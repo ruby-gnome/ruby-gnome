@@ -27,27 +27,6 @@ rb_html_view_initialize(argc, argv, self)
 }
 
 static VALUE
-rb_html_view_set_html (self, htmlv)
-    VALUE self;
-    VALUE htmlv;
-{
-    HtmlDocument *document;
-    char *html;
-    
-    document = _SELF(self)->document;
-    html_document_clear (document);
-    
-    html = RVAL2CSTR(htmlv);
-    
-    if (html_document_open_stream (document, "text/html")) {
-        html_document_write_stream (document, html, strlen (html));
-        html_document_close_stream (document);
-    }
-    
-    return self;
-}
-
-static VALUE
 rb_html_view_set_document (self, document )
     VALUE self;
     VALUE document;
@@ -70,7 +49,6 @@ Init_html_view(mGtkHtml2)
     VALUE gHtmlView = G_DEF_CLASS(html_view_get_type(), "HtmlView", mGtkHtml2);
 
     rb_define_method(gHtmlView, "initialize",   rb_html_view_initialize,  -1);
-    rb_define_method(gHtmlView, "set_html",     rb_html_view_set_html,     1);
     rb_define_method(gHtmlView, "set_document", rb_html_view_set_document, 1);
     rb_define_method(gHtmlView, "document",     rb_html_view_get_document, 0);
 

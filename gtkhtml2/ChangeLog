@@ -1,3 +1,9 @@
+2003-09-04  Martin Povolny <xpovolny@fi.muni.cz>
+    * src/rbgtkhtmlstream.c: Changed rb_html_stream_write as Masao suggested.
+    * src/rbgtkhtmlview.c: Removed 'original' set_html method.
+    * src/sample/test-gtkhtml.rb: Added sample 'request_url' handler.
+    * README: added a note on sigsegvs with earlier versions of gtkhtml
+
 2003-09-02  Martin Povolny <xpovolny@fi.muni.cz>
     * src/rbgtkhtmlstream.c: Added minimalistic wrapper for HtmlStream to
                              allow handling of 'request_url' signal in
