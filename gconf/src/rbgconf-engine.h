@@ -18,9 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * 
- * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
+ * $Author: pcppopper $
  * 
- * Latest Revision: 2002-11-10
+ * $Date: 2002/11/17 16:29:12 $
  * 
  *****************************************************************************/
 
