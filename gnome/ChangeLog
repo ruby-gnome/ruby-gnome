@@ -8,6 +8,7 @@
 	rename Gnome::RESTART_* to Gnome::Client::RESTART_*.
 	rename Gnome.master_client() to Gnome::Client.master_client().
 	rename Gnome.interaction_key_return() to Gnome::Client.interaction_key_return().
+	* sample/gnome-hello/*: delete gnome-hello samples.
 
 2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
 
