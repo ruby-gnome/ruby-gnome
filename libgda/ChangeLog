@@ -1,5 +1,6 @@
 2004-03-10  Laurent Sansonetti  <lrz@gnome.org>
 
+	* README: We require libgda 1.0.3 or higher now (stable branch).
 	* src/rbgdaprovider.c (#get_model),
 	  src/rbgdaquarklist.c (#clear):
 	  Disabled, because they are implemented in the
