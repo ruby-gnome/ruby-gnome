@@ -4,7 +4,7 @@
   Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: stock.rb,v 1.4 2003/01/19 14:28:23 mutoh Exp $
+  $Id: stock.rb,v 1.5 2003/11/01 10:02:49 lrz Exp $
 =end
 
 require 'gtk2'
@@ -22,7 +22,7 @@ cnt = 0
 button.signal_connect("clicked") do
   stock_name = "Gtk::Stock::#{stocks[cnt]}"
   label.set_text(stock_name)
-  image.set(eval(stock_name))
+  image.set(eval(stock_name), Gtk::IconSize::DIALOG)
   if cnt < stocks.size - 1
     cnt += 1
   else
