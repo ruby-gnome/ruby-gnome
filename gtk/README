@@ -15,7 +15,6 @@
 
     If you have any questions or requests, use one of the following:
 
-    mutoh@highway.ne.jp         The current Ruby-GNOME2 maintainer
     http://ruby-gnome2.sf.net/   The website contains a bug tracker and
                                 patch manager, Mailing lists.
 
@@ -94,7 +93,8 @@
 Maintainers:
 (from Ruby-GNOME2)
   Masao Mutoh <mutoh@highway.ne.jp>
-  http://ruby-gnome2.sf.net/
+  Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+  http://ruby-gnome2.sourceforge.net/
 (up to Ruby-GNOME ver. 0.27)
   Neil Conway <neilconway@rogers.com>
   http://ruby-gnome.sf.net/

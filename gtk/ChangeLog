@@ -1,3 +1,8 @@
+2002-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README.EXT(.ja): Remove file.
+	* README: Modified.
+
 2002-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdnd.c: Rename to src/rbgdkdragcontext.c.
