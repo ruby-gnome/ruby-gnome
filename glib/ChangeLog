@@ -1,3 +1,8 @@
+2003-07-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_value.c, rbgobj_type.c: 
+	Accept rb_cObject as RBGOBJ_TYPE_RUBY_VALUE not G_TYPE_POINTER.
+
 2003-07-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_value.c, rbgobj_value_types.c, rbgobj_type.c: 
