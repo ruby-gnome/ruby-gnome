@@ -65,7 +65,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     if(xml)
     {
-        RBGOBJ_INITIALIZE(self, xml);
+        G_INITIALIZE(self, xml);
         /* Once constructed, this means a GladeXML object can never be freed. */
         rb_ary_push(instances, self);
         rb_iv_set(self, "@handler_proc", handler_proc);

@@ -16,7 +16,7 @@ unless system('pkg-config', '--exists', 'libglade-2.0')
   STDERR.print("libglade-2.0 doesn't exist\n")
   exit
 end
-$LDFLAGS += ' ' + `pkg-config libglade-2.0 --libs`.chomp
+$libs += ' ' + `pkg-config libglade-2.0 --libs`.chomp
 $CFLAGS  += ' ' + `pkg-config libglade-2.0 --cflags`.chomp
 $CFLAGS += ' -g'
 
