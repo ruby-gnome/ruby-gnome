@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Author: sakai $
+  $Date: 2003/07/18 13:41:41 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -143,6 +143,7 @@ static VALUE
 gtkselectiondata_set_text(self, str)
     VALUE self, str;
 {
+    StringValue(str);
     gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
                                 RSTRING(str)->len);
     return self;

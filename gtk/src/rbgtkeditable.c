@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Author: sakai $
+  $Date: 2003/07/18 13:41:41 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -40,7 +40,7 @@ edit_insert_text(self, new_text, pos)
 {
     gint p = NUM2INT(pos);
 
-    Check_Type(new_text, T_STRING);
+    StringValue(new_text);
     gtk_editable_insert_text(GTK_EDITABLE(RVAL2GOBJ(self)),
 			     RSTRING(new_text)->ptr,
 			     RSTRING(new_text)->len,

@@ -3,8 +3,8 @@
 
   rbgtkimcontext.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/08 16:45:59 $
+  $Author: sakai $
+  $Date: 2003/07/18 13:41:41 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -86,6 +86,7 @@ static VALUE
 imcontext_set_surrounding(self, text, cursor_index)
     VALUE self, text, cursor_index;
 {
+    StringValue(text);
     gtk_im_context_set_surrounding(_SELF(self),
                                    RVAL2CSTR(text), RSTRING(text)->len,
                                    NUM2INT(cursor_index));

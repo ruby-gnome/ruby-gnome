@@ -1,3 +1,16 @@
+2003-07-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkclipboard.c (clipboard_set_text):
+	* src/rbgtkimcontext.c (imcontext_set_surrounding):
+	* src/rbgtkselectiondata.c (gtkselectiondata_set_text):
+	* src/rbgtktextbuffer.c (txt_set_text, txt_insert,
+	txt_insert_at_cursor, txt_insert_interactive,
+	txt_insert_interactive_at_cursor, txt_insert_with_tags):
+	should call StringValue() before using RSTRING().
+
+	* src/rbgtkeditable.c (src/rbgtkeditable.c): use StringValue(new_text)
+	instead of Check_Type(new_text, T_STRING).
+
 2003-07-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkselectiondata.c: Add Gtk::SelectionData#display.

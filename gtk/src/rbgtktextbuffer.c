@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: sakai $
-  $Date: 2003/04/13 08:39:04 $
+  $Date: 2003/07/18 13:41:41 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -57,6 +57,7 @@ static VALUE
 txt_set_text(self, text)
     VALUE self, text;
 {
+    StringValue(text);
     gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
@@ -65,6 +66,7 @@ static VALUE
 txt_insert(self, iter, text)
     VALUE self, iter, text;
 {
+    StringValue(text);
     gtk_text_buffer_insert(_SELF(self), RVAL2ITR(iter), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
@@ -73,6 +75,7 @@ static VALUE
 txt_insert_at_cursor(self, text)
     VALUE self, text;
 {
+    StringValue(text);
     gtk_text_buffer_insert_at_cursor(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
@@ -81,6 +84,7 @@ static VALUE
 txt_insert_interactive(self, iter, text, editable)
     VALUE self, iter, text, editable;
 {
+    StringValue(text);
     return gtk_text_buffer_insert_interactive(_SELF(self), RVAL2ITR(iter),
                                               RVAL2CSTR(text),
                                               RSTRING(text)->len,
@@ -92,6 +96,7 @@ static VALUE
 txt_insert_interactive_at_cursor(self, text, editable)
     VALUE self, text, editable;
 {
+    StringValue(text);
     return gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
                                                         RVAL2CSTR(text),
                                                         RSTRING(text)->len,
@@ -428,6 +433,7 @@ txt_insert_with_tags(argc, argv, self)
     tarray = RARRAY(tags);
 
     start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
+    StringValue(text);
     gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
 
     if(tarray->len == 0)

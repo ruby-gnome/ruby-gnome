@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Author: sakai $
+  $Date: 2003/07/18 13:41:40 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -112,6 +112,7 @@ static VALUE
 clipboard_set_text(self, text)
     VALUE self, text;
 {
+    StringValue(text);
     gtk_clipboard_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
