@@ -212,4 +212,6 @@ else
   STDOUT.print "no\n"
 end
 
-
+def add_uniq_to_objs(name)
+  $objs << name unless $objs.index(name)
+end

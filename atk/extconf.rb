@@ -47,10 +47,9 @@ begin
   Dir.glob("#{srcdir}/*.c") do |f|
     f = File.basename(f)
     f.sub!(/.c$/, ".o")
-    $objs.push f
+    add_uniq_to_objs(f)
   end
-  $objs << "rbatkinits.o"
-  $objs.uniq!
+  add_uniq_to_objs("rbatkinits.o")
 
   $defs << "-DRUBY_ATK_COMPILATION"
   create_makefile("atk", srcdir)
