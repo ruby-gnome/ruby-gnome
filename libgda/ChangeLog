@@ -1,3 +1,9 @@
+2003-10-06  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaexport.c: New file.
+	* src/rbgda.c: Initializes Gda::Export.
+	* src/rbgda.h: Added macros for Gda::Export.
+
 2003-10-04  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdaselect.c, src/rbgdatable.c: New files.
