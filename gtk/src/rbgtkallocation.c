@@ -3,8 +3,8 @@
 
   rbgtkallocation.c -
 
-  $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:46:26 $
 
   Copyright (C) 2002-2004  Masao Mutoh
 ************************************************/
@@ -146,7 +146,10 @@ alloc_to_rect(self)
 void 
 Init_gtk_allocation()
 {
-    VALUE galloc = G_DEF_CLASS(GTK_TYPE_ALLOCATION, "Allocation", mGtk);
+    VALUE galloc;
+
+    galloc = G_DEF_CLASS(GTK_TYPE_ALLOCATION, "Allocation", mGtk);
+    rbgobj_boxed_not_copy_obj(GTK_TYPE_ALLOCATION);
 
     rb_define_method(galloc, "initialize", alloc_initialize, 4);
     rb_define_method(galloc, "intersect", alloc_intersect, 1);
