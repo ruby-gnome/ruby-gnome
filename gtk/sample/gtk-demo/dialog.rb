@@ -1,4 +1,4 @@
-# $Id: dialog.rb,v 1.2 2003/05/04 03:49:57 mutoh Exp $
+# $Id: dialog.rb,v 1.3 2004/12/31 08:15:20 mutoh Exp $
 =begin
 = Dialog and Message Boxes
 
@@ -87,12 +87,9 @@ EOS
 			       self,
 			       Gtk::Dialog::MODAL |
 			       Gtk::Dialog::DESTROY_WITH_PARENT,
-			       [
-				 Gtk::Stock::OK,
-				 Gtk::Dialog::RESPONSE_OK,
-				 "_Non-stock Button",
-				 Gtk::Dialog::RESPONSE_CANCEL,
-			       ])
+			       [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_OK],
+			       ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
+			       )
 
       hbox = Gtk::HBox.new(false, 0)
       hbox.set_border_width(8)

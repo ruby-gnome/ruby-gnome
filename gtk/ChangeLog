@@ -1,3 +1,7 @@
+2004-12-31  Ferenc Engard <ferenc@engard.hu>
+
+	* sample/gtk-demo/dialog.rb: Fix a bug.
+
 2004-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/tree_progress.rb: Improved.
