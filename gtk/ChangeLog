@@ -1,3 +1,8 @@
+2003-06-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstyle.c: Gtk::Style#paint_* accept nil for Gdk::Rectangle.
+	Gtk::Style#lookup_icon_set accept symbol.
+
 2003-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkfilesel.c: Fix segfault of Gtk::FileSelection#fileop_dialog.

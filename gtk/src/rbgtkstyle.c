@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2003/05/24 15:30:59 $
+  $Date: 2003/06/05 15:50:34 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,7 +15,7 @@
 #include "global.h"
 
 #define _SELF(w) GTK_STYLE(RVAL2GOBJ(w))
-#define RVAL2REC(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
+#define RVAL2REC(r) (NIL_P(r) ? NULL : (GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 #define RVAL2ICONSOURCE(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
 
 static VALUE
@@ -83,8 +83,16 @@ static VALUE
 style_lookup_icon_set(self, stock_id)
     VALUE self, stock_id;
 {
-    return BOXED2RVAL(gtk_style_lookup_icon_set(_SELF(self), RVAL2CSTR(stock_id)),
-                      GTK_TYPE_ICON_SET);
+    gchar* id;
+    GtkIconSet* ret;
+    if (TYPE(stock_id) == T_STRING) {
+        id = RVAL2CSTR(stock_id);
+    } else {
+        id = SYM2CSTR(stock_id));
+    }
+    
+    ret = gtk_style_lookup_icon_set(_SELF(self), id);
+    return ret ? BOXED2RVAL(ret, GTK_TYPE_ICON_SET) : Qnil;
 }
 
 static VALUE
