@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/08/01 16:36:23 $
+  $Date: 2004/08/03 18:19:35 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -41,6 +41,10 @@ extern "C" {
 
 #ifndef ULONG2NUM
 #define ULONG2NUM UINT2NUM
+#endif
+
+#if ! GLIB_CHECK_VERSION(2,4,0)
+typedef int GPid;
 #endif
 
 #define RVAL2CSTR(v) (StringValuePtr(v))

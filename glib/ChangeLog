@@ -1,3 +1,7 @@
+2004-08-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Define GPid when GLib < 2.4.0.
+
 2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_spawn.c: Change the parent of GLib::Spawn*Error to 
