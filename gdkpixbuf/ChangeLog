@@ -1,3 +1,12 @@
+2002-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Rename Gdk::Pixbuf#option to Gdk::Pixbuf#get_option.
+	Add Gdk::Pixbuf#composite, #add_alpha, #copy_area, 
+	#saturate_and_pixelate, #fill!.
+	BugFix for wrong arguments of Gdk::Pixbuf#initialize.
+	BugFix for Gdk::Pixbuf::VERSION.
+	* sample/composite.rb, utils.rb: Add samples.
+
 2002-11-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Gdk::Pixbuf.new accept xpm data and colorspace.

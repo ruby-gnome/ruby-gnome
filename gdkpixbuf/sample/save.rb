@@ -1,11 +1,11 @@
 #!/usr/local/bin/ruby
 =begin
-  scale.rb - Ruby/GdkPixbuf sample script.
+  save.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: save.rb,v 1.1 2002/11/19 13:07:24 mutoh Exp $
+  $Id: save.rb,v 1.2 2002/11/21 16:49:41 mutoh Exp $
 =end
 
 require 'gdk_pixbuf2'

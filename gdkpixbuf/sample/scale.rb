@@ -2,10 +2,10 @@
 =begin
   scale.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: scale.rb,v 1.5 2002/11/20 15:36:00 mutoh Exp $
+  $Id: scale.rb,v 1.6 2002/11/21 16:49:42 mutoh Exp $
 =end
 
 require 'gdk_pixbuf2'
@@ -20,8 +20,7 @@ Gtk.init
 
 src =  Gdk::Pixbuf.new(filename)
 
-dst = src.scale(300, 300, 
-			 Gdk::Pixbuf::INTERP_HYPER)
+dst = src.scale(300, 300, Gdk::Pixbuf::INTERP_HYPER)
 pw = Gtk::Image.new(dst)
 pw.show
 

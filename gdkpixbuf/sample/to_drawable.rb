@@ -2,10 +2,10 @@
 =begin
   to_drawable.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: to_drawable.rb,v 1.3 2002/11/05 11:20:46 mutoh Exp $
+  $Id: to_drawable.rb,v 1.4 2002/11/21 16:49:42 mutoh Exp $
 =end
 
 require 'gtk2'
