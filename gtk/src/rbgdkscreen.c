@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/11/21 15:14:08 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -230,5 +230,9 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "setting", gdkscreen_get_setting, 1);
 
     G_DEF_SETTERS(gdkScreen);
+
+  #ifdef GDK_WINDOWING_X11
+    G_DEF_CLASS3("GdkScreenX11", "ScreenX11", mGdk);
+  #endif
 #endif
 }

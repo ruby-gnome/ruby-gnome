@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/02/12 07:48:53 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -241,5 +241,9 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
     rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
+
+  #ifdef GDK_WINDOWING_X11
+    G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
+  #endif
 #endif
 }

@@ -1,3 +1,9 @@
+2004-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkkeymap.c, rbgdkgc.c, rbgdkpixmap.c, rbgdkdraw.c, rbgdkwindow.c
+	rbgdkscreen.c, rbgdkdisplay.c: Support G_DEF_CLASS3.
+	Real-classes are defined when private _get_type() is called.
+	
 2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Gdk::Window#set_geometry_hints accept nil as geometry.
@@ -5,6 +11,7 @@
 	Add Gdk::Window#set_skip_taskbar_hint, #set_skip_pager_hint.
 	Gdk::Window#pointer returns nil when the window contains the pointer isn't 
 	known to GDK.
+	(Init_gtk_gdk_window): 
 
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 

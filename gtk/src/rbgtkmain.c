@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:03 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -90,7 +90,6 @@ gtk_m_init(argc, argv, self)
         sigfunc[5] = signal(SIGPIPE, SIG_IGN);
         sigfunc[6] = signal(SIGTERM, SIG_IGN);
 #endif
-
         is_initialized = gtk_init_check(&gargc, &gargv);
         setlocale(LC_NUMERIC, "C");
 

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 13:06:09 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -979,5 +979,13 @@ Init_gtk_gdk_window()
     G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_FUNCTION, "GDK_");
 
     rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
+
+#ifdef GDK_WINDOWING_X11
+    G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
+#elif GDK_WINDOWING_WIN32
+    G_DEF_CLASS3("GdkWindowImplWin32", "WindowImplWin32", mGdk);
+#elif GDK_WINDOWING_FB
+    G_DEF_CLASS3("GdkWindowFB", "WindowFB", mGdk);
+#endif
 }
 

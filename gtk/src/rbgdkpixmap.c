@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2003/03/23 13:05:25 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -160,4 +160,12 @@ Init_gtk_gdk_pixmap()
 #ifdef HAVE_XREADBITMAPFILEDATA
     rb_define_singleton_method(gdkPixmap, "create_from_xbm", gdkpmap_create_from_xbm, 2);
 #endif /* HAVE_XREADBITMAPFILEDATA */
+#ifdef GDK_WINDOWING_X11
+    G_DEF_CLASS3("GdkPixmapImplX11", "PixmapImplX11", mGdk);
+#elif GDK_WINDOWING_WIN32
+    G_DEF_CLASS3("GdkPixmapImplWin32", "PixmapImplWin32", mGdk);
+#elif GDK_WINDOWING_FB
+    G_DEF_CLASS3("GdkPixmapFB", "PixmapFB", mGdk);
+#endif
+
 }

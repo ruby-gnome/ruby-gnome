@@ -4,7 +4,7 @@
   rbgdkkeymap.c -
 
   $Author: mutoh $
-  $Date: 2003/10/17 16:30:51 $
+  $Date: 2004/02/22 16:49:13 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -123,5 +123,9 @@ Init_gtk_gdk_keymap()
     rb_define_method(gdkKeymap, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);
     rb_define_method(gdkKeymap, "get_entries_for_keycode", gdkkeymap_get_entries_for_keycode, 1);
     rb_define_method(gdkKeymap, "direction", gdkkeymap_get_direction, 0);
+
+#ifdef GDK_WINDOWING_X11
+    G_DEF_CLASS3("GdkKeymapX11", "KeymapX11", mGdk);
+#endif
 
 }
