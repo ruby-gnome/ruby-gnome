@@ -4,14 +4,11 @@
   rbgdk-pixbufanimation.c -
 
   $Author: mutoh $
-  $Date: 2002/12/07 14:51:05 $
+  $Date: 2002/12/30 12:44:54 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk/gdkpixbuf.h>
-#include "rbgobject.h"
-#include "rbgtk.h"
+#include "rbgdk-pixbuf.h"
 
 #define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
 #define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
@@ -122,7 +119,7 @@ animation_iter_get_pixbuf(self)
 }
 
 void
-Init_gdk_pixbuf_animation()
+Init_gdk_pixbuf_animation(VALUE mGdk)
 {
     VALUE anim = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION, "PixbufAnimation", mGdk);    
     VALUE animiter = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION_ITER, "PixbufAnimationIter", mGdk);    

@@ -1,3 +1,13 @@
+2002-12-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Move GTK+'s functions to Ruby/GTK. 
+	* lib/gdk_pixbuf2.rb: Remove "require 'gtk2'". Now, Ruby/GdkPixbuf doesn't depend on 
+	Ruby/GTK.
+	* sample/.rb: Require 'gtk2' instead of 'gdk_pixbuf2'.
+	* sample/to_drawable: Move to gtk/sample/misc/.
+	* rbgdkpixbuf.h: Add a file.
+	* *.c: Include rbgdkpixbuf.h.
+
 2002-12-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: add space before include directory option to $CFLAGS.

@@ -4,15 +4,11 @@
   rbgdk-pixdata.c -
 
   $Author: mutoh $
-  $Date: 2002/12/07 14:46:11 $
+  $Date: 2002/12/30 12:44:54 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk-pixbuf/gdk-pixdata.h>
-#include <gdk/gdkpixbuf.h>
-#include "rbgobject.h"
-#include "rbgtk.h"
+#include "rbgdk-pixbuf.h"
 
 #define GDK_TYPE_PIXDATA (gdk_pixdata_get_type())
 #define _SELF(s) ((GdkPixdata*)(RVAL2BOXED(s, GDK_TYPE_PIXDATA)))
@@ -170,7 +166,7 @@ pixdata_pixel_data(self)
 
 
 void
-Init_gdk_pixdata()
+Init_gdk_pixdata(VALUE mGdk)
 {
     VALUE pixdata = G_DEF_CLASS(GDK_TYPE_PIXDATA, "Pixdata", mGdk);    
 

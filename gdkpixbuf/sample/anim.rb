@@ -5,10 +5,10 @@
   Copyright (c) 2002 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: anim.rb,v 1.1 2002/11/21 18:13:34 mutoh Exp $
+  $Id: anim.rb,v 1.2 2002/12/30 12:44:54 mutoh Exp $
 =end
 
-require 'gdk_pixbuf2'
+require 'gtk2'
 
 Gtk.init
 
