@@ -1,4 +1,13 @@
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* COPYING, NEWS: Remove file.
+	* README: Revised.
+
 2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkfont.c: Remove file.
+
+2002-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkconst.c, src/rbgdkinput.c: Move GdkInputCondition to src/rbgdkinput.c.
 	* src/rbgdkinput.c: Add a file.

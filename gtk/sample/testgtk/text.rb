@@ -3,7 +3,7 @@
   text.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: text.rb,v 1.1 2002/05/19 12:39:14 mutoh Exp $
+  $Id: text.rb,v 1.2 2002/11/09 17:45:34 mutoh Exp $
 
 Original Copyright:
  
@@ -93,8 +93,6 @@ class TextSample < SampleWindow
 
     text.freeze
     
-    font = Gdk::Font.font_load("-adobe-courier-medium-r-normal--*-120-*-*-*-*-*-*")
-
     TextColors.each do |text_color|
       text.insert(font, nil, nil, text_color[1])
       text.insert(font, nil, nil, "\t")

@@ -5,9 +5,9 @@ extconf.rb for gtk extention library
 require "mkmf"
 
 begin
-	require 'glib2'
+  require 'glib2'
 rescue LoadError
-	raise "Install glib2 before gtk2."
+  raise "Install glib2 before gtk2."
 end
 
 unless defined? macro_defined?

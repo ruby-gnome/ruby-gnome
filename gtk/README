@@ -1,106 +1,29 @@
-  Ruby
-    Object-Oriented scripting language. Smart syntax.
-        http://www.ruby-lang.org
+Ruby/GTK2
+=========
+Ruby/GTK2 is a Ruby binding of GTK+2.0.x.
 
-  GTK+
-    Gimp ToolKit. Powerful toolkit written in C.
-        http://www.gtk.org/
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   Ruby/GLib2: http://ruby-gnome2.sourceforge.net/
 
-  Ruby/GLib2
-    Ruby extention library to use GLib 2.0.
-    This is a part of Ruby-GNOME2.
+Install
+-------
+   0. install ruby-1.6.x, GTK+-2.0.x, Ruby/GLib2.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
-  Ruby/GTK2 (this distribution)
-    Ruby extension library to use GTK+ 2.0.
+Copying
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
 
-    If you have any questions or requests, use one of the following:
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
 
-    http://ruby-gnome2.sf.net/   The website contains a bug tracker and
-                                patch manager, Mailing lists.
-
-  Install
-
-    0. install ruby-1.6.x, GTK+-2.0.x and Ruby/GLib2.
-
-    1. extract archive file.
-       $ gzip -dc ruby-gtk-x.xx.tar.gz | tar xf -
-
-    2. change into the ruby-gtk directory
-       $ cd gtk-x.xx
-
-    3. create Makefile
-       $ ruby extconf.rb
-
-    4. make.
-       $ make
-
-    5. install
-       $ su
-       # make install
-
-
-  Documents
-
-    doc/rbbr.rb         Simple Class Browser (see Install.5)
-
-  Sample Scripts
-
-    sample/helloworld.rb
-    sample/calendar.rb  sample for Gtk::Calendar
-    sample/drawing.rb
-    sample/text.rb
-    sample/texthook.rb
-    sample/test/*.rb
-    sample/testgtk/     Ports of testgtk.c in GTK+ distributions
-    sample/testim.rb    sample for Gdk::IM
-
-
-  Copying
-
-    Copyright (c) 1998-2002 Ruby-GNOME2 Project Team
-
-    This program is free software.
-    You can distribute/modify this program under the terms of
-    the GNU LIBRARY General Public License version 2.
-
-    The graphics files, testgtkrc file, and the origination for
-    testgtk.rb are from the GTK+ distribution, and are under
-    this copyright:
-
-/* GTK - The GIMP Toolkit
- * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
- */
-
-
-  With Ruby, enjoy free and exciting programing.
-
----
-Maintainers:
-(from Ruby-GNOME2)
-  Masao Mutoh <mutoh@highway.ne.jp>
-  Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
-  http://ruby-gnome2.sourceforge.net/
-(up to Ruby-GNOME ver. 0.27)
-  Neil Conway <neilconway@rogers.com>
-  http://ruby-gnome.sf.net/
-(up to Ruby-GNOME ver. 0.25)
-  Hiroshi IGARASHI <iga@ruby-lang.org>
-  http://www.ruby-lang.org/~iga/
-(up to Ruby-GNOME ver. 0.18)
-  by Dai.K. <MAP2303@mapletown.net>
-  http://www.minato.net/~j2/
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/
