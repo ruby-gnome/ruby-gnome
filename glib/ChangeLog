@@ -4,6 +4,9 @@
 	for reference counting. Using Ruby's Hash may cause segmentaion fault
 	when ruby exits.
 
+	* src/rbgobj_closure.c: use GHashTable instead of Ruby's Hash
+	for the same reason as src/rbgobj_valuetypes.c.
+
 	* src/rbgobject.c (rbgobj_gobject_initialize): don't warn if the
 	instance type is a subtype of the class type.
 

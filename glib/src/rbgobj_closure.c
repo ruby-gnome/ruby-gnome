@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2003/07/26 12:09:46 $
+  $Date: 2003/08/06 11:55:06 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -13,7 +13,6 @@
 #include "global.h"
 
 static ID id_call;
-static ID id_delete;
 
 typedef struct _GRClosure GRClosure;
 
@@ -113,31 +112,37 @@ rclosure_marshal(GClosure*       closure,
     }
 }
 
-static VALUE rclosure_marker_list;
+static GHashTable* rclosure_table;
+static VALUE rclosure_table_wrapper;
 
 static void
-marker_remove(gpointer data, GClosure* closure)
+rclosure_invalidate(gpointer data, GClosure* closure)
 {
-    VALUE marker = (VALUE)data;
-    RDATA(marker)->dmark = NULL;
-    rb_funcall(rclosure_marker_list, id_delete, 1, marker);
-
+    g_hash_table_remove(rclosure_table, closure);
     ((GRClosure*)closure)->callback   = Qnil;
     ((GRClosure*)closure)->extra_args = Qnil;
 }
 
 static void
-rclosure_mark(GRClosure* closure)
+rclosure_table_mark_entry(gpointer       key,
+                          gpointer       value,
+                          gpointer       user_data)
 {
+    GRClosure* closure = (GRClosure*)key;
     rb_gc_mark(closure->callback);
     rb_gc_mark(closure->extra_args);
+}
+
+static void
+rclosure_table_mark(GHashTable* table)
+{
+    g_hash_table_foreach(table, rclosure_table_mark_entry, NULL);
 }
 
 GClosure*
 g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_func)
 {
     GRClosure* closure;
-    VALUE marker;
 
     closure = (GRClosure*)g_closure_new_simple(sizeof(GRClosure), NULL);
 
@@ -147,10 +152,9 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 
     g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
 
-    marker = Data_Wrap_Struct(rb_cData, rclosure_mark, NULL, closure);
-    rb_hash_aset(rclosure_marker_list, marker, Qtrue);
-    g_closure_add_invalidate_notifier((GClosure*)closure, (gpointer)marker,
-                                      &marker_remove);
+    g_hash_table_insert(rclosure_table, closure, NULL);
+    g_closure_add_invalidate_notifier((GClosure*)closure, NULL,
+                                      &rclosure_invalidate);
 
     return (GClosure*)closure;
 }
@@ -158,11 +162,16 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 static void
 Init_rclosure()
 {
-    rb_global_variable(&rclosure_marker_list);
-    rclosure_marker_list = rb_hash_new();
+    rclosure_table = g_hash_table_new_full(g_direct_hash, g_direct_equal,
+                                           NULL, NULL);
+
+    rclosure_table_wrapper =
+      Data_Wrap_Struct(rb_cData,
+                       rclosure_table_mark, NULL,
+                       rclosure_table);
+    rb_global_variable(&rclosure_table_wrapper);
 
     id_call = rb_intern("call");
-    id_delete = rb_intern("delete");
 }
 
 /**********************************************************************/
