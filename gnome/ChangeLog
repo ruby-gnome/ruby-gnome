@@ -1,3 +1,7 @@
+2003-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-druid-page-standard.c: Add Gnome::DruidPageStandard#vbox.
+
 2003-09-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgnome-icon-list.c (icon_list_find_icon_from_data): fix wrong

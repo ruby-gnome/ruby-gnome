@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page-standard.c,v 1.3 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-druid-page-standard.c,v 1.4 2003/10/14 17:47:09 mutoh Exp $ */
 
 /* Gnome::DruidPageStandard widget for Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -70,6 +70,13 @@ dstandard_append_item(self, question, item, additional_info)
     return self;
 }
 
+static VALUE
+dstandard_get_vbox(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(_SELF(self)->vbox);
+}
+
 void
 Init_gnome_druid_page_standard(mGnome)
     VALUE mGnome;
@@ -79,6 +86,7 @@ Init_gnome_druid_page_standard(mGnome)
     rb_define_method(gnoDruidPageStandard, "initialize", dstandard_initialize, -1);
     rb_define_method(gnoDruidPageStandard, "set_contents_background", dstandard_set_contents_background, 1);
     rb_define_method(gnoDruidPageStandard, "append_item", dstandard_append_item, 3);
+    rb_define_method(gnoDruidPageStandard, "vbox", dstandard_get_vbox, 0);
 
     G_DEF_SETTERS(gnoDruidPageStandard);
 }
