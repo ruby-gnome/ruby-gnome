@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-05
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
@@ -100,12 +100,12 @@ directory_make_directory(argc, argv, self)
 		perm = 0777;
 	}
 
-	SafeStringValue(path);
-	rb_secure(2);
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_make_directory_for_uri(RVAL2GVFSURI(uri),
 							  perm);
 	} else {
+		SafeStringValue(uri);
+		rb_secure(2);
 		result = gnome_vfs_make_directory(RVAL2CSTR(uri), perm);
 	}
 
@@ -195,7 +195,6 @@ directory_visit_files(argc, argv, self)
 {
 	VALUE uri, r_list, info_options, visit_options;
 	GList *list = NULL;
-	int i, n;
 	VALUE func;
 	GnomeVFSResult result;
 

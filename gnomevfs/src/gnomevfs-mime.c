@@ -20,13 +20,15 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-06
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
 
 #include "gnomevfs.h"
+#include <libgnomevfs/gnome-vfs-application-registry.h>
+#include <libgnomevfs/gnome-vfs-mime-info.h>
 
 /* Defines *******************************************************************/
 
@@ -41,7 +43,7 @@
 /* Function Implementations **************************************************/
 
 static VALUE
-mimeapplist2ary(self, list)
+mimeapplist2ary(list)
 	GList *list;
 {
 	VALUE ary;
@@ -161,8 +163,9 @@ static VALUE
 mime_set_can_be_executable(self, mime, executable)
 	VALUE self, mime, executable;
 {
-	return GVFSRESULT2RVAL(gnome_vfs_mime_set_description(RVAL2CSTR(mime),
-						RVAL2CBOOL(executable)));
+	return GVFSRESULT2RVAL(
+		gnome_vfs_mime_set_can_be_executable(RVAL2CSTR(mime),
+						     RVAL2CBOOL(executable)));
 }
 
 static VALUE
@@ -173,7 +176,8 @@ mime_set_short_list_applications(self, mime, ids)
 	GnomeVFSResult result;
 
 	list = STRARY2GLIST(ids);
-	result = gnome_vfs_mime_set_short_list_applications(mime, list);
+	result = gnome_vfs_mime_set_short_list_applications(RVAL2CSTR(mime), 
+							    list);
 	g_list_free(list);
 	return GVFSRESULT2RVAL(result);
 }
@@ -186,7 +190,8 @@ mime_set_short_list_components(self, mime, iids)
 	GnomeVFSResult result;
 
 	list = STRARY2GLIST(iids);
-	result = gnome_vfs_mime_set_short_list_components(mime, list);
+	result = gnome_vfs_mime_set_short_list_components(RVAL2CSTR(mime),
+							  list);
 	g_list_free(list);
 	return GVFSRESULT2RVAL(result);
 }
@@ -253,7 +258,7 @@ mime_extend_all_applications(self, mime, ids)
 	GnomeVFSResult result;
 
 	list = STRARY2GLIST(ids);
-	result = gnome_vfs_mime_extend_all_applications(mime, list);
+	result = gnome_vfs_mime_extend_all_applications(RVAL2CSTR(mime), list);
 	g_list_free(list);
 	return GVFSRESULT2RVAL(result);
 }
@@ -266,7 +271,8 @@ mime_remove_from_all_applications(self, mime, ids)
 	GnomeVFSResult result;
 
 	list = STRARY2GLIST(ids);
-	result = gnome_vfs_mime_remove_from_all_applications(mime, list);
+	result = gnome_vfs_mime_remove_from_all_applications(RVAL2CSTR(mime),
+							     list);
 	g_list_free(list);
 	return GVFSRESULT2RVAL(result);
 }
@@ -353,7 +359,7 @@ mime_get_extensions_string(self, mime)
 	VALUE str;
 
 	exts = gnome_vfs_mime_get_extensions_string(RVAL2CSTR(mime));
-	str = RVAL2CSTR(exts);
+	str = CSTR2RVAL(exts);
 	g_free(exts);
 	return str;
 }
@@ -366,22 +372,9 @@ mime_get_extensions_pretty_string(self, mime)
 	VALUE str;
 
 	exts = gnome_vfs_mime_get_extensions_pretty_string(RVAL2CSTR(mime));
-	str = RVAL2CSTR(exts);
+	str = CSTR2RVAL(exts);
 	g_free(exts);
 	return str;
-}
-
-static VALUE
-mime_get_registered_mime_types(self, mime)
-	VALUE self, mime;
-{
-	GList *list;
-	VALUE ary;
-
-	list = gnome_vfs_mime_get_registered_mime_types();
-	ary = GLIST2STRARY(list);
-	gnome_vfs_mime_registered_mime_type_list_free(list);
-	return ary;
 }
 
 static VALUE
@@ -389,9 +382,9 @@ mime_set_registered_type_key(self, mime, key, value)
 	VALUE self, mime, key, value;
 {
 	return GVFSRESULT2RVAL(
-		gnome_vfs_mime_registered_type_key(RVAL2CSTR(mime),
-						   RVAL2CSTR(key),
-						   RVAL2CSTR(value)));
+		gnome_vfs_mime_set_registered_type_key(RVAL2CSTR(mime),
+						       RVAL2CSTR(key),
+						       RVAL2CSTR(value)));
 }
 
 static VALUE
@@ -489,8 +482,6 @@ Init_gnomevfs_mime(m_gvfs)
 				  mime_get_extensions_string, 1);
 	rb_define_module_function(gvfs_mime, "get_extensions_pretty_string",
 				  mime_get_extensions_pretty_string, 1);
-	rb_define_module_function(gvfs_mime, "get_registered_mime_types",
-				  mime_get_registered_mime_types, 1);
 	rb_define_module_function(gvfs_mime, "set_registered_type_key",
 				  mime_set_registered_type_key, 3);
 	rb_define_module_function(gvfs_mime, "set_extensions_list",

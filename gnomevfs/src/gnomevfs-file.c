@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-04
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
@@ -555,7 +555,7 @@ file_pos(argc, argv, self)
 	if (rb_scan_args(argc, argv, "01", &offset) == 1) {
 		return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self),
 						      GNOME_VFS_SEEK_START,
-						      OFF2NUM(offset)));
+						      OFFT2NUM(offset)));
 	} else {
 		return file_tell(self);
 	}
@@ -760,7 +760,7 @@ file_readline(argc, argv, self)
 
 	get_gets_separator(argc, argv, &sep, &len);
 	line = handle_gets(_SELF(self), sep, len);
-	return NIL_P(line) ? GVSRESULT2RVAL(GNOME_VFS_ERROR_EOF) : line;
+	return NIL_P(line) ? GVFSRESULT2RVAL(GNOME_VFS_ERROR_EOF) : line;
 }
 
 static VALUE
@@ -807,7 +807,7 @@ file_seek(argc, argv, self)
 	}
 
 	return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self), whence,
-					      OFF2NUM(offset)));
+					      OFFT2NUM(offset)));
 }
 
 static VALUE

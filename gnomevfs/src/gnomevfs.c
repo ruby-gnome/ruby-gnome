@@ -20,13 +20,15 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-05
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
 
 #include "gnomevfs.h"
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <libgnomevfs/gnome-vfs-mime-info.h>
 
 /* Defines *******************************************************************/
 
@@ -56,8 +58,8 @@ strary2glist(ary)
 	return list;
 }
 
-static VALUE
-glist2strary(self, list)
+VALUE
+glist2strary(list)
 	GList *list;
 {
 	VALUE ary;
@@ -127,13 +129,13 @@ gnomevfs_find_directory(argc, argv, self)
 }
 
 static VALUE
-gnomevfs_get_mime_type_for_data(self, data)
-	VALUE self, data, size;
+gnomevfs_get_mime_type_for_data(self, r_data)
+	VALUE self, r_data;
 {
 	const char *data;
 	int size;
 
-	data = RVAL2CSTR(data);
+	data = RVAL2CSTR(r_data);
 	size = strlen(data);
 	return CSTR2RVAL(gnome_vfs_get_mime_type_for_data(data, size));
 }
@@ -151,6 +153,19 @@ gnomevfs_get_mime_type(self, uri)
 	return str;
 }
 
+static VALUE
+gnomevfs_get_registered_mime_types(self, mime)
+	VALUE self, mime;
+{
+	GList *list;
+	VALUE ary;
+
+	list = gnome_vfs_get_registered_mime_types();
+	ary = GLIST2STRARY(list);
+	gnome_vfs_mime_registered_mime_type_list_free(list);
+	return ary;
+}
+
 void
 Init_gnomevfs(void)
 {
@@ -164,10 +179,12 @@ Init_gnomevfs(void)
 	rb_define_module_function(m_gvfs, "shutdown", gnomevfs_shutdown, 0);
 	rb_define_module_function(m_gvfs, "find_directory",
 				  gnomevfs_find_directory, -1);
-	rb_define_module_function(m_gvfs, "get_mime_type_data",
-				  gnomevfs_get_mime_type_data, 1);
+	rb_define_module_function(m_gvfs, "get_mime_type_for_data",
+				  gnomevfs_get_mime_type_for_data, 1);
 	rb_define_module_function(m_gvfs, "get_mime_type",
 				  gnomevfs_get_mime_type, 1);
+	rb_define_module_function(m_gvfs, "get_registered_mime_types",
+				  gnomevfs_get_registered_mime_types, 1);
 
 	rb_define_const(m_gvfs,
 			"DIRECTORY_KIND_DESKTOP",

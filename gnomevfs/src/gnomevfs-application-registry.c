@@ -20,13 +20,14 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-05
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
 
 #include "gnomevfs.h"
+#include <libgnomevfs/gnome-vfs-application-registry.h>
 
 /* Defines *******************************************************************/
 
@@ -55,7 +56,8 @@ application_registry_get_keys(self, id)
 
 	list = gnome_vfs_application_registry_get_keys(RVAL2CSTR(id));
 	ary = GLIST2STRARY(list);
-	gnome_vfs_application_registry_keys_list_free(list);
+	/* XXX: g_list_foreach(list, (GFunc)g_free, NULL); */
+	g_list_free(list);
 	return ary;
 }
 
@@ -118,15 +120,27 @@ static VALUE
 application_registry_get_applications(self, mime)
 	VALUE self, mime;
 {
-	return GLIST2ARY3(application_registry_get_applications(
-							RVAL2CSTR(mime)));
+	GList *list;
+	VALUE ary;
+
+	list = gnome_vfs_application_registry_get_applications(
+							RVAL2CSTR(mime));
+	ary = GLIST2STRARY(list);
+	g_list_free(list);
+	return ary;
 }
 
 static VALUE
 application_registry_get_mime_types(self, id)
 	VALUE self, id;
 {
-	return GLIST2ARY3(application_registry_get_mime_types(RVAL2CSTR(id)));
+	GList *list;
+	VALUE ary;
+
+	list = gnome_vfs_application_registry_get_mime_types(RVAL2CSTR(id));
+	ary = GLIST2STRARY(list);
+	g_list_free(list);
+	return ary;
 }
 
 static VALUE

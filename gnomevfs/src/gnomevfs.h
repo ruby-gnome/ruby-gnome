@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-05
+ * Latest Revision: 2003-08-08
  *
  *****************************************************************************/
 
@@ -72,7 +72,7 @@ extern "C" {
 #define GVFSDIRECTORY2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_DIRECTORY))
 #define GVFSFILE2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_FILE))
 #define GVFSFILEINFO2RVAL(info)	(BOXED2RVAL(info, GNOMEVFS_TYPE_FILE_INFO))
-#define GVFSMIMEAPP2RVAL(ma)	(BOXED2RVAL(ma, GNOMEVFS_TYPE_MIME_APPLICATION)
+#define GVFSMIMEAPP2RVAL(a)	(BOXED2RVAL(a, GNOMEVFS_TYPE_MIME_APPLICATION))
 #define GVFSURI2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_URI))
 
 #define RVAL2GVFSDIRECTORY(uri)	\
@@ -108,7 +108,7 @@ void Init_gnomevfs_result(VALUE m_gvfs);
 void Init_gnomevfs_uri(VALUE m_gvfs);
 
 GList *strary2glist(VALUE ary);
-GList *glist2strary(GList *list);
+VALUE glist2strary(GList *list);
 
 /* Global Variables **********************************************************/
 
