@@ -4,9 +4,9 @@
   rbpangoarray.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:58 $
+  $Date: 2003/02/01 17:13:25 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"

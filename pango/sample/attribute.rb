@@ -1,10 +1,10 @@
 =begin
   attribute.rb - Ruby/Pango sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: attribute.rb,v 1.1 2003/01/10 19:22:13 mutoh Exp $
+  $Id: attribute.rb,v 1.2 2003/02/01 17:13:24 mutoh Exp $
 =end
 
 require 'pango'

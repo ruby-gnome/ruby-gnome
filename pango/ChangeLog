@@ -2,6 +2,7 @@
 
 	* sample/gdk_layout.rb: Add a file. 
 	* src/rbpangofontmap.c: Comment out test code.
+ 	* All files: Update copyright.
 
 2003-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 

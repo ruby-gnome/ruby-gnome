@@ -4,9 +4,9 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 15:24:26 $
+  $Date: 2003/02/01 17:13:25 $
 
-  Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
 #include "rbpango.h"

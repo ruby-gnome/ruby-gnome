@@ -1,3 +1,12 @@
+=begin
+  gdk_layout.rb - Ruby/Pango sample script.
+
+  Copyright (c) 2003 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: gdk_layout.rb,v 1.2 2003/02/01 17:13:24 mutoh Exp $
+=end
+
 require 'gtk2'
 
 Gtk.init
