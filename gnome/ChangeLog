@@ -1,3 +1,8 @@
+2003-09-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgnome-icon-list.c (icon_list_find_icon_from_data): fix wrong
+	use of FIX2INT.
+
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 	
 	* extconf.rb: remove nasty hack by using Dir.entries.

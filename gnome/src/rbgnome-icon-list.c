@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-list.c,v 1.6 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-icon-list.c,v 1.7 2003/09/03 23:56:03 sakai Exp $ */
 /* based on libgnomeui/gnome-icon-list.h */
 
 /* Gnome::IconList widget for Ruby/GNOME2
@@ -308,14 +308,14 @@ icon_list_find_icon_from_data(self, data)
 
     ary = rb_ivar_get(self, id_icon_data);
     if (NIL_P(ary))
-        return FIX2INT(-1);
+        return INT2FIX(-1);
 
     for (i = 0; i < RARRAY(ary)->len; i++) {
         if (rb_equal(RARRAY(ary)->ptr[i], data))
             break;
     }
     if (i == RARRAY(ary)->len)
-        return FIX2INT(-1);
+        return INT2FIX(-1);
     return INT2NUM(gnome_icon_list_find_icon_from_data(_SELF(self), GINT_TO_POINTER(i + 1)));
 }
 
