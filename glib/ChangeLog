@@ -1,5 +1,6 @@
 2004-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* tests/test-glib2.rb: Removed ^M. Pointed out by Laurent Sansonetti.
 	* src/rbglib.c: Version informations use variables not macros. 
 	Added GLib::INTERFACE_AGE, GLib::BINARY_AGE.
 	Pointed out by Jeremy Henty
