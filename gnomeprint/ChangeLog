@@ -1,5 +1,8 @@
 2004-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gnome-print-config.c (PrintConfig.new): removed
+	  PrintConfig.default function.
+
 	* src/rbgp-gnome-print{,-config,-unit,job}.c: removed G_DEF_SETTERS.
 
 	* src/rbgp-gnome-print-paper.c (PrintPaper#get): added. use

@@ -63,19 +63,6 @@ gp_config_from_string(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-gp_config_new(int argc, VALUE *argv, VALUE self)
-{
-  if (argc == 0) {
-    return gp_config_default(self);
-  } else if (argc == 1 || argc == 2) {
-    return gp_config_from_string(argc, argv, self);
-  } else {
-    rb_raise(rb_eArgError, "invalid argument number");
-    return rb_call_super(argc, argv);
-  }
-}
-
-static VALUE
 gp_config_get(VALUE self, VALUE key)
 {
   guchar *value;
@@ -302,7 +289,7 @@ Init_gnome_print_config(VALUE mGnome, VALUE mGP)
 
   rb_define_module_function(c, "default", gp_config_default, 0);
   
-  rb_define_module_function(c, "new", gp_config_new, -1);
+  rb_define_module_function(c, "new", gp_config_from_string, -1);
 
   rb_define_method(c, "dup", gp_config_dup, 0);
   rb_define_method(c, "to_s", gp_config_to_string, -1);
