@@ -2,6 +2,7 @@
 
 	* src/rbgdkwindow.c: Gdk::Window#set_static_gravities raise 
 	RuntimeError when it couldn't turn on static gravity. 
+	* src/makedefconst.rb: Removed. It's never been used.
 
 2004-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
