@@ -1,3 +1,7 @@
+2002-07-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+   * src/rbgnome.c: Change value of Gnome::POPT_ARGS from "args" to "".
+
 2002-07-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
    	* src/rbgnome.c: Add Gnome.init.

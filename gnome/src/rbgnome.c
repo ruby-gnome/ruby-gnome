@@ -1,4 +1,4 @@
-/* $Id: rbgnome.c,v 1.3 2002/07/25 12:12:37 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.4 2002/07/28 03:58:10 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -230,7 +230,7 @@ gnome_s_init(in_argc, in_argv, self)
   for (i = 0; i < len; i++){
 	rb_ary_push(ary, rb_str_new2(p_args[i]));
   }
-  rb_hash_aset(hash, rb_str_new2("args"), ary);
+  rb_hash_aset(hash, rb_str_new2(""), ary);
   
   poptFreeContext(ctx);
   return hash;
@@ -253,7 +253,7 @@ Init_gnome()
     rb_define_const(mGnome, "POPT_ARG_STRING", INT2FIX(POPT_ARG_STRING));
     rb_define_const(mGnome, "POPT_ARG_INT",	INT2FIX(POPT_ARG_INT));
 	/* POPT_ARGS is for Ruby/GNOME only */
-    rb_define_const(mGnome, "POPT_ARGS", rb_str_new2("args"));
+    rb_define_const(mGnome, "POPT_ARGS", rb_str_new2(""));
 
     /* GnomePreferencesType */
     rb_define_const(mGnome, "REFERENCES_NEVER",
