@@ -1,6 +1,8 @@
 2002-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* ToDo, BUGS: Removed.
+	* sample/misc/fileselection.rb: Fix a bug when button is clicked.
+	* sample/misc/listview.rb: Follow Ruby/GTK changes.
+	* ToDo, BUGS, gtk-config.cygwin: Removed.
 	* src/rbgtkwidget.c: Rename Gtk::Widget#activate to #activate? 
 	#mnemonic_activate to #mnemonic_activate?
 	* src/rbgtktreepath.c: Fix return value of Gtk::TreePath#next. 

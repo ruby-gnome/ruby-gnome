@@ -5,7 +5,7 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: listview.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
+  $Id: listview.rb,v 1.3 2002/11/13 14:17:32 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -49,7 +49,7 @@ scrolled_win.add_with_viewport(treeview)
 
 data.each do |v|
   iter = model.append
-  iter.set_value(model, 0, v)
+  iter.set_value(0, v)
 end
 
 button = Gtk::Button.new("add")
@@ -58,7 +58,7 @@ button.set_flags(Gtk::Widget::CAN_FOCUS)
 i = 0
 button.signal_connect("clicked") do
   iter = model.append
-  iter.set_value(model, 0, "add item #{i}")
+  iter.set_value(0, "add item #{i}")
   i += 1
 end
 
