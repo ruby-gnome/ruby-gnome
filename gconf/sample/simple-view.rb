@@ -1,9 +1,15 @@
 #!/usr/bin/env ruby
 
-# Copyright (C) 2004 Giovanni Corriga
+# simple-view.rb
 
 # A very simple program that monitors a single key for changes.
 # The key value may be changed with simple-controller.rb
+#
+# Copyright (C) 2004 Giovanni Corriga
+#
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: simple-view.rb,v 1.2 2004/07/03 07:51:03 mutoh Exp $
 
 require 'gtk2'
 require 'gconf2'
