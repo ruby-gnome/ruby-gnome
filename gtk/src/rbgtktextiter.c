@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/12/27 09:49:07 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -42,7 +42,10 @@ static VALUE
 get_char(self)
     VALUE self;
 {
-    return INT2NUM(gtk_text_iter_get_char(_SELF(self)));
+    gchar buf[10];
+    gint len = g_unichar_to_utf8(gtk_text_iter_get_char(_SELF(self)), buf);
+    buf[len] = '\0';
+    return rb_str_new2(buf);
 }
 
 static VALUE
