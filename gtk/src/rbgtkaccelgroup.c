@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/02/02 14:34:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -30,36 +30,21 @@ gaccelgrp_connect(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE key, mods, flags, func;
-    GClosure *rclosure;
-    
-    rb_scan_args(argc, argv, "31", &key, &mods, &flags, &func);
-    if(NIL_P(func))
-        func = rb_f_lambda();
-    G_RELATIVE(self, func);
-    rclosure = g_rclosure_new(func, Qnil, NULL);
-
-    gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
-                            FIX2INT(mods), FIX2INT(flags), rclosure);
-    return self;
-}
-
-static VALUE
-gaccelgrp_connect_by_path(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE path, func;
+    VALUE key, mods, flags, path, closure;
     GClosure *rclosure;
 
-    rb_scan_args(argc, argv, "11", &path, &func);
-    if(NIL_P(func))
-        func = rb_f_lambda();
-    G_RELATIVE(self, func);
-    rclosure = g_rclosure_new(func, Qnil, NULL);
-
-    gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
+    if (argc > 2){
+        rb_scan_args(argc, argv, "40", &key, &mods, &flags, &closure);
+        G_RELATIVE(self, closure);
+        rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
+                                FIX2INT(mods), FIX2INT(flags), rclosure);
+    } else {
+        rb_scan_args(argc, argv, "20", &path, &closure);
+        G_RELATIVE(self, closure);
+        rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
+    }
     return self;
 }
 
@@ -93,16 +78,21 @@ gaccelgrp_query(self, key, mods)
     }
 }
 
-#if 0
-gboolean    (*GtkAccelGroupActivate)        (GtkAccelGroup *accel_group,
-                                             GObject *acceleratable,
-                                             guint keyval,
-                                             GdkModifierType modifier);
-gboolean    gtk_accel_group_disconnect      (GtkAccelGroup *accel_group,
-                                             GClosure *closure);
-GtkAccelGroup* gtk_accel_group_from_accel_closure
-                                            (GClosure *closure);
-#endif
+static VALUE
+gaccelgrp_disconnect(self, closure)
+    VALUE self, closure;
+{
+    return gtk_accel_group_disconnect(_SELF(self),
+                                      (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+gaccelgrp_s_from_accel_closure(closure)
+    VALUE closure;
+{
+    return GOBJ2RVAL(gtk_accel_group_from_accel_closure(
+                         (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
+}
 
 static gboolean
 gaccelgrp_find_func(key, closure, func)
@@ -169,12 +159,12 @@ Init_gtk_accel_group()
 
     rb_define_singleton_method(gAccelGroup, "activate", gaccelgrp_s_activate, 3);
     rb_define_singleton_method(gAccelGroup, "from_object", gaccelgrp_s_from_object, 1);
-    
+    rb_define_singleton_method(gAccelGroup, "from_accel_closure", gaccelgrp_s_from_accel_closure, 1);
     rb_define_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
     rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);
     rb_define_method(gAccelGroup, "unlock", gaccelgrp_unlock, 0);
     rb_define_method(gAccelGroup, "connect", gaccelgrp_connect, -1);
-    rb_define_method(gAccelGroup, "connect_by_path", gaccelgrp_connect_by_path, -1);
+    rb_define_method(gAccelGroup, "disconnect", gaccelgrp_disconnect, 1);
     rb_define_method(gAccelGroup, "disconnect_key", gaccelgrp_disconnect_key, 2);
     rb_define_method(gAccelGroup, "query", gaccelgrp_query, 2);
     rb_define_method(gAccelGroup, "find", gaccelgrp_find, 0);

@@ -1,3 +1,10 @@
+2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaccelgroup.c: Remove Gtk::AccelGroup#connect_by_path.
+	Use Gtk::AccelGroup#connect instead.
+	Gtk::AccelGroup#connect need GLib::Closure instead of Proc object.
+	Add Gtk::AccelGroup.from_accel_closure, Gtk::AccelGroup#disconnect.
+
 2003-02-02  Geoff Youngs <g@intersect-uk.co.uk>
 
 	* src/rbgdkgc.c: Fix Gdk::GC#set_clip_rectangle passed the wrong type
