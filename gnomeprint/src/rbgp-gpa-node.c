@@ -19,32 +19,33 @@
 #include "rbgp.h"
 
 #define WE_ARE_LIBGNOMEPRINT_INTERNALS
-#include <libgnomeprint/private/gpa-root.h>
+#include <libgnomeprint/private/gpa-node.h>
 
 static VALUE
-gp_gpa_get_printers(VALUE self)
+gp_gpa_node_id(VALUE self)
 {
-  VALUE array = rb_ary_new();
-  GPANode *printers = GPA_NODE(gpa_get_printers());
-  GPANode *printer;
+  return CSTR2RVAL(gpa_node_id(RVAL2GOBJ(self)));
+}
 
-  printer = gpa_node_get_child (printers, NULL);
-  while (printer) {
-    rb_ary_push(array, GOBJ2RVAL(printer));
-    printer = gpa_node_get_child(printers, printer);
-  }
-  gpa_node_unref(printers);
-  
-  return array;
+static VALUE
+gp_gpa_node_get_value(VALUE self)
+{
+  return CSTR2RVAL(gpa_node_get_value(RVAL2GOBJ(self)));
+}
+
+static VALUE
+gp_gpa_node_set_value(VALUE self, VALUE value)
+{
+  return CBOOL2RVAL(gpa_node_set_value(RVAL2GOBJ(self), RVAL2CSTR(value)));
 }
 
 
 void
-Init_gnome_print_gpa_root(VALUE mGnome)
+Init_gnome_print_gpa_node(VALUE mGnome)
 {
-  VALUE mGPA = rb_define_module_under(mGnome, "GPARoot");
-  
-  gpa_init();
+  VALUE c = G_DEF_CLASS(GPA_TYPE_NODE, "GPANode", mGnome);
 
-  rb_define_module_function(mGPA, "printers", gp_gpa_get_printers, 0);
+  rb_define_method(c, "id", gp_gpa_node_id, 0);
+  rb_define_method(c, "value", gp_gpa_node_get_value, 0);
+  rb_define_method(c, "set_value", gp_gpa_node_set_value, 1);
 }

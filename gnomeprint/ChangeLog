@@ -1,3 +1,21 @@
+2004-10-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/gnomeprint2.rb: added backward compatibility for Rabbit
+	  0.0.5.
+
+	* src/* (Init_*): removed mGP.
+	
+	* src/rbgp-gpa-settings.c: added.
+
+	* src/rbgp-gpa-root.c: added.
+
+	* src/rbgp-gpa-printer.c: added.
+
+	* src/rbgp-gpa-node.c: added.
+
+	* src/rbgp-gpa-model.c: added.
+	
+
 2004-10-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/gnomeprint2.rb: called GLib::Log.set_log_domain.

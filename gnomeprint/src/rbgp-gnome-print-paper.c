@@ -168,7 +168,7 @@ gp_paper_get_list(VALUE self)
 
 
 void
-Init_gnome_print_paper(VALUE mGnome, VALUE mGP)
+Init_gnome_print_paper(VALUE mGnome)
 {
   VALUE cPaper = G_DEF_CLASS(GNOME_TYPE_PRINT_PRINT_PAPER,
                              "PrintPaper", mGnome);

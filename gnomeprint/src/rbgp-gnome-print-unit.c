@@ -151,7 +151,7 @@ gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
 
 
 void
-Init_gnome_print_unit(VALUE mGnome, VALUE mGP)
+Init_gnome_print_unit(VALUE mGnome)
 {
   VALUE cUnit = G_DEF_CLASS(GNOME_TYPE_PRINT_UNIT, "PrintUnit", mGnome);
   VALUE cBase;

@@ -44,7 +44,7 @@ gp_error_initialize(VALUE self, VALUE code)
 }
 
 void
-Init_rbgp_utils(VALUE mGnome, VALUE mGP)
+Init_rbgp_utils(VALUE mGnome)
 {
   cGPError = rb_define_class_under(mGnome, "PrintError", rb_eStandardError);
   cGPReturnCode = rb_const_get(mGnome, rb_intern("PrintReturnCode"));

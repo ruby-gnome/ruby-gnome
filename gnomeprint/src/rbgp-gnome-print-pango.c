@@ -78,7 +78,7 @@ gp_pango_layout(VALUE self, VALUE layout)
 
 
 VALUE
-Init_gnome_print_pango(VALUE mGnome, VALUE mGP, VALUE cGPC)
+Init_gnome_print_pango(VALUE mGnome)
 {
   VALUE mGPP = rb_define_module_under(mGnome, "PrintPango");
 

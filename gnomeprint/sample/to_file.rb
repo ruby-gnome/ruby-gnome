@@ -25,17 +25,17 @@ class Renderer
   end
 
   def init_printer
-    printers = Gnome::PrintGPA.printers
+    printers = Gnome::GPARoot.printers
     target_printer = find_printer(printers)
     
     if target_printer.nil?
-      printer_names = printers.collect {|x| x.name}
-      raise "Could not find available printer in #{printer_name.join(', ')}"
+      printer_names = printers.collect {|x| x.value}
+      raise "Could not find available printer in #{printer_names.join(', ')}"
     end
     
-    @config["Printer"] = target_printer.name
-    if @config["Printer", :string] != target_printer.name
-      raise "Could not set printer to #{target_printer.description}"
+    @config["Printer"] = target_printer.id
+    if @config["Printer", :string] != target_printer.id
+      raise "Could not set printer to #{target_printer.value}"
     end
   end
   
@@ -43,11 +43,11 @@ class Renderer
     case File.extname(@filename)
     when /\.ps/i
       printers.find do |printer|
-        /Postscript/i =~ printer.description
+        /Postscript/i =~ printer.value
       end
     when /\.pdf/i
       printers.find do |printer|
-        /PDF/i =~ printer.description
+        /PDF/i =~ printer.value
       end
     else
       nil

@@ -97,7 +97,7 @@ gp_job_get_page_size(VALUE self)
 }
 
 void
-Init_gnome_print_job(VALUE mGnome, VALUE mGP)
+Init_gnome_print_job(VALUE mGnome)
 {
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PRINT_JOB, "PrintJob", mGnome);
 

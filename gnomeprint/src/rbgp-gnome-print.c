@@ -514,12 +514,12 @@ gp_rect_filled(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 
 
 void
-Init_gnome_print(VALUE mGnome, VALUE mGP)
+Init_gnome_print(VALUE mGnome)
 {
   VALUE cGPC = G_DEF_CLASS(GNOME_TYPE_PRINT_CONTEXT, "PrintContext", mGnome);
   VALUE cGPRC = G_DEF_CLASS(GNOME_TYPE_PRINT_PRINT_RETURN_CODE,
                             "PrintReturnCode", mGnome);
-  VALUE mGPP = Init_gnome_print_pango(mGnome, mGP, cGPC);
+  VALUE mGPP = Init_gnome_print_pango(mGnome);
 
   rb_include_module(cGPC, mGPP);
   

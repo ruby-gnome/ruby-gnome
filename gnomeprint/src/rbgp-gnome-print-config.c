@@ -277,7 +277,7 @@ gp_config_dump(VALUE self)
 
 
 void
-Init_gnome_print_config(VALUE mGnome, VALUE mGP)
+Init_gnome_print_config(VALUE mGnome)
 {
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PRINT_CONFIG, "PrintConfig", mGnome);
 
