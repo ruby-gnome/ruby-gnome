@@ -1,3 +1,9 @@
+2002-12-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c: Implement gtk_dialog_new_with_buttons in Gtk::Dialog#intialize, 
+	Gtk::Dialog#add_buttons.
+	* sample/misc/dialog.rb, dialog2.rb: Add files.
+
 2002-12-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Gtk::Dialog#add_button accept Gtk::Stock. 
