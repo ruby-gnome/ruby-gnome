@@ -1,4 +1,4 @@
-# $Id: pixbufs.rb,v 1.1 2003/10/14 13:42:47 kzys Exp $
+# $Id: pixbufs.rb,v 1.2 2003/10/14 14:15:41 kzys Exp $
 =begin
 = Pixbufs
 
@@ -62,6 +62,9 @@ module Demo
 	timeout_id = Gtk.timeout_add(FRAME_DELAY) do
           timeout
 	end
+        signal_connect('destroy') do
+          Gtk.timeout_remove(timeout_id)
+        end
       rescue
 	dialog = Gtk::MessageDialog.new(self,
 					Gtk::Dialog::DESTROY_WITH_PARENT,
