@@ -1,3 +1,7 @@
+2003-03-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/threads.rb: Add a file.
+
 2003-03-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkthreads.c: Add a file.
