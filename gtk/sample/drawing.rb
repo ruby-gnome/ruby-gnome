@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 class Canvas < Gtk::DrawingArea
   def initialize

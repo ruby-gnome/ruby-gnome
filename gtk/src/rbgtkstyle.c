@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -171,33 +171,6 @@ style_white(self)
     VALUE self;
 {
     return make_gdkcolor(&get_gstyle(self)->white);
-}
-
-static VALUE
-style_font(self)
-    VALUE self;
-{
-    return make_gdkfont(get_gstyle(self)->font);
-}
-
-static VALUE
-style_set_font(self, f)
-    VALUE self, f;
-{
-    GtkStyle *style = get_gstyle(self);
-    GdkFont *font = get_gdkfont(f);
-
-    if (font == NULL)
-        rb_raise(rb_eArgError, "Invalid or unknown font.");
-    if (style->fg_gc[0] != NULL)
-        rb_raise(rb_eArgError, "you must not change widget style.");
-    if (style->font != NULL)
-        gdk_font_unref(style->font);
-
-    gdk_font_ref(font);
-    style->font = font;
-
-    return self;
 }
 
 static VALUE
@@ -418,8 +391,6 @@ void Init_gtk_style()
 
     rb_define_method(gStyle, "black", style_black, 0);
     rb_define_method(gStyle, "white", style_white, 0);
-    rb_define_method(gStyle, "font", style_font, 0);
-    rb_define_method(gStyle, "set_font", style_set_font, 1);
     rb_define_method(gStyle, "fg_gc", style_fg_gc, 1);
     rb_define_method(gStyle, "bg_gc", style_bg_gc, 1);
     rb_define_method(gStyle, "light_gc", style_light_gc, 1);

@@ -4,12 +4,14 @@
   rbgtkprogress.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
+
+#ifndef GTK_DISABLE_DEPRECATED
 
 #include "global.h"
 
@@ -190,3 +192,4 @@ void Init_gtk_progress()
     /* child initialize */
     Init_gtk_progress_bar();
 }
+#endif

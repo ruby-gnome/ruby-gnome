@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 23:20:22 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -36,9 +36,6 @@ VALUE gTButton;
 VALUE gCButton;
 VALUE gRButton;
 VALUE gBBox;
-VALUE gCList;
-VALUE gCTree;
-VALUE gCTreeNode;
 VALUE gWindow;
 VALUE gDialog;
 VALUE gFileSel;
@@ -76,9 +73,7 @@ VALUE gHSeparator;
 VALUE gVSeparator;
 VALUE gInputDialog;
 VALUE gLabel;
-VALUE gList;
 VALUE gItem;
-VALUE gListItem;
 VALUE gMenuShell;
 VALUE gMenu;
 VALUE gMenuBar;
@@ -89,19 +84,12 @@ VALUE gTMenuItem;
 VALUE gNotebook;
 VALUE gNotePage;
 VALUE gOptionMenu;
-VALUE gPixmap;
-VALUE gPreview;
-VALUE gProgress;
 VALUE gProgressBar;
 VALUE gScrolledWin;
 VALUE gStatusBar;
 VALUE gTable;
-VALUE gText;
 VALUE gToolbar;
 VALUE gTooltips;
-VALUE gTipsQuery;
-VALUE gTree;
-VALUE gTreeItem;
 VALUE gViewport;
 VALUE gPlug;
 VALUE gSocket;
@@ -110,7 +98,6 @@ VALUE gAccelGroup;
 VALUE gAcceleratorTable;
 VALUE gStyle;
 VALUE gRcStyle;
-VALUE gPreviewInfo;
 VALUE gAllocation;
 VALUE gRequisition;
 VALUE gItemFactory;
@@ -118,6 +105,24 @@ VALUE gIFConst;
 VALUE gFontSelection;
 VALUE gFontSelectionDialog;
 VALUE gSelectionData;
+
+#ifndef GTK_DISABLE_DEPRECATED
+VALUE gCList;
+VALUE gCTree;
+VALUE gList;
+VALUE gListItem;
+VALUE gPixmap;
+VALUE gProgress;
+VALUE gPreview;
+VALUE gPreviewInfo;
+VALUE gTipsQuery;
+#endif
+
+#ifdef GTK_ENABLE_BROKEN
+VALUE gText;
+VALUE gTree;
+VALUE gTreeItem;
+#endif
 
 VALUE mRC;
 
@@ -353,27 +358,17 @@ get_gtk_type(gtkobj)
     else if GTK_IS_SCALE(gtkobj) klass = gScale;
     else if GTK_IS_RANGE(gtkobj) klass = gRange;
     else if GTK_IS_PROGRESS_BAR(gtkobj) klass = gProgressBar;
-    else if GTK_IS_PROGRESS(gtkobj) klass = gProgress;
-    else if GTK_IS_PREVIEW(gtkobj) klass = gPreview;
-    else if GTK_IS_PIXMAP(gtkobj) klass = gPixmap;
-    else if GTK_IS_TIPS_QUERY(gtkobj) klass = gTipsQuery;
     else if GTK_IS_ACCEL_LABEL(gtkobj) klass = gAccelLabel;
     else if GTK_IS_LABEL(gtkobj) klass = gLabel;
     else if GTK_IS_LAYOUT(gtkobj) klass = gLayout;
     else if GTK_IS_IMAGE(gtkobj) klass = gImage;
     else if GTK_IS_ARROW(gtkobj) klass = gArrow;
     else if GTK_IS_MISC(gtkobj) klass = gMisc;
-/*
-    else if GTK_IS_TEXT(gtkobj) klass = gText;
-*/
     else if GTK_IS_SPIN_BUTTON(gtkobj) klass = gSButton;
     else if GTK_IS_ENTRY(gtkobj) klass = gEntry;
     else if GTK_IS_EDITABLE(gtkobj) klass = gEditable;
     else if GTK_IS_CURVE(gtkobj) klass = gCurve;
     else if GTK_IS_DRAWING_AREA(gtkobj) klass = gDrawArea;
-/*
-    else if GTK_IS_TREE(gtkobj) klass = gTree;
-*/
     else if GTK_IS_TOOLBAR(gtkobj) klass = gToolbar;
     else if GTK_IS_TABLE(gtkobj) klass = gTable;
     else if GTK_IS_SCROLLED_WINDOW(gtkobj) klass = gScrolledWin;
@@ -384,10 +379,7 @@ get_gtk_type(gtkobj)
     else if GTK_IS_MENU_BAR(gtkobj) klass = gMenuBar;
     else if GTK_IS_MENU(gtkobj) klass = gMenu;
     else if GTK_IS_MENU_SHELL(gtkobj) klass = gMenuShell;
-    else if GTK_IS_LIST(gtkobj) klass = gList;
     else if GTK_IS_FIXED(gtkobj) klass = gFixed;
-    else if GTK_IS_CTREE(gtkobj) klass = gCTree;
-    else if GTK_IS_CLIST(gtkobj) klass = gCList;
     else if GTK_IS_RADIO_BUTTON(gtkobj) klass = gRButton;
     else if GTK_IS_CHECK_BUTTON(gtkobj) klass = gCButton;
     else if GTK_IS_TOGGLE_BUTTON(gtkobj) klass = gTButton;
@@ -411,14 +403,10 @@ get_gtk_type(gtkobj)
     else if GTK_IS_COLOR_SELECTION_DIALOG(gtkobj) klass = gColorSelDialog;
     else if GTK_IS_WINDOW(gtkobj) klass = gWindow;
     else if GTK_IS_VIEWPORT(gtkobj) klass = gViewport;
-/*
-    else if GTK_IS_TREE_ITEM(gtkobj) klass = gTreeItem;
-*/
     else if GTK_IS_TEAROFF_MENU_ITEM(gtkobj) klass = gTMenuItem;
     else if GTK_IS_RADIO_MENU_ITEM(gtkobj) klass = gRMenuItem;
     else if GTK_IS_CHECK_MENU_ITEM(gtkobj) klass = gCMenuItem;
     else if GTK_IS_MENU_ITEM(gtkobj) klass = gMenuItem;
-    else if GTK_IS_LIST_ITEM(gtkobj) klass = gListItem;
     else if GTK_IS_ITEM(gtkobj) klass = gItem;
     else if GTK_IS_ASPECT_FRAME(gtkobj) klass = gAspectFrame;
     else if GTK_IS_EVENT_BOX(gtkobj) klass = gEventBox;
@@ -430,6 +418,20 @@ get_gtk_type(gtkobj)
     else if GTK_IS_ADJUSTMENT(gtkobj) klass = gAdjustment;
     else if GTK_IS_TOOLTIPS(gtkobj) klass = gTooltips;
     else if GTK_IS_OBJECT(gtkobj) klass = gObject;
+
+#ifndef GTK_DISABLE_DEPRECATED
+    else if GTK_IS_CLIST(gtkobj) klass = gCList;
+    else if GTK_IS_CTREE(gtkobj) klass = gCTree;
+    else if GTK_IS_PIXMAP(gtkobj) klass = gPixmap;
+    else if GTK_IS_PROGRESS(gtkobj) klass = gProgress;
+    else if GTK_IS_PREVIEW(gtkobj) klass = gPreview;
+    else if GTK_IS_TIPS_QUERY(gtkobj) klass = gTipsQuery;
+#endif
+#ifdef GTK_ENABLE_BROKEN
+    else if GTK_IS_TEXT(gtkobj) klass = gText;
+    else if GTK_IS_TREE(gtkobj) klass = gTree;
+    else if GTK_IS_TREE_ITEM(gtkobj) klass = gTreeItem;
+#endif
     else {
 	rb_raise(rb_eTypeError, "not a Gtk object");
     }
@@ -539,6 +541,7 @@ get_gtkselectiondata(value)
     return selectiondata;
 }
 
+#ifdef GTK_DISABLE_DEPRECATED
 VALUE
 make_gtkprevinfo(info)
     GtkPreviewInfo *info;
@@ -561,6 +564,7 @@ get_gtkprevinfo(value)
 
     return info;
 }
+#endif
 
 void
 exec_callback(widget, proc)
@@ -854,7 +858,9 @@ void Init_gtk_gtk()
 
     Init_gtk_accel_group();
     gRcStyle = rb_define_class_under(mGtk, "RcStyle", rb_cData);
+#ifdef GTK_DISABLE_DEPRECATED
     gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", rb_cData);
+#endif
     Init_gtk_requisiton();
     Init_gtk_allocation();
 

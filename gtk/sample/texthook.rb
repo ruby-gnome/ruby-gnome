@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 w = Gtk::Window::new(Gtk::WINDOW_TOPLEVEL)
 w.signal_connect("delete_event") { exit }

@@ -5,7 +5,7 @@
 # see Gtk+ tutorial.
 #
 
-require 'gtk'
+require 'gtk2'
 
 def hello(widget)
   print ("Hello World\n")

@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 cal = Gtk::Calendar.new
 w = Gtk::Window.new(Gtk::WINDOW_TOPLEVEL)

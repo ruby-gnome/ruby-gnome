@@ -4,12 +4,14 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:09 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
+
+#ifndef GTK_DISABLE_DEPRECATED
 
 #include "global.h"
 
@@ -22,7 +24,7 @@ ctree_node_mark(ctree, node, notused)
     if (node) {
         GtkCTreeRow *row = GTK_CTREE_ROW(node);
         if (row && row->row.data) {
-            rb_gc_mark_maybe(row->row.data);
+            rb_gc_mark_maybe((int)row->row.data);
         }
     }
 }
@@ -1525,3 +1527,5 @@ void Init_gtk_ctree()
     rb_define_method(gCTreeNode, "leaf?", ctreenode_is_leaf, 0);
     rb_define_method(gCTreeNode, "expanded?", ctreenode_expanded, 0);
 }
+
+#endif

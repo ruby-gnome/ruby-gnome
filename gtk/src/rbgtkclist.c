@@ -4,13 +4,14 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
 
+#ifndef GTK_DISABLE_DEPRECATED
 #include "global.h"
 
 static void
@@ -22,7 +23,7 @@ clist_mark(clist)
 	for (list = clist->row_list; list; list=list->next) {
 	    GtkCListRow *row = GTK_CLIST_ROW(list);
 	    if (row && row->data) {
-		rb_gc_mark_maybe(row->data);
+		rb_gc_mark_maybe((int)row->data);
 	    }
 	}
     }
@@ -890,3 +891,4 @@ void Init_gtk_clist()
     /* child initialization */
     Init_gtk_ctree();
 }
+#endif

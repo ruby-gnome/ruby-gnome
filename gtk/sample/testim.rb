@@ -3,7 +3,7 @@
 #    written by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 #
 
-require 'gtk'
+require 'gtk2'
 
 
 $text = ""

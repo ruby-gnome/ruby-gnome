@@ -4,12 +4,14 @@
   rbgtktext.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
+
+#ifdef GTK_ENABLE_BROKEN
 
 #include "global.h"
 
@@ -157,3 +159,4 @@ void Init_gtk_text()
     rb_define_method(gText, "forward_delete", txt_forward_delete, 1);
     rb_define_method(gText, "has_cursor?", txt_has_cursor, 0);
 }
+#endif

@@ -4,12 +4,14 @@
   rbgtkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
+
+#ifndef GTK_DISABLE_DEPRECATED
 
 #include "global.h"
 
@@ -60,3 +62,4 @@ void Init_gtk_pixmap()
     rb_define_method(gPixmap, "set", pixmap_set, 2);
     rb_define_method(gPixmap, "get", pixmap_get, 0);
 }
+#endif

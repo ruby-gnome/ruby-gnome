@@ -4,7 +4,7 @@
   rbgtktree.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,11 +13,13 @@
 
 #include "global.h"
 
+#ifdef GTK_ENABLE_BROKEN
+
 static VALUE
 tree_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_tree_new());
+    set_widget(self, (GtkWidget *)gtk_tree_new());
     return Qnil;
 }
 
@@ -69,7 +71,7 @@ tree_set_view_mode(self, mode)
     VALUE self, mode;
 {
     gtk_tree_set_selection_mode(GTK_TREE(get_widget(self)),
-				(GtkTreeViewMode)NUM2INT(mode));
+				NUM2INT(mode));
     return self;
 }
 
@@ -105,14 +107,6 @@ tree_remove_item(self, child)
     return self;
 }
 
-/*
-static VALUE
-tree_selection(self)
-    VALUE self;
-{
-}
-*/
-
 void Init_gtk_tree()
 {
     gTree = rb_define_class_under(mGtk, "Tree", gContainer);
@@ -137,3 +131,4 @@ void Init_gtk_tree()
     rb_define_method(gTree, "remove_item", tree_remove_item, 1);
     /* rb_define_method(gTree, "selection", tree_selection, 0); */
 }
+#endif

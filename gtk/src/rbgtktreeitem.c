@@ -4,7 +4,7 @@
   rbgtktreeitem.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,6 +13,7 @@
 
 #include "global.h"
 
+#ifdef GTK_ENABLE_BROKEN
 static VALUE
 titem_initialize(argc, argv, self)
     int argc;
@@ -122,3 +123,4 @@ void Init_gtk_tree_item()
     rb_define_method(gTreeItem, "expand", titem_expand, 0);
     rb_define_method(gTreeItem, "collapse", titem_collapse, 0);
 }
+#endif

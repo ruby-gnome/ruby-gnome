@@ -4,12 +4,14 @@
   rbgtklist.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
+
+#ifndef GTK_DISABLE_DEPRECATED
 
 #include "global.h"
 
@@ -169,3 +171,4 @@ void Init_gtk_list()
     rb_define_method(gList, "unselect_child", list_unselect_child, 1);
     rb_define_method(gList, "child_position", list_child_position, 1);
 }
+#endif

@@ -4,11 +4,11 @@
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2002/05/19 12:39:12 $
-  $Id: xbm_cursor.rb,v 1.1 2002/05/19 12:39:12 mutoh Exp $
+  $Date: 2002/05/21 17:32:21 $
+  $Id: xbm_cursor.rb,v 1.2 2002/05/21 17:32:21 mutoh Exp $
 =end
 
-require 'gtk'
+require 'gtk2'
 
 cursor_bits = [
    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

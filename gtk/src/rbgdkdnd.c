@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/05/21 17:32:25 $
 
   Copyright (C) 2002 MUTOH Masao
 ************************************************/
@@ -50,7 +50,7 @@ gdkdragcontext_targets(self)
     VALUE ary = rb_ary_new();
 
     for (cur = list; cur != NULL; cur = cur->next) {
-        rb_ary_push(ary, make_gdkatom(GPOINTER_TO_INT(cur->data)));
+        rb_ary_push(ary, make_gdkatom((GdkAtom)cur->data));
     }
     return ary;
 }
