@@ -1,6 +1,7 @@
 2002-11-05  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
 
-	* rbgdk-pixbuf.c: Bugfix for "undefined symbol: DBL2INT"
+	* rbgdk-pixbuf.c: Bugfix for "undefined symbol: DBL2INT", "CSTR2STR",
+	"STR2CSTR".
 	(pointed out by KUBO Takehiro <kubo@jiubao.org>)
 	* README: Add copyright.
 

@@ -216,8 +216,8 @@ static VALUE
 get_option(self, key)
     VALUE self, key;
 {
-    const gchar* ret = gdk_pixbuf_get_option(_SELF(self), STR2CSTR(key));
-    return ret ? CSTR2STR(ret) : Qnil;
+    const gchar* ret = gdk_pixbuf_get_option(_SELF(self), RVAL2CSTR(key));
+    return ret ? CSTR2RVAL(ret) : Qnil;
 }
 
 void Init_gdk_pixbuf2()
