@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.4 2002/10/19 16:36:25 tkubo Exp $ */
+/* $Id: rbgnome-client.c,v 1.5 2002/10/27 05:59:58 tkubo Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
@@ -24,6 +24,8 @@
  */
 
 #include "rbgnome.h"
+
+static ID id_call;
 
 #define _SELF(self) GNOME_CLIENT(RVAL2GOBJ(self))
 
@@ -302,27 +304,60 @@ client_get_desktop_id(self)
     return result ? rb_str_new2(result) : Qnil;
 }
 
-#if 0
-void         gnome_client_request_interaction    (GnomeClient *client,
-						  GnomeDialogType dialog_type,
-						  GnomeInteractFunction function,
-						  gpointer data);
+static void
+client_interact_function(client, key, dialog_type, data)
+    GnomeClient *client;
+    gint key;
+    GnomeDialogType dialog_type;
+    gpointer data;
+{
+    VALUE proc = RARRAY(data)->ptr[0];
+    int argc = RARRAY(data)->len + 2;
+    VALUE *argv = ALLOCA_N(VALUE, argc);
+    int i;
 
-void         gnome_client_request_interaction_interp (GnomeClient *client,
-						      GnomeDialogType dialog_type,
-						      GtkCallbackMarshal function,
-						      gpointer data,
-						      GtkDestroyNotify destroy);
+    argv[0] = GOBJ2RVAL(client);
+    argv[1] = INT2NUM(key);
+    argv[2] = INT2NUM(dialog_type);
+    for (i = 1; i < RARRAY(data)->len; i++) {
+        argv[i + 2] = RARRAY(data)->ptr[i];
+    }
+    rb_funcall2(proc, id_call, argc, argv);
+}
 
-void         gnome_interaction_key_return        (gint     key,
-						  gboolean cancel_shutdown);
-#endif
+static VALUE
+client_request_interaction(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
+{
+    VALUE dialog_type, args, proc;
+
+    rb_scan_args(argc, argv, "1*", &dialog_type, &args);
+    proc = rb_f_lambda();
+    rb_ary_unshift(args, proc);
+    gnome_client_request_interaction(_SELF(self),
+                                     NUM2INT(dialog_type),
+                                     client_interact_function,
+                                     (gpointer)args);
+    G_RELATIVE(self, args);
+    return self;
+}
+
+static VALUE
+rbgnome_interaction_key_return(self, key, cancel_shutdown)
+    VALUE self, key, cancel_shutdown;
+{
+    gnome_interaction_key_return(NUM2INT(key), RTEST(cancel_shutdown));
+    return Qnil;
+}
 
 void
 Init_gnome_client(mGnome)
     VALUE mGnome;
 {
     VALUE gnoClient = G_DEF_CLASS(GNOME_TYPE_CLIENT, "Client", mGnome);
+
+    id_call = rb_intern("call");
 
     /* GnomeInteractStyle */
     rb_define_const(mGnome, "INTERACT_NONE", INT2FIX(GNOME_INTERACT_NONE));
@@ -362,7 +397,7 @@ Init_gnome_client(mGnome)
     rb_define_method(gnoClient, "config_prefix", client_get_config_prefix, 0);
     rb_define_method(gnoClient, "global_config_prefix", client_get_global_config_prefix, 0);
     rb_define_method(gnoClient, "set_global_config_prefix", client_set_global_config_prefix, 1);
-    rb_define_method(gnoClient, "get_flags", client_get_flags, 1);
+    rb_define_method(gnoClient, "flags", client_get_flags, 0);
     rb_define_method(gnoClient, "set_restart_style", client_set_restart_style, 1);
     rb_define_method(gnoClient, "set_priority", client_set_priority, 1);
     rb_define_method(gnoClient, "set_restart_command", client_set_restart_command, 1);
@@ -389,6 +424,8 @@ Init_gnome_client(mGnome)
     rb_define_method(gnoClient, "id", client_get_id, 0);
     rb_define_method(gnoClient, "previous_id", client_get_previous_id, 0);
     rb_define_method(gnoClient, "desktop_id", client_get_desktop_id, 0);
+    rb_define_method(gnoClient, "request_interaction", client_request_interaction, -1);
+    rb_define_module_function(mGnome, "interaction_key_return", rbgnome_interaction_key_return, 2);
 
     G_DEF_SETTERS(gnoClient);
 }

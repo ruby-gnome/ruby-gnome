@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.5 2002/10/17 14:34:39 tkubo Exp $ */
+/* $Id: rbgnome-app.c,v 1.6 2002/10/27 05:59:58 tkubo Exp $ */
 /* based on libgnomeui/gnome-app.h */
 
 /* Gnome::App widget for Ruby/GNOME2
@@ -216,15 +216,14 @@ app_add_docked(self, widget, name, behavior, placement,
     VALUE self, widget, name, behavior, placement;
     VALUE band_num, band_position, offset;
 {
-    gnome_app_add_docked(_SELF(self),
-                         GTK_WIDGET(widget),
-                         RVAL2CSTR(name),
-                         NUM2INT(behavior),
-                         NUM2INT(placement),
-                         NUM2INT(band_num),
-                         NUM2INT(band_position),
-                         NUM2INT(offset));
-    return self;			 
+    return GOBJ2RVAL(gnome_app_add_docked(_SELF(self),
+                                          GTK_WIDGET(widget),
+                                          RVAL2CSTR(name),
+                                          NUM2INT(behavior),
+                                          NUM2INT(placement),
+                                          NUM2INT(band_num),
+                                          NUM2INT(band_position),
+                                          NUM2INT(offset)));
 }
 
 /*

@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-app-helper.rb,v 1.3 2002/10/17 14:33:27 tkubo Exp $
+# $Id: gnome-app-helper.rb,v 1.4 2002/10/27 05:59:01 tkubo Exp $
 #
 # gnome-app-helper.rb - sample script of Gnome::App#create_menus()
 #                       and Gnome::App#toolbar().
@@ -27,7 +27,7 @@ program = Gnome::Program.new('test-app-helper', '0.1', Gnome::ModuleInfo::LIBGNO
 
 class SampleApp < Gnome::App
 
-  include Gnome::I18n
+  include Bonobo::I18n
 
   APP_NAME = 'test-app-helper'
   TITLE = 'App Helper Sample'

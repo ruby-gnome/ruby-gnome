@@ -1,5 +1,17 @@
 2002-10-27  KUBO Takehiro  <kubo@jiubao.org>
 
+	* src/rbgnome-app-helper.c: Add new methods
+	Gtk::ToolBar.fill_toolbar(), Gtk::MenuShell.find_menu_pos(),
+	Gnome::App.install_menu_hints() and Gtk::ToolBar.setup_toolbar().
+	* src/rbgnome-app.c: change the return value of 
+	Gnome::App.add_docked().
+	* src/rbgnome-client.c: Rename Gnome::Client#get_flags() -> flags().
+	Add new methods Gnome::Client#request_interaction() and 
+	interaction_key_return().
+	* sample/gnome-app-helper.rb: use Bonobo::I18n instead of Gnome::I18n.
+
+2002-10-27  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-icon-list.c: Accept nil as the 2nd argument of
 	Gnome::IconList.new. Add constants Gnome::IconList::IS_EDITABLE.
 	Add methods Gnome::IconList#set_icon_data(), find_icon_from_data(),

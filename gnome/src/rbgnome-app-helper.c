@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.8 2002/10/19 16:36:25 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.9 2002/10/27 05:59:58 tkubo Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -754,6 +754,19 @@ app_create_menus(self, menuinfo)
 }
 
 static VALUE
+app_fill_toolbar(self, menuinfo, accel_group)
+    VALUE self, menuinfo, accel_group;
+{
+    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_TOOLBAR);
+
+    gnome_app_fill_toolbar_custom(GTK_TOOLBAR(RVAL2GOBJ(self)),
+                                  DATA_PTR(uiinfo),
+                                  &RbGnome_UIBuilder,
+                                  GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
+    return ui_info_to_ary(DATA_PTR(uiinfo));
+}
+
+static VALUE
 app_create_toolbar(self, menuinfo)
     VALUE self, menuinfo;
 {
@@ -763,6 +776,18 @@ app_create_toolbar(self, menuinfo)
                                     DATA_PTR(uiinfo),
                                     &RbGnome_UIBuilder);
     return ui_info_to_ary(DATA_PTR(uiinfo));
+}
+
+static VALUE
+app_find_menu_pos(self, path)
+    VALUE self, path;
+{
+    GtkWidget *item;
+    gint pos;
+    item = gnome_app_find_menu_pos(GTK_WIDGET(RVAL2GOBJ(self)),
+                                   RVAL2CSTR(path),
+                                   &pos);
+    return item ? rb_ary_new3(2, GOBJ2RVAL(item), INT2NUM(pos)) : Qnil;
 }
 
 static VALUE
@@ -819,6 +844,25 @@ app_install_statusbar_menu_hints(self, menuinfo)
     return self;
 }
 
+static VALUE
+app_install_menu_hints(self, menuinfo)
+    VALUE self, menuinfo;
+{
+    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENU_HINTS);
+
+    gnome_app_install_menu_hints(GNOME_APP(RVAL2GOBJ(self)), DATA_PTR(uiinfo));
+    return self;
+}
+
+static VALUE
+app_setup_toolbar(self, dock_item)
+    VALUE self, dock_item;
+{
+    gnome_app_setup_toolbar(GTK_TOOLBAR(RVAL2GOBJ(self)),
+                            BONOBO_DOCK_ITEM(RVAL2GOBJ(dock_item)));
+    return self;
+}
+
 void
 Init_gnome_app_helper(mGnome)
     VALUE mGnome;
@@ -826,7 +870,9 @@ Init_gnome_app_helper(mGnome)
     VALUE mGnomeUIInfo = rb_define_module_under(mGnome, "UIInfo");
     VALUE gnoApp = GTYPE2CLASS(GNOME_TYPE_APP);
     VALUE gnoAppBar = GTYPE2CLASS(GNOME_TYPE_APPBAR);
+    VALUE gtkMenuShell = GTYPE2CLASS(GTK_TYPE_MENU_SHELL);
     VALUE gtkStatusBar = GTYPE2CLASS(GTK_TYPE_STATUSBAR);
+    VALUE gtkToolBar = GTYPE2CLASS(GTK_TYPE_TOOLBAR);
 
     /* GnomeUIInfoType */
     rb_define_const(gnoApp, "UI_ENDOFINFO", INT2FIX(GNOME_APP_UI_ENDOFINFO));
@@ -957,13 +1003,14 @@ Init_gnome_app_helper(mGnome)
      * instance methods
      */
     rb_define_method(gnoApp, "create_menus", app_create_menus, 1);
-/*     rb_define_method(gtkToolBar, "fill_toolbar", app_fill_toolbar, 1); */
+    rb_define_method(gtkToolBar, "fill_toolbar", app_fill_toolbar, 2);
     rb_define_method(gnoApp, "create_toolbar", app_create_toolbar, 1);
-/*     rb_define_method(gnoApp, "find_menu_pos", app_find_menu_pos, ?); */
+    rb_define_method(gtkMenuShell, "find_menu_pos", app_find_menu_pos, 1);
     rb_define_method(gnoApp, "remove_menus", app_remove_menus, 2);
     rb_define_method(gnoApp, "remove_menu_range", app_remove_menu_range, 3);
     rb_define_method(gnoApp, "insert_menus", app_insert_menus, 2);
-
     rb_define_method(gnoAppBar, "install_menu_hints", app_install_appbar_menu_hints, 1);
     rb_define_method(gtkStatusBar, "install_menu_hints", app_install_statusbar_menu_hints, 1);
+    rb_define_method(gnoApp, "install_menu_hints", app_install_menu_hints, 1);
+    rb_define_method(gtkToolBar, "setup_toolbar", app_setup_toolbar, 1);
 }
