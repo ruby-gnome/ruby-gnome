@@ -3,8 +3,8 @@
 
   rbgtktreepath.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: kzys $
+  $Date: 2003/03/02 06:58:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -74,13 +74,23 @@ static VALUE
 treepath_get_indices(self)
     VALUE self;
 {
-/* How can I get lenght of indices ?
-    gint i, len;
-    gint len = ????;
-    gint* indices = gtk_tree_path_get_indices(_SELF(self));
-*/
-    rb_notimplement();
-    return Qnil;
+    VALUE ary;
+    gint i, length;
+    gint* indices;
+
+    length = gtk_tree_path_get_depth(_SELF(self));
+    indices = gtk_tree_path_get_indices(_SELF(self));
+
+    if (indices != NULL) {
+        ary = rb_ary_new2(length);
+        for (i = 0; i < length; i++) {
+            rb_ary_push(ary, INT2NUM(indices[i]));
+        }
+    
+        return ary;
+    } else {
+        return Qnil;
+    }
 }
 
 static VALUE
