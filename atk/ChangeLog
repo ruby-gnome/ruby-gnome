@@ -1,6 +1,10 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2005-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* extconf.rb: Support MS VC++. Follow mkmf-gnome2.rb changes.
+	* extconf.rb: Support MS VC++. 
 
 2004-12-03  Vincent Isambart <isambart@netcourrier.com>
 

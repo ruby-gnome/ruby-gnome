@@ -15,8 +15,6 @@ require 'mkmf-gnome2'
 PKGConfig.have_package('atk') or exit 1
 setup_win32(PACKAGE_NAME)
 
-add_depend_package("glib2", "glib/src", TOPDIR)
-
 have_func('atk_action_get_localized_name')
 have_func('atk_hyperlink_is_inline')
 have_func('atk_object_add_relationship')
@@ -28,19 +26,13 @@ have_func('atk_text_get_bounded_ranges')
 have_func('atk_role_get_localized_name')
 have_func('atk_text_clip_type_get_type')
 
-$distcleanfiles << "rbatkinits.c" if $distcleanfiles
+add_depend_package("glib2", "glib/src", TOPDIR)
+add_distcleanfile("rbatkinits.c")
 
-begin
-  Dir.mkdir('src') unless File.exist? 'src'
-  Dir.chdir "src"
-
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_ATK_COMPILATION") {
   File.delete("rbatkinits.c") if FileTest.exist?("rbatkinits.c")
   system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
-  $defs << "-DRUBY_ATK_COMPILATION"
-  create_makefile(PACKAGE_NAME, SRCDIR)
-ensure
-  Dir.chdir('..')
-end
+}
 
 create_top_makefile
 
