@@ -3,8 +3,8 @@
 
   rbgdkselection.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/03/02 16:30:21 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -20,7 +20,6 @@ gdkselection_owner_set(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE display = Qnil;
     VALUE owner, selection, time, send_event;
     int ret;
 
@@ -31,13 +30,14 @@ gdkselection_owner_set(argc, argv, self)
                                       NUM2UINT(time), RTEST(send_event));
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
-        rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
-        ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                                  GDK_WINDOW(RVAL2GOBJ(owner)), 
-                                                  RVAL2ATOM(selection), 
-                                                  NUM2UINT(time), RTEST(send_event));
+      VALUE display = Qnil;
+      rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
+      ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                GDK_WINDOW(RVAL2GOBJ(owner)), 
+                                                RVAL2ATOM(selection), 
+                                                NUM2UINT(time), RTEST(send_event));
 #else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
 #endif
 
     }
@@ -50,7 +50,6 @@ gdkselection_owner_get(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE display = Qnil;
     VALUE selection;
 
     if (argc == 1) {
@@ -58,11 +57,12 @@ gdkselection_owner_get(argc, argv, self)
         return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
-        rb_scan_args(argc, argv, "20", &display, &selection);
-        return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                                             RVAL2ATOM(selection)));
+      VALUE display = Qnil;
+      rb_scan_args(argc, argv, "20", &display, &selection);
+      return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                           RVAL2ATOM(selection)));
 #else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
 #endif
     }
 }
@@ -97,7 +97,6 @@ gdkselection_send_notify(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE display = Qnil;
     VALUE requestor, selection, target, property, time;
 
     if (argc == 5) {
@@ -108,14 +107,15 @@ gdkselection_send_notify(argc, argv, self)
                                   NUM2INT(time));
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
-        rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
-        gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                              NUM2UINT(requestor), RVAL2ATOM(selection),
-                                              RVAL2ATOM(target), 
-                                              NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
-                                              NUM2INT(time));
+      VALUE display = Qnil;
+      rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
+      gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                            NUM2UINT(requestor), RVAL2ATOM(selection),
+                                            RVAL2ATOM(target), 
+                                            NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
+                                            NUM2INT(time));
 #else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
 #endif
     }
     return self;

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/02/11 17:26:50 $
+  $Date: 2004/03/02 16:30:21 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -823,9 +823,8 @@ static VALUE
 widget_style_get_property(self, prop_name)
     VALUE self, prop_name;
 {
-    GParamSpec* pspec;
+    GParamSpec* pspec = NULL;
     const char* name;
-    GtkWidgetClass* oclass = g_type_class_ref(RVAL2GTYPE(self));
 
     if (SYMBOL_P(prop_name)) {
         name = rb_id2name(SYM2ID(prop_name));
@@ -834,7 +833,7 @@ widget_style_get_property(self, prop_name)
         name = StringValuePtr(prop_name);
     }
 #if GTK_CHECK_VERSION(2,2,0)
-    pspec = gtk_widget_class_find_style_property(oclass, name);
+    pspec = gtk_widget_class_find_style_property((GtkWidgetClass*)g_type_class_ref(RVAL2GTYPE(self)), name);
 #endif
     if (!pspec)
         rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
