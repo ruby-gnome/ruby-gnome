@@ -1,3 +1,7 @@
+2004-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeview.c: Fix some methods of Gtk::TreeView to accept nil.
+	
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Fix a warning on Win32. 

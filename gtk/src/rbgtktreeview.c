@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/07 18:20:54 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -450,7 +450,8 @@ static VALUE
 treeview_set_drag_dest_row(self, path, pos)
     VALUE self, path, pos;
 {
-    gtk_tree_view_set_drag_dest_row(_SELF(self), RVAL2TREEPATH(path),
+    gtk_tree_view_set_drag_dest_row(_SELF(self), 
+                                    NIL_P(path)?NULL:RVAL2TREEPATH(path),
                                     RVAL2GENUM(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
     return self;
 }
@@ -459,10 +460,10 @@ static VALUE
 treeview_get_drag_dest_row(self)
     VALUE self;
 {
-    GtkTreePath* path;
+    GtkTreePath* path = NULL;
     GtkTreeViewDropPosition pos;
     gtk_tree_view_get_drag_dest_row(_SELF(self), &path, &pos);
-    return rb_ary_new3(2, TREEPATH2RVAL(path), 
+    return rb_ary_new3(2, path ? TREEPATH2RVAL(path) : Qnil, 
                        GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
 }
 
