@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-scores.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-scores.c,v 1.4 2002/09/29 13:12:32 tkubo Exp $ */
 
 /* Gnome::Scores widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -83,7 +83,7 @@ scores_set_logo_label(self, txt, font, color)
     gnome_scores_set_logo_label(_SELF(self),
                                 RVAL2CSTR(txt),
                                 RVAL2CSTR(font),
-                                (GdkColor*)RVAL2BOXED(color));
+                                (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 
@@ -111,7 +111,7 @@ scores_set_color(self, pos, color)
 {
     gnome_scores_set_color(_SELF(self),
                            NUM2INT(pos),
-                           (GdkColor*)RVAL2BOXED(color));
+                           (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 
@@ -119,7 +119,7 @@ static VALUE
 scores_set_def_color(self, color)
     VALUE self, color;
 {
-    gnome_scores_set_def_color(_SELF(self), (GdkColor*)RVAL2BOXED(color));
+    gnome_scores_set_def_color(_SELF(self), (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 
@@ -127,7 +127,7 @@ static VALUE
 scores_set_colors(self, color)
     VALUE self, color;
 {
-    gnome_scores_set_colors(_SELF(self), (GdkColor*)RVAL2BOXED(color));
+    gnome_scores_set_colors(_SELF(self), (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 

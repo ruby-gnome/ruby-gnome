@@ -1,3 +1,7 @@
+2002-09-29  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-scores.c: Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).
+
 2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb: use pkg-config instead of gnome-config. change module
