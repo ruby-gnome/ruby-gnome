@@ -3,8 +3,8 @@
 
   rbpangoarray.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 01:12:49 $
+  $Author: mutoh $
+  $Date: 2003/09/01 14:39:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -32,7 +32,7 @@ rtab_initialize(argc, argv, self)
     if (! NIL_P(attr_ary)){
         for (i = 0; i < RARRAY(attr_ary)->len; i++) {
             pango_tab_array_set_tab(array, i, 
-                                    FIX2INT(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[0]),
+                                    RVAL2GENUM(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[0], PANGO_TYPE_TAB_ALIGN),
                                     FIX2INT(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[1]));
         }
     }
@@ -59,7 +59,7 @@ static VALUE
 rtab_set_tab(self, tab_index, align, location)
     VALUE self, tab_index, align, location;
 {
-    pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), FIX2INT(align),
+    pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), RVAL2GENUM(align, PANGO_TYPE_TAB_ALIGN),
                             NUM2INT(location));
     return self;
 }
@@ -72,7 +72,7 @@ rtab_get_tab(self, tab_index)
     gint location;
     pango_tab_array_get_tab(_SELF(self), NUM2INT(tab_index),
                             &align, &location);
-    return rb_ary_new3(2, INT2FIX(align), INT2NUM(location));
+    return rb_ary_new3(2, GENUM2RVAL(align, PANGO_TYPE_TAB_ALIGN), INT2NUM(location));
 }
 
 static VALUE
@@ -88,7 +88,8 @@ rtab_get_tabs(self)
     pango_tab_array_get_tabs(tab_array, &aligns, &locations);
 
     for (i = 0; i < pango_tab_array_get_size(tab_array); i++){
-        rb_ary_push(ary, rb_ary_new3(2, INT2FIX(aligns[i]), INT2NUM(locations[i])));
+        rb_ary_push(ary, rb_ary_new3(2, GENUM2RVAL(aligns[i], PANGO_TYPE_TAB_ALIGN), 
+                                     INT2NUM(locations[i])));
     }
     return ary;
 }

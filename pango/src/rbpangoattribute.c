@@ -3,8 +3,8 @@
 
   rbpangoattribute.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 01:12:49 $
+  $Author: mutoh $
+  $Date: 2003/09/01 14:39:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -236,6 +236,15 @@ attr_ ## klassname ## _initialize(self, val)\
     return Qnil;\
 }
 
+#define MAKE_ATTRENUM_INIT(klassname, funcname, type)\
+static VALUE \
+attr_ ## klassname ## _initialize(self, val)\
+    VALUE self, val;\
+{\
+    DATA_PTR(self) = pango_attr_ ## funcname ## _new(RVAL2GENUM(val, type));\
+    return Qnil;\
+}
+
 static VALUE
 attr_AttrLanguage_initialize(self, lang)
     VALUE self, lang;
@@ -253,10 +262,10 @@ attr_AttrFamily_initialize(self, family)
     return Qnil;
 }
 
-MAKE_ATTRINT_INIT(AttrStyle, style); 
-MAKE_ATTRINT_INIT(AttrVariant, variant); 
-MAKE_ATTRINT_INIT(AttrStretch, stretch); 
-MAKE_ATTRINT_INIT(AttrWeight, weight); 
+MAKE_ATTRENUM_INIT(AttrStyle, style, PANGO_TYPE_STYLE); 
+MAKE_ATTRENUM_INIT(AttrVariant, variant, PANGO_TYPE_VARIANT); 
+MAKE_ATTRENUM_INIT(AttrStretch, stretch, PANGO_TYPE_STRETCH); 
+MAKE_ATTRENUM_INIT(AttrWeight, weight, PANGO_TYPE_WEIGHT); 
 MAKE_ATTRINT_INIT(AttrSize, size); 
 
 static VALUE
@@ -294,7 +303,7 @@ attr_AttrStrikethrough_initialize(self, strikethrough)
     return Qnil;
 }
 
-MAKE_ATTRINT_INIT(AttrUnderline, underline); 
+MAKE_ATTRENUM_INIT(AttrUnderline, underline, PANGO_TYPE_UNDERLINE); 
 
 static VALUE
 attr_AttrShape_initialize(self, ink_rect, logical_rect)

@@ -3,8 +3,8 @@
 
   rbpangocontext.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 01:12:49 $
+  $Author: mutoh $
+  $Date: 2003/09/01 14:39:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -79,14 +79,14 @@ static VALUE
 rcontext_get_base_dir(self)
     VALUE self;
 {
-    return INT2FIX(pango_context_get_base_dir(_SELF(self)));
+    return GENUM2RVAL(pango_context_get_base_dir(_SELF(self)), PANGO_TYPE_DIRECTION);
 }
 
 static VALUE
 rcontext_set_base_dir(self, direction)
     VALUE self, direction;
 {
-    pango_context_set_base_dir(_SELF(self), FIX2INT(direction));
+    pango_context_set_base_dir(_SELF(self), RVAL2GENUM(direction, PANGO_TYPE_DIRECTION));
     return self;
 }
 

@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: attribute.rb,v 1.3 2003/04/04 18:12:33 mutoh Exp $
+  $Id: attribute.rb,v 1.4 2003/09/01 14:39:24 mutoh Exp $
 =end
 
 require 'pango'
@@ -14,19 +14,19 @@ puts "value = #{a.value}"
 puts "start_index = #{a.start_index}"
 puts "end_index = #{a.end_index}"
 
-p a = Pango::AttrStyle.new(2)
+p a = Pango::AttrStyle.new(Pango::FontDescription::STYLE_NORMAL)
 puts "value = #{a.value}"
 
-p a = Pango::AttrVariant.new(3)
+p a = Pango::AttrVariant.new(Pango::FontDescription::VARIANT_SMALL_CAPS)
 puts "value = #{a.value}"
 
-p a = Pango::AttrStretch.new(4)
+p a = Pango::AttrStretch.new(Pango::FontDescription::STRETCH_EXPANDED)
 puts "value = #{a.value}"
 
-p a = Pango::AttrWeight.new(5)
+p a = Pango::AttrWeight.new(Pango::FontDescription::WEIGHT_BOLD)
 puts "value = #{a.value}"
 
-p a = Pango::AttrRise.new(6)
+p a = Pango::AttrRise.new(10)
 puts "value = #{a.value}"
 
 p a = Pango::AttrLanguage.new(Pango::Language.new("ja"))

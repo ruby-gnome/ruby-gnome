@@ -3,8 +3,8 @@
 
   rbpangolayout.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 01:12:49 $
+  $Author: mutoh $
+  $Date: 2003/09/01 14:39:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -124,7 +124,7 @@ static VALUE
 layout_set_wrap(self, wrap)
     VALUE self, wrap;
 {
-    pango_layout_set_wrap(_SELF(self), FIX2INT(wrap));
+    pango_layout_set_wrap(_SELF(self), RVAL2GENUM(wrap, PANGO_TYPE_WRAP_MODE));
     return self;
 }
 
@@ -132,7 +132,7 @@ static VALUE
 layout_get_wrap(self)
     VALUE self;
 {
-    return INT2FIX(pango_layout_get_wrap(_SELF(self)));
+    return GENUM2RVAL(pango_layout_get_wrap(_SELF(self)), PANGO_TYPE_WRAP_MODE);
 }
 
 static VALUE
@@ -184,7 +184,7 @@ static VALUE
 layout_set_alignment(self, align)
     VALUE self, align;
 {
-    pango_layout_set_alignment(_SELF(self), FIX2INT(align));
+    pango_layout_set_alignment(_SELF(self), RVAL2GENUM(align, PANGO_TYPE_ALIGNMENT));
     return self;
 }
 
@@ -192,7 +192,7 @@ static VALUE
 layout_get_alignment(self)
     VALUE self;
 {
-    return INT2FIX(pango_layout_get_alignment(_SELF(self)));
+    return GENUM2RVAL(pango_layout_get_alignment(_SELF(self)), PANGO_TYPE_ALIGNMENT);
 }
 
 static VALUE

@@ -1,3 +1,10 @@
+2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangocontext.c, rbpangofontdescription.c, rbpangotabarray.c
+	rbpangoattribute.c, rbpangolayout.c: Apply enum/flags.
+	* sample/attribute.rb: ditto.
+	* sample/gdk_layout.rb: Fix warning for ruby-1.8.x.
+
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: add set_output_lib call.

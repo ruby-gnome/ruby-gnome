@@ -3,8 +3,8 @@
 
   rbpangofontdescription.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 01:19:02 $
+  $Author: mutoh $
+  $Date: 2003/09/01 14:39:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -80,7 +80,7 @@ static VALUE
 font_desc_set_style(self, style)
     VALUE self, style;
 {
-    pango_font_description_set_style(_SELF(self), FIX2INT(style));
+    pango_font_description_set_style(_SELF(self), RVAL2GENUM(style, PANGO_TYPE_STYLE));
     return self;
 }
 
@@ -88,14 +88,14 @@ static VALUE
 font_desc_get_style(self)
     VALUE self;
 {
-    return INT2FIX(pango_font_description_get_style(_SELF(self)));
+    return GENUM2RVAL(pango_font_description_get_style(_SELF(self)), PANGO_TYPE_STYLE);
 }
 
 static VALUE
 font_desc_set_variant(self, variant)
     VALUE self, variant;
 {
-    pango_font_description_set_variant(_SELF(self), FIX2INT(variant));
+    pango_font_description_set_variant(_SELF(self), RVAL2GENUM(variant, PANGO_TYPE_VARIANT));
     return self;
 }
 
@@ -103,14 +103,14 @@ static VALUE
 font_desc_get_variant(self)
     VALUE self;
 {
-    return INT2FIX(pango_font_description_get_variant(_SELF(self)));
+    return GENUM2RVAL(pango_font_description_get_variant(_SELF(self)), PANGO_TYPE_VARIANT);
 }
 
 static VALUE
 font_desc_set_weight(self, weight)
     VALUE self;
 {
-    pango_font_description_set_weight(_SELF(self), FIX2INT(weight));
+    pango_font_description_set_weight(_SELF(self), RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
     return self;
 }
 
@@ -118,14 +118,14 @@ static VALUE
 font_desc_get_weight(self)
     VALUE self;
 {
-    return INT2FIX(pango_font_description_get_weight(_SELF(self)));
+    return GENUM2RVAL(pango_font_description_get_weight(_SELF(self)), PANGO_TYPE_WEIGHT);
 }
 
 static VALUE
 font_desc_set_stretch(self, stretch)
     VALUE self, stretch;
 {
-    pango_font_description_set_stretch(_SELF(self), FIX2INT(stretch));
+    pango_font_description_set_stretch(_SELF(self), RVAL2GENUM(stretch, PANGO_TYPE_STRETCH));
     return self;
 }
 
@@ -133,7 +133,7 @@ static VALUE
 font_desc_get_stretch(self)
     VALUE self;
 {
-    return INT2FIX(pango_font_description_get_stretch(_SELF(self)));
+    return GENUM2RVAL(pango_font_description_get_stretch(_SELF(self)), PANGO_TYPE_STRETCH);
 }
 
 static VALUE
@@ -155,14 +155,14 @@ static VALUE
 font_desc_get_set_fields(self)
     VALUE self;
 {
-    return INT2NUM(pango_font_description_get_set_fields(_SELF(self)));
+    return GFLAGS2RVAL(pango_font_description_get_set_fields(_SELF(self)), PANGO_TYPE_FONT_MASK);
 }
 
 static VALUE
 font_desc_unset_fields(self, to_unset)
     VALUE self, to_unset;
 {
-    pango_font_description_unset_fields(_SELF(self), FIX2INT(to_unset));
+    pango_font_description_unset_fields(_SELF(self), RVAL2GFLAGS(to_unset, PANGO_TYPE_FONT_MASK));
     return self;
 }
 
