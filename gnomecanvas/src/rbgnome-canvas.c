@@ -1,4 +1,5 @@
-/* $Id: rbgnome-canvas.c,v 1.1 2002/09/20 16:02:27 tkubo Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-canvas.c,v 1.2 2002/09/20 16:22:16 tkubo Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -68,7 +69,7 @@ canvas_get_scroll_region(self)
                                    &x2,
                                    &y2);
     return rb_ary_new3(4, rb_float_new(x1), rb_float_new(y1),
-                          rb_float_new(x2), rb_float_new(y2));
+                       rb_float_new(x2), rb_float_new(y2));
 }
 
 static VALUE
@@ -253,42 +254,24 @@ Init_gnome_canvas()
     rb_define_singleton_method(gnoCanvas, "new", canvas_s_new, 0);
     rb_define_singleton_method(gnoCanvas, "new_aa", canvas_s_new_aa, 0);
     rb_define_method(gnoCanvas, "root", canvas_root, 0);
-    rb_define_method(gnoCanvas, "set_scroll_region",
-            canvas_set_scroll_region, 4);
-    rb_define_method(gnoCanvas, "get_scroll_region",
-            canvas_get_scroll_region, 0);
-    rb_define_method(gnoCanvas, "set_pixels_per_unit",
-            canvas_set_pixels_per_unit, 1);
-    rb_define_method(gnoCanvas, "scroll_to",
-            canvas_scroll_to, 2);
-    rb_define_method(gnoCanvas, "get_scroll_offsets",
-            canvas_get_scroll_offsets, 0);
-    rb_define_method(gnoCanvas, "update_now",
-            canvas_update_now, 0);
-    rb_define_method(gnoCanvas, "get_item_at",
-            canvas_get_item_at, 2);
-    rb_define_method(gnoCanvas, "request_redraw_uta",
-            canvas_request_redraw_uta, 1);
-    rb_define_method(gnoCanvas, "request_redraw",
-            canvas_request_redraw, 4);
-    rb_define_method(gnoCanvas, "w2c_affine",
-            canvas_w2c_affine, 0);
-    rb_define_method(gnoCanvas, "w2c",
-            canvas_w2c, 2);
-    rb_define_method(gnoCanvas, "c2w",
-            canvas_c2w, 2);
-    rb_define_method(gnoCanvas, "window_to_world",
-            canvas_window_to_world, 2);
-    rb_define_method(gnoCanvas, "world_to_window",
-            canvas_world_to_window, 2);
-    rb_define_method(gnoCanvas, "get_color",
-            canvas_get_color, 2);
-    rb_define_method(gnoCanvas, "set_stipple_origin",
-            canvas_set_stipple_origin, 1);
-    rb_define_method(gnoCanvas, "set_dither",
-            canvas_set_dither, 1);
-    rb_define_method(gnoCanvas, "get_dither",
-            canvas_get_dither, 0);
+    rb_define_method(gnoCanvas, "set_scroll_region", canvas_set_scroll_region, 4);
+    rb_define_method(gnoCanvas, "get_scroll_region", canvas_get_scroll_region, 0);
+    rb_define_method(gnoCanvas, "set_pixels_per_unit", canvas_set_pixels_per_unit, 1);
+    rb_define_method(gnoCanvas, "scroll_to", canvas_scroll_to, 2);
+    rb_define_method(gnoCanvas, "get_scroll_offsets", canvas_get_scroll_offsets, 0);
+    rb_define_method(gnoCanvas, "update_now", canvas_update_now, 0);
+    rb_define_method(gnoCanvas, "get_item_at", canvas_get_item_at, 2);
+    rb_define_method(gnoCanvas, "request_redraw_uta", canvas_request_redraw_uta, 1);
+    rb_define_method(gnoCanvas, "request_redraw", canvas_request_redraw, 4);
+    rb_define_method(gnoCanvas, "w2c_affine", canvas_w2c_affine, 0);
+    rb_define_method(gnoCanvas, "w2c", canvas_w2c, 2);
+    rb_define_method(gnoCanvas, "c2w", canvas_c2w, 2);
+    rb_define_method(gnoCanvas, "window_to_world", canvas_window_to_world, 2);
+    rb_define_method(gnoCanvas, "world_to_window", canvas_world_to_window, 2);
+    rb_define_method(gnoCanvas, "get_color", canvas_get_color, 2);
+    rb_define_method(gnoCanvas, "set_stipple_origin", canvas_set_stipple_origin, 1);
+    rb_define_method(gnoCanvas, "set_dither", canvas_set_dither, 1);
+    rb_define_method(gnoCanvas, "get_dither", canvas_get_dither, 0);
     /* TODO: wrap structure elements. */
     rb_define_method(gnoCanvas, "aa?", canvas_get_aa, 0);
 

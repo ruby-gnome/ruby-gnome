@@ -1,3 +1,4 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 #include "rbgnome.h"
 extern VALUE cImlibImage;
 VALUE gnoCanvasPoints;
@@ -8,7 +9,7 @@ get_gnome_canvas_points(obj)
 {
     GnomeCanvasPoints *gcp;
     if (!rb_obj_is_instance_of(obj, gnoCanvasPoints)) {
-	rb_raise(rb_eTypeError, "not a GnomeCanvasPoints");
+        rb_raise(rb_eTypeError, "not a GnomeCanvasPoints");
     }
     Data_Get_Struct(obj, GnomeCanvasPoints, gcp);
     return gcp;
@@ -41,7 +42,7 @@ points_aref(self, offset)
     int i = NUM2INT(offset);
     Data_Get_Struct(self, GnomeCanvasPoints, gcp);
     if (i < 0 || gcp->num_points * 2 <= i) {
-	rb_raise(rb_eIndexError, "index %d out of coordinate", i);
+        rb_raise(rb_eIndexError, "index %d out of coordinate", i);
     }
     return rb_float_new(gcp->coords[i]);
 }
@@ -54,7 +55,7 @@ points_aset(self, offset, val)
     int i = NUM2INT(offset);
     Data_Get_Struct(self, GnomeCanvasPoints, gcp);
     if (i < 0 || gcp->num_points * 2 <= i) {
-	rb_raise(rb_eIndexError, "index %d out of coordinate", i);
+        rb_raise(rb_eIndexError, "index %d out of coordinate", i);
     }
     gcp->coords[i] = NUM2DBL(val);
     return Qnil;
@@ -73,7 +74,7 @@ s_load_alpha(klass, file)
         im = gnome_canvas_load_alpha(STR2CSTR(file));
     }
     if(im == NULL){
-	rb_raise(rb_eRuntimeError, "could not load %s\n", STR2CSTR(file));
+        rb_raise(rb_eRuntimeError, "could not load %s\n", STR2CSTR(file));
     }
     return Data_Wrap_Struct(cImlibImage, 0, gnome_canvas_destroy_image, im);
 }

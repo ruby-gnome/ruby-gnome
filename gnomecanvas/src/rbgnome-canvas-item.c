@@ -1,4 +1,5 @@
-/* $Id: rbgnome-canvas-item.c,v 1.1 2002/09/20 16:02:27 tkubo Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-canvas-item.c,v 1.2 2002/09/20 16:22:16 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -38,7 +39,7 @@ GdkImlibImage *get_gdkimlib_image(obj)
     GdkImlibImage *im;
 
     if (!rb_obj_is_kind_of(obj, cImlibImage)) {
-	rb_raise(rb_eTypeError, "not a GdkImlibImage");
+        rb_raise(rb_eTypeError, "not a GdkImlibImage");
     }
     Data_Get_Struct(obj, GdkImlibImage, im);
     return im;
@@ -57,29 +58,29 @@ citem_set(argc, argv, self)
     int i;
 
     if (argc > 0 && TYPE(argv[0]) == T_HASH) {
-	if (argc != 1)
-	    rb_raise(rb_eArgError, "wrong # of argument.");
-	ary = rb_funcall(argv[0], rb_intern("to_a"), 0, NULL);
-	argc = RARRAY(ary)->len;
-	arg = ALLOCA_N(GtkArg, argc);
-	for (i = 0;i < argc;i++) {
-	    key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
-	    val = RARRAY(RARRAY(ary)->ptr[i])->ptr[1];
-	    rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
-	    rbgtk_arg_set(&(arg[i]), val);
-	}
+        if (argc != 1)
+            rb_raise(rb_eArgError, "wrong # of argument.");
+        ary = rb_funcall(argv[0], rb_intern("to_a"), 0, NULL);
+        argc = RARRAY(ary)->len;
+        arg = ALLOCA_N(GtkArg, argc);
+        for (i = 0; i < argc; i++) {
+            key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            val = RARRAY(RARRAY(ary)->ptr[i])->ptr[1];
+            rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
+            rbgtk_arg_set(&(arg[i]), val);
+        }
     } else {
-	if (argc & 1) {
-	    rb_raise(rb_eArgError, "wrong # of argument. The pairs of 'name' and 'value' are borken.");
-	}
-	argc /= 2;
-	arg = ALLOCA_N(GtkArg, argc);
-	for (i = 0;i < argc; i++) {
-	    key = argv[i * 2];
-	    val = argv[i * 2 + 1];
-	    rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
-	    rbgtk_arg_set(&(arg[i]), val);
-	}
+        if (argc & 1) {
+            rb_raise(rb_eArgError, "wrong # of argument. The pairs of 'name' and 'value' are borken.");
+        }
+        argc /= 2;
+        arg = ALLOCA_N(GtkArg, argc);
+        for (i = 0; i < argc; i++) {
+            key = argv[i * 2];
+            val = argv[i * 2 + 1];
+            rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
+            rbgtk_arg_set(&(arg[i]), val);
+        }
     }
     gnome_canvas_item_setv(ci, argc, arg);
     return Qnil;
@@ -97,11 +98,11 @@ citem_get(self, name)
     rbgtk_arg_init(&arg, GTK_OBJECT_TYPE(gobj), STR2CSTR(name));
     gtk_object_getv(gobj, 1, &arg);
     if (arg.type == GTK_TYPE_INVALID) {
-	rb_raise(rb_eTypeError, "wrong argument name %s", arg.name);
+        rb_raise(rb_eTypeError, "wrong argument name %s", arg.name);
     }
     obj = rbgtk_arg_get(&arg);
     if (arg.type == GTK_TYPE_STRING) {
-	g_free(GTK_VALUE_STRING(arg));
+        g_free(GTK_VALUE_STRING(arg));
     }
     return obj;
 }
@@ -121,7 +122,7 @@ citem_affine_relative(self, affine)
     VALUE self, affine;
 {
     gnome_canvas_item_affine_relative(GNOME_CANVAS_ITEM(get_gobject(self)),
-                                       get_art_affine(affine));
+                                      get_art_affine(affine));
     return Qnil;
 }
 
@@ -164,8 +165,7 @@ static VALUE
 citem_lower_to_bottom(self)
     VALUE self;
 {
-    gnome_canvas_item_lower_to_bottom(
-            GNOME_CANVAS_ITEM(get_gobject(self)));
+    gnome_canvas_item_lower_to_bottom(GNOME_CANVAS_ITEM(get_gobject(self)));
     return Qnil;
 }
 
@@ -190,10 +190,10 @@ citem_grab(self, event_mask, cursor, etime)
     VALUE self, event_mask, cursor, etime;
 {
     return NUM2INT(
-            gnome_canvas_item_grab(GNOME_CANVAS_ITEM(get_gobject(self)),
-                                   NUM2INT(event_mask),
-                                   get_gdkcursor(cursor),
-                                   NIL_P(etime)  ? 0 : NUM2INT(etime)));
+        gnome_canvas_item_grab(GNOME_CANVAS_ITEM(get_gobject(self)),
+                               NUM2INT(event_mask),
+                               get_gdkcursor(cursor),
+                               NIL_P(etime)  ? 0 : NUM2INT(etime)));
 }
 
 static VALUE
@@ -201,7 +201,7 @@ citem_ungrab(self, etime)
     VALUE self, etime;
 {
     gnome_canvas_item_ungrab(GNOME_CANVAS_ITEM(get_gobject(self)),
-			     NIL_P(etime) ? 0 : NUM2INT(etime));
+                             NIL_P(etime) ? 0 : NUM2INT(etime));
     return Qnil;
 }
 
@@ -246,7 +246,7 @@ citem_reparent(self, new_group)
     VALUE self, new_group;
 {
     if (!rb_obj_is_kind_of(new_group, gnoCanvasGroup)) {
-	rb_raise(rb_eTypeError, "not a GnomeCanvasGroup");
+        rb_raise(rb_eTypeError, "not a GnomeCanvasGroup");
     }
     gnome_canvas_item_reparent(GNOME_CANVAS_ITEM(get_gobject(self)), GNOME_CANVAS_GROUP(get_gobject(new_group)));
     return Qnil;
@@ -271,7 +271,7 @@ citem_get_bounds(self)
                                  &x2,
                                  &y2);
     return rb_ary_new3(4, rb_float_new(x1), rb_float_new(y1),
-                          rb_float_new(x2), rb_float_new(y2));
+                       rb_float_new(x2), rb_float_new(y2));
 }
 
 static VALUE
@@ -300,52 +300,29 @@ void
 Init_gnome_canvas_item()
 {
     gnoCanvasItem = rb_define_class_under(mGnome, "CanvasItem", gObject);
-    rb_define_method(gnoCanvasItem, "set",
-                     citem_set, -1);
-    rb_define_method(gnoCanvasItem, "get",
-                     citem_get, 1);
-    rb_define_method(gnoCanvasItem, "move",
-                     citem_move, 2);
-    rb_define_method(gnoCanvasItem, "affine_relative",
-                     citem_affine_relative, 1);
-    rb_define_method(gnoCanvasItem, "affine_absolute",
-                     citem_affine_absolute, 1);
-    rb_define_method(gnoCanvasItem, "raise",
-                     citem_raise, 1);
-    rb_define_method(gnoCanvasItem, "lower",
-                     citem_lower, 1);
-    rb_define_method(gnoCanvasItem, "raise_to_top",
-                     citem_raise_to_top, 0);
-    rb_define_method(gnoCanvasItem, "lower_to_bottom",
-                     citem_lower_to_bottom, 0);
-    rb_define_method(gnoCanvasItem, "show",
-                     citem_show, 0);
-    rb_define_method(gnoCanvasItem, "hide",
-                     citem_hide, 0);
-    rb_define_method(gnoCanvasItem, "grab",
-                     citem_grab, 3);
-    rb_define_method(gnoCanvasItem, "ungrab",
-                     citem_ungrab, 1);
-    rb_define_method(gnoCanvasItem, "w2i",
-                     citem_w2i, 2);
-    rb_define_method(gnoCanvasItem, "i2w",
-                     citem_i2w, 2);
-    rb_define_method(gnoCanvasItem, "i2w_affine",
-                     citem_i2w_affine, 0);
-    rb_define_method(gnoCanvasItem, "i2c_affine",
-                     citem_i2c_affine, 0);
-    rb_define_method(gnoCanvasItem, "reparent",
-		     citem_reparent, 1);
-    rb_define_method(gnoCanvasItem, "grab_focus",
-                     citem_grab_focus, 0);
-    rb_define_method(gnoCanvasItem, "get_bounds",
-                     citem_get_bounds, 0);
-    rb_define_method(gnoCanvasItem, "request_update",
-                     citem_request_update, 0);
-    rb_define_method(gnoCanvasItem, "parent",
-                     citem_parent, 0);
-    rb_define_method(gnoCanvasItem, "canvas",
-                     citem_canvas, 0);
+    rb_define_method(gnoCanvasItem, "set", citem_set, -1);
+    rb_define_method(gnoCanvasItem, "get", citem_get, 1);
+    rb_define_method(gnoCanvasItem, "move", citem_move, 2);
+    rb_define_method(gnoCanvasItem, "affine_relative", citem_affine_relative, 1);
+    rb_define_method(gnoCanvasItem, "affine_absolute", citem_affine_absolute, 1);
+    rb_define_method(gnoCanvasItem, "raise", citem_raise, 1);
+    rb_define_method(gnoCanvasItem, "lower", citem_lower, 1);
+    rb_define_method(gnoCanvasItem, "raise_to_top", citem_raise_to_top, 0);
+    rb_define_method(gnoCanvasItem, "lower_to_bottom", citem_lower_to_bottom, 0);
+    rb_define_method(gnoCanvasItem, "show", citem_show, 0);
+    rb_define_method(gnoCanvasItem, "hide", citem_hide, 0);
+    rb_define_method(gnoCanvasItem, "grab", citem_grab, 3);
+    rb_define_method(gnoCanvasItem, "ungrab", citem_ungrab, 1);
+    rb_define_method(gnoCanvasItem, "w2i", citem_w2i, 2);
+    rb_define_method(gnoCanvasItem, "i2w", citem_i2w, 2);
+    rb_define_method(gnoCanvasItem, "i2w_affine", citem_i2w_affine, 0);
+    rb_define_method(gnoCanvasItem, "i2c_affine", citem_i2c_affine, 0);
+    rb_define_method(gnoCanvasItem, "reparent", citem_reparent, 1);
+    rb_define_method(gnoCanvasItem, "grab_focus", citem_grab_focus, 0);
+    rb_define_method(gnoCanvasItem, "get_bounds", citem_get_bounds, 0);
+    rb_define_method(gnoCanvasItem, "request_update", citem_request_update, 0);
+    rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
+    rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 
     gnoCanvasLine = rb_define_class_under(mGnome, "CanvasLine", gnoCanvasItem);
     gnoCanvasPolygon = rb_define_class_under(mGnome, "CanvasPolygon", gnoCanvasItem);
