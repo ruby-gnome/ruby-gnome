@@ -1,3 +1,8 @@
+2002-11-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgobj_closure.c (rclosure_marshal): check if return_value's type
+	is valid. Reported by Joshua Keith <joshuakeith@linuxmail.org>.
+
 2002-11-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgutil.c: remove rbgutil_val2cstr().

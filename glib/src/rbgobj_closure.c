@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/08 17:05:32 $
+  $Author: sakai $
+  $Date: 2002/11/26 17:00:24 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -61,7 +61,7 @@ rclosure_marshal(GClosure*      closure,
 
     ret = rb_apply(((GRClosure*)closure)->callback, id_call, args);
 
-    if (return_value)
+    if (return_value && G_VALUE_TYPE(return_value))
         rbgobj_rvalue_to_gvalue(ret, return_value);
 }
 
