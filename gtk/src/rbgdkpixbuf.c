@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/10/04 15:25:57 $
+  $Date: 2003/10/21 13:05:38 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -84,6 +84,36 @@ render_pm(argc, argv, self)
                        mask ? GOBJ2RVAL(mask) : Qnil);
 }
 
+static VALUE
+pixbuf_s_from_drawable(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
+    GdkPixbuf* buf;
+
+    rb_scan_args(argc, argv, "63", &cmap, &src, &src_x, &src_y, &width, &height, 
+                 &dest, &dest_x, &dest_y);
+
+    buf = gdk_pixbuf_get_from_drawable(GDK_PIXBUF(RVAL2GOBJ(dest)),
+                                       GDK_DRAWABLE(RVAL2GOBJ(src)),
+                                       GDK_COLORMAP(RVAL2GOBJ(cmap)),
+                                       NUM2INT(src_x), NUM2INT(src_y),
+                                       NIL_P(dest_x) ? 0 : NUM2INT(dest_x),
+                                       NIL_P(dest_y) ? 0 : NUM2INT(dest_y),
+                                       NUM2INT(width), NUM2INT(height));
+    if (NIL_P(dest)) {
+        if (buf) {
+            return GOBJ2RVAL(buf);
+        } else {
+            return Qnil;
+        }
+    } else {
+        return dest;
+    }
+}
+ 
 void
 Init_gtk_gdk_pixbuf()
 {
@@ -100,7 +130,5 @@ Init_gtk_gdk_pixbuf()
     /* rb_define_method(gdkPixbuf, "render_threshold_alpha", ..., ...); */
     rb_define_method(gdkPixbuf, "render_pixmap_and_mask", render_pm, -1);
 
-    /*
-     * Drawables to Pixbufs
-     */
+    rb_define_singleton_method(gdkPixbuf, "from_drawable", pixbuf_s_from_drawable, -1);
 }

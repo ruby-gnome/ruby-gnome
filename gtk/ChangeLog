@@ -1,5 +1,6 @@
 2003-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkpixbuf.c: Add Gdk::Pixbuf.from_drawable. 
 	* src/rbgdkdraw.c: Add Gdk::Drawable#draw_pixbuf.
 	* src/rbgdkevent.c: Imprement all setter methods.
 
