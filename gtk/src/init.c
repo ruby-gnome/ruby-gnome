@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2003/06/22 17:37:51 $
+  $Date: 2003/06/22 18:00:24 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -23,6 +23,7 @@ extern void Init_gtk_inits();
 VALUE treeiter_set_value_table;
 GType (*rbgtk_clipboard_get_type)() = NULL;
 GtkClipboard* (*rbgtk_get_clipboard)(VALUE obj) = NULL;
+VALUE (*rbgtk_make_clipboard)(GtkClipboard* gobj) = NULL;
 GType (*rbgtk_tree_row_reference_get_type)() = NULL;
 GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj) = NULL;
 

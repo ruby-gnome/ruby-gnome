@@ -13,7 +13,7 @@
 	.current, .main_do_event, .input_add, .quit_add, .quit_remove, 
 	.key_snooper_install, .key_snooper_remove, .current_event_time, 
 	.current_event_state, .get_event_widget, .propagate_event.
-	* src20/gtk20.c, src22/gtk22.c, src/rbgtkclipboard.c: 
+	* init.c, src20/gtk20.c, src22/gtk22.c, src/rbgtkclipboard.c: 
 	Add Gtk::Clipboard#display, #wait_for_contents.
 
 2003-06-21  Masao Mutoh  <mutoh@highway.ne.jp>
