@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Date: 2002/10/02 04:56:42 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -53,17 +53,9 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_UINT:
         return UINT2NUM(g_value_get_uint(value));
       case G_TYPE_LONG:
-#ifdef LONG2NUM
         return LONG2NUM(g_value_get_long(value));
-#else
-        return INT2NUM(g_value_get_long(value));
-#endif
       case G_TYPE_ULONG:
-#ifdef ULONG2NUM
         return ULONG2NUM(g_value_get_ulong(value));
-#else
-        return UINT2NUM(g_value_get_ulong(value));
-#endif
       case G_TYPE_INT64:
         return rbglib_int64_to_num(g_value_get_int64(value));
       case G_TYPE_UINT64:

@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2002/09/14 15:31:23 $
+  $Author: sakai $
+  $Date: 2002/10/02 04:56:42 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -29,6 +29,15 @@ extern "C" {
 #ifndef StringValuePtr
 #define StringValuePtr(s) STR2CSTR(s)
 #endif
+
+#ifndef LONG2NUM
+#define LONG2NUM INT2NUM
+#endif
+
+#ifndef ULONG2NUM
+#define ULONG2NUM UINT2NUM
+#endif
+
 
 #define RVAL2CSTR(v) (rbg_val2cstr(v))
 #define CSTR2RVAL(s) (rb_str_new2(s))
