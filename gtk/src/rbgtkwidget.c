@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/01/25 15:52:02 $
+  $Date: 2004/02/11 17:26:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -711,18 +711,12 @@ rc_property_parser(pspec, rc_string, property_value)
 }
 
 static VALUE
-widget_s_install_style_property(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+widget_s_install_style_property(self, spec)
+    VALUE self, spec;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkWidgetClass* gclass;
-    GParamSpec* pspec;
-    VALUE spec;
-
-    rb_scan_args(argc, argv, "10", &spec);
-    pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registered class",
@@ -1057,7 +1051,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
-    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, -1);
+    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWidget, "style_property", widget_s_find_style_property, 1);
     rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, -1);
