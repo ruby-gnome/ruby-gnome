@@ -1,3 +1,11 @@
+2003-08-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_enum.c (enum_coerce): use NUM2INT not NUM2UINT.
+
+	* src/rbgobj_paramspecs.c: delete unnecessary StringValue invocation.
+
+	* src/rbgobj_paramspecs.c: use RVAL2GENUM and RVAL2GFLAGS.
+
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/lib/glib2.rb: rescue LoadError and Win32::Registry::Error

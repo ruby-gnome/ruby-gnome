@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: sakai $
-  $Date: 2003/08/30 11:09:35 $
+  $Date: 2003/08/31 05:39:57 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -368,7 +368,7 @@ enum_coerce(VALUE self, VALUE other)
     if (rb_obj_is_kind_of(other, rb_cInteger)){
         enum_holder* p = enum_get_holder(self);
         GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-        other = rbgobj_make_enum(NUM2UINT(other), gtype);
+        other = rbgobj_make_enum(NUM2INT(other), gtype);
         return rb_ary_new3(2, other, self);
     } else
         rb_raise(rb_eTypeError, "can't coerce");

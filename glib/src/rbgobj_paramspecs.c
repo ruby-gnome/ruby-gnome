@@ -4,7 +4,7 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2003/07/16 03:41:55 $
+  $Date: 2003/08/31 05:39:57 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -19,9 +19,6 @@ typename##_initialize(self, name, nick, blurb, minimum, maximum, default_value, 
    VALUE self, name, nick, blurb, minimum, maximum, default_value, flags; \
 { \
     GParamSpec* pspec; \
-    StringValue(name); \
-    StringValue(nick); \
-    StringValue(blurb); \
     pspec = g_param_spec_##typename(StringValuePtr(name), \
                                     StringValuePtr(nick), \
                                     StringValuePtr(blurb), \
@@ -83,9 +80,6 @@ boolean_initialize(self, name, nick, blurb, default_value, flags)
    VALUE self, name, nick, blurb, default_value, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_boolean(StringValuePtr(name),
                                  StringValuePtr(nick),
                                  StringValuePtr(blurb),
@@ -100,9 +94,6 @@ unichar_initialize(self, name, nick, blurb, default_value, flags)
    VALUE self, name, nick, blurb, default_value, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_unichar(StringValuePtr(name),
                                  StringValuePtr(nick),
                                  StringValuePtr(blurb),
@@ -117,14 +108,13 @@ enum_initialize(self, name, nick, blurb, enum_type, default_value, flags)
    VALUE self, name, nick, blurb, enum_type, default_value, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
+    GType gtype = rbgobj_gtype_get(enum_type);
+
     pspec = g_param_spec_enum(StringValuePtr(name),
                               StringValuePtr(nick),
                               StringValuePtr(blurb),
-                              rbgobj_gtype_get(enum_type),
-                              NUM2UINT(default_value),
+                              gtype,
+                              RVAL2GENUM(default_value, gtype),
                               NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -135,14 +125,13 @@ flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
    VALUE self, name, nick, blurb, flags_type, default_value, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
+    GType gtype = rbgobj_gtype_get(flags_type);
+
     pspec = g_param_spec_enum(StringValuePtr(name),
                               StringValuePtr(nick),
                               StringValuePtr(blurb),
-                              rbgobj_gtype_get(flags_type),
-                              NUM2UINT(default_value),
+                              gtype,
+                              RVAL2GFLAGS(default_value, gtype),
                               NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -153,14 +142,10 @@ string_initialize(self, name, nick, blurb, default_value, flags)
    VALUE self, name, nick, blurb, default_value, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
-    StringValue(default_value);
     pspec = g_param_spec_string(StringValuePtr(name),
                                 StringValuePtr(nick),
                                 StringValuePtr(blurb),
-                                StringValuePtr(default_value),
+                                NIL_P(default_value) ? NULL : StringValuePtr(default_value),
                                 NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -171,9 +156,6 @@ param_initialize(self, name, nick, blurb, param_type, flags)
    VALUE self, name, nick, blurb, param_type, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_param(StringValuePtr(name),
                                StringValuePtr(nick),
                                StringValuePtr(blurb),
@@ -188,9 +170,6 @@ boxed_initialize(self, name, nick, blurb, boxed_type, flags)
    VALUE self, name, nick, blurb, boxed_type, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_boxed(StringValuePtr(name),
                                StringValuePtr(nick),
                                StringValuePtr(blurb),
@@ -205,9 +184,6 @@ pointer_initialize(self, name, nick, blurb, flags)
    VALUE self, name, nick, blurb, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_pointer(StringValuePtr(name),
                                  StringValuePtr(nick),
                                  StringValuePtr(blurb),
@@ -221,13 +197,10 @@ value_array_initialize(self, name, nick, blurb, element_spec, flags)
    VALUE self, name, nick, blurb, element_spec, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_value_array(StringValuePtr(name),
                                      StringValuePtr(nick),
                                      StringValuePtr(blurb),
-                                     rbgobj_param_spec_get_struct(element_spec),
+                                     RVAL2GOBJ(element_spec),
                                      NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
@@ -238,9 +211,6 @@ object_initialize(self, name, nick, blurb, object_type, flags)
    VALUE self, name, nick, blurb, object_type, flags;
 {
     GParamSpec* pspec;
-    StringValue(name);
-    StringValue(nick);
-    StringValue(blurb);
     pspec = g_param_spec_object(StringValuePtr(name),
                                 StringValuePtr(nick),
                                 StringValuePtr(blurb),
