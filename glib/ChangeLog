@@ -1,8 +1,16 @@
+2005-03-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_pollfd.c: Added GLib::PollFD. 
+	* src/rbglib_source.c: Added GLib::Source. 
+	* src/rbglib_maincontext.c: Added GLib::MainContext#find_source,
+	#add_poll, #remove_poll.
+	* src/rbglib.[ch]: Support GLib::PollFD, GLib::Source.
+
 2005-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_mainloop.c: Added GLib::MainLoop. 
-	* src/rbglib_maincontext.c: Added GLib::Context. 
-	* src/rbglib.[ch]: Support GLib::MainLoop, GLib::Context.
+	* src/rbglib_maincontext.c: Added GLib::MainContext. 
+	* src/rbglib.[ch]: Support GLib::MainLoop, GLib::MainContext.
 
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 

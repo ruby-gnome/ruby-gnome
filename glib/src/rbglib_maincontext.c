@@ -4,12 +4,16 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/11 19:14:12 $
+  $Date: 2005/03/12 18:03:56 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+/*
+static ID id_poll_func;
+*/
 
 /*****************************************/
 GType
@@ -55,10 +59,15 @@ mc_pending(self)
     return CBOOL2RVAL(g_main_context_pending(_SELF(self)));
 }
 
+static VALUE
+mc_find_source(self, source_id)
+    VALUE self, source_id;
+{
+    GSource* src = g_main_context_find_source_by_id(_SELF(self), NUM2UINT(source_id));
+    return src ? BOXED2RVAL(src, G_TYPE_SOURCE) : Qnil;
+}
+
 /*
-GSource*    g_main_context_find_source_by_id
-                                            (GMainContext *context,
-                                             guint source_id);
 GSource*    g_main_context_find_source_by_user_data
                                             (GMainContext *context,
                                              gpointer user_data);
@@ -127,19 +136,51 @@ mc_dispatch(self)
     return self;
 }
 
-/*
-void        g_main_context_set_poll_func    (GMainContext *context,
-                                             GPollFunc func);
-GPollFunc   g_main_context_get_poll_func    (GMainContext *context);
-gint        (*GPollFunc)                    (GPollFD *ufds,
-                                             guint nfsd,
-                                             gint timeout_);
-void        g_main_context_add_poll         (GMainContext *context,
-                                             GPollFD *fd,
-                                             gint priority);
-void        g_main_context_remove_poll      (GMainContext *context,
-                                             GPollFD *fd);
+/* How can I get "self" or something like it as key .... 
+static gint
+poll_func(ufds, nfsd, timeout_)
+    GPollFD* ufds;
+    guint nfsd;
+    gint timeout_;
+{
+    VALUE func = rb_ivar_get(self, id_poll_func);
+    if NIL_P(func) return -1;
+
+    return INT2NUM(rb_funcall(func, 3, BOXED2RVAL(ufds, G_TYPE_POLL_FD),
+                              UINT2NUM(nfsd), INT2NUM(timeout_)));
+}
+
+static VALUE
+mc_set_poll_func(self)
+    VALUE self;
+{
+    rb_ivar_set(self, id_poll_func, G_BLOCK_PROC());
+    g_main_context_set_poll_func(_SELF(self), (GPollFunc)poll_func);
+
+    return self;
+}
 */
+
+/*
+GPollFunc   g_main_context_get_poll_func    (GMainContext *context);
+*/
+
+static VALUE
+mc_add_poll(self, fd, priority)
+    VALUE self, fd, priority;
+{
+    g_main_context_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD),
+                            NUM2INT(priority));
+    return self;
+}
+
+static VALUE
+mc_remove_poll(self, fd)
+    VALUE self, fd;
+{
+    g_main_context_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
+    return self;
+}
 
 static VALUE
 mc_s_depth(self)
@@ -152,15 +193,23 @@ void
 Init_glib_main_context()
 {
     VALUE mc = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
-
+/*
+    id_poll_func = rb_intern("__poll_func__");
+*/
     rb_define_method(mc, "initialize", mc_initialize, 0);
     rb_define_singleton_method(mc, "default", mc_s_default, 0);
     rb_define_method(mc, "iteration", mc_iteration, 1);
     rb_define_method(mc, "pending?", mc_pending, 0);
+    rb_define_method(mc, "find_source", mc_find_source, 1);
     rb_define_method(mc, "wakeup", mc_wakeup, 0);
     rb_define_method(mc, "acquire", mc_acquire, 0);
     rb_define_method(mc, "release", mc_release, 0);
     rb_define_method(mc, "prepare", mc_prepare, 0);
     rb_define_method(mc, "dispatch", mc_dispatch, 0);
+/*
+    rb_define_method(mc, "set_poll_func", mc_set_poll_func, 0);
+*/
+    rb_define_method(mc, "add_poll", mc_add_poll, 2);
+    rb_define_method(mc, "remove_poll", mc_remove_poll, 1);
     rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
 }

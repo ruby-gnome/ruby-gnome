@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2005/03/11 19:14:12 $
+  $Date: 2005/03/12 18:03:56 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -61,6 +61,8 @@ typedef int GPid;
 
 #define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
 #define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())
+#define G_TYPE_SOURCE (g_source_get_type())
+#define G_TYPE_POLL_FD (g_poll_fd_get_type())
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
 #  ifdef RUBY_GLIB2_COMPILATION
@@ -74,6 +76,8 @@ typedef int GPid;
 
 extern GType g_main_loop_get_type(void);
 extern GType g_main_context_get_type(void);
+extern GType g_source_get_type(void);
+extern GType g_poll_fd_get_type(void);
 
 RUBY_GLIB2_VAR VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
