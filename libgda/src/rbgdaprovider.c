@@ -70,6 +70,15 @@ static VALUE rb_gda_provider_each(self)
     return Qnil;
 }
 
+static VALUE rb_gda_provider_model(self)
+    VALUE self;
+{
+    GdaDataModel *model = gda_config_get_provider_model();
+    return model != NULL
+        ? RGDA_DATAMODEL_NEW(model)
+	: Qnil;
+}
+
 static VALUE rb_gda_provider_get_by_name(self, name)
     VALUE self, name;
 {
@@ -103,10 +112,11 @@ static VALUE rb_gda_provider_get_description(self)
 void Init_gda_provider(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_PROVIDER, "Provider", mGda);
 
-    rb_define_singleton_method(c, "providers", rb_gda_get_providers, 0);
-    rb_define_singleton_method(c, "each",      rb_gda_provider_each, 0);
-
-    rb_define_singleton_method(c, "get_by_name", rb_gda_provider_get_by_name, 1);
+    rb_define_singleton_method(c, "providers", rb_gda_get_providers,  0);
+    rb_define_singleton_method(c, "each",      rb_gda_provider_each,  0);
+    rb_define_singleton_method(c, "model",     rb_gda_provider_model, 0);
+    rb_define_singleton_method(c, "get_by_name", 
+                               rb_gda_provider_get_by_name, 1);
 
     rb_define_method(c, "prov_id",     rb_gda_provider_get_id,          0);
     rb_define_method(c, "location",    rb_gda_provider_get_location,    0);

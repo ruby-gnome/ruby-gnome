@@ -69,6 +69,15 @@ static VALUE rb_gda_datasource_find(self, name)
         : Qnil;
 }
 
+static VALUE rb_gda_datasource_model(self)
+    VALUE self;
+{
+    GdaDataModel *model = gda_config_get_data_source_model();
+    return model != NULL
+        ? RGDA_DATAMODEL_NEW(model)
+	: Qnil;
+}
+
 static VALUE rb_gda_datasource_new(self, name, provider, cnc_string, 
                                    description, username, password)
     VALUE self, name, provider, cnc_string, 
@@ -164,10 +173,10 @@ static VALUE rb_gda_datasource_is_equal(self, other_data)
 void Init_gda_datasource(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_DATASOURCE, "DataSource", mGda);
 
-    rb_define_singleton_method(c, "datasources", rb_gda_get_datasources, 0);
-    rb_define_singleton_method(c, "each",        rb_gda_datasource_each, 0);
-
-    rb_define_singleton_method(c, "find", rb_gda_datasource_find, 1);
+    rb_define_singleton_method(c, "datasources", rb_gda_get_datasources,  0);
+    rb_define_singleton_method(c, "each",        rb_gda_datasource_each,  0);
+    rb_define_singleton_method(c, "find",        rb_gda_datasource_find,  1);
+    rb_define_singleton_method(c, "model",       rb_gda_datasource_model, 0);
 
     rb_define_method(c, "initialize", rb_gda_datasource_new, 6);
     

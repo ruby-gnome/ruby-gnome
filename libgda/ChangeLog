@@ -1,3 +1,9 @@
+2003-10-27  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* sample/print_config.rb: New file.
+	* src/rbgdadatasource.c: Introduced Gda::DataSource.model.
+	* src/rbgdaprovider.c: Introduced Gda::Provider.model.
+
 2003-10-25  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdadatasource.c: Gda::DataSource.new now allows nil
