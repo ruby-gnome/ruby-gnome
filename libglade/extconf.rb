@@ -3,7 +3,8 @@ require "mkmf"
 $objs = ["rbglade.o"]
 my_libs = ["glade", "xml", "z"]
 
-$use_gnome = with_config("gnome")
+$use_gnome = ! arg_config("--disable-gnome", false)
+
 puts "GNOME support is: #{$use_gnome ? 'enabled' : 'disabled'}."
 my_libs.push("glade-gnome") if $use_gnome
 
@@ -19,7 +20,8 @@ begin
   version = `#{config_cmd} --version`
   if not version.chomp.empty?
     $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
-    $LDFLAGS += ' ' + `#{config_cmd} --libs`.chomp
+    $CFLAGS += ' -DENABLE_GNOME' if $use_gnome
+    $libs += ' ' + `#{config_cmd} --libs`.chomp
   end
 rescue
   $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
@@ -36,4 +38,4 @@ my_libs.each do |lib|
 	end
 end
 
-create_makefile("lglade")
+create_makefile("libglade2")

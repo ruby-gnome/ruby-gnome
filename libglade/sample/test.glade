@@ -55,7 +55,7 @@
       <can_focus>True</can_focus>
       <signal>
 	<name>clicked</name>
-	<handler>sayHello</handler>
+	<handler>say_hello</handler>
 	<data>hello world</data>
 	<last_modification_time>Mon, 22 Jan 2001 16:51:42 GMT</last_modification_time>
       </signal>

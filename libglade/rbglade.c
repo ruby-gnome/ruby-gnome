@@ -51,7 +51,7 @@ xml_connect(const gchar *handler_name, GtkObject *_source,
     handler = handler_name ? rb_str_new2(handler_name) : Qnil;
     data = signal_data ? rb_str_new2(signal_data) : Qnil;
     
-    rb_funcall(self, rb_intern("doConnect"), 5, source, target, signal, handler, data); 
+    rb_funcall(self, rb_intern("connect"), 5, source, target, signal, handler, data); 
 }
 
 static VALUE
@@ -74,12 +74,12 @@ rb_gladexml_get_widget_by_long_name(VALUE self, VALUE nameString)
 static VALUE
 rb_gladexml_new(int argc, VALUE *argv, VALUE self)
 {
-    VALUE fileString, rootString, handlerProc;
+    VALUE fileString, rootString, handler_proc;
     GladeXML *xml;
     char *fileName;
     char *root;
 
-    rb_scan_args(argc, argv, "11&", &fileString, &rootString, &handlerProc);
+    rb_scan_args(argc, argv, "11&", &fileString, &rootString, &handler_proc);
 
     fileName = NIL_P(fileString) ? 0 : STR2CSTR(fileString);
     root = NIL_P(rootString) ? 0 : STR2CSTR(rootString);
@@ -89,13 +89,14 @@ rb_gladexml_new(int argc, VALUE *argv, VALUE self)
 #else
     glade_gnome_init();
 #endif
+
     xml = glade_xml_new(fileName, root);
 
     if(xml)
     {
         /* Once constructed, this means a GladeXML object can never be freed. */
         self = Data_Wrap_Struct(cGladeXML, 0, 0, xml);
-        rb_iv_set(self, "@handlerProc", handlerProc);
+        rb_iv_set(self, "@handler_proc", handler_proc);
         glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
     }
     else
@@ -114,27 +115,30 @@ void Init_lglade()
      * extension module. This prevents some confusing errors if the user
      * doesn't do it themselves.
      */
-    rb_require("gtk");
+    rb_require("gtk2");
+#ifdef ENABLE_GNOME
+    rb_require("gnome2");
+#endif
     cGladeXML = rb_define_class("GladeXML", rb_cObject);
     rb_define_singleton_method(cGladeXML, "new", rb_gladexml_new, -1);
-    rb_define_method(cGladeXML, "getWidget", rb_gladexml_get_widget, 1);
-    rb_define_method(cGladeXML, "getWidgetByLongName", rb_gladexml_get_widget_by_long_name, 1);    
+    rb_define_method(cGladeXML, "widget", rb_gladexml_get_widget, 1);
+    rb_define_method(cGladeXML, "widget_by_long_name", rb_gladexml_get_widget_by_long_name, 1);    
 
     rb_eval_string(
-        "class GladeXML														\n"
-        "   def doConnect(source, target, signal, handler, data)            \n"
+        "class GladeXML			  											             \n"
+        "   def connect(source, target, signal, handler, data)              \n"
         "       if target                                                   \n"
-        "           signalProc = target.method(handler)                     \n"
+        "           signal_proc = target.method(handler)                    \n"
         "       else                                                        \n"
-        "           signalProc = @handlerProc.call(handler)                 \n"
+        "           signal_proc = @handler_proc.call(handler)               \n"
         "       end                                                         \n"
-        "       case signalProc.arity                                       \n"
+        "       case signal_proc.arity                                      \n"
         "           when 0                                                  \n"
-        "               source.signal_connect(signal) {signalProc.call}     \n"
+        "               source.signal_connect(signal) {signal_proc.call}    \n"
         "           when 1                                                  \n"
-        "               source.signal_connect(signal, &signalProc)          \n"
+        "               source.signal_connect(signal, &signal_proc)         \n"
         "           else                                                    \n"
-        "               source.signal_connect(signal, data, &signalProc)    \n"
+        "               source.signal_connect(signal, data, &signal_proc)    \n"
         "       end                                                         \n"
         "   end                                                             \n"
         "end                                                                \n"

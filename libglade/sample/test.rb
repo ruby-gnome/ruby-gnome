@@ -1,13 +1,12 @@
-require 'gtk'
-require 'lglade'
+require 'libglade2'
 
 class Test
 	def initialize
 		@glade = GladeXML.new("test.glade") {|handler| method(handler)}
-		@entry = @glade.getWidget("entrybox")
+		@entry = @glade.widget("entrybox")
 	end
 	
-	def sayHello(widget, data)
+	def say_hello(widget, data)
 		@entry.set_text(data)
 	end
 	
