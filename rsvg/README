@@ -8,6 +8,8 @@ Requirements
 
     Ruby:               http://www.ruby-lang.org/
     librsvg [*]:        http://librsvg.sourceforge.net/
+    Ruby/GLib2:         http://ruby-gnome2.sourceforge.net/
+    Ruby/GdkPixbuf2:    http://ruby-gnome2.sourceforge.net/
 
     [*]: 2.8 or later is requried.
 

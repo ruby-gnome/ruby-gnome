@@ -1,3 +1,7 @@
+2005-03-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* README: fixed dependencies.
+
 2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: extconf.rb uses PKGConfig.cflags_only_I instead of

@@ -74,7 +74,7 @@ Dependencies
       Ruby/GNOME         depends on Ruby/GnomeCanvas.
       Ruby/GnomeCanvas   depends on Ruby/GTK, Ruby/Libart.
       Ruby/GnomeVFS      depends on Ruby/GLib.
-      Ruby/GnomePrint    depends on Ruby/GLib.
+      Ruby/GnomePrint    depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
       Ruby/GnomePrintUI  depends on Ruby/GTK, Ruby/GnomePrint.
       Ruby/GStreamer     depends on Ruby/GLib.
       Ruby/GtkHtml2      depends on Ruby/GTK.
@@ -83,7 +83,7 @@ Dependencies
       Ruby/Libgda        depends on Ruby/GLib.
       Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional). REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
-      Ruby/RSVG          depends on Ruby/GLib.
+      Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
 
 Copying
 -------
