@@ -41,8 +41,7 @@ doc.signal_connect( "link_clicked" ) {  |doc,link|
 #   File.open( File.expand_path(url) ) {|file| #TODO: here add argument for base_url
 #     puts "open success"
 #     data = file.read()
-#     len  = file.tell()
-#     stream.write(data,len)
+#     stream.write(data)
 #     stream.close()
 #   }
 #}
