@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/08/14 07:00:50 $
+  $Date: 2004/08/18 16:45:12 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -187,6 +187,8 @@ initialize(argc, argv, self)
     } else {
         rb_raise(rb_eArgError, "Wrong number of arguments");
     }
+
+    if (error) RAISE_GERROR(error);
     
     G_INITIALIZE(self, buf);
     return Qnil;
@@ -239,8 +241,7 @@ save(argc, argv, self)
     }
     result = gdk_pixbuf_savev(_SELF(self), RVAL2CSTR(filename),
                               RVAL2CSTR(type), keys, values, &error);
-    if (! result)
-        RAISE_GERROR(error);
+    if (! result) RAISE_GERROR(error);
 
     return self;
 }
@@ -412,10 +413,11 @@ fill(self, pixel)
 void 
 Init_gdk_pixbuf2()
 {
+    VALUE gdkPixbufError;
     VALUE mGdk = rb_define_module("Gdk");
     VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
-     id_pixdata = rb_intern("pixdata");
+    id_pixdata = rb_intern("pixdata");
    
     /*
     gdk_rgb_init();*/ /* initialize it anyway */
@@ -447,9 +449,10 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
 
-    /* GdkPixbufError(not yet) */
-    G_DEF_CLASS(GDK_TYPE_PIXBUF_ERROR, "Error", gdkPixbuf);
+    /* GdkPixbufError */
+    gdkPixbufError = G_DEF_CLASS(GDK_TYPE_PIXBUF_ERROR, "Error", gdkPixbuf);
     G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ERROR, "GDK_PIXBUF_");
+    G_DEF_ERROR(GDK_PIXBUF_ERROR, gdkPixbufError);
 
     /* GdkColorspace */
     G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", gdkPixbuf);

@@ -1,3 +1,7 @@
+2004-08-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Improve error handling. 
+
 2004-08-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbufanimation.c: parameters of Gdk::PixbufAnimation#get_iter, 
