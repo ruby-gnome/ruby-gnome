@@ -2,8 +2,8 @@
 
   gnome-canvas.rb - Affine transformation sample using Ruby/GnomeCanvas2.
 
-  $Author: tkubo $
-  $Date: 2002/10/26 17:53:44 $
+  $Author: mutoh $
+  $Date: 2002/11/05 11:53:41 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -35,7 +35,7 @@ class AffineApp < Gtk::Window
     frame.show
 
     canvas = Gnome::Canvas.new()
-    canvas.set_usize(CANVAS_SIZE_X, CANVAS_SIZE_Y)
+    canvas.set_size_request(CANVAS_SIZE_X, CANVAS_SIZE_Y)
     canvas.set_scroll_region(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y)
     frame.add(canvas)
     canvas.show()
@@ -72,14 +72,14 @@ class AffineApp < Gtk::Window
   end
 
   def initialize
-    super(Gtk::WINDOW_TOPLEVEL)
+    super(Gtk::Window::TOPLEVEL)
 
     self.signal_connect("delete_event") do
       Gtk::main_quit()
     end
 
     sw = Gtk::ScrolledWindow.new
-    sw.set_usize(600, 400)
+    sw.set_size_request(600, 400)
     self.add(sw)
     sw.show
 
@@ -117,6 +117,7 @@ class AffineApp < Gtk::Window
 end
 
 def main
+  Gtk.init
   AffineApp.new
   Gtk::main
 end
