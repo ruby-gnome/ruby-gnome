@@ -3,8 +3,8 @@
 
   rbgobj_valuetypes.c -
 
-  $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Author: mutoh $
+  $Date: 2003/08/02 17:11:53 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -194,7 +194,9 @@ value_transform_ruby_any(const GValue *src_value,
                          GValue       *dest_value)
 {
     int state;
-    struct transform_arg arg = {src_value, dest_value};
+    struct transform_arg arg;
+    arg.src_value = src_value;
+    arg.dest_value = dest_value;
     rb_protect(&value_transform_ruby_any_impl, (VALUE)&arg, &state);
 }
 
