@@ -1,3 +1,8 @@
+2005-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcombobox.c: Added Gtk::ComboBox#active_text,
+	#popup_accessible, #set_row_separator_func, #set_focus_on_click.
+
 2005-01-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdrag.c: Added 
