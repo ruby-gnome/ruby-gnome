@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/04/04 18:08:12 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -141,22 +141,46 @@ txt_delete_interactive(self, start, end, editable)
 }
 
 static VALUE
-txt_get_text(self, start, end, include_hidden_chars)
-    VALUE self, start, end, include_hidden_chars;
+txt_get_text(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    return CSTR2RVAL(gtk_text_buffer_get_text(_SELF(self),
-                                              RVAL2ITR(start),
-                                              RVAL2ITR(end),
+    VALUE start, end, include_hidden_chars;
+    GtkTextIter start_iter, end_iter;
+    GtkTextBuffer* buffer = _SELF(self);
+
+    rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
+
+    if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
+    if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
+    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
+      
+    return CSTR2RVAL(gtk_text_buffer_get_text(buffer,
+                                              NIL_P(start) ? &start_iter : RVAL2ITR(start),
+                                              NIL_P(start) ? &end_iter : RVAL2ITR(end),
                                               RTEST(include_hidden_chars)));
 }
 
 static VALUE
-txt_get_slice(self, start, end, include_hidden_chars)
-    VALUE self, start, end, include_hidden_chars;
+txt_get_slice(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    return CSTR2RVAL(gtk_text_buffer_get_slice(_SELF(self),
-                                               RVAL2ITR(start),
-                                               RVAL2ITR(end),
+    VALUE start, end, include_hidden_chars;
+    GtkTextIter start_iter, end_iter;
+    GtkTextBuffer* buffer = _SELF(self);
+
+    rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
+
+    if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
+    if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
+    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
+      
+    return CSTR2RVAL(gtk_text_buffer_get_slice(buffer,
+                                               NIL_P(start) ? &start_iter : RVAL2ITR(start),
+                                               NIL_P(start) ? &end_iter : RVAL2ITR(end),
                                                RTEST(include_hidden_chars)));
 }
 
@@ -543,8 +567,8 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "delete", txt_delete, 2);
     rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
 
-    rb_define_method(gTextBuffer, "get_text", txt_get_text, 3);
-    rb_define_method(gTextBuffer, "get_slice", txt_get_slice, 3);
+    rb_define_method(gTextBuffer, "get_text", txt_get_text, -1);
+    rb_define_method(gTextBuffer, "get_slice", txt_get_slice, -1);
 
     rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 2);
     rb_define_method(gTextBuffer, "insert_child_anchor", txt_insert_child_anchor, 2);

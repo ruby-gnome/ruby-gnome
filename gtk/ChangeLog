@@ -1,3 +1,8 @@
+2003-04-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Make arguments of Gtk::TextBuffer#get_slice, 
+	#get_text omittable.
+
 2003-04-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/*.rb: Improve some samples.
