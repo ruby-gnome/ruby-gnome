@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2003/03/08 06:12:16 $
+  $Date: 2004/03/27 16:46:17 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -68,26 +68,35 @@ rpango_parse_markup(argc, argv, self)
     VALUE self;
 {
     VALUE markup_text, accel_marker;
-    PangoAttrList *attr_list;
-    gchar* text;
+    PangoAttrList *pattr_list;
+    gchar* gtext;
     gunichar accel_char;
     GError *error = NULL;
     gboolean ret;
     char c;
+    VALUE text = Qnil;
+    VALUE attr_list = Qnil;
 
     rb_scan_args(argc, argv, "11", &markup_text, &accel_marker);
 
     ret = pango_parse_markup(RVAL2CSTR(markup_text),
                              RSTRING(markup_text)->len,
                              NIL_P(accel_marker) ? 0 : NUM2CHR(accel_marker),
-                             &attr_list, &text, &accel_char, &error);
+                             &pattr_list, &gtext, &accel_char, &error);
 
     if (!ret) RAISE_GERROR(error);
 
+    if (pattr_list){
+        attr_list = BOXED2RVAL(pattr_list, PANGO_TYPE_ATTR_LIST); 
+        pango_attr_list_unref(pattr_list);
+    }
+
     c = (char)accel_char;
-    return rb_ary_new3(3, 
-                       attr_list ? BOXED2RVAL(attr_list, PANGO_TYPE_ATTR_LIST) : Qnil,
-                       text ? CSTR2RVAL(text) : Qnil,
+    if (text){
+        text = CSTR2RVAL(gtext);
+        g_free(gtext);
+    }
+    return rb_ary_new3(3, pattr_list, text,
                        accel_char ? rb_str_new(&c, 1) : Qnil);
 }
 
