@@ -4,7 +4,7 @@
   rbgdkwindowattr.c -
 
   $Author: mutoh $
-  $Date: 2003/10/07 16:34:34 $
+  $Date: 2003/10/07 16:53:28 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -37,10 +37,14 @@ gdk_windowattr_get_type(void)
 #define _SELF(w) ((GdkWindowAttr*)RVAL2BOXED(w, GDK_TYPE_WINDOW_ATTR))
 
 static VALUE
-attr_initialize(self)
+attr_initialize(self, width, height, wclass, window_type)
     VALUE self;
 {
     GdkWindowAttr w;
+    w.width = NUM2INT(width);
+    w.height = NUM2INT(height);
+    w.wclass = RVAL2GENUM(wclass, GDK_TYPE_WINDOW_CLASS);
+    w.window_type = RVAL2GENUM(window_type, GDK_TYPE_WINDOW_TYPE);
     G_INITIALIZE(self, &w);
     return Qnil;
 }
@@ -174,7 +178,7 @@ Init_gtk_gdk_windowattr()
 {
     VALUE gWindowAttr = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
 
-    rb_define_method(gWindowAttr, "initialize", attr_initialize, 0);
+    rb_define_method(gWindowAttr, "initialize", attr_initialize, 4);
     rb_define_method(gWindowAttr, "title", attr_get_title, 0);
     rb_define_method(gWindowAttr, "set_title", attr_set_title, 1);
     rb_define_method(gWindowAttr, "event_mask", attr_get_event_mask, 0);
