@@ -3,16 +3,18 @@ Ruby-GNOME2 -- Ruby bindings for GNOME-2.0
 
    This is a set of bindings for the GNOME-2.0 libraries for use from Ruby.
 
-   To use them, you will need Ruby-1.6 and glib-2.0.0, gtk+-2.0.0, gconf2-1.2.0,
-   libgnome-2.0.0, libart_lgpl-2.3.0, libgnomecanvas-2.0.0, libgnomeui-2.0.0, 
-   libglade-2.0.0 or later installed on your system. Keep in mind that you 
-   will need both the runtime libraries and the header files installed.
+   To use them, you will need Ruby-1.6 and glib-2.0.0, gtk+-2.0.0, pango-1.1.0,
+   gconf2-1.2.0, libgnome-2.0.0, libart_lgpl-2.3.0, libgnomecanvas-2.0.0, 
+   libgnomeui-2.0.0, libglade-2.0.0 or later installed on your system. 
+   Keep in mind that you will need both the runtime libraries and the header 
+   files installed.
 
 Release packages
 ----------------
    ruby-gtk2
     - Ruby/GLib2
     - Ruby/GdkPixbuf2
+    - Ruby/Pango
     - Ruby/GTK2
 
    ruby-gnome2-all
@@ -43,7 +45,7 @@ Dependencies
    You should install a sub-binding with its dependencies.
    The current dependencies are:
 
-      Ruby/GTK         depends on Ruby/GLib, Ruby/GdkPixbuf.
+      Ruby/GTK         depends on Ruby/GLib, Ruby/GdkPixbuf, Ruby/Pango.
       Ruby/GdkPixbuf   depends on Ruby/GTK.
       Ruby/GNOME       depends on Ruby/GTK.
       Ruby/GnomeCanvas depends on Ruby/GTK.
