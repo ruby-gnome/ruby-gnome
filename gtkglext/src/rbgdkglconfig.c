@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglconfig.c,v 1.5 2003/08/21 15:14:40 isambart Exp $ */
+/* $Id: rbgdkglconfig.c,v 1.6 2003/08/23 19:07:32 isambart Exp $ */
 /* Gdk::GLConfig
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -20,23 +20,26 @@
 
 #include "rbgtkglext.h"
 
-#define _SELF(i)   GDK_GL_CONFIG(RVAL2GOBJ(i))
-#define _SCREEN(i) GDK_SCREEN(RVAL2GOBJ(i))
+#define _GL_CONFIG(i) GDK_GL_CONFIG(RVAL2GOBJ(i))
+#define _SCREEN(i)    GDK_SCREEN(RVAL2GOBJ(i))
+#define _SELF(i)      _GL_CONFIG(i)
 
 #define RARRAY_TO_ATTRIB_ARRAY(rb_array, array) \
     do { \
-        int i; \
+        int i, len; \
+        len = RARRAY(rb_array)->len; \
         array = ALLOCA_N(int, RARRAY(rb_array)->len+1); \
-        for (i=0; i<RARRAY(rb_array)->len; ++i) \
-        { \
-            VALUE val = RARRAY(rb_array)->ptr[i]; \
-            /* transform Ruby boolean to C boolean */ \
-            if ((val == Qtrue) || (val == Qfalse) || (val = Qnil)) \
-                array[i] = RVAL2CBOOL(val); \
-            else /* transform Ruby number to C int */ \
+        for (i=0; i<len; ++i) { \
+            int type; \
+            VALUE val; \
+            val = RARRAY(rb_array)->ptr[i]; \
+            type = TYPE(val); \
+            if ((type == T_FIXNUM) || (type == T_BIGNUM)) \
                 array[i] = NUM2INT(val); \
+            else \
+                array[i] = rbgobj_get_enum(val, GDK_TYPE_GL_CONFIG_ATTRIB); \
         } \
-        array[RARRAY(rb_array)->len] = GDK_GL_ATTRIB_LIST_NONE; \
+        array[len] = GDK_GL_ATTRIB_LIST_NONE; \
     } while (0)
     
 static VALUE
@@ -53,7 +56,9 @@ glconfig_initialize(argc, argv, self)
             RARRAY_TO_ATTRIB_ARRAY(argv[0], attrib_list);
             G_INITIALIZE(self, gdk_gl_config_new(attrib_list));
         } else {
-            G_INITIALIZE(self, gdk_gl_config_new_by_mode(NUM2INT(argv[0])));
+            int mode;
+            mode = rbgobj_get_flags(argv[0], GDK_TYPE_GL_CONFIG_MODE);
+            G_INITIALIZE(self, gdk_gl_config_new_by_mode(mode));
         }
     }
     else
@@ -68,9 +73,11 @@ glconfig_initialize(argc, argv, self)
             glconfig = gdk_gl_config_new_for_screen(_SCREEN(argv[0]), attrib_list);
             G_INITIALIZE(self, glconfig);
         } else {
+            int mode;
             GdkGLConfig* glconfig;
 
-            glconfig = gdk_gl_config_new_by_mode_for_screen(_SCREEN(argv[0]), NUM2INT(argv[1]));
+            mode = rbgobj_get_flags(argv[1], GDK_TYPE_GL_CONFIG_MODE);
+            glconfig = gdk_gl_config_new_by_mode_for_screen(_SCREEN(argv[0]), mode);
             G_INITIALIZE(self, glconfig);
         }
     }
@@ -86,28 +93,23 @@ glconfig_get_attrib(self, attribute)
     VALUE self, attribute;
 {
     int value;
-    gboolean ok;
     int attrib_int;
 
-    attrib_int = NUM2INT(attribute);
-    ok = gdk_gl_config_get_attrib(_SELF(self), attrib_int, &value);
-    if (ok)
-    {
-        switch (attrib_int)
-        {
-            /* some attributes values should be booleans */
-            case GDK_GL_USE_GL:
-            case GDK_GL_RGBA:
-            case GDK_GL_DOUBLEBUFFER:
-            case GDK_GL_STEREO:
-                return CBOOL2RVAL(value);
-            /* the others should be integers */
-            default:
-                return INT2NUM(value);
-        }
-    }
-    else
+    attrib_int = rbgobj_get_enum(attribute, GDK_TYPE_GL_CONFIG_ATTRIB);
+    if (!gdk_gl_config_get_attrib(_SELF(self), attrib_int, &value))
         return Qnil;
+
+    switch (attrib_int) {
+      /* some attributes values should be booleans */
+      case GDK_GL_USE_GL:
+      case GDK_GL_RGBA:
+      case GDK_GL_DOUBLEBUFFER:
+      case GDK_GL_STEREO:
+        return CBOOL2RVAL(value);
+      /* the others should be integers */
+      default:
+        return INT2NUM(value);
+    }
 }
 
 static VALUE
@@ -216,7 +218,7 @@ Init_gtkglext_gdk_glconfig(void)
 
     G_DEF_CLASS(GDK_TYPE_GL_CONFIG_MODE, "Config", GLConfig);
     G_DEF_CONSTANTS(GLConfig, GDK_TYPE_GL_CONFIG_MODE,   "GDK_GL_");
-    G_DEF_CLASS(GDK_TYPE_GL_CONFIG_ATTRIB, "Attrib", GLConfig);
+    G_DEF_CLASS(GDK_TYPE_GL_CONFIG_ATTRIB, "Attribute", GLConfig);
     G_DEF_CONSTANTS(GLConfig, GDK_TYPE_GL_CONFIG_ATTRIB, "GDK_GL_");
 
     rb_define_method(GLConfig, "initialize",          glconfig_initialize,          -1);

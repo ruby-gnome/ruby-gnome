@@ -1,3 +1,10 @@
+2003-08-23 Vincent Isambart <isambart@netcourrier.com>
+
+	* sample/simple.rb: Corrected a mistake in a comment
+	* src/rbgdkglconfig.c, src/rbgtkwidget.c: corrected a little bug when
+	using attrib lists and NUM2INT was replaced by rbgobj_get_{enum,flags}
+	when we are waiting for an enum or flag
+
 2003-08-21 Vincent Isambart <isambart@netcourrier.com>
 
 	* src/rbgdkglconfig.c, src/rbgtkglext.c: defined enum/flags classes
