@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/03 17:30:49 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -79,7 +79,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
     StringValue(signal_name);
 
-    method_id = rb_to_id(rb_str_concat(rb_str_new2("do_"), signal_name));
+    method_id = rb_to_id(rb_str_concat(rb_str_new2("real_"), signal_name));
     class_closure = dispatch_closure_new(method_id);
 
     param_types = ALLOCA_N(GType, RARRAY(params)->len);
@@ -235,17 +235,29 @@ gobj_sig_emit(argc, argv, self)
     return emit_impl(self, signal_id, 0, rest);
 }
 
-/* TODO */
 static VALUE
 gobj_sig_emit_by_name(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    rb_notimplement();
-    return self;
+    VALUE detailed_signal, params;
+    guint signal_id;
+    GQuark detail;
+
+    rb_scan_args(argc, argv, "1*", &detailed_signal, &params);
+    StringValue(detailed_signal);
+
+    if (!g_signal_parse_name(StringValuePtr(detailed_signal),
+                             CLASS2GTYPE(CLASS_OF(self)),
+                             &signal_id, &detail, FALSE))        
+        rb_raise(rb_eArgError, "invalid signal \"%s\"",
+                 StringValuePtr(detailed_signal));
+
+    return emit_impl(self, signal_id, detail, params);
 }
 
+/* TODO: handle 'detail' */
 static VALUE
 gobj_sig_emit_stop(self, sig_id)
     VALUE self, sig_id;
@@ -255,13 +267,22 @@ gobj_sig_emit_stop(self, sig_id)
 }
 
 static VALUE
-gobj_sig_emit_stop_by_name(self, sig_name)
-    VALUE self, sig_name;
+gobj_sig_emit_stop_by_name(self, detailed_signal)
+    VALUE self, detailed_signal;
 {
-    GObject* gobj = RVAL2GOBJ(self);
-    StringValue(sig_name);
-    g_signal_stop_emission(gobj,
-                           g_signal_lookup(StringValuePtr(sig_name), G_OBJECT_TYPE(gobj)), 0);
+    gpointer instance = RVAL2GOBJ(self);
+    guint signal_id;
+    GQuark detail;
+
+    StringValue(detailed_signal);
+
+    if (!g_signal_parse_name(StringValuePtr(detailed_signal),
+                             CLASS2GTYPE(CLASS_OF(self)),
+                             &signal_id, &detail, FALSE))        
+        rb_raise(rb_eArgError, "invalid signal \"%s\"",
+                 StringValuePtr(detailed_signal));
+
+    g_signal_stop_emission(instance, signal_id, detail);
     return self;
 }
 
