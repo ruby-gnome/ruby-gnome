@@ -4,7 +4,7 @@
   rbgtktexttag.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:04 $
+  $Date: 2002/11/15 13:20:28 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -60,4 +60,8 @@ Init_gtk_texttag()
 
     G_DEF_SETTERS(gTextTag);
 
+	 /* GtkWrapMode */
+    rb_define_const(gTextTag, "WRAP_NONE", INT2FIX(GTK_WRAP_NONE));
+    rb_define_const(gTextTag, "WRAP_CHAR", INT2FIX(GTK_WRAP_CHAR));
+    rb_define_const(gTextTag, "WRAP_WORD", INT2FIX(GTK_WRAP_WORD));
 }

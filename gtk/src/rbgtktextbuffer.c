@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2002/11/15 13:20:28 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -355,34 +355,68 @@ txt_move_mark(self, mark, where)
   return self;
 }
 
-/*
 static VALUE
-txt_create_tag(argc, argv, self)
-     int argc;
-     VALUE *argv;
-     VALUE self;
+txt_create_tag(self, tag_name, properties)
+    VALUE self, tag_name, properties;
 {
-  VALUE tag_name, first_property;
-  VALUE properties;
-  char *p[10];
-  struct RArray *prop_array;
-  int i;
+    GtkTextTag *tag;
+    VALUE parray, pval, pname;
+    GValue gval = {0,};
+    GType pval_type;
+    gchar *gname;
+    int i;
 
-  rb_scan_args(argc, argv, "2*", &tag_name, &first_property, &properties);
-  prop_array = RARRAY(properties);
-  for(i=0; i<prop_array->len; i++)
+    tag = gtk_text_tag_new(RVAL2CSTR(tag_name));
+    gtk_text_tag_table_add (gtk_text_buffer_get_tag_table(_SELF(self)), tag);
+
+    parray = rb_funcall(properties, rb_intern("to_a"), 0);
+    for (i=0; i<RARRAY(parray)->len; i++)
     {
-      p[i] = RVAL2CSTR(prop_array->ptr[i]);
+        pval = RARRAY(RARRAY(parray)->ptr[i])->ptr[1];
+        pval_type = RVAL2GTYPE(pval);
+
+        g_value_init(&gval, pval_type);
+        switch(pval_type)
+        {
+          case G_TYPE_BOOLEAN:
+            g_value_set_boolean(&gval, RTEST(pval));
+            break;
+          case G_TYPE_INT:
+            g_value_set_int(&gval, NUM2INT(pval));
+            break;
+          case G_TYPE_DOUBLE:
+            g_value_set_double(&gval, NUM2DBL(pval));
+            break;
+          case G_TYPE_STRING:
+            g_value_set_string(&gval, RVAL2CSTR(pval));
+            break;
+          default:
+            if(pval_type == GDK_TYPE_COLOR){
+                g_value_set_boxed(&gval, RVAL2BOXED(pval, GDK_TYPE_COLOR));
+            }
+            else if(pval_type == GDK_TYPE_PIXMAP){
+                g_value_set_object(&gval, RVAL2GOBJ(pval));
+            }
+            else{
+                /*
+                  This implimentation is incomplete...
+                */
+                g_warning("%s: unknown gvalue type\n", G_STRLOC);
+            }
+        }
+
+        pname = RARRAY(RARRAY(parray)->ptr[i])->ptr[0];
+        if(SYMBOL_P(pname)){
+            gname = rb_id2name(SYM2ID(pname));
+        }else{
+            gname = RVAL2CSTR(pname);
+        }
+        g_object_set_property(G_OBJECT(tag), gname, &gval);
+        g_value_unset(&gval);
     }
-  p[prop_array->len] = NULL;
-  
-  return GOBJ2RVAL(gtk_text_buffer_create_tag(_SELF(self),
-                                              RVAL2CSTR(tag_name),
-                                              RVAL2CSTR(first_property),
-                                              p[0],p[1],p[2],p[3],p[4],
-                                              p[5],p[6],p[7],p[8],p[9]));
+    
+    return GOBJ2RVAL(tag);
 }
-*/
 
 static VALUE
 txt_insert_with_tags(argc, argv, self)
@@ -487,9 +521,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "end_iter", txt_get_end_iter, 0);
     rb_define_method(gTextBuffer, "move_mark_by_name", txt_move_mark_by_name, 2);
     rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
-/*
-    rb_define_method(gTextBuffer, "create_tag", txt_create_tag, -1);
-*/
+    rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
     rb_define_method(gTextBuffer, "insert_with_tags_by_name", txt_insert_with_tags_by_name, -1);
 

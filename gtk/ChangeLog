@@ -1,3 +1,9 @@
+2002-11-15  OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtktexttagtable.c: Add file.
+	* src/rbgtktextbuffer.c: Readd Gtk::TextBuffer#create_tag.
+	* src/rbgtktexttag.c: Add constants for GtkWrapMode.
+
 2002-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/progressbar.rb: Follow Ruby/GTK2.
