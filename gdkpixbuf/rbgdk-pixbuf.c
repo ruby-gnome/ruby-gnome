@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/08/27 20:42:24 $
+  $Date: 2004/08/29 12:28:57 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -157,7 +157,7 @@ initialize(argc, argv, self)
                                                    NUM2INT(arg2), NUM2INT(arg3), &error);
         }
 #else
-        rb_warn("Not supported in GTK+-2.0.x.");
+        rb_warning("Not supported in GTK+-2.0.x.");
         buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
         if (buf == NULL){
             error = NULL;
@@ -277,6 +277,64 @@ save(argc, argv, self)
 
     return self;
 }
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+/* Don't need this. Use Gdk::Pixbuf#save_to_buffer instead.
+gboolean    gdk_pixbuf_save_to_callbackv    (GdkPixbuf *pixbuf,
+                                             GdkPixbufSaveFunc save_func,
+                                             gpointer user_data,
+                                             const char *type,
+                                             char **option_keys,
+                                             char **option_values,
+                                             GError **error);
+*/
+
+static VALUE
+save_to_buffer(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE type, options, key, str;
+    GError* error = NULL;
+    gboolean result;
+    gchar** keys = NULL;
+    gchar** values = NULL;
+    gchar* buffer;
+    gsize buffer_size;
+    gint len, i;
+    ID to_s = rb_intern("to_s");
+    VALUE ary;
+
+    rb_scan_args(argc, argv, "11", &type, &options);
+
+    if (options != Qnil){
+        Check_Type(options, T_HASH);
+        ary = rb_funcall(options, rb_intern("to_a"), 0);
+        len = RARRAY(ary)->len;
+        keys = ALLOCA_N(gchar*, len + 1);
+        values = ALLOCA_N(gchar*, len + 1);
+        for (i = 0; i < len; i++) {
+            key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            if (SYMBOL_P(key)) {
+               keys[i] = rb_id2name(SYM2ID(key));
+            } else {
+                keys[i] = RVAL2CSTR(key);
+            }
+            str = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
+            values[i] = RVAL2CSTR(str);
+        }
+        keys[len] = NULL;
+        values[len] = NULL;
+    }
+    result = gdk_pixbuf_save_to_bufferv(_SELF(self), &buffer, &buffer_size,
+                                        RVAL2CSTR(type), keys, values, &error);
+
+    if (! result) RAISE_GERROR(error);
+
+    return rb_str_new(buffer, buffer_size);
+}
+#endif
 
 /****************************************************/
 /* Scaling */
@@ -522,6 +580,9 @@ Init_gdk_pixbuf2()
      * File saving
      */
     rb_define_method(gdkPixbuf, "save", save, -1);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkPixbuf, "save_to_buffer", save_to_buffer, -1);
+#endif
 
     /*
      * Scaling

@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf-loader.c -
 
-  $Author: sakai $
-  $Date: 2003/03/07 07:56:34 $
+  $Author: mutoh $
+  $Date: 2004/08/29 12:28:57 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -23,18 +23,25 @@ initialize_loader(argc, argv, self)
 {
     GdkPixbufLoader* loader;
     GError* error = NULL;
-    VALUE arg1;
+    VALUE arg1, is_mime_type;
 
-    rb_scan_args(argc, argv, "01", &arg1);
+    rb_scan_args(argc, argv, "02", &arg1, &is_mime_type);
 
-    if (argc == 0) {
+    if (NIL_P(arg1)) {
         loader = gdk_pixbuf_loader_new();
-    } else if (argc == 1 ) {
-        loader = gdk_pixbuf_loader_new_with_type(RVAL2CSTR(arg1), &error);
-        if(error)
-            RAISE_GERROR(error);
     } else {
-        rb_raise(rb_eArgError, "Wrong number of arguments");
+        if (is_mime_type == Qtrue) {
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+            loader = gdk_pixbuf_loader_new_with_mime_type(RVAL2CSTR(arg1), &error);
+#else
+            rb_warning("Not supported in GTK+-2.0.x.");
+            loader = gdk_pixbuf_loader_new();
+#endif
+        } else {
+            /* Default behavior */
+            loader = gdk_pixbuf_loader_new_with_type(RVAL2CSTR(arg1), &error);
+        }
+        if(error) RAISE_GERROR(error);
     }
     
     G_INITIALIZE(self, loader);
@@ -49,6 +56,16 @@ copy(self)
     rb_raise(rb_eNotImpError, "GdkPixbufLoader objects cannot be copied");
     return Qnil;
 }
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+static VALUE
+loader_get_format(self)
+    VALUE self;
+{
+    GdkPixbufFormat* format = gdk_pixbuf_loader_get_format(_SELF(self));
+    return format ? BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT) : Qnil;
+}
+#endif
 
 static VALUE
 loader_write(self, data)
@@ -88,6 +105,17 @@ last_write(self, data)
 	
     return res ? Qtrue : Qfalse;
 }
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+static VALUE
+loader_set_size(self, width, height)
+    VALUE self, width, height;
+{
+    gdk_pixbuf_loader_set_size(_SELF(self), 
+                               NUM2INT(width), NUM2INT(height));
+    return self;
+}
+#endif
 
 static VALUE
 loader_close(self)
@@ -133,8 +161,14 @@ Init_gdk_pixbuf_loader(VALUE mGdk)
      */
     rb_define_method(gdkPixbufLoader, "initialize", initialize_loader, -1);
     rb_define_method(gdkPixbufLoader, "dup", copy, 0);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkPixbufLoader, "format", loader_get_format, 0);
+#endif
     rb_define_method(gdkPixbufLoader, "write", loader_write, 1);
     rb_define_method(gdkPixbufLoader, "last_write", last_write, 1);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkPixbufLoader, "set_size", loader_set_size, 2);
+#endif
     rb_define_method(gdkPixbufLoader, "close", loader_close, 0);
     rb_define_method(gdkPixbufLoader, "pixbuf", get_pixbuf, 0);
     rb_define_method(gdkPixbufLoader, "animation", get_animation, 0);

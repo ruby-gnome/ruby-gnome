@@ -1,3 +1,10 @@
+2004-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/gdk_pixbuf2.rb: Added Gdk::PixbufLoader.open.
+	* rbgdk-pixbuf-loader.c: Added Gdk::PixbufLoader#format, #set_size
+	for GTK+-2.2.
+	* rbgdk-pixbuf.c: Added Gdk::Pixbuf#save_to_buffer. 
+
 2004-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Added Gdk::Pixbuf.formats, Gdk::Pixbuf#set_option for GTK+-2.2. 
