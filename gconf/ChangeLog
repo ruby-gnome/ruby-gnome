@@ -1,3 +1,13 @@
+2004-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-client.c: Make GConf::Client#initialize/.new obsolete. 
+	It will be removed until Ruby-GNOME2-1.0.0 released.
+	Added GConf::Client.get_for_engine, GConf::Client.default
+	instead of GConf::Client.new.
+	Added GConf::Client#key_is_writable? by Giovanni Corriga.
+	* sample/notify.rb, tests/test.rb, unittest.rb: 
+	Use GConf::Client.default instead of GConf::Client.new.
+	
 2004-05-30  Giovanni Corriga <valkadesh@libero.it>
 
 	* src/rbgconf.c: Fix a wrong definition of g_id_call.
@@ -89,7 +99,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/06/10 16:37:45 $ macros.
+	and $Date: 2004/06/15 17:36:51 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

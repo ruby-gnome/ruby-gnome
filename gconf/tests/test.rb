@@ -3,7 +3,7 @@ require 'gconf2'
 
 Gtk.init
 
-client = GConf::Client.new
+client = GConf::Client.default
 window = Gtk::Window.new
 str = client.get "/apps/gnome-cd/device"
 label = Gtk::Label.new(str ? str : '<unset>')

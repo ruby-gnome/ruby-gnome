@@ -7,7 +7,7 @@ require 'gconf2'
 class TestDigest < Test::Unit::TestCase
   GCONF_TEST_KEY = "/extra/test/directory/key"
 
-  @@client = GConf::Client.new
+  @@client = GConf::Client.default
 
   def t(val)
     @@client[GCONF_TEST_KEY] = val

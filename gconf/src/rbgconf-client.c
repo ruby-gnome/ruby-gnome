@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/04/07 17:22:29 $
+ * $Date: 2004/06/15 17:36:51 $
  *
  *****************************************************************************/
 
@@ -55,24 +55,42 @@ client_notify_callback(client, cnxn_id, entry, user_data)
 		   GCENTRY2RVAL(entry));
 }
 
+/* OBSOLETE. It will be removed until Ruby-GNOME2-1.0.0 */
 static VALUE
 client_initialize(argc, argv, self)
-	int argc;
-	VALUE *argv;
+        int argc;
+        VALUE *argv;
+        VALUE self;
+{
+        VALUE engine;
+        GConfClient *client;
+                                                                                 
+        /* check if we were passed an engine to use */
+        if (rb_scan_args(argc, argv, "01", &engine) == 1) {
+		rb_warn("GConf::Client.new is deprecated. Use GConf::Client.get_for_engine(engine) instead.");
+                client = gconf_client_get_for_engine(RVAL2GCENGINE(engine));
+        } else {
+		rb_warn("GConf::Client.new is deprecated. Use GConf::Client.default instead.");
+                client = gconf_client_get_default();
+        }
+
+        G_INITIALIZE(self, client);
+        return Qnil;
+}
+
+static VALUE
+client_s_get_for_engine(self, engine)
+	VALUE self;
+	VALUE engine;
+{
+	return GOBJ2RVAL(gconf_client_get_for_engine(RVAL2GCENGINE(engine)));
+}
+
+static VALUE
+client_s_get_default(self)
 	VALUE self;
 {
-	VALUE engine;
-	GConfClient *client;
-
-	/* check if we were passed an engine to use */
-	if (rb_scan_args(argc, argv, "01", &engine) == 1) {
-		client = gconf_client_get_for_engine(RVAL2GCENGINE(engine));
-	} else {
-		client = gconf_client_get_default();
-	}
-	
-	G_INITIALIZE(self, client);
-	return Qnil;
+	return GOBJ2RVAL(gconf_client_get_default());
 }
 
 static VALUE
@@ -288,6 +306,16 @@ client_dir_exists(self, dir)
 }
 
 static VALUE
+client_key_is_writable(self, key)
+	VALUE self;
+	VALUE key;
+{
+	return CBOOL2RVAL(gconf_client_key_is_writable(_SELF(self),
+						       RVAL2CSTR(key), NULL));
+}
+
+
+static VALUE
 client_reverse_change_set(self, cs)
 	VALUE self, cs;
 {
@@ -345,6 +373,8 @@ Init_gconf_client(m_gconf)
 	
 	gconf_client = G_DEF_CLASS(GCONF_TYPE_CLIENT, "Client", m_gconf);
 
+	rb_define_singleton_method(gconf_client, "get_for_engine", client_s_get_for_engine, 1);
+	rb_define_singleton_method(gconf_client, "default", client_s_get_default, 0);
 	rb_define_method(gconf_client, "initialize", client_initialize, -1);
 	rb_define_method(gconf_client, "add_dir", client_add_dir, -1);
 	rb_define_method(gconf_client, "remove_dir", client_remove_dir, 1);
@@ -363,6 +393,7 @@ Init_gconf_client(m_gconf)
 	rb_define_method(gconf_client, "all_dirs", client_all_dirs, 1);
 	rb_define_method(gconf_client, "suggest_sync", client_suggest_sync, 0);
 	rb_define_method(gconf_client, "dir_exists?", client_dir_exists, 1);
+	rb_define_method(gconf_client, "key_is_writable?", client_key_is_writable, 1);
 	rb_define_method(gconf_client, "reverse_change_set",
 			 client_reverse_change_set, 1);
 	rb_define_method(gconf_client, "change_set_from_current",
