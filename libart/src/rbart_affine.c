@@ -4,7 +4,7 @@
   rbart_affine.c - Art::Affine class of ruby
 
   $Author: mutoh $
-  $Date: 2004/11/13 11:19:13 $
+  $Date: 2005/01/11 15:41:27 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -13,7 +13,7 @@
 
 #include "rbart.h"
 
-static VALUE artAffine;
+VALUE artAffine;
 
 /* Below 2 macros are available only when obj is self or after
  * checking that obj is certainly a instance of Art::Affine. */

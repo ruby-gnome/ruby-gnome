@@ -1,3 +1,9 @@
+2005-01-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart_affine.c: Works for gcc-4.0(Make artAffine as 
+	global variable). Reported by Debian Bug Tracking System 
+	#289710. Pointed out by Dafydd Harries.
+
 2004-11-14 Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart.c: Fix compiling problem under ruby-1.6.x. 
