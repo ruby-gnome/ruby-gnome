@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2003/01/25 18:02:22 $
+  $Date: 2003/01/30 16:16:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -179,6 +179,8 @@ void
 Init_gtk_selectiondata()
 {
     VALUE gSelectionData = G_DEF_CLASS(GTK_TYPE_SELECTION_DATA, "SelectionData", mGtk);
+
+    rbgobj_boxed_not_copy_obj(GTK_TYPE_SELECTION_DATA);
 
     compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 

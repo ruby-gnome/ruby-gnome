@@ -1,3 +1,8 @@
+2003-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/dnd.rb: Modified.
+	* src/rbgtkselectiondata.c: Fix problem to create object. 
+
 2003-01-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpixmap.c: Gdk::Pixmap#colormap_create_from_xpm_d, colormap_create_from_xpm: 
