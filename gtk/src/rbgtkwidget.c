@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/10/04 16:15:02 $
+  $Date: 2003/11/06 16:54:25 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -699,7 +699,8 @@ void        gtk_widget_class_install_style_property_parser
 GParamSpec* gtk_widget_class_find_style_property
                                             (GtkWidgetClass *klass,
                                              const gchar *property_name);
-Is this exist in GTK+-2.2?
+*/
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 widget_style_properties(self)
     VALUE self;
@@ -719,7 +720,7 @@ widget_style_properties(self)
     g_type_class_unref(oclass);
     return ary;
 }
-*/
+#endif
 
 static VALUE
 widget_region_intersect(self, region)
@@ -747,13 +748,35 @@ void        gtk_widget_style_get_valist     (GtkWidget *widget,
 */
 
 static VALUE
-widget_style_get_property(self, property_name)
-    VALUE self, property_name;
+widget_style_get_property(self, prop_name)
+    VALUE self, prop_name;
 {
-    GValue value = {0, };
-    gtk_widget_style_get_property(_SELF(self), RVAL2CSTR(property_name),
-                                  &value);
-    return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
+    GParamSpec* pspec;
+    const char* name;
+    GtkWidgetClass* oclass = g_type_class_ref(RVAL2GTYPE(self));
+
+    if (SYMBOL_P(prop_name)) {
+        name = rb_id2name(SYM2ID(prop_name));
+    } else {
+        StringValue(prop_name);
+        name = StringValuePtr(prop_name);
+    }
+#if GTK_MINOR_VERSION >= 2
+    pspec = gtk_widget_class_find_style_property(oclass, name);
+#endif
+    if (!pspec)
+        rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
+    else {
+        // FIXME: use rb_ensure to call g_value_unset()
+        GValueToRValueFunc getter = NULL;
+        GValue gval = {0,};
+        VALUE ret;
+        g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
+        gtk_widget_style_get_property(GTK_WIDGET(RVAL2GOBJ(self)), name, &gval);
+        ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
+        g_value_unset(&gval);
+        return ret;
+    }
 }
 
 static VALUE
@@ -954,9 +977,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
-/*
-    rb_define_method(gWidget, "style_properties", widget_style_properties, 0);
-*/
+#if GTK_MINOR_VERSION >= 2
+    rb_define_singleton_method(gWidget, "style_properties", widget_style_properties, 0);
+#endif
     rb_define_method(gWidget, "intersect", widget_intersect, 1);
     rb_define_method(gWidget, "focus?", widget_is_focus, 0);
     rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
