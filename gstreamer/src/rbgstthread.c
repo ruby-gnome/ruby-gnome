@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,39 +20,42 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Thread < Gst::Bin
- *
- *  A Gst::Bin that will become a thread.
+/* Class: Gst::Thread
+ * A Gst::Bin that will become a thread.
  */
 
 /*
- *  Class method: new(aStringName=nil) -> aThreadObject
+ * Class method: new(name=nil)
+ * name: a name which will be attributed to the thread.
  *
- *  Constructs a new Gst::Thread object.
+ * Constructs a new Gst::Thread object.
  *
- *  If element name is ommited (or nil), then the thread will receive a guaranteed
- *  unique name, consisting of the "thread" string and a number.
- *  If name is given, it will be given the name supplied.
+ * If element name is ommited (or nil), then the thread will receive a guaranteed
+ * unique name, consisting of the "thread" string and a number.
+ * If name is given, it will be given the name supplied.
+ *
+ * Returns: a newly created Gst::Thread object.
  */
-static VALUE rb_gst_thread_new(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_thread_new (int argc, VALUE *argv, VALUE self)
 {
-    GstElement *bin;
-    VALUE name;
+	GstElement *bin;
+	VALUE name;
 
-    rb_scan_args(argc, argv, "01", &name);
-
-    bin = gst_thread_new(name != Qnil ? RVAL2CSTR(name) : NULL);
-    if (bin != NULL) {
-        RBGST_INITIALIZE(self, bin);
-    }
-    return Qnil;
+	rb_scan_args (argc, argv, "01", &name);
+	bin = gst_thread_new (NIL_P (name) ? NULL : RVAL2CSTR (name));
+	if (bin != NULL)
+		RBGST_INITIALIZE (self, bin);
+	return Qnil;
 }
 
-void Init_gst_thread(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_THREAD, "Thread", mGst);
-    rb_define_method(c, "initialize", rb_gst_thread_new, -1);
-}
+void
+Init_gst_thread (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_THREAD, "Thread", mGst);
 
+	rb_define_method (c, "initialize", rb_gst_thread_new, -1);
+
+	G_DEF_CLASS (GST_TYPE_THREAD_STATE, "State", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_THREAD_STATE, "GST_THREAD_");
+}

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,28 +20,25 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::IndexFactory < Gst::PluginFeature
- *
- *  Create indexes from a factory.  
+/* Class: Gst::IndexFactory
+ * Create indexes from a factory.  
  */
 
-/*
- *  Method: to_s -> aString
- *
- *  Gets a String representing the factory, as a String.
+/* Method: to_s
+ * Returns: a String representing the factory.
  */
-static VALUE rb_gst_indexfactory_to_s(self)
-    VALUE self;
+static VALUE
+rb_gst_indexfactory_to_s (VALUE self)
 {
-    GstIndexFactory *factory = RGST_INDEX_FACTORY(self); 
-    return rb_str_format("Index: %s (%s)",
-                         GST_PLUGIN_FEATURE_NAME(factory),
-                         factory->longdesc);
+	GstIndexFactory *factory = RGST_INDEX_FACTORY (self); 
+	return rb_str_format ("Index: %s (%s)",
+			      GST_PLUGIN_FEATURE_NAME (factory),
+			      factory->longdesc);
 }
 
-void Init_gst_indexfactory(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_INDEX_FACTORY, "IndexFactory", mGst);
-    rb_define_method(c, "to_s", rb_gst_indexfactory_to_s, 0);
+void
+Init_gst_indexfactory (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_INDEX_FACTORY, "IndexFactory", mGst);
+	rb_define_method (c, "to_s", rb_gst_indexfactory_to_s, 0);
 }
-

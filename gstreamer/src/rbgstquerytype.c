@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,206 +20,140 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::QueryType
- *
- *  Dynamically register new query types. 
+/* Class: Gst::QueryType
+ * Dynamically register new query types. 
  */
 
-static GstQueryType* query_type_copy(const GstQueryType* query_type) {
-    GstQueryType* new_query_type;
-    g_return_val_if_fail (query_type != NULL, NULL);
-    new_query_type = g_new(GstQueryType, 1);
-    *new_query_type = *query_type;
-    return new_query_type;
-}
-
-GType gst_query_type_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GstQueryType",
-            (GBoxedCopyFunc)query_type_copy,
-            (GBoxedFreeFunc)g_free);
-    }
-    return our_type;
-}
-
-/*
- *  Class method: find(aNickString) -> aQueryTypeObject
- *
- *  Returns a reference to the Gst::QueryType object registered with the 
- *  given nick, or nil if this query was not registered.
- */
-static VALUE rb_gst_querytype_find(self, nick)
-    VALUE self, nick;
+static GstQueryType *
+query_type_copy (const GstQueryType* query_type)
 {
-    GstQueryType type = gst_query_type_get_by_nick(RVAL2CSTR(nick));
-    return type != GST_QUERY_NONE 
-        ? RGST_QUERY_TYPE_NEW(&type)
-        : Qnil; 
+	GstQueryType *new_query_type;
+	g_return_val_if_fail (query_type != NULL, NULL);
+	new_query_type = g_new (GstQueryType, 1);
+	*new_query_type = *query_type;
+	return new_query_type;
 }
 
-/*
- *  Class method: each { |aQueryTypeObject| block } -> nil
- *
- *  Calls the block for each registered querytype, passing a reference
- *  to the Gst::QueryType object as parameter.
- *
- *  Always returns nil.
- */
-static VALUE rb_gst_querytype_each(self)
-    VALUE self;
+GType
+gst_query_type_get_type2 (void)
 {
-    const GList *list;
-
-    for (list = gst_query_type_get_definitions();
-         list != NULL;
-         list = g_list_next(list))
-    {
-        GstQueryTypeDefinition *def = (GstQueryTypeDefinition *) list->data;
-        rb_yield(RGST_QUERY_TYPE_NEW(&(def->value)));
-    } 
-    return Qnil;
+	static GType our_type = 0;
+	if (our_type == 0)
+		our_type = g_boxed_type_register_static ("GstQueryTypeClass",
+			(GBoxedCopyFunc)query_type_copy,
+			(GBoxedFreeFunc)g_free);
+	return our_type;
 }
 
 /*
- *  Method: type_id -> aFixnum
+ * Class method: find(nick)
+ * nick: the nick of an existing query type.
  *
- *  Gets the type id of this querytype, which may be:
- *
- *    * Gst::QueryType::NONE;
- *    * Gst::QueryType::TOTAL;
- *    * Gst::QueryType::POSITION;
- *    * Gst::QueryType::LATENCY;
- *    * Gst::QueryType::JITTER;
- *    * Gst::QueryType::START;
- *    * Gst::QueryType::SEGMENT_END;
- *    * Gst::QueryType::RATE.
+ * Returns: a reference to the Gst::QueryType object registered with the 
+ * given nick, or nil if this query was not registered.
  */
-static VALUE rb_gst_querytype_get_type_id(self)
-    VALUE self;
+static VALUE
+rb_gst_querytype_find (VALUE self, VALUE nick)
 {
-    GstQueryType *querytype = RGST_QUERY_TYPE(self);
-    return INT2FIX(*querytype);
+	GstQueryType type = gst_query_type_get_by_nick (RVAL2CSTR (nick));
+	return type != GST_QUERY_NONE 
+		? RGST_QUERY_TYPE_NEW (&type)
+		: Qnil; 
 }
 
 /*
- *  Method: nick -> aString
+ * Class method: each { |query_type| block }
  *
- *  Gets the short nick of the querytype, as a String. 
- */
-static VALUE rb_gst_querytype_get_nick(self)
-    VALUE self;
-{
-    GstQueryType *querytype = RGST_QUERY_TYPE(self);
-    return CSTR2RVAL(gst_query_type_get_details(*querytype)->nick);
-}
-
-/*
- *  Method: description -> aString
+ * Calls the block for each registered query type, passing a reference
+ * to the Gst::QueryType object as parameter.
  *
- *  Gets a longer description of the querytype, as a String. 
+ * Returns: always nil.
  */
-static VALUE rb_gst_querytype_get_description(self)
-    VALUE self;
+static VALUE
+rb_gst_querytype_each (VALUE self)
 {
-    GstQueryType *querytype = RGST_QUERY_TYPE(self);
-    return CSTR2RVAL(gst_query_type_get_details(*querytype)->description);
+	const GList *list;
+
+	for (list = gst_query_type_get_definitions ();
+	     list != NULL;
+	     list = g_list_next (list))
+	{
+		GstQueryTypeDefinition *def = (GstQueryTypeDefinition *) list->data;
+		rb_yield (RGST_QUERY_TYPE_NEW (&(def->value)));
+	} 
+	return Qnil;
+}
+
+/* Method: type_id
+ * Returns: the type id of this query type (see Gst::QueryType::Type).
+ */
+static VALUE
+rb_gst_querytype_get_type_id (VALUE self)
+{
+	GstQueryType *querytype = RGST_QUERY_TYPE (self);
+	return INT2FIX (*querytype);
+}
+
+/* Method: nick
+ * Returns: the short nick of the query type.
+ */
+static VALUE
+rb_gst_querytype_get_nick (VALUE self)
+{
+	GstQueryType *querytype = RGST_QUERY_TYPE (self);
+	return CSTR2RVAL (gst_query_type_get_details (*querytype)->nick);
+}
+
+/* Method: description
+ * Returns: a longer description of the query type.
+ */
+static VALUE
+rb_gst_querytype_get_description (VALUE self)
+{
+	GstQueryType *querytype = RGST_QUERY_TYPE (self);
+	return CSTR2RVAL (gst_query_type_get_details (*querytype)->description);
 }
 
 /*
- *  Method: == aQueryTypeObject -> aBoolean
+ * Method: ==(query_type)
+ * query_type: a Gst::QueryType object.
  *
- *  Checks if two Gst::QueryType objects are registered under the
- *  same nick.
+ * Checks if two Gst::QueryType objects are registered under the
+ * same nick.
+ *
+ * Returns: true on success, false on failure.
  */
-static VALUE rb_gst_querytype_is_equal(self, other_query)
-    VALUE self, other_query;
+static VALUE
+rb_gst_querytype_is_equal (VALUE self, VALUE other_query)
 {
-    GstQueryType *q1, *q2;
-    gchar *n1, *n2;
+	GstQueryType *q1, *q2;
+	gchar *n1, *n2;
 
-    if (NIL_P(other_query)) {
-        return Qfalse;
-    }
+	if (NIL_P (other_query))
+		return Qfalse;
 
-    q1 = RGST_QUERY_TYPE(self);
-    q2 = RGST_QUERY_TYPE(other_query);
+	q1 = RGST_QUERY_TYPE (self);
+	q2 = RGST_QUERY_TYPE (other_query);
 
-    n1 = gst_query_type_get_details(*q1)->nick;
-    n2 = gst_query_type_get_details(*q2)->nick;
+	n1 = gst_query_type_get_details (*q1)->nick;
+	n2 = gst_query_type_get_details (*q2)->nick;
 
-    return CBOOL2RVAL(strcmp(n1, n2) == 0);
+	return CBOOL2RVAL( strcmp (n1, n2) == 0);
 }
 
-/*
- *  Constant: NONE
- *  Invalid query type.
- */
-static VALUE constNone = INT2FIX(GST_QUERY_NONE);
+void
+Init_gst_querytype (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
 
-/*
- *  Constant: TOTAL 
- *  Total length of stream.
- */
-static VALUE constTotal = INT2FIX(GST_QUERY_TOTAL);
+	rb_define_singleton_method (c, "each", rb_gst_querytype_each, 0);
+	rb_define_singleton_method (c, "find", rb_gst_querytype_find, 1);
 
-/*
- *  Constant: POSITION
- *  Current position in stream.
- */
-static VALUE constPosition = INT2FIX(GST_QUERY_POSITION);
+	rb_define_method (c, "type_id", rb_gst_querytype_get_type_id, 0);
+	rb_define_method (c, "nick", rb_gst_querytype_get_nick,	0);
+	rb_define_method (c, "description", rb_gst_querytype_get_description, 0);
+	rb_define_method (c, "==", rb_gst_querytype_is_equal, 1);
 
-/*
- *  Constant: LATENCY
- *  Latency of stream.
- */
-static VALUE constLatency = INT2FIX(GST_QUERY_LATENCY);
-
-/*
- *  Constant: JITTER
- *  Current jitter of stream.
- */
-static VALUE constJitter = INT2FIX(GST_QUERY_JITTER);
-
-/*
- *  Constant: START
- *  Start of configured segment.
- */
-static VALUE constStart = INT2FIX(GST_QUERY_START);
-
-/*
- *  Constant: SEGMENT_END
- *  End of configured segment.
- */
-static VALUE constSegmentEnd = INT2FIX(GST_QUERY_SEGMENT_END);
-
-/*
- *  Constant: RATE
- *  Current rate of the stream.
- */
-static VALUE constRate = INT2FIX(GST_QUERY_RATE);
-
-void Init_gst_querytype(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_QUERY_TYPE, "QueryType", mGst);
-
-    rb_define_singleton_method(c, "each", rb_gst_querytype_each, 0);
-    rb_define_singleton_method(c, "find", rb_gst_querytype_find, 1);
-
-    rb_define_method(c, "type_id", rb_gst_querytype_get_type_id, 0);
-    rb_define_method(c, "nick",    rb_gst_querytype_get_nick,    0);
-    rb_define_method(c, "description", 
-                     rb_gst_querytype_get_description, 0);
-
-    rb_define_method(c, "==", rb_gst_querytype_is_equal, 1);
-
-    rb_define_const(c, "NONE",        constNone);
-    rb_define_const(c, "TOTAL",       constTotal);
-    rb_define_const(c, "POSITION",    constPosition);
-    rb_define_const(c, "LATENCY",     constLatency);
-    rb_define_const(c, "JITTER",      constJitter);
-    rb_define_const(c, "START",       constStart);
-    rb_define_const(c, "SEGMENT_END", constSegmentEnd);
-    rb_define_const(c, "RATE",        constRate);
+	G_DEF_CLASS (GST_TYPE_QUERY_TYPE, "Type", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_QUERY_TYPE, "GST_QUERY_");
 }
-

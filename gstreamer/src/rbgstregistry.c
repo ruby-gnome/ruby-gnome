@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,655 +20,577 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Registry
- *
- *  Abstract class for managing plugins. 
+/* Class: Gst::Registry
+ * Abstract class for managing plugins. 
  */
 
 /*
- *  Class method: plugins -> anArray
+ * Class method: plugins
  *
- *  Get a list of all plugins in the pool, in an array of Gst::Plugin objects.
+ * Gets a list of all plugins in the pool.
+ *
+ * Returns: an array of Gst::Plugin objects.
  */
-static VALUE rb_gst_registry_get_plugins(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_get_plugins (VALUE self)
 {
-    GList *list;
-    VALUE arr;
+	GList *list;
+	VALUE arr;
 
-    arr  = rb_ary_new();
-    for (list = gst_registry_pool_plugin_list();
-         list != NULL;
-         list = g_list_next(list))
-    {     
-        GstPlugin *plugin = (GstPlugin *) list->data;
-        rb_ary_push(arr, RGST_PLUGIN_NEW(plugin));
-    }
-    g_list_free(list);
-    return arr;
+	arr = rb_ary_new ();
+	for (list = gst_registry_pool_plugin_list ();
+	     list != NULL;
+	     list = g_list_next (list)) {	 
+		GstPlugin *plugin = (GstPlugin *) list->data;
+		rb_ary_push (arr, RGST_PLUGIN_NEW (plugin));
+	}
+	g_list_free (list);
+	return arr;
 } 
 
 /*
- *  Class method: each_plugin { |aPlugin| block } -> nil
+ * Class method: each_plugin { |plugin| ... }
  *
- *  Calls the block for each plugin in the pool, passing a reference to
- *  the Gst::Plugin as parameter.
+ * Calls the block for each plugin in the pool, passing a reference to
+ * the Gst::Plugin as parameter.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_each_plugin(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_each_plugin (VALUE self)
 {
-    return rb_ary_yield(rb_gst_registry_get_plugins(self));
+	return rb_ary_yield (rb_gst_registry_get_plugins (self));
 }
 
 /*
- *  Class method: find_plugin(aNameString) -> aGstPluginObject
+ * Class method: find_plugin(name)
+ * name: a plugin name.
  *
- *  Find the plugin with the given name in the registry. 
- *  If founds, returns a reference to the Gst::Plugin object, otherwise
- *  returns nil.
+ * Finds the plugin with the given name in the registry. 
+ *
+ * Returns: a reference to the Gst::Plugin object if found, otherwise
+ * returns nil.
  */
-static VALUE rb_gst_registry_find_plugin(self, name)
-    VALUE self, name;
+static VALUE 
+rb_gst_registry_find_plugin (VALUE self, VALUE name)
 {
-    GstPlugin *plugin = gst_registry_pool_find_plugin(RVAL2CSTR(name));
-    return plugin != NULL
-        ? RGST_PLUGIN_NEW(plugin)
-        : Qnil; 
+	GstPlugin *plugin = gst_registry_pool_find_plugin (RVAL2CSTR (name));
+	return plugin != NULL
+		? RGST_PLUGIN_NEW (plugin)
+		: Qnil; 
 }
 
 /*
- *  Class method: registries -> anArray
+ * Class method: registries
  *
- *  Gets a list of all registries in the pool, in an Array
- *  of Gst::Registry objects.
+ * Gets a list of all registries in the pool.
+ *
+ * Returns: an Array of Gst::Registry objects.
  */
-static VALUE rb_gst_registry_get_registries(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_get_registries (VALUE self)
 {
-    GList *list;
-    VALUE arr;
+	GList *list;
+	VALUE arr;
 
-    arr = rb_ary_new();
-    for (list = gst_registry_pool_list();
-         list != NULL;
-         list = g_list_next(list))
-    {
-        GstRegistry *reg = (GstRegistry *) list->data;
-        rb_ary_push(arr, RGST_REGISTRY_NEW(reg)); 
-    }
-    g_list_free(list);
-    return arr;
+	arr = rb_ary_new ();
+	for (list = gst_registry_pool_list ();
+	     list != NULL;
+	     list = g_list_next (list)) {
+		GstRegistry *reg = (GstRegistry *) list->data;
+		rb_ary_push (arr, RGST_REGISTRY_NEW (reg)); 
+	}
+	g_list_free (list);
+	return arr;
 }
 
 /*
- *  Class method: each { |aRegistryObject| block } -> nil
+ * Class method: each { |registry| ... } -> nil
  *
- *  Calls the block for each registries in the pool, passing a reference to
- *  the Gst::Registry as parameter.
+ * Calls the block for each registries in the pool, passing a reference to
+ * the Gst::Registry as parameter.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_each(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_each (VALUE self)
 {
-    return rb_ary_yield(rb_gst_registry_get_registries(self));
+	return rb_ary_yield (rb_gst_registry_get_registries (self));
 }
 
 /*
- *  Class method: get_features(aFeatureType) -> anArray
+ * Class method: get_features(feature_type)
+ * feature_type: a feature type.
  *
- *  Get a list of all plugin features of the given type in the pool, as
- *  an array of Gst::PluginFeature objects.
+ * Gets a list of all plugin features of the given type in the pool.
  *
- *  Valid class types are:
- *      * Gst::AutoplugFactory;
- *      * Gst::ElementFactory;
- *      * Gst::IndexFactory;
- *      * Gst::SchedulerFactory;
- *	    * Gst::TypeFactory.
+ * Valid features types are Gst::AutoplugFactory, Gst::ElementFactory,
+ * Gst::IndexFactory, Gst::SchedulerFactory and Gst::TypeFactory.
+ *
+ * Returns: an array of Gst::PluginFeature objects.
  */
-static VALUE rb_gst_registry_get_features(self, type)
-    VALUE self, type;
+static VALUE
+rb_gst_registry_get_features (VALUE self, VALUE type)
 {
-    GList *list;
-    GType gtype;
-    VALUE arr;
+	GList *list;
+	GType gtype;
+	VALUE arr;
 
-    arr = rb_ary_new();
-    gtype = CLASS2GTYPE(type);
-    if (!is_valid_pluginfeature_type(gtype)) {
-        rb_raise(rb_eArgError, "Invalid feature type.");
-    }
-    else {
-        for (list = gst_registry_pool_feature_list(gtype);
-             list != NULL;
-            list = g_list_next(list))
-        {
-            rb_ary_push(arr, instanciate_pluginfeature(GST_PLUGIN_FEATURE(list->data)));
-        }
-        g_list_free(list);
-    }
-    return arr;
+	arr = rb_ary_new ();
+	gtype = CLASS2GTYPE (type);
+	if (!is_valid_pluginfeature_type (gtype))
+		rb_raise (rb_eArgError, "Invalid feature type.");
+	else {
+		for (list = gst_registry_pool_feature_list (gtype);
+		     list != NULL;
+		     list = g_list_next (list))
+			rb_ary_push (arr, instanciate_pluginfeature (GST_PLUGIN_FEATURE (list->data)));
+		g_list_free (list);
+	}
+	return arr;
 }
 
 /*
- *  Class method: each_feature(aFeatureType) { |aPluginFeature| block } -> nil
+ * Class method: each_feature(feature_type) { |plugin_feature| ... }
  *
- *  Calls the block for each plugin features of the given type in the pool, 
- *  passing a reference to the Gst::PluginFeature as parameter.
+ * Calls the block for each plugin features of the given type in the pool, 
+ * passing a reference to the Gst::PluginFeature as parameter.
  *
- *  Valid class types are:
- *      * Gst::AutoplugFactory;
- *      * Gst::ElementFactory;
- *      * Gst::IndexFactory;
- *      * Gst::SchedulerFactory;
- *	    * Gst::TypeFactory.
+ * Valid features types are Gst::AutoplugFactory, Gst::ElementFactory,
+ * Gst::IndexFactory, Gst::SchedulerFactory and Gst::TypeFactory.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_each_feature(self, type)
-    VALUE self, type;
+static VALUE
+rb_gst_registry_each_feature (VALUE self, VALUE type)
 {
-    return rb_ary_yield(rb_gst_registry_get_features(self, type));
+	return rb_ary_yield (rb_gst_registry_get_features (self, type));
 }
 
 /*
- *  Class method: find_feature(aName, aFeatureType) -> aPluginFeature
+ * Class method: find_feature(feature_name, feature_type)
+ * feature_name: a name of a feature.
+ * feature_type: a type of a feature.
  *
- *  Find the plugin feature with the given name and type from the pool of 
- *  registries, as a Gst::PluginFeature reference.  
+ * Finds the plugin feature with the given name and type from the pool of 
+ * registries, as a Gst::PluginFeature reference.  
  *
- *  Returns nil if the named plugin feature is not found.
+ * Valid features types are Gst::AutoplugFactory, Gst::ElementFactory,
+ * Gst::IndexFactory, Gst::SchedulerFactory and Gst::TypeFactory.
  *
- *  Valid class types are:
- *      * Gst::AutoplugFactory;
- *      * Gst::ElementFactory;
- *      * Gst::IndexFactory;
- *      * Gst::SchedulerFactory;
- *	    * Gst::TypeFactory.
+ * Returns: a Gst::PluginFeature reference, or nil if the named plugin
+ * feature is not found.
  */
-static VALUE rb_gst_registry_find_feature(self, name, type)
-    VALUE self, name, type;
+static VALUE
+rb_gst_registry_find_feature (VALUE self, VALUE name, VALUE type)
 {
-    GstPluginFeature *feature;
-    GType gtype;
-    
-    gtype = CLASS2GTYPE(type);
-    if (!is_valid_pluginfeature_type(gtype)) {
-        rb_raise(rb_eArgError, "Invalid feature type.");
-    }
-    feature = gst_registry_pool_find_feature(RVAL2CSTR(name),
-                                             gtype);
-    return feature != NULL
-        ? instanciate_pluginfeature(feature)
-        : Qnil;
+	GstPluginFeature *feature;
+	GType gtype;
+	
+	gtype = CLASS2GTYPE (type);
+	if (!is_valid_pluginfeature_type (gtype))
+		rb_raise (rb_eArgError, "Invalid feature type.");
+	feature = gst_registry_pool_find_feature (RVAL2CSTR (name),
+						  gtype);
+	return feature != NULL
+		? instanciate_pluginfeature (feature)
+		: Qnil;
 }
 
 /*
- *  Class method: get_prefered(someFlags) -> aRegistry
+ * Class method: get_prefered(flags)
+ * flags: registry flags (see Gst::Registry::Flags).
  *
- *  Get the prefered registry with the given flags.
- *  Valid flags are:
- *      * Gst::Registry::READABLE;
- *      * Gst::Registry::WRITABLE;
- *      * Gst::Registry::EXISTS;
- *      * Gst::Registry::REMOVE;
- *      * Gst::Registry::DELAYED_LOADING.
+ * Returns: the prefered registry with the given flags.
  */
-static VALUE rb_gst_registry_get_prefered(self, flags)
-    VALUE self, flags;
+static VALUE
+rb_gst_registry_get_prefered (VALUE self, VALUE flags)
 {
-    GstRegistry *registry = gst_registry_pool_get_prefered(FIX2INT(flags));
-    return registry != NULL
-        ? RGST_REGISTRY_NEW(registry)
-        : Qnil;
+	GstRegistry *registry = gst_registry_pool_get_prefered (RVAL2GENUM (flags, GST_TYPE_REGISTRY_FLAGS));
+	return registry != NULL
+		? RGST_REGISTRY_NEW (registry)
+		: Qnil;
 }
 
 /*
- *  Class method: add(aRegistry, aPriority) -> nil
+ * Class method: add(registry, priority)
+ * registry: a Gst::Registry.
+ * priority: the priority (as a Fixnum).
  *
- *  Add the registry to the pool with the given priority (as a Fixnum).
+ * Adds the registry to the pool with the given priority.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_add_registry(self, registry, priority)
-    VALUE self, registry, priority;
+static VALUE
+rb_gst_registry_add_registry (VALUE self, VALUE registry, VALUE priority)
 {
-    gst_registry_pool_add(RGST_REGISTRY(registry), FIX2INT(priority));
-    return Qnil;
+	gst_registry_pool_add (RGST_REGISTRY (registry), FIX2INT (priority));
+	return Qnil;
 }
 
 /*
- *  Class method: remove(aRegistry) -> nil
+ * Class method: remove(registry)
+ * registry: a Gst::Registry.
  *
- *  Remove the registry from the pool.
+ * Removes the registry from the pool.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_remove_registry(self, registry)
-    VALUE self, registry;
+static VALUE
+rb_gst_registry_remove_registry (VALUE self, VALUE registry)
 {
-    gst_registry_pool_remove(RGST_REGISTRY(registry));
-    return Qnil;
+	gst_registry_pool_remove (RGST_REGISTRY (registry));
+	return Qnil;
 }
 
 /*
- *  Class method: add_plugin(aPlugin) -> nil
+ * Class method: add_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Add the plugin to the global pool of plugins.
+ * Adds the plugin to the global pool of plugins.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_add_plugin(self, plugin)
-    VALUE self, plugin;
+static VALUE
+rb_gst_registry_add_plugin (VALUE self, VALUE plugin)
 {
-    gst_registry_pool_add_plugin(RGST_PLUGIN(plugin));
-    return Qnil;
+	gst_registry_pool_add_plugin (RGST_PLUGIN (plugin));
+	return Qnil;
 }
 
 /*
- *  Class method: load_all -> nil
+ * Class method: load_all
  *
- *  Load all the registries in the pool. 
- *  Registries with the Gst::Registry::DELAYED_LOADING flag on will not be loaded.
+ * Loads all the registries in the pool. 
+ * Registries with the Gst::Registry::DELAYED_LOADING flag on will not be loaded.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_load_all(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_load_all (VALUE self)
 {
-    gst_registry_pool_load_all();
-    return Qnil;
+	gst_registry_pool_load_all ();
+	return Qnil;
+}
+
+/* Method: name
+ * Returns: the name of the registry.
+ */
+static VALUE
+rb_gst_registry_get_name (VALUE self)
+{
+	GstRegistry *reg = RGST_REGISTRY (self);
+	return CSTR2RVAL (reg->name);
+}
+
+/* Method: details
+ * Returns: some details about the registry, or nil
+ * if the registry has no details.
+ */
+static VALUE
+rb_gst_registry_get_details (VALUE self)
+{
+	GstRegistry *reg = RGST_REGISTRY (self);
+	return CSTR2RVAL (reg->details);
+}
+
+/* Method: loaded?
+ * Returns: true if the registry is currently loaded, false otherwise.
+ */
+static VALUE
+rb_gst_registry_is_loaded (VALUE self)
+{
+	GstRegistry *reg = RGST_REGISTRY (self);
+	return CBOOL2RVAL (gst_registry_is_loaded (reg));
 }
 
 /*
- *  Method: name -> aString
+ * Method: load
  *
- *  Gets the name of the registry, as a String.
+ * Loads the registry.
+ *
+ * Returns: true on success, otherwise false.
  */
-static VALUE rb_gst_registry_get_name(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_load (VALUE self)
 {
-    GstRegistry *reg = RGST_REGISTRY(self);
-    return CSTR2RVAL(reg->name);
+	return CBOOL2RVAL (gst_registry_load (RGST_REGISTRY (self)));
 }
 
 /*
- *  Method: details -> aString
+ * Method: save
  *
- *  Gets some details about the registry, as a String.  
- *  Returns nil if the registry has no details.
+ * Saves the contents of the registry.
+ *
+ * Returns: true on success, otherwise false.
  */
-static VALUE rb_gst_registry_get_details(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_save (VALUE self)
 {
-    GstRegistry *reg = RGST_REGISTRY(self);
-    return CSTR2RVAL(reg->details);
+	return CBOOL2RVAL (gst_registry_save (RGST_REGISTRY (self)));
 }
 
 /*
- *  Method: loaded? -> aBoolean
+ * Method: rebuild
  *
- *  Checks if the registry is currently loaded.
+ * Rebuilds the registry.
+ *
+ * Returns: true on success, otherwise false.
  */
-static VALUE rb_gst_registry_is_loaded(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_rebuild (VALUE self)
 {
-    GstRegistry *reg = RGST_REGISTRY(self);
-    return CBOOL2RVAL(gst_registry_is_loaded(reg));
+	return CBOOL2RVAL (gst_registry_rebuild (RGST_REGISTRY (self)));
 }
 
 /*
- *  Method: load -> aBoolean
+ * Method: unload
  *
- *  Load the registry.  Returns true on success, otherwise false.
+ * Unloads the registry.
+ *
+ * Returns: true on success, otherwise false.
  */
-static VALUE rb_gst_registry_load(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_unload (VALUE self)
 {
-    return CBOOL2RVAL(gst_registry_load(RGST_REGISTRY(self)));
+	return CBOOL2RVAL (gst_registry_unload (RGST_REGISTRY (self)));
 }
 
 /*
- *  Method: save -> aBoolean
+ * Method: paths
  *
- *  Save the contents of the registry.  Returns true on success, 
- *  otherwise false.
+ * Gets a list of paths of the registry.
+ *
+ * Returns: an array of strings.
  */
-static VALUE rb_gst_registry_save(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_get_paths (VALUE self)
 {
-    return CBOOL2RVAL(gst_registry_save(RGST_REGISTRY(self)));
+	GList *list;
+	VALUE arr;
+
+	arr = rb_ary_new ();
+	for (list = gst_registry_get_path_list (RGST_REGISTRY (self));
+	     list != NULL;
+	     list = g_list_next (list))
+		rb_ary_push (arr, CSTR2RVAL ((gchar *) list->data)); 
+	g_list_free (list);
+	return arr;
 }
 
 /*
- *  Method: rebuild -> aBoolean
+ * Method: each_path { |path| ... } 
  *
- *  Rebuild the registry.  Returns true on success, otherwise false.
+ * Calls the block for each path of the registry, passing a reference to
+ * the path (a String object) as parameter.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_registry_rebuild(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_each_path (VALUE self)
 {
-    return CBOOL2RVAL(gst_registry_rebuild(RGST_REGISTRY(self)));
+	return rb_ary_yield (rb_gst_registry_get_paths (self));
 }
 
 /*
- *  Method: unload -> aBoolean
+ * Method: add_path(path)
+ * path: a path (a String object).
  *
- *  Unload the registry.  Returns true on success, otherwise false.
+ * Add the given path to the registry. 
+ * The syntax of the path is specific to the registry. 
+ * If the path has already been added, do nothing.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_registry_unload(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_add_path (VALUE self, VALUE path)
 {
-    return CBOOL2RVAL(gst_registry_unload(RGST_REGISTRY(self)));
+	gst_registry_add_path (RGST_REGISTRY (self), RVAL2CSTR (path));
+	return self;
 }
 
 /*
- *  Method: paths -> anArray
+ * Method: clear_paths
  *
- *  Gets a list of paths of the registry, in an Array of String objects.
+ * Clears the paths of the registry.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_registry_get_paths(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_clear_paths (VALUE self)
 {
-    GstRegistry *reg;
-    GList *list;
-    VALUE arr;
-
-    reg = RGST_REGISTRY(self);
-    arr = rb_ary_new();
-    for (list = gst_registry_get_path_list(reg);
-         list != NULL;
-         list = g_list_next(list))
-    {
-        rb_ary_push(arr, CSTR2RVAL((gchar *) list->data)); 
-    }
-    g_list_free(list);
-    return arr;
+	gst_registry_clear_paths (RGST_REGISTRY (self));
+	return self;
 }
 
 /*
- *  Method: each_path { |aString| block } -> nil
+ * Method: add_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Calls the block for each path of the registry, passing a reference to
- *  the path String as parameter.
+ * Adds a plugin to the registry. The 'plugin-added' signal will be emitted.
  *
- *  Always returns nil.
+ * Returns: true on success, false otherwise.
  */
-static VALUE rb_gst_registry_each_path(self)
-    VALUE self;
+static VALUE
+rb_gst_registry_add_plugin2 (VALUE self, VALUE plugin)
 {
-    return rb_ary_yield(rb_gst_registry_get_paths(self));
+	return CBOOL2RVAL (gst_registry_add_plugin (RGST_REGISTRY (self),
+						    RGST_PLUGIN (plugin)));
 }
 
 /*
- *  Method: add_path(aPath) -> self
+ * Method: remove_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Add the given path (as a String) to the registry. 
- *  The syntax of the path is specific to the registry. 
- *  If the path has already been added, do nothing.
+ * Removes a plugin from the registry.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_registry_add_path(self, path)
-    VALUE self, path;
+static VALUE
+rb_gst_registry_remove_plugin (VALUE self, VALUE plugin)
 {
-    gst_registry_add_path(RGST_REGISTRY(self), RVAL2CSTR(path));
-    return self;
+	gst_registry_remove_plugin (RGST_REGISTRY (self),
+				    RGST_PLUGIN (plugin));
+	return self;
 }
 
 /*
- *  Method: clear_paths -> self
- *
- *  Clear the paths of the registry.
- */
-static VALUE rb_gst_registry_clear_paths(self)
-    VALUE self;
-{
-    gst_registry_clear_paths(RGST_REGISTRY(self));
-    return self;
-}
-
-/*
- *  Method: add_plugin(aPlugin) -> aBoolean
- *
- *  Add a plugin (as a Gst::Plugin reference) to the registry. 
- *  The 'plugin-added' signal will be emitted.
- *
- *  Returns true on success, false otherwise.
- */
-static VALUE rb_gst_registry_add_plugin2(self, plugin)
-    VALUE self, plugin;
-{
-    return CBOOL2RVAL(gst_registry_add_plugin(RGST_REGISTRY(self),
-                                              RGST_PLUGIN(plugin)));
-}
-
-/*
- *  Method: remove_plugin(aPlugin) -> self
- *
- *  Remove a plugin (as a Gst::Plugin reference) from the registry.
- */
-static VALUE rb_gst_registry_remove_plugin(self, plugin)
-    VALUE self, plugin;
-{
-    gst_registry_remove_plugin(RGST_REGISTRY(self),
-                               RGST_PLUGIN(plugin));
-    return self;
-}
-
-/*
- *  Method: find_plugin(aName) -> aPlugin
+ * Method: find_plugin(name)
+ * name: a plugin name.
  *  
- *  Find the plugin with the given name (as a String) in the registry.
- *  Returns a reference to a Gst::Plugin object if found, 
- *  otherwise returns nil.
+ * Finds the plugin with the given name in the registry.
+ *
+ * Returns: a reference to a Gst::Plugin object if found,
+ * otherwise returns nil.
  */
-static VALUE rb_gst_registry_find_plugin2(self, name)
-    VALUE self, name;
+static VALUE
+rb_gst_registry_find_plugin2 (VALUE self, VALUE name)
 {
-    GstPlugin *plugin = gst_registry_find_plugin(RGST_REGISTRY(self),
-                                                 RVAL2CSTR(name));
-    return plugin != NULL
-        ? RGST_PLUGIN_NEW(plugin)
-        : Qnil;
+	GstPlugin *plugin = gst_registry_find_plugin (RGST_REGISTRY (self),
+						      RVAL2CSTR (name));
+	return plugin != NULL
+		? RGST_PLUGIN_NEW (plugin)
+		: Qnil;
 }
 
 /*
- *  Method: load_plugin(aPlugin) -> aRetCode
+ * Method: load_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Bring the plugin (as a Gst::Plugin reference) from the registry into 
- *  memory.
+ * Brings the specified plugin from the registry into memory.
  *
- *  Returns a Fixnum code indicating the result, which may be:
- *      * Gst::Registry::OK;
- *      * Gst::Registry::LOAD_ERROR;
- *      * Gst::Registry::SAVE_ERROR;
- *      * Gst::Registry::PLUGIN_LOAD_ERROR;
- *      * Gst::Registry::PLUGIN_SIGNATURE_ERROR.
+ * Returns: a code indicating the result (see Gst::Registry::Return).
  */
-static VALUE rb_gst_registry_load_plugin(self, plugin)
-    VALUE self, plugin;
+static VALUE
+rb_gst_registry_load_plugin (VALUE self, VALUE plugin)
 {
-    return INT2FIX(gst_registry_load_plugin(RGST_REGISTRY(self),
-                                            RGST_PLUGIN(plugin)));
+	return GENUM2RVAL (gst_registry_load_plugin (RGST_REGISTRY (self),
+						     RGST_PLUGIN (plugin)),
+			   GST_TYPE_REGISTRY_RETURN);
 }
 
 /*
- *  Method: unload_plugin(aPlugin) -> aRetCode
+ * Method: unload_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Unload a plugin (as a Gst::Plugin reference) from the registry.
+ * Unloads a plugin from the registry.
  *
- *  Returns a Fixnum code indicating the result, which may be:
- *      * Gst::Registry::OK;
- *      * Gst::Registry::LOAD_ERROR;
- *      * Gst::Registry::SAVE_ERROR;
- *      * Gst::Registry::PLUGIN_LOAD_ERROR;
- *      * Gst::Registry::PLUGIN_SIGNATURE_ERROR.
+ * Returns: a code indicating the result (see Gst::Registry::Return).
  */
-static VALUE rb_gst_registry_unload_plugin(self, plugin)
-    VALUE self, plugin;
+static VALUE
+rb_gst_registry_unload_plugin (VALUE self, VALUE plugin)
 {
-    return INT2FIX(gst_registry_unload_plugin(RGST_REGISTRY(self),
-                                              RGST_PLUGIN(plugin)));
+	return GENUM2RVAL (gst_registry_unload_plugin (RGST_REGISTRY (self),
+						       RGST_PLUGIN (plugin)),
+			   GST_TYPE_REGISTRY_RETURN);
 }
 
 /*
- *  Method: update_plugin(aPlugin) -> aRetCode
+ * Method: update_plugin(plugin)
+ * plugin: a Gst::Plugin.
  *
- *  Unload a plugin (as a Gst::Plugin reference) in the registry.
+ * Updates a plugin in the registry.
  *
- *  Returns a Fixnum code indicating the result, which may be:
- *      * Gst::Registry::OK;
- *      * Gst::Registry::LOAD_ERROR;
- *      * Gst::Registry::SAVE_ERROR;
- *      * Gst::Registry::PLUGIN_LOAD_ERROR;
- *      * Gst::Registry::PLUGIN_SIGNATURE_ERROR.
+ * Returns: a code indicating the result (see Gst::Registry::Return).
  */
-static VALUE rb_gst_registry_update_plugin(self, plugin)
-    VALUE self, plugin;
+static VALUE
+rb_gst_registry_update_plugin (VALUE self, VALUE plugin)
 {
-    return INT2FIX(gst_registry_update_plugin(RGST_REGISTRY(self),
-                                              RGST_PLUGIN(plugin)));
+	return GENUM2RVAL (gst_registry_update_plugin (RGST_REGISTRY (self),
+						       RGST_PLUGIN (plugin)),
+			   GST_TYPE_REGISTRY_RETURN);
 }
 
 /*
- *  Method: find_feature(aName, aFeatureType) -> aPluginFeature
+ * Method: find_feature(feature_name, feature_type)
+ * feature_name: a feature name.
+ * feature_type: a feature type.
+ * 
+ * Finds the plugin feature with the given name and type in the registry.
  *
- *  Find the plugin feature with the given name and type in the registry,
- *  as a Gst::PluginFeature reference.  Returns nil if the named plugin 
- *  feature is not found.
+ * Valid features types are Gst::AutoplugFactory, Gst::ElementFactory,
+ * Gst::IndexFactory, Gst::SchedulerFactory and Gst::TypeFactory.
  *
- *  Valid class types are:
- *      * Gst::AutoplugFactory;
- *      * Gst::ElementFactory;
- *      * Gst::IndexFactory;
- *      * Gst::SchedulerFactory;
- *	    * Gst::TypeFactory.
+ * Returns: a reference to a Gst::PluginFeature on success, or nil if the
+ * named plugin feature is not found.
  */
-static VALUE rb_gst_registry_find_feature2(self, name, type)
-    VALUE self, name, type;
+static VALUE
+rb_gst_registry_find_feature2 (VALUE self, VALUE name, VALUE type)
 {
-    GstPluginFeature *feature;
-    GType gtype;
-    
-    gtype = CLASS2GTYPE(type);
-    if (!is_valid_pluginfeature_type(gtype)) {
-        rb_raise(rb_eArgError, "Invalid feature type.");
-    }
-    feature = gst_registry_find_feature(RGST_REGISTRY(self),
-                                        RVAL2CSTR(name),
-                                        gtype);
-    return feature != NULL
-        ? instanciate_pluginfeature(feature)
-        : Qnil;
+	GstPluginFeature *feature;
+	GType gtype;
+	
+	gtype = CLASS2GTYPE (type);
+	if (!is_valid_pluginfeature_type (gtype))
+		rb_raise (rb_eArgError, "Invalid feature type.");
+	feature = gst_registry_find_feature (RGST_REGISTRY (self),
+					     RVAL2CSTR (name),
+					     gtype);
+	return feature != NULL
+		? instanciate_pluginfeature (feature)
+		: Qnil;
 }
 
-/*
- *  Constant: READABLE
- *  The registry can be read.
- */
-static VALUE constReadable = INT2FIX(GST_REGISTRY_READABLE);
+void
+Init_gst_registry (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
 
-/*
- *  Constant: WRITABLE
- *  The registry can be written to.
- */
-static VALUE constWritable = INT2FIX(GST_REGISTRY_WRITABLE);
+	rb_define_singleton_method (c, "plugins", rb_gst_registry_get_plugins, 0);
+	rb_define_singleton_method (c, "each_plugin", rb_gst_registry_each_plugin, 0);
+	rb_define_singleton_method (c, "find_plugin", rb_gst_registry_find_plugin, 1);
+	rb_define_singleton_method (c, "add_plugin", rb_gst_registry_add_plugin, 1);
+	rb_define_singleton_method (c, "each", rb_gst_registry_each, 0);
+	rb_define_singleton_method (c, "registries", rb_gst_registry_get_registries, 0);
+	rb_define_singleton_method (c, "add", rb_gst_registry_add_registry, 2);
+	rb_define_singleton_method (c, "remove", rb_gst_registry_remove_registry, 1);
+	rb_define_singleton_method (c, "load_all", rb_gst_registry_load_all, 0);
+	rb_define_singleton_method (c, "get_features", rb_gst_registry_get_features, 1);
+	rb_define_singleton_method (c, "each_feature", rb_gst_registry_each_feature, 1);
+	rb_define_singleton_method (c, "find_feature", rb_gst_registry_find_feature, 2);
+	rb_define_singleton_method (c, "get_prefered", rb_gst_registry_get_prefered, 1);
+	
+	rb_define_method(c, "name", rb_gst_registry_get_name, 0);
+	rb_define_method(c, "details", rb_gst_registry_get_details, 0);
+	rb_define_method(c, "loaded?", rb_gst_registry_is_loaded, 0);
+	rb_define_method(c, "load", rb_gst_registry_load, 0);
+	rb_define_method(c, "save", rb_gst_registry_save, 0);
+	rb_define_method(c, "rebuild", rb_gst_registry_rebuild, 0);
+	rb_define_method(c, "unload", rb_gst_registry_unload, 0);
+	rb_define_method(c, "paths", rb_gst_registry_get_paths, 0);
+	rb_define_method(c, "each_path", rb_gst_registry_each_path, 0);
+	rb_define_method(c, "add_path",	rb_gst_registry_add_path, 1);
+	rb_define_method(c, "clear_paths", rb_gst_registry_clear_paths, 0);
+	rb_define_method(c, "add_plugin", rb_gst_registry_add_plugin2, 1);
+	rb_define_method(c, "remove_plugin", rb_gst_registry_remove_plugin, 1);
+	rb_define_method(c, "find_plugin", rb_gst_registry_find_plugin2, 1);
+	rb_define_method(c, "load_plugin", rb_gst_registry_load_plugin, 1);
+	rb_define_method(c, "unload_plugin", rb_gst_registry_unload_plugin, 1);
+	rb_define_method(c, "update_plugin", rb_gst_registry_update_plugin, 1);
+	rb_define_method(c, "find_feature", rb_gst_registry_find_feature2, 2);
 
-/*
- *  Constant: EXISTS
- *  The registry exists.
- */
-static VALUE constExists = INT2FIX(GST_REGISTRY_EXISTS);
-
-/*
- *  Constant: REMOTE
- *  The registry is remote and might be slower.
- */
-static VALUE constRemote = INT2FIX(GST_REGISTRY_REMOTE);
-
-/*
- *  Constant: DELAYED_LOADING
- *  The registry will be loaded on demand.
- */
-static VALUE constDelayedLoading = INT2FIX(GST_REGISTRY_DELAYED_LOADING);
-
-/*
- *  Constant: OK
- *  The registry reported no error.
- */
-static VALUE constOk = INT2FIX(GST_REGISTRY_OK);
-
-/*
- *  Constant: LOAD_ERROR 
- *  There was a load error.
- */
-static VALUE constLoadError = INT2FIX(GST_REGISTRY_LOAD_ERROR);
-
-/*
- *  Constant: SAVE_ERROR 
- *  There was an error saving the registry.
- */
-static VALUE constSaveError = INT2FIX(GST_REGISTRY_SAVE_ERROR);
-
-/*
- *  Constant: PLUGIN_LOAD_ERROR 
- *  There was an error loading a plugin.
- */
-static VALUE constPluginLoadError = INT2FIX(GST_REGISTRY_PLUGIN_LOAD_ERROR);
-
-/*
- *  Constant: PLUGIN_SIGNATURE_ERROR 
- *  There was an error saving a plugin.
- */
-static VALUE constPluginSignatureError = INT2FIX(GST_REGISTRY_PLUGIN_SIGNATURE_ERROR);
-
-void Init_gst_registry(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_REGISTRY, "Registry", mGst); 
-
-    rb_define_singleton_method(c, "plugins",     rb_gst_registry_get_plugins, 0);
-    rb_define_singleton_method(c, "each_plugin", rb_gst_registry_each_plugin, 0);
-    rb_define_singleton_method(c, "find_plugin", rb_gst_registry_find_plugin, 1);
-    rb_define_singleton_method(c, "add_plugin",  rb_gst_registry_add_plugin,  1);
-    
-    rb_define_singleton_method(c, "each",       rb_gst_registry_each,            0);
-    rb_define_singleton_method(c, "registries", rb_gst_registry_get_registries,  0);
-    rb_define_singleton_method(c, "add",        rb_gst_registry_add_registry,    2);
-    rb_define_singleton_method(c, "remove",     rb_gst_registry_remove_registry, 1);
-    rb_define_singleton_method(c, "load_all",   rb_gst_registry_load_all,        0);
-
-    rb_define_singleton_method(c, "get_features", rb_gst_registry_get_features, 1);
-    rb_define_singleton_method(c, "each_feature", rb_gst_registry_each_feature, 1);
-    rb_define_singleton_method(c, "find_feature", rb_gst_registry_find_feature, 2);
-    rb_define_singleton_method(c, "get_prefered", rb_gst_registry_get_prefered, 1);
-    
-    rb_define_method(c, "name",    rb_gst_registry_get_name,    0);
-    rb_define_method(c, "details", rb_gst_registry_get_details, 0);
-    rb_define_method(c, "loaded?", rb_gst_registry_is_loaded,   0);
-
-    rb_define_method(c, "load",    rb_gst_registry_load,    0);
-    rb_define_method(c, "save",    rb_gst_registry_save,    0);
-    rb_define_method(c, "rebuild", rb_gst_registry_rebuild, 0);
-    rb_define_method(c, "unload",  rb_gst_registry_unload,  0);
-
-    rb_define_method(c, "paths",       rb_gst_registry_get_paths,   0);
-    rb_define_method(c, "each_path",   rb_gst_registry_each_path,   0);
-    rb_define_method(c, "add_path",    rb_gst_registry_add_path,    1);
-    rb_define_method(c, "clear_paths", rb_gst_registry_clear_paths, 0);
-
-    rb_define_method(c, "add_plugin",    rb_gst_registry_add_plugin2,   1);
-    rb_define_method(c, "remove_plugin", rb_gst_registry_remove_plugin, 1);
-    rb_define_method(c, "find_plugin",   rb_gst_registry_find_plugin2,  1);
-    rb_define_method(c, "load_plugin",   rb_gst_registry_load_plugin,   1);
-    rb_define_method(c, "unload_plugin", rb_gst_registry_unload_plugin, 1);
-    rb_define_method(c, "update_plugin", rb_gst_registry_update_plugin, 1);
-
-    rb_define_method(c, "find_feature", rb_gst_registry_find_feature2, 2);
-    
-    rb_define_const(c, "READABLE",        constReadable);
-    rb_define_const(c, "WRITABLE",        constWritable);
-    rb_define_const(c, "EXISTS",          constExists);
-    rb_define_const(c, "REMOTE",          constRemote);
-    rb_define_const(c, "DELAYED_LOADING", constDelayedLoading);
-
-    rb_define_const(c, "OK",                     constOk);
-    rb_define_const(c, "LOAD_ERROR",             constLoadError);
-    rb_define_const(c, "SAVE_ERROR",             constSaveError);
-    rb_define_const(c, "PLUGIN_LOAD_ERROR",      constPluginLoadError);
-    rb_define_const(c, "PLUGIN_SIGNATURE_ERROR", constPluginSignatureError);
+	G_DEF_CLASS (GST_TYPE_REGISTRY_FLAGS, "Flags", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_REGISTRY_FLAGS, "GST_REGISTRY_");
+	G_DEF_CLASS (GST_TYPE_REGISTRY_RETURN, "Return", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_REGISTRY_RETURN, "GST_REGISTRY_");
 }
-

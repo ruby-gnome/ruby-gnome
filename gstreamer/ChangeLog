@@ -1,3 +1,14 @@
+2004-03-02  Laurent Sansonetti  <lrz@gnome.org>
+
+	* extconf.rb: Removed assert.h dependency.
+	* src/*.[ch]:
+	  - Refactored some parts of the code.
+	  - Updated coding style;
+	  - Updated comments for the API reference;
+	  - Uses GLib assertions (g_assert);
+	  - Uses G_DEF_CONSTANTS to define GLib enumerations/flags.
+	* sample/gst-inspect.rb, sample/media-type2.rb: Follows API changes.
+
 2004-02-17  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstbin.c: Added GstBin#[] as a alias for GstBin#get_by_name.

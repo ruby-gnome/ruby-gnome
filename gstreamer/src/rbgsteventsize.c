@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,39 +20,32 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::EventSize < Gst::Event
- *
- *  A size event.
+/* Class: Gst::EventSize
+ * A size event.
  */
 
 /*
- *  Class method: new(format, value) -> anEvent
+ * Class method: new(format, value)
+ * format: a format (see Gst::Format::Type).
+ * value: the event value.
  *
- *  Creates a new size event with the given values.
+ * Creates a new size event with the given values.
  *
- *  Meaningful formats are:
- *      * Gst::Format::DEFAULT;
- *      * Gst::Format::BYTES;
- *      * Gst::Format::TIME;
- *      * Gst::Format::BUFFERS;
- *      * Gst::Format::PERCENT;
- *      * Gst::Format::UNITS.
+ * Returns: a newly created Gst::EventSize object.
  */
-static VALUE rb_gst_eventsize_new(self, format, value)
-    VALUE self, format, value;
+static VALUE
+rb_gst_eventsize_new (VALUE self, VALUE format, VALUE value)
 {
-    GstEvent *event = gst_event_new_size(FIX2INT(format),
-                                         NUM2ULL(value));
-    if (event != NULL) {
-        G_INITIALIZE(self, event);
-    }
-    return Qnil;
+	GstEvent *event = gst_event_new_size (FIX2INT (format),
+					      NUM2ULL (value));
+	if (event != NULL)
+		G_INITIALIZE (self, event);
+	return Qnil;
 }
 
-void Init_gst_eventsize(void) {
-    VALUE c = rb_define_class_under(mGst, "EventSize", 
-                                    GTYPE2CLASS(GST_TYPE_EVENT));
-    rb_define_method(c, "initialize", rb_gst_eventsize_new, 2);
+void
+Init_gst_eventsize (void)
+{
+	VALUE c = rb_define_class_under (mGst, "EventSize", GTYPE2CLASS (GST_TYPE_EVENT));
+	rb_define_method (c, "initialize", rb_gst_eventsize_new, 2);
 }
-

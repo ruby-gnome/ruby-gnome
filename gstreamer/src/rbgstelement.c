@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,901 +20,748 @@
 
 #include "rbgst.h"
 
+/* Class: Gst::Element
+ * Base class for all pipeline elements.
+ */
+
 /*
- *  Class: Gst::Element < Gst::Object
+ * Method: set_state(state)
+ * state: the state you want to set (see Gst::Element::State).
  *
- *  Base class for all pipeline elements.
- */
-
-/*
- *  Constant: STATE_NULL
- *  The state of the element is reseted.
- */
-static VALUE constStateNull = INT2FIX(GST_STATE_NULL);
-
-/*
- *  Constant: STATE_READY
- *  The element is ready to start processing data. 
- *  Some elements might have a non trivial way to initialize themselves.
- */
-static VALUE constStateReady = INT2FIX(GST_STATE_READY);
-
-/*
- *  Constant: STATE_PAUSED
- *  Means there really is data flowing temporary stops the data flow. 
- */
-static VALUE constStatePaused = INT2FIX(GST_STATE_PAUSED);
-
-/*
- *  Constant: STATE_PLAYING
- *  Means there really is data flowing through the graph. 
- */
-static VALUE constStatePlaying = INT2FIX(GST_STATE_PLAYING);
-
-/*
- *  Constant: STATE_FAILURE
- *  The element could not perform the state change.
- */
-static VALUE constStateFailure = INT2FIX(GST_STATE_FAILURE);
-
-/*
- *  Constant: STATE_SUCCESS
- *  The element successfully changed its state.
- */
-static VALUE constStateSuccess = INT2FIX(GST_STATE_SUCCESS);
-
-/*
- *  Constant: STATE_ASYNC
- *  The element will asynchronously change its state as soon as possible.
- */
-static VALUE constStateAsync = INT2FIX(GST_STATE_ASYNC);
-
-/*
- *  Method: set_state(aFixnum) -> aFixnum
+ * Sets the state of the element. 
  *
- *  Sets the state of the element. 
+ * This method will try to set the requested state by going through all 
+ * the intermediary states and calling the class's state change function 
+ * for each.
  *
- *  This function will try to set the requested state by going through all 
- *  the intermediary states and calling the class's state change function 
- *  for each.
- *
- *  Returns a Fixnum code, according to the result of the operation:
- *
- *    * Gst::Element::STATE_FAILURE;
- *    * Gst::Element::STATE_SUCCESS;
- *    * Gst::Element::STATE_ASYNC.
+ * Returns: a code (see Gst::Element::StateReturn).
  */
-static VALUE rb_gst_element_set_state(self, value)
-    VALUE self, value;
+static VALUE
+rb_gst_element_set_state (VALUE self, VALUE value)
 {
-    GstElement *element = RGST_ELEMENT(self);
-    int state = FIX2INT(value);
-    
-    if (state != GST_STATE_NULL && 
-        state != GST_STATE_READY &&
-        state != GST_STATE_PAUSED &&
-        state != GST_STATE_PLAYING)
-    {
-        rb_raise(rb_eArgError, 
-            "Invalid Gst::Element state %d", 
-            state);
-    }
+	const int state = RVAL2GENUM (value, GST_TYPE_ELEMENT_STATE);
+	return GENUM2RVAL (gst_element_set_state (RGST_ELEMENT (self), state),
+			   GST_TYPE_ELEMENT_STATE_RETURN);
+}
+
+/* Method: state
+ * Returns: the state of the element (see Gst::Element::State).
+ */
+static VALUE
+rb_gst_element_get_state (VALUE self)
+{
+	return GENUM2RVAL (gst_element_get_state (RGST_ELEMENT (self)),
+			   GST_TYPE_ELEMENT_STATE);
+}
+
+/*
+ * Method: stop
+ *
+ * This method calls Gst::Element#set_state with Gst::Element::STATE_NULL.
+ *
+ * Returns: a code (see Gst::Element::StateReturn).
+ */
+static VALUE
+rb_gst_element_stop (VALUE self)
+{
+	return GENUM2RVAL (gst_element_set_state (RGST_ELEMENT (self), GST_STATE_NULL),
+			   GST_TYPE_ELEMENT_STATE_RETURN);
+}
+	
+/*
+ * Method: ready
+ *
+ * This method calls Gst::Element#set_state with Gst::Element::STATE_READY.
+ *
+ * Returns: a code (see Gst::Element::StateReturn).
+ */
+static VALUE
+rb_gst_element_ready (VALUE self)
+{
+	return GENUM2RVAL (gst_element_set_state (RGST_ELEMENT (self), GST_STATE_READY),
+			   GST_TYPE_ELEMENT_STATE_RETURN);
+}
+	
+/*
+ * Method: pause
+ *
+ * This method calls Gst::Element#set_state with Gst::Element::STATE_PAUSED.
+ *
+ * Returns: a code (see Gst::Element::StateReturn).
+ */
+static VALUE
+rb_gst_element_pause (VALUE self)
+{
+	return GENUM2RVAL (gst_element_set_state (RGST_ELEMENT (self), GST_STATE_PAUSED),
+			   GST_TYPE_ELEMENT_STATE_RETURN);
+}
+	
+/*
+ * Method: play
+ *
+ * This method calls Gst::Element#set_state with Gst::Element::STATE_PLAYING.
+ *
+ * Returns: a code (see Gst::Element::StateReturn).
+ */
+static VALUE
+rb_gst_element_play (VALUE self)
+{
+	return GENUM2RVAL (gst_element_set_state (RGST_ELEMENT (self), GST_STATE_PLAYING),
+			   GST_TYPE_ELEMENT_STATE_RETURN);
+}
+	
+/* Method: stopped?
+ * Returns: true if the current state is set to Gst::Element::STATE_NULL,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_element_is_stopped (VALUE self)
+{
+	return CBOOL2RVAL (gst_element_get_state (RGST_ELEMENT (self)) == GST_STATE_NULL);
+}
+	
+/* Method: ready?
+ * Returns: true if the current state equals Gst::Element::STATE_READY,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_element_is_ready (VALUE self)
+{
+	return CBOOL2RVAL (gst_element_get_state (RGST_ELEMENT (self)) == GST_STATE_READY);
+}
+	
+/* Method: paused?
+ * Returns: true if the current state equals Gst::Element::STATE_PAUSED,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_element_is_paused (VALUE self)
+{
+	return CBOOL2RVAL (gst_element_get_state (RGST_ELEMENT (self)) == GST_STATE_PAUSED);
+}
+	
+/* Method: playing?
+ * Returns: true if the current state equals Gst::Element::STATE_PLAYING,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_element_is_playing (VALUE self)
+{
+	return CBOOL2RVAL (gst_element_get_state (RGST_ELEMENT (self)) == GST_STATE_PLAYING);
+}
+
+/*
+ * Method: wait_state_change
+ *
+ * Waits and blocks until the element changed its state.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_wait_state_change (VALUE self)
+{
+	gst_element_wait_state_change (RGST_ELEMENT (self));
+	return self;
+}
+
+static int
+check_property (GstElement *element, const gchar *name, GValue *value)
+{
+	GParamSpec *pspec;
+	GObject *object;
+	int type;
+
+	g_assert (element != NULL);
+	g_assert (name != NULL);
+	g_assert (value != NULL);
+
+	object = (GObject *) element;
+
+	pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), 
+					      name);
+	
+	if (pspec == NULL)
+		rb_raise (rb_eArgError, 
+			  "This element has no property named %s", 
+			  name);
+
+	type = G_PARAM_SPEC_VALUE_TYPE (pspec);
+	g_value_init (value, type);
+	return type;
+}
+
+/*
+ * Method: set_property(name, obj)
+ * name: a property name.
+ * obj: an object.
+ *
+ * Sets the value anObject for a named property.
+ *
+ * If the element uses threadsafe properties, the property will 
+ * be put on the async queue.
+ *
+ * Note that properties may be set through accessors methods, 
+ * which are generated on-the-fly according to the Gst::Element type.
+ *
+ * 	e = Gst::ElementFactory.make("filesrc")
+ * 	e.set_property("location", "a_file.ogg")
+ * 	
+ * 	# This does exactly the same
+ * 	e.location = "a_file.ogg"
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_set_property (VALUE self, VALUE name, VALUE value)
+{
+	GstElement *element;
+	GValue gvalue = { 0, };
+	int type;
    
-    return INT2FIX(gst_element_set_state(element, state));
+	element = RGST_ELEMENT(self); 
+
+	type = check_property (element, RVAL2CSTR (name), &gvalue);
+	rbgobj_rvalue_to_gvalue (value, &gvalue);
+	gst_element_set_property (element, RVAL2CSTR (name), &gvalue);
+	return self; 
 }
 
 /*
- *  Method: state -> aFixnum
+ * Method: get_property(name)
+ * name: a property name.
  *
- *  Gets the state of the element:
+ * Returns the value associated with the named property,
+ * or nil if the property has no value.
  *
- *    * Gst::Element::STATE_NULL;
- *    * Gst::Element::STATE_READY;
- *    * Gst::Element::STATE_PAUSED;
- *    * Gst::Element::STATE_PLAYING.
- */
-static VALUE rb_gst_element_get_state(self)
-    VALUE self;
-{
-    GstElement *element = RGST_ELEMENT(self);
-    switch (gst_element_get_state(element)) {
-        case GST_STATE_NULL:    return constStateNull;
-        case GST_STATE_READY:   return constStateReady;
-        case GST_STATE_PAUSED:  return constStatePaused;
-        case GST_STATE_PLAYING: return constStatePlaying;
-        default:                assert(0);  /* should not be here */
-    }
-    return Qnil;
-}
-
-/*
- *  Method: stop -> aFixnum
+ * Note that properties may be read through accessors methods, 
+ * which are generated on-the-fly according to the Gst::Element type.
  *
- *  Synonym for Gst::Element#set_state with Gst::Element::STATE_NULL.
- */
-static VALUE rb_gst_element_stop(self)
-    VALUE self;
-{
-    return rb_gst_element_set_state(self, constStateNull);
-}
-    
-/*
- *  Method: ready -> aFixnum
+ *	e = Gst::ElementFactory.make("filesrc")
+ * 	# ...
+ *	
+ * 	puts "Location is " + e.get_property("location")
+ *	# This does exactly the same
+ *	puts "Location is " + e.location
  *
- *  Synonym for Gst::Element#set_state with Gst::Element::STATE_READY.
- */
-static VALUE rb_gst_element_ready(self)
-    VALUE self;
-{
-    return rb_gst_element_set_state(self, constStateReady);
-}
-    
-/*
- *  Method: pause -> aFixnum
- *
- *  Synonym for Gst::Element#set_state with Gst::Element::STATE_PAUSED.
- */
-static VALUE rb_gst_element_pause(self)
-    VALUE self;
-{
-    return rb_gst_element_set_state(self, constStatePaused);
-}
-    
-/*
- *  Method: play -> aFixnum
- *
- *  Synonym for Gst::Element#set_state with Gst::Element::STATE_PLAYING.
- */
-static VALUE rb_gst_element_play (self)
-    VALUE self;
-{
-    return rb_gst_element_set_state(self, constStatePlaying);
-}
-    
-/*
- *  Method: stopped? -> aBoolean
- *
- *  Checks if the current state equals Gst::Element::STATE_NULL.
- */
-static VALUE rb_gst_element_is_stopped(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(rb_gst_element_get_state(self) == constStateNull);
-}
-    
-/*
- *  Method: ready? -> aBoolean
- *
- *  Checks if the current state equals Gst::Element::STATE_READY.
- */
-static VALUE rb_gst_element_is_ready(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(rb_gst_element_get_state(self) == constStateReady);
-}
-    
-/*
- *  Method: paused? -> aBoolean
- *
- *  Checks if the current state equals Gst::Element::STATE_PAUSED.
- */
-static VALUE rb_gst_element_is_paused(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(rb_gst_element_get_state(self) == constStatePaused);
-}
-    
-/*
- *  Method: playing? -> aBoolean
- *
- *  Checks if the current state equals Gst::Element::STATE_PLAYING.
- */
-static VALUE rb_gst_element_is_playing(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(rb_gst_element_get_state(self) == constStatePlaying);
-}
-/*
- *  Method: wait_state_change -> self
- *
- *  Waits and blocks until the element changed its state.
- */
-static VALUE rb_gst_element_wait_state_change(self)
-    VALUE self;
-{
-    GstElement *element = RGST_ELEMENT(self);
-    gst_element_wait_state_change(element);
-    return self;
-}
-
-static int check_property(element, name, value)
-    GstElement *element;
-    const gchar *name;
-    GValue *value; 
-{
-    GParamSpec *pspec;
-    GObject *object;
-    int type;
-
-    assert(element != NULL);
-    assert(name    != NULL);
-    assert(value   != NULL);
-
-    object = (GObject *) element;
-
-    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(object), 
-        name);
-    
-    if (pspec == NULL) {
-        rb_raise(rb_eArgError, 
-                 "This element has no property named %s", 
-                 name);
-    }
-
-    type = G_PARAM_SPEC_VALUE_TYPE(pspec);
-    g_value_init(value, type);
-    return type;
-}
-
-/*
- *  Method: set_property(aString, anObject) -> self
- *
- *  Sets the value anObject for the property named aString.
- *
- *  If the element uses threadsafe properties, the property will 
- *  be put on the async queue.
- *
- *  Note that properties may be set through accessors methods, 
- *  which are generated on-the-fly according to the Gst::Element type.
- *
- *  Example:
- *
- *      e = Gst::ElementFactory.make("filesrc")
- *      e.set_property("location", "a_file.ogg")
- *      # This does exactly the same
- *      e.location = "a_file.ogg"
- */
-static VALUE rb_gst_element_set_property(self, name, value)
-    VALUE self, name, value;
-{
-    GstElement *element;
-    GValue gvalue = { 0, };
-    const gchar *gname;
-    int type;
-   
-    gname   = RVAL2CSTR(name);
-    element = RGST_ELEMENT(self); 
-
-    type = check_property(element, gname, &gvalue);
-    rbgobj_rvalue_to_gvalue(value, &gvalue);
-    gst_element_set_property(element, RVAL2CSTR(name), &gvalue);
-    return self; 
-}
-
-/*
- *  Method: get_property(aString) -> anObject
- *
- *  Returns the value associated with the property named 
- *  aString, or nil if the property has no value.
- *
- *  Note that properties may be read through accessors methods, 
- *  which are generated on-the-fly according to the Gst::Element type.
- *
- *  Example:
- *
- *      e = Gst::ElementFactory.make("filesrc")
- *      # ...
- *      puts "Location is " + e.get_property("location")
- *      # This does exactly the same
- *      puts "Location is " + e.location
+ * Returns: the object associated with the named property.
  */ 
-static VALUE rb_gst_element_get_property(self, name)
-    VALUE self, name;
+static VALUE
+rb_gst_element_get_property (VALUE self, VALUE name)
 {
-    GstElement *element;
-    GValue gvalue = { 0, };
-    const gchar *gname;
-    
-    element = RGST_ELEMENT(self);    
-    gname   = RVAL2CSTR(name);
+	GstElement *element;
+	GValue gvalue = { 0, };
+	const gchar *gname;
+	
+	element = RGST_ELEMENT (self);	
+	gname   = RVAL2CSTR (name);
 
-    check_property(element, gname, &gvalue);
-    gst_element_get_property(element, RVAL2CSTR(name), &gvalue);
-    return GVAL2RVAL(&gvalue); 
+	check_property (element, gname, &gvalue);
+	gst_element_get_property (element, RVAL2CSTR (name), &gvalue);
+	/* FIXME: returns nil if property doesn't exist yet */
+	return GVAL2RVAL (&gvalue); 
 }
 
 /*
- *  Method: each_property { |aStringName, aStringDescr, anObject| block } -> nil
+ * Method: each_property { |name, descr, obj| ... }
  *
- *  Calls the block for each property of the element, passing
- *  name (aString), description (aStringDescr) and value (anObject) of the property 
- *  as parameters.
+ * Calls the block for each property of the element, passing
+ * name, description and value of the property as parameters.
  *
- *  Always returns nil.
+ * Returns: always nil. 
  */
-static VALUE rb_gst_element_each_property(self)
-    VALUE self;
+static VALUE
+rb_gst_element_each_property (VALUE self)
 {
-    GParamSpec **pspec;
-    GObject *object;
-    guint count;
-    int i;
+	GParamSpec **pspec;
+	GObject *object;
+	guint count;
+	int i;
 
-    if (rb_block_given_p() == Qfalse) {
-        rb_raise(rb_eArgError, "No block given");
-    }
+	if (rb_block_given_p () == Qfalse)
+		rb_raise (rb_eArgError, "No block given");
 
-    object = (GObject *) RGST_ELEMENT(self); 
-    pspec  = g_object_class_list_properties(G_OBJECT_GET_CLASS(object), 
-        &count);
-    
-    for (i = 0; i < count; i++) {
-        VALUE name, descr, val, arr;
+	object = (GObject *) RGST_ELEMENT(self); 
+	pspec = g_object_class_list_properties (G_OBJECT_GET_CLASS (object), 
+						&count);
+	
+	for (i = 0; i < count; i++) {
+		VALUE name, descr, val, arr;
 
-        name  = CSTR2RVAL(g_param_spec_get_name(pspec[i]));
-        descr = CSTR2RVAL(g_param_spec_get_blurb(pspec[i]));
-        val   = rb_gst_element_get_property(self, name);
+		name = CSTR2RVAL (g_param_spec_get_name (pspec[i]));
+		descr = CSTR2RVAL (g_param_spec_get_blurb (pspec[i]));
+		val = rb_gst_element_get_property (self, name);
 
-        arr = rb_ary_new();
-        rb_ary_push(arr, name);
-        rb_ary_push(arr, descr);
-        rb_ary_push(arr, val);
-        rb_yield(arr);
-    }
-    return Qnil; 
+		arr = rb_ary_new ();
+		rb_ary_push (arr, name);
+		rb_ary_push (arr, descr);
+		rb_ary_push (arr, val);
+		rb_yield (arr);
+	}
+	return Qnil; 
 }
 
 /*
- *  Method: eos -> self
+ * Method: eos
  *
- *  Perform the actions needed to bring the element in the EOS 
- *  (end of stream) state. 
+ * Performs the actions needed to bring the element in the EOS 
+ * (end of stream) state. 
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_element_set_eos(self)
-    VALUE self;
+static VALUE
+rb_gst_element_set_eos (VALUE self)
 {
-    gst_element_set_eos(RGST_ELEMENT(self));
-    return self;
+	gst_element_set_eos (RGST_ELEMENT (self));
+	return self;
 }
 
 /*
- *  Method: sched_yield -> self
+ * Method: sched_yield
  *
- *  Requests a yield operation for the element. The scheduler 
- *  will typically give control to another element.
+ * Requests a yield operation for the element. The scheduler 
+ * will typically give control to another element.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_element_sched_yield(self)
-    VALUE self;
+static VALUE
+rb_gst_element_sched_yield (VALUE self)
 {
-    GstElement *element = RGST_ELEMENT(self);
-    gst_element_yield(element);
-    return self;
+	gst_element_yield (RGST_ELEMENT (self));
+	return self;
 }
 
 /*
- *  Method: sched_interrupt -> self
+ * Method: sched_interrupt
  *
- *  Requests the scheduler of this element to interrupt the 
- *  execution of this element and scheduler another one.
+ * Requests the scheduler of this element to interrupt the 
+ * execution of this element and scheduler another one.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_element_sched_interrupt(self)
-    VALUE self;
+static VALUE
+rb_gst_element_sched_interrupt (VALUE self)
 {
-    GstElement *element = RGST_ELEMENT(self);
-    gst_element_interrupt(element);
-    return self;
+	gst_element_interrupt (RGST_ELEMENT (self));
+	return self;
 }
 
 /*
- *  Method: link(anElement) -> anElement
+ * Method: link(element)
+ * element: a Gst::Element object.
  *
- *  Links this element (source) to anElement (destination). 
+ * Links this element (source) to the provided element (destination). 
  *
- *  The functions looks for existing pads and request pads that 
- *  aren't linked yet. If multiple links are possible, only one 
- *  is established.
+ * The method looks for existing pads and request pads that 
+ * aren't linked yet. If multiple links are possible, only one 
+ * is established.
  *
- *  Returns the destination element (anElement).
+ * Returns: the destination element, or nil if the link failed.
  */
-static VALUE rb_gst_element_link(self, other_element)
-    VALUE self, other_element;
+static VALUE
+rb_gst_element_link (VALUE self, VALUE other_element)
 {
-    GstElement *element1, *element2;
+	GstElement *element1, *element2;
 
-    element1 = RGST_ELEMENT(self);
-    element2 = RGST_ELEMENT(other_element);
-    return gst_element_link(element1, element2) == TRUE 
-        ? other_element 
-        : Qnil;
+	element1 = RGST_ELEMENT (self);
+	element2 = RGST_ELEMENT (other_element);
+	return gst_element_link (element1, element2) == TRUE 
+		? other_element 
+		: Qnil;
 }
 
-/*
- *  Method: requires_clock? -> aBoolean
- *
- *  Checks if the element requires a clock.
+/* Method: requires_clock?
+ * Returns: true if the element requires a clock, false otherwise.
  */
-static VALUE rb_gst_element_requires_clock(self)
-    VALUE self;
+static VALUE
+rb_gst_element_requires_clock (VALUE self)
 {
-    GstElement *element = RGST_ELEMENT(self);
-    return CBOOL2RVAL(gst_element_requires_clock(element));
+	return CBOOL2RVAL (gst_element_requires_clock (RGST_ELEMENT (self)));
 }
 
-/*
- *  Method: provides_clock? -> aBoolean
- *
- *  Checks if the element provides a clock.
+/* Method: provides_clock?
+ * Returns: true if the element provides a clock, false otherwise.
  */
-static VALUE rb_gst_element_provides_clock(self)
-    VALUE self;
+static VALUE
+rb_gst_element_provides_clock (VALUE self)
 {
-    GstElement *element = RGST_ELEMENT(self);
-    return CBOOL2RVAL(gst_element_provides_clock(element));
+	return CBOOL2RVAL (gst_element_provides_clock (RGST_ELEMENT (self)));
 }
 
-/*
- *  Method: clock -> aClockObject
- *
- *  Gets the clock of the element, as a Gst::Clock object.
- *  Returns nil if this element does not provide a clock.
+/* Method: clock
+ * Returns: the clock of the element (as a Gst::Clock object), or nil
+ * if this element does not provide a clock.
  */
-static VALUE rb_gst_element_get_clock(self)
-    VALUE self;
+static VALUE
+rb_gst_element_get_clock (VALUE self)
 {
-    GstElement *element;
-    GstClock *clock;
+	GstClock *clock;
 
-    element = RGST_ELEMENT(self);
-    clock   = gst_element_get_clock(element);
-    return clock != NULL
-        ? RGST_CLOCK_NEW(clock)
-        : Qnil;
+	clock = gst_element_get_clock (RGST_ELEMENT (self));
+	return clock != NULL
+		? RGST_CLOCK_NEW (clock)
+		: Qnil;
 }
 
 /*
- *  Method: pads -> anArray
+ * Method: pads
  *
- *  Gets a list of the pads associated with the element, in an array
- *  of Gst::Pad objects.
+ * Gets a list of the pads associated with the element, in an array
+ * of Gst::Pad objects.
+ *
+ * Returns: an Array of Gst::Pad objects.
  */
-static VALUE rb_gst_element_get_pads(self)
-    VALUE self;
+static VALUE
+rb_gst_element_get_pads (VALUE self)
 {
-    GstElement *element;
-    const GList *list;
-    VALUE arr;
+	const GList *list;
+	VALUE arr;
 
-    element = RGST_ELEMENT(self);
-    arr     = rb_ary_new();
+	arr = rb_ary_new ();
 
-    for (list  = gst_element_get_pad_list(element); 
-         list != NULL; 
-         list  = g_list_next(list))
-    {
-        GstPad *pad = GST_PAD(list->data);
-        /*
-         *  Increment the ref count of the Pad, since it was not
-         *  created with gst_pad_new(), and it will be unref() from
-         *  the GC.  
-         */
-        gst_object_ref(GST_OBJECT(pad));
-        rb_ary_push(arr, RGST_PAD_NEW(pad));
-    }
-    return arr; 
+	for (list = gst_element_get_pad_list (RGST_ELEMENT (self)); 
+	     list != NULL; 
+	     list  = g_list_next (list)) {
+		GstPad *pad = GST_PAD (list->data);
+		/*
+		 *  Increment the ref count of the Pad, since it was not
+		 *  created with gst_pad_new(), and it will be unref() from
+		 *  the GC.  
+		 */
+		gst_object_ref (GST_OBJECT (pad));
+		rb_ary_push (arr, RGST_PAD_NEW (pad));
+	}
+	return arr; 
 }
 
 /*
- *  Method: each_pad { |aGstPad| block } -> nil
+ * Method: each_pad { |pad| ... }
  *
- *  Calls the block for each pad associated with the element, passing a 
- *  reference to the Gst::Pad as parameter.
+ * Calls the block for each pad associated with the element, passing a 
+ * reference to the Gst::Pad as parameter.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-static VALUE rb_gst_element_each_pad(self)
-    VALUE self;
+static VALUE
+rb_gst_element_each_pad (VALUE self)
 {
-    return rb_ary_yield(rb_gst_element_get_pads(self));
+	return rb_ary_yield (rb_gst_element_get_pads (self));
 }
 
 /*
- *  Method: get_pad(aNameString) -> aPad
+ * Method: get_pad(name)
+ * name: the name of a pad.
  *
- *  Retrieves a Gst::Pad object from the element by name.
- *  Returns nil if the pad cannot be found.
+ * Retrieves a Gst::Pad object from the element by name.
+ *
+ * Returns: a Gst::Pad object, or nil if the pad cannot be found.
  */
-static VALUE rb_gst_element_get_pad(self, pad_name)
-    VALUE self, pad_name;
+static VALUE
+rb_gst_element_get_pad (VALUE self, VALUE pad_name)
 {
-    GstElement *element;
-    GstPad *pad;
-    
-    element = RGST_ELEMENT(self);
-    pad = gst_element_get_pad(element, RVAL2CSTR(pad_name));
-    return pad != NULL 
-        ? RGST_PAD_NEW(pad)
-        : Qnil;
+	GstPad *pad = gst_element_get_pad (RGST_ELEMENT (self),
+					   RVAL2CSTR (pad_name));
+	return pad != NULL 
+		? RGST_PAD_NEW (pad)
+		: Qnil;
 }
 
 /*
- *  Method: link_pads(other_element) -> aBoolean
+ * Method: link_pads(element)
+ * element: a Gst::Element.
  *
- *  Links the "src" named pad of the current element to the
- *  "sink" named pad of the destination element, returning
- *  true on success.
+ * Links the "src" named pad of the current element to the
+ * "sink" named pad of the destination element, returning
+ * true on success.
  *
- *  If you want to link specific named pads, you should use
- *  the Gst::Pad#link method directly.
+ * If you want to link specific named pads, you should use
+ * the Gst::Pad#link method directly:
  *
- *  Example:
+ *	element1.link_pads(element2)
+ *	
+ * 	# This does the same
+ *	element1.get_pad("src").link(element2.get_pad("sink"))
  *
- *      element1.link_pads(element2)
- *      # This does the same
- *      element1.get_pad("src").link(element2.get_pad("sink"))
+ * Returns: true on success, false on failure.
  */
-static VALUE rb_gst_element_link_pads(self, other_element)
-    VALUE self, other_element;
+static VALUE
+rb_gst_element_link_pads (VALUE self, VALUE other_element)
 {
-    return CBOOL2RVAL(gst_element_link_pads(RGST_ELEMENT(self),
-                                         "src",
-                                         RGST_ELEMENT(other_element),
-                                         "sink"));
+	return CBOOL2RVAL (gst_element_link_pads (RGST_ELEMENT (self),
+						  "src",
+						  RGST_ELEMENT (other_element),
+						  "sink"));
 }
 
 /*
- *  Method: unlink_pads(other_element) -> self
+ * Method: unlink_pads(element)
+ * element: a Gst::Element.
  *
- *  Unlinks the "src" named pad of the current element from the
- *  "sink" named pad of the destination element.
+ * Unlinks the "src" named pad of the current element from the
+ * "sink" named pad of the destination element.
  *
- *  If you want to unlink specific named pads, you should use
- *  the Gst::Pad#unlink method directly.
+ * If you want to unlink specific named pads, you should use
+ * the Gst::Pad#unlink method directly:
  *
- *  Example:
+ * 	element1.unlink_pads(element2)
+ *	
+ *	# This does the same
+ *	element1.get_pad("src").unlink(element2.get_pad("sink"))
  *
- *      element1.unlink_pads(element2)
- *      # This does the same
- *      element1.get_pad("src").unlink(element2.get_pad("sink"))
+ * Returns: self.
  */
 static VALUE rb_gst_element_unlink_pads(self, other_element)
-    VALUE self, other_element;
+	VALUE self, other_element;
 {
-    gst_element_unlink_pads(RGST_ELEMENT(self),
-                            "src",
-                            RGST_ELEMENT(other_element),
-                            "sink");
-    return self;
+	gst_element_unlink_pads (RGST_ELEMENT (self),
+				 "src",
+				 RGST_ELEMENT (other_element),
+				 "sink");
+	return self;
 }
 
 /*
- *  Method: add_ghost_pad(aPad, aPadNameString=nil) -> aPad
+ * Method: add_ghost_pad(pad, pad_name=nil)
+ * pad: a Gst::Pad.
+ * pad_name: a name which will be attributed to the ghost pad.
  *
- *  Creates a ghost pad from the given pad, and adds it to the list of
- *  pads of the element.
+ * Creates a ghost pad from the given pad, and adds it to the list of
+ * pads of the element.
  *
- *  The second parameter defines the ghost pad name.  
- *  When ommited (or nil),  the ghost pad will receive the same name as
- *  the given pad.
+ * The second parameter defines the ghost pad name.  
+ * When ommited (or nil), the ghost pad will receive the same name as
+ * the given pad.
  *
- *  Returns the ghost pad which was created, or nil.
+ * Returns: the ghost pad which was created, or nil.
  */
-static VALUE rb_gst_element_add_ghost_pad(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_element_add_ghost_pad (int argc, VALUE *argv, VALUE self)
 {
-    GstPad *pad, *newpad;
-    VALUE rpad, rname;
-    const gchar *name;
+	GstPad *pad, *newpad;
+	VALUE rpad, rname;
+	const gchar *name;
 
-    rb_scan_args(argc, argv, "11", &rpad, &rname);
-    
-    pad = RGST_PAD(rpad);
-    name = (rname != Qnil) ? RVAL2CSTR(rname) : gst_pad_get_name(pad);
-    newpad = gst_element_add_ghost_pad(RGST_ELEMENT(self),
-                                       pad, name);
-    return newpad != NULL
-        ? RGST_PAD_NEW(newpad)
-        : Qnil;
+	rb_scan_args (argc, argv, "11", &rpad, &rname);
+	
+	pad = RGST_PAD (rpad);
+	name = (NIL_P (rname)) ? gst_pad_get_name (pad) : RVAL2CSTR (rname);
+	newpad = gst_element_add_ghost_pad (RGST_ELEMENT (self), pad, name);
+	return newpad != NULL
+		? RGST_PAD_NEW (newpad)
+		: Qnil;
+}
+
+/* Method: indexable?
+ * Returns: true if the element can be indexed, false otherwise.
+ */
+static VALUE
+rb_gst_element_is_indexable (VALUE self)
+{
+	return CBOOL2RVAL (gst_element_is_indexable (RGST_ELEMENT (self)));
 }
 
 /*
- *  Constant: FLAG_COMPLEX
- *  This element is complex (for some def.) and generally requires a cothread.
- */
-static VALUE constFlagComplex = INT2FIX(GST_ELEMENT_COMPLEX);
-
-/*
- *  Constant: FLAG_DECOUPLED 
- *  Input and output pads aren't directly coupled to each other 
- *  (examples: queues, multi-output async readers, etc...).
- */
-static VALUE constFlagDecoupled = INT2FIX(GST_ELEMENT_DECOUPLED);
-
-/*
- *  Constant: FLAG_THREAD_SUGGESTED
- *  This element should be placed in a thread if at all possible.
- */
-static VALUE constFlagThreadSuggested = INT2FIX(GST_ELEMENT_THREAD_SUGGESTED);
-
-/*
- *  Constant: FLAG_INFINITE_LOOP 
- *  This element, for some reason, has a loop function that performs
- *  an infinite loop without calls to Gst::Element#sched_yield.
- */
-static VALUE constFlagInfiniteLoop = INT2FIX(GST_ELEMENT_INFINITE_LOOP);
-
-/*
- *  Constant: FLAG_NEW_LOOPFUNC 
- *  There is a new lookfunction ready for placement.
- */
-static VALUE constFlagNewLoopfunc = INT2FIX(GST_ELEMENT_NEW_LOOPFUNC);
-
-/*
- *  Constant: FLAG_EVENT_AWARE 
- *  The element can handle events.
- */
-static VALUE constFlagEventAware = INT2FIX(GST_ELEMENT_EVENT_AWARE);
-
-/*
- *  Constant: FLAG_USE_THREADSAFE_PROPERTIES
- *  Uses threadsafe property acessors (get/set). 
- */
-static VALUE constFlagThreadsafeProperties = INT2FIX(GST_ELEMENT_USE_THREADSAFE_PROPERTIES);
-
-/*
- *  Method: complex? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_COMPLEX flag is set on the object.
- */
-static VALUE rb_gst_element_is_complex(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagComplex);
-}
-
-/*
- *  Method: decoupled? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_DECOUPLED flag is set on the object.
- */
-static VALUE rb_gst_element_is_decoupled(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagDecoupled);
-}
-
-/*
- *  Method: thread_suggested? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_THREAD_SUGGESTED flag is set on the 
- *  object.
- */
-static VALUE rb_gst_element_is_thread_suggested(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagThreadSuggested);
-}
-
-/*
- *  Method: has_infinite_loop? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_INFINITE_LOOP flag is set on the object.
- */
-static VALUE rb_gst_element_has_infinite_loop(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagInfiniteLoop);
-}
-
-/*
- *  Method: has_new_loopfunc? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_NEW_LOOPFUNC flag is set on the object.
- */
-static VALUE rb_gst_element_has_new_loopfunc(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagNewLoopfunc);
-}
-
-/*
- *  Method: event_aware? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_EVENT_AWARE flag is set on the object.
- */
-static VALUE rb_gst_element_is_event_aware(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagEventAware);
-}
-
-/*
- *  Method: use_threadsafe_properties? -> aBoolean 
- *  Checks if the Gst::Element::FLAG_USE_THREADSAFE_PROPERTIES flag 
- *  is set on the object.
- */
-static VALUE rb_gst_element_use_threadsafe_properties(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, 
-                      constFlagThreadsafeProperties);
-}
-
-/*
- *  Method: indexable? -> aBoolean
- *  Checks if the element can be indexed.
- */
-static VALUE rb_gst_element_is_indexable(self)
-    VALUE self;
-{
-    GstElement *element = RGST_ELEMENT(self);
-    return CBOOL2RVAL(gst_element_is_indexable(element));
-}
-
-/*
- *  Method: query(aQueryType, aFormat = Gst::Format::DEFAULT) -> aFixnum
+ * Method: query(query_type, format=Gst::Format::DEFAULT)
+ * query_type: a query type (see Gst::QueryType::Types).
+ * format: a format (see Gst::Format::Types).
  *
- *  Performs a query on the element.
+ * Performs a query on the element.
  *
- *  Meaningful query types are:
- *      * Gst::QueryType::TOTAL;
- *      * Gst::QueryType::POSITION;
- *      * Gst::QueryType::LATENCY;
- *      * Gst::QueryType::JITTER;
- *      * Gst::QueryType::START;
- *      * Gst::QueryType::SEGMENT_END;
- *      * Gst::QueryType::RATE.
- *
- *  Meaningful formats are:
- *      * Gst::Format::DEFAULT;
- *      * Gst::Format::BYTES;
- *      * Gst::Format::TIME;
- *      * Gst::Format::BUFFERS;
- *      * Gst::Format::PERCENT;
- *      * Gst::Format::UNITS.
- *
- *  Returns a Fixnum value, or nil if the query could not be performed.
+ * Returns: a Fixnum value returned by the query, or nil if the query
+ * could not be performed.
  */
-static VALUE rb_gst_element_query(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_element_query (int argc, VALUE *argv, VALUE self)
 {
-    VALUE query_type, format;
-    GstFormat gstformat;
-    gint64 value;
+	VALUE query_type, format;
+	GstFormat gstformat;
+	gint64 value;
 
-    rb_scan_args(argc, argv, "11", &query_type, &format);
-    gstformat = NIL_P(format) ? GST_FORMAT_DEFAULT : FIX2INT(format);
-    
-    if (gst_element_query(RGST_ELEMENT(self), FIX2INT(query_type),
-                          &gstformat, &value))
-    {
-        format = INT2FIX(gstformat);        
-        return ULL2NUM(value);
-    }
-    return Qnil;
+	rb_scan_args (argc, argv, "11", &query_type, &format);
+	gstformat = NIL_P (format) ? GST_FORMAT_DEFAULT : FIX2INT (format);
+	
+	if (gst_element_query (RGST_ELEMENT (self),
+			       FIX2INT (query_type),
+			       &gstformat, &value)) {
+		format = INT2FIX (gstformat);		
+		return ULL2NUM (value);
+	}
+	return Qnil;
 }
 
 /*
- *  Method: send_event(anEvent) -> aBoolean
+ * Method: send_event(event)
+ * event: a Gst::Event object.
  *
- *  Sends an event to an element, through a Gst::Event object. 
- *  If the element doesn't implement an event handler, the event will be 
- *  forwarded to a random sink pad.
+ * Sends an event to an element, through a Gst::Event object. 
+ * If the element doesn't implement an event handler, the event will be 
+ * forwarded to a random sink pad.
  *
- *  Returns true if the request event was successfully handled, false
- *  otherwise.
+ * Returns: true if the request event was successfully handled, false
+ * otherwise.
  */
-static VALUE rb_gst_element_send_event(self, event)
-    VALUE self, event;
+static VALUE
+rb_gst_element_send_event (VALUE self, VALUE event)
 {
-    return CBOOL2RVAL(gst_element_send_event(RGST_ELEMENT(self),
-                                             RGST_EVENT(event)));
+	return CBOOL2RVAL (gst_element_send_event (RGST_ELEMENT (self),
+						   RGST_EVENT (event)));
 }
 
 /*
- *  Creates the Gst::Element class.
+ * Method: complex?
+ *
+ * Checks if the Gst::Element::COMPLEX flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
  */
-void Init_gst_element(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst); 
-
-    /*
-     *  States
-     */
-   
-    rb_define_method(c, "set_state", rb_gst_element_set_state, 1);
-    rb_define_method(c, "state",     rb_gst_element_get_state, 0);
-    rb_define_alias(c, "state=", "set_state");
-    
-    rb_define_method(c, "stop",  rb_gst_element_stop,  0);
-    rb_define_method(c, "ready", rb_gst_element_ready, 0);
-    rb_define_method(c, "pause", rb_gst_element_pause, 0);
-    rb_define_method(c, "play",  rb_gst_element_play,  0);
-
-    rb_define_method(c, "stopped?", rb_gst_element_is_stopped, 0);
-    rb_define_method(c, "ready?",   rb_gst_element_is_ready,   0);
-    rb_define_method(c, "paused?",  rb_gst_element_is_paused,  0);
-    rb_define_method(c, "playing?", rb_gst_element_is_playing, 0);
-    
-    rb_define_method(c, "wait_state_change", 
-                     rb_gst_element_wait_state_change, 0);
-    
-    rb_define_const(c, "STATE_NULL",    constStateNull);
-    rb_define_const(c, "STATE_READY",   constStateReady);
-    rb_define_const(c, "STATE_PAUSED",  constStatePaused);
-    rb_define_const(c, "STATE_PLAYING", constStatePlaying);
-    rb_define_const(c, "STATE_FAILURE", constStateFailure);
-    rb_define_const(c, "STATE_SUCCESS", constStateSuccess);
-    rb_define_const(c, "STATE_ASYNC",   constStateAsync);
-
-    rb_define_method(c, "eos", rb_gst_element_set_eos, 0);
-
-    /*
-     *  Properties
-     */
-
-    rb_define_method(c, "set_property",  rb_gst_element_set_property,  2);
-    rb_define_method(c, "get_property",  rb_gst_element_get_property,  1);
-    rb_define_method(c, "each_property", rb_gst_element_each_property, 0);
-
-    /*
-     *  Scheduler
-     */
-
-    rb_define_method(c, "sched_yield",     rb_gst_element_sched_yield,     0);
-    rb_define_method(c, "sched_interrupt", rb_gst_element_sched_interrupt, 0);
-
-    /*
-     *  Links
-     */
-
-    rb_define_method(c, "link", rb_gst_element_link, 1);
-    rb_define_alias(c, ">>", "link");
-
-    /*
-     *  Clock interaction
-     */
-
-    rb_define_method(c, "provides_clock?", rb_gst_element_provides_clock, 0);
-    rb_define_method(c, "requires_clock?", rb_gst_element_requires_clock, 0);
-    rb_define_method(c, "clock", rb_gst_element_get_clock, 0);
-
-    /*
-     *  Pads
-     */
-
-    rb_define_method(c, "each_pad", rb_gst_element_each_pad, 0);
-    rb_define_method(c, "pads",     rb_gst_element_get_pads, 0);
-
-    rb_define_method(c, "get_pad", rb_gst_element_get_pad, 1);
-
-    rb_define_method(c, "link_pads",   rb_gst_element_link_pads,   1);
-    rb_define_method(c, "unlink_pads", rb_gst_element_unlink_pads, 1);
-
-    rb_define_method(c, "add_ghost_pad", rb_gst_element_add_ghost_pad, -1);
-
-    /*
-     *  Flags
-     */
-
-    rb_define_method(c, "complex?",   rb_gst_element_is_complex, 0);
-    rb_define_method(c, "decoupled?", rb_gst_element_is_decoupled, 0);
-    rb_define_method(c, "thread_suggested?",  
-                     rb_gst_element_is_thread_suggested, 0);
-    rb_define_method(c, "has_infinite_loop?", 
-                     rb_gst_element_has_infinite_loop, 0);
-    rb_define_method(c, "has_new_loopfunc?",  
-                     rb_gst_element_has_new_loopfunc, 0);
-    rb_define_method(c, "event_aware?", 
-                     rb_gst_element_is_event_aware, 0);
-    rb_define_method(c, "use_threadsafe_properties?", 
-                     rb_gst_element_use_threadsafe_properties, 0);
-
-    rb_define_const(c, "FLAG_COMPLEX",         constFlagComplex); 
-    rb_define_const(c, "FLAG_DECOUPLED",       constFlagDecoupled); 
-    rb_define_const(c, "FLAG_THEAD_SUGGESTED", constFlagThreadSuggested); 
-    rb_define_const(c, "FLAG_INFINITE_LOOP",   constFlagInfiniteLoop); 
-    rb_define_const(c, "FLAG_NEW_LOOPFUNC",    constFlagNewLoopfunc); 
-    rb_define_const(c, "FLAG_EVENT_AWARE",     constFlagEventAware); 
-    rb_define_const(c, "FLAG_USE_THREADSAFE_PROPERTIES", 
-                    constFlagThreadsafeProperties); 
-
-    rb_define_method(c, "indexable?", rb_gst_element_is_indexable, 0);
-    rb_define_method(c, "query", rb_gst_element_query, -1);
-    rb_define_method(c, "send_event", rb_gst_element_send_event, 1);
+static VALUE
+rb_gst_element_is_complex (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_COMPLEX));
 }
 
+/*
+ * Method: decoupled?
+ *
+ * Checks if the Gst::Element::DECOUPLED flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_is_decoupled (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_DECOUPLED));
+}
+
+/*
+ * Method: thread_suggested?
+ *
+ * Checks if the Gst::Element::THREAD_SUGGESTED flag is set on the 
+ * object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_is_thread_suggested (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_THREAD_SUGGESTED));
+}
+
+/*
+ * Method: has_infinite_loop?
+ *
+ * Checks if the Gst::Element::INFINITE_LOOP flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_has_infinite_loop (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_INFINITE_LOOP));
+}
+
+/*
+ * Method: has_new_loopfunc?
+ *
+ * Checks if the Gst::Element::NEW_LOOPFUNC flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_has_new_loopfunc (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_NEW_LOOPFUNC));
+}
+
+/*
+ * Method: event_aware?
+ *
+ * Checks if the Gst::Element::EVENT_AWARE flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_is_event_aware (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_EVENT_AWARE));
+}
+
+/*
+ * Method: use_threadsafe_properties? 
+ *
+ * Checks if the Gst::Element::USE_THREADSAFE_PROPERTIES flag 
+ * is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_element_use_threadsafe_properties (VALUE self)
+{
+	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_ELEMENT (self),
+					    GST_ELEMENT_USE_THREADSAFE_PROPERTIES));
+}
+
+void
+Init_gst_element (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_ELEMENT, "Element", mGst); 
+
+	rb_define_method (c, "set_state", rb_gst_element_set_state, 1);
+	rb_define_method (c, "state", rb_gst_element_get_state, 0);
+	rb_define_alias (c, "state=", "set_state");
+	rb_define_method (c, "stop",  rb_gst_element_stop, 0);
+	rb_define_method (c, "ready", rb_gst_element_ready, 0);
+	rb_define_method (c, "pause", rb_gst_element_pause, 0);
+	rb_define_method (c, "play",  rb_gst_element_play, 0);
+	rb_define_method (c, "stopped?", rb_gst_element_is_stopped, 0);
+	rb_define_method (c, "ready?", rb_gst_element_is_ready, 0);
+	rb_define_method (c, "paused?", rb_gst_element_is_paused, 0);
+	rb_define_method (c, "playing?", rb_gst_element_is_playing, 0);
+	rb_define_method (c, "wait_state_change", 
+			 rb_gst_element_wait_state_change, 0);
+	rb_define_method (c, "eos", rb_gst_element_set_eos, 0);
+	rb_define_method (c, "set_property", rb_gst_element_set_property, 2);
+	rb_define_method (c, "get_property", rb_gst_element_get_property, 1);
+	rb_define_method (c, "each_property", rb_gst_element_each_property, 0);
+	rb_define_method (c, "sched_yield", rb_gst_element_sched_yield,	0);
+	rb_define_method (c, "sched_interrupt", rb_gst_element_sched_interrupt, 0);
+	rb_define_method (c, "link", rb_gst_element_link, 1);
+	rb_define_alias (c, ">>", "link");
+	rb_define_method (c, "provides_clock?", rb_gst_element_provides_clock, 0);
+	rb_define_method (c, "requires_clock?", rb_gst_element_requires_clock, 0);
+	rb_define_method (c, "clock", rb_gst_element_get_clock, 0);
+	rb_define_method (c, "each_pad", rb_gst_element_each_pad, 0);
+	rb_define_method (c, "pads", rb_gst_element_get_pads, 0);
+	rb_define_method (c, "get_pad", rb_gst_element_get_pad, 1);
+	rb_define_method (c, "link_pads", rb_gst_element_link_pads, 1);
+	rb_define_method (c, "unlink_pads", rb_gst_element_unlink_pads, 1);
+	rb_define_method (c, "add_ghost_pad", rb_gst_element_add_ghost_pad, -1);
+	rb_define_method (c, "indexable?", rb_gst_element_is_indexable, 0);
+	rb_define_method (c, "query", rb_gst_element_query, -1);
+	rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
+
+	rb_define_method (c, "complex?", rb_gst_element_is_complex, 0);
+	rb_define_method (c, "decoupled?", rb_gst_element_is_decoupled, 0);
+	rb_define_method (c, "thread_suggested?",  
+			  rb_gst_element_is_thread_suggested, 0);
+	rb_define_method (c, "has_infinite_loop?", 
+			  rb_gst_element_has_infinite_loop, 0);
+	rb_define_method (c, "has_new_loopfunc?",  
+			  rb_gst_element_has_new_loopfunc, 0);
+	rb_define_method (c, "event_aware?", 
+			  rb_gst_element_is_event_aware, 0);
+	rb_define_method (c, "use_threadsafe_properties?", 
+			  rb_gst_element_use_threadsafe_properties, 0);
+
+	G_DEF_CLASS (GST_TYPE_ELEMENT_STATE_RETURN, "StateReturn", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_ELEMENT_STATE_RETURN, "GST_");
+	G_DEF_CLASS (GST_TYPE_ELEMENT_STATE, "State", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_ELEMENT_STATE, "GST_");
+	G_DEF_CLASS (GST_TYPE_ELEMENT_FLAGS, "Types", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_ELEMENT_FLAGS, "GST_ELEMENT_");
+}

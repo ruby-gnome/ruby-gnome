@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -42,15 +41,15 @@ extern gboolean debug_mode;
     (rbgst_initialize_gstobject(obj, GST_OBJECT(gstobj)))
 
 #define GST_EVENT_MASK(o)   ((GstEventMask *) o)
-#define GST_FORMAT(o)       ((GstFormat *) o)
-#define GST_QUERY_TYPE(o)   ((GstQueryType *) o)
+#define GST_FORMAT2(o)      ((GstFormat *) o)
+#define GST_QUERY_TYPE2(o)  ((GstQueryType *) o)
 #define GST_TYPE(o)         ((GstType *) o)
 
 #define GST_TYPE_CLOCK_ENTRY    (gst_clock_entry_get_type())
 #define GST_TYPE_EVENT_MASK     (gst_event_mask_get_type())
-#define GST_TYPE_FORMAT         (gst_format_get_type())
+#define GST_TYPE_FORMAT2        (gst_format_get_type2())
 #define GST_TYPE_PLUGIN         (gst_plugin_get_type())
-#define GST_TYPE_QUERY_TYPE     (gst_query_type_get_type())
+#define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
 #define RGST_AUTOPLUG(o)            (GST_AUTOPLUG(RVAL2GOBJ(o)))
@@ -63,7 +62,7 @@ extern gboolean debug_mode;
 #define RGST_ELEMENT_FACTORY(o)     (GST_ELEMENT_FACTORY(RVAL2GOBJ(o)))
 #define RGST_EVENT(o)               (GST_EVENT(RVAL2BOXED(o, GST_TYPE_EVENT)))
 #define RGST_EVENT_MASK(o)          (GST_EVENT_MASK(RVAL2BOXED(o, GST_TYPE_EVENT_MASK)))
-#define RGST_FORMAT(o)              (GST_FORMAT(RVAL2BOXED(o, GST_TYPE_FORMAT)))
+#define RGST_FORMAT(o)              (GST_FORMAT2(RVAL2BOXED(o, GST_TYPE_FORMAT2)))
 #define RGST_INDEX_FACTORY(o)       (GST_INDEX_FACTORY(RVAL2GOBJ(o)))
 #define RGST_OBJECT(o)              (GST_OBJECT(RVAL2GOBJ(o)))
 #define RGST_PAD(o)                 (GST_PAD(RVAL2GOBJ(o)))
@@ -71,7 +70,7 @@ extern gboolean debug_mode;
 #define RGST_PIPELINE(o)            (GST_PIPELINE(RVAL2GOBJ(o)))
 #define RGST_PLUGIN(o)              (GST_PLUGIN(RVAL2BOXED(o, GST_TYPE_PLUGIN)))
 #define RGST_PLUGIN_FEATURE(o)      (GST_PLUGIN_FEATURE(RVAL2GOBJ(o)))
-#define RGST_QUERY_TYPE(o)          (GST_QUERY_TYPE(RVAL2BOXED(o, GST_TYPE_QUERY_TYPE)))
+#define RGST_QUERY_TYPE(o)          (GST_QUERY_TYPE2(RVAL2BOXED(o, GST_TYPE_QUERY_TYPE2)))
 #define RGST_REGISTRY(o)            (GST_REGISTRY(RVAL2GOBJ(o)))
 #define RGST_SCHEDULER_FACTORY(o)   (GST_SCHEDULER_FACTORY(RVAL2GOBJ(o)))
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
@@ -91,14 +90,14 @@ extern gboolean debug_mode;
 #define RGST_ELEMENT_NEW(o)             (RGST_GOBJ_NEW(GST_ELEMENT(o)))
 #define RGST_EVENT_NEW(o)               (BOXED2RVAL(GST_EVENT(o), GST_TYPE_EVENT))
 #define RGST_EVENT_MASK_NEW(o)          (BOXED2RVAL(GST_EVENT_MASK(o), GST_TYPE_EVENT_MASK))
-#define RGST_FORMAT_NEW(o)              (BOXED2RVAL(GST_FORMAT(o), GST_TYPE_FORMAT))
+#define RGST_FORMAT_NEW(o)              (BOXED2RVAL(GST_FORMAT2(o), GST_TYPE_FORMAT2))
 #define RGST_INDEX_FACTORY_NEW(o)       (RGST_GOBJ_NEW(GST_INDEX_FACTORY(o)))
 #define RGST_OBJECT_NEW(o)              (RGST_GOBJ_NEW(GST_OBJECT(o)))
 #define RGST_PAD_NEW(o)                 (RGST_GOBJ_NEW(GST_PAD(o)))
 #define RGST_PAD_TEMPLATE_NEW(o)        (RGST_GOBJ_NEW(GST_PAD_TEMPLATE(o)))
 #define RGST_PIPELINE_NEW(o)            (RGST_GOBJ_NEW(GST_PIPELINE(o)))
 #define RGST_PLUGIN_NEW(o)              (BOXED2RVAL(GST_PLUGIN(o), GST_TYPE_PLUGIN))
-#define RGST_QUERY_TYPE_NEW(o)          (BOXED2RVAL(GST_QUERY_TYPE(o), GST_TYPE_QUERY_TYPE))
+#define RGST_QUERY_TYPE_NEW(o)          (BOXED2RVAL(GST_QUERY_TYPE2(o), GST_TYPE_QUERY_TYPE2))
 #define RGST_REGISTRY_NEW(o)            (RGST_GOBJ_NEW(GST_REGISTRY(o)))
 #define RGST_SCHEDULER_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_SCHEDULER_FACTORY(o)))
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
@@ -109,9 +108,9 @@ extern gboolean debug_mode;
 
 GType gst_clock_handle_get_type();
 GType gst_event_mask_get_type();
-GType gst_format_get_type();
+GType gst_format_get_type2();
 GType gst_plugin_get_type();
-GType gst_query_type_get_type();
+GType gst_query_type_get_type2();
 GType gst_type_get_type();
 
 /* misc.c interface */
@@ -143,23 +142,4 @@ VALUE instanciate_pluginfeature(GstPluginFeature *feature);
 #define NUM2ULL(v)      (rb_num2ull(v))
 #endif
 
-/* 
- *  Create an assert() macro if current system does not support
- *  it natively.
- */
-#if defined(HAVE_ASSERT_H)
-#include <assert.h>
-#else 
-#define assert(expr) \
-    do { \
-        if (!(expr)) { \
-            printf("%s (%d): assertion %s failed",  \
-                __FILE__, __LINE__, #expr); \
-            exit(1); \
-        } \
-    } \
-    while(0)
-#endif 
-
 #endif /* __RBGST_H_ */
-

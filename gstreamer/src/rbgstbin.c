@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,555 +20,475 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Bin < Gst::Element
- *
- *  Base container element.
+/* Class: Gst::Bin
+ * Base container element.
  */
 
-static VALUE get_element_obj(arr, element)
-    VALUE arr;
-    GstElement *element;
+static VALUE
+get_element_obj (VALUE arr, GstElement *element)
 {
-    int i;
-    for (i = 0; i < RARRAY(arr)->len; i++) {
-        VALUE obj = rb_ary_entry(arr, i);
-        if (element == RGST_ELEMENT(obj))
-            return obj;
-    }
-    assert(0);
-    return Qnil;
+	int i;
+	for (i = 0; i < RARRAY (arr)->len; i++) {
+		VALUE obj = rb_ary_entry(arr, i);
+		if (element == RGST_ELEMENT (obj))
+			return obj;
+	}
+	g_assert (0);
+	return Qnil;
 }
 
-static VALUE rb_gst_bin_get_internal_array(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_get_internal_array (VALUE self)
 {
-    VALUE arr;
+	VALUE arr;
   
-    arr = rb_iv_get(self, "@elements");
-    if (arr == Qnil) { 
-        arr = rb_ary_new();
-        rb_iv_set(self, "@elements", arr);
-    }
-    assert (arr != Qnil);
+	arr = rb_iv_get (self, "@elements");
+	if (arr == Qnil) { 
+		arr = rb_ary_new ();
+		rb_iv_set (self, "@elements", arr);
+	}
+	g_assert (arr != Qnil);
 
-    return arr;
+	return arr;
 }
 
 /*
- *  Class method: new(aStringName=nil) -> aBinObject
+ * Class method: new(name=nil)
+ * name: a name for the bin.
  *
- *  Constructs a new Gst::Bin object.
+ * Constructs a new Gst::Bin object.
  *
- *  If element name is ommited (or nil), then the bin will receive a guaranteed
- *  unique name, consisting of the "bin" string and a number.
- *  If name is given, it will be given the name supplied.
+ * If element name is ommited (or nil), then the bin will receive a guaranteed
+ * unique name, consisting of the "bin" string and a number.
+ * If name is given, it will be given the name supplied.
+ *
+ * Returns: a newly allocated Gst::Bin object.
  */
-static VALUE rb_gst_bin_new(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_bin_new (int argc, VALUE *argv, VALUE self)
 {
-    GstElement *bin;
-    VALUE name;
+	GstElement *bin;
+	VALUE name;
 
-    rb_scan_args(argc, argv, "01", &name);
+	rb_scan_args (argc, argv, "01", &name);
 
-    bin = gst_bin_new(name != Qnil ? RVAL2CSTR(name) : NULL);
-    if (bin != NULL) {
-        RBGST_INITIALIZE(self, bin);
-    }
-    return Qnil;
+	bin = gst_bin_new (NIL_P (name) ? NULL : RVAL2CSTR (name));
+	if (bin != NULL)
+		RBGST_INITIALIZE (self, bin);
+	return Qnil;
 }
 
 /*
- *  Method: length -> aFixnum
+ * Method: length
  *
- *  Returns the number of elements in the container.
+ * Returns: the number of elements in the container.
  */
-static VALUE rb_gst_bin_length(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_length (VALUE self)
 {
-    const GList *list;
-    GstBin *bin;
-    int length;
-    
-    bin = RGST_BIN(self);
-    for (list = gst_bin_get_list(bin), length = 0; 
-         list != NULL; 
-         list = g_list_next(list), length++) 
-    ;
-    return INT2FIX(length);
+	const GList *list;
+	GstBin *bin;
+	int length;
+	
+	bin = RGST_BIN (self);
+	for (list = gst_bin_get_list (bin), length = 0; 
+	     list != NULL; 
+	     list = g_list_next (list), length++) 
+		;	/* do nothing */
+	return INT2FIX (length);
 }
 
 /*
- *  Method: elements -> anArray
+ * Method: elements
  *
- *  Returns an array of all Gst::Element objects in the container.
+ * Returns: an array of all Gst::Element objects in the container.
  */
-static VALUE rb_gst_bin_get_elements(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_get_elements (VALUE self)
 {
-    VALUE arr, arr2;
-    GstBin *bin;
-    const GList *list;
+	VALUE arr, arr2;
+	GstBin *bin;
+	const GList *list;
   
-    arr  = rb_gst_bin_get_internal_array(self);
-    arr2 = rb_ary_new();
-    bin  = RGST_BIN(self);
-    list = gst_bin_get_list(bin);
+	arr  = rb_gst_bin_get_internal_array (self);
+	arr2 = rb_ary_new ();
+	bin  = RGST_BIN (self);
+	list = gst_bin_get_list (bin);
 
-    for (list = gst_bin_get_list(bin); 
-         list != NULL; 
-         list = g_list_next(list)) 
-    {
-        rb_ary_push(arr2, get_element_obj(arr, GST_ELEMENT(list->data)));
-    }
+	for (list = gst_bin_get_list (bin); 
+	     list != NULL; 
+	     list = g_list_next(list))
+		rb_ary_push (arr2, get_element_obj (arr, GST_ELEMENT (list->data)));
 
-    return arr2;
+	return arr2;
 }
 
 enum {
-    RB_BIN_ADD,
-    RB_BIN_REMOVE
+	RB_BIN_ADD,
+	RB_BIN_REMOVE
 };
 
-static VALUE rb_gst_bin_add_or_remove(argc, argv, self, what)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-    int what;
+static VALUE
+rb_gst_bin_add_or_remove (int argc, VALUE *argv, VALUE self, int what)
 {
-    GstBin *bin;
-    VALUE arr;
-    int i, size;
+	GstBin *bin;
+	VALUE arr;
+	int i, size;
    
-    bin  = RGST_BIN(self);
-    arr  = rb_gst_bin_get_internal_array(self);
-    size = FIX2INT(rb_gst_bin_length(self));
+	bin  = RGST_BIN (self);
+	arr  = rb_gst_bin_get_internal_array (self);
+	size = FIX2INT (rb_gst_bin_length (self));
  
-    if (argc == 0) {
-        rb_raise(rb_eArgError, "Wrong # of arguments (need at least 1)");
-    }
+	if (argc == 0)
+		rb_raise(rb_eArgError, "Wrong # of arguments (need at least 1)");
   
-    for (i = 0; i < argc; i++) {
-        GstElement *element;
-        VALUE obj;
+	for (i = 0; i < argc; i++) {
+		GstElement *element;
+		VALUE obj;
 
-        obj = argv[i];
-        if (NIL_P(obj)) {
-            rb_raise(rb_eArgError, "nil not allowed (argument %d)", i + 1);
-        }
-        element = RGST_ELEMENT(obj);
-        switch (what) {
-            case RB_BIN_ADD:
-                gst_bin_add(bin, element);
-                if (size == (FIX2INT(rb_gst_bin_length(self)) - 1)) {
-                    rb_ary_push(arr, obj);
-                    size++;
-                }
-                else {
-                    rb_raise(rb_eException, "Could not add element %s", 
-                        gst_element_get_name(element));
-                }
-                break;
+		obj = argv[i];
+		if (NIL_P (obj))
+			rb_raise (rb_eArgError, "nil not allowed (argument %d)", i + 1);
+		element = RGST_ELEMENT (obj);
+		switch (what) {
+			case RB_BIN_ADD:
+				gst_bin_add (bin, element);
+				if (size == (FIX2INT (rb_gst_bin_length (self)) - 1)) {
+					rb_ary_push (arr, obj);
+					size++;
+				}
+				else
+					rb_raise (rb_eException,
+						  "Could not add element %s", 
+						  gst_element_get_name (element));
+				break;
 
-            case RB_BIN_REMOVE:
-                gst_bin_remove(bin, element);
-                if (size == (FIX2INT(rb_gst_bin_length(self)) + 1)) {
-                    rb_ary_delete(arr,  obj);
-                    size--;
-                }
-                else {
-                    rb_raise(rb_eException, "Could not remove element %s",
-                        gst_element_get_name(element));
-                }
-                break;
-            
-            default:
-                assert(0);
-        }
-    }
-    return arr;
+			case RB_BIN_REMOVE:
+				gst_bin_remove (bin, element);
+				if (size == (FIX2INT (rb_gst_bin_length (self)) + 1)) {
+					rb_ary_delete (arr,  obj);
+					size--;
+				}
+				else
+					rb_raise(rb_eException,
+						 "Could not remove element %s",
+						 gst_element_get_name (element));
+				break;
+			
+			default:
+				g_assert (0);
+		}
+	}
+	return arr;
 }
 
 /*
- *  Method: add(*elements) -> anArray
+ * Method: add(*elements)
+ * elements: a list of Gst::Element objects.
  *
- *  Adds one or more Gst::Element objects to the bin.
+ * Adds one or more Gst::Element objects to the bin.
  *
- *  Returns an array of all Gst::Element objects in the container.
+ * Returns: an array of all Gst::Element objects in the container.
  */
-static VALUE rb_gst_bin_add(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+static VALUE
+rb_gst_bin_add (int argc, VALUE *argv, VALUE self)
 {
-    return rb_gst_bin_add_or_remove(argc, argv, self, RB_BIN_ADD);
+	return rb_gst_bin_add_or_remove (argc, argv, self, RB_BIN_ADD);
 }
 
 /*
- *  Method: remove(*elements) -> anArray
+ * Method: remove(*elements)
+ * elements: a list of Gst::Element objects.
  *
- *  Removes one or more Gst::Element objects from the bin, unparenting 
- *  as well.
+ * Removes one or more Gst::Element objects from the bin, unparenting 
+ * as well.
  *
- *  Returns an array of all Gst::Element objects in the container.
+ * Returns: an array of all Gst::Element objects in the container.
  */
-static VALUE rb_gst_bin_remove(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+static VALUE
+rb_gst_bin_remove (int argc, VALUE *argv, VALUE self)
 {
-    return rb_gst_bin_add_or_remove(argc, argv, self, RB_BIN_REMOVE);
+	return rb_gst_bin_add_or_remove (argc, argv, self, RB_BIN_REMOVE);
 }
 
 /*
- *  Method: remove_all -> []
+ * Method: remove_all
  *
- *  Removes all Gst::Element objects in the bin.
+ * Removes all Gst::Element objects in the bin.
  *
- *  Returns an empty array.
+ * Returns: an empty array.
  */
-static VALUE rb_gst_bin_remove_all(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_remove_all (VALUE self)
 {
-    VALUE arr;
-    int i;
-    
-    arr = rb_gst_bin_get_elements(self);
-    for (i = 0; i < RARRAY(arr)->len; i++) {
-        VALUE element = rb_ary_entry(arr, i);
-        rb_gst_bin_remove(1, &element, self);
-    }
-    return rb_ary_clear(arr);
+	VALUE arr;
+	int i;
+	
+	arr = rb_gst_bin_get_elements (self);
+	for (i = 0; i < RARRAY (arr)->len; i++) {
+		VALUE element = rb_ary_entry (arr, i);
+		rb_gst_bin_remove (1, &element, self);
+	}
+	return rb_ary_clear (arr);
 }
 
 /*
- *  Method: each_element { |aGstElement| block } -> nil
+ * Method: each_element { |element| ... }
  *
- *  Calls the block for each element in the bin, passing a reference to
- *  the Gst::Element as parameter.
+ * Calls the block for each element in the bin, passing a reference to
+ * the Gst::Element as parameter.
  *
- *  Always returns nil.
+ * Returns: always  nil.
  */
-static VALUE rb_gst_bin_each_element(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_each_element (VALUE self)
 {
-    return rb_ary_yield(rb_gst_bin_get_elements(self));
+	return rb_ary_yield (rb_gst_bin_get_elements (self));
 }
 
 /*
- *  Method: get_by_name(aName) -> anElement
+ * Method: get_by_name(name)
+ * name: a name.
  *
- *  Gets the element with the given name from the bin, as a reference to 
- *  a Gst::Element object.  Returns nil if the bin does not contain an element
- *  with the given name.
+ * Gets the element with the given name from the bin, as a reference to 
+ * a Gst::Element object.
+ *
+ * Returns: a Gst::Element reference, or nil if the bin does not contain
+ * an element with the given name.
  */
-static VALUE rb_gst_bin_get_by_name(self, name) 
-    VALUE self, name;
+static VALUE
+rb_gst_bin_get_by_name (VALUE self, VALUE name) 
 {
-    GstElement *element = gst_bin_get_by_name(RGST_BIN(self),
-                                              RVAL2CSTR(name));
-    return element != NULL
-        ? RGST_ELEMENT_NEW(element)
-        : Qnil;
+	GstElement *element = gst_bin_get_by_name (RGST_BIN (self),
+						   RVAL2CSTR (name));
+	return element != NULL
+		? RGST_ELEMENT_NEW (element)
+		: Qnil;
 }
 
 /*
- *  Method: get_by_name_recurse_up(aName) -> anElement
+ * Method: get_by_name_recurse_up(name)
+ * name: a name.
  *
- *  Gets the element with the given name from the bin, as a reference to 
- *  a Gst::Element object. If the element is not found, a recursion is 
- *  performed on the parent bin.
+ * Gets the element with the given name from the bin, as a reference to 
+ * a Gst::Element object. If the element is not found, a recursion is 
+ * performed on the parent bin.
  *
- *  Returns nil if no element with the given name is found.
+ * Returns: a Gst::Element reference, or nil if no element with the
+ * given name is found.
  */
-static VALUE rb_gst_bin_get_by_name_recurse_up(self, name) 
-    VALUE self, name;
+static VALUE
+rb_gst_bin_get_by_name_recurse_up (VALUE self, VALUE name) 
 {
-    GstElement *element = gst_bin_get_by_name_recurse_up(RGST_BIN(self),
-                                                         RVAL2CSTR(name));
-    return element != NULL
-        ? RGST_ELEMENT_NEW(element)
-        : Qnil;
+	GstElement *element = gst_bin_get_by_name_recurse_up (RGST_BIN (self),
+							      RVAL2CSTR (name));
+	return element != NULL
+		? RGST_ELEMENT_NEW (element)
+		: Qnil;
 }
 
 /*
- *  Method: iterate -> aBoolean
+ * Method: iterate
  *
- *  Iterates over the elements in this bin.
+ * Iterates over the elements in this bin.
  *
- *  Returns true if the bin did something useful.  This value can be used
- *  to determine if the bin is in EOS ("end of stream").
+ * Returns: true if the bin did something useful, or false (this value can
+ * be used to determine if the bin is in EOS ("end of stream")).
  */
-static VALUE rb_gst_bin_iterate(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_iterate (VALUE self)
 {
-    return CBOOL2RVAL(gst_bin_iterate(RGST_BIN(self)));
+	return CBOOL2RVAL (gst_bin_iterate (RGST_BIN (self)));
 }
 
 /*
- *  Method: clock -> aClockObject
+ * Method: clock
  *
- *  Gets the current clock of the (scheduler of the) bin,
- *  as a Gst::Clock object.
- *  This method overrides Gst::Element#get_clock.
+ * Gets the current clock of the (scheduler of the) bin,
+ * as a Gst::Clock object.
+ * This method overrides Gst::Element#get_clock.
+ *
+ * Returns: a Gst::Clock object, or nil.
  */
-static VALUE rb_gst_bin_get_clock(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_get_clock (VALUE self)
 {
-    GstBin *bin;
-    GstClock *clock;
-    
-    bin   = RGST_BIN(self);
-    clock = gst_bin_get_clock(bin);
-    return clock != NULL
-        ? RGST_CLOCK_NEW(clock)
-        : Qnil;
+	GstClock *clock;
+	
+	clock = gst_bin_get_clock (RGST_BIN (self));
+	return clock != NULL
+		? RGST_CLOCK_NEW (clock)
+		: Qnil;
 }
 
 /*
- *  Method: auto_clock -> self
+ * Method: auto_clock
  *
- *  Let the bin select a clock automatically.
+ * Let the bin select a clock automatically.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_bin_auto_clock(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_auto_clock (VALUE self)
 {
-    gst_bin_auto_clock(RGST_BIN(self));
-    return self;
+	gst_bin_auto_clock (RGST_BIN (self));
+	return self;
 }
 
 /*
- *  Method: use_clock(aClock) -> self
+ * Method: use_clock(clock)
+ * clock: a Gst::Clock.
  *
- *  Force the bin to use the given clock.  Use nil to force it 
- *  to use no clock at all.
+ * Forces the bin to use the given clock.  Use nil to force it 
+ * to use no clock at all.
+ *
+ * Returns: self.
  */
-static VALUE rb_gst_bin_use_clock(self, clock)
-    VALUE self, clock;
+static VALUE
+rb_gst_bin_use_clock (VALUE self, VALUE clock)
 {
-    gst_bin_use_clock(RGST_BIN(self),
-                      NIL_P(clock) ? NULL : RGST_CLOCK(clock));
-    return self;
+	gst_bin_use_clock (RGST_BIN (self),
+			   NIL_P (clock) ? NULL : RGST_CLOCK (clock));
+	return self;
 }
 
 struct __iterate_callback {
-    VALUE callback;
-    GstBin *bin;
+	VALUE callback;
+	GstBin *bin;
 };
 
 static GSList *__pre_iterate_list = NULL;
 static GSList *__post_iterate_list = NULL;
 
-static struct __iterate_callback *__iterate_get(list, bin) 
-    GSList *list;
-    GstBin *bin;
+static struct __iterate_callback *
+__iterate_get (GSList *list, GstBin *bin) 
 {
-    GSList *i;
-    assert(bin != NULL);    /* list may be NULL */
-    for (i = list;
-         i != NULL;
-         i = g_slist_next(i))
-    {
-        struct __iterate_callback *e = (struct __iterate_callback *) i->data;
-        if (e->bin == bin) {
-            return e;
-        }
-    }
-    return NULL;
+	GSList *i;
+	g_assert (bin != NULL);	/* list may be NULL */
+	for (i = list;
+	     i != NULL;
+	     i = g_slist_next (i)) {
+		struct __iterate_callback *e = (struct __iterate_callback *) i->data;
+		if (e->bin == bin)
+			return e;
+	}
+	return NULL;
 }
 
-static void __iterate_call(elem)
-    struct __iterate_callback *elem;
+static void
+__iterate_call (struct __iterate_callback *elem)
 {
-    assert(elem != NULL);
-    rb_funcall(elem->callback, 
-               rb_intern("call"), 
-               1, 
-               RGST_BIN_NEW(elem->bin));
+	g_assert (elem != NULL);
+	rb_funcall (elem->callback, 
+		    rb_intern ("call"), 
+		    1, 
+		    RGST_BIN_NEW (elem->bin));
 }
 
-static void __pre_iterate_dispatcher(bin)
-    GstBin *bin;
+static void
+__pre_iterate_dispatcher (GstBin *bin, gpointer user_data)
 {
-    __iterate_call(__iterate_get(__pre_iterate_list, bin));
+	__iterate_call (__iterate_get (__pre_iterate_list, bin));
 }
 
-static void __post_iterate_dispatcher(bin)
-    GstBin *bin;
+static void
+__post_iterate_dispatcher (GstBin *bin, gpointer user_data)
 {
-    __iterate_call(__iterate_get(__post_iterate_list, bin));
+	__iterate_call (__iterate_get (__post_iterate_list, bin));
 }
 
-static struct __iterate_callback *__iterate_new(rbin)
-    VALUE rbin;
+static struct __iterate_callback *
+__iterate_new (VALUE rbin)
 {
-    struct __iterate_callback *elem;
-    elem = g_malloc(sizeof(struct __iterate_callback));
-    assert(elem != NULL);
-    elem->callback = G_BLOCK_PROC();
-    elem->bin = RGST_BIN(rbin);
-    return elem;
+	struct __iterate_callback *elem;
+	elem = g_malloc (sizeof (struct __iterate_callback));
+	g_assert (elem != NULL);
+	elem->callback = G_BLOCK_PROC ();
+	elem->bin = RGST_BIN (rbin);
+	return elem;
 }
 
 /*
- *  Method: on_pre_iterate { |aBin| ... } -> nil
+ * Method: on_pre_iterate { |bin| ... }
  *
- *  Attaches a block code which will be executed before every iteration 
- *  of the bin.
+ * Attaches a block code which will be executed before every iteration 
+ * of the bin.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-static VALUE rb_gst_bin_on_pre_iterate(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_on_pre_iterate (VALUE self)
 {
-    if (__iterate_get(__pre_iterate_list, RGST_BIN(self)) != NULL) {
-        rb_raise(rb_eRuntimeError,
-                 "A pre_iterate function is already attached on this bin!");
-    }
-    else {
-        __pre_iterate_list = g_slist_append(__pre_iterate_list,  
-                                            __iterate_new(self));
-        gst_bin_set_pre_iterate_function(RGST_BIN(self), 
-                                         __pre_iterate_dispatcher, 
-                                         NULL);
-    }
-    return Qnil;
+	if (__iterate_get (__pre_iterate_list, RGST_BIN (self)) != NULL)
+		rb_raise (rb_eRuntimeError,
+			  "A pre_iterate function is already attached on this bin!");
+	else {
+		__pre_iterate_list = g_slist_append (__pre_iterate_list,  
+						     __iterate_new (self));
+		gst_bin_set_pre_iterate_function (RGST_BIN (self), 
+						  __pre_iterate_dispatcher, 
+						  NULL);
+	}
+	return Qnil;
 }
 
 /*
- *  Method: on_post_iterate { |aBin| ... } -> nil
+ *  Method: on_post_iterate { |bin| ... }
  *
  *  Attaches a callback which will be executed after every iteration 
  *  of the bin.
  *
- *  Always returns nil.
+ *  Returns: always nil.
  */
-static VALUE rb_gst_bin_on_post_iterate(self)
-    VALUE self;
+static VALUE
+rb_gst_bin_on_post_iterate (VALUE self)
 {
-    if (__iterate_get(__post_iterate_list, RGST_BIN(self)) != NULL) {
-        rb_raise(rb_eRuntimeError, 
-                 "A post_iterate function is already attached on this bin!");
-    }
-    else {
-        __post_iterate_list = g_slist_append(__post_iterate_list,
-                                             __iterate_new(self));
-        gst_bin_set_post_iterate_function(RGST_BIN(self), 
-                                          __post_iterate_dispatcher, 
-                                          NULL);
-    }
-    return Qnil;
+	if (__iterate_get (__post_iterate_list, RGST_BIN (self)) != NULL)
+		rb_raise (rb_eRuntimeError, 
+			  "A post_iterate function is already attached on this bin!");
+	else {
+		__post_iterate_list = g_slist_append (__post_iterate_list,
+						      __iterate_new(self));
+		gst_bin_set_post_iterate_function (RGST_BIN (self), 
+						   __post_iterate_dispatcher, 
+						   NULL);
+	}
+	return Qnil;
 }
 
-/*
- *  Constant: FLAG_MANAGER
- *  This bin is a manager of child elements, i.e. a Gst::Pipeline or
- *  a Gst::Thread. 
- */
-static VALUE constFlagManager = INT2FIX(GST_BIN_FLAG_MANAGER);
-
-/*
- *  Constant: FLAG_SCHEDULABLE
- *  This bin iterates itself.
- */
-static VALUE constFlagSchedulable = INT2FIX(GST_BIN_SELF_SCHEDULABLE);
-
-/*
- *  Constant: FLAG_PREFER_COTHREADS
- *  This bin prefers to have cothreads when its an option, over chain-based.
- */
-static VALUE constFlagPreferCothreads = INT2FIX(GST_BIN_FLAG_PREFER_COTHREADS);
-
-/*
- *  Constant: FLAG_FIXED_CLOCK
- *  This bin has a fixed clock.
- */
-static VALUE constFlagFixedClock = INT2FIX(GST_BIN_FLAG_FIXED_CLOCK);
-
-/*
- *  Method: manager? -> aBoolean
- *  Checks if the Gst::Bin::FLAG_MANAGER flag is set on the object.
- */
-static VALUE rb_gst_bin_is_manager(self)
-    VALUE self;
+void
+Init_gst_bin (void)
 {
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagManager);
-}
+	VALUE c = G_DEF_CLASS (GST_TYPE_BIN, "Bin", mGst);
 
-/*
- *  Method: schedulable? -> aBoolean
- *  Checks if the Gst::Bin::FLAG_SCHEDULABLE flag is set on the object.
- */
-static VALUE rb_gst_bin_is_schedulable(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagSchedulable);
-}
+	rb_define_method (c, "initialize", rb_gst_bin_new, -1);
 
-/*
- *  Method: prefers_cothreads? -> aBoolean
- *  Checks if the Gst::Bin::FLAG_PREFER_COTHREADS flag is set on the object.
- */
-static VALUE rb_gst_bin_prefers_cothreads(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagPreferCothreads);
-}
+	rb_define_method (c, "add", rb_gst_bin_add, -1);
+	rb_define_method (c, "remove", rb_gst_bin_remove, -1);
+	rb_define_method (c, "remove_all", rb_gst_bin_remove_all, 0);
+	rb_define_alias (c, "clear", "remove_all");
 
-/*
- *  Method: has_fixed_clock? -> aBoolean
- *  Checks if the Gst::Bin::FLAG_FIXED_CLOCK flag is set on the object.
- */
-static VALUE rb_gst_bin_has_fixed_clock(self)
-    VALUE self;
-{
-    return rb_funcall(self, rb_intern("flag?"), 1, constFlagFixedClock);
-}
+	rb_define_method (c, "elements", rb_gst_bin_get_elements, 0);
+	rb_define_method (c, "each_element", rb_gst_bin_each_element, 0);
 
-void Init_gst_bin(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
+	rb_define_method (c, "get_by_name", rb_gst_bin_get_by_name, 1);
+	rb_define_method (c, "get_by_name_recurse_up", 
+			  rb_gst_bin_get_by_name_recurse_up, 1);
+	rb_define_alias (c, "[]", "get_by_name");
 
-    rb_define_method(c, "initialize", rb_gst_bin_new, -1);
+	rb_define_method (c, "length", rb_gst_bin_length, 0);
+	rb_define_alias (c, "size", "length");
 
-    rb_define_method(c, "add",        rb_gst_bin_add,        -1);
-    rb_define_method(c, "remove",     rb_gst_bin_remove,     -1);
-    rb_define_method(c, "remove_all", rb_gst_bin_remove_all,  0);
-    rb_define_alias(c, "clear", "remove_all");
+	rb_define_method (c, "iterate", rb_gst_bin_iterate, 0);
 
-    rb_define_method(c, "elements", rb_gst_bin_get_elements, 0);
-    rb_define_method(c, "each_element", rb_gst_bin_each_element, 0);
+	rb_define_method (c, "clock", rb_gst_bin_get_clock, 0);
+	rb_define_method (c, "auto_clock", rb_gst_bin_auto_clock, 0);
+	rb_define_method (c, "use_clock", rb_gst_bin_use_clock, 1);
 
-    rb_define_method(c, "get_by_name", rb_gst_bin_get_by_name, 1);
-    rb_define_method(c, "get_by_name_recurse_up", 
-                     rb_gst_bin_get_by_name_recurse_up, 1);
-    rb_define_alias(c, "[]", "get_by_name");
+	rb_define_method (c, "on_post_iterate", rb_gst_bin_on_post_iterate, 0);
+	rb_define_method (c, "on_pre_iterate", rb_gst_bin_on_pre_iterate, 0);
 
-    rb_define_method(c, "length", rb_gst_bin_length, 0);
-    rb_define_alias(c, "size", "length");
-
-    rb_define_method(c, "iterate", rb_gst_bin_iterate, 0);
-
-    rb_define_method(c, "clock", rb_gst_bin_get_clock, 0);
-    rb_define_method(c, "auto_clock", rb_gst_bin_auto_clock, 0);
-    rb_define_method(c, "use_clock", rb_gst_bin_use_clock, 1);
-
-    rb_define_method(c, "on_post_iterate", rb_gst_bin_on_post_iterate, 0);
-    rb_define_method(c, "on_pre_iterate", rb_gst_bin_on_pre_iterate, 0);
-
-    /*
-     *  Flags
-     */
-
-    rb_define_method(c, "manager?",           rb_gst_bin_is_manager, 0);
-    rb_define_method(c, "schedulable?",       rb_gst_bin_is_schedulable, 0);
-    rb_define_method(c, "prefers_cothreads?", rb_gst_bin_prefers_cothreads, 0);
-    rb_define_method(c, "has_fixed_clock?",   rb_gst_bin_has_fixed_clock, 0);
-
-    rb_define_const(c, "FLAG_MANAGER",          constFlagManager);
-    rb_define_const(c, "FLAG_SCHEDULABLE",      constFlagSchedulable);
-    rb_define_const(c, "FLAG_PREFER_COTHREADS", constFlagPreferCothreads);
-    rb_define_const(c, "FLAG_FIXED_CLOCK",      constFlagFixedClock);
+	G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_BIN_FLAGS, "GST_BIN_");
 }
 

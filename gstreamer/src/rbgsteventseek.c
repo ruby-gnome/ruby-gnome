@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,97 +20,40 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::EventSeek < Gst::Event
- *
+/*  Class: Gst::EventSeek
  *  A seek event.
  */
-
 VALUE cGstEventSeek;
 
 /*
- *  Constant: METHOD_CUR
- *  Seek to a relative position.
- */
-static VALUE constSeekMethodCur = INT2FIX(GST_SEEK_METHOD_CUR);
-
-/*
- *  Constant: METHOD_SET
- *  Seek to an absolute position.
- */
-static VALUE constSeekMethodSet = INT2FIX(GST_SEEK_METHOD_SET);
-
-/*
- *  Constant: METHOD_END
- *  Seek relative to the end of the stream.
- */
-static VALUE constSeekMethodEnd = INT2FIX(GST_SEEK_METHOD_END);
-
-/*
- *  Constant: FLAG_FLUSH
- *  Flush any pending data while seeking.
- */
-static VALUE constSeekFlagFlush = INT2FIX(GST_SEEK_FLAG_FLUSH);
-
-/*
- *  Constant: FLAG_ACCURATE
- *  Seek as accuratly as possible.
- */
-static VALUE constSeekFlagAccurate = INT2FIX(GST_SEEK_FLAG_ACCURATE);
-
-/*
- *  Constant: FLAG_KEY_UNIT
- *  Seek to a nearby key unit.
- */
-static VALUE constSeekFlagKeyUnit = INT2FIX(GST_SEEK_FLAG_KEY_UNIT);
-
-/*
- *  Constant: FLAG_SEGMENT_LOOP
- *  Loop between start and stop in a segmented seek.
- */
-static VALUE constSeekFlagSegmentLoop = INT2FIX(GST_SEEK_FLAG_SEGMENT_LOOP);
-
-/*
- *  Class method: new(type, offset) -> anEvent
+ * Class method: new(type, offset)
+ * type: an event seek type (see Gst::EventSeek::Type).
+ * offset: an offset.
  *
- *  Allocate a new seek event with the given parameters.
- * 
- *  Meaningful types are:
- *      * Gst::EventSeek::METHOD_CUR;
- *      * Gst::EventSeek::METHOD_SET;
- *      * Gst::EventSeek::METHOD_END.
+ * Allocates a new seek event with the given parameters.
+ * Types (METHOD_) cam be OR'ed (|) with flags (FLAG_).
  *
- *  Types can be OR'ed (|) with:
- *      * Gst::EventSeek::FLAG_FLUSH;
- *      * Gst::EventSeek::FLAG_ACCURATE;
- *      * Gst::EventSeek::FLAG_KEY_UNIT;
- *      * Gst::EventSeek::FLAG_SEGMENT_LOOP.
+ * Returns: a newly allocated Gst::EventSeek object.
  */
-static VALUE rb_gst_eventseek_new(self, type, offset)
-    VALUE self, type, offset;
+static VALUE
+rb_gst_eventseek_new (VALUE self, VALUE type, VALUE offset)
 {
-    GstEvent *event = gst_event_new_seek(FIX2INT(type),
-                                         NUM2ULL(offset));
-    if (event != NULL) {
-        G_INITIALIZE(self, event);
-    }
-    return Qnil;
+	GstEvent *event = gst_event_new_seek (FIX2INT (type),
+					      NUM2ULL (offset));
+	if (event != NULL)
+		G_INITIALIZE (self, event);
+	return Qnil;
 }
 
-void Init_gst_eventseek(void) {
-    VALUE c = rb_define_class_under(mGst, "EventSeek", 
-                                    GTYPE2CLASS(GST_TYPE_EVENT));
-    rb_define_method(c, "initialize", rb_gst_eventseek_new, 2);
+void
+Init_gst_eventseek (void)
+{
+	VALUE c = rb_define_class_under (mGst, "EventSeek", GTYPE2CLASS(GST_TYPE_EVENT));
+	
+	rb_define_method (c, "initialize", rb_gst_eventseek_new, 2);
 
-    rb_define_const(c, "METHOD_CUR", constSeekMethodCur);
-    rb_define_const(c, "METHOD_SET", constSeekMethodSet);
-    rb_define_const(c, "METHOD_END", constSeekMethodEnd);
-    
-    rb_define_const(c, "FLAG_FLUSH",    constSeekFlagFlush);
-    rb_define_const(c, "FLAG_ACCURATE", constSeekFlagAccurate);
-    rb_define_const(c, "FLAG_KEY_UNIT", constSeekFlagKeyUnit);
-    rb_define_const(c, "FLAG_SEGMENT_LOOP", constSeekFlagSegmentLoop);
+	G_DEF_CLASS (GST_TYPE_SEEK_TYPE, "Type", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
 
-    cGstEventSeek = c;
+	cGstEventSeek = c;
 }
-

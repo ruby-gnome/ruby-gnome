@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -22,25 +21,25 @@
 #include "rbgst.h"
 
 /*
- *  This class is not documented.
+ * This class is not documented.
  */
 
-static VALUE signal_have_type(num, values)
-    guint num;
-    GValue *values;
+static VALUE
+signal_have_type (guint num, const GValue *values)
 {
-    VALUE args;
-    
-    assert(num == 2);
-    args = rb_ary_new();
-    
-    rb_ary_push(args, GVAL2RVAL(&values[0]));
-    rb_ary_push(args, RGST_CAPS_NEW(g_value_get_pointer(&values[1])));
-    return args;
+	VALUE args;
+	
+	g_assert (num == 2);
+	args = rb_ary_new ();
+	
+	rb_ary_push (args, GVAL2RVAL (&values[0]));
+	rb_ary_push (args, RGST_CAPS_NEW (g_value_get_pointer (&values[1])));
+	return args;
 }
 
-void Init_gst_typefind(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_TYPE_FIND, "TypeFind", mGst);
-    G_DEF_SIGNAL_FUNC(c, "have_type", signal_have_type);
+void
+Init_gst_typefind (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_TYPE_FIND, "TypeFind", mGst);
+	G_DEF_SIGNAL_FUNC (c, "have_type", signal_have_type);
 }
-

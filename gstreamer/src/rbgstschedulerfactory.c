@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,28 +20,25 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::SchedulerFactory < Gst::PluginFeature
- *
- *  Create schedulers from a factory.  
+/* Class: Gst::SchedulerFactory
+ * Create schedulers from a factory.  
  */
 
-/*
- *  Method: to_s -> aString
- *
- *  Gets a String representing the factory.
+/* Method: to_s
+ * Returns: a String representing the factory.
  */
-static VALUE rb_gst_schedulerfactory_to_s(self)
-    VALUE self;
+static VALUE
+rb_gst_schedulerfactory_to_s (VALUE self)
 {
-    GstSchedulerFactory *factory = RGST_SCHEDULER_FACTORY(self); 
-    return rb_str_format("Scheduler: %s (%s)",
-                         GST_PLUGIN_FEATURE_NAME(factory),
-                         factory->longdesc);
+	GstSchedulerFactory *factory = RGST_SCHEDULER_FACTORY (self); 
+	return rb_str_format ("Scheduler: %s (%s)",
+			      GST_PLUGIN_FEATURE_NAME (factory),
+			      factory->longdesc);
 }
 
-void Init_gst_schedulerfactory(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_SCHEDULER_FACTORY, "SchedulerFactory", mGst); 
-    rb_define_method(c, "to_s", rb_gst_schedulerfactory_to_s, 0);
+void
+Init_gst_schedulerfactory (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_SCHEDULER_FACTORY, "SchedulerFactory", mGst); 
+	rb_define_method (c, "to_s", rb_gst_schedulerfactory_to_s, 0);
 }
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,90 +20,95 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::EventMask
- *
- *  Event mask. 
+/* Class: Gst::EventMask
+ * Event mask. 
  */
 
-static GstEventMask* event_mask_copy(const GstEventMask* eventmask) {
-    GstEventMask* new_eventmask;
-    g_return_val_if_fail (eventmask != NULL, NULL);
-    new_eventmask = g_new(GstEventMask, sizeof(GstEventMask));
-    *new_eventmask = *eventmask;
-    return new_eventmask;
-}
-
-GType gst_event_mask_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GstEventMask",
-            (GBoxedCopyFunc)event_mask_copy,
-            (GBoxedFreeFunc)g_free);
-    }
-    return our_type;
-}
-
-/*
- *  Method: type_id -> aFixnum
- *
- *  Gets the type id of the Gst::Event type referred by this
- *  event mask, as a Fixnum.
- */
-static VALUE rb_gst_eventmask_get_type_id(self)
-    VALUE self;
+static GstEventMask *
+event_mask_copy(const GstEventMask* eventmask)
 {
-    return INT2FIX(RGST_EVENT_MASK(self)->type);
+	GstEventMask* new_eventmask;
+	g_return_val_if_fail (eventmask != NULL, NULL);
+	new_eventmask = g_new (GstEventMask, sizeof (GstEventMask));
+	*new_eventmask = *eventmask;
+	return new_eventmask;
+}
+
+GType 
+gst_event_mask_get_type (void)
+{
+	static GType our_type = 0;
+	if (our_type == 0)
+		our_type = g_boxed_type_register_static ("GstEventMask",
+			(GBoxedCopyFunc)event_mask_copy,
+			(GBoxedFreeFunc)g_free);
+	return our_type;
 }
 
 /*
- *  Method: type_flags -> anArray 
+ * Method: type_id
  *
- *  Returns all the flags available as an array of Fixnums.
+ * Gets the type id of the Gst::Event type referred by this
+ * event mask.
+ *
+ * Returns: the type id (see Gst::Event::Type).
  */
-static VALUE rb_gst_eventmask_get_flags(self)
-    VALUE self;
+static VALUE
+rb_gst_eventmask_get_type_id (VALUE self)
 {
-    GFlagsClass *flags_class;
-    GstEventMask *mask;
-    gint flags, index;
-    GEnumValue *value;
-    VALUE arr;
-
-    mask = RGST_EVENT_MASK(self);
-    flags_class = NULL;
-    flags = index = 0;
-
-    switch (mask->type) {
-        case GST_EVENT_SEEK:
-            flags = mask->flags;
-            flags_class = (GFlagsClass *) 
-                g_type_class_ref(gst_seek_type_get_type());
-            break;
-        default:
-            break;
-    }
-
-    value = g_enum_get_value((GEnumClass*)g_type_class_ref(gst_event_type_get_type()), 
-                             mask->type);
-    arr = rb_ary_new();
-
-    while (flags) {
-        GFlagsValue *value;
-        if (flags & 1) {
-            value = g_flags_get_first_value(flags_class, 1 << index);
-            rb_ary_push(arr, INT2FIX(value->value));
-        }
-        flags >>= 1;
-        index++;
-    }
-
-    return arr;
+	return GENUM2RVAL (RGST_EVENT_MASK (self)->type,
+			   GST_TYPE_EVENT_TYPE);
 }
 
-void Init_gst_eventmask(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_EVENT_MASK, "EventMask", mGst);
-    rb_define_method(c, "type_id",    rb_gst_eventmask_get_type_id, 0);
-    rb_define_method(c, "type_flags", rb_gst_eventmask_get_flags,   0);
+/* Method: type_flags
+ *
+ * Returns: all the flags available as an array of flags (see Gst::Event::Flag).
+ */
+static VALUE
+rb_gst_eventmask_get_flags (VALUE self)
+{
+	GFlagsClass *flags_class;
+	GstEventMask *mask;
+	gint flags, index;
+	GEnumValue *value;
+	VALUE arr;
+
+	mask = RGST_EVENT_MASK (self);
+	flags_class = NULL;
+	flags = index = 0;
+
+	switch (mask->type) {
+		case GST_EVENT_SEEK:
+			flags = mask->flags;
+			flags_class = (GFlagsClass *) 
+				g_type_class_ref (gst_seek_type_get_type ());
+			break;
+		default:
+			break;
+	}
+
+	value = g_enum_get_value ((GEnumClass*)g_type_class_ref (gst_event_type_get_type ()), 
+				  mask->type);
+	arr = rb_ary_new ();
+
+	while (flags) {
+		GFlagsValue *value;
+		if (flags & 1) {
+			value = g_flags_get_first_value (flags_class, 1 << index);
+			rb_ary_push (arr, GFLAGS2RVAL (value->value, GST_TYPE_EVENT_FLAG));
+		}
+		flags >>= 1;
+		index++;
+	}
+
+	return arr;
 }
 
+void
+Init_gst_eventmask (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_EVENT_MASK, "EventMask", mGst);
+
+	rb_define_method (c, "type_id",	rb_gst_eventmask_get_type_id, 0);
+	rb_define_method (c, "type_flags", rb_gst_eventmask_get_flags, 0);
+}

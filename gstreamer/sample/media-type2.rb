@@ -154,7 +154,7 @@ class MediaInfo
 
     track_format = Gst::Format.find 'logical_stream'
     if track_format != nil
-      start = @decoder_pad.query(Gst::QueryType::POSITION, track_format)
+      start = @decoder_pad.query(Gst::QueryType::POSITION, track_format.type_id)
       track_num = start
       # XXX: need Gst::Pad#convert
     end

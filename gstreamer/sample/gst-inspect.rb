@@ -89,8 +89,8 @@ end
 
 def print_pad(p)
     dir = case p.direction
-        when Gst::Pad::DIRECTION_SRC  then "SRC"
-        when Gst::Pad::DIRECTION_SINK then "SINK"
+        when Gst::Pad::SRC  then "SRC"
+        when Gst::Pad::SINK then "SINK"
         else "UNKNOWN"
     end
     puts dir + ": " + p.name
@@ -133,15 +133,15 @@ def print_element_info(f)
     prefix do 
         f.each_pad_template do |p|
             dir = case p.direction
-                when Gst::Pad::DIRECTION_SRC  then "SRC"
-                when Gst::Pad::DIRECTION_SINK then "SINK"
+                when Gst::Pad::SRC  then "SRC"
+                when Gst::Pad::SINK then "SINK"
                 else "UNKNOWN"
             end
             puts dir + " template: " + p.name
             pres = case p.presence
-                when Gst::Pad::PRESENCE_ALWAYS    then "always"
-                when Gst::Pad::PRESENCE_SOMETIMES then "sometimes"
-                when Gst::Pad::PRESENCE_REQUEST   then "on request"
+                when Gst::Pad::ALWAYS    then "always"
+                when Gst::Pad::SOMETIMES then "sometimes"
+                when Gst::Pad::REQUEST   then "on request"
                 else "unknown"
             end
             puts "Avaibility: " + pres

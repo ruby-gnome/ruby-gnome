@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,43 +20,34 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::EventSegmentSeek < Gst::EventSeek
- *
- *  A segment seek event.
+/* Class: Gst::EventSegmentSeek
+ * A segment seek event.
  */
 
 /*
- *  Class method: new(type, start_offset, end_offset) -> anEvent
+ * Class method: new(type, start_offset, end_offset)
+ * type: an event seek type (see Gst::EventSeek::Type).
+ * start_offset: a starting offset.
+ * end_offset: an ending offset.
  *
- *  Allocate a new segment seek event with the given parameters.
- * 
- *  Meaningful types are:
- *      * Gst::EventSeek::METHOD_CUR;
- *      * Gst::EventSeek::METHOD_SET;
- *      * Gst::EventSeek::METHOD_END.
+ * Allocates a new segment seek event with the given parameters.
  *
- *  Types can be OR'ed (|) with:
- *      * Gst::EventSeek::FLAG_FLUSH;
- *      * Gst::EventSeek::FLAG_ACCURATE;
- *      * Gst::EventSeek::FLAG_KEY_UNIT;
- *      * Gst::EventSeek::FLAG_SEGMENT_LOOP.
+ * Returns: a newly allocated Gst::EventSegmentSeek object.
  */
-static VALUE rb_gst_eventsegmentseek_new(self, type, start_offset, end_offset)
-    VALUE self, type, start_offset, end_offset;
+static VALUE
+rb_gst_eventsegmentseek_new (VALUE self, VALUE type, VALUE start_offset, VALUE end_offset)
 {
-    GstEvent *event = gst_event_new_segment_seek(FIX2INT(type),
-                                                 NUM2ULL(start_offset),
-                                                 NUM2ULL(end_offset));
-    if (event != NULL) {
-        G_INITIALIZE(self, event);
-    }
-    return Qnil;
+	GstEvent *event = gst_event_new_segment_seek (FIX2INT (type),
+						      NUM2ULL (start_offset),
+						      NUM2ULL (end_offset));
+	if (event != NULL)
+		G_INITIALIZE (self, event);
+	return Qnil;
 }
 
-void Init_gst_eventsegmentseek(void) {
-    VALUE c = rb_define_class_under(mGst, "EventSegmentSeek",
-                                    cGstEventSeek);
-    rb_define_method(c, "initialize", rb_gst_eventsegmentseek_new, 3);
+void
+Init_gst_eventsegmentseek (void)
+{
+	VALUE c = rb_define_class_under (mGst, "EventSegmentSeek", cGstEventSeek);
+	rb_define_method (c, "initialize", rb_gst_eventsegmentseek_new, 3);
 }
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,159 +20,161 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Type
- *
- *  Identifies the data. 
+/* Class: Gst::Type
+ * Identifies the data. 
  */
 
-static GstType* type_copy(const GstType* type) {
-    GstType* new_type;
-    g_return_val_if_fail (type != NULL, NULL);
-    new_type = g_new(GstType, 1);
-    *new_type = *type;
-    return new_type;
-}
-
-GType gst_type_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GstType",
-            (GBoxedCopyFunc)type_copy,
-            (GBoxedFreeFunc)g_free);
-    }
-    return our_type;
-}
-
-/*
- *  Class method: types -> anArray
- *
- *  Returns a list of all registered types, in an array 
- *  of Gst::Type objects.
- */
-static VALUE rb_gst_type_get_types(self)
-    VALUE self;
+static GstType *
+type_copy (const GstType* type)
 {
-    VALUE arr;
-    GList *list;
+	GstType *new_type;
+	g_return_val_if_fail (type != NULL, NULL);
+	new_type = g_new (GstType, 1);
+	*new_type = *type;
+	return new_type;
+}
 
-    arr = rb_ary_new();
-    for (list = (GList *) gst_type_get_list(); list != NULL; list = g_list_next(list)) {
-        rb_ary_push(arr, RGST_TYPE_NEW((GstType *)list->data));
-    }
-
-    return arr;
+GType 
+gst_type_get_type (void)
+{
+	static GType our_type = 0;
+	if (our_type == 0)
+		our_type = g_boxed_type_register_static ("GstType",
+			(GBoxedCopyFunc)type_copy,
+			(GBoxedFreeFunc)g_free);
+	return our_type;
 }
 
 /*
- *  Class method: each { |aTypeObject| block } -> nil
+ * Class method: types
  *
- *  Calls the block for each registred types, passing a reference to
- *  the Gst::Type as parameter.
- *
- *  Always returns nil.
+ * Returns: a list of all registered types, in an array 
+ * of Gst::Type objects.
  */
-static VALUE rb_gst_type_each(self)
-    VALUE self;
+static VALUE
+rb_gst_type_get_types (VALUE self)
 {
-    return rb_ary_yield(rb_gst_type_get_types(self));
+	VALUE arr;
+	GList *list;
+
+	arr = rb_ary_new ();
+	for (list = (GList *) gst_type_get_list ();
+	     list != NULL;
+	     list = g_list_next (list))
+		rb_ary_push (arr, RGST_TYPE_NEW ((GstType *)list->data));
+
+	return arr;
 }
 
 /*
- *  Class method: find_by_id(aFixnum) -> aTypeObject
+ * Class method: each { |type| ... }
  *
- *  Searches for a registered type of the given ID.  
- *  If found, returns a Gst::Type object. Otherwise, returns nil. 
+ * Calls the block for each registred types, passing a reference to
+ * the Gst::Type as parameter.
+ *
+ * Returns: always nil.
  */
-static VALUE rb_gst_type_find_by_id(self, id)
-    VALUE self, id;
+static VALUE
+rb_gst_type_each (VALUE self)
 {
-    GstType *type = gst_type_find_by_id(FIX2INT(id));
-    return type != NULL 
-        ? RGST_TYPE_NEW(type)
-        : Qnil;
+	return rb_ary_yield (rb_gst_type_get_types (self));
 }
 
 /*
- *  Class method: find_by_mime(aString) -> aTypeObject
+ * Class method: find_by_id(id)
+ * id: a type ID.
  *
- *  Searches for a registered type of the given MIME type.  
- *  If found, returns a Gst::Type object.  Otherwise, returns nil. 
+ * Searches for a registered type of the given ID.  
+ *
+ * Returns: a Gst::Type object if found, otherwise nil. 
  */
-static VALUE rb_gst_type_find_by_mime(self, mime)
-    VALUE self, mime;
+static VALUE
+rb_gst_type_find_by_id (VALUE self, VALUE id)
 {
-    guint16 id    = gst_type_find_by_mime(RVAL2CSTR(mime));
-    GstType *type = gst_type_find_by_id(id);
-    return type != NULL 
-        ? RGST_TYPE_NEW(type)
-        : Qnil;
+	GstType *type = gst_type_find_by_id (FIX2INT (id));
+	return type != NULL 
+		? RGST_TYPE_NEW (type)
+		: Qnil;
 }
 
 /*
- *  Method: id -> aFixnum
+ * Class method: find_by_mime(mime)
+ * mime: a mime type.
  *
- *  Gets the ID number of the type, as a Fixnum.
+ * Searches for a registered type of the given MIME type. 
+ *
+ * Returns: a Gst::Type object if found, otherwise nil. 
  */
-static VALUE rb_gst_type_get_id(self)
-    VALUE self;
+static VALUE
+rb_gst_type_find_by_mime (VALUE self, VALUE mime)
 {
-    GstType *type = RGST_TYPE(self);
-    return INT2FIX(type->id);
+	guint16 id = gst_type_find_by_mime (RVAL2CSTR (mime));
+	GstType *type = gst_type_find_by_id (id);
+	return type != NULL 
+		? RGST_TYPE_NEW (type)
+		: Qnil;
+}
+
+/* Method: id
+ * Returns: the ID number of the type.
+ */
+static VALUE
+rb_gst_type_get_id (VALUE self)
+{
+	GstType *type = RGST_TYPE (self);
+	return INT2FIX (type->id);
+}
+
+/* Method: mime
+ * Returns: the MIME type of the type. 
+ */
+static VALUE
+rb_gst_type_get_mime (VALUE self)
+{
+	GstType *type = RGST_TYPE (self);
+	return CSTR2RVAL (type->mime);
+}
+
+/* Method: exts
+ * Returns: files extentions handled by the type, if there
+ * are any, otherwise return nil. 
+ */
+static VALUE
+rb_gst_type_get_exts (VALUE self)
+{
+	GstType *type = RGST_TYPE (self);
+	return CSTR2RVAL (type->exts);
 }
 
 /*
- *  Method: mime -> aString
+ * Method: ==(type)
+ * type: a Gst::Type.
  *
- *  Gets the MIME type of the type, as a String. 
- */
-static VALUE rb_gst_type_get_mime(self)
-    VALUE self;
-{
-    GstType *type = RGST_TYPE(self);
-    return CSTR2RVAL(type->mime);
-}
-
-/*
- *  Method: exts -> aString
+ * Checks if two Gst::Type objects are refered under the same ID number.
  *
- *  Gets files extentions handled by the type, if there
- *  are any, as a String.  This method may otherwise return nil. 
+ * Returns: true on success, false on failure.
  */
-static VALUE rb_gst_type_get_exts(self)
-    VALUE self;
+static VALUE
+rb_gst_type_is_equal (VALUE self, VALUE other_type)
 {
-    GstType *type = RGST_TYPE(self);
-    return CSTR2RVAL(type->exts);
+	return NIL_P (other_type)
+		 ? Qfalse
+		 : rb_equal (rb_gst_type_get_id (self), 
+			     rb_gst_type_get_id (other_type));
 }
 
-/*
- *  Method: == aTypeObject -> aBoolean
- *
- *  Checks if two Gst::Type objects are refered under the same ID number.
- */
-static VALUE rb_gst_type_is_equal(self, other_type)
-    VALUE self, other_type;
+void
+Init_gst_type (void)
 {
-    return NIL_P(other_type)
-         ? Qfalse
-         : rb_equal(rb_gst_type_get_id(self), 
-                    rb_gst_type_get_id(other_type));
+	VALUE c = G_DEF_CLASS (GST_TYPE_TYPE, "Type", mGst); 
+	
+	rb_define_singleton_method (c, "types", rb_gst_type_get_types, 0);
+	rb_define_singleton_method (c, "each", rb_gst_type_each, 0);
+	rb_define_singleton_method (c, "find_by_id", rb_gst_type_find_by_id, 1);
+	rb_define_singleton_method (c, "find_by_mime", rb_gst_type_find_by_mime, 1);
+	
+	rb_define_method(c, "id", rb_gst_type_get_id, 0);
+	rb_define_method(c, "mime", rb_gst_type_get_mime, 0);
+	rb_define_method(c, "exts", rb_gst_type_get_exts, 0);
+	rb_define_method(c, "==", rb_gst_type_is_equal, 1);
 }
-
-void Init_gst_type(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_TYPE, "Type", mGst); 
-    
-    rb_define_singleton_method(c, "types", rb_gst_type_get_types, 0);
-    rb_define_singleton_method(c, "each", rb_gst_type_each, 0);
-
-    rb_define_singleton_method(c, "find_by_id",   rb_gst_type_find_by_id,   1);
-    rb_define_singleton_method(c, "find_by_mime", rb_gst_type_find_by_mime, 1);
-    
-    rb_define_method(c, "id",   rb_gst_type_get_id,   0);
-    rb_define_method(c, "mime", rb_gst_type_get_mime, 0);
-    rb_define_method(c, "exts", rb_gst_type_get_exts, 0);
-
-    rb_define_method(c, "==", rb_gst_type_is_equal, 1);
-}
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,119 +20,109 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::PadTemplate < Gst::Object
- *
- *  Describe the media type of a Gst::Pad.  
+/* Class: Gst::PadTemplate
+ * Describe the media type of a Gst::Pad.  
  */
 
 /*
- *  Method: name -> aString
+ * Method: name
  *
- *  Gets the name of the pad template, as a String.
- *  This overrides Gst::Object#name.
+ * Gets the name of the pad template.
+ * This overrides Gst::Object#name.
+ *
+ * Returns: the name of the pad template.
  */
-static VALUE rb_gst_padtemplate_get_name(self)
-    VALUE self;
+static VALUE
+rb_gst_padtemplate_get_name (VALUE self)
 {
-    /* 
-     *  We can't call Gst::Object#name since the real name
-     *  of the pad template is in the "name_template" field of 
-     *  GstPadTemplate.
-     */
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return CSTR2RVAL(GST_PAD_TEMPLATE_NAME_TEMPLATE(pad));
+	/* 
+	 *  We can't call Gst::Object#name since the real name
+	 *  of the pad template is in the "name_template" field of 
+	 *  GstPadTemplate.
+	 */
+	GstPadTemplate *pad = RGST_PAD_TEMPLATE (self);
+	return CSTR2RVAL (GST_PAD_TEMPLATE_NAME_TEMPLATE (pad));
+}
+
+/* Method: presence
+ * Returns: the pad's presence (see Gst::Pad::Presence).
+ */
+static VALUE
+rb_gst_padtemplate_get_presence (VALUE self)
+{
+	GstPadTemplate *pad = RGST_PAD_TEMPLATE (self);
+	return GENUM2RVAL (pad->presence, GST_TYPE_PAD_PRESENCE);
+}
+
+/* Method: direction
+ * Returns: the pad's direction (see Gst::Pad::Direction).
+ */
+static VALUE
+rb_gst_padtemplate_get_direction (VALUE self)
+{
+	GstPadTemplate *pad = RGST_PAD_TEMPLATE (self);
+	return GENUM2RVAL (pad->direction, GST_TYPE_PAD_DIRECTION);
 }
 
 /*
- *  Method: presence -> aFixnum
+ * Method: caps
  *
- *  Gets presence, which can be:
+ * Gets the capabilities of the pad template element.
  *
- *    * Gst::Pad::PRESENCE_ALWAYS;
- *    * Gst::Pad::PRESENCE_SOMETIMES;
- *    * Gst::Pad::PRESENCE_REQUEST.
+ * Returns: an array of Gst::Caps objects.
  */
-static VALUE rb_gst_padtemplate_get_presence(self)
-    VALUE self;
+static VALUE
+rb_gst_padtemplate_get_caps (VALUE self)
 {
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return INT2FIX(pad->presence);
+	GstPadTemplate *pad;
+	GstCaps *list;
+	VALUE arr;
+
+	pad = RGST_PAD_TEMPLATE (self);
+	arr = rb_ary_new ();
+
+	for (list = pad->caps; list != NULL; list = list->next)
+		rb_ary_push (arr, RGST_CAPS_NEW (list));
+	return arr;
 }
 
 /*
- *  Method: direction -> aFixnum
+ * Method: each_caps { |caps| ... }
  *
- *  Gets direction, which can be:
+ * Calls the block for each capability of the pad template, 
+ * passing a reference to the Gst::Caps object as parameter.
  *
- *    * Gst::Pad::DIRECTION_SRC;
- *    * Gst::Pad::DIRECTION_SINK;
- *    * Gst::Pad::DIRECTION_UNKNOWN.
+ * Returns: always nil.
  */
-static VALUE rb_gst_padtemplate_get_direction(self)
-    VALUE self;
+static VALUE
+rb_gst_padtemplate_each_caps (VALUE self)
 {
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return INT2FIX(pad->direction);
+	return rb_ary_yield (rb_gst_padtemplate_get_caps (self));
 }
 
-/*
- *  Method: caps -> anArray
- *
- *  Gets the capabilities of the pad template element, 
- *  in an array of Gst::Caps object.
+/* Method: has_caps?
+ * Returns: true if the pad template has capabilities, false otherwise.
  */
-static VALUE rb_gst_padtemplate_get_caps(self)
-    VALUE self;
+static VALUE
+rb_gst_padtemplate_has_caps (VALUE self)
 {
-    GstPadTemplate *pad;
-    GstCaps *list;
-    VALUE arr;
-
-    pad = RGST_PAD_TEMPLATE(self);
-    arr = rb_ary_new();
-
-    for (list = pad->caps; list != NULL; list = list->next) {
-        rb_ary_push(arr, RGST_CAPS_NEW(list));
-    }
-    return arr;
+	GstPadTemplate *pad = RGST_PAD_TEMPLATE (self);
+	return CBOOL2RVAL (pad->caps != NULL);
 }
 
-/*
- *  Method: each_caps { |aCapsObject| block } -> nil
- *
- *  Calls the block for each capability of the pad template, 
- *  passing a reference to the Gst::Caps object as parameter.
- *
- *  Always returns nil.
- */
-static VALUE rb_gst_padtemplate_each_caps(self)
-    VALUE self;
+void 
+Init_gst_padtemplate (void)
 {
-    return rb_ary_yield(rb_gst_padtemplate_get_caps(self));
+	VALUE c = G_DEF_CLASS (GST_TYPE_PAD_TEMPLATE, "PadTemplate", mGst);
+
+	rb_define_method (c, "name", rb_gst_padtemplate_get_name, 0);
+	rb_define_method (c, "presence", rb_gst_padtemplate_get_presence, 0);
+	rb_define_method (c, "direction", rb_gst_padtemplate_get_direction, 0);
+
+	rb_define_method (c, "caps", rb_gst_padtemplate_get_caps, 0);
+	rb_define_method (c, "each_caps", rb_gst_padtemplate_each_caps, 0);
+	rb_define_method (c, "has_caps?", rb_gst_padtemplate_has_caps, 0);
+
+	G_DEF_CLASS (GST_TYPE_PAD_TEMPLATE_FLAGS, "Flags", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_PAD_TEMPLATE_FLAGS, "GST_PAD_TEMPLATE_");
 }
-
-/*
- *  Method: has_caps? -> aBoolean
- *
- *  Checks if the pad template has capabilities. 
- */
-static VALUE rb_gst_padtemplate_has_caps(self)
-    VALUE self;
-{
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return CBOOL2RVAL(pad->caps != NULL);
-}
-
-void Init_gst_padtemplate(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE, "PadTemplate", mGst);
-
-    rb_define_method(c, "name",      rb_gst_padtemplate_get_name, 0);
-    rb_define_method(c, "presence",  rb_gst_padtemplate_get_presence, 0);
-    rb_define_method(c, "direction", rb_gst_padtemplate_get_direction, 0);
-
-    rb_define_method(c, "caps", rb_gst_padtemplate_get_caps, 0);
-    rb_define_method(c, "each_caps", rb_gst_padtemplate_each_caps, 0);
-    rb_define_method(c, "has_caps?", rb_gst_padtemplate_has_caps, 0);
-}
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,112 +20,44 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Object
- *
- *  Basis for the GST object hierarchy.
+/* Class: Gst::Object
+ * Basis for the GST object hierarchy.
  */
 
 /*
- *  Method: flags -> aFixnum
+ * Method: destroyed?
  *
- *  Gets the entire set of flags for the object, as a Fixnum.
- */ 
-static VALUE rb_gst_object_get_flags(self)
-    VALUE self;
+ * Checks if the Gst::Object::FLAG_DESTROYED flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
+ */
+static VALUE
+rb_gst_object_is_destroyed (VALUE self)
 {
-    GstObject *object = RGST_OBJECT(self);
-    return INT2FIX(object->flags);
+	return CBOOL2RVAL (GST_OBJECT_DESTROYED (RGST_OBJECT (self)));
 }
 
 /*
- *  Method: flag?(aFixnum) -> aBoolean
+ * Method: floating?
  *
- *  Checks if the given flag is set on the object.
+ * Checks if the Gst::Object::FLAG_FLOATING flag is set on the object.
+ *
+ * Returns: true if the flag is set, false otherwise.
  */
-static VALUE rb_gst_object_is_flag_set(self, flag)
-    VALUE self, flag;
+static VALUE
+rb_gst_object_is_floating (VALUE self)
 {
-    GstObject *object = RGST_OBJECT(self);
-    return CBOOL2RVAL(GST_FLAG_IS_SET(object, FIX2INT(flag)));
+	return CBOOL2RVAL (GST_OBJECT_FLOATING (RGST_OBJECT (self)));
 }
 
-/*
- *  Method: set_flag(aFixnum) -> self 
- *
- *  Sets the given flag. 
- */
-static VALUE rb_gst_object_set_flag(self, flag)
-    VALUE self, flag;
+void
+Init_gst_object (void)
 {
-    GstObject *object = RGST_OBJECT(self);
-    GST_FLAG_SET(object, FIX2INT(flag));
-    return self;
-}
-
-/*
- *  Method: unset_flag(aFixnum) -> self 
- *
- *  Unsets the given flag. 
- */
-static VALUE rb_gst_object_unset_flag(self, flag)
-    VALUE self, flag;
-{
-    GstObject *object = RGST_OBJECT(self);
-    GST_FLAG_UNSET(object, FIX2INT(flag));
-    return self;
-}
-
-/*
- *  Constant: FLAG_DESTROYED
- *  The object is flagged for destruction.
- */
-static VALUE constFlagDestroyed = INT2FIX(GST_DESTROYED);
-
-/*
- *  Constant: FLAG_FLOATING 
- *  The object is created but has no parent yet to manage it.
- */
-static VALUE constFlagFloating = INT2FIX(GST_FLOATING);
-
-/*
- *  Method: destroyed? -> aBoolean
- *
- *  Checks if the Gst::Object::FLAG_DESTROYED flag is set on the object.
- */
-static VALUE rb_gst_object_is_destroyed(self)
-    VALUE self;
-{
-    return rb_gst_object_is_flag_set(self, constFlagDestroyed);
-}
-
-/*
- *  Method: floating? -> aBoolean
- *
- *  Checks if the Gst::Object::FLAG_FLOATING flag is set on the object.
- */
-static VALUE rb_gst_object_is_floating(self)
-    VALUE self;
-{
-    return rb_gst_object_is_flag_set(self, constFlagFloating);
-}
-
-void Init_gst_object(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);   
+	VALUE c = G_DEF_CLASS (GST_TYPE_OBJECT, "Object", mGst);   
  
-    /*
-     *  Flags
-     */
+	rb_define_method(c, "destroyed?", rb_gst_object_is_destroyed, 0);
+	rb_define_method(c, "floating?",  rb_gst_object_is_floating,  0);
 
-    rb_define_method(c, "flags",      rb_gst_object_get_flags, 0);
-    rb_define_method(c, "flag?",      rb_gst_object_is_flag_set, 1);
-    rb_define_method(c, "set_flag",   rb_gst_object_set_flag,   1);
-    rb_define_method(c, "unset_flag", rb_gst_object_unset_flag, 1);
-
-    rb_define_method(c, "destroyed?", rb_gst_object_is_destroyed, 0);
-    rb_define_method(c, "floating?",  rb_gst_object_is_floating,  0);
-    
-    rb_define_const(c, "FLAG_DESTROYED", constFlagDestroyed);
-    rb_define_const(c, "FLAG_FLOATING",  constFlagFloating);
+	G_DEF_CLASS (GST_TYPE_OBJECT_FLAGS, "Flags", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_OBJECT_FLAGS, "GST_");
 }
-

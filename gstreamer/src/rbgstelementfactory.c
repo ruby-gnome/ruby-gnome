@@ -21,299 +21,285 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::ElementFactory < Gst::PluginFeature
- *
- *  Creates Gst::Element instances.
+/* Class: Gst::ElementFactory
+ * Creates Gst::Element instances.
  */
 
 /*
- *  Class method: make(aFactoryNameString, anElementNameString=nil) -> aGstElement
+ * Class method: make(factory_name, element_name)
+ * factory_name: a name of an existing factory.
+ * element_name: a name which will be attributed to the element.
  *
- *  Creates a new Gst::Element of the type defined by the given element factory.
+ * Creates a new Gst::Element of the type defined by the given element factory.
  *
- *  If element name is ommited (or nil), then the element will receive a guaranteed 
- *  unique name, consisting of the element factory name and a number. 
- *  If name is given, it will be given the name supplied.
+ * If element name is ommited (or nil), then the element will receive a guaranteed 
+ * unique name, consisting of the element factory name and a number. 
+ * If name is given, it will be given the name supplied.
  *
- *  Example: 
- *
- *    # Creates a 'mad' GStreamer element, named 'foo':
- *    elem1 = Gst::ElementFactory.make("mad", "foo")
+ * 	# Creates a 'mad' GStreamer element, named 'foo':
+ * 	elem1 = Gst::ElementFactory.make("mad", "foo")
  *	  
- *    # This line does exactly the same thing:
- *    elem2 = Gst::ElementFactory.find("mad").create("foo")
+ * 	# This line does exactly the same thing:
+ * 	elem2 = Gst::ElementFactory.find("mad").create("foo")
+ *
+ * Returns: a newly created object based on Gst::Element.
  */
-static VALUE rb_gst_elementfactory_make(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_elementfactory_make (int argc, VALUE *argv, VALUE self)
 {
-    GstElement *element;
-    VALUE fname, ename;
+	GstElement *element;
+	VALUE fname, ename;
 
-    rb_scan_args(argc, argv, "11", &fname, &ename);
+	rb_scan_args (argc, argv, "11", &fname, &ename);
 
-    element = gst_element_factory_make(RVAL2CSTR(fname), 
-        ename != Qnil ? RVAL2CSTR(ename) : NULL);
+	element = gst_element_factory_make (RVAL2CSTR(fname), 
+		NIL_P (ename) ? NULL : RVAL2CSTR (ename));
 
-    return element != NULL
-        ? RGST_ELEMENT_NEW(element)
-        : Qnil;
+	return element != NULL
+		? RGST_ELEMENT_NEW (element)
+		: Qnil;
 }
 
 /*
- *  Class method: find(aFactoryNameString) -> aGstElementFactory
+ * Class method: find(factory_name)
+ * factory_name: a name of an existing factory.
  *
- *  Searches for an element factory of the given name.
- *  If found, returns a Gst::ElementFactory object.  Otherwise, returns nil.
+ * Searches for an element factory of the given name.
+ *
+ * Returns: a Gst::ElementFactory object if found, nil otherwise.
  */
-static VALUE rb_gst_elementfactory_find(self, factory_name)
-    VALUE self, factory_name;
+static VALUE
+rb_gst_elementfactory_find (VALUE self, VALUE factory_name)
 {
-    GstElementFactory *factory = gst_element_factory_find(RVAL2CSTR(factory_name));
-    return factory != NULL 
-        ? RGST_ELEMENT_FACTORY_NEW(factory)
-        : Qnil;
+	GstElementFactory *factory = gst_element_factory_find (RVAL2CSTR (factory_name));
+	return factory != NULL 
+		? RGST_ELEMENT_FACTORY_NEW (factory)
+		: Qnil;
 }
 
 /*
- *  Method: create(anElementNameString=nil) -> aGstElement
+ * Method: create(element_name=nil)
+ * element_name: a name which will be attributed to the element.
  *
- *  Creates a new element of the type defined by the element factory.
+ * Creates a new element of the type defined by the element factory.
  *
- *  If element name is ommited (or nil), then the element will receive a guaranteed 
- *  unique name, consisting of the element factory name and a number. 
- *  If name is given, it will be given the name supplied.
+ * If element name is ommited (or nil), then the element will receive a guaranteed 
+ * unique name, consisting of the element factory name and a number. 
+ * If name is given, it will be given the name supplied.
+ *
+ * Returns: a newly created object based on Gst::Element.
  */
-static VALUE rb_gst_elementfactory_create(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+rb_gst_elementfactory_create (int argc, VALUE *argv, VALUE self)
 {
-    GstElementFactory *factory;
-    GstElement *element;
-    VALUE name;
+	GstElement *element;
+	VALUE name;
 
-    rb_scan_args(argc, argv, "01", &name);
+	rb_scan_args(argc, argv, "01", &name);
 
-    factory = RGST_ELEMENT_FACTORY(self);
-    element = gst_element_factory_create(factory, 
-        name != Qnil ? RVAL2CSTR(name) : NULL);
+	element = gst_element_factory_create (RGST_ELEMENT_FACTORY (self), 
+		NIL_P (name) ? NULL : RVAL2CSTR (name));
 
-    return element != NULL
-        ? RGST_ELEMENT_NEW(element)
-        : Qnil;
+	return element != NULL
+		? RGST_ELEMENT_NEW (element)
+		: Qnil;
 }
 
 /*
- *  Method: rank -> aFixnum
+ * Method: rank
  *
- *  Gets the rank of the factory:
- *      
- *    * Gst::ElementFactory::RANK_MARGINAL;
- *    * Gst::ElementFactory::RANK_NONE;
- *    * Gst::ElementFactory::RANK_PRIMARY;
- *    * Gst::ElementFactory::RANK_SECONDARY.
+ * Gets the rank of the factory (either Gst::ElementFactory::RANK_MARGINAL,
+ * Gst::ElementFactory::RANK_NONE, Gst::ElementFactory::RANK_PRIMARY or
+ * Gst::ElementFactory::RANK_SECONDARY).
+ *
+ * Returns: the rank of the factory.
  */
-static VALUE rb_gst_elementfactory_get_rank(self)
-    VALUE self;
+static VALUE
+rb_gst_elementfactory_get_rank (VALUE self)
 {
-    GstElementFactory *factory = RGST_ELEMENT_FACTORY(self);
-    return INT2FIX(factory->rank);    
+	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self);
+	return INT2FIX (factory->rank);	
+}
+
+/* Constant: RANK_MARGINAL
+ * The element is only marginally usefull for autoplugging.
+ */
+static VALUE constRankMarginal = INT2FIX (GST_ELEMENT_RANK_MARGINAL);
+
+/* Constant: RANK_NONE
+ * The plugin may not be used in autoplugging. 
+ */
+static VALUE constRankNone = INT2FIX (GST_ELEMENT_RANK_NONE);
+
+/* Constant: RANK_PRIMARY
+ * The plugin is well suited for autoplugging. 
+ */
+static VALUE constRankPrimary = INT2FIX (GST_ELEMENT_RANK_PRIMARY);
+
+/* Constant: RANK_SECONDARY
+ * The plugin is suited for autoplugging but only as a second candidate. 
+ */
+static VALUE constRankSecondary = INT2FIX (GST_ELEMENT_RANK_SECONDARY);
+
+/* Method: rank_marginal?
+ * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_MARGINAL,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_elementfactory_rank_marginal (VALUE self)
+{
+	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankMarginal);
+}
+
+/* Method: rank_none?
+ * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_NONE,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_elementfactory_rank_none (VALUE self)
+{
+	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankNone);
+}
+
+/* Method: rank_primary?
+ * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_PRIMARY,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_elementfactory_rank_primary (VALUE self)
+{
+	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankPrimary);
+}
+
+/* Method: rank_secondary?
+ * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_SECONDARY,
+ * false otherwise.
+ */
+static VALUE
+rb_gst_elementfactory_rank_secondary (VALUE self)
+{
+	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankSecondary);
+}
+
+/* Method: to_s
+ * Returns: a String representing the factory.
+ */
+static VALUE
+rb_gst_elementfactory_to_s (VALUE self)
+{
+	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self); 
+	return rb_str_format ("Element: %s (%s)",
+			      GST_PLUGIN_FEATURE_NAME(factory),
+			      factory->details->longname);
 }
 
 /*
- *  Constant: RANK_MARGINAL
- *  The element is only marginally usefull for autoplugging.
- */
-static VALUE constRankMarginal = INT2FIX(GST_ELEMENT_RANK_MARGINAL);
-
-/*
- *  Constant: RANK_NONE
- *  The plugin may not be used in autoplugging. 
- */
-static VALUE constRankNone = INT2FIX(GST_ELEMENT_RANK_NONE);
-
-/*
- *  Constant: RANK_PRIMARY
- *  The plugin is well suited for autoplugging. 
- */
-static VALUE constRankPrimary = INT2FIX(GST_ELEMENT_RANK_PRIMARY);
-
-/*
- *  Constant: RANK_SECONDARY
- *  The plugin is suited for autoplugging but only as a second candidate. 
- */
-static VALUE constRankSecondary = INT2FIX(GST_ELEMENT_RANK_SECONDARY);
-
-/*
- *  Method: rank_marginal? -> aBoolean
+ * Method: pad_templates
  *
- *  Checks if the rank of the factory equals Gst::ElementFactory::RANK_MARGINAL.
+ * Requests all pad templates of factory.
+ *
+ * Returns: an array of Gst::PadTemplate objects.  
  */
-static VALUE rb_gst_elementfactory_rank_marginal(self)
-    VALUE self;
+static VALUE
+rb_gst_elementfactory_get_pad_templates (VALUE self)
 {
-    return CBOOL2RVAL(rb_gst_elementfactory_get_rank(self) == constRankMarginal);
+	GstElementFactory *factory;
+	GList *list;
+	VALUE arr;
+
+	factory = RGST_ELEMENT_FACTORY (self); 
+	arr = rb_ary_new ();
+	for (list = factory->padtemplates; list != NULL; list = g_list_next (list)) {
+		GstPadTemplate *pad = GST_PAD_TEMPLATE (list->data);
+		rb_ary_push (arr, RGST_PAD_TEMPLATE_NEW (pad));
+	}
+	return arr;
 }
 
 /*
- *  Method: rank_none? -> aBoolean
+ * Method: each_pad_template { |pad_template| ... }
  *
- *  Checks if the rank of the factory equals Gst::ElementFactory::RANK_NONE.
+ * Calls the block for each pad template of the factory, passing a
+ * reference to the Gst::PadTemplate as parameter.
+ *
+ * Returns: always nil. 
  */
-static VALUE rb_gst_elementfactory_rank_none(self)
-    VALUE self;
+static VALUE
+rb_gst_elementfactory_each_pad_template (VALUE self)
 {
-    return CBOOL2RVAL(rb_gst_elementfactory_get_rank(self) == constRankNone);
+	return rb_ary_yield (rb_gst_elementfactory_get_pad_templates (self));
 }
 
 /*
- *  Method: rank_primary? -> aBoolean
+ * Method: details
  *
- *  Checks if the rank of the factory equals Gst::ElementFactory::RANK_PRIMARY.
+ * Gets some public information about the factory, 
+ * mostly for the benefit of editors.
+ *
+ * This information is encapsulated in a Hash object, 
+ * with the following (String) keys:
+ *
+ *   * longname: long (English) element name.
+ *   * klass: type of element, as hierarchy.
+ *   * license: license under which the element is provided.
+ *   * description: a short description about the element.
+ *   * version: version of the element.
+ *   * author: some information about the author(s).
+ *   * copyright: some copyright details (year, etc..).
+ *
+ * Here is an example.
+ *
+ *	# Prints all details related to the 'mad' element:
+ *	Gst::ElementFactory.find("mad").details do |k, v| 
+ *		p "#{k}: #{v}"
+ *	end 
+ *
+ * Returns: a Hash.
  */
-static VALUE rb_gst_elementfactory_rank_primary(self)
-    VALUE self;
+static VALUE
+rb_gst_elementfactory_get_details (VALUE self)
 {
-    return CBOOL2RVAL(rb_gst_elementfactory_get_rank(self) == constRankPrimary);
-}
-
-/*
- *  Method: rank_secondary? -> aBoolean
- *
- *  Checks if the rank of the factory equals Gst::ElementFactory::RANK_SECONDARY.
- */
-static VALUE rb_gst_elementfactory_rank_secondary(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(rb_gst_elementfactory_get_rank(self) == constRankSecondary);
-}
-
-/*
- *  Method: to_s -> aString
- *
- *  Gets a String representing the factory.
- */
-static VALUE rb_gst_elementfactory_to_s(self)
-    VALUE self;
-{
-    GstElementFactory *factory = RGST_ELEMENT_FACTORY(self); 
-    return rb_str_format("Element: %s (%s)",
-                         GST_PLUGIN_FEATURE_NAME(factory),
-                         factory->details->longname);
-}
-
-/*
- *  Method: pad_templates -> anArray
- *
- *  Requests all pad templates of factory, in an array 
- *  of Gst::PadTemplate objects.  
- */
-static VALUE rb_gst_elementfactory_get_pad_templates(self)
-    VALUE self;
-{
-    GstElementFactory *factory;
-    GList *list;
-    VALUE arr;
-
-    factory = RGST_ELEMENT_FACTORY(self); 
-    arr = rb_ary_new();
-    for (list = factory->padtemplates; list != NULL; list = g_list_next(list)) {
-        GstPadTemplate *pad = GST_PAD_TEMPLATE(list->data);
-        rb_ary_push(arr, RGST_PAD_TEMPLATE_NEW(pad));
-    }
-    return arr;
-}
-
-/*
- *  Method: each_pad_template { |aPadTemplateObject| block } -> nil
- *
- *  Calls the block for each pad template of the factory, passing a
- *  reference to the Gst::PadTemplate as parameter.
- *
- *  Always returns nil.
- */
-static VALUE rb_gst_elementfactory_each_pad_template(self)
-    VALUE self;
-{
-    return rb_ary_yield(rb_gst_elementfactory_get_pad_templates(self));
-}
-
-/*
- *  Method: details -> aHash
- *
- *  Gets some public information about the factory, 
- *  mostly for the benefit of editors.
- *
- *  This information is encapsulated in a Hash object, 
- *  with the following (String) keys:
- *
- *    * longname: long (English) element name.
- *    * klass: type of element, as hierarchy.
- *    * license: license under which the element is provided.
- *    * description: a short description about the element.
- *    * version: version of the element.
- *    * author: some information about the author(s).
- *    * copyright: some copyright details (year, etc..).
- *
- *  Example: 
- *
- *    # Prints all details related to the 'mad' element:
- *    Gst::ElementFactory.find("mad").details do |k, v| 
- *        p "#{k}: #{v}"
- *    end 
- */
-static VALUE rb_gst_elementfactory_get_details(self)
-    VALUE self;
-{
-    GstElementFactory *factory;
-    GstElementDetails *details;
-    VALUE hash;
+	GstElementFactory *factory;
+	GstElementDetails *details;
+	VALUE hash;
   
-    factory = RGST_ELEMENT_FACTORY(self); 
-    details = factory->details;
-    assert(details != NULL);
-    
-    hash = rb_hash_new();
+	factory = RGST_ELEMENT_FACTORY (self); 
+	details = factory->details;
+	g_assert (details != NULL);
+	
+	hash = rb_hash_new();
 
-    rb_hash_aset(hash, CSTR2RVAL("longname"),    CSTR2RVAL(details->longname));
-    rb_hash_aset(hash, CSTR2RVAL("klass"),       CSTR2RVAL(details->klass)); 
-    rb_hash_aset(hash, CSTR2RVAL("license"),     CSTR2RVAL(details->license));  
-    rb_hash_aset(hash, CSTR2RVAL("description"), CSTR2RVAL(details->description));
-    rb_hash_aset(hash, CSTR2RVAL("version"),     CSTR2RVAL(details->version));
-    rb_hash_aset(hash, CSTR2RVAL("author"),      CSTR2RVAL(details->author));
-    rb_hash_aset(hash, CSTR2RVAL("copyright"),   CSTR2RVAL(details->copyright));
+	rb_hash_aset (hash, CSTR2RVAL ("longname"), CSTR2RVAL (details->longname));
+	rb_hash_aset (hash, CSTR2RVAL ("klass"), CSTR2RVAL (details->klass)); 
+	rb_hash_aset (hash, CSTR2RVAL ("license"), CSTR2RVAL (details->license));  
+	rb_hash_aset (hash, CSTR2RVAL ("description"), CSTR2RVAL (details->description));
+	rb_hash_aset (hash, CSTR2RVAL ("version"), CSTR2RVAL (details->version));
+	rb_hash_aset (hash, CSTR2RVAL ("author"), CSTR2RVAL (details->author));
+	rb_hash_aset (hash, CSTR2RVAL ("copyright"), CSTR2RVAL (details->copyright));
 
-    return hash;
+	return hash;
 }
 
-/*
- *  Creates the Gst::ElementFactory class.
- */
-void Init_gst_elementfactory(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_ELEMENT_FACTORY, "ElementFactory", mGst);
+void
+Init_gst_elementfactory (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_ELEMENT_FACTORY, "ElementFactory", mGst);
 
-    rb_define_singleton_method(c, "make", rb_gst_elementfactory_make, -1);
-    rb_define_singleton_method(c, "find", rb_gst_elementfactory_find,  1);
-    
-    rb_define_method(c, "create", rb_gst_elementfactory_create,   -1);
-    rb_define_method(c, "rank",   rb_gst_elementfactory_get_rank,  0);
+	rb_define_singleton_method(c, "make", rb_gst_elementfactory_make, -1);
+	rb_define_singleton_method(c, "find", rb_gst_elementfactory_find, 1);
+	rb_define_method(c, "create", rb_gst_elementfactory_create, -1);
+	rb_define_method(c, "rank", rb_gst_elementfactory_get_rank, 0);
+	rb_define_method(c, "details", rb_gst_elementfactory_get_details, 0);
+	rb_define_method(c, "to_s", rb_gst_elementfactory_to_s, 0);
+	rb_define_method(c, "pad_templates", rb_gst_elementfactory_get_pad_templates, 0);
+	rb_define_method(c, "each_pad_template", rb_gst_elementfactory_each_pad_template, 0);
+	rb_define_method(c, "rank_marginal?",rb_gst_elementfactory_rank_marginal, 0);
+	rb_define_method(c, "rank_none?", rb_gst_elementfactory_rank_none, 0);
+	rb_define_method(c, "rank_primary?", rb_gst_elementfactory_rank_primary, 0);
+	rb_define_method(c, "rank_secondary?", rb_gst_elementfactory_rank_secondary, 0);
 
-    rb_define_method(c, "details", rb_gst_elementfactory_get_details, 0);
-    
-    rb_define_method(c, "to_s", rb_gst_elementfactory_to_s, 0);
-
-    rb_define_method(c, "pad_templates",     rb_gst_elementfactory_get_pad_templates, 0);
-    rb_define_method(c, "each_pad_template", rb_gst_elementfactory_each_pad_template, 0);
-
-    rb_define_method(c, "rank_marginal?",  rb_gst_elementfactory_rank_marginal,  0);
-    rb_define_method(c, "rank_none?",      rb_gst_elementfactory_rank_none,      0);
-    rb_define_method(c, "rank_primary?",   rb_gst_elementfactory_rank_primary,   0);
-    rb_define_method(c, "rank_secondary?", rb_gst_elementfactory_rank_secondary, 0);
-
-    rb_define_const(c, "RANK_MARGINAL",  constRankMarginal);
-    rb_define_const(c, "RANK_NONE",      constRankNone);
-    rb_define_const(c, "RANK_PRIMARY",   constRankPrimary);
-    rb_define_const(c, "RANK_SECONDARY", constRankSecondary);
+	rb_define_const(c, "RANK_MARGINAL", constRankMarginal);
+	rb_define_const(c, "RANK_NONE", constRankNone);
+	rb_define_const(c, "RANK_PRIMARY", constRankPrimary);
+	rb_define_const(c, "RANK_SECONDARY", constRankSecondary);
 }
-

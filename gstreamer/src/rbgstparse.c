@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,43 +20,44 @@
 
 #include "rbgst.h"
 
-/*
- *  Module: Gst::Parse
- *
- *  Parses command-line syntax into a pipeline. 
+/* Module: Gst::Parse
+ * Parses command-line syntax into a pipeline. 
  */
 
 /*
- *  Class method: launch(aCommandString) -> aBin 
+ * Class method: launch(command)
+ * command: a command line.
  *
- *  Creates a new pipeline based on command line syntax.
- *  Returns a reference to a new Gst::Bin on success.
- *  On failure, nil is returned, and an exception is thrown with a specific
- *  error message.   
+ * Creates a new pipeline based on command line syntax.
+ * On failure, an exception is thrown with a specific
+ * error message.   
+ *
+ * Returns: a reference to a new Gst::Bin on success,
+ * an exception on failure.
  */
-static VALUE rb_gst_parse_launch(self, command)
-    VALUE self, command;
+static VALUE
+rb_gst_parse_launch (VALUE self, VALUE command)
 {
 #if !defined(GST_DISABLE_PARSE)
-    GError *error;
-    GstBin *bin;
+	GError *error;
+	GstBin *bin;
 
-    error = NULL;
-    bin = gst_parse_launch(RVAL2CSTR(command), &error);
-    if (bin != NULL) {
-        return RGST_BIN_NEW(bin);
-    }
-    rb_raise(rb_eRuntimeError, error->message);    
+	error = NULL;
+	bin = gst_parse_launch (RVAL2CSTR (command), &error);
+	if (bin != NULL)
+		return RGST_BIN_NEW (bin);
+	rb_raise (rb_eRuntimeError, error->message);	
 #else
-    rb_raise(rb_eRuntimeError, 
-             "This function has been disabled "
-             "when GStreamer was compiled");
+	rb_raise (rb_eRuntimeError, 
+		  "This function has been disabled "
+		  "when GStreamer was compiled");
 #endif
-    return Qnil;
+	return Qnil;
 }
 
-void Init_gst_parse(void) {
-    VALUE c = rb_define_module_under(mGst, "Parse"); 
-    rb_define_module_function(c, "launch", rb_gst_parse_launch, 1);
+void
+Init_gst_parse (void)
+{
+	VALUE c = rb_define_module_under (mGst, "Parse"); 
+	rb_define_module_function (c, "launch", rb_gst_parse_launch, 1);
 }
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,26 +20,26 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::SystemClock < Gst::Clock
- *
- *  The Gst::SystemClock class is an implementation of Gst::Clock 
- *  using the system time. 
+/* Class: Gst::SystemClock
+ * The Gst::SystemClock class is an implementation of Gst::Clock 
+ * using the system time. 
  */
 
 /*
- *  Class method: obtain -> aSystemClockObject
+ * Class method: obtain
  *
- *  Gets a handle to the default system clock, as a reference
- *  to a Gst::SystemClock object.
+ * Returns: a handle to the default system clock, as a reference
+ * to a Gst::SystemClock object.
  */
-static VALUE rb_gst_systemclock_obtain(self)
+static VALUE
+rb_gst_systemclock_obtain (self)
 {
-    return RGST_SYSTEM_CLOCK_NEW(gst_system_clock_obtain());
+	return RGST_SYSTEM_CLOCK_NEW (gst_system_clock_obtain ());
 }
 
-void Init_gst_systemclock(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
-    rb_define_singleton_method(c, "obtain", rb_gst_systemclock_obtain, 0);
+void
+Init_gst_systemclock (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
+	rb_define_singleton_method (c, "obtain", rb_gst_systemclock_obtain, 0);
 }
-

@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -21,198 +20,139 @@
 
 #include "rbgst.h"
 
-/*
- *  Class: Gst::Format
- *
- *  Dynamically register new formats. 
+/* Class: Gst::Format
+ * Dynamically register new formats. 
  */
 
-static GstFormat* format_copy(const GstFormat* format) {
-    GstFormat* new_format;
-    g_return_val_if_fail (format != NULL, NULL);
-    new_format = g_new(GstFormat, sizeof(GstFormat));
-    *new_format = *format;
-    return new_format;
-}
-
-GType gst_format_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GstFormat",
-            (GBoxedCopyFunc)format_copy,
-            (GBoxedFreeFunc)g_free);
-    }
-    return our_type;
-}
-
-/*
- *  Class method: find(aNickString) -> aFormatObject
- *
- *  Returns a reference to the Gst::Format object registered with the
- *  given nick, or nil if this query was not registered.
- */
-static VALUE rb_gst_format_find(self, nick)
-    VALUE self, nick;
+static GstFormat *
+format_copy (const GstFormat* format)
 {
-    GstFormat format = gst_format_get_by_nick(RVAL2CSTR(nick));
-    return format != GST_FORMAT_UNDEFINED
-        ? RGST_FORMAT_NEW(&format)
-        : Qnil;
+	GstFormat *new_format;
+	g_return_val_if_fail (format != NULL, NULL);
+	new_format = g_new (GstFormat, sizeof (GstFormat));
+	*new_format = *format;
+	return new_format;
 }
 
-/*
- *  Class method: each { |aFormatObject| block } -> nil
- *
- *  Calls the block for each registered format, passing a reference
- *  to the Gst::Format object as parameter.
- *
- *  Always returns nil.
- */
-static VALUE rb_gst_format_each(self)
-    VALUE self;
+GType
+gst_format_get_type2 (void)
 {
-    const GList *list;
-
-    for (list = gst_format_get_definitions();
-         list != NULL;
-         list = g_list_next(list))
-    {
-        GstFormatDefinition *def = (GstFormatDefinition *) list->data;
-        rb_yield(RGST_FORMAT_NEW(&(def->value)));
-    }
-    return Qnil;
+	static GType our_type = 0;
+	if (our_type == 0)
+		our_type = g_boxed_type_register_static ("GstFormatClass",
+			(GBoxedCopyFunc)format_copy,
+			(GBoxedFreeFunc)g_free);
+	return our_type;
 }
 
 /*
- *  Method: type_id -> aFixnum
+ * Class method: find(nick)
+ * nick: the nick of an existing format.
  *
- *  Gets the type id of this format:
- *    * Gst::Format::UNDEFINED;
- *    * Gst::Format::DEFAULT;
- *    * Gst::Format::BYTES;
- *    * Gst::Format::TIME;
- *    * Gst::Format::BUFFERS;
- *    * Gst::Format::PERCENT;
- *    * Gst::Format::UNITS.
+ * Returns: a reference to the Gst::Format object registered with the
+ * given nick, or nil if this query was not registered.
  */
-static VALUE rb_gst_format_get_type_id(self)
-    VALUE self;
+static VALUE
+rb_gst_format_find (VALUE self, VALUE nick)
 {
-    GstFormat *format = RGST_FORMAT(self);
-    return INT2FIX(*format);
+	GstFormat format = gst_format_get_by_nick (RVAL2CSTR (nick));
+	return format != GST_FORMAT_UNDEFINED
+		? RGST_FORMAT_NEW (&format)
+		: Qnil;
 }
 
 /*
- *  Method: nick -> aString
+ * Class method: each { |format| ... }
  *
- *  Gets the short nick of the format, as a String. 
- */
-static VALUE rb_gst_format_get_nick(self)
-    VALUE self;
-{
-    GstFormat *format = RGST_FORMAT(self);
-    return CSTR2RVAL(gst_format_get_details(*format)->nick);
-}
-
-/*
- *  Method: description -> aString
+ * Calls the block for each registered format, passing a reference
+ * to the Gst::Format object as parameter.
  *
- *  Gets a longer description of the format, as a String. 
+ * Returns: always nil.
  */
-static VALUE rb_gst_format_get_description(self)
-    VALUE self;
+static VALUE
+rb_gst_format_each (VALUE self)
 {
-    GstFormat *format = RGST_FORMAT(self);
-    return CSTR2RVAL(gst_format_get_details(*format)->description);
+	const GList *list;
+
+	for (list = gst_format_get_definitions ();
+	     list != NULL;
+	     list = g_list_next (list))	{
+		GstFormatDefinition *def = (GstFormatDefinition *) list->data;
+		rb_yield (RGST_FORMAT_NEW (&(def->value)));
+	}
+	return Qnil;
+}
+
+/* Method: type_id
+ * Returns: the type id of this format (see Gst::Format::Type).
+ */
+static VALUE
+rb_gst_format_get_type_id (VALUE self)
+{
+	GstFormat *format = RGST_FORMAT (self);
+	return GENUM2RVAL (*format, GST_TYPE_FORMAT);
+}
+
+/* Method: nick
+ * Returns: the short nick of the format.
+ */
+static VALUE
+rb_gst_format_get_nick (VALUE self)
+{
+	GstFormat *format = RGST_FORMAT (self);
+	return CSTR2RVAL (gst_format_get_details (*format)->nick);
+}
+
+/* Method: description
+ * Returns: a longer description of the format.
+ */
+static VALUE
+rb_gst_format_get_description (VALUE self)
+{
+	GstFormat *format = RGST_FORMAT (self);
+	return CSTR2RVAL (gst_format_get_details (*format)->description);
 }
 
 /*
- *  Method: == aFormatObject -> aBoolean
+ * Method: ==(format)
+ * format: a Gst::Format.
  *
- *  Checks if two Gst::Format objects are registered under the
- *  same nick.
+ * Checks if two Gst::Format objects are registered under the
+ * same nick.
+ *
+ * Returns: true on success, false on failure.
  */
-static VALUE rb_gst_format_is_equal(self, other_format)
-    VALUE self, other_format;
+static VALUE
+rb_gst_format_is_equal (VALUE self, VALUE other_format)
 {
-    GstFormat *f1, *f2;
-    gchar *n1, *n2;
+	GstFormat *f1, *f2;
+	gchar *n1, *n2;
 
-    if (NIL_P(other_format)) {
-        return Qfalse;
-    }
+	if (NIL_P (other_format))
+		return Qfalse;
 
-    f1 = RGST_FORMAT(self);
-    f2 = RGST_FORMAT(other_format);
+	f1 = RGST_FORMAT (self);
+	f2 = RGST_FORMAT (other_format);
 
-    n1 = gst_format_get_details(*f1)->nick;
-    n2 = gst_format_get_details(*f2)->nick;
+	n1 = gst_format_get_details (*f1)->nick;
+	n2 = gst_format_get_details (*f2)->nick;
 
-    return CBOOL2RVAL(strcmp(n1, n2) == 0);
+	return CBOOL2RVAL (strcmp (n1, n2) == 0);
 }
 
-/*
- *  Constant: UNDEFINED
- *  Undefined format.
- */
-static VALUE constUndefined = INT2FIX(GST_FORMAT_UNDEFINED);
+void
+Init_gst_format (void)
+{
+	VALUE c = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
 
-/*
- *  Constant: DEFAULT
- *  The default format of the pad/element.
- */
-static VALUE constDefault = INT2FIX(GST_FORMAT_DEFAULT);
+	rb_define_singleton_method (c, "each", rb_gst_format_each, 0);
+	rb_define_singleton_method (c, "find", rb_gst_format_find, 1);
 
-/*
- *  Constant: BYTES
- *  Bytes.
- */
-static VALUE constBytes = INT2FIX(GST_FORMAT_BYTES);
+	rb_define_method (c, "type_id", rb_gst_format_get_type_id, 0);
+	rb_define_method (c, "nick",	rb_gst_format_get_nick,	0);
+	rb_define_method (c, "description", rb_gst_format_get_description, 0);
+	rb_define_method (c, "==", rb_gst_format_is_equal, 1);
 
-/*
- *  Constant: TIME
- *  Time in nanoseconds.
- */
-static VALUE constTime = INT2FIX(GST_FORMAT_TIME);
-
-/*
- *  Constant: BUFFERS
- *  Buffers.
- */
-static VALUE constBuffers = INT2FIX(GST_FORMAT_BUFFERS);
-
-/*
- *  Constant: PERCENT
- *  Percentage of stream.
- */
-static VALUE constPercent = INT2FIX(GST_FORMAT_PERCENT);
-
-/*
- *  Constant: UNITS
- *  Frames for video, samples for audio, other definitions as defined by
- *  the media type.
- */
-static VALUE constUnits = INT2FIX(GST_FORMAT_UNITS);
-
-void Init_gst_format(void) {
-    VALUE c = G_DEF_CLASS(GST_TYPE_FORMAT, "Format", mGst);
-
-    rb_define_singleton_method(c, "each", rb_gst_format_each, 0);
-    rb_define_singleton_method(c, "find", rb_gst_format_find, 1);
-
-    rb_define_method(c, "type_id", rb_gst_format_get_type_id, 0);
-    rb_define_method(c, "nick",    rb_gst_format_get_nick,    0);
-    rb_define_method(c, "description", 
-                     rb_gst_format_get_description, 0);
-
-    rb_define_method(c, "==", rb_gst_format_is_equal, 1);
-
-    rb_define_const(c, "UNDEFINED", constUndefined);
-    rb_define_const(c, "DEFAULT",   constDefault);
-    rb_define_const(c, "BYTES",     constBytes);
-    rb_define_const(c, "TIME",      constTime);
-    rb_define_const(c, "BUFFERS",   constBuffers);
-    rb_define_const(c, "PERCENT",   constPercent);
-    rb_define_const(c, "UNITS",     constUnits);
+	G_DEF_CLASS (GST_TYPE_FORMAT, "Type", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_FORMAT, "GST_FORMAT_");
 }
-
