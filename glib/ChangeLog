@@ -1,7 +1,11 @@
 2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
 
-	* src/rbgobject.c: change rbgobj_set_gobject() to rbgobj_initialize_gobject()
-	* src/rbgobject.h: create RBGOBJ_INITIALIZE()
+	* src/rbgobject.h: Fix parameter number of RBGOBJ_INITIALIZE().
+
+2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: change rbgobj_set_gobject() to rbgobj_initialize_gobject().
+	* src/rbgobject.h: create RBGOBJ_INITIALIZE().
 
 2002-06-22  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 

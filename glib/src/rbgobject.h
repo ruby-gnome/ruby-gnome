@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2002/06/22 15:01:52 $
+  $Date: 2002/06/22 15:33:38 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -44,7 +44,7 @@ extern ID id_delete;
 
 #define RVAL2GOBJ(obj) (rbgobj_get_gobject(obj))
 #define GOBJ2RVAL(gobj) (rbgobj_get_value_from_gobject(G_OBJECT(gobj)))
-#define RBGOBJ_INITIALIZE(gobj) (rbgobj_initialize_gobject(obj, G_OBJECT(gobj)))
+#define RBGOBJ_INITIALIZE(obj, gobj) (rbgobj_initialize_gobject(obj, G_OBJECT(gobj)))
 
 extern GObject* rbgobj_get_gobject(VALUE obj);
 extern GObject* rbgobj_force_get_gobject(VALUE obj);
