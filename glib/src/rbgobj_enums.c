@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/09 15:52:31 $
+  $Author: sakai $
+  $Date: 2003/11/15 14:44:24 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -160,7 +160,8 @@ rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix)
 
 typedef struct {
     GEnumClass* gclass;
-    GEnumValue* value;
+    gint value;
+    GEnumValue* info;
 } enum_holder;
 
 static void
@@ -200,7 +201,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
     klass = GTYPE2CLASS(gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
-        return enum_get_holder(obj)->value->value;
+        return enum_get_holder(obj)->value;
     else
         rb_raise(rb_eTypeError, "not a %s", rb_class2name(klass));
 }
@@ -288,7 +289,7 @@ enum_s_allocate(VALUE self)
         enum_holder* p;
         VALUE result = Data_Make_Struct(self, enum_holder, NULL, enum_free, p);
         p->gclass = g_type_class_ref(gtype);
-        p->value  = NULL;
+        p->info   = NULL;
         return result;
     }
 }
@@ -300,15 +301,15 @@ enum_initialize(VALUE self, VALUE arg)
 
     if (rb_respond_to(arg, rb_intern("to_str"))) {
         const char* str = StringValuePtr(arg);
-        p->value = g_enum_get_value_by_name(p->gclass, str);
-        if (! p->value)
-            p->value = g_enum_get_value_by_nick(p->gclass, str);
+        p->info = g_enum_get_value_by_name(p->gclass, str);
+        if (! p->info)
+            p->info = g_enum_get_value_by_nick(p->gclass, str);
+        if (! p->info)
+            rb_raise(rb_eArgError, "invalid argument");
     } else {
-        p->value = g_enum_get_value(p->gclass, NUM2INT(arg));
+        p->value = NUM2INT(arg);
+        p->info  = g_enum_get_value(p->gclass, p->value);
     }
-
-    if (! p->value)
-        rb_raise(rb_eArgError, "invalid argument");
 
     return Qnil;
 }
@@ -317,21 +318,21 @@ static VALUE
 enum_to_i(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
-    return INT2NUM(p->value->value);
+    return INT2NUM(p->value);
 }
 
 static VALUE
 enum_name(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
-    return rb_str_new2(p->value->value_name);
+    return p->info ? rb_str_new2(p->info->value_name) : Qnil;
 }
 
 static VALUE
 enum_nick(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
-    return rb_str_new2(p->value->value_nick);
+    return p->info ? rb_str_new2(p->info->value_nick) : Qnil;
 }
 
 static VALUE
@@ -342,8 +343,12 @@ enum_inspect(VALUE self)
     gchar* str;
     VALUE result;
 
-    str = g_strdup_printf("#<%s %s>",
-                          cname, p->value->value_nick);
+    if (p->info)
+        str = g_strdup_printf("#<%s %s>",
+                              cname, p->info->value_nick);
+    else
+        str = g_strdup_printf("#<%s %d>",
+                              cname, p->value);
     result = rb_str_new2(str);
     g_free(str);
 
@@ -365,7 +370,7 @@ static VALUE
 enum_hash(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
-    return UINT2NUM(p->value->value ^ G_TYPE_FROM_CLASS(p->gclass));
+    return UINT2NUM(p->value ^ G_TYPE_FROM_CLASS(p->gclass));
 }
 
 static VALUE
@@ -588,8 +593,6 @@ flags_initialize(int argc, VALUE* argv, VALUE self)
             p->value = p->info->value;
         } else {
             p->value = NUM2UINT(arg);
-            if ((p->gclass->mask & p->value) != p->value)
-                rb_raise(rb_eArgError, "invalid argument");
         }
     }
 

@@ -1,5 +1,7 @@
 2003-11-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_enums.c: disable range checks.
+
 	* sample/type-register.rb: call GLib::Object#notify when a
 	property is updated.
 
