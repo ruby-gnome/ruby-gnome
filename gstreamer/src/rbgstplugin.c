@@ -114,30 +114,7 @@ static VALUE rb_gst_plugin_get_features(self)
          list = g_list_next(list))
     {
         GstPluginFeature *feature = GST_PLUGIN_FEATURE(list->data);
-        VALUE obj = Qnil;
-
-        if (GST_IS_ELEMENT_FACTORY(feature)) {
-            obj = RGST_ELEMENT_FACTORY_NEW(GST_ELEMENT_FACTORY(feature));
-        }
-        else if (GST_IS_TYPE_FACTORY(feature)) {
-            obj = RGST_TYPE_FACTORY_NEW(GST_TYPE_FACTORY(feature));
-        }
-        else if (GST_IS_SCHEDULER_FACTORY(feature)) {
-            obj = RGST_SCHEDULER_FACTORY_NEW(GST_SCHEDULER_FACTORY(feature));
-        }
-        else if (GST_IS_INDEX_FACTORY(feature)) {
-            obj = RGST_INDEX_FACTORY_NEW(GST_INDEX_FACTORY(feature));
-        }
-        else if (GST_IS_AUTOPLUG_FACTORY(feature)) {
-            obj = RGST_AUTOPLUG_FACTORY_NEW(GST_AUTOPLUG_FACTORY(feature));
-        }
-        else {
-            rb_raise(rb_eArgError,
-                     "GstPluginFeature of type ``%s'' not yet supported",
-                     g_type_name(G_OBJECT_TYPE(feature))); 
-        }
-        
-        rb_ary_push(arr, obj);
+        rb_ary_push(arr, instanciate_pluginfeature(feature));
     }
     return arr;
 }

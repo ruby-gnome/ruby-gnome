@@ -68,6 +68,44 @@ static VALUE rb_gst_pluginfeature_unload_thyself(self)
     return self;
 }
 
+gboolean is_valid_pluginfeature_type(type)
+    const GType type;
+{
+    return type == GST_TYPE_AUTOPLUG_FACTORY 
+        || type == GST_TYPE_ELEMENT_FACTORY
+        || type == GST_TYPE_INDEX_FACTORY
+        || type == GST_TYPE_SCHEDULER_FACTORY
+        || type == GST_TYPE_TYPE_FACTORY;
+}
+
+VALUE instanciate_pluginfeature(feature)
+    GstPluginFeature *feature;
+{
+    VALUE obj = Qnil;
+
+    if (GST_IS_ELEMENT_FACTORY(feature)) {
+        obj = RGST_ELEMENT_FACTORY_NEW(feature);
+    }
+    else if (GST_IS_TYPE_FACTORY(feature)) {
+        obj = RGST_TYPE_FACTORY_NEW(feature);
+    }
+    else if (GST_IS_SCHEDULER_FACTORY(feature)) {
+        obj = RGST_SCHEDULER_FACTORY_NEW(feature);
+    }
+    else if (GST_IS_INDEX_FACTORY(feature)) {
+        obj = RGST_INDEX_FACTORY_NEW(feature);
+    }
+    else if (GST_IS_AUTOPLUG_FACTORY(feature)) {
+        obj = RGST_AUTOPLUG_FACTORY_NEW(feature);
+    }
+    else {
+        rb_raise(rb_eArgError,
+                 "Invalid plugin feature of type ``%s''",
+                 g_type_name(G_OBJECT_TYPE(feature))); 
+    }
+    return obj;
+}
+
 void Init_gst_pluginfeature(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_PLUGIN_FEATURE, "PluginFeature", mGst);
     rb_define_method(c, "name", rb_gst_pluginfeature_get_name, 0);

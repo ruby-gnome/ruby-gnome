@@ -116,6 +116,10 @@ VALUE rbgst_new_gstobject(void *);
 VALUE rb_str_format(char *fmt, ...);
 VALUE rb_ary_yield(VALUE arr);
 
+/* implemented in rbgstpluginfeature.c */
+gboolean is_valid_pluginfeature_type(const GType type);
+VALUE instanciate_pluginfeature(GstPluginFeature *feature);
+
 #define DBL2NUM(v)      (rb_float_new(v))
 
 /* 
