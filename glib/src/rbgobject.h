@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2002/09/30 14:53:08 $
+  $Author: sakai $
+  $Date: 2002/10/13 06:41:58 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -113,6 +113,11 @@ extern gpointer rbgobj_ptr2cptr(VALUE ptr);
 extern GType rbgobj_ruby_value_get_type();
 extern VALUE g_value_get_ruby_value(const GValue* value);
 extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
+
+/* rbgobj_object.c */
+
+extern void rbgobj_register_property_setter(GType gtype, const char* prop_name, RValueToGValueFunc func);
+extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, GValueToRValueFunc func);
 
 /* rbgobj_boxed.c */
 extern VALUE rbgobj_boxed_create(VALUE klass);

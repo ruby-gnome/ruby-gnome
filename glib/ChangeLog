@@ -1,3 +1,12 @@
+2002-10-13  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_valuetypes.c (rbgobj_ptr2cptr): check argument type
+	* src/rbgobj_valuetypes.c: don't register some transformation function
+	which may raise exception
+	* src/rbgobj_object.c: add rbgobj_register_property_getter() and
+	rbgobj_register_property_setter() for overwriting VALUE<=>GValue
+	converter for property.
+
 2002-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.[ch], src/rbglib.c: add G_DEF_SETTERS macro.

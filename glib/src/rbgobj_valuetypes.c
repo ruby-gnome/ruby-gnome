@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/10/13 06:41:58 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -36,6 +36,8 @@ rbgobj_ptr2cptr(ptr)
     return rb_dlptr2cptr(ptr);
 #else
     gpointer dest;
+    if (!rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER)))
+        rb_raise(rb_eTypeError, "not a pointer object");
     Data_Get_Struct(ptr, void, dest);
     return dest;
 #endif
@@ -168,11 +170,12 @@ GType rbgobj_ruby_value_get_type()
           (GBoxedFreeFunc)boxed_ruby_value_unref);
 
       for (i = 0; i < sizeof(table)/sizeof(table[0]); i++){
-          g_value_register_transform_func(our_type, table[i],
-                                          value_transform_ruby_any);
           g_value_register_transform_func(table[i], our_type,
                                           value_transform_any_ruby);
       }
+
+      g_value_register_transform_func(our_type, G_TYPE_BOOLEAN,
+                                      value_transform_ruby_any);
   }
   return our_type;
 }

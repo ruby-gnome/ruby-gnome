@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/09/29 13:36:28 $
+  $Date: 2002/10/13 06:41:58 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -126,6 +126,41 @@ gobj_s_list_properties(self)
     return ary;
 }
 
+static VALUE type_to_prop_setter_table;
+static VALUE type_to_prop_getter_table;
+
+void
+rbgobj_register_property_setter(gtype, name, func)
+    GType gtype;
+    const char* name;
+    RValueToGValueFunc func;
+{
+    VALUE table = rb_hash_aref(type_to_prop_setter_table, INT2FIX(gtype));
+    if (NIL_P(table)){
+        table = rb_hash_new();
+        rb_hash_aset(type_to_prop_setter_table, INT2FIX(gtype), table);
+    }
+
+    rb_hash_aset(table, rb_str_new2(name),
+                 Data_Wrap_Struct(rb_cData, NULL, NULL, func));
+}
+
+void
+rbgobj_register_property_getter(gtype, name, func)
+    GType gtype;
+    const char* name;
+    GValueToRValueFunc func;
+{
+    VALUE table = rb_hash_aref(type_to_prop_getter_table, INT2FIX(gtype));
+    if (NIL_P(table)){
+        table = rb_hash_new();
+        rb_hash_aset(type_to_prop_getter_table, INT2FIX(gtype), table);
+    }
+
+    rb_hash_aset(table, rb_str_new2(name),
+                 Data_Wrap_Struct(rb_cData, NULL, NULL, func));
+}
+
 static VALUE
 gobj_set_property(self, prop_name, val)
     VALUE self, prop_name, val;
@@ -146,12 +181,29 @@ gobj_set_property(self, prop_name, val)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
-        GValue tmp = {0,};
-        g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        if (!NIL_P(val))
-            rbgobj_rvalue_to_gvalue(val, &tmp);
-        g_object_set_property(RVAL2GOBJ(self), name, &tmp);
-        g_value_unset(&tmp);
+        RValueToGValueFunc setter = NULL;
+        GValue gval = {0,};
+        g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
+
+        {
+            VALUE table = rb_hash_aref(type_to_prop_setter_table,
+                                       INT2FIX(pspec->owner_type));
+            if (!NIL_P(table)){
+                VALUE obj = rb_hash_aref(table, rb_str_new2(name));
+                if (obj)
+                    Data_Get_Struct(obj, void, setter);
+            }
+        }
+
+        if (setter)
+            setter(val, &gval);
+        else {
+            if (!NIL_P(val))
+                rbgobj_rvalue_to_gvalue(val, &gval);
+        }
+
+        g_object_set_property(RVAL2GOBJ(self), name, &gval);
+        g_value_unset(&gval);
         return self;
     }
 }
@@ -176,12 +228,24 @@ gobj_get_property(self, prop_name)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
-        GValue tmp = {0,};
+        GValueToRValueFunc getter = NULL;
+        GValue gval = {0,};
         VALUE ret;
-        g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        g_object_get_property(RVAL2GOBJ(self), name, &tmp);
-        ret = GVAL2RVAL(&tmp);
-        g_value_unset(&tmp);
+
+        {
+            VALUE table = rb_hash_aref(type_to_prop_getter_table,
+                                       INT2FIX(pspec->owner_type));
+            if (!NIL_P(table)){
+                VALUE obj = rb_hash_aref(table, rb_str_new2(name));
+                if (obj)
+                    Data_Get_Struct(obj, void, getter);
+            }
+        }
+
+        g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
+        g_object_get_property(RVAL2GOBJ(self), name, &gval);
+        ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
+        g_value_unset(&gval);
         return ret;
     }
 }
@@ -320,5 +384,10 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "inspect", gobj_inspect, 0);
 
     rb_define_method(cGObject, "singleton_method_added", gobj_smethod_added, 1);
+
+    rb_global_variable(&type_to_prop_setter_table);
+    rb_global_variable(&type_to_prop_getter_table);
+    type_to_prop_setter_table = rb_hash_new();
+    type_to_prop_getter_table = rb_hash_new();
 }
 
