@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Date: 2003/02/02 09:33:17 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -135,7 +135,7 @@ gdkgc_set_clip_rectangle(self, rectangle)
     VALUE self, rectangle;
 {
     gdk_gc_set_clip_rectangle(_SELF(self), 
-                              (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_COLOR));
+                              (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_RECTANGLE));
     return self;
 }
 
