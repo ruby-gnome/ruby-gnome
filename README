@@ -14,17 +14,18 @@ Release packages
 
    ruby-gnome2-all
     - ruby-gtk2
+    - Ruby/GConf2        - GConf 2.0.x or later
     - Ruby/GNOME2        - libgnome-2.0.x, libgnomeui-2.0.x or later
     - Ruby/GnomeCanvas2  - libgnomecanvas-2.0.x or later
-    - Ruby/Libart2       - libart_lgpl 2.3.12 or later
-    - Ruby/Libglade2     - Libglade 2.0.x or later
-    - Ruby/GConf2        - GConf 2.0.x or later
+    - Ruby/GnomePrint    - libgnomeprint-2.8.x or later
     - Ruby/GnomeVFS      - GnomeVFS 2.0.x or later
     - Ruby/GStreamer     - GStreamer 0.8.x or later
     - Ruby/GtkHtml2      - GtkHtml2 2.0.x or later
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
-    - Ruby/Libgda        - libgda 1.0.3 or later
     - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
+    - Ruby/Libart2       - libart_lgpl 2.3.12 or later
+    - Ruby/Libgda        - libgda 1.0.3 or later
+    - Ruby/Libglade2     - Libglade 2.0.x or later
     - Ruby/PanelApplet   - gnome-panel 2.6.0 or later
 
 Install
@@ -67,16 +68,17 @@ Dependencies
       Ruby/Pango         depends on Ruby/GLib.
       Ruby/GdkPixbuf     depends on Ruby/GLib.
       Ruby/GTK           depends on Ruby/GLib, Ruby/ATK, Ruby/Pango, Ruby/GdkPixbuf
-      Ruby/GnomeCanvas   depends on Ruby/GTK, Ruby/Libart.
-      Ruby/GNOME         depends on Ruby/GnomeCanvas.
-      Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional). REXML(optional)
       Ruby/GConf         depends on Ruby/GLib.
+      Ruby/GNOME         depends on Ruby/GnomeCanvas.
+      Ruby/GnomeCanvas   depends on Ruby/GTK, Ruby/Libart.
       Ruby/GnomeVFS      depends on Ruby/GLib.
+      Ruby/GnomePrint    depends on Ruby/GLib.
       Ruby/GStreamer     depends on Ruby/GLib.
       Ruby/GtkHtml2      depends on Ruby/GTK.
       Ruby/GtkGLExt      depends on Ruby/GTK, rbogl.
-      Ruby/Libgda        depends on Ruby/GLib.
       Ruby/GtkSourceView depends on Ruby/GTK.
+      Ruby/Libgda        depends on Ruby/GLib.
+      Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional). REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
 
 Copying

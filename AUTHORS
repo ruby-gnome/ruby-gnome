@@ -3,6 +3,9 @@ The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 Dario Linsky <dlinsky@web.de>
      German Website(M).
 
+Erwan Loisant <eloisant@gmail.com>
+     Ruby/GStreamer(M).
+
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
 
@@ -22,12 +25,15 @@ Junichiro Kita <kita@kitaj.no-ip.com>
 KATO Kazuyoshi <kadu@zb.wakwak.com>
      Ruby/GTK(Especially gtk-demo), Gdk::Pixbuf.
 
+Kouhei Sutou  <kou@cozmixng.org>
+     Ruby/GnomePrint(M)
+
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <lrz@gnome.org>
-     Ruby/GStreamer(M), Ruby/Libgda(M), Ruby/GtkSourceView(M), 
-     Ruby/GLib, Ruby/GTK, French Website(M), Website, Tutorials.
+     Ruby/GStreamer, Ruby/Libgda(M), Ruby/GtkSourceView(M), 
+     Ruby/GLib, Ruby/GTK, French Website, Website, Tutorials.
 
 Malte Milatz <malte@gmx-topmail.de>
      German Website.
@@ -36,7 +42,7 @@ Martin Povolný <xpovolny@fi.muni.cz>
      Ruby/GtkHtml2(M). Ruby/GTK, 
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
-     Vice maintainer. Ruby/GLib(M) and almost of the important design
+     Ruby/GLib(M) and almost of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>
