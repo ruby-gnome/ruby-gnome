@@ -1,3 +1,8 @@
+2003-01-04  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
+	License version 2." to "the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.".
+
 2003-01-03  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/lib/gconf2.rb: Added gconf2.so requirement.
@@ -24,7 +29,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/01/02 15:15:43 $ macros.
+	and $Date: 2003/01/04 06:10:50 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

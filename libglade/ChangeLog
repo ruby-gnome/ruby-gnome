@@ -1,3 +1,8 @@
+2003-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
+	License version 2." to "the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.".
+
 2002-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/treeview.glade, treeview.rb: Add a sample for Gtk::TreeView.
