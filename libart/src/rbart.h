@@ -4,7 +4,7 @@
   rbart.h - header file for Art module of ruby
 
   $Author: mutoh $
-  $Date: 2003/02/08 18:51:44 $
+  $Date: 2003/02/18 17:01:20 $
 
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
@@ -14,6 +14,10 @@
 #define _RBART_H_included
 #include <libart_lgpl/libart.h>
 #include <ruby.h>
+
+#ifndef ULONG2NUM
+#define ULONG2NUM UINT2NUM
+#endif
 
 extern VALUE artAffine;
 extern VALUE artSVP;

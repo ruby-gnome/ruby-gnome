@@ -4,7 +4,7 @@
    rbart_canvas.c -
 
    $Author: mutoh $
-   $Date: 2003/02/09 09:05:50 $
+   $Date: 2003/02/18 17:01:21 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 
@@ -228,6 +228,7 @@ user_empty_output_buffer(cinfo)
     rb_str_cat(cd->r_result, cd->buffer, BUFSIZ);
     cinfo->dest->next_output_byte = cd->buffer;
     cinfo->dest->free_in_buffer = BUFSIZ;
+    return TRUE;
 }
 
 static void
@@ -249,12 +250,10 @@ canvas_to_jpeg(argc, argv, r_self)
     VALUE r_quality;
     ArtCanvas *canvas;
     struct jpeg_error_mgr err;
-    JOCTET buffer[BUFSIZ];
     struct jpeg_compress_struct cinfo;
     struct jpeg_destination_mgr dest;
     JSAMPLE **row_pointers;
     int i;
-    VALUE r_result;
     struct client_data cd;
 
     rb_scan_args(argc, argv, "01", &r_quality);
@@ -323,7 +322,7 @@ canvas_to_png(argc, argv, r_self)
     png_structp png_ptr;
     png_infop info_ptr;
     VALUE r_result;
-    art_u8 *rgba;
+    art_u8 *rgba = NULL;
     png_bytepp row_pointers;
     int i;
 
