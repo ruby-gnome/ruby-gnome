@@ -1,3 +1,8 @@
+2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-path-def.c: rename
+	Gnome::CanvasPathDef#current_point? to #has_current_point?.
+
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Add file.

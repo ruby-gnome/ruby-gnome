@@ -301,7 +301,7 @@ Init_gnome_canvas_path_def(mGnome)
     rb_define_method(gnoCanvasPathDef, "closepath_current", cpathdef_closepath_current, 0);
     rb_define_method(gnoCanvasPathDef, "length", cpathdef_length, 0);
     rb_define_method(gnoCanvasPathDef, "empty?", cpathdef_is_empty, 0);
-    rb_define_method(gnoCanvasPathDef, "current_point?", cpathdef_has_current_point, 0);
+    rb_define_method(gnoCanvasPathDef, "has_current_point?", cpathdef_has_current_point, 0);
     rb_define_method(gnoCanvasPathDef, "current_point", cpathdef_current_point, 0);
     rb_define_method(gnoCanvasPathDef, "any_open?", cpathdef_any_open, 0);
     rb_define_method(gnoCanvasPathDef, "all_open?", cpathdef_all_open, 0);
