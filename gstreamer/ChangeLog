@@ -1,3 +1,9 @@
+2003-08-24  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgstbin.c: Added methods get_by_name_recurse_up, auto_clock and 
+	  use_clock.
+	* tests/rc_element.rb: Added test for Gst::Bin#get_by_name*.
+
 2003-08-23  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgst*.c: Changed extdoc.rb enumeration syntax to something 
