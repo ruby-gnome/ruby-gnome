@@ -83,25 +83,33 @@ GType track_get_type(void) {
     return our_type;
 }
 
-static VALUE rb_gst_mediatype_new(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE rb_gst_mediatype_new(self)
+    VALUE self;
 {
-    VALUE r_source;
     GstMediaInfo *info;
-    const char *source;
+    GError *error;
 
-    rb_scan_args(argc, argv, "01", &r_source);
+    error = NULL;
+    info = gst_media_info_new(&error);
 
-    source = NIL_P(r_source) ? NULL : RVAL2CSTR(r_source);
-    info = gst_media_info_new(NULL);
+    if (info == NULL) 
+        RAISE_GERROR(error);
 
-    if (info != NULL) {
-       gst_media_info_set_source(info, source, NULL);
-       G_INITIALIZE(self, info);
-       return RGST_MEDIA_INFO_NEW(info);
-    }
-    return Qnil;
+    G_INITIALIZE(self, info);
+    return RGST_MEDIA_INFO_NEW(info);
+}
+
+static VALUE rb_gst_mediatype_set_source(self, source)
+    VALUE self, source;
+{
+    GError *error;
+
+    error = NULL;
+    if (gst_media_info_set_source (RGST_MEDIA_INFO (self),
+                                   RVAL2CSTR (source),
+                                   &error))
+        return self;
+    RAISE_GERROR(error);
 }
 
 static VALUE rb_gst_mediatype_read(argc, argv, self)
@@ -111,19 +119,21 @@ static VALUE rb_gst_mediatype_read(argc, argv, self)
     VALUE location, r_flags;
     GstMediaInfoStream *stream;
     int flags;
-    GError *error = NULL;
-
+    GError *error;
+    
     rb_scan_args(argc, argv, "11", &location, &r_flags);
 
     flags =  NIL_P(r_flags) ? GST_MEDIA_INFO_ALL : FIX2INT(r_flags);
+    error = NULL;
     stream = gst_media_info_read(RGST_MEDIA_INFO(self),
                                  RVAL2CSTR(location),
                                  flags,
                                  &error);
 
-    if (error) RAISE_GERROR(error);
+    if (error) 
+        RAISE_GERROR(error);
 
-    return stream ? RGST_MEDIA_INFO_STREAM_NEW(stream) : Qnil;
+    return stream != NULL ? RGST_MEDIA_INFO_STREAM_NEW(stream) : Qnil;
 }
 
 static VALUE stream_seekable(self)
@@ -201,7 +211,7 @@ static VALUE track_metadata(self)
 {
     GstMediaInfoTrack *track = RGST_MEDIA_INFO_TRACK(self);
     return track->metadata != NULL
-        ? RGST_CAPS_NEW(track->metadata)
+        ? gst_structure_to_ruby_hash(track->metadata)
         : Qnil;
 }
 
@@ -210,7 +220,7 @@ static VALUE track_streaminfo(self)
 {
     GstMediaInfoTrack *track = RGST_MEDIA_INFO_TRACK(self);
     return track->streaminfo != NULL
-        ? RGST_CAPS_NEW(track->streaminfo)
+        ? gst_structure_to_ruby_hash(track->streaminfo)
         : Qnil;
 }
 
@@ -250,14 +260,16 @@ static VALUE track_con_streams(self)
 
 void Init_gst_mediatype(void) {
     VALUE c = G_DEF_CLASS(GST_MEDIA_INFO_TYPE, "MediaInfo", mGst);
-    rb_define_method(c, "initialize", rb_gst_mediatype_new, -1);
+    rb_define_method(c, "initialize", rb_gst_mediatype_new, 0);
+    rb_define_method(c, "set_source", rb_gst_mediatype_set_source, 1);
     rb_define_method(c, "read", rb_gst_mediatype_read, -1);
     rb_define_const(c, "STREAM", INT2FIX(GST_MEDIA_INFO_STREAM));
     rb_define_const(c, "MIME", INT2FIX(GST_MEDIA_INFO_MIME));
     rb_define_const(c, "METADATA", INT2FIX(GST_MEDIA_INFO_METADATA));
     rb_define_const(c, "FORMAT", INT2FIX(GST_MEDIA_INFO_FORMAT));
     rb_define_const(c, "ALL", INT2FIX(GST_MEDIA_INFO_ALL));
-
+    G_DEF_SETTERS(c);
+    
     c = G_DEF_CLASS(GST_MEDIA_INFO_STREAM_TYPE, "MediaInfoStream", mGst);
     rb_define_method(c, "seekable?", stream_seekable, 0);
     rb_define_method(c, "mime", stream_mime, 0);

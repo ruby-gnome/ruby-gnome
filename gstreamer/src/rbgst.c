@@ -55,8 +55,8 @@ Init_gst_classes (void)
     extern void Init_gst_registry (void);
     extern void Init_gst_scheduler (void);
     extern void Init_gst_schedulerfactory (void);
-    extern void Init_gst_structure (void);
     extern void Init_gst_systemclock (void);
+    extern void Init_gst_tag (void);
     extern void Init_gst_thread (void);
 	extern void Init_gst_typefindfactory (void);
     extern void Init_gst_xml (void);
@@ -92,8 +92,8 @@ Init_gst_classes (void)
     Init_gst_registry ();
     Init_gst_scheduler ();
     Init_gst_schedulerfactory ();
-    Init_gst_structure ();
     Init_gst_systemclock ();
+    Init_gst_tag ();
     Init_gst_thread ();
 	Init_gst_typefindfactory ();
     Init_gst_xml ();

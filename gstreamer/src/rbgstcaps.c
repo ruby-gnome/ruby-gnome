@@ -26,7 +26,7 @@
 
 /*
  * Method: new(*structures)
- * structures: a list of Gst::Structure objects.
+ * structures: a list of Hash objects.
  *
  * Creates a new Gst::Caps object and adds all given structures to it.  If no
  * structures are given, the caps will be empty.  If you want a caps that is 
@@ -44,7 +44,8 @@ rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
     caps = gst_caps_new_empty ();
     if (caps != NULL) {
         for (i = 0; i < argc; i++)
-            gst_caps_append_structure (caps, RGST_STRUCTURE (argv[i]));
+            gst_caps_append_structure (caps, 
+                                       ruby_hash_to_gst_structure (argv[i]));
         RBGST_INITIALIZE (self, caps);
     }
     return Qnil;
@@ -82,7 +83,7 @@ rb_gst_caps_append (VALUE self, VALUE caps)
 
 /*
  * Method: append_structure(structure)
- * structure: the Gst::Structure to append.
+ * structure: the Hash object to append.
  *
  * Append the given structure to self.
  *
@@ -91,7 +92,8 @@ rb_gst_caps_append (VALUE self, VALUE caps)
 static VALUE
 rb_gst_caps_append_structure (VALUE self, VALUE structure)
 {
-    gst_caps_append_structure (RGST_CAPS (self), RGST_STRUCTURE (structure));
+    gst_caps_append_structure (RGST_CAPS (self), 
+                               ruby_hash_to_gst_structure (structure));
     return self;
 }
 
@@ -111,7 +113,7 @@ rb_gst_caps_get_size (VALUE self)
  * Finds the structure in the caps that has the given index, and 
 returns it.
  *
- * Returns: a Gst::Structure corresponding to index, or nil if not found.
+ * Returns: a Hash object corresponding to index, or nil if not found.
  */
 static VALUE
 rb_gst_caps_get_structure (VALUE self, VALUE index)
@@ -119,7 +121,7 @@ rb_gst_caps_get_structure (VALUE self, VALUE index)
     GstStructure *structure = gst_caps_get_structure (RGST_CAPS (self),
                                                       FIX2INT (index));
 
-    return structure != NULL ? RGST_STRUCTURE_NEW (structure)
+    return structure != NULL ? gst_structure_to_ruby_hash (structure)
         : Qnil;
 }
 

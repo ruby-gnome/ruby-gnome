@@ -74,7 +74,6 @@ extern VALUE cGstEventSeek;
 #define RGST_REGISTRY(o)            (GST_REGISTRY(RVAL2GOBJ(o)))
 #define RGST_SCHEDULER(o)           (GST_SCHEDULER(RVAL2GOBJ(o)))
 #define RGST_SCHEDULER_FACTORY(o)   (GST_SCHEDULER_FACTORY(RVAL2GOBJ(o)))
-#define RGST_STRUCTURE(o)           (GST_STRUCTURE(RVAL2BOXED(o, GST_TYPE_STRUCTURE)))
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
 #define RGST_TYPE_FIND_FACTORY(o)   (GST_TYPE_FIND_FACTORY(RVAL2GOBJ(o)))
 #define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
@@ -102,7 +101,6 @@ extern VALUE cGstEventSeek;
 #define RGST_REGISTRY_NEW(o)            (RGST_GOBJ_NEW(GST_REGISTRY(o)))
 #define RGST_SCHEDULER_NEW(o)           (RGST_GOBJ_NEW(GST_SCHEDULER(o)))
 #define RGST_SCHEDULER_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_SCHEDULER_FACTORY(o)))
-#define RGST_STRUCTURE_NEW(o)           (BOXED2RVAL(GST_STRUCTURE(o), GST_TYPE_STRUCTURE))
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
 #define RGST_THREAD_NEW(o)              (RGST_GOBJ_NEW(GST_THREAD(o)))
 #define RGST_TYPE_FIND_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_TYPE_FIND_FACTORY(o)))
@@ -123,6 +121,10 @@ VALUE rb_ary_yield (VALUE arr);
 /* implemented in rbgstpluginfeature.c */
 gboolean is_valid_pluginfeature_type (const GType type);
 VALUE instanciate_pluginfeature (GstPluginFeature * feature);
+
+/* implemented in rbgststructure.c */
+VALUE gst_structure_to_ruby_hash (GstStructure *gst_struct);
+GstStructure *ruby_hash_to_gst_structure (VALUE hash);
 
 #define DBL2NUM(v)      (rb_float_new(v))
 

@@ -1,3 +1,21 @@
+2005-02-21  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.c: Initialize Gst::Tag, do not initialize Gst::Structure.
+	* src/rbgst.h: Removed helper macros for Gst::Structure.
+	* src/rbgsttag.c: Added.
+	* src/rbgstcaps.c: Convert Gst::Structure to Hash.
+	* src/rbgstmediainfo.c: 
+	  - #initialize throws Gst::MediaInfoError upon problems ;
+	  - Added #set_source ;
+	  - #metadata and #streaminfo now return a Hash (instead of a Gst::Structure).
+	* src/rbgstplugin.c: 
+	  - Added #major_version, #minor_version, #version ;
+	  - Added missing documentation.
+	* src/rbgststructure.c: 
+	  - Deprecated Gst::Structure ;
+	  - Added two functions to convert Ruby Hash to Gst::Structure and vice-versa.
+	* sample/media-type.rb, sample/gst-inspect.rb: Follow these changes.
+
 2005-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgstmediainfo.c: Added Gst::MediaInfoError.

@@ -202,9 +202,13 @@ end
 def print_plugin_info(p)
     puts "Plugin details:"
     prefix do
-        puts "Name:".ljust(15) + p.name
-        puts "Long Name:".ljust(15) + (p.longname or "n/a")
-        puts "File Name:".ljust(15) + p.filename
+    	x = 15
+        puts "Name:".ljust(x) + p.name
+        puts "Description:".ljust(x) + p.description
+        puts "Filename:".ljust(x) + p.filename
+        puts "Version:".ljust(x) + p.version
+        puts "License:".ljust(x) + p.license
+        puts "Origin URL:".ljust(x) + p.origin
     end
     puts ""
     stats = Hash.new

@@ -4,8 +4,8 @@
 
 require 'gst'
 
-def print_caps(caps)
-    caps.each_property { |name, obj| puts "      #{name}: #{obj}" } 
+def print_hash(hash)
+    hash.each { |key, val| puts "      #{key}: #{val}" } 
 end
 
 def print_info(stream)
@@ -17,27 +17,39 @@ def print_info(stream)
     stream.tracks.each do |x|
         puts "- track #{i += 1}:"
         puts "  - metadata:"
-        x.metadata and print_caps(x.metadata)
+        if hash = x.metadata
+            print_hash(hash)
+        end
         puts "  - streaminfo:"
-        x.streaminfo and print_caps(x.streaminfo)
+        if hash = x.streaminfo 
+            print_hash(hash)
+        end
         puts "  - format:"
-        x.format and print_caps(x.format)
+        if caps = x.format
+            caps.length.times { |i| print_hash(caps.get_structure(i)) }
+        end
     end
 end
 
 Gst.init
 
-info = Gst::MediaInfo.new
-
 if ARGV.empty?
-    puts "Usage: #{__FILE__} files..."
+    $stderr.puts "Usage: #{__FILE__} files..."
     exit 1
 end
 
-ARGV.each do |x|
-    if stream = info.read(x)
-        print_info(stream)
-    else
-        $stderr.puts "No media info found for file #{x}."
-    end 
+begin
+    info = Gst::MediaInfo.new
+    info.source = "filesrc" 
+
+    ARGV.each do |x|
+        if stream = info.read(x)
+            print_info(stream)
+        else
+            $stderr.puts "No media info found for file #{x}."
+        end 
+    end
+rescue => e
+    $stderr.puts "Media error: #{e}."
+    exit 1
 end
