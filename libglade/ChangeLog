@@ -3,6 +3,8 @@
 	* lib/libglade2.rb: Fix a bug for GladeXML#connect.
 	Reported by Martin Povolny.
 	* bin/ruby-glade-create-template: ditto.
+	* depend: Fix installation error with ruby-1.6.x.
+	Reported by Vincent Isambart.
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
