@@ -3,8 +3,8 @@
 
   rbpangoitem.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:33:40 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -53,6 +53,6 @@ Init_pango_item()
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
     
     rb_define_method(pItem, "initialize", item_initialize, 1);
-    rb_define_method(pItem, "split", item_split, 0);
+    rb_define_method(pItem, "split", item_split, 2);
 
 }
