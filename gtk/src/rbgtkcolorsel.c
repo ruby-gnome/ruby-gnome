@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2005/03/22 15:42:55 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -17,6 +17,8 @@
 #define _SELF(s) (GTK_COLOR_SELECTION(RVAL2GOBJ(self)))
 #define RVAL2COLOR(c) ((GdkColor*)RVAL2BOXED(c, GDK_TYPE_COLOR))
 #define COLOR2RVAL(c) (BOXED2RVAL(c, GDK_TYPE_COLOR))
+
+static VALUE gColorSel;
 
 static VALUE
 colorsel_initialize(self)
@@ -96,7 +98,11 @@ colorsel_s_palette_to_string(argc, argv, self)
     VALUE colors;
     gint i, len;
 
-    rb_scan_args(argc, argv, "*", &colors);
+    if (argc > 1) {
+        rb_scan_args(argc, argv, "*", &colors);
+    } else {
+        rb_scan_args(argc, argv, "10", &colors);
+    }
 
     len = RARRAY(colors)->len;
     gcolors = ALLOCA_N(GdkColor, len);
@@ -109,14 +115,39 @@ colorsel_s_palette_to_string(argc, argv, self)
     return CSTR2RVAL(gtk_color_selection_palette_to_string((const GdkColor*)gcolors, len));
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static void
+screen_func(screen, colors, n_colors)
+    GdkScreen* screen;
+    const GdkColor* colors;
+    gint n_colors;
+{
+    int i;
+    VALUE func = rb_cvar_get(gColorSel, rb_intern("__palette_proc__"));
+    VALUE ary = rb_ary_new();
+    for (i = 0; i < n_colors; i++){
+        ary = rb_ary_push(ary, BOXED2RVAL((GdkColor*)&colors[i], GDK_TYPE_COLOR));
+    }
+    if (! NIL_P(func))
+        rb_funcall(func, id_call, 2, GOBJ2RVAL(screen), ary);
+}
+
+static VALUE
+colorsel_s_set_change_palette_hook(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+
+    rb_cvar_set(gColorSel, rb_intern("__palette_proc__"), func, 0);
+    gtk_color_selection_set_change_palette_with_screen_hook(
+        (GtkColorSelectionChangePaletteWithScreenFunc)screen_func);
+    return self;
+}
+#endif
+
 /* Don't implement them.
 GtkColorSelectionChangePaletteFunc gtk_color_selection_set_change_palette_hook
                                             (GtkColorSelectionChangePaletteFunc func);
-void        (*GtkColorSelectionChangePaletteFunc)
-                                            (const GdkColor *colors,
-                                             gint n_colors);
-GtkColorSelectionChangePaletteWithScreenFunc gtk_color_selection_set_change_palette_with_screen_hook
-                                            (GtkColorSelectionChangePaletteWithScreenFunc func);
 void        (*GtkColorSelectionChangePaletteWithScreenFunc)
                                             (GdkScreen *screen,
                                              const GdkColor *colors,
@@ -126,7 +157,7 @@ void        (*GtkColorSelectionChangePaletteWithScreenFunc)
 void 
 Init_gtk_color_selection()
 {
-    VALUE gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
+    gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
 
     rb_define_method(gColorSel, "initialize", colorsel_initialize, 0);
     rb_define_method(gColorSel, "previous_alpha", colorsel_get_previous_alpha, 0);
@@ -137,6 +168,10 @@ Init_gtk_color_selection()
 
     rb_define_singleton_method(gColorSel, "palette_to_string", colorsel_s_palette_to_string, -1);
     rb_define_singleton_method(gColorSel, "palette_from_string", colorsel_s_palette_from_string, 1);
+
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_singleton_method(gColorSel, "set_change_palette_hook", colorsel_s_set_change_palette_hook, 0);
+#endif
 
     G_DEF_SETTERS(gColorSel);
 }

@@ -1,3 +1,10 @@
+2005-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/colorselection.rb: Added.
+	* src/rbgtkcolorsel.c: Added Gtk::ColorSelection.set_change_palette_hook.
+	Requested by Paul van Tilburg.
+	Gtk::ColorSelection.palette_to_string accept an Array as the 1st argument.
+
 2005-03-20  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* sample/gtk-demo/hypertext.rb: Added.
