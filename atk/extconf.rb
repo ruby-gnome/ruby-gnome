@@ -44,8 +44,7 @@ begin
   Dir.chdir "src"
 
   File.delete("rbatkinits.c") if FileTest.exist?("rbatkinits.c")
-  system("ruby #{srcdir}/makeinits.rb #{srcdir}/*.c > rbatkinits.c")
-    or raise "failed to make ATK inits"
+  system("ruby #{srcdir}/makeinits.rb #{srcdir}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
 
   $objs = []
   Dir.glob("#{srcdir}/*.c") do |f|
