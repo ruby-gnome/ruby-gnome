@@ -1,4 +1,104 @@
-Ruby-GNOME2-0.6 (2003-08-09)
+Ruby-GNOME2-0.7.0 (2003-08-09)
+
+  * The whole Ruby-GNOME2
+      - Enum/Flags support. Enum/Flags constants are defined as classes.
+         [Masahiro Sakai, Vincent Isambart, Masao Mutoh]
+      - Improve extconf.rb. [Masao Mutoh]
+        If the libraries are not found, they're ignored. 
+        And you can specify to target libraries.
+
+  * Ruby/GLib
+      - Improved and Fixed some bugs. [Masahiro Sakai, Masao Mutoh]
+         GLib::Type, GLib::Boxed, mkmf_gnome2.rb
+      - Added lib/glib2.rb and improve to support Win32 platform. 
+         [TAMURA.KENICHI, Masahiro Sakai] 
+      - Added new class: [Masahiro Sakai]
+         GLib::Enum, GLib::Flags
+      - Added new macros: [Masahiro Sakai]
+         RVAL2GENUM(), RVAL2GFLAGS(), GENUM2RVAL(), GFLAGS2RVAL().
+      - Removed some methods. [Masahiro Sakai]
+         GLib::Param#value_defaults?
+      - Apply Enum/Flags. [Masahiro Sakai]
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GdkPixbuf
+      - Apply Enum/Flags. [Masahiro Sakai, Masao Mutoh]
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/Pango 
+      - Improved and Fixed some bugs: 
+        [Vincent Isambart, Masahiro Sakai, Masao Mutoh]
+        Pango::Font, sample/*.rb, extconf.rb 
+      - Added new methods: [Masahiro Sakai]
+        Pango::Language, Pango::FontMap, Pango::FontFamily, Pango::Context,
+        Pango::FontDescription,  
+      - Apply Enum/Flags. [Masahiro Sakai, Masao Mutoh]
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GTK
+      - Follow Ruby/GLib changes. [Masahiro Sakai, Masao Mutoh]
+      - Added some methods, improved, fixed bugs: [Martin Povoln, 
+          KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh] 
+        Gdk::Atom, Gdk::Input, Gdk::DragContext, Gdk::Event, Gdk::GC, Gdk, 
+        Gtk::Label, Gtk::TreeIter, Gtk::TreeView, Gtk::IconSize, 
+        gdk-demo/*.rb, extconf.rb
+      - Added: [KATO Kazuyoshi]
+        Gdk::DisplayManager, gtk-demo.rb
+      - Apply Enum/Flags. [Masahiro Sakai, Masao Mutoh]
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GNOME
+      - Follow extconf.rb changes. [Masao Mutoh]
+      - Fix bugs. [Masahiro Sakai]
+
+  * Ruby/GnomeCanvas
+      - Follow extconf.rb changes. [Masao Mutoh]
+      - Improve extconf.rb. [Masahiro Sakai]
+      - Fix a sample. [Vincent Isambart]
+
+  * Ruby/Libglade
+      - Add a 'after' parameter to GladeXML.connect.
+        It allows to connect signal_connect_after(). [Soila Jani]
+      - Fix bugs: [Masao Mutoh]
+
+  * Ruby/Libart
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GConf
+      - Apply Enum/Flags. [Masao Mutoh]
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GStreamer 
+      - Improved and Fixed some bugs. [Laurent Sansonetti]
+        Gst, Gst::MediaInfo, Gst::Second, Gst::MediaType, sample/media-type.rb
+      - Added some methods: [Laurent Sansonetti]
+        Gst::Bin, Gst::Registry, Gst::MediaInfoTrack
+      - Added: [Laurent Sansonetti]
+        Gst::XML, Gst::ClockEntry, sample/xml-ogg-player.rb
+      - Win32 support. [Masahiro Sakai]
+      - Follow extconf.rb changes. [Masao Mutoh]
+        
+  * Ruby/GnomeVFS
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GtkHtml2
+      - Added: [Martin Povoln, Masao Mutoh]
+        Gtk::HtmlStream, lib/gtkhtml2.rb
+      - Removed methods: [Martin Povoln]
+        Gtk::HtmlView#set_html
+      - Follow extconf.rb changes. [Masao Mutoh]
+
+  * Ruby/GtkGLExt [NEW]
+      - Added and completed. [Vincent Isambart]
+        Gdk::GLConfig, Gdk::GLContext, Gdk::GLDrawable, Gdk::GLPixmap, 
+        Gdk::GLWindow, Gdk::Window, Gdk::Pixmap, Gtk::GL, Gtk::Widget
+      - Added. [Vincent Isambart]
+        Gdk::GL, sample/*.rb
+      - Follow extconf.rb changes. [Masao Mutoh]
+      - Win32 support. [Masahiro Sakai]
+
+
+Ruby-GNOME2-0.6.0 (2003-08-09)
 
   * Ruby/GLib
       - mkmf-gnome2.rb,rbglib.h, rbgobject.h, rbgutil.h are installed 
@@ -92,11 +192,11 @@ Ruby-GNOME2-0.6 (2003-08-09)
          GnomeVFS::File, GnomeVFS::URI
 
   * Ruby/GtkHtml2 [NEW]
-      - Initial release. [Martin Povolný]
-      - Added: [Martin Povolný]
+      - Initial release. [Martin Povoln]
+      - Added: [Martin Povoln]
          Gtk::HtmlDocument, Gtk::HtmlView
 
-Ruby-GNOME2-0.5 (2003-05-24)
+Ruby-GNOME2-0.5.0 (2003-05-24)
 
   * Ruby/GLib
       - Fixed warning for ruby-1.8.1. [Masao Mutoh]
@@ -153,7 +253,7 @@ Ruby-GNOME2-0.5 (2003-05-24)
        - Added GConf::MetaInfo. [Nikolai :: lone-star :: Weibull]
        - Fixed a bug [Masao Mutoh]
  
-Ruby-GNOME2-0.4 (2003-03-23)
+Ruby-GNOME2-0.4.0 (2003-03-23)
 
   * The whole Ruby-GNOME2
       - Add mkmf-gnome2.rb for sub/optional libraries. [Masahiro Sakai]
@@ -218,7 +318,7 @@ Ruby-GNOME2-0.4 (2003-03-23)
     - Project website is moving from http://ruby-gnome2.sourceforge.net/
       to http://ruby-gnome2.sourceforge.jp/.
 
-Ruby-GNOME2-0.3 (2003-02-09)
+Ruby-GNOME2-0.3.0 (2003-02-09)
 
   * Ruby/GLib
     - Miscellaneous bugfixes and some improvement internal. 

@@ -5,7 +5,7 @@ Hiroshi IGARASHI <iga@ruby-lang.org>
 
 Geoff Youngs <g@intersect-uk.co.uk>
      Ruby/GtkSourceView(M), Ruby/GTK, Ruby/GdkPixbuf, 
-     Ruby/Pango, Ruby/GLib.
+     Ruby/Pango, Ruby/GLib. Ruby-GNOME2 Icon.
 
 Joshua Keith <joshuakeith@linuxmail.org>
      Tutorial(M), Website, Ruby-GNOME2 Icon.
@@ -20,10 +20,10 @@ KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <laurent@datarescue.be>
-     Ruby/GStreamer(M).
+     Ruby/GStreamer(M), French Website(M), Website, Tutorial.
 
 Martin Povolný <xpovolny@fi.muni.cz>
-     Ruby/GtkHtml2(M).
+     Ruby/GtkHtml2(M). Ruby/GTK, 
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
      Vice maintainer. Ruby/GLib(M) and most of the important design
@@ -31,7 +31,7 @@ Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 Masao Mutoh <mutoh@highway.ne.jp>
      Chief maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), 
-     Ruby/Pango(M), rbbr(M), Webmaster, Others. Project management.
+     Ruby/Pango(M), rbbr(M), Website(M), Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
@@ -43,7 +43,10 @@ OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
      Ruby/GTK.
 
 TAMURA.Kenichi <sgs02516@nifty.com>
-     Japanese ML archives by w3ml on SF.jp(M)
+     Japanese ML archives by w3ml on SF.jp(M), Ruby/GLib.
+
+Vincent Isambart <vincent.isambart@laposte.net>
+     Ruby/GtkGLExt(M), Ruby/GnomeCanvas, Ruby/Pango, French Website, Website.
 
 All members of Ruby-GNOME2 Mailing lists.
 And many others who have contributed patches, reported bugs. Thanks!
