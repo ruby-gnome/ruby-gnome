@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2004/03/03 18:32:03 $
  *
  *****************************************************************************/
 
@@ -80,8 +80,12 @@ static struct _GVFSToMy {
 	{ GNOME_VFS_ERROR_NAME_TOO_LONG, "NameTooLongError" },
 	{ GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE, "ServiceNotAvailableError" },
 	{ GNOME_VFS_ERROR_SERVICE_OBSOLETE, "ServiceObsoleteError" },
+#ifdef GNOME_VFS_ERROR_NO_MASTER_BROWSER
 	{ GNOME_VFS_ERROR_PROTOCOL_ERROR, "ProtocolError" },
 	{ GNOME_VFS_ERROR_NO_MASTER_BROWSER, "NoMasterBrowserError" }
+#else
+	{ GNOME_VFS_ERROR_PROTOCOL_ERROR, "ProtocolError" }
+#endif
 };
 
 /* Function Implementations **************************************************/

@@ -1,3 +1,8 @@
+2004-03-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/gnomevfs.h, gnomevfs-result.c, gnomevfs-fileinfo.c: 
+	Fix warning for GnomeVFS 2.0.x and ruby-1.6.x.
+
 2003-12-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/lib/gnomevfs.rb (GnomeVFS::FileInfo) include Comparable.
@@ -22,7 +27,7 @@
  	symbolic link.
  
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
-                                                                                
+                                                                               
 	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-12  Nikolai Weibull  <lone-star@home.se>

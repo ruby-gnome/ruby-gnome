@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/08/15 13:12:08 $
+ * $Date: 2004/03/03 18:32:03 $
  *
  *****************************************************************************/
 
@@ -348,7 +348,7 @@ fileinfo_fifo_p(self)
 {
 	return CBOOL2RVAL(_SELF(self)->type == GNOME_VFS_FILE_TYPE_FIFO);
 }
-
+#ifdef GNOME_VFS_PERM_ACCESS_EXECUTABLE
 static VALUE
 fileinfo_executable_real_p(self)
 	VALUE self;
@@ -356,7 +356,8 @@ fileinfo_executable_real_p(self)
 	return CBOOL2RVAL(_SELF(self)->permissions &
 			  GNOME_VFS_PERM_ACCESS_EXECUTABLE);
 }
-
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_READABLE
 static VALUE
 fileinfo_readable_real_p(self)
 	VALUE self;
@@ -364,7 +365,8 @@ fileinfo_readable_real_p(self)
 	return CBOOL2RVAL(_SELF(self)->permissions &
 			  GNOME_VFS_PERM_ACCESS_READABLE);
 }
-
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_WRITABLE
 static VALUE
 fileinfo_writable_real_p(self)
 	VALUE self;
@@ -372,6 +374,7 @@ fileinfo_writable_real_p(self)
 	return CBOOL2RVAL(_SELF(self)->permissions &
 			  GNOME_VFS_PERM_ACCESS_WRITABLE);
 }
+#endif
 
 static VALUE
 fileinfo_grpowned_p(self)
@@ -529,18 +532,24 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_method(g_gvs_fileinfo, "fifo?", fileinfo_fifo_p, 0);
 	rb_define_method(g_gvs_fileinfo, "socket?", fileinfo_socket_p, 0);
 	/* XXX: these do the same thing for now... */
+#ifdef GNOME_VFS_PERM_ACCESS_EXECUTABLE
 	rb_define_method(g_gvs_fileinfo, "executable_real?",
 			 fileinfo_executable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "executable?",
 			 fileinfo_executable_real_p, 0);
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_READABLE
 	rb_define_method(g_gvs_fileinfo, "readable_real?",
 			 fileinfo_readable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "readable?",
 			 fileinfo_readable_real_p, 0);
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_WRITABLE
 	rb_define_method(g_gvs_fileinfo, "writable_real?",
 			 fileinfo_writable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "writable?",
 			 fileinfo_writable_real_p, 0);
+#endif
 	rb_define_method(g_gvs_fileinfo, "grpowned?", fileinfo_grpowned_p, 0);
 	rb_define_method(g_gvs_fileinfo, "owned?", fileinfo_owned_p, 0);
 	rb_define_method(g_gvs_fileinfo, "permissions", fileinfo_permissions,
@@ -571,10 +580,11 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_const(g_gvs_fileinfo,
 			"FOLLOW_LINKS",
 			INT2FIX(GNOME_VFS_FILE_INFO_FOLLOW_LINKS));
+#ifdef GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS
 	rb_define_const(g_gvs_fileinfo,
 			"GET_ACCESS_RIGHTS",
 			INT2FIX(GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS));
-
+#endif
 	rb_define_const(g_gvs_fileinfo,
 			"SET_NONE",
 			INT2FIX(GNOME_VFS_SET_FILE_INFO_NONE));
@@ -636,15 +646,21 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_const(g_gvs_fileinfo,
 			"PERM_OTHER_ALL",
 			INT2FIX(GNOME_VFS_PERM_OTHER_ALL));
+#ifdef GNOME_VFS_PERM_ACCESS_READABLE
 	rb_define_const(g_gvs_fileinfo,
 			"PERM_ACCESS_READABLE",
 			INT2FIX(GNOME_VFS_PERM_ACCESS_READABLE));
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_WRITABLE
 	rb_define_const(g_gvs_fileinfo,
 			"PERM_ACCESS_WRITABLE",
 			INT2FIX(GNOME_VFS_PERM_ACCESS_WRITABLE));
+#endif
+#ifdef GNOME_VFS_PERM_ACCESS_EXECUTABLE
 	rb_define_const(g_gvs_fileinfo,
 			"PERM_ACCESS_EXECUTABLE",
 			INT2FIX(GNOME_VFS_PERM_ACCESS_EXECUTABLE));
+#endif
 
 	G_DEF_SETTERS(g_gvs_fileinfo);
 }
