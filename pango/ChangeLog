@@ -1,3 +1,8 @@
+2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbpangoattribute.c:  Fix a compiling problem on 
+	MSVC++/pango-1.8.0.
+
 2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayoutline.c: Added Pango::LayoutLine#extents, #pixel_extents

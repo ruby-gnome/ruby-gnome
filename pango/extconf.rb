@@ -19,6 +19,8 @@ have_func("pango_layout_iter_get_type")
 have_func("pango_layout_set_ellipsize")
 have_func("pango_layout_get_font_description")
 have_func("pango_render_part_get_type")
+have_func("pango_attr_strikethrough_color_new")
+have_func("pango_attr_underline_color_new")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 

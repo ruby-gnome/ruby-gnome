@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/02/17 05:10:52 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -326,7 +326,7 @@ attr_AttrStrikethrough_initialize(self, strikethrough)
     DATA_PTR(self) = pango_attr_strikethrough_new(RTEST(strikethrough));
     return Qnil;
 }
-#if PANGO_CHECK_VERSION(1,8,0)
+#if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
 static VALUE
 attr_AttrStrikethroughColor_initialize(self, r, g, b)
     VALUE self, r, g, b;
@@ -337,7 +337,7 @@ attr_AttrStrikethroughColor_initialize(self, r, g, b)
 #endif
 
 MAKE_ATTRENUM_INIT(AttrUnderline, underline, PANGO_TYPE_UNDERLINE); 
-#if PANGO_CHECK_VERSION(1,8,0)
+#if HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
 static VALUE
 attr_AttrUnderlineColor_initialize(self, r, g, b)
     VALUE self, r, g, b;
@@ -460,12 +460,12 @@ Init_pango_attribute()
     /* PangoUnderline */
     G_DEF_CLASS(PANGO_TYPE_UNDERLINE, "Underline", tmpklass);
     G_DEF_CONSTANTS(tmpklass, PANGO_TYPE_UNDERLINE, "PANGO_UNDERLINE_");
-#if PANGO_CHECK_VERSION(1,8,0)
+#if HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
     MAKE_ATTR(PANGO_ATTR_UNDERLINE_COLOR, AttrUnderlineColor, pattrcolor, 3);
 #endif
 
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
-#if PANGO_CHECK_VERSION(1,8,0)
+#if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH_COLOR, AttrStrikethroughColor, pattrcolor, 3);
 #endif
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
