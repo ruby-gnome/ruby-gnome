@@ -1,3 +1,6 @@
+2002-08-04  KUBO Takehiro <kubo@jiubao.org>
+	* src/rbgnome-app-helper.c: Fix segmentation fault.
+
 2002-07-30  KUBO Takehiro <kubo@jiubao.org>
    * src/rbgnome-canvas-util.c: Add file. Support Gnome::Canvas,
    CanvasGroup, CanvasItem, CanvasLine, CanvasRect, CanvasText, CanvasImage,

@@ -1,4 +1,4 @@
-/* $Id: rbgnome-app-helper.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.3 2002/08/04 14:03:59 mutoh Exp $ */
 
 /* Gnome::UIInfo module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -322,6 +322,7 @@ do_ui_signal_connect(uiinfo, signal_name, uibdata)
     id = rb_intern(signal_name);
     data = rb_ary_new3(3, (VALUE)uiinfo->moreinfo, INT2NUM(id), args);
     add_relative((VALUE)uiinfo->moreinfo, data);
+    add_relative((VALUE)uibdata->data, (VALUE)uiinfo->moreinfo);
     gtk_signal_connect_full(GTK_OBJECT(uiinfo->widget),
 			    signal_name, 0,
 			    signal_callback,
@@ -329,7 +330,7 @@ do_ui_signal_connect(uiinfo, signal_name, uibdata)
 			    0, FALSE, 0);
 }
 
-static GnomeUIBuilderData RbGnome_UIBuilder = {
+static const GnomeUIBuilderData RbGnome_UIBuilder = {
   do_ui_signal_connect,
   0,               /* these are basically ignored when */
   0,
@@ -337,10 +338,20 @@ static GnomeUIBuilderData RbGnome_UIBuilder = {
   0
 };
 
+static void
+set_uibdata(uibdata, self)
+    GnomeUIBuilderData *uibdata;
+    VALUE self;
+{
+    memcpy(uibdata, &RbGnome_UIBuilder, sizeof(GnomeUIBuilderData));
+    uibdata->data = (gpointer)self;
+}
+
 static GnomeUIInfo *
-ary_to_ui_info(ary, inc_uibd)
+ary_to_ui_info(ary, inc_uibd, uibdata)
    VALUE ary;
    gboolean inc_uibd;
+   GnomeUIBuilderData *uibdata;
 {
     GnomeUIInfo *ret, *inf, *sub;
     VALUE item, moreinfo;
@@ -415,7 +426,7 @@ ary_to_ui_info(ary, inc_uibd)
 	    ret[i].moreinfo = (gpointer)moreinfo;
 	    break;
 	case GNOME_APP_UI_RADIOITEMS:
-	    sub = ary_to_ui_info(moreinfo, FALSE);
+	    sub = ary_to_ui_info(moreinfo, FALSE, uibdata);
 	    if (!sub) {
 		g_free(inf);
 		return 0;
@@ -424,7 +435,7 @@ ary_to_ui_info(ary, inc_uibd)
 	    break;
 	case GNOME_APP_UI_SUBTREE:
 	case GNOME_APP_UI_SUBTREE_STOCK:
-	    sub = ary_to_ui_info(moreinfo, FALSE);
+	    sub = ary_to_ui_info(moreinfo, FALSE, uibdata);
 	    if (!sub) {
 		g_free(inf);
 		return 0;
@@ -469,14 +480,16 @@ app_create_menus(self, menuinfo)
     VALUE self, menuinfo;
 {
     GnomeUIInfo *uiinfo;
-    uiinfo = ary_to_ui_info(menuinfo, FALSE);
+    GnomeUIBuilderData uibdata;
+    uiinfo = ary_to_ui_info(menuinfo, FALSE, &uibdata);
     if (!uiinfo) {
 	return Qnil;
     }
 
+    set_uibdata(&uibdata, self);
     gnome_app_create_menus_custom(GNOME_APP(get_widget(self)),
 				  uiinfo,
-				  &RbGnome_UIBuilder);
+				  &uibdata);
     free_ui_info(uiinfo);
 
     return self;
@@ -487,14 +500,16 @@ app_create_toolbar(self, menuinfo)
     VALUE self, menuinfo;
 {
     GnomeUIInfo *uiinfo;
-    uiinfo = ary_to_ui_info(menuinfo, FALSE);
+    GnomeUIBuilderData uibdata;
+    uiinfo = ary_to_ui_info(menuinfo, FALSE, &uibdata);
     if (!uiinfo) {
 	return Qnil;
     }
 
+    set_uibdata(&uibdata, self);
     gnome_app_create_toolbar_custom(GNOME_APP(get_widget(self)),
 				    uiinfo,
-				    &RbGnome_UIBuilder);
+				    &uibdata);
     free_ui_info(uiinfo);
 
     return self;
@@ -526,15 +541,17 @@ app_insert_menus(self, path, menuinfo)
     VALUE self, path, menuinfo;
 {
     GnomeUIInfo *uiinfo;
-    uiinfo = ary_to_ui_info(menuinfo, FALSE);
+    GnomeUIBuilderData uibdata;
+    uiinfo = ary_to_ui_info(menuinfo, FALSE, &uibdata);
     if (!uiinfo) {
 	return Qnil;
     }
 
+    set_uibdata(&uibdata, self);
     gnome_app_insert_menus_custom(GNOME_APP(get_widget(self)),
 				  STR2CSTR(path),
 				  uiinfo,
-				  &RbGnome_UIBuilder);
+				  &uibdata);
     free_ui_info(uiinfo);
 
     return self;

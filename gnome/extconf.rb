@@ -16,7 +16,7 @@ begin
   version = `#{config_cmd} --version`
   if not version.chomp.empty? then
     $libs += ' ' + `#{config_cmd} #{config_libs} #{config_library}`.chomp
-    $CFLAGS += " -DHAVE_GDKIMLIB -I../../gtk/src  -I../../gdkimlib " +
+    $CFLAGS += " -DHAVE_GDKIMLIB -I../../glib/src -I../../gtk/src  -I../../gdkimlib " +
       `#{config_cmd} #{config_cflags} #{config_library}`.chomp
   else
     raise "Can't find a config command"
