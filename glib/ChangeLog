@@ -2,6 +2,7 @@
 
 	* src/rbgobj_enums.c: fixed rgbobj_get_enum - a VALUE was not
 	converted to int before calling rbgobj_make_enum.
+	(reported by Geoff Youngs <g@intersect-uk.co.uk>)
 
 2003-08-29  Vincent Isambart <isambart@netcourrier.com>
 
