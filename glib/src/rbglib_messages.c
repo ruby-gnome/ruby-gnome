@@ -4,9 +4,9 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2004/11/20 17:10:31 $
+  $Date: 2005/01/09 07:20:52 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 
   This file is devided from rbgtkmain.c.
   rbgtkmain.c -
@@ -19,6 +19,7 @@
 
 static VALUE rbglib_log_handler_procs;
 static ID id_call;
+static gboolean log_canceled;
 
 #define _RAISE(domain, id, message) \
     rb_raise(rb_eRuntimeError, "%s-%s **:%s", domain, id, message)
@@ -30,25 +31,42 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     const gchar *message;
     gpointer user_data;
 {
-    if (log_level & G_LOG_LEVEL_ERROR){
-        _RAISE(log_domain, "ERROR", message);
-    } else if (log_level & G_LOG_LEVEL_CRITICAL){
-        _RAISE(log_domain, "CRITICAL", message);
-    } else if (RTEST(ruby_debug)){
-        if (log_level & G_LOG_LEVEL_WARNING){
-            _RAISE(log_domain, "WARNING", message);
-        } else if (log_level & G_LOG_LEVEL_MESSAGE){
-            _RAISE(log_domain, "MESSAGE", message);
-        } else if (log_level & G_LOG_LEVEL_INFO){
+    if (! log_canceled){
+        if (log_level & G_LOG_LEVEL_ERROR){
+            _RAISE(log_domain, "ERROR", message);
+        } else if (log_level & G_LOG_LEVEL_CRITICAL){
+            _RAISE(log_domain, "CRITICAL", message);
+        } else if (RTEST(ruby_debug)){
+            if (log_level & G_LOG_LEVEL_WARNING){
+                _RAISE(log_domain, "WARNING", message);
+            } else if (log_level & G_LOG_LEVEL_MESSAGE){
+                _RAISE(log_domain, "MESSAGE", message);
+            } else if (log_level & G_LOG_LEVEL_INFO){
             _RAISE(log_domain, "INFO", message);
-        } else if (log_level & G_LOG_LEVEL_DEBUG){
-            _RAISE(log_domain, "DEBUG", message);
+            } else if (log_level & G_LOG_LEVEL_DEBUG){
+                _RAISE(log_domain, "DEBUG", message);
+            }
         }
     } else if (RTEST(ruby_verbose)){
         g_log_default_handler(log_domain, log_level, message, user_data);
     } else {
-        /* ignored */
+        if (log_level & G_LOG_LEVEL_ERROR){
+            g_log_default_handler(log_domain, log_level, message, user_data);
+        } else if (log_level & G_LOG_LEVEL_CRITICAL){
+            g_log_default_handler(log_domain, log_level, message, user_data);
+        } else {
+            /* Ignored */
+        }
     }
+}
+
+/* Use Internal only */
+static VALUE
+rbglib_m_log_cancel_handler(self)
+    VALUE self;
+{
+    log_canceled = TRUE;
+    return Qnil;
 }
 
 static VALUE
@@ -57,7 +75,7 @@ rbglib_m_log_set_handler(self, domain, levels)
 {
     guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                          NUM2INT(levels),
-                                         rbglib_log_handler, (gpointer)NULL);
+                                         rbglib_log_handler, (gpointer)self);
     return UINT2NUM(handler_id);
 }
 
@@ -100,11 +118,13 @@ Init_glib_messages()
     VALUE mGLog = rb_define_module_under(mGLib, "Log");
 
     id_call = rb_intern("call");
+    log_canceled = FALSE;
 
     rb_global_variable(&rbglib_log_handler_procs);
     rbglib_log_handler_procs = rb_hash_new();
     rb_define_module_function(mGLog, "set_handler", rbglib_m_log_set_handler, 2);
     rb_define_module_function(mGLog, "remove_handler", rbglib_m_log_remove_handler, 2);
+    rb_define_module_function(mGLog, "cancel_handler", rbglib_m_log_cancel_handler, 0);
     rb_define_module_function(mGLog, "set_always_fatal", rbglib_m_log_set_always_fatal, 1);
     rb_define_module_function(mGLog, "set_fatal_mask", rbglib_m_log_set_fatal_mask, 2);
     rb_define_module_function(mGLog, "log", rbglib_m_log, 3);

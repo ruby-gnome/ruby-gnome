@@ -1,3 +1,10 @@
+2005-01-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Improved error handling. 
+	* src/rbglib_messages.c: ditto. 
+	* src/rbgobj_strv.c: Added for GLib-2.4.x. Support GStrv as Array.
+	* src/rbgobject.c: Support GStrv.
+
 2004-11-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c, src/lib/glib2.rb: 

@@ -6,8 +6,8 @@
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2004/04/30 14:18:01 $
-  $Id: type-register.rb,v 1.6 2004/04/30 14:18:01 mutoh Exp $
+  $Date: 2005/01/09 07:20:51 $
+  $Id: type-register.rb,v 1.7 2005/01/09 07:20:51 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -100,5 +100,9 @@ b.signal_connect("notify"){|obj, pspec|
 p b.get_property("fuga")
 b.set_property("fuga", 1)
 p b.get_property("fuga")
+
+p b.get_property("hoge")
+b.set_property("hoge", ["a", "b", "c"])
+p b.get_property("hoge")
 
 p MyButton2.ancestors

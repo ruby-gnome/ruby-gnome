@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Date: 2005/01/09 07:21:01 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -173,7 +173,7 @@ extern VALUE rbgobj_make_enum(gint n, GType gtype);
 extern gint rbgobj_get_enum(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_flags(guint n, GType gtype);
 extern guint rbgobj_get_flags(VALUE obj, GType gtype);
-    extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
+extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 
 #ifdef __cplusplus
 }
