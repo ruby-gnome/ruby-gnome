@@ -1,3 +1,8 @@
+2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: extconf.rb uses PKGConfig.cflags_only_I instead of
+	calling pkg-config directly.
+
 2005-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb (mkenums): added dummy $makefile_created setup code
