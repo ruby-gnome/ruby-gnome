@@ -1,11 +1,25 @@
+2003-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkhtmlparser.c, rbgtkhtmlembedded.c, rbgtkhtmlboxembedded.c, 
+	rbgtkhtmlboxtext.c, rbgtkhtmlboxtablerowgroup.c, 
+	rbgtkhtmlboxtablecaption.c, rbgtkhtmlboxtable.c, 
+	rbgtkhtmlcontext.c, rbgtkhtmlbox.c, rbgtkhtmlboxblock.c: Added.
+	* src/rbgtkhtmldocument.c: Add Gtk::HtmlDocument#update_hover_node,
+	#update_active_node, #update_focus_element, #find_anchor, 
+	HtmlDocumentState.
+	* src/rbgtkhtmlview.c: Add Gtk::HtmlView#jump_to_anchor, #magnification,
+	#set_magnification, #zoom_in, #zoom_out, #zoom_reset, #find_layout_box,
+	#scroll_to_node, #selection_start, #selection_end, #selection_update,
+	#selection_set, HtmlViewScrollToType.
+
 2003-09-04  Martin Povolny <xpovolny@fi.muni.cz>
-    * src/rbgtkhtmlstream.c: Changed rb_html_stream_write as Masao suggested.
-    * src/rbgtkhtmlview.c: Removed 'original' set_html method.
-    * src/sample/test-gtkhtml.rb: Added sample 'request_url' handler.
-    * README: added a note on sigsegvs with earlier versions of gtkhtml
+	* src/rbgtkhtmlstream.c: Changed rb_html_stream_write as Masao suggested.
+	* src/rbgtkhtmlview.c: Removed 'original' set_html method.
+	* src/sample/test-gtkhtml.rb: Added sample 'request_url' handler.
+	* README: added a note on sigsegvs with earlier versions of gtkhtml
 
 2003-09-02  Martin Povolny <xpovolny@fi.muni.cz>
-    * src/rbgtkhtmlstream.c: Added minimalistic wrapper for HtmlStream to
+	* src/rbgtkhtmlstream.c: Added minimalistic wrapper for HtmlStream to
                              allow handling of 'request_url' signal in
                              HtmlDocument.
 
@@ -15,7 +29,7 @@
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
