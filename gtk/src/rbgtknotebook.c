@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/11/08 17:08:40 $
+  $Date: 2002/11/09 19:45:36 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,11 +16,6 @@
 #define _SELF(self) GTK_NOTEBOOK(RVAL2GOBJ(self))
 #define RVAL2WIDGET(w) GTK_WIDGET(RVAL2GOBJ(w))
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
-
-typedef struct {
-    VALUE parent;
-    GtkNotebookPage* page;
-} GtkNotebookPageData;
 
 static VALUE
 note_initialize(self)
@@ -160,6 +155,68 @@ note_reorder_child(self, child, pos)
 }
 
 static VALUE
+note_set_tab_pos(self, pos)
+    VALUE self, pos;
+{
+    gtk_notebook_set_tab_pos(_SELF(self), NUM2INT(pos));
+    return self;
+}
+
+static VALUE
+note_set_show_tabs(self, show_tabs)
+    VALUE self, show_tabs;
+{
+    gtk_notebook_set_show_tabs(_SELF(self), RTEST(show_tabs));
+    return self;
+}
+
+static VALUE
+note_set_show_border(self, show_border)
+    VALUE self, show_border;
+{
+    gtk_notebook_set_show_border(_SELF(self), RTEST(show_border));
+    return self;
+}
+
+static VALUE
+note_set_scrollable(self, scrollable)
+    VALUE self, scrollable;
+{
+    gtk_notebook_set_scrollable(_SELF(self), RTEST(scrollable));
+    return self;
+}
+
+static VALUE
+note_set_tab_border(self, border_width)
+    VALUE self, border_width;
+{
+    gtk_notebook_set_tab_border(_SELF(self), NUM2UINT(border_width));
+    return self;
+}
+
+static VALUE
+note_popup_enable(self)
+    VALUE self;
+{
+    gtk_notebook_popup_enable(_SELF(self));
+    return self;
+}
+
+static VALUE
+note_popup_disable(self)
+    VALUE self;
+{
+    gtk_notebook_popup_disable(_SELF(self));
+    return self;
+}
+static VALUE
+note_get_current_page(self, child)
+    VALUE self, child;
+{
+    return INT2NUM(gtk_notebook_get_current_page(_SELF(self)));
+}
+
+static VALUE
 note_get_menu_label(self, child)
     VALUE self, child;
 {
@@ -175,6 +232,15 @@ note_get_nth_page(self, page_num)
                                                 NUM2INT(page_num));
     return page ? GOBJ2RVAL(page) : Qnil;
 }
+
+/* Is this existed?
+static VALUE
+note_get_n_pages(self)
+    VALUE self;
+{
+    return INT2NUM(gtk_notebook_get_n_pages(_SELF(self)));
+}
+*/
 
 static VALUE
 note_get_tab_label(self, child)
@@ -262,6 +328,27 @@ note_get_menu_label_text(self, child)
 }
 
 static VALUE
+note_get_scrollable(self)
+    VALUE self;
+{
+    return gtk_notebook_get_scrollable(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+note_get_show_border(self)
+    VALUE self;
+{
+    return gtk_notebook_get_show_border(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+note_get_show_tabs(self)
+    VALUE self;
+{
+    return gtk_notebook_get_show_tabs(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
 note_get_tab_label_text(self, child)
     VALUE self, child;
 {
@@ -276,10 +363,23 @@ note_get_tab_pos(self)
     return INT2FIX(gtk_notebook_get_tab_pos(_SELF(self)));
 }
 
+static VALUE
+note_set_current_page(self, page)
+    VALUE self, page;
+{
+    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page));
+    return self;
+}
+
 /***********************************************/
 /*
  * Gtk::NotebookPage
  */
+typedef struct {
+    VALUE parent;
+    GtkNotebookPage* page;
+} GtkNotebookPageData;
+
 GtkNotebookPageData*
 notebookpage_copy (const GtkNotebookPage* page)
 {
@@ -302,8 +402,7 @@ gtk_notebookpage_get_type(void)
 }
 
 static VALUE
-signal_g2r_func(gobj, num, values)
-    GObject* gobj;
+signal_g2r_func(num, values)
     guint num;
     const GValue* values;
 {
@@ -334,18 +433,35 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "next_page", note_next_page, 0);
     rb_define_method(gNotebook, "prev_page", note_prev_page, 0);
     rb_define_method(gNotebook, "reorder_child", note_reorder_child, 2);
+    rb_define_method(gNotebook, "set_tab_pos", note_set_tab_pos, 1);
+    rb_define_method(gNotebook, "set_show_tabs", note_set_show_tabs, 1);
+    rb_define_method(gNotebook, "set_show_border", note_set_show_border, 1);
+    rb_define_method(gNotebook, "set_scrollable", note_set_scrollable, 1);
+    rb_define_method(gNotebook, "set_tab_border", note_set_tab_border, 1);
+    rb_define_method(gNotebook, "popup_enable", note_popup_enable, 0);
+    rb_define_method(gNotebook, "popup_disable", note_popup_disable, 0);
+    rb_define_method(gNotebook, "current_page", note_get_current_page, 0);
     rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
     rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
+/*
+    rb_define_method(gNotebook, "n_pages", note_get_n_pages, 0);
+*/
     rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);
     rb_define_method(gNotebook, "query_tab_label_packing", note_query_tab_label_packing, 1);
     rb_define_method(gNotebook, "set_menu_label", note_set_menu_label, 2);
     rb_define_method(gNotebook, "set_menu_label_text", note_set_menu_label_text, 2);
     rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
     rb_define_method(gNotebook, "set_tab_label_packing", note_set_tab_label_packing, 4);
+    rb_define_method(gNotebook, "scrollable?", note_get_scrollable, 0);
+    rb_define_method(gNotebook, "show_border?", note_get_show_border, 0);
+    rb_define_method(gNotebook, "show_tabs?", note_get_show_tabs, 0);
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
     rb_define_method(gNotebook, "tab_pos", note_get_tab_pos, 0);
 
+    rb_define_method(gNotebook, "set_current_page", note_set_current_page, 1);
+
+    G_DEF_SETTERS(gNotebook);
     G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", signal_g2r_func);
 }

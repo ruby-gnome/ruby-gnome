@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Date: 2002/11/09 19:45:36 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,8 +22,8 @@ gdkpmap_initialize(self, win, w, h, depth)
     VALUE self, win, w, h, depth;
 {
 	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
-										  NUM2INT(w), NUM2INT(h), 
-										  NUM2INT(depth)));
+                                          NUM2INT(w), NUM2INT(h), 
+                                          NUM2INT(depth)));
 	return Qnil;
 }
 

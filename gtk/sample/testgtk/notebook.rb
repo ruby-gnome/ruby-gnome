@@ -120,12 +120,6 @@ class NotebookSample < SampleWindow
       end
     end
 
-    cbutton2 = Gtk::CheckButton.new("homogeneous tabs")
-    box2.pack_start(cbutton2, true, false, 0)
-    cbutton2.signal_connect("clicked") do
-      @notebook.set_homogeneous_tabs(cbutton2.active?)
-    end
-
     box2 = Gtk::HBox.new(false, 5)
     box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
@@ -142,7 +136,7 @@ class NotebookSample < SampleWindow
     button = Gtk::Button.new("Show all Pages")
     box2.pack_start(button, false, true, 0)
     button.signal_connect('clicked') do
-      @notebook.foreach do |w|
+      @notebook.each do |w|
 	w.show
       end
     end
@@ -274,19 +268,17 @@ class NotebookSample < SampleWindow
     end
   end
 
-  def page_switch(widget, page, page_num)
-p "----"
-p page
-p page_num
-    oldpage = widget.page
-    if (page == oldpage)
-      return
-    end
-    page.tab_label(@book_open, @book_open_mask)
-    page.menu_label.children[0].set(@book_open, @book_open_mask)
-    if (oldpage)
-      oldpage.tab_label.children[0].set(@book_closed, @book_closed_mask)
-      oldpage.menu_label.children[0].set(@book_closed, @book_closed_mask)
+  def set_page_pixmaps(notebook, page_num, pix, mask)
+    child = notebook.get_nth_page(page_num)
+    label = notebook.get_tab_label(child).children[0].set(pix, mask)
+  end
+
+  def page_switch(notebook, page, page_num)
+    old_page_num = notebook.current_page
+    return if (page_num == old_page_num)
+    set_page_pixmaps(notebook, page_num, @book_open, @book_open_mask)
+    if (old_page_num != -1)
+      set_page_pixmaps(notebook, old_page_num, @book_closed, @book_closed_mask)
     end
   end
 end

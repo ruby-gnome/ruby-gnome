@@ -4,13 +4,14 @@
   rbgtkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Date: 2002/11/09 19:45:36 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 #include "global.h"
 
+#define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
 /*
 void        gtk_image_get_icon_set          (GtkImage *image,
                                              GtkIconSet **icon_set,
@@ -53,11 +54,39 @@ image_initialize(argc, argv, self)
     return Qnil;
 }
 
+static VALUE
+image_set(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg1, arg2;
+    GType gtype;
+
+    rb_scan_args(argc, argv, "11", &arg1, &arg2);
+
+    gtype = RVAL2GTYPE(arg1);
+    if (gtype == GDK_TYPE_IMAGE){
+        gtk_image_set_from_image(_SELF(self), GDK_IMAGE(RVAL2GOBJ(arg1)),
+                                 GDK_BITMAP(RVAL2GOBJ(arg2)));
+
+    } else if (gtype == GDK_TYPE_PIXBUF){
+        gtk_image_set_from_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(arg1)));
+
+    } else if (gtype == GDK_TYPE_PIXMAP){
+        gtk_image_set_from_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(arg1)),
+                                  GDK_BITMAP(RVAL2GOBJ(arg2)));
+    }
+
+    return self;
+}
+
 void 
 Init_gtk_image()
 {
     VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     rb_define_method(gImage, "initialize", image_initialize, -1);
+    rb_define_method(gImage, "set", image_set, -1);
 
     /* GtkImageType */
     rb_define_const(gImage, "EMPTY", INT2FIX(GTK_IMAGE_EMPTY));

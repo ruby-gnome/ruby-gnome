@@ -1,5 +1,11 @@
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/testgtk/notebook.rb: Apply Ruby/GTK2.
+	* src/rbgtkimage.c: Add Gtk::Image#set.
+	* src/rbgtknotebook.c: Follow GLib changes.
+	Add Gtk::Notebook#set_tab_pos, #set_show_tabs, #set_show_border, #set_scrollable, 
+	#set_tab_border, #popup_enable, #popup_disable, #current_page, #n_pages, #scrollable?,
+	#show_border?, #show_tabs?, #set_current_page.
 	* COPYING, NEWS: Remove file.
 	* README: Revised.
 
