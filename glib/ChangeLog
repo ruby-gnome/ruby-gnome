@@ -5,7 +5,7 @@
 	for managing not only GObject*, but also class_info and ruby object itself.
 	* src/rbgobj_object.c: abolish gobject_object_list_v and 
 	gobject_object_list
-	* src/rbgobj_object.c: use gobj_weak_notify() to observe an explicit
+	* src/rbgobj_object.c: use gobject_weak_ref() to observe an explicit
 	disposition. (e.g. by gtk_object_destroy())
 	* src/rbgobj_object.c: implement GObject#set_property and
 	GObject#get_property
