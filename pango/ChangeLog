@@ -1,7 +1,36 @@
 2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbpangolayout.c: Added Pango::Layout#log_attrs.
+	* src/rbpangorectangle.c: Added Pango::Rectangle#ascent, #descent, 
+	#lbearing, #rbearing.
+	* src/rbpangoattriterator.c: Added Pango::AttrIterator#attrs. 
+	* src/rbpangoattrlist.c: Added Pango::AttrList#filter.
+	* src/rbpangofontset.c: Added Pango::FontSet#each for Pango-1.4. 
+	* src/rbpangofontmap.c: Rename Pango::FontMap#list_families to
+	#families. Added #shape_engine_type. Added Pango::FcFontMap, XftFontMap.
+	* src/rbpangofontface.c: Added Pango::FontFace#sizes. 
+	* src/rbpangofontfamily.c: Added Pango::FontFamily#monospace?. 
+	Rename Pango::FontFamily#list_faces to #faces.
+	* src/rbpangofontmetrics.c: Added underline_(thickness|position),
+	strikethrough_(thickness|position).
+	* src/rbpangofontdescription.c: Added Pango::FontDescription#set_absolute_size,
+	#size_is_absolute? for Pango-1.8.x.
+	* src/rbpango.h: Added some type macros. Define PANGO_ENABLE_(ENGINE|BACKEND).
+	* src/rbpangofont.c: Added Pango::Font#get_coverage, #get_glyph_extents.
+	Added Pango::FcFont, Pango::XftFont.
+	* src/rbpangocoverage.c: Added. 
+	* src/rbpangoanalysis.c: Added Pango::Analysis#set_extra_attrs, 
+	#extra_attrs.
+	* sample/attribute.rb: Follow Ruby/GTK changes.
+	* src/rbpangoitem.c: Added Pango::Item#offset, #set_offset, #length,
+	#set_length, #num_chars, #set_num_chars, #analysis, #set_analysis.
+	* src/rbpangologattr.c: Added Pango::LogAttr#backspace_deletes_character?,
+	#set_backspace_deletes_characer.
+	* src/rbpangoattribute.c: Pango::AttrSize.new supports Pango-1.8. 
+	Added Pango::AttrStrikethroughColor, Panog::AttrUnderlineColor,
+	Pango::AttrFallback, Pango::AttrLetterSpacing
 	* src/rbpangomain.c: Added Pango.reorder_items, .unichar_direction, 
-	.find_base_dir, .shape.
+	.find_base_dir, .shape, .break, .get_log_attrs.
 	* src/rbpangoitem.c: Fix a wrong argument. 
 
 2005-02-12  Masao Mutoh  <mutoh@highway.ne.jp>

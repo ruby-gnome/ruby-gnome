@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/02/10 18:32:09 $
+  $Date: 2005/02/13 17:31:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -268,7 +268,29 @@ MAKE_ATTRENUM_INIT(AttrStyle, style, PANGO_TYPE_STYLE);
 MAKE_ATTRENUM_INIT(AttrVariant, variant, PANGO_TYPE_VARIANT); 
 MAKE_ATTRENUM_INIT(AttrStretch, stretch, PANGO_TYPE_STRETCH); 
 MAKE_ATTRENUM_INIT(AttrWeight, weight, PANGO_TYPE_WEIGHT); 
-MAKE_ATTRINT_INIT(AttrSize, size); 
+
+static VALUE
+attr_AttrSize_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE size, absolute;
+    
+    rb_scan_args(argc, argv, "11", &size, &absolute);
+
+    if (NIL_P(absolute) || ! RTEST(absolute)){
+        DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
+    } else {
+#if PANGO_CHECK_VERSION(1,8,0)
+        DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(size));
+#else
+        rb_warning("not supported in pango-1.6.x. The 2nd parameter was ignored. ");
+        DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
+#endif
+    }
+    return Qnil;
+}
 
 static VALUE
 attr_AttrFontDescription_initialize(self, fontdescription)
@@ -304,16 +326,55 @@ attr_AttrStrikethrough_initialize(self, strikethrough)
     DATA_PTR(self) = pango_attr_strikethrough_new(RTEST(strikethrough));
     return Qnil;
 }
+#if PANGO_CHECK_VERSION(1,8,0)
+static VALUE
+attr_AttrStrikethroughColor_initialize(self, r, g, b)
+    VALUE self, r, g, b;
+{
+    DATA_PTR(self) = pango_attr_strikethrough_color_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
+    return Qnil;
+}
+#endif
 
 MAKE_ATTRENUM_INIT(AttrUnderline, underline, PANGO_TYPE_UNDERLINE); 
+#if PANGO_CHECK_VERSION(1,8,0)
+static VALUE
+attr_AttrUnderlineColor_initialize(self, r, g, b)
+    VALUE self, r, g, b;
+{
+    DATA_PTR(self) = pango_attr_underline_color_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
+    return Qnil;
+}
+#endif
 
 static VALUE
-attr_AttrShape_initialize(self, ink_rect, logical_rect)
-    VALUE self, ink_rect, logical_rect;
+attr_AttrShape_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    DATA_PTR(self) = pango_attr_shape_new(
-        (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
-        (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));
+    VALUE ink_rect, logical_rect, data;
+    
+    rb_scan_args(argc, argv, "21", &ink_rect, &logical_rect, &data);
+
+    if (NIL_P(data)){
+        DATA_PTR(self) = pango_attr_shape_new(
+            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
+            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));
+    } else {
+#if PANGO_CHECK_VERSION(1,8,0)
+        DATA_PTR(self) = pango_attr_shape_new_with_data(
+            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
+            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE),
+            (gpointer)data, NULL, NULL);
+#else
+        rb_warning("not supported in Pango-1.6.x. the 3rd parameter was ignored.");
+        DATA_PTR(self) = pango_attr_shape_new(
+            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
+            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));     
+#endif
+    }
+
     return Qnil;
 }
 
@@ -325,7 +386,19 @@ attr_AttrScale_initialize(self, scale)
     return Qnil;
 }
 
+static VALUE
+attr_AttrFallback_initialize(self, enable_fallback)
+    VALUE self, enable_fallback;
+{
+    DATA_PTR(self) = pango_attr_fallback_new(RTEST(enable_fallback));
+    return Qnil;
+}
+
 MAKE_ATTRINT_INIT(AttrRise, rise);
+
+#if PANGO_CHECK_VERSION(1,6,0)
+MAKE_ATTRINT_INIT(AttrLetterSpacing, letter_spacing);
+#endif
 
 #define MAKE_ATTR(gtype, name, parent, num)\
 tmpklass = rb_define_class_under(mPango, #name, parent);\
@@ -378,7 +451,7 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_WEIGHT, AttrWeight, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_VARIANT, AttrVariant, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_STRETCH, AttrStretch, pattrint, 1);
-    MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, 1);
+    MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, -1);
     MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, pattr, 1);
     rb_define_method(tmpklass, "value", attr_fontdesc_value, 0);
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);
@@ -387,10 +460,19 @@ Init_pango_attribute()
     /* PangoUnderline */
     G_DEF_CLASS(PANGO_TYPE_UNDERLINE, "Underline", tmpklass);
     G_DEF_CONSTANTS(tmpklass, PANGO_TYPE_UNDERLINE, "PANGO_UNDERLINE_");
+#if PANGO_CHECK_VERSION(1,8,0)
+    MAKE_ATTR(PANGO_ATTR_UNDERLINE_COLOR, AttrUnderlineColor, pattrcolor, 3);
+#endif
 
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
+#if PANGO_CHECK_VERSION(1,8,0)
+    MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH_COLOR, AttrStrikethroughColor, pattrcolor, 3);
+#endif
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
-    MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, pattr, 2);
+#if PANGO_CHECK_VERSION(1,6,0)
+    MAKE_ATTR(PANGO_ATTR_LETTER_SPACING, AttrLetterSpacing, pattrint, 1);
+#endif
+    MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, pattr, -1);
     rb_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
     rb_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
     rb_define_method(tmpklass, "value", attr_shape_value, 0);
@@ -403,7 +485,9 @@ Init_pango_attribute()
     rb_define_const(tmpklass, "LARGE", rb_float_new(PANGO_SCALE_LARGE));
     rb_define_const(tmpklass, "X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
     rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
-
+#if PANGO_CHECK_VERSION(1,8,0)
+    MAKE_ATTR(PANGO_ATTR_FALLBACK, AttrFallback, pattrbool, 1);
+#endif
     /* PangoAttrType */
     G_DEF_CLASS(PANGO_TYPE_ATTR_TYPE, "Type", pattr);
 #define INT2ATTRTYPE(x) rbgobj_make_enum((x), PANGO_TYPE_ATTR_TYPE)
@@ -420,8 +504,16 @@ Init_pango_attribute()
     rb_define_const(pattr, "TYPE_BACKGROUND", INT2ATTRTYPE(PANGO_ATTR_BACKGROUND));
     rb_define_const(pattr, "TYPE_UNDERLINE", INT2ATTRTYPE(PANGO_ATTR_UNDERLINE));
     rb_define_const(pattr, "TYPE_STRIKETHROUGH", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH));
+#if PANGO_CHECK_VERSION(1,8,0)
+    rb_define_const(pattr, "TYPE_STRIKETHROUGH_COLOR", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH_COLOR));
+#endif
     rb_define_const(pattr, "TYPE_RISE", INT2ATTRTYPE(PANGO_ATTR_RISE));
     rb_define_const(pattr, "TYPE_SHAPE", INT2ATTRTYPE(PANGO_ATTR_SHAPE));
     rb_define_const(pattr, "TYPE_SCALE", INT2ATTRTYPE(PANGO_ATTR_SCALE));
-
+#if PANGO_CHECK_VERSION(1,8,0)
+    rb_define_const(pattr, "TYPE_FALLBACK", INT2ATTRTYPE(PANGO_ATTR_FALLBACK));
+#endif
+#if PANGO_CHECK_VERSION(1,6,0)
+    rb_define_const(pattr, "TYPE_LETTER_SPACING", INT2ATTRTYPE(PANGO_ATTR_LETTER_SPACING));
+#endif
 }

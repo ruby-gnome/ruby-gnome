@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: attribute.rb,v 1.4 2003/09/01 14:39:24 mutoh Exp $
+  $Id: attribute.rb,v 1.5 2005/02/13 17:31:33 mutoh Exp $
 =end
 
 require 'pango'
@@ -74,11 +74,11 @@ rescue
 end
   Gtk.init
 
-  p a = Gdk::Pango::AttrEmbossed.new(true)
+  p a = Gdk::PangoAttrEmbossed.new(true)
   p a.value
 
   mask = Gdk::Pixmap.new(Gtk::Window.new.realize.window, 100, 100, 1)
-  p a = Gdk::Pango::AttrStipple.new(mask)
+  p a = Gdk::PangoAttrStipple.new(mask)
   p a.value
 
 

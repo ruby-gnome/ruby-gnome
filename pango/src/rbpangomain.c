@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2005/02/12 18:13:34 $
+  $Date: 2005/02/13 17:31:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -51,25 +51,61 @@ rpango_find_base_dir(self, text)
                       PANGO_TYPE_DIRECTION);
 }
 
-
-/*
 static VALUE
-rpango_break(self, text)
-     VALUE self, text;
+rpango_break(self, text, analysis)
+    VALUE self, text, analysis;
 {
-  pango_break(RVAL2CSTR(text), NUM2INT(length), 
-                                             int length,
-                                             PangoAnalysis *analysis,
-                                             PangoLogAttr *attrs,
-                                             int attrs_len);
+    gint i, len;
+    glong attrs_len;
+    PangoLogAttr* attrs;
+    gchar* gtext;
+    VALUE ret;
+
+    StringValue(text);
+    len = RSTRING(text)->len;
+    gtext = RVAL2CSTR(text);
+    attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
+    attrs = g_new0(PangoLogAttr, attrs_len);
+
+    pango_break((const gchar*)gtext, len,
+                        NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
+                        attrs, attrs_len);
+
+    ret = rb_ary_new();
+    for (i = 0; i < attrs_len; i++){
+        rb_ary_push(ret, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
+    }
+    g_free(attrs);
+    return ret;
 }
-void        pango_get_log_attrs             (const char *text,
-                                             int length,
-                                             int level,
-                                             PangoLanguage *language,
-                                             PangoLogAttr *log_attrs,
-                                             int attrs_len);
-*/
+
+static VALUE
+rpango_get_log_attrs(self, text, level, language)
+    VALUE self, text, level, language;
+{
+    gint i, len;
+    glong attrs_len;
+    PangoLogAttr* attrs;
+    gchar* gtext;
+    VALUE ret;
+
+    StringValue(text);
+    len = RSTRING(text)->len;
+    gtext = RVAL2CSTR(text);
+    attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
+    attrs = g_new0(PangoLogAttr, attrs_len);
+
+    pango_get_log_attrs((const gchar*)gtext, len, NUM2INT(level),
+                        RVAL2BOXED(language, PANGO_TYPE_LANGUAGE),
+                        attrs, attrs_len);
+
+    ret = rb_ary_new();
+    for (i = 0; i < attrs_len; i++){
+        rb_ary_push(ret, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
+    }
+    g_free(attrs);
+    return ret;
+}
 
 static VALUE
 rpango_find_paragraph_boundary(self, text)
@@ -85,22 +121,12 @@ rpango_find_paragraph_boundary(self, text)
 }
 
 /*
-What should I return this ?
+Don't need to implement this. Use pango_break instead.
 void        pango_default_break             (const gchar *text,
                                              int length,
                                              PangoAnalysis *analysis,
                                              PangoLogAttr *attrs,
                                              int attrs_len);
-
-static VALUE
-rpango_default_break(self, text, analysis)
-    VALUE self, text, anlysis;
-{
-    StringValue(text);
-    pango_default_break(RVAL2CSTR(text), RSTRING(text)->len, 
-                        NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
-                        &attrs, attrs_len);
-}
 */
 
 static VALUE
@@ -116,7 +142,7 @@ rpango_shape(self, text, analysis)
     return ret;
 }
 
-/* This method from rbpangoattribute.c */
+/* This method is from rbpangoattribute.c */
 static VALUE
 rpango_parse_markup(argc, argv, self)
     int argc;
@@ -169,9 +195,12 @@ Init_pango_main()
     rb_define_module_function(mPango, "reorder_items", rpango_reorder_items, 1);
     rb_define_module_function(mPango, "unichar_direction", rpango_unichar_direction, 1);
     rb_define_module_function(mPango, "find_base_dir", rpango_find_base_dir, 1);
+    rb_define_module_function(mPango, "break", rpango_break, 2);
+    rb_define_module_function(mPango, "get_log_attrs", rpango_get_log_attrs, 3);
     rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
     rb_define_module_function(mPango, "shape", rpango_shape, 2);
     rb_define_module_function(mPango, "parse_markup", rpango_parse_markup, -1);
     rb_define_module_function(mPango, "pixels", rpango_pixels, 1);
+
     rb_define_const(mPango, "SCALE", INT2FIX(PANGO_SCALE));
 }

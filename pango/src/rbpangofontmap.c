@@ -3,10 +3,10 @@
 
   rbpangofontmap.c -
 
-  $Author: sakai $
-  $Date: 2003/08/16 05:30:54 $
+  $Author: mutoh $
+  $Date: 2005/02/13 17:31:33 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -61,8 +61,19 @@ font_map_list_families(self)
     for (i = 0; i < n_families; i++)
       rb_ary_store(result, i, GOBJ2RVAL(families[i]));
 
+    g_free(families);
+
     return result;
 }
+
+#if PANGO_CHECK_VERSION(1,4,0)
+static VALUE
+font_map_get_shape_engine_type(self)
+    VALUE self;
+{
+    return CSTR2RVAL(pango_font_map_get_shape_engine_type(_SELF(self)));
+}
+#endif
 
 void
 Init_pango_font_map()
@@ -74,5 +85,12 @@ Init_pango_font_map()
 	 */
     rb_define_method(pMap, "load_font", font_map_load_font, 2);
     rb_define_method(pMap, "load_fontset", font_map_load_fontset, 3);
-    rb_define_method(pMap, "list_families", font_map_list_families, 0);
+    rb_define_method(pMap, "families", font_map_list_families, 0);
+#if PANGO_CHECK_VERSION(1,4,0)
+    rb_define_method(pMap, "shape_engine_type", font_map_get_shape_engine_type, 0);
+#endif
+
+    G_DEF_CLASS3("PangoFcFontMap", "FcFontMap", mPango);
+    G_DEF_CLASS3("PangoXftFontMap", "XftFontMap", mPango);
 }
+

@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2005/02/13 17:31:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -121,6 +121,39 @@ pango_rectangle_to_a(self)
                      INT2FIX(a->width), INT2FIX(a->height));
 }
 
+static VALUE
+pango_rectangle_ascent(self)
+    VALUE self;
+{
+    PangoRectangle* r =_SELF(self);
+    return INT2NUM(PANGO_ASCENT(*r));
+}
+
+static VALUE
+pango_rectangle_descent(self)
+    VALUE self;
+{
+    PangoRectangle* r =_SELF(self);
+    return INT2NUM(PANGO_DESCENT(*r));
+}
+
+static VALUE
+pango_rectangle_lbearing(self)
+    VALUE self;
+{
+    PangoRectangle* r =_SELF(self);
+    return INT2NUM(PANGO_LBEARING(*r));
+}
+
+static VALUE
+pango_rectangle_rbearing(self)
+    VALUE self;
+{
+    PangoRectangle* r =_SELF(self);
+    return INT2NUM(PANGO_RBEARING(*r));
+}
+
+
 void
 Init_pango_rectangle()
 {
@@ -135,6 +168,11 @@ Init_pango_rectangle()
     rb_define_method(pRectangle, "set_width", pango_rectangle_set_w, 1);
     rb_define_method(pRectangle, "set_height", pango_rectangle_set_h, 1);
     rb_define_method(pRectangle, "to_a", pango_rectangle_to_a, 0);
+
+    rb_define_method(pRectangle, "ascent", pango_rectangle_ascent, 0);
+    rb_define_method(pRectangle, "descent", pango_rectangle_descent, 0);
+    rb_define_method(pRectangle, "lbearing", pango_rectangle_lbearing, 0);
+    rb_define_method(pRectangle, "rbearing", pango_rectangle_rbearing, 0);
 
     G_DEF_SETTERS(pRectangle);
 }

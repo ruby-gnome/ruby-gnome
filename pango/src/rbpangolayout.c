@@ -4,9 +4,9 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2005/02/12 16:04:42 $
+  $Date: 2005/02/13 17:31:33 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -266,11 +266,25 @@ layout_get_single_paragraph_mode(self)
     return CBOOL2RVAL(pango_layout_get_single_paragraph_mode(_SELF(self)));
 }
 
-/*
-void        pango_layout_get_log_attrs      (PangoLayout *layout,
-                                             PangoLogAttr **attrs,
-                                             gint *n_attrs);
-*/
+static VALUE
+layout_get_log_attrs(self)
+    VALUE self;
+{
+    PangoLogAttr* attrs;
+    gint i, n_attrs;
+    VALUE ary;
+
+    pango_layout_get_log_attrs(_SELF(self), &attrs, &n_attrs);
+
+    ary = rb_ary_new();
+
+    for (i = 0; i < n_attrs; i++) {
+        rb_ary_assoc(ary, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
+    }
+    g_free(attrs);
+
+    return ary;
+}
 
 static VALUE
 layout_xy_to_index(self, x, y)
@@ -512,6 +526,7 @@ Init_pango_layout()
     rb_define_method(pLayout, "tabs", layout_get_tabs, 0);
     rb_define_method(pLayout, "set_single_paragraph_mode", layout_set_single_paragraph_mode, 1);
     rb_define_method(pLayout, "single_paragraph_mode?", layout_get_single_paragraph_mode, 0);
+    rb_define_method(pLayout, "log_attrs", layout_get_log_attrs, 0);
     rb_define_method(pLayout, "xy_to_index", layout_xy_to_index, 2);
     rb_define_method(pLayout, "index_to_pos", layout_index_to_pos, 1);
     rb_define_method(pLayout, "get_cursor_pos", layout_get_cursor_pos, 1);

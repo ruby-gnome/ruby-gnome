@@ -4,9 +4,9 @@
   rbpangoanalysis.c -
 
   $Author: mutoh $
-  $Date: 2003/11/09 17:10:47 $
+  $Date: 2005/02/13 17:31:33 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -44,6 +44,34 @@ ana_initialize(self)
     PangoAnalysis ana = { NULL, NULL, NULL, 0 };
     G_INITIALIZE(self, &ana);
     return Qnil;
+}
+
+static VALUE
+ana_set_shape_engine(self, engine)
+    VALUE self, engine;
+{
+    _SELF(self)->shape_engine = PANGO_ENGINE_SHAPE(RVAL2GOBJ(engine));
+    return self;
+}
+static VALUE
+ana_get_shape_engine(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(_SELF(self)->shape_engine);
+}
+
+static VALUE
+ana_set_lang_engine(self, engine)
+    VALUE self, engine;
+{
+    _SELF(self)->lang_engine = PANGO_ENGINE_LANG(RVAL2GOBJ(engine));
+    return self;
+}
+static VALUE
+ana_get_lang_engine(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(_SELF(self)->lang_engine);
 }
 
 static VALUE
@@ -91,18 +119,55 @@ ana_get_language(self)
     return BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
 }
 
+static VALUE
+ana_set_extra_attrs(self, attrs)
+    VALUE self, attrs;
+{
+    gint i;
+    gint len = RARRAY(attrs)->len;
+    GSList* gattrs = NULL;
+
+    for (i = 0; i < len; i++){
+        gattrs = g_slist_append(gattrs, RVAL2ATTR(RARRAY(attrs)->ptr[i]));
+    }
+
+    _SELF(self)->extra_attrs = gattrs;
+    return self;
+}
+
+static VALUE
+ana_get_extra_attrs(self)
+    VALUE self;
+{
+    VALUE ary = rb_ary_new();
+    GSList* list = _SELF(self)->extra_attrs;
+
+    while (list) {
+        rb_ary_push(ary, ATTR2RVAL(list->data));
+        list = list->next;
+    }
+    return ary;
+}
+
 void
 Init_pango_analysis()
 {
     VALUE pana = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
     
     rb_define_method(pana, "initialize", ana_initialize, 0);
+    rb_define_method(pana, "set_shape_engine", ana_set_shape_engine, 1);
+    rb_define_method(pana, "shape_engine", ana_get_shape_engine, 0);
+    rb_define_method(pana, "set_lang_engine", ana_set_lang_engine, 1);
+    rb_define_method(pana, "lang_engine", ana_get_lang_engine, 0);
     rb_define_method(pana, "set_font", ana_set_font, 1);
     rb_define_method(pana, "font", ana_get_font, 0);
     rb_define_method(pana, "set_level", ana_set_level, 1);
     rb_define_method(pana, "level", ana_get_level, 0);
     rb_define_method(pana, "set_language", ana_set_language, 1);
     rb_define_method(pana, "language", ana_get_language, 0);
+
+    rb_define_method(pana, "set_extra_attrs", ana_set_extra_attrs, 1);
+    rb_define_method(pana, "extra_attrs", ana_get_extra_attrs, 0);
 
     G_DEF_SETTERS(pana);
 }

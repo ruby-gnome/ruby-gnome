@@ -4,9 +4,9 @@
   rbpangoattriterator.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2005/02/13 17:31:33 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -98,6 +98,28 @@ attriterator_get_font(self)
     return ret;
 }
 
+static VALUE
+attriterator_get_attrs(self)
+    VALUE self;
+{
+    GSList* list = pango_attr_iterator_get_attrs(_SELF(self));
+    GSList* base = list;
+    GSList* old = list;
+    VALUE ary = rb_ary_new();
+
+    while (list) {
+        rb_ary_push(ary, ATTR2RVAL(list->data));
+        list = list->next;
+    }
+    while (old) {
+        pango_attribute_destroy((PangoAttribute*)old);
+        old = old->next;
+    }
+    g_slist_free(base);
+
+    return ary;
+}  
+
 void
 Init_pango_attriterator()
 {
@@ -107,4 +129,5 @@ Init_pango_attriterator()
     rb_define_method(pAttriterator, "range", attriterator_range, 0);
     rb_define_method(pAttriterator, "get", attriterator_get, -1);
     rb_define_method(pAttriterator, "font", attriterator_get_font, 0);
+    rb_define_method(pAttriterator, "attrs", attriterator_get_attrs, 0);
 }

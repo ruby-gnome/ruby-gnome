@@ -4,9 +4,9 @@
   rbpangofontdescription.c -
 
   $Author: mutoh $
-  $Date: 2003/09/01 14:39:24 $
+  $Date: 2005/02/13 17:31:33 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -151,6 +151,23 @@ font_desc_get_size(self)
     return INT2NUM(pango_font_description_get_size(_SELF(self)));
 }
 
+#if PANGO_CHECK_VERSION(1,8,0)
+static VALUE
+font_desc_set_absolute_size(self, size)
+    VALUE self, size;
+{
+    pango_font_description_set_absolute_size(_SELF(self), NUM2INT(size));
+    return self;
+}
+
+static VALUE
+font_desc_get_size_is_absolute(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(pango_font_description_get_size_is_absolute(_SELF(self)));
+}
+#endif
+
 static VALUE
 font_desc_get_set_fields(self)
     VALUE self;
@@ -225,6 +242,11 @@ Init_pango_font_description()
     rb_define_method(pFontDesc, "stretch", font_desc_get_stretch, 0);
     rb_define_method(pFontDesc, "set_size", font_desc_set_size, 1);
     rb_define_method(pFontDesc, "size", font_desc_get_size, 0);
+
+#if PANGO_CHECK_VERSION(1,8,0)
+    rb_define_method(pFontDesc, "set_absolute_size", font_desc_set_absolute_size, 1);
+    rb_define_method(pFontDesc, "size_is_absolute?", font_desc_get_size_is_absolute, 0);
+#endif
     rb_define_method(pFontDesc, "set_fields", font_desc_get_set_fields, 0);
     rb_define_method(pFontDesc, "unset_fields", font_desc_unset_fields, 1);
     rb_define_method(pFontDesc, "merge", font_desc_merge, 2);

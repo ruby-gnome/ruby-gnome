@@ -4,12 +4,14 @@
   rbpangoattrlist.c -
 
   $Author: mutoh $
-  $Date: 2005/02/10 18:32:09 $
+  $Date: 2005/02/13 17:31:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
 
 #include "rbpango.h"
+
+static ID id_call;
 
 #define _SELF(self) ((PangoAttrList*)RVAL2BOXED(self, PANGO_TYPE_ATTR_LIST))
 
@@ -53,6 +55,26 @@ attrlist_splice(self, other, pos, len)
     return self;
 }
 
+static gboolean
+filter_func(attr, data)
+    PangoAttribute* attr;
+    gpointer data;
+{
+    return CBOOL2RVAL(rb_funcall((VALUE)data, id_call, 1, ATTR2RVAL(attr)));
+}
+
+static VALUE
+attrlist_filter(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    return BOXED2RVAL(pango_attr_list_filter(_SELF(self), 
+                                             (PangoAttrFilterFunc)filter_func, 
+                                             (gpointer)func),
+                      PANGO_TYPE_ATTR_LIST);
+}
+
 static VALUE
 attrlist_get_iterator(self)
     VALUE self;
@@ -65,11 +87,14 @@ Init_pango_attrlist()
 {
     VALUE pAttrlist = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
 
+    id_call = rb_intern("call");
+
     rb_define_method(pAttrlist, "initialize", attrlist_initialize, 0);
     rb_define_method(pAttrlist, "insert", attrlist_insert, 1);
     rb_define_method(pAttrlist, "insert_before", attrlist_insert_before, 1);
     rb_define_method(pAttrlist, "change", attrlist_change, 1);
     rb_define_method(pAttrlist, "splice", attrlist_splice, 3);
+    rb_define_method(pAttrlist, "filter", attrlist_filter, 0);
     rb_define_method(pAttrlist, "iterator", attrlist_get_iterator, 0);
 
 }

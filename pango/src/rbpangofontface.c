@@ -4,7 +4,7 @@
   rbpangofontface.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2005/02/13 17:31:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -27,6 +27,29 @@ font_face_describe(self)
     return BOXED2RVAL(pango_font_face_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
+static VALUE
+font_face_list_sizes(self)
+    VALUE self;
+{
+    int n_sizes;
+    int* sizes;
+    int i;
+    VALUE result;
+
+    pango_font_face_list_sizes(_SELF(self),
+                               &sizes,
+                               &n_sizes);
+
+    result = rb_ary_new();
+    for (i = 0; i < n_sizes; i++)
+      rb_ary_push(result, GOBJ2RVAL(&sizes[i]));
+
+    g_free(sizes);
+    return result;
+}
+#endif
+
 void
 Init_pango_font_face()
 {
@@ -34,4 +57,7 @@ Init_pango_font_face()
     
     rb_define_method(pFace, "name", font_face_get_face_name, 0);
     rb_define_method(pFace, "describe", font_face_describe, 0);
+#if PANGO_CHECK_VERSION(1,4,0)
+    rb_define_method(pFace, "sizes", font_face_list_sizes, 0);
+#endif
 }
