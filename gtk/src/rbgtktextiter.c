@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: sakai $
-  $Date: 2003/02/16 13:25:17 $
+  $Author: mutoh $
+  $Date: 2003/03/21 04:02:13 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -77,7 +77,8 @@ static VALUE
 get_pixbuf(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_iter_get_pixbuf(_SELF(self)));
+    GdkPixbuf* pixbuf = gtk_text_iter_get_pixbuf(_SELF(self));
+    return pixbuf ? GOBJ2RVAL(pixbuf) : Qnil;
 }
 
 static VALUE
@@ -98,7 +99,8 @@ static VALUE
 get_child_anchor(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_iter_get_child_anchor(_SELF(self)));
+    GtkTextChildAnchor* anchor = gtk_text_iter_get_child_anchor(_SELF(self));
+    return anchor ? GOBJ2RVAL(anchor) : Qnil;
 }
 
 static VALUE
