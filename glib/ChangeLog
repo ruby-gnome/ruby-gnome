@@ -1,3 +1,7 @@
+2004-08-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Increment version number.
+
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_spawn.c: Fix warnings. 
