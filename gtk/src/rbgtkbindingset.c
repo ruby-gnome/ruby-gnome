@@ -4,7 +4,7 @@
   rbgtkbindingset.c -
 
   $Author: mutoh $
-  $Date: 2003/12/20 15:23:38 $
+  $Date: 2003/12/20 15:37:53 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -147,6 +147,13 @@ binding_add_path(self, path_type, path_pattern, priority)
                              RVAL2GENUM(priority, GTK_TYPE_PATH_PRIORITY_TYPE));
     return self;
 }
+
+/* Non-public methods.
+void        gtk_binding_entry_remove        (GtkBindingSet *binding_set,
+                                             guint keyval,
+                                             GdkModifierType modifiers);
+guint       gtk_binding_parse_binding       (GScanner *scanner);
+*/
 
 void 
 Init_gtk_bindings()

@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: bindings.rb,v 1.1 2003/12/20 15:23:38 mutoh Exp $
+  $Id: bindings.rb,v 1.2 2003/12/20 15:37:53 mutoh Exp $
 =end
 
 =begin
@@ -105,6 +105,7 @@ pager.grab_focus
 
 window.signal_connect("destroy") { Gtk.main_quit }
 
+GC.start
 Gtk.main
 
 
