@@ -60,6 +60,9 @@ static void Init_gst_classes(void) {
     extern void Init_gst_type(void);
     extern void Init_gst_typefactory(void);
     extern void Init_gst_typefind(void);
+#ifdef HAVE_MEDIA_INFO
+    extern void Init_gst_mediatype(void);
+#endif
     
     Init_gst_autoplug();
     Init_gst_autoplugfactory();
@@ -93,7 +96,6 @@ static void Init_gst_classes(void) {
     Init_gst_typefind();
 
 #ifdef HAVE_MEDIA_INFO
-    extern void Init_gst_mediatype(void);
     Init_gst_mediatype();
 #endif
 }
