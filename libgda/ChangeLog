@@ -1,3 +1,13 @@
+2003-09-30  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaconnection.c: Added a few methods (#set_client, #provider, 
+	  #add_errors, #database, #change_database, #create_database, 
+	  #drop_database, #supports?) and constants (FEATURE_AGGREGATES,
+	  FEATURE_INDEXES, FEATURE_INHERITANCE, FEATURE_NAMESPACES, 
+	  FEATURE_PROCEDURES, FEATURE_SEQUENCES, FEATURE_SQL, FEATURE_TRANSACTIONS, 
+	  FEATURE_TRIGGERS, FEATURE_USERS, FEATURE_VIEWS, FEATURE_XML_QUERIES,
+	  FEATURE_BLOBS) to complete the class.
+
 2003-09-29  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdaclient.c: Added a few methods (#close_all_connections,

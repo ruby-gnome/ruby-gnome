@@ -70,6 +70,12 @@ static VALUE rb_gda_connection_get_options(self)
     return INT2FIX(gda_connection_get_options(RGDA_CONNECTION(self)));
 }
 
+static VALUE rb_gda_connection_get_provider(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gda_connection_get_provider(RGDA_CONNECTION(self)));
+}
+
 static VALUE rb_gda_connection_get_client(self)
     VALUE self;
 {
@@ -77,6 +83,14 @@ static VALUE rb_gda_connection_get_client(self)
     return client != NULL
         ? RGDA_CLIENT_NEW(client)
         : Qnil;
+}
+
+static VALUE rb_gda_connection_set_client(self, client)
+    VALUE self, client;
+{
+    gda_connection_set_client(RGDA_CONNECTION(self),
+                              RGDA_CLIENT(client));
+    return self;
 }
 
 static GdaParameterList *parse_params(argc, argv, cmd)
@@ -157,6 +171,20 @@ static VALUE rb_gda_connection_get_errors(self)
     return arr;
 }
 
+static VALUE rb_gda_connection_add_errors(self, errors)
+    VALUE self, errors;
+{
+    GList *list = NULL;
+    int i;
+
+    for (i = 0; i < RARRAY(errors)->len; i++) {
+        list = g_list_append(list, RGDA_ERROR(rb_ary_entry(errors, i)));
+    }
+    gda_connection_add_error_list(RGDA_CONNECTION(self), list);
+    /* the list is automatically freed */
+    return self;
+}
+
 static VALUE rb_gda_connection_begin_transaction(self, tr)
     VALUE self, tr;
 {
@@ -182,6 +210,40 @@ static VALUE rb_gda_connection_rollback_transaction(self, tr)
     return self;
 }
 
+static VALUE rb_gda_connection_get_database(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gda_connection_get_database(RGDA_CONNECTION(self)));
+}
+
+static VALUE rb_gda_connection_change_database(self, db)
+    VALUE self, db;
+{
+    return CBOOL2RVAL(gda_connection_change_database(RGDA_CONNECTION(self),
+                                                     RVAL2CSTR(db)));
+}
+
+static VALUE rb_gda_connection_create_database(self, db)
+    VALUE self, db;
+{
+    return CBOOL2RVAL(gda_connection_create_database(RGDA_CONNECTION(self),
+                                                     RVAL2CSTR(db)));
+}
+
+static VALUE rb_gda_connection_drop_database(self, db)
+    VALUE self, db;
+{
+    return CBOOL2RVAL(gda_connection_drop_database(RGDA_CONNECTION(self),
+                                                   RVAL2CSTR(db)));
+}
+
+static VALUE rb_gda_connection_supports(self, feature)
+    VALUE self, feature;
+{
+    return CBOOL2RVAL(gda_connection_supports(RGDA_CONNECTION(self),
+                                              FIX2INT(feature)));
+}
+
 void Init_gda_connection(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_CONNECTION, "Connection", mGda);
 
@@ -194,7 +256,10 @@ void Init_gda_connection(void) {
     rb_define_method(c, "cnc_string",     rb_gda_connection_get_cnc_string,     0);
     rb_define_method(c, "server_version", rb_gda_connection_get_server_version, 0);
     rb_define_method(c, "options",        rb_gda_connection_get_options,        0);
-    rb_define_method(c, "client",         rb_gda_connection_get_client,         0);
+    rb_define_method(c, "provider",       rb_gda_connection_get_provider,       0);
+
+    rb_define_method(c, "client",     rb_gda_connection_get_client, 0);
+    rb_define_method(c, "set_client", rb_gda_connection_set_client, 1);
 
     rb_define_method(c, "execute_command",        rb_gda_connection_execute_command,        -1);
     rb_define_method(c, "execute_single_command", rb_gda_connection_execute_single_command, -1);
@@ -204,9 +269,35 @@ void Init_gda_connection(void) {
     rb_define_method(c, "commit_transaction",   rb_gda_connection_commit_transaction,   1);
     rb_define_method(c, "rollback_transaction", rb_gda_connection_rollback_transaction, 1);
 
-    rb_define_method(c, "errors", rb_gda_connection_get_errors, 0);
+    rb_define_method(c, "errors",     rb_gda_connection_get_errors,  0);
+    rb_define_method(c, "add_errors", rb_gda_connection_add_errors, -2);
+
+    rb_define_method(c, "database",        rb_gda_connection_get_database,    0);
+    rb_define_method(c, "change_database", rb_gda_connection_change_database, 0);
+    rb_define_method(c, "create_database", rb_gda_connection_create_database, 0);
+    rb_define_method(c, "drop_database",   rb_gda_connection_drop_database,   0);
+
+    rb_define_method(c, "supports?", rb_gda_connection_supports, 1);
 
     rb_define_const(c, "OPTIONS_READ_ONLY",  INT2FIX(GDA_CONNECTION_OPTIONS_READ_ONLY));
     rb_define_const(c, "OPTIONS_DONT_SHARE", INT2FIX(GDA_CONNECTION_OPTIONS_DONT_SHARE));
+
+    rb_define_const(c, "FEATURE_AGGREGATES",   INT2FIX(GDA_CONNECTION_FEATURE_AGGREGATES));
+    rb_define_const(c, "FEATURE_INDEXES",      INT2FIX(GDA_CONNECTION_FEATURE_INDEXES));
+    rb_define_const(c, "FEATURE_INHERITANCE",  INT2FIX(GDA_CONNECTION_FEATURE_INHERITANCE));
+    rb_define_const(c, "FEATURE_NAMESPACES",   INT2FIX(GDA_CONNECTION_FEATURE_NAMESPACES));
+    rb_define_const(c, "FEATURE_PROCEDURES",   INT2FIX(GDA_CONNECTION_FEATURE_PROCEDURES));
+    rb_define_const(c, "FEATURE_SEQUENCES",    INT2FIX(GDA_CONNECTION_FEATURE_SEQUENCES));
+    rb_define_const(c, "FEATURE_SQL",          INT2FIX(GDA_CONNECTION_FEATURE_SQL));
+    rb_define_const(c, "FEATURE_TRANSACTIONS", INT2FIX(GDA_CONNECTION_FEATURE_TRANSACTIONS));
+    rb_define_const(c, "FEATURE_TRIGGERS",     INT2FIX(GDA_CONNECTION_FEATURE_TRIGGERS));
+    rb_define_const(c, "FEATURE_USERS",        INT2FIX(GDA_CONNECTION_FEATURE_USERS));
+    rb_define_const(c, "FEATURE_VIEWS",        INT2FIX(GDA_CONNECTION_FEATURE_VIEWS));
+    rb_define_const(c, "FEATURE_XML_QUERIES",  INT2FIX(GDA_CONNECTION_FEATURE_XML_QUERIES));
+#if defined(GDA_CONNECTION_FEATURE_BLOBS)
+    rb_define_const(c, "FEATURE_BLOBS",        INT2FIX(GDA_CONNECTION_FEATURE_BLOBS));
+#endif
+
+    G_DEF_SETTERS(c);
 }
 
