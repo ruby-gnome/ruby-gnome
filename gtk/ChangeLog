@@ -1,3 +1,8 @@
+2003-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkpango.c: Add Gdk::Pango::AttrStipple#value.
+	Change parent of Gdk::Pango::AttrEmbossed to Pango::AttrBool.
+
 2003-01-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcalendar.c: Fix return value for 

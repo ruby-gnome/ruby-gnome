@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2003/01/08 16:46:57 $
+  $Date: 2003/01/10 19:23:55 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -32,7 +32,7 @@ static VALUE
 gdkpango_attr_embossed_initialize(self, embossed)
     VALUE self, embossed;
 {
-    G_INITIALIZE(self, gdk_pango_attr_embossed_new(RTEST(embossed)));
+    DATA_PTR(self) = gdk_pango_attr_embossed_new(RTEST(embossed));
     return Qnil;
 }
 
@@ -40,8 +40,15 @@ static VALUE
 gdkpango_attr_stipple_initialize(self, stipple)
     VALUE self, stipple;
 {
-    G_INITIALIZE(self, gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple))));
+    DATA_PTR(self) = gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple)));
     return Qnil;
+}
+
+static VALUE
+gdkpango_attr_stipple_value(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(((GdkPangoAttrStipple*)RVAL2ATTR(self))->stipple);
 }
 
 static VALUE
@@ -90,6 +97,7 @@ Init_gtk_gdk_pango()
     VALUE layout = GTYPE2CLASS(PANGO_TYPE_LAYOUT);
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
     VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
+    VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
 
     rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, 0);
 
@@ -98,13 +106,14 @@ Init_gtk_gdk_pango()
     rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
     rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
 
-    klass = rb_define_class_under(mGdkPango, "AttrEmbossed", pattr);
+    klass = rb_define_class_under(mGdkPango, "AttrEmbossed", pattrbool);
     rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
 
     klass = rb_define_class_under(mGdkPango, "AttrStipple", pattr);
     rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
+    rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
 }
