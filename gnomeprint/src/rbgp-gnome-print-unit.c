@@ -157,7 +157,7 @@ Init_gnome_print_unit(VALUE mGnome)
   VALUE cBase;
   
   cBase = G_DEF_CLASS(GNOME_TYPE_PRINT_PRINT_UNIT_BASE,
-                      "PrintUnitBase", cUnit);
+                      "PrintUnitBase", mGnome);
   G_DEF_CONSTANTS(cUnit, GNOME_TYPE_PRINT_PRINT_UNIT_BASE, "GNOME_PRINT_");
 
   rb_define_const(cUnit, "PS_UNIT", CONST_GPU2RVAL(GNOME_PRINT_PS_UNIT));
