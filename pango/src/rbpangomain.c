@@ -4,9 +4,9 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2005/02/07 17:58:47 $
+  $Date: 2005/02/12 18:13:34 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -15,11 +15,44 @@
  * Rendering
  */
 
-/*
-PangoDirection pango_unichar_direction      (gunichar ch);
-PangoDirection pango_find_base_dir          (const gchar *text,
-                                             gint length);
+static VALUE
+rpango_reorder_items(self, logical_items)
+    VALUE self, logical_items;
+{
+    int i;
+    GList *glist = NULL;
+    GList* ret;
 
+    Check_Type(logical_items, T_ARRAY);
+
+    for (i = 0; i < RARRAY(logical_items)->len; i++){
+        glist = g_list_append(glist, RVAL2BOXED(RARRAY(logical_items)->ptr[i], PANGO_TYPE_ITEM));
+    }
+
+    ret = pango_reorder_items(glist);
+    g_list_free(glist);
+
+    return ret ? GLIST2ARY2(ret, PANGO_TYPE_ITEM) : Qnil;
+}
+
+static VALUE
+rpango_unichar_direction(self, ch)
+    VALUE self, ch;
+{
+    return GENUM2RVAL(pango_unichar_direction(NUM2UINT(ch)), PANGO_TYPE_DIRECTION);
+}
+
+static VALUE
+rpango_find_base_dir(self, text)
+    VALUE self, text;
+{
+    StringValue(text);
+    return GENUM2RVAL(pango_find_base_dir(RVAL2CSTR(text), RSTRING(text)->len), 
+                      PANGO_TYPE_DIRECTION);
+}
+
+
+/*
 static VALUE
 rpango_break(self, text)
      VALUE self, text;
@@ -52,17 +85,36 @@ rpango_find_paragraph_boundary(self, text)
 }
 
 /*
+What should I return this ?
 void        pango_default_break             (const gchar *text,
                                              int length,
                                              PangoAnalysis *analysis,
                                              PangoLogAttr *attrs,
                                              int attrs_len);
 
-void        pango_shape                     (const gchar *text,
-                                             gint length,
-                                             PangoAnalysis *analysis,
-                                             PangoGlyphString *glyphs);
+static VALUE
+rpango_default_break(self, text, analysis)
+    VALUE self, text, anlysis;
+{
+    StringValue(text);
+    pango_default_break(RVAL2CSTR(text), RSTRING(text)->len, 
+                        NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
+                        &attrs, attrs_len);
+}
 */
+
+static VALUE
+rpango_shape(self, text, analysis)
+    VALUE self, text, analysis;
+{
+    VALUE ret;
+    PangoGlyphString* glyphs = pango_glyph_string_new();
+    StringValue(text);
+    pango_shape(RVAL2CSTR(text), RSTRING(text)->len, RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS), glyphs);
+    ret = BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
+    pango_glyph_string_free (glyphs);
+    return ret;
+}
 
 /* This method from rbpangoattribute.c */
 static VALUE
@@ -114,7 +166,11 @@ rpango_pixels(self, pixels)
 void
 Init_pango_main()
 {
+    rb_define_module_function(mPango, "reorder_items", rpango_reorder_items, 1);
+    rb_define_module_function(mPango, "unichar_direction", rpango_unichar_direction, 1);
+    rb_define_module_function(mPango, "find_base_dir", rpango_find_base_dir, 1);
     rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
+    rb_define_module_function(mPango, "shape", rpango_shape, 2);
     rb_define_module_function(mPango, "parse_markup", rpango_parse_markup, -1);
     rb_define_module_function(mPango, "pixels", rpango_pixels, 1);
     rb_define_const(mPango, "SCALE", INT2FIX(PANGO_SCALE));

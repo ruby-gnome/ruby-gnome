@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/02/07 17:58:46 $
+  $Date: 2005/02/12 18:13:34 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -45,7 +45,7 @@ rcontext_itemize(argc, argv, self)
     return GLIST2ARY2(list, PANGO_TYPE_ITEM);
 }
 
-/*
+/* Move to Pango module (rbpangomain.c)
 GList*      pango_reorder_items             (GList *logical_items);
 */
 

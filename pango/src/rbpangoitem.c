@@ -3,10 +3,10 @@
 
   rbpangoitem.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/11/06 10:33:40 $
+  $Author: mutoh $
+  $Date: 2005/02/12 18:13:34 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -44,7 +44,7 @@ item_split(self, split_index, split_offset)
                                        NUM2INT(split_offset)), 
                       PANGO_TYPE_ITEM);
 }
-/*
+/* Move to Pango module (rbpangomain.c)
 GList*      pango_reorder_items             (GList *logical_items);
 */
 void
@@ -52,7 +52,7 @@ Init_pango_item()
 {
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
     
-    rb_define_method(pItem, "initialize", item_initialize, 1);
+    rb_define_method(pItem, "initialize", item_initialize, 0);
     rb_define_method(pItem, "split", item_split, 2);
 
 }
