@@ -1,7 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.9 2003/09/09 15:09:25 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.10 2004/09/23 00:36:03 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
+ * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
