@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: mutoh $
-  $Date: 2002/10/09 17:28:35 $
+  $Author: tkubo $
+  $Date: 2002/10/29 16:54:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -37,6 +37,7 @@ extern "C" {
     extern ID id_module_eval;
     extern ID id_add_one_arg_setter;
 
+    extern void rbgutil_raise_gerror(GError *error) NORETURN;
     extern void rbgutil_set_properties(VALUE self, VALUE hash);
     extern VALUE rbgutil_glist2ary(GList* list);
     extern VALUE rbgutil_glist2ary_boxed(GList* list, GType gtype);

@@ -3,8 +3,8 @@
 
   rbgutil.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/09 17:28:35 $
+  $Author: tkubo $
+  $Date: 2002/10/29 16:54:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -16,6 +16,19 @@ ID id_add_one_arg_setter;
 
 static ID id_set_property;
 static ID id_to_a;
+
+void
+rbgutil_raise_gerror(error)
+    GError *error;
+{
+    gchar *msg = g_locale_from_utf8(error->message, -1, NULL, NULL, NULL);
+    VALUE exc = rb_exc_new2(rb_eRuntimeError, msg ? msg : error->message);
+
+    if (msg)
+        g_free(msg);
+    g_error_free(error);
+    rb_exc_raise(exc);
+}
 
 void
 rbgutil_set_properties(self, hash)
