@@ -1,7 +1,15 @@
+2004-02-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Improve GladeXML#widget_names.
+
+2004-02-04  Archit Baweja  <bighead@users.sourceforge.net>
+
+	* lib/libglade2.rb: Add GladeXML#widget_names.
+
 2004-02-01  Archit Baweja  <bighead@users.sourceforge.net>
 
-	* rbglade.c: Added GladeXML#filename.
-
+	* rbglade.c: Add GladeXML#filename.
+	
 2004-01-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c: Add GladeXML#[] as an alias of GladeXML#get_widget.

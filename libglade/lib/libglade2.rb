@@ -36,4 +36,17 @@ class GladeXML
       puts "Undefined handler: #{handler}"
     end
   end
+
+  def widget_names(nocache = false)
+    @widget_names = [] if nocache || ! @widget_names
+    if @widget_names.size == 0
+      regexp = Regexp.new("<widget class=\".*\" id=\"(.*)\"")
+      IO.readlines(filename).each { |line|
+	if md = regexp.match(line)
+	  @widget_names << md[1]
+	end
+      }
+    end
+    @widget_names
+  end
 end
