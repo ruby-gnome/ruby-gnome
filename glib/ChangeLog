@@ -1,6 +1,7 @@
 2004-03-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.c: Work under ruby-1.6.8. 
+	The idea is from Sasada Koichi.
 
 2004-03-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
