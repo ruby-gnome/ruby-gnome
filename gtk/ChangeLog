@@ -1,3 +1,7 @@
+2004-10-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaction.c: Gtk::Action.new can omit 3rd, 4th parameters.
+
 2004-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkuimanager.c: Initialize GError first. 
