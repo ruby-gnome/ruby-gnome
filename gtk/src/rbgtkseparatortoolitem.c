@@ -4,7 +4,7 @@
   rbgtkseparatortoolitem.c -
 
   $Author: mutoh $
-  $Date: 2004/05/31 17:42:24 $
+  $Date: 2005/01/29 15:49:24 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/

@@ -4,9 +4,9 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/06/01 17:33:19 $
+  $Date: 2005/01/29 15:49:24 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -363,7 +363,15 @@ void        gtk_window_set_skip_pager_hint  (GtkWindow *window,
 void        gtk_window_set_accept_focus     (GtkWindow *window,
                                              gboolean setting);
 
+gchar*      gtk_window_get_icon_name        (GtkWindow *window);
+void        gtk_window_set_icon_name        (GtkWindow *window,
+                                             const gchar *name);
+
+void        gtk_window_set_focus_on_map     (GtkWindow *window,
+                                             gboolean setting);
+gboolean    gtk_window_get_focus_on_map     (GtkWindow *window);
 */
+
 
 static VALUE
 gwin_get_decorated(self)
@@ -538,6 +546,16 @@ gwin_s_set_default_icon(self, icon_or_filename)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gwin_s_set_default_icon_name(self, name)
+    VALUE self, name;
+{
+    gtk_window_set_default_icon_name(RVAL2CSTR(name));
+    return self;
+}
+#endif
+
 static VALUE
 gwin_set_icon(self, icon_or_filename)
     VALUE self, icon_or_filename;
@@ -685,6 +703,9 @@ Init_gtk_window()
     rb_define_singleton_method(gWindow, "set_default_icon_list", gwin_s_set_default_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWindow, "set_default_icon", gwin_s_set_default_icon, 1);
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
     rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);

@@ -4,9 +4,9 @@
   rbgtktoggleaction.c -
  
   $Author: mutoh $
-  $Date: 2004/05/30 16:41:13 $
+  $Date: 2005/01/29 15:49:24 $
  
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
  
 #include "global.h"
@@ -19,10 +19,17 @@ static VALUE
 taction_initialize(self, name, label, tooltip, stock_id)
     VALUE self, name, label, tooltip, stock_id;
 {
+    gchar* gstockid;
+    if (TYPE(stock_id) == T_SYMBOL){
+        gstockid = rb_id2name(SYM2ID(stock_id));
+    } else {
+        gstockid = RVAL2CSTR(stock_id);
+    }
+
     G_INITIALIZE(self, gtk_toggle_action_new(RVAL2CSTR(name),
                                              RVAL2CSTR(label),
                                              RVAL2CSTR(tooltip),
-                                             RVAL2CSTR(stock_id)));
+                                             gstockid));
     return Qnil;
 }
 

@@ -7,7 +7,20 @@
         rbgtksettings.c, rbgtktreemodel.c, rbgtktreemodelfilter.c, 
         rbgtktreeview.c, rbgtktreeviewcolumn.c, rbgtkwidget.c, gtk2.def: 
         Fix compiling errors on MS VC++.
+	
+2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkpangorenderer.c: Added for GTK+-2.6. 
+	* src/rbgtkliststore.c: Support gtk_list_store_insert_with_valuesv
+	as Gtk::ListStore#insert for GTK+-2.6.
+	* src/rbgtkwindow.c: Added Gtk::Window.set_default_icon_name 
+	for GTK+-2.6. 
+	* src/rbgtktoggleaction.c: Gtk::ToggleAction.new accept 
+	stock_id as Symbol.
+	* src/rbgtkmessagedialog.c: Added 
+	Gtk::MessageDialog#set_secondary_(text|markup) for GTK+-2.6.
+	* src/rbgtkseperatortoolitem.c: Rename to rbgtkseparatortoolitem.c. 
+	
 2005-01-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Added Gtk::Dialog.alternative_dialog_button_order?, 

@@ -4,12 +4,14 @@
   rbgtkmessagedialog.c -
 
   $Author: mutoh $
-  $Date: 2004/06/19 16:21:34 $
+  $Date: 2005/01/29 15:49:24 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+#define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
 mdiag_initialize(argc, argv, self)
@@ -46,10 +48,29 @@ static VALUE
 mdiag_set_markup(self, str)
     VALUE self, str;
 {
-    gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(RVAL2GOBJ(self)), RVAL2CSTR(str));
+    gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
     return self;
 }
 #endif
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+mdiag_format_secondary_text(self, text)
+    VALUE self, text;
+{
+    gtk_message_dialog_format_secondary_text(_SELF(self), RVAL2CSTR(text), NULL);
+    return self;
+}
+
+static VALUE
+mdiag_format_secondary_markup(self, markup)
+    VALUE self, markup;
+{
+    gtk_message_dialog_format_secondary_markup(_SELF(self), RVAL2CSTR(markup), NULL);
+    return self;
+}
+#endif
+
 void 
 Init_gtk_message_dialog()
 {
@@ -58,6 +79,10 @@ Init_gtk_message_dialog()
     rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gMessageDialog, "set_markup", mdiag_set_markup, 1);
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gMessageDialog, "set_secondary_text", mdiag_format_secondary_text, 1);
+    rb_define_method(gMessageDialog, "set_secondary_markup", mdiag_format_secondary_markup, 1);
 #endif
     G_DEF_SETTERS(gMessageDialog);
 

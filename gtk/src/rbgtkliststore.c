@@ -4,9 +4,9 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2004/08/03 18:16:35 $
+  $Date: 2005/01/29 15:49:24 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -14,6 +14,8 @@
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
+
+static ID id_to_a;
 
 static VALUE
 lstore_initialize(argc, argv, self)
@@ -97,14 +99,60 @@ lstore_remove(self, iter)
 #endif
 }
 
+/*
+  Gtk::ListStore#insert(pos, val1 => 0, val2 => 2, ... )
+ */
 static VALUE
-lstore_insert(self, position)
-    VALUE self, position;
+lstore_insert(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE  self;
 {
+    VALUE position, values;
     GtkTreeIter iter;
-    GtkListStore* model = _SELF(self);
-    gtk_list_store_insert(model, &iter, NUM2INT(position));
-    iter.user_data3 = model;
+    GtkListStore* store = _SELF(self);
+    GtkTreeModel* model = GTK_TREE_MODEL(store);
+
+    rb_scan_args(argc, argv, "11", &position, &values);
+
+    if (NIL_P(values)){
+        gtk_list_store_insert(store, &iter, NUM2INT(position));
+    } else {
+#if GTK_CHECK_VERSION(2,6,0)
+        gint cnt, n_values;
+        gint* columns;
+        GType gtype;
+        GValue* gvalues;
+        VALUE ary = rb_funcall(values, id_to_a, 0);
+
+        n_values = RARRAY(ary)->len;
+        
+        gvalues = g_new(GValue, n_values);
+        columns = g_new(gint, n_values);
+        
+        for (cnt = 0; cnt < n_values; cnt++) {
+            Check_Type(RARRAY(RARRAY(ary)->ptr[cnt]), T_ARRAY);
+            columns[cnt] = NUM2INT(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[1]);
+            gtype = gtk_tree_model_get_column_type(model, columns[cnt]);
+            gvalues[cnt].g_type = 0;
+            g_value_init(&gvalues[cnt], gtype);
+            rbgobj_rvalue_to_gvalue(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[0], &gvalues[cnt]);
+        }
+        
+        gtk_list_store_insert_with_valuesv(store, &iter, NUM2INT(position),
+                                           columns, gvalues, n_values);
+        
+        iter.user_data3 = store;
+        for (cnt = 0; cnt < n_values; cnt++) {
+            g_value_unset(&gvalues[cnt]);
+        }
+        g_free(gvalues);
+        g_free(columns);
+#else
+        gtk_list_store_insert(store, &iter, NUM2INT(position));
+        rb_warn("Ignored 2nd argument under this environment. Because it has been supported since GTK+-2.6. ");
+#endif
+    }
     return ITR2RVAL(&iter);
 }
 
@@ -212,14 +260,16 @@ void
 Init_gtk_list_store()
 {
     VALUE ls = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
-  
+
+    id_to_a = rb_intern("to_a");
+
     rbgtk_register_treeiter_set_value_func(GTK_TYPE_LIST_STORE, 
                                            (rbgtkiter_set_value_func)&gtk_list_store_set_value);
     rb_define_method(ls, "initialize", lstore_initialize, -1);
     rb_define_method(ls, "set_column_types", lstore_set_column_types, -1);
     rb_define_method(ls, "set_value", lstore_set_value, 3);
     rb_define_method(ls, "remove", lstore_remove, 1);
-    rb_define_method(ls, "insert", lstore_insert, 1);
+    rb_define_method(ls, "insert", lstore_insert, -1);
     rb_define_method(ls, "insert_before", lstore_insert_before, 1);
     rb_define_method(ls, "insert_after", lstore_insert_after, 1);
     rb_define_method(ls, "prepend", lstore_prepend, 0);
