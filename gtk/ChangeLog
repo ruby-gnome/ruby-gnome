@@ -4,6 +4,7 @@
 	* src/rbgtkrc.c: Add Gtk::RC.get_style_by_paths, .reparse_all_for_settings, 
 	.add_default_file, .default_files, .set_default_files, .find_module_in_path, 
 	.module_dir, .im_module_path, .im_module_file, .theme_dir
+	* src/rbgtkrc.c: Add GtkRcFlags, GtkRcTokenType.
 
 2003-05-18  Masao Mutoh  <mutoh@highway.ne.jp>
 

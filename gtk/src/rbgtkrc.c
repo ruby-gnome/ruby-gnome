@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2003/05/18 17:02:41 $
+  $Date: 2003/05/18 17:18:52 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -188,4 +188,51 @@ Init_gtk_rc()
     rb_define_module_function(mRC, "theme_dir", rc_get_theme_dir, 0);
 
     G_DEF_SETTERS(mRC);
+
+    /* GtkRcFlags */
+    rb_define_const(mRC, "FG", INT2FIX(GTK_RC_FG));
+    rb_define_const(mRC, "BG", INT2FIX(GTK_RC_BG));
+    rb_define_const(mRC, "TEXT", INT2FIX(GTK_RC_TEXT));
+    rb_define_const(mRC, "BASE", INT2FIX(GTK_RC_BASE));
+
+    /* GtkRcTokenType */
+    rb_define_const(mRC, "TOKEN_INVALID", INT2FIX(GTK_RC_TOKEN_INVALID));
+    rb_define_const(mRC, "TOKEN_INCLUDE", INT2FIX(GTK_RC_TOKEN_INCLUDE));
+    rb_define_const(mRC, "TOKEN_NORMAL", INT2FIX(GTK_RC_TOKEN_NORMAL));
+    rb_define_const(mRC, "TOKEN_ACTIVE", INT2FIX(GTK_RC_TOKEN_ACTIVE));
+    rb_define_const(mRC, "TOKEN_PRELIGHT", INT2FIX(GTK_RC_TOKEN_PRELIGHT));
+    rb_define_const(mRC, "TOKEN_SELECTED", INT2FIX(GTK_RC_TOKEN_SELECTED));
+    rb_define_const(mRC, "TOKEN_INSENSITIVE", INT2FIX(GTK_RC_TOKEN_INSENSITIVE));
+    rb_define_const(mRC, "TOKEN_FG", INT2FIX(GTK_RC_TOKEN_FG));
+    rb_define_const(mRC, "TOKEN_BG", INT2FIX(GTK_RC_TOKEN_BG));
+    rb_define_const(mRC, "TOKEN_TEXT", INT2FIX(GTK_RC_TOKEN_TEXT));
+    rb_define_const(mRC, "TOKEN_BASE", INT2FIX(GTK_RC_TOKEN_BASE));
+    rb_define_const(mRC, "TOKEN_XTHICKNESS", INT2FIX(GTK_RC_TOKEN_XTHICKNESS));
+    rb_define_const(mRC, "TOKEN_YTHICKNESS", INT2FIX(GTK_RC_TOKEN_YTHICKNESS));
+    rb_define_const(mRC, "TOKEN_FONT", INT2FIX(GTK_RC_TOKEN_FONT));
+    rb_define_const(mRC, "TOKEN_FONTSET", INT2FIX(GTK_RC_TOKEN_FONTSET));
+    rb_define_const(mRC, "TOKEN_FONT_NAME", INT2FIX(GTK_RC_TOKEN_FONT_NAME));
+    rb_define_const(mRC, "TOKEN_BG_PIXMAP", INT2FIX(GTK_RC_TOKEN_BG_PIXMAP));
+    rb_define_const(mRC, "TOKEN_PIXMAP_PATH", INT2FIX(GTK_RC_TOKEN_PIXMAP_PATH));
+    rb_define_const(mRC, "TOKEN_STYLE", INT2FIX(GTK_RC_TOKEN_STYLE));
+    rb_define_const(mRC, "TOKEN_BINDING", INT2FIX(GTK_RC_TOKEN_BINDING));
+    rb_define_const(mRC, "TOKEN_BIND", INT2FIX(GTK_RC_TOKEN_BIND));
+    rb_define_const(mRC, "TOKEN_WIDGET", INT2FIX(GTK_RC_TOKEN_WIDGET));
+    rb_define_const(mRC, "TOKEN_WIDGET_CLASS", INT2FIX(GTK_RC_TOKEN_WIDGET_CLASS));
+    rb_define_const(mRC, "TOKEN_CLASS", INT2FIX(GTK_RC_TOKEN_CLASS));
+    rb_define_const(mRC, "TOKEN_LOWSET", INT2FIX(GTK_RC_TOKEN_LOWEST));
+    rb_define_const(mRC, "TOKEN_GTK", INT2FIX(GTK_RC_TOKEN_GTK));
+    rb_define_const(mRC, "TOKEN_APPLICATION", INT2FIX(GTK_RC_TOKEN_APPLICATION));
+    rb_define_const(mRC, "TOKEN_THEME", INT2FIX(GTK_RC_TOKEN_THEME));
+    rb_define_const(mRC, "TOKEN_RC", INT2FIX(GTK_RC_TOKEN_RC));
+    rb_define_const(mRC, "TOKEN_HIGHEST", INT2FIX(GTK_RC_TOKEN_HIGHEST));
+    rb_define_const(mRC, "TOKEN_ENGINE", INT2FIX(GTK_RC_TOKEN_ENGINE));
+    rb_define_const(mRC, "TOKEN_MODULE_PATH", INT2FIX(GTK_RC_TOKEN_MODULE_PATH));
+    rb_define_const(mRC, "TOKEN_IM_MODULE_PATH", INT2FIX(GTK_RC_TOKEN_IM_MODULE_PATH));
+    rb_define_const(mRC, "TOKEN_IM_MODULE_FILE", INT2FIX(GTK_RC_TOKEN_IM_MODULE_FILE));
+    rb_define_const(mRC, "TOKEN_STOCK", INT2FIX(GTK_RC_TOKEN_STOCK));
+    rb_define_const(mRC, "TOKEN_LTR", INT2FIX(GTK_RC_TOKEN_LTR));
+    rb_define_const(mRC, "TOKEN_RTL", INT2FIX(GTK_RC_TOKEN_RTL));
+    rb_define_const(mRC, "TOKEN_LAST", INT2FIX(GTK_RC_TOKEN_LAST));
+  
 }
