@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: sakai $
-  $Date: 2003/08/15 13:02:59 $
+  $Date: 2003/08/15 16:09:28 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -114,12 +114,25 @@ rcontext_get_metrics(self, desc, lang)
                                                 PANGO_TYPE_FONT_METRICS);
 }
 
-/*
-void        pango_context_list_families     (PangoContext *context,
-                                             PangoFontFamily ***families,
-                                             int *n_families);
-*/
+static VALUE
+rcontext_list_families(self)
+    VALUE self;
+{
+    int n_families;
+    PangoFontFamily** families;
+    int i;
+    VALUE result;
 
+    pango_context_list_families(_SELF(self),
+                                &families,
+                                &n_families);
+
+    result = rb_ary_new2(n_families);
+    for (i = 0; i < n_families; i++)
+      rb_ary_store(result, i, GOBJ2RVAL(families[i]));
+
+    return result;
+}
 
 void
 Init_pango_context()
@@ -139,6 +152,7 @@ Init_pango_context()
     rb_define_method(pContext, "load_font", rcontext_load_font, 1);
     rb_define_method(pContext, "load_fontset", rcontext_load_fontset, 2);
     rb_define_method(pContext, "get_metrics", rcontext_get_metrics, 2);
+    rb_define_method(pContext, "list_families", rcontext_list_families, 0);
 
     G_DEF_SETTERS(pContext);
 

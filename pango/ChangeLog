@@ -1,3 +1,9 @@
+2003-08-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/pango/rbpangocontext.c: implement Pango::Context#list_families
+
+	* src/pango/rbpangofont.c: fix Pango::Font.metrics
+
 2003-08-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use G_DEF_CONSTANTS() for defining enum/flags constants.

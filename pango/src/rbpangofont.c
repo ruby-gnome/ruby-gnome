@@ -3,8 +3,8 @@
 
   rbpangofont.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 15:24:26 $
+  $Author: sakai $
+  $Date: 2003/08/15 16:09:28 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -41,7 +41,7 @@ font_get_metrics(self, language)
 {
     PangoLanguage* lang = (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE);
     return BOXED2RVAL(pango_font_get_metrics(_SELF(self), lang), 
-                      PANGO_TYPE_FONT_DESCRIPTION);
+                      PANGO_TYPE_FONT_METRICS);
 }
 void
 Init_pango_font()
@@ -49,5 +49,5 @@ Init_pango_font()
     VALUE pFont = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
     
     rb_define_method(pFont, "describe", font_describe, 0);
-    rb_define_method(pFont, "metrics", font_get_metrics, 0);
+    rb_define_method(pFont, "metrics", font_get_metrics, 1);
 }
