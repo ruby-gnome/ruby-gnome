@@ -23,11 +23,11 @@ def examine_gl_config_attrib(glconfig)
       :RED_SIZE, :GREEN_SIZE, :BLUE_SIZE, :ALPHA_SIZE, :DEPTH_SIZE, :STENCIL_SIZE,
       :ACCUM_RED_SIZE, :ACCUM_GREEN_SIZE, :ACCUM_BLUE_SIZE, :ACCUM_ALPHA_SIZE
     ].each do |id|
-        val = glconfig.get_attrib(Gdk::GL.const_get(id))
+        val = glconfig.get_attrib(Gdk::GL::Config.const_get(id))
         if val == nil
-            puts "*** Cannot get Gdk::GL::#{id} attribute value\n"
+            puts "*** Cannot get Gdk::GL::Config::#{id} attribute value\n"
         else
-            puts "Gdk::GL::#{id} = #{val}\n"
+            puts "Gdk::GL::Config::#{id} = #{val}\n"
         end
     end
 
@@ -85,7 +85,8 @@ puts "\nOpenGL extension version - #{major}.#{minor}\n"
 
 # Configure OpenGL-capable visual
 # Try single-buffered visual
-glconfig = Gdk::GL::Config.new(Gdk::GL::MODE_RGB | Gdk::GL::MODE_DEPTH)
+glconfig = Gdk::GL::Config.new(Gdk::GL::Config::MODE_RGB |
+                               Gdk::GL::Config::MODE_DEPTH)
 if !glconfig
     puts "*** No appropriate OpenGL-capable visual found.\n"
     exit 1

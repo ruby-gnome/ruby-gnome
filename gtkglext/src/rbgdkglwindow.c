@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglwindow.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
+/* $Id: rbgdkglwindow.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
 /*
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -86,6 +86,13 @@ gdkwindow_get_gl_window(self)
     return GOBJ2RVAL(gdk_window_get_gl_window(_SELF(self)));
 }
 
+static VALUE
+gdkwindow_get_gl_drawable(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_window_get_gl_drawable(_SELF(self)));
+}
+
 void
 Init_gdk_gl_window(void)
 {
@@ -102,4 +109,5 @@ Init_gdk_gl_window(void)
     rb_define_method(gdkWindow, "unset_gl_capability", gdkwindow_unset_gl_capability, 0);
     rb_define_method(gdkWindow, "gl_capable?", gdkwindow_is_gl_capable, 0);
     rb_define_method(gdkWindow, "gl_window", gdkwindow_get_gl_window, 0);
+    rb_define_method(gdkWindow, "gl_window", gdkwindow_get_gl_drawable, 0);
 }

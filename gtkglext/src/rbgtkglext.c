@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
+/* $Id: rbgtkglext.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
 /*
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -100,9 +100,30 @@ Init_gtkglext(void)
     mGdk = rb_define_module("Gdk");
     mGdkGl = rb_define_module_under(mGdk, "GL");
 
-    G_DEF_CONSTANTS(mGdkGl, GDK_TYPE_GL_CONFIG_MODE,   "GDK_GL_");
-    G_DEF_CONSTANTS(mGdkGl, GDK_TYPE_GL_CONFIG_ATTRIB, "GDK_GL_");
     G_DEF_CONSTANTS(mGdkGl, GDK_TYPE_GL_RENDER_TYPE,   "GDK_GL_");
+
+    rb_define_const(mGtkGl, "MAJOR_VERSION", gtkglext_major_version);
+    rb_define_const(mGtkGl, "MINOR_VERSION", gtkglext_minor_version);
+    rb_define_const(mGtkGl, "MICRO_VERSION", gtkglext_micro_version);
+    rb_define_const(mGtkGl, "INTERFACE_AGE", gtkglext_interface_age);
+    rb_define_const(mGtkGl, "BINARY_AGE",    gtkglext_binary_age);
+
+    rb_define_const(mGdkGl, "MAJOR_VERSION", gdkglext_major_version);
+    rb_define_const(mGdkGl, "MINOR_VERSION", gdkglext_minor_version);
+    rb_define_const(mGdkGl, "MICRO_VERSION", gdkglext_micro_version);
+    rb_define_const(mGdkGl, "INTERFACE_AGE", gdkglext_interface_age);
+    rb_define_const(mGdkGl, "BINARY_AGE",    gdkglext_binary_age);
+
+#ifdef GDK_MULTIHEAD_SAFE
+    rb_define_const(mGdkGl, "MULTIHEAD_SAFE", Qtrue);
+#else /* !defined GDK_MULTIHEAD_SAFE */
+    rb_define_const(mGdkGl, "MULTIHEAD_SAFE", Qfalse);
+#endif /* !defined GDK_MULTIHEAD_SAFE */
+#ifdef GDKGLEXT_MULTIHEAD_SUPPORT
+    rb_define_const(mGdkGl, "MULTIHEAD_SUPPORT", Qtrue);
+#else /* !defined GDKGLEXT_MULTIHEAD_SUPPORT */
+    rb_define_const(mGdkGl, "MULTIHEAD_SUPPORT", Qfalse);
+#endif /* !defined GDKGLEXT_MULTIHEAD_SUPPORT */
 
     rb_define_module_function(mGtkGl, "init", gtk_gl_m_init, -1);
     rb_define_module_function(mGdkGl, "init", gdk_gl_m_init, -1);

@@ -111,12 +111,15 @@ Gtk::GL.init
 
 # Configure OpenGL-capable visual
 # Try double-buffered visual
-glconfig = Gdk::GL::Config.new(Gdk::GL::MODE_RGB | Gdk::GL::MODE_DEPTH | Gdk::GL::MODE_DOUBLE)
+glconfig = Gdk::GL::Config.new(Gdk::GL::Config::MODE_RGB   |
+                               Gdk::GL::Config::MODE_DEPTH |
+                               Gdk::GL::Config::MODE_DOUBLE)
 if !glconfig
     puts "*** Cannot find the double-buffered visual.\n"
     puts "*** Trying single-buffered visual.\n"
     # Try single-buffered visual
-    glconfig = Gdk::GL::Config.new(Gdk::GL::MODE_RGB | Gdk::GL::MODE_DEPTH)
+    glconfig = Gdk::GL::Config.new(Gdk::GL::Config::MODE_RGB  |
+                                   Gdk::GL::Config::MODE_DEPTH)
     if !glconfig
         puts "*** No appropriate OpenGL-capable visual found.\n"
         exit 1

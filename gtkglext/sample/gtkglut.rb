@@ -20,14 +20,14 @@
 require 'gtkglext'
 
 module GLUT
-    RGB     = Gdk::GL::MODE_RGB
-    RGBA    = Gdk::GL::MODE_RGBA
-    SINGLE  = Gdk::GL::MODE_SINGLE
-    DOUBLE  = Gdk::GL::MODE_DOUBLE
-    DEPTH   = Gdk::GL::MODE_DEPTH
-    ACCUM   = Gdk::GL::MODE_ACCUM
-    ALPHA   = Gdk::GL::MODE_ALPHA
-    STENCIL = Gdk::GL::MODE_STENCIL
+    RGB     = Gdk::GL::Config::MODE_RGB
+    RGBA    = Gdk::GL::Config::MODE_RGBA
+    SINGLE  = Gdk::GL::Config::MODE_SINGLE
+    DOUBLE  = Gdk::GL::Config::MODE_DOUBLE
+    DEPTH   = Gdk::GL::Config::MODE_DEPTH
+    ACCUM   = Gdk::GL::Config::MODE_ACCUM
+    ALPHA   = Gdk::GL::Config::MODE_ALPHA
+    STENCIL = Gdk::GL::Config::MODE_STENCIL
 
     @@window_size = [300, 300]
     @@window_pos  = [100, 100]

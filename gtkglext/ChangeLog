@@ -1,3 +1,13 @@
+2003-08-20 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkglconfig.c, src/rbgtkglext.c: moved
+	  GDK_TYPE_GL_CONFIG_MODE and GDK_TYPE_GL_CONFIG_ATTRIB
+	  from Gdk::GL to Gdk::GL::Config and added GtkGLExt
+	  version information and MULTIHEAD infos
+	* src/rbgdkglpixmap.c, src/rbgtkglwindow.c:
+	  added gl_drawable method
+	* sample/*.rb: modified to follow changes
+
 2003-08-16 Vincent Isambart <isambart@netcourrier.com>
 
 	* ChangeLog, README, README.rbogl, rbogl.patch: Files added

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglpixmap.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
+/* $Id: rbgdkglpixmap.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
 /*
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -86,6 +86,13 @@ gdkpixmap_get_gl_pixmap(self)
     return GOBJ2RVAL(gdk_pixmap_get_gl_pixmap(_SELF(self)));
 }
 
+static VALUE
+gdkpixmap_get_gl_drawable(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_pixmap_get_gl_drawable(_SELF(self)));
+}
+
 void
 Init_gdk_gl_pixmap(void)
 {
@@ -102,4 +109,5 @@ Init_gdk_gl_pixmap(void)
     rb_define_method(gdkPixmap, "unset_gl_capability", gdkpixmap_unset_gl_capability, 0);
     rb_define_method(gdkPixmap, "gl_capable?", gdkpixmap_is_gl_capable, 0);
     rb_define_method(gdkPixmap, "gl_pixmap", gdkpixmap_get_gl_pixmap, 0);
+    rb_define_method(gdkPixmap, "gl_drawable", gdkpixmap_get_gl_drawable, 0);
 }

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglconfig.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
+/* $Id: rbgdkglconfig.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
 /*
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -191,6 +191,9 @@ void
 Init_gdk_gl_config(void)
 {
     VALUE gdkGlConfig = G_DEF_CLASS(GDK_TYPE_GL_CONFIG, "Config", mGdkGl);
+
+    G_DEF_CONSTANTS(gdkGlConfig, GDK_TYPE_GL_CONFIG_MODE,   "GDK_GL_");
+    G_DEF_CONSTANTS(gdkGlConfig, GDK_TYPE_GL_CONFIG_ATTRIB, "GDK_GL_");
 
     rb_define_method(gdkGlConfig, "initialize", gdkglconfig_initialize, -1);
 
