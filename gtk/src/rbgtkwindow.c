@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: mutoh $
+  $Date: 2003/07/22 16:08:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -149,9 +149,9 @@ static VALUE
 gwin_mnemonic_activate(self, keyval, modifier)
     VALUE self, keyval, modifier;
 {
-    return gtk_window_mnemonic_activate(_SELF(self), 
+    return CBOOL2RVAL(gtk_window_mnemonic_activate(_SELF(self), 
                                         NUM2INT(keyval), 
-                                        NUM2INT(modifier)) ? Qtrue : Qfalse;
+                                        NUM2INT(modifier)));
 }
 
 static VALUE
