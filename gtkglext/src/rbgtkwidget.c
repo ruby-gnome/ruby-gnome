@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkwidget.c,v 1.2 2003/08/23 19:07:32 isambart Exp $ */
+/* $Id: rbgtkwidget.c,v 1.3 2003/08/25 09:05:01 isambart Exp $ */
 /* OpenGL extension to Gtk::Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -20,9 +20,10 @@
 
 #include "rbgtkglext.h"
 
-#define _SELF(i)    GTK_WIDGET(RVAL2GOBJ(i))
 #define _CONTEXT(i) GDK_GL_CONTEXT(RVAL2GOBJ(i))
 #define _CONFIG(i)  GDK_GL_CONFIG(RVAL2GOBJ(i))
+#define _WIDGET(i)  GTK_WIDGET(RVAL2GOBJ(i))
+#define _SELF(i)    _WIDGET(i)
 
 static VALUE
 widget_set_gl_capability(argc, argv, self)
@@ -72,13 +73,32 @@ widget_get_gl_config(self)
 }
 
 static VALUE
-widget_create_gl_context(self, share_list, direct, render_type)
-    VALUE self, share_list, direct, render_type;
+widget_create_gl_context(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    GdkGLContext* share_list = NULL;
+    gboolean direct = TRUE;
+    int render_type = GDK_GL_RGBA_TYPE;
+
+    if (argc > 3)
+        rb_raise(rb_eArgError, "wrong number of arguments (%d for 3)", argc);
+
+    switch (argc) {
+        case 3:
+            render_type = rbgobj_get_enum(argv[2], GDK_TYPE_GL_RENDER_TYPE);
+        case 2:
+            direct = RVAL2CBOOL(argv[1]);
+        case 1:
+            share_list = _CONTEXT(argv[0]);
+        default:
+            break;
+    }
     return GOBJ2RVAL(gtk_widget_create_gl_context(_SELF(self),
-                                                  _CONTEXT(share_list),
-                                                  RVAL2CBOOL(direct),
-                                                  NUM2INT(render_type)));
+                                                  share_list,
+                                                  direct,
+                                                  render_type));
 }
 
 static VALUE
