@@ -1,3 +1,7 @@
+2004-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkactiongroup.c: Accept nil correctly in Gtk::ActionGroup#add_action. 
+
 2004-10-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkselectiondata.c: Fix a warning. 

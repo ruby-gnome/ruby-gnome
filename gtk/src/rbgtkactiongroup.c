@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: lrz $
-  $Date: 2004/08/19 20:33:15 $
+  $Author: mutoh $
+  $Date: 2004/11/01 16:11:00 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -61,13 +61,9 @@ actiongroup_add_action(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &action, &accelerator);
 
-    if (NIL_P(accelerator)){
-        gtk_action_group_add_action(_SELF(self), GTK_ACTION(RVAL2GOBJ(action)));
-    } else {
-        gtk_action_group_add_action_with_accel(_SELF(self),
-                                               GTK_ACTION(RVAL2GOBJ(action)),
-                                               RVAL2CSTR(accelerator));
-    }
+    gtk_action_group_add_action_with_accel(_SELF(self),
+                                           GTK_ACTION(RVAL2GOBJ(action)),
+                                           NIL_P(accelerator) ? NULL : RVAL2CSTR(accelerator));
     return self;
 }
 
