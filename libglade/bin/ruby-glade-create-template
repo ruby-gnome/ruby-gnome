@@ -19,6 +19,7 @@ class GladeXML
   end
 end
 
+LG_VERSION = %Q[$Revision: 1.2 $]
 
 begin
   $EXIST_GNOME = true
@@ -29,7 +30,7 @@ rescue LoadError
 end
 
 unless ARGV.size == 1
-  puts "ruby-glade-create-template"
+  puts "ruby-glade-create-template #{LG_VERSION}"
   puts "\nUsage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb\n\n"
   exit(-1)
 end
@@ -37,7 +38,7 @@ end
 #
 # Analyse .glade file.
 #
-path = ARGF.filename
+path = ARGV[0]
 filename = File.basename(path, ".*")
 classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
 
@@ -51,7 +52,7 @@ end
 =end
 
 if $EXIST_GNOME
-  Gnome::Program.new("ruby-glade-create-template", "0.1")
+  Gnome::Program.new("ruby-glade-create-template", LG_VERSION)
 else
   Gtk.init
 end

@@ -1,3 +1,7 @@
+2003-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* bin/ruby-glade-create-tempate: Work with Ruby-1.6.x.
+
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Use ../mkmf-gnome2.rb
