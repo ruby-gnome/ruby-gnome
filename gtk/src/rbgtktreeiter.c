@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/09/07 01:21:37 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -104,6 +104,7 @@ treeiter_nth_child(self, n)
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     gboolean ret = gtk_tree_model_iter_nth_child(model, &child, iter, NUM2INT(n));
+    child.user_data3 = model;
     return ret ? ITR2RVAL(&child) : Qnil;
 }
 
@@ -205,7 +206,7 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "path", treeiter_get_path, 0);
     rb_define_method(gTreeIter, "has_child?", treeiter_has_child, 0);
     rb_define_method(gTreeIter, "n_children", treeiter_n_children, 0);
-    rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 2);
+    rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 1);
     rb_define_method(gTreeIter, "parent", treeiter_parent, 0);
     rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
     rb_define_alias(gTreeIter, "[]=", "set_value");
