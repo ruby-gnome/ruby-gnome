@@ -2,45 +2,53 @@
 #include "rbgnomecanvas.h"
 
 static VALUE
-points_s_new(klass, num)
-    VALUE klass, num;
+cpoint_to_ruby(from)
+    GValue *from;
 {
-    GnomeCanvasPoints *gcp = gnome_canvas_points_new(NUM2INT(num));
-    return BOXED2RVAL(gcp, GNOME_TYPE_CANVAS_POINTS);
+    GnomeCanvasPoints *points = (GnomeCanvasPoints *)g_value_get_boxed(from);
+    VALUE ary = rb_ary_new2(points->num_points);
+    int i;
+
+    for (i = 0;i < points->num_points;i++) {
+        rb_ary_push(ary, rb_ary_new3(2,
+                                     rb_float_new(points->coords[i * 2]),
+                                     rb_float_new(points->coords[i * 2 + 1])));
+    }
+    return ary;
 }
 
-static VALUE
-points_aref(self, offset)
-    VALUE self, offset;
+static void
+cpoint_from_ruby(from, to)
+    VALUE from;
+    GValue *to;
 {
-    GnomeCanvasPoints *gcp = (GnomeCanvasPoints*)RVAL2BOXED(self);
-    int i = NUM2INT(offset);
-    if (i < 0 || gcp->num_points * 2 <= i) {
-        rb_raise(rb_eIndexError, "index %d out of coordinate", i);
-    }
-    return rb_float_new(gcp->coords[i]);
-}
+    GnomeCanvasPoints *points;
+    VALUE entry;
+    double *coords;
+    int i;
 
-static VALUE
-points_aset(self, offset, val)
-    VALUE self, offset, val;
-{
-    GnomeCanvasPoints *gcp =(GnomeCanvasPoints*)RVAL2BOXED(self);
-    int i = NUM2INT(offset);
-    if (i < 0 || gcp->num_points * 2 <= i) {
-        rb_raise(rb_eIndexError, "index %d out of coordinate", i);
+    Check_Type(from, T_ARRAY);
+    coords = ALLOCA_N(double, RARRAY(from)->len * 2);
+    for (i = 0;i < RARRAY(from)->len;i++) {
+        entry = RARRAY(from)->ptr[i];
+        Check_Type(entry, T_ARRAY);
+        if (RARRAY(entry)->len != 2) {
+            rb_raise(rb_eArgError, "wrong coordinate value %d entry(s) for 2", RARRAY(entry)->len);
+        }
+        coords[i * 2] = NUM2DBL(RARRAY(entry)->ptr[0]);
+        coords[i * 2 + 1] = NUM2DBL(RARRAY(entry)->ptr[1]);
     }
-    gcp->coords[i] = NUM2DBL(val);
-    return self;
+    /* store all values to coords before allocate points. */
+    points = gnome_canvas_points_new(RARRAY(from)->len);
+    memcpy(points->coords, coords, sizeof(double) * RARRAY(from)->len * 2);
+    g_value_set_boxed(to, points);
+    gnome_canvas_points_free(points);
 }
 
 void
 Init_gnome_canvas_util(mGnome)
     VALUE mGnome;
 {
-    VALUE gnoCanvasPoints = G_DEF_CLASS(GNOME_TYPE_CANVAS_POINTS, "CanvasPoints", mGnome);
-
-    rb_define_singleton_method(gnoCanvasPoints, "new", points_s_new, 1);
-    rb_define_method(gnoCanvasPoints, "[]", points_aref, 1);
-    rb_define_method(gnoCanvasPoints, "[]=", points_aset, 2);
+    rbgobj_register_g2r_func(GNOME_TYPE_CANVAS_POINTS, cpoint_to_ruby);
+    rbgobj_register_r2g_func(GNOME_TYPE_CANVAS_POINTS, cpoint_from_ruby);
 }

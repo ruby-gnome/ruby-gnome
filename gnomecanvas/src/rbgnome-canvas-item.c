@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.5 2002/09/25 19:12:27 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.6 2002/09/26 14:44:12 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -52,12 +52,10 @@ citem_do_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar 
     va_end(ap);
 }
 
-static VALUE
-citem_do_set(arg)
-    VALUE arg;
+static void
+citem_do_set(self, hash)
+    VALUE self, hash;
 {
-    VALUE self = RARRAY(arg)->ptr[0];
-    VALUE hash = RARRAY(arg)->ptr[1];
     VALUE ary = rb_funcall(hash, id_to_a, 0);
     int i;
 
@@ -66,16 +64,6 @@ citem_do_set(arg)
                    RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
                    RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
     }
-}
-
-static VALUE
-citem_do_recover(arg)
-    VALUE arg;
-{
-    GnomeCanvasItem *item = GNOME_CANVAS_ITEM(RVAL2GOBJ(arg));
-    item->parent = NULL;
-    item->canvas = NULL;
-    return Qnil;
 }
 
 static VALUE
@@ -91,7 +79,7 @@ citem_intialize(self, parent, hash)
 
     item->parent = GNOME_CANVAS_ITEM(group);
     item->canvas = item->parent->canvas;
-    rb_ensure(citem_do_set, rb_ary_new3(2, self, hash), citem_do_recover, self);
+    citem_do_set(self, hash);
     citem_do_construct(item, group, NULL);
     return Qnil;
 }
@@ -100,7 +88,7 @@ static VALUE
 citem_set(self, hash)
     VALUE self, hash;
 {
-    citem_do_set(rb_ary_new3(2, self, hash));
+    citem_do_set(self, hash);
     gnome_canvas_item_set(GNOME_CANVAS_ITEM(RVAL2GOBJ(self)), NULL);
     return self;
 }

@@ -1,5 +1,18 @@
 2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
 
+	* src/rbgnome-canvas-util.c: delete Gnome::CanvasPoints and
+	use Array instead. for example: [[x1, y1], [x2, y2]].
+	* sample/canvas-arrowhead.rb, sample/canvas-primitives.rb:
+	follow above change.
+	* sample/*.rb: add 'indent-tabs-mode: nil' to all files and
+	untabify all.
+	* src/lib/gnomecanvas2.rb: added. This file will be installed
+	automatically.
+	* extconf.rb: delete explicit install(cp) code.
+	* src/rbgnome-canvas-item.c: delete broken code.:-(
+
+2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-canvas-item.c: change initialize and set API to
 	accept property values as hash.
 	* sample/canvas-arrowhead.rb, sample/canvas-features.rb,

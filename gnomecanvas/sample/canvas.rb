@@ -1,3 +1,4 @@
+#  -*- indent-tabs-mode: nil -*-
 =begin header
 
   canvas.rb - Canvas test rewritten in Ruby/GNOME

@@ -103,12 +103,10 @@ all:
 		@nmake -nologo
 
 install:
-		@cp lib/gnomecanvas2.rb #{rubylibdir}
 		@cd src
 		@nmake -nologo install DESTDIR=$(DESTDIR)
 
 site-install:
-		@cp lib/gnomecanvas2.rb #{sitelibdir}
 		@cd src
 		@nmake -nologo site-install DESTDIR=$(DESTDIR)
 
@@ -126,11 +124,9 @@ all:
 		@cd src; make all
 
 install:
-		@cp lib/gnomecanvas2.rb #{rubylibdir}
 		@cd src; make install
 
 site-install:
-		@cp lib/gnomecanvas2.rb #{sitelibdir}
 		@cd src; make site-install
 
 clean:

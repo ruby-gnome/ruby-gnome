@@ -1,15 +1,16 @@
+#  -*- indent-tabs-mode: nil -*-
 class CanvasSampleFifteen < Gtk::VBox
   PIECE_SIZE = 50
 
   def test_win
     0.upto(14) do |i|
       if @board[i].nil? || @board[i].num != i
-	return
+        return
       end
     end
-#    dialog = Gnome::MessageBox.new("You stud, you win!", Gnome::MessageBox::INFO, "OK")
-#    dialog.set_modal(true)
-#    dialog.run_and_close()
+    #    dialog = Gnome::MessageBox.new("You stud, you win!", Gnome::MessageBox::INFO, "OK")
+    #    dialog.set_modal(true)
+    #    dialog.run_and_close()
   end
 
   def piece_event(item, event)
@@ -25,32 +26,32 @@ class CanvasSampleFifteen < Gtk::VBox
       move = true
 
       if (y > 0) && @board[(y - 1) * 4 + x].nil?
-	dx = 0.0
-	dy = -1.0
-	y -= 1
+        dx = 0.0
+        dy = -1.0
+        y -= 1
       elsif (y < 3) && @board[(y + 1) * 4 + x].nil?
-	dx = 0.0
-	dy = 1.0
-	y += 1
+        dx = 0.0
+        dy = 1.0
+        y += 1
       elsif (x > 0) && @board[y * 4 + x - 1].nil?
-	dx = -1.0
-	dy = 0.0
-	x -= 1
+        dx = -1.0
+        dy = 0.0
+        x -= 1
       elsif (x < 3) && @board[y * 4 + x + 1].nil?
-	dx = 1.0
-	dy = 0.0
-	x += 1
+        dx = 1.0
+        dy = 0.0
+        x += 1
       else
-	move = false
+        move = false
       end
 
       if move
-	newpos = y * 4 + x
-	@board[item.pos] = nil
-	@board[newpos] = item
-	item.pos = newpos
-	item.move(dx * PIECE_SIZE, dy * PIECE_SIZE)
-	test_win()
+        newpos = y * 4 + x
+        @board[item.pos] = nil
+        @board[newpos] = item
+        item.pos = newpos
+        item.move(dx * PIECE_SIZE, dy * PIECE_SIZE)
+        test_win()
       end
     end
   end
@@ -63,8 +64,8 @@ class CanvasSampleFifteen < Gtk::VBox
     pos = 0
     0.upto(15) do |i|
       if @board[i].nil?
-	pos = i
-	break
+        pos = i
+        break
       end
     end
 
@@ -76,15 +77,15 @@ class CanvasSampleFifteen < Gtk::VBox
       x = y = 0
 
       if (dir == 0) && (pos > 3) # up
-	y = -1
+        y = -1
       elsif (dir == 1) && (pos < 12) # down
-	y = 1
+        y = 1
       elsif (dir == 2) && ((pos % 4) != 0) # left
-	x = -1
+        x = -1
       elsif (dir == 3) && ((pos % 4) != 3) # right
-	x = 1
+        x = 1
       else
-	retry
+        retry
       end
 
       oldpos = pos + y * 4 + x;
@@ -149,27 +150,27 @@ class CanvasSampleFifteen < Gtk::VBox
       x = i % 4
 
       self.set({"x" => x * PIECE_SIZE,
-		 "y" => y * PIECE_SIZE})
+                 "y" => y * PIECE_SIZE})
       Gnome::CanvasRect.new(self,
-			    {"x1" => 0.0,
-			      "y1" => 0.0,
-			      "x2" => PIECE_SIZE,
-			      "y2" => PIECE_SIZE,
-			      "fill_color" => get_piece_color(x, y),
-			      "outline_color" => "black",
-			      "width_pixels" => 0})
- 
+                            {"x1" => 0.0,
+                              "y1" => 0.0,
+                              "x2" => PIECE_SIZE,
+                              "y2" => PIECE_SIZE,
+                              "fill_color" => get_piece_color(x, y),
+                              "outline_color" => "black",
+                              "width_pixels" => 0})
+      
       @text = Gnome::CanvasText.new(self,
-				    {"text" => i.to_s,
-				      "x" => PIECE_SIZE / 2.0,
-				      "y" => PIECE_SIZE / 2.0,
-				      "font" => "Sans bold 24",
-				      "anchor" => Gtk::ANCHOR_CENTER,
-				      "fill_color" => "black"})
+                                    {"text" => i.to_s,
+                                      "x" => PIECE_SIZE / 2.0,
+                                      "y" => PIECE_SIZE / 2.0,
+                                      "font" => "Sans bold 24",
+                                      "anchor" => Gtk::ANCHOR_CENTER,
+                                      "fill_color" => "black"})
       @num = i
       @pos = i
       self.signal_connect("event") do |item, event|
-	app.piece_event(item, event)
+        app.piece_event(item, event)
       end
     end
 
