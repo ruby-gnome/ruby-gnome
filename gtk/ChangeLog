@@ -1,3 +1,10 @@
+2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: append "-DRUBY_GTK2_COMPILATION" to $defs.
+
+	* src/rbgtk.h: define RUBY_GTK2_VAR macro for exporting variables on
+	some win32 platform.
+
 2003-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombo.c: Remove Gtk::Combo#list, #button, #popup, #popwin, 

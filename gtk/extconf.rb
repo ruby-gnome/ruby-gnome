@@ -69,7 +69,9 @@ begin
   end
   $objs << "rbgtkinits.o"
 
+  $defs << "-DRUBY_GTK2_COMPILATION"
   create_makefile("gtk2", src_dir)
+  $defs.delete("-DRUBY_GTK2_COMPILATION")
 
   raise Interrupt if not FileTest.exist? "Makefile"
 
