@@ -6,13 +6,14 @@
 	calling g_thead_init().
 	* sample/gtk-demo/background.jpg: Added.
 	* sample/gtk-demo/rotated_text.rb: Added.
+	* src/rbgdkthreads.c:: Fixed a warning.
 
 2005-02-27  Mirko Maischberger  <mirko@lilik.it>
 
-	* src/init.c: (Init_gtk2): removed g_thread_init and
+	* src/init.c: removed g_thread_init and
 	  gdk_threads_init from Gtk.init
-	* src/rbgdkthreads.c: (Init_gtk_gdk_threads): Added
-  	  Gdk::Threads.init 
+	* src/rbgdkthreads.c: Added
+	  Gdk::Threads.init 
 	* src/rbgtk.c: removed the unnecessary include file "sys/select.h"
 	* src/rbgtkmain.c: (empty_timeout_func): added an empty g_timeout
 	  to force a timeout for the rb_threads_select inside the custom

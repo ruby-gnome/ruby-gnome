@@ -4,7 +4,7 @@
   rbgtkthreads.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 11:16:03 $
+  $Date: 2005/03/05 14:38:37 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -25,6 +25,7 @@ rbgdk_threads_init(self)
     return self;
 }
 
+static VALUE
 rbgdk_threads_enter(self)
     VALUE self;
 {
