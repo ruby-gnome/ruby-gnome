@@ -1,3 +1,7 @@
+2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: prop_exclude_list defined as a static hash. 
+
 2004-02-14  Vincent Isambart <isambart@netcourrier.com>
 
 	* src/lib/mkmf-gnome2.rb: replaced PLATFORM with RUBY_PLATFORM

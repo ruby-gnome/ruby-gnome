@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2003/08/25 01:50:30 $
+  $Author: mutoh $
+  $Date: 2004/02/22 13:39:34 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -17,7 +17,6 @@
 **********************************************************************/
 
 #include "ruby.h"
-#include "st.h"
 #include "global.h"
 #include <ctype.h>
 
@@ -280,7 +279,7 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
     }
 }
 
-static VALUE prop_exclude_list;
+static GHashTable* prop_exclude_list;
 
 void
 rbgobj_define_property_accessors(klass)
@@ -316,7 +315,7 @@ rbgobj_define_property_accessors(klass)
         else
             prop_name = buf;
 
-        if (RTEST(rb_ary_includes(prop_exclude_list, rb_str_new2(prop_name)))){
+        if (g_hash_table_lookup(prop_exclude_list, prop_name)){
             g_free(buf);
             continue;
         }
@@ -476,10 +475,21 @@ Init_gobject()
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
 
-    
-    prop_exclude_list = rb_funcall(rb_cObject, rb_intern("instance_methods"),
-                                   1, Qtrue);
-    rb_global_variable(&prop_exclude_list);
+    /* Not defined properties. They are already used as methods of Object */
+    prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
+    g_hash_table_insert(prop_exclude_list, "class", "class");
+    g_hash_table_insert(prop_exclude_list, "clone", "clone");
+    g_hash_table_insert(prop_exclude_list, "dup", "dup");
+    g_hash_table_insert(prop_exclude_list, "extend", "extend");
+    g_hash_table_insert(prop_exclude_list, "freeze", "freeze");
+    g_hash_table_insert(prop_exclude_list, "hash", "hash");
+    g_hash_table_insert(prop_exclude_list, "id", "id");
+    g_hash_table_insert(prop_exclude_list, "method", "method");
+    g_hash_table_insert(prop_exclude_list, "methods", "methods");
+    g_hash_table_insert(prop_exclude_list, "object_id", "object_id");
+    g_hash_table_insert(prop_exclude_list, "send", "send");
+    g_hash_table_insert(prop_exclude_list, "taint", "taint");
+    g_hash_table_insert(prop_exclude_list, "untaint", "untaint");
 
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
 
