@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/27 14:14:12 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -92,7 +92,11 @@ gdkwin_foreign_new(self, anid)
     VALUE self, anid;
 {
     GdkWindow *window;
-    window = gdk_window_foreign_new(NUM2INT(anid));
+#ifdef GDK_NATIVE_WINDOW_POINTER
+    window = gdk_window_foreign_new(GUINT_TO_POINTER(NUM2ULONG(anid)));
+#else
+    window = gdk_window_foreign_new(NUM2UINT(anid));
+#endif
     return GOBJ2RVAL(window);
 }
 

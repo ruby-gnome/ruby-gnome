@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/27 14:14:12 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -399,7 +399,11 @@ static VALUE
 gdkeventselection_requestor(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->selection.requestor);
+#ifdef GDK_NATIVE_WINDOW_POINTER
+    return UINT2NUM(GPOINTER_TO_UINT(get_gdkevent(self)->selection.requestor));
+#else
+    return UINT2NUM(get_gdkevent(self)->selection.requestor);
+#endif
 }
 
 static VALUE

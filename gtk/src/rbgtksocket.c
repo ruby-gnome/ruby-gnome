@@ -2,8 +2,8 @@
 
   rbgtksocket.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/09 16:24:24 $
+  $Author: sakai $
+  $Date: 2002/07/27 14:14:12 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -23,7 +23,12 @@ socket_steal(self, wid)
     VALUE self, wid;
 {
     gtk_socket_steal(GTK_SOCKET(RVAL2GOBJ(self)),
-                     (guint32)NUM2INT(wid));
+#ifdef GDK_NATIVE_WINDOW_POINTER
+                     GUINT_TO_POINTER(NUM2ULONG(wid)));
+#else
+                     (guint32)NUM2UINT(wid));
+#endif
+
     return Qnil;
 }
 

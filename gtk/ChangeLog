@@ -1,3 +1,9 @@
+2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgdkevent.c, src/rbgdkwindow.c, src/rbgtkplug.c,
+	src/rbgtksocket.c: suppress warnings which related to the
+	representation of GdkNativeWindow.
+
 2002-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkobject.c (gobj_destroy): follow Ruby/GLib's change of
