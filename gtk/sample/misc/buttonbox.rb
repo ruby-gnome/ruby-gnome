@@ -5,7 +5,7 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: buttonbox.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+  $Id: buttonbox.rb,v 1.2 2002/11/05 10:39:10 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -67,6 +67,8 @@ def test_vbbox
   create_bbox_window(false, "Start", 450, 40, Gtk::ButtonBox::START);
   create_bbox_window(false, "End", 650, 15, Gtk::ButtonBox::END);
 end
+
+Gtk.init
 
 window = Gtk::Window.new
 window.signal_connect("delete_event") do

@@ -1,5 +1,11 @@
 2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkmain.c, init.c: define Gtk.init. 
+	This mean all scripts have to call Gtk.init themselves in Ruby/GTK2.
+	* src/sample/misc/*.rb: Follow this changes.
+
+2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* src/rbgtkprogressbar.c: Fix parameter number of Gtk::ProgreeBar#initialize. 
 	* sample/testgtk/testgtk.rb, sample.rb, pixmap.rb, testgtkrc, menu.rb, layout.rb, 
 	labels.rb, gammacurve.rb, fontselection.rb, filesel.rb, entry.rb, dialog.rb, 

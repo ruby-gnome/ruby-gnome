@@ -7,7 +7,7 @@ Sample script using Gtk::Socket and Gtk::Plug.
 
 Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
 
-$Id: t-gtkplug.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+$Id: t-gtkplug.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -22,7 +22,6 @@ class MyGtkPlug
 		else
 			@window = Gtk::Plug.new xid.to_i
 		end
-		@window.set_policy true, true, false
 		@window.set_window_position Gtk::Window::POS_CENTER
 		@window.signal_connect "delete_event" do Gtk::main_quit end
 		@vbox = Gtk::VBox.new true, 5
@@ -52,5 +51,7 @@ ARGV.each_index { |i|
 		ARGV.delete_at i
 	end 
 }
+
+Gtk.init
 MyGtkPlug.new(xid, ARGV.shift)
 Gtk::main

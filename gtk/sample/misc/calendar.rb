@@ -4,10 +4,12 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: calendar.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+  $Id: calendar.rb,v 1.2 2002/11/05 10:39:10 mutoh Exp $
 =end
 
 require 'gtk2'
+
+Gtk.init
 
 cal = Gtk::Calendar.new
 w = Gtk::Window.new

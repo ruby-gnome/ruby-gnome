@@ -4,11 +4,13 @@
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2002/11/03 18:04:42 $
-  $Id: pointer_grab.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+  $Date: 2002/11/05 10:39:11 $
+  $Id: pointer_grab.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
 =end
 
 require 'gtk2'
+
+Gtk.init
 
 window = Gtk::Window.new
 

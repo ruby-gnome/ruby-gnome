@@ -9,14 +9,13 @@ Sample script using Gtk::Socket and Gtk::Plug.
 
 Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
 
-$Id: t-gtksocket.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+$Id: t-gtksocket.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
 =end
 
 class MyGtkSocket < Gtk::Window
 	def initialize
 		super
 		set_title "Gtk::Socket Test"
-		set_policy false, false, false
 		set_window_position Gtk::Window::POS_CENTER
 		signal_connect "delete_event" do Gtk::main_quit end
 		@buttons = []
@@ -54,5 +53,6 @@ class MyGtkSocket < Gtk::Window
 	end
 end
 
+Gtk.init
 MyGtkSocket.new
 Gtk::main

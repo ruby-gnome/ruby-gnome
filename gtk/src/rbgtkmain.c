@@ -4,13 +4,51 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/10/21 17:29:30 $
+  $Date: 2002/11/05 10:39:11 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
 #include "global.h"
+
+extern VALUE rb_progname, rb_argv;
+
+static VALUE
+gtk_m_init(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    gint i, gargc;
+    VALUE argary;
+    gchar** gargv;
+
+    rb_scan_args(argc, argv, "01", &argary);
+
+    if (NIL_P(argary)){
+        gargc = RARRAY(rb_argv)->len;
+        argary = rb_argv;
+    } else {
+        Check_Type(argary, T_ARRAY);
+        gargc = RARRAY(argary)->len;
+    }
+
+    gargv = ALLOCA_N(char*,gargc + 1);
+    gargv[0] = RVAL2CSTR(rb_progname);
+
+    for (i = 0; i < gargc; i++) {
+        if (TYPE(RARRAY(argary)->ptr[i]) == T_STRING) {
+            gargv[i+1] = RVAL2CSTR(RARRAY(argary)->ptr[i]);
+        }
+        else {
+            gargv[i+1] = "";
+        }
+    }
+    gargc++;
+    gtk_init(&gargc, &gargv);
+    return self;
+}
 
 static VALUE
 gtk_m_events_pending(self)
@@ -218,6 +256,7 @@ void
 Init_gtk_main()
 {
     rb_define_module_function(mGtk, "events_pending", gtk_m_events_pending, 0);
+    rb_define_module_function(mGtk, "init", gtk_m_init, -1);
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
