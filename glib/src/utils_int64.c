@@ -4,7 +4,7 @@
   utils_int64.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/09 13:49:18 $
 
   Copyright (C) 2002  Masahiro Sakai
                       Kenichi Komiya
@@ -31,7 +31,7 @@ typedef gint64 PRInt64;
 
 #define LL_ZERO 0
 #define LL_UI2L(lhs,rhs) ((lhs)=(rhs))
-#define LL_L2UI(lhs,rhs) ((lhs)=(rhs))
+#define LL_L2UI(lhs,rhs) ((lhs)=(guint32)(rhs))
 #define LL_SHL(lhs,v1,v2) ((lhs)=(v1)<<(v2))
 #define LL_SHR(lhs,v1,v2) ((lhs)=(v1)>>(v2))
 #define LL_ADD(lhs,v1,v2) ((lhs)=(v1)+(v2))
@@ -46,7 +46,7 @@ typedef gint64 PRInt64;
 static PRUint64
 RubyTo64BitInt(VALUE aRuby)
 {
-    VALUE bitMask = max_PRUint32;
+    VALUE bitMask = UINT2NUM(max_PRUint32);
     VALUE lo = rb_funcall(aRuby, rb_intern("&"), 1, bitMask);
     VALUE hi = rb_funcall(aRuby, rb_intern(">>"), 1, INT2FIX(32));
     PRUint64 result, hi64, lo64;
