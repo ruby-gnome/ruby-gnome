@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-popup-menu.c,v 1.1 2002/10/30 13:36:48 tkubo Exp $ */
+/* $Id: rbgnome-popup-menu.c,v 1.2 2002/11/27 15:27:11 tkubo Exp $ */
 /* based on libgnomeui/gnome-popup-menu.h */
 
 /* Gnome::PopupMenu widget for Ruby/GNOME2
@@ -23,6 +23,8 @@
 #include "rbgnome.h"
 
 #define _SELF(self) GTK_MENU(RVAL2GOBJ(self))
+
+static ID id_call;
 
 static VALUE
 pmenu_initialize(argc, argv, self)
@@ -177,6 +179,8 @@ Init_gnome_popup_menu(mGnome)
     VALUE gWidget = GTYPE2CLASS(GTK_TYPE_WIDGET);
     VALUE gMenu = GTYPE2CLASS(GTK_TYPE_MENU);
     VALUE gnoPopupMenu = rb_define_class_under(mGnome, "PopupMenu", gMenu);
+
+    id_call = rb_intern("call");
 
     rb_define_method(gnoPopupMenu, "initialize", pmenu_initialize, -1);
     rb_define_method(gnoPopupMenu, "accel_group", pmenu_get_accel_group, 0);
