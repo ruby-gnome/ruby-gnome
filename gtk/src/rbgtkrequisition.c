@@ -4,9 +4,9 @@
   rbgtkrequisition.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002  Masao Mutoh
+  Copyright (C) 2002,2003  Masao Mutoh
 
   This file is derived from rbgtk.c.
   rbgtk.c -

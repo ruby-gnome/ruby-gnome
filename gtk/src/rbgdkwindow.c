@@ -4,8 +4,9 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/11/11 15:32:33 $
+  $Date: 2003/01/19 14:28:24 $
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -623,19 +624,35 @@ GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 
 
 /* General Methods */
+static GdkAtom
+rb2gdk_atom(atom)
+    VALUE atom;
+{
+    if (TYPE(atom) == T_STRING)
+      return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
+    return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
+}
 
 /* Properties */
 static VALUE
-gdkwin_prop_change(self, property, type, mode, src)
-    VALUE self, property, type, mode, src;
+gdkwin_prop_change(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     int        fmt, len, i;
 /*  Atom       atom; */
     void*      dat;
     GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
     GdkAtom    otype, ntype;
+    VALUE property, type, size=Qnil, mode, src;
     
-    otype = ntype = ((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom;
+    if(5 == argc)
+      rb_scan_args(argc, argv, "50", &property, &type, &size, &mode, &src);
+    else
+      rb_scan_args(argc, argv, "40", &property, &type, &mode, &src);
+    
+    otype = ntype = rb2gdk_atom(type);
     
 /* They are not available in Ruby/GTK 2
    if(ntype == GDK_SELECTION_TYPE_ATOM){
@@ -676,20 +693,23 @@ gdkwin_prop_change(self, property, type, mode, src)
   len = 1;
 */
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
-        dat = RSTRING(src)->ptr;
+        dat = RVAL2CSTR(src);
         fmt = 8;
         len = RSTRING(src)->len;
         
     } else if(ntype == compound_text){
-        gdk_string_to_compound_text(RSTRING(src)->ptr,
+        gdk_string_to_compound_text(RVAL2CSTR(src),
                                     &ntype, &fmt, (guchar**)&dat, &len);
         
+    } else if(argc == 5 && size != Qnil) {
+    	dat = RVAL2CSTR(src);
+	fmt = NUM2INT(size);
+	len = RSTRING(src)->len;
     } else {
-        rb_raise(rb_eArgError, "no supperted type.");
+        rb_raise(rb_eArgError, "no supported type.");
     }
     
-    gdk_property_change(_SELF(self),
-                        (((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom), 
+    gdk_property_change(_SELF(self), rb2gdk_atom(property), 
                         ntype, fmt, NUM2INT(mode), dat, len);
     
     if(otype == GDK_SELECTION_TYPE_ATOM) {
@@ -702,21 +722,28 @@ gdkwin_prop_change(self, property, type, mode, src)
 }
 
 static VALUE
-gdkwin_prop_get(self, property, type, offset, length, delete)
-    VALUE self, property, type, offset, length, delete;
+gdkwin_prop_get(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     /* for argument processing */
     GdkAtom     rtype;
     gint        rfmt, rlen;
     void*	rdat;
+    VALUE property, type, offset=INT2FIX(0), length=INT2FIX(9999), delete;
     
     /* for inner processing */
     int		i;
     VALUE	ret = 0;
     
-    if(gdk_property_get(_SELF(self), 
-                        (((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom),
-                        (((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom),
+    if(5 == argc)
+      rb_scan_args(argc, argv, "50", &property, &type, &offset, &length, &delete);
+    else
+      rb_scan_args(argc, argv, "30", &property, &type, &delete);
+    
+    
+    if(gdk_property_get(_SELF(self), rb2gdk_atom(property), rb2gdk_atom(type),
                         NUM2INT(offset), NUM2INT(length),
                         RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
         return Qnil;
@@ -755,15 +782,14 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
     }
     
     return rb_ary_new3(3, BOXED2RVAL(&rtype, GDK_TYPE_ATOM), 
-                       ret, rb_Integer(rlen));
+                       ret, INT2NUM(rlen));
 }
 
 static VALUE
 gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
-    gdk_property_delete(_SELF(self), 
-                        (((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom));
+    gdk_property_delete(_SELF(self), rb2gdk_atom(property));
     return self;
 }
 
@@ -827,8 +853,8 @@ Init_gtk_gdk_window()
    rb_define_method(gdkWindow, "set_decorations", gdkwin_set_decorations, 1);
    rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
    rb_define_method(gdkWindow, "toplevels", gdkwin_get_toplevels, 0);
-   rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, 4);
-   rb_define_method(gdkWindow, "property_get", gdkwin_prop_get, 5);
+   rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, -1);
+   rb_define_method(gdkWindow, "property_get", gdkwin_prop_get, -1);
    rb_define_method(gdkWindow, "property_delete", gdkwin_prop_delete, 1);
 
    G_DEF_SETTERS(gdkWindow);

@@ -4,9 +4,9 @@
   rbgtkcellrendererpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Date: 2003/01/19 14:28:24 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"

@@ -2,10 +2,10 @@
 =begin
   checkbutton.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: checkbutton.rb,v 1.3 2002/11/30 17:40:47 mutoh Exp $
+  $Id: checkbutton.rb,v 1.4 2003/01/19 14:28:23 mutoh Exp $
 =end
 
 require 'gtk2'

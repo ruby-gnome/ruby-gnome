@@ -4,9 +4,9 @@
   rbgtkaccelmap.c -
 
   $Author: mutoh $
-  $Date: 2002/12/18 13:17:15 $
+  $Date: 2003/01/19 14:28:24 $
 
-  Copyright (C) 2002 OGASAWARA, Takeshi
+  Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 

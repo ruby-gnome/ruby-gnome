@@ -4,9 +4,9 @@
   rbgdkinput.c -
 
   $Author: mutoh $
-  $Date: 2002/11/08 17:08:40 $
+  $Date: 2003/01/19 14:28:24 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 
   This file is devided from rbgtkmain.c.
   rbgtkmain.c -

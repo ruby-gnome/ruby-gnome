@@ -3,9 +3,10 @@
 
   init.c -
 
-  $Author: tkubo $
-  $Date: 2003/01/18 15:08:40 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:24 $
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi

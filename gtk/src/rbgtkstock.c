@@ -3,10 +3,10 @@
 
   rbgtkstock.c -
 
-  $Author: tkubo $
-  $Date: 2002/11/15 15:32:37 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+  Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
 #include "rbgtk.h"
 

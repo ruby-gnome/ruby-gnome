@@ -4,9 +4,9 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:36 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 
@@ -142,52 +142,56 @@ GdkDragContext* gtk_drag_begin              (GtkWidget *widget,
 }
 
 static VALUE
-gtkdrag_set_icon_widget(self, context, widget, hot_x, hot_y)
-    VALUE self, context, widget, hot_x, hot_y;
+gtkdrag_set_icon(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    gtk_drag_set_icon_widget(RVAL2DC(context), RVAL2WIDGET(widget),
-                             NUM2INT(hot_x), NUM2INT(hot_y));
+    VALUE context, obj, pixmap = Qnil, mask = Qnil, hot_x, hot_y;
+
+    if (argc == 6) {
+        rb_scan_args(argc, argv, "60", &context, &obj, &pixmap, &mask, &hot_x, &hot_y);
+        gtk_drag_set_icon_pixmap(RVAL2DC(context),
+                                 GDK_COLORMAP(RVAL2GOBJ(obj)), 
+                                 GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+                                 GDK_BITMAP(RVAL2GOBJ(mask)), 
+                                 NUM2INT(hot_x), NUM2INT(hot_y));
+    } else {
+        rb_scan_args(argc, argv, "40", &context, &obj, &hot_x, &hot_y);
+
+        if (TYPE(obj) == T_SYMBOL){
+            gtk_drag_set_icon_stock(RVAL2DC(context), rb_id2name(SYM2ID(obj)),
+                                    NUM2INT(hot_x), NUM2INT(hot_y));
+        } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))){
+            gtk_drag_set_icon_widget(RVAL2DC(context), RVAL2WIDGET(obj),
+                                     NUM2INT(hot_x), NUM2INT(hot_y));
+        } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
+            gtk_drag_set_icon_pixbuf(RVAL2DC(context),
+                                     GDK_PIXBUF(RVAL2GOBJ(obj)),
+                                     NUM2INT(hot_x), NUM2INT(hot_y));
+        } else {
+            rb_raise(rb_eArgError, "invalid argument %s", rb_class2name(CLASS_OF(obj)));
+        }
+    }
     return self;
 }
 
 static VALUE
-gtkdrag_set_icon_pixmap(self, context, colormap, pixmap, mask, hot_x, hot_y)
-    VALUE self, context, colormap, pixmap, mask, hot_x, hot_y;
-{
-    gtk_drag_set_icon_pixmap(RVAL2DC(context),
-                             GDK_COLORMAP(RVAL2GOBJ(colormap)), 
-                             GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-                             GDK_BITMAP(RVAL2GOBJ(mask)), 
-                             NUM2INT(hot_x), NUM2INT(hot_y));
-    return self;
-}
-
-/*
-void        gtk_drag_set_icon_pixbuf        (GdkDragContext *context,
-                                             GdkPixbuf *pixbuf,
-                                             gint hot_x,
-                                             gint hot_y);
-void        gtk_drag_set_icon_stock         (GdkDragContext *context,
-                                             const gchar *stock_id,
-                                             gint hot_x,
-                                             gint hot_y);
-*/
-
-static VALUE
-gtkdrag_set_default_icon(self, context)
+gtkdrag_set_icon_default(self, context)
     VALUE self, context;
 {
     gtk_drag_set_icon_default(RVAL2DC(context));
     return Qnil;
 }
 
-/*
-gboolean    gtk_drag_check_threshold        (GtkWidget *widget,
-                                             gint start_x,
-                                             gint start_y,
-                                             gint current_x,
-                                             gint current_y);
-*/
+static VALUE
+gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
+    VALUE self, widget, start_x, start_y, current_x, current_y;
+{
+    return gtk_drag_check_threshold(RVAL2WIDGET(widget), 
+                                    NUM2INT(start_x), NUM2INT(start_y),
+                                    NUM2INT(current_x), NUM2INT(current_y)) ? Qtrue : Qfalse;
+}
 
 static VALUE
 gtkdrag_drag_source_set(self, widget, flags, targets, actions)
@@ -200,12 +204,27 @@ gtkdrag_drag_source_set(self, widget, flags, targets, actions)
 }
 
 static VALUE
-gtkdrag_drag_source_set_icon(self, widget, colormap, pixmap, mask)
-    VALUE self, widget, colormap, pixmap, mask;
+gtkdrag_drag_source_set_icon(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    gtk_drag_source_set_icon(RVAL2WIDGET(widget), GDK_COLORMAP(RVAL2GOBJ(colormap)),
-                             GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
-                             GDK_BITMAP(RVAL2GOBJ(mask)));
+    VALUE widget, obj, pixmap = Qnil, mask = Qnil;
+
+    rb_scan_args(argc, argv, "22", &widget, &obj, &pixmap, &mask);
+    if (argc == 4){
+        gtk_drag_source_set_icon(RVAL2WIDGET(widget), GDK_COLORMAP(RVAL2GOBJ(obj)),
+                                 GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
+                                 GDK_BITMAP(RVAL2GOBJ(mask)));
+    } else if (argc == 2){
+        if (TYPE(obj) == T_SYMBOL){
+            gtk_drag_source_set_icon_stock(RVAL2WIDGET(widget), rb_id2name(SYM2ID(obj)));
+        } else {
+            gtk_drag_source_set_icon_pixbuf(RVAL2WIDGET(widget), GDK_PIXBUF(RVAL2GOBJ(obj)));
+        }
+    } else {
+        rb_raise(rb_eArgError, "need 2 or 4 arguments");
+    }
     return self;
 }
 
@@ -216,14 +235,6 @@ gtkdrag_drag_source_unset(self, widget)
     gtk_drag_source_unset(RVAL2WIDGET(widget));
     return self;
 }
-
-/*
-void        gtk_drag_source_set_icon_pixbuf (GtkWidget *widget,
-                                             GdkPixbuf *pixbuf);
-void        gtk_drag_source_set_icon_stock  (GtkWidget *widget,
-                                             const gchar *stock_id);
-*/
-
 
 void
 Init_gtk_drag()
@@ -239,11 +250,11 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "highlight", gtkdrag_highlight, 1);
     rb_define_module_function(mGtkDrag, "unhighlight", gtkdrag_unhighlight, 1);
     rb_define_module_function(mGtkDrag, "begin", gtkdrag_begin, 5);
-    rb_define_module_function(mGtkDrag, "set_icon_widget", gtkdrag_set_icon_widget, 4);
-    rb_define_module_function(mGtkDrag, "set_icon_pixmap", gtkdrag_set_icon_pixmap, 6);
-    rb_define_module_function(mGtkDrag, "set_default_icon", gtkdrag_set_default_icon, 1);
+    rb_define_module_function(mGtkDrag, "threshold?", gtkdrag_check_threshold, 5);
+    rb_define_module_function(mGtkDrag, "set_icon", gtkdrag_set_icon, -1);
+    rb_define_module_function(mGtkDrag, "set_icon_default", gtkdrag_set_icon_default, 1);
     rb_define_module_function(mGtkDrag, "source_set", gtkdrag_drag_source_set, 4);
-    rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_drag_source_set_icon, 4);
+    rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_drag_source_set_icon, -1);
     rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_drag_source_unset, 1);
 
     G_DEF_SETTERS(mGtkDrag);

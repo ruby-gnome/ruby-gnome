@@ -1,7 +1,10 @@
 =begin header
 
   progressbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: progressbar.rb,v 1.5 2002/11/14 13:37:35 mutoh Exp $
+
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+
+  $Id: progressbar.rb,v 1.6 2003/01/19 14:28:24 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 

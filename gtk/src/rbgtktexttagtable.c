@@ -4,9 +4,9 @@
   rbgtktexttagtable.c -
  
   $Author: mutoh $
-  $Date: 2002/12/28 11:53:04 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 OGASAWARA, Takeshi
+  Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 

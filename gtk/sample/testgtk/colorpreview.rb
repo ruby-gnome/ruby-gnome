@@ -2,9 +2,11 @@
 
   colorpreview.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
+  Copyright (C) 2002,2003 Ruby-GNOME2 Project
+
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/11/12 16:36:18 $
-  $Id: colorpreview.rb,v 1.2 2002/11/12 16:36:18 mutoh Exp $
+  $Date: 2003/01/19 14:28:24 $
+  $Id: colorpreview.rb,v 1.3 2003/01/19 14:28:24 mutoh Exp $
 
 Original Copyright:
  

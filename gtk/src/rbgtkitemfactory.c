@@ -4,12 +4,12 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/12/07 18:19:29 $
+  $Date: 2003/01/19 14:28:25 $
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
                           MUTOH Masao
-
 ************************************************/
 
 #include "global.h"

@@ -1,7 +1,10 @@
 =begin
 
   savedposition.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: savedposition.rb,v 1.4 2002/12/02 15:31:02 mutoh Exp $
+
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+
+  $Id: savedposition.rb,v 1.5 2003/01/19 14:28:24 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 

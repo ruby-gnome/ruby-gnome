@@ -1,7 +1,10 @@
 =begin header
 
   treestore.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: treestore.rb,v 1.2 2002/12/25 13:11:58 mutoh Exp $
+
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+
+  $Id: treestore.rb,v 1.3 2003/01/19 14:28:24 mutoh Exp $
 
 =end
 

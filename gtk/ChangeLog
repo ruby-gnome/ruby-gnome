@@ -1,3 +1,21 @@
+2003-01-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdrag.c: Unify Gtk::Drag#set_icon_widget and 
+	#set_icon_pixmap to #set_icon.
+	Fix method name of set_default_icon to set_icon_default.
+	Gtk::Drag#source_set_icon accept Gdk::Pixmap, Gdk::Pixbuf 
+	and Gtk::Stock constants.
+	Add Gtk::Drag#threshold?.
+	* src/*.c, sample/*/*.rb: Update Copyright.
+	* sample/misc/dnd.rb: Some fixes. But this hasn't work yet.
+
+2003-01-19  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* src/rbgtkdrag.c:  Add Gtk::Drag.set_icon_pixbuf.
+	* src/rbgdkwindow.c: Change arguments of Gdk::Window#property_(change|get|.
+	* Gdk::Window#property_(get|change|delete): Accept strings as the atom value.
+	* Fix a bug of Gdk::Window#property_get.
+
 2003-01-18  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb: make Makefiles for gtk20.so and gtk22.so.

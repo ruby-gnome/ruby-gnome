@@ -4,9 +4,9 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 
@@ -65,8 +65,7 @@ gtkselectiondata_set(self, type, format, data)
 {
     gtk_selection_data_set(_SELF(self), 
                            (((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom),
-                           NUM2INT(format), RSTRING(data)->ptr, 
-                           RSTRING(data)->len);
+                           NUM2INT(format), RVAL2CSTR(data), RSTRING(data)->len);
     return self;
 }
 

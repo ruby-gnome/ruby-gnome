@@ -4,9 +4,9 @@
   rbgtktexttag.c -
 
   $Author: mutoh $
-  $Date: 2002/11/15 13:20:28 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masahiro Sakai
+  Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
 #include "global.h"

@@ -3,10 +3,10 @@
 
   rbgtktextbuffer.c -
 
-  $Author: tkubo $
-  $Date: 2003/01/18 15:08:40 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masahiro Sakai
+  Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
 #include "global.h"

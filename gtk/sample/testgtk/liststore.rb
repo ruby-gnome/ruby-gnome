@@ -1,7 +1,10 @@
 =begin
 
   liststore.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: liststore.rb,v 1.1 2002/11/15 17:08:43 mutoh Exp $
+
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+
+  $Id: liststore.rb,v 1.2 2003/01/19 14:28:24 mutoh Exp $
 
 =end
 

@@ -1,11 +1,11 @@
 =begin
   xbm_cursor.rb - Gdk::Cursor sample script.
 
-  Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
+  Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2002/11/05 10:39:11 $
-  $Id: xbm_cursor.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
+  $Date: 2003/01/19 14:28:23 $
+  $Id: xbm_cursor.rb,v 1.3 2003/01/19 14:28:23 mutoh Exp $
 =end
 
 require 'gtk2'

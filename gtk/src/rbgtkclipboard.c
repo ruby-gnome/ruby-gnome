@@ -3,10 +3,10 @@
 
   rbgtkclipboard.c -
  
-  $Author: tkubo $
-  $Date: 2003/01/18 15:08:40 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:24 $
 
-  Copyright (C) 2002 OGASAWARA, Takeshi
+  Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 

@@ -2,10 +2,10 @@
 =begin
   itemfactory.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: itemfactory.rb,v 1.1 2002/12/07 17:58:06 mutoh Exp $
+  $Id: itemfactory.rb,v 1.2 2003/01/19 14:28:23 mutoh Exp $
 =end
 
 require 'gtk2'

@@ -3,10 +3,10 @@
 
   rbgtktextiter.c -
 
-  $Author: ogs $
-  $Date: 2002/11/22 16:34:59 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masahiro Sakai
+  Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
 #include "global.h"

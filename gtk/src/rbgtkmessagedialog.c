@@ -4,9 +4,9 @@
   rbgtkmessagedialog.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:17 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"

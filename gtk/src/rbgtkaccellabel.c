@@ -3,9 +3,10 @@
 
   rbgtkaccellabel.c -
 
-  $Author: ogs $
-  $Date: 2002/12/09 16:33:11 $
+  $Author: mutoh $
+  $Date: 2003/01/19 14:28:24 $
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 2001 Neil Conway
 ************************************************/
 

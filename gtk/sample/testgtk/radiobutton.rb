@@ -2,9 +2,11 @@
 
   radiobutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/12/22 13:34:43 $
-  $Id: radiobutton.rb,v 1.4 2002/12/22 13:34:43 mutoh Exp $
+  $Date: 2003/01/19 14:28:24 $
+  $Id: radiobutton.rb,v 1.5 2003/01/19 14:28:24 mutoh Exp $
 
 Original Copyright:
  

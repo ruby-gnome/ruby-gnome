@@ -4,9 +4,9 @@
   rbgtksocket.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:26 $
+  $Date: 2003/01/19 14:28:25 $
 
-  Copyright (C) 2002 Neil Conway
+  Copyright (C) 2002,2003 Neil Conway
 ************************************************/
 
 #include "global.h"

@@ -4,8 +4,9 @@
   rbgtkfontselection.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:15 $
+  $Date: 2003/01/19 14:28:25 $
 
+  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 **********************************************************/
 
