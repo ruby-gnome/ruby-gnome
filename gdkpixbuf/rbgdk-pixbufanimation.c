@@ -3,8 +3,8 @@
 
   rbgdk-pixbufanimation.c -
 
-  $Author: sakai $
-  $Date: 2003/02/17 15:31:42 $
+  $Author: mutoh $
+  $Date: 2004/08/14 08:17:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -12,8 +12,6 @@
 
 #define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
 #define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
-
-static ID tvsec, tvusec;
 
 static VALUE
 animation_initialize(self, filename)
@@ -50,15 +48,19 @@ animation_get_iter(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE start_time;
+    VALUE start_time_sec, start_time_usec;
     GTimeVal* time = NULL;
 
-    rb_scan_args(argc, argv, "01", &start_time);
+    rb_scan_args(argc, argv, "02", &start_time_sec, &start_time_usec);
 
-    if (! NIL_P(start_time)){
+    if (! NIL_P(start_time_sec)){
         time = g_new(GTimeVal, 1);
-        time->tv_sec = rb_funcall(start_time, tvsec, 0);
-        time->tv_usec = rb_funcall(start_time,tvusec, 0);
+        time->tv_sec = NUM2LONG(start_time_sec);
+        if (NIL_P(start_time_usec)){
+            time->tv_usec = 0;
+        } else {
+            time->tv_usec = NUM2LONG(start_time_usec);
+        }
     }
     return GOBJ2RVAL(gdk_pixbuf_animation_get_iter(_SELF(self), time)); 
 }
@@ -67,7 +69,7 @@ static VALUE
 animation_is_static_image(self)
     VALUE self;
 {
-    return gdk_pixbuf_animation_is_static_image(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_pixbuf_animation_is_static_image(_SELF(self)));
 }
 
 static VALUE
@@ -83,18 +85,22 @@ animation_iter_advance(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE current_time;
+    VALUE current_time_sec, current_time_usec;
     GTimeVal* time = NULL;
 
-    rb_scan_args(argc, argv, "01", &current_time);
+    rb_scan_args(argc, argv, "01", &current_time_sec, &current_time_usec);
 
-    if (! NIL_P(current_time)){
+    if (! NIL_P(current_time_sec)){
         time = g_new(GTimeVal, 1);
-        time->tv_sec = rb_funcall(current_time, tvsec, 0);
-        time->tv_usec = rb_funcall(current_time, tvusec, 0);
+        time->tv_sec = NUM2LONG(current_time_sec);
+        if (NIL_P(current_time_usec)){
+            time->tv_usec = 0;
+        } else {
+            time->tv_usec = NUM2LONG(current_time_usec);
+        }
     }
 
-    return gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), time) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), time));
 }
 
 static VALUE
@@ -108,7 +114,7 @@ static VALUE
 animation_iter_on_currently_loading_frame(self)
     VALUE self;
 {
-    return gdk_pixbuf_animation_iter_on_currently_loading_frame(RVAL2ITR(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_pixbuf_animation_iter_on_currently_loading_frame(RVAL2ITR(self)));
 }
 
 static VALUE
@@ -124,9 +130,6 @@ Init_gdk_pixbuf_animation(VALUE mGdk)
     VALUE anim = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION, "PixbufAnimation", mGdk);    
     VALUE animiter = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION_ITER, "PixbufAnimationIter", mGdk);    
 
-    tvsec = rb_intern("tv_sec");
-    tvusec = rb_intern("tv_usec");
-   
     rb_define_method(anim, "initialize", animation_initialize, 1);
     rb_define_method(anim, "width", animation_get_width, 0);
     rb_define_method(anim, "height", animation_get_height, 0);

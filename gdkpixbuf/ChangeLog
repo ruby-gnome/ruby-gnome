@@ -1,5 +1,7 @@
 2004-08-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* rbgdk-pixbufanimation.c: parameters of Gdk::PixbufAnimation#get_iter, 
+	Gdk::PixbufAnimationIter#advance are changed.
 	* rbgdk-pixbuf.c: Remove Gdk::Pixbuf.new_subpixbuf and merge it to 
 	Gdk::Pixbuf.new. 
 	* sample/inline.rb, pixdata.rb: Added.
