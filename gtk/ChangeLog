@@ -1,3 +1,8 @@
+2002-12-07  Hiroshi IGARASHI  <iga@ruby-lang.org>
+
+	* src/rbgtkmain.c (gtk_m_main, gtk_m_main_quit): Gtk.main_quit should
+	awake the thread stopped in Gtk.main.
+
 2002-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkaccelerator.c: Add file. Implement Gtk::Accelerator. 
