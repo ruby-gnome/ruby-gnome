@@ -1,5 +1,7 @@
 2003-08-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/lib/glib2.rb: add new file.
+
 	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): don't use
 	Array#quote. Because mkmf.rb of ruby-1.6 doesn't provide this method.
 
