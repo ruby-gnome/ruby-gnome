@@ -1,4 +1,4 @@
-# $Id: editable_cells.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: editable_cells.rb,v 1.2 2003/03/02 07:08:19 kzys Exp $
 =begin
 = Tree View/Editable Cells
 
@@ -8,127 +8,11 @@ the GtkListStore example first.
 =end
 require 'common'
 
-=begin
-#include <gtk/gtk.h>
-#include <string.h>
-#include <stdlib.h>
-
-static GtkWidget *window = nil
-
-enum
-{
-  COLUMN_NUMBER,
-  COLUMN_PRODUCT,
-  COLUMN_EDITABLE,
-  NUM_COLUMNS
-}
-
-static GArray *articles = nil
-
-
-
-static void
-add_item (GtkWidget *button, gpointer data)
-{
-  Item foo
-  GtkTreeIter iter
-  GtkTreeModel *model = (GtkTreeModel *)data
-
-  g_return_if_fail (articles != nil)
-
-  foo.number = 0
-  foo.product = g_strdup ('Description here')
-  foo.editable = true
-  g_array_append_vals (articles, &foo, 1)
-
-  model.store_append(&iter)
-  model.store_set(&iter,
-		      COLUMN_NUMBER, foo.number,
-		      COLUMN_PRODUCT, foo.product,
-		      COLUMN_EDITABLE, foo.editable,
-		      -1)
-}
-
-static void
-remove_item (GtkWidget *widget, gpointer data)
-{
-  GtkTreeIter iter
-  GtkTreeView *treeview = (GtkTreeView *)data
-  GtkTreeModel *model = gtk_tree_view_get_model (treeview)
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (treeview)
-
-  if (selection.selection_get_selected(nil, &iter))
-    {
-      gint i
-      GtkTreePath *path
-
-      path = model.model_get_path(&iter)
-      i = gtk_tree_path_get_indices (path)[0]
-      model.store_remove(&iter)
-
-      g_array_remove_index (articles, i)
-
-      gtk_tree_path_free (path)
-    }
-}
-
-static void
-cell_edited (GtkCellRendererText *cell,
-	     const gchar         *path_string,
-	     const gchar         *new_text,
-	     gpointer             data)
-{
-  GtkTreeModel *model = (GtkTreeModel *)data
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_string)
-  GtkTreeIter iter
-
-  gint *column
-
-  column = g_object_get_data (cell, 'column')
-
-  model.model_get_iter(&iter, path)
-
-  switch (column)
-    {
-    case COLUMN_NUMBER:
-      {
-	gint i
-
-	i = gtk_tree_path_get_indices (path)[0]
-	g_array_index (articles, Item, i).number = atoi (new_text)
-
-	model.store_set(&iter, column,
-			    g_array_index (articles, Item, i).number, -1)
-      }
-      break
-
-    case COLUMN_PRODUCT:
-      {
-	gint i
-	gchar *old_text
-
-        model.model_get(&iter, column, &old_text, -1)
-	g_free (old_text)
-
-	i = gtk_tree_path_get_indices (path)[0]
-	g_free (g_array_index (articles, Item, i).product)
-	g_array_index (articles, Item, i).product = g_strdup (new_text)
-
-	model.store_set(&iter, column,
-                            g_array_index (articles, Item, i).product, -1)
-      }
-      break
-    }
-
-  gtk_tree_path_free (path)
-}
-
-=end
-
 module Demo
   class EditableCells < BasicWindow
     Item = Struct.new('Item', :number, :product, :editable)
-    COLUMN_NUMBER, COLUMN_PRODUCT, COLUMN_EDITABLE, NUM_COLUMNS = *(1..4).to_a
+    COLUMN_NUMBER, COLUMN_PRODUCT, COLUMN_EDITABLE, NUM_COLUMNS = *(0..4).to_a
+    
     def initialize
       super('Shopping list')
       self.border_width = 5
@@ -186,7 +70,6 @@ module Demo
 
       # add items
       @articles.each do |article|
-	p article
 	iter = model.append
 
 	article.each_with_index do |value, index|
@@ -214,32 +97,73 @@ module Demo
     end
 
     def add_columns(treeview)
+      model = treeview.model
+      
       # number column
       renderer = Gtk::CellRendererText.new
-      renderer.signal_connect('edited') do
-	cell_edited(model)
+      renderer.signal_connect('edited') do |*args|
+	cell_edited(*args.push(model))
       end
-      treeview.insert_column('Number', COLUMN_NUMBER)
-=begin      
-      #g_object_set_data (renderer, 'column', (gint *)COLUMN_NUMBER)
+      treeview.insert_column(-1, 'Number', renderer,
+			     {
+			       :text => COLUMN_NUMBER,
+			       :editable => COLUMN_EDITABLE,
+			     })
+      def renderer.column
+	COLUMN_NUMBER
+      end
 
-      treeview.insert_column_with_attributes ( -1, 'Number', renderer,
-					       'text', COLUMN_NUMBER,
-					       'editable', COLUMN_EDITABLE,
-					       nil)
-=end
       # product column
       renderer = Gtk::CellRendererText.new
-      renderer.signal_connect('edited') do
-	cell_edited(model)
+      renderer.signal_connect('edited') do |*args|
+	cell_edited(*args.push(model))
       end
-      #g_object_set_data (renderer, 'column', (gint *)COLUMN_PRODUCT)
-=begin
-      gtk_tree_view_insert_column_with_attributes (treeview,
-						   -1, 'Product', renderer,
-						   'text', COLUMN_PRODUCT,
-						   'editable', COLUMN_EDITABLE,
-=end						   nil)
+      def renderer.column
+	COLUMN_PRODUCT
+      end
+      treeview.insert_column(-1, 'Product', renderer,
+			     {
+			       :text => COLUMN_PRODUCT,
+			       :editable => COLUMN_EDITABLE,
+			     })
+    end
+    
+    def cell_edited(cell, path_string, new_text, model)
+      path = Gtk::TreePath.new(path_string)
+
+      column = cell.column
+
+      iter = model.get_iter(path)
+      case column
+      when COLUMN_NUMBER
+	i = iter.path.indices[0]
+	@articles[i].number = new_text.to_i
+	model.set_value(iter, column, @articles[i].number)
+      when COLUMN_PRODUCT
+	i = iter.path.indices[0]
+	@articles[i].product = new_text
+	model.set_value(iter, column, @articles[i].product)
+      end
+    end
+
+    def add_item(model)
+      foo = Item.new(0, 'Description here', true)
+      @articles.concat([foo])
+
+      iter = model.append
+      foo.each_with_index do |value, index|
+	model.set_value(iter, index, value)
+      end
+    end
+
+    def remove_item(treeview)
+      model = treeview.model
+      selection = treeview.selection
+
+      if iter = selection.selected
+	model.remove(iter)
+	@articles.delete_at(iter.path.indices[0])
+      end
     end
   end
 end
