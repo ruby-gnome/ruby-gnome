@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:03 $
+  $Date: 2002/12/16 15:39:55 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -78,11 +78,6 @@ Init_gtk_const()
     rb_define_const(mGtk, "CORNER_BOTTOM_LEFT", INT2FIX(GTK_CORNER_BOTTOM_LEFT));
     rb_define_const(mGtk, "CORNER_TOP_RIGHT", INT2FIX(GTK_CORNER_TOP_RIGHT));
     rb_define_const(mGtk, "CORNER_BOTTOM_RIGHT", INT2FIX(GTK_CORNER_BOTTOM_RIGHT));
-
-    /* GtkCurveType */
-    rb_define_const(mGtk, "CURVE_TYPE_LINEAR", INT2FIX(GTK_CURVE_TYPE_LINEAR));
-    rb_define_const(mGtk, "CURVE_TYPE_SPLINE", INT2FIX(GTK_CURVE_TYPE_SPLINE));
-    rb_define_const(mGtk, "CURVE_TYPE_FREE", INT2FIX(GTK_CURVE_TYPE_FREE));
 
     /* GtkDeleteType */
     rb_define_const(mGtk, "DELETE_CHARS", INT2FIX(GTK_DELETE_CHARS));
