@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:09 $
+  $Date: 2002/10/31 17:08:29 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -70,20 +70,42 @@ gdk_s_screen_height_mm(self)
     return INT2NUM(gdk_screen_height_mm());
 }
 
-/* Move to Gdk::Window.
-GdkGrabStatus gdk_pointer_grab              (GdkWindow *window,
-                                             gboolean owner_events,
-                                             GdkEventMask event_mask,
-                                             GdkWindow *confine_to,
-                                             GdkCursor *cursor,
-                                             guint32 time);
-void        gdk_pointer_ungrab              (guint32 time);
-GdkGrabStatus gdk_keyboard_grab             (GdkWindow *window,
-                                             gboolean owner_events,
-                                             guint32 time);
-void        gdk_keyboard_ungrab             (guint32 time);
+static VALUE
+gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time)
+    VALUE self, win, owner_events, event_mask, confine_to, cursor, time;
+{
+    gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
+                     RTEST(owner_events),
+                     NUM2INT(event_mask),
+                     GDK_WINDOW(RVAL2GOBJ(confine_to)),
+                     (GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
+                     NUM2INT(time));
+    return self;
+}
 
-*/
+static VALUE
+gdk_s_pointer_ungrab(self, time)
+    VALUE self, time;
+{
+    gdk_pointer_ungrab(NUM2INT(time));
+    return self;
+}
+
+static VALUE
+gdk_s_keyboard_grab(self, win, owner_events, time)
+    VALUE self, win, owner_events, time;
+{
+    gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), RTEST(owner_events), NUM2INT(time));
+    return self;
+}
+
+static VALUE
+gdk_s_keyboard_ungrab(self, time)
+    VALUE self, time;
+{
+    gdk_keyboard_ungrab(NUM2INT(time));
+    return self;
+}
 
 static VALUE
 gdk_s_pointer_is_grabbed(self)
@@ -128,7 +150,11 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "beep", gdk_s_beep, 0);
     rb_define_module_function(mGdk, "flush", gdk_s_flush, 0);
     rb_define_module_function(mGdk, "set_double_click_time", gdk_s_set_double_click_time, 1);
-    rb_define_module_function(mGdk, "pointer_grabbed?", gdk_s_pointer_is_grabbed, 0);
+    rb_define_module_function(mGdk, "pointer_grab", gdk_s_pointer_grab, 6);
+    rb_define_module_function(mGdk, "pointer_ungrab", gdk_s_pointer_ungrab, 1);
+    rb_define_module_function(mGdk, "keyboard_grab", gdk_s_keyboard_grab, 3);
+    rb_define_module_function(mGdk, "keyboard_ungrab", gdk_s_keyboard_ungrab, 1);
+    rb_define_module_function(mGdk, "pointer_is_grabbed?", gdk_s_pointer_is_grabbed, 0);
 
     G_DEF_SETTERS(mGdk);
 }

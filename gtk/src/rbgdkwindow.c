@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:10 $
+  $Date: 2002/10/31 17:08:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -623,43 +623,6 @@ GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 
 
 /* General Methods */
-static VALUE
-gdkwin_pointer_grab(self, owner_events, event_mask, confine_to, cursor, time)
-    VALUE self, owner_events, event_mask, confine_to, cursor, time;
-{
-    gdk_pointer_grab(_SELF(self),
-                     RTEST(owner_events),
-                     NUM2INT(event_mask),
-                     _SELF(confine_to),
-                     (GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
-                     NUM2INT(time));
-    return self;
-}
-
-
-static VALUE
-gdkwin_pointer_ungrab(self, time)
-    VALUE self, time;
-{
-    gdk_pointer_ungrab(NUM2INT(time));
-    return self;
-}
-
-static VALUE
-gdkwin_keyboard_grab(self, owner_events, time)
-    VALUE self, owner_events, time;
-{
-    gdk_keyboard_grab(_SELF(self), RTEST(owner_events), NUM2INT(time));
-    return self;
-}
-
-static VALUE
-gdkwin_keyboard_ungrab(self, time)
-    VALUE self, time;
-{
-    gdk_keyboard_ungrab(NUM2INT(time));
-    return self;
-}
 
 /* Properties */
 static VALUE
@@ -863,10 +826,6 @@ Init_gtk_gdk_window()
    rb_define_method(gdkWindow, "set_decorations", gdkwin_set_decorations, 1);
    rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
    rb_define_method(gdkWindow, "toplevels", gdkwin_get_toplevels, 0);
-   rb_define_method(gdkWindow, "pointer_grab", gdkwin_pointer_grab, 5);
-   rb_define_method(gdkWindow, "pointer_ungrab", gdkwin_pointer_ungrab, 1);
-   rb_define_method(gdkWindow, "keyboard_grab", gdkwin_keyboard_grab, 2);
-   rb_define_method(gdkWindow, "keyboard_ungrab", gdkwin_keyboard_ungrab, 1);
    rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, 4);
    rb_define_method(gdkWindow, "property_get", gdkwin_prop_get, 5);
    rb_define_method(gdkWindow, "property_delete", gdkwin_prop_delete, 1);

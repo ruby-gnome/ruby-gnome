@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:13 $
+  $Date: 2002/10/31 17:08:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -58,7 +58,7 @@ colorsel_get_previous_color(self)
 }
 
 static VALUE
-colorsel_get_is_adjusting(self)
+colorsel_is_adjusting(self)
     VALUE self;
 {
     return gtk_color_selection_is_adjusting(_SELF(self)) ? Qtrue : Qfalse;
@@ -95,7 +95,7 @@ Init_gtk_color_selection()
     rb_define_method(gColorSel, "set_previous_alpha", colorsel_set_previous_alpha, 1);
     rb_define_method(gColorSel, "set_previous_color", colorsel_set_previous_color, 1);
     rb_define_method(gColorSel, "previous_color", colorsel_get_previous_color, 0);
-    rb_define_method(gColorSel, "adjusting?", colorsel_get_is_adjusting, 0);
+    rb_define_method(gColorSel, "adjusting?", colorsel_is_adjusting, 0);
 
     G_DEF_SETTERS(gColorSel);
 }

@@ -2,23 +2,28 @@
 
 =begin
 Sample script using Gtk::Socket and Gtk::Plug.
+
+ $ ruby t-gtksocket.rb
+
 Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
+
+$Id: t-gtkplug.rb,v 1.2 2002/10/31 17:08:29 mutoh Exp $
 =end
 
-require 'gtk'
+require 'gtk2'
 
 class MyGtkPlug
 	def initialize(xid, plug)
 		plug = "Button" if plug.nil?
 		if xid.nil?
-			@window = Gtk::Window.new Gtk::WINDOW_TOPLEVEL
+			@window = Gtk::Window.new
 			@window.set_title "Gtk::Plug Test"
 			@window.set_default_size 250, 50
 		else
 			@window = Gtk::Plug.new xid.to_i
 		end
 		@window.set_policy true, true, false
-		@window.set_position Gtk::WIN_POS_CENTER
+		@window.set_window_position Gtk::Window::POS_CENTER
 		@window.signal_connect "delete_event" do Gtk::main_quit end
 		@vbox = Gtk::VBox.new true, 5
 		@window.add @vbox

@@ -2,10 +2,10 @@
   xbm_cursor.rb - Gdk::Cursor sample script.
 
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
-  This program is licenced under the same licence as Ruby-GNOME.
+  This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2002/05/21 17:32:21 $
-  $Id: xbm_cursor.rb,v 1.2 2002/05/21 17:32:21 mutoh Exp $
+  $Date: 2002/10/31 17:08:29 $
+  $Id: xbm_cursor.rb,v 1.3 2002/10/31 17:08:29 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -35,7 +35,7 @@ bg = Gdk::Color.new(65535, 65535, 0)
 
 cursor = Gdk::Cursor.new(source, mask, fg, bg, 10, 10)
 
-window.set_usize(200,100).show_all
+window.set_default_size(200,100).show_all
 window.window.set_cursor(cursor)
 
 Gtk.main

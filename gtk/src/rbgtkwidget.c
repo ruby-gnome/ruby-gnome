@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:36 $
+  $Date: 2002/10/31 17:08:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -865,7 +865,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "pango_context", widget_get_pango_context, 0);
     rb_define_method(gWidget, "create_pango_layout", widget_create_pango_layout, 1);
     rb_define_method(gWidget, "render_icon", widget_render_icon, 3);
-    rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 0);
+    rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 4);
     rb_define_method(gWidget, "reset_shapes", widget_reset_shapes, 0);
     rb_define_method(gWidget, "set_app_paintable", widget_set_app_paintable, 1);
     rb_define_method(gWidget, "set_double_buffered", widget_set_double_buffered, 1);

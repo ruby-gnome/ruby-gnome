@@ -1,6 +1,14 @@
-2002-10-31  Masao Mutoh  <mutoh@highway.ne.jp>
+2002-11-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtktextiter.c (Init_gtk_textiter): 
+	* sample/texthook.rb, text.rb, testim.rb: Removed. 
+	* sample/calendar.rb, cursor.rb, drawing.rb, xbm_cursor.rb: Follow Ruby/GTK2.
+	* src/rbgdkwindow.c, src/rbgdk.c: Move Gdk::Window#pointer_grab/ungrab to 
+	Gdk.pointer_grab/ungrab, Gdk::Window#keyboard_grab/ungrab to 
+	Gdk.keyboard_grab/ungrab, 
+	* src/rbgdk.c: Gdk.pointer_grabbed? -> Gdk.pointer_is_grabbed?.
+	* src/rbgdkevent.c: Gdk::EventMotion#is_hint -> hint?. 
+	* src/rbgtkwidget.c: Fix parameter number of Gtk::Widget#queue_draw_area.
+	* src/rbgtkselection.c: Add file.
 	* src/rbgtktextiter.c: Rename is_foo? to foo?. 
 	* src/rbgtkstatusbar.c: Rename set_resize_grip to set_has_resize_grip, 
 	resize_grip? to has_resize_grip? 

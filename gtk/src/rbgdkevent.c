@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/10/17 15:23:10 $
+  $Date: 2002/10/31 17:08:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -649,7 +649,7 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "x", gdkeventmotion_x, 0);
     rb_define_method(ev, "y", gdkeventmotion_y, 0);
     rb_define_method(ev, "state", gdkeventmotion_state, 0);
-    rb_define_method(ev, "is_hint", gdkeventmotion_is_hint, 0);
+    rb_define_method(ev, "hint?", gdkeventmotion_is_hint, 0);
     rb_define_method(ev, "x_root", gdkeventmotion_x_root, 0);
     rb_define_method(ev, "y_root", gdkeventmotion_y_root, 0);
 

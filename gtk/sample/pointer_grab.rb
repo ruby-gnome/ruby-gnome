@@ -4,8 +4,8 @@
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2002/05/21 17:32:21 $
-  $Id: pointer_grab.rb,v 1.2 2002/05/21 17:32:21 mutoh Exp $
+  $Date: 2002/10/31 17:08:29 $
+  $Id: pointer_grab.rb,v 1.3 2002/10/31 17:08:29 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -16,18 +16,18 @@ cursor = Gdk::Cursor.new(Gdk::Cursor::WATCH)
 button1 = Gtk::Button.new("Grab Window!")
 button2 = Gtk::Button.new("Ungrab Window!")
 
-button1.signal_connect(Gtk::Button::SIGNAL_CLICKED) do 
-  window.window.pointer_grab(true, Gdk::BUTTON_PRESS_MASK, 
-			     window.window, cursor, Gdk::CURRENT_TIME)
-  p window.window.pointer_is_grabbed?
+button1.signal_connect('clicked') do 
+  Gdk.pointer_grab(window.window, true, Gdk::Event::BUTTON_PRESS_MASK, 
+			     window.window, cursor, Gdk::Event::CURRENT_TIME)
+  p Gdk.pointer_is_grabbed?
 end
 
-button2.signal_connect(Gtk::Button::SIGNAL_CLICKED) do
-  window.window.pointer_ungrab(Gdk::CURRENT_TIME)
-  p window.window.pointer_is_grabbed?
+button2.signal_connect('clicked') do
+  Gdk.pointer_ungrab(Gdk::Event::CURRENT_TIME)
+  p Gdk.pointer_is_grabbed?
 end
 
 window.add(Gtk::VBox.new.add(button1).add(button2))
-window.set_usize(200,100).show_all
+window.set_default_size(200,100).show_all
 
 Gtk.main

@@ -1,20 +1,32 @@
+=begin
+  calendar.rb - Gtk::Calendar sample script.
+
+  Copyright (c) 2002 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: calendar.rb,v 1.3 2002/10/31 17:08:28 mutoh Exp $
+=end
+
 require 'gtk2'
 
 cal = Gtk::Calendar.new
-w = Gtk::Window.new(Gtk::WINDOW_TOPLEVEL)
+w = Gtk::Window.new
 w.add(cal).show_all.signal_connect('delete_event') do
   Gtk::main_quit
 end
-cal.select_month(7, 1974)
-cal.select_day(15)
-cal.mark_day(20)
-cal.clear_marks
-#cal.display_options(Gtk::Calendar::SHOW_HEADING |
-#		    Gtk::Calendar::SHOW_DAY_NAMES |
-#		    Gtk::Calendar::NO_MONTH_CHANGE |
-#		    Gtk::Calendar::SHOW_WEEK_NUMBERS |
-#		    Gtk::Calendar::WEEK_START_MONDAY)
-year, month, day = cal.get_date
+
+date = Time.new
+
+cal.select_month(date.month, date.year)
+cal.select_day(date.day)
+cal.mark_day(date.day)
+#cal.clear_marks
+cal.display_options(Gtk::Calendar::SHOW_HEADING |
+		    Gtk::Calendar::SHOW_DAY_NAMES |
+		    Gtk::Calendar::NO_MONTH_CHANGE |
+		    Gtk::Calendar::SHOW_WEEK_NUMBERS |
+		    Gtk::Calendar::WEEK_START_MONDAY)
+year, month, day = cal.date
 print "this is #{month} #{day}, #{year}\n"
 
 cal.signal_connect('day_selected') do

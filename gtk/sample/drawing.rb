@@ -1,3 +1,12 @@
+=begin
+  drawing.rb - Gtk::Drawing sample script.
+
+  Copyright (c) 2002 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: drawing.rb,v 1.3 2002/10/31 17:08:29 mutoh Exp $
+=end
+
 require 'gtk2'
 
 class Canvas < Gtk::DrawingArea
@@ -12,7 +21,7 @@ class Canvas < Gtk::DrawingArea
   def expose_event(w,e)
     if ! @buffer.nil?
       rec = e.area
-      w.window.draw_pixmap(@bgc, @buffer, rec.x, rec.y,
+      w.window.draw_drawable(@bgc, @buffer, rec.x, rec.y,
 			   rec.x, rec.y, rec.width, rec.height)
     end
     false
@@ -21,22 +30,21 @@ class Canvas < Gtk::DrawingArea
   def clear(b = @buffer)
     return if b.nil?
 
-    g = b.get_geometry
+    g = b.size
     @bgc = self.style.bg_gc(self.state) if @bgc.nil?
-    if (g[2] > 0 && g[3] > 0)
-      b.draw_rectangle(@bgc, true, 0,0, g[2], g[3])
+    if (g[0] > 0 && g[1] > 0)
+      b.draw_rectangle(@bgc, true, 0,0, g[0], g[1])
     end
   end
 
   def configure_event(w,e)
-    g = w.window.get_geometry
+    g = w.window.geometry
     if (g[2] > 0 && g[3] > 0)
       b = Gdk::Pixmap::new(w.window, g[2], g[3], -1)
       clear(b)
       if not @buffer.nil?
-	g = @buffer.get_geometry
-	b.draw_pixmap(@bgc, @buffer, 0,0,
-		      g[0], g[1], g[2], g[3])
+	g = @buffer.size
+	b.draw_drawable(@bgc, @buffer, 0, 0, 0, 0, g[0], g[1])
       end
       @buffer = b
     end
@@ -48,7 +56,7 @@ class A < Canvas
   def initialize
     super
     signal_connect("button_press_event") { |w,e| pressed(w,e) }
-    set_events(Gdk::BUTTON_PRESS_MASK)
+    set_events(Gdk::Event::BUTTON_PRESS_MASK)
   end
 
   def pressed(widget, ev)
@@ -64,7 +72,7 @@ class A < Canvas
 	    then [@last.y, ev.y]
 	    else [ev.y,    @last.y]
 	    end
-      widget.draw(Gdk::Rectangle.new(x1,y1,x2-x1+1,y2-y1+1))
+      widget.queue_draw_area(x1, y1, x2 - x1 + 1, y2 - y1 + 1)
     end
     @last = nil
     @last = ev
@@ -72,7 +80,7 @@ class A < Canvas
   end
 end
 
-window = Gtk::Window.new(Gtk::WINDOW_TOPLEVEL)
+window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
 window.signal_connect("delete_event") { exit }
 window.signal_connect("destroy_event") { exit }
 window.realize

@@ -1,43 +1,35 @@
 #!/usr/local/bin/ruby
+=begin
+  helloworld.rb - Ruby/GTK first sample script.
 
-#
-# example-start helloworld helloworld.rb
-# see Gtk+ tutorial.
-#
+  Copyright (c) 2002 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: helloworld.rb,v 1.5 2002/10/31 17:08:29 mutoh Exp $
+=end
 
 require 'gtk2'
 
-def hello(widget)
+button = Gtk::Button.new("Hello World")
+button.signal_connect("clicked") {
   print ("Hello World\n")
-end
+}
 
-def delete_event(widget, event)
+window = Gtk::Window.new
+window.signal_connect("delete_event") {
   print ("delete event occurred\n")
-  TRUE
-# FALSE
-end
+  #true
+  false
+}
 
-def destroy(widget)
-  p "destroy"
+window.signal_connect("destroy") {
+  print ("destroy event occurred\n")
   exit
-end
+}
 
-def main
-  window = Gtk::Window::new  # create a toplevel window when argument is omitted.
-  window.signal_connect("delete_event") {|*args| delete_event(*args) }
-  window.signal_connect("destroy") {|*args| destroy(*args) } # x io error..?_?
-  window.border_width = 10
+window.border_width = 10
+window.add(button)
+window.show_all
 
-  button = Gtk::Button::new("Hello World")
-  button.signal_connect("clicked") {|*args| hello(*args) }
-  button.signal_connect("clicked") {|*args| window.destroy }
-
-  window.add(button)
-  button.show()
-  window.show()
-           
-  Gtk::main()
-end
-
-main()
+Gtk.main
 

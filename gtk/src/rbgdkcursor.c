@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/31 17:08:30 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
@@ -17,23 +17,22 @@ gdkcursor_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-	GdkCursor* cursor;
+    GdkCursor* cursor;
     VALUE source_or_type, mask, fg, bg, x, y;
 
     rb_scan_args(argc, argv, "15", &source_or_type, &mask, &fg, &bg, &x, &y);
     if (argc == 1){
-		cursor = gdk_cursor_new(NUM2INT(source_or_type));
+        cursor = gdk_cursor_new(NUM2INT(source_or_type));
     } else {
-		cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(source_or_type)), 
-		  		   		NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
-		   		 		NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR), 
-		  	   			NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR), 
-		   				NUM2INT(x), NUM2INT(y));
+        cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(source_or_type)), 
+                                            NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
+                                            NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR), 
+                                            NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR), 
+                                            NUM2INT(x), NUM2INT(y));
     }
-
-	G_INITIALIZE(self, cursor);
-
-	return Qnil;
+    G_INITIALIZE(self, cursor);
+       
+    return Qnil;
 }
 
 static VALUE
@@ -47,7 +46,7 @@ gdkcursor_is_pixmap(self)
 void
 Init_gtk_gdk_cursor()
 {
-	VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
+    VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
     rb_define_method(gdkCursor, "initialize", gdkcursor_initialize, -1);
     rb_define_method(gdkCursor, "pixmap?", gdkcursor_is_pixmap, 0);
