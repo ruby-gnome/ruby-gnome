@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/13 13:28:28 $
+  $Author: kzys $
+  $Date: 2003/10/14 13:27:56 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -574,9 +574,9 @@ static VALUE
 gdkwin_get_user_data(self)
     VALUE self;
 {
-    GObject data;
+    GObject *data = NULL;
     gdk_window_get_user_data(_SELF(self), (gpointer)&data);
-    return GOBJ2RVAL(&data);
+    return GOBJ2RVAL(data);
 }
 
 static VALUE
