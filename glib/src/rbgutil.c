@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/03/03 17:09:43 $
+  $Date: 2004/03/03 17:21:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -166,7 +166,7 @@ Init_gutil()
         "    ary.each do |m|\n"
         "      if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and klass.instance_method(m).arity == 1\n"
 	"        begin\n"
-        "          klass.module_eval(\"def self.#{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
+        "          klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
         "        rescue SyntaxError\n"
         "          $stderr.print \"Couldn't create #{klass}\\##{$1}=(v).\\n\" if $DEBUG\n"
         "        end\n"
