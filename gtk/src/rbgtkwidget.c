@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:37 $
+  $Date: 2002/09/11 16:35:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1001,9 +1001,4 @@ Init_gtk_widget()
                                widget_pop_composite_child, 0);
     rb_define_singleton_method(gWidget, "push_composite_child",
                                widget_push_composite_child, 0);
-
-    /* private method */
-    /* need rb_call_super, which will hopefully be implemented in Ruby 1.5 - yashi
-	   rb_define_private_method(gWidget, "signal_setup_args", 4);
-    */
 }

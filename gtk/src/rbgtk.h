@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/11 16:35:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,7 +55,6 @@ extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
 extern GSList* ary2gslist(VALUE ary);
 extern VALUE gslist2ary(GSList *list);
-extern VALUE arg_to_value(GtkArg* arg);
 
 extern ID id_relative_callbacks;
 extern ID id_call;
