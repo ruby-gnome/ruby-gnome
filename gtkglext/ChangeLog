@@ -4,6 +4,7 @@
 	* src/lib/gtkglext.rb: require 'opengl' added
 	* sample/*: removed require 'opengl' as it is now automatic
 	* All files added to CVS - First import 8-)
+	* sample/gtkglut.rb: Added
 
 2003-08-16 Vincent Isambart <isambart@netcourrier.com>
 
