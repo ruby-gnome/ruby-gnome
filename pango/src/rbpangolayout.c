@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 18:44:14 $
+  $Date: 2005/01/22 16:15:20 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -105,6 +105,7 @@ layout_set_font_description(self, desc)
     return self;
 }
 
+#ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
 static VALUE
 layout_get_font_description(self)
     VALUE self;
@@ -112,6 +113,7 @@ layout_get_font_description(self)
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
     return desc ? BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
 }
+#endif
 
 static VALUE
 layout_set_width(self, width)
@@ -386,7 +388,9 @@ Init_pango_layout()
     rb_define_method(pLayout, "set_attributes", layout_set_attributes, 1);
     rb_define_method(pLayout, "attributes", layout_get_attributes, 0);
     rb_define_method(pLayout, "set_font_description", layout_set_font_description, 1);
+#ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
     rb_define_method(pLayout, "font_description", layout_get_font_description, 0);
+#endif
     rb_define_method(pLayout, "set_width", layout_set_width, 1);
     rb_define_method(pLayout, "width", layout_get_width, 0);
     rb_define_method(pLayout, "set_wrap", layout_set_wrap, 1);

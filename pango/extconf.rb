@@ -10,6 +10,7 @@ check_win32
 
 have_func("pango_layout_iter_get_type")
 have_func("pango_layout_set_ellipsize")
+have_func("pango_layout_get_font_description")
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src'].map{|d|
