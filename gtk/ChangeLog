@@ -1,3 +1,9 @@
+2004-06-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenu.c, rbgtkmenushell.c, rbgtkmessagedialog.c: 
+	Fix a compilation error for GTK+-2.2 or earilier.
+	Reported by Ryan Platte.
+
 2004-06-16  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdk.c:
@@ -14,6 +20,7 @@
 
 2004-06-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkradiotoolbutton.c: Added. 
 	* src/rbgtktoolbar.c: Added Gtk::Toolbar#item_index, #n_item, #drop_index,
 	#set_drop_highlight_item, #relief_style for GTK+-2.4.
 	* src/rbgtkmenushell.c: Added Gtk::MenuShell#select_first for GTK+-2.2.

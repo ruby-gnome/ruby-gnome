@@ -4,7 +4,7 @@
   rbgtkmenushell.c -
 
   $Author: mutoh $
-  $Date: 2004/06/07 16:09:31 $
+  $Date: 2004/06/19 16:21:34 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -84,7 +84,7 @@ mshell_activate_item(self, menu_item, force_deactivate)
                                  RTEST(force_deactivate));
     return self;
 }
-
+#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 mshell_cancel(self)
     VALUE self;
@@ -92,7 +92,7 @@ mshell_cancel(self)
     gtk_menu_shell_cancel(_SELF(self));
     return self;
 }
-
+#endif
 void 
 Init_gtk_menu_shell()
 {

@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2004/06/07 16:09:31 $
+  $Date: 2004/06/19 16:21:34 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -215,7 +215,7 @@ menu_get_attach_widget(self)
 {
     return GOBJ2RVAL(gtk_menu_get_attach_widget(_SELF(self)));
 }
-
+#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 menu_set_monitor(self, monitor_num)
     VALUE self, monitor_num;
@@ -223,7 +223,7 @@ menu_set_monitor(self, monitor_num)
     gtk_menu_set_monitor(_SELF(self), NUM2INT(monitor_num));
     return self;
 }
-
+#endif
 void 
 Init_gtk_menu()
 {

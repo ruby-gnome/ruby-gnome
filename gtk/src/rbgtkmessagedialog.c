@@ -4,7 +4,7 @@
   rbgtkmessagedialog.c -
 
   $Author: mutoh $
-  $Date: 2004/05/24 17:22:58 $
+  $Date: 2004/06/19 16:21:34 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -41,7 +41,7 @@ GtkWidget*  gtk_message_dialog_new_with_markup
                                              const gchar *message_format,
                                              ...);
 */
-
+#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 mdiag_set_markup(self, str)
     VALUE self, str;
@@ -49,15 +49,16 @@ mdiag_set_markup(self, str)
     gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(RVAL2GOBJ(self)), RVAL2CSTR(str));
     return self;
 }
-
+#endif
 void 
 Init_gtk_message_dialog()
 {
     VALUE gMessageDialog = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 
     rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
+#if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gMessageDialog, "set_markup", mdiag_set_markup, 1);
-
+#endif
     G_DEF_SETTERS(gMessageDialog);
 
     /* GtkMessageType */
