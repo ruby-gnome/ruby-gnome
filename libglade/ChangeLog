@@ -1,6 +1,15 @@
+2003-08-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: Fix GLadeXML.new parameter of block/proc.
+
+2003-08-16  Soila Jani <soila@cs.tut.fi>
+
+	* rbglade.c, lib/libglade2.rb: Add a 'after' parameter to GladeXML.connect.
+	It allows to connect signal_connect_after().
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 	* src/rbgtk.h: Remove a line for including rbgobject.h.
 	(because it is included by rbgtk.h)
 

@@ -11,19 +11,25 @@ class GladeXML
     return handler.gsub(/[-\s]/, "_")
   end
 
-  def connect(source, target, signal, handler, data)
+  def connect(source, target, signal, handler, data, after)
     handler = canonical_handler(handler)
     if target
       signal_proc = target.method(handler)
     else
       signal_proc = @handler_proc.call(handler)
     end
+
+    sig_conn_proc = source.method(:signal_connect)
+    if after
+      sig_conn_proc = source.method(:signal_connect_after)
+    end
+
     if signal_proc
       case signal_proc.arity
       when 0
-        source.signal_connect(signal) {signal_proc.call}
+        sig_conn_proc.call(signal) {signal_proc.call}
       else
-        source.signal_connect(signal, &signal_proc)
+        sig_conn_proc.call(signal, &signal_proc)
       end
     elsif $DEBUG
       puts "Undefined handler: #{handler}"

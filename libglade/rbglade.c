@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2003/05/27 14:49:14 $
+  $Date: 2003/08/15 15:52:32 $
 
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project
@@ -27,10 +27,10 @@ static VALUE instances;
 static void
 xml_connect(const gchar *handler_name, GObject *_source,
             const gchar *signal_name, const gchar *signal_data,
-            GObject *_target, gboolean after, gpointer user_data)
+            GObject *_target, gboolean _after, gpointer user_data)
 {
     VALUE self = (VALUE)user_data;
-    VALUE source, target, signal, handler, data;
+    VALUE source, target, after, signal, handler, data;
     
     source = _source? GOBJ2RVAL(_source) : Qnil;
     target = _target? GOBJ2RVAL(_target) : Qnil;
@@ -38,8 +38,9 @@ xml_connect(const gchar *handler_name, GObject *_source,
     signal = signal_name ? rb_str_new2(signal_name) : Qnil;
     handler = handler_name ? rb_str_new2(handler_name) : Qnil;
     data = signal_data ? rb_str_new2(signal_data) : Qnil;
+    after = CBOOL2RVAL(_after);
     
-    rb_funcall(self, rb_intern("connect"), 5, source, target, signal, handler, data); 
+    rb_funcall(self, rb_intern("connect"), 6, source, target, signal, handler, data, after); 
 }
 
 static VALUE
@@ -59,11 +60,14 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     char *root;
     char *domain;
 
-    rb_scan_args(argc, argv, "12&", &fileString, &rootString, &domainString, &handler_proc);
+    rb_scan_args(argc, argv, "13", &fileString, &rootString, &domainString, &handler_proc);
 
     fileName = NIL_P(fileString) ? 0 : STR2CSTR(fileString);
     root = NIL_P(rootString) ? 0 : STR2CSTR(rootString);
     domain = NIL_P(domainString) ? 0 : STR2CSTR(domainString);
+
+    if (NIL_P(handler_proc))
+        handler_proc = G_BLOCK_PROC();
 
     glade_init();
 
