@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2003/09/01 16:10:41 $
+ * $Date: 2004/03/21 14:08:41 $
  *
  *****************************************************************************/
 
@@ -226,14 +226,15 @@ client_unset(self, key)
 	VALUE self;
 	VALUE key;
 {
-	return CBOOL2RVAL(gconf_client_unset(_SELF(self), RVAL2CSTR(key),
-					     NULL));
+	GError* error = NULL;
+	if (! gconf_client_unset(_SELF(self), RVAL2CSTR(key), &error))
+		RAISE_GERROR(error);
+	return self;
 }
 
 static VALUE
 client_all_entries(self, dir)
-	VALUE self, dir;
-{
+	VALUE self, dir; {
 	GSList *entries, *i;
 	VALUE entry_ary;
 

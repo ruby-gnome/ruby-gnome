@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2003/08/08 19:32:06 $
+ * $Date: 2004/03/21 14:08:41 $
  *
  *****************************************************************************/
 
@@ -55,12 +55,17 @@ rbgconf_entry_copy(entry)
 	 * chance?
 	 */
 	GConfEntry *new_entry;
+	GConfValue *value;
 
 	g_return_val_if_fail(entry != NULL, NULL);
 
+	value = gconf_entry_get_value(entry);
+	if (value != NULL) {
+		value = gconf_value_copy(value);
+	}
 	new_entry = gconf_entry_new_nocopy(
 			g_strdup(gconf_entry_get_key(entry)),
-			gconf_value_copy(gconf_entry_get_value(entry)));
+			value);
 	
 	return new_entry;
 	/*
@@ -100,7 +105,12 @@ static VALUE
 entry_get_value(self)
 	VALUE self;
 {
-	return GCVAL2RVAL(gconf_value_copy(gconf_entry_get_value(_SELF(self))));
+	GConfValue *value = gconf_entry_get_value(_SELF(self));
+	if (value != NULL) {
+		return GCVAL2RVAL(gconf_value_copy(value));
+	} else {
+		return Qnil;
+	}
 }
 
 static VALUE
