@@ -1,5 +1,5 @@
 /* -*- c-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-help.c,v 1.2 2002/10/30 13:36:48 tkubo Exp $ */
+/* $Id: rbgnome-help.c,v 1.3 2002/11/01 15:25:40 tkubo Exp $ */
 /* based on libgnome/gnome-help.h */
 
 /* Gnome::Help for Ruby/GNOME2
@@ -31,7 +31,7 @@ gnohelp_m_display(self, file_name, link_id)
                                          NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                          &error);
     if (!result)
-        rbgutil_raise_gerror(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -46,7 +46,7 @@ gnohelp_m_display_with_doc_id(self, pgm, doc_id, file_name, link_id)
                                                      NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                                      &error);
     if (!result)
-        rbgutil_raise_gerror(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -61,7 +61,7 @@ gnohelp_m_display_desktop(self, pgm, doc_id, file_name, link_id)
                                                  NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                                  &error);
     if (!result)
-        rbgutil_raise_gerror(error);
+        RAISE_GERROR(error);
     return self;
 }
 

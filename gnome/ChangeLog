@@ -1,3 +1,8 @@
+2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-help.c: use RAISE_GERROR instead of
+	rbgutil_raise_gerror()
+
 2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
 
 	* sample/calculator.rb, sample/canvas-arrowhead.rb,
