@@ -4,7 +4,7 @@
   rbgtkiconsize.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:03 $
+  $Date: 2003/08/31 17:10:08 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -42,6 +42,7 @@ static VALUE
 icon_size_register(self, name, width, height)
     VALUE self, name, width, height;
 {
+    /* XXXX FIXME This should be GENUM2RVAL */
     return INT2FIX(gtk_icon_size_register(RVAL2CSTR(name),
                                           NUM2INT(width),
                                           NUM2INT(height)));

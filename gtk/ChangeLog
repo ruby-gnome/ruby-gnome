@@ -5,7 +5,7 @@
 	rbgtktreesortable.c, rbgtkcellrenderer.c, rbgtktoolbar.c, rbgtknotebook.c, 
 	rbgtktable.c, rbgtkscrolledwindow.c, rbgtkarrow.c, rbgtkcalendar.c, 
 	rbgtkbox.c, rbgtkwidget.c, rbgdkdragcontext.c: Apply enum/flags changes.
-	* sample/misc/cursor.rb: Follow enum/flags changes.
+	* sample/misc/cursor.rb, rbgtkaccelkey.c: Follow enum/flags changes.
 	* src/rbgtktreeiter.c (Init_gtk_treeiter): Define Gtk::TreeIter#[], #[]=.
 	* sample/misc/treeview.rb, listview.rb: Use Gtk::TreeIter#[], #[]=.
 

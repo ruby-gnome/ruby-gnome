@@ -4,7 +4,7 @@
   rbgtkaccelkey.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/08/31 17:10:08 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -63,7 +63,7 @@ static VALUE
 accel_key_get_mods(self)
     VALUE self;
 {
-    return INT2FIX(_SELF(self)->accel_mods);
+    return GFLAGS2RVAL(_SELF(self)->accel_mods, GDK_TYPE_MODIFIER_TYPE);
 }
 
 static VALUE
@@ -86,7 +86,7 @@ static VALUE
 accel_key_set_mods(self, mods)
     VALUE self, mods;
 {
-    _SELF(self)->accel_mods = FIX2INT(mods);
+    _SELF(self)->accel_mods = RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE);
     return self;
 }
 

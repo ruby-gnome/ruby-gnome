@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/08/31 17:10:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -228,7 +228,7 @@ static VALUE
 tbar_set_icon_size(self, size)
     VALUE self, size;
 {
-    gtk_toolbar_set_icon_size(_SELF(self), FIX2INT(size));
+    gtk_toolbar_set_icon_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
@@ -236,7 +236,7 @@ static VALUE
 tbar_get_icon_size(self)
     VALUE self;
 {
-    return INT2FIX(gtk_toolbar_get_icon_size(_SELF(self)));
+    return GENUM2RVAL(gtk_toolbar_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE

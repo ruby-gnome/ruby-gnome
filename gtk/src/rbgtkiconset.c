@@ -4,7 +4,7 @@
   rbgtkiconset.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/08/31 17:10:08 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -66,11 +66,10 @@ icon_set_render_icon(argc, argv, self)
 
     rb_scan_args(argc, argv, "42", &style, &direction, &state, &size, &widget, &detail);
     return GOBJ2RVAL(gtk_icon_set_render_icon(_SELF(self),
-//                                              NIL_P(style) ? NULL : RVAL2GOBJ(style),
                                               RVAL2GOBJ(style),
-                                              FIX2INT(direction),
-                                              FIX2INT(state),
-                                              FIX2INT(size),
+                                              RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION),
+                                              RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
+                                              RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
                                               NIL_P(widget) ? NULL : RVAL2GOBJ(widget),
                                               NIL_P(detail) ? NULL : RVAL2CSTR(detail)));
 }
