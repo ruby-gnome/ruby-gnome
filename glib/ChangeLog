@@ -1,4 +1,4 @@
-2002-08-31  Masao Mutoh <mutoh@highway.ne.jp>
+2002-08-29  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgobj_boxed.c: Add GLib::Boxed.new, GLib::Boxed#allocate.
 
