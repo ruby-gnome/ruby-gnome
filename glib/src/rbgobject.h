@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2002/09/01 13:19:22 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:04:29 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -23,7 +23,7 @@ extern "C" {
 
 /* macros */
 
-#define RBGOBJ_INITIALIZE(obj, cobj)\
+#define G_INITIALIZE(obj, cobj)\
  (rbgobj_initialize_object(obj, (gpointer)cobj))
 
 #define G_DEF_CLASS(gtype, name, module)\
@@ -35,6 +35,12 @@ extern "C" {
  (rbgobj_define_class(gtype, name, module, 0, 0))
 #define G_DEF_INTERFACE2(gtype, name, module, mark, free)\
  (rbgobj_define_class(gtype, name, module, mark, free))
+
+#define G_RELATIVE(obj, rel) (rbgobj_add_relative(obj, rel))
+#define G_RELATIVE2(obj, rel, id, hash_key)\
+ (rbgobj_add_relative_removable(obj, rel, id, hash_key))
+#define G_REMOVE_RELATIVE(obj, id, hash_key)\
+ (rbgobj_remove_relative(obj, id, hash_key))
 
 #define CLASS2CINFO(klass) (rbgobj_lookup_class(klass))
 #define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype))

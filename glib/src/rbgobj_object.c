@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:04:28 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -204,7 +204,7 @@ gobj_initialize(argc, argv, self)
         //gtk_object_sink(gobj);
     }
 
-    RBGOBJ_INITIALIZE(self, gobj);
+    G_INITIALIZE(self, gobj);
     return Qnil;
 }
 

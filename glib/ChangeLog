@@ -1,5 +1,10 @@
 2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
 
+	* src/rbgobject.h, src/rbgobj_object.c: Rename RBGOBJ_INITIALIZE to G_INITIALIZE.
+	* src/rbgobject.h: Add G_RELATIVE, G_RELATIVE2, G_REMOVE_RELATIVE.
+
+2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
+
 	* src/rbobjmanager.[ch]: remove files.
 	* src/rbglib.[ch]: remove Init_objmanager().
 
