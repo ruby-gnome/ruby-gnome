@@ -1,3 +1,7 @@
+2005-01-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcombo.c: Fix a memory leak reported by DaVinci.
+
 2005-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombobox.c: Added Gtk::ComboBox#active_text,

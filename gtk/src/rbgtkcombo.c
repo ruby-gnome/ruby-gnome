@@ -4,7 +4,7 @@
   rbgtkcombo.c -
 
   $Author: mutoh $
-  $Date: 2004/05/30 16:41:13 $
+  $Date: 2005/01/19 17:03:29 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -25,13 +25,10 @@ combo_set_popdown_strings(self, ary)
 
     Check_Type(ary, T_ARRAY);
     for (i=0; i<RARRAY(ary)->len; i++) {
-	/* check to avoid memory leak */
-	RVAL2CSTR(RARRAY(ary)->ptr[i]);
-    }
-    for (i=0; i<RARRAY(ary)->len; i++) {
         glist = g_list_append(glist, RVAL2CSTR(RARRAY(ary)->ptr[i]));
     }
     gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);
+    g_list_free(glist);
     return self;
 }
 
