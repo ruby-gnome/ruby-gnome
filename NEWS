@@ -1,3 +1,71 @@
+Ruby-GNOME2-0.11.0 (2004-11-14)
+
+  * Ruby/GLib [Kouhei Sutou, Vincent Isambart, Masao Mutoh]
+      - Fix bugs, Improved, Added some methods.
+
+  * Ruby/ATK [Vincent Isambart, Masao Mutoh]
+      - Support ATK+-1.7.x.
+      - Fixed bugs, Improved, Added some methods.  
+
+  * Ruby/Pango [Geoff Youngs, Vincent Isambart, Masao Mutoh]
+      - Improved, Fix bugs.
+
+  * Ruby/GdkPixbuf [Geoff Youngs, Masao Mutoh]
+      - Support GTK+-2.4.x.
+      - Fixed bugs, Improved, Added some methods. 
+
+  * Ruby/GTK [Geoff Youngs, Vincent Isambart, Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods.
+
+  * Ruby/GNOME [Masao Mutoh]
+      - Improved.
+
+  * Ruby/GnomeCanvas [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods.
+
+  * Ruby/Libglade [Masao Mutoh]
+      - Improved.
+
+  * Ruby/Libart [Vincent Isambart, Masao Mutoh]
+      - Improved to support ruby-1.7.x or later.
+      - Changed: [Masao Mutoh]
+         Art::Canvas::Color.new -> Art::Canvas.color.
+         Art::Vpath::Dash -> Art::VpathDash.
+
+  * Ruby/GConf [Masao Mutoh]
+      - Improved. 
+
+  * Ruby/GStreamer [Masao Mutoh]
+      - Improved. 
+
+  * Ruby/GnomeVFS [Masao Mutoh]
+      - Improved. 
+
+  * Ruby/GtkHtml2 [Masao Mutoh]
+      - Improved. 
+
+  * Ruby/GtkGLExt [Vincent Isambart]
+      - Improved. 
+
+  * Ruby/Libgda 
+      - None.
+
+  * Ruby/PanelApplet 
+      - None.
+
+  * Ruby/GtkSourceView [Vincent Isambart, Masao Mutoh]
+      - Fixed bugs.
+
+  * Ruby/GnomePrint [NEW]
+      - Added. [Kouhei Sutou]
+
+  * Ruby/GnomePrintUI [NEW: Alpha release]
+      - Added. [Kouhei Sutou]
+
+  * Ruby/RSVG [NEW: Alpha release]
+      - Added. [Kouhei Sutou]
+
+
 Ruby-GNOME2-0.10.1 (2004-08-16)
 
   * Ruby/GdkPixbuf [Masao Mutoh]

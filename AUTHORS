@@ -26,7 +26,7 @@ KATO Kazuyoshi <kadu@zb.wakwak.com>
      Ruby/GTK(Especially gtk-demo), Gdk::Pixbuf.
 
 Kouhei Sutou  <kou@cozmixng.org>
-     Ruby/GnomePrint(M)
+     Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M).
 
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
