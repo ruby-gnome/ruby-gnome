@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/11/06 10:44:38 $
+  $Author: mutoh $
+  $Date: 2005/01/11 17:01:40 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -120,6 +120,31 @@ gtkdrag_dest_set_target_list(self, widget, target_list)
 
     return self;
 }
+
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gtkdrag_dest_add_text_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_dest_add_text_targets(RVAL2WIDGET(widget));
+    return self;
+}
+static VALUE
+gtkdrag_dest_add_image_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_dest_add_image_targets(RVAL2WIDGET(widget));
+    return self;
+}
+static VALUE
+gtkdrag_dest_add_uri_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_dest_add_uri_targets(RVAL2WIDGET(widget));
+    return self;
+}
+#endif
 
 static VALUE
 gtkdrag_finish(self, context, success, del, time)
@@ -291,6 +316,30 @@ gtkdrag_source_get_target_list(self, widget)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gtkdrag_source_add_text_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_source_add_text_targets(RVAL2WIDGET(widget));
+    return self;
+}
+static VALUE
+gtkdrag_source_add_image_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_source_add_image_targets(RVAL2WIDGET(widget));
+    return self;
+}
+static VALUE
+gtkdrag_source_add_uri_targets(self, widget)
+    VALUE self, widget;
+{
+    gtk_drag_source_add_uri_targets(RVAL2WIDGET(widget));
+    return self;
+}
+#endif
+
 void
 Init_gtk_drag()
 {
@@ -302,6 +351,11 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "dest_find_target", gtkdrag_dest_find_target, -1);
     rb_define_module_function(mGtkDrag, "dest_get_target_list", gtkdrag_dest_get_target_list, 1);
     rb_define_module_function(mGtkDrag, "dest_set_target_list", gtkdrag_dest_set_target_list, 2);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_module_function(mGtkDrag, "dest_add_text_targets", gtkdrag_dest_add_text_targets, 1);
+    rb_define_module_function(mGtkDrag, "dest_add_image_targets", gtkdrag_dest_add_image_targets, 1);
+    rb_define_module_function(mGtkDrag, "dest_add_uri_targets", gtkdrag_dest_add_uri_targets, 1);
+#endif
     rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
     rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);
     rb_define_module_function(mGtkDrag, "get_source_widget", gtkdrag_get_source_widget, 1);
@@ -317,6 +371,11 @@ Init_gtk_drag()
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_module_function(mGtkDrag, "source_set_target_list", gtkdrag_source_set_target_list, 2);
     rb_define_module_function(mGtkDrag, "source_get_target_list", gtkdrag_source_get_target_list, 1);
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_module_function(mGtkDrag, "source_add_text_targets", gtkdrag_source_add_text_targets, 1);
+    rb_define_module_function(mGtkDrag, "source_add_image_targets", gtkdrag_source_add_image_targets, 1);
+    rb_define_module_function(mGtkDrag, "source_add_uri_targets", gtkdrag_source_add_uri_targets, 1);
 #endif
     G_DEF_SETTERS(mGtkDrag);
 

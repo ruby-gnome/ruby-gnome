@@ -4,9 +4,9 @@
   rbgtkactiongroup.c -
 
   $Author: mutoh $
-  $Date: 2004/11/01 16:11:00 $
+  $Date: 2005/01/11 17:01:40 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -301,6 +301,15 @@ actiongroup_set_translation_domain(self, domain)
     gtk_action_group_set_translation_domain(_SELF(self), RVAL2CSTR(domain));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+actiongroup_translate_string(self, str)
+    VALUE self, str;
+{
+    return CSTR2RVAL(gtk_action_group_translate_string(_SELF(self), RVAL2CSTR(str)));
+}
+#endif
 #endif
 
 void 
@@ -322,7 +331,9 @@ Init_gtk_actiongroup()
     rb_define_method(gActionGroup, "add_radio_actions", actiongroup_add_radio_actions, -1);
     rb_define_method(gActionGroup, "set_translate_func", actiongroup_set_translate_func, 0);
     rb_define_method(gActionGroup, "set_translation_domain", actiongroup_set_translation_domain, 1);
-
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gActionGroup, "translate_string", actiongroup_translate_string, 1);
+#endif
     G_DEF_SETTERS(gActionGroup);
 #endif
 }

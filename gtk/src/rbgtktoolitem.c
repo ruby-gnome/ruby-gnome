@@ -4,9 +4,9 @@
   rbgtktoolitem.c -
 
   $Author: mutoh $
-  $Date: 2004/08/05 18:38:52 $
+  $Date: 2005/01/11 17:01:40 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -145,6 +145,15 @@ void        gtk_tool_item_set_is_important  (GtkToolItem *tool_item,
                                              gboolean is_important);
 gboolean    gtk_tool_item_get_is_important  (GtkToolItem *tool_item);
 */
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+toolitem_rebuild_menu(self)
+    VALUE self;
+{
+    gtk_tool_item_rebuild_menu(_SELF(self));
+    return self;
+}
+#endif
 #endif
 
 void 
@@ -167,7 +176,9 @@ Init_gtk_toolitem()
     rb_define_method(gToolItem, "retrieve_proxy_menu_item", toolitem_retrieve_proxy_menu_item, 0);
     rb_define_method(gToolItem, "get_proxy_menu_item", toolitem_get_proxy_menu_item, 1);
     rb_define_method(gToolItem, "set_proxy_menu_item", toolitem_set_proxy_menu_item, 2);
-
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gToolItem, "rebuild_menu", toolitem_rebuild_menu, 0);
+#endif
     G_DEF_SETTERS(gToolItem);
 #endif
 }

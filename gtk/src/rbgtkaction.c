@@ -4,9 +4,9 @@
   rbgtkaction.c -
 
   $Author: mutoh $
-  $Date: 2004/10/27 16:38:27 $
+  $Date: 2005/01/11 17:01:39 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -40,23 +40,23 @@ action_initialize(argc, argv, self)
 }
 
 static VALUE
-action_get_sensitive(self)
+action_is_sensitive(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gtk_action_get_sensitive(_SELF(self)));
+    return CBOOL2RVAL(gtk_action_is_sensitive(_SELF(self)));
 }
 
 static VALUE
-action_get_visible(self)
+action_is_visible(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gtk_action_get_visible(_SELF(self)));
+    return CBOOL2RVAL(gtk_action_is_visible(_SELF(self)));
 }
 
 /* Defined as property.
 const gchar* gtk_action_get_name            (GtkAction *action);
-gboolean    gtk_action_is_sensitive         (GtkAction *action);
-gboolean    gtk_action_is_visible           (GtkAction *action);
+gboolean    gtk_action_get_sensitive        (GtkAction *action);
+gboolean    gtk_action_get_visible          (GtkAction *action);
 */
 
 static VALUE
@@ -159,6 +159,39 @@ action_set_accel_group(self, accel_group)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+/* This set "sensitive" value and call g_object_notify with "sensitive". 
+   If you want not to call g_object_notify,() 
+   Use GLib::Object#set_property("sensitive", val) instead.
+ */
+static VALUE
+action_set_sensitive(self, sensitive)
+    VALUE self, sensitive;
+{
+    gtk_action_set_sensitive(_SELF(self), RTEST(sensitive));
+    return self;
+}
+
+/* This set "visible" value and call g_object_notify with "visible". 
+   If you want not to call g_object_notify(), 
+   Use GLib::Object#set_property("visible", val) instead.
+*/
+static VALUE
+action_set_visible(self, visible)
+    VALUE self, visible;
+{
+    gtk_action_set_visible(_SELF(self), RTEST(visible));
+    return self;
+}
+
+static VALUE
+action_get_accel_path(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gtk_action_get_accel_path(_SELF(self)));
+}
+
+#endif
 #endif
 
 void 
@@ -168,11 +201,15 @@ Init_gtk_action()
     VALUE gAction = G_DEF_CLASS(GTK_TYPE_ACTION, "Action", mGtk);
 
     rb_define_method(gAction, "initialize", action_initialize, -1);
-    /* (NOTICE) Gtk::Action#sensitive, #visible are special.
+    /* (NOTICE) Gtk::Action#is_sensitive?, #is_visible are special.
        Because there are also Gtk::Action#sensitive?, #visible? as property 
-       accessors. */
-    rb_define_method(gAction, "sensitive", action_get_sensitive, 0);
-    rb_define_method(gAction, "visible", action_get_visible, 0);
+       accessors. 
+       Gtk::Action#is_sensitive?, #is_visible? check its associated 
+       action group.
+       Gtk::Action#sensitive?, #visible? returns the value of the properties.
+    */
+    rb_define_method(gAction, "is_sensitive?", action_is_sensitive, 0);
+    rb_define_method(gAction, "is_visible?", action_is_visible, 0);
     rb_define_method(gAction, "activate", action_activate, 0);
     rb_define_method(gAction, "create_icon", action_create_icon, 1);
     rb_define_method(gAction, "create_menu_item", action_create_menu_item, 0);
@@ -186,6 +223,12 @@ Init_gtk_action()
     rb_define_method(gAction, "unblock_activate_from", action_unblock_activate_from, 1);
     rb_define_method(gAction, "set_accel_path", action_set_accel_path, 1);
     rb_define_method(gAction, "set_accel_group", action_set_accel_group, 1);
+
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gAction, "set_sensitive", action_set_sensitive, 1);
+    rb_define_method(gAction, "set_visible", action_set_visible, 1);
+    rb_define_method(gAction, "accel_path", action_get_accel_path, 0);
+#endif
 
     G_DEF_SETTERS(gAction);
 #endif

@@ -1,3 +1,24 @@
+2005-01-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdrag.c: Added 
+	Gtk::Drag.(dest|source)_add_(text|image|uri)_targets for
+	GTK+-2.6.x.
+	* src/rbgtktoolitem.c: Added Gtk::ToolItem#rebuild_menu 
+	for GTK+-2.6.x.
+	* src/rbgtkactiongroup.c: Added Gtk::ActionGroup#translate_string
+	for GTK+-2.6.x.
+	* src/rbgtkaction.c: Improved to support GTK+-2.6.x.
+	Gtk::Action#sensitive => #sensitive?. 
+	Gtk::Action#visible => #visible?. 
+	Added Gtk::Action#is_visible?, #is_sensitive?.
+	(Note)Those are special methods wraped 
+	gtk_action_is_(sensitive|visible).
+	Gtk::Action#(sensitve|visible)? wrap Properties.
+	Gtk::Action#set_(sensitive|visible) wrap 
+	gtk_action_set_(sensitive|visible).
+	If you need to set "sensitive", "visible" properties.
+	You need to use GLib::Object#set_property().
+	
 2005-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkfilefilter.c: Added Gtk::FileFilter#add_pixbuf_formats
