@@ -121,5 +121,6 @@ class AnimatorDemo < Gnome::App
   end
 end
 
+Gnome::init("AnimatorDemo", "1.0")
 demo = AnimatorDemo.new
 Gtk::main

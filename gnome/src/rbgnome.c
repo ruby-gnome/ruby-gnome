@@ -1,6 +1,6 @@
-/* $Id: rbgnome.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.3 2002/07/25 12:12:37 mutoh Exp $ */
 
-/* Gnome module for Ruby/Gnome
+/* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -102,40 +102,166 @@ gnome_s_is_program_in_path(self, program)
     return res;
 }
 
+static VALUE
+gnome_s_init(in_argc, in_argv, self)
+	 int in_argc;
+	 VALUE *in_argv;
+	 VALUE self;
+{
+  VALUE rb_app_id, rb_app_version, rb_options;
+  VALUE rb_option, rb_lname, rb_sname, rb_argInfo;
+  VALUE rb_arg, rb_str, rb_desc, rb_argDesc;
+  VALUE ret;
+  static VALUE ary, hash;
+  int i, argc, len;
+  poptContext ctx;
+  struct poptOption* options;
+  char** argv;
+  const char** p_args;
+  void** result_s;
+  char* sname;
+
+  rb_scan_args(in_argc, in_argv, "21", &rb_app_id, 
+			   &rb_app_version, &rb_options);
+  
+  argc = RARRAY(rb_argv)->len + 1;
+  argv = ALLOCA_N(char*, argc + 1);
+  argv[0] = STR2CSTR(rb_app_id);
+  for (i = 1; i < argc; i++) {
+	rb_str = rb_ary_entry(rb_argv, i - 1);
+	Check_Type(rb_str, T_STRING);
+	argv[i] = STR2CSTR(rb_str);
+  }
+
+  len = 0;
+  if (! NIL_P(rb_options)){
+	len = RARRAY(rb_options)->len;
+	options = ALLOCA_N(struct poptOption, len + 1);
+	result_s = ALLOCA_N(void*, len);
+	for (i = 0; i < len; i++) {
+	  rb_option = rb_ary_entry(rb_options, i);
+	  Check_Type(rb_option, T_ARRAY);
+	  
+	  rb_lname = rb_ary_entry(rb_option, 0);
+	  Check_Type(rb_lname, T_STRING);
+	  options[i].longName = STR2CSTR(rb_lname);
+	  
+	  rb_sname = rb_ary_entry(rb_option, 1);
+	  Check_Type(rb_sname, T_STRING);
+	  if (NIL_P(rb_sname)){
+		options[i].shortName = '\0';
+	  } else {
+		sname = STR2CSTR(rb_sname);
+		options[i].shortName = sname[0];
+	  }
+	  
+	  rb_argInfo = rb_ary_entry(rb_option, 2);
+	  rb_arg = rb_ary_entry(rb_option, 3);
+	  options[i].argInfo = NUM2INT(rb_argInfo);
+	  result_s[i] = NIL_P(rb_arg) ? (void*)NULL : (void*)rb_arg;
+	  switch(options[i].argInfo){
+	  case POPT_ARG_NONE:
+		result_s[i] = (void*)NULL;
+		break;
+	  case POPT_ARG_INT:
+		result_s[i] = (void*)NUM2INT(rb_arg);
+		break;
+	  case POPT_ARG_STRING:
+		result_s[i] = STR2CSTR(rb_arg);
+		break;
+	  }	
+	  options[i].arg = &result_s[i];
+
+	  options[i].val = 0;
+	  
+	  rb_desc = rb_ary_entry(rb_option, 4);
+	  if (NIL_P(rb_desc)){
+		options[i].descrip = NULL;
+	  } else {
+		Check_Type(rb_desc, T_STRING);
+		options[i].descrip = NIL_P(rb_desc)?NULL:STR2CSTR(rb_desc);
+	  }
+	  
+	  rb_argDesc = rb_ary_entry(rb_option, 5);
+	  if (NIL_P(rb_argDesc)){
+		options[i].argDescrip = NULL;
+	  } else {
+		Check_Type(rb_argDesc, T_STRING);
+		options[i].argDescrip =  NIL_P(rb_argDesc)?NULL:STR2CSTR(rb_argDesc);
+	  }
+	}
+	
+	options[i].longName = NULL;
+	options[i].shortName = '\0';
+	options[i].argInfo = 0;
+	options[i].arg = NULL;
+	options[i].val = 0;
+  }
+
+  gnome_init_with_popt_table(STR2CSTR(rb_app_id), 
+							 STR2CSTR(rb_app_version),
+							 argc, argv, options, 0, &ctx);
+  hash = rb_hash_new();
+
+  for (i = 0; i < len; i++){
+	rb_option = rb_ary_entry(rb_options, i);
+	switch(options[i].argInfo){
+	case POPT_ARG_NONE:
+	  ret = ((int)result_s[i] == 1) ? Qtrue : Qfalse;
+	  break;
+	case POPT_ARG_INT:
+	  ret = INT2NUM((long)result_s[i]);
+	  break;
+	case POPT_ARG_STRING:
+	  ret = rb_str_new2((char*)result_s[i]);
+	  break;
+	}	
+	rb_hash_aset(hash, rb_str_new2(options[i].longName), ret);
+  }
+
+  p_args = poptGetArgs(ctx);
+  len = 0;
+  if (p_args != (const char**)NULL){
+	while (p_args[len] != NULL){
+	  len++;
+	}
+  }
+  ary = rb_ary_new2(len);
+  for (i = 0; i < len; i++){
+	rb_ary_push(ary, rb_str_new2(p_args[i]));
+  }
+  rb_hash_aset(hash, rb_str_new2("args"), ary);
+  
+  poptFreeContext(ctx);
+  return hash;
+}
+
 VALUE mGnome;
 
 void
 Init_gnome()
 {
-    int argc, i;
-    char **argv;
-
-    argc = RARRAY(rb_argv)->len;
-    argv = ALLOCA_N(char*,argc+1);
-    argv[0] = STR2CSTR(rb_progname);
-    for (i=0;i<argc;++i) {
-        if (TYPE(RARRAY(rb_argv)->ptr[i]) == T_STRING) {
-            argv[i+1] = RSTRING(RARRAY(rb_argv)->ptr[i])->ptr;
-        } else {
-            argv[i+1] = "";
-        }
-    }
-    ++argc;
-    program_invocation_name = 0;
-    gnome_init("Ruby/GNOME", "0.0", argc, argv);
-
     mGnome = rb_define_module("Gnome");
+
+    rb_define_module_function(mGnome, "init", gnome_s_init, -1);
 
     rb_define_module_function(mGnome, "is_program_in_path",
                               gnome_s_is_program_in_path, 1);
 
+	/* popt */
+    rb_define_const(mGnome, "POPT_ARG_NONE", INT2FIX(POPT_ARG_NONE));
+    rb_define_const(mGnome, "POPT_ARG_STRING", INT2FIX(POPT_ARG_STRING));
+    rb_define_const(mGnome, "POPT_ARG_INT",	INT2FIX(POPT_ARG_INT));
+	/* POPT_ARGS is for Ruby/GNOME only */
+    rb_define_const(mGnome, "POPT_ARGS", rb_str_new2("args"));
+
     /* GnomePreferencesType */
     rb_define_const(mGnome, "REFERENCES_NEVER",
-		    INT2FIX(GNOME_PREFERENCES_NEVER));
+					INT2FIX(GNOME_PREFERENCES_NEVER));
     rb_define_const(mGnome, "REFERENCES_USER",
-		    INT2FIX(GNOME_PREFERENCES_USER));
+					INT2FIX(GNOME_PREFERENCES_USER));
     rb_define_const(mGnome, "REFERENCES_ALWAYS",
-		    INT2FIX(GNOME_PREFERENCES_ALWAYS));
+					INT2FIX(GNOME_PREFERENCES_ALWAYS));
 
     Init_gtk_dial();
     Init_gtk_clock();

@@ -78,6 +78,8 @@ class Hello < Gnome::App
 
 end
 
+Gnome.init(PACKAGE, "1.0")
+
 # Initialize the i18n stuff
 Gnome::I18n::bindtextdomain(PACKAGE, GNOMELOCALEDIR)
 Gnome::I18n::textdomain(PACKAGE)
@@ -133,4 +135,4 @@ client.signal_connect("save_yourself") { # save_state
 
 client.signal_connect("die") { exit }
 
-Gtk::main()
+Gtk.main

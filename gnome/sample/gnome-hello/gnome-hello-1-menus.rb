@@ -11,7 +11,7 @@ class Hello1 < Gnome::App
 	# Makes the main window and binds the delete event so you can close
 	# the program from your WM
 
-	super("hello", "Hello World Gnomified")
+	super("Hello1", "Hello World Gnomified")
 	realize
 	signal_connect("delete_event") {
 	    Gtk::main_quit
@@ -63,6 +63,7 @@ class Hello1 < Gnome::App
 
 end
 
+Gnome.init("Hello1", "1.0")
 app = Hello1.new
-Gtk::main()
+Gtk.main
 

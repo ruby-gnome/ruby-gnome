@@ -9,8 +9,6 @@
 #
 # Copyright (C) 1998 Mark Galassi, Horacio J. Pe, all rights reserved
 
-require 'gtk'
-require 'gdk_imlib'
 require 'gnome'
 
 class Hello0 < Gnome::App
@@ -19,7 +17,7 @@ class Hello0 < Gnome::App
 	# Makes the main window and binds the delete event so you can close
 	# the program from your WM
 
-	super("hello", "Hello World Gnomified")
+	super("Hello0", "Hello World Gnomified")
 	realize
 	signal_connect("delete_event") {
 	    Gtk::main_quit
@@ -47,5 +45,6 @@ class Hello0 < Gnome::App
     end
 end
 
+Gnome.init("Hello0", "1.0")
 app = Hello0.new
-Gtk::main()
+Gtk.main

@@ -115,6 +115,7 @@ def create_main_window
 end
 
 def main
+  Gnome::init("test-gnome", "1.0")
   create_main_window
   Gtk::main
 end

@@ -65,6 +65,8 @@ class Hello2 < Gnome::App
 
 end
 
+Gnome.init(PACKAGE, "1.0")
+
 # Initialize the i18n stuff
 Gnome::I18n::bindtextdomain(PACKAGE, GNOMELOCALEDIR)
 Gnome::I18n::textdomain(PACKAGE)
