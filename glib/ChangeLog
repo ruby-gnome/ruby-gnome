@@ -1,3 +1,8 @@
+2002-09-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (marker_remove): fix a bug which can cause
+	segmentation fault on following rb_gc_mark().
+
 2002-09-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c: allow GLib::Object#freeze_notify to take block.

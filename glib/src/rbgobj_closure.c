@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/09/24 16:47:25 $
+  $Date: 2002/09/25 05:41:06 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -53,7 +53,9 @@ static void
 marker_remove(gpointer data, GClosure* closure)
 {
     VALUE marker = (VALUE)data;
+    RDATA(marker)->dmark = NULL;
     rb_hash_aset(rclosure_marker_list, marker, Qnil);
+
     ((GRClosure*)closure)->callback   = Qnil;
     ((GRClosure*)closure)->extra_args = Qnil;
 }
