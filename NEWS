@@ -1,3 +1,26 @@
+Ruby-GNOME2-0.9.1 (2004-03-14)
+
+  * Ruby/GLib [Masao Mutoh]
+      - Fix a compilation problem on MinGW.
+
+  * Ruby/ATK [Masao Mutoh]
+      - Fix a compilation problem on MinGW.
+      - Improved extconf.rb
+
+  * Ruby/Pango [Masao Mutoh]
+      - Improved extconf.rb
+
+  * Ruby/GTK [Masao Mutoh]
+      - Fix a compilation problem on MinGW.
+      - Fix a bug of Gtk::Combo.
+      - Improved extconf.rb
+
+  * Ruby/GConf [Kazuhiro NISHIYAMA]
+      - Fix bugs.
+
+  * Ruby/Libgda [Laurent Sansonetti]
+      - Support libgda-1.0.3(stable branch).
+
 Ruby-GNOME2-0.9.0 (2004-03-07)
 
   * Ruby/GLib
