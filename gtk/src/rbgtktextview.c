@@ -4,9 +4,9 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2004/04/30 18:03:27 $
+  $Date: 2005/01/10 17:56:38 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 #include "global.h"
 
@@ -138,6 +138,18 @@ textview_get_iter_at_location(self, x, y)
     gtk_text_view_get_iter_at_location(_SELF(self), &iter, NUM2INT(x), NUM2INT(y));
     return ITR2RVAL(&iter);
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+textview_get_iter_at_position(self, x, y)
+    VALUE self, x, y;
+{
+    GtkTextIter iter;
+    gint trailing;
+    gtk_text_view_get_iter_at_position(_SELF(self), &iter, &trailing, NUM2INT(x), NUM2INT(y));
+    return rb_assoc_new(ITR2RVAL(&iter), INT2NUM(trailing));
+}
+#endif
 
 static VALUE
 textview_buffer_to_window_coords(self, wintype, buffer_x, buffer_y)
@@ -296,6 +308,9 @@ Init_gtk_textview()
     rb_define_method(cTextView, "get_line_at_y", textview_get_line_at_y, 1);
     rb_define_method(cTextView, "get_line_yrange", textview_get_line_yrange, 1);
     rb_define_method(cTextView, "get_iter_at_location", textview_get_iter_at_location, 2);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(cTextView, "get_iter_at_position", textview_get_iter_at_position, 2);
+#endif
     rb_define_method(cTextView, "buffer_to_window_coords", textview_buffer_to_window_coords, 3);
     rb_define_method(cTextView, "window_to_buffer_coords", textview_window_to_buffer_coords, 3);
     rb_define_method(cTextView, "get_window", textview_get_window, 1);

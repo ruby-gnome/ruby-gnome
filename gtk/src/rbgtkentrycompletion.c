@@ -4,9 +4,9 @@
   rbgtkentrycompletion.c -
 
   $Author: mutoh $
-  $Date: 2004/05/24 16:18:58 $
+  $Date: 2005/01/10 17:56:37 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -60,6 +60,16 @@ entryc_complete(self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+entryc_insert_prefix(self)
+    VALUE self;
+{
+    gtk_entry_completion_insert_prefix(_SELF(self));
+    return self;
+}
+#endif
+
 static VALUE
 entryc_insert_action_text(self, index, text)
     VALUE self, index, text;
@@ -91,6 +101,22 @@ entryc_set_text_column(self, column)
     gtk_entry_completion_set_text_column(_SELF(self), NUM2INT(column));
     return self;
 }
+
+/* Defined as property
+gint        gtk_entry_completion_get_text_column
+                                            (GtkEntryCompletion *completion);
+void        gtk_entry_completion_set_inline_completion
+                                            (GtkEntryCompletion *completion,
+                                             gboolean inline_completion);
+gboolean    gtk_entry_completion_get_inline_completion
+                                            (GtkEntryCompletion *completion);
+void        gtk_entry_completion_set_popup_completion
+                                            (GtkEntryCompletion *completion,
+                                             gboolean popup_completion);
+gboolean    gtk_entry_completion_get_popup_completion
+                                            (GtkEntryCompletion *completion);
+*/
+
 #endif
 
 void 
@@ -103,6 +129,9 @@ Init_gtk_entry_completion()
     rb_define_method(gEntryC, "entry", entryc_get_entry, 0);
     rb_define_method(gEntryC, "set_match_func", entryc_set_match_func, 0);
     rb_define_method(gEntryC, "complete", entryc_complete, 0);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gEntryC, "insert_prefix", entryc_insert_prefix, 0);
+#endif
     rb_define_method(gEntryC, "insert_action_text", entryc_insert_action_text, 2);
     rb_define_method(gEntryC, "insert_action_markup", entryc_insert_action_markup, 2);
     rb_define_method(gEntryC, "delete_action", entryc_delete_action, 1);

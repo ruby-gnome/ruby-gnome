@@ -4,8 +4,9 @@
   rbgtkfilefilter.c -
  
   $Author: mutoh $
-  $Date: 2004/07/31 05:44:45 $
+  $Date: 2005/01/10 17:56:37 $
  
+  Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
  
@@ -66,6 +67,16 @@ filter_func(info, func)
                                  CSTR2RVAL(info->display_name), CSTR2RVAL(info->mime_type)));
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+ffil_add_pixbuf_formats(self)
+    VALUE self;
+{
+    gtk_file_filter_add_pixbuf_formats(_SELF(self));
+    return self;
+}
+#endif
+
 static VALUE
 ffil_add_custom(self, needed)
     VALUE self, needed;
@@ -111,6 +122,9 @@ Init_gtk_file_filter()
     rb_define_method(gFileFilter, "name", ffil_get_name, 0);
     rb_define_method(gFileFilter, "add_mime_type", ffil_add_mime_type, 1);
     rb_define_method(gFileFilter, "add_pattern", ffil_add_pattern, 1);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gFileFilter, "add_pixbuf_formats", ffil_add_pixbuf_formats, 0);
+#endif
     rb_define_method(gFileFilter, "add_custom", ffil_add_custom, 1);
     rb_define_method(gFileFilter, "needed", ffil_get_needed, 0);
     rb_define_method(gFileFilter, "filter?", ffil_filter, 5);

@@ -4,9 +4,9 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2004/06/03 17:28:45 $
+  $Date: 2005/01/10 17:56:37 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
@@ -62,6 +62,17 @@ txt_set_text(self, text)
     gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+txt_backspace(self, iter, interactive, default_editable)
+    VALUE self, iter, interactive, default_editable;
+{
+    return CBOOL2RVAL(gtk_text_buffer_backspace(_SELF(self), RVAL2ITR(iter),
+                                                RTEST(interactive),
+                                                RTEST(default_editable)));
+}
+#endif
 
 static VALUE
 txt_insert_at_cursor(self, text)
@@ -618,7 +629,9 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
     rb_define_method(gTextBuffer, "insert", txt_insert, -1);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
-
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gTextBuffer, "backspace", txt_backspace, 3);
+#endif
     rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
     rb_define_method(gTextBuffer, "insert_interactive", txt_insert_interactive, 3);
     rb_define_method(gTextBuffer, "insert_interactive_at_cursor", txt_insert_interactive_at_cursor, 2);

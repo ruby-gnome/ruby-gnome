@@ -4,9 +4,9 @@
   rbgtkiconview.c -
 
   $Author: mutoh $
-  $Date: 2005/01/03 18:55:03 $
+  $Date: 2005/01/10 17:56:37 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -71,6 +71,7 @@ iview_selected_foreach(self)
     VALUE self;
 {
     VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
     gtk_icon_view_selected_foreach(_SELF(self), iview_foreach_func, (gpointer)func);
     return self;
 }

@@ -1,3 +1,23 @@
+2005-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilefilter.c: Added Gtk::FileFilter#add_pixbuf_formats
+	for GTK+-2.6.x.
+	* src/rbgtkfilechooser.c: Support GTK+-2.6.x.
+	* src/rbgtkmenu.c: Added Gtk::Menu.get_for_attach_widget for 
+	GTK+-2.6.x.
+	* src/rbgtkcellrenderer.c: Added Gtk::CellRenderer#stop_edting.
+	Gtk::CellRenderer#editing_canceled has been deprecated for GTK+-2.6.x.
+	* src/rbgtkaboutdialog.c: Append G_RELATIVE to #set_(email|url)_hook.
+	* src/rbgtkiconview.c: ditto.
+	* src/rbgtktreeview.c: Added Gtk::TreeView#set_row_separator_func
+	for GTK+-2.6.x.
+	* src/rbgtktextview.c: Added Gtk::TextView#get_iter_at_position
+	for GTK+-2.6.x.
+	* src/rbgtktextbuffer.c: Added Gtk::TextBuffer#backspace 
+	for GTK+-2.6.x. 
+	* src/rbgtkentrycompletion.c: Added 
+	Gtk::EntryCompletion#insert_prefix for GTK+-2.6.x.
+
 2005-01-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkstock.c: Added GTK+-2.6.x items. 

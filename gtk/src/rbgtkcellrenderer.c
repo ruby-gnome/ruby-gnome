@@ -4,9 +4,9 @@
   rbgtkcellrenderer.c -
 
   $Author: mutoh $
-  $Date: 2004/06/03 17:28:45 $
+  $Date: 2005/01/10 17:56:37 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -70,11 +70,23 @@ cellrenderer_start_editing(self, event, widget, path, background_area,
 }
 
 #if GTK_CHECK_VERSION(2,4,0)
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 cellrenderer_editing_canceled(self)
     VALUE self;
 {
     gtk_cell_renderer_editing_canceled(_SELF(self));
+    return self;
+}
+#endif
+#endif
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+cellrenderer_stop_editing(self, canceled)
+    VALUE self, canceled;
+{
+    gtk_cell_renderer_stop_editing(_SELF(self), RTEST(canceled));
     return self;
 }
 #endif
@@ -107,7 +119,12 @@ Init_gtk_cellrenderer()
     rb_define_method(renderer, "activate", cellrenderer_activate, 6);
     rb_define_method(renderer, "start_editing", cellrenderer_start_editing, 6);
 #if GTK_CHECK_VERSION(2,4,0)
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(renderer, "editing_canceled", cellrenderer_editing_canceled, 0);
+#endif
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(renderer, "stop_editing", cellrenderer_stop_editing, 1);
 #endif
     rb_define_method(renderer, "fixed_size", cellrenderer_get_fixed_size, 0);
     rb_define_method(renderer, "set_fixed_size", cellrenderer_set_fixed_size, 2);

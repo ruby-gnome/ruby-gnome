@@ -4,7 +4,7 @@
   rbgtkaboutdialog.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:30 $
+  $Date: 2005/01/10 17:56:37 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -89,7 +89,7 @@ aboutdialog_s_set_email_hook(self)
     VALUE self;
 {
     VALUE func = G_BLOCK_PROC();
-
+    G_RELATIVE(self, func);
     gtk_about_dialog_set_email_hook(activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
@@ -99,7 +99,7 @@ aboutdialog_s_set_url_hook(self)
     VALUE self;
 {
     VALUE func = G_BLOCK_PROC();
-
+    G_RELATIVE(self, func);
     gtk_about_dialog_set_url_hook(activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }

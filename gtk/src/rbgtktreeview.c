@@ -4,9 +4,9 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2004/08/07 18:29:25 $
+  $Date: 2005/01/10 17:56:38 $
 
-  Copyright (C) 2002-2004 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -558,6 +558,56 @@ treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
 }
 #endif
 
+/* Defined as Property.
+gboolean    gtk_tree_view_get_fixed_height_mode
+                                            (GtkTreeView *tree_view);
+void        gtk_tree_view_set_fixed_height_mode
+                                            (GtkTreeView *tree_view,
+                                             gboolean enable);
+gboolean    gtk_tree_view_get_hover_selection
+                                            (GtkTreeView *tree_view);
+void        gtk_tree_view_set_hover_selection
+                                            (GtkTreeView *tree_view,
+                                             gboolean hover);
+gboolean    gtk_tree_view_get_hover_expand  (GtkTreeView *tree_view);
+void        gtk_tree_view_set_hover_expand  (GtkTreeView *tree_view,
+                                             gboolean expand);
+*/
+
+/* How can I implement this?
+GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
+                                            (GtkTreeView *tree_view);
+*/
+
+#if GTK_CHECK_VERSION(2,6,0)
+static gboolean
+row_separator_func(model, iter, func)
+    GtkTreeModel* model;
+    GtkTreeIter* iter;
+    gpointer* func;
+{
+    VALUE ret;
+    iter->user_data3 = model;
+    ret = rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model), 
+                     BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+    return CBOOL2RVAL(ret);
+}
+
+static VALUE
+treeview_set_row_separator_func(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+
+    G_RELATIVE(self, func);
+    gtk_tree_view_set_row_separator_func(_SELF(self), 
+                                         row_separator_func, 
+                                         (gpointer)func, 
+                                         (GtkDestroyNotify)NULL);
+    return self;
+}
+#endif
+
 void 
 Init_gtk_treeview()
 {
@@ -609,7 +659,11 @@ Init_gtk_treeview()
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTv, "set_cursor_on_cell", treeview_set_cursor_on_cell, 4);
 #endif
-    
+
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gTv, "set_row_separator_func", treeview_set_row_separator_func, 0);
+#endif
+
     /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");

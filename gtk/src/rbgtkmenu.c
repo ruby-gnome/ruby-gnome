@@ -4,9 +4,9 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2004/06/19 16:21:34 $
+  $Date: 2005/01/10 17:56:37 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -215,6 +215,16 @@ menu_get_attach_widget(self)
 {
     return GOBJ2RVAL(gtk_menu_get_attach_widget(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+menu_s_get_for_attach_widget(self, widget)
+    VALUE self, widget;
+{
+    return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
+}
+#endif
+
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 menu_set_monitor(self, monitor_num)
@@ -249,6 +259,9 @@ Init_gtk_menu()
     rb_define_method(gMenu, "set_tearoff_state", menu_set_tearoff_state, 1);
     rb_define_method(gMenu, "detach", menu_detach, 0);
     rb_define_method(gMenu, "attach_widget", menu_get_attach_widget, 0);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_singleton_method(gMenu, "get_for_attach_widget", menu_s_get_for_attach_widget, 1);
+#endif
     rb_define_method(gMenu, "attach_to_widget", menu_attach_to_widget, 1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gMenu, "set_monitor", menu_set_monitor, 1);

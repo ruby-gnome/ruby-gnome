@@ -4,8 +4,9 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2004/08/29 17:00:22 $
+  $Date: 2005/01/10 17:56:37 $
  
+  Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
 
@@ -54,6 +55,14 @@ fcho_get_action(self)
     gtk_file_chooser_get_local_only(_SELF(self));
     gtk_file_chooser_set_select_multiple(_SELF(self), RTEST(multiple));
     gtk_file_chooser_get_select_multiple(_SELF(self));
+*/
+
+/*  Defined as Property
+void        gtk_file_chooser_set_show_hidden
+                                            (GtkFileChooser *chooser,
+                                             gboolean show_hidden);
+gboolean    gtk_file_chooser_get_show_hidden
+                                            (GtkFileChooser *chooser);
 */
 
 static VALUE
