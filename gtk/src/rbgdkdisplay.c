@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/07/02 17:53:44 $
+  $Date: 2003/07/24 16:35:05 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -15,18 +15,10 @@
 #define _DISPLAY(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
 
 static VALUE
-gdkdisplay_initialize(argc, argv, self)
-    int argc;
-    VALUE self, *argv;
+gdkdisplay_initialize(self, display_name)
+    VALUE self, display_name;
 {
-    if (argc == 0)
-    {
-      G_INITIALIZE(self, gdk_display_get_default());
-    }
-    else
-    {
-      G_INITIALIZE(self, gdk_display_open(RVAL2CSTR(argv[0])));
-    }
+    G_INITIALIZE(self, gdk_display_open(RVAL2CSTR(display_name)));
     return Qnil;
 }
 
@@ -151,7 +143,7 @@ Init_gtk_gdk_display()
 #if GTK_MINOR_VERSION >= 2
     VALUE gdkDisplay = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 
-    rb_define_method(gdkDisplay, "initialize", gdkdisplay_initialize, -1);
+    rb_define_method(gdkDisplay, "initialize", gdkdisplay_initialize, 1);
     rb_define_singleton_method(gdkDisplay, "default", gdkdisplay_default, 0);
     rb_define_method(gdkDisplay, "name", gdkdisplay_name, 0);
     rb_define_method(gdkDisplay, "n_screens", gdkdisplay_n_screens, 0);
