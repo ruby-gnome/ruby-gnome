@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: mutoh $
-  $Date: 2004/08/18 16:42:36 $
+  $Date: 2005/02/01 11:45:10 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -12,7 +12,6 @@
 #ifndef __RBGUTIL_H__
 #define __RBGUTIL_H__
 
-#include <glib.h>
 #include <glib-object.h>
 #include "ruby.h"
 #include "rbglib.h"

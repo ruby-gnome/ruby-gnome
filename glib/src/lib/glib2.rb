@@ -8,7 +8,7 @@
 
 # for dropline GTK2-Runtime DLL
 # http://www.dropline.net/gtk/
-if /mingw|mswin/ =~ RUBY_PLATFORM
+if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
   begin
     require 'win32/registry'
     begin

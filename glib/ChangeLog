@@ -1,3 +1,10 @@
+2005-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: Change checking-rules order.
+	Added GTK_BASE_PATH environment variable option for Win32.
+	* src/rbglib.c, rbglib_convert.c, rbgutil.h, rbgobject.h: 
+	Remove to include glib.h directly.
+
 2005-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: Fix segfault, and make it simple.

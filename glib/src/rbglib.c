@@ -4,15 +4,15 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2004/08/18 16:42:35 $
+  $Date: 2005/02/01 11:45:10 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 
-#include <glib.h>
 #include <locale.h>
 #include "global.h"
+#include "rbglib.h"
 
 VALUE mGLib;
 

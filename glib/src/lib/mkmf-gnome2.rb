@@ -34,6 +34,12 @@ else
   $cc_is_gcc = false
 end
 
+include_path = nil
+if ENV['GTK_BASEPATH']
+  include_path = (ENV['GTK_BASEPATH'] + "\\INCLUDE").gsub("\\", "/")
+  $hdrdir = include_path
+  $CFLAGS += " -I#{include_path} " 
+end
 
 def check_win32()
   $G_PLATFORM_WIN32 = false
@@ -171,33 +177,38 @@ END
 end
 
 
-$CPPFLAGS << " -I$(sitearchdir) "
+def check_ruby_func
+  $CPPFLAGS << " -I$(sitearchdir) "
 
-#Other options
-have_func("rb_define_alloc_func") # for ruby-1.8
-have_func("rb_block_proc") # for ruby-1.8
+  #Other options
+  have_func("rb_define_alloc_func") # for ruby-1.8
+  have_func("rb_block_proc") # for ruby-1.8
 
-STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
-if Object.respond_to? :allocate
-  STDOUT.print "yes\n"
-  $defs << "-DHAVE_OBJECT_ALLOCATE"
-else
-  STDOUT.print "no\n"
-end
-                                                                                              
-STDOUT.print("checking for attribute assignment... ") # for ruby-1.7
-STDOUT.flush
-if defined? try_compile and try_compile <<SRC
+  STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
+  if Object.respond_to? :allocate
+    STDOUT.print "yes\n"
+    $defs << "-DHAVE_OBJECT_ALLOCATE"
+  else
+    STDOUT.print "no\n"
+  end
+
+  STDOUT.print("checking for attribute assignment... ") # for ruby-1.7
+  STDOUT.flush
+  if defined? try_compile and try_compile <<SRC
 #include "ruby.h"
 #include "node.h"
 int node_attrasgn = (int)NODE_ATTRASGN;
 SRC
-  STDOUT.print "yes\n"
-  $defs << "-DHAVE_NODE_ATTRASGN"
-else
-  STDOUT.print "no\n"
+    STDOUT.print "yes\n"
+    $defs << "-DHAVE_NODE_ATTRASGN"
+  else
+    STDOUT.print "no\n"
+  end
 end
 
 def add_obj(name)
   $objs << name unless $objs.index(name)
 end
+
+
+check_ruby_func

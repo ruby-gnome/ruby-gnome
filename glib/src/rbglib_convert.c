@@ -4,12 +4,11 @@
   rbglib_convert.c -
 
   $Author: mutoh $
-  $Date: 2004/10/19 16:32:14 $
+  $Date: 2005/02/01 11:45:10 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
 **********************************************************************/
-#include <glib.h>
 #include "global.h"
 #include "rbglib.h"
 
