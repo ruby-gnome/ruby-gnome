@@ -1,5 +1,7 @@
 2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgdkevent.c: change Gdk::Event to a subtype of GLib::Boxed.
+
 	* src/global.c (ary2glist, ary2gslist): remove functions that are
 	no longer used.
 

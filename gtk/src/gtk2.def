@@ -3,7 +3,6 @@ EXPORTS
     mGdk DATA
     mGtk DATA
     exec_callback
-    gdkEvent DATA
     gdk_atom_copy
     gdk_atom_get_type
     gdk_geometry_get_type

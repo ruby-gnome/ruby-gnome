@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/03/19 18:50:59 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,38 +14,29 @@
 
 #include "global.h"
 
-VALUE gdkEvent;
 static VALUE gdkevents[34];
 
 /***********************************************/
+
 VALUE
 make_gdkevent(ev)
     GdkEvent *ev;
 {
+    VALUE obj;
     if (ev == NULL) return Qnil;
-      return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, 
-      gdk_event_copy(ev));
-    /* Shouldn't I copy object here ? ... 
-	  * But errors were occured when I execute Ruby/GnomeCanvas sample.
-    return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, ev);
-		*/
+
+    obj = BOXED2RVAL(ev, GDK_TYPE_EVENT);
+    RBASIC(obj)->klass = gdkevents[ev->type]; /* hack */
+    return obj;
 }
 
 GdkEvent*
 get_gdkevent(event)
     VALUE event;
 {
-    GdkEvent *gevent;
-
-    if (NIL_P(event)) return NULL;
-
-    if (!rb_obj_is_kind_of(event, gdkEvent)) {
-        rb_raise(rb_eTypeError, "not a GdkEvent...");
-    }
-    Data_Get_Struct(event, GdkEvent, gevent);
-
-    return gevent;
+    return NIL_P(event) ? NULL : RVAL2BOXED(event, GDK_TYPE_EVENT);
 }
+
 /***********************************************/
 
 /* GdkEvent Singleton Methods */
@@ -549,13 +540,6 @@ gdkeventclient_send_clientmessage_toall(self)
     return Qnil;
 }
 
-static void 
-gdkevent_r2g(VALUE from, GValue *to)
-{
-    GdkEvent* event = get_gdkevent(from);
-    g_value_set_boxed(to, event);
-}
-
 static VALUE 
 gdkevent_g2r(const GValue *from)
 {
@@ -566,9 +550,10 @@ void
 Init_gtk_gdk_event()
 {
     VALUE ev;
+    VALUE gdkEvent;
     VALUE gdkEventAny;
 
-    gdkEvent = rb_define_class_under(mGdk, "Event", GTYPE2CLASS(G_TYPE_BOXED));
+    gdkEvent = G_DEF_CLASS(GDK_TYPE_EVENT, "Event", mGdk);
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
 
     gdkevents[GDK_DELETE]        = gdkEventAny;
@@ -769,7 +754,6 @@ Init_gtk_gdk_event()
     rb_define_const(ev, "ACTION_CHANGED", INT2FIX(GDK_SETTING_ACTION_CHANGED));
     rb_define_const(ev, "ACTION_DELETED", INT2FIX(GDK_SETTING_ACTION_DELETED));
 
-    rbgobj_register_r2g_func(GDK_TYPE_EVENT, &gdkevent_r2g);
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 
     /*
