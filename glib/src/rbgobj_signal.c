@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2003/11/15 06:07:33 $
+  $Author: mutoh $
+  $Date: 2004/03/04 17:29:02 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -152,6 +152,7 @@ _signal_list(VALUE result, GType gtype)
     guint* ids = g_signal_list_ids(gtype, &n_ids);
     for (i = 0; i < n_ids; i++)
         rb_ary_push(result, rb_str_new2(g_signal_name(ids[i])));
+    g_free(ids);
 }
 
 static VALUE

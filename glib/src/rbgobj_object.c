@@ -4,9 +4,9 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2003/12/21 13:54:44 $
+  $Date: 2004/03/04 17:29:02 $
 
-  Copyright (C) 2002,2003  Masahiro Sakai
+  Copyright (C) 2002-2004  Masahiro Sakai
 
   This file is derived from rbgtkobject.c in Ruby/Gtk distribution.
   rbgtkobject.c -
@@ -162,7 +162,7 @@ gobj_s_properties(int argc, VALUE* argv, VALUE self)
             || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, rb_str_new2(props[i]->name));
     }
-
+    g_free(props);
     g_type_class_unref(oclass);
     return ary;
 }
