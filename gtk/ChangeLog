@@ -1,3 +1,8 @@
+2003-06-07  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* src/rbgdkwindow.c: Gdk::Window.foreign() added
+	* src/rbgdktextview.c: Fixed Gtk::TextView#get_window()
+
 2003-06-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkstyle.c: Gtk::Style#paint_* accept nil for Gdk::Rectangle.
