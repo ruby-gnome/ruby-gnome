@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.10 2002/10/30 13:36:48 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.11 2002/11/10 13:15:39 tkubo Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -447,7 +447,7 @@ do_ui_signal_connect(uiinfo, signal_name, uibdata)
     if (NIL_P(proc))
         return;
     args = rb_ary_new3(1, (VALUE)uiinfo->user_data);
-    rclosure = g_rclosure_new(proc, args);
+    rclosure = g_rclosure_new(proc, args, NULL);
     g_signal_connect_closure(G_OBJECT(uiinfo->widget),
                              signal_name, rclosure, FALSE);
 }

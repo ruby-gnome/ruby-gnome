@@ -1,3 +1,8 @@
+2002-11-10  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-app-helper.c: follow the change of prototype.
+	* src/rbgnome-program.c: delete NORETURN macro.
+
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Revised.

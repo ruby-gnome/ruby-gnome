@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.4 2002/10/28 16:32:56 tkubo Exp $ */
+/* $Id: rbgnome-program.c,v 1.5 2002/11/10 13:15:39 tkubo Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -423,8 +423,6 @@ program_get_options(self)
     return obj;
 }
 
-static void program_print_common(VALUE, const char *) NORETURN;
-
 static void
 program_print_common(self, arg)
     VALUE self;
@@ -450,7 +448,6 @@ program_print_common(self, arg)
                        RVAL2BOXED(minfo, GNOME_TYPE_MODULE_INFO), 2, argv,
                        "popt-table", NIL_P(popt_table) ? NULL : DATA_PTR(popt_table),
                        NULL);
-    rb_bug("you cannot reach here: program_print_common:%d\n", __LINE__);
 }
 
 static VALUE
@@ -458,6 +455,7 @@ program_print_help(self)
     VALUE self;
 {
     program_print_common(self, "--help");
+    rb_bug("program_print_help: the spec of gnome_program_init changed?");
 }
 
 static VALUE
@@ -465,6 +463,7 @@ program_print_usage(self)
     VALUE self;
 {
     program_print_common(self, "--usage");
+    rb_bug("program_print_usage: the spec of gnome_program_init changed?");
 }
 
 #if 0 /* TODO or not TODO... */
