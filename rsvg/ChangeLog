@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-11-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: added librsvg-enum-types.{c,h} generation code.
