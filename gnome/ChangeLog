@@ -1,3 +1,8 @@
+2002-11-07  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/gnome-druid.rb: use Gnome::Program.new instead of Gtk.init.
+	  (suggested by Masao Mutoh.)
+
 2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gnome-druid.rb: Follow Ruby/GTK2 changes.
