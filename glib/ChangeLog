@@ -1,5 +1,8 @@
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbglib.h src/rbgobj_object.c src/rbgobj_paramspecs.c
+	  src/rbgobj_signal.c src/rbgobj_type.c src/rbgobject.c
+	  src/rbgobject.h src/rbgutil.c src/lib/mkmf-gnome2.rb: Update Copyright.
 	* src/lib/mkmf-gnome2.rb: Work under ruby-1.8.1 or later on Cygwin.
 
 2004-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
