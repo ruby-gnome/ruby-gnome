@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Date: 2003/07/31 17:00:19 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -85,7 +85,7 @@ rbgobj_lookup_class_by_gtype(gtype)
     } else {
         void* gclass = NULL;
 
-        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
+        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
           case G_TYPE_POINTER:
@@ -182,7 +182,7 @@ rbgobj_register_class(VALUE klass,
                       gboolean gtype2klass)
 {
     RGObjClassInfo* cinfo;
-    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
+    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);  
 		    
     cinfo->klass = klass;
     cinfo->gtype = gtype;
