@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: igapy $
-  $Date: 2002/12/08 19:17:57 $
+  $Author: sakai $
+  $Date: 2002/12/11 17:23:02 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -49,7 +49,51 @@ gtk_m_init(argc, argv, self)
         }
     }
     gargc++;
-    gtk_init(&gargc, &gargv);
+
+    {
+        gboolean is_initialized;
+
+        /* Gdk modifies sighandlers, sigh */
+#ifdef NT
+        RETSIGTYPE (*sigfunc[3])();
+#else
+        RETSIGTYPE (*sigfunc[7])();
+#endif
+
+#ifdef NT
+        sigfunc[0] = signal(SIGINT, SIG_IGN);
+        sigfunc[1] = signal(SIGSEGV, SIG_IGN);
+        sigfunc[2] = signal(SIGTERM, SIG_IGN);
+#else
+        sigfunc[0] = signal(SIGHUP, SIG_IGN);
+        sigfunc[1] = signal(SIGINT, SIG_IGN);
+        sigfunc[2] = signal(SIGQUIT, SIG_IGN);
+        sigfunc[3] = signal(SIGBUS, SIG_IGN);
+        sigfunc[4] = signal(SIGSEGV, SIG_IGN);
+        sigfunc[5] = signal(SIGPIPE, SIG_IGN);
+        sigfunc[6] = signal(SIGTERM, SIG_IGN);
+#endif
+
+        is_initialized = gtk_init_check(&gargc, &gargv);
+
+#ifdef NT
+        signal(SIGINT,  sigfunc[0]);
+        signal(SIGSEGV, sigfunc[1]);
+        signal(SIGTERM, sigfunc[2]);
+#else
+        signal(SIGHUP,  sigfunc[0]);
+        signal(SIGINT,  sigfunc[1]);
+        signal(SIGQUIT, sigfunc[2]);
+        signal(SIGBUS,  sigfunc[3]);
+        signal(SIGSEGV, sigfunc[4]);
+        signal(SIGPIPE, sigfunc[5]);
+        signal(SIGTERM, sigfunc[6]);
+#endif
+        
+        if (!is_initialized)
+            rb_raise(rb_eRuntimeError, "failed to initialize gtk+");
+    }
+
     return self;
 }
 
