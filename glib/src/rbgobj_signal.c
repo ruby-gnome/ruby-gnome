@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:33 $
+  $Date: 2003/07/18 05:27:21 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -651,21 +651,27 @@ static VALUE
 signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
 {
     GSignalQuery* query;
-    VALUE detail_obj, proc;
+    VALUE proc;
     guint hook_id;
     GQuark detail = 0;
     GClosure* closure;
 
-    if (rb_scan_args(argc, argv, "01&", &detail, &proc) == 1) {
-        if (SYMBOL_P(detail_obj))
-            detail = g_quark_from_string(rb_id2name(SYM2ID(detail_obj)));
-        else
-            detail = g_quark_from_string(StringValuePtr(detail_obj));
-    }
-
     Data_Get_Struct(self, GSignalQuery, query);
 
-    closure = g_rclosure_new(proc, Qnil, rbgobj_get_signal_func(query->signal_id));
+    if (query->signal_flags & G_SIGNAL_DETAILED) {
+        VALUE detail_obj;
+        if (rb_scan_args(argc, argv, "01&", &detail_obj, &proc) == 1) {
+            if (SYMBOL_P(detail_obj))
+                detail = g_quark_from_string(rb_id2name(SYM2ID(detail_obj)));
+            else
+                detail = g_quark_from_string(StringValuePtr(detail_obj));
+        }
+    } else {
+        rb_scan_args(argc, argv, "00&", &proc);
+    }
+
+    closure = g_rclosure_new(proc, Qnil,
+                             rbgobj_get_signal_func(query->signal_id));
     hook_id = g_signal_add_emission_hook_closure(query->signal_id, detail, closure);
     return ULONG2NUM(hook_id);
 }

@@ -1,3 +1,8 @@
+2003-07-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (signal_add_emission_hook): fix to treat `detail'
+	argument correctly.
+
 2003-07-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c (rclosure_marshal): use rb_protect().

@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:31 $
+  $Date: 2003/07/18 05:27:21 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -100,7 +100,7 @@ rclosure_marshal(GClosure*       closure,
     rb_protect((VALUE (*)())&rclosure_marshal_body, (VALUE)&arg, &state);
 
     if (state)
-        rb_warn("unexpected local jump in closure");
+        rb_warn("unexpected jump occured in GClosure invocation");
 }
 
 static VALUE rclosure_marker_list;
