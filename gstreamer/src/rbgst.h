@@ -32,6 +32,9 @@
 /* Gst module */
 extern VALUE mGst;
 
+/* Gst::EventSeek class (needed for inheritance) */
+extern VALUE cGstEventSeek;
+
 /* Is debug mode activated? */
 extern gboolean debug_mode;
 
@@ -50,11 +53,11 @@ extern gboolean debug_mode;
 #define RGST_AUTOPLUG(o)            (GST_AUTOPLUG(RVAL2GOBJ(o)))
 #define RGST_AUTOPLUG_FACTORY(o)    (GST_AUTOPLUG_FACTORY(RVAL2GOBJ(o)))
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
-#define RGST_CAPS(o)                (rb_gst_caps_get_struct(o))
+#define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
 #define RGST_CLOCK(o)               (GST_CLOCK(RVAL2GOBJ(o)))
 #define RGST_ELEMENT(o)             (GST_ELEMENT(RVAL2GOBJ(o)))
 #define RGST_ELEMENT_FACTORY(o)     (GST_ELEMENT_FACTORY(RVAL2GOBJ(o)))
-#define RGST_EVENT(o)               (GST_EVENT(RVAL2GOBJ(o)))
+#define RGST_EVENT(o)               (GST_EVENT(RVAL2BOXED(o, GST_TYPE_EVENT)))
 #define RGST_FORMAT(o)              (GST_FORMAT(RVAL2BOXED(o, GST_TYPE_FORMAT)))
 #define RGST_INDEX_FACTORY(o)       (GST_INDEX_FACTORY(RVAL2GOBJ(o)))
 #define RGST_OBJECT(o)              (GST_OBJECT(RVAL2GOBJ(o)))
@@ -75,13 +78,14 @@ extern gboolean debug_mode;
 #define RGST_AUTOPLUG_NEW(o)            (RGST_GOBJ_NEW(GST_AUTOPLUG(o)))
 #define RGST_AUTOPLUG_FACTORY_NEW(o)    (RGST_GOBJ_NEW(GST_AUTOPLUG_FACTORY(o)))
 #define RGST_BIN_NEW(o)                 (RGST_GOBJ_NEW(GST_BIN(o)))
-#define RGST_CAPS_NEW(o)                (rb_gst_caps_wrap_struct(GST_CAPS(o)))
+#define RGST_CAPS_NEW(o)                (BOXED2RVAL(GST_CAPS(o), GST_TYPE_CAPS))
 #define RGST_CLOCK_NEW(o)               (RGST_GOBJ_NEW(GST_CLOCK(o)))
 #define RGST_ELEMENT_FACTORY_NEW(o)     (RGST_GOBJ_NEW(GST_ELEMENT_FACTORY(o)))
 #define RGST_ELEMENT_NEW(o)             (RGST_GOBJ_NEW(GST_ELEMENT(o)))
-#define RGST_EVENT_NEW(o)               (RGST_GOBJ_NEW(GST_EVENT(o)))
+#define RGST_EVENT_NEW(o)               (BOXED2RVAL(GST_EVENT(o), GST_TYPE_EVENT))
 #define RGST_FORMAT_NEW(o)              (BOXED2RVAL(GST_FORMAT(o), GST_TYPE_FORMAT))
 #define RGST_INDEX_FACTORY_NEW(o)       (RGST_GOBJ_NEW(GST_INDEX_FACTORY(o)))
+#define RGST_OBJECT_NEW(o)              (RGST_GOBJ_NEW(GST_OBJECT(o)))
 #define RGST_PAD_NEW(o)                 (RGST_GOBJ_NEW(GST_PAD(o)))
 #define RGST_PAD_TEMPLATE_NEW(o)        (RGST_GOBJ_NEW(GST_PAD_TEMPLATE(o)))
 #define RGST_PIPELINE_NEW(o)            (RGST_GOBJ_NEW(GST_PIPELINE(o)))
@@ -100,9 +104,6 @@ GType gst_plugin_get_type();
 GType gst_query_type_get_type();
 GType gst_type_get_type();
 
-VALUE rb_gst_caps_wrap_struct(GstCaps *glib_obj); 
-GstCaps *rb_gst_caps_get_struct(VALUE rb_obj);
-
 /* misc.c interface */
 void rbgst_initialize_gstobject(VALUE obj, GstObject *gstobj);
 VALUE rbgst_new_gstobject(void *);
@@ -118,11 +119,14 @@ VALUE rb_ary_yield(VALUE arr);
  */
 #if !defined(ULL2NUM)
 #define ULL2NUM ULONG2NUM
+#define NUM2ULL NUM2ULONG
 #warning \
     This Ruby has no ``unsigned long long''! \
     Using ``unsigned long instead''.  \
     Some data precision may be lost.  \
     Upgrade your Ruby to a newer version to fix this issue.
+#else
+#define NUM2ULL(v)      (rb_big2ull(v))
 #endif
 
 /* 
