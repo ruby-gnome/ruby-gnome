@@ -1,9 +1,9 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.11 2004/08/15 15:06:39 mutoh Exp $
+  $Id: extconf.rb,v 1.12 2005/01/31 10:34:33 mutoh Exp $
 
-  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
 
 require 'mkmf'
@@ -14,8 +14,16 @@ priorlibs = ["glib", "gdkpixbuf", "pango", "atk", "gtk"]
 #
 # detect sub-directories
 #
-$ruby = File.join(Config::CONFIG['bindir'], Config::CONFIG['RUBY_INSTALL_NAME'])
+$ruby = File.join(Config::CONFIG['bindir'], Config::CONFIG['RUBY_INSTALL_NAME'] + Config::CONFIG['EXEEXT'])
 $ruby = arg_config("--ruby", $ruby)
+
+rm = "rm -f "
+if /mswin32/ =~ RUBY_PLATFORM
+  rm = "del " 
+  $ruby.gsub!(/\//, '\\')
+end
+
+
 
 $srcdir = File.dirname(__FILE__)
 $topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
@@ -68,22 +76,23 @@ File.open("Makefile", "w") do |makefile|
 TOPSRCDIR = #{$topsrcdir}
 SUBDIRS = #{targets.join(' ')}
 COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb #{$strict}
+RM = #{rm}
 
 all:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) all;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) all
 
 install:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) install;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) install
 
 site-install:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) site-install;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) site-install
 
 clean:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) clean;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) clean
 
 distclean:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) distclean;
-	rm -f Makefile mkmf.log
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) distclean
+	$(RM) Makefile mkmf.log
 ")
 end
 

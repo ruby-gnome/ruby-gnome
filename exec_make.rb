@@ -1,12 +1,10 @@
 =begin
   exec_make.rb is called by top-level Makefile.
 
-  $Id: exec_make.rb,v 1.4 2004/08/15 15:06:39 mutoh Exp $
+  $Id: exec_make.rb,v 1.5 2005/01/31 10:34:33 mutoh Exp $
 
-  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
-
-puts "ARGV = " + ARGV.inspect
 
 argv = ARGV
 strict = false
