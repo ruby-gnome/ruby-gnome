@@ -1,5 +1,8 @@
 2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_type.c: fix so that GLib::Type#to_class can treat
+	GEnum's descendants.
+
 	* src/rbgobj_object.c: enable GLib::Object.new! by default
 
 	* src/rbgobj_object.c (gobj_s_install_property): modify error message.

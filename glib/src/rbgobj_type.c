@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/04/12 13:14:16 $
+  $Date: 2003/04/13 09:05:34 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -106,6 +106,12 @@ rbgobj_lookup_class_by_gtype(gtype)
             if (gtype != G_TYPE_INTERFACE)
                 rb_include_module(cinfo->klass, GTYPE2CLASS(G_TYPE_INTERFACE));
             break;
+
+          case G_TYPE_ENUM:
+          case G_TYPE_FLAGS:
+            cinfo->klass = rb_cInteger;
+            rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+            return cinfo;
 
           default:
             /* we should raise exception? */
@@ -593,8 +599,6 @@ Init_type()
     _def_fundamental_type(ary, G_TYPE_ULONG,     "ULONG");
     _def_fundamental_type(ary, G_TYPE_INT64,     "INT64");
     _def_fundamental_type(ary, G_TYPE_UINT64,    "UINT64");
-    _def_fundamental_type(ary, G_TYPE_ENUM,      "ENUM");
-    _def_fundamental_type(ary, G_TYPE_FLAGS,     "FLAGS");
     _def_fundamental_type(ary, G_TYPE_FLOAT,     "FLOAT");
     _def_fundamental_type(ary, G_TYPE_DOUBLE,    "DOUBLE");
     _def_fundamental_type(ary, G_TYPE_STRING,    "STRING");
