@@ -14,6 +14,11 @@ require 'mkmf-gnome2'
 
 
 PKGConfig.have_package("libgda") or exit 1
+["1.1", "1.2", "1.3"].each do |version|
+    if system("pkg-config libgda --atleast-version=#{version}")
+        $CFLAGS << " -DGDA_AT_LEAST_#{version.sub(/\./, "_")} "
+    end
+end
 
 setup_win32(PACKAGE_NAME)
 

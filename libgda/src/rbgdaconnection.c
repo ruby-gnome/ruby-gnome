@@ -51,19 +51,6 @@ VALUE rb_gda_connection_close(self)
 }
 
 /*
- * Method: reset!
- *
- * Resets the connection.
- *
- * Returns: true if successful, false otherwise.
- */
-static VALUE rb_gda_connection_reset(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(gda_connection_reset(RGDA_CONNECTION(self)));
-}
-
-/*
  * Method: opened?
  *
  * Checks whether a connection is open or not.
@@ -348,23 +335,6 @@ static VALUE rb_gda_connection_add_errors(self, errors)
 }
 
 /*
- * Method: clear_errors
- *
- * This method lets you clear the list of Gda::Error's of the
- * current connection. This is useful to reuse a Gda::Connection
- * because next uses of Gda::Connection#errors will return an empty
- * list.
- * 
- * Returns: self.
- */
-static VALUE rb_gda_connection_clear_errors(self)
-    VALUE self;
-{
-    gda_connection_clear_error_list(RGDA_CONNECTION(self));
-    return self;
-}
-
-/*
  * Method: begin_transaction(xaction)
  * xaction: a Gda::Transaction object.
  *
@@ -478,6 +448,37 @@ static VALUE rb_gda_connection_drop_database(self, db)
                                                    RVAL2CSTR(db)));
 }
 
+#if defined(GDA_AT_LEAST_1_1)
+/*
+ * Method: reset!
+ *
+ * Resets the connection.
+ *
+ * Returns: true if successful, false otherwise.
+ */
+static VALUE rb_gda_connection_reset(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gda_connection_reset(RGDA_CONNECTION(self)));
+}
+
+/*
+ * Method: clear_errors
+ *
+ * This method lets you clear the list of Gda::Error's of the
+ * current connection. This is useful to reuse a Gda::Connection
+ * because next uses of Gda::Connection#errors will return an empty
+ * list.
+ * 
+ * Returns: self.
+ */
+static VALUE rb_gda_connection_clear_errors(self)
+    VALUE self;
+{
+    gda_connection_clear_error_list(RGDA_CONNECTION(self));
+    return self;
+}
+
 /*
  * Method: create_table(name, attributes)
  * name: the name of the table to create.
@@ -517,6 +518,7 @@ static VALUE rb_gda_connection_drop_table(self, name)
 {
     return CBOOL2RVAL(gda_connection_drop_table(RGDA_CONNECTION(self), RVAL2CSTR(name)));
 }
+#endif /* GDA_AT_LEAST_1_1 */
 
 /*
  * Method: supports?(feature)
@@ -573,7 +575,6 @@ void Init_gda_connection(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_CONNECTION, "Connection", mGda);
 
     rb_define_method(c, "close",   rb_gda_connection_close,     0);
-    rb_define_method(c, "reset!",  rb_gda_connection_reset,     0);
     rb_define_method(c, "opened?", rb_gda_connection_is_opened, 0);
   
     rb_define_method(c, "dsn",            rb_gda_connection_get_dsn,            0);
@@ -598,15 +599,18 @@ void Init_gda_connection(void) {
 
     rb_define_method(c, "errors",     rb_gda_connection_get_errors,  0);
     rb_define_method(c, "add_errors", rb_gda_connection_add_errors, -2);
-    rb_define_method(c, "clear_errors", rb_gda_connection_clear_errors, 0);
     
     rb_define_method(c, "database",        rb_gda_connection_get_database,    0);
     rb_define_method(c, "change_database", rb_gda_connection_change_database, 0);
     rb_define_method(c, "create_database", rb_gda_connection_create_database, 0);
     rb_define_method(c, "drop_database",   rb_gda_connection_drop_database,   0);
 
+#if defined(GDA_AT_LEAST_1_1)
+    rb_define_method(c, "reset!",  rb_gda_connection_reset,     0);
+    rb_define_method(c, "clear_errors", rb_gda_connection_clear_errors, 0);
     rb_define_method(c, "create_table", rb_gda_connection_create_table, 2);
     rb_define_method(c, "drop_table", rb_gda_connection_drop_table, 1);
+#endif
     
     rb_define_method(c, "supports?", rb_gda_connection_supports, 1);
 

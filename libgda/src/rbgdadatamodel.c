@@ -93,54 +93,6 @@ static VALUE rb_gda_datamodel_row_removed(self, rownum)
 }
 
 /*
- * Method: emit_column_inserted(colnum)
- * colnum: a column number.
- *
- * Emits the 'column_inserted' and 'changed' signals on the model.
- *
- * Returns: self.
- */
-static VALUE rb_gda_datamodel_column_inserted(self, colnum)
-    VALUE self, colnum;
-{
-    gda_data_model_column_inserted(RGDA_DATAMODEL(self), 
-                                   FIX2INT(colnum));
-    return self;
-}
-
-/*
- * Method: emit_column_updated(colnum)
- * colnum: a column number.
- *
- * Emits the 'column_updated' and 'changed' signals on the model.
- *
- * Returns: self.
- */
-static VALUE rb_gda_datamodel_column_updated(self, colnum)
-    VALUE self, colnum;
-{
-    gda_data_model_column_updated(RGDA_DATAMODEL(self),
-                                  FIX2INT(colnum));
-    return self;
-}
-
-/*
- * Method: emit_column_removed(colnum)
- * colnum: a column number.
- *
- * Emits the 'column_removed' and 'changed' signals on the model.
- *
- * Returns: self.
- */
-static VALUE rb_gda_datamodel_column_removed(self, colnum)
-    VALUE self, colnum;
-{
-    gda_data_model_column_removed(RGDA_DATAMODEL(self),
-                                  FIX2INT(colnum));
-    return self;
-}
-
-/*
  * Method: freeze!
  *
  * Disables notifications of changes on the data model. To re-enable
@@ -421,6 +373,55 @@ static VALUE rb_gda_datamodel_remove_row(self, row)
                                                 RGDA_ROW(row)));
 }
 
+#if defined(GDA_AT_LEAST_1_1)
+/*
+ * Method: emit_column_inserted(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_inserted' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_inserted(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_inserted(RGDA_DATAMODEL(self), 
+                                   FIX2INT(colnum));
+    return self;
+}
+
+/*
+ * Method: emit_column_updated(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_updated' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_updated(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_updated(RGDA_DATAMODEL(self),
+                                  FIX2INT(colnum));
+    return self;
+}
+
+/*
+ * Method: emit_column_removed(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_removed' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_removed(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_removed(RGDA_DATAMODEL(self),
+                                  FIX2INT(colnum));
+    return self;
+}
+
 /*
  * Method: append_column(attributes)
  * attributes: a Gda::FieldAttributes object describing the column to add.
@@ -467,6 +468,7 @@ static VALUE rb_gda_datamodel_remove_column(self, column_id)
     return CBOOL2RVAL(gda_data_model_remove_column(RGDA_DATAMODEL(self),
                                                    FIX2INT(column_id)));
 }
+#endif /* GDA_AT_LEAST_1_1 */
 
 /*
  * Method: updatable?
@@ -476,7 +478,11 @@ static VALUE rb_gda_datamodel_remove_column(self, column_id)
 static VALUE rb_gda_datamodel_is_updatable(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_is_updatable(RGDA_DATAMODEL(self)));
+#else
+    return CBOOL2RVAL(gda_data_model_is_editable(RGDA_DATAMODEL(self)));
+#endif
 }
 
 /*
@@ -492,7 +498,11 @@ static VALUE rb_gda_datamodel_is_updatable(self)
 static VALUE rb_gda_datamodel_has_changed(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_has_changed(RGDA_DATAMODEL(self)));
+#else
+    return CBOOL2RVAL(gda_data_model_is_editing(RGDA_DATAMODEL(self)));
+#endif
 }
 
 /*
@@ -506,7 +516,11 @@ static VALUE rb_gda_datamodel_has_changed(self)
 static VALUE rb_gda_datamodel_begin_update(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_begin_update(RGDA_DATAMODEL(self)));
+#else
+    return CBOOL2RVAL(gda_data_model_begin_edit(RGDA_DATAMODEL(self)));
+#endif
 }
 
 /*
@@ -520,7 +534,11 @@ static VALUE rb_gda_datamodel_begin_update(self)
 static VALUE rb_gda_datamodel_cancel_update(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_cancel_update(RGDA_DATAMODEL(self)));
+#else
+    return CBOOL2RVAL(gda_data_model_cancel_edit(RGDA_DATAMODEL(self)));
+#endif
 }
 
 /*
@@ -534,7 +552,11 @@ static VALUE rb_gda_datamodel_cancel_update(self)
 static VALUE rb_gda_datamodel_end_update(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_end_update(RGDA_DATAMODEL(self)));
+#else
+    return CBOOL2RVAL(gda_data_model_end_edit(RGDA_DATAMODEL(self)));
+#endif
 }
 
 /*
@@ -646,10 +668,6 @@ void Init_gda_datamodel(void) {
     rb_define_method(c, "emit_row_inserted", rb_gda_datamodel_row_inserted, 1); 
     rb_define_method(c, "emit_row_updated",  rb_gda_datamodel_row_updated,  1); 
     rb_define_method(c, "emit_row_removed",  rb_gda_datamodel_row_removed,  1); 
-    rb_define_method(c, "emit_column_inserted", rb_gda_datamodel_column_inserted, 1); 
-    rb_define_method(c, "emit_column_updated",  rb_gda_datamodel_column_updated,  1); 
-    rb_define_method(c, "emit_column_removed",  rb_gda_datamodel_column_removed,  1); 
-
     rb_define_method(c, "freeze!", rb_gda_datamodel_freeze, 0);
     rb_define_method(c, "thaw!",   rb_gda_datamodel_thaw,   0);
 
@@ -671,10 +689,6 @@ void Init_gda_datamodel(void) {
     rb_define_method(c, "remove_row", rb_gda_datamodel_remove_row,  1);
     rb_define_method(c, "update_row", rb_gda_datamodel_update_row,  1);
    
-    rb_define_method(c, "append_column", rb_gda_datamodel_append_column, 1);
-    rb_define_method(c, "update_column", rb_gda_datamodel_update_column, 2);
-    rb_define_method(c, "remove_column", rb_gda_datamodel_remove_column, 1);
-    
     rb_define_method(c, "updatable?", rb_gda_datamodel_is_updatable, 0);
     rb_define_method(c, "changed?",  rb_gda_datamodel_has_changed,  0);
     
@@ -702,6 +716,15 @@ gboolean    gda_data_model_add_data_from_xml_node
     rb_define_method(c, "set_command_type", 
                      rb_gda_datamodel_set_command_type, 1);
 
+#if defined(GDA_AT_LEAST_1_1)
+    rb_define_method(c, "emit_column_inserted", rb_gda_datamodel_column_inserted, 1); 
+    rb_define_method(c, "emit_column_updated",  rb_gda_datamodel_column_updated,  1); 
+    rb_define_method(c, "emit_column_removed",  rb_gda_datamodel_column_removed,  1); 
+    rb_define_method(c, "append_column", rb_gda_datamodel_append_column, 1);
+    rb_define_method(c, "update_column", rb_gda_datamodel_update_column, 2);
+    rb_define_method(c, "remove_column", rb_gda_datamodel_remove_column, 1);
+#endif
+    
     G_DEF_SETTERS(c);
 
     cGdaDataModel = c;

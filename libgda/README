@@ -9,7 +9,7 @@ Requirements
     Ruby:           http://www.ruby-lang.org/
     libgda [*]:     http://www.gnome-db.org/
 
-    [*]: 1.1.99 or newer is required.
+    [*]: 1.0.3 or newer is required (1.1.x branch supported).
 
 Install
 -------

@@ -68,6 +68,7 @@ static VALUE rb_gda_provider_each(self)
     return Qnil;
 }
 
+#if defined(GDA_AT_LEAST_1_1)
 /*
  * Class method: model
  *
@@ -87,6 +88,7 @@ static VALUE rb_gda_provider_model(self)
         ? RGDA_DATAMODEL_NEW(model)
         : Qnil;
 }
+#endif /* GDA_AT_LEAST_1_1 */
 
 /*
  * Class method: get_by_name(name)
@@ -163,7 +165,9 @@ void Init_gda_provider(void) {
 
     rb_define_singleton_method(c, "providers", rb_gda_get_providers,  0);
     rb_define_singleton_method(c, "each",      rb_gda_provider_each,  0);
+#if defined(GDA_AT_LEAST_1_1)
     rb_define_singleton_method(c, "model",     rb_gda_provider_model, 0);
+#endif
     rb_define_singleton_method(c, "get_by_name", 
                                rb_gda_provider_get_by_name, 1);
 
