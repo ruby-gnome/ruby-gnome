@@ -1,7 +1,7 @@
 =begin
 
   savedposition.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: savedposition.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
+  $Id: savedposition.rb,v 1.4 2002/12/02 15:31:02 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -79,8 +79,8 @@ class SavedPositionSample < SampleWindow
       x, y = window.root_origin
       Pos[0] = x
       Pos[1] = y
-      x_label.text = x.to_s
-      y_label.text = y.to_s
+      x_label.set_text(x.to_s)
+      y_label.set_text(y.to_s)
     end
 
     any = Gtk::HSeparator::new()
