@@ -14,9 +14,12 @@
 
 	* src/rbgobj_enums.c (rbgobj_get_enum, rbgobj_get_flags): 
 	create temporary enum/flags object if the argument is an integer.
+	this is to check if the integer is in the values avalable in the type.
+	(proposed by Vincent Isambart <vincent.isambart@laposte.net>
 
 	* src/rbgobject.c (rbgobj_initialize_object): raise RuntimeError
-	if the argument is NULL.
+	if the argument is NULL. (proposed by Vincent Isambart
+	<vincent.isambart@laposte.net>)
 
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
