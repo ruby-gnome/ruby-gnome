@@ -31,6 +31,8 @@ have_func('atk_object_remove_relationship')
 have_func('atk_component_get_layer')
 have_func('atk_component_mdi_zorder')
 
+$distcleanfiles << "rbatkinits.c"
+
 begin
   srcdir = File.dirname($0) == "." ? "." :
     File.expand_path(File.dirname($0) + "/src")
