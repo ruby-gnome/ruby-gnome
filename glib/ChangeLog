@@ -1,5 +1,11 @@
 2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* glib/src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	enable calling of rbgobj_define_property_accessors() and
+	rbgobj_define_signal_constants().
+
+2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
 	* glib/src/rbgobj_type.c: abolish rbgobj_register_class()
 	* glib/src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
 	now this function create a new class on demand.

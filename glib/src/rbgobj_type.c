@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:43:10 $
+  $Date: 2002/08/02 13:39:48 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -70,10 +70,9 @@ rbgobj_lookup_class_by_gtype(gtype)
 
         rb_ivar_set(cinfo->klass, id_class_info, c);
         rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
-#if 0
+
         rbgobj_define_property_accessors(cinfo->klass);
         rbgobj_define_signal_constants(cinfo->klass);
-#endif
     }
 
     return cinfo;
