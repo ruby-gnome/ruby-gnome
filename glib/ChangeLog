@@ -1,3 +1,9 @@
+2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgutil.c, src/rbgutil.h: re-implement rbgutil_raise_gerror as
+	macro and rename to RAISE_GERROR.
+	add a new function rbgutil_gerror2exception()
+
 2002-11-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.c, rbgobj_type.c: Remove rbgobj_define_signal_constants().

@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: tkubo $
-  $Date: 2002/10/29 16:54:56 $
+  $Date: 2002/11/01 15:15:55 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -17,8 +17,8 @@ ID id_add_one_arg_setter;
 static ID id_set_property;
 static ID id_to_a;
 
-void
-rbgutil_raise_gerror(error)
+VALUE
+rbgutil_gerror2exception(error)
     GError *error;
 {
     gchar *msg = g_locale_from_utf8(error->message, -1, NULL, NULL, NULL);
@@ -27,7 +27,7 @@ rbgutil_raise_gerror(error)
     if (msg)
         g_free(msg);
     g_error_free(error);
-    rb_exc_raise(exc);
+    return exc;
 }
 
 void
