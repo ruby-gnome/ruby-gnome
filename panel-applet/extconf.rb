@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GdkPixbuf extention library
+extconf.rb for Ruby/PanelApplet extention library
 =end
 
 PACKAGE_NAME = "panelapplet2"
@@ -18,4 +18,5 @@ setup_win32(PACKAGE_NAME)
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-create_makefile('panelapplet2')
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANELAPPLET_COMPILATION")
+
