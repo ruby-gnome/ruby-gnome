@@ -1,3 +1,10 @@
+2003-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): use #instance_method,
+	UnboundMethod#bind and Method#call instead of #__send__.
+
+	* src/rbgobj_signal.c (gobj_s_method_added): check GType.
+
 2003-09-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (gobj_s_sig_override): check if the class is
