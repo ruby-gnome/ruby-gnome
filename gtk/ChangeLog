@@ -1,7 +1,15 @@
+2003-03-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkthreads.c: Add a file.
+	* src/init.c: Support multi-threading.
+
+2003-03-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkthreads.c: Add a file. 
+
 2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: append "-DRUBY_GTK2_COMPILATION" to $defs.
-
 	* src/rbgtk.h: define RUBY_GTK2_VAR macro for exporting variables on
 	some win32 platform.
 
@@ -14,11 +22,8 @@
 2003-03-02  KATO Kazuyoshi  <kzys@users.sf.net>
 
 	* sample/gtk-demo/tree_store.rb: File added.
-
 	* sample/gtk-demo/editable_cells.rb: Finished porting.
-
 	* src/rbgtktreepath.c: Implement Gtk::TreePath#indices.
-
 	* src/rbgtktreeview.c:
 	Implement gtk_tree_view_insert_column_with_attributes style to
 	Gtk::TreeView#insert.
@@ -27,7 +32,6 @@
 
 	* sample/gtk-demo: File added.
 
->>>>>>> 1.203
 2003-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/toolbar.rb, sample/testgtk/toolbar.rb: 

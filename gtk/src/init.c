@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/03/08 16:44:41 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -23,6 +23,11 @@ GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj) = NULL;
 void
 Init_gtk2()
 {
+#ifdef   G_THREADS_ENABLED
+    g_thread_init (NULL);
+    gdk_threads_init();
+#endif
+
     if (gtk_minor_version == 0) {
         rb_require("gtk20");
     } else {
@@ -42,4 +47,5 @@ Init_gtk2()
     Init_gtk_gtk();
 
     Init_gtk_inits();
+
 }

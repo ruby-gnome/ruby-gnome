@@ -10,6 +10,7 @@ require 'mkmf-gnome2'
 # detect GTK+ configurations
 #
 
+PKGConfig.have_package('gthread-2.0')
 pkgname= 'gtk+-2.0'
 PKGConfig.have_package(pkgname) or exit
 check_win32
