@@ -1,6 +1,7 @@
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_spawn.c: Fix warnings. 
+	* src/rbgobject.c: Fix a warning. 
 
 2004-08-04  Masao Mutoh  <mutoh@highway.ne.jp>
 

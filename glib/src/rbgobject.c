@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2004/05/15 17:46:15 $
+  $Date: 2004/08/07 15:50:55 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -287,7 +287,7 @@ rbgobj_define_property_accessors(klass)
     VALUE klass;
 {
     GType gtype;
-    GParamSpec** pspecs;
+    GParamSpec** pspecs = NULL;
     int i;
     GString* source = g_string_new(NULL);
     guint n_properties = 0;
