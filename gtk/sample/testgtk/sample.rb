@@ -4,7 +4,7 @@
 
 =end
 
-require 'gtk'
+require 'gtk2'
 
 module Sample
   def destroy

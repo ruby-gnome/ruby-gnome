@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 window = Gtk::FileSelection::new("file selection dialog")
 window.position(Gtk::WIN_POS_MOUSE)

@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 def create_menu(depth)
   return nil if depth < 1

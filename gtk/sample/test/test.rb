@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 Gtk::RC::parse_string <<EOS
 style "default"

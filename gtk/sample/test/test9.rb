@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 def create_bbox_window(horizontal, title, pos, spacing, cw, ch, layout)
   window = Gtk::Window::new(Gtk::WINDOW_TOPLEVEL)

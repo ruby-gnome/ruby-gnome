@@ -1,4 +1,4 @@
-require 'gtk'
+require 'gtk2'
 
 window = Gtk::Window::new(Gtk::WINDOW_TOPLEVEL)
 window.set_title("notebook")

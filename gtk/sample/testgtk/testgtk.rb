@@ -28,7 +28,7 @@ Original Copyright:
 
 =end
 
-require 'gtk'
+require 'gtk2'
 require 'sample'
 require 'button'
 require 'checkbutton'
