@@ -11,7 +11,7 @@ class GladeXML
     return handler.gsub(/[-\s]/, "_")
   end
 
-  def connect(source, target, signal, handler, data, after)
+  def connect(source, target, signal, handler, data, after = false)
     handler = canonical_handler(handler)
     if target
       signal_proc = target.method(handler)
@@ -19,11 +19,12 @@ class GladeXML
       signal_proc = @handler_proc.call(handler)
     end
 
-    sig_conn_proc = source.method(:signal_connect)
     if after
       sig_conn_proc = source.method(:signal_connect_after)
+    else
+      sig_conn_proc = source.method(:signal_connect)
     end
-
+    
     if signal_proc
       case signal_proc.arity
       when 0

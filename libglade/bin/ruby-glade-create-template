@@ -6,7 +6,7 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.3 2003/03/20 15:55:45 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.4 2003/08/28 15:16:31 mutoh Exp $
 #
 # Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 #
@@ -15,13 +15,13 @@ require 'libglade2'
 
 class GladeXML
   attr_reader :signals
-  def connect(source, target, signal_name, handler, data)
+  def connect(source, target, signal_name, handler, data, after)
     @signals = [] unless @signals
     @signals << [source.class.signal(signal_name), self.canonical_handler(handler)]
   end
 end
 
-LG_VERSION = %Q[$Revision: 1.3 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.4 $].scan(/\d/).join(".")
 
 begin
   $EXIST_GNOME = true

@@ -1,6 +1,11 @@
+2003-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Fix a bug for GladeXML#connect.
+	* bin/ruby-glade-create-template: ditto.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
