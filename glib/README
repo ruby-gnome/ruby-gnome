@@ -1,0 +1,28 @@
+Ruby/GLib2
+==========
+Ruby/Glib2 is a Ruby binding of GLib-2.x.
+
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GLib: http://www.gtk.org/
+
+Install
+-------
+   0. install ruby-1.6.x, GLib.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
+
+Copying
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
+
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/
