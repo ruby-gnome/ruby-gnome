@@ -22,25 +22,8 @@ Copying
 
    This program is free software.
    You can distribute/modify this program under the terms of
-   the GNU LIBRARY General Public License version 2.
+   the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 Project Website
 ---------------
    http://ruby-gnome2.sourceforge.net/
-
-Known problems
---------------
-In earlier versions of libgtkhtml (2.2.4) you may experience sigsegvs when destroying
-the HtmlView widget.
-This seems to be gtkhtml2 bug, however to temporarily resolve this you can
-change gtkhtml2/src/rbgtkhtmlview.c like this:
-
-static VALUE
-rb_html_view_set_document (self, document )
-    VALUE self;
-    VALUE document;
-{
-    html_view_set_document (_SELF(self), HTML_DOCUMENT(RVAL2GOBJ(document)));
-    g_object_ref(RVAL2GOBJ(document)); /* this line added */
-    return self;
-}
