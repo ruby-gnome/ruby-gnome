@@ -1,3 +1,12 @@
+2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Gtk::TextBuffer#create_tag 
+	accept nil as a tag_name. 
+	* src/rbgdkthreads.c: Check g_thread_supported() before
+	calling g_thead_init().
+	* sample/gtk-demo/background.jpg: Added.
+	* sample/gtk-demo/rotated_text.rb: Added.
+
 2005-02-27  Mirko Maischberger  <mirko@lilik.it>
 
 	* src/init.c: (Init_gtk2): removed g_thread_init and

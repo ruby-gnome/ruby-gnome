@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Date: 2005/03/05 11:16:03 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -454,7 +454,7 @@ txt_create_tag(self, tag_name, properties)
 {
     GtkTextTag *tag;
 
-    tag = gtk_text_tag_new(RVAL2CSTR(tag_name));
+    tag = gtk_text_tag_new(NIL_P(tag_name) ? (gchar*)NULL : RVAL2CSTR(tag_name));
     gtk_text_tag_table_add (gtk_text_buffer_get_tag_table(_SELF(self)), tag);
 
     G_SET_PROPERTIES(GOBJ2RVAL(tag), properties);

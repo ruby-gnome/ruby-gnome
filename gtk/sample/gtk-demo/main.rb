@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.11 2005/02/25 17:09:25 kzys Exp $
+  $Id: main.rb,v 1.12 2005/03/05 11:16:03 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -190,7 +190,7 @@ module Demo
       lib = iter.get_value(FILENAME_COLUMN)
       if lib
         require(lib)
-
+ 
         klass = Demo.const_get(iter.get_value(CLASS_COLUMN))
         window = klass.new
         window.signal_connect('destroy') do

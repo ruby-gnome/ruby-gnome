@@ -3,10 +3,10 @@
 
   rbgtkthreads.c -
 
-  $Author: silicio $
-  $Date: 2005/03/02 12:06:36 $
+  $Author: mutoh $
+  $Date: 2005/03/05 11:16:03 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -17,13 +17,14 @@ rbgdk_threads_init(self)
     VALUE self;
 {
 #ifndef GDK_WINDOWING_WIN32
-    g_thread_init(NULL);
+    if (!g_thread_supported()){
+        g_thread_init(NULL);
+    }
     gdk_threads_init();
 #endif
     return self;
 }
 
-static VALUE
 rbgdk_threads_enter(self)
     VALUE self;
 {
