@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: mutoh $
-  $Date: 2003/01/30 15:50:53 $
+  $Date: 2003/02/12 18:10:26 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -27,10 +27,14 @@ static void
 boxed_free(boxed_holder* p)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
+    gpointer copy_obj = g_hash_table_lookup(boxed_table, (gconstpointer)(p->type));
+
     if (cinfo && cinfo->free)
         cinfo->free(p->boxed);
-    if (p->boxed)
+    
+    if (! copy_obj && p->boxed)
         g_boxed_free(p->type, p->boxed);
+
     free(p);
 }
 
