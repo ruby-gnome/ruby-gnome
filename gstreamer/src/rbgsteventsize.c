@@ -33,12 +33,12 @@
  *  Creates a new size event with the given values.
  *
  *  Meaningful formats are:
- *      - Gst::Format::DEFAULT
- *      - Gst::Format::BYTES
- *      - Gst::Format::TIME
- *      - Gst::Format::BUFFERS
- *      - Gst::Format::PERCENT
- *      - Gst::Format::UNITS
+ *      * Gst::Format::DEFAULT;
+ *      * Gst::Format::BYTES;
+ *      * Gst::Format::TIME;
+ *      * Gst::Format::BUFFERS;
+ *      * Gst::Format::PERCENT;
+ *      * Gst::Format::UNITS.
  */
 static VALUE rb_gst_eventsize_new(self, format, value)
     VALUE self, format, value;
