@@ -1,5 +1,7 @@
 2002-12-10  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
+	* src/rbgtkaccelkey.c: Fix filename in header.
+
 	* src/rbgtkaccelkey.c: Add a file.
 	* src/rbgtkaccelgroupentry.c: Add a file.
 	* src/rbgtkaccelgroup.c: Add Gtk::AccelGroup#from_object, #connect,

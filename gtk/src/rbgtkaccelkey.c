@@ -1,10 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgtkaccelmap.c -
+  rbgtkaccelkey.c -
 
   $Author: ogs $
-  $Date: 2002/12/09 16:33:11 $
+  $Date: 2002/12/09 16:38:41 $
 
   Copyright (C) 2002 OGASAWARA, Takeshi
 ************************************************/
