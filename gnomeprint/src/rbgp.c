@@ -12,4 +12,6 @@ Init_gnomeprint2(void) {
   Init_gnome_print_unit(mGnome, mGP);
 
   Init_gnome_print_gpa_root(mGnome, mGP);
+
+  Init_rbgp_utils(mGnome, mGP);
 }

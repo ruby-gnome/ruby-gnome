@@ -18,15 +18,28 @@ gp_config_dup(VALUE self)
 }
 
 static VALUE
-gp_config_to_string(VALUE self, VALUE flags)
+gp_config_to_string(int argc, VALUE *argv, VALUE self)
 {
+  VALUE flags; /* currently not used in libgnomeprint. */
+  rb_scan_args(argc, argv, "01", &flags);
+  if (NIL_P(flags)) {
+    flags = INT2NUM(0);
+  }
+  
   return CSTR2RVAL(gnome_print_config_to_string(_SELF(self),
                                                 NUM2UINT(flags)));
 }
 
 static VALUE
-gp_config_from_string(VALUE self, VALUE string, VALUE flags)
+gp_config_from_string(int argc, VALUE* argv, VALUE self)
 {
+  VALUE flags; /* currently not used in libgnomeprint. */
+  VALUE string;
+  rb_scan_args(argc, argv, "11", &string, &flags);
+  if (NIL_P(flags)) {
+    flags = INT2NUM(0);
+  }
+  
   return GOBJ2RVAL(gnome_print_config_from_string(RVAL2CSTR(string),
                                                   NUM2UINT(flags)));
 }
@@ -39,11 +52,11 @@ gp_config_new(int argc, VALUE *argv, VALUE self)
   
   if (argc == 0) {
     return gp_config_default(self);
-  } else if (argc == 2) {
-    return gp_config_from_string(self, string, flags);
+  } else if (argc == 1 || argc == 2) {
+    return gp_config_from_string(argc, argv, self);
   } else {
     rb_raise(rb_eArgError, "invalid argument number");
-    return Qnil;
+    return rb_call_super(argc, argv);
   }
 }
 
@@ -60,44 +73,56 @@ static VALUE
 gp_config_get_boolean(VALUE self, VALUE key)
 {
   gboolean value;
-  gnome_print_config_get_boolean(_SELF(self),
-                                 RVAL2CSTR(key),
-                                 &value);
-  return CBOOL2RVAL(value);
+  gboolean result;
+  
+  result = gnome_print_config_get_boolean(_SELF(self),
+                                          RVAL2CSTR(key),
+                                          &value);
+  return(result ? CBOOL2RVAL(value) : Qnil);
 }
 
 static VALUE
 gp_config_get_int(VALUE self, VALUE key)
 {
   gint value;
-  gnome_print_config_get_int(_SELF(self),
-                             RVAL2CSTR(key),
-                             &value);
-  return INT2NUM(value);
+  gboolean result;
+
+  result = gnome_print_config_get_int(_SELF(self),
+                                      RVAL2CSTR(key),
+                                      &value);
+  return(result ? INT2NUM(value) : Qnil);
 }
 
 static VALUE
 gp_config_get_double(VALUE self, VALUE key)
 {
   gdouble value;
-  gnome_print_config_get_double(_SELF(self),
-                                RVAL2CSTR(key),
-                                &value);
-  return rb_float_new(value);
+  gboolean result;
+
+  result = gnome_print_config_get_double(_SELF(self),
+                                         RVAL2CSTR(key),
+                                         &value);
+  return(result ? rb_float_new(value) : Qnil);
 }
 
 static VALUE
 gp_config_get_length(VALUE self, VALUE key)
 {
   gdouble value;
+  gboolean result;
   const GnomePrintUnit *unit;
-  gnome_print_config_get_length(_SELF(self),
-                                RVAL2CSTR(key),
-                                &value,
-                                &unit);
-  return rb_ary_new3(2,
-                     rb_float_new(value),
-                     GOBJ2RVAL((GnomePrintUnit *)unit));
+  
+  result = gnome_print_config_get_length(_SELF(self),
+                                         RVAL2CSTR(key),
+                                         &value,
+                                         &unit);
+  if (result) {
+    return rb_ary_new3(2,
+                       rb_float_new(value),
+                       GOBJ2RVAL((GnomePrintUnit *)unit));
+  } else {
+    return Qnil;
+  }
 }
 
 #define TRANSFORM_SIZE 6
@@ -105,20 +130,25 @@ gp_config_get_length(VALUE self, VALUE key)
 static VALUE
 gp_config_get_transform(VALUE self, VALUE key)
 {
-  VALUE array = rb_ary_new();
   gdouble *value = ALLOCA_N(gdouble, TRANSFORM_SIZE);
+  gboolean result;
   int i;
   
-  gnome_print_config_get_transform(_SELF(self),
-                                   RVAL2CSTR(key),
-                                   value);
+  result = gnome_print_config_get_transform(_SELF(self),
+                                            RVAL2CSTR(key),
+                                            value);
 
-  for (i = 0; i < TRANSFORM_SIZE; i++) {
-    rb_ary_push(array, rb_float_new(*value));
-    value++;
-  }
+  if (result) {
+    return Qnil;
+  } else {
+    VALUE array = rb_ary_new();
+    for (i = 0; i < TRANSFORM_SIZE; i++) {
+      rb_ary_push(array, rb_float_new(*value));
+      value++;
+    }
     
-  return array;
+    return array;
+  }
 }
 
 static VALUE
@@ -238,7 +268,7 @@ static VALUE
 gp_config_dump(VALUE self)
 {
   gnome_print_config_dump(_SELF(self));
-  return self;
+  return Qnil;
 }
 
 
@@ -256,12 +286,12 @@ Init_gnome_print_config(VALUE mGnome, VALUE mGP)
 
 
   rb_define_module_function(c, "default", gp_config_default, 0);
-  rb_define_module_function(c, "from_string", gp_config_from_string, 2);
+  rb_define_module_function(c, "from_string", gp_config_from_string, -1);
   
-  rb_define_method(c, "initialize", gp_config_new, -1);
+  rb_define_module_function(c, "new", gp_config_new, -1);
 
   rb_define_method(c, "dup", gp_config_dup, 0);
-  rb_define_method(c, "to_s", gp_config_to_string, 1);
+  rb_define_method(c, "to_s", gp_config_to_string, -1);
 
   rb_define_method(c, "get", gp_config_get_generic, -1);
   rb_define_method(c, "[]", gp_config_get_generic, -1);

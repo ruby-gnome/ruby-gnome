@@ -26,7 +26,7 @@ static VALUE
 gp_pango_update_context(VALUE self, VALUE context)
 {
   gnome_print_pango_update_context(RVAL2GOBJ(context), _SELF(self));
-  return self;
+  return Qnil;
 }
 
 static VALUE
@@ -41,21 +41,21 @@ gp_pango_glyph_string(VALUE self, VALUE font, VALUE glyphs)
   gnome_print_pango_glyph_string(_SELF(self),
                                  RVAL2GOBJ(font),
                                  RVAL2GOBJ(glyphs));
-  return self;
+  return Qnil;
 }
 
 static VALUE
 gp_pango_layout_line(VALUE self, VALUE line)
 {
   gnome_print_pango_layout_line(_SELF(self), RVAL2GOBJ(line));
-  return self;
+  return Qnil;
 }
 
 static VALUE
 gp_pango_layout(VALUE self, VALUE layout)
 {
   gnome_print_pango_layout(_SELF(self), RVAL2GOBJ(layout));
-  return self;
+  return Qnil;
 }
 
 

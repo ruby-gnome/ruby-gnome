@@ -1,3 +1,25 @@
 2004-10-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-utils.c: ADDED: utilities for handing error.
+
+	* src/rbgp-gnome-print.c: added error handling.
+
+	* src/rbgp-gnome-print-job.c: added error handling.
+
+	* src/rbgp-gnome-print-pango.c: wrapper method of function which
+	  returns void returns Qnil.
+
+	* src/rbgp-gnome-print-config.c (PrintConfig#to_s,
+	  PrintConfig.from_string): changed flags to optional argument
+	  because flags isn't used in libgnomeprint.
+
+	* src/rbgp-gnome-print-config.c (PrintConfig#get*): return Qnil if
+	  fail.
+
+	* src/rbgp-gnome-print-config.c (PrintConfig#dump): return Qnil.
+
+	* src/rbgp-gnome-print-unit.c:
+	  Gnome::PrintUnit.convert_distance*(..., from, ...) ->
+	  from.convert_distance*(...)
+
 	* gnomeprint: imported gnomeprint.

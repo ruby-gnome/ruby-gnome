@@ -87,27 +87,27 @@ gp_unit_get_abbr_plural(VALUE self)
 
 
 static VALUE
-gp_convert_distance(VALUE self, VALUE distance, VALUE from, VALUE to)
+gp_convert_distance(VALUE self, VALUE distance, VALUE to)
 {
   gboolean ret;
   gdouble dist = NUM2DBL(distance);
   
   ret = gnome_print_convert_distance(&dist,
-                                     RVAL2GPU(from),
+                                     RVAL2GPU(self),
                                      RVAL2GPU(to));
   
   return rb_float_new(dist);
 }
 
 static VALUE
-gp_convert_distance_full(VALUE self, VALUE distance, VALUE from, VALUE to,
+gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
                          VALUE ctmscale, VALUE devicescale)
 {
   gboolean ret;
   gdouble dist = NUM2DBL(distance);
   
   ret = gnome_print_convert_distance_full(&dist,
-                                          RVAL2GPU(from),
+                                          RVAL2GPU(self),
                                           RVAL2GPU(to),
                                           NUM2DBL(ctmscale),
                                           NUM2DBL(devicescale));
@@ -149,11 +149,11 @@ Init_gnome_print_unit(VALUE mGnome, VALUE mGP)
   rb_define_module_function(cUnit, "get_list", gp_unit_get_list, 1);
 
 
-  G_DEF_SETTERS(cUnit);
-
 /* Utility */
-  rb_define_module_function(mGP, "convert_distance",
-                            gp_convert_distance, 3);
-  rb_define_module_function(mGP, "convert_distance_full",
-                            gp_convert_distance_full, 5);
+  rb_define_method(cUnit, "convert_distance",
+                   gp_convert_distance, 2);
+  rb_define_method(cUnit, "convert_distance_full",
+                   gp_convert_distance_full, 4);
+
+  G_DEF_SETTERS(cUnit);
 }

@@ -28,31 +28,30 @@ gp_job_get_config(VALUE self)
 static VALUE
 gp_job_close(VALUE self)
 {
-  gnome_print_job_close(_SELF(self));
-  return self;
+  return check_return_code(gnome_print_job_close(_SELF(self)));
 }
 
 static VALUE
 gp_job_print(VALUE self)
 {
-  gnome_print_job_print(_SELF(self));
-  return self;
+  return check_return_code(gnome_print_job_print(_SELF(self)));
 }
 
 static VALUE
 gp_job_render(VALUE self, VALUE context)
 {
-  gnome_print_job_render(_SELF(self), GP_CONTEXT(context));
-  return self;
+  return check_return_code(gnome_print_job_render(_SELF(self),
+                                                  GP_CONTEXT(context)));
 }
 
+/* pageops: wether you want to send begingpage/showpage to output */
 static VALUE
 gp_job_render_page(VALUE self, VALUE context, VALUE page, VALUE pageops)
 {
-  return INT2NUM(gnome_print_job_render_page(_SELF(self),
-                                             GP_CONTEXT(context),
-                                             NUM2INT(page),
-                                             RTEST(pageops)));
+  return check_return_code(gnome_print_job_render_page(_SELF(self),
+                                                       GP_CONTEXT(context),
+                                                       NUM2INT(page),
+                                                       RTEST(pageops)));
 }
 
 static VALUE
@@ -64,8 +63,8 @@ gp_job_get_pages(VALUE self)
 static VALUE
 gp_job_print_to_file(VALUE self, VALUE output)
 {
-  return INT2NUM(gnome_print_job_print_to_file(_SELF(self),
-                                               RVAL2CSTR(output)));
+  return check_return_code(gnome_print_job_print_to_file(_SELF(self),
+                                                         RVAL2CSTR(output)));
 }
 
 static VALUE
