@@ -2,6 +2,7 @@
 
 	* src/rbgtkcontainer.c: Add Gtk::Widget.install_child_property.
 	* sample/misc/properties.rb: Added.
+	* src/lib/gtk2.rb: Require Atk module.
 
 2004-01-26  Masao Mutoh  <mutoh@highway.ne.jp>
 

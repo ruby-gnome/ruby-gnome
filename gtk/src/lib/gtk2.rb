@@ -1,4 +1,5 @@
 require 'glib2'
+require 'atk'
 require 'pango.so'
 require 'gtk2.so'
 require 'gdk_pixbuf2.so'
