@@ -46,6 +46,7 @@ extern gboolean debug_mode;
 #define GST_QUERY_TYPE(o)   ((GstQueryType *) o)
 #define GST_TYPE(o)         ((GstType *) o)
 
+#define GST_TYPE_CLOCK_ENTRY    (gst_clock_entry_get_type())
 #define GST_TYPE_EVENT_MASK     (gst_event_mask_get_type())
 #define GST_TYPE_FORMAT         (gst_format_get_type())
 #define GST_TYPE_PLUGIN         (gst_plugin_get_type())
@@ -57,6 +58,7 @@ extern gboolean debug_mode;
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
 #define RGST_CLOCK(o)               (GST_CLOCK(RVAL2GOBJ(o)))
+#define RGST_CLOCK_ENTRY(o)         (GST_CLOCK_ENTRY(RVAL2BOXED(o, GST_TYPE_CLOCK_ENTRY)))
 #define RGST_ELEMENT(o)             (GST_ELEMENT(RVAL2GOBJ(o)))
 #define RGST_ELEMENT_FACTORY(o)     (GST_ELEMENT_FACTORY(RVAL2GOBJ(o)))
 #define RGST_EVENT(o)               (GST_EVENT(RVAL2BOXED(o, GST_TYPE_EVENT)))
@@ -84,6 +86,7 @@ extern gboolean debug_mode;
 #define RGST_BIN_NEW(o)                 (RGST_GOBJ_NEW(GST_BIN(o)))
 #define RGST_CAPS_NEW(o)                (BOXED2RVAL(GST_CAPS(o), GST_TYPE_CAPS))
 #define RGST_CLOCK_NEW(o)               (RGST_GOBJ_NEW(GST_CLOCK(o)))
+#define RGST_CLOCK_ENTRY_NEW(o)         (BOXED2RVAL(GST_CLOCK_ENTRY(o), GST_TYPE_CLOCK_ENTRY))
 #define RGST_ELEMENT_FACTORY_NEW(o)     (RGST_GOBJ_NEW(GST_ELEMENT_FACTORY(o)))
 #define RGST_ELEMENT_NEW(o)             (RGST_GOBJ_NEW(GST_ELEMENT(o)))
 #define RGST_EVENT_NEW(o)               (BOXED2RVAL(GST_EVENT(o), GST_TYPE_EVENT))
@@ -104,6 +107,7 @@ extern gboolean debug_mode;
 #define RGST_TYPE_NEW(o)                (BOXED2RVAL(GST_TYPE(o), GST_TYPE_TYPE))
 #define RGST_TYPE_FIND_NEW(o)           (RGST_GOBJ_NEW(GST_TYPE_FIND(o)))
 
+GType gst_clock_handle_get_type();
 GType gst_event_mask_get_type();
 GType gst_format_get_type();
 GType gst_plugin_get_type();
@@ -136,7 +140,7 @@ VALUE instanciate_pluginfeature(GstPluginFeature *feature);
     Some data precision may be lost.  \
     Upgrade your Ruby to a newer version to fix this issue.
 #else
-#define NUM2ULL(v)      (rb_big2ull(v))
+#define NUM2ULL(v)      (rb_num2ull(v))
 #endif
 
 /* 
