@@ -1,3 +1,7 @@
+2002-12-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkimage.c: Gtk::Image#stock return Symbol instead of String. 
+
 2002-12-09  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkmain.c (gtk_m_main, gtk_m_main_quit): Thread#join by

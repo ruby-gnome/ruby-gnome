@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/11/22 14:19:23 $
+  $Date: 2002/12/09 15:07:00 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -112,5 +112,7 @@ Init_gtk_image()
     rb_define_const(gImage, "STOCK", INT2FIX(GTK_IMAGE_STOCK));
     rb_define_const(gImage, "ICON_SET", INT2FIX(GTK_IMAGE_ICON_SET));
     rb_define_const(gImage, "ANIMATION", INT2FIX(GTK_IMAGE_ANIMATION));
+
+    G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
 
 }
