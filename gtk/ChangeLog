@@ -1,3 +1,11 @@
+2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Gdk::Window#set_geometry_hints accept nil as geometry.
+	Fix a memory leak of Gdk::Window#children.
+	Add Gdk::Window#set_skip_taskbar_hint, #set_skip_pager_hint.
+	Gdk::Window#pointer returns nil when the window contains the pointer isn't 
+	known to GDK.
+
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Gdk::Window#set_static_gravities raise 

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/02/18 16:11:29 $
+  $Date: 2004/02/22 13:06:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -21,7 +21,7 @@ gdkwin_initialize(self, parent, attributes, attributes_mask)
     VALUE self, parent, attributes, attributes_mask;
 {
     GdkWindow* win;
-    win = gdk_window_new(_SELF(parent), 
+    win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent), 
                          (GdkWindowAttr*)RVAL2BOXED(attributes, 
                                                     GDK_TYPE_WINDOW_ATTR), 
                          RVAL2GFLAGS(attributes_mask, 
@@ -326,7 +326,7 @@ gdkwin_s_constrain_size(self, geometry, flags, w, h)
     gdk_window_constrain_size((GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
                               RVAL2GFLAGS(flags, GDK_TYPE_WINDOW_HINTS),
                               NUM2INT(w), NUM2INT(h), &new_width, &new_height);
-    return rb_ary_new3(2, INT2NUM(new_width), INT2NUM(new_height));
+    return rb_assoc_new(INT2NUM(new_width), INT2NUM(new_height));
 }
 
 static VALUE
@@ -598,7 +598,7 @@ gdkwin_set_geometry_hints(self, geometry, geom_mask)
     VALUE self, geometry, geom_mask;
 {
     gdk_window_set_geometry_hints(_SELF(self), 
-                                  (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
+                                  NIL_P(geometry) ? (GdkGeometry*)NULL : (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
                                   RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
 }
@@ -635,13 +635,31 @@ gdkwin_set_type_hint(self, hint)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkwin_set_skip_taskbar_hint(self, hint)
+    VALUE self, hint;
+{
+    gdkwin_set_skip_taskbar_hint(_SELF(self), RTEST(hint));
+    return self;
+}
+
+static VALUE
+gdkwin_set_skip_pager_hint(self, hint)
+    VALUE self, hint;
+{
+    gdkwin_set_skip_pager_hint(_SELF(self), RTEST(hint));
+    return self;
+}
+#endif
+
 static VALUE
 gdkwin_get_position(self)
     VALUE self;
 {
     gint x, y;
     gdk_window_get_position(_SELF(self), &x, &y);
-    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+    return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
 
 static VALUE
@@ -675,7 +693,7 @@ gdkwin_get_origin(self)
 {
     gint x, y;
     gdk_window_get_origin(_SELF(self), &x, &y);
-    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+    return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
 
 /* Obsolete
@@ -689,11 +707,11 @@ static VALUE
 gdkwin_get_pointer(self)
     VALUE self;
 {
-    int x, y;
+    gint x, y;
     GdkModifierType state;
-    gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
-
+    GdkWindow* ret = gdk_window_get_pointer(_SELF(self), &x, &y, &state);
+    
+    return ret ? rb_ary_new3(3, INT2NUM(x), INT2NUM(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE)) : Qnil;
 }
 
 static VALUE
@@ -714,7 +732,8 @@ static VALUE
 gdkwin_get_children(self)
     VALUE self;
 {
-    GList* list = gdk_window_get_children(_SELF(self));
+    /* Don't use gdk_window_get_children() here */
+    GList* list = gdk_window_peek_children(_SELF(self));
     VALUE ary = rb_ary_new();
     while (list) {
         rb_ary_push(ary, GOBJ2RVAL(list->data));
@@ -888,6 +907,10 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_icon_list", gdkwin_set_icon_list, 1);
     rb_define_method(gdkWindow, "set_modal_hint", gdkwin_set_modal_hint, 1);
     rb_define_method(gdkWindow, "set_type_hint", gdkwin_set_type_hint, 1);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkWindow, "set_skip_taskbar_hint", gdkwin_set_skip_taskbar_hint, 1);
+    rb_define_method(gdkWindow, "set_skip_pager_hint", gdkwin_set_skip_pager_hint, 1);
+#endif
     rb_define_method(gdkWindow, "position", gdkwin_get_position, 0);
     rb_define_method(gdkWindow, "root_origin", gdkwin_get_root_origin, 0);
     rb_define_method(gdkWindow, "frame_extents", gdkwin_get_frame_extents, 0);
