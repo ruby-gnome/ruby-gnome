@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: composite.rb,v 1.3 2003/01/17 19:20:43 mutoh Exp $
+  $Id: composite.rb,v 1.4 2003/07/12 09:20:48 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -27,21 +27,21 @@ dst = src.composite(100, 100, Gdk::Pixbuf::INTERP_HYPER,
 vbox.pack_start(Gtk::Image.new(dst))
 
 dst = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8, 200, 200)
-src.composite(dst, 0, 0, 200, 200, 0, 0, 1.8, 1.8,
+dst.composite!(src, 0, 0, 200, 200, 0, 0, 1.8, 1.8,
               Gdk::Pixbuf::INTERP_HYPER, 200)
 vbox.pack_start(Gtk::Image.new(dst))
 
 dst = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8, 200, 200)
-src.composite(dst, 10, 10, 180, 180, 15, 15, 3, 2, 
+dst.composite!(src, 10, 10, 180, 180, 15, 15, 3, 2, 
               Gdk::Pixbuf::INTERP_BILINEAR, 200, 100, 100, 16, 
               0x999999, 0xdddddd)
 vbox.pack_start(Gtk::Image.new(dst))
 
-w = Gtk::Window.new.add(vbox)
-w.signal_connect('delete-event') do
+window = Gtk::Window.new.add(vbox)
+window.signal_connect('delete-event') do
   Gtk.main_quit
 end
 
-w.show_all
+window.show_all
 
 Gtk.main

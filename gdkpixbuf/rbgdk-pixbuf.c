@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/05/01 15:50:54 $
+  $Date: 2003/07/12 09:20:47 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -182,52 +182,67 @@ save(argc, argv, self)
 /****************************************************/
 /* Scaling */
 static VALUE
+scale_simple(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE dest_width, dest_height, interp_type;
+    GdkInterpType type = GDK_INTERP_BILINEAR;
+
+    rb_scan_args(argc, argv, "21", &dest_width, &dest_height,
+                 &interp_type);
+
+    if (!NIL_P(interp_type))
+        type = FIX2INT(interp_type);
+    
+    return GOBJ2RVAL(gdk_pixbuf_scale_simple(_SELF(self),
+                                             NUM2INT(dest_width),
+                                             NUM2INT(dest_height),
+                                             type));
+}
+
+static VALUE
 scale(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    VALUE ret;
-    VALUE args[10];
-    int dest_width, dest_height;
-    GdkInterpType interp_type = GDK_INTERP_BILINEAR;
-    GdkPixbuf* dest = NULL;
+    GdkInterpType type = GDK_INTERP_BILINEAR;
 
-    rb_scan_args(argc, argv, "28", &args[0], &args[1], 
-                 &args[2], &args[3], &args[4], &args[5], 
-                 &args[6], &args[7], &args[8], &args[9]);
+    VALUE dest, dest_x, dest_y, dest_width, dest_height; 
+    VALUE offset_x, offset_y, scale_x, scale_y, interp_type;
 
-    switch (argc) {
-      case 2:
-      case 3:
-	dest_width = NUM2INT(args[0]);
-	dest_height = NUM2INT(args[1]);
-	if (!NIL_P(args[2]))
-	    interp_type = FIX2INT(args[2]);
+    rb_scan_args(argc, argv, "91", &dest, &dest_x, &dest_y, 
+                 &dest_width, &dest_height, &offset_x, &offset_y, 
+                 &scale_x, &scale_y, &interp_type);
 
-	ret = GOBJ2RVAL(gdk_pixbuf_scale_simple(_SELF(self),
-						  dest_width,
-						  dest_height,
-						  interp_type));
-	break;
-      case 8:
-      case 9:
-        if (!NIL_P(args[9]))
-            interp_type = FIX2INT(args[9]);
+    if (!NIL_P(interp_type))
+        type = FIX2INT(interp_type);
 
-        gdk_pixbuf_scale(_SELF(self), dest, 
-                         NUM2INT(args[0]), NUM2INT(args[1]), 
-                         NUM2INT(args[2]), NUM2INT(args[3]),
-                         NUM2DBL(args[4]), NUM2DBL(args[5]),
-                         NUM2DBL(args[6]), NUM2DBL(args[7]),
-                         interp_type);
-        ret = GOBJ2RVAL(dest);
-	break;
-      default:
-	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-	break;
-    }
-    return ret;
+    gdk_pixbuf_scale(_SELF(dest), _SELF(self),
+                     NUM2INT(dest_x), NUM2INT(dest_y), 
+                     NUM2INT(dest_width), NUM2INT(dest_height),
+                     NUM2DBL(offset_x), NUM2DBL(offset_y),
+                     NUM2DBL(scale_x), NUM2DBL(scale_y), type);
+    return self;
+}
+
+static VALUE
+composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
+                 check_size, color1, color2)
+    VALUE self, dest_width, dest_height, interp_type, overall_alpha,
+    check_size, color1, color2;
+{
+    GdkInterpType type = GDK_INTERP_BILINEAR;
+
+    if (!NIL_P(interp_type))
+        type = FIX2INT(interp_type);
+
+    return GOBJ2RVAL(gdk_pixbuf_composite_color_simple(
+                         _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
+                         type, NUM2INT(overall_alpha), NUM2INT(check_size),
+                         NUM2UINT(color1), NUM2UINT(color2)));
 }
 
 static VALUE
@@ -240,44 +255,30 @@ composite(argc, argv, self)
     VALUE args[16];
     GdkInterpType interp_type = GDK_INTERP_BILINEAR;
 
-    rb_scan_args(argc, argv, "79", 
+    rb_scan_args(argc, argv, "97", 
                  &args[0], &args[1], &args[2], &args[3], &args[4], 
                  &args[5], &args[6], &args[7], &args[8], &args[9],
                  &args[10], &args[11], &args[12], &args[13], &args[14],
                  &args[15]);
 
     switch (argc) {
-      case 7:
-	if (!NIL_P(args[2]))
-	    interp_type = FIX2INT(args[2]);
-
-        ret = GOBJ2RVAL(gdk_pixbuf_composite_color_simple(_SELF(self),
-                                                          NUM2INT(args[0]),
-                                                          NUM2INT(args[1]),
-                                                          interp_type,
-                                                          NUM2INT(args[3]),
-                                                          NUM2INT(args[4]),
-                                                          NUM2UINT(args[5]),
-                                                          NUM2UINT(args[6])));
-
-	break;
       case 11:
 	if (!NIL_P(args[9]))
 	    interp_type = FIX2INT(args[9]);
 
-        gdk_pixbuf_composite(_SELF(self), _SELF(args[0]), 
+        gdk_pixbuf_composite(_SELF(args[0]), _SELF(self), 
                              NUM2INT(args[1]), NUM2INT(args[2]),
                              NUM2INT(args[3]), NUM2INT(args[4]),
                              NUM2DBL(args[5]), NUM2DBL(args[6]),
                              NUM2DBL(args[7]), NUM2DBL(args[8]),
                              interp_type, NUM2INT(args[10]));
-        ret = args[0];
+        ret = self;
         break;
       case 16:
 	if (!NIL_P(args[9]))
 	    interp_type = FIX2INT(args[9]);
 
-        gdk_pixbuf_composite_color(_SELF(self), _SELF(args[0]),
+        gdk_pixbuf_composite_color(_SELF(args[0]), _SELF(self),
                                    NUM2INT(args[1]), NUM2INT(args[2]),
                                    NUM2INT(args[3]), NUM2INT(args[4]),
                                    NUM2DBL(args[5]), NUM2DBL(args[6]),
@@ -286,7 +287,7 @@ composite(argc, argv, self)
                                    NUM2INT(args[11]), NUM2INT(args[12]),
                                    NUM2INT(args[13]), NUM2UINT(args[14]),
                                    NUM2UINT(args[15]));
-        ret = args[0];
+        ret = self;
         break;
       default:
 	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
@@ -385,8 +386,10 @@ Init_gdk_pixbuf2()
     /*
      * Scaling
      */
-    rb_define_method(gdkPixbuf, "scale", scale, -1);
-    rb_define_method(gdkPixbuf, "composite", composite, -1);
+    rb_define_method(gdkPixbuf, "scale", scale_simple, -1);
+    rb_define_method(gdkPixbuf, "scale!", scale, -1);
+    rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
+    rb_define_method(gdkPixbuf, "composite!", composite, -1);
     /* GdkInterpType */
     rb_define_const(gdkPixbuf, "INTERP_NEAREST", INT2FIX(GDK_INTERP_NEAREST));
     rb_define_const(gdkPixbuf, "INTERP_TILES", INT2FIX(GDK_INTERP_TILES));

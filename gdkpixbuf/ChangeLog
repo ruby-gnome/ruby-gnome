@@ -1,6 +1,17 @@
+2003-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Seprate Gdk::Pixbuf#scale to #scale and #scale!.
+	Separate Gdk::Pixbuf#composite to #composite and #composite!.
+	* sample/scale.rb, composite.rb: Follow changes.
+
+2003-07-10  Mikael Magnusson <mikma@users.sourceforge.net>
+
+	* rbgdk-pixbuf.c, sample/scale.rb, composite.rb: 
+	Gdk::Pixbuf#scale and #composite accept destination pixbuf instead of nil.
+	
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 
 2003-05-02  Geoff Youngs <g@intersect-uk.co.uk>
 
