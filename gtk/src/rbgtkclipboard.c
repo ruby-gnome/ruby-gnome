@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2003/08/27 17:48:05 $
+  $Date: 2003/09/09 15:17:22 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -13,7 +13,7 @@
 #define _SELF(s) RVAL2CLIPBOARD(s)
 
 static VALUE
-clipboard_initialize(argc, argv, self)
+clipboard_get(argc, argv, self)
     int argc;
     VALUE* argv;
     VALUE self;
@@ -34,10 +34,7 @@ clipboard_initialize(argc, argv, self)
         rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
 #endif
     } 
-        
-    G_INITIALIZE(self, clipboard);
-
-    return Qnil;
+    return CLIPBOARD2RVAL(clipboard);
 }
 
 static VALUE
@@ -61,17 +58,9 @@ clipboard_get_func(clipboard, selection_data, info, func)
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
 }
 
-static void
-clipboard_clear_func(clipboard, func)
-    GtkClipboard *clipboard;
-    gpointer func;
-{
-    rb_funcall((VALUE)func, id_call, 1, CLIPBOARD2RVAL(clipboard));
-}    
-
 static VALUE
-clipboard_set_with_data(self, targets, get_proc, clear_proc)
-    VALUE self, targets, get_proc, clear_proc;
+clipboard_set(self, targets)
+    VALUE self, targets;
 {
     const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
     VALUE func = G_BLOCK_PROC();
@@ -80,7 +69,7 @@ clipboard_set_with_data(self, targets, get_proc, clear_proc)
                                        gtargets,
                                        RARRAY(targets)->len,
                                        (GtkClipboardGetFunc)clipboard_get_func,
-                                       (GtkClipboardClearFunc)clipboard_clear_func,
+                                       (GtkClipboardClearFunc)NULL,
                                        (gpointer)func) ? Qtrue : Qfalse;
 }
 /*
@@ -91,7 +80,6 @@ gboolean    gtk_clipboard_set_with_owner    (GtkClipboard *clipboard,
                                              GtkClipboardGetFunc get_func,
                                              GtkClipboardClearFunc clear_func,
                                              GObject *owner);
-*/
 
 static VALUE
 clipboard_get_owner(self)
@@ -101,6 +89,7 @@ clipboard_get_owner(self)
     gobj = gtk_clipboard_get_owner(_SELF(self));
     return gobj ? GOBJ2RVAL(gobj) : Qnil;
 }
+*/
 
 static VALUE
 clipboard_clear(self)
@@ -196,11 +185,12 @@ Init_gtk_clipboard()
   if (rbgtk_clipboard_get_type){
     VALUE gClipboard = G_DEF_CLASS(RBGTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 
-    rb_define_method(gClipboard, "initialize", clipboard_initialize, -1);
+    rb_define_singleton_method(gClipboard, "get", clipboard_get, -1);
     rb_define_method(gClipboard, "display", clipboard_get_display, 0);
-    rb_define_method(gClipboard, "set_with_data", clipboard_set_with_data, 3);
-
+    rb_define_method(gClipboard, "set", clipboard_set, 1);
+/*
     rb_define_method(gClipboard, "owner", clipboard_get_owner, 0);
+*/
     rb_define_method(gClipboard, "clear", clipboard_clear, 0);
     rb_define_method(gClipboard, "set_text", clipboard_set_text, 1);
 
@@ -209,5 +199,7 @@ Init_gtk_clipboard()
     rb_define_method(gClipboard, "wait_for_contents", clipboard_wait_for_contents, 1);
     rb_define_method(gClipboard, "wait_for_text", clipboard_wait_for_text, 0);
     rb_define_method(gClipboard, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
+
+    G_DEF_SETTERS(gClipboard);
   }
 }

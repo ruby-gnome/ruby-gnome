@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/09/09 15:17:22 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,7 +15,7 @@
 #include "global.h"
 
 #define _SELF(w) GTK_ACCEL_GROUP(RVAL2GOBJ(w))
-#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
+#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
 
 static VALUE
 gaccelgrp_initialize(self)

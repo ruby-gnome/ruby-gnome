@@ -4,13 +4,13 @@
   rbgtkaccelmap.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/09/09 15:17:22 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
-#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
+#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
 
 static VALUE
 accel_map_add_entry(self, path, key, mods)

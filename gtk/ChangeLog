@@ -1,3 +1,14 @@
+2003-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkclipboard.c: Rename Gtk::Clipboard.new to Gtk::Clipboard.get.
+	Gtk::Clipboard#set_with_data to Gtk::Clipboard#set. Remove Gtk::Clipboard#owner.
+	* src/rbgtktreeiter.c: Gtk::TreeIter#[key]=val returns val.
+
+2003-09-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaccelgroup.c, rbgtkaccelmap.c: Fix a compatibility 
+	for Gtk::AccelGroup, Gtk::AccelMap.
+
 2003-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gtk-demo/tree_store.rb: Fix handling of block argument for ruby-1.8.

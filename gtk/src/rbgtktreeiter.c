@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2003/09/07 01:21:37 $
+  $Date: 2003/09/09 15:17:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -146,6 +146,14 @@ treeiter_set_value(self, column, value)
 }
 
 static VALUE
+treeiter_set_value_eql(self, column, value)
+    VALUE self, column, value;
+{
+    treeiter_set_value(self, column, value);
+    return value;
+}
+
+static VALUE
 treeiter_eql(self, other)
     VALUE self, other;
 {
@@ -209,6 +217,6 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 1);
     rb_define_method(gTreeIter, "parent", treeiter_parent, 0);
     rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
-    rb_define_alias(gTreeIter, "[]=", "set_value");
+    rb_define_method(gTreeIter, "[]=", treeiter_set_value_eql, 2);
     rb_define_method(gTreeIter, "==", treeiter_eql, 1);
 }
