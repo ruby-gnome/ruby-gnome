@@ -1,3 +1,7 @@
+2003-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilesel.c: Fix segfault of Gtk::FileSelection#fileop_dialog.
+
 2003-06-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmenu.c: parameter of Gtk::Menu#popup was changed.

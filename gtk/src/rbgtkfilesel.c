@@ -4,7 +4,7 @@
   rbgtkfilesel.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/06/04 16:55:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -73,7 +73,8 @@ static VALUE
 fsel_fileop_dialog(self)
     VALUE self;
 {
-    return GOBJ2RVAL(_SELF(self)->fileop_dialog);
+    GtkWidget* widget = _SELF(self)->fileop_dialog;
+    return widget ? GOBJ2RVAL(widget) : Qnil;
 }
 
 static VALUE
