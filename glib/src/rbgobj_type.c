@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:52:27 $
+  $Date: 2004/03/09 17:27:24 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -22,7 +22,7 @@ static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
 
-static void rbgobj_init_interface(VALUE interface);
+static void rbgobj_init_interface(VALUE interf);
 
 static GHashTable* dynamic_gtype_list;
 typedef struct {
@@ -733,15 +733,15 @@ interface_s_append_features(self, klass)
 }
 
 static void
-rbgobj_init_interface(interface)
-    VALUE interface;
+rbgobj_init_interface(interf)
+    VALUE interf;
 {
-    rb_extend_object(interface, mMetaInterface);
-    rb_define_singleton_method(interface, "append_features",
+    rb_extend_object(interf, mMetaInterface);
+    rb_define_singleton_method(interf, "append_features",
                                interface_s_append_features, 1);
     /* pseudo inheritance */
-    if (CLASS2GTYPE(interface) != G_TYPE_INTERFACE)
-        rb_include_module(interface, GTYPE2CLASS(G_TYPE_INTERFACE));
+    if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE)
+        rb_include_module(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
 }
 
 static void
