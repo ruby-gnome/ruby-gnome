@@ -1,3 +1,9 @@
+2002-11-16  OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtktextbuffer.c: Add Gtk::TextBuffer#apply_tag, #remove_tag, 
+   #apply_tag_by_name, #remove_tag_by_name, #remove_all_tags, #start_iter.
+   Code cleanup.
+
 2002-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/liststore.rb, treestore.rb: Add file(but not work yet).

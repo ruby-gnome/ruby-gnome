@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2002/11/15 13:20:28 $
+  $Date: 2002/11/15 17:32:24 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -100,19 +100,6 @@ gboolean gtk_text_buffer_insert_range_interactive (GtkTextBuffer     *buffer,
                                                    const GtkTextIter *end,
                                                    gboolean           default_editable);
 
-void    gtk_text_buffer_insert_with_tags          (GtkTextBuffer     *buffer,
-                                                   GtkTextIter       *iter,
-                                                   const gchar       *text,
-                                                   gint               len,
-                                                   GtkTextTag        *first_tag,
-                                                   ...);
-
-void    gtk_text_buffer_insert_with_tags_by_name  (GtkTextBuffer     *buffer,
-                                                   GtkTextIter       *iter,
-                                                   const gchar       *text,
-                                                   gint               len,
-                                                   const gchar       *first_tag_name,
-                                                   ...);
 #endif
 
 static VALUE
@@ -162,17 +149,11 @@ GtkTextMark   *gtk_text_buffer_create_mark (GtkTextBuffer     *buffer,
                                             const gchar       *mark_name,
                                             const GtkTextIter *where,
                                             gboolean           left_gravity);
-void           gtk_text_buffer_move_mark   (GtkTextBuffer     *buffer,
-                                            GtkTextMark       *mark,
-                                            const GtkTextIter *where);
 void           gtk_text_buffer_delete_mark (GtkTextBuffer     *buffer,
                                             GtkTextMark       *mark);
 GtkTextMark*   gtk_text_buffer_get_mark    (GtkTextBuffer     *buffer,
                                             const gchar       *name);
 
-void gtk_text_buffer_move_mark_by_name   (GtkTextBuffer     *buffer,
-                                          const gchar       *name,
-                                          const GtkTextIter *where);
 void gtk_text_buffer_delete_mark_by_name (GtkTextBuffer     *buffer,
                                           const gchar       *name);
 #endif
@@ -200,35 +181,6 @@ void gtk_text_buffer_place_cursor (GtkTextBuffer     *buffer,
 
 
 #if 0
-/* Tag manipulation */
-void gtk_text_buffer_apply_tag             (GtkTextBuffer     *buffer,
-                                            GtkTextTag        *tag,
-                                            const GtkTextIter *start,
-                                            const GtkTextIter *end);
-void gtk_text_buffer_remove_tag            (GtkTextBuffer     *buffer,
-                                            GtkTextTag        *tag,
-                                            const GtkTextIter *start,
-                                            const GtkTextIter *end);
-void gtk_text_buffer_apply_tag_by_name     (GtkTextBuffer     *buffer,
-                                            const gchar       *name,
-                                            const GtkTextIter *start,
-                                            const GtkTextIter *end);
-void gtk_text_buffer_remove_tag_by_name    (GtkTextBuffer     *buffer,
-                                            const gchar       *name,
-                                            const GtkTextIter *start,
-                                            const GtkTextIter *end);
-void gtk_text_buffer_remove_all_tags       (GtkTextBuffer     *buffer,
-                                            const GtkTextIter *start,
-                                            const GtkTextIter *end);
-
-/* You can either ignore the return value, or use it to
- * set the attributes of the tag. tag_name can be NULL
- */
-GtkTextTag    *gtk_text_buffer_create_tag (GtkTextBuffer *buffer,
-                                           const gchar   *tag_name,
-                                           const gchar   *first_property_name,
-                                           ...);
-
 /* Obtain iterators pointed at various places, then you can move the
  * iterator around using the GtkTextIter operators
  */
@@ -246,10 +198,6 @@ void gtk_text_buffer_get_iter_at_offset      (GtkTextBuffer *buffer,
 void gtk_text_buffer_get_iter_at_line        (GtkTextBuffer *buffer,
                                               GtkTextIter   *iter,
                                               gint           line_number);
-void gtk_text_buffer_get_start_iter          (GtkTextBuffer *buffer,
-                                              GtkTextIter   *iter);
-void gtk_text_buffer_get_end_iter            (GtkTextBuffer *buffer,
-                                              GtkTextIter   *iter);
 void gtk_text_buffer_get_bounds              (GtkTextBuffer *buffer,
                                               GtkTextIter   *start,
                                               GtkTextIter   *end);
@@ -331,28 +279,37 @@ txt_begin_user_action(self)
 }
 
 static VALUE
-txt_get_end_iter(self)
-     VALUE self;
+txt_get_start_iter(self)
+    VALUE self;
 {
-  GtkTextIter iter;
-  gtk_text_buffer_get_end_iter(_SELF(self), &iter);
-  return ITR2RVAL(&iter);
+    GtkTextIter iter;
+    gtk_text_buffer_get_start_iter(_SELF(self), &iter);
+    return ITR2RVAL(&iter);
+}
+
+static VALUE
+txt_get_end_iter(self)
+    VALUE self;
+{
+    GtkTextIter iter;
+    gtk_text_buffer_get_end_iter(_SELF(self), &iter);
+    return ITR2RVAL(&iter);
 }
 
 static VALUE
 txt_move_mark_by_name(self, name, where)
-     VALUE self, name, where;
+    VALUE self, name, where;
 {
-  gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(name), RVAL2ITR(where));
-  return self;
+    gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(name), RVAL2ITR(where));
+    return self;
 }
 
 static VALUE
 txt_move_mark(self, mark, where)
-     VALUE self, mark, where;
+    VALUE self, mark, where;
 {
-  gtk_text_buffer_move_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
-  return self;
+    gtk_text_buffer_move_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
+    return self;
 }
 
 static VALUE
@@ -360,133 +317,124 @@ txt_create_tag(self, tag_name, properties)
     VALUE self, tag_name, properties;
 {
     GtkTextTag *tag;
-    VALUE parray, pval, pname;
-    GValue gval = {0,};
-    GType pval_type;
-    gchar *gname;
-    int i;
 
     tag = gtk_text_tag_new(RVAL2CSTR(tag_name));
     gtk_text_tag_table_add (gtk_text_buffer_get_tag_table(_SELF(self)), tag);
 
-    parray = rb_funcall(properties, rb_intern("to_a"), 0);
-    for (i=0; i<RARRAY(parray)->len; i++)
-    {
-        pval = RARRAY(RARRAY(parray)->ptr[i])->ptr[1];
-        pval_type = RVAL2GTYPE(pval);
-
-        g_value_init(&gval, pval_type);
-        switch(pval_type)
-        {
-          case G_TYPE_BOOLEAN:
-            g_value_set_boolean(&gval, RTEST(pval));
-            break;
-          case G_TYPE_INT:
-            g_value_set_int(&gval, NUM2INT(pval));
-            break;
-          case G_TYPE_DOUBLE:
-            g_value_set_double(&gval, NUM2DBL(pval));
-            break;
-          case G_TYPE_STRING:
-            g_value_set_string(&gval, RVAL2CSTR(pval));
-            break;
-          default:
-            if(pval_type == GDK_TYPE_COLOR){
-                g_value_set_boxed(&gval, RVAL2BOXED(pval, GDK_TYPE_COLOR));
-            }
-            else if(pval_type == GDK_TYPE_PIXMAP){
-                g_value_set_object(&gval, RVAL2GOBJ(pval));
-            }
-            else{
-                /*
-                  This implimentation is incomplete...
-                */
-                g_warning("%s: unknown gvalue type\n", G_STRLOC);
-            }
-        }
-
-        pname = RARRAY(RARRAY(parray)->ptr[i])->ptr[0];
-        if(SYMBOL_P(pname)){
-            gname = rb_id2name(SYM2ID(pname));
-        }else{
-            gname = RVAL2CSTR(pname);
-        }
-        g_object_set_property(G_OBJECT(tag), gname, &gval);
-        g_value_unset(&gval);
-    }
+    G_SET_PROPERTIES(GOBJ2RVAL(tag), properties);
     
     return GOBJ2RVAL(tag);
 }
 
 static VALUE
 txt_insert_with_tags(argc, argv, self)
-     int argc;
-     VALUE *argv;
-     VALUE self;
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-  VALUE where, text, tags;
-  struct RArray *tarray;
-  gint start_offset;
-  GtkTextIter start;
-  int i;
+    VALUE where, text, tags;
+    struct RArray *tarray;
+    gint start_offset;
+    GtkTextIter start;
+    int i;
 
-  rb_scan_args(argc, argv, "2*", &where, &text, &tags);
-  tarray = RARRAY(tags);
+    rb_scan_args(argc, argv, "2*", &where, &text, &tags);
+    tarray = RARRAY(tags);
 
-  start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
-  gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
+    start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
+    gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
 
-  if(tarray->len == 0)
-    return self;
+    if(tarray->len == 0)
+        return self;
 
-  gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
+    gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
   
-  for(i=0; i<tarray->len; i++)
+    for(i=0; i<tarray->len; i++)
     {
-      GtkTextTag *tag;
-      tag = RVAL2GOBJ(tarray->ptr[i]);
-      gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITR(where));
+        GtkTextTag *tag;
+        tag = RVAL2GOBJ(tarray->ptr[i]);
+        gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITR(where));
     }
   
-  return self;
+    return self;
 }
 
 static VALUE
 txt_insert_with_tags_by_name(argc, argv, self)
-     int argc;
-     VALUE *argv;
-     VALUE self;
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-  VALUE where, text, tags;
-  struct RArray *tarray;
-  gint start_offset;
-  GtkTextIter start;
-  int i;
+    VALUE where, text, tags;
+    struct RArray *tarray;
+    gint start_offset;
+    GtkTextIter start;
+    int i;
 
-  rb_scan_args(argc, argv, "2*", &where, &text, &tags);
-  tarray = RARRAY(tags);
+    rb_scan_args(argc, argv, "2*", &where, &text, &tags);
+    tarray = RARRAY(tags);
 
-  start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
-  gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
+    start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
+    gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
 
-  if(tarray->len == 0)
-    return self;
+    if(tarray->len == 0)
+        return self;
 
-  gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
+    gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
   
-  for(i=0; i<tarray->len; i++)
+    for(i=0; i<tarray->len; i++)
     {
-      GtkTextTag *tag;
-      tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
-      if (tag == NULL)
+        GtkTextTag *tag;
+        tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
+        if (tag == NULL)
         {
-          g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
-          return self;
+            g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
+            return self;
         }
-      gtk_text_buffer_apply_tag (_SELF(self), tag, &start, RVAL2ITR(where));
+        gtk_text_buffer_apply_tag (_SELF(self), tag, &start, RVAL2ITR(where));
     }
 
-  return self;
+    return self;
+}
+
+static VALUE
+txt_apply_tag(self, tag, start, end)
+    VALUE self, tag, start, end;
+{
+    gtk_text_buffer_apply_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
+    return self;
+}
+
+static VALUE
+txt_remove_tag(self, tag, start, end)
+    VALUE self, tag, start, end;
+{
+    gtk_text_buffer_remove_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
+    return self;
+}
+
+static VALUE
+txt_apply_tag_by_name(self, name, start, end)
+    VALUE self, name, start, end;
+{
+    gtk_text_buffer_apply_tag_by_name(_SELF(self), RVAL2CSTR(name), RVAL2ITR(start), RVAL2ITR(end));
+    return self;
+}
+
+static VALUE
+txt_remove_tag_by_name(self, name, start, end)
+    VALUE self, name, start, end;
+{
+    gtk_text_buffer_remove_tag_by_name(_SELF(self), RVAL2CSTR(name), RVAL2ITR(start), RVAL2ITR(end));
+    return self;
+}
+
+static VALUE
+txt_remove_all_tags(self, start, end)
+    VALUE self, start, end;
+{
+    gtk_text_buffer_remove_all_tags(_SELF(self), RVAL2ITR(start), RVAL2ITR(end));
+    return self;
 }
 
 void 
@@ -518,12 +466,18 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
     rb_define_method(gTextBuffer, "end_user_action", txt_end_user_action, 0);
 
+    rb_define_method(gTextBuffer, "start_iter", txt_get_start_iter, 0);
     rb_define_method(gTextBuffer, "end_iter", txt_get_end_iter, 0);
     rb_define_method(gTextBuffer, "move_mark_by_name", txt_move_mark_by_name, 2);
     rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
     rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
     rb_define_method(gTextBuffer, "insert_with_tags_by_name", txt_insert_with_tags_by_name, -1);
+    rb_define_method(gTextBuffer, "apply_tag", txt_apply_tag, 3);
+    rb_define_method(gTextBuffer, "remove_tag", txt_remove_tag, 3);
+    rb_define_method(gTextBuffer, "apply_tag_by_name", txt_apply_tag_by_name, 3);
+    rb_define_method(gTextBuffer, "remove_tag_by_name", txt_remove_tag_by_name, 3);
+    rb_define_method(gTextBuffer, "remove_all_tags", txt_remove_all_tags, 2);
 
     G_DEF_SETTERS(gTextBuffer);
 }
