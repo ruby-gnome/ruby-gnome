@@ -2,7 +2,8 @@
 
 	* src/rbart_canvas.c: Change some function names which caused error 
 	of  Ruby/GnomeCanvas.
-	* extconf.rb: Work under GNOME-2.2.
+	Fix to work under Ruby-1.6.x.
+	* extconf.rb: Fix to work under GNOME-2.2.
 	But this changes may be not good solution...
 
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
