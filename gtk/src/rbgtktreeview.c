@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mpovolny $
-  $Date: 2003/10/10 21:30:25 $
+  $Date: 2003/10/11 09:15:26 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -272,6 +272,7 @@ treeview_expand_row(self, path, open_all)
                                     RTEST(open_all)) ? Qtrue: Qfalse;
 }
 
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 treeview_expand_to_path(self, path)
     VALUE self, path;
@@ -279,6 +280,7 @@ treeview_expand_to_path(self, path)
     gtk_tree_view_expand_to_path(_SELF(self), RVAL2TREEPATH(path));
     return self;
 }
+#endif
 
 static VALUE
 treeview_collapse_row(self, path)
@@ -554,8 +556,10 @@ Init_gtk_treeview()
     rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
-    rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
     rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
+   #if GTK_MINOR_VERSION >= 2
+    rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
+   #endif
     rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
     rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
     rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
