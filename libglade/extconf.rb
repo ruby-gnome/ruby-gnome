@@ -15,16 +15,12 @@ end
 # detect libglade configurations
 #
 config_cmd = with_config("libglade-config", "libglade-config")
-while /^--/ =~ ARGV[0]
-  ARGV.shift
-end
-
 begin
   version = `#{config_cmd} --version`
   if not version.chomp.empty?
     $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
     $LDFLAGS += ' ' + `#{config_cmd} --libs`.chomp
-end
+  end
 rescue
   $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
   $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'

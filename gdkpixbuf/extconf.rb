@@ -7,7 +7,7 @@ while /^--/ =~ ARGV[0]
   ARGV.shift
 end
 
-rubygtk_dir = ARGV.shift || "../gtk"
+rubygtk_dir = ARGV.shift || File.dirname(__FILE__)+"/../gtk"
 unless FileTest.exist?(rubygtk_dir)
   raise "Directory #{rubygtk_dir} not found.  Please specify Ruby/Gtk source dir."
 end

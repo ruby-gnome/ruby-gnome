@@ -1,6 +1,14 @@
+Sun May 26 23:40:24 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * extconf.rb: Append rbgtk-xmhtml to target.
+
+Sun May 26 21:59:49 2002 Nobuyoshi Nakada <nobu.nokada@softhome.net>
+
+   * src/rbgtk-xmhtml.c: Fix to fail to compile with undefined variable.
+
 Sun May 26 15:08:10 2002 Akinori MUSHA <knu@iDaemons.org>
 
-   * extconf.rb: Support --with-gnome-config (Ruby-GNOME patch [532458])
+   * extconf.rb: Support --with-gnome-config (patch [532458])
 
 Tue Mar 19 09:59:53 2002 Neil Conway <neilconway@rogers.com>
 

@@ -1,31 +1,70 @@
+=begin
+top-level extconf.rb for gnome extention library
+=end
+
 require 'mkmf'
+require 'ftools'
 
-gnome_config = with_config('gnome-config', 'gnome-config')
-
-while /^--/ =~ ARGV[0]
-  ARGV.shift
+#
+# detect sub-directories
+#
+$ruby = arg_config("--ruby", Config::CONFIG['RUBY_INSTALL_NAME'])
+$srcdir = File.dirname(__FILE__)
+$topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
+$topdir = $configure_args["--topdir"] ||= Dir.pwd
+subdirs = Dir.glob($topsrcdir+"/*/**/extconf.rb")
+subdirs.collect! do |subdir|
+  subdir[0..$topsrcdir.size] = ""
+  File.dirname(subdir)
 end
 
-rbgtk_dir = "../gtk"
-rbgtk_dir = ARGV[0] if ARGV[0]
-unless FileTest.exist?(rbgtk_dir)
-  raise "directry #{rbgtk_dir} not found.  Please specify Ruby-GTK source dir."
+#
+# generate top-level Makefile
+#
+File.open("Makefile", "w") do |makefile|
+  makefile.print("\
+TOPSRCDIR = #{$topsrcdir}
+SUBDIRS = #{subdirs.join(' ')}
+
+all:
+	for subdir in \$(SUBDIRS); do \\
+		(cd \$\${subdir} && \$(MAKE) all); \\
+	done;
+
+install:
+	for subdir in \$(SUBDIRS); do \\
+		(cd \$\${subdir} && \$(MAKE) install); \\
+	done;
+
+site-install:
+	for subdir in \$(SUBDIRS); do \\
+		(cd \$\${subdir} && \$(MAKE) site-install); \\
+	done;
+
+clean:
+	for subdir in \$(SUBDIRS); do \\
+		(cd \$\$subdir && \$(MAKE) clean); \\
+	done; \\
+
+distclean:
+	for subdir in \$(SUBDIRS); do \\
+		(cd \$\${subdir} && \$(MAKE) distclean); \\
+	done;
+	rm -f Makefile mkmf.log
+")
 end
 
-rbgnome_dir = "../gnome"
-rbgnome_dir = ARGV[1] if ARGV[1]
-unless FileTest.exist?(rbgnome_dir)
-  raise "directry #{rbgnome_dir} not found.  Please specify Ruby-GNOME source dir."
+#
+# generate sub-directory Makefiles
+#
+subdirs.each do |subdir|
+  STDERR.puts("#{$0}: Entering directory `#{subdir}'")
+  File.mkpath(subdir)
+  topdir = File.join(*([".."] * subdir.split(/\/+/).size))
+  /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
+  srcdir = File.join(dir, subdir)
+  system($ruby, "-C", subdir, File.join(srcdir, "extconf.rb"),
+   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}",
+   *ARGV)
+  STDERR.puts("#{$0}: Leaving directory `#{subdir}'")
 end
-
-$CFLAGS += " -I#{rbgtk_dir}/src -I#{rbgnome_dir}/src " + `gnome-config --cflags applets`.chomp
-$LDFLAGS += ' ' + `#{gnome_config} --libs applets`.chomp
-
-have_library("X11", "XOpenDisplay") &&
-have_library("Xi", "XOpenDevice") &&
-have_library("Xext", "XextFindDisplay") &&
-have_library("Xmu", "XmuInternAtom") &&
-have_func("g_print") &&
-have_func("gtk_init") &&
-have_func("applet_widget_init") &&
-create_makefile('panel_applet')

@@ -24,7 +24,8 @@ begin
 rescue
   $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
   $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
-  $libs = '-lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXext -lX11 -lm -lgnome -lgnomesupport -ldb -lglib -ldl'
+ # $libs = '-lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXext -lX11 -lm -lgnome -lgnomesupport -ldb -lglib -ldl '
+  $libs = '-lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXext -lX11 -lm -lgnome -lgnomesupport -ldb -lglib -ldl -lgtkxmhtml'
 end
 
 mdir = $mdir
@@ -102,7 +103,8 @@ begin
     "rbgnome-i18n",
     "rbgnome-uidefs",
     "rbgnome-url",
-    "rbgnome-util"
+    "rbgnome-util",
+    "rbgtk-xmhtml"
   ].collect{|item| item + obj_ext}
 
   #
@@ -160,6 +162,7 @@ rbgnome-i18n#{obj_ext}: rbgnome-i18n.c rbgnome.h
 rbgnome-uidefs#{obj_ext}: rbgnome-uidefs.c rbgnome.h
 rbgnome-url#{obj_ext}: rbgnome-url.c rbgnome.h
 rbgnome-util#{obj_ext}: rbgnome-util.c rbgnome.h
+rbgtk-xmhtml#{obj_ext}: rbgtk-xmhtml.c rbgnome.h
 
 allclean: clean
 	rm -rf *.a
