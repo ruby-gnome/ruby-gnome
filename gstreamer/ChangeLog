@@ -1,3 +1,12 @@
+2003-08-08  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* sample/gst-inspect.rb: Added signals and event masks support.
+	* src/rbgsteventmask.c: New file.
+	* src/rbgst.c: Initializes Gst::EventMask.
+	* src/rbgst.h: Added macros for Gst::EventMask.
+	* src/rbgstpad.c: Implemented methods event_masks and each_event_mask.
+	* src/rbgstquerytype.c: Renamed method id to type_id.
+
 2003-08-04  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgst.c: Added constants Gst::SECOND, Gst::MSECOND, Gst::USECOND 
