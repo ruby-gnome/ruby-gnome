@@ -1,0 +1,4 @@
+2003-12-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* atk/*: Initial import. Added Atk::Action, Atk::Document, 
+	Atk::GObjectAccessible, Atk::NoOpObject, Atk::NoOpObjectFactory, Atk::Value. 
