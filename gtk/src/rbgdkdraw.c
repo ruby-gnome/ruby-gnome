@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/19 18:47:37 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -81,45 +81,6 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
 					 RARRAY(pnts)->len);
     return self;
 }
-
-#ifndef GTK_DISABLE_DEPRECATED
-static VALUE
-gdkdraw_draw_text(self, font, gc, x, y, str)
-    VALUE self, font, gc, x, y, str;
-{
-    Check_Type(str, T_STRING);
-    gdk_draw_text(_SELF(self), (GdkFont*)RVAL2BOXED(font), 
-                  GDK_GC(RVAL2GOBJ(gc)),
-				  NUM2INT(x), NUM2INT(y),
-				  RSTRING(str)->ptr, RSTRING(str)->len);
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_pmap(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
-{
-    gdk_draw_pixmap(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					_SELF(src),
-					NUM2INT(xsrc), NUM2INT(ysrc),
-					NUM2INT(xdst), NUM2INT(ydst),
-					NUM2INT(w), NUM2INT(h));
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_bmap(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
-{
-    /* why there's no gdk_draw_bitmap()?? */
-    gdk_draw_pixmap(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					_SELF(src),
-					NUM2INT(xsrc), NUM2INT(ysrc),
-					NUM2INT(xdst), NUM2INT(ydst),
-					NUM2INT(w), NUM2INT(h));
-    return self;
-}
-#endif
 
 static VALUE
 gdkdraw_draw_rgb_image(self, gc, x, y, w, h, dither, buf, rowstride)
@@ -284,20 +245,18 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_rectangle", gdkdraw_draw_rect, 6);
     rb_define_method(gdkDrawable, "draw_arc", gdkdraw_draw_arc, 8);
     rb_define_method(gdkDrawable, "draw_polygon", gdkdraw_draw_poly, 3);
-#ifndef GTK_DISABLE_DEPRECATED
-    rb_define_method(gdkDrawable, "draw_string", gdkdraw_draw_text, 5);
-    rb_define_method(gdkDrawable, "draw_text", gdkdraw_draw_text, 5);
-    rb_define_method(gdkDrawable, "draw_pixmap", gdkdraw_draw_pmap, 8);
-    rb_define_method(gdkDrawable, "draw_bitmap", gdkdraw_draw_bmap, 8);
-#endif
-    rb_define_method(gdkDrawable, "draw_rgb_image", gdkdraw_draw_rgb_image, 8);
-    rb_define_method(gdkDrawable, "draw_rgb_image_dithalign", gdkdraw_draw_rgb_image_dithalign, 10);
-    rb_define_method(gdkDrawable, "draw_gray_image", gdkdraw_draw_gray_image, 8);
-    rb_define_method(gdkDrawable, "draw_rgb_32_image", gdkdraw_draw_rgb_32_image, 8);
+
     rb_define_method(gdkDrawable, "draw_image", gdkdraw_draw_image, 8);
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_pnts, 2);
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
     rb_define_method(gdkDrawable, "size", gdkdraw_get_size, 0);
     rb_define_method(gdkDrawable, "depth", gdkdraw_get_depth, 0);
+
+    /* GdkRGB methods */
+    rb_define_method(gdkDrawable, "draw_rgb_image", gdkdraw_draw_rgb_image, 8);
+    rb_define_method(gdkDrawable, "draw_rgb_image_dithalign", gdkdraw_draw_rgb_image_dithalign, 10);
+    rb_define_method(gdkDrawable, "draw_gray_image", gdkdraw_draw_gray_image, 8);
+    rb_define_method(gdkDrawable, "draw_rgb_32_image", gdkdraw_draw_rgb_32_image, 8);
+
 }

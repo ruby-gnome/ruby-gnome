@@ -1,5 +1,13 @@
 2002-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkdraw.c: Remove Deprecated methods
+	(Gdk::Drawable#draw_string, #draw_text, 
+	#draw_pixmap, #draw_bitmap).
+	* src/rbgdkevent.c: Remove Gdk::Event#copy, 
+	Change Gdk::Event#get_time to #time.
+	
+2002-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* extconf.rb: Bugfix: undefined symbol: Init_gtk_inits.
 	Reported by Markus Jais <mjais@web.de>
 
