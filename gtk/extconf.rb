@@ -97,7 +97,6 @@ begin
     item.gsub(/\.c$/, obj_ext)
   end
   $objs -= opt_objs
-  $objs += opt_objs
 
   if /mswin32/ =~ PLATFORM
     $objs << "rbgdkkeysyms.lib"
