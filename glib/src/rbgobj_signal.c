@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/07/28 11:34:21 $
+  $Date: 2002/07/31 07:47:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -19,17 +19,38 @@ gobj_sig_connect(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE sig, after;
+    VALUE sig, rest;
     ID id = 0;
     int i;
     GClosure* rclosure;
 
-    rb_scan_args(argc, argv, "11", &sig, &after);
+    rb_scan_args(argc, argv, "1*", &sig, &rest);
     StringValue(sig);
 
-    rclosure = g_rclosure_new(rb_f_lambda());
+    rclosure = g_rclosure_new(rb_f_lambda(), rest);
     i = g_signal_connect_closure(RVAL2GOBJ(self),
-                                 StringValuePtr(sig), rclosure, RTEST(after));
+                                 StringValuePtr(sig), rclosure, FALSE);
+
+    return INT2FIX(i);
+}
+
+static VALUE
+gobj_sig_connect_after(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE sig, rest;
+    ID id = 0;
+    int i;
+    GClosure* rclosure;
+
+    rb_scan_args(argc, argv, "1*", &sig, &rest);
+    StringValue(sig);
+
+    rclosure = g_rclosure_new(rb_f_lambda(), rest);
+    i = g_signal_connect_closure(RVAL2GOBJ(self),
+                                 StringValuePtr(sig), rclosure, TRUE);
 
     return INT2FIX(i);
 }
@@ -129,10 +150,8 @@ void
 Init_gobject_gsignal()
 {
     rb_define_method(rbgobj_cGObject, "signal_connect", gobj_sig_connect, -1);
-/*
-  rb_define_method(rbgobj_cGObject, "signal_connect_after",
-  gobj_sig_connect_after, -1);
-*/
+    rb_define_method(rbgobj_cGObject, "signal_connect_after",
+                     gobj_sig_connect_after, -1);
 
     rb_define_method(rbgobj_cGObject, "signal_emit",
                      gobj_sig_emit, -1);

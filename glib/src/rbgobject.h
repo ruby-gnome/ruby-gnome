@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/07/28 11:34:21 $
+  $Date: 2002/07/31 07:47:33 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -66,7 +66,7 @@ extern VALUE rbgobj_cBoxed;
 
 
 /* rbgobj_closure.c */
-extern GClosure* g_rclosure_new(VALUE callback_proc);
+extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args);
 
 /* rbgobj_value.c */
 typedef void (*RValueToGValueFunc)(VALUE from, GValue* to);

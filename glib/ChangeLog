@@ -1,3 +1,13 @@
+2002-07-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c: use g_closure_add_invalidate_notifier()
+	instead of g_closure_add_finalize_notifier()
+	* src/rbgobj_closure.c: fix g_closure_add_invalidate_notifier()'s
+	argument order
+	* src/rbgobj_signal.c: GObject#signal_connect now accept extra argument
+	as Ruby/Gtk 1.
+	* src/rbgobj_signal.c: implement GObject#signal_connect_after
+
 2002-07-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (gobj_s_gobject_new): refine GtkObject-specific
