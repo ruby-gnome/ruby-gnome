@@ -7,7 +7,7 @@
 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: properties.rb,v 1.1 2004/01/28 16:44:12 mutoh Exp $
+  $Id: properties.rb,v 1.2 2004/01/29 17:07:57 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -36,14 +36,14 @@ class MyButton < Gtk::Button
                                         GLib::Param::WRITABLE))
 
   # define new property "hoge"
-  install_child_property(1, GLib::Param::Int.new("hoge", # name
-                                        "Hoge", # nick
-                                        "hoge hoge", # blurb
-                                        0,     # min
-                                        10000, # max
-                                        0,     # default
-                                        GLib::Param::READABLE |
-                                        GLib::Param::WRITABLE))
+  install_child_property(GLib::Param::Int.new("hoge", # name
+                                      "Hoge", # nick
+                                      "hoge hoge", # blurb
+                                      0,     # min
+                                      10000, # max
+                                      0,     # default
+                                      GLib::Param::READABLE |
+                                      GLib::Param::WRITABLE))
 
   # implementation of the property "fuga"
   def fuga

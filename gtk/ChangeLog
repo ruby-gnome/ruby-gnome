@@ -1,6 +1,11 @@
+2004-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcontainer.c: Change arguments of Gtk::Container.install_child_property.
+	* sample/misc/properties.rb: ditto.
+	
 2004-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkcontainer.c: Add Gtk::Widget.install_child_property.
+	* src/rbgtkcontainer.c: Add Gtk::Container.install_child_property.
 	* sample/misc/properties.rb: Added.
 	* src/lib/gtk2.rb: Require Atk module.
 

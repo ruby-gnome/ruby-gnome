@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2004/01/28 16:44:12 $
+  $Date: 2004/01/29 17:08:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -399,12 +399,19 @@ cont_s_child_property(self, property_name)
 }
 
 static VALUE
-cont_s_install_child_property(self, prop_id, spec)
-    VALUE self, prop_id, spec;
+cont_s_install_child_property(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkContainerClass* gclass;
-    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    VALUE spec, prop_id;
+    GParamSpec* pspec;
+
+    rb_scan_args(argc, argv, "11", &spec, &prop_id);
+
+    pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registerd class",
@@ -412,7 +419,8 @@ cont_s_install_child_property(self, prop_id, spec)
 
     gclass = GTK_CONTAINER_CLASS(g_type_class_ref(cinfo->gtype));
     gtk_container_class_install_child_property(gclass, 
-                                               NUM2UINT(prop_id), pspec);
+                                               NIL_P(prop_id) ? 1 : NUM2UINT(prop_id),
+                                               pspec);
 
     return self;
 }
@@ -703,7 +711,7 @@ Init_gtk_container()
     rb_define_method(gContainer, "unset_focus_chain", cont_unset_focus_chain, 0);
     rb_define_singleton_method(gContainer, "child_property", cont_s_child_property, 1);
     rb_define_singleton_method(gContainer, "child_properties", cont_s_child_properties, -1);
-    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, 2);
+    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, -1);
 
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
