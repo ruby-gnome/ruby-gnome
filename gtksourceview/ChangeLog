@@ -1,3 +1,16 @@
+2004-08-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourceiter.c: Fix a warning to define 
+	Gtk::TextIter::SourceSearchFlags instead of Gtk::TextIter::SearchFlags.
+
+2004-08-08  Pascal Terjan <pterjan@linuxfr.org>
+
+	* extconf.rb: Fixed compilation problems.
+
+2004-08-05  Laurent Sansonetti  <lrz@gnome.org>
+
+	* Merged to Ruby-GNOME2.
+
 2004-05-21  Archit Baweja  <bighead@users.sourceforge.net>
 
 	* src/rbgtksourceiter.c: changed all calls to RVAL2GENUM to RVAL2GFLAGS
@@ -7,7 +20,7 @@
 
 	* src/rbgtksourceiter.c: Fixed a bug when setting the SearchFlags
 	  constants.
- 
+
 2004-05-16  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgtksourcebuffer.c (#create_marker): name and type parameters

@@ -3,8 +3,8 @@
 
   rbgtksourceiter.c -
 
-  $Author: lrz $
-  $Date: 2004/08/05 18:13:49 $
+  $Author: mutoh $
+  $Date: 2004/08/10 17:14:13 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
 ************************************************/
@@ -107,16 +107,16 @@ Init_gtk_sourceiter ()
 			  find_matching_bracket, 0);
 
 	/*
-	 * Add GtkSourceSearchFlags as a Gtk::TextIter::SearchFlags 
+	 * Add GtkSourceSearchFlags as a Gtk::TextIter::SourceSearchFlags 
+         * This should not override Gtk::TextIter::SearchFlags.
 	 */
-	G_DEF_CLASS (GTK_TYPE_SOURCE_SEARCH_FLAGS, "SearchFlags",
-		     cTextIter);
+        G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", 
+                    cTextIter);
 	/*
 	 * Define Gtk::TextIter::SEARCH_CASE_INSENSITIVE only. Because other
-	 * constants are same as Gtk::TextIter::SearchFlags (0.7.1) 
+	 * constants are same as Gtk::TextIter::SearchFlags (Since 0.7.1) 
 	 */
 	rb_define_const (cTextIter, "SEARCH_CASE_INSENSITIVE",
 			 GFLAGS2RVAL (GTK_SOURCE_SEARCH_CASE_INSENSITIVE,
 				     GTK_TYPE_SOURCE_SEARCH_FLAGS));
-
 }

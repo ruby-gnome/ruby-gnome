@@ -2,8 +2,7 @@
 extconf.rb for GtkSourceView extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
 #
@@ -14,7 +13,7 @@ PKGConfig.have_package('gtksourceview-1.0') or exit
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..')
-$CFLAGS += " " + ['glib/src'].map{|d|
+$CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|
   "-I" + File.join(top, d)
 }.join(" ")
 
@@ -23,6 +22,7 @@ if /cygwin|mingw/ =~ RUBY_PLATFORM
   top = "../.."
   [
     ["glib/src", "ruby-glib2"],
+    ["gtk/src", "ruby-gtk2"],
   ].each{|d,l|
     $LDFLAGS << " -L#{top}/#{d}"
     $libs << " -l#{l}"
