@@ -4,7 +4,7 @@
   rbgtkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/05/24 11:32:12 $
+  $Date: 2004/06/01 17:33:19 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -19,12 +19,30 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-gtkdrag_selection_owner_set(self, widget, selection, time)
-    VALUE self, widget, selection, time;
+gtkdrag_selection_owner_set(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-    int ret = gtk_selection_owner_set(RVAL2WIDGET(widget), 
+    gboolean ret;
+
+    if (argc == 3){
+        VALUE widget, selection, time;
+        rb_scan_args(argc, argv, "30", &widget, &selection, &time);
+        ret = gtk_selection_owner_set(RVAL2WIDGET(widget), 
                                       RVAL2ATOM(selection), NUM2INT(time));
-    return ret ? Qtrue : Qfalse;
+    } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display, widget, selection, time;
+        rb_scan_args(argc, argv, "40", &display, &widget, &selection, &time);
+        ret = gtk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                  RVAL2WIDGET(widget), 
+                                                  RVAL2ATOM(selection), NUM2INT(time));
+#else
+        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+#endif
+    }
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE

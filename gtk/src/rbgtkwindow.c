@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/03/13 15:14:11 $
+  $Date: 2004/06/01 17:33:19 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -121,6 +121,22 @@ gwin_set_transient_for(self, parent)
     gtk_window_set_transient_for(_SELF(self), _SELF(parent));
     return self;
 }
+
+static VALUE
+gwin_set_destroy_with_parent(self, setting)
+    VALUE self, setting;
+{
+    gtk_window_set_destroy_with_parent(_SELF(self), RTEST(setting));
+    return self;
+}
+
+/* Define as Properties.
+void        gtk_window_set_screen           (GtkWindow *window,
+                                             GdkScreen *screen);
+GdkScreen*  gtk_window_get_screen           (GtkWindow *window);
+gboolean    gtk_window_is_active            (GtkWindow *window);
+gboolean    gtk_window_has_toplevel_focus   (GtkWindow *window);
+*/
 
 static VALUE
 gwin_s_list_toplevels(self)
@@ -251,6 +267,22 @@ gwin_unfullscreen(self)
     return self;
 }
 #endif
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gwin_set_keep_above(self, setting)
+    VALUE self, setting;
+{
+    gtk_window_set_keep_above(_SELF(self), RTEST(setting));
+    return self;
+}
+static VALUE
+gwin_set_keep_below(self, setting)
+    VALUE self, setting;
+{
+    gtk_window_set_keep_below(_SELF(self), RTEST(setting));
+    return self;
+}
+#endif
 
 static VALUE
 gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
@@ -322,6 +354,16 @@ gwin_set_type_hint(self, hint)
     gtk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
     return self;
 }
+/* Defined as Properties
+void        gtk_window_set_skip_taskbar_hint
+                                            (GtkWindow *window,
+                                             gboolean setting);
+void        gtk_window_set_skip_pager_hint  (GtkWindow *window,
+                                             gboolean setting);
+void        gtk_window_set_accept_focus     (GtkWindow *window,
+                                             gboolean setting);
+
+*/
 
 static VALUE
 gwin_get_decorated(self)
@@ -474,6 +516,49 @@ gwin_s_set_default_icon_list(self, list)
     return list;
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gwin_s_set_default_icon(self, icon_or_filename)
+    VALUE self, icon_or_filename;
+{
+    if (TYPE(icon_or_filename) == T_STRING){
+        GError* err;
+        gboolean ret = gtk_window_set_default_icon_from_file(RVAL2CSTR(icon_or_filename), &err);
+        if (! ret)
+            RAISE_GERROR(err);
+    } else {
+#if GTK_CHECK_VERSION(2,4,0)
+        gtk_window_set_default_icon(GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
+#else
+        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
+                 rb_class2name(CLASS_OF(icon_or_filename)));
+#endif
+    }
+    return self;
+}
+#endif
+
+static VALUE
+gwin_set_icon(self, icon_or_filename)
+    VALUE self, icon_or_filename;
+{
+    if (TYPE(icon_or_filename) == T_STRING){
+#if GTK_CHECK_VERSION(2,2,0)
+        GError* err;
+        gboolean ret = gtk_window_set_icon_from_file(_SELF(self),
+                                                     RVAL2CSTR(icon_or_filename), &err);
+        if (! ret)
+            RAISE_GERROR(err);
+#else
+        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
+                 rb_class2name(CLASS_OF(icon_or_filename)));
+#endif
+    } else {
+        gtk_window_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
+    }
+    return self;
+}
+
 static VALUE
 gwin_set_icon_list(self, list)
     VALUE self, list;
@@ -488,6 +573,15 @@ gwin_set_icon_list(self, list)
     g_list_free(glist);
     return list;
 }
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gwin_s_set_auto_startup_notification(self, setting)
+    VALUE self, setting;
+{
+    gtk_window_set_auto_startup_notification(RTEST(setting));
+    return self;
+}
+#endif
 
 /* They are not public methods.
 static VALUE
@@ -540,6 +634,7 @@ Init_gtk_window()
     rb_define_method(gWindow, "set_gravity", gwin_set_gravity, 1);
     rb_define_method(gWindow, "gravity", gwin_get_gravity, 0);
     rb_define_method(gWindow, "set_transient_for", gwin_set_transient_for, 1);
+    rb_define_method(gWindow, "set_destroy_with_parent", gwin_set_destroy_with_parent, 1);
     rb_define_singleton_method(gWindow, "toplevels", gwin_s_list_toplevels, 0);
     rb_define_method(gWindow, "add_mnemonic", gwin_add_mnemonic, 2);
     rb_define_method(gWindow, "remove_mnemonic", gwin_remove_mnemonic, 2);
@@ -557,6 +652,10 @@ Init_gtk_window()
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gWindow, "fullscreen", gwin_fullscreen, 0);
     rb_define_method(gWindow, "unfullscreen", gwin_unfullscreen, 0);
+#endif
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gWindow, "set_keep_above", gwin_set_keep_above, 1);
+    rb_define_method(gWindow, "set_keep_below", gwin_set_keep_below, 1);
 #endif
     rb_define_method(gWindow, "begin_resize_drag", gwin_begin_resize_drag, 5);
     rb_define_method(gWindow, "begin_move_drag", gwin_begin_move_drag, 4);
@@ -584,7 +683,16 @@ Init_gtk_window()
     rb_define_method(gWindow, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
     rb_define_method(gWindow, "resize", gwin_resize, 2);
     rb_define_singleton_method(gWindow, "set_default_icon_list", gwin_s_set_default_icon_list, 1);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_singleton_method(gWindow, "set_default_icon", gwin_s_set_default_icon, 1);
+#endif
+    rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_singleton_method(gWindow, "set_auto_startup_notification", 
+                               gwin_s_set_auto_startup_notification, 1);
+#endif
+
 /*
     rb_define_method(gWindow, "decorated_window_init", gwin_decorated_window_init, 0);
     rb_define_method(gWindow, "decorated_window_calculate_frame_size", gwin_decorated_window_calculate_frame_size, 0);   

@@ -1,3 +1,11 @@
+2004-06-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwindow.c: Added Gtk::Window#set_destroy_with_parent.
+	#set_default_icon, #set_icon, #set_auto_startup_notification. for GTK+-2.2.
+	* src/rbgtkselection.c: Gtk::Selection.owner_set accept Gdk::Display 
+	for GTK+-2.2.
+	* src/rbgtkstyle.c: Added Gtk::Style.draw_insertion_cursor for GTK+-2.4. 
+
 2004-06-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbutton.c, rbgtktoolitem.c, rbgtktoggletoolbutton.c,

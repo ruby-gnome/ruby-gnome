@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:32 $
+  $Date: 2004/06/01 17:33:19 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -392,6 +392,20 @@ style_paint_resize_grip(self, gdkwindow, state_type, area, widget, detail,
                           NUM2INT(width), NUM2INT(height));
     return self;
 }
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+style_s_draw_insertion_cursor(self, widget, drawable, area, location, is_primary, direction, draw_arrow)
+    VALUE self, widget, drawable, area, location, is_primary, direction, draw_arrow;
+{
+    gtk_draw_insertion_cursor(GTK_WIDGET(RVAL2GOBJ(widget)),
+                              GDK_WINDOW(RVAL2GOBJ(drawable)),
+                              RVAL2REC(area), RVAL2REC(location),
+                              RTEST(is_primary), 
+                              RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION),
+                              RTEST(draw_arrow));
+    return self;
+}
+#endif
 
 #define DEFINE_STYLE_COLOR(type) \
 static VALUE \
@@ -632,7 +646,9 @@ Init_gtk_style()
     rb_define_method(gStyle, "paint_expander", style_paint_expander, 8);
     rb_define_method(gStyle, "paint_layout", style_paint_layout, 9);
     rb_define_method(gStyle, "paint_resize_grip", style_paint_resize_grip, 10);
-    
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_singleton_method(gStyle, "draw_insertion_cursor", style_s_draw_insertion_cursor, 7);
+#endif
     rb_define_method(gStyle, "fg", style_fg, 1);
     rb_define_method(gStyle, "bg", style_bg, 1);
     rb_define_method(gStyle, "light", style_light, 1);
