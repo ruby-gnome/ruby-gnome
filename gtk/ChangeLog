@@ -1,3 +1,7 @@
+2004-08-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/testgtk.rb: Fix to show version information.
+
 2004-08-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/gtk-demo/apple-red.png, gnome-*.png: Added.

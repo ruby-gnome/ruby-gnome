@@ -4,9 +4,9 @@
 
   testgtk.rb - testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.10 2003/04/12 17:52:55 sakai Exp $
+  $Id: testgtk.rb,v 1.11 2004/08/15 14:38:17 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -161,7 +161,7 @@ def create_main_window
   box1.pack_start(label, false, false, 0)
 
   buffer =
-      sprintf("Ruby/GTK2 v%d.%d%d",
+      sprintf("Ruby/GTK2 v%d.%d.%d",
 	      Gtk::BINDING_VERSION[0],
 	      Gtk::BINDING_VERSION[1],
 	      Gtk::BINDING_VERSION[2])
