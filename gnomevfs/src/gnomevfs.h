@@ -121,12 +121,12 @@ VALUE glist2strary(GList *list);
 
 /* Global Variables **********************************************************/
 
-VALUE g_id_call;		/* rb_intern("call") */
+extern VALUE g_id_call;		/* rb_intern("call") */
 
-VALUE g_gvfs_uri;		/* GnomeVFS::URI */
-VALUE g_gvfs_error;		/* GnomeVFS::Error */
-VALUE g_gvfs_file;		/* GnomeVFS::File */
-VALUE g_gvfs_dir;		/* GnomeVFS::Directory */
+extern VALUE g_gvfs_uri;	/* GnomeVFS::URI */
+extern VALUE g_gvfs_error;	/* GnomeVFS::Error */
+extern VALUE g_gvfs_file;	/* GnomeVFS::File */
+extern VALUE g_gvfs_dir;	/* GnomeVFS::Directory */
 
 /* End of Multiple Inclusion Guard and extern "C" specifiers for C++ *********/
 

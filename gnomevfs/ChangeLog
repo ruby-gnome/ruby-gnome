@@ -1,3 +1,7 @@
+2004-05-30  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/gnomevfs.h: Add "extern" definition to the Global variables.
+
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* REAMDE, src/gnomevfs-fileinfo.c src/gnomevfs-result.c src/gnomevfs.h:
