@@ -3,44 +3,18 @@
 
   rbgtktreerowreference.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/02 11:18:52 $
+  $Author: tkubo $
+  $Date: 2003/01/18 15:08:40 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 #include "global.h"
 
-#define _SELF(s) ((GtkTreeRowReference*)RVAL2BOXED(s, GTK_TYPE_TREE_ROW_REFERENCE))
+#define _SELF(s) RVAL2TREEROWREFERENCE(s)
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
-
-/*****************************************/
-static GtkTreeRowReference*
-treerowref_copy(ref)
-    const GtkTreeRowReference* ref;
-{ 
-/* XXXX This code is broken, Is GtkTreeRowReference not available ?
-  GtkTreeRowReference* new_ref;
-  g_return_val_if_fail (ref != NULL, NULL);
-  new_ref = g_new(GtkTreeRowReference, 1);
-  *new_ref = *ref;
-  return new_ref;
-*/
-  return (GtkTreeRowReference*)ref;
-}
-
-GType
-gtk_treerowreference_get_type(void)
-{ 
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GtkTreeRowReference",
-                    (GBoxedCopyFunc)treerowref_copy,
-                    (GBoxedFreeFunc)gtk_tree_row_reference_free);
-  return our_type;
-}
 
 /*****************************************/
 
@@ -74,7 +48,7 @@ treerowref_get_path(self)
     VALUE self;
 {
     return BOXED2RVAL(gtk_tree_row_reference_get_path(_SELF(self)), 
-                      GTK_TYPE_TREE_ROW_REFERENCE);
+                      RBGTK_TYPE_TREE_ROW_REFERENCE);
 }
 
 static VALUE
@@ -124,7 +98,7 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
 void 
 Init_gtk_treerowreference()
 {
-  VALUE gTreeref = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
+  VALUE gTreeref = G_DEF_CLASS(RBGTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   
   rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
   rb_define_method(gTreeref, "path", treerowref_get_path, 0);

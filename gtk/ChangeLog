@@ -1,3 +1,19 @@
+2003-01-18  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb: make Makefiles for gtk20.so and gtk22.so.
+	* src/init.c: load gtk20.so or gtk22.so according to Gtk version.
+	* src/rbgtk.h: add prototypes.
+	rename GTK_TYPE_CLIPBOARD to RBGTK_TYPE_CLIPBOARD.
+	rename GTK_TYPE_TREE_ROW_REFERENCE to RBGTK_TYPE_TREE_ROW_REFERENCE.
+	define RVAL2CLIPBOARD and RVAL2TREEROWREFERENCE.
+	* src/rbgtkclipboard.c: delete functions which depend on Gtk2.0.
+	* src/rbgtktreerowreference.c: delete functions which depend on Gtk2.0.
+	use RBGTK_TYPE_TREE_ROW_REFERENCE instead of RBGTK_TYPE_TREE_ROW_REFERENCE
+	(suggested by Masao Mutoh).
+	* src/rbgtktextbuffer.c: delete definition of RVAL2CLIPBOARD.
+	* src20/rbgtk20.c: add a file which depends on Gtk2.0.
+	* src22/rbgtk22.c: add a file which depends on Gtk2.2.
+
 2003-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdraw.c: Implement Gdk::Drawable#visual, #set_colormap, 

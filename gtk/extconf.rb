@@ -145,6 +145,16 @@ allclean: clean
   mfile.close
   Dir.chdir ".."
 
+  Dir.chdir "src20"
+  $objs = ["rbgtk20.o"]
+  create_makefile("gtk20", src_dir)
+  Dir.chdir ".."
+
+  Dir.chdir "src22"
+  $objs = ["rbgtk22.o"]
+  create_makefile("gtk22", src_dir)
+  Dir.chdir ".."
+
   mfile = File.open("Makefile", "w")
   if /mswin32/ =~ PLATFORM
     mfile.print "\
@@ -152,17 +162,33 @@ allclean: clean
 all:
 		@cd src
 		@nmake -nologo
+		@cd ../src20
+		@nmake -nologo
+		@cd ../src22
+		@nmake -nologo
 
 install:
 		@cd src
+		@nmake -nologo install DESTDIR=$(DESTDIR)
+		@cd ../src20
+		@nmake -nologo install DESTDIR=$(DESTDIR)
+		@cd ../src22
 		@nmake -nologo install DESTDIR=$(DESTDIR)
 
 site-install:
 		@cd src
 		@nmake -nologo site-install DESTDIR=$(DESTDIR)
+		@cd ../src20
+		@nmake -nologo site-install DESTDIR=$(DESTDIR)
+		@cd ../src22
+		@nmake -nologo site-install DESTDIR=$(DESTDIR)
 
 clean:
 		@cd src
+		@nmake -nologo allclean
+		@cd ../src20
+		@nmake -nologo allclean
+		@cd ../src22
 		@nmake -nologo allclean
 		@cd ..
 		@-rm -f Makefile extconf.h conftest.*
@@ -173,18 +199,28 @@ clean:
 
 all:
 		@cd src; make all
+		@cd src20; make all
+		@cd src22; make all
 
 install:
 		@cd src; make install
+		@cd src20; make install
+		@cd src22; make install
 
 site-install:;	
 		@cd src; make site-install
+		@cd src20; make site-install
+		@cd src22; make site-install
 
 clean:
 		@cd src; make allclean
+		@cd src20; make allclean
+		@cd src22; make allclean
 		@rm -f core gtk2.a *~
 distclean:	clean
 		@cd src; make distclean
+		@cd src20; make distclean
+		@cd src22; make distclean
 		@rm -f Makefile extconf.h conftest.*
 		@rm -f core *~ mkmf.log
 "

@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: ogs $
-  $Date: 2002/12/02 14:19:09 $
+  $Author: tkubo $
+  $Date: 2003/01/18 15:08:40 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -18,7 +18,6 @@
 #define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
-#define RVAL2CLIPBOARD(c) ((GtkClipboard*)RVAL2BOXED(c, GTK_TYPE_CLIPBOARD))
 
 static VALUE
 txt_initialize(argc, argv, self)

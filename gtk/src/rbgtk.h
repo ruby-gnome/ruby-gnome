@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Author: tkubo $
+  $Date: 2003/01/18 15:08:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,12 +45,10 @@
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
-#define GTK_TYPE_TREE_ROW_REFERENCE (gtk_treerowreference_get_type())
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_SPAN (gdk_span_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
-#define GTK_TYPE_CLIPBOARD (gtk_clipboard_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 
@@ -66,12 +64,23 @@ extern VALUE mGtk;
 extern VALUE mGdk;
 
 /*
+ * for gtk2.0/gtk2.2
+ */
+#define RBGTK_TYPE_CLIPBOARD (rbgtk_clipboard_get_type())
+#define RVAL2CLIPBOARD(obj) rbgtk_get_clipboard(obj)
+extern GType (*rbgtk_clipboard_get_type)();
+extern GtkClipboard* (*rbgtk_get_clipboard)(VALUE obj);
+
+#define RBGTK_TYPE_TREE_ROW_REFERENCE (rbgtk_tree_row_reference_get_type())
+#define RVAL2TREEROWREFERENCE(obj) (rbgtk_get_tree_row_reference(obj))
+extern GType (*rbgtk_tree_row_reference_get_type)();
+extern GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj);
+
+/*
  * for gtk
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
-extern GType gtk_treerowreference_get_type();
-extern GType gtk_clipboard_get_type();
 extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
 

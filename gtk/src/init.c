@@ -3,8 +3,8 @@
 
   init.c -
 
-  $Author: sakai $
-  $Date: 2002/12/11 17:23:02 $
+  $Author: tkubo $
+  $Date: 2003/01/18 15:08:40 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -14,10 +14,20 @@
 #include "global.h"
 
 VALUE treeiter_set_value_table;
+GType (*rbgtk_clipboard_get_type)() = NULL;
+GtkClipboard* (*rbgtk_get_clipboard)(VALUE obj) = NULL;
+GType (*rbgtk_tree_row_reference_get_type)() = NULL;
+GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj) = NULL;
 
 void
 Init_gtk2()
 {
+    if (gtk_minor_version == 0) {
+        rb_require("gtk20");
+    } else {
+        rb_require("gtk22");
+    }
+
     gtk_set_locale();
 
     /*

@@ -3,34 +3,15 @@
 
   rbgtkclipboard.c -
  
-  $Author: ogs $
-  $Date: 2002/11/28 17:33:04 $
+  $Author: tkubo $
+  $Date: 2003/01/18 15:08:40 $
 
   Copyright (C) 2002 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
 #define RVAL2ATOM(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
-#define _SELF(s) ((GtkClipboard*)RVAL2BOXED(s, GTK_TYPE_CLIPBOARD))
-#define GTK_TYPE_CLIPBOARD (gtk_clipboard_get_type())
-
-GtkClipboard*
-clipboard_copy(const GtkClipboard *clipboard)
-{
-    /* I don't know how to copy this object ... */
-    return (GtkClipboard*)clipboard;
-}
-
-GType
-gtk_clipboard_get_type()
-{
-    static GType our_type = 0;
-    if(our_type == 0)
-        our_type = g_boxed_type_register_static("GtkClipboard",
-                                                (GBoxedCopyFunc)clipboard_copy,
-                                                (GBoxedFreeFunc)g_free);
-    return our_type;
-}
+#define _SELF(s) RVAL2CLIPBOARD(s)
 
 static VALUE
 clipboard_initialize(self, selection)
@@ -148,7 +129,7 @@ clipboard_wait_is_text_available(self)
 void 
 Init_gtk_clipboard()
 {
-    VALUE gClipboard = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
+    VALUE gClipboard = G_DEF_CLASS(RBGTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 
     rb_define_method(gClipboard, "initialize", clipboard_initialize, 1);
 
