@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: sakai $
-  $Date: 2003/03/07 07:56:34 $
+  $Author: mutoh $
+  $Date: 2003/05/01 15:50:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -237,7 +237,7 @@ composite(argc, argv, self)
     VALUE self;
 {
     VALUE ret;
-    VALUE args[15];
+    VALUE args[16];
     GdkInterpType interp_type = GDK_INTERP_BILINEAR;
 
     rb_scan_args(argc, argv, "79", 

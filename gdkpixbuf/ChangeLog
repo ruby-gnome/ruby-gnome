@@ -1,3 +1,7 @@
+2003-05-02  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* rbgdk-pixbuf.c: Bugfix for Gdk::Pixbuf#composite
+
 2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* rbgdk-pixbuf-loader.c: rename write and close to 
