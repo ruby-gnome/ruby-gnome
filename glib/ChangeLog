@@ -1,3 +1,7 @@
+2004-02-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: Remove id, send from prop_exclude_list. 
+
 2004-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.h: Add G_DEF_CLASS3(). This is for real-gtype

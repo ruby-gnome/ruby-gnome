@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 13:39:34 $
+  $Date: 2004/02/24 11:44:56 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -483,11 +483,9 @@ Init_gobject()
     g_hash_table_insert(prop_exclude_list, "extend", "extend");
     g_hash_table_insert(prop_exclude_list, "freeze", "freeze");
     g_hash_table_insert(prop_exclude_list, "hash", "hash");
-    g_hash_table_insert(prop_exclude_list, "id", "id");
     g_hash_table_insert(prop_exclude_list, "method", "method");
     g_hash_table_insert(prop_exclude_list, "methods", "methods");
     g_hash_table_insert(prop_exclude_list, "object_id", "object_id");
-    g_hash_table_insert(prop_exclude_list, "send", "send");
     g_hash_table_insert(prop_exclude_list, "taint", "taint");
     g_hash_table_insert(prop_exclude_list, "untaint", "untaint");
 
