@@ -7,7 +7,7 @@ Requirements
    Ruby: http://www.ruby-lang.org/
    GTK+: http://www.gtk.org/
    Pango: http://www.pango.org/
-   Ruby/GLib2, Ruby/Pango: http://ruby-gnome2.sourceforge.net/
+   Ruby/GLib2, Ruby/ATK, Ruby/Pango: http://ruby-gnome2.sourceforge.net/
 
 Install
 -------

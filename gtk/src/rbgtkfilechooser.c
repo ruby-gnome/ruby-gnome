@@ -4,7 +4,7 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2004/05/30 16:41:13 $
+  $Date: 2004/08/22 13:30:40 $
  
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
@@ -15,23 +15,9 @@
 
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
 
-VALUE fchoerror_not;
-VALUE fchoerror_bad;
-
-static VALUE
-fcho_error(error)
-    GError* error;
-{
-    VALUE exc;
-    if (error->code == GTK_FILE_CHOOSER_ERROR_NONEXISTENT)
-        exc = rb_exc_new2(fchoerror_not, error->message);
-    else
-        exc = rb_exc_new2(fchoerror_bad, error->message);
-    
-    g_error_free(error);
-    rb_exc_raise(exc);
-}
-    
+/* For error handling */
+#define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED
+#include <gtk/gtkfilesystem.h>
 
 static VALUE
 gslist2ary_free(list)
@@ -268,7 +254,7 @@ fcho_add_shortcut_folder(self, folder)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_add_shortcut_folder(_SELF(self), RVAL2CSTR(folder), &error))
-        fcho_error(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -278,7 +264,7 @@ fcho_remove_shortcut_folder(self, folder)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_remove_shortcut_folder(_SELF(self), RVAL2CSTR(folder), &error))
-        fcho_error(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -296,7 +282,7 @@ fcho_add_shortcut_folder_uri(self, uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_add_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
-        fcho_error(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -306,7 +292,7 @@ fcho_remove_shortcut_folder_uri(self, uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_remove_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
-        fcho_error(error);
+        RAISE_GERROR(error);
     return self;
 }
 
@@ -363,9 +349,20 @@ Init_gtk_file_chooser()
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", gFileCho);
     G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
 
-    fchoerror_not = rb_define_class_under(mGtk, "FileChooserNotExistentError", rb_eRuntimeError);
-    fchoerror_bad = rb_define_class_under(mGtk, "FileChooserBadFileNameError", rb_eRuntimeError);
-
+    /* GtkFileChooserError */
+    G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
+                GTK_TYPE_FILE_CHOOSER_ERROR);
+    /* GtkFileSystemError */
+    {
+        VALUE fse = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError", mGtk, rb_eRuntimeError);
+        rb_define_const(fse, "NONEXISTENT", INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
+        rb_define_const(fse, "NOT_FOLDER", INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
+        rb_define_const(fse, "INVALID_URI", INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
+        rb_define_const(fse, "BAD_FILENAME", INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
+        rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
+        rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+    }
+    
 #endif
 }
 

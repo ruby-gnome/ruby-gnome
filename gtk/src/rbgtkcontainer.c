@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2004/08/07 08:36:09 $
+  $Date: 2004/08/22 13:30:40 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -696,7 +696,7 @@ type_register(int argc, VALUE* argv, VALUE self)
 
         {
             GType parent = g_type_parent(type);
-            const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(parent);
+            const RGObjClassInfo* cinfo = GTYPE2CINFO(parent);
             VALUE m = rb_define_module_under(self, RubyGtkContainerHookModule);
 
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {

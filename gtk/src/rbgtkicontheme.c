@@ -4,7 +4,7 @@
   rbgtkicontheme.c -
 
   $Author: mutoh $
-  $Date: 2004/05/23 17:02:11 $
+  $Date: 2004/08/22 13:30:40 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -13,8 +13,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 #define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
-static VALUE iterror_notfound;
-static VALUE iterror_failed;
+
 
 static VALUE
 it_initialize(self)
@@ -138,16 +137,7 @@ it_load_icon(self, icon_name, size, flags)
                                               NUM2INT(size),
                                               RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS),
                                               &error);
-    if (! ret) {
-        VALUE exc;
-        if (error->code == GTK_ICON_THEME_NOT_FOUND)
-            exc = rb_exc_new2(iterror_notfound, error->message);
-        else
-            exc = rb_exc_new2(iterror_failed, error->message);
-
-        g_error_free(error);
-        rb_exc_raise(exc);
-    }
+    if (! ret) RAISE_GERROR(error);
     return GOBJ2RVAL(ret);
 }
 
@@ -224,8 +214,9 @@ Init_gtk_icon_theme()
 
     G_DEF_SETTERS(it);
 
-    iterror_notfound = rb_define_class_under(mGtk, "IconThemeNotFoundError", rb_eRuntimeError);
-    iterror_failed = rb_define_class_under(mGtk, "IconThemeFailedError", rb_eRuntimeError);
+    /* GtkIconThemeError */
+    G_DEF_ERROR(GTK_ICON_THEME_ERROR, "IconThemeError", mGtk, rb_eRuntimeError,
+                GTK_TYPE_ICON_THEME_ERROR);
 
     /* GtkIconLookupFlags */
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", it);

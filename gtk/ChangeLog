@@ -1,3 +1,10 @@
+2004-08-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkicontheme.c,src/rbgtkfilechooser.c, src/rbgdkscreen.c, 
+	src/rbgtkcontainer.c: 
+	Improved error handing. Follow Ruby/GLib changes.
+	* README: Fix dependencies(add Ruby/ATK).
+
 2004-08-19  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgtkactiongroup.c (#add_actions, #add_toggle_actions, 
