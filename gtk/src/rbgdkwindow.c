@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/12 16:28:54 $
+  $Date: 2002/06/22 03:14:53 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -119,6 +119,16 @@ gdkwin_clear_area(self, x,y,w,h)
 }
 
 static VALUE
+gdkwin_copy_area(self, gc, x, y, src_window, src_x, src_y, width, height)
+	VALUE self, gc, x, y, src_window, src_x, src_y, width, height;
+{
+	gdk_window_copy_area(get_gdkwindow(self), get_gdkgc(gc),
+						 NUM2INT(x), NUM2INT(y), get_gdkwindow(src_window),
+						 NUM2INT(src_x), NUM2INT(src_y), NUM2INT(width), NUM2INT(height));
+	return self;
+}
+
+static VALUE
 gdkwin_clear_area_e(self, x,y,w,h)
     VALUE self,x,y,w,h;
 {
@@ -167,6 +177,84 @@ gdkwin_lower(self)
 {
     gdk_window_lower(get_gdkwindow(self));
     return self;
+}
+
+static VALUE
+gdkwin_register_dnd(self)
+    VALUE self;
+{
+    gdk_window_register_dnd(get_gdkwindow(self));
+    return self;
+}
+
+static VALUE
+gdkwin_set_override_redirect(self, override_redirect)
+    VALUE self, override_redirect;
+{
+    gdk_window_set_override_redirect(get_gdkwindow(self), 
+									 RTEST(override_redirect));
+    return self;
+}
+
+static VALUE
+gdkwin_shape_combine_mask(self, shape_mask, offset_x, offset_y)
+    VALUE self, shape_mask, offset_x, offset_y;
+{
+    gdk_window_shape_combine_mask(get_gdkwindow(self), 
+								  get_gdkbitmap(shape_mask), 
+								  NUM2INT(offset_x), NUM2INT(offset_y));
+    return self;
+}
+
+static VALUE
+gdkwin_set_child_shapes(self)
+    VALUE self;
+{
+    gdk_window_set_child_shapes(get_gdkwindow(self));
+    return self;
+}
+
+static VALUE
+gdkwin_merge_child_shapes(self)
+    VALUE self;
+{
+    gdk_window_merge_child_shapes(get_gdkwindow(self));
+    return self;
+}   
+
+static VALUE
+gdkwin_set_static_gravities(self, use_static)
+    VALUE self, use_static;
+{
+	return (gdk_window_set_static_gravities(get_gdkwindow(self),
+						NUM2INT(use_static))) ? Qtrue : Qfalse;
+}
+
+static VALUE
+gdkwin_set_hints(self, x, y, min_w, min_h, max_w, max_h, flags)
+    VALUE self, x, y, min_w, min_h, max_w, max_h, flags;
+{
+    gdk_window_set_hints(get_gdkwindow(self), NUM2INT(x), NUM2INT(y),
+						 NUM2INT(min_w), NUM2INT(min_h), 
+						 NUM2INT(max_w), NUM2INT(max_h),
+						 NUM2INT(flags));
+    return self;
+}
+
+static VALUE
+gdkwin_set_title(self, title)
+    VALUE self, title;
+{
+	gdk_window_set_title(get_gdkwindow(self),STR2CSTR(title));
+	return self;
+}
+
+static VALUE
+gdkwin_set_colormap(self, colormap)
+    VALUE self, colormap;
+{
+	gdk_window_set_colormap(get_gdkwindow(self),get_gdkcmap(colormap));
+	return self;
 }
 
 static VALUE
@@ -229,15 +317,6 @@ gdkwin_set_functions(self, func)
 }
 
 static VALUE
-gdkwin_set_override_redirect(self, override_redirect)
-    VALUE self, override_redirect;
-{
-    gdk_window_set_override_redirect(get_gdkwindow(self),
-				     RTEST(override_redirect));
-    return self;
-}
-
-static VALUE
 gdkwin_get_root_origin(self)
     VALUE self;
 {
@@ -278,6 +357,119 @@ gdkwin_get_geometry(self)
     gdk_window_get_geometry(get_gdkwindow(self), &x, &y, &w, &h, &d);
     return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
 		       INT2NUM(w), INT2NUM(h), INT2NUM(d));
+}
+
+static VALUE
+gdkwin_get_position(self)
+	VALUE self;
+{
+	gint x, y;
+	gdk_window_get_position(get_gdkwindow(self), &x, &y);
+	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+gdkwin_get_visual(self)
+	VALUE self;
+{
+	return make_gdkvisual(gdk_window_get_visual(get_gdkwindow(self)));
+}
+
+static VALUE
+gdkwin_get_colormap(self)
+	VALUE self;
+{
+	return make_gdkcolormap(gdk_window_get_colormap(get_gdkwindow(self)));
+}
+
+static VALUE
+gdkwin_get_type(self)
+	VALUE self;
+{
+	return INT2FIX(gdk_window_get_type(get_gdkwindow(self)));
+}
+
+static VALUE
+gdkwin_get_origin(self)
+	VALUE self;
+{
+	gint x, y;
+	gdk_window_get_origin(get_gdkwindow(self), &x, &y);
+	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+gdkwin_get_deskrelative_origin(self)
+	VALUE self;
+{
+	gint x, y;
+	gdk_window_get_deskrelative_origin(get_gdkwindow(self), &x, &y);
+	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+gdkwin_get_parent(self)
+	VALUE self;
+{
+	return make_gdkwindow(gdk_window_get_parent(get_gdkwindow(self)));
+}
+
+static VALUE
+gdkwin_get_toplevel(self)
+	VALUE self;
+{
+	return make_gdkwindow(gdk_window_get_toplevel(get_gdkwindow(self)));
+}
+
+static VALUE
+gdkwin_get_children(self)
+	VALUE self;
+{
+	GList* list = gdk_window_get_children(get_gdkwindow(self));
+	VALUE ary = rb_ary_new();
+	while (list) {
+		rb_ary_push(ary, make_gdkwindow(list->data));
+		list = list->next;
+	}
+	return ary;
+}
+
+static VALUE
+gdkwin_set_transient_for(self, leader)
+    VALUE self, leader;
+{   
+    gdk_window_set_transient_for(get_gdkwindow(self), get_gdkwindow(leader));
+    return self;
+}
+
+static VALUE
+gdkwin_set_role(self, role)
+    VALUE self, role;
+{
+    gdk_window_set_role(get_gdkwindow(self), STR2CSTR(role));
+    return self;
+}
+
+static VALUE
+gdkwin_set_group(self, leader)
+    VALUE self, leader;
+{
+    gdk_window_set_group(get_gdkwindow(self), get_gdkwindow(leader));
+    return self;
+}
+
+
+static VALUE
+gdkwin_get_toplevels(self)
+	VALUE self;
+{
+	GList* list = gdk_window_get_toplevels();
+	VALUE ary = rb_ary_new();
+	while (list) {
+		rb_ary_push(ary, make_gdkwindow(list->data));
+		list = list->next;
+	}
+	return ary;
 }
 
 static VALUE
@@ -459,11 +651,34 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "clear", gdkwin_clear, 0);
     rb_define_method(gdkWindow, "clear_area", gdkwin_clear_area, 4);
     rb_define_method(gdkWindow, "clear_area_e", gdkwin_clear_area_e, 4);
+    rb_define_method(gdkWindow, "copy_area", gdkwin_copy_area, 8);
     rb_define_method(gdkWindow, "set_background", gdkwin_set_background, 1);
     rb_define_method(gdkWindow, "set_back_pixmap", gdkwin_set_back_pixmap, 2);
     rb_define_method(gdkWindow, "move", gdkwin_move, 2);
     rb_define_method(gdkWindow, "raise", gdkwin_raise, 0);
     rb_define_method(gdkWindow, "lower", gdkwin_lower, 0);
+    rb_define_method(gdkWindow, "register_dnd", gdkwin_register_dnd, 0);
+    rb_define_method(gdkWindow, "override_redirect", gdkwin_set_override_redirect, 1);
+    rb_define_method(gdkWindow, "shape_combine_mask", gdkwin_shape_combine_mask, 3);
+    rb_define_method(gdkWindow, "set_child_shapes", gdkwin_set_child_shapes, 0);
+    rb_define_method(gdkWindow, "merge_child_shapes", gdkwin_merge_child_shapes, 0);
+    rb_define_method(gdkWindow, "set_static_gravities", gdkwin_set_static_gravities, 1);
+    rb_define_method(gdkWindow, "set_hints", gdkwin_set_hints, 7);
+    rb_define_method(gdkWindow, "set_title", gdkwin_set_title, 1);
+    rb_define_method(gdkWindow, "set_colormap", gdkwin_set_colormap, 0);
+    rb_define_method(gdkWindow, "position", gdkwin_get_position, 0);
+    rb_define_method(gdkWindow, "visual", gdkwin_get_visual, 0);
+    rb_define_method(gdkWindow, "colormap", gdkwin_get_colormap, 0);
+    rb_define_method(gdkWindow, "window_type", gdkwin_get_type, 0);
+    rb_define_method(gdkWindow, "origin", gdkwin_get_origin, 0);
+    rb_define_method(gdkWindow, "deskrelative_origin", gdkwin_get_deskrelative_origin, 0);
+    rb_define_method(gdkWindow, "parent", gdkwin_get_parent, 0);
+    rb_define_method(gdkWindow, "toplevel", gdkwin_get_toplevel, 0);
+    rb_define_method(gdkWindow, "children", gdkwin_get_children, 0);
+    rb_define_method(gdkWindow, "set_transient_for", gdkwin_set_transient_for, 1);
+    rb_define_method(gdkWindow, "set_role", gdkwin_set_role, 1);
+    rb_define_method(gdkWindow, "set_group", gdkwin_set_group, 1);
+    rb_define_method(gdkWindow, "toplevels", gdkwin_get_toplevels, 0);
     rb_define_method(gdkWindow, "resize", gdkwin_resize, 2);
     rb_define_method(gdkWindow, "move_resize", gdkwin_move_resize, 4);
     rb_define_method(gdkWindow, "set_cursor", gdkwin_set_cursor, 1);
