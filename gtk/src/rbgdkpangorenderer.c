@@ -4,7 +4,7 @@
   rbgdkpangorenderer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/31 09:36:31 $
+  $Date: 2005/02/12 16:03:46 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -53,6 +53,14 @@ prenderer_s_get_default(argc, argv, self)
     } else {
         gscreen = GDK_SCREEN(RVAL2GOBJ(screen));
     }
+    return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
+}
+
+static VALUE
+prenderer_s_default(self)
+    VALUE self;
+{
+    GdkScreen* gscreen = gdk_screen_get_default();
     return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
 }
 
@@ -115,6 +123,7 @@ Init_gtk_gdk_pangorenderer()
     rb_define_method(renderer, "set_override_color", prenderer_set_override_color, 2);
 
     rb_define_singleton_method(renderer, "get_default", prenderer_s_get_default, -1);
+    rb_define_singleton_method(renderer, "default", prenderer_s_default, 0);
 
     G_DEF_SETTERS(renderer);
 #endif

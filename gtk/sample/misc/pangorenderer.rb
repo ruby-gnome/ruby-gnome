@@ -5,7 +5,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pangorenderer.rb,v 1.1 2005/01/30 11:24:36 mutoh Exp $
+  $Id: pangorenderer.rb,v 1.2 2005/02/12 16:03:46 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -15,13 +15,19 @@ N_WORDS = 16
 
 Gtk.init
 
+if str = Gtk.check_version(2, 6, 0)
+  puts "This sample requires GTK+ 2.6.0 or later"
+  puts str
+  exit
+end
+
 win = Gtk::Window.new
 win.set_default_size(400, 400)
 win.realize
 
 matrix = Pango::Matrix.new
 
-renderer = Gdk::PangoRenderer.get_default
+renderer = Gdk::PangoRenderer.default
 renderer.drawable = win.window
 renderer.gc = Gdk::GC.new(win.window)
 width, height = win.size
@@ -46,8 +52,8 @@ win.signal_connect("expose_event") do
     rotated_matrix = matrix.dup
     angle = 360 * i / N_WORDS.to_f
     color = Gdk::Color.new(65535 * rand, 65535 * rand, 65535 * rand)
-    
     renderer.set_override_color(Pango::Renderer::PART_FOREGROUND, color)
+    
     rotated_matrix.rotate!(angle)
     context.set_matrix(rotated_matrix)
     layout.context_changed

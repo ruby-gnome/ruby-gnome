@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: mutoh $
-  $Date: 2004/10/20 17:11:01 $
+  $Date: 2005/02/12 16:03:46 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -185,10 +185,11 @@ get_attributes(self)
 {
     GtkTextAttributes attr;
     
-    if(gtk_text_iter_get_attributes(_SELF(self), &attr) == TRUE)
+    if(gtk_text_iter_get_attributes(_SELF(self), &attr) == TRUE){
         return BOXED2RVAL(&attr, GTK_TYPE_TEXT_ATTRIBUTES);
-    else
+    } else {
         return Qnil;
+    }
 }
     
 static VALUE
