@@ -1,3 +1,8 @@
+2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Gdk::Window#set_static_gravities raise 
+	RuntimeError when it couldn't turn on static gravity. 
+
 2004-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkproperty.c: Fix a warning.

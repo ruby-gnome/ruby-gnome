@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/02/12 07:33:52 $
+  $Date: 2004/02/18 16:11:29 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -522,8 +522,12 @@ static VALUE
 gdkwin_set_static_gravities(self, use_static)
     VALUE self, use_static;
 {
-    return (gdk_window_set_static_gravities(_SELF(self),
-                                            RTEST(use_static))) ? Qtrue : Qfalse;
+    gboolean ret = gdk_window_set_static_gravities(_SELF(self),
+                                                   RTEST(use_static));
+    if (! ret)
+        rb_raise(rb_eRuntimeError, "couldn't turn on static gravity");
+
+    return self;
 }
 
 /* Obsoleted.
