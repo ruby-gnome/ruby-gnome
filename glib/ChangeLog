@@ -1,3 +1,8 @@
+2003-08-02  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: fix for other libraries can't compile
+	in other directories.
+
 2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (gobj_s_properties),

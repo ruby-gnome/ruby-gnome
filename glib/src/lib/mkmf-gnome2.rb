@@ -125,7 +125,6 @@ end
 
 
 def create_top_makefile(sub_dirs = ["src"])
-  $CFLAGS += ' -I$(sitearchdir)'
   mfile = File.open("Makefile", "w")
 =begin
   if /mswin32/ =~ PLATFORM
@@ -195,3 +194,5 @@ SRC
 else
   STDOUT.print "no\n"
 end
+
+$CFLAGS += ' -I$(sitearchdir)'
