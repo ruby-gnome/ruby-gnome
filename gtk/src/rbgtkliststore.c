@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/08/03 18:16:35 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -176,7 +176,7 @@ lstore_reorder(self, new_order)
     gint* gnew_order = g_new(gint, len);
 
     for (i = 0; i < len; i++){
-        gnew_order[i] = RARRAY(new_order)->ptr[i];
+        gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
     }
 
     gtk_list_store_reorder(_SELF(self), gnew_order);

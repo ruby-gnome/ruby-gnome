@@ -1,3 +1,9 @@
+2004-08-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkliststore.c: Fix a bug of Gtk::ListStore#restore.
+	Reported by David Espada.
+	* src/rbgtktreestore.c: ditto.
+
 2004-08-03  Geoff Youngs <g@intersect-uk.co.uk>
 
 	* src/rbgtkradiobutton.c: Gtk::RadioButton.new(other_button) to create empty radio button in same group as other_button.
@@ -7,6 +13,7 @@
 	* src/rbgdkwindow.c: Added check for GTK-2.4 for Gdk::Window#set_accept_focus.
 	* src/rbgtkaccelgroup.c: Added check for GTK-2.4 for Gtk::AccelGroup#activate.
 
+>>>>>>> 1.423
 2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c: Fixed bugs for Gdk::Screen#spawn_on_screen, 
