@@ -346,10 +346,24 @@ static VALUE rb_gst_pad_query(argc, argv, self)
                          FIX2INT(query_type),
                          &gstformat,
                          &value)
-        ? INT2FIX(value)
+        ? ULL2NUM(value)
         : Qnil;
 }
 
+/*
+ *  Method: send_event(anEvent) -> aBoolean
+ *
+ *  Sends an event to the pad, through a Gst::Event object. 
+ *
+ *  Returns true if the request event was successfully handled, false
+ *  otherwise.
+ */
+static VALUE rb_gst_pad_send_event(self, event)
+    VALUE self, event;
+{
+    return CBOOL2RVAL(gst_pad_send_event(RGST_PAD(self),
+                                         RGST_EVENT(event)));
+}
 
 void Init_gst_pad(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_PAD, "Pad", mGst);
@@ -393,6 +407,7 @@ void Init_gst_pad(void) {
     rb_define_method(c, "disabled?",    rb_gst_pad_is_disabled,    0);
     rb_define_method(c, "negotiating?", rb_gst_pad_is_negotiating, 0);
 
-    rb_define_method(c, "query", rb_gst_pad_query, -1);
+    rb_define_method(c, "query",      rb_gst_pad_query,      -1);
+    rb_define_method(c, "send_event", rb_gst_pad_send_event,  1);
 }
 
