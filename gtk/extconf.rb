@@ -2,41 +2,17 @@
 extconf.rb for gtk extention library
 =end
 
-require "mkmf"
-
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
+require 'mkmf'
+require 'mkmf-gnome2'
 
 #
 # detect GTK+ configurations
 #
-if /mswin32/ !~ PLATFORM
-  config_cmd = with_config("pkg-config", "pkg-config gtk+-2.0")
-  while /^--/ =~ ARGV[0]
-    ARGV.shift
-  end
-  begin
-    version = `#{config_cmd} --version`
-    if not version.chomp.empty?
-      $libs += ' ' + `#{config_cmd} --libs`.chomp
-      $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
-    end
-  rescue
-    $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
-    $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
-    $libs = '-lm -lc'
-  end
-else
-  $LDFLAGS = '-L/usr/local/lib'
-  $CFLAGS = '-I/usr/local/include/gdk/win32 -I/usr/local/include/glib -I/usr/local/include'
-end
+
+pkgname= 'gtk+-2.0'
+PKGConfig.have_package(pkgname) or exit
+check_win32
 
 #
 # detect location of GDK include files
@@ -57,24 +33,7 @@ raise "can't found gdkcursor.h or gdkkeysyms.h" if gdkincl.nil?
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../pango/src')) + $CFLAGS
 
-gdkx = `#{config_cmd} --variable=target`.chomp == 'x11'
-
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
-else
-  STDOUT.print "no\n"
-end
-
-STDOUT.print("checking for GCC... ")
-if /gcc/ =~ Config::CONFIG['CC']
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -Wall' 
-else
-  STDOUT.print "no\n"
-end
+gdkx = PKGConfig.variable(pkgname, "target")
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
