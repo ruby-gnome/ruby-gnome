@@ -93,8 +93,8 @@ class ClassWalker
     end
 
     ([underModule] + underClass.values).each do |a|
-      a.sort.uniq.each do |c|
-	visitModule(c)
+      a.uniq.each do |c|
+		visitModule(c)
       end
     end if @down
     @class9.pop
@@ -292,7 +292,8 @@ def initialize_args(defaults = [])
     exit
   end
   classes = []
-  tmp.sort.each do |ances|
+p tmp
+  tmp.each do |ances|
     classes.delete_if { |descen| descen.is_a? ances }
     classes << ances
   end

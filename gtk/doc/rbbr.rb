@@ -5,7 +5,7 @@
   rbbr.rb - Ruby Meta-Level Information Browser
 
   $Author: mutoh $
-  $Date: 2002/10/04 16:30:50 $
+  $Date: 2002/10/06 05:01:45 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -21,7 +21,7 @@
   meta/metainfo.rb - API for Meta-level Information
 
   $Author: mutoh $
-  $Date: 2002/10/04 16:30:50 $
+  $Date: 2002/10/06 05:01:45 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -309,7 +309,7 @@ require 'gtk2'
   gtkutil.rb - Gtk Utility
 
   $Author: mutoh $
-  $Date: 2002/10/04 16:30:50 $
+  $Date: 2002/10/06 05:01:45 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -431,7 +431,7 @@ end
   meta/browser.rb - Meta-Level Information Browser
 
   $Author: mutoh $
-  $Date: 2002/10/04 16:30:50 $
+  $Date: 2002/10/06 05:01:45 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -443,69 +443,84 @@ end
 
 module RBBR
 
-  class ModuleIndex < Gtk::TreeStore
+  class ModuleIndex < Gtk::TreeView
     include Observable
 
     def initialize
-      super(String)
-#      self.set_selection_mode(Gtk::SELECTION_SINGLE)
-      update
+	  @model = Gtk::TreeStore.new(String)
+	  @column = Gtk::TreeViewColumn.new("Messages", Gtk::CellRendererText.new, "text")
+	  super(@model)
+	  append_column(@column)
+
+      append_class(@model, nil,  Object)
+	  signal_connect(Gtk::TreeView::SIGNAL_ROW_EXPANDED) do |tview, titer, tpath|
+		if @model.iter_has_child?(titer)
+		  subclasses.sort{|x, y| x.name <=> y.name}.each do |subclass|
+		  append_class(@model, titer,
+p		  @model.get_value(titer, 0)
+		end
+p tpath
+p		tpath.to_str
+p titer
+p		@model.get_path(titer);
+	  end
     end
 
     def update
-      clear_items(0, 1)
-      append_class(self, Object)
       root_modules = Module.root_modules.sort{|x, y| x.name <=> y.name}
 
-	  module_iter = append(nil)
-	  set_value(module_iter, 0, "<module tree")
+	  module_iter = @model.append(nil)
+	  @model.set_value(module_iter, 0, "<module tree>")
 
-	  iter = append(module_iter)
+	  iter = @model.append(module_iter)
       root_modules.each do |root_module|
-		append_module(module_iter, root_module)
+		append_module(module_iter, nil, root_module)
       end
     end
 
     private
     def append_class(tree, parent_iter, klass)
-	  iter = append(parent_iter)
-	  iter.set_value(iter, 0, klass.name)
+	  iter = @model.append(parent_iter)
+	  @model.set_value(iter, 0, klass.name)
 #      iter.signal_connect('select', klass) do |widget, klass|
 #	  changed
 #	  notify_observers(klass)
 #      end
       subclasses = klass.sub_classes
       unless subclasses.empty?
-		subiter = append(iter)
-		iter.signal_connect("expand") do
-		  if subtree.children.empty?
-			subclasses.sort{|x, y| x.name <=> y.name}.each do |subclass|
-			  append_class(subtree, subclass)
-			end
-		  end
-		end
+		subiter = @model.append(iter)
+#		iter.signal_connect("expand") do
+#		  if subtree.children.empty?
+#			subclasses.sort{|x, y| x.name <=> y.name}.each do |subclass|
+#			  append_class(subtree, subclass)
+#			end
+#		  end
+#		end
       end
     end
 
-    def append_module(tree, modul)
-      treeitem = Gtk::TreeItem.new(modul.name)
-      treeitem.signal_connect('select', modul) do |widget, modul|
-	changed
-	notify_observers(modul)
-      end
-      treeitem.show
-      tree.append(treeitem)
-      submodules = modul.sub_modules
-      unless submodules.empty?
-	treeitem.set_subtree(subtree = Gtk::Tree.new)
-	treeitem.signal_connect("expand") do
-	  if subtree.children.empty?
-	    submodules.sort{|x, y| x.name <=> y.name}.each do |submodule|
-	      append_module(subtree, submodule)
-	    end
-	  end
-	end
-      end
+    def append_module(tree, parent_iter, modul)
+	  iter = @model.append(parent_iter)
+	  @model.set_value(iter, 0, modul.name)
+#      treeitem = Gtk::TreeItem.new(modul.name)
+#      treeitem.signal_connect('select', modul) do |widget, modul|
+#	changed
+#	notify_observers(modul)
+#      end
+#      treeitem.show
+#      tree.append(treeitem)
+#      submodules = modul.sub_modules
+#      unless submodules.empty?
+#		subiter = append(iter)
+#	treeitem.set_subtree(subtree = Gtk::Tree.new)
+#	treeitem.signal_connect("expand") do
+#	  if subtree.children.empty?
+#	    submodules.sort{|x, y| x.name <=> y.name}.each do |submodule|
+#	      append_module(subtree, submodule)
+#	    end
+#	  end
+#	end
+#      end
     end
 
     public
@@ -724,10 +739,11 @@ module RBBR
       module_index_scwin = Gtk::ScrolledWindow.new
       module_index_scwin.set_policy(Gtk::POLICY_AUTOMATIC,
 				    Gtk::POLICY_AUTOMATIC)
-      main_paned.add1(module_index_scwin)
+#      main_paned.add1(module_index_scwin)
       module_index = ModuleIndex.new
-      module_index_scwin.add_with_viewport(module_index)
-
+#      module_index_scwin.add_with_viewport(module_index)
+ #     module_index_scwin.add(module_index)
+main_paned.add1(module_index)
       # create display box
       display_box = Gtk::VBox.new(false, 0)
       main_paned.add2(display_box)
@@ -904,7 +920,7 @@ module RBBR
   end
 
   ## Document Viewer by ReFe
-  class DocViewer < Gtk::Text
+  class DocViewer < Gtk::TextBuffer
     def update(modul, meth)
     end
   end
