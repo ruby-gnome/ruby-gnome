@@ -23,70 +23,17 @@ Install
 
    It requires libglade2, libxml2, and libz.  You may have to
    provide extconf.rb with the paths to these.
+   And ruby-glade-create-template requires REXML.
 
 Usage
------
-   The constructor takes the path to a glade file, and optionally the name
-   of the widget at the root of the desired section of the interface
-   (by default, the entire file will be loaded).  It expects an iterator
-   block to be supplied, which takes the name of a handler (as specified
-   in the glade file) and returns a Method or Proc to bind that handler to.
-
-   For example:
-
-        GladeXML.new("file.glade") do |handler|
-          case handler
-          when "button_clicked"
-            proc { |aButton| puts "#{aButton} clicked"}
-          when "quit"
-            proc {Gtk.main_quit}
-          end
-        end
-
-   Alternatively:
-
-        def button_clicked(aButton)
-          puts "#{aButton} clicked"
-        end
-
-        def quit
-          Gtk.main_quit
-        end
-
-        GladeXML.new("file.glade") { |handler| method(handler) }
-
-   GladeXML#get_widget(name) will return a gtk widget object based on the 
-   name given to it in the glade file.
-
-   e.g.
-
-        glade = GladeXML.new("file.glade") {}
-        @entrybox = glade.get_widget("entry1")
-
-   A note about signal handlers:
-
-   If you're using methods as signal handlers, you need to be somewhat careful
-   about their arity.  Currently, for 0 argument signals, GladeXML supports
-   three forms of method: no argument, a single argument (the widget the signal
-   came from), or two arguments (the widget, and the contents of the data field
-   for that signal in the glade file).
-   For signals with one or more arguments (such as select_column),
-   only one format is supported: (widget, ... args ..., data).
-
-GladeXML class
---------------
-   instance methods:
-
-   initialize(glade_file [, root_widget], &handler_block)
-   get_widget(widget_name) -> aWidget
-
-
-ruby-glade-create-template
---------------------------
+------
    Create a ruby-glade template .rb file from a .glade file.
 
-   $ruby-glade-create-template.rb yourgladefile.glade > file.rb
+   $ruby-glade-create-template yourgladefile.glade > file.rb
 
+   Then you can excute it.
+
+   $ ruby file.rb
 
 Copying
 -------

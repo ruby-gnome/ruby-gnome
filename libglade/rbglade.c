@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/07/11 15:09:28 $
+  $Date: 2004/08/06 18:44:47 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -33,7 +33,14 @@ static VALUE cGladeXML;
 /*
 static VALUE instances;
 */
-                            
+
+static VALUE
+rb_gladexml_get_tooltips(VALUE self, VALUE toplevel)
+{
+    return GOBJ2RVAL(g_object_get_qdata(RVAL2GOBJ(toplevel), 
+                                        g_quark_from_static_string("GladeXML::tooltips")));
+}
+
 static VALUE
 rb_gladexml_get_widget(VALUE self, VALUE nameString)
 {
@@ -247,6 +254,7 @@ Init_libglade2()
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
     rb_define_method(cGladeXML, "signal_autoconnect_full", rb_gladexml_signal_autoconnect_full, 0);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
+    rb_define_method(cGladeXML, "get_tooltips", rb_gladexml_get_tooltips, 1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
     rb_define_alias(cGladeXML, "[]", "get_widget");
     rb_define_method(cGladeXML, "filename"  , rb_gladexml_filename, 0);

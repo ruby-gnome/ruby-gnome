@@ -4,16 +4,23 @@
 #
 # Create a ruby-glade template .rb file from a .glade file.
 #
-# Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
+# Usage: ruby ruby-glade-create-template yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.8 2004/07/11 15:09:28 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.9 2004/08/06 18:44:47 mutoh Exp $
 #
 # Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
 require 'libglade2'
+require 'rexml/document'
 
-LG_VERSION = %Q[$Revision: 1.8 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.9 $].scan(/\d/).join(".")
+
+unless ARGV.size == 1
+  puts "ruby-glade-create-template #{LG_VERSION}"
+  puts "\nUsage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb\n\n"
+  exit 1
+end
 
 path = ARGV[0]
 
@@ -21,8 +28,9 @@ path = ARGV[0]
 # Support GNOME ?
 #
 type_gnome = false
-IO.readlines(path).each do |line|
-  if /<requires lib\=\"gnome\"\/>/ =~ line
+doc = REXML::Document.new(IO.read(path))
+doc.elements.each("//requires") do |e|
+  if e.attributes["lib"] == "gnome"
     type_gnome = true
     begin
       require 'gnome2'
@@ -33,16 +41,12 @@ IO.readlines(path).each do |line|
   end
 end
 
-unless ARGV.size == 1
-  puts "ruby-glade-create-template #{LG_VERSION}"
-  puts "\nUsage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb\n\n"
-  exit 1
-end
-
 #
 # Analyse .glade file.
 #
 filename = File.basename(path, ".*")
+
+# Create class name from the filename.
 classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
 
 if type_gnome
@@ -51,6 +55,7 @@ else
   Gtk.init
 end
 
+# Get signals.
 GladeXML.set_custom_widget_handler(false)
 glade = GladeXML.new(path)
 signals = []
@@ -58,47 +63,157 @@ glade.signal_autoconnect_full{|source, target, signal_name, handler, data, after
   signals << [source.class.signal(signal_name), glade.canonical_handler(handler)]
 }
 
-#
-# Print template.
-#
-# Header part: Initialize method.
-puts <<HEADER
-#!/usr/bin/env ruby
-require 'libglade2'
-HEADER
-
-puts <<INITIALIZE
-class #{classname}
-  def initialize(path_or_data, root = nil, domain = nil, localedir = nil, flag = GladeXML::FILE)
-    @glade = GladeXML.new(path_or_data, root, domain, localedir, flag) {|handler| method(handler)}
+# Get Menu for GnomeApp and Tooltips.
+gnomeapp = nil
+uiinfos = []
+tooltips = []
+doc.elements.each("//widget") do |e|
+  if e.attributes["class"] == "GnomeApp"
+    gnomeapp = e.attributes["id"]
+  elsif /Separator/ =~ e.attributes["class"]
+    #Do nothing
+    #    elsif /ImageMenuItem/ =~ e.attributes["class"]
+  elsif e.elements["property[@name='stock_item']"]
+    e.elements.each("property[@name='stock_item']"){|v|
+      if v.attributes["name"] == "stock_item"
+        if /GNOMEUIINFO_MENU_(.*)_ITEM/ =~ v.text
+          if $1 == "EXIT"
+            uiinfos << [%Q!Gnome::UIInfo::menu_quit_item(callback_dummy, nil)!, e.attributes['id']]
+          elsif $1 == "NEW"
+            label = ""
+            e.elements.each("property[@name='label']") do |v|
+              label = "'#{v.text}'"
+            end
+            uiinfos << [%Q!Gnome::UIInfo::menu_new_item(#{label}, nil, callback_dummy, nil)!, e.attributes['id']]
+          else
+            tooltip = "nil"
+            e.elements.each("property[@name='tooltip']") do |v|
+              tooltip = "'#{v.text}'"
+            end
+            uiinfos << [%Q!Gnome::UIInfo::menu_#{$1.downcase}_item(callback_dummy, #{tooltip})!, e.attributes['id']]
+          end
+        end
+      end
+    }
+  elsif /MenuItem/ =~ e.attributes["class"]
+    label = "nil"
+    tooltip = "nil"
+    e.elements.each("property[@name='tooltip']") do |v|
+      tooltip = "'#{v.text}'"
+    end
+    uiinfos << [%Q!Gnome::UIInfo.item_none(#{label}, #{tooltip}, callback_dummy)!, e.attributes['id'], true]
+  elsif /Tool|Action/ =~ e.attributes["class"]
+    tooltip = nil
+    e.elements.each("property[@name='tooltip']") do |v|
+      tooltip = "'#{v.text}'"
+    end
+    if tooltip
+      tooltips << %Q!@glade['#{e.attributes['id']}'].set_tooltip(@tooltip, _(#{tooltip}))!
+    end
   end
-INITIALIZE
+end
 
-# Handler methods.
+additional_methods = "\n"
+# Create an additional method for creating uiinfo menu hints of GnomeApp.
+uiinfo_method = "\n"
+if gnomeapp and uiinfos.size > 0
+  uiinfo_method << "  # Creates menu hints.\n"
+  uiinfo_method << "  def create_uiinfo_menus(name)\n"
+  uiinfo_method << "    app = @glade['#{gnomeapp}']\n"
+  uiinfo_method << "    tips = @glade.get_tooltips(app.toplevel)\n"
+  uiinfo_method << "    callback_dummy = Proc.new{} #Dummy \n"
+  uiinfo_method << "    uiinfos = [\n"
+  uiinfos.each do |info|
+    uiinfo_method << "      #{info[0]},\n"
+  end
+  uiinfo_method << "    ]\n"
+  uiinfos.each_with_index do |info, i|
+    uiinfo_method << "    uiinfos[#{i}][9] = @glade['#{info[1]}']\n"
+    uiinfo_method << "    tips.set_tip(uiinfos[#{i}][9], nil, nil)\n" if info[2]
+  end
+  uiinfo_method << "    app.install_menu_hints(uiinfos)\n"
+  uiinfo_method << "  end"
+  additional_methods << "    create_uiinfo_menus(domain)\n"
+end
+
+# Create an additional method for creating tooltips.
+tooltips_method = "\n"
+if tooltips.size > 0
+  tooltips_method << "  # Creates tooltips.\n"
+  tooltips_method << "  def create_tooltips\n"
+  tooltips_method << "    @tooltip = Gtk::Tooltips.new\n"
+  tooltips.each do |v|
+    tooltips_method << "    #{v}\n"
+  end
+  tooltips_method << "  end"
+  additional_methods << "    create_tooltips"
+end
+
+# Creates handler methods
+handler_methods = ""
 if signals.size > 0
   signals.each do |signal, handler|
     args = "widget"
     (0...signal.param_types.size).each do |i|
       args << ", arg#{i}"
     end
-    puts "  def #{handler}(#{args})"
-    puts "    puts \"#{handler}() is not implemented yet.\""
-    puts "  end"
+    handler_methods << "  def #{handler}(#{args})\n"
+    handler_methods << "    puts \"#{handler}() is not implemented yet.\"\n"
+    handler_methods << "  end\n"
   end
 end
 
-puts "end\n\n"
+#
+# Print template.
+#
+puts <<CLASS_DEF
+#!/usr/bin/env ruby
+require 'libglade2'
 
-puts <<FOOTER_CONST
+# Support L10n (Requires RAA:Ruby-GetText-Package)
+begin
+  require 'gettext'
+rescue LoadError
+  module GetText
+    module_function
+    def _(str)
+      str
+    end
+    def bindtextdomain(domainname, path = nil, locale = nil, charset = nil)
+    end
+  end
+end
+
+class #{classname}
+  include GetText
+  #{uiinfo_method}
+  #{tooltips_method}
+
+  def initialize(path_or_data, root = nil, domain = nil, localedir = nil, flag = GladeXML::FILE)
+    GetText.bindtextdomain(domain, localedir, nil, "UTF-8")
+    @glade = GladeXML.new(path_or_data, root, domain, localedir, flag) {|handler| method(handler)}
+    #{additional_methods}
+  end
+  #{handler_methods}
+end
+CLASS_DEF
+
+puts <<MAIN1
+
+# Main program
 if __FILE__ == $0
   # Set values as your own application. 
   PROG_PATH = "#{path}"
   PROG_NAME = "YOUR_APPLICATION_NAME"
-FOOTER_CONST
+MAIN1
+
+# Bottom mehotds
 if type_gnome
 puts <<FOOTER_GNOME
   PROG_VERSION = "YOUR_APPLICATION_VERSION"
   Gnome::Program.new(PROG_NAME, PROG_VERSION)
+  #If you use Ruby/GTK2 widgets only, call Gtk.init not Gnome::Program.new here.
+  #Gtk.init
 FOOTER_GNOME
 else
   puts "  Gtk.init"
