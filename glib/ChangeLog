@@ -1,3 +1,9 @@
+2004-04-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_convert.c: Add GLib.utf8_validate.
+	* src/rbglib.c: Commented out Init_mem(), because of "cross-thread violation"
+	with Gst::Thread.
+
 2004-03-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.c: RAISE_GERROR() returns  error messages in UTF-8.

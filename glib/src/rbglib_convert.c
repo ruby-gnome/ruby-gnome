@@ -3,8 +3,8 @@
 
   rbglib_convert.c -
 
-  $Author: sakai $
-  $Date: 2003/03/12 06:41:18 $
+  $Author: mutoh $
+  $Date: 2004/04/14 16:07:14 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
@@ -166,11 +166,20 @@ rbglib_m_filename_from_uri(self, str)
     return s;
 }
 
+static VALUE
+rbglib_m_utf8_validate(self, str)
+    VALUE self, str;
+{
+    StringValue(str);
+    return CBOOL2RVAL(g_utf8_validate(RSTRING(str)->ptr, RSTRING(str)->len, NULL));
+}
+
 void
 Init_glib_convert()
 {
     /* glib/gunicode.h */
     rb_define_module_function(mGLib, "charset", rbglib_m_charset, 0);
+    rb_define_module_function(mGLib, "utf8_validate", rbglib_m_utf8_validate, 1);
 
     /* glib/gconvert.h */
     rb_define_module_function(mGLib, "convert", rbglib_m_convert, 3);

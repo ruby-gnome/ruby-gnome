@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: sakai $
-  $Date: 2003/11/10 05:55:07 $
+  $Author: mutoh $
+  $Date: 2004/04/14 16:07:13 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -43,6 +43,18 @@ rbg_cstr2rval(const char* str)
     return str ? rb_str_new2(str) : Qnil;
 }
 
+#if 0
+/*
+2004-04-15 Commented out by Masao.
+
+These functions replace g_malloc/g_realloc/g_free of GLib.
+When g_malloc is called and the memory area can not reserved,
+rb_gc() will be called. It makes Ruby-GNOME2 uses memory efficiently.
+
+But rb_gc() does not work under multithread.
+So they occur "cross-thread violation".
+*/
+
 static gpointer
 my_malloc(gsize n_bytes)
 {
@@ -76,6 +88,7 @@ Init_mem()
     };
     g_mem_set_vtable(&mem_table);
 }
+#endif
 
 void Init_glib2()
 {
@@ -106,7 +119,7 @@ void Init_glib2()
     rb_define_const(mGLib, "PRIORITY_DEFAULT_IDLE", INT2FIX(G_PRIORITY_DEFAULT_IDLE));
     rb_define_const(mGLib, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
 
-    Init_mem();
+/*    Init_mem(); */
     Init_utils_int64();
     Init_glib_convert();
     Init_glib_messages();
