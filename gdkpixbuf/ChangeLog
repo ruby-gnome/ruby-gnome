@@ -1,5 +1,6 @@
 2002-12-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* *.c: Change headers like as Ruby/GTK.
 	* rbgdk-pixdata.c: Add a file. 
 
 2002-11-27  Masao Mutoh  <mutoh@highway.ne.jp>
