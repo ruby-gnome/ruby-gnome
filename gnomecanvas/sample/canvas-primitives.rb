@@ -513,7 +513,7 @@ EOS
 
     table = Gtk::Table.new(2, 2, false)
     table.set_row_spacings(4)
-    table.set_col_spacings(4)
+    table.set_column_spacings(4)
     pack_start(table, true, true, 0)
     table.show()
 

@@ -39,9 +39,10 @@ Ruby-GNOME2-0.5 (2003-05-24)
 
   * Ruby/GNOME
       - Cygwin support [Masahiro Sakai]
+      - sample/test-gnome/color-picker.rb: Follow Ruby/GTK changes.[Masao Mutoh]
 
   * Ruby/GnomeCanvas
-      - None
+      - sample/canvas-primitives.rb: Follow Ruby/GTK changes.[Masao Mutoh]
 
   * Ruby/Libglade
       - Fix a bug of bin/ruby-glade-create-template. [Masao Mutoh]

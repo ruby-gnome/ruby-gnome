@@ -41,7 +41,7 @@ class ColorPickerApp < TestGnomeApp
     @table = Gtk::Table.new(3, 3, false)
     @table.border_width = Gnome::PAD_SMALL
     @table.set_row_spacings(Gnome::PAD_SMALL)
-    @table.set_col_spacings(Gnome::PAD_SMALL)
+    @table.set_column_spacings(Gnome::PAD_SMALL)
     set_contents(@table)
     @table.show
 
