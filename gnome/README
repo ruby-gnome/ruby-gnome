@@ -1,35 +1,31 @@
-Ruby/GNOME2 -- Ruby bindings for gnome-libs2
-==========================================
+Ruby/GNOME2
+===========
+Ruby/GNOME2 is a Ruby binding of libgnome/libgnomeui-2.x.
 
-*The current status of Ruby/GNOME2 is experimantal*
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   libgnome, libgnomeui: http://www.gnome.org/
+   Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
 
-To use them, you will need Ruby 1.6 and gnome-libs 2.0.0 or
-later installed on your system.
+Install
+-------
+   0. install ruby-1.6.x, GTK+, libgnome, libgnomeui, 
+      Ruby/GLib2 and Ruby/GTK2.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
+Copying
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
 
-Compilation and Installation
-============================
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
 
-To compile Ruby/GNOME2, you should run:
-
-  ruby extconf.rb
-  make
-
-To test (Ruby/GTK2 should be installed):
-
-  cd sample/test-gnome; ruby -I../../src test-gnome.rb
-  cd doc; ruby -I../src rbbr.rb
-
-To install:
-
-  make site-install
-
-
-Contacting the Author
-=====================
-
-You can contact me via email at <mutoh@highway.ne.jp>; you
-can also visit the Ruby-GNOME2 website (http://ruby-gnome.sf.net/),
-which has a facility for reporting bugs and submitting fixes.
-Finally, you can send a message to the ruby-gnome2 mailing list(see website),
-where I or other Ruby-GNOME2 users can help you.
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/
