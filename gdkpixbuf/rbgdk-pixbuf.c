@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/10/07 13:03:50 $
+  $Date: 2003/10/09 18:30:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -205,7 +205,8 @@ scale_simple(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE dest_width, dest_height, interp_type;
+    GdkPixbuf* dest;
+    VALUE dest_width, dest_height, interp_type, ret;
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
     rb_scan_args(argc, argv, "21", &dest_width, &dest_height,
@@ -214,10 +215,13 @@ scale_simple(argc, argv, self)
     if (!NIL_P(interp_type))
         type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
     
-    return GOBJ2RVAL(gdk_pixbuf_scale_simple(_SELF(self),
-                                             NUM2INT(dest_width),
-                                             NUM2INT(dest_height),
-                                             type));
+    dest = gdk_pixbuf_scale_simple(_SELF(self),
+                                   NUM2INT(dest_width),
+                                   NUM2INT(dest_height),
+                                   type);
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
+    return ret;
 }
 
 static VALUE
@@ -252,15 +256,21 @@ composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
     VALUE self, dest_width, dest_height, interp_type, overall_alpha,
     check_size, color1, color2;
 {
+    GdkPixbuf* dest;
+    VALUE ret;
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
     if (!NIL_P(interp_type))
         type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
 
-    return GOBJ2RVAL(gdk_pixbuf_composite_color_simple(
-                         _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
-                         type, NUM2INT(overall_alpha), NUM2INT(check_size),
-                         NUM2UINT(color1), NUM2UINT(color2)));
+    dest = gdk_pixbuf_composite_color_simple(
+        _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
+        type, NUM2INT(overall_alpha), NUM2INT(check_size),
+        NUM2UINT(color1), NUM2UINT(color2));
+
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
+    return ret;
 }
 
 static VALUE
