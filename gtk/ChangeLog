@@ -1,3 +1,8 @@
+2002-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Bugfix of Gdk::Window#property_change(), 
+	Gdk::Window#colormap(Reported by WATANABE Hirofumi).
+
 2002-06-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpixmap.c: Change RBGTK_INITIALIZE to RBGOBJ_INITIALIZE.
