@@ -81,7 +81,7 @@ static VALUE rb_gda_param_list_get_params(self)
     {
         GdaParameter *param = gda_parameter_list_find(list, (const gchar *)node->data);
         if (param != NULL) {    /* normally should always be non-null... */
-            rb_ary_push(arr, RGDA_PARAMETER_NEW(node->data));
+            rb_ary_push(arr, RGDA_PARAMETER_NEW(param));
         }
     }
     g_list_free(names);

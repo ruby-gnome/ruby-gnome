@@ -1,3 +1,8 @@
+2003-11-28  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaparameterlist.c: Fixed a bug in
+	  Gda::ParameterList (#parameters, #each_param).
+
 2003-11-20  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaparameterlist.c: Fixed GC-related bug in
