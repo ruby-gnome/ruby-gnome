@@ -12,7 +12,7 @@ begin
   config_cmd = with_config("gnome-config", "gnome-config")
   config_libs = "--libs"
   config_cflags = "--cflags"
-  config_library = "gnomeui"
+  config_library = "gnomeui gtkxmhtml"
   version = `#{config_cmd} --version`
   if not version.chomp.empty? then
     $libs += ' ' + `#{config_cmd} #{config_libs} #{config_library}`.chomp

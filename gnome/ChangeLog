@@ -1,3 +1,8 @@
+2002-08-29  KUBO Takehiro <kubo@jiubao.org>
+
+   * src/rbgnome-canvas-item.c, src/rbgtk-xmhtml.c, extconf.rb: Bugfix for
+   Undefined symbols.
+
 2002-08-19  KUBO Takehiro <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-item.c: Remove set_gtkarg(). Modify citem_set().

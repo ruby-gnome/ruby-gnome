@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas-item.c,v 1.6 2002/08/19 11:49:08 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.7 2002/08/27 11:54:51 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -131,29 +131,6 @@ citem_affine_absolute(self, affine)
 {
     gnome_canvas_item_affine_absolute(GNOME_CANVAS_ITEM(get_gobject(self)),
                                       get_art_affine(affine));
-    return Qnil;
-}
-
-static VALUE
-citem_scale(self, x, y, scale_x, scale_y)
-    VALUE self, x, y, scale_x, scale_y;
-{
-    gnome_canvas_item_scale(GNOME_CANVAS_ITEM(get_gobject(self)),
-                            NUM2DBL(x),
-                            NUM2DBL(y),
-                            NUM2DBL(scale_x),
-                            NUM2DBL(scale_y));
-    return Qnil;
-}
-
-static VALUE
-citem_rotate(self, x, y, angle)
-    VALUE self, x, y, angle;
-{
-    gnome_canvas_item_rotate(GNOME_CANVAS_ITEM(get_gobject(self)),
-                             NUM2DBL(x),
-                             NUM2DBL(y),
-                             NUM2DBL(angle));
     return Qnil;
 }
 
@@ -333,10 +310,6 @@ Init_gnome_canvas_item()
                      citem_affine_relative, 1);
     rb_define_method(gnoCanvasItem, "affine_absolute",
                      citem_affine_absolute, 1);
-    rb_define_method(gnoCanvasItem, "scale",
-                     citem_scale, 4);
-    rb_define_method(gnoCanvasItem, "rotate",
-                     citem_rotate, 3);
     rb_define_method(gnoCanvasItem, "raise",
                      citem_raise, 1);
     rb_define_method(gnoCanvasItem, "lower",

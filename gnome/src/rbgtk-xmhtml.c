@@ -1,4 +1,4 @@
-/* $Id: rbgtk-xmhtml.c,v 1.3 2002/05/26 14:49:16 mutoh Exp $ */
+/* $Id: rbgtk-xmhtml.c,v 1.4 2002/08/27 11:54:51 mutoh Exp $ */
 
 /* Gtk::XmHTML widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -18,6 +18,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <gtk-xmhtml/gtk-xmhtml.h>
 #include "rbgnome.h"
 
 VALUE gXmHTML;
@@ -62,8 +63,8 @@ static VALUE
 xmhtml_string_direction(self, direction)
     VALUE self, direction;
 {
-    gtk_xmhtml_string_direction(GTK_XMHTML(get_widget(self)),
-				NUM2INT(direction));
+    gtk_xmhtml_set_string_direction(GTK_XMHTML(get_widget(self)),
+				    NUM2INT(direction));
     return self;
 }
 
@@ -80,8 +81,8 @@ static VALUE
 xmhtml_outline(self, flag)
     VALUE self, flag;
 {
-    gtk_xmhtml_outline(GTK_XMHTML(get_widget(self)),
-		       RTEST(flag));
+    gtk_xmhtml_set_outline(GTK_XMHTML(get_widget(self)),
+			   RTEST(flag));
     return self;
 }
 
