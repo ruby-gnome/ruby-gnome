@@ -1,9 +1,7 @@
 /* -*- c-file-style: "ruby" -*- */
 /* 
- * Copyright (C) 2002 Ruby-GNOME2 Project Team
- *
- * Original:
- *  Copyright (C) 2000 Yasushi Shoji
+ * Copyright (C) 2002 Masao Mutoh
+ * Copyright (C) 2000 Yasushi Shoji
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -499,4 +497,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "copy_area", copy_area, 7);
     rb_define_method(gdkPixbuf, "saturate_and_pixelate", saturate_and_pixelate, 2);
     rb_define_method(gdkPixbuf, "fill!", fill, 1);
+
+    Init_gdk_pixbuf_animation();
+
 }

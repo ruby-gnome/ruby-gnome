@@ -2,10 +2,10 @@
 =begin
   xpm.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project
+  Copyright (c) 2002 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: xpm.rb,v 1.1 2002/11/20 15:36:01 mutoh Exp $
+  $Id: xpm.rb,v 1.2 2002/11/21 18:13:34 mutoh Exp $
 =end
 
 require 'gdk_pixbuf2'
