@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: sakai $
-  $Date: 2003/10/05 09:05:57 $
+  $Date: 2003/11/10 05:55:07 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -13,7 +13,6 @@
 #include <glib.h>
 #include <locale.h>
 #include "global.h"
-#include <locale.h>
 
 VALUE mGLib;
 
