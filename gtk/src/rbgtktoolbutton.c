@@ -3,8 +3,8 @@
 
   rbgtktoolbutton.c -
 
-  $Author: mutoh $
-  $Date: 2004/05/31 17:42:24 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:39:25 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -25,10 +25,10 @@ toolbutton_initialize(argc, argv, self)
     rb_scan_args(argc, argv, "11", &obj, &label);
 
     if (NIL_P(label)){
+        item = gtk_tool_button_new_from_stock(rb_id2name(SYM2ID(obj)));
+    } else {
         item = gtk_tool_button_new(GTK_WIDGET(RVAL2GOBJ(obj)), 
                                    RVAL2CSTR(label));
-    } else {
-        item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
     }
     RBGTK_INITIALIZE(self, item);
     return Qnil;
