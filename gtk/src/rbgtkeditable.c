@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Author: sakai $
+  $Date: 2002/07/30 05:37:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,6 +23,17 @@ edit_sel_region(self, start, end)
     gtk_editable_select_region(GTK_EDITABLE(RVAL2GOBJ(self)),
 			       NUM2INT(start), NUM2INT(end));
     return self;
+}
+
+static VALUE
+edit_get_sel_bounds(self)
+    VALUE self;
+{
+    gint start, end;
+    gboolean ret;
+    ret = gtk_editable_get_selection_bounds(GTK_EDITABLE(RVAL2GOBJ(self)),
+                                            &start, &end);
+    return rb_ary_new3(3, ret ? Qtrue : Qfalse, INT2NUM(start), INT2NUM(end));
 }
 
 static VALUE
@@ -99,6 +110,13 @@ edit_set_editable(self, editable)
 }
 
 static VALUE
+edit_get_editable(self)
+    VALUE self;
+{
+    return gtk_editable_get_editable(GTK_EDITABLE(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+}
+
+static VALUE
 edit_cut_clipboard(self)
     VALUE self;
 {
@@ -124,19 +142,13 @@ edit_paste_clipboard(self)
 
 void Init_gtk_editable()
 {
-    static RGObjClassInfo cinfo;
-
-    gEditable = rb_define_class_under(mGtk, "Editable", gWidget);
-    cinfo.klass = gEditable;
-    cinfo.gtype = GTK_TYPE_EDITABLE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    gEditable = rb_define_module_under(mGtk, "Editable");
 
     rb_define_const(gEditable, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
     rb_define_const(gEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));
 
     rb_define_method(gEditable, "select_region", edit_sel_region, 2);
+    rb_define_method(gEditable, "get_selection_bounds", edit_get_sel_bounds, 0);
     rb_define_method(gEditable, "insert_text", edit_insert_text, 2);
     rb_define_method(gEditable, "delete_text", edit_delete_text, 2);
     rb_define_method(gEditable, "get_chars", edit_get_chars, 2);
@@ -145,13 +157,12 @@ void Init_gtk_editable()
     rb_define_method(gEditable, "set_position", edit_set_position, 1);
     rb_define_alias(gEditable, "position=", "set_position");
     rb_define_method(gEditable, "set_editable", edit_set_editable, 1);
+    rb_define_method(gEditable, "get_editable", edit_get_editable, 0);
     rb_define_method(gEditable, "copy_clipboard", edit_copy_clipboard, 0);
     rb_define_method(gEditable, "cut_clipboard", edit_cut_clipboard, 0);
     rb_define_method(gEditable, "paste_clipboard", edit_paste_clipboard, 0);
 
     /* child initialization */
     Init_gtk_entry();
-#ifdef GTK_ENABLE_BROKEN
-    Init_gtk_text();
-#endif
+    Init_gtk_oldeditable();
 }

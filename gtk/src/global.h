@@ -3,8 +3,8 @@
 
   global.h -
 
-  $Author: mutoh $
-  $Date: 2002/06/22 05:26:50 $
+  $Author: sakai $
+  $Date: 2002/07/30 05:37:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,6 +43,7 @@ extern void Init_gtk_data();
 extern void Init_gtk_dialog();
 extern void Init_gtk_drawing_area();
 extern void Init_gtk_editable();
+extern void Init_gtk_oldeditable();
 extern void Init_gtk_entry();
 extern void Init_gtk_eventbox();
 extern void Init_gtk_file_selection();

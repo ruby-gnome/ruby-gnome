@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2002/07/28 04:54:03 $
+  $Author: sakai $
+  $Date: 2002/07/30 05:37:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -83,6 +83,7 @@ extern VALUE gCombo;
 extern VALUE gImage;
 extern VALUE gDrawArea;
 extern VALUE gEditable;
+extern VALUE gOldEditable;
 extern VALUE gEntry;
 extern VALUE gSButton;
 extern VALUE gEventBox;
