@@ -1,3 +1,8 @@
+2003-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Imprement Gtk::Notebook#set_page explicitly.
+   Because "page" property doesn't accept negative value.
+
 2003-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkclipboard.c: Rename Gtk::Clipboard.new to Gtk::Clipboard.get.

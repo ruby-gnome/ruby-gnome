@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/09/23 13:43:40 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -283,6 +283,14 @@ note_get_tab_label_text(self, child)
                                                      RVAL2WIDGET(child)));
 }
 
+static VALUE
+note_set_current_page(self, page_num)
+    VALUE self, page_num;
+{
+    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page_num));
+    return self;
+}
+
 /***********************************************/
 /*
  * Gtk::NotebookPage
@@ -359,6 +367,7 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
+    rb_define_method(gNotebook, "set_page", note_set_current_page, 1);
     /* GtkNotebookTab */
     rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
     rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
