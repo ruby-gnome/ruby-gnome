@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/08/20 16:52:57 $
+  $Date: 2003/08/25 09:33:37 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -59,6 +59,11 @@ extern "C" {
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
+
+#define RVAL2GENUM(obj, gtype)  (rbgobj_get_enum(obj, gtype))
+#define RVAL2GFLAGS(obj, gtype) (rbgobj_get_flags(obj, gtype))
+#define GENUM2RVAL(n, gtype)    (rbgobj_make_enum(n, gtype))
+#define GFLAGS2RVAL(n, gtype)   (rbgobj_make_flags(n, gtype))
 
 #define G_DEF_CONSTANTS(mod, type, strip_prefix) \
 	rbgobj_add_constants(mod, type, strip_prefix)

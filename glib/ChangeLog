@@ -1,5 +1,8 @@
 2003-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobject.h: new macros RVAL2GENUM(), RVAL2GFLAGS(),
+	GENUM2RVAL() and  GFLAGS2RVAL().
+
 	* src/rbgobj_signal.c: new exception class GLib::NoSignalError.
 
 	* src/rbgobj_object.c: new exception class GLib::NoPropertyError.
