@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/05 13:23:23 $
+  $Date: 2003/04/06 06:08:46 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -359,22 +359,6 @@ gobj_sig_emit(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE signal, detail, params;
-
-    rb_scan_args(argc, argv, "11*", &signal, &detail, &params);
-
-    return emit_impl(self,
-                     to_signal_id(signal, CLASS2GTYPE(CLASS_OF(self))),
-                     to_gquark(detail),
-                     params);
-}
-
-static VALUE
-gobj_sig_emit_by_name(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
     VALUE detailed_signal, params;
     guint signal_id;
     GQuark detail;
@@ -392,21 +376,7 @@ gobj_sig_emit_by_name(argc, argv, self)
 }
 
 static VALUE
-gobj_sig_emit_stop(argc, argv, self)
-     int argc;
-     VALUE* argv;
-     VALUE self;
-{
-    VALUE sig_id, detail;
-    rb_scan_args(argc, argv, "11", &sig_id, &detail);
-    g_signal_stop_emission(RVAL2GOBJ(self),
-                           to_signal_id(sig_id, CLASS2GTYPE(CLASS_OF(self))),
-                           to_gquark(detail));
-    return self;
-}
-
-static VALUE
-gobj_sig_emit_stop_by_name(self, detailed_signal)
+gobj_sig_emit_stop(self, detailed_signal)
     VALUE self, detailed_signal;
 {
     gpointer instance = RVAL2GOBJ(self);
@@ -517,12 +487,8 @@ Init_signal_misc()
 
     rb_define_method(cInstantiatable, "signal_emit",
                      gobj_sig_emit, -1);
-    rb_define_method(cInstantiatable, "signal_emit_by_name",
-                     gobj_sig_emit_by_name, -1);
     rb_define_method(cInstantiatable, "signal_emit_stop",
-                     gobj_sig_emit_stop, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop_by_name",
-                     gobj_sig_emit_stop_by_name, 1);
+                     gobj_sig_emit_stop, 1);
     rb_define_method(cInstantiatable, "signal_handler_block",
                      gobj_sig_handler_block, 1);
     rb_define_method(cInstantiatable, "signal_handler_unblock",
@@ -666,12 +632,9 @@ Init_signal_class()
 {
     cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
 
-    rb_define_method(cSignal, "signal_id", query_signal_id, 0);
-    rb_define_alias(cSignal, "id", "signal_id");
-    rb_define_method(cSignal, "signal_name", query_signal_name, 0);
-    rb_define_alias(cSignal, "name", "signal_name");
-    rb_define_method(cSignal, "signal_flags", query_signal_flags, 0);
-    rb_define_alias(cSignal, "flags", "signal_flags");
+    rb_define_method(cSignal, "id", query_signal_id, 0);
+    rb_define_method(cSignal, "name", query_signal_name, 0);
+    rb_define_method(cSignal, "flags", query_signal_flags, 0);
     rb_define_method(cSignal, "itype", query_itype, 0);
     rb_define_method(cSignal, "return_type", query_return_type, 0);
     rb_define_method(cSignal, "param_types", query_param_types, 0);

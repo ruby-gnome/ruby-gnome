@@ -1,3 +1,12 @@
+2003-04-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: rename signal_emit_by_name and
+	signal_emit_stop_by_name to signal_emit and signal_emit_stop
+	respectively.
+
+	* src/rbgobj_signal.c: remove Signal#signal_id, Signal#signal_name,
+	Signal#signal_flags.
+
 2003-04-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: add --enable-experimental option
