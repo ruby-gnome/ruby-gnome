@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.8 2002/10/06 10:02:59 tkubo Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.9 2003/09/09 15:09:25 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -238,7 +238,7 @@ static VALUE
 canvas_set_dither(self, dither)
     VALUE self, dither;
 {
-    gnome_canvas_set_dither(_SELF(self), NUM2UINT(dither));
+    gnome_canvas_set_dither(_SELF(self), RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER));
     return self;
 }
 
@@ -246,7 +246,7 @@ static VALUE
 canvas_get_dither(self)
     VALUE self;
 {
-    return gnome_canvas_get_dither(_SELF(self));
+    return GENUM2RVAL(gnome_canvas_get_dither(_SELF(self)), GDK_TYPE_RGB_DITHER);
 }
 
 static VALUE
