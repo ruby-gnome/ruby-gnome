@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/03/09 15:14:52 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -139,6 +139,34 @@ treeiter_set_value(self, column, value)
     return self;
 }
 
+static VALUE
+treeiter_eql(self, other)
+    VALUE self, other;
+{
+    gint i, num1, num2;
+    GtkTreeIter* iter1 = _SELF(self);
+    GtkTreeIter* iter2 = _SELF(other);
+
+    GtkTreeModel* model1 = (GtkTreeModel*)iter1->user_data3;
+    GtkTreeModel* model2 = (GtkTreeModel*)iter2->user_data3;
+    if (model1 != model2) return Qfalse;
+
+    num1 = gtk_tree_model_get_n_columns(model1);
+    num2 = gtk_tree_model_get_n_columns(model2);
+    if (num1 != num2) return Qfalse;
+
+    for (i = 0; i < num1; i++){
+        GValue gval1 = {0,};
+        GValue gval2 = {0,};
+        gtk_tree_model_get_value(model1, iter1, i, &gval1);
+        gtk_tree_model_get_value(model2, iter2, i, &gval2);
+        
+        if (rb_equal(GVAL2RVAL(&gval1), GVAL2RVAL(&gval2)) == Qfalse) 
+            return Qfalse;
+    }
+    return Qtrue;
+}
+
 void 
 Init_gtk_treeiter()
 {
@@ -154,4 +182,5 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 2);
     rb_define_method(gTreeIter, "parent", treeiter_parent, 0);
     rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
+    rb_define_method(gTreeIter, "==", treeiter_eql, 1);
 }
