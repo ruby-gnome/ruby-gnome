@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/10/29 04:21:24 $
+  $Date: 2003/11/05 12:56:54 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -46,8 +46,6 @@ rbgobj_get_signal_func(guint signal_id)
 /**********************************************************************/
 
 VALUE eNoSignalError;
-
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
 // FIXME: use rb_protect
 static gboolean
@@ -146,8 +144,6 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
     return rbgobj_signal_wrap(sig);
 }
-
-#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
 void
 _signal_list(VALUE result, GType gtype)
@@ -506,8 +502,6 @@ guint	 g_signal_handlers_disconnect_matched (gpointer		  instance,
 					       gpointer		  data);
 #endif
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
 static VALUE
 gobj_s_sig_override(klass, sig)
     VALUE klass;
@@ -652,17 +646,13 @@ gobj_s_method_added(klass, id)
     return Qnil;
 }
 
-#endif
-
 static void
 Init_signal_misc()
 {
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
-#endif
     rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
     rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
 
@@ -691,14 +681,12 @@ Init_signal_misc()
     rb_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_method(mMetaInterface, "signal_override",
                      gobj_s_sig_override, 1);
     rb_define_method(cInstantiatable, "signal_chain_from_overridden",
                      gobj_sig_chain_from_overridden, -1);
     rb_define_singleton_method(cInstantiatable, "method_added",
                                gobj_s_method_added, 1);
-#endif
 }
 
 /**********************************************************************/

@@ -1,3 +1,11 @@
+2003-11-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: rename GLib::Object.register_type to
+	type_register and change its arguments.
+
+	* src/rbgobj_object.c, src/rbgobj_signal.c, src/global.h: enable
+	subtyping codes by default.
+
 2003-10-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/global.h, src/rbgobj_object.c, src/rbgobj_signal.c: share a

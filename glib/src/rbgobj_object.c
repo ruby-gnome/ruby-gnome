@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/10/29 04:21:24 $
+  $Date: 2003/11/05 12:56:54 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -83,8 +83,6 @@ gobj_s_gobject_new(argc, argv, self)
     return result;
 }
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
 static VALUE
 gobj_s_install_property(int argc, VALUE* argv, VALUE self)
 {
@@ -110,8 +108,6 @@ gobj_s_install_property(int argc, VALUE* argv, VALUE self)
 
     return Qnil;
 }
-
-#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
 static VALUE
 gobj_s_property(self, property_name)
@@ -431,8 +427,6 @@ gobj_smethod_added(self, id)
 
 /**********************************************************************/
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
 static VALUE proc_mod_eval;
 static GQuark q_ruby_setter;
 static GQuark q_ruby_getter;
@@ -501,14 +495,14 @@ class_init_func(gpointer g_class_, gpointer class_data)
 }
 
 static VALUE
-register_type(int argc, VALUE* argv, VALUE self)
+type_register(int argc, VALUE* argv, VALUE self)
 {
     VALUE type_name, flags;
-    volatile VALUE class_init_proc;
+    volatile VALUE class_init_proc = Qnil;
     GType parent_type;
     GTypeInfo* info;
 
-    rb_scan_args(argc, argv, "02&", &type_name, &flags, &class_init_proc);
+    rb_scan_args(argc, argv, "03", &type_name, &info, &flags);
 
     {
         const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
@@ -586,7 +580,7 @@ static void
 Init_gobject_subclass()
 {
     VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
-    rb_define_singleton_method(cGObject, "register_type", register_type, -1);
+    rb_define_singleton_method(cGObject, "type_register", type_register, -1);
 
     rb_global_variable(&proc_mod_eval);
     proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
@@ -610,11 +604,9 @@ Init_gobject_gobject()
 
     rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
     rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "install_property", gobj_s_install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
-#endif
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
@@ -637,8 +629,6 @@ Init_gobject_gobject()
     type_to_prop_setter_table = rb_hash_new();
     type_to_prop_getter_table = rb_hash_new();
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     Init_gobject_subclass();
-#endif
 }
 
