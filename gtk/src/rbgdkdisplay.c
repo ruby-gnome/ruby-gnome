@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:02 $
+  $Date: 2005/01/31 16:48:17 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 ************************************************/
@@ -261,6 +261,47 @@ gdkdisplay_get_default_group(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkdisplay_supports_selection_notification(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_selection_notification(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_request_selection_notification(self, selection)
+    VALUE self, selection;
+{
+    return CBOOL2RVAL(gdk_display_request_selection_notification(_SELF(self), 
+                                                                 RVAL2ATOM(selection)));
+}
+
+static VALUE
+gdkdisplay_supports_clipboard_persistence(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_clipboard_persistence(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_store_clipboard(self, clipboard_window, time_, targets)
+    VALUE self, clipboard_window, time_, targets;
+{
+    gint i;
+    gint n_targets = RARRAY(targets)->len;
+    GdkAtom* gtargets = g_new(GdkAtom, n_targets);
+
+    for (i = 0; i < n_targets; i++){
+        gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+    }
+
+    gdk_display_store_clipboard(_SELF(self), GDK_WINDOW(RVAL2GOBJ(clipboard_window)),
+                                NUM2UINT(time_), gtargets, n_targets);
+    return self;
+}
+#endif
+
 static VALUE
 gdkdisplay_get_core_pointer(self)
     VALUE self;
@@ -336,6 +377,12 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "default_cursor_size", gdkdisplay_get_default_cursor_size, 0);
     rb_define_method(gdkDisplay, "maximal_cursor_size", gdkdisplay_get_maximal_cursor_size, 0);
     rb_define_method(gdkDisplay, "default_group", gdkdisplay_get_default_group, 0);
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkDisplay, "supports_selection_notification?", gdkdisplay_supports_selection_notification, 0);
+    rb_define_method(gdkDisplay, "request_selection_notification?", gdkdisplay_request_selection_notification, 1);
+    rb_define_method(gdkDisplay, "supports_clipboard_persistence?", gdkdisplay_supports_clipboard_persistence, 0);
+    rb_define_method(gdkDisplay, "store_clipboard", gdkdisplay_store_clipboard, 3);
 #endif
     rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
 

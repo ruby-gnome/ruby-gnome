@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/05/13 17:00:35 $
+  $Date: 2005/01/31 16:48:17 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,7 +14,11 @@
 
 #include "global.h"
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE gdkevents[35];
+#else
 static VALUE gdkevents[34];
+#endif
 
 /***********************************************/
 
@@ -133,7 +137,8 @@ static VALUE \
 gdkevent ## type ## _ ## name (self)\
     VALUE self;\
 {\
-    return BOXED2RVAL(get_gdkevent(self)->type.name, GDK_TYPE_ATOM);\
+    GdkAtom atom = get_gdkevent(self)->type.name;\
+    return atom ? BOXED2RVAL(atom, GDK_TYPE_ATOM) : Qnil;\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (self, val)\
@@ -596,6 +601,14 @@ ATTR_FLAGS(window_state, new_window_state, GDK_TYPE_WINDOW_STATE);
 ATTR_ENUM(setting, action, GDK_TYPE_SETTING_ACTION);
 ATTR_STR(setting, name);
 
+/* GdkEventOwnerChange */
+#if GTK_CHECK_VERSION(2,6,0)
+ATTR_UINT(owner_change, owner);
+ATTR_ENUM(owner_change, reason, GDK_TYPE_OWNER_CHANGE);
+ATTR_ATOM(owner_change, selection);
+ATTR_UINT(owner_change, time);
+ATTR_UINT(owner_change, selection_time);
+#endif
 
 /* MISC */
 static VALUE 
@@ -648,7 +661,9 @@ Init_gtk_gdk_event()
     gdkevents[GDK_SCROLL]        = rb_define_class_under(mGdk, "EventScroll", gdkEventAny);
     gdkevents[GDK_WINDOW_STATE]  = rb_define_class_under(mGdk, "EventWindowState", gdkEventAny);
     gdkevents[GDK_SETTING]       = rb_define_class_under(mGdk, "EventSetting", gdkEventAny);
-
+#if GTK_CHECK_VERSION(2,6,0)
+    gdkevents[GDK_OWNER_CHANGE]  = rb_define_class_under(mGdk, "EventOwnerChange", gdkEventAny);
+#endif
 
     /* GdkEvent */
 #if GTK_CHECK_VERSION(2,2,0)
@@ -856,6 +871,21 @@ Init_gtk_gdk_event()
     /* GdkSettingAction */
     G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "Action", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
+
+#if GTK_CHECK_VERSION(2,6,0)
+    /* GdkEventOwnerChange */
+    ev = gdkevents[GDK_OWNER_CHANGE];
+    DEFINE_ACCESSOR(ev, owner_change, owner);
+    DEFINE_ACCESSOR(ev, owner_change, reason);
+    DEFINE_ACCESSOR(ev, owner_change, selection);
+    DEFINE_ACCESSOR(ev, owner_change, time);
+    DEFINE_ACCESSOR(ev, owner_change, selection_time);
+    G_DEF_SETTERS(ev);
+
+    /* GdkOwnerChange */
+    G_DEF_CLASS(GDK_TYPE_OWNER_CHANGE, "OwnerChange", ev);
+    G_DEF_CONSTANTS(ev, GDK_TYPE_OWNER_CHANGE, "GDK_OWNER_CHANGE_");
+#endif
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 
