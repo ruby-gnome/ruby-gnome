@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2003/04/04 18:12:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -374,6 +374,12 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_UNDERLINE, AttrUnderline, pattrint, 1);
+    /* PangoUnderline */
+    rb_define_const(tmpklass, "NONE", INT2FIX(PANGO_UNDERLINE_NONE));
+    rb_define_const(tmpklass, "SINGLE", INT2FIX(PANGO_UNDERLINE_SINGLE));
+    rb_define_const(tmpklass, "DOUBLE", INT2FIX(PANGO_UNDERLINE_DOUBLE));
+    rb_define_const(tmpklass, "LOW", INT2FIX(PANGO_UNDERLINE_LOW));
+
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, pattr, 2);
@@ -381,20 +387,14 @@ Init_pango_attribute()
     rb_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
     rb_define_method(tmpklass, "value", attr_shape_value, 0);
     MAKE_ATTR(PANGO_ATTR_SCALE, AttrScale, pattrfloat, 1);
-
-    rb_define_const(pattr, "SCALE_XX_SMALL", rb_float_new(PANGO_SCALE_XX_SMALL));
-    rb_define_const(pattr, "SCALE_X_SMALL", rb_float_new(PANGO_SCALE_X_SMALL));
-    rb_define_const(pattr, "SCALE_SMALL", rb_float_new(PANGO_SCALE_SMALL));
-    rb_define_const(pattr, "SCALE_MEDIUM", rb_float_new(PANGO_SCALE_MEDIUM));
-    rb_define_const(pattr, "SCALE_LARGE", rb_float_new(PANGO_SCALE_LARGE));
-    rb_define_const(pattr, "SCALE_X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
-    rb_define_const(pattr, "SCALE_XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
-
-    /* PangoUnderline */
-    rb_define_const(pattr, "UNDERLINE_NONE", INT2FIX(PANGO_UNDERLINE_NONE));
-    rb_define_const(pattr, "UNDERLINE_SINGLE", INT2FIX(PANGO_UNDERLINE_SINGLE));
-    rb_define_const(pattr, "UNDERLINE_DOUBLE", INT2FIX(PANGO_UNDERLINE_DOUBLE));
-    rb_define_const(pattr, "UNDERLINE_LOW", INT2FIX(PANGO_UNDERLINE_LOW));
+    /* PangoScale */
+    rb_define_const(tmpklass, "XX_SMALL", rb_float_new(PANGO_SCALE_XX_SMALL));
+    rb_define_const(tmpklass, "X_SMALL", rb_float_new(PANGO_SCALE_X_SMALL));
+    rb_define_const(tmpklass, "SMALL", rb_float_new(PANGO_SCALE_SMALL));
+    rb_define_const(tmpklass, "MEDIUM", rb_float_new(PANGO_SCALE_MEDIUM));
+    rb_define_const(tmpklass, "LARGE", rb_float_new(PANGO_SCALE_LARGE));
+    rb_define_const(tmpklass, "X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
+    rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
 
     rb_define_const(pattr, "TYPE_INVALID", INT2FIX(PANGO_ATTR_INVALID));
     rb_define_const(pattr, "TYPE_LANGUAGE", INT2FIX(PANGO_ATTR_LANGUAGE));

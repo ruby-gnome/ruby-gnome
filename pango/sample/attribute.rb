@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: attribute.rb,v 1.2 2003/02/01 17:13:24 mutoh Exp $
+  $Id: attribute.rb,v 1.3 2003/04/04 18:12:33 mutoh Exp $
 =end
 
 require 'pango'
@@ -53,8 +53,8 @@ p a.value.to_a
 p a = Pango::AttrStrikethrough.new(true)
 p a.value
 
-p Pango::Attribute::UNDERLINE_SINGLE
-p a = Pango::AttrUnderline.new(Pango::Attribute::UNDERLINE_SINGLE)
+p Pango::AttrUnderline::SINGLE
+p a = Pango::AttrUnderline.new(Pango::AttrUnderline::SINGLE)
 p a.value
 
 p ink = Pango::Rectangle.new(1, 2, 3, 4)
