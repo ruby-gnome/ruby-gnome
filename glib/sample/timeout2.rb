@@ -4,13 +4,14 @@
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/03/13 14:39:58 $
-  $Id: timeout2.rb,v 1.1 2005/03/13 14:39:58 mutoh Exp $
+  $Date: 2005/03/13 15:43:32 $
+  $Id: timeout2.rb,v 1.2 2005/03/13 15:43:32 mutoh Exp $
 =end
 
 require 'glib2'
 
 context = GLib::MainContext.new
+
 mainloop = GLib::MainLoop.new(context, true)
 
 source = GLib::Timeout.source_new(1000)
@@ -25,6 +26,7 @@ source.set_callback {
   else
     true  # continue ...
   end
+
 }
 source.attach(context)
 

@@ -4,7 +4,7 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/13 14:39:58 $
+  $Date: 2005/03/13 15:43:32 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -117,16 +117,60 @@ mc_prepare(self)
     return rb_assoc_new(CBOOL2RVAL(ret), INT2NUM(priority));
 }
 
-/*
-gint        g_main_context_query            (GMainContext *context,
-                                             gint max_priority,
-                                             gint *timeout_,
-                                             GPollFD *fds,
-                                             gint n_fds);
-gint        g_main_context_check            (GMainContext *context,
-                                             gint max_priority,
-                                             GPollFD *fds,
-                                             gint n_fds);
+static VALUE
+mc_query(self, max_priority)
+    VALUE self, max_priority;
+{
+    gint i, timeout_;
+    VALUE ary;
+   
+    GPollFD* fds = g_new (GPollFD, 100);
+    gint ret = g_main_context_query(_SELF(self), NUM2INT(max_priority), 
+                               &timeout_, fds, 100);
+    if (ret > 100) {
+        g_free(fds);
+        fds = g_new(GPollFD, ret);
+        g_main_context_query(_SELF(self), NUM2INT(max_priority),
+                             &timeout_, fds, ret);
+    }
+
+    ary = rb_ary_new();
+    for (i = 0; i < ret; i++)
+        rb_ary_push(ary, BOXED2RVAL(&fds[i], G_TYPE_POLL_FD));
+    
+    g_free(fds);
+    return rb_assoc_new(INT2NUM(timeout_), ary);
+}
+
+/* How can I implement this?
+static VALUE
+mc_check(self, max_priority)
+    VALUE self, max_priority;
+{
+    gint i, timeout_;
+    VALUE ary;
+
+    GPollFD* fds;
+    gint ret, n_fds;
+
+    fds = g_new (GPollFD, 10);    
+    n_fds = g_main_context_query(_SELF(self), NUM2INT(max_priority), 
+                                      &timeout_, fds, 10);
+    printf("n_fds = %d\n", n_fds);
+
+    g_free(fds);
+    fds = g_new (GPollFD, n_fds);    
+    
+    ret = g_main_context_check(_SELF(self), NUM2INT(max_priority),
+                               fds, n_fds);
+    printf("ret = %d\n", ret);
+    ary = rb_ary_new();
+    for (i = 0; i < ret; i++)
+        rb_ary_push(ary, BOXED2RVAL(&fds[i], G_TYPE_POLL_FD));
+
+    g_free(fds);    
+    return ary;
+}
 */
 
 static VALUE
@@ -296,6 +340,10 @@ Init_glib_main_context()
     rb_define_method(mc, "acquire", mc_acquire, 0);
     rb_define_method(mc, "release", mc_release, 0);
     rb_define_method(mc, "prepare", mc_prepare, 0);
+    rb_define_method(mc, "query", mc_query, 1);
+/*
+    rb_define_method(mc, "check", mc_check, 1);
+*/
     rb_define_method(mc, "dispatch", mc_dispatch, 0);
 /*
     rb_define_method(mc, "set_poll_func", mc_set_poll_func, 0);
