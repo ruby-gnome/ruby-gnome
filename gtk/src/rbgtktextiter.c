@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: mutoh $
+  $Date: 2004/10/20 17:11:01 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -15,6 +15,7 @@
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
+static gboolean is_compat_240;
 
 static VALUE
 get_buffer(self)
@@ -353,15 +354,22 @@ forward_search(argc, argv, self)
 {
     GtkTextIter m_start, m_end;
     VALUE str, flags, limit;
+    gboolean ret;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
-    if(gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                    RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
-                                    &m_start, &m_end,
-                                    NIL_P(limit) ? NULL : _SELF(limit)))
-        return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
-    else
-        return Qnil;
+
+    if (is_compat_240){
+        ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
+                                           RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           &m_start, &m_end,
+                                           NIL_P(limit) ? NULL : _SELF(limit));
+    } else {
+        ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
+                                           RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           &m_start, &m_end,
+                                           NIL_P(limit) ? NULL : _SELF(limit));
+    }
+    return ret ? rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end)) : Qnil;
 }
 
 static VALUE
@@ -372,15 +380,21 @@ backward_search(argc, argv, self)
 {
     GtkTextIter m_start, m_end;
     VALUE str, flags, limit;
+    gboolean ret;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
-    if(gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                     RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
-                                     &m_start, &m_end,
-                                     NIL_P(limit) ? NULL : _SELF(limit)))
-        return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
-    else
-        return Qnil;
+    if (is_compat_240){
+        ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
+                                            RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            &m_start, &m_end,
+                                            NIL_P(limit) ? NULL : _SELF(limit));
+    } else {
+        ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
+                                            RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            &m_start, &m_end,
+                                            NIL_P(limit) ? NULL : _SELF(limit));
+    }
+    return ret ? rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end)) : Qnil;
 }
 
 static VALUE
@@ -413,6 +427,8 @@ Init_gtk_textiter()
 {
     VALUE cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(cTextIter, rb_mComparable);
+
+    is_compat_240 = gtk_check_version(2, 4, 0) ? FALSE : TRUE;
 
     rb_define_method(cTextIter, "buffer", get_buffer, 0);
     rb_define_method(cTextIter, "offset", get_offset, 0);

@@ -1,3 +1,13 @@
+2004-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextiter.c: Gtk::TextIter#[forward|backward]_search works on
+	GTK+-2.4.x. Bug #1050440.
+
+2004-10-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeiter.c: Gtk::TreeIter#[] checks the iter is valid or not
+	for GTK+-2.2.x.
+
 2004-10-17  Vincent Isambart <isambart@netcourrier.com>
 
 	* extconf.rb: Replaced "$objs <<" with add_obj.

@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2004/08/29 16:43:28 $
+  $Date: 2004/10/20 17:11:01 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -15,6 +15,8 @@
 #define _SELF(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
+
+static ID id_iter_is_valid;
 
 void
 rbgtk_register_treeiter_set_value_func(gtype, func)
@@ -59,6 +61,11 @@ treeiter_get_value(self, column)
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     VALUE ret = Qnil;
+
+#if GTK_CHECK_VERSION(2,2,0)
+    if (rb_funcall(GOBJ2RVAL(model), id_iter_is_valid, 1, self) != Qtrue)
+        rb_raise(rb_eTypeError, "Gtk::TreeIter is invalid.");
+#endif
     gtk_tree_model_get_value(model, iter, NUM2INT(column), &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
@@ -239,6 +246,8 @@ void
 Init_gtk_treeiter()
 {
     VALUE gTreeIter = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
+
+    id_iter_is_valid = rb_intern("iter_is_valid?");
 
     rb_define_method(gTreeIter, "first!", treeiter_first, 0);
     rb_define_method(gTreeIter, "next!", treeiter_next, 0);
