@@ -21,16 +21,6 @@
 
 #include "rbgda.h"
 
-GType gda_datasource_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaDataSource",
-            (GBoxedCopyFunc)gda_config_copy_data_source_info,
-            (GBoxedFreeFunc)gda_config_free_data_source_info);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_get_datasources(self)
     VALUE self;
 {
