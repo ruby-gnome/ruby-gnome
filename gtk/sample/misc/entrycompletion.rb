@@ -5,12 +5,18 @@
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: entrycompletion.rb,v 1.1 2004/05/24 16:18:58 mutoh Exp $
+  $Id: entrycompletion.rb,v 1.2 2004/05/24 17:22:57 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
+
+if str = Gtk.check_version(2, 4, 0)
+  puts "This sample requires GTK+ 2.4.0 or later"
+  puts str
+  exit
+end
 
 window = Gtk::Window.new
 window.set_default_size(200, 200)

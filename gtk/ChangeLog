@@ -1,6 +1,9 @@
 2004-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* sample/misc/entry.rb: Modified.
+	* src/rbgtkmessagedialog.c: Added Gtk::MessageDialog#set_markup for 2.4. 
+	* src/rbgtkbutton.c: Added Gtk::Button#set_alignment, #alignment for 2.4.
+	* src/rbgtkborder.c: Added.
+	* sample/misc/entry.rb, settings.rb: Modified.
 	* sample/misc/entrycompletion.rb: Added.
 	* src/rbgtkentrycompletion.c: Added.
 	* src/rbgtkentry.c: Added Gtk::Entry#set_completion, #completion. 

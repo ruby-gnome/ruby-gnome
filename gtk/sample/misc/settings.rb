@@ -4,7 +4,7 @@
   Copyright (C) 2004 Masao Mutoh <mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: settings.rb,v 1.1 2004/01/31 18:50:30 mutoh Exp $
+  $Id: settings.rb,v 1.2 2004/05/24 17:22:57 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -40,4 +40,4 @@ p Gtk::Settings.rc_property_parse_color(spec, "{2222,44444,65535}").to_a
 p Gtk::Settings.rc_property_parse_enum(enum, "watch")
 p Gtk::Settings.rc_property_parse_flags(flags, "(scroll-mask|structure-mask)")
 p Gtk::Settings.rc_property_parse_requisition(spec, "{100, 200}")
-p Gtk::Settings.rc_property_parse_border(spec, "{100, 200, 300, 400}")
+p Gtk::Settings.rc_property_parse_border(spec, "{100, 200, 300, 400}").to_a

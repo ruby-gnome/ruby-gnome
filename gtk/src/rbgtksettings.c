@@ -4,7 +4,7 @@
   rbgtksettings.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:31 $
+  $Date: 2004/05/24 17:22:58 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
@@ -160,8 +160,7 @@ settings_rc_property_parse_border(self, spec, str)
                                       gstr, &prop);
     if (ret){
         GtkBorder* border = g_value_get_boxed(&prop);
-        val = rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right), 
-                          INT2NUM(border->top), INT2NUM(border->bottom));
+        val = BOXED2RVAL(border, GTK_TYPE_BORDER);
     }
     g_string_free(gstr, TRUE);
     g_value_unset(&prop);
