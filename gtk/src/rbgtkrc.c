@@ -4,9 +4,9 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2004/05/20 16:57:59 $
+  $Date: 2005/03/24 17:33:19 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -37,19 +37,32 @@ rc_get_style(self, widget)
 }
 
 static VALUE
-rc_get_style_by_paths(self, settings, widget_path, class_path, klass)
-    VALUE self, settings, widget_path, class_path, klass;
+rc_get_style_by_paths(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    GtkStyle* style = gtk_rc_get_style_by_paths(GTK_SETTINGS(RVAL2GOBJ(settings)),
-                                                NIL_P(widget_path) ? NULL : RVAL2CSTR(widget_path),
-                                                NIL_P(class_path) ? NULL : RVAL2CSTR(class_path),
-                                                CLASS2GTYPE(klass));
-    GType gtype = G_OBJECT_TYPE(style);
-    const gchar* name = G_OBJECT_TYPE_NAME(style);
-    if (! rb_const_defined_at(mGtk, rb_intern(name))){
-        G_DEF_CLASS(gtype, (gchar*)name, mGtk);
-    }    
-    return style ? GOBJ2RVAL(style) : Qnil;
+    VALUE settings, widget_path, class_path, klass;
+    GtkStyle* style;
+    GType gtype;
+    const gchar* name;
+
+    rb_scan_args(argc, argv, "13", &settings, &widget_path, &class_path, &klass);
+
+    style = gtk_rc_get_style_by_paths(GTK_SETTINGS(RVAL2GOBJ(settings)),
+                                      NIL_P(widget_path) ? NULL : RVAL2CSTR(widget_path),
+                                      NIL_P(class_path) ? NULL : RVAL2CSTR(class_path),
+                                      NIL_P(klass) ? G_TYPE_NONE : CLASS2GTYPE(klass));
+
+    if (style){
+        gtype = G_OBJECT_TYPE(style);
+        name = G_OBJECT_TYPE_NAME(style);
+        if (! rb_const_defined_at(mGtk, rb_intern(name))){
+            G_DEF_CLASS(gtype, (gchar*)name, mGtk);
+        }
+        return GOBJ2RVAL(style);
+    }
+    return Qnil;
 }
 
 static VALUE
@@ -140,7 +153,7 @@ static VALUE
 rc_find_module_in_path(self, module_file)
     VALUE self, module_file;
 {
-    return CSTR2RVAL(gtk_rc_find_module_in_path(RVAL2CSTR(module_file)));
+    return CSTR2RVAL2(gtk_rc_find_module_in_path(RVAL2CSTR(module_file)));
 }
 
 /*
@@ -153,7 +166,7 @@ static VALUE
 rc_get_module_dir(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_rc_get_module_dir());
+    return CSTR2RVAL2(gtk_rc_get_module_dir());
 }
 
 static VALUE
@@ -174,7 +187,7 @@ static VALUE
 rc_get_theme_dir(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_rc_get_theme_dir());
+    return CSTR2RVAL2(gtk_rc_get_theme_dir());
 }
 
 void 
@@ -183,7 +196,7 @@ Init_gtk_rc()
     VALUE mRC = rb_define_module_under(mGtk, "RC");
 
     rb_define_module_function(mRC, "get_style", rc_get_style, 1);
-    rb_define_module_function(mRC, "get_style_by_paths", rc_get_style_by_paths, 4);
+    rb_define_module_function(mRC, "get_style_by_paths", rc_get_style_by_paths, -1);
     rb_define_module_function(mRC, "parse", rc_parse, 1);
     rb_define_module_function(mRC, "parse_string", rc_parse_string, 1);
     rb_define_module_function(mRC, "reparse_all", rc_reparse_all, 0);

@@ -1,3 +1,10 @@
+2005-03-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrc.c: Fix memory leaks of Gtk::RC.theme_dir, 
+	.module_dir, .find_module_in_path.
+	Gtk::RC.get_style_by_paths accept nil as the 4th parameter and fix
+	when it returns NULL.
+
 2005-03-22  Mirko Maischberger  <mirko@lilik.it>
 
 	* sample/misc/*.rb: sh-bang (!#) normalization.
