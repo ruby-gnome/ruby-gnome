@@ -1,0 +1,158 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbgtkstock.c -
+
+  $Author: tkubo $
+  $Date: 2002/11/15 15:32:37 $
+
+  Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+************************************************/
+#include "rbgtk.h"
+
+#define Check_Symbol(sym) do { \
+    if (!SYMBOL_P(sym)) \
+        rb_raise(rb_eArgError, "invalid argument %s (expect Symbol)", \
+                 rb_class2name(CLASS_OF(sym))); \
+} while (0)
+
+/* check whether sym is a Symbol or not in advance. */
+#define SYM2CSTR(sym) rb_id2name(SYM2ID(sym))
+#define CSTR2SYM(str) ID2SYM(rb_intern(str))
+
+static VALUE
+stock_m_add(argc, argv, klass)
+    int argc;
+    VALUE *argv, klass;
+{
+    VALUE stock_id, label, modifier, keyval, translation_domain;
+    GtkStockItem item;
+
+    rb_scan_args(argc, argv, "23", &stock_id, &label, &modifier, &keyval, &translation_domain);
+    Check_Symbol(stock_id);
+    item.stock_id = SYM2CSTR(stock_id);
+    item.label = RVAL2CSTR(label);
+    item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
+    item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);
+    item.translation_domain = NIL_P(translation_domain) ? NULL : RVAL2CSTR(translation_domain);
+    gtk_stock_add(&item, 1);
+    return Qnil;
+}
+
+static VALUE
+stock_m_lookup(klass, stock_id)
+    VALUE klass, stock_id;
+{
+    GtkStockItem item;
+
+    Check_Symbol(stock_id);
+    if (gtk_stock_lookup(SYM2CSTR(stock_id), &item)) {
+        return rb_ary_new3(5,
+                           CSTR2SYM(item.stock_id),
+                           rb_str_new2(item.label),
+                           UINT2NUM(item.modifier),
+                           UINT2NUM(item.keyval),
+                           item.translation_domain ? rb_str_new2(item.translation_domain) : Qnil);
+    }
+    rb_raise(rb_eArgError, "no such stock-id: %s", SYM2CSTR(stock_id));
+}
+
+static VALUE
+stock_m_list_ids(klass)
+    VALUE klass;
+{
+    GSList *ids = gtk_stock_list_ids();
+    GSList *l;
+    VALUE ary = rb_ary_new();
+    for (l = ids; l != NULL; l = g_slist_next(l)) {
+        rb_ary_push(ary, CSTR2SYM(l->data));
+        g_free(l->data);
+    }
+    g_slist_free(ids);
+    return ary;
+}
+
+void
+Init_gtk_stock()
+{
+    VALUE mGtkStock = rb_define_module_under(mGtk, "Stock");
+
+    rb_undef_method(mGtkStock, "new");
+    rb_define_singleton_method(mGtkStock, "add", stock_m_add, -1);
+    rb_define_singleton_method(mGtkStock, "lookup", stock_m_lookup, 1);
+    rb_define_singleton_method(mGtkStock, "list_ids", stock_m_list_ids, 0);
+
+	/* Stock IDs (not all are stock items; some are images only) */
+    rb_define_const(mGtkStock, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));
+    rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
+    rb_define_const(mGtkStock, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
+    rb_define_const(mGtkStock, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
+
+    rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
+    rb_define_const(mGtkStock, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
+
+    rb_define_const(mGtkStock, "ADD", CSTR2SYM(GTK_STOCK_ADD));
+    rb_define_const(mGtkStock, "APPLY", CSTR2SYM(GTK_STOCK_APPLY));
+    rb_define_const(mGtkStock, "BOLD", CSTR2SYM(GTK_STOCK_BOLD));
+    rb_define_const(mGtkStock, "CANCEL", CSTR2SYM(GTK_STOCK_CANCEL));
+    rb_define_const(mGtkStock, "CDROM", CSTR2SYM(GTK_STOCK_CDROM));
+    rb_define_const(mGtkStock, "CLEAR", CSTR2SYM(GTK_STOCK_CLEAR));
+    rb_define_const(mGtkStock, "CLOSE", CSTR2SYM(GTK_STOCK_CLOSE));
+    rb_define_const(mGtkStock, "CONVERT", CSTR2SYM(GTK_STOCK_CONVERT));
+    rb_define_const(mGtkStock, "COPY", CSTR2SYM(GTK_STOCK_COPY));
+    rb_define_const(mGtkStock, "CUT", CSTR2SYM(GTK_STOCK_CUT));
+    rb_define_const(mGtkStock, "DELETE", CSTR2SYM(GTK_STOCK_DELETE));
+    rb_define_const(mGtkStock, "EXECUTE", CSTR2SYM(GTK_STOCK_EXECUTE));
+    rb_define_const(mGtkStock, "FIND", CSTR2SYM(GTK_STOCK_FIND));
+    rb_define_const(mGtkStock, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
+    rb_define_const(mGtkStock, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
+    rb_define_const(mGtkStock, "GOTO_BOTTOM", CSTR2SYM(GTK_STOCK_GOTO_BOTTOM));
+    rb_define_const(mGtkStock, "GOTO_FIRST", CSTR2SYM(GTK_STOCK_GOTO_FIRST));
+    rb_define_const(mGtkStock, "GOTO_LAST", CSTR2SYM(GTK_STOCK_GOTO_LAST));
+    rb_define_const(mGtkStock, "GOTO_TOP", CSTR2SYM(GTK_STOCK_GOTO_TOP));
+    rb_define_const(mGtkStock, "GO_BACK", CSTR2SYM(GTK_STOCK_GO_BACK));
+    rb_define_const(mGtkStock, "GO_DOWN", CSTR2SYM(GTK_STOCK_GO_DOWN));
+    rb_define_const(mGtkStock, "GO_FORWARD", CSTR2SYM(GTK_STOCK_GO_FORWARD));
+    rb_define_const(mGtkStock, "GO_UP", CSTR2SYM(GTK_STOCK_GO_UP));
+    rb_define_const(mGtkStock, "HELP", CSTR2SYM(GTK_STOCK_HELP));
+    rb_define_const(mGtkStock, "HOME", CSTR2SYM(GTK_STOCK_HOME));
+    rb_define_const(mGtkStock, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
+    rb_define_const(mGtkStock, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
+    rb_define_const(mGtkStock, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
+    rb_define_const(mGtkStock, "JUSTIFY_CENTER", CSTR2SYM(GTK_STOCK_JUSTIFY_CENTER));
+    rb_define_const(mGtkStock, "JUSTIFY_FILL", CSTR2SYM(GTK_STOCK_JUSTIFY_FILL));
+    rb_define_const(mGtkStock, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
+    rb_define_const(mGtkStock, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
+    rb_define_const(mGtkStock, "MISSING_IMAGE", CSTR2SYM(GTK_STOCK_MISSING_IMAGE));
+    rb_define_const(mGtkStock, "NEW", CSTR2SYM(GTK_STOCK_NEW));
+    rb_define_const(mGtkStock, "NO", CSTR2SYM(GTK_STOCK_NO));
+    rb_define_const(mGtkStock, "OK", CSTR2SYM(GTK_STOCK_OK));
+    rb_define_const(mGtkStock, "OPEN", CSTR2SYM(GTK_STOCK_OPEN));
+    rb_define_const(mGtkStock, "PASTE", CSTR2SYM(GTK_STOCK_PASTE));
+    rb_define_const(mGtkStock, "PREFERENCES", CSTR2SYM(GTK_STOCK_PREFERENCES));
+    rb_define_const(mGtkStock, "PRINT", CSTR2SYM(GTK_STOCK_PRINT));
+    rb_define_const(mGtkStock, "PRINT_PREVIEW", CSTR2SYM(GTK_STOCK_PRINT_PREVIEW));
+    rb_define_const(mGtkStock, "PROPERTIES", CSTR2SYM(GTK_STOCK_PROPERTIES));
+    rb_define_const(mGtkStock, "QUIT", CSTR2SYM(GTK_STOCK_QUIT));
+    rb_define_const(mGtkStock, "REDO", CSTR2SYM(GTK_STOCK_REDO));
+    rb_define_const(mGtkStock, "REFRESH", CSTR2SYM(GTK_STOCK_REFRESH));
+    rb_define_const(mGtkStock, "REMOVE", CSTR2SYM(GTK_STOCK_REMOVE));
+    rb_define_const(mGtkStock, "REVERT_TO_SAVED", CSTR2SYM(GTK_STOCK_REVERT_TO_SAVED));
+    rb_define_const(mGtkStock, "SAVE", CSTR2SYM(GTK_STOCK_SAVE));
+    rb_define_const(mGtkStock, "SAVE_AS", CSTR2SYM(GTK_STOCK_SAVE_AS));
+    rb_define_const(mGtkStock, "SELECT_COLOR", CSTR2SYM(GTK_STOCK_SELECT_COLOR));
+    rb_define_const(mGtkStock, "SELECT_FONT", CSTR2SYM(GTK_STOCK_SELECT_FONT));
+    rb_define_const(mGtkStock, "SORT_ASCENDING", CSTR2SYM(GTK_STOCK_SORT_ASCENDING));
+    rb_define_const(mGtkStock, "SORT_DESCENDING", CSTR2SYM(GTK_STOCK_SORT_DESCENDING));
+    rb_define_const(mGtkStock, "SPELL_CHECK", CSTR2SYM(GTK_STOCK_SPELL_CHECK));
+    rb_define_const(mGtkStock, "STOP", CSTR2SYM(GTK_STOCK_STOP));
+    rb_define_const(mGtkStock, "STRIKETHROUGH", CSTR2SYM(GTK_STOCK_STRIKETHROUGH));
+    rb_define_const(mGtkStock, "UNDELETE", CSTR2SYM(GTK_STOCK_UNDELETE));
+    rb_define_const(mGtkStock, "UNDERLINE", CSTR2SYM(GTK_STOCK_UNDERLINE));
+    rb_define_const(mGtkStock, "UNDO", CSTR2SYM(GTK_STOCK_UNDO));
+    rb_define_const(mGtkStock, "YES", CSTR2SYM(GTK_STOCK_YES));
+    rb_define_const(mGtkStock, "ZOOM_100", CSTR2SYM(GTK_STOCK_ZOOM_100));
+    rb_define_const(mGtkStock, "ZOOM_FIT", CSTR2SYM(GTK_STOCK_ZOOM_FIT));
+    rb_define_const(mGtkStock, "ZOOM_IN", CSTR2SYM(GTK_STOCK_ZOOM_IN));
+    rb_define_const(mGtkStock, "ZOOM_OUT", CSTR2SYM(GTK_STOCK_ZOOM_OUT));
+}
