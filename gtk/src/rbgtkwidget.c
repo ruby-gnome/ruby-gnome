@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1149,17 +1149,4 @@ Init_gtk_widget()
     /* need rb_call_super, which will hopefully be implemented in Ruby 1.5 - yashi
 	   rb_define_private_method(gWidget, "signal_setup_args", 4);
     */
-
-    /* child initialization */
-    Init_gtk_calendar();
-    Init_gtk_container();
-    Init_gtk_drawing_area();
-    Init_gtk_misc();
-    Init_gtk_preview();
-    Init_gtk_progress();
-    Init_gtk_range();
-    Init_gtk_ruler();
-    Init_gtk_separator();
-    Init_gtk_oldeditable();
-    Init_gtk_entry();
 }

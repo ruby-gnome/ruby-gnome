@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -182,11 +182,4 @@ void Init_gtk_window()
     rb_define_method(gWindow, "set_modal", gwin_set_modal, 1);
     rb_define_method(gWindow, "set_transient_for", gwin_set_transient_for, 1);
     rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
-
-    /* child initialization */
-    Init_gtk_dialog();
-    Init_gtk_file_selection();
-    Init_gtk_font_selection_dialog();
-    Init_gtk_color_selection_dialog();
-    Init_gtk_plug();
 }

@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -383,17 +383,7 @@ VALUE gObject;
 void 
 Init_gtk_object()
 {
-	static RGObjClassInfo cinfo;
-
-/* FIXME
-    VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
-*/
-    gObject = rb_define_class_under(mGtk, "Object", rbgobj_cGObject);
-    cinfo.klass = gObject;
-    cinfo.gtype = GTK_TYPE_OBJECT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgobj_register_class(&cinfo);
+    gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
     /* GtkArgFlags */
     rb_define_const(gObject, "ARG_READABLE", INT2NUM(GTK_ARG_READABLE));
@@ -430,6 +420,99 @@ Init_gtk_object()
 
     /* child initialize */
     Init_gtk_data();
-    Init_gtk_widget();
+
+    Init_gtk_accel_label();
+    Init_gtk_adjustment();
+    Init_gtk_alignment();
+    Init_gtk_arrow();
+    Init_gtk_aspect_frame();
+    Init_gtk_bin();
+    Init_gtk_box();
+    Init_gtk_button();
+    Init_gtk_button_box();
+    Init_gtk_calendar();
+    Init_gtk_check_button();
+    Init_gtk_check_menu_item();
+    Init_gtk_color_selection();
+    Init_gtk_color_selection_dialog();
+    Init_gtk_combo();
+    Init_gtk_container();
+    Init_gtk_curve();
+    Init_gtk_dialog();
+    Init_gtk_drawing_area();
+    Init_gtk_entry();
+    Init_gtk_eventbox();
+    Init_gtk_file_selection();
+    Init_gtk_fixed();
+    Init_gtk_font_selection();
+    Init_gtk_font_selection_dialog();
+    Init_gtk_frame();
+    Init_gtk_gamma_curve();
+    Init_gtk_handle_box();
+    Init_gtk_hbox();
+    Init_gtk_hbutton_box();
+    Init_gtk_hpaned();
+    Init_gtk_hruler();
+    Init_gtk_hscale();
+    Init_gtk_hscrollbar();
+    Init_gtk_hseparator();
+    Init_gtk_image();
+    Init_gtk_input_dialog();
+    Init_gtk_item();
     Init_gtk_itemfactory();
+    Init_gtk_label();
+    Init_gtk_layout();
+    Init_gtk_list_item();
+    Init_gtk_menu();
+    Init_gtk_menu_bar();
+    Init_gtk_menu_item();
+    Init_gtk_menu_shell();
+    Init_gtk_misc();
+    Init_gtk_notebook();
+    Init_gtk_option_menu();
+    Init_gtk_paned();
+    Init_gtk_plug();
+    Init_gtk_preview();
+    Init_gtk_progress();
+    Init_gtk_progress_bar();
+    Init_gtk_radio_button();
+    Init_gtk_radio_menu_item();
+    Init_gtk_range();
+    Init_gtk_ruler();
+    Init_gtk_scale();
+    Init_gtk_scrollbar();
+    Init_gtk_scrolled_window();
+    Init_gtk_separator();
+    Init_gtk_socket();
+    Init_gtk_spin_button();
+    Init_gtk_statusbar();
+    Init_gtk_table();
+    Init_gtk_tearoff_menu_item();
+    Init_gtk_toggle_button();
+    Init_gtk_toolbar();
+    Init_gtk_tooltips();
+    Init_gtk_vbox();
+    Init_gtk_vbutton_box();
+    Init_gtk_viewport();
+    Init_gtk_vpaned();
+    Init_gtk_vruler();
+    Init_gtk_vscale();
+    Init_gtk_vscrollbar();
+    Init_gtk_vseparator();
+    Init_gtk_widget();
+    Init_gtk_window();
+
+#ifndef GTK_DISABLE_DEPRECATED
+    Init_gtk_list();
+    Init_gtk_clist();
+    Init_gtk_ctree();
+    Init_gtk_oldeditable();
+    Init_gtk_pixmap();
+    Init_gtk_tips_query();
+#endif
+#ifdef GTK_ENABLE_BROKEN
+    Init_gtk_text();
+    Init_gtk_tree();
+    Init_gtk_tree_item();
+#endif
 }

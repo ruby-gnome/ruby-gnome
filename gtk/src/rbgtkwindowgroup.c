@@ -3,15 +3,13 @@
 
   rbgtkwindowgroup.c -
 
-  $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 #include "global.h"
-
-VALUE gWindowGroup;
 
 /*
  * Gtk::WindowGroup
@@ -46,15 +44,7 @@ rbgwingrp_remove_window(self, window)
 void 
 Init_gtk_windowgroup()
 {
-    static RGObjClassInfo cinfo;
-
-    gWindowGroup = rb_define_class_under(mGtk, "WindowGroup", rbgobj_cGObject);
-    cinfo.klass = gWindowGroup;
-    cinfo.gtype = GTK_TYPE_WINDOW_GROUP;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgobj_register_class(&cinfo);
-
+    VALUE gWindowGroup = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);
 	rb_define_method(gWindowGroup, "initialize", rbgwingrp_initialize, 0);
 	rb_define_method(gWindowGroup, "add", rbgwingrp_add_window, 1);
 	rb_define_method(gWindowGroup, "remove", rbgwingrp_remove_window, 1);

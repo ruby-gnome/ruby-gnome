@@ -3,8 +3,8 @@
 
   rbgtkmisc.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -70,10 +70,4 @@ Init_gtk_misc()
     rb_define_method(gMisc, "yalign", misc_get_yalign, 0);
     rb_define_method(gMisc, "xpad", misc_get_xpad, 0);
     rb_define_method(gMisc, "ypad", misc_get_ypad, 0);
-
-    /* child initialize */
-    Init_gtk_arrow();
-    Init_gtk_image();
-    Init_gtk_label();
-    Init_gtk_pixmap();
 }

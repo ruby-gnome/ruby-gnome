@@ -3,8 +3,8 @@
 
   rbgtkhbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,8 +34,4 @@ Init_gtk_hbox()
     VALUE gHBox = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
 
     rb_define_method(gHBox, "initialize", hbox_initialize, -1);
-
-    /* child initialization */
-    Init_gtk_combo();
-    Init_gtk_statusbar();
 }

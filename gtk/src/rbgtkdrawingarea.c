@@ -3,8 +3,8 @@
 
   rbgtkdrawingarea.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,4 @@ Init_gtk_drawing_area()
 
     rb_define_method(gDrawArea, "initialize", darea_initialize, 0);
     rb_define_method(gDrawArea, "size", darea_size, 2);
-
-    /* child initialization */
-    Init_gtk_curve();
 }

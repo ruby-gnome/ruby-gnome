@@ -3,8 +3,8 @@
 
   rbgtktogglebutton.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -92,7 +92,4 @@ Init_gtk_toggle_button()
     rb_define_alias(gTButton, "active=", "set_active");
 
     rb_define_const(gTButton, "SIGNAL_TOGGLED", rb_str_new2("toggled"));
-
-    /* child initialization */
-    Init_gtk_check_button();
 }

@@ -3,8 +3,8 @@
 
   rbgtkbutton.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,8 +109,4 @@ Init_gtk_button()
     rb_define_method(gButton, "leave", button_leave, 0);
     rb_define_method(gButton, "set_relief", button_set_relief, 1);
     rb_define_method(gButton, "get_relief", button_get_relief, 0);
-
-    /* child initialization */
-    Init_gtk_option_menu();
-    Init_gtk_toggle_button();
 }

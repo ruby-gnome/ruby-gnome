@@ -3,8 +3,8 @@
 
   rbgdkpixmap.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -163,7 +163,6 @@ Init_gtk_gdk_pixmap()
 {
 	VALUE gdkPixmap;
 	VALUE gdkBitmap;
-	RGObjClassInfo* cinfo_bitmap;
 
     /* 
      * GdkPixmap
@@ -188,13 +187,6 @@ Init_gtk_gdk_pixmap()
      * GdkBitmap
      */
     gdkBitmap = rb_define_class_under(mGdk, "Bitmap", gdkPixmap);
-
-	cinfo_bitmap = ALLOC(RGObjClassInfo);
-    cinfo_bitmap->klass = gdkBitmap;
-    cinfo_bitmap->gtype = GDK_TYPE_PIXMAP;
-    cinfo_bitmap->mark = 0;
-    cinfo_bitmap->free = 0;
-    rbgobj_register_class(cinfo_bitmap);
 
     rb_define_method(gdkBitmap, "initialize", gdkbmap_initialize, 3);
     rb_define_singleton_method(gdkBitmap, "create_from_data",

@@ -3,8 +3,8 @@
 
   rbgtkbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -134,9 +134,4 @@ Init_gtk_box()
     rb_define_method(gBox, "reorder_child", box_reorder_child, 2);
     rb_define_method(gBox, "query_child_packing", box_query_child_packing, 1);
     rb_define_method(gBox, "set_child_packing", box_set_child_packing, 5);
-
-    /* child initialization */
-    Init_gtk_button_box();
-    Init_gtk_hbox();
-    Init_gtk_vbox();
 }

@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -161,21 +161,4 @@ Init_gtk_container()
     rb_define_method(gContainer, "set_focus_child", cont_set_focus_child, 1);
     rb_define_method(gContainer, "set_focus_vadjustment", cont_set_focus_vadjustment, 1);
     rb_define_method(gContainer, "set_focus_hadjustment", cont_set_focus_hadjustment, 1);
-
-    /* child initialization */
-    Init_gtk_bin();
-    Init_gtk_box();
-    Init_gtk_clist();
-    Init_gtk_fixed();
-    Init_gtk_layout();
-    Init_gtk_list();
-    Init_gtk_menu_shell();
-    Init_gtk_notebook();
-    Init_gtk_paned();
-    Init_gtk_socket();
-    Init_gtk_table();
-    Init_gtk_toolbar();
-#ifdef Init_gtk_tree
-    Init_gtk_tree();
-#endif
 }

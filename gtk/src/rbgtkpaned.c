@@ -3,8 +3,8 @@
 
   rbgtkpaned.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -131,8 +131,4 @@ Init_gtk_paned()
 
     rb_define_alias(gPaned, "gutter_size=", "set_gutter_size");
     rb_define_alias(gPaned, "position=", "set_position");
-
-    /* child initialization */
-    Init_gtk_hpaned();
-    Init_gtk_vpaned();
 }

@@ -3,8 +3,8 @@
 
   rbgtkrange.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,8 +48,4 @@ Init_gtk_range()
   rb_define_method(gRange, "get_adjustment", range_get_adj, 0);
   rb_define_method(gRange, "set_update_policy", range_set_update_policy, 1);
   rb_define_method(gRange, "set_adjustment", range_set_adj, 1);
-
-  /* child init */
-  Init_gtk_scale();
-  Init_gtk_scrollbar();
 }

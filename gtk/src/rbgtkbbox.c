@@ -3,8 +3,8 @@
 
   rbgtkbbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -104,8 +104,4 @@ Init_gtk_button_box()
     rb_define_method(gBBox, "set_layout", bbox_set_layout, 1);
     rb_define_method(gBBox, "set_child_size", bbox_set_child_size, 2);
     rb_define_method(gBBox, "set_child_ipadding", bbox_set_child_ipadding, 2);
-
-    /* child initialization */
-    Init_gtk_hbutton_box();
-    Init_gtk_vbutton_box();
 }

@@ -3,8 +3,8 @@
 
   rbgtkvbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,8 +34,4 @@ Init_gtk_vbox()
     VALUE gVBox = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 
     rb_define_method(gVBox, "initialize", vbox_initialize, -1);
-
-    /* child initialization */
-    Init_gtk_color_selection();
-    Init_gtk_gamma_curve();
 }

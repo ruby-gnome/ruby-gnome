@@ -3,8 +3,8 @@
 
   rbgtkclist.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -879,8 +879,5 @@ Init_gtk_clist()
     rb_define_method(gCList, "set_button_actions", clist_set_button_actions, 2);
     rb_define_method(gCList, "get_cell_type", clist_get_cell_type, 2);
     rb_define_method(gCList, "find_row_from_data", clist_find_row_from_data, 1);
- 
-    /* child initialization */
-    Init_gtk_ctree();
 }
 #endif

@@ -3,8 +3,8 @@
 
   rbgtkseparator.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,8 +17,4 @@ void
 Init_gtk_separator()
 {
     G_DEF_CLASS(GTK_TYPE_SEPARATOR, "Separator", mGtk);
-
-    /* child init */
-    Init_gtk_hseparator();
-    Init_gtk_vseparator();
 }

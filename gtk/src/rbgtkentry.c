@@ -3,8 +3,8 @@
 
   rbgtkentry.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -92,7 +92,4 @@ Init_gtk_entry()
     rb_define_method(gEntry, "get_text", entry_get_text, 0);
     rb_define_method(gEntry, "set_visibility", entry_set_visibility, 1);
     rb_define_method(gEntry, "set_max_length", entry_set_max_length, 1);
-
-    /* child initialize */
-    Init_gtk_spin_button();
 }

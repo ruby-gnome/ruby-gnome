@@ -3,8 +3,8 @@
 
   rbgtkscale.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,8 +47,4 @@ Init_gtk_scale()
   rb_define_method(gScale, "set_digits", scale_set_digits, 1);
   rb_define_method(gScale, "set_draw_value", scale_set_draw_value, 1);
   rb_define_method(gScale, "set_value_pos", scale_set_value_pos, 1);
-
-  /* child init */
-  Init_gtk_hscale();
-  Init_gtk_vscale();
 }

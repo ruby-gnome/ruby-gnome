@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -60,9 +60,4 @@ Init_gtk_menu_shell()
     rb_define_method(gMenuShell, "prepend", mshell_prepend, 1);
     rb_define_method(gMenuShell, "insert", mshell_insert, 2);
     rb_define_method(gMenuShell, "deactivate", mshell_deactivate, 0);
-
-    /* child initialization */
-
-    Init_gtk_menu();
-    Init_gtk_menu_bar();
 }

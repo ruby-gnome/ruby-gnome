@@ -3,8 +3,8 @@
 
   rbgtklabel.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -104,8 +104,4 @@ Init_gtk_label()
 
     rb_define_alias(gLabel, "get_justify", "jtype");
     rb_define_alias(gLabel, "set_justify", "jtype=");
-
-    /* child initialize */
-    Init_gtk_tips_query();
-    Init_gtk_accel_label();
 }

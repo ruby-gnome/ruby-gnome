@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,7 +41,4 @@ void Init_gtk_dialog()
     rb_define_method(gDialog, "initialize", dialog_initialize, 0);
     rb_define_method(gDialog, "vbox", dialog_vbox, 0);
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);
-
-    /* child initialization */
-    Init_gtk_input_dialog();
 }

@@ -3,8 +3,8 @@
 
   rbgtkframe.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -62,8 +62,5 @@ Init_gtk_frame()
     rb_define_method(gFrame, "set_label", frame_set_label, 1);
     rb_define_method(gFrame, "set_label_align", frame_set_label_align, 2);
     rb_define_method(gFrame, "set_shadow_type", frame_set_shadow_type, 1);
-
-    /* child initialization */
-    Init_gtk_aspect_frame();
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkprogress.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -186,8 +186,5 @@ Init_gtk_progress()
     rb_define_method(gProgress, "get_current_percentage", progress_get_current_percentage, 0);
     rb_define_method(gProgress, "get_percentage_from_value", progress_get_percentage_from_value, 1);
     rb_define_method(gProgress, "configure", progress_configure, 3);
-
-    /* child initialize */
-    Init_gtk_progress_bar();
 }
 #endif

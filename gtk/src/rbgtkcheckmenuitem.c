@@ -3,8 +3,8 @@
 
   rbgtkcheckmenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -89,7 +89,4 @@ Init_gtk_check_menu_item()
     rb_define_method(gCMenuItem, "active?", cmitem_is_active, 0);
     rb_define_method(gCMenuItem, "set_show_toggle", cmitem_set_show_toggle, 1);
     rb_define_method(gCMenuItem, "toggled", cmitem_toggled, 0);
-
-    /* child initialization */
-    Init_gtk_radio_menu_item();
 }

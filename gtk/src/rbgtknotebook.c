@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -425,6 +425,4 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);
     rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
-
-    Init_gtk_font_selection();
 }

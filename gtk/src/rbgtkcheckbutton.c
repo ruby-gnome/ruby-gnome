@@ -3,8 +3,8 @@
 
   rbgtkcheckbutton.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:46:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -39,7 +39,4 @@ Init_gtk_check_button()
     VALUE gCButton = G_DEF_CLASS(GTK_TYPE_CHECK_BUTTON, "CheckButton", mGtk);
 
     rb_define_method(gCButton, "initialize", cbtn_initialize, -1);
-
-    /* child initialization */
-    Init_gtk_radio_button();
 }
