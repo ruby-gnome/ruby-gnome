@@ -1,3 +1,9 @@
+2003-05-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Remove *_event methods. Use GLib::Instantiatable#signal_emit. 
+	Remove Gtk::Widget::NO_PARENT because it is deprecated constants.
+	Fix return values of "size-request", "size-allocate" signals.
+
 2003-05-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Remove Gtk::Widget#set_requisition,

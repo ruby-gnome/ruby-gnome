@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/05/12 16:18:48 $
+  $Date: 2003/05/16 17:18:30 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -879,43 +879,23 @@ widget_saved_state(self)
     return INT2FIX(_SELF(self)->saved_state);
 }
 
-#define DEFINE_EVENT_FUNC(EVENT,TYPE) \
-static VALUE \
-widget_event_ ## EVENT (self, event) \
-    VALUE self, event; \
-{ \
-    GtkWidget *widget = RVAL2GOBJ(self); \
-    GTK_WIDGET_GET_CLASS(widget)->EVENT \
-        (widget, &RVAL2GEV(event)->TYPE); \
-    return self; \
+static VALUE
+widget_signal_size_request(num, values)
+    guint num;
+    const GValue* values;
+{
+    GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]), 
+                       rb_ary_new3(2, INT2NUM(req->width), INT2NUM(req->height)));
 }
-DEFINE_EVENT_FUNC(button_press_event, button);
-DEFINE_EVENT_FUNC(button_release_event, button);
-DEFINE_EVENT_FUNC(scroll_event, scroll);
-DEFINE_EVENT_FUNC(motion_notify_event, motion);
-DEFINE_EVENT_FUNC(delete_event, any);
-DEFINE_EVENT_FUNC(destroy_event, any);
-DEFINE_EVENT_FUNC(expose_event, expose);
-DEFINE_EVENT_FUNC(key_press_event, key);
-DEFINE_EVENT_FUNC(key_release_event, key);
-DEFINE_EVENT_FUNC(enter_notify_event, crossing);
-DEFINE_EVENT_FUNC(leave_notify_event, crossing);
-DEFINE_EVENT_FUNC(configure_event, configure);
-DEFINE_EVENT_FUNC(focus_in_event, focus_change);
-DEFINE_EVENT_FUNC(focus_out_event, focus_change);
-DEFINE_EVENT_FUNC(map_event, any);
-DEFINE_EVENT_FUNC(unmap_event, any);
-DEFINE_EVENT_FUNC(property_notify_event, property);
-DEFINE_EVENT_FUNC(selection_clear_event, selection);
-DEFINE_EVENT_FUNC(selection_request_event, selection);
-DEFINE_EVENT_FUNC(selection_notify_event, selection);
-DEFINE_EVENT_FUNC(proximity_in_event, proximity);
-DEFINE_EVENT_FUNC(proximity_out_event, proximity);
-DEFINE_EVENT_FUNC(visibility_notify_event, visibility);
-DEFINE_EVENT_FUNC(client_event, client);
-DEFINE_EVENT_FUNC(no_expose_event, any);
-DEFINE_EVENT_FUNC(window_state_event, window_state);
-
+static VALUE
+widget_signal_size_allocate(num, values)
+    guint num;
+    const GValue* values;
+{
+    GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
+}
 void 
 Init_gtk_widget()
 {
@@ -1041,36 +1021,6 @@ Init_gtk_widget()
     G_DEF_SETTERS(gWidget);
 
     /*
-     * events
-     */
-    rb_define_method(gWidget, "button_press_event", widget_event_button_press_event, 1);
-    rb_define_method(gWidget, "button_release_event", widget_event_button_release_event, 1);
-    rb_define_method(gWidget, "scroll_event", widget_event_scroll_event, 1);
-    rb_define_method(gWidget, "motion_notify_event", widget_event_motion_notify_event, 1);
-    rb_define_method(gWidget, "delete_event", widget_event_delete_event, 1);
-    rb_define_method(gWidget, "destroy_event", widget_event_destroy_event, 1);
-    rb_define_method(gWidget, "expose_event", widget_event_expose_event, 1);
-    rb_define_method(gWidget, "key_press_event", widget_event_key_press_event, 1);
-    rb_define_method(gWidget, "key_release_event", widget_event_key_release_event, 1);
-    rb_define_method(gWidget, "enter_notify_event", widget_event_enter_notify_event, 1);
-    rb_define_method(gWidget, "leave_notify_event", widget_event_leave_notify_event, 1);
-    rb_define_method(gWidget, "configure_event", widget_event_configure_event, 1);
-    rb_define_method(gWidget, "focus_in_event", widget_event_focus_in_event, 1);
-    rb_define_method(gWidget, "focus_out_event", widget_event_focus_out_event, 1);
-    rb_define_method(gWidget, "map_event", widget_event_map_event, 1);
-    rb_define_method(gWidget, "unmap_event", widget_event_unmap_event, 1);
-    rb_define_method(gWidget, "property_notify_event", widget_event_property_notify_event, 1);
-    rb_define_method(gWidget, "selection_clear_event", widget_event_selection_clear_event, 1);
-    rb_define_method(gWidget, "selection_request_event", widget_event_selection_request_event, 1);
-    rb_define_method(gWidget, "selection_notify_event", widget_event_selection_notify_event, 1);
-    rb_define_method(gWidget, "proximity_in_event", widget_event_proximity_in_event, 1);
-    rb_define_method(gWidget, "proximity_out_event", widget_event_proximity_out_event, 1);
-    rb_define_method(gWidget, "visibility_notify_event", widget_event_visibility_notify_event, 1);
-    rb_define_method(gWidget, "client_event", widget_event_client_event, 1);
-    rb_define_method(gWidget, "no_expose_event", widget_event_no_expose_event, 1);
-    rb_define_method(gWidget, "window_state_event", widget_event_window_state_event, 1);
-
-    /*
      * constants
      */
     /* GtkWidgetFlags */
@@ -1088,7 +1038,6 @@ Init_gtk_widget()
     rb_define_const(gWidget, "HAS_GRAB", INT2NUM(GTK_HAS_GRAB));
     rb_define_const(gWidget, "RC_STYLE", INT2NUM(GTK_RC_STYLE));
     rb_define_const(gWidget, "COMPOSITE_CHILD", INT2NUM(GTK_COMPOSITE_CHILD));
-    rb_define_const(gWidget, "NO_REPARENT", INT2NUM(GTK_NO_REPARENT));
     rb_define_const(gWidget, "APP_PAINTABLE", INT2NUM(GTK_APP_PAINTABLE));
     rb_define_const(gWidget, "RECEIVES_DEFAULT", INT2NUM(GTK_RECEIVES_DEFAULT));
     rb_define_const(gWidget, "DOUBLE_BUFFERED", INT2NUM(GTK_DOUBLE_BUFFERED));
@@ -1101,5 +1050,9 @@ Init_gtk_widget()
     rb_define_const(gWidget, "TEXT_DIR_NONE", INT2FIX(GTK_TEXT_DIR_NONE));
     rb_define_const(gWidget, "TEXT_DIR_LTR", INT2FIX(GTK_TEXT_DIR_LTR));
     rb_define_const(gWidget, "TEXT_DIR_RTL", INT2FIX(GTK_TEXT_DIR_RTL));
+
+    /* Special signals */
+    G_DEF_SIGNAL_FUNC(gWidget, "size-request", widget_signal_size_request);
+    G_DEF_SIGNAL_FUNC(gWidget, "size-allocate", widget_signal_size_allocate);
     
 }
