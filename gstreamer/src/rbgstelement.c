@@ -1094,6 +1094,107 @@ rb_gst_element_get_compatible_pad_template (VALUE self, VALUE pad)
     return pad2 != NULL ? RGST_PAD_TEMPLATE_NEW (pad2) : Qnil;
 }
 
+/*
+ * Method: seek(seek_type, offset)
+ * seek_type: the method to use for seeking (see Gst::EventSeek::Type).
+ * offset: the offset to seek to.
+ *
+ * Sends a seek event (Gst::EventSseek) to the element.
+ * 
+ * Returns: true if the event was handled.
+ */
+static VALUE
+rb_gst_element_seek (VALUE self, VALUE seek_type, VALUE offset)
+{
+    return
+        CBOOL2RVAL (gst_element_seek
+                    (RGST_ELEMENT (self),
+                     RVAL2GFLAGS (seek_type, GST_TYPE_SEEK_TYPE),
+                     NUM2ULL (offset)));
+}
+
+/*
+ * Method: locked_state?
+ *
+ * Checks if the state of an element is locked. If the state of an element is 
+ * locked, state changes of the parent don't affect the element. This way you 
+ * can leave currently unused elements inside bins. Just lock their state 
+ * before changing the state from Gst::Element::STATE_NULL.
+ *
+ * Returns: true if the element's state is locked.
+ */
+static VALUE
+rb_gst_element_is_locked_state (VALUE self)
+{
+    return CBOOL2RVAL (gst_element_is_locked_state (RGST_ELEMENT (self)));
+}
+
+/*
+ * Method: set_locked_state(state)
+ * state: whether to lock the element's state.
+ *
+ * Locks the state of an element, so state changes of the parent don't affect 
+ * this element anymore.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_set_locked_state (VALUE self, VALUE state)
+{
+    gst_element_set_locked_state (RGST_ELEMENT (self), RVAL2CBOOL (state));
+    return self;
+}
+
+/*
+ * Method: sync_state_with_parent
+ *
+ * Tries to change the state of the element to the same as its parent. If this 
+ * method returns false, the state of element is undefined.
+ *
+ * Returns: true if the element's state could be synced to the parent's state.
+ */
+static VALUE
+rb_gst_element_sync_state_with_parent (VALUE self)
+{
+    return
+        CBOOL2RVAL (gst_element_sync_state_with_parent (RGST_ELEMENT (self)));
+}
+
+/*
+ * Method: managing_bin
+ *
+ * Gets the managing bin (a pipeline or a thread, for example) of an element.
+ *
+ * Returns: a Gst::Bin, or nil on failure.
+ */
+static VALUE
+rb_gst_element_get_managing_bin (VALUE self)
+{
+    GstBin *bin;
+
+    bin = gst_element_get_managing_bin (RGST_ELEMENT (self));
+    return bin != NULL ? RGST_BIN_NEW (bin) : Qnil;
+}
+
+/*
+ * Method: no_more_pads
+ *
+ * Uses this method to signal that the element does not expect any more pads 
+ * to show up in the current pipeline. This method should be called whenever 
+ * pads have been added by the element itself. 
+ * Elements with Gst::Pad::SOMETIMES pad templates use this in combination 
+ * with autopluggers to figure out that the element is done initializing its 
+ * pads.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_no_more_pads (VALUE self)
+{
+    gst_element_no_more_pads (RGST_ELEMENT (self));
+    return self;
+}
+
 void
 Init_gst_element (void)
 {
@@ -1152,10 +1253,18 @@ Init_gst_element (void)
     rb_define_method (c, "indexable?", rb_gst_element_is_indexable, 0);
     rb_define_method (c, "query", rb_gst_element_query, -1);
     rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
+    rb_define_method (c, "seek", rb_gst_element_seek, 2);
     rb_define_method (c, "index", rb_gst_element_get_index, 0);
     rb_define_method (c, "set_index", rb_gst_element_set_index, 1);
     rb_define_method (c, "scheduler", rb_gst_element_get_scheduler, 0);
     rb_define_method (c, "set_scheduler", rb_gst_element_set_scheduler, 1);
+    rb_define_method (c, "locked_state?", rb_gst_element_is_locked_state, 0);
+    rb_define_method (c, "set_locked_state", rb_gst_element_set_locked_state,
+                      1);
+    rb_define_method (c, "sync_state_with_parent",
+                      rb_gst_element_sync_state_with_parent, 0);
+    rb_define_method (c, "managing_bin", rb_gst_element_get_managing_bin, 0);
+    rb_define_method (c, "no_more_pads", rb_gst_element_no_more_pads, 0);
 
     rb_define_method (c, "complex?", rb_gst_element_is_complex, 0);
     rb_define_method (c, "decoupled?", rb_gst_element_is_decoupled, 0);

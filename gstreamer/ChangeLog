@@ -1,3 +1,9 @@
+2004-08-03  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstelement.c (#seek, #locked_state?, #set_locked_state,
+	  #sync_state_with_parent, #managing_bin, #no_more_pads):
+	  Added.
+
 2004-08-02  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstelement.c (#get_static_pad, #get_request_pad, 
