@@ -4,7 +4,7 @@
   rbatkstate.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:33:48 $
+  $Date: 2004/10/17 23:06:07 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -19,16 +19,23 @@ rbatkstate_s_type_register(self, name)
     return GENUM2RVAL(atk_state_type_register(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
 }
 
-/* We don't need them
+/* We don't need this.
 G_CONST_RETURN gchar* atk_state_type_get_name
                                             (AtkStateType type);
-AtkStateType atk_state_type_for_name  (const gchar *name);
 */
+
+static VALUE
+rbatkstate_s_for_name(self, name)
+    VALUE self, name;
+{
+    return GENUM2RVAL(atk_state_type_for_name(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
+}
 
 void
 Init_atk_state()
 {
-    VALUE state = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "StateType", mAtk);
+    VALUE state = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
     rb_define_singleton_method(state, "type_register", rbatkstate_s_type_register, 1);
+    rb_define_singleton_method(state, "for_name", rbatkstate_s_for_name, 1);
     G_DEF_CONSTANTS(mAtk, ATK_TYPE_STATE_TYPE, "ATK_");
 }

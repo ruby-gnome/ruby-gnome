@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2004/02/19 17:16:54 $
+  $Date: 2004/10/17 23:06:07 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -168,6 +168,45 @@ rbatk_text_get_offset_at_point(self, x, y, coords)
                                                 RVAL2GENUM(coords, ATK_TYPE_COORD_TYPE)));
 }
 
+#ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+static VALUE
+rbatk_text_get_bounded_ranges(self, rect, coord_type, x_clip_type, y_clip_type)
+    VALUE self, rect, coord_type, x_clip_type, y_clip_type;
+{
+    AtkTextRange** ranges;
+    int i = 0;
+    VALUE ary;
+    ranges = atk_text_get_bounded_ranges(_SELF(self),
+                                         RVAL2BOXED(rect, ATK_TYPE_TEXT_RECTANGLE),
+                                         RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE),
+                                         RVAL2GENUM(x_clip_type, ATK_TYPE_TEXT_CLIP_TYPE),
+                                         RVAL2GENUM(y_clip_type, ATK_TYPE_TEXT_CLIP_TYPE));
+    ary = rb_ary_new();
+    while(ranges[i]){
+        rb_ary_push(ary, BOXED2RVAL(ranges[i], ATK_TYPE_TEXT_RANGE));
+        i++;
+    }
+    atk_text_free_ranges(ranges);
+    return ary;
+}
+
+static VALUE
+rbatk_text_get_range_extents(self, start_offset, end_offset, coord_type)
+    VALUE self, start_offset, end_offset, coord_type;
+{
+    AtkTextRectangle rect;
+    atk_text_get_range_extents(_SELF(self), NUM2INT(start_offset),
+                               NUM2INT(end_offset), 
+                               RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE),
+                               &rect);
+    return BOXED2RVAL(&rect, ATK_TYPE_TEXT_RECTANGLE);
+}
+
+/* Don't need this
+void        atk_text_free_ranges            (AtkTextRange **ranges);
+*/
+#endif
+
 static VALUE
 rbatk_text_get_n_selections(self)
     VALUE self;
@@ -264,6 +303,10 @@ Init_atk_text()
     rb_define_method(mText, "default_attributes", rbatk_text_get_default_attributes, 0);
     rb_define_method(mText, "character_count", rbatk_text_get_character_count, 0);
     rb_define_method(mText, "get_offset_at_point", rbatk_text_get_offset_at_point, 3);
+#ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+    rb_define_method(mText, "get_bounded_ranges", rbatk_text_get_bounded_ranges, 4);
+    rb_define_method(mText, "get_range_extents", rbatk_text_get_range_extents, 3);
+#endif
     rb_define_method(mText, "n_selections", rbatk_text_get_n_selections, 0);
     rb_define_method(mText, "get_selection", rbatk_text_get_selection, 1);
     rb_define_method(mText, "add_selection", rbatk_text_add_selection, 2);
@@ -277,4 +320,15 @@ Init_atk_text()
     attr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", mText);
     rb_define_singleton_method(attr, "type_register", rbatk_s_text_attribute_register, 1);
     G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
+    
+    /* AtkTextBoundary */
+#ifdef ATK_TYPE_TEXT_BOUNDARY
+    G_DEF_CLASS(ATK_TYPE_TEXT_BOUNDARY, "Boundary", mText);
+    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_BOUNDARY, "ATK_TEXT_");
+#endif    
+    /* AtkTextClipType */
+#ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+   G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", mText);
+    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
+#endif
 }

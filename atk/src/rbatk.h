@@ -4,7 +4,7 @@
   rbatk.h -
                                                                                 
   $Author: mutoh $
-  $Date: 2004/03/02 15:55:20 $
+  $Date: 2004/10/17 23:06:07 $
                                                                                 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -28,4 +28,10 @@
 #endif
                                                                                 
 extern void Init_atk_inits();
+extern GType atk_text_rectangle_get_type(void);
+extern GType atk_text_range_get_type(void);
+
 RUBY_ATK_VAR VALUE mAtk;
+
+#define ATK_TYPE_TEXT_RECTANGLE (atk_text_rectangle_get_type())
+#define ATK_TYPE_TEXT_RANGE (atk_text_range_get_type())

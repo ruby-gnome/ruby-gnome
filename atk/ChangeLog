@@ -1,3 +1,13 @@
+2004-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkrelation.c: Added Atk::Relation::Type.for_name.
+	* src/rbatkstate.c: Moved Atk::StateType to Atk::State. 
+	Added Atk::State.for_name.
+	* src/rbatkobject.c: Added Gtk::Atk::Object#localized_name, 
+	.for_name, #notify_state_change, 
+	* src/rbatkhyperlink.c: Added Atk::Hyperlink#selected_link?.
+	Fixed to use wrong macro for Atk::Hyperlink#inline?.
+
 2004-10-17  Vincent Isambart <isambart@netcourrier.com>
 
 	* extconf.rb: Changed add_uniq_to_objs to add_obj.

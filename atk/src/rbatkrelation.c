@@ -4,7 +4,7 @@
   rbatkrelation.c -
 
   $Author: mutoh $
-  $Date: 2003/12/08 16:32:09 $
+  $Date: 2004/10/17 23:06:07 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -22,8 +22,15 @@ rbatkrel_s_type_register(self, name)
 /* We don't need them
 G_CONST_RETURN gchar* atk_relation_type_get_name
                                             (AtkRelationType type);
-AtkRelationType atk_relation_type_for_name  (const gchar *name);
 */
+
+static VALUE
+rbatkrelation_s_for_name(self, name)
+    VALUE self, name;
+{
+    return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
+}
+
 
 static VALUE
 rbatkrel_initialize(self, targets, relationship)
@@ -71,12 +78,14 @@ void
 Init_atk_relation()
 {
     VALUE rel = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
+    VALUE type;
     rb_define_singleton_method(rel, "type_register", rbatkrel_s_type_register, 1);
     rb_define_method(rel, "initialize", rbatkrel_initialize, 2);
     rb_define_method(rel, "relation_type", rbatkrel_get_relation_type, 0);
     rb_define_method(rel, "target", rbatkrel_get_target, 0);
 
     /* AtkRelationType */
-    G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", rel);
+    type = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", rel);
+    rb_define_singleton_method(type, "for_name", rbatkrelation_s_for_name, 1);
     G_DEF_CONSTANTS(rel, ATK_TYPE_RELATION_TYPE, "ATK_");
 }
