@@ -2,7 +2,6 @@
 extconf.rb for Ruby/GConf extention library
 =end
 
-
 PACKAGE_NAME = "gnomevfs"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
