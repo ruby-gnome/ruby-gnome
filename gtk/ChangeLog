@@ -1,3 +1,9 @@
+2003-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolbar.c: Remove Gtk::Treebar#insert_item/widget/element, 
+	Gtk::Treebar#prepend_item/widget/element, Gtk::Treebar#append_item/widget/element.
+	Use Gtk::Treebar#insert, prepend, append instead.
+	
 2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: Remove dependence on id_relatives.

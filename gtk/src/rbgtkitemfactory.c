@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/02/15 14:09:14 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -109,13 +109,13 @@ menuitem_type_check(item_type)
 static void
 items_exec_callback_wrap(callback_data, action, widget)
     VALUE callback_data, action;
-    GtkWidget widget;
+    GtkWidget* widget;
 {
     VALUE iter, data;
     iter = RARRAY(action)->ptr[0];
     data = RARRAY(action)->ptr[1];
     if (!NIL_P(iter)) {
-        rb_funcall(iter, id_call, 1, data);
+        rb_funcall(iter, id_call, 2, data, GOBJ2RVAL(widget));
     }
 }
 
