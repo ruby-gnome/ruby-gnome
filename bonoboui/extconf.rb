@@ -1,5 +1,5 @@
 =begin
-extconf.rb for gnome extention library
+extconf.rb for bonoboui extention library
 =end
 
 require "mkmf"
