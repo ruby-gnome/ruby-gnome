@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/08/18 16:45:12 $
+  $Date: 2004/08/22 13:28:33 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -413,7 +413,6 @@ fill(self, pixel)
 void 
 Init_gdk_pixbuf2()
 {
-    VALUE gdkPixbufError;
     VALUE mGdk = rb_define_module("Gdk");
     VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
@@ -450,9 +449,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
 
     /* GdkPixbufError */
-    gdkPixbufError = G_DEF_CLASS(GDK_TYPE_PIXBUF_ERROR, "Error", gdkPixbuf);
-    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ERROR, "GDK_PIXBUF_");
-    G_DEF_ERROR(GDK_PIXBUF_ERROR, gdkPixbufError);
+    G_DEF_ERROR(GDK_PIXBUF_ERROR, "PixbufError", mGdk, rb_eRuntimeError, GDK_TYPE_PIXBUF_ERROR);
 
     /* GdkColorspace */
     G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", gdkPixbuf);
