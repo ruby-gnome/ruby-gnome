@@ -1,3 +1,18 @@
+2002-10-28  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/gnome-init-popt.rb: Removed.
+	* sample/gnome-program.rb: Added.
+	* src/rbgnome-program.c: Move popt features to src/rbpopt.c.
+	Enhance Gnome::Program.new()
+	Add Ruby/GNOME2 original methods Gnome::Program#args(), options(),
+	print_help(), and print_usage().
+	Add Gnome::ModuleInfo#==, ===, eql?, <=>, and hash.
+	* src/rbgnome.c: Move popt features to src/rbpopt.c.
+	* src/rbgnome.h: Add prototypes: rbgno_poptoption_raw_to_arary(),
+	rbgno_poptoption_array_to_obj(), rbgno_poptoption_arg_to_hash(),
+	and Init_gnome_popt().
+	* src/rbpopt.c: call Init_gnome_popt() in Init_gnome2().
+
 2002-10-27  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-app-helper.c: Add new methods

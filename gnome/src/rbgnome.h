@@ -23,6 +23,10 @@
 
 struct timeval rb_time_timeval(VALUE);
 
+VALUE rbgno_poptoption_raw_to_arary(struct poptOption *);
+VALUE rbgno_poptoption_array_to_obj(VALUE);
+void rbgno_poptoption_arg_to_hash(VALUE, struct poptOption *);
+
 void Init_gnome_program(VALUE);
 void Init_gnome_about(VALUE);
 void Init_gnome_app(VALUE);
@@ -53,5 +57,6 @@ void Init_gnome_stock_icons(VALUE);
 void Init_gnome_uidefs(VALUE);
 void Init_gnome_url(VALUE);
 void Init_gnome_util(VALUE);
+void Init_gnome_popt(VALUE);
 
 #endif /* ! _RBGNOME_H_included */
