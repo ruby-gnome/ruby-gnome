@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Author: isambart $
+  $Date: 2004/08/01 17:04:17 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -467,6 +467,7 @@ gdkwin_set_override_redirect(self, override_redirect)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 gdkwin_set_accept_focus(self, accept_focus)
     VALUE self, accept_focus;
@@ -474,6 +475,7 @@ gdkwin_set_accept_focus(self, accept_focus)
     gdk_window_set_accept_focus(_SELF(self), RTEST(accept_focus));
     return self;
 }
+#endif
 
 /* GdkXEvent is not implemented.
   void        gdk_window_add_filter           (GdkWindow *window,
