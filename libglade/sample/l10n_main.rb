@@ -7,10 +7,10 @@
 
   Required: Ruby-GetText-Package-0.6.1 or later.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project
+  Copyright (c) 2004,2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: l10n_main.rb,v 1.1 2004/07/11 15:09:28 mutoh Exp $
+  $Id: l10n_main.rb,v 1.2 2005/02/12 04:10:52 mutoh Exp $
 =end
 
 #
@@ -25,7 +25,7 @@ PROG_PATH = "l10n.glade"
 PROG_NAME = "l10n"
 LOCALE_DIR = "locale"
 
-class L10n
+class L10n < L10nGlade
   include GetText
   GetText.bindtextdomain(PROG_NAME, LOCALE_DIR)
 
@@ -41,6 +41,7 @@ class L10n
     Gtk.main_quit
   end
 end
-Gtk.init
+
+Gtk.init 
 L10n.new(PROG_PATH, nil, PROG_NAME, LOCALE_DIR)
 Gtk.main

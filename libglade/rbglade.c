@@ -4,10 +4,10 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2005/02/01 11:46:14 $
+  $Date: 2005/02/12 04:10:51 $
 
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project
 
   This program is free software.
   You can distribute/modify this program under the terms of
@@ -118,12 +118,14 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     glade_init();
 
-#ifdef HAVE_LIBINTL_H
+#ifdef HAVE_BINDTEXTDOMAIN
     if (localedir){
         bindtextdomain(domain, localedir);
     }
     if (domain){
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
         bind_textdomain_codeset(domain, "UTF-8");
+#endif
         textdomain(domain);
     }
 #endif
@@ -139,10 +141,6 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     if (xml) {
         G_INITIALIZE(self, xml);
-        /* Once constructed, this means a GladeXML object can never be freed. */
-/* TEST!!! Commented out once.  
-        rb_ary_push(instances, self);
-*/
         if (rb_block_given_p()){
             rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
             glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);

@@ -17,6 +17,9 @@ setup_win32(PACKAGE_NAME)
 
 have_header("libintl.h")
 
+have_func("bindtextdomain")
+have_func("bind_textdomain_codeset")
+
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
@@ -25,4 +28,4 @@ if /mswin32/ =~ RUBY_PLATFORM
   $libs.gsub!(/ z.lib /, " libz.lib ")
 end
 
-create_makefile("libglade2")  
+create_makefile(PACKAGE_NAME)  
