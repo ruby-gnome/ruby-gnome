@@ -103,6 +103,15 @@ module GLib
 
   module Log
     DOMAIN = "Ruby/GLib"
+    LEVELS = { 
+      LEVEL_ERROR => "ERROR",
+      LEVEL_CRITICAL => "CRITICAL",
+      LEVEL_WARNING => "WARNING",
+      LEVEL_MESSAGE => "MESSAGE",
+      LEVEL_INFO => "INFO",
+      LEVEL_DEBUG => "DEBUG"
+    }
+
     module_function
     def error(str)
       log(DOMAIN, LEVEL_ERROR, caller(1)[0] << ": " << str)
@@ -125,11 +134,7 @@ module GLib
         level = 127
       end
       GLib::Log.set_handler(domain, level) do |domain, level, message|
-        #  puts "domain = "#{domain}"
-        #  puts "laevel = #{level}"
-        puts "message = #{message}"
-        message =~ /assertion /
-        raise $'
+        raise "#{domain}-#{LEVELS[level]} **:#{message}"
       end
     end
   end
