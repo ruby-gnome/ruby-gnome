@@ -2,7 +2,7 @@
  *
  * rbgconf-client.c: GConf::Client class.
  *
- * Copyright (C) 2002 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
+ * Copyright (C) 2002,2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: pcppopper $
  *
- * $Date: 2002/12/01 02:25:41 $
+ * $Date: 2003/02/04 21:28:44 $
  *
  *****************************************************************************/
 

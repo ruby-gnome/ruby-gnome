@@ -2,7 +2,7 @@
  * 
  * rbgconf.h: Ruby GConf Module.
  * 
- * Copyright (C) 2002 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
+ * Copyright (C) 2002,2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@
  * 
  * $Author: pcppopper $
  * 
- * $Date: 2002/11/18 17:44:55 $
+ * $Date: 2003/02/04 21:28:49 $
  * 
  *****************************************************************************/
 
