@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.18 2005/02/15 06:12:56 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.19 2005/02/15 07:29:36 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -60,7 +60,6 @@ citem_intialize(self, parent, hash)
     group = GNOME_CANVAS_GROUP(RVAL2GOBJ(parent));
     item = GNOME_CANVAS_ITEM(g_object_new(RVAL2GTYPE(self), NULL));
     RBGTK_INITIALIZE(self, item);
-
     g_object_ref(group);
     g_object_freeze_notify(G_OBJECT(item));
 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.14 2005/02/15 06:45:18 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.15 2005/02/15 07:29:36 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -39,7 +39,6 @@ canvas_initialize(argc, argv, self)
     else
         canvas = gnome_canvas_new();
 
-    g_object_ref(canvas);
     RBGTK_INITIALIZE(self, canvas);
 
     return Qnil;

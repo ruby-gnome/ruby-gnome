@@ -1,6 +1,5 @@
 2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgnome-canvas.c: Fix a warning when GCed.
 	* README, COPYING.LIB src/*.c: 
 	Replace "GNU LIBRARY GENERAL PUBLIC LICENSE" to 
 	"GNU LESSER GENERAL PUBLIC LICENSE".
