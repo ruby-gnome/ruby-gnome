@@ -5,6 +5,7 @@
 	#internal_paint_info, #set_user_data, #shape_combine_region,
 	#user_data, #set_geometry_hints.
 	Gdk::Window.process_all_updates, .set_debug_updates,
+	Rename Gdk::Window.foreign to .foreign_new.
 
 2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
