@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-app.c,v 1.4 2002/10/15 14:55:09 tkubo Exp $ */
+/* based on libgnomeui/gnome-app.h */
 
-/* Gnome::App widget for Ruby/Gnome
+/* Gnome::App widget for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -317,8 +319,10 @@ Init_gnome_app(mGnome)
     rb_define_method(gnoApp, "add_docked", app_add_docked, 7);
     rb_define_method(gnoApp, "add_dock_item", app_add_dock_item, 5);
     rb_define_method(gnoApp, "enable_layout_config", app_enable_layout_config, 1);
-    rb_define_method(gnoApp, "get_dock", app_get_dock, 0);
+    rb_define_method(gnoApp, "dock", app_get_dock, 0);
     rb_define_method(gnoApp, "get_dock_item_by_name", app_get_dock_item_by_name, 1);
 
     Init_gnome_app_helper(mGnome, gnoApp);
+
+    G_DEF_SETTERS(gnoApp);
 }

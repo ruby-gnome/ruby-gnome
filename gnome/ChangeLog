@@ -1,3 +1,11 @@
+2002-10-15  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-app-helper.c: Add uiinfo_include(),
+	uiinfo_menu_new_item(), uiinfo_menu_new_subtree(), 
+	uiinfo_menu_*_item() and uiinfo_menu_*_tree().
+	* src/rbgnome-app.c: use G_DEF_SETTERS().
+	* sample/gnome-app-helper.rb: new sample file using gnome-app-helper.
+
 2002-10-14  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-href.c: Delete href_set_label() and href_get_label().
