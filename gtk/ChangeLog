@@ -1,3 +1,16 @@
+2002-10-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeviewcolumn.c: Gtk::TreeViewColumn.new - Accept Symbol for properties.
+	* src/rbgtktreeselection.c: Add Gtk::Selection#selected_each.
+	* src/rbgtktreemodel.c: Remove Gtk::TreeModel#iter_next? and Gtk::TreeModel#iter_children. 
+	Instead of these methods, I implemented Gtk::TreeModel#get_children.
+	Fix return value of Gtk::TreeModel#iter_n_children.
+	* src/rbgdkevent.c: Fix class name of Gdk::EventSelection from Gdk::Gdkeventselection.
+	* src/rbgtkfontselection.c, src/rbgtkfontselectiondialog.c, src/rbgtkmain.c: Change 
+	G_CONST_RETURN to const.
+	* extconf.rb: Re-add -Wall option to CFLAGS when compiler is gcc
+	(I've forgotten it!).
+
 2002-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeselection.c: Add a file.

@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: sakai $
-  $Date: 2002/10/05 07:42:46 $
+  $Author: mutoh $
+  $Date: 2002/10/08 18:53:21 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -22,6 +22,7 @@ tvc_initialize(argc, argv, self)
 {
     int i;
     GtkTreeViewColumn* tvc;
+    gchar* name;
 
     if (argc > 1){
         tvc = gtk_tree_view_column_new_with_attributes(RVAL2CSTR(argv[0]), 
@@ -34,8 +35,13 @@ tvc_initialize(argc, argv, self)
 
     if (argc > 2){
         for (i = 2; i < argc; i++) {
+            if (SYMBOL_P(argv[i])) {
+                name = rb_id2name(SYM2ID(argv[i]));
+            } else {
+                name = RVAL2CSTR(argv[i]);
+            }
             gtk_tree_view_column_add_attribute(_SELF(self), RVAL2CELLRENDERER(argv[1]), 
-                                               RVAL2CSTR(argv[i]), i - 2);
+                                               name, i - 2);
         }       
     }
 
@@ -123,7 +129,7 @@ static VALUE
 tvc_get_spacing(self)
     VALUE self;
 {
-    return gtk_tree_view_column_get_spacing(_SELF(self));
+    return INT2NUM(gtk_tree_view_column_get_spacing(_SELF(self)));
 }
 
 static VALUE
@@ -220,7 +226,8 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "add_attribute", tvc_add_attribute, 3);
     rb_define_method(tvc, "clear_attributes", tvc_clear_attributes, 1);
     rb_define_method(tvc, "set_spacing", tvc_set_spacing, 1);
-    rb_define_method(tvc, "spacing=", tvc_spacing_equal, 1);
+/*    rb_define_method(tvc, "spacing=", tvc_spacing_equal, 1);
+ */
     rb_define_method(tvc, "spacing", tvc_get_spacing, 0);
     rb_define_method(tvc, "clicked", tvc_clicked, 0);
     rb_define_method(tvc, "set_sort_column_id", tvc_set_sort_column_id, 1);
@@ -234,4 +241,6 @@ Init_gtk_treeviewcolumn()
     rb_define_const(tvc, "GROW_ONLY", GTK_TREE_VIEW_COLUMN_GROW_ONLY); 
     rb_define_const(tvc, "AUTOSIZE", GTK_TREE_VIEW_COLUMN_AUTOSIZE); 
     rb_define_const(tvc, "FIXED", GTK_TREE_VIEW_COLUMN_FIXED); 
+
+    rb_funcall(mGLib, rb_intern("__add_one_arg_setter"), 1, tvc);
 }

@@ -73,6 +73,14 @@ else
   STDOUT.print "no\n"
 end
 
+STDOUT.print("checking for GCC... ")
+if /gcc/ =~ Config::CONFIG['CC']
+  STDOUT.print "yes\n"
+  $CFLAGS += ' -Wall' 
+else
+  STDOUT.print "no\n"
+end
+
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
 have_func('_gtk_accel_group_attach')

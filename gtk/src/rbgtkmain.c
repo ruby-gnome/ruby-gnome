@@ -4,7 +4,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/08 18:53:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -156,7 +156,7 @@ static VALUE
 gtk_m_signal_name(self, signal_id)
     VALUE self, signal_id;
 {
-    G_CONST_RETURN gchar* name = gtk_signal_name(NUM2INT(signal_id));
+    const gchar* name = gtk_signal_name(NUM2INT(signal_id));
     return name ? CSTR2RVAL(name) : Qnil;
 }
 

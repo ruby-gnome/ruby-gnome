@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2002/10/06 16:43:44 $
+  $Date: 2002/10/08 18:53:21 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -14,7 +14,9 @@
 #define _SELF(s) (GTK_TREE_SELECTION(RVAL2GOBJ(s)))
 #define RVAL2TREEMODEL(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
+#define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2ITR(i) ((GtkTreeIter*)(RVAL2BOXED(i, GTK_TYPE_TREE_ITER)))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 treeselection_set_mode(self, type)
@@ -57,12 +59,28 @@ treeselection_get_selected(self, iter)
 }
 */
 
-/*
-void        gtk_tree_selection_selected_foreach
-                                            (GtkTreeSelection *selection,
-                                             GtkTreeSelectionForeachFunc func,
-                                             gpointer data);
-*/
+static void
+treeselection_foreach_func(model, path, iter, data)
+    GtkTreeModel* model;
+    GtkTreePath* path;
+    GtkTreeIter* iter;
+    gpointer data;
+{
+    rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(model), 
+               TREEPATH2RVAL(path), ITR2RVAL(iter));
+}
+
+static VALUE
+treeselection_selected_foreach(self)
+    VALUE self;
+{
+    VALUE func = rb_f_lambda();
+    G_RELATIVE(self, func);
+    gtk_tree_selection_selected_foreach(_SELF(self), 
+                                        (GtkTreeSelectionForeachFunc)treeselection_foreach_func, 
+                                        (gpointer)func);
+    return self;
+}
 
 static VALUE
 treeselection_select_path(self, path)
@@ -144,6 +162,7 @@ Init_gtk_treeselection()
     rb_define_method(gTs, "mode", treeselection_get_mode, 0);
     rb_define_method(gTs, "tree_view", treeselection_get_tree_view, 0);
 /*    rb_define_method(gTs, "get_selected", treeselection_get_selected, 1);*/
+    rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);
     rb_define_method(gTs, "select_path", treeselection_select_path, 1);
     rb_define_method(gTs, "unselect_path", treeselection_unselect_path, 1);
     rb_define_method(gTs, "path_selected?", treeselection_path_is_selected, 1);

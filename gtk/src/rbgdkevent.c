@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/09/19 18:47:37 $
+  $Date: 2002/10/08 18:53:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -576,7 +576,7 @@ Init_gtk_gdk_event()
     gdkevents[GDK_MAP]           = gdkEvent; /* FIXME */
     gdkevents[GDK_UNMAP]         = gdkEvent; /* FIXME */
     gdkevents[GDK_PROPERTY_NOTIFY]= rb_define_class_under(mGdk, "EventProperty", gdkEventAny);
-    gdkevents[GDK_SELECTION_CLEAR]= rb_define_class_under(mGdk, "Gdkeventselection", gdkEventAny);
+    gdkevents[GDK_SELECTION_CLEAR]= rb_define_class_under(mGdk, "EventSelection", gdkEventAny);
     gdkevents[GDK_SELECTION_REQUEST]= gdkevents[GDK_SELECTION_CLEAR];
     gdkevents[GDK_SELECTION_NOTIFY] = gdkevents[GDK_SELECTION_CLEAR];
     gdkevents[GDK_PROXIMITY_IN]  = rb_define_class_under(mGdk, "EventProximity", gdkEventAny);

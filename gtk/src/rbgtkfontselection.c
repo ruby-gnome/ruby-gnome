@@ -4,7 +4,7 @@
   rbgtkfontselection.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/10/08 18:53:21 $
 
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 **********************************************************/
@@ -53,7 +53,7 @@ static VALUE
 fs_get_preview_text(self)
     VALUE self;
 {
-    G_CONST_RETURN gchar* text = gtk_font_selection_get_preview_text(
+    const gchar* text = gtk_font_selection_get_preview_text(
         GTK_FONT_SELECTION(RVAL2GOBJ(self)));
 
     return text ? CSTR2RVAL(text) : Qnil;
