@@ -1,3 +1,8 @@
+2003-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Fix a bug of Gdk::Window#pointer 
+	* src/rbgtkconst.c: Update version number.
+
 2003-11-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Fix a bug for Gtk::Widget#style_get_property.

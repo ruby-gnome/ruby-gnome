@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/11/03 15:17:18 $
+  $Date: 2003/11/08 19:18:24 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -688,7 +688,7 @@ gdkwin_get_pointer(self)
     int x, y;
     GdkModifierType state;
     gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), GENUM2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
+    return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
 
 }
 
