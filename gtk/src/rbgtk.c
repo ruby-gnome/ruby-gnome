@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: silicio $
-  $Date: 2005/03/02 12:06:36 $
+  $Author: mutoh $
+  $Date: 2005/03/11 17:02:30 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -145,7 +145,7 @@ Init_gtk_gtk()
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
 
 #ifdef USE_POLL_FUNC
-    g_main_set_poll_func(rbgtk_poll);
+    g_main_context_set_poll_func(NULL, (GPollFunc)rbgtk_poll);
 #else
     rb_set_end_proc(idle_remove, UINT2NUM(gtk_idle_add((GtkFunction)idle, 0)));
 #endif

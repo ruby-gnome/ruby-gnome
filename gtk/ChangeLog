@@ -1,5 +1,7 @@
 2005-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtk.c: Use g_main_context_set_poll_func instead of
+	g_main_set_poll_func.
 	* src/rbgtkicontheme.c: Fix a memory leak of Gtk::IconTheme#icons. 
 
 2005-03-12  Hiroyuki Ikezoe <poincare@ikezoe.net>
