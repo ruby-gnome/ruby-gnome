@@ -1,3 +1,9 @@
+2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/README: Revised.
+	* sample/hello-applet.server, clock-applet.server:
+	Change category to "Ruby/PanelApplet Samples".
+
 2004-06-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/hello-applet.[server|rb], clock-applet.server, README: Added.

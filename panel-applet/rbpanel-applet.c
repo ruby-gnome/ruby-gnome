@@ -4,9 +4,9 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2004/06/06 17:23:04 $
+  $Date: 2004/08/01 04:25:34 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
 #include "rbgobject.h"

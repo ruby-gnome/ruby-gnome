@@ -20,7 +20,7 @@
         </oaf_attribute>
         <oaf_attribute name="name" type="string" value="Hello World Applet"/>
         <oaf_attribute name="description" type="string" value="an sample applet for Ruby-GNOME2"/>
-        <oaf_attribute name="panel:category" type="string" value="Amusements"/>
+        <oaf_attribute name="panel:category" type="string" value="Ruby/PanelApplet Samples"/>
         <oaf_attribute name="panel:icon" type="string" value="gnome-applets.png"/>
 </oaf_server>
 </oaf_info>
