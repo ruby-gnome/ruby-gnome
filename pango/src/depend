@@ -1,0 +1,2 @@
+install:
+	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbpango.h $(sitearchdir)$(target_prefix)

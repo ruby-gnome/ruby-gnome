@@ -1,3 +1,7 @@
+2003-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/depend: Added.
+
 2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoattribute.c: Remove debug code. 
