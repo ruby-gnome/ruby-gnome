@@ -38,6 +38,7 @@ Ruby-GNOME2-0.3 (2003-02-09)
 
   * Ruby/Libart
     - Added Art::Affine, Art::Bpath, Art::Canvas, Art::SVP, Art::Vpath [Tom Payne]
+    - Added samples(sample/rose.rb, testlibart2.rb). [Tom Payne]
 
   * Ruby/GConf
     - None.
