@@ -51,7 +51,7 @@ VALUE cGdaCommand;
  * Class method: new(text, type, options)
  * text: text of the command.
  * type: type of the command (see Gda::Command::Type).
- * options: options for the command (see Gda::Command::Option).
+ * options: options for the command (see Gda::Command::Options).
  *
  * Creates a new Gda::Command from the parameters.  If there are conflicting
  * options, this will set options to Gda::Command::DEFAULT_OPTION.
@@ -126,7 +126,7 @@ static VALUE rb_gda_command_get_command_type(self)
 
 /*
  * Method: set_options(options)
- * options: see Gda::Command::Option.
+ * options: see Gda::Command::Options.
  *
  * Sets command options.
  *
@@ -143,7 +143,7 @@ static VALUE rb_gda_command_set_options(self, options)
 /*
  * Method: options
  *
- * Returns: options of the command (see Gda::Command::Option).
+ * Returns: options of the command (see Gda::Command::Options).
  */
 static VALUE rb_gda_command_get_options(self)
     VALUE self;

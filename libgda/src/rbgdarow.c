@@ -36,7 +36,7 @@ VALUE cGdaRow;
  *
  * If you don't want to specify rows, you can also build a row like this:
  *
- *   Gda::Row.new(model, 5)      # the model will hold 5 values 
+ * 	Gda::Row.new(model, 5)      # the model will hold 5 values 
  *
  * Returns: a newly created Gda::Row object.
  */

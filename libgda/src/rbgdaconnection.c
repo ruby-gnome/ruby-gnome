@@ -127,7 +127,7 @@ static VALUE rb_gda_connection_get_server_version(self)
 /*
  * Method: options
  *
- * Returns: the Gda::Connection::Option used to open this connection.
+ * Returns: the Gda::Connection::Options used to open this connection.
  */
 static VALUE rb_gda_connection_get_options(self)
     VALUE self;
