@@ -1,3 +1,9 @@
+2003-08-14  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgstxml.c, tests/tc_xml.rb: New files.
+	* src/rbgst.c: Initializes Gst::XML.
+	* src/rbgst.h: Added macros for Gst::XML.
+
 2003-08-10  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgstautoplug.c, src/rbgstelement.c, src/rbgsteventseek.c,
