@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/07/01 14:45:18 $
+  $Date: 2003/07/02 17:53:44 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -98,10 +98,12 @@ gdkscreen_get_setting(self,name)
       return Qnil;
 }
 
+#endif
 
 void 
 Init_gtk_gdk_screen()
 {
+#if GTK_MINOR_VERSION >= 2
     VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 
     rb_define_method(gdkScreen, "initialize", gdkscreen_initialize, 0);
@@ -116,13 +118,5 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "monitor_at_point", gdkscreen_monitor_at_point, 2);
     rb_define_method(gdkScreen, "monitor_at_window", gdkscreen_monitor_at_window, 1);
     rb_define_method(gdkScreen, "setting", gdkscreen_get_setting, 1);
-}
-#else
-
-void 
-Init_gtk_gdk_screen()
-{
-}
-
 #endif
-
+}

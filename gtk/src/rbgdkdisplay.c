@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/07/01 14:45:18 $
+  $Date: 2003/07/02 17:53:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -143,10 +143,12 @@ gdkdisplay_get_window_at_pointer(self)
     
     return rb_ary_new3(3, GOBJ2RVAL(window), INT2NUM(x), INT2NUM(y));
 }
+#endif
 
 void 
 Init_gtk_gdk_display()
 {
+#if GTK_MINOR_VERSION >= 2
     VALUE gdkDisplay = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 
     rb_define_method(gdkDisplay, "initialize", gdkdisplay_initialize, -1);
@@ -169,13 +171,5 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "devices", gdkdisplay_list_devices, 0);
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
-}
-#else
-
-void 
-Init_gtk_gdk_display()
-{
-}
-
 #endif
-
+}
