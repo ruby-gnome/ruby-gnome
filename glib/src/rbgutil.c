@@ -3,17 +3,17 @@
 
   rbgutil.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:10 $
+  $Author: sakai $
+  $Date: 2003/02/14 17:54:40 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"
 
-ID id_module_eval;
-ID id_add_one_arg_setter;
+ID rbgutil_id_module_eval;
 
+static ID id_add_one_arg_setter;
 static ID id_set_property;
 static ID id_to_a;
 
@@ -103,7 +103,14 @@ rbgutil_gslist2ary_boxed(list, gtype)
 }
 
 VALUE
-sym_g2r_func(from)
+rbgutil_def_setters(klass)
+    VALUE klass;
+{
+    return rb_funcall(mGLib, id_add_one_arg_setter, 1, klass);
+}
+
+VALUE
+rbgutil_sym_g2r_func(from)
     const GValue *from;
 {
     const gchar *str = g_value_get_string(from);
@@ -113,8 +120,20 @@ sym_g2r_func(from)
 void
 Init_gutil()
 {
+    rbgutil_id_module_eval = rb_intern("module_eval");
     id_set_property = rb_intern("set_property");
     id_to_a = rb_intern("to_a");
-    id_module_eval = rb_intern("module_eval");
     id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
+
+    rb_eval_string(
+        "module GLib\n"
+        "  def self.__add_one_arg_setter(klass)\n"
+        "    ary = klass.instance_methods\n"
+        "    ary.each do |m|\n"
+        "      if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and klass.instance_method(m).arity == 1\n"
+        "        klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
+        "      end\n"
+        "    end\n"
+        "  end\n"
+        "end\n");
 }

@@ -1,5 +1,7 @@
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbglib.c, src/rbgutil.[ch]: code cleanups
+
 	* src/rbgobj_boxed.c: make some functions to be static.
 
 	* src/rbgobj_boxed.c: implement GLib::Boxed#{copy,clone}
