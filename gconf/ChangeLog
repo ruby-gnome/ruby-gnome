@@ -1,7 +1,7 @@
 2004-03-21  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
 
-	* src/rbgconf-entry.c: Fix a segfault of GConf::Client#notify_add 
-	when GConf::Client#unset is called.
+	* src/rbgconf-entry.c, rbgconf-client.c: Fix a segfault of 
+	GConf::Client#notify_add when GConf::Client#unset is called.
 
 2004-03-14  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
 
@@ -77,7 +77,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/03/21 14:08:41 $ macros.
+	and $Date: 2004/03/21 14:10:17 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
