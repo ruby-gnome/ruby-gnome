@@ -2,7 +2,7 @@ require 'gtk2'
 Gtk.init
 
 class MyButton < Gtk::Button
-  type_register("MyButton")
+  type_register
 
   def initialize(label = nil)
     # XXX: 
