@@ -1,6 +1,7 @@
 2004-03-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* NEWS: Updated.
+	* extconf.rb: Remove debug code.
 
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 

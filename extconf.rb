@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.9 2004/03/05 18:38:45 mutoh Exp $
+  $Id: extconf.rb,v 1.10 2004/03/07 15:19:34 mutoh Exp $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
 =end
@@ -33,7 +33,6 @@ if subdirs.size == 0
   subdirs -= priorlibs
   subdirs = priorlibs + subdirs #Change the order
 end
-p subdirs
 
 #
 # generate sub-directory Makefiles
