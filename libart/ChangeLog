@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2005-01-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart_affine.c: Works for gcc-4.0(Make artAffine as 
