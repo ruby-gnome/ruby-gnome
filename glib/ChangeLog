@@ -1,3 +1,7 @@
+2004-10-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_convert.c: Implemented GLib::ConvertError. 
+
 2004-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf-gnome2.rb: Added PKGConfig.modversion, .check_version?.

@@ -4,7 +4,7 @@
   rbglib_convert.c -
 
   $Author: mutoh $
-  $Date: 2004/04/14 16:07:14 $
+  $Date: 2004/10/19 16:32:14 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
@@ -177,6 +177,15 @@ rbglib_m_utf8_validate(self, str)
 void
 Init_glib_convert()
 {
+    VALUE cCharError = G_DEF_ERROR2(G_CONVERT_ERROR, "ConvertError", mGLib, rb_eIOError);
+
+    rb_define_const(cCharError, "NO_CONVERSION", INT2NUM(G_CONVERT_ERROR_NO_CONVERSION));
+    rb_define_const(cCharError, "ILLEGAL_SEQUENCE", INT2NUM(G_CONVERT_ERROR_ILLEGAL_SEQUENCE));
+    rb_define_const(cCharError, "FAILED", INT2NUM(G_CONVERT_ERROR_FAILED));
+    rb_define_const(cCharError, "PARTIAL_INPUT", INT2NUM(G_CONVERT_ERROR_PARTIAL_INPUT));
+    rb_define_const(cCharError, "BAD_URI", INT2NUM(G_CONVERT_ERROR_BAD_URI));
+    rb_define_const(cCharError, "NOT_ABSOLUTE_PATH", INT2NUM(G_CONVERT_ERROR_NOT_ABSOLUTE_PATH));
+
     /* glib/gunicode.h */
     rb_define_module_function(mGLib, "charset", rbglib_m_charset, 0);
     rb_define_module_function(mGLib, "utf8_validate", rbglib_m_utf8_validate, 1);
