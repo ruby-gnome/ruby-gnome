@@ -118,7 +118,7 @@ static VALUE constTsOffset = INT2FIX(GST_EVENT_TS_OFFSET);
 static VALUE constInterrupt = INT2FIX(GST_EVENT_INTERRUPT);
 
 /*
- *  Method: new(anIntegerType) -> anEvent
+ *  Class method: new(anIntegerType) -> anEvent
  *
  *  Allocate a new event of the given type.
  *
@@ -144,34 +144,64 @@ static VALUE rb_gst_event_new(self, rtype)
 {
     int type = FIX2INT(rtype);
 
-    if ( type == GST_EVENT_UNKNOWN
-      || type == GST_EVENT_EOS
-      || type == GST_EVENT_FLUSH
-      || type == GST_EVENT_EMPTY
-      || type == GST_EVENT_DISCONTINUOUS
-      || type == GST_EVENT_NEW_MEDIA
-      || type == GST_EVENT_QOS
-      || type == GST_EVENT_SEEK
-      || type == GST_EVENT_SEEK_SEGMENT
-      || type == GST_EVENT_SEGMENT_DONE
-      || type == GST_EVENT_SIZE
-      || type == GST_EVENT_RATE
-      || type == GST_EVENT_FILLER
-      || type == GST_EVENT_TS_OFFSET
-      || type == GST_EVENT_INTERRUPT ) 
+    if ( type != GST_EVENT_UNKNOWN
+      && type != GST_EVENT_EOS
+      && type != GST_EVENT_FLUSH
+      && type != GST_EVENT_EMPTY
+      && type != GST_EVENT_DISCONTINUOUS
+      && type != GST_EVENT_NEW_MEDIA
+      && type != GST_EVENT_QOS
+      && type != GST_EVENT_SEEK
+      && type != GST_EVENT_SEEK_SEGMENT
+      && type != GST_EVENT_SEGMENT_DONE
+      && type != GST_EVENT_SIZE
+      && type != GST_EVENT_RATE
+      && type != GST_EVENT_FILLER
+      && type != GST_EVENT_TS_OFFSET
+      && type != GST_EVENT_INTERRUPT )
     {
-        GstEvent *event = gst_event_new(type);
-        return event != NULL
-            ? RGST_EVENT_NEW(event)
-            : Qnil;
+        rb_raise(rb_eArgError, "Invalid type");
     }
-    rb_raise(rb_eArgError, "Invalid type");
+    else {
+        GstEvent *event = gst_event_new(type);
+        if (event != NULL) {
+            G_INITIALIZE(self, event);
+        }
+    }
     return Qnil;
+}
+
+/*
+ *  Method: src -> anObject
+ *
+ *  Gets the source Gst::Object that generated this event.
+ */
+static VALUE rb_gst_event_src(self)
+    VALUE self;
+{
+    GstObject *object = GST_EVENT_SRC(RGST_EVENT(self));
+    return object != NULL
+        ? RGST_OBJECT_NEW(object)
+        : Qnil;
+}
+
+/*
+ *  Method: timestamp -> aFixnum
+ *
+ *  Gets the timestamp of this event.
+ */
+static VALUE rb_gst_event_timestamp(self)
+    VALUE self;
+{
+    return INT2NUM(GST_EVENT_TIMESTAMP(RGST_EVENT(self)));
 }
 
 void Init_gst_event(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_EVENT, "Event", mGst);
+    
     rb_define_method(c, "initialize", rb_gst_event_new, 1);
+    rb_define_method(c, "src",        rb_gst_event_src, 0);
+    rb_define_method(c, "timestamp",  rb_gst_event_timestamp, 0);
 
     rb_define_const(c, "UNKONWN",       constUnknown);
     rb_define_const(c, "EOS",           constEos);
