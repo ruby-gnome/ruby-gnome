@@ -1,3 +1,14 @@
+2003-05-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolbar.c: Fixed incorrect calls of G_RELATIVE. 
+	* src/rbgtkwindow.c: Add Gtk::Window#set_frame_dimensions,
+	#set_has_frame, #set_mnemonic_modifier, #add_mnemonic, #remove_mnemonic,
+	#mnemonic_activate, #begin_resize_drag, #move_drag, #has_frame?
+	#icon_list, #mnemonic_modifier, #parse_geometry, #reshow_with_initial_size
+	#set_icon_list.
+	.toplevels, .default_icon_list, .set_default_icon_list
+	* src/rbgtkwidget.c: Add Gtk::Widget#flags, #set_flags, #unset_flags.
+
 2003-05-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbar.c: Fixed an incorrect call of G_RELATIVE. 

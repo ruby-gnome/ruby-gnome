@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/05/22 17:06:05 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -96,7 +96,6 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
                                   GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
                                   (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
                                   NUM2INT(geom_mask));
-
     return self;
 }
 
@@ -123,21 +122,37 @@ gwin_set_transient_for(self, parent)
     return self;
 }
 
-/*
-void        gtk_window_set_destroy_with_parent
-                                            (GtkWindow *window,
-                                             gboolean setting);
-GList*      gtk_window_list_toplevels       (void);
-void        gtk_window_add_mnemonic         (GtkWindow *window,
-                                             guint keyval,
-                                             GtkWidget *target);
-void        gtk_window_remove_mnemonic      (GtkWindow *window,
-                                             guint keyval,
-                                             GtkWidget *target);
-gboolean    gtk_window_mnemonic_activate    (GtkWindow *window,
-                                             guint keyval,
-                                             GdkModifierType modifier);
-*/
+static VALUE
+gwin_s_list_toplevels(self)
+    VALUE self;
+{
+    return GLIST2ARY(gtk_window_list_toplevels());
+}
+
+static VALUE
+gwin_add_mnemonic(self, keyval, target)
+    VALUE self, keyval, target;
+{
+    gtk_window_add_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
+    return self;
+}
+
+static VALUE
+gwin_remove_mnemonic(self, keyval, target)
+    VALUE self, keyval, target;
+{
+    gtk_window_remove_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
+    return self;
+}
+
+static VALUE
+gwin_mnemonic_activate(self, keyval, modifier)
+    VALUE self, keyval, modifier;
+{
+    return gtk_window_mnemonic_activate(_SELF(self), 
+                                        NUM2INT(keyval), 
+                                        NUM2INT(modifier)) ? Qtrue : Qfalse;
+}
 
 static VALUE
 gwin_get_focus(self)
@@ -151,7 +166,7 @@ gwin_set_focus(self, win)
     VALUE self, win;
 {
     gtk_window_set_focus(_SELF(self), 
-                         GTK_WIDGET(RVAL2GOBJ(win)));
+                         NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -160,7 +175,7 @@ gwin_set_default(self, win)
     VALUE self, win;
 {
     gtk_window_set_default(_SELF(self), 
-                           GTK_WIDGET(RVAL2GOBJ(win)));
+                           NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -220,19 +235,25 @@ gwin_unmaximize(self)
     return self;
 }
 
-/*
-void        gtk_window_begin_resize_drag    (GtkWindow *window,
-                                             GdkWindowEdge edge,
-                                             gint button,
-                                             gint root_x,
-                                             gint root_y,
-                                             guint32 timestamp);
-void        gtk_window_begin_move_drag      (GtkWindow *window,
-                                             gint button,
-                                             gint root_x,
-                                             gint root_y,
-                                             guint32 timestamp);
-*/
+static VALUE
+gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
+    VALUE self, edge, button, root_x, root_y, timestamp;
+{
+    gtk_window_begin_resize_drag(_SELF(self), NUM2INT(edge),
+                                 NUM2INT(button), NUM2INT(root_x),
+                                 NUM2INT(root_y), NUM2UINT(timestamp));
+    return self;
+}
+
+static VALUE
+gwin_begin_move_drag(self, button, root_x, root_y, timestamp)
+    VALUE self, button, root_x, root_y, timestamp;
+{
+    gtk_window_begin_move_drag(_SELF(self), 
+                               NUM2INT(button), NUM2INT(root_x),
+                               NUM2INT(root_y), NUM2UINT(timestamp));
+    return self;
+}
 
 static VALUE
 gwin_set_decorated(self, setting)
@@ -242,18 +263,31 @@ gwin_set_decorated(self, setting)
     return self;
 }
 
-/*
-void        gtk_window_set_frame_dimensions (GtkWindow *window,
-                                             gint left,
-                                             gint top,
-                                             gint right,
-                                             gint bottom);
-void        gtk_window_set_has_frame        (GtkWindow *window,
-                                             gboolean setting);
-void        gtk_window_set_mnemonic_modifier
-                                            (GtkWindow *window,
-                                             GdkModifierType modifier);
-*/
+static VALUE
+gwin_set_frame_dimensions(self, left, top, right, bottom)
+    VALUE self, left, top, right, bottom;
+{
+    gtk_window_set_frame_dimensions(_SELF(self), NUM2INT(left),
+                                    NUM2INT(top), NUM2INT(right),
+                                    NUM2INT(bottom));
+    return self;
+}
+
+static VALUE
+gwin_set_has_frame(self, setting)
+    VALUE self, setting;
+{
+    gtk_window_set_has_frame(_SELF(self), RTEST(setting));
+    return self;
+}
+
+static VALUE
+gwin_set_mnemonic_modifier(self, modifier)
+    VALUE self, modifier;
+{
+    gtk_window_set_mnemonic_modifier(_SELF(self), FIX2INT(modifier));
+    return self;
+}
 
 static VALUE
 gwin_set_role(self, role)
@@ -278,10 +312,12 @@ gwin_get_decorated(self)
     return gtk_window_get_decorated(_SELF(self)) ? Qtrue : Qfalse;
 }
 
-/*
-GList*      gtk_window_get_default_icon_list
-                                            (void);
-*/
+static VALUE
+gwin_s_get_default_icon_list(self)
+    VALUE self;
+{
+    return GLIST2ARY(gtk_window_get_default_icon_list());
+}
 
 static VALUE
 gwin_get_default_size(self)
@@ -305,15 +341,25 @@ gwin_get_frame_dimensions(self)
 {
     int left, top, right, bottom;
     gtk_window_get_frame_dimensions(_SELF(self), &left, &top, &right, &bottom);
-    return rb_ary_new3(2, INT2NUM(left), INT2NUM(top), INT2NUM(right), INT2NUM(bottom));
+    return rb_ary_new3(4, &left ? INT2NUM(left) : Qnil, 
+                       &top ? INT2NUM(top) : Qnil, 
+                       &right ? INT2NUM(right) : Qnil, 
+                       &bottom ? INT2NUM(bottom) : Qnil);
 }
 
-/*
-gboolean    gtk_window_get_has_frame        (GtkWindow *window);
-GList*      gtk_window_get_icon_list        (GtkWindow *window);
-GdkModifierType gtk_window_get_mnemonic_modifier
-                                            (GtkWindow *window);
-*/
+static VALUE
+gwin_get_has_frame(self)
+    VALUE self;
+{
+    return gtk_window_get_has_frame(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+gwin_get_icon_list(self)
+    VALUE self;
+{
+    return GLIST2ARY(gtk_window_get_icon_list(_SELF(self)));
+}
 
 static VALUE
 gwin_get_mnemonic_modifier(self)
@@ -335,7 +381,8 @@ static VALUE
 gwin_get_role(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_window_get_role(_SELF(self)));
+    const gchar* role = gtk_window_get_role(_SELF(self));
+    return role ? CSTR2RVAL(role) : Qnil;
 }
 
 static VALUE
@@ -344,14 +391,16 @@ gwin_get_size(self)
 {
     int width, height;
     gtk_window_get_size(_SELF(self), &width, &height);
-    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
+    return rb_ary_new3(2, &width ? INT2NUM(width) : Qnil, 
+                       &height ? INT2NUM(height) : Qnil);
 }
 
 static VALUE
 gwin_get_transient_for(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_window_get_transient_for(_SELF(self)));
+    GtkWindow* window = gtk_window_get_transient_for(_SELF(self));
+    return window ? GOBJ2RVAL(window) : Qnil;
 }
 
 static VALUE
@@ -369,12 +418,20 @@ gwin_move(self, x, y)
     return self;
 }
 
-/*
-gboolean    gtk_window_parse_geometry       (GtkWindow *window,
-                                             const gchar *geometry);
-void        gtk_window_reshow_with_initial_size
-                                            (GtkWindow *window);
-*/
+static VALUE
+gwin_parse_geometry(self, geometry)
+    VALUE self, geometry;
+{
+    return gtk_window_parse_geometry(_SELF(self), RVAL2CSTR(geometry)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+gwin_reshow_with_initial_size(self)
+    VALUE self;
+{
+    gtk_window_reshow_with_initial_size(_SELF(self));
+    return self;
+}
 
 static VALUE
 gwin_resize(self, width, height)
@@ -384,12 +441,37 @@ gwin_resize(self, width, height)
     return self;
 }
 
-/*
-void        gtk_window_set_default_icon_list
-                                            (GList *list);
-void        gtk_window_set_icon_list        (GtkWindow *window,
-                                             GList *list);
+static VALUE
+gwin_s_set_default_icon_list(self, list)
+    VALUE self, list;
+{
+    int i;
+    GList *glist = NULL;
+    Check_Type(list, T_ARRAY);
+    for (i = 0; i < RARRAY(list)->len; i++){
+        glist = g_list_append(glist, RVAL2GOBJ(RARRAY(list)->ptr[i]));
+    }
+    gtk_window_set_default_icon_list(glist);
+    g_list_free(glist);
+    return list;
+}
 
+static VALUE
+gwin_set_icon_list(self, list)
+    VALUE self, list;
+{
+    int i;
+    GList *glist = NULL;
+    Check_Type(list, T_ARRAY);
+    for (i = 0; i < RARRAY(list)->len; i++){
+        glist = g_list_append(glist, RVAL2GOBJ(RARRAY(list)->ptr[i]));
+    }
+    gtk_window_set_icon_list(_SELF(self), glist);
+    g_list_free(glist);
+    return list;
+}
+
+/* They are not public methods.
 static VALUE
 gwin_decorated_window_init(self)
     VALUE self;
@@ -420,10 +502,10 @@ gwin_decorated_window_move_resize_window(self)
 {
     int x, y, width, height;
     gtk_decorated_window_move_resize_window(_SELF(self), &x, &y, &width, &height);
-    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
+    return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
 }
-
 */
+
 void 
 Init_gtk_window()
 {
@@ -440,6 +522,10 @@ Init_gtk_window()
     rb_define_method(gWindow, "set_gravity", gwin_set_gravity, 1);
     rb_define_method(gWindow, "gravity", gwin_get_gravity, 0);
     rb_define_method(gWindow, "set_transient_for", gwin_set_transient_for, 1);
+    rb_define_singleton_method(gWindow, "toplevels", gwin_s_list_toplevels, 0);
+    rb_define_method(gWindow, "add_mnemonic", gwin_add_mnemonic, 2);
+    rb_define_method(gWindow, "remove_mnemonic", gwin_remove_mnemonic, 2);
+    rb_define_method(gWindow, "mnemonic_activate", gwin_mnemonic_activate, 2);
     rb_define_method(gWindow, "focus", gwin_get_focus, 0);
     rb_define_method(gWindow, "set_focus", gwin_set_focus, 1);
     rb_define_method(gWindow, "set_default", gwin_set_default, 1);
@@ -450,13 +536,21 @@ Init_gtk_window()
     rb_define_method(gWindow, "unstick", gwin_unstick, 0);
     rb_define_method(gWindow, "maximize", gwin_maximize, 0);
     rb_define_method(gWindow, "unmaximize", gwin_unmaximize, 0);
+    rb_define_method(gWindow, "begin_resize_drag", gwin_begin_resize_drag, 5);
+    rb_define_method(gWindow, "begin_move_drag", gwin_begin_move_drag, 4);
     rb_define_method(gWindow, "set_decorated", gwin_set_decorated, 1);
+    rb_define_method(gWindow, "set_frame_dimensions", gwin_set_frame_dimensions, 4);
+    rb_define_method(gWindow, "set_mnemonic_modifier", gwin_set_mnemonic_modifier, 1);
     rb_define_method(gWindow, "set_role", gwin_set_role, 1);
     rb_define_method(gWindow, "set_type_hint", gwin_set_type_hint, 1);
     rb_define_method(gWindow, "decorated?", gwin_get_decorated, 0);
     rb_define_method(gWindow, "default_size", gwin_get_default_size, 0);
+    rb_define_singleton_method(gWindow, "default_icon_list", gwin_s_get_default_icon_list, 0);
     rb_define_method(gWindow, "destroy_with_parent?", gwin_get_destroy_with_parent, 0);
     rb_define_method(gWindow, "frame_dimensions", gwin_get_frame_dimensions, 0);
+    rb_define_method(gWindow, "set_has_frame", gwin_set_has_frame, 1);
+    rb_define_method(gWindow, "has_frame?", gwin_get_has_frame, 0);
+    rb_define_method(gWindow, "icon_list", gwin_get_icon_list, 0);
     rb_define_method(gWindow, "mnemonic_modifier", gwin_get_mnemonic_modifier, 0);
     rb_define_method(gWindow, "position", gwin_get_position, 0);
     rb_define_method(gWindow, "role", gwin_get_role, 0);
@@ -464,13 +558,17 @@ Init_gtk_window()
     rb_define_method(gWindow, "transient_for", gwin_get_transient_for, 0);
     rb_define_method(gWindow, "type_hint", gwin_get_type_hint, 0);
     rb_define_method(gWindow, "move", gwin_move, 2);
+    rb_define_method(gWindow, "parse_geometry", gwin_parse_geometry, 1);
+    rb_define_method(gWindow, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
     rb_define_method(gWindow, "resize", gwin_resize, 2);
+    rb_define_singleton_method(gWindow, "set_default_icon_list", gwin_s_set_default_icon_list, 1);
+    rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
 /*
     rb_define_method(gWindow, "decorated_window_init", gwin_decorated_window_init, 0);
     rb_define_method(gWindow, "decorated_window_calculate_frame_size", gwin_decorated_window_calculate_frame_size, 0);   
     rb_define_method(gWindow, "decorated_window_set_title", gwin_decorated_window_set_title, 1);
     rb_define_method(gWindow, "decorated_window_move_resize_window", gwin_decorated_window_move_resize_window, 0);
-*/    
+*/
     G_DEF_SETTERS(gWindow);
 
     /* GtkWindowPosition (from General constants) */

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/05/16 17:18:30 $
+  $Date: 2003/05/22 17:06:05 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,6 +15,30 @@
 #include "global.h"
 
 #define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
+
+static VALUE
+widget_get_flags(self)
+    VALUE self;
+{
+    return INT2NUM(GTK_WIDGET_FLAGS(_SELF(self)));
+}
+
+static VALUE
+widget_set_flags(self, flag)
+    VALUE self;
+{
+    GTK_WIDGET_SET_FLAGS(_SELF(self), NUM2INT(flag));
+    return self;
+}
+
+static VALUE
+widget_unset_flags(self, flag)
+    VALUE self;
+{
+    GTK_WIDGET_UNSET_FLAGS(_SELF(self), NUM2INT(flag));
+    return self;
+}
+
 
 static VALUE
 widget_unparent(self)
@@ -831,6 +855,7 @@ DEFINE_IS_WIDGET(TOPLEVEL);
 DEFINE_IS_WIDGET(NO_WINDOW);
 DEFINE_IS_WIDGET(REALIZED);
 DEFINE_IS_WIDGET(MAPPED);
+/*DEFINE_IS_WIDGET(VISIBLE); VISIBLE is defined as property*/
 DEFINE_IS_WIDGET(DRAWABLE);
 DEFINE_IS_WIDGET(PARENT_SENSITIVE);
 DEFINE_IS_WIDGET(IS_SENSITIVE);
@@ -904,6 +929,9 @@ Init_gtk_widget()
     /*
      * instance methods
      */
+    rb_define_method(gWidget, "flags", widget_get_flags, 0);
+    rb_define_method(gWidget, "set_flags", widget_set_flags, 1);
+    rb_define_method(gWidget, "unset_flags", widget_unset_flags, 1);
     rb_define_method(gWidget, "unparent", widget_unparent, 0);
     rb_define_method(gWidget, "show", widget_show, 0);
     rb_define_method(gWidget, "show_now", widget_show_now, 0);
