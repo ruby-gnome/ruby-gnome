@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/05 17:45:57 $
+  $Date: 2002/08/07 08:51:15 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -26,7 +26,7 @@ static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 ID id_relatives;
 ID id_relative_callbacks;
 static ID id_delete;
-ID id_class_info;
+static ID id_module_eval;
 
 /**********************************************************************/
 
@@ -227,7 +227,7 @@ rbgobj_define_property_accessors(klass)
         if (pspec->flags & G_PARAM_READABLE){
             char* s = g_strdup_printf("def %s; get_property('%s'); end",
                                       prop_name, pspec->name);
-            rb_funcall(klass, rb_intern("module_eval"), 3,
+            rb_funcall(klass, id_module_eval, 3,
                        rb_str_new2(s),
                        rb_str_new2(__FILE__),
                        INT2NUM(__LINE__ - 5));
@@ -236,7 +236,7 @@ rbgobj_define_property_accessors(klass)
         if (pspec->flags & G_PARAM_WRITABLE){
             char* s = g_strdup_printf("def %s=(val); set_property('%s', val); val; end",
                                       prop_name, pspec->name);
-            rb_funcall(klass, rb_intern("module_eval"), 3,
+            rb_funcall(klass, id_module_eval, 3,
                        rb_str_new2(s),
                        rb_str_new2(__FILE__),
                        INT2NUM(__LINE__ - 5));
@@ -327,39 +327,37 @@ _params_setup(arg, param_setup_arg)
 }
 
 GObject*
-rbgobj_gobject_new(type, params_hash)
-    VALUE type, params_hash;
-{
+rbgobj_gobject_new(gtype, params_hash)
     GType gtype;
-    size_t param_size;
-    struct param_setup_arg param_setup_arg;
+    VALUE params_hash;
+{
     GObject* result;
-
-    if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
-        gtype = NUM2INT(type);
-    } else {
-        StringValue(type);
-        gtype = g_type_from_name(StringValuePtr(type));
-    }
 
     if (!g_type_is_a(gtype, G_TYPE_OBJECT))
         rb_raise(rb_eArgError,
-                 "type \"%s\" is not descendants if GObject",
-                 g_type_name(type));
+                 "type \"%s\" is not descendant of GObject",
+                 g_type_name(gtype));
 
-    param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
+    if (NIL_P(params_hash)) {
+        result = g_object_newv(gtype, 0, NULL);
+    } else {
+        size_t param_size;
+        struct param_setup_arg param_setup_arg;
 
-    param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
-    param_setup_arg.params = ALLOCA_N(GParameter, param_size);
-    memset(param_setup_arg.params, 0, sizeof(GValue) * param_size);
+        param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
 
-    // FIXME: use rb_ensure() to ensure following g_type_class_unref() call.
-    rb_iterate(&_each_with_index, params_hash, _params_setup,
-               (VALUE)&param_setup_arg);
+        param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
+        param_setup_arg.params = ALLOCA_N(GParameter, param_size);
+        memset(param_setup_arg.params, 0, sizeof(GValue) * param_size);
 
-    result = g_object_newv(gtype, param_size, param_setup_arg.params);
+        // FIXME: use rb_ensure() to ensure following g_type_class_unref() call.
+        rb_iterate(&_each_with_index, params_hash, _params_setup,
+                   (VALUE)&param_setup_arg);
 
-    g_type_class_unref(param_setup_arg.gclass);
+        result = g_object_newv(gtype, param_size, param_setup_arg.params);
+
+        g_type_class_unref(param_setup_arg.gclass);
+    }
 
     return result;
 }
@@ -372,6 +370,7 @@ Init_gobject()
     id_relatives = rb_intern("__relatives__");
     id_relative_callbacks = rb_intern("__relative_callbacks__");
     id_delete = rb_intern("delete");
+    id_module_eval = rb_intern("module_eval");
 
     Init_gobject_gtype();
     Init_gobject_gvalue();

@@ -1,3 +1,16 @@
+2002-08-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_gobject_new): take type argument as GType
+	 instead of VALUE.
+	* src/rbgobject.c (rbgobj_gobject_new): allow nil for construct parameter
+	* src/rbgobj_object.c (is_gtkobject): add function
+	* src/rbgobj_object.c (GObject.allocate): check abstract class
+	* src/rbgobj_object.c (GObject#initialize): rewrite
+	* src/rbgobj_type.c (rbgobj_lookup_class): use independent hash instead
+	of instance variable. and abolish id_class_info.
+	* src/rbgobj_type.c (rbgobj_lookup_class): search ancestor classes.
+	* src/rbgobj_type.c: implement GLib::Type.
+
 2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c: extend rbgobj_lookup_class_by_gtype() to deal

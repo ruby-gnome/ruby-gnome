@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/05 16:16:33 $
+  $Date: 2002/08/07 08:51:15 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -27,6 +27,9 @@ static VALUE
 gobj_s_allocate(klass)
     VALUE klass;
 {
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
+    if (G_TYPE_IS_ABSTRACT(cinfo->gtype))
+        rb_raise(rb_eTypeError, "abstract class");
     return rbgobj_create_object(klass);
 }
 
@@ -42,26 +45,46 @@ gobj_s_new(int argc, VALUE* argv, VALUE klass)
 }
 #endif
 
-static VALUE
-gobj_s_gobject_new(self, type, params_hash)
-    VALUE self, type, params_hash;
+static gboolean
+is_gtkobject(gobj)
+    GObject* gobj;
 {
-    GObject* gobj = rbgobj_gobject_new(type, params_hash);
-    VALUE result = GOBJ2RVAL(gobj);
+    static GType gtype_gtkobject = G_TYPE_INVALID;
+    if (!gtype_gtkobject)
+        gtype_gtkobject = g_type_from_name("GtkObject");
+    return gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject);
+}
+
+static VALUE
+gobj_s_gobject_new(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    VALUE type, params_hash;
+    GType gtype;
+    GObject* gobj;
+    VALUE result;
+
+    rb_scan_args(argc, argv, "11", &type, &params_hash);
+
+    if (RTEST(rb_obj_is_kind_of(type, rbgobj_cType))) {
+        gtype = rbgobj_gtype_get(type);
+    } else {
+        StringValue(type);
+        gtype = g_type_from_name(StringValuePtr(type));
+    }
+
+    gobj = rbgobj_gobject_new(gtype, params_hash);
+    result = GOBJ2RVAL(gobj);
 
     // XXX: Ughhhhh
-    {
-        static GType gtype_gtkobject = G_TYPE_INVALID;
-        if (!gtype_gtkobject)
-            gtype_gtkobject = g_type_from_name("GtkObject");
-
-        if (gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject)){
-            // We can't call gtk_object_sink() here.
-            // But hopefully someone will call it.
-            //gtk_object_sink(gobj);
-        } else {
-            g_object_unref(gobj);
-        }
+    if (is_gtkobject(gobj)){
+        // We can't call gtk_object_sink() here.
+        // But hopefully someone will call it in the future.
+        //gtk_object_sink(gobj);
+    } else {
+        g_object_unref(gobj);
     }
 
     return result;
@@ -169,15 +192,37 @@ gobj_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    rb_raise(rb_eRuntimeError, "can't instantiate class %s",
-             rb_class2name(CLASS_OF(self)));
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(CLASS_OF(self));
+    VALUE params_hash;
+    GObject* gobj;
+    
+    rb_scan_args(argc, argv, "01", &params_hash);
+
+    gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
+
+    if (is_gtkobject(gobj)){
+        gobj = g_object_ref(gobj);
+        // We can't call gtk_object_sink() here.
+        // But hopefully someone will call it in the future.
+        //gtk_object_sink(gobj);
+    }
+
+    RBGOBJ_INITIALIZE(self, gobj);
+    return Qnil;
 }
 
 static VALUE
-gobj_get_g_type(self)
+gobj_s_get_gtype(klass)
+    VALUE klass;
+{
+    return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
+}
+
+static VALUE
+gobj_get_gtype(self)
     VALUE self;
 {
-    return INT2NUM(G_OBJECT_TYPE(RVAL2GOBJ(self)));
+    return rbgobj_gtype_new(G_OBJECT_TYPE(RVAL2GOBJ(self)));
 }
 
 static VALUE
@@ -242,13 +287,12 @@ Init_gobject_gobject()
     rbgobj_register_r2g_func(cGObject, _gobject_from_ruby);
     rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
 
-#ifdef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
-#else
+#ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(cGObject, "new", &gobj_s_new, -1);
 #endif
+    rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 
-    rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, 2);
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
     rb_define_alias(cGObject, "property", "get_property");
@@ -257,7 +301,8 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
 
     rb_define_method(cGObject, "initialize", gobj_initialize, -1);
-    rb_define_method(cGObject, "g_type", gobj_get_g_type, 0);
+    rb_define_singleton_method(cGObject, "gtype", gobj_s_get_gtype, 0);
+    rb_define_method(cGObject, "gtype", gobj_get_gtype, 0);
     rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
     rb_define_method(cGObject, "inspect", gobj_inspect, 0);
     rb_define_method(cGObject, "clone", gobj_clone, 0);
