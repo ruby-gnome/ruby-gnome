@@ -146,7 +146,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
   end
 
   def create_canvas(aa)
-    Gtk::Widget.push_colormap(Gdk::RGB.cmap())
+    Gtk::Widget.push_colormap(Gdk::RGB.colormap())
 
     canvas = Gnome::Canvas.new(aa)
 

@@ -1,5 +1,6 @@
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/canvas-curve.rb: Replace Gdk::RGB.cmap to Gdk::RGB.colormap.
 	* src/rbgnomecanvas.h: Add rbgno_canvas_path_def_get_type.
 	* src/rbgnome-canvas-item.c: Add Gnome::CanvasShape, Gnome::CanvasRE, 
 	Gnome::CanvasClipgroup.
