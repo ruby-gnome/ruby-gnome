@@ -81,9 +81,9 @@ static VALUE constStateAsync = INT2FIX(GST_STATE_ASYNC);
  *
  *  Returns a Fixnum code, according to the result of the operation:
  *
- *    - Gst::Element::STATE_FAILURE;
- *    - Gst::Element::STATE_SUCCESS;
- *    - Gst::Element::STATE_ASYNC.
+ *    * Gst::Element::STATE_FAILURE;
+ *    * Gst::Element::STATE_SUCCESS;
+ *    * Gst::Element::STATE_ASYNC.
  */
 static VALUE rb_gst_element_set_state(self, value)
     VALUE self, value;
@@ -109,10 +109,10 @@ static VALUE rb_gst_element_set_state(self, value)
  *
  *  Gets the state of the element:
  *
- *    - Gst::Element::STATE_NULL;
- *    - Gst::Element::STATE_READY;
- *    - Gst::Element::STATE_PAUSED;
- *    - Gst::Element::STATE_PLAYING.
+ *    * Gst::Element::STATE_NULL;
+ *    * Gst::Element::STATE_READY;
+ *    * Gst::Element::STATE_PAUSED;
+ *    * Gst::Element::STATE_PLAYING.
  */
 static VALUE rb_gst_element_get_state(self)
     VALUE self;
@@ -752,21 +752,21 @@ static VALUE rb_gst_element_is_indexable(self)
  *  Performs a query on the element.
  *
  *  Meaningful query types are:
- *      - Gst::QueryType::TOTAL;
- *      - Gst::QueryType::POSITION;
- *      - Gst::QueryType::LATENCY;
- *      - Gst::QueryType::JITTER;
- *      - Gst::QueryType::START;
- *      - Gst::QueryType::SEGMENT_END;
- *      - Gst::QueryType::RATE.
+ *      * Gst::QueryType::TOTAL;
+ *      * Gst::QueryType::POSITION;
+ *      * Gst::QueryType::LATENCY;
+ *      * Gst::QueryType::JITTER;
+ *      * Gst::QueryType::START;
+ *      * Gst::QueryType::SEGMENT_END;
+ *      * Gst::QueryType::RATE.
  *
  *  Meaningful formats are:
- *      - Gst::Format::DEFAULT;
- *      - Gst::Format::BYTES;
- *      - Gst::Format::TIME;
- *      - Gst::Format::BUFFERS;
- *      - Gst::Format::PERCENT;
- *      - Gst::Format::UNITS.
+ *      * Gst::Format::DEFAULT;
+ *      * Gst::Format::BYTES;
+ *      * Gst::Format::TIME;
+ *      * Gst::Format::BUFFERS;
+ *      * Gst::Format::PERCENT;
+ *      * Gst::Format::UNITS.
  *
  *  Returns a Fixnum value, or nil if the query could not be performed.
  */

@@ -1,3 +1,8 @@
+2003-08-23  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgst*.c: Changed extdoc.rb enumeration syntax to something 
+	  more RDish (-a, -b, -c to *a, *b, *c).
+
 2003-08-19  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgst*.c: Fixed comments + removed obsolete code.

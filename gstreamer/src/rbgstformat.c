@@ -87,13 +87,13 @@ static VALUE rb_gst_format_each(self)
  *  Method: type_id -> aFixnum
  *
  *  Gets the type id of this format:
- *    - Gst::Format::UNDEFINED;
- *    - Gst::Format::DEFAULT;
- *    - Gst::Format::BYTES;
- *    - Gst::Format::TIME;
- *    - Gst::Format::BUFFERS;
- *    - Gst::Format::PERCENT;
- *    - Gst::Format::UNITS.
+ *    * Gst::Format::UNDEFINED;
+ *    * Gst::Format::DEFAULT;
+ *    * Gst::Format::BYTES;
+ *    * Gst::Format::TIME;
+ *    * Gst::Format::BUFFERS;
+ *    * Gst::Format::PERCENT;
+ *    * Gst::Format::UNITS.
  */
 static VALUE rb_gst_format_get_type_id(self)
     VALUE self;

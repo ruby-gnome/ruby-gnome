@@ -44,9 +44,9 @@ static VALUE rb_gst_pad_get_name(self)
  *  Method: direction -> aFixnum
  *
  *  Gets the pad's direction, which can be:
- *      - Gst::Pad::DIRECTION_UNKNOWN;
- *      - Gst::Pad::DIRECTION_SRC;
- *      - Gst::Pad::DIRECTION_SINK.
+ *      * Gst::Pad::DIRECTION_UNKNOWN;
+ *      * Gst::Pad::DIRECTION_SRC;
+ *      * Gst::Pad::DIRECTION_SINK.
  */
 
 static VALUE rb_gst_pad_get_direction(self)
@@ -329,21 +329,21 @@ static VALUE rb_gst_pad_is_negotiating(self)
  *  Performs a query on the pad.
  *
  *  Meaningful query types are:
- *      - Gst::QueryType::TOTAL;
- *      - Gst::QueryType::POSITION;
- *      - Gst::QueryType::LATENCY;
- *      - Gst::QueryType::JITTER;
- *      - Gst::QueryType::START;
- *      - Gst::QueryType::SEGMENT_END;
- *      - Gst::QueryType::RATE.
+ *      * Gst::QueryType::TOTAL;
+ *      * Gst::QueryType::POSITION;
+ *      * Gst::QueryType::LATENCY;
+ *      * Gst::QueryType::JITTER;
+ *      * Gst::QueryType::START;
+ *      * Gst::QueryType::SEGMENT_END;
+ *      * Gst::QueryType::RATE.
  *
  *  Meaningful formats are:
- *      - Gst::Format::DEFAULT;
- *      - Gst::Format::BYTES;
- *      - Gst::Format::TIME;
- *      - Gst::Format::BUFFERS;
- *      - Gst::Format::PERCENT;
- *      - Gst::Format::UNITS.
+ *      * Gst::Format::DEFAULT;
+ *      * Gst::Format::BYTES;
+ *      * Gst::Format::TIME;
+ *      * Gst::Format::BUFFERS;
+ *      * Gst::Format::PERCENT;
+ *      * Gst::Format::UNITS.
  *
  *  Returns a fixnum, or nil if the query could not be performed.
  */

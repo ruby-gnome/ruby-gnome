@@ -77,15 +77,15 @@ static VALUE constSeekFlagSegmentLoop = INT2FIX(GST_SEEK_FLAG_SEGMENT_LOOP);
  *  Allocate a new seek event with the given parameters.
  * 
  *  Meaningful types are:
- *      - Gst::EventSeek::METHOD_CUR;
- *      - Gst::EventSeek::METHOD_SET;
- *      - Gst::EventSeek::METHOD_END.
+ *      * Gst::EventSeek::METHOD_CUR;
+ *      * Gst::EventSeek::METHOD_SET;
+ *      * Gst::EventSeek::METHOD_END.
  *
  *  Types can be OR'ed (|) with:
- *      - Gst::EventSeek::FLAG_FLUSH;
- *      - Gst::EventSeek::FLAG_ACCURATE;
- *      - Gst::EventSeek::FLAG_KEY_UNIT;
- *      - Gst::EventSeek::FLAG_SEGMENT_LOOP.
+ *      * Gst::EventSeek::FLAG_FLUSH;
+ *      * Gst::EventSeek::FLAG_ACCURATE;
+ *      * Gst::EventSeek::FLAG_KEY_UNIT;
+ *      * Gst::EventSeek::FLAG_SEGMENT_LOOP.
  */
 static VALUE rb_gst_eventseek_new(self, type, offset)
     VALUE self, type, offset;

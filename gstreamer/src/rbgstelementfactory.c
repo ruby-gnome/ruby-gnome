@@ -109,10 +109,10 @@ static VALUE rb_gst_elementfactory_create(argc, argv, self)
  *
  *  Gets the rank of the factory:
  *      
- *    - Gst::ElementFactory::RANK_MARGINAL;
- *    - Gst::ElementFactory::RANK_NONE;
- *    - Gst::ElementFactory::RANK_PRIMARY;
- *    - Gst::ElementFactory::RANK_SECONDARY.
+ *    * Gst::ElementFactory::RANK_MARGINAL;
+ *    * Gst::ElementFactory::RANK_NONE;
+ *    * Gst::ElementFactory::RANK_PRIMARY;
+ *    * Gst::ElementFactory::RANK_SECONDARY.
  */
 static VALUE rb_gst_elementfactory_get_rank(self)
     VALUE self;
@@ -248,13 +248,13 @@ static VALUE rb_gst_elementfactory_each_pad_template(self)
  *  This information is encapsulated in a Hash object, 
  *  with the following (String) keys:
  *
- *    - longname: long (English) element name.
- *    - klass: type of element, as hierarchy.
- *    - license: license under which the element is provided.
- *    - description: a short description about the element.
- *    - version: version of the element.
- *    - author: some information about the author(s).
- *    - copyright: some copyright details (year, etc..).
+ *    * longname: long (English) element name.
+ *    * klass: type of element, as hierarchy.
+ *    * license: license under which the element is provided.
+ *    * description: a short description about the element.
+ *    * version: version of the element.
+ *    * author: some information about the author(s).
+ *    * copyright: some copyright details (year, etc..).
  *
  *  Example: 
  *

@@ -50,9 +50,9 @@ static VALUE rb_gst_padtemplate_get_name(self)
  *
  *  Gets presence, which can be:
  *
- *    - Gst::Pad::PRESENCE_ALWAYS;
- *    - Gst::Pad::PRESENCE_SOMETIMES;
- *    - Gst::Pad::PRESENCE_REQUEST.
+ *    * Gst::Pad::PRESENCE_ALWAYS;
+ *    * Gst::Pad::PRESENCE_SOMETIMES;
+ *    * Gst::Pad::PRESENCE_REQUEST.
  */
 static VALUE rb_gst_padtemplate_get_presence(self)
     VALUE self;
@@ -66,9 +66,9 @@ static VALUE rb_gst_padtemplate_get_presence(self)
  *
  *  Gets direction, which can be:
  *
- *    - Gst::Pad::DIRECTION_SRC;
- *    - Gst::Pad::DIRECTION_SINK;
- *    - Gst::Pad::DIRECTION_UNKNOWN.
+ *    * Gst::Pad::DIRECTION_SRC;
+ *    * Gst::Pad::DIRECTION_SINK;
+ *    * Gst::Pad::DIRECTION_UNKNOWN.
  */
 static VALUE rb_gst_padtemplate_get_direction(self)
     VALUE self;
