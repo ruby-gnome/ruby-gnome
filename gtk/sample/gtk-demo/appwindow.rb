@@ -6,7 +6,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: appwindow.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+  $Id: appwindow.rb,v 1.5 2005/01/09 09:20:29 mutoh Exp $
 =end
 
 require 'common'
@@ -81,7 +81,7 @@ module Demo
 	# "<LastBranch>", not "<Branch>".  Right justified help menu
 	# items are generally considered a bad idea now days.
 	["/_Help"],
-	["/Help/_About", "<Item>", nil, nil, menuitem_cb],
+	["/Help/_About", "<Item>", nil, nil, Proc.new{about_cb}],
       ]
       item_factory.create_items(menu_items)
 
@@ -157,6 +157,47 @@ module Demo
       end
 
       dialog.show
+    end
+
+    def about_cb(*args)
+      authors = ["Peter Mattis", "Spencer Kimball", "Josh MacDonald", "and many more..."]
+      documentors = ["Owen Taylor", "Tony Gale", "Mattias Clasen <mclasen@redhat.com>",  
+	"and many more..."]
+      license = %Q[
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Library General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU
+Library General Public License for more details.
+
+You should have received a copy of the GNU Library General Public
+License along with the Gnome Library; see the file COPYING.LIB.If not,
+write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
+]
+
+      transparent = Gdk::Pixbuf.new(Demo.find_file("gtk-logo-rgb.gif")).add_alpha(true, 0xff, 0xff, 0xff)
+      
+      Gtk::AboutDialog.set_email_hook {|about, link|
+	puts "send mail to #{link}"
+      }
+      Gtk::AboutDialog.set_url_hook {|about, link|
+	puts "show url #{link}"
+      }
+      Gtk::AboutDialog.show(self,
+			    :name => "GTK+ Code Demos",
+			    :version => Gtk::VERSION.join("."),
+			    :copyright => "(C) 1997-2004 The GTK+ Team",
+			    :license => license,
+			    :website => "http://www.gtk.org",
+			    :comments => "Program to demonstrate GTK+ functions.",
+			    :authors => authors,
+			    :documenters => documentors,
+			    :logo => transparent)
     end
 
     def update_statusbar(buffer, statusbar)

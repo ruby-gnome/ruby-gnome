@@ -4,7 +4,7 @@
   rbgtkradiotoolbutton.c -
 
   $Author: mutoh $
-  $Date: 2004/07/25 16:27:12 $
+  $Date: 2005/01/09 09:20:30 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -42,7 +42,11 @@ rbtn_initialize(argc, argv, self)
         if (NIL_P(stock_id)){
             widget = gtk_radio_tool_button_new(list);
         } else {
-            widget = gtk_radio_tool_button_new_from_stock(list, RVAL2CSTR(stock_id));
+            if (TYPE(stock_id) == T_SYMBOL){
+                widget = gtk_radio_tool_button_new_from_stock(list, rb_id2name(SYM2ID(stock_id)));
+            } else {
+                widget = gtk_radio_tool_button_new_from_stock(list, RVAL2CSTR(stock_id));
+            }
         }
     } else {
         widget = gtk_radio_tool_button_new(NULL);

@@ -4,7 +4,7 @@
   rbgtktoggletoolbutton.c -
 
   $Author: mutoh $
-  $Date: 2004/05/31 17:42:24 $
+  $Date: 2005/01/09 09:20:31 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -28,7 +28,11 @@ toggletoolbutton_initialize(argc, argv, self)
     if (NIL_P(stock_id)){
         item = gtk_toggle_tool_button_new();
     } else {
-        item = gtk_toggle_tool_button_new_from_stock(RVAL2CSTR(stock_id));
+        if (TYPE(stock_id) == T_SYMBOL){
+            item = gtk_toggle_tool_button_new_from_stock(rb_id2name(SYM2ID(stock_id)));
+        } else {
+            item = gtk_toggle_tool_button_new_from_stock(RVAL2CSTR(stock_id));
+        }
     }
     RBGTK_INITIALIZE(self, item);
     return Qnil;

@@ -1,5 +1,19 @@
+2005-01-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/aboutdialog.rb, aboutdialog2.rb: Added.
+	* src/rbgtkaboutdialog.c: Added for GTK+-2.6.x.
+
 2005-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/misc/color_font_button.rb, misc_button.rb: Rename 
+	color_font_button.rb to misc_button.rb. Added sample for
+	Gtk::FileChooserButton.
+	* src/rbgtkfilechooserbutton.c: Added for GTK+-2.6.x.
+	* src/rbgtkmenutoolbutton.c: Added for GTK+-2.6.x. 
+	* src/rbgtkcellview.c: Added for GTK+-2.6.x. 
+	* src/rbgtktoggletoolbutton.c: Accept symbol as stock_id of 
+	Gtk::ToggleToolButton.new. 
+	* src/rbgtkradiotoolbutton.c, rbgtktoolbutton.c: Ditto. 
 	* src/rbgtkcellrenderercombo.c: Added for GTK+-2.6.x.
 	* src/rbgtkiconview.c: Added for GTK+-2.6.x.
 	* sample/gtk-demo/iconview.rb: Added for Gtk::IconView.

@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 =begin
-  color_font_button.rb - Ruby/GTK sample script.
+  misc_button.rb - Ruby/GTK sample script.
                                                                                 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: color_font_button.rb,v 1.2 2004/06/07 16:09:30 mutoh Exp $
+  $Id: misc_button.rb,v 1.1 2005/01/09 09:20:30 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -35,6 +35,20 @@ fontbutton.signal_connect("font-set") do
 end
 box.add(fontbutton)
 
+#Gtk::FileChooserButton(GTK+-2.6.0 or later)
+if str = Gtk.check_version(2, 6, 0)
+  puts "Gtk::FileChooserButton requires GTK+ 2.6.0 or later"
+else
+  filebutton = Gtk::FileChooserButton.new("Gtk::FileChooserButton", 
+					  Gtk::FileChooser::ACTION_OPEN)
+  filebutton.filename = GLib.home_dir
+  filebutton.signal_connect("current-folder-changed") do |w, e|
+    p filebutton.filename
+  end
+
+  box.add(filebutton)
+end
+
 #Quit
 quitbutton = Gtk::Button.new("Quit")
 quitbutton.signal_connect("clicked") do
@@ -42,6 +56,6 @@ quitbutton.signal_connect("clicked") do
 end
 box.add(quitbutton)
 
-Gtk::Window.new.add(box).show_all
+Gtk::Window.new.add(box).set_default_size(200, 100).show_all
 
 Gtk.main
