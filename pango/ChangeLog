@@ -1,3 +1,7 @@
+2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoattribute.c: Remove debug code. 
+
 2003-09-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayout.c: Add Pango::Layout#index_to_pos, get_cursor_pos. 

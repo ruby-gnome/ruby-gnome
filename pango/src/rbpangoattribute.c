@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/09/01 14:39:24 $
+  $Date: 2003/10/07 13:16:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -72,7 +72,6 @@ pango_get_attribute(attr)
         rb_raise(rb_eTypeError, "not a Pango::Attribute...");
     }
     Data_Get_Struct(attr, PangoAttribute, gattr);
-    printf("gattr type = %d\n", gattr->klass->type);
     return gattr;
 }
 
