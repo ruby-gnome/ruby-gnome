@@ -1,3 +1,7 @@
+2003-02-15  KATO Kazuyoshi <kadu@zb.wakwak.com>
+
+	* src/rbgtkitemfactory.c: Change callback parameter(add 2nd parameter as widget).
+	
 2003-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbar.c: Remove Gtk::Treebar#insert_item/widget/element, 
