@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/16 03:47:30 $
+  $Date: 2002/09/17 15:25:54 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -222,6 +222,7 @@ rbgobj_define_property_accessors(klass)
     GParamSpec** pspecs;
     GObjectClass* oclass;
     int i;
+    GString* source = g_string_new(NULL);
 
     gtype  = rbgobj_lookup_class(klass)->gtype;
     oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
@@ -246,29 +247,25 @@ rbgobj_define_property_accessors(klass)
         }
 
         if (pspec->flags & G_PARAM_READABLE){
-            char* s = g_strdup_printf("def %s; get_property('%s'); end",
-                                      prop_name, pspec->name);
-            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
-            g_free(s);
+            g_string_append_printf(source, 
+                                   "def %s; get_property('%s'); end\n",
+                                   prop_name, pspec->name);
         }
 
         if (pspec->flags & G_PARAM_WRITABLE){
-            char* s;
-            s = g_strdup_printf(
-                    "def %s=(val); set_property('%s', val); val; end",
-                    prop_name, pspec->name);
-            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
-            g_free(s);
-
-            s = g_strdup_printf(
-                    "def set_%s(val); set_property('%s', val); end",
-                    prop_name, pspec->name);
-            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
-            g_free(s);
+            g_string_append_printf(source,
+                "def %s=(val); set_property('%s', val); val; end\n",
+                prop_name, pspec->name);
+            g_string_append_printf(source,
+                "def set_%s(val); set_property('%s', val); end\n",
+                prop_name, pspec->name);
         }
 
         g_free(prop_name);
     }
+
+    rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
+    g_string_free(source, TRUE);
 
     g_type_class_unref(oclass);
 }
