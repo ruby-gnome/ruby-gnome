@@ -1,3 +1,15 @@
+2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: enable GLib::Object.new! by default
+
+	* src/rbgobj_object.c (gobj_s_install_property): modify error message.
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): check if the class has a
+	registerd type.
+
+	* src/rbgobj_signal.c: implement GLib::Signal#{run_first?, run_last?,
+	run_cleanup?, no_recurse?, detailed?, action?, no_hooks?}
+
 2003-04-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (GLib::Object.new!): check if the class has a

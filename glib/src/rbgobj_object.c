@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/04/12 13:14:16 $
+  $Date: 2003/04/13 08:35:33 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -49,8 +49,6 @@ is_gtkobject(gobj)
     return gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject);
 }
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
 static VALUE
 gobj_s_gobject_new(argc, argv, self)
     int argc;
@@ -63,8 +61,10 @@ gobj_s_gobject_new(argc, argv, self)
     VALUE result;
 
     rb_scan_args(argc, argv, "01", &params_hash);
+
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "doesn't have proper GLib::Type");
+        rb_raise(rb_eTypeError, "%s isn't registerd class",
+                 rb_class2name(self));
 
     gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
     result = GOBJ2RVAL(gobj);
@@ -81,6 +81,8 @@ gobj_s_gobject_new(argc, argv, self)
     return result;
 }
 
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+
 static VALUE
 gobj_s_install_property(int argc, VALUE* argv, VALUE self)
 {
@@ -90,7 +92,8 @@ gobj_s_install_property(int argc, VALUE* argv, VALUE self)
     VALUE pspec_obj, prop_id;
 
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "doesn't have proper GLib::Type");
+        rb_raise(rb_eTypeError, "%s isn't registerd class",
+                 rb_class2name(self));
 
     rb_scan_args(argc, argv, "11", &pspec_obj, &prop_id);
     pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
@@ -562,9 +565,7 @@ Init_gobject_gobject()
 #else
     rb_define_alloc_func(cGObject, gobj_s_allocate);
 #endif
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "new!", gobj_s_gobject_new, -1);
-#endif
 
     rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
     rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);

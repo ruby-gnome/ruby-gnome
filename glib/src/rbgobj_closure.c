@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:08 $
+  $Author: sakai $
+  $Date: 2003/04/13 08:35:32 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -38,10 +38,10 @@ rclosure_default_g2r_func(num, values)
 }
 
 static void
-rclosure_marshal(GClosure*      closure,
-                 GValue         *return_value,
+rclosure_marshal(GClosure*       closure,
+                 GValue*         return_value,
                  guint           n_param_values,
-                 const GValue   *param_values,
+                 const GValue*   param_values,
                  gpointer        invocation_hint,
                  gpointer        marshal_data)
 {

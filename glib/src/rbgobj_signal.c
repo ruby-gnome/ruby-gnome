@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/12 13:14:16 $
+  $Date: 2003/04/13 08:35:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -160,6 +160,7 @@ accumulator_func(GSignalInvocationHint* ihint,
 static VALUE
 gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 {
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     VALUE signal_name, signal_flags, accumulator, return_type, params;
     GClosure* class_closure;
     GType* param_types;
@@ -169,6 +170,10 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
     rb_scan_args(argc, argv, "50", &signal_name, &signal_flags,
                  &accumulator, &return_type, &params);
+
+    if (cinfo->klass != self)
+        rb_raise(rb_eTypeError, "%s isn't registerd class",
+                 rb_class2name(self));
 
     StringValue(signal_name);
 
@@ -189,7 +194,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     }
 
     sig = g_signal_newv(StringValuePtr(signal_name),
-                        CLASS2GTYPE(self),
+                        cinfo->gtype,
                         NUM2INT(signal_flags),
                         class_closure,
                         NIL_P(accumulator) ? NULL : accumulator_func,
@@ -598,6 +603,24 @@ query_param_types(self)
     return result;
 }
 
+#define query_is_flag(flag) \
+    static VALUE \
+    query_is_##flag(self) \
+    { \
+        GSignalQuery* query; \
+        Data_Get_Struct(self, GSignalQuery, query); \
+        return (query->signal_flags & flag) ? Qtrue : Qfalse; \
+    }
+
+query_is_flag(G_SIGNAL_RUN_FIRST)
+query_is_flag(G_SIGNAL_RUN_LAST)
+query_is_flag(G_SIGNAL_RUN_CLEANUP)
+query_is_flag(G_SIGNAL_NO_RECURSE)
+query_is_flag(G_SIGNAL_DETAILED)
+query_is_flag(G_SIGNAL_ACTION)
+query_is_flag(G_SIGNAL_NO_HOOKS)
+
+
 static gboolean
 hook_func(GSignalInvocationHint* ihint,
           guint                  n_param_values,
@@ -667,6 +690,7 @@ Init_signal_class()
     rb_define_method(cSignal, "itype", query_itype, 0);
     rb_define_method(cSignal, "return_type", query_return_type, 0);
     rb_define_method(cSignal, "param_types", query_param_types, 0);
+
     rb_define_method(cSignal, "add_emission_hook", signal_add_emission_hook, -1);
     rb_define_method(cSignal, "remove_emission_hook", signal_remove_emission_hook, 1);
 
@@ -680,6 +704,15 @@ Init_signal_class()
     rb_define_const(cSignal, "NO_HOOKS",    INT2FIX(G_SIGNAL_NO_HOOKS));
 
     rb_define_const(cSignal, "FLAGS_MASK",  INT2FIX(G_SIGNAL_FLAGS_MASK));
+
+    rb_define_method(cSignal, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
+    rb_define_method(cSignal, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
+    rb_define_method(cSignal, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
+    rb_define_method(cSignal, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
+    rb_define_method(cSignal, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
+    rb_define_method(cSignal, "action?", query_is_G_SIGNAL_ACTION, 0);
+    rb_define_method(cSignal, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
+
 
     /* GConnectFlags */
     rb_define_const(cSignal, "CONNECT_AFTER",   INT2FIX(G_CONNECT_AFTER));
