@@ -33,8 +33,18 @@ cpathdef_g2r_func(from)
     return _WRAP(g_value_get_pointer(from));
 }
 
+#if 0 /* implement after Art::Bpath has been supported. */
+GnomeCanvasPathDef* gnome_canvas_path_def_new_from_bpath
+                                            (ArtBpath *bpath);
+GnomeCanvasPathDef* gnome_canvas_path_def_new_from_static_bpath
+                                            (ArtBpath *bpath);
+GnomeCanvasPathDef* gnome_canvas_path_def_new_from_foreign_bpath
+                                            (ArtBpath *bpath);
+#endif
+
+
 static VALUE
-cpathdef_s_new(argc, argv, self)
+cpathdef_initialize(argc, argv, self)
     int argc;
     VALUE *argv, self;
 {
@@ -45,7 +55,9 @@ cpathdef_s_new(argc, argv, self)
         path = gnome_canvas_path_def_new();
     else
         path = gnome_canvas_path_def_new_sized(NUM2INT(length));
-    return _WRAP(path);
+
+    G_INITIALIZE(self, path);
+    return Qnil;
 }
 
 /*
@@ -193,8 +205,9 @@ cpathdef_closepath_current(self)
 }
 
 /* Various methods */
-
+/*
 ArtBpath * gnome_canvas_path_def_bpath (const GnomeCanvasPathDef * path);
+*/
 
 static VALUE
 cpathdef_length(self)
@@ -285,7 +298,7 @@ Init_gnome_canvas_path_def(mGnome)
     rbgobj_register_property_setter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_r2g_func);
     rbgobj_register_property_getter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_g2r_func);
 
-    rb_define_singleton_method(gnoCanvasPathDef, "new", cpathdef_s_new, -1);
+    rb_define_method(gnoCanvasPathDef, "initialize", cpathdef_initialize, -1);
     rb_define_method(gnoCanvasPathDef, "duplicate", cpathdef_duplicate, 0);
     rb_define_method(gnoCanvasPathDef, "concat", cpathdef_concat, -1);
     rb_define_method(gnoCanvasPathDef, "split", cpathdef_split, 0);

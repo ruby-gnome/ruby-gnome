@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.14 2004/03/05 15:56:29 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.15 2004/11/01 14:58:39 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -60,11 +60,9 @@ citem_intialize(self, parent, hash)
     group = GNOME_CANVAS_GROUP(RVAL2GOBJ(parent));
     item = GNOME_CANVAS_ITEM(g_object_new(RVAL2GTYPE(self), NULL));
     RBGTK_INITIALIZE(self, item);
-
-    item->parent = GNOME_CANVAS_ITEM(group);
-    item->canvas = item->parent->canvas;
-    rbgutil_set_properties(self, hash);
     citem_do_construct(item, group, NULL);
+    rbgutil_set_properties(self, hash);
+
     return Qnil;
 }
 
@@ -244,9 +242,13 @@ citem_get_bounds(self)
                        rb_float_new(x2), rb_float_new(y2));
 }
 
-#if 0 /* This should be used only by item implementations. */
-void gnome_canvas_item_request_update (GnomeCanvasItem *item);
-#endif
+static VALUE
+citem_request_update(self)
+    VALUE self;
+{
+    gnome_canvas_item_request_update(_SELF(self));
+    return self;
+}
 
 static VALUE
 citem_parent(self)
@@ -305,6 +307,7 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasItem, "reparent", citem_reparent, 1);
     rb_define_method(gnoCanvasItem, "grab_focus", citem_grab_focus, 0);
     rb_define_method(gnoCanvasItem, "bounds", citem_get_bounds, 0);
+    rb_define_method(gnoCanvasItem, "request_update", citem_request_update, 0);
     rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
     rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 

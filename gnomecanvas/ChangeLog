@@ -1,3 +1,13 @@
+2004-11-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas.c: Gnome::Canvas#initialize returns nil not self. 
+
+2004-10-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas-item.c: Added Gnome::CanvasItem#request_update.
+	* src/rbgnome-canvas.c: Added Gnome::Canvas::EPSILON, .convert_color
+	Rename Gnome::Canvas#item_at to Gnome::Canvas#get_item_at.
+
 2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/gnomecanvas2.rb: Support GLib::Log.set_log_domain.
