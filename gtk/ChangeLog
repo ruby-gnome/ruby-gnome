@@ -1,3 +1,12 @@
+2004-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkscale.c: Added Gtk::Scale#layout, #layout_offsets for 
+	GTK+-2.4.
+
+2004-06-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdrag.c: Fix a bug of Gtk::Drag.dest_find_target.
+
 2004-06-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmenu.c, rbgtkmenushell.c, rbgtkmessagedialog.c: 

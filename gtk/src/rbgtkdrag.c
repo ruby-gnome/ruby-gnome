@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2004/06/03 15:13:00 $
+  $Date: 2004/07/24 08:03:14 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -94,7 +94,7 @@ gtkdrag_dest_find_target(argc, argv, self)
         RVAL2WIDGET(widget), RVAL2DC(context),
         NIL_P(target_list) ? NULL : RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
  
-    return BOXED2RVAL(&ret, GDK_TYPE_ATOM);
+    return BOXED2RVAL(ret, GDK_TYPE_ATOM);
 }
 
 static VALUE
