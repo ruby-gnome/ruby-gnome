@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/12/07 17:58:06 $
+  $Date: 2002/12/07 18:19:29 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -139,7 +139,7 @@ create_factory_entry(entry, self, path, item_type, accel, extdata, func, data)
             entry->callback = items_exec_callback_wrap;
         }
     }
-    action = rb_ary_new3(4, func, data);
+    action = rb_ary_new3(2, func, data);
     G_RELATIVE(self, action);
     entry->callback_action = action;
 
