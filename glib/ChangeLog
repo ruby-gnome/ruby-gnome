@@ -1,3 +1,8 @@
+2003-02-11  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbglib_convert.c: Add a file. Support string character set conversion.
+	* src/rbglib.c: Follow above changes.
+
 2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_object.c, rbgobject.h: Add rbgobj_add_abstract_but_create_instance_class() 

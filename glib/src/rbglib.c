@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: sakai $
-  $Date: 2003/02/03 08:52:24 $
+  $Author: mutoh $
+  $Date: 2003/02/10 16:45:22 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -16,6 +16,7 @@
 VALUE mGLib;
 
 extern void Init_utils_int64();
+extern void Init_glib_convert();
 extern void Init_glib_messages();
 extern void Init_gobject();
 
@@ -67,6 +68,7 @@ void Init_glib2()
         "end\n");
 
     Init_utils_int64();
+    Init_glib_convert();
     Init_glib_messages();
     Init_gobject();
     Init_gutil();
