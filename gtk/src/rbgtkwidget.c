@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2002/12/05 17:27:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -571,7 +571,7 @@ static VALUE
 widget_render_icon(self, stock_id, size, detail)
     VALUE self, stock_id, size, detail;
 {
-    return GOBJ2RVAL(gtk_widget_render_icon(_SELF(self), RVAL2CSTR(stock_id),
+    return GOBJ2RVAL(gtk_widget_render_icon(_SELF(self),  rb_id2name(SYM2ID(stock_id)),
                                             FIX2INT(size), RVAL2CSTR(detail)));
 }
 

@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:36 $
+  $Date: 2002/12/05 17:27:40 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -167,40 +167,53 @@ ifact_create_items(argc, argv, self)
     VALUE self;
 {
     VALUE ary, cb_data;
-    VALUE rb_entry, rb_path, rb_accel, rb_type, rb_func, rb_data;
+    VALUE r_entry, r_path, r_accel, r_type, r_func, r_data, r_extdata;
     VALUE action;
     GtkItemFactoryEntry *entries;
     guint i, len, n_menu_entries;
 
+    if (TYPE(self)== T_STRING){}
+
     rb_scan_args(argc, argv, "11", &ary, &cb_data);
 
+    if (TYPE(ary) == T_STRING){
+        printf("OK\n");
+    }
     n_menu_entries = RARRAY(ary)->len;
 
     entries = ALLOC_N(GtkItemFactoryEntry, n_menu_entries);
 
     for (i = 0; i < n_menu_entries; i++) {
-        rb_entry = RARRAY(ary)->ptr[i];
-        len = RARRAY(rb_entry)->len;
-        Check_Type(rb_entry, T_ARRAY);
-        rb_path =  RARRAY(rb_entry)->ptr[0];
-        rb_type =  ((len > 1) ? RARRAY(rb_entry)->ptr[1] : Qnil);
-        rb_accel = ((len > 2) ? RARRAY(rb_entry)->ptr[2] : Qnil);
-        rb_func =  ((len > 3) ? RARRAY(rb_entry)->ptr[3] : Qnil);
-        rb_data =  ((len > 4) ? RARRAY(rb_entry)->ptr[4] : Qnil);
-        entries[i].path = NIL_P(rb_path) ? NULL : RVAL2CSTR(rb_path);
-        entries[i].item_type = NIL_P(rb_type) ? "<Branch>" : RVAL2CSTR(rb_type);
-        entries[i].accelerator = NIL_P(rb_accel) ? NULL : RVAL2CSTR(rb_accel);
+        r_entry = RARRAY(ary)->ptr[i];
+        len = RARRAY(r_entry)->len;
+        Check_Type(r_entry, T_ARRAY);
+        r_path =  RARRAY(r_entry)->ptr[0];
+        r_type =  ((len > 1) ? RARRAY(r_entry)->ptr[1] : Qnil);
+        r_accel = ((len > 2) ? RARRAY(r_entry)->ptr[2] : Qnil);
+        r_extdata = ((len > 3) ? RARRAY(r_entry)->ptr[3] : Qnil);
+        r_func =  ((len > 4) ? RARRAY(r_entry)->ptr[4] : Qnil);
+        r_data =  ((len > 5) ? RARRAY(r_entry)->ptr[5] : Qnil);
+        entries[i].path = NIL_P(r_path) ? NULL : RVAL2CSTR(r_path);
+        entries[i].item_type = NIL_P(r_type) ? "<Branch>" : RVAL2CSTR(r_type);
+        entries[i].accelerator = NIL_P(r_accel) ? NULL : RVAL2CSTR(r_accel);
 
+        if (NIL_P(r_extdata)){
+            entries[i].extra_data = NULL;
+        } else if (TYPE(r_extdata) == T_STRING){
+            entries[i].extra_data = RVAL2CSTR(r_extdata);
+        } else if (TYPE(r_extdata) == T_SYMBOL){
+            entries[i].extra_data = rb_id2name(SYM2ID(r_extdata));
+        }
         if (menuitem_type_check(entries[i].item_type) == 0) {
             entries[i].callback = NULL;
         } else {
-            if (NIL_P(rb_func)) {
+            if (NIL_P(r_func)) {
                 entries[i].callback = NULL;
             } else {
                 entries[i].callback = items_exec_callback_wrap;
             }
         }
-        action = rb_ary_new3(4, rb_func, rb_data, self, rb_path);
+        action = rb_ary_new3(4, r_func, r_data, self, r_path);
 
         G_RELATIVE(self, action);
         entries[i].callback_action = action;
@@ -279,6 +292,8 @@ Init_gtk_itemfactory()
     rb_define_const(gItemFactory, "CHECK_ITEM", rb_str_new2("<CheckItem>"));
     rb_define_const(gItemFactory, "TOGGLE_ITEM", rb_str_new2("<ToggleItem>"));
     rb_define_const(gItemFactory, "RADIO_ITEM", rb_str_new2("<RadioItem>"));
+    rb_define_const(gItemFactory, "IMAGE_ITEM", rb_str_new2("<ImageItem>"));
+    rb_define_const(gItemFactory, "STOCK_ITEM", rb_str_new2("<StockItem>"));
     rb_define_const(gItemFactory, "SEPARATOR", rb_str_new2("<Separator>"));
     rb_define_const(gItemFactory, "BRANCH", rb_str_new2("<Branch>"));
     rb_define_const(gItemFactory, "LAST_BRANCH", rb_str_new2("<LastBranch>"));

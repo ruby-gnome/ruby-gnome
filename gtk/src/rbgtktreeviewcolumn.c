@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2002/11/04 08:32:33 $
+  $Date: 2002/12/05 17:27:41 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -98,13 +98,31 @@ tvc_add_attribute(self, cell, attribute, column)
    (GtkTreeViewColumn *tree_column,
    GtkCellRenderer *cell_renderer,
    ...);
-   void        gtk_tree_view_column_set_cell_data_func
-   (GtkTreeViewColumn *tree_column,
-   GtkCellRenderer *cell_renderer,
-   GtkTreeCellDataFunc func,
-   gpointer func_data,
-   GtkDestroyNotify destroy);
 */
+static void
+cell_data_func(tree_column, cell, model, iter, func)
+    GtkTreeViewColumn* tree_column;
+    GtkCellRenderer*   cell;
+    GtkTreeModel*      model;
+    GtkTreeIter*       iter;
+    gpointer           func;
+{
+    iter->user_data3 = model;
+    rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(tree_column),
+               GOBJ2RVAL(cell), GOBJ2RVAL(model), 
+               BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+}
+
+static VALUE
+tvc_set_cell_data_func(self, renderer)
+    VALUE self, renderer;
+{
+    VALUE func = rb_f_lambda();
+    G_RELATIVE(self, func);
+    gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2CELLRENDERER(renderer),
+                                            cell_data_func, (gpointer)func, NULL);
+    return self;
+}
 
 static VALUE
 tvc_clear_attributes(self, cell)
@@ -212,6 +230,7 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "clear", tvc_clear, 0);
     rb_define_method(tvc, "cell_renderers", tvc_get_cell_renderers, 0);
     rb_define_method(tvc, "add_attribute", tvc_add_attribute, 3);
+    rb_define_method(tvc, "set_cell_data_func", tvc_set_cell_data_func, 1);
     rb_define_method(tvc, "clear_attributes", tvc_clear_attributes, 1);
     rb_define_method(tvc, "set_spacing", tvc_set_spacing, 1);
     rb_define_method(tvc, "spacing", tvc_get_spacing, 0);

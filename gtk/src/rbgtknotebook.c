@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/11/09 19:45:36 $
+  $Date: 2002/12/05 17:27:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -209,12 +209,6 @@ note_popup_disable(self)
     gtk_notebook_popup_disable(_SELF(self));
     return self;
 }
-static VALUE
-note_get_current_page(self, child)
-    VALUE self, child;
-{
-    return INT2NUM(gtk_notebook_get_current_page(_SELF(self)));
-}
 
 static VALUE
 note_get_menu_label(self, child)
@@ -363,14 +357,6 @@ note_get_tab_pos(self)
     return INT2FIX(gtk_notebook_get_tab_pos(_SELF(self)));
 }
 
-static VALUE
-note_set_current_page(self, page)
-    VALUE self, page;
-{
-    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page));
-    return self;
-}
-
 /***********************************************/
 /*
  * Gtk::NotebookPage
@@ -440,7 +426,6 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "set_tab_border", note_set_tab_border, 1);
     rb_define_method(gNotebook, "popup_enable", note_popup_enable, 0);
     rb_define_method(gNotebook, "popup_disable", note_popup_disable, 0);
-    rb_define_method(gNotebook, "current_page", note_get_current_page, 0);
     rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
     rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
 /*
@@ -459,8 +444,6 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
     rb_define_method(gNotebook, "tab_pos", note_get_tab_pos, 0);
-
-    rb_define_method(gNotebook, "set_current_page", note_set_current_page, 1);
 
     G_DEF_SETTERS(gNotebook);
     G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", signal_g2r_func);

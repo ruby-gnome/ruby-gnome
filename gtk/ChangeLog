@@ -1,3 +1,12 @@
+2002-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaccelerator.c: Add file. Implement Gtk::Accelerator. 
+	* src/rbgtknotebook.c: Remove Gtk::Notebook#set_current_page, 
+	#current_page as they are same as set_page, page.
+	* src/rbgtktreeviewcolumn.c: Add Gtk::TreeViewColumn#set_cell_data_func.
+	* src/rbgtkwidget.c: Fix to use Symbol to stock_id in Gtk::Widget#render_icon.
+	* src/rbgtkitemfactory.c: Add Gtk::ItemFactory::IMAGE_ITEM, ::STOCK_ITEM.
+
 2002-12-02  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtkiconfactory.c: Add a file.
