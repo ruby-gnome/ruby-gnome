@@ -1,3 +1,9 @@
+2002-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktexttagtable.c: Fix a segfault when TextTagTable#lookup crashes is called 
+	with bad tag name.
+	Bugs item #659231 by Maicon Rodrigues.
+	
 2002-12-28  Kazuo Saito <ksaito@uranus.dti.ne.jp>
 
 	* src/rbgtk.h: Fix a bad definition of treeiter_set_value_table.

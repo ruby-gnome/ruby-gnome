@@ -4,7 +4,7 @@
   rbgtktexttagtable.c -
  
   $Author: mutoh $
-  $Date: 2002/11/15 13:27:23 $
+  $Date: 2002/12/28 11:53:04 $
 
   Copyright (C) 2002 OGASAWARA, Takeshi
 ************************************************/
@@ -41,7 +41,8 @@ static VALUE
 txt_tt_lookup(self, name)
     VALUE self, name;
 {
-    return GOBJ2RVAL(gtk_text_tag_table_lookup(_SELF(self), RVAL2CSTR(name)));
+    GtkTextTag* tag = gtk_text_tag_table_lookup(_SELF(self), RVAL2CSTR(name));
+    return tag ? GOBJ2RVAL(tag) : Qnil;
 }
 
 static gboolean
