@@ -1,10 +1,11 @@
 Ruby-GNOME2-0.8.0 (2003-11-16)
 
   * Ruby/GLib
-      - Provide methods for creating GObject from ruby side. Now you can create your 
-        own signals and properties: [Masahiro, Sakai]
+      - Provide methods for creating GObject from ruby side. Now you can create
+        your own signals and properties: [Masahiro, Sakai]
          GLib::MetaInterface, GLib::Instantiatable, GLib::Signal
-      - Added some methods, improved and Fixed some bugs: [Masahiro Sakai, Masao Mutoh]
+      - Added some methods, improved and Fixed some bugs: 
+        [Masahiro Sakai, Masao Mutoh]
          GLib::Closure, GLib, GLib::Instantiatable, GLib::Object, mkmf-gnome2.rb
       - Added new macros: [Masao Mutoh]
          G_RENAME_NICK()
@@ -12,7 +13,8 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
          sample/type-register.rb, tests/*.rb
 
   * Ruby/GdkPixbuf
-      - Added some methods, improved and Fixed some bugs: [KATO Kazuyoshi, Masao Mutoh]
+      - Added some methods, improved and Fixed some bugs: 
+        [KATO Kazuyoshi, Masao Mutoh]
          Gdk::Pixbuf
 
   * Ruby/Pango 
@@ -24,16 +26,19 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
 
   * Ruby/GTK
       - Completed: [Masao Mutoh]
-         Gdk::Geometry, Gdk::Event*, Gdk::Pixbuf, Gdk::Drawable, Gdk::DragContext, 
-         Gdk::Selection, Gdk::RGB, Gdk::GC, Gdk::Atom, Gdk::Image, Gdk::Colormap, 
-         Gdk::Keyval, Gdk::Screen, Gdk::Visual, Gdk::Window, Gdk::Display,  Gdk
+         Gdk::Geometry, Gdk::Event*, Gdk::Pixbuf, Gdk::Drawable, 
+         Gdk::DragContext, Gdk::Selection, Gdk::RGB, Gdk::GC, Gdk::Atom, 
+         Gdk::Image, Gdk::Colormap, Gdk::Keyval, Gdk::Screen, Gdk::Visual, 
+         Gdk::Window, Gdk::Display,  Gdk
       - Added and completed: [Masao Mutoh]
          Gdk::Property, Gdk::Keymap, Gdk::TimeCoord, 
-      - Added some methods, improved, fixed bugs: [Matthew Berg, Martin Povolny, 
-        KATO Kazuyoshi, Laurent Sansonetti, Masahiro Sakai, Masao Mutoh] 
-         Gtk::AccelGroup, Gtk::Accelmap, Gtk::Clipboard, Gtk::Notebook, Gtk::Drag, 
-         Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore, Gtk::TreeStore,
-         Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath, Gtk::TreeRowReference
+      - Added some methods, improved, fixed bugs: [Matthew Berg, 
+        Martin Povolny, KATO Kazuyoshi, Laurent Sansonetti, Masahiro Sakai, 
+        Masao Mutoh] 
+         Gtk::AccelGroup, Gtk::Accelmap, Gtk::Clipboard, Gtk::Notebook, 
+         Gtk::Drag, Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore, 
+         Gtk::TreeStore, Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath, 
+         Gtk::TreeRowReference
       - Added: [Kato Kazuyoshi]
          sample/gtk-demo/changedisplay.rb, sample/gtk-demo/pixbufs.rb.
       - Removed: [Masao Mutoh]
