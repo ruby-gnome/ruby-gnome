@@ -1,0 +1,1128 @@
+2003-09-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb: append "-I$(sitearchdir)" to $CPPFLAGS not
+	$CFLAGS. and stop overriding create_makefile().
+
+2003-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): use #instance_method,
+	UnboundMethod#bind and Method#call instead of #__send__.
+
+	* src/rbgobj_signal.c (gobj_s_method_added): check GType.
+
+2003-09-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_s_sig_override): check if the class is
+	registered.
+
+	* src/rbgobj_signal.c (gobj_s_method_added): when a method named
+	'do_<signal_name>' is defined then override default handler by the
+	method.
+
+2003-09-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: override #append_features of interface modules to
+	prevent including them into classes which is not subclass of
+	GLib::Instantiatable.
+
+2003-09-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c: implement GLib::Closure#invalidate.
+
+	* src/rbgobj_closure.c: don't invoke Proc objects after ruby is
+	terminated.
+
+	* src/rbgobj_signal.c: implement GLib::MetaInterface#signal_override
+	and GLib::Instantiatable#signal_chain_from_overridden experimentaly.
+
+2003-09-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c: define GLib::BINDING_VERSION.
+
+	* src/lib/mkmf-gnome2.rb: use PKG_CONFIG environment variable.
+
+2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf_gnome2.rb: Pass "-l$(sitearchdir)" at last of $CFLAGS.
+
+2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (register_type): if the super type is not defined
+	by ruby, then include a new module that defines #initialize.
+
+	* src/rbgobj_param.c (value_validate): use rb_ensure().
+
+	* src/rbgobj_param.c: disable GLib::Param#value_defaults? since the
+	name is bad.
+
+2003-08-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_enum.c (enum_coerce): use NUM2INT not NUM2UINT.
+
+	* src/rbgobj_paramspecs.c: delete unnecessary StringValue invocation.
+
+	* src/rbgobj_paramspecs.c: use RVAL2GENUM and RVAL2GFLAGS.
+
+2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/glib2.rb: rescue LoadError and Win32::Registry::Error
+	separately.
+
+	* src/lib/glib2.rb: On mingw32 and mswin32 platform, require
+	'win32/registry' unconditionaly and rescue LoadError.
+	(proposed by TAMURA.KENICHI <sgs02516@nifty.com>)
+
+	* src/rbgobj_enums.c: fixed rgbobj_get_enum - a VALUE was not
+	converted to int before calling rbgobj_make_enum.
+	(reported by Geoff Youngs <g@intersect-uk.co.uk>)
+
+2003-08-29  Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgobj_enums.c: fixed rgbobj_get_flags - a VALUE was not
+	converted to unsigned int before calling rbgobj_make_flags.
+
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Exit with 1 when the package is not found.
+
+2003-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h: new macros RVAL2GENUM(), RVAL2GFLAGS(),
+	GENUM2RVAL() and  GFLAGS2RVAL().
+
+	* src/rbgobj_signal.c: new exception class GLib::NoSignalError.
+
+	* src/rbgobj_object.c: new exception class GLib::NoPropertyError.
+
+	* src/lib/glib2.rb: append Dropline GTK2-Runtime DLL path into PATH
+	environmental variable. (proposed by TAMURA.KENICHI <sgs02516@nifty.com>)
+
+	* src/rbgobj_object.c: remove GLib::Object#property.
+
+	* src/rbgobj_enums.c (rbgobj_get_enum, rbgobj_get_flags): 
+	create temporary enum/flags object if the argument is an integer.
+	this is to check if the integer is in the values avalable in the type.
+	(proposed by Vincent Isambart <vincent.isambart@laposte.net>
+
+	* src/rbgobject.c (rbgobj_initialize_object): raise RuntimeError
+	if the argument is NULL. (proposed by Vincent Isambart
+	<vincent.isambart@laposte.net>)
+
+2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed.c: define GLib::Boxed#initialize which simply raise
+	TypeError.
+
+	* src/rbglib2.rb: fix format of GLib::Flags#inspect.
+
+	* src/glib2.def, src/global.h, src/rbgobj_enums.c, src/rbgobj_type.c,
+	src/rbgobj_value.c, src/rbgobject.h, src/lib/glib2.rb: new classes
+	GLib::Enum and GLib::Flags.
+
+2003-08-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/glib2.rb: add new file.
+
+	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): don't use
+	Array#quote. Because mkmf.rb of ruby-1.6 doesn't provide this method.
+
+2003-08-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h, src/rbgobj_type.c, let rbgobj_define_class() to
+	take `const gchar*', not `gchar*'.
+
+2003-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): append linker
+	flags other than -l and -L into $LDFLAGS.
+
+2003-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_sig_emit): fix to setup arg.self.
+
+2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/depend: use old style
+	* src/glib2.def: Add rbgobj_constant_remap.
+
+2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_valuetypes.c: use GHashTable instead of Ruby's Hash
+	for reference counting. Using Ruby's Hash may cause segmentaion fault
+	when ruby exits.
+
+	* src/rbgobj_closure.c: use GHashTable instead of Ruby's Hash
+	for the same reason as src/rbgobj_valuetypes.c.
+
+	* src/rbgobject.c (rbgobj_gobject_initialize): don't warn if the
+	instance type is a subtype of the class type.
+
+2003-08-03  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobj_valuetypes.c: Fix error for gcc 2.95.4.
+	Reported by Hiroshi Igarashi.
+
+2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): use --libs-only-l
+	and --libs-only-L instead of --libs.
+
+2003-08-02  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: fix for other libraries can't compile
+	in other directories.
+
+2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobj_s_properties),
+	src/rbgobj_signal.c (gobj_s_signals): recurse by default.
+
+2003-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: don't free RGObjClassInfo structure.
+
+2003-07-28  Geoff Youngs  <g@intersect-uk.co.uk>
+	* src/rbgobj_enums.c: add rbgobj_constant_* to allow renaming
+	invalid constants.
+	* src/rbgobject.h: add G_RENAME_CONSTANT
+
+2003-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (rclosure_marshal): don't stop jumps.
+	This is a temporary solution for the Ruby-GNOME2 0.6 release.
+
+2003-07-22  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: add CBOOL2RVAL, RVAL2CBOOL.
+
+	* src/lib/mkmf-gnome2.rb: Change include orders.
+
+2003-07-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_enums.c (rbgobj_flags_add_constants): use UINT2NUM()
+	instaed of INT2NUM().
+
+	* src/rbgobj_object.c (gobj_smethod_added): use
+	rbgobj_get_signal_func().
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): fix to treat accumulator
+	correctly.
+
+	* src/rbgobj_type.c: implement GLib::Type#<=>.
+
+	* src/rbgobj_type.c: change superclass of GLib::Boxed from Data to
+	Object.
+
+	* src/global.h, rbgutil.c: add new functions generic_s_new(),
+	generic_s_gtype() and generic_gtype().
+
+	* rbgobj_boxed.c, rbgobj_type.c: use generic_s_new(),
+	generic_s_gtype() and generic_gtype().
+
+2003-07-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_closure.c: enhance warning message of rclosure_marshal() 
+	which is used in GLib::Instantiatable#signal_connect().
+
+2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c, src/rbgobj_type.c, src/global.h: enable
+	rbgobj_define_action_methods() by default.
+	This function defines methods that emit	action signals.
+
+	Action signals are signals that may freely be emitted on alive
+	objects from user code via g_signal_emit() and friends, without
+	the need of being embedded into extra code that performs pre or
+	post emission adjustments on the object. They can also be thought
+	of as by third-party code generically callable object methods.
+
+	* src/rbgobject.h, src/rbgobj_enum.c, src/glib2.def: add new function
+	rbgobj_add_constants() and new macro G_DEF_CONSTANTS().
+
+2003-07-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (signal_add_emission_hook): fix to treat `detail'
+	argument correctly.
+
+2003-07-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (rclosure_marshal): use rb_protect().
+
+	* src/rbgobj_valuetypes.c (value_transform_ruby_any): use rb_protect().
+
+	* src/rbgobject.c (rbgobj_gobject_new): use rb_ensure().
+
+	* src/rbgobj_signal.c (gobj_sig_emit): use rb_ensure().
+
+	* src/rbgobj_object.c (gobj_set_property):
+	call rbgobj_rvalue_to_gvalue() even if the argument is nil.
+
+	* src/rbgobj_signal.c: remove Dispatch Closure stuff.
+	use g_rclosure_new() instead.
+
+	* src/rbgobj_value.c (rbgobj_rvalue_to_gvalue): call #to_s only for
+	Symbol->G_TYPE_STEING conversion.
+
+	* src/rbgobject.c (rbgobj_gobject_initialize): check if the argument
+	has expected GType.
+
+	* src/rbgobject.c (rbgobj_get_gobject): raise TypeError instead of
+	ArgumentError.
+
+2003-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed.c (boxed_to_ruby): convert NULL to nil.
+
+	* src/rbgobj_object.c (register_type): change error message:
+	"parent class" to "super class".
+
+	* src/rbgobj_param.c: remove Param#default=.
+	rename Param#defaults to Param#value_defaults?.
+	rename Paramcompare to Param#value_compare.
+	implement Param#value_validate, #value_convert, 
+	(value_defaults) initialize tmp.
+
+	* src/rbgobj_paramspecs.c: remove *#default and *#default_value.
+
+	* src/rbgobj_type.c:
+	(get_superclass): change to static function.
+	(GLib::Type#initialize): check if the given integer is valid GType
+	by using g_type_name().
+	(GLib::Type#==, #<, #>, #<=, #>=): return nil when uncomparable.
+
+2003-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/depend: use $(srcdir) to allow building in different directories.
+
+	* src/rbgobj_param.c (inspect): change inspect format.
+
+	* src/rbgobj_param.c: new methods:
+	GLib::Param#owner, GLib::Param#readable?,
+	GLib::Param#writable?, GLib::Param#construct?,
+	GLib::Param#construct_only?, GLib::Param#lax_validation?,
+	GLib::Param#private?, GLib::Param#readwrite?
+
+	* src/rbgobj_paramspec.c: new methods:
+	GLib::Param::Char#range, GLib::Param::UChar#range,
+	GLib::Param::Int#range, GLib::Param::UInt#range,
+	GLib::Param::Long#range, GLib::Param::ULong#range,
+	GLib::Param::Int64#range, GLib::Param::UInt64#range,
+	GLib::Param::Float#range, GLib::Param::Double#range
+
+	* src/rbgobj_boxed.c: implement GLib::Boxed#inspect and
+	GLib::Boxed#initialize_copy.
+	(boxed_from_ruby): accept nil and set NULL.
+
+	* src/rbgobj_signal.c: implement GLib::Signal#inspect and
+	GLib::Signal#owner.
+	(to_signal_id, to_gquark): removed.
+	(gobj_s_signal_new, gobj_s_signal, gobj_sig_emit, gobj_sig_emit_stop):
+	accept Symbol.
+	(query_signal_id, query_signal_name, query_itype, query_return_type,
+	query_signal_flags, query_param_types): fix argument declaration.
+
+	* src/rbgobj_valuetypes.c: implement GLib::Pointer#inspect,
+	GLib::Pointer#==, GLib::Pointer#eql? and GLib::Pointer#hash.
+
+2003-07-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_value.c, rbgobj_type.c: 
+	Accept rb_cObject as RBGOBJ_TYPE_RUBY_VALUE not G_TYPE_POINTER.
+
+2003-07-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_value.c, rbgobj_value_types.c, rbgobj_type.c: 
+	Accept rb_cObject as G_TYPE_POINTER.
+
+2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.h: Define G_BLOCK_PROC for ruby-1.8.x.
+	* src/*c: Use G_BLOCK_PROC instead of rb_f_lambda().
+	* src/lib/mkmf-gnome2.rb: Check rb_block_proc().
+
+2003-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.c: Add GLib::PRIORITY_*. 
+
+2003-06-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.c: Call setlocale(LC_NUMERIC, "C") for some locales 
+	which doesn't use "." as decimal-point.
+	Pointed out by Joao Pedrosa.
+
+2003-05-27  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* rbgobject.c - altered rbgobj_instance_from_ruby_object()
+	and rbgobj_ruby_object_from_instance() to
+	convert between NULL and nil automatically
+
+2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/depend: Add a file.
+	* src/lib/mkmf-gnome2.rb: Add a file(Move from ../).
+	* extconf.rb: Follow above changes.
+
+2003-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.c: klass.instance_methods to klass.instance_methods(false) 
+	for ruby-1.8.x.
+	* src/rbgobject.h, rbgobj_type.c: Remove rbgobj_exist_class().
+	Use rb_const_define_at() instead. Pointed out by Masahiro Sakai.
+
+2003-05-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c, rbgobject.h: Add rbgobj_exist_class(). 
+
+2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: fix so that GLib::Type#to_class can treat
+	GEnum's descendants.
+
+	* src/rbgobj_object.c: enable GLib::Object.new! by default
+
+	* src/rbgobj_object.c (gobj_s_install_property): modify error message.
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): check if the class has a
+	registerd type.
+
+	* src/rbgobj_signal.c: implement GLib::Signal#{run_first?, run_last?,
+	run_cleanup?, no_recurse?, detailed?, action?, no_hooks?}
+
+2003-04-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (GLib::Object.new!): check if the class has a
+	registered type.
+
+	* src/rbgobj_object.c: implement GLib::Object.install_property
+
+	* src/rbgobj_object.c: improve type registeration system.
+
+	* src/rbgobj_paramspecs.c: fix to use appropriate GType.
+
+	* src/rbgobj_type.c, src/rbgobject.h: Add a new function
+	rbgobj_register_class() and rewring
+	_register_fundamental_klass_to_gtype() and
+	_register_fundamental_gtype_to_klass() with it.
+
+2003-04-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_type.c: fix typo. ( interfaced? => interface? )
+	
+	* src/rbgobj_type.c: implement GLib::Type#<, GLib::Type#>,
+	GLib::Type#<= and GLib::Type#>=.
+
+	* src/rbgobj_signal.c: Extend GLib::Instantiatable#signal_handler_block
+	to take a block.
+
+	* src/rbgobj_signal.c (gobj_s_signals): Fix memory leak.
+
+	* src/rbgobj_object.c: Use RVAL2GTYPE().
+
+	* src/rbgobj_type.c (interface_get_gtype): Use CLASS2GTYPE().
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): ditto
+
+2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_signal.c: Implement a new function
+	rbgobj_define_action_methods() experimentaly.
+	This function defines methods that emit	action signals.
+
+	Action signals are signals that may freely be emitted on alive
+	objects from user code via g_signal_emit() and friends, without
+	the need of being embedded into extra code that performs pre or
+	post emission adjustments on the object. They can also be thought
+	of as by third-party code generically callable object methods.
+
+	* src/rbgobj_signal.c: Extend GLib::Object.signals to
+	GLib::Object.signals([inherited_too])
+
+	* src/rbgobj_object.c: Extend GLib::Object.properties to
+	GLib::Object.properties([inherited_too])
+
+	* src/global.h, src/rbgobj_signal.c, rbgobj_type.c:
+	gsub(/mInterfaceCommons/, 'mMetaInterface') and define
+	GLib::MetaInterface.
+
+	* src/rbgobj_paramspecs.c (GLib::Param::String#default_value): 
+	use rbg_cstr2rval() instead of rb_str_new2(). Because we need to
+	allow NULL.
+
+	* src/rbgobj_type.c: simplify the format of GLib::Type#inspect
+
+2003-04-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: rename signal_emit_by_name and
+	signal_emit_stop_by_name to signal_emit and signal_emit_stop
+	respectively.
+
+	* src/rbgobj_signal.c: remove Signal#signal_id, Signal#signal_name,
+	Signal#signal_flags.
+
+2003-04-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: add --enable-experimental option
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): implement accumulator stuff.
+
+	* src/rbgobj_signal.c: code cleanup
+
+	* src/rbgobj_signal.c: use signal_id as a key of signal_func_table.
+
+	* src/rbgobj_signal.c: change rbgobj_get_signal_func() to static
+	function.
+
+	* src/rbgobj_signal.c: implement Signal#add_emission_hook and
+	Signal#remove_emission_hook
+
+2003-04-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobject_class_new): implement the function
+	experimentaly.
+
+	* src/rbgobj_object.c: abolish not_abstract_table and use
+	RGObjClassInfo's `flags' field.	
+
+	* src/rbgobj_boxed.c: abolish boxed_table and use RGObjClassInfo's
+	`flags' field.	
+
+	* src/rbgobject.c, src/rbgobject.h:
+	add `flags' field to RGObjClassInfo.
+
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype): code cleanup
+
+2003-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c: Add GLib::Object.destroyed?
+
+2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/glib2.def: Add a file
+
+2003-03-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib_messages.c: change rbglib_log_handler_procs to static
+	variable.
+
+2003-03-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib_convert.c: implement
+	- uri = GLib.filename_to_uri(filename[, hostname])
+	- filename, hostname = GLib.filename_from_uri(uri)
+
+2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgutil.h: #include rbglib.h for RUBY_GLIB2_VAR.
+
+	* src/rbglib.h, rbgutil.h: define RUBY_GLIB2_VAR macro, and
+	use RUBY_GLIB2_VAR for defining 'exported' variables.
+
+	* extconf.rb: append "-DRUBY_GLIB2_COMPILATION" to $defs.
+
+2003-02-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Check NODE_ATTRASGN only if try_compile is defined.
+
+2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h: Add rbgobj_signal_wrap() declaration.
+
+	* src/rbgobject.h, src/global.h: Move declaration of
+	rbgobj_define_property_accessors() from rbgobject.h to global.h
+
+	* src/rbgobject.h: Remove rbgobj_define_signal_constants() declaration.
+	This function no longer exists.
+
+2003-02-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgutil.c:
+	Check whether NODE_ATTRASGN is used in ruby. If NODE_ATTRASGN is
+	used, G_DEF_SETTERS uses alias_method instead of generating wrapper
+	methods.
+	Patch from Nobuyoshi Nakada <nobu.nokada@softhome.net>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): ditto
+
+2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c: make id_relatives be static variable.
+
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c, src/rbgutil.[ch]: code cleanups
+
+	* src/rbgobj_boxed.c: make some functions to be static.
+
+	* src/rbgobj_boxed.c: implement GLib::Boxed#{copy,clone}
+	Suggested by KATO Kazuyoshi <kadu@zb.wakwak.com>
+
+2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: follow changes of ../mkmf-gnome2.rb
+
+2003-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c: Don't free boxed object when it's not copied boxed object.
+	* src/rbglib.c: Call setlocale() in Init_glib2(). 
+
+2003-02-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use ../mkmf-gnome2.rb
+
+2003-02-11  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbglib_convert.c: Add a file. Support string character set conversion.
+	* src/rbglib.c: Follow above changes.
+
+2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c, rbgobject.h: Add rbgobj_add_abstract_but_create_instance_class() 
+	for the classes which can create instance itself but define as an abstract 
+	class in GTK+-2.2. (e.g. GdkGC).
+
+2003-02-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.[ch]: change CSTR2RVAL's body to be a new function
+	rbg_cstr2rval() to avoid unexprected side-effect of macro.
+
+2003-02-03  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* src/rbglib.h: a check for NULL strings in the CSTR2RVAL macro so that
+	a NULL string translates to nil rather than raising an ArgumentError.
+
+2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/*[ch], README: Update Copyright.
+
+2003-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c, rbgobject.h: Add rbgobj_boxed_not_copy_obj().
+	Some boxed object shouldn't copy when gpoint convert to VALUE.
+
+2002-12-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c (type_is_value_type): fix typo
+
+2002-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_value.c rbgobj_gvalue_to_rvalue(), rbgobj_rvalue_to_gvalue():
+	Change behavior of G_TYPE_INTERFACE(same as G_TYPE_OBJECT).
+
+2002-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c, rbgobj_type.c, rbgobj_param.c, rbgobj_object.c: 
+	Apply rb_define_alloc_func() of ruby-1.8.x.
+
+2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.c: Check 2nd argument is hash. 
+
+2002-12-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.[ch]: Add G_SET_SYMBOL_PROPERTY(gtype, name).
+
+2002-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c: Add rb_cSymbol as G_TYPE_STRING. 
+
+2002-11-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgobj_closure.c (rclosure_marshal): check if return_value's type
+	is valid. Reported by Joshua Keith <joshuakeith@linuxmail.org>.
+
+2002-11-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgutil.c: remove rbgutil_val2cstr().
+
+	* src/rbglib.h: change StringValuePtr() definition to the same as
+	ruby-1.7. and change RVAL2CSTR() to use the StringValuePtr().
+
+2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_value.c: rbgobj_rvalue_to_gvalue() support Symbol value 
+	when G_TYPE_STRING is required.
+
+2002-11-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c, src/rbgobj_signal.c: change
+	GLib::Instantiatable.signals and GLib::Object.properties to return
+	array of strings. (instead of array of specific objects)
+	* rbgobj_signal.c: disable some experimental code.
+
+2002-11-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: Fix typos in error messages(GLib::GObject to GLib::Object).
+
+2002-11-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_signal.c: BugFix of rbgobj_set/get_signal_func.
+
+2002-11-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: stop appending '-g' to $CFLAGS.
+
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Add file.
+
+2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_message.c: add file(Sorry I forgot it....)
+
+2002-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: add file(methods are moved from Ruby/GTK). 
+	* src/rbgobj_signal.c, rbgobj_closure.c, rbgobj_object.c, rbgobject.h: 
+	add G_DEF_SIGNAL_FUNC. 
+	
+2002-11-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c (G_DEF_SETTERS): don't override existent methods.
+
+2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgutil.c, src/rbgutil.h: re-implement rbgutil_raise_gerror as
+	macro and rename to RAISE_GERROR.
+	add a new function rbgutil_gerror2exception()
+
+2002-11-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c, rbgobj_type.c: Remove rbgobj_define_signal_constants().
+
+2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgutil.c, src/rbgutil.h: add rbgutil_raise_gerror().
+
+2002-10-24  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgobj_signal.c (GLib::Instantiatable#signal_conect,
+	#signal_connect_after): accept detailed signal.
+
+2002-10-20  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: use canonical property name as hash key for the
+	hash for a special getter and setter of the property.
+
+2002-10-18  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c, src/rbgobj_valuetypes.c: use Hash#delete
+	instead of assigning nil.
+
+2002-10-17  KUBO Takehiro  <kubo@jiubao.org>
+
+	* rbgobj_object.c (gobj_set_property, gobj_get_property): fix a bug.
+
+2002-10-14  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (GLib::Object.property): raise exception if the
+	property doesn't exist.
+	* src/rbgobj_param.c: rename GLib::ParamSpec to GLib::Param
+	* src/rbgobj_signal.c (GLib::Instantiatable#signal_conect): accept
+	symbol as signal name.
+	* src/rbgobj_signal.c: rename
+	GLib::Signal::Query to GLIb::Signal and
+	GLib::Object.signal_list to GLIb::Object.signals and
+	GLib::Object.signal_lookup to GLIb::Object.signal
+	* src/rbgobj_object.c: rename
+	GLib::Object.list_properties to GLIb::Object.properties and
+	GLib::Object.find_property to GLIb::Object.property
+
+2002-10-13  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_valuetypes.c (rbgobj_ptr2cptr): check argument type
+	* src/rbgobj_valuetypes.c: don't register some transformation function
+	which may raise exception
+	* src/rbgobj_object.c: add rbgobj_register_property_getter() and
+	rbgobj_register_property_setter() for overwriting VALUE<=>GValue
+	converter for property.
+
+2002-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.[ch], src/rbglib.c: add G_DEF_SETTERS macro.
+
+2002-10-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_value.c (rbgobj_gvalue_to_rvalue): return Qnil when the
+	type of GValue is G_TYPE_STRING and the content is NULL.
+
+2002-10-05  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgutil.h: add G_DEF_SETTER macro.
+
+2002-10-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed: implement GLib::Boxed::gtype & GLib::Boxed#gtype
+
+2002-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c: Add _register_fundamental_gtype_to_klass()/
+	_register_fundamental_klass_to_gtype().
+
+2002-10-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.h: define LONG2NUM and ULONG2NUM unless already defined.
+
+2002-09-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.[ch]: File added.
+	* src/rbgobject.h, src/rbglib.[ch]: Support rbgutil.c.
+
+2002-09-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_param.c (inspect): change format: including value type and
+	owner type. excluding nick and blurb.
+	* src/rbgobj_param.c (get_nick, get_blurb): return nil if the string
+	is NULL.
+	* src/rbgobj_signal.c: introduce GLIb::Signal::Query to wrap
+	GSignalQuery.
+	* src/rbgobj_type.c: define GLib::Interface and include it to each
+	interface. This inclusion is intended to represent that interfaces
+	are subtypes of GLib::Inteface.
+	* src/rbgobj_object.c (gobj_s_find_property, gobj_set_property,
+	gobj_get_property): accept Symbol as property name.
+	* src/rbgobj_object.c: fix parameter number of GLib::Object.find_property
+
+2002-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_closure.c, src/rbgobj_boxed.c, src/rbgobject.h:
+	Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).
+
+2002-09-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (marker_remove): fix a bug which can cause
+	segmentation fault on following rb_gc_mark().
+
+2002-09-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: allow GLib::Object#freeze_notify to take block.
+	* src/rbgobj_param.c (rbgobj_get_value_from_param_spec): fixed
+	* src/rbgobj_param.c: implement GLib::ParamSpec#inspect
+	* src/rbgobj_object.c: implement GLib::Object.list_properties and
+	GLib::Object.find_property
+	* src/rbgobj_signal.c: implement signal_handler_is_connected?
+	* src/*.c: untabify
+	* src/rbgobj_boxed.c (boxed_free): don't call g_boxed_free() if not
+	initilized.
+	* src/rbgobj_closure.c: implement GLib::Closure
+
+2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: introduce GLib::Instantiatable as a common superclass of 
+	GLib::Object and GLib::ParamSpec. GLib:Instantiatable corresponds to
+	GTypeInstance structure in C.
+	* src/*.c: arrange APIs
+	* src/rbgobject.c (rbgobj_define_signal_constants): stop calling
+	g_class_ref(). Now caller must ensure that the class is initialized.
+
+2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: introduce macro "RBGLIB_ENABLE_EXPERIMENTAL" to indicate
+	experimental API.
+	* src/rbgobj_signal.c: define constants
+	* src/rbgobj_signal.c (signal_emit, signal_emit_stop): handles detail
+	parameter.
+	* src/rbgobject.c (rbgobj_gobject_new): check actual parameter size.
+
+2002-09-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): when property
+	name begins with 'is_', remove 'is_' from getter/setter name.
+	* src/rbgobject.c (rbgobj_define_property_accessors): append '?' to
+	the name of getter method of gboolean valued property.
+
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgobj_object.c (gobj_set_property, gobj_get_property):
+	accept nil as an argument of val. raise more kindly exception when
+	property name was not found.
+
+2002-09-18  KUBO Takehiro <kubo@jiubao.org>
+
+	* src/rbgobject.c (rbgobj_gobject_new): fix size parameter of memset()
+	* src/rbgobj_value.c (rbgobj_rvalue_to_gvalue): don't use
+	g2r_func_table but r2g_func_table
+
+2002-09-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): optimize a bit
+	  by accumulating source string and call module_eval at once.
+
+2002-09-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors):
+	  - Define not only 'hogehoge=' but alse 'set_hogehoge'
+	  - Exclude properties which name is conflict with method of 'Object'
+	  - Stop passing second and third argument of module_eval
+
+2002-09-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/global.h, src/rbglib.h: Move StringValue, StringValuePtr 
+	to src/rbglib.h(Because it'll be used by other Ruby-GNOME libraries).
+	Add RVAL2CSTR, CSTR2RVAL macro.
+
+2002-09-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Append -fnative-struct to $CFLAGS when G_OS_WIN32 is defined
+
+2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobject.h, src/rbgobj_object.c: Rename RBGOBJ_INITIALIZE to G_INITIALIZE.
+	* src/rbgobject.h: Add G_RELATIVE, G_RELATIVE2, G_REMOVE_RELATIVE.
+
+2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbobjmanager.[ch]: remove files.
+	* src/rbglib.[ch]: remove Init_objmanager().
+
+2002-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: implement GLib::Object#signal_emit_by_name
+
+2002-09-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: fix GLib::Object#signal_emit.
+	* src/rbgobj_signal.c: implement GLib::Object.signal_lookup and 
+	GLib::Object.signal_list
+	* src/rbgobj_signal.c: implement GLib::Object.signal_new.
+	This is an experimental interface.
+	* src/rbgobj_value.c (rbgobj_gvalue_to_rvalue, rbgobj_rvalue_to_gvalue): 
+	fix error messsage and use g_warning().
+	* src/utils_int64.c: use 0xffffffffL instead of G_MAXUINT
+	* src/utils_int64.c, src/global.h, src/rbgobj_paramspecs.c,
+	src/rbgobj_value.c: change prefix of int64 functions from 'rbgobj_' to
+	'rbglib_'.
+	* src/*.[ch]: add 'indent-tabs-mode: nil' to header 
+
+2002-08-29  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c: Add GLib::Boxed.new, GLib::Boxed#allocate.
+
+2002-08-20  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c: Add rbgobj_boxed_initialize(), rbgobj_boxed_create().
+	Modify rbgobj_boxed_get().
+
+	* src/rbgobject.[ch]: Support Boxed type in rbgobj_create_object(), 
+	rbgobj_initialize_object().
+
+2002-08-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/utils_int64.c: rb_global_variable(&max_PRUint32)
+	* src/rbgobj_param.c: rename rbgobj_get_value_from_paramspec to
+	rbgobj_get_value_from_param_spec
+	* src/rbgobj_param.c (gobj_get_gtype): use rbgobj_param_spec_get_struct
+	instead of RVAL2GOBJ
+
+2002-08-18  Masao Mutoh <mutoh@highway.ne.jp>
+
+   * src/rbobjmanager.[ch]: Add file. Support RB_DEF_CLASS system.
+
+2002-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use $libs instead of $LDFLAGS
+	* src/rbglib.c: define GLib::VERSION, GLib::(MAJOR|MINOR|MICRO)_VERSION
+	* src/rbgobj_param.c: define GParamFlags constants
+	* src/rbgobj_value.c (rbgobj_register_r2g_func): change argument.
+	it now take GType as key instead of Ruby class.
+	* src/rbgobject.c (rbgobj_add_relative, rbgobj_add_relative_removable,
+	rbgobj_remove_relative): call rb_ivar_defined() before calling rb_ivar_get()
+	* rbgobj_valuetypes.c, rbgobj_value.c: improve G_TYPE_POINTER handling
+
+2002-08-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.[ch]: move id_relative_callbacks to gtk
+	* src/rbgobj_closure.c, src/rbgobj_object.c, src/rbgobj_signal.c:
+	use GVAL2RVAL
+	* src/rbgobj_valuetypes.c: add file. implement RBGOBJ_TYPE_RUBY_VALUE
+	to box Ruby object into GValue.
+	* src/rbgobj_type.c, src/rbgobj_value.c, src/rbgobj_valuetypes.c:
+	support G_TYPE_POINTER. This is a tentative implementation.
+	* src/global.h: move "extern void Init_hoge();" stuff to where these
+	functions are actually called.
+
+2002-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/utils_int64.c (LL_L2UI): cast argument to guint32
+	* src/utils_int64.c (RubyTo64BitInt): oops. convert max_PRUint32 to VALUE.
+	* src/utils_int64.c: optimize
+
+2002-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c: use GQuark
+	* src/rbgobj_type.c: fix allocation problem in ruby-1.7
+	rb_obj_alloc() was used though GLib::Type#allocate wasn't implemented.
+	this problem is pointed out by Masao Mutoh <mutoh@highway.ne.jp>.
+	* src/rbgobj_object.c: rename GLib::GObject to GLib::Object
+	* src/utils_int64.c: add file. support gint64/guint64.
+	code is ripped from rbXPCOM-0.0.3.
+	<URL:http://www.ruby-lang.org/en/raa-list.rhtml?name=rbXPCOM>
+	Thanks to Kenichi Komiya <kom@mail1.accsnet.ne.jp>
+	* src/rbgobj_param.c (value_set_default): initialize GValue with {0,}.
+	* src/rbgobj_param.c (ParamSpec#value_type): returns GLib::Type
+	* src/rbgobj_param.c (ParamSpec#owner_type): ditto
+	* src/rbgobj_paramspecs.c: implement more functions
+	* src/rbgobj_boxed.c: use rbgobj_type.c for class managiment
+	* src/rbgobj_value.c: hardcode most converters.
+	Now table-lookup is used only for G_TYPE_POINTER and G_TYPE_BOXED.
+	* src/rbgobj_object.c, src/rbgobj_enum.c, src/rbgobj_param.c: ditto
+
+2002-08-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: more ruby-ish method naming.
+	ie: "hoge?" rather than "is_hoge"?
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype): enhancement for
+	G_TYPE_PARAM
+	* src/rbgobj_param.c, src/rbgobj_paramspec.c: rewrite for using above
+	enhancement.
+
+2002-08-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_gobject_new): take type argument as GType
+	 instead of VALUE.
+	* src/rbgobject.c (rbgobj_gobject_new): allow nil for construct parameter
+	* src/rbgobj_object.c (is_gtkobject): add function
+	* src/rbgobj_object.c (GObject.allocate): check abstract class
+	* src/rbgobj_object.c (GObject#initialize): rewrite
+	* src/rbgobj_type.c (rbgobj_lookup_class): use independent hash instead
+	of instance variable. and abolish id_class_info.
+	* src/rbgobj_type.c (rbgobj_lookup_class): search ancestor classes.
+	* src/rbgobj_type.c: implement GLib::Type.
+
+2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: extend rbgobj_lookup_class_by_gtype() to deal
+	interfaces
+	* src/rbgobject.h: define macros: G_DEF_INTERFACE and G_DEF_INTERFACE2
+	* src/rbgobj_typeplugin.c: file added
+	* extconf.rb: use --msvc-syntax option for pkg-config if the compiler
+	is MSVC++.
+
+2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+ 
+	* src/rbgobject.h: remove declaration of id_class_info and id_delete
+	* src/rbgobject.h, src/rbgobj_object.c, src/rbgobj_signal.c:
+	remove global variable rbgobj_cGObject.
+
+2002-08-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.[ch]: fix mGLib declaration and definition
+
+2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	enable calling of rbgobj_define_property_accessors() and
+	rbgobj_define_signal_constants().
+
+2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: abolish rbgobj_register_class()
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	now this function create a new class on demand.
+	* src/rbgobj_type.c: abolish rbgobj_lookup_rbclass()
+	* src/rbgobject.c: fix typo
+	* src/rbgobject.c: add rbgobj_define_signal_constants()
+	which define constants for signal names.
+
+2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (_gobject_to_ruby): check NULL before calling
+	GOBJ2RVAL().
+	* src/rbgobj_signal.c (gobj_sig_connect): remove unused variable 'id'.
+	* src/rbgobj_signal.c (gobj_sig_connect_after): ditto
+	* src/rbgobj_object.c (gobj_smethod_added): fix bugs
+	
+2002-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: devide from rbgobj_objectc[ch].
+	* src/rbgobj_object.c, src/rbgobject.h: abolish rbgobj_force_get_gobject().
+	* src/rbgobject.h: add G_DEF_CLASS(), G_DEF_CLASS2(), GTYPE2CLASS().
+	* src/rbgobj_type.c: add rbgobj_define_class()
+
+2002-07-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c: use g_closure_add_invalidate_notifier()
+	instead of g_closure_add_finalize_notifier()
+	* src/rbgobj_closure.c: fix g_closure_add_invalidate_notifier()'s
+	argument order
+	* src/rbgobj_signal.c: GObject#signal_connect now accept extra argument
+	as Ruby/Gtk 1.
+	* src/rbgobj_signal.c: implement GObject#signal_connect_after
+
+2002-07-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobj_s_gobject_new): refine GtkObject-specific
+	stuff
+	* src/rbgobj_object.c: implement GObject#freeze_notify, GObject#notify,
+	GObject#thaw_notify
+	* src/rbgobj_object.c (gobj_inspect): use g_strdup_printf() instead of
+	ALLOCA_N() and sprintf()
+	* src/rbgobj_type.c (rbgobj_register_class): add some check
+	* src/*.c: replace rbgobj_get_value_from_gobject() with GOBJ2RVAL()
+	* src/*.c: replace rbgobj_get_gobject() with RVAL2GOBJ()
+	* src/rbgobj_object.c:
+	  void rbgobj_define_property_acccessors(VALUE klass);
+	is added. This function defines accessor methods for properties.
+	* src/rbgobj_signal.c (gobj_sig_emit): call g_value_init()
+
+2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: abolish rbgobj_make_gobject_auto_type() and
+	rbgobj_make_gobject()
+	* src/rbgobj_boxed.c, src/rbgobj_enums.c, src/rbgobj_typemodule.c,
+	src/rbgobj_signal.c: created
+	* src/rbgobj_object.c: move signal stuff to src/rbgobj_signal.c
+
+2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: implement GObject.gobject_new experimentaly.
+	  example:
+	   w = GLib::GObject.gobject_new("GtkWindow", "title" => "Hello World")
+
+2002-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: check allocation framework
+	* src/rbgobj_object.c: introduce intermediate data structure (gobj_holder)
+	for managing not only GObject*, but also class_info and ruby object itself.
+	* src/rbgobj_object.c: abolish gobject_object_list_v and 
+	gobject_object_list
+	* src/rbgobj_object.c: use gobject_weak_ref() to observe an explicit
+	disposition. (e.g. by gtk_object_destroy())
+	* src/rbgobj_object.c: implement GObject#set_property and
+	GObject#get_property
+	* src/rbgobj_paramspecs.c: created
+
+2002-06-23  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c (Init_gobject_gtype): call g_type_init().
+	* src/rbgobj_object.c, src/gclosure.c: zero-fill GValue before
+	using it.
+
+2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobject.h: Fix parameter number of RBGOBJ_INITIALIZE().
+
+2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: change rbgobj_set_gobject() to rbgobj_initialize_gobject().
+	* src/rbgobject.h: create RBGOBJ_INITIALIZE().
+
+2002-06-22  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobject.h: create two macros; RVAL2GOBJ() and GOBJ2RVAL().
+	* src/rbgobject.h, rbgobj_object.c: make rbgobj_make_gobject() and
+	rbgobj_make_gobject_auto_type() be private.
+	* src/rbgobj_object.c: remove gobj_mark() and clear_gobject().
+	* src/rbglib.c: remove gError.
+
+2002-06-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c, src/rbgobj_type.c, src/rbgobject.h:
+	rename rbgobj_class_info to RGObjClassInfo.
+
+2002-06-18  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/*.c: conform to Ruby/GNOME2 coding-style.
+
+2002-06-18  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* extconf.rb: check whether package exists or not.
