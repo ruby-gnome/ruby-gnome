@@ -6,6 +6,7 @@
 	calling g_thead_init().
 	* sample/gtk-demo/background.jpg: Added.
 	* sample/gtk-demo/rotated_text.rb: Added.
+	* sample/gtk-demo/appwindow.rb: Work under GTK+-2.0.x.
 	* src/rbgdkthreads.c:: Fixed a warning.
 
 2005-02-27  Mirko Maischberger  <mirko@lilik.it>

@@ -1,7 +1,7 @@
 # Copyright (c) 2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: rotated_text.rb,v 1.1 2005/03/05 11:16:03 mutoh Exp $
+# $Id: rotated_text.rb,v 1.2 2005/03/05 15:01:16 mutoh Exp $
 =begin
 = Rotated Text
 
@@ -21,6 +21,11 @@ module Demo
 
     def initialize
       super('Rotated Text')
+
+      unless Gtk.check_version?(2, 6, 0)
+         add(Gtk::Label.new("This sample requires GTK+ 2.6.0 or later"))
+         return
+      end
 
       drawing_area = Gtk::DrawingArea.new
       add(drawing_area)

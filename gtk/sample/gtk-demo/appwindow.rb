@@ -1,7 +1,7 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: appwindow.rb,v 1.6 2005/02/12 23:02:43 kzys Exp $
+# $Id: appwindow.rb,v 1.7 2005/03/05 15:01:16 mutoh Exp $
 =begin
 =  Application main window
 
@@ -159,6 +159,11 @@ module Demo
     end
 
     def about_cb(*args)
+      unless Gtk.check_version?(2, 6, 0)
+        puts "This sample requires GTK+ 2.6.0 or later"
+        return
+      end
+
       authors = ["Peter Mattis", "Spencer Kimball", "Josh MacDonald", "and many more..."]
       documentors = ["Owen Taylor", "Tony Gale", "Mattias Clasen <mclasen@redhat.com>",  
 	"and many more..."]
