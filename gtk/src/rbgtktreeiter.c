@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/03 18:04:43 $
+  $Author: igapy $
+  $Date: 2002/11/04 14:11:57 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,7 +12,7 @@
 #include "global.h"
 
 #define _SELF(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
-#define ITR2RVAL(i) (BOXED2RVAL2(i, GTK_TYPE_TREE_ITER))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))

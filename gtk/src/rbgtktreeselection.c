@@ -3,8 +3,8 @@
 
   rbgtktreeselection.c -
 
-  $Author: mutoh $ 
-  $Date: 2002/11/02 11:18:52 $
+  $Author: igapy $ 
+  $Date: 2002/11/04 14:11:57 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -15,7 +15,7 @@
 #define RVAL2TREEMODEL(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
-#define ITR2RVAL(i) (BOXED2RVAL2(i, GTK_TYPE_TREE_ITER))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE

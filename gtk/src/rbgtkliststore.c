@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/03 18:04:42 $
+  $Author: igapy $
+  $Date: 2002/11/04 14:11:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,7 +12,7 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
-#define ITR2RVAL(i) (BOXED2RVAL2(i, GTK_TYPE_TREE_ITER))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
