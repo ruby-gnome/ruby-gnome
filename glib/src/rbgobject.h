@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2003/09/03 07:11:02 $
+  $Author: mutoh $
+  $Date: 2003/11/09 15:52:31 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -68,6 +68,8 @@ extern "C" {
 #define G_DEF_CONSTANTS(mod, type, strip_prefix) \
 	rbgobj_add_constants(mod, type, strip_prefix)
 #define G_RENAME_CONSTANT(orig, alt) \
+	rbgobj_constant_remap(orig, alt)
+#define G_RENAME_NICK(orig, alt) \
 	rbgobj_constant_remap(orig, alt)
 
 typedef enum

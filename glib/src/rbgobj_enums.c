@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: sakai $
-  $Date: 2003/10/22 16:38:23 $
+  $Author: mutoh $
+  $Date: 2003/11/09 15:52:31 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -475,8 +475,16 @@ rbgobj_init_flags_class(VALUE klass)
 
     for (i = 0; i < gclass->n_values; i++) {
         GFlagsValue* entry = &(gclass->values[i]);
-        gchar* nick = g_strdup(entry->value_nick);
+        gchar* nick;
         gchar* p;
+        gchar* replace_nick;
+
+        replace_nick = rbgobj_constant_lookup(entry->value_nick);
+        if (replace_nick){
+            nick = g_strdup(replace_nick);
+        } else {
+            nick = g_strdup(entry->value_nick);
+        }
 
         for (p = nick; *p; p++)
             if (*p == '-')
