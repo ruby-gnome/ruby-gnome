@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Date: 2003/08/01 15:48:30 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -155,7 +155,8 @@ gobj_s_signals(int argc, VALUE* argv, VALUE self)
     GType gtype;
     VALUE inherited_too, result;
 
-    rb_scan_args(argc, argv, "01", &inherited_too);
+    if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
+        inherited_too = Qtrue;
     gtype = CLASS2GTYPE(self);
     result = rb_ary_new();
 

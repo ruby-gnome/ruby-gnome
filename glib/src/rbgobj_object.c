@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Date: 2003/08/01 15:48:30 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -150,7 +150,8 @@ gobj_s_properties(int argc, VALUE* argv, VALUE self)
     VALUE ary;
     int i;
 
-    rb_scan_args(argc, argv, "01", &inherited_too);
+    if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
+        inherited_too = Qtrue;
 
     props = g_object_class_list_properties(oclass, &n_properties);
 

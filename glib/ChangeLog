@@ -1,3 +1,8 @@
+2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobj_s_properties),
+	src/rbgobj_signal.c (gobj_s_signals): recurse by default.
+
 2003-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c: don't free RGObjClassInfo structure.
