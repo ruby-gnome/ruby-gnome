@@ -4,15 +4,18 @@
   rbpango.c -
 
   $Author: mutoh $
-  $Date: 2003/01/03 16:34:48 $
+  $Date: 2003/01/10 19:22:13 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
 #include "rbpango.h"
 
+VALUE mPango;
+
 void
 Init_pango()
 {
-   Init_pango_inits();
+    mPango = rb_define_module("Pango");
+    Init_pango_inits();
 }

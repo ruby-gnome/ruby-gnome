@@ -1,3 +1,18 @@
+2003-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/attribute.rb: Add a file. 
+	* src/rbpangocolor.c: Add accessor for the struct PangoColor.
+	* src/rbpangofontdescription.c: Remove Pango::FontDescription#to_s.
+	* src/rbpangoattribute.c: Improve Gtk::Attribute and children. Add initialize methods.
+	* src/rbpangolanguage.c: Add Pango::Language#to_str.
+
+2003-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpango.h, src/rbpangoattribute.c: 
+	Add RBPANGO_ADD_ATTRIBUTE for other libs(rbgdkpango.c).
+	Add extern declaration for accessing to pattr, pattrstring, 
+	pattrint, pattrfloat, pattrcolor.
+
 2003-01-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoattribute.c: Add accessor methods to attributes.

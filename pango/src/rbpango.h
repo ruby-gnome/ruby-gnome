@@ -4,7 +4,7 @@
   rbpango.h -
 
   $Author: mutoh $
-  $Date: 2003/01/03 16:34:48 $
+  $Date: 2003/01/10 19:22:13 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -24,14 +24,18 @@ extern VALUE mPango;
 #define PANGO_TYPE_RECTANGLE (pango_rectangle_get_type())
 #define PANGO_TYPE_ATTR_ITERATOR (pango_attr_iter_get_type())
 
-#define ATTR2RVAL(attr) (make_pango_attribute(attr))
-#define RVAL2ATTR(attr) (get_pango_attribute(attr))
+#define ATTR2RVAL(attr) (pango_make_attribute(attr))
+#define RVAL2ATTR(attr) (pango_get_attribute(attr))
+#define ATTRTYPE2CLASS(attr_type) (pango_get_attribute_klass(attr_type))
+#define RBPANGO_ADD_ATTRIBUTE(type, klass) (pango_add_attribute(type, klass))
 
-extern VALUE make_pango_attribute(PangoAttribute* attr);
-extern PangoAttribute* get_pango_attribute(VALUE attr);
+extern VALUE pango_make_attribute(PangoAttribute* attr);
+extern PangoAttribute* pango_get_attribute(VALUE attr);
 
 extern GType pango_item_get_type();
 extern GType pango_layout_iter_get_type();
 extern GType pango_layout_line_get_type();
 extern GType pango_rectangle_get_type();
 extern GType pango_attr_iter_get_type();
+extern VALUE pango_get_attribute_klass(VALUE attr_type);
+extern void pango_add_attribute(int attr_type, VALUE klass);

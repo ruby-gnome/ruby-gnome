@@ -4,7 +4,7 @@
   rbpangolanguage.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:58 $
+  $Date: 2003/01/10 19:22:13 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -43,6 +43,13 @@ language_matches(argc, argv, self)
                                              NIL_P(range_list) ? NULL : RVAL2CSTR(range_list)));
 }
 
+static VALUE
+language_to_str(self)
+    VALUE self;
+{
+    return CSTR2RVAL((char*)_SELF(self));
+}
+
 void
 Init_pango_language()
 {
@@ -51,5 +58,5 @@ Init_pango_language()
     rb_define_method(pLanguage, "initialize", language_initialize, 1);
     rb_define_singleton_method(pLanguage, "to_string", language_s_to_string, 1);
     rb_define_method(pLanguage, "matches", language_matches, -1);
-
+    rb_define_method(pLanguage, "to_str", language_to_str, 0);
 }

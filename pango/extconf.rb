@@ -49,6 +49,16 @@ else
   is_gcc = false
 end
 
+STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
+if Object.respond_to? :allocate
+  STDOUT.print "yes\n"
+  $defs << "-DHAVE_OBJECT_ALLOCATE"
+else
+  STDOUT.print "no\n"
+end
+
+have_func("rb_define_alloc_func") # for ruby-1.8
+
 mdir = $mdir
 begin
   $mdir = "pango/src"

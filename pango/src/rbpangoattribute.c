@@ -4,29 +4,64 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/01/03 16:34:48 $
+  $Date: 2003/01/10 19:22:13 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
 #include "rbpango.h"
 
-static VALUE pattr;
-static VALUE pattrs;
+VALUE pattr, attrstring, pattrint, pattrfloat, pattrcolor, pattrbool;
+static VALUE type_to_klass;
 
 /***********************************************/
+void
+pango_add_attribute(attr_type, klass)
+    int attr_type;
+    VALUE klass;
+{
+    rb_hash_aset(type_to_klass, INT2FIX(attr_type), klass);
+}
+
+/* This is for Attributes which has PangoAttrType. */
 VALUE
-make_pango_attribute(attr)
+pango_get_attribute_klass(attr_type)
+    VALUE attr_type;
+{
+    VALUE type = Qnil;
+    if (TYPE(attr_type) == T_STRING){
+        char* strtype = RVAL2CSTR(attr_type);
+        if (strcmp(strtype, "Attribute") == 0){
+            type = pattr;
+        } else if (strcmp(strtype, "AttrString") == 0){
+            type = attrstring;
+        } else if (strcmp(strtype, "AttrInt") == 0){
+            type = pattrint;
+        } else if (strcmp(strtype, "AttrFloat") == 0){
+            type = pattrfloat;
+        } else if (strcmp(strtype, "AttrColor") == 0){
+            type = pattrcolor;
+        } else if (strcmp(strtype, "AttrBool") == 0){
+            type = pattrbool;
+        }
+    } else {
+        type = rb_hash_aref(type_to_klass, INT2FIX(attr_type));
+    }
+    return type;
+}
+
+VALUE
+pango_make_attribute(attr)
     PangoAttribute* attr;
 {
     if (attr == NULL) return Qnil;
-    return Data_Wrap_Struct(rb_hash_aref(pattrs, INT2FIX(attr->klass->type)), 0, 
+    return Data_Wrap_Struct(rb_hash_aref(type_to_klass, INT2FIX(attr->klass->type)), 0, 
                             pango_attribute_destroy, 
                             pango_attribute_copy(attr));
 }
 
 PangoAttribute*
-get_pango_attribute(attr)
+pango_get_attribute(attr)
     VALUE attr;
 {
     PangoAttribute *gattr;
@@ -37,9 +72,33 @@ get_pango_attribute(attr)
         rb_raise(rb_eTypeError, "not a Pango::Attribute...");
     }
     Data_Get_Struct(attr, PangoAttribute, gattr);
-
+    printf("gattr type = %d\n", gattr->klass->type);
     return gattr;
 }
+
+/***********************************************/
+static VALUE
+attr_s_allocate(klass)
+    VALUE klass;
+{
+    return Data_Wrap_Struct(klass, 0, pango_attribute_destroy, 0);
+}
+
+#ifdef HAVE_OBJECT_ALLOCATE
+#define attr_s_new rb_class_new_instance
+#else
+static VALUE
+attr_s_new(argc, argv, klass)
+    int argc;
+    VALUE* argv;
+    VALUE klass;
+{
+    VALUE obj = attr_s_allocate(klass);
+    rb_obj_call_init(obj, argc, argv);
+    return obj;
+}
+#endif
+
 /***********************************************/
 
 /* This method implemented at rbpangomain.c
@@ -121,6 +180,14 @@ attr_float_value(self)
     return rb_float_new(((PangoAttrFloat*)RVAL2ATTR(self))->value);
 }
 
+/* PangoAttrBool(This is Ruby/Pango's original class) */
+static VALUE
+attr_bool_value(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(((PangoAttrInt*)RVAL2ATTR(self))->value);
+}
+
 /* PangoAttrFontDesc */
 static VALUE
 attr_fontdesc_value(self)
@@ -161,7 +228,7 @@ static VALUE \
 attr_ ## klassname ## _initialize(self, val)\
     VALUE self, val;\
 {\
-    G_INITIALIZE(self, pango_attr_ ## funcname ## _new(NUM2INT(val)));\
+    DATA_PTR(self) = pango_attr_ ## funcname ## _new(NUM2INT(val));\
     return Qnil;\
 }
 
@@ -169,8 +236,8 @@ static VALUE
 attr_AttrLanguage_initialize(self, lang)
     VALUE self, lang;
 {
-    G_INITIALIZE(self, pango_attr_language_new(
-                     (PangoLanguage*)RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE)));
+    DATA_PTR(self) = pango_attr_language_new(
+                     (PangoLanguage*)RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE));
     return Qnil;
 }
 
@@ -178,7 +245,7 @@ static VALUE
 attr_AttrFamily_initialize(self, family)
     VALUE self, family;
 {
-    G_INITIALIZE(self, pango_attr_family_new(RVAL2CSTR(family)));
+    DATA_PTR(self) = pango_attr_family_new(RVAL2CSTR(family));
     return Qnil;
 }
 
@@ -192,9 +259,9 @@ static VALUE
 attr_AttrFontDescription_initialize(self, fontdescription)
     VALUE self, fontdescription;
 {
-    G_INITIALIZE(self, pango_attr_font_desc_new(
-                     (PangoFontDescription*)RVAL2BOXED(self, 
-                                                       PANGO_TYPE_FONT_DESCRIPTION)));
+    DATA_PTR(self) = pango_attr_font_desc_new(
+        (PangoFontDescription*)RVAL2BOXED(fontdescription, 
+                                          PANGO_TYPE_FONT_DESCRIPTION));
 
     return Qnil;
 }
@@ -203,7 +270,7 @@ static VALUE
 attr_AttrForeground_initialize(self, r, g, b)
     VALUE self, r, g, b;
 {
-    G_INITIALIZE(self, pango_attr_foreground_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b)));
+    DATA_PTR(self) = pango_attr_foreground_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
 }
 
@@ -211,7 +278,7 @@ static VALUE
 attr_AttrBackground_initialize(self, r, g, b)
     VALUE self, r, g, b;
 {
-    G_INITIALIZE(self, pango_attr_background_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b)));
+    DATA_PTR(self) = pango_attr_background_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
 }
 
@@ -219,7 +286,7 @@ static VALUE
 attr_AttrStrikethrough_initialize(self, strikethrough)
     VALUE self, strikethrough;
 {
-    G_INITIALIZE(self, pango_attr_strikethrough_new(RTEST(strikethrough)));
+    DATA_PTR(self) = pango_attr_strikethrough_new(RTEST(strikethrough));
     return Qnil;
 }
 
@@ -229,9 +296,9 @@ static VALUE
 attr_AttrShape_initialize(self, ink_rect, logical_rect)
     VALUE self, ink_rect, logical_rect;
 {
-    G_INITIALIZE(self, pango_attr_shape_new(
-                     (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
-                     (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE)));
+    DATA_PTR(self) = pango_attr_shape_new(
+        (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
+        (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));
     return Qnil;
 }
 
@@ -239,7 +306,7 @@ static VALUE
 attr_AttrScale_initialize(self, scale)
     VALUE self, scale;
 {
-    G_INITIALIZE(self, pango_attr_scale_new(NUM2DBL(scale)));
+    DATA_PTR(self) = pango_attr_scale_new(NUM2DBL(scale));
     return Qnil;
 }
 
@@ -247,21 +314,30 @@ MAKE_ATTRINT_INIT(AttrRise, rise);
 
 #define MAKE_ATTR(gtype, name, parent, num)\
 tmpklass = rb_define_class_under(mPango, #name, parent);\
-rb_hash_aset(pattrs, INT2FIX(gtype), tmpklass);\
+rb_hash_aset(type_to_klass, INT2FIX(gtype), tmpklass);\
 rb_define_method(tmpklass, "initialize", attr_## name ## _initialize , num);
 
 void
 Init_pango_attribute()
 {
-    VALUE tmpklass, pattrstring, pattrint, pattrfloat, pattrcolor;
+    VALUE tmpklass;
 
     pattr = rb_define_class_under(mPango, "Attribute", GTYPE2CLASS(G_TYPE_BOXED));
     rb_define_method(pattr, "==", attr_equal, 1);
     rb_define_method(pattr, "start_index", attr_start_index, 0);
     rb_define_method(pattr, "end_index", attr_end_index, 0);
 
-    pattrstring = rb_define_class_under(mPango, "AttrString", pattr);
-    rb_define_method(pattrstring, "value", attr_string_value, 0);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+    rb_define_singleton_method(pattr, "allocate", attr_s_allocate, 0);
+#else
+    rb_define_alloc_func(pattr, attr_s_allocate);
+#endif
+#ifndef HAVE_OBJECT_ALLOCATE
+    rb_define_singleton_method(pattr, "new", attr_s_new, -1);
+#endif
+
+    attrstring = rb_define_class_under(mPango, "AttrString", pattr);
+    rb_define_method(attrstring, "value", attr_string_value, 0);
 
     pattrint = rb_define_class_under(mPango, "AttrInt", pattr);
     rb_define_method(pattrint, "value", attr_int_value, 0);
@@ -272,13 +348,16 @@ Init_pango_attribute()
     pattrcolor = rb_define_class_under(mPango, "AttrColor", pattr);
     rb_define_method(pattrcolor, "value", attr_color_value, 0);
 
-    rb_global_variable(&pattrs);
-    pattrs = rb_hash_new();
+    pattrbool = rb_define_class_under(mPango, "AttrBool", pattr);
+    rb_define_method(pattrbool, "value", attr_bool_value, 0);
+
+    rb_global_variable(&type_to_klass);
+    type_to_klass = rb_hash_new();
 
     MAKE_ATTR(PANGO_ATTR_LANGUAGE, AttrLanguage, pattr, 1);
     rb_define_method(tmpklass, "value", attr_language_value, 0);
     
-    MAKE_ATTR(PANGO_ATTR_FAMILY, AttrFamily, pattrstring, 1);
+    MAKE_ATTR(PANGO_ATTR_FAMILY, AttrFamily, attrstring, 1);
     MAKE_ATTR(PANGO_ATTR_STYLE, AttrStyle, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_WEIGHT, AttrWeight, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_VARIANT, AttrVariant, pattrint, 1);
@@ -289,7 +368,7 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_UNDERLINE, AttrUnderline, pattrint, 1);
-    MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrint, 1);
+    MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, pattr, 2);
     rb_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
@@ -304,6 +383,12 @@ Init_pango_attribute()
     rb_define_const(pattr, "SCALE_LARGE", rb_float_new(PANGO_SCALE_LARGE));
     rb_define_const(pattr, "SCALE_X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
     rb_define_const(pattr, "SCALE_XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
+
+    /* PangoUnderline */
+    rb_define_const(pattr, "UNDERLINE_NONE", INT2FIX(PANGO_UNDERLINE_NONE));
+    rb_define_const(pattr, "UNDERLINE_SINGLE", INT2FIX(PANGO_UNDERLINE_SINGLE));
+    rb_define_const(pattr, "UNDERLINE_DOUBLE", INT2FIX(PANGO_UNDERLINE_DOUBLE));
+    rb_define_const(pattr, "UNDERLINE_LOW", INT2FIX(PANGO_UNDERLINE_LOW));
 
     rb_define_const(pattr, "TYPE_INVALID", INT2FIX(PANGO_ATTR_INVALID));
     rb_define_const(pattr, "TYPE_LANGUAGE", INT2FIX(PANGO_ATTR_LANGUAGE));
