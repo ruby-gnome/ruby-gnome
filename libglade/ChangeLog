@@ -1,5 +1,9 @@
 2003-08-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* rbglade.c: Fix bug caused by previous changes.
+
+2003-08-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* rbglade.c: Fix GLadeXML.new parameter of block/proc.
 
 2003-08-16  Soila Jani <soila@cs.tut.fi>

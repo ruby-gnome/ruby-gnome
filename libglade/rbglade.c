@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2003/08/15 15:52:32 $
+  $Date: 2003/08/22 12:02:27 $
 
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project
@@ -66,7 +66,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     root = NIL_P(rootString) ? 0 : STR2CSTR(rootString);
     domain = NIL_P(domainString) ? 0 : STR2CSTR(domainString);
 
-    if (NIL_P(handler_proc))
+    if (NIL_P(handler_proc) && rb_block_given_p())
         handler_proc = G_BLOCK_PROC();
 
     glade_init();
