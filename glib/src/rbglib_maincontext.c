@@ -4,7 +4,7 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/12 18:03:56 $
+  $Date: 2005/03/13 14:39:58 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -14,6 +14,7 @@
 /*
 static ID id_poll_func;
 */
+static ID id_call;
 
 /*****************************************/
 GType
@@ -189,10 +190,100 @@ mc_s_depth(self)
     return INT2NUM(g_main_depth());
 }
 
+static gboolean
+source_func(func)
+    gpointer func;
+{
+    return RTEST(rb_funcall((VALUE)func, id_call, 0));
+}
+
+static VALUE
+timeout_source_new(self, interval)
+    VALUE self, interval;
+{
+    return BOXED2RVAL(g_timeout_source_new(NUM2UINT(interval)), G_TYPE_SOURCE);
+}
+
+static VALUE
+timeout_add(self, interval)
+    VALUE self, interval;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    return UINT2NUM(g_timeout_add(NUM2UINT(interval), 
+                                  (GSourceFunc)source_func, (gpointer)func));
+}
+
+static VALUE
+idle_source_new(self)
+    VALUE self;
+{
+    return BOXED2RVAL(g_idle_source_new(), G_TYPE_SOURCE);
+}
+
+static VALUE
+idle_add(argc, argv, self)
+    gint argc;
+    VALUE* argv;
+    VALUE self;
+{
+    VALUE func;
+
+    rb_scan_args(argc, argv, "01", &func);
+
+    if NIL_P(func)
+        func = G_BLOCK_PROC();
+
+    G_RELATIVE(self, func);
+
+    return UINT2NUM(g_idle_add((GSourceFunc)source_func, (gpointer)func));
+}
+
+static VALUE
+idle_remove(self, func)
+    VALUE self, func;
+{
+    return CBOOL2RVAL(g_idle_remove_by_data((gpointer)func));
+}
+
+#if GLIB_CHECK_VERSION(2,4,0)
+static VALUE
+child_watch_source_new(self, pid)
+    VALUE self, pid;
+{
+    return BOXED2RVAL(g_child_watch_source_new(NUM2INT(pid)), G_TYPE_SOURCE);
+}
+
+static void
+child_watch_func(pid, status, func)
+    GPid pid;
+    gint status;
+    gpointer func;
+{
+    rb_funcall((VALUE)func, id_call, 2, INT2NUM(pid), INT2NUM(status));
+}
+
+static VALUE
+child_watch_add(self, pid)
+    VALUE self, pid;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    return UINT2NUM(g_child_watch_add(NUM2INT(pid), 
+                                      (GChildWatchFunc)child_watch_func, (gpointer)func));
+}
+#endif
+
 void
 Init_glib_main_context()
 {
     VALUE mc = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
+
+    VALUE timeout = rb_define_module_under(mGLib, "Timeout");
+    VALUE idle = rb_define_module_under(mGLib, "Idle");
+    VALUE child_watch = rb_define_module_under(mGLib, "ChildWatch");
+
+    id_call = rb_intern("call");
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
@@ -212,4 +303,16 @@ Init_glib_main_context()
     rb_define_method(mc, "add_poll", mc_add_poll, 2);
     rb_define_method(mc, "remove_poll", mc_remove_poll, 1);
     rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
+
+    rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
+    rb_define_module_function(timeout, "add", timeout_add, 1);
+
+    rb_define_module_function(idle, "source_new", idle_source_new, 0);
+    rb_define_module_function(idle, "add", idle_add, -1);
+    rb_define_module_function(idle, "remove", idle_remove, 1);
+
+#if GLIB_CHECK_VERSION(2,4,0)
+    rb_define_module_function(child_watch, "source_new", child_watch_source_new, 1);
+    rb_define_module_function(child_watch, "add", child_watch_add, 1);
+#endif
 }

@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2005/03/12 18:03:56 $
+  $Date: 2005/03/13 14:39:58 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -25,10 +25,11 @@ extern void Init_glib_messages();
 extern void Init_glib_spawn();
 extern void Init_glib_fileutils();
 extern void Init_glib_utils();
+extern void Init_gobject();
 extern void Init_glib_main_loop();
 extern void Init_glib_main_context();
 extern void Init_glib_source();
-extern void Init_gobject();
+extern void Init_glib_poll_fd();
 
 char *
 rbg_string_value_ptr(ptr)

@@ -1,9 +1,10 @@
 2005-03-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/idle.rb, timeout.rb, timeout2.rb: Added.
 	* src/rbglib_pollfd.c: Added GLib::PollFD. 
 	* src/rbglib_source.c: Added GLib::Source. 
 	* src/rbglib_maincontext.c: Added GLib::MainContext#find_source,
-	#add_poll, #remove_poll.
+	#add_poll, #remove_poll, GLib::Timeout, GLib::Idle, GLib::ChildWatch.
 	* src/rbglib.[ch]: Support GLib::PollFD, GLib::Source.
 
 2005-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
