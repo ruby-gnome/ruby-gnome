@@ -4,7 +4,7 @@
   rbgtkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:08:30 $
+  $Date: 2002/11/23 05:40:10 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -72,11 +72,11 @@ Init_gtk_selection()
 {
     VALUE mSelection =  rb_define_module_under(mGtk, "Selection");
 
-    rb_define_method(mSelection, "selection_owner_set", gtkdrag_selection_owner_set, 2);
-    rb_define_method(mSelection, "selection_add_target", gtkdrag_selection_add_target, 3);
+    rb_define_method(mSelection, "owner_set", gtkdrag_selection_owner_set, 2);
+    rb_define_method(mSelection, "add_target", gtkdrag_selection_add_target, 3);
 /*
-    rb_define_method(mSelection, "selection_add_targets", gtkdrag_selection_add_targets, 2);
+    rb_define_method(mSelection, "add_targets", gtkdrag_selection_add_targets, 2);
 */
-    rb_define_method(mSelection, "selection_convert", gtkdrag_selection_convert, 3);
-    rb_define_method(mSelection, "selection_remove_all", gtkdrag_selection_remove_all, 0);
+    rb_define_method(mSelection, "convert", gtkdrag_selection_convert, 3);
+    rb_define_method(mSelection, "remove_all", gtkdrag_selection_remove_all, 0);
 }
