@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2003/11/09 15:52:31 $
+  $Date: 2004/02/22 16:20:59 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -31,6 +31,8 @@ extern "C" {
  (rbgobj_define_class(gtype, name, module, 0, 0))
 #define G_DEF_CLASS2(gtype, name, module, mark, free)\
  (rbgobj_define_class(gtype, name, module, mark, free))
+#define G_DEF_CLASS3(gtype_name, name, module)\
+ (rbgobj_define_class_dynamic(gtype_name, name, module, 0, 0))
 
 #define G_DEF_INTERFACE(gtype, name, module)\
  (rbgobj_define_class(gtype, name, module, 0, 0))
@@ -109,6 +111,9 @@ extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
 extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
 extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
                                  void* mark, void* free); 
+extern VALUE rbgobj_define_class_dynamic(const gchar* gtype_name, 
+                                         const gchar* name, VALUE module, 
+                                         void* mark, void* free); 
 extern void rbgobj_register_class(VALUE klass,
                                   GType gtype,
                                   gboolean klass2gtype,

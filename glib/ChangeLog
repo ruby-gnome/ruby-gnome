@@ -1,3 +1,9 @@
+2004-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.h: Add G_DEF_CLASS3(). This is for real-gtype
+	but its foo_get_type() isn't public method such as GdkScreenX11.
+	* src/rbgobj_type.c: Add RGObjClassInfoDynamic and G_DEF_CLASS3().
+
 2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.c: prop_exclude_list defined as a static hash. 

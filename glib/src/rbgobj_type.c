@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2003/09/20 01:27:39 $
+  $Author: mutoh $
+  $Date: 2004/02/22 16:20:46 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -20,7 +20,17 @@ static ID id_new;
 static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
+
 static void rbgobj_init_interface(VALUE interface);
+
+static GHashTable* dynamic_gtype_list;
+typedef struct {
+    const gchar* name;
+    VALUE module;
+    void (*mark)(gpointer);
+    void (*free)(gpointer);
+    int flags; /* RGObjClassFlag */
+} RGObjClassInfoDynamic;
 
 static void
 cinfo_mark(RGObjClassInfo* cinfo)
@@ -79,81 +89,88 @@ rbgobj_lookup_class_by_gtype(gtype)
     GType gtype;
 {
     RGObjClassInfo* cinfo;
+    RGObjClassInfoDynamic* cinfod; 
+    void* gclass = NULL;
     VALUE c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
 
     if (!NIL_P(c)){
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
-    } else {
-        void* gclass = NULL;
-
-        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
-
-        switch (G_TYPE_FUNDAMENTAL(gtype)){
-          case G_TYPE_POINTER:
-          case G_TYPE_BOXED:
-          case G_TYPE_PARAM:
-          case G_TYPE_OBJECT:
-          case G_TYPE_ENUM:
-          case G_TYPE_FLAGS:
-            cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
-                                      get_superclass(gtype));
-            break;
-
-          case G_TYPE_INTERFACE:
-            cinfo->klass = rb_module_new();
-            break;
-
-          default:
-            /* we should raise exception? */
-            fprintf(stderr,
-                    "%s: %s's fundamental type %s isn't supported\n",
-                    "rbgobj_lookup_class_by_gtype",
-                    g_type_name(gtype),
-                    g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
-            return NULL;
-        }
-
-        cinfo->gtype = gtype;
-        cinfo->mark  = NULL;
-        cinfo->free  = NULL;
-        cinfo->flags = 0;
-
-        rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
-        rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
-
-        if (G_TYPE_IS_CLASSED(gtype))
-            gclass = g_type_class_ref(gtype);
-
-        if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
-            rbgobj_define_action_methods(cinfo->klass);
-
-        if (G_TYPE_IS_INSTANTIATABLE(gtype)){
-            GType* interfaces = NULL;
-            guint n_interfaces = 0;
-            int i;
-
-            interfaces = g_type_interfaces(gtype, &n_interfaces);
-            for (i = 0; i < n_interfaces; i++){
-                rb_include_module(
-                    cinfo->klass,
-                    rbgobj_lookup_class_by_gtype(interfaces[i])->klass);
-            }
-            g_free(interfaces);
-        }
-
-        if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT) {
-            rbgobj_define_property_accessors(cinfo->klass);
-        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
-            rbgobj_init_enum_class(cinfo->klass);
-        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {
-            rbgobj_init_flags_class(cinfo->klass);
-        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_INTERFACE) {
-            rbgobj_init_interface(cinfo->klass);
-        }
-
-        if (gclass)
-            g_type_class_unref(gclass);
+        return cinfo;
     }
+    c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+    cinfo->gtype = gtype;
+    cinfo->mark  = NULL;
+    cinfo->free  = NULL;
+    cinfo->flags = 0;
+
+    switch (G_TYPE_FUNDAMENTAL(gtype)){
+    case G_TYPE_POINTER:
+    case G_TYPE_BOXED:
+    case G_TYPE_PARAM:
+    case G_TYPE_OBJECT:
+    case G_TYPE_ENUM:
+    case G_TYPE_FLAGS:
+        cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
+                                  get_superclass(gtype));
+        break;
+        
+    case G_TYPE_INTERFACE:
+        cinfo->klass = rb_module_new();
+        break;
+        
+    default:
+        /* we should raise exception? */
+        fprintf(stderr,
+                "%s: %s's fundamental type %s isn't supported\n",
+                "rbgobj_lookup_class_by_gtype",
+                g_type_name(gtype),
+                g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
+        return NULL;
+    
+    }
+
+    cinfod = (RGObjClassInfoDynamic*)g_hash_table_lookup(dynamic_gtype_list, g_type_name(gtype));
+    if (cinfod){
+        cinfo->mark = cinfod->mark;
+        cinfo->free = cinfod->free;
+        rb_define_const(cinfod->module, cinfod->name, cinfo->klass);
+    }
+
+    rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
+    rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+    
+    if (G_TYPE_IS_CLASSED(gtype))
+        gclass = g_type_class_ref(gtype);
+    
+    if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
+        rbgobj_define_action_methods(cinfo->klass);
+    
+    if (G_TYPE_IS_INSTANTIATABLE(gtype)){
+        GType* interfaces = NULL;
+        guint n_interfaces = 0;
+        int i;
+        
+        interfaces = g_type_interfaces(gtype, &n_interfaces);
+        for (i = 0; i < n_interfaces; i++){
+            rb_include_module(
+                cinfo->klass,
+                rbgobj_lookup_class_by_gtype(interfaces[i])->klass);
+        }
+        g_free(interfaces);
+    }
+    
+    if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT) {
+        rbgobj_define_property_accessors(cinfo->klass);
+    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
+        rbgobj_init_enum_class(cinfo->klass);
+    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {
+        rbgobj_init_flags_class(cinfo->klass);
+    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_INTERFACE) {
+        rbgobj_init_interface(cinfo->klass);
+    }
+    
+    if (gclass)
+        g_type_class_unref(gclass);
 
     return cinfo;
 }
@@ -166,11 +183,33 @@ rbgobj_define_class(gtype, name, module, mark, free)
     void* mark;
     void* free;
 {
-    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    RGObjClassInfo* cinfo;
+    if (gtype == 0)
+        rb_bug("rbgobj_define_class: Invalid gtype [%s]\n", name);
+
+    cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
     cinfo->mark = mark;
     cinfo->free = free;
     rb_define_const(module, name, cinfo->klass);
     return cinfo->klass;
+}
+
+VALUE
+rbgobj_define_class_dynamic(gtype_name, name, module, mark, free)
+    const gchar* gtype_name;
+    const gchar* name;
+    VALUE module;
+    void* mark;
+    void* free;
+{
+    RGObjClassInfoDynamic* cinfo;
+    cinfo = (RGObjClassInfoDynamic*)g_new(RGObjClassInfoDynamic, 1);
+    cinfo->name = name;
+    cinfo->module = module;
+    cinfo->mark = mark;
+    cinfo->free = free;
+    g_hash_table_insert(dynamic_gtype_list, (void*)gtype_name, (void*)cinfo);
+    return Qnil;
 }
 
 void
@@ -555,6 +594,7 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 static void
 Init_type()
 {
+    dynamic_gtype_list = g_hash_table_new(g_str_hash, g_str_equal);
     id_gtype = rb_intern("__gobject_gtype__");
 
     rbgobj_cType = rb_define_class_under(mGLib, "Type", rb_cObject);
