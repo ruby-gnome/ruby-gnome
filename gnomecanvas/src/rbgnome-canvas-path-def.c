@@ -1,6 +1,27 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-canvas-path-def.c,v 1.7 2004/11/10 18:05:54 mutoh Exp $ */
+
+/* Gnome::CanvasPathDef
+ *
+ * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
 #include "rbgnomecanvas.h"
 #include <libart_lgpl/art_bpath.h>
+#include "rbart.h"
 
 static VALUE gnoCanvasPathDef;
 
@@ -33,9 +54,7 @@ cpathdef_g2r_func(from)
     return _WRAP(g_value_get_pointer(from));
 }
 
-#if 0 /* implement after Art::Bpath has been supported. */
-GnomeCanvasPathDef* gnome_canvas_path_def_new_from_bpath
-                                            (ArtBpath *bpath);
+#if 0 /* We don't need them ... */
 GnomeCanvasPathDef* gnome_canvas_path_def_new_from_static_bpath
                                             (ArtBpath *bpath);
 GnomeCanvasPathDef* gnome_canvas_path_def_new_from_foreign_bpath
@@ -48,13 +67,16 @@ cpathdef_initialize(argc, argv, self)
     int argc;
     VALUE *argv, self;
 {
-    VALUE length;
+    VALUE obj;
     GnomeCanvasPathDef *path;
-    rb_scan_args(argc, argv, "01", &length);
-    if (NIL_P(length))
+    rb_scan_args(argc, argv, "01", &obj);
+    if (NIL_P(obj)) {
         path = gnome_canvas_path_def_new();
-    else
-        path = gnome_canvas_path_def_new_sized(NUM2INT(length));
+    } else if (TYPE(obj) == T_FIXNUM) {
+        path = gnome_canvas_path_def_new_sized(NUM2INT(obj));
+    } else {
+        path = gnome_canvas_path_def_new_from_bpath(get_art_bpath(obj));
+    }
 
     G_INITIALIZE(self, path);
     return Qnil;
@@ -205,9 +227,13 @@ cpathdef_closepath_current(self)
 }
 
 /* Various methods */
-/*
-ArtBpath * gnome_canvas_path_def_bpath (const GnomeCanvasPathDef * path);
-*/
+static VALUE
+cpathdef_bpath(self)
+    VALUE self;
+{
+    ArtBpath* path = gnome_canvas_path_def_bpath(_SELF(self));
+    return path ? make_art_bpath(path) : Qnil;
+}
 
 static VALUE
 cpathdef_length(self)
@@ -249,10 +275,21 @@ cpathdef_current_point(self)
     return rb_ary_new3(2, rb_float_new(p.x), rb_float_new(p.y));
 }
 
-#if 0 /* implement after Art::Bpath has been supported. */
-ArtBpath * gnome_canvas_path_def_last_bpath (const GnomeCanvasPathDef * path);
-ArtBpath * gnome_canvas_path_def_first_bpath (const GnomeCanvasPathDef * path);
-#endif
+static VALUE
+cpathdef_last_bpath(self)
+    VALUE self;
+{
+    ArtBpath* path = gnome_canvas_path_def_last_bpath(_SELF(self));
+    return path ? make_art_bpath(path) : Qnil;
+}
+
+static VALUE
+cpathdef_first_bpath(self)
+    VALUE self;
+{
+    ArtBpath* path = gnome_canvas_path_def_first_bpath(_SELF(self));
+    return path ? make_art_bpath(path) : Qnil;
+}
 
 static VALUE
 cpathdef_any_open(self)
@@ -312,10 +349,13 @@ Init_gnome_canvas_path_def(mGnome)
     rb_define_method(gnoCanvasPathDef, "curveto", cpathdef_curveto, 6);
     rb_define_method(gnoCanvasPathDef, "closepath", cpathdef_closepath, 0);
     rb_define_method(gnoCanvasPathDef, "closepath_current", cpathdef_closepath_current, 0);
+    rb_define_method(gnoCanvasPathDef, "bpath", cpathdef_bpath, 0);
     rb_define_method(gnoCanvasPathDef, "length", cpathdef_length, 0);
     rb_define_method(gnoCanvasPathDef, "empty?", cpathdef_is_empty, 0);
     rb_define_method(gnoCanvasPathDef, "has_current_point?", cpathdef_has_current_point, 0);
     rb_define_method(gnoCanvasPathDef, "current_point", cpathdef_current_point, 0);
+    rb_define_method(gnoCanvasPathDef, "last_bpath", cpathdef_last_bpath, 0);
+    rb_define_method(gnoCanvasPathDef, "first_bpath", cpathdef_first_bpath, 0);
     rb_define_method(gnoCanvasPathDef, "any_open?", cpathdef_any_open, 0);
     rb_define_method(gnoCanvasPathDef, "all_open?", cpathdef_all_open, 0);
     rb_define_method(gnoCanvasPathDef, "any_closed?", cpathdef_any_closed, 0);

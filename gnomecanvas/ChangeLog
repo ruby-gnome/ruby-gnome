@@ -1,3 +1,9 @@
+2004-11-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas-util.c: Added a header.
+	* src/rbgnome-canvas-path-def.c: Added Gnome::CanvasPathDef#bpath 
+	Add a header.
+
 2004-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas-util.c: Added GnomeCanvas.join_gdk_to_art, 
