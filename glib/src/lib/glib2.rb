@@ -133,8 +133,12 @@ module GLib
       elsif $VERBOSE
         level = 127
       end
-      GLib::Log.set_handler(domain, level) do |domain, level, message|
-        raise "#{domain}-#{LEVELS[level]} **:#{message}"
+      GLib::Log.set_handler(domain, level) do |domain, lvl, message|
+        if lvl == LEVEL_CRITICAL || lvl = LEVEL_ERROR  
+          raise "#{domain}-#{LEVELS[lvl]} **:#{message}"
+        else
+          $stderr.puts "#{domain}-#{LEVELS[lvl]} **:#{message}"
+        end
       end
     end
   end
