@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/08 11:45:07 $
+  $Date: 2003/04/12 13:14:16 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -174,7 +174,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
     {
         ID method_id;
-        method_id = rb_to_id(rb_str_concat(rb_str_new2("real_"), signal_name));
+        method_id = rb_to_id(rb_str_concat(rb_str_new2("do_"), signal_name));
         class_closure = dispatch_closure_new(method_id);
     }
 

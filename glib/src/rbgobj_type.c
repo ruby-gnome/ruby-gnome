@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/04/08 11:45:08 $
+  $Date: 2003/04/12 13:14:16 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -170,6 +170,27 @@ rbgobj_define_class(gtype, name, module, mark, free)
     cinfo->free = free;
     rb_define_const(module, name, cinfo->klass);
     return cinfo->klass;
+}
+
+void
+rbgobj_register_class(VALUE klass,
+                      GType gtype,
+                      gboolean klass2gtype,
+                      gboolean gtype2klass)
+{
+    RGObjClassInfo* cinfo;
+    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
+		    
+    cinfo->klass = klass;
+    cinfo->gtype = gtype;
+    cinfo->mark  = NULL;
+    cinfo->free  = NULL;
+    cinfo->flags = 0;
+ 
+    if (klass2gtype)
+        rb_hash_aset(klass_to_cinfo, cinfo->klass, c); 
+    if (gtype2klass)
+        rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
 }
 
 /**********************************************************************/
@@ -507,33 +528,11 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
     rb_ary_push(ary, c);
 }
 
-static inline
-void _register_fundamental_klass_to_gtype(VALUE klass, GType gtype)
-{   
-    RGObjClassInfo* cinfo;
-    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
-		    
-    cinfo->klass = klass;
-    cinfo->gtype = gtype;
-    cinfo->mark  = NULL;
-    cinfo->free  = NULL;
-    
-    rb_hash_aset(klass_to_cinfo, cinfo->klass, c); 
-}   
+#define _register_fundamental_klass_to_gtype(klass, gtype) \
+    rbgobj_register_class(klass, gtype, TRUE, FALSE)
 
-static inline
-void _register_fundamental_gtype_to_klass(GType gtype, VALUE klass)
-{   
-    RGObjClassInfo* cinfo;
-    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
-		    
-    cinfo->klass = klass;
-    cinfo->gtype = gtype;
-    cinfo->mark  = NULL;
-    cinfo->free  = NULL;
-    
-    rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
-}   
+#define _register_fundamental_gtype_to_klass(gtype,klass) \
+    rbgobj_register_class(klass, gtype, FALSE, TRUE)
 
 static void
 Init_type()
@@ -628,8 +627,6 @@ Init_type()
     _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
     _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
     _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
-    _register_fundamental_gtype_to_klass(G_TYPE_ENUM, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_FLAGS, rb_cInteger);
 }
 
 /**********************************************************************/

@@ -4,7 +4,7 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2003/04/07 11:26:30 $
+  $Date: 2003/04/12 13:14:16 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -322,12 +322,12 @@ Init_gobject_gparamspecs()
     rb_define_method(c, "default_value", unichar_default_value, 0);
     rb_define_alias(c, "default", "default_value");
 
-    c = G_DEF_CLASS(G_TYPE_PARAM_STRING, "Enum", cParamSpec);
+    c = G_DEF_CLASS(G_TYPE_PARAM_ENUM, "Enum", cParamSpec);
     rb_define_method(c, "initialize", enum_initialize, 6);
     rb_define_method(c, "default_value", enum_default_value, 0);
     rb_define_alias(c, "default", "default_value");
 
-    c = G_DEF_CLASS(G_TYPE_PARAM_STRING, "Flags", cParamSpec);
+    c = G_DEF_CLASS(G_TYPE_PARAM_FLAGS, "Flags", cParamSpec);
     rb_define_method(c, "initialize", flags_initialize, 6);
     rb_define_method(c, "default_value", flags_default_value, 0);
     rb_define_alias(c, "default", "default_value");

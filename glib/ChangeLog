@@ -1,4 +1,20 @@
-2003-04-08    <sakai@tom.sfc.keio.ac.jp>
+2003-04-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (GLib::Object.new!): check if the class has a
+	registered type.
+
+	* src/rbgobj_object.c: implement GLib::Object.install_property
+
+	* src/rbgobj_object.c: improve type registeration system.
+
+	* src/rbgobj_paramspecs.c: fix to use appropriate GType.
+
+	* src/rbgobj_type.c, src/rbgobject.h: Add a new function
+	rbgobj_register_class() and rewring
+	_register_fundamental_klass_to_gtype() and
+	_register_fundamental_gtype_to_klass() with it.
+
+2003-04-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 	
 	* src/rbgobj_type.c: fix typo. ( interfaced? => interface? )
 	

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/04/08 11:45:07 $
+  $Date: 2003/04/12 13:14:16 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -57,13 +57,16 @@ gobj_s_gobject_new(argc, argv, self)
     VALUE* argv;
     VALUE self;
 {
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     VALUE params_hash;
     GObject* gobj;
     VALUE result;
 
     rb_scan_args(argc, argv, "01", &params_hash);
+    if (cinfo->klass != self)
+        rb_raise(rb_eTypeError, "doesn't have proper GLib::Type");
 
-    gobj = rbgobj_gobject_new(CLASS2GTYPE(self), params_hash);
+    gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
     result = GOBJ2RVAL(gobj);
 
     // XXX: Ughhhhh
@@ -78,13 +81,32 @@ gobj_s_gobject_new(argc, argv, self)
     return result;
 }
 
-#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
+static VALUE
+gobj_s_install_property(int argc, VALUE* argv, VALUE self)
+{
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
+    gpointer gclass;
+    GParamSpec* pspec;
+    VALUE pspec_obj, prop_id;
 
-#if 0
-void        g_object_class_install_property   (GObjectClass   *oclass,
-					       guint           property_id,
-					       GParamSpec     *pspec);
-#endif
+    if (cinfo->klass != self)
+        rb_raise(rb_eTypeError, "doesn't have proper GLib::Type");
+
+    rb_scan_args(argc, argv, "11", &pspec_obj, &prop_id);
+    pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
+
+    gclass = g_type_class_ref(cinfo->gtype);
+    g_object_class_install_property(gclass,
+                                    NIL_P(prop_id) ? 1 : NUM2UINT(prop_id),
+                                    pspec);
+    g_type_class_unref(gclass);
+
+    /* FIXME: define accessor methods */
+
+    return Qnil;
+}
+
+#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
 static VALUE
 gobj_s_property(self, property_name)
@@ -402,31 +424,47 @@ gobj_smethod_added(self, id)
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
-#if 0
-typedef void   (*GBaseInitFunc)              (gpointer         g_class);
-typedef void   (*GBaseFinalizeFunc)          (gpointer         g_class);
-typedef void   (*GClassFinalizeFunc)         (gpointer         g_class,
-					      gpointer         class_data);
-typedef void   (*GInterfaceInitFunc)         (gpointer         g_iface,
-					      gpointer         iface_data);
-typedef void   (*GInterfaceFinalizeFunc)     (gpointer         g_iface,
-					      gpointer         iface_data);
-typedef gboolean (*GTypeClassCacheFunc)	     (gpointer	       cache_data,
-					      GTypeClass      *g_class);
-#endif
+static VALUE proc_mod_eval;
 
 static void
-class_init(gpointer g_class, gpointer class_data)
+get_prop_func(GObject* object,
+              guint property_id,
+              GValue* value,
+              GParamSpec* pspec)
 {
-    VALUE class_init_proc = (VALUE)class_data;
-    // XXX
-    VALUE f = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
-    rb_funcall(f, rb_intern("call"), 2,
-               GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class)), class_init_proc);
+    ID m = rb_intern("do_get_property");
+    VALUE ret = rb_funcall(GOBJ2RVAL(object), m, 1, GOBJ2RVAL(pspec));
+    rbgobj_rvalue_to_gvalue(ret, value);
 }
 
 static void
-instance_init(GTypeInstance* instance, gpointer g_class)
+set_prop_func(GObject* object,
+              guint property_id,
+              const GValue* value,
+              GParamSpec* pspec)
+{
+    ID m = rb_intern("do_set_property");
+    rb_funcall(GOBJ2RVAL(object), m, 2,
+               GVAL2RVAL(value), GOBJ2RVAL(pspec));
+}
+
+static void
+class_init_func(gpointer g_class_, gpointer class_data)
+{
+    GObjectClass* g_class = G_OBJECT_CLASS(g_class_);
+
+    g_class->set_property = set_prop_func;
+    g_class->get_property = get_prop_func;
+
+#if 0
+    VALUE class_init_proc = (VALUE)class_data;
+    rb_funcall(proc_mod_eval, rb_intern("call"), 2,
+               GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class)), class_init_proc);
+#endif
+}
+
+static void
+instance_init_func(GTypeInstance* instance, gpointer g_class)
 {
     VALUE obj = GOBJ2RVAL(instance);
     ID id_instance_init = rb_intern("instance_init");
@@ -435,24 +473,38 @@ instance_init(GTypeInstance* instance, gpointer g_class)
 }
 
 static VALUE
-noop(int argc, VALUE* argv, VALUE _)
-{
-    return Qnil;
-}
-
-static VALUE
-gobject_class_new(int argc, VALUE* argv, VALUE _)
+register_type(int argc, VALUE* argv, VALUE self)
 {
     VALUE type_name, flags;
     volatile VALUE class_init_proc;
     GType parent_type;
     GTypeInfo* info;
 
+    rb_scan_args(argc, argv, "11&", &type_name, &flags, &class_init_proc);
+
     {
-        VALUE parent;
-        rb_scan_args(argc, argv, "21&", &parent, &type_name, &flags, &class_init_proc);
-        # FIXME: check arguments
-        parent_type = CLASS2GTYPE(parent);
+        const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
+        if (cinfo->klass == self)
+            rb_raise(rb_eTypeError, "already registered");
+    }
+
+    {
+        VALUE parent = rb_funcall(self, rb_intern("superclass"), 0); // FIXME?
+        const RGObjClassInfo* cinfo = rbgobj_lookup_class(parent);
+        if (cinfo->klass != parent)
+            rb_raise(rb_eTypeError, "parent class isn't registered");
+        parent_type = cinfo->gtype;
+    }
+
+    if (NIL_P(type_name)){
+        VALUE s = rb_funcall(self, rb_intern("name"), 0);
+
+        if (strlen(StringValuePtr(s)) == 0)
+            rb_raise(rb_eTypeError, "can't determine type name");        
+
+        type_name = rb_funcall(
+            rb_eval_string("lambda{|x| x.gsub(/::/,'') }"),
+            rb_intern("call"), 1, s);
     }
 
     {
@@ -463,12 +515,12 @@ gobject_class_new(int argc, VALUE* argv, VALUE _)
         info->class_size     = query.class_size;
         info->base_init      = NULL;
         info->base_finalize  = NULL;
-        info->class_init     = class_init;
+        info->class_init     = class_init_func;
         info->class_finalize = NULL;
         info->class_data     = (gpointer)class_init_proc;
         info->instance_size  = query.instance_size;
         info->n_preallocs    = 0;
-        info->instance_init  = instance_init;
+        info->instance_init  = instance_init_func;
         info->value_table    = NULL;
     }
 
@@ -477,21 +529,23 @@ gobject_class_new(int argc, VALUE* argv, VALUE _)
                                             StringValuePtr(type_name),
                                             info,
                                             NIL_P(flags) ? 0 : NUM2INT(flags));
-        VALUE klass = GTYPE2CLASS(type);
-        G_RELATIVE(klass, class_init_proc);
+        G_RELATIVE(self, class_init_proc);
 
-        rb_define_alias(CLASS_OF(klass), "new", "new!");
-        rb_define_method(klass, "initialize", noop, -1);
+        rbgobj_register_class(self, type, TRUE, TRUE);
+        rb_define_method(self, "initialize", gobj_initialize, -1);
 
-        return klass;
+        return Qnil;
     }
 }
 
 static void
-Init_gobject_class()
+Init_gobject_subclass()
 {
     VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
-    rb_define_module_function(cGObject, "class_new", gobject_class_new, -1);
+    rb_define_singleton_method(cGObject, "register_type", register_type, -1);
+
+    rb_global_variable(&proc_mod_eval);
+    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
 }
 
 #endif
@@ -514,6 +568,9 @@ Init_gobject_gobject()
 
     rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
     rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+    rb_define_singleton_method(cGObject, "install_property", gobj_s_install_property, -1);
+#endif
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
@@ -535,7 +592,7 @@ Init_gobject_gobject()
     type_to_prop_getter_table = rb_hash_new();
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    Init_gobject_class();
+    Init_gobject_subclass();
 #endif
 }
 

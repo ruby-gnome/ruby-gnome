@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/04/05 08:51:33 $
+  $Date: 2003/04/12 13:14:16 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -96,6 +96,10 @@ extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
 extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
 extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
                                  void* mark, void* free); 
+extern void rbgobj_register_class(VALUE klass,
+                                  GType gtype,
+                                  gboolean klass2gtype,
+                                  gboolean gtype2klass);
 extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
