@@ -9,7 +9,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.6.x, GLib.
+   0. install ruby-1.6.x or later, GLib.
    1. ruby extconf.rb
    2. make
    3. su
@@ -25,4 +25,4 @@ Copying
 
 Project Website
 ---------------
-   http://ruby-gnome2.sourceforge.net/
+   http://ruby-gnome2.sourceforge.jp/
