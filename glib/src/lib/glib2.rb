@@ -142,7 +142,7 @@ module GLib
     end
     
     def set_log_domain(domain)
-      level = GLib::Log::LEVEL_CRITICAL
+      level = GLib::Log::LEVEL_MASK
       if $DEBUG
         level = 255
       elsif $VERBOSE
