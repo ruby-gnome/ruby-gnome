@@ -1,3 +1,8 @@
+2002-12-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
+
+	* src/lib/gtk2.rb: move from lib/gtk2.rb and should be installed
+	by src/Makefile.
+
 2002-12-13  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtkaccelgroup.c : Fix return value of #lock and #unlock.
