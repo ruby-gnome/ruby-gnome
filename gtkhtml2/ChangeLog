@@ -1,5 +1,9 @@
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
+	* src/lib/gtkhtml2.rb: Added(sorry, but this is the first import).
+
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+                                                                                
    * extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-22  Masao Mutoh  <mutoh@highway.ne.jp>
