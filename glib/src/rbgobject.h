@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/07/26 14:31:34 $
+  $Date: 2002/07/27 06:23:51 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -56,8 +56,7 @@ extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
                                              ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 
-extern GTypeClass* rbgobj_type_class_get_struct(VALUE obj);
-extern GTypeInstance* rbgobj_type_instance_get_struct(VALUE obj);
+extern GObject* rbgobj_gobject_new(VALUE type, VALUE params_hash);
 
 extern VALUE rbgobj_cGObject;
 extern VALUE rbgobj_cParamSpec;

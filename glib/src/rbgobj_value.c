@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/07/26 14:31:34 $
+  $Date: 2002/07/27 06:23:51 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -135,7 +135,17 @@ static void
 str_to_gvalue(VALUE from, GValue* to)
 {
     StringValue(from);
-    g_value_set_string(to, StringValuePtr(from));
+    if (0)
+        ;
+    else if (G_VALUE_HOLDS_FLOAT(to))
+        g_value_set_string(to, StringValuePtr(from));
+    else {
+        GValue tmp = {0,};
+        g_value_init(&tmp, G_TYPE_STRING);
+        g_value_set_string(&tmp, StringValuePtr(from));
+        g_value_transform(&tmp, to);
+        g_value_unset(&tmp);
+    }
 }
 
 static void
@@ -147,7 +157,19 @@ int_to_gvalue(VALUE from, GValue* to)
 static void
 float_to_gvalue(VALUE from, GValue* to)
 {
-    g_value_set_double(to, NUM2DBL(from));
+    if (0)
+        ;
+    else if (G_VALUE_HOLDS_FLOAT(to))
+        g_value_set_float(to, NUM2DBL(from));
+    else if (G_VALUE_HOLDS_DOUBLE(to))
+        g_value_set_double(to, NUM2DBL(from));
+    else {
+        GValue tmp = {0,};
+        g_value_init(&tmp, G_TYPE_DOUBLE);
+        g_value_set_double(&tmp, NUM2DBL(from));
+        g_value_transform(&tmp, to);
+        g_value_unset(&tmp);
+    }
 }
 
 /**********************************************************************/

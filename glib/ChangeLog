@@ -1,3 +1,9 @@
+2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: implement GObject.gobject_new experimentaly.
+	  example:
+	   w = GLib::GObject.gobject_new("GtkWindow", "title" => "Hello World")
+
 2002-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: check allocation framework

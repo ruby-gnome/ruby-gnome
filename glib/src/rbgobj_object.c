@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/07/26 14:31:33 $
+  $Date: 2002/07/27 06:23:51 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -19,6 +19,8 @@
 #include "ruby.h"
 #include "st.h"
 #include "global.h"
+
+VALUE rbgobj_cGObject;
 
 static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 
@@ -252,7 +254,10 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 
 /**********************************************************************/
 
-VALUE rbgobj_cGObject;
+struct param_setup_arg {
+    GObjectClass* gclass;
+    GParameter* params;
+};
 
 static VALUE
 _each_with_index(obj)
@@ -263,48 +268,85 @@ _each_with_index(obj)
 }
 
 static VALUE
-_params_setup(arg, parameters)
+_params_setup(arg, param_setup_arg)
     VALUE arg;
-    GParameter* parameters;
+    struct param_setup_arg* param_setup_arg;
 {
     int n = NUM2INT(rb_ary_entry(arg, 1));
     VALUE name, val;
+    GParamSpec* pspec;
+
     arg = rb_ary_entry(arg, 0);
 
     name = rb_ary_entry(arg, 0);
     val  = rb_ary_entry(arg, 1);
 
     StringValue(name);
+    param_setup_arg->params[n].name = StringValuePtr(name);
 
-    parameters[n].name = StringValuePtr(name);
-    rbgobj_rvalue_to_gvalue(val, &parameters[n].value);
+    pspec = g_object_class_find_property(
+        param_setup_arg->gclass,
+        param_setup_arg->params[n].name);
+    if (!pspec)
+        rb_raise(rb_eArgError, "No such property: %s",
+                 param_setup_arg->params[n].name);
 
+    g_value_init(&(param_setup_arg->params[n].value),
+                 G_PARAM_SPEC_VALUE_TYPE(pspec));
+    rbgobj_rvalue_to_gvalue(val, &(param_setup_arg->params[n].value));
+    
     return Qnil;
 }
 
-VALUE
-rbgobj_gobject_new(gtype, params_hash)
-    GType gtype;
-    VALUE params_hash;
+GObject*
+rbgobj_gobject_new(type, params_hash)
+    VALUE type, params_hash;
 {
-    size_t param_size = rb_enum_length(params_hash);
-    GParameter* parameters = ALLOCA_N(GParameter, param_size);
-    GObject* gobj;
+    GType gtype;
+    size_t param_size;
+    struct param_setup_arg param_setup_arg;
     VALUE result;
 
-    rb_iterate(&_each_with_index, params_hash, _params_setup, (VALUE)parameters);
-    gobj = g_object_newv(gtype, param_size, parameters);
+    if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
+        gtype = NUM2INT(type);
+    } else {
+        StringValue(type);
+        gtype = g_type_from_name(StringValuePtr(type));
+    }
 
-    result = rbgobj_make_gobject_auto_type(gobj);
-    g_object_unref(gobj);
-    return result;
+    if (!g_type_is_a(gtype, G_TYPE_OBJECT))
+        rb_raise(rb_eArgError,
+                 "type \"%s\" is not descendants if GObject",
+                 g_type_name(type));
+
+    param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0));
+
+    param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype)); // FIXME: g_type_peek_class?
+    param_setup_arg.params = ALLOCA_N(GParameter, param_size);
+    memset(param_setup_arg.params, 0, sizeof(GValue) * param_size);
+
+    rb_iterate(&_each_with_index, params_hash, _params_setup,
+               (VALUE)&param_setup_arg);
+
+    return g_object_newv(gtype, param_size, param_setup_arg.params);
 }
 
+/**********************************************************************/
+
 static VALUE
-gobj_new(self, gtype, params_hash)
-    VALUE self, gtype, params_hash;
+gobj_s_gobject_new(self, type, params_hash)
+    VALUE self, type, params_hash;
 {
-    return rbgobj_gobject_new(NUM2INT(gtype), params_hash);
+    GObject* gobj = rbgobj_gobject_new(type, params_hash);
+    VALUE result = rbgobj_make_gobject_auto_type(gobj);
+
+    // XXX: Ughhhhh
+    if (!strncmp("Gtk", g_type_name(G_OBJECT_TYPE(gobj)), 3))
+        gtk_object_sink(gobj);
+    else
+        g_object_unref(gobj);
+
+    return result;
 }
 
 static VALUE
@@ -322,8 +364,7 @@ gobj_set_property(self, prop_name, val)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property");
     else {
-        GValue tmp;
-        memset(&tmp, 0, sizeof(tmp));
+        GValue tmp = {0,};
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
         rbgobj_rvalue_to_gvalue(val, &tmp);
         g_object_set_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
@@ -347,9 +388,8 @@ gobj_get_property(self, prop_name)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property");
     else {
-        GValue tmp;
+        GValue tmp = {0,};
         VALUE ret;
-        memset(&tmp, 0, sizeof(tmp));
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
         g_object_get_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
         ret = rbgobj_gvalue_to_rvalue(&tmp);
@@ -424,7 +464,7 @@ gobj_sig_emit(argc, argv, self)
     VALUE rest;
     GSignalQuery query;
     GValueArray* params;
-    GValue return_value;
+    GValue return_value = {0,};
     int i;
     VALUE result;
 
@@ -436,7 +476,6 @@ gobj_sig_emit(argc, argv, self)
     for (i = 0; i < query.n_params; i++)
         rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i), &(params->values[i+1]));
 
-    memset(&return_value, 0, sizeof(return_value));
     //g_value_init(&return_value, ); // XXX
 
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
@@ -572,7 +611,7 @@ void Init_gobject_gobj()
     rb_define_singleton_method(rbgobj_cGObject, "new", &gobj_s_new, -1);
 #endif
 
-    rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_new, 2);
+    rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_s_gobject_new, 2);
     rb_define_method(rbgobj_cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(rbgobj_cGObject, "get_property", gobj_get_property, 1);
 
