@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/10/14 17:24:15 $
+  $Date: 2002/10/17 15:23:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -44,6 +44,13 @@ get_gdkevent(event)
 /***********************************************/
 
 /* GdkEvent Singleton Methods */
+static VALUE
+gdkevent_s_events_pending(self)
+    VALUE self;
+{
+    return gdk_events_pending() ? Qtrue : Qfalse;
+}
+
 static VALUE
 gdkevent_s_peek(self)
     VALUE self;
@@ -598,6 +605,7 @@ Init_gtk_gdk_event()
     /* GdkEvent */
     rb_define_method(gdkEvent, "event_type", gdkevent_type, 0);
 
+    rb_define_singleton_method(gdkEvent, "events_pending?", gdkevent_s_events_pending, 0);
     rb_define_singleton_method(gdkEvent, "peek", gdkevent_s_peek, 0);
     rb_define_singleton_method(gdkEvent, "get", gdkevent_s_get, 0);
     rb_define_singleton_method(gdkEvent, "get_graphics_expose", 
@@ -762,6 +770,8 @@ Init_gtk_gdk_event()
     /*
      * GdkEvent's Constants
      */
+    rb_define_const(gdkEvent, "CURRENT_TIME", INT2FIX(GDK_CURRENT_TIME));
+    rb_define_const(gdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
 
     /* GdkEventType */
     rb_define_const(gdkEvent, "NOTHING", INT2FIX(GDK_NOTHING));

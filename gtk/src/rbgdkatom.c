@@ -4,7 +4,7 @@
   rbgdkatom.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/17 15:23:10 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -79,4 +79,8 @@ Init_gtk_gdk_atom()
     rb_define_method(gdkAtom, "==", gdkatom_eq, 1);
     rb_define_method(gdkAtom, "===", gdkatom_eq, 1);
     rb_define_method(gdkAtom, "eql?", gdkatom_eq, 1);
+
+    /* FIXME. GDK_NONE should be Gdk::Atom.
+    rb_define_const(gdkAtom, "NONE", BOXED2RVAL(GDK_NONE, GDK_TYPE_ATOM));
+    */
 }           

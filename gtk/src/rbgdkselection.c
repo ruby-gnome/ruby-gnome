@@ -4,15 +4,13 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/17 15:23:10 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 
 #include "global.h"
-
-VALUE mGdkSelection;
 
 #define RVAL2GATOM(v) (((GdkAtomData*)RVAL2BOXED(v, GDK_TYPE_ATOM))->atom)
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
@@ -33,15 +31,18 @@ gdkselection_owner_get(self, selection)
 {
     return GOBJ2RVAL(gdk_selection_owner_get(RVAL2GATOM(selection)));
 }
-
+/*
+GdkWindow*  gdk_selection_owner_get_for_display(GdkDisplay *display,
+GdkAtom selection);
+*/
 static VALUE
 gdkselection_convert(self, requestor, selection, target, time)
     VALUE self, requestor, selection, target, time;
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
-						  RVAL2GATOM(selection), 
-						  RVAL2GATOM(target), NUM2INT(time));
-    return Qnil;
+                          RVAL2GATOM(selection), 
+                          RVAL2GATOM(target), NUM2INT(time));
+    return requestor;
 }
 
 static VALUE
@@ -64,19 +65,28 @@ gdkselection_send_notify(self, requestor, selection, target, property, time)
 {
     if( property == Qnil){
         gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
-								  RVAL2GATOM(target), GDK_NONE, NUM2INT(time));
+                                  RVAL2GATOM(target), GDK_NONE, NUM2INT(time));
     } else {
         gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
-								  RVAL2GATOM(target), RVAL2GATOM(property), 
+                                  RVAL2GATOM(target), RVAL2GATOM(property), 
                                   NUM2INT(time));
     }
-    return Qnil;
+    return requestor;
 }
+/*
+void        gdk_selection_send_notify_for_display
+                                            (GdkDisplay *display,
+                                             guint32 requestor,
+                                             GdkAtom selection,
+                                             GdkAtom target,
+                                             GdkAtom property,
+                                             guint32 time);
+*/
 
 void
 Init_gtk_gdk_selection()
 {
-    mGdkSelection = rb_define_module_under(mGdk, "Selection");
+    VALUE mGdkSelection = rb_define_module_under(mGdk, "Selection");
 
     rb_define_module_function(mGdkSelection, "owner_set", gdkselection_owner_set, 4);
     rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, 1);
@@ -85,6 +95,10 @@ Init_gtk_gdk_selection()
     rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, 5);
 
     /* Constants */
+    rb_define_const(mGdkSelection, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
+    rb_define_const(mGdkSelection, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
+    rb_define_const(mGdkSelection, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
+    
     /* GdkSelectionType */
     rb_define_const(mGdkSelection, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
     rb_define_const(mGdkSelection, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));

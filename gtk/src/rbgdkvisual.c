@@ -4,7 +4,7 @@
   rbgdkvisual.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:42:00 $
+  $Date: 2002/10/17 15:23:10 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -259,7 +259,7 @@ Init_gtk_gdk_visual()
     rb_define_const(gdkVisual, "DIRECT_COLOR", INT2FIX(GDK_VISUAL_DIRECT_COLOR));
 
     /* GdkByteOrder */
-    rb_define_const(mGdk, "LSB_FIRST", INT2FIX(GDK_LSB_FIRST));
-    rb_define_const(mGdk, "MSB_FIRST", INT2FIX(GDK_MSB_FIRST));
+    rb_define_const(gdkVisual, "LSB_FIRST", INT2FIX(GDK_LSB_FIRST));
+    rb_define_const(gdkVisual, "MSB_FIRST", INT2FIX(GDK_MSB_FIRST));
 
 }

@@ -1,4 +1,26 @@
+2002-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdk.c, src/rbgdkwindow.c: 
+	Move Gdk::Window#pointer_is_grabbed? -> Gdk::pointer_grabbed?. 
+	* src/rbgdkwindow.c: Remove Gdk::Window#set_colormap, #set_hints, #get_size, #visual, 
+	#colormap, #window_type, #deskrelative_origin, #root_window, 
+	Remove Gdk::Window#foreign_new temporarily. This method will implement in Gdk::X.
+	Add Gdk::Window#visible?, #viewable?, #state, #iconfify, #deiconify, #stick, #unstick, 
+	#maximize, #unmaximize, #scroll, #copy_area, #set_colormap.
+	Change name of Gdk::Window#get_root_origin -> #root_origin, #get_geometry -> #geometry, 
+	#get_pointer -> #pointer, #get_events -> events,
+	Change parameter of Gdk::Window#show, 
+	Combine Gdk::Window#clear_area, #clear_area_e.
+	Some constants move from rbgdkconst.c.
+	Apply G_DEF_SETTERS.
+	* src/rbgdkselection.c: Add some constants. Code clean up.
+	* src/rbgdkevent.c, src/rbgdk.c: Gdk::events_pending -> Gdk::Event::events_pending?
+	* src/rbgdk.c: Code clean up. Add Gdk::set_double_click_time.
+	* src/rbgdkatom.c, src/rbgdkconst.c, src/rbgdkfont.c: Move some constants.
+	
 2002-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Remove Gdk::Window#set_hints.
 
 	* src/rbgdkkeyval.c: Gdk::Keyval#to_name -> Gdk::Keyval#name. 
 	* src/rbgdkgc.c, src/rbgdkconst.c: Some constants were moved from rbgdkconst.c. Apply G_DEF_SETTERS. 
