@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:17:19 $
+  $Date: 2002/08/10 16:07:09 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -37,7 +37,7 @@ rclosure_marshal(GClosure*      closure,
     VALUE args = rb_ary_new2(n_param_values);
     
     for (i = 0; i < n_param_values; i++)
-        rb_ary_store(args, i, rbgobj_gvalue_to_rvalue(&param_values[i]));
+        rb_ary_store(args, i, GVAL2RVAL(&param_values[i]));
     if (!NIL_P(((GRClosure*)closure)->extra_args))
         args = rb_ary_concat(args, ((GRClosure*)closure)->extra_args);
 

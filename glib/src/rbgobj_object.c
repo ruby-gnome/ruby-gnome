@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/10 16:07:09 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -130,7 +130,7 @@ gobj_get_property(self, prop_name)
         VALUE ret;
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
         g_object_get_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
-        ret = rbgobj_gvalue_to_rvalue(&tmp);
+        ret = GVAL2RVAL(&tmp);
         g_value_unset(&tmp);
         return ret;
     }

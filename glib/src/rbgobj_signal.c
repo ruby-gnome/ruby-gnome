@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:17:59 $
+  $Date: 2002/08/10 16:07:09 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -83,7 +83,7 @@ gobj_sig_emit(argc, argv, self)
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
 
     g_value_array_free(params);
-    result = rbgobj_gvalue_to_rvalue(&return_value);
+    result = GVAL2RVAL(&return_value);
     g_value_unset(&return_value);
     
     return self;

@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 00:08:14 $
+  $Date: 2002/08/10 16:07:09 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -361,6 +361,20 @@ rbgobj_gobject_new(gtype, params_hash)
 }
 
 
+extern void Init_gobject_gtype();
+extern void Init_gobject_gvalue();
+extern void Init_gobject_gvaluetypes();
+extern void Init_gobject_gboxed();
+extern void Init_gobject_genums();
+extern void Init_gobject_gparam();
+extern void Init_gobject_gparamspecs();
+extern void Init_gobject_gclosure();
+extern void Init_gobject_gobject();
+extern void Init_gobject_gsignal();
+extern void Init_gobject_gtypeplugin();
+extern void Init_gobject_gtypemodule();
+
+
 void 
 Init_gobject()
 {
@@ -370,19 +384,17 @@ Init_gobject()
     id_delete = rb_intern("delete");
     id_module_eval = rb_intern("module_eval");
 
-    Init_utils_int64();
-
     Init_gobject_gtype();
     Init_gobject_gvalue();
-    Init_gobject_gclosure();
+    Init_gobject_gvaluetypes();
+    Init_gobject_gboxed();
+    Init_gobject_genums();
     Init_gobject_gparam();
     Init_gobject_gparamspecs();
-
+    Init_gobject_gclosure();
     Init_gobject_gobject();
     Init_gobject_gsignal();
 
     Init_gobject_gtypeplugin();
     Init_gobject_gtypemodule();
-    Init_gobject_gboxed();
-    Init_gobject_genums();
 }

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/10 00:08:15 $
+  $Date: 2002/08/10 16:07:09 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -85,12 +85,19 @@ extern GType rbgobj_gtype_get(VALUE obj);
 extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args);
 
 /* rbgobj_value.c */
+extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
+extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
+
 typedef void (*RValueToGValueFunc)(VALUE from, GValue* to);
 typedef VALUE (*GValueToRValueFunc)(const GValue* from);
 extern void rbgobj_register_r2g_func(VALUE klass, RValueToGValueFunc func);
 extern void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func);
-extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
-extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
+
+/* rbgobj_valuetypes.c */
+#define RBGOBJ_TYPE_RUBY_VALUE (rbgobj_ruby_value_get_type())
+extern GType rbgobj_ruby_value_get_type();
+extern VALUE g_value_get_ruby_value(const GValue* value);
+extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
 
 /* rbgobj_param.c */
 extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);

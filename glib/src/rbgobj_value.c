@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/10 16:07:09 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -80,9 +80,17 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             GParamSpec* pspec = g_value_get_param(value);
             return pspec ? rbgobj_get_value_from_param_spec(pspec) : Qnil;
         }
+      case G_TYPE_POINTER:
+        {
+            gpointer ptr = g_value_get_pointer(value);
+            if (!ptr)
+                return Qnil;
+            else
+                return Data_Wrap_Struct(GTYPE2CLASS(G_VALUE_TYPE(value)),
+                                        NULL, NULL, ptr);
+        }
 #if 0
       case G_TYPE_INTERFACE:
-      case G_TYPE_POINTER:
       case G_TYPE_BOXED:
 #endif
     }
@@ -163,9 +171,16 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
       case G_TYPE_PARAM:
         g_value_set_param(result, NIL_P(val) ? NULL : rbgobj_param_spec_get_struct(val));
         return;
+      case G_TYPE_POINTER:
+        if (NIL_P(val))
+            g_value_set_pointer(result, NULL);
+        else {
+            gpointer ptr;
+            Data_Get_Struct(val, void, ptr);
+            g_value_set_pointer(result, ptr);
+        }
 #if 0
       case G_TYPE_INTERFACE:
-      case G_TYPE_POINTER:
       case G_TYPE_BOXED:
 #endif
     }

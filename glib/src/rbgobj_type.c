@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/10 16:07:09 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -63,6 +63,16 @@ rbgobj_lookup_class_by_gtype(gtype)
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
+          case G_TYPE_POINTER:
+            if (gtype == G_TYPE_POINTER) {
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cData);
+            } else {
+                const RGObjClassInfo* cinfo_super
+                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+            }
+            break;
+
           case G_TYPE_BOXED:
             if (gtype == G_TYPE_BOXED){
                 cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cData);
@@ -440,6 +450,7 @@ Init_type()
 
     rbgobj_cType = rb_define_class_under(mGLib, "Type", rb_cObject);
 
+    //rb_define_alias(rbgobj_cType, "[]", "new");
     rb_define_method(rbgobj_cType, "initialize", type_initialize, 1);
     rb_define_method(rbgobj_cType, "inspect", type_inspect, 0);
     rb_define_method(rbgobj_cType, "==", type_eq, 1);
