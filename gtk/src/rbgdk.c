@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:53 $
+  $Author: mutoh $
+  $Date: 2003/11/24 06:41:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -112,7 +112,14 @@ rbgdk_x_io_error(display)
     const gchar* disp;
     const gchar* error;
 
+#if GTK_CHECK_VERSION(2,2,0)
     disp = display ? DisplayString(display) : gdk_get_display_arg_name();
+#else
+    disp = DisplayString(display);
+#endif
+    if (! disp)
+        disp = "(none)";
+
     error = g_strerror(errno_saved);
     
     rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp), 
