@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/09/19 18:47:37 $
+  $Date: 2002/10/14 17:24:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -59,6 +59,18 @@ gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
 }
 
 static VALUE
+gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
+    VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
+{
+    gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+				   GDK_IMAGE(RVAL2GOBJ(image)),
+				   NUM2INT(xsrc), NUM2INT(ysrc),
+				   NUM2INT(xdst), NUM2INT(ydst),
+				   NUM2INT(w), NUM2INT(h));
+    return self;
+}
+
+static VALUE
 gdkdraw_draw_poly(self, gc, filled, pnts)
     VALUE self, gc, filled, pnts;
 {
@@ -79,72 +91,6 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
 					 RTEST(filled),
 					 points,
 					 RARRAY(pnts)->len);
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_rgb_image(self, gc, x, y, w, h, dither, buf, rowstride)
-    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
-{
-    gdk_draw_rgb_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					   NUM2INT(x), NUM2INT(y),
-					   NUM2INT(w), NUM2INT(h),
-					   NUM2INT(dither),
-					   RVAL2CSTR(buf),
-					   NUM2INT(rowstride));
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_rgb_image_dithalign(self, gc, x, y, w, h, dither, buf, rowstride, 
-								 xdith, ydith)
-    VALUE self, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
-{
-    gdk_draw_rgb_image_dithalign(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-								 NUM2INT(x), NUM2INT(y),
-								 NUM2INT(w), NUM2INT(h),
-								 NUM2INT(dither),
-								 RVAL2CSTR(buf),
-								 NUM2INT(rowstride),
-								 NUM2INT(xdith), NUM2INT(ydith));
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_gray_image(self, gc, x, y, w, h, dither, buf, rowstride)
-    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
-{
-    gdk_draw_gray_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-						NUM2INT(x), NUM2INT(y),
-						NUM2INT(w), NUM2INT(h),
-						NUM2INT(dither),
-						RVAL2CSTR(buf),
-						NUM2INT(rowstride));
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_rgb_32_image(self, gc, x, y, w, h, dither, buf, rowstride)
-    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
-{
-    gdk_draw_rgb_32_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-						  NUM2INT(x), NUM2INT(y),
-						  NUM2INT(w), NUM2INT(h),
-						  NUM2INT(dither),
-						  RVAL2CSTR(buf),
-						  NUM2INT(rowstride));
-    return self;
-}
-
-static VALUE
-gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
-{
-    gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				   GDK_IMAGE(RVAL2GOBJ(image)),
-				   NUM2INT(xsrc), NUM2INT(ysrc),
-				   NUM2INT(xdst), NUM2INT(ydst),
-				   NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -219,6 +165,17 @@ gdkdraw_draw_lines(self, gc, pnts)
 }
 
 static VALUE
+gdkdraw_draw_drawable(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
+    VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
+{
+    gdk_draw_drawable(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), _SELF(src),
+                      NUM2INT(xsrc), NUM2INT(ysrc),
+                      NUM2INT(xdst), NUM2INT(ydst),
+                      NUM2INT(w), NUM2INT(h));
+    return self;
+}
+
+static VALUE
 gdkdraw_get_size(self)
     VALUE self;
 {
@@ -239,7 +196,6 @@ Init_gtk_gdk_draw()
 {
     VALUE gdkDrawable = G_DEF_CLASS(GDK_TYPE_DRAWABLE, "Drawable", mGdk);
 
-    /* instance methods */
     rb_define_method(gdkDrawable, "draw_point", gdkdraw_draw_point, 3);
     rb_define_method(gdkDrawable, "draw_line", gdkdraw_draw_line, 5);
     rb_define_method(gdkDrawable, "draw_rectangle", gdkdraw_draw_rect, 6);
@@ -250,13 +206,7 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_pnts, 2);
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
+    rb_define_method(gdkDrawable, "draw_drawable", gdkdraw_draw_drawable, 8);
     rb_define_method(gdkDrawable, "size", gdkdraw_get_size, 0);
     rb_define_method(gdkDrawable, "depth", gdkdraw_get_depth, 0);
-
-    /* GdkRGB methods */
-    rb_define_method(gdkDrawable, "draw_rgb_image", gdkdraw_draw_rgb_image, 8);
-    rb_define_method(gdkDrawable, "draw_rgb_image_dithalign", gdkdraw_draw_rgb_image_dithalign, 10);
-    rb_define_method(gdkDrawable, "draw_gray_image", gdkdraw_draw_gray_image, 8);
-    rb_define_method(gdkDrawable, "draw_rgb_32_image", gdkdraw_draw_rgb_32_image, 8);
-
 }

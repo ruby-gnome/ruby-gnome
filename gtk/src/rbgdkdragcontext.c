@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/09/16 14:20:22 $
+  $Date: 2002/10/14 17:24:14 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -216,6 +216,4 @@ Init_gtk_gdk_dragcontext()
     rb_define_const(gdkDragContext, "ACTION_LINK", INT2FIX(GDK_ACTION_LINK));
     rb_define_const(gdkDragContext, "ACTION_PRIVATE", INT2FIX(GDK_ACTION_PRIVATE));
     rb_define_const(gdkDragContext, "ACTION_ASK", INT2FIX(GDK_ACTION_ASK));
-
-    rb_include_module(gdkDragContext, gdkDragContext);
 }

@@ -1,3 +1,14 @@
+2002-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkconst.c, src/rbgdkevent.c: Implement constants. Some constants were moved from rbgdkconst.c.
+	* src/rbgdkrgb.c: Rename Gdk::Rgb to Gdk::RGB.
+	* src/rbgdkdraw.c, src/rbgdkrgb.c: Move Gdk::Drawable#draw_*image to Gdk::RGB#draw_*_image.
+	* src/rbgdkconst.c, src/rbgdkrgb.c: Move Gdk::RGB_DITHER_* to Gdk::RGB#DITHER_*.
+	* src/rbgdkdraw.c: Implement Gdk::Drawable#draw_drawable. 
+	* src/rbgdkconst.c: Code clean up. 
+	* src/rbgdkdragcontext.c: Fix misused definition. 
+	* src/rbgdkcolor.c: Apply G_DEF_SETTERS. 
+
 2002-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* doc/: Remove files.

@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/14 17:24:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -64,7 +64,7 @@ gdkcolor_set_red(self, red)
     VALUE red;
 {
     _SELF(self)->red = NUM2INT(red);
-    return red;
+    return self;
 }
 
 static VALUE
@@ -80,7 +80,7 @@ gdkcolor_set_green(self, green)
     VALUE green;
 {
     _SELF(self)->green = NUM2INT(green);
-    return green;
+    return self;
 }
 
 static VALUE
@@ -96,7 +96,7 @@ gdkcolor_set_blue(self, blue)
     VALUE blue;
 {
     _SELF(self)->blue = NUM2INT(blue);
-    return blue;
+    return self;
 }
 
 static VALUE
@@ -124,12 +124,14 @@ Init_gtk_gdk_color()
     rb_define_method(gdkColor, "initialize", gdkcolor_initialize, 3);
     rb_define_method(gdkColor, "pixel", gdkcolor_pixel, 0);
     rb_define_method(gdkColor, "red", gdkcolor_red, 0);
-    rb_define_method(gdkColor, "red=", gdkcolor_set_red, 1);
+    rb_define_method(gdkColor, "set_red", gdkcolor_set_red, 1);
     rb_define_method(gdkColor, "green", gdkcolor_green, 0);
-    rb_define_method(gdkColor, "green=", gdkcolor_set_green, 1);
+    rb_define_method(gdkColor, "set_green", gdkcolor_set_green, 1);
     rb_define_method(gdkColor, "blue", gdkcolor_blue, 0);
-    rb_define_method(gdkColor, "blue=", gdkcolor_set_blue, 1);
+    rb_define_method(gdkColor, "set_blue", gdkcolor_set_blue, 1);
     rb_define_method(gdkColor, "to_a", gdkcolor_to_a, 0);
     rb_define_method(gdkColor, "==", gdkcolor_equal, 1);
+
+    G_DEF_SETTERS(gdkColor);
 }
 
