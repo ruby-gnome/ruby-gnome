@@ -9,6 +9,8 @@ pkgname   = 'gstreamer-0.6'
 
 PKGConfig.have_package(pkgname) or exit 1
 
+check_win32
+
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src'].map{|d|
   "-I" + File.join(top, d)
@@ -21,6 +23,16 @@ have_header("assert.h")
 
 if have_library("gstmedia-info-0.6", "gst_media_info_read")
 	$CFLAGS += " -DHAVE_MEDIA_INFO"
+end
+
+if /cygwin|mingw/ =~ RUBY_PLATFORM
+  top = "../.."
+  [
+    ["glib/src", "ruby-glib2"],
+  ].each{|d,l|
+    $LDFLAGS << " -L#{top}/#{d}"
+    $libs << " -l#{l}"
+  }
 end
 
 Dir.mkdir('src') unless File.exist? 'src'
