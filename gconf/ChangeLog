@@ -1,3 +1,8 @@
+2003-01-03  Nikolai :: lone-star :: Weibull <lone-star@home.se>
+
+	* src/lib/gconf2.rb: Added gconf2.so requirement.
+	Reported by Eliot Landrum <eliot@landrum.cx>.
+
 2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-client.c: Follow Ruby/GLib changes.
@@ -19,7 +24,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2002/12/01 02:25:40 $ macros.
+	and $Date: 2003/01/02 15:15:43 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
