@@ -3,8 +3,8 @@
 
   rbart_affine.c - Art::Affine class of ruby
 
-  $Author: tkubo $
-  $Date: 2002/09/28 19:13:35 $
+  $Author: mutoh $
+  $Date: 2003/01/04 06:04:28 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -20,7 +20,7 @@ static VALUE artAffine;
 #define Affine_Set(obj, val) memcpy(Affine_Ptr(obj), val, sizeof(double[6]))
 
 double *
-rbart_get_art_affine(obj)
+get_art_affine(obj)
     VALUE obj;
 {
     if (!rb_obj_is_instance_of(obj, artAffine))
@@ -29,7 +29,7 @@ rbart_get_art_affine(obj)
 }
 
 VALUE
-rbart_make_art_affine(affine)
+make_art_affine(affine)
     double affine[6];
 {
     double *ptr = xmalloc(sizeof(double[6]));
@@ -55,7 +55,7 @@ affine_s_new(argc, argv, klass)
     }
     for (i = 0;i < 6;i++)
         affine[i] = NUM2DBL(argv[i]);
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -64,7 +64,7 @@ affine_s_identity(klass)
 {
     double affine[6];
     art_affine_identity(affine);
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -73,7 +73,7 @@ affine_s_scale(klass, sx, sy)
 {
     double affine[6];
     art_affine_scale(affine, NUM2DBL(sx), NUM2DBL(sy));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -82,7 +82,7 @@ affine_s_rotate(klass, theta)
 {
     double affine[6];
     art_affine_rotate(affine, NUM2DBL(theta));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -91,7 +91,7 @@ affine_s_shear(klass, theta)
 {
     double affine[6];
     art_affine_shear(affine, NUM2DBL(theta));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -100,7 +100,7 @@ affine_s_translate(klass, tx, ty)
 {
     double affine[6];
     art_affine_translate(affine, NUM2DBL(tx), NUM2DBL(ty));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -136,7 +136,7 @@ affine_invert(self)
 {
     double affine[6];
     art_affine_invert(affine, Affine_Ptr(self));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -155,7 +155,7 @@ affine_flip(self, horz, vert)
 {
     double affine[6];
     art_affine_flip(affine, Affine_Ptr(self), RTEST(horz), RTEST(vert));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -214,8 +214,8 @@ affine_multiply(self, right)
     VALUE self, right;
 {
     double affine[6];
-    art_affine_multiply(affine, rbart_get_art_affine(right), Affine_Ptr(self));
-    return rbart_make_art_affine(affine);
+    art_affine_multiply(affine, get_art_affine(right), Affine_Ptr(self));
+    return make_art_affine(affine);
 }
 
 static VALUE

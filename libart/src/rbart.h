@@ -3,8 +3,8 @@
 
   rbart.h - header file for Art module of ruby
 
-  $Author: tkubo $
-  $Date: 2002/09/28 19:13:35 $
+  $Author: mutoh $
+  $Date: 2003/01/04 06:04:28 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -15,12 +15,36 @@
 #include <libart_lgpl/libart.h>
 #include <ruby.h>
 
-extern VALUE mArt;
 extern VALUE artAffine;
+extern VALUE artSVP;
+extern VALUE artBpath;
+extern VALUE artVpath;
+extern VALUE artVpathDash;
+extern VALUE artCanvas;
 
-double *rbart_get_art_affine(VALUE);
-VALUE rbart_make_art_affine(double[6]);
+extern double *get_art_affine(VALUE);
+extern VALUE make_art_affine(double[6]);
 
-void Init_art_affine(VALUE);
+extern void Init_art_affine(VALUE);
+
+extern ArtSVP *get_art_svp(VALUE);
+extern VALUE make_art_svp(ArtSVP *);
+
+extern void Init_art_svp();
+
+extern ArtBpath *get_art_bpath(VALUE);
+extern VALUE make_art_bpath(ArtBpath *);
+
+extern void Init_art_bpath();
+
+extern ArtVpath *get_art_vpath(VALUE);
+extern VALUE make_art_vpath(ArtVpath *);
+
+extern ArtVpathDash *get_art_vpath_dash(VALUE);
+extern VALUE make_art_vpath_dash(ArtVpathDash *);
+
+extern void Init_art_vpath();
+extern void Init_art_canvas();
+
 
 #endif /* ! _RBART_H_included */

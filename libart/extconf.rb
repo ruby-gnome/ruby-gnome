@@ -4,6 +4,9 @@ extconf.rb for libart extention library
 
 require "mkmf"
 
+have_library("png", "png_create_write_struct")
+have_library("jpeg", "jpeg_set_defaults")
+
 config_cmd = with_config("libart2-config", "libart2-config")
 
 begin

@@ -1,3 +1,9 @@
+2003-01-04  Tom Payne <ruby-gnome-users-en@tompayne.org>
+
+	* src/rbart_bpath.c, rbart_canvas.c, rbart_svp.c, rbart_vpath.c,
+	sample/rose.rb: Add files.
+	* src/rbart.[ch]: Modified for above files.
+
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Add file.
