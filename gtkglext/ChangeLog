@@ -1,3 +1,7 @@
+2003-08-28 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkwindow.c: Gdk::Window#gl_drawable can now be called
+
 2003-08-27 Vincent Isambart <isambart@netcourrier.com>
 
 	* src/rbgdkglconfig.c, src/rbgtkwidget.c: replaced

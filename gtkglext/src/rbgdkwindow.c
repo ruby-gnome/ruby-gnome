@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkwindow.c,v 1.1 2003/08/20 22:36:02 isambart Exp $ */
+/* $Id: rbgdkwindow.c,v 1.2 2003/08/28 17:41:27 isambart Exp $ */
 /* OpenGL extension to Gdk::Window
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -85,5 +85,5 @@ Init_gtkglext_gdk_window(void)
     rb_define_method(Window, "unset_gl_capability", window_unset_gl_capability, 0);
     rb_define_method(Window, "gl_capable?",         window_is_gl_capable,       0);
     rb_define_method(Window, "gl_window",           window_get_gl_window,       0);
-    rb_define_method(Window, "gl_window",           window_get_gl_drawable,     0);
+    rb_define_method(Window, "gl_drawable",         window_get_gl_drawable,     0);
 }
