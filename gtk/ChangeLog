@@ -1,3 +1,18 @@
+2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Add Gtk::Notebook#n_pages.
+	Gtk::Notebook#page= works with negative value.
+
+2003-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkspan.c: Removed. Use [x, y, width] instead.
+	* src/rbgtk.h: Revmoe GDK_TYPE_SPAN.
+	* src/rbgdkregion.c: Remove Gdk::Region#eql?, #&, #-, #|.
+	Merge Gdk::Region#union_with_rect and #union.
+	Gdk::Region#offset, #shrink returns self.
+	Fix segfault for Gdk::Region#rectangles.
+	Gdk::Region#spans_intersect_each() accept [x, y, width] not Gdk::Span.
+
 2003-10-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Rename Gtk::Widget#list_accel_closures to #accel_closures.

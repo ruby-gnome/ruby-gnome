@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2003/09/23 13:43:40 $
+  $Date: 2003/10/06 16:47:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -181,14 +181,14 @@ note_get_nth_page(self, page_num)
     return page ? GOBJ2RVAL(page) : Qnil;
 }
 
-/* Is this existed?
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 note_get_n_pages(self)
     VALUE self;
 {
     return INT2NUM(gtk_notebook_get_n_pages(_SELF(self)));
 }
-*/
+#endif
 
 static VALUE
 note_get_tab_label(self, child)
@@ -291,6 +291,14 @@ note_set_current_page(self, page_num)
     return self;
 }
 
+static VALUE
+note_set_current_page_eq(self, page_num)
+    VALUE self, page_num;
+{
+    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page_num));
+    return page_num;
+}
+
 /***********************************************/
 /*
  * Gtk::NotebookPage
@@ -355,9 +363,9 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "reorder_child", note_reorder_child, 2);
     rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
     rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
-/*
+#if GTK_MINOR_VERSION >= 2
     rb_define_method(gNotebook, "n_pages", note_get_n_pages, 0);
-*/
+#endif
     rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);
     rb_define_method(gNotebook, "query_tab_label_packing", note_query_tab_label_packing, 1);
     rb_define_method(gNotebook, "set_menu_label", note_set_menu_label, 2);
@@ -368,6 +376,7 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
     rb_define_method(gNotebook, "set_page", note_set_current_page, 1);
+    rb_define_method(gNotebook, "page=", note_set_current_page_eq, 1);
     /* GtkNotebookTab */
     rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
     rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
