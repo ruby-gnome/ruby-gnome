@@ -15,6 +15,8 @@ extern void Init_gobject_gtypemodule();
 extern void Init_gobject_gboxed();
 extern void Init_gobject_genums();
 
+extern void Init_utils_int64();
+
 #ifndef StringValue
 #define StringValue(s) ((s) = (TYPE(s) == T_STRING) ? (s) : rb_str_to_str(s))
 #endif
@@ -24,3 +26,8 @@ extern void Init_gobject_genums();
 #ifndef StringValuePtr
 #define StringValuePtr(s) STR2CSTR(s)
 #endif
+
+extern VALUE rbgobj_int64_to_num(guint64 val);
+extern VALUE rbgobj_uint64_to_num(guint64 val);
+extern gint64 rbgobj_num_to_int64(VALUE val);
+extern guint64 rbgobj_num_to_uint64(VALUE val);

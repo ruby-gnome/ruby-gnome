@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:17:24 $
+  $Date: 2002/08/09 12:44:01 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -261,28 +261,10 @@ gobj_smethod_added(self, id)
 
 /**********************************************************************/
 
-static VALUE
-_gobject_to_ruby(const GValue* from)
-{
-    GObject* gobj = g_value_get_object(from);
-    return gobj ? GOBJ2RVAL(gobj) : Qnil;
-}
-
-static void
-_gobject_from_ruby(VALUE from, GValue* to)
-{
-    g_value_set_object(to, RVAL2GOBJ(from));
-}
-
-/**********************************************************************/
-
 void 
 Init_gobject_gobject()
 {
-    VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "GObject", mGLib);
-
-    rbgobj_register_r2g_func(cGObject, _gobject_from_ruby);
-    rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
+    VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
 
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
 #ifndef HAVE_OBJECT_ALLOCATE

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:18:12 $
+  $Date: 2002/08/09 12:44:01 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -65,7 +65,7 @@ extern VALUE rbgobj_get_value_from_gobject(GObject* gobj);
 
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
-                                             ID obj_ivar_id, VALUE hash_key);
+                                          ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
 extern void rbgobj_define_property_accessors(VALUE klass);
@@ -80,9 +80,6 @@ extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
 extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
-
-
-extern VALUE rbgobj_cBoxed;
 
 
 /* rbgobj_closure.c */
@@ -102,8 +99,6 @@ extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec);
 
 /* rbgobj_boxed.c */
-extern VALUE rbgobj_boxed_class(GType gtype);
-extern GType rbgobj_boxed_class_gtype(VALUE klass);
 extern gpointer rbgobj_boxed_get(VALUE obj);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
 

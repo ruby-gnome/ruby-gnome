@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:17:25 $
+  $Date: 2002/08/09 12:44:01 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -159,19 +159,19 @@ get_flags(VALUE self)
 static VALUE
 get_value_type(VALUE self)
 {
-    return INT2NUM(G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+    return rbgobj_gtype_new(G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
 }
 
 static VALUE
 get_owner_type(VALUE self)
 {
-    return INT2NUM(rbgobj_param_spec_get_struct(self)->owner_type);
+    return rbgobj_gtype_new(rbgobj_param_spec_get_struct(self)->owner_type);
 }
 
 static VALUE
 value_set_default(VALUE self, VALUE val)
 {
-    GValue tmp;
+    GValue tmp = {0,};
     g_value_init(&tmp,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
     rbgobj_rvalue_to_gvalue(val, &tmp);
@@ -195,14 +195,20 @@ value_defaults(VALUE self, VALUE val)
     return result ? Qtrue : Qfalse;
 }
 
-
-#if 0
-gboolean	g_param_value_validate		(GParamSpec    *pspec,
-						 GValue	       *value);
-#endif
 static VALUE
-value_validate(VALUE self)
+value_validate(self, value)
+    VALUE self, value;
 {
+    GValue tmp = {0,};
+    gboolean result;
+
+    g_value_init(&tmp,
+                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+    rbgobj_rvalue_to_gvalue(value, &tmp);
+    result = g_param_value_validate(rbgobj_param_spec_get_struct(self), &tmp);
+    g_value_unset(&tmp);
+
+    return result ? Qtrue : Qfalse;
 }
 
 #if 0
@@ -224,29 +230,11 @@ get_ref_count(self)
 
 /**********************************************************************/
 
-static VALUE
-_pspec_to_ruby(const GValue* from)
-{
-    GParamSpec* pspec = g_value_get_param(from);
-    return pspec ? rbgobj_get_value_from_paramspec(pspec) : Qnil;
-}
-
-static void
-_pspec_from_ruby(VALUE from, GValue* to)
-{
-    g_value_set_param(to, rbgobj_param_spec_get_struct(from));
-}
-
-/**********************************************************************/
-
 static void
 Init_gobject_gparam_spec()
 {    
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
     cParamSpec = G_DEF_CLASS(G_TYPE_PARAM, "ParamSpec", mGLib);
-
-    rbgobj_register_r2g_func(cParamSpec, _pspec_from_ruby);
-    rbgobj_register_g2r_func(G_TYPE_PARAM, _pspec_to_ruby);
 
     rb_define_singleton_method(cParamSpec, "allocate", pspec_s_allocate, 0);
 #ifndef HAVE_OBJECT_ALLOCATE

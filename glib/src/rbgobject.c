@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:18:11 $
+  $Date: 2002/08/09 12:44:01 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -21,7 +21,7 @@
 #include "global.h"
 #include <ctype.h>
 
-static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
+static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 ID id_relatives;
 ID id_relative_callbacks;
@@ -68,7 +68,7 @@ rbgobj_free(gobj_holder* holder)
         if (!holder->destroyed){
             if (holder->cinfo && holder->cinfo->free)
                 holder->cinfo->free(holder->gobj);
-            g_object_set_data(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
+            g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, rbgobj_weak_notify, holder);
         }
         g_object_unref(holder->gobj);
@@ -97,7 +97,7 @@ rbgobj_initialize_gobject(obj, gobj)
     VALUE obj;
     GObject* gobj;
 {
-    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
         rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
 
@@ -106,7 +106,7 @@ rbgobj_initialize_gobject(obj, gobj)
     holder->gobj  = gobj;
     holder->destroyed = FALSE;
 
-    g_object_set_data(gobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
+    g_object_set_qdata(gobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref(gobj, rbgobj_weak_notify, holder);
 
     rb_ivar_set(obj, id_relatives, Qnil);
@@ -136,7 +136,7 @@ VALUE
 rbgobj_get_value_from_gobject_if_exist(gobj)
     GObject* gobj;
 {
-    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
     return holder ? holder->self : Qnil;
 }
 
@@ -144,7 +144,7 @@ VALUE
 rbgobj_get_value_from_gobject(gobj)
     GObject* gobj;
 {
-    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
         return holder->self;
     else {
@@ -365,11 +365,14 @@ rbgobj_gobject_new(gtype, params_hash)
 void 
 Init_gobject()
 {
+    RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
     /* IDs */
     id_relatives = rb_intern("__relatives__");
     id_relative_callbacks = rb_intern("__relative_callbacks__");
     id_delete = rb_intern("delete");
     id_module_eval = rb_intern("module_eval");
+
+    Init_utils_int64();
 
     Init_gobject_gtype();
     Init_gobject_gvalue();

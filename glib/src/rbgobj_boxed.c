@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2002/07/28 11:34:21 $
+  $Date: 2002/08/09 12:44:01 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -13,18 +13,25 @@
 
 #include "global.h"
 
-VALUE rbgobj_cBoxed;
-
-/**********************************************************************/
-
 typedef struct {
     gpointer boxed;
     GType type;
 } boxed_holder;
 
 static void
+boxed_mark(boxed_holder* p)
+{
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
+    if (cinfo && cinfo->mark)
+        cinfo->mark(p->boxed);
+}
+
+static void
 boxed_free(boxed_holder* p)
 {
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
+    if (cinfo && cinfo->free)
+        cinfo->free(p->boxed);
     g_boxed_free(p->type, p->boxed);
     free(p);
 }
@@ -48,47 +55,12 @@ rbgobj_make_boxed(p, gtype)
     boxed_holder* holder;
     VALUE result;
 
-    result = Data_Make_Struct(rbgobj_boxed_class(gtype), boxed_holder,
-                              NULL, boxed_free, holder);
+    result = Data_Make_Struct(GTYPE2CLASS(gtype), boxed_holder,
+                              boxed_mark, boxed_free, holder);
     holder->type  = gtype;
     holder->boxed = g_boxed_copy(gtype, p);
 
     return result;
-}
-
-/**********************************************************************/
-
-static VALUE gtype_to_class;
-
-VALUE
-rbgobj_boxed_class(gtype)
-    GType gtype;
-{
-    VALUE type = INT2NUM(gtype);
-    VALUE klass;
-
-    if (!G_TYPE_IS_BOXED(gtype))
-        rb_raise(rb_eRuntimeError, "%s is not a subtype of GBoxed",
-                 g_type_name(gtype));
-
-    klass = rb_hash_aref(gtype_to_class, type);
-
-    if (NIL_P(klass)){
-        VALUE parent = rbgobj_boxed_class(g_type_parent(gtype));
-        klass = rb_class_new(parent);
-        rb_hash_aset(gtype_to_class, type, klass);
-        rb_iv_set(klass, "@gtype", type);
-        return klass;
-    }
-
-    return klass;
-}
-
-GType
-rbgobj_boxed_class_gtype(klass)
-    VALUE klass;
-{
-    return NUM2INT(rb_iv_get(klass, "@gtype"));
 }
 
 /**********************************************************************/
@@ -101,7 +73,7 @@ boxed_to_ruby(const GValue* from)
     GType gtype = G_VALUE_TYPE(from);
     VALUE result;
 
-    result = Data_Make_Struct(rbgobj_boxed_class(gtype), boxed_holder,
+    result = Data_Make_Struct(GTYPE2CLASS(gtype), boxed_holder,
                               NULL, boxed_free, holder);
     holder->type  = gtype;
     holder->boxed = boxed;
@@ -128,13 +100,8 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed()
 {
-    rb_global_variable(&gtype_to_class);
-    gtype_to_class = rb_hash_new();
-
-    rbgobj_cBoxed = rb_define_class_under(mGLib, "Boxed", rb_cData);
-    rb_hash_aset(gtype_to_class, INT2NUM(G_TYPE_BOXED), rbgobj_cBoxed);    
-    rb_iv_set(rbgobj_cBoxed, "@gtype", INT2NUM(G_TYPE_BOXED));
+    VALUE cBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
 
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
-    rbgobj_register_r2g_func(rbgobj_cBoxed, boxed_from_ruby);
+    rbgobj_register_r2g_func(cBoxed, boxed_from_ruby);
 }

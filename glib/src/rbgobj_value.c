@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/07/28 11:34:21 $
+  $Date: 2002/08/09 12:44:01 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -36,11 +36,59 @@ rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 VALUE
 rbgobj_gvalue_to_rvalue(const GValue* value)
 {
-    GType gtype;
-
     if (!value)
         return Qnil;
 
+    switch (G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))) {
+      case G_TYPE_NONE:
+        return Qnil;
+      case G_TYPE_CHAR:
+        return CHR2FIX(g_value_get_char(value));
+      case G_TYPE_UCHAR:
+        return INT2FIX(g_value_get_uchar(value));
+      case G_TYPE_BOOLEAN:
+        return g_value_get_boolean(value) ? Qtrue : Qfalse;
+      case G_TYPE_INT:
+        return INT2NUM(g_value_get_int(value));
+      case G_TYPE_UINT:
+        return UINT2NUM(g_value_get_uint(value));
+      case G_TYPE_LONG:
+        return INT2NUM(g_value_get_long(value));
+      case G_TYPE_ULONG:
+        return UINT2NUM(g_value_get_ulong(value));
+      case G_TYPE_INT64:
+        return rbgobj_int64_to_num(g_value_get_int64(value));
+      case G_TYPE_UINT64:
+        return rbgobj_uint64_to_num(g_value_get_uint64(value));
+      case G_TYPE_FLOAT:
+        return rb_float_new(g_value_get_float(value));
+      case G_TYPE_DOUBLE:
+        return rb_float_new(g_value_get_double(value));
+      case G_TYPE_STRING:
+        return rb_str_new2(g_value_get_string(value));
+      case G_TYPE_ENUM:
+        return UINT2NUM(g_value_get_enum(value));
+      case G_TYPE_FLAGS:
+        return UINT2NUM(g_value_get_flags(value));        
+      case G_TYPE_OBJECT:
+        {
+            GObject* gobj = g_value_get_object(value);
+            return gobj ? GOBJ2RVAL(gobj) : Qnil;
+        }
+      case G_TYPE_PARAM:
+        {
+            GParamSpec* pspec = g_value_get_param(value);
+            return pspec ? rbgobj_get_value_from_param_spec(pspec) : Qnil;
+        }
+#if 0
+      case G_TYPE_INTERFACE:
+      case G_TYPE_POINTER:
+      case G_TYPE_BOXED:
+#endif
+    }
+
+    {
+    GType gtype;
     for (gtype = G_VALUE_TYPE(value);
          gtype != G_TYPE_INVALID;
          gtype = g_type_parent(gtype))
@@ -52,36 +100,10 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
         Data_Get_Struct(obj, GValueToRValueFunc, func);
         return func(value);
     }
-
-    if (0)
-        ;
-    else if (G_VALUE_HOLDS_CHAR(value))
-        return CHR2FIX(g_value_get_char(value));
-    else if (G_VALUE_HOLDS_UCHAR(value))
-        return INT2FIX(g_value_get_uchar(value));
-    else if (G_VALUE_HOLDS_BOOLEAN(value))
-        return g_value_get_boolean(value) ? Qtrue : Qfalse;
-    else if (G_VALUE_HOLDS_INT(value))
-        return INT2NUM(g_value_get_int(value));
-    else if (G_VALUE_HOLDS_UINT(value))
-        return UINT2NUM(g_value_get_uint(value));
-    else if (G_VALUE_HOLDS_LONG(value))
-        return INT2NUM(g_value_get_long(value));
-    else if (G_VALUE_HOLDS_ULONG(value))
-        return UINT2NUM(g_value_get_ulong(value));
-    else if (G_VALUE_HOLDS_INT64(value))
-        return INT2NUM(g_value_get_long(value)); /* FIXME */
-    else if (G_VALUE_HOLDS_UINT64(value)) 
-        return UINT2NUM(g_value_get_ulong(value)); /* FIXME */
-    else if (G_VALUE_HOLDS_FLOAT(value))
-        return rb_float_new(g_value_get_float(value));
-    else if (G_VALUE_HOLDS_DOUBLE(value))
-        return rb_float_new(g_value_get_double(value));
-    else if (G_VALUE_HOLDS_STRING(value))
-        return rb_str_new2(g_value_get_string(value));
+    }
 
     /* XXX */
-    printf("rbgobj_gvalue_to_rvalue: unsupported (gobject) type: %s\n",
+    printf("rbgobj_gvalue_to_rvalue: unsupported gobject type: %s\n",
            g_type_name(G_VALUE_TYPE(value)));
     return Qnil;
 }
@@ -89,10 +111,69 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
 void
 rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 {
-    VALUE mods;
+    switch (G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result))) {
+      case G_TYPE_NONE:
+        return;
+      case G_TYPE_CHAR:
+        g_value_set_char(result, NUM2INT(val));
+        return;
+      case G_TYPE_UCHAR:
+        g_value_set_uchar(result, NUM2UINT(val));
+        return;
+      case G_TYPE_BOOLEAN:
+        g_value_set_boolean(result, RTEST(val));
+        return;
+      case G_TYPE_INT:
+        g_value_set_int(result, NUM2INT(val));
+        return;
+      case G_TYPE_UINT:
+        g_value_set_uint(result, NUM2UINT(val));
+        return;
+      case G_TYPE_LONG:
+        g_value_set_long(result, NUM2LONG(val));
+        return;
+      case G_TYPE_ULONG:
+        g_value_set_ulong(result, NUM2ULONG(val));
+        return;
+      case G_TYPE_INT64:
+        g_value_set_int64(result, rbgobj_num_to_int64(val));
+        return;
+      case G_TYPE_UINT64:
+        g_value_set_uint64(result, rbgobj_num_to_uint64(val));
+        return;
+      case G_TYPE_ENUM:
+        g_value_set_enum(result, NUM2UINT(val));
+        return;
+      case G_TYPE_FLAGS:
+        g_value_set_flags(result, NUM2UINT(val));
+        return;
+      case G_TYPE_FLOAT:
+        g_value_set_float(result, NUM2DBL(val));
+        return;
+      case G_TYPE_DOUBLE:
+        g_value_set_double(result, NUM2DBL(val));
+        return;
+      case G_TYPE_STRING:
+        StringValue(val);
+        g_value_set_string(result, StringValuePtr(val));
+        return;
+      case G_TYPE_OBJECT:
+        g_value_set_object(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
+        return;
+      case G_TYPE_PARAM:
+        g_value_set_param(result, NIL_P(val) ? NULL : rbgobj_param_spec_get_struct(val));
+        return;
+#if 0
+      case G_TYPE_INTERFACE:
+      case G_TYPE_POINTER:
+      case G_TYPE_BOXED:
+#endif
+    }
+
+    {
+    VALUE mods = rb_mod_ancestors(CLASS_OF(val));
     VALUE* c;
 
-    mods = rb_mod_ancestors(CLASS_OF(val));
     Check_Type(mods, T_ARRAY);
 
     for (c = RARRAY(mods)->ptr;
@@ -107,77 +188,11 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         func(val, result);
         return;
     }
+    }
  
     /* XXX */
     printf("rbgobj_rvalue_to_gvalue: unsupported (ruby) class: %s\n",
            rb_class2name(CLASS_OF(val)));
-}
-
-/**********************************************************************/
-/* GLib -> Ruby */
-
-/**********************************************************************/
-/* Ruby -> GLib */
-
-static void
-nil_to_gvalue(VALUE from, GValue* to)
-{
-    /* ??? */
-}
-
-static void
-bool_to_gvalue(VALUE from, GValue* to)
-{
-    g_value_set_boolean(to, RTEST(from));
-}
-
-static void
-str_to_gvalue(VALUE from, GValue* to)
-{
-    StringValue(from);
-    if (0)
-        ;
-    else if (G_VALUE_HOLDS_FLOAT(to))
-        g_value_set_string(to, StringValuePtr(from));
-    else {
-        GValue tmp = {0,};
-        g_value_init(&tmp, G_TYPE_STRING);
-        g_value_set_string(&tmp, StringValuePtr(from));
-        g_value_transform(&tmp, to);
-        g_value_unset(&tmp);
-    }
-}
-
-static void
-int_to_gvalue(VALUE from, GValue* to)
-{
-    if (0)
-        ;
-    else if (G_VALUE_HOLDS_ENUM(to))
-        g_value_set_enum(to, NUM2INT(from));
-    else if (G_VALUE_HOLDS_FLAGS(to))
-        g_value_set_flags(to, NUM2INT(from));
-    else {
-        g_value_set_int(to, NUM2INT(to));
-    }
-}
-
-static void
-float_to_gvalue(VALUE from, GValue* to)
-{
-    if (0)
-        ;
-    else if (G_VALUE_HOLDS_FLOAT(to))
-        g_value_set_float(to, NUM2DBL(from));
-    else if (G_VALUE_HOLDS_DOUBLE(to))
-        g_value_set_double(to, NUM2DBL(from));
-    else {
-        GValue tmp = {0,};
-        g_value_init(&tmp, G_TYPE_DOUBLE);
-        g_value_set_double(&tmp, NUM2DBL(from));
-        g_value_transform(&tmp, to);
-        g_value_unset(&tmp);
-    }
 }
 
 /**********************************************************************/
@@ -188,11 +203,4 @@ void Init_gobject_gvalue()
     g2r_func_table = rb_hash_new();
     rb_global_variable(&r2g_func_table);
     rb_global_variable(&g2r_func_table);
-
-    rbgobj_register_r2g_func(rb_cNilClass, &nil_to_gvalue);
-    rbgobj_register_r2g_func(rb_cTrueClass, &bool_to_gvalue);
-    rbgobj_register_r2g_func(rb_cFalseClass, &bool_to_gvalue);
-    rbgobj_register_r2g_func(rb_cString, &str_to_gvalue);
-    rbgobj_register_r2g_func(rb_cInteger, &int_to_gvalue);
-    rbgobj_register_r2g_func(rb_cFloat, &float_to_gvalue);
 }

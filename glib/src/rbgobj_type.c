@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/08 15:18:08 $
+  $Date: 2002/08/09 12:44:01 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -63,6 +63,16 @@ rbgobj_lookup_class_by_gtype(gtype)
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
+          case G_TYPE_BOXED:
+            if (gtype == G_TYPE_BOXED){
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cData);
+            } else {
+                const RGObjClassInfo* cinfo_super
+                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+            }
+            break;
+
           case G_TYPE_PARAM:
             if (gtype == G_TYPE_PARAM){
                 cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
@@ -150,14 +160,9 @@ VALUE
 rbgobj_gtype_new(gtype)
     GType gtype;
 {
-    VALUE result;
-
-    if (G_TYPE_INVALID == gtype)
-        rb_raise(rb_eArgError, "invalid type");
-    /* FIXME: more check */
-
-    result = rb_obj_alloc(rbgobj_cType);
-    rb_ivar_set(result, id_gtype, UINT2NUM(gtype));
+    VALUE result = rb_obj_alloc(rbgobj_cType);
+    VALUE arg = UINT2NUM(gtype);
+    rb_obj_call_init(result, 1, &arg);
     return result;
 }
 
@@ -171,8 +176,8 @@ rbgobj_gtype_get(self)
 }
 
 static VALUE
-type_s_new(klass, type)
-    VALUE klass, type;
+type_initialize(self, type)
+    VALUE self, type;
 {
     GType gtype;
 
@@ -182,8 +187,14 @@ type_s_new(klass, type)
         StringValue(type);
         gtype = g_type_from_name(StringValuePtr(type));
     }
+
+    if (G_TYPE_INVALID == gtype)
+        rb_raise(rb_eArgError, "invalid type");
+    /* FIXME: more check */
+
+    rb_ivar_set(self, id_gtype, UINT2NUM(gtype));
  
-    return rbgobj_gtype_new(gtype);
+    return Qnil;
 }
 
 static VALUE
@@ -427,9 +438,9 @@ Init_type()
 {
     id_gtype = rb_intern("__gobject_gtype__");
 
-    rbgobj_cType = rb_define_class_under(mGLib, "Type", rb_cData);
+    rbgobj_cType = rb_define_class_under(mGLib, "Type", rb_cObject);
 
-    rb_define_singleton_method(rbgobj_cType, "new", type_s_new, 1);
+    rb_define_method(rbgobj_cType, "initialize", type_initialize, 1);
     rb_define_method(rbgobj_cType, "inspect", type_inspect, 0);
     rb_define_method(rbgobj_cType, "==", type_eq, 1);
     rb_define_method(rbgobj_cType, "eql?", type_eq, 1);
