@@ -1,3 +1,7 @@
+2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: remove nasty hack by using Dir.entries.
+
 2003-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c, rbgdkcursor.c, rbgdkregion.c, rbgdkgc.c, rbgdkrgb.c, 

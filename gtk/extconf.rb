@@ -77,10 +77,7 @@ begin
 
     File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
     $libs = $libs.split(/\s/).uniq.join(' ')
-    $source_files = Dir.glob("#{src_dir}/*.c").map{|fname|
-      fname[0, src_dir.length+1] = ''
-      fname
-    }
+    $source_files = Dir.entries(src_dir).select{|fname| /\.c$/ =~ fname }
     $objs = $source_files.collect do |item|
       item.gsub(/\.c$/, obj_ext)
     end
