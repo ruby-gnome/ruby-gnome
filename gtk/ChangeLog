@@ -4,7 +4,8 @@
 	* src/rbgtkcontainer.c: Add Gtk::Container.child_property, .child_properties, 
 	.child_install_property, Gtk::Container#child_type, 
 	Gtk::Container#child_get_property, Gtk::Container#child_set_property.
-
+	* src/rbgtkcontainer.c, rbgtk.h: Add rbgtkcontainer_register_child_property_setter/getter.
+	
 2003-04-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkobject.c: Remove Gtk::Object#user_data, #user_data=, #set_user_data. 
