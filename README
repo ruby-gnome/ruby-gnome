@@ -1,7 +1,7 @@
-gnome-ruby -- Ruby bindings for GNOME
-=====================================
+Ruby-GNOME2 -- Ruby bindings for GNOME-2.0
+==========================================
 
-This is a set of bindings for the GNOME libraries for use from Ruby.
+This is a set of bindings for the GNOME-2.0 libraries for use from Ruby.
 
 To use them, you will need Ruby 1.6 and gnome-libs 2.0.0 or
 later installed on your system. Keep in mind that you will need both the
@@ -28,15 +28,12 @@ To compile and install a particular sub-binding, you should run:
 You should install a sub-binding with its dependencies.
 The current dependencies are:
 
+  gtk depends on glib.
   gdkpixbuf depends on gtk.
   gnome depends on gtk
 
 
 Contacting the Author
 =====================
-
-You can contact me via email at <mutoh@highway.ne.jp>; you
-can also visit the Ruby-GNOME2 website (http://ruby-gnome2.sf.net/),
-which has a facility for reporting bugs and submitting fixes.
-Finally, you can send a message to the ruby-gnome2 mailing list(see website),
-where I or other Ruby-GNOME2 users can help you.
+The Ruby-GNOME2 website is http://ruby-gnome2.sf.net/.
+which has a mailing list and facility for reporting bugs and submitting fixes.
