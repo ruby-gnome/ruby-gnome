@@ -3,9 +3,10 @@
 
   utils_int64.c -
 
-  $Author: sakai $
-  $Date: 2002/09/01 13:19:22 $
+  $Author: mutoh $
+  $Date: 2003/02/01 16:03:10 $
 
+  Copyright (C) 2003  Masahiro Sakai
   Copyright (C) 2002  Masahiro Sakai
                       Kenichi Komiya
 

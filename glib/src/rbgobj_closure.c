@@ -3,10 +3,10 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2002/11/26 17:00:24 $
+  $Author: mutoh $
+  $Date: 2003/02/01 16:03:08 $
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

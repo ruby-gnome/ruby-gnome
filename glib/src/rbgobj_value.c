@@ -4,9 +4,9 @@
   rbgobj_value.c -
 
   $Author: mutoh $
-  $Date: 2002/12/28 04:50:57 $
+  $Date: 2003/02/01 16:03:09 $
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

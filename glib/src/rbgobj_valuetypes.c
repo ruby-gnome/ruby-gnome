@@ -3,10 +3,10 @@
 
   rbgobj_valuetypes.c -
 
-  $Author: sakai $
-  $Date: 2002/10/18 12:57:00 $
+  $Author: mutoh $
+  $Date: 2003/02/01 16:03:09 $
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

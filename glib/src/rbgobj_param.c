@@ -4,10 +4,10 @@
   rbgobj_param.c -
 
   $Author: mutoh $
-  $Date: 2002/12/25 16:24:23 $
+  $Date: 2003/02/01 16:03:09 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

@@ -4,9 +4,9 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2003/01/30 15:50:54 $
+  $Date: 2003/02/01 16:03:10 $
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

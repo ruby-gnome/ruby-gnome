@@ -4,9 +4,9 @@
   rbgutil.h -
 
   $Author: mutoh $
-  $Date: 2002/12/09 15:05:25 $
+  $Date: 2003/02/01 16:03:10 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #ifndef __RBGUTIL_H__

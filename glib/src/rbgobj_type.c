@@ -3,11 +3,11 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2002/12/28 06:23:46 $
+  $Author: mutoh $
+  $Date: 2003/02/01 16:03:09 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
-  Copyright (C) 2002  Masahiro Sakai
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 

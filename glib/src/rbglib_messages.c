@@ -4,9 +4,9 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2002/11/09 13:25:31 $
+  $Date: 2003/02/01 16:03:08 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 
   This file is devided from rbgtkmain.c.
   rbgtkmain.c -
