@@ -5,6 +5,7 @@
 2003-11-21  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c: Remove invalid macros.
+	* src/rbgtkconst.c: Update version information.
 
 2003-11-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
