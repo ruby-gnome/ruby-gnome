@@ -10,7 +10,7 @@ end
 
 def print_info(stream)
     puts "- mime type: #{stream.mime}"
-    puts "- length: #{stream.length_time} seconds"
+    puts "- length: #{stream.length_time / Gst::SECOND} seconds"
     puts "- bitrate: #{stream.bitrate / 1000.0} kbps"
     puts "- number of tracks: #{stream.length_tracks}"
     i = 0 
