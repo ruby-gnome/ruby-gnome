@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/11/03 18:04:43 $
+  $Date: 2002/11/12 18:15:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,10 +55,10 @@ tbar_append_item(argc, argv, self)
     VALUE text, ttext, ptext, icon, func;
 
     rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_append_item(_SELF(self), N_RVAL2CSTR(text),
                                   N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                   N_RVAL2WIDGET(icon),
@@ -78,10 +78,10 @@ tbar_prepend_item(argc, argv, self)
 
     rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
 
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_prepend_item(_SELF(self),N_RVAL2CSTR(text),
                                    N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                    N_RVAL2WIDGET(icon),
@@ -100,10 +100,10 @@ tbar_insert_item(argc, argv, self)
     VALUE text, ttext, ptext, icon, func, pos;
     rb_scan_args(argc, argv, "15", &pos, &text, &ttext, &ptext, &icon, &func);
 
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_insert_item(_SELF(self),N_RVAL2CSTR(text),
                                   N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                   N_RVAL2WIDGET(icon),
@@ -145,20 +145,18 @@ tbar_append_element(argc, argv, self)
 {
     VALUE type, widget, text, ttext, ptext, icon;
     VALUE func = (VALUE)NULL;
-    void *callback = NULL;
     GtkWidget *ret = NULL;
 
     rb_scan_args(argc, argv, "07", &type, &widget, &text, &ttext, &ptext, &icon, &func);
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
-        callback = exec_callback;
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_append_element(_SELF(self), NUM2INT(type), 
                                      N_RVAL2WIDGET(widget), N_RVAL2CSTR(text),
                                      N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                      N_RVAL2WIDGET(icon),
-                                     GTK_SIGNAL_FUNC(callback),
+                                     GTK_SIGNAL_FUNC(exec_callback),
                                      (gpointer)func);
     return tbar_get_gobject(ret, type);
 }
@@ -171,20 +169,18 @@ tbar_prepend_element(argc, argv, self)
 {
     VALUE type, widget, text, ttext, ptext, icon;
     VALUE func = (VALUE)NULL;
-    void *callback = NULL;
     GtkWidget *ret = NULL;
 
     rb_scan_args(argc, argv, "07", &type, &widget, &text, &ttext, &ptext, &icon, &func);
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
-        callback = exec_callback;
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_prepend_element(_SELF(self),
                                       NUM2INT(type), N_RVAL2WIDGET(widget), 
                                       N_RVAL2CSTR(text), N_RVAL2CSTR(ttext),
                                       N_RVAL2CSTR(ptext), N_RVAL2WIDGET(icon),
-                                      GTK_SIGNAL_FUNC(callback),
+                                      GTK_SIGNAL_FUNC(exec_callback),
                                       (gpointer)func);
     return tbar_get_gobject(ret, type);
 }
@@ -196,20 +192,18 @@ tbar_insert_element(argc, argv, self)
     VALUE  self;
 {
     VALUE pos, type, widget, text, ttext, ptext, icon, func;
-    void *callback = NULL;
     GtkWidget *ret = NULL;
 
     rb_scan_args(argc, argv, "17", &pos, &type, &widget, &text, &ttext, &ptext, &icon, &func);
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
-        callback = exec_callback;
     }
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_insert_element(_SELF(self),
                                      NUM2INT(type),N_RVAL2WIDGET(widget), 
                                      N_RVAL2CSTR(text), N_RVAL2CSTR(ttext),
                                      N_RVAL2CSTR(ptext), N_RVAL2WIDGET(icon),
-                                     GTK_SIGNAL_FUNC(callback),
+                                     GTK_SIGNAL_FUNC(exec_callback),
                                      (gpointer)func,
                                      NUM2INT(pos));
     return tbar_get_gobject(ret, type);
@@ -270,19 +264,17 @@ tbar_insert_stock(argc, argv, self)
     VALUE  self;
 {
     VALUE stock_id, pos, ttext, ptext, func;
-    void *callback = NULL;
 
     rb_scan_args(argc, argv, "23", &pos, &stock_id, &ttext, &ptext, &func);
 
-    if (NIL_P(func) && rb_block_given_p()) {
+    if (NIL_P(func)) {
         func = rb_f_lambda();
-        G_RELATIVE(self, func);
-        callback = exec_callback;
     }
+    G_RELATIVE(self, func);
 
     return GOBJ2RVAL(gtk_toolbar_insert_stock(_SELF(self), RVAL2CSTR(stock_id),
                                               N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
-                                              GTK_SIGNAL_FUNC(callback),
+                                              GTK_SIGNAL_FUNC(exec_callback),
                                               (gpointer)func,
                                               NUM2INT(pos)));
 }

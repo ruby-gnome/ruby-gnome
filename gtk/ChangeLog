@@ -1,5 +1,7 @@
 2002-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktoolbar.c: Fix redundant check. 
+	Pointed out by Nikolai Weibull <lone-star@home.se>.
 	* sample/textgtk/*.rb: Revise header comment.
 	* sample/testgtk/spinbutton.rb: Fix some bugs.
 	* src/rbgtktextbuffer.c: Remove Gtk::TextBuffer#get_insert temporarily 
