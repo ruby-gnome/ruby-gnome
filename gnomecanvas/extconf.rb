@@ -64,6 +64,7 @@ end
 mdir = $mdir
 begin
   $mdir = "gnomecanvas/src"
+  src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
   Dir.chdir "src"
 
   have_func('gnome_canvas_set_center_scroll_region')
@@ -77,7 +78,7 @@ begin
     item.gsub(/\.c$/, obj_ext)
   end
 
-  create_makefile("gnomecanvas2")
+  create_makefile("gnomecanvas2", src_dir)
 
   raise Interrupt if not FileTest.exist? "Makefile"
 
