@@ -4,7 +4,7 @@
   rbgtkcombo.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/09 17:01:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,8 +20,7 @@ combo_set_popdown_strings(self, ary)
     VALUE self, ary;
 {
     int i;
-//    GList *glist = NULL;
-	GtkWidget* item;
+    GList *glist = NULL;
 
     Check_Type(ary, T_ARRAY);
     for (i=0; i<RARRAY(ary)->len; i++) {
@@ -29,15 +28,9 @@ combo_set_popdown_strings(self, ary)
 	RVAL2CSTR(RARRAY(ary)->ptr[i]);
     }
     for (i=0; i<RARRAY(ary)->len; i++) {
-//	glist = g_list_append(glist, RVAL2CSTR(RARRAY(ary)->ptr[i]));
-	item = gtk_list_item_new_with_label(RVAL2CSTR(RARRAY(ary)->ptr[i]));
-	gtk_widget_show(item);
-	gtk_combo_set_item_string(GTK_COMBO(RVAL2GOBJ(self)), GTK_ITEM(item),
-					RVAL2CSTR(RARRAY(ary)->ptr[i]));
-	gtk_container_add (GTK_CONTAINER (RVAL2GOBJ(self)), item);
+        glist = g_list_append(glist, RVAL2CSTR(RARRAY(ary)->ptr[i]));
     }
-
-//    gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);
+    gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);
     return self;
 }
 

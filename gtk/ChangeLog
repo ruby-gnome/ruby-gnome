@@ -1,3 +1,7 @@
+2004-03-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcombo.c: Fix a bug(Sorry, I added some debug code...).
+
 2004-03-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/bindings.rb: Modified.
