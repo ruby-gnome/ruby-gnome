@@ -1,3 +1,7 @@
+2002-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/liststore.rb, treestore.rb: Add file(but not work yet).
+
 2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgtkstock.c: Add a file.
