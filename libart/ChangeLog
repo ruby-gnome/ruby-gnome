@@ -1,3 +1,8 @@
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Add file.
+	* COPYING, COPYING.LIB: Rename COPYING to COPYING.LIB.
+
 2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gnome-canvas.rb: Follow Ruby/GTK2 changes.
