@@ -1,4 +1,4 @@
-# $Id: changedisplay.rb,v 1.1 2003/10/14 13:41:59 kzys Exp $
+# $Id: changedisplay.rb,v 1.2 2003/10/15 12:48:13 kzys Exp $
 =begin
 = Change Display
 
@@ -234,7 +234,7 @@ module Demo
       if toplevel
 	toplevel.screen = @current_screen
       else
-	# TODO: Gdk::Display.beep(screen.display)
+	screen.display.beep
       end
     end
 
