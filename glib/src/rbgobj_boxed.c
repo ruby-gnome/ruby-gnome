@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/29 12:48:20 $
+  $Author: sakai $
+  $Date: 2002/10/02 12:27:55 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -59,6 +59,20 @@ rbgobj_boxed_s_new(argc, argv, klass)
     return obj;
 }
 #endif
+
+VALUE
+rbgobj_boxed_s_gtype(klass)
+    VALUE klass;
+{
+    return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
+}
+
+VALUE
+rbgobj_boxed_gtype(self)
+    VALUE self;
+{
+    return rbgobj_boxed_s_gtype(CLASS_OF(self));
+}
 
 VALUE
 rbgobj_boxed_create(klass)
@@ -157,4 +171,7 @@ Init_gobject_gboxed()
 #ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(gBoxed, "new", rbgobj_boxed_s_new, -1);
 #endif
+
+    rb_define_singleton_method(gBoxed, "gtype", rbgobj_boxed_s_gtype, 0);
+    rb_define_method(gBoxed, "gtype", rbgobj_boxed_gtype, 0);
 }
