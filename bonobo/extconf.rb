@@ -15,7 +15,7 @@ EOP
 end
 
 #
-# detect Gnome configurations
+# detect configurations
 #
 
 begin
