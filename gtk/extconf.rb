@@ -88,6 +88,8 @@ begin
   have_func("XReadBitmapFileData")
   obj_ext = ".#{$OBJEXT}"
   opt_objs = ["rbgtkinits.o"]
+  rubylibdir = Config::CONFIG["rubylibdir"]
+  sitelibdir = Config::CONFIG["sitelibdir"]
 
   $libs = $libs.split(/\s/).uniq.join(' ')
   $source_files = Dir.glob('*.c')
@@ -158,12 +160,12 @@ all:
 		@nmake -nologo
 
 install:
-		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
+		@cp lib/gtk2.rb #{rubylibdir}
 		@cd src
 		@nmake -nologo install DESTDIR=$(DESTDIR)
 
 site-install:
-		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
+		@cp lib/gtk2.rb #{sitelibdir}
 		@cd src
 		@nmake -nologo site-install DESTDIR=$(DESTDIR)
 
@@ -181,11 +183,11 @@ all:
 		@cd src; make all
 
 install:
-		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
+		@cp lib/gtk2.rb #{rubylibdir}
 		@cd src; make install
 
 site-install:;	
-		@cp lib/gtk2.rb #{Config::CONFIG["sitelibdir"]}
+		@cp lib/gtk2.rb #{sitelibdir}
 		@cd src; make site-install
 
 clean:

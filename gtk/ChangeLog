@@ -1,3 +1,11 @@
+2002-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Bugfix for using ruby-1.6.x. 
+	Reported by markus jais <mjais@web.de>.
+	* lib/gtkcompat.rb: Remove file temporarily. 
+	* src/rbgdkcursor.c: Remove LAST_CURSOR, CURSOR_IS_PIXMAP. 
+	Add Gdk::Cursor#pixmap?
+
 2002-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Revise README.
