@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -133,10 +133,7 @@ Init_gtk_object()
     rb_define_method(gObject, "bindings_activate", gobj_bindings_activate, 2);
 
     /* GtkObjectFlags */
-    rb_define_const(gObject, "IN_DESTRUCTION", INT2FIX(GTK_IN_DESTRUCTION));
-    rb_define_const(gObject, "FLOATING", INT2FIX(GTK_FLOATING));
-    rb_define_const(gObject, "RESERVED_1", INT2FIX(GTK_RESERVED_1));
-    rb_define_const(gObject, "RESERVED_2", INT2FIX(GTK_RESERVED_2));
+    G_DEF_CONSTANTS(gObject, GTK_TYPE_OBJECT_FLAGS, "GTK_");
 
     /* undef deprecated properties */
     rb_undef_method(gObject, "user_data");

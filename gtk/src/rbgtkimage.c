@@ -3,8 +3,8 @@
 
   rbgtkimage.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -105,13 +105,7 @@ Init_gtk_image()
     rb_define_method(gImage, "set", image_set, -1);
 
     /* GtkImageType */
-    rb_define_const(gImage, "EMPTY", INT2FIX(GTK_IMAGE_EMPTY));
-    rb_define_const(gImage, "PIXMAP", INT2FIX(GTK_IMAGE_PIXMAP));
-    rb_define_const(gImage, "IMAGE", INT2FIX(GTK_IMAGE_IMAGE));
-    rb_define_const(gImage, "PIXBUF", INT2FIX(GTK_IMAGE_PIXBUF));
-    rb_define_const(gImage, "STOCK", INT2FIX(GTK_IMAGE_STOCK));
-    rb_define_const(gImage, "ICON_SET", INT2FIX(GTK_IMAGE_ICON_SET));
-    rb_define_const(gImage, "ANIMATION", INT2FIX(GTK_IMAGE_ANIMATION));
+    G_DEF_CONSTANTS(gImage, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
 

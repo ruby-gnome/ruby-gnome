@@ -3,8 +3,8 @@
 
   rbgtkspinbutton.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -128,15 +128,8 @@ Init_gtk_spin_button()
     rb_define_method(gSButton, "range", sbtn_get_range, 0);
 
     /* GtkSpinType */
-    rb_define_const(gSButton, "STEP_FORWARD", INT2FIX(GTK_SPIN_STEP_FORWARD));
-    rb_define_const(gSButton, "STEP_BACKWARD", INT2FIX(GTK_SPIN_STEP_BACKWARD));
-    rb_define_const(gSButton, "PAGE_FORWARD", INT2FIX(GTK_SPIN_PAGE_FORWARD));
-    rb_define_const(gSButton, "PAGE_BACKWARD", INT2FIX(GTK_SPIN_PAGE_BACKWARD));
-    rb_define_const(gSButton, "HOME", INT2FIX(GTK_SPIN_HOME));
-    rb_define_const(gSButton, "END", INT2FIX(GTK_SPIN_END));
-    rb_define_const(gSButton, "USER_DEFINED", INT2FIX(GTK_SPIN_USER_DEFINED));
+    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
 
     /* GtkSpinButtonUpdatePolicy */
-    rb_define_const(gSButton, "UPDATE_ALWAYS", INT2FIX(GTK_UPDATE_ALWAYS));
-    rb_define_const(gSButton, "UPDATE_IF_VALID", INT2FIX(GTK_UPDATE_IF_VALID));
+    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
 }

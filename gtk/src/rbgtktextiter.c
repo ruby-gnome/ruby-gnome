@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -489,6 +489,5 @@ Init_gtk_textiter()
     G_DEF_SETTERS(cTextIter);
 
     /* GtkTextSearchFlags */
-    rb_define_const(cTextIter, "SEARCH_VISIBLE_ONLY", INT2FIX(GTK_TEXT_SEARCH_VISIBLE_ONLY));
-    rb_define_const(cTextIter, "SEARCH_TEXT_ONLY", INT2FIX(GTK_TEXT_SEARCH_TEXT_ONLY));
+    G_DEF_CONSTANTS(cTextIter, GTK_TYPE_TEXT_SEARCH_FLAGS, "GTK_TEXT_");
 }

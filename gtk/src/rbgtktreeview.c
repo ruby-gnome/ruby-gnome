@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -543,10 +543,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
     
     /* Constants */
-    rb_define_const(gTv, "DROP_BEFORE", INT2NUM(GTK_TREE_VIEW_DROP_BEFORE));
-    rb_define_const(gTv, "DROP_AFTER", INT2NUM(GTK_TREE_VIEW_DROP_AFTER));
-    rb_define_const(gTv, "DROP_INTO_OR_BEFORE", INT2NUM(GTK_TREE_VIEW_DROP_INTO_OR_BEFORE));
-    rb_define_const(gTv, "DROP_INTO_OR_AFTER", INT2NUM(GTK_TREE_VIEW_DROP_INTO_OR_AFTER));
+    G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
     /* Option Signals */
     G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", treeview_signal_func);

@@ -3,8 +3,8 @@
 
   rbgtkconst.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/24 11:32:12 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -46,185 +46,83 @@ Init_gtk_const()
      */
 
     /* GtkAccelFlags */
-    rb_define_const(mGtk, "ACCEL_VISIBLE", INT2FIX(GTK_ACCEL_VISIBLE));
-    rb_define_const(mGtk, "ACCEL_LOCKED", INT2FIX(GTK_ACCEL_LOCKED));
-    rb_define_const(mGtk, "ACCEL_MASK", INT2FIX(GTK_ACCEL_MASK));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_ACCEL_FLAGS, "GTK_");
 
     /* GtkAnchorType */
-    rb_define_const(mGtk, "ANCHOR_CENTER", INT2FIX(GTK_ANCHOR_CENTER));
-    rb_define_const(mGtk, "ANCHOR_NORTH", INT2FIX(GTK_ANCHOR_NORTH));
-    rb_define_const(mGtk, "ANCHOR_NORTH_WEST", INT2FIX(GTK_ANCHOR_NORTH_WEST));
-    rb_define_const(mGtk, "ANCHOR_NORTH_EAST", INT2FIX(GTK_ANCHOR_NORTH_EAST));
-    rb_define_const(mGtk, "ANCHOR_SOUTH", INT2FIX(GTK_ANCHOR_SOUTH));
-    rb_define_const(mGtk, "ANCHOR_SOUTH_WEST", INT2FIX(GTK_ANCHOR_SOUTH_WEST));
-    rb_define_const(mGtk, "ANCHOR_SOUTH_EAST", INT2FIX(GTK_ANCHOR_SOUTH_EAST));
-    rb_define_const(mGtk, "ANCHOR_WEST", INT2FIX(GTK_ANCHOR_WEST));
-    rb_define_const(mGtk, "ANCHOR_EAST", INT2FIX(GTK_ANCHOR_EAST));
-    rb_define_const(mGtk, "ANCHOR_N", INT2FIX(GTK_ANCHOR_N));
-    rb_define_const(mGtk, "ANCHOR_NW", INT2FIX(GTK_ANCHOR_NW));
-    rb_define_const(mGtk, "ANCHOR_NE", INT2FIX(GTK_ANCHOR_NE));
-    rb_define_const(mGtk, "ANCHOR_S", INT2FIX(GTK_ANCHOR_S));
-    rb_define_const(mGtk, "ANCHOR_SW", INT2FIX(GTK_ANCHOR_SW));
-    rb_define_const(mGtk, "ANCHOR_SE", INT2FIX(GTK_ANCHOR_SE));
-    rb_define_const(mGtk, "ANCHOR_W", INT2FIX(GTK_ANCHOR_W));
-    rb_define_const(mGtk, "ANCHOR_E", INT2FIX(GTK_ANCHOR_E));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_ANCHOR_TYPE, "GTK_");
 
     /* GtkAttachOptions */
-    rb_define_const(mGtk, "EXPAND", INT2FIX(GTK_EXPAND));
-    rb_define_const(mGtk, "SHRINK", INT2FIX(GTK_SHRINK));
-    rb_define_const(mGtk, "FILL", INT2FIX(GTK_FILL));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_ATTACH_OPTIONS, "GTK_");
 
     /* GtkCornerType */
-    rb_define_const(mGtk, "CORNER_TOP_LEFT", INT2FIX(GTK_CORNER_TOP_LEFT));
-    rb_define_const(mGtk, "CORNER_BOTTOM_LEFT", INT2FIX(GTK_CORNER_BOTTOM_LEFT));
-    rb_define_const(mGtk, "CORNER_TOP_RIGHT", INT2FIX(GTK_CORNER_TOP_RIGHT));
-    rb_define_const(mGtk, "CORNER_BOTTOM_RIGHT", INT2FIX(GTK_CORNER_BOTTOM_RIGHT));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_CORNER_TYPE, "GTK_");
 
     /* GtkDeleteType */
-    rb_define_const(mGtk, "DELETE_CHARS", INT2FIX(GTK_DELETE_CHARS));
-    rb_define_const(mGtk, "DELETE_WORD_ENDS", INT2FIX(GTK_DELETE_WORD_ENDS));
-    rb_define_const(mGtk, "DELETE_WORDS", INT2FIX(GTK_DELETE_WORDS));
-    rb_define_const(mGtk, "DELETE_DISPLAY_LINES", INT2FIX(GTK_DELETE_DISPLAY_LINES));
-    rb_define_const(mGtk, "DELETE_DISPLAY_LINE_ENDS", INT2FIX(GTK_DELETE_DISPLAY_LINE_ENDS));
-    rb_define_const(mGtk, "DELETE_PARAGRAPH_ENDS", INT2FIX(GTK_DELETE_PARAGRAPH_ENDS));
-    rb_define_const(mGtk, "DELETE_PARAGRAPHS", INT2FIX(GTK_DELETE_PARAGRAPHS));
-    rb_define_const(mGtk, "DELETE_WHITESPACE", INT2FIX(GTK_DELETE_WHITESPACE));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_DELETE_TYPE, "GTK_");
 
     /* GtkDirectionType */
-    rb_define_const(mGtk, "DIR_TAB_FORWARD", INT2FIX(GTK_DIR_TAB_FORWARD));
-    rb_define_const(mGtk, "DIR_TAB_BACKWARD", INT2FIX(GTK_DIR_TAB_BACKWARD));
-    rb_define_const(mGtk, "DIR_UP", INT2FIX(GTK_DIR_UP));
-    rb_define_const(mGtk, "DIR_DOWN", INT2FIX(GTK_DIR_DOWN));
-    rb_define_const(mGtk, "DIR_LEFT", INT2FIX(GTK_DIR_LEFT));
-    rb_define_const(mGtk, "DIR_RIGHT", INT2FIX(GTK_DIR_RIGHT));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_DIRECTION_TYPE, "GTK_");
 
     /* GtkExpanderStyle */
-    rb_define_const(mGtk, "EXPANDER_COLLAPSED", INT2FIX(GTK_EXPANDER_COLLAPSED));
-    rb_define_const(mGtk, "EXPANDER_SEMI_COLLAPSED", INT2FIX(GTK_EXPANDER_SEMI_COLLAPSED));
-    rb_define_const(mGtk, "EXPANDER_SEMI_EXPANDED", INT2FIX(GTK_EXPANDER_SEMI_EXPANDED));
-    rb_define_const(mGtk, "EXPANDER_EXPANDED", INT2FIX(GTK_EXPANDER_EXPANDED));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_EXPANDER_STYLE, "GTK_");
 
     /* GtkJustification */
-    rb_define_const(mGtk, "JUSTIFY_LEFT", INT2FIX(GTK_JUSTIFY_LEFT));
-    rb_define_const(mGtk, "JUSTIFY_RIGHT", INT2FIX(GTK_JUSTIFY_RIGHT));
-    rb_define_const(mGtk, "JUSTIFY_CENTER", INT2FIX(GTK_JUSTIFY_CENTER));
-    rb_define_const(mGtk, "JUSTIFY_FILL", INT2FIX(GTK_JUSTIFY_FILL));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_JUSTIFICATION, "GTK_");
 
     /* GtkMetricType */
-    rb_define_const(mGtk, "PIXELS", INT2FIX(GTK_PIXELS));
-    rb_define_const(mGtk, "INCHES", INT2FIX(GTK_INCHES));
-    rb_define_const(mGtk, "CENTIMETERS", INT2FIX(GTK_CENTIMETERS));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_METRIC_TYPE, "GTK_");
 
     /* GtkMovementStep */
-    rb_define_const(mGtk, "MOVEMENT_LOGICAL_POSITIONS", INT2FIX(GTK_MOVEMENT_LOGICAL_POSITIONS));
-    rb_define_const(mGtk, "MOVEMENT_VISUAL_POSITIONS", INT2FIX(GTK_MOVEMENT_VISUAL_POSITIONS));
-    rb_define_const(mGtk, "MOVEMENT_WORDS", INT2FIX(GTK_MOVEMENT_WORDS));
-    rb_define_const(mGtk, "MOVEMENT_DISPLAY_LINES", INT2FIX(GTK_MOVEMENT_DISPLAY_LINES));
-    rb_define_const(mGtk, "MOVEMENT_DISPLAY_LINE_ENDS", INT2FIX(GTK_MOVEMENT_DISPLAY_LINE_ENDS));
-    rb_define_const(mGtk, "MOVEMENT_PARAGRAPHS", INT2FIX(GTK_MOVEMENT_PARAGRAPHS));
-    rb_define_const(mGtk, "MOVEMENT_PARAGRAPH_ENDS", INT2FIX(GTK_MOVEMENT_PARAGRAPH_ENDS));
-    rb_define_const(mGtk, "MOVEMENT_PAGES", INT2FIX(GTK_MOVEMENT_PAGES));
-    rb_define_const(mGtk, "MOVEMENT_BUFFER_ENDS", INT2FIX(GTK_MOVEMENT_BUFFER_ENDS));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_MOVEMENT_STEP, "GTK_");
 
     /* GtkOrientation */
-    rb_define_const(mGtk, "ORIENTATION_HORIZONTAL", INT2FIX(GTK_ORIENTATION_HORIZONTAL));
-    rb_define_const(mGtk, "ORIENTATION_VERTICAL", INT2FIX(GTK_ORIENTATION_VERTICAL));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_ORIENTATION, "GTK_");
 
     /* GtkPackType */
-    rb_define_const(mGtk, "PACK_START", INT2FIX(GTK_PACK_START));
-    rb_define_const(mGtk, "PACK_END", INT2FIX(GTK_PACK_END));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_PACK_TYPE, "GTK_");
 
     /* GtkPathPriorityType */
-    rb_define_const(mGtk, "PATH_PRIO_LOWEST", INT2FIX(GTK_PATH_PRIO_LOWEST));
-    rb_define_const(mGtk, "PATH_PRIO_GTK", INT2FIX(GTK_PATH_PRIO_GTK));
-    rb_define_const(mGtk, "PATH_PRIO_APPLICATION", INT2FIX(GTK_PATH_PRIO_APPLICATION));
-    rb_define_const(mGtk, "PATH_PRIO_THEME", INT2FIX(GTK_PATH_PRIO_THEME));
-    rb_define_const(mGtk, "PATH_PRIO_RC", INT2FIX(GTK_PATH_PRIO_RC));
-    rb_define_const(mGtk, "PATH_PRIO_HIGHEST", INT2FIX(GTK_PATH_PRIO_HIGHEST));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_PATH_PRIORITY_TYPE, "GTK_");
 
     /* GtkPathType */
-    rb_define_const(mGtk, "PATH_WIDGET", INT2FIX(GTK_PATH_WIDGET));
-    rb_define_const(mGtk, "PATH_WIDGET_CLASS", INT2FIX(GTK_PATH_WIDGET_CLASS));
-    rb_define_const(mGtk, "PATH_CLASS", INT2FIX(GTK_PATH_CLASS));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_PATH_TYPE, "GTK_");
 
     /* GtkPolicyType */
-    rb_define_const(mGtk, "POLICY_ALWAYS", INT2FIX(GTK_POLICY_ALWAYS));
-    rb_define_const(mGtk, "POLICY_AUTOMATIC", INT2FIX(GTK_POLICY_AUTOMATIC));
-    rb_define_const(mGtk, "POLICY_NEVER", INT2FIX(GTK_POLICY_NEVER));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_POLICY_TYPE, "GTK_");
 
     /* GtkPositionType */
-    rb_define_const(mGtk, "POS_LEFT", INT2FIX(GTK_POS_LEFT));
-    rb_define_const(mGtk, "POS_RIGHT", INT2FIX(GTK_POS_RIGHT));
-    rb_define_const(mGtk, "POS_TOP", INT2FIX(GTK_POS_TOP));
-    rb_define_const(mGtk, "POS_BOTTOM", INT2FIX(GTK_POS_BOTTOM));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_POSITION_TYPE, "GTK_");
 
     /* GtkReliefStyle */
-    rb_define_const(mGtk, "RELIEF_NORMAL", INT2FIX(GTK_RELIEF_NORMAL));
-    rb_define_const(mGtk, "RELIEF_HALF", INT2FIX(GTK_RELIEF_HALF));
-    rb_define_const(mGtk, "RELIEF_NONE", INT2FIX(GTK_RELIEF_NONE));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_RELIEF_STYLE, "GTK_");
 
     /* GtkResizeMode */
-    rb_define_const(mGtk, "RESIZE_PARENT", INT2FIX(GTK_RESIZE_PARENT));
-    rb_define_const(mGtk, "RESIZE_QUEUE", INT2FIX(GTK_RESIZE_QUEUE));
-    rb_define_const(mGtk, "RESIZE_IMMEDIATE", INT2FIX(GTK_RESIZE_IMMEDIATE));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_RESIZE_MODE, "GTK_");
 
     /* GtkScrollType */
-    rb_define_const(mGtk, "SCROLL_NONE", INT2FIX(GTK_SCROLL_NONE));
-    rb_define_const(mGtk, "SCROLL_STEP_BACKWARD", INT2FIX(GTK_SCROLL_STEP_BACKWARD));
-    rb_define_const(mGtk, "SCROLL_STEP_FORWARD", INT2FIX(GTK_SCROLL_STEP_FORWARD));
-    rb_define_const(mGtk, "SCROLL_PAGE_BACKWARD", INT2FIX(GTK_SCROLL_PAGE_BACKWARD));
-    rb_define_const(mGtk, "SCROLL_PAGE_FORWARD", INT2FIX(GTK_SCROLL_PAGE_FORWARD));
-    rb_define_const(mGtk, "SCROLL_STEP_UP", INT2FIX(GTK_SCROLL_STEP_UP));
-    rb_define_const(mGtk, "SCROLL_STEP_DOWN", INT2FIX(GTK_SCROLL_STEP_DOWN));
-    rb_define_const(mGtk, "SCROLL_PAGE_UP", INT2FIX(GTK_SCROLL_PAGE_UP));
-    rb_define_const(mGtk, "SCROLL_PAGE_DOWN", INT2FIX(GTK_SCROLL_PAGE_DOWN));
-    rb_define_const(mGtk, "SCROLL_STEP_LEFT", INT2FIX(GTK_SCROLL_STEP_LEFT));
-    rb_define_const(mGtk, "SCROLL_STEP_RIGHT", INT2FIX(GTK_SCROLL_STEP_RIGHT));
-    rb_define_const(mGtk, "SCROLL_PAGE_LEFT", INT2FIX(GTK_SCROLL_PAGE_LEFT));
-    rb_define_const(mGtk, "SCROLL_PAGE_RIGHT", INT2FIX(GTK_SCROLL_PAGE_RIGHT));
-    rb_define_const(mGtk, "SCROLL_START", INT2FIX(GTK_SCROLL_START));
-    rb_define_const(mGtk, "SCROLL_END", INT2FIX(GTK_SCROLL_END));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SCROLL_TYPE, "GTK_");
 
     /* GtkSelectionMode */
-    rb_define_const(mGtk, "SELECTION_NONE", INT2FIX(GTK_SELECTION_NONE));
-    rb_define_const(mGtk, "SELECTION_SINGLE", INT2FIX(GTK_SELECTION_SINGLE));
-    rb_define_const(mGtk, "SELECTION_BROWSE", INT2FIX(GTK_SELECTION_BROWSE));
-    rb_define_const(mGtk, "SELECTION_MULTIPLE", INT2FIX(GTK_SELECTION_MULTIPLE));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SELECTION_MODE, "GTK_");
 
     /* GtkShadowType */
-    rb_define_const(mGtk, "SHADOW_NONE", INT2FIX(GTK_SHADOW_NONE));
-    rb_define_const(mGtk, "SHADOW_IN", INT2FIX(GTK_SHADOW_IN));
-    rb_define_const(mGtk, "SHADOW_OUT", INT2FIX(GTK_SHADOW_OUT));
-    rb_define_const(mGtk, "SHADOW_ETCHED_IN", INT2FIX(GTK_SHADOW_ETCHED_IN));
-    rb_define_const(mGtk, "SHADOW_ETCHED_OUT", INT2FIX(GTK_SHADOW_ETCHED_OUT));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SHADOW_TYPE, "GTK_");
 
     /* GtkStateType */
-    rb_define_const(mGtk, "STATE_NORMAL", INT2FIX(GTK_STATE_NORMAL));
-    rb_define_const(mGtk, "STATE_ACTIVE", INT2FIX(GTK_STATE_ACTIVE));
-    rb_define_const(mGtk, "STATE_PRELIGHT", INT2FIX(GTK_STATE_PRELIGHT));
-    rb_define_const(mGtk, "STATE_SELECTED", INT2FIX(GTK_STATE_SELECTED));
-    rb_define_const(mGtk, "STATE_INSENSITIVE", INT2FIX(GTK_STATE_INSENSITIVE));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_STATE_TYPE, "GTK_");
 
     /* GtkSubmenuDirection */
-    rb_define_const(mGtk, "DIRECTION_LEFT", INT2FIX(GTK_DIRECTION_LEFT));
-    rb_define_const(mGtk, "DIRECTION_RIGHT", INT2FIX(GTK_DIRECTION_RIGHT));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SUBMENU_DIRECTION, "GTK_");
 
     /* GtkSubmenuPlacement */
-    rb_define_const(mGtk, "TOP_BOTTOM", INT2FIX(GTK_TOP_BOTTOM));
-    rb_define_const(mGtk, "LEFT_RIGHT", INT2FIX(GTK_LEFT_RIGHT));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SUBMENU_PLACEMENT, "GTK_");
 
     /* GtkUpdateType */
-    rb_define_const(mGtk, "UPDATE_CONTINUOUS", INT2FIX(GTK_UPDATE_CONTINUOUS));
-    rb_define_const(mGtk, "UPDATE_DISCONTINUOUS", INT2FIX(GTK_UPDATE_DISCONTINUOUS));
-    rb_define_const(mGtk, "UPDATE_DELAYED", INT2FIX(GTK_UPDATE_DELAYED));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_UPDATE_TYPE, "GTK_");
 
     /* GtkVisibility */
-    rb_define_const(mGtk, "VISIBILITY_NONE", INT2FIX(GTK_VISIBILITY_NONE));
-    rb_define_const(mGtk, "VISIBILITY_PARTIAL", INT2FIX(GTK_VISIBILITY_PARTIAL));
-    rb_define_const(mGtk, "VISIBILITY_FULL", INT2FIX(GTK_VISIBILITY_FULL));
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_VISIBILITY, "GTK_");
 
     /* GtkSortType */
-    rb_define_const(mGtk, "SORT_ASCENDING", INT2FIX(GTK_SORT_ASCENDING));
-    rb_define_const(mGtk, "SORT_DESCENDING", INT2FIX(GTK_SORT_DESCENDING));
-
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SORT_TYPE, "GTK_");
 }

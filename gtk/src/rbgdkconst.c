@@ -3,8 +3,8 @@
 
   rbgdkconst.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -21,11 +21,7 @@ void
 Init_gtk_gdk_const()
 {
     /* GdkStatus */
-    rb_define_const(mGdk, "OK", INT2FIX(GDK_OK));
-    rb_define_const(mGdk, "ERROR", INT2FIX(GDK_ERROR));
-    rb_define_const(mGdk, "ERROR_PARAM", INT2FIX(GDK_ERROR_PARAM));
-    rb_define_const(mGdk, "ERROR_FILE", INT2FIX(GDK_ERROR_FILE));
-    rb_define_const(mGdk, "ERROR_MEM", INT2FIX(GDK_ERROR_MEM));
+    G_DEF_CONSTANTS(mGdk, GDK_TYPE_STATUS, "GDK_");
 
     /* GdkInputSource */
     /* This will move to Gdk::Device.

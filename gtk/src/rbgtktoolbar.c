@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -291,19 +291,11 @@ Init_gtk_toolbar()
     G_DEF_SETTERS(gToolbar);
 
     /* GtkToolbarChildType */
-    rb_define_const(gToolbar, "CHILD_SPACE", INT2FIX(GTK_TOOLBAR_CHILD_SPACE));
-    rb_define_const(gToolbar, "CHILD_BUTTON", INT2FIX(GTK_TOOLBAR_CHILD_BUTTON));
-    rb_define_const(gToolbar, "CHILD_TOGGLEBUTTON", INT2FIX(GTK_TOOLBAR_CHILD_TOGGLEBUTTON));
-    rb_define_const(gToolbar, "CHILD_RADIOBUTTON", INT2FIX(GTK_TOOLBAR_CHILD_RADIOBUTTON));
-    rb_define_const(gToolbar, "CHILD_WIDGET", INT2FIX(GTK_TOOLBAR_CHILD_WIDGET));
+    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_CHILD_TYPE, "GTK_TOOLBAR_");
 
     /* GtkToolbarSpaceStyle */
-    rb_define_const(gToolbar, "SPACE_EMPTY", INT2FIX(GTK_TOOLBAR_SPACE_EMPTY));
-    rb_define_const(gToolbar, "SPACE_LINE", INT2FIX(GTK_TOOLBAR_SPACE_LINE));
+    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_SPACE_STYLE, "GTK_TOOLBAR_");
 
     /* GtkToolbarStyle(from Standard Constants) */
-    rb_define_const(gToolbar, "ICONS", INT2FIX(GTK_TOOLBAR_ICONS));
-    rb_define_const(gToolbar, "TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
-    rb_define_const(gToolbar, "BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
-    rb_define_const(gToolbar, "BOTH_HORIZ", INT2FIX(GTK_TOOLBAR_BOTH_HORIZ));
+    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_STYLE, "GTK_TOOLBAR_");
 }

@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -202,18 +202,6 @@ Init_gtk_gdk_dragcontext()
     rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
 
 	/* Constants */
-    rb_define_const(gdkDragContext, "PROTO_MOTIF", INT2FIX(GDK_DRAG_PROTO_MOTIF));
-    rb_define_const(gdkDragContext, "PROTO_XDND", INT2FIX(GDK_DRAG_PROTO_XDND));
-    rb_define_const(gdkDragContext, "PROTO_ROOTWIN", INT2FIX(GDK_DRAG_PROTO_ROOTWIN));
-    rb_define_const(gdkDragContext, "PROTO_NONE", INT2FIX(GDK_DRAG_PROTO_NONE));
-    rb_define_const(gdkDragContext, "PROTO_WIN32_DROPFILES", INT2FIX(GDK_DRAG_PROTO_WIN32_DROPFILES));
-    rb_define_const(gdkDragContext, "PROTO_OLE2", INT2FIX(GDK_DRAG_PROTO_OLE2));
-    rb_define_const(gdkDragContext, "PROTO_LOCAL", INT2FIX(GDK_DRAG_PROTO_LOCAL));
-
-    rb_define_const(gdkDragContext, "ACTION_DEFAULT", INT2FIX(GDK_ACTION_DEFAULT));
-    rb_define_const(gdkDragContext, "ACTION_COPY", INT2FIX(GDK_ACTION_COPY));
-    rb_define_const(gdkDragContext, "ACTION_MOVE", INT2FIX(GDK_ACTION_MOVE));
-    rb_define_const(gdkDragContext, "ACTION_LINK", INT2FIX(GDK_ACTION_LINK));
-    rb_define_const(gdkDragContext, "ACTION_PRIVATE", INT2FIX(GDK_ACTION_PRIVATE));
-    rb_define_const(gdkDragContext, "ACTION_ASK", INT2FIX(GDK_ACTION_ASK));
+    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
+    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_ACTION, "GDK_");
 }

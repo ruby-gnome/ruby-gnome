@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/01 14:43:20 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -190,12 +190,8 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
     rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);
     
-	 /* GdkGrabStatus */
-    rb_define_const(mGdk, "GRAB_SUCCESS", INT2FIX(GDK_GRAB_SUCCESS));
-    rb_define_const(mGdk, "GRAB_ALREADY_GRABBED", INT2FIX(GDK_GRAB_ALREADY_GRABBED));
-    rb_define_const(mGdk, "GRAB_INVALID_TIME", INT2FIX(GDK_GRAB_INVALID_TIME));
-    rb_define_const(mGdk, "GRAB_NOT_VIEWABLE", INT2FIX(GDK_GRAB_NOT_VIEWABLE));
-    rb_define_const(mGdk, "GRAB_FROZEN", INT2FIX(GDK_GRAB_FROZEN));
+    /* GdkGrabStatus */
+    G_DEF_CONSTANTS(mGdk, GDK_TYPE_GRAB_STATUS, "GDK_");
 
     G_DEF_SETTERS(mGdk);
 }

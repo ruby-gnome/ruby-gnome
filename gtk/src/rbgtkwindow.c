@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/22 17:06:05 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -572,13 +572,8 @@ Init_gtk_window()
     G_DEF_SETTERS(gWindow);
 
     /* GtkWindowPosition (from General constants) */
-    rb_define_const(gWindow, "POS_NONE", INT2FIX(GTK_WIN_POS_NONE));
-    rb_define_const(gWindow, "POS_CENTER", INT2FIX(GTK_WIN_POS_CENTER));
-    rb_define_const(gWindow, "POS_MOUSE", INT2FIX(GTK_WIN_POS_MOUSE));
-    rb_define_const(gWindow, "POS_CENTER_ALWAYS", INT2FIX(GTK_WIN_POS_CENTER_ALWAYS));
-    rb_define_const(gWindow, "POS_CENTER_ON_PARENT", INT2FIX(GTK_WIN_POS_CENTER_ON_PARENT));
+    G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_POSITION, "GTK_WIN_");
 
     /* GtkWindowType (from General constants) */
-    rb_define_const(gWindow, "TOPLEVEL", INT2FIX(GTK_WINDOW_TOPLEVEL));
-    rb_define_const(gWindow, "POPUP", INT2FIX(GTK_WINDOW_POPUP));
+    G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
 }

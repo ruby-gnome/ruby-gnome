@@ -3,8 +3,8 @@
 
   rbgdkvisual.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -251,15 +251,8 @@ Init_gtk_gdk_visual()
     rb_define_method(gdkVisual, "blue_prec", gdkvisual_blue_prec, 0);
 
     /* GdkVisualType */
-    rb_define_const(gdkVisual, "STATIC_GRAY", INT2FIX(GDK_VISUAL_STATIC_GRAY));
-    rb_define_const(gdkVisual, "GRAYSCALE", INT2FIX(GDK_VISUAL_GRAYSCALE));
-    rb_define_const(gdkVisual, "STATIC_COLOR", INT2FIX(GDK_VISUAL_STATIC_COLOR));
-    rb_define_const(gdkVisual, "PSEUDO_COLOR", INT2FIX(GDK_VISUAL_PSEUDO_COLOR));
-    rb_define_const(gdkVisual, "TRUE_COLOR", INT2FIX(GDK_VISUAL_TRUE_COLOR));
-    rb_define_const(gdkVisual, "DIRECT_COLOR", INT2FIX(GDK_VISUAL_DIRECT_COLOR));
+    G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_VISUAL_TYPE, "GDK_VISUAL_");
 
     /* GdkByteOrder */
-    rb_define_const(gdkVisual, "LSB_FIRST", INT2FIX(GDK_LSB_FIRST));
-    rb_define_const(gdkVisual, "MSB_FIRST", INT2FIX(GDK_MSB_FIRST));
-
+    G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_BYTE_ORDER, "GDK_");
 }

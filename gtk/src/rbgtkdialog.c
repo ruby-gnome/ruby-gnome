@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -168,21 +168,8 @@ Init_gtk_dialog()
     G_DEF_SETTERS(gDialog);
    
     /* GtkDialogFlags */
-    rb_define_const(gDialog, "MODAL", INT2FIX(GTK_DIALOG_MODAL));
-    rb_define_const(gDialog, "DESTROY_WITH_PARENT", INT2FIX(GTK_DIALOG_DESTROY_WITH_PARENT));
-    rb_define_const(gDialog, "NO_SEPARATOR", INT2FIX(GTK_DIALOG_NO_SEPARATOR));
+    G_DEF_CONSTANTS(gDialog, GTK_TYPE_DIALOG_FLAGS, "GTK_DIALOG_");
 
     /* GtkResponseType */
-    rb_define_const(gDialog, "RESPONSE_NONE", INT2FIX(GTK_RESPONSE_NONE));
-    rb_define_const(gDialog, "RESPONSE_REJECT", INT2FIX(GTK_RESPONSE_REJECT));
-    rb_define_const(gDialog, "RESPONSE_ACCEPT", INT2FIX(GTK_RESPONSE_ACCEPT));
-    rb_define_const(gDialog, "RESPONSE_DELETE_EVENT", INT2FIX(GTK_RESPONSE_DELETE_EVENT));
-    rb_define_const(gDialog, "RESPONSE_OK", INT2FIX(GTK_RESPONSE_OK));
-    rb_define_const(gDialog, "RESPONSE_CANCEL", INT2FIX(GTK_RESPONSE_CANCEL));
-    rb_define_const(gDialog, "RESPONSE_CLOSE", INT2FIX(GTK_RESPONSE_CLOSE));
-    rb_define_const(gDialog, "RESPONSE_YES", INT2FIX(GTK_RESPONSE_YES));
-    rb_define_const(gDialog, "RESPONSE_NO", INT2FIX(GTK_RESPONSE_NO));
-    rb_define_const(gDialog, "RESPONSE_APPLY", INT2FIX(GTK_RESPONSE_APPLY));
-    rb_define_const(gDialog, "RESPONSE_HELP", INT2FIX(GTK_RESPONSE_HELP));
-
+    G_DEF_CONSTANTS(gDialog, GTK_TYPE_RESPONSE_TYPE, "GTK_");
 }

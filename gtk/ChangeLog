@@ -1,3 +1,7 @@
+2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: use G_DEF_CONSTANTS() for defining enum/flags constants.
+
 2003-07-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkclipboard.c (clipboard_set_text):

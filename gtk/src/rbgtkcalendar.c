@@ -3,8 +3,8 @@
 
   rbgtkcalendar.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -121,9 +121,5 @@ Init_gtk_calendar()
     rb_define_method(gCalendar, "freeze", cal_freeze, 0);
     rb_define_method(gCalendar, "thaw", cal_thaw, 0);
 
-    rb_define_const(gCalendar, "SHOW_HEADING", INT2FIX(GTK_CALENDAR_SHOW_HEADING));
-    rb_define_const(gCalendar, "SHOW_DAY_NAMES", INT2FIX(GTK_CALENDAR_SHOW_DAY_NAMES));
-    rb_define_const(gCalendar, "NO_MONTH_CHANGE", INT2FIX(GTK_CALENDAR_NO_MONTH_CHANGE));
-    rb_define_const(gCalendar, "SHOW_WEEK_NUMBERS", INT2FIX(GTK_CALENDAR_SHOW_WEEK_NUMBERS));
-    rb_define_const(gCalendar, "WEEK_START_MONDAY", INT2FIX(GTK_CALENDAR_WEEK_START_MONDAY));
+    G_DEF_CONSTANTS(gCalendar, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
 }

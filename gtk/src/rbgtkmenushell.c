@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -89,8 +89,5 @@ Init_gtk_menu_shell()
     rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
 
     /* GtkMenuDirectionType */
-    rb_define_const(gMenuShell, "DIR_PARENT", INT2FIX(GTK_MENU_DIR_PARENT));
-    rb_define_const(gMenuShell, "DIR_CHILD", INT2FIX(GTK_MENU_DIR_CHILD));
-    rb_define_const(gMenuShell, "DIR_NEXT", INT2FIX(GTK_MENU_DIR_NEXT));
-    rb_define_const(gMenuShell, "DIR_PREV", INT2FIX(GTK_MENU_DIR_PREV));
+    G_DEF_CONSTANTS(gMenuShell, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");
 }

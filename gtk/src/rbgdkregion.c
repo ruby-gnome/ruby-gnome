@@ -3,8 +3,8 @@
 
   rbgdkregion.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -240,12 +240,8 @@ Init_gtk_gdk_region()
     rb_define_method(gdkRegion, "xor", gdkregion_xor, 1);
 
     /* GdkOverlapType */
-    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_IN", INT2FIX(GDK_OVERLAP_RECTANGLE_IN));
-    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_OUT", INT2FIX(GDK_OVERLAP_RECTANGLE_OUT));
-    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_PART", INT2FIX(GDK_OVERLAP_RECTANGLE_PART));
+    G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_OVERLAP_TYPE, "GDK_");
 
     /* GdkFillRule */
-    rb_define_const(gdkRegion, "EVEN_ODD_RULE", INT2FIX(GDK_EVEN_ODD_RULE));
-    rb_define_const(gdkRegion, "WINDING_RULE", INT2FIX(GDK_WINDING_RULE));
-
+    G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_FILL_RULE, "GDK_");
 }

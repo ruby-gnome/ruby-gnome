@@ -3,8 +3,8 @@
 
   rbgtkarrow.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -42,8 +42,5 @@ Init_gtk_arrow()
     rb_define_method(gArrow, "set", arrow_set, 2);
 
     /* GtkArrowType (from General constants) */
-    rb_define_const(gArrow, "UP", INT2FIX(GTK_ARROW_UP));
-    rb_define_const(gArrow, "DOWN", INT2FIX(GTK_ARROW_DOWN));
-    rb_define_const(gArrow, "LEFT", INT2FIX(GTK_ARROW_LEFT));
-    rb_define_const(gArrow, "RIGHT", INT2FIX(GTK_ARROW_RIGHT));
+    G_DEF_CONSTANTS(gArrow, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
 }

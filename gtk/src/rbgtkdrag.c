@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: sakai $
-  $Date: 2003/03/21 04:56:58 $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -263,12 +263,8 @@ Init_gtk_drag()
     G_DEF_SETTERS(mGtkDrag);
 
     /* GtkDestDefaults */
-    rb_define_const(mGtkDrag, "DEST_DEFAULT_MOTION", INT2FIX(GTK_DEST_DEFAULT_MOTION));
-    rb_define_const(mGtkDrag, "DEST_DEFAULT_HIGHLIGHT", INT2FIX(GTK_DEST_DEFAULT_HIGHLIGHT));
-    rb_define_const(mGtkDrag, "DEST_DEFAULT_DROP", INT2FIX(GTK_DEST_DEFAULT_DROP));
-    rb_define_const(mGtkDrag, "DEST_DEFAULT_ALL", INT2FIX(GTK_DEST_DEFAULT_ALL));
+    G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_DEST_DEFAULTS, "GTK_");
 
     /* GtkTargetFlags */
-    rb_define_const(mGtkDrag, "TARGET_SAME_APP", INT2FIX(GTK_TARGET_SAME_APP));
-    rb_define_const(mGtkDrag, "TARGET_SAME_WIDGET", INT2FIX(GTK_TARGET_SAME_WIDGET));
+    G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_TARGET_FLAGS, "GTK_");
 }

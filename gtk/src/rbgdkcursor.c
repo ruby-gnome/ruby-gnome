@@ -3,8 +3,8 @@
 
   rbgdkcursor.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/08 16:46:57 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2001-2003 Masao Mutoh
 ************************************************/
@@ -50,5 +50,5 @@ Init_gtk_gdk_cursor()
 
     rb_define_method(gdkCursor, "initialize", gdkcursor_initialize, -1);
     rb_define_method(gdkCursor, "pixmap?", gdkcursor_is_pixmap, 0);
-#include "rbgdkcursor.h"
+    G_DEF_CONSTANTS(gdkCursor, GDK_TYPE_CURSOR_TYPE, "GDK_");
 }

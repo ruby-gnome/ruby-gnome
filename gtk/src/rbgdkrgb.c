@@ -4,7 +4,7 @@
   rbgdkrgb.c -
 
   $Author: sakai $
-  $Date: 2003/02/17 11:29:20 $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -97,7 +97,5 @@ Init_gtk_gdk_rgb()
     rb_define_module_function(mGdkRgb, "draw_rgb_32_image", gdkdraw_draw_rgb_32_image, 9);
 
     /* GdkRgbDither */
-    rb_define_const(mGdkRgb, "DITHER_NONE", INT2FIX(GDK_RGB_DITHER_NONE));
-    rb_define_const(mGdkRgb, "DITHER_NORMAL", INT2FIX(GDK_RGB_DITHER_NORMAL));
-    rb_define_const(mGdkRgb, "DITHER_MAX", INT2FIX(GDK_RGB_DITHER_MAX));
+    G_DEF_CONSTANTS(mGdkRgb, GDK_TYPE_RGB_DITHER, "GDK_RGB_");
 }

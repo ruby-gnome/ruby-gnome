@@ -3,8 +3,8 @@
 
   rbgtkmessagedialog.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -37,16 +37,8 @@ Init_gtk_message_dialog()
     rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
 
     /* GtkMessageType */
-    rb_define_const(gMessageDialog, "INFO", INT2FIX(GTK_MESSAGE_INFO));
-    rb_define_const(gMessageDialog, "WARNING", INT2FIX(GTK_MESSAGE_WARNING));
-    rb_define_const(gMessageDialog, "QUESTION", INT2FIX(GTK_MESSAGE_QUESTION));
-    rb_define_const(gMessageDialog, "ERROR", INT2FIX(GTK_MESSAGE_ERROR));
+    G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_MESSAGE_TYPE, "GTK_");
 
     /* GtkButtonsType */
-    rb_define_const(gMessageDialog, "BUTTONS_NONE", INT2FIX(GTK_BUTTONS_NONE));
-    rb_define_const(gMessageDialog, "BUTTONS_OK", INT2FIX(GTK_BUTTONS_OK));
-    rb_define_const(gMessageDialog, "BUTTONS_CLOSE", INT2FIX(GTK_BUTTONS_CLOSE));
-    rb_define_const(gMessageDialog, "BUTTONS_CANCEL", INT2FIX(GTK_BUTTONS_CANCEL));
-    rb_define_const(gMessageDialog, "BUTTONS_YES_NO", INT2FIX(GTK_BUTTONS_YES_NO));
-    rb_define_const(gMessageDialog, "BUTTONS_OK_CANCEL", INT2FIX(GTK_BUTTONS_OK_CANCEL));
+    G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_BUTTONS_TYPE, "GTK_");
 }

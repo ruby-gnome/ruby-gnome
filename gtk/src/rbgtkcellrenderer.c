@@ -3,8 +3,8 @@
 
   rbgtkcellrenderer.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -98,14 +98,8 @@ Init_gtk_cellrenderer()
     rb_define_method(renderer, "set_fixed_size", cellrenderer_set_fixed_size, 2);
 
     /* GtkCellRendererState */
-    rb_define_const(renderer, "SELECTED", INT2NUM(GTK_CELL_RENDERER_SELECTED));
-    rb_define_const(renderer, "PRELIT", INT2NUM(GTK_CELL_RENDERER_PRELIT));
-    rb_define_const(renderer, "INSENSITIVE", INT2NUM(GTK_CELL_RENDERER_INSENSITIVE));
-    rb_define_const(renderer, "SORTED", INT2NUM(GTK_CELL_RENDERER_SORTED));
+    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_STATE, "GTK_CELL_RENDERER_");
 
     /* GtkCellRendererMode */
-    rb_define_const(renderer, "MODE_INERT", INT2NUM(GTK_CELL_RENDERER_MODE_INERT));
-    rb_define_const(renderer, "MODE_ACTIVATABLE", INT2NUM(GTK_CELL_RENDERER_MODE_ACTIVATABLE));
-    rb_define_const(renderer, "MODE_EDITABLE", INT2NUM(GTK_CELL_RENDERER_MODE_EDITABLE));
-
+    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_MODE, "GTK_CELL_RENDERER_");
 }

@@ -3,8 +3,8 @@
 
   rbgdkinput.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -72,13 +72,9 @@ Init_gtk_gdk_input()
     rb_define_module_function(mGdkInput, "set_extension_events", input_set_extension_events, 3);
 
     /* GdkInputCondition */
-    rb_define_const(mGdkInput, "READ", INT2FIX(GDK_INPUT_READ));
-    rb_define_const(mGdkInput, "WRITE", INT2FIX(GDK_INPUT_WRITE));
-    rb_define_const(mGdkInput, "EXCEPTION", INT2FIX(GDK_INPUT_EXCEPTION));
+    G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
     /* GdkExtensionMode */
-    rb_define_const(mGdkInput, "EXTENSION_EVENTS_NONE", INT2FIX(GDK_EXTENSION_EVENTS_NONE));
-    rb_define_const(mGdkInput, "EXTENSION_EVENTS_ALL", INT2FIX(GDK_EXTENSION_EVENTS_ALL));
-    rb_define_const(mGdkInput, "EXTENSION_EVENTS_CURSOR", INT2FIX(GDK_EXTENSION_EVENTS_CURSOR));
-
+    G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_EXTENSION_MODE, "GDK_");
 }
+

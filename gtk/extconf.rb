@@ -23,13 +23,12 @@ tmpincl = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
 tmpincl.each do |i|
   i.strip!
   
-  if FileTest.exist?(i + "/gdk/gdkcursor.h") and
-      FileTest.exist?(i + "/gdk/gdkkeysyms.h")
+  if FileTest.exist?(i + "/gdk/gdkkeysyms.h")
     gdkincl = i + "/gdk"
     break
   end
 end
-raise "can't found gdkcursor.h or gdkkeysyms.h" if gdkincl.nil?
+raise "can't find gdkkeysyms.h" if gdkincl.nil?
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
@@ -94,8 +93,6 @@ begin
     $source_files.each do |e|
       if e == "rbgdk.c"
 	mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
-      elsif e == "rbgdkcursor.c"
-	mfile.print "rbgdkcursor#{obj_ext}: rbgdkcursor.c rbgdkcursor.h\n"
       elsif e == "rbgdkkeyval.c"
 	mfile.print "rbgdkkeyval#{obj_ext}: rbgdkkeyval.c rbgdkkeysyms.h\n"
       elsif e == "init.c"
@@ -108,12 +105,11 @@ begin
 
     mfile.print "\
 
-rbgdkcursor.h:;	$(RUBY) $(srcdir)/makecursors.rb #{gdkincl}/gdkcursor.h > $@
 rbgtkinits.c:;	   $(RUBY) $(srcdir)/makeinits.rb $(srcdir)/*.c > $@
 rbgdkkeysyms.h:;	$(RUBY) $(srcdir)/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
 
 allclean: clean
-	rm -rf rbgdkkeysyms* *.a rbgdkcursors* rbgtkinits*
+	rm -rf rbgdkkeysyms* *.a rbgtkinits*
 "
     mfile.close
   ensure

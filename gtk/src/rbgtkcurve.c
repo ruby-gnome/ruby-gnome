@@ -3,8 +3,8 @@
 
   rbgtkcurve.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -95,7 +95,7 @@ Init_gtk_curve()
     rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
 
     /* GtkCurveType(from standard constants) */
-    rb_define_const(gCurve, "TYPE_LINEAR", INT2FIX(GTK_CURVE_TYPE_LINEAR));
-    rb_define_const(gCurve, "TYPE_SPLINE", INT2FIX(GTK_CURVE_TYPE_SPLINE));
-    rb_define_const(gCurve, "TYPE_FREE", INT2FIX(GTK_CURVE_TYPE_FREE));
+    G_DEF_CONSTANTS(gCurve, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
 }
+
+

@@ -3,8 +3,8 @@
 
   rbgtkalignment.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/09 05:10:14 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -259,67 +259,23 @@ Init_gtk_gdk_gc()
     G_DEF_SETTERS(gdkGC);
 
     /* GdkGCValuesMask */
-    rb_define_const(gdkGC, "FOREGROUND", INT2FIX(GDK_GC_FOREGROUND));
-    rb_define_const(gdkGC, "BACKGROUND", INT2FIX(GDK_GC_BACKGROUND));
-    rb_define_const(gdkGC, "FONT", INT2FIX(GDK_GC_FONT));
-    rb_define_const(gdkGC, "FUNCTION", INT2FIX(GDK_GC_FUNCTION));
-    rb_define_const(gdkGC, "FILL", INT2FIX(GDK_GC_FILL));
-    rb_define_const(gdkGC, "TILE", INT2FIX(GDK_GC_TILE));
-    rb_define_const(gdkGC, "STIPPLE", INT2FIX(GDK_GC_STIPPLE));
-    rb_define_const(gdkGC, "CLIP_MASK", INT2FIX(GDK_GC_CLIP_MASK));
-    rb_define_const(gdkGC, "SUBWINDOW", INT2FIX(GDK_GC_SUBWINDOW));
-    rb_define_const(gdkGC, "TS_X_ORIGIN", INT2FIX(GDK_GC_TS_X_ORIGIN));
-    rb_define_const(gdkGC, "TS_Y_ORIGIN", INT2FIX(GDK_GC_TS_Y_ORIGIN));
-    rb_define_const(gdkGC, "CLIP_X_ORIGIN", INT2FIX(GDK_GC_CLIP_X_ORIGIN));
-    rb_define_const(gdkGC, "CLIP_Y_ORIGIN", INT2FIX(GDK_GC_CLIP_Y_ORIGIN));
-    rb_define_const(gdkGC, "EXPOSURES", INT2FIX(GDK_GC_EXPOSURES));
-    rb_define_const(gdkGC, "LINE_WIDTH", INT2FIX(GDK_GC_LINE_WIDTH));
-    rb_define_const(gdkGC, "LINE_STYLE", INT2FIX(GDK_GC_LINE_STYLE));
-    rb_define_const(gdkGC, "CAP_STYLE", INT2FIX(GDK_GC_CAP_STYLE));
-    rb_define_const(gdkGC, "JOIN_STYLE", INT2FIX(GDK_GC_JOIN_STYLE));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
 
     /* GdkFunction */
-    rb_define_const(gdkGC, "COPY", INT2FIX(GDK_COPY));
-    rb_define_const(gdkGC, "INVERT", INT2FIX(GDK_INVERT));
-    rb_define_const(gdkGC, "XOR", INT2FIX(GDK_XOR));
-    rb_define_const(gdkGC, "CLEAR", INT2FIX(GDK_CLEAR));
-    rb_define_const(gdkGC, "AND", INT2FIX(GDK_AND));
-    rb_define_const(gdkGC, "AND_REVERSE", INT2FIX(GDK_AND_REVERSE));
-    rb_define_const(gdkGC, "AND_INVERT", INT2FIX(GDK_AND_INVERT));
-    rb_define_const(gdkGC, "NOOP", INT2FIX(GDK_NOOP));
-    rb_define_const(gdkGC, "OR", INT2FIX(GDK_OR));
-    rb_define_const(gdkGC, "EQUIV", INT2FIX(GDK_EQUIV));
-    rb_define_const(gdkGC, "OR_REVERSE", INT2FIX(GDK_OR_REVERSE));
-    rb_define_const(gdkGC, "COPY_INVERT", INT2FIX(GDK_COPY_INVERT));
-    rb_define_const(gdkGC, "OR_INVERT", INT2FIX(GDK_OR_INVERT));
-    rb_define_const(gdkGC, "NAND", INT2FIX(GDK_NAND));
-    rb_define_const(gdkGC, "NOR", INT2FIX(GDK_NOR));
-    rb_define_const(gdkGC, "SET", INT2FIX(GDK_SET));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FUNCTION, "GDK_");
 
     /* GdkFill */
-    rb_define_const(gdkGC, "SOLID", INT2FIX(GDK_SOLID));
-    rb_define_const(gdkGC, "TILED", INT2FIX(GDK_TILED));
-    rb_define_const(gdkGC, "STIPPLED", INT2FIX(GDK_STIPPLED));
-    rb_define_const(gdkGC, "OPAQUE_STIPPLED", INT2FIX(GDK_OPAQUE_STIPPLED));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FILL, "GDK_");
 
     /* GdkSubwindowMode */
-    rb_define_const(gdkGC, "CLIP_BY_CHILDREN", INT2FIX(GDK_CLIP_BY_CHILDREN));
-    rb_define_const(gdkGC, "INCLUDE_INFERIORS", INT2FIX(GDK_INCLUDE_INFERIORS));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_SUBWINDOW_MODE, "GDK_");
 
     /* GdkLineStyle */
-    rb_define_const(gdkGC, "LINE_SOLID", INT2FIX(GDK_LINE_SOLID));
-    rb_define_const(gdkGC, "LINE_ON_OFF_DASH", INT2FIX(GDK_LINE_ON_OFF_DASH));
-    rb_define_const(gdkGC, "LINE_DOUBLE_DASH", INT2FIX(GDK_LINE_DOUBLE_DASH));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_LINE_STYLE, "GDK_");
 
     /* GdkCapStyle */
-    rb_define_const(gdkGC, "CAP_NOT_LAST", INT2FIX(GDK_CAP_NOT_LAST));
-    rb_define_const(gdkGC, "CAP_BUTT", INT2FIX(GDK_CAP_BUTT));
-    rb_define_const(gdkGC, "CAP_ROUND", INT2FIX(GDK_CAP_ROUND));
-    rb_define_const(gdkGC, "CAP_PROJECTING", INT2FIX(GDK_CAP_PROJECTING));
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_CAP_STYLE, "GDK_");
 
     /* GdkJoinStyle */
-    rb_define_const(gdkGC, "JOIN_MITER", INT2FIX(GDK_JOIN_MITER));
-    rb_define_const(gdkGC, "JOIN_ROUND", INT2FIX(GDK_JOIN_ROUND));
-    rb_define_const(gdkGC, "JOIN_BEVEL", INT2FIX(GDK_JOIN_BEVEL));
-
+    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_JOIN_STYLE, "GDK_");
 }

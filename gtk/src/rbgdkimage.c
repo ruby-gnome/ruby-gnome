@@ -3,8 +3,8 @@
 
   rbgdkimage.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -93,8 +93,5 @@ Init_gtk_gdk_image()
     rb_define_method(gdkImage, "bpl", gdkimage_bpl, 0);
 
     /* GdkImageType */
-    rb_define_const(gdkImage, "NORMAL", INT2FIX(GDK_IMAGE_NORMAL));
-    rb_define_const(gdkImage, "SHARED", INT2FIX(GDK_IMAGE_SHARED));
-    rb_define_const(gdkImage, "FASTEST", INT2FIX(GDK_IMAGE_FASTEST));
-
+    G_DEF_CONSTANTS(gdkImage, GDK_TYPE_IMAGE_TYPE, "GDK_IMAGE_");
 }

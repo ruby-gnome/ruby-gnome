@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -874,109 +874,41 @@ Init_gtk_gdk_window()
    G_DEF_SETTERS(gdkWindow);
 
    /* GdkWindowType */
-   rb_define_const(gdkWindow, "ROOT", INT2FIX(GDK_WINDOW_ROOT));
-   rb_define_const(gdkWindow, "TOPLEVEL", INT2FIX(GDK_WINDOW_TOPLEVEL));
-   rb_define_const(gdkWindow, "CHILD", INT2FIX(GDK_WINDOW_CHILD));
-   rb_define_const(gdkWindow, "DIALOG", INT2FIX(GDK_WINDOW_DIALOG));
-   rb_define_const(gdkWindow, "TEMP", INT2FIX(GDK_WINDOW_TEMP));
-   rb_define_const(gdkWindow, "FOREIGN", INT2FIX(GDK_WINDOW_FOREIGN));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_TYPE, "GDK_WINDOW_");
    
    /* GdkWindowClass */
-   rb_define_const(gdkWindow, "INPUT_OUTPUT", INT2FIX(GDK_INPUT_OUTPUT));
-   rb_define_const(gdkWindow, "INPUT_ONLY", INT2FIX(GDK_INPUT_ONLY));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_CLASS, "GDK_");
 
    /* GdkWindowHints */
-   rb_define_const(gdkWindow, "HINT_POS", INT2FIX(GDK_HINT_POS));
-   rb_define_const(gdkWindow, "HINT_MIN_SIZE", INT2FIX(GDK_HINT_MIN_SIZE));
-   rb_define_const(gdkWindow, "HINT_MAX_SIZE", INT2FIX(GDK_HINT_MAX_SIZE));
-   rb_define_const(gdkWindow, "HINT_BASE_SIZE", INT2FIX(GDK_HINT_BASE_SIZE));
-   rb_define_const(gdkWindow, "HINT_ASPECT", INT2FIX(GDK_HINT_ASPECT));
-   rb_define_const(gdkWindow, "HINT_RESIZE_INC", INT2FIX(GDK_HINT_RESIZE_INC));
-   rb_define_const(gdkWindow, "HINT_WIN_GRAVITY", INT2FIX(GDK_HINT_WIN_GRAVITY));
-   rb_define_const(gdkWindow, "HINT_USER_POS", INT2FIX(GDK_HINT_USER_POS));
-   rb_define_const(gdkWindow, "HINT_USER_SIZE", INT2FIX(GDK_HINT_USER_SIZE));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_HINTS, "GDK_");
 
    /* GdkGravity */
-   rb_define_const(gdkWindow, "GRAVITY_NORTH_WEST", INT2FIX(GDK_GRAVITY_NORTH_WEST));
-   rb_define_const(gdkWindow, "GRAVITY_NORTH", INT2FIX(GDK_GRAVITY_NORTH));
-   rb_define_const(gdkWindow, "GRAVITY_NORTH_EAST", INT2FIX(GDK_GRAVITY_NORTH_EAST));
-   rb_define_const(gdkWindow, "GRAVITY_WEST", INT2FIX(GDK_GRAVITY_WEST));
-   rb_define_const(gdkWindow, "GRAVITY_CENTER", INT2FIX(GDK_GRAVITY_CENTER));
-   rb_define_const(gdkWindow, "GRAVITY_EAST", INT2FIX(GDK_GRAVITY_EAST));
-   rb_define_const(gdkWindow, "GRAVITY_SOUTH_WEST", INT2FIX(GDK_GRAVITY_SOUTH_WEST));
-   rb_define_const(gdkWindow, "GRAVITY_SOUTH", INT2FIX(GDK_GRAVITY_SOUTH));
-   rb_define_const(gdkWindow, "GRAVITY_SOUTH_EAST", INT2FIX(GDK_GRAVITY_SOUTH_EAST));
-   rb_define_const(gdkWindow, "GRAVITY_STATIC", INT2FIX(GDK_GRAVITY_STATIC));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_GRAVITY, "GDK_");
 
    /* GdkWindowEdge */
-   rb_define_const(gdkWindow, "EDGE_NORTH_WEST", INT2FIX(GDK_WINDOW_EDGE_WEST));
-   rb_define_const(gdkWindow, "EDGE_NORTH", INT2FIX(GDK_WINDOW_EDGE_NORTH));
-   rb_define_const(gdkWindow, "EDGE_NORTH_EAST", INT2FIX(GDK_WINDOW_EDGE_NORTH_EAST));
-   rb_define_const(gdkWindow, "EDGE_WEST", INT2FIX(GDK_WINDOW_EDGE_WEST));
-   rb_define_const(gdkWindow, "EDGE_EAST", INT2FIX(GDK_WINDOW_EDGE_EAST));
-   rb_define_const(gdkWindow, "EDGE_SOUTH_WEST", INT2FIX(GDK_WINDOW_EDGE_SOUTH_WEST));
-   rb_define_const(gdkWindow, "EDGE_SOUTH", INT2FIX(GDK_WINDOW_EDGE_SOUTH));
-   rb_define_const(gdkWindow, "EDGE_SOUTH_EAST", INT2FIX(GDK_WINDOW_EDGE_SOUTH_EAST));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_EDGE, "GDK_WINDOW_");
 
    /* GdkWindowTypeHint */
-   rb_define_const(gdkWindow, "TYPE_HINT_NORMAL", INT2FIX(GDK_WINDOW_TYPE_HINT_NORMAL));
-   rb_define_const(gdkWindow, "TYPE_HINT_DIALOG", INT2FIX(GDK_WINDOW_TYPE_HINT_DIALOG));
-   rb_define_const(gdkWindow, "TYPE_HINT_MENU", INT2FIX(GDK_WINDOW_TYPE_HINT_MENU));
-   rb_define_const(gdkWindow, "TYPE_HINT_TOOLBAR", INT2FIX(GDK_WINDOW_TYPE_HINT_TOOLBAR));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_TYPE_HINT, "GDK_WINDOW_");
 
    /* GdkWindowAttibutesType */
-   rb_define_const(gdkWindow, "WA_TITLE", INT2FIX(GDK_WA_TITLE));
-   rb_define_const(gdkWindow, "WA_X", INT2FIX(GDK_WA_X));
-   rb_define_const(gdkWindow, "WA_Y", INT2FIX(GDK_WA_Y));
-   rb_define_const(gdkWindow, "WA_CURSOR", INT2FIX(GDK_WA_CURSOR));
-   rb_define_const(gdkWindow, "WA_COLORMAP", INT2FIX(GDK_WA_COLORMAP));
-   rb_define_const(gdkWindow, "WA_VISUAL", INT2FIX(GDK_WA_VISUAL));
-   rb_define_const(gdkWindow, "WA_WMCLASS", INT2FIX(GDK_WA_WMCLASS));
-   rb_define_const(gdkWindow, "WA_NOREDIR", INT2FIX(GDK_WA_NOREDIR));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_ATTRIBUTES_TYPE, "GDK_");
 
    /* GdkFilterReturn */
-   rb_define_const(gdkWindow, "FILTER_CONTINUE", INT2FIX(GDK_FILTER_CONTINUE));
-   rb_define_const(gdkWindow, "FILTER_TRANSLATE", INT2FIX(GDK_FILTER_TRANSLATE));
-   rb_define_const(gdkWindow, "FILTER_REMOVE", INT2FIX(GDK_FILTER_REMOVE));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_FILTER_RETURN, "GDK_");
 
    /* GdkModifierType */
-   rb_define_const(gdkWindow, "SHIFT_MASK", INT2FIX(GDK_SHIFT_MASK));
-   rb_define_const(gdkWindow, "LOCK_MASK", INT2FIX(GDK_LOCK_MASK));
-   rb_define_const(gdkWindow, "CONTROL_MASK", INT2FIX(GDK_CONTROL_MASK));
-   rb_define_const(gdkWindow, "MOD1_MASK", INT2FIX(GDK_MOD1_MASK));
-   rb_define_const(gdkWindow, "MOD2_MASK", INT2FIX(GDK_MOD2_MASK));
-   rb_define_const(gdkWindow, "MOD3_MASK", INT2FIX(GDK_MOD3_MASK));
-   rb_define_const(gdkWindow, "MOD4_MASK", INT2FIX(GDK_MOD4_MASK));
-   rb_define_const(gdkWindow, "MOD5_MASK", INT2FIX(GDK_MOD5_MASK));
-   rb_define_const(gdkWindow, "BUTTON1_MASK", INT2FIX(GDK_BUTTON1_MASK));
-   rb_define_const(gdkWindow, "BUTTON2_MASK", INT2FIX(GDK_BUTTON2_MASK));
-   rb_define_const(gdkWindow, "BUTTON3_MASK", INT2FIX(GDK_BUTTON3_MASK));
-   rb_define_const(gdkWindow, "BUTTON4_MASK", INT2FIX(GDK_BUTTON4_MASK));
-   rb_define_const(gdkWindow, "BUTTON5_MASK", INT2FIX(GDK_BUTTON5_MASK));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_MODIFIER_TYPE, "GDK_");
    
    /* GdkWMDecoration */
-   rb_define_const(gdkWindow, "DECOR_ALL", INT2FIX(GDK_DECOR_ALL));
-   rb_define_const(gdkWindow, "DECOR_BORDER", INT2FIX(GDK_DECOR_BORDER));
-   rb_define_const(gdkWindow, "DECOR_RESIZEH", INT2FIX(GDK_DECOR_RESIZEH));
-   rb_define_const(gdkWindow, "DECOR_TITLE", INT2FIX(GDK_DECOR_TITLE));
-   rb_define_const(gdkWindow, "DECOR_MENU", INT2FIX(GDK_DECOR_MENU));
-   rb_define_const(gdkWindow, "DECOR_MINIMIZE", INT2FIX(GDK_DECOR_MINIMIZE));
-   rb_define_const(gdkWindow, "DECOR_MAXIMIZE", INT2FIX(GDK_DECOR_MAXIMIZE));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_DECORATION, "GDK_");
    
    /* GdkWMFunction */
-   rb_define_const(gdkWindow, "FUNC_ALL", INT2FIX(GDK_FUNC_ALL));
-   rb_define_const(gdkWindow, "FUNC_RESIZE", INT2FIX(GDK_FUNC_RESIZE));
-   rb_define_const(gdkWindow, "FUNC_MOVE", INT2FIX(GDK_FUNC_MOVE));
-   rb_define_const(gdkWindow, "FUNC_MINIMIZE", INT2FIX(GDK_FUNC_MINIMIZE));
-   rb_define_const(gdkWindow, "FUNC_MAXIMIZE", INT2FIX(GDK_FUNC_MAXIMIZE));
-   rb_define_const(gdkWindow, "FUNC_CLOSE", INT2FIX(GDK_FUNC_CLOSE));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_FUNCTION, "GDK_");
 
    /* GdkPropMode from GdkProperties */
-   rb_define_const(gdkWindow, "PROP_MODE_REPLACE", INT2FIX(GDK_PROP_MODE_REPLACE));
-   rb_define_const(gdkWindow, "PROP_MODE_PREPEND", INT2FIX(GDK_PROP_MODE_PREPEND));
-   rb_define_const(gdkWindow, "PROP_MODE_APPEND", INT2FIX(GDK_PROP_MODE_APPEND));
+   G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_PROP_MODE, "GDK_");
 
-   rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));
-   
+   rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
 }
 

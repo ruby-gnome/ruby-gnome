@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/06/07 14:22:33 $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -309,13 +309,7 @@ Init_gtk_textview()
     G_DEF_SETTERS(cTextView);
 
     /* GtkTextWindowType */
-    rb_define_const(cTextView, "WINDOW_PRIVATE", INT2FIX(GTK_TEXT_WINDOW_PRIVATE));
-    rb_define_const(cTextView, "WINDOW_WIDGET", INT2FIX(GTK_TEXT_WINDOW_WIDGET));
-    rb_define_const(cTextView, "WINDOW_TEXT", INT2FIX(GTK_TEXT_WINDOW_TEXT));
-    rb_define_const(cTextView, "WINDOW_LEFT", INT2FIX(GTK_TEXT_WINDOW_LEFT));
-    rb_define_const(cTextView, "WINDOW_RIGHT", INT2FIX(GTK_TEXT_WINDOW_RIGHT));
-    rb_define_const(cTextView, "WINDOW_TOP", INT2FIX(GTK_TEXT_WINDOW_TOP));
-    rb_define_const(cTextView, "WINDOW_BOTTOM", INT2FIX(GTK_TEXT_WINDOW_BOTTOM));
+    G_DEF_CONSTANTS(cTextView, GTK_TYPE_TEXT_WINDOW_TYPE, "GTK_TEXT_");
  
     rb_define_const(cTextView, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));
 }

@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/22 17:06:05 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -1052,32 +1052,13 @@ Init_gtk_widget()
      * constants
      */
     /* GtkWidgetFlags */
-    rb_define_const(gWidget, "TOPLEVEL", INT2NUM(GTK_TOPLEVEL));
-    rb_define_const(gWidget, "NO_WINDOW", INT2NUM(GTK_NO_WINDOW));
-    rb_define_const(gWidget, "REALIZED", INT2NUM(GTK_REALIZED));
-    rb_define_const(gWidget, "MAPPED", INT2NUM(GTK_MAPPED));
-    rb_define_const(gWidget, "VISIBLE", INT2NUM(GTK_VISIBLE));
-    rb_define_const(gWidget, "SENSITIVE", INT2NUM(GTK_SENSITIVE));
-    rb_define_const(gWidget, "PARENT_SENSITIVE", INT2NUM(GTK_PARENT_SENSITIVE));
-    rb_define_const(gWidget, "CAN_FOCUS", INT2NUM(GTK_CAN_FOCUS));
-    rb_define_const(gWidget, "HAS_FOCUS", INT2NUM(GTK_HAS_FOCUS));
-    rb_define_const(gWidget, "CAN_DEFAULT", INT2NUM(GTK_CAN_DEFAULT));
-    rb_define_const(gWidget, "HAS_DEFAULT", INT2NUM(GTK_HAS_DEFAULT));
-    rb_define_const(gWidget, "HAS_GRAB", INT2NUM(GTK_HAS_GRAB));
-    rb_define_const(gWidget, "RC_STYLE", INT2NUM(GTK_RC_STYLE));
-    rb_define_const(gWidget, "COMPOSITE_CHILD", INT2NUM(GTK_COMPOSITE_CHILD));
-    rb_define_const(gWidget, "APP_PAINTABLE", INT2NUM(GTK_APP_PAINTABLE));
-    rb_define_const(gWidget, "RECEIVES_DEFAULT", INT2NUM(GTK_RECEIVES_DEFAULT));
-    rb_define_const(gWidget, "DOUBLE_BUFFERED", INT2NUM(GTK_DOUBLE_BUFFERED));
+    G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_FLAGS, "GTK_");
 
     /* GtkWidgetHelpType */
-    rb_define_const(gWidget, "HELP_TOOLTIP", INT2FIX(GTK_WIDGET_HELP_TOOLTIP));
-    rb_define_const(gWidget, "HELP_WHATS_THIS", INT2FIX(GTK_WIDGET_HELP_WHATS_THIS));
+    G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
 
     /* GtkTextDirection */
-    rb_define_const(gWidget, "TEXT_DIR_NONE", INT2FIX(GTK_TEXT_DIR_NONE));
-    rb_define_const(gWidget, "TEXT_DIR_LTR", INT2FIX(GTK_TEXT_DIR_LTR));
-    rb_define_const(gWidget, "TEXT_DIR_RTL", INT2FIX(GTK_TEXT_DIR_RTL));
+    G_DEF_CONSTANTS(gWidget, GTK_TYPE_TEXT_DIRECTION, "GTK_");
 
     /* Special signals */
     G_DEF_SIGNAL_FUNC(gWidget, "size-request", widget_signal_size_request);

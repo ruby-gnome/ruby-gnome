@@ -3,8 +3,8 @@
 
   rbgtkbbox.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -31,9 +31,5 @@ Init_gtk_button_box()
     rb_define_method(gBBox, "set_child_secondary", bbox_set_child_secondary, 2);
 
     /* GtkButtonBoxStyle(General constants) */
-    rb_define_const(gBBox, "DEFAULT_STYLE",INT2FIX(GTK_BUTTONBOX_DEFAULT_STYLE));
-    rb_define_const(gBBox, "SPREAD", INT2FIX(GTK_BUTTONBOX_SPREAD));
-    rb_define_const(gBBox, "EDGE", INT2FIX(GTK_BUTTONBOX_EDGE));
-    rb_define_const(gBBox, "START", INT2FIX(GTK_BUTTONBOX_START));
-    rb_define_const(gBBox, "END", INT2FIX(GTK_BUTTONBOX_END));
+    G_DEF_CONSTANTS(gBBox, GTK_TYPE_BUTTON_BOX_STYLE, "GTK_BUTTONBOX_");
 }

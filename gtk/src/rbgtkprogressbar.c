@@ -3,8 +3,8 @@
 
   rbgtkprogressbar.c -
 
-  $Author: mutoh $
-  $Date: 2003/04/30 19:44:41 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -42,10 +42,7 @@ Init_gtk_progress_bar()
 */
 
     /* GtkProgressBarOrientation */
-    rb_define_const(gProgressBar, "LEFT_TO_RIGHT", INT2FIX(GTK_PROGRESS_LEFT_TO_RIGHT));
-    rb_define_const(gProgressBar, "RIGHT_TO_LEFT", INT2FIX(GTK_PROGRESS_RIGHT_TO_LEFT));
-    rb_define_const(gProgressBar, "BOTTOM_TO_TOP", INT2FIX(GTK_PROGRESS_BOTTOM_TO_TOP));
-    rb_define_const(gProgressBar, "TOP_TO_BOTTOM", INT2FIX(GTK_PROGRESS_TOP_TO_BOTTOM));
+    G_DEF_CONSTANTS(gProgressBar, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
 
     rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);
     rb_define_method(gProgressBar, "pulse", pbar_pulse, 0);

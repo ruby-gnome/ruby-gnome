@@ -3,8 +3,8 @@
 
   rbgtkiconsize.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -89,11 +89,5 @@ Init_icon_size()
     rb_define_module_function(mIconSize, "get_name", icon_size_get_name, 1);
     
     /* GtkIconSize */
-    rb_define_const(mIconSize, "INVALID", INT2FIX(GTK_ICON_SIZE_INVALID));
-    rb_define_const(mIconSize, "MENU", INT2FIX(GTK_ICON_SIZE_MENU));
-    rb_define_const(mIconSize, "SMALL_TOOLBAR", INT2FIX(GTK_ICON_SIZE_SMALL_TOOLBAR));
-    rb_define_const(mIconSize, "LARGE_TOOLBAR", INT2FIX(GTK_ICON_SIZE_LARGE_TOOLBAR));
-    rb_define_const(mIconSize, "BUTTON", INT2FIX(GTK_ICON_SIZE_BUTTON));
-    rb_define_const(mIconSize, "DND", INT2FIX(GTK_ICON_SIZE_DND));
-    rb_define_const(mIconSize, "DIALOG", INT2FIX(GTK_ICON_SIZE_DIALOG));
+    G_DEF_CONSTANTS(mIconSize, GTK_TYPE_ICON_SIZE, "GTK_ICON_SIZE");
 }

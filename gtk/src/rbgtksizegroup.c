@@ -3,8 +3,8 @@
 
   rbgtksizegroup.c -
  
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -66,9 +66,6 @@ Init_sizegrp()
     G_DEF_SETTERS(gSizeGroup);
 
     /* GtkSizeGroupMode */
-    rb_define_const(gSizeGroup, "NONE", INT2FIX(GTK_SIZE_GROUP_NONE));
-    rb_define_const(gSizeGroup, "HORIZONTAL", INT2FIX(GTK_SIZE_GROUP_HORIZONTAL));
-    rb_define_const(gSizeGroup, "VERTICAL", INT2FIX(GTK_SIZE_GROUP_VERTICAL));
-    rb_define_const(gSizeGroup, "BOTH", INT2FIX(GTK_SIZE_GROUP_BOTH));
+    G_DEF_CONSTANTS(gSizeGroup, GTK_TYPE_SIZE_GROUP_MODE, "GTK_SIZE_GROUP_");
 }
 

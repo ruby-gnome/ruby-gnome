@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/01 14:43:20 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:05:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -750,9 +750,7 @@ Init_gtk_gdk_event()
     /* GdkEventSetting */
     ev = gdkevents[GDK_SETTING];
     /* GdkSettingAction */
-    rb_define_const(ev, "ACTION_NEW", INT2FIX(GDK_SETTING_ACTION_NEW));
-    rb_define_const(ev, "ACTION_CHANGED", INT2FIX(GDK_SETTING_ACTION_CHANGED));
-    rb_define_const(ev, "ACTION_DELETED", INT2FIX(GDK_SETTING_ACTION_DELETED));
+    G_DEF_CONSTANTS(mGdk, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 
@@ -763,60 +761,8 @@ Init_gtk_gdk_event()
     rb_define_const(gdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
 
     /* GdkEventType */
-    rb_define_const(gdkEvent, "NOTHING", INT2FIX(GDK_NOTHING));
-    rb_define_const(gdkEvent, "EXPOSE", INT2FIX(GDK_EXPOSE));
-    rb_define_const(gdkEvent, "NO_EXPOSE", INT2FIX(GDK_NO_EXPOSE));
-    rb_define_const(gdkEvent, "VISIBILITY_NOTIFY", INT2FIX(GDK_VISIBILITY_NOTIFY));
-    rb_define_const(gdkEvent, "MOTION_NOTIFY", INT2FIX(GDK_MOTION_NOTIFY));
-    rb_define_const(gdkEvent, "BUTTON_PRESS", INT2FIX(GDK_BUTTON_PRESS));
-    rb_define_const(gdkEvent, "BUTTON2_PRESS", INT2FIX(GDK_2BUTTON_PRESS));
-    rb_define_const(gdkEvent, "BUTTON3_PRESS", INT2FIX(GDK_3BUTTON_PRESS));
-    rb_define_const(gdkEvent, "BUTTON_RELEASE", INT2FIX(GDK_BUTTON_RELEASE));
-    rb_define_const(gdkEvent, "KEY_PRESS", INT2FIX(GDK_KEY_PRESS));
-    rb_define_const(gdkEvent, "KEY_RELEASE", INT2FIX(GDK_KEY_RELEASE));
-    rb_define_const(gdkEvent, "FOCUS_CHANGE", INT2FIX(GDK_FOCUS_CHANGE));
-    rb_define_const(gdkEvent, "CONFIGURE", INT2FIX(GDK_CONFIGURE));
-    rb_define_const(gdkEvent, "PROPERTY_NOTIFY", INT2FIX(GDK_PROPERTY_NOTIFY));
-    rb_define_const(gdkEvent, "SELECTION_CLEAR", INT2FIX(GDK_SELECTION_CLEAR));
-    rb_define_const(gdkEvent, "SELECTION_REQUEST", INT2FIX(GDK_SELECTION_REQUEST));
-    rb_define_const(gdkEvent, "SELECTION_NOTIFY", INT2FIX(GDK_SELECTION_NOTIFY));
-    rb_define_const(gdkEvent, "PROXIMITY_IN", INT2FIX(GDK_PROXIMITY_IN));
-    rb_define_const(gdkEvent, "PROXIMITY_OUT", INT2FIX(GDK_PROXIMITY_OUT));
-    rb_define_const(gdkEvent, "DRAG_ENTER", INT2FIX(GDK_DRAG_ENTER));
-    rb_define_const(gdkEvent, "DRAG_LEAVE", INT2FIX(GDK_DRAG_LEAVE));
-    rb_define_const(gdkEvent, "DRAG_MOTION", INT2FIX(GDK_DRAG_MOTION));
-    rb_define_const(gdkEvent, "DRAG_STATUS", INT2FIX(GDK_DRAG_STATUS));
-    rb_define_const(gdkEvent, "DROP_START", INT2FIX(GDK_DROP_START));
-    rb_define_const(gdkEvent, "DROP_FINISHED", INT2FIX(GDK_DROP_FINISHED));
-
-    rb_define_const(gdkEvent, "CLIENT_EVENT", INT2FIX(GDK_CLIENT_EVENT));
-    rb_define_const(gdkEvent, "DELETE", INT2FIX(GDK_DELETE));
-    rb_define_const(gdkEvent, "DESTROY", INT2FIX(GDK_DESTROY));
-    rb_define_const(gdkEvent, "ENTER_NOTIFY", INT2FIX(GDK_ENTER_NOTIFY));
-    rb_define_const(gdkEvent, "LEAVE_NOTIFY", INT2FIX(GDK_LEAVE_NOTIFY));
-    rb_define_const(gdkEvent, "MAP", INT2FIX(GDK_MAP));
-    rb_define_const(gdkEvent, "UNMAP", INT2FIX(GDK_UNMAP));
+    G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_TYPE, "GDK_");
 
     /* GdkEventMask */
-    rb_define_const(gdkEvent, "EXPOSURE_MASK", INT2FIX(GDK_EXPOSURE_MASK));
-    rb_define_const(gdkEvent, "POINTER_MOTION_MASK", INT2FIX(GDK_POINTER_MOTION_MASK));
-    rb_define_const(gdkEvent, "POINTER_MOTION_HINT_MASK", INT2FIX(GDK_POINTER_MOTION_HINT_MASK));
-    rb_define_const(gdkEvent, "BUTTON_MOTION_MASK", INT2FIX(GDK_BUTTON_MOTION_MASK));
-    rb_define_const(gdkEvent, "BUTTON1_MOTION_MASK", INT2FIX(GDK_BUTTON1_MOTION_MASK));
-    rb_define_const(gdkEvent, "BUTTON2_MOTION_MASK", INT2FIX(GDK_BUTTON2_MOTION_MASK));
-    rb_define_const(gdkEvent, "BUTTON3_MOTION_MASK", INT2FIX(GDK_BUTTON3_MOTION_MASK));
-    rb_define_const(gdkEvent, "BUTTON_PRESS_MASK", INT2FIX(GDK_BUTTON_PRESS_MASK));
-    rb_define_const(gdkEvent, "BUTTON_RELEASE_MASK", INT2FIX(GDK_BUTTON_RELEASE_MASK));
-    rb_define_const(gdkEvent, "KEY_PRESS_MASK", INT2FIX(GDK_KEY_PRESS_MASK));
-    rb_define_const(gdkEvent, "KEY_RELEASE_MASK", INT2FIX(GDK_KEY_RELEASE_MASK));
-    rb_define_const(gdkEvent, "ENTER_NOTIFY_MASK", INT2FIX(GDK_ENTER_NOTIFY_MASK));
-    rb_define_const(gdkEvent, "LEAVE_NOTIFY_MASK", INT2FIX(GDK_LEAVE_NOTIFY_MASK));
-    rb_define_const(gdkEvent, "FOCUS_CHANGE_MASK", INT2FIX(GDK_FOCUS_CHANGE_MASK));
-    rb_define_const(gdkEvent, "STRUCTURE_MASK", INT2FIX(GDK_STRUCTURE_MASK));
-    rb_define_const(gdkEvent, "PROPERTY_CHANGE_MASK", INT2FIX(GDK_PROPERTY_CHANGE_MASK));
-    rb_define_const(gdkEvent, "VISIBILITY_NOTIFY_MASK", INT2FIX(GDK_VISIBILITY_NOTIFY_MASK));
-    rb_define_const(gdkEvent, "PROXIMITY_IN_MASK", INT2FIX(GDK_PROXIMITY_IN_MASK));
-    rb_define_const(gdkEvent, "PROXIMITY_OUT_MASK", INT2FIX(GDK_PROXIMITY_OUT_MASK));
-    rb_define_const(gdkEvent, "SUBSTRUCTURE_MASK", INT2FIX(GDK_SUBSTRUCTURE_MASK));
-    rb_define_const(gdkEvent, "ALL_EVENTS_MASK", INT2FIX(GDK_ALL_EVENTS_MASK));
+    G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_MASK, "GDK_");
 }
