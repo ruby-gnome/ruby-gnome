@@ -1,7 +1,15 @@
+2003-06-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenu.c: parameter of Gtk::Menu#popup was changed.
+	Gtk::Menu#reorder_child, #reposition, #set_accel_group, #accel_group,
+	#set_accel_path, #tearoff_state?, #set_path, #attach_to_widget.
+	* src/rbgtkcolorsel.c: Add Gtk::ColorSelection.palette_to_string, 
+	.palette_from_string.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/depend: Add a file.
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 	* src/rbgtk.h: Remove a line for including rbglib.h.
 	(because it is included by rbgobject.h)
 	* sample/misc/t-gtksocket.rb: Follow Gtk::Socket changes.

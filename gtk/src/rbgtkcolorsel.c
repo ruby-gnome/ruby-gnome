@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/05/31 18:22:39 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -70,9 +70,52 @@ gboolean    gtk_color_selection_palette_from_string
                                             (const gchar *str,
                                              GdkColor **colors,
                                              gint *n_colors);
-gchar*      gtk_color_selection_palette_to_string
-                                            (const GdkColor *colors,
-                                             gint n_colors);
+*/
+static VALUE
+colorsel_s_palette_from_string(self, str)
+    VALUE self, str;
+{
+    GdkColor* gcolors;
+    gint i, n_colors;
+    VALUE ary = Qnil;
+    gboolean ret = gtk_color_selection_palette_from_string(RVAL2CSTR(str), 
+                                                           &gcolors, &n_colors);
+    
+    if (ret) {
+        ary = rb_ary_new();
+        for (i = 0; i < n_colors; i++) {
+            rb_ary_push(ary, COLOR2RVAL(&gcolors[i]));
+        }
+    }
+                                                                                
+    return ary;
+}
+
+static VALUE
+colorsel_s_palette_to_string(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    GdkColor* gcolors;
+    GdkColor* gcolor;
+    VALUE colors;
+    gint i, len;
+
+    rb_scan_args(argc, argv, "*", &colors);
+
+    len = RARRAY(colors)->len;
+    gcolors = ALLOCA_N(GdkColor, len);
+
+    for (i = 0; i < len; i++) {
+        gcolor = (GdkColor*)RVAL2BOXED(RARRAY(colors)->ptr[i], GDK_TYPE_COLOR);
+        gcolors[i] = *gcolor;
+    }
+
+    return CSTR2RVAL(gtk_color_selection_palette_to_string((const GdkColor*)gcolors, len));
+}
+
+/* Don't implement them.
 GtkColorSelectionChangePaletteFunc gtk_color_selection_set_change_palette_hook
                                             (GtkColorSelectionChangePaletteFunc func);
 void        (*GtkColorSelectionChangePaletteFunc)
@@ -97,6 +140,9 @@ Init_gtk_color_selection()
     rb_define_method(gColorSel, "set_previous_color", colorsel_set_previous_color, 1);
     rb_define_method(gColorSel, "previous_color", colorsel_get_previous_color, 0);
     rb_define_method(gColorSel, "adjusting?", colorsel_is_adjusting, 0);
+
+    rb_define_singleton_method(gColorSel, "palette_to_string", colorsel_s_palette_to_string, -1);
+    rb_define_singleton_method(gColorSel, "palette_from_string", colorsel_s_palette_from_string, 1);
 
     G_DEF_SETTERS(gColorSel);
 }
