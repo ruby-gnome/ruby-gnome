@@ -2,6 +2,7 @@
  *
  * rbgconf-error.c: GConf error handling.
  *
+ * Copyright (C) 2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2002,2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  *
  * This library is free software; you can redistribute it and/or
@@ -18,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/04/13 20:31:43 $
+ * $Date: 2004/08/22 17:47:48 $
  *
  *****************************************************************************/
 
@@ -36,70 +37,38 @@
 
 /* Global Variables **********************************************************/
 
-static struct GCToMy {
-	int gconf_code;
-	char *rb_class_name;
-	VALUE rb_class;
-} s_gc_to_my[] = {
-	{ GCONF_ERROR_FAILED, 			"FailedError" },
-	{ GCONF_ERROR_NO_SERVER, 	 	"NoServerError" },
-	{ GCONF_ERROR_NO_PERMISSION, 		"NoPermissionError" },
-	{ GCONF_ERROR_BAD_ADDRESS, 		"BadAddressError" },
-	{ GCONF_ERROR_BAD_KEY, 			"BadKeyError" },
-	{ GCONF_ERROR_PARSE_ERROR, 		"ParseError" },
-	{ GCONF_ERROR_CORRUPT, 			"CorruptError" },
-	{ GCONF_ERROR_TYPE_MISMATCH, 		"TypeMismatchError" },
-	{ GCONF_ERROR_IS_DIR, 			"IsDirError" },
-	{ GCONF_ERROR_IS_KEY, 			"IsKeyError" },
-	{ GCONF_ERROR_OVERRIDDEN, 		"OverriddenError" },
-	{ GCONF_ERROR_OAF_ERROR, 		"OafError" },
-	{ GCONF_ERROR_LOCAL_ENGINE, 		"LocalEngineError" },
-	{ GCONF_ERROR_LOCK_FAILED, 		"LockFailedError" },
-	{ GCONF_ERROR_NO_WRITABLE_DATABASE,	"NoWritableDatabaseError" },
-	{ GCONF_ERROR_IN_SHUTDOWN, 		"InShutdownError" }
-};
-
-
 /* Function Implementations **************************************************/
 
 void
 error_default_error_handler(client, error)
-	GConfClient *client;
-	GError *error;
+     GConfClient *client;
+     GError *error;
 {
-	VALUE err = Qnil;
-	int i, n;
-
-	for (i = 0, n = G_N_ELEMENTS(s_gc_to_my); i < n; i++) {
-		if (error->code == s_gc_to_my[i].gconf_code) {
-			err = s_gc_to_my[i].rb_class;
-			break;
-		}
-	}
-
-	if (err == Qnil) {
-		rb_warn("Unrecognized GConf error ignored; please report."
-			" code: %d, message: %s", error->code, error->message);
-		return;
-	}
-
-	rb_raise(err, "GConf Error: %s", error->message);
+  RAISE_GERROR(error);
 }
 
 void
 Init_gconf_error(m_gconf)
 	VALUE m_gconf;
 {
-	VALUE gconf_error;
-	int i, n;
-
-	gconf_error = rb_define_class_under(m_gconf, "Error",
-					    rb_eStandardError);
-	for (i = 0, n = G_N_ELEMENTS(s_gc_to_my); i <  n; i++) {
-		s_gc_to_my[i].rb_class = rb_define_class_under(m_gconf,
-						s_gc_to_my[i].rb_class_name,
-						gconf_error);
-	}
+  VALUE gerror = G_DEF_ERROR2(GCONF_ERROR, "Error", m_gconf, rb_eRuntimeError);
+  
+  rb_define_const(gerror, "FAILED", INT2NUM(GCONF_ERROR_FAILED));
+  rb_define_const(gerror, "NO_SERVER", INT2NUM(GCONF_ERROR_NO_SERVER));
+  rb_define_const(gerror, "NO_PERMISSION", INT2NUM(GCONF_ERROR_NO_PERMISSION));
+  rb_define_const(gerror, "BAD_ADDRESS", INT2NUM(GCONF_ERROR_BAD_ADDRESS));
+  rb_define_const(gerror, "BAD_KEY", INT2NUM(GCONF_ERROR_BAD_KEY));
+  rb_define_const(gerror, "PARSE_ERROR", INT2NUM(GCONF_ERROR_PARSE_ERROR));
+  rb_define_const(gerror, "CORRUPT", INT2NUM(GCONF_ERROR_CORRUPT));
+  rb_define_const(gerror, "TYPE_MISMATCH", INT2NUM(GCONF_ERROR_TYPE_MISMATCH));
+  rb_define_const(gerror, "IS_DIR", INT2NUM(GCONF_ERROR_IS_DIR));
+  rb_define_const(gerror, "IS_KEY", INT2NUM(GCONF_ERROR_IS_KEY));
+  rb_define_const(gerror, "OVERRIDDEN", INT2NUM(GCONF_ERROR_OVERRIDDEN));
+  rb_define_const(gerror, "OAF_ERROR", INT2NUM(GCONF_ERROR_OAF_ERROR));
+  rb_define_const(gerror, "LOCAL_ENGINE", INT2NUM(GCONF_ERROR_LOCAL_ENGINE));
+  rb_define_const(gerror, "LOCK_FAILED", INT2NUM(GCONF_ERROR_LOCK_FAILED));
+  rb_define_const(gerror, "NO_WRITABLE_DATABASE", INT2NUM(GCONF_ERROR_NO_WRITABLE_DATABASE));
+  rb_define_const(gerror, "IN_SHUTDOWN", INT2NUM(GCONF_ERROR_IN_SHUTDOWN));
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

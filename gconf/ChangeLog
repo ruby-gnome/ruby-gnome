@@ -1,3 +1,8 @@
+2004-08-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-error.c: Improved error handling.
+	* sample/notify.rb: Removed.
+
 2004-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-client.c: Call rb_warning instead of rb_warn in
@@ -109,7 +114,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/07/31 04:57:19 $ macros.
+	and $Date: 2004/08/22 17:47:48 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
