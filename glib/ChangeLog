@@ -1,3 +1,7 @@
+2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: follow changes of ../mkmf-gnome2.rb
+
 2003-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_boxed.c: Don't free boxed object when it's not copied boxed object.

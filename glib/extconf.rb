@@ -4,6 +4,7 @@ require 'mkmf-gnome2'
 
 
 PKGConfig.have_package('gobject-2.0') or exit
+check_win32
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate
