@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/01/25 18:02:21 $
+  $Date: 2003/11/02 14:49:52 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -15,25 +15,58 @@
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
-gdkselection_owner_set(self, owner, selection, time, send_event)
-    VALUE self, owner, selection, time, send_event;
+gdkselection_owner_set(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    int ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
+    VALUE display = Qnil;
+    VALUE owner, selection, time, send_event;
+    int ret;
+
+    if (argc == 4){
+        rb_scan_args(argc, argv, "40", &owner, &selection, &time, &send_event);
+        ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
                                       RVAL2ATOM(selection), 
-                                      NUM2INT(time), RTEST(send_event));
+                                      NUM2UINT(time), RTEST(send_event));
+    } else {
+#if GTK_MINOR_VERSION >= 2
+        rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
+        ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                  GDK_WINDOW(RVAL2GOBJ(owner)), 
+                                                  RVAL2ATOM(selection), 
+                                                  NUM2UINT(time), RTEST(send_event));
+#else
+        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+#endif
+
+    }
     return ret ? Qtrue : Qfalse;
 }
 
 static VALUE
-gdkselection_owner_get(self, selection)
-    VALUE self, selection;
+gdkselection_owner_get(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
+    VALUE display = Qnil;
+    VALUE selection;
+
+    if (argc == 1) {
+        rb_scan_args(argc, argv, "10", &selection);
+        return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
+    } else {
+#if GTK_MINOR_VERSION >= 2
+        rb_scan_args(argc, argv, "20", &display, &selection);
+        return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                             RVAL2ATOM(selection)));
+#else
+        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+#endif
+    }
 }
-/*
-GdkWindow*  gdk_selection_owner_get_for_display(GdkDisplay *display,
-GdkAtom selection);
-*/
+
 static VALUE
 gdkselection_convert(self, requestor, selection, target, time)
     VALUE self, requestor, selection, target, time;
@@ -41,7 +74,7 @@ gdkselection_convert(self, requestor, selection, target, time)
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
                           RVAL2ATOM(selection), 
                           RVAL2ATOM(target), NUM2INT(time));
-    return requestor;
+    return self;
 }
 
 static VALUE
@@ -59,36 +92,42 @@ gdkselection_property_get(self, requestor)
 }
 
 static VALUE
-gdkselection_send_notify(self, requestor, selection, target, property, time)
-    VALUE self, requestor, selection, target, property, time;
+gdkselection_send_notify(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    if( property == Qnil){
-        gdk_selection_send_notify(NUM2INT(requestor), RVAL2ATOM(selection),
-                                  RVAL2ATOM(target), GDK_NONE, NUM2INT(time));
-    } else {
-        gdk_selection_send_notify(NUM2INT(requestor), RVAL2ATOM(selection),
-                                  RVAL2ATOM(target), RVAL2ATOM(property), 
+    VALUE display = Qnil;
+    VALUE requestor, selection, target, property, time;
+
+    if (argc == 5) {
+        rb_scan_args(argc, argv, "50", &requestor, &selection, &target, &property, &time);
+        gdk_selection_send_notify(NUM2UINT(requestor), RVAL2ATOM(selection),
+                                  RVAL2ATOM(target), 
+                                  NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                   NUM2INT(time));
+    } else {
+#if GTK_MINOR_VERSION >= 2
+        rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
+        gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                              NUM2UINT(requestor), RVAL2ATOM(selection),
+                                              RVAL2ATOM(target), 
+                                              NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
+                                              NUM2INT(time));
+#else
+        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+#endif
     }
-    return requestor;
+    return self;
 }
-/*
-void        gdk_selection_send_notify_for_display
-                                            (GdkDisplay *display,
-                                             guint32 requestor,
-                                             GdkAtom selection,
-                                             GdkAtom target,
-                                             GdkAtom property,
-                                             guint32 time);
-*/
 
 void
 Init_gtk_gdk_selection()
 {
     VALUE mGdkSelection = rb_define_module_under(mGdk, "Selection");
 
-    rb_define_module_function(mGdkSelection, "owner_set", gdkselection_owner_set, 4);
-    rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, 1);
+    rb_define_module_function(mGdkSelection, "owner_set", gdkselection_owner_set, -1);
+    rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, -1);
     rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
     rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
     rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, 5);

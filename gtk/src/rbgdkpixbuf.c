@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/10/21 13:05:38 $
+  $Date: 2003/11/02 14:49:52 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -14,47 +14,57 @@
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
 static VALUE
-render_to_drawable(argc, argv, self)
+pixbuf_render_threshold_alpha(self, bitmap, src_x, src_y, dest_x, dest_y,
+                              width, height, alpha_threshold)
+    VALUE self, bitmap, src_x, src_y, dest_x, dest_y,
+    width, height, alpha_threshold;
+{
+    gdk_pixbuf_render_threshold_alpha(_SELF(self), GDK_BITMAP(RVAL2GOBJ(bitmap)),
+                                      NUM2INT(src_x), NUM2INT(src_y),
+                                      NUM2INT(dest_x), NUM2INT(dest_y),
+                                      NUM2INT(width), NUM2INT(height),
+                                      NUM2INT(alpha_threshold));
+    return self;
+}
+
+static VALUE
+pixbuf_render_to_drawable(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
     VALUE args[11];
+    VALUE gc, src_x, src_y, dest_x, dest_y, width, height, 
+        dither, x_dither, y_dither;
+
     int i;
-    int dither = GDK_RGB_DITHER_NONE;
-    int x_dither = 0;
-    int y_dither = 0;
 
-    rb_scan_args(argc, argv, "83", &args[0], &args[1], &args[2], &args[3], 
-                 &args[4], &args[5], &args[6], &args[7], &args[8], &args[9], &args[10]);
+#if GTK_MINOR_VERSION >= 2
+    rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#pixbuf instead.");
+#endif
 
-    for (i=0; i<8; i++) {
+    rb_scan_args(argc, argv, "83", &gc, &src_x, &src_y, &dest_x, &dest_y,
+                 &width, &height, &dither, &x_dither, &y_dither);
+
+    for (i = 0; i < 8; i++) {
 	if (NIL_P(args[i]))
 	    rb_raise(rb_eArgError, "arguments %d must be non nil", i);
     }
 
-    if (!NIL_P(args[8]))
-	dither = RVAL2GENUM(args[8], GDK_TYPE_RGB_DITHER);
-    if (!NIL_P(args[9]))
-	x_dither = NUM2INT(args[9]);
-    if (!NIL_P(args[10]))
-	y_dither = NUM2INT(args[10]);
-
     gdk_pixbuf_render_to_drawable(_SELF(self),
-				  GDK_DRAWABLE(RVAL2GOBJ(args[0])),
-				  GDK_GC(RVAL2GOBJ(args[1])),
-				  NUM2INT(args[2]),
-				  NUM2INT(args[3]),
-				  NUM2INT(args[4]),
-				  NUM2INT(args[5]),
-				  NUM2INT(args[6]),
-				  NUM2INT(args[7]),
-				  dither, x_dither, y_dither);
+				  GDK_DRAWABLE(RVAL2GOBJ(self)),
+				  GDK_GC(RVAL2GOBJ(gc)),
+				  NUM2INT(src_x), NUM2INT(src_y),
+                                  NUM2INT(dest_x), NUM2INT(dest_y),
+                                  NUM2INT(width), NUM2INT(height),
+                                  NIL_P(dither) ? GDK_RGB_DITHER_NONE : RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                                  NIL_P(x_dither) ? 0 : NUM2INT(x_dither), 
+                                  NIL_P(y_dither) ? 0 : NUM2INT(y_dither));
     return self;
 }
 
 static VALUE
-render_pm(argc, argv, self)
+pixbuf_render_pixmap_and_mask(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
@@ -114,6 +124,36 @@ pixbuf_s_from_drawable(argc, argv, self)
     }
 }
  
+static VALUE
+pixbuf_s_from_image(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
+    GdkPixbuf* buf;
+
+    rb_scan_args(argc, argv, "63", &cmap, &src, &src_x, &src_y, &width, &height, 
+                 &dest, &dest_x, &dest_y);
+
+    buf = gdk_pixbuf_get_from_image(GDK_PIXBUF(RVAL2GOBJ(dest)),
+                                    GDK_IMAGE(RVAL2GOBJ(src)),
+                                    GDK_COLORMAP(RVAL2GOBJ(cmap)),
+                                    NUM2INT(src_x), NUM2INT(src_y),
+                                    NIL_P(dest_x) ? 0 : NUM2INT(dest_x),
+                                    NIL_P(dest_y) ? 0 : NUM2INT(dest_y),
+                                    NUM2INT(width), NUM2INT(height));
+    if (NIL_P(dest)) {
+        if (buf) {
+            return GOBJ2RVAL(buf);
+        } else {
+            return Qnil;
+        }
+    } else {
+        return dest;
+    }
+}
+
 void
 Init_gtk_gdk_pixbuf()
 {
@@ -122,13 +162,10 @@ Init_gtk_gdk_pixbuf()
      */
     VALUE gdkPixbuf = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
-    /* 
-     * Rendering
-     */
-    /* rb_define_method(gdkPixbuf, "render_to_drawable_alpha", ..., ...,); */
-    rb_define_method(gdkPixbuf, "render_to_drawable", render_to_drawable, -1);
-    /* rb_define_method(gdkPixbuf, "render_threshold_alpha", ..., ...); */
-    rb_define_method(gdkPixbuf, "render_pixmap_and_mask", render_pm, -1);
+    rb_define_method(gdkPixbuf, "render_threshold_alpha", pixbuf_render_threshold_alpha, 8);
+    rb_define_method(gdkPixbuf, "render_to_drawable", pixbuf_render_to_drawable, -1);
+    rb_define_method(gdkPixbuf, "render_pixmap_and_mask", pixbuf_render_pixmap_and_mask, -1);
 
     rb_define_singleton_method(gdkPixbuf, "from_drawable", pixbuf_s_from_drawable, -1);
+    rb_define_singleton_method(gdkPixbuf, "from_image", pixbuf_s_from_image, -1);
 }

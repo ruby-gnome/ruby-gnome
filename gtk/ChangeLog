@@ -1,5 +1,18 @@
 2003-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkdragcontext.c: Rename Gdk::DragContext.protocol to 
+	Gdk::DragContext.get_protocol.
+	Rename Gdk::DragContext#motion to Gdk::DragContext#drag_motion.
+	Add Gdk::DragContext.begin.
+	Support GTK+-2.2 methods.
+	* src/rbgdkselection.c: Support GTK+-2.2 methods. 
+	* src/rbgdkpixbuf.c: Add Gdk::Pixbuf#render_threshold_alpha,
+	Gdk::Pixbuf.from_image.
+	* src/rbgdkrgb.c: Unified Gdk::RGB.draw_rgb_image and
+	.draw_rgb_image_dithalign.
+	Rename Gdk::RGB.cmap to Gdk::RGB.colormap.
+	Add Gdk::RGB.draw_indexed_image, .find_color, .set_install, 
+	.set_min_colors, .ditherable?, set_verbose.
 	* src/rbgdkgc.c: Add Gdk::GC#foreground, #background, #function,
 	#fill, #tile, #stipple, #ts_origin, #clip_origin, #clip_mask,
 	#subwindow_mode, #exposures?, #line_attributes.
