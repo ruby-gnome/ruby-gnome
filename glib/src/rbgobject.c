@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2003/05/20 17:12:02 $
+  $Date: 2003/05/20 17:14:10 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -106,7 +106,6 @@ static void
 rbgobj_mark(holder)
     gobj_holder* holder;
 {
-    printf("rbgobj_mark: holder %s\n",  g_type_name(G_TYPE_FROM_INSTANCE(holder->gobj)));
     if (holder->gobj && !holder->destroyed
         && holder->cinfo && holder->cinfo->mark)
         holder->cinfo->mark(holder->gobj);
