@@ -1,3 +1,7 @@
+2003-12-21  Laurent Sansonetti  <lrz@gnome.org>
+
+	* extconf.rb: Removed obsolete directive.
+
 2003-12-17  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/*.c: Fixed GEnum/GFLags <=> Ruby conversions, added

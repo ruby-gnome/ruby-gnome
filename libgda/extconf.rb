@@ -31,8 +31,6 @@ end
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")
 
-have_func("gda_config_save_data_source_info")
-
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
