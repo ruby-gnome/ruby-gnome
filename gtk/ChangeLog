@@ -1,3 +1,14 @@
+2003-04-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaccelgroup.c: Gtk::AccelGroup#connect accept block instead of GLib::Closure.
+	Fix for Gtk::AccelGroup#from_accel_closure.
+	Gtk::AccelGroup#lock accept a block.
+	* src/rbgtkcontainer.c: Add Gtk::Container#resize_container?, #check_resize, 
+	#set_reallocate_redraws, #focus_vadjustment, #focus_hadjustment, #resize_children, 
+	#propagate_expose, #focus_chain, #set_focus_chain, #unset_focus_chain.
+	Gtk::Container#add() accept properties as 2nd parameter.
+	
+
 2003-04-21  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkframe.c: Remove Gtk::Frame#shadow, #set_shadow, #shadow= as deprecated properties.

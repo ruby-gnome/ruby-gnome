@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: sakai $
-  $Date: 2003/02/16 13:25:17 $
+  $Author: mutoh $
+  $Date: 2003/04/23 16:44:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -32,15 +32,23 @@ gaccelgrp_connect(argc, argv, self)
 {
     VALUE key, mods, flags, path, closure;
     GClosure *rclosure;
-
+    
     if (argc > 2){
-        rb_scan_args(argc, argv, "40", &key, &mods, &flags, &closure);
-        rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        rb_scan_args(argc, argv, "31", &key, &mods, &flags, &closure);
+        if (NIL_P(closure)){
+            rclosure = g_rclosure_new(rb_f_lambda(), Qnil, NULL);
+        } else {
+            rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        }
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
                                 FIX2INT(mods), FIX2INT(flags), rclosure);
     } else {
-        rb_scan_args(argc, argv, "20", &path, &closure);
-        rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        rb_scan_args(argc, argv, "11", &path, &closure);
+        if (NIL_P(closure)){
+            rclosure = g_rclosure_new(rb_f_lambda(), Qnil, NULL);
+        } else {
+            rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+        }
         gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
     }
     return self;
@@ -85,8 +93,8 @@ gaccelgrp_disconnect(self, closure)
 }
 
 static VALUE
-gaccelgrp_s_from_accel_closure(closure)
-    VALUE closure;
+gaccelgrp_s_from_accel_closure(self, closure)
+    VALUE self, closure;
 {
     return GOBJ2RVAL(gtk_accel_group_from_accel_closure(
                          (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
@@ -117,10 +125,21 @@ gaccelgrp_find(self)
 }
 
 static VALUE
+_gaccelgrp_lock_ensure(self)
+    VALUE self;
+{
+    gtk_accel_group_unlock(_SELF(self));
+    return Qnil;
+}
+
+static VALUE
 gaccelgrp_lock(self)
     VALUE self;
 {
     gtk_accel_group_lock(_SELF(self));
+    if (rb_block_given_p()){
+        rb_ensure(rb_yield, self, _gaccelgrp_lock_ensure , self);
+    }
     return self;
 }
 
