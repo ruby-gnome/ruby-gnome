@@ -383,6 +383,16 @@ class CanvasSamplePrimitives < Gtk::VBox
                                        "arrow_shape_c" => 4.0}))
   end
 
+  def setup_curves(root)
+    path_def = Gnome::CanvasPathDef.new()
+    path_def.moveto(500.0, 175.0)
+    path_def.curveto(550.0, 175.0, 550.0, 275.0, 500.0, 275.0)
+    setup_item(Gnome::CanvasBpath.new(root,
+                                      {"bpath" => path_def,
+                                        "outline_color" => "black",
+                                        "width_pixels" => 4}))
+  end
+
   def setup_polygons(root)
     points = [[210.0, 320.0], [210.0, 380.0], [260.0, 350.0]]
     if root.canvas.aa?
@@ -478,6 +488,7 @@ EOS
     setup_texts(root)
     setup_images(root, aa)
     setup_lines(root)
+    setup_curves(root)
     setup_polygons(root)
     setup_widgets(root)
 

@@ -37,6 +37,8 @@ require 'canvas-arrowhead'
 require 'canvas-primitives'
 require 'canvas-fifteen'
 require 'canvas-features'
+require 'canvas-rich-text'
+require 'canvas-curve'
 
 class CanvasSample < Gtk::Window
   def initialize
@@ -54,6 +56,8 @@ class CanvasSample < Gtk::Window
     notebook.append_page(CanvasSampleArrowhead.new(), Gtk::Label.new("Arrowhead"))
     notebook.append_page(CanvasSampleFifteen.new(), Gtk::Label.new("Fifteen"))
     notebook.append_page(CanvasSampleFeatures.new(), Gtk::Label.new("Feature"))
+    notebook.append_page(CanvasSampleRichText.new(), Gtk::Label.new("Rich Text"))
+    notebook.append_page(CanvasSampleBezierCurve.new(), Gtk::Label.new("Bezier Curve"))
     show()
   end
 end
