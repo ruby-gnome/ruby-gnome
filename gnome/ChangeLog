@@ -1,3 +1,8 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-program.c: Fix a segfault of Gnome::Program.new
+	* README: Update copyright.
+
 2003-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/*.c: Apply G_DEF_CONSTANTS.

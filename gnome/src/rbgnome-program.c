@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.8 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-program.c,v 1.9 2004/03/05 15:28:27 mutoh Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -319,6 +319,8 @@ program_initialize(argc, argv, self)
                                 RVAL2BOXED(module_info, GNOME_TYPE_MODULE_INFO),
                                 cargc, cargv, i, pdata);
     G_INITIALIZE(self, program);
+    G_RELATIVE(rb_eval_string("eval('self', binding)"), self);
+
     return Qnil;
 }
 
