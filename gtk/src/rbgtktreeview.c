@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Author: mpovolny $
+  $Date: 2003/10/10 21:30:25 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -270,6 +270,14 @@ treeview_expand_row(self, path, open_all)
     return gtk_tree_view_expand_row(_SELF(self), 
                                     RVAL2TREEPATH(path),
                                     RTEST(open_all)) ? Qtrue: Qfalse;
+}
+
+static VALUE
+treeview_expand_to_path(self, path)
+    VALUE self, path;
+{
+    gtk_tree_view_expand_to_path(_SELF(self), RVAL2TREEPATH(path));
+    return self;
 }
 
 static VALUE
@@ -546,6 +554,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
+    rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
     rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
     rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
     rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);

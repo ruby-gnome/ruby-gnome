@@ -1,3 +1,7 @@
+2003-10-10 Martin Povolny <xpovolny@fi.muni.cz>
+
+	* src/rbgtktreeview.c: Add Gtk::TreeView#expand_to_path
+
 2003-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Add Gdk::Window#get_update_area,
