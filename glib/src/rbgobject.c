@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/21 15:53:45 $
+  $Date: 2002/09/23 06:49:06 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -317,6 +317,7 @@ rbgobj_define_signal_constants(klass)
 struct param_setup_arg {
     GObjectClass* gclass;
     GParameter* params;
+    guint param_size;
 };
 
 static VALUE
@@ -336,13 +337,20 @@ _params_setup(arg, param_setup_arg)
     VALUE name, val;
     GParamSpec* pspec;
 
+    if (n >= param_setup_arg->param_size)
+       rb_raise(rb_eArgError, "too many parameters");
+
     arg = rb_ary_entry(arg, 0);
 
     name = rb_ary_entry(arg, 0);
     val  = rb_ary_entry(arg, 1);
 
-    StringValue(name);
-    param_setup_arg->params[n].name = StringValuePtr(name);
+    if (SYMBOL_P(name)) {
+        param_setup_arg->params[n].name = rb_id2name(SYM2ID(name));
+    } else {
+        StringValue(name);
+        param_setup_arg->params[n].name = StringValuePtr(name);
+    }
 
     pspec = g_object_class_find_property(
         param_setup_arg->gclass,
@@ -378,6 +386,7 @@ rbgobj_gobject_new(gtype, params_hash)
 
         param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
 
+        param_setup_arg.param_size = param_size;
         param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
         param_setup_arg.params = ALLOCA_N(GParameter, param_size);
         memset(param_setup_arg.params, 0, sizeof(GParameter) * param_size);

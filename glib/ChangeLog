@@ -1,3 +1,12 @@
+2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: introduce macro "RBGLIB_ENABLE_EXPERIMENTAL" to indicate
+	experimental API.
+	* src/rbgobj_signal.c: define constants
+	* src/rbgobj_signal.c (signal_emit, signal_emit_stop): handles detail
+	parameter.
+	* src/rbgobject.c (rbgobj_gobject_new): check actual parameter size.
+
 2002-09-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.c (rbgobj_define_property_accessors): when property
