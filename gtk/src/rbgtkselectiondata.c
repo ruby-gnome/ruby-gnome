@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: mutoh $
-  $Date: 2004/10/27 17:13:08 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:42:48 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -44,7 +44,7 @@ rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
     } else if(type != Qnil && size != Qnil && src != Qnil) {
     	dat = RVAL2CSTR(src);
 	fmt = NUM2INT(size);
-	len = RSTRING(src)->len;
+	len = (RSTRING(src)->len * sizeof(char) / fmt);
     } else {
         rb_raise(rb_eArgError, "no supported type.");
     }
