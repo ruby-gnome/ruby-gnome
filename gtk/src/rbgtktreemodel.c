@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/04 19:01:17 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -68,8 +68,7 @@ static VALUE
 treemodel_get_path(self, iter)
     VALUE self, iter;
 {
-    return TREEPATH2RVAL(gtk_tree_model_get_path(_SELF(self), 
-                                                 RVAL2ITR(iter)));
+    return TREEPATH2RVAL(gtk_tree_model_get_path(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
@@ -78,17 +77,15 @@ treemodel_get_value(self, iter, column)
 {
     GValue value;
 
-    gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), 
-                             NUM2INT(column), &value);
+    gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &value);
     return GVAL2RVAL(&value);
 }
 
 static VALUE
-treemodel_iter_next(self)
+treemodel_iter_next(self, iter)
     VALUE self;
 {
-    GtkTreeIter iter;
-    return (gtk_tree_model_iter_next(_SELF(self), &iter)) ? ITR2RVAL(&iter) : Qnil;
+    return (gtk_tree_model_iter_next(_SELF(self), RVAL2ITR(iter))) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -108,12 +105,18 @@ treemodel_iter_has_child(self, iter)
 }
 
 static VALUE
-treemodel_iter_nth_child(self, parent, n)
-    VALUE self, parent, n;
+treemodel_iter_n_children(self, iter)
+    VALUE self, iter;
 {
-    GtkTreeIter iter;
-    return (gtk_tree_model_iter_nth_child(_SELF(self), &iter, RVAL2ITR(parent), 
-                                          NUM2INT(n))) ? ITR2RVAL(&iter) : Qnil;
+    return NUM2INT(gtk_tree_model_iter_n_children(_SELF(self), RVAL2ITR(iter)));
+}
+
+static VALUE
+treemodel_iter_nth_child(self, iter, parent, n)
+    VALUE self, iter, parent, n;
+{
+    return (gtk_tree_model_iter_nth_child(_SELF(self), RVAL2ITR(iter), RVAL2ITR(parent), 
+                                          NUM2INT(n))) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -206,10 +209,11 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "iter_first", treemodel_get_iter_first, 0);
     rb_define_method(mTreeModel, "get_path", treemodel_get_path, 1);
     rb_define_method(mTreeModel, "get_value", treemodel_get_value, 2);
-    rb_define_method(mTreeModel, "iter_next", treemodel_iter_next, 0);
+    rb_define_method(mTreeModel, "iter_next?", treemodel_iter_next, 1);
     rb_define_method(mTreeModel, "iter_children", treemodel_iter_children, 1);
-    rb_define_method(mTreeModel, "iter_has_child", treemodel_iter_has_child, 1);
-    rb_define_method(mTreeModel, "iter_nth_child", treemodel_iter_nth_child, 1);
+    rb_define_method(mTreeModel, "iter_has_child?", treemodel_iter_has_child, 1);
+    rb_define_method(mTreeModel, "iter_n_children", treemodel_iter_n_children, 1);
+    rb_define_method(mTreeModel, "iter_nth_child", treemodel_iter_nth_child, 3);
     rb_define_method(mTreeModel, "iter_parent", treemodel_iter_parent, 1);
     rb_define_method(mTreeModel, "row_changed", treemodel_row_changed, 2);
     rb_define_method(mTreeModel, "row_inserted", treemodel_row_inserted, 2);

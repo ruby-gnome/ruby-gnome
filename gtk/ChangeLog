@@ -2,6 +2,9 @@
 
 	* src/rbgtktreeviewcolumn.c: Change arguments of 
 	Gtk::TreeViewColumn#initialize.
+	* src/rbgtktreemodel.c: Add Gtk::TreeModel#iter_n_children. 
+	Fix arguments of #iter_next, #iter_nth_child. 
+	Change #iter_next -> iter_next?, #iter_has_child -> iter_has_child?.
 
 2002-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
