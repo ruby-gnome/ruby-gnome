@@ -1,3 +1,11 @@
+2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Move ruby part from rbglade.c.
+	Improve the behavior to work when handlers aren't undefined not 
+	to occur signal_proc.arity error.
+	Run ruby with -d option, you can get warning for undefined handlers. 
+	Suggested by michael <m1chael@optushome.com.au>
+	
 2002-12-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: add space before include directory option to $CFLAGS.

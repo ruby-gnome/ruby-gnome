@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2002/11/09 16:04:35 $
+  $Date: 2002/12/19 12:56:57 $
 
 
   Copyright (C) 2002 Ruby-GNOME2 Project
@@ -95,24 +95,4 @@ void Init_libglade2()
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
-
-    rb_eval_string(
-        "class GladeXML			  											             \n"
-        "   def connect(source, target, signal, handler, data)              \n"
-        "       if target                                                   \n"
-        "           signal_proc = target.method(handler)                    \n"
-        "       else                                                        \n"
-        "           signal_proc = @handler_proc.call(handler)               \n"
-        "       end                                                         \n"
-        "       case signal_proc.arity                                      \n"
-        "           when 0                                                  \n"
-        "               source.signal_connect(signal) {signal_proc.call}    \n"
-        "           when 1                                                  \n"
-        "               source.signal_connect(signal, &signal_proc)         \n"
-        "           else                                                    \n"
-        "               source.signal_connect(signal, data, &signal_proc)    \n"
-        "       end                                                         \n"
-        "   end                                                             \n"
-        "end                                                                \n"
-    );
 }
