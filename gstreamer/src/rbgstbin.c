@@ -354,6 +354,115 @@ static VALUE rb_gst_bin_use_clock(self, clock)
     return self;
 }
 
+struct __iterate_callback {
+    VALUE callback;
+    GstBin *bin;
+};
+
+static GSList *__pre_iterate_list = NULL;
+static GSList *__post_iterate_list = NULL;
+
+static struct __iterate_callback *__iterate_get(list, bin) 
+    GSList *list;
+    GstBin *bin;
+{
+    GSList *i;
+    assert(bin != NULL);    /* list may be NULL */
+    for (i = list;
+         i != NULL;
+         i = g_slist_next(i))
+    {
+        struct __iterate_callback *e = (struct __iterate_callback *) i->data;
+        if (e->bin == bin) {
+            return e;
+        }
+    }
+    return NULL;
+}
+
+static void __iterate_call(elem)
+    struct __iterate_callback *elem;
+{
+    assert(elem != NULL);
+    rb_funcall(elem->callback, 
+               rb_intern("call"), 
+               1, 
+               RGST_BIN_NEW(elem->bin));
+}
+
+static void __pre_iterate_dispatcher(bin)
+    GstBin *bin;
+{
+    __iterate_call(__iterate_get(__pre_iterate_list, bin));
+}
+
+static void __post_iterate_dispatcher(bin)
+    GstBin *bin;
+{
+    __iterate_call(__iterate_get(__post_iterate_list, bin));
+}
+
+static struct __iterate_callback *__iterate_new(rbin)
+    VALUE rbin;
+{
+    struct __iterate_callback *elem;
+    elem = g_malloc(sizeof(struct __iterate_callback));
+    assert(elem != NULL);
+    elem->callback = G_BLOCK_PROC();
+    elem->bin = RGST_BIN(rbin);
+    return elem;
+}
+
+/*
+ *  Method: on_pre_iterate { |aBin| ... } -> nil
+ *
+ *  Attaches a block code which will be executed before every iteration 
+ *  of the bin.
+ *
+ *  Always returns nil.
+ */
+static VALUE rb_gst_bin_on_pre_iterate(self)
+    VALUE self;
+{
+    if (__iterate_get(__pre_iterate_list, RGST_BIN(self)) != NULL) {
+        rb_raise(rb_eRuntimeError,
+                 "A pre_iterate function is already attached on this bin!");
+    }
+    else {
+        __pre_iterate_list = g_slist_append(__pre_iterate_list,  
+                                            __iterate_new(self));
+        gst_bin_set_pre_iterate_function(RGST_BIN(self), 
+                                         __pre_iterate_dispatcher, 
+                                         NULL);
+    }
+    return Qnil;
+}
+
+/*
+ *  Method: on_post_iterate { |aBin| ... } -> nil
+ *
+ *  Attaches a callback which will be executed after every iteration 
+ *  of the bin.
+ *
+ *  Always returns nil.
+ */
+static VALUE rb_gst_bin_on_post_iterate(self)
+    VALUE self;
+{
+    if (__iterate_get(__post_iterate_list, RGST_BIN(self)) != NULL) {
+        rb_raise(rb_eRuntimeError, 
+                 "A post_iterate function is already attached on this bin!");
+    }
+    else {
+        __post_iterate_list = g_slist_append(__post_iterate_list,
+                                             __iterate_new(self));
+        gst_bin_set_post_iterate_function(RGST_BIN(self), 
+                                          __post_iterate_dispatcher, 
+                                          NULL);
+    }
+    return Qnil;
+}
+
 /*
  *  Constant: FLAG_MANAGER
  *  This bin is a manager of child elements, i.e. a Gst::Pipeline or
@@ -444,6 +553,9 @@ void Init_gst_bin(void) {
     rb_define_method(c, "clock", rb_gst_bin_get_clock, 0);
     rb_define_method(c, "auto_clock", rb_gst_bin_auto_clock, 0);
     rb_define_method(c, "use_clock", rb_gst_bin_use_clock, 1);
+
+    rb_define_method(c, "on_post_iterate", rb_gst_bin_on_post_iterate, 0);
+    rb_define_method(c, "on_pre_iterate", rb_gst_bin_on_pre_iterate, 0);
 
     /*
      *  Flags
