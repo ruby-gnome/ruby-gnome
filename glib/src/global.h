@@ -3,8 +3,8 @@
 
    global.h -
 
-   $Author: mutoh $
-   $Date: 2003/02/01 16:03:08 $
+   $Author: sakai $
+   $Date: 2003/02/14 14:09:21 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
 ************************************************/
@@ -26,6 +26,7 @@ typedef struct {
 
 typedef struct {
     gpointer boxed;
+    gboolean own;
     GType type;
 } boxed_holder;
 

@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/12 18:10:26 $
+  $Author: sakai $
+  $Date: 2003/02/14 14:09:21 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -27,12 +27,11 @@ static void
 boxed_free(boxed_holder* p)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
-    gpointer copy_obj = g_hash_table_lookup(boxed_table, (gconstpointer)(p->type));
 
     if (cinfo && cinfo->free)
         cinfo->free(p->boxed);
     
-    if (! copy_obj && p->boxed)
+    if (p->own && p->boxed)
         g_boxed_free(p->type, p->boxed);
 
     free(p);
@@ -66,19 +65,38 @@ rbgobj_boxed_s_new(argc, argv, klass)
 }
 #endif
 
-VALUE
+static VALUE
 rbgobj_boxed_s_gtype(klass)
     VALUE klass;
 {
     return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
 }
 
-VALUE
+static VALUE
 rbgobj_boxed_gtype(self)
     VALUE self;
 {
     return rbgobj_boxed_s_gtype(CLASS_OF(self));
 }
+
+static VALUE
+rbgobj_boxed_copy(self)
+    VALUE self;
+{
+    boxed_holder* holder1;
+    boxed_holder* holder2;
+    VALUE result = rbgobj_boxed_create(CLASS_OF(self));
+
+    Data_Get_Struct(self, boxed_holder, holder1);
+    Data_Get_Struct(result, boxed_holder, holder2);
+
+    holder2->boxed = g_boxed_copy(holder1->type, holder1->boxed);
+    holder2->own   = TRUE;
+
+    return result;
+}
+
+/**********************************************************************/
 
 VALUE
 rbgobj_boxed_create(klass)
@@ -89,8 +107,11 @@ rbgobj_boxed_create(klass)
     const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
     VALUE result = Data_Make_Struct(klass, boxed_holder, 
                                     boxed_mark, boxed_free, holder);
-    holder->type = cinfo->gtype;
-    holder->boxed = (gpointer)NULL;
+    holder->type  = cinfo->gtype;
+    holder->boxed = NULL;
+    holder->own   = FALSE;
+
+    rb_ivar_set(result, id_relatives, Qnil);
 
     return result;
 }
@@ -103,8 +124,7 @@ rbgobj_boxed_initialize(obj, boxed)
     boxed_holder* holder;
     Data_Get_Struct(obj, boxed_holder, holder);
     holder->boxed = g_boxed_copy(holder->type, boxed);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
+    holder->own   = TRUE;
 }
 
 gpointer
@@ -130,18 +150,20 @@ rbgobj_make_boxed(p, gtype)
     gpointer p;
     GType gtype;
 {
-    boxed_holder* holder = NULL;
-    gpointer copy_obj = g_hash_table_lookup(boxed_table, (gconstpointer)gtype);
+    VALUE result = rbgobj_boxed_create(GTYPE2CLASS(gtype));
+    boxed_holder* holder;
+    gboolean copy_obj = (g_hash_table_lookup(boxed_table, (gconstpointer)gtype) == NULL);
 
-    VALUE result = Data_Make_Struct(GTYPE2CLASS(gtype), boxed_holder,
-                                    boxed_mark, boxed_free, holder);
-    holder->type  = gtype;
+    Data_Get_Struct(result, boxed_holder, holder);
     
     if (copy_obj){
-        holder->boxed = p;
-    } else {
         holder->boxed = g_boxed_copy(gtype, p);
+        holder->own   = TRUE;
+    } else {
+        holder->boxed = p;
+        holder->own   = FALSE;
     }
+
     return result;
 }
 
@@ -151,7 +173,6 @@ rbgobj_boxed_not_copy_obj(gtype)
 {
     g_hash_table_insert(boxed_table, (gpointer)gtype, (gpointer)gtype);
 }
-
 
 /**********************************************************************/
 
@@ -198,4 +219,6 @@ Init_gobject_gboxed()
 
     rb_define_singleton_method(gBoxed, "gtype", rbgobj_boxed_s_gtype, 0);
     rb_define_method(gBoxed, "gtype", rbgobj_boxed_gtype, 0);
+    rb_define_method(gBoxed, "copy", rbgobj_boxed_copy, 0);
+    rb_define_alias(gBoxed, "clone", "copy");
 }

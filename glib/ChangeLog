@@ -1,3 +1,10 @@
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed.c: make some functions to be static.
+
+	* src/rbgobj_boxed.c: implement GLib::Boxed#{copy,clone}
+	Suggested by KATO Kazuyoshi <kadu@zb.wakwak.com>
+
 2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: follow changes of ../mkmf-gnome2.rb
