@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2003/06/05 15:50:34 $
+  $Date: 2003/06/05 17:00:35 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -88,7 +88,7 @@ style_lookup_icon_set(self, stock_id)
     if (TYPE(stock_id) == T_STRING) {
         id = RVAL2CSTR(stock_id);
     } else {
-        id = SYM2CSTR(stock_id));
+        id = rb_id2name(SYM2ID(stock_id));
     }
     
     ret = gtk_style_lookup_icon_set(_SELF(self), id);
