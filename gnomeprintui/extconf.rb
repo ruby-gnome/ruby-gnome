@@ -124,8 +124,8 @@ srcdir = File.dirname($0) == "." ? "." :
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
-  if !have_header("libgnomeprintui-enum-types.h")
-    enum_type_prefix = "libgnomeprintui-enum-types"
+  enum_type_prefix = "libgnomeprintui-enum-types"
+  if !have_header("#{enum_type_prefix}.h")
     if maintainer
       include_paths = `pkg-config libgnomeprintui-2.2 --cflags-only-I`
       include_path = include_paths.split.find do |x|
@@ -139,6 +139,12 @@ begin
         enum_type_filename = "#{enum_type_prefix}.#{ext}"
         FileUtils.cp("#{enum_type_filename}.maintainer", enum_type_filename)
       end
+    end
+  end
+
+  if $distcleanfiles
+    %w(c h).each do |ext|
+      $distcleanfiles << "#{enum_type_prefix}.#{ext}"
     end
   end
 

@@ -1,3 +1,9 @@
+2004-11-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: removed libgnomeprintui-enum-types.{c,h} when make
+	  distclean. It is pointed by Dafydd Harries
+	  <daf@muse.19inch.net>. Thanks!
+
 2004-11-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: removed libgnomeprint from required packages. This

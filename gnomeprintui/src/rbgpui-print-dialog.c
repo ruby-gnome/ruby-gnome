@@ -33,7 +33,7 @@ gpui_dialog_new(VALUE self, VALUE job, VALUE title, VALUE flags)
   G_INITIALIZE(self, gnome_print_dialog_new(RVAL2GOBJ(job),
                                             RVAL2CSTR(title),
                                             RVAL2GPDF(flags)));
-  /* Is it good way??? */
+  /* XXX: Is it good way??? */
   g_object_ref(_SELF(self));
   return Qnil;
 }
