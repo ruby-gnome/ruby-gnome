@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: tkubo $
-  $Date: 2002/10/17 14:47:55 $
+  $Author: sakai $
+  $Date: 2002/10/19 18:34:15 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -143,14 +143,22 @@ rbgobj_register_property_setter(gtype, name, func)
     const char* name;
     RValueToGValueFunc func;
 {
+    GObjectClass* oclass;
+    GParamSpec* pspec;
+
     VALUE table = rb_hash_aref(type_to_prop_setter_table, INT2FIX(gtype));
     if (NIL_P(table)){
         table = rb_hash_new();
         rb_hash_aset(type_to_prop_setter_table, INT2FIX(gtype), table);
     }
 
-    rb_hash_aset(table, rb_str_new2(name),
+    oclass = g_type_class_ref(gtype);
+    pspec = g_object_class_find_property(oclass, name);
+    
+    rb_hash_aset(table, rb_intern(g_param_spec_get_name(pspec)),
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
+
+    g_type_class_unref(oclass);
 }
 
 void
@@ -159,13 +167,19 @@ rbgobj_register_property_getter(gtype, name, func)
     const char* name;
     GValueToRValueFunc func;
 {
+    GObjectClass* oclass;
+    GParamSpec* pspec;
+
     VALUE table = rb_hash_aref(type_to_prop_getter_table, INT2FIX(gtype));
     if (NIL_P(table)){
         table = rb_hash_new();
         rb_hash_aset(type_to_prop_getter_table, INT2FIX(gtype), table);
     }
 
-    rb_hash_aset(table, rb_str_new2(name),
+    oclass = g_type_class_ref(gtype);
+    pspec = g_object_class_find_property(oclass, name);
+
+    rb_hash_aset(table, rb_intern(g_param_spec_get_name(pspec)),
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
 }
 
@@ -197,7 +211,7 @@ gobj_set_property(self, prop_name, val)
             VALUE table = rb_hash_aref(type_to_prop_setter_table,
                                        INT2FIX(pspec->owner_type));
             if (!NIL_P(table)){
-                VALUE obj = rb_hash_aref(table, rb_str_new2(name));
+                VALUE obj = rb_hash_aref(table, rb_intern(g_param_spec_get_name(pspec)));
                 if (!NIL_P(obj))
                     Data_Get_Struct(obj, void, setter);
             }
@@ -244,7 +258,7 @@ gobj_get_property(self, prop_name)
             VALUE table = rb_hash_aref(type_to_prop_getter_table,
                                        INT2FIX(pspec->owner_type));
             if (!NIL_P(table)){
-                VALUE obj = rb_hash_aref(table, rb_str_new2(name));
+                VALUE obj = rb_hash_aref(table, rb_intern(g_param_spec_get_name(pspec)));
                 if (!NIL_P(obj))
                     Data_Get_Struct(obj, void, getter);
             }

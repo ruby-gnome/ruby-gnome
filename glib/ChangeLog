@@ -1,3 +1,8 @@
+2002-10-20  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: use canonical property name as hash key for the
+	hash for a special getter and setter of the property.
+
 2002-10-18  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c, src/rbgobj_valuetypes.c: use Hash#delete
