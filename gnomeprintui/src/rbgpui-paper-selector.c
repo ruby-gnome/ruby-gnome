@@ -20,7 +20,6 @@
 #include "libgnomeprintui-enum-types.h"
 
 #include <gtk/gtkwidget.h>
-#include <libgnomeprint/gnome-print-config.h>
 #include <libgnomeprintui/gnome-print-paper-selector.h>
 
 #define _SELF(self) (RVAL2GOBJ(self))

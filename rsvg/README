@@ -1,18 +1,20 @@
 Ruby/RSVG
 ==============
 
-Ruby/RSVG is a Ruby binding of librsvg2. 
+Ruby/RSVG is a Ruby binding of librsvg.
 
 Requirements
 ------------
 
     Ruby:               http://www.ruby-lang.org/
-    librsvg2:           http://www.gnome.org/
+    librsvg [*]:        http://librsvg.sourceforge.net/
+
+    [*]: 2.8 or later is requried.
 
 Install
 -------
 
-    0. install ruby and librsvg2. 
+    0. install ruby and librsvg.
     1. ruby extconf.rb
     2. make
     3. su

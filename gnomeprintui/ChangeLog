@@ -1,3 +1,7 @@
+2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* README: Fixed requirements.
+
 2004-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgpui-paper-selector.c, rbgpui-print-dialog.c: 
