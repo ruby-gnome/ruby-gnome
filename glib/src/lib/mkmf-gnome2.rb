@@ -142,7 +142,7 @@ $CPPFLAGS << " -I$(sitearchdir) "
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
 =begin
-  if /mswin32/ =~ PLATFORM
+  if /mswin32/ =~ RUBY_PLATFORM
     mfile.print <<END
 
 all:
