@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2003/06/22 18:00:24 $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -56,9 +56,6 @@ Init_gtk2()
 #else
     rb_rescue2(&require_minor, Qnil, NULL, Qnil, rb_eLoadError, NULL);
 #endif
-
-    gtk_set_locale();
-    setlocale(LC_NUMERIC, "C");
 
     /*
      * For Gtk::TreeModel, Gtk::TreeIter. 

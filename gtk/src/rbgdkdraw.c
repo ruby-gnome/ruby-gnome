@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,6 +14,9 @@
 
 #include "global.h"
 #include "rbpango.h"
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
 
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
@@ -300,6 +303,32 @@ gdkdraw_get_image(self, x, y, w, h)
                                             NUM2INT(w), NUM2INT(h)));
 }
 
+#ifdef GDK_WINDOWING_X11
+static VALUE
+gdkdraw_get_xid(self)
+    VALUE self;
+{
+    return ULONG2NUM(GDK_DRAWABLE_XID(_SELF(self)));
+}
+#endif
+
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+gdkdraw_get_display(self)
+	VALUE self;
+{
+	return GOBJ2RVAL(gdk_drawable_get_display(_SELF(self)));
+}
+
+static VALUE
+gdkdraw_get_screen(self)
+	VALUE self;
+{
+	return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
+}
+#endif
+
+
 void
 Init_gtk_gdk_draw()
 {
@@ -326,6 +355,14 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_drawable", gdkdraw_draw_drawable, 8);
     rb_define_method(gdkDrawable, "draw_image", gdkdraw_draw_image, 8);
     rb_define_method(gdkDrawable, "get_image", gdkdraw_get_image, 4);
+#ifdef GDK_WINDOWING_X11
+    rb_define_method(gdkDrawable, "xid", gdkdraw_get_xid, 0);
+#endif
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(gdkDrawable, "display", gdkdraw_get_display, 0);
+    rb_define_method(gdkDrawable, "screen", gdkdraw_get_screen, 0);
+#endif
     
     G_DEF_SETTERS(gdkDrawable);
 }
+

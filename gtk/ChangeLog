@@ -1,3 +1,18 @@
+2003-06-27  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* src/rbgdk.c: Gdk::pointer_grab, Gdk::keyboard_grab fixes.
+	Add Gdk.windowing_(x11|win32|fb)?
+	* src/rbgdkdisplay.c, src/rbgdkscreen.c: Added.
+	* src/rbgdkdraw.c: Add Gdk::Drawable#xid for X11 only.
+	Add Gdk::Drawable#screen, #display since GTK+-2.2.
+	* src/rbgtktreemodel.c: Change to using rb_yield() in Gtk::TreeStore#each.
+	* src/rbgdkevent.c: Fix for Gdk::EventProperty#atom to return 
+	Gdk::Atom instead of integer value.
+
+2003-06-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/init.c: Remove gtk_setlocale() as it'll call in glib2.
+
 2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/*.c: Use G_BLOCK_PROC instead of rb_f_lambda(). 

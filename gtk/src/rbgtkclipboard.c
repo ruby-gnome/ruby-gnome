@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -49,7 +49,6 @@ clipboard_get_display(self)
 }
 #endif
 
-/* XXX
 static void
 clipboard_get_func(clipboard, selection_data, info, func)
     GtkClipboard *clipboard;
@@ -59,22 +58,28 @@ clipboard_get_func(clipboard, selection_data, info, func)
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
 }
-*/
+
+static void
+clipboard_clear_func(clipboard, func)
+    GtkClipboard *clipboard;
+    gpointer func;
+{
+    rb_funcall((VALUE)func, id_call, 1, CLIPBOARD2RVAL(clipboard));
+}    
+
+static VALUE
+clipboard_set_with_data(self, targets, get_proc, clear_proc)
+    VALUE self, targets, get_proc, clear_proc;
+{
+    const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
+    return gtk_clipboard_set_with_data(_SELF(self), 
+                                       gtargets,
+                                       RARRAY(targets)->len,
+                                       (GtkClipboardGetFunc)clipboard_get_func,
+                                       (GtkClipboardClearFunc)clipboard_clear_func,
+                                       (gpointer)G_BLOCK_PROC()) ? Qtrue : Qfalse;
+}
 #if 0
-void        (*GtkClipboardGetFunc)          (GtkClipboard *clipboard,
-                                             GtkSelectionData *selection_data,
-                                             guint info,
-                                             gpointer user_data_or_owner);
-
-void        (*GtkClipboardClearFunc)        (GtkClipboard *clipboard,
-                                             gpointer user_data_or_owner);
-
-gboolean    gtk_clipboard_set_with_data     (GtkClipboard *clipboard,
-                                             const GtkTargetEntry *targets,
-                                             guint n_targets,
-                                             GtkClipboardGetFunc get_func,
-                                             GtkClipboardClearFunc clear_func,
-                                             gpointer user_data);
 gboolean    gtk_clipboard_set_with_owner    (GtkClipboard *clipboard,
                                              const GtkTargetEntry *targets,
                                              guint n_targets,
@@ -187,6 +192,7 @@ Init_gtk_clipboard()
 
     rb_define_method(gClipboard, "initialize", clipboard_initialize, -1);
     rb_define_method(gClipboard, "display", clipboard_get_display, 0);
+    rb_define_method(gClipboard, "set_with_data", clipboard_set_with_data, 3);
 
     rb_define_method(gClipboard, "owner", clipboard_get_owner, 0);
     rb_define_method(gClipboard, "clear", clipboard_clear, 0);

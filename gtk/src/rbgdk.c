@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -75,13 +75,12 @@ static VALUE
 gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time)
     VALUE self, win, owner_events, event_mask, confine_to, cursor, time;
 {
-    gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
+    return INT2NUM(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RTEST(owner_events),
                      NUM2INT(event_mask),
                      NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
-                     NIL_P(confine_to)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
-                     NUM2INT(time));
-    return self;
+                     NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
+                     NUM2INT(time)));
 }
 
 static VALUE
@@ -96,8 +95,7 @@ static VALUE
 gdk_s_keyboard_grab(self, win, owner_events, time)
     VALUE self, win, owner_events, time;
 {
-    gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), RTEST(owner_events), NUM2INT(time));
-    return self;
+    return INT2NUM(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), RTEST(owner_events), NUM2INT(time)));
 }
 
 static VALUE
@@ -138,6 +136,38 @@ void        gdk_set_use_xshm                (gboolean use_xshm);
 void        gdk_error_trap_push             (void);
 gint        gdk_error_trap_pop              (void);
 */
+static VALUE
+gdk_s_windowing_x11(self)
+    VALUE self;
+{
+#ifdef GDK_WINDOWING_X11
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
+gdk_s_windowing_win32(self)
+    VALUE self;
+{
+#ifdef GDK_WINDOWING_WIN32
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
+gdk_s_windowing_fb(self)
+    VALUE self;
+{
+#ifdef GDK_WINDOWING_FB
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
 
 void
 Init_gtk_gdk()
@@ -156,6 +186,17 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "keyboard_grab", gdk_s_keyboard_grab, 3);
     rb_define_module_function(mGdk, "keyboard_ungrab", gdk_s_keyboard_ungrab, 1);
     rb_define_module_function(mGdk, "pointer_is_grabbed?", gdk_s_pointer_is_grabbed, 0);
+    rb_define_module_function(mGdk, "windowing_x11?", gdk_s_windowing_x11, 0);
+    rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
+    rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);
+    
+	 /* GdkGrabStatus */
+    rb_define_const(mGdk, "GRAB_SUCCESS", INT2FIX(GDK_GRAB_SUCCESS));
+    rb_define_const(mGdk, "GRAB_ALREADY_GRABBED", INT2FIX(GDK_GRAB_ALREADY_GRABBED));
+    rb_define_const(mGdk, "GRAB_INVALID_TIME", INT2FIX(GDK_GRAB_INVALID_TIME));
+    rb_define_const(mGdk, "GRAB_NOT_VIEWABLE", INT2FIX(GDK_GRAB_NOT_VIEWABLE));
+    rb_define_const(mGdk, "GRAB_FROZEN", INT2FIX(GDK_GRAB_FROZEN));
 
     G_DEF_SETTERS(mGdk);
 }
+

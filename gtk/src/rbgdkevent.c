@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2003/03/19 18:50:59 $
+  $Author: mutoh $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -378,7 +378,7 @@ static VALUE
 gdkeventproperty_atom(self)
     VALUE self;
 {
-    return INT2NUM((int)(get_gdkevent(self)->property.atom));
+    return BOXED2RVAL((get_gdkevent(self)->property.atom), GDK_TYPE_ATOM);
 }
 
 static VALUE

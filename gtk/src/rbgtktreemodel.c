@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/07/01 14:43:20 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -89,19 +89,17 @@ treemodel_foreach_func(model, path, iter, func)
     gpointer func;
 {
     iter->user_data3 = model;
-    rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(model), 
-                            TREEPATH2RVAL(path), ITR2RVAL(iter));
-	 return FALSE;
+    rb_yield(rb_ary_new3(3, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter)));
+    return FALSE;
 }
 
 static VALUE
 treemodel_foreach(self)
     VALUE self;
 {
-    volatile VALUE func = G_BLOCK_PROC();
     gtk_tree_model_foreach(_SELF(self), 
                            (GtkTreeModelForeachFunc)treemodel_foreach_func, 
-                           (gpointer)func);
+                           (gpointer)NULL);
     return self;
 }
 
@@ -181,4 +179,5 @@ Init_gtk_treemodel()
 
     G_DEF_SETTERS(mTreeModel);
 }
+
 
