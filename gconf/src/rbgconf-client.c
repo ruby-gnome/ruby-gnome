@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/03/21 14:08:41 $
+ * $Date: 2004/04/07 17:22:29 $
  *
  *****************************************************************************/
 
@@ -131,7 +131,7 @@ client_notify_remove(self, cnxn_id)
 	VALUE self;
 	VALUE cnxn_id;
 {
-	gconf_client_notify_remove(_SELF(self), NUM2INT(cnxn_id));
+	gconf_client_notify_remove(_SELF(self), NUM2UINT(cnxn_id));
 	return self;
 }
 
