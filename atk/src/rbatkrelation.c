@@ -4,7 +4,7 @@
   rbatkrelation.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 18:12:33 $
+  $Date: 2003/12/08 16:32:09 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -77,6 +77,6 @@ Init_atk_relation()
     rb_define_method(rel, "target", rbatkrel_get_target, 0);
 
     /* AtkRelationType */
-    G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "RelationType", rel);
+    G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", rel);
     G_DEF_CONSTANTS(rel, ATK_TYPE_RELATION_TYPE, "ATK_");
 }

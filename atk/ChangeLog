@@ -1,3 +1,8 @@
+2003-12-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkstate.c, src/rbatkselection.c, 
+	src/rbatkrelationset.c: Added. 
+
 2003-12-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatknoopobjectfactory.c: Fix a wrong definition. 
