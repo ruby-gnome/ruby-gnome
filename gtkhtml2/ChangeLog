@@ -1,3 +1,7 @@
+2003-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkhtmlboxtabtablerow, src/rbgtkhtmlboxform.c: Added.
+
 2003-11-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: remove nasty hack.
