@@ -4,7 +4,7 @@
   rbgtklist.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/30 15:08:29 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,7 +43,7 @@ static VALUE
 list_selection(self)
     VALUE self;
 {
-    return glist2ary(GTK_LIST(RVAL2GOBJ(self))->selection);
+    return GLIST2ARY(GTK_LIST(RVAL2GOBJ(self))->selection);
 }
 
 static VALUE

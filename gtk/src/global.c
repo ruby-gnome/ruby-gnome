@@ -4,7 +4,7 @@
   global.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/30 15:08:29 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,20 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE
-glist2ary(list)
-    GList *list; 
-{
-    VALUE ary = rb_ary_new();
-
-    while (list) {
-		rb_ary_push(ary, GOBJ2RVAL(list->data));
-		list = list->next;
-    }
-
-    return ary;
-}
 
 GList*
 ary2glist(ary)
@@ -57,18 +43,3 @@ ary2gslist(ary)
 
     return glist;
 }
-
-VALUE
-gslist2ary(list)
-    GSList *list; 
-{
-    VALUE ary = rb_ary_new();
-
-    while (list) {
-		rb_ary_push(ary, GOBJ2RVAL(list->data));
-		list = list->next;
-    }
-
-    return ary;
-}
-

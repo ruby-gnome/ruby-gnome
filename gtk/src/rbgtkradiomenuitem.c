@@ -4,7 +4,7 @@
   rbgtkradiomenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/09/30 15:08:29 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -54,7 +54,7 @@ static VALUE
 rmitem_group(self)
     VALUE self;
 {
-    return gslist2ary(gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtkradiobutton.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/09/30 15:08:29 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,7 +53,7 @@ static VALUE
 rbtn_group(self)
     VALUE self;
 {
-    return gslist2ary(gtk_radio_button_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_button_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 
 void 
