@@ -50,7 +50,7 @@ class LabelSample < SampleWindow
       label.set_line_wrap(true)
     end
     create_frame_with_label("Underlined label",
-			    "This label is underlined!\nThis one is underlined in ÆüËÜ¸ì¤ÎÆþÍÑquite a funky fashion",
+			    "This label is underlined!\nThis one is underlined in æ—¥æœ¬èªžã®å…¥ç”¨quite a funky fashion",
 			    vbox) do |label|
       label.jtype = Gtk::JUSTIFY_LEFT
       label.set_pattern("_________________________ _ _________ _ _____ _ __ __  ___ ____ _____")

@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/01 05:05:08 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,6 +21,8 @@ VALUE mGtk;
 VALUE mEditable;
 
 VALUE gData;
+VALUE gAllocation;
+VALUE gRequisition;
 VALUE gSelectionData;
 
 #ifndef GTK_DISABLE_DEPRECATED

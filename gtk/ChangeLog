@@ -1,3 +1,9 @@
+2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtk.c: restore definition of gAllocation and gRequisition.
+	  (tentative?)
+	* sample/testgtk/labels.rb: convert encoding from euc-jp to utf-8
+
 2002-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtk.[ch]: Remove rbgtk_register_class().
