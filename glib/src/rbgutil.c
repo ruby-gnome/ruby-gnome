@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:50:32 $
+  $Date: 2004/03/23 18:22:06 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -22,11 +22,7 @@ VALUE
 rbgutil_gerror2exception(error)
     GError *error;
 {
-    gchar *msg = g_locale_from_utf8(error->message, -1, NULL, NULL, NULL);
-    VALUE exc = rb_exc_new2(rb_eRuntimeError, msg ? msg : error->message);
-
-    if (msg)
-        g_free(msg);
+    VALUE exc = rb_exc_new2(rb_eRuntimeError, error->message);
     g_error_free(error);
     return exc;
 }
