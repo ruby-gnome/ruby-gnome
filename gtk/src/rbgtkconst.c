@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/06 16:14:09 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -160,10 +160,10 @@ Init_gtk_const()
     rb_define_const(mGtk, "SCROLL_JUMP", INT2FIX(GTK_SCROLL_JUMP));
 
     /* GtkSelectionMode */
+    rb_define_const(mGtk, "SELECTION_NONE", INT2FIX(GTK_SELECTION_NONE));
     rb_define_const(mGtk, "SELECTION_SINGLE", INT2FIX(GTK_SELECTION_SINGLE));
     rb_define_const(mGtk, "SELECTION_BROWSE", INT2FIX(GTK_SELECTION_BROWSE));
     rb_define_const(mGtk, "SELECTION_MULTIPLE", INT2FIX(GTK_SELECTION_MULTIPLE));
-    rb_define_const(mGtk, "SELECTION_EXTENDED", INT2FIX(GTK_SELECTION_EXTENDED));
 
     /* GtkShadowType */
     rb_define_const(mGtk, "SHADOW_NONE", INT2FIX(GTK_SHADOW_NONE));
