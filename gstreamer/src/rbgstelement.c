@@ -881,6 +881,36 @@ rb_gst_element_set_index (VALUE self, VALUE index)
     return self;
 }
 
+/* 
+ * Method: scheduler
+ *
+ * Gets the scheduler of the element.
+ *
+ * Returns: a Gst::Scheduler, or nil if the element has no scheduler.
+ */
+static VALUE
+rb_gst_element_get_scheduler (VALUE self)
+{
+    GstScheduler *scheduler = gst_element_get_scheduler (RGST_ELEMENT (self))
+        return scheduler != NULL ? RGST_SCHEDULER_NEW (scheduler) : Qnil;
+}
+
+/*
+ * Method: set_scheduler(scheduler)
+ * scheduler: the Gst::Scheduler to set.
+ *
+ * Sets the scheduler of the element. For internal use only, unless you're 
+ * writing a new bin subclass.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_set_scheduler (VALUE self, VALUE scheduler)
+{
+    gst_element_set_scheduler (RGST_ELEMENT (self), RGST_SCHEDULER (scheduler));
+    return self;
+}
+
 void
 Init_gst_element (void)
 {
@@ -925,6 +955,8 @@ Init_gst_element (void)
     rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
     rb_define_method (c, "index", rb_gst_element_get_index, 0);
     rb_define_method (c, "set_index", rb_gst_element_set_index, 1);
+    rb_define_method (c, "scheduler", rb_gst_element_get_scheduler, 0);
+    rb_define_method (c, "set_scheduler", rb_gst_element_set_scheduler, 1);
 
     rb_define_method (c, "complex?", rb_gst_element_is_complex, 0);
     rb_define_method (c, "decoupled?", rb_gst_element_is_decoupled, 0);

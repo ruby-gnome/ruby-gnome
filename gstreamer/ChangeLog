@@ -1,3 +1,10 @@
+2004-08-01  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.c: Initializes Gst::Scheduler.
+	* src/rbgst.h: Added helper macros for Gst::Scheduler.
+	* src/rbgstelement.c (#scheduler, #set_scheduler): Added.
+	* src/rbgstscheduler.c: Added.
+
 2004-07-31  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Initializes Gst::Index and Gst::IndexEntry.
