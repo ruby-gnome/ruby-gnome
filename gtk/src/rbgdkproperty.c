@@ -4,7 +4,7 @@
   rbgdkproperty.c -
 
   $Author: mutoh $
-  $Date: 2003/10/15 17:53:23 $
+  $Date: 2004/02/14 17:16:13 $
 
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
@@ -149,7 +149,7 @@ gdkprop_get(argc, argv, self)
     /* for argument processing */
     GdkAtom     rtype;
     gint        rfmt, rlen;
-    void*	rdat;
+    guchar*	rdat;
     VALUE win, property, type, offset=INT2FIX(0), length=INT2FIX(9999), delete;
     
     /* for inner processing */
@@ -164,7 +164,7 @@ gdkprop_get(argc, argv, self)
     
     if(gdk_property_get(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), RVAL2ATOM(type),
                         NUM2INT(offset), NUM2INT(length),
-                        RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
+                        RTEST(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
         return Qnil;
     }
     

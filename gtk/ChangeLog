@@ -1,3 +1,7 @@
+2004-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkproperty.c: Fix a warning.
+
 2004-02-14  Vincent Isambart  <isambart@netcourrier.com>
 
 	* src/makedefconst.rb, extconf.rb: replaced PLATFORM with RUBY_PLATFORM.
