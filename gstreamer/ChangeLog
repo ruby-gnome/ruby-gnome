@@ -1,3 +1,10 @@
+2003-08-15  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* sample/xml-ogg-player.rb: New file.
+	* sample/media-type.rb: Fixed a bug when printing track length (needed 
+	  to divide with Gst::Second to have the correct number of seconds).
+	* src/rbgstmediainfo.c: Fixed integer conversion bug (now uses ULL).
+
 2003-08-14  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgstxml.c, tests/tc_xml.rb: New files.
