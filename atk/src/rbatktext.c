@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2004/10/19 13:33:43 $
+  $Date: 2005/01/29 11:42:15 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -169,6 +169,7 @@ rbatk_text_get_offset_at_point(self, x, y, coords)
 }
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+#ifdef HAVE_ATK_TEXT_CLIP_TYPE_GET_TYPE
 static VALUE
 rbatk_text_get_bounded_ranges(self, rect, coord_type, x_clip_type, y_clip_type)
     VALUE self, rect, coord_type, x_clip_type, y_clip_type;
@@ -189,6 +190,7 @@ rbatk_text_get_bounded_ranges(self, rect, coord_type, x_clip_type, y_clip_type)
     atk_text_free_ranges(ranges);
     return ary;
 }
+#endif
 
 static VALUE
 rbatk_text_get_range_extents(self, start_offset, end_offset, coord_type)

@@ -1,3 +1,7 @@
+2005-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Support MS VC++. Follow mkmf-gnome2.rb changes.
+
 2004-12-03  Vincent Isambart <isambart@netcourrier.com>
 
 	* extconf.rb: Corrected a little parse error (just removed an end of line).
