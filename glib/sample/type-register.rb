@@ -1,3 +1,15 @@
+=begin
+  type-register.rb - Sample for GLib::Object
+
+  You also need Ruby/GTK.
+
+  Copyright (C) 2004 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Date: 2004/04/30 14:18:01 $
+  $Id: type-register.rb,v 1.6 2004/04/30 14:18:01 mutoh Exp $
+=end
+
 require 'gtk2'
 Gtk.init
 

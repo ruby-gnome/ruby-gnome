@@ -1,5 +1,7 @@
 2004-04-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/utils.rb: Add a sample.
+	* src/rbglib_utils.c: Add/Modify some methods.
 	* src/lib/glib2.rb: Fix a bug which GLib.__add_one_arg_setter(klass) 
 	doen't work for module function and moved from src/rbgutil.c.
 
