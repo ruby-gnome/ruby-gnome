@@ -55,7 +55,7 @@ begin
     raise Interrupt if not FileTest.exist? "Makefile"
 
     mfile = File.open("Makefile", "a")
-    if /mswin32/ =~ PLATFORM
+    if /mswin32/ =~ RUBY_PLATFORM
       mfile.puts "	copy /Y  gnomecanvas2.lib .."
       mfile.puts
     end
