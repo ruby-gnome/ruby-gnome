@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/20 14:51:09 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1046,7 +1046,7 @@ ctree_node_set_foreground(self, node, color)
 {
     gtk_ctree_node_set_foreground(GTK_CTREE(RVAL2GOBJ(self)),
                                   RVAL2CTREENODE(node),
-                                  (GdkColor*)RVAL2COBJ("Gdk::Color", color));
+                                  (GdkColor*)RVAL2BOXED(color));
     return self;
 }
 
@@ -1059,7 +1059,7 @@ ctree_node_set_background(self, node, color)
 {
     gtk_ctree_node_set_background(GTK_CTREE(RVAL2GOBJ(self)),
                                   RVAL2CTREENODE(node),
-                                  (GdkColor*)RVAL2COBJ("Gdk::Color", color));
+                                  (GdkColor*)RVAL2BOXED(color));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/20 14:51:08 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -44,11 +44,11 @@ gdkwin_pointer_grab(self, owner_events, event_mask, confine_to, cursor, time)
     VALUE self, owner_events, event_mask, confine_to, cursor, time;
 {
     gdk_pointer_grab(_SELF(self),
-		     RTEST(owner_events),
-		     NUM2INT(event_mask),
-		     _SELF(confine_to),
-		     (GdkCursor*)RVAL2COBJ("Gdk::Cursor", cursor),
-		     NUM2INT(time));
+					 RTEST(owner_events),
+					 NUM2INT(event_mask),
+					 _SELF(confine_to),
+					 (GdkCursor*)RVAL2BOXED(cursor),
+					 NUM2INT(time));
     return self;
 }
 
@@ -72,8 +72,8 @@ gdkwin_keyboard_grab(self, owner_events, time)
     VALUE self, owner_events, time;
 {
     gdk_keyboard_grab(_SELF(self),
-		     RTEST(owner_events),
-		     NUM2INT(time));
+					  RTEST(owner_events),
+					  NUM2INT(time));
     return self;
 }
 
@@ -118,7 +118,7 @@ gdkwin_clear_area(self, x,y,w,h)
     VALUE self,x,y,w,h;
 {
     gdk_window_clear_area(_SELF(self),
-			  NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
+						  NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -137,7 +137,7 @@ gdkwin_clear_area_e(self, x,y,w,h)
     VALUE self,x,y,w,h;
 {
     gdk_window_clear_area_e(_SELF(self),
-			    NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
+							NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -146,7 +146,7 @@ gdkwin_set_background(self, color)
     VALUE self, color;
 {
     gdk_window_set_background(_SELF(self), 
-							  (GdkColor*)RVAL2COBJ("Gdk::Color", color));
+							  (GdkColor*)RVAL2BOXED(color));
     return self;
 }
 
@@ -165,7 +165,7 @@ gdkwin_move(self, x,y)
     VALUE self, x,y;
 {
     gdk_window_move(_SELF(self),
-		    NUM2INT(x), NUM2INT(y));
+					NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -233,7 +233,7 @@ gdkwin_set_static_gravities(self, use_static)
     VALUE self, use_static;
 {
 	return (gdk_window_set_static_gravities(_SELF(self),
-						NUM2INT(use_static))) ? Qtrue : Qfalse;
+											NUM2INT(use_static))) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -268,7 +268,7 @@ gdkwin_resize(self, w,h)
     VALUE self, w,h;
 {
     gdk_window_resize(_SELF(self),
-		      NUM2INT(w), NUM2INT(h));
+					  NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -277,7 +277,7 @@ gdkwin_move_resize(self, x,y,w,h)
     VALUE self, x,y,w,h;
 {
     gdk_window_move_resize(_SELF(self),
-			   NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
+						   NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -285,7 +285,7 @@ static VALUE
 gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
 {
-    gdk_window_set_cursor(_SELF(self), (GdkCursor*)RVAL2COBJ("Gdk::Cursor", cursor));
+    gdk_window_set_cursor(_SELF(self), (GdkCursor*)RVAL2BOXED(cursor));
     return self;
 }
 
@@ -352,7 +352,7 @@ gdkwin_reparent(self, new_parent, x, y)
     VALUE self, new_parent, x, y;
 {
     gdk_window_reparent(_SELF(self), _SELF(new_parent),
-			NUM2INT(x), NUM2INT(y));
+						NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -363,7 +363,7 @@ gdkwin_get_geometry(self)
     gint x, y, w, h, d;
     gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h, &d);
     return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
-		       INT2NUM(w), INT2NUM(h), INT2NUM(d));
+					   INT2NUM(w), INT2NUM(h), INT2NUM(d));
 }
 
 static VALUE
@@ -499,137 +499,137 @@ static VALUE
 gdkwin_prop_change(self, property, type, mode, src)
     VALUE self, property, type, mode, src;
 {
-  int        fmt, len, i;
+	int        fmt, len, i;
 /*  Atom       atom; */
-  void*      dat;
-  GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
-  GdkAtom    otype, ntype;
+	void*      dat;
+	GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
+	GdkAtom    otype, ntype;
 
-  otype = ntype = get_gdkatom(type);
+	otype = ntype = get_gdkatom(type);
 
 /* They are not available in Ruby/GTK 2
-  if(ntype == GDK_SELECTION_TYPE_ATOM){
-    len = RARRAY(src)->len;
+   if(ntype == GDK_SELECTION_TYPE_ATOM){
+   len = RARRAY(src)->len;
 
-    dat = (Atom*)ALLOC_N(Atom, len);
+   dat = (Atom*)ALLOC_N(Atom, len);
 
-    for(i = 0; i < len; i++){
-        ((Atom*)dat)[i] = get_gdkatom(rb_ary_entry(src, i));
-    }
-    fmt = 32;
+   for(i = 0; i < len; i++){
+   ((Atom*)dat)[i] = get_gdkatom(rb_ary_entry(src, i));
+   }
+   fmt = 32;
 
-  } else if(ntype == GDK_SELECTION_TYPE_BITMAP){
-    dat = (void*)&(((GdkPixmapPrivate*)GDK_BITMAP(RVAL2GOBJ(src)))->xwindow);
-    fmt = 32;
-    len = 1;  
-  } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
-    dat = (void*)&(((GdkColormapPrivate*)GDK_COLORMAP(RVAL2GOBJ(src)))->xcolormap);
-    fmt = 32;
-    len = 1;
-  } else if(ntype == GDK_SELECTION_TYPE_INTEGER){
+   } else if(ntype == GDK_SELECTION_TYPE_BITMAP){
+   dat = (void*)&(((GdkPixmapPrivate*)GDK_BITMAP(RVAL2GOBJ(src)))->xwindow);
+   fmt = 32;
+   len = 1;  
+   } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
+   dat = (void*)&(((GdkColormapPrivate*)GDK_COLORMAP(RVAL2GOBJ(src)))->xcolormap);
+   fmt = 32;
+   len = 1;
+   } else if(ntype == GDK_SELECTION_TYPE_INTEGER){
 */
-  if(ntype == GDK_SELECTION_TYPE_INTEGER){
-    i = NUM2INT(src);
-    dat = (void*)&i;
-    fmt = 32;
-    len = 1;
+	if(ntype == GDK_SELECTION_TYPE_INTEGER){
+		i = NUM2INT(src);
+		dat = (void*)&i;
+		fmt = 32;
+		len = 1;
 /*
   } else if(ntype == GDK_SELECTION_TYPE_PIXMAP){
-    dat = (void*)&(((GdkPixmapPrivate*)GDK_PIXMAP(RVAL2GOBJ(src)))->xwindow);
-    fmt = 32;
-    len = 1;
+  dat = (void*)&(((GdkPixmapPrivate*)GDK_PIXMAP(RVAL2GOBJ(src)))->xwindow);
+  fmt = 32;
+  len = 1;
   
   } else if(ntype == GDK_SELECTION_TYPE_WINDOW||
-	     ntype == GDK_SELECTION_TYPE_DRAWABLE){
-    dat = (void*)&(((GdkPixmapPrivate*)_SELF(src))->xwindow);
-    fmt = 32;
-    len = 1;
+  ntype == GDK_SELECTION_TYPE_DRAWABLE){
+  dat = (void*)&(((GdkPixmapPrivate*)_SELF(src))->xwindow);
+  fmt = 32;
+  len = 1;
 */
-  } else if(ntype == GDK_SELECTION_TYPE_STRING) {
-    dat = RSTRING(src)->ptr;
-    fmt = 8;
-    len = RSTRING(src)->len;
+	} else if(ntype == GDK_SELECTION_TYPE_STRING) {
+		dat = RSTRING(src)->ptr;
+		fmt = 8;
+		len = RSTRING(src)->len;
 
-  } else if(ntype == compound_text){
-	  gdk_string_to_compound_text(RSTRING(src)->ptr,
-				&ntype, &fmt, (guchar**)&dat, &len);
+	} else if(ntype == compound_text){
+		gdk_string_to_compound_text(RSTRING(src)->ptr,
+									&ntype, &fmt, (guchar**)&dat, &len);
 
-  } else {
-	  rb_raise(rb_eArgError, "no supperted type.");
-  }
+	} else {
+		rb_raise(rb_eArgError, "no supperted type.");
+	}
 
-  gdk_property_change(_SELF(self),
-		 get_gdkatom(property), ntype, fmt, NUM2INT(mode), dat, len);
+	gdk_property_change(_SELF(self),
+						get_gdkatom(property), ntype, fmt, NUM2INT(mode), dat, len);
 
-  if(otype == GDK_SELECTION_TYPE_ATOM) {
-	  xfree(dat);
-  } else if(otype == compound_text) {
-	  gdk_free_compound_text(dat);
-  }
+	if(otype == GDK_SELECTION_TYPE_ATOM) {
+		xfree(dat);
+	} else if(otype == compound_text) {
+		gdk_free_compound_text(dat);
+	}
 
-  return self;
+	return self;
 }
 
 static VALUE
 gdkwin_prop_get(self, property, type, offset, length, delete)
     VALUE self, property, type, offset, length, delete;
 {
-  /* for argument processing */
-  GdkAtom       rtype;
-  gint          rfmt, rlen;
-  void*		rdat;
+	/* for argument processing */
+	GdkAtom       rtype;
+	gint          rfmt, rlen;
+	void*		rdat;
 
-  /* for inner processing */
-  int		i;
-  VALUE		ret = 0;
+	/* for inner processing */
+	int		i;
+	VALUE		ret = 0;
 
-  if(gdk_property_get(_SELF(self), get_gdkatom(property),
-       get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
-       RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
-    return Qnil;
-  }
+	if(gdk_property_get(_SELF(self), get_gdkatom(property),
+						get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
+						RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
+		return Qnil;
+	}
 
-  switch(rfmt){
-  case 8:
-  default:
-    ret = rb_str_new(rdat, rlen);
-    break;
+	switch(rfmt){
+	  case 8:
+	  default:
+		ret = rb_str_new(rdat, rlen);
+		break;
 
-  case 16:
-    ret = rb_ary_new();
+	  case 16:
+		ret = rb_ary_new();
 
-    for( i = 0; i < rlen; i++){
-        rb_ary_push(ret, rb_Integer(((unsigned short*)rdat)[i]));
-    }
-    break;
+		for( i = 0; i < rlen; i++){
+			rb_ary_push(ret, rb_Integer(((unsigned short*)rdat)[i]));
+		}
+		break;
 
-  case 32:
+	  case 32:
 /*
-    ret = rb_ary_new();
+  ret = rb_ary_new();
 
-    if(rtype != GDK_SELECTION_TYPE_ATOM){
-        for(i = 0; i < rlen; i++){
-            rb_ary_push(ret, INT2FIX(((unsigned long *)rdat)[i]));
-        }
-    } else {
-        for(i = 0; i < rlen; i++){
-            rb_ary_push(ret, make_gdkatom((GdkAtom)(unsigned long *)rdat[i]));
-        }
-    }
-*/
-	rb_warning("not implemented yet.");
-    break;
+  if(rtype != GDK_SELECTION_TYPE_ATOM){
+  for(i = 0; i < rlen; i++){
+  rb_ary_push(ret, INT2FIX(((unsigned long *)rdat)[i]));
   }
+  } else {
+  for(i = 0; i < rlen; i++){
+  rb_ary_push(ret, make_gdkatom((GdkAtom)(unsigned long *)rdat[i]));
+  }
+  }
+*/
+		rb_warning("not implemented yet.");
+		break;
+	}
 
-  return rb_ary_new3(3, make_gdkatom(rtype), ret, rb_Integer(rlen));
+	return rb_ary_new3(3, make_gdkatom(rtype), ret, rb_Integer(rlen));
 }
 
 static VALUE
 gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
-  gdk_property_delete(_SELF(self), get_gdkatom(property));
-  return self;
+	gdk_property_delete(_SELF(self), get_gdkatom(property));
+	return self;
 }
 
 void
@@ -848,7 +848,7 @@ geo_max_aspect(self)
 
 static VALUE
 geo_set(self, min_width, min_height, max_width,	max_height,
-	base_width, base_height, width_inc, height_inc,	min_aspect, max_aspect)
+		base_width, base_height, width_inc, height_inc,	min_aspect, max_aspect)
     VALUE self,
     min_width, min_height, max_width, max_height,
     base_width, base_height, width_inc, height_inc,

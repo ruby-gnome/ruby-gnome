@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/20 14:51:08 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,19 +13,13 @@
 
 #include "global.h"
 
-#define _SELF(c) ((GdkColor*)RVAL2COBJ("Gdk::Color", c))
+#define _SELF(c) ((GdkColor*)RVAL2BOXED(c))
 
 static VALUE
-gdkcolor_s_allocate(self)
-	VALUE self;
+gdkcolor_s_allocate(klass)
+	VALUE klass;
 {
-	GdkColor c;
-	c.pixel = 0;
-	c.red = 0;
-	c.green = 0;
-	c.blue = 0;
-
-	return COBJ2RVAL("Gdk::Color", &c);
+	return rbgobj_create_object(klass);
 }
 #ifdef HAVE_OBJECT_ALLOCATE
 #define gdkcolor_s_new rb_class_new_instance
@@ -49,16 +43,16 @@ gdkcolor_initialize(argc, argv, self)
     VALUE self;
 {
 	int red, green, blue;
-	GdkColor *c = DATA_PTR(self);
+	GdkColor c;
 
 	rb_scan_args(argc, argv, "30", &red, &green, &blue);
 
-    c->pixel = 0;
-    c->red = NUM2INT(red);
-    c->green = NUM2INT(green);
-    c->blue = NUM2INT(blue);
+    c.pixel = 0;
+    c.red = NUM2INT(red);
+    c.green = NUM2INT(green);
+    c.blue = NUM2INT(blue);
 
-	return self;
+	RBGOBJ_INITIALIZE(self, &c);
 }
 
 static VALUE
@@ -70,7 +64,7 @@ gdkcolor_s_parse(self, name)
     if (! gdk_color_parse(STR2CSTR(name), &c)) {
         rb_raise(rb_eArgError, "can't parse color name `%s'", STR2CSTR(name));
     }
-    return COBJ2RVAL("Gdk::Color", &c);
+    return BOXED2RVAL(&c, GDK_TYPE_COLOR);
 }
 
 static VALUE
@@ -148,8 +142,7 @@ gdkcolor_equal(self, other)
 void
 Init_gtk_gdk_color()
 {
-	VALUE gdkColor = RB_DEF_CLASS2("Color", mGdk, "Data", GdkColor, 0, 
-								   gdk_color_copy, gdk_color_free);
+	VALUE gdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
     rb_define_singleton_method(gdkColor, "allocate", gdkcolor_s_allocate, 0);
 #ifndef HAVE_OBJECT_ALLOCATE

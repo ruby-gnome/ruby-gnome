@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/20 14:51:08 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
@@ -12,11 +12,10 @@
 #include "global.h"
 
 static VALUE
-gdkcursor_s_allocate(self)
-	VALUE self;
+gdkcursor_s_allocate(klass)
+	VALUE klass;
 {
-	GdkCursor c;
-	return COBJ2RVAL("Gdk::Cursor", &c);
+	return rbgobj_create_object(klass);
 }
 
 #ifdef HAVE_OBJECT_ALLOCATE
@@ -40,8 +39,8 @@ gdkcursor_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
+	GdkCursor* cursor;
     VALUE source_or_type, mask, fg, bg, x, y;
-    GdkCursor *cursor = DATA_PTR(self);
 
     rb_scan_args(argc, argv, "15", &source_or_type, &mask, &fg, &bg, &x, &y);
     if (argc == 1){
@@ -49,29 +48,20 @@ gdkcursor_initialize(argc, argv, self)
     } else {
 		cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(source_or_type)), 
 		  		   		NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
-		   		 		NIL_P(fg)?NULL:(GdkColor*)RVAL2COBJ("Gdk::Color",fg), 
-		  	   			NIL_P(bg)?NULL:(GdkColor*)RVAL2COBJ("Gdk::Color",bg), 
+		   		 		NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg), 
+		  	   			NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg), 
 		   				NUM2INT(x), NUM2INT(y));
     }
-	DATA_PTR(self) = cursor;
-	return self;
-}
 
-static void*
-gdkcursor_alloc(cobj)
-	void* cobj;
-{
-	GdkCursor* c = xmalloc(sizeof(GdkCursor));
-	gdk_cursor_ref((GdkCursor*)cobj);
-	memcpy(c, cobj, sizeof(GdkCursor));
-	return c;
+	RBGOBJ_INITIALIZE(self, cursor);
+
+	return self;
 }
 
 void
 Init_gtk_gdk_cursor()
 {
-    VALUE gdkCursor = RB_DEF_CLASS2("Cursor", mGdk, "Data", GdkCursor, 0, 
-									gdkcursor_alloc, gdk_cursor_unref);
+	VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
 	rb_define_singleton_method(gdkCursor, "allocate", gdkcursor_s_allocate, 0);
 #ifndef HAVE_OBJECT_ALLOCATE

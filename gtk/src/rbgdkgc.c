@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/20 14:51:08 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -54,7 +54,7 @@ static VALUE
 gdkgc_set_foreground(self, color)
 	VALUE self, color;
 {
-	gdk_gc_set_foreground(_SELF(self), (GdkColor*)RVAL2COBJ("Gdk::Color", color));
+	gdk_gc_set_foreground(_SELF(self), (GdkColor*)RVAL2BOXED(color));
 	return self;
 }
 
@@ -62,7 +62,7 @@ static VALUE
 gdkgc_set_background(self, color)
 	VALUE self, color;
 {
-	gdk_gc_set_background(_SELF(self), (GdkColor*)RVAL2COBJ("Gdk::Color",color));
+	gdk_gc_set_background(_SELF(self), (GdkColor*)RVAL2BOXED(color));
 	return self;
 }
 
