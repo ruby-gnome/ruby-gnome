@@ -261,8 +261,6 @@ void Init_gst_mediatype(void) {
     rb_define_method(c, "format", track_format, 0);
     rb_define_method(c, "length_time", track_length_time, 0);
     rb_define_method(c, "con_stream", track_con_stream, 0);
-
-    rb_warn("done");
 }
 
 #endif /* HAVE_MEDIA_INFO */
