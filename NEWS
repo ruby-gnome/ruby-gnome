@@ -91,7 +91,7 @@ Ruby-GNOME2-0.10.0 (2004-08-07)
         Gda::Export
 
   * Ruby/PanelApplet [NEW]
-      - Added. [Masao Mutoh]
+      - Added. [Jamis Buck, Masao Mutoh]
 
   * Ruby/GtkSourceView [NEW]
      - Added. [Laurent Sansonetti]

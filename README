@@ -29,7 +29,7 @@ Release packages
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
     - Ruby/Libgda        - libgda 1.0.3 or later
     - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
-    - Ruby/PanelApplet   - gnome-panel 2.4.0 or later
+    - Ruby/PanelApplet   - gnome-panel 2.6.0 or later
 
 Install
 -------
