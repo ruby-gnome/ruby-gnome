@@ -4,7 +4,7 @@
   rbgdkrectangle.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/15 15:42:00 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -112,9 +112,11 @@ Init_gtk_gdk_rectangle()
     rb_define_method(gdkRectangle, "y", gdkrect_y, 0);
     rb_define_method(gdkRectangle, "width", gdkrect_w, 0);
     rb_define_method(gdkRectangle, "height", gdkrect_h, 0);
-    rb_define_method(gdkRectangle, "x=", gdkrect_set_x, 1);
-    rb_define_method(gdkRectangle, "y=", gdkrect_set_y, 1);
-    rb_define_method(gdkRectangle, "width=", gdkrect_set_w, 1);
-    rb_define_method(gdkRectangle, "height=", gdkrect_set_h, 1);
+    rb_define_method(gdkRectangle, "set_x", gdkrect_set_x, 1);
+    rb_define_method(gdkRectangle, "set_y", gdkrect_set_y, 1);
+    rb_define_method(gdkRectangle, "set_width", gdkrect_set_w, 1);
+    rb_define_method(gdkRectangle, "set_height", gdkrect_set_h, 1);
     rb_define_method(gdkRectangle, "to_a", gdkrect_to_a, 0);
+
+    G_DEF_SETTERS(gdkRectangle);
 }

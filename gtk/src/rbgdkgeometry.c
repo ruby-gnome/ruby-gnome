@@ -4,7 +4,7 @@
   rbgdkgeometry.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/15 15:42:00 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -247,5 +247,7 @@ Init_gtk_gdk_geometry()
     rb_define_method(gdkGeometry, "set_height_inc", geo_set_height_inc, 1);
     rb_define_method(gdkGeometry, "set_min_aspect", geo_set_min_aspect, 1);
     rb_define_method(gdkGeometry, "set_max_aspect", geo_set_max_aspect, 1);
+
+    G_DEF_SETTERS(gdkGeometry);
 
 }

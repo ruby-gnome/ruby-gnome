@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/15 15:42:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -46,7 +46,7 @@ gdkregion_get_clipbox(self)
 }
 
 static VALUE
-gdkregion_empty_p(self)
+gdkregion_empty(self)
     VALUE self;
 {
     return gdk_region_empty(_SELF(self)) ? Qtrue : Qfalse;
@@ -59,8 +59,7 @@ gdkregion_equal(self, obj)
     if (!rb_obj_is_instance_of(obj, GTYPE2CLASS(GDK_TYPE_REGION))) {
         return Qnil;
     }
-    return gdk_region_equal(_SELF(self),
-                            _SELF(obj)) ? Qtrue : Qfalse;
+    return gdk_region_equal(_SELF(self), _SELF(obj)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -145,7 +144,7 @@ Init_gtk_gdk_region()
 
     rb_define_method(gdkRegion, "initialize", gdkregion_initialize, 0);
     rb_define_method(gdkRegion, "clipbox", gdkregion_get_clipbox, 0);
-    rb_define_method(gdkRegion, "empty?", gdkregion_empty_p, 0);
+    rb_define_method(gdkRegion, "empty?", gdkregion_empty, 0);
     rb_define_method(gdkRegion, "==", gdkregion_equal, 1);
     rb_define_method(gdkRegion, "eql?", gdkregion_equal, 1);
     rb_define_method(gdkRegion, "point_in?", gdkregion_point_in, 2);
@@ -161,11 +160,13 @@ Init_gtk_gdk_region()
     rb_define_method(gdkRegion, "-", gdkregion_subtract, 1);
     rb_define_method(gdkRegion, "xor", gdkregion_xor, 1);
 
-    /* constants */
-    rb_define_const(mGdk, "OVERLAP_RECTANGLE_IN",
-                    INT2NUM(GDK_OVERLAP_RECTANGLE_IN));
-    rb_define_const(mGdk, "OVERLAP_RECTANGLE_OUT",
-                    INT2NUM(GDK_OVERLAP_RECTANGLE_OUT));
-    rb_define_const(mGdk, "OVERLAP_RECTANGLE_PART",
-                    INT2NUM(GDK_OVERLAP_RECTANGLE_PART));
+    /* GdkOverlapType */
+    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_IN", INT2FIX(GDK_OVERLAP_RECTANGLE_IN));
+    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_OUT", INT2FIX(GDK_OVERLAP_RECTANGLE_OUT));
+    rb_define_const(gdkRegion, "OVERLAP_RECTANGLE_PART", INT2FIX(GDK_OVERLAP_RECTANGLE_PART));
+
+    /* GdkFillRule */
+    rb_define_const(gdkRegion, "EVEN_ODD_RULE", INT2FIX(GDK_EVEN_ODD_RULE));
+    rb_define_const(gdkRegion, "WINDING_RULE", INT2FIX(GDK_WINDING_RULE));
+
 }

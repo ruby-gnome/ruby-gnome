@@ -1,3 +1,15 @@
+2002-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkkeyval.c: Gdk::Keyval#to_name -> Gdk::Keyval#name. 
+	* src/rbgdkgc.c, src/rbgdkconst.c: Some constants were moved from rbgdkconst.c. Apply G_DEF_SETTERS. 
+	Some fixes.
+	* src/rbgdkgeometry.c: Apply G_DEF_SETTERS.
+	* src/rbgdkimage.c, src/rbgdkconst.c: Remove Gdk::Image.get, Gdk::Image.new_bitmap.  
+	Some constants were moved from rbgdkconst.c. 
+	* src/rbgdkrectangle.c: Apply G_DEF_SETTERS. 
+	* src/rbgdkregion.c, src/rbgdkconst.c: Some constants were moved from rbgdkconst.c. 
+	* src/rbgdkvisual.c, src/rbgdkconst.c:  Some constants were moved from rbgdkconst.c.
+
 2002-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkconst.c, src/rbgdkevent.c: Implement constants. Some constants were moved from rbgdkconst.c.

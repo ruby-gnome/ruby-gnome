@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/10/14 17:24:14 $
+  $Date: 2002/10/15 15:41:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -36,11 +36,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "INPUT_OUTPUT", INT2FIX(GDK_INPUT_OUTPUT));
     rb_define_const(mGdk, "INPUT_ONLY", INT2FIX(GDK_INPUT_ONLY));
 
-    /* GdkImageType */
-    rb_define_const(mGdk, "IMAGE_NORMAL", INT2FIX(GDK_IMAGE_NORMAL));
-    rb_define_const(mGdk, "IMAGE_SHARED", INT2FIX(GDK_IMAGE_SHARED));
-    rb_define_const(mGdk, "IMAGE_FASTEST", INT2FIX(GDK_IMAGE_FASTEST));
-
     /* GdkVisualType */
     rb_define_const(mGdk, "VISUAL_STATIC_GRAY", INT2FIX(GDK_VISUAL_STATIC_GRAY));
     rb_define_const(mGdk, "VISUAL_GRAYSCALE", INT2FIX(GDK_VISUAL_GRAYSCALE));
@@ -63,49 +58,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "WA_WMCLASS", INT2FIX(GDK_WA_WMCLASS));
     rb_define_const(mGdk, "WA_NOREDIR", INT2FIX(GDK_WA_NOREDIR));
 
-    /* GdkFunction */
-    rb_define_const(mGdk, "COPY", INT2FIX(GDK_COPY));
-    rb_define_const(mGdk, "INVERT", INT2FIX(GDK_INVERT));
-    rb_define_const(mGdk, "XOR", INT2FIX(GDK_XOR));
-    rb_define_const(mGdk, "CLEAR", INT2FIX(GDK_CLEAR));
-    rb_define_const(mGdk, "AND", INT2FIX(GDK_AND));
-    rb_define_const(mGdk, "AND_REVERSE", INT2FIX(GDK_AND_REVERSE));
-    rb_define_const(mGdk, "AND_INVERT", INT2FIX(GDK_AND_INVERT));
-    rb_define_const(mGdk, "NOOP", INT2FIX(GDK_NOOP));
-    rb_define_const(mGdk, "OR", INT2FIX(GDK_OR));
-    rb_define_const(mGdk, "EQUIV", INT2FIX(GDK_EQUIV));
-    rb_define_const(mGdk, "OR_REVERSE", INT2FIX(GDK_OR_REVERSE));
-    rb_define_const(mGdk, "COPY_INVERT", INT2FIX(GDK_COPY_INVERT));
-    rb_define_const(mGdk, "OR_INVERT", INT2FIX(GDK_OR_INVERT));
-    rb_define_const(mGdk, "NAND", INT2FIX(GDK_NAND));
-    rb_define_const(mGdk, "SET", INT2FIX(GDK_SET));
-
-    /* GdkFill */
-    rb_define_const(mGdk, "SOLID", INT2FIX(GDK_SOLID));
-    rb_define_const(mGdk, "TILED", INT2FIX(GDK_TILED));
-    rb_define_const(mGdk, "STIPPLED", INT2FIX(GDK_STIPPLED));
-    rb_define_const(mGdk, "OPAQUE_STIPPLED", INT2FIX(GDK_OPAQUE_STIPPLED));
-
-    /* GdkFillRule */
-    rb_define_const(mGdk, "EVEN_ODD_RULE", INT2FIX(GDK_EVEN_ODD_RULE));
-    rb_define_const(mGdk, "WINDING_RULE", INT2FIX(GDK_WINDING_RULE));
-
-    /* GdkLineStyle */
-    rb_define_const(mGdk, "LINE_SOLID", INT2FIX(GDK_LINE_SOLID));
-    rb_define_const(mGdk, "LINE_ON_OFF_DASH", INT2FIX(GDK_LINE_ON_OFF_DASH));
-    rb_define_const(mGdk, "LINE_DOUBLE_DASH", INT2FIX(GDK_LINE_DOUBLE_DASH));
-
-    /* GdkCapStyle */
-    rb_define_const(mGdk, "CAP_NOT_LAST", INT2FIX(GDK_CAP_NOT_LAST));
-    rb_define_const(mGdk, "CAP_BUTT", INT2FIX(GDK_CAP_BUTT));
-    rb_define_const(mGdk, "CAP_ROUND", INT2FIX(GDK_CAP_ROUND));
-    rb_define_const(mGdk, "CAP_PROJECTING", INT2FIX(GDK_CAP_PROJECTING));
-
-    /* GdkJoinStyle */
-    rb_define_const(mGdk, "JOIN_MITER", INT2FIX(GDK_JOIN_MITER));
-    rb_define_const(mGdk, "JOIN_ROUND", INT2FIX(GDK_JOIN_ROUND));
-    rb_define_const(mGdk, "JOIN_BEVEL", INT2FIX(GDK_JOIN_BEVEL));
-
     /* GdkFilterReturn */
     rb_define_const(mGdk, "FILTER_CONTINUE", INT2FIX(GDK_FILTER_CONTINUE));
     rb_define_const(mGdk, "FILTER_TRANSLATE", INT2FIX(GDK_FILTER_TRANSLATE));
@@ -126,10 +78,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "BUTTON4_MASK", INT2FIX(GDK_BUTTON4_MASK));
     rb_define_const(mGdk, "BUTTON5_MASK", INT2FIX(GDK_BUTTON5_MASK));
 
-    /* GdkSubwindowMode */
-    rb_define_const(mGdk, "CLIP_BY_CHILDREN", INT2FIX(GDK_CLIP_BY_CHILDREN));
-    rb_define_const(mGdk, "INCLUDE_INFERIORS", INT2FIX(GDK_INCLUDE_INFERIORS));
-
     /* GdkInputCondition */
     rb_define_const(mGdk, "INPUT_READ", INT2FIX(GDK_INPUT_READ));
     rb_define_const(mGdk, "INPUT_WRITE", INT2FIX(GDK_INPUT_WRITE));
@@ -141,30 +89,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "ERROR_PARAM", INT2FIX(GDK_ERROR_PARAM));
     rb_define_const(mGdk, "ERROR_FILE", INT2FIX(GDK_ERROR_FILE));
     rb_define_const(mGdk, "ERROR_MEM", INT2FIX(GDK_ERROR_MEM));
-
-    /* GdkByteOrder */
-    rb_define_const(mGdk, "LSB_FIRST", INT2FIX(GDK_LSB_FIRST));
-    rb_define_const(mGdk, "MSB_FIRST", INT2FIX(GDK_MSB_FIRST));
-
-    /* GdkGCValuesMask */
-    rb_define_const(mGdk, "GC_FOREGROUND", INT2FIX(GDK_GC_FOREGROUND));
-    rb_define_const(mGdk, "GC_BACKGROUND", INT2FIX(GDK_GC_BACKGROUND));
-    rb_define_const(mGdk, "GC_FONT", INT2FIX(GDK_GC_FONT));
-    rb_define_const(mGdk, "GC_FUNCTION", INT2FIX(GDK_GC_FUNCTION));
-    rb_define_const(mGdk, "GC_FILL", INT2FIX(GDK_GC_FILL));
-    rb_define_const(mGdk, "GC_TILE", INT2FIX(GDK_GC_TILE));
-    rb_define_const(mGdk, "GC_STIPPLE", INT2FIX(GDK_GC_STIPPLE));
-    rb_define_const(mGdk, "GC_CLIP_MASK", INT2FIX(GDK_GC_CLIP_MASK));
-    rb_define_const(mGdk, "GC_SUBWINDOW", INT2FIX(GDK_GC_SUBWINDOW));
-    rb_define_const(mGdk, "GC_TS_X_ORIGIN", INT2FIX(GDK_GC_TS_X_ORIGIN));
-    rb_define_const(mGdk, "GC_TS_Y_ORIGIN", INT2FIX(GDK_GC_TS_Y_ORIGIN));
-    rb_define_const(mGdk, "GC_CLIP_X_ORIGIN", INT2FIX(GDK_GC_CLIP_X_ORIGIN));
-    rb_define_const(mGdk, "GC_CLIP_Y_ORIGIN", INT2FIX(GDK_GC_CLIP_Y_ORIGIN));
-    rb_define_const(mGdk, "GC_EXPOSURES", INT2FIX(GDK_GC_EXPOSURES));
-    rb_define_const(mGdk, "GC_LINE_WIDTH", INT2FIX(GDK_GC_LINE_WIDTH));
-    rb_define_const(mGdk, "GC_LINE_STYLE", INT2FIX(GDK_GC_LINE_STYLE));
-    rb_define_const(mGdk, "GC_CAP_STYLE", INT2FIX(GDK_GC_CAP_STYLE));
-    rb_define_const(mGdk, "GC_JOIN_STYLE", INT2FIX(GDK_GC_JOIN_STYLE));
 
     /* GdkPropMode */
     rb_define_const(mGdk, "PROP_MODE_REPLACE", INT2FIX(GDK_PROP_MODE_REPLACE));

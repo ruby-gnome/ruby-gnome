@@ -4,7 +4,7 @@
   rbgdkvisual.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/15 15:42:00 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -222,37 +222,17 @@ Init_gtk_gdk_visual()
 {
     VALUE gdkVisual = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
 
-    /* GdkVisualType */
-    rb_define_const(gdkVisual, "STATIC_GRAY", INT2FIX(GDK_VISUAL_STATIC_GRAY));
-    rb_define_const(gdkVisual, "GRAYSCALE", INT2FIX(GDK_VISUAL_GRAYSCALE));
-    rb_define_const(gdkVisual, "STATIC_COLOR", INT2FIX(GDK_VISUAL_STATIC_COLOR));
-    rb_define_const(gdkVisual, "PSEUDO_COLOR", INT2FIX(GDK_VISUAL_PSEUDO_COLOR));
-    rb_define_const(gdkVisual, "TRUE_COLOR", INT2FIX(GDK_VISUAL_TRUE_COLOR));
-    rb_define_const(gdkVisual, "DIRECT_COLOR", INT2FIX(GDK_VISUAL_DIRECT_COLOR));
-
     /* class methods */
-    rb_define_singleton_method(gdkVisual, "query_depths",
-                               gdkvisual_s_query_depths, 0);
-    rb_define_singleton_method(gdkVisual, "query_visual_types",
-                               gdkvisual_s_query_visual_types, 0);
-    rb_define_singleton_method(gdkVisual, "list_visuals",
-                               gdkvisual_s_list_visuals, 0);
-
-    rb_define_singleton_method(gdkVisual, "best_depth",
-                               gdkvisual_s_get_best_depth, 0);
-    rb_define_singleton_method(gdkVisual, "best_type",
-                               gdkvisual_s_get_best_type, 0);
-
-    rb_define_singleton_method(gdkVisual, "system",
-                               gdkvisual_s_get_system, 0);
-    rb_define_singleton_method(gdkVisual, "best",
-                               gdkvisual_s_get_best, 0);
-    rb_define_singleton_method(gdkVisual, "best_with_depth",
-                               gdkvisual_s_get_best_with_depth, 1);
-    rb_define_singleton_method(gdkVisual, "best_with_type",
-                               gdkvisual_s_get_best_with_type, 1);
-    rb_define_singleton_method(gdkVisual, "best_with_both",
-                               gdkvisual_s_get_best_with_both, 2);
+    rb_define_singleton_method(gdkVisual, "query_depths", gdkvisual_s_query_depths, 0);
+    rb_define_singleton_method(gdkVisual, "query_visual_types", gdkvisual_s_query_visual_types, 0);
+    rb_define_singleton_method(gdkVisual, "list_visuals", gdkvisual_s_list_visuals, 0);
+    rb_define_singleton_method(gdkVisual, "best_depth", gdkvisual_s_get_best_depth, 0);
+    rb_define_singleton_method(gdkVisual, "best_type", gdkvisual_s_get_best_type, 0);
+    rb_define_singleton_method(gdkVisual, "system", gdkvisual_s_get_system, 0);
+    rb_define_singleton_method(gdkVisual, "best", gdkvisual_s_get_best, 0);
+    rb_define_singleton_method(gdkVisual, "best_with_depth", gdkvisual_s_get_best_with_depth, 1);
+    rb_define_singleton_method(gdkVisual, "best_with_type", gdkvisual_s_get_best_with_type, 1);
+    rb_define_singleton_method(gdkVisual, "best_with_both", gdkvisual_s_get_best_with_both, 2);
 
     /* instance methods */
     rb_define_method(gdkVisual, "visual_type", gdkvisual_type, 0);
@@ -269,4 +249,17 @@ Init_gtk_gdk_visual()
     rb_define_method(gdkVisual, "blue_mask", gdkvisual_blue_mask, 0);
     rb_define_method(gdkVisual, "blue_shift", gdkvisual_blue_shift, 0);
     rb_define_method(gdkVisual, "blue_prec", gdkvisual_blue_prec, 0);
+
+    /* GdkVisualType */
+    rb_define_const(gdkVisual, "STATIC_GRAY", INT2FIX(GDK_VISUAL_STATIC_GRAY));
+    rb_define_const(gdkVisual, "GRAYSCALE", INT2FIX(GDK_VISUAL_GRAYSCALE));
+    rb_define_const(gdkVisual, "STATIC_COLOR", INT2FIX(GDK_VISUAL_STATIC_COLOR));
+    rb_define_const(gdkVisual, "PSEUDO_COLOR", INT2FIX(GDK_VISUAL_PSEUDO_COLOR));
+    rb_define_const(gdkVisual, "TRUE_COLOR", INT2FIX(GDK_VISUAL_TRUE_COLOR));
+    rb_define_const(gdkVisual, "DIRECT_COLOR", INT2FIX(GDK_VISUAL_DIRECT_COLOR));
+
+    /* GdkByteOrder */
+    rb_define_const(mGdk, "LSB_FIRST", INT2FIX(GDK_LSB_FIRST));
+    rb_define_const(mGdk, "MSB_FIRST", INT2FIX(GDK_MSB_FIRST));
+
 }

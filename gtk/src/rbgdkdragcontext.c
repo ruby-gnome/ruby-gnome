@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/10/14 17:24:14 $
+  $Date: 2002/10/15 15:41:59 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -110,7 +110,7 @@ gdkdragcontext_drag_abort(self, time)
     VALUE self, time;
 {
     gdk_drag_abort(_SELF(self), NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -118,7 +118,7 @@ gdkdragcontext_drop_reply(self, ok, time)
     VALUE self, ok, time;
 {
     gdk_drop_reply(_SELF(self), RTEST(ok), NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -126,7 +126,7 @@ gdkdragcontext_drag_drop(self, time)
     VALUE self, time;
 {
     gdk_drag_drop(_SELF(self), NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -163,7 +163,7 @@ gdkdragcontext_drop_finish(self, success, time)
     VALUE self, success, time;
 {
     gdk_drop_finish(_SELF(self), RTEST(success), NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -171,7 +171,7 @@ gdkdragcontext_drag_status(self, action, time)
     VALUE self, action, time;
 {
     gdk_drag_status(_SELF(self), NUM2INT(action), NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 void

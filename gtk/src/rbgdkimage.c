@@ -4,7 +4,7 @@
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/15 15:42:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,23 +15,6 @@
 
 #define _SELF(i) GDK_IMAGE(RVAL2GOBJ(i))
 
-#ifdef GDK_ENABLE_BROKEN
-static VALUE
-gdkimage_s_newbmap(klass, visual, data, w, h)
-    VALUE klass, visual, data, w, h;
-{
-    int width = NUM2INT(w);
-    int height = NUM2INT(h);
-    Check_Type(data, T_STRING);
-    if (RSTRING(data)->len < (width * height)) {
-        rb_raise(rb_eArgError, "data too short");
-    }
-    return GOBJ2RVAL(gdk_image_new_bitmap(GDK_VISUAL(RVAL2GOBJ(visual)),
-                                          RSTRING(data)->ptr,
-                                          width, height));
-}
-#endif
-
 static VALUE
 gdkimage_initialize(self, type, visual, w, h)
     VALUE self, type, visual, w, h;
@@ -40,15 +23,6 @@ gdkimage_initialize(self, type, visual, w, h)
                                           GDK_VISUAL(RVAL2GOBJ(visual)),
                                           NUM2INT(w), NUM2INT(h)));
     return Qnil;
-}
-
-static VALUE
-gdkimage_s_get(klass, win, x, y, w, h)
-    VALUE klass, win, x, y, w, h;
-{
-    return GOBJ2RVAL(gdk_image_get(GDK_DRAWABLE(RVAL2GOBJ(win)),
-                         NUM2INT(x), NUM2INT(y),
-                         NUM2INT(w), NUM2INT(h)));
 }
 
 static VALUE
@@ -66,15 +40,6 @@ gdkimage_get_pixel(self, x, y)
 {
     return INT2NUM(gdk_image_get_pixel(_SELF(self),
                                        NUM2INT(x), NUM2INT(y)));
-}
-
-static VALUE
-gdkimage_destroy(self)
-    VALUE self;
-{
-    gdk_image_destroy(_SELF(self));
-    DATA_PTR(self) = 0;
-    return Qnil;
 }
 
 static VALUE
@@ -117,18 +82,18 @@ Init_gtk_gdk_image()
 {
     VALUE gdkImage = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 
-#ifdef GDK_ENABLE_BROKEN
-    rb_define_singleton_method(gdkImage, "new_bitmap", gdkimage_s_newbmap, 4);
-#endif
-    rb_define_singleton_method(gdkImage, "get", gdkimage_s_get, 5);
-
     rb_define_method(gdkImage, "initialize", gdkimage_initialize, 4);
     rb_define_method(gdkImage, "put_pixel", gdkimage_put_pixel, 3);
     rb_define_method(gdkImage, "get_pixel", gdkimage_get_pixel, 2);
-    rb_define_method(gdkImage, "destroy", gdkimage_destroy, 0);
     rb_define_method(gdkImage, "width", gdkimage_width, 0);
     rb_define_method(gdkImage, "height", gdkimage_height, 0);
     rb_define_method(gdkImage, "depth", gdkimage_depth, 0);
     rb_define_method(gdkImage, "bpp", gdkimage_bpp, 0);
     rb_define_method(gdkImage, "bpl", gdkimage_bpl, 0);
+
+    /* GdkImageType */
+    rb_define_const(gdkImage, "NORMAL", INT2FIX(GDK_IMAGE_NORMAL));
+    rb_define_const(gdkImage, "SHARED", INT2FIX(GDK_IMAGE_SHARED));
+    rb_define_const(gdkImage, "FASTEST", INT2FIX(GDK_IMAGE_FASTEST));
+
 }
