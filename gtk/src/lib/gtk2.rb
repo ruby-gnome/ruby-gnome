@@ -1,5 +1,16 @@
 require 'glib2'
 require 'atk'
-require 'pango.so'
+require 'pango'
 require 'gtk2.so'
-require 'gdk_pixbuf2.so'
+require 'gdk_pixbuf2'
+
+module Gdk
+  LOG_DOMAIN = "Gdk"
+end
+
+module Gtk
+  LOG_DOMAIN = "Gtk"
+end
+
+GLib::Log.set_error_domain(Gdk::LOG_DOMAIN)
+GLib::Log.set_error_domain(Gtk::LOG_DOMAIN)

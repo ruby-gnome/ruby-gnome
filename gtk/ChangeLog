@@ -1,3 +1,8 @@
+2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gtk2.rb: Improved log handling.
+	Define Gtk::LOG_DOMAIN, Gdk::LOG_DOMAIN.
+
 2004-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkfilechooser.c: Added Gtk::FileChooserEmbed.
