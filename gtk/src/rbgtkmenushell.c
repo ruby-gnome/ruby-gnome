@@ -3,10 +3,10 @@
 
   rbgtkmenushell.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2004/06/07 16:09:31 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -58,6 +58,16 @@ mshell_select_item(self, menu_item)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+mshell_select_first(self, search_sensitive)
+    VALUE self, search_sensitive;
+{
+    gtk_menu_shell_select_first(_SELF(self), RTEST(search_sensitive));
+    return self;
+}
+#endif
+
 static VALUE
 mshell_deselect(self)
     VALUE self;
@@ -75,6 +85,14 @@ mshell_activate_item(self, menu_item, force_deactivate)
     return self;
 }
 
+static VALUE
+mshell_cancel(self)
+    VALUE self;
+{
+    gtk_menu_shell_cancel(_SELF(self));
+    return self;
+}
+
 void 
 Init_gtk_menu_shell()
 {
@@ -85,9 +103,14 @@ Init_gtk_menu_shell()
     rb_define_method(gMenuShell, "insert", mshell_insert, 2);
     rb_define_method(gMenuShell, "deactivate", mshell_deactivate, 0);
     rb_define_method(gMenuShell, "select_item", mshell_select_item, 1);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gMenuShell, "select_first", mshell_select_first, 1);
+#endif
     rb_define_method(gMenuShell, "deselect", mshell_deselect, 0);
     rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
-
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gMenuShell, "cancel", mshell_cancel, 0);
+#endif
     /* GtkMenuDirectionType */
     G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", gMenuShell);
     G_DEF_CONSTANTS(gMenuShell, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");

@@ -1,3 +1,14 @@
+2004-06-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolbar.c: Added Gtk::Toolbar#item_index, #n_item, #drop_index,
+	#set_drop_highlight_item, #relief_style for GTK+-2.4.
+	* src/rbgtkmenushell.c: Added Gtk::MenuShell#select_first for GTK+-2.2.
+	Added Gtk::MenuShell#cancel for GTK+-2.4.
+	* src/rbgtkmenu.c: Added Gtk::Menu#set_screen for GTK+-2.2.
+	Added Gtk::Menu#attach, Gtk::Menu#set_monitor for Gtk+-2.4.
+	* src/rbgtktreemodelfilter.c, sample/misc/treemodelfilter.rb: 
+	Added for GTK+-2.4.
+
 2004-06-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcellrenderer.c: Added Gtk::CellRenderer#editing_canceled for GTK+-2.4. 

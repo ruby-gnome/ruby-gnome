@@ -4,9 +4,9 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 17:10:08 $
+  $Date: 2004/06/07 16:09:31 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -181,6 +181,13 @@ tbar_insert(argc, argv, self)
                                        N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                        GTK_SIGNAL_FUNC(exec_callback),
                                        (gpointer)func, NUM2INT(pos));
+#if GTK_CHECK_VERSION(2,4,0)
+    } else if (rb_obj_is_kind_of(type, GTYPE2CLASS(GTK_TYPE_TOOL_ITEM))){
+        rb_scan_args(argc, argv, "20", &pos, &widget);
+        gtk_toolbar_insert(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(widget)),
+                           NUM2INT(pos));
+        return widget;
+#endif
     } else {
         rb_scan_args(argc, argv, "22", &pos, &widget, &ttext, &ptext);
         gtk_toolbar_insert_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
@@ -191,6 +198,58 @@ tbar_insert(argc, argv, self)
 
     return ret ? GOBJ2RVAL(ret) : Qnil;
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+tbar_get_item_index(self, item)
+    VALUE self, item;
+{
+    return INT2NUM(gtk_toolbar_get_item_index(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(item))));
+}
+
+static VALUE
+tbar_get_n_items(self)
+    VALUE self;
+{
+    return INT2NUM(gtk_toolbar_get_n_items(_SELF(self)));
+}
+
+static VALUE
+tbar_get_nth_item(self, n)
+    VALUE self, n;
+{
+    return GOBJ2RVAL(gtk_toolbar_get_nth_item(_SELF(self), NUM2INT(n)));
+}
+
+static VALUE
+tbar_get_drop_index(self, x, y)
+    VALUE self, x, y;
+{
+    return INT2NUM(gtk_toolbar_get_drop_index(_SELF(self), NUM2INT(x), NUM2INT(y)));
+}
+
+static VALUE
+tbar_set_drop_highlight_item(self, item, index)
+    VALUE self, item, index;
+{
+    gtk_toolbar_set_drop_highlight_item(_SELF(self), 
+                                        GTK_TOOL_ITEM(RVAL2GOBJ(item)), 
+                                        NUM2INT(index));
+    return self;
+}
+/* Defined as Properties
+void        gtk_toolbar_set_show_arrow      (GtkToolbar *toolbar,
+                                             gboolean show_arrow);
+gboolean    gtk_toolbar_get_show_arrow      (GtkToolbar *toolbar);
+*/
+
+static VALUE
+tbar_get_relief_style(self)
+    VALUE self;
+{
+    return GENUM2RVAL(gtk_toolbar_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
+}
+#endif
 
 static VALUE
 tbar_append_space(self)
@@ -276,6 +335,14 @@ Init_gtk_toolbar()
     VALUE gToolbar = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
     rb_define_method(gToolbar, "initialize", tbar_initialize, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gToolbar, "item_index", tbar_get_item_index, 1);
+    rb_define_method(gToolbar, "n_items", tbar_get_n_items, 0);
+    rb_define_method(gToolbar, "nth_item", tbar_get_nth_item, 1);
+    rb_define_method(gToolbar, "drop_index", tbar_get_drop_index, 2);
+    rb_define_method(gToolbar, "set_drop_highlight_item", tbar_set_drop_highlight_item, 2);
+    rb_define_method(gToolbar, "relief_style", tbar_get_relief_style, 0);
+#endif
     rb_define_method(gToolbar, "append", tbar_append, -1);
     rb_define_method(gToolbar, "prepend", tbar_prepend, -1);
     rb_define_method(gToolbar, "insert", tbar_insert, -1);

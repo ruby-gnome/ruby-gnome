@@ -4,9 +4,9 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2003/11/01 09:37:25 $
+  $Date: 2004/06/07 16:09:31 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -25,6 +25,16 @@ menu_initialize(self)
     return Qnil;
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+menu_set_screen(self, screen)
+    VALUE self, screen;
+{
+    gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
+    return self;
+}
+#endif
+
 static VALUE
 menu_reorder_child(self, child, position)
     VALUE self, child, position;
@@ -33,6 +43,18 @@ menu_reorder_child(self, child, position)
                            NUM2INT(position));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+menu_attach(self, child, left_attach, right_attach, top_attach, bottom_attach)
+    VALUE self, child, left_attach, right_attach, top_attach, bottom_attach;
+{
+    gtk_menu_attach(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
+                    NUM2UINT(left_attach), NUM2UINT(right_attach), 
+                    NUM2UINT(top_attach), NUM2UINT(bottom_attach));
+    return self;
+}
+#endif
 
 static void
 menu_pos_func(menu, px, py, push_in, data)
@@ -194,13 +216,27 @@ menu_get_attach_widget(self)
     return GOBJ2RVAL(gtk_menu_get_attach_widget(_SELF(self)));
 }
 
+static VALUE
+menu_set_monitor(self, monitor_num)
+    VALUE self, monitor_num;
+{
+    gtk_menu_set_monitor(_SELF(self), NUM2INT(monitor_num));
+    return self;
+}
+
 void 
 Init_gtk_menu()
 {
     VALUE gMenu = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 
     rb_define_method(gMenu, "initialize", menu_initialize, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gMenu, "set_screen", menu_set_screen, 1);
+#endif
     rb_define_method(gMenu, "reorder_child", menu_reorder_child, 2);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gMenu, "attach", menu_attach, 5);
+#endif
     rb_define_method(gMenu, "popup", menu_popup, 4);
     rb_define_method(gMenu, "popdown", menu_popdown, 0);
     rb_define_method(gMenu, "reposition", menu_reposition, 0);
@@ -214,6 +250,9 @@ Init_gtk_menu()
     rb_define_method(gMenu, "detach", menu_detach, 0);
     rb_define_method(gMenu, "attach_widget", menu_get_attach_widget, 0);
     rb_define_method(gMenu, "attach_to_widget", menu_attach_to_widget, 1);
- 
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gMenu, "set_monitor", menu_set_monitor, 1);
+#endif
+
     G_DEF_SETTERS(gMenu);
 }

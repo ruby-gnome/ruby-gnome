@@ -5,12 +5,18 @@
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: combobox.rb,v 1.1 2004/05/30 16:41:13 mutoh Exp $
+  $Id: combobox.rb,v 1.2 2004/06/07 16:09:31 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
+
+if str = Gtk.check_version(2, 4, 0)
+  puts "This sample requires GTK+ 2.4.0 or later"
+  puts str
+  exit
+end
 
 window = Gtk::Window.new
 
