@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2004/04/30 10:50:02 $
+  $Date: 2004/05/15 17:46:15 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -43,6 +43,17 @@ VALUE
 rbg_cstr2rval(const char* str)
 {
     return str ? rb_str_new2(str) : Qnil;
+}
+
+VALUE
+rbg_cstr2rval_with_free(gchar* str)
+{
+    VALUE ret = Qnil;
+    if (str) {
+        ret = rb_str_new2(str);
+        g_free(str);
+    }
+    return ret;
 }
 
 #if 0

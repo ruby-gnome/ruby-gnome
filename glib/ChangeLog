@@ -1,3 +1,13 @@
+2004-05-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c (rbgobj_define_property_accessor): Supports 
+	interface properties (Since 2.4).
+	* src/rbgobj_type.c (rbgobj_init_interface): ditto. 
+
+2004-05-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.[ch]: Add CSTR2RVAL2 which free given char* area. 
+
 2004-05-05  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbglib_spawn.c: Fixed a memory overflow bug in the

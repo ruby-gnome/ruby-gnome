@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:52:27 $
+  $Date: 2004/05/15 17:46:15 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -287,15 +287,23 @@ rbgobj_define_property_accessors(klass)
     VALUE klass;
 {
     GType gtype;
-    guint n_properties;
     GParamSpec** pspecs;
-    GObjectClass* oclass;
     int i;
     GString* source = g_string_new(NULL);
+    guint n_properties = 0;
 
     gtype  = CLASS2GTYPE(klass);
-    oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
-    pspecs = g_object_class_list_properties(oclass, &n_properties);
+    if (G_TYPE_IS_INTERFACE(gtype)){
+#if GLIB_CHECK_VERSION(2,4,0)
+        gpointer iface = g_type_default_interface_ref(gtype);
+        pspecs = g_object_interface_list_properties(iface, &n_properties);
+        g_type_default_interface_unref(iface);
+#endif
+    } else {
+        GObjectClass* oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
+        pspecs = g_object_class_list_properties(oclass, &n_properties);
+        g_type_class_unref(oclass);
+    }
 
     for (i = 0; i < n_properties; i++){
         GParamSpec* pspec = pspecs[i];
@@ -349,8 +357,6 @@ rbgobj_define_property_accessors(klass)
 
     rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
     g_string_free(source, TRUE);
-
-    g_type_class_unref(oclass);
 }
 
 

@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/03/14 10:18:40 $
+  $Date: 2004/05/15 17:46:15 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -45,6 +45,7 @@ extern "C" {
 
 #define RVAL2CSTR(v) (StringValuePtr(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
+#define CSTR2RVAL2(s) (rbg_cstr2rval_with_free(s))
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
@@ -62,6 +63,7 @@ extern "C" {
 RUBY_GLIB2_VAR VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 extern VALUE rbg_cstr2rval(const char* str);
+extern VALUE rbg_cstr2rval_with_free(const char* str);
 
 #ifdef __cplusplus
 }

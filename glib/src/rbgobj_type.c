@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2004/04/27 09:01:57 $
+  $Date: 2004/05/15 17:46:15 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -743,8 +743,10 @@ rbgobj_init_interface(interf)
     rb_define_singleton_method(interf, "append_features",
                                interface_s_append_features, 1);
     /* pseudo inheritance */
-    if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE)
+    if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE){
         rb_include_module(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
+        rbgobj_define_property_accessors(interf);
+    }
 }
 
 static void
