@@ -4,7 +4,7 @@
   rbatkhyperlink.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2004/03/02 15:55:21 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -47,12 +47,14 @@ rbatk_hl_is_valid(self)
     return CBOOL2RVAL(atk_hyperlink_is_valid(_SELF(self)));
 }
 
+#ifdef HAVE_HYPERLINK_IS_INLINE
 static VALUE
 rbatk_hl_is_inline(self)
     VALUE self;
 {
     return CBOOL2RVAL(atk_hyperlink_is_inline(_SELF(self)));
 }
+#endif
 
 static VALUE
 rbatk_hl_get_n_anchors(self)
@@ -71,6 +73,8 @@ Init_atk_hyperlink()
     rb_define_method(hl, "end_index", rbatk_hl_get_end_index, 0);
     rb_define_method(hl, "start_index", rbatk_hl_get_start_index, 0);
     rb_define_method(hl, "valid?", rbatk_hl_is_valid, 0);
+#ifdef HAVE_HYPERLINK_IS_INLINE
     rb_define_method(hl, "inline?", rbatk_hl_is_inline, 0);
+#endif
     rb_define_method(hl, "n_anchors", rbatk_hl_get_n_anchors, 0);
 }

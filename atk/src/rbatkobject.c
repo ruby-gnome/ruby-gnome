@@ -4,7 +4,7 @@
   rbatkobject.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2004/03/02 15:55:21 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -77,6 +77,7 @@ void        atk_object_initialize           (AtkObject *accessible,
                                              gpointer data);
 */
 
+#ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
 static VALUE
 rbatkobj_add_relationship(self, relationship, target)
     VALUE self, relationship, target;
@@ -86,7 +87,9 @@ rbatkobj_add_relationship(self, relationship, target)
                           RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE),
                           _SELF(target)));
 }
+#endif
 
+#ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
 static VALUE
 rbatkobj_remove_relationship(self, relationship, target)
     VALUE self, relationship, target;
@@ -96,6 +99,7 @@ rbatkobj_remove_relationship(self, relationship, target)
                           RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE),
                           _SELF(target)));
 }
+#endif
 
 /* We don't need them.
 G_CONST_RETURN gchar* atk_role_get_name     (AtkRole role);
@@ -114,8 +118,12 @@ Init_atk_object()
     rb_define_method(obj, "ref_relation_set", rbatkobj_ref_releation_set, 0);
     rb_define_method(obj, "ref_state_set", rbatkobj_ref_state_set, 0);
     rb_define_method(obj, "index_in_parent", rbatkobj_get_index_in_parent, 0);
+#ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
     rb_define_method(obj, "add_relationship", rbatkobj_add_relationship, 2);
+#endif
+#ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
     rb_define_method(obj, "remove_relationship", rbatkobj_remove_relationship, 2);
+#endif
 
     /* AtkRole */
     G_DEF_CLASS(ATK_TYPE_ROLE, "Role", obj);

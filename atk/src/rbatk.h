@@ -4,7 +4,7 @@
   rbatk.h -
                                                                                 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2004/03/02 15:55:20 $
                                                                                 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -12,6 +12,8 @@
 #include "ruby.h"
 #include <atk/atk.h>
 #include <atk/atk-enum-types.h>
+#include <atk/atknoopobject.h>
+#include <atk/atknoopobjectfactory.h>
 #include "rbgobject.h"
 
 

@@ -4,7 +4,7 @@
   rbatkaction.c -
 
   $Author: mutoh $
-  $Date: 2003/12/04 18:06:17 $
+  $Date: 2004/03/02 15:55:21 $
 
   Copyright (C) 2003 Masao Mutoh 
 ************************************************/
@@ -41,12 +41,14 @@ rbatk_action_get_name(self, i)
     return CSTR2RVAL(atk_action_get_name(_SELF(self), NUM2INT(i)));
 }
 
+#ifdef HAVE_ATK_ACTION_GET_LOCALIZED_NAME
 static VALUE
 rbatk_action_get_localized_name(self, i)
     VALUE self, i;
 {
     return CSTR2RVAL(atk_action_get_localized_name(_SELF(self), NUM2INT(i)));
 }
+#endif
 
 static VALUE
 rbatk_action_get_keybinding(self, i)
@@ -71,7 +73,9 @@ Init_atk_action()
     rb_define_method(mAction, "n_actions", rbatk_action_get_n_actions, 0);
     rb_define_method(mAction, "get_description", rbatk_action_get_description, 1);
     rb_define_method(mAction, "get_name", rbatk_action_get_name, 1);
+#ifdef HAVE_ATK_ACTION_GET_LOCALIZED_NAME
     rb_define_method(mAction, "get_localized_name", rbatk_action_get_localized_name, 1);
+#endif
     rb_define_method(mAction, "get_keybinding", rbatk_action_get_keybinding, 1);
     rb_define_method(mAction, "set_description", rbatk_action_set_description, 2);
 }
