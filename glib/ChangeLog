@@ -1,5 +1,9 @@
 2003-04-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* extconf.rb: add --enable-experimental option
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): implement accumulator stuff.
+
 	* src/rbgobj_signal.c: code cleanup
 
 	* src/rbgobj_signal.c: use signal_id as a key of signal_func_table.

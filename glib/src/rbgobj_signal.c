@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/05 08:51:33 $
+  $Date: 2003/04/05 13:23:23 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -131,38 +131,79 @@ dispatch_closure_new(ID method_id)
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
+static gboolean
+accumulator_func(GSignalInvocationHint* ihint,
+                 GValue*                return_accu,
+                 const GValue*          handler_return,
+                 gpointer               data)
+{
+    VALUE proc = (VALUE)data;
+    VALUE val = GVAL2RVAL(return_accu);
+    VALUE new = GVAL2RVAL(handler_return);
+    VALUE hint = Qnil; // FIXME
+    VALUE tmp;
+    gboolean continue_emission = TRUE;
+
+    tmp = rb_funcall(proc, rb_intern("call"), 3, hint, val, new);
+    /* FIXME */
+    if (TYPE(tmp) == T_ARRAY) {
+        continue_emission = RTEST(rb_ary_entry(tmp, 0));
+        val = rb_ary_entry(tmp, 1);
+    } else {
+        val = tmp;        
+    }
+    rbgobj_rvalue_to_gvalue(val, return_accu);
+
+    return continue_emission;
+}
+
 static VALUE
 gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 {
     VALUE signal_name, signal_flags, accumulator, return_type, params;
-    ID method_id;
     GClosure* class_closure;
     GType* param_types;
+    guint n_params;
     int i;
     guint sig;
 
-    rb_scan_args(argc, argv, "3*&", &signal_name, &signal_flags,
-                 &return_type, &params, &accumulator);
+    rb_scan_args(argc, argv, "50", &signal_name, &signal_flags,
+                 &accumulator, &return_type, &params);
 
     StringValue(signal_name);
 
-    method_id = rb_to_id(rb_str_concat(rb_str_new2("real_"), signal_name));
-    class_closure = dispatch_closure_new(method_id);
+    {
+        ID method_id;
+        method_id = rb_to_id(rb_str_concat(rb_str_new2("real_"), signal_name));
+        class_closure = dispatch_closure_new(method_id);
+    }
 
-    param_types = ALLOCA_N(GType, RARRAY(params)->len);
-    for (i = 0; i < RARRAY(params)->len; i++)
-        param_types[i] = rbgobj_gtype_get(RARRAY(params)->ptr[i]);
+    if (NIL_P(params)) {
+        n_params = 0;
+        param_types = NULL;
+    } else {
+        n_params = RARRAY(params)->len;
+        param_types = ALLOCA_N(GType, n_params);
+        for (i = 0; i < n_params; i++)
+            param_types[i] = rbgobj_gtype_get(RARRAY(params)->ptr[i]);
+    }
 
     sig = g_signal_newv(StringValuePtr(signal_name),
                         CLASS2GTYPE(self),
                         NUM2INT(signal_flags),
                         class_closure,
-                        NULL,
-                        NULL,
-                        NULL,
+                        NIL_P(accumulator) ? NULL : accumulator_func,
+                        NIL_P(accumulator) ? NULL : (gpointer)accumulator,
+                        NULL, /* c_marshaller */
                         rbgobj_gtype_get(return_type),
-                        RARRAY(params)->len,
+                        n_params,
                         param_types);
+
+    if (!sig)
+        rb_raise(rb_eRuntimeError, "g_signal_newv failed");
+
+    if (accumulator)
+        G_RELATIVE(self, accumulator); /* FIXME */
 
     return rbgobj_signal_wrap(sig);
 }

@@ -29,6 +29,11 @@ else
   STDOUT.print "no\n"
 end
 
+if arg_config("--enable-experimental")
+  $defs << "-DRBGLIB_ENABLE_EXPERIMENTAL"
+end
+
+
 set_output_lib('libruby-glib2.a')
 
 srcdir = File.dirname($0) == "." ? "." :
