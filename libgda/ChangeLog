@@ -1,3 +1,7 @@
+2003-12-28  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaconnection.c: Added Gda::Connection#get_schema.
+
 2003-12-21  Laurent Sansonetti  <lrz@gnome.org>
 
 	* extconf.rb: Removed obsolete directive.

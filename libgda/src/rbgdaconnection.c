@@ -463,6 +463,42 @@ static VALUE rb_gda_connection_supports(self, feature)
                                               RVAL2GENUM(feature, GDA_TYPE_CONNECTION_FEATURE)));
 }
 
+/*
+ * Method: get_schema(schema, params=nil)
+ * schema: database schema to get (see Gda::Connection::Schema).
+ * params: an optional Gda::ParameterList object.
+ *
+ * Asks the underlying data source for a list of database objects.
+ *
+ * This is the method that lets applications ask the different providers
+ * about all their database objects (tables, views, procedures, etc).
+ * The set of database objects that are retrieved are given by the 2 parameters
+ * of this method: 'schema' (which specifies the specific schema required) and
+ * 'params' (which is a list of Gda::Parameter objects that can be used to give
+ * more detail about the objects to be returned).
+ *
+ * The list of parameters is specific to each schema type.
+ *
+ * Returns: a Gda::DataModel containing the data required if successful, 
+ * nil otherwise.
+ */
+static VALUE rb_gda_connection_get_schema(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
+{
+    VALUE schema, params;
+    GdaDataModel *model;
+
+    rb_scan_args(argc, argv, "11", &schema, &params);
+
+    model = gda_connection_get_schema(RGDA_CONNECTION(self),
+                                      RVAL2GENUM(schema, GDA_TYPE_CONNECTION_SCHEMA),
+				      NIL_P(params) ? NULL : RGDA_PARAMETER_LIST(params));
+    return model != NULL
+        ? RGDA_DATAMODEL_NEW(model)
+	: Qnil;
+}
+
 void Init_gda_connection(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_CONNECTION, "Connection", mGda);
 
@@ -497,6 +533,8 @@ void Init_gda_connection(void) {
     rb_define_method(c, "drop_database",   rb_gda_connection_drop_database,   0);
 
     rb_define_method(c, "supports?", rb_gda_connection_supports, 1);
+
+    rb_define_method(c, "get_schema", rb_gda_connection_get_schema, -1);
 
     G_DEF_CLASS(GDA_TYPE_CONNECTION_OPTIONS, "Options", c);
     G_DEF_CONSTANTS(c, GDA_TYPE_CONNECTION_OPTIONS, "GDA_CONNECTION_");
