@@ -1,5 +1,8 @@
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+=begin
+extconf.rb for Ruby/GConf extention library
+=end
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
 pkgname   = 'gconf-2.0'

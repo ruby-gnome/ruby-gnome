@@ -1,3 +1,9 @@
+2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* src/rbgtk.h: Remove a line for including rbgobject.h.
+	(because it is included by rbgtk.h)
+
 2003-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* bin/ruby-glade-create-tempate: Work with Ruby-1.6.x.

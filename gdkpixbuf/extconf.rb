@@ -1,5 +1,8 @@
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+=begin
+extconf.rb for Ruby/GdkPixbuf extention library
+=end
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
 PKGConfig.have_package('gdk-pixbuf-2.0') or exit

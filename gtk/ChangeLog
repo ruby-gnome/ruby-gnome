@@ -1,5 +1,9 @@
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/depend: Add a file.
+   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* src/rbgtk.h: Remove a line for including rbglib.h.
+	(because it is included by rbgobject.h)
 	* sample/misc/t-gtksocket.rb: Follow Gtk::Socket changes.
 	* src/rbgtktoolbar.c: Rename Gtk::Toolbar#unset_iconsize to #unset_icon_size.
 	* src/rbgtkplug.c: Gtk::Plug#construct return self.

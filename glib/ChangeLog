@@ -1,3 +1,9 @@
+2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/depend: Add a file.
+	* src/lib/mkmf-gnome2.rb: Add a file(Move from ../).
+	* extconf.rb: Follow above changes.
+
 2003-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.c: klass.instance_methods to klass.instance_methods(false) 

@@ -1,5 +1,9 @@
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+=begin
+extconf.rb for Ruby/PanelApplet extention library
+=end
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
 require 'mkmf-gnome2'
 
 gnome_config = with_config('gnome-config', 'gnome-config')

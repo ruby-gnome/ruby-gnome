@@ -1,9 +1,8 @@
 =begin
-extconf.rb for bonobo extention library
+extconf.rb for Ruby/Bonobo extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
 #

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/05/24 11:32:12 $
+  $Date: 2003/05/27 14:49:13 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -17,7 +17,6 @@
 
 #include "ruby.h"
 #include "rubysig.h"
-#include "rbglib.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
 

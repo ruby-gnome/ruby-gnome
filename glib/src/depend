@@ -1,0 +1,4 @@
+install: 
+	$(INSTALL_DATA) rbglib.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) rbgutil.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) rbgobject.h $(RUBYARCHDIR)

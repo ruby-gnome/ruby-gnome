@@ -5,6 +5,8 @@ top-level extconf.rb for gnome extention library
 require 'mkmf'
 require 'ftools'
 
+priorlibs = ["glib", "gdkpixbuf", "pango", "gtk"]
+
 #
 # detect sub-directories
 #
@@ -18,13 +20,15 @@ subdirs.collect! do |subdir|
   File.dirname(subdir)
 end
 
+subdirs -= priorlibs
+
 #
 # generate top-level Makefile
 #
 File.open("Makefile", "w") do |makefile|
   makefile.print("\
 TOPSRCDIR = #{$topsrcdir}
-SUBDIRS = #{subdirs.join(' ')}
+SUBDIRS = #{priorlibs.join(' ')} #{subdirs.join(' ')}
 
 all:
 	for subdir in \$(SUBDIRS); do \\

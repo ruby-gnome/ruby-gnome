@@ -1,9 +1,9 @@
 =begin
-extconf.rb for libart extention library
+extconf.rb for Ruby/Libart extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
 require 'mkmf-gnome2'
 
 config_cmd = with_config("libart2-config", "libart2-config")

@@ -1,9 +1,9 @@
 =begin
-extconf.rb for bonoboui extention library
+extconf.rb for Ruby/BonoboUI extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
 require 'mkmf-gnome2'
 
 #

@@ -1,7 +1,10 @@
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require 'mkmf'
-require 'mkmf-gnome2'
+=begin
+extconf.rb for Ruby/GLib extention library
+=end
 
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
+require 'mkmf-gnome2'
 
 PKGConfig.have_package('gobject-2.0') or exit
 check_win32

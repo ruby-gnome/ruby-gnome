@@ -1,9 +1,9 @@
 =begin
-extconf.rb for gnome extention library
+extconf.rb for Ruby/GNOME extention library
 =end
 
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..')
-require 'mkmf'
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
 require 'mkmf-gnome2'
 
 #

@@ -1,3 +1,7 @@
+2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* mkmf-gnome2.rb: Move to glib/src/lib/mkmf-gnome2.rb.
+
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Modified.

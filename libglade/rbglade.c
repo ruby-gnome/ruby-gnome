@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:01:56 $
+  $Date: 2003/05/27 14:49:14 $
 
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project
@@ -17,7 +17,6 @@
 ************************************************/
 
 #include "ruby.h"
-#include "rbgobject.h"
 #include "rbgtk.h"
 #include <glade/glade.h>
 #include <gtk/gtk.h>

@@ -2,8 +2,8 @@
 extconf.rb for Ruby/Libglade2 extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
-require "mkmf"
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
 require 'mkmf-gnome2'
 
 PKGConfig.have_package('libglade-2.0') or exit
