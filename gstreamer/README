@@ -1,18 +1,18 @@
 Ruby/GStreamer
 ==============
 
-Ruby/GStreamer is a Ruby binding of GStreamer.
+Ruby/GStreamer is a Ruby binding for GStreamer.
 
 Requirements
 ------------
 
     Ruby:       http://www.ruby-lang.org/
-    GStreamer:  http://www.gstreamer.net/
+    GStreamer:  http://gstreamer.freedesktop.org/ 
 
 Install
 -------
 
-    0. install ruby and GStreamer.
+    0. install Ruby (>= 1.8.x) and GStreamer (>= 0.8.x).
     1. ruby extconf.rb
     2. make
     3. su
@@ -30,4 +30,4 @@ Copying
 Project Website
 ---------------
 
-    http://ruby-gnome2.sourceforge.net/
+    http://ruby-gnome2.sourceforge.jp

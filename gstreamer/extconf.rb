@@ -5,7 +5,7 @@ extconf.rb for Ruby/GStreamer extention library
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
-pkgname   = 'gstreamer-0.6'
+pkgname   = 'gstreamer-0.8'
 
 PKGConfig.have_package(pkgname) or exit 1
 
@@ -19,7 +19,7 @@ $CFLAGS += " " + ['glib/src'].map{|d|
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")
 
-if have_library("gstmedia-info-0.6", "gst_media_info_read")
+if have_library("gstmedia-info-0.8", "gst_media_info_read")
 	$CFLAGS += " -DHAVE_MEDIA_INFO"
 end
 

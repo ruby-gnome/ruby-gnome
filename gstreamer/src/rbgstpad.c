@@ -325,20 +325,12 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
  *
  * Gets the capabilities of the pad element.
  *
- * Returns: an array of Gst::Caps objects.
+ * Returns: a Gst::Caps object.
  */
 static VALUE
 rb_gst_pad_get_caps (VALUE self)
 {
-	GstCaps *list;
-	VALUE arr;
-
-	arr = rb_ary_new ();
-	for (list = gst_pad_get_caps (RGST_PAD (self));
-	     list != NULL;
-	     list = list->next)
-		rb_ary_push (arr, RGST_CAPS_NEW (list));
-	return arr;
+    return RBGST_CAPS (gst_pad_get_caps (RGST_PAD (self))); 	
 }
 
 /*

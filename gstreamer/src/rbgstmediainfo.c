@@ -94,9 +94,10 @@ static VALUE rb_gst_mediatype_new(argc, argv, self)
     rb_scan_args(argc, argv, "01", &r_source);
 
     source = NIL_P(r_source) ? NULL : RVAL2CSTR(r_source);
-    info = gst_media_info_new(source);
+    info = gst_media_info_new(NULL);
 
     if (info != NULL) {
+        gst_media_info_set_source(info, source, NULL);
         G_INITIALIZE(self, info);
         return RGST_MEDIA_INFO_NEW(info);
     }
@@ -116,7 +117,8 @@ static VALUE rb_gst_mediatype_read(argc, argv, self)
     flags =  NIL_P(r_flags) ? GST_MEDIA_INFO_ALL : FIX2INT(r_flags);
     stream = gst_media_info_read(RGST_MEDIA_INFO(self),
                                  RVAL2CSTR(location),
-                                 flags);
+                                 flags,
+                                 NULL);
 
     return stream != NULL
         ? RGST_MEDIA_INFO_STREAM_NEW(stream)

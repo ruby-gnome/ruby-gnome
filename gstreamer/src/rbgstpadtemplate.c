@@ -69,20 +69,12 @@ rb_gst_padtemplate_get_direction (VALUE self)
  *
  * Gets the capabilities of the pad template element.
  *
- * Returns: an array of Gst::Caps objects.
+ * Returns: a Gst::Caps object.
  */
 static VALUE
 rb_gst_padtemplate_get_caps (VALUE self)
 {
-	GstCaps *list;
-	VALUE arr;
-
-	arr = rb_ary_new ();
-	for (list = gst_pad_template_get_caps (RGST_PAD_TEMPLATE (self));
-	     list != NULL;
-	     list = list->next)
-		rb_ary_push (arr, RGST_CAPS_NEW (list));
-	return arr;
+	return RBGST_CAPS (gst_pad_template_get_caps (RGST_PAD_TEMPLATE (self)));
 }
 
 /*

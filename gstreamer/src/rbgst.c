@@ -28,8 +28,6 @@ VALUE mGst;
 static void
 Init_gst_classes (void)
 {
-	extern void Init_gst_autoplug (void);
-	extern void Init_gst_autoplugfactory (void);
 	extern void Init_gst_bin (void);
 	extern void Init_gst_caps (void);
 	extern void Init_gst_clock (void);
@@ -56,16 +54,11 @@ Init_gst_classes (void)
 	extern void Init_gst_schedulerfactory (void);
 	extern void Init_gst_systemclock (void);
 	extern void Init_gst_thread (void);
-	extern void Init_gst_type (void);
-	extern void Init_gst_typefactory (void);
-	extern void Init_gst_typefind (void);
 	extern void Init_gst_xml (void);
 #ifdef HAVE_MEDIA_INFO
 	extern void Init_gst_mediatype (void);
 #endif
 	
-	Init_gst_autoplug ();
-	Init_gst_autoplugfactory ();
 	Init_gst_bin ();
 	Init_gst_caps ();
 	Init_gst_clock ();
@@ -92,9 +85,6 @@ Init_gst_classes (void)
 	Init_gst_schedulerfactory ();
 	Init_gst_systemclock ();
 	Init_gst_thread ();
-	Init_gst_type ();
-	Init_gst_typefactory ();
-	Init_gst_typefind ();
 	Init_gst_xml ();
 
 #ifdef HAVE_MEDIA_INFO

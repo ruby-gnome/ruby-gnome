@@ -44,36 +44,6 @@ gst_plugin_get_type (void) {
 	return our_type;
 }
 
-/* Method: name
- * Returns: the (short) name of the plugin.
- */
-static VALUE
-rb_gst_plugin_get_name (VALUE self)
-{
-	GstPlugin *plugin = RGST_PLUGIN (self);
-	return CSTR2RVAL (plugin->name);
-}
-
-/* Method: longname
- * Returns: the long name (descriptive) of the plugin.
- */
-static VALUE
-rb_gst_plugin_get_longname (VALUE self)
-{
-	GstPlugin *plugin = RGST_PLUGIN (self);
-	return CSTR2RVAL (plugin->longname);
-}
-
-/* Method: filename
- * Returns: the file name where the plugin cames from.
- */
-static VALUE
-rb_gst_plugin_get_filename (VALUE self)
-{
-	GstPlugin *plugin = RGST_PLUGIN (self);
-	return CSTR2RVAL (plugin->filename);
-}
-
 /* Method: loaded?
  * Returns: true if the plugin is loaded into memory, false otherwise.
  */
@@ -143,9 +113,6 @@ Init_gst_plugin (void)
 {
 	VALUE c = G_DEF_CLASS (GST_TYPE_PLUGIN, "Plugin", mGst);
 
-	rb_define_method (c, "name", rb_gst_plugin_get_name, 0);
-	rb_define_method (c, "longname", rb_gst_plugin_get_longname, 0);
-	rb_define_method (c, "filename", rb_gst_plugin_get_filename, 0);
 	rb_define_method (c, "loaded?", rb_gst_plugin_is_loaded, 0);
 	rb_define_method (c, "features", rb_gst_plugin_get_features, 0);
 	rb_define_method (c, "each_feature", rb_gst_plugin_each_feature, 0);

@@ -105,92 +105,13 @@ rb_gst_elementfactory_create (int argc, VALUE *argv, VALUE self)
 		: Qnil;
 }
 
-/*
- * Method: rank
- *
- * Gets the rank of the factory (either Gst::ElementFactory::RANK_MARGINAL,
- * Gst::ElementFactory::RANK_NONE, Gst::ElementFactory::RANK_PRIMARY or
- * Gst::ElementFactory::RANK_SECONDARY).
- *
- * Returns: the rank of the factory.
- */
-static VALUE
-rb_gst_elementfactory_get_rank (VALUE self)
-{
-	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self);
-	return INT2FIX (factory->rank);	
-}
-
-/* Constant: RANK_MARGINAL
- * The element is only marginally usefull for autoplugging.
- */
-static VALUE constRankMarginal = INT2FIX (GST_ELEMENT_RANK_MARGINAL);
-
-/* Constant: RANK_NONE
- * The plugin may not be used in autoplugging. 
- */
-static VALUE constRankNone = INT2FIX (GST_ELEMENT_RANK_NONE);
-
-/* Constant: RANK_PRIMARY
- * The plugin is well suited for autoplugging. 
- */
-static VALUE constRankPrimary = INT2FIX (GST_ELEMENT_RANK_PRIMARY);
-
-/* Constant: RANK_SECONDARY
- * The plugin is suited for autoplugging but only as a second candidate. 
- */
-static VALUE constRankSecondary = INT2FIX (GST_ELEMENT_RANK_SECONDARY);
-
-/* Method: rank_marginal?
- * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_MARGINAL,
- * false otherwise.
- */
-static VALUE
-rb_gst_elementfactory_rank_marginal (VALUE self)
-{
-	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankMarginal);
-}
-
-/* Method: rank_none?
- * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_NONE,
- * false otherwise.
- */
-static VALUE
-rb_gst_elementfactory_rank_none (VALUE self)
-{
-	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankNone);
-}
-
-/* Method: rank_primary?
- * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_PRIMARY,
- * false otherwise.
- */
-static VALUE
-rb_gst_elementfactory_rank_primary (VALUE self)
-{
-	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankPrimary);
-}
-
-/* Method: rank_secondary?
- * Returns: true if the rank of the factory equals Gst::ElementFactory::RANK_SECONDARY,
- * false otherwise.
- */
-static VALUE
-rb_gst_elementfactory_rank_secondary (VALUE self)
-{
-	return CBOOL2RVAL (rb_gst_elementfactory_get_rank (self) == constRankSecondary);
-}
-
-/* Method: to_s
- * Returns: a String representing the factory.
- */
 static VALUE
 rb_gst_elementfactory_to_s (VALUE self)
 {
 	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self); 
 	return rb_str_format ("Element: %s (%s)",
 			      GST_PLUGIN_FEATURE_NAME(factory),
-			      factory->details->longname);
+			      factory->details.longname);
 }
 
 /*
@@ -241,11 +162,8 @@ rb_gst_elementfactory_each_pad_template (VALUE self)
  *
  *   * longname: long (English) element name.
  *   * klass: type of element, as hierarchy.
- *   * license: license under which the element is provided.
  *   * description: a short description about the element.
- *   * version: version of the element.
  *   * author: some information about the author(s).
- *   * copyright: some copyright details (year, etc..).
  *
  * Here is an example.
  *
@@ -260,22 +178,16 @@ static VALUE
 rb_gst_elementfactory_get_details (VALUE self)
 {
 	GstElementFactory *factory;
-	GstElementDetails *details;
 	VALUE hash;
   
 	factory = RGST_ELEMENT_FACTORY (self); 
-	details = factory->details;
-	g_assert (details != NULL);
 	
 	hash = rb_hash_new();
 
-	rb_hash_aset (hash, CSTR2RVAL ("longname"), CSTR2RVAL (details->longname));
-	rb_hash_aset (hash, CSTR2RVAL ("klass"), CSTR2RVAL (details->klass)); 
-	rb_hash_aset (hash, CSTR2RVAL ("license"), CSTR2RVAL (details->license));  
-	rb_hash_aset (hash, CSTR2RVAL ("description"), CSTR2RVAL (details->description));
-	rb_hash_aset (hash, CSTR2RVAL ("version"), CSTR2RVAL (details->version));
-	rb_hash_aset (hash, CSTR2RVAL ("author"), CSTR2RVAL (details->author));
-	rb_hash_aset (hash, CSTR2RVAL ("copyright"), CSTR2RVAL (details->copyright));
+	rb_hash_aset (hash, CSTR2RVAL ("longname"), CSTR2RVAL (factory->details.longname));
+	rb_hash_aset (hash, CSTR2RVAL ("klass"), CSTR2RVAL (factory->details.klass)); 
+	rb_hash_aset (hash, CSTR2RVAL ("description"), CSTR2RVAL (factory->details.description));
+	rb_hash_aset (hash, CSTR2RVAL ("author"), CSTR2RVAL (factory->details.author));
 
 	return hash;
 }
@@ -288,18 +200,8 @@ Init_gst_elementfactory (void)
 	rb_define_singleton_method(c, "make", rb_gst_elementfactory_make, -1);
 	rb_define_singleton_method(c, "find", rb_gst_elementfactory_find, 1);
 	rb_define_method(c, "create", rb_gst_elementfactory_create, -1);
-	rb_define_method(c, "rank", rb_gst_elementfactory_get_rank, 0);
 	rb_define_method(c, "details", rb_gst_elementfactory_get_details, 0);
 	rb_define_method(c, "to_s", rb_gst_elementfactory_to_s, 0);
 	rb_define_method(c, "pad_templates", rb_gst_elementfactory_get_pad_templates, 0);
 	rb_define_method(c, "each_pad_template", rb_gst_elementfactory_each_pad_template, 0);
-	rb_define_method(c, "rank_marginal?",rb_gst_elementfactory_rank_marginal, 0);
-	rb_define_method(c, "rank_none?", rb_gst_elementfactory_rank_none, 0);
-	rb_define_method(c, "rank_primary?", rb_gst_elementfactory_rank_primary, 0);
-	rb_define_method(c, "rank_secondary?", rb_gst_elementfactory_rank_secondary, 0);
-
-	rb_define_const(c, "RANK_MARGINAL", constRankMarginal);
-	rb_define_const(c, "RANK_NONE", constRankNone);
-	rb_define_const(c, "RANK_PRIMARY", constRankPrimary);
-	rb_define_const(c, "RANK_SECONDARY", constRankSecondary);
 }

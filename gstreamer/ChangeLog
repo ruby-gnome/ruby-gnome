@@ -1,3 +1,16 @@
+2004-07-23  Laurent Sansonetti  <lrz@gnome.org>
+
+	* README: We require 0.8.x now. 
+	* extconf.rb: Check for gstreamer-0.8 and gst-mediainfo-0.8 instead
+	of 0.6.
+	* src/rbgst.c: Do not initialize autoplug, autoplugfactory, type,
+	typefactory and typefind anymore (since they have been removed).
+	* src/rbgstautoplug.c, src/rbgstautoplugfactory.c, src/rbgsttype.c,
+	  src/rbgsttypefactory.c, src/rbgsttypefind.c: Removed.
+	* src/rbgstcaps.c, src/rbgstelementfactory.c, src/rbgstmediainfo.c, 
+	  src/rbgstpad.c, src/rbgstpadtemplate.c, src/rbgstplugin.c,
+	  src/rbgstpluginfeature.c: Compiles against 0.8.x.
+
 2004-03-23  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstelement.c (#get_property): Fixed a memory leak

@@ -67,11 +67,9 @@ rb_gst_pluginfeature_unload_thyself (VALUE self)
 gboolean
 is_valid_pluginfeature_type (const GType type)
 {
-	return type == GST_TYPE_AUTOPLUG_FACTORY 
-		|| type == GST_TYPE_ELEMENT_FACTORY
+	return type == GST_TYPE_ELEMENT_FACTORY
 		|| type == GST_TYPE_INDEX_FACTORY
-		|| type == GST_TYPE_SCHEDULER_FACTORY
-		|| type == GST_TYPE_TYPE_FACTORY;
+		|| type == GST_TYPE_SCHEDULER_FACTORY;
 }
 
 VALUE
@@ -80,14 +78,10 @@ instanciate_pluginfeature (GstPluginFeature *feature)
 
 	if (GST_IS_ELEMENT_FACTORY (feature))
 		return RGST_ELEMENT_FACTORY_NEW (feature);
-	else if (GST_IS_TYPE_FACTORY (feature))
-		return RGST_TYPE_FACTORY_NEW (feature);
 	else if (GST_IS_SCHEDULER_FACTORY (feature))
 		return RGST_SCHEDULER_FACTORY_NEW (feature);
 	else if (GST_IS_INDEX_FACTORY (feature))
 		return RGST_INDEX_FACTORY_NEW (feature);
-	else if (GST_IS_AUTOPLUG_FACTORY (feature))
-		return RGST_AUTOPLUG_FACTORY_NEW (feature);
 	else
 		rb_raise(rb_eArgError,
 			 "Invalid plugin feature of type ``%s''",
