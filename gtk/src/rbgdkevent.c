@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2003/10/14 13:34:08 $
+  $Date: 2003/10/14 13:35:52 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -622,7 +622,6 @@ Init_gtk_gdk_event()
 
     gdkEvent = G_DEF_CLASS(GDK_TYPE_EVENT, "Event", mGdk);
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
-    printf("event = %d\n", GDK_TYPE_EVENT);
 
     gdkevents[GDK_DELETE]        = gdkEventAny;
     gdkevents[GDK_DESTROY]       = gdkEventAny;
