@@ -67,6 +67,7 @@ extern VALUE cGdaValue;
 #define RGDA_PROVIDER(o)         (GDA_PROVIDER(RVAL2BOXED(o, GDA_TYPE_PROVIDER)))
 #define RGDA_ROW(o)              (GDA_ROW(RVAL2BOXED(o, GDA_TYPE_ROW)))
 #define RGDA_SELECT(o)           (GDA_SELECT(RVAL2GOBJ(o)))
+#define RGDA_TABLE(o)            (GDA_TABLE(RVAL2GOBJ(o)))
 #define RGDA_TRANSACTION(o)      (GDA_TRANSACTION(RVAL2GOBJ(o)))
 #define RGDA_VALUE(o)            (GDA_VALUE(RVAL2BOXED(o, GDA_TYPE_VALUE)))
 
@@ -85,6 +86,7 @@ extern VALUE cGdaValue;
 #define RGDA_PROVIDER_NEW(o)         (BOXED2RVAL(GDA_PROVIDER(o), GDA_TYPE_PROVIDER))
 #define RGDA_ROW_NEW(o)              (BOXED2RVAL(GDA_ROW(o), GDA_TYPE_ROW))
 #define RGDA_SELECT_NEW(o)           (GOBJ2RVAL(GDA_SELECT(o)))
+#define RGDA_TABLE_NEW(o)            (GOBJ2RVAL(GDA_TABLE(o)))
 #define RGDA_TRANSACTION_NEW(o)      (GOBJ2RVAL(GDA_TRANSACTION(o)))
 #define RGDA_VALUE_NEW(o)            (BOXED2RVAL(GDA_VALUE(o), GDA_TYPE_VALUE))
 

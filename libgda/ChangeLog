@@ -1,8 +1,8 @@
 2003-10-04  Laurent Sansonetti  <laurent@datarescue.be>
 
-	* src/rbgdaselect.c: New file.
-	* src/rbgda.c: Initializes Gda::Select.
-	* src/rbgda.h: Added macros for Gda::Select.
+	* src/rbgdaselect.c, src/rbgdatable.c: New files.
+	* src/rbgda.c: Initializes Gda::Select & Gda::Table.
+	* src/rbgda.h: Added macros for Gda::Select & Gda::Table.
 
 2003-10-03  Laurent Sansonetti  <laurent@datarescue.be>
 
