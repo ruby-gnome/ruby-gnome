@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2003/11/24 07:40:55 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -95,7 +95,6 @@ gdkdragcontext_s_get_protocol(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE display = Qnil;
     VALUE xid;
     GdkDragProtocol prot;
     guint32 ret;
@@ -104,9 +103,15 @@ gdkdragcontext_s_get_protocol(argc, argv, self)
         rb_scan_args(argc, argv, "10", &xid);
         ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
     } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display;
         rb_scan_args(argc, argv, "20", &display, &xid);
         ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 NUM2UINT(xid), &prot);
+#else
+        rb_warn("Not supported display option in GTK+-2.0.x.");
+        ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
+#endif
     }
 
     return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), UINT2NUM(ret));
@@ -150,7 +155,6 @@ gdkdragcontext_find_window(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE screen = Qnil;
     VALUE drag_window, x_root, y_root;
     GdkWindow *dest_window;
     GdkDragProtocol prot;
@@ -163,6 +167,7 @@ gdkdragcontext_find_window(argc, argv, self)
                              &dest_window, &prot);
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
+        VALUE screen;
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
         gdk_drag_find_window_for_screen(_SELF(self),
                                         GDK_WINDOW(RVAL2GOBJ(drag_window)), 

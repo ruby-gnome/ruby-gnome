@@ -1,6 +1,6 @@
 2003-11-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgdk.c: Fix compilation error for GTK+-2.0. 
+	* src/rbgdk.c, rbgdkdragcontext.c: Fix compilation error for GTK+-2.0. 
 
 2003-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
