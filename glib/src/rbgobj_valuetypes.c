@@ -3,8 +3,8 @@
 
   rbgobj_valuetypes.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/02 17:11:53 $
+  $Author: sakai $
+  $Date: 2003/08/06 00:53:02 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -121,8 +121,8 @@ Init_gtype_pointer()
 
 /**********************************************************************/
 
-static VALUE boxed_ruby_value_markers;
-static ID id_delete;
+static GHashTable* boxed_ruby_value_table;
+static VALUE boxed_ruby_value_table_wrapper;
 
 typedef struct {
     VALUE obj;
@@ -130,29 +130,36 @@ typedef struct {
 } boxed_ruby_value_counter;
 
 static void
-boxed_ruby_value_counter_mark(boxed_ruby_value_counter* counter)
+boxed_ruby_value_counter_mark(gpointer       key,
+                              gpointer       value,
+                              gpointer       user_data)
 {
+    boxed_ruby_value_counter* counter = value;
     if (counter->ref_count)
         rb_gc_mark(counter->obj);
+}
+
+static void
+boxed_ruby_value_table_mark(GHashTable* table)
+{
+    g_hash_table_foreach(table, boxed_ruby_value_counter_mark, NULL);
 }
 
 static VALUE
 boxed_ruby_value_ref(VALUE val)
 {
     if (!SPECIAL_CONST_P(val)){
-        VALUE key = rb_obj_id(val);
-        VALUE marker = rb_hash_aref(boxed_ruby_value_markers, key);
         boxed_ruby_value_counter* counter;
 
-        if (NIL_P(marker)){
-            marker = Data_Make_Struct(rb_cData, boxed_ruby_value_counter,
-                                      boxed_ruby_value_counter_mark, free,
-                                      counter);
+        counter = g_hash_table_lookup(boxed_ruby_value_table, (gpointer)val);
+
+        if (!counter){
+            counter = g_new(boxed_ruby_value_counter, 1);
             counter->obj       = val;
             counter->ref_count = 1;
-            rb_hash_aset(boxed_ruby_value_markers, key, marker);
+            g_hash_table_insert(boxed_ruby_value_table, (gpointer)val,
+                                counter);
         } else {
-            Data_Get_Struct(marker, boxed_ruby_value_counter, counter);
             counter->ref_count += 1;
         }
     }
@@ -163,15 +170,13 @@ static void
 boxed_ruby_value_unref(VALUE val)
 {
     if (!SPECIAL_CONST_P(val)){
-        VALUE key = rb_obj_id(val);
-        VALUE marker = rb_hash_aref(boxed_ruby_value_markers, key);
         boxed_ruby_value_counter* counter;
 
-        Data_Get_Struct(marker, boxed_ruby_value_counter, counter);
+        counter = g_hash_table_lookup(boxed_ruby_value_table, (gpointer)val);
         counter->ref_count -= 1;
 
         if (!counter->ref_count)
-            rb_funcall(boxed_ruby_value_markers, id_delete, 1, key);
+            g_hash_table_remove(boxed_ruby_value_table, (gpointer)val);
     }
 }
 
@@ -271,9 +276,13 @@ ruby_value_r2g(VALUE from, GValue* to)
 static void
 Init_boxed_ruby_value()
 {
-    id_delete = rb_intern("delete");
-    boxed_ruby_value_markers = rb_hash_new();
-    rb_global_variable(&boxed_ruby_value_markers);
+    boxed_ruby_value_table = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, free);
+
+    boxed_ruby_value_table_wrapper =
+      Data_Wrap_Struct(rb_cData,
+                       boxed_ruby_value_table_mark, NULL,
+                       boxed_ruby_value_table);
+    rb_global_variable(&boxed_ruby_value_table_wrapper);
 
     rbgobj_register_g2r_func(RBGOBJ_TYPE_RUBY_VALUE, g_value_get_ruby_value);
     rbgobj_register_r2g_func(RBGOBJ_TYPE_RUBY_VALUE, ruby_value_r2g);

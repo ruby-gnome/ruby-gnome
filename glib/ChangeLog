@@ -1,5 +1,9 @@
 2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_valuetypes.c: use GHashTable instead of Ruby's Hash
+	for reference counting. Using Ruby's Hash may cause segmentaion fault
+	when ruby exits.
+
 	* src/rbgobject.c (rbgobj_gobject_initialize): don't warn if the
 	instance type is a subtype of the class type.
 
