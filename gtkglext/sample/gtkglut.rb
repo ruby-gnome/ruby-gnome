@@ -77,10 +77,7 @@ module GLUT
         # Get automatically redrawn if any of their children
         # changed allocation.
         @@window.reallocate_redraws = true
-        @@window.signal_connect("delete_event") do
-            Gtk.main_quit
-            true
-        end
+        @@window.signal_connect("delete_event") { Gtk.main_quit }
         @@window.title = name
 
         @@window.set_events(@@window.events      |
