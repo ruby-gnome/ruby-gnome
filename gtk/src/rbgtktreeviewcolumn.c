@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/04 16:31:05 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -21,24 +21,21 @@ tvc_initialize(argc, argv, self)
     VALUE self;
 {
     int i;
-    VALUE title, cell, params;
     GtkTreeViewColumn* tvc;
 
-    if (rb_scan_args(argc, argv, "03", &title, &cell, &params) > 2){
-        tvc = gtk_tree_view_column_new_with_attributes(RVAL2CSTR(title), 
-                                                       RVAL2CELLRENDERER(cell), NULL);
+    if (argc > 1){
+        tvc = gtk_tree_view_column_new_with_attributes(RVAL2CSTR(argv[0]), 
+                                                       RVAL2CELLRENDERER(argv[1]), NULL);
     } else {
         tvc = gtk_tree_view_column_new();
-        params = (VALUE)NULL;
     }
 
     RBGTK_INITIALIZE(self, tvc);
 
-    if (params){
-        Check_Type(params, T_ARRAY);
-        for (i = 0; i < RARRAY(params)->len; i++) {
-            gtk_tree_view_column_add_attribute(_SELF(self), RVAL2CELLRENDERER(cell), 
-                                               RVAL2CSTR(RARRAY(params)->ptr[i]), i);
+    if (argc > 2){
+        for (i = 2; i < argc; i++) {
+            gtk_tree_view_column_add_attribute(_SELF(self), RVAL2CELLRENDERER(argv[1]), 
+                                               RVAL2CSTR(argv[i]), i - 2);
         }       
     }
 

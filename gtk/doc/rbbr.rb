@@ -4,8 +4,8 @@
 
   rbbr.rb - Ruby Meta-Level Information Browser
 
-  $Author: sakai $
-  $Date: 2002/10/02 04:38:44 $
+  $Author: mutoh $
+  $Date: 2002/10/04 16:30:50 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -20,8 +20,8 @@
 
   meta/metainfo.rb - API for Meta-level Information
 
-  $Author: sakai $
-  $Date: 2002/10/02 04:38:44 $
+  $Author: mutoh $
+  $Date: 2002/10/04 16:30:50 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -308,8 +308,8 @@ require 'gtk2'
 
   gtkutil.rb - Gtk Utility
 
-  $Author: sakai $
-  $Date: 2002/10/02 04:38:44 $
+  $Author: mutoh $
+  $Date: 2002/10/04 16:30:50 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -430,8 +430,8 @@ end
 
   meta/browser.rb - Meta-Level Information Browser
 
-  $Author: sakai $
-  $Date: 2002/10/02 04:38:44 $
+  $Author: mutoh $
+  $Date: 2002/10/04 16:30:50 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -443,12 +443,12 @@ end
 
 module RBBR
 
-  class ModuleIndex < Gtk::Tree
+  class ModuleIndex < Gtk::TreeStore
     include Observable
 
     def initialize
-      super()
-      self.set_selection_mode(Gtk::SELECTION_SINGLE)
+      super(String)
+#      self.set_selection_mode(Gtk::SELECTION_SINGLE)
       update
     end
 
@@ -457,34 +457,33 @@ module RBBR
       append_class(self, Object)
       root_modules = Module.root_modules.sort{|x, y| x.name <=> y.name}
 
-      module_treeitem = Gtk::TreeItem.new("<module tree>")
-      module_treeitem.show
-      self.append(module_treeitem)
-      module_treeitem.set_subtree(module_tree = Gtk::Tree.new)
+	  module_iter = append(nil)
+	  set_value(module_iter, 0, "<module tree")
+
+	  iter = append(module_iter)
       root_modules.each do |root_module|
-	append_module(module_tree, root_module)
+		append_module(module_iter, root_module)
       end
     end
 
     private
-    def append_class(tree, klass)
-      treeitem = Gtk::TreeItem.new(klass.name)
-      treeitem.signal_connect('select', klass) do |widget, klass|
-	changed
-	notify_observers(klass)
-      end
-      treeitem.show
-      tree.append(treeitem)
+    def append_class(tree, parent_iter, klass)
+	  iter = append(parent_iter)
+	  iter.set_value(iter, 0, klass.name)
+#      iter.signal_connect('select', klass) do |widget, klass|
+#	  changed
+#	  notify_observers(klass)
+#      end
       subclasses = klass.sub_classes
       unless subclasses.empty?
-	treeitem.set_subtree(subtree = Gtk::Tree.new)
-	treeitem.signal_connect("expand") do
-	  if subtree.children.empty?
-	    subclasses.sort{|x, y| x.name <=> y.name}.each do |subclass|
-	      append_class(subtree, subclass)
-	    end
-	  end
-	end
+		subiter = append(iter)
+		iter.signal_connect("expand") do
+		  if subtree.children.empty?
+			subclasses.sort{|x, y| x.name <=> y.name}.each do |subclass|
+			  append_class(subtree, subclass)
+			end
+		  end
+		end
       end
     end
 

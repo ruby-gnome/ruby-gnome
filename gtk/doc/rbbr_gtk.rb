@@ -81,7 +81,8 @@ class ClassTree < ClassWalker
   end
 
   def createDescendantsTree
-    descendants = Gtk::Tree::new()
+	model = Gtk::TreeStore.new(String)
+    descendants = Gtk::TreeView.new(tstore)
     cc = []
     mm = []
     @p2c.each_key do |c|
@@ -96,10 +97,10 @@ class ClassTree < ClassWalker
     end
 
     cc.sort{|a,b| a.name<=>b.name}.each do |c|
-      append(descendants, c, true)
+      append(model, c, true)
     end
     mm.sort{|a,b| a.name<=>b.name}.each do |c|
-      append(descendants, c, true)
+      append(model, c, true)
     end
     descendants
   end
@@ -139,14 +140,13 @@ class ClassTree < ClassWalker
   end
 
   private
-  def append(tree, cls, f=true)
-    i = Gtk::TreeItem::new(cls.name)
-    tree.append(i)
-    i.show
+  def append(treemodel, cls, parent_iter = nil, f = true)
+	iter = treemodel.append(parent_iter)
+	treemodel.set_value(iter, 0, cls.name)
+
     if f and @p2c[cls].is_a? Array and 0<@p2c[cls].size
-      t = Gtk::Tree::new()
-      i.set_subtree(t)
-      @p2c[cls].sort { |a,b| a.name <=> b.name }.each { |c| append(t, c) }
+	  parent_iter = iter
+      @p2c[cls].sort { |a,b| a.name <=> b.name }.each { |c| append(t, c, parent_iter) }
     end
   end
 end
