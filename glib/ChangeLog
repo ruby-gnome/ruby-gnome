@@ -1,3 +1,7 @@
+2003-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_sig_emit): fix to setup arg.self.
+
 2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/depend: use old style

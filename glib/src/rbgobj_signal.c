@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/08/01 15:48:30 $
+  $Date: 2003/08/09 06:32:42 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -344,7 +344,8 @@ gobj_sig_emit(argc, argv, self)
                  RARRAY(arg.args)->len + 1,
                  arg.query.n_params + 1);
 
-    arg.instance_and_params = g_value_array_new(1 + arg.query.n_params);;
+    arg.self = self;
+    arg.instance_and_params = g_value_array_new(1 + arg.query.n_params);
     
     return rb_ensure(emit_body, (VALUE)&arg, emit_ensure, (VALUE)&arg);
 }
