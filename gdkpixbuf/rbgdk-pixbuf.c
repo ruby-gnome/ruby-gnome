@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: kzys $
-  $Date: 2003/10/14 13:26:07 $
+  $Author: mutoh $
+  $Date: 2003/12/20 13:56:16 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -33,7 +33,7 @@ static VALUE
 get_has_alpha(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_has_alpha(_SELF(self)));
+    return CBOOL2RVAL(gdk_pixbuf_get_has_alpha(_SELF(self)));
 }
 
 static VALUE
@@ -49,8 +49,8 @@ get_pixels(self)
 {
     guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
     return rb_str_new(pixels,
-                      gdk_pixbuf_get_width(_SELF(self)) *
-                      gdk_pixbuf_get_height(_SELF(self)) * 3);
+                      gdk_pixbuf_get_height(_SELF(self)) * 
+                      gdk_pixbuf_get_rowstride(_SELF(self)));
 }
 
 static VALUE
