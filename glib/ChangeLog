@@ -3,6 +3,7 @@
 	* src/lib/mkmf-gnome2.rb: Added PKGConfig.modversion, .check_version?.
 	PKGConfig#have_package accept major, minor micro version to check 
 	the module version correctly.
+	Pointed out by Kouhei Sutou.
 
 2004-10-17  Vincent Isambart <isambart@netcourrier.com>
 
