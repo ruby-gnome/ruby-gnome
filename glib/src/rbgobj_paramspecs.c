@@ -4,10 +4,10 @@
   rbgobj_paramspecs.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:50:32 $
+  $Date: 2004/03/05 15:52:27 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
-  Copyright (C) 2004       Ruby-GNOME2 Project
+  Copyright (C) 2004       Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
