@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:08 $
+  $Author: sakai $
+  $Date: 2003/02/03 08:52:24 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -32,6 +32,12 @@ rbg_string_value_ptr(ptr)
         rb_str_modify(s);
     }
     return RSTRING(s)->ptr;
+}
+
+VALUE
+rbg_cstr2rval(const char* str)
+{
+    return str ? rb_str_new2(str) : Qnil;
 }
 
 void Init_glib2()

@@ -1,3 +1,13 @@
+2003-02-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.[ch]: change CSTR2RVAL's body to be a new function
+	rbg_cstr2rval() to avoid unexprected side-effect of macro.
+
+2003-02-03  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* src/rbglib.h: a check for NULL strings in the CSTR2RVAL macro so that
+	a NULL string translates to nil rather than raising an ArgumentError.
+
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/*[ch], README: Update Copyright.

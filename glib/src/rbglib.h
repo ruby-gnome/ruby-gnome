@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:08 $
+  $Author: sakai $
+  $Date: 2003/02/03 08:52:24 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -39,10 +39,11 @@ extern "C" {
 #endif
 
 #define RVAL2CSTR(v) (StringValuePtr(v))
-#define CSTR2RVAL(s) (rb_str_new2(s))
+#define CSTR2RVAL(s) (rbg_cstr2rval(s))
 
 extern VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
+extern VALUE rbg_cstr2rval(const char* str);
 
 #ifdef __cplusplus
 }
