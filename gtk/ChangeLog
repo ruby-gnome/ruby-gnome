@@ -1,10 +1,14 @@
+2002-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkregion.c, src/rbgtk.h: Remove Gdk::Point.
+
 2002-08-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: remove idle handler when ruby interpreter is terminated.
 
 2002-08-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * src/rbgtkmenubar.c: Implement Gtk::MenuBar#set_shadow_type().
+	* src/rbgtkmenubar.c: Implement Gtk::MenuBar#set_shadow_type().
 
 2002-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
@@ -12,7 +16,7 @@
 
 2002-08-20  Masao Mutoh <mutoh@highway.ne.jp>
 
-	* src/rbgdkcolor.c: Support  RB_DEF_CLASS system.
+	* src/rbgdkcolor.c: Support RB_DEF_CLASS system.
 	Remove Gdk::ColorContext temporarily. 
 	Add Gdk::Color#==.
 	* src/rbgdkcursor.c, rbgdk.c, rbgtk.h: Apply RB_DEF_CLASS system.

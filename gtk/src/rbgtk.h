@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/28 17:09:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -62,7 +62,6 @@ extern VALUE mGdkRgb;
 #ifndef GTK_DISABLE_DEPRECATED
 extern VALUE gdkFont;
 #endif
-extern VALUE gdkPoint;
 extern VALUE gdkRectangle;
 extern VALUE gdkRegion;
 extern VALUE gdkAtom;
@@ -116,9 +115,6 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 #define make_grequisition(c) make_tobj(c, gRequisition, sizeof(GtkRequisition))
 #define get_grequisition(c) ((GtkRequisition*)get_tobj(c, gRequisition))
-
-#define make_gdkpoint(r) make_tobj(r, gdkPoint, sizeof(GdkPoint))
-#define get_gdkpoint(r) ((GdkPoint*)get_tobj(r, gdkPoint))
 
 #define make_gdkrectangle(r) make_tobj(r, gdkRectangle, sizeof(GdkRectangle))
 #define get_gdkrectangle(r) ((GdkRectangle*)get_tobj(r, gdkRectangle))

@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/08/28 17:09:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,53 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-/*
- * Gdk::Point
- */
-
-VALUE gdkPoint;
-
-static VALUE
-gdkpoint_s_new(self, x, y)
-    VALUE self, x, y;
-{
-    GdkPoint new;
-    new.x = NUM2INT(x);
-    new.y = NUM2INT(y);
-    return make_gdkpoint(&new);
-}
-
-static VALUE
-gdkpoint_x(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkpoint(self)->x);
-}
-
-static VALUE
-gdkpoint_y(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkpoint(self)->y);
-}
-
-static VALUE
-gdkpoint_set_x(self, x)
-    VALUE self, x;
-{
-    get_gdkpoint(self)->x = NUM2INT(x);
-    return self;
-}
-
-static VALUE
-gdkpoint_set_y(self, y)
-    VALUE self, y;
-{
-    get_gdkpoint(self)->y = NUM2INT(y);
-    return self;
-}
-
 
 /*
  * Gdk::Rectangle
@@ -290,15 +243,6 @@ gdkregion_xor(self, region)
 void
 Init_gtk_gdk_region()
 {
-    /* Gdk::Point */
-    gdkPoint = rb_define_class_under(mGdk, "Point", rb_cData);
-
-    rb_define_singleton_method(gdkPoint, "new", gdkpoint_s_new, 2);
-    rb_define_method(gdkPoint, "x", gdkpoint_x, 0);
-    rb_define_method(gdkPoint, "y", gdkpoint_y, 0);
-    rb_define_method(gdkPoint, "x=", gdkpoint_set_x, 1);
-    rb_define_method(gdkPoint, "y=", gdkpoint_set_y, 1);
-
     /* Gdk::Rectangle */
     gdkRectangle = rb_define_class_under(mGdk, "Rectangle", rb_cData);
 
