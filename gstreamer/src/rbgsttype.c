@@ -115,6 +115,25 @@ rb_gst_type_find_by_mime (VALUE self, VALUE mime)
 		: Qnil;
 }
 
+/*
+ * Class method: find_by_ext(ext)
+ * ext: a file extension.
+ *
+ * Searches for a registered type which can handle the given
+ * file extension. 
+ *
+ * Returns: a Gst::Type object if found, otherwise nil. 
+ */
+static VALUE
+rb_gst_type_find_by_ext (VALUE self, VALUE mime)
+{
+	guint16 id = gst_type_find_by_ext (RVAL2CSTR (mime));
+	GstType *type = gst_type_find_by_id (id);
+	return type != NULL 
+		? RGST_TYPE_NEW (type)
+		: Qnil;
+}
+
 /* Method: id
  * Returns: the ID number of the type.
  */
@@ -172,6 +191,7 @@ Init_gst_type (void)
 	rb_define_singleton_method (c, "each", rb_gst_type_each, 0);
 	rb_define_singleton_method (c, "find_by_id", rb_gst_type_find_by_id, 1);
 	rb_define_singleton_method (c, "find_by_mime", rb_gst_type_find_by_mime, 1);
+	rb_define_singleton_method (c, "find_by_ext", rb_gst_type_find_by_ext, 1);
 	
 	rb_define_method(c, "id", rb_gst_type_get_id, 0);
 	rb_define_method(c, "mime", rb_gst_type_get_mime, 0);

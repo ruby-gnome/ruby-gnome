@@ -320,6 +320,41 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
 					       RGST_EVENT (event)));
 }
 
+/*
+ * Method: caps
+ *
+ * Gets the capabilities of the pad element.
+ *
+ * Returns: an array of Gst::Caps objects.
+ */
+static VALUE
+rb_gst_pad_get_caps (VALUE self)
+{
+	GstCaps *list;
+	VALUE arr;
+
+	arr = rb_ary_new ();
+	for (list = gst_pad_get_caps (RGST_PAD (self));
+	     list != NULL;
+	     list = list->next)
+		rb_ary_push (arr, RGST_CAPS_NEW (list));
+	return arr;
+}
+
+/*
+ * Method: each_caps { |caps| ... }
+ *
+ * Calls the block for each capability of the pad, 
+ * passing a reference to the Gst::Caps object as parameter.
+ *
+ * Returns: always nil.
+ */
+static VALUE
+rb_gst_pad_each_caps (VALUE self)
+{
+	return rb_ary_yield (rb_gst_pad_get_caps (self));
+}
+
 void
 Init_gst_pad (void)
 {
@@ -343,6 +378,8 @@ Init_gst_pad (void)
 	rb_define_method (c, "negotiating?", rb_gst_pad_is_negotiating, 0);
 	rb_define_method (c, "query", rb_gst_pad_query,	-1);
 	rb_define_method (c, "send_event", rb_gst_pad_send_event, 1);
+	rb_define_method (c, "caps", rb_gst_pad_get_caps, 0);
+	rb_define_method (c, "each_caps", rb_gst_pad_each_caps ,0);
 
 	G_DEF_CLASS (GST_TYPE_PAD_LINK_RETURN, "LinkReturn", c);
 	G_DEF_CONSTANTS (c, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");

@@ -1,5 +1,13 @@
 2004-03-02  Laurent Sansonetti  <lrz@gnome.org>
 
+	* src/rbgst.c: Defines Gst::[MAJOR|MINOR|MACRO]_VERSION.
+	* src/rbgstpad.c (#caps, #each_caps): Added.
+	* src/rbgstpadtemplate.c (#caps): Uses the gst_pad_template_get_caps
+	  C function instead of directly accessing the structure fields.
+	* src/rbgsttype.c (find_by_ext): Added.
+
+2004-03-02  Laurent Sansonetti  <lrz@gnome.org>
+
 	* extconf.rb: Removed assert.h dependency.
 	* src/*.[ch]:
 	  - Refactored some parts of the code.

@@ -276,4 +276,19 @@ Init_gst (void)
 	 * Constant that defines one GStreamer nanosecond.
 	 */
 	rb_define_const (mGst, "NSECOND", INT2FIX (GST_NSECOND));
+
+	/* Constant: VERSION_MAJOR
+	 * GStreamer's major version.
+	 */
+	rb_define_const (mGst, "VERSION_MAJOR", INT2FIX (GST_VERSION_MAJOR));
+	
+	/* Constant: VERSION_MINOR
+	 * GStreamer's minor version.
+	 */
+	rb_define_const (mGst, "VERSION_MINOR", INT2FIX (GST_VERSION_MINOR));
+
+	/* Constant: VERSION_MICRO
+	 * GStreamer's micro version.
+	 */
+	rb_define_const (mGst, "VERSION_MICRO", INT2FIX (GST_VERSION_MICRO));
 }

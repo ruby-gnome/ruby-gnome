@@ -74,14 +74,13 @@ rb_gst_padtemplate_get_direction (VALUE self)
 static VALUE
 rb_gst_padtemplate_get_caps (VALUE self)
 {
-	GstPadTemplate *pad;
 	GstCaps *list;
 	VALUE arr;
 
-	pad = RGST_PAD_TEMPLATE (self);
 	arr = rb_ary_new ();
-
-	for (list = pad->caps; list != NULL; list = list->next)
+	for (list = gst_pad_template_get_caps (RGST_PAD_TEMPLATE (self));
+	     list != NULL;
+	     list = list->next)
 		rb_ary_push (arr, RGST_CAPS_NEW (list));
 	return arr;
 }
@@ -118,7 +117,6 @@ Init_gst_padtemplate (void)
 	rb_define_method (c, "name", rb_gst_padtemplate_get_name, 0);
 	rb_define_method (c, "presence", rb_gst_padtemplate_get_presence, 0);
 	rb_define_method (c, "direction", rb_gst_padtemplate_get_direction, 0);
-
 	rb_define_method (c, "caps", rb_gst_padtemplate_get_caps, 0);
 	rb_define_method (c, "each_caps", rb_gst_padtemplate_each_caps, 0);
 	rb_define_method (c, "has_caps?", rb_gst_padtemplate_has_caps, 0);
