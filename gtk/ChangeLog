@@ -1,3 +1,11 @@
+2002-08-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktree.c: suppress warnings
+	* src/rbgtktext.c: use G_DEF_CLASS
+	* src/rbgtklayout.c: remove unused global variable gLayout
+	* src/rbgtkaccellabel.c: remove unused global variable gAccelLabel
+	* src/rbgtkobject.c: make gObject be local variable
+
 2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: remove definitions of signal names.

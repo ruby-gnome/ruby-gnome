@@ -4,7 +4,7 @@
   rbgtktree.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:44:32 $
+  $Date: 2002/08/04 13:45:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -27,7 +27,7 @@ static VALUE
 tree_append(self, child)
     VALUE self, child;
 {
-    gtk_tree_append(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child));
+    gtk_tree_append(GTK_TREE(RVAL2GOBJ(self)), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -35,7 +35,7 @@ static VALUE
 tree_prepend(self, child)
     VALUE self, child;
 {
-    gtk_tree_prepend(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child));
+    gtk_tree_prepend(GTK_TREE(RVAL2GOBJ(self)), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -43,7 +43,7 @@ static VALUE
 tree_insert(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_tree_insert(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child),
+    gtk_tree_insert(GTK_TREE(RVAL2GOBJ(self)), GTK_WIEGET(RVAL2GOBJ(child)),
 		    NUM2INT(pos));
     return self;
 }
@@ -80,7 +80,7 @@ tree_child_position(self, child)
     VALUE self, child;
 {
     return INT2NUM(gtk_tree_child_position(GTK_TREE(RVAL2GOBJ(self)),
-					   RVAL2GOBJ(child)));
+					   GTK_WIDGET(RVAL2GOBJ(child))));
 }
 
 static VALUE

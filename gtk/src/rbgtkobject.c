@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Date: 2002/08/04 13:45:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -378,12 +378,10 @@ gobj_get_gtk_type(self)
     return INT2NUM(GTK_OBJECT_TYPE(RVAL2GOBJ(self)));
 }
 
-VALUE gObject;
-
 void 
 Init_gtk_object()
 {
-    gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
+    VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
     /* GtkArgFlags */
     rb_define_const(gObject, "ARG_READABLE", INT2NUM(GTK_ARG_READABLE));

@@ -4,7 +4,7 @@
   rbgtklayout.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Date: 2002/08/04 13:45:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,8 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE gLayout;
 
 static VALUE
 layout_initialize(self, hadjustment, vadjustment)

@@ -2,15 +2,13 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/04 13:45:42 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
 
 #include "global.h"
-
-VALUE gAccelLabel;
 
 static VALUE
 alabel_initialize(self, string)

@@ -3,8 +3,8 @@
 
   rbgtktext.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/08/04 13:45:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -146,14 +146,7 @@ txt_has_cursor(self)
 
 void Init_gtk_text()
 {
-    static RGObjClassInfo cinfo;
-
-    gText = rb_define_class_under(mGtk, "Text", gEditable);
-    cinfo.klass = gText;
-    cinfo.gtype = GTK_TYPE_TEXT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gText = G_DEF_CLASS(GTK_TYPE_TEXT, "Text", mGtk);
 
     rb_define_method(gText, "initialize", txt_initialize, -1);
     rb_define_method(gText, "set_line_wrap", txt_set_line_wrap, 1);
