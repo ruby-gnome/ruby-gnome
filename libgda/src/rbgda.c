@@ -35,6 +35,8 @@ static void Init_all_classes(void) {
     extern void Init_gda_connection(void);
     extern void Init_gda_datamodel(void);
     extern void Init_gda_datamodel_array(void);
+    extern void Init_gda_datamodel_hash(void);
+    extern void Init_gda_datamodel_list(void);
     extern void Init_gda_datasource(void);
     extern void Init_gda_error(void);
     extern void Init_gda_parameter(void);
@@ -49,6 +51,8 @@ static void Init_all_classes(void) {
     Init_gda_connection();
     Init_gda_datamodel();
     Init_gda_datamodel_array();
+    Init_gda_datamodel_hash();
+    Init_gda_datamodel_list();
     Init_gda_datasource();
     Init_gda_error();
     Init_gda_parameter();
