@@ -1,6 +1,10 @@
 2002-08-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/utils_int64.c: rb_global_variable(&max_PRUint32)
+	* src/rbgobj_param.c: rename rbgobj_get_value_from_paramspec to
+	rbgobj_get_value_from_param_spec
+	* src/rbgobj_param.c (gobj_get_gtype): use rbgobj_param_spec_get_struct
+	instead of RVAL2GOBJ
 
 2002-08-18  Masao Mutoh <mutoh@highway.ne.jp>
 

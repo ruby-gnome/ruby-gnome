@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/08/13 17:56:41 $
+  $Date: 2002/08/20 03:55:17 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -69,7 +69,7 @@ rbgobj_param_spec_initialize(self, pspec)
 }
 
 VALUE
-rbgobj_get_value_from_paramspec(GParamSpec* pspec)
+rbgobj_get_value_from_param_spec(GParamSpec* pspec)
 {
     gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
     if (!data)
@@ -128,7 +128,7 @@ static VALUE
 gobj_get_gtype(self)
     VALUE self;
 {
-    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(RVAL2GOBJ(self)));
+    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_param_spec_get_struct(self)));
 }
 
 
