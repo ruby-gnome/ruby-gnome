@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,17 +37,7 @@ dialog_action_area(self)
 
 void Init_gtk_dialog()
 {
-    static RGObjClassInfo cinfo;
-
-    gDialog = rb_define_class_under(mGtk, "Dialog", gWindow);
-    cinfo.klass = gDialog;
-    cinfo.gtype = GTK_TYPE_DIALOG;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /* rb_define_const(gDialog, "SIGNAL_", rb_str_new2("")); */
-
+    VALUE gDialog = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
     rb_define_method(gDialog, "initialize", dialog_initialize, 0);
     rb_define_method(gDialog, "vbox", dialog_vbox, 0);
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);

@@ -4,7 +4,7 @@
   rbgtkhruler.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,16 +21,10 @@ hruler_initialize(self)
     return Qnil;
 }
 
-void Init_gtk_hruler()
+void 
+Init_gtk_hruler()
 {
-    static RGObjClassInfo cinfo;
-
-    gHRuler = rb_define_class_under(mGtk, "HRuler", gRuler);
-    cinfo.klass = gHRuler;
-    cinfo.gtype = GTK_TYPE_HRULER;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gHRuler = G_DEF_CLASS(GTK_TYPE_HRULER, "HRuler", mGtk);
 
     rb_define_method(gHRuler, "initialize", hruler_initialize, 0);
 }

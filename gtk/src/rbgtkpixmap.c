@@ -4,7 +4,7 @@
   rbgtkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,16 +45,10 @@ pixmap_get(self)
 	return rb_assoc_new(GOBJ2RVAL(val),GOBJ2RVAL(mask));
 }
 
-void Init_gtk_pixmap()
+void 
+Init_gtk_pixmap()
 {
-    static RGObjClassInfo cinfo;
-
-    gPixmap = rb_define_class_under(mGtk, "Pixmap", gMisc);
-    cinfo.klass = gPixmap;
-    cinfo.gtype = GTK_TYPE_PIXMAP;;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gPixmap = G_DEF_CLASS(GTK_TYPE_PIXMAP, "Pixmap", mGtk);
 
     rb_define_method(gPixmap, "initialize", pixmap_initialize, 2);
     rb_define_method(gPixmap, "set", pixmap_set, 2);

@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -356,7 +356,7 @@ clist_get_row_style(self, row)
 {
     GtkStyle* style;
     style = gtk_clist_get_row_style(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row));
-    return make_gstyle(style);
+    return GOBJ2RVAL(style);
 }
 
 static VALUE
@@ -767,16 +767,10 @@ clist_find_row_from_data(self, data)
     return INT2FIX(gtk_clist_find_row_from_data(GTK_CLIST(RVAL2GOBJ(self)), (gpointer)data));
 }
 
-void Init_gtk_clist()
+void 
+Init_gtk_clist()
 {
-    static RGObjClassInfo cinfo;
-
-    gCList = rb_define_class_under(mGtk, "CList", gContainer);
-    cinfo.klass = gCList;
-    cinfo.gtype = gtk_clist_get_type();
-    cinfo.mark = clist_mark;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gCList = G_DEF_CLASS2(GTK_TYPE_CLIST, "CList", mGtk, clist_mark, 0);
     
     /* Signals */
     rb_define_const(gCList, "SIGNAL_SELECT_ROW", rb_str_new2("select_row"));

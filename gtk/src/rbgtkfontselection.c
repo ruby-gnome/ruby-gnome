@@ -1,9 +1,12 @@
-/************************************************
+/**********************************************************
 
   rbgtkfontselection.c -
 
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
+
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
-************************************************/
+**********************************************************/
 
 #include "global.h"
 
@@ -61,17 +64,10 @@ fs_set_preview_text(self, text)
     return Qnil;
 }
 
-void Init_gtk_font_selection()
+void 
+Init_gtk_font_selection()
 {
-    static RGObjClassInfo cinfo;
-
-    gFontSelection = rb_define_class_under(mGtk, "FontSelection", gNotebook);
-    cinfo.klass = gFontSelection;
-    cinfo.gtype = GTK_TYPE_FONT_SELECTION;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gFontSelection = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
     rb_define_method(gFontSelection, "initialize", fs_initialize, 0);
 #ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gFontSelection, "font", fs_get_font, 0);

@@ -4,7 +4,7 @@
   rbgtkbin.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,18 +21,10 @@ bin_child(self)
     return child ? GOBJ2RVAL(child) : Qnil;
 }
 
-void Init_gtk_bin()
+void 
+Init_gtk_bin()
 {
-    static RGObjClassInfo cinfo;
-
-    gBin = rb_define_class_under(mGtk, "Bin", gContainer);
-    cinfo.klass = gBin;
-    cinfo.gtype = GTK_TYPE_BIN;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /* rb_define_const(   gBin, "SIGNAL_", rb_str_new2("")); */
+    VALUE gBin = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
 
     rb_define_method(gBin, "child", bin_child, 0);
 

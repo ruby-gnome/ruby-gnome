@@ -1,3 +1,17 @@
+2002-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.[ch]: Remove rbgtk_register_class().
+	* src/rbgtk.h: Remove RUBY_GTK_OBJ_KEY.
+	* src/rbgtkallocation.c, src/rbgtkrequisition.c: Divide from rbgtk.c.
+	* src/rbgtkitemfactroy.c: Remove Gtk::ItemFactory::Constants.
+	* src/*.c: Apply G_DEF_CLASS(), G_DEF_CLASS2(), GTYPE2CLASS().
+	* src/rbgdkevent.c: Add Gdk::EventButton#button ,#state.
+	* src/rbgdkwindow.c: Remove Gdk::WindowAttr temporarily.
+	* src/rbgdkdraw.c: Remove Gdk::Segment temporarily.
+	* src/rbgdkgc.c: Remove Gdk::GCValues temporarily.
+	* src/rbgdk.c: Remove Gdk::Error temporarily.
+	* src/rbgtknotebook.c: Remove Gtk::Notebook#cur_page, #page temporarily.
+
 2002-07-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkeditable.c: Gtk::Editable becomes a module

@@ -3,8 +3,8 @@
 
   rbgdkimage.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,8 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE gdkImage;
 
 VALUE
 make_gdkimage(image)
@@ -128,16 +126,10 @@ gdkimage_bpl(self)
     return INT2NUM((get_gdkimage(self))->bpl);
 }
 
-void Init_gtk_gdk_image()
+void 
+Init_gtk_gdk_image()
 {
-    static RGObjClassInfo cinfo;
-
-    gdkImage = rb_define_class_under(mGdk, "Image", rbgobj_cGObject);
-    cinfo.klass = gdkImage;
-    cinfo.gtype = GDK_TYPE_IMAGE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gdkImage = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 
 #ifdef GDK_ENABLE_BROKEN
     rb_define_singleton_method(gdkImage, "new_bitmap", gdkimage_s_newbmap, 4);

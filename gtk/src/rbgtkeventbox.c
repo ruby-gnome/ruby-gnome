@@ -4,7 +4,7 @@
   rbgtkeventbox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,16 +21,10 @@ eventbox_initialize(self)
     return Qnil;
 }
 
-void Init_gtk_eventbox()
+void 
+Init_gtk_eventbox()
 {
-    static RGObjClassInfo cinfo;
-
-    gEventBox = rb_define_class_under(mGtk, "EventBox", gBin);
-    cinfo.klass = gEventBox;
-    cinfo.gtype = GTK_TYPE_EVENT_BOX;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gEventBox = G_DEF_CLASS(GTK_TYPE_EVENT_BOX, "EventBox", mGtk);
 
     rb_define_method(gEventBox, "initialize", eventbox_initialize, 0);
 }

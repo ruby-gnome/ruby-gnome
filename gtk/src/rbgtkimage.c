@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,16 +43,10 @@ image_get(self)
     return rb_assoc_new(make_gdkimage(val),GOBJ2RVAL(mask));
 }
 
-void Init_gtk_image()
+void 
+Init_gtk_image()
 {
-    static RGObjClassInfo cinfo;
-
-    gImage = rb_define_class_under(mGtk, "Image", gMisc);
-    cinfo.klass = gImage;
-    cinfo.gtype = GTK_TYPE_IMAGE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
 
     rb_define_method(gImage, "initialize", image_initialize, 2);
     rb_define_method(gImage, "set", image_set, 2);

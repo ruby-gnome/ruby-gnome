@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,8 +18,6 @@
  */
 
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
-
-VALUE gdkDrawable;
 
 static VALUE
 gdkdraw_draw_point(self, gc, x, y)
@@ -284,18 +282,7 @@ VALUE gdkSegment;
 void
 Init_gtk_gdk_draw()
 {
-    static RGObjClassInfo cinfo;
-
-    /*
-     * Gdk::Drawable
-     */
-    gdkDrawable = rb_define_class_under(mGdk, "Drawable", rbgobj_cGObject);
-    cinfo.klass = gdkDrawable;
-    cinfo.gtype = GDK_TYPE_DRAWABLE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gdkDrawable = G_DEF_CLASS(GDK_TYPE_DRAWABLE, "Drawable", mGdk);
 
     /* instance methods */
     rb_define_method(gdkDrawable, "draw_point", gdkdraw_draw_point, 3);
@@ -318,9 +305,4 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
     rb_define_method(gdkDrawable, "geometry", gdkdraw_get_geometry, 0);
-
-    /*
-     * Gdk::Segment
-     */
-    gdkSegment = rb_define_class_under(mGdk, "Segment", rb_cData);
 }

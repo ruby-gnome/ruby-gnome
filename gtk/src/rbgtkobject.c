@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: sakai $
-  $Date: 2002/07/26 14:42:15 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -133,7 +133,7 @@ signal_setup_args(obj, sig, argc, params, args)
     int i;
     char *signame = rb_id2name(sig);
 
-    if (rb_obj_is_kind_of(obj, gWidget)) {
+    if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))) {
 		if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
 			rb_ary_push(args, make_gdkrectangle(GTK_VALUE_POINTER(params[0])));
 			return;
@@ -182,7 +182,7 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
     }
-    if (rb_obj_is_kind_of(obj, gWindow)) {
+    if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WINDOW))) {
 		if (signal_comp(signame, "move_resize", GTK_TYPE_WINDOW)) {
 			rb_ary_push(args, INT2NUM(*GTK_RETLOC_INT(params[0])));
 			rb_ary_push(args, INT2NUM(*GTK_RETLOC_INT(params[1])));	
@@ -195,7 +195,7 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
     }
-    if (rb_obj_is_kind_of(obj, gEditable)) {
+    if (rb_obj_is_kind_of(obj, mEditable)) {
 		if (signal_comp(signame, "insert_text", GTK_TYPE_EDITABLE)) {
 			rb_ary_push(args, rb_str_new(GTK_VALUE_STRING(params[0]), 
 										 GTK_VALUE_INT(params[1])));
@@ -246,13 +246,13 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
     }
-    if (rb_obj_is_kind_of(obj, gEntry)) {
+    if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_ENTRY))) {
 		if (signal_comp(signame, "insert_position", GTK_TYPE_ENTRY)) {
 			rb_ary_push(args, INT2NUM(*GTK_RETLOC_INT(params[0])));
 			return;
 		}
     }
-    if (rb_obj_is_kind_of(obj, gCList)) {
+    if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_CLIST))) {
 		if (signal_comp(signame, "select_row", GTK_TYPE_CLIST) ||
 			signal_comp(signame, "unselect_row", GTK_TYPE_CLIST)) {
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[0])));
@@ -264,12 +264,14 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
     }
-	if (rb_obj_is_kind_of(obj, gNotebook)) {
+	if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_NOTEBOOK))) {
+/* FIXME
 		if (signal_comp(signame, "switch_page", GTK_TYPE_NOTEBOOK)) {
 			rb_ary_push(args, make_notepage((GtkNotebookPage*) GTK_VALUE_OBJECT(params[0])));
 			rb_ary_push(args, INT2FIX(GTK_VALUE_INT(params[1])));
 			return; 
 		} 
+*/
 	}
   
     params1 = params;
@@ -289,7 +291,7 @@ signal_sync_args(obj, sig, argc, params, args)
 {
     char *signame = rb_id2name(sig);
 
-    if (rb_obj_is_kind_of(obj, gWidget)) {
+    if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))) {
 		if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
 			memcpy(GTK_VALUE_POINTER(params[0]), get_grequisition(rb_ary_pop(args)),
 				   sizeof(GtkRequisition));
@@ -376,16 +378,22 @@ gobj_get_gtk_type(self)
     return INT2NUM(GTK_OBJECT_TYPE(RVAL2GOBJ(self)));
 }
 
-void Init_gtk_object()
-{
-    static RGObjClassInfo cinfo;
+VALUE gObject;
 
+void 
+Init_gtk_object()
+{
+	static RGObjClassInfo cinfo;
+
+/* FIXME
+    VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
+*/
     gObject = rb_define_class_under(mGtk, "Object", rbgobj_cGObject);
     cinfo.klass = gObject;
     cinfo.gtype = GTK_TYPE_OBJECT;
     cinfo.mark = 0;
     cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    rbgobj_register_class(&cinfo);
 
     /* GtkArgFlags */
     rb_define_const(gObject, "ARG_READABLE", INT2NUM(GTK_ARG_READABLE));
@@ -410,6 +418,7 @@ void Init_gtk_object()
     /*
      * instance methods
      */
+
     rb_define_method(gObject, "flags", gobj_get_flags, 0);
     rb_define_method(gObject, "flags=", gobj_set_flags, 1);
     rb_define_method(gObject, "unset_flags", gobj_unset_flags, 1);

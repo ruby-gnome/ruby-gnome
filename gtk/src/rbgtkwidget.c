@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -903,16 +903,10 @@ DEFINE_EVENT_FUNC(button_press_event, button)
 	DEFINE_EVENT_FUNC(client_event, client)
 	DEFINE_EVENT_FUNC(no_expose_event, any)
 
-	void Init_gtk_widget()
+void 
+Init_gtk_widget()
 {
-    static RGObjClassInfo cinfo;
-
-    gWidget = rb_define_class_under(mGtk, "Widget", gObject);
-    cinfo.klass = gWidget;
-    cinfo.gtype = GTK_TYPE_WIDGET;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
 
     /*
      * constants
@@ -1160,11 +1154,12 @@ DEFINE_EVENT_FUNC(button_press_event, button)
     Init_gtk_calendar();
     Init_gtk_container();
     Init_gtk_drawing_area();
-    Init_gtk_editable();
     Init_gtk_misc();
     Init_gtk_preview();
     Init_gtk_progress();
     Init_gtk_range();
     Init_gtk_ruler();
     Init_gtk_separator();
+    Init_gtk_oldeditable();
+    Init_gtk_entry();
 }

@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: sakai $
-  $Date: 2002/07/30 05:37:54 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -35,9 +35,6 @@
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
-/* Move to glib ASAP by M.Mutoh */
-#define GVAL2RVAL(v) rbgobj_gvalue_to_rvalue((GValue*)v)
-
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
 extern GSList* ary2gslist(VALUE ary);
@@ -46,136 +43,29 @@ extern VALUE arg_to_value(GtkArg* arg);
 
 extern ID id_call;
 
-extern void rbgtk_register_class(RGObjClassInfo *cinfo);
-
 extern VALUE mRC;
 extern VALUE mGtk;
 extern VALUE mGtkDrag;
-extern VALUE gObject;
-extern VALUE gWidget;
-extern VALUE gContainer;
-extern VALUE gBin;
-extern VALUE gAccelLabel;
-extern VALUE gAlignment;
-extern VALUE gMisc;
-extern VALUE gArrow;
-extern VALUE gFrame;
-extern VALUE gAspectFrame;
-extern VALUE gData;
-extern VALUE gAdjustment;
-extern VALUE gBox;
-extern VALUE gButton;
-extern VALUE gTButton;
-extern VALUE gCButton;
-extern VALUE gRButton;
-extern VALUE gBBox;
-extern VALUE gCalendar;
-extern VALUE gCList;
-extern VALUE gCTree;
-extern VALUE gCTreeNode;
-extern VALUE gWindow;
-extern VALUE gDialog;
-extern VALUE gFileSel;
-extern VALUE gVBox;
-extern VALUE gColorSel;
-extern VALUE gColorSelDialog;
-extern VALUE gCombo;
-extern VALUE gImage;
-extern VALUE gDrawArea;
-extern VALUE gEditable;
-extern VALUE gOldEditable;
-extern VALUE gEntry;
-extern VALUE gSButton;
-extern VALUE gEventBox;
-extern VALUE gFixed;
-extern VALUE gFontSelection;
-extern VALUE gFontSelectionDialog;
-extern VALUE gGamma;
-extern VALUE gCurve;
-extern VALUE gHBBox;
-extern VALUE gVBBox;
-extern VALUE gHBox;
-extern VALUE gPaned;
-extern VALUE gHPaned;
-extern VALUE gVPaned;
-extern VALUE gRuler;
-extern VALUE gHRuler;
-extern VALUE gVRuler;
-extern VALUE gRange;
-extern VALUE gScale;
-extern VALUE gHScale;
-extern VALUE gVScale;
-extern VALUE gScrollbar;
-extern VALUE gHScrollbar;
-extern VALUE gVScrollbar;
-extern VALUE gSeparator;
-extern VALUE gHSeparator;
-extern VALUE gVSeparator;
-extern VALUE gInputDialog;
-extern VALUE gLabel;
-extern VALUE gLayout;
-extern VALUE gList;
-extern VALUE gItem;
-extern VALUE gListItem;
-extern VALUE gMenuShell;
-extern VALUE gMenu;
-extern VALUE gMenuBar;
-extern VALUE gMenuItem;
-extern VALUE gCMenuItem;
-extern VALUE gRMenuItem;
-extern VALUE gTMenuItem;
-extern VALUE gNotebook;
-extern VALUE gNotePage;
-extern VALUE gOptionMenu;
-extern VALUE gPixmap;
-extern VALUE gPreview;
-extern VALUE gProgress;
-extern VALUE gProgressBar;
-extern VALUE gScrolledWin;
-extern VALUE gStatusBar;
-extern VALUE gTable;
-extern VALUE gText;
-extern VALUE gTipsQuery;
-extern VALUE gToolbar;
-extern VALUE gTooltips;
-extern VALUE gTree;
-extern VALUE gTreeItem;
-extern VALUE gViewport;
-extern VALUE gHandleBox;
-extern VALUE gPlug;
-extern VALUE gSocket;
+extern VALUE mEditable;
 
-extern VALUE gAccelGroup;
-extern VALUE gStyle;
-extern VALUE gPreviewInfo;
 extern VALUE gAllocation;
 extern VALUE gRequisition;
-extern VALUE gItemFactory;
-extern VALUE gIFConst;
 extern VALUE gSelectionData;
+extern VALUE gData;
 
 extern VALUE mGdk;
 extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
-extern VALUE gdkError;
+extern VALUE mGdkRgb;
+
+
 #ifndef GTK_DISABLE_DEPRECATED
 extern VALUE gdkFont;
 #endif
 extern VALUE gdkColor;
-extern VALUE gdkColormap;
-extern VALUE gdkDrawable;
-extern VALUE gdkPixmap;
-extern VALUE gdkBitmap;
-extern VALUE gdkWindow;
-extern VALUE gdkImage;
-extern VALUE gdkVisual;
-extern VALUE gdkGC;
 extern VALUE gdkPoint;
 extern VALUE gdkRectangle;
 extern VALUE gdkRegion;
-extern VALUE gdkGCValues;
-extern VALUE gdkSegment;
-extern VALUE gdkWindowAttr;
 extern VALUE gdkCursor;
 extern VALUE gdkAtom;
 extern VALUE gdkColorContext;
@@ -198,21 +88,11 @@ extern VALUE gdkEventDND;
 extern VALUE gdkEventProximity;
 extern VALUE gdkEventClient;
 extern VALUE gdkEventOther;
-extern VALUE gdkDragContext;
-extern VALUE gdkDragContextConst;
-
-extern VALUE mGdkIM;
-extern VALUE gdkIC;
-extern VALUE gdkICAttr;
-
-extern VALUE mGdkRgb;
 
 /*
  * for gtk
  */
-extern void rbgtk_initialize_gobject(VALUE obj, GtkObject *gtkobj);
-
-extern VALUE make_notepage(GtkNotebookPage* page);
+extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 
@@ -237,15 +117,6 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 #define make_gdkcolor(c) make_tobj(c, gdkColor, sizeof(GdkColor))
 #define get_gdkcolor(c) ((GdkColor*)get_tobj(c, gdkColor))
-
-#define make_gdksegment(c) make_tobj(c, gdkSegment, sizeof(GdkSegment))
-#define get_gdksegment(c) ((GdkSegment*)get_tobj(c, gdkSegment))
-
-#define make_gdkwinattr(c) make_tobj(c, gdkWindowAttr, sizeof(GdkWindowAttr))
-#define get_gdkwinattr(c) ((GdkWindowAttr*)get_tobj(c, gdkWindowAttr))
-
-#define make_gdkwinattr(c) make_tobj(c, gdkWindowAttr, sizeof(GdkWindowAttr))
-#define get_gdkwinattr(c) ((GdkWindowAttr*)get_tobj(c, gdkWindowAttr))
 
 #define make_gallocation(c) make_tobj(c, gAllocation, sizeof(GtkAllocation))
 #define get_gallocation(c) ((GtkAllocation*)get_tobj(c, gAllocation))

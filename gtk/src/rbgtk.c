@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: sakai $
-  $Date: 2002/07/30 05:37:54 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,122 +18,21 @@
 #endif
 
 VALUE mGtk;
-VALUE gObject;
-VALUE gWidget;
-VALUE gContainer;
-VALUE gBin;
-VALUE gAlignment;
-VALUE gMisc;
-VALUE gArrow;
-VALUE gFrame;
-VALUE gAspectFrame;
-VALUE gData;
-VALUE gAdjustment;
-VALUE gBox;
-VALUE gButton;
-VALUE gTButton;
-VALUE gCButton;
-VALUE gRButton;
-VALUE gBBox;
-VALUE gWindow;
-VALUE gDialog;
-VALUE gFileSel;
-VALUE gVBox;
-VALUE gColorSel;
-VALUE gColorSelDialog;
-VALUE gCombo;
-VALUE gImage;
-VALUE gDrawArea;
-VALUE gEditable;
-VALUE gOldEditable;
-VALUE gEntry;
-VALUE gSButton;
-VALUE gEventBox;
-VALUE gFixed;
-VALUE gGamma;
-VALUE gCurve;
-VALUE gHBBox;
-VALUE gVBBox;
-VALUE gHBox;
-VALUE gPaned;
-VALUE gHPaned;
-VALUE gVPaned;
-VALUE gRuler;
-VALUE gHRuler;
-VALUE gVRuler;
-VALUE gRange;
-VALUE gScale;
-VALUE gHScale;
-VALUE gVScale;
-VALUE gScrollbar;
-VALUE gHScrollbar;
-VALUE gVScrollbar;
-VALUE gSeparator;
-VALUE gHSeparator;
-VALUE gVSeparator;
-VALUE gInputDialog;
-VALUE gLabel;
-VALUE gItem;
-VALUE gMenuShell;
-VALUE gMenu;
-VALUE gMenuBar;
-VALUE gMenuItem;
-VALUE gCMenuItem;
-VALUE gRMenuItem;
-VALUE gTMenuItem;
-VALUE gNotebook;
-VALUE gNotePage;
-VALUE gOptionMenu;
-VALUE gProgressBar;
-VALUE gScrolledWin;
-VALUE gStatusBar;
-VALUE gTable;
-VALUE gToolbar;
-VALUE gTooltips;
-VALUE gViewport;
-VALUE gPlug;
-VALUE gSocket;
+VALUE mEditable;
 
-VALUE gAccelGroup;
-VALUE gAcceleratorTable;
-VALUE gStyle;
-VALUE gAllocation;
-VALUE gRequisition;
-VALUE gItemFactory;
-VALUE gIFConst;
-VALUE gFontSelection;
-VALUE gFontSelectionDialog;
+VALUE gData;
 VALUE gSelectionData;
 
 #ifndef GTK_DISABLE_DEPRECATED
-VALUE gCList;
-VALUE gCTree;
-VALUE gCTreeNode;
-VALUE gList;
-VALUE gListItem;
-VALUE gPixmap;
-VALUE gProgress;
-VALUE gPreview;
 VALUE gPreviewInfo;
-VALUE gTipsQuery;
 #endif
 
 #ifdef GTK_ENABLE_BROKEN
-VALUE gText;
-VALUE gTree;
-VALUE gTreeItem;
 #endif
 
 VALUE mRC;
 
 ID id_call;
-
-void
-rbgtk_register_class(cinfo)
-    RGObjClassInfo *cinfo;
-{
-    rbgobj_register_class(cinfo);
-}
 
 void
 rbgtk_initialize_gtkobject(obj, gtkobj)
@@ -222,165 +121,6 @@ exec_callback(widget, proc)
 {
     rb_funcall((VALUE)proc, id_call, 1, GOBJ2RVAL(widget));
 }
-
-/* 
- * Allocation
- */
-static VALUE
-gallocation_new(self, x, y, w, h)
-    VALUE self, x, y, w, h;
-{
-    GtkAllocation a;
-
-    a.x = NUM2INT(x);
-    a.y = NUM2INT(y);
-    a.width = NUM2INT(w);
-    a.height = NUM2INT(h);
-    return make_gallocation(&a);
-}
-
-static VALUE
-gallocation_x(self)
-    VALUE self;
-{
-    return INT2NUM(get_gallocation(self)->x);
-}
-
-static VALUE
-gallocation_y(self)
-    VALUE self;
-{
-    return INT2NUM(get_gallocation(self)->y);
-}
-
-static VALUE
-gallocation_w(self)
-    VALUE self;
-{
-    return INT2NUM(get_gallocation(self)->width);
-}
-
-static VALUE
-gallocation_h(self)
-    VALUE self;
-{
-    return INT2NUM(get_gallocation(self)->height);
-}
-
-static VALUE
-gallocation_to_a(self)
-    VALUE self;
-{
-    GtkAllocation *a;
-
-    a = get_gallocation(self);
-    return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
-					   INT2FIX(a->width), INT2FIX(a->height));
-}
-
-static VALUE
-gallocation_to_s(self)
-    VALUE self;
-{
-    char str[2 +2*3 +5*4  +1]; /* member is guint16. max string size is 5 */
-    GtkAllocation *a;
-
-    a = get_gallocation(self);
-    sprintf(str, "(%5d, %5d, %5d, %5d)", a->x, a->y, a->width, a->height);
-    return rb_str_new2(str);
-}
-
-void Init_gtk_allocation()
-{
-    gAllocation = rb_define_class_under(mGtk, "Allocation", rb_cData);
-
-    rb_define_singleton_method(gAllocation, "new", gallocation_new, 4);
-    rb_define_method(gAllocation, "x", gallocation_x, 0);
-    rb_define_method(gAllocation, "y", gallocation_y, 0);
-    rb_define_method(gAllocation, "width", gallocation_w, 0);
-    rb_define_method(gAllocation, "height", gallocation_h, 0);
-    rb_define_method(gAllocation, "to_a", gallocation_to_a, 0);
-    rb_define_method(gAllocation, "to_s", gallocation_to_s, 0);
-}
-
-/*
- * Requisition
- */
-static VALUE grequisition_new(self, w, h)
-    VALUE self, w, h;
-{
-    GtkRequisition r;
-
-    r.width = NUM2INT(w);
-    r.height = NUM2INT(h);
-    return make_grequisition(&r);
-}
-
-static VALUE
-grequisition_w(self)
-    VALUE self;
-{
-    return INT2NUM(get_grequisition(self)->width);
-}
-
-static VALUE
-grequisition_h(self)
-    VALUE self;
-{
-    return INT2NUM(get_grequisition(self)->height);
-}
-
-static VALUE
-grequisition_set_w(self, w)
-    VALUE self, w;
-{
-    get_grequisition(self)->width = NUM2INT(w);
-    return self;
-}
-
-static VALUE
-grequisition_set_h(self, h)
-    VALUE self, h;
-{
-    get_grequisition(self)->height = NUM2INT(h);
-    return self;
-}
-
-static VALUE
-grequisition_to_a(self)
-    VALUE self;
-{
-    GtkRequisition *r;
-
-    r = get_grequisition(self);
-    return rb_ary_new3(2, INT2FIX(r->width), INT2FIX(r->height));
-}
-
-static VALUE
-grequisition_to_s(self)
-    VALUE self;
-{
-    char str[2 +2*1 +5*2  +1]; /* member is guint16. max string size is 5 */
-    GtkRequisition *r;
-
-    r = get_grequisition(self);
-    sprintf(str, "(%5d, %5d)", r->width, r->height);
-    return rb_str_new2(str);
-}
-
-void Init_gtk_requisiton()
-{
-    gRequisition = rb_define_class_under(mGtk, "Requisition", rb_cData);
-
-    rb_define_singleton_method(gRequisition, "new", grequisition_new, 2);
-    rb_define_method(gRequisition, "width", grequisition_w, 0);
-    rb_define_method(gRequisition, "height", grequisition_h, 0);
-    rb_define_method(gRequisition, "width=", grequisition_set_w, 1);
-    rb_define_method(gRequisition, "height=", grequisition_set_h, 1);
-    rb_define_method(gRequisition, "to_a", grequisition_to_a, 0);
-    rb_define_method(gRequisition, "to_s", grequisition_to_s, 0);
-}
-
 
 /*
  * Gtk module
@@ -472,27 +212,30 @@ idle()
 /*
  * Init
  */
-void Init_gtk_gtk()
+void 
+Init_gtk_gtk()
 {
     id_call = rb_intern("call");
 
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relatives, Qnil);
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
+
     Init_gtk_const();
+	Init_gtk_editable();
     Init_gtk_main();
+    Init_gtk_object();
     Init_gtk_rc();
     Init_gtk_style();
     Init_gtk_selectiondata();
     Init_gtk_drag();
 	Init_gtk_windowgroup();
-    Init_gtk_object();
 
     Init_gtk_accel_group();
 #ifndef GTK_DISABLE_DEPRECATED
     gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", rb_cData);
 #endif
-    Init_gtk_requisiton();
+    Init_gtk_requisition();
     Init_gtk_allocation();
 
 #ifdef USE_POLL_FUNC
@@ -500,4 +243,5 @@ void Init_gtk_gtk()
 #else
     gtk_idle_add((GtkFunction)idle, 0);
 #endif
+
 }

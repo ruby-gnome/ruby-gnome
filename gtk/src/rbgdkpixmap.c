@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,8 +16,6 @@
 /*
  * Gdk::Pixmap
  */
-VALUE gdkPixmap;
-
 static VALUE
 gdkpmap_initialize(self, win, w, h, depth)
     VALUE self, win, w, h, depth;
@@ -119,9 +117,6 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 /*
  * Gdk::Bitmap
  */
-
-VALUE gdkBitmap;
-
 static VALUE
 gdkbmap_initialize(self, win, w, h)
     VALUE self, win, w, h;
@@ -166,19 +161,14 @@ gdkbmap_create_from_xbm(self, win, fname)
 void
 Init_gtk_gdk_pixmap()
 {
-    static RGObjClassInfo cinfo_pixmap;
-    static RGObjClassInfo cinfo_bitmap;
+	VALUE gdkPixmap;
+	VALUE gdkBitmap;
+	RGObjClassInfo* cinfo_bitmap;
 
     /* 
      * GdkPixmap
      */
-    gdkPixmap = rb_define_class_under(mGdk, "Pixmap", gdkDrawable);
-
-    cinfo_pixmap.klass = gdkPixmap;
-    cinfo_pixmap.gtype = GDK_TYPE_PIXMAP;
-    cinfo_pixmap.mark = 0;
-    cinfo_pixmap.free = 0;
-    rbgtk_register_class(&cinfo_pixmap);
+    gdkPixmap = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
 
     rb_define_method(gdkPixmap, "initialize", gdkpmap_initialize, 4);
     rb_define_singleton_method(gdkPixmap, "create_from_data",
@@ -199,11 +189,12 @@ Init_gtk_gdk_pixmap()
      */
     gdkBitmap = rb_define_class_under(mGdk, "Bitmap", gdkPixmap);
 
-    cinfo_bitmap.klass = gdkBitmap;
-    cinfo_bitmap.gtype = GDK_TYPE_PIXMAP;
-    cinfo_bitmap.mark = 0;
-    cinfo_bitmap.free = 0;
-    rbgtk_register_class(&cinfo_bitmap);
+	cinfo_bitmap = ALLOC(RGObjClassInfo);
+    cinfo_bitmap->klass = gdkBitmap;
+    cinfo_bitmap->gtype = GDK_TYPE_PIXMAP;
+    cinfo_bitmap->mark = 0;
+    cinfo_bitmap->free = 0;
+    rbgobj_register_class(cinfo_bitmap);
 
     rb_define_method(gdkBitmap, "initialize", gdkbmap_initialize, 3);
     rb_define_singleton_method(gdkBitmap, "create_from_data",

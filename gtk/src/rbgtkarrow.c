@@ -4,7 +4,7 @@
   rbgtkarrow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,16 +32,10 @@ arrow_set(self, arrow_t, shadow_t)
     return self;
 }
 
-void Init_gtk_arrow()
+void 
+Init_gtk_arrow()
 {
-    static RGObjClassInfo cinfo;
-
-    gArrow = rb_define_class_under(mGtk, "Arrow", gMisc);
-    cinfo.klass = gArrow;
-    cinfo.gtype = GTK_TYPE_ARROW;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gArrow = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
 
     rb_define_method(gArrow, "initialize", arrow_initialize, 2);
     rb_define_method(gArrow, "set", arrow_set, 2);

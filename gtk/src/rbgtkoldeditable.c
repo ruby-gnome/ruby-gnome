@@ -3,8 +3,8 @@
 
   rbgtkoldeditable.c -
 
-  $Author: sakai $
-  $Date: 2002/07/30 05:37:54 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Masahiro Sakai
 
@@ -15,16 +15,9 @@
 void Init_gtk_oldeditable()
 {
 #ifndef GTK_DISABLE_DEPRECATED
-    static RGObjClassInfo cinfo;
+    VALUE gOldEditable = G_DEF_CLASS(GTK_TYPE_OLD_EDITABLE, "OldEditable", mGtk);
 
-    gOldEditable = rb_define_class_under(mGtk, "OldEditable", gWidget);
-    cinfo.klass = gOldEditable;
-    cinfo.gtype = GTK_TYPE_OLD_EDITABLE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    rb_include_module(gOldEditable, gEditable);
+    rb_include_module(gOldEditable, mEditable);
 
 #ifdef GTK_ENABLE_BROKEN
     Init_gtk_text();

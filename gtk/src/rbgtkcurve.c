@@ -4,7 +4,7 @@
   rbgtkcurve.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -86,16 +86,10 @@ curve_get_vector(self, length)
     return vector;
 }
 
-void Init_gtk_curve()
+void 
+Init_gtk_curve()
 {
-    static RGObjClassInfo cinfo;
-
-    gCurve = rb_define_class_under(mGtk, "Curve", gDrawArea);
-    cinfo.klass = gCurve;
-    cinfo.gtype = GTK_TYPE_CURVE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gCurve = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
 
     rb_define_const(gCurve, "SIGNAL_CURVE_TYPE_CHANGED", rb_str_new2("curve-type-changed"));
 

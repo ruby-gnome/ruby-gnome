@@ -2,6 +2,9 @@
 
   rbgtkfontselectiondialog.c -
 
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
+
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 ************************************************/
 
@@ -86,7 +89,7 @@ fsd_get_ok_button(self)
     button = rb_iv_get(self, "@__ok_button");
     if (NIL_P(button)) {
         GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->ok_button;
-        button = make_widget(gButton, w);
+        button = GOBJ2RVAL(w);
         rb_iv_set(self, "@__ok_button", button);
     }
 
@@ -102,7 +105,7 @@ fsd_get_cancel_button(self)
     button = rb_iv_get(self, "@__cancel_button");
     if (NIL_P(button)) {
         GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->cancel_button;
-        button = make_widget(gButton, w);
+        button = GOBJ2RVAL(w);
         rb_iv_set(self, "@__cancel_button", button);
     }
 
@@ -118,7 +121,7 @@ fsd_get_apply_button(self)
     button = rb_iv_get(self, "@__apply_button");
     if (NIL_P(button)) {
         GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->apply_button;
-        button = make_widget(gButton, w);
+        button = GOBJ2RVAL(w);
         rb_iv_set(self, "@__apply_button", button);
     }
 
@@ -127,14 +130,7 @@ fsd_get_apply_button(self)
 
 void Init_gtk_font_selection_dialog()
 {
-    static RGObjClassInfo cinfo;
-    gFontSelectionDialog = rb_define_class_under(mGtk,
-                                "FontSelectionDialog", gWindow);
-    cinfo.klass = gFontSelectionDialog;
-    cinfo.gtype = GTK_TYPE_FONT_SELECTION_DIALOG;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gFontSelectionDialog = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, "FontSelectionDialog", mGtk);
 
     rb_define_method(gFontSelectionDialog, "initialize", fsd_initialize, 1);
 #ifndef GTK_DISABLE_DEPRECATED

@@ -2,8 +2,8 @@
 
   rbgdkplug.c -
 
-  $Author: sakai $
-  $Date: 2002/07/27 14:14:12 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -37,14 +37,7 @@ plug_construct(self, socket_id)
 
 void Init_gtk_plug()
 {
-    static RGObjClassInfo cinfo;
-
-    gPlug = rb_define_class_under(mGtk, "Plug", gWindow);
-    cinfo.klass = gPlug;
-    cinfo.gtype = GTK_TYPE_PLUG;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gPlug = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
     
     rb_define_method(gPlug, "initialize", plug_initialize, 1);
     rb_define_method(gPlug, "construct", plug_construct, 1);

@@ -4,7 +4,7 @@
   rbgtkvbox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -28,18 +28,10 @@ vbox_initialize(argc, argv, self)
     return Qnil;
 }
 
-void Init_gtk_vbox()
+void 
+Init_gtk_vbox()
 {
-    static RGObjClassInfo cinfo;
-
-    gVBox = rb_define_class_under(mGtk, "VBox", gBox);
-    cinfo.klass = gVBox;
-    cinfo.gtype = GTK_TYPE_VBOX;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /* rb_define_const(gVBox, "SIGNAL_", rb_str_new2("")); */
+    VALUE gVBox = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 
     rb_define_method(gVBox, "initialize", vbox_initialize, -1);
 

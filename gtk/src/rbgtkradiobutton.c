@@ -4,7 +4,7 @@
   rbgtkradiobutton.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,7 +32,7 @@ rbtn_initialize(argc, argv, self)
 		if (!NIL_P(arg2)) {
 			label = STR2CSTR(arg2);
 		}
-		if (rb_obj_is_kind_of(arg1, gRButton)) {
+		if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_BUTTON))) {
 			list = GTK_RADIO_BUTTON(RVAL2GOBJ(arg1))->group;
 		}
 		else {
@@ -56,16 +56,10 @@ rbtn_group(self)
     return gslist2ary(gtk_radio_button_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 
-void Init_gtk_radio_button()
+void 
+Init_gtk_radio_button()
 {
-    static RGObjClassInfo cinfo;
-
-    gRButton = rb_define_class_under(mGtk, "RadioButton", gCButton);
-    cinfo.klass = gRButton;
-    cinfo.gtype = GTK_TYPE_RADIO_BUTTON;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gRButton = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
 
     rb_define_method(gRButton, "initialize", rbtn_initialize, -1);
     rb_define_method(gRButton, "group", rbtn_group, 0);

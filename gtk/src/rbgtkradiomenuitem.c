@@ -4,7 +4,7 @@
   rbgtkradiomenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,25 +26,25 @@ rmitem_initialize(argc, argv, self)
     char *label = NULL;
     
     if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
-	TYPE(arg1) == T_STRING) {
-	label = RSTRING(arg1)->ptr;
+		TYPE(arg1) == T_STRING) {
+		label = RSTRING(arg1)->ptr;
     }
     else {
-	if (!NIL_P(arg2)) {
-	    label = STR2CSTR(arg2);
-	}
-	if (rb_obj_is_kind_of(arg1, gRMenuItem)) {
-	    list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
-	}
-	else {
-	    list = ary2gslist(arg1);
-	}
+		if (!NIL_P(arg2)) {
+			label = STR2CSTR(arg2);
+		}
+		if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM))){
+			list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
+		}
+		else {
+			list = ary2gslist(arg1);
+		}
     }
     if (label) {
-	widget = gtk_radio_menu_item_new_with_label(list, label);
+		widget = gtk_radio_menu_item_new_with_label(list, label);
     }
     else {
-	widget = gtk_radio_menu_item_new(list);
+		widget = gtk_radio_menu_item_new(list);
     }
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
@@ -73,16 +73,10 @@ rmitem_set_group(self, grp_ary)
     return gslist2ary(gtk_radio_menu_item_group(rmitem2add));
 }
 
-void Init_gtk_radio_menu_item()
+void 
+Init_gtk_radio_menu_item()
 {
-    static RGObjClassInfo cinfo;
-
-    gRMenuItem = rb_define_class_under(mGtk, "RadioMenuItem", gCMenuItem);
-    cinfo.klass = gRMenuItem;
-    cinfo.gtype = GTK_TYPE_RADIO_MENU_ITEM;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gRMenuItem = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 
     rb_define_method(gRMenuItem, "initialize", rmitem_initialize, -1);
     rb_define_method(gRMenuItem, "group", rmitem_group, 0);

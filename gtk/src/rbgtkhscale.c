@@ -4,7 +4,7 @@
   rbgtkhscale.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,16 +29,10 @@ hscale_initialize(argc, argv, self)
     return Qnil;
 }
 
-void Init_gtk_hscale()
+void 
+Init_gtk_hscale()
 {
-  static RGObjClassInfo cinfo;
-
-  gHScale = rb_define_class_under(mGtk, "HScale", gScale);
-  cinfo.klass = gHScale;
-  cinfo.gtype = GTK_TYPE_HSCALE;
-  cinfo.mark = 0;
-  cinfo.free = 0;
-  rbgtk_register_class(&cinfo);
+  VALUE gHScale = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
 
   rb_define_method(gHScale, "initialize", hscale_initialize, -1);
 }

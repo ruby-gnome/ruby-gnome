@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -172,6 +172,20 @@ gdkeventmotion_is_hint(self)
 }
 
 /* GdkEventButton */
+static VALUE
+gdkeventbutton_button(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->button.button);
+}
+
+static VALUE
+gdkeventbutton_state(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->button.state);
+}
+
 static VALUE
 gdkeventbutton_time(self)
     VALUE self;
@@ -535,6 +549,7 @@ void
 Init_gtk_gdk_event()
 {
     gdkEvent = rb_define_class_under(mGdk, "Event", rb_cData);
+
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
     gdkEventExpose = rb_define_class_under(mGdk, "EventExpose", gdkEventAny);
     gdkEventNoExpose = rb_define_class_under(mGdk, "EventNoExpose", gdkEventAny);
@@ -584,7 +599,9 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventMotion, "y_root", gdkeventmotion_y_root, 0);
 
     /* GdkEventButton */
-    rb_define_method(gdkEventButton, "time", gdkeventbutton_time, 0);
+    rb_define_method(gdkEventButton, "button", gdkeventbutton_button, 0);
+    rb_define_method(gdkEventButton, "state", gdkeventbutton_state, 0);
+    rb_define_method(gdkEventButton, "time",   gdkeventbutton_time, 0);
     rb_define_method(gdkEventButton, "x", gdkeventbutton_x, 0);
     rb_define_method(gdkEventButton, "y", gdkeventbutton_y, 0);
     rb_define_method(gdkEventButton, "x_root", gdkeventbutton_x_root, 0);

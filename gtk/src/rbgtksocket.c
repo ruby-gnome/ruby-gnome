@@ -2,8 +2,8 @@
 
   rbgtksocket.c -
 
-  $Author: sakai $
-  $Date: 2002/07/27 14:14:12 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -44,20 +44,14 @@ static VALUE
 socket_get_socket_id(self)
     VALUE self;
 {
-    return INT2NUM(GDK_WINDOW_XWINDOW(GTK_WIDGET(get_widget(self))->window));
+    return INT2NUM(GDK_WINDOW_XWINDOW(GTK_WIDGET(RVAL2GOBJ(self))->window));
 }
 #endif
 
-void Init_gtk_socket()
+void 
+Init_gtk_socket()
 {
-    static RGObjClassInfo cinfo;
-
-    gSocket = rb_define_class_under(mGtk, "Socket", gContainer);
-    cinfo.klass = gSocket;
-    cinfo.gtype = GTK_TYPE_SOCKET;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gSocket = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
     rb_define_method(gSocket, "initialize",  socket_initialize, 0);
     rb_define_method(gSocket, "steal", socket_steal, 1);

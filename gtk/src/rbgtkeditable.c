@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: sakai $
-  $Date: 2002/07/30 05:37:54 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -140,29 +140,26 @@ edit_paste_clipboard(self)
     return self;
 }
 
-void Init_gtk_editable()
+void 
+Init_gtk_editable()
 {
-    gEditable = rb_define_module_under(mGtk, "Editable");
+    mEditable = rb_define_module_under(mGtk, "Editable");
 
-    rb_define_const(gEditable, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
-    rb_define_const(gEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));
+    rb_define_const(mEditable, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
+    rb_define_const(mEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));
 
-    rb_define_method(gEditable, "select_region", edit_sel_region, 2);
-    rb_define_method(gEditable, "get_selection_bounds", edit_get_sel_bounds, 0);
-    rb_define_method(gEditable, "insert_text", edit_insert_text, 2);
-    rb_define_method(gEditable, "delete_text", edit_delete_text, 2);
-    rb_define_method(gEditable, "get_chars", edit_get_chars, 2);
-    rb_define_method(gEditable, "delete_selection", edit_delete_selection, 0);
-    rb_define_method(gEditable, "position", edit_get_position, 0);
-    rb_define_method(gEditable, "set_position", edit_set_position, 1);
-    rb_define_alias(gEditable, "position=", "set_position");
-    rb_define_method(gEditable, "set_editable", edit_set_editable, 1);
-    rb_define_method(gEditable, "get_editable", edit_get_editable, 0);
-    rb_define_method(gEditable, "copy_clipboard", edit_copy_clipboard, 0);
-    rb_define_method(gEditable, "cut_clipboard", edit_cut_clipboard, 0);
-    rb_define_method(gEditable, "paste_clipboard", edit_paste_clipboard, 0);
-
-    /* child initialization */
-    Init_gtk_entry();
-    Init_gtk_oldeditable();
+    rb_define_method(mEditable, "select_region", edit_sel_region, 2);
+    rb_define_method(mEditable, "get_selection_bounds", edit_get_sel_bounds, 0);
+    rb_define_method(mEditable, "insert_text", edit_insert_text, 2);
+    rb_define_method(mEditable, "delete_text", edit_delete_text, 2);
+    rb_define_method(mEditable, "get_chars", edit_get_chars, 2);
+    rb_define_method(mEditable, "delete_selection", edit_delete_selection, 0);
+    rb_define_method(mEditable, "position", edit_get_position, 0);
+    rb_define_method(mEditable, "set_position", edit_set_position, 1);
+    rb_define_alias(mEditable, "position=", "set_position");
+    rb_define_method(mEditable, "set_editable", edit_set_editable, 1);
+    rb_define_method(mEditable, "get_editable", edit_get_editable, 0);
+    rb_define_method(mEditable, "copy_clipboard", edit_copy_clipboard, 0);
+    rb_define_method(mEditable, "cut_clipboard", edit_cut_clipboard, 0);
+    rb_define_method(mEditable, "paste_clipboard", edit_paste_clipboard, 0);
 }

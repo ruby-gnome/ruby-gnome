@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,8 +18,6 @@
  */
 
 #define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
-
-VALUE gdkWindow;
 
 static VALUE
 gdkwin_get_size(self)
@@ -208,7 +206,7 @@ gdkwin_shape_combine_mask(self, shape_mask, offset_x, offset_y)
     VALUE self, shape_mask, offset_x, offset_y;
 {
     gdk_window_shape_combine_mask(_SELF(self), 
-								  GDK_BITMAP(RVAL2OBJ(shape_mask)), 
+								  GDK_BITMAP(RVAL2GOBJ(shape_mask)), 
 								  NUM2INT(offset_x), NUM2INT(offset_y));
     return self;
 }
@@ -501,7 +499,7 @@ gdkwin_prop_change(self, property, type, mode, src)
     VALUE self, property, type, mode, src;
 {
   int        fmt, len, i;
-  Atom       atom;
+/*  Atom       atom; */
   void*      dat;
   GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
   GdkAtom    otype, ntype;
@@ -576,17 +574,13 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
     VALUE self, property, type, offset, length, delete;
 {
   /* for argument processing */
-  GdkWindow*    w;
-  GdkAtom       p, t;
-  gulong        o, l;
-  gint          d;
   GdkAtom       rtype;
   gint          rfmt, rlen;
   void*		rdat;
 
   /* for inner processing */
   int		i;
-  VALUE		ret;
+  VALUE		ret = 0;
 
   if(gdk_property_get(_SELF(self), get_gdkatom(property),
        get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
@@ -637,22 +631,10 @@ gdkwin_prop_delete(self, property)
   return self;
 }
 
-VALUE gdkWindowAttr;
-
 void
 Init_gtk_gdk_window()
 {
-    static RGObjClassInfo cinfo;
-
-    /* Gdk::Window */
-
-    gdkWindow = rb_define_class_under(mGdk, "Window", gdkDrawable);
-    cinfo.klass = gdkWindow;
-    cinfo.gtype = GDK_TYPE_WINDOW;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gdkWindow = G_DEF_CLASS(GDK_TYPE_WINDOW, "Window", mGdk);
 
     rb_define_method(gdkWindow, "get_size", gdkwin_get_size, 0);
     rb_define_method(gdkWindow, "get_pointer", gdkwin_get_pointer, 0);
@@ -721,10 +703,6 @@ Init_gtk_gdk_window()
     rb_define_const(gdkWindow, "HINT_BASE_SIZE", INT2FIX(GDK_HINT_BASE_SIZE));
     rb_define_const(gdkWindow, "HINT_ASPECT", INT2FIX(GDK_HINT_ASPECT));
     rb_define_const(gdkWindow, "HINT_RESIZE_INC", INT2FIX(GDK_HINT_RESIZE_INC));
-
-    /* Gdk::WindowAttr */
-
-    gdkWindowAttr = rb_define_class_under(mGdk, "WindowAttr", rb_cData);
 }
 
 /*
@@ -1002,7 +980,8 @@ geo_set_max_aspect(self, max_aspect)
 }
 
 
-void Init_gtk_gdk_geometry()
+void 
+Init_gtk_gdk_geometry()
 {
     gdkGeometry = rb_define_class_under(mGdk, "Geometry", rb_cData);
 

@@ -4,7 +4,7 @@
   rbgtkcheckmenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -75,16 +75,10 @@ cmitem_toggled(self)
     return self;
 }
 
-void Init_gtk_check_menu_item()
+void 
+Init_gtk_check_menu_item()
 {
-    static RGObjClassInfo cinfo;
-
-    gCMenuItem = rb_define_class_under(mGtk, "CheckMenuItem", gMenuItem);
-    cinfo.klass = gCMenuItem;
-    cinfo.gtype = GTK_TYPE_CHECK_MENU_ITEM;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gCMenuItem = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
 
     rb_define_const(gCMenuItem, "SIGNAL_TOGGLED", rb_str_new2("toggled"));
 

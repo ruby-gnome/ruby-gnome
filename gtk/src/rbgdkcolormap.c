@@ -3,8 +3,8 @@
 
   rbgdkcolormap.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -18,8 +18,6 @@
 #include "global.h"
 
 #define _SELF(self) (GDK_COLORMAP(RVAL2GOBJ(self)))
-
-VALUE gdkColormap;
 
 static VALUE
 gdkcmap_initialize(self, visual, allocate)
@@ -80,14 +78,7 @@ gdkcmap_colors(self)
 void
 Init_gtk_gdk_colormap()
 {
-    static RGObjClassInfo cinfo;
-
-    gdkColormap = rb_define_class_under(mGdk, "Colormap", rbgobj_cGObject);
-    cinfo.klass = gdkColormap;
-    cinfo.gtype = GDK_TYPE_COLORMAP;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gdkColormap = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
 
     rb_define_singleton_method(gdkColormap, "system",
                                gdkcmap_s_get_system, 0);

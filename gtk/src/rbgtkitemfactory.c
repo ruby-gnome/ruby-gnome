@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -32,21 +32,21 @@ distinguish_item_type(p_item)
 	GtkWidget *p_item;
 {
     if (GTK_IS_RADIO_MENU_ITEM(p_item))
-        return rb_obj_alloc(gRMenuItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_WIDGET_TYPE(p_item)));
     else if (GTK_IS_CHECK_MENU_ITEM(p_item))
-        return rb_obj_alloc(gCMenuItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_CHECK_MENU_ITEM));
     else if (GTK_IS_TEAROFF_MENU_ITEM(p_item))
-        return rb_obj_alloc(gTMenuItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_TEAROFF_MENU_ITEM));
     else if (GTK_IS_MENU_ITEM(p_item))
-        return rb_obj_alloc(gMenuItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_MENU_ITEM));
     else if (GTK_IS_LIST_ITEM(p_item))
-        return rb_obj_alloc(gListItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_LIST_ITEM));
 #ifdef GTK_ENABLE_BROKEN
     else if (GTK_IS_TREE_ITEM(p_item))
-        return rb_obj_alloc(gTreeItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_TREE_ITEM));
 #endif
     else
-        return rb_obj_alloc(gItem);
+        return rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_ITEM));
 }
 
 static int
@@ -197,11 +197,11 @@ ifact_get_gobject(self, path)
     p_menu = gtk_item_factory_get_widget(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
 										 STR2CSTR(path));
     if (GTK_IS_OPTION_MENU(p_menu))
-        menuobj = rb_obj_alloc(gOptionMenu);
+        menuobj = rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_OPTION_MENU));
     else if (GTK_IS_MENU(p_menu))
-        menuobj = rb_obj_alloc(gMenu);
+        menuobj = rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_MENU));
     else
-        menuobj = rb_obj_alloc(gMenuBar);
+        menuobj = rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_MENU_BAR));
 
     RBGTK_INITIALIZE(menuobj, p_menu);
   
@@ -239,36 +239,26 @@ ifact_s_path_from_widget(self, widget)
     return rb_str_new2(gtk_item_factory_path_from_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
 
-void Init_gtk_itemfactory()
+void 
+Init_gtk_itemfactory()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gItemFactory = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 
-    gItemFactory = rb_define_class_under(mGtk, "ItemFactory", gObject);
-    gIFConst = rb_define_module_under(gItemFactory, "Constants");
-
-    cinfo.klass = gItemFactory;
-    cinfo.gtype = GTK_TYPE_ITEM_FACTORY;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    rb_define_const(gIFConst, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
-    rb_define_const(gIFConst, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
-    rb_define_const(gIFConst, "TYPE_OPTION_MENU",
+    rb_define_const(gItemFactory, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
+    rb_define_const(gItemFactory, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
+    rb_define_const(gItemFactory, "TYPE_OPTION_MENU",
                     INT2FIX(GTK_TYPE_OPTION_MENU));
   
-    rb_define_const(gIFConst, "TITLE", rb_str_new2("<Title>"));
-    rb_define_const(gIFConst, "ITEM", rb_str_new2("<Item>"));
-    rb_define_const(gIFConst, "CHECK_ITEM", rb_str_new2("<CheckItem>"));
-    rb_define_const(gIFConst, "TOGGLE_ITEM", rb_str_new2("<ToggleItem>"));
-    rb_define_const(gIFConst, "RADIO_ITEM", rb_str_new2("<RadioItem>"));
-    rb_define_const(gIFConst, "SEPARATOR", rb_str_new2("<Separator>"));
-    rb_define_const(gIFConst, "BRANCH", rb_str_new2("<Branch>"));
-    rb_define_const(gIFConst, "LAST_BRANCH", rb_str_new2("<LastBranch>"));
-    rb_define_const(gIFConst, "TEAROFF", rb_str_new2("<Tearoff>"));
+    rb_define_const(gItemFactory, "TITLE", rb_str_new2("<Title>"));
+    rb_define_const(gItemFactory, "ITEM", rb_str_new2("<Item>"));
+    rb_define_const(gItemFactory, "CHECK_ITEM", rb_str_new2("<CheckItem>"));
+    rb_define_const(gItemFactory, "TOGGLE_ITEM", rb_str_new2("<ToggleItem>"));
+    rb_define_const(gItemFactory, "RADIO_ITEM", rb_str_new2("<RadioItem>"));
+    rb_define_const(gItemFactory, "SEPARATOR", rb_str_new2("<Separator>"));
+    rb_define_const(gItemFactory, "BRANCH", rb_str_new2("<Branch>"));
+    rb_define_const(gItemFactory, "LAST_BRANCH", rb_str_new2("<LastBranch>"));
+    rb_define_const(gItemFactory, "TEAROFF", rb_str_new2("<Tearoff>"));
   
-    rb_include_module(gItemFactory, gIFConst);
-
     rb_define_method(gItemFactory, "initialize", ifact_initialize, 3);
     rb_define_method(gItemFactory, "create_item", ifact_create_item, -1);
     rb_define_method(gItemFactory, "create_items", ifact_create_items, -1);

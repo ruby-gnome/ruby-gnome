@@ -3,16 +3,14 @@
 
   rbgdkdnd.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 #include "global.h"
 
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
-
-VALUE gdkDragContext;
 
 static VALUE
 gdkdragcontext_protocol(self)
@@ -179,14 +177,7 @@ gdkdragcontext_drag_status(self, action, time)
 void
 Init_gtk_gdk_dnd()
 {
-    static RGObjClassInfo cinfo;
-
-    gdkDragContext = rb_define_class_under(mGdk, "DragContext", rbgobj_cGObject);
-    cinfo.klass = gdkDragContext;
-    cinfo.gtype = GDK_TYPE_DRAG_CONTEXT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gdkDragContext = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
     rb_define_singleton_method(gdkDragContext, "protocol", gdkdragcontext_s_get_protocol, 2);
 

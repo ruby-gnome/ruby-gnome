@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,16 +34,10 @@ align_set(self, xalign, yalign, xscale, yscale)
     return self;
 }
 
-void Init_gtk_alignment()
+void 
+Init_gtk_alignment()
 {
-    static RGObjClassInfo cinfo;
-
-    gAlignment = rb_define_class_under(mGtk, "Alignment", gBin);
-    cinfo.klass = gAlignment;
-    cinfo.gtype = GTK_TYPE_ALIGNMENT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gAlignment = G_DEF_CLASS(GTK_TYPE_ALIGNMENT, "Alignment", mGtk);
 
     rb_define_method(gAlignment, "initialize", align_initialize, 4);
     rb_define_method(gAlignment, "set", align_set, 4);

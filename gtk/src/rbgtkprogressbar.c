@@ -4,7 +4,7 @@
   rbgtkprogressbar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -88,16 +88,10 @@ pbar_update(self, percentage)
     return self;
 }    
 
-void Init_gtk_progress_bar()
+void 
+Init_gtk_progress_bar()
 {
-    static RGObjClassInfo cinfo;
-
-    gProgressBar = rb_define_class_under(mGtk, "ProgressBar", gProgress);
-    cinfo.klass = gProgressBar;
-    cinfo.gtype = GTK_TYPE_PROGRESS_BAR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gProgressBar = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
 
     /* GtkProgressBarStyle */
     rb_define_const(gProgressBar, "CONTINUOUS", INT2FIX(GTK_PROGRESS_CONTINUOUS));

@@ -4,7 +4,7 @@
   rbgtktogglebutton.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -76,16 +76,10 @@ tbtn_set_active(self, is_active)
     return self;
 }
 
-void Init_gtk_toggle_button()
+void 
+Init_gtk_toggle_button()
 {
-    static RGObjClassInfo cinfo;
-
-    gTButton = rb_define_class_under(mGtk, "ToggleButton", gButton);
-    cinfo.klass = gTButton;
-    cinfo.gtype = GTK_TYPE_TOGGLE_BUTTON;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gTButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
 
     rb_define_method(gTButton, "initialize", tbtn_initialize, -1);
     rb_define_method(gTButton, "set_mode", tbtn_set_mode, 1);

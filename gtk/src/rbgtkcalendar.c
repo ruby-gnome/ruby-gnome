@@ -4,7 +4,7 @@
   rbgtkcalendar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,8 +16,6 @@
 /*
  * Calendar
  */
-
-VALUE gCalendar;
 
 static VALUE
 cal_init(self)
@@ -150,16 +148,10 @@ cal_thaw(self)
     return self;
 }
 
-void Init_gtk_calendar()
+void 
+Init_gtk_calendar()
 {
-    static RGObjClassInfo cinfo;
-
-    gCalendar = rb_define_class_under(mGtk, "Calendar", gWidget);
-    cinfo.klass = gCalendar;
-    cinfo.gtype = GTK_TYPE_CALENDAR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gCalendar = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
 
     rb_define_const(gCalendar, "SHOW_HEADING",
 		    INT2FIX(GTK_CALENDAR_SHOW_HEADING));

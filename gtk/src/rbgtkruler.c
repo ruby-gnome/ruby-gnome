@@ -4,7 +4,7 @@
   rbgtkruler.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,16 +50,10 @@ ruler_draw_pos(self)
     return self;
 }
 
-void Init_gtk_ruler()
+void 
+Init_gtk_ruler()
 {
-    static RGObjClassInfo cinfo;
-
-    gRuler = rb_define_class_under(mGtk, "Ruler", gWidget);
-    cinfo.klass = gRuler;
-    cinfo.gtype = GTK_TYPE_RULER;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gRuler = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
 
     rb_define_method(gRuler, "set_metric", ruler_set_metric, 1);
     rb_define_method(gRuler, "set_range", ruler_set_range, 4);

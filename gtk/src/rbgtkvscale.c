@@ -4,7 +4,7 @@
   rbgtkvscale.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,16 +29,9 @@ vscale_initialize(argc, argv, self)
     return Qnil;
 }
 
-void Init_gtk_vscale()
+void 
+Init_gtk_vscale()
 {
-  static RGObjClassInfo cinfo;
-
-  gVScale = rb_define_class_under(mGtk, "VScale", gScale);
-  cinfo.klass = gVScale;
-  cinfo.gtype = GTK_TYPE_VSCALE;
-  cinfo.mark = 0;
-  cinfo.free = 0;
-  rbgtk_register_class(&cinfo);
-
+  VALUE gVScale = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
   rb_define_method(gVScale, "initialize", vscale_initialize, -1);
 }

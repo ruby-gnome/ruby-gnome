@@ -4,7 +4,7 @@
   rbgtkscrolledwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -72,16 +72,10 @@ scwin_get_vadjustment(self)
     return GOBJ2RVAL(adj);
 }
 
-void Init_gtk_scrolled_window()
+void 
+Init_gtk_scrolled_window()
 {
-    static RGObjClassInfo cinfo;
-
-    gScrolledWin = rb_define_class_under(mGtk, "ScrolledWindow", gBin);
-    cinfo.klass = gScrolledWin;
-    cinfo.gtype = GTK_TYPE_SCROLLED_WINDOW;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gScrolledWin = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
 
     rb_define_method(gScrolledWin, "initialize", scwin_initialize, -1);
     rb_define_method(gScrolledWin, "set_policy", scwin_set_policy, 2);

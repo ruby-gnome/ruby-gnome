@@ -3,8 +3,8 @@
 
   global.h -
 
-  $Author: sakai $
-  $Date: 2002/07/30 05:37:54 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -118,6 +118,8 @@ extern void Init_gtk_window();
 extern void Init_gtk_windowgroup();
 extern void Init_gtk_itemfactory();
 extern void Init_gtk_selectiondata();
+extern void Init_gtk_requisition();
+extern void Init_gtk_allocation();
 extern void Init_gtk_drag();
 
 #endif /* _RBGTK_GLOBAL_H */

@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,7 @@ tbar_initialize(argc, argv, self)
 }
 
 static VALUE
-tbar_getgobject(widget, type)
+tbar_get_gobject(widget, type)
     GtkWidget *widget;
     VALUE type;
 {
@@ -197,7 +197,7 @@ tbar_append_element(self, type, widget, text, ttext, ptext, icon)
 									 NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 									 GTK_SIGNAL_FUNC(callback),
 									 (gpointer)func);
-    return tbar_get_object(ret, type);
+    return tbar_get_gobject(ret, type);
 }
 
 static VALUE
@@ -222,7 +222,7 @@ tbar_prepend_element(self, type, widget, text, ttext, ptext, icon)
 									  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 									  GTK_SIGNAL_FUNC(callback),
 									  (gpointer)func);
-    return tbar_get_object(ret, type);
+    return tbar_get_gobject(ret, type);
 }
 
 static VALUE
@@ -248,7 +248,7 @@ tbar_insert_element(self, type, widget, text, ttext, ptext, icon, position)
 									 GTK_SIGNAL_FUNC(callback),
 									 (gpointer)func,
 									 NUM2INT(position));
-    return tbar_get_object(ret, type);
+    return tbar_get_gobject(ret, type);
 }
 
 static VALUE
@@ -277,16 +277,10 @@ tbar_set_tooltips(self, enable)
     return self;
 }
 
-void Init_gtk_toolbar()
+void 
+Init_gtk_toolbar()
 {
-    static RGObjClassInfo cinfo;
-
-    gToolbar = rb_define_class_under(mGtk, "Toolbar", gContainer);
-    cinfo.klass = gToolbar;
-    cinfo.gtype = GTK_TYPE_TOOLBAR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gToolbar = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
     rb_define_const(gToolbar, "CHILD_SPACE", INT2NUM(GTK_TOOLBAR_CHILD_SPACE));
     rb_define_const(gToolbar, "CHILD_BUTTON", INT2NUM(GTK_TOOLBAR_CHILD_BUTTON));

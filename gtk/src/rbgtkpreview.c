@@ -4,7 +4,7 @@
   rbgtkpreview.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -126,29 +126,17 @@ preview_get_info(self)
     return make_gtkprevinfo(i);
 }
 
-void Init_gtk_preview()
+void 
+Init_gtk_preview()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gPreview = G_DEF_CLASS(GTK_TYPE_PREVIEW, "Preview", mGtk);
 
-    gPreview = rb_define_class_under(mGtk, "Preview", gWidget);
-    cinfo.klass = gPreview;
-    cinfo.gtype = GTK_TYPE_PREVIEW;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /*
-     * instance methods
-     */
     rb_define_method(gPreview, "initialize", preview_initialize, 1);
     rb_define_method(gPreview, "size", preview_size, 2);
     rb_define_method(gPreview, "put", preview_put, 8);
     rb_define_method(gPreview, "draw_row", preview_draw_row, 4);
     rb_define_method(gPreview, "set_expand", preview_set_expand, 1);
 
-    /*
-     * singleton methods
-     */
     rb_define_singleton_method(gPreview, "set_gamma", preview_set_gamma, 1);
     rb_define_singleton_method(gPreview, "set_color_cube",
 							   preview_set_color_cube, 4);

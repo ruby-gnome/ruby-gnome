@@ -4,7 +4,7 @@
   rbgtkmenubar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -51,14 +51,7 @@ mbar_insert(self, child, pos)
 void 
 Init_gtk_menu_bar()
 {
-    static RGObjClassInfo cinfo;
-
-    gMenuBar = rb_define_class_under(mGtk, "MenuBar", gMenuShell);
-    cinfo.klass = gMenuBar;
-    cinfo.gtype = GTK_TYPE_MENU_BAR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gMenuBar = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
 
     rb_define_method(gMenuBar, "initialize", mbar_initialize, 0);
     rb_define_method(gMenuBar, "append", mbar_append, 1);

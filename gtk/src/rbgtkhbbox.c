@@ -4,7 +4,7 @@
   rbgtkhbbox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,16 +55,10 @@ hbbox_set_layout_default(self, layout)
     return Qnil;
 }
 
-void Init_gtk_hbutton_box()
+void 
+Init_gtk_hbutton_box()
 {
-    static RGObjClassInfo cinfo;
-
-    gHBBox = rb_define_class_under(mGtk, "HButtonBox", gBBox);
-    cinfo.klass = gHBBox;
-    cinfo.gtype = GTK_TYPE_HBUTTON_BOX;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gHBBox = G_DEF_CLASS(GTK_TYPE_HBUTTON_BOX, "HButtonBox", mGtk);
 
     rb_define_method(gHBBox, "initialize", hbbox_initialize, 0);
     rb_define_singleton_method(gHBBox, "get_spacing_default",

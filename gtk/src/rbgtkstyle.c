@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -366,16 +366,10 @@ style_draw_string(self,)    /* 5 */
 }
 #endif
 
-void Init_gtk_style()
+void 
+Init_gtk_style()
 {
-    static RGObjClassInfo cinfo;
-    gStyle = rb_define_class_under(mGtk, "Style", rbgobj_cGObject);
-
-    cinfo.klass = gStyle;
-    cinfo.gtype = GTK_TYPE_STYLE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gStyle = G_DEF_CLASS(GTK_TYPE_STYLE, "Style", mGtk);
 
     rb_define_method(gStyle, "initialize", style_initialize, 0);
     rb_define_method(gStyle, "copy", style_copy, 0);

@@ -4,7 +4,7 @@
   rbgtktreeitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -99,16 +99,10 @@ titem_collapse(self)
     return self;
 }
 
-void Init_gtk_tree_item()
+void 
+Init_gtk_tree_item()
 {
-    static RGObjClassInfo cinfo;
-
-    gTreeItem = rb_define_class_under(mGtk, "TreeItem", gItem);
-    cinfo.klass = gTreeItem;
-    cinfo.gtype = GTK_TYPE_TREE_ITEM;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gTreeItem = G_DEF_CLASS(GTK_TYPE_TREE_ITEM, "TreeItem", mGtk);
 
     rb_define_const(gTreeItem, "SIGNAL_EXPAND", rb_str_new2("expand"));
     rb_define_const(gTreeItem, "SIGNAL_COLLAPSE", rb_str_new2("collapse"));

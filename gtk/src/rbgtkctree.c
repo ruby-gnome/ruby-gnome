@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,7 +15,10 @@
 
 #include "global.h"
 
+/* FIXME
 #define RVAL2CTREENODE(n) GTK_CTREE_NODE(RVAL2GVAL(n))
+*/
+#define RVAL2CTREENODE(n) GTK_CTREE_NODE(RVAL2GOBJ(n))
 
 static void
 ctree_node_mark(ctree, node, notused)
@@ -1376,22 +1379,6 @@ rbobj_get(obj)
     return G_OBJECT(ret);
 }
 
-void
-rbobj_initialize(obj, gvalue)
-    VALUE obj;
-    GValue* gvalue;
-{
-    VALUE data;
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(rb_class_of(obj));
-
-	data = Data_Wrap_Struct(rb_cData, cinfo->mark, xfree, gvalue);
-    g_value_set_pointer(gvalue, (gpointer)obj);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
-    rb_ivar_set(obj, id_gobject_data, data);
-}
-
-
 VALUE
 _ctree_node_to_ruby(node)
     GtkCTreeNode* node;
@@ -1423,16 +1410,9 @@ _ctree_node_from_ruby(from, to)
 void 
 Init_gtk_ctree()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gCTree = G_DEF_CLASS2(GTK_TYPE_CTREE, "CTree", mGtk, ctree_mark, 0);
 
-    gCTree = rb_define_class_under(mGtk, "CTree", gCList);
-    cinfo.klass = gCTree;
-    cinfo.gtype = gtk_ctree_get_type();
-    cinfo.mark = ctree_mark;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    gCTreeNode = rb_define_class_under(mGtk, "CTreeNode", rb_cData);
+    VALUE gCTreeNode = rb_define_class_under(mGtk, "CTreeNode", rb_cData);
 /*
 	rbgobj_register_r2g_func(gCTreeNode, _ctree_node_from_ruby);
     rbgobj_register_g2r_func(GTK_TYPE_CTREE_NODE, _ctree_node_to_ruby);

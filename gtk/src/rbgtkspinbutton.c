@@ -4,7 +4,7 @@
   rbgtkspinbutton.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -131,20 +131,11 @@ sbtn_set_snap_to_ticks(self,n)
     return self;
 }
 
-void Init_gtk_spin_button()
+void 
+Init_gtk_spin_button()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gSButton = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
 
-    gSButton = rb_define_class_under(mGtk, "SpinButton", gEntry);
-    cinfo.klass = gSButton;
-    cinfo.gtype = GTK_TYPE_SPIN_BUTTON;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /*
-     * instance methods
-     */
     rb_define_method(gSButton, "initialize",        sbtn_initialize, -1);
     rb_define_method(gSButton, "set_adjustment",    sbtn_set_adjustment,1);
     rb_define_method(gSButton, "get_adjustment",    sbtn_get_adjustment,0);
@@ -158,14 +149,7 @@ void Init_gtk_spin_button()
     rb_define_method(gSButton, "spin",              sbtn_spin,2);
     rb_define_method(gSButton, "set_wrap",          sbtn_set_wrap,1);
     rb_define_method(gSButton, "set_snap_to_ticks", sbtn_set_snap_to_ticks, 1);
-    /*
-      rb_define_method(gSButton, "get_type",          sbtn_get_type,0);
-      rb_define_method(gSButton, "construct",         sbtn_construct,4);
-    */
 
-    /*
-     * constants
-     */
     /* GtkSpinType */
     rb_define_const(gSButton, "STEP_FORWARD", INT2FIX(GTK_SPIN_STEP_FORWARD));
     rb_define_const(gSButton, "STEP_BACKWARD", INT2FIX(GTK_SPIN_STEP_BACKWARD));

@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,16 +21,14 @@ gwin_initialize(argc, argv, self)
 {
     VALUE type;
     GtkWindowType tp;
-    GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &type) == 1) {
 		tp = NUM2INT(type);
     } else {
 		tp = GTK_WINDOW_TOPLEVEL;
     }
-    widget = gtk_window_new(tp);
 
-    RBGTK_INITIALIZE(self, widget);
+    RBGTK_INITIALIZE(self, gtk_window_new(tp));
     return Qnil;
 }
 
@@ -163,14 +161,7 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 
 void Init_gtk_window()
 {
-    static RGObjClassInfo cinfo;
-
-    gWindow = rb_define_class_under(mGtk, "Window", gBin);
-    cinfo.klass = gWindow;
-    cinfo.gtype = GTK_TYPE_WINDOW;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+	VALUE gWindow = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
 
     rb_define_const(gWindow, "SIGNAL_MOVE_RESIZE", rb_str_new2("move_resize"));
     rb_define_const(gWindow, "SIGNAL_SET_FOCUS", rb_str_new2("set_focus"));
@@ -193,9 +184,9 @@ void Init_gtk_window()
     rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
 
     /* child initialization */
-    Init_gtk_color_selection_dialog();
     Init_gtk_dialog();
     Init_gtk_file_selection();
     Init_gtk_font_selection_dialog();
+    Init_gtk_color_selection_dialog();
     Init_gtk_plug();
 }

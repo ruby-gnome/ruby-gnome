@@ -4,7 +4,7 @@
   rbgtkprogress.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -162,20 +162,11 @@ progress_configure(self, value, min, max)
     return self;
 }
 
-void Init_gtk_progress()
+void 
+Init_gtk_progress()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gProgress = G_DEF_CLASS(GTK_TYPE_PROGRESS, "Progress", mGtk);
 
-    gProgress = rb_define_class_under(mGtk, "Progress", gWidget);
-    cinfo.klass = gProgress;
-    cinfo.gtype = GTK_TYPE_PROGRESS;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /*
-     * instance methods
-     */
     rb_define_method(gProgress, "set_show_text", progress_set_show_text, 1);
     rb_define_method(gProgress, "show_text=", progress_set_show_text, 1);
     rb_define_method(gProgress, "show_text?", progress_show_text_p, 0);

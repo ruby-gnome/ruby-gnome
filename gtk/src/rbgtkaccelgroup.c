@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -67,17 +67,10 @@ gaccelgrp_unlock(self)
 
 void Init_gtk_accel_group()
 {
-    static RGObjClassInfo cinfo;
-    gAccelGroup = rb_define_class_under(mGtk, "AccelGroup", rbgobj_cGObject);
-
-    cinfo.klass = gAccelGroup;
-    cinfo.gtype = GTK_TYPE_ACCEL_GROUP;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gAccelGroup = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 
     rb_define_singleton_method(gAccelGroup, "activate", gaccelgrp_s_activate, 3);
-    rb_define_singleton_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
+    rb_define_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
     rb_define_method(gAccelGroup, "attach", gaccelgrp_attach, 1);
     rb_define_method(gAccelGroup, "detach", gaccelgrp_detach, 1);
     rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);

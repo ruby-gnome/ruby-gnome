@@ -4,7 +4,7 @@
   rbgtkdata.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,9 +16,10 @@
 /*
  * Data
  */
-void Init_gtk_data()
+void 
+Init_gtk_data()
 {
-    gData = rb_define_class_under(mGtk, "Data", gObject);
+    gData = rb_define_class_under(mGtk, "Data", GTYPE2CLASS(GTK_TYPE_OBJECT));
 
     rb_define_const(gData, "SIGNAL_DISCONNECT", rb_str_new2("disconnect"));
 
@@ -102,16 +103,10 @@ adj_get_page_size(self)
     return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->page_size);
 }
 
-void Init_gtk_adjustment()
+void 
+Init_gtk_adjustment()
 {
-    static RGObjClassInfo cinfo;
-
-    gAdjustment = rb_define_class_under(mGtk, "Adjustment", gData);
-    cinfo.klass = gAdjustment;
-    cinfo.gtype = GTK_TYPE_ADJUSTMENT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gAdjustment = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
 
     rb_define_method(gAdjustment, "initialize", adj_initialize, 6);
     rb_define_method(gAdjustment, "set_value", adj_set_value, 1);
@@ -174,16 +169,10 @@ ttips_disable(self)
     return self;
 }
 
-void Init_gtk_tooltips()
+void 
+Init_gtk_tooltips()
 {
-    static RGObjClassInfo cinfo;
-
-    gTooltips = rb_define_class_under(mGtk, "Tooltips", gData);
-    cinfo.klass = gTooltips;
-    cinfo.gtype = GTK_TYPE_TOOLTIPS;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gTooltips = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
 
     rb_define_method(gTooltips, "initialize", ttips_initialize, 0);
     rb_define_method(gTooltips, "set_tip", ttips_set_tip, 3);

@@ -4,7 +4,7 @@
   rbgtkgamma.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -35,16 +35,10 @@ gamma_curve(self)
     return GOBJ2RVAL(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->curve);
 }
 
-void Init_gtk_gamma_curve()
+void 
+Init_gtk_gamma_curve()
 {
-    static RGObjClassInfo cinfo;
-
-    gGamma = rb_define_class_under(mGtk, "GammaCurve", gVBox);
-    cinfo.klass = gGamma;
-    cinfo.gtype = GTK_TYPE_GAMMA_CURVE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gGamma = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
 
     rb_define_method(gGamma, "initialize", gamma_initialize, 0);
     rb_define_method(gGamma, "gamma", gamma_gamma, 0);

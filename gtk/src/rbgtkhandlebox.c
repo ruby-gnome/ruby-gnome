@@ -4,7 +4,7 @@
   rbgtkhandlebox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,8 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE gHandleBox;
 
 static VALUE
 hb_init(self)
@@ -78,16 +76,10 @@ hb_child_detached(self)
     return GTK_HANDLE_BOX(RVAL2GOBJ(self))->child_detached ? Qtrue : Qfalse;
 }
 
-void Init_gtk_handle_box()
+void 
+Init_gtk_handle_box()
 {
-    static RGObjClassInfo cinfo;
-
-    gHandleBox = rb_define_class_under(mGtk, "HandleBox", gBin);
-    cinfo.klass = gHandleBox;
-    cinfo.gtype = GTK_TYPE_HANDLE_BOX;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gHandleBox = G_DEF_CLASS(GTK_TYPE_HANDLE_BOX, "HandleBox", mGtk);
 
     rb_define_method(gHandleBox, "initialize", hb_init, 0);
 

@@ -4,7 +4,7 @@
   rbgtkvscrollbar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,16 +29,9 @@ vscrollbar_initialize(argc, argv, self)
     return Qnil;
 }
 
-void Init_gtk_vscrollbar()
+void 
+Init_gtk_vscrollbar()
 {
-  static RGObjClassInfo cinfo;
-
-  gVScrollbar = rb_define_class_under(mGtk, "VScrollbar", gScrollbar);
-  cinfo.klass = gVScrollbar;
-  cinfo.gtype = GTK_TYPE_VSCROLLBAR;
-  cinfo.mark = 0;
-  cinfo.free = 0;
-  rbgtk_register_class(&cinfo);
-  
+  VALUE gVScrollbar = G_DEF_CLASS(GTK_TYPE_VSCROLLBAR, "VScrollbar", mGtk);
   rb_define_method(gVScrollbar, "initialize", vscrollbar_initialize, -1);
 }

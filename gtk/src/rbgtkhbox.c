@@ -4,7 +4,7 @@
   rbgtkhbox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -28,18 +28,10 @@ hbox_initialize(argc, argv, self)
     return Qnil;
 }
 
-void Init_gtk_hbox()
+void 
+Init_gtk_hbox()
 {
-    static RGObjClassInfo cinfo;
-
-    gHBox = rb_define_class_under(mGtk, "HBox", gBox);
-    cinfo.klass = gHBox;
-    cinfo.gtype = GTK_TYPE_HBOX;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
-    /* rb_define_const(gHBox, "SIGNAL_", rb_str_new2("")); */
+    VALUE gHBox = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
 
     rb_define_method(gHBox, "initialize", hbox_initialize, -1);
 

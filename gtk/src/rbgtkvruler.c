@@ -4,7 +4,7 @@
   rbgtkvruler.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,16 +21,9 @@ vruler_initialize(self)
     return Qnil;
 }
 
-void Init_gtk_vruler()
+void 
+Init_gtk_vruler()
 {
-    static RGObjClassInfo cinfo;
-
-    gVRuler = rb_define_class_under(mGtk, "VRuler", gRuler);
-    cinfo.klass = gVRuler;
-    cinfo.gtype = GTK_TYPE_VRULER;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gVRuler = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
     rb_define_method(gVRuler, "initialize", vruler_initialize, 0);
 }

@@ -4,7 +4,7 @@
   rbgtkitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -40,16 +40,10 @@ item_toggle(self)
     return self;
 }
 
-void Init_gtk_item()
+void 
+Init_gtk_item()
 {
-    static RGObjClassInfo cinfo;
-
-    gItem = rb_define_class_under(mGtk, "Item", gBin);
-    cinfo.klass = gItem;
-    cinfo.gtype = GTK_TYPE_ITEM;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gItem = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
 
     rb_define_const(gItem, "SIGNAL_SELECT", rb_str_new2("select"));
     rb_define_const(gItem, "SIGNAL_DESELECT", rb_str_new2("deselect"));

@@ -4,7 +4,7 @@
   rbgtkvseparator.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,16 +21,9 @@ vsep_initialize(self)
     return Qnil;
 }
 
-void Init_gtk_vseparator()
+void 
+Init_gtk_vseparator()
 {
-    static RGObjClassInfo cinfo;
-
-    gVSeparator = rb_define_class_under(mGtk, "VSeparator", gSeparator);
-    cinfo.klass = gVSeparator;
-    cinfo.gtype = GTK_TYPE_VSEPARATOR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gVSeparator = G_DEF_CLASS(GTK_TYPE_VSEPARATOR, "VSeparator", mGtk);
     rb_define_method(gVSeparator, "initialize", vsep_initialize, 0);
 }

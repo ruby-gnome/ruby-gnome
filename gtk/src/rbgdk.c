@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/07/07 05:14:40 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -14,7 +14,6 @@
 #include "global.h"
 
 VALUE mGdk;
-VALUE gdkError;
 
 VALUE gdkEvent;
 
@@ -336,7 +335,7 @@ Init_gtk_gdk()
 {
     /* Gdk */
     mGdk = rb_define_module("Gdk");
-    gdkError = rb_define_class_under(mGdk, "Error", rb_eRuntimeError);
+
     rb_define_singleton_method(mGdk, "screen_width", gdk_s_screen_width, 0);
     rb_define_singleton_method(mGdk, "screen_width_mm", gdk_s_screen_width_mm, 0);
     rb_define_singleton_method(mGdk, "screen_height", gdk_s_screen_height, 0);

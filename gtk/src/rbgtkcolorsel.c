@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -30,7 +30,7 @@ colorsel_set_update_policy(self, policy)
     VALUE self, policy;
 {
     gtk_color_selection_set_update_policy(GTK_COLOR_SELECTION(RVAL2GOBJ(self)),
-					  (GtkUpdateType)NUM2INT(policy));
+										  (GtkUpdateType)NUM2INT(policy));
     return self;
 }
 
@@ -84,22 +84,15 @@ colorsel_get_color(self)
     rb_ary_push(ary, rb_float_new(buf[1]));
     rb_ary_push(ary, rb_float_new(buf[2]));
     if (arylen == 4) {
-	rb_ary_push(ary, rb_float_new(buf[3]));
+		rb_ary_push(ary, rb_float_new(buf[3]));
     }
     return ary;
 }
 
-void Init_gtk_color_selection()
+void 
+Init_gtk_color_selection()
 {
-    static RGObjClassInfo cinfo;
-
-    gColorSel = rb_define_class_under(mGtk, "ColorSelection", gVBox);
-    cinfo.klass = gColorSel;
-    cinfo.gtype = GTK_TYPE_COLOR_SELECTION;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+	VALUE gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
     rb_define_const(gColorSel, "SIGNAL_COLOR_CHANGED", rb_str_new2("color_changed"));
 
     rb_define_method(gColorSel, "initialize", colorsel_initialize, 0);
@@ -126,9 +119,9 @@ cdialog_get_colorsel(self)
     VALUE sel = rb_iv_get(self, "colorsel");
 
     if (NIL_P(sel)) {
-	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->colorsel;
-	sel = GOBJ2RVAL(w);
-	rb_iv_set(self, "colorsel", sel);
+		GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->colorsel;
+		sel = GOBJ2RVAL(w);
+		rb_iv_set(self, "colorsel", sel);
     }
 
     return sel;
@@ -141,9 +134,9 @@ cdialog_get_ok_button(self)
     VALUE b = rb_iv_get(self, "ok_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->ok_button;
-	b = GOBJ2RVAL(w);
-	rb_iv_set(self, "ok_button", b);
+		GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->ok_button;
+		b = GOBJ2RVAL(w);
+		rb_iv_set(self, "ok_button", b);
     }
 
     return b;
@@ -156,10 +149,10 @@ cdialog_get_cancel_button(self)
     VALUE b = rb_iv_get(self, "cancel_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w
-	    = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->cancel_button;
-	b = GOBJ2RVAL(w);
-	rb_iv_set(self, "cancel_button", b);
+		GtkWidget *w
+			= GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->cancel_button;
+		b = GOBJ2RVAL(w);
+		rb_iv_set(self, "cancel_button", b);
     }
 
     return b;
@@ -172,25 +165,20 @@ cdialog_get_help_button(self)
     VALUE b = rb_iv_get(self, "help_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w
-	    = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->help_button;
-	b = GOBJ2RVAL(w);
-	rb_iv_set(self, "help_button", b);
+		GtkWidget *w
+			= GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->help_button;
+		b = GOBJ2RVAL(w);
+		rb_iv_set(self, "help_button", b);
     }
 
     return b;
 }
 
-void Init_gtk_color_selection_dialog()
+void 
+Init_gtk_color_selection_dialog()
 {
-    static RGObjClassInfo cinfo;
-
-    gColorSelDialog = rb_define_class_under(mGtk, "ColorSelectionDialog", gWindow);
-    cinfo.klass = gColorSelDialog;
-    cinfo.gtype = GTK_TYPE_COLOR_SELECTION_DIALOG;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gColorSelDialog = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
+										"ColorSelectionDialog", mGtk);
 
     rb_define_method(gColorSelDialog, "initialize", cdialog_initialize, 1);
     rb_define_method(gColorSelDialog, "colorsel", cdialog_get_colorsel, 0);

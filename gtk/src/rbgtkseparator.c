@@ -4,7 +4,7 @@
   rbgtkseparator.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,16 +13,10 @@
 
 #include "global.h"
 
-void Init_gtk_separator()
+void 
+Init_gtk_separator()
 {
-    static RGObjClassInfo cinfo;
-
-    gSeparator = rb_define_class_under(mGtk, "Separator", gWidget);
-    cinfo.klass = gSeparator;
-    cinfo.gtype = GTK_TYPE_SEPARATOR;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    G_DEF_CLASS(GTK_TYPE_SEPARATOR, "Separator", mGtk);
 
     /* child init */
     Init_gtk_hseparator();

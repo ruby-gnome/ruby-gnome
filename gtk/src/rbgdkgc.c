@@ -3,16 +3,13 @@
 
   rbgtkalignment.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
 
 #include "global.h"
-
-VALUE gdkGC;
-VALUE gdkGCValues;
 
 #define _SELF(s) GDK_GC(RVAL2GOBJ(s))
 
@@ -198,14 +195,7 @@ gdkgc_set_ts_origin(self, x, y)
 void
 Init_gtk_gdk_gc()
 {
-    static RGObjClassInfo cinfo;
-
-    gdkGC = rb_define_class_under(mGdk, "GC", rbgobj_cGObject);
-    cinfo.klass = gdkGC;
-    cinfo.gtype = GDK_TYPE_GC;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
 
 	rb_define_singleton_method(gdkGC, "new", gdkgc_s_new, 1);
 	rb_define_method(gdkGC, "copy", gdkgc_copy, 1);
@@ -229,8 +219,4 @@ Init_gtk_gdk_gc()
 	rb_define_method(gdkGC, "set_tile", gdkgc_set_tile, 1);
 	rb_define_method(gdkGC, "set_ts_origin", gdkgc_set_ts_origin, 2);
 
-	/*
-	 * Gdk::GCValues
-	 */
-	gdkGCValues = rb_define_class_under(mGdk, "GCValues", rb_cData);
 }

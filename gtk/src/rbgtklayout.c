@@ -4,7 +4,7 @@
   rbgtklayout.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -119,14 +119,7 @@ layout_get_bin_window(self)
 void
 Init_gtk_layout()
 {
-    static RGObjClassInfo cinfo;
-
-    gLayout = rb_define_class_under(mGtk, "Layout", gContainer);
-    cinfo.klass = gLayout;
-    cinfo.gtype = GTK_TYPE_LAYOUT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gLayout = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
 
     /* Instance methods */
     rb_define_method(gLayout, "initialize", layout_initialize, 2);
@@ -147,5 +140,5 @@ Init_gtk_layout()
 
     /* Signals */
     rb_define_const(gLayout, "SIGNAL_SET_SCROLL_ADJUSTMENTS",
-		    rb_str_new2("set_scroll_adjustments"));
+					rb_str_new2("set_scroll_adjustments"));
 }

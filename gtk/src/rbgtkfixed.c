@@ -4,7 +4,7 @@
   rbgtkfixed.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,14 +41,7 @@ fixed_move(self, win, x, y)
 
 void Init_gtk_fixed()
 {
-    static RGObjClassInfo cinfo;
-
-    gFixed = rb_define_class_under(mGtk, "Fixed", gContainer);
-    cinfo.klass = gFixed;
-    cinfo.gtype = GTK_TYPE_FIXED;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gFixed = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);
 
     rb_define_method(gFixed, "initialize", fixed_initialize, 0);
     rb_define_method(gFixed, "put", fixed_put, 3);

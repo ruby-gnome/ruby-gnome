@@ -4,7 +4,7 @@
   rbgtkoptionmenu.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,16 +55,10 @@ omenu_set_history(self, index)
     return self;
 }
 
-void Init_gtk_option_menu()
+void 
+Init_gtk_option_menu()
 {
-    static RGObjClassInfo cinfo;
-
-    gOptionMenu = rb_define_class_under(mGtk, "OptionMenu", gButton);
-    cinfo.klass = gOptionMenu;
-    cinfo.gtype = GTK_TYPE_OPTION_MENU;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gOptionMenu = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);
 
     rb_define_method(gOptionMenu, "initialize", omenu_initialize, 0);
     rb_define_method(gOptionMenu, "get_menu", omenu_get_menu, 0);

@@ -4,7 +4,7 @@
   rbgtklabel.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -84,16 +84,10 @@ label_parse_uline(self, string)
     return INT2FIX(i);
 }
 
-void Init_gtk_label()
+void 
+Init_gtk_label()
 {
-    static RGObjClassInfo cinfo;
-
-    gLabel = rb_define_class_under(mGtk, "Label", gMisc);
-    cinfo.klass = gLabel;
-    cinfo.gtype = GTK_TYPE_LABEL;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gLabel = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 
     rb_define_method(gLabel, "initialize", label_initialize, -1);
     rb_define_method(gLabel, "get", label_get, 0);

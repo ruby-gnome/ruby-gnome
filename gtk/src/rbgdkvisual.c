@@ -3,8 +3,8 @@
 
   rbgdkvisual.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 05:34:04 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -18,8 +18,6 @@
 #include "global.h"
 
 #define _SELF(self) (GDK_VISUAL(RVAL2GOBJ(self)))
-
-VALUE gdkVisual;
 
 static VALUE
 gdkvisual_s_query_depths(self)
@@ -222,15 +220,7 @@ gdkvisual_blue_prec(self)
 void
 Init_gtk_gdk_visual()
 {
-    static RGObjClassInfo cinfo;
-
-    gdkVisual = rb_define_class_under(mGdk, "Visual", rbgobj_cGObject);
-    cinfo.klass = gdkVisual;
-    cinfo.gtype = GDK_TYPE_VISUAL;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-
+    VALUE gdkVisual = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
 
     /* GdkVisualType */
     rb_define_const(gdkVisual, "STATIC_GRAY", INT2FIX(GDK_VISUAL_STATIC_GRAY));

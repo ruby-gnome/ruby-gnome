@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/07/28 04:54:03 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -75,7 +75,6 @@ note_prepend_page_menu(argc, argv, self)
     VALUE self;
 {
     VALUE child, tab_label, menu_label;
-    GtkWidget *gmenu_label = NULL;
 
     rb_scan_args(argc, argv, "21", &child, &tab_label, &menu_label);
     gtk_notebook_prepend_page_menu(GTK_NOTEBOOK(RVAL2GOBJ(self)),
@@ -125,13 +124,6 @@ note_set_page(self, pos)
 {
     gtk_notebook_set_page(GTK_NOTEBOOK(RVAL2GOBJ(self)), NUM2INT(pos));
     return self;
-}
-
-static VALUE
-note_cur_page(self)
-    VALUE self;
-{
-    return make_notepage(GTK_NOTEBOOK(RVAL2GOBJ(self))->cur_page);
 }
 
 static VALUE
@@ -388,17 +380,11 @@ note_set_tab_label_text(self, child, text)
     return self;
 }
 
-void Init_gtk_notebook()
+void 
+Init_gtk_notebook()
 {
-    static RGObjClassInfo cinfo;
+    VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
 
-    gNotebook = rb_define_class_under(mGtk, "Notebook", gContainer);
-    cinfo.klass = gNotebook;
-    cinfo.gtype = GTK_TYPE_NOTEBOOK;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
-  
     rb_define_const(gNotebook, "SIGNAL_SWITCH_PAGE", rb_str_new2("switch_page"));
 
     rb_define_method(gNotebook, "initialize", note_initialize, 0);
@@ -410,7 +396,6 @@ void Init_gtk_notebook()
     rb_define_method(gNotebook, "insert_page_menu", note_insert_page_menu, 4);
     rb_define_method(gNotebook, "remove_page", note_remove_page, 1);
     rb_define_method(gNotebook, "set_page", note_set_page, 1);
-    rb_define_method(gNotebook, "cur_page", note_cur_page, 0);
     rb_define_method(gNotebook, "get_current_page", note_get_current_page, 0);
     rb_define_method(gNotebook, "next_page", note_next_page, 0);
     rb_define_method(gNotebook, "prev_page", note_prev_page, 0);
@@ -440,8 +425,6 @@ void Init_gtk_notebook()
     rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);
     rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
-
-    rb_define_alias(gNotebook, "page", "cur_page");
 
     Init_gtk_font_selection();
 }

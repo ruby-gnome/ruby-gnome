@@ -4,7 +4,7 @@
   rbgtkdrawingarea.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/31 17:23:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -30,16 +30,10 @@ darea_size(self, w, h)
     return self;
 }
 
-void Init_gtk_drawing_area()
+void 
+Init_gtk_drawing_area()
 {
-    static RGObjClassInfo cinfo;
-
-    gDrawArea = rb_define_class_under(mGtk, "DrawingArea", gWidget);
-    cinfo.klass = gDrawArea;
-    cinfo.gtype = GTK_TYPE_DRAWING_AREA;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgtk_register_class(&cinfo);
+    VALUE gDrawArea = G_DEF_CLASS(GTK_TYPE_DRAWING_AREA, "DrawingArea", mGtk);
 
     rb_define_method(gDrawArea, "initialize", darea_initialize, 0);
     rb_define_method(gDrawArea, "size", darea_size, 2);
