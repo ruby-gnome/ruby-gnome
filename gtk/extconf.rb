@@ -89,6 +89,8 @@ mdir = $mdir
 begin
   $mdir = "gtk/src"
   src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
+  src20_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src20'))
+  src22_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src22'))
 
   Dir.mkdir('src') unless File.exist? 'src'
   Dir.chdir "src"
@@ -145,14 +147,18 @@ allclean: clean
   mfile.close
   Dir.chdir ".."
 
+  $CFLAGS = " -I#{src_dir} " + $CFLAGS
+
+  Dir.mkdir('src20') unless File.exist? 'src20'
   Dir.chdir "src20"
   $objs = ["rbgtk20.o"]
-  create_makefile("gtk20", src_dir)
+  create_makefile("gtk20", src20_dir)
   Dir.chdir ".."
 
+  Dir.mkdir('src22') unless File.exist? 'src22'
   Dir.chdir "src22"
   $objs = ["rbgtk22.o"]
-  create_makefile("gtk22", src_dir)
+  create_makefile("gtk22", src22_dir)
   Dir.chdir ".."
 
   mfile = File.open("Makefile", "w")
