@@ -6,15 +6,18 @@ Ruby/GnomePrintUI is a Ruby binding of libgnomeprintui.
 Requirements
 ------------
 
-    Ruby:                 http://www.ruby-lang.org/
-    libgnomeprintui [*]:  http://www.gnome.org/
+    Ruby:                  http://www.ruby-lang.org/
+    Ruby/GTK2:             http://ruby-gnome2.sourceforge.net/
+    libgnomeprint [*1]:    http://www.gnome.org/
+    libgnomeprintui [*2]:  http://www.gnome.org/
 
-    [*]: 2.8 or newer is required.
+    [*1]: 2.8 or newer is required.
+    [*2]: 2.6 or newer is required.
 
 Install
 -------
 
-    0. install ruby and libgnomeprintui. 
+    0. install ruby, Ruby/GTK2 and libgnomeprintui. 
     1. ruby extconf.rb
     2. make
     3. su

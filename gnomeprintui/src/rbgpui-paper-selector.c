@@ -46,8 +46,10 @@ void
 Init_gnome_paper_selector(VALUE mGnome)
 {
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PAPER_SELECTOR, "PaperSelector", mGnome);
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS,
-              "PaperSelectorFlags", mGnome);
+
+  /* GnomePaperSelectorFlags */
+  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS, "Flags", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS, "GNOME_PAPER_SELECTOR_");
 
   rb_define_method(c, "initialize", gpui_paper_selector_new, -1);
 }

@@ -1,3 +1,8 @@
+2004-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgpui-paper-selector.c, rbgpui-print-dialog.c: 
+	Fix constant definitions. 
+
 2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: added fallback for libgnomeprintui-enum-types.h.

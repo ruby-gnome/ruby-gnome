@@ -22,16 +22,16 @@ class Renderer
   end
   
   def dialog
-    args = [@job, "preview", Gnome::PrintDialogFlags::RANGE]
+    args = [@job, "preview", Gnome::PrintDialog::RANGE]
     dialog = Gnome::PrintDialog.new(*args)
     response = dialog.run
     dialog.destroy
     case response
-    when Gnome::PrintDialogResponse::PRINT
+    when Gnome::PrintDialog::RESPONSE_PRINT
       print
-    when Gnome::PrintDialogResponse::PREVIEW
+    when Gnome::PrintDialog::RESPONSE_PREVIEW
       preview
-    when Gnome::PrintDialogResponse::CANCEL
+    when Gnome::PrintDialog::RESPONSE_CANCEL
       puts "canceled"
     else
       puts "???"
@@ -102,7 +102,7 @@ class Renderer
   end
 
   def draw_image
-    filename = Dir["sample/*.png"].first
+    filename = Dir["**/*.png"].first
     pixbuf = Gdk::Pixbuf.new(filename)
     @context.save do
       @context.translate(350, 500)

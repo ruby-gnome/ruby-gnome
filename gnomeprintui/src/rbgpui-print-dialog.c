@@ -85,14 +85,19 @@ void
 Init_gnome_print_dialog(VALUE mGnome)
 {
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PRINT_DIALOG, "PrintDialog", mGnome);
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_RANGE_TYPE,
-              "PrintRangeType", mGnome);
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_DIALOG_RANGE_FLAGS,
-              "PrintDialogRangeFlags", mGnome);
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_DIALOG_FLAGS,
-              "PrintDialogFlags", mGnome);
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_BUTTONS,
-              "PrintDialogResponse", mGnome);
+
+  /* GnomePrintRangeType */
+  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_RANGE_TYPE, "RangeType", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PRINT_RANGE_TYPE, "GNOME_PRINT_");
+  /* GnomePrintDialogRangeFlags */
+  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_DIALOG_RANGE_FLAGS, "RangeFlags", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PRINT_DIALOG_RANGE_FLAGS, "GNOME_PRINT_");
+  /* GnomePrintDialogFlags */
+  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_DIALOG_FLAGS, "Flags", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PRINT_DIALOG_FLAGS, "GNOME_PRINT_DIALOG_");
+  /* GnomePrintButtons */
+  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PRINT_BUTTONS, "Response", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PRINT_BUTTONS, "GNOME_PRINT_DIALOG_");
   
               
   rb_define_method(c, "initialize", gpui_dialog_new, 3);
