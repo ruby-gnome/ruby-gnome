@@ -148,7 +148,7 @@ class FontPickerApp < TestGnomeApp
 
   def set_font(gfp, font_name, label)
     printf("Font name: %s\n", font_name)
-    label.text = font_name
+    label.set_text(font_name)
   end
 end
 

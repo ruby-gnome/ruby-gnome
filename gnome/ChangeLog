@@ -1,3 +1,7 @@
+2002-12-08  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* sample/gnome-app-helper.rb: Follow Ruby/GTK changes.
+
 2002-12-03  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb: delete obsolete depended libraries.
@@ -5,7 +9,7 @@
 2002-11-27  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-popup-menu.c: use id_call defined as static instead of
-	using one which is defined in Ruby/Gtk.
+	using one which is defined in Ruby/GTK.
 
 2002-11-17  KUBO Takehiro  <kubo@jiubao.org>
 
