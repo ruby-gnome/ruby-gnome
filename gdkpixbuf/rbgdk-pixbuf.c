@@ -420,7 +420,8 @@ void
 Init_gdk_pixbuf2()
 {
     VALUE gdkPixbuf;
-    gdk_rgb_init(); /* initialize it anyway */
+	 /*
+    gdk_rgb_init();*/ /* initialize it anyway */
     gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
     /*
@@ -462,9 +463,6 @@ Init_gdk_pixbuf2()
      */
     rb_define_method(gdkPixbuf, "save", save, -1);
 
-    /* 
-     * Inline data
-     */
     /*
      * Scaling
      */
@@ -500,5 +498,5 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "fill!", fill, 1);
 
     Init_gdk_pixbuf_animation();
-
+    Init_gdk_pixdata();
 }
