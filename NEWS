@@ -39,7 +39,7 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
          Gtk::Drag, Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore, 
          Gtk::TreeStore, Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath, 
          Gtk::TreeRowReference
-      - Added: [Kato Kazuyoshi]
+      - Added: [KATO Kazuyoshi]
          sample/gtk-demo/changedisplay.rb, sample/gtk-demo/pixbufs.rb.
       - Removed: [Masao Mutoh]
          Gtk::Clipboard#owner
