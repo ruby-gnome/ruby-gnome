@@ -3,8 +3,8 @@
 
   rbgdk-pixdata.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/17 19:20:41 $
+  $Author: sakai $
+  $Date: 2003/02/13 08:19:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -152,7 +152,6 @@ static VALUE
 pixdata_pixel_data(self)
     VALUE self;
 {
-    guint stream_length;
     gint i;
     guint8* ret = _SELF(self)->pixel_data;
 

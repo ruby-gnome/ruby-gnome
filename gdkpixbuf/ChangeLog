@@ -1,3 +1,7 @@
+2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgdk-pixbufanimation.c,rbgdk-pixdata.c: Suppress warnings.
+
 2003-01-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* *.[ch]: Update Copyright. 

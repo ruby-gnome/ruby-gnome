@@ -3,8 +3,8 @@
 
   rbgdk-pixbufanimation.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/17 19:20:41 $
+  $Author: sakai $
+  $Date: 2003/02/13 08:19:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -84,7 +84,7 @@ animation_iter_advance(argc, argv, self)
     VALUE self;
 {
     VALUE current_time;
-    GTimeVal* time;
+    GTimeVal* time = NULL;
 
     rb_scan_args(argc, argv, "01", &current_time);
 
