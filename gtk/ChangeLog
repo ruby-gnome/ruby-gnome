@@ -1,3 +1,7 @@
+2004-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkuimanager.c: Initialize GError first. 
+
 2004-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextiter.c: Gtk::TextIter#[forward|backward]_search works on

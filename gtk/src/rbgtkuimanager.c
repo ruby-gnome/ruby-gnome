@@ -4,7 +4,7 @@
   rbgtkuimanager.c -
 
   $Author: mutoh $
-  $Date: 2004/07/29 18:35:06 $
+  $Date: 2004/10/26 15:57:32 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -91,7 +91,7 @@ rbuimanager_add_ui(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    GError* error;
+    GError* error = NULL;
     guint ret;
     VALUE buffer;
 
