@@ -1,4 +1,78 @@
-Ruby-GNOME2-0.2
+Ruby-GNOME2-0.3 (2003-02-09)
+
+  * Ruby/GLib
+    - Miscellaneous bugfixes and some improvement internal. 
+      [Masahiro Sakai, Masao Mutoh]
+
+  * Ruby/GTK
+    - Miscellaneous bugfixes and some improvement internal.
+      [Masao Mutoh]
+    - Support GTK+-2.2.x. [KUBO Takehiro]
+    - DnD enhancement. [Geoff Youngs, Masao Mutoh]
+    - Require Ruby/Pango. [Masao Mutoh]
+
+      - Completed:
+         Gdk::Drawable, Gdk::Rectangle, Gdk::Region, Gtk::AccelGroup,
+         Gtk::Accelerator, Gtk::AccelGroupEntry, Gtk::AccelKey
+      - Added and completed:
+         Gdk::Pango::Embossed, Gdk::Pango::Stipple, Gdk::Span
+      - Added some methods, improved:
+         Gtk::Widget, Gtk::Calender, Gdk::GC, Gtk::Drag, Gtk::SelectionData, 
+         Gtk::RadioMenuItem,Gdk::Pixmap
+      - Added:
+        sample/misc/dnd.rb, dndtreeview.rb, dnd.rb
+      - Removed:
+         Gtk::AccelGroup#connect_by_path(use Gtk::AccelGroup#connect instead).
+
+  * Ruby/GdkPixbuf
+    - Added GdkPixbufLoader. [Geoff Youngs]
+
+  * Ruby/GNOME
+    - None.
+
+  * Ruby/GnomeCanvas
+    - Warning fixes for samples. [Masao Mutoh]
+
+  * Ruby/Libglade
+    - Added a sample(sample/treview.[glade|rb]). [Masao Mutoh]
+
+  * Ruby/Libart
+    - Added Art::Affine, Art::Bpath, Art::Canvas, Art::SVP, Art::Vpath [Tom Payne]
+
+  * Ruby/GConf
+    - None.
+
+  * Ruby/Pango(NEW)
+    - Initial release. [Geoff Youngs, Masao Mutoh]
+
+      - Added and completed:
+         Pango::Rectangle, Pango::FontDescription, Pango::FontMetrics, 
+         Pango::FontFace, Pango::Fontset, Pango::FontsetSimple, 
+         Pango::Attribute, Pango::AttrString, Pango::AttrLanguage, 
+         Pango::AttrColor, Pango::AttrInt, Pango::AttrFloat, Pango::AttrBool
+         Pango::AttrFontDesc, Pango::AttrShape, Pango::AttrFamily, 
+         Pango::AttrStyle, Pango::AttrVariant, Pango::AttrStretch,
+         Pango::AttrWeight, Pango::AttrSize, Pango::AttrForeground,
+         Pango::AttrBackground, Pango::AttrStrikethrough, Pango::AttrUnderline,
+         Pango::AttrScale, Pango::AttrRise, Pango::Color, Pango::Language,
+         Pango::AttrList, Pango::AttrIterator, Pango::TabArray
+     - Added:
+         Pango::Context, Pango::Item, Pango::ClyphString, Pango::Font, 
+         Pango::FontFamily, Pango::FontMap, Pango::Layout, Pango::LayoutIter,
+         Pango::LayoutLine,
+         sample/attribute.rb, gdk_layout.rb, label.rb, parse.rb.
+
+  * Misc
+    - Project website
+      http://ruby-gnome2.sourceforge.net/
+    - Ruby/GTK Tutorial
+      http://ruby-gnome2.sourceforge.net/tut/toc.htm
+    - Ruby-GNOME2 reference manual(This project has just started).
+      http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=Ruby-GNOME2
+
+
+Ruby-GNOME2-0.2 (2002-12-28)
+
   * Ruby/GLib
     - Some bugfixes and some improvement internal.
 

@@ -1,5 +1,5 @@
 The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
-------------------------------------------------
+------------------------------------------------------------------------
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
 
@@ -15,7 +15,7 @@ Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 Masao Mutoh <mutoh@highway.ne.jp>
      Chief maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), 
-     rbbr(M), Others. Project management.
+     Ruby/Pango(M), rbbr(M), Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M).
