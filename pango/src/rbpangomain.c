@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2003/02/02 09:10:53 $
+  $Date: 2003/03/08 06:12:16 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -91,10 +91,18 @@ rpango_parse_markup(argc, argv, self)
                        accel_char ? rb_str_new(&c, 1) : Qnil);
 }
 
+static VALUE
+rpango_pixels(self, pixels)
+    VALUE self, pixels;
+{
+    return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
+}
+
 void
 Init_pango_main()
 {
     rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
     rb_define_module_function(mPango, "parse_markup", rpango_parse_markup, -1);
+    rb_define_module_function(mPango, "pixels", rpango_pixels, 1);
     rb_define_const(mPango, "SCALE", INT2FIX(PANGO_SCALE));
 }

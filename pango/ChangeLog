@@ -1,7 +1,10 @@
+2003-03-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangomain.c: Add Pango.pixels 
+
 2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: append "-DRUBY_PANGO_COMPILATION" to $defs.
-
 	* src/rbpango.h: define RUBY_PANGO_VAR macro for exporting variables
 	on some win32 platforms.
 
