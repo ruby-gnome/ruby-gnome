@@ -4,7 +4,7 @@
   rbgtkpreview.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,10 @@
 ************************************************/
 
 #include "global.h"
+
+#ifndef GTK_DISABLE_DEPRECATED
+
+static VALUE gPreviewInfo;
 
 static VALUE
 preview_initialize(self, type)
@@ -122,14 +126,16 @@ static VALUE
 preview_get_info(self)
     VALUE self;
 {
-    GtkPreviewInfo *i = gtk_preview_get_info();
-    return make_gtkprevinfo(i);
+    return Data_Wrap_Struct(gPreviewInfo, 0, 0, gtk_preview_get_info());
 }
 
 void 
 Init_gtk_preview()
 {
     VALUE gPreview = G_DEF_CLASS(GTK_TYPE_PREVIEW, "Preview", mGtk);
+
+    gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", 
+                                         GTYPE2CLASS(G_TYPE_BOXED));
 
     rb_define_method(gPreview, "initialize", preview_initialize, 1);
     rb_define_method(gPreview, "size", preview_size, 2);
@@ -148,3 +154,5 @@ Init_gtk_preview()
     rb_define_singleton_method(gPreview, "get_cmap", preview_get_cmap, 0);
     rb_define_singleton_method(gPreview, "get_info", preview_get_info, 0);
 }
+
+#endif

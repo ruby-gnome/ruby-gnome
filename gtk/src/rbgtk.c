@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: sakai $
-  $Date: 2002/08/30 18:24:46 $
+  $Author: mutoh $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,12 +20,6 @@
 VALUE mGtk;
 VALUE mEditable;
 
-VALUE gRequisition;
-
-#ifndef GTK_DISABLE_DEPRECATED
-VALUE gPreviewInfo;
-#endif
-
 VALUE mRC;
 
 ID id_relative_callbacks;
@@ -40,31 +34,6 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
     gtk_object_sink(gtkobj);
     RBGOBJ_INITIALIZE(obj, gtkobj);
 }
-
-#ifndef GTK_DISABLE_DEPRECATED
-VALUE
-make_gtkprevinfo(info)
-    GtkPreviewInfo *info;
-{
-    return Data_Wrap_Struct(gPreviewInfo, 0, 0, info);
-}
-
-GtkPreviewInfo*
-get_gtkprevinfo(value)
-    VALUE value;
-{
-    GtkPreviewInfo *info;
-
-    if (NIL_P(value)) return NULL;
-
-    if (!rb_obj_is_instance_of(value, gPreviewInfo)) {
-		rb_raise(rb_eTypeError, "not a PreviewInfo");
-    }
-    Data_Get_Struct(value, GtkPreviewInfo, info);
-
-    return info;
-}
-#endif
 
 void
 exec_callback(widget, proc)
@@ -192,9 +161,6 @@ Init_gtk_gtk()
 	Init_gtk_windowgroup();
 
     Init_gtk_accel_group();
-#ifndef GTK_DISABLE_DEPRECATED
-    gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", rb_cData);
-#endif
     Init_gtk_requisition();
     Init_gtk_allocation();
 

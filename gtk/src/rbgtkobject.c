@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -466,7 +466,6 @@ Init_gtk_object()
     Init_gtk_option_menu();
     Init_gtk_paned();
     Init_gtk_plug();
-    Init_gtk_preview();
     Init_gtk_progress();
     Init_gtk_progress_bar();
     Init_gtk_radio_button();
@@ -501,6 +500,7 @@ Init_gtk_object()
     Init_gtk_window();
 
 #ifndef GTK_DISABLE_DEPRECATED
+    Init_gtk_preview();
     Init_gtk_list();
     Init_gtk_clist();
     Init_gtk_ctree();

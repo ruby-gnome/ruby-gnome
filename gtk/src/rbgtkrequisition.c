@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* -*- C-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkrequisition.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 2002  Masao Mutoh
 
@@ -73,7 +73,7 @@ grequisition_to_a(self)
 
 void Init_gtk_requisition()
 {
-    VALUE gRequisition = G_DEF_CLASS(GTK_TYPE_REQUISITION, "Requisition", mGdk);
+    VALUE gRequisition = G_DEF_CLASS(GTK_TYPE_REQUISITION, "Requisition", mGtk);
 
     rb_define_singleton_method(gRequisition, "initialize", grequisition_initialize, 2);
     rb_define_method(gRequisition, "width", grequisition_w, 0);

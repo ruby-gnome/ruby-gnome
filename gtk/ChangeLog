@@ -1,5 +1,16 @@
 2002-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkrequision.c: Fix a param of G_DEF_CLASS from mGdk to mGtk.
+	* src/rbgtkctree.c: Apply G_DEF_CLASS to Gtk::CTreeNode.
+	* src/rbgdkgeometry.c: Separate from src/rbgdkwindow.c.
+	* src/rbgdkgeometry.c, src/rbgtkwindow.c,src/rbgtk.h: 
+	make GDK_TYPE_GEOMETRY as boxed object and apply G_DEF_CLASS.
+	* src/rbgtk.c, src/rbgtkprevinfo.c, src/rbgtkobject.c: 
+	Move Gtk::PreviewInfo to src/rbgtkprevinfo.c.
+	Make Gtk::Preview as GTK_DISABLE_DEPRECATED.
+	
+2002-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* src/rbgdkregion.c, src/rbgdkatom.c, src/rbgtk.h: 
 	make GDK_TYPE_REGION, GDK_TYPE_ATOM as boxed object	
 	and apply G_DEF_CLASS.

@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:32 $
+  $Author: mutoh $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -153,7 +153,7 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 {
     gtk_window_set_geometry_hints(GTK_WINDOW(RVAL2GOBJ(self)),
 								  GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
-								  rbgdk_geometry_get(geometry),
+								  (GdkGeometry*)RVAL2BOXED(geometry),
 								  NUM2INT(geom_mask));
 
     return self;

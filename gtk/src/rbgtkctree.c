@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:09 $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,10 +15,37 @@
 
 #include "global.h"
 
-/* FIXME
-#define RVAL2CTREENODE(n) GTK_CTREE_NODE(RVAL2GVAL(n))
-*/
-#define RVAL2CTREENODE(n) GTK_CTREE_NODE(RVAL2GOBJ(n))
+#define RVAL2CTREENODE(n) ((n == Qnil)?NULL:GTK_CTREE_NODE(RVAL2BOXED(n)))
+#define RVAL2PIXMAP(p) ((p == Qnil)?NULL:GDK_PIXMAP(RVAL2GOBJ(p)))
+#define RVAL2BITMAP(p) ((p == Qnil)?NULL:GDK_BITMAP(RVAL2GOBJ(p)))
+#define BOXED2RTREENODE(b) BOXED2RVAL(b, ctreenode_get_type())
+
+/*****************************************/
+static GtkCTreeNode*
+ctreenode_copy (const GtkCTreeNode* node)
+{
+    return node;
+}
+
+static void
+ctreenode_free (GtkCTreeNode* node)
+{
+  g_list_free(&(node->list));
+  g_free(node);
+}
+
+GType
+ctreenode_get_type (void)
+{
+  static GType our_type = 0;
+  if (our_type == 0)
+    our_type = g_boxed_type_register_static ("GtkCTreeNodeBoxed",
+                    (GBoxedCopyFunc)ctreenode_copy,
+                    (GBoxedFreeFunc)ctreenode_free);
+  return our_type;
+}
+
+/*****************************************/
 
 static void
 ctree_node_mark(ctree, node, notused)
@@ -121,17 +148,16 @@ ctree_insert_node(self, parent, sibling, texts, spacing,
         VALUE text = RARRAY(texts)->ptr[i];
         c_texts[i] = NIL_P(text)?0:STR2CSTR(text);
     }
-
     result = gtk_ctree_insert_node(GTK_CTREE(RVAL2GOBJ(self)),
                                    c_parent, c_sibling, c_texts,
                                    NUM2INT(spacing),
-                                   GDK_PIXMAP(RVAL2GOBJ(pixmap_closed)),
-                                   GDK_BITMAP(RVAL2GOBJ(mask_closed)),
-                                   GDK_PIXMAP(RVAL2GOBJ(pixmap_opened)),
-                                   GDK_BITMAP(RVAL2GOBJ(mask_opened)),
+                                   RVAL2PIXMAP(pixmap_closed),
+                                   RVAL2BITMAP(mask_closed),
+                                   RVAL2PIXMAP(pixmap_opened),
+                                   RVAL2BITMAP(mask_opened),
                                    RTEST(is_leaf),
                                    RTEST(expanded));
-    return GVAL2RVAL(result);
+    return BOXED2RTREENODE(result);
 }
 
 /*
@@ -197,7 +223,7 @@ ctree_post_recursive(self, node)
 
     while (c_node) {
         tmp = GTK_CTREE_ROW(c_node)->sibling;
-        ctree_post_recursive(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)));
+        ctree_post_recursive(self, GTK_CTREE_NODE(c_node));
         c_node = tmp;
     }
 
@@ -247,7 +273,7 @@ ctree_post_recursive_to_depth(self, node, depth)
     if (c_node && GTK_CTREE_ROW(c_node)->level <= c_depth) {
         while (c_node) {
             tmp = GTK_CTREE_ROW(c_node)->sibling;
-            ctree_post_recursive_to_depth(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)), depth);
+            ctree_post_recursive_to_depth(self, c_node, depth);
             c_node = tmp;
         }
     }
@@ -288,7 +314,7 @@ ctree_pre_recursive(self, node)
 
     while (c_node) {
         tmp = GTK_CTREE_ROW(c_node)->sibling;
-        ctree_pre_recursive(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)));
+        ctree_pre_recursive(self, c_node);
         c_node = tmp;
     }
 
@@ -336,7 +362,7 @@ ctree_pre_recursive_to_depth(self, node, depth)
     if (c_node && GTK_CTREE_ROW(c_node)->level <= c_depth) {
         while (c_node) {
             tmp = GTK_CTREE_ROW(c_node)->sibling;
-            ctree_pre_recursive_to_depth(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)), depth);
+            ctree_pre_recursive_to_depth(self, c_node, depth);
             c_node = tmp;
         }
     }
@@ -374,7 +400,7 @@ static VALUE
 ctree_last(self, node)
 	VALUE self, node;
 {
-    return GVAL2RVAL(gtk_ctree_last(GTK_CTREE(RVAL2GOBJ(self)),
+    return BOXED2RTREENODE(gtk_ctree_last(GTK_CTREE(RVAL2GOBJ(self)),
 									RVAL2CTREENODE(node)));
 }
 
@@ -411,53 +437,6 @@ ctree_is_ancestor_p(self, node, child)
                                             RVAL2CTREENODE(child));
     return result?Qtrue:Qfalse;
 }
-
-#if 0
-/*
- * find_by_row_data(node, data)
- *
- * Finds a node in the tree under node that has the given
- * user data pointer.
- *
- * arguments:
- *   node - The node where to start searching.
- *   data - User data.
- *
- * return:
- *   The node, or NULL if not found.
- */
-static VALUE
-ctree_find_by_row_data(self, node, data)
-	VALUE self, node, data;
-{
-    GtkCTreeNode *result;
-
-    result = gtk_ctree_find_by_row_data_custom(
-		GTK_CTREE(RVAL2GOBJ(self)), RVAL2CTREENODE(node),
-		data, ...);
-
-    return GVAL2RVAL(resulte);
-}
-
-/*
- * find_all_by_row_data(node, data)
- *
- * Find the first node under node whose row data pointer fulfills
- * a custom criterion.
- *
- * arguments:
- *   node - The node where to start searching.
- *   data - User data.
- *
- * return:
- *   The array of nodes that have the given data. 
- */
-static VALUE
-ctree_find_all_by_row_data(self, node, data)
-	VALUE self, node, data;
-{
-}
-#endif /* 0 */
 
 /*
  * is_hot_spot_p(x, y)
@@ -735,8 +714,8 @@ ctree_node_set_pixmap(self, node, column, pixmap, mask)
     gtk_ctree_node_set_pixmap(GTK_CTREE(RVAL2GOBJ(self)),
                               RVAL2CTREENODE(node),
                               NUM2INT(column),
-							  GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-							  GDK_BITMAP(RVAL2GOBJ(mask)));
+							  RVAL2PIXMAP(pixmap),
+							  RVAL2BITMAP(mask));
     return self;
 }
 
@@ -762,8 +741,8 @@ ctree_node_set_pixtext(self, node, column, text, spacing, pixmap, mask)
                                NUM2INT(column),
                                STR2CSTR(text),
                                NUM2INT(spacing),
-							   GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-							   GDK_BITMAP(RVAL2GOBJ(mask)));
+							   RVAL2PIXMAP(pixmap),
+							   RVAL2BITMAP(mask));
     return self;
 }
 
@@ -790,10 +769,10 @@ ctree_set_node_info(self, node, text, spacing,
 							RVAL2CTREENODE(node),
 							STR2CSTR(text),
 							NUM2INT(spacing),
-							GDK_PIXMAP(RVAL2GOBJ(pixmap_closed)),
-							GDK_BITMAP(RVAL2GOBJ(mask_closed)),
-							GDK_PIXMAP(RVAL2GOBJ(pixmap_opened)),
-							GDK_BITMAP(RVAL2GOBJ(mask_opened)),
+							RVAL2PIXMAP(pixmap_closed),
+							RVAL2BITMAP(mask_closed),
+							RVAL2PIXMAP(pixmap_opened),
+							RVAL2BITMAP(mask_opened),
 							RTEST(is_leaf), RTEST(expanded));
     return self;
 }
@@ -1250,7 +1229,7 @@ ctree_node_nth(self, row)
 {
     GtkCTreeNode *result = gtk_ctree_node_nth(GTK_CTREE(RVAL2GOBJ(self)),
                                               NUM2INT(row));
-    return GVAL2RVAL(result);
+    return BOXED2RTREENODE(result);
 }
 
 static VALUE
@@ -1280,7 +1259,7 @@ ctree_each_selection(self)
         GtkCTreeNode* node;
         node = GTK_CTREE_NODE(sellist->data);
         sellist = sellist->next;
-        rb_yield(GVAL2RVAL(node));
+        rb_yield(BOXED2RTREENODE(node));
     }
 
     return Qnil;
@@ -1304,119 +1283,57 @@ static VALUE
 ctreenode_get_next(self)
 	VALUE self;
 {
-    return GVAL2RVAL(GTK_CTREE_NODE_NEXT(RVAL2CTREENODE(self)));
+    return BOXED2RTREENODE(GTK_CTREE_NODE_NEXT(RVAL2CTREENODE(self)));
 }
 
 static VALUE
 ctreenode_get_prev(self)
 	VALUE self;
 {
-    return GVAL2RVAL(GTK_CTREE_NODE_PREV(RVAL2CTREENODE(self)));
+    return BOXED2RTREENODE(GTK_CTREE_NODE_PREV(RVAL2CTREENODE(self)));
 }
 
 static VALUE
 ctreenode_get_parent(self)
 	VALUE self;
 {
-    return GVAL2RVAL(GTK_CTREE_ROW(RVAL2CTREENODE(self))->parent);
+    return BOXED2RTREENODE(GTK_CTREE_ROW(RVAL2CTREENODE(self))->parent);
 }
 
 static VALUE
 ctreenode_get_sibling(self)
 	VALUE self;
 {
-    GtkCTreeNode *result = GTK_CTREE_ROW(RVAL2CTREENODE(self))->sibling;
-    return GVAL2RVAL(result);
+    return BOXED2RTREENODE(GTK_CTREE_ROW(RVAL2CTREENODE(self))->sibling);
 }
 
 static VALUE
 ctreenode_get_children(self)
 	VALUE self;
 {
-    GtkCTreeNode *result = GTK_CTREE_ROW(RVAL2CTREENODE(self))->children;
-    return GVAL2RVAL(result);
+    return BOXED2RTREENODE(GTK_CTREE_ROW(RVAL2CTREENODE(self))->children);
 }
 
 static VALUE
 ctreenode_is_leaf(self)
 	VALUE self;
 {
-    GtkCTreeNode* node = RVAL2CTREENODE(self);
-    return (GTK_CTREE_ROW(node)->is_leaf)?Qtrue:Qfalse;
+    return (GTK_CTREE_ROW(RVAL2CTREENODE(self))->is_leaf)?Qtrue:Qfalse;
 }
 
 static VALUE
 ctreenode_expanded(self)
 	VALUE self;
 {
-    GtkCTreeNode* node = RVAL2CTREENODE(self);
-    return (GTK_CTREE_ROW(node)->expanded)?Qtrue:Qfalse;
+    return (GTK_CTREE_ROW(RVAL2CTREENODE(self))->expanded)?Qtrue:Qfalse;
 }
-
-#ifdef hoge
-GValue*
-rbobj_get(obj)
-    VALUE obj;
-{
-    VALUE data;
-    GValue* ret;
-
-    if (NIL_P(obj)) { 
-		rb_raise(rb_eTypeError, "wrong argument type nil");
-    }
-
-    Check_Type(obj, T_OBJECT);
-    data = rb_ivar_get(obj, id_gobject_data);
-
-    /* if (NIL_P(data) || data->dmark != gobj_mark) { */
-    if (NIL_P(data)) {
-		rb_raise(rb_eTypeError, "not a Glib::GObject");
-    }
-
-    Data_Get_Struct(data, GObject, result);
-    if (!ret)
-		rb_raise(rb_eArgError, "destroyed GLib::GObject");
-    return G_OBJECT(ret);
-}
-
-VALUE
-_ctree_node_to_ruby(node)
-    GtkCTreeNode* node;
-{
-	VALUE ret;
-
-    if (!node) return Qnil;
-    ret = (VALUE)g_value_get_pointer(node);
-    if (! ret){
-		ret = rb_obj_alloc(rbgobj_lookup_rbclass(node));
-		rbobj_initialize(ret, (GValue*)node);
-	}
-    return ret;
-}
-
-static void
-_ctree_node_from_ruby(from, to)
-	VALUE from;
-	GValue* to;
-{
-    GtkCTreeNode* c_node;
-
-    if (NIL_P(from)) return NULL;
-    Data_Get_Struct(from, GtkCTreeNode, c_node);
-	g_value_set_pointer(to, c_node);
-}
-#endif
 
 void 
 Init_gtk_ctree()
 {
     VALUE gCTree = G_DEF_CLASS2(GTK_TYPE_CTREE, "CTree", mGtk, ctree_mark, 0);
 
-    VALUE gCTreeNode = rb_define_class_under(mGtk, "CTreeNode", rb_cData);
-/*
-    rbgobj_register_r2g_func(GTK_TYPE_CTREE_NODE, _ctree_node_from_ruby);
-    rbgobj_register_g2r_func(GTK_TYPE_CTREE_NODE, _ctree_node_to_ruby);
-*/
+    VALUE gCTreeNode = G_DEF_CLASS(ctreenode_get_type(), "CTreeNode", mGtk);
  
     /* constants */
 

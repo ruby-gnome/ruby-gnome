@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/07 13:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,8 +55,6 @@ extern VALUE mGtk;
 extern VALUE mGtkDrag;
 extern VALUE mEditable;
 
-extern VALUE gRequisition;
-
 extern VALUE mGdk;
 extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
@@ -89,9 +87,6 @@ extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 
-extern VALUE make_gtkprevinfo(GtkPreviewInfo* info);
-extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
-
 #define add_relative rbgobj_add_relative
 #define add_relative_removable rbgobj_add_relative_removable
 #define remove_relative rbgobj_remove_relative
@@ -100,19 +95,18 @@ extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
  * for gdk
  */
 /* Append type */
+#define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
+extern GType gdk_geometry_get_type(void);
+
 #define GDK_TYPE_REGION (gdk_region_get_type())
-extern GType gdk_region_get_type (void);
+extern GType gdk_region_get_type(void);
 
 typedef struct {
   GdkAtom atom;
 } GdkAtomData;
 
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
-extern GType gdk_atom_get_type (void);
-
-
-extern VALUE make_tobj(gpointer obj, VALUE klass, int size);
-extern gpointer get_tobj(VALUE obj, VALUE klass);
+extern GType gdk_atom_get_type(void);
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
@@ -120,8 +114,4 @@ typedef void(*gdkdrawfunc)();
 
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
-
-extern VALUE rbgdk_geometry_make(GdkGeometry *geo);
-extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
-
 #endif /* _RBGTK_H */
