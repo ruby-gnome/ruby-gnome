@@ -1,3 +1,21 @@
+2004-11-06  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* src/rbgtktoolbutton.c: Gtk::ToolButton.new
+	  Use Symbols instead of Strings for stock-id (as elsewhere)
+	
+	* src/rbgtkselectiondata.c: rbgtk_atom2selectiondata()
+	  Calculate length properly (take format size into account)
+	  
+	* src/rbgtkdrag.c: Gtk::Drag.dest_set()
+	  Allow nil as well as empty target list
+          (ie. accept any rather than accept none)
+	
+	* src/rbgtkallocation.c: Gtk::Allocation
+	  Make object non-copyable (ie. modify original values in struct)
+	
+	* src/rbgdkrgb.c: Gdk::RGB#find_color
+	  Fix passing of colormap to gdk_rgb_find_color()
+
 2004-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkactiongroup.c: Accept nil correctly in Gtk::ActionGroup#add_action. 
