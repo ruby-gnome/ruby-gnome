@@ -1,3 +1,7 @@
+2004-02-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Correct ruby path.
+
 2003-12-09  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README: Ruby/Libgda needs libgda 1.1.1 (development branch).

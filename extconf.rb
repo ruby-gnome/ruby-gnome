@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.7 2003/08/27 17:28:04 mutoh Exp $
+  $Id: extconf.rb,v 1.8 2004/02/14 13:15:12 mutoh Exp $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
 =end
@@ -14,7 +14,8 @@ priorlibs = ["glib", "gdkpixbuf", "pango", "gtk"]
 #
 # detect sub-directories
 #
-$ruby = arg_config("--ruby", Config::CONFIG['RUBY_INSTALL_NAME'])
+$ruby = File.join(Config::CONFIG['bindir'], Config::CONFIG['RUBY_INSTALL_NAME'])
+p $ruby = arg_config("--ruby", $ruby)
 
 $srcdir = File.dirname(__FILE__)
 $topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
