@@ -1,10 +1,10 @@
 =begin
   calendar.rb - Gtk::Calendar sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: calendar.rb,v 1.3 2003/01/19 14:28:23 mutoh Exp $
+  $Id: calendar.rb,v 1.4 2003/02/01 16:46:22 mutoh Exp $
 =end
 
 require 'gtk2'

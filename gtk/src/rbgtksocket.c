@@ -4,9 +4,10 @@
   rbgtksocket.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/02/01 16:46:24 $
 
-  Copyright (C) 2002,2003 Neil Conway
+  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002 Neil Conway
 ************************************************/
 
 #include "global.h"

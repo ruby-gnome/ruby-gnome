@@ -4,9 +4,9 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/02/01 16:46:24 $
 
-  Copyright (C) 2002,2003 The Ruby-GNOME2 Project
+  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -562,10 +562,15 @@ widget_get_pango_context(self)
 }
 
 static VALUE
-widget_create_pango_layout(self, text)
-    VALUE self, text;
+widget_create_pango_layout(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-    return GOBJ2RVAL(gtk_widget_create_pango_layout(_SELF(self), RVAL2CSTR(text)));
+    VALUE text;
+    rb_scan_args(argc, argv, "01", &text);
+    return GOBJ2RVAL(gtk_widget_create_pango_layout(_SELF(self), 
+                                                    NIL_P(text) ? NULL : RVAL2CSTR(text)));
 }
 
 static VALUE
@@ -902,7 +907,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "modify_font", widget_modify_font, 1);
     rb_define_method(gWidget, "create_pango_context", widget_create_pango_context, 0);
     rb_define_method(gWidget, "pango_context", widget_get_pango_context, 0);
-    rb_define_method(gWidget, "create_pango_layout", widget_create_pango_layout, 1);
+    rb_define_method(gWidget, "create_pango_layout", widget_create_pango_layout, -1);
     rb_define_method(gWidget, "render_icon", widget_render_icon, 3);
     rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 4);
     rb_define_method(gWidget, "reset_shapes", widget_reset_shapes, 0);
