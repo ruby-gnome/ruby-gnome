@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/06/24 15:15:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -184,7 +184,7 @@ style_fg_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->fg_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->fg_gc[i]);
 }
 
 static VALUE
@@ -195,7 +195,7 @@ style_bg_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->bg_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->bg_gc[i]);
 }
 
 static VALUE
@@ -206,7 +206,7 @@ style_light_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->light_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->light_gc[i]);
 }
 
 static VALUE
@@ -217,7 +217,7 @@ style_dark_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->dark_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->dark_gc[i]);
 }
 
 static VALUE
@@ -228,7 +228,7 @@ style_mid_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->mid_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->mid_gc[i]);
 }
 
 static VALUE
@@ -239,7 +239,7 @@ style_text_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->text_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->text_gc[i]);
 }
 
 static VALUE
@@ -250,21 +250,21 @@ style_base_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(_SELF(self)->base_gc[i]);
+    return GOBJ2RVAL(_SELF(self)->base_gc[i]);
 }
 
 static VALUE
 style_black_gc(self)
     VALUE self;
 {
-    return make_gdkgc(_SELF(self)->black_gc);
+    return GOBJ2RVAL(_SELF(self)->black_gc);
 }
 
 static VALUE
 style_white_gc(self)
     VALUE self;
 {
-    return make_gdkgc(_SELF(self)->white_gc);
+    return GOBJ2RVAL(_SELF(self)->white_gc);
 }
 
 static VALUE

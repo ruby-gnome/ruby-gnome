@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/06/24 15:15:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -124,7 +124,7 @@ static VALUE
 gdkwin_copy_area(self, gc, x, y, src_window, src_x, src_y, width, height)
 	VALUE self, gc, x, y, src_window, src_x, src_y, width, height;
 {
-	gdk_window_copy_area(_SELF(self), get_gdkgc(gc),
+	gdk_window_copy_area(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
 						 NUM2INT(x), NUM2INT(y), _SELF(src_window),
 						 NUM2INT(src_x), NUM2INT(src_y), NUM2INT(width), NUM2INT(height));
 	return self;

@@ -1,3 +1,8 @@
+2002-06-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkpixmap.c: Change RBGTK_INITIALIZE to RBGOBJ_INITIALIZE.
+	* src/*.[ch]: Change make_gdkgc() to GOBJ2RVAL(), get_gdkgc() to RVAL2GOBJ().
+
 2002-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtk.c, src/rbgtk.h: Change rbgtk_class_info to RGObjClassInfo.

@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/06/24 15:15:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -248,35 +248,6 @@ get_gdkevent(event)
     Data_Get_Struct(event, GdkEvent, gevent);
 
     return gevent;
-}
-
-VALUE
-make_gdkgc(gc)
-    GdkGC *gc;
-{
-    if (gc == NULL) return Qnil;
-
-    gdk_gc_ref(gc);
-    return Data_Wrap_Struct(gdkGC, 0, gdk_gc_unref, gc);
-}
-
-GdkGC*
-get_gdkgc(gc)
-    VALUE gc;
-{
-    GdkGC *ggc;
-
-    if (NIL_P(gc)) return NULL;
-
-    if (!rb_obj_is_instance_of(gc, gdkGC)) {
-        rb_raise(rb_eTypeError, "not a GdkGC");
-    }
-    Data_Get_Struct(gc, GdkGC, ggc);
-    if (ggc == 0) {
-        rb_raise(rb_eArgError, "destroyed GdkGC");
-    }
-
-    return ggc;
 }
 
 VALUE

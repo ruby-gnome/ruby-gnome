@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/06/24 15:15:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -279,9 +279,6 @@ extern GdkImage* get_gdkimage(VALUE image);
 
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
-
-extern VALUE make_gdkgc(GdkGC* gc);
-extern GdkGC* get_gdkgc(VALUE gc);
 
 extern VALUE rbgdk_geometry_make(GdkGeometry *geo);
 extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
