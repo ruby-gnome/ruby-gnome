@@ -3,6 +3,10 @@ The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
 
+Geoff Youngs <g@intersect-uk.co.uk>
+     Ruby/GtkSourceView(M), Ruby/GTK, Ruby/GdkPixbuf, 
+     Ruby/Pango, Ruby/GLib.
+
 Joshua Keith <joshuakeith@linuxmail.org>
      Tutorial(M), Website, Ruby-GNOME2 Icon.
 
@@ -21,13 +25,13 @@ Masao Mutoh <mutoh@highway.ne.jp>
      Ruby/Pango(M), rbbr(M), Webmaster, Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
-     Ruby/GConf(M).
+     Ruby/GConf(M), Ruby/GTK.
 
 Nobuyoshi Nakada <nobu.nokada@softhome.net>
      Technical advisor.
 
 OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
-     Ruby/GTK
+     Ruby/GTK.
 
 TAMURA.Kenichi <sgs02516@nifty.com>
      Japanese ML archives by w3ml on SF.jp(M)
