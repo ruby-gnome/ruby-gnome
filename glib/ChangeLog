@@ -1,3 +1,7 @@
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Increment version information. 
+
 2004-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: Works again for ruby-1.8.x. 
