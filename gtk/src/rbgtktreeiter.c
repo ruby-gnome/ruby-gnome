@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: sakai $
-  $Date: 2003/03/17 12:42:13 $
+  $Author: mutoh $
+  $Date: 2003/03/20 17:36:51 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -148,6 +148,8 @@ treeiter_eql(self, other)
     GtkTreeIter* iter2;
     GtkTreeModel* model1;
     GtkTreeModel* model2;
+    GtkTreePath* path1;
+    GtkTreePath* path2;
 
     if (!rb_obj_is_kind_of(other, GTYPE2CLASS(GTK_TYPE_TREE_ITER)))
         return Qfalse;
@@ -161,6 +163,17 @@ treeiter_eql(self, other)
     num1 = gtk_tree_model_get_n_columns(model1);
     num2 = gtk_tree_model_get_n_columns(model2);
     if (num1 != num2) return Qfalse;
+
+    path1 = gtk_tree_model_get_path(model1, iter1);
+    path2 = gtk_tree_model_get_path(model2, iter2);
+    if (gtk_tree_path_compare(path1, path2) != 0) {
+        gtk_tree_path_free(path1);
+        gtk_tree_path_free(path2);
+        return Qfalse;
+    } else {
+        gtk_tree_path_free(path1);
+        gtk_tree_path_free(path2);
+    }
 
     for (i = 0; i < num1; i++){
         GValue gval1 = {0,};
