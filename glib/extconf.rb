@@ -35,6 +35,7 @@ src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
+  $defs << "-DRUBY_GLIB2_COMPILATION"
   create_makefile("glib2", src_dir)
 ensure
   Dir.chdir('..')

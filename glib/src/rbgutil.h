@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: sakai $
-  $Date: 2003/02/14 17:54:41 $
+  $Date: 2003/03/06 18:10:39 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -45,7 +45,7 @@ extern VALUE rbgutil_gslist2ary(GSList* list);
 extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);
 
 /*< protected >*/
-extern ID rbgutil_id_module_eval;
+RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
 #ifdef __cplusplus

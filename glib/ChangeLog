@@ -1,3 +1,10 @@
+2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.h, rbgutil.h: define RUBY_GLIB2_VAR macro, and
+	use RUBY_GLIB2_VAR for defining 'exported' variables.
+
+	* extconf.rb: append "-DRUBY_GLIB2_COMPILATION" to $defs.
+
 2003-02-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Check NODE_ATTRASGN only if try_compile is defined.

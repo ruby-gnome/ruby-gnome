@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: sakai $
-  $Date: 2003/02/03 08:52:24 $
+  $Date: 2003/03/06 18:10:39 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -41,7 +41,17 @@ extern "C" {
 #define RVAL2CSTR(v) (StringValuePtr(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 
-extern VALUE mGLib;
+#if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
+#  ifdef RUBY_GLIB2_COMPILATION
+#    define RUBY_GLIB2_VAR __declspec(dllexport)
+#  else
+#    define RUBY_GLIB2_VAR extern __declspec(dllimport)
+#  endif
+#else
+#  define RUBY_GLIB2_VAR extern
+#endif
+
+RUBY_GLIB2_VAR VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 extern VALUE rbg_cstr2rval(const char* str);
 
