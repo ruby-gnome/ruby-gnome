@@ -1,3 +1,10 @@
+2003-05-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkimcontext.c: Add Gtk::IMContext. 
+	* src/rbgtkimcontextsimple.c: Add Gtk::IMContextSimple.
+	* src/rbgtkimmulticontext.c: Add Gtk::IMMulticontext. 
+	* src/rbgtktreemodelsort.c: Add Gtk::TreeModelSort.
+
 2003-05-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/*/*.rb: Fix follow changes below.
