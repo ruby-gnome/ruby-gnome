@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.c,v 1.3 2003/08/20 22:36:02 isambart Exp $ */
+/* $Id: rbgtkglext.c,v 1.4 2003/08/21 11:51:08 isambart Exp $ */
 /* Ruby/GtkGLExt initialization
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -98,19 +98,20 @@ Init_gtkglext(void)
     mGdk   = rb_define_module("Gdk"); /* Gdk */
     mGdkGL = rb_define_module_under(mGdk, "GL"); /* Gdk::GL */
 
+    G_DEF_CLASS(GDK_TYPE_GL_RENDER_TYPE, "RenderType", mGdkGL);
     G_DEF_CONSTANTS(mGdkGL, GDK_TYPE_GL_RENDER_TYPE, "GDK_GL_");
 
-    rb_define_const(mGtkGL, "MAJOR_VERSION", gtkglext_major_version);
-    rb_define_const(mGtkGL, "MINOR_VERSION", gtkglext_minor_version);
-    rb_define_const(mGtkGL, "MICRO_VERSION", gtkglext_micro_version);
-    rb_define_const(mGtkGL, "INTERFACE_AGE", gtkglext_interface_age);
-    rb_define_const(mGtkGL, "BINARY_AGE",    gtkglext_binary_age);
+    rb_define_const(mGtkGL, "MAJOR_VERSION", INT2NUM(gtkglext_major_version));
+    rb_define_const(mGtkGL, "MINOR_VERSION", INT2NUM(gtkglext_minor_version));
+    rb_define_const(mGtkGL, "MICRO_VERSION", INT2NUM(gtkglext_micro_version));
+    rb_define_const(mGtkGL, "INTERFACE_AGE", INT2NUM(gtkglext_interface_age));
+    rb_define_const(mGtkGL, "BINARY_AGE",    INT2NUM(gtkglext_binary_age));
 
-    rb_define_const(mGdkGL, "MAJOR_VERSION", gdkglext_major_version);
-    rb_define_const(mGdkGL, "MINOR_VERSION", gdkglext_minor_version);
-    rb_define_const(mGdkGL, "MICRO_VERSION", gdkglext_micro_version);
-    rb_define_const(mGdkGL, "INTERFACE_AGE", gdkglext_interface_age);
-    rb_define_const(mGdkGL, "BINARY_AGE",    gdkglext_binary_age);
+    rb_define_const(mGdkGL, "MAJOR_VERSION", INT2NUM(gdkglext_major_version));
+    rb_define_const(mGdkGL, "MINOR_VERSION", INT2NUM(gdkglext_minor_version));
+    rb_define_const(mGdkGL, "MICRO_VERSION", INT2NUM(gdkglext_micro_version));
+    rb_define_const(mGdkGL, "INTERFACE_AGE", INT2NUM(gdkglext_interface_age));
+    rb_define_const(mGdkGL, "BINARY_AGE",    INT2NUM(gdkglext_binary_age));
 
 #ifdef GDK_MULTIHEAD_SAFE
     rb_define_const(mGdkGL, "MULTIHEAD_SAFE", Qtrue);
