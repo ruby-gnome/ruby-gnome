@@ -4,12 +4,15 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2002/09/30 14:53:08 $
+  $Date: 2002/10/09 17:28:35 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+ID id_module_eval;
+ID id_add_one_arg_setter;
 
 static ID id_set_property;
 static ID id_to_a;
@@ -95,4 +98,6 @@ Init_gutil()
 {
     id_set_property = rb_intern("set_property");
     id_to_a = rb_intern("to_a");
+    id_module_eval = rb_intern("module_eval");
+    id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
 }

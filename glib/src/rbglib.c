@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2002/09/30 14:53:08 $
+  $Date: 2002/10/09 17:28:35 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -38,6 +38,18 @@ void Init_glib2()
     rb_define_const(mGLib, "MAJOR_VERSION", INT2FIX(GLIB_MAJOR_VERSION));
     rb_define_const(mGLib, "MINOR_VERSION", INT2FIX(GLIB_MINOR_VERSION));
     rb_define_const(mGLib, "MICRO_VERSION", INT2FIX(GLIB_MICRO_VERSION));
+
+    rb_eval_string(
+        "module GLib\n"
+        "  def __add_one_arg_setter(klass)\n"
+        "    klass.instance_methods.each do |m|\n"
+        "      if /^set_(.*)/ =~ m and klass.instance_method(m).arity == 1\n"
+        "        klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\n\")\n"
+        "      end\n"
+        "    end\n"
+        "  end\n"
+        "  module_function :__add_one_arg_setter\n"
+        "end\n");
 
     Init_utils_int64();
     Init_gobject();

@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: tkubo $
-  $Date: 2002/10/05 10:30:40 $
+  $Author: mutoh $
+  $Date: 2002/10/09 17:28:35 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -21,8 +21,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define G_DEF_SETTER(klass, name) \
-    rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2( \
+    rb_funcall(klass, id_module_eval, 1, rb_str_new2( \
     "def " name "=(val); set_" name "(val); val; end\n"))
+#define G_DEF_SETTERS(klass) \
+    rb_funcall(mGLib, id_add_one_arg_setter, 1, klass)
 
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
 
@@ -30,6 +32,10 @@ extern "C" {
 #define GLIST2ARY2(list, gtype)      (rbgutil_glist2ary_boxed(list, gtype))
 #define GSLIST2ARY(list)             (rbgutil_gslist2ary(list))
 #define GSLIST2ARY2(list, gtype)     (rbgutil_gslist2ary_boxed(list, gtype))
+
+
+    extern ID id_module_eval;
+    extern ID id_add_one_arg_setter;
 
     extern void rbgutil_set_properties(VALUE self, VALUE hash);
     extern VALUE rbgutil_glist2ary(GList* list);
