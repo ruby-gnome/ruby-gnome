@@ -1,3 +1,7 @@
+2002-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreepath.c: Add Gtk::TreePath#to_s as alias of Gtk::TreePath#to_str.
+
 2002-12-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/testgtk.rb: Fix to call Gtk::main_quit twice.

@@ -4,7 +4,7 @@
   rbgtktreepath.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2002/12/23 13:58:26 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -143,6 +143,7 @@ Init_gtk_treepath()
 
     rb_define_method(gTreepath, "initialize", treepath_initialize, -1);
     rb_define_method(gTreepath, "to_str", treepath_to_string, 0);
+    rb_define_method(gTreepath, "to_s", treepath_to_string, 0);
     rb_define_method(gTreepath, "append_index", treepath_append_index, 1);
     rb_define_method(gTreepath, "prepend_index", treepath_prepend_index, 1);
     rb_define_method(gTreepath, "depth", treepath_get_depth, 0);
