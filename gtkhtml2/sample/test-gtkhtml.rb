@@ -10,6 +10,7 @@ window.signal_connect( "destroy" ) {
 }
 
 window.border_width = 10
+window.set_default_size(200, 200)
 
 htmlview = Gtk::HtmlView.new()
 htmlview.show

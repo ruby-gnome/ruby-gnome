@@ -60,7 +60,6 @@ static VALUE
 rb_html_view_get_document (self)
     VALUE self;
 {
-    g_object_ref( _SELF(self)->document );
     return GOBJ2RVAL(_SELF(self)->document);
 }
 
@@ -73,7 +72,7 @@ Init_html_view(mGtkHtml2)
     rb_define_method(gHtmlView, "initialize",   rb_html_view_initialize,  -1);
     rb_define_method(gHtmlView, "set_html",     rb_html_view_set_html,     1);
     rb_define_method(gHtmlView, "set_document", rb_html_view_set_document, 1);
-    /*rb_define_method(gHtmlView, "document",     rb_html_view_get_document, 0);*/
+    rb_define_method(gHtmlView, "document",     rb_html_view_get_document, 0);
 
     G_DEF_SETTERS(gHtmlView);
 }
