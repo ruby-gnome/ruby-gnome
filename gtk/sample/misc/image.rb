@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: image.rb,v 1.4 2003/02/01 16:46:22 mutoh Exp $
+  $Id: image.rb,v 1.5 2003/04/01 16:21:20 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -14,10 +14,7 @@ Gtk.init
 
 window = Gtk::Window.new
 window.signal_connect("destroy") do
-  exit
-end
-window.signal_connect("delete_event") do
-  exit
+  Gtk.main_quit
 end
 window.set_title("pixmap")
 window.set_border_width(0)
@@ -49,8 +46,7 @@ box1.pack_start(box2, false, true, 0)
 
 button = Gtk::Button.new("close")
 button.signal_connect("clicked") do
-  window.destroy
-  exit
+	Gtk.main_quit
 end
 box2.pack_start(button, true, true, 0)
 button.set_flags(Gtk::Widget::CAN_DEFAULT);

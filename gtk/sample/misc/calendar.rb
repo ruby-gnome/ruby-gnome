@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: calendar.rb,v 1.4 2003/02/01 16:46:22 mutoh Exp $
+  $Id: calendar.rb,v 1.5 2003/04/01 16:21:14 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -29,35 +29,35 @@ cal.display_options(Gtk::Calendar::SHOW_HEADING |
 		    Gtk::Calendar::SHOW_WEEK_NUMBERS |
 		    Gtk::Calendar::WEEK_START_MONDAY)
 year, month, day = cal.date
-print "this is #{month} #{day}, #{year}\n"
+puts "this is #{month} #{day}, #{year}"
 
 cal.signal_connect('day_selected') do
   year, month, day = cal.date
-  print "selected day: ", day, "\n"
+  puts "selected day: #{day}"
 end
 cal.signal_connect('month_changed') do
   year, month, day = cal.date
-  print "changed month: ", month, "\n"
+  puts "changed month: #{month}"
 end
 cal.signal_connect('day_selected_double_click') do
   year, month, day = cal.date
-  print "dclicked day: ", day, "\n"
+  puts "dclicked day: #{day}"
 end
 cal.signal_connect('prev_month') do
   year, month, day = cal.date
-  print "prev month: ", month, "\n"
+  puts "prev month: #{month}"
 end
 cal.signal_connect('next_month') do
   year, month, day = cal.date
-  print "next_month: ", month, "\n"
+  puts "next_month: #{month}"
 end
 cal.signal_connect('prev_year') do
   year, month, day = cal.date
-  print "prev_year: ", year, "\n"
+  puts "prev_year: #{year}"
 end
 cal.signal_connect('next_year') do
   year, month, day = cal.date
-  print "next year: ", year, "\n"
+  puts "next year: #{year}"
 end
 
 Gtk::main

@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: drawing.rb,v 1.4 2003/02/01 16:46:22 mutoh Exp $
+  $Id: drawing.rb,v 1.5 2003/04/01 16:21:15 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -82,15 +82,13 @@ end
 
 Gtk.init
 
-window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
-window.signal_connect("delete_event") { exit }
-window.signal_connect("destroy_event") { exit }
+window = Gtk::Window.new
+window.signal_connect("destroy") { Gtk.main_quit }
 window.realize
 window.set_title("drawing test")
 
 canvas = A.new
 window.add(canvas)
-canvas.show
 
-window.show
-Gtk::main()
+window.show_all
+Gtk::main

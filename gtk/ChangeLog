@@ -1,3 +1,7 @@
+2003-04-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/*.rb: Improve some samples.
+
 2003-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gtk-demo/appwindow.rb: Fix a bug for creating Toolbar.

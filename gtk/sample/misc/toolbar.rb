@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: toolbar.rb,v 1.5 2003/02/22 17:54:41 mutoh Exp $
+  $Id: toolbar.rb,v 1.6 2003/04/01 16:21:23 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -16,10 +16,7 @@ window = Gtk::Window.new
 window.set_title("toolbar test")
 
 window.signal_connect("destroy") do
-  exit
-end
-window.signal_connect("delete_event") do
-  exit
+  Gtk.main_quit
 end
 window.set_border_width(0)
 window.realize
