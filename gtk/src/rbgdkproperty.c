@@ -4,7 +4,7 @@
   rbgdkproperty.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2004/08/09 19:22:46 $
 
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
@@ -48,6 +48,8 @@ gdkprop_text_property_to_text_list(argc, argv, self)
                                                          RVAL2CSTR(text), 
                                                          RSTRING(text)->len, &list);
 #else
+        VALUE encoding, format, text;
+        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
         rb_warn("Gdk::Property.text_property_to_text_list: Not supported arguments in GTK+-2.0.x.");
         num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
                                              NUM2INT(format),
@@ -93,6 +95,10 @@ gdkprop_text_property_to_utf8_list(argc, argv, self)
                                                          RVAL2CSTR(text), 
                                                          RSTRING(text)->len, &list);
 #else
+        VALUE encoding, format, text;
+        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
+        StringValue(text);
+
         rb_warn("Gdk::Property.text_property_to_utf8_list: Not supported arguments in GTK+-2.0.x.");
         num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
                                              NUM2INT(format),
@@ -136,10 +142,12 @@ gdkprop_string_to_compound_text(argc, argv, self)
                                                       &encoding, &format,
                                                       &ctext, &length);
 #else
+        VALUE str;
+        rb_scan_args(argc, argv, "10", &str);
         rb_warn("Gdk::Property.string_to_compound_text: Not supported arguments in GTK+-2.0.x.");
-        num = gdk_string_to_compound_text(RVAL2ATOM(encoding),
-                                          NUM2INT(format),
-                                          RVAL2CSTR(text), RSTRING(text)->len, &list);
+        num = gdk_string_to_compound_text(RVAL2CSTR(str),
+                                          &encoding, &format,
+                                          &ctext, &length);
 #endif
     }
 
@@ -190,6 +198,9 @@ gdkprop_utf8_to_compound_text(argc, argv, self)
                                                     &encoding, &format,
                                                     &ctext, &length);
 #else
+        VALUE str;
+        rb_scan_args(argc, argv, "10", &str);
+    
         rb_warn("Gdk::Property.utf8_to_compound_text: Not supported arguments in GTK+-2.0.x.");
         ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
                                         &encoding, &format,

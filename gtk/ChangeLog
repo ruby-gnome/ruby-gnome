@@ -1,3 +1,8 @@
+2004-08-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkpango.c: Fix compiling errors on GTK+-2.0.x. 
+	* src/rbgdkproperty.c: ditto.  Reported by Noritsugu Nakamura.
+
 2004-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeview.c: Fix some methods of Gtk::TreeView to accept nil.

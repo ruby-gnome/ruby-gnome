@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2004/08/09 19:22:39 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -23,7 +23,12 @@ gdkpango_s_context_get(argc, argv, self)
     if (NIL_P(screen)){
         ret = GOBJ2RVAL(gdk_pango_context_get());
     } else {
+#if GTK_CHECK_VERSION(2,2,0)
         ret = GOBJ2RVAL(gdk_pango_context_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
+#else
+        rb_warn("Gdk::Pango.context_get: Not supported arguments in GTK+-2.0.x.");
+        ret = GOBJ2RVAL(gdk_pango_context_get());
+#endif
     }
     return ret;
 }
