@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/06/17 19:13:06 $
+ * $Date: 2003/08/08 19:32:06 $
  *
  *****************************************************************************/
 
@@ -42,8 +42,8 @@
 /* Function Implementations **************************************************/
 
 static GConfEntry *
-gconf_entry_copy(entry)
-	GConfEntry *entry;
+rbgconf_entry_copy(entry)
+	const GConfEntry *entry;
 {
 	/*
 	 * XXX: i think this actually suffices in this case, hopefully GConf
@@ -82,7 +82,7 @@ gconf_entry_get_type(void)
 
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static("GConfEntry",
-				(GBoxedCopyFunc)gconf_entry_copy,
+				(GBoxedCopyFunc)rbgconf_entry_copy,
 				(GBoxedFreeFunc)gconf_entry_free);
 	}
 
