@@ -1,24 +1,16 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   entry.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: entry.rb,v 1.6 2003/04/01 16:26:33 mutoh Exp $
+  $Id: entry.rb,v 1.7 2004/05/24 16:18:58 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
-
-Gtk::RC::parse_string <<EOS
-style "default"
-{
-  fontset = "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*"
-}
-widget_class "*" style "default"
-EOS
 
 window = Gtk::Window.new
 window.set_title("entry")
@@ -44,7 +36,7 @@ box1.pack_start(box2, false, true, 0)
 
 button = Gtk::Button.new("close")
 button.signal_connect("clicked") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
 box2.pack_start(button, true, true, 0)
 button.set_flags(Gtk::Widget::CAN_DEFAULT)

@@ -1,3 +1,10 @@
+2004-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/entry.rb: Modified.
+	* sample/misc/entrycompletion.rb: Added.
+	* src/rbgtkentrycompletion.c: Added.
+	* src/rbgtkentry.c: Added Gtk::Entry#set_completion, #completion. 
+
 2004-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkclipboard.c: Added Gtk::Clipboard#request_targets, 
