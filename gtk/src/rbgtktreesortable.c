@@ -79,7 +79,7 @@ treesortable_set_sort_column_id(argc, argv, self)
 
 	if (argc == 1 || argc == 2) {
 		sort_column_id = NUM2INT(argv[0]);
-		order = (argc == 2) ? NUM2INT(argv[1]) : GTK_SORT_DESCENDING;
+		order = (argc == 2) ? NUM2INT(argv[1]) : GTK_SORT_ASCENDING;
 	} else {
 		rb_raise(rb_eArgError, "need 1 or 2 arguments.");
 	}
@@ -97,6 +97,8 @@ sort_func(model, a, b, func)
 	GtkTreeIter *a, *b;
 	gpointer func;
 {
+	a->user_data3 = model;
+	b->user_data3 = model;
 	return NUM2INT(rb_funcall((VALUE)func, id_call, 2, ITR2RVAL(a),
 				 ITR2RVAL(b)));
 }
@@ -105,7 +107,7 @@ static VALUE
 treesortable_set_sort_func(self, sort_column_id)
 	VALUE self, sort_column_id;
 {
-	VALUE func = rb_f_lambda();
+	volatile VALUE func = rb_f_lambda();
 	G_RELATIVE(self, func);
 	gtk_tree_sortable_set_sort_func(_SELF(self), NUM2INT(sort_column_id),
 					(GtkTreeIterCompareFunc)sort_func,
@@ -117,7 +119,7 @@ static VALUE
 treesortable_set_default_sort_func(self)
 	VALUE self;
 {
-	VALUE func = rb_f_lambda();
+	volatile VALUE func = rb_f_lambda();
 	G_RELATIVE(self, func);
 	gtk_tree_sortable_set_default_sort_func(_SELF(self),
 					(GtkTreeIterCompareFunc)sort_func,
