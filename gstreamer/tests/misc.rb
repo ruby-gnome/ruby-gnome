@@ -48,16 +48,6 @@ require 'gst'
 Gst.init or raise "Could not initialize GStreamer!"
            
 module Gst
-class Clock
-    def test(tc)
-        # Test active
-        tc.assert_bool active?
-        # Test speed (should be always float)
-        tc.assert_instance_of(Float, speed)
-        # Test time (should be either Fixnum or Bignum)
-        tc.assert time.is_a?(Integer)
-    end  
-end  
 class Object 
     def test(tc)
         # Test name
@@ -93,6 +83,28 @@ class Object
         end
     end
 end
+class Clock
+    def test(tc)
+        # Test active
+        tc.assert_bool active?
+        # Test speed (should be always float)
+        tc.assert_instance_of(Float, speed)
+        # Test time (should be either Fixnum or Bignum)
+        tc.assert_instance_of(Integer, time)
+        # Test resolution (should be either Fixnum or Bignum)
+        tc.assert_instance_of(Integer, resolution)
+        # Test flags
+        flags = {
+            can_do_single_sync?    => Gst::Clock::FLAG_CAN_DO_SINGLE_SYNC,
+            can_do_single_async?   => Gst::Clock::FLAG_CAN_DO_SINGLE_ASYNC,
+            can_do_periodic_sync?  => Gst::Clock::FLAG_CAN_DO_PERIODIC_SYNC,
+            can_do_periodic_async? => Gst::Clock::FLAG_CAN_DO_PERIODIC_ASYNC,
+            can_set_resolution?    => Gst::Clock::FLAG_CAN_SET_RESOLUTION,
+            can_set_speed?         => Gst::Clock::FLAG_CAN_SET_SPEED
+        }
+        test_flags(tc, flags)
+    end  
+end  
 class Element
     def test(tc)
         # Test the element as a Gst::Object
