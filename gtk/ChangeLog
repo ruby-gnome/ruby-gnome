@@ -1,3 +1,8 @@
+2003-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmessagedialog.c: Fix constants.
+	* sample/gtk-demo/textview.rb: Fix warnings for ruby-1.8.x.
+
 2003-07-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdrag.c: Gtk::Drag.begin, .get_target_list, .set_target_list.
