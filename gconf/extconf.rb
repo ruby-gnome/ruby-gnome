@@ -25,15 +25,6 @@ if /cygwin|mingw/ =~ RUBY_PLATFORM
   }
 end
 
-STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
-if Object.respond_to? :allocate
-  STDOUT.print "yes\n"
-  $defs << "-DHAVE_OBJECT_ALLOCATE"
-else
-  STDOUT.print "no\n"
-end
-
-
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")
 

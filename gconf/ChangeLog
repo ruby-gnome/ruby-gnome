@@ -1,6 +1,7 @@
 2003-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
    * src/rbgconf-entry.c: Fix a bug [744158]
+   * extconf.rb: Code cleanup.
 
 2003-07-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
@@ -58,7 +59,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/08/08 19:32:06 $ macros.
+	and $Date: 2003/08/08 19:40:45 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
