@@ -235,6 +235,30 @@ static VALUE rb_gst_set_debug(self, value)
 }
 
 /*
+ *  Constant: SECOND
+ *  Constant that defines one GStreamer second.
+ */
+static VALUE constSecond = INT2FIX(GST_SECOND);
+
+/*
+ *  Constant: MSECOND
+ *  Constant that defines one GStreamer milmisecond.
+ */
+static VALUE constMsecond = INT2FIX(GST_MSECOND);
+
+/*
+ *  Constant: USECOND
+ *  Constant that defines one GStreamer microsecond.
+ */
+static VALUE constUsecond = INT2FIX(GST_USECOND);
+
+/*
+ *  Constant: NSECOND
+ *  Constant that defines one GStreamer nanosecond.
+ */
+static VALUE constNsecond = INT2FIX(GST_NSECOND);
+
+/*
  *  Creates the Gst module.
  */
 void Init_gst(void) {
@@ -245,5 +269,10 @@ void Init_gst(void) {
     rb_define_module_function(mGst, "has_threads?", rb_gst_has_threads,  0);
     rb_define_module_function(mGst, "use_threads",  rb_gst_use_threads,  1);
     rb_define_module_function(mGst, "set_debug",    rb_gst_set_debug,    1);
+
+    rb_define_const(mGst, "SECOND",  constSecond);
+    rb_define_const(mGst, "MSECOND", constMsecond);
+    rb_define_const(mGst, "USECOND", constUsecond);
+    rb_define_const(mGst, "NSECOND", constNsecond);
 }
  
