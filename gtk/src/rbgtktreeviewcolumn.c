@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/23 15:08:30 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -143,6 +143,7 @@ cell_data_func(tree_column, cell, model, iter, func)
                GOBJ2RVAL(cell), GOBJ2RVAL(model), 
                BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
 }
+
 
 static VALUE
 tvc_set_cell_data_func(self, renderer)

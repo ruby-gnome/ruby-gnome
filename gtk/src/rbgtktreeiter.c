@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/23 15:08:30 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -58,8 +58,13 @@ treeiter_get_value(self, column)
     GValue value = {0, };
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
+    VALUE ret = Qnil;
     gtk_tree_model_get_value(model, iter, NUM2INT(column), &value);
-    return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
+    if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
+        ret = GVAL2RVAL(&value);
+        g_value_reset(&value);
+    } 
+    return ret;
 }
 
 static VALUE
@@ -197,10 +202,15 @@ treeiter_eql(self, other)
     for (i = 0; i < num1; i++){
         GValue gval1 = {0,};
         GValue gval2 = {0,};
+        VALUE ret1, ret2;
         gtk_tree_model_get_value(model1, iter1, i, &gval1);
         gtk_tree_model_get_value(model2, iter2, i, &gval2);
         
-        if (rb_equal(GVAL2RVAL(&gval1), GVAL2RVAL(&gval2)) == Qfalse) 
+        ret1 = GVAL2RVAL(&gval1);
+        ret2 = GVAL2RVAL(&gval2);
+        g_value_reset(&gval1);
+        g_value_reset(&gval2);
+        if (rb_equal(ret1, ret2) == Qfalse) 
             return Qfalse;
     }
     return Qtrue;
