@@ -87,16 +87,16 @@ begin
   have_func('_gtk_accel_group_attach')
   have_func("XReadBitmapFileData")
   obj_ext = ".#{$OBJEXT}"
-  opt_objs = ["rbgtkinits.o"]
   rubylibdir = Config::CONFIG["rubylibdir"]
   sitelibdir = Config::CONFIG["sitelibdir"]
 
+  File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   $libs = $libs.split(/\s/).uniq.join(' ')
   $source_files = Dir.glob('*.c')
   $objs = $source_files.collect do |item|
     item.gsub(/\.c$/, obj_ext)
   end
-  $objs -= opt_objs
+  $objs << "rbgtkinits.o"
 
   if /mswin32/ =~ PLATFORM
     $objs << "rbgdkkeysyms.lib"
@@ -115,11 +115,17 @@ begin
   end
   mfile.print "\n"
   $source_files.each do |e|
-    mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbgtk.h global.h\n"
+    if e == "rbgdk.c"
+      mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
+    elsif e == "rbgdkconst.c"
+      mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
+    elsif e == "init.c"
+      mfile.print "init#{obj_ext}: init.c rbgtk.h global.h rbgtkinits.c\n"
+    else
+      mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbgtk.h global.h\n"
+    end
   end
-  mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
   mfile.print "rbgtkinits#{obj_ext}: rbgtkinits.c\n"
-  mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
 
   if /mswin32/ =~ PLATFORM
     mfile.print "\
