@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/11/02 14:49:52 $
+  $Date: 2003/11/02 18:34:05 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -130,7 +130,7 @@ Init_gtk_gdk_selection()
     rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, -1);
     rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
     rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
-    rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, 5);
+    rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, -1);
 
     /* Constants */
     rb_define_const(mGdkSelection, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
