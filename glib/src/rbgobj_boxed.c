@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:58 $
+  $Date: 2002/08/29 04:19:36 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -32,16 +32,39 @@ boxed_free(boxed_holder* p)
 }
 
 /**********************************************************************/
+static VALUE
+rbgobj_boxed_s_allocate(klass)
+	VALUE klass;
+{
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
+    if (cinfo->gtype == G_TYPE_BOXED)
+        rb_raise(rb_eTypeError, "abstract class");
+
+	return rbgobj_create_object(klass);
+}
+#ifdef HAVE_OBJECT_ALLOCATE
+#define rbgobj_boxed_s_new rb_class_new_instance
+#else
+static VALUE
+rbgobj_boxed_s_new(argc, argv, klass)
+    int argc;
+    VALUE* argv;
+    VALUE klass;
+{
+	VALUE obj = rbgobj_boxed_s_allocate(klass);
+	rb_obj_call_init(obj, argc ,argv);
+    return obj;
+}
+#endif
+
 VALUE
 rbgobj_boxed_create(klass)
     VALUE klass;
 {
     boxed_holder* holder;
-    VALUE result;
-	RGObjClassInfo *cinfo;
 
-	cinfo = rbgobj_lookup_class(klass);
-    result = Data_Make_Struct(klass, boxed_holder, 
+	const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
+    VALUE result = Data_Make_Struct(klass, boxed_holder, 
 							  boxed_mark, boxed_free, holder);
     holder->type = cinfo->gtype;
     holder->boxed = (gpointer)NULL;
@@ -127,7 +150,12 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed()
 {
-    G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
+    VALUE gBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
+
+    rb_define_singleton_method(gBoxed, "allocate", rbgobj_boxed_s_allocate, 0);
+#ifndef HAVE_OBJECT_ALLOCATE
+    rb_define_singleton_method(gBoxed, "new", rbgobj_boxed_s_new, -1);
+#endif
 }
