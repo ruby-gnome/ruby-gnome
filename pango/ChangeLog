@@ -1,3 +1,8 @@
+2005-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayout.c: Added Pango::Layout#(get_)extents, 
+	#(get)_pixel_extents. 
+
 2005-02-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangomatrix.c: Added accessors for xx, xy, yx, yy, x0, y0.

@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2005/01/22 16:15:20 $
+  $Date: 2005/02/12 16:04:42 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -315,14 +315,113 @@ layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
     return rb_ary_new3(2, INT2NUM(new_index), INT2NUM(new_trailing));
 }
 
-/*
-void        pango_layout_get_extents        (PangoLayout *layout,
-                                             PangoRectangle *ink_rect,
-                                             PangoRectangle *logical_rect);
-void        pango_layout_get_pixel_extents  (PangoLayout *layout,
-                                             PangoRectangle *ink_rect,
-                                             PangoRectangle *logical_rect);
-*/
+static VALUE
+layout_get_extents(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    VALUE ink_rect, logical_rect;
+    PangoRectangle rink, rlog;
+
+    rb_scan_args(argc, argv, "02", &ink_rect, &logical_rect);
+
+    if (NIL_P(ink_rect)){
+        rink.x = 0;
+        rink.y = 0;
+        rink.width = 0;
+        rink.height = 0;
+    } else {
+        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE);
+        rink.x = rect->x;
+        rink.y = rect->y;
+        rink.width = rect->width;
+        rink.height = rect->height;
+    }
+    if (NIL_P(logical_rect)){
+        rlog.x = 0;
+        rlog.y = 0;
+        rlog.width = 0;
+        rlog.height = 0;
+    } else {
+        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE);
+        rlog.x = rect->x;
+        rlog.y = rect->y;
+        rlog.width = rect->width;
+        rlog.height = rect->height;
+    }   
+
+    pango_layout_get_extents(_SELF(self), &rink, &rlog);
+
+    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
+                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+}
+
+static VALUE
+layout_extents(self)
+    VALUE self;
+{
+    PangoRectangle rink = {0, 0, 0, 0};
+    PangoRectangle rlog = {0, 0, 0, 0};
+
+    pango_layout_get_extents(_SELF(self), &rink, &rlog);
+    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
+                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+}
+
+static VALUE
+layout_get_pixel_extents(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    VALUE ink_rect, logical_rect;
+    PangoRectangle rink, rlog;
+
+    rb_scan_args(argc, argv, "02", &ink_rect, &logical_rect);
+
+    if (NIL_P(ink_rect)){
+        rink.x = 0;
+        rink.y = 0;
+        rink.width = 0;
+        rink.height = 0;
+    } else {
+        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE);
+        rink.x = rect->x;
+        rink.y = rect->y;
+        rink.width = rect->width;
+        rink.height = rect->height;
+    }
+    if (NIL_P(logical_rect)){
+        rlog.x = 0;
+        rlog.y = 0;
+        rlog.width = 0;
+        rlog.height = 0;
+    } else {
+        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE);
+        rlog.x = rect->x;
+        rlog.y = rect->y;
+        rlog.width = rect->width;
+        rlog.height = rect->height;
+    }   
+
+    pango_layout_get_pixel_extents(_SELF(self), &rink, &rlog);
+
+    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
+                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+}
+
+static VALUE
+layout_pixel_extents(self)
+    VALUE self;
+{
+    PangoRectangle rink = {0, 0, 0, 0};
+    PangoRectangle rlog = {0, 0, 0, 0};
+
+    pango_layout_get_pixel_extents(_SELF(self), &rink, &rlog);
+    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
+                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+}
 
 static VALUE
 layout_get_size(self)
@@ -417,6 +516,10 @@ Init_pango_layout()
     rb_define_method(pLayout, "index_to_pos", layout_index_to_pos, 1);
     rb_define_method(pLayout, "get_cursor_pos", layout_get_cursor_pos, 1);
     rb_define_method(pLayout, "move_cursor_visually", layout_move_cursor_visually, 4);
+    rb_define_method(pLayout, "get_extents", layout_get_extents, -1);
+    rb_define_method(pLayout, "extents", layout_extents, 0);
+    rb_define_method(pLayout, "get_pixel_extents", layout_get_pixel_extents, -1);
+    rb_define_method(pLayout, "pixel_extents", layout_pixel_extents, 0);
     rb_define_method(pLayout, "size", layout_get_size, 0);
     rb_define_method(pLayout, "pixel_size", layout_get_pixel_size, 0);
     rb_define_method(pLayout, "line_count", layout_get_line_count, 0);
