@@ -3,8 +3,8 @@
 
   rbpango.h -
 
-  $Author: sakai $
-  $Date: 2003/03/07 00:33:09 $
+  $Author: mutoh $
+  $Date: 2003/11/09 17:10:47 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -29,6 +29,8 @@ RUBY_PANGO_VAR VALUE mPango;
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 
 #define PANGO_TYPE_ITEM (pango_item_get_type())
+#define PANGO_TYPE_ANALYSIS (pango_analysis_get_type())
+#define PANGO_TYPE_LOG_ATTR (pango_log_attr_get_type())
 #define PANGO_TYPE_LAYOUT_ITER (pango_layout_iter_get_type())
 #define PANGO_TYPE_LAYOUT_LINE (pango_layout_line_get_type())
 #define PANGO_TYPE_RECTANGLE (pango_rectangle_get_type())
@@ -43,6 +45,8 @@ extern VALUE pango_make_attribute(PangoAttribute* attr);
 extern PangoAttribute* pango_get_attribute(VALUE attr);
 
 extern GType pango_item_get_type();
+extern GType pango_analysis_get_type();
+extern GType pango_log_attr_get_type();
 extern GType pango_layout_iter_get_type();
 extern GType pango_layout_line_get_type();
 extern GType pango_rectangle_get_type();
