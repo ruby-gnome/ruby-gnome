@@ -1,3 +1,8 @@
+2004-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksettings.c: Add Gtk::Setting.rc_property_parse_*.
+	* sample/misc/settings.rb: Added.
+
 2004-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcontainer.c: Change arguments of Gtk::Container.install_child_property.
