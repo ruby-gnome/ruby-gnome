@@ -1,3 +1,7 @@
+2005-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkicontheme.c: Fix a memory leak of Gtk::IconTheme#icons. 
+
 2005-03-12  Hiroyuki Ikezoe <poincare@ikezoe.net>
 
 	* src/rbgtkactiongroup.c: Gtk::ActionGroup#set_translate_domain 

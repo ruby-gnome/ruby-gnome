@@ -4,7 +4,7 @@
   rbgtkicontheme.c -
 
   $Author: mutoh $
-  $Date: 2005/01/23 16:47:15 $
+  $Date: 2005/03/11 16:15:54 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -103,7 +103,8 @@ static VALUE
 it_set_custom_theme(self, theme_name)
     VALUE self, theme_name;
 {
-    gtk_icon_theme_set_custom_theme(_SELF(self), RVAL2CSTR(theme_name));
+    gtk_icon_theme_set_custom_theme(_SELF(self), 
+                                    NIL_P(theme_name) ? NULL : RVAL2CSTR(theme_name));
     return self;
 }
 
@@ -149,17 +150,19 @@ it_list_icons(argc, argv, self)
 {
     VALUE context;
     GList* list;
+    GList* old;
     VALUE ary = rb_ary_new();
 
     rb_scan_args(argc, argv, "01", &context);
 
     list = gtk_icon_theme_list_icons(_SELF(self), 
                                      NIL_P(context) ? NULL : RVAL2CSTR(context));
+    old = list;
     while (list) {
         rb_ary_push(ary, CSTR2RVAL2(list->data));
         list = list->next;
     }
-    g_list_free(list);
+    g_list_free(old);
     return ary;
 }
 
