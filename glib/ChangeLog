@@ -1,3 +1,8 @@
+2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README, COPYING.LIB: Replace "GNU LIBRARY GENERAL PUBLIC LICENSE"
+	to "GNU LESSER GENERAL PUBLIC LICENSE".
+
 2005-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Fix the default error level.
