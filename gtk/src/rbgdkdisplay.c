@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/10/03 12:51:01 $
+  $Date: 2003/10/04 15:25:57 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -201,6 +201,14 @@ GdkDisplayPointerHooks* gdk_display_set_pointer_hooks
                                             (GdkDisplay *display,
                                              const GdkDisplayPointerHooks *new_hooks);
  */
+
+static VALUE
+gdkdisplay_get_core_pointer(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
+}
+
 #endif
 
 void 
@@ -232,5 +240,6 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 2);
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
+    rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
 #endif
 }

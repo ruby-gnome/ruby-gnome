@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:53 $
+  $Date: 2003/10/04 15:25:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -88,8 +88,8 @@ void
 Init_gtk_gdk_pixbuf()
 {
     /*
-	  *  This defines Gdk::Pixbuf methods of GDK side.
-	  */
+     *  This defines Gdk::Pixbuf methods of GDK side.
+     */
     VALUE gdkPixbuf = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
     /* 

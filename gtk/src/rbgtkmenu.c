@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/10/04 15:25:57 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,22 +38,24 @@ static void
 menu_pos_func(menu, px, py, push_in, data)
     GtkMenu *menu;
     gint *px, *py;
-    gboolean push_in;
+    gboolean *push_in;
     gpointer data;
 {
     VALUE arr = rb_funcall((VALUE)data, id_call, 4, GOBJ2RVAL(menu), 
                            INT2FIX(*px), INT2FIX(*py), 
-                           push_in ? Qtrue : Qfalse);
+                           *push_in ? Qtrue : Qfalse);
 
-    if (TYPE(arr) == T_ARRAY && RARRAY(arr)->len == 2){
+    if (TYPE(arr) == T_ARRAY && (RARRAY(arr)->len == 2 || RARRAY(arr)->len == 3)){
         *px = NUM2INT(RARRAY(arr)->ptr[0]);
         *py = NUM2INT(RARRAY(arr)->ptr[1]);
+        if (RARRAY(arr)->len == 3)
+            *push_in = RVAL2CBOOL(RARRAY(arr)->ptr[2]);
     } else {
-        rb_raise(rb_eArgError, "block should return [x, y]"); 
+        rb_raise(rb_eArgError, "block should return [x, y, push_in]"); 
     } 
 }
 
-/* the proc should return [x, y] */
+/* the proc should return [x, y, push_in] */
 static VALUE
 menu_popup(self, pshell, pitem, button, activate_time)
     VALUE self, pshell, pitem, button, activate_time;

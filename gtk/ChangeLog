@@ -1,11 +1,22 @@
+2003-10-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenu.c: Gtk::menu#popup should set push_in as 3rd parameter. 
+
 2003-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkdisplaymanager.c: Remove Gdk::DisplayManager#get_default_display. 
+	Use Gdk::DisplayManager#default_display instead.
+	Remove implementation of Gdk::DisplayManager#default_display, 
+	#set_default_display, because they are defined as properties.
+	Rename Gdk::DisplayManager#list_displays to Gdk::DisplayManager#displays.
+	Add Gdk::DisplayManager#core_pointer.
 
 	* src/rbgdkscreen.c: Add Gdk::Screen#default_colormap, #set_default_colormap,
 	#system_colormap, #system_visual, #rgb_colormap, #rgb_visual, #root_window,
 	#display, #visuals, #toplevel_windows, #display_name, #broadcast_client_message.
 	Unify Gdk::Screen#monitor_at_point and #montior_at_window to #get_monitor.
 	* src/rbgdkdisplay.c: Add Gdk::Display#event, #peek_event, #put_event,
-	#set_double_click_time.
+	#set_double_click_time, #core_pointer.
 	Remove Gdk::Display#screen. Use Gdk::Display#get_screen or #[] instead.
 	Rename Gdk::Display.new to Gdk::Display.open and accept block.
 	* src/rbgdkcolormap.c: Add Gdk::Colormap#free_color, #query_color, #visual. 

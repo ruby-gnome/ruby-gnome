@@ -4,7 +4,7 @@
   rbgdkdisplaymanager.c -
 
   $Author: mutoh $
-  $Date: 2003/09/05 18:03:14 $
+  $Date: 2003/10/04 15:25:57 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -12,7 +12,7 @@
 #include "global.h"
 
 #if GTK_MINOR_VERSION >= 2
-#define _DISPLAY_MANAGER(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
+#define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
 gdkdisplaymanager_get(self)
@@ -22,27 +22,20 @@ gdkdisplaymanager_get(self)
 }
 
 static VALUE
-gdkdisplaymanager_get_default_display(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gdk_display_manager_get_default_display(_DISPLAY_MANAGER(self)));
-}
-
-static VALUE
-gdkdisplaymanager_set_default_display(self, display)
-    VALUE self, display;
-{
-    gdk_display_manager_set_default_display(_DISPLAY_MANAGER(self), RVAL2GOBJ(display));
-    return self;
-}
-
-static VALUE
 gdkdisplaymanager_list_displays(self)
     VALUE self;
 {
-    return GSLIST2ARY(gdk_display_manager_list_displays(_DISPLAY_MANAGER(self)));
+    return GSLIST2ARY(gdk_display_manager_list_displays(_SELF(self)));
 }
 
+/* Move to Gdk::Display.
+static VALUE
+gdkdisplaymanager_get_core_pointer(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
+}
+*/
 #endif
 
 void 
@@ -52,11 +45,6 @@ Init_gtk_gdk_display_manager()
     VALUE gdkDisplayManager = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
 
     rb_define_singleton_method(gdkDisplayManager, "get", gdkdisplaymanager_get, 0);
-    rb_define_method(gdkDisplayManager, "get_default_display", gdkdisplaymanager_get_default_display, 0);
-    rb_define_alias(gdkDisplayManager, "default_display", "get_default_display");
-    rb_define_method(gdkDisplayManager, "set_default_display", gdkdisplaymanager_set_default_display, 1);
-    rb_define_method(gdkDisplayManager, "list_displays", gdkdisplaymanager_list_displays, 0);
-
-    G_DEF_SETTERS(gdkDisplayManager);
+    rb_define_method(gdkDisplayManager, "displays", gdkdisplaymanager_list_displays, 0);
 #endif
 }
