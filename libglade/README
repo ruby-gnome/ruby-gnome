@@ -1,87 +1,96 @@
-Libglade wrapper for Ruby
-originally by Avi Bryant <avi@beta4.com>
-   (now maintained by Masao Mutoh <mutoh@highway.ne.jp>)
-
+Ruby/Libglade2
+==============
+Ruby/Libglade2 is a Ruby bindings of Libglade2.
 This provides a very simple interface to the libglade library,
 to load interfaces dynamically from a glade file.
 
-Installing:
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   libgnome: http://www.gnome.org/ (If you use GNOME widgets)
+   Libglade2: http://www.daa.com.au/~james/gnome/
+   Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
+   Ruby/GNOME2: http://ruby-gnome2.sourceforge.net/ (If you use GNOME widgets)
 
->ruby extconf.rb
->make
->su
->make install
+Install
+-------
+   0. install libgnome2, libglade2, libxml2, libz, ruby-1.6.x.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
-It requires libglade2, libxml2, and libz.  You may have to
-provide extconf.rb with the paths to these.
+   It requires libglade2, libxml2, and libz.  You may have to
+   provide extconf.rb with the paths to these.
 
-There is also optional support for libglade-gnome: this allows
-you to utilize GNOME widgets from within your Ruby-libglade
-applications. To enable this, pass the '--with-gnome' flag
-to extconf.rb; in the status messages that follow, you should
-see this:
 
-$ ruby extconf.rb --with-gnome
-GNOME support is: enabled.
-...
+Usage
+-----
+   The constructor takes the path to a glade file, and optionally the name
+   of the widget at the root of the desired section of the interface
+   (by default, the entire file will be loaded).  It expects an iterator
+   block to be supplied, which takes the name of a handler (as specified
+   in the glade file) and returns a Method or Proc to bind that handler to.
 
-Usage:
+   For example:
 
-The constructor takes the path to a glade file, and optionally the name
-of the widget at the root of the desired section of the interface
-(by default, the entire file will be loaded).  It expects an iterator
-block to be supplied, which takes the name of a handler (as specified
-in the glade file) and returns a Method or Proc to bind that handler to.
+        GladeXML.new("file.glade") do |handler|
+          case handler
+          when "button_clicked"
+            proc { |aButton| puts "#{aButton} clicked"}
+          when "quit"
+            proc {Gtk.main_quit}
+          end
+        end
 
-For example:
+   Alternatively:
 
-	GladeXML.new("file.glade") do |handler|
-		case handler
-		when "buttonClicked"
-			proc { |aButton| puts "#{aButton} clicked"}
-		when "quit"
-			proc {Gtk.main_quit}
-		end
-	end
+        def button_clicked(aButton)
+          puts "#{aButton} clicked"
+        end
 
-Alternatively:
+        def quit
+          Gtk.main_quit
+        end
 
-	def buttonClicked(aButton)
-		puts "#{aButton} clicked"
-	end
+        GladeXML.new("file.glade") { |handler| method(handler) }
 
-	def quit
-		Gtk.main_quit
-	end
+   GladeXML#get_widget(name) will return a gtk widget object based on the 
+   name given to it in the glade file.
 
-	GladeXML.new("file.glade") { |handler| method(handler) }
+   e.g.
 
-The other two methods are getWidget and getWidgetByLongName, which will
-return a gtk widget object based on the name given to it in the glade
-file (getWidgetByLongName takes a full widget path to resolve ambiguity).
+        glade = GladeXML.new("file.glade") {}
+        @entrybox = glade.get_widget("entry1")
 
-e.g.
+   A note about signal handlers:
 
-	glade = GladeXML.new("file.glade") {}
-	@myEntryBox = glade.getWidget("entry1")
-	@myList = glade.getWidgetByLongName("window2.hbox.clist")
-
-A note about signal handlers:
-
-If you're using methods as signal handlers, you need to be somewhat careful
-about their arity.  Currently, for 0 argument signals, GladeXML supports
-three forms of method: no argument, a single argument (the widget the signal
-came from), or two arguments (the widget, and the contents of the data field
-for that signal in the glade file).
-For signals with one or more arguments (such as select_column),
-only one format is supported: (widget, ... args ..., data).
-
------------
+   If you're using methods as signal handlers, you need to be somewhat careful
+   about their arity.  Currently, for 0 argument signals, GladeXML supports
+   three forms of method: no argument, a single argument (the widget the signal
+   came from), or two arguments (the widget, and the contents of the data field
+   for that signal in the glade file).
+   For signals with one or more arguments (such as select_column),
+   only one format is supported: (widget, ... args ..., data).
 
 GladeXML class
+--------------
+   instance methods:
 
-instance methods:
+   initialize(glade_file [, root_widget], &handler_block)
+   get_widget(widget_name) -> aWidget
 
-initialize(gladeFile [, rootWidget], &handlerBlock)
-getWidget(widgetName) -> aWidget
-getWidgetByLongName(longWidgetName) -> aWidget
+Copying
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
+
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
+
+   Original author is Avi Bryant <avi@beta4.com>
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/

@@ -1,3 +1,18 @@
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+	* sample/test.rb, test.glade: Apply Ruby-GNOME2.
+	* extconf.rb: Remove --disable-gnome(Because they are known automatically).
+	* rbglade.c: Remove rb_require.
+	* lib/libglade2.rb: Add file.
+	* ChangeLog: Change date format.
+
+2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: Code cleanup.
+	* rbglade.c: Move GladeXML#widget to GladeXML#get_widget. 
+	* README: Revise contents.
+
 2002-09-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: use $libs instead of $LDFLAGS
@@ -7,54 +22,49 @@
 
 	* rbglade.c, extconf.rb: change for libglade-2.0
 
-Tue Jun 02 02:12:56 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-02  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* lib/libglade.rb: remove file.
-
 	* extconf.rb: create libglade2.so instead of lglade.so.
-
 	* rbglade.c: Support gtk2, gnome2.
+	* rbglade.c: Remove GladeXML#getWidget, #getWidgetByLongName, #doConnect.
 
-   * rbglade.c: Remove GladeXML#getWidget, #getWidgetByLongName, #doConnect.
+2002-06-02  Masao Mutoh <mutoh@highway.ne.jp>
 
-Tue Jun 02 02:12:02 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* extconf.rb: Support libglade-gnome again. This is bugfix of [530001].
+	And now, libglade-gnome support is not option but default.
+	* rbglade.c: Add GladeXML#widget, #widget_by_long_name, #connect.
+	They are aliases of GladeXML#getWidget, #getWidgetByLongName, #doConnect.
+	* rbglade.c, sample/*: Method/Variable names are followed Ruby-Way
+	(not CamelCase).
 
-   * extconf.rb: Support libglade-gnome again. This is bugfix of [530001].
-   And now, libglade-gnome support is not option but default.
+2002-05-29  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * rbglade.c: Add GladeXML#widget, #widget_by_long_name, #connect.
-   They are aliases of GladeXML#getWidget, #getWidgetByLongName, #doConnect.
+	* README: Modified.
 
-   * rbglade.c, sample/*: Method/Variable names are followed Ruby-Way
-   (not CamelCase).
+2002-05-26  Akinori MUSHA <knu@iDaemons.org>
 
-Wed May 29 00:38:37 2002 Masao Mutoh <mutoh@highway.ne.jp>
-
-   * README: Modified.
-
-Sun May 26 18:20:10 2002 Akinori MUSHA <knu@iDaemons.org>
-
-   * extconf.rb: Support --with-imlib-config instead of ARGV[0] 
+	* extconf.rb: Support --with-imlib-config instead of ARGV[0] 
 					(Ruby-GNOME patch [532441])
 
-Wed Mar 20 01:45:43 2002 Neil Conway <neilconway@rogers.com>
+2002-03-20  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: More bugfixes. Also, cGladeXML is no longer a
 	sub-class of gObject (I thought this would work; apparently,
 	it doesn't).
 
-Tue Mar 19 01:21:17 2002 Neil Conway <neilconway@rogers.com>
+2002-03-19  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: Fix a major bug in Gnome support (requiring changes
 	in both Ruby-Gtk and Ruby-Gnome); make GladeXML a sub-class of
 	gObject. Reported by Gary Lawrence Murphy <garym@canada.com>.
 
-Sun Mar 17 16:04:38 2002 Neil Conway <neilconway@rogers.com>
+2002-03-17  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: Fix a serious bug: don't use get_gobject().
         Reported by Gary Lawrence Murphy <garym@canada.com>.
 
-Fri Mar 15 15:28:03 2002 Neil Conway <neilconway@rogers.com>
+2002-03-15  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c, extconf.rb: Add support for libglade-gnome.
 	To enable this, pass the '--with-gnome' flag to extconf.rb,
@@ -63,14 +73,14 @@ Fri Mar 15 15:28:03 2002 Neil Conway <neilconway@rogers.com>
 
 	* README: Add blurb on new support for libglade-gnome.
 
-Fri Mar 15 14:40:12 2002 Neil Conway <neilconway@rogers.com>
+2002-03-15  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: Misc cleanups and improvements, mostly from my
 	previous patch.
 
 	* README: Update for new maintainer.
 
-Fri Mar 15 14:15:43 2002 Neil Conway <neilconway@rogers.com>
+2002-03-15  Neil Conway <neilconway@rogers.com>
 
 	* lib/libglade.rb: Remove file.
 
@@ -79,21 +89,21 @@ Fri Mar 15 14:15:43 2002 Neil Conway <neilconway@rogers.com>
 	tree is now the official package, and future releases of Ruby-Gnome
 	will include Ruby-libglade as a sub-binding.
 
-Tue Dec 18 18:36:10 2001 Neil Conway <neilconway@rogers.com>
+2001-12-18  Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: Code cleanup; fix compiler warnings; change the
 	storage location of the pointer to the Glade XML gObject;
         make it a sub-class of (the Ruby class) Gtk::Object.
 
-Tue Dec 11 20:24:38 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-12-11  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: Fixed; it should use libglade-config,
 	not gtk-config.
 
-Sat Nov 24 16:30:32 2001 Neil Conway <neilconway@rogers.com>
+2001-11-24  Neil Conway <neilconway@rogers.com>
 
 	* MANIFEST: File removed.
 
-Tue May 22 06:33:43 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-05-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* import Ruby/LibGlade.

@@ -1,3 +1,21 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbglade.c -
+
+  $Author: mutoh $
+  $Date: 2002/11/09 16:04:35 $
+
+
+  Copyright (C) 2002 Ruby-GNOME2 Project
+
+  This program is free software.
+  You can distribute/modify this program under the terms of
+  the GNU LIBRARY General Public License version 2.
+
+  Original author: Avi Bryant <avi@beta4.com>
+************************************************/
+
 #include "ruby.h"
 #include "rbgobject.h"
 #include "rbgtk.h"
@@ -33,17 +51,6 @@ rb_gladexml_get_widget(VALUE self, VALUE nameString)
     return widget ? GOBJ2RVAL(widget) : Qnil;
 }
 
-#if 0
-static VALUE
-rb_gladexml_get_widget_by_long_name(VALUE self, VALUE nameString)
-{
-    GtkWidget *widget;
-    widget = glade_xml_get_widget_by_long_name(GLADE_XML(RVAL2GOBJ(self)),
-                                               STR2CSTR(nameString));
-    return widget ? GOBJ2RVAL(widget) : Qnil;
-}
-#endif
-    
 static VALUE
 rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -82,25 +89,12 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
 void Init_libglade2()
 {
-    /*
-     * It is important that the first thing we do is load the Ruby-Gtk
-     * extension module. This prevents some confusing errors if the user
-     * doesn't do it themselves.
-     */
-    rb_require("gtk2");
-#ifdef ENABLE_GNOME
-    rb_require("gnome2");
-#endif
-
     instances = rb_ary_new();
     rb_global_variable(&instances);
 
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
-    rb_define_method(cGladeXML, "widget", rb_gladexml_get_widget, 1);
-#if 0
-    rb_define_method(cGladeXML, "widget_by_long_name", rb_gladexml_get_widget_by_long_name, 1);
-#endif
+    rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
 
     rb_eval_string(
         "class GladeXML			  											             \n"

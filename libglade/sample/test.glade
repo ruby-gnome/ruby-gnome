@@ -1,90 +1,71 @@
-<?xml version="1.0"?>
-<GTK-Interface>
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd" >
 
-<project>
-  <program_name>test</program_name>
-  <directory></directory>
-  <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
-  <language>C</language>
-  <gnome_support>True</gnome_support>
-  <gettext_support>True</gettext_support>
-</project>
+<glade-interface>
+  <widget class="GtkWindow" id="window1">
+    <property name="title" translatable="yes">Ruby Glade Test</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">yes</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
+    <property name="visible">yes</property>
 
-<widget>
-  <class>GtkWindow</class>
-  <name>window1</name>
-  <signal>
-    <name>destroy</name>
-    <handler>quit</handler>
-    <last_modification_time>Mon, 22 Jan 2001 15:58:43 GMT</last_modification_time>
-  </signal>
-  <title>Ruby Glade Test</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
+    <signal name="destroy" handler="quit" />
 
-  <widget>
-    <class>GtkVBox</class>
-    <name>vbox1</name>
-    <border_width>10</border_width>
-    <homogeneous>False</homogeneous>
-    <spacing>5</spacing>
+    <child>
+      <widget class="GtkVBox" id="vbox1">
+        <property name="border_width">10</property>
+        <property name="homogeneous">no</property>
+        <property name="spacing">5</property>
+        <property name="visible">yes</property>
 
-    <widget>
-      <class>GtkEntry</class>
-      <name>entrybox</name>
-      <can_focus>True</can_focus>
-      <editable>True</editable>
-      <text_visible>True</text_visible>
-      <text_max_length>0</text_max_length>
-      <text></text>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
+        <child>
+          <widget class="GtkEntry" id="entrybox">
+            <property name="can_focus">yes</property>
+            <property name="editable">yes</property>
+            <property name="text" translatable="yes"></property>
+            <property name="max-length">0</property>
+            <property name="visibility">yes</property>
+            <property name="visible">yes</property>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">no</property>
+          </packing>
+        </child>
 
-    <widget>
-      <class>GtkButton</class>
-      <name>button1</name>
-      <can_focus>True</can_focus>
-      <signal>
-	<name>clicked</name>
-	<handler>say_hello</handler>
-	<data>hello world</data>
-	<last_modification_time>Mon, 22 Jan 2001 16:51:42 GMT</last_modification_time>
-      </signal>
-      <label>Say Hello</label>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
+        <child>
+          <widget class="GtkButton" id="button1">
+            <property name="can_focus">yes</property>
+            <property name="label" translatable="yes">Say Hello</property>
+            <property name="visible">yes</property>
 
-    <widget>
-      <class>GtkButton</class>
-      <name>button2</name>
-      <can_focus>True</can_focus>
-      <signal>
-	<name>clicked</name>
-	<handler>destroy</handler>
-	<object>window1</object>
-	<last_modification_time>Mon, 22 Jan 2001 15:59:01 GMT</last_modification_time>
-      </signal>
-      <label>Exit</label>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
+            <signal name="clicked" handler="say_hello" />
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">no</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkButton" id="button2">
+            <property name="can_focus">yes</property>
+            <property name="label" translatable="yes">Exit</property>
+            <property name="visible">yes</property>
+
+            <signal name="clicked" handler="destroy" object="window1" />
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">no</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
   </widget>
-</widget>
-
-</GTK-Interface>
+</glade-interface>
