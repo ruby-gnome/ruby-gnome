@@ -4,7 +4,7 @@
   rbgdkatom.c -
 
   $Author: mutoh $
-  $Date: 2003/09/25 15:32:36 $
+  $Date: 2003/09/29 12:51:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -116,8 +116,6 @@ Init_gtk_gdk_atom()
     rb_define_method(gdkAtom, "name", gdkatom_name, 0);
     rb_define_method(gdkAtom, "to_i", gdkatom_to_i, 0);
     rb_define_method(gdkAtom, "==", gdkatom_eq, 1);
-    rb_define_method(gdkAtom, "===", gdkatom_eq, 1);
-    rb_define_method(gdkAtom, "eql?", gdkatom_eq, 1);
 
     /* This is a trick to define GDK_NONE as a BOXED object */
     none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);

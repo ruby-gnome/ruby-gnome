@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2003/01/10 19:23:55 $
+  $Date: 2003/09/29 12:51:02 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -106,12 +106,12 @@ Init_gtk_gdk_pango()
     rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
     rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
 
-    klass = rb_define_class_under(mGdkPango, "AttrEmbossed", pattrbool);
+    klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
     rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
 
-    klass = rb_define_class_under(mGdkPango, "AttrStipple", pattr);
+    klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);
     rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);

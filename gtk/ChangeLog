@@ -1,3 +1,9 @@
+2003-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkatom.c: Remove Gdk::Atom#===, Gdk::Atom#eql? 
+	* src/rbgdkpango.c: Rename Gdk::Pango::AttrEmbossed to Gdk::PangoAttrEmbossed,
+	Gdk::Pango::AttrStipple to Gdk::PangoAttrStipple.
+
 2003-09-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeyval.c: Add Gdk::Keyval.to_unicode, .from_unicode. 
