@@ -1,5 +1,7 @@
 2003-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgutil.c: klass.instance_methods to klass.instance_methods(false) 
+	for ruby-1.8.x.
 	* src/rbgobject.h, rbgobj_type.c: Remove rbgobj_exist_class().
 	Use rb_const_define_at() instead. Pointed out by Masahiro Sakai.
 

@@ -3,8 +3,8 @@
 
   rbgutil.c -
 
-  $Author: sakai $
-  $Date: 2003/02/17 16:00:13 $
+  $Author: mutoh $
+  $Date: 2003/05/20 17:21:34 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -128,7 +128,7 @@ Init_gutil()
     rb_eval_string(
         "module GLib\n"
         "  def self.__add_one_arg_setter(klass)\n"
-        "    ary = klass.instance_methods\n"
+        "    ary = klass.instance_methods(false)\n"
 #ifdef HAVE_NODE_ATTRASGN
         "    klass.module_eval do\n"
         "      ary.each do |m|\n"
