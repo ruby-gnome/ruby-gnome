@@ -130,5 +130,46 @@ class TC_elements < Test::Unit::TestCase
             assert_instance_of(Gst::Element, b.get_by_name_recurse_up(x))
         end
     end
+    def __create_bin(name)
+        b = Gst::Pipeline.new(name)
+        e1 = Gst::ElementFactory.make("fakesrc") 
+        e2 = Gst::ElementFactory.make("fakesink")
+        e1 >> e2
+        b.add(e1, e2)
+        b
+    end
+    def test_bin_iterate
+        b1 = __create_bin("foo")
+        b2 = __create_bin("bar")
+        res1 = {
+            b1 => 0,
+            b2 => 0
+        }
+        res2 = {
+            b1 => 0,
+            b2 => 0
+        }
+        [ b1, b2 ].each do |bin|
+            assert_raises(ArgumentError) { bin.on_pre_iterate }
+            bin.on_pre_iterate { |bin| res1[bin] += 1 } 
+            assert_raises(RuntimeError) { bin.on_pre_iterate {} }
+            assert_raises(ArgumentError) { bin.on_post_iterate }
+            bin.on_post_iterate { |bin| res2[bin] += 1 }
+            assert_raises(RuntimeError) { bin.on_post_iterate {} }
+            bin.play
+        end
+        50.times do |i|
+            [ b1, b2 ].each do |bin|
+                assert_equal(res1[bin], i)
+                assert_equal(res2[bin], i)
+                bin.iterate
+            end
+        end
+        [ b1, b2 ].each do |bin| 
+            assert_equal(50, res1[bin])
+            assert_equal(50, res2[bin])
+            bin.stop
+        end
+    end
 end
 
