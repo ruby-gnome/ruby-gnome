@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2003/06/26 15:17:01 $
+ * $Date: 2003/09/01 16:10:41 $
  *
  *****************************************************************************/
 
@@ -82,16 +82,16 @@ client_add_dir(argc, argv, self)
 	VALUE self;
 {
 	VALUE dir, preload;
+        GConfClientPreloadType gpreload = GCONF_CLIENT_PRELOAD_NONE;
 
 	rb_scan_args(argc, argv, "11", &dir, &preload);
 
 	/* check if we were passed a preloading specification */
-	if (NIL_P(preload)) {
-		preload = INT2FIX(GCONF_CLIENT_PRELOAD_NONE);
+	if (! NIL_P(preload)) {
+          gpreload = RVAL2GENUM(preload, GCONF_TYPE_CLIENT_PRELOAD_TYPE);
 	}
 
-	gconf_client_add_dir(_SELF(self), RVAL2CSTR(dir), NUM2INT(preload),
-			     NULL);
+	gconf_client_add_dir(_SELF(self), RVAL2CSTR(dir), gpreload, NULL);
 	return self;
 }
 
@@ -149,7 +149,8 @@ client_preload(self, dir, preload)
 	VALUE dir;
 	VALUE preload;
 {
-	gconf_client_preload(_SELF(self), RVAL2CSTR(dir), NUM2INT(preload),
+	gconf_client_preload(_SELF(self), RVAL2CSTR(dir), 
+                             RVAL2GENUM(preload, GCONF_TYPE_CLIENT_PRELOAD_TYPE),
 			     NULL);
 	return self;
 }
@@ -374,12 +375,9 @@ Init_gconf_client(m_gconf)
 	rb_define_alias(gconf_client, "diff", "change_set_from_current");
 	rb_define_alias(gconf_client, "commit", "commit_change_set");
 
-	rb_define_const(gconf_client, "PRELOAD_NONE",
-			INT2FIX(GCONF_CLIENT_PRELOAD_NONE));
-	rb_define_const(gconf_client, "PRELOAD_ONELEVEL",
-			INT2FIX(GCONF_CLIENT_PRELOAD_ONELEVEL));
-	rb_define_const(gconf_client, "PRELOAD_RECURSIVE",
-			INT2FIX(GCONF_CLIENT_PRELOAD_RECURSIVE));
+        /* GConfClientPreloadType */
+        G_DEF_CLASS(GCONF_TYPE_CLIENT_PRELOAD_TYPE, "PreloadType", gconf_client);
+        G_DEF_CONSTANTS(gconf_client, GCONF_TYPE_CLIENT_PRELOAD_TYPE, "GCONF_CLIENT_");
 
 	/* setup error handling in the client */
 	gconf_client_set_global_default_error_handler(

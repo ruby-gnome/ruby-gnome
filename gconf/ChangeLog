@@ -1,6 +1,10 @@
+2003-09-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-client.c: Apply enums/flags.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
@@ -63,7 +67,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/08/27 17:48:05 $ macros.
+	and $Date: 2003/09/01 16:10:41 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
