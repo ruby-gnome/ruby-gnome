@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -53,13 +53,14 @@ tbar_append(argc, argv, self)
         if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
-        ret = gtk_toolbar_append_element(_SELF(self), NUM2INT(element_type), 
+        ret = gtk_toolbar_append_element(_SELF(self), 
+                                         RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE), 
                                          N_RVAL2WIDGET(widget), N_RVAL2CSTR(text),
                                          N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                          N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func);
-        if (NUM2INT(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
@@ -107,13 +108,13 @@ tbar_prepend(argc, argv, self)
         if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
-        ret = gtk_toolbar_prepend_element(_SELF(self), NUM2INT(element_type), 
+        ret = gtk_toolbar_prepend_element(_SELF(self), RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE),
                                          N_RVAL2WIDGET(widget), N_RVAL2CSTR(text),
                                          N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                          N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func);
-        if (NUM2INT(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
@@ -162,13 +163,14 @@ tbar_insert(argc, argv, self)
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_insert_element(_SELF(self),
-                                         NUM2INT(element_type), N_RVAL2WIDGET(widget), 
+                                         RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE),
+                                         N_RVAL2WIDGET(widget), 
                                          N_RVAL2CSTR(text), N_RVAL2CSTR(ttext),
                                          N_RVAL2CSTR(ptext), N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func,
                                          NUM2INT(pos));
-        if (NUM2INT(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "14", &pos, &stock_id, &ttext, &ptext, &func);

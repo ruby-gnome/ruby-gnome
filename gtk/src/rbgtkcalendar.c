@@ -3,8 +3,8 @@
 
   rbgtkcalendar.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -70,7 +70,8 @@ static VALUE
 cal_display_options(self, flags)
     VALUE self, flags;
 {
-    gtk_calendar_display_options(_SELF(self), NUM2INT(flags));
+    gtk_calendar_display_options(_SELF(self), 
+                                 RVAL2GFLAGS(flags, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS));
     return self;
 }
 

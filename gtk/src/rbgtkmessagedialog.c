@@ -3,8 +3,8 @@
 
   rbgtkmessagedialog.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -23,7 +23,9 @@ mdiag_initialize(argc, argv, self)
     rb_scan_args(argc, argv, "41", &parent, &flags, &type, &buttons, &message);
 
     w = gtk_message_dialog_new(NIL_P(parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(parent)), 
-                               FIX2INT(flags), FIX2INT(type), FIX2INT(buttons),
+                               RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS), 
+                               RVAL2GENUM(type, GTK_TYPE_MESSAGE_TYPE), 
+                               RVAL2GENUM(buttons, GTK_TYPE_BUTTONS_TYPE),
                                (const gchar*)(NIL_P(message) ? "": RVAL2CSTR(message)));
     RBGTK_INITIALIZE(self, w);
     return Qnil;

@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -342,7 +342,8 @@ forward_search(argc, argv, self)
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if(gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                    FIX2INT(flags), &m_start, &m_end,
+                                    RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                    &m_start, &m_end,
                                     NIL_P(limit) ? NULL : _SELF(limit)))
         return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
     else
@@ -360,8 +361,9 @@ backward_search(argc, argv, self)
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if(gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                    FIX2INT(flags), &m_start, &m_end,
-                                    NIL_P(limit) ? NULL : _SELF(limit)))
+                                     RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                     &m_start, &m_end,
+                                     NIL_P(limit) ? NULL : _SELF(limit)))
         return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
     else
         return Qnil;

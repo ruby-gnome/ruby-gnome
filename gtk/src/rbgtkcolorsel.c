@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2003/05/31 18:22:39 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,12 +65,6 @@ colorsel_is_adjusting(self)
     return gtk_color_selection_is_adjusting(_SELF(self)) ? Qtrue : Qfalse;
 }
 
-/*
-gboolean    gtk_color_selection_palette_from_string
-                                            (const gchar *str,
-                                             GdkColor **colors,
-                                             gint *n_colors);
-*/
 static VALUE
 colorsel_s_palette_from_string(self, str)
     VALUE self, str;

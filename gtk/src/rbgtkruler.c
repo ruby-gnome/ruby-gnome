@@ -4,7 +4,7 @@
   rbgtkruler.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,7 +20,7 @@ static VALUE
 ruler_set_metric(self, metric)
     VALUE self, metric;
 {
-    gtk_ruler_set_metric(_SELF(self), NUM2INT(metric));
+    gtk_ruler_set_metric(_SELF(self), RVAL2GENUM(metric, GTK_TYPE_METRIC_TYPE));
     return self;
 }
 

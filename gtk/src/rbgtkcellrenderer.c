@@ -3,8 +3,8 @@
 
   rbgtkcellrenderer.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -37,7 +37,7 @@ cellrenderer_render(self, window, widget, background_area, cell_area,
                              RVAL2RECT(background_area),
                              RVAL2RECT(cell_area),
                              RVAL2RECT(expose_area),
-                             NUM2INT(flags));
+                             RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
     return self;
 }
 
@@ -50,7 +50,8 @@ cellrenderer_activate(self, event, widget, path, background_area,
     gtk_cell_renderer_activate(_SELF(self), (GdkEvent*)RVAL2GEV(event),
                                GTK_WIDGET(RVAL2GOBJ(widget)),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
-                               RVAL2RECT(cell_area), NUM2INT(flags));
+                               RVAL2RECT(cell_area), 
+                               RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
     return ret ? Qtrue : Qfalse;
 }
 
@@ -63,7 +64,8 @@ cellrenderer_start_editing(self, event, widget, path, background_area,
     gtk_cell_renderer_start_editing(_SELF(self), (GdkEvent*)RVAL2GEV(event),
                                GTK_WIDGET(RVAL2GOBJ(widget)),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
-                               RVAL2RECT(cell_area), NUM2INT(flags));
+                               RVAL2RECT(cell_area), 
+                               RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
     return edit ? GOBJ2RVAL(edit) : Qnil;
 }
 

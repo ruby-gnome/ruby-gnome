@@ -4,7 +4,7 @@
   rbgtkhandlebox.c -
 
   $Author: mutoh $
-  $Date: 2003/04/20 16:56:36 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -36,7 +36,7 @@ Init_gtk_handle_box()
 
     rb_define_method(gHandleBox, "initialize", hb_initialize, 0);
     rb_define_method(gHandleBox, "child_detached?", hb_child_detached, 0);
-	 rb_undef_method(gHandleBox, "shadow");
-	 rb_undef_method(gHandleBox, "shadow=");
-	 rb_undef_method(gHandleBox, "set_shadow");
+    rb_undef_method(gHandleBox, "shadow");
+    rb_undef_method(gHandleBox, "shadow=");
+    rb_undef_method(gHandleBox, "set_shadow");
 }

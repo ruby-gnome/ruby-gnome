@@ -3,8 +3,8 @@
 
   rbgtkbox.c -
 
-  $Author: sakai $
-  $Date: 2003/02/17 11:29:20 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -110,7 +110,7 @@ box_query_child_packing(self, child)
     rb_ary_push(ary, expand == FALSE ? Qfalse : Qtrue);
     rb_ary_push(ary, fill == FALSE ? Qfalse : Qtrue);
     rb_ary_push(ary, INT2NUM(padding));
-    rb_ary_push(ary, INT2FIX(pack_type));
+    rb_ary_push(ary, GENUM2RVAL(pack_type, GTK_TYPE_PACK_TYPE));
 
     return ary;
 }
@@ -122,7 +122,7 @@ box_set_child_packing(self, child, expand, fill, padding, pack_type)
     gtk_box_set_child_packing(_SELF(self), 
                               RVAL2WIDGET(child),
                               RTEST(expand), RTEST(fill),
-                              NUM2UINT(padding), NUM2INT(pack_type));
+                              NUM2UINT(padding), RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
     return self;
 }
 

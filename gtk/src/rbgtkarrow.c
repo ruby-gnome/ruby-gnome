@@ -3,8 +3,8 @@
 
   rbgtkarrow.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -18,8 +18,8 @@ static VALUE
 arrow_initialize(self, arrow_t, shadow_t)
     VALUE self, arrow_t, shadow_t;
 {
-    RBGTK_INITIALIZE(self, gtk_arrow_new((GtkArrowType)NUM2INT(arrow_t),
-				   (GtkShadowType)NUM2INT(shadow_t)));
+    RBGTK_INITIALIZE(self, gtk_arrow_new(RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
+                                         RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE)));
     return Qnil;
 }
 
@@ -28,8 +28,8 @@ arrow_set(self, arrow_t, shadow_t)
     VALUE self, arrow_t, shadow_t;
 {
     gtk_arrow_set(GTK_ARROW(RVAL2GOBJ(self)),
-		  (GtkArrowType)NUM2INT(arrow_t),
-		  (GtkShadowType)NUM2INT(shadow_t));
+		  RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
+		  RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE));
     return self;
 }
 

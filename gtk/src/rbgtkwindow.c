@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -26,7 +26,7 @@ gwin_initialize(argc, argv, self)
     GtkWindowType tp;
 
     if (rb_scan_args(argc, argv, "01", &type) == 1) {
-        tp = NUM2INT(type);
+        tp = RVAL2GENUM(type, GTK_TYPE_WINDOW_TYPE);
     } else {
         tp = GTK_WINDOW_TOPLEVEL;
     }
@@ -95,7 +95,7 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
     gtk_window_set_geometry_hints(_SELF(self),
                                   GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
                                   (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
-                                  NUM2INT(geom_mask));
+                                  RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
 }
 
@@ -103,7 +103,7 @@ static VALUE
 gwin_set_gravity(self, gravity)
     VALUE self, gravity;
 {
-    gtk_window_set_gravity(_SELF(self), NUM2INT(gravity));
+    gtk_window_set_gravity(_SELF(self), RVAL2GENUM(gravity, GDK_TYPE_GRAVITY));
     return self;
 }
 
@@ -111,7 +111,7 @@ static VALUE
 gwin_get_gravity(self)
     VALUE self;
 {
-    return INT2NUM(gtk_window_get_gravity(_SELF(self)));
+    return GENUM2RVAL(gtk_window_get_gravity(_SELF(self)), GDK_TYPE_GRAVITY);
 }
 
 static VALUE
@@ -151,7 +151,7 @@ gwin_mnemonic_activate(self, keyval, modifier)
 {
     return CBOOL2RVAL(gtk_window_mnemonic_activate(_SELF(self), 
                                         NUM2INT(keyval), 
-                                        NUM2INT(modifier)));
+                                        RVAL2GFLAGS(modifier, GDK_TYPE_MODIFIER_TYPE)));
 }
 
 static VALUE
@@ -239,7 +239,7 @@ static VALUE
 gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
     VALUE self, edge, button, root_x, root_y, timestamp;
 {
-    gtk_window_begin_resize_drag(_SELF(self), NUM2INT(edge),
+    gtk_window_begin_resize_drag(_SELF(self), RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE),
                                  NUM2INT(button), NUM2INT(root_x),
                                  NUM2INT(root_y), NUM2UINT(timestamp));
     return self;
@@ -285,7 +285,8 @@ static VALUE
 gwin_set_mnemonic_modifier(self, modifier)
     VALUE self, modifier;
 {
-    gtk_window_set_mnemonic_modifier(_SELF(self), FIX2INT(modifier));
+    gtk_window_set_mnemonic_modifier(_SELF(self), 
+                                     RVAL2GFLAGS(modifier, GDK_TYPE_MODIFIER_TYPE));
     return self;
 }
 
@@ -301,7 +302,7 @@ static VALUE
 gwin_set_type_hint(self, hint)
     VALUE self, hint;
 {
-    gtk_window_set_type_hint(_SELF(self), NUM2INT(hint));
+    gtk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
     return self;
 }
 
@@ -365,7 +366,7 @@ static VALUE
 gwin_get_mnemonic_modifier(self)
     VALUE self;
 {
-    return INT2NUM(gtk_window_get_mnemonic_modifier(_SELF(self)));
+    return GFLAGS2RVAL(gtk_window_get_mnemonic_modifier(_SELF(self)), GDK_TYPE_MODIFIER_TYPE);
 }
 
 static VALUE
@@ -407,7 +408,7 @@ static VALUE
 gwin_get_type_hint(self)
     VALUE self;
 {
-    return INT2NUM(gtk_window_get_type_hint(_SELF(self)));
+    return GENUM2RVAL(gtk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
 
 static VALUE

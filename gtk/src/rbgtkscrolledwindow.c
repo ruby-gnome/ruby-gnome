@@ -4,7 +4,7 @@
   rbgtkscrolledwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,8 +38,8 @@ scwin_set_policy(self, hpolicy, vpolicy)
     VALUE self, hpolicy, vpolicy;
 {
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
-                                   (GtkPolicyType)NUM2INT(hpolicy),
-                                   (GtkPolicyType)NUM2INT(vpolicy));
+                                   RVAL2GENUM(hpolicy, GTK_TYPE_POLICY_TYPE),
+                                   RVAL2GENUM(vpolicy, GTK_TYPE_POLICY_TYPE));
     return self;
 }
 
@@ -51,7 +51,9 @@ scwin_get_policy(self)
 
     gtk_scrolled_window_get_policy(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
                                    &hpolicy, &vpolicy);
-    return rb_ary_new3(2, INT2FIX(hpolicy), INT2FIX(vpolicy));
+    return rb_ary_new3(2, 
+                       GENUM2RVAL(hpolicy, GTK_TYPE_POLICY_TYPE), 
+                       GENUM2RVAL(vpolicy, GTK_TYPE_POLICY_TYPE)); 
 }
 
 static VALUE

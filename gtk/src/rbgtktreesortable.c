@@ -5,7 +5,7 @@
 
   $Author: mutoh $
 
-  $Date: 2003/07/11 19:39:08 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -36,7 +36,7 @@ treesortable_get_sort_column_id(self)
 
 	ary = rb_ary_new2(2);
 	rb_ary_push(ary, INT2NUM(sort_column_id));
-	rb_ary_push(ary, INT2NUM(order));
+	rb_ary_push(ary, GENUM2RVAL(order, GTK_TYPE_SORT_TYPE));
 	return ary;
     } else {
 	return Qnil;	/* XXX: or something else? exception? */
@@ -54,7 +54,7 @@ treesortable_set_sort_column_id(argc, argv, self)
 
     if (argc == 1 || argc == 2) {
 	sort_column_id = NUM2INT(argv[0]);
-	order = (argc == 2) ? NUM2INT(argv[1]) : GTK_SORT_ASCENDING;
+	order = (argc == 2) ? RVAL2GENUM(argv[1], GTK_TYPE_SORT_TYPE) : GTK_SORT_ASCENDING;
     } else {
 	rb_raise(rb_eArgError, "need 1 or 2 arguments.");
     }

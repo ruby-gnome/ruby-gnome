@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -212,7 +212,7 @@ note_query_tab_label_packing(self, child)
     ary = rb_ary_new2(3);
     rb_ary_push(ary, expand ? Qtrue : Qfalse);
     rb_ary_push(ary, fill ? Qtrue : Qfalse);
-    rb_ary_push(ary, INT2FIX(pack_type));
+    rb_ary_push(ary, GENUM2RVAL(pack_type, GTK_TYPE_PACK_TYPE));
     return ary;
 }
 
@@ -253,7 +253,7 @@ note_set_tab_label_packing(self, child, expand, fill, pack_type)
     gtk_notebook_set_tab_label_packing(_SELF(self),
                                        RVAL2WIDGET(child),
                                        RTEST(expand), RTEST(fill),
-                                       NUM2INT(pack_type));
+                                       RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
     return self;
 }
 

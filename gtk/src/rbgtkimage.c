@@ -3,8 +3,8 @@
 
   rbgtkimage.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -13,6 +13,7 @@
 
 #define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
 /*
+Use properties instead.
 void        gtk_image_get_icon_set          (GtkImage *image,
                                              GtkIconSet **icon_set,
                                              GtkIconSize *size);
@@ -39,7 +40,8 @@ image_initialize(argc, argv, self)
     } else if (TYPE(arg1) == T_STRING){
         widget = gtk_image_new_from_file(RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
-        widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), FIX2INT(arg2));
+        widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
+                                          RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -51,7 +53,7 @@ image_initialize(argc, argv, self)
             widget = gtk_image_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(arg1)),
                                                GDK_BITMAP(RVAL2GOBJ(arg2)));
         } else if (gtype == GTK_TYPE_ICON_SET){
-            widget = gtk_image_new_from_icon_set((GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), NUM2INT(arg2));
+            widget = gtk_image_new_from_icon_set((GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (gtype == GDK_TYPE_PIXBUF_ANIMATION){
             widget = gtk_image_new_from_animation(GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
         }
@@ -74,7 +76,8 @@ image_set(argc, argv, self)
     if (TYPE(arg1) == T_STRING){
         gtk_image_set_from_file(_SELF(self), RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
-        gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), FIX2INT(arg2));
+        gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
+                                 RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -88,7 +91,8 @@ image_set(argc, argv, self)
                                       GDK_BITMAP(RVAL2GOBJ(arg2)));
         } else if (gtype == GTK_TYPE_ICON_SET){
             gtk_image_set_from_icon_set(_SELF(self), 
-                                        (GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), NUM2INT(arg2));
+                                        (GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), 
+                                        RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (gtype == GDK_TYPE_PIXBUF_ANIMATION){
             gtk_image_set_from_animation(_SELF(self), GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
         }

@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: sakai $
-  $Date: 2003/04/07 14:31:53 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -200,6 +200,7 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "first!", treeiter_first, 0);
     rb_define_method(gTreeIter, "next!", treeiter_next, 0);
     rb_define_method(gTreeIter, "get_value", treeiter_get_value, 1);
+    rb_define_alias(gTreeIter, "[]", "get_value");
     rb_define_method(gTreeIter, "first_child", treeiter_children, 0);
     rb_define_method(gTreeIter, "path", treeiter_get_path, 0);
     rb_define_method(gTreeIter, "has_child?", treeiter_has_child, 0);
@@ -207,5 +208,6 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 2);
     rb_define_method(gTreeIter, "parent", treeiter_parent, 0);
     rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
+    rb_define_alias(gTreeIter, "[]=", "set_value");
     rb_define_method(gTreeIter, "==", treeiter_eql, 1);
 }

@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -16,7 +16,7 @@ static VALUE
 gdkdragcontext_protocol(self)
     VALUE self;
 {
-    return INT2NUM(_SELF(self)->protocol);
+    return GENUM2RVAL(_SELF(self)->protocol, GDK_TYPE_DRAG_PROTOCOL);
 }
 
 static VALUE
@@ -57,21 +57,21 @@ static VALUE
 gdkdragcontext_actions(self)
     VALUE self;
 {
-    return INT2NUM(_SELF(self)->actions);
+    return GFLAGS2RVAL(_SELF(self)->actions, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
 gdkdragcontext_suggested_action(self)
     VALUE self;
 {
-    return INT2NUM(_SELF(self)->suggested_action);
+    return GFLAGS2RVAL(_SELF(self)->suggested_action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
 gdkdragcontext_action(self)
     VALUE self;
 {
-    return INT2NUM(_SELF(self)->action);
+    return GFLAGS2RVAL(_SELF(self)->action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE

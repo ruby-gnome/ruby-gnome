@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2003/07/14 18:12:53 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -22,7 +22,7 @@ static VALUE
 treeselection_set_mode(self, type)
     VALUE self, type;
 {
-    gtk_tree_selection_set_mode(_SELF(self), NUM2INT(type));
+    gtk_tree_selection_set_mode(_SELF(self), RVAL2GENUM(type, GTK_TYPE_SELECTION_MODE));
     return self;
 }
 
@@ -30,7 +30,7 @@ static VALUE
 treeselection_get_mode(self)
     VALUE self;
 {
-    return INT2FIX(gtk_tree_selection_get_mode(_SELF(self)));
+    return GENUM2RVAL(gtk_tree_selection_get_mode(_SELF(self)), GTK_TYPE_SELECTION_MODE);
 }
 
 static gboolean

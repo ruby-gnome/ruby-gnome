@@ -4,7 +4,7 @@
   rbgtktable.c -
 
   $Author: mutoh $
-  $Date: 2003/05/02 18:22:16 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -47,15 +47,16 @@ tbl_attach(argc, argv, self)
 {
     VALUE child, left, right, top, bottom;
     VALUE arg0, arg1, arg2, arg3;
-    int xopt, yopt, xspc, yspc;
+    gint xspc, yspc;
+    GtkAttachOptions xopt, yopt;
 
     xopt = yopt = GTK_EXPAND | GTK_FILL;
     xspc = yspc = 0;
     rb_scan_args(argc, argv, "54",
                  &child, &left, &right, &top, &bottom,
                  &arg0, &arg1, &arg2, &arg3);
-    if (!NIL_P(arg0)) xopt = NUM2INT(arg0);
-    if (!NIL_P(arg1)) yopt = NUM2INT(arg1);
+    if (!NIL_P(arg0)) xopt = RVAL2GFLAGS(arg0, GTK_TYPE_ATTACH_OPTIONS);
+    if (!NIL_P(arg1)) yopt = RVAL2GFLAGS(arg1, GTK_TYPE_ATTACH_OPTIONS);
     if (!NIL_P(arg2)) xspc = NUM2INT(arg2);
     if (!NIL_P(arg3)) yspc = NUM2INT(arg3);
 

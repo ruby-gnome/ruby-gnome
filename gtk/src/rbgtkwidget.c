@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:03 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -173,8 +173,8 @@ widget_add_accelerator(self, sig, accel, key, mod, flag)
                                RVAL2CSTR(sig),
                                GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
                                NUM2INT(key),
-                               NUM2INT(mod),
-                               NUM2INT(flag));
+                               RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE),
+                               RVAL2GFLAGS(flag, GTK_TYPE_ACCEL_FLAGS));
     return self;
 }
 
@@ -185,7 +185,7 @@ widget_remove_accelerator(self, accel, key, mod)
     return gtk_widget_remove_accelerator(_SELF(self),
                                          GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
                                          NUM2INT(key),
-                                         NUM2INT(mod)) ? Qtrue : Qfalse;
+                                         RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -264,7 +264,7 @@ static VALUE
 widget_set_state(self, state)
     VALUE self, state;
 {
-    gtk_widget_set_state(_SELF(self), (GtkStateType)NUM2INT(state));
+    gtk_widget_set_state(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE));
     return self;
 }
 
@@ -433,7 +433,7 @@ static VALUE
 widget_set_direction(self, dir)
     VALUE self, dir;
 {
-    gtk_widget_set_direction(_SELF(self), FIX2INT(dir));
+    gtk_widget_set_direction(_SELF(self), RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
     return self;
 }
 
@@ -441,14 +441,14 @@ static VALUE
 widget_get_direction(self)
     VALUE self;
 {
-    return INT2FIX(gtk_widget_get_direction(_SELF(self)));
+    return GENUM2RVAL(gtk_widget_get_direction(_SELF(self)), GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
 widget_s_set_default_direction(self, dir)
     VALUE self;
 {
-    gtk_widget_set_default_direction(FIX2INT(dir));
+    gtk_widget_set_default_direction(RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
     return self;
 }
 
@@ -456,7 +456,7 @@ static VALUE
 widget_s_get_default_direction(self)
     VALUE self;
 {
-    return INT2FIX(gtk_widget_get_default_direction());
+    return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
@@ -533,7 +533,7 @@ static VALUE
 widget_modify_fg(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_fg(_SELF(self), FIX2INT(state), 
+    gtk_widget_modify_fg(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE), 
                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
@@ -542,7 +542,7 @@ static VALUE
 widget_modify_bg(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_bg(_SELF(self), FIX2INT(state), 
+    gtk_widget_modify_bg(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
@@ -551,7 +551,7 @@ static VALUE
 widget_modify_text(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_text(_SELF(self), FIX2INT(state), 
+    gtk_widget_modify_text(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
@@ -560,7 +560,7 @@ static VALUE
 widget_modify_base(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_base(_SELF(self), FIX2INT(state), 
+    gtk_widget_modify_base(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
@@ -605,7 +605,7 @@ widget_render_icon(self, stock_id, size, detail)
     VALUE self, stock_id, size, detail;
 {
     return GOBJ2RVAL(gtk_widget_render_icon(_SELF(self),  rb_id2name(SYM2ID(stock_id)),
-                                            FIX2INT(size), RVAL2CSTR(detail)));
+                                            RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), RVAL2CSTR(detail)));
 }
 
 static VALUE
@@ -767,7 +767,7 @@ static VALUE
 widget_child_focus(self, direction)
     VALUE self, direction;
 {
-    return gtk_widget_child_focus(_SELF(self), NUM2INT(direction)) ? Qtrue : Qfalse;
+    return gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)) ? Qtrue : Qfalse;
 }
 
 static VALUE

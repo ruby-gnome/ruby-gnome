@@ -3,8 +3,8 @@
 
   rbgtkspinbutton.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -80,7 +80,8 @@ static VALUE
 sbtn_spin(self, direction, increment)
     VALUE self, direction, increment;
 {
-    gtk_spin_button_spin(_SELF(self), NUM2INT(direction), NUM2DBL(increment));
+    gtk_spin_button_spin(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_SPIN_TYPE), 
+                         NUM2DBL(increment));
     return self;
 }
 

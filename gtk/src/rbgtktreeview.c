@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mpovolny $
-  $Date: 2003/08/28 11:35:59 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -395,7 +395,7 @@ treeview_enable_model_drag_dest(self, targets, actions)
     int num = RARRAY(targets)->len;
 
     gtk_tree_view_enable_model_drag_dest(_SELF(self),  entries, 
-                                         num, NUM2INT(actions));
+                                         num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     return self;
 }
 
@@ -408,8 +408,9 @@ treeview_enable_model_drag_source(self, start_button_mask, targets, actions)
         gint num = RARRAY(targets)->len;
         
         gtk_tree_view_enable_model_drag_source(_SELF(self), 
-                                               NUM2INT(start_button_mask), entries, 
-                                               num, NUM2INT(actions));
+                                               RVAL2GFLAGS(start_button_mask, GDK_TYPE_MODIFIER_TYPE), 
+                                               entries, num,
+                                               RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     }
     return self;
 }
@@ -435,7 +436,7 @@ treeview_set_drag_dest_row(self, path, pos)
     VALUE self, path, pos;
 {
     gtk_tree_view_set_drag_dest_row(_SELF(self), RVAL2TREEPATH(path),
-                                    NUM2INT(pos));
+                                    RVAL2GENUM(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
     return self;
 }
 
@@ -446,7 +447,8 @@ treeview_get_drag_dest_row(self)
     GtkTreePath* path;
     GtkTreeViewDropPosition pos;
     gtk_tree_view_get_drag_dest_row(_SELF(self), &path, &pos);
-    return rb_ary_new3(2, TREEPATH2RVAL(path), INT2NUM(pos));
+    return rb_ary_new3(2, TREEPATH2RVAL(path), 
+                       GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
 }
 
 static VALUE
@@ -460,7 +462,8 @@ treeview_get_dest_row_at_pos(self, drag_x, drag_y)
     ret = gtk_tree_view_get_dest_row_at_pos(_SELF(self), 
                                             NUM2INT(drag_x), NUM2INT(drag_y),
                                             &path, &pos);
-    return ret ? rb_ary_new3(2, TREEPATH2RVAL(path), INT2NUM(pos)) : Qnil;
+    return ret ? rb_ary_new3(2, TREEPATH2RVAL(path), 
+                             GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION)) : Qnil;
 }
 
 static VALUE

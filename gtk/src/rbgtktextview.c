@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/08/20 17:07:04 $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -144,7 +144,8 @@ textview_buffer_to_window_coords(self, wintype, buffer_x, buffer_y)
     VALUE self, wintype, buffer_x, buffer_y;
 {
     int window_x, window_y;
-    gtk_text_view_buffer_to_window_coords(_SELF(self), FIX2INT(wintype),
+    gtk_text_view_buffer_to_window_coords(_SELF(self), 
+                                          RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE),
                                           NUM2INT(buffer_x), NUM2INT(buffer_y),
                                           &window_x, &window_y);
     return rb_ary_new3(2, INT2NUM(window_x), INT2NUM(window_y));
@@ -155,7 +156,8 @@ textview_window_to_buffer_coords(self, wintype, window_x, window_y)
     VALUE self, wintype, window_x, window_y;
 {
     int buffer_x, buffer_y;
-    gtk_text_view_window_to_buffer_coords(_SELF(self), FIX2INT(wintype),
+    gtk_text_view_window_to_buffer_coords(_SELF(self),
+                                          RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE),
                                           NUM2INT(window_x), NUM2INT(window_y),
                                           &buffer_x, &buffer_y);
     return rb_ary_new3(2, INT2NUM(buffer_x), INT2NUM(buffer_y));
@@ -166,7 +168,8 @@ textview_get_window(self, wintype)
     VALUE self, wintype;
 {
     GdkWindow* win = NULL;
-    win = gtk_text_view_get_window(_SELF(self), NUM2INT(wintype));
+    win = gtk_text_view_get_window(_SELF(self), 
+                                   RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE));
     return win ? GOBJ2RVAL(win): Qnil;
 }
 
@@ -174,14 +177,17 @@ static VALUE
 textview_get_window_type(self, gdkwin)
     VALUE self, gdkwin;
 {
-    return INT2FIX(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)));
+    return GENUM2RVAL(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)), 
+                      GTK_TYPE_TEXT_WINDOW_TYPE);
 }
 
 static VALUE
 textview_set_border_window_size(self, wintype, size)
     VALUE self, wintype, size;
 {
-    gtk_text_view_set_border_window_size(_SELF(self), FIX2INT(wintype), NUM2INT(size));
+    gtk_text_view_set_border_window_size(_SELF(self), 
+                                         RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE), 
+                                         NUM2INT(size));
     return self;
 }
 
@@ -189,7 +195,9 @@ static VALUE
 textview_get_border_window_size(self, wintype)
     VALUE self, wintype;
 {
-    return INT2NUM(gtk_text_view_get_border_window_size(_SELF(self), NUM2INT(wintype)));
+    return INT2NUM(gtk_text_view_get_border_window_size(
+                       _SELF(self), 
+                       RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE)));
 }
 
 static VALUE

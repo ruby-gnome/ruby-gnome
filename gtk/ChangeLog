@@ -1,3 +1,14 @@
+2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c, rbgtkmessagedialog.c, rbgtkwindow.c, rbgtkimage.c, 
+	rbgtkspinbutton.c, rbgtktreemodel.c, rbgtktreeselection.c, rbgtktreeview.c, 
+	rbgtktreesortable.c, rbgtkcellrenderer.c, rbgtktoolbar.c, rbgtknotebook.c, 
+	rbgtktable.c, rbgtkscrolledwindow.c, rbgtkarrow.c, rbgtkcalendar.c, 
+	rbgtkbox.c, rbgtkwidget.c, rbgdkdragcontext.c: Apply enum/flags changes.
+	* sample/misc/cursor.rb: Follow enum/flags changes.
+	* src/rbgtktreeiter.c (Init_gtk_treeiter): Define Gtk::TreeIter#[], #[]=.
+	* sample/misc/treeview.rb, listview.rb: Use Gtk::TreeIter#[], #[]=.
+
 2003-08-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkiconsize.c: Add Gtk::IconSize.lookup_for_settings.

@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,6 +15,12 @@
 #include "global.h"
 
 #define _SELF(self) (GTK_DIALOG(RVAL2GOBJ(self)))
+
+/*
+ * 2003/08/31 Masao
+ * We don't use RVAL2GENUM/GENUM2RVAL for GtkResponseType.
+ * Because sometimes you may use your own number as response_id.
+ */
 
 static ID id_to_a;
 
@@ -72,7 +78,7 @@ dialog_initialize(argc, argv, self)
         RBGTK_INITIALIZE(self, gtk_dialog_new());
     } else if (argc > 3){
         GtkDialog* dialog = GTK_DIALOG(g_object_new(GTK_TYPE_DIALOG, NULL));
-        GtkDialogFlags gflags = NIL_P(flags) ? 0 : NUM2INT(flags);
+        GtkDialogFlags gflags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS);
         if (! NIL_P(title))
             gtk_window_set_title(GTK_WINDOW(dialog), RVAL2CSTR(title));
         if (! NIL_P(parent))

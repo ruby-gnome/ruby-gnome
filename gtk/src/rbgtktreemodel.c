@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/08/31 15:29:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -21,7 +21,7 @@ static VALUE
 treemodel_get_flags(self)
     VALUE self;
 {
-    return INT2NUM(gtk_tree_model_get_flags(_SELF(self)));
+    return GFLAGS2RVAL(gtk_tree_model_get_flags(_SELF(self)), GTK_TYPE_TREE_MODEL_FLAGS);
 }
 
 static VALUE
