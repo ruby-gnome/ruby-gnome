@@ -39,6 +39,7 @@ static void Init_gst_classes(void) {
     extern void Init_gst_element(void);
     extern void Init_gst_elementfactory(void);
     extern void Init_gst_event(void);
+    extern void Init_gst_eventmask(void);
     extern void Init_gst_eventseek(void);
     extern void Init_gst_eventsegmentseek(void);
     extern void Init_gst_eventsize(void);
@@ -69,6 +70,7 @@ static void Init_gst_classes(void) {
     Init_gst_element();
     Init_gst_elementfactory();
     Init_gst_event();
+    Init_gst_eventmask();
     Init_gst_eventseek();
     Init_gst_eventsegmentseek();
     Init_gst_eventsize();
