@@ -4,7 +4,7 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2004/08/01 04:25:34 $
+  $Date: 2004/12/12 16:10:16 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -12,6 +12,7 @@
 #include "rbgobject.h"
 #include "rbgtk.h"
 #include <panel-applet.h>
+#include <panel-applet-gconf.h>
 #include <panel-applet-enums.h>
 
 static ID id_call;
@@ -143,6 +144,115 @@ rbpanel_cb(applet, iid, func)
    
 
 static VALUE
+rbpanel_applet_gconf_get_string(self, key)
+    VALUE self, key;
+{
+    GError* error = NULL;
+
+    char* value = panel_applet_gconf_get_string(_SELF(self), RVAL2CSTR(key), &error);
+    VALUE ret = CSTR2RVAL(value);
+    g_free(value);
+
+    if (error) RAISE_GERROR(error);
+
+    return ret;
+}
+
+static VALUE
+rbpanel_applet_gconf_get_int(self, key)
+    VALUE self, key;
+{
+    GError* error = NULL;
+
+    gint value = panel_applet_gconf_get_int(_SELF(self), RVAL2CSTR(key), &error);
+    VALUE ret = INT2NUM(value);
+
+    if (error) RAISE_GERROR(error);
+
+    return ret;
+}
+
+static VALUE
+rbpanel_applet_gconf_get_bool(self, key)
+    VALUE self, key;
+{
+    GError* error = NULL;
+
+    gboolean value = panel_applet_gconf_get_bool(_SELF(self), RVAL2CSTR(key), &error);
+    VALUE ret = CBOOL2RVAL(value);
+
+    if (error) RAISE_GERROR(error);
+
+    return ret;
+}
+
+static VALUE
+rbpanel_applet_gconf_get_float(self, key)
+    VALUE self, key;
+{
+    GError* error = NULL;
+
+    gdouble value = panel_applet_gconf_get_float(_SELF(self), RVAL2CSTR(key), &error);
+    VALUE ret = rb_float_new(value);
+
+    if (error) RAISE_GERROR(error);
+
+    return ret;
+}
+
+static VALUE
+rbpanel_applet_gconf_set_int(self, key, value)
+    VALUE self, key, value;
+{
+    GError* error = NULL;
+
+    panel_applet_gconf_set_int(_SELF(self), RVAL2CSTR(key), NUM2INT(value), &error);
+
+    if (error) RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
+rbpanel_applet_gconf_set_bool(self, key, value)
+    VALUE self, key, value;
+{
+    GError* error = NULL;
+
+    panel_applet_gconf_set_bool(_SELF(self), RVAL2CSTR(key), RTEST(value), &error);
+
+    if (error) RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
+rbpanel_applet_gconf_set_string(self, key, value)
+    VALUE self, key, value;
+{
+    GError* error = NULL;
+
+    panel_applet_gconf_set_string(_SELF(self), RVAL2CSTR(key), RVAL2CSTR(value), &error);
+
+    if (error) RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
+rbpanel_applet_gconf_set_float(self, key, value)
+    VALUE self, key, value;
+{
+    GError* error = NULL;
+
+    panel_applet_gconf_set_float(_SELF(self), RVAL2CSTR(key), NUM2DBL(value), &error);
+
+    if (error) RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
 rbpanel_s_main(argc, argv, self)
     int argc;
     VALUE* argv;
@@ -232,6 +342,14 @@ Init_panelapplet2()
     rb_define_method(cApplet, "set_flags", rbpanel_applet_set_flags, 1);
     rb_define_method(cApplet, "control", rbpanel_applet_get_control, 0);
     rb_define_method(cApplet, "popup_component", rbpanel_applet_get_popup_component, 0);
+    rb_define_method(cApplet, "gconf_get_int", rbpanel_applet_gconf_get_int, 1);
+    rb_define_method(cApplet, "gconf_get_string", rbpanel_applet_gconf_get_string, 1);
+    rb_define_method(cApplet, "gconf_get_bool", rbpanel_applet_gconf_get_bool, 1);
+    rb_define_method(cApplet, "gconf_get_float", rbpanel_applet_gconf_get_float, 1);
+    rb_define_method(cApplet, "gconf_set_int", rbpanel_applet_gconf_set_int, 2);
+    rb_define_method(cApplet, "gconf_set_string", rbpanel_applet_gconf_set_string, 2);
+    rb_define_method(cApplet, "gconf_set_bool", rbpanel_applet_gconf_set_bool, 2);
+    rb_define_method(cApplet, "gconf_set_float", rbpanel_applet_gconf_set_float, 2);
 
     rb_define_singleton_method(cApplet, "main", rbpanel_s_main, -1);
 

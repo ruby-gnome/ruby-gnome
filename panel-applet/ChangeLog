@@ -1,3 +1,7 @@
+2004-12-13  Neil Stevens <neil@hakubi.us>
+
+	* rbpanel-applet.c: Added gconf accssors(PanelApplet#gconf_*).
+
 2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/README: Revised.
