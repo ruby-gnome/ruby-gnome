@@ -39,6 +39,7 @@ static void Init_all_classes(void) {
     extern void Init_gda_datamodel_list(void);
     extern void Init_gda_datasource(void);
     extern void Init_gda_error(void);
+    extern void Init_gda_field_attributes(void);
     extern void Init_gda_parameter(void);
     extern void Init_gda_parameter_list(void);
     extern void Init_gda_provider(void);
@@ -55,6 +56,7 @@ static void Init_all_classes(void) {
     Init_gda_datamodel_list();
     Init_gda_datasource();
     Init_gda_error();
+    Init_gda_field_attributes();
     Init_gda_parameter();
     Init_gda_parameter_list();
     Init_gda_provider();

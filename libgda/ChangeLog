@@ -1,3 +1,15 @@
+2003-10-03  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdafieldattributes: New file.
+	* src/rbgda.c: Initializes Gda::FieldAttributes.
+	* src/rbgda.h: Added macros for Gda::FieldAttributes.
+	* src/rbgdadatamodel: Added a few methods (#emit_changed, 
+	  #emit_row_inserted, #emit_row_updated, #emit_row_removed,
+	  #freeze!, #thaw!, #describe_column, #append_row, #remove_row,
+	  #update_row, #editable?, #editing?, #begin_edit, #cancel_edit,
+	  #end_edit, #to_comma_separated, #to_tab_separated, #to_xml,
+	  #command_text, #set_command_text, #command_type, #set_command_type). 
+
 2003-10-02  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdadatamodelhash.c, src/rbgdadatamodellist.c: New files.
