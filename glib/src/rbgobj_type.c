@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/16 03:41:55 $
+  $Date: 2003/07/17 14:28:34 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -231,7 +231,7 @@ type_initialize(self, type)
 
     if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
         gtype = NUM2UINT(type);
-        // FIXME: XXX
+        // XXX
         if (!g_type_name(gtype))
             gtype = G_TYPE_INVALID;
     } else {

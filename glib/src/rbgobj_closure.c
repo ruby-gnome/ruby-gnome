@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:14:47 $
+  $Author: sakai $
+  $Date: 2003/07/17 14:28:31 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -37,14 +37,26 @@ rclosure_default_g2r_func(num, values)
     return args;
 }
 
-static void
-rclosure_marshal(GClosure*       closure,
-                 GValue*         return_value,
-                 guint           n_param_values,
-                 const GValue*   param_values,
-                 gpointer        invocation_hint,
-                 gpointer        marshal_data)
+struct marshal_arg
 {
+    GClosure*       closure;
+    GValue*         return_value;
+    guint           n_param_values;
+    const GValue*   param_values;
+    gpointer        invocation_hint;
+    gpointer        marshal_data;
+};
+
+static VALUE
+rclosure_marshal_body(struct marshal_arg* arg)
+{
+    GClosure*       closure         = arg->closure;
+    GValue*         return_value    = arg->return_value;   
+    guint           n_param_values  = arg->n_param_values; 
+    const GValue*   param_values    = arg->param_values;
+    //gpointer        invocation_hint = arg->invocation_hint;
+    //gpointer        marshal_data    = arg->marshal_data;
+
     VALUE ret, args;
     GValToRValSignalFunc func;
 
@@ -63,6 +75,32 @@ rclosure_marshal(GClosure*       closure,
 
     if (return_value && G_VALUE_TYPE(return_value))
         rbgobj_rvalue_to_gvalue(ret, return_value);
+
+    return Qnil;
+}
+
+static void
+rclosure_marshal(GClosure*       closure,
+                 GValue*         return_value,
+                 guint           n_param_values,
+                 const GValue*   param_values,
+                 gpointer        invocation_hint,
+                 gpointer        marshal_data)
+{
+    struct marshal_arg arg;
+    int state;
+
+    arg.closure         = closure;
+    arg.return_value    = return_value;
+    arg.n_param_values  = n_param_values;
+    arg.param_values    = param_values;
+    arg.invocation_hint = invocation_hint;
+    arg.marshal_data    = marshal_data;
+
+    rb_protect((VALUE (*)())&rclosure_marshal_body, (VALUE)&arg, &state);
+
+    if (state)
+        rb_warn("unexpected local jump in closure");
 }
 
 static VALUE rclosure_marker_list;

@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: geoff_youngs $
-  $Date: 2003/06/16 17:24:29 $
+  $Author: sakai $
+  $Date: 2003/07/17 14:28:36 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -171,6 +171,20 @@ rbgobj_gobject_initialize(obj, cobj)
 
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
+
+    {
+        GType t1 = G_TYPE_FROM_INSTANCE(cobj);
+        GType t2 = CLASS2GTYPE(CLASS_OF(obj));
+
+        if (t1 != t2) {
+            if (g_type_is_a(t1, t2))
+                rb_warn("instance type %s != class type %s",
+                        g_type_name(t1), g_type_name(t2));
+            else
+                rb_raise(rb_eTypeError, "%s is not subtype of %s",
+                         g_type_name(t1), g_type_name(t2));
+        }
+    }
 }
 
 GObject*
@@ -185,10 +199,10 @@ rbgobj_get_gobject(obj)
     Data_Get_Struct(obj, gobj_holder, holder);
 
     if (holder->destroyed)
-        rb_raise(rb_eArgError, "destroyed GLib::Object");
+        rb_raise(rb_eTypeError, "destroyed GLib::Object");
 
     if (!holder->gobj)
-        rb_raise(rb_eArgError, "uninitialize GLib::Object");
+        rb_raise(rb_eTypeError, "uninitialize GLib::Object");
 
     return holder->gobj;
 }
@@ -339,10 +353,12 @@ rbgobj_define_property_accessors(klass)
     g_type_class_unref(oclass);
 }
 
+
 struct param_setup_arg {
     GObjectClass* gclass;
     GParameter* params;
     guint param_size;
+    VALUE params_hash;
 };
 
 static VALUE
@@ -391,6 +407,26 @@ _params_setup(arg, param_setup_arg)
     return Qnil;
 }
 
+static VALUE
+gobj_new_body(struct param_setup_arg* arg)
+{
+    rb_iterate(&_each_with_index, arg->params_hash, _params_setup, (VALUE)arg);
+    return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
+                                arg->param_size, arg->params);
+}
+
+static VALUE
+gobj_new_ensure(struct param_setup_arg* arg)
+{
+    int i;
+    g_type_class_unref(arg->gclass);
+    for (i = 0; i < arg->param_size; i++) {
+        if (G_IS_VALUE(&arg->params[i].value))
+            g_value_unset(&arg->params[i].value);
+    }
+    return Qnil;
+}
+
 GObject*
 rbgobj_gobject_new(gtype, params_hash)
     GType gtype;
@@ -407,22 +443,18 @@ rbgobj_gobject_new(gtype, params_hash)
         result = g_object_newv(gtype, 0, NULL);
     } else {
         size_t param_size;
-        struct param_setup_arg param_setup_arg;
+        struct param_setup_arg arg;
 
         param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
 
-        param_setup_arg.param_size = param_size;
-        param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
-        param_setup_arg.params = ALLOCA_N(GParameter, param_size);
-        memset(param_setup_arg.params, 0, sizeof(GParameter) * param_size);
+        arg.param_size = param_size;
+        arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
+        arg.params = ALLOCA_N(GParameter, param_size);
+        memset(arg.params, 0, sizeof(GParameter) * param_size);
+        arg.params_hash = params_hash;
 
-        // FIXME: use rb_ensure() to ensure following g_type_class_unref() call.
-        rb_iterate(&_each_with_index, params_hash, _params_setup,
-                   (VALUE)&param_setup_arg);
-
-        result = g_object_newv(gtype, param_size, param_setup_arg.params);
-
-        g_type_class_unref(param_setup_arg.gclass);
+        result = (GObject*)rb_ensure(&gobj_new_body, (VALUE)&arg,
+                                     &gobj_new_ensure, (VALUE)&arg);
     }
 
     return result;

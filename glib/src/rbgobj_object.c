@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/07/16 03:41:55 $
+  $Date: 2003/07/17 14:28:31 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -234,6 +234,7 @@ gobj_set_property(self, prop_name, val)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
+        // FIXME: use rb_ensure to call g_value_unset()
         RValueToGValueFunc setter = NULL;
         GValue gval = {0,};
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
@@ -251,8 +252,7 @@ gobj_set_property(self, prop_name, val)
         if (setter)
             setter(val, &gval);
         else {
-            if (!NIL_P(val))
-                rbgobj_rvalue_to_gvalue(val, &gval);
+            rbgobj_rvalue_to_gvalue(val, &gval);
         }
 
         g_object_set_property(RVAL2GOBJ(self), name, &gval);
@@ -281,6 +281,7 @@ gobj_get_property(self, prop_name)
     if (!pspec)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
+        // FIXME: use rb_ensure to call g_value_unset()
         GValueToRValueFunc getter = NULL;
         GValue gval = {0,};
         VALUE ret;
@@ -429,6 +430,7 @@ gobj_smethod_added(self, id)
 
 static VALUE proc_mod_eval;
 
+// FIXME: use rb_protect
 static void
 get_prop_func(GObject* object,
               guint property_id,
@@ -440,6 +442,7 @@ get_prop_func(GObject* object,
     rbgobj_rvalue_to_gvalue(ret, value);
 }
 
+// FIXME: use rb_protect
 static void
 set_prop_func(GObject* object,
               guint property_id,
@@ -451,6 +454,7 @@ set_prop_func(GObject* object,
                GVAL2RVAL(value), GOBJ2RVAL(pspec));
 }
 
+// FIXME: use rb_protect
 static void
 class_init_func(gpointer g_class_, gpointer class_data)
 {
@@ -466,6 +470,7 @@ class_init_func(gpointer g_class_, gpointer class_data)
 #endif
 }
 
+// FIXME: use rb_protect
 static void
 instance_init_func(GTypeInstance* instance, gpointer g_class)
 {
@@ -492,9 +497,9 @@ register_type(int argc, VALUE* argv, VALUE self)
     }
 
     {
-        VALUE parent = rb_funcall(self, rb_intern("superclass"), 0); // FIXME?
-        const RGObjClassInfo* cinfo = rbgobj_lookup_class(parent);
-        if (cinfo->klass != parent)
+        VALUE superclass = rb_funcall(self, rb_intern("superclass"), 0);
+        const RGObjClassInfo* cinfo = rbgobj_lookup_class(superclass);
+        if (cinfo->klass != superclass)
             rb_raise(rb_eTypeError, "super class must be registered to GLib");
         parent_type = cinfo->gtype;
     }

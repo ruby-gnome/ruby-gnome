@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2003/07/16 03:41:55 $
+  $Date: 2003/07/17 14:28:33 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -182,6 +182,7 @@ value_defaults(VALUE self, VALUE val)
     GValue tmp = {0,};
     gboolean result;
 
+    /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
     g_value_init(&tmp,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
     rbgobj_rvalue_to_gvalue(val, &tmp);
@@ -198,6 +199,7 @@ value_validate(self, value)
     GValue tmp = {0,};
     gboolean b;
 
+    /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
     g_value_init(&tmp,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
     rbgobj_rvalue_to_gvalue(value, &tmp);
@@ -220,6 +222,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 
     rb_scan_args(argc, argv, "21", &src, &src_type, &strict_validation);
 
+    /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
     g_value_init(&src_value, rbgobj_gtype_get(src_type));
     g_value_init(&dest_value,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));

@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 16:26:45 $
+  $Date: 2003/07/17 14:28:36 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -175,20 +175,33 @@ boxed_ruby_value_unref(VALUE val)
     }
 }
 
+struct transform_arg {
+    const GValue *src_value;
+    GValue       *dest_value;
+};
+
+static VALUE
+value_transform_ruby_any_impl(VALUE arg_)
+{
+  struct transform_arg* arg = (struct transform_arg*)arg_;
+    rbgobj_rvalue_to_gvalue(g_value_get_ruby_value(arg->src_value),
+                            arg->dest_value);
+    return Qnil;
+}
+
 static void
 value_transform_ruby_any(const GValue *src_value,
                          GValue       *dest_value)
 {
-    /* FIXME: use rb_rescue */
-    rbgobj_rvalue_to_gvalue(g_value_get_ruby_value(src_value),
-                            dest_value);
+    int state;
+    struct transform_arg arg = {src_value, dest_value};
+    rb_protect(&value_transform_ruby_any_impl, (VALUE)&arg, &state);
 }
 
 static void
 value_transform_any_ruby(const GValue *src_value,
                          GValue       *dest_value)
 {
-    /* FIXME: use rb_rescue */
     g_value_set_ruby_value(dest_value, GVAL2RVAL(src_value));
 }
 

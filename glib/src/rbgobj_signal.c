@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 16:26:45 $
+  $Date: 2003/07/17 14:28:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -45,59 +45,7 @@ rbgobj_get_signal_func(guint signal_id)
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
-static ID id_send;
-
-typedef struct _DispatchClosure DispatchClosure;
-
-struct _DispatchClosure
-{
-    GClosure closure;
-    ID method_id;
-};
-
-static void
-dispatch_closure_marshal(GClosure*       closure,
-                         GValue*         return_value,
-                         guint           n_param_values,
-                         const GValue*   param_values,
-                         gpointer        invocation_hint,
-                         gpointer        marshal_data)
-{
-    int i;
-    VALUE instance;
-    VALUE args = rb_ary_new2(n_param_values);
-    VALUE ret;
-
-    instance = GVAL2RVAL(param_values);
-    
-    rb_ary_store(args, 0, ID2SYM(((DispatchClosure*)closure)->method_id));
-    for (i = 1; i < n_param_values; i++)
-        rb_ary_store(args, i, GVAL2RVAL(&param_values[i]));
-
-    ret = rb_apply(instance, id_send, args);
-
-    if (return_value)
-        rbgobj_rvalue_to_gvalue(ret, return_value);
-}
-
-static GClosure*
-dispatch_closure_new(ID method_id)
-{
-    DispatchClosure* closure;
-
-    closure = (DispatchClosure*)g_closure_new_simple(sizeof(DispatchClosure), NULL);
-    closure->method_id = method_id;
-    g_closure_set_marshal((GClosure*)closure, &dispatch_closure_marshal);
-
-    return (GClosure*)closure;    
-}
-
-#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
-
-/**********************************************************************/
-
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
+// FIXME: use rb_protect
 static gboolean
 accumulator_func(GSignalInvocationHint* ihint,
                  GValue*                return_accu,
@@ -143,14 +91,21 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
                  rb_class2name(self));
 
     if (SYMBOL_P(signal_name))
-        signal_name = rb_str_new2(rb_id2name(SYM2ID(sig)));
+        signal_name = rb_str_new2(rb_id2name(SYM2ID(signal_name)));
     else
         StringValue(signal_name);
 
     {
+        VALUE factory;
+        VALUE proc;
         ID method_id;
+
         method_id = rb_to_id(rb_str_concat(rb_str_new2("do_"), signal_name));
-        class_closure = dispatch_closure_new(method_id);
+
+        factory = rb_eval_string("lambda{|mid| lambda{|obj,*args| obj.__send__(mid, *args) } }");
+        proc = rb_funcall(factory, rb_intern("call"), 1, ID2SYM(method_id));
+
+        class_closure = g_rclosure_new(proc, Qnil, NULL);
     }
 
     if (NIL_P(params)) {
@@ -304,51 +259,56 @@ gobj_sig_connect_after(argc, argv, self)
     return INT2FIX(i);
 }
 
-static VALUE
-emit_impl(self, signal_id, detail, args)
+struct emit_arg{
     VALUE self;
-    guint signal_id;
-    GQuark detail;
     VALUE args;
-{
+
     GSignalQuery query;
+    GQuark detail;
     GValueArray* instance_and_params;
-    GValue* params;
-    GValue return_value = {0,};
-    int i;
-    gboolean use_ret;
+};
 
-    g_signal_query(signal_id, &query);
+static VALUE
+emit_body(struct emit_arg* arg)
+{
+    g_value_init(arg->instance_and_params->values, G_TYPE_OBJECT);
+    rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
 
-    instance_and_params = g_value_array_new(1 + query.n_params);
-    params = instance_and_params->values + 1;
-
-    g_value_init(instance_and_params->values, G_TYPE_OBJECT);
-    rbgobj_rvalue_to_gvalue(self, instance_and_params->values);
-    for (i = 0; i < query.n_params; i++){
-        g_value_init(params + i, query.param_types[i]);
-        rbgobj_rvalue_to_gvalue(rb_ary_entry(args, i), params + i);
+    {
+        GValue* params = arg->instance_and_params->values + 1;
+        int i;
+        for (i = 0; i < arg->query.n_params; i++){
+            g_value_init(params + i, arg->query.param_types[i]);
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
+        }
     }
 
-    /* Should we use G_TYPE_IS_VALUE_TYPE(query.return_type)? */
-    use_ret = (query.return_type != G_TYPE_NONE);
+    {
+        gboolean use_ret = (arg->query.return_type != G_TYPE_NONE);
+        GValue return_value = {0,};
 
-    if (use_ret)
-        g_value_init(&return_value, query.return_type);
+        if (use_ret)
+            g_value_init(&return_value, arg->query.return_type);
 
-    g_signal_emitv(instance_and_params->values,
-                   signal_id, detail,
-                   (use_ret) ? &return_value : NULL);
+        g_signal_emitv(arg->instance_and_params->values,
+                       arg->query.signal_id, arg->detail,
+                       (use_ret) ? &return_value : NULL);
 
-    g_value_array_free(instance_and_params);
-
-    if (use_ret){
-        VALUE result = GVAL2RVAL(&return_value);
-        g_value_unset(&return_value);
-        return result;
-    } else {
-        return Qnil;
+        if (use_ret) {
+            VALUE ret = GVAL2RVAL(&return_value);
+            g_value_unset(&return_value);
+            return ret;
+        } else {
+            return Qnil;
+        }
     }
+}
+
+static VALUE
+emit_ensure(struct emit_arg* arg)
+{
+    g_value_array_free(arg->instance_and_params);
+    return Qnil;
 }
 
 static VALUE
@@ -357,12 +317,12 @@ gobj_sig_emit(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE sig, params;
+    VALUE sig;
     const char* sig_name;
     guint signal_id;
-    GQuark detail;
+    struct emit_arg arg;
 
-    rb_scan_args(argc, argv, "1*", &sig, &params);
+    rb_scan_args(argc, argv, "1*", &sig, &arg.args);
 
     if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
@@ -373,10 +333,19 @@ gobj_sig_emit(argc, argv, self)
 
     if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
-                             &signal_id, &detail, FALSE))        
+                             &signal_id, &arg.detail, FALSE))        
         rb_raise(rb_eArgError, "invalid signal \"%s\"", sig_name);
 
-    return emit_impl(self, signal_id, detail, params);
+    g_signal_query(signal_id, &arg.query);
+
+    if (arg.query.n_params != RARRAY(arg.args)->len)
+        rb_raise(rb_eArgError, "wrong number of arguments(%d for %d)",
+                 RARRAY(arg.args)->len + 1,
+                 arg.query.n_params + 1);
+
+    arg.instance_and_params = g_value_array_new(1 + arg.query.n_params);;
+    
+    return rb_ensure(emit_body, (VALUE)&arg, emit_ensure, (VALUE)&arg);
 }
 
 static VALUE
@@ -493,9 +462,6 @@ void	g_signal_chain_from_overridden	      (const GValue      *instance_and_param
 static void
 Init_signal_misc()
 {
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    id_send = rb_intern("__send__");
-#endif
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
 

@@ -1,3 +1,28 @@
+2003-07-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (rclosure_marshal): use rb_protect().
+
+	* src/rbgobj_valuetypes.c (value_transform_ruby_any): use rb_protect().
+
+	* src/rbgobject.c (rbgobj_gobject_new): use rb_ensure().
+
+	* src/rbgobj_signal.c (gobj_sig_emit): use rb_ensure().
+
+	* src/rbgobj_object.c (gobj_set_property):
+	call rbgobj_rvalue_to_gvalue() even if the argument is nil.
+
+	* src/rbgobj_signal.c: remove Dispatch Closure stuff.
+	use g_rclosure_new() instead.
+
+	* src/rbgobj_value.c (rbgobj_rvalue_to_gvalue): call #to_s only for
+	Symbol->G_TYPE_STEING conversion.
+
+	* src/rbgobject.c (rbgobj_gobject_initialize): check if the argument
+	has expected GType.
+
+	* src/rbgobject.c (rbgobj_get_gobject): raise TypeError instead of
+	ArgumentError.
+
 2003-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_boxed.c (boxed_to_ruby): convert NULL to nil.

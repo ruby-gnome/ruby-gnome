@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 02:29:47 $
+  $Date: 2003/07/17 14:28:35 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -14,7 +14,7 @@
 
 /**********************************************************************/
 
-static ID to_s;
+static ID id_to_s;
 static VALUE r2g_func_table;
 static VALUE g2r_func_table;
 
@@ -163,8 +163,9 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         return;
       case G_TYPE_STRING:
         {
-            VALUE str = rb_funcall(val, to_s, 0);
-            g_value_set_string(result, RVAL2CSTR(str));
+            if (SYMBOL_P(val))
+                val = rb_funcall(val, id_to_s, 0);
+            g_value_set_string(result, NIL_P(val) ? NULL : StringValuePtr(val));
             return;
         }
       case G_TYPE_OBJECT:
@@ -208,7 +209,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 
 void Init_gobject_gvalue()
 {
-    to_s = rb_intern("to_s");
+    id_to_s = rb_intern("to_s");
     r2g_func_table = rb_hash_new();
     g2r_func_table = rb_hash_new();
     rb_global_variable(&r2g_func_table);
