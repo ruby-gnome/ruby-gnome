@@ -14,6 +14,7 @@ EXPORTS
     gtk_accel_key_get_type
     gtk_notebookpage_get_type
     gtk_target_list_get_type
+    gtk_bindingset_get_type
     make_gdkevent
     notebookpage_copy
     rbgtk_atom2selectiondata

@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: kzys $
-  $Date: 2003/03/02 06:56:52 $
+  $Author: mutoh $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -153,13 +153,30 @@ treeview_move_column_after(self, column, base_column)
     return self;
 }
 
-/* XXXX
-   void        gtk_tree_view_set_column_drag_function
-   (GtkTreeView *tree_view,
-   GtkTreeViewColumnDropFunc func,
-   gpointer user_data,
-   GtkDestroyNotify destroy);
-*/
+static gboolean
+column_drop_func(treeview, column, prev_column, next_column, func)
+    GtkTreeView* treeview;
+    GtkTreeViewColumn* column;
+    GtkTreeViewColumn* prev_column;
+    GtkTreeViewColumn* next_column;
+    gpointer func;
+{
+    return RTEST(rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(treeview),
+                      GOBJ2RVAL(column), GOBJ2RVAL(prev_column), 
+                      GOBJ2RVAL(next_column)));
+}
+
+static VALUE
+treeview_set_column_drag_function(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_tree_view_set_column_drag_function(_SELF(self), 
+                                           (GtkTreeViewColumnDropFunc)column_drop_func,
+                                           (gpointer)func, NULL);
+    return self;
+}
 
 static VALUE
 treeview_scroll_to_point(self, x, y)
@@ -242,11 +259,27 @@ treeview_collapse_row(self, path)
                                       RVAL2TREEPATH(path)) ? Qtrue : Qfalse;
 }
 
-/* XXXX
-   void        gtk_tree_view_map_expanded_rows (GtkTreeView *tree_view,
-   GtkTreeViewMappingFunc func,
-   gpointer data);
-*/
+static void
+mapping_func(treeview, path, func)
+    GtkTreeView* treeview;
+    GtkTreePath* path;
+    gpointer func;
+{
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(treeview),
+               TREEPATH2RVAL(path));
+}
+
+static VALUE
+treeview_map_expanded_rows(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_tree_view_map_expanded_rows(_SELF(self), 
+                                    (GtkTreeViewMappingFunc)mapping_func,
+                                    (gpointer)func);
+    return self;
+}
 
 static VALUE
 treeview_row_expanded(self, path)
@@ -418,14 +451,38 @@ treeview_create_row_drag_icon(self, path)
 }
 
 /*
+  We don't need this.
   GtkTreeViewSearchEqualFunc gtk_tree_view_get_search_equal_func
   (GtkTreeView *tree_view);
-  void        gtk_tree_view_set_search_equal_func
-  (GtkTreeView *tree_view,
-  GtkTreeViewSearchEqualFunc search_equal_func,
-  gpointer search_user_data,
-  GtkDestroyNotify search_destroy);
 */
+
+static gboolean
+search_equal_func(model, column, key, iter, func)
+    GtkTreeModel* model;
+    gint column;
+    const gchar* key;
+    GtkTreeIter* iter;
+    gpointer func;
+{
+    iter->user_data3 = model;
+    return RTEST(rb_funcall((VALUE)func, id_call, 4, 
+                            GOBJ2RVAL(model), INT2NUM(column),
+                            CSTR2RVAL(key), ITR2RVAL(iter)));
+}
+
+static VALUE
+treeview_set_search_equal_func(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_tree_view_set_search_equal_func(_SELF(self),
+                                        (GtkTreeViewSearchEqualFunc)search_equal_func,
+                                        (gpointer)func, NULL);
+    return self;
+}
+
+
 
 /*
  * Optional Signals
@@ -456,6 +513,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "get_column", treeview_get_column, 1);
     rb_define_method(gTv, "columns", treeview_get_columns, 0);
     rb_define_method(gTv, "move_column_after", treeview_move_column_after, 2);
+    rb_define_method(gTv, "set_column_drag_function", treeview_set_column_drag_function, 0);
     rb_define_method(gTv, "scroll_to_point", treeview_scroll_to_point, 2);
     rb_define_method(gTv, "scroll_to_cell", treeview_scroll_to_cell, 5);
     rb_define_method(gTv, "set_cursor", treeview_set_cursor, 3);
@@ -465,6 +523,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
     rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
+    rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
     rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
     rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
     rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
@@ -481,6 +540,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "drag_dest_row", treeview_get_drag_dest_row, 0);
     rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
     rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
+    rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
     
     /* Constants */
     rb_define_const(gTv, "DROP_BEFORE", INT2NUM(GTK_TREE_VIEW_DROP_BEFORE));

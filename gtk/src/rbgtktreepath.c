@@ -3,8 +3,8 @@
 
   rbgtktreepath.c -
 
-  $Author: kzys $
-  $Date: 2003/03/02 06:58:46 $
+  $Author: mutoh $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -24,6 +24,9 @@ treepath_initialize(argc, argv, self)
     
     if (rb_scan_args(argc, argv, "01", &path) == 1) {
         widget = gtk_tree_path_new_from_string(RVAL2CSTR(path));
+        if (widget == NULL)
+            rb_raise(rb_eArgError, "Invalid path %s was passed.", RVAL2CSTR(path));
+
     }
     else {
         widget = gtk_tree_path_new();
@@ -153,7 +156,6 @@ Init_gtk_treepath()
 
     rb_define_method(gTreepath, "initialize", treepath_initialize, -1);
     rb_define_method(gTreepath, "to_str", treepath_to_string, 0);
-    rb_define_method(gTreepath, "to_s", treepath_to_string, 0);
     rb_define_method(gTreepath, "append_index", treepath_append_index, 1);
     rb_define_method(gTreepath, "prepend_index", treepath_prepend_index, 1);
     rb_define_method(gTreepath, "depth", treepath_get_depth, 0);

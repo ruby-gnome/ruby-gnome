@@ -1,3 +1,14 @@
+2003-07-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkselectiondata.c: Add Gtk::SelectionData#display.
+	* src/rbgtkliststore.c:  Gtk::ListStore#remove return true or false 
+	correctly in GTK+-2.2.
+	* src/rbgtktreeview.c: Add Gtk::TreeView#set_column_drag_function,
+	#map_expanded_rows, #set_search_equal_func.
+	* src/rbgtkclipboard.c: Fix segfault for Gtk::Clipboard#set_with_data
+	* src/rbgtktreeselection.c: Add Gtk::TreeSelection#set_select_function. 
+	* src/rbgtktreepath.c: Remove Gtk::TreePath#to_s. 
+
 2003-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkmain.c: fix segmentation fault caused by passing invalid

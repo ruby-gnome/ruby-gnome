@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2003/07/01 14:43:20 $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -72,21 +72,24 @@ clipboard_set_with_data(self, targets, get_proc, clear_proc)
     VALUE self, targets, get_proc, clear_proc;
 {
     const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
     return gtk_clipboard_set_with_data(_SELF(self), 
                                        gtargets,
                                        RARRAY(targets)->len,
                                        (GtkClipboardGetFunc)clipboard_get_func,
                                        (GtkClipboardClearFunc)clipboard_clear_func,
-                                       (gpointer)G_BLOCK_PROC()) ? Qtrue : Qfalse;
+                                       (gpointer)func) ? Qtrue : Qfalse;
 }
-#if 0
+/*
+Do not implement this. Use Gtk::Clipboard#set_with_data instead.
 gboolean    gtk_clipboard_set_with_owner    (GtkClipboard *clipboard,
                                              const GtkTargetEntry *targets,
                                              guint n_targets,
                                              GtkClipboardGetFunc get_func,
                                              GtkClipboardClearFunc clear_func,
                                              GObject *owner);
-#endif
+*/
 
 static VALUE
 clipboard_get_owner(self)

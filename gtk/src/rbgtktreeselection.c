@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -33,14 +33,36 @@ treeselection_get_mode(self)
     return INT2FIX(gtk_tree_selection_get_mode(_SELF(self)));
 }
 
-/*
-void        gtk_tree_selection_set_select_function
-                                            (GtkTreeSelection *selection,
-                                             GtkTreeSelectionFunc func,
-                                             gpointer data,
-                                             GtkDestroyNotify destroy);
+static gboolean
+selection_func(selection, model, path, path_currently_selected, func)
+    GtkTreeSelection* selection;
+    GtkTreeModel* model;
+    GtkTreePath* path;
+    gboolean path_currently_selected;
+    gpointer func;
+{
+    return RTEST(rb_funcall((VALUE)func, id_call, 4, 
+                            GOBJ2RVAL(selection),
+                            GOBJ2RVAL(model),
+                            TREEPATH2RVAL(path),
+                            path_currently_selected ? Qtrue : Qfalse));
+}
+
+static VALUE
+treeselection_set_select_function(self)
+    VALUE self;
+{
+    volatile VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_tree_selection_set_select_function(_SELF(self),
+                                    (GtkTreeSelectionFunc)selection_func,
+                                    (gpointer)func, NULL);
+    return self;
+}
+
+/* We don't need this(?)
 gpointer    gtk_tree_selection_get_user_data
-                                            (GtkTreeSelection *selection);
+(GtkTreeSelection *selection);
 */
 
 static VALUE
@@ -62,7 +84,7 @@ treeselection_get_selected(self)
 }
 
 static void
-treeselection_foreach_func(model, path, iter, data)
+foreach_func(model, path, iter, data)
     GtkTreeModel* model;
     GtkTreePath* path;
     GtkTreeIter* iter;
@@ -79,7 +101,7 @@ treeselection_selected_foreach(self)
 {
     volatile VALUE func = G_BLOCK_PROC();
     gtk_tree_selection_selected_foreach(_SELF(self), 
-                                        (GtkTreeSelectionForeachFunc)treeselection_foreach_func, 
+                                        (GtkTreeSelectionForeachFunc)foreach_func, 
                                         (gpointer)func);
     return self;
 }
@@ -162,6 +184,7 @@ Init_gtk_treeselection()
     
     rb_define_method(gTs, "set_mode", treeselection_set_mode, 1);
     rb_define_method(gTs, "mode", treeselection_get_mode, 0);
+    rb_define_method(gTs, "set_select_function", treeselection_set_select_function, 0);
     rb_define_method(gTs, "tree_view", treeselection_get_tree_view, 0);
     rb_define_method(gTs, "selected", treeselection_get_selected, 0);
     rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);

@@ -3,8 +3,8 @@
 
   rbgtktreerowreference.c -
 
-  $Author: sakai $
-  $Date: 2003/03/14 03:12:22 $
+  $Author: mutoh $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -37,6 +37,8 @@ treerowref_initialize(argc, argv, self)
     ref = gtk_tree_row_reference_new(GTK_TREE_MODEL(RVAL2GOBJ(model)), 
                                      RVAL2TREEPATH(path));
   }
+  if (ref == NULL)
+      rb_raise(rb_eArgError, "Invalid arguments were passed.");
   
   G_INITIALIZE(self, ref);
   return Qnil;

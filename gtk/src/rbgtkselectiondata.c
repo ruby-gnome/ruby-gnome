@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2003/05/24 11:32:12 $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -103,14 +103,14 @@ gtkselectiondata_data(self)
     return rb_str_new(_SELF(self)->data, _SELF(self)->length);
 }
 
-/*
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 gtkselectiondata_display(self)
     VALUE self;
 {
     return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
 }
-*/
+#endif
 
 /* Instance Methods */
 static VALUE
@@ -197,9 +197,9 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "type", gtkselectiondata_type, 0);
     rb_define_method(gSelectionData, "format", gtkselectiondata_format, 0);
     rb_define_method(gSelectionData, "data", gtkselectiondata_data, 0);
-/*
+#if GTK_MINOR_VERSION >= 2
     rb_define_method(gSelectionData, "display", gtkselectiondata_display, 0);
-*/
+#endif
 
     rb_define_method(gSelectionData, "set", gtkselectiondata_set, -1);
     rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);

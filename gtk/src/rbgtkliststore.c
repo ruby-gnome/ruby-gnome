@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2003/05/27 10:59:22 $
+  $Date: 2003/07/14 18:12:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -76,14 +76,9 @@ lstore_set_value(self, iter, column, value)
 }
 
 /*
-static VALUE
-lstore_set(self, iter, tv, column1, column2)
-    VALUE self, iter, tv, column1, column2;
-{
-}
   void        gtk_tree_store_set (GtkTreeStore *tree_store,
-                                               GtkTreeIter *iter,
-					                                                    ...);
+  GtkTreeIter *iter,
+  ...);
 
   void        gtk_tree_store_set_valist       (GtkTreeStore *tree_store,
   GtkTreeIter *iter,
@@ -94,13 +89,12 @@ static VALUE
 lstore_remove(self, iter)
     VALUE self, iter;
 {
-    /* XXX This method should return boolean.
-       but at least v2.0.6, it returns nothing(void).
-    return gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
-    */
+#if GTK_MINOR_VERSION >= 2
+    return gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+#else
     gtk_list_store_remove(_SELF(self), RVAL2ITR(iter));
-
     return Qtrue;
+#endif
 }
 
 static VALUE
