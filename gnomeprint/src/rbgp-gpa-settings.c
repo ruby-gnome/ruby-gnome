@@ -29,11 +29,12 @@ gp_gpa_settings_initialize(int argc, VALUE *argv, VALUE self)
   VALUE model, name, id;
   rb_scan_args(argc, argv, "21", &model, &name, &id);
 
-  if (TYPE(model)) {
+  /*
+  if (NIL_P(model)) {
     model = name;
     name = id;
     G_INITIALIZE(self, gpa_settings_new_empty(RVAL2CSTR(name), RVAL2CSTR(id)));
-  } else if (NIL_P(id)) {
+  } else */ if (NIL_P(id)) {
     VALUE tree = id;
     G_INITIALIZE(self, gpa_settings_new_from_model_and_tree(RVAL2GOBJ(model),
                                                             RVAL2GOBJ(tree)));

@@ -8,6 +8,9 @@ Requirements
 
     Ruby:               http://www.ruby-lang.org/
     libgnomeprint [*]:  http://www.gnome.org/projects/gnome-print/
+    Ruby/GLib2:         http://ruby-gnome2.sourceforge.net/
+    Ruby/Pango:         http://ruby-gnome2.sourceforge.net/
+    Ruby/Libart2:       http://ruby-gnome2.sourceforge.net/
 
     [*]: 2.8 or later is required.
 

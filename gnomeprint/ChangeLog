@@ -1,3 +1,13 @@
+2005-01-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: updated dependency.
+
+	* README: ditto.
+
+	* src/rbgp-gpa-settings.c (gp_gpa_settings_initialize): `model' is
+	  always required because gpa_settings_new_empty()'s
+	  implementation doesn't exist.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
