@@ -1,3 +1,7 @@
+2004-03-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/bindings.rb: Modified.
+
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextbuffer.c: Gtk::TextBuffer#insert_with_tags, 
