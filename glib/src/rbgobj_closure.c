@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2003/09/20 01:27:39 $
+  $Author: mutoh $
+  $Date: 2005/01/29 11:41:17 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -102,7 +102,7 @@ rclosure_marshal(GClosure*       closure,
     arg.invocation_hint = invocation_hint;
     arg.marshal_data    = marshal_data;
 
-    rb_protect((VALUE (*)())&rclosure_marshal_body, (VALUE)&arg, &state);
+    rb_protect((VALUE (*)_((VALUE)))rclosure_marshal_body, (VALUE)&arg, &state);
 
     if (state){
         /* FIXME */

@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:20:52 $
+  $Date: 2005/01/29 11:41:17 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 
@@ -75,7 +75,7 @@ rbglib_m_log_set_handler(self, domain, levels)
 {
     guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                          NUM2INT(levels),
-                                         rbglib_log_handler, (gpointer)self);
+                                         (GLogFunc)rbglib_log_handler, (gpointer)self);
     return UINT2NUM(handler_id);
 }
 

@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: mutoh $
-  $Date: 2004/08/18 16:42:35 $
+  $Date: 2005/01/29 11:41:17 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -75,7 +75,8 @@ rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
 
     ret = g_spawn_async_with_pipes(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                                    gargv, genvp, NUM2INT(flags),
-                                   child_setup, (gpointer)func,
+                                   (GSpawnChildSetupFunc)child_setup, 
+                                   (gpointer)func,
                                    &child_pid, 
                                    &standard_input, &standard_output,
                                    &standard_error, &err);
@@ -137,7 +138,7 @@ rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
 
     ret = g_spawn_async(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                         gargv, genvp, NUM2INT(flags),
-                        child_setup, (gpointer)func,
+                        (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                         &child_pid, &err);
 
     if (! ret){
@@ -198,7 +199,7 @@ rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
 
     ret = g_spawn_sync(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                        gargv, genvp, NUM2INT(flags),
-                       child_setup, (gpointer)func,
+                       (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                        &standard_output, &standard_error,
                        &exit_status, &err);
 

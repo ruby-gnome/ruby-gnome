@@ -32,6 +32,7 @@ EXPORTS
 	rbgobj_get_flags
 	rbgobj_register_g2r_func
 	rbgobj_register_r2g_func
+	rbgobj_register_class
 	rbgobj_register_property_getter
 	rbgobj_register_property_setter
 	rbgobj_set_signal_func

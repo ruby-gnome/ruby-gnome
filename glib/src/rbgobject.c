@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:21:01 $
+  $Date: 2005/01/29 11:41:17 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -132,7 +132,7 @@ rbgobj_free(gobj_holder* holder)
             if (holder->cinfo && holder->cinfo->free)
                 holder->cinfo->free(holder->gobj);
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
-            g_object_weak_unref(holder->gobj, rbgobj_weak_notify, holder);
+            g_object_weak_unref(holder->gobj, (GWeakNotify)rbgobj_weak_notify, holder);
         }
         g_object_unref(holder->gobj);
     }
@@ -173,7 +173,7 @@ rbgobj_gobject_initialize(obj, cobj)
     holder->destroyed = FALSE;
 
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
-    g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
+    g_object_weak_ref((GObject*)cobj, (GWeakNotify)rbgobj_weak_notify, holder);
 
     {
         GType t1 = G_TYPE_FROM_INSTANCE(cobj);
@@ -416,7 +416,7 @@ _params_setup(arg, param_setup_arg)
 static VALUE
 gobj_new_body(struct param_setup_arg* arg)
 {
-    rb_iterate(&_each_with_index, arg->params_hash, _params_setup, (VALUE)arg);
+    rb_iterate((VALUE(*)_((VALUE)))_each_with_index, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
     return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
                                 arg->param_size, arg->params);
 }

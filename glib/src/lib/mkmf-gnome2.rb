@@ -57,10 +57,10 @@ module PKGConfig
     if check_version?(pkg, major, minor, micro)
       STDOUT.print "yes\n"
       libs = libs_only_l(pkg)
-      ldflags = libs(pkg)
-      ldflags = (Shellwords.shellwords(ldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
+      dldflags = libs(pkg)
+      dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
       $libs   += ' ' + libs
-      $LDFLAGS += ' ' + ldflags
+      $DLDFLAGS += ' ' + dldflags
       $CFLAGS += ' ' + cflags(pkg)
       true
     else
@@ -137,8 +137,8 @@ def check_win32()
   nil
 end
 
-
-def set_output_lib(filename)
+def set_output_lib(target_name)
+  filename = "libruby-#{target_name}.a"
   if /cygwin|mingw/ =~ RUBY_PLATFORM
     if RUBY_VERSION > "1.8.0"
       $DLDFLAGS << ",--out-implib=#{filename}" if filename
@@ -152,35 +152,46 @@ def set_output_lib(filename)
   end
 end
 
+def setup_win32(target_name)
+  check_win32
+  set_output_lib(target_name)
+end
+
+#add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
+def add_depend_package(target_name, target_srcdir, topdir)
+  $CFLAGS += " -I" + File.join(topdir, target_srcdir)
+
+  if /cygwin|mingw/ =~ RUBY_PLATFORM
+    $libs << " -lruby-#{target_name}"
+    $LDFLAGS << " -L#{topdir}/#{target_srcdir}"
+  elsif /mswin32/ =~ RUBY_PLATFORM
+    $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
+    $libs << " #{target_name}.lib"
+  end
+end
+
 $CPPFLAGS << " -I$(sitearchdir) "
 
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
-=begin
   if /mswin32/ =~ RUBY_PLATFORM
-    mfile.print <<END
+    mfile.print <<MSWIN32_END 
 
 all:
-		@cd src
-		@nmake -nologo
-
+#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo all\n	@cd ..\n"}.join('')}
 install:
-		@cd src
-		@nmake -nologo install DESTDIR=$(DESTDIR)
-
+#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo install DESTDIR=$(DESTDIR)\n	@cd ..\n"}.join('')}
 site-install:
-		@cd src
-		@nmake -nologo site-install DESTDIR=$(DESTDIR)
-
+#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo site-install DESTDIR=$(DESTDIR)\n	@cd ..\n"}.join('')}
 clean:
-		@cd src
-		@nmake -nologo clean
-		@cd ..
-		@-rm -f Makefile extconf.h conftest.*
-		@-rm -f *.lib *~
-END
+#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo clean\n	@cd ..\n"}.join('')}	@if exist Makefile del Makefile
+	@if exist extconf.h del extconf.h
+	@if exist conftest.* del conftest.*
+	@if exist *.lib del *.lib
+	@if exist *~ del *~
+	@if exist mkmf.log del mkmf.log 
+MSWIN32_END
   else
-=end
     mfile.print <<END
 all:
 #{sub_dirs.map{|d| "	@cd #{d}; make all\n"}.join('')}
@@ -196,7 +207,7 @@ distclean:	clean
 	@rm -f Makefile extconf.h conftest.*
 	@rm -f core *~ mkmf.log
 END
-#  end
+  end
   mfile.close
 end
 

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:21:11 $
+  $Date: 2005/01/29 11:41:17 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -606,7 +606,7 @@ Init_gobject_gobject()
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
 #else
-    rb_define_alloc_func(cGObject, gobj_s_allocate);
+    rb_define_alloc_func(cGObject, (VALUE(*)_((VALUE)))gobj_s_allocate);
 #endif
     rb_define_singleton_method(cGObject, "new!", gobj_s_gobject_new, -1);
 

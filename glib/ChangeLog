@@ -1,3 +1,11 @@
+2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_message.c, rbglib_spawn.c, rbgobject.c, rbgobj_boxed.c, 
+	rbgobj_closure.c,rbgobj_enums.c,rbgobj_object.c, rbgobj_type.c, 
+	src/lib/mkmf-gnome2.rb: Support MS VC++.
+	* src/lib/mkmf-gnome2.rb: Added setup_win32, add_depend_package.
+	* src/glib.def: Added rbgobj_register_class.
+
 2005-01-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Remove $KCODE="U". Reported by Dafydd Harries.

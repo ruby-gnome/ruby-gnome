@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Date: 2005/01/29 11:41:17 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -235,7 +235,7 @@ Init_gobject_gboxed()
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(gBoxed, "allocate", rbgobj_boxed_s_allocate, 0);
 #else
-    rb_define_alloc_func(gBoxed, rbgobj_boxed_s_allocate);
+    rb_define_alloc_func(gBoxed, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(gBoxed, "new", generic_s_new, -1);

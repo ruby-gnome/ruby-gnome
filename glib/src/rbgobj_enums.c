@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Date: 2005/01/29 11:41:17 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
@@ -106,7 +106,7 @@ rbgobj_enum_add_constants(VALUE mod, GType enum_type,
         const GEnumValue* value = &gclass->values[i];
 
         if (strncmp(value->value_name, strip_prefix, prefix_len)) {
-            g_warning("\%s\" doesn't have prefix \"%s\"",
+            g_warning("\"%s\" doesn't have prefix \"%s\"",
                       value->value_name, strip_prefix);
         } else {
             const char* name = value->value_name + prefix_len;
@@ -132,7 +132,7 @@ rbgobj_flags_add_constants(VALUE mod, GType flags_type,
         const GFlagsValue* value = &gclass->values[i];
 
         if (strncmp(value->value_name, strip_prefix, prefix_len)) {
-            g_warning("\%s\" doesn't have prefix \"%s\"",
+            g_warning("\"%s\" doesn't have prefix \"%s\"",
                       value->value_name, strip_prefix);
         } else {
             const char* name = value->value_name + prefix_len;

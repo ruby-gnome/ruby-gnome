@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Date: 2005/01/29 11:41:17 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -720,7 +720,7 @@ Init_instantiatable()
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cInstantiatable, "allocate", instantiatable_s_allocate, 0);
 #else
-    rb_define_alloc_func(cInstantiatable, instantiatable_s_allocate);
+    rb_define_alloc_func(cInstantiatable, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(cInstantiatable, "new", &generic_s_new, -1);
