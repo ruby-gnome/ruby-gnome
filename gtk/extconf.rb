@@ -44,7 +44,6 @@ end
 #
 gdkincl = nil
 tmpincl = $CFLAGS.gsub(/-D\w+/, '').split('-I') + ['/usr/include']
-p tmpincl
 tmpincl.each do |i|
   i.strip!
   

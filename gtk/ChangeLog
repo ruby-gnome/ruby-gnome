@@ -1,3 +1,6 @@
+Fri May 24 02:34:04 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* extconf.rb: Same as Ruby-GNOME CVS. Code cleanup.
+
 Fri May 24 02:08:00 2002 Masahiro Sakai <zvm01052@nifty.ne.jp>
 	* src/init.c src/rbgdkimage.c src/rbgtk.c src/rbgtkcontainer.c
 		src/rbgtkeditable.c src/rbgtkitem.c src/rbgtkitemfactory.c: 
