@@ -4,7 +4,7 @@
   rbpango.h -
 
   $Author: mutoh $
-  $Date: 2004/10/27 16:52:03 $
+  $Date: 2004/10/27 16:59:52 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -29,7 +29,7 @@ RUBY_PANGO_VAR VALUE mPango;
 #define PANGO_TYPE_ITEM (pango_item_get_type())
 #define PANGO_TYPE_ANALYSIS (pango_analysis_get_type())
 #define PANGO_TYPE_LOG_ATTR (pango_log_attr_get_type())
-#if ! HAVE_PANGO_LAYOUT_ITER_GET_TYPE
+#ifndef PANGO_TYPE_LAYOUT_ITER
 #define PANGO_TYPE_LAYOUT_ITER (pango_layout_iter_get_type())
 #endif
 #define PANGO_TYPE_LAYOUT_LINE (pango_layout_line_get_type())
