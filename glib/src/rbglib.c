@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/09 17:28:35 $
+  $Author: sakai $
+  $Date: 2002/11/06 10:07:14 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -42,9 +42,10 @@ void Init_glib2()
     rb_eval_string(
         "module GLib\n"
         "  def __add_one_arg_setter(klass)\n"
-        "    klass.instance_methods.each do |m|\n"
-        "      if /^set_(.*)/ =~ m and klass.instance_method(m).arity == 1\n"
-        "        klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\n\")\n"
+        "    ary = klass.instance_methods\n"
+        "    ary.each do |m|\n"
+        "      if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and klass.instance_method(m).arity == 1\n"
+        "        klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
         "      end\n"
         "    end\n"
         "  end\n"

@@ -1,3 +1,7 @@
+2002-11-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c (G_DEF_SETTERS): don't override existent methods.
+
 2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgutil.c, src/rbgutil.h: re-implement rbgutil_raise_gerror as
