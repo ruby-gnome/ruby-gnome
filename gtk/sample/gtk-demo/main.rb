@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: main.rb,v 1.2 2003/05/18 17:02:41 mutoh Exp $
 
 require 'gtk2'
 
@@ -144,15 +144,18 @@ module Demo
 
 	## TODO: Using WeakRef?
 	begin
-	  require(iter.get_value(FILENAME_COLUMN))
-
-	  klass = eval(iter.get_value(FUNC_COLUMN))
-	  if @instances[klass]
-	    @instances[klass].show
-	  else
-	    @instances[klass] = klass.new
-	    @instances[klass].show_all
-	  end
+          lib = iter.get_value(FILENAME_COLUMN)
+          if lib
+            require(lib) 
+            
+            klass = eval(iter.get_value(FUNC_COLUMN))
+            if @instances[klass]
+              @instances[klass].show
+            else
+              @instances[klass] = klass.new
+              @instances[klass].show_all
+            end
+          end
 	rescue LoadError
 	  ;
 	end

@@ -1,3 +1,14 @@
+2003-05-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrcstyle.c: Added.
+	* src/rbgtkrc.c: Add Gtk::RC.get_style_by_paths, .reparse_all_for_settings, 
+	.add_default_file, .default_files, .set_default_files, .find_module_in_path, 
+	.module_dir, .im_module_path, .im_module_file, .theme_dir
+
+2003-05-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksettings.c: Added.
+
 2003-05-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Remove *_event methods. Use GLib::Instantiatable#signal_emit. 
@@ -112,6 +123,10 @@
 2003-04-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/*.rb: Improve some samples.
+
+2003-03-26  Nikolai :: lone-star :: Weibull <lone-star@home.se>
+
+	* src/rbgtktreeviewcolumn.c: Added.
 
 2003-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
