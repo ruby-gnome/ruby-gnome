@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/11/20 16:39:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -177,6 +177,36 @@ treeselection_select_range(self, start_path, end_path)
     return self;
 }
 
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+treeselection_get_selected_rows(self)
+    VALUE self;
+{
+    GtkTreeModel* model;
+    GList* list = gtk_tree_selection_get_selected_rows(_SELF(self), &model);
+    VALUE ret = GLIST2ARY2(list, GTK_TYPE_TREE_PATH);
+    g_list_foreach(list, (GFunc)gtk_tree_path_free, (gpointer)NULL);
+    g_list_free(list);
+    return ret;
+}
+
+static VALUE
+treeselection_count_selected_rows(self)
+    VALUE self;
+{
+    return INT2NUM(gtk_tree_selection_count_selected_rows(_SELF(self)));
+}
+
+static VALUE
+treeselection_unselect_range(self, start_path, end_path)
+    VALUE self, start_path, end_path;
+{
+    gtk_tree_selection_unselect_range(_SELF(self), RVAL2TREEPATH(start_path), 
+                                      RVAL2TREEPATH(end_path));
+    return self;
+}
+#endif
+
 void
 Init_gtk_treeselection()
 {
@@ -197,6 +227,11 @@ Init_gtk_treeselection()
     rb_define_method(gTs, "select_all", treeselection_select_all, 0);
     rb_define_method(gTs, "unselect_all", treeselection_unselect_all, 0);
     rb_define_method(gTs, "select_range", treeselection_select_range, 2);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(gTs, "selected_rows", treeselection_get_selected_rows, 0);
+    rb_define_method(gTs, "count_selected_rows", treeselection_count_selected_rows, 0);
+    rb_define_method(gTs, "unselect_range", treeselection_unselect_range, 2);
+#endif
 
     G_DEF_SETTERS(gTs);
 }

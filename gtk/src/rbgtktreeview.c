@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mpovolny $
-  $Date: 2003/10/11 09:15:26 $
+  $Author: mutoh $
+  $Date: 2003/11/20 16:39:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -533,6 +533,18 @@ treeview_signal_func(num, values)
     return rb_ary_new3(3, GOBJ2RVAL(view), ITR2RVAL(iter), GVAL2RVAL(&values[2]));
 }
 
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
+    VALUE self, path, focus_column, focus_cell, start_editing;
+{
+    gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2TREEPATH(path),
+                             TREEVIEW_COL(focus_column), GTK_CELL_RENDERER(RVAL2GOBJ(focus_cell)), 
+                             RTEST(start_editing));
+    return self;
+}
+#endif
+
 void 
 Init_gtk_treeview()
 {
@@ -578,6 +590,9 @@ Init_gtk_treeview()
     rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
     rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
     rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(gTv, "set_cursor_on_cell", treeview_set_cursor_on_cell, 4);
+#endif
     
     /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);

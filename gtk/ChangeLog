@@ -1,3 +1,11 @@
+2003-11-21  Matthew Berg <galt@gothpoodle.com>
+
+	* src/rbgtktreeselection.c: Gtk::TreeSelection#selected_rows,
+   #count_selected_rows, #unselect_range.
+	* src/rbgtktreeiter.c: Add Gtk::TreeIter#to_str
+	* src/rbgtktreeview.c: Add Gtk::TreeView#set_cursor_on_cell.
+	* src/rbgtktreeviewcolumn.c: Add Gtk::TreeViewColumn#focus_cell.
+
 2003-11-20  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkevent.c: Fix compilation problems for GTK+-2.0.x.
