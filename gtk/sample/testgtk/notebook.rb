@@ -1,7 +1,7 @@
 =begin header
 
   notebook.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: notebook.rb,v 1.5 2002/11/12 16:36:18 mutoh Exp $
+  $Id: notebook.rb,v 1.6 2002/12/22 13:34:43 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -275,7 +275,7 @@ class NotebookSample < SampleWindow
   end
 
   def page_switch(notebook, page, page_num)
-    old_page_num = notebook.current_page
+    old_page_num = notebook.page
     return if (page_num == old_page_num)
     set_page_pixmaps(notebook, page_num, @book_open, @book_open_mask)
     if (old_page_num != -1)

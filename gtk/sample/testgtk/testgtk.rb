@@ -3,7 +3,7 @@
 =begin header
 
   testgtk.rb - testgtk.c rewritten in Ruby/GTK2
-  $Id: testgtk.rb,v 1.6 2002/11/12 16:36:18 mutoh Exp $
+  $Id: testgtk.rb,v 1.7 2002/12/22 13:34:43 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -134,8 +134,10 @@ def create_main_window
   window.set_default_size(200, 400)
   window.move(20, 20)
 
-  window.signal_connect("destroy") do Gtk.main_quit end
-  window.signal_connect("delete_event") do false end
+  window.signal_connect("delete_event") do 
+    Gtk.main_quit 
+    true 
+  end
 
   box1 = Gtk::VBox.new(false, 0)
   window.add(box1)

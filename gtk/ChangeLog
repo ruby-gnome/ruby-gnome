@@ -1,5 +1,10 @@
 2002-12-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/testgtk/testgtk.rb: Fix to call Gtk::main_quit twice.
+	* src/rbgtkmain.c: Improve behavior of Gtk::main_quit. 
+	* sample/testgtk/notebook.rb: Bugfix to use Gtk::Notebook#current_page => Gtk::Notebook#page.
+	* sample/testgtk/wmhints.rb: Change Gdk::Bitmap to Gdk::Pixmap.
+	* src/rbgdkpixmap.c: Remove Gdk::Bitmap. Use Gdk::Pixmap(depth = 1) instead. 
 	* src/rbgtktextview.c: Fix typo of TextView#place_cursor_onscreen,
 	Bugs item #657117 by Maicon Rodrigues.
 

@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: sakai $
-  $Date: 2002/12/11 17:23:02 $
+  $Author: mutoh $
+  $Date: 2002/12/22 13:34:44 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -124,8 +124,13 @@ static VALUE
 gtk_m_main_quit(self)
     VALUE self;
 {
+    VALUE thread = rb_ary_pop(rbgtk_main_threads);
     gtk_main_quit();
-    rb_thread_wakeup(rb_ary_pop(rbgtk_main_threads));
+    if (NIL_P(thread)){
+        rb_warning("Gtk.main_quit was called incorrectly.");
+    } else {
+        rb_thread_wakeup(thread);
+    }
     return Qnil;
 }
 

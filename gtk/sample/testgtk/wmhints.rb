@@ -1,13 +1,13 @@
 =begin header
 
   wmhints.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: wmhints.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
+  $Id: wmhints.rb,v 1.4 2002/12/22 13:34:44 mutoh Exp $
 =end
 
 require 'sample'
 
-unless defined? Gdk::Bitmap::create_from_xbm()
-  class << Gdk::Bitmap
+unless defined? Gdk::Pixmap::create_from_xbm()
+  class << Gdk::Pixmap
     def create_from_xbm(window, fname)
       open(fname) do |fh|
 	while line = fh.gets
