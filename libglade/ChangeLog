@@ -1,6 +1,7 @@
 2003-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* lib/libglade2.rb: Fix a bug for GladeXML#connect.
+	Reported by Margin Povolny.
 	* bin/ruby-glade-create-template: ditto.
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
