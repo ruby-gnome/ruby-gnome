@@ -1,6 +1,6 @@
 2003-08-19  Laurent Sansonetti  <laurent@datarescue.be>
 
-	* src/rbgst*.c: Fixed comments.
+	* src/rbgst*.c: Fixed comments + removed obsolete code.
 
 2003-08-15  Laurent Sansonetti  <laurent@datarescue.be>
 
