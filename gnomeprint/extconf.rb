@@ -5,33 +5,12 @@ extconf.rb for Ruby/Libgda extention library
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
-unless PKGConfig.respond_to?(:or_newer?)
-  module PKGConfig
-    module_function
-    def or_newer?(pkg, version)
-      STDOUT.print("checking for #{pkg} version (>= #{version})... ")
-      STDOUT.flush
-      mod_version = `#{@@cmd} --modversion #{pkg}`.chomp
-      result = (mod_version.split(".") <=> version.split(".")) >= 0
-      result_message = result ? "yes" : "no"
-      STDOUT.print "#{result_message}\n"
-      result
-    end
-  end
-end
+pkg_infos   = [
+  ['libgnomeprint-2.2', [2, 8]],
+]
 
-pkgnames   = ['libgnomeprint-2.2']
-
-require_version = {
-  "libgnomeprint-2.2" => "2.8",
-}
-
-pkgnames.each do |pkgname|
-	PKGConfig.have_package(pkgname) or exit 1
-  if require_version.has_key?(pkgname) and
-      !PKGConfig.or_newer?(pkgname, require_version[pkgname])
-    exit 1
-  end
+pkg_infos.each do |name, version|
+	PKGConfig.have_package(name, *version) or exit 1
 end
 
 check_win32

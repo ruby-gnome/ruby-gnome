@@ -1,3 +1,10 @@
+2004-10-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/gnomeprint2.rb: called GLib::Log.set_log_domain.
+
+	* extconf.rb: used PKGConfig.have_pacakge instead of
+	  PKGConfig.or_newer?.
+
 2004-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gnome-print-config.c: PrintConfig.new ->
