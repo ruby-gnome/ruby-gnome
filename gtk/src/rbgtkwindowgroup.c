@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkwindowgroup.c -
 
-  $Author: sakai $
-  $Date: 2002/08/01 17:46:19 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:06:03 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -18,7 +18,7 @@ static VALUE
 rbgwingrp_initialize(self)
 	VALUE self;
 {
-	RBGOBJ_INITIALIZE(self, gtk_window_group_new());
+	G_INITIALIZE(self, gtk_window_group_new());
 	return Qnil;
 }
 

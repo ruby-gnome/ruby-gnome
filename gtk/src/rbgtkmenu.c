@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:22 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -79,7 +79,7 @@ menu_popup(self, pshell, pitem, func, button, activate_time)
     if (!NIL_P(func)) {
 		pfunc = menu_pos_func;
 		data = (gpointer)func;
-		add_relative(self, func);
+		G_RELATIVE(self, func);
     }
     if (!NIL_P(pshell)){
 		gpshell = GTK_WIDGET(RVAL2GOBJ(pshell));

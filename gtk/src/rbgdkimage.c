@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 13:07:00 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -36,7 +36,7 @@ static VALUE
 gdkimage_initialize(self, type, visual, w, h)
     VALUE self, type, visual, w, h;
 {
-    RBGOBJ_INITIALIZE(self, gdk_image_new((GdkImageType)NUM2INT(type),
+    G_INITIALIZE(self, gdk_image_new((GdkImageType)NUM2INT(type),
                                           GDK_VISUAL(RVAL2GOBJ(visual)),
                                           NUM2INT(w), NUM2INT(h)));
     return Qnil;

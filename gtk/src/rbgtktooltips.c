@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktooltips.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 13:07:01 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 2002 Masao Mutoh
 

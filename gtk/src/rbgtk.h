@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/11 16:35:58 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -68,10 +68,6 @@ extern VALUE mEditable;
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
-
-#define add_relative rbgobj_add_relative
-#define add_relative_removable rbgobj_add_relative_removable
-#define remove_relative rbgobj_remove_relative
 
 /*
  * for gdk

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:19 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -69,7 +69,7 @@ timeout_add(self, interval)
     id = INT2FIX(gtk_timeout_add(NUM2INT(interval),
                                  (GtkFunction)exec_interval,
                                  (gpointer)func));
-    add_relative_removable(self, func, id_relative_callbacks, id);
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
 }
 
@@ -78,7 +78,7 @@ timeout_remove(self, id)
     VALUE self, id;
 {
     gtk_timeout_remove(NUM2INT(id));
-    remove_relative(self, id_relative_callbacks, id);
+    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
     return Qnil;
 }
 
@@ -104,7 +104,7 @@ input_add(self, filedescriptor, gdk_input_condition)
                                (GdkInputCondition)NUM2INT(gdk_input_condition),
                                (GdkInputFunction)exec_input,
                                (gpointer)func));
-    add_relative_removable(self, func, id_relative_callbacks, id);
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
 }
 
@@ -113,7 +113,7 @@ input_remove(self, id)
     VALUE self, id;
 {
     gdk_input_remove(NUM2INT(id));
-    remove_relative(self, id_relative_callbacks, id);
+    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
     return Qnil;
 }
 
@@ -126,7 +126,7 @@ idle_add(self)
 
     func = rb_f_lambda();
     id = INT2FIX(gtk_idle_add((GtkFunction)exec_interval, (gpointer)func));
-    add_relative_removable(self, func, id_relative_callbacks, id);
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
 }
 
@@ -135,7 +135,7 @@ idle_remove(self, id)
     VALUE self, id;
 {
     gtk_idle_remove(NUM2INT(id));
-    remove_relative(self, id_relative_callbacks, id);
+    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
     return Qnil;
 }
 

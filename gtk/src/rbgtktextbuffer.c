@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:34 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -22,7 +22,7 @@ txt_initialize(argc, argv, self)
 {
     VALUE table;
     rb_scan_args(argc, argv, "01", &table);
-    RBGOBJ_INITIALIZE(
+    G_INITIALIZE(
         self, gtk_text_buffer_new(NIL_P(table) ? NULL : GTK_TEXT_TAG_TABLE(RVAL2GOBJ(table))));
     return Qnil;
 }

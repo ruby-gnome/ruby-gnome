@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:42:55 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,8 +19,8 @@ static VALUE
 gaccelgrp_initialize(self)
     VALUE self;
 {
-    RBGOBJ_INITIALIZE(self, gtk_accel_group_new());
-	return Qnil;
+    G_INITIALIZE(self, gtk_accel_group_new());
+    return Qnil;
 }
 
 static VALUE

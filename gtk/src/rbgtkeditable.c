@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkeditable.c -
 
-  $Author: sakai $
-  $Date: 2002/08/05 17:52:00 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:42:56 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,

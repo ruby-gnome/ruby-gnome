@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 13:07:00 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,7 +20,7 @@ static VALUE
 gdkpmap_initialize(self, win, w, h, depth)
     VALUE self, win, w, h, depth;
 {
-	RBGOBJ_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
+	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
 										  NUM2INT(w), NUM2INT(h), 
 										  NUM2INT(depth)));
 	return Qnil;
@@ -125,7 +125,7 @@ static VALUE
 gdkbmap_initialize(self, win, w, h)
     VALUE self, win, w, h;
 {
-	RBGTK_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
+	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
 										  NUM2INT(w), NUM2INT(h), 1));
 	return Qnil;
 }

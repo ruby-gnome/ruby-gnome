@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/

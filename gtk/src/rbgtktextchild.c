@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktextchild.c -
 
-  $Author: sakai $
-  $Date: 2002/08/07 08:35:05 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/

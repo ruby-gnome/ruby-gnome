@@ -4,7 +4,7 @@
   rbgdkgeometry.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 14:24:50 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -45,8 +45,8 @@ static VALUE
 geo_initialize(self)
     VALUE self;
 {
-	GdkGeometry g;
-	RBGOBJ_INITIALIZE(self, &g);
+    GdkGeometry g;
+    G_INITIALIZE(self, &g);
     return Qnil;
 }
 

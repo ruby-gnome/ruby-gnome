@@ -4,7 +4,7 @@
   rbgtkrequisition.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 2002  Masao Mutoh
 
@@ -27,8 +27,8 @@ grequisition_initialize(self, w, h)
 
     r.width = NUM2INT(w);
     r.height = NUM2INT(h);
-	RBGOBJ_INITIALIZE(self, &r);
-	return Qnil;
+    G_INITIALIZE(self, &r);
+    return Qnil;
 }
 
 static VALUE

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:42:55 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -28,9 +28,9 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
     VALUE obj;
     GtkObject *gtkobj;
 {
-	gtkobj = gtk_object_ref(gtkobj);
+    gtkobj = gtk_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
-    RBGOBJ_INITIALIZE(obj, gtkobj);
+    G_INITIALIZE(obj, gtkobj);
 }
 
 void

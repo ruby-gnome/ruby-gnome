@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 2002 Masao Mutoh
 

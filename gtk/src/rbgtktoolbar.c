@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktoolbar.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:32 $
+  $Author: mutoh $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -65,7 +65,7 @@ tbar_append_item(self, text, ttext, ptext, icon, func)
     if (NIL_P(func)) {
 		func = rb_f_lambda();
     }
-    add_relative(self, func);
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_append_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
 								  NIL_P(text)?NULL:STR2CSTR(text),
 								  NIL_P(ttext)?NULL:STR2CSTR(ttext),
@@ -85,7 +85,7 @@ tbar_prepend_item(self, text, ttext, ptext, icon, func)
     if (NIL_P(func)) {
 		func = rb_f_lambda();
     }
-    add_relative(self, func);
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_prepend_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
 								   NIL_P(text)?NULL:STR2CSTR(text),
 								   NIL_P(ttext)?NULL:STR2CSTR(ttext),
@@ -105,7 +105,7 @@ tbar_insert_item(self, text, ttext, ptext, icon, func, pos)
     if (NIL_P(func)) {
 		func = rb_f_lambda();
     }
-    add_relative(self, func);
+    G_RELATIVE(self, func);
     ret = gtk_toolbar_insert_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
 								  NIL_P(text)?NULL:STR2CSTR(text),
 								  NIL_P(ttext)?NULL:STR2CSTR(ttext),
@@ -185,7 +185,7 @@ tbar_append_element(self, type, widget, text, ttext, ptext, icon)
 
     if (rb_block_given_p()) {
 		func = rb_f_lambda();
-		add_relative(self, func);
+		G_RELATIVE(self, func);
 		callback = exec_callback;
     }
     ret = gtk_toolbar_append_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
@@ -210,7 +210,7 @@ tbar_prepend_element(self, type, widget, text, ttext, ptext, icon)
 
     if (rb_block_given_p()) {
 		func = rb_f_lambda();
-		add_relative(self, func);
+		G_RELATIVE(self, func);
 		callback = exec_callback;
     }
     ret = gtk_toolbar_prepend_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
@@ -235,7 +235,7 @@ tbar_insert_element(self, type, widget, text, ttext, ptext, icon, position)
 
     if (rb_block_given_p()) {
 		func = rb_f_lambda();
-		add_relative(self, func);
+		G_RELATIVE(self, func);
 		callback = exec_callback;
     }
     ret = gtk_toolbar_insert_element(GTK_TOOLBAR(RVAL2GOBJ(self)),

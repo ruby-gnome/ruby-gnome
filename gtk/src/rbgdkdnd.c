@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -85,7 +85,7 @@ static VALUE
 gdkdragcontext_initialize(self)
     VALUE self;
 {   
-	RBGOBJ_INITIALIZE(self, gdk_drag_context_new());
+    G_INITIALIZE(self, gdk_drag_context_new());
     return Qnil;
 }
 

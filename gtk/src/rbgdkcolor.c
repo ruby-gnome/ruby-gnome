@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 04:44:30 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,13 +20,13 @@ gdkcolor_initialize(self, red, green, blue)
     VALUE self;
     VALUE red, green, blue;
 {
-	GdkColor c;
+    GdkColor c;
     c.pixel = 0;
     c.red = NUM2INT(red);
     c.green = NUM2INT(green);
     c.blue = NUM2INT(blue);
 
-	RBGOBJ_INITIALIZE(self, &c);
+    G_INITIALIZE(self, &c);
 
     return Qnil;
 }

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktextmark.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:35 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/

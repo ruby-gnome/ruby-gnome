@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 04:44:30 $
+  $Date: 2002/09/12 19:06:01 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
@@ -31,7 +31,7 @@ gdkcursor_initialize(argc, argv, self)
 		   				NUM2INT(x), NUM2INT(y));
     }
 
-	RBGOBJ_INITIALIZE(self, cursor);
+	G_INITIALIZE(self, cursor);
 
 	return Qnil;
 }

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/12 19:06:02 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -114,7 +114,7 @@ ifact_create_item(argc, argv, self)
     entry->callback = item_exec_callback_wrap;
     if (menuitem_type_check(entry->item_type) != 0) {
         action = rb_rescue((VALUE(*)())rb_f_lambda, 0, NULL, 0);
-        add_relative(self, action);
+        G_RELATIVE(self, action);
         entry->callback_action = action;
     }
   
@@ -175,7 +175,7 @@ ifact_create_items(argc, argv, self)
                 entries[i].callback = items_exec_callback_wrap;
             }
             action = rb_ary_new3(4, rb_func, rb_data, self, rb_path);
-            add_relative(self, action);
+            G_RELATIVE(self, action);
             entries[i].callback_action = action;
         }
     }
