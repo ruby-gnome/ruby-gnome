@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/20 16:58:54 $
+  $Author: sakai $
+  $Date: 2003/07/26 12:09:46 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -100,11 +100,16 @@ rclosure_marshal(GClosure*       closure,
     rb_protect((VALUE (*)())&rclosure_marshal_body, (VALUE)&arg, &state);
 
     if (state){
+        /* FIXME */
+#if 0
         char buf[BUFSIZ];
         snprintf(buf, BUFSIZ, 
                  "%s:%d warning: unexpected jump occured in GClosure invocation\n",
                  ruby_sourcefile, ruby_sourceline);
         rb_write_deferr(buf);
+#else
+        rb_jump_tag(state);
+#endif
     }
 }
 

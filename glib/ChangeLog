@@ -1,3 +1,8 @@
+2003-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c (rclosure_marshal): don't stop jumps.
+	This is a temporary solution for the Ruby-GNOME2 0.6 release.
+
 2003-07-22  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: add CBOOL2RVAL, RVAL2CBOOL.
