@@ -79,6 +79,8 @@ VALUE get_value_from_gno_obj(GtkObject*);
 GnomeDesktopEntry* get_dentry(VALUE);
 VALUE make_dentry(GnomeDesktopEntry*);
 
+void rbgnome_register_citem_type(VALUE, GtkType);
+
 void Init_gtk_dial();
 void Init_gtk_clock();
 void Init_gtk_pixmap_menu_item();

@@ -126,12 +126,10 @@ class CanvasSampleArrowhead < Gtk::VBox
 	  item.set("fill_color", nil)
 	end
       when Gdk::BUTTON_PRESS
-	#fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
-	fleur = nil
+	fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
 	item.grab(Gdk::POINTER_MOTION_MASK | Gdk::BUTTON_RELEASE_MASK,
 		  fleur,
 		  event.time)
-	#fleur.destroy()
       when Gdk::BUTTON_RELEASE
 	item.ungrab(event.time)
       end

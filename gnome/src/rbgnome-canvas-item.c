@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas-item.c,v 1.4 2002/08/06 12:45:23 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.5 2002/08/17 17:30:34 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -278,8 +278,8 @@ citem_grab(self, event_mask, cursor, etime)
     return NUM2INT(
             gnome_canvas_item_grab(GNOME_CANVAS_ITEM(get_gobject(self)),
                                    NUM2INT(event_mask),
-                                   NIL_P(cursor) ? get_gdkcursor(cursor) : NULL,
-                                   NIL_P(etime)  ? NUM2INT(etime) : 0));
+                                   get_gdkcursor(cursor),
+                                   NIL_P(etime)  ? 0 : NUM2INT(etime)));
 }
 
 static VALUE
@@ -287,7 +287,7 @@ citem_ungrab(self, etime)
     VALUE self, etime;
 {
     gnome_canvas_item_ungrab(GNOME_CANVAS_ITEM(get_gobject(self)),
-			     NIL_P(etime) ? NUM2INT(etime) : 0);
+			     NIL_P(etime) ? 0 : NUM2INT(etime));
     return Qnil;
 }
 
@@ -445,4 +445,13 @@ Init_gnome_canvas_item()
 
     /* child init */
     Init_gnome_canvas_group();
+
+    rbgnome_register_citem_type(gnoCanvasLine, GNOME_TYPE_CANVAS_LINE);
+    rbgnome_register_citem_type(gnoCanvasPolygon, GNOME_TYPE_CANVAS_POLYGON);
+    rbgnome_register_citem_type(gnoCanvasRect, GNOME_TYPE_CANVAS_RECT);
+    rbgnome_register_citem_type(gnoCanvasEllipse, GNOME_TYPE_CANVAS_ELLIPSE);
+    rbgnome_register_citem_type(gnoCanvasText, GNOME_TYPE_CANVAS_TEXT);
+    rbgnome_register_citem_type(gnoCanvasImage, GNOME_TYPE_CANVAS_IMAGE);
+    rbgnome_register_citem_type(gnoCanvasWidget, GNOME_TYPE_CANVAS_WIDGET);
+    rbgnome_register_citem_type(gnoCanvasGroup, GNOME_TYPE_CANVAS_GROUP);
 }

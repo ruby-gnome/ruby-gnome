@@ -12,12 +12,10 @@ class CanvasSamplePrimitives < Gtk::VBox
 	else
 	  @x = item_x;
 	  @y = item_y;
-	  #TODO? fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
-	  fleur = nil
+	  fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
 	  item.grab(Gdk::POINTER_MOTION_MASK | Gdk::BUTTON_RELEASE_MASK,
 		    fleur,
 		    event.time)
-	  #TODO? fleur.destroy()
 	  @dragging = true
 	end
       when 2
