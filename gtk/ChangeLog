@@ -1,5 +1,6 @@
 2002-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* doc/: Remove files.
 	* src/rbgtktreeselection.c: Fix typo for Gtk::TreeSelection#iter_selected?. 
 	Apply G_DEF_SETTERS2.
 	* src/rbgtktreeviewcolumn.c: Apply G_DEF_SETTERS2. Change parameter of 
