@@ -4,14 +4,15 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/07/03 07:46:56 $
+  $Date: 2004/08/14 07:00:50 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
 ************************************************/
 #include "rbgdk-pixbuf.h"
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
+static ID id_pixdata;
 
 /****************************************************/
 /* The GdkPixbuf Structure */
@@ -82,19 +83,6 @@ get_option(self, key)
     return ret ? CSTR2RVAL(ret) : Qnil;
 }
 
-static VALUE
-get_single_pixel(self, rx, ry)
-    VALUE self, rx, ry;
-{
-        //Could probably be optimized..
-        guint x = NUM2INT(rx);
-        guint y = NUM2INT(ry);
-        guint r = gdk_pixbuf_get_rowstride(_SELF(self));
-        guint n = gdk_pixbuf_get_n_channels(_SELF(self));
-        guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
-        return rb_str_new(pixels + (y * r + x * n), n);
-}
-
 /****************************************************/
 /* File opening */
 /* Image Data in Memory */
@@ -106,64 +94,104 @@ initialize(argc, argv, self)
 {
     GdkPixbuf* buf;
     GError* error = NULL;
-    VALUE arg1, arg2, arg3, arg4, arg5;
-    gchar** data;
-    int i;
+    VALUE arg1, arg2, arg3, arg4, arg5, arg6, arg7;
 
-    rb_scan_args(argc, argv, "14", &arg1, &arg2, &arg3, &arg4, &arg5);
+    rb_scan_args(argc, argv, "16", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7);
 
-    if (argc == 5){
-        buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
-                             RTEST(arg2), NUM2INT(arg3),
-                             NUM2INT(arg4), NUM2INT(arg5));
+    if (argc == 7){
+        buf = gdk_pixbuf_new_from_data(RVAL2CSTR(arg1), 
+                                       RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
+                                       RTEST(arg3),   NUM2INT(arg4),
+                                       NUM2INT(arg5), NUM2INT(arg6),
+                                       NUM2INT(arg7), NULL, NULL);
         if (buf == NULL){
             rb_gc();
-            buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
-                                 RTEST(arg2), NUM2INT(arg3),
-                                 NUM2INT(arg4), NUM2INT(arg5));
+            buf = gdk_pixbuf_new_from_data(RVAL2CSTR(arg1), 
+                                           RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
+                                           RTEST(arg3),   NUM2INT(arg4),
+                                           NUM2INT(arg5), NUM2INT(arg6),
+                                           NUM2INT(arg7), NULL, NULL);
             if (buf == NULL)
                 rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
         }
-    } else {
-        if (TYPE(arg1) == T_STRING) {
-            buf = gdk_pixbuf_new_from_file(RSTRING(arg1)->ptr, &error);
+    } else if (argc == 5){
+        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
+            buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
+                                           NUM2INT(arg2), NUM2INT(arg3), 
+                                           NUM2INT(arg4), NUM2INT(arg5));
             if (buf == NULL){
-                error = NULL;
                 rb_gc();
-                buf = gdk_pixbuf_new_from_file(RSTRING(arg1)->ptr, &error);
+                buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
+                                               NUM2INT(arg2), NUM2INT(arg3), 
+                                               NUM2INT(arg4), NUM2INT(arg5));
                 if (buf == NULL)
-                    RAISE_GERROR(error);
+                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
             }
-        } else if (TYPE(arg1) == T_ARRAY) {
-            data = ALLOCA_N(char*, RARRAY(arg1)->len);
-            for (i=0; i < RARRAY(arg1)->len; i++) {
-		data[i] = RVAL2CSTR(RARRAY(arg1)->ptr[i]);
-            }
-            buf = gdk_pixbuf_new_from_xpm_data((const char**)data);
+        } else if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_COLORSPACE))){
+            buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
+                                 RTEST(arg2), NUM2INT(arg3),
+                                 NUM2INT(arg4), NUM2INT(arg5));
             if (buf == NULL){
                 rb_gc();
-                buf = gdk_pixbuf_new_from_xpm_data((const char**)data);
+                buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
+                                     RTEST(arg2), NUM2INT(arg3),
+                                     NUM2INT(arg4), NUM2INT(arg5));
                 if (buf == NULL)
                     rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
             }
         } else {
-            rb_raise(rb_eArgError, "Wrong type of 1st arguments");
+            rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
+    } else if (argc == 2){
+        int i;
+        int len = RARRAY(arg1)->len; 
+        guint8 *gstream = g_new(guint8, len);
+        for (i = 0; i < len; i++){
+            gstream[i] = (guint8)NUM2UINT(RARRAY(arg1)->ptr[i]);
+        }      
+        buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
+        if (buf == NULL){
+            rb_gc();
+            buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
+            if (buf == NULL)
+                rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+        }
+        /* need to manage the returned value */
+        rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
+    } else if (argc == 1){
+        if (TYPE(arg1) == T_STRING) {
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+            if (buf == NULL){
+                error = NULL;
+                rb_gc();
+                buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+                if (buf == NULL)
+                    RAISE_GERROR(error);
+            }
+        } else if (TYPE(arg1) == T_ARRAY) {
+            int i;
+            gchar** data = ALLOCA_N(gchar*, RARRAY(arg1)->len);
+            for (i=0; i < RARRAY(arg1)->len; i++) {
+		data[i] = RVAL2CSTR(RARRAY(arg1)->ptr[i]);
+            }
+            buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
+            if (buf == NULL){
+                rb_gc();
+                buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
+                if (buf == NULL)
+                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+            }
+        } else {
+            rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
+        }
+    } else {
+        rb_raise(rb_eArgError, "Wrong number of arguments");
     }
     
     G_INITIALIZE(self, buf);
     return Qnil;
 }
 
-static VALUE
-new_subpixbuf(self, src_x, src_y, width, height)
-    VALUE self, src_x, src_y, width, height;
-{
-    return GOBJ2RVAL(gdk_pixbuf_new_subpixbuf(_SELF(self), 
-                                              NUM2INT(src_x), NUM2INT(src_y), 
-                                              NUM2INT(width), NUM2INT(height)));
-}
-  
 static VALUE
 copy(self)
     VALUE self;
@@ -386,6 +414,9 @@ Init_gdk_pixbuf2()
 {
     VALUE mGdk = rb_define_module("Gdk");
     VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
+
+     id_pixdata = rb_intern("pixdata");
+   
     /*
     gdk_rgb_init();*/ /* initialize it anyway */
     
@@ -432,7 +463,6 @@ Init_gdk_pixbuf2()
      * File Loading, Image Data in Memory
      */
     rb_define_method(gdkPixbuf, "initialize", initialize, -1);
-    rb_define_method(gdkPixbuf, "get_subpixbuf", new_subpixbuf, 4);
     rb_define_method(gdkPixbuf, "dup", copy, 0);
 
     /*
@@ -447,7 +477,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "scale!", scale, -1);
     rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
     rb_define_method(gdkPixbuf, "composite!", composite, -1);
-    rb_define_method(gdkPixbuf, "get_single_pixel", get_single_pixel, 2);
+
     /* GdkInterpType */
     G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", gdkPixbuf);
     G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_INTERP_TYPE, "GDK_");

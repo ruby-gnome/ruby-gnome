@@ -3,8 +3,8 @@
 
   rbgdk-pixdata.c -
 
-  $Author: sakai $
-  $Date: 2003/02/13 08:19:53 $
+  $Author: mutoh $
+  $Date: 2004/08/14 07:00:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -14,9 +14,11 @@
 #define _SELF(s) ((GdkPixdata*)(RVAL2BOXED(s, GDK_TYPE_PIXDATA)))
 #define PIXDATA2RVAL(pix) (BOXED2RVAL(pix, GDK_TYPE_PIXDATA))
 
+static ID id_pixdata;
+
 /*****************************************/
 GdkPixdata*
-gdk_pixdata_copy (const GdkPixdata* src)
+gdk_pixdata_copy(const GdkPixdata* src)
 {
   GdkPixdata* data;
   g_return_val_if_fail (src != NULL, NULL);
@@ -41,13 +43,17 @@ pixdata_s_from_pixbuf(self, pixbuf, use_rle)
     VALUE self, pixbuf, use_rle;
 {
     GdkPixdata pixdata;
-    gpointer ret = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RTEST(use_rle));
-    /* What should we return as this gpointer value? */
-    return rb_ary_new3(2, PIXDATA2RVAL(&pixdata), use_rle ? rbgobj_ptr_new(G_TYPE_POINTER, ret) : Qnil);
+    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RTEST(use_rle));
+    VALUE ret = PIXDATA2RVAL(&pixdata);
+    if (use_rle){
+        /* need to manage the returned value */
+        rb_ivar_set(ret, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, rle_data));
+    }
+    return ret;
 }
 
 static VALUE
-pixdata_pixbuf(self, copy_pixels)
+pixdata_to_pixbuf(self, copy_pixels)
     VALUE self, copy_pixels;
 {
     GError* error = NULL;
@@ -57,7 +63,6 @@ pixdata_pixbuf(self, copy_pixels)
     return GOBJ2RVAL(ret);
 }
 
-/* This may be broken. */
 static VALUE
 pixdata_serialize(self)
     VALUE self;
@@ -72,7 +77,6 @@ pixdata_serialize(self)
     return ary;
 }
 
-/* This may be broken. */
 static VALUE
 pixdata_s_deserialize(self, stream)
     VALUE self, stream;
@@ -84,13 +88,17 @@ pixdata_s_deserialize(self, stream)
     gint i, len;
 
     len = RARRAY(stream)->len;
-    gstream = ALLOCA_N(guint8, len);
+    gstream = g_new(guint8, len);
+    //   gstream = ALLOCA_N(guint8, len);
     for (i = 0; i < len; i++){
-        gstream[i] = (guint8)NUM2INT(RARRAY(stream)->ptr[i]);
+        gstream[i] = (guint8)NUM2UINT(RARRAY(stream)->ptr[i]);
     }
     ret = gdk_pixdata_deserialize(&pixdata, len, gstream, &error);
 
-    if (!ret) RAISE_GERROR(error);
+    /* need to manage the returned value */
+    rb_ivar_set(ret, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
+
+    if (ret != TRUE) RAISE_GERROR(error);
 
     return PIXDATA2RVAL(&pixdata);
 }
@@ -157,8 +165,7 @@ pixdata_pixel_data(self)
 
     VALUE ary = rb_ary_new2(_SELF(self)->length);
     for (i = 0; i < _SELF(self)->length; i++) {
-        rb_ary_push(ary, INT2NUM((gint)ret));
-        ret++;
+        rb_ary_push(ary, UINT2NUM(ret[i]));
     }
     return ary;
 }
@@ -169,9 +176,11 @@ Init_gdk_pixdata(VALUE mGdk)
 {
     VALUE pixdata = G_DEF_CLASS(GDK_TYPE_PIXDATA, "Pixdata", mGdk);    
 
+    id_pixdata = rb_intern("pixdata");
+
     rb_define_singleton_method(pixdata, "from_pixbuf", pixdata_s_from_pixbuf, 2);
     rb_define_singleton_method(pixdata, "deserialize", pixdata_s_deserialize, 1);
-    rb_define_method(pixdata, "pixbuf", pixdata_pixbuf, 1);
+    rb_define_method(pixdata, "to_pixbuf", pixdata_to_pixbuf, 1);
     rb_define_method(pixdata, "serialize", pixdata_serialize, 0);
     rb_define_method(pixdata, "to_csource", pixdata_to_csource, 2);
     rb_define_method(pixdata, "magic", pixdata_magic, 0);

@@ -1,3 +1,15 @@
+2004-08-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Remove Gdk::Pixbuf.new_subpixbuf and merge it to 
+	Gdk::Pixbuf.new. 
+	* sample/inline.rb, pixdata.rb: Added.
+
+2004-08-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixdata.c: Rename Gdk::Pixdata#pixbuf to Gdk::Pixdata#to_pixbuf.
+	Fix a bug of Gdk::Pixdata.deserialize, Gdk::Pixdata#pixel_data.
+	Fix a memory leak of Gdk::Pixdata.from_pixbuf.
+
 2004-07-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Remove Gdk::Pixbuf::VERSION which causes a segfault
