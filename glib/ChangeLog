@@ -1,3 +1,7 @@
+2002-10-17  KUBO Takehiro  <kubo@jiubao.org>
+
+	* rbgobj_object.c (gobj_set_property, gobj_get_property): fix a bug.
+
 2002-10-14  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (GLib::Object.property): raise exception if the

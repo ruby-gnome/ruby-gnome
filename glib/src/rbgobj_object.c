@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2002/10/14 14:49:55 $
+  $Author: tkubo $
+  $Date: 2002/10/17 14:47:55 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -198,7 +198,7 @@ gobj_set_property(self, prop_name, val)
                                        INT2FIX(pspec->owner_type));
             if (!NIL_P(table)){
                 VALUE obj = rb_hash_aref(table, rb_str_new2(name));
-                if (obj)
+                if (!NIL_P(obj))
                     Data_Get_Struct(obj, void, setter);
             }
         }
@@ -245,7 +245,7 @@ gobj_get_property(self, prop_name)
                                        INT2FIX(pspec->owner_type));
             if (!NIL_P(table)){
                 VALUE obj = rb_hash_aref(table, rb_str_new2(name));
-                if (obj)
+                if (!NIL_P(obj))
                     Data_Get_Struct(obj, void, getter);
             }
         }
