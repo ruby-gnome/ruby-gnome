@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: sakai $
-  $Date: 2003/03/14 03:55:44 $
+  $Date: 2003/03/19 18:38:28 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -22,8 +22,6 @@
 #include <gtk/gtk.h>
 
 #include <signal.h>
-
-#undef G_THREADS_ENABLED
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
