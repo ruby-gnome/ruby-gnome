@@ -1,6 +1,7 @@
 2003-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gtk-demo/appwindow.rb: Fix a bug for creating Toolbar.
+	* src/rbgdkpixmap.c: Fix warning.
 
 2003-03-21  Masao Mutoh <oolbab@highway.ne.jp>
 
