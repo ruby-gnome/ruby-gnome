@@ -12,7 +12,7 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package('gthread-2.0')
 pkgname= 'gtk+-2.0'
-PKGConfig.have_package(pkgname) or exit
+PKGConfig.have_package(pkgname) or exit 1
 check_win32
 
 STDOUT.print("checking for target... ")

@@ -7,7 +7,7 @@ require 'mkmf-gnome2'
 
 pkgname   = 'gstreamer-0.6'
 
-PKGConfig.have_package(pkgname) or exit
+PKGConfig.have_package(pkgname) or exit 1
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src'].map{|d|

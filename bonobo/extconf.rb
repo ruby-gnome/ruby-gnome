@@ -10,7 +10,7 @@ require 'mkmf-gnome2'
 #
 
 (PKGConfig.have_package('libbonobo-2.0') and
- PKGConfig.have_package('libbonoboui-2.0')) or exit
+ PKGConfig.have_package('libbonoboui-2.0')) or exit 1
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX

@@ -8,7 +8,7 @@ require 'mkmf-gnome2'
 pkgnames   = ['gnome-vfs-2.0', 'gnome-vfs-module-2.0']
 
 pkgnames.each do |pkgname|
-	PKGConfig.have_package(pkgname) or exit
+	PKGConfig.have_package(pkgname) or exit 1
 end
 
 check_win32

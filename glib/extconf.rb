@@ -6,7 +6,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('gobject-2.0') or exit
+PKGConfig.have_package('gobject-2.0') or exit 1
 check_win32
 
 set_output_lib('libruby-glib2.a')

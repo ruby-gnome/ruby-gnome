@@ -1,3 +1,7 @@
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+                                                                                
+   * extconf.rb: Exit with 1 when the package is not found.
+
 2003-08-25  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgst.h, src/rbgstplugin.c, src/rbgstpluginfeature.c: 

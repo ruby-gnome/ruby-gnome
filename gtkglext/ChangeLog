@@ -1,3 +1,7 @@
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+                                                                                
+   * extconf.rb: Exit with 1 when the package is not found.
+
 2003-08-25 Vincent Isambart <isambart@netcourrier.com>
 
 	* src/rbgtkwidget.c: Added default parameters and a rgbobj_get_enum to

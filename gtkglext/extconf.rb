@@ -6,7 +6,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
 pkgname = 'gtkglext-1.0'
-PKGConfig.have_package(pkgname) or exit
+PKGConfig.have_package(pkgname) or exit 1
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|

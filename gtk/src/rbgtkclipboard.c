@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: sakai $
-  $Date: 2003/07/18 13:41:40 $
+  $Author: mutoh $
+  $Date: 2003/08/27 17:48:05 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -40,14 +40,16 @@ clipboard_initialize(argc, argv, self)
     return Qnil;
 }
 
-#if GTK_MINOR_VERSION >= 2
 static VALUE
 clipboard_get_display(self)
     VALUE self;
 {
+#if GTK_MINOR_VERSION >= 2
     return GOBJ2RVAL(gtk_clipboard_get_display(_SELF(self)));
-}
+#else
+	 return Qnil;
 #endif
+}
 
 static void
 clipboard_get_func(clipboard, selection_data, info, func)

@@ -1,7 +1,7 @@
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbpanel-applet.c: Rewritten.
-	* extconf.rb: Rewritten.
+   * extconf.rb: Exit with 1 when the package is not found.
 	
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 

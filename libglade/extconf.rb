@@ -6,7 +6,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('libglade-2.0') or exit
+PKGConfig.have_package('libglade-2.0') or exit 1
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX

@@ -1,3 +1,7 @@
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+                                                                                
+   * extconf.rb: Exit with 1 when the package is not found.
+
 2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-pixmap-entry.c: Add Gnome::PixmapEntry#set_preview. 

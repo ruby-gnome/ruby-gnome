@@ -1,6 +1,6 @@
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
-
-	* extconf.rb: Revised.
+                                                                                
+   * extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

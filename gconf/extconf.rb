@@ -7,7 +7,7 @@ require 'mkmf-gnome2'
 
 pkgname   = 'gconf-2.0'
 
-PKGConfig.have_package(pkgname) or exit
+PKGConfig.have_package(pkgname) or exit 1
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX

@@ -10,7 +10,7 @@ require 'mkmf-gnome2'
 # detect GTK+ configurations
 #
 
-PKGConfig.have_package('libgnomecanvas-2.0') or exit
+PKGConfig.have_package('libgnomecanvas-2.0') or exit 1
 check_win32
 
 have_func('gnome_canvas_set_center_scroll_region')
