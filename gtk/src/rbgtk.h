@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/05/16 07:21:17 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -118,6 +118,11 @@ extern void rbgtkcontainer_register_child_property_setter(GType gtype,
 extern void rbgtkcontainer_register_child_property_getter(GType gtype, 
                                                           const char* prop_name, 
                                                           GValueToRValueFunc func);
+
+/*
+ * Dialog
+ */
+extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
 
 /*
  * for gdk

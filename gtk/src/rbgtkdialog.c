@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2004/05/16 07:21:17 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,14 +38,15 @@ dialog_add_button(self, button_text, response_id)
                                            NUM2INT(response_id)));
 }
 
-static VALUE
-dialog_add_buttons_internal(self, button_ary)
+VALUE
+rbgtk_dialog_add_buttons_internal(self, button_ary)
     VALUE self, button_ary;
 {
     int i;
     GObject* obj = RVAL2GOBJ(self);
     g_object_freeze_notify(obj);
     for (i = 0; i < RARRAY(button_ary)->len; i++) {
+        Check_Type(RARRAY(RARRAY(button_ary)->ptr[i]), T_ARRAY);
         dialog_add_button(self, RARRAY(RARRAY(button_ary)->ptr[i])->ptr[0],
                           RARRAY(RARRAY(button_ary)->ptr[i])->ptr[1]);
     }
@@ -61,7 +62,7 @@ dialog_add_buttons(argc, argv, self)
 {
     VALUE button_ary;
     rb_scan_args(argc, argv, "*", &button_ary);
-    dialog_add_buttons_internal(self, button_ary);
+    rbgtk_dialog_add_buttons_internal(self, button_ary);
     return self;
 }    
 
@@ -92,7 +93,7 @@ dialog_initialize(argc, argv, self)
             gtk_dialog_set_has_separator(dialog, FALSE);
 
         RBGTK_INITIALIZE(self, dialog);
-        dialog_add_buttons_internal(self, button_ary);
+        rbgtk_dialog_add_buttons_internal(self, button_ary);
     } else {
         rb_raise(rb_eArgError, "invalid argument number");
     }

@@ -1,3 +1,15 @@
+2004-05-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/filechooser.rb: Added (Original code from Seiya Nishizawa).
+	* src/rbgtk.h, gtk2.def: Add rbgtk_dialog_add_buttons_internal 
+	as an external function.
+	* src/rbgtkdialog.c: ditto.
+	* src/rbgtkfilechooser.c, rbgtkfilefilter.c, rbgtkfilechooserdialog.c: Modified.
+
+2004-05-16  Seiya Nishizawa  <seiya@kugi.kyoto-u.ac.jp>
+	
+	* src/rbgtkfilechooser.c, rbgtkfilefilter.c, rbgtkfilechooserdialog.c: Added. 
+
 2004-05-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeymap.c: Add Gdk::Keymap.for_display.

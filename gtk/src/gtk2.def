@@ -28,3 +28,4 @@ EXPORTS
     rbgtk_register_treeiter_set_value_func
     rbgtk_tree_row_reference_get_type DATA
     rbgtk_text_appearance_get_type DATA
+    rbgtk_dialog_add_buttons_internal
