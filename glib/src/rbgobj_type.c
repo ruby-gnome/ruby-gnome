@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 06:35:14 $
+  $Date: 2003/07/22 04:02:22 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -54,7 +54,7 @@ get_superclass(gtype)
       case G_TYPE_OBJECT:
         return cInstantiatable;
       case G_TYPE_BOXED:
-        return rb_cData;
+        return rb_cObject;
       case G_TYPE_POINTER:
 #ifdef RBGOBJ_USE_DLPTR
         return rb_cDLPtrData;
@@ -257,6 +257,27 @@ type_inspect(self)
     g_free(str);
 
     return result;
+}
+
+static VALUE
+type_compare(self, other)
+    VALUE self, other;
+{
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+        return Qnil;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+
+        if (a==b)
+            return INT2FIX(0);
+        else if (g_type_is_a(a,b))
+            return INT2FIX(-1);
+        else if (g_type_is_a(b,a))
+            return INT2FIX(1);
+        else
+            return Qnil;
+    }
 }
 
 static VALUE
@@ -533,12 +554,6 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
     rb_ary_push(ary, c);
 }
 
-#define _register_fundamental_klass_to_gtype(klass, gtype) \
-    rbgobj_register_class(klass, gtype, TRUE, FALSE)
-
-#define _register_fundamental_gtype_to_klass(gtype,klass) \
-    rbgobj_register_class(klass, gtype, FALSE, TRUE)
-
 static void
 Init_type()
 {
@@ -549,6 +564,7 @@ Init_type()
     rb_define_alias(CLASS_OF(rbgobj_cType), "[]", "new");
     rb_define_method(rbgobj_cType, "initialize", type_initialize, 1);
     rb_define_method(rbgobj_cType, "inspect", type_inspect, 0);
+    rb_define_method(rbgobj_cType, "<=>", type_compare, 1);
     rb_define_method(rbgobj_cType, "==", type_eq, 1);
     rb_define_method(rbgobj_cType, "<=", type_lt_eq, 1);
     rb_define_method(rbgobj_cType, ">=", type_gt_eq, 1);
@@ -609,48 +625,17 @@ Init_type()
     _def_fundamental_type(ary, G_TYPE_OBJECT,    "OBJECT");
     rb_define_const(rbgobj_cType, "FUNDAMENTAL_TYPES", ary); /* FIXME: better name */
     }
-
-    _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
-    _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
-    _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
-    _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
-    _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
-    _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
-    _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(rb_cObject, RBGOBJ_TYPE_RUBY_VALUE);
-
-    _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_FLOAT, rb_cFloat);
-    _register_fundamental_gtype_to_klass(G_TYPE_DOUBLE, rb_cFloat);
-    _register_fundamental_gtype_to_klass(G_TYPE_INT64, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
-    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
-    _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
-    _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
-    _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
 }
 
 /**********************************************************************/
 
 VALUE mMetaInterface;
 
-static VALUE
-interface_get_gtype(iface)
-    VALUE iface;
-{
-    return rbgobj_gtype_new(CLASS2GTYPE(iface));
-}
-
 static void 
 Init_interface_commons()
 {
     mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
-    rb_define_method(mMetaInterface, "gtype", interface_get_gtype, 0);
+    rb_define_method(mMetaInterface, "gtype", generic_s_gtype, 0);
 }
 
 /**********************************************************************/
@@ -663,20 +648,6 @@ instantiatable_s_allocate(klass)
 {
      rb_raise(rb_eTypeError, "abstract class");
 }
-
-#ifndef HAVE_OBJECT_ALLOCATE
-
-static ID id_allocate;
-
-static VALUE 
-instantiatable_s_new(int argc, VALUE* argv, VALUE klass)
-{
-    VALUE obj = rb_funcall(klass, id_allocate, 0);
-    rb_obj_call_init(obj, argc, argv);
-    return obj;
-}
-
-#endif /* HAVE_OBJECT_ALLOCATE */
 
 static VALUE
 instantiatable_get_gtype(self)
@@ -704,8 +675,7 @@ Init_instantiatable()
     rb_define_alloc_func(cInstantiatable, instantiatable_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
-    id_allocate = rb_intern("allocate");
-    rb_define_singleton_method(cInstantiatable, "new", &instantiatable_s_new, -1);
+    rb_define_singleton_method(cInstantiatable, "new", &generic_s_new, -1);
 #endif
 
     rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
@@ -722,6 +692,12 @@ Init_interface()
 
 /**********************************************************************/
 
+#define _register_fundamental_klass_to_gtype(klass, gtype) \
+    rbgobj_register_class(klass, gtype, TRUE, FALSE)
+
+#define _register_fundamental_gtype_to_klass(gtype,klass) \
+    rbgobj_register_class(klass, gtype, FALSE, TRUE)
+
 /*
  * Init
  */
@@ -736,6 +712,30 @@ void Init_gobject_gtype()
     rb_global_variable(&klass_to_cinfo);
     gtype_to_cinfo = rb_hash_new();
     klass_to_cinfo = rb_hash_new();
+
+    _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
+    _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
+    _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(rb_cObject, RBGOBJ_TYPE_RUBY_VALUE);
+
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_FLOAT, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_DOUBLE, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
+    _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
+    _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
 
     Init_type();
 

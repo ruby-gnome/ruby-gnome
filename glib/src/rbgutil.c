@@ -3,8 +3,8 @@
 
   rbgutil.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/20 17:21:34 $
+  $Author: sakai $
+  $Date: 2003/07/22 04:02:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -16,6 +16,7 @@ ID rbgutil_id_module_eval;
 static ID id_add_one_arg_setter;
 static ID id_set_property;
 static ID id_to_a;
+static ID id_allocate;
 
 VALUE
 rbgutil_gerror2exception(error)
@@ -117,6 +118,29 @@ rbgutil_sym_g2r_func(from)
     return str ? ID2SYM(rb_intern(str)) : Qnil;
 }
 
+#ifndef HAVE_OBJECT_ALLOCATE
+VALUE
+rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self)
+{
+    VALUE obj = rb_funcall(self, id_allocate, 0);
+    rb_obj_call_init(obj, argc, argv);
+    return obj;
+}
+#endif /* HAVE_OBJECT_ALLOCATE */
+
+VALUE
+rbgutil_generic_s_gtype(VALUE klass)
+{
+    return rbgobj_gtype_new(CLASS2GTYPE(klass));
+}
+
+VALUE
+rbgutil_generic_gtype(VALUE self)
+{
+    return generic_s_gtype(CLASS_OF(self));
+}
+
+
 void
 Init_gutil()
 {
@@ -124,6 +148,7 @@ Init_gutil()
     id_set_property = rb_intern("set_property");
     id_to_a = rb_intern("to_a");
     id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
+    id_allocate = rb_intern("allocate");
 
     rb_eval_string(
         "module GLib\n"

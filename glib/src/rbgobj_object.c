@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:31 $
+  $Date: 2003/07/22 04:02:22 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -414,11 +414,13 @@ gobj_smethod_added(self, id)
 {
     GObject *obj = RVAL2GOBJ(self);
     const char* name = rb_id2name(SYM2ID(id));
+    guint signal_id = g_signal_lookup(name, G_OBJECT_TYPE(obj));
     
-    if (g_signal_lookup(name, G_OBJECT_TYPE(obj))) {
+    if (signal_id) {
         VALUE method = rb_funcall(self, rb_intern("method"), 1, id);
-        g_signal_connect_closure(obj, name,
-                                 g_rclosure_new(method, Qnil, NULL), FALSE);
+        GClosure* closure = g_rclosure_new(method, Qnil,
+                                           rbgobj_get_signal_func(signal_id));
+        g_signal_connect_closure(obj, name, closure, FALSE);
     }
 
     return Qnil;

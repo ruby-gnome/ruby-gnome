@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:04:26 $
+  $Date: 2003/07/22 04:02:22 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -56,7 +56,7 @@ rbgobj_flags_add_constants(VALUE mod, GType flags_type,
                       value->value_name, strip_prefix);
         } else {
             const char* name = value->value_name + prefix_len;
-            rb_define_const(mod, name, INT2NUM(value->value));
+            rb_define_const(mod, name, UINT2NUM(value->value));
         }
     }
 

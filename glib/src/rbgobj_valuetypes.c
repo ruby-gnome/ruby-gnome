@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:36 $
+  $Date: 2003/07/22 04:02:22 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -183,7 +183,7 @@ struct transform_arg {
 static VALUE
 value_transform_ruby_any_impl(VALUE arg_)
 {
-  struct transform_arg* arg = (struct transform_arg*)arg_;
+    struct transform_arg* arg = (struct transform_arg*)arg_;
     rbgobj_rvalue_to_gvalue(g_value_get_ruby_value(arg->src_value),
                             arg->dest_value);
     return Qnil;

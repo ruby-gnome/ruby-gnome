@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 06:35:14 $
+  $Date: 2003/07/22 04:02:22 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -31,7 +31,7 @@ rbgobj_set_signal_func(klass, sig_name, func)
     rb_hash_aset(signal_func_table, UINT2NUM(signal_id), obj);
 }
 
-static GValToRValSignalFunc
+GValToRValSignalFunc
 rbgobj_get_signal_func(guint signal_id)
 {
     GValToRValSignalFunc func = NULL;
@@ -132,7 +132,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     if (!sig)
         rb_raise(rb_eRuntimeError, "g_signal_newv failed");
 
-    if (accumulator)
+    if (!NIL_P(accumulator))
         G_RELATIVE(self, accumulator); /* FIXME */
 
     return rbgobj_signal_wrap(sig);

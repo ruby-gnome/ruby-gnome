@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/07/16 03:41:55 $
+  $Date: 2003/07/22 04:02:22 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -46,35 +46,6 @@ rbgobj_boxed_s_allocate(klass)
         rb_raise(rb_eTypeError, "abstract class");
 
     return rbgobj_create_object(klass);
-}
-
-#ifdef HAVE_OBJECT_ALLOCATE
-#define rbgobj_boxed_s_new rb_class_new_instance
-#else
-static VALUE
-rbgobj_boxed_s_new(argc, argv, klass)
-    int argc;
-    VALUE* argv;
-    VALUE klass;
-{
-    VALUE obj = rbgobj_boxed_s_allocate(klass);
-    rb_obj_call_init(obj, argc, argv);
-    return obj;
-}
-#endif
-
-static VALUE
-rbgobj_boxed_s_gtype(klass)
-    VALUE klass;
-{
-    return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
-}
-
-static VALUE
-rbgobj_boxed_gtype(self)
-    VALUE self;
-{
-    return rbgobj_boxed_s_gtype(CLASS_OF(self));
 }
 
 static VALUE
@@ -259,11 +230,11 @@ Init_gobject_gboxed()
     rb_define_alloc_func(gBoxed, rbgobj_boxed_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(gBoxed, "new", rbgobj_boxed_s_new, -1);
+    rb_define_singleton_method(gBoxed, "new", generic_s_new, -1);
 #endif
 
-    rb_define_singleton_method(gBoxed, "gtype", rbgobj_boxed_s_gtype, 0);
-    rb_define_method(gBoxed, "gtype", rbgobj_boxed_gtype, 0);
+    rb_define_singleton_method(gBoxed, "gtype", generic_s_gtype, 0);
+    rb_define_method(gBoxed, "gtype", generic_gtype, 0);
     rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
     rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 0);
 

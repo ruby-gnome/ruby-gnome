@@ -1,3 +1,25 @@
+2003-07-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_enums.c (rbgobj_flags_add_constants): use UINT2NUM()
+	instaed of INT2NUM().
+
+	* src/rbgobj_object.c (gobj_smethod_added): use
+	rbgobj_get_signal_func().
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): fix to treat accumulator
+	correctly.
+
+	* src/rbgobj_type.c: implement GLib::Type#<=>.
+
+	* src/rbgobj_type.c: change superclass of GLib::Boxed from Data to
+	Object.
+
+	* src/global.h, rbgutil.c: add new functions generic_s_new(),
+	generic_s_gtype() and generic_gtype().
+
+	* rbgobj_boxed.c, rbgobj_type.c: use generic_s_new(),
+	generic_s_gtype() and generic_gtype().
+
 2003-07-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_closure.c: enhance warning message of rclosure_marshal() 
