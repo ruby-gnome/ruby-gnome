@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -146,6 +146,70 @@ gdkpmap_create_from_xbm(self, win, fname)
 }
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
+/* From X Window System Interaction */
+static VALUE
+gdkpmap_foreign_new(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg[2];
+    GdkPixmap* win = NULL;
+    
+    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
+
+    switch(argc)
+    {
+      case 1:
+    	win = gdk_pixmap_foreign_new(NUM2UINT(arg[0]));
+	break;
+      case 2:
+#if GTK_CHECK_VERSION(2,2,0)
+    	win = gdk_pixmap_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+#else
+    	win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
+        rb_warn("Not supported in GTK+-2.0.x.");
+#endif
+    	break;
+    }
+    if (win == NULL)
+        return Qnil;
+    else {
+        return GOBJ2RVAL(win);
+    }
+}
+static VALUE
+gdkpmap_lookup(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg[2];
+    GdkPixmap* win = NULL;
+    
+    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
+
+    switch(argc)
+    {
+      case 1:
+    	win = gdk_pixmap_lookup(NUM2UINT(arg[0]));
+	break;
+      case 2:
+#if GTK_CHECK_VERSION(2,2,0)
+    	win = gdk_pixmap_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+#else
+    	win = gdk_pixmap_lookup(NUM2UINT(arg[1])); 
+        rb_warn("Not supported in GTK+-2.0.x.");
+#endif
+    	break;
+    }
+    if (win == NULL)
+        return Qnil;
+    else {
+        return GOBJ2RVAL(win);
+    }
+}
+
 void
 Init_gtk_gdk_pixmap()
 {
@@ -167,5 +231,8 @@ Init_gtk_gdk_pixmap()
 #elif defined(GDK_WINDOWING_FB)
     G_DEF_CLASS3("GdkPixmapFB", "PixmapFB", mGdk);
 #endif
+
+    rb_define_singleton_method(gdkPixmap, "foreign_new", gdkpmap_foreign_new, -1);
+    rb_define_singleton_method(gdkPixmap, "lookup", gdkpmap_lookup, -1);
 
 }

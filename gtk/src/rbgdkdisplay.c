@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/01 07:10:02 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 ************************************************/
@@ -111,6 +111,16 @@ gdkdisplay_sync(self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdisplay_flush(self)
+    VALUE self;
+{
+    gdk_display_flush(_SELF(self));
+    return self;
+}
+#endif
+
 static VALUE
 gdkdisplay_list_devices(self)
     VALUE self;
@@ -172,6 +182,16 @@ gdkdisplay_set_double_click_time(self, msec)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdisplay_set_double_click_distance(self, distance)
+    VALUE self, distance;
+{
+    gdk_display_set_double_click_distance(_SELF(self), NUM2UINT(distance));
+    return self;
+}
+#endif
+
 static VALUE
 gdkdisplay_get_pointer(self)
     VALUE self;
@@ -202,13 +222,77 @@ GdkDisplayPointerHooks* gdk_display_set_pointer_hooks
                                              const GdkDisplayPointerHooks *new_hooks);
  */
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdisplay_supports_cursor_color(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_cursor_color(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_supports_cursor_alpha(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_cursor_alpha(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_get_default_cursor_size(self)
+    VALUE self;
+{
+    return UINT2NUM(gdk_display_get_default_cursor_size(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_get_maximal_cursor_size(self)
+    VALUE self;
+{
+    guint width, height;
+    gdk_display_get_maximal_cursor_size(_SELF(self), &width, &height);
+    return rb_assoc_new(UINT2NUM(width), UINT2NUM(height));
+}
+
+static VALUE
+gdkdisplay_get_default_group(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_display_get_default_group(_SELF(self)));
+}
+#endif
+
 static VALUE
 gdkdisplay_get_core_pointer(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
-
+#ifdef GDK_WINDOWING_X11
+static VALUE
+gdkdisplay_grab(self)
+    VALUE self;
+{
+    gdk_x11_display_grab(_SELF(self));
+    return self;
+}
+static VALUE
+gdkdisplay_ungrab(self)
+    VALUE self;
+{
+    gdk_x11_display_ungrab(_SELF(self));
+    return self;
+}
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdisplay_register_standard_event_type(self, event_base, n_events)
+    VALUE self, event_base, n_events;
+{
+    gdk_x11_register_standard_event_type(_SELF(self),
+                                         NUM2INT(event_base), NUM2INT(n_events));
+    return self;
+}
+#endif
+#endif
 #endif
 
 void 
@@ -231,6 +315,9 @@ Init_gtk_gdk_display()
     
     rb_define_method(gdkDisplay, "beep", gdkdisplay_beep, 0);
     rb_define_method(gdkDisplay, "sync", gdkdisplay_sync, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDisplay, "flush", gdkdisplay_flush, 0);
+#endif
     rb_define_method(gdkDisplay, "close", gdkdisplay_close, 0);
     
     rb_define_method(gdkDisplay, "devices", gdkdisplay_list_devices, 0);
@@ -238,12 +325,27 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "peek_event", gdkdisplay_peek_event, 0);
     rb_define_method(gdkDisplay, "put_event", gdkdisplay_put_event, 1);
     rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 1);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDisplay, "set_double_click_distance", gdkdisplay_set_double_click_distance, 1);
+#endif
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDisplay, "supports_cursor_color?", gdkdisplay_supports_cursor_color, 0);
+    rb_define_method(gdkDisplay, "supports_cursor_alpha?", gdkdisplay_supports_cursor_alpha, 0);
+    rb_define_method(gdkDisplay, "default_cursor_size", gdkdisplay_get_default_cursor_size, 0);
+    rb_define_method(gdkDisplay, "maximal_cursor_size", gdkdisplay_get_maximal_cursor_size, 0);
+    rb_define_method(gdkDisplay, "default_group", gdkdisplay_get_default_group, 0);
+#endif
     rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
 
-  #ifdef GDK_WINDOWING_X11
+#ifdef GDK_WINDOWING_X11
+    rb_define_method(gdkDisplay, "grab", gdkdisplay_grab, 0);
+    rb_define_method(gdkDisplay, "ungrab", gdkdisplay_ungrab, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDisplay, "register_standard_event_type", gdkdisplay_register_standard_event_type, 2);
+#endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
-  #endif
+#endif
 #endif
 }

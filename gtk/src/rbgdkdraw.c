@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2002,2003 Masao Mutoh
@@ -323,6 +323,19 @@ gdkdraw_get_image(self, x, y, w, h)
                                             NUM2INT(w), NUM2INT(h)));
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdraw_copy_to_image(self, image, xsrc, ysrc, xdst, ydst, w, h)
+    VALUE self, image, xsrc, ysrc, xdst, ydst, w, h;
+{
+    return GOBJ2RVAL(gdk_drawable_copy_to_image(_SELF(self), 
+                                                GDK_IMAGE(RVAL2GOBJ(image)),
+                                                NUM2INT(xsrc), NUM2INT(ysrc),
+                                                NUM2INT(xdst), NUM2INT(ydst),
+                                                NUM2INT(w), NUM2INT(h)));
+}
+#endif
+
 #ifdef GDK_WINDOWING_X11
 static VALUE
 gdkdraw_get_xid(self)
@@ -378,6 +391,10 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_drawable", gdkdraw_draw_drawable, 8);
     rb_define_method(gdkDrawable, "draw_image", gdkdraw_draw_image, 8);
     rb_define_method(gdkDrawable, "get_image", gdkdraw_get_image, 4);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDrawable, "copy_to_image", gdkdraw_copy_to_image, 7);
+#endif
+
 #ifdef GDK_WINDOWING_X11
     rb_define_method(gdkDrawable, "xid", gdkdraw_get_xid, 0);
 #endif

@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:31 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -14,6 +14,8 @@
 
 #if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
+
+static ID id_new;
 
 static VALUE
 gdkscreen_default(self)
@@ -215,6 +217,182 @@ gdkscreen_get_setting(argc, argv, self)
     return value;
 }
 
+static void
+child_setup(func)
+    gpointer func;
+{
+    if (! NIL_P(func)){
+        rb_funcall((VALUE)func, id_call, 0);
+    }
+}
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
+    VALUE self, working_directory, argv, envp, flags;
+{
+    GError *err = NULL;
+    gboolean ret;
+    gint child_pid;
+    VALUE func = Qnil;
+    gint gargc, genc, i;
+    gchar** gargv = (gchar**)NULL;
+    gchar** genvp = (gchar**)NULL;
+
+    if (rb_block_given_p()) {
+        func = G_BLOCK_PROC();
+        G_RELATIVE(self, func);
+    }
+
+    if (! NIL_P(argv)){
+        Check_Type(argv, T_ARRAY);
+        gargc = RARRAY(argv)->len;
+        gargv = ALLOCA_N(gchar*, gargc);
+        for (i = 0; i < gargc; i++) {
+            if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
+                gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
+            }
+            else {
+                gargv[i] = "";
+            }
+        }
+    }
+    if (! NIL_P(envp)){
+        Check_Type(envp, T_ARRAY);
+        genc = RARRAY(envp)->len;
+        genvp = ALLOCA_N(gchar*, genc);
+        for (i = 0; i < genc; i++) {
+            if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
+                genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
+            }
+            else {
+                genvp[i] = "";
+            }
+        }
+    }
+
+    ret = gdk_spawn_on_screen(_SELF(self),
+                              NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
+                              gargv, genvp, NUM2INT(flags),
+                              child_setup, (gpointer)func,
+                              &child_pid, &err);
+
+    if (! ret){
+        rbglib_spawn_error(err);
+    }
+    
+    return INT2NUM(child_pid);
+}
+
+static VALUE
+gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
+    VALUE self, working_directory, argv, envp, flags;
+{
+    GError *err = NULL;
+    gboolean ret;
+    gint child_pid;
+    VALUE func = Qnil;
+    gint gargc, genc, i;
+    gchar** gargv = (gchar**)NULL;
+    gchar** genvp = (gchar**)NULL;
+    gint standard_input, standard_output, standard_error;
+
+    if (rb_block_given_p()) {
+        func = G_BLOCK_PROC();
+        G_RELATIVE(self, func);
+    }
+
+    if (! NIL_P(argv)){
+        Check_Type(argv, T_ARRAY);
+        gargc = RARRAY(argv)->len;
+        gargv = ALLOCA_N(gchar*, gargc);
+        for (i = 0; i < gargc; i++) {
+            if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
+                gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
+            }
+            else {
+                gargv[i] = "";
+            }
+        }
+    }
+
+    if (! NIL_P(envp)){
+        Check_Type(envp, T_ARRAY);
+        genc = RARRAY(envp)->len;
+        genvp = ALLOCA_N(gchar*, genc);
+        for (i = 0; i < genc; i++) {
+            if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
+                genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
+            }
+            else {
+                genvp[i] = "";
+            }
+        }
+    }
+
+    ret = gdk_spawn_on_screen_with_pipes(_SELF(self),
+                                         NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
+                                         gargv, genvp, NUM2INT(flags),
+                                         child_setup, (gpointer)func,
+                                         &child_pid, 
+                                         &standard_input, &standard_output,
+                                         &standard_error, &err);
+
+    if (! ret)
+        rbglib_spawn_error(err);
+    
+    return rb_ary_new3(3, INT2NUM(child_pid), 
+                       rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_input)),
+                       rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_output)),
+                       rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_error)));
+}
+
+static VALUE
+gdkscreen_spawn_command_line_on_screen(self, command_line)
+    VALUE self, command_line;
+{
+    GError *err = NULL;
+    VALUE ret;
+
+    ret = CBOOL2RVAL(g_spawn_command_line_async(RVAL2CSTR(command_line), &err));
+    if (!ret)
+        rbglib_spawn_error(err);
+    
+    return ret;   
+}
+#endif
+
+/* From X Window System Interaction */
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+static VALUE
+gdkscreen_xnumber(self)
+    VALUE self;
+{
+    return INT2NUM(GDK_SCREEN_XNUMBER(_SELF(self)));
+}
+static VALUE
+gdkscreen_supports_net_wm_hint(self, property)
+    VALUE self, property;
+{
+    return CBOOL2RVAL(gdk_x11_screen_supports_net_wm_hint(_SELF(self),
+                                                          RVAL2ATOM(property)));
+}
+
+static VALUE
+gdkscreen_get_window_manager_name(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_x11_screen_get_window_manager_name(_SELF(self)));
+}
+static VALUE
+gdkscreen_get_screen_number(self)
+    VALUE self;
+{
+    return INT2NUM(gdk_x11_screen_get_screen_number(_SELF(self)));
+}
+#endif
+
 #endif
 
 void 
@@ -222,6 +400,8 @@ Init_gtk_gdk_screen()
 {
 #if GTK_CHECK_VERSION(2,2,0)
     VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
+
+    id_new = rb_intern("new");
 
     rb_define_singleton_method(gdkScreen, "default", gdkscreen_default, 0);
     rb_define_method(gdkScreen, "default_colormap", gdkscreen_get_default_colormap, 0);
@@ -246,6 +426,18 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
     rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
 
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkScreen, "spawn_on_screen", gdkscreen_spawn_on_screen, 4);
+    rb_define_method(gdkScreen, "spawn_on_screen_with_pipes", gdkscreen_spawn_on_screen_with_pipes, 4);
+    rb_define_method(gdkScreen, "spawn_command_line_on_screen", gdkscreen_spawn_command_line_on_screen, 1);
+#endif
+
+#ifdef GDK_WINDOWING_X11
+    rb_define_method(gdkScreen, "xnumber", gdkscreen_xnumber, 0);
+    rb_define_method(gdkScreen, "supports_net_wm_hint?", gdkscreen_supports_net_wm_hint, 0);
+    rb_define_method(gdkScreen, "window_manager_name", gdkscreen_get_window_manager_name, 0);
+    rb_define_method(gdkScreen, "screen_number", gdkscreen_get_screen_number, 0);
+#endif
     G_DEF_SETTERS(gdkScreen);
 
   #ifdef GDK_WINDOWING_X11

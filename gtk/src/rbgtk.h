@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2004/05/16 07:21:17 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -19,6 +19,10 @@
 #include "rubysig.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
+
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
 
 #include <signal.h>
 

@@ -4,19 +4,28 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2003/09/29 12:51:02 $
+  $Date: 2004/08/01 07:10:03 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
 #include "global.h"
 #include "rbpango.h"
 
 static VALUE
-gdkpango_s_context_get(self)
+gdkpango_s_context_get(argc, argv, self)
+    int argc;
+    VALUE *argv;
     VALUE self;
 {
-    return GOBJ2RVAL(gdk_pango_context_get());
+    VALUE screen, ret;
+    rb_scan_args(argc, argv, "01", &screen);
+    if (NIL_P(screen)){
+        ret = GOBJ2RVAL(gdk_pango_context_get());
+    } else {
+        ret = GOBJ2RVAL(gdk_pango_context_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
+    }
+    return ret;
 }
 
 static VALUE

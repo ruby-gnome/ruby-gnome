@@ -4,10 +4,10 @@
   rbgdkproperty.c -
 
   $Author: mutoh $
-  $Date: 2004/02/14 17:16:13 $
+  $Date: 2004/08/01 07:10:03 $
 
 
-  Copyright (C) 2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
 
   Devided from rbgdkwindow.c
   rbgdkwindow.c - 
@@ -19,18 +19,41 @@
 #include "global.h"
 
 static VALUE
-gdkprop_text_property_to_text_list(self, encoding, format, text)
-    VALUE self, encoding, format, text;
+gdkprop_text_property_to_text_list(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     gint num, i;
     gchar** list;
     VALUE ret = Qnil;
-
-    StringValue(text);
-
-    num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
-                                         NUM2INT(format),
-                                         RVAL2CSTR(text), RSTRING(text)->len, &list);
+    
+    if (argc == 3) {
+        VALUE encoding, format, text;
+        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
+        StringValue(text);
+        
+        num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
+                                             NUM2INT(format),
+                                             RVAL2CSTR(text), RSTRING(text)->len, &list);
+    } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display, encoding, format, text;
+        rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
+        StringValue(text);
+        
+        num = gdk_text_property_to_text_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                         RVAL2ATOM(encoding),
+                                                         NUM2INT(format),
+                                                         RVAL2CSTR(text), 
+                                                         RSTRING(text)->len, &list);
+#else
+        rb_warn("Gdk::Property.text_property_to_text_list: Not supported arguments in GTK+-2.0.x.");
+        num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
+                                             NUM2INT(format),
+                                             RVAL2CSTR(text), RSTRING(text)->len, &list);
+#endif
+    }
 
     ret = rb_ary_new2(num);
     for (i =0; i < num; i++){
@@ -41,18 +64,41 @@ gdkprop_text_property_to_text_list(self, encoding, format, text)
 }
 
 static VALUE
-gdkprop_text_property_to_utf8_list(self, encoding, format, text)
-    VALUE self, encoding, format, text;
+gdkprop_text_property_to_utf8_list(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     gint num, i;
     gchar** list;
     VALUE ret = Qnil;
-
-    StringValue(text);
-
-    num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
-                                         NUM2INT(format),
-                                         RVAL2CSTR(text), RSTRING(text)->len, &list);
+    
+    if (argc == 3) {
+        VALUE encoding, format, text;
+        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
+        StringValue(text);
+        
+        num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
+                                             NUM2INT(format),
+                                             RVAL2CSTR(text), RSTRING(text)->len, &list);
+    } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display, encoding, format, text;
+        rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
+        StringValue(text);
+        
+        num = gdk_text_property_to_utf8_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                         RVAL2ATOM(encoding),
+                                                         NUM2INT(format),
+                                                         RVAL2CSTR(text), 
+                                                         RSTRING(text)->len, &list);
+#else
+        rb_warn("Gdk::Property.text_property_to_utf8_list: Not supported arguments in GTK+-2.0.x.");
+        num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
+                                             NUM2INT(format),
+                                             RVAL2CSTR(text), RSTRING(text)->len, &list);
+#endif
+    }
 
     ret = rb_ary_new2(num);
     for (i =0; i < num; i++){
@@ -63,16 +109,40 @@ gdkprop_text_property_to_utf8_list(self, encoding, format, text)
 }
 
 static VALUE
-gdkprop_string_to_compound_text(self, str)
-    VALUE self, str;
+gdkprop_string_to_compound_text(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    gint num;
     GdkAtom encoding;
     gint format;
     guchar *ctext;
     gint length;
-    gint num = gdk_string_to_compound_text(RVAL2CSTR(str),
-                                           &encoding, &format,
-                                           &ctext, &length);
+
+    if (argc == 1) {
+        VALUE str;
+        rb_scan_args(argc, argv, "10", &str);
+        num = gdk_string_to_compound_text(RVAL2CSTR(str),
+                                          &encoding, &format,
+                                          &ctext, &length);
+    } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display, str;
+
+        rb_scan_args(argc, argv, "20", &display, &str);
+        num = gdk_string_to_compound_text_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                      RVAL2CSTR(str),
+                                                      &encoding, &format,
+                                                      &ctext, &length);
+#else
+        rb_warn("Gdk::Property.string_to_compound_text: Not supported arguments in GTK+-2.0.x.");
+        num = gdk_string_to_compound_text(RVAL2ATOM(encoding),
+                                          NUM2INT(format),
+                                          RVAL2CSTR(text), RSTRING(text)->len, &list);
+#endif
+    }
+
     if (num == 0){
         VALUE ret = CSTR2RVAL(ctext);
         gdk_free_compound_text(ctext);
@@ -92,16 +162,41 @@ gdkprop_utf8_to_string_target(self, str)
 }
 
 static VALUE
-gdkprop_utf8_to_compound_text(self, str)
-    VALUE self, str;
+gdkprop_utf8_to_compound_text(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     GdkAtom encoding;
     gint format;
     guchar *ctext;
     gint length;
-    gint ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
-                                         &encoding, &format,
-                                         &ctext, &length);
+    gint ret;
+
+    if (argc == 1) {
+        VALUE str;
+        rb_scan_args(argc, argv, "10", &str);
+    
+        ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
+                                        &encoding, &format,
+                                        &ctext, &length);
+    } else {
+#if GTK_CHECK_VERSION(2,2,0)
+        VALUE display, str;
+
+        rb_scan_args(argc, argv, "20", &display, &str);
+        ret = gdk_utf8_to_compound_text_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                                    RVAL2CSTR(str),
+                                                    &encoding, &format,
+                                                    &ctext, &length);
+#else
+        rb_warn("Gdk::Property.utf8_to_compound_text: Not supported arguments in GTK+-2.0.x.");
+        ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
+                                        &encoding, &format,
+                                        &ctext, &length);
+#endif
+    }
+
     if (ret){
         VALUE val = CSTR2RVAL(ctext);
         gdk_free_compound_text(ctext);
@@ -217,11 +312,11 @@ Init_gtk_gdk_property()
 {
     VALUE gdkProperty = rb_define_module_under(mGdk, "Property");
 
-    rb_define_module_function(gdkProperty, "text_property_to_text_list", gdkprop_text_property_to_text_list, 3);
-    rb_define_module_function(gdkProperty, "text_property_to_utf8_list", gdkprop_text_property_to_utf8_list, 3);
-    rb_define_module_function(gdkProperty, "string_to_compound_text", gdkprop_string_to_compound_text, 1);
+    rb_define_module_function(gdkProperty, "text_property_to_text_list", gdkprop_text_property_to_text_list, -1);
+    rb_define_module_function(gdkProperty, "text_property_to_utf8_list", gdkprop_text_property_to_utf8_list, -1);
+    rb_define_module_function(gdkProperty, "string_to_compound_text", gdkprop_string_to_compound_text, -1);
     rb_define_module_function(gdkProperty, "utf8_to_string_target", gdkprop_utf8_to_string_target, 1);
-    rb_define_module_function(gdkProperty, "utf8_to_compound_text", gdkprop_utf8_to_compound_text, 1);
+    rb_define_module_function(gdkProperty, "utf8_to_compound_text", gdkprop_utf8_to_compound_text, -1);
     rb_define_module_function(gdkProperty, "change", gdkprop_change, -1);
     rb_define_module_function(gdkProperty, "get", gdkprop_get, -1);
     rb_define_module_function(gdkProperty, "delete", gdkprop_delete, 2);

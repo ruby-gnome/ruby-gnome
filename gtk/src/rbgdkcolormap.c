@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2003/12/21 08:22:19 $
+  $Date: 2004/08/01 07:10:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -85,6 +85,15 @@ gdkcmap_get_visual(self)
     return GOBJ2RVAL(gdk_colormap_get_visual(_SELF(self)));
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkcmap_get_screen(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_colormap_get_screen(_SELF(self)));
+}
+#endif
+
 static VALUE
 gdkcmap_colors(self)
     VALUE self;
@@ -125,6 +134,9 @@ Init_gtk_gdk_colormap()
     rb_define_method(gdkColormap, "free_color", gdkcmap_free_color, 1);
     rb_define_method(gdkColormap, "query_color", gdkcmap_query_color, 1);
     rb_define_method(gdkColormap, "visual", gdkcmap_get_visual, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkColormap, "screen", gdkcmap_get_screen, 0);
+#endif
     rb_define_method(gdkColormap, "colors", gdkcmap_colors, 0);
 }
 

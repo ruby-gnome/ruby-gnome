@@ -1,16 +1,45 @@
+2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkdisplay.c: Added Gdk::Display#grab, #ungrab, 
+	#register_standard_event_type from "X Window System Interaction". 
+	* src/rbgdkscreen.c: Added Gdk::Screen#xnumber, #supports_net_wm_hint?,
+	#window_manager_name, #screen_number from "X Window System Interaction". 
+	Added Gdk::Screen#spawn_on_screen, #spawn_on_screen_with_pipes,
+	#spawn_command_line_on_screen for GTK+-2.4.
+	* src/rbgdkwindow.c: Added Gdk::Window.lookup, #server_time from 
+	"X Window System Interaction".
+	* src/rbgdkpango.c: Gdk::Pango.get accept Gdk::Screen for GTK+-2.2. 
+	* src/rbgdkproperty.c: Gdk::Property.text_property_to_(text|utf8)_list,
+	.string_to_compound_text, .utf8_to_compound_text accept Gdk::Display as
+	an argument for GTK+-2.2.
+
 2004-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkwindow.c: Added Gdk::Window#fullscreen, #unfullscreen
+	for GTK+-2.2.
+	Added Gdk::Window#set_keep_(above|below), #set_accept_focus, #group
+	for GTK+-2.4.
+	* src/rbgdkcursor.c: Support Gdk::Cursor.new(display, cursor_type) 
+	for GTK+-2.2.
+	Support Gdk::Cursor.new(display, pixbuf, x, y) for GTK+-2.4.
+	Added Gdk::Cursor#display for GTK+-2.4.
+	* src/rbgdkvisual.c: Added Gdk::Visual#screen for GTK+-2.2. 
+	* src/rbgdkcolormap.c: Added Gdk::Colormap#screen for GTK+-2.2.
+	* src/rbgdkdraw.c: Added Gdk::Drawable#copy_to_image for GTK+-2.4. 
+	* src/rbgdkdisplay.c: Added Gdk::Display#flush, 
+	#set_double_click_distance, #supports_cursor_(color|alpha)?,
+	#(default|maximal)_cursor_size, #default_group for GTK+-2.4.
 	* src/rbgtkaccelgroup.c: Added Gtk::AccelGroup#activate.
 	* src/rbgtkalignment.c: Added Gtk::Alignment#padding, 
-	#set_padding for 2.4. 
+	#set_padding for GTK+-2.4. 
 	* src/rbgtkcalendar.c: Added Gtk::Calendar#display_options, 
-	#set_display_options for 2.4.
-	* src/rbgtktooltips.c: Added Gtk::Tooltips.get_info for 2.4.
+	#set_display_options for GTK+-2.4.
+	* src/rbgtktooltips.c: Added Gtk::Tooltips.get_info for GTK+-2.4.
 	* src/rbgtkwidget.c: Added Gtk::Widget#get_clipboard, #display, 
-	#root_window, #screen, #has_screen? for 2.2.
+	#root_window, #screen, #has_screen? for GTK+-2.2.
 	Added Gtk::Widget#queue_resize_no_redraw, #can_activate_accel?, 
 	#set_no_show_all, #no_show_all?, #mnemonic_labels, 
-	#add_mnemonic_label, #remove_mnemonic_label for 2.4.
+	#add_mnemonic_label, #remove_mnemonic_label for GTK+-2.4.
 	* sample/misc/uimanager.rb, uimanager2.rb, uimanager2.xml: 
 	Check version of GTK+ and run GTK+-2.4 later only.
 

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -53,38 +53,6 @@ gdkwin_s_at_pointer(self)
     gint x, y;
     GdkWindow* win = gdk_window_at_pointer(&x, &y);
     return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
-}
-
-static VALUE
-gdkwin_foreign_new(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE arg[2];
-    GdkWindow * win = NULL;
-    
-    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
-
-    switch(argc)
-    {
-      case 1:
-    	win = gdk_window_foreign_new(NUM2UINT(arg[0]));
-	break;
-      case 2:
-#if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
-#else
-    	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif
-    	break;
-    }
-    if (win == NULL)
-        return Qnil;
-    else {
-        return GOBJ2RVAL(win);
-    }
 }
 
 static VALUE
@@ -187,6 +155,40 @@ gdkwin_unmaximize(self)
     gdk_window_unmaximize(_SELF(self));
     return self;
 }
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkwin_fullscreen(self)
+    VALUE self;
+{
+    gdk_window_fullscreen(_SELF(self));
+    return self;
+}
+
+static VALUE
+gdkwin_unfullscreen(self)
+    VALUE self;
+{
+    gdk_window_unfullscreen(_SELF(self));
+    return self;
+}
+#endif
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkwin_set_keep_above(self, setting)
+    VALUE self, setting;
+{
+    gdk_window_set_keep_above(_SELF(self), RTEST(setting));
+    return self;
+}
+
+static VALUE
+gdkwin_set_keep_below(self, setting)
+    VALUE self, setting;
+{
+    gdk_window_set_keep_below(_SELF(self), RTEST(setting));
+    return self;
+}
+#endif
 
 static VALUE
 gdkwin_move(self, x, y)
@@ -462,6 +464,14 @@ gdkwin_set_override_redirect(self, override_redirect)
 {
     gdk_window_set_override_redirect(_SELF(self), 
                                      RTEST(override_redirect));
+    return self;
+}
+
+static VALUE
+gdkwin_set_accept_focus(self, accept_focus)
+    VALUE self, accept_focus;
+{
+    gdk_window_set_accept_focus(_SELF(self), RTEST(accept_focus));
     return self;
 }
 
@@ -793,6 +803,15 @@ gdkwin_set_group(self, leader)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkwin_get_group(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_window_get_group(_SELF(self)));
+}
+#endif
+
 static VALUE
 gdkwin_set_decorations(self, decor)
     VALUE self, decor;
@@ -839,6 +858,81 @@ gdkwin_s_get_default_root_window(self)
 GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 */
 
+
+/* From X Window System Interaction */
+static VALUE
+gdkwin_foreign_new(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg[2];
+    GdkWindow * win = NULL;
+    
+    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
+
+    switch(argc)
+    {
+      case 1:
+    	win = gdk_window_foreign_new(NUM2UINT(arg[0]));
+	break;
+      case 2:
+#if GTK_CHECK_VERSION(2,2,0)
+    	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+#else
+    	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
+        rb_warn("Not supported in GTK+-2.0.x.");
+#endif
+    	break;
+    }
+    if (win == NULL)
+        return Qnil;
+    else {
+        return GOBJ2RVAL(win);
+    }
+}
+
+static VALUE
+gdkwin_lookup(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg[2];
+    GdkWindow * win = NULL;
+    
+    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
+
+    switch(argc)
+    {
+      case 1:
+    	win = gdk_window_lookup(NUM2UINT(arg[0]));
+	break;
+      case 2:
+#if GTK_CHECK_VERSION(2,2,0)
+    	win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+#else
+    	win = gdk_window_lookup(NUM2UINT(arg[1])); 
+        rb_warn("Not supported in GTK+-2.0.x.");
+#endif
+    	break;
+    }
+    if (win == NULL)
+        return Qnil;
+    else {
+        return GOBJ2RVAL(win);
+    }
+}
+
+#ifdef GDK_WINDOWING_X11
+static VALUE
+gdkwin_get_server_time(self)
+    VALUE self;
+{
+    return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
+}
+#endif
+
 void
 Init_gtk_gdk_window()
 {
@@ -848,7 +942,6 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "destroy", gdkwin_destroy, 0);
     rb_define_method(gdkWindow, "window_type", gdkwin_get_window_type, 0);
     rb_define_singleton_method(gdkWindow, "at_pointer", gdkwin_s_at_pointer, 0);
-    rb_define_singleton_method(gdkWindow, "foreign_new", gdkwin_foreign_new, -1);
     rb_define_singleton_method(gdkWindow, "constrain_size", gdkwin_s_constrain_size, 4);
     rb_define_singleton_method(gdkWindow, "process_all_updates", gdkwin_s_process_all_updates, 0);
     rb_define_singleton_method(gdkWindow, "set_debug_updates", gdkwin_s_set_debug_updates, 1);
@@ -865,6 +958,14 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "unstick", gdkwin_unstick, 0);
     rb_define_method(gdkWindow, "maximize", gdkwin_maximize, 0);
     rb_define_method(gdkWindow, "unmaximize", gdkwin_unmaximize, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkWindow, "fullscreen", gdkwin_fullscreen, 0);
+    rb_define_method(gdkWindow, "unfullscreen", gdkwin_unfullscreen, 0);
+#endif
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkWindow, "set_keep_above", gdkwin_set_keep_above, 1);
+    rb_define_method(gdkWindow, "set_keep_below", gdkwin_set_keep_below, 1);
+#endif
     rb_define_method(gdkWindow, "move", gdkwin_move, 2);
     rb_define_method(gdkWindow, "resize", gdkwin_resize, 2);
     rb_define_method(gdkWindow, "move_resize", gdkwin_move_resize, 4);
@@ -889,6 +990,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "internal_paint_info", gdkwin_get_internal_paint_info, 0);
     rb_define_method(gdkWindow, "set_user_data", gdkwin_set_user_data, 1);
     rb_define_method(gdkWindow, "set_override_redirect", gdkwin_set_override_redirect, 1);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkWindow, "set_accept_focus", gdkwin_set_accept_focus, 1);
+#endif
     rb_define_method(gdkWindow, "shape_combine_mask", gdkwin_shape_combine_mask, 3);
     rb_define_method(gdkWindow, "shape_combine_region", gdkwin_shape_combine_region, 3);
     rb_define_method(gdkWindow, "set_child_shapes", gdkwin_set_child_shapes, 0);
@@ -924,10 +1028,16 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_transient_for", gdkwin_set_transient_for, 1);
     rb_define_method(gdkWindow, "set_role", gdkwin_set_role, 1);
     rb_define_method(gdkWindow, "set_group", gdkwin_set_group, 1);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkWindow, "group", gdkwin_get_group, 0);
+#endif
     rb_define_method(gdkWindow, "set_decorations", gdkwin_set_decorations, 1);
     rb_define_method(gdkWindow, "decorations", gdkwin_get_decorations, 0);
     rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
     rb_define_singleton_method(gdkWindow, "toplevels", gdkwin_s_get_toplevels, 0);
+
+    rb_define_singleton_method(gdkWindow, "foreign_new", gdkwin_foreign_new, -1);
+    rb_define_singleton_method(gdkWindow, "lookup", gdkwin_lookup, -1);
 
     G_DEF_SETTERS(gdkWindow);
 
@@ -978,6 +1088,8 @@ Init_gtk_gdk_window()
     rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
 
 #ifdef GDK_WINDOWING_X11
+    rb_define_method(gdkWindow, "server_time", gdkwin_get_server_time, 0);
+
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)
     G_DEF_CLASS3("GdkWindowImplWin32", "WindowImplWin32", mGdk);

@@ -1,10 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgtkalignment.c -
+  rbgdkgc.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/08/01 07:10:03 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh

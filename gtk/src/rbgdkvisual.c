@@ -4,9 +4,9 @@
   rbgdkvisual.c -
 
   $Author: mutoh $
-  $Date: 2003/10/04 16:15:02 $
+  $Date: 2004/08/01 07:10:03 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Masao Mutoh
 
   This file is devided from rbgdkcolor.c.
   rbgdkcolor.c -
@@ -119,6 +119,16 @@ gdkvisual_s_get_best_with_both(self, depth, type)
                                     (GdkVisualType)RVAL2GENUM(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkvisual_get_screen(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_visual_get_screen(_SELF(self)));
+}
+#endif
+
+/* Structure accessors */
 static VALUE
 gdkvisual_type(self)
     VALUE self;
@@ -235,6 +245,9 @@ Init_gtk_gdk_visual()
     rb_define_singleton_method(gdkVisual, "best_with_both", gdkvisual_s_get_best_with_both, 2);
 
     /* instance methods */
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkVisual, "screen", gdkvisual_get_screen, 0);
+#endif
     rb_define_method(gdkVisual, "visual_type", gdkvisual_type, 0);
     rb_define_method(gdkVisual, "depth", gdkvisual_depth, 0);
     rb_define_method(gdkVisual, "byte_order", gdkvisual_byte_order, 0);
