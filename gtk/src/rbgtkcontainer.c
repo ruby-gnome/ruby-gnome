@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2004/01/29 17:08:31 $
+  $Date: 2004/02/11 08:22:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -691,6 +691,7 @@ Init_gtk_container()
 
     rb_define_method(gContainer, "resize_container?", cont_is_resize_container, 0);
     rb_define_method(gContainer, "add", cont_add, -1);
+    rb_define_alias(gContainer, "<<", "add");
     rb_define_method(gContainer, "remove", cont_remove, 1);
     rb_define_method(gContainer, "check_resize", cont_check_resize, 0);
     rb_define_method(gContainer, "each", cont_foreach, -1);

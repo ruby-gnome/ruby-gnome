@@ -1,3 +1,14 @@
+2004-02-11  Dafydd Harries <daf@muse.19inch.net>
+
+	* src/rbgtkcontainer.c: Add Gtk::Container#<< as an alias of #add.
+	* src/rbgtktreepath.c, src/rbgtktreeiter.c: Add Gtk::TreePath#to_s,
+	Gtk::TreeIter#to_s as aliases of #to_str.
+
+2004-02-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextattributes.c: Remove Gtk::TextAttributes#copy
+	(Use Gtk::Boxed#copy instead).
+
 2004-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtksettings.c: Add Gtk::Setting.rc_property_parse_*.
