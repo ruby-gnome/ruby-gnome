@@ -1,3 +1,7 @@
+2003-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeviewcolumn.c: Fix G_DEF_CONSTANTS. Reported by Geoff Youngs.
+
 2003-07-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkiconsize.c: Fix G_DEF_CONSTANTS.
