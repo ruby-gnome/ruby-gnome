@@ -21,6 +21,17 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::FieldAttributes
+ * Management of database fields.
+ */
+VALUE cGdaFieldAttributes;
+
+/*
+ * Class method: new
+ *
+ * Returns: a newly created Gda::FieldAttributes object.
+ */
 static VALUE rb_gda_field_new(self)
     VALUE self;
 {
@@ -31,12 +42,25 @@ static VALUE rb_gda_field_new(self)
     return Qnil;
 }
 
+/*
+ * Method: defined_size
+ *
+ * Returns: the defined size of the field attributes.
+ */
 static VALUE rb_gda_field_get_defined_size(self)
     VALUE self;
 {
     return LONG2FIX(gda_field_attributes_get_defined_size(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_defined_size(size)
+ * size: the defined size we want to set.
+ * 
+ * Sets the defined size of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_defined_size(self, defined_size)
     VALUE self, defined_size;
 {
@@ -45,12 +69,25 @@ static VALUE rb_gda_field_set_defined_size(self, defined_size)
     return self;
 }
 
+/*
+ * Method: name
+ *
+ * Returns: the name of the field attributes.
+ */
 static VALUE rb_gda_field_get_name(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_field_attributes_get_name(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_name(name)
+ * name: the new name of the field attributes.
+ *
+ * Sets the name of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_name(self, name)
     VALUE self, name;
 {
@@ -59,12 +96,25 @@ static VALUE rb_gda_field_set_name(self, name)
     return self;
 }
 
+/*
+ * Method: table
+ *
+ * Returns: the name of the table to which this field belongs.
+ */
 static VALUE rb_gda_field_get_table(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_field_attributes_get_table(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_table(name)
+ * name: a table name.
+ *
+ * Sets the name of the table to which this field belongs.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_table(self, table)
     VALUE self, table;
 {
@@ -73,12 +123,25 @@ static VALUE rb_gda_field_set_table(self, table)
     return self;
 }
 
+/*
+ * Method: caption
+ *
+ * Returns: the caption of the field attributes.
+ */
 static VALUE rb_gda_field_get_caption(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_field_attributes_get_caption(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_caption(caption)
+ * caption: the new caption of the field attributes.
+ *
+ * Sets the caption of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_caption(self, caption)
     VALUE self, caption;
 {
@@ -87,12 +150,25 @@ static VALUE rb_gda_field_set_caption(self, caption)
     return self;
 }
 
+/*
+ * Method: scale
+ *
+ * Returns: the scale of the field attributes.
+ */
 static VALUE rb_gda_field_get_scale(self)
     VALUE self;
 {
     return LONG2FIX(gda_field_attributes_get_scale(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_scale(scale)
+ * scale: the new scale of the field attributes.
+ *
+ * Sets the scale of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_scale(self, scale)
     VALUE self, scale;
 {
@@ -101,12 +177,25 @@ static VALUE rb_gda_field_set_scale(self, scale)
     return self;
 }
   
+/*
+ * Method: gdatype
+ *
+ * Returns: the gdatype of the field attributes (see Gda::Value::Type).
+ */
 static VALUE rb_gda_field_get_gdatype(self)
     VALUE self;
 {
     return INT2FIX(gda_field_attributes_get_gdatype(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_gdatype(gdatype)
+ * gdatype: the new gdatype of the field attributes (see Gda::Value::Type).
+ *
+ * Sets the gdatype of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_gdatype(self, gdatype)
     VALUE self, gdatype;
 {
@@ -115,12 +204,27 @@ static VALUE rb_gda_field_set_gdatype(self, gdatype)
     return self;
 }
 
+/*
+ * Method: allow_null?
+ *
+ * Gets the 'allow null' flag of the field attributes.
+ *
+ * Returns: whether the field allows null values or not (true or false).
+ */
 static VALUE rb_gda_field_get_allow_null(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_field_attributes_get_allow_null(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_allow_null(allow)
+ * allow: whether the given field should allows null values or not.
+ *
+ * Sets the 'allow null' flag of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_allow_null(self, allow_null)
     VALUE self, allow_null;
 {
@@ -129,12 +233,25 @@ static VALUE rb_gda_field_set_allow_null(self, allow_null)
     return self;
 }
 
+/*
+ * Method: primary_key?
+ *
+ * Returns: whether if the field is a primary key (true or false).
+ */
 static VALUE rb_gda_field_get_primary_key(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_field_attributes_get_primary_key(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_primary_key(pk)
+ * pk: whether if the field should be a primary key.
+ *
+ * Sets the 'primary key' flag of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_primary_key(self, primary_key)
     VALUE self, primary_key;
 {
@@ -143,12 +260,25 @@ static VALUE rb_gda_field_set_primary_key(self, primary_key)
     return self;
 }
 
+/*
+ * Method: unique_key 
+ *
+ * Returns: whether the field is an unique key (true or false).
+ */
 static VALUE rb_gda_field_get_unique_key(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_field_attributes_get_unique_key(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_unique_key(uk)
+ * uk: whether if the field should be a unique key.
+ *
+ * Sets the 'unique key' flag of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_unique_key(self, unique_key)
     VALUE self, unique_key;
 {
@@ -157,12 +287,25 @@ static VALUE rb_gda_field_set_unique_key(self, unique_key)
     return self;
 }
 
+/*
+ * Method: references
+ *
+ * Returns: the references of the field attributes.
+ */
 static VALUE rb_gda_field_get_references(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_field_attributes_get_references(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_references(references)
+ * references: the new references of the field attributes.
+ *
+ * Sets the references of the field attributes.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_references(self, references)
     VALUE self, references;
 {
@@ -171,12 +314,25 @@ static VALUE rb_gda_field_set_references(self, references)
     return self;
 }
 
+/*
+ * Method: auto_increment?
+ *
+ * Returns: whether the given field is an auto incremented one (true or false).
+ */
 static VALUE rb_gda_field_get_auto_increment(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_field_attributes_get_auto_increment(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_auto_increment(is_auto)
+ * is_auto: auto increment boolean status.
+ *
+ * Sets the auto increment flag for the field.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_auto_increment(self, auto_increment)
     VALUE self, auto_increment;
 {
@@ -185,12 +341,27 @@ static VALUE rb_gda_field_set_auto_increment(self, auto_increment)
     return self;
 }
 
+/*
+ * Method: position
+ *
+ * Returns: the position of the field the attributes refer to in the containing
+ * data model.
+ */
 static VALUE rb_gda_field_get_position(self)
     VALUE self;
 {
     return INT2FIX(gda_field_attributes_get_position(RGDA_FIELD_ATTRIBUTES(self)));
 }
 
+/*
+ * Method: set_position(position)
+ * position: the wanted position of the field in the containing data model.
+ *
+ * Sets the position of the field the attributes refer to in the containing
+ * data model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_field_set_position(self, position)
     VALUE self, position;
 {
@@ -225,11 +396,11 @@ void Init_gda_field_attributes(void) {
     rb_define_method(c, "allow_null?",    rb_gda_field_get_allow_null,  0);
     rb_define_method(c, "set_allow_null", rb_gda_field_set_allow_null, 1);
 
-    rb_define_method(c, "has_primary_key?",    rb_gda_field_get_primary_key, 0);
-    rb_define_method(c, "set_has_primary_key", rb_gda_field_set_primary_key, 1);
+    rb_define_method(c, "primary_key?",    rb_gda_field_get_primary_key, 0);
+    rb_define_method(c, "set_primary_key", rb_gda_field_set_primary_key, 1);
 
-    rb_define_method(c, "has_unique_key?",    rb_gda_field_get_unique_key, 0);
-    rb_define_method(c, "set_has_unique_key", rb_gda_field_set_unique_key, 1);
+    rb_define_method(c, "unique_key?",    rb_gda_field_get_unique_key, 0);
+    rb_define_method(c, "set_unique_key", rb_gda_field_set_unique_key, 1);
 
     rb_define_method(c, "references",     rb_gda_field_get_references, 0);
     rb_define_method(c, "set_references", rb_gda_field_set_references, 1);
@@ -241,5 +412,7 @@ void Init_gda_field_attributes(void) {
     rb_define_method(c, "set_position", rb_gda_field_set_position, 1);
 
     G_DEF_SETTERS(c);
+
+    cGdaFieldAttributes = c;
 }
 

@@ -31,7 +31,26 @@
 /* Gda module */
 extern VALUE mGda;
 
-/* Gda::Value class */
+/* Gda classes */
+extern VALUE cGdaClient;
+extern VALUE cGdaCommand;
+extern VALUE cGdaConnection;
+extern VALUE cGdaDataModel;
+extern VALUE cGdaDataModelArray;
+extern VALUE cGdaDataModelHash;
+extern VALUE cGdaDataModelList;
+extern VALUE cGdaDataSource;
+extern VALUE cGdaError;
+extern VALUE cGdaExport;
+extern VALUE cGdaFieldAttributes;
+extern VALUE cGdaParameter;
+extern VALUE cGdaParameterList;
+extern VALUE cGdaProvider;
+extern VALUE cGdaQuarkList;
+extern VALUE cGdaRow;
+extern VALUE cGdaSelect;
+extern VALUE cGdaTable;
+extern VALUE cGdaTransaction;
 extern VALUE cGdaValue;
 
 #define GDA_COMMAND(o)          ((GdaCommand *)o)

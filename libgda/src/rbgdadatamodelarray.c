@@ -21,6 +21,18 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::DataModelArray
+ * An implementation of Gda::DataModel based on an array.
+ */
+VALUE cGdaDataModelArray;
+
+/*
+ * Class method: new(n_columns)
+ * n_columns: number of columns for rows of this data model.
+ *
+ * Returns: a reference to a newly created Gda::DataModelArray object.
+ */
 static VALUE rb_gda_datamodel_array_new(self, n_columns)
     VALUE self, n_columns;
 {
@@ -31,6 +43,15 @@ static VALUE rb_gda_datamodel_array_new(self, n_columns)
     return Qnil;
 }
 
+/*
+ * Method: set_n_columns(n_columns)
+ * n_columns: number of columns for rows this data model should use (must be
+ * greated than or equal to 0). 
+ *
+ * Sets the number of columns for rows inserted in this model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_array_set_n_columns(self, n_columns)
     VALUE self, n_columns;
 {
@@ -39,6 +60,13 @@ static VALUE rb_gda_datamodel_array_set_n_columns(self, n_columns)
     return self;
 }
 
+/*
+ * Method: clear
+ *
+ * Frees all the rows inserted in this model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_array_clear(self)
     VALUE self;
 {
@@ -53,5 +81,7 @@ void Init_gda_datamodel_array(void) {
     rb_define_method(c, "set_n_columns", rb_gda_datamodel_array_set_n_columns, 1);
     rb_define_method(c, "clear",         rb_gda_datamodel_array_clear,         0);
     G_DEF_SETTER(c, "n_columns"); 
+
+    cGdaDataModelArray = c;
 }
 

@@ -21,6 +21,25 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Parameter
+ *
+ * Parameters are the way clients have to send an unlimited number of arguments
+ * to the providers.
+ */
+VALUE cGdaParameter;
+
+/*
+ * Class method: new(name, value)
+ * name: the name for the parameter being created.
+ * value: a value for the parameter (which can be either a boolean, string,
+ * integer, or an existing Gda::Value).
+ *
+ * Creates a new Gda::Parameter object, which is usually used with
+ * Gda::ParameterList.
+ *
+ * Returns: a newly created Gda::Parameter object.
+ */
 static VALUE rb_gda_parameter_new(self, name, value)
     VALUE self, name, value;
 {
@@ -44,6 +63,9 @@ static VALUE rb_gda_parameter_new(self, name, value)
         param = gda_parameter_new_from_value(RVAL2CSTR(name),
                                              RGDA_VALUE(value));   
     }
+    else {
+        /* FIXME throw an exception here */
+    }
 
     if (param != NULL) {
         G_INITIALIZE(self, param);
@@ -51,12 +73,25 @@ static VALUE rb_gda_parameter_new(self, name, value)
     return Qnil;
 }
 
+/*
+ * Method: name
+ *
+ * Returns: the name of the parameter.
+ */
 static VALUE rb_gda_parameter_get_name(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_parameter_get_name(RGDA_PARAMETER(self)));
 }
 
+/*
+ * Method: set_name(name)
+ * name: new name for the parameter.
+ *
+ * Sets the name of the parameter.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_parameter_set_name(self, name)
     VALUE self, name;
 {
@@ -65,12 +100,25 @@ static VALUE rb_gda_parameter_set_name(self, name)
     return self;
 }
 
+/*
+ * Method: value
+ *
+ * Returns: the value of the parameter, as a Gda::Value object.
+ */
 static VALUE rb_gda_parameter_get_value(self)
     VALUE self;
 {
     return RGDA_VALUE_NEW(gda_parameter_get_value(RGDA_PARAMETER(self)));
 }
 
+/*
+ * Method: set_value(value)
+ * value: new value for the parameter, as a Gda::Value object.
+ *
+ * Sets the value of the parameter.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_parameter_set_value(self, value)
     VALUE self, value;
 {
@@ -90,5 +138,7 @@ void Init_gda_parameter(void) {
     rb_define_method(c, "set_value", rb_gda_parameter_set_value, 1);
 
     G_DEF_SETTERS(c);
+
+    cGdaParameter = c;
 }
 

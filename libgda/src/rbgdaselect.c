@@ -21,6 +21,23 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Select
+ * Filtering data from Gda::DataModel.
+ */
+VALUE cGdaSelect;
+
+/*
+ * Class method: new
+ *
+ * Creates a new Gda::Select object, which allows programs to filter
+ * Gda::DataModel's based on a given SQL SELECT command.
+ *
+ * A Gda::Select is just another Gda::DataModel based class, so it can be used
+ * in the same way any other data model class is.
+ *
+ * Returns: the newly created Gda::Select object.
+ */
 static VALUE rb_gda_select_new(self)
     VALUE self;
 {
@@ -31,6 +48,18 @@ static VALUE rb_gda_select_new(self)
     return Qnil;
 }
 
+/*
+ * Method: add_source(name, source)
+ * name: name to identify the data model (usually a table name).
+ * source: a Gda::DataModel object from which to get data.
+ *
+ * Adds a data model as a source of data for the Gda::Select object.
+ *
+ * When the select object is run (via Gda::Select#run), it will parse the SQL
+ * and get the required data from the source data models.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_select_add_source(self, name, source)
     VALUE self, name, source;
 {
@@ -41,6 +70,15 @@ static VALUE rb_gda_select_add_source(self, name, source)
        
 }
 
+/*
+ * Method: set_sql(sql)
+ * sql: the SQL command to be used for filtering rows.
+ *
+ * Sets the SQL command to be used on the Gda::Select object for filtering rows
+ * from the source data model (which is set with Gda::Select#set_source).
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_select_set_sql(self, sql)
     VALUE self, sql;
 {
@@ -48,6 +86,19 @@ static VALUE rb_gda_select_set_sql(self, sql)
     return sql;
 }
 
+/*
+ * Method: run
+ *
+ * Runs the query and fills in the Gda::Select object with the rows that
+ * matched the SQL command (which can be set with Gda::Select#set_sql)
+ * associated with this Gda::Select object.
+ *
+ * After calling this function, if everything is successful, the Gda::Select
+ * object will contain the matched rows, which can then be accessed like a
+ * normal Gda::DataModel.
+ *
+ * Returns: true if successful, false if there was an error.
+ */
 static VALUE rb_gda_select_run(self)
     VALUE self;
 {
@@ -63,5 +114,7 @@ void Init_gda_select(void) {
     rb_define_method(c, "run",        rb_gda_select_run,        0);
 
     G_DEF_SETTER(c, "sql");
+
+    cGdaSelect = c;
 }
 

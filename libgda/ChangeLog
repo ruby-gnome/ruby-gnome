@@ -1,3 +1,7 @@
+2003-12-12  Laurent Sansonetti  <lrz@gnome.org>
+
+    * src/*.c: Added documentation (for extdoc.rb).
+
 2003-12-09  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdadatasource.c, src/rbgdaprovider.c: Removed obsolete code.

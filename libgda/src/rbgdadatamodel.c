@@ -21,6 +21,22 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::DataModel
+ * Basic data model class.
+ */
+VALUE cGdaDataModel;
+
+/*
+ * Method: emit_changed
+ *
+ * Notifies listeners of the given data model object of changes in the
+ * underlying data. Listeners usually will connect themselves to the "changed"
+ * signal in the Gda::DataModel class, thus being notified of any new data
+ * being appended or removed from the data model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_changed(self)
     VALUE self;
 {
@@ -28,6 +44,14 @@ static VALUE rb_gda_datamodel_changed(self)
     return self;
 }
 
+/*
+ * Method: emit_row_inserted(rownum)
+ * rownum: a row number.
+ *
+ * Emits the 'row_inserted' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_row_inserted(self, rownum)
     VALUE self, rownum;
 {
@@ -36,6 +60,14 @@ static VALUE rb_gda_datamodel_row_inserted(self, rownum)
     return self;
 }
 
+/*
+ * Method: emit_row_updated(rownum)
+ * rownum: a row number.
+ *
+ * Emits the 'row_updated' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_row_updated(self, rownum)
     VALUE self, rownum;
 {
@@ -44,6 +76,14 @@ static VALUE rb_gda_datamodel_row_updated(self, rownum)
     return self;
 }
 
+/*
+ * Method: emit_row_removed(rownum)
+ * rownum: a row number.
+ *
+ * Emits the 'row_removed' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_row_removed(self, rownum)
     VALUE self, rownum;
 {
@@ -52,6 +92,14 @@ static VALUE rb_gda_datamodel_row_removed(self, rownum)
     return self;
 }
 
+/*
+ * Method: freeze!
+ *
+ * Disables notifications of changes on the data model. To re-enable
+ * notifications again, you should call the Gda::DataModel#thaw method. 
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_freeze(self)
     VALUE self;
 {
@@ -59,6 +107,13 @@ static VALUE rb_gda_datamodel_freeze(self)
     return self;
 }
 
+/*
+ * Method: thaw!
+ *
+ * Re-enables notifications of changes on the given data model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_thaw(self)
     VALUE self;
 {
@@ -66,6 +121,11 @@ static VALUE rb_gda_datamodel_thaw(self)
     return self;
 }
 
+/*
+ * Method: columns
+ *
+ * Returns: a list of all column titles in the model, as an Array of strings.
+ */
 static VALUE rb_gda_datamodel_get_columns(self)
     VALUE self;
 {
@@ -82,6 +142,14 @@ static VALUE rb_gda_datamodel_get_columns(self)
     return arr;
 }
 
+/*
+ * Method: each_column { |col_title| ... }
+ *
+ * Calls the block for each column title in the model, passing a reference
+ * to a String object as parameter.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_datamodel_each_column(self)
     VALUE self;
 {
@@ -89,12 +157,23 @@ static VALUE rb_gda_datamodel_each_column(self)
     return Qnil;
 }
 
+/*
+ * Method: n_columns
+ *
+ * Returns: the number of columns in the model.
+ */
 static VALUE rb_gda_datamodel_get_n_columns(self)
     VALUE self;
 {
     return INT2FIX(gda_data_model_get_n_columns(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: get_column_title(colnum)
+ * colnum: a column number.
+ *
+ * Returns: the title for the given column in the model.
+ */
 static VALUE rb_gda_datamodel_get_column(self, colnum)
     VALUE self, colnum;
 {
@@ -105,6 +184,17 @@ static VALUE rb_gda_datamodel_get_column(self, colnum)
         : Qnil;
 }
 
+/*
+ * Method: describe_column(colnum)
+ * colnum: a column number.
+ *
+ * Queries the underlying data model implementation for a description of a
+ * given column. That description is returned in the form of a 
+ * Gda::FieldAttributes object, which contains all the information about the
+ * given column in the data model.
+ *
+ * Returns: the description of the column, as a Gda::FieldAttributes object.
+ */
 static VALUE rb_gda_datamodel_describe_column(self, colnum)
     VALUE self, colnum;
 {
@@ -115,6 +205,15 @@ static VALUE rb_gda_datamodel_describe_column(self, colnum)
         : Qnil;
 }
 
+/*
+ * Method: get_column_pos(col_title)
+ * col_title: a column title.
+ *
+ * Gets the position of a column on the data model, based on the column's title.
+ *
+ * Returns: the position of the column in the data model, or -1 if the column
+ * could not be found.
+ */
 static VALUE rb_gda_datamodel_get_column_pos(self, col_title)
     VALUE self, col_title;
 {
@@ -122,6 +221,12 @@ static VALUE rb_gda_datamodel_get_column_pos(self, col_title)
                                                       RVAL2CSTR(col_title)));
 }
 
+/*
+ * Method: rows
+ *
+ * Returns: a list of all the rows in the data model, as an Array of Gda::Row
+ * objects.
+ */
 static VALUE rb_gda_datamodel_get_rows(self)
     VALUE self;
 {
@@ -138,6 +243,14 @@ static VALUE rb_gda_datamodel_get_rows(self)
     return arr;
 }
 
+/*
+ * Method: each_row { |row| ... }
+ *
+ * Calls the block for each row in the data model, passing a reference to a
+ * Gda::Row object as parameter.
+ *
+ * Returns: always nil.
+ */ 
 static VALUE rb_gda_datamodel_each_row(self)
     VALUE self;
 {
@@ -145,12 +258,26 @@ static VALUE rb_gda_datamodel_each_row(self)
     return Qnil;
 }
 
+/*
+ * Method: n_rows
+ *
+ * Returns: the number of rows in the data model.
+ */
 static VALUE rb_gda_datamodel_get_n_rows(self)
     VALUE self;
 {
     return INT2FIX(gda_data_model_get_n_rows(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: get_row(rownum)
+ * rownum: a row number.
+ *
+ * Retrieves a given row from the data model.
+ *
+ * Returns: the row, as a Gda::Row object, or nil if the given row number is
+ * invalid.
+ */
 static VALUE rb_gda_datamodel_get_row(self, row_number)
     VALUE self, row_number;
 {
@@ -161,6 +288,15 @@ static VALUE rb_gda_datamodel_get_row(self, row_number)
         : Qnil;
 }
 
+/*
+ * Method: append_row(*values)
+ * values: a list of Gda::Value objects. Their length must match model's
+ * column count.
+ *
+ * Appends a row to the data model.
+ *
+ * Returns: the added row, as a Gda::Row object, on success, nil on errors.
+ */
 static VALUE rb_gda_datamodel_append_row(self, values)
     VALUE self, values;
 {
@@ -182,6 +318,15 @@ static VALUE rb_gda_datamodel_append_row(self, values)
         : Qnil;
 }
 
+/*
+ * Method: update_row(row)
+ * row: a Gda::Row object.
+ *
+ * Updates a row data model. This results in the underlying database row's
+ * values being changed.
+ *
+ * Returns: true if successful, false otherwise.
+ */
 static VALUE rb_gda_datamodel_update_row(self, row)
     VALUE self, row;
 {
@@ -189,6 +334,15 @@ static VALUE rb_gda_datamodel_update_row(self, row)
                                                 RGDA_ROW(row)));
 }
 
+/*
+ * Method: remove_row(row)
+ * row: a Gda::Row object.
+ *
+ * Removes a row from the data model. This results in the underlying database
+ * row being removed in the database.
+ *
+ * Returns: true if successful, false otherwise.
+ */
 static VALUE rb_gda_datamodel_remove_row(self, row)
     VALUE self, row;
 {
@@ -196,48 +350,108 @@ static VALUE rb_gda_datamodel_remove_row(self, row)
                                                 RGDA_ROW(row)));
 }
 
+/*
+ * Method: editable?
+ *
+ * Returns: true if the model can be updated, false otherwise.
+ */
 static VALUE rb_gda_datamodel_is_editable(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_data_model_is_editable(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: editing?
+ *
+ * Checks whether this data model is in updating mode or not. Updating
+ * mode is set to true when Gda::DataModel#begin_edit has been
+ * called successfully, and is not set back to false until either
+ * Gda::DataModel#cancel_edit or Gda::DataModel#end_edit have been called.
+     
+ * Returns: true if updating mode, false otherwise.
+ */
 static VALUE rb_gda_datamodel_is_editing(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_data_model_is_editing(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: begin_edit
+ *
+ * Starts update of this data model. This method should be the
+ * first called when modifying the data model.
+ *
+ * Returns: true on success, false if there was an error.
+ */
 static VALUE rb_gda_datamodel_begin_edit(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_data_model_begin_edit(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: cancel_edit
+ *
+ * Cancels update of this data model. This means that all changes
+ * will be discarded, and the old data put back in the model.
+ *
+ * Returns: true on success, false if there was an error.
+ */
 static VALUE rb_gda_datamodel_cancel_edit(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_data_model_cancel_edit(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: end_edit
+ *
+ * Approves all modifications and send them to the underlying
+ * data source/store.
+ *
+ * Returns: true on success, false if there was an error.
+ */
 static VALUE rb_gda_datamodel_end_edit(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_data_model_end_edit(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: to_comma_separated
+ *
+ * Converts the given model into a comma-separated series of rows.
+ *
+ * Returns: the string representation of the model.
+ */
 static VALUE rb_gda_datamodel_to_comma_separated(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_data_model_to_comma_separated(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: to_tab_separated
+ *
+ * Converts the given model into a tab-separated series of rows.
+ *
+ * Returns: the string representation of the model.
+ */
 static VALUE rb_gda_datamodel_to_tab_separated(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_data_model_to_tab_separated(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: to_xml(standalone=false)
+ *
+ * Converts the given model into a XML representation.
+ *
+ * Returns: the string representation of the model.
+ */
 static VALUE rb_gda_datamodel_to_xml(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -250,12 +464,27 @@ static VALUE rb_gda_datamodel_to_xml(argc, argv, self)
                                            NIL_P(standalone) ? FALSE : RVAL2CBOOL(standalone)));
 }
 
+/*
+ * Method: command_text
+ *
+ * Gets the text of command that generated this data model.
+ *
+ * Returns: a string with the command issued.
+ */
 static VALUE rb_gda_datamodel_get_command_text(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_data_model_get_command_text(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: set_command_text(text)
+ * text: the command text.
+ *
+ * Sets the command text of this data model.
+ *
+ * Returns: self.
+ */ 
 static VALUE rb_gda_datamodel_set_command_text(self, text)
     VALUE self, text;
 {
@@ -264,12 +493,25 @@ static VALUE rb_gda_datamodel_set_command_text(self, text)
     return self;
 }
 
+/*
+ * Method: command_type
+ *
+ * Returns: the command type of this data model (see Gda::Command::Type).
+ */
 static VALUE rb_gda_datamodel_get_command_type(self)
     VALUE self;
 {
     return INT2FIX(gda_data_model_get_command_type(RGDA_DATAMODEL(self)));
 }
 
+/*
+ * Method: set_command_type(type)
+ * type: the command type (see Gda::Command::Type).
+ *
+ * Sets the command type of this data model.
+ *
+ * Returns: self.
+ */ 
 static VALUE rb_gda_datamodel_set_command_type(self, type)
     VALUE self, type;
 {
@@ -334,5 +576,7 @@ gboolean    gda_data_model_add_data_from_xml_node
                      rb_gda_datamodel_set_command_type, 1);
 
     G_DEF_SETTERS(c);
+
+    cGdaDataModel = c;
 }
 

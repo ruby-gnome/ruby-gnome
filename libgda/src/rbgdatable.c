@@ -21,6 +21,26 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Table
+ * An in-memory representation of a database table
+ */
+VALUE cGdaTable;
+
+/*
+ * Class method: new(name, model=nil, add_data=nil)
+ * name: name for the new table.
+ * model: a Gda::DataModel to create the table from.
+ * add_data: whether to add model's data or not.
+ *
+ * Creates a new Gda::Table object, which is an in-memory representation of an
+ * entire table. It is mainly used by the Gda::XmlDatabase class, but you can
+ * also use it in your applications for whatever you may need it.
+ *
+ * You can optionally pass a Gda::DataModel object to create the table from.
+ *
+ * Returns: a newly created Gda::Table object.
+ */
 static VALUE rb_gda_table_new(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -44,20 +64,41 @@ static VALUE rb_gda_table_new(argc, argv, self)
     return Qnil;
 }
 
+/*
+ * Method: name
+ *
+ * Returns: the name of the table.
+ */
 static VALUE rb_gda_table_get_name(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_table_get_name(RGDA_TABLE(self)));
 }
 
+/*
+ * Method: set_name(name)
+ * name: new name for the table.
+ *
+ * Sets the name of the table.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_table_set_name(self, name)
     VALUE self, name;
 {
     gda_table_set_name(RGDA_TABLE(self),
                        RVAL2CSTR(name));
-    return name;
+    return self;
 }
 
+/*
+ * Method: add_field(field)
+ * field: a Gda::FieldAttributes object.
+ *
+ * Adds a field to the table.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_table_add_field(self, field)
     VALUE self, field;
 {
@@ -66,6 +107,14 @@ static VALUE rb_gda_table_add_field(self, field)
     return self;
 }
 
+/*
+ * Method: add_data_from_model(model)
+ * model: the Gda::DataModel from which to add the data.
+ *
+ * Adds data from the given model to the table.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_table_add_data_from_model(self, model)
     VALUE self, model;
 {
@@ -84,5 +133,7 @@ void Init_gda_table(void) {
     rb_define_method(c, "add_data_from_model",  
                      rb_gda_table_add_data_from_model, 1);
     G_DEF_SETTER(c, "name");
+
+    cGdaTable = c;
 }
 

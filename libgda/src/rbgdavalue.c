@@ -21,14 +21,35 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Value
+ * Data values.
+ */
 VALUE cGdaValue;
 
+/*
+ * Method: to_s
+ *
+ * Converts a Gda::Value to its string representation.
+ *
+ * Returns: a formatted string.
+ */
 static VALUE rb_gda_value_to_s(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_value_stringify(RGDA_VALUE(self)));
 }
 
+/*
+ * Method: <=>(an_other_value)
+ * an_other_value: the other value to be compared to.
+ *
+ * Compares two Gda::Value objects of the same type.
+ *
+ * Returns: if both values have the same type, returns 0 if both contains the
+ * same value, an integer less than 0 if the value is less than the other or an
+ * integer greater than 0 if the value is greater than the other.
+ */
 static VALUE rb_gda_value_cmp(self, other_value)
     VALUE self;
 {

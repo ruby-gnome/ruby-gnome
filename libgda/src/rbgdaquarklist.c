@@ -21,6 +21,24 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::QuarkList
+ * Quark lists (lists of KEY=VALUE's).
+ */
+VALUE cGdaQuarkList;
+
+/*
+ * Class method: new(string=nil)
+ * string: a connection string.
+ *
+ * Creates a new Gda::QuarkList, which is a set of key->value pairs, very
+ * similar to GLib's GHashTable, but with the only purpose to make easier the
+ * parsing and creation of data source connection strings.
+ *
+ * You can optionally pass a connection string to initialize the quark list.
+ *
+ * Returns: a newly created Gda::QuarkList object.
+ */
 static VALUE rb_gda_quarklist_new(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -43,6 +61,16 @@ static VALUE rb_gda_quarklist_new(argc, argv, self)
     return Qnil;
 }
 
+/*
+ * Method: add_from_string(string, cleanup=false)
+ * string: a connection string.
+ * cleanup: whether to cleanup the previous content or not.
+ *
+ * Adds new key->value pairs from the given string. If cleanup is set to true,
+ * the previous contents will be discarded before adding the new pairs.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_quarklist_add_from_string(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -57,6 +85,15 @@ static VALUE rb_gda_quarklist_add_from_string(argc, argv, self)
     return self;
 }
 
+/*
+ * Method: find(name)
+ * name: the name of the value to search for.
+ *
+ * Searches for the value identified by name in the quark list.
+ *
+ * Returns: the value associated with the given key if found, or nil if not
+ * found.
+ */
 static VALUE rb_gda_quarklist_find(self, name)
     VALUE self, name;
 {
@@ -67,6 +104,13 @@ static VALUE rb_gda_quarklist_find(self, name)
         : Qnil;
 }
 
+/*
+ * Method: clean
+ *
+ * Removes all key->pair values from the quark list.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_quarklist_clear(self)   
     VALUE self;
 {
@@ -81,5 +125,7 @@ void Init_gda_quarklist(void) {
     rb_define_alias(c, "add", "add_from_string");
     rb_define_method(c, "find", rb_gda_quarklist_find, 1);
     rb_define_method(c, "clear", rb_gda_quarklist_clear, 0);
+
+    cGdaQuarkList = c;
 }
 

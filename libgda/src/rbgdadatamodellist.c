@@ -21,6 +21,18 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::DataModelList
+ * An implementation of Gda::DataModel based on a list.
+ */
+VALUE cGdaDataModelList;
+
+/*
+ * Class method: new(strings=nil)
+ * strings: a list of strings.
+ *
+ * Returns: a reference to a newly allocated Gda::DataModelList object.
+ */
 static VALUE rb_gda_datamodel_list_new(self, args)
     VALUE self, args;
 {
@@ -44,6 +56,14 @@ static VALUE rb_gda_datamodel_list_new(self, args)
     return Qnil;
 }
 
+/*
+ * Method: append_value(value)
+ * value: a Gda::Value object.
+ *
+ * Inserts a row in the model, using the value parameter.
+ *
+ * Returns: the Gda::Row which has been inserted, or nil on failure.
+ */
 static VALUE rb_gda_datamodel_list_append_value(self, value)
     VALUE self, value;
 {
@@ -59,5 +79,7 @@ void Init_gda_datamodel_list(void) {
     
     rb_define_method(c, "initialize",    rb_gda_datamodel_list_new,         -2);
     rb_define_method(c, "append_value",  rb_gda_datamodel_list_append_value, 1);
+
+    cGdaDataModelList = c;
 }
 

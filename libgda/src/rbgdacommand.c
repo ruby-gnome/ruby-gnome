@@ -21,6 +21,43 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Command
+ *
+ * The Gda::Command object holds data needed to issue a command to the
+ * providers. Applications usually create a Gda::Command (via
+ * Gda::Command.new), set its properties and pass it over to the database using
+ * the Gda::Connection methods.
+ *
+ * One interesting thing about Gda::Command's is that they can be reused over
+ * and over. That is, applications don't need to create a command every time
+ * they want to run something on the connected database. Moreover, the ability
+ * to create command strings with placeholders allows the use of parameters to
+ * specify the values for those placeholders. Thus, an application can create
+ * a command of the form:
+ *
+ * 	INSERT INTO employees VALUES (id, name, address, salary)
+ *
+ * and reuse the same command over and over, just using different values for
+ * the placeholders.
+ *
+ * The value for the placeholders is specified when sending the Gda::Command
+ * to a database connection, which is done via the
+ * Gda::Connection#execute_command method.
+ */
+VALUE cGdaCommand;
+
+/*
+ * Class method: new(text, type, options)
+ * text: text of the command.
+ * type: type of the command (see Gda::Command::Type).
+ * options: options for the command (see Gda::Command::Option).
+ *
+ * Creates a new Gda::Command from the parameters.  If there are conflicting
+ * options, this will set options to Gda::Command::DEFAULT_OPTION.
+ * 
+ * Returns: a newly allocated Gda::Command object.
+ */
 static VALUE rb_gda_command_new(self, text, command_type, options)
     VALUE self, text, command_type, options;
 {
@@ -33,6 +70,14 @@ static VALUE rb_gda_command_new(self, text, command_type, options)
     return Qnil;
 }
 
+/*
+ * Method: set_text(text)
+ * text: the command text.
+ *
+ * Sets the text of the command.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_command_set_text(self, text)
     VALUE self, text;
 {
@@ -41,12 +86,25 @@ static VALUE rb_gda_command_set_text(self, text)
     return self;
 }
 
+/*
+ * Method: text
+ *
+ * Returns: the text of the command.
+ */
 static VALUE rb_gda_command_get_text(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_command_get_text(RGDA_COMMAND(self)));
 }
 
+/*
+ * Method: set_command_type(type)
+ * type: the command type (see Gda::Command::Type).
+ *
+ * Sets the command type.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_command_set_command_type(self, command_type)
     VALUE self, command_type;
 {
@@ -55,12 +113,25 @@ static VALUE rb_gda_command_set_command_type(self, command_type)
     return self;
 }
 
+/*
+ * Method: command_type
+ *
+ * Returns: the command type (see Gda::Command::Type).
+ */
 static VALUE rb_gda_command_get_command_type(self)
     VALUE self;
 {
     return INT2FIX(gda_command_get_command_type(RGDA_COMMAND(self)));
 }
 
+/*
+ * Method: set_options(options)
+ * options: see Gda::Command::Option.
+ *
+ * Sets command options.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_command_set_options(self, options)
     VALUE self, options;
 {
@@ -69,12 +140,25 @@ static VALUE rb_gda_command_set_options(self, options)
     return self;
 }
 
+/*
+ * Method: options
+ *
+ * Returns: options of the command (see Gda::Command::Option).
+ */
 static VALUE rb_gda_command_get_options(self)
     VALUE self;
 {
     return INT2FIX(gda_command_get_options(RGDA_COMMAND(self)));
 }
 
+/*
+ * Method: set_transaction(xaction)
+ * xaction: a Gda::Transaction object.
+ *
+ * Sets the GdaTransaction associated with the command.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_command_set_transaction(self, transaction)
     VALUE self, transaction;
 {
@@ -83,6 +167,11 @@ static VALUE rb_gda_command_set_transaction(self, transaction)
     return self;
 }
 
+/*
+ * Method: transaction
+ *
+ * Returns: the Gda::Transaction object associated with the command.
+ */
 static VALUE rb_gda_command_get_transaction(self)
     VALUE self;
 {
@@ -110,8 +199,12 @@ void Init_gda_command(void) {
     rb_define_method(c, "set_transaction", rb_gda_command_set_transaction, 1);
     rb_define_method(c, "transaction",     rb_gda_command_get_transaction, 0);
 
+    G_DEF_CLASS(GDA_TYPE_COMMAND_OPTIONS, "Options", c);
     G_DEF_CONSTANTS(c, GDA_TYPE_COMMAND_OPTIONS, "GDA_COMMAND_");
+    G_DEF_CLASS(GDA_TYPE_COMMAND_TYPE, "Type", c);
     G_DEF_CONSTANTS(c, GDA_TYPE_COMMAND_TYPE,    "GDA_COMMAND_");
     G_DEF_SETTERS(c);
+
+    cGdaCommand = c;
 }
 

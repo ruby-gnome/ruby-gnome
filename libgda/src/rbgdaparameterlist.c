@@ -21,6 +21,19 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::ParameterList
+ * A list of Gda::Parameter objects.
+ */
+VALUE cGdaParameterList;
+
+/*
+ * Class method: new
+ *
+ * Creates a new Gda::ParameterList.
+ *
+ * Returns: the newly created Gda::ParameterList object.
+ */
 static VALUE rb_gda_param_list_new(self)
     VALUE self;
 {
@@ -31,6 +44,14 @@ static VALUE rb_gda_param_list_new(self)
     return Qnil;
 }
 
+/*
+ * Method: add(param)
+ * param: the Gda::Parameter to be added to the list.
+ *
+ * Adds a new parameter to the list.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_param_list_add(self, param)
     VALUE self, param;
 {
@@ -40,6 +61,13 @@ static VALUE rb_gda_param_list_add(self, param)
     return self;
 }
 
+/*
+ * Method: names
+ *
+ * Gets the names of all parameters in the parameter list.
+ *
+ * Returns: an Array containing the names of all parameters.
+ */
 static VALUE rb_gda_param_list_get_names(self)
     VALUE self;
 {
@@ -58,6 +86,14 @@ static VALUE rb_gda_param_list_get_names(self)
     return arr;
 }
 
+/*
+ * Method: each_name { |name| ... }
+ *
+ * Calls the block for each parameter in the list, passing its name as
+ * parameter.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_param_list_each_name(self)
     VALUE self;
 {
@@ -65,6 +101,13 @@ static VALUE rb_gda_param_list_each_name(self)
     return Qnil;
 }
 
+/*
+ * Method: parameters
+ *
+ * Gets all parameters in the parameter list.
+ *
+ * Returns: an Array of Gda::Parameter objects.
+ */
 static VALUE rb_gda_param_list_get_params(self)
     VALUE self;
 {
@@ -88,6 +131,14 @@ static VALUE rb_gda_param_list_get_params(self)
     return arr;
 }
 
+/*
+ * Method: each_parameter { |param| ... }
+ *
+ * Calls the block for each parameter in the parameter list, passing a
+ * reference to a Gda::Parameter object as argument.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_param_list_each_param(self)
     VALUE self;
 {
@@ -95,6 +146,14 @@ static VALUE rb_gda_param_list_each_param(self)
     return Qnil;
 }
 
+/*
+ * Method: find(name)
+ * name: name of the parameter to search for.
+ *
+ * Gets a parameter from the list given its name.
+ *
+ * Returns: a Gda::Parameter reference if found, nil if not found.
+ */
 static VALUE rb_gda_param_list_find(self, name)
     VALUE self, name;
 {
@@ -105,18 +164,35 @@ static VALUE rb_gda_param_list_find(self, name)
         : Qnil;
 }
 
+/*
+ * Method: length
+ *
+ * Returns: the number of parameters stored in the list.
+ */
 static VALUE rb_gda_param_list_get_length(self)
     VALUE self;
 {
     return INT2FIX(gda_parameter_list_get_length(RGDA_PARAMETER_LIST(self)));
 }
 
+/*
+ * Method: empty?
+ *
+ * Returns: true if the list is empty, false otherwise.
+ */
 static VALUE rb_gda_param_list_is_empty(self)
     VALUE self;
 {
     return CBOOL2RVAL(gda_parameter_list_get_length(RGDA_PARAMETER_LIST(self)) == 0);
 }
 
+/*
+ * Method: clear
+ *
+ * Removes all parameters from the parameter list.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_param_list_clear(self)
     VALUE self;
 {
@@ -146,5 +222,7 @@ void Init_gda_parameter_list(void) {
     rb_define_method(c, "empty?", rb_gda_param_list_is_empty, 0);
 
     rb_define_method(c, "clear", rb_gda_param_list_clear, 0);
+
+    cGdaParameterList = c;
 }
 

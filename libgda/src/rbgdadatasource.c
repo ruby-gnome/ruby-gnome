@@ -21,6 +21,18 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::DataSource
+ * Data sources.
+ */
+VALUE cGdaDataSource;
+
+/*
+ * Class method: datasources
+ *
+ * Returns: a list of all data sources currently configured in the system, as
+ * an Array of Gda::DataSource objects.
+ */
 static VALUE rb_gda_get_datasources(self)
     VALUE self;
 {
@@ -42,6 +54,14 @@ static VALUE rb_gda_get_datasources(self)
     return arr;
 }
 
+/*
+ * Class method: each { |datasource| ... }
+ *
+ * Calls the block for each data source which is currently configured in the
+ * system, passing a reference to a Gda::DataSource object as parameter.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_datasource_each(self)
     VALUE self;
 {
@@ -49,6 +69,14 @@ static VALUE rb_gda_datasource_each(self)
     return Qnil;
 }
 
+/*
+ * Class method: find(name)
+ * name: name of the data source to search to.
+ *
+ * Gets a Gda::DataSource object givin its name.
+ *
+ * Returns: a Gda::DataSource reference if found, nil if not found.
+ */
 static VALUE rb_gda_datasource_find(self, name)
     VALUE self, name;
 {
@@ -58,6 +86,17 @@ static VALUE rb_gda_datasource_find(self, name)
         : Qnil;
 }
 
+/*
+ * Class method: model
+ *
+ * Fills and returns a new Gda::DataModel object using information from all
+ * data sources which are currently configured in the system.
+ *
+ * Rows are separated in 6 columns: 'Name', 'Provider', 'Connection string',
+ * 'Description', 'Username' and 'Password'.
+ *
+ * Returns: a newly created Gda::DataModel object.
+ */
 static VALUE rb_gda_datasource_model(self)
     VALUE self;
 {
@@ -67,6 +106,17 @@ static VALUE rb_gda_datasource_model(self)
 	: Qnil;
 }
 
+/*
+ * Class method: new(name, provider, cnc_string, description, username, password)
+ * name: name of the data source to create.
+ * provider: name of the provider to use.
+ * cnc_string: connection string that will be used to connect to the data source.
+ * description: a short description of the data source.
+ * username: user name to use for the connection (may be nil).
+ * password: password to use for the connection (may be nil).
+ *
+ * Returns: a newly created Gda::DataSource object.
+ */
 static VALUE rb_gda_datasource_new(self, name, provider, cnc_string, 
                                    description, username, password)
     VALUE self, name, provider, cnc_string, 
@@ -83,6 +133,13 @@ static VALUE rb_gda_datasource_new(self, name, provider, cnc_string,
     return Qnil;
 }
 
+/*
+ * Method: save
+ *
+ * Saves the data source in the libgda configuration.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datasource_save(self)
     VALUE self;
 {
@@ -91,6 +148,13 @@ static VALUE rb_gda_datasource_save(self)
 
 }
 
+/*
+ * Method: remove
+ *
+ * Removes the data source from the libgda configuration.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datasource_remove(self)
     VALUE self;
 {
@@ -98,6 +162,11 @@ static VALUE rb_gda_datasource_remove(self)
     return self;
 }
 
+/*
+ * Method: name
+ *
+ * Returns: the name of the data source.
+ */
 static VALUE rb_gda_datasource_get_name(self)
     VALUE self;
 {
@@ -105,6 +174,11 @@ static VALUE rb_gda_datasource_get_name(self)
     return CSTR2RVAL(info->name);
 }
 
+/*
+ * Method: provider
+ *
+ * Returns: the name of the provider this data source is using.
+ */
 static VALUE rb_gda_datasource_get_provider(self)
     VALUE self;
 {
@@ -112,6 +186,12 @@ static VALUE rb_gda_datasource_get_provider(self)
     return CSTR2RVAL(info->provider);
 }
 
+/*
+ * Method: cnc_string
+ *
+ * Returns: the connection string this data source will be using to connect
+ * to the provider.
+ */
 static VALUE rb_gda_datasource_get_cnc_string(self)
     VALUE self;
 {
@@ -119,6 +199,11 @@ static VALUE rb_gda_datasource_get_cnc_string(self)
     return CSTR2RVAL(info->cnc_string);
 }
 
+/*
+ * Method: description
+ *
+ * Returns: a short description of the data source.
+ */
 static VALUE rb_gda_datasource_get_description(self)
     VALUE self;
 {
@@ -126,6 +211,12 @@ static VALUE rb_gda_datasource_get_description(self)
     return CSTR2RVAL(info->description);
 }
 
+/*
+ * Method: username
+ *
+ * Returns: the user name that will be used for the connection, 
+ * or nil of no user name has been specified.
+ */
 static VALUE rb_gda_datasource_get_username(self)
     VALUE self;
 {
@@ -133,6 +224,12 @@ static VALUE rb_gda_datasource_get_username(self)
     return CSTR2RVAL(info->username);
 }
 
+/*
+ * Method: password
+ *
+ * Returns: the password that will be used for the connection, 
+ * or nil of no password has been specified.
+ */
 static VALUE rb_gda_datasource_get_password(self)
     VALUE self;
 {
@@ -140,6 +237,15 @@ static VALUE rb_gda_datasource_get_password(self)
     return CSTR2RVAL(info->password);
 }
 
+/*
+ * Method: ==(an_other_datasource)
+ * an_other_datasource: a Gda::DataSource object.
+ *
+ * Checks if two Gda::DataSource objects are representing the same
+ * data source.
+ *
+ * Returns: true on success, false on failure.
+ */
 static VALUE rb_gda_datasource_is_equal(self, other_data)
     VALUE self, other_data;
 {
@@ -170,5 +276,7 @@ void Init_gda_datasource(void) {
     rb_define_method(c, "password",    rb_gda_datasource_get_password,    0);
 
     rb_define_method(c, "==", rb_gda_datasource_is_equal, 1);
+
+    cGdaDataSource = c;
 }
 

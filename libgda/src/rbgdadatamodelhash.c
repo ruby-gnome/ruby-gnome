@@ -21,6 +21,17 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::DataModelHash
+ * An implementation of Gda::DataModel based on a hash table.
+ */
+ 
+/*
+ * Class method: new(n_column)
+ * n_column:  number of columns for rows in this data model.
+ * 
+ * Returns: a reference to a newly created Gda::DataModelHash object.
+ */
 static VALUE rb_gda_datamodel_hash_new(self, n_columns)
     VALUE self, n_columns;
 {
@@ -31,6 +42,15 @@ static VALUE rb_gda_datamodel_hash_new(self, n_columns)
     return Qnil;
 }
 
+/*
+ * Method: set_n_columns(n_columns)
+ * n_columns: number of columns for rows this data model should use (must be
+ * greated than or equal to 0).
+ *
+ * Sets the number of columns for rows inserted in this model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_hash_set_n_columns(self, n_columns)
     VALUE self, n_columns;
 {
@@ -39,6 +59,13 @@ static VALUE rb_gda_datamodel_hash_set_n_columns(self, n_columns)
     return self;
 }
 
+/*
+ * Method: clear
+ *
+ * Frees all the rows inserted in this model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_hash_clear(self)
     VALUE self;
 {
@@ -46,6 +73,16 @@ static VALUE rb_gda_datamodel_hash_clear(self)
     return self;
 }
 
+/*
+ * Method: get_value_at(colnum, rownum)
+ * colnum:  column number (starting from 0).
+ * rownum:  row number (starting from 0).
+ *
+ * Retrieves the value at a specified column and row.
+ *
+ * Returns: a reference to a Gda::Value object if successful, nil
+ * otherwise.
+ */
 static VALUE rb_gda_datamodel_hash_get_value_at(self, colnum, rownum)
     VALUE self, colnum, rownum;
 {
@@ -57,6 +94,15 @@ static VALUE rb_gda_datamodel_hash_get_value_at(self, colnum, rownum)
         : Qnil;
 }
 
+/*
+ * Method: insert_row(rownum, row)
+ * rownum: the number of the row.
+ * row: the row to insert, as a Gda::Row object.
+ *
+ * Inserts a row in the data model.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_datamodel_hash_insert_row(self, rownum, row)
     VALUE self, rownum, row;
 {
@@ -66,6 +112,15 @@ static VALUE rb_gda_datamodel_hash_insert_row(self, rownum, row)
     return self; 
 }
 
+/*
+ * Method: get_row(rownum)
+ * rownum: a row number.
+ *
+ * Retrieves a row from the underlying hash table.
+ *
+ * Returns: a reference to a Gda::Row or nil if the requested row is not
+ * in the hash table.
+ */
 static VALUE rb_gda_datamodel_hash_get_row(self, rownum)
     VALUE self, rownum;
 {

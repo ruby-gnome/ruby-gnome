@@ -22,11 +22,9 @@
 #include "rbgda.h"
 
 /*
- *  Module: Gda
- *
- *  The Gda module.
+ * Module: Gda
+ * The Gda module.
  */
-
 VALUE mGda;
 
 static void Init_all_classes(void) {
@@ -74,16 +72,13 @@ static void Init_all_classes(void) {
 }
 
 /*
- *  Class method: init(appId, appVersion, *args) -> nil
+ * Class method: init(app_id, version)
+ * app_id: name of the program. 
+ * version: revision number of the program.
  *
- *  Initializes the libgda library in the current application, 
- *  identified by appId and appVersion (both String), with given
- *  parameters.
+ * Initializes the Ruby/Libgda library, using arguments from the command line.
  *
- *  If *args are ommited, libgda will be initialized using arguments
- *  from the Ruby command line.
- *
- *  Always returns nil.
+ * Returns: always nil.
  */
 extern VALUE rb_progname, rb_argv;
 static VALUE rb_gda_init(argc, argv, self)
@@ -134,18 +129,17 @@ static VALUE rb_gda_init(argc, argv, self)
 }
 
 /*
- *  Class method: main { ... } -> nil
+ * Class method: main { ... }
  *
- *  Runs the GDA main loop, which is nothing more than the Bonobo main loop, 
- *  but with internally added stuff specific for applications using libgda.
+ * Runs the GDA main loop, which is nothing more than the Bonobo main loop, 
+ * but with internally added stuff specific for applications using libgda.
  *
- *  You can specify a block code to be called after everything has been 
- *  correctly initialized (that is, for initializing your own stuff).
- *  In this case, Gda.main_quit method will be called at the end of the block.
+ * You can specify a block code to be called after everything has been 
+ * correctly initialized (that is, for initializing your own stuff).
+ * In this case, Gda.main_quit method will be called at the end of the block.
  *
- *  Always returns nil.
+ * Returns: always nil.
  */
-
 static VALUE __gda_callback;
 static void __gda_main(data)
     gpointer data;
@@ -166,6 +160,13 @@ static VALUE rb_gda_main(self)
     return Qnil;
 }
 
+/*
+ * Class method: main_quit
+ *
+ * Exits the main loop.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_main_quit(self)
     VALUE self;
 {
@@ -173,6 +174,17 @@ static VALUE rb_gda_main_quit(self)
     return Qnil;
 }
 
+/*
+ * Class method: sql_replace_placeholders(sql, params)
+ * sql: a SQL command containing placeholders for values.
+ * params: a list of values for the placeholders, as a Gda::ParameterList
+ * object.
+ *
+ * Replaces the placeholders (:name) in the given SQL command with the values
+ * from the Gda::ParameterList specified as the params argument.
+ *
+ * Returns: the SQL string with all placeholders replaced, or nil on error.
+ */
 static VALUE rb_gda_sql_replace_placeholders(self, text, plist)
     VALUE text, plist;
 {

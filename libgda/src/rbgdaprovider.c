@@ -21,6 +21,18 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Provider
+ * Information about providers which are installed in the system.
+ */
+VALUE cGdaProvider;
+
+/*
+ * Class method: providers
+ *
+ * Returns: a list of all providers currently installed in the system, as an
+ * Array of Gda::Provider objects.
+ */
 static VALUE rb_gda_get_providers(self)
     VALUE self;
 {
@@ -41,6 +53,14 @@ static VALUE rb_gda_get_providers(self)
     return arr;
 }
 
+/*
+ * Class method: each_provider { |provider| ... }
+ *
+ * Calls the block for each provider which is currently installed in the
+ * system, passing a reference to a Gda::Provider object as parameter.
+ *
+ * Returns: always nil.
+ */
 static VALUE rb_gda_provider_each(self)
     VALUE self;
 {
@@ -48,6 +68,17 @@ static VALUE rb_gda_provider_each(self)
     return Qnil;
 }
 
+/*
+ * Class method: model
+ *
+ * Fills and returns a new Gda::DataModel object using information from all
+ * providers which are currently installed in the system.
+ *
+ * Rows are separated in 3 columns:
+ * 'Id', 'Location' and 'Description'.
+ *
+ * Returns: a new Gda::DataModel object.
+ */
 static VALUE rb_gda_provider_model(self)
     VALUE self;
 {
@@ -57,6 +88,14 @@ static VALUE rb_gda_provider_model(self)
 	: Qnil;
 }
 
+/*
+ * Class method: get_by_name(name)
+ * name: name of the provider to search for.
+ *
+ * Gets a Gda::Provider object from the provider list givin its name.
+ *
+ * Returns: a Gda::Provider object if found, nil if not found.
+ */
 static VALUE rb_gda_provider_get_by_name(self, name)
     VALUE self, name;
 {
@@ -66,6 +105,11 @@ static VALUE rb_gda_provider_get_by_name(self, name)
         : Qnil;
 }
 
+/*
+ * Method: prov_id
+ *
+ * Returns: the provider's ID (usually its name).
+ */
 static VALUE rb_gda_provider_get_id(self)
     VALUE self;
 {
@@ -73,6 +117,12 @@ static VALUE rb_gda_provider_get_id(self)
     return CSTR2RVAL(info->id);
 }
 
+/*
+ * Method: location
+ *
+ * Returns: the provider's location (usually, the file name where it came
+ * from).
+ */
 static VALUE rb_gda_provider_get_location(self)
     VALUE self;
 {
@@ -80,6 +130,11 @@ static VALUE rb_gda_provider_get_location(self)
     return CSTR2RVAL(info->location);
 }
 
+/*
+ * Method: description
+ *
+ * Returns: the provider's description.
+ */
 static VALUE rb_gda_provider_get_description(self)
     VALUE self;
 {
@@ -87,6 +142,13 @@ static VALUE rb_gda_provider_get_description(self)
     return CSTR2RVAL(info->description);
 }
 
+/*
+ * Method: ==(an_other_provider)
+ * an_other_provider: a Gda::Provider object.
+ *
+ * Returns: true if the two Gda::Provider are referring the same provider,
+ * false otherwise.
+ */
 static VALUE rb_gda_provider_is_equal(self, other_prov)
     VALUE self, other_prov;
 {
@@ -95,7 +157,6 @@ static VALUE rb_gda_provider_is_equal(self, other_prov)
         : rb_equal(rb_gda_provider_get_id(self),
                    rb_gda_provider_get_id(other_prov));
 }
-
 
 void Init_gda_provider(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_PROVIDER_INFO, "Provider", mGda);
@@ -112,5 +173,7 @@ void Init_gda_provider(void) {
     rb_define_method(c, "description", rb_gda_provider_get_description, 0);
 
     rb_define_method(c, "==", rb_gda_provider_is_equal, 1);
+
+    cGdaProvider = c;
 }
 

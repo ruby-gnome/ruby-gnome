@@ -21,30 +21,64 @@
 
 #include "rbgda.h"
 
+/*
+ * Class: Gda::Error
+ * Management of errors.
+ */
+VALUE cGdaError;
+
+/*
+ * Method: description
+ *
+ * Returns: the description on thir error.
+ */
 static VALUE rb_gda_error_get_description(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_error_get_description(RGDA_ERROR(self)));
 }
 
+/*
+ * Method: number
+ *
+ * Returns: the number of this error.
+ */
 static VALUE rb_gda_error_get_number(self)
     VALUE self;
 {
     return INT2FIX(gda_error_get_number(RGDA_ERROR(self)));
 }
 
+/*
+ * Method: source
+ *
+ * Returns: the name of the source (usually provider's name).
+ */
 static VALUE rb_gda_error_get_source(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_error_get_source(RGDA_ERROR(self)));
 }
 
+/*
+ * Method: sqlstate
+ *
+ * Returns: the SQL state of this error.
+ */
 static VALUE rb_gda_error_get_sqlstate(self)
     VALUE self;
 {
     return CSTR2RVAL(gda_error_get_sqlstate(RGDA_ERROR(self)));
 }
 
+/*
+ * Method: set_description(description)
+ * description: a textual description of the error.
+ *
+ * Sets the description of the error.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_error_set_description(self, description)
     VALUE self, description;
 {
@@ -53,6 +87,14 @@ static VALUE rb_gda_error_set_description(self, description)
     return self;
 }
 
+/*
+ * Method: set_number(number)
+ * number: the number of the error.
+ *
+ * Sets the number of the error.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_error_set_number(self, number)
     VALUE self, number;
 {
@@ -61,6 +103,14 @@ static VALUE rb_gda_error_set_number(self, number)
     return self;
 }
 
+/*
+ * Method: set_source(source)
+ * source: the source of the error.
+ *
+ * Sets the source of the error.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_error_set_source(self, source)
     VALUE self, source;
 {
@@ -69,6 +119,14 @@ static VALUE rb_gda_error_set_source(self, source)
     return self;
 }
 
+/*
+ * Method: set_sqlstate(sqlstate)
+ * sqlstate: SQL state for the error.
+ *
+ * Sets the SQL state of the error.
+ *
+ * Returns: self.
+ */
 static VALUE rb_gda_error_set_sqlstate(self, sqlstate)
     VALUE self, sqlstate;
 {
@@ -77,6 +135,11 @@ static VALUE rb_gda_error_set_sqlstate(self, sqlstate)
     return self;
 }
 
+/*
+ * Class method: new(description=nil, number=nil, source=nil, sqlstate=nil)
+ *
+ * Returns: a newly created Gda::Error object.
+ */
 static VALUE rb_gda_error_new(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -123,5 +186,7 @@ void Init_gda_error(void) {
     rb_define_method(c, "set_sqlstate",    rb_gda_error_set_sqlstate,    1);
 
     G_DEF_SETTERS(c);
+
+    cGdaError = c;
 }
 
