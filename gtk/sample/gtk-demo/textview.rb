@@ -1,4 +1,4 @@
-# $Id: textview.rb,v 1.5 2003/07/30 17:26:31 mutoh Exp $
+# $Id: textview.rb,v 1.6 2004/01/13 14:24:00 mutoh Exp $
 =begin
 = Text Widget
 
@@ -40,7 +40,7 @@ module Demo
       
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.set_policy(Gtk::POLICY_AUTOMATIC,
-		     Gtk::POLICY_AUTOMATIC)
+		    Gtk::POLICY_AUTOMATIC)
       vpaned.add1(sw)
 
       sw.add(view1)
@@ -85,100 +85,94 @@ module Demo
       #
 
       buffer.create_tag('heading',
-			{'weight' =>(Pango::FontDescription::WEIGHT_BOLD),
-			  'size' =>(15 * Pango::SCALE)})
+			'weight' => Pango::FontDescription::WEIGHT_BOLD,
+			'size' => 15 * Pango::SCALE)
       
       buffer.create_tag("italic",
-			{ "style" => Pango::FontDescription::STYLE_ITALIC})
+			"style" => Pango::FontDescription::STYLE_ITALIC)
 
-      buffer.create_tag( "bold",
-			{"weight" => Pango::FontDescription::WEIGHT_BOLD})
+      buffer.create_tag("bold",
+			"weight" => Pango::FontDescription::WEIGHT_BOLD)
       
-      buffer.create_tag( "big",
+      buffer.create_tag("big",
 			# points times the PANGO_SCALE factor 
-			{ "size" => 20 * Pango::SCALE})
+			"size" => 20 * Pango::SCALE)
 
-      buffer.create_tag( "xx-small",
-			{"scale", Pango::AttrScale::XX_SMALL})
+      buffer.create_tag("xx-small",
+			"scale" => Pango::AttrScale::XX_SMALL)
 
-      buffer.create_tag( "x-large",
-			{"scale" => Pango::AttrScale::X_LARGE})
+      buffer.create_tag("x-large",
+			"scale" => Pango::AttrScale::X_LARGE)
       
-      buffer.create_tag( "monospace",
-			{"family" => "monospace"})
+      buffer.create_tag("monospace", "family" => "monospace")
       
-      buffer.create_tag( "blue_foreground",
-			{"foreground" => "blue"})
+      buffer.create_tag("blue_foreground", "foreground" => "blue")
 
-      buffer.create_tag( "red_background",
-			{"background" => "red"})
+      buffer.create_tag("red_background", "background" => "red")
 
       stipple = Gdk::Pixmap.create_from_data(nil, GRAY50_BITS, GRAY50_WIDTH,
 					     GRAY50_HEIGHT)
       
-      buffer.create_tag( "background_stipple",
-			{"background_stipple" => stipple})
+      buffer.create_tag("background_stipple",
+			"background_stipple" => stipple)
 
-      buffer.create_tag( "foreground_stipple",
-			{"foreground_stipple" => stipple})
+      buffer.create_tag("foreground_stipple",
+			"foreground_stipple" => stipple)
 
-      buffer.create_tag( "big_gap_before_line",
-			{"pixels_above_lines" => 30})
+      buffer.create_tag("big_gap_before_line",
+			"pixels_above_lines" => 30)
 
-      buffer.create_tag( "big_gap_after_line",
-			{"pixels_below_lines" => 30})
+      buffer.create_tag("big_gap_after_line",
+			"pixels_below_lines" => 30)
 
-      buffer.create_tag( "double_spaced_line",
-			{"pixels_inside_wrap" => 10})
+      buffer.create_tag("double_spaced_line",
+			"pixels_inside_wrap" => 10)
 
-      buffer.create_tag( "not_editable",
-			{ "editable" => false})
+      buffer.create_tag("not_editable",
+			 "editable" => false)
       
-      buffer.create_tag( "word_wrap",
-			{"wrap_mode" => Gtk::TextTag::WRAP_WORD})
+      buffer.create_tag("word_wrap",
+			"wrap_mode" => Gtk::TextTag::WRAP_WORD)
 
-      buffer.create_tag( "char_wrap",
-			{"wrap_mode" => Gtk::TextTag::WRAP_CHAR})
+      buffer.create_tag("char_wrap",
+			"wrap_mode" => Gtk::TextTag::WRAP_CHAR)
 
-      buffer.create_tag( "no_wrap",
-			{"wrap_mode" => Gtk::TextTag::WRAP_NONE})
+      buffer.create_tag("no_wrap",
+			"wrap_mode" => Gtk::TextTag::WRAP_NONE)
       
-      buffer.create_tag( "center",
-			{"justification" => Gtk::JUSTIFY_CENTER})
+      buffer.create_tag("center",
+			"justification" => Gtk::JUSTIFY_CENTER)
 
-      buffer.create_tag( "right_justify",
-			{"justification" => Gtk::JUSTIFY_RIGHT})
+      buffer.create_tag("right_justify",
+			"justification" => Gtk::JUSTIFY_RIGHT)
 
-      buffer.create_tag( "wide_margins",
-			{"left_margin" => 50,
-			  "right_margin" => 50})
+      buffer.create_tag("wide_margins",
+			"left_margin" => 50,
+			  "right_margin" => 50)
       
-      buffer.create_tag( "strikethrough",
-			{"strikethrough" => true})
+      buffer.create_tag("strikethrough",
+			"strikethrough" => true)
       
-      buffer.create_tag( "underline",
-			{"underline" => Pango::AttrUnderline::SINGLE})
+      buffer.create_tag("underline",
+			"underline" => Pango::AttrUnderline::SINGLE)
 
-      buffer.create_tag( "double_underline",
-			{"underline" => Pango::AttrUnderline::DOUBLE})
+      buffer.create_tag("double_underline",
+			"underline" => Pango::AttrUnderline::DOUBLE)
 
-      buffer.create_tag( "superscript",
-			{"rise" =>(10 * Pango::SCALE),	 #  10 pixels 
-			  "size" =>(8 * Pango::SCALE)  #  8 points 
-			})
+      buffer.create_tag("superscript",
+			"rise" => 10 * Pango::SCALE, #  10 pixels 
+			"size" => 8 * Pango::SCALE)  #  8 points 
       
-      buffer.create_tag( "subscript",
-			{"rise" =>(-10 * Pango::SCALE),   #  10 pixels 
-			  "size" =>(8 * Pango::SCALE)	  #  8 points 
-			})
+      buffer.create_tag("subscript",
+			"rise" => -10 * Pango::SCALE, #  10 pixels 
+			"size" => 8 * Pango::SCALE) #  8 points 
 
-      buffer.create_tag( "rtl_quote",
-			{"wrap_mode" => Gtk::TextTag::WRAP_WORD,
-			  "direction" => Gtk::Widget::TEXT_DIR_RTL,
-			  "indent" => 30,
-			  "left_margin" => 20,
-			  "right_margin" => 20
-			})
+      buffer.create_tag("rtl_quote",
+			"wrap_mode" => Gtk::TextTag::WRAP_WORD,
+			"direction" => Gtk::Widget::TEXT_DIR_RTL,
+			"indent" => 30,
+			"left_margin" => 20,
+			"right_margin" => 20)
     end
 
     def insert_text(buffer)
@@ -209,160 +203,102 @@ module Demo
 
       buffer.insert(iter, "The text widget can display text with all kinds of nifty attributes. It also supports multiple views of the same buffer; this demo is showing the same buffer in two places.\n\n")
 
-      buffer.insert_with_tags(iter, "Font styles. ",
-			       'heading')
+      buffer.insert(iter, "Font styles. ", 'heading')
       
       buffer.insert(iter, "For example, you can have ")
-      buffer.insert_with_tags(iter,
-			       "italic",
-			       "italic")
+      buffer.insert(iter, "italic", "italic")
       buffer.insert(iter, ", ")
-      buffer.insert_with_tags(iter,
-			       "bold",
-			       "bold")
+      buffer.insert(iter, "bold", "bold")
       buffer.insert(iter, ", or ")
-      buffer.insert_with_tags(iter,
-			       "monospace(typewriter)",
-			       "monospace")
+      buffer.insert(iter, "monospace(typewriter)", "monospace")
       buffer.insert(iter, ", or ")
-      buffer.insert_with_tags(iter,
-			       "big",
-			       "big")
+      buffer.insert(iter, "big", "big")
       buffer.insert(iter, " text. ")
       buffer.insert(iter, "It's best not to hardcode specific text sizes; you can use relative sizes as with CSS, such as ")
-      buffer.insert_with_tags(iter,
-			       "xx-small",
-			       "xx-small")
+      buffer.insert(iter, "xx-small", "xx-small")
       buffer.insert(iter, " or ")
-      buffer.insert_with_tags(iter,
-			       "x-large",
-			       "x-large")
+      buffer.insert(iter, "x-large", "x-large")
       buffer.insert(iter, " to ensure that your program properly adapts if the user changes the default font size.\n\n")
       
-      buffer.insert_with_tags(iter, "Colors. ",
-			       "heading")
+      buffer.insert(iter, "Colors. ", "heading")
       
       buffer.insert(iter, "Colors such as ")
-      buffer.insert_with_tags(iter,
-			       "a blue foreground",
-			       "blue_foreground")
+      buffer.insert(iter, "a blue foreground", "blue_foreground")
       buffer.insert(iter, " or ")
-      buffer.insert_with_tags(iter,
-			       "a red background",
-			       "red_background")
+      buffer.insert(iter, "a red background", "red_background")
       buffer.insert(iter, " or even ")
-      buffer.insert_with_tags(iter,
-			       "a stippled red background",
-			       "red_background",
-				 "background_stipple")
+      buffer.insert(iter, "a stippled red background",
+		    "red_background", "background_stipple")
 
       buffer.insert(iter, " or ")
-      buffer.insert_with_tags(iter,
-			       "a stippled blue foreground on solid red background",
-			       "blue_foreground",
-				 "red_background",
-				 "foreground_stipple")
+      buffer.insert(iter, "a stippled blue foreground on solid red background",
+		    "blue_foreground", "red_background", "foreground_stipple")
 
       buffer.insert(iter, "(select that to read it) can be used.\n\n")
 
-      buffer.insert_with_tags(iter, "Underline, strikethrough, and rise. ",
-			       "heading")
+      buffer.insert(iter, "Underline, strikethrough, and rise. ", "heading")
       
-      buffer.insert_with_tags(iter,
-			       "Strikethrough",
-			       "strikethrough")
+      buffer.insert(iter, "Strikethrough", "strikethrough")
       buffer.insert(iter, ", ")
-      buffer.insert_with_tags(iter,
-			       "underline",
-			       "underline")
+      buffer.insert(iter, "underline", "underline")
       buffer.insert(iter, ", ")
-      buffer.insert_with_tags(iter,
-			       "double underline",
-			       "double_underline")
+      buffer.insert(iter, "double underline", "double_underline")
       buffer.insert(iter, ", ")
-      buffer.insert_with_tags(iter,
-			       "superscript",
-			       "superscript")
+      buffer.insert(iter, "superscript", "superscript")
       buffer.insert(iter, ", and ")
-      buffer.insert_with_tags(iter,
-			       "subscript",
-			       "subscript")
+      buffer.insert(iter, "subscript", "subscript")
       buffer.insert(iter, " are all supported.\n\n")
 
-      buffer.insert_with_tags(iter, "Images. ",
-			       "heading")
+      buffer.insert(iter, "Images. ", "heading")
       
       buffer.insert(iter, "The buffer can have images in it: ")
-      buffer.insert_pixbuf(iter, pixbuf)
-      buffer.insert_pixbuf(iter, pixbuf)
-      buffer.insert_pixbuf(iter, pixbuf)
+      buffer.insert(iter, pixbuf)
+      buffer.insert(iter, pixbuf)
+      buffer.insert(iter, pixbuf)
       buffer.insert(iter, " for example.\n\n")
 
-      buffer.insert_with_tags(iter, "Spacing. ",
-			       "heading")
+      buffer.insert(iter, "Spacing. ", "heading")
 
       buffer.insert(iter, "You can adjust the amount of space before each line.\n")
       
-      buffer.insert_with_tags(iter,
-			       "This line has a whole lot of space before it.\n",
-			       "big_gap_before_line", "wide_margins")
-      buffer.insert_with_tags(iter,
-			       "You can also adjust the amount of space after each line; this line has a whole lot of space after it.\n",
-			       "big_gap_after_line", "wide_margins")
+      buffer.insert(iter, "This line has a whole lot of space before it.\n",
+		    "big_gap_before_line", "wide_margins")
+      buffer.insert(iter, "You can also adjust the amount of space after each line; this line has a whole lot of space after it.\n",
+		    "big_gap_after_line", "wide_margins")
       
-      buffer.insert_with_tags(iter,
-			       "You can also adjust the amount of space between wrapped lines; this line has extra space between each wrapped line in the same paragraph. To show off wrapping, some filler text: the quick brown fox jumped over the lazy dog. Blah blah blah blah blah blah blah blah blah.\n",
-			       "double_spaced_line", "wide_margins")
+      buffer.insert(iter, "You can also adjust the amount of space between wrapped lines; this line has extra space between each wrapped line in the same paragraph. To show off wrapping, some filler text: the quick brown fox jumped over the lazy dog. Blah blah blah blah blah blah blah blah blah.\n",
+		    "double_spaced_line", "wide_margins")
 
-      buffer.insert(iter,
-		     "Also note that those lines have extra-wide margins.\n\n")
+      buffer.insert(iter, "Also note that those lines have extra-wide margins.\n\n")
 
-      buffer.insert_with_tags(iter, "Editability. ",
-			       "heading")
+      buffer.insert(iter, "Editability. ", "heading")
       
-      buffer.insert_with_tags(iter,
-			       "This line is 'locked down' and can't be edited by the user - just try it! You can't delete this line.\n\n",
-			       "not_editable")
+      buffer.insert(iter, "This line is 'locked down' and can't be edited by the user - just try it! You can't delete this line.\n\n",
+		    "not_editable")
 
-      buffer.insert_with_tags(iter, "Wrapping. ", 
-			       "heading")
+      buffer.insert(iter, "Wrapping. ", "heading")
 
-      buffer.insert(iter,
-		     "This line(and most of the others in this buffer) is word-wrapped, using the proper Unicode algorithm. Word wrap should work in all scripts and languages that GTK+ supports. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n")
+      buffer.insert(iter, "This line(and most of the others in this buffer) is word-wrapped, using the proper Unicode algorithm. Word wrap should work in all scripts and languages that GTK+ supports. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n")
       
-      buffer.insert_with_tags(iter,
-			       "This line has character-based wrapping, and can wrap between any two character glyphs. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n",
-			       "char_wrap")
+      buffer.insert(iter, "This line has character-based wrapping, and can wrap between any two character glyphs. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n", "char_wrap")
       
-      buffer.insert_with_tags(iter,
-			       "This line has all wrapping turned off, so it makes the horizontal scrollbar appear.\n\n\n",
-			       "no_wrap")
+      buffer.insert(iter, "This line has all wrapping turned off, so it makes the horizontal scrollbar appear.\n\n\n", "no_wrap")
 
-      buffer.insert_with_tags(iter, "Justification. ",
-			       "heading")
+      buffer.insert(iter, "Justification. ", "heading")
       
-      buffer.insert_with_tags(iter,
-			       "\nThis line has center justification.\n",
-			       "center")
+      buffer.insert(iter, "\nThis line has center justification.\n", "center")
 
-      buffer.insert_with_tags(iter,
-			       "This line has right justification.\n",
-			       "right_justify")
+      buffer.insert(iter, "This line has right justification.\n",
+		    "right_justify")
 
-      buffer.insert_with_tags(iter,
-			       "\nThis line has big wide margins. Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.\n",
-			       "wide_margins")
+      buffer.insert(iter, "\nThis line has big wide margins. Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.\n", "wide_margins")
 
-      buffer.insert_with_tags(iter, "Internationalization. ",
-			       "heading")
+      buffer.insert(iter, "Internationalization. ", "heading")
 
-      buffer.insert(iter,
-		     "You can put all sorts of Unicode text in the buffer.\n\nGerman(Deutsch Süd) Grüß Gott\nGreek(Ελληνικά) Γειά σας\nHebrew	שלום\nJapanese(日本語)\n\nThe widget properly handles bidirectional text, word wrapping, DOS/UNIX/Unicode paragraph separators, grapheme boundaries, and so on using the Pango internationalization framework.\n")
+      buffer.insert(iter, "You can put all sorts of Unicode text in the buffer.\n\nGerman(Deutsch Süd) Grüß Gott\nGreek(Ελληνικά) Γειά σας\nHebrew	שלום\nJapanese(日本語)\n\nThe widget properly handles bidirectional text, word wrapping, DOS/UNIX/Unicode paragraph separators, grapheme boundaries, and so on using the Pango internationalization framework.\n")
 
       buffer.insert(iter, "Here's a word-wrapped quote in a right-to-left language:\n")
-      buffer.insert_with_tags(iter, "وقد بدأ ثلاث من أكثر المؤسسات تقدما في شبكة اكسيون برامجها كمنظمات لا تسعى للربح، ثم تحولت في السنوات الخمس الماضية إلى مؤسسات مالية منظمة، وباتت جزءا من النظام المالي في بلدانها، ولكنها تتخصص في خدمة قطاع المشروعات الصغيرة. وأحد أكثر هذه المؤسسات نجاحا هو »بانكوسول« في بوليفيا.\n\n",
-
-			       "rtl_quote")
+      buffer.insert(iter, "وقد بدأ ثلاث من أكثر المؤسسات تقدما في شبكة اكسيون برامجها كمنظمات لا تسعى للربح، ثم تحولت في السنوات الخمس الماضية إلى مؤسسات مالية منظمة، وباتت جزءا من النظام المالي في بلدانها، ولكنها تتخصص في خدمة قطاع المشروعات الصغيرة. وأحد أكثر هذه المؤسسات نجاحا هو »بانكوسول« في بوليفيا.\n\n", "rtl_quote")
       
       buffer.insert(iter, "You can put widgets in the buffer: Here's a button: ")
       anchor = buffer.create_child_anchor(iter)
@@ -392,7 +328,7 @@ module Demo
     end
 
     def attach_widgets(text_view)
-  
+      
       buffer = text_view.buffer;
 
       iter = buffer.start_iter
@@ -403,29 +339,27 @@ module Demo
 
 	if  i == 0 
 	  widget = Gtk::Button.new("Click Me")
-	widget.signal_connect('clicked') { |button|
+	  widget.signal_connect('clicked') { |button|
 	    if @@nest_window and ! @@nest_window.destroyed?
 	      @@nest_window.present
 	      break
 	    end
-  
+	    
 	    buffer = Gtk::TextBuffer.new
 	    iter = buffer.start_iter
 
-	    buffer.insert(iter,
-			   "This buffer is shared by a set of nested text views.\n Nested view:\n")
+	    buffer.insert(iter, "This buffer is shared by a set of nested text views.\n Nested view:\n")
 	    anchor = buffer.create_child_anchor(iter)
-	    buffer.insert(iter,
-			   "\nDon't do this in real applications, please.\n")
+	    buffer.insert(iter, "\nDon't do this in real applications, please.\n")
 
 	    view = Gtk::TextView.new(buffer)
-  
+	    
 	    recursive_attach_view(0, view, anchor)
-  
+	    
 	    @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
 	    sw = Gtk::ScrolledWindow.new(nil, nil)
 	    sw.set_policy(Gtk::POLICY_AUTOMATIC,
-			   Gtk::POLICY_AUTOMATIC)
+			  Gtk::POLICY_AUTOMATIC)
 
 	    @@nest_window.add(sw)
 	    sw.add(view)
@@ -464,7 +398,7 @@ module Demo
 	end
 
 	text_view.add_child_at_anchor(widget,
-				       anchor)
+				      anchor)
 
 	widget.show_all 
 	i += 1
@@ -484,10 +418,10 @@ module Demo
 
       align = Gtk::Alignment.new(0.5, 0.5, 1.0, 1.0)
       align.set_border_width(1)
-  
+      
       event_box.add(align)
       align.add(child_view)
-  
+      
       view.add_child_at_anchor(event_box, anchor)
 
       recursive_attach_view(depth + 1, child_view, anchor)

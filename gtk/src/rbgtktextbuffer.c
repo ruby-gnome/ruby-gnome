@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2003/11/19 12:52:34 $
+  $Author: mutoh $
+  $Date: 2004/01/13 14:25:58 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -59,15 +59,6 @@ txt_set_text(self, text)
 {
     StringValue(text);
     gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
-    return self;
-}
-
-static VALUE
-txt_insert(self, iter, text)
-    VALUE self, iter, text;
-{
-    StringValue(text);
-    gtk_text_buffer_insert(_SELF(self), RVAL2ITR(iter), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
 
@@ -221,6 +212,7 @@ static VALUE
 txt_insert_pixbuf(self, iter, pixbuf)
     VALUE self, iter, pixbuf;
 {
+    rb_warn("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
                                   GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
@@ -230,6 +222,7 @@ static VALUE
 txt_insert_child_anchor(self, iter, anchor)
     VALUE self, iter, anchor;
 {
+    rb_warn("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
                                         GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
     return self;
@@ -446,46 +439,62 @@ txt_create_tag(self, tag_name, properties)
 }
 
 static VALUE
-txt_insert_with_tags(argc, argv, self)
+txt_insert(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    VALUE where, text, tags;
+    VALUE where, value, tags;
     struct RArray *tarray;
     gint start_offset;
     GtkTextIter start;
     int i;
 
-    rb_scan_args(argc, argv, "2*", &where, &text, &tags);
+    rb_scan_args(argc, argv, "2*", &where, &value, &tags);
     tarray = RARRAY(tags);
 
-    start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
-    StringValue(text);
-    gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(text), RSTRING(text)->len);
-
-    if(tarray->len == 0)
-        return self;
-
-    gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
-  
-    for(i=0; i<tarray->len; i++)
-    {
-        GtkTextTag *tag;
-
-        if (rb_obj_is_kind_of(tarray->ptr[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
-            tag = RVAL2GOBJ(tarray->ptr[i]);
-        } else {
-            tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
-            if (tag == NULL)
-            {
-                g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
-                return self;
+    if (rb_obj_is_kind_of(value, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
+        gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(where),
+                                      GDK_PIXBUF(RVAL2GOBJ(value)));
+    } else if (rb_obj_is_kind_of(value, GTYPE2CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR))){
+        gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(where),
+                                            GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(value)));
+    } else {
+        start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
+        StringValue(value);
+        gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where), RVAL2CSTR(value), RSTRING(value)->len);
+        
+        if(tarray->len == 0)
+            return self;
+        
+        gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
+        
+        for(i=0; i<tarray->len; i++) {
+            GtkTextTag *tag;
+            
+            if (rb_obj_is_kind_of(tarray->ptr[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
+                tag = RVAL2GOBJ(tarray->ptr[i]);
+            } else {
+                tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
+                if (tag == NULL) {
+                    g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
+                    return self;
+                }
             }
+            gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITR(where));
         }
-        gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITR(where));
     }
-  
+    return self;
+}
+
+static VALUE
+txt_insert_with_tags(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    rb_warn("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
+    txt_insert(argc, argv, self);
     return self;
 }
 
@@ -593,7 +602,9 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "tag_table", txt_get_tag_table, 0);
 
     rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
-    rb_define_method(gTextBuffer, "insert", txt_insert, 2);
+    rb_define_method(gTextBuffer, "insert", txt_insert, -1);
+    rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
+
     rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
     rb_define_method(gTextBuffer, "insert_interactive", txt_insert_interactive, 3);
     rb_define_method(gTextBuffer, "insert_interactive_at_cursor", txt_insert_interactive_at_cursor, 2);
@@ -650,7 +661,6 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 2);
     
     rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
-    rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
     rb_define_method(gTextBuffer, "apply_tag", txt_apply_tag, 3);
     rb_define_method(gTextBuffer, "remove_tag", txt_remove_tag, 3);
     rb_define_method(gTextBuffer, "remove_all_tags", txt_remove_all_tags, 2);

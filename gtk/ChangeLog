@@ -1,3 +1,10 @@
+2004-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Gtk::TextBuffer#insert_with_tags, 
+	#insert_pixbuf,	#insert_child_anchor are deprecated. 
+	Use Gtk::TextBuffer#insert instead.
+	* sample/gtk-demo/textview.rb: Apply above changes.
+
 2003-01-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkspinbutton.c: Fix a bug of Gtk::SpinButton#range.
