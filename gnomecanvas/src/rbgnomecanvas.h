@@ -4,8 +4,9 @@
   rbgnomecanvas.h -
 
   $Author: mutoh $
-  $Date: 2004/02/18 16:57:30 $
+  $Date: 2004/03/05 15:56:29 $
 
+  Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002 KUBO Takehiro 
 ************************************************/
 
