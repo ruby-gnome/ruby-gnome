@@ -1,5 +1,10 @@
 2002-11-20  Masao Mutoh <mutoh@highway.ne.jp>
 
+	* src/lib/gconf2.rb: Move from lib/gconf2.rb as it was not installed 
+	by make install.
+
+2002-11-20  Masao Mutoh <mutoh@highway.ne.jp>
+
 	* extconf.rb: Remove checking either gdk2 is installed or not.
 
 2002-11-18  Nikolai :: lone-star :: Weibull <lone-star@home.se>
@@ -9,7 +14,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2002/11/20 11:23:26 $ macros.
+	and $Date: 2002/11/23 04:51:49 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
