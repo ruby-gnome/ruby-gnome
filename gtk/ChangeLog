@@ -1,3 +1,9 @@
+2002-12-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkitemfactory.c: Improve Gtk::ItemFactory#create_item/s.
+	Add Gtk::ItemFactory#popup.
+	* sample/misc/itemfactory.rb, itemfactory2.rb: Add samples. 
+
 2002-12-07  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkmain.c (gtk_m_main, gtk_m_main_quit): Gtk.main_quit should

@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/12/05 17:27:40 $
+  $Date: 2002/12/07 17:58:06 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -13,6 +13,7 @@
 ************************************************/
 
 #include "global.h"
+#include <gdk-pixbuf/gdk-pixdata.h>
 
 #define _SELF(self) (GTK_ITEM_FACTORY(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
@@ -106,48 +107,6 @@ menuitem_type_check(item_type)
 }
 
 static void
-item_exec_callback_wrap(ifact, iter, p_item)
-    VALUE ifact, iter;
-    GtkWidget *p_item;
-{
-    if (!NIL_P(iter)) {
-        rb_funcall(iter, id_call, 1, GOBJ2RVAL(p_item));
-    }
-}
-
-static VALUE
-ifact_create_item(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE path, accel, item_type, action;
-    GtkItemFactoryEntry *entry;
-
-    rb_scan_args(argc, argv, "12", &path, &item_type, &accel);
-
-    entry = ALLOC(GtkItemFactoryEntry);
-
-    entry->path = NIL_P(path) ? NULL : RVAL2CSTR(path);
-    entry->item_type = NIL_P(item_type) ? "<Branch>" : RVAL2CSTR(item_type);
-    entry->accelerator = NIL_P(accel) ? NULL : RVAL2CSTR(accel);
-    entry->callback = item_exec_callback_wrap;
-    if (menuitem_type_check(entry->item_type) != 0) {
-        action = rb_rescue((VALUE(*)())rb_f_lambda, 0, NULL, 0);
-        G_RELATIVE(self, action);
-        entry->callback_action = action;
-    }
-  
-    if (! NIL_P(item_type) && menuitem_type_check(entry->item_type) == 0) {
-        entry->callback = NULL;
-        entry->callback_action = 0;
-    }
-    gtk_item_factory_create_item(_SELF(self), entry, (gpointer)self, 1);
-    g_free(entry);
-    return self;
-}
-
-static void
 items_exec_callback_wrap(callback_data, action, widget)
     VALUE callback_data, action;
     GtkWidget widget;
@@ -160,6 +119,67 @@ items_exec_callback_wrap(callback_data, action, widget)
     }
 }
 
+static void
+create_factory_entry(entry, self, path, item_type, accel, extdata, func, data)
+    GtkItemFactoryEntry* entry;
+    VALUE self, path, item_type, accel, extdata, func, data;
+{
+    VALUE action;
+
+    entry->path = NIL_P(path) ? NULL : RVAL2CSTR(path);
+    entry->item_type = NIL_P(item_type) ? "<Branch>" : RVAL2CSTR(item_type);
+    entry->accelerator = NIL_P(accel) ? NULL : RVAL2CSTR(accel);
+        
+    if (menuitem_type_check(entry->item_type) == 0) {
+        entry->callback = NULL;
+    } else {
+        if (NIL_P(func)) {
+            entry->callback = NULL;
+        } else {
+            entry->callback = items_exec_callback_wrap;
+        }
+    }
+    action = rb_ary_new3(4, func, data);
+    G_RELATIVE(self, action);
+    entry->callback_action = action;
+
+    if (NIL_P(extdata)){
+        entry->extra_data = NULL;
+    } else if (TYPE(extdata) == T_STRING){
+        entry->extra_data = RVAL2CSTR(extdata);
+    } else if (TYPE(extdata) == T_SYMBOL){
+        entry->extra_data = rb_id2name(SYM2ID(extdata));
+    } else if (RVAL2GTYPE(extdata) == GDK_TYPE_PIXBUF){
+        GdkPixdata pixdata;
+        guint stream_length_p;
+        gdk_pixdata_from_pixbuf(&pixdata, GDK_PIXBUF(RVAL2GOBJ(extdata)), TRUE);
+        entry->extra_data = gdk_pixdata_serialize(&pixdata, &stream_length_p);
+    } else {
+        entry->extra_data = NULL;
+    }
+}  
+
+static VALUE
+ifact_create_item(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE path, type, accel, extdata, data, func;
+    GtkItemFactoryEntry *entry;
+
+    rb_scan_args(argc, argv, "14", &path, &type, &accel, &extdata, &data);
+
+    entry = ALLOC(GtkItemFactoryEntry);
+    func = rb_rescue((VALUE(*)())rb_f_lambda, 0, NULL, 0);
+
+    create_factory_entry(entry, self, path, type, accel, extdata, func, data);
+    
+    gtk_item_factory_create_item(_SELF(self), entry, (gpointer)self, 1);
+    g_free(entry);
+    return self;
+}
+
 static VALUE
 ifact_create_items(argc, argv, self)
     int argc;
@@ -167,56 +187,27 @@ ifact_create_items(argc, argv, self)
     VALUE self;
 {
     VALUE ary, cb_data;
-    VALUE r_entry, r_path, r_accel, r_type, r_func, r_data, r_extdata;
-    VALUE action;
+    VALUE entry, path, accel, type, func, data, extdata;
     GtkItemFactoryEntry *entries;
     guint i, len, n_menu_entries;
 
-    if (TYPE(self)== T_STRING){}
-
     rb_scan_args(argc, argv, "11", &ary, &cb_data);
 
-    if (TYPE(ary) == T_STRING){
-        printf("OK\n");
-    }
     n_menu_entries = RARRAY(ary)->len;
-
     entries = ALLOC_N(GtkItemFactoryEntry, n_menu_entries);
 
     for (i = 0; i < n_menu_entries; i++) {
-        r_entry = RARRAY(ary)->ptr[i];
-        len = RARRAY(r_entry)->len;
-        Check_Type(r_entry, T_ARRAY);
-        r_path =  RARRAY(r_entry)->ptr[0];
-        r_type =  ((len > 1) ? RARRAY(r_entry)->ptr[1] : Qnil);
-        r_accel = ((len > 2) ? RARRAY(r_entry)->ptr[2] : Qnil);
-        r_extdata = ((len > 3) ? RARRAY(r_entry)->ptr[3] : Qnil);
-        r_func =  ((len > 4) ? RARRAY(r_entry)->ptr[4] : Qnil);
-        r_data =  ((len > 5) ? RARRAY(r_entry)->ptr[5] : Qnil);
-        entries[i].path = NIL_P(r_path) ? NULL : RVAL2CSTR(r_path);
-        entries[i].item_type = NIL_P(r_type) ? "<Branch>" : RVAL2CSTR(r_type);
-        entries[i].accelerator = NIL_P(r_accel) ? NULL : RVAL2CSTR(r_accel);
+        entry = RARRAY(ary)->ptr[i];
+        len = RARRAY(entry)->len;
+        Check_Type(entry, T_ARRAY);
+        path =  RARRAY(entry)->ptr[0];
+        type =  ((len > 1) ? RARRAY(entry)->ptr[1] : Qnil);
+        accel = ((len > 2) ? RARRAY(entry)->ptr[2] : Qnil);
+        extdata = ((len > 3) ? RARRAY(entry)->ptr[3] : Qnil);
+        func =  ((len > 4) ? RARRAY(entry)->ptr[4] : Qnil);
+        data =  ((len > 5) ? RARRAY(entry)->ptr[5] : Qnil);
 
-        if (NIL_P(r_extdata)){
-            entries[i].extra_data = NULL;
-        } else if (TYPE(r_extdata) == T_STRING){
-            entries[i].extra_data = RVAL2CSTR(r_extdata);
-        } else if (TYPE(r_extdata) == T_SYMBOL){
-            entries[i].extra_data = rb_id2name(SYM2ID(r_extdata));
-        }
-        if (menuitem_type_check(entries[i].item_type) == 0) {
-            entries[i].callback = NULL;
-        } else {
-            if (NIL_P(r_func)) {
-                entries[i].callback = NULL;
-            } else {
-                entries[i].callback = items_exec_callback_wrap;
-            }
-        }
-        action = rb_ary_new3(4, r_func, r_data, self, r_path);
-
-        G_RELATIVE(self, action);
-        entries[i].callback_action = action;
+        create_factory_entry(&entries[i], self, path, type, accel, extdata, func, data);
     }
 
     gtk_item_factory_create_items (_SELF(self), n_menu_entries, entries, NULL);
@@ -235,16 +226,24 @@ ifact_delete_item(self, path)
 }
 
 /*
+Don't implement. Use Gtk::ItemFactory#delete_item instead.
 void        gtk_item_factory_delete_entry   (GtkItemFactory *ifactory,
                                              GtkItemFactoryEntry *entry);
 void        gtk_item_factory_delete_entries (GtkItemFactory *ifactory,
                                              guint n_entries,
                                              GtkItemFactoryEntry *entries);
-void        gtk_item_factory_popup          (GtkItemFactory *ifactory,
-                                             guint x,
-                                             guint y,
-                                             guint mouse_button,
-                                             guint32 time);
+*/
+
+static VALUE
+ifact_popup(self, x, y, mouse_button, time)
+    VALUE self, x, y, mouse_button, time;
+{
+    gtk_item_factory_popup(_SELF(self), NUM2UINT(x), NUM2UINT(y), NUM2UINT(mouse_button),
+                           NUM2INT(time));
+    return self;
+}
+/*
+Do we need these methods?
 void        gtk_item_factory_popup_with_data
                                             (GtkItemFactory *ifactory,
                                              gpointer popup_data,
@@ -281,6 +280,7 @@ Init_gtk_itemfactory()
     rb_define_method(gItemFactory, "create_item", ifact_create_item, -1);
     rb_define_method(gItemFactory, "create_items", ifact_create_items, -1);
     rb_define_method(gItemFactory, "delete_item", ifact_delete_item, 1);
+    rb_define_method(gItemFactory, "popup", ifact_popup, 4);
 
     /* Ruby/GTK Original constants */
     rb_define_const(gItemFactory, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
