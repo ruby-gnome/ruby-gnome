@@ -58,7 +58,7 @@ class TestGnomeApp < Gnome::App
     "Havoc Pennington",
     "Miguel de Icaza",
     "Jonathan Blandford",
-    "Carlos PerellÃ³ MarÃ­n",
+    "Carlos Perelló Marín",
     "Martin Baulig",
   ]
 
