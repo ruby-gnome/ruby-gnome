@@ -3,8 +3,8 @@
 
    rbart_svp.c -
 
-   $Author: mutoh $
-   $Date: 2003/02/01 16:55:26 $
+   $Author: sakai $
+   $Date: 2003/03/20 17:40:51 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 
@@ -61,13 +61,6 @@ svp_union(r_self, r_other)
 	VALUE r_other;
 {
 	return make_art_svp(art_svp_union(get_art_svp(r_self), get_art_svp(r_other)));
-}
-
-static VALUE
-vpath_to_svp(r_self)
-	VALUE r_self;
-{
-	return make_art_svp(art_svp_from_vpath(get_art_vpath(r_self)));
 }
 
 void
