@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: tkubo $
-  $Date: 2002/11/01 15:15:55 $
+  $Author: mutoh $
+  $Date: 2002/12/09 15:05:25 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -27,6 +27,8 @@ extern "C" {
     rb_funcall(mGLib, id_add_one_arg_setter, 1, klass)
 
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
+#define G_SET_SYMBOL_PROPERTY(gtype, name) \
+     rbgobj_register_property_getter(gtype, name, sym_g2r_func)
 
 #define GLIST2ARY(list)              (rbgutil_glist2ary(list))
 #define GLIST2ARY2(list, gtype)      (rbgutil_glist2ary_boxed(list, gtype))
@@ -38,6 +40,7 @@ extern "C" {
     extern ID id_module_eval;
     extern ID id_add_one_arg_setter;
 
+    extern VALUE sym_g2r_func(const GValue *from);
     extern VALUE rbgutil_gerror2exception(GError *error);
     extern void rbgutil_set_properties(VALUE self, VALUE hash);
     extern VALUE rbgutil_glist2ary(GList* list);

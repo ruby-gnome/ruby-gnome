@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:12:32 $
+  $Date: 2002/12/09 15:05:24 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -545,6 +545,7 @@ Init_type()
     _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
     _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
     _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
     _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
     _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
     _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);

@@ -3,8 +3,8 @@
 
   rbgutil.c -
 
-  $Author: sakai $
-  $Date: 2002/11/24 15:02:48 $
+  $Author: mutoh $
+  $Date: 2002/12/09 15:05:24 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -96,6 +96,14 @@ rbgutil_gslist2ary_boxed(list, gtype)
         list = list->next;
     }
     return ary;
+}
+
+VALUE
+sym_g2r_func(from)
+    const GValue *from;
+{
+    const gchar *str = g_value_get_string(from);
+    return str ? ID2SYM(rb_intern(str)) : Qnil;
 }
 
 void

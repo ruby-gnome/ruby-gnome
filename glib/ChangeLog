@@ -1,3 +1,11 @@
+2002-12-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.[ch]: Add G_SET_SYMBOL_PROPERTY(gtype, name).
+
+2002-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c: Add rb_cSymbol as G_TYPE_STRING. 
+
 2002-11-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* rbgobj_closure.c (rclosure_marshal): check if return_value's type
