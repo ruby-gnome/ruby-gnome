@@ -1,6 +1,12 @@
+2004-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkactiongroup.c: Added for GTK+-2.4.
+	* sample/misc/uimanager.rb, uimanager2.rb, uimanager2.xml: Added.
+	* src/rbgtkstyle.c: Fix a memleak of Gtk::Style#set_bg_pixmap. 
+
 2004-07-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkuimanager.c: Added. 
+	* src/rbgtkuimanager.c: Added for GTK+-2.4. 
 	* src/rbgtkiconinfo.c: Fix a memory leak.
 
 2004-07-24  Masao Mutoh  <mutoh@highway.ne.jp>

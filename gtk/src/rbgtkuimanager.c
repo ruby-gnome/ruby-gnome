@@ -4,7 +4,7 @@
   rbgtkuimanager.c -
 
   $Author: mutoh $
-  $Date: 2004/07/25 16:27:12 $
+  $Date: 2004/07/29 18:35:06 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -160,7 +160,7 @@ void
 Init_gtk_uimanager()
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gUI = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "UIManager", mGtk);
+    VALUE gUI = G_DEF_CLASS(GTK_TYPE_UI_MANAGER, "UIManager", mGtk);
 
     rb_define_method(gUI, "initialize", rbuimanager_initialize, 0);
     rb_define_method(gUI, "insert_action_group", rbuimanager_insert_action_group, 2);

@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2004/06/01 17:33:19 $
+  $Date: 2004/07/29 18:35:06 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -603,10 +603,11 @@ style_set_bg_pixmap(self, idx, bg_pixmap)
     VALUE self, idx, bg_pixmap;
 {
     int i = NUM2INT(idx);
-
+    GdkPixmap* pixmap = RVAL2GOBJ(bg_pixmap);
+    g_object_ref(G_OBJECT(pixmap));
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    _SELF(self)->bg_pixmap[i] = RVAL2GOBJ(bg_pixmap);
+    _SELF(self)->bg_pixmap[i] = pixmap;
     return self;
 }
 
