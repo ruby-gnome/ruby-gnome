@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2004/05/15 17:46:15 $
+  $Date: 2004/07/24 07:43:00 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -112,12 +112,14 @@ void Init_glib2()
     
     rb_define_const(mGLib, "VERSION",
                     rb_ary_new3(3,
-                                INT2FIX(GLIB_MAJOR_VERSION),
-                                INT2FIX(GLIB_MINOR_VERSION),
-                                INT2FIX(GLIB_MICRO_VERSION)));
-    rb_define_const(mGLib, "MAJOR_VERSION", INT2FIX(GLIB_MAJOR_VERSION));
-    rb_define_const(mGLib, "MINOR_VERSION", INT2FIX(GLIB_MINOR_VERSION));
-    rb_define_const(mGLib, "MICRO_VERSION", INT2FIX(GLIB_MICRO_VERSION));
+                                INT2FIX(glib_major_version),
+                                INT2FIX(glib_minor_version),
+                                INT2FIX(glib_micro_version)));
+    rb_define_const(mGLib, "MAJOR_VERSION", INT2FIX(glib_major_version));
+    rb_define_const(mGLib, "MINOR_VERSION", INT2FIX(glib_minor_version));
+    rb_define_const(mGLib, "MICRO_VERSION", INT2FIX(glib_micro_version));
+    rb_define_const(mGLib, "INTERFACE_AGE", INT2FIX(glib_interface_age));
+    rb_define_const(mGLib, "BINARY_AGE", INT2FIX(glib_binary_age));
 
     rb_define_const(mGLib, "BINDING_VERSION",
                     rb_ary_new3(3,

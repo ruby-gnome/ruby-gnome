@@ -77,7 +77,7 @@ class TestGLib < Test::Unit::TestCase
 	box.add mybutton.new
 	GC.start
       }
-      assert(box.children.all?{|item| item.is_a? mybutton })      
+      assert(box.children.all?{|item| item.is_a? mybutton })
     rescue LoadError
     end
   end
