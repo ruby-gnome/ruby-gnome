@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/02/12 07:48:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -236,8 +236,8 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "devices", gdkdisplay_list_devices, 0);
     rb_define_method(gdkDisplay, "event", gdkdisplay_get_event, 0);
     rb_define_method(gdkDisplay, "peek_event", gdkdisplay_peek_event, 0);
-    rb_define_method(gdkDisplay, "put_event", gdkdisplay_put_event, 0);
-    rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 2);
+    rb_define_method(gdkDisplay, "put_event", gdkdisplay_put_event, 1);
+    rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 1);
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
     rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);

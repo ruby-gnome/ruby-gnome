@@ -1,7 +1,9 @@
 2004-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkdisplay.c: Fix argument errors of Gdk::Display#put_event, 
+	#set_double_click_time. Bugs item [892303].
 	* sample/gtk-demo/main.rb: Don't show a warning message when 
-	"Tree View" is choosed.
+	"Tree View" is choosed reported by gariele renzi.
 	* src/rbgdkwindow.c: Fixed Gdk::Window#(set_)decorations, 
 	#(set_)functions, #(set_)events reported by gabriele renzi. 
 	* sample/testgtk/notebook.rb: Fixed bugs reported by gabriele renzi.
