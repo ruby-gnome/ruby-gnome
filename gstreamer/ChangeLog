@@ -1,3 +1,7 @@
+2003-08-09  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* sample/media-type2.rb: New file (thanks to Nikolai Weibull).
+
 2003-08-08  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* sample/gst-inspect.rb: Added signals and event masks support.
