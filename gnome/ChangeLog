@@ -1,5 +1,9 @@
 2002-12-08  Masao Mutoh <mutoh@highway.ne.jp>
 
+	* extconf.rb: restore previous version.
+
+2002-12-08  Masao Mutoh <mutoh@highway.ne.jp>
+
 	* sample/gnome-app-helper.rb: Follow Ruby/GTK changes.
 
 2002-12-03  KUBO Takehiro  <kubo@jiubao.org>
