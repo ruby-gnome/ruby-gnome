@@ -107,12 +107,6 @@ begin
   end
   $objs << "rbgtkinits.o"
 
-  if /mswin32/ =~ PLATFORM
-    $objs << "rbgdkkeysyms.lib"
-  else
-    $objs << "librbgdkkeysyms.a"
-  end
-
   create_makefile("gtk2", src_dir)
 
   raise Interrupt if not FileTest.exist? "Makefile"
@@ -128,6 +122,8 @@ begin
       mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
     elsif e == "rbgdkconst.c"
       mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
+    elsif e == "rbgdkkeyval.c"
+      mfile.print "rbgdkkeyval#{obj_ext}: rbgdkkeyval.c rbgdkkeysyms.h\n"
     elsif e == "init.c"
       mfile.print "init#{obj_ext}: init.c rbgtk.h global.h rbgtkinits.c\n"
     else
@@ -135,23 +131,6 @@ begin
     end
   end
   mfile.print "rbgtkinits#{obj_ext}: rbgtkinits.c\n"
-
-  if /mswin32/ =~ PLATFORM
-    mfile.print "\
-rbgdkkeysyms.lib: makedefconst.rb rbgdkkeysyms.h
-	$(RUBY) $(srcdir)/makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
-	cd rbgdkkeysyms
-	nmake ..\\$@
-	cd ..
-"
-  else
-    mfile.print "\
-
-librbgdkkeysyms.a: makedefconst.rb rbgdkkeysyms.h
-	$(RUBY) $(srcdir)/makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
-	cd rbgdkkeysyms; make ../$@; cd ..
-"
-  end
 
   mfile.print "\
 

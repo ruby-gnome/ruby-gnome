@@ -1,3 +1,10 @@
+2002-11-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkkeysyms/*: Abolished. Create rbgdkkeysyms.h instead.
+	* extconf.rb: Follow above changes.
+	* makegdkkeysyms.h: Append constants of Key symbols to Gdk::Keyval.
+	* src/rbgdkkeyval.c: Include rbgdkkeysyms.h.
+	
 2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeyval.c: Rename Gdk::Keyval.name to Gdk::Keyval.to_name.

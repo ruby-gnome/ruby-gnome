@@ -4,7 +4,7 @@
   rbgdkkeyval.c -
 
   $Author: mutoh $
-  $Date: 2002/11/23 09:40:06 $
+  $Date: 2002/11/28 16:13:11 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,7 @@
 ************************************************/
 
 #include "global.h"
+#include <gdk/gdkkeysyms.h>
 
 static VALUE
 keyval_to_name(self, keyval)
@@ -66,4 +67,5 @@ Init_gtk_gdk_keyval()
     rb_define_module_function(mGdkKeyval, "lower?", keyval_is_lower, 1);
     rb_define_module_function(mGdkKeyval, "to_upper", keyval_to_upper, 1);
     rb_define_module_function(mGdkKeyval, "to_lower", keyval_to_lower, 1);
+#include "rbgdkkeysyms.h"
 }
