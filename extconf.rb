@@ -21,6 +21,8 @@ subdirs.collect! do |subdir|
 end
 
 subdirs -= priorlibs
+subdirs = priorlibs + subdirs #Change order
+
 
 #
 # generate top-level Makefile

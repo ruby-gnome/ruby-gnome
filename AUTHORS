@@ -19,6 +19,9 @@ KATO Kazuyoshi <kadu@zb.wakwak.com>
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
+Laurent Sansonetti <laurent@datarescue.be>
+     Ruby/GStreamer(M).
+
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
      Vice maintainer. Ruby/GLib(M) and most of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
@@ -28,7 +31,7 @@ Masao Mutoh <mutoh@highway.ne.jp>
      Ruby/Pango(M), rbbr(M), Webmaster, Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
-     Ruby/GConf(M), Ruby/GTK.
+     Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
 
 Nobuyoshi Nakada <nobu.nokada@softhome.net>
      Technical advisor.

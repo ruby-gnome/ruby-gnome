@@ -1,5 +1,10 @@
+2003-07-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* AUTHORS: Modified.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* extconf.rb: Follow bellow changes. And indicate compiling order.
 	* mkmf-gnome2.rb: Move to glib/src/lib/mkmf-gnome2.rb.
 
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
