@@ -1,4 +1,4 @@
-# $Id: stock_browser.rb,v 1.2 2003/10/14 13:50:25 kzys Exp $
+# $Id: stock_browser.rb,v 1.3 2004/03/01 15:04:46 mutoh Exp $
 =begin
 = Stock Item and Icon Browser
 
@@ -8,18 +8,6 @@ just to provide a handy place to browse the available stock icons
 and stock items.
 =end
 require 'common'
-
-module Gtk
-  class TreeView
-    def insert_column_with_data_func(position, title, renderer, func, data, dnotify)
-      column = Gtk::TreeViewColumn.new(title, renderer)
-      self.insert_column(column, position)
-      column.set_cell_data_func(renderer) do |*args|
-	func.call(*args)
-      end
-    end
-  end
-end
 
 module Demo
   class StockBrowser < BasicWindow
@@ -56,47 +44,33 @@ module Demo
 
       cell_renderer = Gtk::CellRendererPixbuf.new
       column.pack_start(cell_renderer, false)
-      #column.set_attributes(cell_renderer, 'stock_id', 1, nil)
+      column.set_attributes(cell_renderer, "stock_id" => 1)
 
       cell_renderer = Gtk::CellRendererText.new
       column.pack_start(cell_renderer, true)
       column.set_cell_data_func(cell_renderer) do |column, cell, model, iter|
-	info = model.get_value(iter, 0)
-	cell.text = info.const
+	cell.text = iter[0].const
       end
 
       treeview.append_column(column)
 
       cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1, 'Label', cell_renderer,
-					    proc do |col, cell, model, iter|
-					      info = model.get_value(iter, 0)
-					      if info
-						cell.text = info.item.label
-					      end
-					    end,
-					    nil, nil)
-
-      accel_set_func =
-      cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1, 'Accel', cell_renderer,
-					    proc do |col, cell, model, iter|
-					      info = model.get_value(iter, 0)
-					      if info
-						cell.text = info.accel_str
-					      end
-					    end,
-					    nil, nil)
+      treeview.insert_column(-1, 'Label', cell_renderer) do |col, cell, model, iter|
+	info = iter[0]
+	cell.text = info.item.label if info
+      end
 
       cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1, 'ID', cell_renderer,
-					    proc do |col, cell, model, iter|
-					      info = model.get_value(iter, 0)
-					      if info
-						cell.text = info.id
-					      end
-					    end,
-					    nil, nil)
+      treeview.insert_column(-1, 'Accel', cell_renderer) do |col, cell, model, iter|
+	info = iter[0]
+	cell.text = info.accel_str if info
+      end
+
+      cell_renderer = Gtk::CellRendererText.new
+      treeview.insert_column(-1, 'ID', cell_renderer) do |col, cell, model, iter|
+	info = iter[0]
+	cell.text = info.id if info
+      end
 
       align = Gtk::Alignment.new(0.5, 0.0, 0.0, 0.0)
       hbox.pack_end(align, false, false, 0)
@@ -188,8 +162,8 @@ module Demo
 	info.const = id_to_const(info.id)
 
 	iter = store.append
-	store.set_value(iter, 0, info)
-	store.set_value(iter, 1, info.id)
+	iter[0] = info
+	iter[1] = info.id
       end
 
       return store
@@ -200,7 +174,7 @@ module Demo
       display = treeview.display
 
       iter = selection.selected
-      info = iter.get_value(0)
+      info = iter[0]
 
       display.type_label.label = if info.small_icon and info.item.label
 				   'Icon and Item'

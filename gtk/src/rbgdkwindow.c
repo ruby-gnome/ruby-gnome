@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/02/26 17:24:51 $
+  $Date: 2004/03/01 15:04:46 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -243,7 +243,7 @@ gdkwin_clear_area(argc, argv, self)
     VALUE self;
 {
     VALUE gen_expose, x, y, w, h;
-    rb_scan_args(argc, argv, "01", &x, &y, &w, &h, &gen_expose);
+    rb_scan_args(argc, argv, "41", &x, &y, &w, &h, &gen_expose);
 
     if (! NIL_P(gen_expose) && RTEST(gen_expose)){
         gdk_window_clear_area_e(_SELF(self),

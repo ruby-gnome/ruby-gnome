@@ -1,3 +1,21 @@
+2004-03-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/gtk-demo/stock_browser.rb, list_store.rb, tree_store.rb: 
+	Some modified. 
+
+2004-03-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeviewcolumn.c: Fix a segfault of 
+	Gtk::TreeViewColumn#set_cell_data_func. Reported by Joao Pedrosa.
+	* src/rbgtktreeview.c: Ditto.
+	* src/init.c: Remove comment for threading support.
+
+2004-02-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.h: Increment version number.
+	* src/rbgdkwindow.c: Fix an argument numbers. 
+	Reported by Michel Metzger.
+
 2004-02-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c: Change Gdk::Screen#setting to #get_setting. 

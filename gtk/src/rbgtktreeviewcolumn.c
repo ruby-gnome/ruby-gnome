@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2003/12/23 05:27:06 $
+  $Date: 2004/03/01 15:04:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -149,6 +149,7 @@ tvc_set_cell_data_func(self, renderer)
     VALUE self, renderer;
 {
     volatile VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
     G_RELATIVE(renderer, func);
     gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2CELLRENDERER(renderer),
                                             cell_data_func, (gpointer)func, NULL);

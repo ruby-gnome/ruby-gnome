@@ -1,4 +1,4 @@
-# $Id: list_store.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
+# $Id: list_store.rb,v 1.3 2004/03/01 15:04:46 mutoh Exp $
 =begin
 = Tree View/List Store
 
@@ -71,7 +71,7 @@ module Demo
       DATA.each do |bug|
 	iter = store.append
 	bug.each_with_index do |value, index|
-	  iter.set_value(index, value)
+	  iter[index] = value
 	end
       end
       return store
@@ -86,7 +86,7 @@ module Demo
       
       column = Gtk::TreeViewColumn.new('Fixed?',
 				       renderer,
-				       {'active' => COLUMN_FIXED})
+				       'active' => COLUMN_FIXED)
 
       # set this column to a fixed sizing (of 50 pixels)
       column.sizing = Gtk::TreeViewColumn::FIXED
@@ -97,7 +97,7 @@ module Demo
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Bug number',
 				       renderer,
-				       {'text' => COLUMN_NUMBER})
+				       'text' => COLUMN_NUMBER)
       column.set_sort_column_id(COLUMN_NUMBER)
       treeview.append_column(column)
 
@@ -105,7 +105,7 @@ module Demo
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Severity',
 				       renderer,
-				       {'text' => COLUMN_SEVERITY})
+				       'text' => COLUMN_SEVERITY)
       column.set_sort_column_id(COLUMN_SEVERITY)
       treeview.append_column(column)
 
@@ -113,7 +113,7 @@ module Demo
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Description',
 				       renderer,
-				       {'text' => COLUMN_DESCRIPTION})
+				       'text' => COLUMN_DESCRIPTION)
       column.set_sort_column_id(COLUMN_DESCRIPTION)
       treeview.append_column(column)
     end
@@ -123,13 +123,13 @@ module Demo
       
       # get toggled iter
       iter = model.get_iter(path)
-      fixed = model.get_value(iter, COLUMN_FIXED)
+      fixed =iter[COLUMN_FIXED]
       
       # do something with the value
       fixed ^= 1
       
       # set new value
-      model.set_value(iter, COLUMN_FIXED, fixed)
+      iter[COLUMN_FIXED] = fixed
     end
   end
 end
