@@ -1,3 +1,26 @@
+2002-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwindow.c: Implement Gtk::Window#active_focus, #active_default, #set_gravity, 
+	#gravity, #focus, #present, #iconify, #deiconify, #stick, #unstick, #maximize, 
+	#unmaximize, #set_decorated, #set_role, #set_type_hint, #decorated?, #default_size, 
+	#destroy_with_parent?, #frame_dimensions, #mnemonic_modifier, #position, #role, #size, 
+	#transient_for, #type_hint, #move, #resize.
+	* src/rbgtkwindow.c, src/rbgtkmain.c: Move Gtk::Window#grab_add/remove to 
+	Gtk.grab_add/remove.
+	* src/rbgtklist.c, src/rbgtktree.c, src/rbgtklistitem.c, src/rbgtktreeitem.c: Removed.
+	* src/rbgtktearoffmenuitem.c: Code cleanup.
+	* src/rbgtkseparatormenuitem.c: Implement Gtk::SeparatorMenuItem.
+	* src/rbgtkimagemenuitem.c: Implement Gtk::ImageMenuItem. 
+	* src/rbgtkradiomenuitem.c: Remove property methods. Code cleanup. 
+	* src/rbgtkcheckmenuitem.c: Remove property methods.
+	* src/rbgtkmenuitem.c: Change Gtk::MenuItem#right_justify to #set_right_justified. 
+	Add Gtk::MenuItem#right_justify?, #submenu, #toggle_size_allocate.
+	* src/rbgtkoptionmenu.c: Remove property methods. Add Gtk::OptionMenu#history.
+	* src/rbgtkradiobutton.c: Remove property methods. 
+	* src/rbgtkcheckbutton.c: Code clean up.
+	* src/rbgtktogglebutton.c: Remove property methods. Remove Gtk::ToggleButton#set_state. 
+	* src/rbgtkbutton.c: Remove property methods. 
+
 2002-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkframe.c: Remove property methods. Add Gtk::Frame#label_align. 

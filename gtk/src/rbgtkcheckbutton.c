@@ -4,7 +4,7 @@
   rbgtkcheckbutton.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,15 +23,20 @@ cbtn_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &label) == 1) {
-		widget = gtk_check_button_new_with_label(RVAL2CSTR(label));
+        widget = gtk_check_button_new_with_label(RVAL2CSTR(label));
     }
     else {
-		widget = gtk_check_button_new();
+        widget = gtk_check_button_new();
     }
 
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
+
+/* 
+GtkWidget*  gtk_check_button_new_with_mnemonic
+                                            (const gchar *label);
+*/
 
 void 
 Init_gtk_check_button()

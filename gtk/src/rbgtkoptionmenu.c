@@ -4,7 +4,7 @@
   rbgtkoptionmenu.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,23 +22,6 @@ omenu_initialize(self)
 }
 
 static VALUE
-omenu_set_menu(self, child)
-    VALUE self, child;
-{
-    rb_iv_set(self, "option_menu", child);
-    gtk_option_menu_set_menu(GTK_OPTION_MENU(RVAL2GOBJ(self)),
-							 GTK_WIDGET(RVAL2GOBJ(child)));
-    return self;
-}
-
-static VALUE
-omenu_get_menu(self)
-    VALUE self;
-{
-    return rb_iv_get(self, "option_menu");
-}
-
-static VALUE
 omenu_remove_menu(self)
     VALUE self;
 {
@@ -50,9 +33,15 @@ static VALUE
 omenu_set_history(self, index)
     VALUE self, index;
 {
-    gtk_option_menu_set_history(GTK_OPTION_MENU(RVAL2GOBJ(self)),
-								NUM2INT(index));
+    gtk_option_menu_set_history(GTK_OPTION_MENU(RVAL2GOBJ(self)), NUM2INT(index));
     return self;
+}
+
+static VALUE
+omenu_get_history(self)
+    VALUE self;
+{
+    return INT2NUM(gtk_option_menu_get_history(GTK_OPTION_MENU(RVAL2GOBJ(self))));
 }
 
 void 
@@ -61,9 +50,9 @@ Init_gtk_option_menu()
     VALUE gOptionMenu = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);
 
     rb_define_method(gOptionMenu, "initialize", omenu_initialize, 0);
-    rb_define_method(gOptionMenu, "get_menu", omenu_get_menu, 0);
-    rb_define_method(gOptionMenu, "menu", omenu_get_menu, 0);
-    rb_define_method(gOptionMenu, "set_menu", omenu_set_menu, 1);
     rb_define_method(gOptionMenu, "remove_menu", omenu_remove_menu, 0);
     rb_define_method(gOptionMenu, "set_history", omenu_set_history, 1);
+    rb_define_method(gOptionMenu, "history", omenu_get_history, 0);
+
+    G_DEF_SETTERS(gOptionMenu);
 }

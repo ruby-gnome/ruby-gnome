@@ -3,8 +3,8 @@
 
   rbgtkradiomenuitem.c -
 
-  $Author: sakai $
-  $Date: 2002/10/05 07:42:46 $
+  $Author: mutoh $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,35 +26,40 @@ rmitem_initialize(argc, argv, self)
     char *label = NULL;
     
     if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
-		TYPE(arg1) == T_STRING) {
-		label = RSTRING(arg1)->ptr;
+        TYPE(arg1) == T_STRING) {
+        label = RSTRING(arg1)->ptr;
     }
     else {
-		if (!NIL_P(arg2)) {
-			label = RVAL2CSTR(arg2);
-		}
-		if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM))){
-			list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
-		}
-		else {
-			list = ary2gslist(arg1);
-		}
+        if (!NIL_P(arg2)) {
+            label = RVAL2CSTR(arg2);
+        }
+        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM))){
+            list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
+        }
+        else {
+            list = ary2gslist(arg1);
+        }
     }
     if (label) {
-		widget = gtk_radio_menu_item_new_with_label(list, label);
+        widget = gtk_radio_menu_item_new_with_label(list, label);
     }
     else {
-		widget = gtk_radio_menu_item_new(list);
+        widget = gtk_radio_menu_item_new(list);
     }
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
+/*
+GtkWidget*  gtk_radio_menu_item_new_with_mnemonic
+                                            (GSList *group,
+                                             const gchar *label);
+*/
 
 static VALUE
-rmitem_group(self)
+rmitem_get_group(self)
     VALUE self;
 {
-    return GSLIST2ARY(gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -79,6 +84,8 @@ Init_gtk_radio_menu_item()
     VALUE gRMenuItem = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 
     rb_define_method(gRMenuItem, "initialize", rmitem_initialize, -1);
-    rb_define_method(gRMenuItem, "group", rmitem_group, 0);
+    rb_define_method(gRMenuItem, "group", rmitem_get_group, 0);
     rb_define_method(gRMenuItem, "set_group", rmitem_set_group, 1);
+
+    G_DEF_SETTERS(gRMenuItem);
 }

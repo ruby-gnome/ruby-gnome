@@ -4,7 +4,7 @@
   rbgtktearoffmenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,10 +17,7 @@ static VALUE
 tmitem_initialize(self)
     VALUE self;
 {
-    GtkWidget *widget;
-
-    widget = gtk_tearoff_menu_item_new();
-    RBGTK_INITIALIZE(self, widget);
+    RBGTK_INITIALIZE(self, gtk_tearoff_menu_item_new());
     return Qnil;
 }
 

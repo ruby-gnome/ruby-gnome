@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -135,7 +135,8 @@ idle_remove(VALUE data)
 }
 
 #endif /* !USE_POLL_FUNC */
- 
+
+
 /*
  * Init
  */

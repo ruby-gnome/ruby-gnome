@@ -4,7 +4,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/10/08 18:53:21 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -198,6 +198,22 @@ rbgtk_m_log_remove_handler(self, log_domain, handler_id)
     return Qnil;
 }
 
+static VALUE
+rbgtk_m_grab_add(self, widget)
+    VALUE self, widget;
+{
+    gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
+    return self;
+}
+
+static VALUE
+rbgtk_m_grab_remove(self, widget)
+    VALUE self, widget;
+{
+    gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
+    return self;
+}
+
 void 
 Init_gtk_main()
 {
@@ -215,6 +231,8 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "get_current_event", gtk_m_get_current_event, 0);
     rb_define_module_function(mGtk, "signal_lookup", gtk_m_signal_lookup, 2);
     rb_define_module_function(mGtk, "signal_name", gtk_m_signal_name, 1);
+    rb_define_module_function(mGtk, "grab_add", rbgtk_m_grab_add, 1);
+    rb_define_module_function(mGtk, "grab_remove", rbgtk_m_grab_remove, 1);
     rb_global_variable(&rbgtk_log_handler_procs);
     rbgtk_log_handler_procs = rb_hash_new();
     rb_define_module_function(mGtk, "log_set_handler", rbgtk_m_log_set_handler, 2);

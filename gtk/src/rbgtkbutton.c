@@ -4,7 +4,7 @@
   rbgtkbutton.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,9 +29,15 @@ button_initialize(argc, argv, self)
 	widget = gtk_button_new();
     }
 
-    RBGTK_INITIALIZE(self, widget);
+    RBGTK_INITIALIZE(self, widget); 
     return Qnil;
 }
+
+/*
+ Should't we implement them?
+GtkWidget*  gtk_button_new_with_mnemonic    (const gchar *label);
+GtkWidget*  gtk_button_new_from_stock       (const gchar *stock_id);
+*/
 
 static VALUE
 button_pressed(self)
@@ -73,23 +79,6 @@ button_leave(self)
     return self;
 }
 
-static VALUE
-button_set_relief(self, style)
-    VALUE self, style;
-{
-    gtk_button_set_relief(GTK_BUTTON(RVAL2GOBJ(self)), NUM2INT(style));
-    return self;
-}
-
-static VALUE
-button_get_relief(self)
-    VALUE self;
-{
-    GtkReliefStyle style;
-    style = gtk_button_get_relief(GTK_BUTTON(RVAL2GOBJ(self)));
-    return INT2FIX(style);
-}
-
 void 
 Init_gtk_button()
 {
@@ -101,6 +90,4 @@ Init_gtk_button()
     rb_define_method(gButton, "clicked", button_clicked, 0);
     rb_define_method(gButton, "enter", button_enter, 0);
     rb_define_method(gButton, "leave", button_leave, 0);
-    rb_define_method(gButton, "set_relief", button_set_relief, 1);
-    rb_define_method(gButton, "get_relief", button_get_relief, 0);
 }

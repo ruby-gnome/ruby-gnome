@@ -4,7 +4,7 @@
   rbgtkradiobutton.c -
 
   $Author: mutoh $
-  $Date: 2002/09/30 15:08:29 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -25,35 +25,50 @@ rbtn_initialize(argc, argv, self)
     char *label = NULL;
     
     if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
-		TYPE(arg1) == T_STRING) {
-		label = RSTRING(arg1)->ptr;
+        TYPE(arg1) == T_STRING) {
+        label = RSTRING(arg1)->ptr;
     }
     else {
-		if (!NIL_P(arg2)) {
-			label = RVAL2CSTR(arg2);
-		}
-		if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_BUTTON))) {
-			list = GTK_RADIO_BUTTON(RVAL2GOBJ(arg1))->group;
-		}
-		else {
-			list = ary2gslist(arg1);
-		}
+        if (!NIL_P(arg2)) {
+            label = RVAL2CSTR(arg2);
+        }
+        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_BUTTON))) {
+            list = GTK_RADIO_BUTTON(RVAL2GOBJ(arg1))->group;
+        }
+        else {
+            list = ary2gslist(arg1);
+        }
     }
     if (label) {
-		widget = gtk_radio_button_new_with_label(list, label);
+        widget = gtk_radio_button_new_with_label(list, label);
     }
     else {
-		widget = gtk_radio_button_new(list);
+        widget = gtk_radio_button_new(list);
     }
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
+/*
+GtkWidget*  gtk_radio_button_new_from_widget
+                                            (GtkRadioButton *group);
+                                         
+GtkWidget*  gtk_radio_button_new_with_label_from_widget
+                                            (GtkRadioButton *group,
+                                             const gchar *label);
+GtkWidget*  gtk_radio_button_new_with_mnemonic
+                                            (GSList *group,
+                                             const gchar *label);
+GtkWidget*  gtk_radio_button_new_with_mnemonic_from_widget
+                                            (GtkRadioButton *group,
+                                             const gchar *label);
+*/
+
 static VALUE
 rbtn_group(self)
     VALUE self;
 {
-    return GSLIST2ARY(gtk_radio_button_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_button_get_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 
 void 

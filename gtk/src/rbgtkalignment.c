@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/21 17:29:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,9 +18,9 @@ align_initialize(self, xalign, yalign, xscale, yscale)
     VALUE self, xalign, yalign, xscale, yscale;
 {
     RBGTK_INITIALIZE(self, gtk_alignment_new(NUM2DBL(xalign),
-				       NUM2DBL(yalign),
-				       NUM2DBL(xscale),
-				       NUM2DBL(yscale)));
+                                             NUM2DBL(yalign),
+                                             NUM2DBL(xscale),
+                                             NUM2DBL(yscale)));
     return Qnil;
 }
 
