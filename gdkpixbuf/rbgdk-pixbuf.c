@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/17 19:20:39 $
+  $Author: sakai $
+  $Date: 2003/03/07 07:56:34 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -344,7 +344,9 @@ Init_gdk_pixbuf2()
     /*
      * Initialization and Versions 
      */
+#ifdef HAVE_GDK_PIXBUF_VERSION
     rb_define_const(gdkPixbuf, "VERSION", CSTR2RVAL(gdk_pixbuf_version));
+#endif
     rb_define_const(gdkPixbuf, "MAJOR", INT2FIX(GDK_PIXBUF_MAJOR));
     rb_define_const(gdkPixbuf, "MINOR", INT2FIX(GDK_PIXBUF_MINOR));
     rb_define_const(gdkPixbuf, "MICRO", INT2FIX(GDK_PIXBUF_MICRO));

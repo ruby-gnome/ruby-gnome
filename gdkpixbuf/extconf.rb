@@ -8,6 +8,9 @@ check_win32
 rubyglib_dir = File.dirname(__FILE__)+"/../glib"
 $CFLAGS += " -I#{rubyglib_dir}/src "
 
+# tml's libgdk_pixbuf-2.0-0.dll doesn't export gdk_pixbuf_version.
+have_func('gdk_pixbuf_version') # XXX
+
 have_func("g_print") &&
 have_func("gdk_pixbuf_new") &&
 create_makefile('gdk_pixbuf2')

@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf-loader.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/17 19:20:38 $
+  $Author: sakai $
+  $Date: 2003/03/07 07:56:34 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -51,7 +51,7 @@ copy(self)
 }
 
 static VALUE
-write(self, data)
+loader_write(self, data)
     VALUE self;
     VALUE data;
 {
@@ -90,7 +90,7 @@ last_write(self, data)
 }
 
 static VALUE
-close(self)
+loader_close(self)
     VALUE self;
 {
     GError *error = NULL;
@@ -133,9 +133,9 @@ Init_gdk_pixbuf_loader(VALUE mGdk)
      */
     rb_define_method(gdkPixbufLoader, "initialize", initialize_loader, -1);
     rb_define_method(gdkPixbufLoader, "dup", copy, 0);
-    rb_define_method(gdkPixbufLoader, "write", write, 1);
+    rb_define_method(gdkPixbufLoader, "write", loader_write, 1);
     rb_define_method(gdkPixbufLoader, "last_write", last_write, 1);
-    rb_define_method(gdkPixbufLoader, "close", close, 0);
+    rb_define_method(gdkPixbufLoader, "close", loader_close, 0);
     rb_define_method(gdkPixbufLoader, "pixbuf", get_pixbuf, 0);
     rb_define_method(gdkPixbufLoader, "animation", get_animation, 0);
 }

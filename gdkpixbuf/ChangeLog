@@ -1,3 +1,13 @@
+2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgdk-pixbuf-loader.c: rename write and close to 
+	loader_write and loader_close respectively for avoiding crash with
+	system's definitions of these names
+
+	* extconf.rb: check if gdk_pixbuf_version is available or not.
+	Because tml's libgdk_pixbuf-2.0-0.dll doesn't export this.
+	* rbgdk-pixbuf.c: ditto
+
 2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* rbgdk-pixbufanimation.c: change tvsec and tvusec to static variable.
