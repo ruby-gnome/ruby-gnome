@@ -1,3 +1,7 @@
+2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+
 2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextbuffer.c: Gtk::TextBuffer#create_tag 
