@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GnomeCanvas extention library
+extconf.rb for Ruby/GtkHtml2 extention library
 =end
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
