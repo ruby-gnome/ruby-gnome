@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: sakai $
-  $Date: 2003/02/14 17:54:40 $
+  $Author: mutoh $
+  $Date: 2003/06/21 18:20:31 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -13,6 +13,7 @@
 #include <glib.h>
 #include <locale.h>
 #include "global.h"
+#include <locale.h>
 
 VALUE mGLib;
 
@@ -48,6 +49,7 @@ void Init_glib2()
     mGLib = rb_define_module("GLib");
 
     setlocale(LC_ALL, "");
+    setlocale(LC_NUMERIC, "C");
     
     rb_define_const(mGLib, "VERSION",
                     rb_ary_new3(3,
