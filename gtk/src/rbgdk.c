@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2003/07/28 18:03:00 $
+  $Date: 2003/08/09 14:51:43 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -35,7 +35,8 @@ gchar*      gdk_get_display                 (void);
 
 */
 
-#ifdef HAVE_X11_XLIB_H
+#ifdef HAVE_X11_XLIB_H 
+#ifdef HAVE_XGETERRORTEXT
 #include <X11/Xlib.h>
 #include <errno.h>
 
@@ -72,14 +73,20 @@ rbgdk_x_io_error(display)
                INT2NUM(errno), CSTR2RVAL(error));
     return 0;
 }
+#endif 
+#endif 
 
 static VALUE
 gdk_s_set_x_error_handler(self)
     VALUE self;
 {
+#ifdef HAVE_XGETERRORTEXT
     rb_x_error = G_BLOCK_PROC();
     G_RELATIVE(self, rb_x_error);
     XSetErrorHandler(rbgdk_x_error);
+#else
+    rb_warn("Not supported in this environment.");
+#endif
     return Qnil;
 }
 
@@ -87,12 +94,15 @@ static VALUE
 gdk_s_set_x_io_error_handler(self)
     VALUE self;
 {
+#ifdef HAVE_XGETERRORTEXT
     rb_x_io_error = G_BLOCK_PROC();
     G_RELATIVE(self, rb_x_io_error);
     XSetIOErrorHandler(rbgdk_x_io_error);
+#else
+    rb_warn("Not supported in this environment.");
+#endif
     return Qnil;
 }
-#endif
 
 static VALUE
 gdk_s_flush(self)

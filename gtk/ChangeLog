@@ -2,6 +2,7 @@
 
 	* src/rbgtkconst.c: Update version number.
 	* src/depend: Use old style.
+	* extconf.rb, src/rbgdk.c: Fix compile error for Win32.
 
 2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
