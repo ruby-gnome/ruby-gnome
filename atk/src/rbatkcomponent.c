@@ -4,7 +4,7 @@
   rbatkcomponent.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:33:47 $
+  $Date: 2004/03/09 18:27:06 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -51,13 +51,16 @@ comp_get_extents(self, coord_type)
     return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
 }
 
+#ifdef HAVE_ATK_COMPONENT_GET_LAYER
 static VALUE
 comp_get_layer(self)
     VALUE self;
 {
     return GENUM2RVAL(atk_component_get_layer(_SELF(self)), ATK_TYPE_LAYER);
 }
+#endif
 
+#ifdef HAVE_ATK_COMPONENT_GET_MDI_ZORDER
 static VALUE
 comp_get_mdi_zorder(self)
     VALUE self;
@@ -65,6 +68,7 @@ comp_get_mdi_zorder(self)
     return INT2NUM(atk_component_get_mdi_zorder(_SELF(self)));
 }
 
+#endif
 static VALUE
 comp_get_position(self, coord_type)
     VALUE self, coord_type;
@@ -151,8 +155,12 @@ Init_atk_component()
 */
     rb_define_method(comp, "contains?", comp_contains, 3);
     rb_define_method(comp, "get_extents", comp_get_extents, 1);
+#ifdef HAVE_ATK_COMPONENT_GET_LAYER
     rb_define_method(comp, "layer", comp_get_layer, 0);
+#endif
+#ifdef HAVE_ATK_COMPONENT_GET_MDI_ZORDER
     rb_define_method(comp, "mdi_zorder", comp_get_mdi_zorder, 0);
+#endif
     rb_define_method(comp, "position", comp_get_position, 1);
     rb_define_method(comp, "size", comp_get_size, 0);
     rb_define_method(comp, "grab_focus", comp_grab_focus, 0);

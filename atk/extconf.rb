@@ -28,6 +28,8 @@ have_func('atk_action_get_localized_name')
 have_func('atk_hyperlink_is_inline')
 have_func('atk_object_add_relationship')
 have_func('atk_object_remove_relationship')
+have_func('atk_component_get_layer')
+have_func('atk_component_mdi_zorder')
 
 begin
   srcdir = File.dirname($0) == "." ? "." :
