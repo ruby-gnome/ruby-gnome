@@ -111,6 +111,7 @@ static VALUE rb_gst_mediatype_read(argc, argv, self)
     VALUE location, r_flags;
     GstMediaInfoStream *stream;
     int flags;
+    GError *error = NULL;
 
     rb_scan_args(argc, argv, "11", &location, &r_flags);
 
@@ -118,11 +119,11 @@ static VALUE rb_gst_mediatype_read(argc, argv, self)
     stream = gst_media_info_read(RGST_MEDIA_INFO(self),
                                  RVAL2CSTR(location),
                                  flags,
-                                 NULL);
+                                 &error);
 
-    return stream != NULL
-        ? RGST_MEDIA_INFO_STREAM_NEW(stream)
-        : Qnil;
+    if (error) RAISE_GERROR(error);
+
+    return stream ? RGST_MEDIA_INFO_STREAM_NEW(stream) : Qnil;
 }
 
 static VALUE stream_seekable(self)
@@ -273,7 +274,10 @@ void Init_gst_mediatype(void) {
     rb_define_method(c, "format", track_format, 0);
     rb_define_method(c, "length_time", track_length_time, 0);
     rb_define_method(c, "con_streams", track_con_streams, 0);
+
+    /* GstMediaInfoError */
+    G_DEF_ERROR2(GST_MEDIA_INFO_ERROR, "MediaInfoError", mGst, rb_eRuntimeError);
 }
 
-#endif /* HAVE_MEDIA_INFO */
+#endif /* HAVE_MEDIA_INFO */ 
 

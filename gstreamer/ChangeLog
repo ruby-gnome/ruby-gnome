@@ -1,3 +1,15 @@
+2005-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgstmediainfo.c: Added Gst::MediaInfoError.
+	Raise an Gst::MediaInfoError when an error raised in 
+	Gst::MediaInfo#read.
+	Reported by Max Nickel.
+	* src/rbgstcaps.c: Added G_DEF_SETTERS().
+
+2005-02-09  Max Nickel <max@unmuted.de>
+
+	* src/rbgstcaps.c: Fix a wrong argument of Gst::Caps#get_structure.
+
 2005-02-09  Jack, Paul  <pjack@sfaf.org>
 
 	* src/rbgsttypefindfactory.c: Added.

@@ -389,7 +389,7 @@ Init_gst_caps (void)
     rb_define_method (c, "append_structure", rb_gst_caps_append_structure, 1);
     rb_define_method (c, "size", rb_gst_caps_get_size, 0);
     rb_define_alias (c, "length", "size");
-    rb_define_method (c, "get_structure", rb_gst_caps_get_structure, 2);
+    rb_define_method (c, "get_structure", rb_gst_caps_get_structure, 1);
     rb_define_method (c, "set_simple", rb_gst_caps_set_simple, 2);
     rb_define_method (c, "any?", rb_gst_caps_is_any, 0);
     rb_define_method (c, "empty?", rb_gst_caps_is_empty, 0);
@@ -412,6 +412,8 @@ Init_gst_caps (void)
     rb_define_alias (c, "to_s", "to_string");
     rb_define_singleton_method (c, "from_string", rb_gst_caps_from_string, 1);
     rb_define_method (c, "subtract", rb_gst_caps_subtract, 1);
+
+    G_DEF_SETTERS(c);
 
 /* TODO:
     gst_caps_structure_fixate_field_nearest_int ()
