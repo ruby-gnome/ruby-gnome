@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:36 $
+  $Date: 2003/08/05 16:15:04 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -177,10 +177,7 @@ rbgobj_gobject_initialize(obj, cobj)
         GType t2 = CLASS2GTYPE(CLASS_OF(obj));
 
         if (t1 != t2) {
-            if (g_type_is_a(t1, t2))
-                rb_warn("instance type %s != class type %s",
-                        g_type_name(t1), g_type_name(t2));
-            else
+            if (!g_type_is_a(t1, t2))
                 rb_raise(rb_eTypeError, "%s is not subtype of %s",
                          g_type_name(t1), g_type_name(t2));
         }
