@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 06:49:06 $
+  $Date: 2002/09/23 15:55:32 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -343,33 +343,31 @@ gobj_sig_handler_disconnect(self, id)
 void
 Init_gobject_gsignal()
 {
-    VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
-
     id_send = rb_intern("__send__");
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    rb_define_singleton_method(cGObject, "signal_new", gobj_s_signal_new, -1);
+    rb_define_singleton_method(cInstantiatable, "signal_new", gobj_s_signal_new, -1);
 #endif
-    rb_define_singleton_method(cGObject, "signal_list", gobj_s_signal_list, 0);
-    rb_define_singleton_method(cGObject, "signal_lookup", gobj_s_signal_lookup, 1);
+    rb_define_singleton_method(cInstantiatable, "signal_list", gobj_s_signal_list, 0);
+    rb_define_singleton_method(cInstantiatable, "signal_lookup", gobj_s_signal_lookup, 1);
 
-    rb_define_method(cGObject, "signal_connect", gobj_sig_connect, -1);
-    rb_define_method(cGObject, "signal_connect_after",
+    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
+    rb_define_method(cInstantiatable, "signal_connect_after",
                      gobj_sig_connect_after, -1);
 
-    rb_define_method(cGObject, "signal_emit",
+    rb_define_method(cInstantiatable, "signal_emit",
                      gobj_sig_emit, -1);
-    rb_define_method(cGObject, "signal_emit_by_name",
+    rb_define_method(cInstantiatable, "signal_emit_by_name",
                      gobj_sig_emit_by_name, -1);
-    rb_define_method(cGObject, "signal_emit_stop",
+    rb_define_method(cInstantiatable, "signal_emit_stop",
                      gobj_sig_emit_stop, -1);
-    rb_define_method(cGObject, "signal_emit_stop_by_name",
+    rb_define_method(cInstantiatable, "signal_emit_stop_by_name",
                      gobj_sig_emit_stop_by_name, 1);
-    rb_define_method(cGObject, "signal_handler_block",
+    rb_define_method(cInstantiatable, "signal_handler_block",
                      gobj_sig_handler_block, 1);
-    rb_define_method(cGObject, "signal_handler_unblock",
+    rb_define_method(cInstantiatable, "signal_handler_unblock",
                      gobj_sig_handler_unblock, 1);
-    rb_define_method(cGObject, "signal_disconnect",
+    rb_define_method(cInstantiatable, "signal_disconnect",
                      gobj_sig_handler_disconnect, 1);
 
     /* --- run, match and connect types --- */

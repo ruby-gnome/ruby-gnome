@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/23 15:55:32 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -102,35 +102,6 @@ pspec_s_allocate(VALUE klass)
         return result;
     }
 }
-
-#ifdef HAVE_OBJECT_ALLOCATE
-#define pspec_s_new rb_class_new_instance
-#else
-static VALUE 
-pspec_s_new(int argc, VALUE* argv, VALUE klass)
-{
-    VALUE obj = pspec_s_allocate(klass);
-    rb_obj_call_init(obj, argc, argv);
-    return obj;
-}
-#endif
-
-// XXX: ripped from rbgobj_object.c
-static VALUE
-gobj_s_get_gtype(klass)
-    VALUE klass;
-{
-    return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
-}
-
-// XXX: ripped from rbgobj_object.c
-static VALUE
-gobj_get_gtype(self)
-    VALUE self;
-{
-    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_param_spec_get_struct(self)));
-}
-
 
 static VALUE
 get_name(VALUE self)
@@ -272,12 +243,6 @@ Init_gobject_gparam_spec()
     rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
 
     rb_define_singleton_method(cParamSpec, "allocate", pspec_s_allocate, 0);
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cParamSpec, "new", pspec_s_new, -1);
-#endif
-
-    rb_define_singleton_method(cParamSpec, "gtype", gobj_s_get_gtype, 0);
-    rb_define_method(cParamSpec, "gtype", gobj_get_gtype, 0);
 
     rb_define_method(cParamSpec, "name", get_name, 0);
     rb_define_method(cParamSpec, "nick", get_nick, 0);

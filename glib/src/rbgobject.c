@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 06:49:06 $
+  $Date: 2002/09/23 15:55:32 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -26,6 +26,56 @@ static GQuark RUBY_GOBJECT_OBJ_KEY;
 ID id_relatives;
 static ID id_delete;
 static ID id_module_eval;
+
+/**********************************************************************/
+
+void
+rbgobj_initialize_object(obj, cobj)
+    VALUE obj;
+    gpointer cobj;
+{
+    switch (G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj))){
+    case G_TYPE_OBJECT:
+        rbgobj_gobject_initialize(obj, cobj);
+        break;
+    case G_TYPE_PARAM:
+        rbgobj_param_spec_initialize(obj, cobj);
+        break;
+    case G_TYPE_BOXED:
+        rbgobj_boxed_initialize(obj, cobj);
+        break;
+    }
+}
+
+gpointer
+rbgobj_instance_from_ruby_object(VALUE obj)
+{
+    GType t = G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj));
+    switch (t){
+    case G_TYPE_OBJECT:
+        return rbgobj_get_gobject(obj);
+    case G_TYPE_PARAM:
+        return rbgobj_param_spec_get_struct(obj);
+    default:
+        rb_raise(rb_eTypeError, "fundamental type %s isn't supported",
+                 g_type_name(t));
+    }
+}
+
+VALUE
+rbgobj_ruby_object_from_instance(gpointer instance)
+{
+    GType t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
+    switch (t){
+    case G_TYPE_OBJECT:
+        return rbgobj_get_value_from_gobject(instance);
+    case G_TYPE_PARAM:
+        return rbgobj_get_value_from_param_spec(instance);
+    default:
+        rb_raise(rb_eTypeError, "fundamental type %s isn't supported",
+                 g_type_name(t));
+    }
+}
 
 /**********************************************************************/
 
@@ -95,27 +145,23 @@ rbgobj_create_object(klass)
 }
 
 void
-rbgobj_initialize_object(obj, cobj)
+rbgobj_gobject_initialize(obj, cobj)
     VALUE obj;
     gpointer cobj;
 {
-	if (G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj)) == G_TYPE_BOXED){
-		rbgobj_boxed_initialize(obj, cobj);
-	} else {
-		gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
-		if (holder)
-			rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
+    gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
+    if (holder)
+        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
 
-		Data_Get_Struct(obj, gobj_holder, holder);
-		holder->cinfo = RVAL2CINFO(obj);
-		holder->gobj  = (GObject*)cobj;
-		holder->destroyed = FALSE;
+    Data_Get_Struct(obj, gobj_holder, holder);
+    holder->cinfo = RVAL2CINFO(obj);
+    holder->gobj  = (GObject*)cobj;
+    holder->destroyed = FALSE;
 		
-		g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
-		g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
+    g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
+    g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
 
-		rb_ivar_set(obj, id_relatives, Qnil);
-	}
+    rb_ivar_set(obj, id_relatives, Qnil);
 }
 
 GObject*
@@ -156,7 +202,7 @@ rbgobj_get_value_from_gobject(gobj)
     else {
         VALUE obj = rbgobj_create_object(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
-        rbgobj_initialize_object(obj, (gpointer)gobj);
+        rbgobj_gobject_initialize(obj, (gpointer)gobj);
         return obj;
     }
 }
@@ -284,13 +330,11 @@ rbgobj_define_signal_constants(klass)
     VALUE klass;
 {
     GType gtype;
-    gpointer oclass;
     guint n_ids;
     guint* ids;
     int i;
 
     gtype = rbgobj_lookup_class(klass)->gtype;
-    oclass = g_type_class_ref(gtype);
 
     ids = g_signal_list_ids(gtype, &n_ids);
 
@@ -310,8 +354,6 @@ rbgobj_define_signal_constants(klass)
         rb_define_const(klass, cname, rb_str_new2(sname));
         g_free(cname);
     }
-
-    g_type_class_unref(oclass);
 }
 
 struct param_setup_arg {

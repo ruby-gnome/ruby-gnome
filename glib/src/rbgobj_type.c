@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/23 15:55:32 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -20,6 +20,7 @@ static ID id_new;
 static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
+static VALUE mInterfaceCommons;
 
 static void
 cinfo_mark(RGObjClassInfo* cinfo)
@@ -43,13 +44,6 @@ rbgobj_lookup_class(klass)
         return rbgobj_lookup_class(rb_funcall(klass, id_superclass, 0));
 
     rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
-}
-
-static VALUE
-interface_s_get_gtype(interface)
-    VALUE interface;
-{
-    return rbgobj_gtype_new(rbgobj_lookup_class(interface)->gtype);
 }
 
 const RGObjClassInfo *
@@ -91,7 +85,7 @@ rbgobj_lookup_class_by_gtype(gtype)
 
           case G_TYPE_PARAM:
             if (gtype == G_TYPE_PARAM){
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cInstantiatable);
             } else {
                 const RGObjClassInfo* cinfo_super
                     = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
@@ -101,7 +95,7 @@ rbgobj_lookup_class_by_gtype(gtype)
 
           case G_TYPE_OBJECT:
             if (gtype == G_TYPE_OBJECT){
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cInstantiatable);
             } else {
                 const RGObjClassInfo* cinfo_super
                     = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
@@ -111,7 +105,7 @@ rbgobj_lookup_class_by_gtype(gtype)
 
           case G_TYPE_INTERFACE:
             cinfo->klass = rb_module_new();
-            rb_define_singleton_method(cinfo->klass, "gtype", interface_s_get_gtype, 0);
+            rb_extend_object(cinfo->klass, mInterfaceCommons);
             break;
 
           default:
@@ -134,6 +128,7 @@ rbgobj_lookup_class_by_gtype(gtype)
         if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT){
             GType* interfaces = NULL;
             guint n_interfaces = 0;
+            gpointer oclass = g_type_class_ref(gtype);
             int i;
 
             interfaces = g_type_interfaces(gtype, &n_interfaces);
@@ -146,6 +141,8 @@ rbgobj_lookup_class_by_gtype(gtype)
 
             rbgobj_define_signal_constants(cinfo->klass);
             rbgobj_define_property_accessors(cinfo->klass);
+
+            g_type_class_unref(oclass);
         }
     }
 
@@ -519,6 +516,78 @@ Init_type()
 
 /**********************************************************************/
 
+static VALUE
+interface_get_gtype(iface)
+    VALUE iface;
+{
+    return rbgobj_gtype_new(rbgobj_lookup_class(iface)->gtype);
+}
+
+static void 
+Init_interface_commons()
+{
+    mInterfaceCommons = rb_module_new();
+    rb_define_method(mInterfaceCommons, "gtype", interface_get_gtype, 0);
+}
+
+/**********************************************************************/
+
+VALUE cInstantiatable;
+
+static VALUE
+instantiatable_s_allocate(klass)
+     VALUE klass;
+{
+     rb_raise(rb_eTypeError, "abstract class");
+}
+
+#ifndef HAVE_OBJECT_ALLOCATE
+
+static ID id_allocate;
+
+static VALUE 
+instantiatable_s_new(int argc, VALUE* argv, VALUE klass)
+{
+    VALUE obj = rb_funcall(klass, id_allocate, 0);
+    rb_obj_call_init(obj, argc, argv);
+    return obj;
+}
+
+#endif /* HAVE_OBJECT_ALLOCATE */
+
+static VALUE
+instantiatable_get_gtype(self)
+    VALUE self;
+{
+    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
+}
+
+static VALUE
+instantiatable_clone(self)
+    VALUE self;
+{
+    rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
+}
+
+static void
+Init_instantiatable()
+{
+    cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
+    rb_extend_object(cInstantiatable, mInterfaceCommons);
+
+    rb_define_singleton_method(cInstantiatable, "allocate", &instantiatable_s_allocate, 0);
+
+#ifndef HAVE_OBJECT_ALLOCATE
+    id_allocate = rb_intern("allocate");
+    rb_define_singleton_method(cInstantiatable, "new", &instantiatable_s_new, -1);
+#endif
+
+    rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
+    rb_define_method(cInstantiatable, "clone", instantiatable_clone, 0);
+}
+
+/**********************************************************************/
+
 /*
  * Init
  */
@@ -535,4 +604,7 @@ void Init_gobject_gtype()
     klass_to_cinfo = rb_hash_new();
 
     Init_type();
+
+    Init_interface_commons();
+    Init_instantiatable();
 }

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 06:49:06 $
+  $Date: 2002/09/23 15:55:31 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -29,18 +29,6 @@ gobj_s_allocate(klass)
         rb_raise(rb_eTypeError, "abstract class");
     return rbgobj_create_object(klass);
 }
-
-#ifdef HAVE_OBJECT_ALLOCATE
-#define rbgobj_s_new rb_class_new_instance
-#else
-static VALUE 
-gobj_s_new(int argc, VALUE* argv, VALUE klass)
-{
-    VALUE obj = gobj_s_allocate(klass);
-    rb_obj_call_init(obj, argc, argv);
-    return obj;
-}
-#endif
 
 static gboolean
 is_gtkobject(gobj)
@@ -214,20 +202,6 @@ gobj_initialize(argc, argv, self)
 }
 
 static VALUE
-gobj_s_get_gtype(klass)
-    VALUE klass;
-{
-    return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
-}
-
-static VALUE
-gobj_get_gtype(self)
-    VALUE self;
-{
-    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(RVAL2GOBJ(self)));
-}
-
-static VALUE
 null()
 {
     return (VALUE)NULL;
@@ -239,13 +213,6 @@ gobj_ref_count(self)
 {
     GObject* gobj = (GObject*)rb_rescue((VALUE(*)())rbgobj_get_gobject, self, null, 0);
     return INT2NUM(gobj ? gobj->ref_count : 0);
-}
-
-static VALUE
-gobj_clone(self)
-    VALUE self;
-{
-    rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
@@ -272,9 +239,6 @@ Init_gobject_gobject()
     VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
 
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cGObject, "new", &gobj_s_new, -1);
-#endif
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 #endif
@@ -287,11 +251,8 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
 
     rb_define_method(cGObject, "initialize", gobj_initialize, -1);
-    rb_define_singleton_method(cGObject, "gtype", gobj_s_get_gtype, 0);
-    rb_define_method(cGObject, "gtype", gobj_get_gtype, 0);
     rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
     rb_define_method(cGObject, "inspect", gobj_inspect, 0);
-    rb_define_method(cGObject, "clone", gobj_clone, 0);
 
     rb_define_method(cGObject, "singleton_method_added", gobj_smethod_added, 1);
 }

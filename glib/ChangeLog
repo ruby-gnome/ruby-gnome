@@ -1,5 +1,14 @@
 2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/*.c: introduce GLib::Instantiatable as a common superclass of 
+	GLib::Object and GLib::ParamSpec. GLib:Instantiatable corresponds to
+	TypeInstance structure in C.
+	* src/*.c: arrange APIs
+	* src/rbgobject.c (rbgobj_define_signal_constants): stop calling
+	g_class_ref(). Now caller must ensure that the class is initialized.
+
+2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
 	* src/*.c: introduce macro "RBGLIB_ENABLE_EXPERIMENTAL" to indicate
 	experimental API.
 	* src/rbgobj_signal.c: define constants

@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/09/18 13:53:55 $
+  $Date: 2002/09/23 15:55:32 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -86,7 +86,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_PARAM:
         {
             GParamSpec* pspec = g_value_get_param(value);
-            return pspec ? rbgobj_get_value_from_param_spec(pspec) : Qnil;
+            return pspec ? rbgobj_ruby_object_from_instance(pspec) : Qnil;
         }
       case G_TYPE_POINTER:
         {
