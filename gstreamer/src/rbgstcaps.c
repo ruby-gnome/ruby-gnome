@@ -27,21 +27,6 @@
  *  Capabilities of pads. 
  */
 
-VALUE rb_gst_caps_wrap_struct(GstCaps *glib_obj) {
-    VALUE rb_obj;
-    assert (glib_obj != NULL);
-    rb_obj = Data_Wrap_Struct(GTYPE2CLASS(GST_TYPE_CAPS), NULL, NULL, glib_obj);
-    rb_obj_call_init(rb_obj, 0, NULL);
-    return rb_obj;
-}
-
-GstCaps *rb_gst_caps_get_struct(VALUE rb_obj) {
-    GstCaps *glib_obj;
-    Data_Get_Struct(rb_obj, GstCaps, glib_obj);
-    assert (glib_obj != NULL);
-    return glib_obj;
-}
-
 /*
  *  Method: name -> aString
  *
