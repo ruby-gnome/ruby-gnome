@@ -1,3 +1,8 @@
+2002-11-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkmain.c: use `EXTERN' instead of plain `extern' for
+	rb_progname and rb_argv. This is necessary for windows.
+
 2002-11-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtknotebook.c: Add Gtk::NotebookPage.

@@ -3,8 +3,8 @@
 
   rbgtkmain.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/05 10:39:11 $
+  $Author: sakai $
+  $Date: 2002/11/08 14:07:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,7 +12,7 @@
 ************************************************/
 #include "global.h"
 
-extern VALUE rb_progname, rb_argv;
+EXTERN VALUE rb_progname, rb_argv;
 
 static VALUE
 gtk_m_init(argc, argv, self)
