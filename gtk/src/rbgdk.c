@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:14 $
+  $Date: 2002/07/07 05:14:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,8 +17,6 @@ VALUE mGdk;
 VALUE gdkError;
 
 VALUE gdkEvent;
-
-VALUE gdk_object_list;
 
 VALUE
 make_tobj(obj, klass, size)
@@ -322,9 +320,6 @@ extern void Init_gtk_gdk_font();
 #endif
 extern void Init_gtk_gdk_gc();
 extern void Init_gtk_gdk_image();
-#ifdef USE_XIM
-extern void Init_gtk_gdk_im();
-#endif /* USE_XIM */
 extern void Init_gtk_gdk_keyval();
 extern void Init_gtk_gdk_pixmap();
 extern void Init_gtk_gdk_region();
@@ -339,9 +334,6 @@ extern void Init_gtk_gdk_selection();
 void
 Init_gtk_gdk()
 {
-    gdk_object_list = rb_hash_new();
-    rb_global_variable(&gdk_object_list);
-
     /* Gdk */
     mGdk = rb_define_module("Gdk");
     gdkError = rb_define_class_under(mGdk, "Error", rb_eRuntimeError);
@@ -375,10 +367,4 @@ Init_gtk_gdk()
     Init_gtk_gdkkeysyms();
     Init_gtk_gdk_atom();
     Init_gtk_gdk_selection();
-
-#ifdef USE_XIM
-    /* Gdk::IM, Gdk::IC, Gdk::ICAttr */
-    Init_gtk_gdk_im();
-#endif /* USE_XIM */
-
 }
