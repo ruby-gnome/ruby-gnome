@@ -4,7 +4,7 @@
   rbgtktreemodelsort.c -
 
   $Author: mutoh $
-  $Date: 2003/05/05 16:58:55 $
+  $Date: 2003/11/21 15:14:08 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -84,6 +84,15 @@ tmodelsort_clear_cache(self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+tmodelsort_iter_is_valid(self, iter)
+    VALUE self, iter;
+{
+    return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+}
+#endif
+
 void 
 Init_gtk_tmodelsort()
 {
@@ -96,5 +105,8 @@ Init_gtk_tmodelsort()
     rb_define_method(gTMSort, "convert_iter_to_child_iter", tmodelsort_convert_iter_to_child_iter, 1);
     rb_define_method(gTMSort, "reset_default_sort_func", tmodelsort_reset_default_sort_func, 0);
     rb_define_method(gTMSort, "clear_cache", tmodelsort_clear_cache, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gTMSort, "iter_is_valid?", tmodelsort_iter_is_valid, 1);
+#endif
 
 }

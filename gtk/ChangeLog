@@ -1,3 +1,11 @@
+2003-11-21  Matthew Berg <galt@gothpoodle.com>
+
+	* src/rbgtktreemodelsort.c: Add Gtk::TreeModelSort#iter_is_valid?.
+
+2003-11-21  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgdkscreen.c: Remove invalid macros.
+
 2003-11-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: use "#if GTK_CHECK_VERSION(2,2,0)" instead of

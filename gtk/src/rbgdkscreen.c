@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2003/11/21 15:14:08 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -218,12 +218,8 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
     rb_define_method(gdkScreen, "width", gdkscreen_width, 0);
     rb_define_method(gdkScreen, "height", gdkscreen_height, 0);
-#ifdef HAVE_GDK_SCREEN_GET_WIDTH_MM
     rb_define_method(gdkScreen, "width_mm", gdkscreen_width_mm, 0);
-#endif
-#ifdef HAVE_GDK_SCREEN_GET_HEIGHT_MM
     rb_define_method(gdkScreen, "height_mm", gdkscreen_height_mm, 0);
-#endif
     rb_define_method(gdkScreen, "visuals", gdkscreen_list_visuals, 0);
     rb_define_method(gdkScreen, "toplevel_windows", gdkscreen_get_toplevel_windows, 0);
     rb_define_method(gdkScreen, "display_name", gdkscreen_make_display_name, 0);
