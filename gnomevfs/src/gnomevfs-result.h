@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -38,6 +38,7 @@ extern "C" {
 /* Defines *******************************************************************/
 
 #define GVFSRESULT2RVAL(res)	(gnomevfs_result_to_rval(res))
+#define RAISE_IF_ERROR(res)	((void)gnomevfs_result_to_rval(res))
 #define CHECK_RESULT(res, ret)	\
 	((res == GNOME_VFS_OK) ? ret : GVFSRESULT2RVAL(res))
 

@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -75,15 +75,17 @@ file_initialize(argc, argv, self)
 	VALUE *argv;
 	VALUE self;
 {
-	VALUE uri, open_mode, exclusive, perm, r_result;
+	VALUE uri, open_mode, exclusive, perm;
 	GnomeVFSResult result;
 	GnomeVFSHandle *handle;
+	mode_t mask;
 
 	argc = rb_scan_args(argc, argv, "13", &uri, &open_mode, &exclusive,
 			    &perm);
-	/* XXX: or what? */
 	if (argc < 4) {
-		perm = INT2FIX(0644);
+		mask = umask(0);
+		umask(mask);
+		perm = INT2FIX(mask);
 	}
 	if (argc < 3) {
 		exclusive = Qfalse;
@@ -118,10 +120,7 @@ file_initialize(argc, argv, self)
 		}
 	}
 
-	/* ugly, but raise error */
-	r_result = GVFSRESULT2RVAL(result);
-
-
+	RAISE_IF_ERROR(result);
 	G_INITIALIZE(self, handle);
 	return Qnil;
 }
@@ -239,7 +238,7 @@ bytes_from_end(self)
 		result = gnome_vfs_tell(_SELF(self), &offset);
 		if (result == GNOME_VFS_OK) {
 			/* XXX: is the + 1 right? */
-			value = ULONG2NUM(info->size - offset + 1);
+			value = ULL2NUM(info->size - offset + 1);
 		} else {
 			value = GVFSRESULT2RVAL(result);
 		}
@@ -261,7 +260,7 @@ bytes_from_end(self)
 							GNOME_VFS_SEEK_START,
 							offset);
 				if (result == GNOME_VFS_OK) {
-					return ULONG2NUM(end - offset);
+					return ULL2NUM(end - offset);
 				} else {
 					return GVFSRESULT2RVAL(result);
 				}
@@ -327,7 +326,7 @@ static VALUE
 file_readchar(self)
 	VALUE self;
 {
-	gchar c;
+	guint8 c;
 	GnomeVFSResult result;
 	GnomeVFSFileSize bytes_read;
 
@@ -352,7 +351,7 @@ file_write(self, str)
 
 	result = gnome_vfs_write(_SELF(self), RSTRING(str)->ptr,
 				 RSTRING(str)->len, &bytes_written);
-	return CHECK_RESULT(result, ULONG2NUM(bytes_written));
+	return CHECK_RESULT(result, ULL2NUM(bytes_written));
 }
 
 static VALUE
@@ -382,17 +381,17 @@ file_tell(self)
 	GnomeVFSFileSize offset;
 
 	result = gnome_vfs_tell(_SELF(self), &offset);
-	return CHECK_RESULT(result, ULONG2NUM(offset));
+	return CHECK_RESULT(result, ULL2NUM(offset));
 }
 
 static VALUE
 file_gets(self)
 	VALUE self;
 {
-	gchar buf[8192];
+	guint8 buf[8192];
 	/* XXX: why -3? */
-	gchar *bp, *bpend = buf + sizeof(buf) - 3;
-	gchar c;
+	guint8 *bp, *bpend = buf + sizeof(buf) - 3;
+	guint8 c;
 	gboolean append;
 	VALUE str;
 	GnomeVFSHandle *handle;
@@ -566,7 +565,7 @@ file_m_chown(argc, argv, self)
 
 	info = gnome_vfs_file_info_new();
 	rb_scan_args(argc, argv, "2*", &r_owner, &r_group, &paths);
-	/* XXX: hm...how about -1? */
+	/* XXX: hm...how about -1? works for UNIX, but what else? */
 	if (NIL_P(r_owner)) {
 		info->uid = (guint)-1;
 	} else {

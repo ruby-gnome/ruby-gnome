@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -44,8 +44,6 @@
 
 /* Function Implementations **************************************************/
 
-/* XXX: OMG! GnomeVFS is so messed up.  gnome_vfs_file_info_ref() doesn't
- * return the GnomeVFSFileInfo!!! */
 static GnomeVFSFileInfo *
 gnome_vfs_file_info_ref_fix(gpointer boxed)
 {
@@ -224,24 +222,21 @@ static VALUE
 fileinfo_dev(self)
 	VALUE self;
 {
-	/* XXX: what is this really? */
-	return UINT2NUM(_SELF(self)->device);
+	return ULL2NUM(_SELF(self)->device);
 }
 
 static VALUE
 fileinfo_inode(self)
 	VALUE self;
 {
-	/* XXX: this is a UULONG actually */
-	return ULONG2NUM(_SELF(self)->inode);
+	return ULL2NUM(_SELF(self)->inode);
 }
 
 static VALUE
 fileinfo_size(self)
 	VALUE self;
 {
-	/* XXX: this is a UULONG actually */
-	return ULONG2NUM(_SELF(self)->size);
+	return ULL2NUM(_SELF(self)->size);
 }
 
 static VALUE
@@ -251,8 +246,7 @@ fileinfo_has_size(self)
 	if (_SELF(self)->size == 0) {
 		return Qnil;
 	} else {
-		/* XXX: this is a UULONG actually */
-		return ULONG2NUM(_SELF(self)->size);
+		return ULL2NUM(_SELF(self)->size);
 	}
 }
 
@@ -267,7 +261,7 @@ static VALUE
 fileinfo_blocks(self)
 	VALUE self;
 {
-	return ULONG2NUM(_SELF(self)->block_count);
+	return ULL2NUM(_SELF(self)->block_count);
 }
 
 static VALUE
@@ -413,10 +407,11 @@ static VALUE
 fileinfo_set_name(self, name)
 	VALUE self, name;
 {
-	/* XXX: should this be freed somehow? and do we need error checking for
-	 * RVAL2CSTR (i.e. to not free prematurely... */
+	char *str;
+
+	str = RVAL2CSTR(name);
 	g_free(_SELF(self)->name);
-	_SELF(self)->name = g_strdup(RVAL2CSTR(name));
+	_SELF(self)->name = g_strdup(str);
 	return self;
 }
 

@@ -20,7 +20,7 @@
  *
  * Author: Nikolai Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -92,7 +92,6 @@ monitor_initialize(argc, argv, self);
 	gboolean free_uri;
 	GnomeVFSMonitorHandle *handle;
 	GnomeVFSResult result;
-	VALUE r_result;
 
 	/* XXX: is this the way to do it? */
 	rb_scan_args(argc, argv, "2&", &uri, &type, &func);
@@ -116,7 +115,7 @@ monitor_initialize(argc, argv, self);
 				(GnomeVFSMonitorCallback)monitor_callback,
 				(gpointer)func);
 
-	r_result = GVFSRESULT2RVAL(result);
+	RAISE_IF_ERROR(result);
 	G_INITIALIZE(self, handle);
 	if (free_uri) {
 		g_free(text_uri);

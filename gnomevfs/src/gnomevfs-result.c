@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -80,7 +80,6 @@ static struct _GVFSToMy {
 	{ GNOME_VFS_ERROR_NAME_TOO_LONG, "NameTooLongError" },
 	{ GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE, "ServiceNotAvailableError" },
 	{ GNOME_VFS_ERROR_SERVICE_OBSOLETE, "ServiceObsoleteError" },
-	/* XXX: rename to ProtocolError? */
 	{ GNOME_VFS_ERROR_PROTOCOL_ERROR, "ProtocolError" },
 	{ GNOME_VFS_ERROR_NO_MASTER_BROWSER, "NoMasterBrowserError" }
 };

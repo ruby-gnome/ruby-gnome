@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -123,7 +123,6 @@ directory_initialize(argc, argv, self)
 	GnomeVFSFileInfoOptions options;
 	GnomeVFSDirectoryHandle *handle;
 	GnomeVFSResult result;
-	VALUE r_result;
 
 	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
 		options = FIX2INT(r_options);
@@ -140,8 +139,7 @@ directory_initialize(argc, argv, self)
 						  options);
 	}
 
-	/* ugly, but raise error */
-	r_result = GVFSRESULT2RVAL(result);
+	RAISE_IF_ERROR(result);
 
 	G_INITIALIZE(self, handle);
 	return Qnil;
@@ -175,7 +173,6 @@ directory_each(self)
 {
 	GnomeVFSDirectoryHandle *handle = _SELF(self);
 	GnomeVFSResult result = GNOME_VFS_OK;
-	VALUE r_result;
 
 	while (TRUE) {
 		GnomeVFSFileInfo *info;
@@ -192,8 +189,7 @@ directory_each(self)
 	if (result == GNOME_VFS_OK || result == GNOME_VFS_ERROR_EOF) {
 		return Qnil;
 	} else {
-		r_result = GVFSRESULT2RVAL(result);
-		return r_result;
+		return GVFSRESULT2RVAL(result);
 	}
 }
 
@@ -213,8 +209,7 @@ directory_read_next(self)
 		return Qnil;
 	} else {
 		gnome_vfs_file_info_unref(info);
-		r_result = GVFSRESULT2RVAL(result);
-		return r_result;
+		return GVFSRESULT2RVAL(result);
 	}
 }
 
@@ -241,7 +236,6 @@ directory_visit_callback(rel_path, info, recursing_will_loop, data, recurse)
 				    g_id_call,
 				    GVFSFILEINFO2RVAL(info),
 				    recursing_will_loop));
-	/* XXX: or what? */
 	return TRUE;
 }
 
@@ -341,7 +335,6 @@ directory_visit_files(argc, argv, self)
 	}
 
 	/* XXX: should we call g_free to unmalloc the strings from above? */
-	g_list_foreach(list, (GFunc)g_free, NULL);
 	g_list_free(list);
 
 	return GVFSRESULT2RVAL(result);
@@ -353,7 +346,7 @@ directory_list_load(argc, argv, self)
 	VALUE *argv;
 	VALUE self;
 {
-	VALUE uri, r_options;
+	VALUE uri, r_options, ary;
 	GnomeVFSFileInfoOptions options;
 	GList *list;
 	GnomeVFSResult result;
@@ -367,7 +360,9 @@ directory_list_load(argc, argv, self)
 
 	result = gnome_vfs_directory_list_load(&list, RVAL2CSTR(uri), options);
 	if (result == GNOME_VFS_OK) {
-		return GLIST2ARY(list);
+		ary = GLIST2ARY(list);
+		gnome_vfs_file_info_list_free(list);
+		return ary;
 	} else {
 		return GVFSRESULT2RVAL(result);
 	}

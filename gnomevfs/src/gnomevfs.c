@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -48,6 +48,12 @@ static VALUE
 gnomevfs_initialized(void)
 {
 	return CBOOL2RVAL(gnome_vfs_initialized());
+}
+
+static VALUE
+gnomevfs_shutdown(void)
+{
+	return CBOOL2RVAL(gnome_vfs_shutdown());
 }
 
 static VALUE
@@ -96,6 +102,7 @@ Init_gnomevfs(void)
 	rb_define_module_function(m_gvfs, "init", gnomevfs_init, 0);
 	rb_define_module_function(m_gvfs, "initialized?", gnomevfs_initialized,
 				  0);
+	rb_define_module_function(m_gvfs, "shutdown", gnomevfs_shutdown, 0);
 	rb_define_module_function(m_gvfs, "find_directory",
 				  gnomevfs_find_directory, -1);
 	rb_define_const(m_gvfs,

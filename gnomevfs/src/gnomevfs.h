@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-25
  *
  *****************************************************************************/
 
@@ -50,7 +50,9 @@ extern "C" {
 
 /* Defines *******************************************************************/
 
-#define CBOOL2RVAL(b)	((b) ? Qtrue : Qfalse)
+#ifndef ULL2NUM
+# define ULL2NUM ULONG2NUM
+#endif
 
 /* Type Definitions **********************************************************/
 
