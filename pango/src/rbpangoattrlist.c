@@ -4,7 +4,7 @@
   rbpangoattrlist.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/03/05 18:46:23 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -55,6 +55,7 @@ attrlist_splice(self, other, pos, len)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static gboolean
 filter_func(attr, data)
     PangoAttribute* attr;
@@ -74,6 +75,7 @@ attrlist_filter(self)
                                              (gpointer)func),
                       PANGO_TYPE_ATTR_LIST);
 }
+#endif
 
 static VALUE
 attrlist_get_iterator(self)
@@ -94,7 +96,9 @@ Init_pango_attrlist()
     rb_define_method(pAttrlist, "insert_before", attrlist_insert_before, 1);
     rb_define_method(pAttrlist, "change", attrlist_change, 1);
     rb_define_method(pAttrlist, "splice", attrlist_splice, 3);
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(pAttrlist, "filter", attrlist_filter, 0);
+#endif
     rb_define_method(pAttrlist, "iterator", attrlist_get_iterator, 0);
 
 }

@@ -1,5 +1,7 @@
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbpangoglyphitem.c, src/rbpangocontext.c, rbpangofontfamily.c, 
+	rbpangoattrlist.c: Fix compiling errors on pango-1.1.x.
 	* extconf.rb, src/rbpangoglyphitem.c, rbpangomain.c, 
 	rbpangologattr.c, rbpangolayoutline.c, rbpangolayoutiter.c, 
 	rbpangolayout.c, rbpangoanalysis.c, rbpangoattribute.c: 

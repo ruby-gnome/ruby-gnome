@@ -4,14 +4,14 @@
   rbpangoglyphitem.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/03/05 18:46:23 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
 
-
+#if PANGO_CHECK_VERSION(1,2,0)
 #define _SELF(r) ((PangoGlyphItem*)RVAL2BOXED(r, PANGO_TYPE_GLYPH_ITEM))
 
 /**********************************/
@@ -67,11 +67,16 @@ glyph_item_get_glyphs(self)
     return glyphs ? BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING) : Qnil;
 }
 
+#endif
+
 void
 Init_pango_glyph_item()
 {
+#if PANGO_CHECK_VERSION(1,2,0)
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);
 
     rb_define_method(pItem, "item", glyph_item_get_item, 0);
     rb_define_method(pItem, "glyphs", glyph_item_get_glyphs, 0);
+#endif
 }
+

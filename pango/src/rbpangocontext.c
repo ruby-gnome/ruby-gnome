@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/02/12 18:13:34 $
+  $Date: 2005/03/05 18:46:23 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -34,6 +34,7 @@ rcontext_itemize(argc, argv, self)
                              (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
                              NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
     } else {
+#if PANGO_CHECK_VERSION(1,2,0)
         list = pango_itemize_with_base_dir(_SELF(self), 
                                            RVAL2GENUM(arg1, PANGO_TYPE_DIRECTION), /* base_dir */
                                            RVAL2CSTR(arg2),      /* text */ 
@@ -41,6 +42,15 @@ rcontext_itemize(argc, argv, self)
                                            NUM2INT(arg4),        /* length */
                                            (PangoAttrList*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_LIST), /* attrs */
                                            NIL_P(arg6) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg6, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+#else
+        rb_warn("Pango::Context#itemize(base_dir, text, start_index, length, attrs, cached_iter) isn't supported on this environment.");
+        list = pango_itemize(_SELF(self), 
+                             RVAL2CSTR(arg1),      /* text */ 
+                             NUM2INT(arg2),        /* start_index */ 
+                             NUM2INT(arg3),        /* length */
+                             (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
+                             NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+#endif
     }
     return GLIST2ARY2(list, PANGO_TYPE_ITEM);
 }
