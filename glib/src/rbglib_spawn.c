@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: mutoh $
-  $Date: 2004/04/27 06:43:42 $
+  $Date: 2004/04/30 17:59:05 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -12,7 +12,7 @@
 **********************************************************************/
 #include "global.h"
 #include "rbglib.h"
-
+#include <errno.h>
 
 static VALUE spawn_error[19];
 
@@ -109,21 +109,53 @@ Init_glib_spawn()
     spawn_error[G_SPAWN_ERROR_CHDIR] = rb_define_class_under(mGLib, "SpawnChDirError", rb_eSystemCallError);
     spawn_error[G_SPAWN_ERROR_FAILED] = rb_define_class_under(mGLib, "SpawnFailed", rb_eSystemCallError);
 
+#ifdef EACCES
     spawn_error[G_SPAWN_ERROR_ACCES]  = rb_const_get(rb_mErrno, rb_intern("EACCES"));
+#endif
+#ifdef EPERM
     spawn_error[G_SPAWN_ERROR_PERM]   = rb_const_get(rb_mErrno, rb_intern("EPERM"));
+#endif
+#ifdef E2BIG
     spawn_error[G_SPAWN_ERROR_2BIG]   = rb_const_get(rb_mErrno, rb_intern("E2BIG"));
+#endif
+#ifdef ENOEXEC
     spawn_error[G_SPAWN_ERROR_NOEXEC] = rb_const_get(rb_mErrno, rb_intern("ENOEXEC"));
+#endif
+#ifdef ENAMETOOLONG
     spawn_error[G_SPAWN_ERROR_NAMETOOLONG] = rb_const_get(rb_mErrno, rb_intern("ENAMETOOLONG"));
+#endif
+#ifdef ENOENT
     spawn_error[G_SPAWN_ERROR_NOENT]  = rb_const_get(rb_mErrno, rb_intern("ENOENT"));
+#endif
+#ifdef ENOMEM
     spawn_error[G_SPAWN_ERROR_NOMEM]  = rb_const_get(rb_mErrno, rb_intern("ENOMEM"));
+#endif
+#ifdef ENOTDIR
     spawn_error[G_SPAWN_ERROR_NOTDIR] = rb_const_get(rb_mErrno, rb_intern("ENOTDIR"));
+#endif
+#ifdef ELOOP
     spawn_error[G_SPAWN_ERROR_LOOP]   = rb_const_get(rb_mErrno, rb_intern("ELOOP"));
+#endif
+#ifdef ETXTBSY
     spawn_error[G_SPAWN_ERROR_TXTBUSY] = rb_const_get(rb_mErrno, rb_intern("ETXTBSY"));
+#endif
+#ifdef EIO
     spawn_error[G_SPAWN_ERROR_IO]     = rb_const_get(rb_mErrno, rb_intern("EIO"));
+#endif
+#ifdef ENFILE
     spawn_error[G_SPAWN_ERROR_NFILE]  = rb_const_get(rb_mErrno, rb_intern("ENFILE"));
+#endif
+#ifdef EMFILE
     spawn_error[G_SPAWN_ERROR_MFILE]  = rb_const_get(rb_mErrno, rb_intern("EMFILE"));
+#endif
+#ifdef EINVAL
     spawn_error[G_SPAWN_ERROR_INVAL]  = rb_const_get(rb_mErrno, rb_intern("EINVAL"));
+#endif
+#ifdef EISDIR
     spawn_error[G_SPAWN_ERROR_ISDIR]  = rb_const_get(rb_mErrno, rb_intern("EISDIR"));
+#endif
+#ifdef ELIBBAD
     spawn_error[G_SPAWN_ERROR_LIBBAD] = rb_const_get(rb_mErrno, rb_intern("ELIBBAD"));
+#endif
 
 }
