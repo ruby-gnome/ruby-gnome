@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/10/02 04:56:42 $
+  $Date: 2002/10/07 00:00:26 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -65,7 +65,10 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_DOUBLE:
         return rb_float_new(g_value_get_double(value));
       case G_TYPE_STRING:
-        return rb_str_new2(g_value_get_string(value));
+        {
+            const char* str = g_value_get_string(value);
+            return str ? rb_str_new2(str) : Qnil;
+        }
       case G_TYPE_ENUM:
         return UINT2NUM(g_value_get_enum(value));
       case G_TYPE_FLAGS:

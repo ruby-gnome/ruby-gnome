@@ -1,3 +1,8 @@
+2002-10-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_value.c (rbgobj_gvalue_to_rvalue): return Qnil when the
+	type of GValue is G_TYPE_STRING and the content is NULL.
+
 2002-10-05  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgutil.h: add G_DEF_SETTER macro.
