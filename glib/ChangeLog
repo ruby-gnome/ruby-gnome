@@ -74,7 +74,7 @@
 	* src/rbgobj_signal.c: Fix a segfault when GLib::Object#signal_emit 
 	is called. 
 
-2003-10-08  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-08  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgobj_param.c: Removed a compilation warning in function
 	value_validate_ensure().

@@ -1,4 +1,8 @@
-2003-11-05  Laurent Sansonetti  <laurent@datarescue.be>
+2003-11-14  Laurent Sansonetti  <lrz@gnome.org>
+
+	* Changed my e-mail address (laurent@datarescue.be -> lrz@gnome.org).
+
+2003-11-05  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgda.h, src/rbgdacommand.c, src/rbgdafieldattributes.c,
 	  src/rbgdaparameter.c, src/rbgdaparameterlist.c,
@@ -6,13 +10,13 @@
 	  Removed all gboxed code, since all GDA classes we support
 	  are now following GLib type system.
 
-2003-10-27  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-27  Laurent Sansonetti  <lrz@gnome.org>
 
 	* sample/print_config.rb: New file.
 	* src/rbgdadatasource.c: Introduced Gda::DataSource.model.
 	* src/rbgdaprovider.c: Introduced Gda::Provider.model.
 
-2003-10-25  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdadatasource.c: Gda::DataSource.new now allows nil
 	  as password.
@@ -22,19 +26,19 @@
 	* src/rbgda.c: Initializes Gda::QuarkList.
 	* src/rbgda.h: Added macros for Gda::QuarkList.
 
-2003-10-06  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-06  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaexport.c: New file.
 	* src/rbgda.c: Initializes Gda::Export.
 	* src/rbgda.h: Added macros for Gda::Export.
 
-2003-10-04  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-04  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaselect.c, src/rbgdatable.c: New files.
 	* src/rbgda.c: Initializes Gda::Select & Gda::Table.
 	* src/rbgda.h: Added macros for Gda::Select & Gda::Table.
 
-2003-10-03  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-03  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdafieldattributes.c: New file.
 	* src/rbgda.c: Initializes Gda::FieldAttributes.
@@ -46,18 +50,18 @@
 	  #end_edit, #to_comma_separated, #to_tab_separated, #to_xml,
 	  #command_text, #set_command_text, #command_type, #set_command_type). 
 
-2003-10-02  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-02  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdadatamodelhash.c, src/rbgdadatamodellist.c: New files.
 	* src/rbgda.c: Initializes Gda::DataModelHash & Gda::DataModelList.
 	* src/rbgda.h: Added macros for Gda::DataModelHash & Gda::DataModelList.
 
-2003-10-01  Laurent Sansonetti  <laurent@datarescue.be>
+2003-10-01  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaclient.c: Added #notify_connection_closed_event (which 
 	  declaration was missing in gda-client.h).
 
-2003-09-30  Laurent Sansonetti  <laurent@datarescue.be>
+2003-09-30  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaconnection.c: Added a few methods (#set_client, #provider, 
 	  #add_errors, #database, #change_database, #create_database, 
@@ -67,7 +71,7 @@
 	  FEATURE_TRIGGERS, FEATURE_USERS, FEATURE_VIEWS, FEATURE_XML_QUERIES,
 	  FEATURE_BLOBS) to complete the class.
 
-2003-09-29  Laurent Sansonetti  <laurent@datarescue.be>
+2003-09-29  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaclient.c: Added a few methods (#close_all_connections,
 	  #begin_transaction, #commit_transaction, #rollback_transaction,
@@ -78,7 +82,7 @@
 	  EVENT_TRANSACTION_COMMITTED, EVENT_TRANSACTION_CANCELLED) to complete the
 	  class.  
 
-2003-09-25  Laurent Sansonetti  <laurent@datarescue.be>
+2003-09-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdavalue.c: Added Gda::Value#<=>.
 	* src/rbgdaconnection.c: Added Gda::Connection#begin_transaction, 
@@ -87,7 +91,7 @@
 	  values as username and password.
 	* sample/sample.rb, sample/sample.sql: New files.
 
-2003-09-24  Laurent Sansonetti  <laurent@datarescue.be>
+2003-09-24  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaparameter.c, src/rbgdaparameterlist.c: New files.
 	* src/rbgda.c: Initializes Gda::Parameter & Gda::ParameterList, 
@@ -96,7 +100,7 @@
 	* src/rbgdaconnection.c: Uses Gda::ParameterList for queries.
 	* src/rbgdavalue.c: Class is exported.
 
-2003-09-21  Laurent Sansonetti  <laurent@datarescue.be>
+2003-09-21  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README, extconf.rb, sample/sql_console.rb, src/rbgda.c,
 	  src/rbgda.h, src/rbgdaclient.c, src/rbgdacommand.c,

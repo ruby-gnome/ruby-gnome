@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003 Laurent Sansonetti <laurent@datarescue.be>
+ * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
  *
  * This file is part of Ruby/GStreamer.
  *

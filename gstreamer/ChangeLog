@@ -1,8 +1,12 @@
+2003-11-14  Laurent Sansonetti  <lrz@gnome.org>
+
+	* Changed my e-mail address (laurent@datarescue.be -> lrz@gnome.org).
+
 2003-09-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: win32 support.
 
-2003-08-29  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-29  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstclockentry.c: New file.
 	* src/rbgst.c: Initializes Gst::ClockEntry.
@@ -17,7 +21,7 @@
                                                                                 
 	* extconf.rb: Exit with 1 when the package is not found.
 
-2003-08-25  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.h, src/rbgstplugin.c, src/rbgstpluginfeature.c: 
 	  Introduced is_valid_pluginfeature_type() and 
@@ -28,36 +32,36 @@
 	* tests/tc_plugin.rb: Moved 'test_registry' in tests/tc_registry.rb.
 	* src/rbgstmediainfo.c: Implemented Gst::MediaInfoTrack#con_streams.
 
-2003-08-24  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-24  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstbin.c: Added methods get_by_name_recurse_up, auto_clock,
 	  use_clock and on_[pre|post]_iterate.
 	* tests/rc_element.rb: Added tests for Gst::Bin#get_by_name* and
 	  on_[pre|post]_iterate.
 
-2003-08-23  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-23  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst*.c: Changed extdoc.rb enumeration syntax to something 
 	  more RDish (-a, -b, -c to *a, *b, *c).
 
-2003-08-19  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-19  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst*.c: Fixed comments + removed obsolete code.
 
-2003-08-15  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-15  Laurent Sansonetti  <lrz@gnome.org>
 
 	* sample/xml-ogg-player.rb: New file.
 	* sample/media-type.rb: Fixed a bug when printing track length (needed 
 	  to divide with Gst::Second to have the correct number of seconds).
 	* src/rbgstmediainfo.c: Fixed integer conversion bug (now uses ULL).
 
-2003-08-14  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-14  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstxml.c, tests/tc_xml.rb: New files.
 	* src/rbgst.c: Initializes Gst::XML.
 	* src/rbgst.h: Added macros for Gst::XML.
 
-2003-08-10  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-10  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstautoplug.c, src/rbgstelement.c, src/rbgsteventseek.c,
 	  src/rbgsteventsegmentseek.c, src/rbgstformat.c, src/rbgstpad.c,
@@ -67,11 +71,11 @@
 
 	* src/rbgst.c: Fixed a compilation bug with old 2.x GCC.
 
-2003-08-09  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-09  Laurent Sansonetti  <lrz@gnome.org>
 
 	* sample/media-type2.rb: New file (thanks to Nikolai Weibull).
 
-2003-08-08  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-08  Laurent Sansonetti  <lrz@gnome.org>
 
 	* sample/gst-inspect.rb: Added signals and event masks support.
 	* src/rbgsteventmask.c: New file.
@@ -80,7 +84,7 @@
 	* src/rbgstpad.c: Implemented methods event_masks and each_event_mask.
 	* src/rbgstquerytype.c: Renamed method id to type_id.
 
-2003-08-04  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-04  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Added constants Gst::SECOND, Gst::MSECOND, Gst::USECOND 
 	  and Gst::NSECOND. 
@@ -89,7 +93,7 @@
 	* src/rbgstpad.c, src/rbgstelement.c: Methods query sets the format 
 	  parameter on success. 
 
-2003-08-03  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-03  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgsteventseek.c, src/rbgsteventsegmentseek.c, src/rbgsteventsize.c:
 	New files.
@@ -102,17 +106,17 @@
 	* src/rbgstevent.c: Added methods src and timestamp.
 	* src/rbgstpad.c: Uses ULL2NUM in query + added method send_event.
 
-2003-08-01  Laurent Sansonetti  <laurent@datarescue.be>
+2003-08-01  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstparse.c, tests/tc_parse.rb: New files.
 	* src/rbgst.c: Initializes the Gst::Parse module.
 	* src/rbgstmediainfo.c: Removed a debug warning.
 
-2003-07-30  Laurent Sansonetti  <laurent@datarescue.be>
+2003-07-30  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstpad.c: Added method query.
 
-2003-07-29  Laurent Sansonetti  <laurent@datarescue.be>
+2003-07-29  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstcaps.c, src/rbgstclock.c, src/rbgstformat.c, src/rbgstplugin.c,
 	  src/rbgstquerytype.c src/rbgsttype.c: 
@@ -122,13 +126,13 @@
 	* extconf.rb: Checks if the gstmedia-info library is installed,
 	and sets the HAVE_MEDIA_INFO macro accordingly.
 
-2003-07-28  Laurent Sansonetti  <laurent@datarescue.be>
+2003-07-28  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstautoplug.c: Added method signal_new_object.
 	* src/rbgstpluginfeature.c: Added methods ensure_loaded and
 	unload_thyself.
 
-2003-07-25  Laurent Sansonetti  <laurent@datarescue.be>
+2003-07-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* AUTHORS: removed
 	* .cvsignore, AUTHORS, COPYING.LIB, README, extconf.rb,
@@ -148,7 +152,7 @@
 	  tests/tc_element.rb, tests/tc_modfunc.rb, tests/tc_pad.rb,
 	  tests/tc_plugin.rb, tests/tc_type.rb: initial SF import
 
-2003-07-07  Laurent Sansonetti  <laurent@datarescue.be>
+2003-07-07  Laurent Sansonetti  <lrz@gnome.org>
 
 	* 0.1.1 released
 	* improved the existing API (in the Ruby way)
@@ -161,7 +165,7 @@
 	* added inclusion and inheritance maps 
 	* enhanced support of Ruby operators
 
-2003-06-01  Laurent Sansonetti  <laurent@datarescue.be>
+2003-06-01  Laurent Sansonetti  <lrz@gnome.org>
 
 	* 0.1.0 released
 	* basic API 
