@@ -20,32 +20,71 @@
 
 #include "rbgst.h"
 
-/* FIXME: document me */
+/* Module: Gst::Tag
+ * Helper module to the tagging interface.
+ */
 
+/*
+ * Class method: exists?(tag)
+ * tag: the name of the tag.
+ *
+ * Checks if the given tag is already registered.
+ *
+ * Returns: true if the tag is registered, false otherwise.
+ */
 static VALUE
 rb_gst_tag_exists (VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_exists (RVAL2CSTR (tag)));
 }
 
+/*
+ * Class method: fixed?(tag)
+ * tag: the name of the tag.
+ *
+ * Checks if the given tag is fixed. A fixed tag can only contain one value. 
+ * Unfixed tags can contain lists of values.
+ *
+ * Returns: true if the tag is fixed, false otherwise.
+ */
 static VALUE
 rb_gst_tag_fixed (VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_is_fixed (RVAL2CSTR (tag)));
 }
 
+/*
+ * Class method: get_nick(tag)
+ * tag: the name of the tag.
+ *
+ * Returns: the human-readable name of this tag.
+ */
 static VALUE
 rb_gst_tag_get_nick (VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_nick (RVAL2CSTR (tag)));
 }
 
+/*
+ * Class method: get_description(tag)
+ * tag: the name of the tag.
+ *
+ * Returns: the human-readable description of this tag.
+ */
 static VALUE
 rb_gst_tag_get_description (VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_description (RVAL2CSTR (tag)));
 }
 
+/*
+ * Class method: get_flag(tag)
+ * tag: the name of the tag.
+ *
+ * Gets the flag of the given tag.
+ *
+ * Returns: the flag of this tag (see Gst::Tag::Flag).
+ */
 static VALUE
 rb_gst_tag_get_flag (VALUE self, VALUE tag)
 {

@@ -24,14 +24,23 @@
  * Create schedulers from a factory.  
  */
 
-/* FIXME: document me */
+/* Class method: default_name
+ * Returns: the default scheduler factory name.
+ */
 static VALUE
 rb_gst_sf_default_name (VALUE self)
 {
 	return CSTR2RVAL (gst_scheduler_factory_get_default_name ());
 }
 
-/* FIXME: document me */
+/*
+ * Class method: set_default_name(name)
+ * name: the name of the default scheduler factory used as a default.
+ *
+ * Sets the default scheduler name.
+ *
+ * Returns: self.
+ */
 static VALUE
 rb_gst_sf_set_default_name (VALUE self, VALUE name)
 {

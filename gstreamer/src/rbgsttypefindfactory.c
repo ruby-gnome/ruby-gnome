@@ -21,8 +21,17 @@
 
 #include "rbgst.h"
 
-/* FIXME: Document me */
+/* Class: Gst::TypeFindFactory
+ * Information about registered type find functions.
+ */
 
+/*
+ * Class method: list
+ *
+ * Gets the list of all registered type find factories.
+ *
+ * Returns: an Array of Gst::TypeFindFactory objects.
+ */
 static VALUE
 rb_gst_type_find_factory_get_list (void)
 {
@@ -42,6 +51,14 @@ rb_gst_type_find_factory_get_list (void)
 	return arr;
 }
 
+/*
+ * Method: extensions
+ *
+ * Gets the extensions associated with a type find factory.
+ *
+ * Returns: an Array of String objects, or nil if no extensions are 
+ * associated with the type find factory.
+ */
 static VALUE 
 rb_gst_type_find_factory_get_extensions (VALUE self) 
 {
@@ -58,6 +75,13 @@ rb_gst_type_find_factory_get_extensions (VALUE self)
     return ary;
 }
 
+/*
+ * Method: caps
+ *
+ * Gets the caps associated with a type find factory.
+ *
+ * Returns: the Gst::Caps object associated with this factory.
+ */
 static VALUE
 rb_gst_type_find_factory_get_caps (VALUE self)
 {
@@ -88,6 +112,6 @@ Init_gst_typefindfactory (void)
 	rb_define_singleton_method(c, "list", rb_gst_type_find_factory_get_list, 0);
 	rb_define_method(c, "extensions", rb_gst_type_find_factory_get_extensions, 0);
 	rb_define_method(c, "caps", rb_gst_type_find_factory_get_caps, 0);
-	//rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);
+	/*rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);*/
 	rb_define_method(c, "to_s", rb_gst_type_find_factory_to_s, 0);
 }

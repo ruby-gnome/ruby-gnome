@@ -1,3 +1,8 @@
+2005-03-04  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstregistrypool.c, src/rbgstschedulerfactory.c, src/rbgsttag.c,
+	  src/rbgsttagsetter.c, src/rbgsttypefindfactory.c: Updated API reference.
+
 2005-02-23  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstregistrypool.c: Added.

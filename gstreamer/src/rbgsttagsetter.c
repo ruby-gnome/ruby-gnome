@@ -20,8 +20,19 @@
 
 #include "rbgst.h"
 
-/* FIXME: document me */
+/* Class: Gst::TagSetter
+ * Element interface that allows the setting and retrieval of media metadata.
+ */
 
+/*
+ * Method: merge(structure, merge_mode)
+ * structure: a Ruby hash representing the tag list of merge from.
+ * merge_mode: the mode to merge with (see Gst::Tag::MergeMode).
+ *
+ * Merges the given tag list in the setter's list using the given mode.
+ *
+ * Returns: self.
+ */
 static VALUE
 rb_gst_tag_setter_merge (VALUE self, VALUE structure, VALUE merge_mode)
 {
