@@ -1,6 +1,11 @@
+2003-08-27 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkglconfig.c, src/rbgtkwidget.c: replaced
+        rbgobj_get_{enum,flags} with RVAL2{GENUM,GFLAGS}
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-25 Vincent Isambart <isambart@netcourrier.com>
 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglconfig.c,v 1.6 2003/08/23 19:07:32 isambart Exp $ */
+/* $Id: rbgdkglconfig.c,v 1.7 2003/08/27 18:29:18 isambart Exp $ */
 /* Gdk::GLConfig
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -37,7 +37,7 @@
             if ((type == T_FIXNUM) || (type == T_BIGNUM)) \
                 array[i] = NUM2INT(val); \
             else \
-                array[i] = rbgobj_get_enum(val, GDK_TYPE_GL_CONFIG_ATTRIB); \
+                array[i] = RVAL2GENUM(val, GDK_TYPE_GL_CONFIG_ATTRIB); \
         } \
         array[len] = GDK_GL_ATTRIB_LIST_NONE; \
     } while (0)
@@ -57,7 +57,7 @@ glconfig_initialize(argc, argv, self)
             G_INITIALIZE(self, gdk_gl_config_new(attrib_list));
         } else {
             int mode;
-            mode = rbgobj_get_flags(argv[0], GDK_TYPE_GL_CONFIG_MODE);
+            mode = RVAL2GFLAGS(argv[0], GDK_TYPE_GL_CONFIG_MODE);
             G_INITIALIZE(self, gdk_gl_config_new_by_mode(mode));
         }
     }
@@ -76,7 +76,7 @@ glconfig_initialize(argc, argv, self)
             int mode;
             GdkGLConfig* glconfig;
 
-            mode = rbgobj_get_flags(argv[1], GDK_TYPE_GL_CONFIG_MODE);
+            mode = RVAL2GFLAGS(argv[1], GDK_TYPE_GL_CONFIG_MODE);
             glconfig = gdk_gl_config_new_by_mode_for_screen(_SCREEN(argv[0]), mode);
             G_INITIALIZE(self, glconfig);
         }
@@ -95,7 +95,7 @@ glconfig_get_attrib(self, attribute)
     int value;
     int attrib_int;
 
-    attrib_int = rbgobj_get_enum(attribute, GDK_TYPE_GL_CONFIG_ATTRIB);
+    attrib_int = RVAL2GENUM(attribute, GDK_TYPE_GL_CONFIG_ATTRIB);
     if (!gdk_gl_config_get_attrib(_SELF(self), attrib_int, &value))
         return Qnil;
 

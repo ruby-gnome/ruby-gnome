@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkwidget.c,v 1.3 2003/08/25 09:05:01 isambart Exp $ */
+/* $Id: rbgtkwidget.c,v 1.4 2003/08/27 18:29:18 isambart Exp $ */
 /* OpenGL extension to Gtk::Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -43,7 +43,7 @@ widget_set_gl_capability(argc, argv, self)
 
     switch (argc) {
         case 4:
-            render_type = rbgobj_get_enum(argv[3], GDK_TYPE_GL_RENDER_TYPE);
+            render_type = RVAL2GENUM(argv[3], GDK_TYPE_GL_RENDER_TYPE);
         case 3:
             direct = RVAL2CBOOL(argv[2]);
         case 2:
@@ -87,7 +87,7 @@ widget_create_gl_context(argc, argv, self)
 
     switch (argc) {
         case 3:
-            render_type = rbgobj_get_enum(argv[2], GDK_TYPE_GL_RENDER_TYPE);
+            render_type = RVAL2GENUM(argv[2], GDK_TYPE_GL_RENDER_TYPE);
         case 2:
             direct = RVAL2CBOOL(argv[1]);
         case 1:
