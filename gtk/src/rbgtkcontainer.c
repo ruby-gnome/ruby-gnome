@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2004/05/12 17:39:46 $
+  $Date: 2004/05/28 18:59:40 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -111,7 +111,7 @@ cont_set_focus_vadjustment(self, adjustment)
     VALUE self, adjustment;
 {
     gtk_container_set_focus_vadjustment(_SELF(self),
-                                        GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+                                        NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
     return self;
 }
 
@@ -120,7 +120,7 @@ cont_set_focus_hadjustment(self, adjustment)
     VALUE self, adjustment;
 {
     gtk_container_set_focus_hadjustment(_SELF(self),
-                                        GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+                                        NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
     return self;
 }
 

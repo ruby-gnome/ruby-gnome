@@ -4,7 +4,7 @@
   rbgdkinput.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2004/05/28 18:59:40 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -53,15 +53,6 @@ input_remove(self, id)
     return id;
 }
 
-/* This method from 'Input Devices' */
-static VALUE
-input_set_extension_events(self, window, mask, mode)
-    VALUE self, window, mask, mode;
-{
-    gdk_input_set_extension_events(GDK_WINDOW(RVAL2GOBJ(window)),
-                                   NUM2INT(mask), FIX2INT(mode));
-    return Qnil;
-}
 
 void
 Init_gtk_gdk_input()
@@ -70,14 +61,10 @@ Init_gtk_gdk_input()
 
     rb_define_module_function(mGdkInput, "add", input_add, 2);
     rb_define_module_function(mGdkInput, "remove", input_remove, 1);
-    rb_define_module_function(mGdkInput, "set_extension_events", input_set_extension_events, 3);
 
     /* GdkInputCondition */
     G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", mGdkInput);
     G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
-    /* GdkExtensionMode */
-    G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", mGdkInput);
-    G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_EXTENSION_MODE, "GDK_");
 }
 

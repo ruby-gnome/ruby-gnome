@@ -1,3 +1,11 @@
+2004-05-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcelllayout.c: Added for 2.4. 
+	* src/rbgdkdevice.c, rbgdkinput.c: Move Gdk::Input.set_extension_events to 
+	Gdk::Device. 
+	* src/rbgtkcontainer.c: Gtk::Container#set_focus_(h|v)adjustment accept nil. 
+	* src/rbgdkselection.c: Fix a memory leak.
+
 2004-05-26  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
 
 	* src/rbgtkentry.c: Fix compilation error of Gtk::Entry.c 

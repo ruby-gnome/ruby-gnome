@@ -4,7 +4,7 @@
   rbgdkdevice.c -
 
   $Author: mutoh $
-  $Date: 2003/11/02 18:29:29 $
+  $Date: 2004/05/28 18:59:40 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -20,6 +20,16 @@ device_s_list(self)
 {
     return GLIST2ARY(gdk_devices_list());
 }
+
+static VALUE
+device_s_set_extension_events(self, window, mask, mode)
+    VALUE self, window, mask, mode;
+{
+    gdk_input_set_extension_events(GDK_WINDOW(RVAL2GOBJ(window)),
+                                   NUM2INT(mask), FIX2INT(mode));
+    return Qnil;
+}
+
 
 static VALUE
 device_set_source(self, source)
@@ -186,6 +196,7 @@ Init_gtk_gdk_device()
 
     rb_define_singleton_method(dev, "list", device_s_list, 0);
     rb_define_singleton_method(dev, "core_pointer", device_s_get_core_pointer, 0);
+    rb_define_singleton_method(dev, "set_extension_events", device_s_set_extension_events, 3);
 
     rb_define_method(dev, "set_source", device_set_source, 1);
     rb_define_method(dev, "set_mode", device_set_mode, 1);
@@ -194,6 +205,7 @@ Init_gtk_gdk_device()
     rb_define_method(dev, "get_state", device_get_state, 1);
     rb_define_method(dev, "get_history", device_get_history, 3);
     rb_define_method(dev, "get_axis", device_get_axis, 2);
+
     rb_define_method(dev, "name", device_name, 0);
     rb_define_method(dev, "source", device_source, 0);
     rb_define_method(dev, "mode", device_mode, 0);
@@ -214,5 +226,9 @@ Init_gtk_gdk_device()
     /* GdkAxisUse */
     G_DEF_CLASS(GDK_TYPE_AXIS_USE, "AxisUse", dev);
     G_DEF_CONSTANTS(dev, GDK_TYPE_AXIS_USE, "GDK_");
+
+    /* GdkExtensionMode */
+    G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", dev);
+    G_DEF_CONSTANTS(dev, GDK_TYPE_EXTENSION_MODE, "GDK_");
 
 }
