@@ -1,3 +1,12 @@
+2003-08-04  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgst.c: Added constants Gst::SECOND, Gst::MSECOND, Gst::USECOND 
+	  and Gst::NSECOND. 
+	* src/rbgstcaps.c: Added methods mime, set_mime and mime=.
+	* src/rbgstformat.c: Renamed method id to type_id.
+	* src/rbgstpad.c, src/rbgstelement.c: Methods query sets the format 
+	  parameter on success. 
+
 2003-08-03  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgsteventseek.c, src/rbgsteventsegmentseek.c, src/rbgsteventsize.c:
