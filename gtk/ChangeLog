@@ -1,3 +1,9 @@
+2003-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdktimecoord.c: Added. 
+	* src/rbgtk.h: Add GDK_TYPE_TIME_COORD.
+	* src/rbgdkdevice.c: Added.
+
 2003-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdragcontext.c: Rename Gdk::DragContext.protocol to 

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/10/07 16:34:34 $
+  $Date: 2003/11/02 18:29:29 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -35,6 +35,8 @@
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GDK_TYPE_WINDOW_ATTR (gdk_windowattr_get_type())
+#define GDK_TYPE_TIME_COORD (gdk_timecoord_get_type())
+
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
@@ -120,6 +122,7 @@ extern GType gdk_windowattr_get_type(void);
 extern GType gdk_atom_get_type(void);
 extern GType gdk_geometry_get_type(void);
 extern GType gdk_region_get_type(void);
+extern GType gdk_timecoord_get_type(void);
 
 extern GdkAtom get_gdkatom(VALUE atom);
 extern VALUE make_gdkevent(GdkEvent* event);
