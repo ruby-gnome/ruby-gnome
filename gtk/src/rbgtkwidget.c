@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/01/21 18:47:06 $
+  $Date: 2004/01/21 19:03:15 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -696,7 +696,7 @@ widget_s_install_style_property(self, spec)
 
     gclass = (GtkWidgetClass *)g_type_class_ref(cinfo->gtype);
     gtk_widget_class_install_style_property(gclass, pspec); 
-    return Qnil;
+    return self;
 }
 
 /* Do we need this?
