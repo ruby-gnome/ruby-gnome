@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:21:01 $
+  $Date: 2005/01/09 07:34:56 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -224,7 +224,6 @@ gobj_set_property(self, prop_name, val)
     GParamSpec* pspec;
     const char* name;
 
-    printf("set_property:1\n");
     if (SYMBOL_P(prop_name)) {
         name = rb_id2name(SYM2ID(prop_name));
     } else {
@@ -232,18 +231,15 @@ gobj_set_property(self, prop_name, val)
         name = StringValuePtr(prop_name);
     }
 
-    printf("set_property:2\n");
     pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
                                          name);
 
-    printf("set_property:4\n");
     if (!pspec)
         rb_raise(eNoPropertyError, "No such property: %s", name);
     else {
         // FIXME: use rb_ensure to call g_value_unset()
         RValueToGValueFunc setter = NULL;
         GValue gval = {0,};
-    printf("set_property:4\n");
 
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
 
@@ -256,18 +252,15 @@ gobj_set_property(self, prop_name, val)
                     Data_Get_Struct(obj, void, setter);
             }
         }
-    printf("set_property:5\n");
 
         if (setter)
             setter(val, &gval);
         else {
             rbgobj_rvalue_to_gvalue(val, &gval);
         }
-    printf("set_property:6\n");
 
         g_object_set_property(RVAL2GOBJ(self), name, &gval);
         g_value_unset(&gval);
-    printf("set_property:7\n");
 
         return self;
     }
