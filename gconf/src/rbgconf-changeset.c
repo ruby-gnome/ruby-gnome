@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/02/04 21:28:42 $
+ * $Date: 2003/04/13 00:19:20 $
  *
  *****************************************************************************/
 
@@ -97,7 +97,8 @@ static void
 change_set_foreach_func(GConfChangeSet *cs, const gchar *key,
 			GConfValue *value, gpointer user_data)
 {
-	rb_funcall((VALUE)user_data, g_id_call, 1, GCVAL2RVAL(value));
+	rb_funcall((VALUE)user_data, g_id_call, 2, CSTR2RVAL(key),
+		   GCVAL2RVAL(value));
 }
 
 static VALUE
