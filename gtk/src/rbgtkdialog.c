@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2002/12/17 17:34:44 $
+  $Date: 2002/12/18 13:11:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,12 +32,11 @@ dialog_add_button(self, button_text, response_id)
 }
 
 static VALUE
-dialog_add_buttons(self, button_ary)
+dialog_add_buttons_internal(self, button_ary)
     VALUE self, button_ary;
 {
     int i;
     GObject* obj = RVAL2GOBJ(self);
-
     g_object_freeze_notify(obj);
     for (i = 0; i < RARRAY(button_ary)->len; i++) {
         dialog_add_button(self, RARRAY(RARRAY(button_ary)->ptr[i])->ptr[0],
@@ -48,18 +47,30 @@ dialog_add_buttons(self, button_ary)
 }    
 
 static VALUE
+dialog_add_buttons(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE button_ary;
+    rb_scan_args(argc, argv, "*", &button_ary);
+    dialog_add_buttons_internal(self, button_ary);
+    return self;
+}    
+
+static VALUE
 dialog_initialize(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
     VALUE title, parent, flags, button_ary;
-    rb_scan_args(argc, argv, "04", &title, &parent, &flags, &button_ary);
+    rb_scan_args(argc, argv, "03*", &title, &parent, &flags, &button_ary);
 
     if (argc == 0){
         RBGTK_INITIALIZE(self, gtk_dialog_new());
-    } else if (argc == 4){
-        GtkDialog *dialog = GTK_DIALOG(g_object_new(GTK_TYPE_DIALOG, NULL));
+    } else if (argc > 3){
+        GtkDialog* dialog = GTK_DIALOG(g_object_new(GTK_TYPE_DIALOG, NULL));
         GtkDialogFlags gflags = NIL_P(flags) ? 0 : NUM2INT(flags);
         if (! NIL_P(title))
             gtk_window_set_title(GTK_WINDOW(dialog), RVAL2CSTR(title));
@@ -74,8 +85,7 @@ dialog_initialize(argc, argv, self)
             gtk_dialog_set_has_separator(dialog, FALSE);
 
         RBGTK_INITIALIZE(self, dialog);
-
-        dialog_add_buttons(self, button_ary);
+        dialog_add_buttons_internal(self, button_ary);
     } else {
         rb_raise(rb_eArgError, "invalid argument number");
     }
@@ -147,7 +157,7 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "run", dialog_run, 0);
     rb_define_method(gDialog, "response", dialog_response, 1);
     rb_define_method(gDialog, "add_button", dialog_add_button, 2);
-    rb_define_method(gDialog, "add_buttons", dialog_add_buttons, 1);
+    rb_define_method(gDialog, "add_buttons", dialog_add_buttons, -1);
     rb_define_method(gDialog, "add_action_widget", dialog_add_action_widget, 2);
     rb_define_method(gDialog, "set_default_response", dialog_set_default_response, 1);
     rb_define_method(gDialog, "set_response_sensitive", dialog_set_response_sensitive, 2);

@@ -3,8 +3,8 @@
 
   rbgtkaccelmap.c -
 
-  $Author: ogs $
-  $Date: 2002/12/12 15:52:22 $
+  $Author: mutoh $
+  $Date: 2002/12/18 13:11:31 $
 
   Copyright (C) 2002 OGASAWARA, Takeshi
 ************************************************/
@@ -59,7 +59,7 @@ accel_map_add_filter(self, pattern)
     VALUE self, pattern;
 {
     gtk_accel_map_add_filter(RVAL2CSTR(pattern));
-    return Qnil;
+    return self;
 }
 
 void
@@ -113,7 +113,7 @@ Init_accel_map()
     rb_define_module_function(mAccelMap, "change_entry", accel_map_change_entry, 4);
     rb_define_module_function(mAccelMap, "load", accel_map_load, 1);
     rb_define_module_function(mAccelMap, "save", accel_map_save, 1);
-    rb_define_module_function(mAccelMap, "add_filter", accel_map_add_filter, 1);
+    rb_define_method(mAccelMap, "add_filter", accel_map_add_filter, 1);
     rb_define_module_function(mAccelMap, "each", accel_map_foreach, 0);
     rb_define_module_function(mAccelMap, "each_unfilterd", accel_map_foreach_unfilterd, 0);
 }
