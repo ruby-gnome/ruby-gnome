@@ -1,9 +1,10 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-program.rb,v 1.1 2002/10/28 16:32:13 tkubo Exp $
+# $Id: gnome-program.rb,v 1.2 2003/02/02 12:47:55 tkubo Exp $
 #
 # gnome-program.rb - sample script of Gnome::Program and Gnome::ModuleInfo
 #
-# Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+# Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+# Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
-
+#
 require 'gnome2'
 
 options = [

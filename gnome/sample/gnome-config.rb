@@ -1,9 +1,10 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-config.rb,v 1.1 2002/11/16 09:54:50 tkubo Exp $
+# $Id: gnome-config.rb,v 1.2 2003/02/02 12:47:55 tkubo Exp $
 #
 # gnome-config.rb - sample script of Gnome::Config
 #
-# Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+# Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+# Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

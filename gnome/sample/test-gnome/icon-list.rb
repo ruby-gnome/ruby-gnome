@@ -5,6 +5,8 @@
 
   Rewritten by KUBO Takehiro <kubo@jiubao.org>
 
+  Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+
 Original Copyright:
  
   Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)

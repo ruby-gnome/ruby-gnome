@@ -6,6 +6,8 @@
   Rewritten by Neil Conway <neilconway@rogers.com> (GNOME 1.x version)
                KUBO Takehiro <kubo@jiubao.org> (Ported to GNOME 2.0)
 
+  Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+
 Original Copyright:
  
   Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)
@@ -114,8 +116,7 @@ class FontPickerApp < TestGnomeApp
     fontpicker3.mode = Gnome::FontPicker::MODE_USER_WIDGET
 
     hbox3 = Gtk::HBox.new(false, 0)
-    #hbox3.pack_start(Gtk::Image.new(Gtk::Stock::SPELLCHECK, Gtk::ICON_SIZE_BUTTON), false, false, 5)
-    hbox3.pack_start(Gtk::Image.new(File.dirname(__FILE__) + '/bomb.xpm'), false, false, 5) # TODO
+    hbox3.pack_start(Gtk::Image.new(Gtk::Stock::SPELL_CHECK, Gtk::IconSize::BUTTON), false, false, 5)
     hbox3.pack_start(Gtk::Label.new("This is an hbox with pixmap and text"), false, false, 5)
     fontpicker3.set_widget(hbox3)
     fontpicker3.border_width = 5

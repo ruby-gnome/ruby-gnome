@@ -1,11 +1,12 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-druid.rb,v 1.5 2002/11/16 09:54:50 tkubo Exp $
+# $Id: gnome-druid.rb,v 1.6 2003/02/02 12:47:55 tkubo Exp $
 #
 # test-druid.rb - sample script of Gnome::Druid
 #                 This program was based of test-druid of libgnomeui
 #                 and enhanced many features.
 #
-# Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+# Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+# Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
 #
 # Original copyright is unknown. There is no copyright in original source.
 #
@@ -23,7 +24,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
-
+#
 require 'gnome2'
 
 class TestDruid < Gtk::Window

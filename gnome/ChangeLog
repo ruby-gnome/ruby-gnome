@@ -1,3 +1,8 @@
+2003-02-02  KUBO Takehiro  <kubo@jiubao.org>
+
+	* All files: Update copyright notice from LGPL 2.0 to LGPL 2.1.
+	* sample/test-gnome/font-picker.rb: use Gtk::Stock.
+
 2002-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-pixmap-entry.c, rbgnome-icon-entry.c, rbgnome-href.c, 

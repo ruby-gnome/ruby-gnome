@@ -1,10 +1,11 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-app-helper.rb,v 1.7 2002/12/22 14:27:43 mutoh Exp $
+# $Id: gnome-app-helper.rb,v 1.8 2003/02/02 12:47:55 tkubo Exp $
 #
 # gnome-app-helper.rb - sample script of Gnome::App#create_menus()
 #                       and Gnome::App#toolbar().
 #
-# Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
+# Copyright (c) 2002-2003 Ruby-GNOME2 Project Team
+# Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
