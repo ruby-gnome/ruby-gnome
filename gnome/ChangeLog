@@ -1,5 +1,14 @@
 2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
 
+	* sample/calculator.rb, sample/canvas-arrowhead.rb,
+	sample/canvas-features.rb, sample/canvas-fifteen.rb,
+	sample/canvas-primitives.rb, sample/canvas.rb,
+	sample/clock.rb, sample/flower.png, sample/less.rb,
+	sample/number-entry.rb, sample/paper-selector.rb,
+	sample/toroid.png: Delete obsolete sample files. 
+
+2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-about.c: Gnome::Abount accepts nil as 7th argument.
 	* src/rbgnome-app-helper.c: Add Gtk::MenuShell#fill_menus.
 	Rename ary_to_ui_info to rbgno_ary_to_ui_info and export it.
