@@ -4,7 +4,7 @@
   rbgtkrange.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/25 17:51:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,30 +13,36 @@
 
 #include "global.h"
 
+#define _SELF(self) (GTK_RANGE(RVAL2GOBJ(self)))
+
 static VALUE
-range_get_adj(self)
-	 VALUE self;
+range_get_value(self)
+    VALUE self;
 {
-    return GOBJ2RVAL(gtk_range_get_adjustment(GTK_RANGE(RVAL2GOBJ(self))));
+    return rb_float_new(gtk_range_get_value(_SELF(self)));
 }
 
 static VALUE
-range_set_update_policy(self, policy)
-    VALUE self, policy;
+range_set_increments(self, step, page)
+    VALUE self, step, page;
 {
-    gtk_range_set_update_policy(GTK_RANGE(RVAL2GOBJ(self)),
-				(GtkUpdateType)NUM2INT(policy));
+    gtk_range_set_increments(_SELF(self), NUM2DBL(step), NUM2DBL(page));
     return self;
 }
 
 static VALUE
-range_set_adj(self, adj)
-    VALUE self, adj;
+range_set_range(self, min, max)
+    VALUE self, min, max;
 {
-	if (! NIL_P(adj))
-	  gtk_range_set_adjustment(GTK_RANGE(RVAL2GOBJ(self)),
-							   GTK_ADJUSTMENT(RVAL2GOBJ(adj)));
+    gtk_range_set_range(_SELF(self), NUM2DBL(min), NUM2DBL(max));
+    return self;
+}
 
+static VALUE
+range_set_value(self, value)
+    VALUE self, value;
+{
+    gtk_range_set_value(_SELF(self), NUM2DBL(value));
     return self;
 }
 
@@ -45,7 +51,10 @@ Init_gtk_range()
 {
   VALUE gRange = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
 
-  rb_define_method(gRange, "get_adjustment", range_get_adj, 0);
-  rb_define_method(gRange, "set_update_policy", range_set_update_policy, 1);
-  rb_define_method(gRange, "set_adjustment", range_set_adj, 1);
+  rb_define_method(gRange, "value", range_get_value, 0);
+  rb_define_method(gRange, "set_increments", range_set_increments, 2);
+  rb_define_method(gRange, "set_range", range_set_range, 2);
+  rb_define_method(gRange, "set_value", range_set_value, 1);
+
+  G_DEF_SETTERS(gRange);
 }

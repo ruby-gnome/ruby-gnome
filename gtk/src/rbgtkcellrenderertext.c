@@ -4,7 +4,7 @@
   rbgtkcellrenderertext.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -30,14 +30,6 @@ crtext_set_fixed_height_from_font(self, number_of_rows)
     return self;
 }
 
-static VALUE
-crtext_set_fixed_height_from_font_equal(self, number_of_rows)
-    VALUE self, number_of_rows;
-{
-    gtk_cell_renderer_text_set_fixed_height_from_font(_SELF(self), NUM2INT(number_of_rows));
-    return number_of_rows;
-}
-
 void
 Init_gtk_cellrenderertext()
 {
@@ -45,7 +37,8 @@ Init_gtk_cellrenderertext()
     
     rb_define_method(renderer, "initialize", crtext_initialize, 0);
     rb_define_method(renderer, "set_fixed_height_from_font", crtext_set_fixed_height_from_font, 1);
-    rb_define_method(renderer, "fixed_height_from_font=", crtext_set_fixed_height_from_font_equal, 1);
+
+    G_DEF_SETTERS(renderer);
 }
 
 

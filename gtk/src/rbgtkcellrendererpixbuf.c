@@ -4,7 +4,7 @@
   rbgtkcellrendererpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -26,7 +26,6 @@ void
 Init_gtk_cellrendererpixbuf()
 {
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PIXBUF, "CellRendererPixbuf", mGtk);
-    
     rb_define_method(renderer, "initialize", crpixbuf_initialize, 0);
 }
 

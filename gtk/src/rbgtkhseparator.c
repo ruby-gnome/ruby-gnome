@@ -4,7 +4,7 @@
   rbgtkhseparator.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -25,6 +25,5 @@ void
 Init_gtk_hseparator()
 {
     VALUE gHSeparator = G_DEF_CLASS(GTK_TYPE_HSEPARATOR, "HSeparator", mGtk);
-
     rb_define_method(gHSeparator, "initialize", hsep_initialize, 0);
 }

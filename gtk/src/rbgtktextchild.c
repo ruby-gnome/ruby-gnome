@@ -4,15 +4,17 @@
   rbgtktextchild.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/25 17:51:26 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
 
 #include "global.h"
 
+#define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
+
 static VALUE
-initialize(argc, argv, self)
+textchild_initialize(argc, argv, self)
     int argc;
     VALUE* argv;
     VALUE self;
@@ -21,30 +23,18 @@ initialize(argc, argv, self)
     return Qnil;
 }
 
-static void
-collect_widgets(widget, ary)
-    gpointer widget;
-    VALUE ary;
+static VALUE
+textchild_get_widgets(self)
+    VALUE self;
 {
-    rb_ary_push(ary, GOBJ2RVAL(widget));
+    return GLIST2ARY(gtk_text_child_anchor_get_widgets(_SELF(self)));
 }
 
 static VALUE
-get_widgets(self)
+textchild_get_deleted(self)
     VALUE self;
 {
-    GList* list = gtk_text_child_anchor_get_widgets(
-        GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self)));
-    VALUE result = rb_ary_new();
-    g_list_foreach(list, collect_widgets, (gpointer)result);
-    return result;
-}
-
-static VALUE
-get_deleted(self)
-    VALUE self;
-{
-    return gtk_text_child_anchor_get_deleted(GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return gtk_text_child_anchor_get_deleted(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 void
@@ -52,6 +42,7 @@ Init_gtk_textchild()
 {
     VALUE gTextChildAnchor = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
 
-    rb_define_method(gTextChildAnchor, "widgets", get_widgets, 0);
-    rb_define_method(gTextChildAnchor, "deleted?", get_deleted, 0);
+    rb_define_method(gTextChildAnchor, "initialize", textchild_initialize, 0);
+    rb_define_method(gTextChildAnchor, "widgets", textchild_get_widgets, 0);
+    rb_define_method(gTextChildAnchor, "deleted?", textchild_get_deleted, 0);
 }

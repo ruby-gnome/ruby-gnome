@@ -4,7 +4,7 @@
   rbgtkhscrollbar.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,7 +32,6 @@ hscrollbar_initialize(argc, argv, self)
 void
 Init_gtk_hscrollbar()
 {
-  VALUE gHScrollbar = G_DEF_CLASS(GTK_TYPE_HSCROLLBAR, "HScrollbar", mGtk);
-
-  rb_define_method(gHScrollbar, "initialize", hscrollbar_initialize, -1);
+    VALUE gHScrollbar = G_DEF_CLASS(GTK_TYPE_HSCROLLBAR, "HScrollbar", mGtk);
+    rb_define_method(gHScrollbar, "initialize", hscrollbar_initialize, -1);
 }

@@ -4,7 +4,7 @@
   rbgtkcurve.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,14 +48,6 @@ curve_set_range(self, min_x, max_x, min_y, max_y)
 }
 
 static VALUE
-curve_set_curve_type(self, type)
-    VALUE self, type;
-{
-    gtk_curve_set_curve_type(GTK_CURVE(RVAL2GOBJ(self)), NUM2INT(type));
-    return self;
-}
-
-static VALUE
 curve_set_vector(self, length, vector)
     VALUE self, length, vector;
 {
@@ -66,7 +58,9 @@ curve_set_vector(self, length, vector)
     c_vec = ALLOCA_N(gfloat, len);
     for (i = 0; i < len; i++)
       c_vec[i] = NUM2DBL(RARRAY(vector)->ptr[i]);
+
     gtk_curve_set_vector(GTK_CURVE(RVAL2GOBJ(self)), len, c_vec);
+
     return self;
 }
 
@@ -83,6 +77,7 @@ curve_get_vector(self, length)
     gtk_curve_get_vector(GTK_CURVE(RVAL2GOBJ(self)), len, c_vec);
     for (i = 0; i < len; i++)
       rb_ary_push(vector, rb_float_new(c_vec[i]));
+
     return vector;
 }
 
@@ -95,11 +90,11 @@ Init_gtk_curve()
     rb_define_method(gCurve, "reset", curve_reset, 0);
     rb_define_method(gCurve, "set_gamma", curve_set_gamma, 1);
     rb_define_method(gCurve, "set_range", curve_set_range, 4);
-    rb_define_method(gCurve, "set_curve_type", curve_set_curve_type, 1);
     rb_define_method(gCurve, "set_vector", curve_set_vector, 2);
     rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
 
-    rb_define_const(gCurve, "CURVE_TYPE_LINEAR", INT2FIX(GTK_CURVE_TYPE_LINEAR));
-    rb_define_const(gCurve, "CURVE_TYPE_SPLINE", INT2FIX(GTK_CURVE_TYPE_SPLINE));
-    rb_define_const(gCurve, "CURVE_TYPE_FREE", INT2FIX(GTK_CURVE_TYPE_FREE));
+    /* GtkCurveType(from standard constants) */
+    rb_define_const(gCurve, "TYPE_LINEAR", INT2FIX(GTK_CURVE_TYPE_LINEAR));
+    rb_define_const(gCurve, "TYPE_SPLINE", INT2FIX(GTK_CURVE_TYPE_SPLINE));
+    rb_define_const(gCurve, "TYPE_FREE", INT2FIX(GTK_CURVE_TYPE_FREE));
 }

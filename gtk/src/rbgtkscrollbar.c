@@ -4,7 +4,7 @@
   rbgtkscrollbar.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/25 17:51:25 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,5 +16,5 @@
 void 
 Init_gtk_scrollbar()
 {
-  G_DEF_CLASS(GTK_TYPE_SCROLLBAR, "Scrollbar", mGtk);
+    G_DEF_CLASS(GTK_TYPE_SCROLLBAR, "Scrollbar", mGtk);
 }

@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/25 17:51:26 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,28 +13,9 @@
 
 #include "global.h"
 
-static VALUE
-tbar_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE arg1, arg2;
-    GtkOrientation orientation = GTK_ORIENTATION_HORIZONTAL;
-    GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
-
-    rb_scan_args(argc, argv, "02", &arg1, &arg2);
-    if (!NIL_P(arg1)) orientation = (GtkOrientation)NUM2INT(arg1);
-    if (!NIL_P(arg2)) style = (GtkToolbarStyle)NUM2INT(arg2);
-
-    {
-        GtkWidget* w = gtk_toolbar_new();
-        gtk_toolbar_set_orientation(GTK_TOOLBAR(w), orientation);
-        gtk_toolbar_set_style(GTK_TOOLBAR(w), style);
-        RBGTK_INITIALIZE(self, w);
-    }    
-    return Qnil;
-}
+#define _SELF(self) (GTK_TOOLBAR(RVAL2GOBJ(self)))
+#define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
+#define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
 tbar_get_gobject(widget, type)
@@ -45,15 +26,23 @@ tbar_get_gobject(widget, type)
     switch (NUM2INT(type)){
       case GTK_TOOLBAR_CHILD_SPACE:
         ret = Qnil;
-		break;
+        break;
       case GTK_TOOLBAR_CHILD_BUTTON:
       case GTK_TOOLBAR_CHILD_TOGGLEBUTTON:
       case GTK_TOOLBAR_CHILD_RADIOBUTTON:
       case GTK_TOOLBAR_CHILD_WIDGET:
-		ret = GOBJ2RVAL(widget);
-		break;
+        ret = GOBJ2RVAL(widget);
+        break;
     }
     return ret;
+}
+
+static VALUE
+tbar_initialize(self)
+    VALUE self;
+{
+    RBGTK_INITIALIZE(self, gtk_toolbar_new());
+    return Qnil;
 }
 
 static VALUE
@@ -63,16 +52,14 @@ tbar_append_item(self, text, ttext, ptext, icon, func)
     GtkWidget *ret = NULL;
 
     if (NIL_P(func)) {
-		func = rb_f_lambda();
+        func = rb_f_lambda();
     }
     G_RELATIVE(self, func);
-    ret = gtk_toolbar_append_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								  NIL_P(text)?NULL:RVAL2CSTR(text),
-								  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-								  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-								  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-								  GTK_SIGNAL_FUNC(exec_callback),
-								  (gpointer)func);
+    ret = gtk_toolbar_append_item(_SELF(self), N_RVAL2CSTR(text),
+                                  N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                                  N_RVAL2WIDGET(icon),
+                                  GTK_SIGNAL_FUNC(exec_callback),
+                                  (gpointer)func);
     return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
@@ -83,16 +70,14 @@ tbar_prepend_item(self, text, ttext, ptext, icon, func)
     GtkWidget *ret = NULL;
 
     if (NIL_P(func)) {
-		func = rb_f_lambda();
+        func = rb_f_lambda();
     }
     G_RELATIVE(self, func);
-    ret = gtk_toolbar_prepend_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								   NIL_P(text)?NULL:RVAL2CSTR(text),
-								   NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-								   NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-								   NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-								   GTK_SIGNAL_FUNC(exec_callback),
-								   (gpointer)func);
+    ret = gtk_toolbar_prepend_item(_SELF(self),N_RVAL2CSTR(text),
+                                   N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                                   N_RVAL2WIDGET(icon),
+                                   GTK_SIGNAL_FUNC(exec_callback),
+                                   (gpointer)func);
     return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
@@ -103,17 +88,15 @@ tbar_insert_item(self, text, ttext, ptext, icon, func, pos)
     GtkWidget *ret = NULL;
 
     if (NIL_P(func)) {
-		func = rb_f_lambda();
+        func = rb_f_lambda();
     }
     G_RELATIVE(self, func);
-    ret = gtk_toolbar_insert_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								  NIL_P(text)?NULL:RVAL2CSTR(text),
-								  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-								  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-								  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-								  GTK_SIGNAL_FUNC(exec_callback),
-								  (gpointer)func,
-								  NUM2INT(pos));
+    ret = gtk_toolbar_insert_item(_SELF(self),N_RVAL2CSTR(text),
+                                  N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                                  N_RVAL2WIDGET(icon),
+                                  GTK_SIGNAL_FUNC(exec_callback),
+                                  (gpointer)func,
+                                  NUM2INT(pos));
     return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
@@ -121,7 +104,7 @@ static VALUE
 tbar_append_space(self)
     VALUE self;
 {
-    gtk_toolbar_append_space(GTK_TOOLBAR(RVAL2GOBJ(self)));
+    gtk_toolbar_append_space(_SELF(self));
     return self;
 }
 
@@ -129,7 +112,7 @@ static VALUE
 tbar_prepend_space(self)
     VALUE self;
 {
-    gtk_toolbar_prepend_space(GTK_TOOLBAR(RVAL2GOBJ(self)));
+    gtk_toolbar_prepend_space(_SELF(self));
     return self;
 }
 
@@ -137,41 +120,7 @@ static VALUE
 tbar_insert_space(self, pos)
     VALUE self, pos;
 {
-    gtk_toolbar_insert_space(GTK_TOOLBAR(RVAL2GOBJ(self)), NUM2INT(pos));
-    return self;
-}
-
-static VALUE
-tbar_append_widget(self, widget, ttext, ptext)
-    VALUE self, widget, ttext, ptext;
-{
-    gtk_toolbar_append_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
-                              GTK_WIDGET(RVAL2GOBJ(widget)),
-                              NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-                              NIL_P(ptext)?NULL:RVAL2CSTR(ptext));
-    return self;
-}
-
-static VALUE
-tbar_prepend_widget(self, widget, ttext, ptext)
-    VALUE self, widget, ttext, ptext;
-{
-    gtk_toolbar_prepend_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
-							   GTK_WIDGET(RVAL2GOBJ(widget)),
-							   NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-							   NIL_P(ptext)?NULL:RVAL2CSTR(ptext));
-    return self;
-}
-
-static VALUE
-tbar_insert_widget(self, widget, ttext, ptext, pos)
-    VALUE self, widget, ttext, ptext, pos;
-{
-    gtk_toolbar_insert_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
-                              GTK_WIDGET(RVAL2GOBJ(widget)),
-                              NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-                              NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-                              NUM2INT(pos));
+    gtk_toolbar_insert_space(_SELF(self), NUM2INT(pos));
     return self;
 }
 
@@ -184,19 +133,16 @@ tbar_append_element(self, type, widget, text, ttext, ptext, icon)
     GtkWidget *ret = NULL;
 
     if (rb_block_given_p()) {
-		func = rb_f_lambda();
-		G_RELATIVE(self, func);
-		callback = exec_callback;
+        func = rb_f_lambda();
+        G_RELATIVE(self, func);
+        callback = exec_callback;
     }
-    ret = gtk_toolbar_append_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
-									 NUM2INT(type),
-									 NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									 NIL_P(text)?NULL:RVAL2CSTR(text),
-									 NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-									 NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-									 NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-									 GTK_SIGNAL_FUNC(callback),
-									 (gpointer)func);
+    ret = gtk_toolbar_append_element(_SELF(self), NUM2INT(type), 
+                                     N_RVAL2WIDGET(widget), N_RVAL2CSTR(text),
+                                     N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                                     N_RVAL2WIDGET(icon),
+                                     GTK_SIGNAL_FUNC(callback),
+                                     (gpointer)func);
     return tbar_get_gobject(ret, type);
 }
 
@@ -209,19 +155,16 @@ tbar_prepend_element(self, type, widget, text, ttext, ptext, icon)
     GtkWidget *ret = NULL;
 
     if (rb_block_given_p()) {
-		func = rb_f_lambda();
-		G_RELATIVE(self, func);
-		callback = exec_callback;
+        func = rb_f_lambda();
+        G_RELATIVE(self, func);
+        callback = exec_callback;
     }
-    ret = gtk_toolbar_prepend_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
-									  NUM2INT(type),
-									  NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									  NIL_P(text)?NULL:RVAL2CSTR(text),
-									  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-									  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-									  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-									  GTK_SIGNAL_FUNC(callback),
-									  (gpointer)func);
+    ret = gtk_toolbar_prepend_element(_SELF(self),
+                                      NUM2INT(type), N_RVAL2WIDGET(widget), 
+                                      N_RVAL2CSTR(text), N_RVAL2CSTR(ttext),
+                                      N_RVAL2CSTR(ptext), N_RVAL2WIDGET(icon),
+                                      GTK_SIGNAL_FUNC(callback),
+                                      (gpointer)func);
     return tbar_get_gobject(ret, type);
 }
 
@@ -234,38 +177,45 @@ tbar_insert_element(self, type, widget, text, ttext, ptext, icon, position)
     GtkWidget *ret = NULL;
 
     if (rb_block_given_p()) {
-		func = rb_f_lambda();
-		G_RELATIVE(self, func);
-		callback = exec_callback;
+        func = rb_f_lambda();
+        G_RELATIVE(self, func);
+        callback = exec_callback;
     }
-    ret = gtk_toolbar_insert_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
-									 NUM2INT(type),
-									 NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									 NIL_P(text)?NULL:RVAL2CSTR(text),
-									 NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
-									 NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
-									 NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
-									 GTK_SIGNAL_FUNC(callback),
-									 (gpointer)func,
-									 NUM2INT(position));
+    ret = gtk_toolbar_insert_element(_SELF(self),
+                                     NUM2INT(type),N_RVAL2WIDGET(widget), 
+                                     N_RVAL2CSTR(text), N_RVAL2CSTR(ttext),
+                                     N_RVAL2CSTR(ptext), N_RVAL2WIDGET(icon),
+                                     GTK_SIGNAL_FUNC(callback),
+                                     (gpointer)func,
+                                     NUM2INT(position));
     return tbar_get_gobject(ret, type);
 }
 
 static VALUE
-tbar_set_orientation(self, orientation)
-    VALUE self, orientation;
+tbar_append_widget(self, widget, ttext, ptext)
+    VALUE self, widget, ttext, ptext;
 {
-    gtk_toolbar_set_orientation(GTK_TOOLBAR(RVAL2GOBJ(self)), 
-								(GtkOrientation)NUM2INT(orientation));
+    gtk_toolbar_append_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+                              N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext));
     return self;
 }
 
 static VALUE
-tbar_set_style(self, style)
-    VALUE self, style;
+tbar_prepend_widget(self, widget, ttext, ptext)
+    VALUE self, widget, ttext, ptext;
 {
-    gtk_toolbar_set_style(GTK_TOOLBAR(RVAL2GOBJ(self)), 
-						  (GtkToolbarStyle)NUM2INT(style));
+    gtk_toolbar_prepend_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+                               N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext));
+    return self;
+}
+
+static VALUE
+tbar_insert_widget(self, widget, ttext, ptext, pos)
+    VALUE self, widget, ttext, ptext, pos;
+{
+    gtk_toolbar_insert_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+                              N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                              NUM2INT(pos));
     return self;
 }
 
@@ -273,7 +223,73 @@ static VALUE
 tbar_set_tooltips(self, enable)
     VALUE self, enable;
 {
-    gtk_toolbar_set_tooltips(GTK_TOOLBAR(RVAL2GOBJ(self)), RTEST(enable));
+    gtk_toolbar_set_tooltips(_SELF(self), RTEST(enable));
+    return self;
+}
+
+static VALUE
+tbar_insert_stock(self, stock_id, ttext, ptext, position)
+    VALUE self, stock_id, ttext, ptext, position;
+{
+    VALUE func = (VALUE)NULL;
+    void *callback = NULL;
+
+    if (rb_block_given_p()) {
+        func = rb_f_lambda();
+        G_RELATIVE(self, func);
+        callback = exec_callback;
+    }
+
+    return GOBJ2RVAL(gtk_toolbar_insert_stock(_SELF(self), RVAL2CSTR(stock_id),
+                                              N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
+                                              GTK_SIGNAL_FUNC(callback),
+                                              (gpointer)func,
+                                              NUM2INT(position)));
+}
+
+static VALUE
+tbar_set_icon_size(self, size)
+    VALUE self, size;
+{
+    gtk_toolbar_set_icon_size(_SELF(self), FIX2INT(size));
+    return self;
+}
+
+static VALUE
+tbar_get_icon_size(self)
+    VALUE self;
+{
+    return INT2FIX(gtk_toolbar_get_icon_size(_SELF(self)));
+}
+
+static VALUE
+tbar_get_tooltips(self)
+    VALUE self;
+{
+    return gtk_toolbar_get_tooltips(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+tbar_remove_space(self, position)
+    VALUE self, position;
+{
+    gtk_toolbar_remove_space(_SELF(self), NUM2INT(position));
+    return self;
+}
+
+static VALUE
+tbar_unset_icon_size(self)
+    VALUE self;
+{
+    gtk_toolbar_unset_icon_size(_SELF(self));
+    return self;
+}
+
+static VALUE
+tbar_unset_style(self)
+    VALUE self;
+{
+    gtk_toolbar_unset_style(_SELF(self));
     return self;
 }
 
@@ -282,18 +298,7 @@ Init_gtk_toolbar()
 {
     VALUE gToolbar = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
-    rb_define_const(gToolbar, "CHILD_SPACE", INT2NUM(GTK_TOOLBAR_CHILD_SPACE));
-    rb_define_const(gToolbar, "CHILD_BUTTON", INT2NUM(GTK_TOOLBAR_CHILD_BUTTON));
-    rb_define_const(gToolbar, "CHILD_TOGGLEBUTTON", INT2NUM(GTK_TOOLBAR_CHILD_TOGGLEBUTTON));
-    rb_define_const(gToolbar, "CHILD_RADIOBUTTON", INT2NUM(GTK_TOOLBAR_CHILD_RADIOBUTTON));
-    rb_define_const(gToolbar, "CHILD_WIDGET", INT2NUM(GTK_TOOLBAR_CHILD_WIDGET));
-    rb_define_const(gToolbar, "SPACE_EMPTY", INT2FIX(GTK_TOOLBAR_SPACE_EMPTY));
-    rb_define_const(gToolbar, "SPACE_LINE", INT2FIX(GTK_TOOLBAR_SPACE_LINE));
-    rb_define_const(gToolbar, "ICONS", INT2FIX(GTK_TOOLBAR_ICONS));
-    rb_define_const(gToolbar, "TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
-    rb_define_const(gToolbar, "BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
-
-    rb_define_method(gToolbar, "initialize", tbar_initialize, -1);
+    rb_define_method(gToolbar, "initialize", tbar_initialize, 1);
     rb_define_method(gToolbar, "append_item", tbar_append_item, 5);
     rb_define_method(gToolbar, "prepend_item", tbar_prepend_item, 5);
     rb_define_method(gToolbar, "insert_item", tbar_insert_item, 6);
@@ -306,7 +311,31 @@ Init_gtk_toolbar()
     rb_define_method(gToolbar, "append_element", tbar_append_element, 6);
     rb_define_method(gToolbar, "prepend_element", tbar_prepend_element, 6);
     rb_define_method(gToolbar, "insert_element", tbar_insert_element, 7);
-    rb_define_method(gToolbar, "set_orientation", tbar_set_orientation, 1);
-    rb_define_method(gToolbar, "set_style", tbar_set_style, 1);
     rb_define_method(gToolbar, "set_tooltips", tbar_set_tooltips, 1);
+    rb_define_method(gToolbar, "insert_stock", tbar_insert_stock, 4);
+    rb_define_method(gToolbar, "set_icon_size", tbar_set_icon_size, 1);
+    rb_define_method(gToolbar, "icon_size", tbar_get_icon_size, 0);
+    rb_define_method(gToolbar, "tooltips?", tbar_get_tooltips, 0);
+    rb_define_method(gToolbar, "remove_space", tbar_remove_space, 1);
+    rb_define_method(gToolbar, "unset_iconsize", tbar_unset_icon_size, 0);
+    rb_define_method(gToolbar, "unset_style", tbar_unset_style, 0);
+
+    G_DEF_SETTERS(gToolbar);
+
+    /* GtkToolbarChildType */
+    rb_define_const(gToolbar, "CHILD_SPACE", INT2NUM(GTK_TOOLBAR_CHILD_SPACE));
+    rb_define_const(gToolbar, "CHILD_BUTTON", INT2NUM(GTK_TOOLBAR_CHILD_BUTTON));
+    rb_define_const(gToolbar, "CHILD_TOGGLEBUTTON", INT2NUM(GTK_TOOLBAR_CHILD_TOGGLEBUTTON));
+    rb_define_const(gToolbar, "CHILD_RADIOBUTTON", INT2NUM(GTK_TOOLBAR_CHILD_RADIOBUTTON));
+    rb_define_const(gToolbar, "CHILD_WIDGET", INT2NUM(GTK_TOOLBAR_CHILD_WIDGET));
+
+    /* GtkToolbarSpaceStyle */
+    rb_define_const(gToolbar, "SPACE_EMPTY", INT2FIX(GTK_TOOLBAR_SPACE_EMPTY));
+    rb_define_const(gToolbar, "SPACE_LINE", INT2FIX(GTK_TOOLBAR_SPACE_LINE));
+
+    /* GtkToolbarStyle(from Standard Constants) */
+    rb_define_const(gToolbar, "ICONS", INT2FIX(GTK_TOOLBAR_ICONS));
+    rb_define_const(gToolbar, "TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
+    rb_define_const(gToolbar, "BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
+    rb_define_const(gToolbar, "BOTH_HORIZ", INT2FIX(GTK_TOOLBAR_BOTH_HORIZ));
 }

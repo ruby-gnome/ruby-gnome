@@ -1,3 +1,49 @@
+2002-10-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcellrenderertext.c: Remove property methods. 
+	* src/rbgtkcellrenderertoggle.c: Remove property methods.
+	* src/makeinits.rb: Fix error when obsoleted class was not found.
+	* src/rbgtkprogressbar.c: Remove property/obsoleted methods.
+	Add Gtk::ProgeressBar#pulse.
+	* src/rbgtkprogress.c: Remove all methods as they are all obsoleted.
+	* src/rbgtkoldeditable.c, src/rbgtkclist.c, src/rbgtkctree.c, src/rbgtktext.c,
+	src/rbgtkpreview.c: Remove files.
+	* src/rbgtkvscale.c: Gtk::VScale.new accept range.
+	* src/rbgtkhscale.c: Gtk::HScale.new accept range.
+	* rbgtkscale.c: Remove property methods.
+	* rbgtkruler.c: Code clean up. Add Gtk::Ruler#metric, Gtk::Ruler#range.
+	* rbgtkspinbutton.c: Remove property methods.
+	Add Gtk::SpinButton#configure, #value_as_int, #update, #increments, #range.
+	* rbgtkentry.c: Gtk::Entry.new accept no parameter any longer. 
+	Remove proprety methods. Remove Gtk::Entry#append_text, #prepend_text.
+	Add Gtk::Entry#layout, #layout_offsets.
+	* rbgtkcurve.c: Remove property methods. Rename constants.
+	* rbgtkdrawingarea.c: Remove Gtk::DrawingArea#size.
+	* rbgtkcalendar.c: Code clean up. Remove Gtk::Calendar#get_year/month/day.
+	Rename #get_date to #date.
+	* rbgtkconst.c: Remove GtkToolbarStyle. 
+	* rbgtktoolbar.c: Remove property methods.Code cleanup.
+	Gtk::Toolbar.new accept no parameter any longer. 
+	Add Gtk::Toolbar#insert_stock.
+	Add constants(GtkToolbarStyle).
+	* rbgtktextview.c: Re-Implement Gtk::TextView.
+	* rbgtktable.c: Remove property methods.
+	Add Gtk::Table#default_row_spacing, #default_col_spacing, #attach_defaults,
+	#resize.
+	* rbgtksocket.c: Remove Gtk::Socket#steal, Code clean up. 
+	* rbgtknotebook.c: Remove property methods. 
+	Add Gtk::Notebook#get_menu_label_text, #get_tab_label_text, #tab_pos
+	* rbgtkmenu.c: Remove Gtk::Menu#append, #prepend, #insert.
+	Add Gtk::Menu#set_tearoff_state, #detach, attach_widget.
+	* rbgtkmenubar.c: Remove Gtk::MenuBar#append, #prepend, #insert. 
+	* rbgtkmenushell.c: Remove property methods. Code clean up.
+	Add Gtk::MenuShell#selet_item, #deselect, #activate_item.
+	Add constants(GtkMenuDirectionType).
+	* rbgtklayout.c: Remove property methods, Remove Gtk::Layout#thaw, #freeze.
+	Add Gtk::Layout#size
+	* rbgtkpaned.c: Remove property methods. Remove Gtk::Paned#set_cutter_size 
+	* rbgtkfixed.c: Add Gtk::Fixed#set_has_window, #has_window?. 
+
 2002-10-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkstatusbar.c: Code clean up. Add Gtk::StatusBar#resize_grip?, #set_resize_grip. 

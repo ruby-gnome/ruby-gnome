@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2002/10/13 17:47:00 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -69,36 +69,12 @@ lstore_set_value(self, iter, column, value)
     return self;
 }
 
+/*
 static VALUE
 lstore_set(self, iter, tv, column1, column2)
     VALUE self, iter, tv, column1, column2;
 {
-    GtkCellRenderer* renderer;
-    GtkTreeViewColumn* column;
-    GtkTreeView* treeview;
-    GtkListStore* store;
-
-    store = _SELF(self);
-    treeview = GTK_TREE_VIEW(RVAL2GOBJ(tv));
-
-    gtk_list_store_set(store, RVAL2ITR(iter), 0, "test1", 1, "test2", -1);
-/*
-    gtk_list_store_set_value(store, RVAL2ITR(iter), 0, gval1);
-    gtk_list_store_set_value(store, RVAL2ITR(iter), 0, gval2);
- */
-
-    renderer = GTK_CELL_RENDERER_TEXT(RVAL2GOBJ(column1));
-    column = gtk_tree_view_column_new_with_attributes("Test1", renderer, "text", 0, NULL);
-printf("column = %d\n",     gtk_tree_view_append_column (treeview, column));
-   
-    renderer = GTK_CELL_RENDERER_TEXT(RVAL2GOBJ(column2));
-    column = gtk_tree_view_column_new_with_attributes("Test2", renderer, "text", 0, NULL);
-printf("column = %d\n",     gtk_tree_view_append_column (treeview, column));
-
-    return self;
 }
-
-/*
   void        gtk_tree_store_set (GtkTreeStore *tree_store,
                                                GtkTreeIter *iter,
 					                                                    ...);
@@ -188,7 +164,6 @@ Init_gtk_list_store()
     rb_define_method(ts, "initialize", lstore_initialize, -1);
     rb_define_method(ts, "set_column_types", lstore_set_column_types, -1);
     rb_define_method(ts, "set_value", lstore_set_value, 3);
-    rb_define_method(ts, "set", lstore_set, 4);
     rb_define_method(ts, "remove", lstore_remove, 1);
     rb_define_method(ts, "insert", lstore_insert, 1);
     rb_define_method(ts, "insert_before", lstore_insert_before, 1);

@@ -4,7 +4,7 @@
   rbgtkhscale.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,20 +19,26 @@ hscale_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE arg1;
+    VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
+    GtkWidget *widget;
 
-    rb_scan_args(argc, argv, "01", &arg1);
-    if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
+    rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3);
 
-    RBGTK_INITIALIZE(self, gtk_hscale_new(adj));
+    if (NIL_P(arg1) || RVAL2GTYPE(arg1) == GTK_TYPE_ADJUSTMENT){
+        if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
+        widget = gtk_hscale_new(adj);
+    } else {
+        widget = gtk_hscale_new_with_range(NUM2DBL(arg1), 
+                                           NUM2DBL(arg2), NUM2DBL(arg3));
+    }
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
 void 
 Init_gtk_hscale()
 {
-  VALUE gHScale = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
-
-  rb_define_method(gHScale, "initialize", hscale_initialize, -1);
+    VALUE gHScale = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
+    rb_define_method(gHScale, "initialize", hscale_initialize, -1);
 }

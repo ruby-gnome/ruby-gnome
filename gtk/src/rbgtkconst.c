@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/10/06 16:14:09 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -186,11 +186,6 @@ Init_gtk_const()
     /* GtkSubmenuPlacement */
     rb_define_const(mGtk, "TOP_BOTTOM", INT2FIX(GTK_TOP_BOTTOM));
     rb_define_const(mGtk, "LEFT_RIGHT", INT2FIX(GTK_LEFT_RIGHT));
-
-    /* GtkToolbarStyle */
-    rb_define_const(mGtk, "TOOLBAR_ICONS", INT2FIX(GTK_TOOLBAR_ICONS));
-    rb_define_const(mGtk, "TOOLBAR_TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
-    rb_define_const(mGtk, "TOOLBAR_BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
 
     /* GtkUpdateType */
     rb_define_const(mGtk, "UPDATE_CONTINUOUS", INT2FIX(GTK_UPDATE_CONTINUOUS));

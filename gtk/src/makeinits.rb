@@ -1,12 +1,14 @@
 except_targets = ["Init_gtk2()", "Init_gtk_gdk()", "Init_gtk_gtk()"]
 
 def print_data(array, type, defs, extern = false)
-  extern_def = "extern void" if extern
-  print "##{defs} #{type}\n" if defs
-  array[type].each do |val|
-	print "#{extern_def}   #{val};\n"
+  if array[type]
+    extern_def = "extern void" if extern
+    print "##{defs} #{type}\n" if defs
+    array[type].each do |val|
+	   print "#{extern_def}   #{val};\n"
+    end
+    print "#endif\n" if defs
   end
-  print "#endif\n" if defs
 end
 
 inits = Hash.new

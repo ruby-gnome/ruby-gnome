@@ -4,7 +4,7 @@
   rbgtkentry.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/10/25 17:51:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,69 +13,30 @@
 
 #include "global.h"
 
+#define _SELF(self) (GTK_ENTRY(RVAL2GOBJ(self)))
+
 static VALUE
-entry_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
+entry_initialize(self)
     VALUE self;
 {
-    VALUE maxlen;
-    rb_scan_args(argc, argv, "01", &maxlen);
-
-    if (!NIL_P(maxlen))
-      RBGTK_INITIALIZE(self, gtk_entry_new_with_max_length(NUM2INT(maxlen)));
-    else
-      RBGTK_INITIALIZE(self, gtk_entry_new());
-
+    RBGTK_INITIALIZE(self, gtk_entry_new());
     return Qnil;
 }
 
 static VALUE
-entry_set_text(self, text)
-    VALUE self, text;
-{
-    gtk_entry_set_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
-
-    return self;
-}
-
-static VALUE
-entry_append_text(self, text)
-    VALUE self, text;
-{
-    gtk_entry_append_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-entry_prepend_text(self, text)
-    VALUE self, text;
-{
-    gtk_entry_prepend_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-entry_get_text(self)
+entry_get_layout(self)
     VALUE self;
 {
-    return rb_str_new2(gtk_entry_get_text(GTK_ENTRY(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_entry_get_layout(_SELF(self)));
 }
 
 static VALUE
-entry_set_visibility(self, visibility)
-    VALUE self, visibility;
+entry_get_layout_offsets(self)
+    VALUE self;
 {
-    gtk_entry_set_visibility(GTK_ENTRY(RVAL2GOBJ(self)), RTEST(visibility));
-    return self;
-}
-
-static VALUE
-entry_set_max_length(self, max)
-    VALUE self, max;
-{
-    gtk_entry_set_max_length(GTK_ENTRY(RVAL2GOBJ(self)), NUM2INT(max));
-    return self;
+    int x, y;
+    gtk_entry_get_layout_offsets(_SELF(self), &x, &y);
+    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
 void 
@@ -83,11 +44,7 @@ Init_gtk_entry()
 {
     VALUE gEntry = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 
-    rb_define_method(gEntry, "initialize", entry_initialize, -1);
-    rb_define_method(gEntry, "set_text", entry_set_text, 1);
-    rb_define_method(gEntry, "append_text", entry_append_text, 1);
-    rb_define_method(gEntry, "prepend_text", entry_prepend_text, 1);
-    rb_define_method(gEntry, "get_text", entry_get_text, 0);
-    rb_define_method(gEntry, "set_visibility", entry_set_visibility, 1);
-    rb_define_method(gEntry, "set_max_length", entry_set_max_length, 1);
+    rb_define_method(gEntry, "initialize", entry_initialize, 1);
+    rb_define_method(gEntry, "layout", entry_get_layout, 0);
+    rb_define_method(gEntry, "layout_offsets", entry_get_layout_offsets, 0);
 }
