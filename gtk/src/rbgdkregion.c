@@ -3,8 +3,8 @@
 
   rbgdkregion.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -101,9 +101,8 @@ gdkregion_spans_intersect_foreach(self, spans, sorted)
     int i;
     GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY(spans)->len);
     GdkSpan* span;
-    VALUE func = rb_f_lambda();
+    volatile VALUE func = rb_f_lambda();
 
-    G_RELATIVE(self, func);
     for (i = 0; i < RARRAY(spans)->len; i++) {
         span = (GdkSpan*)RVAL2BOXED(RARRAY(spans)->ptr[i], GDK_TYPE_SPAN);
         gspans[i] = *span;

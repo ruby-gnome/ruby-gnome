@@ -3,8 +3,8 @@
 
   rbgtktexttagtable.c -
  
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -57,8 +57,7 @@ static VALUE
 txt_tt_foreach(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
     gtk_text_tag_table_foreach(_SELF(self), 
                                (GtkTextTagTableForeach)txt_tt_foreach_func, 
                                (gpointer)func);

@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -302,8 +302,7 @@ forward_find_char(argc, argv, self)
     VALUE self;
 {
     VALUE limit;
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
     
     rb_scan_args(argc, argv, "01", &limit);
     return gtk_text_iter_forward_find_char(_SELF(self),
@@ -320,8 +319,7 @@ backward_find_char(argc, argv, self)
     VALUE self;
 {
     VALUE limit;
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
 
     rb_scan_args(argc, argv, "01", &limit);
     return gtk_text_iter_backward_find_char(_SELF(self),

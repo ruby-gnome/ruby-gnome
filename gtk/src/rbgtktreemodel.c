@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -97,8 +97,7 @@ static VALUE
 treemodel_foreach(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
     gtk_tree_model_foreach(_SELF(self), 
                            (GtkTreeModelForeachFunc)treemodel_foreach_func, 
                            (gpointer)func);

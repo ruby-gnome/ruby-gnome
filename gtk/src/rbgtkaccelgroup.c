@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/02 14:34:04 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -35,13 +35,11 @@ gaccelgrp_connect(argc, argv, self)
 
     if (argc > 2){
         rb_scan_args(argc, argv, "40", &key, &mods, &flags, &closure);
-        G_RELATIVE(self, closure);
         rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
                                 FIX2INT(mods), FIX2INT(flags), rclosure);
     } else {
         rb_scan_args(argc, argv, "20", &path, &closure);
-        G_RELATIVE(self, closure);
         rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
     }
@@ -110,8 +108,7 @@ gaccelgrp_find(self)
     VALUE self;
 {
     GtkAccelKey *result;
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
 
     result = gtk_accel_group_find(_SELF(self),
                                   gaccelgrp_find_func,

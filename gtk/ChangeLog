@@ -1,3 +1,15 @@
+2003-02-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgdkregion.c (gdkregion_spans_intersect_foreach):
+	Remove unnecessary G_RELATIVE() call.
+	* src/rbgtkaccelgroup.c (gaccelgrp_connect, gaccelgrp_find): ditto
+	* src/rbgtkaccelmap.c (accel_map_foreach, accel_map_foreach_unfilterd):
+	ditto
+	* src/rbgtktextiter.c (forward_find_char, backward_find_char): ditto
+	* src/rbgtktexttagtable.c (txt_tt_foreach): ditto
+	* src/rbgtktreemodel.c (treemodel_foreach): ditto
+	* src/rbgtktreeselection.c (treeselection_selected_foreach): ditto
+
 2003-02-15  KATO Kazuyoshi <kadu@zb.wakwak.com>
 
 	* src/rbgtkitemfactory.c: Change callback parameter(add 2nd parameter as widget).

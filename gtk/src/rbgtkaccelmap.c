@@ -3,8 +3,8 @@
 
   rbgtkaccelmap.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Author: sakai $
+  $Date: 2003/02/16 13:25:17 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -79,8 +79,7 @@ static VALUE
 accel_map_foreach(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
     gtk_accel_map_foreach((gpointer)func,
                           (GtkAccelMapForeach)accel_map_foreach_func);
     return Qnil;
@@ -90,8 +89,7 @@ static VALUE
 accel_map_foreach_unfilterd(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
-    G_RELATIVE(self, func);
+    volatile VALUE func = rb_f_lambda();
     gtk_accel_map_foreach_unfiltered((gpointer)func,
                                      (GtkAccelMapForeach)accel_map_foreach_func);
     return Qnil;
