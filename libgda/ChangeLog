@@ -1,6 +1,11 @@
+2003-12-14  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaclient.c, src/rbgdavalue.c: Fixed some typos in the
+	  comments.
+
 2003-12-12  Laurent Sansonetti  <lrz@gnome.org>
 
-    * src/*.c: Added documentation (for extdoc.rb).
+	* src/*.c: Added documentation (for extdoc.rb).
 
 2003-12-09  Laurent Sansonetti  <lrz@gnome.org>
 

@@ -46,7 +46,7 @@ static VALUE rb_gda_value_to_s(self)
  *
  * Compares two Gda::Value objects of the same type.
  *
- * Returns: if both values have the same type, returns 0 if both contains the
+ * Returns: if both values have the same type, returns 0 if both contain the
  * same value, an integer less than 0 if the value is less than the other or an
  * integer greater than 0 if the value is greater than the other.
  */

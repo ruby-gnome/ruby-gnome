@@ -32,7 +32,7 @@
  *
  * Gda::Client also provides a way to treat several connections as if they were
  * only one (a connection pool), which allows applications to, for instance,
- * commit/rollback a transaction in all the connections being managed by an
+ * commit/rollback a transaction in all the connections being managed by a
  * unique GdaClient object, or obtain the list of all tables in all opened
  * connections.
  */
@@ -168,7 +168,7 @@ static VALUE rb_gda_client_each_connection(self)
  * password: password for user name.
  *
  * Looks for an open connection given a data source name (per libgda
- * configuration), an username and a password.
+ * configuration), a username and a password.
  *
  * This method iterates over the list of open connections in the 
  * Gda::Client object and looks for one that matches the given data source
