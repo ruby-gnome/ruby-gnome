@@ -1,3 +1,13 @@
+
+2003-09-24  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaparameter.c, src/rbgdaparameterlist.c: New files.
+	* src/rbgda.c: Initializes Gda::Parameter & Gda::ParameterList, 
+	  added Gda.sql_replace_placeholders.
+	* src/rbgda.h: Added macros for Gda::Parameter & Gda::ParameterList.
+	* src/rbgdaconnection.c: Uses Gda::ParameterList for queries.
+	* src/rbgdavalue.c: Class is exported.
+
 2003-09-21  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* README, extconf.rb, sample/sql_console.rb, src/rbgda.c,
