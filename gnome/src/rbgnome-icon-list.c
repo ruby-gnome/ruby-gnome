@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-list.c,v 1.4 2002/10/14 13:56:23 tkubo Exp $ */
+/* $Id: rbgnome-icon-list.c,v 1.5 2002/10/26 16:40:15 tkubo Exp $ */
 /* based on libgnomeui/gnome-icon-list.h */
 
 /* Gnome::IconList widget for Ruby/GNOME2
@@ -23,6 +23,8 @@
 
 #include "rbgnome.h"
 
+static ID id_icon_data;
+
 #define _SELF(self) GNOME_ICON_LIST(RVAL2GOBJ(self))
 
 static VALUE
@@ -30,7 +32,7 @@ icon_list_initialize(self, icon_width, adj, flags)
     VALUE self, icon_width, adj, flags;
 {
     RBGTK_INITIALIZE(self, gnome_icon_list_new(NUM2UINT(icon_width),
-                                               GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
+                                               NIL_P(adj) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
                                                NUM2INT(flags)));
     return Qnil;
 }
@@ -261,18 +263,74 @@ icon_list_find_icon_from_filename(self, filename)
 }
 
 /* Attaching information to the icons */
-#if 0
-void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
-                                                    int idx, gpointer data);
-void           gnome_icon_list_set_icon_data_full  (GnomeIconList *gil,
-                                                    int pos, gpointer data,
-                                                    GDestroyNotify destroy);
-int            gnome_icon_list_find_icon_from_data (GnomeIconList *gil,
-                                                    gpointer data);
-gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
-                                                    int pos);
-#endif
+static VALUE
+icon_list_set_icon_data(self, idx, data)
+    VALUE self, idx, data;
+{
+    GnomeIconList *gil = _SELF(self);
+    int gil_idx = NUM2INT(idx);
+    VALUE ary;
+    int ary_idx;
+    int i;
 
+    ary = rb_ivar_get(self, id_icon_data);
+    if (NIL_P(ary)) {
+        ary = rb_ary_new();
+        rb_ivar_set(self, id_icon_data, ary);
+    }
+    ary_idx = GPOINTER_TO_INT(gnome_icon_list_get_icon_data(gil, gil_idx)) - 1;
+
+    if (ary_idx == -1) {
+        if (!NIL_P(data)) {
+            /* search empty entry. */
+            for (i = 0; i < RARRAY(ary)->len; i++) {
+                if (NIL_P(RARRAY(ary)->ptr[i]))
+                    break;
+            }
+            rb_ary_store(ary, i, data);
+            gnome_icon_list_set_icon_data(gil, gil_idx, GINT_TO_POINTER(i + 1));
+        }
+    } else {
+        rb_ary_store(ary, ary_idx, data);
+        if (NIL_P(data))
+            gnome_icon_list_set_icon_data(gil, gil_idx, NULL);
+    }
+    return self;
+}
+
+static VALUE
+icon_list_find_icon_from_data(self, data)
+    VALUE self, data;
+{
+    VALUE ary;
+    int i;
+
+    ary = rb_ivar_get(self, id_icon_data);
+    if (NIL_P(ary))
+        return FIX2INT(-1);
+
+    for (i = 0; i < RARRAY(ary)->len; i++) {
+        if (rb_equal(RARRAY(ary)->ptr[i], data))
+            break;
+    }
+    if (i == RARRAY(ary)->len)
+        return FIX2INT(-1);
+    return INT2NUM(gnome_icon_list_find_icon_from_data(_SELF(self), GINT_TO_POINTER(i + 1)));
+}
+
+static VALUE
+icon_list_get_icon_data(self, pos)
+    VALUE self, pos;
+{
+    int ary_idx;
+    VALUE ary;
+
+    ary_idx = GPOINTER_TO_INT(gnome_icon_list_get_icon_data(_SELF(self), NUM2INT(pos))) - 1;
+    if (ary_idx == -1)
+        return Qnil;
+    ary = rb_ivar_get(self, id_icon_data);
+    return rb_ary_entry(ary, ary_idx);
+}
 
 /* Visibility */
 static VALUE
@@ -330,9 +388,16 @@ Init_gnome_icon_list(mGnome)
 {
     VALUE gnoIconList = G_DEF_CLASS(GNOME_TYPE_ICON_LIST, "IconList", mGnome);
 
+    id_icon_data = rb_intern("___icon_data___");
+
     rb_define_const(gnoIconList, "ICONS", INT2FIX(GNOME_ICON_LIST_ICONS));
     rb_define_const(gnoIconList, "TEXT_BELOW", INT2FIX(GNOME_ICON_LIST_TEXT_BELOW));
     rb_define_const(gnoIconList, "TEXT_RIGHT", INT2FIX(GNOME_ICON_LIST_TEXT_RIGHT));
+
+    rb_define_const(gnoIconList, "IS_EDITABLE", INT2FIX(GNOME_ICON_LIST_IS_EDITABLE));
+#if 0 /* who needs this constant in ruby? */
+    rb_define_const(gnoIconList, "STATIC_TEXT", INT2FIX(GNOME_ICON_LIST_STATIC_TEXT));
+#endif
 
     rb_define_method(gnoIconList, "initialize", icon_list_initialize, 3);
     rb_define_method(gnoIconList, "set_hadjustment", icon_list_set_hadjustment, 1);
@@ -361,6 +426,9 @@ Init_gnome_icon_list(mGnome)
     rb_define_method(gnoIconList, "set_separators", icon_list_set_separators, 1);
     rb_define_method(gnoIconList, "get_icon_filename", icon_list_get_icon_filename, 1);
     rb_define_method(gnoIconList, "find_icon_from_filename", icon_list_find_icon_from_filename, 1);
+    rb_define_method(gnoIconList, "set_icon_data", icon_list_set_icon_data, 2);
+    rb_define_method(gnoIconList, "find_icon_from_data", icon_list_find_icon_from_data, 1);
+    rb_define_method(gnoIconList, "get_icon_data", icon_list_get_icon_data, 1);
     rb_define_method(gnoIconList, "moveto", icon_list_moveto, 2);
     rb_define_method(gnoIconList, "icon_is_visible", icon_list_icon_is_visible, 1);
     rb_define_method(gnoIconList, "get_icon_at", icon_list_get_icon_at, 2);

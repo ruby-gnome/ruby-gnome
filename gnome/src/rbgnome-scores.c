@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-scores.c,v 1.4 2002/09/29 13:12:32 tkubo Exp $ */
+/* $Id: rbgnome-scores.c,v 1.5 2002/10/26 16:40:15 tkubo Exp $ */
+/* based on libgnomeui/gnome-scores.h */
 
-/* Gnome::Scores widget for Ruby/Gnome
+/* Gnome::Scores widget for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +24,27 @@
 #include "rbgnome.h"
 
 #define _SELF(self) GNOME_SCORES(RVAL2GOBJ(self))
+
+static VALUE
+scores_s_display(self, title, app_name, level, pos)
+    VALUE self, title, app_name, level, pos;
+{
+    return GOBJ2RVAL(gnome_scores_display(RVAL2CSTR(title),
+                                          RVAL2CSTR(app_name),
+                                          NIL_P(level) ? NULL : RVAL2CSTR(level),
+                                          NUM2INT(pos)));
+}
+
+static VALUE
+scores_s_display_with_pixmap(self, pixmap_logo, app_name, level, pos)
+    VALUE self, pixmap_logo, app_name, level, pos;
+{
+    return GOBJ2RVAL(gnome_scores_display_with_pixmap(RVAL2CSTR(pixmap_logo),
+                                                      RVAL2CSTR(app_name),
+                                                      NIL_P(level) ? NULL : RVAL2CSTR(level),
+                                                      NUM2INT(pos)));
+}
+
 
 /* This function has some important differences from the C function
  * gnome_scores_new().
@@ -152,6 +175,10 @@ Init_gnome_scores(mGnome)
     VALUE mGnome;
 {
     VALUE gnoScores = G_DEF_CLASS(GNOME_TYPE_SCORES, "Scores", mGnome);
+
+    rb_define_singleton_method(gnoScores, "display", scores_s_display, 4);
+    rb_define_singleton_method(gnoScores, "display_with_pixmap", scores_s_display_with_pixmap, 4);
+
     rb_define_method(gnoScores, "initialize", scores_initialize, 4);
     rb_define_method(gnoScores, "set_logo_label", scores_set_logo_label, 3);
     rb_define_method(gnoScores, "set_logo_pixmap", scores_set_logo_pixmap, 1);

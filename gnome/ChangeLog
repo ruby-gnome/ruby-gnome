@@ -1,3 +1,15 @@
+2002-10-27  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-icon-list.c: Accept nil as the 2nd argument of
+	Gnome::IconList.new. Add constants Gnome::IconList::IS_EDITABLE.
+	Add methods Gnome::IconList#set_icon_data(), find_icon_from_data(),
+	and get_icon_data().
+	* src/rbgnome-score.c: Add a new file. support Gnome::Score.
+	* src/rbgnome-scores.c: Add Gnome:Scores.display() and
+	display_with_pixmap().
+	* src/rbgnome.c, src/rbgnome.h: call Init_gnome_score().
+	* src/lib/gnome2.rb: require gnomecanvas2.
+
 2002-10-26  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbbonobo.h: Add new file. header file for bonobo.
