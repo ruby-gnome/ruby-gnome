@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/10/14 13:34:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -608,9 +608,9 @@ gdkeventexpose_count(self)
 
 /* MISC */
 static VALUE 
-gdkevent_g2r(const GValue *from)
+gdkevent_g2r(const GValue *values)
 {
-    return make_gdkevent(g_value_get_boxed(from));
+    return make_gdkevent(g_value_get_boxed(&values[0]));
 }
 
 void
@@ -622,6 +622,7 @@ Init_gtk_gdk_event()
 
     gdkEvent = G_DEF_CLASS(GDK_TYPE_EVENT, "Event", mGdk);
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
+    printf("event = %d\n", GDK_TYPE_EVENT);
 
     gdkevents[GDK_DELETE]        = gdkEventAny;
     gdkevents[GDK_DESTROY]       = gdkEventAny;

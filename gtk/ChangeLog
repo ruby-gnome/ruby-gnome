@@ -1,3 +1,9 @@
+2003-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Fix a segfault when GLib::Object#signal_emit 
+	is called. 
+	* sample/testgtk/rulers.rb: Ditto.
+
 2003-10-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Fix a segfault for Gdk.pointer_grab.
