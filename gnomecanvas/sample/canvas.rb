@@ -65,4 +65,3 @@ end
 Gtk.init
 canvas = CanvasSample.new()
 Gtk::main()
-
