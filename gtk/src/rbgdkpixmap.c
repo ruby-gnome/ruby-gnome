@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/01/25 18:02:21 $
 
   Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -90,7 +90,7 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
     GdkPixmap *new;
     GdkBitmap *mask;
 
-    new = gdk_pixmap_colormap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), 
+    new = gdk_pixmap_colormap_create_from_xpm(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)), 
                                               GDK_COLORMAP(RVAL2GOBJ(colormap)),
                                               &mask, RVAL2COLOR(tcolor),
                                               RVAL2CSTR(fname));
@@ -115,7 +115,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 	buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
     }
 
-    new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
+    new = gdk_pixmap_colormap_create_from_xpm_d(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
                                                 GDK_COLORMAP(RVAL2GOBJ(colormap)),
                                                 &mask, RVAL2COLOR(tcolor), buf);
 

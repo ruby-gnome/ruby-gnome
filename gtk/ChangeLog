@@ -1,3 +1,17 @@
+2003-01-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkpixmap.c: Gdk::Pixmap#colormap_create_from_xpm_d, colormap_create_from_xpm: 
+	Accept nil to 1st argument.
+
+2003-01-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkselectiondata.c: Gtk::SelectionData#set's size is now omittable.
+	* src/global.c: Removed.
+	* rbgtkradiomenuitem.c: Move ary2gslist from global.c.
+	* src/rbgdkwindow.c, rbgdkatom.c, rbgtk.h: rb2gdk_atom() in rbgdkwindow.c -> get_gdkatom() 
+	in rbgdkatom.c. Add RVAL2ATOM to rbgtk.h.
+	* src/rbgtkclipboard.c, rbgdkselection.c, rbgtkdrag.c: Apply RVAL2ATOM.
+
 2003-01-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdrag.c: Unify Gtk::Drag#set_icon_widget and 

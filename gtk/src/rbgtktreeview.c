@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -299,19 +299,32 @@ treeview_tree_to_widget_coords(self, tx, ty)
     return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
 }
 
-/* XXXX
-   void        gtk_tree_view_enable_model_drag_dest
-   (GtkTreeView *tree_view,
-   const GtkTargetEntry *targets,
-   gint n_targets,
-   GdkDragAction actions);
-   void        gtk_tree_view_enable_model_drag_source
-   (GtkTreeView *tree_view,
-   GdkModifierType start_button_mask,
-   const GtkTargetEntry *targets,
-   gint n_targets,
-   GdkDragAction actions);
-*/
+static VALUE
+treeview_enable_model_drag_dest(self, targets, actions)
+    VALUE self, targets, actions;
+{
+    const GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
+    int num = RARRAY(targets)->len;
+
+    gtk_tree_view_enable_model_drag_dest(_SELF(self),  entries, 
+                                         num, NUM2INT(actions));
+    return self;
+}
+
+static VALUE
+treeview_enable_model_drag_source(self, start_button_mask, targets, actions)
+        VALUE self, start_button_mask, targets, actions;
+{
+    GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
+    if (entries){
+        gint num = RARRAY(targets)->len;
+        
+        gtk_tree_view_enable_model_drag_source(_SELF(self), 
+                                               NUM2INT(start_button_mask), entries, 
+                                               num, NUM2INT(actions));
+    }
+    return self;
+}
 
 static VALUE
 treeview_unset_rows_drag_source(self)
@@ -426,6 +439,8 @@ Init_gtk_treeview()
     rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
     rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
     rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
+    rb_define_method(gTv, "enable_model_drag_dest", treeview_enable_model_drag_dest, 2);
+    rb_define_method(gTv, "enable_model_drag_source", treeview_enable_model_drag_source, 3);
     rb_define_method(gTv, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
     rb_define_method(gTv, "unset_rows_drag_dest", treeview_unset_rows_drag_dest, 0);
     rb_define_method(gTv, "set_drag_dest_row", treeview_set_drag_dest_row, 2);

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/01/25 18:02:21 $
 
   Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -622,17 +622,6 @@ gdkwin_s_get_default_root_window(self)
 GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 */
 
-
-/* General Methods */
-static GdkAtom
-rb2gdk_atom(atom)
-    VALUE atom;
-{
-    if (TYPE(atom) == T_STRING)
-      return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
-    return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
-}
-
 /* Properties */
 static VALUE
 gdkwin_prop_change(argc, argv, self)
@@ -640,84 +629,23 @@ gdkwin_prop_change(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    int        fmt, len, i;
-/*  Atom       atom; */
+    int        fmt, len;
     void*      dat;
-    GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
-    GdkAtom    otype, ntype;
+    GdkAtom    ntype;
     VALUE property, type, size=Qnil, mode, src;
     
     if(5 == argc)
-      rb_scan_args(argc, argv, "50", &property, &type, &size, &mode, &src);
+        rb_scan_args(argc, argv, "50", &property, &type, &size, &mode, &src);
     else
-      rb_scan_args(argc, argv, "40", &property, &type, &mode, &src);
+        rb_scan_args(argc, argv, "40", &property, &type, &mode, &src);
     
-    otype = ntype = rb2gdk_atom(type);
+    rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
     
-/* They are not available in Ruby/GTK 2
-   if(ntype == GDK_SELECTION_TYPE_ATOM){
-   len = RARRAY(src)->len;
-
-   dat = (Atom*)ALLOC_N(Atom, len);
-
-   for(i = 0; i < len; i++){
-   ((Atom*)dat)[i] = ((GdkAtomData*)RVAL2BOXED(rb_ary_entry(src, i), GDK_TYPE_ATOM)->atom);
-   }
-   fmt = 32;
-
-   } else if(ntype == GDK_SELECTION_TYPE_BITMAP){
-   dat = (void*)&(((GdkPixmapPrivate*)GDK_BITMAP(RVAL2GOBJ(src)))->xwindow);
-   fmt = 32;
-   len = 1;  
-   } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
-   dat = (void*)&(((GdkColormapPrivate*)GDK_COLORMAP(RVAL2GOBJ(src)))->xcolormap);
-   fmt = 32;
-   len = 1;
-   } else if(ntype == GDK_SELECTION_TYPE_INTEGER){
-*/
-    if(ntype == GDK_SELECTION_TYPE_INTEGER){
-        i = NUM2INT(src);
-        dat = (void*)&i;
-        fmt = 32;
-        len = 1;
-/*
-  } else if(ntype == GDK_SELECTION_TYPE_PIXMAP){
-  dat = (void*)&(((GdkPixmapPrivate*)GDK_PIXMAP(RVAL2GOBJ(src)))->xwindow);
-  fmt = 32;
-  len = 1;
-  
-  } else if(ntype == GDK_SELECTION_TYPE_WINDOW||
-  ntype == GDK_SELECTION_TYPE_DRAWABLE){
-  dat = (void*)&(((GdkPixmapPrivate*)_SELF(src))->xwindow);
-  fmt = 32;
-  len = 1;
-*/
-    } else if(ntype == GDK_SELECTION_TYPE_STRING) {
-        dat = RVAL2CSTR(src);
-        fmt = 8;
-        len = RSTRING(src)->len;
-        
-    } else if(ntype == compound_text){
-        gdk_string_to_compound_text(RVAL2CSTR(src),
-                                    &ntype, &fmt, (guchar**)&dat, &len);
-        
-    } else if(argc == 5 && size != Qnil) {
-    	dat = RVAL2CSTR(src);
-	fmt = NUM2INT(size);
-	len = RSTRING(src)->len;
-    } else {
-        rb_raise(rb_eArgError, "no supported type.");
-    }
-    
-    gdk_property_change(_SELF(self), rb2gdk_atom(property), 
+    gdk_property_change(_SELF(self), RVAL2ATOM(property), 
                         ntype, fmt, NUM2INT(mode), dat, len);
-    
-    if(otype == GDK_SELECTION_TYPE_ATOM) {
-        xfree(dat);
-    } else if(otype == compound_text) {
-        gdk_free_compound_text(dat);
-    }
-    
+
+    rbgtk_atom2selectiondata_free(ntype, dat);
+
     return self;
 }
 
@@ -743,7 +671,7 @@ gdkwin_prop_get(argc, argv, self)
       rb_scan_args(argc, argv, "30", &property, &type, &delete);
     
     
-    if(gdk_property_get(_SELF(self), rb2gdk_atom(property), rb2gdk_atom(type),
+    if(gdk_property_get(_SELF(self), RVAL2ATOM(property), RVAL2ATOM(type),
                         NUM2INT(offset), NUM2INT(length),
                         RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
         return Qnil;
@@ -789,7 +717,7 @@ static VALUE
 gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
-    gdk_property_delete(_SELF(self), rb2gdk_atom(property));
+    gdk_property_delete(_SELF(self), RVAL2ATOM(property));
     return self;
 }
 

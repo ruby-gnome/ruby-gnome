@@ -4,7 +4,7 @@
   rbgdkatom.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/01/25 18:02:21 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -36,6 +36,15 @@ gdk_atom_get_type (void)
   return our_type;
 }
 
+
+GdkAtom
+get_gdkatom(atom)
+    VALUE atom;
+{
+    if (TYPE(atom) == T_STRING)
+      return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
+    return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
+}
 /*****************************************/
 
 static VALUE

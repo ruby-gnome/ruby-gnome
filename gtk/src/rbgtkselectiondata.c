@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -13,6 +13,59 @@
 #include "global.h"
 
 #define _SELF(d) ((GtkSelectionData*)RVAL2BOXED(d, GTK_TYPE_SELECTION_DATA))
+
+static GdkAtom compound_text;
+
+/************************************************************************/
+void
+rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
+    VALUE type, size, src;
+    void** data;
+    GdkAtom* gtype;
+    gint* format;
+    gint* length;
+{
+    void* dat;
+    gint fmt, len;
+    GdkAtom ntype = RVAL2ATOM(type);
+    
+    if(ntype == GDK_SELECTION_TYPE_INTEGER){
+        int i = NUM2INT(src);
+        dat = (void*)&i;
+        fmt = 32;
+        len = 1;
+    } else if(ntype == GDK_SELECTION_TYPE_STRING) {
+        dat = RVAL2CSTR(src);
+        fmt = 8;
+        len = RSTRING(src)->len;
+    } else if(ntype == compound_text){
+        gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, (guchar**)&dat, &len);
+    } else if(type != Qnil && size != Qnil && src != Qnil) {
+    	dat = RVAL2CSTR(src);
+	fmt = NUM2INT(size);
+	len = RSTRING(src)->len;
+    } else {
+        rb_raise(rb_eArgError, "no supported type.");
+    }
+
+    *gtype = ntype;
+    *data = dat;
+    *format = fmt;
+    *length = len;
+}
+
+void
+rbgtk_atom2selectiondata_free(type, dat)
+    GdkAtom type;
+    void* dat;
+{
+    if(type == GDK_SELECTION_TYPE_ATOM) {
+        xfree(dat);
+    } else if(type == compound_text) {
+        gdk_free_compound_text(dat);
+    }
+}    
+/************************************************************************/
 
 static VALUE
 gtkselectiondata_selection(self)
@@ -60,12 +113,28 @@ gtkselectiondata_display(self)
 
 /* Instance Methods */
 static VALUE
-gtkselectiondata_set(self, type, format, data)
-    VALUE self, type, format, data;
+gtkselectiondata_set(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-    gtk_selection_data_set(_SELF(self), 
-                           (((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom),
-                           NUM2INT(format), RVAL2CSTR(data), RSTRING(data)->len);
+    void* dat;
+    VALUE type, src;
+    gint fmt, len;
+    GdkAtom ntype;
+    VALUE size = Qnil;
+    
+    if(3 == argc)
+        rb_scan_args(argc, argv, "30", &type, &size, &src);
+    else
+        rb_scan_args(argc, argv, "20", &type, &src);
+    
+    rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
+
+    gtk_selection_data_set(_SELF(self), ntype, fmt, dat, len);
+
+    rbgtk_atom2selectiondata_free(ntype, dat);
+
     return self;
 }
 
@@ -111,6 +180,8 @@ Init_gtk_selectiondata()
 {
     VALUE gSelectionData = G_DEF_CLASS(GTK_TYPE_SELECTION_DATA, "SelectionData", mGtk);
 
+    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
+
     rb_define_method(gSelectionData, "selection", gtkselectiondata_selection, 0);
     rb_define_method(gSelectionData, "target", gtkselectiondata_target, 0);
     rb_define_method(gSelectionData, "type", gtkselectiondata_type, 0);
@@ -120,7 +191,7 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "display", gtkselectiondata_display, 0);
 */
 
-    rb_define_method(gSelectionData, "set", gtkselectiondata_set, 3);
+    rb_define_method(gSelectionData, "set", gtkselectiondata_set, -1);
     rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);
     rb_define_method(gSelectionData, "text", gtkselectiondata_get_text, 0);
     rb_define_method(gSelectionData, "targets_include_text?", gtkselectiondata_targets_include_text, 0);

@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: tkubo $
-  $Date: 2003/01/18 15:08:40 $
+  $Author: mutoh $
+  $Date: 2003/01/25 18:02:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,6 +41,7 @@
 
 #define GEV2RVAL(ev) (make_gdkevent(ev))
 #define RVAL2GEV(ev) (get_gdkevent(ev))
+#define RVAL2ATOM(atom) (get_gdkatom(atom))
 
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
@@ -51,11 +52,6 @@
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
-
-extern VALUE glist2ary(GList* list);
-extern GList* ary2glist(VALUE ary);
-extern GSList* ary2gslist(VALUE ary);
-extern VALUE gslist2ary(GSList *list);
 
 extern ID id_relative_callbacks;
 extern ID id_call;
@@ -89,9 +85,20 @@ extern GType gtk_accel_group_entry_get_type();
  */
 typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
                                          gint column, GValue *value);
-void rbgtk_register_treeiter_set_value_func(VALUE klass, rbgtkiter_set_value_func);
+extern void rbgtk_register_treeiter_set_value_func(VALUE klass, rbgtkiter_set_value_func);
 extern VALUE treeiter_set_value_table;
 
+/*
+ * Gtk::SelectionData
+ */
+extern void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
+                                     void** data, gint* format, gint* length);
+extern void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
+
+/*
+ * Gtk::Drag
+ */
+extern GtkTargetEntry* rbgtk_get_target_entry(VALUE targets);
 
 /*
  * for gdk
@@ -105,7 +112,9 @@ extern GType gdk_geometry_get_type(void);
 extern GType gdk_region_get_type(void);
 extern GType gdk_span_get_type(void);
 
+extern GdkAtom get_gdkatom(VALUE atom);
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
+
 
 #endif /* _RBGTK_H */

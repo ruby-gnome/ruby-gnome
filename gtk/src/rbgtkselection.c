@@ -4,7 +4,7 @@
   rbgtkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -17,7 +17,6 @@
 #include "global.h"
 
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
-#define RVAL2ATOM(a) ((((GdkAtomData*)RVAL2BOXED(selection, GDK_TYPE_ATOM))->atom))
 
 static VALUE
 gtkdrag_selection_owner_set(self, widget, selection, time)

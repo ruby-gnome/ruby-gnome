@@ -4,7 +4,7 @@
   rbgtkradiomenuitem.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 The Ruby-GNOME2 Project
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,6 +14,22 @@
 ************************************************/
 
 #include "global.h"
+
+static GSList*
+ary2gslist(ary)
+    VALUE ary;
+{
+    long i;
+    GSList *glist = NULL;
+
+    if (NIL_P(ary)) return NULL;
+    Check_Type(ary, T_ARRAY);
+    for (i=0; i<RARRAY(ary)->len; i++) {
+        glist = g_slist_append(glist,RVAL2GOBJ(RARRAY(ary)->ptr[i]));
+    }
+
+    return glist;
+}
 
 static VALUE
 rmitem_initialize(argc, argv, self)

@@ -4,13 +4,12 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
-#define RVAL2ATOM(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
 #define _SELF(s) RVAL2CLIPBOARD(s)
 
 static VALUE

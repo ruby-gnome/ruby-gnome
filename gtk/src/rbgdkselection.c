@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/01/25 18:02:21 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -12,7 +12,6 @@
 
 #include "global.h"
 
-#define RVAL2GATOM(v) (((GdkAtomData*)RVAL2BOXED(v, GDK_TYPE_ATOM))->atom)
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
@@ -20,7 +19,7 @@ gdkselection_owner_set(self, owner, selection, time, send_event)
     VALUE self, owner, selection, time, send_event;
 {
     int ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
-                                      RVAL2GATOM(selection), 
+                                      RVAL2ATOM(selection), 
                                       NUM2INT(time), RTEST(send_event));
     return ret ? Qtrue : Qfalse;
 }
@@ -29,7 +28,7 @@ static VALUE
 gdkselection_owner_get(self, selection)
     VALUE self, selection;
 {
-    return GOBJ2RVAL(gdk_selection_owner_get(RVAL2GATOM(selection)));
+    return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
 }
 /*
 GdkWindow*  gdk_selection_owner_get_for_display(GdkDisplay *display,
@@ -40,8 +39,8 @@ gdkselection_convert(self, requestor, selection, target, time)
     VALUE self, requestor, selection, target, time;
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
-                          RVAL2GATOM(selection), 
-                          RVAL2GATOM(target), NUM2INT(time));
+                          RVAL2ATOM(selection), 
+                          RVAL2ATOM(target), NUM2INT(time));
     return requestor;
 }
 
@@ -64,11 +63,11 @@ gdkselection_send_notify(self, requestor, selection, target, property, time)
     VALUE self, requestor, selection, target, property, time;
 {
     if( property == Qnil){
-        gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
-                                  RVAL2GATOM(target), GDK_NONE, NUM2INT(time));
+        gdk_selection_send_notify(NUM2INT(requestor), RVAL2ATOM(selection),
+                                  RVAL2ATOM(target), GDK_NONE, NUM2INT(time));
     } else {
-        gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
-                                  RVAL2GATOM(target), RVAL2GATOM(property), 
+        gdk_selection_send_notify(NUM2INT(requestor), RVAL2ATOM(selection),
+                                  RVAL2ATOM(target), RVAL2ATOM(property), 
                                   NUM2INT(time));
     }
     return requestor;

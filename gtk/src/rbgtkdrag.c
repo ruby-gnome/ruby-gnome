@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/01/25 18:02:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -15,8 +15,8 @@
 #define RVAL2DC(c) (GDK_DRAG_CONTEXT(RVAL2GOBJ(c)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
-static GtkTargetEntry*
-get_target_entry(targets)
+GtkTargetEntry*
+rbgtk_get_target_entry(targets)
 	VALUE targets;
 {
     VALUE ary;
@@ -24,6 +24,7 @@ get_target_entry(targets)
     GtkTargetEntry *entries;
     int i, n_targets;
     
+    if (NIL_P(targets)) return NULL;
     Check_Type(targets, T_ARRAY);
     
     n_targets = RARRAY(targets)->len;
@@ -48,11 +49,14 @@ static VALUE
 gtkdrag_drag_dest_set(self, widget, flags, targets, actions)
     VALUE self, widget, flags, targets, actions;
 {
-    GtkTargetEntry *entries = get_target_entry(targets);
-    int num = RARRAY(targets)->len;
-
-    gtk_drag_dest_set(RVAL2WIDGET(widget), NUM2INT(flags), entries, 
-                      num, NUM2INT(actions));
+    int num;
+    GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
+    if (entries){
+        num = RARRAY(targets)->len;
+        
+        gtk_drag_dest_set(RVAL2WIDGET(widget), NUM2INT(flags), entries, 
+                          num, NUM2INT(actions));
+    }
     return self;
 }
 
@@ -97,8 +101,7 @@ static VALUE
 gtkdrag_drag_get_data(self, widget, context, target, time)
     VALUE self, widget, context, target, time;
 {
-    gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context),
-                      (((GdkAtomData*)RVAL2BOXED(target, GDK_TYPE_ATOM))->atom), 
+    gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context), RVAL2ATOM(target),
                       NUM2INT(time));
     return self;
 }
@@ -198,7 +201,7 @@ gtkdrag_drag_source_set(self, widget, flags, targets, actions)
     VALUE self, flags, targets, actions;
 {
     gtk_drag_source_set(RVAL2WIDGET(widget), NUM2INT(flags), 
-                        get_target_entry(targets), 
+                        rbgtk_get_target_entry(targets), 
                         RARRAY(targets)->len, NUM2INT(actions));
     return self;
 }
