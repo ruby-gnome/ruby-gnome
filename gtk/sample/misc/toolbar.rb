@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: toolbar.rb,v 1.6 2003/04/01 16:21:23 mutoh Exp $
+  $Id: toolbar.rb,v 1.7 2004/02/12 07:33:52 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -27,7 +27,7 @@ toolbar.append "Horizontal", "Horizontal toolbar layout", "Toolbar/Horizontal",
   Gtk::Image.new("test.xpm") do
   toolbar.set_orientation Gtk::ORIENTATION_HORIZONTAL
 end
-toolbar.append "Vertival", "Vertical toolbar layout", "Toolbar/Vertical",
+toolbar.append "Vertical", "Vertical toolbar layout", "Toolbar/Vertical",
   Gtk::Image.new("test.xpm") do
   toolbar.set_orientation Gtk::ORIENTATION_VERTICAL
 end

@@ -1,5 +1,12 @@
 2004-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/gtk-demo/main.rb: Don't show a warning message when 
+	"Tree View" is choosed.
+	* src/rbgdkwindow.c: Fixed Gdk::Window#(set_)decorations, 
+	#(set_)functions, #(set_)events reported by gabriele renzi. 
+	* sample/testgtk/notebook.rb: Fixed bugs reported by gabriele renzi.
+	* sample/misc/label.rb: Fix a warning repoted by gabriele renzi.
+	* sample/misc/toolbar.rb: Fix a typo reported by gabriele renzi.
 	* src/rbgtktextappearance.c: Add Gtk::TextAppearance.
 	* src/rbgtktextattributes.c: Add all accessors.
 	* src/gtk2.def, rbgtk.h: Add rbgtk_text_appearance_get_type.

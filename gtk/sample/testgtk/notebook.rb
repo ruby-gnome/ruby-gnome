@@ -4,7 +4,7 @@
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 
-  $Id: notebook.rb,v 1.8 2003/02/01 16:46:23 mutoh Exp $
+  $Id: notebook.rb,v 1.9 2004/02/12 07:33:52 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -117,11 +117,7 @@ class NotebookSample < SampleWindow
     cbutton1 = Gtk::CheckButton.new("popup menu")
     box2.pack_start(cbutton1, true, false, 0)
     cbutton1.signal_connect("clicked") do
-      if cbutton1.active?
-	@notebook.popup_enable
-      else
-	@notebook.popup_disable
-      end
+      @notebook.set_enable_popup(cbutton1.active?)
     end
 
     box2 = Gtk::HBox.new(false, 5)
@@ -163,7 +159,7 @@ class NotebookSample < SampleWindow
 
     button = Gtk::Button.new("rotate")
     button.signal_connect("clicked") do
-      @notebook.set_tab_pos((@notebook.tab_pos + 1) % 4)
+      @notebook.set_tab_pos((@notebook.tab_pos.to_i + 1) % 4)
     end
     box2.pack_start(button, true, true, 0)
 

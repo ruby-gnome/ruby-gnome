@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.6 2003/10/14 13:50:24 kzys Exp $
+# $Id: main.rb,v 1.7 2004/02/12 07:33:52 mutoh Exp $
 
 require 'gtk2'
 
@@ -197,7 +197,7 @@ module Demo
       file = begin
 	       File.open(filename)
 	     rescue
-	       $stderr.puts "Cannot open: #{$!}"
+	       $stderr.puts "Cannot open: #{$!}" if $DEBUG
 	       return
 	     end
       start = @info_buffer.get_iter_at_offset(0)

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/11/26 17:00:15 $
+  $Date: 2004/02/12 07:33:52 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -723,14 +723,14 @@ static VALUE
 gdkwin_get_events(self)
     VALUE self;
 {
-    return INT2NUM(gdk_window_get_events(_SELF(self)));
+    return GFLAGS2RVAL(gdk_window_get_events(_SELF(self)), GDK_TYPE_EVENT_MASK);
 }
 
 static VALUE
 gdkwin_set_events(self, mask)
     VALUE self, mask;
 {
-    gdk_window_set_events(_SELF(self), RVAL2GENUM(mask, GDK_TYPE_EVENT_MASK));
+    gdk_window_set_events(_SELF(self), RVAL2GFLAGS(mask, GDK_TYPE_EVENT_MASK));
     return self;
 }
 
@@ -780,7 +780,7 @@ static VALUE
 gdkwin_set_decorations(self, decor)
     VALUE self, decor;
 {
-    gdk_window_set_decorations(_SELF(self), RVAL2GENUM(decor, GDK_TYPE_WM_DECORATION));
+    gdk_window_set_decorations(_SELF(self), RVAL2GFLAGS(decor, GDK_TYPE_WM_DECORATION));
     return self;
 }
 
@@ -790,14 +790,14 @@ gdkwin_get_decorations(self)
 {
     GdkWMDecoration decorations;
     gboolean ret = gdk_window_get_decorations(_SELF(self), &decorations);
-    return ret ? GENUM2RVAL(decorations, GDK_TYPE_WM_DECORATION) : Qnil;
+    return ret ? GFLAGS2RVAL(decorations, GDK_TYPE_WM_DECORATION) : Qnil;
 }
 
 static VALUE
 gdkwin_set_functions(self, func)
     VALUE self, func;
 {
-    gdk_window_set_functions(_SELF(self), RVAL2GENUM(func, GDK_TYPE_WM_FUNCTION));
+    gdk_window_set_functions(_SELF(self), RVAL2GFLAGS(func, GDK_TYPE_WM_FUNCTION));
     return self;
 }
 
