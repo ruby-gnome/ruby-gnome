@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.5 2002/11/10 13:15:39 tkubo Exp $ */
+/* $Id: rbgnome-program.c,v 1.6 2002/11/16 01:24:05 tkubo Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -283,7 +283,7 @@ program_initialize(argc, argv, self)
     char **cargv;
     struct prop_data pdata[SIZE_OF_PROP_TABLE];
     VALUE popt_table;
-    extern VALUE rb_progname;
+    EXTERN VALUE rb_progname;
     int i;
 
     rb_scan_args(argc, argv, "24", &app_id, &app_version, &module_info, &arg0, &args, &prop);

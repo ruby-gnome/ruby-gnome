@@ -7,12 +7,12 @@ Requirements
    Ruby: http://www.ruby-lang.org/
    GTK+: http://www.gtk.org/
    libgnome, libgnomeui: http://www.gnome.org/
-   Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
+   Ruby/GLib2, Ruby/GTK2, Ruby/GnomeCanvas2: http://ruby-gnome2.sourceforge.net/
 
 Install
 -------
-   0. install ruby-1.6.x, GTK+, libgnome, libgnomeui, 
-      Ruby/GLib2 and Ruby/GTK2.
+   0. install ruby-1.6.x, GTK+, libgnome, libgnomeui, libgnomecanvas,
+      Ruby/GLib2, Ruby/GTK2 and Ruby/GnomeCanvas2.
    1. ruby extconf.rb
    2. make
    3. su

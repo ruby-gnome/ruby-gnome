@@ -30,24 +30,6 @@ Original Copyright:
 
 =end
 
-module Gtk # TODO: DELETE BEFORE RELEASE
-  class Stock # StockItem ?
-    COPY       = 'gtk-copy'        # GTK_STOCK_COPY
-    CUT        = 'gtk-cut'         # GTK_STOCK_CUT
-    NEW        = 'gtk-new'         # GTK_STOCK_NEW
-    OPEN       = 'gtk-open'        # GTK_STOCK_OPEN
-    PASTE      = 'gtk-paste'       # GTK_STOCK_PASTE
-    PRINT      = 'gtk-print'       # GTK_STOCK_PRINT
-    QUIT       = 'gtk-quit'        # GTK_STOCK_QUIT
-    REDO       = 'gtk-redo'        # GTK_STOCK_REDO
-    SAVE       = 'gtk-save'        # GTK_STOCK_SAVE
-    SAVE_AS    = 'gtk-save-as'     # GTK_STOCK_SAVE_AS
-    SPELLCHECK = 'gtk-spell-check' # GTK_STOCK_SPELL_CHECK
-    UNDO       = 'gtk-undo'        # GTK_STOCK_UNDO
-  end
-  ICON_SIZE_BUTTON = 4 # GTK_ICON_SIZE_BUTTON
-end
-
 require 'gnome2'
 
 class TestGnomeApp < Gnome::App

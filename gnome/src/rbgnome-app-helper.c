@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.11 2002/11/10 13:15:39 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.12 2002/11/16 01:24:05 tkubo Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -26,6 +26,7 @@
 static ID id_call;
 
 #define _SELF(self) GNOME_APP(RVAL2GOBJ(self))
+#define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
 uiinfo_separator(self)
@@ -343,7 +344,7 @@ uiinfo_menu_new_subtree(self, tree)
     rb_ary_push(ary, tree);             /* moreinfo */
     rb_ary_push(ary, Qnil);                /* user_data */
     rb_ary_push(ary, INT2FIX(GNOME_APP_PIXMAP_STOCK));   /* pixmap_type */
-    rb_ary_push(ary, rb_str_new2(GTK_STOCK_NEW));             /* pixmap_info */
+    rb_ary_push(ary, CSTR2SYM(GTK_STOCK_NEW));             /* pixmap_info */
     rb_ary_push(ary, INT2FIX(GNOME_KEY_NAME_NEW));           /* accelerator_key */
     rb_ary_push(ary, INT2FIX(GNOME_KEY_MOD_NEW));           /* ac_mods */
     rb_ary_push(ary, Qnil);             /* widget */
@@ -597,11 +598,11 @@ fill_ui_info(uiinfo, ary, uitype)
           case GNOME_APP_PIXMAP_STOCK:
             if (NIL_P(pixmap_info))
                 break;
-            if (TYPE(pixmap_info) != T_STRING)
+            if (!SYMBOL_P(pixmap_info))
                 rb_raise(rb_eArgError,
-                         "wrong pixmap data for Gnome::App::PIXMAP_STOCK (%s for String)",
+                         "wrong pixmap data for Gnome::App::PIXMAP_STOCK (%s for Symbol)",
                          rb_class2name(CLASS_OF(pixmap_info)));
-            uiinfo[i].pixmap_info = RVAL2CSTR(pixmap_info);
+            uiinfo[i].pixmap_info = rb_id2name(SYM2ID(pixmap_info));
             break;
           case GNOME_APP_PIXMAP_DATA:
             if (NIL_P(pixmap_info))
@@ -729,6 +730,8 @@ ui_info_to_ary(uiinfo)
             rb_ary_push(item, Qnil);
             break;
           case GNOME_APP_PIXMAP_STOCK:
+            rb_ary_push(item, CSTR2SYM(uiinfo->pixmap_info));
+            break;
           case GNOME_APP_PIXMAP_FILENAME:
             rb_ary_push(item, rb_str_new2(uiinfo->pixmap_info));
             break;
