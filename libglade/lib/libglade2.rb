@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.11 2004/07/11 15:11:55 mutoh Exp $
+  $Id: libglade2.rb,v 1.12 2004/09/23 00:21:06 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -91,4 +91,8 @@ class GladeXML
     end
     [@widget_names, @custom_methods]    
   end
+
+  LOG_DOMAIN = "libglade"
 end
+
+GLib::Log.set_log_domain(GladeXML::LOG_DOMAIN)
