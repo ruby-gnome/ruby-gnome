@@ -1,6 +1,7 @@
 =begin header
 
   sample.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: sample.rb,v 1.5 2002/11/12 16:36:18 mutoh Exp $
 
 =end
 

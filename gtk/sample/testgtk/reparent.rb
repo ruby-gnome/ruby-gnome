@@ -1,6 +1,7 @@
 =begin header
 
-  reparent.rb - a part of testgtk.c rewritten in ruby-gtk
+  reparent.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: reparent.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 

@@ -1,10 +1,11 @@
 =begin header
 
   checkbutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: checkbutton.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/11/04 16:19:18 $
-  $Id: checkbutton.rb,v 1.2 2002/11/04 16:19:18 mutoh Exp $
+  $Date: 2002/11/12 16:36:18 $
+  $Id: checkbutton.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  

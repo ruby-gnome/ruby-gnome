@@ -1,6 +1,7 @@
 =begin header
 
   progressbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: progressbar.rb,v 1.4 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -268,7 +269,7 @@ class ProgressBarSample < SampleDialog
       buf = sprintf("???");
     else
       #buf = sprintf("%.0f%%", 100 *  @pbar.get_current_percentage)
-      buf = sprintf("%d%%", 100 *  @pbar.get_current_percentage)
+      buf = sprintf("%d%%", 100 *  @pbar.fraction)
     end
     @label.set_text(buf)
   end
@@ -291,24 +292,24 @@ class ProgressBarSample < SampleDialog
   private
   def adjust_align
     @pbar.set_text_alignment(
-	@x_align_spin.get_value_as_float,
-	@y_align_spin.get_value_as_float)
+	@x_align_spin.value,
+	@y_align_spin.value)
   end
 
   private
   def adjust_blocks
-    @pbar.set_percentage(0)
-    @pbar.set_discrete_blocks(@block_spin.get_value_as_int)
+    @pbar.set_fraction(0)
+    @pbar.set_discrete_blocks(@block_spin.value_as_int)
   end
 
   private
   def adjust_step
-    @pbar.set_activity_step(@step_spin.get_value_as_int)
+    @pbar.set_activity_step(@step_spin.value_as_int)
   end
 
   private
   def adjust_act_blocks
-    @pbar.set_activity_blocks(@act_blocks_spin.get_value_as_int)
+    @pbar.set_activity_blocks(@act_blocks_spin.value_as_int)
   end
 
   private

@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2002/11/12 07:11:59 $
+  $Author: mutoh $
+  $Date: 2002/11/12 16:36:18 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -176,13 +176,14 @@ void gtk_text_buffer_move_mark_by_name   (GtkTextBuffer     *buffer,
 void gtk_text_buffer_delete_mark_by_name (GtkTextBuffer     *buffer,
                                           const gchar       *name);
 #endif
-
+/*
 static VALUE
 txt_get_insert(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_text_buffer_get_insert(_SELF(self)));
 }
+*/
 
 static VALUE
 txt_get_selection_bound(self)
@@ -354,6 +355,7 @@ txt_move_mark(self, mark, where)
   return self;
 }
 
+/*
 static VALUE
 txt_create_tag(argc, argv, self)
      int argc;
@@ -380,6 +382,7 @@ txt_create_tag(argc, argv, self)
                                               p[0],p[1],p[2],p[3],p[4],
                                               p[5],p[6],p[7],p[8],p[9]));
 }
+*/
 
 static VALUE
 txt_insert_with_tags(argc, argv, self)
@@ -459,7 +462,7 @@ Init_gtk_textbuffer()
 
     rb_define_method(gTextBuffer, "initialize", txt_initialize, -1);
     rb_define_method(gTextBuffer, "line_count", txt_get_line_count, 0);
-    rb_define_method(gTextBuffer, "cher_count", txt_get_char_count, 0);
+    rb_define_method(gTextBuffer, "char_count", txt_get_char_count, 0);
     rb_define_method(gTextBuffer, "tag_table", txt_get_tag_table, 0);
 
     rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
@@ -467,8 +470,10 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
 
     rb_define_method(gTextBuffer, "delete", txt_delete, 2);
-
+/* Comment out because this method's name is very bad.
+   Use Gtk::TextBuffer#get_mark("insert") instead.
     rb_define_method(gTextBuffer, "get_insert", txt_get_insert, 0);
+*/
     rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
 
     rb_define_method(gTextBuffer, "modified", txt_get_modified, 0);
@@ -479,10 +484,12 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
     rb_define_method(gTextBuffer, "end_user_action", txt_end_user_action, 0);
 
-    rb_define_method(gTextBuffer, "get_end_iter", txt_get_end_iter, 0);
+    rb_define_method(gTextBuffer, "end_iter", txt_get_end_iter, 0);
     rb_define_method(gTextBuffer, "move_mark_by_name", txt_move_mark_by_name, 2);
     rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
+/*
     rb_define_method(gTextBuffer, "create_tag", txt_create_tag, -1);
+*/
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
     rb_define_method(gTextBuffer, "insert_with_tags_by_name", txt_insert_with_tags_by_name, -1);
 

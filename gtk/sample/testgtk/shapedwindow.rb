@@ -1,8 +1,11 @@
-require 'sample'
+=begin header
 
-#
-# Shaped Windows
-#
+  shapedwindow.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: shapedwindow.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
+
+=end
+
+require 'sample'
 
 $root_win = nil
 

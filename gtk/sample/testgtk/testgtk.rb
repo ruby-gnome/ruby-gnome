@@ -3,6 +3,7 @@
 =begin header
 
   testgtk.rb - testgtk.c rewritten in Ruby/GTK2
+  $Id: testgtk.rb,v 1.6 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 

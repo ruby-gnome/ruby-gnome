@@ -1,10 +1,11 @@
 =begin header
 
-  mainloop.rb - a part of testgtk.c rewritten in ruby-gtk
+  mainloop.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: mainloop.rb,v 1.2 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:12 $
-  $Id: mainloop.rb,v 1.1 2002/05/19 12:39:12 mutoh Exp $
+  $Date: 2002/11/12 16:36:18 $
+  $Id: mainloop.rb,v 1.2 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  

@@ -1,6 +1,7 @@
 =begin header
 
   fontselection.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: fontselection.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Neil Conway <neilconway@rogers.com>
 

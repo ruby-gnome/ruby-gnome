@@ -1,10 +1,10 @@
 =begin header
 
-  idle.rb - a part of testgtk.c rewritten in ruby-gtk
+  idle.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:16 $
-  $Id: idle.rb,v 1.1 2002/05/19 12:39:16 mutoh Exp $
+  $Date: 2002/11/12 16:36:18 $
+  $Id: idle.rb,v 1.2 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  

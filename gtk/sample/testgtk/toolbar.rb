@@ -1,9 +1,9 @@
 =begin header
 
-  toolbar.rb - a part of testgtk.c rewritten in ruby-gtk
+  toolbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: toolbar.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
+  $Id: toolbar.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  

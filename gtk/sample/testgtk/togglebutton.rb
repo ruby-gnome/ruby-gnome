@@ -1,10 +1,10 @@
 =begin header
 
-  togglebutton.rb - a part of testgtk.c rewritten in ruby-gtk
+  togglebutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/11/11 15:32:31 $
-  $Id: togglebutton.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
+  $Date: 2002/11/12 16:36:18 $
+  $Id: togglebutton.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  

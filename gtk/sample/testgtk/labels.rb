@@ -1,6 +1,7 @@
 =begin header
 
   labels.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: labels.rb,v 1.4 2002/11/12 16:36:18 mutoh Exp $
 
 =end
 

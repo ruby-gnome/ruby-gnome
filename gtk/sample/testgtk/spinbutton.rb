@@ -1,9 +1,10 @@
 =begin header
 
-  spinbutton.rb - a part of testgtk.c rewritten in ruby-gtk
+  spinbutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: spinbutton.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: spinbutton.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
+  $Id: spinbutton.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 
 Original Copyright:
  
@@ -45,7 +46,7 @@ class SpinButtonSample < SampleWindow
   end
 
   def change_digits(spin)
-    @spinner1.set_digits(spin.get_value_as_int)
+    @spinner1.set_digits(spin.value_as_int)
   end
 
   def get_value(label, data)
@@ -56,11 +57,11 @@ class SpinButtonSample < SampleWindow
     spin = @spinner1
     #label = button.get_user_data
     if (data == 1)
-      buf = sprintf("%d", spin.get_value_as_int)
+      buf = sprintf("%d", spin.value_as_int)
     else
-      buf = sprintf("%0.*f", spin.digits, spin.get_value_as_float)
+      buf = sprintf("%0.*f", spin.digits, spin.value)
     end
-    label.set(buf)
+    label.set_text(buf)
   end
 
   def initialize
@@ -133,7 +134,7 @@ class SpinButtonSample < SampleWindow
     spinner = Gtk::SpinButton::new(adj, 0, 0)
     spinner.set_wrap(true)
     #spinner.set_shadow_type(Gtk::SHADOW_IN)
-    spinner.set_size_request(55, 0)
+    spinner.set_size_request(55, -1)
     vbox2.pack_start(spinner, false, true, 0)
 
     frame = Gtk::Frame::new("Accelerated")
@@ -156,7 +157,7 @@ class SpinButtonSample < SampleWindow
     adj = Gtk::Adjustment::new(0.0, -10000.0, 10000.0, 0.5, 100.0, 0.0)
     @spinner1 = Gtk::SpinButton::new(adj, 1.0, 2)
     @spinner1.set_wrap(true)
-    @spinner1.set_size_request(100, 0)
+    @spinner1.set_size_request(100, -1)
     @spinner1.set_update_policy(Gtk::SpinButton::UPDATE_ALWAYS)
     vbox2.pack_start(@spinner1, false, true, 0)
 

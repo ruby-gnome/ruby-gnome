@@ -1,7 +1,7 @@
 =begin header
 
-  wmhints.rb - a part of testgtk.c rewritten in ruby-gtk
-
+  wmhints.rb - a part of testgtk.c rewritten in Ruby/GTK2
+  $Id: wmhints.rb,v 1.3 2002/11/12 16:36:18 mutoh Exp $
 =end
 
 require 'sample'
