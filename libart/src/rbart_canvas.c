@@ -4,8 +4,9 @@
    rbart_canvas.c -
 
    $Author: mutoh $
-   $Date: 2003/02/18 17:01:21 $
+   $Date: 2004/11/13 11:19:13 $
 
+   Copyright (C) 2004 Ruby-GNOME2 Project Team
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 
 **********************************************************************/
@@ -31,6 +32,7 @@ typedef struct {
 
 #define Canvas_Ptr(r_obj) ((ArtCanvas *)RDATA(r_obj)->data)
 
+/*************************************************/
 ArtCanvas *
 rbart_get_art_canvas(r_obj)
     VALUE r_obj;
@@ -39,7 +41,7 @@ rbart_get_art_canvas(r_obj)
         rb_raise(rb_eTypeError, "not an Art::Canvas");
     return Canvas_Ptr(r_obj);
 }
-
+/*************************************************/
 
 static void
 canvas_free(canvas)
@@ -52,10 +54,17 @@ canvas_free(canvas)
 }
 
 static VALUE
-canvas_s_new(argc, argv, r_klass)
+canvas_s_allocate(klass)
+    VALUE klass;
+{
+    return Data_Wrap_Struct(klass, 0, canvas_free, 0);
+}
+
+static VALUE
+canvas_initialize(argc, argv, self)
     int argc;
     VALUE *argv;
-    VALUE r_klass;
+    VALUE self;
 {
     VALUE r_width;
     VALUE r_height;
@@ -78,7 +87,9 @@ canvas_s_new(argc, argv, r_klass)
     }
     else
         canvas->mask = NULL;
-    return Data_Wrap_Struct(artCanvas, 0, canvas_free, canvas);
+
+    DATA_PTR(self) = canvas;
+    return Qnil;
 }
 
 static VALUE
@@ -463,7 +474,10 @@ Init_art_canvas(mArt)
     artCanvas = rb_define_class_under(mArt, "Canvas", rb_cObject);
     rb_define_const(artCanvas, "ALPHA_MASK", INT2NUM(ART_CANVAS_ALPHA_MASK));
     rb_define_const(artCanvas, "PNG_INTERLACE_ADAM7", INT2NUM(ART_CANVAS_PNG_INTERLACE_ADAM7));
-    rb_define_singleton_method(artCanvas, "new", canvas_s_new, -1);
+
+    RBART_INIT_FUNC2(artCanvas, canvas_s_allocate);
+
+    rb_define_method(artCanvas, "initialize", canvas_initialize, -1);
     rb_define_method(artCanvas, "[]", canvas_aref, 2);
     rb_define_method(artCanvas, "[]=", canvas_aref_set, 3);
     rb_define_method(artCanvas, "flags", canvas_flags, 0);
@@ -472,6 +486,7 @@ Init_art_canvas(mArt)
     rb_define_method(artCanvas, "to_jpeg", canvas_to_jpeg, -1);
     rb_define_method(artCanvas, "to_png", canvas_to_png, -1);
     rb_define_method(artCanvas, "width", canvas_width, 0);
+    rb_define_singleton_method(artCanvas, "color", color_new, -1);
 
     artCanvasColor = rb_define_module_under(artCanvas, "Color");
     rb_define_const(artCanvasColor, "BLACK", ULONG2NUM(0x000000ff));
@@ -482,5 +497,4 @@ Init_art_canvas(mArt)
     rb_define_const(artCanvasColor, "RED", ULONG2NUM(0xff0000ff));
     rb_define_const(artCanvasColor, "WHITE", ULONG2NUM(0xffffffff));
     rb_define_const(artCanvasColor, "YELLOW", ULONG2NUM(0xffff00ff));
-    rb_define_singleton_method(artCanvasColor, "new", color_new, -1);
 }

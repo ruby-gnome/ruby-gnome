@@ -2,7 +2,7 @@
    testlibart2.rb
 
    $Author: mutoh $
-   $Date: 2003/02/01 16:55:26 $
+   $Date: 2004/11/13 11:19:13 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 =end
@@ -122,15 +122,15 @@ def main
   canvas.render_vpath_with_context(box, box_outline_context)
 
   circle_context = context.with({:affine_transform => context[:affine_transform] * Art::Affine.translate(0.0, 0.0) * Art::Affine.scale(0.45, 0.45)})
-  canvas.render_vpath_with_context(Art::Vpath.circle(0.5, 0.4, 0.25), circle_context.with({:color => Art::Canvas::Color.new(1.0, 0.0, 0.0, 0.5)}))
-  canvas.render_vpath_with_context(Art::Vpath.circle(0.4, 0.55, 0.25), circle_context.with({:color => Art::Canvas::Color.new(0.0, 1.0, 0.0, 0.5)}))
-  canvas.render_vpath_with_context(Art::Vpath.circle(0.6, 0.55, 0.25), circle_context.with({:color => Art::Canvas::Color.new(0.0, 0.0, 1.0, 0.5)}))
+  canvas.render_vpath_with_context(Art::Vpath.circle(0.5, 0.4, 0.25), circle_context.with({:color => Art::Canvas.color(1.0, 0.0, 0.0, 0.5)}))
+  canvas.render_vpath_with_context(Art::Vpath.circle(0.4, 0.55, 0.25), circle_context.with({:color => Art::Canvas.color(0.0, 1.0, 0.0, 0.5)}))
+  canvas.render_vpath_with_context(Art::Vpath.circle(0.6, 0.55, 0.25), circle_context.with({:color => Art::Canvas.color(0.0, 0.0, 1.0, 0.5)}))
 
   lines_context = context.with({:affine_transform => context[:affine_transform] * Art::Affine.translate(0.5, 0.0) * Art::Affine.scale(0.45, 0.45), :stroke => true, :line_width => 8, :miter_limit => 0.5})
   line = Art::Vpath.new([[Art::MOVETO, 0.3, 0.2], [Art::LINETO, 0.0, 0.3], [Art::LINETO, 0.3, 0.6], [Art::LINETO, 0.0, 0.8], [Art::END]])
-  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.0, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_ROUND, :join => Art::PATH_STROKE_JOIN_ROUND, :color => Art::Canvas::Color.new(0.5, 0.0, 0.0)}))
-  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.3, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_BUTT, :join => Art::PATH_STROKE_JOIN_MITER, :color => Art::Canvas::Color.new(0.0, 0.5, 0.0)}))
-  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.6, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_SQUARE, :join => Art::PATH_STROKE_JOIN_BEVEL, :color => Art::Canvas::Color.new(0.0, 0.0, 0.5)}))
+  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.0, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_ROUND, :join => Art::PATH_STROKE_JOIN_ROUND, :color => Art::Canvas.color(0.5, 0.0, 0.0)}))
+  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.3, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_BUTT, :join => Art::PATH_STROKE_JOIN_MITER, :color => Art::Canvas.color(0.0, 0.5, 0.0)}))
+  canvas.render_vpath_with_context(line.affine_transform(Art::Affine.translate(0.6, 0.0)), lines_context.with({:cap => Art::PATH_STROKE_CAP_SQUARE, :join => Art::PATH_STROKE_JOIN_BEVEL, :color => Art::Canvas.color(0.0, 0.0, 0.5)}))
 
   overlap_context = context.with({:affine_transform => context[:affine_transform] * Art::Affine.translate(0.0, 0.5) * Art::Affine.scale(0.45, 0.45)})
   shape1 = Art::Vpath.rectangle(0.25, 0.25, 0.75, 0.75)
@@ -143,12 +143,12 @@ def main
   canvas.render_vpath_with_context(overlap, overlap_context.with({:color => Art::Canvas::Color::MAGENTA}))
 
   pie_context = context.with({:affine_transform => context[:affine_transform] * Art::Affine.translate(0.5, 0.5) * Art::Affine.scale(0.45, 0.45)})
-  line_context = pie_context.with({:stroke => true, :line_width => 1, :color => Art::Canvas::Color.new(0.0, 0.0, 0.25)})
+  line_context = pie_context.with({:stroke => true, :line_width => 1, :color => Art::Canvas.color(0.0, 0.0, 0.25)})
   canvas.render_vpath_with_context(Art::Vpath.line(0.5, 0.0, 0.5, 1.0), line_context)
   canvas.render_vpath_with_context(Art::Vpath.line(0.0, 0.5, 1.0, 0.5), line_context)
   canvas.render_vpath_with_context(Art::Vpath.circle(0.5, 0.5, 0.4), line_context)
   slice = Art::Vpath.slice(0.5, 0.5, 0.45, -30.0, 135.0)
-  canvas.render_vpath_with_context(slice, pie_context.with({:color => Art::Canvas::Color.new(0.5, 0.5, 1.0)}))
+  canvas.render_vpath_with_context(slice, pie_context.with({:color => Art::Canvas.color(0.5, 0.5, 1.0)}))
   canvas.render_vpath_with_context(slice, line_context)
 
   File.open('testlibart2.png', 'w') do |file|

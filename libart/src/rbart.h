@@ -4,8 +4,9 @@
   rbart.h - header file for Art module of ruby
 
   $Author: mutoh $
-  $Date: 2003/02/18 17:01:20 $
+  $Date: 2004/11/13 11:19:13 $
 
+  Copyright (C) 2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 **********************************************************************/
@@ -26,20 +27,17 @@ extern VALUE artVpath;
 extern VALUE artVpathDash;
 extern VALUE artCanvas;
 
-extern double *rbart_get_art_affine(VALUE);
-extern VALUE rbart_make_art_affine(double[6]);
-
-extern void Init_art_affine(VALUE);
+/*
+ * For other libraries
+ */
+extern double *get_art_affine(VALUE);
+extern VALUE make_art_affine(double[6]);
 
 extern ArtSVP *get_art_svp(VALUE);
 extern VALUE make_art_svp(ArtSVP *);
 
-extern void Init_art_svp();
-
 extern ArtBpath *get_art_bpath(VALUE);
 extern VALUE make_art_bpath(ArtBpath *);
-
-extern void Init_art_bpath();
 
 extern ArtVpath *get_art_vpath(VALUE);
 extern VALUE make_art_vpath(ArtVpath *);
@@ -47,8 +45,21 @@ extern VALUE make_art_vpath(ArtVpath *);
 extern ArtVpathDash *get_art_vpath_dash(VALUE);
 extern VALUE make_art_vpath_dash(ArtVpathDash *);
 
-extern void Init_art_vpath();
-extern void Init_art_canvas();
+/*
+ * Internal usage
+ */
+extern void Init_art_affine(VALUE);
+extern void Init_art_svp(VALUE);
+extern void Init_art_bpath(VALUE);
+extern void Init_art_vpath(VALUE);
+extern void Init_art_vpathdash(VALUE);
+extern void Init_art_canvas(VALUE);
 
+#ifndef HAVE_OBJECT_ALLOCATE
+extern VALUE rbart_s_new(int, VALUE*, VALUE);
+#endif
+extern void rbart_init_func(VALUE, void*);
+#define RBART_INIT_FUNC(klass) rbart_init_func(klass, NULL)
+#define RBART_INIT_FUNC2(klass, func) rbart_init_func(klass, func)
 
 #endif /* ! _RBART_H_included */

@@ -1,3 +1,15 @@
+2004-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart_canvas.c: Support Object.allocate.
+	Rename Art::Canvas::Color.new to Art::Canvas.color.
+	* src/rbart_vpathdash.c: Separate from rbart_vpath.c
+	Rename Art::Vpath::Dash to Art::VpathDash. Support Object.allocate.
+	* src/rbart_bpath.c, rbart_vpath.c: Support Object.allocate. 
+
+2004-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart.c, rbart.h, src/rbart_affine.c: Support Object.allocate.
+
 2004-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/depend: Added.

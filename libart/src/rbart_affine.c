@@ -4,8 +4,9 @@
   rbart_affine.c - Art::Affine class of ruby
 
   $Author: mutoh $
-  $Date: 2003/02/08 18:51:44 $
+  $Date: 2004/11/13 11:19:13 $
 
+  Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 **********************************************************************/
@@ -19,8 +20,9 @@ static VALUE artAffine;
 #define Affine_Ptr(obj) ((double *)(RDATA(obj)->data))
 #define Affine_Set(obj, val) memcpy(Affine_Ptr(obj), val, sizeof(double[6]))
 
+/**********************************************************/
 double *
-rbart_get_art_affine(obj)
+get_art_affine(obj)
     VALUE obj;
 {
     if (!rb_obj_is_instance_of(obj, artAffine))
@@ -29,33 +31,38 @@ rbart_get_art_affine(obj)
 }
 
 VALUE
-rbart_make_art_affine(affine)
+make_art_affine(affine)
     double affine[6];
 {
     double *ptr = xmalloc(sizeof(double[6]));
     memcpy(ptr, affine, sizeof(double[6]));
     return Data_Wrap_Struct(artAffine, 0, xfree, ptr);
 }
+/**********************************************************/
 
 static VALUE
-affine_s_new(argc, argv, klass)
+affine_initialize(argc, argv, klass)
     int argc;
     VALUE *argv;
     VALUE klass;
 {
-    double affine[6];
     int i;
+    double* affine = xmalloc(sizeof(double[6]));
+
     if (argc == 1) {
         Check_Type(argv[0], T_ARRAY);
         if (RARRAY(argv[0])->len != 6)
             rb_raise(rb_eArgError, "wrong size of Array (expect 6)");
         argv = RARRAY(argv[0])->ptr;
     } else if (argc != 6) {
-        rb_raise(rb_eArgError, "wrong # of argument (expect 1 or 6)");
+        rb_raise(rb_eArgError, "wrong # of argument (expect an array(5 members) or 6 parameters)");
     }
     for (i = 0;i < 6;i++)
         affine[i] = NUM2DBL(argv[i]);
-    return rbart_make_art_affine(affine);
+
+    RDATA(klass)->data = affine;
+
+    return Qnil;
 }
 
 static VALUE
@@ -64,7 +71,7 @@ affine_s_identity(klass)
 {
     double affine[6];
     art_affine_identity(affine);
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -73,7 +80,7 @@ affine_s_scale(klass, sx, sy)
 {
     double affine[6];
     art_affine_scale(affine, NUM2DBL(sx), NUM2DBL(sy));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -82,7 +89,7 @@ affine_s_rotate(klass, theta)
 {
     double affine[6];
     art_affine_rotate(affine, NUM2DBL(theta));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -91,7 +98,7 @@ affine_s_shear(klass, theta)
 {
     double affine[6];
     art_affine_shear(affine, NUM2DBL(theta));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -100,7 +107,7 @@ affine_s_translate(klass, tx, ty)
 {
     double affine[6];
     art_affine_translate(affine, NUM2DBL(tx), NUM2DBL(ty));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -136,7 +143,7 @@ affine_invert(self)
 {
     double affine[6];
     art_affine_invert(affine, Affine_Ptr(self));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -155,7 +162,7 @@ affine_flip(self, horz, vert)
 {
     double affine[6];
     art_affine_flip(affine, Affine_Ptr(self), RTEST(horz), RTEST(vert));
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -168,21 +175,26 @@ affine_flip_bang(self, horz, vert)
     return self;
 }
 
-#define AFFINE_TO_S_HEAD "#<Art::Affine:"
-#define AFFINE_TO_S_TAIL ">"
 static VALUE
 affine_to_s(self)
     VALUE self;
 {
-    char str[128 + sizeof(AFFINE_TO_S_HEAD) + sizeof(AFFINE_TO_S_TAIL)];
-    size_t offset = strlen(AFFINE_TO_S_HEAD);
-
-    strcpy(str, AFFINE_TO_S_HEAD);
-    art_affine_to_string(str + offset, Affine_Ptr(self));
-    if (str[offset] == '\0')
-        strcat(str, "identity");
-    strcat(str, AFFINE_TO_S_TAIL);
-    return rb_str_new2(str);
+    char str[255];
+    VALUE ret;
+    double* affine = Affine_Ptr(self);
+    if (affine)
+        art_affine_to_string(str, affine);
+    else
+        str[0] = '\0';
+    
+    ret = rb_str_new2("<");
+    rb_str_cat2(ret, rb_class2name(CLASS_OF(self)));
+    if (str[0] != '\0') {
+        rb_str_cat2(ret, ":");
+        rb_str_cat2(ret, str);
+    }
+    rb_str_cat2(ret, ">");
+    return ret;
 }
 
 static VALUE
@@ -214,8 +226,8 @@ affine_multiply(self, right)
     VALUE self, right;
 {
     double affine[6];
-    art_affine_multiply(affine, rbart_get_art_affine(right), Affine_Ptr(self));
-    return rbart_make_art_affine(affine);
+    art_affine_multiply(affine, get_art_affine(right), Affine_Ptr(self));
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -232,14 +244,17 @@ void
 Init_art_affine(mArt)
     VALUE mArt;
 {
-    artAffine = rb_define_class_under(mArt, "Affine", rb_cObject);
+    artAffine = rb_define_class_under(mArt, "Affine", rb_cData);
 
-    rb_define_singleton_method(artAffine, "new", affine_s_new, -1);
+    RBART_INIT_FUNC(artAffine);
+
     rb_define_singleton_method(artAffine, "identity", affine_s_identity, 0);
     rb_define_singleton_method(artAffine, "scale", affine_s_scale, 2);
     rb_define_singleton_method(artAffine, "rotate", affine_s_rotate, 1);
     rb_define_singleton_method(artAffine, "shear", affine_s_shear, 1);
     rb_define_singleton_method(artAffine, "translate", affine_s_translate, 2);
+
+    rb_define_method(artAffine, "initialize", affine_initialize, -1);
 
     rb_define_method(artAffine, "point", affine_point, -1);
     rb_define_method(artAffine, "invert", affine_invert, 0);

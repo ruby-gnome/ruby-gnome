@@ -2,7 +2,7 @@
    rose.rb
 
    $Author: mutoh $
-   $Date: 2003/02/01 16:55:26 $
+   $Date: 2004/11/13 11:19:13 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 =end
@@ -97,9 +97,9 @@ height = size + 2 * border
 
 context = Art::Canvas::Context.new({:affine_transform => Art::Affine.translate(width / 2 + 0.5, height / 2 + 0.5) * Art::Affine.scale(size / 2.0, size / 2.0)})
 line_context = context
-line_context = context.with({:stroke => true, :line_width => 1, :color => Art::Canvas::Color.new(0x00, 0x66, 0x00)})
-crosshair_fill_context = context.with({:color => Art::Canvas::Color.new(0xff, 0xff, 0xff)})
-pie_fill_context = context.with({:color => Art::Canvas::Color.new(0xee, 0xff, 0xee)})
+line_context = context.with({:stroke => true, :line_width => 1, :color => Art::Canvas.color(0x00, 0x66, 0x00)})
+crosshair_fill_context = context.with({:color => Art::Canvas.color(0xff, 0xff, 0xff)})
+pie_fill_context = context.with({:color => Art::Canvas.color(0xee, 0xff, 0xee)})
 hline = Art::Vpath.line(-1, 0, 1, 0)
 vline = Art::Vpath.line(0, -1, 0, 1)
 circle = Art::Vpath.circle(0, 0, 0.8)
