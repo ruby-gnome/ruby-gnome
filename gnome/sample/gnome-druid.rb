@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-druid.rb,v 1.2 2002/11/02 09:29:06 tkubo Exp $
+# $Id: gnome-druid.rb,v 1.3 2002/11/05 13:09:06 mutoh Exp $
 #
 # test-druid.rb - sample script of Gnome::Druid
 #                 This program was based of test-druid of libgnomeui
@@ -84,6 +84,8 @@ EOS
     end
   end
 end
+
+Gtk.init
 
 window = TestDruid.new()
 window.show_all()

@@ -1,3 +1,7 @@
+2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/gnome-druid.rb: Follow Ruby/GTK2 changes.
+
 2002-11-05  KUBO Takehiro  <kubo@jiubao.org>
 
 	* doc/*.rb: delete rbbr package.
