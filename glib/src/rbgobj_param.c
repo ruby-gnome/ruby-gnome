@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:33 $
+  $Date: 2003/09/03 01:00:00 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -176,6 +176,7 @@ value_default(VALUE self)
     return result;
 }
 
+#if 0
 static VALUE
 value_defaults(VALUE self, VALUE val)
 {
@@ -191,31 +192,58 @@ value_defaults(VALUE self, VALUE val)
 
     return result ? Qtrue : Qfalse;
 }
+#endif
+
+
+struct validate_arg{
+    GParamSpec* pspec;
+    GValue* value;
+    VALUE obj;
+};
 
 static VALUE
-value_validate(self, value)
-    VALUE self, value;
+value_validate_body(struct validate_arg* arg)
 {
-    GValue tmp = {0,};
+    VALUE ret;
     gboolean b;
 
-    /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
-    g_value_init(&tmp,
-                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
-    rbgobj_rvalue_to_gvalue(value, &tmp);
-    b = g_param_value_validate(rbgobj_param_spec_get_struct(self), &tmp);
-    value = rbgobj_gvalue_to_rvalue(&tmp);
-    g_value_unset(&tmp);
-
-    return rb_ary_new3(2, b ? Qtrue : Qfalse, value);
+    rbgobj_rvalue_to_gvalue(arg->obj, arg->value);
+    b = g_param_value_validate(arg->pspec, arg->value);
+    ret = rbgobj_gvalue_to_rvalue(arg->value);
+    return rb_ary_new3(2, b ? Qtrue : Qfalse, ret);
 }
+
+static VALUE
+value_validate_ensure(struct validate_arg* arg)
+{
+    g_value_unset(arg->value);
+}
+
+static VALUE
+value_validate(self, obj)
+    VALUE self, obj;
+{
+    struct validate_arg arg;
+    GValue value = {0,};
+
+    arg.pspec = rbgobj_param_spec_get_struct(self);
+    arg.value = &value;
+    arg.obj = obj;
+
+    g_value_init(&value, G_PARAM_SPEC_VALUE_TYPE(arg.pspec));
+
+    return rb_ensure(value_validate_body, (VALUE)&arg,
+                     value_validate_ensure, (VALUE)&arg);
+}
+
 
 static VALUE
 value_convert(int argc, VALUE* argv, VALUE self)
 {
+    GParamSpec* pspec = rbgobj_param_spec_get_struct(self);
     VALUE src, strict_validation;
     VALUE src_type;
-    VALUE result;
+    VALUE result = Qnil;
     GValue src_value = {0,};
     GValue dest_value = {0,};
     gboolean b;
@@ -224,8 +252,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 
     /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
     g_value_init(&src_value, rbgobj_gtype_get(src_type));
-    g_value_init(&dest_value,
-                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+    g_value_init(&dest_value, G_PARAM_SPEC_VALUE_TYPE(pspec));
 
     rbgobj_rvalue_to_gvalue(src, &src_value);
 
@@ -233,21 +260,26 @@ value_convert(int argc, VALUE* argv, VALUE self)
                               &src_value, &dest_value,
                               RTEST(strict_validation));
 
-    result = rbgobj_gvalue_to_rvalue(&dest_value);
+    if (b)
+        result = rbgobj_gvalue_to_rvalue(&dest_value);
 
     g_value_unset(&src_value);
     g_value_unset(&dest_value);
 
-    return rb_ary_new3(2, b ? Qtrue : Qfalse, result);
+    if (b)
+        return result;
+    else
+        rb_raise(rb_eTypeError, "can't convert");
 }
 
 static VALUE
 values_compare(self, a, b)
     VALUE self, a, b;
 {
+    GParamSpec* pspec = rbgobj_param_spec_get_struct(self);
+    GType type = G_PARAM_SPEC_VALUE_TYPE(pspec);
     GValue v1 = {0,};
     GValue v2 = {0,};
-    GType type = G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self));
     gint result;
 
     g_value_init(&v1, type);
@@ -257,7 +289,7 @@ values_compare(self, a, b)
     rbgobj_rvalue_to_gvalue(a, &v1);
     rbgobj_rvalue_to_gvalue(b, &v2);
 
-    result = g_param_values_cmp(rbgobj_param_spec_get_struct(self), &v1, &v2);
+    result = g_param_values_cmp(pspec, &v1, &v2);
 
     g_value_unset(&v1);
     g_value_unset(&v2);
@@ -332,7 +364,9 @@ Init_gobject_gparam_spec()
     rb_define_alias(cParamSpec, "default", "value_default");
 
     // FIXME: better name
+#if 0
     rb_define_method(cParamSpec, "value_defaults?", value_defaults, 1);
+#endif
     rb_define_method(cParamSpec, "value_validate", value_validate, 1);
     rb_define_method(cParamSpec, "value_convert", value_convert, -1);
     rb_define_method(cParamSpec, "value_compare", values_compare, 2);

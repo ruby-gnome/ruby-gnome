@@ -1,3 +1,10 @@
+2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_param.c (value_validate): use rb_ensure().
+
+	* src/rbgobj_param.c: disable GLib::Param#value_defaults? since the
+	name is bad.
+
 2003-08-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_enum.c (enum_coerce): use NUM2INT not NUM2UINT.
