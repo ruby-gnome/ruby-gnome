@@ -46,6 +46,7 @@ else
 end
 
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
+$CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../gtk/src')) + $CFLAGS
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../libart/src')) + $CFLAGS
 
 STDOUT.print("checking for G_OS_WIN32... ")

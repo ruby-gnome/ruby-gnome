@@ -159,7 +159,7 @@ class CanvasSampleFifteen < Gtk::VBox
 		       "text", i.to_s,
 		       "x", PIECE_SIZE / 2.0,
 		       "y", PIECE_SIZE / 2.0,
-		       "font", "-adobe-helvetica-bold-r-normal--24-240-75-75-p-138-iso8859-1",
+		       "font", "Sans bold 24",
 		       "anchor", Gtk::ANCHOR_CENTER,
 		       "fill_color", "black")
       @num = i

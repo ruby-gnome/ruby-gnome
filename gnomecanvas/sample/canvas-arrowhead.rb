@@ -185,7 +185,7 @@ class CanvasSampleArrowhead < Gtk::VBox
 			  "arrow_shape_c", 3.0)
     text = root.item_new(Gnome::CanvasText,
 			 "fill_color", "black",
-			 "font", "-adobe-helvetica-medium-r-normal--12-*-72-72-p-*-iso8859-1",
+			 "font", "Sans 12",
 			 "anchor", anchor)
     return arrow, text
   end
@@ -195,7 +195,7 @@ class CanvasSampleArrowhead < Gtk::VBox
 		  "x", x,
 		  "y", y,
 		  "fill_color", "black",
-		  "font", "-adobe-helvetica-bold-r-normal--14-*-72-72-p-*-iso8859-1",
+		  "font", "Sans 14",
 		  "anchor", Gtk::ANCHOR_NW)
   end
 

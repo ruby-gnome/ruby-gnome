@@ -1,3 +1,12 @@
+2002-09-21  KUBO Takehiro  <kubo@lilliput.insight-tec.co.jp>
+
+	* extconf.rb, src/rbgnomecanvas.h: include rbgtk.h.
+	* src/rbgnome-canvas.c(canvas_s_new, canvas_s_new_aa),
+	src/rbgnome-canvas-group.c (group_item_new):
+	bug fix. use RBGTK_INITIALIZE.
+	* canvas-arrowhead.rb, canvas-fifteen.rb, canvas-primitives.rb:
+	change font name.
+
 2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb: add.

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.3 2002/09/21 05:35:01 tkubo Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.4 2002/09/21 14:53:20 tkubo Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -28,14 +28,18 @@ static VALUE
 canvas_s_new(klass)
     VALUE klass;
 {
-    return GOBJ2RVAL(gnome_canvas_new());
+    VALUE obj = rbgobj_create_object(klass);
+    RBGTK_INITIALIZE(obj, gnome_canvas_new());
+    return obj;
 }
 
 static VALUE
 canvas_s_new_aa(klass)
     VALUE klass;
 {
-    return GOBJ2RVAL(gnome_canvas_new_aa());
+    VALUE obj = rbgobj_create_object(klass);
+    RBGTK_INITIALIZE(obj, gnome_canvas_new_aa());
+    return obj;
 }
 
 static VALUE

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-group.c,v 1.3 2002/09/21 05:35:01 tkubo Exp $ */
+/* $Id: rbgnome-canvas-group.c,v 1.4 2002/09/21 14:53:20 tkubo Exp $ */
 
 /* Gnome::CanvasGroup widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -66,7 +66,7 @@ group_item_new(argc, argv, self)
 
     item = GNOME_CANVAS_ITEM(g_object_new(type, NULL));
     rval = rbgobj_create_object(argv[0]);
-    G_INITIALIZE(rval, item);
+    RBGTK_INITIALIZE(rval, item);
     parent = GNOME_CANVAS_GROUP(RVAL2GOBJ(self));
 
 	item->parent = GNOME_CANVAS_ITEM(parent);

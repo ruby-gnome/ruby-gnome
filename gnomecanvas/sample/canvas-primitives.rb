@@ -55,7 +55,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 		  "text", text,
 		  "x", (pos % 3) * 200 + 100,
 		  "y", (pos / 3) * 150 + 5,
-		  "font", "-adobe-helvetica-medium-r-normal--12-*-72-72-p-*-iso8859-1",
+		  "font", "Sans 12",
 		  "anchor", Gtk::ANCHOR_N,
 		  "fill_color", "black")
   end
@@ -223,7 +223,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 					      "text", "Anchor NW",
 					      "x", 0.0,
 					      "y", 0.0,
-					      "font", "-adobe-helvetica-bold-r-normal--24-240-75-75-p-138-iso8859-1",
+					      "font", "Sans Bold 24",
 					      "anchor", Gtk::ANCHOR_NW,
 					      "fill_color_rgba", 0x0000ff80)
     else
@@ -232,7 +232,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 					      "text", "Anchor NW",
 					      "x", 0.0,
 					      "y", 0.0,
-					      "font", "-adobe-helvetica-bold-r-normal--24-240-75-75-p-138-iso8859-1",
+					      "font", "Sans Bold 24",
 					      "anchor", Gtk::ANCHOR_NW,
 					      "fill_color", "blue",
 					      "fill_stipple", stipple)
@@ -242,7 +242,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 					    "text", "Anchor center\nJustify center\nMultiline text",
 					    "x", 0.0,
 					    "y", 0.0,
-					    "font", "-b&h-lucida-bold-r-normal-*-14-*-*-*-p-*-iso8859-1",
+					    "font", "monospace bold 14",
 					    "anchor", Gtk::ANCHOR_CENTER,
 					    "justification", Gtk::JUSTIFY_CENTER,
 					    "fill_color", "firebrick")
@@ -251,7 +251,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 					     "text", "Clipped text\nClipped text\nClipped text\nClipped text\nClipped text\nClipped text",
 					     "x", 0.0,
 					     "y", 0.0,
-					     "font", "-*-clean-medium-r-*-*-12-*-*-*-*-*-*-*",
+					     "font", "Sans 12",
 					     "anchor", Gtk::ANCHOR_SE,
 					     "clip", TRUE,
 					     "clip_width", 50.0,
