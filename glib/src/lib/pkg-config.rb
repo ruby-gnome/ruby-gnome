@@ -70,7 +70,11 @@ module PKGConfig
       dldflags = libs(pkg)
       dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
       $libs   += ' ' + libs
-      $DLDFLAGS += ' ' + dldflags
+      if /mswin32/ =~ RUBY_PLATFORM
+	$DLDFLAGS += ' ' + dldflags
+      else
+	$LDFLAGS += ' ' + dldflags
+      end
       $CFLAGS += ' ' + cflags(pkg)
       true
     else
