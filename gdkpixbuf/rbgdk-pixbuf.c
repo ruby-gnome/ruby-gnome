@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 17:43:15 $
+  $Date: 2003/10/07 13:03:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -90,24 +90,42 @@ initialize(argc, argv, self)
     gchar** data;
     int i;
 
-    rb_scan_args(argc, argv, "14", &arg1, &arg2,
-                 &arg3, &arg4, &arg5);
+    rb_scan_args(argc, argv, "14", &arg1, &arg2, &arg3, &arg4, &arg5);
 
     if (argc == 5){
         buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
                              RTEST(arg2), NUM2INT(arg3),
                              NUM2INT(arg4), NUM2INT(arg5));
+        if (buf == NULL){
+            rb_gc();
+            buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
+                                 RTEST(arg2), NUM2INT(arg3),
+                                 NUM2INT(arg4), NUM2INT(arg5));
+            if (buf == NULL)
+                rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+        }
     } else {
         if (TYPE(arg1) == T_STRING) {
             buf = gdk_pixbuf_new_from_file(RSTRING(arg1)->ptr, &error);
-            if (buf == NULL)
-                RAISE_GERROR(error);
+            if (buf == NULL){
+                error = NULL;
+                rb_gc();
+                buf = gdk_pixbuf_new_from_file(RSTRING(arg1)->ptr, &error);
+                if (buf == NULL)
+                    RAISE_GERROR(error);
+            }
         } else if (TYPE(arg1) == T_ARRAY) {
             data = ALLOCA_N(char*, RARRAY(arg1)->len);
             for (i=0; i < RARRAY(arg1)->len; i++) {
 		data[i] = RVAL2CSTR(RARRAY(arg1)->ptr[i]);
             }
             buf = gdk_pixbuf_new_from_xpm_data((const char**)data);
+            if (buf == NULL){
+                rb_gc();
+                buf = gdk_pixbuf_new_from_xpm_data((const char**)data);
+                if (buf == NULL)
+                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+            }
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st arguments");
         }

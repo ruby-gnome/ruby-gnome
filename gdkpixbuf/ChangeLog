@@ -1,3 +1,7 @@
+2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Retry once if Gdk::Pixbuf.new is failed.
+
 2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c:  Apply enum/flags.

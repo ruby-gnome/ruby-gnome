@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/10/07 13:03:22 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -16,18 +16,20 @@
 
 #define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
 
-/*
 static VALUE
 gdkwin_initialize(self, parent, attributes, attributes_mask)
-    VALUE self;
-    VALUE red, green, blue;
+    VALUE self, parent, attributes, attributes_mask;
 {
+    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+/*
     GdkWindow* win;
 
     win = gdk_window_new(_SELF(parent), xxx, NUM2INT(attributes_mask));
     G_INITIALIZE(self, win);
+*/
     return Qnil;
 }
+/*
 GdkWindow*  gdk_window_new                  (GdkWindow *parent,
                                              GdkWindowAttr *attributes,
                                              gint attributes_mask);
@@ -810,9 +812,7 @@ Init_gtk_gdk_window()
 {
     VALUE gdkWindow = G_DEF_CLASS(GDK_TYPE_WINDOW, "Window", mGdk);
 
-/*
     rb_define_method(gdkWindow, "initialize", gdkwin_initialize, 3);
-*/
    rb_define_method(gdkWindow, "window_type", gdkwin_get_window_type, 0);
    rb_define_singleton_method(gdkWindow, "at_pointer", gdkwin_s_at_pointer, 0);
    rb_define_singleton_method(gdkWindow, "foreign", gdkwin_foreign, -1);
