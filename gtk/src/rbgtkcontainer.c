@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2004/01/28 16:44:12 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -397,33 +397,26 @@ cont_s_child_property(self, property_name)
     g_type_class_unref(oclass);
     return result;
 }
-/*
+
 static VALUE
-cont_s_install_child_property(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+cont_s_install_child_property(self, prop_id, spec)
+    VALUE self, prop_id, spec;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkContainerClass* gclass;
-    GParamSpec* pspec;
-    VALUE pspec_obj, prop_id;
+    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registerd class",
                  rb_class2name(self));
 
-    rb_scan_args(argc, argv, "11", &pspec_obj, &prop_id);
-    pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
+    gclass = GTK_CONTAINER_CLASS(g_type_class_ref(cinfo->gtype));
+    gtk_container_class_install_child_property(gclass, 
+                                               NUM2UINT(prop_id), pspec);
 
-    gclass = (GtkContainerClass *)g_type_class_ref(cinfo->gtype);
-    gtk_container_class_install_child_property(
-        gclass, NIL_P(prop_id) ? 1: NUM2INT(prop_id), 
-        pspec);
-
-    return Qnil;
+    return self;
 }
-*/
+
 static VALUE
 cont_s_child_properties(argc, argv, self)
     int argc;
@@ -437,7 +430,8 @@ cont_s_child_properties(argc, argv, self)
     VALUE ary;
     int i;
 
-    rb_scan_args(argc, argv, "01", &inherited_too);
+    if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
+        inherited_too = Qtrue;
 
     props = gtk_container_class_list_child_properties(oclass, &n_properties);
 
@@ -451,6 +445,236 @@ cont_s_child_properties(argc, argv, self)
     g_type_class_unref(oclass);
     return ary;
 }
+
+/**********************************************************************/
+
+static VALUE proc_mod_eval;
+static GQuark q_ruby_setter;
+static GQuark q_ruby_getter;
+
+static VALUE
+cont_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE params_hash;
+    GObject* gobj;
+    
+    rb_scan_args(argc, argv, "01", &params_hash);
+
+    if (!NIL_P(params_hash))
+        Check_Type(params_hash, T_HASH);
+
+    gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
+
+    RBGTK_INITIALIZE(self, gobj);
+    return Qnil;
+}
+
+// FIXME: use rb_protect
+static void
+get_prop_func(GObject* object,
+              guint property_id,
+              GValue* value,
+              GParamSpec* pspec)
+{
+    ID ruby_getter = (ID)g_param_spec_get_qdata(pspec, q_ruby_getter);
+    if (!ruby_getter) {
+        gchar* name = g_strdup(g_param_spec_get_name(pspec));
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_getter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_getter, (gpointer)ruby_getter);
+        g_free(name);
+    }
+
+    {
+        VALUE ret = rb_funcall(GOBJ2RVAL(object), ruby_getter, 0);
+        rbgobj_rvalue_to_gvalue(ret, value);
+    }
+}
+
+// FIXME: use rb_protect
+static void
+set_prop_func(GObject* object,
+              guint property_id,
+              const GValue* value,
+              GParamSpec* pspec)
+{
+    ID ruby_setter = (ID)g_param_spec_get_qdata(pspec, q_ruby_setter);
+    if (!ruby_setter) {
+        gchar* name = g_strconcat(g_param_spec_get_name(pspec), "=", NULL);
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_setter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_setter, (gpointer)ruby_setter);
+        g_free(name);
+    }
+
+    rb_funcall(GOBJ2RVAL(object), ruby_setter, 1, GVAL2RVAL(value));
+}
+
+// FIXME: use rb_protect
+static void
+get_child_prop_func(GtkContainer* container,
+                    GtkWidget*    child,
+                    guint         property_id,
+                    GValue*       value,
+                    GParamSpec*   pspec)
+{
+    ID ruby_getter = (ID)g_param_spec_get_qdata(pspec, q_ruby_getter);
+    if (!ruby_getter) {
+        gchar* name = g_strconcat("get_", g_param_spec_get_name(pspec), NULL);
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_getter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_getter, (gpointer)ruby_getter);
+        g_free(name);
+    }
+
+    {
+        VALUE ret = rb_funcall(GOBJ2RVAL(container), ruby_getter, 1, GOBJ2RVAL(child));
+        rbgobj_rvalue_to_gvalue(ret, value);
+    }
+}
+
+// FIXME: use rb_protect
+static void
+set_child_prop_func(GtkContainer* container,
+                    GtkWidget*    child,
+                    guint         property_id,
+                    const GValue* value,
+                    GParamSpec*   pspec)
+{
+    ID ruby_setter = (ID)g_param_spec_get_qdata(pspec, q_ruby_setter);
+    if (!ruby_setter) {
+        gchar* name = g_strconcat("set_", g_param_spec_get_name(pspec), NULL);
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_setter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_setter, (gpointer)ruby_setter);
+        g_free(name);
+    }
+
+    rb_funcall(GOBJ2RVAL(container), ruby_setter, 2, GOBJ2RVAL(child), GVAL2RVAL(value));
+}
+
+// FIXME: use rb_protect
+static void
+class_init_func(gpointer g_class, gpointer class_data)
+{
+    GObjectClass* g_class1 = G_OBJECT_CLASS(g_class);
+    GtkContainerClass* g_class2 = GTK_CONTAINER_CLASS(g_class);
+
+    g_class1->set_property = set_prop_func;
+    g_class1->get_property = get_prop_func;
+
+    g_class2->set_child_property = set_child_prop_func;
+    g_class2->get_child_property = get_child_prop_func;
+
+#if 0
+    VALUE class_init_proc = (VALUE)class_data;
+    rb_funcall(proc_mod_eval, rb_intern("call"), 2,
+               GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class)), class_init_proc);
+#endif
+}
+
+static VALUE
+type_register(int argc, VALUE* argv, VALUE self)
+{
+    VALUE type_name, flags;
+    volatile VALUE class_init_proc = Qnil;
+    GType parent_type;
+    GTypeInfo* info;
+
+    rb_scan_args(argc, argv, "03", &type_name, &info, &flags);
+
+    {
+        const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
+        if (cinfo->klass == self)
+            rb_raise(rb_eTypeError, "already registered");
+    }
+
+    {
+        VALUE superclass = rb_funcall(self, rb_intern("superclass"), 0);
+        const RGObjClassInfo* cinfo = CLASS2CINFO(superclass);
+        if (cinfo->klass != superclass)
+            rb_raise(rb_eTypeError, "super class must be registered to GLib");
+        parent_type = cinfo->gtype;
+    }
+
+    if (NIL_P(type_name)){
+        VALUE s = rb_funcall(self, rb_intern("name"), 0);
+
+        if (strlen(StringValuePtr(s)) == 0)
+            rb_raise(rb_eTypeError, "can't determine type name");        
+
+        type_name = rb_funcall(
+            rb_eval_string("lambda{|x| x.gsub(/::/,'') }"),
+            rb_intern("call"), 1, s);
+    }
+
+    {
+        GTypeQuery query;
+        g_type_query(parent_type, &query);
+
+        info = g_new0(GTypeInfo, 1);
+        info->class_size     = query.class_size;
+        info->base_init      = NULL;
+        info->base_finalize  = NULL;
+        info->class_init     = class_init_func;
+        info->class_finalize = NULL;
+        info->class_data     = (gpointer)class_init_proc;
+        info->instance_size  = query.instance_size;
+        info->n_preallocs    = 0;
+        info->instance_init  = NULL;
+        info->value_table    = NULL;
+    }
+
+    {
+        GType type = g_type_register_static(parent_type,
+                                            StringValuePtr(type_name),
+                                            info,
+                                            NIL_P(flags) ? 0 : NUM2INT(flags));
+        G_RELATIVE(self, class_init_proc);
+
+        rbgobj_register_class(self, type, TRUE, TRUE);
+
+        {
+            RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class(self);
+            cinfo->flags |= RBGOBJ_DEFINED_BY_RUBY;
+        }
+
+        {
+            GType parent = g_type_parent(type);
+            const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(parent);
+            VALUE m = rb_define_module_under(self, RubyGtkContainerHookModule);
+
+            if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
+                rb_define_method(m, "initialize", cont_initialize, -1);
+            }
+
+            rb_include_module(self, m);
+        }
+
+        return Qnil;
+    }
+}
+/**********************************************************************/
+
 
 void 
 Init_gtk_container()
@@ -479,9 +703,16 @@ Init_gtk_container()
     rb_define_method(gContainer, "unset_focus_chain", cont_unset_focus_chain, 0);
     rb_define_singleton_method(gContainer, "child_property", cont_s_child_property, 1);
     rb_define_singleton_method(gContainer, "child_properties", cont_s_child_properties, -1);
-/*
-    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, -1);
-*/
+    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, 2);
+
+    q_ruby_getter = g_quark_from_static_string("__ruby_getter");
+    q_ruby_setter = g_quark_from_static_string("__ruby_setter");
+
+    rb_define_singleton_method(gContainer, "type_register", type_register, -1);
+
+    rb_global_variable(&proc_mod_eval);
+    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
+
     G_DEF_SETTERS(gContainer);
 
     rb_global_variable(&type_to_prop_setter_table);
