@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2004/03/27 16:46:17 $
+  $Date: 2004/03/27 16:53:06 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -96,7 +96,7 @@ rpango_parse_markup(argc, argv, self)
         text = CSTR2RVAL(gtext);
         g_free(gtext);
     }
-    return rb_ary_new3(3, pattr_list, text,
+    return rb_ary_new3(3, attr_list, text,
                        accel_char ? rb_str_new(&c, 1) : Qnil);
 }
 
