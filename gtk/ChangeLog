@@ -1,3 +1,9 @@
+2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkgc.c: Support GTK+-2.2.x.
+	(Call rbgobj_boxed_abstract_but_create_instance_class() 
+        because GdkGC changes as Abstract class in GTK+-2.2.x ... why?).
+	
 2003-02-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Add Gtk::Widget#saved_state, #visible?, #focus?, 

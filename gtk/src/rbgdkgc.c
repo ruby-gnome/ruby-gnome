@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2003/02/02 09:33:17 $
+  $Date: 2003/02/09 04:51:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -230,6 +230,8 @@ void
 Init_gtk_gdk_gc()
 {
     VALUE gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
+
+    rbgobj_boxed_abstract_but_create_instance_class(GDK_TYPE_GC);
 
     rb_define_method(gdkGC, "initialize", gdkgc_initialize, 1);
     rb_define_method(gdkGC, "set_foreground", gdkgc_set_foreground, 1);
