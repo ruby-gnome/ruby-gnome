@@ -6,3 +6,4 @@ module GConf
 end
 
 GLib::Log.set_log_domain(GConf::LOG_DOMAIN)
+GLib::Log.set_log_domain("GConf-Backends")
