@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-dateedit.c,v 1.5 2002/10/20 07:33:51 tkubo Exp $ */
+/* $Id: rbgnome-dateedit.c,v 1.6 2002/12/26 15:13:43 mutoh Exp $ */
 /* based on libgnomeui/gnome-dateedit.h */
 
 /* Gnome::DateEdit widget for Ruby/GNOME2
@@ -53,56 +53,12 @@ dateedit_initialize(argc, argv, self)
 }
 
 static VALUE
-dateedit_set_time(self, the_time)
-    VALUE self, the_time;
-{
-    struct timeval tv;
-
-    tv = rb_time_timeval(the_time);
-    gnome_date_edit_set_time(_SELF(self), tv.tv_sec);
-    return self;
-}
-
-static VALUE
-dateedit_get_time(self)
-    VALUE self;
-{
-    time_t result = gnome_date_edit_get_time(_SELF(self));
-    return rb_funcall(rb_cTime, id_at, 1, LONG2NUM(result));
-}
-
-static VALUE
 dateedit_set_popup_range(self, low_hour, up_hour)
     VALUE self, low_hour, up_hour;
 {
     gnome_date_edit_set_popup_range(_SELF(self),
                                     NUM2INT(low_hour), NUM2INT(up_hour));
     return self;
-}
-
-static VALUE
-dateedit_set_flags(self, flags)
-    VALUE self, flags;
-{
-    gnome_date_edit_set_flags(_SELF(self), NUM2INT(flags));
-    return self;
-}
-
-static VALUE
-dateedit_get_flags(self)
-    VALUE self;
-{
-    int flags;
-    flags = gnome_date_edit_get_flags(_SELF(self));
-    return INT2NUM(flags);
-}
-
-static VALUE
-dateedit_get_initial_time(self)
-    VALUE self;
-{
-    time_t result = gnome_date_edit_get_initial_time(_SELF(self));
-    return rb_funcall(rb_cTime, id_at, 1, LONG2NUM(result));
 }
 
 void
@@ -120,12 +76,5 @@ Init_gnome_dateedit(mGnome)
 
     /* Instance methods */
     rb_define_method(gnoDateEdit, "initialize", dateedit_initialize, -1);
-    rb_define_method(gnoDateEdit, "set_time", dateedit_set_time, 1);
-    rb_define_method(gnoDateEdit, "time", dateedit_get_time, 0);
     rb_define_method(gnoDateEdit, "set_popup_range",  dateedit_set_popup_range, 2);
-    rb_define_method(gnoDateEdit, "set_flags", dateedit_set_flags, 1);
-    rb_define_method(gnoDateEdit, "flags", dateedit_get_flags, 0);
-    rb_define_method(gnoDateEdit, "initial_time", dateedit_get_initial_time, 0);
-
-    G_DEF_SETTERS(gnoDateEdit);
 }

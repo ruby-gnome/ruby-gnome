@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page-standard.c,v 1.1 2002/10/20 07:33:51 tkubo Exp $ */
+/* $Id: rbgnome-druid-page-standard.c,v 1.2 2002/12/26 15:13:43 mutoh Exp $ */
 
 #include "rbgnome.h"
 
@@ -31,54 +31,7 @@ dstandard_initialize(argc, argv, self)
     return Qnil;
 }
 
-static VALUE
-dstandard_set_title(self, title)
-    VALUE self, title;
-{
-    gnome_druid_page_standard_set_title(_SELF(self), RVAL2CSTR(title));
-    return self;
-}
-
-static VALUE
-dstandard_set_logo(self, logo_image)
-    VALUE self, logo_image;
-{
-    gnome_druid_page_standard_set_logo(_SELF(self), _PIXBUF(logo_image));
-    return self;
-}
-
-static VALUE
-dstandard_set_top_watermark(self, top_watermark_image)
-    VALUE self, top_watermark_image;
-{
-    gnome_druid_page_standard_set_top_watermark(_SELF(self), _PIXBUF(top_watermark_image));
-    return self;
-}
-
-static VALUE
-dstandard_set_title_foreground(self, color)
-    VALUE self, color;
-{
-    gnome_druid_page_standard_set_title_foreground(_SELF(self), _COLOR(color));
-    return self;
-}
-
-static VALUE
-dstandard_set_background(self, color)
-    VALUE self, color;
-{
-    gnome_druid_page_standard_set_background(_SELF(self), _COLOR(color));
-    return self;
-}
-
-static VALUE
-dstandard_set_logo_background(self, color)
-    VALUE self, color;
-{
-    gnome_druid_page_standard_set_logo_background(_SELF(self), _COLOR(color));
-    return self;
-}
-
+/* Why Isn't this defined as property? */
 static VALUE
 dstandard_set_contents_background(self, color)
     VALUE self, color;
@@ -105,12 +58,6 @@ Init_gnome_druid_page_standard(mGnome)
     VALUE gnoDruidPageStandard = G_DEF_CLASS(GNOME_TYPE_DRUID_PAGE_STANDARD, "DruidPageStandard", mGnome);
 
     rb_define_method(gnoDruidPageStandard, "initialize", dstandard_initialize, -1);
-    rb_define_method(gnoDruidPageStandard, "set_title", dstandard_set_title, 1);
-    rb_define_method(gnoDruidPageStandard, "set_logo", dstandard_set_logo, 1);
-    rb_define_method(gnoDruidPageStandard, "set_top_watermark", dstandard_set_top_watermark, 1);
-    rb_define_method(gnoDruidPageStandard, "set_title_foreground", dstandard_set_title_foreground, 1);
-    rb_define_method(gnoDruidPageStandard, "set_background", dstandard_set_background, 1);
-    rb_define_method(gnoDruidPageStandard, "set_logo_background", dstandard_set_logo_background, 1);
     rb_define_method(gnoDruidPageStandard, "set_contents_background", dstandard_set_contents_background, 1);
     rb_define_method(gnoDruidPageStandard, "append_item", dstandard_append_item, 3);
 

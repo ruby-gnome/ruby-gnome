@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-href.c,v 1.4 2002/10/14 13:56:22 tkubo Exp $ */
+/* $Id: rbgnome-href.c,v 1.5 2002/12/26 15:13:44 mutoh Exp $ */
 /* based on libgnomeui/gnome-href.h */
 
 /* Gnome::HRef widget for Ruby/GNOME2
@@ -58,38 +58,6 @@ href_initialize(argc, argv, self)
     return Qnil;
 }
 
-static VALUE
-href_set_url(self, url)
-    VALUE self, url;
-{
-    gnome_href_set_url(_SELF(self), RVAL2CSTR(url));
-    return self;
-}
-
-static VALUE
-href_get_url(self)
-    VALUE self;
-{
-    const gchar *result = gnome_href_get_url(_SELF(self));
-    return result ? rb_str_new2(result) : Qnil;
-}
-
-static VALUE
-href_set_text(self, text)
-    VALUE self, text;
-{
-    gnome_href_set_text(_SELF(self), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-href_get_text(self)
-    VALUE self;
-{
-    const gchar *result = gnome_href_get_text(_SELF(self));
-    return result ? rb_str_new2(result) : Qnil;
-}
-
 void
 Init_gnome_href(mGnome)
     VALUE mGnome;
@@ -97,12 +65,5 @@ Init_gnome_href(mGnome)
     VALUE gnoHRef = G_DEF_CLASS(GNOME_TYPE_HREF, "HRef", mGnome);
 
     rb_define_method(gnoHRef, "initialize", href_initialize, -1);
-    rb_define_method(gnoHRef, "set_url", href_set_url, 1);
-    rb_define_method(gnoHRef, "url", href_get_url, 0);
-    rb_define_method(gnoHRef, "set_text", href_set_text, 1);
-    rb_define_method(gnoHRef, "text", href_get_text, 0);
-
-    G_DEF_SETTER(gnoHRef, "url");
-    G_DEF_SETTER(gnoHRef, "text");
 }
 

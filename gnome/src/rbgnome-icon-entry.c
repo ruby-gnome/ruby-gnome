@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-entry.c,v 1.4 2002/10/14 13:56:22 tkubo Exp $ */
+/* $Id: rbgnome-icon-entry.c,v 1.5 2002/12/26 15:13:44 mutoh Exp $ */
 /* based on libgnomeui/gnome-icon-entry.h */
 
 /* Gnome::IconEntry widget for Ruby/GNOME2
@@ -36,57 +36,6 @@ ientry_initialize(self, history_id, browse_dialog_title)
     return Qnil;
 }
 
-static VALUE
-ientry_set_pixmap_subdir(self, subdir)
-    VALUE self, subdir;
-{
-    gnome_icon_entry_set_pixmap_subdir(_SELF(self), RVAL2CSTR(subdir));
-    return self;
-}
-
-static VALUE
-ientry_get_filename(self)
-    VALUE self;
-{
-    gchar *result = gnome_icon_entry_get_filename(_SELF(self));
-    VALUE obj;
-    SET_STR_AND_GFREE(obj, result);
-    return obj;
-}
-
-static VALUE
-ientry_set_filename(self, filename)
-    VALUE self, filename;
-{
-    gboolean result = gnome_icon_entry_set_filename(_SELF(self), RVAL2CSTR(filename));
-    if (!result)
-        rb_raise(rb_eRuntimeError, "cannot load icon %s", RVAL2CSTR(filename));
-    return self;
-}
-
-static VALUE
-ientry_set_browse_dialog_title(self, browse_dialog_title)
-    VALUE self, browse_dialog_title;
-{
-    gnome_icon_entry_set_browse_dialog_title(_SELF(self), RVAL2CSTR(browse_dialog_title));
-    return self;
-}
-
-static VALUE
-ientry_set_history_id(self, history_id)
-    VALUE self, history_id;
-{
-    gnome_icon_entry_set_history_id(_SELF(self), RVAL2CSTR(history_id));
-    return self;
-}
-
-static VALUE
-ientry_pick_dialog(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gnome_icon_entry_pick_dialog(_SELF(self)));
-}
-
 void
 Init_gnome_icon_entry(mGnome)
     VALUE mGnome;
@@ -95,15 +44,4 @@ Init_gnome_icon_entry(mGnome)
 
     /* Instance methods */
     rb_define_method(gnoIconEntry, "initialize", ientry_initialize, 2);
-    rb_define_method(gnoIconEntry, "set_pixmap_subdir", ientry_set_pixmap_subdir, 1);
-    rb_define_method(gnoIconEntry, "filename", ientry_get_filename, 0);
-    rb_define_method(gnoIconEntry, "set_filename", ientry_set_filename, 0);
-    rb_define_method(gnoIconEntry, "set_browse_dialog_title", ientry_set_browse_dialog_title, 1);
-    rb_define_method(gnoIconEntry, "set_history_id", ientry_set_history_id, 1);
-    rb_define_method(gnoIconEntry, "pick_dialog", ientry_pick_dialog, 0);
-
-    G_DEF_SETTER(gnoIconEntry, "pixmap_subdir");
-    G_DEF_SETTER(gnoIconEntry, "filename");
-    G_DEF_SETTER(gnoIconEntry, "browse_dialog_title");
-    G_DEF_SETTER(gnoIconEntry, "history_id");
 }

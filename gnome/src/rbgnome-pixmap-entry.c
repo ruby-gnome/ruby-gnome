@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-pixmap-entry.c,v 1.4 2002/10/13 14:11:42 tkubo Exp $ */
+/* $Id: rbgnome-pixmap-entry.c,v 1.5 2002/12/26 15:13:44 mutoh Exp $ */
 /* based on libgnomeui/gnome-pixmap-entry.h */
 
 /* Gnome::PixmapEntry widget for Ruby/GNOME2
@@ -106,10 +106,8 @@ Init_gnome_pixmap_entry(mGnome)
     rb_define_method(gnoPixmapEntry, "set_pixmap_subdir", pentry_set_pixmap_subdir, 1);
     rb_define_method(gnoPixmapEntry, "scrolled_window", pentry_scrolled_window, 0);
     rb_define_method(gnoPixmapEntry, "preview_widget", pentry_preview_widget, 0);
-    rb_define_method(gnoPixmapEntry, "set_preview", pentry_set_preview, 1);
     rb_define_method(gnoPixmapEntry, "set_preview_size", pentry_set_preview_size, 2);
     rb_define_method(gnoPixmapEntry, "filename", pentry_get_filename, 0);
 
     G_DEF_SETTER(gnoPixmapEntry, "pixmap_subdir");
-    G_DEF_SETTER(gnoPixmapEntry, "preview");
 }

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-color-picker.c,v 1.4 2002/10/19 16:36:25 tkubo Exp $ */
+/* $Id: rbgnome-color-picker.c,v 1.5 2002/12/26 15:13:43 mutoh Exp $ */
 /* based on libgnomeui/gnome-color-picker.h */
 
 /* Gnome::ColorPicker widget for Ruby-Gnome
@@ -162,54 +162,6 @@ cpicker_get_i16(self)
     return ary;
 }
 
-static VALUE
-cpicker_set_dither(self, dither)
-    VALUE self, dither;
-{
-    gnome_color_picker_set_dither(_SELF(self),
-                                  RTEST(dither));
-    return self;
-}
-
-static VALUE
-cpicker_get_dither(self)
-    VALUE self;
-{
-    return gnome_color_picker_get_dither(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-cpicker_set_use_alpha(self, use_alpha)
-    VALUE self, use_alpha;
-{
-    gnome_color_picker_set_use_alpha(_SELF(self),
-                                     RTEST(use_alpha));
-    return self;
-}
-
-static VALUE
-cpicker_get_use_alpha(self)
-    VALUE self;
-{
-    return gnome_color_picker_get_use_alpha(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-cpicker_set_title(self, title)
-    VALUE self, title;
-{
-    gnome_color_picker_set_title(_SELF(self),
-                                 RVAL2CSTR(title));
-    return self;
-}
-
-static VALUE
-cpicker_get_title(self)
-    VALUE self;
-{
-    return rb_str_new2(gnome_color_picker_get_title(_SELF(self)));
-}
-
 void
 Init_gnome_color_picker(mGnome)
     VALUE mGnome;
@@ -224,12 +176,4 @@ Init_gnome_color_picker(mGnome)
     rb_define_method(gnoColorPicker, "i8", cpicker_get_i8, 0);
     rb_define_method(gnoColorPicker, "set_i16", cpicker_set_i16, 4);
     rb_define_method(gnoColorPicker, "i16", cpicker_get_i16, 0);
-    rb_define_method(gnoColorPicker, "set_dither", cpicker_set_dither, 1);
-    rb_define_method(gnoColorPicker, "dither?", cpicker_get_dither, 0);
-    rb_define_method(gnoColorPicker, "set_use_alpha", cpicker_set_use_alpha, 1);
-    rb_define_method(gnoColorPicker, "use_alpha?", cpicker_get_use_alpha, 0);
-    rb_define_method(gnoColorPicker, "set_title", cpicker_set_title, 1);
-    rb_define_method(gnoColorPicker, "title", cpicker_get_title, 0);
-
-    G_DEF_SETTERS(gnoColorPicker);
 }
