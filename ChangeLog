@@ -1,3 +1,8 @@
+2005-02-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: added dummy $makefile_created = true for mkmf.rb in
+	  ruby 1.9.
+
 2005-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, exec_make.rb: Support MSVC++(nmake).

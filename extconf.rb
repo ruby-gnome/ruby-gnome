@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.12 2005/01/31 10:34:33 mutoh Exp $
+  $Id: extconf.rb,v 1.13 2005/02/24 13:02:45 ktou Exp $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
@@ -99,3 +99,4 @@ end
 puts "-----"
 puts "Done."
 
+$makefile_created = true
