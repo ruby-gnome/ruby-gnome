@@ -1,6 +1,17 @@
+2003-08-29  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgstclockentry.c: New file.
+	* src/rbgst.c: Initializes Gst::ClockEntry.
+	* src/rbgst.h: Added macros for Gst::ClockEntry + fixed a critical bug
+	  in ULL conversion.
+	* src/rbgstclock.c: Added a lot of methods + some constants.
+	  Class is now finished.
+	* src/rbgsteventsize.c: Fixed typos in a comment (for API reference).
+	* tests/misc.rb, tests/tc_clock.rb: Added additional tests for Gst::Clock.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-25  Laurent Sansonetti  <laurent@datarescue.be>
 
