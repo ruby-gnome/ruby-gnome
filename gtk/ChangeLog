@@ -1,3 +1,9 @@
+2003-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcombo.c: Remove Gtk::Combo#list, #button, #popup, #popwin, 
+	#set_item_string.
+	Gtk::Combo.new accept an argument as string array.
+
 2003-03-02  KATO Kazuyoshi  <kzys@users.sf.net>
 
 	* sample/gtk-demo/tree_store.rb: File added.
@@ -14,6 +20,7 @@
 
 	* sample/gtk-demo: File added.
 
+>>>>>>> 1.203
 2003-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/toolbar.rb, sample/testgtk/toolbar.rb: 
