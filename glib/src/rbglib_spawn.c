@@ -3,8 +3,8 @@
 
   rbglib_spawn.c -
 
-  $Author: mutoh $
-  $Date: 2004/04/30 17:59:05 $
+  $Author: lrz $
+  $Date: 2004/05/05 19:14:17 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -14,7 +14,7 @@
 #include "rbglib.h"
 #include <errno.h>
 
-static VALUE spawn_error[19];
+static VALUE spawn_error[20];
 
 void
 rbglib_spawn_error(error)
@@ -157,5 +157,4 @@ Init_glib_spawn()
 #ifdef ELIBBAD
     spawn_error[G_SPAWN_ERROR_LIBBAD] = rb_const_get(rb_mErrno, rb_intern("ELIBBAD"));
 #endif
-
 }
