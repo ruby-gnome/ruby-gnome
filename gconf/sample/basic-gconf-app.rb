@@ -6,7 +6,7 @@
 #
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: basic-gconf-app.rb,v 1.1 2004/07/03 07:38:02 mutoh Exp $
+# $Id: basic-gconf-app.rb,v 1.2 2005/01/29 16:52:32 mutoh Exp $
 
 require 'gconf2'
 require 'gtk2'
@@ -96,7 +96,7 @@ class BasicGConfApp
 			else
 				@client[key] = text
 			end
-			return false
+			false
 		}
 
 		entry.signal_connect('focus_out_event', &commit_entry)

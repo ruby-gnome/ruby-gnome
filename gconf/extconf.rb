@@ -2,38 +2,21 @@
 extconf.rb for Ruby/GConf extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "gconf2"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..') 
+SRCDIR = TOPDIR + '/gconf/src'
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
-pkgname   = 'gconf-2.0'
+PKGConfig.have_package("gconf-2.0") or exit 1
+setup_win32(PACKAGE_NAME)
 
-PKGConfig.have_package(pkgname) or exit 1
-check_win32
+add_depend_package("glib2", "glib/src", TOPDIR)
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
-
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
-
-srcdir = File.dirname($0) == "." ? "." :
-  File.expand_path(File.dirname($0) + "/src")
-
-Dir.mkdir('src') unless File.exist? 'src'
-Dir.chdir "src"
-begin
-  create_makefile("gconf2", srcdir)
-ensure
-  Dir.chdir('..')
-end
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GCONF2_COMPILATION")
 
 create_top_makefile
