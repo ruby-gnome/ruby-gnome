@@ -1,3 +1,9 @@
+2003-03-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib_convert.c: implement
+	- uri = GLib.filename_to_uri(filename[, hostname])
+	- filename, hostname = GLib.filename_from_uri(uri)
+
 2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgutil.h: #include rbglib.h for RUBY_GLIB2_VAR.

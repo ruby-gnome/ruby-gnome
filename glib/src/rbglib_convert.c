@@ -3,8 +3,8 @@
 
   rbglib_convert.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/10 16:46:05 $
+  $Author: sakai $
+  $Date: 2003/03/12 06:41:18 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
@@ -123,6 +123,49 @@ rbglib_m_filename_from_utf8(self, str)
     return s;
 }
 
+static VALUE
+rbglib_m_filename_to_uri(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE filename, hostname, s;
+    GError *err = NULL;
+    gchar* ret;
+
+    rb_scan_args(argc, argv, "11", &filename, &hostname);
+
+    ret = g_filename_to_uri(StringValuePtr(filename),
+                            NIL_P(hostname) ? NULL : StringValuePtr(hostname),
+                            &err);
+
+    if (err)
+        RAISE_GERROR(err);
+    s = rb_str_new2(ret);
+    g_free(ret);
+    return s;
+}
+
+static VALUE
+rbglib_m_filename_from_uri(self, str)
+    VALUE self, str;
+{
+    GError *err = NULL;
+    VALUE s;
+    gchar* filename;
+    char* hostname;
+
+    filename = g_filename_from_uri(StringValuePtr(str), &hostname, &err);
+
+    if (err)
+        RAISE_GERROR(err);
+    s = rb_ary_new3(2, rb_str_new2(filename),
+                    hostname ? rb_str_new2(hostname) : Qnil);
+    g_free(filename);
+    g_free(hostname);
+    return s;
+}
+
 void
 Init_glib_convert()
 {
@@ -135,4 +178,7 @@ Init_glib_convert()
     rb_define_module_function(mGLib, "locale_from_utf8", rbglib_m_locale_from_utf8, 1);
     rb_define_module_function(mGLib, "filename_to_utf8", rbglib_m_filename_to_utf8, 1);
     rb_define_module_function(mGLib, "filename_from_utf8", rbglib_m_filename_from_utf8, 1);
+
+    rb_define_module_function(mGLib, "filename_to_uri", rbglib_m_filename_to_uri, -1);
+    rb_define_module_function(mGLib, "filename_from_uri", rbglib_m_filename_from_uri, 1);
 }
