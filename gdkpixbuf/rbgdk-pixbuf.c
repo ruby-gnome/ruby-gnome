@@ -123,7 +123,7 @@ scale(argc, argv, self)
     VALUE args[10];
     int dest_width, dest_height;
     GdkInterpType interp_type = GDK_INTERP_NEAREST;
-    GdkPixbuf* dest;
+    GdkPixbuf* dest = NULL;
 
     rb_scan_args(argc, argv, "28", &args[0], &args[1], &args[2], &args[3], &args[4], &args[5], &args[6], &args[7], &args[8], &args[9]);
 
@@ -148,8 +148,8 @@ scale(argc, argv, self)
         gdk_pixbuf_scale(_SELF(self), dest, 
                          NUM2INT(args[0]), NUM2INT(args[1]), 
                          NUM2INT(args[2]), NUM2INT(args[3]),
-                         DBL2INT(args[4]), DBL2INT(args[5]),
-                         DBL2INT(args[6]), DBL2INT(args[7]),
+                         NUM2DBL(args[4]), NUM2DBL(args[5]),
+                         NUM2DBL(args[6]), NUM2DBL(args[7]),
                          interp_type);
         ret = GOBJ2RVAL(dest);
 	break;

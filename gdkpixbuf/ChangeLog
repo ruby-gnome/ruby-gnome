@@ -1,5 +1,11 @@
 2002-11-05  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
 
+	* rbgdk-pixbuf.c: Bugfix for "undefined symbol: DBL2INT"
+	(pointed out by KUBO Takehiro <kubo@jiubao.org>)
+	* README: Add copyright.
+
+2002-11-05  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
+
 	* rbgdk-pixbuf.c: Apply Ruby-GNOME2 rules.Code cleanup.Some modified.
 	* sample/test.rb: Removed.
 	* sample/*.rb: Follow Ruby/GTK2, rbgdk-pixbuf.c changes.

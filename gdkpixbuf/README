@@ -7,13 +7,21 @@ GdkPixbuf 2.0
 Ruby/GTK2
 
 INSTALL INSTRUCTIONS
-===========
+====================
 
 $ ruby extconf.rb /location/of/ruby-gtk/source/directory
 $ make
 # make install
 $ ruby sample/test.rb some_image
 
+Copying
+=======
+    Copyright (c) 2002 Ruby-GNOME2 Project Team
+
+    This program is free software.
+    You can distribute/modify this program under the terms of
+    the GNU LIBRARY General Public License version 2.
+
 CONTACT INFORMATION
-==========
+===================
 Ruby-GNOME2 Website is http://ruby-gnome2.sf.net/.
