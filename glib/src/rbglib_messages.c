@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2004/11/03 07:39:41 $
+  $Date: 2004/11/20 17:10:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -20,6 +20,9 @@
 static VALUE rbglib_log_handler_procs;
 static ID id_call;
 
+#define _RAISE(domain, id, message) \
+    rb_raise(rb_eRuntimeError, "%s-%s **:%s", domain, id, message)
+
 static void
 rbglib_log_handler(log_domain, log_level, message, user_data)
     const gchar *log_domain;
@@ -27,13 +30,24 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     const gchar *message;
     gpointer user_data;
 {
-    if (TYPE(user_data) == T_CLASS){
-        rb_funcall((VALUE)user_data, id_call, 3,
-                   CSTR2RVAL(log_domain), INT2NUM(log_level),
-                   CSTR2RVAL(message));
-
-    } else {
+    if (log_level & G_LOG_LEVEL_ERROR){
+        _RAISE(log_domain, "ERROR", message);
+    } else if (log_level & G_LOG_LEVEL_CRITICAL){
+        _RAISE(log_domain, "CRITICAL", message);
+    } else if (RTEST(ruby_debug)){
+        if (log_level & G_LOG_LEVEL_WARNING){
+            _RAISE(log_domain, "WARNING", message);
+        } else if (log_level & G_LOG_LEVEL_MESSAGE){
+            _RAISE(log_domain, "MESSAGE", message);
+        } else if (log_level & G_LOG_LEVEL_INFO){
+            _RAISE(log_domain, "INFO", message);
+        } else if (log_level & G_LOG_LEVEL_DEBUG){
+            _RAISE(log_domain, "DEBUG", message);
+        }
+    } else if (RTEST(ruby_verbose)){
         g_log_default_handler(log_domain, log_level, message, user_data);
+    } else {
+        /* ignored */
     }
 }
 
@@ -41,11 +55,9 @@ static VALUE
 rbglib_m_log_set_handler(self, domain, levels)
     VALUE self, domain, levels;
 {
-    VALUE proc = G_BLOCK_PROC();
     guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                          NUM2INT(levels),
-                                         rbglib_log_handler, (gpointer)proc);
-    G_RELATIVE2(self, proc, UINT2NUM(handler_id), rbglib_log_handler_procs);
+                                         rbglib_log_handler, (gpointer)NULL);
     return UINT2NUM(handler_id);
 }
 

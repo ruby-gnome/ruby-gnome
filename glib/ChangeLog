@@ -1,3 +1,8 @@
+2004-11-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c, src/lib/glib2.rb: 
+	Rewrite code to C for stablity.
+
 2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: Increment version information. 
