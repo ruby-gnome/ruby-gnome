@@ -1,16 +1,15 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: tree_store.rb,v 1.7 2005/02/06 18:25:13 kzys Exp $
 =begin
-  tree_store.rb - Tree View/Tree Store
+= Tree View/Tree Store
 
-  The Gtk::TreeStore is used to store data in tree form, to be
-  used later on by a Gtk::TreeView to display it. This demo builds
-  a simple Gtk::TreeStore and displays it. If you're new to the
-  GtkTreeView widgets and associates, look into the Gtk::ListStore
-  example first.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: tree_store.rb,v 1.6 2005/01/03 18:55:02 mutoh Exp $
+The Gtk::TreeStore is used to store data in tree form, to be
+used later on by a Gtk::TreeView to display it. This demo builds
+a simple Gtk::TreeStore and displays it. If you're new to the
+GtkTreeView widgets and associates, look into the Gtk::ListStore
+example first.
 =end
 require 'common'
 
@@ -30,7 +29,7 @@ module Demo
      TIM_COLUMN,
      OWEN_COLUMN,
      DAVE_COLUMN,
-     
+
      VISIBLE_COLUMN,
      WORLD_COLUMN,
      NUM_COLUMNS,
@@ -73,7 +72,7 @@ module Demo
 	  [ "Mothers' Day", false, false, false, false, false, true ],
 	  [ "Armed Forces Day", false, false, false, false, false, false ],
 	  [ "Memorial Day", true, true, true, true, false, true ],
-	  
+
 	]
       ],
       ['June',
@@ -130,7 +129,7 @@ module Demo
       ],
     ].collect do |month_name, holidays|
       [
-	month_name, 
+	month_name,
 	holidays.collect do |args| TreeItem.new(args) end,
       ]
     end
@@ -153,7 +152,7 @@ module Demo
       vbox.pack_start(sw, true, true, 0)
 
       # create model
-      model = create_model 
+      model = create_model
 
       # create tree view
       treeview = Gtk::TreeView.new(model)
@@ -181,7 +180,7 @@ module Demo
 				 TrueClass,
 				 TrueClass,
 				 TrueClass)
-      
+
       # add data to the tree store
       TOPLEVEL.each do |month_name, holidays|
 	iter = model.append(nil)
@@ -201,19 +200,19 @@ module Demo
 	  child_iter[VISIBLE_COLUMN] = true
 	  child_iter[WORLD_COLUMN] = holiday.world_holiday
 	end
-	
+
       end
-      
+
       return model
     end
 
     def add_columns(treeview)
       model = treeview.model
-      
+
       # column for holiday names
       renderer = Gtk::CellRendererText.new
       renderer.xalign = 0.0
-      
+
       col_offset = treeview.insert_column(-1, 'Holiday',
 					  renderer,
 					  'text' => HOLIDAY_NAME_COLUMN)
@@ -231,7 +230,7 @@ module Demo
 	renderer = Gtk::CellRendererToggle.new
 	renderer.xalign = 0.0
 	eval(%Q[def renderer.column; #{ALEX_COLUMN + i}; end])
-	
+
 	renderer.signal_connect('toggled') do |cell, path|
 	  item_toggled(cell, path, model)
 	end
@@ -244,14 +243,14 @@ module Demo
 	  attributes['activatable'] = WORLD_COLUMN
 	end
 	col_offset = treeview.insert_column(-1, person, renderer, attributes)
-	
+
 	column = treeview.get_column(col_offset - 1)
 	column.sizing = Gtk::TreeViewColumn::FIXED
 	column.fixed_width = 50
 	column.clickable = true
       end
     end
-    
+
     def item_toggled (cell, path_str, model)
       path = Gtk::TreePath.new(path_str)
 

@@ -1,15 +1,14 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: textview.rb,v 1.8 2005/02/06 18:25:13 kzys Exp $
 =begin
-  textview.rb - Text Widget
+= Text Widget/Multiple Views
 
-  The Gtk::TextView widget displays a Gtk::TextBuffer. 
-  One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
-  This demo has two views displaying a single buffer, 
-  and shows off the widget's text formatting features.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: textview.rb,v 1.7 2005/01/03 18:55:02 mutoh Exp $
+The Gtk::TextView widget displays a Gtk::TextBuffer. 
+One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
+This demo has two views displaying a single buffer, 
+and shows off the widget's text formatting features.
 =end
 require 'common'
 

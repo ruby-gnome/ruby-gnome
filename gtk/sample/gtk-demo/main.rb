@@ -5,44 +5,14 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.9 2005/01/30 23:14:15 kzys Exp $
+  $Id: main.rb,v 1.10 2005/02/06 18:25:13 kzys Exp $
 =end
 
 require 'gtk2'
 
+Gtk.init
+
 module Demo
-  INDEX = [
-    ["Application main window",     "appwindow.rb",     :AppWindow],
-    ["Button Boxes",                "button_box.rb",    :ButtonBox],
-    ["Change Display",              "changedisplay.rb", :ChangeDisplay],
-    ["Clipboard", "clipboard.rb", :Clipboard],
-    ["Color Selector",              "colorsel.rb",      :ColorSel],
-    ["Dialog and Message Boxes",    "dialog.rb",        :Dialog],
-    ["Drawing Area",                "drawingarea.rb",   :DrawingArea],
-    ["Entry Completion", "entry_completion.rb", :EntryCompletion],
-    ["Expander", "expander.rb", :Expander],
-    ["Icon View",                   "iconview.rb",      :IconView],
-    ["Images",                      "images.rb",        :Images],
-    ["Menus",                       "menus.rb",         :Menus],
-    ["Paned Widgets",               "panes.rb",         :Panes],
-    ["Pixbufs",                     "pixbufs.rb",       :Pixbufs],
-    ["Rotated Text", "rotated_text.rb", :RotatedText],
-    ["Size Groups",                 "sizegroup.rb",     :SizeGroup],
-    ["Stock Item and Icon Browser", "stock_browser.rb", :StockBrowser],
-    ["Text Widget", nil, nil,
-     [
-        ["HyperText", "hypertext.rb", :HyperText],
-        ["Multiple Views", "textview.rb", :TextView],
-      ]
-    ],
-    ["Tree View",                   nil,                nil,
-      [
-	["Editable Cells", "editable_cells.rb", :EditableCells],
-        ["List Store",     "list_store.rb",     :ListStore],
-        ["Tree Store",     "tree_store.rb",     :TreeStore],
-      ]
-    ],
-  ]
 
   class Main < Gtk::Window
     TITLE_COLUMN, FILENAME_COLUMN, CLASS_COLUMN, ITALIC_COLUMN = 0, 1, 2, 3
@@ -90,8 +60,75 @@ module Demo
       @source_buffer.create_tag('reserved',
                                {'foreground' => 'purple'})
     end
+    
+    def script_info(path)
+      title = nil
+      klass = nil
+      
+      File.open(path) do |file|
+        file.each do |ln|
+          if not title and ln =~ /^=\s+(.*)$/
+            title = $1
+          elsif not klass and ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
+            klass = $1
+          end
+          
+          if title and klass
+            return title, klass.to_sym
+          end
+        end
+      end
+      
+      unless title
+        title = klass.gsub(/([A-Z])/, ' \1').strip
+      end
 
+      return title, klass.to_sym
+    end
 
+    def generate_index 
+      # Target scripts
+      scripts = Dir.glob('*.rb') - %w(common.rb geninclude.rb main.rb)
+
+      # Generate index tree
+      children = {}
+      index = []
+      
+      scripts.each do |fn|
+        title, klass = script_info(fn)
+                
+        if title =~ %r{^(.+?)/(.+)$}
+          parent = $1
+          child = $2
+          
+          unless children[parent]
+            children[parent] = []
+            index += [[parent, nil, nil, []]]
+          end
+          
+          children[parent] += [[child, fn, klass]]
+        else
+          index += [[title, fn, klass]]
+        end
+        
+      end
+
+      # Expand children
+      index.collect! do |row|
+        if row[3]
+          row[3] = children[row[0]]
+        end
+
+        row
+      end
+
+      index.sort! do |a, b|
+        a[0] <=> b[0]
+      end
+
+      index
+    end
+    
     def create_tree
       model = Gtk::TreeStore.new(String, String, String, TrueClass)
 
@@ -102,7 +139,7 @@ module Demo
       selection.set_mode(Gtk::SELECTION_BROWSE)
       tree_view.set_size_request(200, -1)
 
-      append_children(model, INDEX)
+      append_children(model, generate_index)
 
       cell = Gtk::CellRendererText.new
       cell.style = Pango::FontDescription::STYLE_ITALIC
@@ -290,7 +327,6 @@ module Demo
   end
 end
 
-Gtk.init
 
 target = ARGV.shift
 if target

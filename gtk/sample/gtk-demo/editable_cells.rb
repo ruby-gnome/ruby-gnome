@@ -1,14 +1,13 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: editable_cells.rb,v 1.7 2005/02/06 18:25:13 kzys Exp $
 =begin
-  editable_cells - Tree View/Editable Cells
+= Tree View/Editable Cells
 
-  This demo demonstrates the use of editable cells in a Gtk::TreeView. If
-  you're new to the Gtk::TreeView widgets and associates, look into
-  the Gtk::ListStore example first.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: editable_cells.rb,v 1.6 2005/01/03 18:55:02 mutoh Exp $
+This demo demonstrates the use of editable cells in a Gtk::TreeView. If
+you're new to the Gtk::TreeView widgets and associates, look into
+the Gtk::ListStore example first.
 =end
 require 'common'
 
@@ -16,7 +15,7 @@ module Demo
   class EditableCells < BasicWindow
     Item = Struct.new('Item', :number, :product, :editable)
     COLUMN_NUMBER, COLUMN_PRODUCT, COLUMN_EDITABLE, NUM_COLUMNS = *(0..4).to_a
-    
+
     def initialize
       super('Shopping list')
       self.border_width = 5
@@ -33,7 +32,7 @@ module Demo
       vbox.pack_start(sw, true, true, 0)
 
       # create model
-      model = create_model 
+      model = create_model
 
       # create tree view
       treeview = Gtk::TreeView.new(model)
@@ -102,7 +101,7 @@ module Demo
 
     def add_columns(treeview)
       model = treeview.model
-      
+
       # number column
       renderer = Gtk::CellRendererText.new
       renderer.signal_connect('edited') do |*args|
@@ -131,7 +130,7 @@ module Demo
 			       :editable => COLUMN_EDITABLE,
 			     })
     end
-    
+
     def cell_edited(cell, path_string, new_text, model)
       path = Gtk::TreePath.new(path_string)
 

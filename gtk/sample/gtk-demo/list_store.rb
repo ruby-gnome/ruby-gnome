@@ -1,18 +1,17 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: list_store.rb,v 1.5 2005/02/06 18:25:13 kzys Exp $
 =begin
-  list_store.rb - Tree View/List Store
+= Tree View/List Store
 
-  The Gtk::ListStore is used to store data in list form, to be used
-  later on by a Gtk::TreeView to display it. This demo builds a
-  simple Gtk::ListStore and displays it. See the Stock Browser
-  demo for a more advanced example.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: list_store.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+The Gtk::ListStore is used to store data in list form, to be used
+later on by a Gtk::TreeView to display it. This demo builds a
+simple Gtk::ListStore and displays it. See the Stock Browser
+demo for a more advanced example.
 =end
 require 'common'
-    
+
 module Demo
   class ListStore < BasicWindow
     Bug = Struct.new('Bug', :fixed, :number, :severity, :description)
@@ -52,7 +51,7 @@ module Demo
       vbox.pack_start(sw, true, true, 0)
 
       # create tree model
-      model = create_model 
+      model = create_model
 
       # create tree view
       treeview = Gtk::TreeView.new(model)
@@ -70,7 +69,7 @@ module Demo
     def create_model
       # create list store
       store = Gtk::ListStore.new(TrueClass, Integer, String, String)
-      
+
       # add data to the list store
       DATA.each do |bug|
 	iter = store.append
@@ -87,7 +86,7 @@ module Demo
       renderer.signal_connect('toggled') do |cell, path|
 	fixed_toggled(treeview.model, path)
       end
-      
+
       column = Gtk::TreeViewColumn.new('Fixed?',
 				       renderer,
 				       'active' => COLUMN_FIXED)
@@ -124,14 +123,14 @@ module Demo
 
     def fixed_toggled(model, path_str)
       path = Gtk::TreePath.new(path_str)
-      
+
       # get toggled iter
       iter = model.get_iter(path)
       fixed =iter[COLUMN_FIXED]
-      
+
       # do something with the value
       fixed ^= 1
-      
+
       # set new value
       iter[COLUMN_FIXED] = fixed
     end

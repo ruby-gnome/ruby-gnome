@@ -1,3 +1,9 @@
+2005-02-07  KATO Kazuyoshi  <kzys@8-p.info>
+
+	* sample/gtk-demo/main.rb (Demo::Main): Generate demos index from script files.
+	* sample/gtk-demo/editable_cells.rb, list_store.rb, textview.rb, tree_store.rb:
+	Change comment style to follow sample/gtk-demo/main.rb changes.
+
 2005-02-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkentrycompletion.c: Fixed a problem of property setter.
