@@ -1,3 +1,13 @@
+2003-10-14  KATO Kazuyoshi  <kzys@users.sf.net>
+
+	* sample/gtk-demo/changedisplay.rb: Added.
+	* sample/gtk-demo/pixbufs.rb: Added.
+	* sample/gtk-demo/stock_browser.rb: Code cleanup.
+	* sample/gtk-demo/main.rb: Make italic text in active item.
+	Define RubyTokenizer. Code cleanup.
+	* sample/gtk-demo/common.rb: Delete debug message.
+	* src/rbgdkwindow.c: Fix Gdk::Window#user_data.
+
 2003-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkevent.c: Fix a segfault when GLib::Object#signal_emit 
