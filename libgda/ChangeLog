@@ -1,3 +1,9 @@
+2004-01-14  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdarow.c: Added Gda::Row#[].
+	* src/rbgdavalue.c: Added Gda::Value#==.
+	* tests/tc_all.rb: Follow these changes.
+
 2004-01-02  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdacommand.c: The 'options' parameter of Gda::Command.new

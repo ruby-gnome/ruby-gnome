@@ -181,5 +181,15 @@ class TC_everything < Test::Unit::TestCase
         assert list.empty?
         assert_equal(0, list.length)
     end
+
+    def test_row
+        model = Gda::Provider.model
+        model.each_row do |row|
+	    row.size.times do |k|
+            	assert_equal(row.get_value(k), row[k])
+            	assert_equal(row.get_value(k), row[model.get_column_title(k)])
+	    end
+        end
+    end
 end
 

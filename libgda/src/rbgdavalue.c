@@ -57,11 +57,30 @@ static VALUE rb_gda_value_cmp(self, other_value)
                                      RGDA_VALUE(other_value)));
 }
 
+/*
+ * Method: ==(an_other_value)
+ * an_other_value: the other value to be compared to.
+ *
+ * Checks if two Gda::Value objects of the same type contains the same value.
+ *
+ * Returns: true if they both have the same type and contain the same
+ * value, false otherwise.
+ */
+static VALUE rb_gda_value_equ(self, other_value)
+    VALUE self;
+{
+    gboolean ok = FALSE;
+    if (!NIL_P(other_value))
+        ok = gda_value_compare(RGDA_VALUE(self), RGDA_VALUE(other_value)) == 0;
+    return CBOOL2RVAL(ok);
+}
+
 void Init_gda_value(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_VALUE, "Value", mGda);
     
     rb_define_method(c, "to_s", rb_gda_value_to_s, 0);
     rb_define_method(c, "<=>",  rb_gda_value_cmp,  1);
+    rb_define_method(c, "==",   rb_gda_value_equ,  1);
     
     G_DEF_CLASS(GDA_TYPE_VALUE_TYPE, "Type", c);
     G_DEF_CONSTANTS(c, GDA_TYPE_VALUE_TYPE, "GDA_VALUE_");

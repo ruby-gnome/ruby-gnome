@@ -213,6 +213,54 @@ static VALUE rb_gda_row_get_value(self, num)
         : Qnil;
 }
 
+/*
+ * Method: [](key)
+ * key: field index or column name.
+ *
+ * Gets the value in the row indexed by the 'key' parameter.
+ * If the 'key' parameter is a Fixnum, it will be used as an field index.
+ * If the 'key' parameter is a String, it will be used as the column's name.
+ * 
+ * Returns: a Gda::Value object if successful, or nil if there was an error.
+ */
+static VALUE
+rb_gda_row_index(self, key)
+    VALUE self, key;
+{
+    const GdaValue *value;
+    GdaRow *row;
+    int pos;
+   
+    value = NULL;
+    row = RGDA_ROW(self);
+    pos = -1;
+    
+    if (TYPE(key) == T_STRING) {
+        int i;
+
+        for (i = 0; i < gda_row_get_length(RGDA_ROW(self)); i++) {
+            GdaDataModel *model = gda_row_get_model(row);
+            if (model != NULL && strcmp(gda_data_model_get_column_title(model, i),
+                                        RVAL2CSTR(key)) == 0) {
+                pos = i;
+                break;
+            }
+        }
+    }
+    else if (TYPE(key) == T_FIXNUM
+          || TYPE(key) == T_BIGNUM
+          || TYPE(key) == T_FLOAT) {
+        pos = FIX2INT(key);
+    }
+
+    if (pos != -1)
+        value = gda_row_get_value(row, pos);
+
+    return value != NULL
+        ? RGDA_VALUE_NEW(value)
+        : Qnil;
+}
+
 void Init_gda_row(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_ROW, "Row", mGda);
   
@@ -230,6 +278,7 @@ void Init_gda_row(void) {
     rb_define_alias(c, "size", "length");
 
     rb_define_method(c, "get_value", rb_gda_row_get_value, 1);
+    rb_define_method(c, "[]",        rb_gda_row_index,     1);
 
     G_DEF_SETTERS(c);
 
