@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/10/07 13:16:46 $
+  $Date: 2005/01/29 11:42:49 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -344,7 +344,7 @@ Init_pango_attribute()
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(pattr, "allocate", attr_s_allocate, 0);
 #else
-    rb_define_alloc_func(pattr, attr_s_allocate);
+    rb_define_alloc_func(pattr, (VALUE(*)_((VALUE)))attr_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(pattr, "new", attr_s_new, -1);

@@ -2,57 +2,44 @@
 extconf.rb for Ruby/Pango extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "pango"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/pango/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
 PKGConfig.have_package('pango') or exit 1
-check_win32
+setup_win32(PACKAGE_NAME)
 
 have_func("pango_layout_iter_get_type")
 have_func("pango_layout_set_ellipsize")
 have_func("pango_layout_get_font_description")
+have_func("pango_render_part_get_type")
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
+add_depend_package("glib2", "glib/src", TOPDIR)
 
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
+if $distcleanfiles
+  $distcleanfiles << "rbpangoinits.c"
+  $distcleanfiles << "rbpangoversion.h"
 end
-set_output_lib('libruby-pango.a')
-
-$distcleanfiles << "rbpangoinits.c" if $distcleanfiles
 
 begin
-  srcdir = File.dirname($0) == "." ? "." :
-    File.expand_path(File.dirname($0) + "/src")
-
   Dir.mkdir('src') unless File.exist? 'src'
   Dir.chdir "src"
 
   pango_version = PKGConfig.modversion("pango")
 
   File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
-  system("ruby #{srcdir}/makeinits.rb #{srcdir}/*.c > rbpangoinits.c")
-  system("ruby #{srcdir}/makeversion.rb #{pango_version} > rbpangoversion.h")
-
-  $objs = []
-  Dir.glob("#{srcdir}/*.c") do |f|
-    f = File.basename(f)
-    f.sub!(/.c$/, ".o")
-    add_obj(f)
-  end
-  add_obj("rbpangoinits.o")
+  File.delete("rbpangoversion.h") if FileTest.exist?("rbpangoversion.h")
+  system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
+  system("ruby #{SRCDIR}/makeversion.rb #{pango_version} > rbpangoversion.h")
 
   $defs << "-DRUBY_PANGO_COMPILATION"
-  create_makefile("pango", srcdir)
+  create_makefile(PACKAGE_NAME, SRCDIR)
 ensure
   Dir.chdir('..')
 end

@@ -3,6 +3,7 @@ require 'pango.so'
 
 
 module Pango
+  LOG_DOMAIN = "Pango"
   class AttrList
     def each(text = nil)
       iter = iterator
@@ -17,3 +18,6 @@ module Pango
     end
   end
 end
+
+GLib::Log.set_log_domain(Pango::LOG_DOMAIN)
+

@@ -4,7 +4,7 @@
   rbpangorenderer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/28 09:24:45 $
+  $Date: 2005/01/29 11:42:49 $
 
   Copyright (C) 2005 Masao Mutoh 
 ************************************************/
@@ -49,8 +49,13 @@ static VALUE
 renderer_draw_rectangle(self, part, x, y, width, height)
     VALUE self, part, x, y, width, height;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_rectangle(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                   NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
+#else
+    pango_renderer_draw_rectangle(_SELF(self), NUM2INT(part),
+                                  NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
+#endif
     return self;
 }
 
@@ -67,10 +72,16 @@ static VALUE
 renderer_draw_trapezoid(self, part, y1, x11, x21, y2, x12, x22)
     VALUE self, part, y1, x11, x21, y2, x12, x22;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_trapezoid(_SELF(self), 
                                   RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                   NUM2DBL(y1), NUM2DBL(x11), NUM2DBL(x21),
                                   NUM2DBL(y2), NUM2DBL(x12), NUM2DBL(x22));
+#else
+    pango_renderer_draw_trapezoid(_SELF(self), NUM2INT(part),
+                                  NUM2DBL(y1), NUM2DBL(x11), NUM2DBL(x21),
+                                  NUM2DBL(y2), NUM2DBL(x12), NUM2DBL(x22));
+#endif
     return self;
 }
 
@@ -103,7 +114,11 @@ static VALUE
 renderer_part_changed(self, part)
     VALUE self, part;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_part_changed(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
+#else
+    pango_renderer_part_changed(_SELF(self), NUM2INT(part));
+#endif
     return self;
 }
 
@@ -111,8 +126,13 @@ static VALUE
 renderer_set_color(self, part, color)
     VALUE self, part, color;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                              (PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR));
+#else
+    pango_renderer_set_color(_SELF(self), NUM2INT(part),
+                             (PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR));
+#endif
     return self;
 }
 
@@ -120,8 +140,12 @@ static VALUE
 renderer_get_color(self, part)
     VALUE self, part;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     PangoColor* color = pango_renderer_get_color(_SELF(self),
                                                  RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
+#else
+    PangoColor* color = pango_renderer_get_color(_SELF(self),NUM2INT(part));
+#endif
     return color ? BOXED2RVAL(color, PANGO_TYPE_COLOR) : Qnil;
 }
 
@@ -168,8 +192,10 @@ Init_pangorenderer()
     G_DEF_SETTERS(renderer);
 
     /* PangoRenderPart */
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", renderer);
-    G_DEF_CONSTANTS(renderer, PANGO_TYPE_ALIGNMENT, "PANGO_RENDER_");
+    G_DEF_CONSTANTS(renderer, PANGO_TYPE_RENDER_PART, "PANGO_RENDER_");
+#endif
 
 #endif
 }
