@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: sakai $
-  $Date: 2003/08/22 06:41:45 $
+  $Author: mpovolny $
+  $Date: 2003/08/28 11:35:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -312,7 +312,7 @@ treeview_row_expanded(self, path)
 
 static VALUE
 treeview_get_path_at_pos(self, x, y)
-    VALUE self;
+    VALUE self, x, y;
 {
     GtkTreePath* path;
     GtkTreeViewColumn* column;
@@ -320,7 +320,7 @@ treeview_get_path_at_pos(self, x, y)
     gboolean ret;
 
     ret = gtk_tree_view_get_path_at_pos(_SELF(self), 
-                                        INT2NUM(x), INT2NUM(y),
+                                        NUM2INT(x), NUM2INT(y),
                                         &path, &column, &cell_x, &cell_y);
     return ret ? rb_ary_new3(4, 
                              (path == NULL) ? Qnil : TREEPATH2RVAL(path),
