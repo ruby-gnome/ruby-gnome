@@ -38,7 +38,6 @@ gdkx = PKGConfig.variable(pkgname, "target")
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
-have_func('_gtk_accel_group_attach')
 have_func("XReadBitmapFileData")
 
 #
@@ -56,8 +55,6 @@ begin
   Dir.chdir "src"
 
   obj_ext = ".#{$OBJEXT}"
-  rubylibdir = Config::CONFIG["rubylibdir"]
-  sitelibdir = Config::CONFIG["sitelibdir"]
 
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   $libs = $libs.split(/\s/).uniq.join(' ')

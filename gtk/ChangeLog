@@ -1,3 +1,10 @@
+2003-03-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: remove unused variables: gdkx, rubylibdir, sitelibdir.
+
+	* extconf.rb: stop cheking _gtk_accel_group_attach() which is no
+	longer used.
+
 2003-03-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeiter.c: Add Gtk::TreeIter#==. 
