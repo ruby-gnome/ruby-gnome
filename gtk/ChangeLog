@@ -1,3 +1,10 @@
+2005-02-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Added Gdk::Window#configure_finished, 
+	#enable_synchronized_configure, #set_focus_on_map for GTK+-2.6.
+	* src/rbgdkdraw.c: Added Gdk::Drawable#draw_trapezoids, #draw_glyphs_transformed
+	for GTK+-2.6.
+
 2005-02-07  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* sample/gtk-demo/main.rb (Demo::Main): Generate demos index from script files.

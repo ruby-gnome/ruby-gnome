@@ -4,10 +4,9 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2005/02/07 16:56:39 $
 
-  Copyright (C) 2002-2004 Masao Mutoh
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -229,6 +228,39 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+/*
+  trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
+ */
+static VALUE
+gdkdraw_draw_trapezoids(self, gc, trapezoids)
+    VALUE self, gc, trapezoids;
+{
+    GdkTrapezoid *gtrapezoids;
+    gint i, len;
+
+    Check_Type(trapezoids, T_ARRAY);
+
+    len = RARRAY(trapezoids)->len;
+
+    gtrapezoids = ALLOCA_N(GdkTrapezoid, len);
+    for (i = 0; i < len; i++) {
+        Check_Type(RARRAY(trapezoids)->ptr[i], T_ARRAY);
+        if (RARRAY(RARRAY(trapezoids)->ptr[i])->len < 7) {
+            rb_raise(rb_eArgError, "trapezoids %d should be array of size 6", i);
+        }
+        gtrapezoids[i].y1 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[0]);
+        gtrapezoids[i].x11 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[1]);
+        gtrapezoids[i].x21 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[2]);
+        gtrapezoids[i].y2 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[3]);
+        gtrapezoids[i].x12 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[4]);
+        gtrapezoids[i].x22 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[5]);
+    }
+    gdk_draw_trapezoids(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), gtrapezoids, len);
+    return self; 
+}
+#endif
+
 static VALUE
 gdkdraw_glyphs(self, gc, font, x, y, glyphs)
     VALUE self, gc, font, x, y, glyphs;
@@ -238,6 +270,20 @@ gdkdraw_glyphs(self, gc, font, x, y, glyphs)
                     (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkdraw_glyphs_transformed(self, gc, matrix, font, x, y, glyphs)
+    VALUE self, gc, matrix, font, x, y, glyphs;
+{
+    gdk_draw_glyphs_transformed(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
+                                NIL_P(matrix) ? (PangoMatrix*)NULL : (PangoMatrix*)(RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)),
+                                PANGO_FONT(RVAL2GOBJ(font)),
+                                NUM2INT(x), NUM2INT(y), 
+                                (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
+    return self;
+}
+#endif
 
 static VALUE
 gdkdraw_layout_line(argc, argv, self)
@@ -385,7 +431,13 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_rectangle", gdkdraw_draw_rect, 6);
     rb_define_method(gdkDrawable, "draw_arc", gdkdraw_draw_arc, 8);
     rb_define_method(gdkDrawable, "draw_polygon", gdkdraw_draw_poly, 3);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkDrawable, "draw_trapezoids", gdkdraw_draw_trapezoids, 2);
+#endif
     rb_define_method(gdkDrawable, "draw_glyphs", gdkdraw_glyphs, 5);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkDrawable, "draw_glyphs_transformed", gdkdraw_glyphs_transformed, 6);
+#endif
     rb_define_method(gdkDrawable, "draw_layout_line", gdkdraw_layout_line, -1);
     rb_define_method(gdkDrawable, "draw_layout", gdkdraw_layout, -1);
     rb_define_method(gdkDrawable, "draw_drawable", gdkdraw_draw_drawable, 8);

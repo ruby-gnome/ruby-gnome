@@ -4,9 +4,9 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Date: 2005/02/07 16:56:39 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -452,6 +452,28 @@ gdkwin_get_internal_paint_info(self)
                        INT2NUM(x_offset), INT2NUM(y_offset));
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkwin_configure_finished(self)
+    VALUE self;
+{
+    gdk_window_configure_finished(_SELF(self));
+    return self;
+}
+
+static VALUE
+gdkwin_enable_synchronized_configure(self)
+    VALUE self;
+{
+    gdk_window_enable_synchronized_configure(_SELF(self));
+
+    if (rb_block_given_p()) {
+        rb_ensure(rb_yield, self, gdkwin_configure_finished, self);
+    }
+    return self;
+}
+#endif
+
 static VALUE
 gdkwin_set_user_data(self, user_data)
     VALUE self, user_data;
@@ -475,6 +497,16 @@ gdkwin_set_accept_focus(self, accept_focus)
     VALUE self, accept_focus;
 {
     gdk_window_set_accept_focus(_SELF(self), RTEST(accept_focus));
+    return self;
+}
+#endif
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkwin_set_focus_on_map(self, focus_on_map)
+    VALUE self, focus_on_map;
+{
+    gdk_window_set_focus_on_map(_SELF(self), RTEST(focus_on_map));
     return self;
 }
 #endif
@@ -886,8 +918,8 @@ gdkwin_foreign_new(argc, argv, self)
 #else
     	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
         rb_warn("Not supported in GTK+-2.0.x.");
-#endif
-    	break;
+#endif 
+   	break;
     }
     if (win == NULL)
         return Qnil;
@@ -992,10 +1024,17 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "thaw_updates", gdkwin_thaw_updates, 0);
     rb_define_method(gdkWindow, "process_updates", gdkwin_process_updates, 1);
     rb_define_method(gdkWindow, "internal_paint_info", gdkwin_get_internal_paint_info, 0);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkWindow, "configure_finished", gdkwin_configure_finished, 0);
+    rb_define_method(gdkWindow, "enable_synchronized_configure", gdkwin_enable_synchronized_configure, 0);
+#endif
     rb_define_method(gdkWindow, "set_user_data", gdkwin_set_user_data, 1);
     rb_define_method(gdkWindow, "set_override_redirect", gdkwin_set_override_redirect, 1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gdkWindow, "set_accept_focus", gdkwin_set_accept_focus, 1);
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkWindow, "set_focus_on_map", gdkwin_set_focus_on_map, 1);
 #endif
     rb_define_method(gdkWindow, "shape_combine_mask", gdkwin_shape_combine_mask, 3);
     rb_define_method(gdkWindow, "shape_combine_region", gdkwin_shape_combine_region, 3);

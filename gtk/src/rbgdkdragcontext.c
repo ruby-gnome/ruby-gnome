@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2003/11/24 08:32:06 $
+  $Date: 2005/02/07 16:56:39 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -233,6 +233,15 @@ gdkdragcontext_drag_status(self, action, time)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkdragcontext_drag_drop_succeeded(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_drag_drop_succeeded(_SELF(self)));
+}
+#endif
+
 void
 Init_gtk_gdk_dragcontext()
 {
@@ -260,7 +269,9 @@ Init_gtk_gdk_dragcontext()
     rb_define_method(gdkDragContext, "drag_motion", gdkdragcontext_drag_motion, 7);
     rb_define_method(gdkDragContext, "drop_finish", gdkdragcontext_drop_finish, 2);
     rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
-
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkDragContext, "drag_drop_succeeded?", gdkdragcontext_drag_drop_succeeded, 0);
+#endif
 	/* Constants */
     G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", gdkDragContext);
     G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", gdkDragContext);
