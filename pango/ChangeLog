@@ -1,3 +1,9 @@
+2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: add set_output_lib call.
+
+	* extconf.rb: fix to allow building in a foreign directory.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
    * extconf.rb: Exit with 1 when the package is not found.

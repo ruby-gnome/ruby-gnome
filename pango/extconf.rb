@@ -22,20 +22,29 @@ if /cygwin|mingw/ =~ RUBY_PLATFORM
     $LDFLAGS << " -L#{top}/#{d}"
   }
 end
+set_output_lib('libruby-pango.a')
 
 begin
-  File.delete("src/rbpangoinits.c") if FileTest.exist?("src/rbpangoinits.c")
+  srcdir = File.dirname($0) == "." ? "." :
+    File.expand_path(File.dirname($0) + "/src")
 
+  Dir.mkdir('src') unless File.exist? 'src'
   Dir.chdir "src"
-  system("ruby makeinits.rb *.c > rbpangoinits.c")
+
+  File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
+  system("ruby #{srcdir}/makeinits.rb #{srcdir}/*.c > rbpangoinits.c")
+
   $objs = []
-  Dir.glob("*.c") do |f|
+  Dir.glob("#{srcdir}/*.c") do |f|
     f = File.basename(f)
     f.sub!(/.c$/, ".o")
     $objs.push f
   end
+  $objs << "rbpangoinits.o"
+  $objs.uniq!
+
   $defs << "-DRUBY_PANGO_COMPILATION"
-  create_makefile("pango", File.expand_path(File.dirname($0) + "/src"))
+  create_makefile("pango", srcdir)
 ensure
   Dir.chdir('..')
 end
