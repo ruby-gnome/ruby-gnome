@@ -261,19 +261,15 @@ class CanvasSamplePrimitives < Gtk::VBox
   end
 
   def plant_flower(root, x, y, anchor, aa)
-    if aa
-      im = Gnome::Canvas.load_alpha("flower.png")
-    else
-      im = GdkImlib::Image.new("flower.png")
-    end
+    im = Gdk::Pixbuf.new("flower.png")
 
     unless im.nil?
-      image = root.item_new(Gnome::CanvasImage,
-			    "image", im,
+      image = root.item_new(Gnome::CanvasPixbuf,
+			    "pixbuf", im,
 			    "x", x,
 			    "y", y,
-			    "width", im.rgb_width,
-			    "height", im.rgb_height,
+			    "width", im.get_width,
+			    "height", im.get_height,
 			    "anchor", anchor)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
@@ -282,18 +278,14 @@ class CanvasSamplePrimitives < Gtk::VBox
   end
 
   def setup_images(root, aa)
-    if aa
-      im = Gnome::Canvas.load_alpha("toroid.png")
-    else
-      im = GdkImlib::Image.new("toroid.png")
-    end
+    im = Gdk::Pixbuf.new("toroid.png")
     unless im.nil?
-      image = root.item_new(Gnome::CanvasImage,
-			    "image", im,
+      image = root.item_new(Gnome::CanvasPixbuf,
+			    "pixbuf", im,
 			    "x", 100.0,
 			    "y", 225.0,
-			    "width", im.rgb_width,
-			    "height", im.rgb_height,
+			    "width", im.get_width,
+			    "height", im.get_height,
 			    "anchor", Gtk::ANCHOR_CENTER)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|

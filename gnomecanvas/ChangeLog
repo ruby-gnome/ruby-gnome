@@ -1,5 +1,22 @@
 2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
 
+	* extconf.rb: add.
+	* src/rbgnomecanvas.[ch]: add.
+	* src/*.c: change almost all functions for the Ruby-GNOME2 framework.
+	* src/rbgnome-canvas-util.c:
+	  - remove s_load_alpha(), get_gnome_canvas_points(), make_gnome_canvas_points()
+	* src/rbgnome-canvas-item.c:
+	  - remove get_gdkimlib_image(), citem_get().
+	  - add rbgnomecanvas_se_properties().
+	* src/rbgnome-canvas-group.c:
+	  - remove rbgnome_register_citem_type(), group_child_bounds().
+	  - add group_do_item_construct().
+	* sample/flower.png, sample/toroid.png: add.
+	* canvas.rb, sample/canvas-features.rb, sample/canvas-fifteen.rb,
+	sample/canvas-primitives.rb: change for Ruby/GnomeCanvas2.
+
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-canvas-group.c, src/rbgnome-canvas-item.c,
 	src/rbgnome-canvas-util.c, src/rbgnome-canvas.c:
 	Move from ruby-gnome2/gnome/src/.

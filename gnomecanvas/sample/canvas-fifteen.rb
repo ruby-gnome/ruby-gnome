@@ -7,9 +7,9 @@ class CanvasSampleFifteen < Gtk::VBox
 	return
       end
     end
-    dialog = Gnome::MessageBox.new("You stud, you win!", Gnome::MessageBox::INFO, "OK")
-    dialog.set_modal(true)
-    dialog.run_and_close()
+#    dialog = Gnome::MessageBox.new("You stud, you win!", Gnome::MessageBox::INFO, "OK")
+#    dialog.set_modal(true)
+#    dialog.run_and_close()
   end
 
   def piece_event(item, event)

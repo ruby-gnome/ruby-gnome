@@ -1,4 +1,7 @@
 class CanvasSampleFeatures < Gtk::VBox
+
+  PAD_SMALL = 4
+
   def item_event(item, event)
     if (event.event_type != Gdk::BUTTON_PRESS) || (event.button != 1)
       return
@@ -12,8 +15,8 @@ class CanvasSampleFeatures < Gtk::VBox
 
   def initialize
 
-    super(false, Gnome::PAD_SMALL)
-    border_width = Gnome::PAD_SMALL
+    super(false, PAD_SMALL)
+    border_width = PAD_SMALL
     show()
 
     # Instructions

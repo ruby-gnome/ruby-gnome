@@ -27,19 +27,25 @@ Original Copyright:
 
 =end
 
-require 'sample'
+require 'gtk2'
+require 'gdk_pixbuf2'
+require 'libart2'
+require 'gnomecanvas2'
+
 require 'canvas-arrowhead'
 require 'canvas-primitives'
 require 'canvas-fifteen'
 require 'canvas-features'
 
-class CanvasSample < SampleApp
+class CanvasSample < Gtk::Window
   def initialize
-    super(true, "testGNOME", "Canvas")
-    set_policy(true, true, false)
+    super(Gtk::WINDOW_TOPLEVEL)
+    self.signal_connect("delete_event") do |widget, event|
+      Gtk::main_quit()
+    end
 
     notebook = Gtk::Notebook.new()
-    set_contents(notebook)
+    self.add(notebook)
     notebook.show()
 
     notebook.append_page(CanvasSamplePrimitives.new(false), Gtk::Label.new("Primitives"))
@@ -50,3 +56,7 @@ class CanvasSample < SampleApp
     show()
   end
 end
+
+canvas = CanvasSample.new()
+Gtk::main()
+
