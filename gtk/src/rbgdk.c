@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: mutoh $
+  $Date: 2004/08/07 15:51:37 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -138,7 +138,7 @@ gdk_s_set_x_error_handler(self)
     G_RELATIVE(self, rb_x_error);
     XSetErrorHandler(rbgdk_x_error);
 #else
-    rb_warn("Not supported in this environment.");
+    rb_warn("Not supported on this environment.");
 #endif
     return Qnil;
 }
@@ -152,7 +152,7 @@ gdk_s_set_x_io_error_handler(self)
     G_RELATIVE(self, rb_x_io_error);
     XSetIOErrorHandler(rbgdk_x_io_error);
 #else
-    rb_warn("Not supported in this environment.");
+    rb_warn("Not supported on this environment.");
 #endif
     return Qnil;
 }
@@ -326,10 +326,8 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "set_program_class", gdk_s_set_program_class, 1);
     rb_define_module_function(mGdk, "display", gdk_s_get_display, 0);
 
-#ifdef HAVE_X11_XLIB_H
     rb_define_module_function(mGdk, "set_x_error_handler", gdk_s_set_x_error_handler , 0);
     rb_define_module_function(mGdk, "set_x_io_error_handler", gdk_s_set_x_io_error_handler , 0);
-#endif
     rb_define_module_function(mGdk, "screen_width", gdk_s_screen_width, 0);
     rb_define_module_function(mGdk, "screen_width_mm", gdk_s_screen_width_mm, 0);
     rb_define_module_function(mGdk, "screen_height", gdk_s_screen_height, 0);

@@ -1,5 +1,6 @@
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdk.c: Fix a warning on Win32. 
 	* src/rbgtkcontainer.c: Added Gtk::Container#each_forall. 
 
 2004-08-06  Masao Mutoh  <mutoh@highway.ne.jp>
@@ -15,7 +16,8 @@
 
 2004-08-03  Geoff Youngs <g@intersect-uk.co.uk>
 
-	* src/rbgtkradiobutton.c: Gtk::RadioButton.new(other_button) to create empty radio button in same group as other_button.
+	* src/rbgtkradiobutton.c: Gtk::RadioButton.new(other_button) to create 
+	empty radio button in same group as other_button.
 	
 2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
