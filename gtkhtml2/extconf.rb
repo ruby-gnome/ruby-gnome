@@ -13,6 +13,7 @@ require 'mkmf-gnome2'
 PKGConfig.have_package('libgtkhtml-2.0') or exit 1
 check_win32
 
+have_func('html_view_scroll_to_node')
 have_func('html_box_block_get_containing_width')
 have_func('html_box_embedded_new')
 have_func('html_box_table_get_top_offset')
