@@ -1,6 +1,6 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: entry_completion.rb,v 1.1 2005/01/31 00:01:13 kzys Exp $
+# $Id: entry_completion.rb,v 1.2 2005/02/02 15:07:38 mutoh Exp $
 =begin
 = Entry Completion
 
@@ -46,8 +46,7 @@ module Demo
       completion.model = create_completion_model
 
       # Use model column 0 as the text column
-      # FIXME: completion.text_column = 0
-      completion.set_text_column(0)
+      completion.text_column = 0
     end
 
 
