@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/26 16:29:52 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -261,6 +261,13 @@ signal_setup_args(obj, sig, argc, params, args)
 	    return;
 	}
     }
+   if (rb_obj_is_kind_of(obj, gNotebook)) {
+       if (signal_comp(signame, "switch_page", GTK_TYPE_NOTEBOOK)) {
+           rb_ary_push(args, make_notepage((GtkNotebookPage*) GTK_VALUE_OBJECT(params[0])));
+           rb_ary_push(args, INT2FIX(GTK_VALUE_INT(params[1])));
+           return; 
+       } 
+   }
   
     params1 = params;
     for (i=0; i<argc; i++) {
