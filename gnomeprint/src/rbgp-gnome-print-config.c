@@ -114,7 +114,7 @@ gp_config_get_length(VALUE self, VALUE key)
 {
   gdouble value;
   gboolean result;
-  const GnomePrintUnit *unit;
+  const GnomePrintUnit *unit = ALLOCA_N(GnomePrintUnit, 1);
   
   result = gnome_print_config_get_length(_SELF(self),
                                          RVAL2CSTR(key),
@@ -123,7 +123,7 @@ gp_config_get_length(VALUE self, VALUE key)
   if (result) {
     return rb_ary_new3(2,
                        rb_float_new(value),
-                       GOBJ2RVAL((GnomePrintUnit *)unit));
+                       CONST_GPU2RVAL(gnome_print_unit_get_by_name(unit->name)));
   } else {
     return Qnil;
   }
@@ -231,7 +231,7 @@ gp_config_set_length(VALUE self, VALUE key, VALUE value, VALUE unit)
   return CBOOL2RVAL(gnome_print_config_set_length(_SELF(self),
                                                   RVAL2CSTR(key),
                                                   NUM2DBL(value),
-                                                  RVAL2GOBJ(unit)));
+                                                  RVAL2GPU(unit)));
 }
 
 static VALUE

@@ -20,9 +20,6 @@
 #include <libgnomeprint/gnome-print-unit.h>
 #include <libgnomeprint/libgnomeprint-enum-types.h>
 
-#define RVAL2GPU(obj) ((GnomePrintUnit *)RVAL2BOXED(obj, GNOME_TYPE_PRINT_UNIT))
-#define GPU2RVAL(obj) (BOXED2RVAL(obj, GNOME_TYPE_PRINT_UNIT))
-#define CONST_GPU2RVAL(obj) (GPU2RVAL((GnomePrintUnit *)obj))
 #define RVAL2GPUB(obj) (RVAL2GFLAGS(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
 #define GPUB2RVAL(obj) (GFLAGS2RVAL(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
 
@@ -170,6 +167,20 @@ gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
   return result;
 }
 
+static VALUE
+gp_generic_convert_distance(int argc, VALUE *argv, VALUE self)
+{
+  VALUE distance, to, ctmscale, devicescale;
+  
+  rb_scan_args(argc, argv, "22", &distance, &to, &ctmscale, &devicescale);
+
+  if (NIL_P(ctmscale) || NIL_P(devicescale)) {
+    return gp_convert_distance(self, distance, to);
+  } else {
+    return gp_convert_distance_full(self, distance, to, ctmscale, devicescale);
+  }
+}
+
 
 void
 Init_gnome_print_unit(VALUE mGnome)
@@ -208,7 +219,7 @@ Init_gnome_print_unit(VALUE mGnome)
 
 /* Utility */
   rb_define_method(cUnit, "convert_distance",
-                   gp_convert_distance, 2);
+                   gp_generic_convert_distance, -1);
   rb_define_method(cUnit, "convert_distance_full",
                    gp_convert_distance_full, 4);
 }

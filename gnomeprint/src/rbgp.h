@@ -33,6 +33,10 @@
 #define GP_GPA_PRINTER(o) (GPA_PRINTER(RVAL2GOBJ(o)))
 #define GP_GPA_SETTINGS(o) (GPA_SETTINGS(RVAL2GOBJ(o)))
 
+#define RVAL2GPU(obj) ((GnomePrintUnit *)RVAL2BOXED(obj, GNOME_TYPE_PRINT_UNIT))
+#define GPU2RVAL(obj) (BOXED2RVAL(obj, GNOME_TYPE_PRINT_UNIT))
+#define CONST_GPU2RVAL(obj) (GPU2RVAL((GnomePrintUnit *)obj))
+
 extern GType gnome_print_paper_get_type(void);
 
 #define GNOME_TYPE_PRINT_PRINT_PAPER (gnome_print_paper_get_type())
