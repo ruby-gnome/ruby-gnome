@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2003/11/06 16:53:43 $
+  $Author: mutoh $
+  $Date: 2003/12/20 15:26:28 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -63,6 +63,9 @@ gobj_s_gobject_new(argc, argv, self)
     VALUE result;
 
     rb_scan_args(argc, argv, "01", &params_hash);
+
+    if (!NIL_P(params_hash))
+        Check_Type(params_hash, T_HASH);
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registerd class",
@@ -379,6 +382,9 @@ gobj_initialize(argc, argv, self)
     GObject* gobj;
     
     rb_scan_args(argc, argv, "01", &params_hash);
+
+    if (!NIL_P(params_hash))
+        Check_Type(params_hash, T_HASH);
 
     gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
 
