@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/02/04 16:23:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,14 +15,6 @@
 #include "global.h"
 
 #define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
-
-/*
-GtkWidget*  gtk_widget_new                  (GtkType type,
-                                             const gchar *first_property_name,
-                                             ...);
-void        gtk_widget_destroyed            (GtkWidget *widget,
-                                             GtkWidget **widget_pointer);
-*/
 
 static VALUE
 widget_unparent(self)
@@ -181,15 +173,18 @@ widget_set_accel_path(self, accel_path, accel_group)
     return self;
 }
 
-/*
-GList*      gtk_widget_list_accel_closures  (GtkWidget *widget);
-*/
+static VALUE
+widget_list_accel_closures(self)
+    VALUE self;
+{
+    return GLIST2ARY2(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
+}
 
 static VALUE
 widget_event(self, event)
     VALUE self, event;
 {
-    return INT2NUM(gtk_widget_event(_SELF(self), RVAL2GEV(event)));
+    return gtk_widget_event(_SELF(self), RVAL2GEV(event)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -214,6 +209,13 @@ widget_intersect(self, area, intersect)
     return INT2NUM(gtk_widget_intersect(_SELF(self),
                                         (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
                                         (GdkRectangle*)RVAL2BOXED(intersect, GDK_TYPE_RECTANGLE)));
+}
+
+static VALUE
+widget_is_focus(self)
+    VALUE self;
+{
+    return gtk_widget_is_focus(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -615,14 +617,6 @@ widget_reset_shapes(self)
 }
 
 static VALUE
-widget_set_app_paintable(self, app_paintable)
-    VALUE self, app_paintable;
-{
-    gtk_widget_set_app_paintable(_SELF(self), RTEST(app_paintable));
-    return self;
-}
-
-static VALUE
 widget_set_double_buffered(self, double_buffered)
     VALUE self, double_buffered;
 {
@@ -663,10 +657,16 @@ widget_mnemonic_activate(self, group_cycling)
     return gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)) ? Qtrue : Qfalse;
 }
 
-/*
-void        gtk_widget_class_install_style_property
-                                            (GtkWidgetClass *klass,
-                                             GParamSpec *pspec);
+/* Can we implement this?
+static VALUE
+widget_class_install_style_property(self, pspec)
+    VALUE self, pspec;
+{
+    gtk_widget_class_install_style_property((GtkWidgetClass*)G_OBJECT_GET_CLASS(_SELF(self)), 
+                                            RVAL2GOBJ(pspec));
+    return self;
+}
+
 void        gtk_widget_class_install_style_property_parser
                                             (GtkWidgetClass *klass,
                                              GParamSpec *pspec,
@@ -674,40 +674,110 @@ void        gtk_widget_class_install_style_property_parser
 GParamSpec* gtk_widget_class_find_style_property
                                             (GtkWidgetClass *klass,
                                              const gchar *property_name);
-GParamSpec** gtk_widget_class_list_style_properties
-                                            (GtkWidgetClass *klass,
-                                             guint *n_properties);
+Is this exist in GTK+-2.2?
+static VALUE
+widget_style_properties(self)
+    VALUE self;
+{
+    GtkWidgetClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
+    gint n_properties;
+    GParamSpec** props;
+    VALUE ary;
+    int i;
 
-GdkRegion*  gtk_widget_region_intersect     (GtkWidget *widget,
-                                             GdkRegion *region);
-gint        gtk_widget_send_expose          (GtkWidget *widget,
-                                             GdkEvent *event);
+    props = gtk_widget_class_list_style_properties(oclass, &n_properties);
+
+    ary = rb_ary_new2(n_properties);
+    for (i = 0; i < n_properties; i++)
+        rb_ary_store(ary, i, rb_str_new2(props[i]->name));
+
+    g_type_class_unref(oclass);
+    return ary;
+}
+*/
+
+static VALUE
+widget_region_intersect(self, region)
+    VALUE self, region;
+{
+    return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self), 
+                                                  (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
+                      GDK_TYPE_REGION);
+}
+
+static VALUE
+widget_send_expose(self, event)
+    VALUE self, event;
+{
+    return INT2NUM(gtk_widget_send_expose(_SELF(self), RVAL2GEV(event)));
+}
+
+/* They are needless method for ruby.
 void        gtk_widget_style_get            (GtkWidget *widget,
                                              const gchar *first_property_name,
                                              ...);
-void        gtk_widget_style_get_property   (GtkWidget *widget,
-                                             const gchar *property_name,
-                                             GValue *value);
 void        gtk_widget_style_get_valist     (GtkWidget *widget,
                                              const gchar *first_property_name,
                                              va_list var_args);
-AtkObject*  gtk_widget_get_accessible       (GtkWidget *widget);
-gboolean    gtk_widget_child_focus          (GtkWidget *widget,
-                                             GtkDirectionType direction);
-void        gtk_widget_child_notify         (GtkWidget *widget,
-                                             const gchar *child_property);
-void        gtk_widget_freeze_child_notify  (GtkWidget *widget);
-gboolean    gtk_widget_get_child_visible    (GtkWidget *widget);
-GtkSettings* gtk_widget_get_settings        (GtkWidget *widget);
-GtkClipboard* gtk_widget_get_clipboard      (GtkWidget *widget,
-                                             GdkAtom selection);
-GdkDisplay* gtk_widget_get_display          (GtkWidget *widget);
-GdkWindow*  gtk_widget_get_root_window      (GtkWidget *widget);
-GdkScreen*  gtk_widget_get_screen           (GtkWidget *widget);
-gboolean    gtk_widget_has_screen           (GtkWidget *widget);
 */
 
-/* This method's name will conflict to gtk_widget_size_requst
+static VALUE
+widget_style_get_property(self, property_name)
+    VALUE self, property_name;
+{
+    GValue value = {0, };
+    gtk_widget_style_get_property(_SELF(self), RVAL2CSTR(property_name),
+                                  &value);
+    return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
+}
+
+static VALUE
+widget_get_accessible(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(_SELF(self));
+}
+
+static VALUE
+widget_child_focus(self, direction)
+    VALUE self, direction;
+{
+    return gtk_widget_child_focus(_SELF(self), NUM2INT(direction)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+widget_child_notify(self, child_property)
+    VALUE self, child_property;
+{
+    gtk_widget_child_notify(_SELF(self), RVAL2CSTR(child_property));
+    return self;
+}
+
+static VALUE
+widget_freeze_child_notify(self)
+    VALUE self;
+{
+    gtk_widget_freeze_child_notify(_SELF(self));
+    return self;
+}
+
+static VALUE
+widget_get_child_visible(self)
+    VALUE self;
+{
+    return gtk_widget_get_child_visible(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+widget_get_settings(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
+}
+
+/* This method's name will conflict to gtk_widget_size_requst.
+   But gtk_widget_size_request returns Gtk::Requisiton and
+   it include width and height.
 void gtk_widget_get_size_request     (GtkWidget *widget,
                                       gint *width,
                                       gint *height);
@@ -761,8 +831,6 @@ DEFINE_IS_WIDGET(PARENT_SENSITIVE);
 DEFINE_IS_WIDGET(IS_SENSITIVE);
 DEFINE_IS_WIDGET(HAS_GRAB);
 DEFINE_IS_WIDGET(RC_STYLE);
-DEFINE_IS_WIDGET(COMPOSITE_CHILD);
-DEFINE_IS_WIDGET(APP_PAINTABLE);
 DEFINE_IS_WIDGET(DOUBLE_BUFFERED);
 
 static VALUE
@@ -806,6 +874,13 @@ widget_state(self)
     VALUE self;
 {
     return INT2FIX(_SELF(self)->state);
+}
+
+static VALUE
+widget_saved_state(self)
+    VALUE self;
+{
+    return INT2FIX(_SELF(self)->saved_state);
 }
 
 #define DEFINE_EVENT_FUNC(EVENT,TYPE) \
@@ -871,10 +946,15 @@ Init_gtk_widget()
     rb_define_method(gWidget, "add_accelerator", widget_add_accelerator, 5);
     rb_define_method(gWidget, "remove_accelerator", widget_remove_accelerator, 3);
     rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
+    rb_define_method(gWidget, "list_accel_closures", widget_list_accel_closures, 0);
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate?", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
+/*
+    rb_define_method(gWidget, "style_properties", widget_style_properties, 0);
+*/
     rb_define_method(gWidget, "intersect", widget_intersect, 2);
+    rb_define_method(gWidget, "focus?", widget_is_focus, 0);
     rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
     rb_define_method(gWidget, "grab_default", widget_grab_default, 0);
     rb_define_method(gWidget, "set_state", widget_set_state, 1);
@@ -911,12 +991,20 @@ Init_gtk_widget()
     rb_define_method(gWidget, "render_icon", widget_render_icon, 3);
     rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 4);
     rb_define_method(gWidget, "reset_shapes", widget_reset_shapes, 0);
-    rb_define_method(gWidget, "set_app_paintable", widget_set_app_paintable, 1);
     rb_define_method(gWidget, "set_double_buffered", widget_set_double_buffered, 1);
     rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
     rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
     rb_define_method(gWidget, "set_scroll_adjustment", widget_set_scroll_adjustments, 2);
     rb_define_method(gWidget, "mnemonic_activate?", widget_mnemonic_activate, 1);
+    rb_define_method(gWidget, "region_intersect", widget_region_intersect, 1);
+    rb_define_method(gWidget, "send_expose", widget_send_expose, 1);
+    rb_define_method(gWidget, "style_get_property", widget_style_get_property, 1);
+    rb_define_method(gWidget, "accessible", widget_get_accessible, 0);
+    rb_define_method(gWidget, "child_focus?", widget_child_focus, 1);
+    rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
+    rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
+    rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
+    rb_define_method(gWidget, "settings", widget_get_settings, 0);
     rb_define_method(gWidget, "set_child_visible", widget_set_child_visible, 1);
     rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
     rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
@@ -926,6 +1014,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "requisition", widget_get_requisition, 0);
     rb_define_method(gWidget, "set_requisition", widget_set_requisition, 2);
     rb_define_method(gWidget, "state", widget_state, 0);
+    rb_define_method(gWidget, "saved_state", widget_saved_state, 0);
 
     rb_define_method(gWidget, "toplevel?",  widget_TOPLEVEL, 0);
     rb_define_method(gWidget, "no_window?", widget_NO_WINDOW, 0);
@@ -937,8 +1026,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
     rb_define_method(gWidget, "has_grab?",    widget_HAS_GRAB, 0);
     rb_define_method(gWidget, "rc_style?",    widget_RC_STYLE, 0);
-    rb_define_method(gWidget, "composite_child?",  widget_COMPOSITE_CHILD, 0);
-    rb_define_method(gWidget, "app_paintable?",    widget_APP_PAINTABLE, 0);
     rb_define_method(gWidget, "double_buffered?",  widget_DOUBLE_BUFFERED, 0);
 
     /*

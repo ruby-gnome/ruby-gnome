@@ -1,3 +1,13 @@
+2003-02-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Add Gtk::Widget#saved_state, #visible?, #focus?, 
+	#region_intersect, #send_expose, #style_get_property, #accessible, 
+	#child_focus, #child_notify, #freeze_child_notify, #child_visible?, #settings.
+	Remove Gtk::Widget#set_app_paintable, #app_paintable?, composite_child?
+	because they are defined as property variables.
+	Gtk::Widget#event returns true or false not Integer.
+	* src/rbgtkobject.c: Add Gtk::Object#type_name.
+
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkaccelgroup.c: Remove Gtk::AccelGroup#connect_by_path.

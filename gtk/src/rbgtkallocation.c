@@ -4,7 +4,7 @@
   rbgtkallocation.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/02/04 16:23:43 $
 
   Copyright (C) 2002,2003  Masao Mutoh
 ************************************************/
@@ -14,7 +14,7 @@
 void 
 Init_gtk_allocation()
 {
-	/* GtkAllocation is typedef of GdkRectangle. */
-	rb_define_class_under(mGtk, "Allocation", 
+    /* GtkAllocation is typedef of GdkRectangle. */
+    rb_define_class_under(mGtk, "Allocation", 
                           GTYPE2CLASS(GDK_TYPE_RECTANGLE));
 }
