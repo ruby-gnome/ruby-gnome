@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.11 2004/11/01 14:58:55 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.12 2004/11/13 12:31:11 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -166,7 +166,7 @@ canvas_w2c_affine(self)
 {
     double affine[6];
     gnome_canvas_w2c_affine(_SELF(self), affine);
-    return rbart_make_art_affine(affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
