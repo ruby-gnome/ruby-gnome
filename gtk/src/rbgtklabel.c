@@ -4,9 +4,9 @@
   rbgtklabel.c -
 
   $Author: mutoh $
-  $Date: 2003/09/05 18:24:38 $
+  $Date: 2005/01/09 19:02:05 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -125,6 +125,25 @@ label_get_selection_bounds(self)
     gboolean ret = gtk_label_get_selection_bounds(_SELF(self), &start, &end);
     return ret ? rb_ary_new3(2, INT2NUM(start), INT2NUM(end)) : Qnil;
 }
+
+/* Defined as Properties
+gdouble     gtk_label_get_angle             (GtkLabel *label);
+void        gtk_label_set_angle             (GtkLabel *label,
+                                             gdouble angle);
+void        gtk_label_set_ellipsize         (GtkLabel *label,
+                                             PangoEllipsizeMode mode);
+PangoEllipsizeMode gtk_label_get_ellipsize  (GtkLabel *label);
+void        gtk_label_set_max_width_chars   (GtkLabel *label,
+                                             gint n_chars);
+gint        gtk_label_get_max_width_chars   (GtkLabel *label);
+
+gboolean    gtk_label_get_single_line_mode  (GtkLabel *label);
+void        gtk_label_set_single_line_mode  (GtkLabel *label,
+                                             gboolean single_line_mode);
+void        gtk_label_set_width_chars       (GtkLabel *label,
+                                             gint n_chars);
+gint        gtk_label_get_width_chars       (GtkLabel *label);
+*/
 
 void 
 Init_gtk_label()

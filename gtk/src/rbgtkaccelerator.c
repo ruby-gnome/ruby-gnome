@@ -4,7 +4,7 @@
   rbgtkaccelerator.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2005/01/09 19:02:05 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -36,6 +36,15 @@ accel_name(self, key, mods)
     return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+accel_get_label(self, key, mods)
+    VALUE self, key, mods;
+{
+    return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
+}
+#endif
+
 static VALUE
 accel_set_default_mod_mask(self, default_mod_mask)
     VALUE self, default_mod_mask;
@@ -60,6 +69,9 @@ Init_gtk_accelerator()
     rb_define_singleton_method(mGtkAccel, "parse", accel_parse, 1);
     /* name is reserved by Ruby */
     rb_define_singleton_method(mGtkAccel, "to_name", accel_name, 2);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_singleton_method(mGtkAccel, "get_label", accel_get_label, 2);
+#endif
     rb_define_singleton_method(mGtkAccel, "set_default_mod_mask", accel_set_default_mod_mask, 1);
     rb_define_singleton_method(mGtkAccel, "default_mod_mask", accel_get_default_mod_mask, 0);
     G_DEF_SETTERS(mGtkAccel);

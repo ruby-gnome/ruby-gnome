@@ -4,9 +4,9 @@
   rbgtkimage.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2005/01/09 19:02:05 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -42,6 +42,11 @@ image_initialize(argc, argv, self)
     } else if (TYPE(arg1) == T_SYMBOL){
         widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
                                           RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+#if GTK_CHECK_VERSION(2,6,0)
+    } else if (TYPE(arg1) == T_STRING){
+        widget = gtk_image_new_from_icon_name(RVAL2CSTR(arg1),
+                                              RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+#endif
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -78,6 +83,11 @@ image_set(argc, argv, self)
     } else if (TYPE(arg1) == T_SYMBOL){
         gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
                                  RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+#if GTK_CHECK_VERSION(2,6,0)
+    } else if (TYPE(arg1) == T_STRING){
+        gtk_image_set_from_icon_name(_SELF(self), RVAL2CSTR(arg1),
+                                     RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+#endif
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -95,11 +105,23 @@ image_set(argc, argv, self)
                                         RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (gtype == GDK_TYPE_PIXBUF_ANIMATION){
             gtk_image_set_from_animation(_SELF(self), GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
+        } else {
+            rb_raise(rb_eArgError, "invalid argument: %s", rb_class2name(arg1));
         }
     }
 
     return self;
 }
+
+/* Defined as property
+void        gtk_image_get_icon_name         (GtkImage *image,
+                                             G_CONST_RETURN gchar **icon_name,
+                                             GtkIconSize *size);
+void        gtk_image_set_pixel_size        (GtkImage *image,
+                                             gint pixel_size);
+gint        gtk_image_get_pixel_size        (GtkImage *image);
+
+*/
 
 void 
 Init_gtk_image()

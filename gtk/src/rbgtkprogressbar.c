@@ -3,10 +3,10 @@
 
   rbgtkprogressbar.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2005/01/09 19:02:05 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -29,6 +29,11 @@ pbar_pulse(self)
     gtk_progress_bar_pulse(GTK_PROGRESS_BAR(RVAL2GOBJ(self)));
     return self;
 }
+
+/* Defined as Property
+void        gtk_progress_bar_set_ellipsize  (GtkProgressBar *pbar,
+                                             PangoEllipsizeMode mode);
+*/
 
 void 
 Init_gtk_progress_bar()

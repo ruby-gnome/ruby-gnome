@@ -1,3 +1,9 @@
+2005-01-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstock.c: Added GTK+-2.6.x items. 
+	* src/rbgtkimage.c, rbgtklabel.c, rbgtkprogressbar.c: 
+	Support GTK+-2.6.x. 
+
 2005-01-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/aboutdialog.rb, aboutdialog2.rb: Added.
