@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/12 09:20:47 $
+  $Author: sakai $
+  $Date: 2003/08/21 07:43:58 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -364,12 +364,16 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "height", get_height, 0);
     rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
+
     /* GdkPixbufError(not yet) */
+
     /* GdkColorspace */
-    rb_define_const(gdkPixbuf, "COLORSPACE_RGB", INT2FIX(GDK_COLORSPACE_RGB));
+    G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", gdkPixbuf);
+    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_COLORSPACE, "GDK_");
+
     /* GdkPixbufAlphaMode */
-    rb_define_const(gdkPixbuf, "ALPHA_BILEVEL", INT2FIX(GDK_PIXBUF_ALPHA_BILEVEL));
-    rb_define_const(gdkPixbuf, "ALPHA_FULL", INT2FIX(GDK_PIXBUF_ALPHA_FULL));
+    G_DEF_CLASS(GDK_TYPE_PIXBUF_ALPHA_MODE, "AlphaMode", gdkPixbuf);
+    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ALPHA_MODE, "GDK_PIXBUF_");
 
     /* 
      * File Loading, Image Data in Memory
@@ -391,10 +395,8 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
     rb_define_method(gdkPixbuf, "composite!", composite, -1);
     /* GdkInterpType */
-    rb_define_const(gdkPixbuf, "INTERP_NEAREST", INT2FIX(GDK_INTERP_NEAREST));
-    rb_define_const(gdkPixbuf, "INTERP_TILES", INT2FIX(GDK_INTERP_TILES));
-    rb_define_const(gdkPixbuf, "INTERP_BILINEAR", INT2FIX(GDK_INTERP_BILINEAR));
-    rb_define_const(gdkPixbuf, "INTERP_HYPER", INT2FIX(GDK_INTERP_HYPER));
+    G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", gdkPixbuf);
+    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_INTERP_TYPE, "GDK_");
 
     /*
      * Utilities

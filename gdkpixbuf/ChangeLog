@@ -1,3 +1,7 @@
+2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgdk-pixbuf.c: use G_DEF_CONSTANTS() and define enum/flags classes.
+
 2003-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Seprate Gdk::Pixbuf#scale to #scale and #scale!.
