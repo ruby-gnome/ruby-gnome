@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.4 2002/09/23 08:22:36 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.5 2002/09/25 19:12:27 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -25,6 +25,7 @@
 #define _SELF(self) GNOME_CANVAS_ITEM(RVAL2GOBJ(self))
 
 static ID id_set_property;
+static ID id_to_a;
 
 #ifdef HAVE_STDARG_PROTOTYPES
 #include <stdarg.h>
@@ -36,9 +37,9 @@ static ID id_set_property;
 
 static void
 #ifdef HAVE_STDARG_PROTOTYPES
-cgroup_do_item_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, ...)
+citem_do_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, ...)
 #else
-cgroup_do_item_construct(item, parent, first_arg_name, va_alist)
+    citem_do_construct(item, parent, first_arg_name, va_alist)
     GnomeCanvasItem *item;
     GnomeCanvasGroup *parent;
     const gchar *first_arg_name;
@@ -51,52 +52,57 @@ cgroup_do_item_construct(item, parent, first_arg_name, va_alist)
     va_end(ap);
 }
 
-static void
-rbgnomecanvas_do_item_set(argc, argv, self)
-    int argc;
-    VALUE *argv, self;
+static VALUE
+citem_do_set(arg)
+    VALUE arg;
 {
+    VALUE self = RARRAY(arg)->ptr[0];
+    VALUE hash = RARRAY(arg)->ptr[1];
+    VALUE ary = rb_funcall(hash, id_to_a, 0);
     int i;
-    if (argc % 1) {
-        rb_raise(rb_eArgError, "mismatch the number of name - value pairs.");
-    }
-    for (i = 0; i < argc / 2; i++) {
-        rb_funcall(self, id_set_property, 2, argv[i * 2], argv[i * 2 + 1]);
+
+    for (i = 0; i < RARRAY(ary)->len; i++) {
+        rb_funcall(self, id_set_property, 2,
+                   RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
+                   RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
     }
 }
 
 static VALUE
-citem_intialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+citem_do_recover(arg)
+    VALUE arg;
+{
+    GnomeCanvasItem *item = GNOME_CANVAS_ITEM(RVAL2GOBJ(arg));
+    item->parent = NULL;
+    item->canvas = NULL;
+    return Qnil;
+}
+
+static VALUE
+citem_intialize(self, parent, hash)
+    VALUE self, parent, hash;
 {
     GnomeCanvasItem *item;
-    GnomeCanvasGroup *parent;
+    GnomeCanvasGroup *group;
 
-    if (argc == 0) 
-        rb_raise(rb_eArgError, "wrong # of argument (%d)", argc);
-    parent = GNOME_CANVAS_GROUP(RVAL2GOBJ(argv[0]));
-
+    group = GNOME_CANVAS_GROUP(RVAL2GOBJ(parent));
     item = GNOME_CANVAS_ITEM(g_object_new(RVAL2GTYPE(self), NULL));
     RBGTK_INITIALIZE(self, item);
 
-	item->parent = GNOME_CANVAS_ITEM(parent);
-	item->canvas = item->parent->canvas;
-    rbgnomecanvas_do_item_set(argc - 1, argv + 1, self);
-    cgroup_do_item_construct(item, parent, NULL);
+    item->parent = GNOME_CANVAS_ITEM(group);
+    item->canvas = item->parent->canvas;
+    rb_ensure(citem_do_set, rb_ary_new3(2, self, hash), citem_do_recover, self);
+    citem_do_construct(item, group, NULL);
     return Qnil;
 }
 
 static VALUE
-citem_set(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+citem_set(self, hash)
+    VALUE self, hash;
 {
-    rbgnomecanvas_do_item_set(argc, argv, self);
+    citem_do_set(rb_ary_new3(2, self, hash));
     gnome_canvas_item_set(GNOME_CANVAS_ITEM(RVAL2GOBJ(self)), NULL);
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -294,9 +300,10 @@ Init_gnome_canvas_item(mGnome)
 {
     VALUE gnoCanvasItem = G_DEF_CLASS(GNOME_TYPE_CANVAS_ITEM, "CanvasItem", mGnome);
     id_set_property = rb_intern("set_property");
+    id_to_a = rb_intern("to_a");
 
-    rb_define_method(gnoCanvasItem, "initialize", citem_intialize, -1);
-    rb_define_method(gnoCanvasItem, "set", citem_set, -1);
+    rb_define_method(gnoCanvasItem, "initialize", citem_intialize, 2);
+    rb_define_method(gnoCanvasItem, "set", citem_set, 1);
     rb_define_method(gnoCanvasItem, "move", citem_move, 2);
     rb_define_method(gnoCanvasItem, "affine_relative", citem_affine_relative, 1);
     rb_define_method(gnoCanvasItem, "affine_absolute", citem_affine_absolute, 1);

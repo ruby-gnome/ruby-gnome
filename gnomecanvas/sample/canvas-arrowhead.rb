@@ -15,25 +15,25 @@ class CanvasSampleArrowhead < Gtk::VBox
     points[1] = y1
     points[2] = x2
     points[3] = y2
-    arrow.set("points", points)
-    text.set("text", dim.to_s,
-	     "x", tx,
-	     "y", ty)
+    arrow.set({"points" => points})
+    text.set({"text" => dim.to_s,
+	       "x" => tx,
+	       "y" => ty})
   end
 
   def move_drag_box(item, x, y)
-    item.set("x1", x - 5.0,
-	     "y1", y - 5.0,
-	     "x2", x + 5.0,
-	     "y2", y + 5.0)
+    item.set({"x1" => x - 5.0,
+	       "y1" => y - 5.0,
+	       "x2" => x + 5.0,
+	       "y2" => y + 5.0})
   end
 
   def set_arrow_shape(canvas)
     # Big arrow
-    @big_arrow.set("width_pixels", 10 * @width,
-		   "arrow_shape_a", @shape_a * 10,
-		   "arrow_shape_b", @shape_b * 10,
-		   "arrow_shape_c", @shape_c * 10)
+    @big_arrow.set({"width_pixels" => 10 * @width,
+		     "arrow_shape_a" => @shape_a * 10,
+		     "arrow_shape_b" => @shape_b * 10,
+		     "arrow_shape_c" => @shape_c * 10})
 
     # Outline
     points = Gnome::CanvasPoints.new(5)
@@ -47,7 +47,7 @@ class CanvasSampleArrowhead < Gtk::VBox
     points[7] = MIDDLE + 10 * (@shape_c + @width / 2.0);
     points[8] = points[0];
     points[9] = points[1];
-    @outline.set("points", points)
+    @outline.set({"points" => points})
 
     # Drag boxes
     move_drag_box(@width_drag_box, LEFT, MIDDLE - 10 * @width / 2.0)
@@ -92,38 +92,38 @@ class CanvasSampleArrowhead < Gtk::VBox
 		  @shape_c);
 
     # Info
-    @width_info.set("text", @width.to_s)
-    @shape_a_info.set("text", @shape_a.to_s)
-    @shape_b_info.set("text", @shape_b.to_s)
-    @shape_c_info.set("text", @shape_c.to_s)
+    @width_info.set({"text" => @width.to_s})
+    @shape_a_info.set({"text" => @shape_a.to_s})
+    @shape_b_info.set({"text" => @shape_b.to_s})
+    @shape_c_info.set({"text" => @shape_c.to_s})
 
     # Sample arrows
-    @sample_1.set("width_pixels", @width,
-		  "arrow_shape_a", @shape_a,
-		  "arrow_shape_b", @shape_b,
-		  "arrow_shape_c", @shape_c)
-    @sample_2.set("width_pixels", @width,
-		  "arrow_shape_a", @shape_a,
-		  "arrow_shape_b", @shape_b,
-		  "arrow_shape_c", @shape_c)
-    @sample_3.set("width_pixels", @width,
-		  "arrow_shape_a", @shape_a,
-		  "arrow_shape_b", @shape_b,
-		  "arrow_shape_c", @shape_c)
+    @sample_1.set({"width_pixels" => @width,
+		    "arrow_shape_a" => @shape_a,
+		    "arrow_shape_b" => @shape_b,
+		    "arrow_shape_c" => @shape_c})
+    @sample_2.set({"width_pixels" => @width,
+		    "arrow_shape_a" => @shape_a,
+		    "arrow_shape_b" => @shape_b,
+		    "arrow_shape_c" => @shape_c})
+    @sample_3.set({"width_pixels" => @width,
+		    "arrow_shape_a" => @shape_a,
+		    "arrow_shape_b" => @shape_b,
+		    "arrow_shape_c" => @shape_c})
   end
 
   def create_drag_box(root)
     box = Gnome::CanvasRect.new(root,
-				"fill_color", nil,
-				"outline_color", "black",
-				"width_pixels", 1)
+				{"fill_color" => nil,
+				  "outline_color" => "black",
+				  "width_pixels" => 1})
     box.signal_connect("event") do |item, event|
       case event.event_type
       when Gdk::ENTER_NOTIFY
-	item.set("fill_color", "red")
+	item.set({"fill_color" => "red"})
       when Gdk::LEAVE_NOTIFY
 	if event.state & Gdk::BUTTON1_MASK == 0
-	  item.set("fill_color", nil)
+	  item.set({"fill_color" => nil})
 	end
       when Gdk::BUTTON_PRESS
 	fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
@@ -177,26 +177,26 @@ class CanvasSampleArrowhead < Gtk::VBox
 
   def create_dimension(root, anchor)
     arrow = Gnome::CanvasLine.new(root,
-				  "fill_color", "black",
-				  "first_arrowhead", true,
-				  "last_arrowhead", true,
-				  "arrow_shape_a", 5.0,
-				  "arrow_shape_b", 5.0,
-				  "arrow_shape_c", 3.0)
+				  {"fill_color" => "black",
+				    "first_arrowhead" => true,
+				    "last_arrowhead" => true,
+				    "arrow_shape_a" => 5.0,
+				    "arrow_shape_b" => 5.0,
+				    "arrow_shape_c" => 3.0})
     text = Gnome::CanvasText.new(root,
-				 "fill_color", "black",
-				 "font", "Sans 12",
-				 "anchor", anchor)
+				 {"fill_color" => "black",
+				   "font" => "Sans 12",
+				   "anchor" => anchor})
     return arrow, text
   end
 
   def create_info(root, x, y)
     Gnome::CanvasText.new(root,
-			  "x", x,
-			  "y", y,
-			  "fill_color", "black",
-			  "font", "Sans 14",
-			  "anchor", Gtk::ANCHOR_NW)
+			  {"x" => x,
+			    "y" => y,
+			    "fill_color" => "black",
+			    "font" => "Sans 14",
+			    "anchor" => Gtk::ANCHOR_NW})
   end
 
   def create_sample_arrow(root, x1, y1, x2, y2)
@@ -206,10 +206,10 @@ class CanvasSampleArrowhead < Gtk::VBox
     points[2] = x2
     points[3] = y2
     item = Gnome::CanvasLine.new(root,
-				 "points", points,
-				 "fill_color", "black",
-				 "first_arrowhead", true,
-				 "last_arrowhead", true)
+				 {"points" => points,
+				   "fill_color" => "black",
+				   "first_arrowhead" => true,
+				   "last_arrowhead" => true})
     item
   end
 
@@ -255,17 +255,17 @@ EOS
     points[2] = RIGHT
     points[3] = MIDDLE
     @big_arrow = Gnome::CanvasLine.new(root,
-				       "points", points,
-				       "fill_color", "mediumseagreen",
-				       "width_pixels", DEFAULT_WIDTH * 20,
-				       "last_arrowhead", true)
+				       {"points" => points,
+					 "fill_color" => "mediumseagreen",
+					 "width_pixels" => DEFAULT_WIDTH * 20,
+					 "last_arrowhead" => true})
 
     # Arrow outline
     @outline = Gnome::CanvasLine.new(root,
-				     "fill_color", "black",
-				     "width_pixels", 2,
-				     "cap_style", Gdk::CAP_ROUND,
-				     "join_style", Gdk::JOIN_ROUND)
+				     {"fill_color" => "black",
+				       "width_pixels" => 2,
+				       "cap_style" => Gdk::CAP_ROUND,
+				       "join_style" => Gdk::JOIN_ROUND})
 
     # Drag boxes
     @width_drag_box = create_drag_box(root) do |item, event|
@@ -297,9 +297,9 @@ EOS
     points[2] = points[0]
     points[3] = 1000
     Gnome::CanvasLine.new(root,
-			  "points", points,
-			  "fill_color", "black",
-			  "width_pixels", 2)
+			  {"points" => points,
+			    "fill_color" => "black",
+			    "width_pixels" => 2})
 
     # Sample arrows
     @sample_1 = create_sample_arrow(root, RIGHT + 100, 30, RIGHT + 100, MIDDLE - 30);

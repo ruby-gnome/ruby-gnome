@@ -1,3 +1,11 @@
+2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-item.c: change initialize and set API to
+	accept property values as hash.
+	* sample/canvas-arrowhead.rb, sample/canvas-features.rb,
+	sample/canvas-fifteen.rb, sample/canvas-primitives.rb:
+	follow above API change.
+
 2002-09-23  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb: fix bug for site-install and clean.

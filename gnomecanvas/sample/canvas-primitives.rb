@@ -52,63 +52,63 @@ class CanvasSamplePrimitives < Gtk::VBox
 
   def setup_heading(root, text, pos)
     Gnome::CanvasText.new(root,
-			  "text", text,
-			  "x", (pos % 3) * 200 + 100,
-			  "y", (pos / 3) * 150 + 5,
-			  "font", "Sans 12",
-			  "anchor", Gtk::ANCHOR_N,
-			  "fill_color", "black")
+			  {"text" => text,
+			    "x" => (pos % 3) * 200 + 100,
+			    "y" => (pos / 3) * 150 + 5,
+			    "font" => "Sans 12",
+			    "anchor" => Gtk::ANCHOR_N,
+			    "fill_color" => "black"})
   end
 
   def setup_divisions(root)
     group = Gnome::CanvasGroup.new(root,
-				   "x", 0.0,
-				   "y", 0.0)
+				   {"x" => 0.0,
+				     "y" => 0.0})
     setup_item(group)
 
     Gnome::CanvasRect.new(group,
-			  "x1", 0.0,
-			  "y1", 0.0,
-			  "x2", 600.0,
-			  "y2", 450.0,
-			  "outline_color", "black",
-			  "width_units", 4.0)
+			  {"x1" => 0.0,
+			    "y1" => 0.0,
+			    "x2" => 600.0,
+			    "y2" => 450.0,
+			    "outline_color" => "black",
+			    "width_units" => 4.0})
     points = Gnome::CanvasPoints.new(2)
     points[0] = 0.0
     points[1] = 150.0
     points[2] = 600.0
     points[3] = 150.0
     Gnome::CanvasLine.new(group,
-			  "points", points,
-			  "fill_color", "black",
-			  "width_units", 4.0)
+			  {"points" => points,
+			    "fill_color" => "black",
+			    "width_units" => 4.0})
 
     points[0] = 0.0
     points[1] = 300.0
     points[2] = 600.0
     points[3] = 300.0
     Gnome::CanvasLine.new(group,
-			  "points", points,
-			  "fill_color", "black",
-			  "width_units", 4.0)
+			  {"points" => points,
+			    "fill_color" => "black",
+			    "width_units" => 4.0})
 
     points[0] = 200.0
     points[1] = 0.0
     points[2] = 200.0
     points[3] = 450.0
     Gnome::CanvasLine.new(group,
-			  "points", points,
-			  "fill_color", "black",
-			  "width_units", 4.0)
+			  {"points" => points,
+			    "fill_color" => "black",
+			    "width_units" => 4.0})
 
     points[0] = 400.0
     points[1] = 0.0
     points[2] = 400.0
     points[3] = 450.0
     Gnome::CanvasLine.new(group,
-			  "points", points,
-			  "fill_color", "black",
-			  "width_units", 4.0)
+			  {"points" => points,
+			    "fill_color" => "black",
+			    "width_units" => 4.0})
 
     setup_heading(group, "Rectangles", 0)
     setup_heading(group, "Ellipses", 1)
@@ -127,137 +127,137 @@ class CanvasSamplePrimitives < Gtk::VBox
 
   def setup_rectangles(root)
     setup_item(Gnome::CanvasRect.new(root,
-				     "x1", 20.0,
-				     "y1", 30.0,
-				     "x2", 70.0,
-				     "y2", 60.0,
-				     "outline_color", "red",
-				     "width_pixels", 8))
+				     {"x1" => 20.0,
+				       "y1" => 30.0,
+				       "x2" => 70.0,
+				       "y2" => 60.0,
+				       "outline_color" => "red",
+				       "width_pixels" => 8}))
     if root.canvas.aa?
       setup_item(Gnome::CanvasRect.new(root,
-				       "x1", 90.0,
-				       "y1", 40.0,
-				       "x2", 180.0,
-				       "y2", 100.0,
-				       "fill_color_rgba", 0x3cb37180,
-				       "outline_color", "black",
-				       "width_units", 4.0))
+				       {"x1" => 90.0,
+					 "y1" => 40.0,
+					 "x2" => 180.0,
+					 "y2" => 100.0,
+					 "fill_color_rgba" => 0x3cb37180,
+					 "outline_color" => "black",
+					 "width_units" => 4.0}))
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasRect.new(root,
-				       "x1", 90.0,
-				       "y1", 40.0,
-				       "x2", 180.0,
-				       "y2", 100.0,
-				       "fill_color", "mediumseagreen",
-				       "fill_stipple", stipple,
-				       "outline_color", "black",
-				       "width_units", 4.0))
+				       {"x1" => 90.0,
+					 "y1" => 40.0,
+					 "x2" => 180.0,
+					 "y2" => 100.0,
+					 "fill_color" => "mediumseagreen",
+					 "fill_stipple" => stipple,
+					 "outline_color" => "black",
+					 "width_units" => 4.0}))
     end
 
     setup_item(Gnome::CanvasRect.new(root,
-				     "x1", 10.0,
-				     "y1", 80.0,
-				     "x2", 80.0,
-				     "y2", 140.0,
-				     "fill_color", "steelblue"))
+				     {"x1" => 10.0,
+				       "y1" => 80.0,
+				       "x2" => 80.0,
+				       "y2" => 140.0,
+				       "fill_color" => "steelblue"}))
   end
 
   def setup_ellipses(root)
     setup_item(Gnome::CanvasEllipse.new(root,
-					"x1", 220.0,
-					"y1", 30.0,
-					"x2", 270.0,
-					"y2", 60.0,
-					"outline_color", "goldenrod",
-					"width_pixels", 8))
+					{"x1" => 220.0,
+					  "y1" => 30.0,
+					  "x2" => 270.0,
+					  "y2" => 60.0,
+					  "outline_color" => "goldenrod",
+					  "width_pixels" => 8}))
     setup_item(Gnome::CanvasEllipse.new(root,
-					"x1", 290.0,
-					"y1", 40.0,
-					"x2", 380.0,
-					"y2", 100.0,
-					"fill_color", "wheat",
-					"outline_color", "midnightblue",
-					"width_units", 4.0))
+					{"x1" => 290.0,
+					  "y1" => 40.0,
+					  "x2" => 380.0,
+					  "y2" => 100.0,
+					  "fill_color" => "wheat",
+					  "outline_color" => "midnightblue",
+					  "width_units" => 4.0}))
     if root.canvas.aa?
       setup_item(Gnome::CanvasEllipse.new(root,
-					  "x1", 210.0,
-					  "y1", 80.0,
-					  "x2", 280.0,
-					  "y2", 140.0,
-					  "fill_color_rgba", 0x5f9ea080,
-					  "outline_color", "black",
-					  "width_pixels", 0))
+					  {"x1" => 210.0,
+					    "y1" => 80.0,
+					    "x2" => 280.0,
+					    "y2" => 140.0,
+					    "fill_color_rgba" => 0x5f9ea080,
+					    "outline_color" => "black",
+					    "width_pixels" => 0}))
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasEllipse.new(root,
-					  "x1", 210.0,
-					  "y1", 80.0,
-					  "x2", 280.0,
-					  "y2", 140.0,
-					  "fill_color", "cadetblue",
-					  "fill_stipple", stipple,
-					  "outline_color", "black",
-					  "width_pixels", 0))
+					  {"x1" => 210.0,
+					    "y1" => 80.0,
+					    "x2" => 280.0,
+					    "y2" => 140.0,
+					    "fill_color" => "cadetblue",
+					    "fill_stipple" => stipple,
+					    "outline_color" => "black",
+					    "width_pixels" => 0}))
     end
   end
 
   def make_anchor(root, x, y)
     group = Gnome::CanvasGroup.new(root,
-				   "x", x,
-				   "y", y)
+				   {"x" => x,
+				     "y" => y})
     setup_item(group)
     Gnome::CanvasRect.new(group,
-			  "x1", -2.0,
-			  "y1", -2.0,
-			  "x2", 2.0,
-			  "y2", 2.0,
-			  "outline_color", "black",
-			  "width_pixels", 1)
+			  {"x1" => -2.0,
+			    "y1" => -2.0,
+			    "x2" => 2.0,
+			    "y2" => 2.0,
+			    "outline_color" => "black",
+			    "width_pixels" => 1})
     group
   end
 
   def setup_texts(root)
     if root.canvas.aa?
       Gnome::CanvasText.new(make_anchor(root, 420.0, 20.0),
-			    "text", "Anchor NW",
-			    "x", 0.0,
-			    "y", 0.0,
-			    "font", "Sans Bold 24",
-			    "anchor", Gtk::ANCHOR_NW,
-			    "fill_color_rgba", 0x0000ff80)
+			    {"text" => "Anchor NW",
+			      "x" => 0.0,
+			      "y" => 0.0,
+			      "font" => "Sans Bold 24",
+			      "anchor" => Gtk::ANCHOR_NW,
+			      "fill_color_rgba" => 0x0000ff80})
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       Gnome::CanvasText.new(make_anchor(root, 420.0, 20.0),
-			    "text", "Anchor NW",
-			    "x", 0.0,
-			    "y", 0.0,
-			    "font", "Sans Bold 24",
-			    "anchor", Gtk::ANCHOR_NW,
-			    "fill_color", "blue",
-			    "fill_stipple", stipple)
+			    {"text" => "Anchor NW",
+			      "x" => 0.0,
+			      "y" => 0.0,
+			      "font" => "Sans Bold 24",
+			      "anchor" => Gtk::ANCHOR_NW,
+			      "fill_color" => "blue",
+			      "fill_stipple" => stipple})
     end
 
     Gnome::CanvasText.new(make_anchor(root, 470.0, 75.0),
-			  "text", "Anchor center\nJustify center\nMultiline text",
-			  "x", 0.0,
-			  "y", 0.0,
-			  "font", "monospace bold 14",
-			  "anchor", Gtk::ANCHOR_CENTER,
-			  "justification", Gtk::JUSTIFY_CENTER,
-			  "fill_color", "firebrick")
+			  {"text" => "Anchor center\nJustify center\nMultiline text",
+			    "x" => 0.0,
+			    "y" => 0.0,
+			    "font" => "monospace bold 14",
+			    "anchor" => Gtk::ANCHOR_CENTER,
+			    "justification" => Gtk::JUSTIFY_CENTER,
+			    "fill_color" => "firebrick"})
 
     Gnome::CanvasText.new(make_anchor(root, 590.0, 140.0),
-			  "text", "Clipped text\nClipped text\nClipped text\nClipped text\nClipped text\nClipped text",
-			  "x", 0.0,
-			  "y", 0.0,
-			  "font", "Sans 12",
-			  "anchor", Gtk::ANCHOR_SE,
-			  "clip", true,
-			  "clip_width", 50.0,
-			  "clip_height", 55.0,
-			  "x_offset", 10.0,
-			  "fill_color", "darkgreen")
+			  {"text" => "Clipped text\nClipped text\nClipped text\nClipped text\nClipped text\nClipped text",
+			    "x" => 0.0,
+			    "y" => 0.0,
+			    "font" => "Sans 12",
+			    "anchor" => Gtk::ANCHOR_SE,
+			    "clip" => true,
+			    "clip_width" => 50.0,
+			    "clip_height" => 55.0,
+			    "x_offset" => 10.0,
+			    "fill_color" => "darkgreen"})
   end
 
   def plant_flower(root, x, y, anchor, aa)
@@ -265,12 +265,12 @@ class CanvasSamplePrimitives < Gtk::VBox
 
     unless im.nil?
       image = Gnome::CanvasPixbuf.new(root,
-				      "pixbuf", im,
-				      "x", x,
-				      "y", y,
-				      "width", im.get_width,
-				      "height", im.get_height,
-				      "anchor", anchor)
+				      "pixbuf" => im,
+				      "x" => x,
+				      "y" => y,
+				      "width" => im.get_width,
+				      "height" => im.get_height,
+				      "anchor" => anchor)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
       end
@@ -281,12 +281,12 @@ class CanvasSamplePrimitives < Gtk::VBox
     im = Gdk::Pixbuf.new("toroid.png")
     unless im.nil?
       image = Gnome::CanvasPixbuf.new(root,
-				      "pixbuf", im,
-				      "x", 100.0,
-				      "y", 225.0,
-				      "width", im.get_width,
-				      "height", im.get_height,
-				      "anchor", Gtk::ANCHOR_CENTER)
+				      {"pixbuf" => im,
+					"x" => 100.0,
+					"y" => 225.0,
+					"width" => im.get_width,
+					"height" => im.get_height,
+					"anchor" => Gtk::ANCHOR_CENTER})
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
       end
@@ -302,8 +302,8 @@ class CanvasSamplePrimitives < Gtk::VBox
   def polish_diamond(root)
 
     group = Gnome::CanvasGroup.new(root,
-				   "x", 270.0,
-				   "y", 230.0)
+				   {"x" => 270.0,
+				     "y" => 230.0})
     setup_item(group)
 
     points = Gnome::CanvasPoints.new(2)
@@ -318,10 +318,10 @@ class CanvasSamplePrimitives < Gtk::VBox
 	points[2] = RADIUS * Math::cos(a)
 	points[3] = RADIUS * Math::sin(a)
 	Gnome::CanvasLine.new(group,
-			      "points", points,
-			      "fill_color", "black",
-			      "width_units", 1.0,
-			      "cap_style", Gdk::CAP_ROUND)
+			      {"points" => points,
+				"fill_color" => "black",
+				"width_units" => 1.0,
+				"cap_style" => Gdk::CAP_ROUND})
       end
     end
   end
@@ -353,20 +353,20 @@ class CanvasSamplePrimitives < Gtk::VBox
 
     if root.canvas.aa?
       setup_item(Gnome::CanvasLine.new(root,
-				       "points", points,
-				       "fill_color_rgba", 0xff000080,
-				       "width_units", 4.0,
-				       "cap_style", Gdk::CAP_PROJECTING,
-				       "join_style", Gdk::JOIN_MITER))
+				       {"points" => points,
+					 "fill_color_rgba" => 0xff000080,
+					 "width_units" => 4.0,
+					 "cap_style" => Gdk::CAP_PROJECTING,
+					 "join_style" => Gdk::JOIN_MITER}))
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasLine.new(root,
-				       "points", points,
-				       "fill_color", "red",
-				       "fill_stipple", stipple,
-				       "width_units", 4.0,
-				       "cap_style", Gdk::CAP_PROJECTING,
-				       "join_style", Gdk::JOIN_MITER))
+				       {"points" => points,
+					 "fill_color" => "red",
+					 "fill_stipple" => stipple,
+					 "width_units" => 4.0,
+					 "cap_style" => Gdk::CAP_PROJECTING,
+					 "join_style" => Gdk::JOIN_MITER}))
     end
   end
 
@@ -385,14 +385,14 @@ class CanvasSamplePrimitives < Gtk::VBox
     points[6] = 390.0
     points[7] = 170.0
     setup_item(Gnome::CanvasLine.new(root,
-				     "points", points,
-				     "fill_color", "midnightblue",
-				     "width_units", 3.0,
-				     "first_arrowhead", true,
-				     "last_arrowhead", true,
-				     "arrow_shape_a", 8.0,
-				     "arrow_shape_b", 12.0,
-				     "arrow_shape_c", 4.0))
+				     {"points" => points,
+				       "fill_color" => "midnightblue",
+				       "width_units" => 3.0,
+				       "first_arrowhead" => true,
+				       "last_arrowhead" => true,
+				       "arrow_shape_a" => 8.0,
+				       "arrow_shape_b" => 12.0,
+				       "arrow_shape_c" => 4.0}))
 
     points = Gnome::CanvasPoints.new(2)
     points[0] = 356.0
@@ -400,28 +400,28 @@ class CanvasSamplePrimitives < Gtk::VBox
     points[2] = 374.0
     points[3] = 220.0
     setup_item(Gnome::CanvasLine.new(root,
-				     "points", points,
-				     "fill_color", "blue",
-				     "width_pixels", 0,
-				     "first_arrowhead", true,
-				     "last_arrowhead", true,
-				     "arrow_shape_a", 6.0,
-				     "arrow_shape_b", 6.0,
-				     "arrow_shape_c", 4.0))
+				     {"points" => points,
+				       "fill_color" => "blue",
+				       "width_pixels" => 0,
+				       "first_arrowhead" => true,
+				       "last_arrowhead" => true,
+				       "arrow_shape_a" => 6.0,
+				       "arrow_shape_b" => 6.0,
+				       "arrow_shape_c" => 4.0}))
 
     points[0] = 356.0
     points[1] = 220.0
     points[2] = 374.0
     points[3] = 180.0
     setup_item(Gnome::CanvasLine.new(root,
-				     "points", points,
-				     "fill_color", "blue",
-				     "width_pixels", 0,
-				     "first_arrowhead", true,
-				     "last_arrowhead", true,
-				     "arrow_shape_a", 6.0,
-				     "arrow_shape_b", 6.0,
-				     "arrow_shape_c", 4.0))
+				     {"points" => points,
+				       "fill_color" => "blue",
+				       "width_pixels" => 0,
+				       "first_arrowhead" => true,
+				       "last_arrowhead" => true,
+				       "arrow_shape_a" => 6.0,
+				       "arrow_shape_b" => 6.0,
+				       "arrow_shape_c" => 4.0}))
   end
 
   def setup_polygons(root)
@@ -434,16 +434,16 @@ class CanvasSamplePrimitives < Gtk::VBox
     points[5] = 350.0
     if root.canvas.aa?
       setup_item(Gnome::CanvasPolygon.new(root,
-					  "points", points,
-					  "fill_color_rgba", 0x0000ff80,
-					  "outline_color", "black"))
+					  {"points" => points,
+					    "fill_color_rgba" => 0x0000ff80,
+					    "outline_color" => "black"}))
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasPolygon.new(root,
-					  "points", points,
-					  "fill_color", "blue",
-					  "fill_stipple", stipple,
-					  "outline_color", "black"))
+					  {"points" => points,
+					    "fill_color" => "blue",
+					    "fill_stipple" => stipple,
+					    "outline_color" => "black"}))
     end
 
     points = Gnome::CanvasPoints.new(14)
@@ -476,22 +476,22 @@ class CanvasSamplePrimitives < Gtk::VBox
     points[26] = 290.0
     points[27] = 330.0
     setup_item(Gnome::CanvasPolygon.new(root,
-					"points", points,
-					"fill_color", "tan",
-					"outline_color", "black",
-					"width_units", 3.0))
+					{"points" => points,
+					  "fill_color" => "tan",
+					  "outline_color" => "black",
+					  "width_units" => 3.0}))
   end
 
   def setup_widgets(root)
     w = Gtk::Button.new("Hello world!")
     setup_item(Gnome::CanvasWidget.new(root,
-				       "widget", w,
-				       "x", 420.0,
-				       "y", 330.0,
-				       "width", 100.0,
-				       "height", 40.0,
-				       "anchor", Gtk::ANCHOR_NW,
-				       "size_pixels", FALSE))
+				       {"widget" => w,
+					 "x" => 420.0,
+					 "y" => 330.0,
+					 "width" => 100.0,
+					 "height" => 40.0,
+					 "anchor" => Gtk::ANCHOR_NW,
+					 "size_pixels" => FALSE}))
     w.show()
   end
 
