@@ -4,7 +4,7 @@
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:53 $
+  $Date: 2003/10/01 15:15:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,10 +20,31 @@ static VALUE
 gdkimage_initialize(self, type, visual, w, h)
     VALUE self, type, visual, w, h;
 {
-    G_INITIALIZE(self, gdk_image_new((GdkImageType)RVAL2GENUM(type, GDK_TYPE_IMAGE_TYPE),
-                                          GDK_VISUAL(RVAL2GOBJ(visual)),
-                                          NUM2INT(w), NUM2INT(h)));
+    GdkImage* image = gdk_image_new((GdkImageType)RVAL2GENUM(type, GDK_TYPE_IMAGE_TYPE),
+                                    GDK_VISUAL(RVAL2GOBJ(visual)),
+                                    NUM2INT(w), NUM2INT(h));
+
+    if (image)
+        G_INITIALIZE(self, image);
+    else
+        rb_raise(rb_eArgError, "The image could not be created.");
+
     return Qnil;
+}
+
+static VALUE
+gdkimage_get_colormap(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_image_get_colormap(_SELF(self)));
+}
+
+static VALUE
+gdkimage_set_colormap(self, colormap)
+    VALUE self;
+{
+    gdk_image_set_colormap(_SELF(self), RVAL2GOBJ(colormap));
+    return self;
 }
 
 static VALUE
@@ -41,6 +62,34 @@ gdkimage_get_pixel(self, x, y)
 {
     return INT2NUM(gdk_image_get_pixel(_SELF(self),
                                        NUM2INT(x), NUM2INT(y)));
+}
+
+static VALUE
+gdkimage_image_type(self)
+    VALUE self;
+{
+    return GENUM2RVAL((_SELF(self))->type, GDK_TYPE_IMAGE_TYPE);
+}
+
+static VALUE
+gdkimage_visual(self)
+    VALUE self;
+{
+    return GOBJ2RVAL((_SELF(self))->visual);
+}
+
+static VALUE
+gdkimage_byte_order(self)
+    VALUE self;
+{
+    return GENUM2RVAL((_SELF(self))->byte_order, GDK_TYPE_BYTE_ORDER);
+}
+
+static VALUE
+gdkimage_bits_per_pixel(self)
+    VALUE self;
+{
+    return INT2NUM((_SELF(self))->bits_per_pixel);
 }
 
 static VALUE
@@ -84,13 +133,21 @@ Init_gtk_gdk_image()
     VALUE gdkImage = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 
     rb_define_method(gdkImage, "initialize", gdkimage_initialize, 4);
+    rb_define_method(gdkImage, "colormap", gdkimage_get_colormap, 0);
+    rb_define_method(gdkImage, "set_colormap", gdkimage_set_colormap, 1);
     rb_define_method(gdkImage, "put_pixel", gdkimage_put_pixel, 3);
     rb_define_method(gdkImage, "get_pixel", gdkimage_get_pixel, 2);
+    rb_define_method(gdkImage, "image_type", gdkimage_image_type, 0);
+    rb_define_method(gdkImage, "visual", gdkimage_visual, 0);
+    rb_define_method(gdkImage, "byte_order", gdkimage_byte_order, 0);
+    rb_define_method(gdkImage, "bits_per_pixel", gdkimage_bits_per_pixel, 0);
     rb_define_method(gdkImage, "width", gdkimage_width, 0);
     rb_define_method(gdkImage, "height", gdkimage_height, 0);
     rb_define_method(gdkImage, "depth", gdkimage_depth, 0);
     rb_define_method(gdkImage, "bpp", gdkimage_bpp, 0);
     rb_define_method(gdkImage, "bpl", gdkimage_bpl, 0);
+
+    G_DEF_SETTERS(gdkImage);
 
     /* GdkImageType */
     G_DEF_CLASS(GDK_TYPE_IMAGE_TYPE, "Type", gdkImage);

@@ -1,3 +1,9 @@
+2003-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkimage.c: Add Gdk::Image#colormap, #colormap=, set_colormap, 
+	Gdk::Image#image_type, #visual, #depth , #bits_per_pixel.
+	Raise error when the image couldn't be created in Gdk::Image.new.
+
 2003-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkatom.c: Remove Gdk::Atom#===, Gdk::Atom#eql? 
