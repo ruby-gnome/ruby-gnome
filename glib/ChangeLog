@@ -1,3 +1,8 @@
+2003-07-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_value.c, rbgobj_value_types.c, rbgobj_type.c: 
+	Accept rb_cObject as G_TYPE_POINTER.
+
 2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.h: Define G_BLOCK_PROC for ruby-1.8.x.

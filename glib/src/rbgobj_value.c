@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Date: 2003/07/09 17:31:16 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -90,8 +90,24 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             gpointer ptr = g_value_get_pointer(value);
             if (!ptr)
                 return Qnil;
-            else
-                return rbgobj_ptr_new(G_VALUE_TYPE(value), ptr);
+            else{
+                if (rb_obj_is_kind_of(ptr, rb_cObject)){
+/*
+                switch (TYPE(ptr)) {
+                  case T_MODULE:
+                  case T_CLASS:
+                  case T_ICLASS:
+*/
+                    printf("hogehogehogehohgoe\n");
+                    return (VALUE)ptr;
+/*
+                  default:
+                    printf("ffffffffffffffffff\n");
+*/
+                } else {
+                    return rbgobj_ptr_new(G_VALUE_TYPE(value), ptr);
+                }
+            }
         }
 
       case G_TYPE_BOXED:

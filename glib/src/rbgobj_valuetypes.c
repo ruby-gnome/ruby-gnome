@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Date: 2003/07/09 17:31:16 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -36,9 +36,13 @@ rbgobj_ptr2cptr(ptr)
     return rb_dlptr2cptr(ptr);
 #else
     gpointer dest;
-    if (!rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER)))
+    if (rb_obj_is_kind_of(ptr, GTYPE2CLASS(G_TYPE_POINTER))){
+        Data_Get_Struct(ptr, void, dest);
+    } else if (rb_obj_is_kind_of(ptr, rb_cObject)){
+        dest = (gpointer)ptr;
+    } else{
         rb_raise(rb_eTypeError, "not a pointer object");
-    Data_Get_Struct(ptr, void, dest);
+    }
     return dest;
 #endif
 }
