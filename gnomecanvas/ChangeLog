@@ -1,3 +1,12 @@
+2002-10-06  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-item.c: Delete citem_do_set() and use
+	rbgutil_set_properties() instead.
+	* src/*.c: Return self when the correspondent C function
+	returns nothing. Add '?' to method names if its return value
+	is boolean. Delete 'get_' prefix from getter methods if it 
+	has no argument. Add setter methods by using G_DEF_SETTER.
+
 2002-10-03  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-rich-text.c: delete workaround code for

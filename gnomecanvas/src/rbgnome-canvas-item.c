@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.9 2002/10/02 13:36:50 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.10 2002/10/06 10:02:59 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -23,9 +23,6 @@
 #include "rbart.h"
 
 #define _SELF(self) GNOME_CANVAS_ITEM(RVAL2GOBJ(self))
-
-static ID id_set_property;
-static ID id_to_a;
 
 #ifdef HAVE_STDARG_PROTOTYPES
 #include <stdarg.h>
@@ -52,20 +49,6 @@ citem_do_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar 
     va_end(ap);
 }
 
-static void
-citem_do_set(self, hash)
-    VALUE self, hash;
-{
-    VALUE ary = rb_funcall(hash, id_to_a, 0);
-    int i;
-
-    for (i = 0; i < RARRAY(ary)->len; i++) {
-        rb_funcall(self, id_set_property, 2,
-                   RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
-                   RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
-    }
-}
-
 static VALUE
 citem_intialize(self, parent, hash)
     VALUE self, parent, hash;
@@ -79,7 +62,7 @@ citem_intialize(self, parent, hash)
 
     item->parent = GNOME_CANVAS_ITEM(group);
     item->canvas = item->parent->canvas;
-    citem_do_set(self, hash);
+    rbgutil_set_properties(self, hash);
     citem_do_construct(item, group, NULL);
     return Qnil;
 }
@@ -88,7 +71,7 @@ static VALUE
 citem_set(self, hash)
     VALUE self, hash;
 {
-    citem_do_set(self, hash);
+    rbgutil_set_properties(self, hash);
     gnome_canvas_item_set(GNOME_CANVAS_ITEM(RVAL2GOBJ(self)), NULL);
     return self;
 }
@@ -100,7 +83,7 @@ citem_move(self, dx, dy)
     gnome_canvas_item_move(_SELF(self),
                            NUM2DBL(dx),
                            NUM2DBL(dy));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -109,7 +92,7 @@ citem_affine_relative(self, affine)
 {
     gnome_canvas_item_affine_relative(_SELF(self),
                                       rbart_get_art_affine(affine));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -118,7 +101,7 @@ citem_affine_absolute(self, affine)
 {
     gnome_canvas_item_affine_absolute(_SELF(self),
                                       rbart_get_art_affine(affine));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -127,7 +110,7 @@ citem_raise(self, positions)
 {
     gnome_canvas_item_raise(_SELF(self),
                             NUM2INT(positions));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -136,7 +119,7 @@ citem_lower(self, positions)
 {
     gnome_canvas_item_lower(_SELF(self),
                             NUM2INT(positions));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -144,7 +127,7 @@ citem_raise_to_top(self)
     VALUE self;
 {
     gnome_canvas_item_raise_to_top(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -152,7 +135,7 @@ citem_lower_to_bottom(self)
     VALUE self;
 {
     gnome_canvas_item_lower_to_bottom(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -160,7 +143,7 @@ citem_show(self)
     VALUE self;
 {
     gnome_canvas_item_show(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -168,7 +151,7 @@ citem_hide(self)
     VALUE self;
 {
     gnome_canvas_item_hide(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -188,7 +171,7 @@ citem_ungrab(self, etime)
 {
     gnome_canvas_item_ungrab(_SELF(self),
                              NIL_P(etime) ? 0 : NUM2UINT(etime));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -235,7 +218,7 @@ citem_reparent(self, new_group)
         rb_raise(rb_eTypeError, "not a GnomeCanvasGroup");
     }
     gnome_canvas_item_reparent(_SELF(self), GNOME_CANVAS_GROUP(RVAL2GOBJ(new_group)));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -243,7 +226,7 @@ citem_grab_focus(self)
     VALUE self;
 {
     gnome_canvas_item_grab_focus(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -283,8 +266,6 @@ Init_gnome_canvas_item(mGnome)
     VALUE mGnome;
 {
     VALUE gnoCanvasItem = G_DEF_CLASS(GNOME_TYPE_CANVAS_ITEM, "CanvasItem", mGnome);
-    id_set_property = rb_intern("set_property");
-    id_to_a = rb_intern("to_a");
 
     rb_define_method(gnoCanvasItem, "initialize", citem_intialize, 2);
     rb_define_method(gnoCanvasItem, "set", citem_set, 1);
@@ -305,7 +286,7 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasItem, "i2c_affine", citem_i2c_affine, 0);
     rb_define_method(gnoCanvasItem, "reparent", citem_reparent, 1);
     rb_define_method(gnoCanvasItem, "grab_focus", citem_grab_focus, 0);
-    rb_define_method(gnoCanvasItem, "get_bounds", citem_get_bounds, 0);
+    rb_define_method(gnoCanvasItem, "bounds", citem_get_bounds, 0);
     rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
     rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 

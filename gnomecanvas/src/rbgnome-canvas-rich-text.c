@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-rich-text.c,v 1.2 2002/10/03 13:09:59 tkubo Exp $ */
+/* $Id: rbgnome-canvas-rich-text.c,v 1.3 2002/10/06 10:02:59 tkubo Exp $ */
 
 /* Gnome::CanvasRichText widget for Ruby/Gnome
  * Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
@@ -94,7 +94,9 @@ Init_gnome_canvas_rich_text(mGnome)
     rb_define_method(gnoCanvasRichText, "copy_clipboard", crtext_copy_clipboard, 0);
     rb_define_method(gnoCanvasRichText, "paste_clipboard", crtext_paste_clipboard, 0);
     rb_define_method(gnoCanvasRichText, "set_buffer", crtext_set_buffer, 1);
-    rb_define_method(gnoCanvasRichText, "get_buffer", crtext_get_buffer, 0);
+    rb_define_method(gnoCanvasRichText, "buffer", crtext_get_buffer, 0);
     rb_define_method(gnoCanvasRichText, "get_iter_location", crtext_get_iter_location, 1);
     rb_define_method(gnoCanvasRichText, "get_iter_at_location", crtext_get_iter_at_location, 2);
+
+    G_DEF_SETTER(gnoCanvasRichText, "buffer");
 }
