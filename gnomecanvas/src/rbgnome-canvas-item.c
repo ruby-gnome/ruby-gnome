@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.3 2002/09/21 05:35:01 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.4 2002/09/23 08:22:36 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -26,7 +26,32 @@
 
 static ID id_set_property;
 
-void
+#ifdef HAVE_STDARG_PROTOTYPES
+#include <stdarg.h>
+#define va_init_list(a,b) va_start(a,b)
+#else
+#include <varargs.h>
+#define va_init_list(a,b) va_start(a)
+#endif
+
+static void
+#ifdef HAVE_STDARG_PROTOTYPES
+cgroup_do_item_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, ...)
+#else
+cgroup_do_item_construct(item, parent, first_arg_name, va_alist)
+    GnomeCanvasItem *item;
+    GnomeCanvasGroup *parent;
+    const gchar *first_arg_name;
+    va_dcl
+#endif
+{
+    va_list ap;
+    va_init_list(ap, first_arg_name);
+    gnome_canvas_item_construct(item, parent, first_arg_name, ap);
+    va_end(ap);
+}
+
+static void
 rbgnomecanvas_do_item_set(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -38,6 +63,29 @@ rbgnomecanvas_do_item_set(argc, argv, self)
     for (i = 0; i < argc / 2; i++) {
         rb_funcall(self, id_set_property, 2, argv[i * 2], argv[i * 2 + 1]);
     }
+}
+
+static VALUE
+citem_intialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    GnomeCanvasItem *item;
+    GnomeCanvasGroup *parent;
+
+    if (argc == 0) 
+        rb_raise(rb_eArgError, "wrong # of argument (%d)", argc);
+    parent = GNOME_CANVAS_GROUP(RVAL2GOBJ(argv[0]));
+
+    item = GNOME_CANVAS_ITEM(g_object_new(RVAL2GTYPE(self), NULL));
+    RBGTK_INITIALIZE(self, item);
+
+	item->parent = GNOME_CANVAS_ITEM(parent);
+	item->canvas = item->parent->canvas;
+    rbgnomecanvas_do_item_set(argc - 1, argv + 1, self);
+    cgroup_do_item_construct(item, parent, NULL);
+    return Qnil;
 }
 
 static VALUE
@@ -247,7 +295,7 @@ Init_gnome_canvas_item(mGnome)
     VALUE gnoCanvasItem = G_DEF_CLASS(GNOME_TYPE_CANVAS_ITEM, "CanvasItem", mGnome);
     id_set_property = rb_intern("set_property");
 
-    rb_undef_method(gnoCanvasItem, "new");
+    rb_define_method(gnoCanvasItem, "initialize", citem_intialize, -1);
     rb_define_method(gnoCanvasItem, "set", citem_set, -1);
     rb_define_method(gnoCanvasItem, "move", citem_move, 2);
     rb_define_method(gnoCanvasItem, "affine_relative", citem_affine_relative, 1);
@@ -271,6 +319,7 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
     rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 
+    G_DEF_CLASS(GNOME_TYPE_CANVAS_GROUP, "CanvasGroup", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_BPATH, "CanvasBpath", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_LINE, "CanvasLine", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_PIXBUF, "CanvasPixbuf", mGnome);

@@ -41,60 +41,60 @@ class CanvasSampleFeatures < Gtk::VBox
     canvas.show()
 
     # First parent and box
-    @parent1 = canvas.root.item_new(Gnome::CanvasGroup,
-				    "x", 0.0,
-				    "y", 0.0)
+    @parent1 = Gnome::CanvasGroup.new(canvas.root,
+				      "x", 0.0,
+				      "y", 0.0)
 
-    @parent1.item_new(Gnome::CanvasRect,
-		      "x1", 0.0,
-		      "y1", 0.0,
-		      "x2", 200.0,
-		      "y2", 200.0,
-		      "fill_color", "tan")
+    Gnome::CanvasRect.new(@parent1,
+			  "x1", 0.0,
+			  "y1", 0.0,
+			  "x2", 200.0,
+			  "y2", 200.0,
+			  "fill_color", "tan")
 
     # Second parent and box
-    @parent2 = canvas.root.item_new(Gnome::CanvasGroup,
-				    "x", 200.0,
-				    "y", 0.0)
-    @parent2.item_new(Gnome::CanvasRect,
-		      "x1", 0.0,
-		      "y1", 0.0,
-		      "x2", 200.0,
-		      "y2", 200.0,
-		      "fill_color", "#204060")
+    @parent2 = Gnome::CanvasGroup.new(canvas.root,
+				      "x", 200.0,
+				      "y", 0.0)
+    Gnome::CanvasRect.new(@parent2,
+			  "x1", 0.0,
+			  "y1", 0.0,
+			  "x2", 200.0,
+			  "y2", 200.0,
+			  "fill_color", "#204060")
  
     # Big circle to be reparented
-    item = @parent1.item_new(Gnome::CanvasEllipse,
-			    "x1", 10.0,
-			    "y1", 10.0,
-			    "x2", 190.0,
-			    "y2", 190.0,
-			    "outline_color", "black",
-			    "fill_color", "mediumseagreen",
-			    "width_units", 3.0)
+    item = Gnome::CanvasEllipse.new(@parent1,
+				    "x1", 10.0,
+				    "y1", 10.0,
+				    "x2", 190.0,
+				    "y2", 190.0,
+				    "outline_color", "black",
+				    "fill_color", "mediumseagreen",
+				    "width_units", 3.0)
 
     item.signal_connect("event") do |item, event|
       item_event(item, event)
     end
 
     # A group to be reparented
-    group = @parent2.item_new(Gnome::CanvasGroup,
-			      "x", 100.0,
-			      "y", 100.0)
-    group.item_new(Gnome::CanvasEllipse,
-		   "x1", -50.0,
-		   "y1", -50.0,
-		   "x2", 50.0,
-		   "y2", 50.0,
-		   "outline_color", "black",
-		   "fill_color", "wheat",
-		   "width_units", 3.0)
-    group.item_new(Gnome::CanvasEllipse,
-		   "x1", -25.0,
-		   "y1", -25.0,
-		   "x2", 25.0,
-		   "y2", 25.0,
-		   "fill_color", "steelblue")
+    group = Gnome::CanvasGroup.new(@parent2,
+				   "x", 100.0,
+				   "y", 100.0)
+    Gnome::CanvasEllipse.new(group,
+			     "x1", -50.0,
+			     "y1", -50.0,
+			     "x2", 50.0,
+			     "y2", 50.0,
+			     "outline_color", "black",
+			     "fill_color", "wheat",
+			     "width_units", 3.0)
+    Gnome::CanvasEllipse.new(group,
+			     "x1", -25.0,
+			     "y1", -25.0,
+			     "x2", 25.0,
+			     "y2", 25.0,
+			     "fill_color", "steelblue")
 
     group.signal_connect("event") do |item, event|
       item_event(item, event)

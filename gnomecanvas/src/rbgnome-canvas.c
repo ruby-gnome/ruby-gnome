@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.4 2002/09/21 14:53:20 tkubo Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.5 2002/09/23 08:22:36 tkubo Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -25,21 +25,18 @@
 #define _SELF(self) GNOME_CANVAS(RVAL2GOBJ(self))
 
 static VALUE
-canvas_s_new(klass)
-    VALUE klass;
+canvas_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
-    VALUE obj = rbgobj_create_object(klass);
-    RBGTK_INITIALIZE(obj, gnome_canvas_new());
-    return obj;
-}
+    VALUE antialiased;
 
-static VALUE
-canvas_s_new_aa(klass)
-    VALUE klass;
-{
-    VALUE obj = rbgobj_create_object(klass);
-    RBGTK_INITIALIZE(obj, gnome_canvas_new_aa());
-    return obj;
+    rb_scan_args(argc, argv, "01", &antialiased);
+    if (RTEST(antialiased))
+        RBGTK_INITIALIZE(self, gnome_canvas_new_aa());
+    else
+        RBGTK_INITIALIZE(self, gnome_canvas_new());
+    return self;
 }
 
 static VALUE
@@ -255,8 +252,7 @@ Init_gnome_canvas(mGnome)
 {
     VALUE gnoCanvas = G_DEF_CLASS(GNOME_TYPE_CANVAS, "Canvas", mGnome);
 
-    rb_define_singleton_method(gnoCanvas, "new", canvas_s_new, 0);
-    rb_define_singleton_method(gnoCanvas, "new_aa", canvas_s_new_aa, 0);
+    rb_define_method(gnoCanvas, "initialize", canvas_initialize, -1);
     rb_define_method(gnoCanvas, "root", canvas_root, 0);
     rb_define_method(gnoCanvas, "set_scroll_region", canvas_set_scroll_region, 4);
     rb_define_method(gnoCanvas, "get_scroll_region", canvas_get_scroll_region, 0);

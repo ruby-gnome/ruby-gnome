@@ -129,12 +129,12 @@ install:
 		@cp lib/gnomecanvas2.rb #{rubylibdir}
 		@cd src; make install
 
-site-install:;	
+site-install:
 		@cp lib/gnomecanvas2.rb #{sitelibdir}
 		@cd src; make site-install
 
 clean:
-		@cd src; make allclean
+		@cd src; make clean
 		@rm -f core gnomecanvas2.a *~
 distclean:	clean
 		@cd src; make distclean

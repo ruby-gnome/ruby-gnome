@@ -1,4 +1,18 @@
-2002-09-21  KUBO Takehiro  <kubo@lilliput.insight-tec.co.jp>
+2002-09-23  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb: fix bug for site-install and clean.
+	* src/rbgnomecanvas.c, src/rbgnomecanvas.h, 
+	src/rbgnome-canvas-group.c: removed. merge Init_gnome_canvas_group()
+	to Init_gnome_canvas_item().
+	* src/rbgnome-canvas-item.c: revise Gnome::CanvasGroup.item_new()
+	as Gnome::CanvasItem.new(), as suggested by Mutoh Masao.
+	* src/rbgnome-canvas.c: merge Gnome::Canvas.new_aa() to 
+	Gnome::Canvas.new(), as suggested by Mutoh Masao.
+	* sample/canvas-arrowhead.rb, sample/canvas-features.rb,
+	sample/canvas-fifteen.rb, sample/canvas-primitives.rb: follow
+	above changes.
+
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
 
 	* extconf.rb, src/rbgnomecanvas.h: include rbgtk.h.
 	* src/rbgnome-canvas.c(canvas_s_new, canvas_s_new_aa),

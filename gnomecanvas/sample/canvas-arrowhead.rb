@@ -113,10 +113,10 @@ class CanvasSampleArrowhead < Gtk::VBox
   end
 
   def create_drag_box(root)
-    box = root.item_new(Gnome::CanvasRect,
-			"fill_color", nil,
-			"outline_color", "black",
-			"width_pixels", 1)
+    box = Gnome::CanvasRect.new(root,
+				"fill_color", nil,
+				"outline_color", "black",
+				"width_pixels", 1)
     box.signal_connect("event") do |item, event|
       case event.event_type
       when Gdk::ENTER_NOTIFY
@@ -176,27 +176,27 @@ class CanvasSampleArrowhead < Gtk::VBox
   end
 
   def create_dimension(root, anchor)
-    arrow = root.item_new(Gnome::CanvasLine,
-			  "fill_color", "black",
-			  "first_arrowhead", true,
-			  "last_arrowhead", true,
-			  "arrow_shape_a", 5.0,
-			  "arrow_shape_b", 5.0,
-			  "arrow_shape_c", 3.0)
-    text = root.item_new(Gnome::CanvasText,
-			 "fill_color", "black",
-			 "font", "Sans 12",
-			 "anchor", anchor)
+    arrow = Gnome::CanvasLine.new(root,
+				  "fill_color", "black",
+				  "first_arrowhead", true,
+				  "last_arrowhead", true,
+				  "arrow_shape_a", 5.0,
+				  "arrow_shape_b", 5.0,
+				  "arrow_shape_c", 3.0)
+    text = Gnome::CanvasText.new(root,
+				 "fill_color", "black",
+				 "font", "Sans 12",
+				 "anchor", anchor)
     return arrow, text
   end
 
   def create_info(root, x, y)
-    root.item_new(Gnome::CanvasText,
-		  "x", x,
-		  "y", y,
-		  "fill_color", "black",
-		  "font", "Sans 14",
-		  "anchor", Gtk::ANCHOR_NW)
+    Gnome::CanvasText.new(root,
+			  "x", x,
+			  "y", y,
+			  "fill_color", "black",
+			  "font", "Sans 14",
+			  "anchor", Gtk::ANCHOR_NW)
   end
 
   def create_sample_arrow(root, x1, y1, x2, y2)
@@ -205,11 +205,11 @@ class CanvasSampleArrowhead < Gtk::VBox
     points[1] = y1
     points[2] = x2
     points[3] = y2
-    item = root.item_new(Gnome::CanvasLine,
-			 "points", points,
-			 "fill_color", "black",
-			 "first_arrowhead", true,
-			 "last_arrowhead", true)
+    item = Gnome::CanvasLine.new(root,
+				 "points", points,
+				 "fill_color", "black",
+				 "first_arrowhead", true,
+				 "last_arrowhead", true)
     item
   end
 
@@ -254,18 +254,18 @@ EOS
     points[1] = MIDDLE
     points[2] = RIGHT
     points[3] = MIDDLE
-    @big_arrow = root.item_new(Gnome::CanvasLine,
-			       "points", points,
-			       "fill_color", "mediumseagreen",
-			       "width_pixels", DEFAULT_WIDTH * 20,
-			       "last_arrowhead", true)
+    @big_arrow = Gnome::CanvasLine.new(root,
+				       "points", points,
+				       "fill_color", "mediumseagreen",
+				       "width_pixels", DEFAULT_WIDTH * 20,
+				       "last_arrowhead", true)
 
     # Arrow outline
-    @outline = root.item_new(Gnome::CanvasLine,
-			     "fill_color", "black",
-			     "width_pixels", 2,
-			     "cap_style", Gdk::CAP_ROUND,
-			     "join_style", Gdk::JOIN_ROUND)
+    @outline = Gnome::CanvasLine.new(root,
+				     "fill_color", "black",
+				     "width_pixels", 2,
+				     "cap_style", Gdk::CAP_ROUND,
+				     "join_style", Gdk::JOIN_ROUND)
 
     # Drag boxes
     @width_drag_box = create_drag_box(root) do |item, event|
@@ -296,10 +296,10 @@ EOS
     points[1] = 0
     points[2] = points[0]
     points[3] = 1000
-    root.item_new(Gnome::CanvasLine,
-		  "points", points,
-		  "fill_color", "black",
-		  "width_pixels", 2)
+    Gnome::CanvasLine.new(root,
+			  "points", points,
+			  "fill_color", "black",
+			  "width_pixels", 2)
 
     # Sample arrows
     @sample_1 = create_sample_arrow(root, RIGHT + 100, 30, RIGHT + 100, MIDDLE - 30);
