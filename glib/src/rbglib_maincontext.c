@@ -4,7 +4,7 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/13 15:43:32 $
+  $Date: 2005/03/14 15:08:24 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -325,7 +325,9 @@ Init_glib_main_context()
 
     VALUE timeout = rb_define_module_under(mGLib, "Timeout");
     VALUE idle = rb_define_module_under(mGLib, "Idle");
+#if GLIB_CHECK_VERSION(2,4,0)
     VALUE child_watch = rb_define_module_under(mGLib, "ChildWatch");
+#endif
 
     id_call = rb_intern("call");
 /*

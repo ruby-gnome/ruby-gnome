@@ -1,3 +1,9 @@
+2005-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h, rbgobject.h: Move some macros/definitions to rbgobject.h
+	Reported by Vincent Isambart.
+	* src/rbglib_maincontext.c: Added GLib::MainContext#query. 
+
 2005-03-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/idle.rb, timeout.rb, timeout2.rb: Added.

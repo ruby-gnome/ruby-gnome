@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:21:01 $
+  $Date: 2005/03/14 15:08:25 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -174,6 +174,20 @@ extern gint rbgobj_get_enum(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_flags(guint n, GType gtype);
 extern guint rbgobj_get_flags(VALUE obj, GType gtype);
 extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
+
+
+/* rbglib_mainloop.c */
+#define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
+extern GType g_main_loop_get_type(void);
+
+/* rbglib_maincontext.c */
+#define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())
+#define G_TYPE_SOURCE (g_source_get_type())
+#define G_TYPE_POLL_FD (g_poll_fd_get_type())
+extern GType g_main_context_get_type(void);
+extern GType g_source_get_type(void);
+extern GType g_poll_fd_get_type(void);
+
 
 #ifdef __cplusplus
 }
