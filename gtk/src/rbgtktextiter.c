@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/19 12:26:16 $
+  $Author: ogs $
+  $Date: 2002/11/22 16:34:59 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -12,7 +12,7 @@
 #include "global.h"
 
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
-#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t))
+#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
 
@@ -58,7 +58,6 @@ get_text(self, rhs)
 {
     return rb_str_new2(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
 }
-
 
 static VALUE
 get_visible_slice(self, rhs)
@@ -106,28 +105,28 @@ static VALUE
 begins_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 ends_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 toggles_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 has_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -137,13 +136,23 @@ get_tags(self)
     return GSLIST2ARY(gtk_text_iter_get_tags(_SELF(self)));
 }
 
-#if 0
-gboolean gtk_text_iter_editable          (const GtkTextIter   *iter,
-                                          gboolean             default_setting);
-gboolean gtk_text_iter_can_insert        (const GtkTextIter   *iter,
-                                          gboolean             default_editability);
-#endif
+static VALUE
+editable(self, default_setting)
+    VALUE self, default_setting;
+{
+    return gtk_text_iter_editable(_SELF(self), RTEST(default_setting))
+        ? Qtrue : Qfalse;
+}
 
+static VALUE
+can_insert(self, default_setting)
+    VALUE self, default_setting;
+{
+    return gtk_text_iter_can_insert(_SELF(self), RTEST(default_setting))
+        ? Qtrue : Qfalse;
+}
+
+    
 #define def_predicate(__name__) \
 static VALUE \
 __name__(self) \
@@ -164,11 +173,18 @@ def_predicate(is_cursor_position)
 def_gint_getter(chars_in_line)
 def_gint_getter(bytes_in_line)
 
-#if 0
-gboolean       gtk_text_iter_get_attributes (const GtkTextIter *iter,
-					     GtkTextAttributes *values);
-#endif
-
+static VALUE
+get_attributes(self)
+    VALUE self;
+{
+    GtkTextAttributes attr;
+    
+    if(gtk_text_iter_get_attributes(_SELF(self), &attr) == TRUE)
+        return BOXED2RVAL(&attr, GTK_TYPE_TEXT_ATTRIBUTES);
+    else
+        return Qnil;
+}
+    
 static VALUE
 get_language(self)
     VALUE self;
@@ -218,7 +234,13 @@ def_move_gint(forward_cursor_positions)
 def_move_gint(backward_cursor_positions)
 def_move(forward_to_line_end)
 
-//def_move(forward_to_end)
+static VALUE
+forward_to_end(self)
+    VALUE self;
+{
+    gtk_text_iter_forward_to_end(_SELF(self));
+    return self;
+}
 
 #define def_gint_setter(__name__) \
 static VALUE \
@@ -237,28 +259,77 @@ def_gint_setter(line_index)
 def_gint_setter(visible_line_offset)
 def_gint_setter(visible_line_index)
 
-#if 0
-/* returns TRUE if a toggle was found; NULL for the tag pointer
- * means "any tag toggle", otherwise the next toggle of the
- * specified tag is located.
- */
-gboolean gtk_text_iter_forward_to_tag_toggle (GtkTextIter *iter,
-                                              GtkTextTag  *tag);
+static VALUE
+forward_to_tag_toggle(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE tag;
 
-gboolean gtk_text_iter_backward_to_tag_toggle (GtkTextIter *iter,
-                                               GtkTextTag  *tag);
+    rb_scan_args(argc, argv, "01", &tag);
+    return gtk_text_iter_forward_to_tag_toggle(_SELF(self),
+                                               NIL_P(tag) ? NULL : RVAL2TAG(tag))
+        ? Qtrue : Qfalse;
+}
 
-typedef gboolean (* GtkTextCharPredicate) (gunichar ch, gpointer user_data);
+static VALUE
+backward_to_tag_toggle(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE tag;
 
-gboolean gtk_text_iter_forward_find_char  (GtkTextIter          *iter,
-                                           GtkTextCharPredicate  pred,
-                                           gpointer              user_data,
-                                           const GtkTextIter    *limit);
-gboolean gtk_text_iter_backward_find_char (GtkTextIter          *iter,
-                                           GtkTextCharPredicate  pred,
-                                           gpointer              user_data,
-                                           const GtkTextIter    *limit);
-#endif
+    rb_scan_args(argc, argv, "01", &tag);
+    return gtk_text_iter_backward_to_tag_toggle(_SELF(self),
+                                                NIL_P(tag) ? NULL : RVAL2TAG(tag))
+        ? Qtrue : Qfalse;
+}
+
+static gboolean
+char_predicate_func(ch, func)
+    guint32 ch;
+    gpointer func;
+{
+    return RTEST(rb_funcall((VALUE)func, id_call, 1, UINT2NUM(ch)));
+}
+
+static VALUE
+forward_find_char(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE limit;
+    VALUE func = rb_f_lambda();
+    G_RELATIVE(self, func);
+    
+    rb_scan_args(argc, argv, "01", &limit);
+    return gtk_text_iter_forward_find_char(_SELF(self),
+                                           (GtkTextCharPredicate)char_predicate_func, 
+                                           (gpointer)func,
+                                           NIL_P(limit) ? NULL : _SELF(limit))
+        ? Qtrue : Qfalse;
+}
+
+static VALUE
+backward_find_char(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE limit;
+    VALUE func = rb_f_lambda();
+    G_RELATIVE(self, func);
+
+    rb_scan_args(argc, argv, "01", &limit);
+    return gtk_text_iter_backward_find_char(_SELF(self),
+                                            (GtkTextCharPredicate)char_predicate_func,
+                                            (gpointer)func,
+                                            NIL_P(limit) ? NULL : _SELF(limit))
+        ? Qtrue : Qfalse;
+}
 
 static VALUE
 forward_search(argc, argv, self)
@@ -267,21 +338,15 @@ forward_search(argc, argv, self)
     VALUE self;
 {
     GtkTextIter m_start, m_end;
-    VALUE str, flags, limit, result;
+    VALUE str, flags, limit;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if(gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
                                     FIX2INT(flags), &m_start, &m_end,
-                                    limit==Qnil ? NULL : _SELF(limit)))
-    {
-        result = rb_ary_new();
-        rb_ary_push(result, ITR2RVAL(&m_start));
-        rb_ary_push(result, ITR2RVAL(&m_end));
-        return result;
-    }
-    else{
+                                    NIL_P(limit) ? NULL : _SELF(limit)))
+        return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
+    else
         return Qnil;
-    }
 }
 
 static VALUE
@@ -291,21 +356,15 @@ backward_search(argc, argv, self)
     VALUE self;
 {
     GtkTextIter m_start, m_end;
-    VALUE str, flags, limit, result;
+    VALUE str, flags, limit;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if(gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
                                     FIX2INT(flags), &m_start, &m_end,
-                                    limit==Qnil ? NULL : _SELF(limit)))
-    {
-        result = rb_ary_new();
-        rb_ary_push(result, ITR2RVAL(&m_start));
-        rb_ary_push(result, ITR2RVAL(&m_end));
-        return result;
-    }
-    else{
+                                    NIL_P(limit) ? NULL : _SELF(limit)))
+        return rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end));
+    else
         return Qnil;
-    }
 }
 
 static VALUE
@@ -321,16 +380,17 @@ compare(self, rhs)
 {
     return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
-    
-#if 0
-gboolean gtk_text_iter_in_range        (const GtkTextIter *iter,
-                                        const GtkTextIter *start,
-                                        const GtkTextIter *end);
 
-/* Put these two in ascending order */
-void     gtk_text_iter_order           (GtkTextIter *first,
-                                        GtkTextIter *second);
-#endif
+/*
+  The following methods don't have to be implimented.
+  Including Comparable module is enough.
+  
+gboolean    gtk_text_iter_in_range          (const GtkTextIter *iter,
+                                             const GtkTextIter *start,
+                                             const GtkTextIter *end);
+void        gtk_text_iter_order             (GtkTextIter *first,
+                                             GtkTextIter *second);
+*/
 
 void
 Init_gtk_textiter()
@@ -363,6 +423,9 @@ Init_gtk_textiter()
     rb_define_method(cTextIter, "has_tag?", has_tag, 1);
     rb_define_method(cTextIter, "tags", get_tags, 0);
 
+    rb_define_method(cTextIter, "editable?", editable, 1);
+    rb_define_method(cTextIter, "can_insert?", can_insert, 1);
+
     rb_define_method(cTextIter, "starts_word?", starts_word, 0);
     rb_define_method(cTextIter, "ends_word?", ends_word, 0);
     rb_define_method(cTextIter, "inside_word?", inside_word, 0);
@@ -374,6 +437,8 @@ Init_gtk_textiter()
 
     rb_define_method(cTextIter, "chars_in_line", get_chars_in_line, 0);
     rb_define_method(cTextIter, "bytes_in_line", get_bytes_in_line, 0);
+
+    rb_define_method(cTextIter, "attributes", get_attributes, 0);
 
     rb_define_method(cTextIter, "language", get_language, 0);
     rb_define_method(cTextIter, "end?", is_end, 0);
@@ -399,7 +464,7 @@ Init_gtk_textiter()
     rb_define_method(cTextIter, "backward_cursor_position", backward_cursor_position, 0);
     rb_define_method(cTextIter, "forward_cursor_positions", forward_cursor_positions, 1);
     rb_define_method(cTextIter, "backward_cursor_positions", backward_cursor_positions, 1);
-    //rb_define_method(cTextIter, "forward_to_end", forward_to_end, 0);
+    rb_define_method(cTextIter, "forward_to_end", forward_to_end, 0);
     rb_define_method(cTextIter, "forward_to_line_end", forward_to_line_end, 0);
 
 
@@ -411,6 +476,10 @@ Init_gtk_textiter()
     rb_define_method(cTextIter, "set_visible_line_offset", set_visible_line_offset, 1);
     rb_define_method(cTextIter, "set_visible_line_index", set_visible_line_index, 1);
 
+    rb_define_method(cTextIter, "forward_to_tag_toggle", forward_to_tag_toggle, -1);
+    rb_define_method(cTextIter, "backward_to_tag_toggle", backward_to_tag_toggle, -1);
+    rb_define_method(cTextIter, "forward_find_char", forward_find_char, -1);
+    rb_define_method(cTextIter, "backward_find_char", backward_find_char, -1);
     rb_define_method(cTextIter, "forward_search", forward_search, -1);
     rb_define_method(cTextIter, "backward_search", backward_search, -1);
 

@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/19 12:26:16 $
+  $Author: ogs $
+  $Date: 2002/11/22 16:34:59 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -70,37 +70,54 @@ txt_insert(self, iter, text)
 
 static VALUE
 txt_insert_at_cursor(self, text)
+    VALUE self, text;
 {
     gtk_text_buffer_insert_at_cursor(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
 
-#if 0
-gboolean gtk_text_buffer_insert_interactive           (GtkTextBuffer *buffer,
-                                                       GtkTextIter   *iter,
-                                                       const gchar   *text,
-                                                       gint           len,
-                                                       gboolean       default_editable);
-gboolean gtk_text_buffer_insert_interactive_at_cursor (GtkTextBuffer *buffer,
-                                                       const gchar   *text,
-                                                       gint           len,
-                                                       gboolean       default_editable);
+static VALUE
+txt_insert_interactive(self, iter, text, editable)
+    VALUE self, iter, text, editable;
+{
+    return gtk_text_buffer_insert_interactive(_SELF(self), RVAL2ITR(iter),
+                                              RVAL2CSTR(text),
+                                              RSTRING(text)->len,
+                                              RTEST(editable))
+        ? Qtrue : Qfalse;
+}
 
-#endif
+static VALUE
+txt_insert_interactive_at_cursor(self, text, editable)
+    VALUE self, text, editable;
+{
+    return gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
+                                                        RVAL2CSTR(text),
+                                                        RSTRING(text)->len,
+                                                        RTEST(editable))
+        ? Qtrue : Qfalse;
+}
 
-#if 0
+static VALUE
+txt_insert_range(self, iter, start, end)
+    VALUE self, iter, start, end;
+{
+    gtk_text_buffer_insert_range(_SELF(self), RVAL2ITR(iter),
+                                 RVAL2ITR(start), RVAL2ITR(end));
+    return self;
+}
 
-void     gtk_text_buffer_insert_range             (GtkTextBuffer     *buffer,
-                                                   GtkTextIter       *iter,
-                                                   const GtkTextIter *start,
-                                                   const GtkTextIter *end);
-gboolean gtk_text_buffer_insert_range_interactive (GtkTextBuffer     *buffer,
-                                                   GtkTextIter       *iter,
-                                                   const GtkTextIter *start,
-                                                   const GtkTextIter *end,
-                                                   gboolean           default_editable);
-
-#endif
+static VALUE
+txt_insert_range_interactive(self, iter, start, end, editable)
+    VALUE self, iter, start, end, editable;
+{
+    return gtk_text_buffer_insert_range_interactive(_SELF(self),
+                                                    RVAL2ITR(iter),
+                                                    RVAL2ITR(start),
+                                                    RVAL2ITR(end),
+                                                    RTEST(editable))
+        ? Qtrue : Qfalse;
+}
 
 static VALUE
 txt_delete(self, start, end)
@@ -111,25 +128,38 @@ txt_delete(self, start, end)
     return self;
 }
 
+static VALUE
+txt_delete_interactive(self, start, end, editable)
+    VALUE self, start, end, editable;
+{
+    return gtk_text_buffer_delete_interactive(_SELF(self),
+                                              RVAL2ITR(start),
+                                              RVAL2ITR(end),
+                                              RTEST(editable))
+        ? Qtrue : Qfalse;
+}
+
+static VALUE
+txt_get_text(self, start, end, include_hidden_chars)
+    VALUE self, start, end, include_hidden_chars;
+{
+    return CSTR2RVAL(gtk_text_buffer_get_text(_SELF(self),
+                                              RVAL2ITR(start),
+                                              RVAL2ITR(end),
+                                              RTEST(include_hidden_chars)));
+}
+
+static VALUE
+txt_get_slice(self, start, end, include_hidden_chars)
+    VALUE self, start, end, include_hidden_chars;
+{
+    return CSTR2RVAL(gtk_text_buffer_get_slice(_SELF(self),
+                                               RVAL2ITR(start),
+                                               RVAL2ITR(end),
+                                               RTEST(include_hidden_chars)));
+}
+
 #if 0
-gboolean gtk_text_buffer_delete_interactive (GtkTextBuffer *buffer,
-                                             GtkTextIter   *start_iter,
-                                             GtkTextIter   *end_iter,
-                                             gboolean       default_editable);
-
-
-
-/* Obtain strings from the buffer */
-gchar          *gtk_text_buffer_get_text            (GtkTextBuffer     *buffer,
-                                                     const GtkTextIter *start,
-                                                     const GtkTextIter *end,
-                                                     gboolean           include_hidden_chars);
-
-gchar          *gtk_text_buffer_get_slice           (GtkTextBuffer     *buffer,
-                                                     const GtkTextIter *start,
-                                                     const GtkTextIter *end,
-                                                     gboolean           include_hidden_chars);
-
 /* Insert a pixbuf */
 void gtk_text_buffer_insert_pixbuf         (GtkTextBuffer *buffer,
                                             GtkTextIter   *iter,
@@ -144,19 +174,36 @@ void               gtk_text_buffer_insert_child_anchor (GtkTextBuffer      *buff
 GtkTextChildAnchor *gtk_text_buffer_create_child_anchor (GtkTextBuffer *buffer,
                                                          GtkTextIter   *iter);
 
-/* Mark manipulation */
-GtkTextMark   *gtk_text_buffer_create_mark (GtkTextBuffer     *buffer,
-                                            const gchar       *mark_name,
-                                            const GtkTextIter *where,
-                                            gboolean           left_gravity);
-void           gtk_text_buffer_delete_mark (GtkTextBuffer     *buffer,
-                                            GtkTextMark       *mark);
-GtkTextMark*   gtk_text_buffer_get_mark    (GtkTextBuffer     *buffer,
-                                            const gchar       *name);
-
-void gtk_text_buffer_delete_mark_by_name (GtkTextBuffer     *buffer,
-                                          const gchar       *name);
 #endif
+
+static VALUE
+txt_create_mark(self, name, where, left_gravity)
+    VALUE self, name, where, left_gravity;
+{
+    return GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
+                                                 NIL_P(name) ? NULL : RVAL2CSTR(name),
+                                                 RVAL2ITR(where),
+                                                 RTEST(left_gravity)));
+}
+
+static VALUE
+txt_delete_mark(self, mark)
+    VALUE self, mark;
+{
+    if(RVAL2GTYPE(mark) == G_TYPE_STRING)
+        gtk_text_buffer_delete_mark_by_name(_SELF(self), RVAL2CSTR(mark));
+    else
+        gtk_text_buffer_delete_mark(_SELF(self), RVAL2MARK(mark));
+    return self;
+}
+
+static VALUE
+txt_get_mark(self, name)
+    VALUE self, name;
+{
+    return GOBJ2RVAL(gtk_text_buffer_get_mark(_SELF(self), RVAL2CSTR(name)));
+}
+
 /*
 static VALUE
 txt_get_insert(self)
@@ -173,12 +220,13 @@ txt_get_selection_bound(self)
     return GOBJ2RVAL(gtk_text_buffer_get_selection_bound(_SELF(self)));
 }
 
-#if 0
-/* efficiently move insert and selection_bound to same location */
-void gtk_text_buffer_place_cursor (GtkTextBuffer     *buffer,
-                                   const GtkTextIter *where);
-#endif
-
+static VALUE
+txt_place_cursor(self, where)
+    VALUE self, where;
+{
+    gtk_text_buffer_place_cursor(_SELF(self), RVAL2ITR(where));
+    return self;
+}
 
 #if 0
 /* Obtain iterators pointed at various places, then you can move the
@@ -221,11 +269,17 @@ void            gtk_text_buffer_paste_clipboard         (GtkTextBuffer *buffer,
                                                          gboolean       default_editable);
 #endif
 
-#if 0
-gboolean        gtk_text_buffer_get_selection_bounds    (GtkTextBuffer *buffer,
-                                                         GtkTextIter   *start,
-                                                         GtkTextIter   *end);
-#endif
+static VALUE
+txt_get_selection_bounds(self)
+    VALUE self;
+{
+    GtkTextIter start, end;
+    
+    if(gtk_text_buffer_get_selection_bounds(_SELF(self), &start, &end))
+        return rb_ary_new3(2, ITR2RVAL(&start), ITR2RVAL(&end));
+    else
+        return Qnil;
+}
 
 static VALUE
 txt_delete_selection(argc, argv, self)
@@ -447,17 +501,32 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
     rb_define_method(gTextBuffer, "insert", txt_insert, 2);
     rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
+    rb_define_method(gTextBuffer, "insert_interactive", txt_insert_interactive, 3);
+    rb_define_method(gTextBuffer, "insert_interactive_at_cursor", txt_insert_interactive_at_cursor, 2);
+    rb_define_method(gTextBuffer, "insert_range", txt_insert_range, 3);
+    rb_define_method(gTextBuffer, "insert_range_interactive", txt_insert_range_interactive, 4);
 
     rb_define_method(gTextBuffer, "delete", txt_delete, 2);
+    rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
+
+    rb_define_method(gTextBuffer, "get_text", txt_get_text, 3);
+    rb_define_method(gTextBuffer, "get_slice", txt_get_slice, 3);
+
+    rb_define_method(gTextBuffer, "create_mark", txt_create_mark, 3);
+    rb_define_method(gTextBuffer, "delete_mark", txt_delete_mark, 1);
+
+    rb_define_method(gTextBuffer, "get_mark", txt_get_mark, 1);
 /* Comment out because this method's name is very bad.
    Use Gtk::TextBuffer#get_mark("insert") instead.
     rb_define_method(gTextBuffer, "get_insert", txt_get_insert, 0);
 */
     rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
+    rb_define_method(gTextBuffer, "place_cursor", txt_place_cursor, 1);
 
     rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
     rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
 
+    rb_define_method(gTextBuffer, "selection_bounds", txt_get_selection_bounds, 0);
     rb_define_method(gTextBuffer, "delete_selection", txt_delete_selection, -1);
 
     rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
