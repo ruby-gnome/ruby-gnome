@@ -85,6 +85,7 @@ puts "\nOpenGL extension version - #{major}.#{minor}\n"
 
 # Configure OpenGL-capable visual
 # Try double-buffered visual
+# Note: Could be glconfig = Gdk::GLConfig.new([ Gdk::GLConfig::USE_GL, true, Gdk::GLConfig::RGBA,   true, Gdk::GLConfig::DEPTH_SIZE, 16, Gdk::GLConfig::DOUBLEBUFFER, true ])
 glconfig = Gdk::GLConfig.new(Gdk::GLConfig::MODE_RGB   |
                              Gdk::GLConfig::MODE_DEPTH |
                              Gdk::GLConfig::MODE_DOUBLE)

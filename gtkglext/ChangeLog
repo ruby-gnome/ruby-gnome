@@ -2,6 +2,10 @@
 
 	* src/rbgdkglconfig.c, src/rbgtkglext.c: defined enum/flags classes
 	and fixed version numbers
+	* sample/simple.rb: added in a comment an other way to create a
+	Gdk::GLConfig
+	* src/rbgdkglconfig.c: added automatic conversion to and from booleans
+	for some attributes values
 
 2003-08-21 Vincent Isambart <isambart@netcourrier.com>
 

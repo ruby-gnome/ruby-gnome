@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglconfig.c,v 1.4 2003/08/21 11:51:08 isambart Exp $ */
+/* $Id: rbgdkglconfig.c,v 1.5 2003/08/21 15:14:40 isambart Exp $ */
 /* Gdk::GLConfig
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -28,7 +28,14 @@
         int i; \
         array = ALLOCA_N(int, RARRAY(rb_array)->len+1); \
         for (i=0; i<RARRAY(rb_array)->len; ++i) \
-            array[i] = NUM2INT(RARRAY(rb_array)->ptr[i]); \
+        { \
+            VALUE val = RARRAY(rb_array)->ptr[i]; \
+            /* transform Ruby boolean to C boolean */ \
+            if ((val == Qtrue) || (val == Qfalse) || (val = Qnil)) \
+                array[i] = RVAL2CBOOL(val); \
+            else /* transform Ruby number to C int */ \
+                array[i] = NUM2INT(val); \
+        } \
         array[RARRAY(rb_array)->len] = GDK_GL_ATTRIB_LIST_NONE; \
     } while (0)
     
@@ -80,10 +87,25 @@ glconfig_get_attrib(self, attribute)
 {
     int value;
     gboolean ok;
+    int attrib_int;
 
-    ok = gdk_gl_config_get_attrib(_SELF(self), NUM2INT(attribute), &value);
+    attrib_int = NUM2INT(attribute);
+    ok = gdk_gl_config_get_attrib(_SELF(self), attrib_int, &value);
     if (ok)
-        return INT2NUM(value);
+    {
+        switch (attrib_int)
+        {
+            /* some attributes values should be booleans */
+            case GDK_GL_USE_GL:
+            case GDK_GL_RGBA:
+            case GDK_GL_DOUBLEBUFFER:
+            case GDK_GL_STEREO:
+                return CBOOL2RVAL(value);
+            /* the others should be integers */
+            default:
+                return INT2NUM(value);
+        }
+    }
     else
         return Qnil;
 }
