@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2003/09/23 05:23:02 $
+  $Author: mutoh $
+  $Date: 2003/10/14 13:30:24 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -302,9 +302,11 @@ emit_body(struct emit_arg* arg)
     {
         GValue* params = arg->instance_and_params->values + 1;
         int i;
+        VALUE val;
         for (i = 0; i < arg->query.n_params; i++){
-            g_value_init(params + i, arg->query.param_types[i]);
-            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
+            val = rb_ary_entry(arg->args, i);
+            g_value_init(params + i, RVAL2GTYPE(val));
+            rbgobj_rvalue_to_gvalue(val, params + i);
         }
     }
 

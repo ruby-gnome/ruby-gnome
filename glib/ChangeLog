@@ -1,3 +1,8 @@
+2003-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_signal.c: Fix a segfault when GLib::Object#signal_emit 
+	is called. 
+
 2003-10-08  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgobj_param.c: Removed a compilation warning in function
@@ -13,6 +18,7 @@
 	* src/lib/mkmf-gnome2.rb: append "-I$(sitearchdir)" to $CPPFLAGS not
 	$CFLAGS. and stop overriding create_makefile().
 
+>>>>>>> 1.180
 2003-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (gobj_s_signal_new): use #instance_method,
