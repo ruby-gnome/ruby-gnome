@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2003/05/23 18:47:57 $
+  $Date: 2003/05/24 15:30:59 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -503,7 +503,7 @@ style_ ## type(self, idx) \
   int i = NUM2INT(idx); \
  \
   if (i < 0 || 5 < i) rb_raise(rb_eArgError, "state out of range"); \
-  return GOBJ2RVAL(&_SELF(self)-> type [i]); \
+  return GOBJ2RVAL(_SELF(self)-> type [i]); \
 } \
 
 DEFINE_STYLE_GC(fg_gc);

@@ -1,3 +1,8 @@
+2003-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/rulers.rb, progressbar.rb: 
+	Follow Gtk::ProgressBar changes.
+
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkselectiondata.c: Removed Gtk::SelectionData.remove_all.
