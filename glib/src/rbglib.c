@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/08 17:05:32 $
+  $Author: sakai $
+  $Date: 2002/11/24 15:02:48 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -19,12 +19,19 @@ extern void Init_utils_int64();
 extern void Init_glib_messages();
 extern void Init_gobject();
 
-gchar*
-rbg_val2cstr(val)
-    VALUE val;
+char *
+rbg_string_value_ptr(ptr)
+    volatile VALUE *ptr;
 {
-    StringValue(val);
-    return StringValuePtr(val);
+    VALUE s = *ptr;
+    if (TYPE(s) != T_STRING) {
+        s = rb_str_to_str(s);
+        *ptr = s;
+    }
+    if (!RSTRING(s)->ptr) {
+        rb_str_modify(s);
+    }
+    return RSTRING(s)->ptr;
 }
 
 void Init_glib2()

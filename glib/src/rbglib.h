@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: sakai $
-  $Date: 2002/10/02 04:56:42 $
+  $Date: 2002/11/24 15:02:48 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -27,7 +27,7 @@ extern "C" {
 #define SafeStringValue(v) rb_check_safe_str(StringValue(v))
 #endif
 #ifndef StringValuePtr
-#define StringValuePtr(s) STR2CSTR(s)
+#define StringValuePtr(v) rbg_string_value_ptr(&(v))
 #endif
 
 #ifndef LONG2NUM
@@ -38,12 +38,11 @@ extern "C" {
 #define ULONG2NUM UINT2NUM
 #endif
 
-
-#define RVAL2CSTR(v) (rbg_val2cstr(v))
+#define RVAL2CSTR(v) (StringValuePtr(v))
 #define CSTR2RVAL(s) (rb_str_new2(s))
 
 extern VALUE mGLib;
-extern gchar* rbg_val2cstr(VALUE str);
+extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 
 #ifdef __cplusplus
 }

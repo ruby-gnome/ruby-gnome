@@ -1,3 +1,10 @@
+2002-11-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgutil.c: remove rbgutil_val2cstr().
+
+	* src/rbglib.h: change StringValuePtr() definition to the same as
+	ruby-1.7. and change RVAL2CSTR() to use the StringValuePtr().
+
 2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_value.c: rbgobj_rvalue_to_gvalue() support Symbol value 
