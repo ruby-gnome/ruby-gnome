@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 16:36:23 $
+  $Date: 2004/08/07 12:20:59 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -93,7 +93,7 @@ rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
     if (! ret)
         rbglib_spawn_error(err);
     
-    return rb_ary_new3(4, INT2NUM(child_pid), 
+    return rb_ary_new3(4, INT2NUM((gint)child_pid), 
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_input)),
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_output)),
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_error)));
@@ -155,7 +155,7 @@ rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
         rbglib_spawn_error(err);
     }
     
-    return INT2NUM(child_pid);
+    return INT2NUM((int)child_pid);
 }
 
 static VALUE
