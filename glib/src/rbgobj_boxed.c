@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/02/14 14:09:21 $
+  $Date: 2003/02/14 18:55:51 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -110,8 +110,6 @@ rbgobj_boxed_create(klass)
     holder->type  = cinfo->gtype;
     holder->boxed = NULL;
     holder->own   = FALSE;
-
-    rb_ivar_set(result, id_relatives, Qnil);
 
     return result;
 }

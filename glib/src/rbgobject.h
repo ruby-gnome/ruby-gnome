@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2003/02/09 05:10:42 $
+  $Author: sakai $
+  $Date: 2003/02/14 18:55:52 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -68,7 +68,6 @@ typedef struct {
 } RGObjClassInfo;
 
 /* rbgobject.c */
-extern ID id_relatives;
 
 extern void rbgobj_initialize_object(VALUE obj, gpointer cobj);
 extern gpointer rbgobj_instance_from_ruby_object(VALUE obj);

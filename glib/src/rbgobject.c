@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:10 $
+  $Author: sakai $
+  $Date: 2003/02/14 18:55:52 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -23,7 +23,7 @@
 
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
-ID id_relatives;
+static ID id_relatives;
 static ID id_delete;
 static ID id_module_eval;
 
@@ -89,7 +89,8 @@ rbgobj_weak_notify(data, where_the_object_was)
     gobj_holder* holder = data;
     if (holder->cinfo && holder->cinfo->free)
         holder->cinfo->free(holder->gobj); 
-    rb_ivar_set(holder->self, id_relatives, Qnil);
+    if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
+        rb_ivar_set(holder->self, id_relatives, Qnil);
     /*
       XXX. We can't unref() here.
       Because ref_counted have been set to zero in g_object_real_dispose().
@@ -160,8 +161,6 @@ rbgobj_gobject_initialize(obj, cobj)
 
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
 }
 
 GObject*
