@@ -1,3 +1,9 @@
+2005-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: Fix segfault, and make it simple.
+	Now it doesn't raise Exception, because of bad influence to
+	other libs such as gnomeprint.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes.

@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Date: 2005/01/30 15:34:55 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 
@@ -21,8 +21,22 @@ static VALUE rbglib_log_handler_procs;
 static ID id_call;
 static gboolean log_canceled;
 
-#define _RAISE(domain, id, message) \
-    rb_raise(rb_eRuntimeError, "%s-%s **:%s", domain, id, message)
+static gchar* logmessage(GLogLevelFlags level)
+{
+    if (level & G_LOG_LEVEL_ERROR){
+        return "ERROR";
+    } else if (level & G_LOG_LEVEL_CRITICAL){
+        return "CRITICAL";
+    } else if (level & G_LOG_LEVEL_WARNING){
+        return "WARNING";
+    } else if (level & G_LOG_LEVEL_MESSAGE){
+        return "MESSAGE";
+    } else if (level & G_LOG_LEVEL_INFO){
+        return "INFO";
+    } else if (level & G_LOG_LEVEL_DEBUG){
+        return "DEBUG";
+    }
+};
 
 static void
 rbglib_log_handler(log_domain, log_level, message, user_data)
@@ -32,31 +46,14 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     gpointer user_data;
 {
     if (! log_canceled){
-        if (log_level & G_LOG_LEVEL_ERROR){
-            _RAISE(log_domain, "ERROR", message);
-        } else if (log_level & G_LOG_LEVEL_CRITICAL){
-            _RAISE(log_domain, "CRITICAL", message);
-        } else if (RTEST(ruby_debug)){
-            if (log_level & G_LOG_LEVEL_WARNING){
-                _RAISE(log_domain, "WARNING", message);
-            } else if (log_level & G_LOG_LEVEL_MESSAGE){
-                _RAISE(log_domain, "MESSAGE", message);
-            } else if (log_level & G_LOG_LEVEL_INFO){
-            _RAISE(log_domain, "INFO", message);
-            } else if (log_level & G_LOG_LEVEL_DEBUG){
-                _RAISE(log_domain, "DEBUG", message);
-            }
-        }
-    } else if (RTEST(ruby_verbose)){
-        g_log_default_handler(log_domain, log_level, message, user_data);
-    } else {
-        if (log_level & G_LOG_LEVEL_ERROR){
-            g_log_default_handler(log_domain, log_level, message, user_data);
-        } else if (log_level & G_LOG_LEVEL_CRITICAL){
-            g_log_default_handler(log_domain, log_level, message, user_data);
+        if (RTEST(ruby_verbose)){
+            printf("%s: line %d\n", ruby_sourcefile, ruby_sourceline);
+            printf("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
         } else {
             /* Ignored */
         }
+    } else {
+        g_log_default_handler(log_domain, log_level, message, user_data);
     }
 }
 
@@ -77,6 +74,7 @@ rbglib_m_log_set_handler(self, domain, levels)
                                          NUM2INT(levels),
                                          (GLogFunc)rbglib_log_handler, (gpointer)self);
     return UINT2NUM(handler_id);
+    return Qnil;
 }
 
 static VALUE
