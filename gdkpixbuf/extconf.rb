@@ -2,35 +2,23 @@
 extconf.rb for Ruby/GdkPixbuf extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "gdk_pixbuf2"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/gdkpixbuf'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
 PKGConfig.have_package('gdk-pixbuf-2.0') or exit 1
-check_win32
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
+setup_win32(PACKAGE_NAME)
 
 have_func("gdk_pixbuf_set_option")
 have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
-if have_func("g_print") && have_func("gdk_pixbuf_new")
-# Removed. This crashes Ruby/GTK on Windows + GTK+-2.4.x.
-#   Pointed out by Laurent.
-#  # tml's libgdk_pixbuf-2.0-0.dll doesn't export gdk_pixbuf_version.
-#  have_func('gdk_pixbuf_version') # XXX
+add_depend_package("glib2", "glib/src", TOPDIR)
 
-  if /cygwin|mingw/ =~ RUBY_PLATFORM
-    top = '..'
-    [
-      ["glib/src", "ruby-glib2"],
-    ].each{|d,l|
-      $LDFLAGS << " -L#{top}/#{d}"
-      $libs << " -l#{l}"
-    }
-  end
-
-  create_makefile('gdk_pixbuf2')
-end
+create_makefile(PACKAGE_NAME)
