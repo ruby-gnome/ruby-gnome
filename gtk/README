@@ -6,25 +6,21 @@
     Gimp ToolKit. Powerful toolkit written in C.
         http://www.gtk.org/
 
-  Ruby/GTK (this distribution)
-    Ruby extension library to use GTK+.
+  Ruby/GTK2 (this distribution)
+    Ruby extension library to use GTK+ 2.0.
     This language binding was first developed by Yukihiro Matsumoto,
     it is now maintained by me.
-        http://ruby-gnome.sf.net
+        http://ruby-gnome.sf.net/
 
     If you have any questions or requests, use one of the following:
 
-    neilconway@rogers.com       The current Ruby-GNOME maintainer
-    http://ruby-gnome.sf.net    The website contains a bug tracker and
-                                patch manager
-    ruby-talk@netlab.co.jp      English Mailing List. Not Ruby-GNOME
-                                specific, but there are other Ruby-GNOME
-                                users subscribed
-
+    mutoh@highway.ne.jp         The current Ruby-GNOME2 maintainer
+    http://ruby-gnome2.sf.net/   The website contains a bug tracker and
+                                patch manager, Mailing lists.
 
   Install
 
-    0. install ruby-1.6.x and GTK+-1.2.x
+    0. install ruby-1.6.x and GTK+-2.0.x
 
     1. extract archive file.
        $ gzip -dc ruby-gtk-x.xx.tar.gz | tar xf -
@@ -34,8 +30,6 @@
 
     3. create Makefile
        $ ruby extconf.rb
-       If gtk-config is installed with other name (ex. gtk12-config), 
-       $ ruby extconf.rb <other name>
 
     4. make.
        $ make
@@ -68,9 +62,9 @@
 
   Related links
 
-    - Ruby/GTK (official)
-      you can get latest version of Ruby/GTK.
-      -> http://ruby-gnome.sf.net
+    - Ruby-GNOME2 (official)
+      you can get latest version of Ruby-GNOME2.
+      -> http://ruby-gnome2.sf.net/
 
     - Programming by Ruby/Gtk
       there are many documents for Ruby/Gtk.
@@ -81,7 +75,7 @@
 
   Copying
 
-    You can redistribute Ruby/GTK and/or modify it under the same term
+    You can redistribute Ruby/GTK2 and/or modify it under the same term
     of Ruby.  License of Ruby is included with Ruby distribution in
     the file "README".
 
@@ -113,12 +107,15 @@
 
 ---
 Maintainers:
-(up to ver. 0.18)
-  by Dai.K. <MAP2303@mapletown.net>
-  http://www.minato.net/~j2/
-(up to ver. 0.25)
+(from Ruby-GNOME2)
+  Masao Mutoh <mutoh@highway.ne.jp>
+  http://ruby-gnome2.sf.net/
+(up to Ruby-GNOME ver. 0.27)
+  Neil Conway <neilconway@rogers.com>
+  http://ruby-gnome.sf.net/
+(up to Ruby-GNOME ver. 0.25)
   Hiroshi IGARASHI <iga@ruby-lang.org>
   http://www.ruby-lang.org/~iga/
-(from ver. 0.26)
-  Neil Conway <neilconway@rogers.com>
-  http://ruby-gnome.sf.net
+(up to Ruby-GNOME ver. 0.18)
+  by Dai.K. <MAP2303@mapletown.net>
+  http://www.minato.net/~j2/

@@ -1,3 +1,7 @@
+Wed May 29 00:33:47 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * README: Modified.
+
 Sun May 26 23:40:24 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
    * extconf.rb: Append rbgtk-xmhtml to target.

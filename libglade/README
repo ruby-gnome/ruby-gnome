@@ -1,6 +1,6 @@
 Libglade wrapper for Ruby
 originally by Avi Bryant <avi@beta4.com>
-   (now maintained by Neil Conway <neilconway@rogers.com>)
+   (now maintained by Masao Mutoh <mutoh@highway.ne.jp>)
 
 This provides a very simple interface to the libglade library,
 to load interfaces dynamically from a glade file.
