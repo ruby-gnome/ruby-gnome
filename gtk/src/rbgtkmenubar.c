@@ -4,7 +4,7 @@
   rbgtkmenubar.c -
 
   $Author: mutoh $
-  $Date: 2002/08/27 02:48:41 $
+  $Date: 2002/08/30 15:22:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,14 +48,6 @@ mbar_insert(self, child, pos)
     return self;
 }
 
-static VALUE
-mbar_set_shadow_type(self, type)
-    VALUE self, type;
-{
-    gtk_menu_bar_set_shadow_type(GTK_MENU_BAR(RVAL2GOBJ(self)), NUM2INT(type));
-    return self;
-}
-
 void 
 Init_gtk_menu_bar()
 {
@@ -65,5 +57,4 @@ Init_gtk_menu_bar()
     rb_define_method(gMenuBar, "append", mbar_append, 1);
     rb_define_method(gMenuBar, "prepend", mbar_prepend, 1);
     rb_define_method(gMenuBar, "insert", mbar_insert, 2);
-    rb_define_method(gMenuBar, "set_shadow_type", mbar_set_shadow_type, 1);
 }
