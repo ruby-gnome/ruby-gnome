@@ -2,41 +2,23 @@
 extconf.rb for Ruby/Libgda extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "libgda"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/libgda/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
-pkgnames   = ['libgda']
 
-pkgnames.each do |pkgname|
-	PKGConfig.have_package(pkgname) or exit 1
-end
+PKGConfig.have_package("libgda") or exit 1
 
-check_win32
+setup_win32(PACKAGE_NAME)
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
+add_depend_package("glib2", "glib/src", TOPDIR)
 
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
-
-srcdir = File.dirname($0) == "." ? "." :
-  File.expand_path(File.dirname($0) + "/src")
-
-Dir.mkdir('src') unless File.exist? 'src'
-Dir.chdir "src"
-begin
-  create_makefile("libgda", srcdir)
-ensure
-  Dir.chdir('..')
-end
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_LIBGDA_COMPILATION")
 
 create_top_makefile

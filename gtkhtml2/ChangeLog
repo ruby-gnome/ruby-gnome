@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/gtkhtml2.rb: Support GLib::Log.set_log_domain.

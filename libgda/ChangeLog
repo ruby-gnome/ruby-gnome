@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-04-19  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaexport.c: Removed.
