@@ -1,3 +1,14 @@
+2003-09-29  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaclient.c: Added a few methods (#close_all_connections,
+	  #begin_transaction, #commit_transaction, #rollback_transaction,
+	  #notify_event, #notify_error_event, #notify_connection_opened_event,
+	  #notify_transaction_started_event, #notify_transaction_committed_event,
+	  #notify_transaction_cancelled_event) and constants (EVENT_ERROR,
+	  EVENT_CONNECTION_OPENED, EVENT_CONNECTION_CLOSED, EVENT_TRANSACTION_STARTED,
+	  EVENT_TRANSACTION_COMMITTED, EVENT_TRANSACTION_CANCELLED) to complete the
+	  class.  
+
 2003-09-25  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdavalue.c: Added Gda::Value#<=>.
