@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/28 15:13:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -318,5 +318,10 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "OVERLAP_RACTANGLE_IN", INT2FIX(GDK_OVERLAP_RECTANGLE_IN));
     rb_define_const(mGdk, "OVERLAP_RACTANGLE_OUT", INT2FIX(GDK_OVERLAP_RECTANGLE_OUT));
     rb_define_const(mGdk, "OVERLAP_RACTANGLE_PART", INT2FIX(GDK_OVERLAP_RECTANGLE_PART));
+
+  /* GdkRgbDither */
+  rb_define_const(mGdk, "RGB_DITHER_NONE", INT2FIX(GDK_RGB_DITHER_NONE));
+  rb_define_const(mGdk, "RGB_DITHER_NORMAL", INT2FIX(GDK_RGB_DITHER_NORMAL));
+  rb_define_const(mGdk, "RGB_DITHER_MAX", INT2FIX(GDK_RGB_DITHER_MAX));
 }
 

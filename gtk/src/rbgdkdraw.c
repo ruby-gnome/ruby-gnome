@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/05/28 15:13:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -118,6 +118,60 @@ gdkdraw_draw_bmap(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
 		    NUM2INT(xsrc), NUM2INT(ysrc),
 		    NUM2INT(xdst), NUM2INT(ydst),
 		    NUM2INT(w), NUM2INT(h));
+    return self;
+}
+
+static VALUE
+gdkdraw_draw_rgb_image(self, gc, x, y, w, h, dither, buf, rowstride)
+    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
+{
+    gdk_draw_rgb_image(get_gdkdrawable(self), get_gdkgc(gc),
+                    NUM2INT(x), NUM2INT(y),
+                    NUM2INT(w), NUM2INT(h),
+                    NUM2INT(dither),
+                    STR2CSTR(buf),
+					NUM2INT(rowstride));
+    return self;
+}
+
+static VALUE
+gdkdraw_draw_rgb_image_dithalign(self, gc, x, y, w, h, dither, buf, rowstride, 
+								 xdith, ydith)
+    VALUE self, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
+{
+    gdk_draw_rgb_image_dithalign(get_gdkdrawable(self), get_gdkgc(gc),
+                    NUM2INT(x), NUM2INT(y),
+                    NUM2INT(w), NUM2INT(h),
+                    NUM2INT(dither),
+                    STR2CSTR(buf),
+					NUM2INT(rowstride),
+			        NUM2INT(xdith), NUM2INT(ydith));
+    return self;
+}
+
+static VALUE
+gdkdraw_draw_gray_image(self, gc, x, y, w, h, dither, buf, rowstride)
+    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
+{
+    gdk_draw_gray_image(get_gdkdrawable(self), get_gdkgc(gc),
+                    NUM2INT(x), NUM2INT(y),
+                    NUM2INT(w), NUM2INT(h),
+                    NUM2INT(dither),
+                    STR2CSTR(buf),
+                    NUM2INT(rowstride));
+    return self;
+}
+
+static VALUE
+gdkdraw_draw_rgb_32_image(self, gc, x, y, w, h, dither, buf, rowstride)
+    VALUE self, gc, x, y, w, h, dither, buf, rowstride;
+{
+    gdk_draw_rgb_32_image(get_gdkdrawable(self), get_gdkgc(gc),
+                    NUM2INT(x), NUM2INT(y),
+                    NUM2INT(w), NUM2INT(h),
+                    NUM2INT(dither),
+                    STR2CSTR(buf),
+                    NUM2INT(rowstride));
     return self;
 }
 
@@ -241,6 +295,10 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_text", gdkdraw_draw_text, 5);
     rb_define_method(gdkDrawable, "draw_pixmap", gdkdraw_draw_pmap, 8);
     rb_define_method(gdkDrawable, "draw_bitmap", gdkdraw_draw_bmap, 8);
+    rb_define_method(gdkDrawable, "draw_rgb_image", gdkdraw_draw_rgb_image, 8);
+    rb_define_method(gdkDrawable, "draw_rgb_image_dithalign", gdkdraw_draw_rgb_image_dithalign, 10);
+    rb_define_method(gdkDrawable, "draw_gray_image", gdkdraw_draw_gray_image, 8);
+    rb_define_method(gdkDrawable, "draw_rgb_32_image", gdkdraw_draw_rgb_32_image, 8);
     rb_define_method(gdkDrawable, "draw_image", gdkdraw_draw_image, 8);
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_pnts, 2);
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
