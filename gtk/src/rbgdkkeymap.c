@@ -4,7 +4,7 @@
   rbgdkkeymap.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/05/13 17:00:36 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -18,7 +18,14 @@ gdkkeymap_s_get_default(self)
 {
   return GOBJ2RVAL(gdk_keymap_get_default());
 }
-
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkkeymap_s_get_for_display(self, display)
+    VALUE self, display;
+{
+  return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
+}
+#endif
 static VALUE
 gdkkeymap_lookup_key(self, keycode, group, level)
      VALUE self, keycode, group, level;
@@ -118,6 +125,9 @@ Init_gtk_gdk_keymap()
     VALUE gdkKeymap = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 
     rb_define_singleton_method(gdkKeymap, "default", gdkkeymap_s_get_default, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_singleton_method(gdkKeymap, "for_display", gdkkeymap_s_get_for_display, 0);
+#endif
     rb_define_method(gdkKeymap, "lookup_key", gdkkeymap_lookup_key, 3);
     rb_define_method(gdkKeymap, "translate_keyboard_state", gdkkeymap_translate_keyboard_state, 3);
     rb_define_method(gdkKeymap, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);

@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/05/12 17:39:46 $
+  $Date: 2004/05/13 17:00:35 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -564,7 +564,7 @@ gdkeventclient_send_clientmessage_toall(self)
     VALUE self;
 {
     gdk_event_send_clientmessage_toall(get_gdkevent(self));
-    return Qnil;
+    return self;
 }
 
 static GdkFilterReturn
@@ -854,8 +854,8 @@ Init_gtk_gdk_event()
     G_DEF_SETTERS(ev);
 
     /* GdkSettingAction */
-    G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "SettingAction", mGdk);
-    G_DEF_CONSTANTS(mGdk, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
+    G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "Action", ev);
+    G_DEF_CONSTANTS(ev, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 

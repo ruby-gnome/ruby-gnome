@@ -1,3 +1,9 @@
+2004-05-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkkeymap.c: Add Gdk::Keymap.for_display.
+	* src/rbgdkevent.c: Gdk::EventClient#send_clientmessage_toall returns self.
+	Rename Gdk::SettingAction to Gdk::EventSetting::Action.
+
 2004-05-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcontainer.c: Gtk::Container#focus_hadjustment/vadjustment return nil
