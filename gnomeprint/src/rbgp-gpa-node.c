@@ -48,4 +48,6 @@ Init_gnome_print_gpa_node(VALUE mGnome)
   rb_define_method(c, "id", gp_gpa_node_id, 0);
   rb_define_method(c, "value", gp_gpa_node_get_value, 0);
   rb_define_method(c, "set_value", gp_gpa_node_set_value, 1);
+
+  G_DEF_SETTERS(c);
 }

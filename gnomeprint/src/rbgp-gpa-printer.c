@@ -45,12 +45,6 @@ gp_gpa_printer_get_by_id(VALUE self, VALUE id)
   return GOBJ2RVAL(gpa_printer_get_by_id(RVAL2CSTR(id)));
 }
 
-static VALUE
-gp_gpa_printer_list_load(VALUE self)
-{
-  return GOBJ2RVAL(gpa_printer_list_load());
-}
-
 /* static VALUE */
 /* gp_gpa_printer_model(VALUE self) */
 /* { */
@@ -123,7 +117,6 @@ Init_gnome_print_gpa_printer(VALUE mGnome)
 
   rb_define_module_function(c, "default", gp_gpa_printer_default, 0);
   rb_define_module_function(c, "get", gp_gpa_printer_get_by_id, 1);
-  rb_define_module_function(c, "list_load", gp_gpa_printer_list_load, 0);
   
   rb_define_method(c, "initialize", gp_gpa_printer_initialize, 4);
 
@@ -132,4 +125,5 @@ Init_gnome_print_gpa_printer(VALUE mGnome)
   rb_define_method(c, "settings", gp_gpa_printer_settings_generic, -1);
   rb_define_method(c, "state", gp_gpa_printer_state_generic, -1);
   
+  G_DEF_SETTERS(c);
 }

@@ -1,5 +1,15 @@
 2004-10-24  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gpa-printer.c: added G_DEF_SETTERS.
+
+	* src/rbgp-gpa-node.c: added G_DEF_SETTERS.
+
+	* src/rbgp-gpa-printer.c (GPAPrinter.list_load: removed.
+
+	* src/rbgp-gpa-state.c: added.
+
+	* src/rbgp-gpa-list.c: added.
+
 	* src/lib/gnomeprint2.rb: added backward compatibility for Rabbit
 	  0.0.5.
 

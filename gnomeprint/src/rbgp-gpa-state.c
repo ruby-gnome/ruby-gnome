@@ -18,23 +18,21 @@
 
 #include "rbgp.h"
 
+#define WE_ARE_LIBGNOMEPRINT_INTERNALS
+#include <libgnomeprint/private/gpa-model.h>
+#include <libgnomeprint/private/gpa-state.h>
+
+static VALUE
+gp_gpa_state_initialize(VALUE self, VALUE id)
+{
+  G_INITIALIZE(self, gpa_state_new(RVAL2CSTR(id)));
+  return Qnil;
+}
+
 void
-Init_gnomeprint2(void) {
-  VALUE mGnome = rb_define_module("Gnome");
-
-  Init_gnome_print(mGnome);
-  Init_gnome_print_job(mGnome);
-  Init_gnome_print_config(mGnome);
-  Init_gnome_print_paper(mGnome);
-  Init_gnome_print_unit(mGnome);
-
-  Init_gnome_print_gpa_root(mGnome);
-  Init_gnome_print_gpa_node(mGnome);
-  Init_gnome_print_gpa_list(mGnome);
-  Init_gnome_print_gpa_printer(mGnome);
-  Init_gnome_print_gpa_settings(mGnome);
-  Init_gnome_print_gpa_state(mGnome);
-  Init_gnome_print_gpa_model(mGnome);
-
-  Init_rbgp_utils(mGnome);
+Init_gnome_print_gpa_state(VALUE mGnome)
+{
+  VALUE c = G_DEF_CLASS(GPA_TYPE_STATE, "GPAState", mGnome);
+  
+  rb_define_method(c, "initialize", gp_gpa_state_initialize, 1);
 }

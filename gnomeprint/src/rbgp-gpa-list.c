@@ -18,23 +18,29 @@
 
 #include "rbgp.h"
 
+#define WE_ARE_LIBGNOMEPRINT_INTERNALS
+#include <libgnomeprint/private/gpa-list.h>
+
+static VALUE
+gp_gpa_list_get_default(VALUE self)
+{
+  return GOBJ2RVAL(gpa_list_get_default(RVAL2GOBJ(self)));
+}
+
+static VALUE
+gp_gpa_list_set_default(VALUE self, VALUE def)
+{
+  return CBOOL2RVAL(gpa_list_set_default(RVAL2GOBJ(self), RVAL2GOBJ(def)));
+}
+
+
 void
-Init_gnomeprint2(void) {
-  VALUE mGnome = rb_define_module("Gnome");
+Init_gnome_print_gpa_list(VALUE mGnome)
+{
+  VALUE c = G_DEF_CLASS(GPA_TYPE_LIST, "GPAList", mGnome);
 
-  Init_gnome_print(mGnome);
-  Init_gnome_print_job(mGnome);
-  Init_gnome_print_config(mGnome);
-  Init_gnome_print_paper(mGnome);
-  Init_gnome_print_unit(mGnome);
+  rb_define_method(c, "default", gp_gpa_list_get_default, 0);
+  rb_define_method(c, "set_default", gp_gpa_list_set_default, 1);
 
-  Init_gnome_print_gpa_root(mGnome);
-  Init_gnome_print_gpa_node(mGnome);
-  Init_gnome_print_gpa_list(mGnome);
-  Init_gnome_print_gpa_printer(mGnome);
-  Init_gnome_print_gpa_settings(mGnome);
-  Init_gnome_print_gpa_state(mGnome);
-  Init_gnome_print_gpa_model(mGnome);
-
-  Init_rbgp_utils(mGnome);
+  G_DEF_SETTERS(c);
 }

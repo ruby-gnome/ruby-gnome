@@ -45,8 +45,10 @@ extern void Init_gnome_print_unit(VALUE mGnome);
 
 extern void Init_gnome_print_gpa_root(VALUE mGnome);
 extern void Init_gnome_print_gpa_node(VALUE mGnome);
+extern void Init_gnome_print_gpa_list(VALUE mGnome);
 extern void Init_gnome_print_gpa_printer(VALUE mGnome);
 extern void Init_gnome_print_gpa_settings(VALUE mGnome);
+extern void Init_gnome_print_gpa_state(VALUE mGnome);
 extern void Init_gnome_print_gpa_model(VALUE mGnome);
 
 extern void Init_rbgp_utils(VALUE mGnome);
