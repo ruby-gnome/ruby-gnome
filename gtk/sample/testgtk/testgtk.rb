@@ -6,7 +6,7 @@
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.9 2003/02/01 16:46:23 mutoh Exp $
+  $Id: testgtk.rb,v 1.10 2003/04/12 17:52:55 sakai Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -179,10 +179,10 @@ def create_main_window
   scrolled_window.add_with_viewport(box2);
   box2.set_focus_vadjustment(scrolled_window.vadjustment)
 
-  for i in 0..(nbuttons-1)
-    button = Gtk::Button.new(buttons[i][0])
-    unless buttons[i][1].nil?
-      button.signal_connect("clicked", buttons[i][1]) do |obj, sample_class|
+  buttons.each do |title, sample_class|
+    button = Gtk::Button.new(title)
+    unless sample_class.nil?
+      button.signal_connect("clicked") do |obj|
         sample_class.invoke
       end
     else

@@ -1,3 +1,7 @@
+2003-04-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* sample/testgtk/testgtk.rb: cleanup
+
 2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktreeiter.c (treeiter_set_value):  Use
