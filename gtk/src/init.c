@@ -4,7 +4,7 @@
   init.c -
 
   $Author: sakai $
-  $Date: 2003/03/14 03:12:20 $
+  $Date: 2003/03/19 19:12:46 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -50,7 +50,11 @@ Init_gtk2()
     gdk_threads_init();
 #endif
 
+#if 0
     rb_protect(&require_minor, Qnil, NULL);
+#else
+    rb_rescue2(&require_minor, Qnil, NULL, Qnil, rb_eLoadError, NULL);
+#endif
 
     gtk_set_locale();
 

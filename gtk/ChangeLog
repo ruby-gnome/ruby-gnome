@@ -1,4 +1,7 @@
 2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/init.c (Init_gtk2): Use rb_rescue2() instead of rb_protect()
+	for avoiding ruby bug!?
 
 	* src/rbgdkevent.c: change Gdk::Event to a subtype of GLib::Boxed.
 
