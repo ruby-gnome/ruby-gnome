@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/26 16:04:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -61,7 +61,6 @@ extern ID id_call;
 
 extern VALUE mGtk;
 extern VALUE mGdk;
-extern VALUE mEditable;
 
 /*
  * for gtk

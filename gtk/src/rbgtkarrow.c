@@ -4,7 +4,7 @@
   rbgtkarrow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/26 16:04:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -39,4 +39,10 @@ Init_gtk_arrow()
 
     rb_define_method(gArrow, "initialize", arrow_initialize, 2);
     rb_define_method(gArrow, "set", arrow_set, 2);
+
+    /* GtkArrowType (from General constants) */
+    rb_define_const(gArrow, "UP", INT2FIX(GTK_ARROW_UP));
+    rb_define_const(gArrow, "DOWN", INT2FIX(GTK_ARROW_DOWN));
+    rb_define_const(gArrow, "LEFT", INT2FIX(GTK_ARROW_LEFT));
+    rb_define_const(gArrow, "RIGHT", INT2FIX(GTK_ARROW_RIGHT));
 }

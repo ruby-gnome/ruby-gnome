@@ -4,7 +4,7 @@
   rbgtktexttag.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/26 16:04:04 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -38,12 +38,17 @@ set_priority(self, priority)
     return priority;
 }
 
-#if 0
-gboolean     gtk_text_tag_event        (GtkTextTag        *tag,
-                                        GObject           *event_object,
-                                        GdkEvent          *event,
-                                        const GtkTextIter *iter);
-#endif
+/*
+gboolean    gtk_text_tag_event              (GtkTextTag *tag,
+                                             GObject *event_object,
+                                             GdkEvent *event,
+                                             const GtkTextIter *iter);
+struct      GtkTextAppearance;
+GtkTextAttributes* gtk_text_attributes_copy (GtkTextAttributes *src);
+GtkTextAttributes* gtk_text_attributes_new  (void);
+void        gtk_text_attributes_copy_values (GtkTextAttributes *src,
+                                             GtkTextAttributes *dest);
+*/
 
 void
 Init_gtk_texttag()
@@ -51,5 +56,8 @@ Init_gtk_texttag()
     VALUE gTextTag = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
     rb_define_method(gTextTag, "initialize", initialize, -1);
     rb_define_method(gTextTag, "priority", get_priority, 0);
-    rb_define_method(gTextTag, "priority=", set_priority, 1);
+    rb_define_method(gTextTag, "set_priority", set_priority, 1);
+
+    G_DEF_SETTERS(gTextTag);
+
 }

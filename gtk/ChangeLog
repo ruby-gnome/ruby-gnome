@@ -1,5 +1,25 @@
-2002-10-26  Masao Mutoh  <mutoh@highway.ne.jp>
+2002-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkconstants.c, src/rbgtkwindow.c: Move GtkWindowPosition, GtkWindowType to 
+	rbgtkwindow.c.
+	* src/rbgtkconstants.c, src/rbgtkbbox.c: Move GtkButtonBoxStyle to rbgtkbbox.c.
+	* src/rbgtkeditable.c: Apply G_DEF_SETTERS.
+	* src/rbgtkeditable.c, src/rbgtk.[ch]: Remove mGtkEditable.
+	* src/rbgtkconst.c: Implement all general constants.
+	Remove GtkMatchType, GtkPreviewType.
+	* src/rbgtkwindowgroup.c: Code clean up.
+	* src/rbgtktreeselection.c: Rename Gtk::TreeSelection#iter_selected? to #iter_is_selected?
+	#path_selected? to path_is_selected?
+	* src/rbgtktextmark.c: Apply G_DEF_SETTERS.
+	* src/rbgtkstyle.c: Remove obsolete methods.
+	Add Gtk::Style#attached?
+	* src/rbgtkrc.c: Remove Gtk::RC.add_widget_name_style, Gtk::RC.add_widget_class_style.
+	* src/rbgtktreeviewcolumn.c: Rename Gtk::TreeViewColumn#cell_visible? to 
+	#cell_is_visible?, 
+	* src/rbgtktooltips.c: Remove Gtk::ToolTips#set_delay.
+	Add Gtk::ToolTips#force_window.
+
+2002-10-26  Masao Mutoh  <mutoh@highway.ne.jp>
 	* src/rbgtkcellrenderertext.c: Remove property methods. 
 	* src/rbgtkcellrenderertoggle.c: Remove property methods.
 	* src/makeinits.rb: Fix error when obsoleted class was not found.

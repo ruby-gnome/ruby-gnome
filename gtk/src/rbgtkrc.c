@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/26 16:04:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -42,25 +42,6 @@ rc_m_get_style(self, w)
 {
     return GOBJ2RVAL(gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(w))));
 }
-
-static VALUE
-rc_m_add_widget_name_style(self, style, pat)
-    VALUE self, style, pat;
-{
-    gtk_rc_add_widget_name_style(GTK_RC_STYLE(RVAL2GOBJ(style)), 
-								 RVAL2CSTR(pat));
-    return Qnil;
-}
-
-static VALUE
-rc_m_add_widget_class_style(self, style, pat)
-    VALUE self, style, pat;
-{
-    gtk_rc_add_widget_class_style(GTK_RC_STYLE(RVAL2GOBJ(style)), 
-								  RVAL2CSTR(pat));
-    return Qnil;
-}
-
 void 
 Init_gtk_rc()
 {
@@ -70,8 +51,4 @@ Init_gtk_rc()
     rb_define_module_function(mRC, "parse", rc_m_parse, 1);
     rb_define_module_function(mRC, "parse_string", rc_m_parse_string, 1);
     rb_define_module_function(mRC, "get_style", rc_m_get_style, 1);
-    rb_define_module_function(mRC, "add_widget_name_style",
-							  rc_m_add_widget_name_style, 2);
-    rb_define_module_function(mRC, "add_widget_class_style",
-							  rc_m_add_widget_class_style, 2);
 }

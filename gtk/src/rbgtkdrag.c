@@ -4,15 +4,13 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/26 16:04:03 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 
 #include "global.h"
-
-VALUE mGtkDrag;
 
 static VALUE
 gtkdrag_finish(self, context, success, del, time)
@@ -73,12 +71,25 @@ gtkdrag_set_default_icon(self, context)
 void
 Init_gtk_drag()
 {
-	mGtkDrag = rb_define_module_under(mGtk, "Drag");
+    VALUE mGtkDrag = rb_define_module_under(mGtk, "Drag");
 
-	rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
-	rb_define_module_function(mGtkDrag, "source_widget", gtkdrag_get_source_widget, 1);
-	rb_define_module_function(mGtkDrag, "begin", gtkdrag_begin, 5);
-	rb_define_module_function(mGtkDrag, "set_icon_widget", gtkdrag_set_icon_widget, 4);
-	rb_define_module_function(mGtkDrag, "set_icon_pixmap", gtkdrag_set_icon_pixmap, 6);
-	rb_define_module_function(mGtkDrag, "set_default_icon", gtkdrag_set_default_icon, 1);
+    rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
+    rb_define_module_function(mGtkDrag, "source_widget", gtkdrag_get_source_widget, 1);
+    rb_define_module_function(mGtkDrag, "begin", gtkdrag_begin, 5);
+    rb_define_module_function(mGtkDrag, "set_icon_widget", gtkdrag_set_icon_widget, 4);
+    rb_define_module_function(mGtkDrag, "set_icon_pixmap", gtkdrag_set_icon_pixmap, 6);
+    rb_define_module_function(mGtkDrag, "set_default_icon", gtkdrag_set_default_icon, 1);
+
+    G_DEF_SETTERS(mGtkDrag);
+
+    /* GtkDestDefaults */
+    rb_define_const(mGtkDrag, "DEST_DEFAULT_MOTION", INT2FIX(GTK_DEST_DEFAULT_MOTION));
+    rb_define_const(mGtkDrag, "DEST_DEFAULT_HIGHLIGHT", INT2FIX(GTK_DEST_DEFAULT_HIGHLIGHT));
+    rb_define_const(mGtkDrag, "DEST_DEFAULT_DROP", INT2FIX(GTK_DEST_DEFAULT_DROP));
+    rb_define_const(mGtkDrag, "DEST_DEFAULT_ALL", INT2FIX(GTK_DEST_DEFAULT_ALL));
+
+    /* GtkTargetFlags */
+    rb_define_const(mGtkDrag, "TARGET_SAME_APP", INT2FIX(GTK_TARGET_SAME_APP));
+    rb_define_const(mGtkDrag, "TARGET_SAME_WIDGET", INT2FIX(GTK_TARGET_SAME_WIDGET));
+
 }

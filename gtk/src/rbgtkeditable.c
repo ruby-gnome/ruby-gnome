@@ -4,7 +4,7 @@
   rbgtkeditable.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/26 16:04:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,9 +13,6 @@
 
 #include "global.h"
 
-/*
- * Editable
- */
 static VALUE
 edit_sel_region(self, start, end)
     VALUE self, start, end;
@@ -143,25 +140,21 @@ edit_paste_clipboard(self)
 void 
 Init_gtk_editable()
 {
-    mEditable = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
-
-    /* FIXME */
-    rb_define_const(mEditable, "SIGNAL_INSERT_TEXT", rb_str_new2("insert_text"));
-    rb_define_const(mEditable, "SIGNAL_DELETE_TEXT", rb_str_new2("delete_text"));
-    rb_define_const(mEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));
+    VALUE mEditable = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
 
     rb_define_method(mEditable, "select_region", edit_sel_region, 2);
-    rb_define_method(mEditable, "get_selection_bounds", edit_get_sel_bounds, 0);
+    rb_define_method(mEditable, "selection_bounds", edit_get_sel_bounds, 0);
     rb_define_method(mEditable, "insert_text", edit_insert_text, 2);
     rb_define_method(mEditable, "delete_text", edit_delete_text, 2);
     rb_define_method(mEditable, "get_chars", edit_get_chars, 2);
     rb_define_method(mEditable, "delete_selection", edit_delete_selection, 0);
     rb_define_method(mEditable, "position", edit_get_position, 0);
     rb_define_method(mEditable, "set_position", edit_set_position, 1);
-    rb_define_alias(mEditable, "position=", "set_position");
     rb_define_method(mEditable, "set_editable", edit_set_editable, 1);
-    rb_define_method(mEditable, "get_editable", edit_get_editable, 0);
+    rb_define_method(mEditable, "editable?", edit_get_editable, 0);
     rb_define_method(mEditable, "copy_clipboard", edit_copy_clipboard, 0);
     rb_define_method(mEditable, "cut_clipboard", edit_cut_clipboard, 0);
     rb_define_method(mEditable, "paste_clipboard", edit_paste_clipboard, 0);
+
+    G_DEF_SETTERS(mEditable);
 }

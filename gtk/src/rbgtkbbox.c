@@ -4,7 +4,7 @@
   rbgtkbbox.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:12 $
+  $Date: 2002/10/26 16:04:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -27,6 +27,12 @@ void
 Init_gtk_button_box()
 {
     VALUE gBBox = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
-
     rb_define_method(gBBox, "set_child_secondary", bbox_set_child_secondary, 2);
+
+    /* GtkButtonBoxStyle(General constants) */
+    rb_define_const(gBBox, "DEFAULT_STYLE",INT2FIX(GTK_BUTTONBOX_DEFAULT_STYLE));
+    rb_define_const(gBBox, "SPREAD", INT2FIX(GTK_BUTTONBOX_SPREAD));
+    rb_define_const(gBBox, "EDGE", INT2FIX(GTK_BUTTONBOX_EDGE));
+    rb_define_const(gBBox, "START", INT2FIX(GTK_BUTTONBOX_START));
+    rb_define_const(gBBox, "END", INT2FIX(GTK_BUTTONBOX_END));
 }

@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/10/21 17:29:30 $
+  $Date: 2002/10/26 16:04:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -481,4 +481,13 @@ Init_gtk_window()
     rb_define_method(gWindow, "decorated_window_move_resize_window", gwin_decorated_window_move_resize_window, 0);
 */    
     G_DEF_SETTERS(gWindow);
+
+    /* GtkWindowPosition (from General constants) */
+    rb_define_const(gWindow, "POS_NONE", INT2FIX(GTK_WIN_POS_NONE));
+    rb_define_const(gWindow, "POS_CENTER", INT2FIX(GTK_WIN_POS_CENTER));
+    rb_define_const(gWindow, "POS_MOUSE", INT2FIX(GTK_WIN_POS_MOUSE));
+
+    /* GtkWindowType (from General constants) */
+    rb_define_const(gWindow, "TOPLEVEL", INT2FIX(GTK_WINDOW_TOPLEVEL));
+    rb_define_const(gWindow, "POPUP", INT2FIX(GTK_WINDOW_POPUP));
 }

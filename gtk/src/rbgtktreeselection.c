@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2002/10/13 17:32:38 $
+  $Date: 2002/10/26 16:04:04 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -165,10 +165,10 @@ Init_gtk_treeselection()
     rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);
     rb_define_method(gTs, "select_path", treeselection_select_path, 1);
     rb_define_method(gTs, "unselect_path", treeselection_unselect_path, 1);
-    rb_define_method(gTs, "path_selected?", treeselection_path_is_selected, 1);
+    rb_define_method(gTs, "path_is_selected?", treeselection_path_is_selected, 1);
     rb_define_method(gTs, "select_iter", treeselection_select_iter, 1);
     rb_define_method(gTs, "unselect_iter", treeselection_unselect_iter, 1);
-    rb_define_method(gTs, "iter_selected?", treeselection_iter_is_selected, 1);
+    rb_define_method(gTs, "iter_is_selected?", treeselection_iter_is_selected, 1);
     rb_define_method(gTs, "select_all", treeselection_select_all, 0);
     rb_define_method(gTs, "unselect_all", treeselection_unselect_all, 0);
     rb_define_method(gTs, "select_range", treeselection_select_range, 2);
