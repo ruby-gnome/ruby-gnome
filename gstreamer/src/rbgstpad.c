@@ -233,6 +233,25 @@ rb_gst_pad_link (VALUE self, VALUE other_pad)
 }
  
 /*
+ * Method: link_filtered(other_pad, caps)
+ * other_pad: a Gst::Pad.
+ * caps: a Gst::Caps.
+ *
+ * Links the current pad (source) to an other pad (sink), constrained by
+ * the given filter caps.
+ *
+ * Returns: true if the pads have been linked, false otherwise.
+ */  
+static VALUE
+rb_gst_pad_link_filtered (VALUE self, VALUE other_pad, VALUE rcaps)
+{
+	GstPad *srcpad = RGST_PAD (self);
+	GstPad *sinkpad = RGST_PAD (other_pad);
+    GstCaps *caps = RGST_CAPS (rcaps);
+	return CBOOL2RVAL (gst_pad_link_filtered (srcpad, sinkpad, caps)); 
+}
+
+/*
  * Method: unlink(other_pad)
  * other_pad: a Gst::Pad.
  *
@@ -354,6 +373,7 @@ Init_gst_pad (void)
 	rb_define_method (c, "each_event_mask", rb_gst_pad_each_event_mask, 0);
 	rb_define_method (c, "each_query_type", rb_gst_pad_each_query_type, 0);
 	rb_define_method (c, "link", rb_gst_pad_link, 1);
+	rb_define_method (c, "link_filtered", rb_gst_pad_link_filtered, 2);
 	rb_define_method (c, "unlink", rb_gst_pad_unlink, 1);
 	rb_define_method (c, "disabled?", rb_gst_pad_is_disabled, 0);
 	rb_define_method (c, "negotiating?", rb_gst_pad_is_negotiating, 0);

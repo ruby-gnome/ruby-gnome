@@ -381,6 +381,34 @@ rb_gst_element_link (VALUE self, VALUE other_element)
     return gst_element_link (element1, element2) == TRUE ? other_element : Qnil;
 }
 
+/*
+ * Method: link_filtered(element, caps)
+ * element: a Gst::Element object.
+ * caps: a Gst::Caps object.
+ *
+ * Links this element (source) to the provided element (destination), 
+ * filtered by the given caps.
+ *
+ * The method looks for existing pads and request pads that 
+ * aren't linked yet. If multiple links are possible, only one 
+ * is established.
+ *
+ * Returns: the destination element, or nil if the link failed.
+ */
+static VALUE
+rb_gst_element_link_filtered (VALUE self, VALUE other_element, VALUE rcaps)
+{
+    GstElement *element1, *element2;
+    GstCaps *caps;
+    
+    element1 = RGST_ELEMENT (self);
+    element2 = RGST_ELEMENT (other_element);
+    caps = RGST_CAPS (rcaps);
+    return gst_element_link_filtered (element1, element2, caps)
+        ? other_element 
+        : Qnil;
+}
+
 /* Method: requires_clock?
  * Returns: true if the element requires a clock, false otherwise.
  */
@@ -1220,6 +1248,7 @@ Init_gst_element (void)
     rb_define_method (c, "sched_interrupt", rb_gst_element_sched_interrupt, 0);
     rb_define_method (c, "link", rb_gst_element_link, 1);
     rb_define_alias (c, ">>", "link");
+    rb_define_method (c, "link_filtered", rb_gst_element_link_filtered, 2);
     rb_define_method (c, "provides_clock?", rb_gst_element_provides_clock, 0);
     rb_define_method (c, "requires_clock?", rb_gst_element_requires_clock, 0);
     rb_define_method (c, "clock", rb_gst_element_get_clock, 0);
