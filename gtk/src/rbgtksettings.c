@@ -4,7 +4,7 @@
   rbgtksettings.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/24 17:54:31 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
@@ -77,10 +77,16 @@ settings_rc_property_parse_color(self, spec, str)
 {
     gboolean ret; 
     GValue prop = {0,};
+    VALUE val = Qnil;
+    GString* gstr = g_string_new(RVAL2CSTR(str));
     g_value_init(&prop, GDK_TYPE_COLOR);
     ret = gtk_rc_property_parse_color(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                      g_string_new(RVAL2CSTR(str)), &prop);
-    return ret ? GVAL2RVAL(&prop) : Qnil;
+                                      gstr, &prop);
+    if (ret) val = GVAL2RVAL(&prop);
+
+    g_string_free(gstr, TRUE);
+    g_value_unset(&prop);
+    return val;
 }
 
 static VALUE
@@ -89,10 +95,17 @@ settings_rc_property_parse_enum(self, spec, str)
 {
     gboolean ret; 
     GValue prop = {0,};
+    VALUE val = Qnil;
+    GString* gstr = g_string_new(RVAL2CSTR(str));
     GParamSpec* gspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
     g_value_init(&prop, gspec->value_type);
-    ret = gtk_rc_property_parse_enum(gspec, g_string_new(RVAL2CSTR(str)), &prop);
-    return ret ? GVAL2RVAL(&prop) : Qnil;
+    ret = gtk_rc_property_parse_enum(gspec, gstr, &prop);
+
+    if (ret) val = GVAL2RVAL(&prop);
+
+    g_string_free(gstr, TRUE);
+    g_value_unset(&prop);
+    return val;
 }
 
 static VALUE
@@ -101,10 +114,17 @@ settings_rc_property_parse_flags(self, spec, str)
 {
     gboolean ret; 
     GValue prop = {0,};
+    VALUE val = Qnil;
+    GString* gstr = g_string_new(RVAL2CSTR(str));
     GParamSpec* gspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
     g_value_init(&prop, gspec->value_type);
-    ret = gtk_rc_property_parse_flags(gspec, g_string_new(RVAL2CSTR(str)), &prop);
-    return ret ? GVAL2RVAL(&prop) : Qnil;
+    ret = gtk_rc_property_parse_flags(gspec, gstr, &prop);
+
+    if (ret) val = GVAL2RVAL(&prop);
+
+    g_string_free(gstr, TRUE);
+    g_value_unset(&prop);
+    return val;
 }
 
 static VALUE
@@ -113,15 +133,18 @@ settings_rc_property_parse_requisition(self, spec, str)
 {
     gboolean ret; 
     GValue prop = {0,};
+    VALUE val = Qnil;
+    GString* gstr = g_string_new(RVAL2CSTR(str));
     g_value_init(&prop, GTK_TYPE_REQUISITION);
     ret = gtk_rc_property_parse_requisition(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                            g_string_new(RVAL2CSTR(str)), &prop);
+                                            gstr, &prop);
     if (ret){
         GtkRequisition* req = g_value_get_boxed(&prop);
-        return rb_assoc_new(INT2NUM(req->width), INT2NUM(req->height));
-    } else {
-        return Qnil;
+        val = rb_assoc_new(INT2NUM(req->width), INT2NUM(req->height));
     }
+    g_string_free(gstr, TRUE);
+    g_value_unset(&prop);
+    return val;    
 }
 
 static VALUE
@@ -130,18 +153,19 @@ settings_rc_property_parse_border(self, spec, str)
 {
     gboolean ret; 
     GValue prop = {0,};
+    VALUE val = Qnil;
+    GString* gstr = g_string_new(RVAL2CSTR(str));
     g_value_init(&prop, GTK_TYPE_BORDER);
     ret = gtk_rc_property_parse_border(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                      g_string_new(RVAL2CSTR(str)), &prop);
+                                      gstr, &prop);
     if (ret){
         GtkBorder* border = g_value_get_boxed(&prop);
-        return rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right), 
-                           INT2NUM(border->top), INT2NUM(border->bottom));
-    } else {
-        return Qnil;
+        val = rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right), 
+                          INT2NUM(border->top), INT2NUM(border->bottom));
     }
-
-    return ret ? GVAL2RVAL(&prop) : Qnil;
+    g_string_free(gstr, TRUE);
+    g_value_unset(&prop);
+    return val;
 }
 
 static VALUE
@@ -155,6 +179,7 @@ settings_set_property_value(self, name, value, origin)
     svalue.origin = RVAL2CSTR(origin);
     gtk_settings_set_property_value(GTK_SETTINGS(RVAL2GOBJ(self)), 
                                     RVAL2CSTR(name), &svalue);
+    g_value_unset(&svalue.value);
 
     return self;
 }

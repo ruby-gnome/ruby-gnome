@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2004/03/23 15:08:30 $
+  $Date: 2004/03/24 17:54:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -79,7 +79,7 @@ treemodel_get_value(self, iter, column)
     gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
-        g_value_reset(&value);
+        g_value_unset(&value);
     } 
     return ret;
 }

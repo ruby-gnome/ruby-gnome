@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/24 17:54:31 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -187,16 +187,32 @@ gdkscreen_broadcast_client_message(self, event)
     return self;
 }
 
+/*
+  type: String, Integer, Gdk::Color.
+ */
 static VALUE
-gdkscreen_get_setting(self, name)
-    VALUE self, name;
+gdkscreen_get_setting(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-      GValue val;
-      if (gdk_screen_get_setting(_SELF(self), RVAL2CSTR(name), &val))
-      {
-      	  return GVAL2RVAL(&val);
-      }
-      return Qnil;
+    VALUE name, type;
+    GType gtype;
+    GValue val = {0,};
+    gboolean ret;
+    VALUE value;
+
+    rb_scan_args(argc, argv, "11", &name, &type);
+    if NIL_P(type) 
+        gtype = G_TYPE_STRING;
+    else
+        gtype = CLASS2GTYPE(type);
+
+    g_value_init(&val, gtype);
+    ret = gdk_screen_get_setting(_SELF(self), RVAL2CSTR(name), &val);
+    value = ret ? GVAL2RVAL(&val) : Qnil;
+    g_value_unset(&val);
+    return value;
 }
 
 #endif
@@ -228,7 +244,7 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "monitor_geometry", gdkscreen_monitor_geometry, 1);
     rb_define_method(gdkScreen, "get_monitor", gdkscreen_get_monitor, -1);
     rb_define_method(gdkScreen, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
-    rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, 1);
+    rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
 
     G_DEF_SETTERS(gdkScreen);
 

@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/24 17:54:30 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -344,14 +344,33 @@ gdkevent_screen(self)
 }
 #endif
 
+/*
+  type: String, Integer, Gdk::Color.
+ */
 static VALUE
-gdkevent_s_setting_get(self, name)
-    VALUE self, name;
+gdkevent_s_setting_get(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-    GValue value = {0, };
+    VALUE name, type;
+    GType gtype;
+    GValue val = {0,};
+    gboolean ret;
+    VALUE value;
 
-    gboolean ret = gdk_setting_get(RVAL2CSTR(name), &value);
-    return ret ? GVAL2RVAL(&value) : Qnil;
+    rb_scan_args(argc, argv, "11", &name, &type);
+    if NIL_P(type) 
+        gtype = G_TYPE_STRING;
+    else
+        gtype = CLASS2GTYPE(type);
+
+    g_value_init(&val, gtype);
+    ret = gdk_setting_get(RVAL2CSTR(name), &val);
+
+    value = ret ? GVAL2RVAL(&val) : Qnil;
+    g_value_unset(&val);
+    return value;
 }
 
 /* GdkEventAny */
@@ -648,7 +667,7 @@ Init_gtk_gdk_event()
     rb_define_singleton_method(gdkEvent, "handler_set", gdkevent_s_handler_set, 0);
     rb_define_singleton_method(gdkEvent, "show_events?", gdkevent_s_get_show_events, 0);
     rb_define_singleton_method(gdkEvent, "set_show_events", gdkevent_s_set_show_events, 1);
-    rb_define_singleton_method(gdkEvent, "setting_get", gdkevent_s_setting_get, 1);
+    rb_define_singleton_method(gdkEvent, "setting_get", gdkevent_s_setting_get, -1);
     rb_define_singleton_method(gdkEvent, "add_client_message_filter", gdkevent_s_add_client_message_filter, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkEvent, "screen", gdkevent_screen, 0);

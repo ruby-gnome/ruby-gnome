@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2004/03/23 15:08:30 $
+  $Date: 2004/03/24 17:54:33 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -62,7 +62,7 @@ treeiter_get_value(self, column)
     gtk_tree_model_get_value(model, iter, NUM2INT(column), &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
-        g_value_reset(&value);
+        g_value_unset(&value);
     } 
     return ret;
 }
@@ -208,8 +208,8 @@ treeiter_eql(self, other)
         
         ret1 = GVAL2RVAL(&gval1);
         ret2 = GVAL2RVAL(&gval2);
-        g_value_reset(&gval1);
-        g_value_reset(&gval2);
+        g_value_unset(&gval1);
+        g_value_unset(&gval2);
         if (rb_equal(ret1, ret2) == Qfalse) 
             return Qfalse;
     }

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/24 17:54:33 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -987,14 +987,14 @@ static VALUE
 widget_state(self)
     VALUE self;
 {
-    return INT2FIX(_SELF(self)->state);
+    return GENUM2RVAL(_SELF(self)->state, GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
 widget_saved_state(self)
     VALUE self;
 {
-    return INT2FIX(_SELF(self)->saved_state);
+    return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE

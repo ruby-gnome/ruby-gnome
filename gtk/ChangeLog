@@ -1,5 +1,16 @@
+2004-03-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstyle.c: Fix a bug of Gtk::Style#paint_layout. 
+	Reported by rds. 
+	* src/rbgtkwidget.c: Fix a bug of Gtk::Widget#state, #saved_state.
+
 2004-03-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkstyle.c: Accept nil for an argument of Gtk::Style#paint_xxx.
+	* src/rbgdkscreen.c: Fix a bug of Gdk::Screen#get_setting.
+	* src/rbgdkevent.c: Fix a bug of Gdk::Event.setting_get.
+	* sample/misc/gdkscreen.rb: Added.
+	* src/rbgtksettings.c: Fix memory leaks. 
 	* src/rbgtktreemodel.c: Fix a memory leak of Gtk::TreeModel#get_value.  
 	* src/rbgtktreeiter.c: ditto (Gtk::TreeIter#[], #==). 
 
