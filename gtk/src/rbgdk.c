@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/09 14:24:50 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -14,122 +14,6 @@
 #include "global.h"
 
 VALUE mGdk;
-
-VALUE gdkEvent;
-
-VALUE
-make_gdkevent(ev)
-    GdkEvent *ev;
-{
-    GdkEvent *event;
-    VALUE ret;
-
-    if (ev == NULL) return Qnil;
-
-    event = gdk_event_copy(ev);
-
-    switch (event->type) {
-
-    case GDK_EXPOSE:
-        ret = Data_Wrap_Struct(gdkEventExpose, 0, gdk_event_free, event);
-        break;
-
-    case GDK_NO_EXPOSE:
-        ret = Data_Wrap_Struct(gdkEventNoExpose, 0, gdk_event_free, event);
-        break;
-
-    case GDK_VISIBILITY_NOTIFY:
-        ret = Data_Wrap_Struct(gdkEventVisibility, 0, gdk_event_free, event);
-        break;
-
-    case GDK_MOTION_NOTIFY:
-        ret = Data_Wrap_Struct(gdkEventMotion, 0, gdk_event_free, event);
-        break;
-
-    case GDK_BUTTON_PRESS:
-    case GDK_2BUTTON_PRESS:
-    case GDK_3BUTTON_PRESS:
-    case GDK_BUTTON_RELEASE:
-        ret = Data_Wrap_Struct(gdkEventButton, 0, gdk_event_free, event);
-        break;
-
-    case GDK_KEY_PRESS:
-    case GDK_KEY_RELEASE:
-        ret = Data_Wrap_Struct(gdkEventKey, 0, gdk_event_free, event);
-        break;
-
-    case GDK_FOCUS_CHANGE:
-        ret = Data_Wrap_Struct(gdkEventFocus, 0, gdk_event_free, event);
-        break;
-
-    case GDK_CONFIGURE:
-        ret = Data_Wrap_Struct(gdkEventConfigure, 0, gdk_event_free, event);
-        break;
-
-    case GDK_PROPERTY_NOTIFY:
-        ret = Data_Wrap_Struct(gdkEventProperty, 0, gdk_event_free, event);
-        break;
-
-    case GDK_SELECTION_CLEAR:
-    case GDK_SELECTION_REQUEST:
-    case GDK_SELECTION_NOTIFY:
-        ret = Data_Wrap_Struct(gdkEventSelection, 0, gdk_event_free, event);
-        break;
-
-    case GDK_DRAG_ENTER:
-    case GDK_DRAG_LEAVE:
-    case GDK_DRAG_MOTION:
-    case GDK_DRAG_STATUS:
-    case GDK_DROP_START:
-    case GDK_DROP_FINISHED:
-        ret = Data_Wrap_Struct(gdkEventDND, 0, gdk_event_free, event);
-        break;
-
-    case GDK_PROXIMITY_IN:
-    case GDK_PROXIMITY_OUT:
-        ret = Data_Wrap_Struct(gdkEventProximity, 0, gdk_event_free, event);
-        break;
-
-    case GDK_CLIENT_EVENT:
-        ret = Data_Wrap_Struct(gdkEventClient, 0, gdk_event_free, event);
-        break;
-
-    case GDK_ENTER_NOTIFY:
-    case GDK_LEAVE_NOTIFY:
-        ret = Data_Wrap_Struct(gdkEventCrossing, 0, gdk_event_free, event);
-        break;
-
-    /*
-     * I don't know which these types below should be related to.
-     * Please teach me if you know it.
-     */
-    case GDK_DELETE:
-    case GDK_DESTROY:
-    case GDK_MAP:
-    case GDK_UNMAP:
-
-    default:
-        ret = Data_Wrap_Struct(gdkEvent, 0, gdk_event_free, event);
-    }
-
-    return ret;
-}
-
-GdkEvent*
-get_gdkevent(event)
-    VALUE event;
-{
-    GdkEvent *gevent;
-
-    if (NIL_P(event)) return NULL;
-
-    if (!rb_obj_is_kind_of(event, gdkEvent)) {
-        rb_raise(rb_eTypeError, "not a GdkEvent...");
-    }
-    Data_Get_Struct(event, GdkEvent, gevent);
-
-    return gevent;
-}
 
 /*
  * Gdk

@@ -1,3 +1,12 @@
+2002-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkgeometry.c: Add file. It's my mistake.
+
+2002-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdk.c, src/rbgdkevent.c: Move *_gdkevent() to rbgdkevent.c.
+	Remove declaration of gdkEvent*.
+
 2002-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkrequision.c: Fix a param of G_DEF_CLASS from mGdk to mGtk.

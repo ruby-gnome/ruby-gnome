@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/09 14:24:50 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -59,26 +59,6 @@ extern VALUE mGdk;
 extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
 extern VALUE mGdkRgb;
-
-extern VALUE gdkEvent;
-
-extern VALUE gdkEventType;
-extern VALUE gdkEventAny;
-extern VALUE gdkEventExpose;
-extern VALUE gdkEventNoExpose;
-extern VALUE gdkEventVisibility;
-extern VALUE gdkEventMotion;
-extern VALUE gdkEventButton;
-extern VALUE gdkEventKey;
-extern VALUE gdkEventCrossing;
-extern VALUE gdkEventFocus;
-extern VALUE gdkEventConfigure;
-extern VALUE gdkEventProperty;
-extern VALUE gdkEventSelection;
-extern VALUE gdkEventDND;
-extern VALUE gdkEventProximity;
-extern VALUE gdkEventClient;
-extern VALUE gdkEventOther;
 
 /*
  * for gtk
