@@ -1,3 +1,12 @@
+2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangorenderer.c: Added for Pango-1.8. 
+	* src/depend: Added rbpangoversion.h 
+	* src/makeversion.rb: Added. Create rbpangoversion.h which defines
+	pango version as constants detected from pkg-config. 
+	* extconf.rb: Call makeversion.rb.
+	* src/rbpango.h: Include rbpangoversion.h.
+
 2005-01-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/rbpangolayout.c: Fix to compile under older pango.

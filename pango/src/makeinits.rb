@@ -1,3 +1,12 @@
+=begin
+  makeinits.rb -
+
+  $Author: mutoh $
+  $Date: 2005/01/28 09:24:45 $
+
+  Copyright (C) 2002-2005 Masao Mutoh
+=end
+
 except_targets = ["Init_pango()"]
 
 def print_data(array, type, defs, extern = false)
@@ -33,7 +42,7 @@ end
 
 print_data(inits, "", nil, true)
 
-print "void Init_pango_inits()\n"
-print "{\n"
+puts "void Init_pango_inits()\n"
+puts "{\n"
 print_data(inits, "", nil)
-print "}\n"
+puts "}\n"

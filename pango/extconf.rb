@@ -37,8 +37,11 @@ begin
   Dir.mkdir('src') unless File.exist? 'src'
   Dir.chdir "src"
 
+  pango_version = PKGConfig.modversion("pango")
+
   File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
   system("ruby #{srcdir}/makeinits.rb #{srcdir}/*.c > rbpangoinits.c")
+  system("ruby #{srcdir}/makeversion.rb #{pango_version} > rbpangoversion.h")
 
   $objs = []
   Dir.glob("#{srcdir}/*.c") do |f|
