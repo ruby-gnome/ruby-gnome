@@ -4,9 +4,9 @@
   rbgtkhtmlview.c
 
   $Author: mutoh $
-  $Date: 2004/03/03 17:50:04 $
+  $Date: 2004/03/05 16:29:45 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003,2004 Masao Mutoh
   Copyright (C) 2003 Martin Povolny
 ************************************************/
 #include "rbgtkhtml.h"
