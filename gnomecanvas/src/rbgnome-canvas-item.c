@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.7 2002/09/29 03:45:19 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.8 2002/09/29 13:19:16 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -178,7 +178,7 @@ citem_grab(self, event_mask, cursor, etime)
     return NUM2INT(
         gnome_canvas_item_grab(_SELF(self),
                                NUM2INT(event_mask),
-                               RVAL2BOXED(cursor),
+                               (GdkCursor *)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
                                NIL_P(etime) ? 0 : NUM2INT(etime)));
 }
 
