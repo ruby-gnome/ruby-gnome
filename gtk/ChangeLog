@@ -1,3 +1,11 @@
+2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktreeiter.c (treeiter_set_value):  Use
+	gtk_tree_model_get_column_type() instead of RVAL2GTYPE().
+	And call g_value_unset().
+	* src/rbgtkliststore.c (lstore_set_value): ditto
+	* src/rbgtktreestore.c (tstore_set_value): ditto
+
 2003-04-06  Stephen Lewis <slewis@paradise.net.nz>
 
 	* src/rbgtktreeiter.c: Bugfix for Gtk::TreeIter#parent.

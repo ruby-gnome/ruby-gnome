@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: mutoh $
-  $Date: 2003/04/05 15:07:56 $
+  $Author: sakai $
+  $Date: 2003/04/07 14:31:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -128,15 +128,19 @@ treeiter_set_value(self, column, value)
 
     VALUE obj = rb_hash_aref(treeiter_set_value_table, INT2NUM(G_TYPE_FROM_INSTANCE(model)));
     rbgtkiter_set_value_func func;
+    GType gtype = gtk_tree_model_get_column_type(model, NUM2INT(column));
     GValue gval = {0,};
 
     if (NIL_P(obj))
         rb_raise(rb_eTypeError, "Gtk::TreeModel is invalid.");
 
     Data_Get_Struct(obj, void, func);
-    g_value_init(&gval, RVAL2GTYPE(value));
+
+    g_value_init(&gval, gtype);
     rbgobj_rvalue_to_gvalue(value, &gval);
     func(model, iter, NUM2INT(column), &gval);
+    g_value_unset(&gval);
+
     return self;
 }
 
