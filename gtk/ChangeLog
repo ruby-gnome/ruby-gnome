@@ -1,9 +1,16 @@
+2002-10-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextiter.c (Init_gtk_textiter): 
+	* src/rbgtktextiter.c: Rename is_foo? to foo?. 
+	* src/rbgtkstatusbar.c: Rename set_resize_grip to set_has_resize_grip, 
+	resize_grip? to has_resize_grip? 
+
 2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgtkentry.c: Fix small bug of Gtk::Entry#initialize.
 
 2002-10-30  Masao Mutoh  <mutoh@highway.ne.jp>
-
+	
 	* src/rbgtkitemfactory.c: Change parameter order of Gtk::ItemFactory#create_item, 
 	#create_items. 
 	* src/rbgtkwidget.c, src/rbgtkdrag.c: Move Dnd methods to rbgtkdrag.c.

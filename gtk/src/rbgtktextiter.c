@@ -3,32 +3,23 @@
 
   rbgtktextiter.c -
 
-  $Author: sakai $
-  $Date: 2002/10/02 14:46:23 $
+  $Author: mutoh $
+  $Date: 2002/10/30 15:11:07 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
 
 #include "global.h"
 
-static VALUE cTextIter;
+#define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
+#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t))
 
-static inline VALUE
-make_gtktextiter(GtkTextIter* iter)
-{ return BOXED2RVAL(iter, GTK_TYPE_TEXT_ITER); }
-
-static inline GtkTextIter*
-get_gtktextiter(VALUE obj)
-{ return RVAL2BOXED(obj, GTK_TYPE_TEXT_ITER); }
-
-
-// GtkTextIter *gtk_text_iter_copy     (const GtkTextIter *iter);
 
 static VALUE
 get_buffer(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_iter_get_buffer(get_gtktextiter(self)));
+    return GOBJ2RVAL(gtk_text_iter_get_buffer(_SELF(self)));
 }
 
 #define def_gint_getter(__name__) \
@@ -36,7 +27,7 @@ static VALUE \
 get_##__name__(self) \
     VALUE self; \
 { \
-    return INT2NUM(gtk_text_iter_get_##__name__(get_gtktextiter(self))); \
+    return INT2NUM(gtk_text_iter_get_##__name__(_SELF(self))); \
 }
 
 def_gint_getter(offset)
@@ -50,23 +41,21 @@ static VALUE
 get_char(self)
     VALUE self;
 {
-    return INT2NUM(gtk_text_iter_get_char(get_gtktextiter(self)));
+    return INT2NUM(gtk_text_iter_get_char(_SELF(self)));
 }
 
 static VALUE
 get_slice(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_slice(get_gtktextiter(self),
-                                               get_gtktextiter(rhs)));
+    return rb_str_new2(gtk_text_iter_get_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_text(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_slice(get_gtktextiter(self),
-                                               get_gtktextiter(rhs)));
+    return rb_str_new2(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
 }
 
 
@@ -74,105 +63,77 @@ static VALUE
 get_visible_slice(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_visible_slice(get_gtktextiter(self),
-                                                       get_gtktextiter(rhs)));
+    return rb_str_new2(gtk_text_iter_get_visible_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_visible_text(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_visible_slice(get_gtktextiter(self),
-                                                       get_gtktextiter(rhs)));
+    return rb_str_new2(gtk_text_iter_get_visible_text(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_pixbuf(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_iter_get_pixbuf(get_gtktextiter(self)));
-}
-
-static void
-collect_marks(data, ary)
-    gpointer data;
-    VALUE ary;
-{
-    rb_ary_push(ary, GOBJ2RVAL(data));
+    return GOBJ2RVAL(gtk_text_iter_get_pixbuf(_SELF(self)));
 }
 
 static VALUE
 get_marks(self)
     VALUE self;
 {
-    GSList* list = gtk_text_iter_get_marks(get_gtktextiter(self));
-    VALUE result = rb_ary_new();
-    g_slist_foreach(list, collect_marks, (gpointer)result);
-    return result;
-}
-
-
-static VALUE
-get_child_anchor(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gtk_text_iter_get_child_anchor(get_gtktextiter(self)));
-}
-
-static void
-collect_tags(data, user_data)
-    gpointer data, user_data;
-{
-    VALUE ary = (VALUE)user_data;
-    rb_ary_push(ary, GOBJ2RVAL(data));
+    return GSLIST2ARY(gtk_text_iter_get_marks(_SELF(self)));
 }
 
 static VALUE
 get_toggled_tags(self, toggled_on)
     VALUE self, toggled_on;
 {
-    GSList* list = gtk_text_iter_get_toggled_tags(get_gtktextiter(self), RTEST(toggled_on));
-    VALUE result = rb_ary_new();
-    g_slist_foreach(list, &collect_tags, (gpointer)result);
-    return result;
+    return GSLIST2ARY(gtk_text_iter_get_toggled_tags(_SELF(self), RTEST(toggled_on)));
+}
+
+static VALUE
+get_child_anchor(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_text_iter_get_child_anchor(_SELF(self)));
 }
 
 static VALUE
 begins_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_begins_tag(get_gtktextiter(self), GTK_TEXT_TAG(RVAL2GOBJ(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
 }
 
 static VALUE
 ends_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_ends_tag(get_gtktextiter(self), GTK_TEXT_TAG(RVAL2GOBJ(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
 }
 
 static VALUE
 toggles_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_toggles_tag(get_gtktextiter(self), GTK_TEXT_TAG(RVAL2GOBJ(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
 }
 
 static VALUE
 has_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_toggles_tag(get_gtktextiter(self), GTK_TEXT_TAG(RVAL2GOBJ(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
 }
 
 static VALUE
 get_tags(self)
     VALUE self;
 {
-    GSList* list = gtk_text_iter_get_tags(get_gtktextiter(self));
-    VALUE result = rb_ary_new();
-    g_slist_foreach(list, &collect_tags, (gpointer)result);
-    return result;
+    return GSLIST2ARY(gtk_text_iter_get_tags(_SELF(self)));
 }
 
 #if 0
@@ -187,7 +148,7 @@ static VALUE \
 __name__(self) \
     VALUE self; \
 { \
-    return gtk_text_iter_##__name__(get_gtktextiter(self)) ? Qtrue : Qfalse; \
+    return gtk_text_iter_##__name__(_SELF(self)) ? Qtrue : Qfalse; \
 }
 
 def_predicate(starts_word)
@@ -211,7 +172,7 @@ static VALUE
 get_language(self)
     VALUE self;
 {
-    return rb_str_new2(pango_language_to_string(gtk_text_iter_get_language(get_gtktextiter(self))));
+    return rb_str_new2(pango_language_to_string(gtk_text_iter_get_language(_SELF(self))));
 }
 
 def_predicate(is_end)
@@ -223,7 +184,7 @@ static VALUE \
 __name__(self) \
     VALUE self; \
 { \
-    return gtk_text_iter_##__name__(get_gtktextiter(self)) ? Qtrue : Qfalse; \
+    return gtk_text_iter_##__name__(_SELF(self)) ? Qtrue : Qfalse; \
 }
 
 #define def_move_gint(__name__) \
@@ -231,7 +192,7 @@ static VALUE \
 __name__(self, i) \
     VALUE self, i; \
 { \
-    return gtk_text_iter_##__name__(get_gtktextiter(self), NUM2INT(i)) ? Qtrue : Qfalse; \
+    return gtk_text_iter_##__name__(_SELF(self), NUM2INT(i)) ? Qtrue : Qfalse; \
 }
 
 def_move(forward_char)
@@ -263,7 +224,7 @@ static VALUE \
 set_##__name__(self, val) \
     VALUE self, val; \
 { \
-    gtk_text_iter_set_##__name__(get_gtktextiter(self), NUM2INT(val)); \
+    gtk_text_iter_set_##__name__(_SELF(self), NUM2INT(val)); \
     return val; \
 }
 
@@ -322,7 +283,7 @@ static VALUE
 compare(self, rhs)
     VALUE self, rhs;
 {
-    return INT2NUM(gtk_text_iter_compare(get_gtktextiter(self), get_gtktextiter(rhs)));
+    return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
     
 #if 0
@@ -338,16 +299,8 @@ void     gtk_text_iter_order           (GtkTextIter *first,
 void
 Init_gtk_textiter()
 {
-    cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
+    VALUE cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(cTextIter, rb_mComparable);
-
-#if 0
-typedef enum {
-  GTK_TEXT_SEARCH_VISIBLE_ONLY,
-  GTK_TEXT_SEARCH_TEXT_ONLY
-  /* Possible future plans: SEARCH_CASE_INSENSITIVE, SEARCH_REGEXP */
-} GtkTextSearchFlags;
-#endif
 
     rb_define_method(cTextIter, "buffer", get_buffer, 0);
     rb_define_method(cTextIter, "offset", get_offset, 0);
@@ -381,14 +334,14 @@ typedef enum {
     rb_define_method(cTextIter, "ends_sentence?", ends_sentence, 0);
     rb_define_method(cTextIter, "starts_line?", starts_line, 0);
     rb_define_method(cTextIter, "ends_line?", ends_line, 0);
-    rb_define_method(cTextIter, "is_cursor_position?", is_cursor_position, 0);
+    rb_define_method(cTextIter, "cursor_position?", is_cursor_position, 0);
 
     rb_define_method(cTextIter, "chars_in_line", get_chars_in_line, 0);
     rb_define_method(cTextIter, "bytes_in_line", get_bytes_in_line, 0);
 
     rb_define_method(cTextIter, "language", get_language, 0);
-    rb_define_method(cTextIter, "is_end?", is_end, 0);
-    rb_define_method(cTextIter, "is_start?", is_start, 0);
+    rb_define_method(cTextIter, "end?", is_end, 0);
+    rb_define_method(cTextIter, "start?", is_start, 0);
 
     rb_define_method(cTextIter, "forward_char", forward_char, 0);
     rb_define_method(cTextIter, "backward_char", backward_char, 0);
@@ -414,13 +367,19 @@ typedef enum {
     rb_define_method(cTextIter, "forward_to_line_end", forward_to_line_end, 0);
 
 
-    rb_define_method(cTextIter, "offset=", set_offset, 1);
-    rb_define_method(cTextIter, "line=", set_line, 1);
-    rb_define_method(cTextIter, "line_offset=", set_line_offset, 1);
-    rb_define_method(cTextIter, "line_index=", set_line_index, 1);
+    rb_define_method(cTextIter, "set_offset", set_offset, 1);
+    rb_define_method(cTextIter, "set_line", set_line, 1);
+    rb_define_method(cTextIter, "set_line_offset", set_line_offset, 1);
+    rb_define_method(cTextIter, "set_line_index", set_line_index, 1);
 
-    rb_define_method(cTextIter, "visible_line_offset=", set_visible_line_offset, 1);
-    rb_define_method(cTextIter, "visible_line_index=", set_visible_line_index, 1);
+    rb_define_method(cTextIter, "set_visible_line_offset", set_visible_line_offset, 1);
+    rb_define_method(cTextIter, "set_visible_line_index", set_visible_line_index, 1);
 
     rb_define_method(cTextIter, "<=>", compare, 1);
+
+    G_DEF_SETTERS(cTextIter);
+
+    /* GtkTextSearchFlags */
+    rb_define_const(cTextIter, "SEARCH_VISIBLE_ONLY", INT2FIX(GTK_TEXT_SEARCH_VISIBLE_ONLY));
+    rb_define_const(cTextIter, "SEARCH_TEXT_ONLY", INT2FIX(GTK_TEXT_SEARCH_TEXT_ONLY));
 }

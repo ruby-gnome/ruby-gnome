@@ -4,7 +4,7 @@
   rbgtkstatusbar.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:18 $
+  $Date: 2002/10/30 15:11:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -82,8 +82,8 @@ Init_gtk_statusbar()
     rb_define_method(gStatusBar, "push", statusbar_push, 2);
     rb_define_method(gStatusBar, "pop", statusbar_pop, 1);
     rb_define_method(gStatusBar, "remove", statusbar_remove, 2);
-    rb_define_method(gStatusBar, "set_resize_grip", statusbar_set_has_resize_grip, 1);
-    rb_define_method(gStatusBar, "resize_grip?", statusbar_get_has_resize_grip, 0);
+    rb_define_method(gStatusBar, "set_has_resize_grip", statusbar_set_has_resize_grip, 1);
+    rb_define_method(gStatusBar, "has_resize_grip?", statusbar_get_has_resize_grip, 0);
 
     G_DEF_SETTERS(gStatusBar);
 }
