@@ -1,3 +1,11 @@
+2002-12-13  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtkaccelgroup.c : Fix return value of #lock and #unlock.
+	* src/rbgtkinvisible.c : Add a file.
+	* src/rbgtkaccelmap.c : Add a file.
+	* src/rbgtkaccelgroupentry.c : Fix #accel_path to avoid passing NULL
+	to CSTR2RVAL.
+
 2002-12-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkmain.c (Gtk.init): Use gtk_init_check() instead of

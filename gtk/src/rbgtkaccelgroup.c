@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: ogs $
-  $Date: 2002/12/09 16:33:11 $
+  $Date: 2002/12/12 15:52:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -133,7 +133,7 @@ gaccelgrp_lock(self)
     VALUE self;
 {
     gtk_accel_group_lock(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -141,7 +141,7 @@ gaccelgrp_unlock(self)
     VALUE self;
 {
     gtk_accel_group_unlock(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 

@@ -4,7 +4,7 @@
   rbgtkaccelgroupentry.c -
 
   $Author: ogs $
-  $Date: 2002/12/09 16:33:11 $
+  $Date: 2002/12/12 15:52:22 $
 
   Copyright (C) 2002 OGASAWARA, Takeshi
 ************************************************/
@@ -69,7 +69,8 @@ static VALUE
 agentry_get_accel_path(self)
     VALUE self;
 {
-    return CSTR2RVAL(g_quark_to_string(_SELF(self)->accel_path_quark));
+    const gchar *quark_str = g_quark_to_string(_SELF(self)->accel_path_quark);
+    return quark_str ? CSTR2RVAL(quark_str) : Qnil;
 }
 
 void
