@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-selection.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-icon-selection.c,v 1.4 2002/10/14 13:56:24 tkubo Exp $ */
+/* based on libgnomeui/gnome-icon-sel.h */
 
-/* Gnome::IconSelection widget for Ruby/Gnome
+/* Gnome::IconSelection widget for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,7 +26,7 @@
 #define _SELF(self) GNOME_ICON_SELECTION(RVAL2GOBJ(self))
 
 static VALUE
-icon_sel_init(self)
+icon_sel_initialize(self)
     VALUE self;
 {
     RBGTK_INITIALIZE(self, gnome_icon_selection_new());
@@ -85,16 +87,41 @@ icon_sel_select_icon(self, filename)
     return self;
 }
 
+static VALUE
+icon_sel_stop_loading(self)
+    VALUE self;
+{
+    gnome_icon_selection_stop_loading(_SELF(self));
+    return self;
+}
+
+static VALUE
+icon_sel_get_gil(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gnome_icon_selection_get_gil(_SELF(self)));
+}
+
+static VALUE
+icon_sel_get_box(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gnome_icon_selection_get_box(_SELF(self)));
+}
+
 void
 Init_gnome_icon_selection(mGnome)
     VALUE mGnome;
 {
     VALUE gnoIconSelection = G_DEF_CLASS(GNOME_TYPE_ICON_SELECTION, "IconSelection", mGnome);
-    rb_define_method(gnoIconSelection, "initialize", icon_sel_init, 0);
+    rb_define_method(gnoIconSelection, "initialize", icon_sel_initialize, 0);
     rb_define_method(gnoIconSelection, "add_defaults", icon_sel_add_defaults, 0);
     rb_define_method(gnoIconSelection, "add_directory", icon_sel_add_directory, 1);
     rb_define_method(gnoIconSelection, "show_icons", icon_sel_show_icons, 0);
     rb_define_method(gnoIconSelection, "clear", icon_sel_clear, 1);
     rb_define_method(gnoIconSelection, "get_icon", icon_sel_get_icon, 1);
     rb_define_method(gnoIconSelection, "select_icon", icon_sel_select_icon, 1);
+    rb_define_method(gnoIconSelection, "stop_loading", icon_sel_stop_loading, 0);
+    rb_define_method(gnoIconSelection, "gil", icon_sel_get_gil, 0);
+    rb_define_method(gnoIconSelection, "box", icon_sel_get_box, 0);
 }

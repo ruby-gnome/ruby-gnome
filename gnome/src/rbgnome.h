@@ -42,6 +42,7 @@ void Init_gnome_font_picker(VALUE);
 void Init_gnome_href(VALUE);
 void Init_gnome_i18n(VALUE);
 void Init_gnome_icon_entry(VALUE);
+void Init_gnome_icon_item(VALUE);
 void Init_gnome_icon_list(VALUE);
 void Init_gnome_icon_selection(VALUE);
 void Init_gnome_pixmap_entry(VALUE);

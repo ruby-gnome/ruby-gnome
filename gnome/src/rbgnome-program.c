@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.1 2002/10/13 15:33:24 tkubo Exp $ */
+/* $Id: rbgnome-program.c,v 1.2 2002/10/14 13:56:24 tkubo Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -87,6 +87,22 @@ make_poptoption(options)
         rb_ary_push(obj, entry);
     }
     return obj;
+}
+
+static VALUE
+popt_context_g2r_func(from)
+    const GValue *from;
+{
+    poptContext ctx = g_value_get_pointer(from);
+    const char **args = poptGetArgs(ctx);
+    VALUE ary;
+
+    if (args == NULL)
+        return Qnil;
+    ary = rb_ary_new();
+    for (;*args != NULL;args++)
+        rb_ary_push(ary, rb_str_new2(*args));
+    return ary;
 }
 
 static VALUE
@@ -268,6 +284,7 @@ Init_gnome_program(mGnome)
 {
     VALUE gnoProgram = G_DEF_CLASS(GNOME_TYPE_PROGRAM, "Program", mGnome);
     VALUE gnoModuleInfo = G_DEF_CLASS(GNOME_TYPE_MODULE_INFO, "ModuleInfo", mGnome);
+    rbgobj_register_property_getter(GNOME_TYPE_PROGRAM, GNOME_PARAM_POPT_CONTEXT, popt_context_g2r_func);
 
     rb_define_method(gnoProgram, "initialize", program_initialize, 3);
     rb_define_singleton_method(gnoProgram, "get", program_s_get, 0);

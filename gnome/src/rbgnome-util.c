@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-util.c,v 1.4 2002/10/13 15:33:24 tkubo Exp $ */
+/* $Id: rbgnome-util.c,v 1.5 2002/10/14 13:56:24 tkubo Exp $ */
 /* based on libgnome/gnome-util.h */
 
 /* Utility functions for Ruby/GNOME2
@@ -58,7 +58,9 @@ void
 Init_gnome_util(mGnome)
     VALUE mGnome;
 {
-    rb_define_module_function(mGnome, "util_prepend_user_home", rgutil_prepend_user_home, 1);
-    rb_define_module_function(mGnome, "util_home_file", rgutil_home_file, 1);
-    rb_define_module_function(mGnome, "util_user_shell", rgutil_user_shell,0);
+    VALUE mUtil = rb_define_module_under(mGnome, "Util");
+
+    rb_define_module_function(mUtil, "prepend_user_home", rgutil_prepend_user_home, 1);
+    rb_define_module_function(mUtil, "home_file", rgutil_home_file, 1);
+    rb_define_module_function(mUtil, "user_shell", rgutil_user_shell,0);
 }

@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-list.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-icon-list.c,v 1.4 2002/10/14 13:56:23 tkubo Exp $ */
+/* based on libgnomeui/gnome-icon-list.h */
 
-/* Gnome::IconList widget for Ruby/Gnome
+/* Gnome::IconList widget for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,6 +25,33 @@
 
 #define _SELF(self) GNOME_ICON_LIST(RVAL2GOBJ(self))
 
+static VALUE
+icon_list_initialize(self, icon_width, adj, flags)
+    VALUE self, icon_width, adj, flags;
+{
+    RBGTK_INITIALIZE(self, gnome_icon_list_new(NUM2UINT(icon_width),
+                                               GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
+                                               NUM2INT(flags)));
+    return Qnil;
+}
+
+static VALUE
+icon_list_set_hadjustment(self, hadj)
+    VALUE self, hadj;
+{
+    gnome_icon_list_set_hadjustment(_SELF(self), GTK_ADJUSTMENT(RVAL2GOBJ(hadj)));
+    return self;
+}
+
+static VALUE
+icon_list_set_vadjustment(self, vadj)
+    VALUE self, vadj;
+{
+    gnome_icon_list_set_vadjustment(_SELF(self), GTK_ADJUSTMENT(RVAL2GOBJ(vadj)));
+    return self;
+}
+
+/* To avoid excesive recomputes during insertion/deletion */
 static VALUE
 icon_list_freeze(self)
     VALUE self;
@@ -66,21 +95,19 @@ static VALUE
 icon_list_append(self, icon_filename, text)
     VALUE self, icon_filename, text;
 {
-    gnome_icon_list_append(_SELF(self),
-                           RVAL2CSTR(icon_filename),
-                           RVAL2CSTR(text));
-    return Qnil;
+    return INT2NUM(gnome_icon_list_append(_SELF(self),
+                                          RVAL2CSTR(icon_filename),
+                                          RVAL2CSTR(text)));
 }
 
 static VALUE
 icon_list_append_pixbuf(self, im, icon_filename, text)
     VALUE self, im, icon_filename, text;
 {
-    gnome_icon_list_append_pixbuf(_SELF(self),
-                                  GDK_PIXBUF(RVAL2GOBJ(im)),                                  
-                                  RVAL2CSTR(icon_filename),
-                                  RVAL2CSTR(text));
-    return Qnil;
+    return INT2NUM(gnome_icon_list_append_pixbuf(_SELF(self),
+                                                 GDK_PIXBUF(RVAL2GOBJ(im)),                                  
+                                                 RVAL2CSTR(icon_filename),
+                                                 RVAL2CSTR(text)));
 }
 
 static VALUE
@@ -100,6 +127,29 @@ icon_list_remove(self, pos)
 }
 
 static VALUE
+icon_list_get_num_icons(self)
+    VALUE self;
+{
+    return UINT2NUM(gnome_icon_list_get_num_icons(_SELF(self)));
+}
+
+/* Managing the selection */
+static VALUE
+icon_list_get_selection_mode(self)
+    VALUE self;
+{
+    return INT2NUM(gnome_icon_list_get_selection_mode(_SELF(self)));
+}
+
+static VALUE
+icon_list_set_selection_mode(self, mode)
+    VALUE self, mode;
+{
+    gnome_icon_list_set_selection_mode(_SELF(self), NUM2INT(mode));
+    return self;
+}
+
+static VALUE
 icon_list_select_icon(self, idx)
     VALUE self, idx;
 {
@@ -115,6 +165,36 @@ icon_list_unselect_icon(self, pos)
     return self;
 }
 
+static VALUE
+icon_list_unselect_all(self)
+    VALUE self;
+{
+    return INT2NUM(gnome_icon_list_unselect_all(_SELF(self)));
+}
+
+static VALUE
+icon_list_get_selection(self)
+    VALUE self;
+{
+    GList *list = gnome_icon_list_get_selection(_SELF(self));
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, INT2NUM(GPOINTER_TO_INT(list->data)));
+        list = list->next;
+    }
+    return ary;
+}
+
+/* Managing focus */
+static VALUE
+icon_list_focus_icon(self, idx)
+    VALUE self, idx;
+{
+    gnome_icon_list_focus_icon(_SELF(self), NUM2INT(idx));
+    return self;
+}
+
+/* Setting the spacing values */
 static VALUE
 icon_list_set_icon_width(self, w)
     VALUE self, w;
@@ -163,6 +243,38 @@ icon_list_set_separators(self, sep)
     return self;
 }
 
+/* Icon filename. */
+static VALUE
+icon_list_get_icon_filename(self, idx)
+    VALUE self, idx;
+{
+    gchar *result = gnome_icon_list_get_icon_filename(_SELF(self), NUM2INT(idx));
+    return result ? rb_str_new2(result) : Qnil;
+}
+
+static VALUE
+icon_list_find_icon_from_filename(self, filename)
+    VALUE self, filename;
+{
+    return INT2NUM(gnome_icon_list_find_icon_from_filename(_SELF(self),
+                                                           RVAL2CSTR(filename)));
+}
+
+/* Attaching information to the icons */
+#if 0
+void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
+                                                    int idx, gpointer data);
+void           gnome_icon_list_set_icon_data_full  (GnomeIconList *gil,
+                                                    int pos, gpointer data,
+                                                    GDestroyNotify destroy);
+int            gnome_icon_list_find_icon_from_data (GnomeIconList *gil,
+                                                    gpointer data);
+gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
+                                                    int pos);
+#endif
+
+
+/* Visibility */
 static VALUE
 icon_list_moveto(self, pos, yalign)
     VALUE self, pos, yalign;
@@ -171,6 +283,14 @@ icon_list_moveto(self, pos, yalign)
                            NUM2INT(pos),
                            NUM2DBL(yalign));
     return self;
+}
+
+static VALUE
+icon_list_icon_is_visible(self, pos)
+    VALUE self, pos;
+{
+    return INT2NUM(gnome_icon_list_icon_is_visible(_SELF(self),
+                                                   NUM2INT(pos)));
 }
 
 static VALUE
@@ -189,12 +309,34 @@ icon_list_get_items_per_line(self)
     return INT2NUM(gnome_icon_list_get_items_per_line(_SELF(self)));
 }
 
+/* Accessibility functions */
+static VALUE
+icon_list_get_icon_text_item(self, idx)
+    VALUE self, idx;
+{
+    return GOBJ2RVAL(gnome_icon_list_get_icon_text_item(_SELF(self), NUM2INT(idx)));
+}
+
+static VALUE
+icon_list_get_icon_pixbuf_item(self, idx)
+    VALUE self, idx;
+{
+    return GOBJ2RVAL(gnome_icon_list_get_icon_pixbuf_item(_SELF(self), NUM2INT(idx)));
+}
+
 void
 Init_gnome_icon_list(mGnome)
     VALUE mGnome;
 {
     VALUE gnoIconList = G_DEF_CLASS(GNOME_TYPE_ICON_LIST, "IconList", mGnome);
-    // TODO: new (calls new_flags)
+
+    rb_define_const(gnoIconList, "ICONS", INT2FIX(GNOME_ICON_LIST_ICONS));
+    rb_define_const(gnoIconList, "TEXT_BELOW", INT2FIX(GNOME_ICON_LIST_TEXT_BELOW));
+    rb_define_const(gnoIconList, "TEXT_RIGHT", INT2FIX(GNOME_ICON_LIST_TEXT_RIGHT));
+
+    rb_define_method(gnoIconList, "initialize", icon_list_initialize, 3);
+    rb_define_method(gnoIconList, "set_hadjustment", icon_list_set_hadjustment, 1);
+    rb_define_method(gnoIconList, "set_vadjustment", icon_list_set_vadjustment, 1);
     rb_define_method(gnoIconList, "freeze", icon_list_freeze, 0);
     rb_define_method(gnoIconList, "thaw", icon_list_thaw, 0);
     rb_define_method(gnoIconList, "insert", icon_list_insert, 3);
@@ -203,17 +345,28 @@ Init_gnome_icon_list(mGnome)
     rb_define_method(gnoIconList, "append_pixbuf", icon_list_append_pixbuf, 3);
     rb_define_method(gnoIconList, "clear", icon_list_clear, 0);
     rb_define_method(gnoIconList, "remove", icon_list_remove, 1);
-    // TODO: set_selection_mode
+    rb_define_method(gnoIconList, "num_icons", icon_list_get_num_icons, 0);
+    rb_define_method(gnoIconList, "selection_mode", icon_list_get_selection_mode, 0);
+    rb_define_method(gnoIconList, "set_selection_mode", icon_list_set_selection_mode, 1);
     rb_define_method(gnoIconList, "select_icon", icon_list_select_icon, 1);
     rb_define_method(gnoIconList, "unselect_icon", icon_list_unselect_icon, 1);
-    // TODO: unselect_all
+    rb_define_method(gnoIconList, "unselect_all", icon_list_unselect_all, 0);
+    rb_define_method(gnoIconList, "selection", icon_list_get_selection, 0);
+    rb_define_method(gnoIconList, "focus_icon", icon_list_focus_icon, 1);
     rb_define_method(gnoIconList, "set_icon_width", icon_list_set_icon_width, 1);
     rb_define_method(gnoIconList, "set_row_spacing", icon_list_set_row_spacing, 1);
     rb_define_method(gnoIconList, "set_col_spacing", icon_list_set_col_spacing, 1);
     rb_define_method(gnoIconList, "set_text_spacing", icon_list_set_text_spacing, 1);
     rb_define_method(gnoIconList, "set_icon_border", icon_list_set_icon_border, 1);
     rb_define_method(gnoIconList, "set_separators", icon_list_set_separators, 1);
+    rb_define_method(gnoIconList, "get_icon_filename", icon_list_get_icon_filename, 1);
+    rb_define_method(gnoIconList, "find_icon_from_filename", icon_list_find_icon_from_filename, 1);
     rb_define_method(gnoIconList, "moveto", icon_list_moveto, 2);
+    rb_define_method(gnoIconList, "icon_is_visible", icon_list_icon_is_visible, 1);
     rb_define_method(gnoIconList, "get_icon_at", icon_list_get_icon_at, 2);
-    rb_define_method(gnoIconList, "get_items_per_line", icon_list_get_items_per_line, 0);
+    rb_define_method(gnoIconList, "items_per_line", icon_list_get_items_per_line, 0);
+    rb_define_method(gnoIconList, "get_icon_text_item", icon_list_get_icon_text_item, 1);
+    rb_define_method(gnoIconList, "get_icon_pixbuf_item", icon_list_get_icon_pixbuf_item, 1);
+
+    G_DEF_SETTERS(gnoIconList);
 }

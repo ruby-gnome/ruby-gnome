@@ -1,5 +1,32 @@
 2002-10-14  KUBO Takehiro  <kubo@jiubao.org>
 
+	* src/rbgnome-href.c: Delete href_set_label() and href_get_label().
+	Add href_set_text() and href_get_text. Modify Init_gnome_href().
+	* src/rbgnome-icon-entry.c: Delete ientry_set_icon(),
+	ientry_gnome_file_entry(), ientry_gnome_entry() and ientry_gtk_entry().
+	Add ientry_set_filename(), ientry_set_browse_dialog_title(),
+	ientry_set_history_id() and ientry_pick_dialog().
+	* src/rbgnome-icon-item.c: Add new file.
+	* src/rbgnome-icon-list.c: Add icon_list_initialize(),
+	icon_list_set_hadjustment(), icon_list_set_vadjustment(),
+	icon_list_get_num_icons(), icon_list_get_selection_mode(),
+	icon_list_unselect_all(), icon_list_get_selection(),
+	icon_list_focus_icon(), icon_list_get_icon_filename(),
+	icon_list_find_icon_from_filename(), icon_list_icon_is_visible(),
+	icon_list_get_icon_text_item(), and icon_list_get_icon_pixbuf_item().
+	Modify icon_list_append(), and icon_list_append_pixbuf().
+	* src/rbgnome-icon-selection.c: Rename icon_sel_init() to
+	icon_sel_initialize(). Add icon_sel_stop_loading(), icon_sel_get_gil(),
+	icon_sel_get_box().
+	* src/rbgnome-program.c: Add popt_context_g2r_func().
+	* src/rbgnome-util.c: Rename Gnome::util_prepend_user_home, 
+	Gnome::util_home_file, and Gnome::util_user_shell to
+	Gnome::Util::prepend_user_home, Gnome::Util::home_file,
+	and Gnome::Util::user_shell respectively.
+	* src/rbgnome.c, src/rbgnome.h: call Init_gnome_icon_item().
+
+2002-10-14  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-dateedit.c: delete dateedit_get_date().
 	* src/rbgnome-program.c: add a file. implement Gnome::Program and
 	Gnome::ModuleInfo.
