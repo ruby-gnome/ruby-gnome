@@ -4,7 +4,7 @@
   rbgtkaccelkey.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 17:10:08 $
+  $Date: 2004/05/20 16:57:59 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -73,7 +73,6 @@ accel_key_get_flags(self)
     return INT2FIX(_SELF(self)->accel_flags);
 }
 
-/*
 static VALUE
 accel_key_set_key(self, key)
     VALUE self, key;
@@ -97,7 +96,6 @@ accel_key_set_flags(self, flags)
     _SELF(self)->accel_flags = FIX2INT(flags);
     return self;
 }
-*/
 
 void
 Init_accel_key()
@@ -109,11 +107,10 @@ Init_accel_key()
     rb_define_method(gAccelKey, "key", accel_key_get_key, 0);
     rb_define_method(gAccelKey, "mods", accel_key_get_mods, 0);
     rb_define_method(gAccelKey, "flags", accel_key_get_flags, 0);
-    /*
+
     rb_define_method(gAccelKey, "set_key", accel_key_set_key, 1);
     rb_define_method(gAccelKey, "set_mods", accel_key_set_mods, 1);
     rb_define_method(gAccelKey, "set_flags", accel_key_set_flags, 1);
     
     G_DEF_SETTERS(gAccelKey);
-    */
 }

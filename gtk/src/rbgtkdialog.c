@@ -4,9 +4,9 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2004/05/16 07:21:17 $
+  $Date: 2004/05/20 16:57:59 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -104,7 +104,14 @@ static VALUE
 dialog_run(self)
     VALUE self;
 {
-    return INT2NUM(gtk_dialog_run(_SELF(self)));
+    if (rb_block_given_p()){
+        VALUE ret = INT2NUM(gtk_dialog_run(_SELF(self)));
+        rb_yield(ret);
+        return ret;
+        
+    } else {
+        return INT2NUM(gtk_dialog_run(_SELF(self)));
+    }
 }
 
 static VALUE

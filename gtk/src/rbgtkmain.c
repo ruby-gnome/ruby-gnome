@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Date: 2004/05/20 16:57:59 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -25,6 +25,21 @@ gtk_m_function(data)
 {
     VALUE ret = rb_funcall((VALUE)data, id_call, 0);
     return RTEST(ret);
+}
+
+static VALUE
+gtk_m_set_locale(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gtk_set_locale());
+}
+
+static VALUE
+gtk_m_disable_setlocale(self)
+    VALUE self;
+{
+    gtk_disable_setlocale();
+    return Qnil;
 }
 
 static VALUE
@@ -407,6 +422,8 @@ void
 Init_gtk_main()
 {
     rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
+    rb_define_module_function(mGtk, "set_locale", gtk_m_set_locale, 0);
+    rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
     rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
     rb_define_module_function(mGtk, "init", gtk_m_init, -1);
     rb_global_variable(&rbgtk_main_threads);

@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: mutoh $
-  $Date: 2003/10/04 16:15:02 $
+  $Date: 2004/05/20 16:57:59 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -87,6 +87,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
     rb_define_const(mGtkStock, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
     rb_define_const(mGtkStock, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_const(mGtkStock, "DIALOG_AUTHENTICATION", CSTR2SYM(GTK_STOCK_DIALOG_AUTHENTICATION));
+#endif
 
     rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
     rb_define_const(mGtkStock, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
@@ -98,6 +101,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "CDROM", CSTR2SYM(GTK_STOCK_CDROM));
     rb_define_const(mGtkStock, "CLEAR", CSTR2SYM(GTK_STOCK_CLEAR));
     rb_define_const(mGtkStock, "CLOSE", CSTR2SYM(GTK_STOCK_CLOSE));
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_const(mGtkStock, "COLOR_PICKER", CSTR2SYM(GTK_STOCK_COLOR_PICKER));
+#endif
     rb_define_const(mGtkStock, "CONVERT", CSTR2SYM(GTK_STOCK_CONVERT));
     rb_define_const(mGtkStock, "COPY", CSTR2SYM(GTK_STOCK_COPY));
     rb_define_const(mGtkStock, "CUT", CSTR2SYM(GTK_STOCK_CUT));
@@ -114,8 +120,12 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "GO_DOWN", CSTR2SYM(GTK_STOCK_GO_DOWN));
     rb_define_const(mGtkStock, "GO_FORWARD", CSTR2SYM(GTK_STOCK_GO_FORWARD));
     rb_define_const(mGtkStock, "GO_UP", CSTR2SYM(GTK_STOCK_GO_UP));
+    rb_define_const(mGtkStock, "HARDDISK", CSTR2SYM(GTK_STOCK_HARDDISK));
     rb_define_const(mGtkStock, "HELP", CSTR2SYM(GTK_STOCK_HELP));
     rb_define_const(mGtkStock, "HOME", CSTR2SYM(GTK_STOCK_HOME));
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_const(mGtkStock, "INDENT", CSTR2SYM(GTK_STOCK_INDENT));
+#endif
     rb_define_const(mGtkStock, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
     rb_define_const(mGtkStock, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
     rb_define_const(mGtkStock, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
@@ -124,6 +134,7 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
     rb_define_const(mGtkStock, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
     rb_define_const(mGtkStock, "MISSING_IMAGE", CSTR2SYM(GTK_STOCK_MISSING_IMAGE));
+    rb_define_const(mGtkStock, "NETWORK", CSTR2SYM(GTK_STOCK_NETWORK));
     rb_define_const(mGtkStock, "NEW", CSTR2SYM(GTK_STOCK_NEW));
     rb_define_const(mGtkStock, "NO", CSTR2SYM(GTK_STOCK_NO));
     rb_define_const(mGtkStock, "OK", CSTR2SYM(GTK_STOCK_OK));
@@ -150,6 +161,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "UNDELETE", CSTR2SYM(GTK_STOCK_UNDELETE));
     rb_define_const(mGtkStock, "UNDERLINE", CSTR2SYM(GTK_STOCK_UNDERLINE));
     rb_define_const(mGtkStock, "UNDO", CSTR2SYM(GTK_STOCK_UNDO));
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_const(mGtkStock, "UNINDENT", CSTR2SYM(GTK_STOCK_UNINDENT));
+#endif
     rb_define_const(mGtkStock, "YES", CSTR2SYM(GTK_STOCK_YES));
     rb_define_const(mGtkStock, "ZOOM_100", CSTR2SYM(GTK_STOCK_ZOOM_100));
     rb_define_const(mGtkStock, "ZOOM_FIT", CSTR2SYM(GTK_STOCK_ZOOM_FIT));

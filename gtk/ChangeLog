@@ -1,5 +1,20 @@
+2004-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c: Gtk::Dialog#run accept a block.
+	Suggested by Dario Linsky.
+	sample/misc/dialog2.rb: Follow above changes.
+
+2004-05-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrc.c: Add Gtk::RC.reset_styles for 2.4. 
+	* src/rbgtkstock.c: Add missing constants and support 2.4. 
+	* src/rbgtkaccelmap.c: Define as a class since 2.4 otherwise as a module.
+	Add Gtk::AccelMap.get, .lock_path, .unlock_path.
+	* src/rbgtkaccelkey.c: Add Gtk::AccelKey#set_key, #set_mods, #set_flags.
+
 2004-05-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkmain.c: Add Gtk.set_locale, Gtk.disable_setlocale. 
 	* sample/misc/filechooser.rb: Added (Original code from Seiya Nishizawa).
 	* src/rbgtk.h, gtk2.def: Add rbgtk_dialog_add_buttons_internal 
 	as an external function.

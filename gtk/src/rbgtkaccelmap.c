@@ -4,7 +4,7 @@
   rbgtkaccelmap.c -
 
   $Author: mutoh $
-  $Date: 2003/09/09 15:17:22 $
+  $Date: 2004/05/20 16:57:59 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -17,7 +17,7 @@ accel_map_add_entry(self, path, key, mods)
     VALUE self, path, key, mods;
 {
     gtk_accel_map_add_entry(RVAL2CSTR(path), NUM2UINT(key), RVAL2MOD(mods));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -28,7 +28,7 @@ accel_map_lookup_entry(self, path)
     if(gtk_accel_map_lookup_entry(RVAL2CSTR(path), &key))
         return BOXED2RVAL(&key, GTK_TYPE_ACCEL_KEY);
     else
-        return Qnil;
+        return self;
 }
 
 static VALUE
@@ -45,7 +45,7 @@ accel_map_load(self, filename)
     VALUE self, filename;
 {
     gtk_accel_map_load(RVAL2CSTR(filename));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -53,7 +53,7 @@ accel_map_save(self, filename)
     VALUE self, filename;
 {
     gtk_accel_map_save(RVAL2CSTR(filename));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -61,7 +61,7 @@ accel_map_add_filter(self, pattern)
     VALUE self, pattern;
 {
     gtk_accel_map_add_filter(RVAL2CSTR(pattern));
-    return Qnil;
+    return self;
 }
 
 static void
@@ -84,7 +84,7 @@ accel_map_foreach(self)
     volatile VALUE func = G_BLOCK_PROC();
     gtk_accel_map_foreach((gpointer)func,
                           (GtkAccelMapForeach)accel_map_foreach_func);
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -94,7 +94,7 @@ accel_map_foreach_unfilterd(self)
     volatile VALUE func = G_BLOCK_PROC();
     gtk_accel_map_foreach_unfiltered((gpointer)func,
                                      (GtkAccelMapForeach)accel_map_foreach_func);
-    return Qnil;
+    return self;
 }
 
 /*
@@ -106,11 +106,51 @@ void        gtk_accel_map_load_fd           (gint fd);
 void        gtk_accel_map_save_fd           (gint fd);
 */
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+accel_map_get(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_accel_map_get());
+}
+
+static VALUE
+accel_map_lock_path(self, accel_path)
+    VALUE self, accel_path;
+{
+    gtk_accel_map_lock_path(RVAL2CSTR(accel_path));
+    return self;
+}
+
+static VALUE
+accel_map_unlock_path(self, accel_path)
+    VALUE self, accel_path;
+{
+    gtk_accel_map_unlock_path(RVAL2CSTR(accel_path));
+    return self;
+}
+#endif
+
 void
 Init_accel_map()
 {
-    VALUE mAccelMap = rb_define_module_under(mGtk, "AccelMap");
+#if GTK_CHECK_VERSION(2,4,0)
+    VALUE mAccelMap = G_DEF_CLASS(GTK_TYPE_ACCEL_MAP, "AccelMap", mGtk);
 
+    rb_define_singleton_method(mAccelMap, "add_entry", accel_map_add_entry, 3);
+    rb_define_singleton_method(mAccelMap, "lookup_entry", accel_map_lookup_entry, 1);
+    rb_define_singleton_method(mAccelMap, "change_entry", accel_map_change_entry, 4);
+    rb_define_singleton_method(mAccelMap, "load", accel_map_load, 1);
+    rb_define_singleton_method(mAccelMap, "save", accel_map_save, 1);
+    rb_define_singleton_method(mAccelMap, "add_filter", accel_map_add_filter, 1);
+    rb_define_singleton_method(mAccelMap, "each", accel_map_foreach, 0);
+    rb_define_singleton_method(mAccelMap, "each_unfilterd", accel_map_foreach_unfilterd, 0);
+    rb_define_singleton_method(mAccelMap, "get", accel_map_get, 0);
+    rb_define_singleton_method(mAccelMap, "lock_path", accel_map_lock_path, 1);
+    rb_define_singleton_method(mAccelMap, "unlock_path", accel_map_unlock_path, 1);
+#else
+    VALUE mAccelMap = rb_define_module_under(mGtk, "AccelMap");
+                                                                                
     rb_define_module_function(mAccelMap, "add_entry", accel_map_add_entry, 3);
     rb_define_module_function(mAccelMap, "lookup_entry", accel_map_lookup_entry, 1);
     rb_define_module_function(mAccelMap, "change_entry", accel_map_change_entry, 4);
@@ -119,4 +159,5 @@ Init_accel_map()
     rb_define_module_function(mAccelMap, "add_filter", accel_map_add_filter, 1);
     rb_define_module_function(mAccelMap, "each", accel_map_foreach, 0);
     rb_define_module_function(mAccelMap, "each_unfilterd", accel_map_foreach_unfilterd, 0);
+#endif
 }

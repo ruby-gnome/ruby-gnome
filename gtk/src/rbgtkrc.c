@@ -3,8 +3,8 @@
 
   rbgtkrc.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2004/05/20 16:57:59 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -82,6 +82,16 @@ rc_reparse_all_for_settings(self, settings, force_load)
     return gtk_rc_reparse_all_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)), 
                                            RTEST(force_load)) ? Qtrue : Qfalse;
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+rc_reset_styles(self, settings)
+    VALUE self, settings;
+{
+    gtk_rc_reset_styles(GTK_SETTINGS(RVAL2GOBJ(settings)));
+    return settings;
+}
+#endif
 
 static VALUE
 rc_add_default_file(self, filename)
@@ -178,6 +188,9 @@ Init_gtk_rc()
     rb_define_module_function(mRC, "parse_string", rc_parse_string, 1);
     rb_define_module_function(mRC, "reparse_all", rc_reparse_all, 0);
     rb_define_module_function(mRC, "reparse_all_for_settings", rc_reparse_all_for_settings, 2);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_module_function(mRC, "reset_styles", rc_reset_styles, 1);
+#endif
     rb_define_module_function(mRC, "add_default_file", rc_add_default_file, 1);
     rb_define_module_function(mRC, "default_files", rc_get_default_files, 0);
     rb_define_module_function(mRC, "set_default_files", rc_set_default_files, 1);
