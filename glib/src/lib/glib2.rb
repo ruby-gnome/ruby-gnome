@@ -116,6 +116,24 @@ module GLib
     def warning(str)
       log(DOMAIN,  LEVEL_WARNING, caller(1)[0] << ": " << str)
     end
+    
+    def set_error_domain(domain)
+      level = GLib::Log::LEVEL_CRITICAL
+      if $DEBUG
+        level = 255
+      elsif $VERBOSE
+        level = 127
+      end
+      GLib::Log.set_handler(domain, level) do |domain, level, message|
+        #  puts "domain = "#{domain}"
+        #  puts "laevel = #{level}"
+        puts "message = #{message}"
+        message =~ /assertion /
+        raise $'
+      end
+    end
   end
 
 end
+
+GLib::Log.set_error_domain("GLib")

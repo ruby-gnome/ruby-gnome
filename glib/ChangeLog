@@ -1,3 +1,8 @@
+2004-09-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Add GLib::Log.set_error_domain for improvement
+	error handling.
+
 2004-09-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Set $KCODE to "U".
