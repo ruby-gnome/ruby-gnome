@@ -1,3 +1,7 @@
+2003-05-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c, rbgobject.h: Add rbgobj_exist_class(). 
+
 2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c: fix so that GLib::Type#to_class can treat

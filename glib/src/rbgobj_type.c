@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2003/04/13 09:14:10 $
+  $Author: mutoh $
+  $Date: 2003/05/18 17:03:35 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -43,6 +43,13 @@ rbgobj_lookup_class(klass)
         return rbgobj_lookup_class(rb_funcall(klass, id_superclass, 0));
 
     rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
+}
+
+gboolean
+rbgobj_exist_class(gtype)
+    GType gtype;
+{
+    return NIL_P(rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype))) ? FALSE : TRUE;
 }
 
 VALUE
