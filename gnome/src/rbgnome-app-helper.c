@@ -1,4 +1,4 @@
-/* $Id: rbgnome-app-helper.c,v 1.3 2002/08/04 14:03:59 mutoh Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.4 2002/08/04 14:28:17 mutoh Exp $ */
 
 /* Gnome::UIInfo module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -365,7 +365,7 @@ ary_to_ui_info(ary, inc_uibd, uibdata)
 	inf = g_new(GnomeUIInfo, len + 2);
 	inf[0].type = GNOME_APP_UI_BUILDER_DATA;
 	inf[0].label = inf[0].hint = NULL;
-	inf[0].moreinfo = &RbGnome_UIBuilder;
+	inf[0].moreinfo = uibdata;
 	ret = &inf[1];
     } else {
 	ret = inf = g_new(GnomeUIInfo, len + 1);
