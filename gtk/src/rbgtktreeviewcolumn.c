@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:04 $
+  $Date: 2002/11/04 08:32:33 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -223,9 +223,9 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "cell_is_visible?", tvc_cell_is_visible, 0);
 
     /* GtkTreeViewColumnSizing */
-    rb_define_const(tvc, "GROW_ONLY", GTK_TREE_VIEW_COLUMN_GROW_ONLY); 
-    rb_define_const(tvc, "AUTOSIZE", GTK_TREE_VIEW_COLUMN_AUTOSIZE); 
-    rb_define_const(tvc, "FIXED", GTK_TREE_VIEW_COLUMN_FIXED); 
+    rb_define_const(tvc, "GROW_ONLY", INT2FIX(GTK_TREE_VIEW_COLUMN_GROW_ONLY)); 
+    rb_define_const(tvc, "AUTOSIZE", INT2FIX(GTK_TREE_VIEW_COLUMN_AUTOSIZE)); 
+    rb_define_const(tvc, "FIXED", INT2FIX(GTK_TREE_VIEW_COLUMN_FIXED)); 
 
     G_DEF_SETTERS(tvc);
 }

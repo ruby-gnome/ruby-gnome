@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2002/10/25 17:51:26 $
+  $Date: 2002/11/04 08:32:33 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -308,13 +308,13 @@ Init_gtk_textview()
     G_DEF_SETTERS(cTextView);
 
     /* GtkTextWindowType */
-    rb_define_const(cTextView, "WINDOW_PRIVATE", GTK_TEXT_WINDOW_PRIVATE);
-    rb_define_const(cTextView, "WINDOW_WIDGET", GTK_TEXT_WINDOW_WIDGET);
-    rb_define_const(cTextView, "WINDOW_TEXT", GTK_TEXT_WINDOW_TEXT);
-    rb_define_const(cTextView, "WINDOW_LEFT", GTK_TEXT_WINDOW_LEFT);
-    rb_define_const(cTextView, "WINDOW_RIGHT", GTK_TEXT_WINDOW_RIGHT);
-    rb_define_const(cTextView, "WINDOW_TOP", GTK_TEXT_WINDOW_TOP);
-    rb_define_const(cTextView, "WINDOW_BOTTOM", GTK_TEXT_WINDOW_BOTTOM);
+    rb_define_const(cTextView, "WINDOW_PRIVATE", INT2FIX(GTK_TEXT_WINDOW_PRIVATE));
+    rb_define_const(cTextView, "WINDOW_WIDGET", INT2FIX(GTK_TEXT_WINDOW_WIDGET));
+    rb_define_const(cTextView, "WINDOW_TEXT", INT2FIX(GTK_TEXT_WINDOW_TEXT));
+    rb_define_const(cTextView, "WINDOW_LEFT", INT2FIX(GTK_TEXT_WINDOW_LEFT));
+    rb_define_const(cTextView, "WINDOW_RIGHT", INT2FIX(GTK_TEXT_WINDOW_RIGHT));
+    rb_define_const(cTextView, "WINDOW_TOP", INT2FIX(GTK_TEXT_WINDOW_TOP));
+    rb_define_const(cTextView, "WINDOW_BOTTOM", INT2FIX(GTK_TEXT_WINDOW_BOTTOM));
  
-    rb_define_const(cTextView, "PRIORITY_VALIDATE", GTK_TEXT_VIEW_PRIORITY_VALIDATE);
+    rb_define_const(cTextView, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));
 }

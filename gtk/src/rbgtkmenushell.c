@@ -4,7 +4,7 @@
   rbgtkmenushell.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Date: 2002/11/04 08:32:33 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -88,8 +88,8 @@ Init_gtk_menu_shell()
     rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
 
     /* GtkMenuDirectionType */
-    rb_define_const(gMenuShell, "DIR_PARENT", GTK_MENU_DIR_PARENT);
-    rb_define_const(gMenuShell, "DIR_CHILD", GTK_MENU_DIR_CHILD);
-    rb_define_const(gMenuShell, "DIR_NEXT", GTK_MENU_DIR_NEXT);
-    rb_define_const(gMenuShell, "DIR_PREV", GTK_MENU_DIR_PREV);
+    rb_define_const(gMenuShell, "DIR_PARENT", INT2FIX(GTK_MENU_DIR_PARENT));
+    rb_define_const(gMenuShell, "DIR_CHILD", INT2FIX(GTK_MENU_DIR_CHILD));
+    rb_define_const(gMenuShell, "DIR_NEXT", INT2FIX(GTK_MENU_DIR_NEXT));
+    rb_define_const(gMenuShell, "DIR_PREV", INT2FIX(GTK_MENU_DIR_PREV));
 }
