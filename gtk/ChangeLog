@@ -1,3 +1,7 @@
+2004-05-26  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
+
+	* src/rbgtkentry.c: Fix compilation error of Gtk::Entry.c 
+
 2004-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkstock.c: Fix compilation error of GTK_STOCK_HARDDISK/NETWORK.

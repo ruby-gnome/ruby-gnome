@@ -4,7 +4,7 @@
   rbgtkentry.c -
 
   $Author: mutoh $
-  $Date: 2004/05/24 16:18:58 $
+  $Date: 2004/05/25 17:07:12 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,8 +65,9 @@ Init_gtk_entry()
     rb_define_method(gEntry, "initialize", entry_initialize, 0);
     rb_define_method(gEntry, "layout", entry_get_layout, 0);
     rb_define_method(gEntry, "layout_offsets", entry_get_layout_offsets, 0);
+#if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gEntry, "set_completion", entry_set_completion, 1);
     rb_define_method(gEntry, "completion", entry_get_completion, 0);
-
+#endif
     G_DEF_SETTERS(gEntry);
 }
