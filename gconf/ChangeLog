@@ -1,3 +1,7 @@
+2003-07-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-util.h: Move CBOOL2RVAL to Ruby/GLib.
+
 2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-client.c, rbgconf_changeset.c: 
@@ -50,7 +54,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/06/26 15:17:01 $ macros.
+	and $Date: 2003/07/22 15:05:22 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

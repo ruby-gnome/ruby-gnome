@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  * 
- * $Author: pcppopper $
+ * $Author: mutoh $
  * 
- * $Date: 2003/06/17 19:13:06 $
+ * $Date: 2003/07/22 15:05:22 $
  * 
  *****************************************************************************/
 
@@ -39,10 +39,6 @@ extern "C" {
 
 #define RVAL2GCVAL(val)	(rb_value_to_gconf_value(val))
 #define GCVAL2RVAL(val)	(gconf_value_to_rb_value(val))
-
-/* other utility macros */
-#define CBOOL2RVAL(b)	((b) ? Qtrue : Qfalse)
-/* #define RVAL2CBOOL(b)   ( */
 
 /* Type Definitions **********************************************************/
 
