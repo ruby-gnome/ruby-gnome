@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: image.rb,v 1.5 2003/04/01 16:21:20 mutoh Exp $
+  $Id: image.rb,v 1.6 2003/04/01 16:26:34 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -49,7 +49,7 @@ button.signal_connect("clicked") do
 	Gtk.main_quit
 end
 box2.pack_start(button, true, true, 0)
-button.set_flags(Gtk::Widget::CAN_DEFAULT);
+button.set_flags(Gtk::Widget::CAN_DEFAULT)
 button.grab_default
 
 window.show_all

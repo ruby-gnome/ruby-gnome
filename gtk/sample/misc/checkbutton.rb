@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: checkbutton.rb,v 1.6 2003/04/01 16:21:15 mutoh Exp $
+  $Id: checkbutton.rb,v 1.7 2003/04/01 16:26:32 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -42,7 +42,7 @@ close.signal_connect("clicked") do
 	Gtk.main_quit
 end
 box2.pack_start(close, true, true, 0)
-close.set_flags(Gtk::Widget::CAN_DEFAULT);
+close.set_flags(Gtk::Widget::CAN_DEFAULT)
 close.grab_default
 
 window.show_all

@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: buttonbox.rb,v 1.5 2003/04/01 16:21:14 mutoh Exp $
+  $Id: buttonbox.rb,v 1.6 2003/04/01 16:26:32 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -55,17 +55,17 @@ def create_bbox_window(horizontal, title, pos, spacing, layout)
 end
 
 def test_hbbox
-  create_bbox_window(true, "Spread", 50, 40, Gtk::ButtonBox::SPREAD);
-  create_bbox_window(true, "Edge", 250, 40, Gtk::ButtonBox::EDGE);
-  create_bbox_window(true, "Start", 450, 40,  Gtk::ButtonBox::START);
-  create_bbox_window(true, "End", 650, 15, Gtk::ButtonBox::END);
+  create_bbox_window(true, "Spread", 50, 40, Gtk::ButtonBox::SPREAD)
+  create_bbox_window(true, "Edge", 250, 40, Gtk::ButtonBox::EDGE)
+  create_bbox_window(true, "Start", 450, 40,  Gtk::ButtonBox::START)
+  create_bbox_window(true, "End", 650, 15, Gtk::ButtonBox::END)
 end
 
 def test_vbbox
-  create_bbox_window(false, "Spread", 50, 40, Gtk::ButtonBox::SPREAD);
-  create_bbox_window(false, "Edge", 250, 40,  Gtk::ButtonBox::EDGE);
-  create_bbox_window(false, "Start", 450, 40, Gtk::ButtonBox::START);
-  create_bbox_window(false, "End", 650, 15, Gtk::ButtonBox::END);
+  create_bbox_window(false, "Spread", 50, 40, Gtk::ButtonBox::SPREAD)
+  create_bbox_window(false, "Edge", 250, 40,  Gtk::ButtonBox::EDGE)
+  create_bbox_window(false, "Start", 450, 40, Gtk::ButtonBox::START)
+  create_bbox_window(false, "End", 650, 15, Gtk::ButtonBox::END)
 end
 
 Gtk.init
