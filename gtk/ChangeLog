@@ -1,5 +1,6 @@
 2003-09-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkkeyval.c: Add Gdk::Keyval.to_unicode, .from_unicode. 
 	* src/rbgdkatom.c: Add Gdk::Atom.new, GDK_NONE.
 	* src/rbgtkdrag.c (Init_gtk_drag): 
 	Gtk::Drag.find_target -> Gtk::Drag.dest_find_target. 
