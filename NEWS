@@ -1,3 +1,58 @@
+Ruby-GNOME2-0.5 (2003-05-24)
+
+  * Ruby/GLib
+      - Fixed warning for ruby-1.8.1. [Masao Mutoh]
+      - Fixed some bugs, Added methods and improved: [Masahiro Sakai]
+         GLib::Object, GLib::ParamSpec, GLib::Signal, GLib::Type, 
+         GLib::Instantiatable, GLib::MetaInterface, GLib::Param::String
+         
+  * Ruby/GdkPixbuf
+      - Fixed a bug. [Geoff Youngs]
+
+  * Ruby/Pango 
+      - Some constants were moved. [Masao Mutoh]
+         Moved Pango::Attribute::UNDERLINE_* to Pango::AttrUnderline::*.
+         Moved Pango::Attribute::SCALE_* to Pango::AttrScale::*.
+
+  * Ruby/GTK
+      - Completed: [Masao Mutoh]
+        Gtk::AccelGroup, Gtk::Style, Gtk::Selection
+      - Added some methods, improved: [Stephen Lewis, Masahiro Sakai, Masao Mutoh] 
+         Gtk::TextBuffer, Gtk::TextIter, Gtk::TreeIter, Gtk::ListStore, 
+         Gtk::TreeStore, Gtk, Gtk::HandleBox, Gtk::Frame, Gtk::Container, 
+         Gtk::Table, Gdk::Input, Gtk::Widget, Gtk::Allocation, Gtk::RC, 
+         Gtk::ItemFactory, Gtk::Toolbar, Gtk::Window, Gtk::CellEditable, 
+         Gtk::Accessible, sample/misc/*.rb
+      - Added and completed. [Nikolai :: lone-star :: Weibull, Masao Mutoh]
+         Gtk::RcStyle, Gtk::TargetList, Gtk::TreeSortable, Gtk::TreeModelSort, 
+         Gtk::IMContext, Gtk::IMContextSimple, Gtk::IMMulticontext
+      - Added: [Masao Mutoh]
+         Gtk::Settings
+      - Renamed some methods. [Masao Mutoh]
+         Gtk::Table, Gtk::Widget
+      - Removed: [Masao Mutoh]
+         Gtk::Object#user_data, #user_data=, #set_user_data.
+         Deprecated properties of Gtk::ProgressBar.
+         Gtk::Requisition. Use [width, height] instead.
+         Gtk::Widget#set_requisition, *_event, Gtk::Widget::NO_PARENT.
+         Gtk::SelectionData.remove_all. Use Gtk::Selection.remove_all instead.
+
+  * Ruby/GNOME
+      - Cygwin support [Masahiro Sakai]
+
+  * Ruby/GnomeCanvas
+      - None
+
+  * Ruby/Libglade
+      - Fix a bug of bin/ruby-glade-create-template. [Masao Mutoh]
+
+  * Ruby/Libart
+      - None
+
+  * Ruby/GConf
+       - Added GConf::MetaInfo. [Nikolai :: lone-star :: Weibull]
+       - Fixed a bug [Masao Mutoh]
+ 
 Ruby-GNOME2-0.4 (2003-03-23)
 
   * The whole Ruby-GNOME2

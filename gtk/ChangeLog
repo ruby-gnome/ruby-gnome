@@ -166,7 +166,7 @@
 
 2003-03-26  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
-	* src/rbgtktreeviewcolumn.c: Added.
+	* src/rbgtktreesortable.c: Added.
 
 2003-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
