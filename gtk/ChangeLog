@@ -1,3 +1,8 @@
+2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktextbuffer.c (txt_insert_child_anchor): pass correct
+	anchor to gtk_text_buffer_insert_child_anchor().
+
 2003-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreemodel.c: Add Gtk::TreeModel#iter_first.

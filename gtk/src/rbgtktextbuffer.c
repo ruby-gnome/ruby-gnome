@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/29 13:28:56 $
+  $Author: sakai $
+  $Date: 2003/08/06 12:14:04 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -203,7 +203,7 @@ txt_insert_child_anchor(self, iter, anchor)
     VALUE self, iter, anchor;
 {
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
-                                        GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self)));
+                                        GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
     return self;
 }
 
