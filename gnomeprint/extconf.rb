@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/Libgda extention library
+extconf.rb for Ruby/GnomePrint extention library
 =end
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')

@@ -1,3 +1,8 @@
+2004-11-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/gnomeprint2.rb: added backward compatibility for Rabbit
+	  0.0.5.
+
 2004-10-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gpa-printer.c: added G_DEF_SETTERS.

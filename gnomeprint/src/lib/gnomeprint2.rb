@@ -7,6 +7,7 @@ require "gnomeprint2.so"
 module Gnome
   class GPANode
     alias description value 
+    alias name id
   end
   PrinterGPA = GPANode
 end
