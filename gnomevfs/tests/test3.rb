@@ -4,6 +4,8 @@ require 'gnomevfs'
 
 GnomeVFS.init
 
-GnomeVFS::File.open "/tmp/mutt-puritan-4337-13" do |f|
+p file =  File.expand_path(__FILE__)
+
+GnomeVFS::File.open file do |f|
 	puts f.read
 end

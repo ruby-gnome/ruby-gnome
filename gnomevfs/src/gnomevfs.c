@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2004/06/10 16:51:09 $
  *
  *****************************************************************************/
 
@@ -37,6 +37,13 @@
 /* Function Declarations *****************************************************/
 
 /* Global Variables **********************************************************/
+
+VALUE g_id_call;		/* rb_intern("call") */
+
+VALUE g_gvfs_uri;	/* GnomeVFS::URI */
+VALUE g_gvfs_error;	/* GnomeVFS::Error */
+VALUE g_gvfs_file;	/* GnomeVFS::File */
+VALUE g_gvfs_dir;	/* GnomeVFS::Directory */
 
 /* Function Implementations **************************************************/
 
