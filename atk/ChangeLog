@@ -1,3 +1,12 @@
+2003-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatktable.c: Added.
+
+2003-12-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkstreamablecontent.c, rbatkstateset.c: Added. 
+	* src/rbatkeditabletext.c: Fix a typo. 
+
 2003-12-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatkstate.c, src/rbatkselection.c, 

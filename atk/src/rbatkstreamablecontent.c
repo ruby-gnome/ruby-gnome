@@ -4,7 +4,7 @@
   rbatkstreamablecontent.c -
 
   $Author: mutoh $
-  $Date: 2003/12/23 15:59:28 $
+  $Date: 2003/12/25 17:46:08 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -17,14 +17,14 @@ static VALUE
 rbatkst_get_n_mime_types(self)
      VALUE self;
 {
-  return INT2NUM(atk_streamable_content_get_n_mime_types(_SELF(self)));
+    return INT2NUM(atk_streamable_content_get_n_mime_types(_SELF(self)));
 }
 
 static VALUE
 rbatkst_get_mime_type(self, i)
      VALUE self, i;
 {
-  return CSTR2RVAL(atk_streamable_content_get_mime_type(_SELF(self), NUM2INT(i)));
+    return CSTR2RVAL(atk_streamable_content_get_mime_type(_SELF(self), NUM2INT(i)));
 }
 
 /*
