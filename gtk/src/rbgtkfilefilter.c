@@ -4,7 +4,7 @@
   rbgtkfilefilter.c -
  
   $Author: mutoh $
-  $Date: 2004/05/16 07:21:17 $
+  $Date: 2004/07/31 05:44:45 $
  
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
@@ -54,15 +54,28 @@ ffil_add_pattern(self, pattern)
   return self;
 }
 
-/*
-static VALUE
-ffil_add_custom(self, needed, func, data, notify)
-    VALUE self, needed, func, data, notify;
+/* Should return true/false */
+static gboolean
+filter_func(info, func)
+    const GtkFileFilterInfo* info;
+    gpointer func;
 {
-    gtk_file_filter_add_custom(_SELF(self), RVAL2GENUM(needed), func, data, notify);
+    return CBOOL2RVAL(rb_funcall((VALUE)func, 5, 
+                                 GFLAGS2RVAL(info->contains, GTK_TYPE_FILE_FILTER_FLAGS), 
+                                 CSTR2RVAL(info->filename), CSTR2RVAL(info->uri), 
+                                 CSTR2RVAL(info->display_name), CSTR2RVAL(info->mime_type)));
+}
+
+static VALUE
+ffil_add_custom(self, needed)
+    VALUE self, needed;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_file_filter_add_custom(_SELF(self), RVAL2GFLAGS(needed, GTK_TYPE_FILE_FILTER_FLAGS), 
+                               filter_func, (gpointer)func, NULL);
     return self;
 }
-*/
 
 static VALUE
 ffil_get_needed(self)
@@ -71,18 +84,19 @@ ffil_get_needed(self)
     return GFLAGS2RVAL(gtk_file_filter_get_needed(_SELF(self)), GTK_TYPE_FILE_FILTER_FLAGS);
 }
 
-/*
 static VALUE
-ffil_filter(self, info)
-    VALUE self, info;
+ffil_filter(self, contains, filename, uri, display_name, mime_type)
+    VALUE self, contains, filename, uri, display_name, mime_type;
 {
-    GObject *ginfo;
-    ginfo = RVAL2GOBJ(info);
-    G_TYPE_CHECK_INSTANCE_TYPE(ginfo, GTK_TYPE_FILE_FILTER_INFO);
-    return CBOOL2RVAL(gtk_file_filter_filter(_SELF(self), (GtkFileFilterInfo*)ginfo));
-}
-*/
+    GtkFileFilterInfo info;
+    info.contains = RVAL2GFLAGS(contains, GTK_TYPE_FILE_FILTER_FLAGS);
+    info.filename = RVAL2CSTR(filename);
+    info.uri = RVAL2CSTR(uri);
+    info.display_name = RVAL2CSTR(display_name);
+    info.mime_type = RVAL2CSTR(mime_type);
 
+    return CBOOL2RVAL(gtk_file_filter_filter(_SELF(self), &info));
+}
 #endif
 
 void 
@@ -97,13 +111,9 @@ Init_gtk_file_filter()
     rb_define_method(gFileFilter, "name", ffil_get_name, 0);
     rb_define_method(gFileFilter, "add_mime_type", ffil_add_mime_type, 1);
     rb_define_method(gFileFilter, "add_pattern", ffil_add_pattern, 1);
-/*
-    rb_define_method(gFileFilter, "add_custom", ffil_add_custom, 4);
-*/
+    rb_define_method(gFileFilter, "add_custom", ffil_add_custom, 1);
     rb_define_method(gFileFilter, "needed", ffil_get_needed, 0);
-/*
-    rb_define_method(gFileFilter, "filter", ffil_filter, 1);
-*/
+    rb_define_method(gFileFilter, "filter?", ffil_filter, 5);
 
     G_DEF_SETTERS(gFileFilter);
 

@@ -7,7 +7,7 @@
   
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager.rb,v 1.1 2004/07/29 18:35:06 mutoh Exp $
+  $Id: uimanager.rb,v 1.2 2004/07/31 05:44:45 mutoh Exp $
 =end
 
 ui_info = %Q[
@@ -49,6 +49,12 @@ ui_info = %Q[
 require 'gtk2'
 
 Gtk.init
+
+if str = Gtk.check_version(2, 4, 0)
+  puts "This sample requires GTK+ 2.4.0 or later"
+  puts str
+  exit
+end
 
 callback = Proc.new {|actiongroup, action| 
   puts "`#{action.name}' is clicked. "

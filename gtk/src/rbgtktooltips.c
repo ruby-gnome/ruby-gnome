@@ -4,9 +4,9 @@
   rbgtktooltips.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2004/07/31 05:44:45 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Masao Mutoh
 
   This file is derived from rbgtkdata.c.
   rbgtkdata.c -
@@ -72,8 +72,25 @@ ttips_force_window(self)
     gtk_tooltips_force_window(_SELF(self));
     return self;
 }
-void 
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+ttips_s_get_info_from_tip_window(self, window)
+    VALUE self, window;
+{
+    GtkTooltips* tooltips;
+    GtkWidget* current_widget;
+    gboolean ret = gtk_tooltips_get_info_from_tip_window(GTK_WINDOW(RVAL2GOBJ(window)),
+                                                         &tooltips, 
+                                                         &current_widget);
+    if (ret)
+        return rb_assoc_new(GOBJ2RVAL(tooltips), GOBJ2RVAL(current_widget));
+    else
+        return Qnil;
+}
+#endif
+
+void 
 Init_gtk_tooltips()
 {
     VALUE gTooltips = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
@@ -83,6 +100,8 @@ Init_gtk_tooltips()
     rb_define_method(gTooltips, "enable", ttips_enable, 0);
     rb_define_method(gTooltips, "disable", ttips_disable, 0);
     rb_define_method(gTooltips, "force_window", ttips_force_window, 0);
-
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_singleton_method(gTooltips, "get_info", ttips_s_get_info_from_tip_window, 1);
+#endif
     rb_define_singleton_method(gTooltips, "get_data", ttips_s_data_get, 1);
 }

@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:32 $
+  $Author: mutoh $
+  $Date: 2004/07/31 05:44:45 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -138,6 +138,16 @@ widget_queue_resize(self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+widget_queue_resize_no_redraw(self)
+    VALUE self;
+{
+    gtk_widget_queue_resize_no_redraw(_SELF(self));
+    return self;
+}
+#endif
+
 /* Note this method is not
    gtk_widget_get_size_request */
 static VALUE
@@ -205,6 +215,15 @@ widget_list_accel_closures(self)
 {
     return GLIST2ARY2(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+widget_can_activate_accel(self, signal_id)
+    VALUE self, signal_id;
+{
+    return CBOOL2RVAL(gtk_widget_can_activate_accel(_SELF(self), NUM2UINT(signal_id)));
+}
+#endif
 
 static VALUE
 widget_event(self, event)
@@ -893,6 +912,43 @@ widget_get_settings(self)
     return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+widget_get_clipboard(self, selection)
+    VALUE self, selection;
+{
+    return CLIPBOARD2RVAL(gtk_widget_get_clipboard(_SELF(self), RVAL2ATOM(selection)));
+}
+
+static VALUE
+widget_get_display(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_display(_SELF(self)));
+}
+
+static VALUE
+widget_get_root_window(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_root_window(_SELF(self)));
+}
+
+static VALUE
+widget_get_screen(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_screen(_SELF(self)));
+}
+
+static VALUE
+widget_has_screen(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
+}
+#endif
+
 /*
   Note this method is not gtk_widget_size_request()
 */
@@ -928,6 +984,49 @@ widget_thaw_child_notify(self)
     gtk_widget_thaw_child_notify(_SELF(self));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+widget_set_no_show_all(self, no_show_all)
+    VALUE self, no_show_all;
+{
+    gtk_widget_set_no_show_all(_SELF(self), RTEST(no_show_all));
+    return self;
+}
+
+static VALUE
+widget_get_no_show_all(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gtk_widget_get_no_show_all(_SELF(self)));
+}
+
+static VALUE
+widget_list_mnemonic_labels(self)
+    VALUE self;
+{
+    GList* list = gtk_widget_list_mnemonic_labels(_SELF(self));
+    VALUE ret = GLIST2ARY(list);
+    g_list_free(list);
+    return ret;
+}
+
+static VALUE
+widget_add_mnemonic_label(self, label)
+    VALUE self, label;
+{
+    gtk_widget_add_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
+    return self;
+}
+
+static VALUE
+widget_remove_mnemonic_label(self, label)
+    VALUE self, label;
+{
+    gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
+    return self;
+}
+#endif
 
 static VALUE
 widget_window(self)
@@ -1040,6 +1139,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "unrealize", widget_unrealize, 0);
     rb_define_method(gWidget, "queue_draw", widget_queue_draw, 0);
     rb_define_method(gWidget, "queue_resize", widget_queue_resize, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gWidget, "queue_resize_no_redraw", widget_queue_resize_no_redraw, 0);
+#endif
     rb_define_method(gWidget, "size_request", widget_size_request, 0);
     rb_define_method(gWidget, "child_requisition", widget_get_child_requisition, 0);
     rb_define_method(gWidget, "size_allocate", widget_size_allocate, 1);
@@ -1047,6 +1149,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "remove_accelerator", widget_remove_accelerator, 3);
     rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
     rb_define_method(gWidget, "accel_closures", widget_list_accel_closures, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gWidget, "can_activate_accel?", widget_can_activate_accel, 1);
+#endif
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
@@ -1107,10 +1212,24 @@ Init_gtk_widget()
     rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
     rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
     rb_define_method(gWidget, "settings", widget_get_settings, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gWidget, "get_clipboard", widget_get_clipboard, 1);
+    rb_define_method(gWidget, "display", widget_get_display, 0);
+    rb_define_method(gWidget, "root_window", widget_get_root_window, 0);
+    rb_define_method(gWidget, "screen", widget_get_screen, 0);
+    rb_define_method(gWidget, "has_screen?", widget_has_screen, 0);
+#endif
     rb_define_method(gWidget, "set_child_visible", widget_set_child_visible, 1);
     rb_define_method(gWidget, "get_size_request", widget_get_size_request, 0);
     rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
     rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gWidget, "set_no_show_all", widget_set_no_show_all, 1);
+    rb_define_method(gWidget, "no_show_all?", widget_get_no_show_all, 0);
+    rb_define_method(gWidget, "mnemonic_labels", widget_list_mnemonic_labels, 0);
+    rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
+    rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
+#endif
     rb_define_method(gWidget, "window", widget_window, 0);
     rb_define_method(gWidget, "allocation", widget_get_allocation, 0);
     rb_define_method(gWidget, "set_allocation", widget_set_allocation, 4);

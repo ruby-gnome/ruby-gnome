@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2003/09/09 15:17:22 $
+  $Date: 2004/07/31 05:44:45 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -128,6 +128,20 @@ gaccelgrp_find(self)
 }
 
 static VALUE
+gaccelgrp_activate(self, accel_quark, acceleratable, accel_key, accel_mods)
+    VALUE self, accel_quark, acceleratable, accel_key, accel_mods;
+{
+    GQuark quark = 0;
+    if (TYPE(accel_quark) == T_STRING){
+        quark = g_quark_from_string(RVAL2CSTR(accel_quark));
+    } else {
+        quark = NUM2UINT(quark);
+    }
+    return CBOOL2RVAL(gtk_accel_group_activate(_SELF(self), quark, RVAL2GOBJ(acceleratable),
+                                               NUM2UINT(accel_key), RVAL2MOD(accel_mods)));
+}
+
+static VALUE
 _gaccelgrp_lock_ensure(self)
     VALUE self;
 {
@@ -160,7 +174,7 @@ gaccelgrp_s_activate(self, obj, key, modtype)
     VALUE self, obj, key, modtype;
 {
     return gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
-                                     NUM2INT(key),
+                                     NUM2UINT(key),
                                      RVAL2MOD(modtype)) ? Qtrue : Qfalse;
 }
 
@@ -180,6 +194,7 @@ Init_gtk_accel_group()
     rb_define_singleton_method(gAccelGroup, "from_object", gaccelgrp_s_from_object, 1);
     rb_define_singleton_method(gAccelGroup, "from_accel_closure", gaccelgrp_s_from_accel_closure, 1);
     rb_define_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
+    rb_define_method(gAccelGroup, "activate", gaccelgrp_activate, 4);
     rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);
     rb_define_method(gAccelGroup, "unlock", gaccelgrp_unlock, 0);
     rb_define_method(gAccelGroup, "connect", gaccelgrp_connect, -1);
