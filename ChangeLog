@@ -1,10 +1,10 @@
 2003-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * NEWS: Updated.
+	* NEWS: Updated.
 
 2003-11-22  Laurent Sansonetti  <lrz@gnome.org>
                                                                                 
-   * README: libgda 1.0.2 or newer is needed for Ruby/Libgda.
+	* README: libgda 1.0.2 or newer is needed for Ruby/Libgda.
 
 2003-11-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
