@@ -251,6 +251,7 @@ rb_gst_element_get_property (VALUE self, VALUE name)
 	GstElement *element;
 	GValue gvalue = { 0, };
 	const gchar *gname;
+	VALUE ret;
 	
 	element = RGST_ELEMENT (self);	
 	gname   = RVAL2CSTR (name);
@@ -258,7 +259,9 @@ rb_gst_element_get_property (VALUE self, VALUE name)
 	check_property (element, gname, &gvalue);
 	gst_element_get_property (element, RVAL2CSTR (name), &gvalue);
 	/* FIXME: returns nil if property doesn't exist yet */
-	return GVAL2RVAL (&gvalue); 
+	ret = GVAL2RVAL (&gvalue);
+	g_value_unset (&gvalue);
+	return ret; 
 }
 
 /*
