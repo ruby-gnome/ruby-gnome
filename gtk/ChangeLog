@@ -1,5 +1,6 @@
 2004-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktextappearance.c: Add Gtk::TextAppearance.new.
 	* src/rbgdkdisplay.c: Fix argument errors of Gdk::Display#put_event, 
 	#set_double_click_time. Bugs item [892303].
 	* sample/gtk-demo/main.rb: Don't show a warning message when 

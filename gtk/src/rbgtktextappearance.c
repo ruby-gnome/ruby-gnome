@@ -4,7 +4,7 @@
   rbgtktextappearance.c -
  
   $Author: mutoh $
-  $Date: 2004/02/11 17:21:47 $
+  $Date: 2004/02/12 08:30:53 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -129,6 +129,16 @@ ATTR_BOOL(draw_bg);
 ATTR_BOOL(inside_selection);
 ATTR_BOOL(is_text);
 
+static VALUE
+txt_app_initialize(self)
+    VALUE self;
+{
+    GtkTextAppearance app;
+    G_INITIALIZE(self, &app);
+    return Qnil;
+}
+
+
 void
 Init_txt_appearance()
 {
@@ -141,6 +151,7 @@ Init_txt_appearance()
     DEFINE_ACCESSOR(gTextApp, int, rise);
     DEFINE_ACCESSOR(gTextApp, enums, underline);
 
+    rb_define_method(gTextApp, "initialize", txt_app_initialize, 0);
     rb_define_method(gTextApp, "strikethrough?", txt_app_bool_strikethrough, 0);
     rb_define_method(gTextApp, "set_strikethrough", txt_app_bool_set_strikethrough, 1);
     rb_define_method(gTextApp, "draw_bg?", txt_app_bool_draw_bg, 0);
