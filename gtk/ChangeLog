@@ -1,3 +1,8 @@
+2003-03-17  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* src/rbgtktreeiter.c (treeiter_eql): moved declaration of
+	GtkTreeModels to start of function for not depending on C99.
+
 2003-03-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.h: remove code for GDK_ROOT_WINDOW.

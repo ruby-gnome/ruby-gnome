@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: sakai $
-  $Date: 2003/03/14 03:12:22 $
+  $Date: 2003/03/17 12:42:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -146,14 +146,16 @@ treeiter_eql(self, other)
     gint i, num1, num2;
     GtkTreeIter* iter1 = _SELF(self);
     GtkTreeIter* iter2;
+    GtkTreeModel* model1;
+    GtkTreeModel* model2;
 
     if (!rb_obj_is_kind_of(other, GTYPE2CLASS(GTK_TYPE_TREE_ITER)))
         return Qfalse;
 
     iter2 = _SELF(other);
 
-    GtkTreeModel* model1 = (GtkTreeModel*)iter1->user_data3;
-    GtkTreeModel* model2 = (GtkTreeModel*)iter2->user_data3;
+    model1 = (GtkTreeModel*)iter1->user_data3;
+    model2 = (GtkTreeModel*)iter2->user_data3;
     if (model1 != model2) return Qfalse;
 
     num1 = gtk_tree_model_get_n_columns(model1);
