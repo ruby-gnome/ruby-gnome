@@ -28,6 +28,22 @@
  */
 
 /*
+ *  Method: signal_new_object(anObject) -> self
+ *
+ *  Emit a 'new_object' signal.  Autopluggers are supposed to emit
+ *  this signal whenever a new object has been added to the
+ *  autoplugged pipeline.
+ */
+
+static VALUE rb_gst_autoplug_signal_new_object(self, object)
+    VALUE self, object;
+{
+    gst_autoplug_signal_new_object(RGST_AUTOPLUG(self),
+                                   RGST_OBJECT(object));
+    return self;
+}
+
+/*
  *  XXX to_caps and to_renderers should handle variable arguments as targets.
  */
 
@@ -74,6 +90,7 @@ static VALUE rb_gst_autoplug_to_renderers(self, srccaps, sinkelement)
 
 void Init_gst_autoplug(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_AUTOPLUG, "Autoplug", mGst);
+    rb_define_method(c, "signal_new_object", rb_gst_autoplug_signal_new_object, 1);
     rb_define_method(c, "to_caps", rb_gst_autoplug_to_caps, 2);
     rb_define_method(c, "to_renderers", rb_gst_autoplug_to_renderers, 2);
 }
