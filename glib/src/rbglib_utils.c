@@ -4,7 +4,7 @@
   rbglib_utils.c -
 
   $Author: mutoh $
-  $Date: 2004/10/21 15:50:21 $
+  $Date: 2005/03/11 19:14:12 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -267,5 +267,6 @@ Init_glib_utils()
     rb_define_module_function(mGLib, "spaced_primes_closest", rbglib_m_spaced_primes_closest, 1);
     rb_define_module_function(mGLib, "parse_debug_string", rbglib_m_parse_debug_string, 2);
     rb_define_module_function(mGLib, "check_version?", rbglib_m_check_version, 3);
+
 }
 

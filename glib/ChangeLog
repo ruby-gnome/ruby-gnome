@@ -1,3 +1,9 @@
+2005-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_mainloop.c: Added GLib::MainLoop. 
+	* src/rbglib_maincontext.c: Added GLib::Context. 
+	* src/rbglib.[ch]: Support GLib::MainLoop, GLib::Context.
+
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_threads.c, extconf.rb: Fix compiling problem on MSVC++.

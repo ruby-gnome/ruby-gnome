@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 06:55:37 $
+  $Date: 2005/03/11 19:14:12 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -25,6 +25,8 @@ extern void Init_glib_messages();
 extern void Init_glib_spawn();
 extern void Init_glib_fileutils();
 extern void Init_glib_utils();
+extern void Init_glib_main_loop();
+extern void Init_glib_main_context();
 extern void Init_gobject();
 
 char *
@@ -148,7 +150,12 @@ void Init_glib2()
     Init_glib_spawn();
     Init_glib_fileutils();
     Init_glib_utils();
+
     Init_gobject();
+
+    /* Require GBoxed/GObject */
+    Init_glib_main_loop();
+    Init_glib_main_context();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);
