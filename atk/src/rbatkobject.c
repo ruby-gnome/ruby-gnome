@@ -4,9 +4,9 @@
   rbatkobject.c -
 
   $Author: mutoh $
-  $Date: 2004/03/02 15:55:21 $
+  $Date: 2004/03/05 15:33:48 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
 #include "rbatk.h"
