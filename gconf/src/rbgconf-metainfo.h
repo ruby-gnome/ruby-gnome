@@ -41,7 +41,8 @@ extern "C" {
 
 /* Function Declarations *****************************************************/
 
-void Init_gconf_metainfo(m_gconf);
+extern void Init_gconf_metainfo(VALUE m_gconf);
+extern GType metainfo_get_gobject_type();
 
 /* Global Variables **********************************************************/
 

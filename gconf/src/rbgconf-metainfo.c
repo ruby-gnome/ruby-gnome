@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/04/13 20:31:43 $
+ * $Date: 2003/05/24 13:23:34 $
  *
  *****************************************************************************/
 
@@ -55,8 +55,8 @@ metainfo_get_gobject_type(void)
 
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static("GConfMetaInfo",
-				(GConfCopyFunc)metainfo_copy,
-				(GConfFreeFunc)gconf_meta_info_free);
+				(GBoxedCopyFunc)metainfo_copy,
+				(GBoxedFreeFunc)gconf_meta_info_free);
 	}
 
 	return our_type;
@@ -91,7 +91,7 @@ static VALUE
 metainfo_get_mod_time(self)
 	VALUE self;
 {
-	return CSTR2RVAL(gconf_meta_info_get_mod_time(_SELF(self)));	
+	return INT2NUM(gconf_meta_info_mod_time(_SELF(self)));	
 }
 
 static VALUE
@@ -111,7 +111,7 @@ metainfo_set_mod_user(self, user)
 }
 
 static VALUE
-metainfo_set_mod_user(self, time)
+metainfo_set_mod_time(self, time)
 	VALUE self, time;
 {
 	gconf_meta_info_set_mod_time(_SELF(self), NUM2INT(time));
@@ -127,7 +127,7 @@ Init_gconf_metainfo(m_gconf)
 	rb_define_method(gmi, "initialize", metainfo_initialize, 0);
 	rb_define_method(gmi, "schema", metainfo_get_schema, 0);
 	rb_define_method(gmi, "mod_user", metainfo_get_mod_user, 0);
-	rb_define_method(gmi, "mod_time", metainfo_mod_time, 0);
+	rb_define_method(gmi, "mod_time", metainfo_get_mod_time, 0);
 	rb_define_method(gmi, "set_schema", metainfo_set_schema, 1);
 	rb_define_method(gmi, "set_mod_user", metainfo_set_mod_user, 1);
 	rb_define_method(gmi, "set_mod_time", metainfo_set_mod_time, 1);
