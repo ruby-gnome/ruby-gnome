@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,8 @@
 ************************************************/
 
 #include "global.h"
+
+VALUE mRC;
 
 static VALUE
 rc_m_reparse_all(self)

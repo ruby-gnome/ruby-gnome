@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -164,7 +164,7 @@ static VALUE
 widget_event(self, event)
     VALUE self, event;
 {
-    return INT2NUM(gtk_widget_event(_SELF(self), get_gdkevent(event)));
+    return INT2NUM(gtk_widget_event(_SELF(self), GEV2RVAL(event)));
 }
 
 static VALUE
@@ -846,42 +846,7 @@ widget_selection_remove_all(self)
     return self;
 }
 
-#define DEFINE_EVENT_FUNC(EVENT,TYPE) \
-static VALUE \
-widget_event_ ## EVENT (self, event) \
-    VALUE self, event; \
-{ \
-    GtkWidget *widget = _SELF(self); \
-    GTK_WIDGET_CLASS(G_OBJECT_GET_CLASS(widget))->EVENT \
-        (widget, &get_gdkevent(event)->TYPE); \
-    return Qnil; \
-}
-DEFINE_EVENT_FUNC(button_press_event, button)
-	DEFINE_EVENT_FUNC(button_release_event, button)
-	DEFINE_EVENT_FUNC(motion_notify_event, motion)
-	DEFINE_EVENT_FUNC(delete_event, any)
-	DEFINE_EVENT_FUNC(destroy_event, any)
-	DEFINE_EVENT_FUNC(expose_event, expose)
-	DEFINE_EVENT_FUNC(key_press_event, key)
-	DEFINE_EVENT_FUNC(key_release_event, key)
-	DEFINE_EVENT_FUNC(enter_notify_event, crossing)
-	DEFINE_EVENT_FUNC(leave_notify_event, crossing)
-	DEFINE_EVENT_FUNC(configure_event, configure)
-	DEFINE_EVENT_FUNC(focus_in_event, focus_change)
-	DEFINE_EVENT_FUNC(focus_out_event, focus_change)
-	DEFINE_EVENT_FUNC(map_event, any)
-	DEFINE_EVENT_FUNC(unmap_event, any)
-	DEFINE_EVENT_FUNC(property_notify_event, property)
-	DEFINE_EVENT_FUNC(selection_clear_event, selection)
-	DEFINE_EVENT_FUNC(selection_request_event, selection)
-	DEFINE_EVENT_FUNC(selection_notify_event, selection)
-	DEFINE_EVENT_FUNC(proximity_in_event, proximity)
-	DEFINE_EVENT_FUNC(proximity_out_event, proximity)
-	DEFINE_EVENT_FUNC(visibility_notify_event, visibility)
-	DEFINE_EVENT_FUNC(client_event, client)
-	DEFINE_EVENT_FUNC(no_expose_event, any)
-
-    void 
+void 
 Init_gtk_widget()
 {
     VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
@@ -1014,34 +979,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "selection_add_targets", widget_selection_add_targets, 2);
     rb_define_method(gWidget, "selection_convert", widget_selection_convert, 3);
     rb_define_method(gWidget, "selection_remove_all", widget_selection_remove_all, 0);
-	
-    /*
-     * events
-     */
-    rb_define_method(gWidget, "button_press_event", widget_event_button_press_event, 1);
-    rb_define_method(gWidget, "button_release_event", widget_event_button_release_event, 1);
-    rb_define_method(gWidget, "motion_notify_event", widget_event_motion_notify_event, 1);
-    rb_define_method(gWidget, "delete_event", widget_event_delete_event, 1);
-    rb_define_method(gWidget, "destroy_event", widget_event_destroy_event, 1);
-    rb_define_method(gWidget, "expose_event", widget_event_expose_event, 1);
-    rb_define_method(gWidget, "key_press_event", widget_event_key_press_event, 1);
-    rb_define_method(gWidget, "key_release_event", widget_event_key_release_event, 1);
-    rb_define_method(gWidget, "enter_notify_event", widget_event_enter_notify_event, 1);
-    rb_define_method(gWidget, "leave_notify_event", widget_event_leave_notify_event, 1);
-    rb_define_method(gWidget, "configure_event", widget_event_configure_event, 1);
-    rb_define_method(gWidget, "focus_in_event", widget_event_focus_in_event, 1);
-    rb_define_method(gWidget, "focus_out_event", widget_event_focus_out_event, 1);
-    rb_define_method(gWidget, "map_event", widget_event_map_event, 1);
-    rb_define_method(gWidget, "unmap_event", widget_event_unmap_event, 1);
-    rb_define_method(gWidget, "property_notify_event", widget_event_property_notify_event, 1);
-    rb_define_method(gWidget, "selection_clear_event", widget_event_selection_clear_event, 1);
-    rb_define_method(gWidget, "selection_request_event", widget_event_selection_request_event, 1);
-    rb_define_method(gWidget, "selection_notify_event", widget_event_selection_notify_event, 1);
-    rb_define_method(gWidget, "proximity_in_event", widget_event_proximity_in_event, 1);
-    rb_define_method(gWidget, "proximity_out_event", widget_event_proximity_out_event, 1);
-    rb_define_method(gWidget, "visibility_notify_event", widget_event_visibility_notify_event, 1);
-    rb_define_method(gWidget, "client_event", widget_event_client_event, 1);
-    rb_define_method(gWidget, "no_expose_event", widget_event_no_expose_event, 1);
 
     /*
      * singleton methods

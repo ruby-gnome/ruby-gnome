@@ -4,7 +4,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -143,7 +143,7 @@ static VALUE
 gtk_m_get_current_event(self)
     VALUE self;
 {
-    return make_gdkevent(gtk_get_current_event());
+    return GEV2RVAL(gtk_get_current_event());
 }
 
 static VALUE

@@ -1,8 +1,16 @@
+2002-09-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Remove Gtk::Widget#.*_event.
+	* src/rbgtk.h, rbgtkobject.c, rbgtkwidget.c, rbgtkmain.c, global.c:
+	Apply RVAL2GEV, GEV2RVAL macros.
+	* src/rbgtk.c: Code clean up.
+	* src/rbgtkctree.c: Fix warning message of compiling time.
+	
 2002-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkctree.c: Bugfix for segmentation fault.
 	* src/rbgdkevents.c: Code clean up.
-	
+
 2002-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkgeometry.c: Add file. It's my mistake.

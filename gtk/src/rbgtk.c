@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,8 +19,6 @@
 
 VALUE mGtk;
 VALUE mEditable;
-
-VALUE mRC;
 
 ID id_relative_callbacks;
 ID id_call;

@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -74,7 +74,7 @@ arg_set_value(arg, value)
 
 	  case GTK_TYPE_BOXED:
 		if (arg->type == GDK_TYPE_EVENT)
-			GTK_VALUE_BOXED(*arg) = get_gdkevent(value);
+			GTK_VALUE_BOXED(*arg) = RVAL2GEV(value);
 #ifdef GTK_TYPE_GDK_COLORMAP
 		else if (arg->type == GTK_TYPE_GDK_COLORMAP)
 			GTK_VALUE_BOXED(*arg) = GDK_COLORMAP(RVAL2GOBJ(value));
@@ -260,7 +260,7 @@ signal_setup_args(obj, sig, argc, params, args)
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[0])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[1])));
 			if (GTK_VALUE_POINTER(params[2]))
-				rb_ary_push(args, make_gdkevent(GTK_VALUE_POINTER(params[2])));
+				rb_ary_push(args, GEV2RVAL(GTK_VALUE_POINTER(params[2])));
 			else
 				rb_ary_push(args, Qnil);
 			return;

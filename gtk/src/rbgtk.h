@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/09 14:24:50 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -38,8 +38,18 @@
 #include <signal.h>
 
 #define CSTR2OBJ(s) (s ? rb_str_new2(s) : Qnil)
+#define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
+
+#define GEV2RVAL(ev) (make_gdkevent(ev))
+#define RVAL2GEV(ev) (get_gdkevent(ev))
+
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
+
+#define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
+#define GDK_TYPE_REGION (gdk_region_get_type())
+#define GDK_TYPE_ATOM (gdk_atom_get_type())
+
 
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
@@ -50,21 +60,14 @@ extern VALUE arg_to_value(GtkArg* arg);
 extern ID id_relative_callbacks;
 extern ID id_call;
 
-extern VALUE mRC;
 extern VALUE mGtk;
-extern VALUE mGtkDrag;
-extern VALUE mEditable;
-
 extern VALUE mGdk;
-extern VALUE mGdkKeyval;
-extern VALUE mGdkSelection;
-extern VALUE mGdkRgb;
+extern VALUE mEditable;
 
 /*
  * for gtk
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
-
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 
 #define add_relative rbgobj_add_relative
@@ -74,24 +77,15 @@ extern void exec_callback(GtkWidget *widget, gpointer proc);
 /*
  * for gdk
  */
-/* Append type */
-#define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
-extern GType gdk_geometry_get_type(void);
-
-#define GDK_TYPE_REGION (gdk_region_get_type())
-extern GType gdk_region_get_type(void);
-
 typedef struct {
   GdkAtom atom;
 } GdkAtomData;
 
-#define GDK_TYPE_ATOM (gdk_atom_get_type())
 extern GType gdk_atom_get_type(void);
-
-#define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
-
-typedef void(*gdkdrawfunc)();
+extern GType gdk_geometry_get_type(void);
+extern GType gdk_region_get_type(void);
 
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
+
 #endif /* _RBGTK_H */

@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 15:03:43 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@
 static GtkCTreeNode*
 ctreenode_copy (const GtkCTreeNode* node)
 {
-    return node;
+    return (GtkCTreeNode*)node;
 }
 
 static void

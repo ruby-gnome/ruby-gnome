@@ -4,7 +4,7 @@
   global.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 13:06:59 $
+  $Date: 2002/09/09 16:27:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -112,7 +112,7 @@ arg_to_value(arg)
 
 	  case GTK_TYPE_BOXED:
 		if (arg->type == GDK_TYPE_EVENT) {
-			return make_gdkevent(GTK_VALUE_BOXED(*arg));
+			return GEV2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 #ifdef GTK_TYPE_GDK_COLORMAP
 		else if (arg->type == GTK_TYPE_GDK_COLORMAP) {
