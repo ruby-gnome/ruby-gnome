@@ -1,3 +1,7 @@
+2003-08-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*: use G_DEF_CONSTANTS() for defining enum/flags constants.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
    * extconf.rb: Follow mkmf-gnome2.rb position changes.

@@ -3,8 +3,8 @@
 
   rbpangocontext.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 15:24:26 $
+  $Author: sakai $
+  $Date: 2003/08/15 13:02:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -143,8 +143,5 @@ Init_pango_context()
     G_DEF_SETTERS(pContext);
 
     /* PangoDirection */
-    rb_define_const(pContext, "DIRECTION_LTR", INT2FIX(PANGO_DIRECTION_LTR));
-    rb_define_const(pContext, "DIRECTION_RTL", INT2FIX(PANGO_DIRECTION_RTL));
-    rb_define_const(pContext, "DIRECTION_TTB_LTR", INT2FIX(PANGO_DIRECTION_TTB_LTR));
-    rb_define_const(pContext, "DIRECTION_TTB_RTL", INT2FIX(PANGO_DIRECTION_TTB_RTL));
+    G_DEF_CONSTANTS(pContext, PANGO_TYPE_DIRECTION, "PANGO_");
 }

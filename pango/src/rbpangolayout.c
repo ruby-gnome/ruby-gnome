@@ -3,8 +3,8 @@
 
   rbpangolayout.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/02 09:10:53 $
+  $Author: sakai $
+  $Date: 2003/08/15 13:02:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -362,11 +362,8 @@ Init_pango_layout()
     G_DEF_SETTERS(pLayout);
 
     /* PangoWrapMode */
-    rb_define_const(pLayout, "WRAP_WORD", INT2FIX(PANGO_WRAP_WORD));
-    rb_define_const(pLayout, "WRAP_CHAR", INT2FIX(PANGO_WRAP_CHAR));
+    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_WRAP_MODE, "PANGO_");
 
     /* PangoAlignment */
-    rb_define_const(pLayout, "ALIGN_LEFT", INT2FIX(PANGO_ALIGN_LEFT));
-    rb_define_const(pLayout, "ALIGN_CENTER", INT2FIX(PANGO_ALIGN_CENTER));
-    rb_define_const(pLayout, "ALIGN_RIGHT", INT2FIX(PANGO_ALIGN_RIGHT));
+    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_ALIGNMENT, "PANGO_");
 }

@@ -3,8 +3,8 @@
 
   rbpangoarray.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Author: sakai $
+  $Date: 2003/08/15 13:02:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -115,11 +115,5 @@ Init_pango_array()
     G_DEF_SETTERS(pTabArray);
 
     /* PangoTabAlign */
-    rb_define_const(pTabArray, "TAB_LEFT", INT2FIX(PANGO_TAB_LEFT));
-    /* These constants are not supporte yet
-    rb_define_const(pTabArray, "TAB_RIGHT", INT2FIX(PANGO_TAB_RIGHT));
-    rb_define_const(pTabArray, "TAB_CENTER", INT2FIX(PANGO_TAB_CENTER));
-    rb_define_const(pTabArray, "TAB_NUMERIC", INT2FIX(PANGO_TAB_NUMERIC));
-    */
-    
+    G_DEF_CONSTANTS(pTabArray, PANGO_TYPE_TAB_ALIGN, "PANGO_");    
 }

@@ -3,8 +3,8 @@
 
   rbpangofontdescription.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 15:24:26 $
+  $Author: sakai $
+  $Date: 2003/08/15 13:02:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -235,39 +235,17 @@ Init_pango_font_description()
     G_DEF_SETTERS(pFontDesc);
 
     /* PangoStyle */
-    rb_define_const(pFontDesc, "STYLE_NORMAL", INT2FIX(PANGO_STYLE_NORMAL));
-    rb_define_const(pFontDesc, "STYLE_OBLIQUE", INT2FIX(PANGO_STYLE_OBLIQUE));
-    rb_define_const(pFontDesc, "STYLE_ITALIC", INT2FIX(PANGO_STYLE_ITALIC));
+    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STYLE, "PANGO_");
 
     /* PangoWeight */
-    rb_define_const(pFontDesc, "WEIGHT_ULTRALIGHT", INT2FIX(PANGO_WEIGHT_ULTRALIGHT));
-    rb_define_const(pFontDesc, "WEIGHT_LIGHT", INT2FIX(PANGO_WEIGHT_LIGHT));
-    rb_define_const(pFontDesc, "WEIGHT_NORMAL", INT2FIX(PANGO_WEIGHT_NORMAL));
-    rb_define_const(pFontDesc, "WEIGHT_BOLD", INT2FIX(PANGO_WEIGHT_BOLD));
-    rb_define_const(pFontDesc, "WEIGHT_ULTRABOLD", INT2FIX(PANGO_WEIGHT_ULTRABOLD));
-    rb_define_const(pFontDesc, "WEIGHT_HEAVY", INT2FIX(PANGO_WEIGHT_HEAVY));
+    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_WEIGHT, "PANGO_");
 
     /* PangoVariant */
-    rb_define_const(pFontDesc, "VARIANT_NORMAL", INT2FIX(PANGO_VARIANT_NORMAL));
-    rb_define_const(pFontDesc, "VARIANT_SMALL_CAPS", INT2FIX(PANGO_VARIANT_SMALL_CAPS));
+    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_VARIANT, "PANGO_");
 
     /* PangoStretch */
-    rb_define_const(pFontDesc, "STRETCH_ULTRA_CONDENSED", INT2FIX(PANGO_STRETCH_ULTRA_CONDENSED));
-    rb_define_const(pFontDesc, "STRETCH_EXTRA_CONDENSED", INT2FIX(PANGO_STRETCH_EXTRA_CONDENSED));
-    rb_define_const(pFontDesc, "STRETCH_CONDENSED", INT2FIX(PANGO_STRETCH_CONDENSED));
-    rb_define_const(pFontDesc, "STRETCH_SEMI_CONDENSED", INT2FIX(PANGO_STRETCH_SEMI_CONDENSED));
-    rb_define_const(pFontDesc, "STRETCH_NORMAL", INT2FIX(PANGO_STRETCH_NORMAL));
-    rb_define_const(pFontDesc, "STRETCH_SEMI_EXPANDED", INT2FIX(PANGO_STRETCH_SEMI_EXPANDED));
-    rb_define_const(pFontDesc, "STRETCH_EXPANDED", INT2FIX(PANGO_STRETCH_EXPANDED));
-    rb_define_const(pFontDesc, "STRETCH_EXTRA_EXPANDED", INT2FIX(PANGO_STRETCH_EXTRA_EXPANDED));
-    rb_define_const(pFontDesc, "STRETCH_ULTRA_EXPANDED", INT2FIX(PANGO_STRETCH_ULTRA_EXPANDED));
+    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STRETCH, "PANGO_");
 
     /* PangoFontMask */
-    rb_define_const(pFontDesc, "FONT_MASK_FAMILY", INT2FIX(PANGO_FONT_MASK_FAMILY));
-    rb_define_const(pFontDesc, "FONT_MASK_STYLE", INT2FIX(PANGO_FONT_MASK_STYLE));
-    rb_define_const(pFontDesc, "FONT_MASK_VARIANT", INT2FIX(PANGO_FONT_MASK_VARIANT));
-    rb_define_const(pFontDesc, "FONT_MASK_WEIGHT", INT2FIX(PANGO_FONT_MASK_WEIGHT));
-    rb_define_const(pFontDesc, "FONT_MASK_STRETCH", INT2FIX(PANGO_FONT_MASK_STRETCH));
-    rb_define_const(pFontDesc, "FONT_MASK_SIZE", INT2FIX(PANGO_FONT_MASK_SIZE));
-
+    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_FONT_MASK, "PANGO_");
 }

@@ -3,8 +3,8 @@
 
   rbpangoattribute.c -
 
-  $Author: mutoh $
-  $Date: 2003/04/04 18:12:33 $
+  $Author: sakai $
+  $Date: 2003/08/15 13:02:59 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -375,10 +375,7 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_UNDERLINE, AttrUnderline, pattrint, 1);
     /* PangoUnderline */
-    rb_define_const(tmpklass, "NONE", INT2FIX(PANGO_UNDERLINE_NONE));
-    rb_define_const(tmpklass, "SINGLE", INT2FIX(PANGO_UNDERLINE_SINGLE));
-    rb_define_const(tmpklass, "DOUBLE", INT2FIX(PANGO_UNDERLINE_DOUBLE));
-    rb_define_const(tmpklass, "LOW", INT2FIX(PANGO_UNDERLINE_LOW));
+    G_DEF_CONSTANTS(tmpklass, PANGO_TYPE_UNDERLINE, "PANGO_UNDERLINE_");
 
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
@@ -396,6 +393,7 @@ Init_pango_attribute()
     rb_define_const(tmpklass, "X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
     rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
 
+    /* PangoAttrType */
     rb_define_const(pattr, "TYPE_INVALID", INT2FIX(PANGO_ATTR_INVALID));
     rb_define_const(pattr, "TYPE_LANGUAGE", INT2FIX(PANGO_ATTR_LANGUAGE));
     rb_define_const(pattr, "TYPE_FAMILY", INT2FIX(PANGO_ATTR_FAMILY));
