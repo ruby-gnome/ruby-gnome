@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ *                     2004 Erwan Loisant <erwan@loisant.org>
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -93,9 +94,13 @@ static VALUE
 rb_gst_bin_add (int argc, VALUE * argv, VALUE self)
 {
     int i;
-
-    for (i = 0; i < argc; i++)
-        gst_bin_add (RGST_BIN (self), RGST_ELEMENT (argv[i]));
+ 
+    for (i = 0; i < argc; i++) {
+       if (!rb_obj_is_kind_of(argv[i], GTYPE2CLASS(GST_TYPE_ELEMENT))) {
+	 rb_raise(rb_eTypeError, "GstElement expected");
+       }
+       gst_bin_add (RGST_BIN (self), RGST_ELEMENT (argv[i]));
+    }
     return rb_gst_bin_get_elements (self);
 }
 

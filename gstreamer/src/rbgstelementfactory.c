@@ -52,7 +52,7 @@ rb_gst_elementfactory_make (int argc, VALUE *argv, VALUE self)
 
 	rb_scan_args (argc, argv, "11", &fname, &ename);
 
-	element = gst_element_factory_make (RVAL2CSTR(fname), 
+	element = gst_element_factory_make (RVAL2CSTR(fname),
 		NIL_P (ename) ? NULL : RVAL2CSTR (ename));
 
 	return element != NULL
