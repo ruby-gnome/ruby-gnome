@@ -4,7 +4,7 @@
   rbart_affine.c - Art::Affine class of ruby
 
   $Author: tkubo $
-  $Date: 2002/09/20 14:51:20 $
+  $Date: 2002/09/28 14:27:08 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -12,7 +12,7 @@
 
 #include "rbart.h"
 
-VALUE artAffine;
+static VALUE artAffine;
 
 /* Below 2 macros are available only when obj is self or after
  * checking that obj is certainly a instance of Art::Affine. */
@@ -104,15 +104,30 @@ affine_s_translate(klass, tx, ty)
 }
 
 static VALUE
-affine_point(self, x, y)
-    VALUE self, x, y;
+affine_point(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
     ArtPoint src;
     ArtPoint dst;
-    src.x = NUM2DBL(x);
-    src.y = NUM2DBL(y);
+
+    if (argc == 1) {
+        if (BUILTIN_TYPE(argv[0]) != T_ARRAY)
+            goto arg_error;
+        if (RARRAY(argv[0])-> len != 2)
+            goto arg_error;
+        src.x = NUM2DBL(RARRAY(argv[0])->ptr[0]);
+        src.y = NUM2DBL(RARRAY(argv[0])->ptr[1]);
+    } else if (argc == 2) {
+        src.x = NUM2DBL(argv[0]);
+        src.y = NUM2DBL(argv[1]);
+    } else {
+        goto arg_error;
+    }
     art_affine_point(&dst, &src, Affine_Ptr(self));
     return rb_ary_new3(2, rb_float_new(dst.x), rb_float_new(dst.y));
+  arg_error:
+    rb_raise(rb_eArgError, "wrong argument format (expect (x, y) or ([x, y]).)");
 }
 
 static VALUE
@@ -214,7 +229,8 @@ affine_equal(self, right)
 }
 
 void
-Init_art_affine()
+Init_art_affine(mArt)
+    VALUE mArt;
 {
     artAffine = rb_define_class_under(mArt, "Affine", rb_cObject);
 
@@ -225,7 +241,7 @@ Init_art_affine()
     rb_define_singleton_method(artAffine, "shear", affine_s_shear, 1);
     rb_define_singleton_method(artAffine, "translate", affine_s_translate, 2);
 
-    rb_define_method(artAffine, "point", affine_point, 2);
+    rb_define_method(artAffine, "point", affine_point, -1);
     rb_define_method(artAffine, "invert", affine_invert, 0);
     rb_define_method(artAffine, "invert!", affine_invert_bang, 0);
     rb_define_method(artAffine, "flip", affine_flip, 2);
@@ -237,4 +253,10 @@ Init_art_affine()
 
     rb_define_method(artAffine, "*", affine_multiply, 1);
     rb_define_method(artAffine, "==", affine_equal, 1);
+
+    rb_define_alias(artAffine, "inverse", "invert");
+    rb_define_alias(artAffine, "inverse!", "invert!");
+    rb_define_alias(artAffine, "call", "point");
+    rb_define_alias(artAffine, "[]", "point");
+    rb_define_alias(artAffine, "act", "point");
 }
