@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2004/08/07 18:20:54 $
+  $Date: 2004/08/07 18:29:25 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -175,7 +175,7 @@ treeview_move_column_after(self, column, base_column)
     VALUE self, column, base_column;
 {
     gtk_tree_view_move_column_after(_SELF(self), TREEVIEW_COL(column),
-                                    TREEVIEW_COL(base_column));
+                                    NIL_P(base_column) ? NULL : TREEVIEW_COL(base_column));
     return self;
 }
 
@@ -216,8 +216,10 @@ static VALUE
 treeview_scroll_to_cell(self, path, column, use_align, row_align, col_align)
     VALUE self, path, column, use_align, row_align, col_align;
 {
-    gtk_tree_view_scroll_to_cell(_SELF(self), RVAL2TREEPATH(path),
-                                 TREEVIEW_COL(column), RTEST(use_align),
+    gtk_tree_view_scroll_to_cell(_SELF(self),
+                                 NIL_P(path) ? NULL : RVAL2TREEPATH(path),
+                                 NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                 RTEST(use_align),
                                  NUM2DBL(row_align), NUM2DBL(col_align));
     return self;
 }
@@ -227,7 +229,8 @@ treeview_set_cursor(self, path, focus_column, start_editing)
     VALUE self, path, focus_column, start_editing;
 {
     gtk_tree_view_set_cursor(_SELF(self), RVAL2TREEPATH(path),
-                             TREEVIEW_COL(focus_column), RTEST(start_editing));
+                             NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
+                             RTEST(start_editing));
     return self;
 }
 
@@ -239,8 +242,8 @@ treeview_get_cursor(self)
     GtkTreeViewColumn* focus_column;
 
     gtk_tree_view_get_cursor(_SELF(self), &path, &focus_column);
-    return rb_ary_new3(2, (path == NULL) ? Qnil : TREEPATH2RVAL(path),
-                       (focus_column == NULL) ? Qnil : GOBJ2RVAL(focus_column));
+    return rb_ary_new3(2, path ? TREEPATH2RVAL(path) : Qnil,
+                       GOBJ2RVAL(focus_column));
 }
 
 static VALUE
@@ -338,8 +341,8 @@ treeview_get_path_at_pos(self, x, y)
                                         NUM2INT(x), NUM2INT(y),
                                         &path, &column, &cell_x, &cell_y);
     return ret ? rb_ary_new3(4, 
-                             (path == NULL) ? Qnil : TREEPATH2RVAL(path),
-                             (column == NULL) ? Qnil : GOBJ2RVAL(column),
+                             path ? TREEPATH2RVAL(path) : Qnil,
+                             column ? GOBJ2RVAL(column) : Qnil,
                              INT2NUM(cell_x), INT2NUM(cell_y)) : Qnil;
 }
 
@@ -348,8 +351,10 @@ treeview_get_cell_area(self, path, column)
     VALUE self, path, column;
 {
     GdkRectangle rect;
-    gtk_tree_view_get_cell_area(_SELF(self), RVAL2TREEPATH(path),
-                                TREEVIEW_COL(column), &rect);
+    gtk_tree_view_get_cell_area(_SELF(self), 
+                                NIL_P(path) ? NULL : RVAL2TREEPATH(path),
+                                NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                &rect);
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
@@ -359,8 +364,9 @@ treeview_get_background_area(self, path, column)
 {
     GdkRectangle rect;
     gtk_tree_view_get_background_area(_SELF(self), 
-                                      RVAL2TREEPATH(path),
-                                      TREEVIEW_COL(column), &rect);
+                                      NIL_P(path) ? NULL : RVAL2TREEPATH(path),
+                                      NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                      &rect);
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
@@ -478,7 +484,7 @@ treeview_get_dest_row_at_pos(self, drag_x, drag_y)
     ret = gtk_tree_view_get_dest_row_at_pos(_SELF(self), 
                                             NUM2INT(drag_x), NUM2INT(drag_y),
                                             &path, &pos);
-    return ret ? rb_ary_new3(2, TREEPATH2RVAL(path), 
+    return ret ? rb_ary_new3(2, path ? TREEPATH2RVAL(path) : Qnil, 
                              GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION)) : Qnil;
 }
 
@@ -545,8 +551,9 @@ treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
     VALUE self, path, focus_column, focus_cell, start_editing;
 {
     gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2TREEPATH(path),
-                             TREEVIEW_COL(focus_column), GTK_CELL_RENDERER(RVAL2GOBJ(focus_cell)), 
-                             RTEST(start_editing));
+                                     NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
+                                     NIL_P(focus_cell) ? NULL : GTK_CELL_RENDERER(RVAL2GOBJ(focus_cell)), 
+                                     RTEST(start_editing));
     return self;
 }
 #endif
