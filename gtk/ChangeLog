@@ -1,5 +1,8 @@
 2003-03-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgtk.h: remove code for GDK_ROOT_WINDOW.
+	Because GDK_ROOT_WINDOW is no longer used.
+
 	* src/global.h, src/init.c: move declarations of Init_gtk_gdk(), 
 	Init_gtk_gtk() and Init_gtk_inits() from src/global.h to src/init.c.
 

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: sakai $
-  $Date: 2003/03/14 03:12:21 $
+  $Date: 2003/03/14 03:55:44 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,21 +20,6 @@
 #include "rbglib.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
-
-/* for GDK_ROOT_WINDOW() */
-#if defined GDK_WINDOWING_X11
-# include <gdk/gdkx.h>
-#elif defined GDK_WINDOWING_FB
-# include <gdk/linux-fb/gdkfb.h>
-#elif defined GDK_WINDOWING_DIRECTFB
-# include <gdk/directfb/gdkdirectfb.h>
-/*#elif defined(GDK_WINDOWING_BEOS)*/
-#elif defined GDK_WINDOWING_WIN32
-# if !defined HWND_DESKTOP
-#  define HWND_DESKTOP 0
-# endif
-# define GDK_ROOT_WINDOW() ((guint32) HWND_DESKTOP)
-#endif
 
 #include <signal.h>
 
