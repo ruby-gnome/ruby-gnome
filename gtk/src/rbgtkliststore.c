@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 15:49:24 $
+  $Date: 2005/01/30 11:24:36 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -142,7 +142,6 @@ lstore_insert(argc, argv, self)
         gtk_list_store_insert_with_valuesv(store, &iter, NUM2INT(position),
                                            columns, gvalues, n_values);
         
-        iter.user_data3 = store;
         for (cnt = 0; cnt < n_values; cnt++) {
             g_value_unset(&gvalues[cnt]);
         }
@@ -153,6 +152,7 @@ lstore_insert(argc, argv, self)
         rb_warn("Ignored 2nd argument under this environment. Because it has been supported since GTK+-2.6. ");
 #endif
     }
+    iter.user_data3 = store;
     return ITR2RVAL(&iter);
 }
 

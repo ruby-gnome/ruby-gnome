@@ -1,12 +1,20 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkliststore.c: Fix segfault in Gtk::ListStore#insert.
+	Reported by Joao Pedrosa.
+	* sample/misc/pangorenderer.rb: Added. 
+	* src/rbgdkpango.c: Fix wrong argument of Gdk::Pango.context. 
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2005-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkregion.c, rbgdkwindow.c, rbgtkaboutdialog.c, 
-        rbgtkactiongroup.c, rbgtkcelllayout.c, rbgtkclipboard.c, 
-        rbgtkcombobox.c, rbgtkentrycompletion.c, rbgtkfilefilter.c,
-        rbgtkiconview.c, rbgtkmain.c, rbgtkmenu.c, rbgtknotebook.c,  
-        rbgtksettings.c, rbgtktreemodel.c, rbgtktreemodelfilter.c, 
-        rbgtktreeview.c, rbgtktreeviewcolumn.c, rbgtkwidget.c, gtk2.def: 
-        Fix compiling errors on MS VC++.
+	rbgtkactiongroup.c, rbgtkcelllayout.c, rbgtkclipboard.c, 
+	rbgtkcombobox.c, rbgtkentrycompletion.c, rbgtkfilefilter.c,
+	rbgtkiconview.c, rbgtkmain.c, rbgtkmenu.c, rbgtknotebook.c,  
+	rbgtksettings.c, rbgtktreemodel.c, rbgtktreemodelfilter.c, 
+	rbgtktreeview.c, rbgtktreeviewcolumn.c, rbgtkwidget.c, gtk2.def: 
+	Fix compiling errors on MS VC++.
 	
 2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
 

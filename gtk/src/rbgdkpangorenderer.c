@@ -4,7 +4,7 @@
   rbgdkpangorenderer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 15:49:24 $
+  $Date: 2005/01/30 11:24:36 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -60,7 +60,8 @@ static VALUE
 prenderer_set_drawable(self, drawable)
     VALUE self, drawable;
 {
-    gdk_pango_renderer_set_drawable(_SELF(self), GDK_DRAWABLE(RVAL2GOBJ(drawable)));
+    gdk_pango_renderer_set_drawable(_SELF(self), 
+                                    GDK_DRAWABLE(RVAL2GOBJ(drawable)));
     return self;
 }
 
@@ -68,7 +69,8 @@ static VALUE
 prenderer_set_gc(self, gc)
     VALUE self, gc;
 {
-    gdk_pango_renderer_set_gc(_SELF(self), GDK_GC(RVAL2GOBJ(gc)));
+    gdk_pango_renderer_set_gc(_SELF(self), 
+                              NIL_P(gc) ? NULL : GDK_GC(RVAL2GOBJ(gc)));
     return self;
 }
 
@@ -77,7 +79,7 @@ prenderer_set_stipple(self, part, stipple)
     VALUE self, part, stipple;
 {
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                                   GDK_BITMAP(RVAL2GOBJ(stipple)));
+                                   NIL_P(stipple) ? NULL : GDK_BITMAP(RVAL2GOBJ(stipple)));
     return self;
 }
 
@@ -87,7 +89,7 @@ prenderer_set_override_color(self, part, color)
 {
     gdk_pango_renderer_set_override_color(_SELF(self), 
                                           RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+                                          NIL_P(color) ? NULL : (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 #endif

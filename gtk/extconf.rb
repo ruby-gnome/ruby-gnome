@@ -21,7 +21,7 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package('gthread-2.0')
 PKGConfig.have_package(PKG_CONFIG_ID) or exit 1
-check_win32
+setup_win32(PACKAGE_NAME)
 
 STDOUT.print("checking for target... ")
 STDOUT.flush
@@ -46,6 +46,7 @@ raise "can't find gdkkeysyms.h" if gdkincl.nil?
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
+
 if target=="x11"
   have_func("XReadBitmapFileData")
   have_header('X11/Xlib.h')
@@ -59,53 +60,25 @@ add_depend_package("pango", "pango/src", TOPDIR)
 # create Makefiles
 #
 
-begin
+add_distcleanfile("rbgdkkeysyms.h")
+add_distcleanfile("rbgtkinits.c")
 
-  Dir.mkdir('src') unless File.exist? 'src'
-  Dir.chdir "src"
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {
+  File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
+  File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
+  system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
+  system("ruby #{SRCDIR}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
+}
 
-  begin
-    File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
-    File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
-    system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
-    system("ruby #{SRCDIR}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
+$defs.delete("-DRUBY_GTK2_COMPILATION")
 
-    set_output_lib('libruby-gtk2.a')
-    $defs << "-DRUBY_GTK2_COMPILATION"
+add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-    if $distcleanfiles
-      $distcleanfiles << "rbgdkkeysyms.h"
-      $distcleanfiles << "rbgtkinits.c"
-    end
+create_makefile_at_srcdir("gtk20", SRCDIR20) {
+  $objs = ["rbgtk20.o"]
+}
+create_makefile_at_srcdir("gtk22", SRCDIR22) {
+  $objs = ["rbgtk22.o"]
+}
 
-    create_makefile("gtk2", SRCDIR)
-    $defs.delete("-DRUBY_GTK2_COMPILATION")
-  ensure
-    Dir.chdir ".."
-  end
-
-  add_depend_package("gtk2", "gtk/src", TOPDIR)
-
-  Dir.mkdir('src20') unless File.exist? 'src20'
-  Dir.chdir "src20"
-  begin
-    $objs = ["rbgtk20.o"]
-    create_makefile("gtk20", SRCDIR20)
-  ensure
-    Dir.chdir ".."
-  end
-
-  Dir.mkdir('src22') unless File.exist? 'src22'
-  Dir.chdir "src22"
-  begin
-    $objs = ["rbgtk22.o"]
-    create_makefile("gtk22", SRCDIR22)
-  ensure
-    Dir.chdir ".."
-  end
-
-  create_top_makefile(["src", "src20", "src22"])
-
-rescue Interrupt
-  print "  [error] " + $!.to_s + "\n"
-end
+create_top_makefile(["src", "src20", "src22"])

@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2004/08/09 19:22:39 $
+  $Date: 2005/01/30 11:24:36 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -113,7 +113,7 @@ Init_gtk_gdk_pango()
     VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
 
-    rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, 0);
+    rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, -1);
 
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
     G_DEF_SETTER(context, "set_colormap");
