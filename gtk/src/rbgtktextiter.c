@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2002/11/19 12:26:16 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -13,6 +13,7 @@
 
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
 
 static VALUE
@@ -257,27 +258,62 @@ gboolean gtk_text_iter_backward_find_char (GtkTextIter          *iter,
                                            GtkTextCharPredicate  pred,
                                            gpointer              user_data,
                                            const GtkTextIter    *limit);
-
-gboolean gtk_text_iter_forward_search  (const GtkTextIter *iter,
-                                        const gchar       *str,
-                                        GtkTextSearchFlags flags,
-                                        GtkTextIter       *match_start,
-                                        GtkTextIter       *match_end,
-                                        const GtkTextIter *limit);
-
-gboolean gtk_text_iter_backward_search (const GtkTextIter *iter,
-                                        const gchar       *str,
-                                        GtkTextSearchFlags flags,
-                                        GtkTextIter       *match_start,
-                                        GtkTextIter       *match_end,
-                                        const GtkTextIter *limit);
-
 #endif
 
-#if 0
-gboolean gtk_text_iter_equal           (const GtkTextIter *lhs,
-                                        const GtkTextIter *rhs);
-#endif
+static VALUE
+forward_search(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    GtkTextIter m_start, m_end;
+    VALUE str, flags, limit, result;
+
+    rb_scan_args(argc, argv, "21", &str, &flags, &limit);
+    if(gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
+                                    FIX2INT(flags), &m_start, &m_end,
+                                    limit==Qnil ? NULL : _SELF(limit)))
+    {
+        result = rb_ary_new();
+        rb_ary_push(result, ITR2RVAL(&m_start));
+        rb_ary_push(result, ITR2RVAL(&m_end));
+        return result;
+    }
+    else{
+        return Qnil;
+    }
+}
+
+static VALUE
+backward_search(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    GtkTextIter m_start, m_end;
+    VALUE str, flags, limit, result;
+
+    rb_scan_args(argc, argv, "21", &str, &flags, &limit);
+    if(gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
+                                    FIX2INT(flags), &m_start, &m_end,
+                                    limit==Qnil ? NULL : _SELF(limit)))
+    {
+        result = rb_ary_new();
+        rb_ary_push(result, ITR2RVAL(&m_start));
+        rb_ary_push(result, ITR2RVAL(&m_end));
+        return result;
+    }
+    else{
+        return Qnil;
+    }
+}
+
+static VALUE
+equal(self, other)
+    VALUE self, other;
+{
+    return gtk_text_iter_equal(_SELF(self), _SELF(other)) ? Qtrue : Qfalse;
+}
 
 static VALUE
 compare(self, rhs)
@@ -375,6 +411,10 @@ Init_gtk_textiter()
     rb_define_method(cTextIter, "set_visible_line_offset", set_visible_line_offset, 1);
     rb_define_method(cTextIter, "set_visible_line_index", set_visible_line_index, 1);
 
+    rb_define_method(cTextIter, "forward_search", forward_search, -1);
+    rb_define_method(cTextIter, "backward_search", backward_search, -1);
+
+    rb_define_method(cTextIter, "==", equal, 1);
     rb_define_method(cTextIter, "<=>", compare, 1);
 
     G_DEF_SETTERS(cTextIter);
