@@ -1,3 +1,8 @@
+2004-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf-format.c, sample/format.rb: Added for GTK+-2.2.
+	* rbgdk-pixbuf.c: Add Gdk::Pixbuf.new(filename, width, height) for GTK+-2.4. 
+
 2004-08-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Improve error handling. 

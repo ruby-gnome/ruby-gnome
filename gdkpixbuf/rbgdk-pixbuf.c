@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:28:33 $
+  $Date: 2004/08/27 20:29:28 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -12,6 +12,13 @@
 #include "rbgdk-pixbuf.h"
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
+
+#define NOMEM_ERROR(error) g_set_error(error,\
+                             GDK_PIXBUF_ERROR,\
+                             GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY,\
+                             "Insufficient memory to load image file");
+
+
 static ID id_pixdata;
 
 /****************************************************/
@@ -111,8 +118,7 @@ initialize(argc, argv, self)
                                            RTEST(arg3),   NUM2INT(arg4),
                                            NUM2INT(arg5), NUM2INT(arg6),
                                            NUM2INT(arg7), NULL, NULL);
-            if (buf == NULL)
-                rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+            if (buf == NULL) NOMEM_ERROR(&error);
         }
     } else if (argc == 5){
         if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
@@ -124,8 +130,7 @@ initialize(argc, argv, self)
                 buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
                                                NUM2INT(arg2), NUM2INT(arg3), 
                                                NUM2INT(arg4), NUM2INT(arg5));
-                if (buf == NULL)
-                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+                if (buf == NULL) NOMEM_ERROR(&error);
             }
         } else if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_COLORSPACE))){
             buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
@@ -136,12 +141,30 @@ initialize(argc, argv, self)
                 buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
                                      RTEST(arg2), NUM2INT(arg3),
                                      NUM2INT(arg4), NUM2INT(arg5));
-                if (buf == NULL)
-                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+                if (buf == NULL) NOMEM_ERROR(&error);
             }
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
+    } else if (argc == 3) {
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+        buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(arg1),
+                                               NUM2INT(arg2), NUM2INT(arg3), &error);
+        if (buf == NULL){
+            rb_gc();
+            error = NULL;
+            buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(arg1),
+                                                   NUM2INT(arg2), NUM2INT(arg3), &error);
+        }
+#else
+        rb_warn("Not supported in GTK+-2.0.x.");
+        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+        if (buf == NULL){
+            error = NULL;
+            rb_gc();
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+        }
+#endif
     } else if (argc == 2){
         int i;
         int len = RARRAY(arg1)->len; 
@@ -152,9 +175,8 @@ initialize(argc, argv, self)
         buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
         if (buf == NULL){
             rb_gc();
+            error = NULL;
             buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
-            if (buf == NULL)
-                rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
         }
         /* need to manage the returned value */
         rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
@@ -162,11 +184,9 @@ initialize(argc, argv, self)
         if (TYPE(arg1) == T_STRING) {
             buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
             if (buf == NULL){
-                error = NULL;
                 rb_gc();
+                error = NULL;
                 buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-                if (buf == NULL)
-                    RAISE_GERROR(error);
             }
         } else if (TYPE(arg1) == T_ARRAY) {
             int i;
@@ -178,8 +198,7 @@ initialize(argc, argv, self)
             if (buf == NULL){
                 rb_gc();
                 buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
-                if (buf == NULL)
-                    rb_raise(rb_eNoMemError, "Not enough memory could be allocated for the image buffer");
+                if (buf == NULL) NOMEM_ERROR(&error);
             }
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
@@ -188,7 +207,7 @@ initialize(argc, argv, self)
         rb_raise(rb_eArgError, "Wrong number of arguments");
     }
 
-    if (error) RAISE_GERROR(error);
+    if (error || ! buf) RAISE_GERROR(error);
     
     G_INITIALIZE(self, buf);
     return Qnil;
@@ -200,6 +219,19 @@ copy(self)
 {
     return GOBJ2RVAL(gdk_pixbuf_copy(_SELF(self)));
 }
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+static VALUE
+get_file_info(self, filename)
+    VALUE self, filename;
+{
+    gint width, height;
+    GdkPixbufFormat* format = gdk_pixbuf_get_file_info(RVAL2CSTR(filename), 
+                                                       &width, &height);
+    return format ? BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT) : Qnil;
+}
+
+#endif
 
 /****************************************************/
 /* File saving */
@@ -464,6 +496,9 @@ Init_gdk_pixbuf2()
      */
     rb_define_method(gdkPixbuf, "initialize", initialize, -1);
     rb_define_method(gdkPixbuf, "dup", copy, 0);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+    rb_define_singleton_method(gdkPixbuf, "get_file_info", get_file_info, 1);
+#endif
 
     /*
      * File saving
@@ -493,4 +528,5 @@ Init_gdk_pixbuf2()
     Init_gdk_pixbuf_animation(mGdk);
     Init_gdk_pixdata(mGdk);
     Init_gdk_pixbuf_loader(mGdk);
+    Init_gdk_pixbuf_format(mGdk);
 }
