@@ -4,34 +4,12 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Date: 2002/08/29 04:44:30 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
 
 #include "global.h"
-
-static VALUE
-gdkcursor_s_allocate(klass)
-	VALUE klass;
-{
-	return rbgobj_create_object(klass);
-}
-
-#ifdef HAVE_OBJECT_ALLOCATE
-#define gdkcursor_s_new rb_class_new_instance
-#else
-static VALUE
-gdkcursor_s_new(argc, argv, klass)
-    int argc;
-    VALUE* argv;
-    VALUE klass;
-{
-	VALUE obj = gdkcursor_s_allocate(klass);
-	rb_obj_call_init(obj, argc ,argv);
-    return obj;
-}
-#endif
 
 static VALUE
 gdkcursor_initialize(argc, argv, self)
@@ -55,7 +33,7 @@ gdkcursor_initialize(argc, argv, self)
 
 	RBGOBJ_INITIALIZE(self, cursor);
 
-	return self;
+	return Qnil;
 }
 
 void
@@ -63,10 +41,6 @@ Init_gtk_gdk_cursor()
 {
 	VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
-	rb_define_singleton_method(gdkCursor, "allocate", gdkcursor_s_allocate, 0);
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(gdkCursor, "new", gdkcursor_s_new, -1);
-#endif
     rb_define_method(gdkCursor, "initialize", gdkcursor_initialize, -1);
 #include "rbgdkcursor.h"
     rb_define_const(gdkCursor, "LAST_CURSOR", INT2FIX(GDK_LAST_CURSOR));

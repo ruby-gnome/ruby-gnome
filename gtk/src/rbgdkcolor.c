@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Date: 2002/08/29 04:44:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,43 +16,19 @@
 #define _SELF(c) ((GdkColor*)RVAL2BOXED(c))
 
 static VALUE
-gdkcolor_s_allocate(klass)
-	VALUE klass;
-{
-	return rbgobj_create_object(klass);
-}
-#ifdef HAVE_OBJECT_ALLOCATE
-#define gdkcolor_s_new rb_class_new_instance
-#else
-static VALUE
-gdkcolor_s_new(argc, argv, klass)
-    int argc;
-    VALUE* argv;
-    VALUE klass;
-{
-	VALUE obj = gdkcolor_s_allocate(klass);
-	rb_obj_call_init(obj, argc ,argv);
-    return obj;
-}
-#endif
-
-static VALUE
-gdkcolor_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
+gdkcolor_initialize(self, red, green, blue)
     VALUE self;
+    VALUE red, green, blue;
 {
-	int red, green, blue;
 	GdkColor c;
-
-	rb_scan_args(argc, argv, "30", &red, &green, &blue);
-
     c.pixel = 0;
     c.red = NUM2INT(red);
     c.green = NUM2INT(green);
     c.blue = NUM2INT(blue);
 
 	RBGOBJ_INITIALIZE(self, &c);
+
+    return Qnil;
 }
 
 static VALUE
@@ -144,12 +120,8 @@ Init_gtk_gdk_color()
 {
 	VALUE gdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
-    rb_define_singleton_method(gdkColor, "allocate", gdkcolor_s_allocate, 0);
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(gdkColor, "new", gdkcolor_s_new, -1);
-#endif
     rb_define_singleton_method(gdkColor, "parse", gdkcolor_s_parse, 1);
-    rb_define_method(gdkColor, "initialize", gdkcolor_initialize, -1);
+    rb_define_method(gdkColor, "initialize", gdkcolor_initialize, 3);
     rb_define_method(gdkColor, "pixel", gdkcolor_pixel, 0);
     rb_define_method(gdkColor, "red", gdkcolor_red, 0);
     rb_define_method(gdkColor, "red=", gdkcolor_set_red, 1);
