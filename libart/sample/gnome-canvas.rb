@@ -1,24 +1,24 @@
 =begin header
 
-  gnome-canvas.rb - Affine transformation sample on Gnome::Canvas.
+  gnome-canvas.rb - Affine transformation sample using Ruby/GnomeCanvas2.
 
   $Author: tkubo $
-  $Date: 2002/09/20 14:51:20 $
+  $Date: 2002/10/26 17:53:44 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
 =end
 
-require 'libart'
-require 'gnome'
+require 'libart2'
+require 'gnomecanvas2'
 
-class AffineApp < Gnome::App
-  include Gnome::I18n
-
+class AffineApp < Gtk::Window
   CANVAS_SIZE_X = 200
   CANVAS_SIZE_Y = 100
-  TRANSLATE_X = 50
+  TRANSLATE_X = 20
   TRANSLATE_Y = 20
+  ITEM_SIZE_X = 20
+  ITEM_SIZE_Y = 20
 
   # affine transformation to move to the center of the Canvas.
   TRANS = Art::Affine.translate(CANVAS_SIZE_X / 2, CANVAS_SIZE_Y / 2)
@@ -34,56 +34,53 @@ class AffineApp < Gnome::App
 		 0, 0)
     frame.show
 
-    canvas = Gnome::Canvas.new_aa
+    canvas = Gnome::Canvas.new()
     canvas.set_usize(CANVAS_SIZE_X, CANVAS_SIZE_Y)
     canvas.set_scroll_region(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y)
     frame.add(canvas)
     canvas.show()
-    points = Gnome::CanvasPoints.new(2)
-    points[0] = CANVAS_SIZE_X / 2
-    points[1] = 0
-    points[2] = CANVAS_SIZE_X / 2
-    points[3] = CANVAS_SIZE_Y
-    canvas.root.item_new(Gnome::CanvasLine,
-			 "points", points,
-			 "fill_color", "gray",
-			 "width_pixels", 1)
-    points[0] = 0
-    points[1] = CANVAS_SIZE_Y / 2
-    points[2] = CANVAS_SIZE_X
-    points[3] = CANVAS_SIZE_Y / 2
-    canvas.root.item_new(Gnome::CanvasLine,
-			 "points", points,
-			 "fill_color", "gray",
-			 "width_pixels", 1)
-    text = canvas.root.item_new(Gnome::CanvasText,
-				"text", "Hello, Ruby/GNOME.",
-				"x", 0,
-				"y", 0,
-				"font", "-b&h-lucida-bold-r-normal-*-14-*-*-*-p-*-iso8859-1",
-				"anchor", Gtk::ANCHOR_CENTER,
-				"fill_color", "firebrick")
-    text.affine_relative(TRANS * affine)
+
+    points = [[CANVAS_SIZE_X / 2, 0], [CANVAS_SIZE_X / 2, CANVAS_SIZE_Y]]
+    Gnome::CanvasLine.new(canvas.root,
+			  {:points => points,
+			    :fill_color => "gray",
+			    :width_pixels => 1})
+    points = [[0, CANVAS_SIZE_Y / 2], [CANVAS_SIZE_X, CANVAS_SIZE_Y / 2]]
+    Gnome::CanvasLine.new(canvas.root,
+			  {:points => points,
+			    :fill_color => "gray",
+			    :width_pixels => 1})
+
+    group = Gnome::CanvasGroup.new(canvas.root, {})
+    Gnome::CanvasRect.new(group,
+			  {:x1 => 0, :y1 => 0,
+			    :x2 => - ITEM_SIZE_X / 2, :y2 => - ITEM_SIZE_Y / 2,
+			    :fill_color => "blue"})
+    Gnome::CanvasRect.new(group,
+			  {:x1 => 0, :y1 => 0,
+			    :x2 => ITEM_SIZE_X / 2, :y2 => - ITEM_SIZE_Y / 2,
+			    :fill_color => "red"})
+    Gnome::CanvasRect.new(group,
+			  {:x1 => 0, :y1 => 0,
+			    :x2 => - ITEM_SIZE_X / 2, :y2 => ITEM_SIZE_Y / 2,
+			    :fill_color => "green"})
+    Gnome::CanvasRect.new(group,
+			  {:x1 => 0, :y1 => 0,
+			    :x2 => ITEM_SIZE_X / 2, :y2 => ITEM_SIZE_Y / 2,
+			    :fill_color => "yellow"})
+    group.affine_relative(TRANS * affine)
   end
 
   def initialize
-    super("affine-on-gnome-canvas", "Affine transformation test on Gnome::Canvas")
+    super(Gtk::WINDOW_TOPLEVEL)
 
-    file_menu = [
-      [ Gnome::App::UI_ITEM, N_("Exit"), nil, proc{ Gtk::main_quit }, nil,
-	Gnome::App::PIXMAP_STOCK, Gnome::Stock::MENU_EXIT, ?Q,
-	Gdk::CONTROL_MASK, nil ],
-    ]
-
-    main_menu = [
-      Gnome::UIInfo::subtree(N_("File"), file_menu),
-    ]
-
-    create_menus(main_menu)
+    self.signal_connect("delete_event") do
+      Gtk::main_quit()
+    end
 
     sw = Gtk::ScrolledWindow.new
-    sw.set_usize(600, 600)
-    set_contents(sw)
+    sw.set_usize(600, 400)
+    self.add(sw)
     sw.show
 
     affine = Array.new(5)
@@ -115,12 +112,11 @@ class AffineApp < Gnome::App
 	setup_canvas_frame(table, x, y, label, affine[x] * affine[y])
       end
     end
-    show
+    self.show
   end
 end
 
 def main
-  Gnome::init("test-gnome-canvas", "1.0")
   AffineApp.new
   Gtk::main
 end
