@@ -1,0 +1,16 @@
+2003-08-16 Vincent Isambart <isambart@netcourrier.com>
+
+	* ChangeLog, README, README.rbogl, rbogl.patch: Files added
+	* src/lib/gtkglext.rb: require 'opengl' added
+	* sample/*: removed require 'opengl' as it is now automatic
+	* All files added to CVS - First import 8-)
+
+2003-08-16 Vincent Isambart <isambart@netcourrier.com>
+
+	* Ruby/GtkGLExt 0.0.1 released
+	* Ruby/GtkGLExt 0.0.2 released
+	* Ruby/GtkGLExt 0.0.3 released
+
+2003-08-15 Vincent Isambart <isambart@netcourrier.com>
+
+	* Ruby/GtkGLExt 0.0.0 released
