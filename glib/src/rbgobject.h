@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:51:15 $
+  $Date: 2002/08/08 15:18:12 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -22,8 +22,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* macros */
+
 #define RBGOBJ_INITIALIZE(obj, gobj)\
  (rbgobj_initialize_gobject(obj, G_OBJECT(gobj)))
+
 #define G_DEF_CLASS(gtype, name, module)\
  (rbgobj_define_class(gtype, name, module, 0, 0))
 #define G_DEF_CLASS2(gtype, name, module, mark, free)\
@@ -42,8 +44,8 @@ extern "C" {
 typedef struct {
     VALUE klass;
     GType gtype;
-    void (*mark)(GObject *);
-    void (*free)(GObject *);
+    void (*mark)(gpointer);
+    void (*free)(gpointer);
 } RGObjClassInfo;
 
 typedef struct {
@@ -80,7 +82,6 @@ extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
 
 
-extern VALUE rbgobj_cParamSpec;
 extern VALUE rbgobj_cBoxed;
 
 
@@ -97,7 +98,8 @@ extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
 
 /* rbgobj_param.c */
 extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
-extern VALUE rbgobj_param_spec_wrap(GParamSpec* pspec);
+extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
+extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec);
 
 /* rbgobj_boxed.c */
 extern VALUE rbgobj_boxed_class(GType gtype);

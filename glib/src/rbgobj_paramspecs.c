@@ -4,7 +4,7 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:46:35 $
+  $Date: 2002/08/08 15:17:32 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -14,10 +14,9 @@
 #include "global.h"
 
 static VALUE
-char_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+char_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -29,16 +28,14 @@ char_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                               NUM2INT(maximum),
                               NUM2INT(default_value),
                               NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-uchar_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+uchar_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -50,16 +47,14 @@ uchar_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                NUM2INT(maximum),
                                NUM2INT(default_value),
                                NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-boolean_new(klass, name, nick, blurb, default_value, flags)
-   VALUE klass, name, nick, blurb, default_value, flags;
+boolean_initialize(self, name, nick, blurb, default_value, flags)
+   VALUE self, name, nick, blurb, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -69,16 +64,14 @@ boolean_new(klass, name, nick, blurb, default_value, flags)
                                  StringValuePtr(blurb),
                                  RTEST(default_value),
                                  NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-int_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+int_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -90,16 +83,14 @@ int_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                              NUM2INT(maximum),
                              NUM2INT(default_value),
                              NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-uint_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+uint_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -111,16 +102,14 @@ uint_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                               NUM2INT(maximum),
                               NUM2INT(default_value),
                               NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-long_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+long_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -132,16 +121,14 @@ long_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                               NUM2INT(maximum),
                               NUM2INT(default_value),
                               NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-ulong_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+ulong_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -153,17 +140,15 @@ ulong_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                NUM2INT(maximum),
                                NUM2INT(default_value),
                                NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 // FIXME
 static VALUE
-int64_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+int64_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -175,17 +160,15 @@ int64_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                NUM2INT(maximum),
                                NUM2INT(default_value),
                                NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 // FIXME
 static VALUE
-uint64_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+uint64_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -197,16 +180,14 @@ uint64_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                 NUM2INT(maximum),
                                 NUM2INT(default_value),
                                 NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-unichar_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+unichar_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -216,9 +197,8 @@ unichar_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                  StringValuePtr(blurb),
                                  NUM2INT(default_value),
                                  NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 #if 0
@@ -240,10 +220,9 @@ GParamSpec*	g_param_spec_flags	 (const gchar	 *name,
 #endif
 
 static VALUE
-float_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+float_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -255,16 +234,14 @@ float_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                NUM2DBL(maximum),
                                NUM2DBL(default_value),
                                NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-double_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
-   VALUE klass, name, nick, blurb, minimum, maximum, default_value, flags;
+double_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags)
+   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -276,16 +253,14 @@ double_new(klass, name, nick, blurb, minimum, maximum, default_value, flags)
                                 NUM2DBL(maximum),
                                 NUM2DBL(default_value),
                                 NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 static VALUE
-string_new(klass, name, nick, blurb, default_value, flags)
-   VALUE klass, name, nick, blurb, default_value, flags;
+string_initialize(self, name, nick, blurb, default_value, flags)
+   VALUE self, name, nick, blurb, default_value, flags;
 {
-    VALUE result;
     GParamSpec* pspec;
     StringValue(name);
     StringValue(nick);
@@ -295,9 +270,8 @@ string_new(klass, name, nick, blurb, default_value, flags)
                                 StringValuePtr(blurb),
                                 StringValuePtr(default_value),
                                 NUM2INT(flags));
-    result = rbgobj_param_spec_wrap(pspec);
-    g_param_spec_unref(pspec);
-    return result;
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
 }
 
 #if 0
@@ -330,44 +304,45 @@ GParamSpec*	g_param_spec_object	 (const gchar	 *name,
 void
 Init_gobject_gparamspecs()
 {
+    VALUE cParamSpec = GTYPE2CLASS(G_TYPE_PARAM);
     VALUE c;
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Char", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", char_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_CHAR, "Char", cParamSpec);
+    rb_define_method(c, "initialize", char_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "UChar", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", uchar_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_UCHAR, "UChar", cParamSpec);
+    rb_define_method(c, "initialize", uchar_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Boolean", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", boolean_new, 5);
+    c = G_DEF_CLASS(G_TYPE_PARAM_BOOLEAN, "Boolean", cParamSpec);
+    rb_define_method(c, "initialize", boolean_initialize, 5);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Int", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", int_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_INT, "Int", cParamSpec);
+    rb_define_method(c, "initialize", int_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "UInt", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", uint_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_UINT, "UInt", cParamSpec);
+    rb_define_method(c, "initialize", uint_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Long", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", long_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_LONG, "Long", cParamSpec);
+    rb_define_method(c, "initialize", long_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "ULong", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", ulong_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_ULONG, "ULong", cParamSpec);
+    rb_define_method(c, "initialize", ulong_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Int64", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", int64_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_INT64, "Int64", cParamSpec);
+    rb_define_method(c, "initialize", int64_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "UInt64", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", uint64_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_UINT64, "UInt64", cParamSpec);
+    rb_define_method(c, "initialize", uint64_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "UniChar", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", unichar_new, 5);
+    c = G_DEF_CLASS(G_TYPE_PARAM_UNICHAR, "UniChar", cParamSpec);
+    rb_define_method(c, "initialize", unichar_initialize, 5);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Float", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", float_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_FLOAT, "Float", cParamSpec);
+    rb_define_method(c, "initialize", float_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "Double", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", double_new, 7);
+    c = G_DEF_CLASS(G_TYPE_PARAM_DOUBLE, "Double", cParamSpec);
+    rb_define_method(c, "initialize", double_initialize, 7);
 
-    c = rb_define_class_under(rbgobj_cParamSpec, "String", rbgobj_cParamSpec);
-    rb_define_singleton_method(c, "new", string_new, 5);
+    c = G_DEF_CLASS(G_TYPE_PARAM_STRING, "String", cParamSpec);
+    rb_define_method(c, "initialize", string_initialize, 5);
 }

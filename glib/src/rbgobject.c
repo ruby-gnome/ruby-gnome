@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:51:15 $
+  $Date: 2002/08/08 15:18:11 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -148,8 +148,7 @@ rbgobj_get_value_from_gobject(gobj)
     if (holder)
         return holder->self;
     else {
-        VALUE obj = rbgobj_create_object(
-            rbgobj_lookup_class_by_gtype(G_OBJECT_TYPE(gobj))->klass);
+        VALUE obj = rbgobj_create_object(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_initialize_gobject(obj, gobj);
         return obj;
@@ -376,6 +375,7 @@ Init_gobject()
     Init_gobject_gvalue();
     Init_gobject_gclosure();
     Init_gobject_gparam();
+    Init_gobject_gparamspecs();
 
     Init_gobject_gobject();
     Init_gobject_gsignal();

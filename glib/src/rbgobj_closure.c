@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 04:59:07 $
+  $Date: 2002/08/08 15:17:19 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -23,7 +23,7 @@ struct _GRClosure
     VALUE extra_args;
 };
 
-void
+static void
 rclosure_marshal(GClosure*      closure,
                  GValue         *return_value,
                  guint           n_param_values,

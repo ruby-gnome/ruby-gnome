@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:51:15 $
+  $Date: 2002/08/08 15:17:24 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -19,9 +19,6 @@
 #include "ruby.h"
 #include "st.h"
 #include "global.h"
-
-VALUE rbgobj_cGObject;
-
 
 static VALUE
 gobj_s_allocate(klass)
@@ -222,7 +219,7 @@ static VALUE
 gobj_get_gtype(self)
     VALUE self;
 {
-    return rbgobj_gtype_new(G_OBJECT_TYPE(RVAL2GOBJ(self)));
+    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(RVAL2GOBJ(self)));
 }
 
 static VALUE

@@ -1,3 +1,12 @@
+2002-08-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: more ruby-ish method naming.
+	ie: "hoge?" rather than "is_hoge"?
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype): enhancement for
+	G_TYPE_PARAM
+	* src/rbgobj_param.c, src/rbgobj_paramspec.c: rewrite for using above
+	enhancement.
+
 2002-08-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.c (rbgobj_gobject_new): take type argument as GType

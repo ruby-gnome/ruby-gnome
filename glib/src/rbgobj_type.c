@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:51:15 $
+  $Date: 2002/08/08 15:18:08 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -63,6 +63,16 @@ rbgobj_lookup_class_by_gtype(gtype)
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
+          case G_TYPE_PARAM:
+            if (gtype == G_TYPE_PARAM){
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
+            } else {
+                const RGObjClassInfo* cinfo_super
+                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+            }
+            break;
+
           case G_TYPE_OBJECT:
             if (gtype == G_TYPE_OBJECT){
                 cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
@@ -429,16 +439,16 @@ Init_type()
     rb_define_method(rbgobj_cType, "to_class", type_to_class, 0);
 
     rb_define_method(rbgobj_cType, "fundamental", type_fundamental, 0);
-    rb_define_method(rbgobj_cType, "is_fundamental?", type_is_fundamental, 0);
-    rb_define_method(rbgobj_cType, "is_derived?", type_is_derived, 0);
-    rb_define_method(rbgobj_cType, "is_interfaced?", type_is_interface, 0);
-    rb_define_method(rbgobj_cType, "is_classed?", type_is_classed, 0);
-    rb_define_method(rbgobj_cType, "is_instantiatable?", type_is_instantiatable, 0);
-    rb_define_method(rbgobj_cType, "is_derivable?", type_is_derivable, 0);
-    rb_define_method(rbgobj_cType, "is_deep_derivable?", type_is_deep_derivable, 0);
-    rb_define_method(rbgobj_cType, "is_abstract?", type_is_abstract, 0);
-    rb_define_method(rbgobj_cType, "is_value_abstract?", type_is_value_abstract, 0);
-    rb_define_method(rbgobj_cType, "is_value_type?", type_is_value_type, 0);
+    rb_define_method(rbgobj_cType, "fundamental?", type_is_fundamental, 0);
+    rb_define_method(rbgobj_cType, "derived?", type_is_derived, 0);
+    rb_define_method(rbgobj_cType, "interfaced?", type_is_interface, 0);
+    rb_define_method(rbgobj_cType, "classed?", type_is_classed, 0);
+    rb_define_method(rbgobj_cType, "instantiatable?", type_is_instantiatable, 0);
+    rb_define_method(rbgobj_cType, "derivable?", type_is_derivable, 0);
+    rb_define_method(rbgobj_cType, "deep_derivable?", type_is_deep_derivable, 0);
+    rb_define_method(rbgobj_cType, "abstract?", type_is_abstract, 0);
+    rb_define_method(rbgobj_cType, "value_abstract?", type_is_value_abstract, 0);
+    rb_define_method(rbgobj_cType, "value_type?", type_is_value_type, 0);
     rb_define_method(rbgobj_cType, "has_value_table", type_has_value_table, 0);
 
     rb_define_method(rbgobj_cType, "name", type_name, 0);
