@@ -1,4 +1,5 @@
-/* $Id: rbgnome-entry.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-entry.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::Entry widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,7 +21,7 @@
 
 #include "rbgnome.h"
 
-VALUE gnoEntry;
+#define _SELF(self) GNOME_ENTRY(RVAL2GOBJ(self))
 
 static VALUE
 entry_initialize(argc, argv, self)
@@ -32,8 +33,8 @@ entry_initialize(argc, argv, self)
     GtkWidget *entry;
 
     rb_scan_args(argc, argv, "01", &history_id);
-    entry = gnome_entry_new(NIL_P(history_id)?0:STR2CSTR(history_id));
-    set_widget(self, entry);
+    entry = gnome_entry_new(NIL_P(history_id) ? NULL : RVAL2CSTR(history_id));
+    RBGTK_INITIALIZE(self, entry);
     return Qnil;
 }
 
@@ -41,17 +42,14 @@ static VALUE
 entry_gtk_entry(self)
     VALUE self;
 {
-    GtkWidget *entry;
-    entry = gnome_entry_gtk_entry(GNOME_ENTRY(get_widget(self)));
-    return make_gnobject_auto_type(GTK_OBJECT(entry));
+    return GOBJ2RVAL(gnome_entry_gtk_entry(_SELF(self)));
 }
 
 static VALUE
 entry_set_history_id(self, history_id)
     VALUE self, history_id;
 {
-    gnome_entry_set_history_id(GNOME_ENTRY(get_widget(self)),
-			       STR2CSTR(history_id));
+    gnome_entry_set_history_id(_SELF(self), RVAL2CSTR(history_id));
     return self;
 }
 
@@ -59,8 +57,7 @@ static VALUE
 entry_set_max_saved(self, max_saved)
     VALUE self, max_saved;
 {
-    gnome_entry_set_max_saved(GNOME_ENTRY(get_widget(self)),
-			      (guint)NUM2INT(max_saved));
+    gnome_entry_set_max_saved(_SELF(self), (guint)NUM2INT(max_saved));
     return self;
 }
 
@@ -68,9 +65,7 @@ static VALUE
 entry_prepend_history(self, save, text)
     VALUE self, save, text;
 {
-    gnome_entry_prepend_history(GNOME_ENTRY(get_widget(self)),
-				NUM2INT(save),
-				STR2CSTR(text));
+    gnome_entry_prepend_history(_SELF(self), NUM2INT(save), RVAL2CSTR(text));
     return self;
 }
 
@@ -78,32 +73,15 @@ static VALUE
 entry_append_history(self, save, text)
     VALUE self, save, text;
 {
-    gnome_entry_append_history(GNOME_ENTRY(get_widget(self)),
-				NUM2INT(save),
-				STR2CSTR(text));
-    return self;
-}
-
-static VALUE
-entry_load_history(self)
-    VALUE self;
-{
-    gnome_entry_load_history(GNOME_ENTRY(get_widget(self)));
-    return self;
-}
-
-static VALUE
-entry_save_history(self)
-    VALUE self;
-{
-    gnome_entry_save_history(GNOME_ENTRY(get_widget(self)));
+    gnome_entry_append_history(_SELF(self), NUM2INT(save), RVAL2CSTR(text));
     return self;
 }
 
 void
-Init_gnome_entry()
+Init_gnome_entry(mGnome)
+    VALUE mGnome;
 {
-    gnoEntry = rb_define_class_under(mGnome, "Entry", gCombo);
+    VALUE gnoEntry = G_DEF_CLASS(GNOME_TYPE_ENTRY, "Entry", mGnome);
 
     rb_define_method(gnoEntry, "initialize", entry_initialize, -1);
     rb_define_method(gnoEntry, "gtk_entry", entry_gtk_entry, 0);
@@ -111,6 +89,4 @@ Init_gnome_entry()
     rb_define_method(gnoEntry, "set_max_saved", entry_set_max_saved, 1);
     rb_define_method(gnoEntry, "prepend_history", entry_prepend_history, 2);
     rb_define_method(gnoEntry, "append_history", entry_append_history, 2);
-    rb_define_method(gnoEntry, "load_history", entry_load_history, 0);
-    rb_define_method(gnoEntry, "save_history", entry_save_history, 0);
 }

@@ -1,6 +1,7 @@
-/* $Id: rbgnome-property-box.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-property-box.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
-/* Gnome::Animator widget for Ruby/Gnome
+/* Gnome::PropertyBox widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,14 +21,13 @@
 
 #include "rbgnome.h"
 
-VALUE gnoPropertyBox;
+#define _SELF(self) GNOME_PROPERTY_BOX(RVAL2GOBJ(self))
 
 static VALUE
 propbox_initialize(self)
     VALUE self;
 {
-    GtkWidget* pb = gnome_property_box_new();
-    set_widget(self, pb);
+    RBGTK_INITIALIZE(self, gnome_property_box_new());
     return Qnil;
 }
 
@@ -35,39 +35,36 @@ static VALUE
 propbox_changed(self)
     VALUE self;
 {
-    gnome_property_box_changed(GNOME_PROPERTY_BOX(get_widget(self)));
-    return Qnil;
+    gnome_property_box_changed(_SELF(self));
+    return self;
 }
 
 static VALUE
 propbox_set_state(self, state)
     VALUE self, state;
 {
-    gnome_property_box_set_state(GNOME_PROPERTY_BOX(get_widget(self)),
+    gnome_property_box_set_state(_SELF(self),
                                  RTEST(state));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 propbox_append_page(self, child, label)
     VALUE self, child, label;
 {
-    return NUM2INT(
-            gnome_property_box_append_page(GNOME_PROPERTY_BOX(get_widget(self)),
-                                           get_widget(child),
-                                           get_widget(label)));
+    return NUM2INT(gnome_property_box_append_page(_SELF(self),
+                                                  GTK_WIDGET(RVAL2GOBJ(child)),
+                                                  GTK_WIDGET(RVAL2GOBJ(label))));
 }
 
 void
-Init_gnome_property_box()
+Init_gnome_property_box(mGnome)
+    VALUE mGnome;
 {
-    gnoPropertyBox = rb_define_class_under(mGnome, "PropertyBox", gnoDialog);
+    VALUE gnoPropertyBox = G_DEF_CLASS(GNOME_TYPE_PROPERTY_BOX, "PropertyBox", mGnome);
 
     rb_define_method(gnoPropertyBox, "initialize", propbox_initialize, 0);
     rb_define_method(gnoPropertyBox, "changed", propbox_changed, 0);
     rb_define_method(gnoPropertyBox, "set_state", propbox_set_state, 1);
     rb_define_method(gnoPropertyBox, "append_page", propbox_append_page, 2);
-
-    rb_define_const(gnoPropertyBox, "SIGNAL_APPLY", rb_str_new2("apply"));
-    rb_define_const(gnoPropertyBox, "SIGNAL_HELP", rb_str_new2("help"));
 }

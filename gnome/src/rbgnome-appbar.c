@@ -1,4 +1,5 @@
-/* $Id: rbgnome-appbar.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-appbar.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::AppBar widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,7 +21,7 @@
 
 #include "rbgnome.h"
 
-VALUE gnoAppBar;
+#define _SELF(self) GNOME_APPBAR(RVAL2GOBJ(self))
 
 static VALUE
 appbar_initialize(self, has_progress, has_status, interactivity)
@@ -28,9 +29,9 @@ appbar_initialize(self, has_progress, has_status, interactivity)
 {
     GtkWidget *appbar;
     appbar = gnome_appbar_new(RTEST(has_progress),
-			      RTEST(has_status),
-			      NUM2INT(interactivity));
-	set_widget(self, appbar);
+                              RTEST(has_status),
+                              NUM2INT(interactivity));
+	RBGTK_INITIALIZE(self, appbar);
     return Qnil;
 }
 
@@ -40,8 +41,8 @@ static VALUE
 appbar_set_status(self, status)
     VALUE self, status;
 {
-    gnome_appbar_set_status(GNOME_APPBAR(get_widget(self)),
-			    STR2CSTR(status));
+    gnome_appbar_set_status(_SELF(self),
+                            RVAL2CSTR(status));
     return self;
 }
 
@@ -50,8 +51,7 @@ static VALUE
 appbar_set_default(self, default_status)
     VALUE self, default_status;
 {
-    gnome_appbar_set_default(GNOME_APPBAR(get_widget(self)),
-			     STR2CSTR(default_status));
+    gnome_appbar_set_default(_SELF(self), RVAL2CSTR(default_status));
     return self;
 }
 
@@ -59,8 +59,7 @@ static VALUE
 appbar_push(self, status)
     VALUE self, status;
 {
-    gnome_appbar_push(GNOME_APPBAR(get_widget(self)),
-		      STR2CSTR(status));
+    gnome_appbar_push(_SELF(self), RVAL2CSTR(status));
     return self;
 }
 
@@ -69,7 +68,7 @@ static VALUE
 appbar_pop(self)
     VALUE self;
 {
-    gnome_appbar_pop(GNOME_APPBAR(get_widget(self)));
+    gnome_appbar_pop(_SELF(self));
     return self;
 }
 
@@ -78,7 +77,7 @@ static VALUE
 appbar_clear_stack(self)
     VALUE self;
 {
-    gnome_appbar_clear_stack(GNOME_APPBAR(get_widget(self)));
+    gnome_appbar_clear_stack(_SELF(self));
     return self;
 }
 
@@ -86,11 +85,10 @@ appbar_clear_stack(self)
    which is not the opposite of set_progress. Maybe this function
    should die.*/
 static VALUE
-appbar_set_progress(self, percentage)
+appbar_set_progress_percentage(self, percentage)
     VALUE self, percentage;
 {
-    gnome_appbar_set_progress(GNOME_APPBAR(get_widget(self)),
-			      (gfloat)NUM2DBL(percentage));
+    gnome_appbar_set_progress_percentage(_SELF(self), (gfloat)NUM2DBL(percentage));
     return self;
 }
 
@@ -99,9 +97,9 @@ static VALUE
 appbar_get_progress(self)
     VALUE self;
 {
-    GtkProgress* progress;
-    progress = gnome_appbar_get_progress(GNOME_APPBAR(get_widget(self)));
-    return make_gnobject_auto_type(GTK_OBJECT(progress));
+    GtkProgressBar* progress;
+    progress = gnome_appbar_get_progress(_SELF(self));
+    return GOBJ2RVAL(progress);
 }
 
 /* Reflect the current state of stack/default. Useful to force a set_status
@@ -110,7 +108,7 @@ static VALUE
 appbar_refresh(self)
     VALUE self;
 {
-    gnome_appbar_refresh(GNOME_APPBAR(get_widget(self)));
+    gnome_appbar_refresh(_SELF(self));
     return self;
 }
 
@@ -120,9 +118,9 @@ static VALUE
 appbar_set_prompt(self, prompt, modal)
     VALUE self, prompt, modal;
 {
-    gnome_appbar_set_prompt(GNOME_APPBAR(get_widget(self)),
-			    STR2CSTR(prompt),
-			    RTEST(modal));
+    gnome_appbar_set_prompt(_SELF(self),
+                            RVAL2CSTR(prompt),
+                            RTEST(modal));
     return self;
 }
 
@@ -131,7 +129,7 @@ static VALUE
 appbar_clear_prompt(self)
     VALUE self;
 {
-    gnome_appbar_clear_prompt(GNOME_APPBAR(get_widget(self)));
+    gnome_appbar_clear_prompt(_SELF(self));
     return self;
 }
 
@@ -141,14 +139,18 @@ appbar_get_response(self)
     VALUE self;
 {
     gchar *response;
-    response = gnome_appbar_get_response(GNOME_APPBAR(get_widget(self)));
-    return rb_str_new2(response);
+    VALUE obj;
+    response = gnome_appbar_get_response(_SELF(self));
+    obj = rb_str_new2(response);
+    g_free(response);
+    return obj;
 }
 
 void
-Init_gnome_appbar()
+Init_gnome_appbar(mGnome)
+    VALUE mGnome;
 {
-    gnoAppBar = rb_define_class_under(mGnome, "AppBar", gHBox);
+    VALUE gnoAppBar = G_DEF_CLASS(GNOME_TYPE_APPBAR, "AppBar", mGnome);
 
     /* Instance methods */
     rb_define_method(gnoAppBar, "initialize", appbar_initialize, 3);
@@ -157,16 +159,10 @@ Init_gnome_appbar()
     rb_define_method(gnoAppBar, "push", appbar_push, 1);
     rb_define_method(gnoAppBar, "pop", appbar_pop, 0);
     rb_define_method(gnoAppBar, "clear_stack", appbar_clear_stack, 0);
-    rb_define_method(gnoAppBar, "set_progress", appbar_set_progress, 1);
+    rb_define_method(gnoAppBar, "set_progress_percentage", appbar_set_progress_percentage, 1);
     rb_define_method(gnoAppBar, "get_progress", appbar_get_progress, 0);
     rb_define_method(gnoAppBar, "refresh", appbar_refresh, 0);
     rb_define_method(gnoAppBar, "set_prompt", appbar_set_prompt, 2);
     rb_define_method(gnoAppBar, "clear_prompt", appbar_clear_prompt, 0);
     rb_define_method(gnoAppBar, "get_response", appbar_get_response, 0);
-
-    /* Signals */
-    rb_define_const(gnoAppBar, "SIGNAL_USER_RESPONSE",
-		    rb_str_new2("user_response"));
-    rb_define_const(gnoAppBar, "SIGNAL_CLEAR_PROMPT",
-		    rb_str_new2("clear_prompt"));
 }

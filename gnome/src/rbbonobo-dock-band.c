@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-band.c,v 1.1 2002/09/25 14:10:04 tkubo Exp $ */
+/* $Id: rbbonobo-dock-band.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
 
-/* Gnome::DockBand widget for Ruby/Gnome
+/* Bonobo::DockBand widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
  *
  * This library is free software; you can redistribute it and/or
@@ -21,8 +21,10 @@
 
 #include "rbgnome.h"
 
+#define _SELF(self) BONOBO_DOCK_BAND(RVAL2GOBJ(self))
+
 /*
- * Class Gnome::DockBand
+ * Class Bonobo::DockBand
  *
  * Hierarchy:
  *
@@ -30,15 +32,14 @@
  *     +----Gtk::Object
  *            +----Gtk::Widget
  *                   +----Gtk::Container
- *                          +----Gnome::DockBand
+ *                          +----Bonobo::DockBand
  */
-VALUE gnoDockBand;
 
 static VALUE
 dockband_initialize(self)
     VALUE self;
 {
-    set_widget(self, gnome_dock_band_new());
+    RBGTK_INITIALIZE(self, bonobo_dock_band_new());
     return Qnil;
 }
 
@@ -46,8 +47,8 @@ static VALUE
 dockband_set_orientation(self, orientation)
     VALUE self, orientation;
 {
-    gnome_dock_band_set_orientation(GNOME_DOCK_BAND(get_widget(self)),
-                                    NUM2INT(orientation));
+    bonobo_dock_band_set_orientation(_SELF(self),
+                                     NUM2INT(orientation));
     return self;
 }
 
@@ -56,8 +57,7 @@ dockband_get_orientation(self)
     VALUE self;
 {
     GtkOrientation result;
-    result = gnome_dock_band_get_orientation(
-        GNOME_DOCK_BAND(get_widget(self)));
+    result = bonobo_dock_band_get_orientation(_SELF(self));
     return INT2FIX(result);
 }
 
@@ -66,16 +66,13 @@ dockband_insert(self, child, offset, position)
     VALUE self, child, offset, position;
 {
     gboolean result;
-    result = gnome_dock_band_insert(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GTK_WIDGET(get_widget(child)),
-        NUM2INT(offset),
-        NUM2INT(position));
-
+    result = bonobo_dock_band_insert(_SELF(self),
+                                     GTK_WIDGET(RVAL2GOBJ(child)),
+                                     NUM2INT(offset),
+                                     NUM2INT(position));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
@@ -84,15 +81,12 @@ dockband_prepend(self, child, offset)
     VALUE self, child, offset;
 {
     gboolean result;
-    result = gnome_dock_band_prepend(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GTK_WIDGET(get_widget(child)),
-        NUM2INT(offset));
-
+    result = bonobo_dock_band_prepend(_SELF(self),
+                                      GTK_WIDGET(RVAL2GOBJ(child)),
+                                      NUM2INT(offset));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
@@ -101,15 +95,12 @@ dockband_append(self, child, offset)
     VALUE self, child, offset;
 {
     gboolean result;
-    result = gnome_dock_band_append(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GTK_WIDGET(get_widget(child)),
-        NUM2INT(offset));
-
+    result = bonobo_dock_band_append(_SELF(self),
+                                     GTK_WIDGET(RVAL2GOBJ(child)),
+                                     NUM2INT(offset));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
     
@@ -117,11 +108,9 @@ static VALUE
 dockband_set_child_offset(self, child, offset)
     VALUE self, child, offset;
 {
-    gnome_dock_band_set_child_offset(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GTK_WIDGET(get_widget(child)),
-        NUM2INT(offset));
-
+    bonobo_dock_band_set_child_offset(_SELF(self),
+                                      GTK_WIDGET(RVAL2GOBJ(child)),
+                                      NUM2INT(offset));
     return self;
 }
     
@@ -130,10 +119,8 @@ dockband_get_child_offset(self, child)
     VALUE self, child;
 {
     guint result;
-    result = gnome_dock_band_get_child_offset(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GTK_WIDGET(get_widget(child)));
-
+    result = bonobo_dock_band_get_child_offset(_SELF(self),
+                                               GTK_WIDGET(RVAL2GOBJ(child)));
     return INT2NUM(self);
 }
 
@@ -151,8 +138,7 @@ dockband_get_num_children(self)
     VALUE self;
 {
     guint result;
-    result = gnome_dock_band_get_num_children(
-        GNOME_DOCK_BAND(get_widget(self)));
+    result = bonobo_dock_band_get_num_children(_SELF(self));
     return INT2NUM(result);
 }
 
@@ -160,9 +146,8 @@ static VALUE
 dockband_drag_begin(self, item)
     VALUE self, item;
 {
-    gnome_dock_band_drag_begin(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GNOME_DOCK_ITEM(get_widget(item)));
+    bonobo_dock_band_drag_begin(_SELF(self),
+                                BONOBO_DOCK_ITEM(RVAL2GOBJ(item)));
     return self;
 }
 
@@ -171,15 +156,12 @@ dockband_drag_to(self, item, x, y)
     VALUE self, item, x, y;
 {
     gboolean result;
-    result = gnome_dock_band_drag_to(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GNOME_DOCK_ITEM(get_widget(item)),
-        NUM2INT(x), NUM2INT(y));
-
+    result = bonobo_dock_band_drag_to(_SELF(self),
+                                      BONOBO_DOCK_ITEM(RVAL2GOBJ(item)),
+                                      NUM2INT(x), NUM2INT(y));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
@@ -187,9 +169,8 @@ static VALUE
 dockband_drag_end(self, item)
     VALUE self, item;
 {
-    gnome_dock_band_drag_end(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GNOME_DOCK_ITEM(get_widget(item)));
+    bonobo_dock_band_drag_end(_SELF(self),
+                              BONOBO_DOCK_ITEM(RVAL2GOBJ(item)));
     return self;
 }
 
@@ -197,19 +178,16 @@ static VALUE
 dockband_get_item_by_name(self, name)
     VALUE self, name;
 {
-    GnomeDockItem *result;
+    BonoboDockItem *result;
     guint position, offset;
     VALUE ary;
 
-    result = gnome_dock_band_get_item_by_name(
-        GNOME_DOCK_BAND(get_widget(self)), STR2CSTR(name),
-        &position, &offset);
-
+    result = bonobo_dock_band_get_item_by_name(_SELF(self), RVAL2CSTR(name),
+                                               &position, &offset);
     ary = rb_ary_new2(3);
-    rb_ary_push(ary, make_widget(gnoDockItem, GTK_WIDGET(result)));
+    rb_ary_push(ary, GOBJ2RVAL(result));
     rb_ary_push(ary, INT2NUM(position));
     rb_ary_push(ary, INT2NUM(offset));
-
     return ary;
 }
 
@@ -217,36 +195,36 @@ static VALUE
 dockband_layout_add(self, layout, placement, band_num)
     VALUE self, layout, placement, band_num;
 {
-    gnome_dock_band_layout_add(
-        GNOME_DOCK_BAND(get_widget(self)),
-        GNOME_DOCK_LAYOUT(layout),
-        NUM2INT(placement), NUM2INT(band_num));
+    bonobo_dock_band_layout_add(_SELF(self),
+                                BONOBO_DOCK_LAYOUT(RVAL2GOBJ(layout)),
+                                NUM2INT(placement), NUM2INT(band_num));
     return self;
 }
 
 void
-Init_gnome_dock_band()
+Init_bonobo_dock_band(mBonobo)
+    VALUE mBonobo;
 {
-    gnoDockBand = rb_define_class_under(mGnome, "DockBand", gContainer);
+    VALUE bnbDockBand = G_DEF_CLASS(BONOBO_TYPE_DOCK_BAND, "DockBand", mBonobo);
 
     /*
      * instance methods
      */
-    rb_define_method(gnoDockBand, "initialize", dockband_initialize, 0);
-    rb_define_method(gnoDockBand, "set_orientation", dockband_set_orientation, 1);
-    rb_define_method(gnoDockBand, "get_orientation", dockband_get_orientation, 0);
-    rb_define_method(gnoDockBand, "insert", dockband_insert, 3);
-    rb_define_method(gnoDockBand, "prepend", dockband_prepend, 2);
-    rb_define_method(gnoDockBand, "append", dockband_append, 2);
-    rb_define_method(gnoDockBand, "set_child_offset", dockband_set_child_offset, 2);
-    rb_define_method(gnoDockBand, "get_child_offset", dockband_get_child_offset, 1);
+    rb_define_method(bnbDockBand, "initialize", dockband_initialize, 0);
+    rb_define_method(bnbDockBand, "set_orientation", dockband_set_orientation, 1);
+    rb_define_method(bnbDockBand, "get_orientation", dockband_get_orientation, 0);
+    rb_define_method(bnbDockBand, "insert", dockband_insert, 3);
+    rb_define_method(bnbDockBand, "prepend", dockband_prepend, 2);
+    rb_define_method(bnbDockBand, "append", dockband_append, 2);
+    rb_define_method(bnbDockBand, "set_child_offset", dockband_set_child_offset, 2);
+    rb_define_method(bnbDockBand, "get_child_offset", dockband_get_child_offset, 1);
 #if 0
-    rb_define_method(gnoDockBand, "move_child", dockband_move_child, 2);
+    rb_define_method(bnbDockBand, "move_child", dockband_move_child, 2);
 #endif
-    rb_define_method(gnoDockBand, "get_num_children", dockband_get_num_children, 0);
-    rb_define_method(gnoDockBand, "drag_begin", dockband_drag_begin, 1);
-    rb_define_method(gnoDockBand, "drag_to", dockband_drag_to, 3);
-    rb_define_method(gnoDockBand, "drag_end", dockband_drag_end, 1);
-    rb_define_method(gnoDockBand, "get_item_by_name", dockband_get_item_by_name, 1);
-    rb_define_method(gnoDockBand, "layout_add", dockband_layout_add, 3);
+    rb_define_method(bnbDockBand, "get_num_children", dockband_get_num_children, 0);
+    rb_define_method(bnbDockBand, "drag_begin", dockband_drag_begin, 1);
+    rb_define_method(bnbDockBand, "drag_to", dockband_drag_to, 3);
+    rb_define_method(bnbDockBand, "drag_end", dockband_drag_end, 1);
+    rb_define_method(bnbDockBand, "get_item_by_name", dockband_get_item_by_name, 1);
+    rb_define_method(bnbDockBand, "layout_add", dockband_layout_add, 3);
 }

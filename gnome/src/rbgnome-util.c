@@ -1,4 +1,5 @@
-/* $Id: rbgnome-util.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-util.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Utility functions for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -25,9 +26,8 @@ rbgnome_libdir_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_libdir_file(STR2CSTR(filename));
-    ret = CSTR2OBJ(file);
-    g_free(file);
+    char *file = gnome_libdir_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -36,9 +36,8 @@ rbgnome_datadir_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_datadir_file(STR2CSTR(filename));
-    ret = CSTR2OBJ(file);
-    g_free(file);
+    char *file = gnome_datadir_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -47,9 +46,8 @@ rbgnome_sound_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_sound_file(STR2CSTR(filename));
-    ret = CSTR2OBJ(file);
-    g_free(file);
+    char *file = gnome_sound_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -58,9 +56,8 @@ rbgnome_pixmap_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_pixmap_file(STR2CSTR(filename));
-    ret = CSTR2OBJ(file);
-    g_free(file);
+    char *file = gnome_pixmap_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -69,9 +66,8 @@ rbgnome_config_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_config_file(STR2CSTR(filename));
-    ret = CSTR2OBJ(file);
-    g_free(file);
+    char *file = gnome_config_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -80,9 +76,8 @@ rbgnome_unconditional_libdir_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_unconditional_libdir_file(STR2CSTR(filename));
-    ret = rb_str_new2(file);
-    g_free(file);
+    char *file = gnome_unconditional_libdir_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -91,9 +86,8 @@ rbgnome_unconditional_datadir_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_unconditional_datadir_file(STR2CSTR(filename));
-    ret = rb_str_new2(file);
-    g_free(file);
+    char *file = gnome_unconditional_datadir_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -102,9 +96,8 @@ rbgnome_unconditional_sound_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_unconditional_sound_file(STR2CSTR(filename));
-    ret = rb_str_new2(file);
-    g_free(file);
+    char *file = gnome_unconditional_sound_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -113,9 +106,8 @@ rbgnome_unconditional_pixmap_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_unconditional_pixmap_file(STR2CSTR(filename));
-    ret = rb_str_new2(file);
-    g_free(file);
+    char *file = gnome_unconditional_pixmap_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
@@ -124,28 +116,23 @@ rbgnome_unconditional_config_file(self, filename)
     VALUE self, filename;
 {
     VALUE ret;
-    char *file = gnome_unconditional_config_file(STR2CSTR(filename));
-    ret = rb_str_new2(file);
-    g_free(file);
+    char *file = gnome_unconditional_config_file(RVAL2CSTR(filename));
+    SET_STR_AND_GFREE(ret, file);
     return ret;
 }
 
 void
-Init_gnome_util()
+Init_gnome_util(mGnome)
+    VALUE mGnome;
 {
     rb_define_module_function(mGnome, "libdir_file", rbgnome_libdir_file, 1);
     rb_define_module_function(mGnome, "datadir_file", rbgnome_datadir_file, 1);
     rb_define_module_function(mGnome, "sound_file", rbgnome_sound_file, 1);
     rb_define_module_function(mGnome, "pixmap_file", rbgnome_pixmap_file, 1);
     rb_define_module_function(mGnome, "config_file", rbgnome_config_file, 1);
-    rb_define_module_function(mGnome, "unconditional_libdir_file",
-                rbgnome_unconditional_libdir_file, 1);
-    rb_define_module_function(mGnome, "unconditional_datadir_file",
-                rbgnome_unconditional_datadir_file, 1);
-    rb_define_module_function(mGnome, "unconditional_sound_file",
-                rbgnome_unconditional_sound_file, 1);
-    rb_define_module_function(mGnome, "unconditional_pixmap_file",
-                rbgnome_unconditional_pixmap_file, 1);
-    rb_define_module_function(mGnome, "unconditional_config_file",
-                rbgnome_unconditional_config_file, 1);
+    rb_define_module_function(mGnome, "unconditional_libdir_file", rbgnome_unconditional_libdir_file, 1);
+    rb_define_module_function(mGnome, "unconditional_datadir_file", rbgnome_unconditional_datadir_file, 1);
+    rb_define_module_function(mGnome, "unconditional_sound_file", rbgnome_unconditional_sound_file, 1);
+    rb_define_module_function(mGnome, "unconditional_pixmap_file", rbgnome_unconditional_pixmap_file, 1);
+    rb_define_module_function(mGnome, "unconditional_config_file", rbgnome_unconditional_config_file, 1);
 }

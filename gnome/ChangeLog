@@ -1,3 +1,36 @@
+2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb: use pkg-config instead of gnome-config. change module
+	name to gnome2.
+	* src/lib/gnome.rb: deleted. renamed to gnome2.rb.
+	* src/lib/gnome2.rb: added. copy from gnome.rb and change for Ruby/GNOME2.
+	* src/*.c, src/*.h: fix for Ruby-GNOME2 framework.
+	* rbbonobo-dock-band.c: rename Gnome::DockBand to Bonobo::DockBand.
+	* src/rbbonobo-dock-item.c: rename Gnome::DockItem to Bonobo::DockItem.
+	* src/rbbonobo-dock-layout.c: rename Gnome::DockLayout and
+	Gnome::DockLayoutItem to Bonobo::DockLayout and Bonobo::DockLayoutItem
+	respectively.
+	* src/rbbonobo-dock.c: rename Gnome::Dock to Bonobo::Dock.
+	* src/src/rbgnome-appbar.c: rename Gnome::AppBar.set_progress to
+	Gnome::AppBar.set_progress_percentage.
+	* src/rbgnome-entry.c: delete obsolete methods
+	Gnome::Entry.load_history and Gnome::Entry.save_history,
+	* src/rbgnome-font-picker.c: delete obsolete methods
+	Gnome::FontPicker.get_use_font_in_label,
+	Gnome::FontPicker.get_use_font_in_label_size, and
+	Gnome::FontPicker.get_show_size.
+	* src/rbgnome-i18n.c: delete obsolete methods Gnome;:I18n.get_language,
+	Gnome;:I18n.set_preferred_language and
+	Gnome;:I18n.get_preferred_language.
+	* src/rbgnome-icon-list.c: rename Gnome::IconList.insert_imlib and
+	Gnome::IconList.append_imlib to Gnome::IconList.insert_pixbuf and
+	Gnome::IconList.append_pixbuf respectively.
+	* src/rbgnome-pixmap-entry.c: fix typo of method name.
+	* src/rbgnome-pixmap.c: delete obsolete method
+	Gnome::Pixmap.load_imlib.
+	* src/rbgnome.c: delete get_gnome_type, make_gnobject_auto_type and
+	get_value_from_gno_obj. rename Init_gnome to Init_gnome2.
+	
 2002-09-25  KUBO Takehiro  <kubo@jiubao.org>
 
 	* rbbonobo-dock-band.c, rbbonobo-dock-item.c, rbbonobo-dock-layout.c,

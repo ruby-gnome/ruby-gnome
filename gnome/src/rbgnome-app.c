@@ -1,4 +1,5 @@
-/* $Id: rbgnome-app.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-app.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::App widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
@@ -19,6 +20,7 @@
  */
 
 #include "rbgnome.h"
+#define _SELF(self) GNOME_APP(RVAL2GOBJ(self))
 
 /*
  * Class Gnome::App
@@ -45,7 +47,6 @@
  *   can create those yourself and use the set_menus(), add_toolbar(),
  *   set_toolbar(), add_dock_item(), and add_docked().
  */
-VALUE gnoApp;
 
 /*
  * Gnome::App#initialize(appname, title)
@@ -62,7 +63,7 @@ static VALUE
 app_initialize(self, appname, title)
     VALUE self, appname, title;
 {
-    set_widget(self, gnome_app_new(STR2CSTR(appname), STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gnome_app_new(RVAL2CSTR(appname), RVAL2CSTR(title)));
     return Qnil;
 }
 
@@ -78,8 +79,8 @@ static VALUE
 app_set_menus(self, menubar)
     VALUE self, menubar;
 {
-    gnome_app_set_menus(GNOME_APP(get_widget(self)),
-			GTK_MENU_BAR(get_widget(menubar)));
+    gnome_app_set_menus(_SELF(self),
+                        GTK_MENU_BAR(RVAL2GOBJ(menubar)));
     return self;
 }
 
@@ -95,8 +96,8 @@ static VALUE
 app_set_toolbar(self, toolbar)
     VALUE self, toolbar;
 {
-    gnome_app_set_toolbar(GNOME_APP(get_widget(self)),
-			  GTK_TOOLBAR(get_widget(toolbar)));
+    gnome_app_set_toolbar(_SELF(self),
+                          GTK_TOOLBAR(RVAL2GOBJ(toolbar)));
     return self;
 }
 
@@ -112,8 +113,8 @@ static VALUE
 app_set_statusbar(self, statusbar)
     VALUE self, statusbar;
 {
-    gnome_app_set_statusbar(GNOME_APP(get_widget(self)),
-			    GTK_WIDGET(get_widget(statusbar)));
+    gnome_app_set_statusbar(_SELF(self),
+                            GTK_WIDGET(RVAL2GOBJ(statusbar)));
     return self;
 }
 
@@ -127,9 +128,9 @@ static VALUE
 app_set_statusbar_custom(self, container, statusbar)
     VALUE self, container, statusbar;
 {
-    gnome_app_set_statusbar_custom(GNOME_APP(get_widget(self)),
-                                   get_widget(container),
-                                   get_widget(statusbar));
+    gnome_app_set_statusbar_custom(_SELF(self),
+                                   GTK_WIDGET(RVAL2GOBJ(container)),
+                                   GTK_WIDGET(RVAL2GOBJ(statusbar)));
     return self;
 }
 
@@ -145,8 +146,8 @@ static VALUE
 app_set_contents(self, contents)
     VALUE self, contents;
 {
-    gnome_app_set_contents(GNOME_APP(get_widget(self)),
-			   GTK_WIDGET(get_widget(contents)));
+    gnome_app_set_contents(_SELF(self),
+                           GTK_WIDGET(RVAL2GOBJ(contents)));
     return self;
 }
 
@@ -172,18 +173,18 @@ app_set_contents(self, contents)
  */
 static VALUE
 app_add_toolbar(self, toolbar, name, behavior, placement,
-		band_num, band_position, offset)
+                band_num, band_position, offset)
     VALUE self, toolbar, name, behavior, placement;
     VALUE band_num, band_position, offset;
 {
-    gnome_app_add_toolbar(GNOME_APP(get_widget(self)),
-			  GTK_TOOLBAR(get_widget(toolbar)),
-			  STR2CSTR(name),
-			  NUM2INT(behavior),
-			  NUM2INT(placement),
-			  NUM2INT(band_num),
-			  NUM2INT(band_position),
-			  NUM2INT(offset));
+    gnome_app_add_toolbar(_SELF(self),
+                          GTK_TOOLBAR(RVAL2GOBJ(toolbar)),
+                          RVAL2CSTR(name),
+                          NUM2INT(behavior),
+                          NUM2INT(placement),
+                          NUM2INT(band_num),
+                          NUM2INT(band_position),
+                          NUM2INT(offset));
     return self;
 }
 
@@ -209,18 +210,18 @@ app_add_toolbar(self, toolbar, name, behavior, placement,
  */
 static VALUE
 app_add_docked(self, widget, name, behavior, placement,
-	       band_num, band_position, offset)
+               band_num, band_position, offset)
     VALUE self, widget, name, behavior, placement;
     VALUE band_num, band_position, offset;
 {
-    gnome_app_add_docked(GNOME_APP(get_widget(self)),
-			 GTK_WIDGET(widget),
-			 STR2CSTR(name),
-			 NUM2INT(behavior),
-			 NUM2INT(placement),
-			 NUM2INT(band_num),
-			 NUM2INT(band_position),
-			 NUM2INT(offset));
+    gnome_app_add_docked(_SELF(self),
+                         GTK_WIDGET(widget),
+                         RVAL2CSTR(name),
+                         NUM2INT(behavior),
+                         NUM2INT(placement),
+                         NUM2INT(band_num),
+                         NUM2INT(band_position),
+                         NUM2INT(offset));
     return self;			 
 }
 
@@ -229,16 +230,16 @@ app_add_docked(self, widget, name, behavior, placement,
  */
 static VALUE
 app_add_dock_item(self, item, placement,
-		  band_num, band_position, offset)
+                  band_num, band_position, offset)
     VALUE self, item, placement;
     VALUE band_num, band_position, offset;
 {
-    gnome_app_add_dock_item(GNOME_APP(get_widget(self)),
-			    GNOME_DOCK_ITEM(get_widget(item)),
-			    NUM2INT(placement),
-			    NUM2INT(band_num),
-			    NUM2INT(band_position),
-			    NUM2INT(offset));
+    gnome_app_add_dock_item(_SELF(self),
+                            BONOBO_DOCK_ITEM(RVAL2GOBJ(item)),
+                            NUM2INT(placement),
+                            NUM2INT(band_num),
+                            NUM2INT(band_position),
+                            NUM2INT(offset));
     return self;			 
 }
 
@@ -256,7 +257,7 @@ static VALUE
 app_enable_layout_config(self, enable)
     VALUE self, enable;
 {
-    gnome_app_enable_layout_config(GNOME_APP(get_widget(self)), RTEST(enable));
+    gnome_app_enable_layout_config(_SELF(self), RTEST(enable));
     return self;
 }
 
@@ -272,9 +273,9 @@ static VALUE
 app_get_dock(self)
     VALUE self;
 {
-    GnomeDock* result;
-    result = gnome_app_get_dock(GNOME_APP(get_widget(self)));
-    return result?make_widget(gnoDock, GTK_WIDGET(result)):Qnil;
+    BonoboDock* result;
+    result = gnome_app_get_dock(_SELF(self));
+    return result ? GOBJ2RVAL(result) : Qnil;
 }
 
 /*
@@ -291,16 +292,17 @@ static VALUE
 app_get_dock_item_by_name(self, name)
     VALUE self, name;
 {
-    GnomeDockItem* result;
-    result = gnome_app_get_dock_item_by_name(GNOME_APP(get_widget(self)),
-					                         STR2CSTR(name));
-    return result?make_widget(gnoDockItem, GTK_WIDGET(result)):Qnil;
+    BonoboDockItem* result;
+    result = gnome_app_get_dock_item_by_name(_SELF(self),
+					                         RVAL2CSTR(name));
+    return result ? GOBJ2RVAL(result) : Qnil;
 }
 
 void
-Init_gnome_app()
+Init_gnome_app(mGnome)
+    VALUE mGnome;
 {
-    gnoApp = rb_define_class_under(mGnome, "App", gWindow);
+    VALUE gnoApp = G_DEF_CLASS(GNOME_TYPE_APP, "App", mGnome);
 
     /*
      * instance methods
@@ -317,4 +319,6 @@ Init_gnome_app()
     rb_define_method(gnoApp, "enable_layout_config", app_enable_layout_config, 1);
     rb_define_method(gnoApp, "get_dock", app_get_dock, 0);
     rb_define_method(gnoApp, "get_dock_item_by_name", app_get_dock_item_by_name, 1);
+
+    Init_gnome_app_helper(mGnome, gnoApp);
 }

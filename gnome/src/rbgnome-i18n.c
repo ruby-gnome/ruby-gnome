@@ -1,4 +1,4 @@
-/* $Id: rbgnome-i18n.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* $Id: rbgnome-i18n.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::I18n module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -18,7 +18,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libintl.h>
+#include <libgnome/gnome-i18n.h>
 #include "rbgnome.h"
 
 VALUE mGnomeI18n;
@@ -31,10 +31,10 @@ gnoi18n_bindtextdomain(self, domain, dirname)
 
     switch (TYPE(dirname)) {
     case T_STRING:
-        new_dirname = bindtextdomain(STR2CSTR(domain), STR2CSTR(dirname));
+        new_dirname = bindtextdomain(RVAL2CSTR(domain), RVAL2CSTR(dirname));
         break;
     case T_NIL:
-        new_dirname = bindtextdomain(STR2CSTR(domain), 0);
+        new_dirname = bindtextdomain(RVAL2CSTR(domain), 0);
         break;
     default:
         rb_raise(rb_eTypeError, "dirname is Not String or Null");
@@ -48,7 +48,7 @@ gnoi18n_textdomain(self, domain)
     VALUE self, domain;
 {
     char* new_domain;
-    new_domain = textdomain(STR2CSTR(domain));
+    new_domain = textdomain(RVAL2CSTR(domain));
     return rb_str_new2(new_domain);
 }
 
@@ -57,7 +57,7 @@ gnoi18n_gettext(self, msgid)
     VALUE self, msgid;
 {
     char* msgstr;
-    msgstr = gettext(STR2CSTR(msgid));
+    msgstr = gettext(RVAL2CSTR(msgid));
     return rb_str_new2(msgstr);
 }
 
@@ -73,7 +73,7 @@ gnoi18n_dgettext(self, domain, msgid)
     VALUE self, domain, msgid;
 {
     char* msgstr;
-    msgstr = dgettext(STR2CSTR(domain), STR2CSTR(msgid));
+    msgstr = dgettext(RVAL2CSTR(domain), RVAL2CSTR(msgid));
 
     return rb_str_new2(msgstr);
 }
@@ -83,27 +83,18 @@ gnoi18n_dcgettext(self, domain, msgid, category)
     VALUE self, domain, msgid, category;
 {
     char* msgstr;
-    msgstr = dcgettext(STR2CSTR(domain), STR2CSTR(msgid), FIX2INT(category));
+    msgstr = dcgettext(RVAL2CSTR(domain), RVAL2CSTR(msgid), FIX2INT(category));
 
     return rb_str_new2(msgstr);
-}
-
-static VALUE
-gnoi18n_get_language(self)
-    VALUE self;
-{
-    const char* lang;
-    lang = gnome_i18n_get_language();
-    return NIL_P(lang)?Qnil:rb_str_new2(lang);
 }
 
 static VALUE
 gno18n_get_language_list(self, category_name)
     VALUE self, category_name;
 {
-    GList* lang_list;
+    const GList* lang_list;
     VALUE ary;
-    lang_list = gnome_i18n_get_language_list(STR2CSTR(category_name));
+    lang_list = gnome_i18n_get_language_list(RVAL2CSTR(category_name));
 
     ary = rb_ary_new();
     while (lang_list) {
@@ -115,45 +106,20 @@ gno18n_get_language_list(self, category_name)
     return ary;
 }
 
-static VALUE
-gnoi18n_set_preferred_language(self, val)
-    VALUE self, val;
-{
-    gnome_i18n_set_preferred_language(STR2CSTR(val));
-    return self;
-}
-
-static VALUE
-gnoi18n_get_preferred_language(self)
-    VALUE self;
-{
-    const char *val;
-    val = gnome_i18n_get_preferred_language();
-    return NIL_P(val)?Qnil:rb_str_new2(val);
-}
-
 void
-Init_gnome_i18n()
+Init_gnome_i18n(mGnome)
+     VALUE mGnome;
 {
     mGnomeI18n = rb_define_module_under(mGnome, "I18n");
 
-    rb_define_module_function(mGnomeI18n, "bindtextdomain",
-			      gnoi18n_bindtextdomain, 2);
+    rb_define_module_function(mGnomeI18n, "bindtextdomain", gnoi18n_bindtextdomain, 2);
     rb_define_module_function(mGnomeI18n, "textdomain", gnoi18n_textdomain, 1);
     rb_define_module_function(mGnomeI18n, "gettext", gnoi18n_gettext, 1);
     rb_define_module_function(mGnomeI18n, "_", gnoi18n_gettext, 1);
-    rb_define_module_function(mGnomeI18n, "gettext_noop",
-			      gnoi18n_gettext_noop, 1);
+    rb_define_module_function(mGnomeI18n, "gettext_noop", gnoi18n_gettext_noop, 1);
     rb_define_module_function(mGnomeI18n, "N_", gnoi18n_gettext_noop, 1);
     rb_define_module_function(mGnomeI18n, "dgettext", gnoi18n_dgettext, 2);
     rb_define_module_function(mGnomeI18n, "dcgettext", gnoi18n_dcgettext, 3);
 
-    rb_define_module_function(mGnomeI18n, "get_language",
-			      gnoi18n_get_language, 0);
-    rb_define_module_function(mGnomeI18n, "get_language_list",
-			      gno18n_get_language_list, 1);
-    rb_define_module_function(mGnomeI18n, "set_preferred_language",
-			      gnoi18n_set_preferred_language, 1);
-    rb_define_module_function(mGnomeI18n, "get_preferred_language",
-			      gnoi18n_get_preferred_language, 0);
+    rb_define_module_function(mGnomeI18n, "get_language_list", gno18n_get_language_list, 1);
 }

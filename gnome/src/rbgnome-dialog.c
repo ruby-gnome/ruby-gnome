@@ -1,4 +1,5 @@
-/* $Id: rbgnome-dialog.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-dialog.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::Dialog widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
@@ -20,7 +21,8 @@
 
 #include "rbgnome.h"
 
-VALUE gnoDialog;
+static ID id_signal_connect;
+#define _SELF(self) GNOME_DIALOG(RVAL2GOBJ(self))
 
 static VALUE
 dialog_initialize(argc, argv, self)
@@ -31,19 +33,16 @@ dialog_initialize(argc, argv, self)
     VALUE title, buttons;
     const gchar **c_buttons;
     int i;
-    GtkWidget* dialog;
 
     rb_scan_args(argc, argv, "1*", &title, &buttons);
 
     c_buttons = ALLOCA_N(const gchar*, RARRAY(buttons)->len+1);
     for (i=0; i<RARRAY(buttons)->len; i++) {
-	c_buttons[i] = STR2CSTR(RARRAY(buttons)->ptr[i]);
+        c_buttons[i] = RVAL2CSTR(RARRAY(buttons)->ptr[i]);
     }
-    c_buttons[i] = 0;
+    c_buttons[i] = NULL;
 
-    dialog = gnome_dialog_newv(STR2CSTR(title), c_buttons);
-
-    set_widget(self, dialog);
+    RBGTK_INITIALIZE(self, gnome_dialog_newv(RVAL2CSTR(title), c_buttons));
 
     return Qnil;
 }
@@ -58,8 +57,8 @@ static VALUE
 dialog_set_parent(self, parent)
      VALUE self, parent;
 {
-    gnome_dialog_set_parent(GNOME_DIALOG(get_widget(self)),
-			    GTK_WINDOW(get_widget(parent)));
+    gnome_dialog_set_parent(_SELF(self),
+                            GTK_WINDOW(RVAL2GOBJ(parent)));
     return self;
 }
 
@@ -70,28 +69,21 @@ dialog_button_connect(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE button, data, args;
-    ID id = 0;
+    VALUE button;
     GList *list;
 
-    rb_scan_args(argc, argv, "1*", &button, &args);
+    if (argc == 0)
+        rb_raise(rb_eArgError, "wrong # of argument 0");
 
-    list = g_list_nth(GNOME_DIALOG(get_widget(self))->buttons,
-		      NUM2INT(button));
-
+    button = argv[0];
+    list = g_list_nth(_SELF(self)->buttons, NUM2INT(button));
     if (list == 0 || list->data == 0) {
-	rb_raise(rb_eArgError, "Button number %d does not appear to exist\n",
-		 NUM2INT(button));
+        rb_raise(rb_eArgError, "Button number %d does not appear to exist.",
+                 NUM2INT(button));
     }
 
-    id = rb_intern("clicked");
-    data = rb_ary_new3(3, rb_f_lambda(), INT2NUM(id), args);
-    add_relative(self, data);
-    gtk_signal_connect_full(get_gobject(self),
-			    "clicked", 0,
-			    (GtkSignalFunc)signal_callback,
-			    (gpointer)data,
-			    0, FALSE, 0);
+    argv[0] = rb_str_new2("clicked");
+    rb_funcall2(GOBJ2RVAL(list->data), id_signal_connect, argc, argv);
     return self;
 }
 
@@ -100,7 +92,7 @@ dialog_run(self)
     VALUE self;
 {
     gint button;
-    button = gnome_dialog_run(GNOME_DIALOG(get_widget(self)));
+    button = gnome_dialog_run(_SELF(self));
     return INT2NUM(button);
 }
 
@@ -109,7 +101,7 @@ dialog_run_and_close(self)
     VALUE self;
 {
     gint button;
-    button = gnome_dialog_run_and_close(GNOME_DIALOG(get_widget(self)));
+    button = gnome_dialog_run_and_close(_SELF(self));
     return INT2NUM(button);
 }
 
@@ -117,7 +109,7 @@ static VALUE
 dialog_set_default(self, button)
     VALUE self, button;
 {
-    gnome_dialog_set_default(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_set_default(_SELF(self),
 			     NUM2INT(button));
     return self;
 }
@@ -126,7 +118,7 @@ static VALUE
 dialog_set_sensitive(self, button, setting)
     VALUE self, button, setting;
 {
-    gnome_dialog_set_sensitive(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_set_sensitive(_SELF(self),
 			       NUM2INT(button),
 			       RTEST(setting));
     return self;
@@ -136,7 +128,7 @@ static VALUE
 dialog_set_accelerator(self, button, accelerator_key, accelerator_mods)
     VALUE self, button, accelerator_key, accelerator_mods;
 {
-    gnome_dialog_set_accelerator(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_set_accelerator(_SELF(self),
 				 NUM2INT(button),
 				 (guchar)NUM2INT(accelerator_key),
 				 (guint8)NUM2INT(accelerator_mods));
@@ -147,7 +139,7 @@ static VALUE
 dialog_close(self)
     VALUE self;
 {
-    gnome_dialog_close(GNOME_DIALOG(get_widget(self)));
+    gnome_dialog_close(_SELF(self));
     return self;
 }
 
@@ -155,7 +147,7 @@ static VALUE
 dialog_close_hides(self, just_hide)
     VALUE self, just_hide;
 {
-    gnome_dialog_close_hides(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_close_hides(_SELF(self),
 			     RTEST(just_hide));
     return self;
 }
@@ -164,7 +156,7 @@ static VALUE
 dialog_set_close(self, click_closes)
     VALUE self, click_closes;
 {
-    gnome_dialog_set_close(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_set_close(_SELF(self),
 			   RTEST(click_closes));
     return self;
 }
@@ -173,8 +165,8 @@ static VALUE
 dialog_editable_enters(self, editable)
     VALUE self, editable;
 {
-    gnome_dialog_editable_enters(GNOME_DIALOG(get_widget(self)),
-				 GTK_EDITABLE(get_widget(editable)));
+    gnome_dialog_editable_enters(_SELF(self),
+				 GTK_EDITABLE(RVAL2GOBJ(editable)));
     return self;
 }
 
@@ -193,10 +185,10 @@ dialog_append_buttons(argc, argv, self)
 #endif
     buttons = ALLOCA_N(const gchar*, argc+1);
     for (i=0; i<argc; i++) {
-	buttons[i] = STR2CSTR(argv[i]);
+	buttons[i] = RVAL2CSTR(argv[i]);
     }
     buttons[i] = 0;
-    gnome_dialog_append_buttonsv(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_append_buttonsv(_SELF(self),
 				 buttons);
     return self;
 }
@@ -205,8 +197,8 @@ static VALUE
 dialog_append_button(self, name)
     VALUE self, name;
 {
-    gnome_dialog_append_button(GNOME_DIALOG(get_widget(self)),
-			       STR2CSTR(name));
+    gnome_dialog_append_button(_SELF(self),
+			       RVAL2CSTR(name));
     return self;
 }
 
@@ -214,9 +206,9 @@ static VALUE
 dialog_append_button_with_pixmap(self, name, pixmap)
     VALUE self, name, pixmap;
 {
-    gnome_dialog_append_button_with_pixmap(GNOME_DIALOG(get_widget(self)),
-					   STR2CSTR(name),
-					   STR2CSTR(pixmap));
+    gnome_dialog_append_button_with_pixmap(_SELF(self),
+					   RVAL2CSTR(name),
+					   RVAL2CSTR(pixmap));
     return self;
 }
 
@@ -233,12 +225,12 @@ dialog_append_buttons_with_pixmaps(argc, argv, self)
     c_buttons = ALLOCA_N(const gchar*, argc+1);
     c_pixmaps = ALLOCA_N(const gchar*, argc+1);
     for (i=0; i<argc; i++) {
-	c_buttons[i] = STR2CSTR(RARRAY(argv[i])->ptr[0]);
-	c_pixmaps[i] = STR2CSTR(RARRAY(argv[i])->ptr[1]);
+	c_buttons[i] = RVAL2CSTR(RARRAY(argv[i])->ptr[0]);
+	c_pixmaps[i] = RVAL2CSTR(RARRAY(argv[i])->ptr[1]);
     }
     c_buttons[i] = 0;
     c_pixmaps[i] = 0;
-    gnome_dialog_append_buttons_with_pixmaps(GNOME_DIALOG(get_widget(self)),
+    gnome_dialog_append_buttons_with_pixmaps(_SELF(self),
 					     c_buttons,
 					     c_pixmaps);
     return self;
@@ -248,15 +240,15 @@ static VALUE
 dialog_get_vbox(self)
     VALUE self;
 {
-    GtkObject *vbox;
-    vbox = GTK_OBJECT(GNOME_DIALOG(get_widget(self))->vbox);
-    return make_gnobject_auto_type(vbox);
+    return GOBJ2RVAL(_SELF(self)->vbox);
 }
 
 void
-Init_gnome_dialog()
+Init_gnome_dialog(mGnome)
+    VALUE mGnome;
 {
-    gnoDialog = rb_define_class_under(mGnome, "Dialog", gWindow);
+    VALUE gnoDialog = G_DEF_CLASS(GNOME_TYPE_DIALOG, "Dialog", mGnome);
+    id_signal_connect = rb_intern("signal_connect");
 
     /*
      * instance methods
@@ -275,17 +267,11 @@ Init_gnome_dialog()
     rb_define_method(gnoDialog, "editable_enters", dialog_editable_enters, 1);
     rb_define_method(gnoDialog, "append_buttons", dialog_append_buttons, -1);
     rb_define_method(gnoDialog, "append_button", dialog_append_button, 1);
-    rb_define_method(gnoDialog, "append_button_with_pixmap",
-		     dialog_append_button_with_pixmap, 2);
-    rb_define_method(gnoDialog, "append_buttons_with_pixmaps",
-		     dialog_append_buttons_with_pixmaps, -1);
+    rb_define_method(gnoDialog, "append_button_with_pixmap", dialog_append_button_with_pixmap, 2);
+    rb_define_method(gnoDialog, "append_buttons_with_pixmaps", dialog_append_buttons_with_pixmaps, -1);
     rb_define_method(gnoDialog, "vbox", dialog_get_vbox, 0);
 
-    /* Signals */
-    rb_define_const(gnoDialog, "SIGNAL_CLOSE", rb_str_new2("close"));
-    rb_define_const(gnoDialog, "SIGNAL_CLICKED", rb_str_new2("clicked"));    
-
     /* child init */
-    Init_gnome_about();
-    Init_gnome_property_box();
+    Init_gnome_about(mGnome);
+    Init_gnome_property_box(mGnome);
 }

@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock.c,v 1.1 2002/09/25 14:10:05 tkubo Exp $ */
+/* $Id: rbbonobo-dock.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
 
-/* Gnome::Dock widget for Ruby/Gnome
+/* Bonobo::Dock widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
  *
  * This library is free software; you can redistribute it and/or
@@ -21,86 +21,86 @@
 
 #include "rbgnome.h"
 
-VALUE gnoDock;
+#define _SELF(self) BONOBO_DOCK(RVAL2GOBJ(self))
 
 static VALUE
 dock_initialize(self)
     VALUE self;
 {
-    set_widget(self, gnome_dock_new());
+    RBGTK_INITIALIZE(self, bonobo_dock_new());
     return Qnil;
 }
 
 /*
- * Gnome::Dock#allow_floating_items(enable)
+ * Bonobo::Dock#allow_floating_items(enable)
  */
 static VALUE
 dock_allow_floating_items(self, enable)
     VALUE self, enable;
 {
-    gnome_dock_allow_floating_items(GNOME_DOCK(get_widget(self)),
-                                    RTEST(enable));
+    bonobo_dock_allow_floating_items(_SELF(self),
+                                     RTEST(enable));
     return self;
 }
 
 /*
- * Gnome::Dock#add_item(item, placement, band_num, position,
+ * Bonobo::Dock#add_item(item, placement, band_num, position,
  *          offset, in_new_band)
  */ 
 static VALUE
 dock_add_item(self, item, placement, band_num, position, offset, in_new_band)
     VALUE self, item, placement, band_num, position, offset, in_new_band;
 {
-    gnome_dock_add_item(GNOME_DOCK(get_widget(self)),
-                        GNOME_DOCK_ITEM(get_widget(item)),
-                        NUM2INT(placement),
-                        NUM2INT(band_num),
-                        NUM2INT(position),
-                        NUM2INT(offset),
-                        RTEST(in_new_band));
+    bonobo_dock_add_item(_SELF(self),
+                         BONOBO_DOCK_ITEM(RVAL2GOBJ(item)),
+                         NUM2INT(placement),
+                         NUM2INT(band_num),
+                         NUM2INT(position),
+                         NUM2INT(offset),
+                         RTEST(in_new_band));
     return self;
 }
 
 /*
- * Gnome::Dock#add_floating_item(widget, x, y, orientation)
+ * Bonobo::Dock#add_floating_item(widget, x, y, orientation)
  */
 static VALUE
 dock_add_floating_item(self, widget, x, y, orientation)
     VALUE self, widget, x, y, orientation;
 {
-    gnome_dock_add_floating_item(GNOME_DOCK(get_widget(self)),
-                                 GNOME_DOCK_ITEM(get_widget(widget)),
-                                 NUM2INT(x), NUM2INT(y),
-                                 NUM2INT(orientation));
+    bonobo_dock_add_floating_item(_SELF(self),
+                                  BONOBO_DOCK_ITEM(RVAL2GOBJ(widget)),
+                                  NUM2INT(x), NUM2INT(y),
+                                  NUM2INT(orientation));
     return self;
 }
 
 /*
- * Gnome::Dock#set_client_area(widget)
+ * Bonobo::Dock#set_client_area(widget)
  */
 static VALUE
 dock_set_client_area(self, widget)
     VALUE self, widget;
 {
-    gnome_dock_set_client_area(GNOME_DOCK(get_widget(self)),
-                               GTK_WIDGET(get_widget(widget)));
+    bonobo_dock_set_client_area(_SELF(self),
+                                GTK_WIDGET(RVAL2GOBJ(widget)));
     return self;
 }
 
 /*
- * Gnome::Dock#get_client_area
+ * Bonobo::Dock#get_client_area
  */
 static VALUE
 dock_get_client_area(self)
     VALUE self;
 {
     GtkWidget* result;
-    result = gnome_dock_get_client_area(GNOME_DOCK(get_widget(self)));
-    return result?make_gnobject_auto_type(GTK_OBJECT(result)):Qnil;
+    result = bonobo_dock_get_client_area(_SELF(self));
+    return result ? GOBJ2RVAL(result) : Qnil;
 }
 
 /*
- * Gnome::Dock#get_item_by_name(name)
+ * Bonobo::Dock#get_item_by_name(name)
  *
  * return:
  *   [ item, placement, num_band, band_position, offset ]
@@ -109,21 +109,21 @@ static VALUE
 dock_get_item_by_name(self, name)
     VALUE self, name;
 {
-    GnomeDockItem* result;
-    GnomeDockPlacement placement;
+    BonoboDockItem* result;
+    BonoboDockPlacement placement;
     guint num_band;
     guint band_position;
     guint offset;
     VALUE ary;
 
-    result = gnome_dock_get_item_by_name(GNOME_DOCK(get_widget(self)),
-                                         STR2CSTR(name),
-                                         &placement,
-                                         &num_band,
-                                         &band_position,
-                                         &offset);
+    result = bonobo_dock_get_item_by_name(_SELF(self),
+                                          RVAL2CSTR(name),
+                                          &placement,
+                                          &num_band,
+                                          &band_position,
+                                          &offset);
     ary = rb_ary_new2(5);
-    rb_ary_push(ary, result?make_widget(gnoDockItem, GTK_WIDGET(result)):Qnil);
+    rb_ary_push(ary, result ? GOBJ2RVAL(result) : Qnil);
     rb_ary_push(ary, INT2NUM(placement));
     rb_ary_push(ary, INT2NUM(num_band));
     rb_ary_push(ary, INT2NUM(band_position));
@@ -133,57 +133,53 @@ dock_get_item_by_name(self, name)
 }
 
 /*
- * Gnome::Dock#get_layout
+ * Bonobo::Dock#get_layout
  */
 static VALUE
 dock_get_layout(self)
     VALUE self;
 {
-    GnomeDockLayout *result;
-    result = gnome_dock_get_layout(GNOME_DOCK(get_widget(self)));
-    return result?make_widget(gnoDockLayout, GTK_WIDGET(result)):Qnil;
+    BonoboDockLayout *result;
+    result = bonobo_dock_get_layout(_SELF(self));
+    return result ? GOBJ2RVAL(result) : Qnil;
 }
 
 /*
- * Gnome::Dock#add_from_layout(layout)
+ * Bonobo::Dock#add_from_layout(layout)
  */
 static VALUE
 dock_add_from_layout(self, layout)
     VALUE self, layout;
 {
     gboolean result;
-    result = gnome_dock_add_from_layout(GNOME_DOCK(get_widget(self)),
-                                        GNOME_DOCK_LAYOUT(layout));
-    return result?Qtrue:Qfalse;
+    result = bonobo_dock_add_from_layout(_SELF(self),
+                                         BONOBO_DOCK_LAYOUT(RVAL2GOBJ(layout)));
+    return result ? Qtrue : Qfalse;
 }
 
 void
-Init_gnome_dock()
+Init_bonobo_dock(mBonobo)
+    VALUE mBonobo;
 {
-    gnoDock = rb_define_class_under(mGnome, "Dock", gContainer);
+    VALUE bnbDock = G_DEF_CLASS(BONOBO_TYPE_DOCK, "Dock", mBonobo);
 
-    /* GnomeDockPlacement */
-    rb_define_const(gnoDock, "TOP", INT2FIX(GNOME_DOCK_TOP));
-    rb_define_const(gnoDock, "RIGHT", INT2FIX(GNOME_DOCK_RIGHT));
-    rb_define_const(gnoDock, "BOTTOM", INT2FIX(GNOME_DOCK_BOTTOM));
-    rb_define_const(gnoDock, "LEFT", INT2FIX(GNOME_DOCK_LEFT));
-    rb_define_const(gnoDock, "FLOATING", INT2FIX(GNOME_DOCK_FLOATING));
+    /* BonoboDockPlacement */
+    rb_define_const(bnbDock, "TOP", INT2FIX(BONOBO_DOCK_TOP));
+    rb_define_const(bnbDock, "RIGHT", INT2FIX(BONOBO_DOCK_RIGHT));
+    rb_define_const(bnbDock, "BOTTOM", INT2FIX(BONOBO_DOCK_BOTTOM));
+    rb_define_const(bnbDock, "LEFT", INT2FIX(BONOBO_DOCK_LEFT));
+    rb_define_const(bnbDock, "FLOATING", INT2FIX(BONOBO_DOCK_FLOATING));
 
     /*
      * instance methods
      */
-    rb_define_method(gnoDock, "initialize", dock_initialize, 0);
-    rb_define_method(gnoDock, "allow_floating_items", dock_allow_floating_items, 1);
-    rb_define_method(gnoDock, "add_item", dock_add_item, 6);
-    rb_define_method(gnoDock, "add_floating_item", dock_add_floating_item, 4);
-    rb_define_method(gnoDock, "set_client_area", dock_set_client_area, 1);
-    rb_define_method(gnoDock, "get_client_area", dock_get_client_area, 0);
-    rb_define_method(gnoDock, "get_item_by_name", dock_get_item_by_name, 1);
-    rb_define_method(gnoDock, "get_layout", dock_get_layout, 0);
-    rb_define_method(gnoDock, "add_from_layout", dock_add_from_layout, 1);
-
-    /*
-     * Signal
-     */
-    rb_define_const(gnoDock, "SIGNAL_LAYOUT_CHANGED", rb_str_new2("layout_changed"));
+    rb_define_method(bnbDock, "initialize", dock_initialize, 0);
+    rb_define_method(bnbDock, "allow_floating_items", dock_allow_floating_items, 1);
+    rb_define_method(bnbDock, "add_item", dock_add_item, 6);
+    rb_define_method(bnbDock, "add_floating_item", dock_add_floating_item, 4);
+    rb_define_method(bnbDock, "set_client_area", dock_set_client_area, 1);
+    rb_define_method(bnbDock, "get_client_area", dock_get_client_area, 0);
+    rb_define_method(bnbDock, "get_item_by_name", dock_get_item_by_name, 1);
+    rb_define_method(bnbDock, "get_layout", dock_get_layout, 0);
+    rb_define_method(bnbDock, "add_from_layout", dock_add_from_layout, 1);
 }

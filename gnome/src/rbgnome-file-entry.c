@@ -1,4 +1,5 @@
-/* $Id: rbgnome-file-entry.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-file-entry.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::FileEntry widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,7 +21,7 @@
 
 #include "rbgnome.h"
 
-VALUE gnoFileEntry;
+#define _SELF(self) GNOME_FILE_ENTRY(RVAL2GOBJ(self))
 
 static VALUE
 fentry_initialize(argc, argv, self)
@@ -32,10 +33,10 @@ fentry_initialize(argc, argv, self)
     GtkWidget* fentry;
 
     rb_scan_args(argc, argv, "02", &history_id, &title);
-    fentry = gnome_file_entry_new(NIL_P(history_id)?0:STR2CSTR(history_id),
-                                  NIL_P(title)?0:STR2CSTR(title));
+    fentry = gnome_file_entry_new(NIL_P(history_id)?0:RVAL2CSTR(history_id),
+                                  NIL_P(title)?0:RVAL2CSTR(title));
 
-    set_widget(self, fentry);
+    RBGTK_INITIALIZE(self, fentry);
     return Qnil;
 }
 
@@ -43,24 +44,21 @@ static VALUE
 fentry_gnome_entry(self)
     VALUE self;
 {
-    GtkWidget *entry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(get_widget(self)));
-    return make_gnobject_auto_type(GTK_OBJECT(entry));
+    return GOBJ2RVAL(gnome_file_entry_gnome_entry(_SELF(self)));
 }
 
 static VALUE
 fentry_gtk_entry(self)
     VALUE self;
 {
-    GtkWidget *entry = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(get_widget(self)));
-    return make_gnobject_auto_type(GTK_OBJECT(entry));
+    return GOBJ2RVAL(gnome_file_entry_gtk_entry(_SELF(self)));
 }
 
 static VALUE
 fentry_set_title(self, browse_dialog_title)
     VALUE self, browse_dialog_title;
 {
-    gnome_file_entry_set_title(GNOME_FILE_ENTRY(get_widget(self)),
-                               STR2CSTR(browse_dialog_title));
+    gnome_file_entry_set_title(_SELF(self), RVAL2CSTR(browse_dialog_title));
     return self;
 }
 
@@ -69,8 +67,7 @@ static VALUE
 fentry_set_default_path(self, path)
     VALUE self, path;
 {
-    gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(get_widget(self)),
-                      STR2CSTR(path));
+    gnome_file_entry_set_default_path(_SELF(self), RVAL2CSTR(path));
     return self;
 }
 
@@ -79,8 +76,7 @@ static VALUE
 fentry_set_directory(self, directory_entry)
     VALUE self, directory_entry;
 {
-    gnome_file_entry_set_directory(GNOME_FILE_ENTRY(get_widget(self)),
-                                   RTEST(directory_entry));
+    gnome_file_entry_set_directory(_SELF(self), RTEST(directory_entry));
     return self;
 }
 
@@ -92,8 +88,13 @@ static VALUE
 fentry_get_full_path(self, file_must_exist)
     VALUE self, file_must_exist;
 {
-    return CSTR2OBJ(gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(get_widget(self)),
-                                                   RTEST(file_must_exist)));
+    char *filename;
+    VALUE obj;
+
+    filename = gnome_file_entry_get_full_path(_SELF(self),
+                                               RTEST(file_must_exist));
+    SET_STR_AND_GFREE(obj, filename);
+    return obj;
 }
 
 /*set modality of the file browse dialog, only applies for the
@@ -102,29 +103,25 @@ static VALUE
 fentry_set_modal(self, is_modal)
     VALUE self, is_modal;
 {
-    gnome_file_entry_set_modal(GNOME_FILE_ENTRY(get_widget(self)),
+    gnome_file_entry_set_modal(_SELF(self),
                                RTEST(is_modal));
     return self;
 }
 
 void
-Init_gnome_file_entry()
+Init_gnome_file_entry(mGnome)
+    VALUE mGnome;
 {
-    gnoFileEntry = rb_define_class_under(mGnome, "FileEntry", gHBox);
+    VALUE gnoFileEntry = G_DEF_CLASS(GNOME_TYPE_FILE_ENTRY, "FileEntry", mGnome);
 
     /* Instance methods */
     rb_define_method(gnoFileEntry, "initialize", fentry_initialize, -1);
     rb_define_method(gnoFileEntry, "gnome_entry", fentry_gnome_entry, 0);
     rb_define_method(gnoFileEntry, "gtk_entry", fentry_gtk_entry, 0);
     rb_define_method(gnoFileEntry, "set_title", fentry_set_title, 1);
-    rb_define_method(gnoFileEntry, "set_default_path",
-                     fentry_set_default_path, 1);
+    rb_define_method(gnoFileEntry, "set_default_path", fentry_set_default_path, 1);
     rb_define_method(gnoFileEntry, "set_directory", fentry_set_directory, 1);
     rb_define_method(gnoFileEntry, "get_full_path", fentry_get_full_path, 1);
     rb_define_method(gnoFileEntry, "set_modal", fentry_set_modal, 1);
-
-    /* Signals */
-    rb_define_const(gnoFileEntry, "SIGNAL_BROWSE_CLICKED",
-                    rb_str_new2("browse_clicked"));
 }
 

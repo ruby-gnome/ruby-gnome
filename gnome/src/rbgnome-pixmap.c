@@ -1,4 +1,5 @@
-/* $Id: rbgnome-pixmap.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-pixmap.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::Pixmap widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -19,9 +20,8 @@
  */
 
 #include "rbgnome.h"
-#include "rbgdkimlib.h"
 
-VALUE gnoPixmap;
+#define _SELF(self) GNOME_PIXMAP(RVAL2GOBJ(self))
 
 static VALUE
 pixmap_initialize(argc, argv, self)
@@ -32,56 +32,41 @@ pixmap_initialize(argc, argv, self)
     GtkWidget *pixmap = 0;
 
     switch (TYPE(argv[0])) {
-        case T_STRING:
-            switch (argc) {
-                case 1:
-                    pixmap = gnome_pixmap_new_from_file(STR2CSTR(argv[0]));
-                    break;
-                case 3:
-                    pixmap = gnome_pixmap_new_from_file_at_size(STR2CSTR(argv[0]),
-                                        NUM2INT(argv[1]), NUM2INT(argv[2]));
-                    break;
-            }
+      case T_STRING:
+        switch (argc) {
+          case 1:
+            pixmap = gnome_pixmap_new_from_file(RVAL2CSTR(argv[0]));
             break;
-        case T_ARRAY:
-        {
-            int i;
-            char **buf = ALLOCA_N(char*, RARRAY(argv[0])->len);
-            for (i=0; i<RARRAY(argv[0])->len; ++i) {
-                buf[i] = STR2CSTR(RARRAY(argv[0])->ptr[i]);
-            }
-            switch (argc) {
-                case 1:
-                    pixmap = gnome_pixmap_new_from_xpm_d(buf);
-                    break;
-                case 3:
-                    pixmap = gnome_pixmap_new_from_xpm_d_at_size(buf,
-                                        NUM2INT(argv[1]), NUM2INT(argv[2]));
-                    break;
-            }
-			break;
+          case 3:
+            pixmap = gnome_pixmap_new_from_file_at_size(RVAL2CSTR(argv[0]),
+                                                        NUM2INT(argv[1]), NUM2INT(argv[2]));
+            break;
         }
-        case T_OBJECT:
-            if (rb_obj_is_kind_of(argv[0], gnoPixmap)) {
-                pixmap = gnome_pixmap_new_from_gnome_pixmap(
-                            GNOME_PIXMAP(get_widget(argv[0])));
-            } else if (rb_obj_is_kind_of(argv[0], cImlibImage)) {
-                GdkImlibImage *im;
-                Data_Get_Struct(argv[0], GdkImlibImage, im);
-                    switch (argc) {
-                        case 1:
-                            pixmap = gnome_pixmap_new_from_imlib(im);
-                            break;
-                        case 3:
-                            pixmap = gnome_pixmap_new_from_imlib_at_size(im,
-                                        NUM2INT(argv[1]), NUM2INT(argv[2]));
-                            break;
-                    }
-            }
-			break;
-        }
-
-    set_widget(self, pixmap);
+        break;
+      case T_ARRAY:
+      {
+          int i;
+          const gchar **buf = ALLOCA_N(const gchar*, RARRAY(argv[0])->len);
+          for (i=0; i<RARRAY(argv[0])->len; ++i) {
+              buf[i] = RVAL2CSTR(RARRAY(argv[0])->ptr[i]);
+          }
+          switch (argc) {
+            case 1:
+              pixmap = gnome_pixmap_new_from_xpm_d(buf);
+              break;
+            case 3:
+              pixmap = gnome_pixmap_new_from_xpm_d_at_size(buf,
+                                                           NUM2INT(argv[1]), NUM2INT(argv[2]));
+              break;
+          }
+          break;
+      }
+      case T_OBJECT:
+        pixmap = gnome_pixmap_new_from_gnome_pixmap(GNOME_PIXMAP(RVAL2GOBJ(argv[0])));
+        break;
+    }
+    
+    RBGTK_INITIALIZE(self, pixmap);
     return Qnil;
 }
 
@@ -94,11 +79,10 @@ pixmap_load_file(argc, argv, self)
     VALUE filename, width, height;
 
     if (rb_scan_args(argc, argv, "12", &filename, &width, &height) == 1) {
-        gnome_pixmap_load_file(GNOME_PIXMAP(get_widget(self)),
-                               STR2CSTR(filename));
+        gnome_pixmap_load_file(_SELF(self), RVAL2CSTR(filename));
     } else {
-        gnome_pixmap_load_file_at_size(GNOME_PIXMAP(get_widget(self)),
-                                       STR2CSTR(filename),
+        gnome_pixmap_load_file_at_size(_SELF(self),
+                                       RVAL2CSTR(filename),
                                        NUM2INT(width),
                                        NUM2INT(height));
     }
@@ -113,53 +97,31 @@ pixmap_load_xpm_d(argc, argv, self)
 {
     VALUE xpm_data, width, height;
     int i;
-    char **buf;
+    const gchar **buf;
 
     rb_scan_args(argc, argv, "12", &xpm_data, &width, &height);
 
-    buf = ALLOCA_N(char*, RARRAY(xpm_data)->len);
+    buf = ALLOCA_N(const gchar*, RARRAY(xpm_data)->len);
     for (i=0; i<RARRAY(xpm_data)->len; ++i) {
-        buf[i] = STR2CSTR(RARRAY(argv[0])->ptr[i]);
+        buf[i] = RVAL2CSTR(RARRAY(argv[0])->ptr[i]);
     }
 
     if (argc == 1) {
-        gnome_pixmap_load_xpm_d(GNOME_PIXMAP(get_widget(self)), buf);
+        gnome_pixmap_load_xpm_d(_SELF(self), buf);
     } else {
-        gnome_pixmap_load_xpm_d_at_size(GNOME_PIXMAP(get_widget(self)), buf,
-                                        NUM2INT(width), NUM2INT(height));
-    }
-    return self;
-}
-
-static VALUE
-pixmap_load_imlib(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE xpm_data, width, height;
-    GdkImlibImage *im;
-
-    rb_scan_args(argc, argv, "12", &xpm_data, &width, &height);
-
-    Data_Get_Struct(argv[0], GdkImlibImage, im);
-
-    if (argc == 1) {
-        gnome_pixmap_load_imlib(GNOME_PIXMAP(get_widget(self)), im);
-    } else {
-        gnome_pixmap_load_imlib_at_size(GNOME_PIXMAP(get_widget(self)), im,
+        gnome_pixmap_load_xpm_d_at_size(_SELF(self), buf,
                                         NUM2INT(width), NUM2INT(height));
     }
     return self;
 }
 
 void
-Init_gnome_pixmap()
+Init_gnome_pixmap(mGnome)
+    VALUE mGnome;
 {
-    gnoPixmap = rb_define_class_under(mGnome, "Pixmap", gWidget);
+    VALUE gnoPixmap = G_DEF_CLASS(GNOME_TYPE_PIXMAP, "Pixmap", mGnome);
 
     rb_define_method(gnoPixmap, "initialize", pixmap_initialize, -1);
     rb_define_method(gnoPixmap, "load_file", pixmap_load_file, -1);
     rb_define_method(gnoPixmap, "load_xpm_d", pixmap_load_xpm_d, -1);
-    rb_define_method(gnoPixmap, "load_imlib", pixmap_load_imlib, -1);
 }

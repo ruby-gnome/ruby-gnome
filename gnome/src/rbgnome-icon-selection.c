@@ -1,4 +1,5 @@
-/* $Id: rbgnome-icon-selection.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-icon-selection.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::IconSelection widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,14 +21,13 @@
 
 #include "rbgnome.h"
 
-VALUE gnoIconSelection;
+#define _SELF(self) GNOME_ICON_SELECTION(RVAL2GOBJ(self))
 
 static VALUE
 icon_sel_init(self)
     VALUE self;
 {
-    GtkWidget* icon_selection = gnome_icon_selection_new();
-    set_widget(self, icon_selection);
+    RBGTK_INITIALIZE(self, gnome_icon_selection_new());
     return Qnil;
 }
 
@@ -35,69 +35,66 @@ static VALUE
 icon_sel_add_defaults(self)
     VALUE self;
 {
-    gnome_icon_selection_add_defaults(GNOME_ICON_SELECTION(get_widget(self)));
-    return Qnil;
+    gnome_icon_selection_add_defaults(_SELF(self));
+    return self;
 }
 
 static VALUE
 icon_sel_add_directory(self, dir)
     VALUE self, dir;
 {
-    gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(get_widget(self)),
-                                       STR2CSTR(dir));
-    return Qnil;
+    gnome_icon_selection_add_directory(_SELF(self),
+                                       RVAL2CSTR(dir));
+    return self;
 }
 
 static VALUE
 icon_sel_show_icons(self)
     VALUE self;
 {
-    gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(get_widget(self)));
-    return Qnil;
+    gnome_icon_selection_show_icons(_SELF(self));
+    return self;
 }
 
 static VALUE
 icon_sel_clear(self, not_shown)
     VALUE self, not_shown;
 {
-    gnome_icon_selection_clear(GNOME_ICON_SELECTION(get_widget(self)),
+    gnome_icon_selection_clear(_SELF(self),
                                RTEST(not_shown));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 icon_sel_get_icon(self, full_path)
     VALUE self, full_path;
 {
-    return rb_str_new2(
-        gnome_icon_selection_get_icon(GNOME_ICON_SELECTION(get_widget(self)),
-                                      RTEST(full_path)));
+    gchar *filename;
+    VALUE obj;
+
+    filename = gnome_icon_selection_get_icon(_SELF(self), RTEST(full_path));
+    SET_STR_AND_GFREE(obj, filename);
+    return obj;
 }
 
 static VALUE
 icon_sel_select_icon(self, filename)
     VALUE self, filename;
 {
-    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(get_widget(self)),
-                                     STR2CSTR(filename));
-    return Qnil;
+    gnome_icon_selection_select_icon(_SELF(self), RVAL2CSTR(filename));
+    return self;
 }
 
 void
-Init_gnome_icon_selection()
+Init_gnome_icon_selection(mGnome)
+    VALUE mGnome;
 {
-    gnoIconSelection = rb_define_class_under(mGnome, "IconSelection", gVBox);
+    VALUE gnoIconSelection = G_DEF_CLASS(GNOME_TYPE_ICON_SELECTION, "IconSelection", mGnome);
     rb_define_method(gnoIconSelection, "initialize", icon_sel_init, 0);
-    rb_define_method(gnoIconSelection, "add_defaults",
-            icon_sel_add_defaults, 0);
-    rb_define_method(gnoIconSelection, "add_directory",
-            icon_sel_add_directory, 1);
-    rb_define_method(gnoIconSelection, "show_icons",
-            icon_sel_show_icons, 0);
-    rb_define_method(gnoIconSelection, "clear",
-            icon_sel_clear, 1);
-    rb_define_method(gnoIconSelection, "get_icon",
-            icon_sel_get_icon, 1);
-    rb_define_method(gnoIconSelection, "select_icon",
-            icon_sel_select_icon, 1);
+    rb_define_method(gnoIconSelection, "add_defaults", icon_sel_add_defaults, 0);
+    rb_define_method(gnoIconSelection, "add_directory", icon_sel_add_directory, 1);
+    rb_define_method(gnoIconSelection, "show_icons", icon_sel_show_icons, 0);
+    rb_define_method(gnoIconSelection, "clear", icon_sel_clear, 1);
+    rb_define_method(gnoIconSelection, "get_icon", icon_sel_get_icon, 1);
+    rb_define_method(gnoIconSelection, "select_icon", icon_sel_select_icon, 1);
 }

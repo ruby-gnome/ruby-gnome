@@ -9,7 +9,7 @@ require "mkmf"
 #
 
 begin
-  config_cmd = with_config("gnome-config", "gnome-config")
+  config_cmd = with_config("pkg-config", "pkg-config libgnomeui-2.0")
   config_libs = "--libs"
   config_cflags = "--cflags"
   config_library = "gnomeui gtkxmhtml"
@@ -65,7 +65,7 @@ begin
   # create Makefiles
   #
   srcdir = File.dirname($0) == "." ? "." : "../src"
-  create_makefile("gnome", srcdir)
+  create_makefile("gnome2", srcdir)
   raise Interrupt if not FileTest.exist? "Makefile"
 
   mfile = File.open("Makefile", "a")

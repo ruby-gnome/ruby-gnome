@@ -1,4 +1,5 @@
-/* $Id: rbgnome-href.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-href.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::HRef widget for Ruby-Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,6 +21,8 @@
 
 #include "rbgnome.h"
 
+#define _SELF(self) GNOME_HREF(RVAL2GOBJ(self))
+
 /*
  * Class Gnome::HRef
  *
@@ -37,8 +40,6 @@
  *                                        +----Gnome::HRef
  */
 
-VALUE gnoHRef;
-
 static VALUE
 href_initialize(argc, argv, self)
     int argc;
@@ -49,9 +50,9 @@ href_initialize(argc, argv, self)
     GtkWidget *href;
 
     rb_scan_args(argc, argv, "02", &url, &label);
-    href = gnome_href_new(NIL_P(url)?0:STR2CSTR(url),
-			  NIL_P(label)?0:STR2CSTR(label));
-    set_widget(self, href);
+    href = gnome_href_new(NIL_P(url)?0:RVAL2CSTR(url),
+			  NIL_P(label)?0:RVAL2CSTR(label));
+    RBGTK_INITIALIZE(self, href);
     return Qnil;
 }
 
@@ -59,7 +60,7 @@ static VALUE
 href_set_url(self, url)
     VALUE self, url;
 {
-    gnome_href_set_url(GNOME_HREF(get_widget(self)), STR2CSTR(url));
+    gnome_href_set_url(_SELF(self), RVAL2CSTR(url));
     return self;
 }
 
@@ -67,14 +68,14 @@ static VALUE
 href_get_url(self)
     VALUE self;
 {
-    return rb_str_new2(gnome_href_get_url(GNOME_HREF(get_widget(self))));
+    return rb_str_new2(gnome_href_get_url(_SELF(self)));
 }
 
 static VALUE
 href_set_label(self, label)
     VALUE self, label;
 {
-    gnome_href_set_label(GNOME_HREF(get_widget(self)), STR2CSTR(label));
+    gnome_href_set_label(_SELF(self), RVAL2CSTR(label));
     return self;
 }
 
@@ -82,13 +83,14 @@ static VALUE
 href_get_label(self)
     VALUE self;
 {
-    return rb_str_new2(gnome_href_get_label(GNOME_HREF(get_widget(self))));
+    return rb_str_new2(gnome_href_get_label(_SELF(self)));
 }
 
 void
-Init_gnome_href()
+Init_gnome_href(mGnome)
+    VALUE mGnome;
 {
-    gnoHRef = rb_define_class_under(mGnome, "HRef", gButton);
+    VALUE gnoHRef = G_DEF_CLASS(GNOME_TYPE_HREF, "HRef", mGnome);
 
     rb_define_method(gnoHRef, "initialize", href_initialize, -1);
     rb_define_method(gnoHRef, "set_url", href_set_url, 1);

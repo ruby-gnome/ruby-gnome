@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-layout.c,v 1.1 2002/09/25 14:10:04 tkubo Exp $ */
+/* $Id: rbbonobo-dock-layout.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
 
-/* Gnome::DockLayout class for Ruby/Gnome
+/* Bonobo::DockLayout class for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
  *
  * This library is free software; you can redistribute it and/or
@@ -21,29 +21,29 @@
 
 #include "rbgnome.h"
 
+#define _SELF(self) BONOBO_DOCK_LAYOUT(RVAL2GOBJ(self))
+static VALUE bnbDockLayoutItem;
+
 /*
- * Class Gnome::DockLayout
+ * Class Bonobo::DockLayout
  *
  * Hierarchy:
  *
  *   Object
- *     +----Gtk::Object
- *            +----Gnome::DockLayout
+ *     +----Glib::Object
+ *            +----Bonobo::DockLayout
  */
-VALUE gnoDockLayout;
-
-VALUE gnoDockLayoutItem;
 
 static VALUE
 docklayout_initialize(self)
     VALUE self;
 {
-    set_gobject(self, GTK_OBJECT(gnome_dock_layout_new()));
+    G_INITIALIZE(self, bonobo_dock_layout_new());
     return Qnil;
 }
 
 /*
- * Gnome::DockLayout#add_item(item, placement,
+ * Bonobo::DockLayout#add_item(item, placement,
  *                band_num, band_position, offset)
  *
  * Add item to layout with the specified parameters.
@@ -62,17 +62,15 @@ docklayout_add_item(self, item, placement,
     VALUE band_num, band_position, offset;
 {
     gboolean result;
-    result = gnome_dock_layout_add_item(GNOME_DOCK_LAYOUT(get_widget(self)),
-                                        GNOME_DOCK_ITEM(get_widget(item)),
-                                        NUM2INT(placement),
-                                        NUM2INT(band_num),
-                                        NUM2INT(band_position),
-                                        NUM2INT(offset));
-
+    result = bonobo_dock_layout_add_item(_SELF(self),
+                                         BONOBO_DOCK_ITEM(RVAL2GOBJ(item)),
+                                         NUM2INT(placement),
+                                         NUM2INT(band_num),
+                                         NUM2INT(band_position),
+                                         NUM2INT(offset));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
@@ -81,17 +79,14 @@ docklayout_add_floating_item(self, item, x, y, orientation)
     VALUE self, item, x, y, orientation;
 {
     gboolean result;
-    result = gnome_dock_layout_add_floating_item(
-        GNOME_DOCK_LAYOUT(get_widget(self)),
-        GNOME_DOCK_ITEM(get_widget(item)),
-        NUM2INT(x),
-        NUM2INT(y),
-        NUM2INT(orientation));
-
+    result = bonobo_dock_layout_add_floating_item(_SELF(self),
+                                                  BONOBO_DOCK_ITEM(RVAL2GOBJ(item)),
+                                                  NUM2INT(x),
+                                                  NUM2INT(y),
+                                                  NUM2INT(orientation));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
@@ -99,18 +94,16 @@ static VALUE
 docklayout_get_item(self, item)
     VALUE self, item;
 {
-    GnomeDockLayoutItem *result;
+    BonoboDockLayoutItem *result;
 
     if (TYPE(item) == T_STRING) {
-        result = gnome_dock_layout_get_item_by_name(
-            GNOME_DOCK_LAYOUT(get_widget(self)),
-            STR2CSTR(item));
+        result = bonobo_dock_layout_get_item_by_name(_SELF(self),
+                                                     RVAL2CSTR(item));
     } else {
-        result = gnome_dock_layout_get_item(
-            GNOME_DOCK_LAYOUT(get_widget(self)),
-            GNOME_DOCK_ITEM(get_widget(item)));
+        result = bonobo_dock_layout_get_item(_SELF(self),
+                                             BONOBO_DOCK_ITEM(RVAL2GOBJ(item)));
     }
-    return Data_Wrap_Struct(gnoDockLayoutItem, 0, 0, result);
+    return Data_Wrap_Struct(bnbDockLayoutItem, 0, 0, result);
 }
 
 static VALUE
@@ -120,13 +113,13 @@ docklayout_remove_item(self, item)
     gboolean result;
 
     if (TYPE(item) == T_STRING) {
-        result = gnome_dock_layout_remove_item_by_name(
-            GNOME_DOCK_LAYOUT(get_widget(self)),
-            STR2CSTR(item));
+        result = bonobo_dock_layout_remove_item_by_name(
+            _SELF(self),
+            RVAL2CSTR(item));
     } else {
-        result = gnome_dock_layout_remove_item(
-            GNOME_DOCK_LAYOUT(get_widget(self)),
-            GNOME_DOCK_ITEM(get_widget(item)));
+        result = bonobo_dock_layout_remove_item(
+            _SELF(self),
+            BONOBO_DOCK_ITEM(RVAL2GOBJ(item)));
     }
 
     if (!result) {
@@ -141,8 +134,8 @@ docklayout_create_string(self)
     VALUE self;
 {
     gchar *result;
-    result = gnome_dock_layout_create_string(
-        GNOME_DOCK_LAYOUT(get_widget(self)));
+    result = bonobo_dock_layout_create_string(
+        _SELF(self));
     return rb_str_new2(result);
 }
 
@@ -151,9 +144,9 @@ docklayout_parse_string(self, string)
     VALUE self, string;
 {
     gboolean result;
-    result = gnome_dock_layout_parse_string(
-        GNOME_DOCK_LAYOUT(get_widget(self)),
-        STR2CSTR(string));
+    result = bonobo_dock_layout_parse_string(
+        _SELF(self),
+        RVAL2CSTR(string));
 
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
@@ -167,32 +160,30 @@ docklayout_add_to_dock(self, dock)
     VALUE self, dock;
 {
     gboolean result;
-    result = gnome_dock_layout_add_to_dock(
-        GNOME_DOCK_LAYOUT(get_widget(self)),
-        GNOME_DOCK(get_widget(dock)));
-
+    result = bonobo_dock_layout_add_to_dock(_SELF(self),
+                                            BONOBO_DOCK(RVAL2GOBJ(dock)));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
 void
-Init_gnome_dock_layout()
+Init_bonobo_dock_layout(mBonobo)
+    VALUE mBonobo;
 {
-    gnoDockLayout = rb_define_class_under(mGnome, "DockLayout", gObject);
-    gnoDockLayoutItem = rb_define_class_under(mGnome, "DockLayoutItem", rb_cData);
+    VALUE bnbDockLayout = G_DEF_CLASS(BONOBO_TYPE_DOCK_LAYOUT, "DockLayout", mBonobo);
+    bnbDockLayoutItem = rb_define_class_under(mBonobo, "DockLayoutItem", rb_cData);
 
     /*
      * instance methods
      */
-    rb_define_method(gnoDockLayout, "initialize", docklayout_initialize, 0);
-    rb_define_method(gnoDockLayout, "add_item", docklayout_add_item, 5);
-    rb_define_method(gnoDockLayout, "add_floating_item", docklayout_add_floating_item, 4);
-    rb_define_method(gnoDockLayout, "get_item", docklayout_get_item, 1);
-    rb_define_method(gnoDockLayout, "remove_item", docklayout_remove_item, 1);
-    rb_define_method(gnoDockLayout, "create_string", docklayout_create_string, 0);
-    rb_define_method(gnoDockLayout, "parse_string", docklayout_parse_string, 1);
-    rb_define_method(gnoDockLayout, "add_to_dock", docklayout_add_to_dock, 1);
+    rb_define_method(bnbDockLayout, "initialize", docklayout_initialize, 0);
+    rb_define_method(bnbDockLayout, "add_item", docklayout_add_item, 5);
+    rb_define_method(bnbDockLayout, "add_floating_item", docklayout_add_floating_item, 4);
+    rb_define_method(bnbDockLayout, "get_item", docklayout_get_item, 1);
+    rb_define_method(bnbDockLayout, "remove_item", docklayout_remove_item, 1);
+    rb_define_method(bnbDockLayout, "create_string", docklayout_create_string, 0);
+    rb_define_method(bnbDockLayout, "parse_string", docklayout_parse_string, 1);
+    rb_define_method(bnbDockLayout, "add_to_dock", docklayout_add_to_dock, 1);
 }

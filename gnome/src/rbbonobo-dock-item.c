@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-item.c,v 1.1 2002/09/25 14:10:04 tkubo Exp $ */
+/* $Id: rbbonobo-dock-item.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
 
-/* Gnome::DockItem widget for Ruby/Gnome
+/* Bonobo::DockItem widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
  *
  * This library is free software; you can redistribute it and/or
@@ -21,24 +21,24 @@
 
 #include "rbgnome.h"
 
-VALUE gnoDockItem;
+#define _SELF(self) BONOBO_DOCK_ITEM(RVAL2GOBJ(self))
 
 /*
- * Gnome::DockItem::initialize(name, behavior)
+ * Bonobo::DockItem::initialize(name, behavior)
  *
- * Initialize a new GnomeDockItem named @name, with the
+ * Initialize a new BonoboDockItem named @name, with the
  * specified @behavior.
  */
 static VALUE
 dockitem_initialize(self, name, behavior)
     VALUE self, name, behavior;
 {
-    set_widget(self, gnome_dock_item_new(STR2CSTR(name), NUM2INT(behavior)));
+    RBGTK_INITIALIZE(self, bonobo_dock_item_new(RVAL2CSTR(name), NUM2INT(behavior)));
     return Qnil;
 }
 
 /*
- * Gnome::DockItem::get_child
+ * Bonobo::DockItem::get_child
  *
  * Retrieve the child.
  */
@@ -46,13 +46,11 @@ static VALUE
 dockitem_get_child(self)
     VALUE self;
 {
-    GtkWidget* result;
-    result = gnome_dock_item_get_child(GNOME_DOCK_ITEM(get_widget(self)));
-    return make_gnobject_auto_type((GtkObject*)result);
+    return GOBJ2RVAL(bonobo_dock_item_get_child(_SELF(self)));
 }
 
 /*
- * Gnome::DockItem::get_name
+ * Bonobo::DockItem::get_name
  *
  * Retrieve the name.
  */
@@ -61,12 +59,14 @@ dockitem_get_name(self)
     VALUE self;
 {
     char* result;
-    result = gnome_dock_item_get_name(GNOME_DOCK_ITEM(get_widget(self)));
-    return rb_str_new2(result);
+    VALUE obj;
+    result = bonobo_dock_item_get_name(_SELF(self));
+    SET_STR_AND_GFREE(obj, result);
+    return obj;
 }
 
 /*
- * Gnome::DockItem::set_shadow_type(type)
+ * Bonobo::DockItem::set_shadow_type(type)
  *
  * Set the shadow type.
  */
@@ -74,13 +74,12 @@ static VALUE
 dockitem_set_shadow_type(self, type)
     VALUE self, type;
 {
-    gnome_dock_item_set_shadow_type(GNOME_DOCK_ITEM(get_widget(self)),
-                                    NUM2INT(type));
+    bonobo_dock_item_set_shadow_type(_SELF(self), NUM2INT(type));
     return self;
 }
 
 /*
- * Gnome::DockItem#get_shadow_type
+ * Bonobo::DockItem#get_shadow_type
  *
  * Retrieve the shadow type.
  */
@@ -89,13 +88,12 @@ dockitem_get_shadow_type(self)
     VALUE self;
 {
     GtkShadowType result;
-    result = gnome_dock_item_get_shadow_type(
-        GNOME_DOCK_ITEM(get_widget(self)));
+    result = bonobo_dock_item_get_shadow_type(_SELF(self));
     return INT2FIX(result);
 }
 
 /*
- * Gnome::DockItem#set_orientation(orientation)
+ * Bonobo::DockItem#set_orientation(orientation)
  * 
  * Set the orientation.
  */
@@ -104,17 +102,16 @@ dockitem_set_orientation(self, orientation)
     VALUE self, orientation;
 {
     gboolean result;
-    result = gnome_dock_item_set_orientation(GNOME_DOCK_ITEM(get_widget(self)),
-                                             NUM2INT(orientation));
+    result = bonobo_dock_item_set_orientation(_SELF(self),
+                                              NUM2INT(orientation));
     if (!result) {
         rb_raise(rb_eRuntimeError, "operation failed\n");
     }
-
     return self;
 }
 
 /*
- * Gnome::DockItem#get_orientation
+ * Bonobo::DockItem#get_orientation
  * 
  * Retrieve the orientation.
  */
@@ -123,13 +120,12 @@ dockitem_get_orientation(self)
     VALUE self;
 {
     GtkOrientation result;
-    result = gnome_dock_item_get_orientation(
-        GNOME_DOCK_ITEM(get_widget(self)));
+    result = bonobo_dock_item_get_orientation(_SELF(self));
     return INT2FIX(result);
 }
 
 /*
- * Gnome::DockItem#get_behavior
+ * Bonobo::DockItem#get_behavior
  *
  * Retrieve the behavior.
  */
@@ -137,40 +133,34 @@ static VALUE
 dockitem_get_behavior(self)
     VALUE self;
 {
-    GnomeDockItemBehavior result;
-    result = gnome_dock_item_get_behavior(
-        GNOME_DOCK_ITEM(get_widget(self)));
+    BonoboDockItemBehavior result;
+    result = bonobo_dock_item_get_behavior(_SELF(self));
     return INT2FIX(result);
 }
 
 void
-Init_gnome_dock_item()
+Init_bonobo_dock_item(mBonobo)
+    VALUE mBonobo;
 {
-    gnoDockItem = rb_define_class_under(mGnome, "DockItem", gBin);
+    VALUE bnbDockItem = G_DEF_CLASS(BONOBO_TYPE_DOCK_ITEM, "DockItem", mBonobo);
 
-    /* GnomeDockItemBehavior */
-    rb_define_const(gnoDockItem, "BEH_NORMAL", INT2FIX(GNOME_DOCK_ITEM_BEH_NORMAL));
-    rb_define_const(gnoDockItem, "BEH_EXCLUSIVE", INT2FIX(GNOME_DOCK_ITEM_BEH_EXCLUSIVE));
-    rb_define_const(gnoDockItem, "BEH_NEVER_FLOATING", INT2FIX(GNOME_DOCK_ITEM_BEH_NEVER_FLOATING));
-    rb_define_const(gnoDockItem, "BEH_NEVER_VERTICAL", INT2FIX(GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL));
-    rb_define_const(gnoDockItem, "BEH_NEVER_HORIZONTAL", INT2FIX(GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL));
-    rb_define_const(gnoDockItem, "BEH_LOCKED", INT2FIX(GNOME_DOCK_ITEM_BEH_LOCKED));
+    /* BonoboDockItemBehavior */
+    rb_define_const(bnbDockItem, "BEH_NORMAL", INT2FIX(BONOBO_DOCK_ITEM_BEH_NORMAL));
+    rb_define_const(bnbDockItem, "BEH_EXCLUSIVE", INT2FIX(BONOBO_DOCK_ITEM_BEH_EXCLUSIVE));
+    rb_define_const(bnbDockItem, "BEH_NEVER_FLOATING", INT2FIX(BONOBO_DOCK_ITEM_BEH_NEVER_FLOATING));
+    rb_define_const(bnbDockItem, "BEH_NEVER_VERTICAL", INT2FIX(BONOBO_DOCK_ITEM_BEH_NEVER_VERTICAL));
+    rb_define_const(bnbDockItem, "BEH_NEVER_HORIZONTAL", INT2FIX(BONOBO_DOCK_ITEM_BEH_NEVER_HORIZONTAL));
+    rb_define_const(bnbDockItem, "BEH_LOCKED", INT2FIX(BONOBO_DOCK_ITEM_BEH_LOCKED));
 
     /*
      * instance methods
      */
-    rb_define_method(gnoDockItem, "initialize", dockitem_initialize, 2);
-    rb_define_method(gnoDockItem, "get_child", dockitem_get_child, 0);
-    rb_define_method(gnoDockItem, "get_name", dockitem_get_name, 0);
-    rb_define_method(gnoDockItem, "set_shadow_type", dockitem_set_shadow_type, 1);
-    rb_define_method(gnoDockItem, "get_shadow_type", dockitem_get_shadow_type, 0);
-    rb_define_method(gnoDockItem, "set_orientation", dockitem_set_orientation, 1);
-    rb_define_method(gnoDockItem, "get_orientation", dockitem_get_orientation, 0);
-    rb_define_method(gnoDockItem, "get_behavior", dockitem_get_behavior, 0);
-
-    /* Signals */
-    rb_define_const(gnoDockItem, "SIGNAL_DOCK_DRAG_BEGIN", rb_str_new2("dock_drag_begin"));
-    rb_define_const(gnoDockItem, "SIGNAL_DOCK_DRAG_MOTION", rb_str_new2("dock_drag_motion"));
-    rb_define_const(gnoDockItem, "SIGNAL_DOCK_DRAG_END", rb_str_new2("dock_drag_end"));
-    rb_define_const(gnoDockItem, "SIGNAL_DOCK_DETACH", rb_str_new2("dock_detach"));
+    rb_define_method(bnbDockItem, "initialize", dockitem_initialize, 2);
+    rb_define_method(bnbDockItem, "get_child", dockitem_get_child, 0);
+    rb_define_method(bnbDockItem, "get_name", dockitem_get_name, 0);
+    rb_define_method(bnbDockItem, "set_shadow_type", dockitem_set_shadow_type, 1);
+    rb_define_method(bnbDockItem, "get_shadow_type", dockitem_get_shadow_type, 0);
+    rb_define_method(bnbDockItem, "set_orientation", dockitem_set_orientation, 1);
+    rb_define_method(bnbDockItem, "get_orientation", dockitem_get_orientation, 0);
+    rb_define_method(bnbDockItem, "get_behavior", dockitem_get_behavior, 0);
 }

@@ -1,4 +1,5 @@
-/* $Id: rbgnome-url.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* $Id: rbgnome-url.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
 
 /* Gnome::URL module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,19 +21,32 @@
 
 #include "rbgnome.h"
 
-VALUE mGnomeURL;
-
 static VALUE
 url_show(self, url)
     VALUE self, url;
 {
-    gnome_url_show(STR2CSTR(url));
-    return Qnil;
+    GError *error = NULL;
+    VALUE exc;
+
+    if (gnome_url_show(RVAL2CSTR(url), &error)) {
+        /* success */
+        return Qnil;
+    }
+    /* fail */
+    if (error && error->message != NULL) {
+        exc = rb_exc_new2(rb_eRuntimeError, error->message);
+    } else {
+        exc = rb_exc_new2(rb_eRuntimeError, "url_show error");
+    }
+    if (error)
+        g_error_free(error);
+    rb_exc_raise(exc);
 }
 
 void
-Init_gnome_url()
+Init_gnome_url(mGnome)
+     VALUE mGnome;
 {
-    mGnomeURL = rb_define_module_under(mGnome, "URL");
+    VALUE mGnomeURL = rb_define_module_under(mGnome, "URL");
     rb_define_module_function(mGnomeURL, "show", url_show, 1);
 }
