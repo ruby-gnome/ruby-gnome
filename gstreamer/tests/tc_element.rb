@@ -119,5 +119,16 @@ class TC_elements < Test::Unit::TestCase
         a.each { |e| assert_instance_of(Gst::Bin, e) }
         assert_nil a.collect { |e| e.name }.uniq! 
     end
+    def test_bin2
+        assert_instance_of(Gst::Bin, b = Gst::Bin.new)
+        assert_instance_of(Gst::Element, e1 = Gst::ElementFactory.make("fakesrc", "fake1")) 
+        assert_instance_of(Gst::Element, e2 = Gst::ElementFactory.make("fakesrc", "fake2")) 
+        b.add(e1, e2)
+        assert b.size == 2
+        [ "fake1", "fake2" ].each do |x|
+            assert_instance_of(Gst::Element, b.get_by_name(x))
+            assert_instance_of(Gst::Element, b.get_by_name_recurse_up(x))
+        end
+    end
 end
 
