@@ -3,8 +3,8 @@
 
   rbgtktexttag.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: mutoh $
+  $Date: 2003/07/21 16:09:59 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -38,17 +38,16 @@ set_priority(self, priority)
     return priority;
 }
 
-/*
-gboolean    gtk_text_tag_event              (GtkTextTag *tag,
-                                             GObject *event_object,
-                                             GdkEvent *event,
-                                             const GtkTextIter *iter);
-struct      GtkTextAppearance;
-GtkTextAttributes* gtk_text_attributes_copy (GtkTextAttributes *src);
-GtkTextAttributes* gtk_text_attributes_new  (void);
-void        gtk_text_attributes_copy_values (GtkTextAttributes *src,
-                                             GtkTextAttributes *dest);
-*/
+static VALUE
+event(self, event_object, event, iter)
+    VALUE self, event_object, event, iter;
+{
+    gboolean ret = gtk_text_tag_event(GTK_TEXT_TAG(RVAL2GOBJ(self)), 
+                                      RVAL2GOBJ(event_object),
+                                      RVAL2GEV(event),
+                                      (GtkTextIter*)RVAL2BOXED(iter, GTK_TYPE_TEXT_ITER));
+    return ret ? Qtrue : Qfalse;
+}
 
 void
 Init_gtk_texttag()
@@ -57,9 +56,10 @@ Init_gtk_texttag()
     rb_define_method(gTextTag, "initialize", initialize, -1);
     rb_define_method(gTextTag, "priority", get_priority, 0);
     rb_define_method(gTextTag, "set_priority", set_priority, 1);
+    rb_define_method(gTextTag, "event", event, 3);
 
     G_DEF_SETTERS(gTextTag);
 
-	 /* GtkWrapMode */
+    /* GtkWrapMode */
     G_DEF_CONSTANTS(gTextTag, GTK_TYPE_WRAP_MODE, "GTK_");
 }
