@@ -1,3 +1,8 @@
+2003-07-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_closure.c: enhance warning message of rclosure_marshal() 
+	which is used in GLib::Instantiatable#signal_connect().
+
 2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c, src/rbgobj_type.c, src/global.h: enable

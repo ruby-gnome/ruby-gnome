@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2003/07/18 05:27:21 $
+  $Author: mutoh $
+  $Date: 2003/07/20 16:58:54 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -89,7 +89,7 @@ rclosure_marshal(GClosure*       closure,
 {
     struct marshal_arg arg;
     int state;
-
+ 
     arg.closure         = closure;
     arg.return_value    = return_value;
     arg.n_param_values  = n_param_values;
@@ -99,8 +99,13 @@ rclosure_marshal(GClosure*       closure,
 
     rb_protect((VALUE (*)())&rclosure_marshal_body, (VALUE)&arg, &state);
 
-    if (state)
-        rb_warn("unexpected jump occured in GClosure invocation");
+    if (state){
+        char buf[BUFSIZ];
+        snprintf(buf, BUFSIZ, 
+                 "%s:%d warning: unexpected jump occured in GClosure invocation\n",
+                 ruby_sourcefile, ruby_sourceline);
+        rb_write_deferr(buf);
+    }
 }
 
 static VALUE rclosure_marker_list;
