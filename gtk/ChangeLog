@@ -4,6 +4,7 @@
 
 2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkx11.c: Added.
 	* src/rbgtktextbuffer.c: Gtk::TextBuffer#create_tag 
 	accept nil as a tag_name. 
 	* src/rbgdkthreads.c: Check g_thread_supported() before
