@@ -6,6 +6,7 @@
 	* rbglade.c: Remove rb_require.
 	* lib/libglade2.rb: Add file.
 	* ChangeLog: Change date format.
+	* COPYING.LIB: Add file.
 
 2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
