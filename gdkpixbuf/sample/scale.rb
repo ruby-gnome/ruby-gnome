@@ -5,10 +5,9 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: scale.rb,v 1.3 2002/11/05 11:20:46 mutoh Exp $
+  $Id: scale.rb,v 1.4 2002/11/19 13:07:24 mutoh Exp $
 =end
 
-require 'gtk2'
 require 'gdk_pixbuf2'
 
 filename = ARGV[0]
@@ -18,9 +17,11 @@ unless filename
 end
 
 Gtk.init
-pixbuf =  Gdk::Pixbuf.new(filename)
 
-pixmap, mask = pixbuf.scale(500, 200).render_pixmap_and_mask
+src =  Gdk::Pixbuf.new(filename)
+
+pixmap, mask = src.scale(300, 300, 
+			 Gdk::Pixbuf::INTERP_HYPER).render_pixmap_and_mask
 pw = Gtk::Image.new(pixmap, mask)
 pw.show
 

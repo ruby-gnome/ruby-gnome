@@ -25,22 +25,73 @@
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s))
 
+/****************************************************/
+/* Common */
+
+/****************************************************/
+/* File opening */
 static VALUE
 initialize(self, file_name)
     VALUE self, file_name;
 {
-    GdkPixbuf *buf;
+    GdkPixbuf* buf;
+    GError* error = NULL;
 
     if (TYPE(file_name) != T_STRING) {
 	rb_raise(rb_eArgError, "argument must be string");
     }
 
-    buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr, NULL);
+    buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr, &error);
     if (buf == NULL)
-	rb_raise(rb_eRuntimeError, "error occurred in loading image");
+	RAISE_GERROR(error);
 
     G_INITIALIZE(self, buf);
     return Qnil;
+}
+
+/****************************************************/
+/* File saving */
+static VALUE
+save(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE filename, type, options, key;
+    GError* error = NULL;
+    gboolean result;
+    gchar** keys = NULL;
+    gchar** values = NULL;
+    gint len, i;
+    ID to_s = rb_intern("to_s");
+    VALUE ary;
+
+    rb_scan_args(argc, argv, "21", &filename, &type, &options);
+
+    if (options != Qnil){
+        Check_Type(options, T_HASH);
+        ary = rb_funcall(options, rb_intern("to_a"), 0);
+        len = RARRAY(ary)->len;
+        keys = ALLOCA_N(gchar*, len + 1);
+        values = ALLOCA_N(gchar*, len + 1);
+        for (i = 0; i < len; i++) {
+            key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            if (SYMBOL_P(key)) {
+               keys[i] = rb_id2name(SYM2ID(key));
+            } else {
+                keys[i] = RVAL2CSTR(key);
+            }
+            values[i] = RVAL2CSTR(rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0));
+        }
+        keys[len] = NULL;
+        values[len] = NULL;
+    }
+    result = gdk_pixbuf_savev(_SELF(self), RVAL2CSTR(filename),
+                              RVAL2CSTR(type), keys, values, &error);
+    if (! result)
+        RAISE_GERROR(error);
+
+    return self;
 }
 
 static VALUE
@@ -122,7 +173,7 @@ scale(argc, argv, self)
     VALUE ret;
     VALUE args[10];
     int dest_width, dest_height;
-    GdkInterpType interp_type = GDK_INTERP_NEAREST;
+    GdkInterpType interp_type = GDK_INTERP_BILINEAR;
     GdkPixbuf* dest = NULL;
 
     rb_scan_args(argc, argv, "28", &args[0], &args[1], &args[2], &args[3], &args[4], &args[5], &args[6], &args[7], &args[8], &args[9]);
@@ -261,6 +312,7 @@ void Init_gdk_pixbuf2()
     /*
      * File saving
      */
+    rb_define_method(gdkPixbuf, "save", save, -1);
     /* 
      * Image Data in Memory
      */
