@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/18 13:53:55 $
+  $Date: 2002/09/21 10:54:49 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -247,9 +247,12 @@ rbgobj_define_property_accessors(klass)
         }
 
         if (pspec->flags & G_PARAM_READABLE){
-            g_string_append_printf(source, 
-                                   "def %s; get_property('%s'); end\n",
-                                   prop_name, pspec->name);
+            g_string_append_printf(
+                source, 
+                "def %s%s; get_property('%s'); end\n",
+                prop_name,
+                (G_PARAM_SPEC_VALUE_TYPE(pspec) == G_TYPE_BOOLEAN) ? "?" : "",
+                pspec->name);
         }
 
         if (pspec->flags & G_PARAM_WRITABLE){
