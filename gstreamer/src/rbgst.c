@@ -41,6 +41,8 @@ Init_gst_classes (void)
     extern void Init_gst_eventsegmentseek (void);
     extern void Init_gst_eventsize (void);
     extern void Init_gst_format (void);
+    extern void Init_gst_index (void);
+    extern void Init_gst_indexentry (void);
     extern void Init_gst_indexfactory (void);
     extern void Init_gst_object (void);
     extern void Init_gst_pad (void);
@@ -74,6 +76,8 @@ Init_gst_classes (void)
     Init_gst_eventsegmentseek ();
     Init_gst_eventsize ();
     Init_gst_format ();
+    Init_gst_index ();
+    Init_gst_indexentry ();
     Init_gst_indexfactory ();
     Init_gst_object ();
     Init_gst_pad ();

@@ -34,14 +34,12 @@ extern VALUE mGst;
 /* Gst::EventSeek class (needed for inheritance) */
 extern VALUE cGstEventSeek;
 
-/* Is debug mode activated? */
-extern gboolean debug_mode;
-
 #define RBGST_INITIALIZE(obj,gstobj) \
     (rbgst_initialize_gstobject(obj, GST_OBJECT(gstobj)))
 
 #define GST_EVENT_MASK(o)   ((GstEventMask *) o)
 #define GST_FORMAT2(o)      ((GstFormat *) o)
+#define GST_INDEX_ENTRY(o)  ((GstIndexEntry *) o)
 #define GST_QUERY_TYPE2(o)  ((GstQueryType *) o)
 #define GST_TYPE(o)         ((GstType *) o)
 
@@ -61,6 +59,8 @@ extern gboolean debug_mode;
 #define RGST_EVENT(o)               (GST_EVENT(RVAL2BOXED(o, GST_TYPE_EVENT)))
 #define RGST_EVENT_MASK(o)          (GST_EVENT_MASK(RVAL2BOXED(o, GST_TYPE_EVENT_MASK)))
 #define RGST_FORMAT(o)              (GST_FORMAT2(RVAL2BOXED(o, GST_TYPE_FORMAT2)))
+#define RGST_INDEX(o)               (GST_INDEX(RVAL2GOBJ(o)))
+#define RGST_INDEX_ENTRY(o)         (GST_INDEX_ENTRY(RVAL2BOXED(o, GST_TYPE_INDEX_ENTRY)))
 #define RGST_INDEX_FACTORY(o)       (GST_INDEX_FACTORY(RVAL2GOBJ(o)))
 #define RGST_OBJECT(o)              (GST_OBJECT(RVAL2GOBJ(o)))
 #define RGST_PAD(o)                 (GST_PAD(RVAL2GOBJ(o)))
@@ -86,6 +86,8 @@ extern gboolean debug_mode;
 #define RGST_EVENT_NEW(o)               (BOXED2RVAL(GST_EVENT(o), GST_TYPE_EVENT))
 #define RGST_EVENT_MASK_NEW(o)          (BOXED2RVAL(GST_EVENT_MASK(o), GST_TYPE_EVENT_MASK))
 #define RGST_FORMAT_NEW(o)              (BOXED2RVAL(GST_FORMAT2(o), GST_TYPE_FORMAT2))
+#define RGST_INDEX_NEW(o)               (RGST_GOBJ_NEW(GST_INDEX(o)))
+#define RGST_INDEX_ENTRY_NEW(o)         (BOXED2RVAL(GST_INDEX_ENTRY(o), GST_TYPE_INDEX_ENTRY))
 #define RGST_INDEX_FACTORY_NEW(o)       (RGST_GOBJ_NEW(GST_INDEX_FACTORY(o)))
 #define RGST_OBJECT_NEW(o)              (RGST_GOBJ_NEW(GST_OBJECT(o)))
 #define RGST_PAD_NEW(o)                 (RGST_GOBJ_NEW(GST_PAD(o)))

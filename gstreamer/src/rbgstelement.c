@@ -850,6 +850,37 @@ rb_gst_element_adjust_time (VALUE self, VALUE diff)
     return self;
 }
 
+/* 
+ * Method: index
+ *
+ * Gets the index from the element. 
+ *
+ * Returns: a Gst::Index or nil when no index was set on the element.
+ */
+static VALUE
+rb_gst_element_get_index (VALUE self)
+{
+    GstIndex *index = gst_element_get_index (RGST_ELEMENT (self));
+
+    return index != NULL ? RGST_INDEX_NEW (index)
+        : Qnil;
+}
+
+/*
+ * Method: set_index(index)
+ * index: the index to set, as a Gst::Index.
+ * 
+ * Sets the specified index on the element.
+ *
+ * Returns: self. 
+ */
+static VALUE
+rb_gst_element_set_index (VALUE self, VALUE index)
+{
+    gst_element_set_index (RGST_ELEMENT (self), RGST_INDEX (index));
+    return self;
+}
+
 void
 Init_gst_element (void)
 {
@@ -892,6 +923,8 @@ Init_gst_element (void)
     rb_define_method (c, "indexable?", rb_gst_element_is_indexable, 0);
     rb_define_method (c, "query", rb_gst_element_query, -1);
     rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
+    rb_define_method (c, "index", rb_gst_element_get_index, 0);
+    rb_define_method (c, "set_index", rb_gst_element_set_index, 1);
 
     rb_define_method (c, "complex?", rb_gst_element_is_complex, 0);
     rb_define_method (c, "decoupled?", rb_gst_element_is_decoupled, 0);
