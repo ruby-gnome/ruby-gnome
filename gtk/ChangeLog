@@ -1,5 +1,10 @@
 2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkimagemenuitem.c: Support mnemonic label, stockitem in #initialize.
+	* src/rbgtkmenuitem.c, rbgtkradiomenuitem.c, rbgtkcheckmenuitem.c: 
+	Support mnemonic label in #initialize.
+	* src/rbgtkmenuitem.c: Add Gtk::MenuItem#set_accel_path, #remove_submenu, 
+	#toggle_size_request.
 	* sample/misc/cursor.rb: Code clean up.
 	* sample/misc/button2.rb: Add a file.
 	* sample/misc/togglebutton.rb, checkbutton.rb, radiobutton.rb: 

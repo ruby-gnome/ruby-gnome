@@ -4,7 +4,7 @@
   rbgtkradiomenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/10/21 17:29:30 $
+  $Date: 2002/12/01 04:33:45 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,40 +20,46 @@ rmitem_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE arg1, arg2;
+    VALUE arg1, arg2, arg3;
     GtkWidget *widget;
     GSList *list = NULL;
     char *label = NULL;
+    char *mnemonic = NULL;
     
-    if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
+    if (rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3) > 0 &&
         TYPE(arg1) == T_STRING) {
-        label = RSTRING(arg1)->ptr;
-    }
-    else {
+        if (NIL_P(arg2) || RTEST(arg2)){
+            mnemonic = RVAL2CSTR(arg1);
+        } else {
+            label = RVAL2CSTR(arg1);
+        }
+    } else {
         if (!NIL_P(arg2)) {
-            label = RVAL2CSTR(arg2);
+            if (NIL_P(arg3) || RTEST(arg3)){
+                mnemonic = RVAL2CSTR(arg2);
+            } else {
+                label = RVAL2CSTR(arg2);
+            }
         }
         if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM))){
             list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
-        }
-        else {
+        } else if (TYPE(arg1) == T_ARRAY){
             list = ary2gslist(arg1);
+        } else if (! NIL_P(arg1)){
+            rb_raise(rb_eArgError, "invalid argument %s (expect Array or Gtk::RadioMenuItem)", 
+                     rb_class2name(CLASS_OF(label)));
         }
     }
     if (label) {
         widget = gtk_radio_menu_item_new_with_label(list, label);
-    }
-    else {
+    } else if (mnemonic){
+        widget = gtk_radio_menu_item_new_with_mnemonic(list, mnemonic);
+    } else {
         widget = gtk_radio_menu_item_new(list);
     }
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-/*
-GtkWidget*  gtk_radio_menu_item_new_with_mnemonic
-                                            (GSList *group,
-                                             const gchar *label);
-*/
 
 static VALUE
 rmitem_get_group(self)

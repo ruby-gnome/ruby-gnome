@@ -4,7 +4,7 @@
   rbgtkimagemenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/11/15 13:27:23 $
+  $Date: 2002/12/01 04:33:45 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -17,27 +17,31 @@ imitem_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE label;
-    GtkWidget *widget;
+    VALUE label, use_underline_or_accel_group;
+    GtkWidget *widget = NULL;
 
-    if (rb_scan_args(argc, argv, "01", &label) == 1) {
-	widget = gtk_image_menu_item_new_with_label(RVAL2CSTR(label));
-    }
-    else {
+    if (rb_scan_args(argc, argv, "02", &label, &use_underline_or_accel_group) > 0) {
+        if (TYPE(label) == T_STRING){
+            if (NIL_P(use_underline_or_accel_group) || RTEST(use_underline_or_accel_group)){
+                widget = gtk_image_menu_item_new_with_mnemonic(RVAL2CSTR(label));
+            } else {
+                widget = gtk_image_menu_item_new_with_label(RVAL2CSTR(label));
+            }
+        } else if (TYPE(label) == T_SYMBOL){
+            widget = gtk_image_menu_item_new_from_stock(rb_id2name(SYM2ID(label)),
+                                                        NIL_P(use_underline_or_accel_group) ? NULL :
+                                                        GTK_ACCEL_GROUP(RVAL2GOBJ(use_underline_or_accel_group)));
+        } else {
+            rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
+                     rb_class2name(CLASS_OF(label)));
+        }
+    } else {
 	widget = gtk_image_menu_item_new();
     }
 
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-
-/*
-GtkWidget*  gtk_image_menu_item_new_from_stock
-                                            (const gchar *stock_id,
-                                             GtkAccelGroup *accel_group);
-GtkWidget*  gtk_image_menu_item_new_with_mnemonic
-                                            (const gchar *label);
-*/
 
 void 
 Init_gtk_image_menu_item()
