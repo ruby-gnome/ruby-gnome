@@ -143,9 +143,23 @@ module GLib
     end
   end
 
-  LOG_DOMAINS = ["GLib", "GThread", "GModule", "GLib-GObject", "GLib-Genmarshal"]
+  LOG_DOMAIN = "GLib"
+
+  class Object
+    LOG_DOMAIN = "GLib-GObject"
+  end
+
+  module Thread
+    LOG_DOMAIN = "GThread"
+  end
+
+  module Module
+    LOG_DOMAIN = "GModule"
+  end
 end
 
-GLib::LOG_DOMAINS.each do |domain|
-  GLib::Log.set_error_domain(domain)
-end
+GLib::Log.set_error_domain(GLib::LOG_DOMAIN)
+GLib::Log.set_error_domain(GLib::Object::LOG_DOMAIN)
+GLib::Log.set_error_domain(GLib::Thread::LOG_DOMAIN)
+GLib::Log.set_error_domain(GLib::Module::LOG_DOMAIN)
+
