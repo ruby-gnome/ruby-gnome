@@ -1,3 +1,17 @@
+2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_spawn.c: Change the parent of GLib::Spawn*Error to 
+	StandardError from SystemCallError.
+	Added GLib::Spawn#async_with_pipes, #async, #sync.
+	Make uniform of the return values of GLib::Spawn#command_line_sync
+	to #sync.
+
+2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h, glib2.def: Export rbglib_spawn_error() 
+	for Gdk::Screen#spawn_on_screen.
+	Increment version.
+
 2004-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.c: setlocale parameter was changed. 

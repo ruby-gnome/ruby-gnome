@@ -55,3 +55,4 @@ EXPORTS
 	rbgutil_gslist2ary_boxed
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
+	rbglib_spawn_error

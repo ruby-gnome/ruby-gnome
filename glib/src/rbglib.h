@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/05/20 16:10:54 $
+  $Date: 2004/08/01 16:36:23 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -22,8 +22,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define RBGLIB_MAJOR_VERSION 0
-#define RBGLIB_MINOR_VERSION 9
-#define RBGLIB_MICRO_VERSION 1
+#define RBGLIB_MINOR_VERSION 10
+#define RBGLIB_MICRO_VERSION 0
 
 #ifndef StringValue
 #define StringValue(s) ((s) = (TYPE(s) == T_STRING) ? (s) : rb_str_to_str(s))
@@ -64,6 +64,9 @@ RUBY_GLIB2_VAR VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 extern VALUE rbg_cstr2rval(const char* str);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);
+
+/* rbglib_spawn.c */
+extern void rbglib_spawn_error(GError* error);
 
 #ifdef __cplusplus
 }
