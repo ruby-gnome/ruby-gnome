@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-08-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgstparse.c: Improved error handling. 

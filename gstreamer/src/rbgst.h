@@ -1,4 +1,6 @@
 /*
+ *
+ * Copyright (C) 2004 Ruby-GNOME2 Project
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
  * This file is part of Ruby/GStreamer.
@@ -136,7 +138,9 @@ VALUE instanciate_pluginfeature (GstPluginFeature * feature);
     Some data precision may be lost.  \
     Upgrade your Ruby to a newer version to fix this issue.
 #else
-#define NUM2ULL(v)      (rb_num2ull(v))
+  #if !defined(NUM2ULL)
+    #define NUM2ULL(v)      (rb_num2ull(v))
+  #endif
 #endif
 
 #endif                          /* __RBGST_H_ */
