@@ -4,7 +4,7 @@
   rbgtkspinbutton.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2004/01/09 16:25:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -108,7 +108,7 @@ sbtn_get_range(self)
     VALUE self;
 {
     gdouble min, max;
-    gtk_spin_button_get_increments(_SELF(self), &min, &max);
+    gtk_spin_button_get_range(_SELF(self), &min, &max);
 
     return rb_ary_new3(2, rb_float_new(min), rb_float_new(max));
 }
