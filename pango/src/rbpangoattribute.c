@@ -4,9 +4,9 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:42:49 $
+  $Date: 2005/02/10 18:32:09 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -80,7 +80,10 @@ static VALUE
 attr_s_allocate(klass)
     VALUE klass;
 {
-    return Data_Wrap_Struct(klass, 0, pango_attribute_destroy, 0);
+    /* Don't define destroy method here.
+       return Data_Wrap_Struct(klass, 0, pango_attribute_destroy, 0);
+    */
+    return Data_Wrap_Struct(klass, NULL, NULL, 0);
 }
 
 #ifdef HAVE_OBJECT_ALLOCATE
@@ -333,8 +336,7 @@ void
 Init_pango_attribute()
 {
     VALUE tmpklass;
-
-    pattr = rb_define_class_under(mPango, "Attribute", GTYPE2CLASS(G_TYPE_BOXED));
+    pattr = rb_define_class_under(mPango, "Attribute", rb_cData);
 
     rb_define_singleton_method(pattr, "type_register", attr_s_type_register, 1);
     rb_define_method(pattr, "==", attr_equal, 1);

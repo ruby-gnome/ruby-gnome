@@ -1,3 +1,8 @@
+2005-02-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoattribute.c: Fix a segfault. 
+	Make a subclass of Data instead of GLib::Boxed.
+
 2005-02-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Added Pango::Context#itemize. 
