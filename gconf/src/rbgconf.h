@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  * 
- * $Author: pcppopper $
+ * $Author: mutoh $
  * 
- * $Date: 2003/04/12 23:35:57 $
+ * $Date: 2004/05/29 17:21:47 $
  * 
  *****************************************************************************/
 
@@ -59,7 +59,7 @@ extern "C" {
 
 /* Global Variables **********************************************************/
 
-ID g_id_call;
+extern ID g_id_call;
 
 /* End of Multiple Inclusion Guard and extern "C" specifiers for C++ *********/
 

@@ -1,3 +1,7 @@
+2004-05-30  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/rbgconf.h: Add "extern" definition to the g_id_call.
+
 2004-04-08  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
 
 	* src/rbgconf-client.c: Fix a RangeError of GConf::Client#notify_remove.
@@ -81,7 +85,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/04/07 17:22:29 $ macros.
+	and $Date: 2004/05/29 17:21:46 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
