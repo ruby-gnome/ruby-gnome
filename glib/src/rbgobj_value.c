@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 16:07:09 $
+  $Date: 2002/08/13 17:56:41 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -18,10 +18,10 @@ static VALUE r2g_func_table;
 static VALUE g2r_func_table;
 
 void
-rbgobj_register_r2g_func(VALUE klass, RValueToGValueFunc func)
+rbgobj_register_r2g_func(GType gtype, RValueToGValueFunc func)
 {
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    rb_hash_aset(r2g_func_table, klass, obj);
+    rb_hash_aset(r2g_func_table, INT2FIX(gtype), obj);
 }
 
 void
@@ -53,9 +53,17 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_UINT:
         return UINT2NUM(g_value_get_uint(value));
       case G_TYPE_LONG:
+#ifdef LONG2NUM
+        return LONG2NUM(g_value_get_long(value));
+#else
         return INT2NUM(g_value_get_long(value));
+#endif
       case G_TYPE_ULONG:
+#ifdef ULONG2NUM
+        return ULONG2NUM(g_value_get_ulong(value));
+#else
         return UINT2NUM(g_value_get_ulong(value));
+#endif
       case G_TYPE_INT64:
         return rbgobj_int64_to_num(g_value_get_int64(value));
       case G_TYPE_UINT64:
@@ -86,34 +94,32 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             if (!ptr)
                 return Qnil;
             else
-                return Data_Wrap_Struct(GTYPE2CLASS(G_VALUE_TYPE(value)),
-                                        NULL, NULL, ptr);
+                return rbgobj_ptr_new(G_VALUE_TYPE(value), ptr);
         }
-#if 0
-      case G_TYPE_INTERFACE:
+
       case G_TYPE_BOXED:
-#endif
-    }
+        {
+            GType gtype;
+            for (gtype = G_VALUE_TYPE(value);
+                 gtype != G_TYPE_INVALID;
+                 gtype = g_type_parent(gtype))
+            {
+                GValueToRValueFunc func;
+                VALUE obj = rb_hash_aref(g2r_func_table, INT2NUM(gtype));
+                if (NIL_P(obj))
+                    continue;
+                Data_Get_Struct(obj, void, func);
+                return func(value);
+            }
+        }
 
-    {
-    GType gtype;
-    for (gtype = G_VALUE_TYPE(value);
-         gtype != G_TYPE_INVALID;
-         gtype = g_type_parent(gtype))
-    {
-        GValueToRValueFunc func;
-        VALUE obj = rb_hash_aref(g2r_func_table, INT2NUM(gtype));
-        if (NIL_P(obj))
-            continue;
-        Data_Get_Struct(obj, GValueToRValueFunc, func);
-        return func(value);
+      case G_TYPE_INTERFACE:
+      default:
+        /* XXX */
+        printf("rbgobj_gvalue_to_rvalue: unsupported gobject type: %s\n",
+               g_type_name(G_VALUE_TYPE(value)));
+        return Qnil;
     }
-    }
-
-    /* XXX */
-    printf("rbgobj_gvalue_to_rvalue: unsupported gobject type: %s\n",
-           g_type_name(G_VALUE_TYPE(value)));
-    return Qnil;
 }
 
 void
@@ -174,40 +180,33 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
       case G_TYPE_POINTER:
         if (NIL_P(val))
             g_value_set_pointer(result, NULL);
-        else {
-            gpointer ptr;
-            Data_Get_Struct(val, void, ptr);
-            g_value_set_pointer(result, ptr);
-        }
-#if 0
-      case G_TYPE_INTERFACE:
-      case G_TYPE_BOXED:
-#endif
-    }
-
-    {
-    VALUE mods = rb_mod_ancestors(CLASS_OF(val));
-    VALUE* c;
-
-    Check_Type(mods, T_ARRAY);
-
-    for (c = RARRAY(mods)->ptr;
-         c != RARRAY(mods)->ptr + RARRAY(mods)->len;
-         c++)
-    {
-        RValueToGValueFunc func;
-        VALUE obj = rb_hash_aref(r2g_func_table, *c);
-        if (NIL_P(obj))
-            continue;
-        Data_Get_Struct(obj, RValueToGValueFunc, func);
-        func(val, result);
+        else
+            g_value_set_pointer(result, rbgobj_ptr2cptr(val));
         return;
+
+      case G_TYPE_BOXED:
+        {
+            GType gtype;
+            for (gtype = G_VALUE_TYPE(result);
+                 gtype != G_TYPE_INVALID;
+                 gtype = g_type_parent(gtype))
+            {
+                RValueToGValueFunc func;
+                VALUE obj = rb_hash_aref(g2r_func_table, INT2NUM(gtype));
+                if (NIL_P(obj))
+                    continue;
+                Data_Get_Struct(obj, void, func);
+                func(val, result);
+                return;
+            }
+        }
+
+      case G_TYPE_INTERFACE:
+      default:
+        /* XXX */
+        printf("rbgobj_rvalue_to_gvalue: unsupported (ruby) class: %s\n",
+               rb_class2name(CLASS_OF(val)));
     }
-    }
- 
-    /* XXX */
-    printf("rbgobj_rvalue_to_gvalue: unsupported (ruby) class: %s\n",
-           rb_class2name(CLASS_OF(val)));
 }
 
 /**********************************************************************/

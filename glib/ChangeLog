@@ -1,3 +1,14 @@
+2002-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use $libs instead of $LDFLAGS
+	* src/rbglib.c: define GLib::VERSION, GLib::(MAJOR|MINOR|MICRO)_VERSION
+	* src/rbgobj_param.c: define GParamFlags constants
+	* src/rbgobj_value.c (rbgobj_register_r2g_func): change argument.
+	it now take GType as key instead of Ruby class.
+	* src/rbgobject.c (rbgobj_add_relative, rbgobj_add_relative_removable,
+	rbgobj_remove_relative): call rb_ivar_defined() before calling rb_ivar_get()
+	* rbgobj_valuetypes.c, rbgobj_value.c: improve G_TYPE_POINTER handling
+
 2002-08-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.[ch]: move id_relative_callbacks to gtk

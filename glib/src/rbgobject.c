@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 16:07:09 $
+  $Date: 2002/08/13 17:56:41 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -158,7 +158,10 @@ void
 rbgobj_add_relative(obj, relative)
     VALUE obj, relative;
 {
-    VALUE ary = rb_ivar_get(obj, id_relatives);
+    VALUE ary = Qnil;
+
+    if (RTEST(rb_ivar_defined(obj, id_relatives)))
+        ary = rb_ivar_get(obj, id_relatives);
 
     if (NIL_P(ary) || TYPE(ary) != T_ARRAY) {
         ary = rb_ary_new();
@@ -172,7 +175,10 @@ rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
     VALUE obj, relative, hash_key;
     ID    obj_ivar_id;
 {
-    VALUE hash = rb_ivar_get(obj, obj_ivar_id);
+    VALUE hash = Qnil;
+
+    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+        hash = rb_ivar_get(obj, obj_ivar_id);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
         hash = rb_hash_new();
@@ -186,7 +192,10 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 	VALUE obj, hash_key;
 	ID    obj_ivar_id;
 {
-    VALUE hash = rb_ivar_get(obj, obj_ivar_id);
+    VALUE hash = Qnil;
+
+    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+        hash = rb_ivar_get(obj, obj_ivar_id);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
         /* should not happen. */
@@ -360,24 +369,22 @@ rbgobj_gobject_new(gtype, params_hash)
     return result;
 }
 
-
-extern void Init_gobject_gtype();
-extern void Init_gobject_gvalue();
-extern void Init_gobject_gvaluetypes();
-extern void Init_gobject_gboxed();
-extern void Init_gobject_genums();
-extern void Init_gobject_gparam();
-extern void Init_gobject_gparamspecs();
-extern void Init_gobject_gclosure();
-extern void Init_gobject_gobject();
-extern void Init_gobject_gsignal();
-extern void Init_gobject_gtypeplugin();
-extern void Init_gobject_gtypemodule();
-
-
 void 
 Init_gobject()
 {
+    extern void Init_gobject_gtype();
+    extern void Init_gobject_gvalue();
+    extern void Init_gobject_gvaluetypes();
+    extern void Init_gobject_gboxed();
+    extern void Init_gobject_genums();
+    extern void Init_gobject_gparam();
+    extern void Init_gobject_gparamspecs();
+    extern void Init_gobject_gclosure();
+    extern void Init_gobject_gobject();
+    extern void Init_gobject_gsignal();
+    extern void Init_gobject_gtypeplugin();
+    extern void Init_gobject_gtypemodule();
+
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
     /* IDs */
     id_relatives = rb_intern("__relatives__");

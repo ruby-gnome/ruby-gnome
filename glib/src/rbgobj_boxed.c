@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/13 17:56:41 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -100,8 +100,7 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed()
 {
-    VALUE cBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
-
+    G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
-    rbgobj_register_r2g_func(cBoxed, boxed_from_ruby);
+    rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 }

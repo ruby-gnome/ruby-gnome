@@ -4,13 +4,42 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 16:07:09 $
+  $Date: 2002/08/13 17:56:41 $
 
   Copyright (C) 2002  Masahiro Sakai
 
 **********************************************************************/
 
 #include "global.h"
+#ifdef RBGOBJ_USE_DLPTR
+#include "dl.h"
+#endif
+
+
+VALUE
+rbgobj_ptr_new(type, ptr)
+    GType type;
+    gpointer ptr;
+{
+#ifdef RBGOBJ_USE_DLPTR
+    return rb_dlptr_new2(GTYPE2CLASS(type), 0, NULL);
+#else
+    return Data_Wrap_Struct(GTYPE2CLASS(type), NULL, NULL, ptr);
+#endif
+}
+
+gpointer
+rbgobj_ptr2cptr(ptr)
+    VALUE ptr;
+{
+#ifdef RBGOBJ_USE_DLPTR
+    return rb_dlptr2cptr(ptr);
+#else
+    gpointer dest;
+    Data_Get_Struct(ptr, void, dest);
+    return dest;
+#endif
+}
 
 static VALUE
 ptr_s_gtype(klass)
@@ -89,14 +118,61 @@ boxed_ruby_value_unref(VALUE val)
     }
 }
 
+static void
+value_transform_ruby_any(const GValue *src_value,
+                         GValue       *dest_value)
+{
+    /* FIXME: use rb_rescue */
+    rbgobj_rvalue_to_gvalue(g_value_get_ruby_value(src_value),
+                            dest_value);
+}
+
+static void
+value_transform_any_ruby(const GValue *src_value,
+                         GValue       *dest_value)
+{
+    /* FIXME: use rb_rescue */
+    g_value_set_ruby_value(dest_value, GVAL2RVAL(src_value));
+}
+
 GType rbgobj_ruby_value_get_type()
 {
   static GType our_type = 0;
+
   if (!our_type){
+      const GType table[] = {
+          G_TYPE_CHAR,
+          G_TYPE_UCHAR,
+          G_TYPE_BOOLEAN,
+          G_TYPE_INT,
+          G_TYPE_UINT,
+          G_TYPE_LONG,
+          G_TYPE_ULONG,
+          G_TYPE_INT64,
+          G_TYPE_UINT64,
+          G_TYPE_ENUM,
+          G_TYPE_FLAGS,
+          G_TYPE_FLOAT,
+          G_TYPE_DOUBLE,
+          G_TYPE_STRING,
+          G_TYPE_POINTER,
+          //G_TYPE_BOXED,
+          G_TYPE_PARAM,
+          G_TYPE_OBJECT,
+      };
+      int i;
+
       our_type = g_boxed_type_register_static(
           "VALUE",
           (GBoxedCopyFunc)boxed_ruby_value_ref,
           (GBoxedFreeFunc)boxed_ruby_value_unref);
+
+      for (i = 0; i < sizeof(table)/sizeof(table[0]); i++){
+          g_value_register_transform_func(our_type, table[i],
+                                          value_transform_ruby_any);
+          g_value_register_transform_func(table[i], our_type,
+                                          value_transform_any_ruby);
+      }
   }
   return our_type;
 }
@@ -114,18 +190,9 @@ g_value_set_ruby_value(GValue* value, VALUE ruby)
 }
 
 static void
-value_transform_ruby_any(const GValue *src_value,
-                         GValue       *dest_value)
+ruby_value_r2g(VALUE from, GValue* to)
 {
-    rbgobj_rvalue_to_gvalue(g_value_get_ruby_value(src_value),
-                            dest_value);
-}
-
-static void
-value_transform_any_ruby(const GValue *src_value,
-                         GValue       *dest_value)
-{
-    g_value_set_ruby_value(dest_value, GVAL2RVAL(src_value));
+    g_value_set_ruby_value(to, from);
 }
 
 static void
@@ -135,38 +202,7 @@ Init_boxed_ruby_value()
     rb_global_variable(&boxed_ruby_value_markers);
 
     rbgobj_register_g2r_func(RBGOBJ_TYPE_RUBY_VALUE, g_value_get_ruby_value);
-    // rbgobj_register_r2g_func(rb_cObject, g_value_set_ruby_value);
-
-    {
-        const GType table[] = {
-            G_TYPE_CHAR,
-            G_TYPE_UCHAR,
-            G_TYPE_BOOLEAN,
-            G_TYPE_INT,
-            G_TYPE_UINT,
-            G_TYPE_LONG,
-            G_TYPE_ULONG,
-            G_TYPE_INT64,
-            G_TYPE_UINT64,
-            G_TYPE_ENUM,
-            G_TYPE_FLAGS,
-            G_TYPE_FLOAT,
-            G_TYPE_DOUBLE,
-            G_TYPE_STRING,
-            G_TYPE_POINTER,
-            //G_TYPE_BOXED,
-            G_TYPE_PARAM,
-            G_TYPE_OBJECT,
-        };
-        int i;
-
-        for (i = 0; i < sizeof(table)/sizeof(table[0]); i++){
-            g_value_register_transform_func(RBGOBJ_TYPE_RUBY_VALUE, table[i],
-                                            value_transform_ruby_any);
-            g_value_register_transform_func(table[i], RBGOBJ_TYPE_RUBY_VALUE,
-                                            value_transform_any_ruby);
-        }
-    }
+    rbgobj_register_r2g_func(RBGOBJ_TYPE_RUBY_VALUE, ruby_value_r2g);
 }
 
 /**********************************************************************/

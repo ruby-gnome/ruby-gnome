@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/13 17:56:41 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -195,6 +195,7 @@ value_defaults(VALUE self, VALUE val)
     return result ? Qtrue : Qfalse;
 }
 
+/* fixme: return modified value */
 static VALUE
 value_validate(self, value)
     VALUE self, value;
@@ -216,10 +217,32 @@ gboolean	g_param_value_convert		(GParamSpec    *pspec,
 						 const GValue  *src_value,
 						 GValue	       *dest_value,
 						 gboolean	strict_validation);
-gint		g_param_values_cmp		(GParamSpec    *pspec,
-						 const GValue  *value1,
-						 const GValue  *value2);
 #endif
+
+static VALUE
+values_compare(self, a, b)
+    VALUE self, a, b;
+{
+    GValue v1 = {0,};
+    GValue v2 = {0,};
+    GType type = G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self));
+    gint result;
+
+    g_value_init(&v1, type);
+    g_value_init(&v2, type);
+
+    /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
+    rbgobj_rvalue_to_gvalue(a, &v1);
+    rbgobj_rvalue_to_gvalue(b, &v2);
+
+    result = g_param_values_cmp(rbgobj_param_spec_get_struct(self), &v1, &v2);
+
+    g_value_unset(&v1);
+    g_value_unset(&v2);
+
+    return INT2NUM(result);
+}
+
 
 static VALUE
 get_ref_count(self)
@@ -235,6 +258,18 @@ Init_gobject_gparam_spec()
 {    
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
     cParamSpec = G_DEF_CLASS(G_TYPE_PARAM, "ParamSpec", mGLib);
+
+    /* GParamFlags */
+    rb_define_const(cParamSpec, "READABLE",       INT2FIX(G_PARAM_READABLE));
+    rb_define_const(cParamSpec, "WRITABLE",       INT2FIX(G_PARAM_WRITABLE));
+    rb_define_const(cParamSpec, "CONSTRUCT",      INT2FIX(G_PARAM_CONSTRUCT));
+    rb_define_const(cParamSpec, "CONSTRUCT_ONLY", INT2FIX(G_PARAM_CONSTRUCT_ONLY));
+    rb_define_const(cParamSpec, "LAX_VALIDATION", INT2FIX(G_PARAM_LAX_VALIDATION));
+    rb_define_const(cParamSpec, "PRIVATE",        INT2FIX(G_PARAM_PRIVATE));
+
+    rb_define_const(cParamSpec, "READWRITE",      INT2FIX(G_PARAM_READWRITE));
+    rb_define_const(cParamSpec, "MASK",           INT2FIX(G_PARAM_MASK));
+    rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
 
     rb_define_singleton_method(cParamSpec, "allocate", pspec_s_allocate, 0);
 #ifndef HAVE_OBJECT_ALLOCATE
@@ -254,6 +289,9 @@ Init_gobject_gparam_spec()
 
     rb_define_method(cParamSpec, "default=", value_set_default, 1);
     rb_define_method(cParamSpec, "defaults", value_defaults, 1);
+
+    rb_define_method(cParamSpec, "validate", value_validate, 0);
+    rb_define_method(cParamSpec, "compare", values_compare, 2);
 
     /* for debugging */
     rb_define_method(cParamSpec, "ref_count", get_ref_count, 0);

@@ -14,8 +14,8 @@ unless system(pkgconfig, '--exists', pkgname)
   exit
 end
 
-$LDFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
-$CFLAGS  += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
+$libs   += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
+$CFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
 $CFLAGS += ' -g'
 
 if /mswin32|mingw|bcc/ =~ RUBY_PLATFORM and /gcc/ =~ Config::CONFIG['CC']
