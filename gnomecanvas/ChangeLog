@@ -1,6 +1,7 @@
 2003-12-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas-util.c: Fix a segfault of cpoint_to_ruby(). 
+	(Bugs [ 859431 ])
 
 2003-09-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
