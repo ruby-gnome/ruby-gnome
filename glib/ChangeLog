@@ -1,3 +1,12 @@
+2003-10-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: new method
+	GLib::Instantiatable#signal_has_handler_pending?.
+
+	* src/rbgobj_signal.c (g_signal_handler_block,
+	gobj_sig_handler_unblock, gobj_sig_handler_disconnect):
+	use NUM2ULONG instead of NUM2INT.
+
 2003-10-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_signal.c: Fix a segfault when GLib::Object#signal_emit 

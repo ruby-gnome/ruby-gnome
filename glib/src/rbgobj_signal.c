@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/14 13:30:24 $
+  $Author: sakai $
+  $Date: 2003/10/22 16:14:50 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -203,6 +203,34 @@ gobj_s_signal(VALUE self, VALUE name)
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
     return rbgobj_signal_wrap(sig_id);
+}
+
+static VALUE
+gobj_sig_has_handler_pending(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE sig, may_be_blocked;
+    const char* sig_name;
+    guint signal_id;
+    GQuark detail;
+
+    rb_scan_args(argc, argv, "11", &sig, &may_be_blocked);
+
+    if (SYMBOL_P(sig)){
+        sig_name = rb_id2name(SYM2ID(sig));
+    } else {
+        StringValue(sig);
+        sig_name = StringValuePtr(sig);
+    }
+
+    if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
+        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
+
+    return g_signal_has_handler_pending(RVAL2GOBJ(self),
+                                        signal_id, detail,
+                                        RTEST(may_be_blocked)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -417,7 +445,7 @@ static VALUE
 gobj_sig_handler_block(self, id)
     VALUE self, id;
 {
-    g_signal_handler_block(RVAL2GOBJ(self), NUM2INT(id));
+    g_signal_handler_block(RVAL2GOBJ(self), NUM2ULONG(id));
     if (rb_block_given_p())
         rb_ensure(rb_yield, self, _sig_handler_block_ensure,
                   rb_ary_new3(2, self, id));
@@ -428,7 +456,7 @@ static VALUE
 gobj_sig_handler_unblock(self, id)
     VALUE self, id;
 {
-    g_signal_handler_unblock(RVAL2GOBJ(self), NUM2INT(id));
+    g_signal_handler_unblock(RVAL2GOBJ(self), NUM2ULONG(id));
     return self;
 }
 
@@ -436,7 +464,7 @@ static VALUE
 gobj_sig_handler_disconnect(self, id)
     VALUE self, id;
 {
-    g_signal_handler_disconnect(RVAL2GOBJ(self), NUM2INT(id));
+    g_signal_handler_disconnect(RVAL2GOBJ(self), NUM2ULONG(id));
     return self;
 }
 
@@ -636,6 +664,8 @@ Init_signal_misc()
     rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
     rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
 
+    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
+                     gobj_sig_has_handler_pending, -1);
     rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
     rb_define_method(cInstantiatable, "signal_connect_after",
                      gobj_sig_connect_after, -1);
