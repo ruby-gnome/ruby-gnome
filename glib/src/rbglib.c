@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 16:38:16 $
+  $Date: 2002/09/14 15:31:23 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -17,6 +17,14 @@ VALUE mGLib;
 
 extern void Init_utils_int64();
 extern void Init_gobject();
+
+gchar*
+rbg_val2cstr(val)
+    VALUE val;
+{
+    StringValue(val);
+    return StringValuePtr(val);
+}
 
 void Init_glib2()
 {
