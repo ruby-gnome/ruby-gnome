@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Date: 2002/05/28 15:19:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@ ctree_node_mark(ctree, node, notused)
     if (node) {
         GtkCTreeRow *row = GTK_CTREE_ROW(node);
         if (row && row->row.data) {
-            rb_gc_mark_maybe((int)row->row.data);
+            rb_gc_mark_maybe((VALUE)row->row.data);
         }
     }
 }

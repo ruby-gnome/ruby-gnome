@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Date: 2002/05/28 15:19:24 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,7 @@ clist_mark(clist)
 	for (list = clist->row_list; list; list=list->next) {
 	    GtkCListRow *row = GTK_CLIST_ROW(list);
 	    if (row && row->data) {
-		rb_gc_mark_maybe((int)row->data);
+		rb_gc_mark_maybe((VALUE)row->data);
 	    }
 	}
     }
