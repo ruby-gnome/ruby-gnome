@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/28 04:54:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -388,33 +388,6 @@ note_set_tab_label_text(self, child, text)
     return self;
 }
 
-
-VALUE
-make_notepage(page)
-    GtkNotebookPage* page;
-{
-    if (!page)
-        return Qnil;
-    else
-        return Data_Wrap_Struct(gNotePage, 0, 0, page);
-}
-
-static GtkNotebookPage*
-get_notepage(page)
-	VALUE page;
-{
-    GtkNotebookPage *c_page;
-
-    if (NIL_P(page)) return NULL;
-
-    if (!rb_obj_is_instance_of(page, gNotePage)) {
-        rb_raise(rb_eTypeError, "not a NotebookPage");
-    }
-
-    Data_Get_Struct(page, GtkNotebookPage, c_page);
-    return c_page;
-}
-
 void Init_gtk_notebook()
 {
     static RGObjClassInfo cinfo;
@@ -469,8 +442,6 @@ void Init_gtk_notebook()
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
 
     rb_define_alias(gNotebook, "page", "cur_page");
-
-    gNotePage = rb_define_class_under(mGtk, "NotebookPage", rb_cData);
 
     Init_gtk_font_selection();
 }

@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/28 04:54:03 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,7 +18,6 @@
 #endif
 
 VALUE mGtk;
-VALUE gError;
 VALUE gObject;
 VALUE gWidget;
 VALUE gContainer;
@@ -97,7 +96,6 @@ VALUE gSocket;
 VALUE gAccelGroup;
 VALUE gAcceleratorTable;
 VALUE gStyle;
-VALUE gRcStyle;
 VALUE gAllocation;
 VALUE gRequisition;
 VALUE gItemFactory;
@@ -480,7 +478,6 @@ void Init_gtk_gtk()
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relatives, Qnil);
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
-    gError = rb_define_class_under(mGtk, "Error", rb_eRuntimeError);
     Init_gtk_const();
     Init_gtk_main();
     Init_gtk_rc();
@@ -491,7 +488,6 @@ void Init_gtk_gtk()
     Init_gtk_object();
 
     Init_gtk_accel_group();
-    gRcStyle = rb_define_class_under(mGtk, "RcStyle", rb_cData);
 #ifndef GTK_DISABLE_DEPRECATED
     gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", rb_cData);
 #endif

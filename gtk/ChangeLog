@@ -1,3 +1,8 @@
+2002-07-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Remove Gtk::NotebookPage temporarily.
+	* src/rbgtk.[ch]: Remove Gtk::Error, Gtk::RcStyle temporarily.
+
 2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdkevent.c, src/rbgdkwindow.c, src/rbgtkplug.c,

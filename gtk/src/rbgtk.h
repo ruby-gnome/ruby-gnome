@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/07/07 05:59:16 $
+  $Date: 2002/07/28 04:54:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,7 +16,6 @@
 
 #include "ruby.h"
 #include "rubysig.h"
-#include "rbg.h"
 #include "rbglib.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
@@ -52,7 +51,6 @@ extern void rbgtk_register_class(RGObjClassInfo *cinfo);
 extern VALUE mRC;
 extern VALUE mGtk;
 extern VALUE mGtkDrag;
-extern VALUE gError;
 extern VALUE gObject;
 extern VALUE gWidget;
 extern VALUE gContainer;
@@ -148,7 +146,6 @@ extern VALUE gSocket;
 
 extern VALUE gAccelGroup;
 extern VALUE gStyle;
-extern VALUE gRcStyle;
 extern VALUE gPreviewInfo;
 extern VALUE gAllocation;
 extern VALUE gRequisition;
