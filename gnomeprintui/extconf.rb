@@ -2,6 +2,10 @@
 extconf.rb for Ruby/GnomePrintUI extention library
 =end
 
+require "fileutils"
+
+maintainer = false
+
 def mkenums(output, config, files)
   args = []
   %w(fhead fprod ftail eprod vhead vprod vtail comments template).each do |param|
@@ -121,14 +125,23 @@ srcdir = File.dirname($0) == "." ? "." :
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
-  enum_type_prefix = "libgnomeprintui-enum-types"
-  include_paths = `pkg-config libgnomeprintui-2.2 --cflags-only-I`
-  include_path = include_paths.split.find do |x|
-    /libgnomeprintui/.match(x)
-  end.sub(/^-I/, "")
-  headers = Dir.glob(File.join(include_path, "libgnomeprintui", "*.h"))
-  mkenums_h(enum_type_prefix, headers)
-  mkenums_c(enum_type_prefix, headers)
+  if !have_header("libgnomeprintui-enum-types.h")
+    enum_type_prefix = "libgnomeprintui-enum-types"
+    if maintainer
+      include_paths = `pkg-config libgnomeprintui-2.2 --cflags-only-I`
+      include_path = include_paths.split.find do |x|
+        /libgnomeprintui/.match(x)
+      end.sub(/^-I/, "")
+      headers = Dir.glob(File.join(include_path, "libgnomeprintui", "*.h"))
+      mkenums_h(enum_type_prefix, headers)
+      mkenums_c(enum_type_prefix, headers)
+    else
+      %w(h c).each do |ext|
+        enum_type_filename = "#{enum_type_prefix}.#{ext}"
+        FileUtils.cp("#{enum_type_filename}.maintainer", enum_type_filename)
+      end
+    end
+  end
 
   create_makefile("gnomeprintui2", srcdir)
 ensure

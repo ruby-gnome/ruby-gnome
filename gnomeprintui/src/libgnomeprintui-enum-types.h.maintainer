@@ -1,0 +1,36 @@
+
+/* Generated data (by glib-mkenums) */
+
+#ifndef __LIBGNOMEPRINTUI_ENUM_TYPES_H__
+#define __LIBGNOMEPRINTUI_ENUM_TYPES_H__
+
+#include <glib-object.h>
+
+G_BEGIN_DECLS
+
+/* enumerations from "/usr/include/libgnomeprintui-2.2/libgnomeprintui/gnome-print-dialog.h" */
+
+GType gnome_print_range_type_get_type (void);
+#define GNOME_TYPE_PRINTUI_PRINT_RANGE_TYPE (gnome_print_range_type_get_type())
+
+GType gnome_print_dialog_range_flags_get_type (void);
+#define GNOME_TYPE_PRINTUI_PRINT_DIALOG_RANGE_FLAGS (gnome_print_dialog_range_flags_get_type())
+
+GType gnome_print_dialog_flags_get_type (void);
+#define GNOME_TYPE_PRINTUI_PRINT_DIALOG_FLAGS (gnome_print_dialog_flags_get_type())
+
+GType gnome_print_buttons_get_type (void);
+#define GNOME_TYPE_PRINTUI_PRINT_BUTTONS (gnome_print_buttons_get_type())
+
+/* enumerations from "/usr/include/libgnomeprintui-2.2/libgnomeprintui/gnome-print-paper-selector.h" */
+
+GType gnome_paper_selector_flags_get_type (void);
+#define GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS (gnome_paper_selector_flags_get_type())
+
+G_END_DECLS
+
+#endif /* __LIBGNOMEPRINTUI_ENUM_TYPES_H__*/
+
+
+/* Generated data ends here */
+
