@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/02/04 21:28:44 $
+ * $Date: 2003/04/13 20:31:43 $
  *
  *****************************************************************************/
 
@@ -190,17 +190,6 @@ client_get(argc, argv, self)
 	return GCVAL2RVAL(val);
 }
 
-/*
-static VALUE
-client_get_without_default(self, key)
-	VALUE self;
-	VALUE key;
-{
-	return GCVAL2RVAL(gconf_client_get_without_default(_SELF(self), key,
-							    NULL));
-}
-*/
-
 static VALUE
 client_get_entry(argc, argv, self)
 	int argc;
@@ -214,11 +203,7 @@ client_get_entry(argc, argv, self)
 	if (NIL_P(use_schema_default)) {
 		use_schema_default = Qtrue;
 	}
-	if (!NIL_P(locale)) {
-		clocale = RVAL2CSTR(locale);
-	} else {
-		clocale = NULL;
-	}
+	clocale = NIL_P(locale) ? NULL : RVAL2CSTR(locale);
 
 	return GCENTRY2RVAL(gconf_client_get_entry(_SELF(self), RVAL2CSTR(key),
 						   NULL,

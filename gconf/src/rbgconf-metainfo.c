@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/04/10 20:29:48 $
+ * $Date: 2003/04/13 20:31:43 $
  *
  *****************************************************************************/
 
@@ -60,6 +60,17 @@ metainfo_get_gobject_type(void)
 	}
 
 	return our_type;
+}
+
+static VALUE
+metainfo_initialize(self)
+	VALUE self;
+{
+	GConfMetaInfo *metainfo;
+
+	metainfo = gconf_meta_info_new();
+	G_INITIALIZE(self, metainfo);
+	return Qnil;
 }
 
 static VALUE
@@ -113,6 +124,7 @@ Init_gconf_metainfo(m_gconf)
 {
 	VALUE gmi = G_DEF_CLASS(GCONF_TYPE_METAINFO, "MetaInfo", m_gconf);
 
+	rb_define_method(gmi, "initialize", metainfo_initialize, 0);
 	rb_define_method(gmi, "schema", metainfo_get_schema, 0);
 	rb_define_method(gmi, "mod_user", metainfo_get_mod_user, 0);
 	rb_define_method(gmi, "mod_time", metainfo_mod_time, 0);
