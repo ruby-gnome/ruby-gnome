@@ -1,41 +1,23 @@
 require "mkmf"
 
-$objs = ["rbglade.o"]
-my_libs = ["glade", "xml", "z"]
-
-$use_gnome = ! arg_config("--disable-gnome", false)
-
-puts "GNOME support is: #{$use_gnome ? 'enabled' : 'disabled'}."
-my_libs.push("glade-gnome") if $use_gnome
-
-my_libs.each do |lib|
-  dir_config(lib)
+rubyglib_dir = ARGV.shift || File.dirname(__FILE__)+"/../glib"
+unless FileTest.exist?(rubyglib_dir)
+  raise "Directory #{rubyglib_dir} not found.  Please specify Ruby/GLib source dir."
 end
+$CFLAGS += "-I#{rubyglib_dir}/src "
 
-#
-# detect libglade configurations
-#
-config_cmd = with_config("libglade-config", "libglade-config")
-begin
-  version = `#{config_cmd} --version`
-  if not version.chomp.empty?
-    $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
-    $CFLAGS += ' -DENABLE_GNOME' if $use_gnome
-    $libs += ' ' + `#{config_cmd} --libs`.chomp
-  end
-rescue
-  $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
-  $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
-  $libs = '-lm -lc'
+rubygtk_dir = ARGV.shift || File.dirname(__FILE__)+"/../gtk"
+unless FileTest.exist?(rubyglib_dir)
+  raise "Directory #{rubygtk_dir} not found.  Please specify Ruby/Gtk source dir."
 end
+$CFLAGS += "-I#{rubygtk_dir}/src "
 
-my_libs.each do |lib|
-	unless have_library(lib)
-		puts "\n***"
-		puts "Could not find lib#{lib}."
-		puts "You can specify its path using --with-#{lib}-lib=/path/"
-		exit
-	end
+unless system('pkg-config', '--exists', 'libglade-2.0')
+  STDERR.print("libglade-2.0 doesn't exist\n")
+  exit
 end
+$LDFLAGS += ' ' + `pkg-config libglade-2.0 --libs`.chomp
+$CFLAGS  += ' ' + `pkg-config libglade-2.0 --cflags`.chomp
+$CFLAGS += ' -g'
 
 create_makefile("libglade2")

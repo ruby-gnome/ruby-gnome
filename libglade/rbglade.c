@@ -1,51 +1,22 @@
 #include "ruby.h"
-
+#include "rbgobject.h"
+#include "rbgtk.h"
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 
-/*
- * Here are some function declarations from Ruby-Gtk; it is convenient
- * to be able to use these within Ruby-libglade. However, it could be
- * a hassle to require to Ruby-libglade include the rbgtk.h during
- * compilation, so we just copy-n-paste these few lines over.
- */
-
-/*
- * If Gnome support is enabled, we need to use the appropriate function
- * to convert a GtkObject* to a Ruby object (a VALUE).
- */
-#ifdef ENABLE_GNOME
-
-extern VALUE get_value_from_gno_obj(GtkObject* obj);
-#define get_glade_auto_type(obj) (get_value_from_gno_obj((obj)))
-
-#else
-
-extern VALUE get_value_from_gobject(GtkObject* obj);
-#define get_glade_auto_type(obj) (get_value_from_gobject((obj)))
-
-#endif
-
 static VALUE cGladeXML;
-
-static GladeXML *
-get_glade(VALUE self)
-{
-    GladeXML *xml;
-    Data_Get_Struct(self, GladeXML, xml);
-    return xml;
-}
+static VALUE instances;
 
 static void
-xml_connect(const gchar *handler_name, GtkObject *_source,
+xml_connect(const gchar *handler_name, GObject *_source,
             const gchar *signal_name, const gchar *signal_data,
-            GtkObject *_target, gboolean after, gpointer user_data)
+            GObject *_target, gboolean after, gpointer user_data)
 {
     VALUE self = (VALUE)user_data;
     VALUE source, target, signal, handler, data;
     
-    source = _source? get_glade_auto_type(_source) : Qnil;
-    target = _target? get_glade_auto_type(_target) : Qnil;
+    source = _source? GOBJ2RVAL(_source) : Qnil;
+    target = _target? GOBJ2RVAL(_target) : Qnil;
     
     signal = signal_name ? rb_str_new2(signal_name) : Qnil;
     handler = handler_name ? rb_str_new2(handler_name) : Qnil;
@@ -58,44 +29,45 @@ static VALUE
 rb_gladexml_get_widget(VALUE self, VALUE nameString)
 {
     GtkWidget *widget;
-    widget = glade_xml_get_widget(get_glade(self), STR2CSTR(nameString));
-    return widget ? get_glade_auto_type(GTK_OBJECT(widget)) : Qnil;
+    widget = glade_xml_get_widget(GLADE_XML(RVAL2GOBJ(self)), STR2CSTR(nameString));
+    return widget ? GOBJ2RVAL(widget) : Qnil;
 }
 
+#if 0
 static VALUE
 rb_gladexml_get_widget_by_long_name(VALUE self, VALUE nameString)
 {
     GtkWidget *widget;
-    widget = glade_xml_get_widget_by_long_name(get_glade(self),
+    widget = glade_xml_get_widget_by_long_name(GLADE_XML(RVAL2GOBJ(self)),
                                                STR2CSTR(nameString));
-    return widget ? get_glade_auto_type(GTK_OBJECT(widget)) : Qnil;
+    return widget ? GOBJ2RVAL(widget) : Qnil;
 }
+#endif
     
 static VALUE
-rb_gladexml_new(int argc, VALUE *argv, VALUE self)
+rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE fileString, rootString, handler_proc;
+    VALUE fileString, rootString, domainString, handler_proc;
     GladeXML *xml;
     char *fileName;
     char *root;
+    char *domain;
 
-    rb_scan_args(argc, argv, "11&", &fileString, &rootString, &handler_proc);
+    rb_scan_args(argc, argv, "12&", &fileString, &rootString, &domainString, &handler_proc);
 
     fileName = NIL_P(fileString) ? 0 : STR2CSTR(fileString);
     root = NIL_P(rootString) ? 0 : STR2CSTR(rootString);
-    
-#ifndef ENABLE_GNOME
-    glade_init();
-#else
-    glade_gnome_init();
-#endif
+    domain = NIL_P(domainString) ? 0 : STR2CSTR(domainString);
 
-    xml = glade_xml_new(fileName, root);
+    glade_init();
+
+    xml = glade_xml_new(fileName, root, domain);
 
     if(xml)
     {
+        RBGOBJ_INITIALIZE(self, xml);
         /* Once constructed, this means a GladeXML object can never be freed. */
-        self = Data_Wrap_Struct(cGladeXML, 0, 0, xml);
+        rb_ary_push(instances, self);
         rb_iv_set(self, "@handler_proc", handler_proc);
         glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
     }
@@ -108,7 +80,7 @@ rb_gladexml_new(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-void Init_lglade()
+void Init_libglade2()
 {
     /*
      * It is important that the first thing we do is load the Ruby-Gtk
@@ -119,10 +91,16 @@ void Init_lglade()
 #ifdef ENABLE_GNOME
     rb_require("gnome2");
 #endif
-    cGladeXML = rb_define_class("GladeXML", rb_cObject);
-    rb_define_singleton_method(cGladeXML, "new", rb_gladexml_new, -1);
+
+    instances = rb_ary_new();
+    rb_global_variable(&instances);
+
+    cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
+    rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "widget", rb_gladexml_get_widget, 1);
-    rb_define_method(cGladeXML, "widget_by_long_name", rb_gladexml_get_widget_by_long_name, 1);    
+#if 0
+    rb_define_method(cGladeXML, "widget_by_long_name", rb_gladexml_get_widget_by_long_name, 1);
+#endif
 
     rb_eval_string(
         "class GladeXML			  											             \n"

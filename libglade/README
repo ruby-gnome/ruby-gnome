@@ -12,7 +12,7 @@ Installing:
 >su
 >make install
 
-It requires libglade, libxml (1.x), and libz.  You may have to
+It requires libglade2, libxml2, and libz.  You may have to
 provide extconf.rb with the paths to these.
 
 There is also optional support for libglade-gnome: this allows
