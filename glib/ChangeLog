@@ -1,3 +1,9 @@
+2002-06-23  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c (Init_gobject_gtype): call g_type_init().
+	* src/rbgobj_object.c, src/gclosure.c: zero-fill GValue before
+	using it.
+
 2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgobject.h: Fix parameter number of RBGOBJ_INITIALIZE().

@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/06/17 18:14:24 $
+  $Date: 2002/06/23 11:03:28 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -23,6 +23,7 @@ VALUE closure_invoke(argc, argv, self)
 {
     int i;
     GValue* params = ALLOCA_N(GValue, argc);
+    memset(params, 0, sizeof(GValue) * argc);
 
     for (i = 0; i < argc; i++)
         rbgobj_rvalue_to_gvalue(argv[i], &params[i]);

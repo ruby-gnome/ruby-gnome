@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/06/20 13:46:36 $
+  $Date: 2002/06/23 11:03:28 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -74,6 +74,8 @@ rbgobj_lookup_rbclass(const GObject* gobj)
  */
 void Init_gobject_gtype()
 {
+    g_type_init();
+
     rb_global_variable(&gobject_type_hash);
     gobject_type_hash = rb_hash_new();    
 }

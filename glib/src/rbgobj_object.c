@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2002/06/22 16:36:41 $
+  $Author: sakai $
+  $Date: 2002/06/23 11:03:28 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -319,9 +319,8 @@ gobj_sig_emit(argc, argv, self)
     params = g_value_array_new(query.n_params + 1);
     rbgobj_rvalue_to_gvalue(self, &(params->values[0]));
     for (i = 0; i < query.n_params; i++)
-        rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i),
-								&(params->values[i+1]));
-    g_value_init(&return_value, G_TYPE_NONE);
+        rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i), &(params->values[i+1]));
+    memset(&return_value, 0, sizeof(return_value));
 
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
 
