@@ -72,7 +72,9 @@ static VALUE rb_gst_caps_get_type_id(self)
 static VALUE rb_gst_caps_is_equal(self, other_caps)
     VALUE self, other_caps;
 {
-   return rb_equal(rb_gst_caps_get_type_id(self),
+   return NIL_P(other_caps)
+        ? Qfalse
+        : rb_equal(rb_gst_caps_get_type_id(self),
                    rb_gst_caps_get_type_id(other_caps));
 }
 

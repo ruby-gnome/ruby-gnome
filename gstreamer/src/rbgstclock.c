@@ -69,9 +69,14 @@ static VALUE rb_gst_clock_is_active(self)
 static VALUE rb_gst_clock_is_equal(self, other_clock)
     VALUE self, other_clock;
 {
-    GstClock *c1 = RGST_CLOCK(self);
-    GstClock *c2 = RGST_CLOCK(other_clock);
-    return CBOOL2RVAL(GST_CLOCK_DIFF(c1, c2) == 0);
+    if (NIL_P(other_clock)) {
+        return Qfalse;
+    }
+    else {
+        GstClock *c1 = RGST_CLOCK(self);
+        GstClock *c2 = RGST_CLOCK(other_clock);
+        return CBOOL2RVAL(GST_CLOCK_DIFF(c1, c2) == 0);
+    }
 }
 
 void Init_gst_clock(void) {

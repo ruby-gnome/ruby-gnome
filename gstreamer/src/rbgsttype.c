@@ -153,7 +153,9 @@ static VALUE rb_gst_type_get_exts(self)
 static VALUE rb_gst_type_is_equal(self, other_type)
     VALUE self, other_type;
 {
-    return rb_equal(rb_gst_type_get_id(self), 
+    return NIL_P(other_type)
+         ? Qfalse
+         : rb_equal(rb_gst_type_get_id(self), 
                     rb_gst_type_get_id(other_type));
 }
 

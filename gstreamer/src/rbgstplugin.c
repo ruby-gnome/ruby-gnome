@@ -162,7 +162,9 @@ static VALUE rb_gst_plugin_each_feature(self)
 static VALUE rb_gst_plugin_is_equal(self, other_plugin)
     VALUE self, other_plugin;
 {
-   return rb_equal(rb_gst_plugin_get_filename(self),
+   return NIL_P(other_plugin)
+        ? Qfalse
+        : rb_equal(rb_gst_plugin_get_filename(self),
                    rb_gst_plugin_get_filename(other_plugin));
 }
 

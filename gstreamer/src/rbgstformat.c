@@ -129,6 +129,10 @@ static VALUE rb_gst_format_is_equal(self, other_format)
     GstFormat *f1, *f2;
     gchar *n1, *n2;
 
+    if (NIL_P(other_format)) {
+        return Qfalse;
+    }
+
     f1 = RGST_FORMAT(self);
     f2 = RGST_FORMAT(other_format);
 
