@@ -2,7 +2,13 @@
 extconf.rb for Ruby/GnomeCanvas extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "gnomecanvas2"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/gnomecanvas/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
@@ -11,66 +17,13 @@ require 'mkmf-gnome2'
 #
 
 PKGConfig.have_package('libgnomecanvas-2.0') or exit 1
-check_win32
+setup_win32(PACKAGE_NAME)
 
 have_func('gnome_canvas_set_center_scroll_region')
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src', 'gtk/src', 'libart/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
+add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
+add_depend_package("libart2", "libart/src", TOPDIR)
 
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-    ["gtk/src", "ruby-gtk2"],
-    ["libart/src", "ruby-libart2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
-
-#
-# create Makefiles
-#
-begin
-  srcdir = File.dirname($0) == "." ? "." :
-    File.expand_path(File.dirname($0) + "/src")
-
-  Dir.mkdir "src" unless File.exist? "src"
-  Dir.chdir "src"
-
-  begin
-    obj_ext = ".#{$OBJEXT}"
-
-    $libs = $libs.split(/\s/).uniq.join(' ')
-    $source_files = Dir.entries(srcdir).select{|fname| /\.c$/ =~ fname }
-    $objs = $source_files.collect do |item|
-      item.gsub(/\.c$/, obj_ext)
-    end
-
-    create_makefile("gnomecanvas2", srcdir)
-    raise Interrupt if not FileTest.exist? "Makefile"
-
-    mfile = File.open("Makefile", "a")
-    if /mswin32/ =~ RUBY_PLATFORM
-      mfile.puts "	copy /Y  gnomecanvas2.lib .."
-      mfile.puts
-    end
-    mfile.print "\n"
-    $source_files.each do |e|
-      mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbgnomecanvas.h\n"
-    end
-
-    mfile.close
-  ensure
-    Dir.chdir ".."
-  end
-
-  create_top_makefile()
-
-rescue Interrupt
-  print "  [error] " + $!.to_s + "\n"
-end
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMECANVAS2_COMPILATION")
+create_top_makefile
