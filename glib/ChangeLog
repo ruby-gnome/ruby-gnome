@@ -1,3 +1,7 @@
+2003-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.c: Add GLib::PRIORITY_*. 
+
 2003-06-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.c: Call setlocale(LC_NUMERIC, "C") for some locales 
