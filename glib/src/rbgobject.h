@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2002/06/22 15:33:38 $
+  $Author: sakai $
+  $Date: 2002/07/26 14:31:34 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -60,17 +60,22 @@ extern GTypeClass* rbgobj_type_class_get_struct(VALUE obj);
 extern GTypeInstance* rbgobj_type_instance_get_struct(VALUE obj);
 
 extern VALUE rbgobj_cGObject;
+extern VALUE rbgobj_cParamSpec;
 
 /* rbgobj_closure.c */
 extern GClosure* g_rclosure_new(VALUE callback_proc);
 
 /* rbgobj_value.c */
 typedef void (*RValueToGValueFunc)(VALUE from, GValue* to);
-typedef VALUE (*GValueToRValueFunc)(GValue* from);
+typedef VALUE (*GValueToRValueFunc)(const GValue* from);
 extern void rbgobj_register_r2g_func(VALUE klass, RValueToGValueFunc func);
 extern void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func);
-extern VALUE rbgobj_gvalue_to_rvalue(GValue* value);
+extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
 extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
+
+/* rbobj_param.c */
+extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
+extern VALUE rbgobj_param_spec_wrap(GParamSpec* pspec);
 
 #ifdef __cplusplus
 }

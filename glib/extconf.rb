@@ -5,9 +5,18 @@ unless system('pkg-config', '--exists', 'gobject-2.0')
   exit
 end
 
-$LDFLAGS = ' ' + `pkg-config gobject-2.0 --libs`.chomp
-$CFLAGS  = ' ' + `pkg-config gobject-2.0 --cflags`.chomp
+$LDFLAGS += ' ' + `pkg-config gobject-2.0 --libs`.chomp
+$CFLAGS  += ' ' + `pkg-config gobject-2.0 --cflags`.chomp
 $CFLAGS += ' -g'
+
+STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
+if Object.respond_to? :allocate
+  STDOUT.print "yes\n"
+  $defs << "-DHAVE_OBJECT_ALLOCATE"
+else
+  STDOUT.print "no\n"
+end
+
 
 src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
 

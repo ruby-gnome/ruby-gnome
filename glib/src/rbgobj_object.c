@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/06/23 11:03:28 $
+  $Date: 2002/07/26 14:31:33 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -25,38 +25,134 @@ static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 static VALUE rbgobj_make_gobject(VALUE klass, GObject* gobj);
 static VALUE rbgobj_make_gobject_auto_type(GObject* gobj);
 
-ID id_gobject_data;
 ID id_relatives;
 ID id_relative_callbacks;
 ID id_delete;
 ID id_class_info;
 
-static st_table *gobject_object_list;
-static VALUE gobject_object_list_v;
+/**********************************************************************/
+
+#define NO_UNREF_IN_WEAK_NOTIFY
+
+typedef struct {
+    VALUE self;
+    GObject* gobj;
+    const RGObjClassInfo* cinfo;
+    gboolean destroyed;
+} gobj_holder;
+
+static
+void gobj_weak_notify(data, where_the_object_was)
+    gpointer data;
+    GObject* where_the_object_was;
+{
+    gobj_holder* holder = data;
+    if (holder->cinfo && holder->cinfo->free)
+        holder->cinfo->free(holder->gobj); 
+    rb_ivar_set(holder->self, id_relatives, Qnil);
+    /*
+      XXX. We can't unref() here.
+      Because ref_counted have been set to zero in g_object_real_dispose().
+    */
+#ifndef NO_UNREF_IN_WEAK_NOTIFY
+    g_object_unref(holder->gobj);
+    holder->gobj = NULL;
+#endif
+    holder->destroyed = TRUE;
+}
+
+static void
+gobj_mark(holder)
+    gobj_holder* holder;
+{
+    if (holder->gobj && !holder->destroyed
+        && holder->cinfo && holder->cinfo->mark)
+        holder->cinfo->mark(holder->gobj);
+}
+
+static void
+gobj_free(gobj_holder* holder)
+{
+    if (holder->gobj){
+        if (!holder->destroyed){
+            if (holder->cinfo && holder->cinfo->free)
+                holder->cinfo->free(holder->gobj);
+            g_object_set_data(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
+            g_object_weak_unref(holder->gobj, gobj_weak_notify, holder);
+        }
+        g_object_unref(holder->gobj);
+    }
+    free(holder);
+}
+
+static VALUE
+gobj_s_allocate(klass)
+    VALUE klass;
+{
+    gobj_holder* holder;
+    VALUE result;
+
+    result = Data_Make_Struct(klass, gobj_holder, gobj_mark, gobj_free, holder);
+    holder->self  = result;
+    holder->gobj  = NULL;
+    holder->cinfo = NULL;
+    holder->destroyed = FALSE;
+    
+    return result;
+}
+
+#ifdef HAVE_OBJECT_ALLOCATE
+#define rbgobj_s_new rb_class_new_instance
+#else
+static
+VALUE gobj_s_new(int argc, VALUE* argv, VALUE klass)
+{
+    VALUE obj = gobj_s_allocate(klass);
+    rb_obj_call_init(obj, argc, argv);
+    return obj;
+}
+#endif
+
+void
+rbgobj_initialize_gobject(obj, gobj)
+    VALUE obj;
+    GObject* gobj;
+{
+    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    if (holder)
+        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
+
+    Data_Get_Struct(obj, gobj_holder, holder);
+    holder->cinfo = rbgobj_lookup_class(rb_class_of(obj));
+    holder->gobj  = gobj;
+    holder->destroyed = FALSE;
+
+    g_object_set_data(gobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
+    g_object_weak_ref(gobj, gobj_weak_notify, holder);
+
+    rb_ivar_set(obj, id_relatives, Qnil);
+}
+
+/**********************************************************************/
 
 GObject*
 rbgobj_get_gobject(obj)
     VALUE obj;
 {
-    VALUE data;
-    GObject* result;
+    gobj_holder* holder;
 
-    if (NIL_P(obj)) { 
-		rb_raise(rb_eTypeError, "wrong argument type nil");
-    }
+    if (!RTEST(rb_obj_is_kind_of(obj, rbgobj_cGObject)))
+        rb_raise(rb_eTypeError, "not a GLib::GObject");
 
-    Check_Type(obj, T_OBJECT);
-    data = rb_ivar_get(obj, id_gobject_data);
+    Data_Get_Struct(obj, gobj_holder, holder);
 
-    /* if (NIL_P(data) || data->dmark != gobj_mark) { */
-    if (NIL_P(data)) {
-		rb_raise(rb_eTypeError, "not a Glib::GObject");
-    }
+    if (holder->destroyed)
+        rb_raise(rb_eArgError, "destroyed GLib::GObject");
 
-    Data_Get_Struct(data, GObject, result);
-    if (!result)
-		rb_raise(rb_eArgError, "destroyed GLib::GObject");
-    return G_OBJECT(result);
+    if (!holder->gobj)
+        rb_raise(rb_eArgError, "uninitialize GLib::GObject");
+
+    return holder->gobj;
 }
 
 static VALUE
@@ -72,51 +168,21 @@ rbgobj_force_get_gobject(self)
     return (GObject*)rb_rescue((VALUE(*)())rbgobj_get_gobject, self, null, 0);
 }
 
-static void
-delete_gobject(gpointer user_data)
-{
-    VALUE obj = (VALUE)user_data;
-    struct RData *data;
 
-    if (!st_delete(gobject_object_list, (char**)&obj, 0))
-        rb_bug("ruby-gobject: already freed object is freed again");
-    data = RDATA(rb_ivar_get(obj, id_gobject_data));
-    data->dfree = NULL;
-    data->data  = NULL;
-}
-
-void
-rbgobj_initialize_gobject(obj, gobj)
-    VALUE obj;
+VALUE
+rbgobj_get_value_from_gobject_if_exist(gobj)
     GObject* gobj;
 {
-    VALUE data;
-
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(rb_class_of(obj));
-
-    /* XXX */
-    if (cinfo)
-		data = Data_Wrap_Struct(rb_cData, cinfo->mark, g_object_unref, gobj);
-    else
-		data = Data_Wrap_Struct(rb_cData, NULL, g_object_unref, gobj);
-
-    g_object_set_data_full(gobj, RUBY_GOBJECT_OBJ_KEY,
-                           (gpointer)obj, delete_gobject);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
-    rb_ivar_set(obj, id_gobject_data, data);
-
-    st_add_direct(gobject_object_list, (char*)obj, (char*)obj);
+    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    return holder ? holder->self : Qnil;
 }
 
 VALUE
 rbgobj_get_value_from_gobject(gobj)
     GObject* gobj;
 {
-    VALUE ret = (VALUE)g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
-    if ( ! ret )
-		ret = rbgobj_make_gobject_auto_type(gobj);
-    return ret;
+    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+    return holder ? holder->self : rbgobj_make_gobject_auto_type(gobj);
 }
 
 VALUE
@@ -124,10 +190,16 @@ rbgobj_make_gobject(klass, gobj)
     VALUE klass;
     GObject* gobj;
 {
-    VALUE obj = rb_obj_alloc(klass);
-    gobj = g_object_ref(gobj);
-    rbgobj_initialize_gobject(obj, gobj);
-    return obj;
+    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
+
+    if (holder) {
+        return holder->self;
+    } else {
+        VALUE obj = gobj_s_allocate(klass);
+        gobj = g_object_ref(gobj);
+        rbgobj_initialize_gobject(obj, gobj);
+        return obj;
+    }
 }
 
 VALUE
@@ -138,22 +210,22 @@ rbgobj_make_gobject_auto_type(gobj)
 }
 
 void
-rbgobjct_add_relative(obj, relative)
+rbgobj_add_relative(obj, relative)
     VALUE obj, relative;
 {
     VALUE ary = rb_ivar_get(obj, id_relatives);
 
     if (NIL_P(ary) || TYPE(ary) != T_ARRAY) {
-		ary = rb_ary_new();
-		rb_ivar_set(obj, id_relatives, ary);
+        ary = rb_ary_new();
+        rb_ivar_set(obj, id_relatives, ary);
     }
     rb_ary_push(ary, relative);
 }
 
 void
-rbgobjcet_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
-	VALUE obj, relative, hash_key;
-	ID    obj_ivar_id;
+rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
+    VALUE obj, relative, hash_key;
+    ID    obj_ivar_id;
 {
     VALUE hash = rb_ivar_get(obj, obj_ivar_id);
 
@@ -174,7 +246,7 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
         /* should not happen. */
     } else {
-        rb_funcall(hash, rb_intern("delete"), 1, hash_key);
+        rb_funcall(hash, id_delete, 1, hash_key);
     }
 }
 
@@ -236,42 +308,85 @@ gobj_new(self, gtype, params_hash)
 }
 
 static VALUE
+gobj_set_property(self, prop_name, val)
+    VALUE self, prop_name, val;
+{
+    GParamSpec* pspec;
+
+    StringValue(prop_name);
+
+    pspec = g_object_class_find_property(
+        G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+        StringValuePtr(prop_name));
+
+    if (!pspec)
+        rb_raise(rb_eArgError, "No such property");
+    else {
+        GValue tmp;
+        memset(&tmp, 0, sizeof(tmp));
+        g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
+        rbgobj_rvalue_to_gvalue(val, &tmp);
+        g_object_set_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
+        g_value_unset(&tmp);
+        return self;
+    }
+}
+
+static VALUE
+gobj_get_property(self, prop_name)
+    VALUE self, prop_name;
+{
+    GParamSpec* pspec;
+
+    StringValue(prop_name);
+
+    pspec = g_object_class_find_property(
+        G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+        StringValuePtr(prop_name));
+
+    if (!pspec)
+        rb_raise(rb_eArgError, "No such property");
+    else {
+        GValue tmp;
+        VALUE ret;
+        memset(&tmp, 0, sizeof(tmp));
+        g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
+        g_object_get_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
+        ret = rbgobj_gvalue_to_rvalue(&tmp);
+        g_value_unset(&tmp);
+        return ret;
+    }
+}
+
+static VALUE
 gobj_initialize(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    rb_raise(rb_eRuntimeError, "can't instantiate class %s", rb_class2name(self));
-}
-
-static VALUE
-gobj_equal(self, other)
-    VALUE self, other;
-{
-    if (self == other)
-        return Qtrue;
-    if (rbgobj_get_gobject(self) == rbgobj_force_get_gobject(other))
-        return Qtrue;
-    return Qfalse;
+    rb_raise(rb_eRuntimeError, "can't instantiate class %s",
+             rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
 gobj_inspect(self)
     VALUE self;
 {
-    VALUE iv = rb_ivar_get(self, id_gobject_data);
+    gobj_holder* holder;
     char *cname = rb_class2name(CLASS_OF(self));
     char *s;
 
-    if (NIL_P(iv) || RDATA(iv)->data == 0) {
-		s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
-		sprintf(s, "#<%s: destroyed>", cname);
-    }
-    else {
-		s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
-		sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self,
+    Data_Get_Struct(self, gobj_holder, holder);
+
+    if (holder->gobj) {
+        s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
+        sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self,
                 rbgobj_get_gobject(self));
+    } else {
+        s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
+        sprintf(s, "#<%s: destroyed>", cname);
     }
+
     return rb_str_new2(s);
 }
 
@@ -320,7 +435,9 @@ gobj_sig_emit(argc, argv, self)
     rbgobj_rvalue_to_gvalue(self, &(params->values[0]));
     for (i = 0; i < query.n_params; i++)
         rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i), &(params->values[i+1]));
+
     memset(&return_value, 0, sizeof(return_value));
+    //g_value_init(&return_value, ); // XXX
 
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
 
@@ -417,7 +534,15 @@ gobj_smethod_added(self, id)
 }
 
 static VALUE
-_gobject_to_ruby(GValue* from)
+gobj_ref_count(self)
+    VALUE self;
+{
+    GObject* gobj = rbgobj_force_get_gobject(self);
+    return INT2NUM(gobj ? gobj->ref_count : 0);
+}
+
+static VALUE
+_gobject_to_ruby(const GValue* from)
 {
     return rbgobj_get_value_from_gobject(g_value_get_object(from));
 }
@@ -441,7 +566,15 @@ void Init_gobject_gobj()
     rbgobj_register_r2g_func(rbgobj_cGObject, _gobject_from_ruby);
     rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
 
+#ifdef HAVE_OBJECT_ALLOCATE
+    rb_define_singleton_method(rbgobj_cGObject, "allocate", &gobj_s_allocate, 0);
+#else
+    rb_define_singleton_method(rbgobj_cGObject, "new", &gobj_s_new, -1);
+#endif
+
     rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_new, 2);
+    rb_define_method(rbgobj_cGObject, "set_property", gobj_set_property, 2);
+    rb_define_method(rbgobj_cGObject, "get_property", gobj_get_property, 1);
 
     rb_define_method(rbgobj_cGObject, "initialize", gobj_initialize, -1);
     rb_define_method(rbgobj_cGObject, "g_type", gobj_get_g_type, 0);
@@ -468,9 +601,11 @@ void Init_gobject_gobj()
                      gobj_sig_handler_disconnect, 1);
 
     rb_define_method(rbgobj_cGObject, "singleton_method_added", gobj_smethod_added, 1);
-    rb_define_method(rbgobj_cGObject, "==", gobj_equal, 1);
     rb_define_method(rbgobj_cGObject, "inspect", gobj_inspect, 0);
     rb_define_method(rbgobj_cGObject, "clone", gobj_clone, 0);
+
+    /* for debugging */
+    rb_define_method(rbgobj_cGObject, "ref_count", gobj_ref_count, 0);
 }
 
 /**********************************************************************/
@@ -478,22 +613,15 @@ void Init_gobject_gobj()
 void Init_gobject()
 {
     /* IDs */
-    id_gobject_data = rb_intern("__gobject_data__");
     id_relatives = rb_intern("__relatives__");
     id_relative_callbacks = rb_intern("__relative_callbacks__");
+    id_class_info = rb_intern("__gobject_class_info__");
     id_delete = rb_intern("delete");
 
     Init_gobject_gtype();
     Init_gobject_gvalue();
     Init_gobject_gclosure();
     Init_gobject_gparam();
-
-    gobject_object_list_v = Qnil;
-    rb_global_variable(&gobject_object_list_v);
-    gobject_object_list = st_init_numtable();
-    gobject_object_list_v = Data_Wrap_Struct(rb_cObject,
-                                             rb_mark_tbl, st_free_table,
-                                             gobject_object_list);
 
     Init_gobject_gobj();
 }

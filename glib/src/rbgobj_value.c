@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/06/17 18:14:24 $
+  $Date: 2002/07/26 14:31:34 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -34,7 +34,7 @@ rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 /**********************************************************************/
 
 VALUE
-rbgobj_gvalue_to_rvalue(GValue* value)
+rbgobj_gvalue_to_rvalue(const GValue* value)
 {
     GType gtype;
 

@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: sakai $
-  $Date: 2002/06/21 18:26:11 $
+  $Date: 2002/07/26 14:31:33 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -16,8 +16,5 @@
 void Init_glib2()
 {
     mGLib = rb_define_module("GLib");
-    rb_ivar_set(mGLib, id_relatives, Qnil);
-    rb_ivar_set(mGLib, id_relative_callbacks, Qnil);
-
     Init_gobject();
 }
