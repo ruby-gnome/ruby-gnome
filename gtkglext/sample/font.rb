@@ -45,42 +45,40 @@ def realize(w)
     light_position = [1.0, 1.0, 1.0, 0.0]
 
     #*** OpenGL BEGIN ***
-    return if !gldrawable.gl_begin(glcontext)
-        
-    # Generate font display lists.
-    $font_list_base = GL.GenLists(128)
+    gldrawable.gl_begin(glcontext) do
+        # Generate font display lists.
+        $font_list_base = GL.GenLists(128)
 
-    font_desc = Pango::FontDescription.new FONT_STRING
+        font_desc = Pango::FontDescription.new FONT_STRING
 
-    font = Gdk::GL.use_pango_font(font_desc, 0, 128, $font_list_base)
-    if !font
-        puts "*** Can't load font '#{FONT_STRING}'\n"
-        exit 1
+        font = Gdk::GL.use_pango_font(font_desc, 0, 128, $font_list_base)
+        if !font
+            puts "*** Can't load font '#{FONT_STRING}'\n"
+            exit 1
+        end
+
+        begin
+            font_metrics = font.metrics
+        rescue TypeError, ArgumentError # the error depend on if I give no or a nil arg to font.metrics
+            raise "Sorry, but this example does not work with Ruby-GNOME2 0.6.0 because of a bug in Ruby/Pango."
+        end
+        $font_height = font_metrics.ascent + font_metrics.descent
+        $font_height = Pango.pixels($font_height)
+
+        GL.ClearColor(1.0, 1.0, 1.0, 1.0)
+        GL.ClearDepth(1.0)
+
+        GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
+
+        GL.MatrixMode(GL::PROJECTION)
+        GL.LoadIdentity
+        GL.Ortho(0.0, w.allocation.width,
+                 0.0, w.allocation.height,
+                 -1.0, 1.0);
+
+        GL.MatrixMode(GL::MODELVIEW)
+        GL.LoadIdentity
     end
-
-    begin
-        font_metrics = font.metrics
-    rescue TypeError, ArgumentError # the error depend on if I give no or a nil arg to font.metrics
-        raise "Sorry, but this example does not work with Ruby-GNOME2 0.6.0 because of a bug in Ruby/Pango."
-    end
-    $font_height = font_metrics.ascent + font_metrics.descent
-    $font_height = Pango.pixels($font_height)
-
-    GL.ClearColor(1.0, 1.0, 1.0, 1.0)
-    GL.ClearDepth(1.0)
-
-    GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
-
-    GL.MatrixMode(GL::PROJECTION)
-    GL.LoadIdentity
-    GL.Ortho(0.0, w.allocation.width,
-             0.0, w.allocation.height,
-             -1.0, 1.0);
-
-    GL.MatrixMode(GL::MODELVIEW)
-    GL.LoadIdentity
-
-    gldrawable.gl_end #*** OpenGL END ***
 end
 
 # Init GTK
@@ -134,7 +132,7 @@ drawing_area.signal_connect("configure_event") do |w, e|
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    if gldrawable.gl_begin(glcontext) #*** OpenGL BEGIN ***
+    gldrawable.gl_begin(glcontext) do
         GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
 
         GL.MatrixMode(GL::PROJECTION)
@@ -145,18 +143,14 @@ drawing_area.signal_connect("configure_event") do |w, e|
 
         GL.MatrixMode(GL::MODELVIEW)
         GL.LoadIdentity
-
-        gldrawable.gl_end #*** OpenGL END ***
         true
-    else
-        false
     end
 end
 drawing_area.signal_connect("expose_event") do |w,e|
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    if gldrawable.gl_begin(glcontext) #*** OpenGL BEGIN ***
+    gldrawable.gl_begin(glcontext) do
         GL.Clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT)
 
         GL.Color(0.0, 0.0, 0.0)
@@ -176,11 +170,7 @@ drawing_area.signal_connect("expose_event") do |w,e|
         else
             GL.Flush
         end
-
-        gldrawable.gl_end #*** OpenGL END ***
         true
-    else
-        false
     end
 end
 

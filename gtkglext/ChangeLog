@@ -1,3 +1,9 @@
+2004-02-13 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkgldrawable.c: added support for blocks in gl_begin
+	gldrawable.gl_begin { ... }
+	* sample/*.rb: updated the samples to use the block version of gl_begin
+
 2003-12-29 Vincent Isambart <isambart@netcourrier.com>
 
 	* sample/*.rb: corrected the behavior when closing the window.

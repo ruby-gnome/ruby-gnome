@@ -39,69 +39,51 @@ def realize_main(w, l)
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    #*** OpenGL BEGIN ***
-    return if !gldrawable.gl_begin(glcontext)
+    gldrawable.gl_begin(glcontext) do
+        qobj = GLU.NewQuadric
+        GLU.QuadricDrawStyle(qobj, GLU::FILL)
+        GL.NewList(1, GL::COMPILE)
+        GLU.Sphere(qobj, 1.0, 20, 20)
+        GL.EndList
 
-    qobj = GLU.NewQuadric
-    GLU.QuadricDrawStyle(qobj, GLU::FILL)
-    GL.NewList(1, GL::COMPILE)
-    GLU.Sphere(qobj, 1.0, 20, 20)
-    GL.EndList
-
-    init_gl(l)
-
-    #*** OpenGL END ***
-    gldrawable.gl_end
+        init_gl(l)
+    end
 end
 
 def realize_sub(w, l)
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    #*** OpenGL BEGIN ***
-    return if !gldrawable.gl_begin(glcontext)
-
-    init_gl(l)
-
-    #*** OpenGL END ***
-    gldrawable.gl_end
+    gldrawable.gl_begin(glcontext) do
+       init_gl(l)
+    end
 end
 
 def configure_event(w)
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    #*** OpenGL BEGIN ***
-    return false if !gldrawable.gl_begin(glcontext)
-
-    GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
-
-    #*** OpenGL END ***
-    gldrawable.gl_end
-
-    true
+    gldrawable.gl_begin(glcontext) do
+        GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
+        true
+    end
 end
 
 def expose_event(w)
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    #*** OpenGL BEGIN ***
-    return false if !gldrawable.gl_begin(glcontext)
+    gldrawable.gl_begin(glcontext) do
+        GL.Clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT)
+        GL.CallList(1)
 
-    GL.Clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT)
-    GL.CallList(1)
-
-    if gldrawable.double_buffered?
-        gldrawable.swap_buffers
-    else
-        GL.Flush
+        if gldrawable.double_buffered?
+            gldrawable.swap_buffers
+        else
+            GL.Flush
+        end
+        true
     end
-
-    #*** OpenGL END ***
-    gldrawable.gl_end
-
-    true
 end
 
 # Init GTK

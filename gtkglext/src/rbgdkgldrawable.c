@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkgldrawable.c,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* $Id: rbgdkgldrawable.c,v 1.3 2004/02/13 22:21:09 isambart Exp $ */
 /* Gdk::GLDrawable Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -68,7 +68,13 @@ static VALUE
 gldrawable_gl_begin(self, context)
     VALUE self, context;
 {
-    return CBOOL2RVAL(gdk_gl_drawable_gl_begin(_SELF(self), _CONTEXT(context)));
+    gboolean begin_ok = gdk_gl_drawable_gl_begin(_SELF(self), _CONTEXT(context));
+    if (!begin_ok)
+        return Qfalse;
+    if (rb_block_given_p())
+        return rb_ensure(rb_yield, Qnil, gdk_gl_drawable_gl_end, _SELF(self));
+
+    return Qtrue;
 }
 
 static VALUE

@@ -167,12 +167,9 @@ module GLUT
                 glcontext  = w.gl_context
                 gldrawable = w.gl_drawable
 
-                if gldrawable.gl_begin(glcontext)
+                gldrawable.gl_begin(glcontext) do
                     display.call
-                    gldrawable.gl_end
                     true
-                else
-                    false
                 end
             end
         else
@@ -186,12 +183,9 @@ module GLUT
                 glcontext  = w.gl_context
                 gldrawable = w.gl_drawable
 
-                if gldrawable.gl_begin(glcontext)
+                gldrawable.gl_begin(glcontext) do
                     reshape.call(w.allocation.width, w.allocation.height)
-                    gldrawable.gl_end
                     true
-                else
-                    false
                 end
             end
         else

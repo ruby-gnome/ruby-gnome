@@ -40,39 +40,35 @@ def realize(w)
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    #*** OpenGL BEGIN ***
-    return if !gldrawable.gl_begin(glcontext)
+    gldrawable.gl_begin(glcontext) do
+        qobj = GLU.NewQuadric
+        GLU.QuadricDrawStyle(qobj, GLU::FILL)
+        GL.NewList(1, GL::COMPILE)
+        GLU.Sphere(qobj, 1.0, 20, 20)
+        GL.EndList
 
-    qobj = GLU.NewQuadric
-    GLU.QuadricDrawStyle(qobj, GLU::FILL)
-    GL.NewList(1, GL::COMPILE)
-    GLU.Sphere(qobj, 1.0, 20, 20)
-    GL.EndList
+        GL.Light(GL::LIGHT0, GL::DIFFUSE, LIGHT_DIFFUSE)
+        GL.Light(GL::LIGHT0, GL::POSITION, LIGHT_POSITION)
+        GL.Enable(GL::LIGHTING)
+        GL.Enable(GL::LIGHT0)
+        GL.Enable(GL::DEPTH_TEST)
 
-    GL.Light(GL::LIGHT0, GL::DIFFUSE, LIGHT_DIFFUSE)
-    GL.Light(GL::LIGHT0, GL::POSITION, LIGHT_POSITION)
-    GL.Enable(GL::LIGHTING)
-    GL.Enable(GL::LIGHT0)
-    GL.Enable(GL::DEPTH_TEST)
+        GL.ClearColor(1.0, 1.0, 1.0, 1.0)
+        GL.ClearDepth(1.0)
 
-    GL.ClearColor(1.0, 1.0, 1.0, 1.0)
-    GL.ClearDepth(1.0)
+        GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
 
-    GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
+        GL.MatrixMode(GL::PROJECTION)
+        GL.LoadIdentity
+        GLU.Perspective(40.0, 1.0, 1.0, 10.0)
 
-    GL.MatrixMode(GL::PROJECTION)
-    GL.LoadIdentity
-    GLU.Perspective(40.0, 1.0, 1.0, 10.0)
-
-    GL.MatrixMode(GL::MODELVIEW)
-    GL.LoadIdentity
-    GLU.LookAt(0.0, 0.0, 3.0,
-               0.0, 0.0, 0.0,
-               0.0, 1.0, 0.0)
-    GL.Translate(0.0, 0.0, -3.0)
-
-    #*** OpenGL END ***
-    gldrawable.gl_end
+        GL.MatrixMode(GL::MODELVIEW)
+        GL.LoadIdentity
+        GLU.LookAt(0.0, 0.0, 3.0,
+                   0.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0)
+        GL.Translate(0.0, 0.0, -3.0)
+    end
 end
 
 # Init GTK
@@ -119,19 +115,16 @@ drawing_area.signal_connect("configure_event") do |w, e|
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    if gldrawable.gl_begin(glcontext) #*** OpenGL BEGIN ***
+    gldrawable.gl_begin(glcontext) do
         GL.Viewport(0, 0, w.allocation.width, w.allocation.height)
-        gldrawable.gl_end #*** OpenGL END ***
         true
-    else
-        false
     end
 end
 drawing_area.signal_connect("expose_event") do |w,e|
     glcontext = w.gl_context
     gldrawable = w.gl_drawable
 
-    if gldrawable.gl_begin(glcontext) #*** OpenGL BEGIN ***
+    gldrawable.gl_begin(glcontext) do
         GL.Clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT)
 
         # Sync.
@@ -151,11 +144,7 @@ drawing_area.signal_connect("expose_event") do |w,e|
         GL.CallList(1)
 
         GL.Flush
-
-        gldrawable.gl_end #*** OpenGL END ***
         true
-    else
-        false
     end
 end
 
