@@ -3,8 +3,8 @@
 
   global.h -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/07 08:35:05 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -99,6 +99,9 @@ extern void Init_gtk_style();
 extern void Init_gtk_table();
 extern void Init_gtk_tearoff_menu_item();
 extern void Init_gtk_text();
+extern void Init_gtk_textchild();
+extern void Init_gtk_textmark();
+extern void Init_gtk_texttag();
 extern void Init_gtk_tips_query();
 extern void Init_gtk_toggle_button();
 extern void Init_gtk_toolbar();

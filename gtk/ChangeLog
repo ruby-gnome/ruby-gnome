@@ -1,3 +1,8 @@
+2002-08-07  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgtktextchild.c, src/rbgtktextmark.c, src/rbgtktexttag.c:
+	add file
+
 2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkeditable.c: use G_DEF_INTERFACE
