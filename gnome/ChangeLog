@@ -1,3 +1,10 @@
+2002-10-13  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-dialog.c, src/rbgnome-messagebox.c, src/rbgnome-pixmap.c,
+	src/rbgnome-property-box.c: delete files for deprecated classes.
+	* src/rbgnome-uidefs.c: delete deprecated constants.
+	* src/rbgnome.c, src/rbgnome.h: delete deprecated classes.
+
 2002-09-29  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-scores.c: Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).

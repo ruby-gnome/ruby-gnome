@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-uidefs.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-uidefs.c,v 1.4 2002/10/13 13:00:32 tkubo Exp $ */
 
 /* Miscellaneous definitions for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -32,19 +32,11 @@ Init_gnome_uidefs(mGnome)
     rb_define_const(mGnome, "PAD_SMALL", INT2FIX(GNOME_PAD_SMALL));
     rb_define_const(mGnome, "PAD_BIG", INT2FIX(GNOME_PAD_BIG));
 
-    /* These are the button numbers on a yes-no or ok-cancel GnomeDialog,
-       and in the gnome-app-util callbacks. Make the program more
-       readable, is all. */
-    rb_define_const(mGnome, "YES", INT2FIX(GNOME_YES));
-    rb_define_const(mGnome, "NO", INT2FIX(GNOME_NO));
-    rb_define_const(mGnome, "OK", INT2FIX(GNOME_OK));
-    rb_define_const(mGnome, "CANCEL", INT2FIX(GNOME_CANCEL));
-
     /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
        Add to the list as well..
     */
-    rb_define_const(mGnome, "KEY_NAME_EXIT", INT2FIX(GNOME_KEY_NAME_EXIT));
-    rb_define_const(mGnome, "KEY_MOD_EXIT", INT2FIX(GNOME_KEY_MOD_EXIT));
+    rb_define_const(mGnome, "KEY_NAME_QUIT", INT2FIX(GNOME_KEY_NAME_QUIT));
+    rb_define_const(mGnome, "KEY_MOD_QUIT", INT2FIX(GNOME_KEY_MOD_QUIT));
     rb_define_const(mGnome, "KEY_NAME_CLOSE", INT2FIX(GNOME_KEY_NAME_CLOSE));
     rb_define_const(mGnome, "KEY_MOD_CLOSE", INT2FIX(GNOME_KEY_MOD_CLOSE));
 
