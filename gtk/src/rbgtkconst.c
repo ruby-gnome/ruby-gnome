@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2003/11/23 08:38:36 $
+  $Date: 2004/12/12 17:55:06 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -112,6 +112,12 @@ Init_gtk_const()
     /* GtkResizeMode */
     G_DEF_CLASS(GTK_TYPE_RESIZE_MODE, "ResizeMode", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_RESIZE_MODE, "GTK_");
+
+    /* GtkScrollStep */
+#if GTK_CHECK_VERSION(2,4,0)
+    G_DEF_CLASS(GTK_TYPE_SCROLL_STEP, "ScrollStep", mGtk);
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_SCROLL_STEP, "GTK_");
+#endif
 
     /* GtkScrollType */
     G_DEF_CLASS(GTK_TYPE_SCROLL_TYPE, "ScrollType", mGtk);

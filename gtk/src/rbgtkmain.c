@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2004/05/20 16:57:59 $
+  $Date: 2004/12/12 17:55:06 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -418,6 +418,17 @@ gtk_m_check_version(self, major, minor, micro)
     return ret ? CSTR2RVAL(ret) : Qnil;
 }
 
+static VALUE
+gtk_m_check_version_q(self, major, minor, micro)
+    VALUE self, major, minor, micro;
+{
+    gchar * ret = NULL;
+    ret = gtk_check_version(FIX2INT(major),
+                            FIX2INT(minor), FIX2INT(micro));
+    return (ret == NULL) ? Qtrue : Qfalse;
+}
+
+
 void 
 Init_gtk_main()
 {
@@ -454,6 +465,7 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "get_event_widget", gtk_m_get_event_widget, -1);
     rb_define_module_function(mGtk, "propagate_event", gtk_m_propagate_event, 2);
     rb_define_module_function(mGtk, "check_version", gtk_m_check_version, 3);
+    rb_define_module_function(mGtk, "check_version?", gtk_m_check_version_q, 3);
 
     rb_define_const(mGtk, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 

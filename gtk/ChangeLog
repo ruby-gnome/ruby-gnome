@@ -1,3 +1,10 @@
+2004-12-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkconst.c: Added Gtk::ScrollStep for GTK+-2.4.x. 
+	* src/rbgtkmain.c: Added Gtk.check_version?. 
+	* src/rbgtkcelllayout.c: When Gtk::CellLayout#set_cell_data_func is 
+	not given a block, it may be removed the data_func.
+
 2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c, rbgtkscale.c: Fix warning for GTK+-2.2.x.
