@@ -1,5 +1,11 @@
 2002-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* README: Revise README.
+	* extconf.rb: Add check Ruby/GLib2 was installed or not.
+	Install lib/gtk2.rb automatically.
+
+2002-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* src/rbgtk.h: Remove CSTR2OBJ().
 	* src/*.c: CSTR2OBJ() -> CSTR2RVAL, STR2CSTR -> RVAL2CSTR.
 

@@ -4,6 +4,12 @@ extconf.rb for gtk extention library
 
 require "mkmf"
 
+begin
+	require 'glib2'
+rescue LoadError
+	raise "Install glib2 before gtk2."
+end
+
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)
@@ -98,6 +104,7 @@ begin
   end
 
   create_makefile("gtk2")
+
   raise Interrupt if not FileTest.exist? "Makefile"
 
   mfile = File.open("Makefile", "a")
@@ -151,10 +158,12 @@ all:
 		@nmake -nologo
 
 install:
+		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
 		@cd src
 		@nmake -nologo install DESTDIR=$(DESTDIR)
 
 site-install:
+		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
 		@cd src
 		@nmake -nologo site-install DESTDIR=$(DESTDIR)
 
@@ -171,8 +180,14 @@ clean:
 all:
 		@cd src; make all
 
-install:;	@cd src; make install
-site-install:;	@cd src; make site-install
+install:
+		@cp lib/gtk2.rb #{Config::CONFIG["rubylibdir"]}
+		@cd src; make install
+
+site-install:;	
+		@cp lib/gtk2.rb #{Config::CONFIG["sitelibdir"]}
+		@cd src; make site-install
+
 clean:
 		@cd src; make allclean
 		@rm -f core gtk2.a *~

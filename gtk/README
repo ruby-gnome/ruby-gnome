@@ -6,11 +6,12 @@
     Gimp ToolKit. Powerful toolkit written in C.
         http://www.gtk.org/
 
+  Ruby/GLib2
+    Ruby extention library to use GLib 2.0.
+    This is a part of Ruby-GNOME2.
+
   Ruby/GTK2 (this distribution)
     Ruby extension library to use GTK+ 2.0.
-    This language binding was first developed by Yukihiro Matsumoto,
-    it is now maintained by me.
-        http://ruby-gnome.sf.net/
 
     If you have any questions or requests, use one of the following:
 
@@ -20,7 +21,7 @@
 
   Install
 
-    0. install ruby-1.6.x and GTK+-2.0.x
+    0. install ruby-1.6.x, GTK+-2.0.x and Ruby/GLib2.
 
     1. extract archive file.
        $ gzip -dc ruby-gtk-x.xx.tar.gz | tar xf -
@@ -34,12 +35,7 @@
     4. make.
        $ make
 
-    5. test sample scripts.
-       $ ruby -Isrc sample/*.rb
-       $ cd sample/testgtk; ruby -I../../src testgtk.rb
-       $ cd doc; ruby -I../src rbbr.rb
-    
-    6. make install if all tests have been OK.
+    5. install
        $ su
        # make install
 
@@ -58,19 +54,6 @@
     sample/test/*.rb
     sample/testgtk/     Ports of testgtk.c in GTK+ distributions
     sample/testim.rb    sample for Gdk::IM
-
-
-  Related links
-
-    - Ruby-GNOME2 (official)
-      you can get latest version of Ruby-GNOME2.
-      -> http://ruby-gnome2.sf.net/
-
-    - Programming by Ruby/Gtk
-      there are many documents for Ruby/Gtk.
-      -> http://ruby.freak.ne.jp/gtk/index.html
-
-    - you can also get valuable information from WWW about GTK+.
 
 
   Copying
