@@ -227,12 +227,22 @@ static VALUE track_length_time(self)
     return ULL2NUM(track->length_time);
 }
 
-static VALUE track_con_stream(self)
+static VALUE track_con_streams(self)
     VALUE self;
 {
-    /*GstMediaInfoTrack *track = RGST_MEDIA_INFO_TRACK(self);
-      TODO */
-    return Qnil;
+    GstMediaInfoTrack *track;
+    const GList *list;
+    VALUE arr;
+    
+    track = RGST_MEDIA_INFO_TRACK(self);
+    arr = rb_ary_new();
+    for (list = track->con_streams;
+         list != NULL;
+         list = g_list_next(list))
+    {
+        rb_ary_push(arr, RGST_MEDIA_INFO_STREAM_NEW(list->data));
+    }
+    return arr;
 }
 
 void Init_gst_mediatype(void) {
@@ -260,7 +270,7 @@ void Init_gst_mediatype(void) {
     rb_define_method(c, "streaminfo", track_streaminfo, 0);
     rb_define_method(c, "format", track_format, 0);
     rb_define_method(c, "length_time", track_length_time, 0);
-    rb_define_method(c, "con_stream", track_con_stream, 0);
+    rb_define_method(c, "con_streams", track_con_streams, 0);
 }
 
 #endif /* HAVE_MEDIA_INFO */
