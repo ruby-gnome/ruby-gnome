@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2002/11/21 11:53:51 $
+ * $Date: 2002/12/01 02:25:41 $
  *
  *****************************************************************************/
 
@@ -315,7 +315,7 @@ client_change_set_from_currentv(self, keys)
 {
 	int i, n;
 	gchar **gkeys;
-	VALUE set;
+	VALUE key, set;
 
 	Check_Type(keys, T_ARRAY);
 	n = RARRAY(keys)->len;
@@ -323,7 +323,8 @@ client_change_set_from_currentv(self, keys)
 
 	/* convert to NULL-terminated array of gchar *'s */
 	for (i = 0; i < n; i++) {
-		gkeys[i] = RVAL2CSTR(rb_ary_entry(keys, i));
+		key = rb_ary_entry(keys, i);
+		gkeys[i] = RVAL2CSTR(key);
 	}
 	gkeys[n] = NULL;
 

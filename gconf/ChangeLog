@@ -1,3 +1,8 @@
+2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-client.c: Follow Ruby/GLib changes.
+	Pointed out by Joshua Keith <joshuakeith@linuxmail.org>.
+
 2002-11-20  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/lib/gconf2.rb: Move from lib/gconf2.rb as it was not installed 
@@ -14,7 +19,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2002/11/23 04:51:49 $ macros.
+	and $Date: 2002/12/01 02:25:40 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
