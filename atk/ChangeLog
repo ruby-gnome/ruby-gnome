@@ -1,3 +1,16 @@
+2004-02-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkutil.c: Added. 
+	* src/rbatkcomponent.c: Fix a return value of Atk::Component#set_extents,
+	#set_position, #set_size.
+	* src/rbatkimage.c: Fix a return value of Atk::Image#set_image_description. 
+	* src/rbatkselection.c: Fix return values of Atk::Selection#add_selection,
+	#clear_selection, #remove_selection.
+	* src/rbatktable.c: Fix return values of Atk::Table#add_column_selection,
+	#add_row_selection, #remove_column_selection, #remove_row_selection
+	* src/rbatkstate.c: Fix a bug of Atk::StateType. 
+	* src/rbatktext.c: Added. 
+
 2003-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatktable.c: Added.

@@ -4,7 +4,7 @@
   rbatktable.c -
 
   $Author: mutoh $
-  $Date: 2003/12/25 17:46:49 $
+  $Date: 2004/02/19 17:16:54 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -220,28 +220,36 @@ static VALUE
 rbatk_table_add_column_selection(self, column)
     VALUE self, column;
 {
-    return CBOOL2RVAL(atk_table_add_column_selection(_SELF(self), NUM2INT(column)));
+    gboolean ret = atk_table_add_column_selection(_SELF(self), NUM2INT(column));
+    if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
+    return self;
 }
 
 static VALUE
 rbatk_table_add_row_selection(self, row)
     VALUE self, row;
 {
-    return CBOOL2RVAL(atk_table_add_row_selection(_SELF(self), NUM2INT(row)));
+    gboolean ret = atk_table_add_row_selection(_SELF(self), NUM2INT(row));
+    if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
+    return self;
 }
 
 static VALUE
 rbatk_table_remove_column_selection(self, column)
     VALUE self, column;
 {
-    return CBOOL2RVAL(atk_table_remove_column_selection(_SELF(self), NUM2INT(column)));
+    gboolean ret = atk_table_remove_column_selection(_SELF(self), NUM2INT(column));
+    if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
+    return self;
 }
 
 static VALUE
 rbatk_table_remove_row_selection(self, row)
     VALUE self, row;
 {
-    return CBOOL2RVAL(atk_table_remove_row_selection(_SELF(self), NUM2INT(row)));
+    gboolean ret = atk_table_remove_row_selection(_SELF(self), NUM2INT(row));
+    if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
+    return self;
 }
 
 void

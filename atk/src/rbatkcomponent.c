@@ -4,7 +4,7 @@
   rbatkcomponent.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2004/02/19 17:16:54 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -113,30 +113,33 @@ static VALUE
 comp_set_extents(self, x, y, width, height, coord_type)
     VALUE self, x, y, width, height, coord_type;
 {
-    return CBOOL2RVAL(atk_component_set_extents(
-                          _SELF(self),
-                          NUM2INT(x), NUM2INT(y),
-                          NUM2INT(width), NUM2INT(height),
-                          RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE)));
+    gboolean ret = atk_component_set_extents(_SELF(self),
+                                             NUM2INT(x), NUM2INT(y),
+                                             NUM2INT(width), NUM2INT(height),
+                                             RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't set extents");
+    return self;
 }
 
 static VALUE
 comp_set_position(self, x, y, coord_type)
     VALUE self, x, y, coord_type;
 {
-    return CBOOL2RVAL(atk_component_set_position(
-                          _SELF(self),
-                          NUM2INT(x), NUM2INT(y),
-                          RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE)));
+    gboolean ret = atk_component_set_position(_SELF(self),
+                                              NUM2INT(x), NUM2INT(y),
+                                              RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't set the position");
+    return self;
 }
 
 static VALUE
 comp_set_size(self, width, height)
     VALUE self, width, height;
 {
-    return CBOOL2RVAL(atk_component_set_size(
-                          _SELF(self),
-                          NUM2INT(width), NUM2INT(height)));
+    gboolean ret = atk_component_set_size(_SELF(self),
+                                          NUM2INT(width), NUM2INT(height));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't set the size");
+    return self;
 }
 
 void

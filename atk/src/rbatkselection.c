@@ -4,7 +4,7 @@
   rbatkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/12/08 16:32:09 $
+  $Date: 2004/02/19 17:16:54 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -16,14 +16,18 @@ static VALUE
 rbatksel_add_selection(self, i)
     VALUE self, i;
 {
-    return CBOOL2RVAL(atk_selection_add_selection(_SELF(self), NUM2INT(i)));
+    gboolean ret = atk_selection_add_selection(_SELF(self), NUM2INT(i));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't add selection");
+    return self;
 }
 
 static VALUE
 rbatksel_clear_selection(self)
     VALUE self;
 {
-    return CBOOL2RVAL(atk_selection_clear_selection(_SELF(self)));
+    gboolean ret = atk_selection_clear_selection(_SELF(self));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't clear selection");
+    return self;
 }
 
 static VALUE
@@ -51,7 +55,9 @@ static VALUE
 rbatksel_remove_selection(self, i)
     VALUE self, i;
 {
-    return CBOOL2RVAL(atk_selection_remove_selection(_SELF(self), NUM2INT(i)));
+    gboolean ret = atk_selection_remove_selection(_SELF(self), NUM2INT(i));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection");
+    return self;
 }
 
 static VALUE

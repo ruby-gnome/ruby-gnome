@@ -4,7 +4,7 @@
   rbatkhypertext.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2004/02/19 17:16:54 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -33,8 +33,10 @@ static VALUE
 rbatkimage_set_image_description(self, description)
     VALUE self, description;
 {
-    return CBOOL2RVAL(atk_image_set_image_description(_SELF(self),
-                                                      RVAL2CSTR(description)));
+    gboolean ret = atk_image_set_image_description(_SELF(self),
+                                                   RVAL2CSTR(description));
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't set image description");
+    return self;
 }
 
 static VALUE
