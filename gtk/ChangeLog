@@ -1,3 +1,8 @@
+2003-03-21  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* src/rbgtkdrag.c (): NUM2INT() can fail a bounds check for the time
+	value, NUM2ULONG() avoids this.
+
 2003-03-21  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/gtk-demo/textview.rb: Modified.

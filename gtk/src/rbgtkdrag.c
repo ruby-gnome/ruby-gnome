@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/25 18:02:22 $
+  $Author: sakai $
+  $Date: 2003/03/21 04:56:58 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -102,7 +102,7 @@ gtkdrag_drag_get_data(self, widget, context, target, time)
     VALUE self, widget, context, target, time;
 {
     gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context), RVAL2ATOM(target),
-                      NUM2INT(time));
+                      NUM2ULONG(time));
     return self;
 }
 
