@@ -1,0 +1,35 @@
+Ruby/GNOME -- Ruby bindings for gnome-libs
+==========================================
+
+*The current status of Ruby/GNOME is experimantal*
+
+To use them, you will need Ruby 1.6 and gnome-libs 1.0.50 or
+later installed on your system.
+
+
+Compilation and Installation
+============================
+
+To compile Ruby/GNOME, you should run:
+
+  ruby extconf.rb
+  make
+
+To test (Ruby/GTK should be installed):
+
+  cd sample/test-gnome; ruby -I../../src test-gnome.rb
+  cd doc; ruby -I../src rbbr.rb
+
+To install:
+
+  make site-install
+
+
+Contacting the Author
+=====================
+
+You can contact me via email at <neilconway@rogers.com>; you
+can also visit the Ruby-GNOME website (http://ruby-gnome.sf.net),
+which has a facility for reporting bugs and submitting fixes.
+Finally, you can send a message to the ruby-talk mailing list,
+where I or other Ruby-GNOME users can help you.

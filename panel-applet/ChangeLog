@@ -1,0 +1,11 @@
+Tue Feb  5 19:09:34 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbpanel-applet.c: Major changes, additions and improvements.
+
+Sat Nov 24 16:31:12 2001 Neil Conway <neilconway@rogers.com>
+
+	* MANIFEST: File removed.
+
+Tue May 22 06:33:43 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+
+	* import panel-applet binding.

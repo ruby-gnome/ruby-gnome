@@ -1,0 +1,14 @@
+#!/usr/local/bin/ruby
+
+gtk_src = '/pub/src'
+
+for arg in ARGV
+  case arg
+  when '--version'
+    print "1.3\n"
+  when '--libs'
+    print "-L#{gtk_src}/glib -L#{gtk_src}/gtk+/gdk -L#{gtk_src}/gtk+/gtk -lgtk-1.3 -lgdk-1.3 -lglib-1.3\n"
+  when '--cflags'
+    print "-I#{gtk_src}/gtk+/gdk -I#{gtk_src}/gtk+ -I#{gtk_src}/glib\n"
+  end
+end

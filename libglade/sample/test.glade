@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <program_name>test</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <language>C</language>
+  <gnome_support>True</gnome_support>
+  <gettext_support>True</gettext_support>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window1</name>
+  <signal>
+    <name>destroy</name>
+    <handler>quit</handler>
+    <last_modification_time>Mon, 22 Jan 2001 15:58:43 GMT</last_modification_time>
+  </signal>
+  <title>Ruby Glade Test</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox1</name>
+    <border_width>10</border_width>
+    <homogeneous>False</homogeneous>
+    <spacing>5</spacing>
+
+    <widget>
+      <class>GtkEntry</class>
+      <name>entrybox</name>
+      <can_focus>True</can_focus>
+      <editable>True</editable>
+      <text_visible>True</text_visible>
+      <text_max_length>0</text_max_length>
+      <text></text>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>button1</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>sayHello</handler>
+	<data>hello world</data>
+	<last_modification_time>Mon, 22 Jan 2001 16:51:42 GMT</last_modification_time>
+      </signal>
+      <label>Say Hello</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>button2</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>destroy</handler>
+	<object>window1</object>
+	<last_modification_time>Mon, 22 Jan 2001 15:59:01 GMT</last_modification_time>
+      </signal>
+      <label>Exit</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>
