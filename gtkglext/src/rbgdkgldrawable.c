@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkgldrawable.c,v 1.4 2004/03/03 18:03:15 mutoh Exp $ */
+/* $Id: rbgdkgldrawable.c,v 1.5 2004/03/03 18:08:26 mutoh Exp $ */
 /* Gdk::GLDrawable Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -72,7 +72,7 @@ gldrawable_gl_begin(self, context)
     if (!begin_ok)
         return Qfalse;
     if (rb_block_given_p())
-        return rb_ensure(rb_yield, Qnil, (void*)gdk_gl_drawable_gl_end, self);
+        return rb_ensure(rb_yield, Qnil, (void*)gdk_gl_drawable_gl_end, (VALUE)_SELF(self));
 
     return Qtrue;
 }
