@@ -1,8 +1,3 @@
-#
-# mkmf-gnome2.rb - a mkmf tool for Ruby-GNOME2.
-#
-# Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
-#
 require 'mkmf'
 require 'shellwords'
 
@@ -132,7 +127,9 @@ end
 
 def set_output_lib(filename)
   if /cygwin|mingw/ =~ RUBY_PLATFORM
-    if RUBY_VERSION > "1.8"
+    if RUBY_VERSION > "1.8.0"
+      $DLDFLAGS << ",--out-implib=#{filename}" if filename
+    elsif RUBY_VERSION > "1.8"
       CONFIG["DLDFLAGS"].gsub!(/ -Wl,--out-implib=[^ ]+/, '')
       CONFIG["DLDFLAGS"] << " -Wl,--out-implib=#{filename}" if filename
     else
@@ -214,4 +211,5 @@ SRC
 else
   STDOUT.print "no\n"
 end
+
 

@@ -1,3 +1,7 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: Work under ruby-1.8.1 or later on Cygwin.
+
 2004-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_object.c: Fix a memleak for GLib::Object#properties. 
