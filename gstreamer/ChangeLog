@@ -1,3 +1,16 @@
+2003-08-03  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgsteventseek.c, src/rbgsteventsegmentseek.c, src/rbgsteventsize.c:
+	New files.
+	* src/rbgst.c: Initializes Gst::EventSeek, Gst::EventSegmentSeek and 
+	  Gst::EventSize.
+	* src/rbgst.h: Fixed bug in macros for Gst::Caps and Gst::Event +
+	  introduced NUM2ULL.
+	* src/rbgstcaps.c: Removed obsolete _get/_wrap functions.
+	* src/rbgstelement.c: Uses ULL2NUM in query.
+	* src/rbgstevent.c: Added methods src and timestamp.
+	* src/rbgstpad.c: Uses ULL2NUM in query + added method send_event.
+
 2003-08-01  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgstparse.c, tests/tc_parse.rb: New files.
