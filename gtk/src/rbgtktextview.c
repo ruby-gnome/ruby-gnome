@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2002/11/04 08:32:33 $
+  $Date: 2002/12/21 15:18:47 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -282,7 +282,7 @@ Init_gtk_textview()
     rb_define_method(cTextView, "scroll_to_iter", textview_scroll_to_iter, 5);
     rb_define_method(cTextView, "scroll_mark_onscreen", textview_scroll_mark_onscreen, 1);
     rb_define_method(cTextView, "move_mark_onscreen", textview_move_mark_onscreen, 1);
-    rb_define_method(cTextView, "place_sursor_onscreen", textview_place_cursor_onscreen, 0);
+    rb_define_method(cTextView, "place_cursor_onscreen", textview_place_cursor_onscreen, 0);
     rb_define_method(cTextView, "visible_rect", textview_get_visible_rect, 0);
     rb_define_method(cTextView, "get_iter_location", textview_get_iter_location, 1);
     rb_define_method(cTextView, "get_line_at_y", textview_get_line_at_y, 1);

@@ -1,3 +1,8 @@
+2002-12-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextview.c: Fix typo of TextView#place_cursor_onscreen,
+	Bugs item #657117 by Maicon Rodrigues.
+
 2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/treeview.rb: Add a file.
@@ -105,7 +110,7 @@
 	* src/rbgtkbutton.c, rbgtktogglebutton.c, rbgtkcheckbutton.c, rbgtkradiobutton.c: 
 	Support mnemonic label or stock item in #initialize.
 	* extconf.rb: Fix compile error about rbgdkcursor.h.
-	Reported by Thorsten Roggendorf <schrotie@uni-bielefeld.de>, Bugs item #643915.
+	Bugs item #643915 by Thorsten Roggendorf <schrotie@uni-bielefeld.de>, 
 
 2002-11-29  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
