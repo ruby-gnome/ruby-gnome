@@ -1,7 +1,8 @@
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnomecanvas.h: Add rbgno_canvas_path_def_get_type.
-	* src/rbgnome-canvas-item.c: Add Gnome::CanvasShape, Gnome::CanvasRE.
+	* src/rbgnome-canvas-item.c: Add Gnome::CanvasShape, Gnome::CanvasRE, 
+	Gnome::CanvasClipgroup.
 	
 2004-02-14  Vincent Isambart  <isambart@netcourrier.com>
 

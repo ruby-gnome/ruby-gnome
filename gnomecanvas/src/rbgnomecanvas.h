@@ -4,7 +4,7 @@
   rbgnomecanvas.h -
 
   $Author: mutoh $
-  $Date: 2004/02/18 16:47:44 $
+  $Date: 2004/02/18 16:57:30 $
 
   Copyright (C) 2002 KUBO Takehiro 
 ************************************************/
@@ -14,6 +14,7 @@
 #include "ruby.h"
 #include "rbgtk.h"
 #include <libgnomecanvas/libgnomecanvas.h>
+#include <libgnomecanvas/gnome-canvas-clipgroup.h>
 
 extern void Init_gnome_canvas(VALUE);
 extern void Init_gnome_canvas_util(VALUE);

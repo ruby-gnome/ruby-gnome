@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.12 2004/02/18 16:47:44 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.13 2004/02/18 16:57:30 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -313,6 +313,7 @@ Init_gnome_canvas_item(mGnome)
 
     G_DEF_CLASS(GNOME_TYPE_CANVAS_RE, "CanvasRE", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_GROUP, "CanvasGroup", mGnome);
+    G_DEF_CLASS(GNOME_TYPE_CANVAS_CLIPGROUP, "CanvasClipgroup", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_BPATH, "CanvasBpath", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_LINE, "CanvasLine", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_PIXBUF, "CanvasPixbuf", mGnome);
