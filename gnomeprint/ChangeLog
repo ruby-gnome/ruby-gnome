@@ -1,3 +1,22 @@
+2004-10-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print{,-config,-unit,job}.c: removed G_DEF_SETTERS.
+
+	* src/rbgp-gnome-print-paper.c (PrintPaper#get): added. use
+	  instead of PrintPaper#get_*.
+
+	* src/rbgp-gnome-print-paper.c (PrintPaper#get_*): removed. use
+	  PrintPaper#get.
+
+	* src/rbgp-gnome-print-config.c (PrintConfig.from_string):
+	  removed. Use PrintConfig.new(string).
+
+	* src/*.{c,h}: added copyright header.
+
+	* COPYING.LIB: added.
+
+	* README: added Copying and Project Website.
+
 2004-10-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gpa-root.c: Gnome::PrintGPA::Printer ->
