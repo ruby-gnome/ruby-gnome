@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/17 15:25:54 $
+  $Date: 2002/09/18 13:53:55 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -371,7 +371,7 @@ rbgobj_gobject_new(gtype, params_hash)
 
         param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
         param_setup_arg.params = ALLOCA_N(GParameter, param_size);
-        memset(param_setup_arg.params, 0, sizeof(GValue) * param_size);
+        memset(param_setup_arg.params, 0, sizeof(GParameter) * param_size);
 
         // FIXME: use rb_ensure() to ensure following g_type_class_unref() call.
         rb_iterate(&_each_with_index, params_hash, _params_setup,

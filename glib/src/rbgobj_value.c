@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/18 13:53:55 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -191,7 +191,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                  gtype = g_type_parent(gtype))
             {
                 RValueToGValueFunc func;
-                VALUE obj = rb_hash_aref(g2r_func_table, INT2NUM(gtype));
+                VALUE obj = rb_hash_aref(r2g_func_table, INT2NUM(gtype));
                 if (NIL_P(obj))
                     continue;
                 Data_Get_Struct(obj, void, func);
