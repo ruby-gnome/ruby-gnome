@@ -4,7 +4,7 @@
   rbgtkradioaction.c -
  
   $Author: mutoh $
-  $Date: 2004/05/30 16:41:13 $
+  $Date: 2005/02/09 16:20:53 $
  
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -19,18 +19,47 @@ static VALUE
 raction_initialize(self, name, label, tooltip, stock_id, value)
     VALUE self, name, label, tooltip, stock_id, value;
 {
+    gchar* gstock;
+
+    if (TYPE(stock_id) == T_STRING){
+        gstock = RVAL2CSTR(stock_id);
+    } else {
+        gstock = rb_id2name(SYM2ID(stock_id));
+    }
     G_INITIALIZE(self, gtk_radio_action_new(RVAL2CSTR(name),
                                             RVAL2CSTR(label),
                                             RVAL2CSTR(tooltip),
-                                            RVAL2CSTR(stock_id),
+                                            gstock,
                                             NUM2INT(value)));
     return Qnil;
 }
-/* Defined as Property
-GSList*     gtk_radio_action_get_group      (GtkRadioAction *action);
-void        gtk_radio_action_set_group      (GtkRadioAction *action,
-                                             GSList *group);
-*/
+
+static VALUE
+raction_get_group(self)
+    VALUE self;
+{
+    return GSLIST2ARY(gtk_radio_action_get_group(_SELF(self)));
+}
+
+static VALUE
+raction_set_group(self, group)
+    VALUE self, group;
+{
+    long i;
+    GSList *glist = NULL;
+
+    if (TYPE(group) == T_ARRAY){
+        for (i = 0; i < RARRAY(group)->len; i++) {
+            glist = g_slist_append(glist, RVAL2GOBJ(RARRAY(group)->ptr[i]));
+        }
+        gtk_radio_action_set_group(_SELF(group), glist);
+        g_slist_free(glist);
+    } else {
+        glist = gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(group))); 
+        gtk_radio_action_set_group(_SELF(group), glist);
+    }
+    return self;
+}
 
 static VALUE
 raction_get_current_value(self)
@@ -50,6 +79,12 @@ Init_gtk_radio_action()
 
     rb_define_method(gRadioAction, "initialize", raction_initialize, 5);
     rb_define_method(gRadioAction, "current_value", raction_get_current_value, 0);
+    rb_undef_method(gRadioAction, "group");
+    rb_undef_method(gRadioAction, "set_group");
+    rb_define_method(gRadioAction, "group", raction_get_group, 0);
+    rb_define_method(gRadioAction, "set_group", raction_set_group, 1);
+
+    G_DEF_SETTERS(gRadioAction);
 #endif
 }
 

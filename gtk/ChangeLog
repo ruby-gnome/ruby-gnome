@@ -1,3 +1,7 @@
+2005-02-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkradioaction.c: Added Gtk::RadioAction#group, #set_group. 
+
 2005-02-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Added Gdk::Window#configure_finished, 
