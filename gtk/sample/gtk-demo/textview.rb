@@ -1,8 +1,8 @@
-# $Id: textview.rb,v 1.1 2003/03/21 04:02:13 mutoh Exp $
+# $Id: textview.rb,v 1.2 2003/03/21 04:45:00 mutoh Exp $
 =begin
 = Text Widget
 
-The GtkTextView widget displays a GtkTextBuffer. One GtkTextBuffer can be displayed by multiple GtkTextViews. 
+The Gtk::TextView widget displays a Gtk::TextBuffer. One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
 This demo has two views displaying a single buffer, and shows off the widget's text formatting features.
 =end
 require 'common'
@@ -18,20 +18,20 @@ module Demo
     def initialize
       super("TextView Window")
 
-      self.set_default_size (450, 450)
+      set_default_size (450, 450)
       
-      self.set_title ("TextView")
-      self.set_border_width (0)
+      set_title ("TextView")
+      set_border_width (0)
 
       vpaned = Gtk::VPaned.new 
       vpaned.set_border_width (5)
-      self.add (vpaned)
+      add (vpaned)
       ##
-      # /* For convenience, we just use the autocreated buffer from
-      # * the first text view; you could also create the buffer
-      # * by itself with gtk_text_buffer_new, then later create
-      # * a view widget.
-      # */
+      # For convenience, we just use the autocreated buffer from
+      # the first text view; you could also create the buffer
+      # by itself with Gtk::TextBuffer.new, then later create
+      # a view widget.
+      # 
       view1 = Gtk::TextView.new
       buffer = view1.buffer
       view2 = Gtk::TextView.new(buffer)
@@ -63,24 +63,24 @@ module Demo
 
     def create_tags (buffer)
       ##
-      # /* Create a bunch of tags. Note that it's also possible to
-      # * create tags with gtk_text_tag_new then add them to the
-      # * tag table for the buffer, gtk_text_buffer_create_tag is
-      # * just a convenience function. Also note that you don't have
-      # * to give tags a name; pass NULL for the name to create an
-      # * anonymous tag.
-      # *
-      # * In any real app, another useful optimization would be to create
-      # * a GtkTextTagTable in advance, and reuse the same tag table for
-      # * all the buffers with the same tag set, instead of creating
-      # * new copies of the same tags for every buffer.
-      # *
-      # * Tags are assigned default priorities in order of addition to the
-      # * tag table.	 That is, tags created later that affect the same text
-      # * property affected by an earlier tag will override the earlier
-      # * tag.  You can modify tag priorities with
-      # * gtk_text_tag_set_priority.
-      # */
+      #  Create a bunch of tags. Note that it's also possible to
+      #  create tags with Gtk::TextTag.new then add them to the
+      #  tag table for the buffer, Gtk::TextBuffer#create_tag is
+      #  just a convenience function. Also note that you don't have
+      #  to give tags a name; pass NULL for the name to create an
+      #  anonymous tag.
+      # 
+      #  In any real app, another useful optimization would be to create
+      #  a Gtk::TextTagTable in advance, and reuse the same tag table for
+      #  all the buffers with the same tag set, instead of creating
+      #  new copies of the same tags for every buffer.
+      # 
+      #  Tags are assigned default priorities in order of addition to the
+      #  tag table.	 That is, tags created later that affect the same text
+      #  property affected by an earlier tag will override the earlier
+      #  tag.  You can modify tag priorities with
+      #  Gtk::TextTag#set_priority.
+      #
 
       buffer.create_tag('heading',
 			{'weight' => (Pango::FontDescription::WEIGHT_BOLD),
@@ -93,7 +93,7 @@ module Demo
 			{"weight" => Pango::FontDescription::WEIGHT_BOLD})
       
       buffer.create_tag( "big",
-			#/* points times the PANGO_SCALE factor */
+			# points times the PANGO_SCALE factor 
 			{ "size" => 20 * Pango::SCALE})
 
       buffer.create_tag( "xx-small",
@@ -119,8 +119,6 @@ module Demo
 
       buffer.create_tag( "foreground_stipple",
 			{"foreground_stipple" => stipple})
-
-      #  g_object_unref (G_OBJECT (stipple))
 
       buffer.create_tag( "big_gap_before_line",
 			{"pixels_above_lines" => 30})
@@ -163,13 +161,13 @@ module Demo
 			{"underline" => Pango::Attribute::UNDERLINE_DOUBLE})
 
       buffer.create_tag( "superscript",
-			{"rise" => (10 * Pango::SCALE),	 # /* 10 pixels */
-			  "size" => (8 * Pango::SCALE)  # /* 8 points */
+			{"rise" => (10 * Pango::SCALE),	 #  10 pixels 
+			  "size" => (8 * Pango::SCALE)  #  8 points 
 			})
       
       buffer.create_tag( "subscript",
-			{"rise" => (-10 * Pango::SCALE),   # /* 10 pixels */
-			  "size" => (8 * Pango::SCALE)	  # /* 8 points */
+			{"rise" => (-10 * Pango::SCALE),   #  10 pixels 
+			  "size" => (8 * Pango::SCALE)	  #  8 points 
 			})
 
       buffer.create_tag( "rtl_quote",
@@ -184,26 +182,26 @@ module Demo
     def insert_text (buffer)
 
       ##
-      # /* demo_find_file looks in the the current directory first,
-      # * so you can run gtk-demo without installing GTK, then looks
-      # * in the location where the file is installed.
-      # */
+      #  Demo.find_file looks in the the current directory first,
+      # so you can run gtk-demo without installing GTK, then looks
+      # in the location where the file is installed.
+      # 
 
       filename = Demo.find_file("gtk-logo-rgb.gif")
       pixbuf = Gdk::Pixbuf.new(filename) if filename
 
       unless pixbuf
-	#g_printerr ("Failed to load image file gtk-logo-rgb.gif\n")
-	exit 1;
+	$stderr.print "Failed to load image file gtk-logo-rgb.gif\n"
+	exit 1
       end
 
       scaled = pixbuf.scale(32, 32, Gdk::Pixbuf::INTERP_BILINEAR)
       pixbuf = scaled
 
       ##
-      # /* get start of buffer; each insertion will revalidate the
-      #  * iterator to point to just after the inserted text.
-      #  */
+      #  get start of buffer; each insertion will revalidate the
+      #  iterator to point to just after the inserted text.
+      #  
 
       iter = buffer.get_iter_at_offset(0)
 
@@ -376,9 +374,9 @@ module Demo
       anchor = buffer.create_child_anchor (iter)
       buffer.insert (iter, ".\n")
       
-      buffer.insert (iter, "\n\nThis demo doesn't demonstrate all the GtkTextBuffer features; it leaves out, for example: invisible/hidden text (doesn't work in GTK 2, but planned), tab stops, application-drawn areas on the sides of the widget for displaying breakpoints and such...")
+      buffer.insert (iter, "\n\nThis demo doesn't demonstrate all the Gtk::TextBuffer features; it leaves out, for example: invisible/hidden text (doesn't work in GTK 2, but planned), tab stops, application-drawn areas on the sides of the widget for displaying breakpoints and such...")
 
-      # /* Apply word_wrap tag to whole buffer */
+      #  Apply word_wrap tag to whole buffer 
 
       buf_start, buf_end = buffer.bounds
       buffer.apply_tag("word_wrap", buf_start, buf_end)
@@ -403,8 +401,8 @@ module Demo
 
 	if  i == 0 
 	  widget = Gtk::Button.new("Click Me")
-          widget.signal_connect ('clicked') { |button|
-	    if @@nest_window
+	widget.signal_connect ('clicked') { |button|
+	    if @@nest_window and ! @@nest_window.destroyed?
 	      @@nest_window.present
 	      break
 	    end
@@ -422,8 +420,6 @@ module Demo
   
 	    recursive_attach_view (0, view, anchor)
   
-	    #g_object_unref (G_OBJECT (buffer))
-
 	    @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
 	    sw = Gtk::ScrolledWindow.new(nil, nil)
 	    sw.set_policy (Gtk::POLICY_AUTOMATIC,
@@ -432,11 +428,7 @@ module Demo
 	    @@nest_window.add(sw)
 	    sw.add(view)
 
-	    #window.g_object_add_weak_pointer (G_OBJECT (window),
-	    #(gpointer *) &window)
-
 	    @@nest_window.set_default_size (300, 400)
-  
 	    @@nest_window.show_all
 	  }
 	elsif i == 1
@@ -465,7 +457,7 @@ module Demo
           widget = Gtk::Entry.new
 
 	else
-	  #widget = nil; /* avoids a compiler warning */
+	  #widget = nil;  avoids a compiler warning 
 	  #g_assert_not_reached ;
 	end
 
@@ -483,7 +475,7 @@ module Demo
 
       child_view = Gtk::TextView.new(view.buffer)
 
-      # /* Event box is to add a black border around each child view */
+      #  Event box is to add a black border around each child view 
       event_box = Gtk::EventBox.new
       color = Gdk::Color.parse ("black")
       event_box.modify_bg(Gtk::STATE_NORMAL, color)
