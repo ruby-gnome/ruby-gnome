@@ -423,5 +423,5 @@ Init_gst_scheduler (void)
     rb_define_method (c, "state", rb_gst_scheduler_get_state, 0);
 
     G_DEF_CLASS (GST_TYPE_SCHEDULER_STATE, "State", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_SCHEDULER_STATE, "GST_ELEMENT_");
+    G_DEF_CONSTANTS (c, GST_TYPE_SCHEDULER_STATE, "GST_SCHEDULER_");
 }

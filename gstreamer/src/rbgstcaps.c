@@ -32,6 +32,8 @@
  * structures are given, the caps will be empty.  If you want a caps that is 
  * compatible with any media format, just create an empty caps, then call
  * Gst::Caps#set_any. 
+ *
+ * Returns: a newly allocated Gst::Caps object.
  */
 static VALUE
 rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
@@ -323,6 +325,8 @@ rb_gst_caps_do_simplify (VALUE self)
  * caps: another Gst::Caps.
  *
  * Replaces the current caps inplace with the given caps.
+ *
+ * Returns: self.
  */
 static VALUE
 rb_gst_caps_replace (VALUE self, VALUE caps)

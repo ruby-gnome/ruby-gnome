@@ -1,3 +1,11 @@
+2004-08-05  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.c: Fixed bad comments (for the constants).
+	* src/rbgstcaps.c: Added missing Returns statements in the 
+	  comments.
+	* src/rbgstscheduler.c: Fixed a bug when creating the GEnum,
+	  reported by Pascal Terjan.
+
 2004-08-03  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstelement.c (#seek, #locked_state?, #set_locked_state,
