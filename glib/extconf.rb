@@ -10,6 +10,7 @@ PKGConfig.have_package('gobject-2.0') or exit 1
 check_win32
 
 set_output_lib('libruby-glib2.a')
+have_func("g_spawn_close_id")
 
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")

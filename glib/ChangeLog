@@ -1,3 +1,9 @@
+2004-04-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_spawn.c: Improve error classes.
+	Separate module from GLib to GLib::Spawn.
+	Add GLib::Spawn.close_pid.
+
 2004-04-27  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
 
 	* src/rbglib_spawn.c: Added.
