@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/07/18 05:27:21 $
+  $Date: 2003/07/20 06:35:14 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -740,17 +740,19 @@ Init_signal_class()
 
 /**********************************************************************/
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-
 void
 rbgobj_define_action_methods(VALUE klass)
 {
+    GType gtype = CLASS2GTYPE(klass);
     GString* source = g_string_new(NULL);
     guint n_ids;
     guint* ids;
     int i;
 
-    ids = g_signal_list_ids(CLASS2GTYPE(klass), &n_ids);
+    if (gtype == G_TYPE_INTERFACE)
+        return;
+
+    ids = g_signal_list_ids(gtype, &n_ids);
 
     for (i = 0; i < n_ids; i++){
         GSignalQuery query;
@@ -785,8 +787,6 @@ rbgobj_define_action_methods(VALUE klass)
 
     rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2(source->str));
 }
-
-#endif // RBGLIB_ENABLE_EXPERIMENTAL
 
 /**********************************************************************/
 

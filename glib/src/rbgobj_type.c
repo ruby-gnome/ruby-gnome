@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:34 $
+  $Date: 2003/07/20 06:35:14 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -134,11 +134,8 @@ rbgobj_lookup_class_by_gtype(gtype)
         if (G_TYPE_IS_CLASSED(gtype))
             gclass = g_type_class_ref(gtype);
 
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-        if ((G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
-            && !G_TYPE_IS_FUNDAMENTAL(gtype))
+        if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
             rbgobj_define_action_methods(cinfo->klass);
-#endif
 
         if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT){
             GType* interfaces = NULL;

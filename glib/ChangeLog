@@ -1,5 +1,15 @@
 2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_signal.c, src/rbgobj_type.c, src/global.h: enable
+	rbgobj_define_action_methods() by default.
+	This function defines methods that emit	action signals.
+
+	Action signals are signals that may freely be emitted on alive
+	objects from user code via g_signal_emit() and friends, without
+	the need of being embedded into extra code that performs pre or
+	post emission adjustments on the object. They can also be thought
+	of as by third-party code generically callable object methods.
+
 	* src/rbgobject.h, src/rbgobj_enum.c, src/glib2.def: add new function
 	rbgobj_add_constants() and new macro G_DEF_CONSTANTS().
 
