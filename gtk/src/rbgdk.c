@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:53 $
+  $Date: 2003/10/13 13:28:28 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -146,7 +146,7 @@ gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time
 {
     return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RTEST(owner_events),
-                     RVAL2GENUM(event_mask, GDK_TYPE_EVENT_MASK),
+                     RVAL2GFLAGS(event_mask, GDK_TYPE_EVENT_MASK),
                      NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
                      NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
                      NUM2INT(time)), GDK_TYPE_GRAB_STATUS);

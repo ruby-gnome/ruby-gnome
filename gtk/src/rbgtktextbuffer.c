@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2003/08/06 12:14:04 $
+  $Author: mutoh $
+  $Date: 2003/10/13 13:28:28 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -168,6 +168,13 @@ txt_get_text(argc, argv, self)
 }
 
 static VALUE
+txt_get_text_all(self)
+    VALUE self;
+{
+    return txt_get_text(0, NULL, self);
+}
+
+static VALUE
 txt_get_slice(argc, argv, self)
     int argc;
     VALUE *argv;
@@ -187,6 +194,13 @@ txt_get_slice(argc, argv, self)
                                                NIL_P(start) ? &start_iter : RVAL2ITR(start),
                                                NIL_P(start) ? &end_iter : RVAL2ITR(end),
                                                RTEST(include_hidden_chars)));
+}
+
+static VALUE
+txt_get_slice_all(self)
+    VALUE self;
+{
+    return txt_get_slice(0, NULL, self);
 }
 
 static VALUE
@@ -576,7 +590,9 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
 
     rb_define_method(gTextBuffer, "get_text", txt_get_text, -1);
+    rb_define_method(gTextBuffer, "text", txt_get_text_all, 0);
     rb_define_method(gTextBuffer, "get_slice", txt_get_slice, -1);
+    rb_define_method(gTextBuffer, "slice", txt_get_slice_all, 0);
 
     rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 2);
     rb_define_method(gTextBuffer, "insert_child_anchor", txt_insert_child_anchor, 2);

@@ -1,3 +1,14 @@
+2003-10-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdk.c: Fix a segfault for Gdk.pointer_grab.
+	Reported by KATO Kazuyoshi.
+
+2003-10-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Add Gtk::TextBuffer#text, #slice. 
+	* src/rbgdkwindow.c: Add Gdk::Window#set_icon_list,
+	#set_modal_hint, #set_type_hint, #frame_extents, #decorations.
+
 2003-10-10 Martin Povolny <xpovolny@fi.muni.cz>
 
 	* src/rbgtktreeview.c: Add Gtk::TreeView#expand_to_path
