@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Date: 2002/09/24 03:00:02 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -72,7 +72,7 @@ VALUE
 rbgobj_get_value_from_param_spec(GParamSpec* pspec)
 {
     gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
-    if (!data)
+    if (data)
         return (VALUE)data;
     else {
         VALUE result = pspec_s_allocate(GTYPE2CLASS(G_PARAM_SPEC_TYPE(pspec)));
@@ -101,6 +101,20 @@ pspec_s_allocate(VALUE klass)
 
         return result;
     }
+}
+
+static VALUE
+inspect(VALUE self)
+{
+    GParamSpec* pspec = RVAL2GOBJ(self);
+    gchar* str = g_strdup_printf("#<%s: name=\"%s\" nick=\"%s\" blurb=\"%s\">",
+                                 rb_class2name(CLASS_OF(self)),
+                                 g_param_spec_get_name(pspec),
+                                 g_param_spec_get_nick(pspec),
+                                 g_param_spec_get_blurb(pspec));
+    VALUE result = rb_str_new2(str);
+    g_free(str);
+    return result;
 }
 
 static VALUE
@@ -243,6 +257,8 @@ Init_gobject_gparam_spec()
     rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
 
     rb_define_singleton_method(cParamSpec, "allocate", pspec_s_allocate, 0);
+
+    rb_define_method(cParamSpec, "inspect", inspect, 0);
 
     rb_define_method(cParamSpec, "name", get_name, 0);
     rb_define_method(cParamSpec, "nick", get_nick, 0);

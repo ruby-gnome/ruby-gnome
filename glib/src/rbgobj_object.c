@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:31 $
+  $Date: 2002/09/24 03:00:02 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -79,6 +79,46 @@ gobj_s_gobject_new(argc, argv, self)
 
 #endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
+#if 0
+void        g_object_class_install_property   (GObjectClass   *oclass,
+					       guint           property_id,
+					       GParamSpec     *pspec);
+#endif
+
+static VALUE
+gobj_s_find_property(self, property_name)
+     VALUE self, property_name;
+{
+    GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
+    VALUE result;
+
+    StringValue(property_name);     
+    result = GOBJ2RVAL(g_object_class_find_property(oclass, StringValuePtr(property_name)));
+
+    g_type_class_unref(oclass);                       
+    return result;
+}
+
+static VALUE
+gobj_s_list_properties(self)
+     VALUE self;
+{
+    GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
+    gint n_properties;
+    GParamSpec** props;
+    VALUE ary;
+    int i;
+
+    props = g_object_class_list_properties(oclass, &n_properties);
+
+    ary = rb_ary_new2(n_properties);
+    for (i = 0; i < n_properties; i++)
+        rb_ary_store(ary, i, GOBJ2RVAL(props[i]));
+
+    g_type_class_unref(oclass);
+    return ary;
+}
+
 static VALUE
 gobj_set_property(self, prop_name, val)
     VALUE self, prop_name, val;
@@ -129,11 +169,16 @@ gobj_get_property(self, prop_name)
     }
 }
 
+static VALUE gobj_thaw_notify(VALUE self);
+
 static VALUE
 gobj_freeze_notify(self)
     VALUE self;
 {
     g_object_freeze_notify(RVAL2GOBJ(self));
+    if (rb_block_given_p()) {
+        return rb_ensure(rb_yield, self, gobj_thaw_notify, self);
+    }
     return self;
 }
 
@@ -242,6 +287,9 @@ Init_gobject_gobject()
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 #endif
+
+    rb_define_singleton_method(cGObject, "find_property", &gobj_s_find_property, 0);
+    rb_define_singleton_method(cGObject, "list_properties", &gobj_s_list_properties, 0);
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);

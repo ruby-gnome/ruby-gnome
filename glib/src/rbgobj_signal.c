@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Date: 2002/09/24 03:00:02 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -338,6 +338,53 @@ gobj_sig_handler_disconnect(self, id)
     return self;
 }
 
+static VALUE
+gobj_sig_handler_is_connected(self, id)
+     VALUE self, id;
+{
+    return g_signal_handler_is_connected(RVAL2GOBJ(self), NUM2ULONG(id)) ? Qtrue : Qfalse;
+}
+
+#if 0
+gulong	 g_signal_handler_find		      (gpointer		  instance,
+					       GSignalMatchType	  mask,
+					       guint		  signal_id,
+					       GQuark		  detail,
+					       GClosure		 *closure,
+					       gpointer		  func,
+					       gpointer		  data);
+guint	 g_signal_handlers_block_matched      (gpointer		  instance,
+					       GSignalMatchType	  mask,
+					       guint		  signal_id,
+					       GQuark		  detail,
+					       GClosure		 *closure,
+					       gpointer		  func,
+					       gpointer		  data);
+guint	 g_signal_handlers_unblock_matched    (gpointer		  instance,
+					       GSignalMatchType	  mask,
+					       guint		  signal_id,
+					       GQuark		  detail,
+					       GClosure		 *closure,
+					       gpointer		  func,
+					       gpointer		  data);
+guint	 g_signal_handlers_disconnect_matched (gpointer		  instance,
+					       GSignalMatchType	  mask,
+					       guint		  signal_id,
+					       GQuark		  detail,
+					       GClosure		 *closure,
+					       gpointer		  func,
+					       gpointer		  data);
+#endif
+
+#if 0
+/* --- chaining for language bindings --- */
+void	g_signal_override_class_closure	      (guint		  signal_id,
+					       GType		  instance_type,
+					       GClosure		 *class_closure);
+void	g_signal_chain_from_overridden	      (const GValue      *instance_and_params,
+					       GValue            *return_value);
+#endif
+
 /**********************************************************************/
 
 void
@@ -367,8 +414,11 @@ Init_gobject_gsignal()
                      gobj_sig_handler_block, 1);
     rb_define_method(cInstantiatable, "signal_handler_unblock",
                      gobj_sig_handler_unblock, 1);
-    rb_define_method(cInstantiatable, "signal_disconnect",
+    rb_define_method(cInstantiatable, "signal_handler_disconnect",
                      gobj_sig_handler_disconnect, 1);
+
+    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
+                     gobj_sig_handler_is_connected, 1);
 
     /* --- run, match and connect types --- */
     {
