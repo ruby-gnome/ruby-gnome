@@ -155,7 +155,7 @@ static VALUE stream_length_time(self)
     VALUE self;
 {
     GstMediaInfoStream *stream = RGST_MEDIA_INFO_STREAM(self);
-    return INT2NUM(stream->length_time);
+    return ULL2NUM(stream->length_time);
 }
 
 static VALUE stream_length_tracks(self)
@@ -224,7 +224,7 @@ static VALUE track_length_time(self)
     VALUE self;
 {
     GstMediaInfoTrack *track = RGST_MEDIA_INFO_TRACK(self);
-    return INT2FIX(track->length_time);
+    return ULL2NUM(track->length_time);
 }
 
 static VALUE track_con_stream(self)
