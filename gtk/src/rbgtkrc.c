@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2003/05/18 17:18:52 $
+  $Date: 2003/05/21 17:10:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -30,7 +30,7 @@ rc_get_style(self, widget)
     GtkStyle* style = gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(widget)));
     GType gtype = G_OBJECT_TYPE(style);
     const gchar* name = G_OBJECT_TYPE_NAME(style);
-    if (! rbgobj_exist_class(gtype)){
+    if (! rb_const_defined_at(mGtk, rb_intern(name))){
         G_DEF_CLASS(gtype, (gchar*)name, mGtk);
     }
     return GOBJ2RVAL(gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(widget))));
@@ -46,7 +46,7 @@ rc_get_style_by_paths(self, settings, widget_path, class_path, klass)
                                                 CLASS2GTYPE(klass));
     GType gtype = G_OBJECT_TYPE(style);
     const gchar* name = G_OBJECT_TYPE_NAME(style);
-    if (! rbgobj_exist_class(gtype)){
+    if (! rb_const_defined_at(mGtk, rb_intern(name))){
         G_DEF_CLASS(gtype, (gchar*)name, mGtk);
     }    
     return style ? GOBJ2RVAL(style) : Qnil;

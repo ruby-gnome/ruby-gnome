@@ -1,3 +1,14 @@
+2003-05-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolbar.c: Fixed an incorrect call of G_RELATIVE. 
+
+2003-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrc.c: Use rb_const_defined_at() instead of rbgobj_exist_class().
+	Pointed out by Masahiro Sakai.
+	* src/rbgtkitemfactory.c: Gtk::ItemFactory#get_item/widget return Qnil 
+	when the functions return NULL. 
+
 2003-05-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkrcstyle.c: Added.

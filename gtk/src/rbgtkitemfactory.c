@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2003/02/15 14:09:14 $
+  $Date: 2003/05/21 17:10:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -71,8 +71,12 @@ static VALUE
 ifact_get_item(self, path)
     VALUE self, path;
 {
-    VALUE obj = GOBJ2RVAL(gtk_item_factory_get_item(_SELF(self), RVAL2CSTR(path)));
-    G_RELATIVE(obj, self);
+    VALUE obj = Qnil;
+    GtkWidget* widget = gtk_item_factory_get_item(_SELF(self), RVAL2CSTR(path));
+    if (widget){
+        obj = GOBJ2RVAL(widget);
+        G_RELATIVE(obj, self);
+    }
     return obj;
 }
 
@@ -80,8 +84,12 @@ static VALUE
 ifact_get_widget(self, path)
     VALUE self, path;
 {
-    VALUE obj = GOBJ2RVAL(gtk_item_factory_get_widget(_SELF(self), RVAL2CSTR(path)));
-    G_RELATIVE(obj, self);
+    VALUE obj = Qnil;
+    GtkWidget* widget = gtk_item_factory_get_widget(_SELF(self), RVAL2CSTR(path));
+    if (widget){
+        obj = GOBJ2RVAL(widget);
+        G_RELATIVE(obj, self);
+    }
     return obj;
 }
 

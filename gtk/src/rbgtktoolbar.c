@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2003/02/15 14:09:14 $
+  $Date: 2003/05/21 17:10:07 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,7 +38,6 @@ tbar_append(argc, argv, self)
 
     if (argc > 0) type = argv[0];
 
-    G_RELATIVE(self, func);
     if (type == Qnil || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
         if (NIL_P(func)) func = rb_f_lambda();
