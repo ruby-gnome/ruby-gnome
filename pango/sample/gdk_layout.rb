@@ -4,7 +4,7 @@
   Copyright (c) 2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gdk_layout.rb,v 1.2 2003/02/01 17:13:24 mutoh Exp $
+  $Id: gdk_layout.rb,v 1.3 2003/02/09 08:10:59 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -17,7 +17,7 @@ gdkwin = window.window
 gc = Gdk::GC.new(gdkwin)
 
 layout = window.create_pango_layout
-layout.set_markup(File.read("sample.txt"), "$")
+layout.set_markup(File.readlines("sample.txt").to_s, "$")
 window.signal_connect("expose_event") do |v|
   gdkwin.draw_layout(gc, 10, 10, layout)
 end

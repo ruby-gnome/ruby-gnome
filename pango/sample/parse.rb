@@ -5,12 +5,12 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: parse.rb,v 1.2 2003/02/01 17:13:24 mutoh Exp $
+  $Id: parse.rb,v 1.3 2003/02/09 08:10:59 mutoh Exp $
 =end
 
 require 'pango'
 
-str = File.read("sample.txt")
+str = File.readlines("sample.txt").to_s
 puts str
 puts "------"
 
