@@ -1,3 +1,7 @@
+2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_message.c: add file(Sorry I forgot it....)
+
 2002-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: add file(methods are moved from Ruby/GTK). 
