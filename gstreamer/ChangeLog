@@ -1,3 +1,7 @@
+2004-02-17  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstbin.c: Added GstBin#[] as a alias for GstBin#get_by_name.
+
 2003-11-14  Laurent Sansonetti  <lrz@gnome.org>
 
 	* Changed my e-mail address (laurent@datarescue.be -> lrz@gnome.org).

@@ -544,6 +544,7 @@ void Init_gst_bin(void) {
     rb_define_method(c, "get_by_name", rb_gst_bin_get_by_name, 1);
     rb_define_method(c, "get_by_name_recurse_up", 
                      rb_gst_bin_get_by_name_recurse_up, 1);
+    rb_define_alias(c, "[]", "get_by_name");
 
     rb_define_method(c, "length", rb_gst_bin_length, 0);
     rb_define_alias(c, "size", "length");
