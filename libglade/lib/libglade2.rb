@@ -6,9 +6,13 @@ rescue LoadError
 end
 require 'libglade2.so'
 
-
 class GladeXML
+  def canonical_handler(handler)
+    return handler.gsub(/[-\s]/, "_")
+  end
+
   def connect(source, target, signal, handler, data)
+    handler = canonical_handler(handler)
     if target
       signal_proc = target.method(handler)
     else
@@ -18,10 +22,8 @@ class GladeXML
       case signal_proc.arity
       when 0
         source.signal_connect(signal) {signal_proc.call}
-      when 1
-        source.signal_connect(signal, &signal_proc)
       else
-        source.signal_connect(signal, data, &signal_proc)
+        source.signal_connect(signal, &signal_proc)
       end
     elsif $DEBUG
       puts "Undefined handler: #{handler}"

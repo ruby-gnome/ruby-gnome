@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# ruby-glade-create-template.rb
+# ruby-glade-create-template
 #
 # Create a ruby-glade template .rb file from a .glade file.
 #
@@ -9,7 +9,17 @@
 # Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
-require 'gtk2'
+require 'libglade2'
+
+class GladeXML
+  attr_reader :signals
+  def connect(source, target, signal_name, handler, data)
+    @signals = [] unless @signals
+    @signals << [source.class.signal(signal_name), self.canonical_handler(handler)]
+  end
+end
+
+
 begin
   $EXIST_GNOME = true
   require 'gnome2'
@@ -24,39 +34,60 @@ unless ARGV.size == 1
   exit(-1)
 end
 
-filename = ARGF.filename
-classname = ((filename.split("."))[0]).capitalize
-signals = []
+#
+# Analyse .glade file.
+#
+path = ARGF.filename
+filename = File.basename(path, ".*")
+classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
+
 objects = []
+=begin
 ARGF.each_line do |line|
-  if /<signal name="(.*)" handler="([^"]*)" / =~ line
-    signals << [$1, $2]
-  elsif /id="(.*)"/ =~ line
+  if /id="(.*)"/ =~ line
     objects << $1
   end
 end
+=end
 
+if $EXIST_GNOME
+  Gnome::Program.new("ruby-glade-create-template", "0.1")
+else
+  Gtk.init
+end
+glade = GladeXML.new(path) 
+
+
+#
+# Print template.
+#
+# Header part: Initialize method.
 puts <<HEADER
+#!/usr/bin/env ruby
 require 'libglade2'
 
 class #{classname}
-  def initialize
-    @glade = GladeXML.new("#{filename}") {|handler| method(handler)}
+  def initialize(path)
+    @glade = GladeXML.new(path) {|handler| method(handler)}
 HEADER
 
 objects.each do |name|
-   puts "    @#{name} = @glade.get_widget('#{name}')"
+   puts "    @#{name.gsub(/[-\s]/, "_")} = @glade.get_widget('#{name}')"
 end
 
 puts "  end"
 
-signals.each do |name, handler|
-puts <<METHOD
-  def #{handler}(*args)
-    puts "#{handler}() is not implemented yet."
+# Handler methods.
+if glade.signals
+  glade.signals.each do |signal, handler|
+    args = "widget"
+    (0...signal.param_types.size).each do |i|
+      args << ", arg#{i}"
+    end
+    puts "  def #{handler}(#{args})"
+    puts "    puts \"#{handler}() is not implemented yet.\""
+    puts "  end"
   end
-
-METHOD
 end
 
 puts "end\n\n"
@@ -72,6 +103,8 @@ else
     puts "Gtk.init"
 end
 puts <<FOOTER
-#{classname}.new
+
+# Set correct path yourself.
+#{classname}.new("#{path}")
 Gtk.main
 FOOTER

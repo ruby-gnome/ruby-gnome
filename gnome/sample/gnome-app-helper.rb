@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-app-helper.rb,v 1.6 2002/12/07 15:10:28 mutoh Exp $
+# $Id: gnome-app-helper.rb,v 1.7 2002/12/22 14:27:43 mutoh Exp $
 #
 # gnome-app-helper.rb - sample script of Gnome::App#create_menus()
 #                       and Gnome::App#toolbar().
@@ -25,8 +25,6 @@ require 'gnome2'
 
 class SampleApp < Gnome::App
 
-  include Bonobo::I18n
-
   NAME = 'test-app-helper'
   TITLE = 'App Helper Sample'
   VERSION = '0.1'
@@ -48,8 +46,7 @@ class SampleApp < Gnome::App
     callback = proc { |item, arg| @label.set_text(arg) }
 
     file_menu = [
-      Gnome::UIInfo::menu_new_item(N_('_New'), 'Create a new file', callback, 'New'),
-#      Gnome::UIInfo::menu_new_subtree(new_submenu),
+      Gnome::UIInfo::menu_new_item('_New', 'Create a new file', callback, 'New'),
       Gnome::UIInfo::menu_open_item(callback, 'Open'),
       Gnome::UIInfo::menu_save_item(callback, 'Save'),
       Gnome::UIInfo::menu_save_as_item(callback, 'Save As'),

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.20 2002/10/30 13:36:48 tkubo Exp $ */
+/* $Id: rbgnome.c,v 1.21 2002/12/22 14:27:43 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -20,23 +20,11 @@
  */
 
 #include "rbgnome.h"
-#ifndef EXCLUDE_RUBY_BONOBO
-#include "rbbonobo.h"
-#endif
 
 void
 Init_gnome2()
 {
     VALUE mGnome = rb_define_module("Gnome");
-#ifndef EXCLUDE_RUBY_BONOBO
-    VALUE mBonobo = rb_define_module("Bonobo");
-
-    Init_bonobo_dock(mBonobo);
-    Init_bonobo_dock_layout(mBonobo);
-    Init_bonobo_dock_item(mBonobo);
-    Init_bonobo_dock_band(mBonobo);
-    Init_bonobo_i18n(mBonobo);
-#endif
 
     /* GnomePreferencesType */
     rb_define_const(mGnome, "PREFERENCES_NEVER", INT2FIX(GNOME_PREFERENCES_NEVER));
