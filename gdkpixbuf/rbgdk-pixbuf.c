@@ -154,7 +154,7 @@ save(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE filename, type, options, key;
+    VALUE filename, type, options, key, str;
     GError* error = NULL;
     gboolean result;
     gchar** keys = NULL;
@@ -178,7 +178,8 @@ save(argc, argv, self)
             } else {
                 keys[i] = RVAL2CSTR(key);
             }
-            values[i] = RVAL2CSTR(rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0));
+            str = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
+            values[i] = RVAL2CSTR(str);
         }
         keys[len] = NULL;
         values[len] = NULL;

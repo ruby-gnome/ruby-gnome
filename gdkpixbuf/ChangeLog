@@ -1,3 +1,8 @@
+2002-11-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Follow Ruby/GLib changes.
+	Reported by Michael C. Libby <m_libby@andsoforth.com>.
+
 2002-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbufanimation.c: Add a file.
