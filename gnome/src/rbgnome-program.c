@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.9 2004/03/05 15:28:27 mutoh Exp $ */
+/* $Id: rbgnome-program.c,v 1.10 2004/03/07 11:40:06 mutoh Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -28,6 +28,8 @@ static ID id_module_info;
 static ID id_args;
 static ID id_popt_table;
 static VALUE default_module_info;
+
+static VALUE rb_gnome_program = Qnil;
 
 #define _SELF(self) GNOME_PROGRAM(RVAL2GOBJ(self))
 #define _WRAP(gmi) BOXED2RVAL((gpointer)(gmi), GNOME_TYPE_MODULE_INFO)
@@ -301,6 +303,7 @@ program_initialize(argc, argv, self)
     } else {
         Check_Type(args, T_ARRAY);
     }
+
     args = rb_obj_dup(args); /* clone to attach to 'self'. */
     rb_ary_unshift(args, arg0);
     cargc = RARRAY(args)->len;
@@ -313,14 +316,15 @@ program_initialize(argc, argv, self)
 
     /* prepare properties */
     i = prepare_pdata(prop, pdata, &popt_table);
-    rb_ivar_set(self, id_popt_table, popt_table);
+
+    if (i > 0)
+       rb_ivar_set(self, id_popt_table, popt_table);
 
     program = call_program_init(RVAL2CSTR(app_id), RVAL2CSTR(app_version),
                                 RVAL2BOXED(module_info, GNOME_TYPE_MODULE_INFO),
                                 cargc, cargv, i, pdata);
-    G_INITIALIZE(self, program);
-    G_RELATIVE(rb_eval_string("eval('self', binding)"), self);
 
+    G_INITIALIZE(self, program);
     return Qnil;
 }
 
@@ -612,6 +616,9 @@ Init_gnome_program(mGnome)
     id_popt_table = rb_intern("___popt_table___");
     id_args = rb_intern("___args___");
     id_module_info = rb_intern("___module_info___");
+
+    rb_global_variable(&rb_gnome_program);
+    rb_gnome_program = rb_ary_new();
 
     rb_define_method(gnoProgram, "initialize", program_initialize, -1);
     rb_define_singleton_method(gnoProgram, "get", program_s_get, 0);
