@@ -3,8 +3,8 @@
 
   rbgtkradiomenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/30 15:08:29 $
+  $Author: sakai $
+  $Date: 2002/10/05 07:42:46 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -70,7 +70,7 @@ rmitem_set_group(self, grp_ary)
 
     gtk_radio_menu_item_set_group(rmitem2add, group);
 
-    return gslist2ary(gtk_radio_menu_item_group(rmitem2add));
+    return GSLIST2ARY(gtk_radio_menu_item_group(rmitem2add));
 }
 
 void 

@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/04 16:31:05 $
+  $Author: sakai $
+  $Date: 2002/10/05 07:42:46 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -194,11 +194,11 @@ tvc_cell_get_size(self)
     } else {
         cell = BOXED2RVAL(&cell_area, GDK_TYPE_RECTANGLE);
     }
-    return rb_array_new3(5, cell,
-                         x_offset ? INT2NUM(x_offset) : Qnil,
-                         y_offset ? INT2NUM(y_offset) : Qnil,
-                         width ? INT2NUM(width) : Qnil,
-                         height ? INT2NUM(height) : Qnil);
+    return rb_ary_new3(5, cell,
+                       x_offset ? INT2NUM(x_offset) : Qnil,
+                       y_offset ? INT2NUM(y_offset) : Qnil,
+                       width ? INT2NUM(width) : Qnil,
+                       height ? INT2NUM(height) : Qnil);
 }
 
 static VALUE

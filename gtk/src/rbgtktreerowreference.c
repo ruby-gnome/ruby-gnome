@@ -3,8 +3,8 @@
 
   rbgtktreerowreference.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Author: sakai $
+  $Date: 2002/10/05 07:42:46 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -14,6 +14,7 @@
 #define _SELF(s) ((GtkTreeRowReference*)RVAL2BOXED(s, GTK_TYPE_TREE_ROW_REFERENCE))
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
+#define RVAL2ITR(i) ((GtkTreeIter*)(RVAL2BOXED(i, GTK_TYPE_TREE_ITER)))
 
 /*****************************************/
 static GtkTreeRowReference*
@@ -115,7 +116,7 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
         orders[i] = RARRAY(new_orders)->ptr[i];
     }
   
-    gtk_tree_model_row_reordered(_SELF(proxy), RVAL2TREEPATH(path), RVAL2ITR(iter), orders);
+    gtk_tree_row_reference_reordered(RVAL2GOBJ(proxy), RVAL2TREEPATH(path), RVAL2ITR(iter), orders);
     return self;
 }
 

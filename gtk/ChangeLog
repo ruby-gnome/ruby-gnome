@@ -1,5 +1,9 @@
 2002-10-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgtkradiomenuitem.c, src/rbgtktreemodel.c,
+	src/rbgtktreerowreference.c, src/rbgtktreeviewcolumn.c: fix typos and
+	trivial errors.
+
 	* extconf.rb: improvement for building in different directory.
 	(not completed)
 

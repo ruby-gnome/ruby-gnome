@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/04 19:01:17 $
+  $Author: sakai $
+  $Date: 2002/10/05 07:42:46 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -47,8 +47,8 @@ treemodel_get_iter(self, path)
     gboolean ret;
 
     if (TYPE(path) == T_STRING){
-        ret = gtk_treemodel_get_iter_from_string(_SELF(self), &iter, 
-                                                 RVAL2CSTR(path));
+        ret = gtk_tree_model_get_iter_from_string(_SELF(self), &iter, 
+                                                  RVAL2CSTR(path));
     } else {
         ret = gtk_tree_model_get_iter(_SELF(self), &iter, 
                                       RVAL2TREEPATH(path));
@@ -192,7 +192,7 @@ treemodel_rows_reordered(self, path, iter, new_orders)
         orders[i] = RARRAY(new_orders)->ptr[i];
     }
   
-    gtk_tree_model_row_reordered(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter), orders);
+    gtk_tree_model_rows_reordered(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter), orders);
     return self;
 }
 
