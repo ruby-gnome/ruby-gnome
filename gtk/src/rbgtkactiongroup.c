@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: mutoh $
-  $Date: 2004/07/29 18:35:06 $
+  $Author: lrz $
+  $Date: 2004/08/19 20:33:15 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -139,6 +139,7 @@ actiongroup_add_actions(self, entries)
     } 
     rb_ivar_set(self, id_action_procs, action_procs);
     gtk_action_group_add_actions(_SELF(self), gentries, n_entries, (gpointer)self);
+    g_free(gentries);
 
     return self;
 }
@@ -205,6 +206,7 @@ actiongroup_add_toggle_actions(self, entries)
     } 
     rb_ivar_set(self, id_toggle_action_procs, toggle_action_procs);
     gtk_action_group_add_toggle_actions(_SELF(self), gentries, n_entries, (gpointer)self);
+    g_free(gentries);
 
     return self;
 }
@@ -272,6 +274,7 @@ actiongroup_add_radio_actions(argc, argv, self)
     } 
     gtk_action_group_add_radio_actions(_SELF(self), gentries, n_entries, NUM2INT(value), 
                                        G_CALLBACK(activate_radio_action), (gpointer)proc);
+    g_free(gentries);
 
     return self;
 }
