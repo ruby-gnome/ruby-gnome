@@ -1,3 +1,7 @@
+2004-03-07  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/*.[ch]: Updated copyright.
+
 2004-03-06  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstelement.c (#query): Fixed bad GEnum conversion.

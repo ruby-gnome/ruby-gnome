@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
  * This file is part of Ruby/Libgda.
  *
