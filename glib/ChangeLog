@@ -1,5 +1,8 @@
 2003-10-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_object.c (get_prop_func, set_prop_func): replace '-' with
+	'_' from method name.
+
 	* src/rbgobj_object.c (get_prop_func, set_prop_func): do not call
 	#do_get_property and #do_set_property, but #foo and #foo=.
 

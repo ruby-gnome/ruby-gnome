@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/10/25 15:35:01 $
+  $Date: 2003/10/25 15:53:12 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -434,6 +434,8 @@ gobj_smethod_added(self, id)
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
 static VALUE proc_mod_eval;
+static GQuark q_ruby_setter;
+static GQuark q_ruby_getter;
 
 // FIXME: use rb_protect
 static void
@@ -442,9 +444,20 @@ get_prop_func(GObject* object,
               GValue* value,
               GParamSpec* pspec)
 {
-    const gchar* name = g_param_spec_get_name(pspec);
-    ID m = rb_intern(name);
-    VALUE ret = rb_funcall(GOBJ2RVAL(object), m, 0);
+    ID ruby_getter = (ID)g_param_spec_get_qdata(pspec, q_ruby_getter);
+    if (!ruby_getter) {
+        gchar* name = g_strdup(g_param_spec_get_name(pspec));
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_getter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_getter, (gpointer)ruby_getter);
+        g_free(name);
+    }
+
+    VALUE ret = rb_funcall(GOBJ2RVAL(object), ruby_getter, 0);
     rbgobj_rvalue_to_gvalue(ret, value);
 }
 
@@ -455,11 +468,20 @@ set_prop_func(GObject* object,
               const GValue* value,
               GParamSpec* pspec)
 {
-    const gchar* name = g_param_spec_get_name(pspec);
-    gchar* mname = g_strconcat(name, "=", NULL);
-    ID m = rb_intern(mname);
-    g_free(mname);
-    rb_funcall(GOBJ2RVAL(object), m, 1, GVAL2RVAL(value));
+    ID ruby_setter = (ID)g_param_spec_get_qdata(pspec, q_ruby_setter);
+    if (!ruby_setter) {
+        gchar* name = g_strconcat(g_param_spec_get_name(pspec), "=", NULL);
+        gchar* p;
+        for (p = name; *p; p++) {
+          if (*p == '-')
+            *p = '_';
+        }
+        ruby_setter = rb_intern(name);
+        g_param_spec_set_qdata(pspec, q_ruby_setter, (gpointer)ruby_setter);
+        g_free(name);
+    }
+
+    rb_funcall(GOBJ2RVAL(object), ruby_setter, 1, GVAL2RVAL(value));
 }
 
 // FIXME: use rb_protect
@@ -588,6 +610,8 @@ Init_gobject_gobject()
     rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "install_property", gobj_s_install_property, -1);
+    q_ruby_getter = g_quark_from_static_string("__ruby_getter");
+    q_ruby_setter = g_quark_from_static_string("__ruby_setter");
 #endif
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
