@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2002/10/14 11:04:18 $
+  $Author: tkubo $
+  $Date: 2002/10/24 13:14:28 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -150,6 +150,8 @@ gobj_sig_connect(argc, argv, self)
     int i;
     GClosure* rclosure;
     const char* sig_name;
+    guint signal_id;
+    GQuark detail;
 
     rb_scan_args(argc, argv, "1*", &sig, &rest);
 
@@ -160,11 +162,11 @@ gobj_sig_connect(argc, argv, self)
         sig_name = StringValuePtr(sig);
     }
 
-    if (!g_signal_lookup(sig_name, CLASS2GTYPE(CLASS_OF(self))))
+    if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(rb_f_lambda(), rest);
-    i = g_signal_connect_closure(RVAL2GOBJ(self), sig_name, rclosure, FALSE);
+    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
 
     return INT2FIX(i);
 }
@@ -179,6 +181,8 @@ gobj_sig_connect_after(argc, argv, self)
     int i;
     GClosure* rclosure;
     const char* sig_name;
+    guint signal_id;
+    GQuark detail;
 
     rb_scan_args(argc, argv, "1*", &sig, &rest);
 
@@ -189,11 +193,11 @@ gobj_sig_connect_after(argc, argv, self)
         sig_name = StringValuePtr(sig);
     }
 
-    if (!g_signal_lookup(sig_name, CLASS2GTYPE(CLASS_OF(self))))
+    if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(rb_f_lambda(), rest);
-    i = g_signal_connect_closure(RVAL2GOBJ(self), sig_name, rclosure, TRUE);
+    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
 
     return INT2FIX(i);
 }

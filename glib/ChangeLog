@@ -1,3 +1,8 @@
+2002-10-24  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgobj_signal.c (GLib::Instantiatable#signal_conect,
+	#signal_connect_after): accept detailed signal.
+
 2002-10-20  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c: use canonical property name as hash key for the
