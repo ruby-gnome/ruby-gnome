@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,6 +15,7 @@
 #include "global.h"
 
 #define _SELF(w) GTK_ACCEL_GROUP(RVAL2GOBJ(w))
+#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 static VALUE
 gaccelgrp_initialize(self)
@@ -41,7 +42,9 @@ gaccelgrp_connect(argc, argv, self)
             rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         }
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
-                                FIX2INT(mods), FIX2INT(flags), rclosure);
+                                RVAL2MOD(mods), 
+                                RVAL2GFLAGS(flags, GTK_TYPE_ACCEL_FLAGS),
+                                rclosure);
     } else {
         rb_scan_args(argc, argv, "11", &path, &closure);
         if (NIL_P(closure)){
@@ -59,7 +62,7 @@ gaccelgrp_disconnect_key(self, key, mods)
     VALUE self, key, mods;
 {
     return gtk_accel_group_disconnect_key(_SELF(self), NUM2UINT(key),
-                                          FIX2INT(mods)) ? Qtrue : Qfalse;
+                                          RVAL2MOD(mods)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -72,7 +75,7 @@ gaccelgrp_query(self, key, mods)
     VALUE result;
 
     entries = gtk_accel_group_query(_SELF(self), NUM2UINT(key),
-                                    FIX2INT(mods), &n_entries);
+                                    RVAL2MOD(mods), &n_entries);
     if(n_entries == 0){
         return Qnil;
     }
@@ -158,7 +161,7 @@ gaccelgrp_s_activate(self, obj, key, modtype)
 {
     return gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
                                      NUM2INT(key),
-                                     NUM2INT(modtype)) ? Qtrue : Qfalse;
+                                     RVAL2MOD(modtype)) ? Qtrue : Qfalse;
 }
 
 static VALUE

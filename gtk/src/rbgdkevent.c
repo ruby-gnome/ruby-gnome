@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -73,7 +73,7 @@ static VALUE
 gdkevent_type(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->type);
+    return GENUM2RVAL(get_gdkevent(self)->type, GDK_TYPE_EVENT_TYPE);
 }
 
 static VALUE
@@ -106,27 +106,126 @@ gdkeventany_send_event(self)
     return get_gdkevent(self)->any.send_event ? Qtrue : Qfalse;
 }
 
-/* GdkEventExpose */
+/* GdkEventKey */
 static VALUE
-gdkeventexpose_area(self)
+gdkeventkey_time(self)
     VALUE self;
 {
-    return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
+    return INT2NUM(get_gdkevent(self)->key.time);
 }
 
 static VALUE
-gdkeventexpose_count(self)
+gdkeventkey_state(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->expose.count);
+    return GFLAGS2RVAL(get_gdkevent(self)->key.state, GDK_TYPE_MODIFIER_TYPE);
 }
 
-/* GdkEventVisibility */
 static VALUE
-gdkeventvisibility_state(self)
+gdkeventkey_keyval(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->visibility.state);
+    return INT2NUM(get_gdkevent(self)->key.keyval);
+}
+
+static VALUE
+gdkeventkey_length(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->key.length);
+}
+
+static VALUE
+gdkeventkey_string(self)
+    VALUE self;
+{
+    return rb_str_new2(get_gdkevent(self)->key.string);
+}
+
+/* GdkEventButton */
+static VALUE
+gdkeventbutton_button(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->button.button);
+}
+
+static VALUE
+gdkeventbutton_state(self)
+    VALUE self;
+{
+    return GFLAGS2RVAL(get_gdkevent(self)->button.state, GDK_TYPE_MODIFIER_TYPE);
+}
+
+static VALUE
+gdkeventbutton_time(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->button.time);
+}
+
+static VALUE
+gdkeventbutton_x(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->button.x);
+}
+
+static VALUE
+gdkeventbutton_y(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->button.y);
+}
+
+static VALUE
+gdkeventbutton_x_root(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->button.x_root);
+}
+
+static VALUE
+gdkeventbutton_y_root(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->button.y_root);
+}
+
+/* GdkEventScroll */
+static VALUE
+gdkeventscroll_time(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->scroll.time);
+}
+
+static VALUE
+gdkeventscroll_x(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->scroll.x);
+}
+
+static VALUE
+gdkeventscroll_y(self)
+    VALUE self;
+{
+    return rb_float_new(get_gdkevent(self)->scroll.y);
+}
+
+static VALUE
+gdkeventscroll_state(self)
+    VALUE self;
+{
+    return GFLAGS2RVAL(get_gdkevent(self)->scroll.state, GDK_TYPE_MODIFIER_TYPE);
+}
+
+static VALUE
+gdkeventscroll_direction(self)
+    VALUE self;
+{
+    return GENUM2RVAL(get_gdkevent(self)->scroll.direction, GDK_TYPE_SCROLL_DIRECTION);
 }
 
 /* GdkEventMotion */
@@ -169,7 +268,7 @@ static VALUE
 gdkeventmotion_state(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->motion.state);
+    return GFLAGS2RVAL(get_gdkevent(self)->motion.state, GDK_TYPE_MODIFIER_TYPE);
 }
 
 static VALUE
@@ -179,90 +278,12 @@ gdkeventmotion_is_hint(self)
     return INT2NUM(get_gdkevent(self)->motion.is_hint);
 }
 
-/* GdkEventButton */
+/* GdkEventVisibility */
 static VALUE
-gdkeventbutton_button(self)
+gdkeventvisibility_state(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->button.button);
-}
-
-static VALUE
-gdkeventbutton_state(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->button.state);
-}
-
-static VALUE
-gdkeventbutton_time(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->button.time);
-}
-
-static VALUE
-gdkeventbutton_x(self)
-    VALUE self;
-{
-    return rb_float_new(get_gdkevent(self)->button.x);
-}
-
-static VALUE
-gdkeventbutton_y(self)
-    VALUE self;
-{
-    return rb_float_new(get_gdkevent(self)->button.y);
-}
-
-static VALUE
-gdkeventbutton_x_root(self)
-    VALUE self;
-{
-    return rb_float_new(get_gdkevent(self)->button.x_root);
-}
-
-static VALUE
-gdkeventbutton_y_root(self)
-    VALUE self;
-{
-    return rb_float_new(get_gdkevent(self)->button.y_root);
-}
-
-/* GdkEventKey */
-static VALUE
-gdkeventkey_time(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->key.time);
-}
-
-static VALUE
-gdkeventkey_state(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->key.state);
-}
-
-static VALUE
-gdkeventkey_keyval(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->key.keyval);
-}
-
-static VALUE
-gdkeventkey_length(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkevent(self)->key.length);
-}
-
-static VALUE
-gdkeventkey_string(self)
-    VALUE self;
-{
-    return rb_str_new2(get_gdkevent(self)->key.string);
+    return GENUM2RVAL(get_gdkevent(self)->visibility.state, GDK_TYPE_VISIBILITY_STATE);
 }
 
 /* GdkEventCrossing */
@@ -312,14 +333,14 @@ static VALUE
 gdkeventcrossing_mode(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->crossing.mode);
+    return GENUM2RVAL(get_gdkevent(self)->crossing.mode, GDK_TYPE_CROSSING_MODE);
 }
 
 static VALUE
 gdkeventcrossing_detail(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->crossing.detail);
+    return GENUM2RVAL(get_gdkevent(self)->crossing.detail, GDK_TYPE_NOTIFY_TYPE);
 }
 
 static VALUE
@@ -333,8 +354,9 @@ static VALUE
 gdkeventcrossing_state(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->crossing.state);
+    return GFLAGS2RVAL(get_gdkevent(self)->crossing.state, GDK_TYPE_MODIFIER_TYPE);
 }
+
 
 /* GdkEventFocus */
 static VALUE
@@ -392,7 +414,7 @@ static VALUE
 gdkeventproperty_state(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->property.state);
+    return GENUM2RVAL(get_gdkevent(self)->property.state, GDK_TYPE_PROPERTY_STATE);
 }
 
 /* GdkEventSelection */
@@ -464,7 +486,6 @@ gdkeventDND_y_root(self)
     return INT2NUM(get_gdkevent(self)->dnd.y_root);
 }
 
-
 /* GdkEventProximity */
 static VALUE
 gdkeventproximity_time(self)
@@ -478,7 +499,7 @@ static VALUE
 gdkeventclient_message_type(self)
     VALUE self;
 {
-    return INT2NUM((int)(get_gdkevent(self)->client.message_type));
+    return BOXED2RVAL(get_gdkevent(self)->client.message_type, GDK_TYPE_ATOM);
 }
 
 static VALUE
@@ -519,7 +540,7 @@ gdkeventclient_data_long(self)
     VALUE ary = rb_ary_new2(5);
     int i;
     for (i=0; i<5; i++)
-        rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.l[i]));
+        rb_ary_push(ary, INT2NUM(get_gdkevent(self)->client.data.l[i]));
 
     return ary;
 }
@@ -540,6 +561,52 @@ gdkeventclient_send_clientmessage_toall(self)
     return Qnil;
 }
 
+/* GdkEventWindowState */
+static VALUE
+gdkeventwindowstate_changed_mask(self)
+    VALUE self;
+{
+    return GFLAGS2RVAL(((GdkEventWindowState*)get_gdkevent(self))->changed_mask, GDK_TYPE_WINDOW_STATE);
+}
+
+static VALUE
+gdkeventwindowstate_new_window_state(self)
+    VALUE self;
+{
+    return GFLAGS2RVAL(((GdkEventWindowState*)get_gdkevent(self))->new_window_state, GDK_TYPE_WINDOW_STATE);
+}
+
+/* GdkEventSetting */
+static VALUE
+gdkeventsetting_action(self)
+    VALUE self;
+{
+    return GENUM2RVAL(((GdkEventSetting*)get_gdkevent(self))->action, GDK_TYPE_SETTING_ACTION);
+}
+
+static VALUE
+gdkeventsetting_name(self)
+    VALUE self;
+{
+    return CSTR2RVAL(((GdkEventSetting*)get_gdkevent(self))->name);
+}
+
+/* GdkEventExpose */
+static VALUE
+gdkeventexpose_area(self)
+    VALUE self;
+{
+    return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
+}
+
+static VALUE
+gdkeventexpose_count(self)
+    VALUE self;
+{
+    return INT2NUM(get_gdkevent(self)->expose.count);
+}
+
+/* MISC */
 static VALUE 
 gdkevent_g2r(const GValue *from)
 {
@@ -627,6 +694,12 @@ Init_gtk_gdk_event()
 
     /* GdkEventScroll */
     ev = gdkevents[GDK_SCROLL];
+    rb_define_method(ev, "time",   gdkeventscroll_time, 0);
+    rb_define_method(ev, "x", gdkeventscroll_x, 0);
+    rb_define_method(ev, "y", gdkeventscroll_y, 0);
+    rb_define_method(ev, "state", gdkeventscroll_state, 0);
+    rb_define_method(ev, "direction", gdkeventscroll_direction, 0);
+
     /* GdkScrollDirection */
     G_DEF_CLASS(GDK_TYPE_SCROLL_DIRECTION, "Direction", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_SCROLL_DIRECTION, "GDK_SCROLL_");
@@ -731,12 +804,16 @@ Init_gtk_gdk_event()
 
     /* GdkEventWindowState */
     ev = gdkevents[GDK_WINDOW_STATE];
+    rb_define_method(ev, "changed_mask", gdkeventwindowstate_changed_mask, 0);
+    rb_define_method(ev, "new_window_state", gdkeventwindowstate_new_window_state, 0);
     /* GdkWindowState */
     G_DEF_CLASS(GDK_TYPE_WINDOW_STATE, "WindowState", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_WINDOW_STATE, "GDK_WINDOW_STATE_");
 
     /* GdkEventSetting */
     ev = gdkevents[GDK_SETTING];
+    rb_define_method(ev, "action", gdkeventsetting_action, 0);
+    rb_define_method(ev, "name", gdkeventsetting_name, 0);
     /* GdkSettingAction */
     G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "SettingAction", mGdk);
     G_DEF_CONSTANTS(mGdk, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");

@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:02 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -90,11 +90,12 @@ gdkdragcontext_initialize(self)
 }
 
 static VALUE
-gdkdragcontext_s_get_protocol(self, xid, protocol)
-    VALUE self, xid, protocol;
+gdkdragcontext_s_get_protocol(self, xid)
+    VALUE self, xid;
 {
-    int prot = NUM2INT(protocol);
-    return INT2NUM(gdk_drag_get_protocol(NUM2INT(xid),(GdkDragProtocol*)&prot)); 
+    GdkDragProtocol prot;
+    guint32 ret = gdk_drag_get_protocol(NUM2INT(xid), &prot);
+    return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), INT2NUM(ret));
 }
 
 /* Instance Methods */
@@ -130,18 +131,17 @@ gdkdragcontext_drag_drop(self, time)
 }
 
 static VALUE
-gdkdragcontext_find_window(self, drag_window, x_root, y_root, protocol)
-    VALUE self, drag_window, x_root, y_root, protocol;
+gdkdragcontext_find_window(self, drag_window, x_root, y_root)
+    VALUE self, drag_window, x_root, y_root;
 {
     GdkWindow *dest_window;
-    int prot = NUM2INT(protocol);
+    GdkDragProtocol prot;
     gdk_drag_find_window(_SELF(self),
                          GDK_WINDOW(RVAL2GOBJ(drag_window)), 
-                         NUM2INT(x_root),
-                         NUM2INT(y_root),
-                         &dest_window, 
-                         (GdkDragProtocol*)&prot);
-    return GOBJ2RVAL(dest_window);
+                         NUM2INT(x_root), NUM2INT(y_root),
+                         &dest_window, &prot);
+    return rb_ary_new3(2, GOBJ2RVAL(dest_window), 
+                       GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL));
 }
 
 static VALUE
@@ -152,8 +152,10 @@ gdkdragcontext_motion(self, dest_window, protocol, x_root, y_root,
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
                                    GDK_WINDOW(RVAL2GOBJ(dest_window)), 
-                                   NUM2INT(protocol), NUM2INT(x_root), NUM2INT(y_root), 
-                                   NUM2INT(suggested_action), NUM2INT(possible_actions), 
+                                   RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
+                                   NUM2INT(x_root), NUM2INT(y_root), 
+                                   RVAL2GFLAGS(suggested_action, GDK_TYPE_DRAG_ACTION), 
+                                   RVAL2GFLAGS(possible_actions, GDK_TYPE_DRAG_ACTION), 
                                    NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
@@ -170,7 +172,8 @@ static VALUE
 gdkdragcontext_drag_status(self, action, time)
     VALUE self, action, time;
 {
-    gdk_drag_status(_SELF(self), NUM2INT(action), NUM2INT(time));
+    gdk_drag_status(_SELF(self), 
+                    RVAL2GFLAGS(action, GDK_TYPE_DRAG_ACTION), NUM2INT(time));
     return self;
 }
 

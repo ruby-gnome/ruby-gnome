@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:54 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -726,7 +726,7 @@ gdkwin_prop_change(argc, argv, self)
     rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
     
     gdk_property_change(_SELF(self), RVAL2ATOM(property), 
-                        ntype, fmt, NUM2INT(mode), dat, len);
+                        ntype, fmt, RVAL2GENUM(mode, GDK_TYPE_PROP_MODE), dat, len);
 
     rbgtk_atom2selectiondata_free(ntype, dat);
 

@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2003/06/05 17:00:35 $
+  $Date: 2003/08/30 18:40:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -17,6 +17,11 @@
 #define _SELF(w) GTK_STYLE(RVAL2GOBJ(w))
 #define RVAL2REC(r) (NIL_P(r) ? NULL : (GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 #define RVAL2ICONSOURCE(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
+#define RVAL2STATE(s) (RVAL2GENUM(s, GTK_TYPE_STATE_TYPE))
+#define RVAL2SHADOW(s) (RVAL2GENUM(s, GTK_TYPE_SHADOW_TYPE))
+#define RVAL2ARROW(s) (RVAL2GENUM(s, GTK_TYPE_ARROW_TYPE))
+#define RVAL2GAP(s) (RVAL2GENUM(s, GTK_TYPE_POSITION_TYPE))
+#define RVAL2ORI(s) (RVAL2GENUM(s, GTK_TYPE_ORIENTATION))
 
 static VALUE
 style_initialize(self)
@@ -61,7 +66,7 @@ style_set_background(self, win, state_type)
     VALUE self, win, state_type;
 {
     gtk_style_set_background(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
-                             (GtkStateType)NUM2INT(state_type));
+                             RVAL2STATE(state_type));
     return self;
 }
 
@@ -72,7 +77,7 @@ style_apply_default_background(self, gdkwindow, set_bg, state_type, area,
 {
     gtk_style_apply_default_background(_SELF(self), 
                                        GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                                       RTEST(set_bg), FIX2INT(state_type),
+                                       RTEST(set_bg), RVAL2STATE(state_type),
                                        RVAL2REC(area), 
                                        NUM2INT(x), NUM2INT(y), 
                                        NUM2INT(width), NUM2INT(height));
@@ -100,8 +105,9 @@ style_render_icon(self, source, direction, state, size, widget, detail)
     VALUE self, source, direction, state, size, widget, detail;
 {
     return GOBJ2RVAL(gtk_style_render_icon(_SELF(self), RVAL2ICONSOURCE(source),
-                                           FIX2INT(direction), FIX2INT(state),
-                                           FIX2INT(size), 
+                                           RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION), 
+                                           RVAL2STATE(state),
+                                           RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), 
                                            GTK_WIDGET(RVAL2GOBJ(widget)),
                                            RVAL2CSTR(detail)));
 }
@@ -113,9 +119,9 @@ style_paint_arrow(self, gdkwindow, state_type, shadow_type, area, widget, detail
     arrow_type, fill, x, y, width, height;
 {
     gtk_paint_arrow(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
-                    FIX2INT(arrow_type), RTEST(fill), NUM2INT(x), NUM2INT(y),
+                    RVAL2ARROW(arrow_type), RTEST(fill), NUM2INT(x), NUM2INT(y),
                     NUM2INT(width), NUM2INT(height));
     return self;
 }
@@ -127,7 +133,7 @@ style_paint_box(self, gdkwindow, state_type, shadow_type, area, widget, detail,
     x, y, width, height;
 {
     gtk_paint_box(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -140,10 +146,10 @@ style_paint_box_gap(self, gdkwindow, state_type, shadow_type, area, widget, deta
     x, y, width, height, gap_side, gap_x, gap_width;
 {
     gtk_paint_box_gap(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                      FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                      RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                       GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                       NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height),
-                      FIX2INT(gap_side), NUM2INT(gap_x), NUM2INT(gap_width));
+                      RVAL2GAP(gap_side), NUM2INT(gap_x), NUM2INT(gap_width));
     return self;
 }
 
@@ -154,7 +160,7 @@ style_paint_check(self, gdkwindow, state_type, shadow_type, area, widget, detail
     x, y, width, height;
 {
     gtk_paint_check(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -167,7 +173,7 @@ style_paint_diamond(self, gdkwindow, state_type, shadow_type, area, widget, deta
     x, y, width, height;
 {
     gtk_paint_diamond(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -180,10 +186,10 @@ style_paint_extension(self, gdkwindow, state_type, shadow_type, area, widget, de
     x, y, width, height, gap_side;
 {
     gtk_paint_extension(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                        FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                        RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                         GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                         NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height), 
-                        FIX2INT(gap_side));
+                        RVAL2GAP(gap_side));
     return self;
 }
 
@@ -194,7 +200,7 @@ style_paint_flat_box(self, gdkwindow, state_type, shadow_type, area, widget, det
     x, y, width, height;
 {
     gtk_paint_flat_box(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -207,7 +213,7 @@ style_paint_focus(self, gdkwindow, state_type, area, widget, detail,
     x, y, width, height;
 {
     gtk_paint_focus(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -220,10 +226,10 @@ style_paint_handle(self, gdkwindow, state_type, shadow_type, area, widget, detai
     x, y, width, height, orientation;
 {
     gtk_paint_handle(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                     FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                     RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                      GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                      NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height),
-                     FIX2INT(orientation));
+                     RVAL2ORI(orientation));
     return self;
 }
 
@@ -232,7 +238,7 @@ style_paint_hline(self, gdkwindow, state_type, area, widget, detail, x1, x2, y)
     VALUE self, gdkwindow, state_type, area, widget, detail, x1, x2, y;
 {
     gtk_paint_hline(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x1), NUM2INT(x2), NUM2INT(y));
     return self;
@@ -245,7 +251,7 @@ style_paint_option(self, gdkwindow, state_type, shadow_type, area, widget, detai
     x, y, width, height;
 {
     gtk_paint_option(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -265,7 +271,7 @@ style_paint_polygon(self, gdkwindow, state_type, shadow_type, area, widget, deta
         gpoints[i].y = RARRAY(RARRAY(points)->ptr[i])->ptr[1];
     }
     gtk_paint_polygon(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                       GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail), gpoints,
                       RARRAY(points)->len, RTEST(fill));
     return self;
@@ -278,7 +284,7 @@ style_paint_shadow(self, gdkwindow, state_type, shadow_type, area, widget, detai
     x, y, width, height;
 {
     gtk_paint_shadow(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -291,10 +297,10 @@ style_paint_shadow_gap(self, gdkwindow, state_type, shadow_type, area, widget, d
     x, y, width, height, gap_side, gap_x, gap_width;
 {
     gtk_paint_shadow_gap(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                         FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                         RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                          GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                          NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height),
-                         FIX2INT(gap_side), NUM2INT(gap_x), NUM2INT(gap_width));
+                         RVAL2GAP(gap_side), NUM2INT(gap_x), NUM2INT(gap_width));
     return self;
 }
 
@@ -305,10 +311,10 @@ style_paint_slider(self, gdkwindow, state_type, shadow_type, area, widget, detai
     x, y, width, height, orientation;
 {
     gtk_paint_slider(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                     FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                     RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                      GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                      NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height),
-                     FIX2INT(orientation));
+                     RVAL2ORI(orientation));
     return self;
 }
 
@@ -319,7 +325,7 @@ style_paint_tab(self, gdkwindow, state_type, shadow_type, area, widget, detail,
     x, y, width, height;
 {
     gtk_paint_tab(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                  FIX2INT(state_type), FIX2INT(shadow_type), RVAL2REC(area),
+                  RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                   GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                   NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
     return self;
@@ -330,7 +336,7 @@ style_paint_vline(self, gdkwindow, state_type, area, widget, detail, y1, y2, x)
     VALUE self, gdkwindow, state_type, area, widget, detail, y1, y2, x;
 {
     gtk_paint_vline(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                    FIX2INT(state_type), RVAL2REC(area),
+                    RVAL2STATE(state_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                     NUM2INT(y1), NUM2INT(y2), NUM2INT(x));
     return self;
@@ -343,9 +349,9 @@ style_paint_expander(self, gdkwindow, state_type, area, widget, detail,
     x, y, expander_style;
 {
     gtk_paint_expander(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                       FIX2INT(state_type), RVAL2REC(area),
+                       RVAL2STATE(state_type), RVAL2REC(area),
                        GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
-                       NUM2INT(x), NUM2INT(y), FIX2INT(expander_style));
+                       NUM2INT(x), NUM2INT(y), RVAL2GENUM(expander_style, GTK_TYPE_EXPANDER_STYLE));
     return self;
 }
 
@@ -356,7 +362,7 @@ style_paint_layout(self, gdkwindow, state_type, use_text, area,
     x, y, layout;
 {
     gtk_paint_layout(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                     FIX2INT(state_type), RTEST(use_text), RVAL2REC(area),
+                     RVAL2STATE(state_type), RTEST(use_text), RVAL2REC(area),
                      GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
                      NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(self)));
     return self;
@@ -369,9 +375,10 @@ style_paint_resize_grip(self, gdkwindow, state_type, area, widget, detail,
     width, height;
 {
     gtk_paint_resize_grip(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                          FIX2INT(state_type), RVAL2REC(area),
+                          RVAL2STATE(state_type), RVAL2REC(area),
                           GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
-                          FIX2INT(edge), NUM2INT(x), NUM2INT(y), 
+                          RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE), 
+                          NUM2INT(x), NUM2INT(y), 
                           NUM2INT(width), NUM2INT(height));
     return self;
 }

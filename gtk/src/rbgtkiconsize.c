@@ -3,8 +3,8 @@
 
   rbgtkiconsize.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:03 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -16,22 +16,13 @@ icon_size_lookup(self, size)
 {
     gint width, height;
 
-    if(gtk_icon_size_lookup(FIX2INT(size), &width, &height))
+    if(gtk_icon_size_lookup(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), &width, &height))
         return rb_ary_new3(2, INT2FIX(width), INT2FIX(height));
     else
         return Qnil;
 }
 
-#if 0
-/* gtk_icon_size_lookup_for_settings is not defined in GTK+. */
-
-/*
-gboolean    gtk_icon_size_lookup_for_settings
-                                            (GtkSettings *settings,
-                                             GtkIconSize size,
-                                             gint *width,
-                                             gint *height);
-*/
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 icon_size_lookup_for_settings(self, settings, size)
     VALUE self, settings, size;
@@ -39,7 +30,8 @@ icon_size_lookup_for_settings(self, settings, size)
     gint width, height;
 
     if(gtk_icon_size_lookup_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)),
-                                         FIX2INT(size), &width, &height))
+                                         RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), 
+                                         &width, &height))
         return rb_ary_new3(2, INT2FIX(width), INT2FIX(height));
     else
         return Qnil;
@@ -59,7 +51,7 @@ static VALUE
 icon_size_register_alias(self, alias, target)
     VALUE self, alias, target;
 {
-    gtk_icon_size_register_alias(RVAL2CSTR(alias), FIX2INT(target));
+    gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GENUM(target, GTK_TYPE_ICON_SIZE));
     return Qnil;
 }
 
@@ -74,7 +66,7 @@ static VALUE
 icon_size_get_name(self, size)
     VALUE self, size;
 {
-    return CSTR2RVAL(gtk_icon_size_get_name(FIX2INT(size)));
+    return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE)));
 }
 
 void
@@ -83,6 +75,9 @@ Init_icon_size()
     VALUE mIconSize = rb_define_module_under(mGtk, "IconSize");
 
     rb_define_module_function(mIconSize, "lookup", icon_size_lookup, 1);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_module_function(mIconSize, "lookup_for_settings", icon_size_lookup_for_settings, 2);
+#endif
     rb_define_module_function(mIconSize, "register", icon_size_register, 3);
     rb_define_module_function(mIconSize, "register_alias", icon_size_register_alias, 2);
     rb_define_module_function(mIconSize, "from_name", icon_size_from_name, 1);

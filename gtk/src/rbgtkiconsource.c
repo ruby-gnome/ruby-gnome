@@ -4,7 +4,7 @@
   rbgtkiconsource.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/08/30 18:40:03 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -27,7 +27,8 @@ static VALUE
 icon_source_get_direction(self)
     VALUE self;
 {
-    return INT2NUM(gtk_icon_source_get_direction(_SELF(self)));
+    return GENUM2RVAL(gtk_icon_source_get_direction(_SELF(self)), 
+                      GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
@@ -57,7 +58,7 @@ static VALUE
 icon_source_get_size(self)
     VALUE self;
 {
-    return INT2FIX(gtk_icon_source_get_size(_SELF(self)));
+    return GENUM2RVAL(gtk_icon_source_get_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
@@ -71,7 +72,7 @@ static VALUE
 icon_source_get_state(self)
     VALUE self;
 {
-    return INT2FIX(gtk_icon_source_get_state(_SELF(self)));
+    return GENUM2RVAL(gtk_icon_source_get_state(_SELF(self)), GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
@@ -86,7 +87,7 @@ icon_source_set_direction(self, direction)
     VALUE self, direction;
 {
     gtk_icon_source_set_direction(_SELF(self),
-                                  (GtkTextDirection)FIX2INT(direction));
+                                  RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION));
     return self;
 }
 
@@ -118,7 +119,7 @@ static VALUE
 icon_source_set_size(self, size)
     VALUE self, size;
 {
-    gtk_icon_source_set_size(_SELF(self), FIX2INT(size));
+    gtk_icon_source_set_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
@@ -134,7 +135,7 @@ static VALUE
 icon_source_set_state(self, state)
     VALUE self, state;
 {
-    gtk_icon_source_set_state(_SELF(self), FIX2INT(state));
+    gtk_icon_source_set_state(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE));
     return self;
 }
 

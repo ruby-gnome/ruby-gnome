@@ -1,3 +1,15 @@
+2003-08-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkiconsize.c: Add Gtk::IconSize.lookup_for_settings.
+	* src/rbgdkinput.c: Add "condition" as a block parameter of Gdk::Input.add.
+	* src/rbgdkdragcontext.c: Fix wrong parameter of Gdk::DragContext.protocol,
+	Gdk::DragContext#find_window.
+	* src/rbgdkevent.c: Add some methods.
+	* src/rbgdkevent.c, rbgdkdragcontext.c, rbgdkinput.c, rbgtkmain.c, 
+	rbgtkaccelgroup.c, rbgtkaccelgroup.c, rbgtkaccelmap.c, rbgtkdrag.c, 
+	rbgtkiconsource.c, rbgtkiconset.c, rbgtkiconsize.c, rbgtkbindingset.c, 
+	rbgtkstyle.c: Apply enum/flags changes.
+
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: remove nasty hack by using Dir.entries.
@@ -10,7 +22,7 @@
 
 2003-08-28 Martin Povolny <xpovolny@fi.muni.cz>
 
-   * src/rbgtktreeview.c: fix non-functional treeview_get_path_at_pos
+	* src/rbgtktreeview.c: fix non-functional treeview_get_path_at_pos
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 

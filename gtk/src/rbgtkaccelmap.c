@@ -4,17 +4,19 @@
   rbgtkaccelmap.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
+#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
+
 static VALUE
 accel_map_add_entry(self, path, key, mods)
     VALUE self, path, key, mods;
 {
-    gtk_accel_map_add_entry(RVAL2CSTR(path), NUM2UINT(key), FIX2INT(mods));
+    gtk_accel_map_add_entry(RVAL2CSTR(path), NUM2UINT(key), RVAL2MOD(mods));
     return Qnil;
 }
 
@@ -34,7 +36,7 @@ accel_map_change_entry(self, path, key, mods, replace)
     VALUE self, path, key, mods, replace;
 {
     return gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
-                                      FIX2INT(mods), RTEST(replace))
+                                      RVAL2MOD(mods), RTEST(replace))
         ? Qtrue : Qfalse;
 }
 
@@ -71,7 +73,7 @@ accel_map_foreach_func(func, path, key, mods, changed)
     gboolean changed;
 {
     rb_funcall((VALUE)func, id_call, 4,
-               CSTR2RVAL(path), UINT2NUM(key), INT2FIX(mods),
+               CSTR2RVAL(path), UINT2NUM(key), GFLAGS2RVAL(mods, GDK_TYPE_MODIFIER_TYPE),
                changed ? Qtrue : Qfalse);
 }
 

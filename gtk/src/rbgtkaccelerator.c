@@ -4,17 +4,19 @@
   rbgtkaccelerator.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 #include "global.h"
 
+#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
+
 static VALUE
 accel_valid(self, keyval, modifiers)
     VALUE self, keyval, modifiers;
 {
-    return gtk_accelerator_valid(NUM2UINT(keyval), FIX2INT(modifiers)) ? Qtrue : Qfalse;
+    return gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -24,21 +26,21 @@ accel_parse(self, accelerator)
     guint key;
     GdkModifierType mods;
     gtk_accelerator_parse(RVAL2CSTR(accelerator), &key, &mods);
-    return rb_ary_new3(2, UINT2NUM(key), INT2FIX(mods));
+    return rb_ary_new3(2, UINT2NUM(key), GFLAGS2RVAL(mods, GDK_TYPE_MODIFIER_TYPE));
 }
 
 static VALUE
 accel_name(self, key, mods)
     VALUE self, key, mods;
 {
-    return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), FIX2INT(mods)));
+    return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
 static VALUE
 accel_set_default_mod_mask(self, default_mod_mask)
     VALUE self, default_mod_mask;
 {
-    gtk_accelerator_set_default_mod_mask(FIX2INT(default_mod_mask));
+    gtk_accelerator_set_default_mod_mask(RVAL2MOD(default_mod_mask));
     return self;
 }
 
@@ -46,7 +48,7 @@ static VALUE
 accel_get_default_mod_mask(self)
     VALUE self;
 {
-    return UINT2NUM(gtk_accelerator_get_default_mod_mask());
+    return GFLAGS2RVAL(gtk_accelerator_get_default_mod_mask(), GDK_TYPE_MODIFIER_TYPE);
 }
 
 void

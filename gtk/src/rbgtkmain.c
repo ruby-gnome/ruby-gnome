@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: sakai $
-  $Date: 2003/07/14 14:44:13 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -370,7 +370,7 @@ gtk_m_get_current_event_state(self)
 {
     GdkModifierType state;
     gboolean ret = gtk_get_current_event_state(&state);
-    return ret ? INT2NUM(state) : Qnil;
+    return ret ? GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE) : Qnil;
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtkiconset.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -52,7 +52,7 @@ icon_set_get_sizes(self)
     gtk_icon_set_get_sizes(_SELF(self), &sizes, &n_sizes);
     result = rb_ary_new();
     for(n=0; n<n_sizes; n++, sizes++)
-        rb_ary_push(result, INT2FIX(*sizes));
+        rb_ary_push(result, GENUM2RVAL(*sizes, GTK_TYPE_ICON_SIZE));
     return result;
 }
 

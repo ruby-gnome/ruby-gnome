@@ -4,12 +4,14 @@
   rbgtkbindingset.c -
 
   $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 /*****************************************/
 static GtkBindingSet*
@@ -66,7 +68,7 @@ binding_activate(self, keyval, modifiers, object)
     VALUE self, keyval, modifiers, object;
 {
     return gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
-                                    NUM2UINT(modifiers),
+                                    RVAL2MOD(modifiers),
                                     GTK_OBJECT(RVAL2GOBJ(object))) ? Qtrue : Qfalse;
 }
 
@@ -75,7 +77,7 @@ binding_entry_clear(self, keyval, modifiers)
     VALUE self, keyval, modifiers;
 {
     gtk_binding_entry_clear(_SELF(self), NUM2UINT(keyval),
-                            NUM2UINT(modifiers));
+                            RVAL2MOD(modifiers));
     return self;
 }
 
@@ -92,9 +94,9 @@ static VALUE
 binding_add_path(self, path_type, path_pattern, priority)
     VALUE self, path_type, path_pattern, priority;
 {
-    gtk_binding_set_add_path(_SELF(self), NUM2INT(path_type),
+    gtk_binding_set_add_path(_SELF(self), RVAL2GENUM(path_type, GTK_TYPE_PATH_TYPE),
                              RVAL2CSTR(path_pattern),
-                             NUM2INT(priority));
+                             RVAL2GENUM(priority, GTK_TYPE_PATH_PRIORITY_TYPE));
     return self;
 }
 
@@ -103,7 +105,7 @@ binding_entry_remove(self, keyval, modifiers)
     VALUE self, keyval, modifiers;
 {
     gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval),
-                             NUM2UINT(modifiers));
+                             RVAL2MOD(modifiers));
 
     return self;
 }

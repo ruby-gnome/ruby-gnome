@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -38,7 +38,7 @@ rbgtk_get_target_entry(targets)
         e_info = rb_ary_entry(ary, 2);
         
         entries[i].target = NIL_P(e_target) ? NULL:RVAL2CSTR(e_target);
-        entries[i].flags = NIL_P(e_flags) ? 0:NUM2INT(e_flags);
+        entries[i].flags = NIL_P(e_flags) ? 0:RVAL2GFLAGS(e_flags, GTK_TYPE_TARGET_FLAGS);
         entries[i].info = NIL_P(e_info) ? 0:NUM2INT(e_info);
 
     }
@@ -54,8 +54,9 @@ gtkdrag_dest_set(self, widget, flags, targets, actions)
     if (entries){
         num = RARRAY(targets)->len;
         
-        gtk_drag_dest_set(RVAL2WIDGET(widget), NUM2INT(flags), entries, 
-                          num, NUM2INT(actions));
+        gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
+                          entries, 
+                          num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     }
     return self;
 }
@@ -66,7 +67,8 @@ gtkdrag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
 {
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
                             GDK_WINDOW(RVAL2GOBJ(proxy_window)),
-                            NUM2INT(protocol), RTEST(use_coordinates)); 
+                            RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
+                            RTEST(use_coordinates)); 
     return self;
 }
 
@@ -161,7 +163,7 @@ gtkdrag_begin(self, widget, target_list, actions, button, event)
 {
     return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(self),
                                     RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
-                                    NUM2INT(actions),
+                                    RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION),
                                     NUM2INT(button),
                                     RVAL2GEV(event)));
 }
@@ -222,9 +224,10 @@ static VALUE
 gtkdrag_source_set(self, widget, flags, targets, actions)
     VALUE self, flags, targets, actions;
 {
-    gtk_drag_source_set(RVAL2WIDGET(widget), NUM2INT(flags), 
+    gtk_drag_source_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
                         rbgtk_get_target_entry(targets), 
-                        RARRAY(targets)->len, NUM2INT(actions));
+                        RARRAY(targets)->len, 
+                        RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     return self;
 }
 

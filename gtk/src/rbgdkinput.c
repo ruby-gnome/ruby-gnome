@@ -3,8 +3,8 @@
 
   rbgdkinput.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/30 18:40:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -23,7 +23,8 @@ exec_input(data, source, condition)
     gint source;
     GdkInputCondition condition;
 {
-    rb_funcall((VALUE)data, id_call, 0);
+    rb_funcall((VALUE)data, id_call, 1, 
+               GFLAGS2RVAL(condition, GDK_TYPE_INPUT_CONDITION));
 }
 
 static VALUE
@@ -36,7 +37,7 @@ input_add(self, filedescriptor, gdk_input_condition)
     func = G_BLOCK_PROC();
     id = INT2FIX(gdk_input_add(NUM2INT(rb_funcall(filedescriptor,
                                                   rb_intern("to_i"), 0)),
-                               (GdkInputCondition)NUM2INT(gdk_input_condition),
+                               RVAL2GFLAGS(gdk_input_condition, GDK_TYPE_INPUT_CONDITION),
                                (GdkInputFunction)exec_input,
                                (gpointer)func));
     G_RELATIVE2(self, func, id_relative_callbacks, id);
