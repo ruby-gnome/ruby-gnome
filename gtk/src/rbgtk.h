@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 23:20:22 $
+  $Author: sakai $
+  $Date: 2002/06/11 17:47:46 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,6 +16,8 @@
 
 #include "ruby.h"
 #include "rubysig.h"
+#include "rbglib.h"
+#include "rbgobject.h"
 #include <gtk/gtk.h>
 #if defined __CYGWIN__
 #define HWND_DESKTOP 0
@@ -41,14 +43,7 @@ extern ID id_relatives;
 extern ID id_relative_callbacks;
 extern ID id_call;
 
-struct _rbgtk_class_info {
-    VALUE klass;
-    GtkType gtype;
-    void (*mark)(GtkObject *);
-    void (*free)(GtkObject *);
-};
-
-typedef struct _rbgtk_class_info rbgtk_class_info;
+typedef rbgobj_class_info rbgtk_class_info;
 
 extern void rbgtk_register_class(rbgtk_class_info *cinfo);
 extern rbgtk_class_info *rbgtk_lookup_class(VALUE klass);

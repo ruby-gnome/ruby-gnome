@@ -1,3 +1,9 @@
+Mon Jun 10 19:32:31 2002 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+
+   * lib/gtk2.rb: File added
+   * src/rbgdkevent.c, src/rbgtk.c, src/rbgtk.h, src/rbgtkobject.c:
+     Use glib extension library.
+
 Sun Jun 09 22:59:40 2002 Hiroshi Kuwagata <kgt@kokone.to>
 
    * src/rbgdkatom.c,src/rbgdkconst.c,src/rbgdkevent.c,src/rbgdkwindow.c:

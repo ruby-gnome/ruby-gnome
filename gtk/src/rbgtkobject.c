@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/11 17:47:46 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -335,33 +335,6 @@ signal_callback(widget, data, nparams, params)
 }
 
 static VALUE
-gobj_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    rb_raise(rb_eRuntimeError, "can't instantiate class %s", rb_class2name(self));
-}
-
-static VALUE
-gobj_smethod_added(self, id)
-    VALUE self, id;
-{
-    GtkObject *obj = get_gobject(self);
-    char *name = rb_id2name(NUM2INT(id));
-    
-    if (gtk_signal_lookup(name, GTK_OBJECT_TYPE(obj))) {
-	VALUE data = rb_ary_new3(3, Qnil, id, rb_ary_new2(0));
-
-	add_relative(self, data);
-	gtk_signal_connect_full(obj, name, NULL,
-				signal_callback, (gpointer)data,
-				NULL, FALSE, 0);
-    }
-    return Qnil;
-}
-
-static VALUE
 null()
 {
     return (VALUE)NULL;
@@ -372,88 +345,6 @@ force_get_gobject(self)
     VALUE self;
 {
     return (GtkObject*)rb_rescue((VALUE(*)())get_gobject, self, null, 0);
-}
-
-static VALUE
-gobj_equal(self, other)
-    VALUE self, other;
-{
-    if (self == other) return Qtrue;
-    if (get_gobject(self) == force_get_gobject(other)) return Qtrue;
-    return Qfalse;
-}
-
-static VALUE
-gobj_inspect(self)
-    VALUE self;
-{
-    VALUE iv = rb_ivar_get(self, id_gtkdata);
-    char *cname = rb_class2name(CLASS_OF(self));
-    char *s;
-
-    if (NIL_P(iv) || RDATA(iv)->data == 0) {
-	s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
-	sprintf(s, "#<%s: destroyed>", cname);
-    }
-    else {
-	s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
-	sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self, get_gobject(self));
-    }
-    return rb_str_new2(s);
-}
-
-/* TODO */
-static VALUE
-gobj_sig_emit(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    rb_notimplement();
-    return self;
-}
-
-/* TODO */
-static VALUE
-gobj_sig_emit_by_name(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    rb_notimplement();
-    return self;
-}
-
-static VALUE
-gobj_sig_emit_stop(self, sig_id)
-    VALUE self, sig_id;
-{
-    gtk_signal_emit_stop(get_gobject(self), NUM2INT(sig_id));
-    return self;
-}
-
-static VALUE
-gobj_sig_emit_stop_by_name(self, sig_name)
-    VALUE self, sig_name;
-{
-    gtk_signal_emit_stop_by_name(get_gobject(self), STR2CSTR(sig_name));
-    return self;
-}
-
-static VALUE
-gobj_sig_handler_block(self, id)
-     VALUE self, id;
-{
-    gtk_signal_handler_block(GTK_OBJECT(get_gobject(self)), NUM2INT(id));
-    return self;
-}
-
-static VALUE
-gobj_sig_handler_unblock(self, id)
-     VALUE self, id;
-{
-    gtk_signal_handler_unblock(GTK_OBJECT(get_gobject(self)), NUM2INT(id));
-    return self;
 }
 
 static void
@@ -511,70 +402,11 @@ gobj_get_gtk_type(self)
     return INT2NUM(GTK_OBJECT_TYPE(get_gobject(self)));
 }
 
-static VALUE
-gobj_sig_connect(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE sig, data, args;
-    ID id = 0;
-    int i;
-
-    rb_scan_args(argc, argv, "1*", &sig, &args);
-    id = rb_intern(STR2CSTR(sig));
-    data = rb_ary_new3(3, rb_f_lambda(), INT2NUM(id), args);
-    add_relative(self, data);
-    i = gtk_signal_connect_full(get_gobject(self),
-				STR2CSTR(sig), NULL,
-				signal_callback, (gpointer)data,
-				NULL, FALSE, 0);
-
-    return INT2FIX(i);
-}
-
-static VALUE
-gobj_sig_connect_after(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE sig, data, args;
-    ID id = 0;
-    int i;
-
-    rb_scan_args(argc, argv, "1*", &sig, &args);
-    id = rb_intern(STR2CSTR(sig));
-    data = rb_ary_new3(3, rb_f_lambda(), INT2NUM(id), args);
-    add_relative(self, data);
-    i = gtk_signal_connect_full(get_gobject(self),
-				STR2CSTR(sig), NULL,
-				signal_callback, (gpointer)data,
-				NULL, FALSE, 1);
-
-    return INT2FIX(i);
-}
-
-static VALUE
-gobj_sig_disconnect(self, handler_id)
-    VALUE self, handler_id;
-{
-    gtk_signal_disconnect(get_gobject(self), NUM2INT(handler_id));
-    return Qnil;
-}
-
-static VALUE
-gobj_clone(self)
-    VALUE self;
-{
-    rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
-}
-
 void Init_gtk_object()
 {
     static rbgtk_class_info cinfo;
 
-    gObject = rb_define_class_under(mGtk, "Object", rb_cObject);
+    gObject = rb_define_class_under(mGtk, "Object", rbgobj_cGObject);
     cinfo.klass = gObject;
     cinfo.gtype = GTK_TYPE_OBJECT;
     cinfo.mark = 0;
@@ -604,7 +436,6 @@ void Init_gtk_object()
     /*
      * instance methods
      */
-    rb_define_method(gObject, "initialize", gobj_initialize, -1);
     rb_define_method(gObject, "flags", gobj_get_flags, 0);
     rb_define_method(gObject, "flags=", gobj_set_flags, 1);
     rb_define_method(gObject, "unset_flags", gobj_unset_flags, 1);
@@ -613,28 +444,6 @@ void Init_gtk_object()
     rb_define_method(gObject, "gtk_type", gobj_get_gtk_type, 0);
 
     rb_define_method(gObject, "destroy", gobj_destroy, 0);
-    rb_define_method(gObject, "signal_emit",
-            gobj_sig_emit, -1);
-    rb_define_method(gObject, "signal_emit_by_name",
-            gobj_sig_emit_by_name, -1);
-    rb_define_method(gObject, "signal_emit_stop",
-            gobj_sig_emit_stop, 1);
-    rb_define_method(gObject, "signal_emit_stop_by_name",
-            gobj_sig_emit_stop_by_name, 1);
-    rb_define_method(gObject, "signal_handler_block",
-            gobj_sig_handler_block, 1);
-    rb_define_method(gObject, "signal_handler_unblock",
-            gobj_sig_handler_unblock, 1);
-    rb_define_method(gObject, "signal_connect",
-            gobj_sig_connect, -1);
-    rb_define_method(gObject, "signal_connect_after",
-            gobj_sig_connect_after, -1);
-    rb_define_method(gObject, "signal_disconnect",
-            gobj_sig_disconnect, 1);
-    rb_define_method(gObject, "singleton_method_added", gobj_smethod_added, 1);
-    rb_define_method(gObject, "==", gobj_equal, 1);
-    rb_define_method(gObject, "inspect", gobj_inspect, 0);
-    rb_define_method(gObject, "clone", gobj_clone, 0);
 
     /* child initialize */
     Init_gtk_data();

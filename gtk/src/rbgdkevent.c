@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2002/06/09 14:30:00 $
+  $Author: sakai $
+  $Date: 2002/06/11 17:47:46 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -514,6 +514,19 @@ gdkeventclient_send_clientmessage_toall(self)
     return Qnil;
 }
 
+static
+void gdkevent_r2g(VALUE from, GValue *to)
+{
+    GdkEvent* event = get_gdkevent(from);
+    g_value_set_boxed(to, event);
+}
+
+static
+VALUE gdkevent_g2r(GValue *from)
+{
+    return make_gdkevent(g_value_get_boxed(from));
+}
+
 void
 Init_gtk_gdk_event()
 {
@@ -634,4 +647,7 @@ Init_gtk_gdk_event()
 		     gdkeventclient_send_clientmessage_toall, 0);
     rb_define_alias(gdkEventClient, "send_client_message_toall",
                                     "send_clientmessage_toall");
+
+    rbgobj_register_r2g_func(gdkEvent, &gdkevent_r2g);
+    rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 }

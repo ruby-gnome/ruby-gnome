@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/11 17:47:46 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -141,34 +141,21 @@ void
 rbgtk_register_class(cinfo)
     rbgtk_class_info *cinfo;
 {
-    VALUE data = Data_Wrap_Struct(rb_cData, 0, 0, cinfo);
-    rb_ivar_set(cinfo->klass, id_class_info, data);
-    rb_hash_aset(gtk_type_hash, INT2NUM(cinfo->gtype), cinfo->klass);
+    rbgobj_register_class(cinfo);
 }
 
 rbgtk_class_info *
 rbgtk_lookup_class(klass)
     VALUE klass;
 {
-    rbgtk_class_info *cinfo = NULL;
-    if (RTEST(rb_ivar_defined(klass, id_class_info))) {
-	VALUE data = rb_ivar_get(klass, id_class_info);
-	if (!NIL_P(data))
-	    Data_Get_Struct(data, rbgtk_class_info, cinfo);
-    }
-    return cinfo;
+    return (rbgtk_class_info*)rbgobj_lookup_class(klass);
 }
 
 rbgtk_class_info *
 rbgtk_lookup_class_by_gtype(gtype)
     GtkType gtype;
 {
-    VALUE klass = rb_hash_aref(gtk_type_hash, INT2NUM(gtype));
-
-    if (NIL_P(klass))
-        return NULL;
-    else
-        return rbgtk_lookup_class(klass);
+    return (rbgtk_class_info*)rbgobj_lookup_class_by_gtype(gtype);
 }
 
 static void
@@ -182,42 +169,7 @@ GtkObject*
 get_gobject(obj)
     VALUE obj;
 {
-    struct RData *data;
-    GtkObject *gtkp;
-
-    if (NIL_P(obj)) { 
-	rb_raise(rb_eTypeError, "wrong argument type nil");
-    }
-
-    Check_Type(obj, T_OBJECT);
-    data = RDATA(rb_ivar_get(obj, id_gtkdata));
-    /* if (NIL_P(data) || data->dmark != gobj_mark) { */
-    if (NIL_P(data)) {
-	rb_raise(rb_eTypeError, "not a Gtk object");
-    }
-    Data_Get_Struct(data, GtkObject, gtkp);
-    if (!gtkp) {
-	rb_raise(rb_eArgError, "destroyed GtkObject");
-    }
-    if (!GTK_IS_OBJECT(gtkp)) {
-	rb_raise(rb_eTypeError, "not a GtkObject");
-    }
-
-    return gtkp;
-}
-
-static void
-delete_gobject(gtkobj, obj)
-    GtkObject *gtkobj;
-    VALUE obj;
-{
-    struct RData *data;
-
-    if (!st_delete(gtk_object_list, (char**)&obj, 0))
-        rb_bug("ruby-gtk: already freed object is freed again");
-    data = RDATA(rb_ivar_get(obj, id_gtkdata));
-    data->dfree = 0;
-    data->data = 0;
+    return GTK_OBJECT(rbgobj_get_gobject(obj));
 }
 
 void
@@ -225,21 +177,7 @@ set_gobject(obj, gtkobj)
     VALUE obj;
     GtkObject *gtkobj;
 {
-    VALUE data;
-
-    rbgtk_class_info *cinfo = rbgtk_lookup_class(rb_class_of(obj));
-    if (cinfo)
-	data = Data_Wrap_Struct(rb_cData, cinfo->mark, cinfo->free, gtkobj);
-    else
-	data = Data_Wrap_Struct(rb_cData, gobj_mark, 0, gtkobj);
-    gtk_object_set_data(gtkobj, RUBY_GTK_OBJ_KEY, (gpointer)obj);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
-
-    rb_ivar_set(obj, id_gtkdata, data);
-    gtk_signal_connect(gtkobj, "destroy",
-		       (GtkSignalFunc)delete_gobject, (gpointer)obj);
-    st_add_direct(gtk_object_list, (char*)obj, (char*)obj);
+    rbgobj_set_gobject(obj, G_OBJECT(gtkobj));
 }
 
 GtkWidget*
@@ -255,50 +193,28 @@ VALUE
 get_value_from_gobject(obj)
     GtkObject *obj;
 {
-    VALUE  ret;
-    ret = (VALUE)gtk_object_get_data(obj, RUBY_GTK_OBJ_KEY);
-    if ( ! ret )
-	ret = make_gobject_auto_type(obj);
-    return ret;
+    return rbgobj_get_value_from_gobject(G_OBJECT(obj));
 }
 
 void
 add_relative(obj, relative)
     VALUE obj, relative;
 {
-    VALUE ary = rb_ivar_get(obj, id_relatives);
-
-    if (NIL_P(ary) || TYPE(ary) != T_ARRAY) {
-	ary = rb_ary_new();
-	rb_ivar_set(obj, id_relatives, ary);
-    }
-    rb_ary_push(ary, relative);
+    rbgobj_add_relative(obj, relative);
 }
 
 void add_relative_removable(obj, relative, obj_ivar_id, hash_key)
      VALUE obj, relative, hash_key;
      ID    obj_ivar_id;
 {
-    VALUE hash = rb_ivar_get(obj, obj_ivar_id);
-
-    if (NIL_P(hash) || TYPE(hash) != T_HASH) {
-        hash = rb_hash_new();
-        rb_ivar_set(obj, obj_ivar_id, hash);
-    }
-    rb_hash_aset(hash, hash_key, relative);
+    rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key);
 }
 
 void remove_relative(obj, obj_ivar_id, hash_key)
      VALUE obj, hash_key;
      ID    obj_ivar_id;
 {
-    VALUE hash = rb_ivar_get(obj, obj_ivar_id);
-
-    if (NIL_P(hash) || TYPE(hash) != T_HASH) {
-        /* should not happen. */
-    } else {
-        rb_funcall(hash, rb_intern("delete"), 1, hash_key);
-    }
+    rbgobj_remove_relative(obj, obj_ivar_id, hash_key);
 }
 
 VALUE
@@ -306,10 +222,7 @@ make_gobject(klass, gtkobj)
     VALUE klass;
     GtkObject *gtkobj;
 {
-    VALUE obj = rb_obj_alloc(klass);
-
-    set_gobject(obj, gtkobj);
-    return obj;
+    return rbgobj_make_gobject(klass, G_OBJECT(gtkobj));
 }
 
 void
@@ -332,18 +245,7 @@ VALUE
 get_gtk_type(gtkobj)
     GtkObject *gtkobj;
 {
-    GtkType gtype;
-
-    for (gtype = GTK_OBJECT_TYPE(gtkobj);
-         gtype != GTK_TYPE_INVALID;
-         gtype = gtk_type_parent(gtype))
-    {
-        VALUE klass = rb_hash_aref(gtk_type_hash, INT2NUM(gtype));
-        if (!NIL_P(klass))
-            return klass;
-    }
-
-    rb_raise(rb_eTypeError, "not a Gtk object");
+    return rbgobj_lookup_rbclass(G_OBJECT(gtkobj));
 }
 
 VALUE
