@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/22 17:23:39 $
+  $Author: geoff_youngs $
+  $Date: 2003/06/07 14:44:34 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -51,6 +51,34 @@ gdkwin_s_at_pointer(self)
         return Qnil;
     else {
         return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
+    }
+}
+
+static VALUE
+gdkwin_foreign(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg[2];
+    
+    
+    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
+
+    switch(argc)
+    {
+    case 1:
+    	return GOBJ2RVAL(gdk_window_foreign_new(NUM2UINT(arg[0])));
+    case 2:
+#if GTK_MINOR_VERSION >= 2
+    	return GOBJ2RVAL(gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1]))); 
+#else
+    	return GOBJ2RVAL(gdk_window_foreign_new(NUM2UINT(arg[1]))); 
+	/* XXX: Should the program be warned? */
+#endif
+    	break;
+    default:
+    	return Qnil;
     }
 }
 
@@ -783,6 +811,7 @@ Init_gtk_gdk_window()
 */
    rb_define_method(gdkWindow, "window_type", gdkwin_get_window_type, 0);
    rb_define_singleton_method(gdkWindow, "at_pointer", gdkwin_s_at_pointer, 0);
+   rb_define_singleton_method(gdkWindow, "foreign", gdkwin_foreign, -1);
    rb_define_method(gdkWindow, "show", gdkwin_show, -1);
    rb_define_method(gdkWindow, "hide", gdkwin_hide, 0);
    rb_define_method(gdkWindow, "visible?", gdkwin_is_visible, 0);
