@@ -1,3 +1,10 @@
+2003-08-19  KATO Kazuyoshi  <kzys@users.sf.net>
+
+	* src/rbgdkdisplaymanager.c: Added.
+	* src/rbgtklabel.c: Implement Gtk::Label#text=.
+	* sample/gtk-demo/common.rb: Follow Demo::Main changes.
+	* sample/gtk-demo/main.rb: Fix and destroy closed window.
+
 2003-08-17  KATO Kazuyoshi  <kzys@users.sf.net>
 
 	* sample/gtk-demo/stock_browser.rb: Added.

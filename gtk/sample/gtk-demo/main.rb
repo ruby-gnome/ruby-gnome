@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.3 2003/08/17 09:30:44 kzys Exp $
+# $Id: main.rb,v 1.4 2003/08/18 20:43:28 kzys Exp $
 
 require 'gtk2'
 
@@ -43,10 +43,7 @@ module Demo
   ]
 
   class Main < Gtk::Window
-    TITLE_COLUMN    = 0
-    FILENAME_COLUMN = 1
-    FUNC_COLUMN     = 2
-    ITALIC_COLUMN   = 3
+    TITLE_COLUMN, FILENAME_COLUMN, CLASS_COLUMN = 0, 1, 2
 
     def initialize
       super()
@@ -102,7 +99,7 @@ module Demo
       selection.set_mode(Gtk::SELECTION_BROWSE)
       tree_view.set_size_request(200, -1)
 
-      DEMOS.each do |*args| # title, filename, class, children
+      INDEX.each do |*args| # title, filename, class, children
 	iter = model.append(nil)
 
 	args[0, 3].each_with_index do |value, column|
@@ -110,7 +107,6 @@ module Demo
 	    iter.set_value(column, value)
 	  end
 	end
-	#iter.set_value(ITALIC_COLUMN, false)
 
 	children = args[3]
 	children.each do |*args|
@@ -127,10 +123,7 @@ module Demo
       cell = Gtk::CellRendererText.new
 
       column = Gtk::TreeViewColumn.new("Widget (double click for demo)", cell,
-				       {
-					 'text' => TITLE_COLUMN,
-					 #'style_set' => ITALIC_COLUMN,
-				       })
+				       { 'text' => TITLE_COLUMN })
 
       tree_view.append_column(column)
 
@@ -143,21 +136,13 @@ module Demo
 
 	iter = model.get_iter(path)
 
-	## TODO: Using WeakRef?
 	begin
           lib = iter.get_value(FILENAME_COLUMN)
           if lib
-            #require(lib)
-	    load(lib)
-            
-            klass = eval(iter.get_value(FUNC_COLUMN))
-	    @instances[klass] = nil
-            if @instances[klass]
-              @instances[klass].show
-            else
-              @instances[klass] = klass.new
-              @instances[klass].show_all
-            end
+            require(lib)
+
+            klass = Demo.const_get(iter.get_value(CLASS_COLUMN))
+	    klass.new.show_all
           end
 	rescue LoadError
 	  ;
@@ -299,16 +284,16 @@ if target
   Demo::INDEX.each do |title, filename, klass_symbol, children|
     if target == filename or target == klass_symbol.id2name
       require filename
-      
+
       window = Demo.const_get(klass_symbol).new
       window.show_all
-      
+
       class << window
 	def quit
 	  Gtk.main_quit
 	end
       end
-      
+
       break
     end
   end

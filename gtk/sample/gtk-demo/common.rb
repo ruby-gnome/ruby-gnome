@@ -1,4 +1,4 @@
-# $Id: common.rb,v 1.2 2003/08/16 13:36:50 kzys Exp $
+# $Id: common.rb,v 1.3 2003/08/18 20:43:28 kzys Exp $
 require 'gtk2'
 
 module Demo
@@ -27,7 +27,7 @@ module Demo
     end
 
     def quit
-      hide
+      destroy
       true
     end
   end

@@ -3,8 +3,8 @@
 
   rbgtklabel.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: kzys $
+  $Date: 2003/08/18 20:43:28 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -34,6 +34,14 @@ label_initialize(argc, argv, self)
 
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
+}
+
+static VALUE
+label_set_text_only(self, text)
+    VALUE self, text;
+{
+    gtk_label_set_text(_SELF(self), RVAL2CSTR(text));
+    return self;
 }
 
 static VALUE
@@ -118,6 +126,7 @@ Init_gtk_label()
     rb_define_method(gLabel, "initialize", label_initialize, -1);
     rb_define_method(gLabel, "text", label_get_text, 0);
     rb_define_method(gLabel, "set_text", label_set_text, -1);
+    rb_define_method(gLabel, "text=", label_set_text_only, 1);
     rb_define_method(gLabel, "set_markup", label_set_markup, -1);
     rb_define_method(gLabel, "layout_offsets", label_get_layout_offsets, 0);
     rb_define_method(gLabel, "select_region", label_select_region, 2);
