@@ -1,3 +1,8 @@
+2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbobjmanager.[ch]: remove files.
+	* src/rbglib.[ch]: remove Init_objmanager().
+
 2002-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c: implement GLib::Object#signal_emit_by_name

@@ -3,15 +3,14 @@
 
   rbglib.h -
 
-  $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Author: mutoh $
+  $Date: 2002/09/12 16:38:16 $
 
   Copyright (C) 2002  Masahiro Sakai
 
 **********************************************************************/
 
 #include "ruby.h"
-#include "rbobjmanager.h"
 
 #ifdef __cplusplus
 extern "C" {

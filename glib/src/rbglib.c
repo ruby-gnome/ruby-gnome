@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Author: mutoh $
+  $Date: 2002/09/12 16:38:16 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -32,6 +32,5 @@ void Init_glib2()
     rb_define_const(mGLib, "MICRO_VERSION", INT2FIX(GLIB_MICRO_VERSION));
 
     Init_utils_int64();
-    Init_objmanager();
     Init_gobject();
 }
