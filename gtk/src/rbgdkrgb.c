@@ -3,8 +3,8 @@
 
   rbgdkrgb.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/02 14:49:52 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:47:47 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -123,7 +123,7 @@ static VALUE
 rgb_find_color(self, colormap, color)
     VALUE self, colormap, color;
 {
-    gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(self)),
+    gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(colormap)),
                        (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
