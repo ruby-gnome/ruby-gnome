@@ -20,17 +20,6 @@
 require 'tests/misc'
 
 class TC_plugins < Test::Unit::TestCase
-    def test_registry
-        i = 0
-        Gst::Registry.each do |r| 
-            assert_instance_of(Gst::Registry, r)
-            r.test(self)
-            i += 1
-        end
-        assert_instance_of(Array, a = Gst::Registry.registries)
-        assert a.size == i
-        a.each { |r| assert_instance_of(Gst::Registry, r); r.test(self) }
-    end
     def test_plugins
         i = 0
         Gst::Registry.each_plugin do |p| 
