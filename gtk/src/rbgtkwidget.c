@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2003/10/04 16:15:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -950,7 +950,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "add_accelerator", widget_add_accelerator, 5);
     rb_define_method(gWidget, "remove_accelerator", widget_remove_accelerator, 3);
     rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
-    rb_define_method(gWidget, "list_accel_closures", widget_list_accel_closures, 0);
+    rb_define_method(gWidget, "accel_closures", widget_list_accel_closures, 0);
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);

@@ -4,7 +4,7 @@
   rbgdkvisual.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:54 $
+  $Date: 2003/10/04 16:15:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -225,7 +225,7 @@ Init_gtk_gdk_visual()
     /* class methods */
     rb_define_singleton_method(gdkVisual, "query_depths", gdkvisual_s_query_depths, 0);
     rb_define_singleton_method(gdkVisual, "query_visual_types", gdkvisual_s_query_visual_types, 0);
-    rb_define_singleton_method(gdkVisual, "list_visuals", gdkvisual_s_list_visuals, 0);
+    rb_define_singleton_method(gdkVisual, "visuals", gdkvisual_s_list_visuals, 0);
     rb_define_singleton_method(gdkVisual, "best_depth", gdkvisual_s_get_best_depth, 0);
     rb_define_singleton_method(gdkVisual, "best_type", gdkvisual_s_get_best_type, 0);
     rb_define_singleton_method(gdkVisual, "system", gdkvisual_s_get_system, 0);

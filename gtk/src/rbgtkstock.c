@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/10/04 16:15:02 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -80,7 +80,7 @@ Init_gtk_stock()
     rb_undef_method(mGtkStock, "new");
     rb_define_singleton_method(mGtkStock, "add", stock_m_add, -1);
     rb_define_singleton_method(mGtkStock, "lookup", stock_m_lookup, 1);
-    rb_define_singleton_method(mGtkStock, "list_ids", stock_m_list_ids, 0);
+    rb_define_singleton_method(mGtkStock, "ids", stock_m_list_ids, 0);
 
 	/* Stock IDs (not all are stock items; some are images only) */
     rb_define_const(mGtkStock, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));

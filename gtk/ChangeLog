@@ -1,3 +1,9 @@
+2003-10-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Rename Gtk::Widget#list_accel_closures to #accel_closures.
+	* src/rbgdkvisual.c: Renam Gdk::Visual.list_visuals to .visuals 
+	* src/rbgtkstock.c: Rename Gtk::Stock.list_ids to .ids. 
+
 2003-10-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmenu.c: Gtk::menu#popup should set push_in as 3rd parameter. 
