@@ -1,10 +1,9 @@
 #! /usr/local/bin/ruby
 =begin header
 
-  dateedit.rb - DateEdit test rewritten in Ruby/GNOME
+  entry.rb - Entry test rewritten in Ruby/GNOME
 
-  Rewritten by Minoru Inachi <inachi@earth.interq.or.jp> (GNOME 1.x version)
-               KUBO Takehiro <kubo@jiubao.org> (Ported to GNOME 2.0)
+  Rewritten by KUBO Takehiro <kubo@jiubao.org>
 
 Original Copyright:
  
@@ -32,21 +31,20 @@ Original Copyright:
 
 require 'test-gnome-app'
 
-class DateEditApp < TestGnomeApp
+class EntryApp < TestGnomeApp
   def initialize
-    super(true, "testGNOME", "Date Edit")
+    super(true, "testGNOME", "Entry")
 
-    curtime = Time.now
-    datedit = Gnome::DateEdit.new(curtime, true, true)
-    set_contents(datedit)
-    datedit.show
-    show
+    entry = Gnome::Entry.new('test-entry')
+    self.contents = entry
+    entry.show()
+    self.show()
   end
 end
 
 if $0 == __FILE__
   Gnome::Program.new("testGNOME", TestGnomeApp::VERSION, Gnome::ModuleInfo::LIBGNOMEUI)
-  app = DateEditApp.new
+  app = EntryApp.new
   app.signal_connect("destroy") { Gtk::main_quit }
   Gtk::main
 end

@@ -1,14 +1,17 @@
+#! /usr/local/bin/ruby
 =begin header
 
   pixmap-entry.rb - PixmapEntry test rewritten in Ruby/GNOME
 
-  Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
+  Rewritten by Minoru Inachi <inachi@earth.interq.or.jp> (GNOME 1.x version)
+               KUBO Takehiro <kubo@jiubao.org> (Ported to GNOME 2.0)
 
 Original Copyright:
  
-  Author : Richard Hestilow <hestgray@ionet.net>
+  Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)
+            Carlos Perelló Marín <carlos@gnome-db.org> (Ported to GNOME 2.0)
 
-  Copyright (C) 1998 Free Software Foundation
+  Copyright (C) 1998-2001 Free Software Foundation
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -27,9 +30,9 @@ Original Copyright:
 
 =end
 
-require 'sample'
+require 'test-gnome-app'
 
-class PixmapEntrySample < SampleApp
+class PixmapEntryApp < TestGnomeApp
   def initialize
     super(true, "testGNOME", "Pixmap Entry")
     entry = Gnome::PixmapEntry.new("Foo", "Pixmap", true)
@@ -38,3 +41,15 @@ class PixmapEntrySample < SampleApp
     show
   end
 end
+
+if $0 == __FILE__
+  Gnome::Program.new("testGNOME", TestGnomeApp::VERSION, Gnome::ModuleInfo::LIBGNOMEUI)
+  app = PixmapEntryApp.new
+  app.signal_connect("destroy") { Gtk::main_quit }
+  Gtk::main
+end
+
+# Local variables:
+# indent-tabs-mode: nil
+# ruby-indent-level: 2
+# End:

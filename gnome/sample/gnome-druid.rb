@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-druid.rb,v 1.1 2002/10/20 07:33:02 tkubo Exp $
+# $Id: gnome-druid.rb,v 1.2 2002/11/02 09:29:06 tkubo Exp $
 #
 # test-druid.rb - sample script of Gnome::Druid
 #                 This program was based of test-druid of libgnomeui
@@ -28,7 +28,7 @@ require 'gnome2'
 
 class TestDruid < Gtk::Window
   def initialize
-    super(Gtk::WINDOW_TOPLEVEL)
+    super(Gtk::Window::TOPLEVEL)
 
     self.set_title("Druid Sample")
     self.signal_connect("delete_event") do
@@ -66,19 +66,19 @@ class TestDruid < Gtk::Window
     druid_page.signal_connect("prepare") do |page, druid|
       page.text = <<EOS
 Confirm
-  one:   #{one.get_text()}
-  two:   #{two.get_text()}
-  three: #{three.get_text()}
-  four:  #{four.get_text()}
+  one:   #{one.text()}
+  two:   #{two.text()}
+  three: #{three.text()}
+  four:  #{four.text()}
 EOS
     end
     druid_page.signal_connect("finish") do |page, druid|
       puts <<EOS
 Your Settings
-  one:   #{one.get_text()}
-  two:   #{two.get_text()}
-  three: #{three.get_text()}
-  four:  #{four.get_text()}
+  one:   #{one.text()}
+  two:   #{two.text()}
+  three: #{three.text()}
+  four:  #{four.text()}
 EOS
       Gtk::main_quit()
     end

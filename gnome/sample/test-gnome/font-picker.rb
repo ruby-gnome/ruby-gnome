@@ -1,14 +1,17 @@
+#! /usr/local/bin/ruby
 =begin header
 
   font-picker.rb - FontPicker test rewritten in Ruby/GNOME
 
-  Rewritten by Neil Conway <neilconway@rogers.com>
+  Rewritten by Neil Conway <neilconway@rogers.com> (GNOME 1.x version)
+               KUBO Takehiro <kubo@jiubao.org> (Ported to GNOME 2.0)
 
 Original Copyright:
  
-  Author : Richard Hestilow <hestgray@ionet.net>
+  Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)
+            Carlos Perelló Marín <carlos@gnome-db.org> (Ported to GNOME 2.0)
 
-  Copyright (C) 1998 Free Software Foundation
+  Copyright (C) 1998-2001 Free Software Foundation
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -27,95 +30,136 @@ Original Copyright:
 
 =end
 
-require 'sample'
+require 'test-gnome-app'
 
-class FontPickerSample < SampleApp
+
+class FontPickerApp < TestGnomeApp
   def initialize
     super(true, "testGNOME", "Font Picker")
 
     vbox = Gtk::VBox.new(false, 5)
     vbox.border_width = 5
-    set_contents(vbox)
+    self.contents = vbox
 
-    fr_pixmap = Gtk::Frame.new("Default Pixmap")
-    vbox.pack_start(fr_pixmap, true, true, 0)
-
+    # Pixmap
+    frPixmap = Gtk::Frame.new("Default Pixmap")
+    vbox.pack_start(frPixmap, true, true, 0)
     vbox1 = Gtk::VBox.new(false, 0)
-    fr_pixmap.add(vbox1)
-    fp1 = Gnome::FontPicker.new
-    fp1.border_width = 5
-    vbox1.pack_start(fp1, true, true, 0)
-    label_pixmap = Gtk::Label.new("If you choose a font it will appear here")
-    vbox1.pack_start(label_pixmap, true, true, 5)
-    fp1.signal_connect('font_set', label_pixmap) do |*a| set_font(*a) end
+    frPixmap.add(vbox1)
 
-    fr_font_info = Gtk::Frame.new
-    vbox.pack_start(fr_font_info, false, false, 0)
+    # GnomeFontPicker with pixmap
+    fontpicker1 = Gnome::FontPicker.new()
+    fontpicker1.border_width = 5
+    vbox1.pack_start(fontpicker1, true, true, 0)
+    lbPixmap = Gtk::Label.new("If you choose a font it will appear here")
+    vbox1.pack_start(lbPixmap, true, true, 5)
 
+    fontpicker1.signal_connect("font_set", lbPixmap) do |gfp, font_name, label|
+      set_font(gfp, font_name, label)
+    end
+
+    # Font_Info
+    frFontInfo = Gtk::Frame.new("Font Info")
+    vbox.pack_start(frFontInfo, true, true, 0)
     vbox2 = Gtk::VBox.new(false, 0)
     vbox2.border_width = 5
-    fr_font_info.add(vbox2)
+    frFontInfo.add(vbox2)
 
+    fontpicker2 = Gnome::FontPicker.new()
+
+    # GnomeFontPicker with fontinfo
     hbox1 = Gtk::HBox.new(false, 5)
-    vbox2.pack_start(hbox1)
-    use_font = Gtk::CheckButton.new("Use Font in button with size")
-    hbox1.pack_start(use_font, true, true, 0)
-    
+    vbox2.pack_start(hbox1, false, false, 0)
+    ckUseFont = Gtk::CheckButton.new("Use Font in button with size")
+    hbox1.pack_start(ckUseFont, true, true, 0)
+
     adj = Gtk::Adjustment.new(14, 5, 150, 1, 1, 1)
-    spin_use_font = Gtk::SpinButton.new(adj, 1, 0)
-    hbox1.pack_start(spin_use_font, false, false, 0)
+    adj.signal_connect("value_changed", fontpicker2) do |adj, gfp|
+      value_changed(adj, gfp)
+    end
+    spUseFont = Gtk::SpinButton.new(adj, 1, 0)
+    hbox1.pack_start(spUseFont, false, false, 0)
+    # g_object_set_data (G_OBJECT (fontpicker2), "spUseFont", spUseFont);
 
-    show_size = Gtk::CheckButton.new("Show font size")
-    show_size.active = true
-    vbox2.pack_start(show_size, false, false, 5)
-
-    fp2 = Gnome::FontPicker.new
-    fp2.set_mode(Gnome::FontPicker::MODE_FONT_INFO)
-    vbox2.pack_start(fp2, true, true, 0)
-
-    use_font.signal_connect("toggled", fp2) do |w, gfp|
-      gfp.fi_set_use_font_in_label(! gfp.get_use_font_in_label,
-                                     gfp.get_use_font_in_label_size)
+    ckUseFont.signal_connect("toggled", fontpicker2) do |widget, gfp|
+      usefont(widget, gfp)
     end
 
-    show_size.signal_connect("toggled") do
-      ;
+    ckShowSize = Gtk::CheckButton.new("Show font size")
+    ckShowSize.active = true
+    vbox2.pack_start(ckShowSize, false, false, 5)
+
+    ckShowSize.signal_connect("toggled", fontpicker2) do |widget, gfp|
+      showsize(widget, gfp)
     end
 
-    adj.signal_connect("value-changed", fp2) do |adj, gfp|
-      gfp.fi_set_use_font_in_label( gfp.get_use_font_in_label, adj.value)
+    fontpicker2.mode = Gnome::FontPicker::MODE_FONT_INFO
+    vbox2.pack_start(fontpicker2, true, true, 0)
+
+    lbFontInfo = Gtk::Label.new("If you choose a font it will appear here")
+    vbox2.pack_start(lbFontInfo, true, true, 5)
+
+    fontpicker2.signal_connect("font_set", lbFontInfo) do |gfp, font_name, label|
+      set_font(gfp, font_name, label)
     end
 
-    label_font_info = Gtk::Label.new("If you choose a font it will appear here")
-    vbox2.pack_start(label_font_info, true, true, 5)
-
-    fr_user = Gtk::Frame.new("User Widget")
-    vbox.pack_start(fr_user, true, true, 0)
+    # User Widget
+    frUser = Gtk::Frame.new("User Widget")
+    vbox.pack_start(frUser, true, true, 0)
     vbox3 = Gtk::VBox.new(false, 0)
-    fr_user.add(vbox3)
+    frUser.add(vbox3)
 
-    fp3 = Gnome::FontPicker.new
-    fp3.set_mode(Gnome::FontPicker::MODE_USER_WIDGET)
+    # GnomeFontPicker with User Widget
+    fontpicker3 = Gnome::FontPicker.new()
+    fontpicker3.mode = Gnome::FontPicker::MODE_USER_WIDGET
+
     hbox3 = Gtk::HBox.new(false, 0)
-    hbox3.pack_start(
-      Gnome::Stock.new(Gnome::Stock::PIXMAP_SPELLCHECK), false, false, 5)
-    hbox3.pack_start(
-      Gtk::Label.new("This is an hbox with pixmap and text"), false, false, 5)
-    fp3.uw_set_widget(hbox3)
-    fp3.border_width = 5
-    vbox3.pack_start(fp3, true, true, 0)
+    #hbox3.pack_start(Gtk::Image.new(Gtk::Stock::SPELLCHECK, Gtk::ICON_SIZE_BUTTON), false, false, 5)
+    hbox3.pack_start(Gtk::Image.new(File.dirname(__FILE__) + '/bomb.xpm'), false, false, 5) # TODO
+    hbox3.pack_start(Gtk::Label.new("This is an hbox with pixmap and text"), false, false, 5)
+    fontpicker3.set_widget(hbox3)
+    fontpicker3.border_width = 5
+    vbox3.pack_start(fontpicker3, true, true, 0)
 
-    label_user = Gtk::Label.new("If you choose a font it will appear here")
-    vbox3.pack_start(label_user, true, true, 5)
-    fp3.signal_connect("font-set") do
-      ;
+    lbUser = Gtk::Label.new("If you choose a font it will appear here")
+    vbox3.pack_start(lbUser, true, true, 5)
+
+    fontpicker3.signal_connect("font_set", lbUser) do |gfp, font_name, label|
+      set_font(gfp, font_name, label)
     end
 
-    show_all
+    self.show_all()
   end
 
-  def set_font(fp, font_name, label)
-    puts "Font name: #{font_name}"
-    label.set_text(font_name)
+  private
+  def usefont(widget, gfp)
+    show = gfp.get_property('use-font-in-label')
+    gfp.set_property('use-font-in-label', !show)
+  end
+
+  def value_changed(adj, gfp)
+    gfp.set_property('label-font-size', adj.value)
+  end
+
+  def showsize(togglebutton, gfp)
+    #gfp.fi_set_show_size(togglebutton.active?)
+    gfp.set_show_size(togglebutton.active?)
+  end
+
+  def set_font(gfp, font_name, label)
+    printf("Font name: %s\n", font_name)
+    label.text = font_name
   end
 end
+
+if $0 == __FILE__
+  Gnome::Program.new("testGNOME", TestGnomeApp::VERSION, Gnome::ModuleInfo::LIBGNOMEUI)
+  app = FontPickerApp.new
+  app.signal_connect("destroy") { Gtk::main_quit }
+  Gtk::main
+end
+
+# Local variables:
+# indent-tabs-mode: nil
+# ruby-indent-level: 2
+# End:

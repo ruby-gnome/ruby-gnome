@@ -1,5 +1,20 @@
 2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
 
+	* sample/gnome-druid.rb: follow the change of Ruby/GTK.
+	* sample/test-gnome/about.rb, sample/test-gnome/entry.rb,
+	sample/test-gnome/icon-list.rb, sample/test-gnome/bomb.xpm:
+	add new files.
+	* sample/test-gnome/app-helper.rb, sample/test-gnome/color-picker.rb,
+	sample/test-gnome/dateedit.rb, sample/test-gnome/file-entry.rb,
+	sample/test-gnome/font-picker.rb, sample/test-gnome/href.rb,
+	sample/test-gnome/icon-entry.rb, sample/test-gnome/pixmap-entry.rb,
+	sample/test-gnome/test-gnome.rb: ported to Ruby/GNOME2.
+	* sample/test-gnome/dialog.rb, sample/test-gnome/sample.rb: removed.
+	* sample/test-gnome/test-gnome-app.rb: renamed from sample.rb and
+	ported to Ruby/GNOME2.
+
+2002-11-02  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-help.c: use RAISE_GERROR instead of
 	rbgutil_raise_gerror()
 
