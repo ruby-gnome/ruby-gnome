@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/04 14:10:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,13 +19,14 @@
 #include "rbglib.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
-#if defined __CYGWIN__
-#define HWND_DESKTOP 0
-#define GDK_ROOT_WINDOW() ((guint32) HWND_DESKTOP)
-#elif defined _WIN32
-#include <gdk/win32/gdkwin32.h> /* for GDK_ROOT_WINDOW() */
-#else
-#include <gdk/gdkx.h> /* for GDK_ROOT_WINDOW() */
+
+#if defined HAVE_GDK_GDKX_H
+# include <gdk/gdkx.h> /* for GDK_ROOT_WINDOW() */
+#elif defined G_OS_WIN32
+# if !defined HWND_DESKTOP
+#  define HWND_DESKTOP 0
+# endif
+# define GDK_ROOT_WINDOW() ((guint32) HWND_DESKTOP)
 #endif
 #include <signal.h>
 

@@ -1,3 +1,7 @@
+2002-07-04  WATANABE Hirofumi <eban@os.rim.or.jp>
+
+   * extconf.rb, src/rbgtk.h: Fix for Win32.
+
 2002-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Bugfix of Gdk::Window#property_change(), 
