@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/20 17:14:10 $
+  $Author: geoff_youngs $
+  $Date: 2003/06/16 17:24:29 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -50,7 +50,12 @@ rbgobj_initialize_object(obj, cobj)
 gpointer
 rbgobj_instance_from_ruby_object(VALUE obj)
 {
-    GType t = G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj));
+    GType t;
+
+    if (obj == Qnil)
+    	return NULL;
+
+    t = G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj));
     switch (t){
     case G_TYPE_OBJECT:
         return rbgobj_get_gobject(obj);
@@ -65,7 +70,12 @@ rbgobj_instance_from_ruby_object(VALUE obj)
 VALUE
 rbgobj_ruby_object_from_instance(gpointer instance)
 {
-    GType t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
+    GType t; 
+    
+    if (instance == NULL)
+    	return Qnil;
+    
+    t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
     switch (t){
     case G_TYPE_OBJECT:
         return rbgobj_get_value_from_gobject(instance);
