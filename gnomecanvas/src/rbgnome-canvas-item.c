@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.6 2002/09/26 14:44:12 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.7 2002/09/29 03:45:19 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -108,7 +108,7 @@ citem_affine_relative(self, affine)
     VALUE self, affine;
 {
     gnome_canvas_item_affine_relative(_SELF(self),
-                                      get_art_affine(affine));
+                                      rbart_get_art_affine(affine));
     return Qnil;
 }
 
@@ -117,7 +117,7 @@ citem_affine_absolute(self, affine)
     VALUE self, affine;
 {
     gnome_canvas_item_affine_absolute(_SELF(self),
-                                      get_art_affine(affine));
+                                      rbart_get_art_affine(affine));
     return Qnil;
 }
 
@@ -215,7 +215,7 @@ citem_i2c_affine(self)
 {
     double affine[6];
     gnome_canvas_item_i2c_affine(_SELF(self), affine);
-    return make_art_affine(affine);
+    return rbart_make_art_affine(affine);
 }
 
 static VALUE
@@ -224,7 +224,7 @@ citem_i2w_affine(self)
 {
     double affine[6];
     gnome_canvas_item_i2w_affine(_SELF(self), affine);
-    return make_art_affine(affine);
+    return rbart_make_art_affine(affine);
 }
 
 static VALUE
