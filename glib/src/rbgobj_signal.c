@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:38:47 $
+  $Author: sakai $
+  $Date: 2002/08/01 04:59:07 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -20,7 +20,6 @@ gobj_sig_connect(argc, argv, self)
     VALUE self;
 {
     VALUE sig, rest;
-    ID id = 0;
     int i;
     GClosure* rclosure;
 
@@ -41,7 +40,6 @@ gobj_sig_connect_after(argc, argv, self)
     VALUE self;
 {
     VALUE sig, rest;
-    ID id = 0;
     int i;
     GClosure* rclosure;
 

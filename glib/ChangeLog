@@ -1,3 +1,11 @@
+2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (_gobject_to_ruby): check NULL before calling
+	GOBJ2RVAL().
+	* src/rbgobj_signal.c (gobj_sig_connect): remove unused variable 'id'.
+	* src/rbgobj_signal.c (gobj_sig_connect_after): ditto
+	* src/rbgobj_object.c (gobj_smethod_added): fix bugs
+	
 2002-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.c: devide from rbgobj_objectc[ch].

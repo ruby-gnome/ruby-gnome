@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:38:47 $
+  $Author: sakai $
+  $Date: 2002/08/01 04:59:07 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -209,9 +209,9 @@ gobj_smethod_added(self, id)
     const char* name = rb_id2name(SYM2ID(id));
     
     if (g_signal_lookup(name, G_OBJECT_TYPE(obj))) {
-        VALUE method = rb_funcall(self, rb_intern("method"), id);
-        VALUE args[2] = {method, Qfalse};
-        gobj_sig_connect(self, sizeof(args)/sizeof(args[0]), args);
+        VALUE method = rb_funcall(self, rb_intern("method"), 1, id);
+        g_signal_connect_closure(RVAL2GOBJ(self), name,
+                                 g_rclosure_new(method, Qnil), FALSE);
     }
 
     return Qnil;
@@ -222,7 +222,8 @@ gobj_smethod_added(self, id)
 static VALUE
 _gobject_to_ruby(const GValue* from)
 {
-    return GOBJ2RVAL(g_value_get_object(from));
+    GObject* gobj = g_value_get_object(from);
+    return gobj ? GOBJ2RVAL(gobj) : Qnil;
 }
 
 static void

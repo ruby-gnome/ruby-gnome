@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:38:47 $
+  $Author: sakai $
+  $Date: 2002/08/01 04:59:07 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -296,6 +296,7 @@ rbgobj_gobject_new(type, params_hash)
     GType gtype;
     size_t param_size;
     struct param_setup_arg param_setup_arg;
+    GObject* result;
 
     if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
         gtype = NUM2INT(type);
@@ -309,16 +310,21 @@ rbgobj_gobject_new(type, params_hash)
                  "type \"%s\" is not descendants if GObject",
                  g_type_name(type));
 
-    param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0));
+    param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
 
-    param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype)); // FIXME: g_type_peek_class?
+    param_setup_arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
     param_setup_arg.params = ALLOCA_N(GParameter, param_size);
     memset(param_setup_arg.params, 0, sizeof(GValue) * param_size);
 
+    // FIXME: use rb_ensure() to ensure following g_type_class_unref() call.
     rb_iterate(&_each_with_index, params_hash, _params_setup,
                (VALUE)&param_setup_arg);
 
-    return g_object_newv(gtype, param_size, param_setup_arg.params);
+    result = g_object_newv(gtype, param_size, param_setup_arg.params);
+
+    g_type_class_unref(param_setup_arg.gclass);
+
+    return result;
 }
 
 

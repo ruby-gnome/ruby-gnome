@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/07/31 07:47:33 $
+  $Date: 2002/08/01 04:59:07 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -12,7 +12,7 @@
 
 #include "global.h"
 
-static id_call;
+static ID id_call;
 
 typedef struct _GRClosure GRClosure;
 
@@ -38,7 +38,8 @@ rclosure_marshal(GClosure*      closure,
     
     for (i = 0; i < n_param_values; i++)
         rb_ary_store(args, i, rbgobj_gvalue_to_rvalue(&param_values[i]));
-    args = rb_ary_concat(args, ((GRClosure*)closure)->extra_args);
+    if (!NIL_P(((GRClosure*)closure)->extra_args))
+        args = rb_ary_concat(args, ((GRClosure*)closure)->extra_args);
 
     ret = rb_apply(((GRClosure*)closure)->callback, id_call, args);
 
