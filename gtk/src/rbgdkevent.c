@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/02/26 17:24:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -255,7 +255,7 @@ gdkevent_put(self)
     VALUE self;
 {
     gdk_event_put(get_gdkevent(self));
-    return Qnil;
+    return self;
 }
 
 /* We don't need this.
@@ -642,8 +642,6 @@ Init_gtk_gdk_event()
     rb_define_singleton_method(gdkEvent, "events_pending?", gdkevent_s_events_pending, 0);
     rb_define_singleton_method(gdkEvent, "peek", gdkevent_s_peek, 0);
     rb_define_singleton_method(gdkEvent, "get", gdkevent_s_get, 0);
-    rb_define_singleton_method(gdkEvent, "get_graphics_expose", 
-							   gdkevent_s_get_graphics_expose, 1);
     rb_define_method(gdkEvent, "put", gdkevent_put, 0);
     rb_define_method(gdkEvent, "get_axis", gdkevent_get_axis, 1);
     rb_define_method(gdkEvent, "coords", gdkevent_get_coords, 0);
@@ -660,7 +658,7 @@ Init_gtk_gdk_event()
 #endif
 
     /* GdkEventAny */
-    DEFINE_ACCESSOR(gdkEvent, any, window);
+    DEFINE_ACCESSOR(gdkEventAny, any, window);
     rb_define_method(gdkEventAny, "send_event?", gdkeventany_send_event, 0);
     rb_define_method(gdkEventAny, "set_send_event", gdkeventany_set_send_event, 1);
 
@@ -721,6 +719,8 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, expose, area);
     DEFINE_ACCESSOR(ev, expose, region);
     DEFINE_ACCESSOR(ev, expose, count);
+    rb_define_singleton_method(ev, "get_graphics_expose", 
+                               gdkevent_s_get_graphics_expose, 1);
 
     /* GdkEventVisibility */
     ev = gdkevents[GDK_VISIBILITY_NOTIFY];

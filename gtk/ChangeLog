@@ -1,3 +1,14 @@
+2004-02-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Move Gdk::Event.get_graphics_expose to 
+	Gdk::EventExpose.get_graphics_expose. 
+	Gdk::Event#put returns self.
+	Move Gdk::Event#window, #window= to Gdk::EventAny 
+	* src/rbgdkwindow.c: Move Gdk::Window#toplevels to 
+	Gdk::Window.toplevels and fix a memory leak.
+	Fix two bugs of Gdk::Window.at_pointer and #pointer.
+	Gdk::Window#pointer changes ret-value([x, y, mod] to [win, x, y, mod]).
+
 2004-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeymap.c, rbgdkgc.c, rbgdkpixmap.c, rbgdkdraw.c, rbgdkwindow.c

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Date: 2004/02/26 17:24:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -52,12 +52,7 @@ gdkwin_s_at_pointer(self)
 {
     gint x, y;
     GdkWindow* win = gdk_window_at_pointer(&x, &y);
-    
-    if (win == NULL)
-        return Qnil;
-    else {
-        return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
-    }
+    return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
 }
 
 static VALUE
@@ -710,8 +705,7 @@ gdkwin_get_pointer(self)
     gint x, y;
     GdkModifierType state;
     GdkWindow* ret = gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    
-    return ret ? rb_ary_new3(3, INT2NUM(x), INT2NUM(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE)) : Qnil;
+    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
 }
 
 static VALUE
@@ -825,10 +819,13 @@ gdkwin_set_functions(self, func)
 }
 
 static VALUE
-gdkwin_get_toplevels(self)
+gdkwin_s_get_toplevels(self)
     VALUE self;
 {
-    return GLIST2ARY(gdk_window_get_toplevels());
+    GList* list = gdk_window_get_toplevels();
+    VALUE ret = GLIST2ARY(list);
+    g_list_free(list);
+    return ret;
 }
 
 static VALUE
@@ -930,7 +927,7 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_decorations", gdkwin_set_decorations, 1);
     rb_define_method(gdkWindow, "decorations", gdkwin_get_decorations, 0);
     rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
-    rb_define_method(gdkWindow, "toplevels", gdkwin_get_toplevels, 0);
+    rb_define_singleton_method(gdkWindow, "toplevels", gdkwin_s_get_toplevels, 0);
 
     G_DEF_SETTERS(gdkWindow);
 
