@@ -4,7 +4,7 @@
   rbgdk-pixbuf-loader.c -
 
   $Author: mutoh $
-  $Date: 2004/11/14 02:46:38 $
+  $Date: 2004/11/30 16:23:13 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2003 Geoff Youngs
@@ -36,7 +36,7 @@ initialize_loader(argc, argv, self)
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
             loader = gdk_pixbuf_loader_new_with_mime_type(RVAL2CSTR(arg1), &error);
 #else
-            rb_warning("Not supported in GTK+-2.0.x.");
+            rb_warning("Not supported GTK+-2.0/2.2.");
             loader = gdk_pixbuf_loader_new();
 #endif
         } else {
@@ -47,15 +47,6 @@ initialize_loader(argc, argv, self)
     }
     
     G_INITIALIZE(self, loader);
-    return Qnil;
-}
-
-static VALUE
-copy(self)
-    VALUE self;
-{
-    /* You can't */
-    rb_raise(rb_eNotImpError, "GdkPixbufLoader objects cannot be copied");
     return Qnil;
 }
 
@@ -162,7 +153,8 @@ Init_gdk_pixbuf_loader(VALUE mGdk)
      * File Loading, Image Data in Memory
      */
     rb_define_method(gdkPixbufLoader, "initialize", initialize_loader, -1);
-    rb_define_method(gdkPixbufLoader, "dup", copy, 0);
+
+    rb_undef_method(gdkPixbufLoader, "dup");
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
     rb_define_method(gdkPixbufLoader, "format", loader_get_format, 0);
 #endif

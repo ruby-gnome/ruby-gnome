@@ -4,13 +4,17 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/11/14 02:46:38 $
+  $Date: 2004/11/30 16:23:13 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
 ************************************************/
 
 #include "rbgdk-pixbuf.h"
+#ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
+#define GDK_PIXBUF_ENABLE_BACKEND
+#include <gdk-pixbuf/gdk-pixbuf-io.h>
+#endif
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
@@ -18,7 +22,6 @@
                              GDK_PIXBUF_ERROR,\
                              GDK_PIXBUF_ERROR_INSUFFICIENT_MEMORY,\
                              "Insufficient memory to load image file");
-
 
 static ID id_pixdata;
 
@@ -469,9 +472,15 @@ static VALUE
 add_alpha(self, substitute_color, r, g, b)
     VALUE self, substitute_color, r, g, b;
 {
-    return GOBJ2RVAL(gdk_pixbuf_add_alpha(_SELF(self),
+    VALUE ret = Qnil;
+    GdkPixbuf* buf = gdk_pixbuf_add_alpha(_SELF(self),
                                           RTEST(substitute_color),
-                                          FIX2INT(r), FIX2INT(g), FIX2INT(b)));
+                                          FIX2INT(r), FIX2INT(g), FIX2INT(b));
+    if (buf){
+        ret = GOBJ2RVAL(buf);
+        g_object_unref(buf);
+    }
+    return ret;
 }
 
 static VALUE

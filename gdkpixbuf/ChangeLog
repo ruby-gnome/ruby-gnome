@@ -1,3 +1,15 @@
+2004-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbufanimation.c: Fix a wrong number of arguments for 
+	Gdk::PixbufAnimationIter#advance. 
+	* rbgdk-pixbuf.c: Fix memoryleak for Gdk::Pixbuf#add_alpha. 
+	* rbgdk-pixbuf-loader.c: Undef Gdk::PixbufLoader#dup.
+	* rbgdk-pixbuf.c: Fix a compilation warning. 
+
+2004-11-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf-loader.c: Fix an error message.
+
 2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c, rbgdk-pixbuf-format.c: 
