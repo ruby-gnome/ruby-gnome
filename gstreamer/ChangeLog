@@ -78,3 +78,24 @@
 	  tests/tc_all.rb, tests/tc_clock.rb, tests/tc_cpu.rb,
 	  tests/tc_element.rb, tests/tc_modfunc.rb, tests/tc_pad.rb,
 	  tests/tc_plugin.rb, tests/tc_type.rb: initial SF import
+
+2003-07-07  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* 0.1.1 released
+	* improved the existing API (in the Ruby way)
+	* added some classes (AutoplugFactory, Caps, Clock, Format, 
+		IndexFactory, Pad, PadTemplate, Plugin, PluginFeature, 
+		QueryType, Registry, SchedulerFactory, Type, TypeFactory)
+	* gst-inspect example 
+	* improved documentation system:	
+	* C tags are now human readable
+	* added inclusion and inheritance maps 
+	* enhanced support of Ruby operators
+
+2003-06-01  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* 0.1.0 released
+	* basic API 
+	* helloworld (mp3-player) example 
+	* basic documentation system
+
