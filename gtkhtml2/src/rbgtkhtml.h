@@ -7,5 +7,6 @@
 
 extern void Init_html_document(VALUE);
 extern void Init_html_view(VALUE);
+extern void Init_html_stream(VALUE);
 
 #endif /* _RBGTKHTML2_H */

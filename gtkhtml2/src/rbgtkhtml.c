@@ -7,4 +7,5 @@ Init_gtkhtml2(void)
 
     Init_html_document(mGtk);
     Init_html_view(mGtk);
+    Init_html_stream(mGtk);
 }
