@@ -53,10 +53,7 @@ begin
     obj_ext = ".#{$OBJEXT}"
 
     $libs = $libs.split(/\s/).uniq.join(' ')
-    $source_files = Dir.glob("#{srcdir}/*.c").map{|fname|
-      fname[0, srcdir.length+1] = ''
-      fname
-    }
+    $source_files = Dir.entries(srcdir).select{|fname| /\.c$/ =~ fname }
     $objs = $source_files.collect do |item|
       item.gsub(/\.c$/, obj_ext)
     end
