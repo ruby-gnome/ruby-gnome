@@ -84,10 +84,6 @@ begin
     end
   end
   have_func("XReadBitmapFileData")
-  if have_func("gdk_ic_attr_new")
-       $CFLAGS = $CFLAGS + " -DUSE_XIM"
-  end
-
   obj_ext = ".#{$OBJEXT}"
 
   $libs = $libs.split(/\s/).uniq.join(' ')
