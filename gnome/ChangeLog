@@ -1,3 +1,8 @@
+2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-pixmap-entry.c: Add Gnome::PixmapEntry#set_preview. 
+	* src/rbgnome-client.c: Replace rb_f_lambda() to G_BLOCK_PROC() for ruby-1.8.x.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
    * extconf.rb: Follow mkmf-gnome2.rb position changes.
