@@ -1,3 +1,7 @@
+2004-02-14  Vincent Isambart  <isambart@netcourrier.com>
+
+	* src/makedefconst.rb, extconf.rb: replaced PLATFORM with RUBY_PLATFORM.
+
 2004-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextappearance.c: Add Gtk::TextAppearance.new.

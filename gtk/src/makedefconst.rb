@@ -50,7 +50,7 @@ name = File.basename(ARGV[0], ".h")
 if not FileTest.directory?(name)
   Dir.mkdir(name) || exit(1)
   Dir.chdir(name); 
-  #if /mswin32/ =~ PLATFORM
+  #if /mswin32/ =~ RUBY_PLATFORM
   #  my_split("../#{name}.h", 100, "_#{name}.", "aa")
   #else
   #  `#{Split} ../#{name}.h _#{name}.`
@@ -67,7 +67,7 @@ makefile = File.open("Makefile", "a")
 makefile.puts
 makefile.puts("# -----------------------------------------")
 
-if /mswin32/ =~ PLATFORM
+if /mswin32/ =~ RUBY_PLATFORM
   makefile.print("../#{name}.lib:")
   makefile.print("#{name}.obj ")
 else
@@ -86,7 +86,7 @@ cfile.puts("void #{func}() {")
 hfile = File.open("#{name}.h", "a")
 for i in Dir.glob("_#{name}.[a-z][a-z]")
   STDERR.puts(i)
-  if /mswin32/ =~ PLATFORM
+  if /mswin32/ =~ RUBY_PLATFORM
     makefile.print("#{i}.obj ")
   else
     makefile.print("#{i}.o ")
@@ -111,7 +111,7 @@ end
 cfile.puts("}")
 
 makefile.puts
-case PLATFORM
+case RUBY_PLATFORM
 when /mswin32/
   makefile.puts("	lib /OUT:\$@ \$?")
 else
