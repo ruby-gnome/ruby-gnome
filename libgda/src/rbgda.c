@@ -37,7 +37,6 @@ static void Init_all_classes(void) {
     extern void Init_gda_datamodel_list(void);
     extern void Init_gda_datasource(void);
     extern void Init_gda_error(void);
-    extern void Init_gda_export(void);
     extern void Init_gda_field_attributes(void);
     extern void Init_gda_geometric_point(void);
     extern void Init_gda_money(void);
@@ -60,7 +59,6 @@ static void Init_all_classes(void) {
     Init_gda_datamodel_list();
     Init_gda_datasource();
     Init_gda_error();
-    Init_gda_export();
     Init_gda_field_attributes();
     Init_gda_geometric_point();
     Init_gda_money();

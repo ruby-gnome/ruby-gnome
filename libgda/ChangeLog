@@ -1,3 +1,12 @@
+2004-04-19  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaexport.c: Removed.
+	* src/rbgda.c: Removed call to Init_gda_export.
+	* src/rbgdacommand.c: Fixed a compilation bug with GCC 2.9.XX,
+	  reported by mezz7.
+	* src/rbgdaconnection.c (#execute): Added as an alias 
+	  to #execute_single_command.
+
 2004-03-10  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README: We require libgda 1.0.3 or higher now (stable branch).

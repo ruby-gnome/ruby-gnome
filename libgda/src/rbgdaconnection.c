@@ -519,6 +519,7 @@ void Init_gda_connection(void) {
     rb_define_method(c, "execute_command",        rb_gda_connection_execute_command,        -1);
     rb_define_method(c, "execute_single_command", rb_gda_connection_execute_single_command, -1);
     rb_define_method(c, "execute_non_query",      rb_gda_connection_execute_non_query,      -1);
+    rb_define_alias(c, "execute", "execute_single_command");
 
     rb_define_method(c, "begin_transaction",    rb_gda_connection_begin_transaction,    1);
     rb_define_method(c, "commit_transaction",   rb_gda_connection_commit_transaction,   1);
