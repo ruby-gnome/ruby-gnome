@@ -1,3 +1,8 @@
+2003-05-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Remove Gtk::Widget#set_requisition,
+	DEFINE_EVENT_FUNC returns self.
+
 2003-05-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Rename Gtk::Widget#mnemonic_activate? -> #mnemonic_activate, 

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/05/09 16:21:16 $
+  $Date: 2003/05/12 16:18:48 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -866,16 +866,6 @@ widget_get_requisition(self)
 }
 
 static VALUE
-widget_set_requisition(self, w,h)
-    VALUE self,w,h;
-{
-    GtkRequisition *r = &(_SELF(self)->requisition);
-    r->width  = NUM2INT(w);
-    r->height = NUM2INT(h);
-    return self;
-}
-
-static VALUE
 widget_state(self)
     VALUE self;
 {
@@ -897,7 +887,7 @@ widget_event_ ## EVENT (self, event) \
     GtkWidget *widget = RVAL2GOBJ(self); \
     GTK_WIDGET_GET_CLASS(widget)->EVENT \
         (widget, &RVAL2GEV(event)->TYPE); \
-    return Qnil; \
+    return self; \
 }
 DEFINE_EVENT_FUNC(button_press_event, button);
 DEFINE_EVENT_FUNC(button_release_event, button);
@@ -1019,7 +1009,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "allocation", widget_get_allocation, 0);
     rb_define_method(gWidget, "set_allocation", widget_set_allocation, 4);
     rb_define_method(gWidget, "requisition", widget_get_requisition, 0);
-    rb_define_method(gWidget, "set_requisition", widget_set_requisition, 2);
     rb_define_method(gWidget, "state", widget_state, 0);
     rb_define_method(gWidget, "saved_state", widget_saved_state, 0);
 
