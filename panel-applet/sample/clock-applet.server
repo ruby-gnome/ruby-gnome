@@ -1,0 +1,26 @@
+<oaf_info>
+<oaf_server iid="OAFIID:GNOME_SampleClockApplet_Factory" type="exe"
+            location="/usr/libexec/clock-applet.rb">
+
+        <oaf_attribute name="repo_ids" type="stringv">
+                <item value="IDL:Bonobo/GenericFactory:1.0"/>
+                <item value="IDL:Bonobo/Unknown:1.0"/>
+        </oaf_attribute>
+        <oaf_attribute name="name" type="string" value="Clock Applet Factory"/>
+        <oaf_attribute name="description" type="string" value="Sample clock applet factory for Ruby-GNOME2"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:GNOME_SampleClockApplet" type="factory"
+            location="OAFIID:GNOME_SampleClockApplet_Factory">
+
+        <oaf_attribute name="repo_ids" type="stringv">
+                <item value="IDL:GNOME/Vertigo/PanelAppletShell:1.0"/>
+                <item value="IDL:Bonobo/Control:1.0"/>
+                <item value="IDL:Bonobo/Unknown:1.0"/>
+        </oaf_attribute>
+        <oaf_attribute name="name" type="string" value="Clock Applet"/>
+        <oaf_attribute name="description" type="string" value="Sample clock applet for Ruby-GNOME2"/>
+        <oaf_attribute name="panel:category" type="string" value="Amusements"/>
+        <oaf_attribute name="panel:icon" type="string" value="gnome-applets.png"/>
+</oaf_server>
+</oaf_info>

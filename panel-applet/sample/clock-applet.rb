@@ -1,46 +1,48 @@
 #!/usr/bin/env ruby
+=begin
+  clock-applet.rb
+                                                                                
+  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+                                                                                
+  $Id: clock-applet.rb,v 1.2 2004/06/06 17:23:04 mutoh Exp $
+=end
 
-if $DEBUG
-  require 'gtk'
-else
-  require 'panel-applet'
+
+require 'panelapplet2'
+
+OAFIID="OAFIID:GNOME_SampleClockApplet_Factory"
+
+init = proc do |applet, iid|
+  label = Gtk::Label.new
+
+  applet.add(label)
+  applet.show_all
+  
+  Thread.start do
+    loop do
+      time = Time.now
+      str = time.strftime("%m/%d (%a) %H:%M:%S")
+      label.set_text("#{str}")
+      sleep(1)
+    end
+  end
+  true
 end
 
-applet =
-  if $DEBUG
-    Gtk::Window.new
-  else
-    Gnome::AppletWidget.new("ruby-clock-applet")
-  end
-def applet.delete_event(e)
-  if $DEBUG
-    Gtk.main_quit
-  else
-    Gnome::AppletWidget.main_quit
-  end
-end
-button = Gtk::Button.new
-button.set_relief(Gtk::RELIEF_NONE)
-button.show
+oafiid = OAFIID
+run_in_window = (ARGV.length == 1 && ARGV.first == "run-in-window")
+oafiid += "_debug" if run_in_window
 
-label = Gtk::Label.new("")
-button.add(label)
-label.show
+PanelApplet.main(oafiid, "Sample Clock Applet (Ruby-GNOME2)", "0", &init)
 
-applet.add(button)
-applet.show
-
-Thread.start do
-  loop do
-    time = Time.now
-    str = time.strftime("%m/%d (%a)\n%H:%M:%S")
-    label.set_text("#{str}")
-    sleep(1)
-  end
-end
-
-if $DEBUG
-  Gtk.main
-else
-  Gnome::AppletWidget.main # use instead of Gtk.main
+if run_in_window
+  main_window = Gtk::Window.new
+  main_window.set_title "Sample Clock Applet"
+  main_window.signal_connect("destroy") { Gtk::main_quit }
+  app = PanelApplet.new
+  init.call(app, oafiid)
+  app.reparent(main_window)
+  main_window.show_all
+  Gtk::main
 end

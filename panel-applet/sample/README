@@ -1,0 +1,5 @@
+1. Copy *.server to Bonobo Server's directory
+   (e.g. /usr/lib/bonobo/servers).
+2. Copy *.rb to "location" directory (/usr/libexec/*.rb).
+3. Add execute permission.
+   (e.g. #chown a+x /usr/libexec/hello-applet.rb)

@@ -1,7 +1,24 @@
+2004-06-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/hello-applet.[server|rb], clock-applet.server, README: Added.
+	* sample/clock-applet.rb: Fixed.
+	* rbpanel-applet.c: Fixed and added some methods.
+
+2004-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/panelapplet2.rb: Added instead of lib/panel-applet.rb
+	* lib/panel-applet.rb: Removed.
+
+2004-05-04  Jamis Buck <jgb3@email.byu.edu>
+
+	* rbpanel-applet.c: updated module with minimal 
+	functionality so that panel applets may now be written for Gnome2.
+	* lib/clock-applet.rb: Fixed.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbpanel-applet.c: Rewritten.
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 	
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
