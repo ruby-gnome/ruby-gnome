@@ -1,6 +1,26 @@
+2003-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkdraw.c: Add Gdk::Drawable#display, #screen, #draw_pixbuf.
+	* src/rbgdkevent.c: Imprement all setter methods.
+
+2003-10-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Add  Gdk::EventButton#device, #axes
+	Gdk::EventScroll#device, #x_root, #y_root
+	Gdk::EventMotion#device, #axes, Gdk::EventExpose#region
+	Gdk::EventProximity#device
+	Unify Gdk::EventClient#data_(byte|short|long) to Gdk::EventClient#data.
+
 2003-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkevent.c: Add Gdk::EventKey#hardware_keycode, #group.
+	Gdk::Event.get_axis, .coords, .root_coords, .handler_set,
+	.show_events?, .set_show_events, #set_screen, #screen,
+	.setting_get, .add_client_message_filter, .new,
+	Gdk::EventButton#device, #axes,
+	Gdk::EventScroll#device, #x_root, #y_root,
+	Gdk::EventMotion#device, #axes,
+	Gdk::EventExpose#region, Gdk::EventProximity#device
 
 2003-10-17  Masao Mutoh  <mutoh@highway.ne.jp>
 

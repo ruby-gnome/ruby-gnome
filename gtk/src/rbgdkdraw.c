@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2003/07/01 14:43:20 $
+  $Date: 2003/10/20 16:48:15 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -78,7 +78,7 @@ gdkdraw_draw_point(self, gc, x, y)
     VALUE self, gc, x, y;
 {
     gdk_draw_point(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				   NUM2INT(x), NUM2INT(y));
+                   NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -92,16 +92,16 @@ gdkdraw_draw_points(self, gc, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-		}
-		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+        }
+        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
     gdk_draw_points(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					points,
-					RARRAY(pnts)->len);
+                    points,
+                    RARRAY(pnts)->len);
     return self;
 }
 
@@ -110,8 +110,8 @@ gdkdraw_draw_line(self, gc, x1, y1, x2, y2)
     VALUE self, gc, x1, y1, x2, y2;
 {
     gdk_draw_line(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				  NUM2INT(x1), NUM2INT(y1),
-				  NUM2INT(x2), NUM2INT(y2));
+                  NUM2INT(x1), NUM2INT(y1),
+                  NUM2INT(x2), NUM2INT(y2));
     return self;
 }
 
@@ -125,18 +125,37 @@ gdkdraw_draw_lines(self, gc, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-		}
-		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+        }
+        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
     gdk_draw_lines(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				   points,
-				   RARRAY(pnts)->len);
+                   points,
+                   RARRAY(pnts)->len);
     return self;
 }
+
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+gdkdraw_draw_pixbuf(self, gc, pixbuf, src_x, src_y, dest_x, dest_y, 
+                    width, height, dither, x_dither, y_dither)
+    VALUE self, gc, pixbuf, src_x, src_y, dest_x, dest_y; 
+    VALUE width, height, dither, x_dither, y_dither;
+{
+    gdk_draw_pixbuf(_SELF(self),
+                    GDK_GC(RVAL2GOBJ(gc)),
+                    GDK_PIXBUF(RVAL2GOBJ(pixbuf)),
+                    NUM2INT(src_x), NUM2INT(src_y), 
+                    NUM2INT(dest_x), NUM2INT(dest_y),
+                    NUM2INT(width), NUM2INT(height),
+                    RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                    NUM2INT(x_dither), NUM2INT(y_dither));
+    return self;
+}
+#endif
 
 static VALUE
 gdkdraw_draw_segs(self, gc, segs)
@@ -148,17 +167,17 @@ gdkdraw_draw_segs(self, gc, segs)
     Check_Type(segs, T_ARRAY);
     segments = ALLOCA_N(GdkSegment,RARRAY(segs)->len);
     for (i=0; i<RARRAY(segs)->len; i++) {
-		Check_Type(RARRAY(segs)->ptr[i], T_ARRAY);
-		if (RARRAY(RARRAY(segs)->ptr[i])->len < 4) {
-			rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
-		}
-		segments[i].x1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[0]);
-		segments[i].y1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[1]);
-		segments[i].x2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[2]);
-		segments[i].y2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[3]);
+        Check_Type(RARRAY(segs)->ptr[i], T_ARRAY);
+        if (RARRAY(RARRAY(segs)->ptr[i])->len < 4) {
+            rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
+        }
+        segments[i].x1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[0]);
+        segments[i].y1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[1]);
+        segments[i].x2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[2]);
+        segments[i].y2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[3]);
     }
     gdk_draw_segments(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					  segments, RARRAY(segs)->len);
+                      segments, RARRAY(segs)->len);
     return self;
 }
 
@@ -167,9 +186,9 @@ gdkdraw_draw_rect(self, gc, filled, x, y, w, h)
     VALUE self, gc, filled, x, y, w, h;
 {
     gdk_draw_rectangle(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					   RTEST(filled),
-					   NUM2INT(x), NUM2INT(y),
-					   NUM2INT(w), NUM2INT(h));
+                       RTEST(filled),
+                       NUM2INT(x), NUM2INT(y),
+                       NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -178,10 +197,10 @@ gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
     VALUE self, gc, filled, x, y, w, h, a1, a2;
 {
     gdk_draw_arc(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				 RTEST(filled),
-				 NUM2INT(x), NUM2INT(y),
-				 NUM2INT(w), NUM2INT(h),
-				 NUM2INT(a1), NUM2INT(a2));
+                 RTEST(filled),
+                 NUM2INT(x), NUM2INT(y),
+                 NUM2INT(w), NUM2INT(h),
+                 NUM2INT(a1), NUM2INT(a2));
     return self;
 }
 
@@ -195,17 +214,17 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-		}
-		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+        }
+        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
     gdk_draw_polygon(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-					 RTEST(filled),
-					 points,
-					 RARRAY(pnts)->len);
+                     RTEST(filled),
+                     points,
+                     RARRAY(pnts)->len);
     return self;
 }
 
@@ -287,10 +306,10 @@ gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
     VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
 {
     gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				   GDK_IMAGE(RVAL2GOBJ(image)),
-				   NUM2INT(xsrc), NUM2INT(ysrc),
-				   NUM2INT(xdst), NUM2INT(ydst),
-				   NUM2INT(w), NUM2INT(h));
+                   GDK_IMAGE(RVAL2GOBJ(image)),
+                   NUM2INT(xsrc), NUM2INT(ysrc),
+                   NUM2INT(xdst), NUM2INT(ydst),
+                   NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -315,16 +334,16 @@ gdkdraw_get_xid(self)
 #if GTK_MINOR_VERSION >= 2
 static VALUE
 gdkdraw_get_display(self)
-	VALUE self;
+    VALUE self;
 {
-	return GOBJ2RVAL(gdk_drawable_get_display(_SELF(self)));
+    return GOBJ2RVAL(gdk_drawable_get_display(_SELF(self)));
 }
 
 static VALUE
 gdkdraw_get_screen(self)
-	VALUE self;
+    VALUE self;
 {
-	return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
+    return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
 }
 #endif
 
@@ -345,6 +364,9 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_points, 2);
     rb_define_method(gdkDrawable, "draw_line", gdkdraw_draw_line, 5);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(gdkDrawable, "draw_pixbuf", gdkdraw_draw_pixbuf, 11);
+#endif
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
     rb_define_method(gdkDrawable, "draw_rectangle", gdkdraw_draw_rect, 6);
     rb_define_method(gdkDrawable, "draw_arc", gdkdraw_draw_arc, 8);
