@@ -1,5 +1,11 @@
 2003-10-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/global.h, src/rbgobj_object.c, src/rbgobj_signal.c: share a
+	module which serves to hook 'super'.
+
+	* src/rbgobj_signal.c: change prefix of default handler of signals
+	from 'do_' to 'signal_do_'.
+
 	* test/test-glib2.rb: new file.
 
 2003-10-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>

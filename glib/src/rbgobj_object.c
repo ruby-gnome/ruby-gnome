@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/10/25 15:53:12 $
+  $Date: 2003/10/29 04:21:24 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -569,11 +569,13 @@ register_type(int argc, VALUE* argv, VALUE self)
         {
             GType parent = g_type_parent(type);
             const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(parent);
+            VALUE m = rb_define_module_under(self, RubyGObjectHookModule);
+
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                VALUE m = rb_module_new();
                 rb_define_method(m, "initialize", gobj_initialize, -1);
-                rb_include_module(self, m);
             }
+
+            rb_include_module(self, m);
         }
 
         return Qnil;

@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2003/08/20 16:52:57 $
+   $Date: 2003/10/29 04:21:24 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
 ************************************************/
@@ -61,3 +61,7 @@ VALUE rbgutil_generic_s_gtype(VALUE klass);
 VALUE rbgutil_generic_gtype(VALUE self);
 #define generic_s_gtype rbgutil_generic_s_gtype
 #define generic_gtype rbgutil_generic_gtype
+
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+#define RubyGObjectHookModule "RubyGObjectHook__"
+#endif

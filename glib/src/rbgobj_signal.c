@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/10/25 15:35:01 $
+  $Date: 2003/10/29 04:21:24 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -16,7 +16,7 @@
 static VALUE cSignal;
 VALUE rbgobj_signal_wrap(guint sig_id);
 
-#define default_handler_method_prefix "do_"
+#define default_handler_method_prefix "signal_do_"
 
 /**********************************************************************/
 
@@ -644,7 +644,7 @@ gobj_s_method_added(klass, id)
     }
 
     {
-        VALUE mod = rb_define_module_under(klass, "SignalHook__");
+        VALUE mod = rb_define_module_under(klass, RubyGObjectHookModule);
         rb_include_module(klass, mod);
         rb_define_method(mod, name, gobj_sig_chain_from_overridden, -1);
     }
