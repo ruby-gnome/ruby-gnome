@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:33 $
+  $Date: 2004/08/29 16:43:28 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -83,9 +83,13 @@ static VALUE
 treeiter_get_path(self)
     VALUE self;
 {
+    VALUE retval = Qnil;
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
-    return TREEPATH2RVAL(gtk_tree_model_get_path(model, iter));
+    GtkTreePath* path = gtk_tree_model_get_path(model, iter);
+    retval= TREEPATH2RVAL(path);
+    gtk_tree_path_free(path);
+    return retval;
 }
 
 static VALUE
