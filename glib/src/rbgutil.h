@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: mutoh $
-  $Date: 2002/09/30 14:53:08 $
+  $Author: tkubo $
+  $Date: 2002/10/05 10:30:40 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -19,6 +19,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+
+#define G_DEF_SETTER(klass, name) \
+    rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2( \
+    "def " name "=(val); set_" name "(val); val; end\n"))
 
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
 
