@@ -1,3 +1,7 @@
+2003-08-17  Vincent Isambart <vincent.isambart@laposte.net>
+
+	* src/rbpangofont.c: Pango::Font#metrics accept no parameter.
+	
 2003-08-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbpangolanguage.c: implement Pango::Language#to_s

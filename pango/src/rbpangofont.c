@@ -3,8 +3,8 @@
 
   rbpangofont.c -
 
-  $Author: sakai $
-  $Date: 2003/08/15 16:09:28 $
+  $Author: mutoh $
+  $Date: 2003/08/17 07:59:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -36,18 +36,28 @@ void        pango_font_get_glyph_extents    (PangoFont *font,
 */
 
 static VALUE
-font_get_metrics(self, language)
-    VALUE self, language;
+font_get_metrics(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    PangoLanguage* lang = (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE);
+    VALUE language;
+    PangoLanguage* lang = NULL;
+    
+    rb_scan_args(argc, argv, "01", &language);
+    
+    if (!NIL_P(language))
+        lang = (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE);
+
     return BOXED2RVAL(pango_font_get_metrics(_SELF(self), lang), 
                       PANGO_TYPE_FONT_METRICS);
 }
+
 void
 Init_pango_font()
 {
     VALUE pFont = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
     
     rb_define_method(pFont, "describe", font_describe, 0);
-    rb_define_method(pFont, "metrics", font_get_metrics, 1);
+    rb_define_method(pFont, "metrics", font_get_metrics, -1);
 }
