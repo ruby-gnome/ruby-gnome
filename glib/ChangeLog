@@ -2,6 +2,7 @@
 
 	* src/utils_int64.c (LL_L2UI): cast argument to guint32
 	* src/utils_int64.c (RubyTo64BitInt): oops. convert max_PRUint32 to VALUE.
+	* src/utils_int64.c: optimize
 
 2002-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
@@ -11,8 +12,9 @@
 	this problem is pointed out by Masao Mutoh <mutoh@highway.ne.jp>.
 	* src/rbgobj_object.c: rename GLib::GObject to GLib::Object
 	* src/utils_int64.c: add file. support gint64/guint64.
-	code is ripped from rbXPCOM.
+	code is ripped from rbXPCOM-0.0.3.
 	<URL:http://www.ruby-lang.org/en/raa-list.rhtml?name=rbXPCOM>
+	Thanks to Kenichi Komiya <kom@mail1.accsnet.ne.jp>
 	* src/rbgobj_param.c (value_set_default): initialize GValue with {0,}.
 	* src/rbgobj_param.c (ParamSpec#value_type): returns GLib::Type
 	* src/rbgobj_param.c (ParamSpec#owner_type): ditto
