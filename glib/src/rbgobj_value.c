@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: mutoh $
-  $Date: 2002/11/22 18:03:38 $
+  $Date: 2002/12/28 04:50:57 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -75,6 +75,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_FLAGS:
         return UINT2NUM(g_value_get_flags(value));        
       case G_TYPE_OBJECT:
+      case G_TYPE_INTERFACE:
         {
             GObject* gobj = g_value_get_object(value);
             return gobj ? GOBJ2RVAL(gobj) : Qnil;
@@ -108,8 +109,6 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                 return func(value);
             }
         }
-
-      case G_TYPE_INTERFACE:
       default:
         g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
                   g_type_name(G_VALUE_TYPE(value)));
@@ -169,6 +168,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
             return;
         }
       case G_TYPE_OBJECT:
+      case G_TYPE_INTERFACE:
         g_value_set_object(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
         return;
       case G_TYPE_PARAM:
@@ -198,7 +198,6 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
             }
         }
 
-      case G_TYPE_INTERFACE:
       default:
         g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
                   g_type_name(G_VALUE_TYPE(result)));
