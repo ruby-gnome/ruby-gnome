@@ -82,11 +82,21 @@ static VALUE rb_gst_querytype_each(self)
 }
 
 /*
- *  Method: id -> aFixnum
+ *  Method: type_id -> aFixnum
  *
- *  Gets the unique id of this querytype, as an integer value.
+ *  Gets the type id of this querytype, as an integer value.
+ *
+ *  Meaningful types are:
+ *    - Gst::QueryType::NONE
+ *    - Gst::QueryType::TOTAL
+ *    - Gst::QueryType::POSITION
+ *    - Gst::QueryType::LATENCY
+ *    - Gst::QueryType::JITTER
+ *    - Gst::QueryType::START
+ *    - Gst::QueryType::SEGMENT_END
+ *    - Gst::QueryType::RATE
  */
-static VALUE rb_gst_querytype_get_id(self)
+static VALUE rb_gst_querytype_get_type_id(self)
     VALUE self;
 {
     GstQueryType *querytype = RGST_QUERY_TYPE(self);
@@ -196,8 +206,8 @@ void Init_gst_querytype(void) {
     rb_define_singleton_method(c, "each", rb_gst_querytype_each, 0);
     rb_define_singleton_method(c, "find", rb_gst_querytype_find, 1);
 
-    rb_define_method(c, "id",   rb_gst_querytype_get_id, 0);
-    rb_define_method(c, "nick", rb_gst_querytype_get_nick, 0);
+    rb_define_method(c, "type_id", rb_gst_querytype_get_type_id, 0);
+    rb_define_method(c, "nick",    rb_gst_querytype_get_nick,    0);
     rb_define_method(c, "description", 
                      rb_gst_querytype_get_description, 0);
 
