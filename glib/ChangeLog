@@ -1,5 +1,9 @@
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/lib/glib2.rb: On mingw32 and mswin32 platform, require
+	'win32/registry' unconditionaly and rescue LoadError.
+	(proposed by TAMURA.KENICHI <sgs02516@nifty.com>)
+
 	* src/rbgobj_enums.c: fixed rgbobj_get_enum - a VALUE was not
 	converted to int before calling rbgobj_make_enum.
 	(reported by Geoff Youngs <g@intersect-uk.co.uk>)

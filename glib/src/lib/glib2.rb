@@ -1,6 +1,6 @@
 # for dropline GTK2-Runtime DLL
 # http://www.dropline.net/gtk/
-if /mingw|mswin/ =~ RUBY_PLATFORM and RUBY_VERSION >= "1.8.0"
+if /mingw|mswin/ =~ RUBY_PLATFORM
   begin
     require 'win32/registry'
     GTK2Dir =
@@ -8,7 +8,7 @@ if /mingw|mswin/ =~ RUBY_PLATFORM and RUBY_VERSION >= "1.8.0"
     ENV['PATH'] = %w(bin lib).collect{|dir|
       "#{GTK2Dir}\\#{dir};"
     }.join('') + ENV['PATH']
-  rescue Win32::Registry::Error
+  rescue LoadError, Win32::Registry::Error
   end
 end
 
@@ -18,6 +18,7 @@ require 'glib2.so'
 module GLib
 
   class Type
+
     def decendants
       [self] + children.map{|t| t.decendants }.flatten
     end
