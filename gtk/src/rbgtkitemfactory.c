@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -41,8 +41,10 @@ distinguish_item_type(p_item)
         return rb_obj_alloc(gMenuItem);
     else if (GTK_IS_LIST_ITEM(p_item))
         return rb_obj_alloc(gListItem);
+#ifdef GTK_ENABLE_BROKEN
     else if (GTK_IS_TREE_ITEM(p_item))
         return rb_obj_alloc(gTreeItem);
+#endif
     else
         return rb_obj_alloc(gItem);
 }

@@ -4,7 +4,7 @@
   rbgtkeditable.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -144,5 +144,7 @@ void Init_gtk_editable()
 
     /* child initialization */
     Init_gtk_entry();
+#ifdef GTK_ENABLE_BROKEN
     Init_gtk_text();
+#endif
 }

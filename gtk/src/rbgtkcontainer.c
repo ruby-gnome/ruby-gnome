@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -174,5 +174,7 @@ void Init_gtk_container()
     Init_gtk_socket();
     Init_gtk_table();
     Init_gtk_toolbar();
+#ifdef Init_gtk_tree
     Init_gtk_tree();
+#endif
 }

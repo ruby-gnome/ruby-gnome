@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:07 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,7 +16,7 @@
 EXTERN VALUE rb_argv, rb_progname;
 
 void
-Init_gtk()
+Init_gtk2()
 {
     int argc, i;
     char **argv;

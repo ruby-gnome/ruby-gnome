@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,6 +109,7 @@ VALUE gSelectionData;
 #ifndef GTK_DISABLE_DEPRECATED
 VALUE gCList;
 VALUE gCTree;
+VALUE gCTreeNode;
 VALUE gList;
 VALUE gListItem;
 VALUE gPixmap;

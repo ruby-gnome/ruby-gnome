@@ -1,3 +1,8 @@
+Fri May 24 02:08:00 2002 Masahiro Sakai <zvm01052@nifty.ne.jp>
+	* src/init.c src/rbgdkimage.c src/rbgtk.c src/rbgtkcontainer.c
+		src/rbgtkeditable.c src/rbgtkitem.c src/rbgtkitemfactory.c: 
+	  Add GDK_ENABLE_BROKEN, GTK_ENABLE_BROKEN
+
 Wed May 22 02:37:37 2002 Masao Mutoh <mutoh@highway.ne.jp>
 	* sample/: Change require 'gtk' to 'gtk2'
 	  src/rbgtk.c src/rbgtkclist.c src/rbgtkctree.c src/rbgtklist.c

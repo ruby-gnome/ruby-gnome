@@ -4,7 +4,7 @@
   rbgtkitem.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,5 +55,7 @@ void Init_gtk_item()
     /* child initialization */
     Init_gtk_list_item();
     Init_gtk_menu_item();
+#ifdef GTK_ENABLE_BROKEN
     Init_gtk_tree_item();
+#endif
 }

@@ -4,7 +4,7 @@
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/05/23 17:26:21 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,6 +41,8 @@ get_gdkimage(image)
     return gimage;
 }
 
+#ifdef GDK_ENABLE_BROKEN
+
 static VALUE
 gdkimage_s_newbmap(klass, visual, data, w, h)
     VALUE klass, visual, data, w, h;
@@ -55,6 +57,8 @@ gdkimage_s_newbmap(klass, visual, data, w, h)
                          RSTRING(data)->ptr,
                          width, height));
 }
+
+#endif
 
 static VALUE
 gdkimage_s_new(klass, type, visual, w, h)
@@ -138,7 +142,9 @@ gdkimage_bpl(self)
 void Init_gtk_gdk_image() {
     gdkImage = rb_define_class_under(mGdk, "Image", rb_cData);
 
+#ifdef GDK_ENABLE_BROKEN
     rb_define_singleton_method(gdkImage, "new_bitmap", gdkimage_s_newbmap, 4);
+#endif
     rb_define_singleton_method(gdkImage, "new", gdkimage_s_new, 4);
     rb_define_singleton_method(gdkImage, "get", gdkimage_s_get, 5);
 

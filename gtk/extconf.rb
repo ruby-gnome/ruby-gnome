@@ -8,13 +8,32 @@ require "mkmf"
 # detect GTK+ configurations
 #
 if /mswin32/ !~ PLATFORM
-  config_cmd = ENV.fetch("GTK_CONFIG"){
+  config_cmds = [ENV.fetch("GTK_CONFIG"){
     "pkg-config gtk+-x11-2.0"
-  }
-  config_libs, config_cflags = "--libs", "--cflags"
-  $LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
-  $libs = libs.join(' ') + ' ' + $libs
-  $CFLAGS = `#{config_cmd} #{config_cflags}`.chomp
+  }]
+  while /^--/ =~ ARGV[0]
+    ARGV.shift
+  end
+  if ARGV.size > 0
+    config_cmds.unshift(ARGV[0])
+  end
+  
+  begin
+    config_cmds.each do |config_cmd|
+      version = `#{config_cmd} --version`
+      if not version.chomp.empty?
+	config_libs, config_cflags = "--libs", "--cflags"
+	$LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
+	$libs = libs.join(' ') + ' ' + $libs
+	$CFLAGS = `#{config_cmd} #{config_cflags}`.chomp
+	break
+      end
+    end
+  rescue
+    $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
+    $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
+    $libs = '-lm -lc'
+  end
 else
   $LDFLAGS = '-L/usr/local/lib'
   $CFLAGS = '-I/usr/local/include/gdk/win32 -I/usr/local/include/glib -I/usr/local/include'
@@ -25,8 +44,9 @@ end
 #
 gdkincl = nil
 tmpincl = $CFLAGS.gsub(/-D\w+/, '').split('-I') + ['/usr/include']
+p tmpincl
 tmpincl.each do |i|
-p  i.strip!
+  i.strip!
   
   if FileTest.exist?(i + "/gdk/gdkcursor.h") and
       FileTest.exist?(i + "/gdk/gdkkeysyms.h")
@@ -51,11 +71,14 @@ begin
     lib_ary = [# ["X11", "XOpenDisplay"],
                # ["Xext", "XShmQueryVersion"],
                # ["Xi", "XOpenDevice"],
+#                ["glib", "g_print"],
+#                ["gdk", "gdk_init"],
+#                ["gtk", "gtk_init"],
     ]
   else
-    lib_ary = [ ["glib2", "g_print"],
-                ["gdk2", "gdk_init"],
-                ["gtk2", "gtk_init"] ]
+    lib_ary = [ ["glib-1.3", "g_print"],
+                ["gdk-1.3", "gdk_init"],
+                ["gtk-1.3", "gtk_init"] ]
   end
 
   lib_ary.each do |ary|
@@ -99,7 +122,7 @@ begin
   $source_files.each do |e|
     mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbgtk.h global.h\n"
   end
-  mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursors.h\n"
+  mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
   mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
 
   if /mswin32/ =~ PLATFORM
@@ -121,7 +144,7 @@ librbgdkkeysyms.a: makedefconst.rb rbgdkkeysyms.h
 
   mfile.print "\
 
-rbgdkcursors.h:;	$(RUBY) makecursors.rb #{gdkincl}/gdkcursors.h > $@
+rbgdkcursor.h:;	$(RUBY) makecursors.rb #{gdkincl}/gdkcursor.h > $@
 rbgdkkeysyms.h:;	$(RUBY) makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
 
 allclean: clean
@@ -151,14 +174,13 @@ clean:
 		@nmake -nologo allclean
 		@cd ..
 		@-rm -f Makefile extconf.h conftest.*
-		@-rm -f gtk.lib *~
+		@-rm -f gtk2.lib *~
 "
   else
     mfile.print "\
 
 all:
 		@cd src; make all
-		@if [ ! -r gtk2.a ]; then ln -sf src/gtk2.a gtk2.a; fi
 
 install:;	@cd src; make install
 site-install:;	@cd src; make site-install
