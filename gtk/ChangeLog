@@ -1,11 +1,20 @@
 2003-06-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/init.c, src/rbgtkmain.c: Call setlocale(LC_NUMERIC, "C") for some locales 
-	which doesn't use "." as decimal-point.	Pointed out by Joao Pedrosa.
+	* src/init.c, src/rbgtkmain.c: Call setlocale(LC_NUMERIC, "C") for 
+	some locales which doesn't use "." as decimal-point.	
+	Pointed out by Joao Pedrosa.
 	* src/rbgtkbindingset.c: Added.
 	* src/rbgtkobject.c: Add Gtk::Object#bindings_activate(from Bindings). 
 	* src/rbgtkeditable.c: Change return value of Gtk::Editable#selection_bounds 
 	same as Gtk::Label#selection_bounds.
+	* src/rbgtktreemodel.c: Fix Gtk::TreeModel#each. Pointed out by 
+	Joao Pedrosa.
+	* src/rbgtkmain.c: Add Gtk.default_language, .main_iteration_do, 
+	.current, .main_do_event, .input_add, .quit_add, .quit_remove, 
+	.key_snooper_install, .key_snooper_remove, .current_event_time, 
+	.current_event_state, .get_event_widget, .propagate_event.
+	* src20/gtk20.c, src22/gtk22.c, src/rbgtkclipboard.c: 
+	Add Gtk::Clipboard#display, #wait_for_contents.
 
 2003-06-21  Masao Mutoh  <mutoh@highway.ne.jp>
 

@@ -20,6 +20,7 @@ EXPORTS
     rbgtk_atom2selectiondata_free
     rbgtk_clipboard_get_type DATA
     rbgtk_get_clipboard DATA
+    rbgtk_make_clipboard DATA
     rbgtk_get_target_entry
     rbgtk_get_tree_row_reference DATA
     rbgtk_initialize_gtkobject

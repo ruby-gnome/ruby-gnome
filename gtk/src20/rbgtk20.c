@@ -3,8 +3,8 @@
 
   rbgtk20.c -
 
-  $Author: tkubo $
-  $Date: 2003/01/18 15:09:14 $
+  $Author: mutoh $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2003 KUBO Takehiro
                 but many codes are copyed from src/rbgtkclipboard.c
@@ -38,6 +38,13 @@ get_clipboard(obj)
     VALUE obj;
 {
     return (GtkClipboard*)RVAL2BOXED(obj, RBGTK_TYPE_CLIPBOARD);
+}
+
+static VALUE
+make_clipboard(gobj)
+    GtkClipboard* gobj;
+{
+    return BOXED2RVAL(gobj, RBGTK_TYPE_CLIPBOARD);
 }
 
 /*****************************************/
@@ -78,6 +85,7 @@ Init_gtk20()
 {
     rbgtk_clipboard_get_type = clipboard_get_type;
     rbgtk_get_clipboard = get_clipboard;
+    rbgtk_make_clipboard = make_clipboard;
     rbgtk_tree_row_reference_get_type = tree_row_reference_get_type;
     rbgtk_get_tree_row_reference = get_tree_row_reference;
 }

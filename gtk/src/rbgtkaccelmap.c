@@ -3,8 +3,8 @@
 
   rbgtkaccelmap.c -
 
-  $Author: sakai $
-  $Date: 2003/02/17 11:29:20 $
+  $Author: mutoh $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -95,11 +95,14 @@ accel_map_foreach_unfilterd(self)
     return Qnil;
 }
 
-#if 0
+/*
 void        gtk_accel_map_load_scanner      (GScanner *scanner);
+*/
+
+/* We don't need them.
 void        gtk_accel_map_load_fd           (gint fd);
 void        gtk_accel_map_save_fd           (gint fd);
-#endif
+*/
 
 void
 Init_accel_map()

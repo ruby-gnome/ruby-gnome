@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -46,11 +46,9 @@ require_minor()
 void
 Init_gtk2()
 {
-#if 0
 #ifdef G_THREADS_ENABLED
     g_thread_init (NULL);
     gdk_threads_init();
-#endif
 #endif
 #if 0
     rb_protect(&require_minor, Qnil, NULL);

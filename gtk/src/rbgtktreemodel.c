@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: sakai $
-  $Date: 2003/02/16 13:25:17 $
+  $Author: mutoh $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -89,8 +89,9 @@ treemodel_foreach_func(model, path, iter, func)
     gpointer func;
 {
     iter->user_data3 = model;
-    return RTEST(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(model), 
-                            TREEPATH2RVAL(path), ITR2RVAL(iter)));
+    rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(model), 
+                            TREEPATH2RVAL(path), ITR2RVAL(iter));
+	 return FALSE;
 }
 
 static VALUE

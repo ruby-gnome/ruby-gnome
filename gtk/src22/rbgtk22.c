@@ -3,8 +3,8 @@
 
   rbgtk22.c -
 
-  $Author: tkubo $
-  $Date: 2003/01/18 15:09:34 $
+  $Author: mutoh $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2003 KUBO Takehiro
 
@@ -43,6 +43,13 @@ get_clipboard(obj)
     return GTK_CLIPBOARD(RVAL2GOBJ(obj));
 }
 
+static VALUE
+make_clipboard(gobj)
+    GtkClipboard* gobj;
+{
+    return GOBJ2RVAL(gobj);
+}
+
 static GType
 tree_row_reference_get_type(void)
 { 
@@ -64,6 +71,7 @@ Init_gtk22()
 {
     rbgtk_clipboard_get_type = clipboard_get_type;
     rbgtk_get_clipboard = get_clipboard;
+    rbgtk_make_clipboard = make_clipboard;
     rbgtk_tree_row_reference_get_type = tree_row_reference_get_type;
     rbgtk_get_tree_row_reference = get_tree_row_reference;
 }

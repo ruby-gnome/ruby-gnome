@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2003/06/21 18:19:00 $
+  $Date: 2003/06/22 17:37:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -18,6 +18,21 @@
 EXTERN VALUE rb_progname, rb_argv;
 
 static VALUE rbgtk_main_threads = Qnil;
+
+static gboolean
+gtk_m_function(data)
+    gpointer data;
+{
+    VALUE ret = rb_funcall((VALUE)data, id_call, 0);
+    return RTEST(ret);
+}
+
+static VALUE
+gtk_m_get_default_language(self)
+    VALUE self;
+{
+    return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
+}
 
 static VALUE
 gtk_m_init(argc, argv, self)
@@ -100,6 +115,11 @@ gtk_m_init(argc, argv, self)
     return self;
 }
 
+/* We don't need them.
+gtk_init()
+gtk_exit()
+*/
+
 static VALUE
 gtk_m_events_pending(self)
     VALUE self;
@@ -144,13 +164,88 @@ gtk_m_main_iteration(self)
     return gtk_main_iteration() ? Qtrue : Qfalse;
 }
 
-static gboolean
-exec_interval(proc)
-    VALUE proc;
+static VALUE
+gtk_m_main_iteration_do(self, blocking)
+    VALUE self, blocking;
 {
-    VALUE ret = rb_funcall(proc, id_call, 0);
-    return RTEST(ret);
+    return gtk_main_iteration_do(RTEST(blocking)) ? Qtrue : Qfalse;
 }
+
+static VALUE
+gtk_m_main_do_event(self, event)
+    VALUE self, event;
+{
+    gtk_main_do_event(RVAL2GEV(event));
+    return event;
+}
+
+/* We don't need them.
+gtk_true()
+gtk_false()
+*/
+
+static VALUE
+gtk_m_grab_add(self, widget)
+    VALUE self, widget;
+{
+    gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
+    return Qnil;
+}
+
+static VALUE
+gtk_m_get_current(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_grab_get_current());
+}
+
+static VALUE
+gtk_m_grab_remove(self, widget)
+    VALUE self, widget;
+{
+    gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
+    return Qnil;
+}
+
+static VALUE
+gtk_m_init_add(self)
+    VALUE self;
+{
+    volatile VALUE func = rb_f_lambda();
+    
+    gtk_init_add(gtk_m_function, (gpointer)func);
+    G_RELATIVE(self, func);
+    return Qnil;
+}
+
+static VALUE
+gtk_m_quit_add(self, main_level)
+    VALUE self, main_level;
+{
+    volatile VALUE func = rb_f_lambda();
+    VALUE id;
+
+    id = INT2FIX(gtk_quit_add(NUM2UINT(main_level), 
+                                gtk_m_function, (gpointer)func));
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
+    return id;
+}
+
+static VALUE
+gtk_m_quit_remove(self, quit_handler_id)
+    VALUE self, quit_handler_id;
+{
+    gtk_quit_remove(NUM2UINT(quit_handler_id));
+    G_REMOVE_RELATIVE(self, id_relative_callbacks, quit_handler_id);
+    return quit_handler_id;
+}
+
+/* We don't need this.
+gtk_quit_add_full ()
+gtk_quit_add_destroy()
+gtk_quit_remove_by_data()
+gtk_timeout_add_full()
+*/
 
 static VALUE
 timeout_add(self, interval)
@@ -161,7 +256,7 @@ timeout_add(self, interval)
 
     func = rb_f_lambda();
     id = INT2FIX(gtk_timeout_add(NUM2INT(interval),
-                                 (GtkFunction)exec_interval,
+                                 (GtkFunction)gtk_m_function,
                                  (gpointer)func));
     G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
@@ -184,7 +279,22 @@ idle_add(self)
     VALUE func;
 
     func = rb_f_lambda();
-    id = INT2FIX(gtk_idle_add((GtkFunction)exec_interval, (gpointer)func));
+    id = INT2FIX(gtk_idle_add((GtkFunction)gtk_m_function, (gpointer)func));
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
+    return id;
+}
+
+static VALUE
+idle_add_priority(self, priority)
+    VALUE self;
+{
+    VALUE id;
+    VALUE func;
+
+    func = rb_f_lambda();
+    id = INT2FIX(gtk_idle_add_priority(NUM2INT(priority),
+                                       (GtkFunction)gtk_m_function, 
+                                       (gpointer)func));
     G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
 }
@@ -198,6 +308,48 @@ idle_remove(self, id)
     return Qnil;
 }
 
+/* We don't need this.
+gtk_idle_remove_by_data()
+gtk_idle_add_full()
+
+Use Gdk::Input.add, remove
+gtk_input_add_full()
+gtk_input_remove()
+*/
+
+static gint
+gtk_m_key_snoop_func(grab_widget, event, func)
+    GtkWidget* grab_widget;
+    GdkEventKey* event;
+    gpointer func;
+{
+    VALUE ret = rb_funcall((VALUE)func, id_call, 2, 
+                           GOBJ2RVAL(grab_widget), 
+                           GEV2RVAL((GdkEvent*)event));
+    return RTEST(ret);
+}
+
+static VALUE
+gtk_m_key_snooper_install(self)
+    VALUE self;
+{
+    VALUE func = rb_f_lambda();
+    VALUE id = INT2FIX(gtk_key_snooper_install(
+                           (GtkKeySnoopFunc)gtk_m_key_snoop_func, 
+                           (gpointer)func));
+    G_RELATIVE2(self, func, id_relative_callbacks, id);
+    return id;
+}
+
+static VALUE
+gtk_m_key_snooper_remove(self, id)
+    VALUE self, id;
+{
+    gtk_key_snooper_remove(NUM2UINT(id));
+    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
+    return Qnil;
+}
+
 static VALUE
 gtk_m_get_current_event(self)
     VALUE self;
@@ -206,24 +358,44 @@ gtk_m_get_current_event(self)
 }
 
 static VALUE
-rbgtk_m_grab_add(self, widget)
-    VALUE self, widget;
+gtk_m_get_current_event_time(self)
+    VALUE self;
 {
-    gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
-    return Qnil;
+    return INT2NUM(gtk_get_current_event_time());
 }
 
 static VALUE
-rbgtk_m_grab_remove(self, widget)
-    VALUE self, widget;
+gtk_m_get_current_event_state(self)
+    VALUE self;
 {
-    gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
+    GdkModifierType state;
+    gboolean ret = gtk_get_current_event_state(&state);
+    return ret ? INT2NUM(state) : Qnil;
+}
+
+static VALUE
+gtk_m_get_event_widget(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    VALUE event;
+    rb_scan_args(argc, argv, "01", &event);
+
+    return GOBJ2RVAL(gtk_get_event_widget(NIL_P(event) ? NULL :RVAL2GEV(event)));
+}
+
+static VALUE
+gtk_m_propagate_event(self, widget, event)
+    VALUE self, widget, event;
+{
+    gtk_propagate_event(GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2GEV(event));
     return Qnil;
 }
 
 /* From Version Information */
 static VALUE
-rbgtk_m_check_version(self, major, minor, micro)
+gtk_m_check_version(self, major, minor, micro)
     VALUE self, major, minor, micro;
 {
     gchar * ret = NULL;
@@ -236,6 +408,7 @@ void
 Init_gtk_main()
 {
     rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
+    rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
     rb_define_module_function(mGtk, "init", gtk_m_init, -1);
     rb_global_variable(&rbgtk_main_threads);
     rbgtk_main_threads = rb_ary_new();
@@ -243,13 +416,29 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
     rb_define_module_function(mGtk, "main_iteration", gtk_m_main_iteration, 0);
+    rb_define_module_function(mGtk, "main_iteration_do", gtk_m_main_iteration_do, 1);
+    rb_define_module_function(mGtk, "main_do_event", gtk_m_main_do_event, 1);
+    rb_define_module_function(mGtk, "grab_add", gtk_m_grab_add, 1);
+    rb_define_module_function(mGtk, "current", gtk_m_get_current, 0);
+    rb_define_module_function(mGtk, "grab_remove", gtk_m_grab_remove, 1);
+    rb_define_module_function(mGtk, "init_add", gtk_m_init_add, 0);
+    rb_define_module_function(mGtk, "quit_add", gtk_m_quit_add, 1);
+    rb_define_module_function(mGtk, "quit_remove", gtk_m_quit_remove, 1);
+
     rb_define_module_function(mGtk, "timeout_add", timeout_add, 1);
     rb_define_module_function(mGtk, "timeout_remove", timeout_remove, 1);
     rb_define_module_function(mGtk, "idle_add", idle_add, 0);
+    rb_define_module_function(mGtk, "idle_add_priority", idle_add_priority, 1);
     rb_define_module_function(mGtk, "idle_remove", idle_remove, 1);
+    rb_define_module_function(mGtk, "key_snooper_install", gtk_m_key_snooper_install, 0);
+    rb_define_module_function(mGtk, "key_snooper_remove", gtk_m_key_snooper_remove, 1);
     rb_define_module_function(mGtk, "current_event", gtk_m_get_current_event, 0);
-    rb_define_module_function(mGtk, "grab_add", rbgtk_m_grab_add, 1);
-    rb_define_module_function(mGtk, "grab_remove", rbgtk_m_grab_remove, 1);
-    rb_define_module_function(mGtk, "check_version", rbgtk_m_check_version, 3);
- 
+    rb_define_module_function(mGtk, "current_event_time", gtk_m_get_current_event_time, 0);
+    rb_define_module_function(mGtk, "current_event_state", gtk_m_get_current_event_state, 0);
+    rb_define_module_function(mGtk, "get_event_widget", gtk_m_get_event_widget, -1);
+    rb_define_module_function(mGtk, "propagate_event", gtk_m_propagate_event, 2);
+    rb_define_module_function(mGtk, "check_version", gtk_m_check_version, 3);
+
+    rb_define_const(mGtk, "PRIORITY_RESIZE", GTK_PRIORITY_RESIZE);
+
 }
