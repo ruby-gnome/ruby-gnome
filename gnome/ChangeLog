@@ -1,3 +1,9 @@
+2002-10-16  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/gnome-app-helper.rb: Add toolbar sample.
+	* src/rbgnome-stock-icons.c: New file. Define Gnome::Stock::*. 
+	* src/rbgnome.c, src/rbgnome.h: Call Init_gnome_stock_icons().
+
 2002-10-15  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-app-helper.c: Add uiinfo_include(),
