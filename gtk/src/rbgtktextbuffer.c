@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/03/05 17:04:03 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -213,7 +213,8 @@ static VALUE
 txt_insert_pixbuf(self, iter, pixbuf)
     VALUE self, iter, pixbuf;
 {
-    rb_warn("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
+    if (RTEST(ruby_debug))
+        rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
                                   GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
@@ -223,7 +224,8 @@ static VALUE
 txt_insert_child_anchor(self, iter, anchor)
     VALUE self, iter, anchor;
 {
-    rb_warn("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
+    if (RTEST(ruby_debug))
+        rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
                                         GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
     return self;
@@ -494,7 +496,8 @@ txt_insert_with_tags(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    rb_warn("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
+    if (RTEST(ruby_debug))
+        rb_warning("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
     txt_insert(argc, argv, self);
     return self;
 }
