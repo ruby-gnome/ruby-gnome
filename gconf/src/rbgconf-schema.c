@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/02/04 21:28:47 $
+ * $Date: 2003/04/10 20:29:49 $
  *
  *****************************************************************************/
 
@@ -48,7 +48,7 @@ gconf_schema_get_gobject_type(void)
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static("GConfSchema",
 				(GBoxedCopyFunc)gconf_schema_copy,
-				(GBoxedFreeFunc)gconf_engine_unref);
+				(GBoxedFreeFunc)gconf_schema_free);
 	}
 
 	return our_type;
