@@ -1,3 +1,10 @@
+2005-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourceiter.c: Add Gtk::TextIter::SOURCE_SEARCH_* instead of 
+	Gtk::TextIter::SEARCH_CASE_INSENSITIVE.
+	they aren't or-able with other Gtk::TextIter constants.
+	Reported by Archit Baweja.
+
 2004-10-18  Vincent Isambart  <isambart@netcourrier.com>
 
 	* extconf.rb: Exit with error code 1 after failure.
