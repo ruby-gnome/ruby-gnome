@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2002/10/13 06:41:58 $
+  $Author: mutoh $
+  $Date: 2002/11/08 17:05:33 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -43,6 +43,9 @@ extern "C" {
 #define G_REMOVE_RELATIVE(obj, id, hash_key)\
  (rbgobj_remove_relative(obj, id, hash_key))
 
+#define G_DEF_SIGNAL_FUNC(klass, sig_name, func)\
+(rbgobj_set_signal_func(klass, sig_name, func))
+
 #define CLASS2CINFO(klass) (rbgobj_lookup_class(klass))
 #define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype))
 #define RVAL2CINFO(obj)    (rbgobj_lookup_class(CLASS_OF(obj)))
@@ -56,7 +59,7 @@ extern "C" {
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
-
+    
 typedef struct {
     VALUE klass;
     GType gtype;
@@ -92,9 +95,15 @@ extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
 
+/* rbgobj_signal.c */
+typedef VALUE (*GValToRValSignalFunc)(guint num,const GValue* values);
+extern void rbgobj_set_signal_func(VALUE klass, gchar* sig_name, GValToRValSignalFunc func);
+extern GValToRValSignalFunc rbgobj_get_signal_func(VALUE obj, VALUE sig_name);
+
 
 /* rbgobj_closure.c */
-extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args);
+extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args, 
+                                GValToRValSignalFunc func);
 
 /* rbgobj_value.c */
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
@@ -115,7 +124,6 @@ extern VALUE g_value_get_ruby_value(const GValue* value);
 extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
 
 /* rbgobj_object.c */
-
 extern void rbgobj_register_property_setter(GType gtype, const char* prop_name, RValueToGValueFunc func);
 extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, GValueToRValueFunc func);
 

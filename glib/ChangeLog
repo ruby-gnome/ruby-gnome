@@ -1,3 +1,9 @@
+2002-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: add file(methods are moved from Ruby/GTK). 
+	* src/rbgobj_signal.c, rbgobj_closure.c, rbgobj_object.c, rbgobject.h: 
+	add G_DEF_SIGNAL_FUNC. 
+	
 2002-11-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib.c (G_DEF_SETTERS): don't override existent methods.

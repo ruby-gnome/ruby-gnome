@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: tkubo $
-  $Date: 2002/10/24 13:14:28 $
+  $Author: mutoh $
+  $Date: 2002/11/08 17:05:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -14,6 +14,31 @@
 #include "global.h"
 
 VALUE rbgobj_signal_wrap(guint sig_id);
+static VALUE signal_func_table;
+
+GValToRValSignalFunc
+rbgobj_get_signal_func(obj, sig_name)
+    VALUE obj, sig_name;
+{
+    GValToRValSignalFunc func = NULL;
+    VALUE key = rb_ary_new3(2, CLASS_OF(obj), sig_name);
+    VALUE funcobj = rb_hash_aref(signal_func_table, key);
+    if (!NIL_P(funcobj)){
+        Data_Get_Struct(funcobj, void, func);
+    }
+    return func;
+}
+
+void
+rbgobj_set_signal_func(klass, sig_name, func)
+    VALUE klass;
+    gchar* sig_name; 
+    GValToRValSignalFunc func;
+{
+    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
+    VALUE key = rb_ary_new3(2, klass, CSTR2RVAL(sig_name));
+    rb_hash_aset(signal_func_table, key, obj);
+}
 
 /**********************************************************************/
 
@@ -155,9 +180,9 @@ gobj_sig_connect(argc, argv, self)
 
     rb_scan_args(argc, argv, "1*", &sig, &rest);
 
-    if (SYMBOL_P(sig))
+    if (SYMBOL_P(sig)){
         sig_name = rb_id2name(SYM2ID(sig));
-    else {
+    } else {
         StringValue(sig);
         sig_name = StringValuePtr(sig);
     }
@@ -165,7 +190,8 @@ gobj_sig_connect(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
-    rclosure = g_rclosure_new(rb_f_lambda(), rest);
+    rclosure = g_rclosure_new(rb_f_lambda(), rest, 
+                              rbgobj_get_signal_func(self, CSTR2RVAL(sig_name)));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
 
     return INT2FIX(i);
@@ -196,7 +222,8 @@ gobj_sig_connect_after(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
-    rclosure = g_rclosure_new(rb_f_lambda(), rest);
+    rclosure = g_rclosure_new(rb_f_lambda(), rest, 
+                              rbgobj_get_signal_func(self, CSTR2RVAL(sig_name)));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
 
     return INT2FIX(i);
@@ -500,6 +527,8 @@ Init_gobject_gsignal()
     cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
 
     id_send = rb_intern("__send__");
+    signal_func_table = rb_hash_new();
+    rb_global_variable(&signal_func_table);
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_method(mInterfaceCommons, "signal_new", gobj_s_signal_new, -1);

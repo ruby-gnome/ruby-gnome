@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2002/10/18 12:57:00 $
+  $Author: mutoh $
+  $Date: 2002/11/08 17:05:32 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -22,7 +22,20 @@ struct _GRClosure
     GClosure closure;
     VALUE callback;
     VALUE extra_args;
+    GValToRValSignalFunc g2r_func;
 };
+
+static VALUE
+rclosure_default_g2r_func(num, values)
+    guint num;
+    const GValue* values;
+{
+    int i;
+    VALUE args = rb_ary_new2(num);
+    for (i = 0; i < num; i++)
+        rb_ary_store(args, i, GVAL2RVAL(&values[i]));
+    return args;
+}
 
 static void
 rclosure_marshal(GClosure*      closure,
@@ -32,15 +45,19 @@ rclosure_marshal(GClosure*      closure,
                  gpointer        invocation_hint,
                  gpointer        marshal_data)
 {
-    int i;
-    VALUE ret;
+    VALUE ret, args;
+    GValToRValSignalFunc func;
 
-    VALUE args = rb_ary_new2(n_param_values);
-    
-    for (i = 0; i < n_param_values; i++)
-        rb_ary_store(args, i, GVAL2RVAL(&param_values[i]));
-    if (!NIL_P(((GRClosure*)closure)->extra_args))
+    if (((GRClosure*)closure)->g2r_func){
+        func = (GValToRValSignalFunc)((GRClosure*)closure)->g2r_func;
+    } else { 
+        func = (GValToRValSignalFunc)rclosure_default_g2r_func;
+    }
+    args = (*func)(n_param_values, param_values);
+
+    if (!NIL_P(((GRClosure*)closure)->extra_args)){
         args = rb_ary_concat(args, ((GRClosure*)closure)->extra_args);
+    }
 
     ret = rb_apply(((GRClosure*)closure)->callback, id_call, args);
 
@@ -69,7 +86,7 @@ rclosure_mark(GRClosure* closure)
 }
 
 GClosure*
-g_rclosure_new(VALUE callback_proc, VALUE extra_args)
+g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_func)
 {
     GRClosure* closure;
     VALUE marker;
@@ -78,6 +95,7 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args)
 
     closure->callback   = callback_proc;
     closure->extra_args = extra_args;
+    closure->g2r_func   = g2r_func;
 
     g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
 
@@ -105,7 +123,7 @@ static VALUE
 closure_initialize(self)
     VALUE self;
 {
-    GClosure* closure = g_rclosure_new(rb_f_lambda(), Qnil);
+    GClosure* closure = g_rclosure_new(rb_f_lambda(), Qnil, NULL);
     G_INITIALIZE(self, closure);
     g_closure_sink(closure);
     return self;

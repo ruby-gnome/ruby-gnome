@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2002/10/19 18:34:15 $
+  $Author: mutoh $
+  $Date: 2002/11/08 17:05:32 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -372,8 +372,8 @@ gobj_smethod_added(self, id)
     
     if (g_signal_lookup(name, G_OBJECT_TYPE(obj))) {
         VALUE method = rb_funcall(self, rb_intern("method"), 1, id);
-        g_signal_connect_closure(RVAL2GOBJ(self), name,
-                                 g_rclosure_new(method, Qnil), FALSE);
+        g_signal_connect_closure(obj, name,
+                                 g_rclosure_new(obj, method, Qnil, NULL), FALSE);
     }
 
     return Qnil;
