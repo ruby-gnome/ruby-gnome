@@ -124,7 +124,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                                          :outline_color => "black",
                                          :width_units => 4.0}))
     else
-      stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
+      stipple = Gdk::Pixmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasRect.new(root,
                                        {:x1 => 90.0,
                                          :y1 => 40.0,
@@ -170,7 +170,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                                             :outline_color => "black",
                                             :width_pixels => 0}))
     else
-      stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
+      stipple = Gdk::Pixmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasEllipse.new(root,
                                           {:x1 => 210.0,
                                             :y1 => 80.0,
@@ -208,7 +208,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                               :anchor => Gtk::ANCHOR_NW,
                               :fill_color_rgba => 0x0000ff80})
     else
-      stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
+      stipple = Gdk::Pixmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       Gnome::CanvasText.new(make_anchor(root, 420.0, 20.0),
                             {:text => "Anchor NW",
                               :x => 0.0,
@@ -333,7 +333,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                                          :cap_style => Gdk::GC::CAP_PROJECTING,
                                          :join_style => Gdk::GC::JOIN_MITER}))
     else
-      stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
+      stipple = Gdk::Pixmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasLine.new(root,
                                        {:points => points,
                                          :fill_color => "red",
@@ -401,7 +401,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                                             :fill_color_rgba => 0x0000ff80,
                                             :outline_color => "black"}))
     else
-      stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
+      stipple = Gdk::Pixmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasPolygon.new(root,
                                           {:points => points,
                                             :fill_color => "blue",
