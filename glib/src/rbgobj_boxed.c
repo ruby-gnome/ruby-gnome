@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Date: 2003/08/21 04:49:14 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -46,6 +46,14 @@ rbgobj_boxed_s_allocate(klass)
         rb_raise(rb_eTypeError, "abstract class");
 
     return rbgobj_create_object(klass);
+}
+
+static VALUE
+rbgobj_boxed_init(self)
+    VALUE self;
+{
+    rb_raise(rb_eTypeError, "can't initialize %s",
+             rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
@@ -235,6 +243,7 @@ Init_gobject_gboxed()
 
     rb_define_singleton_method(gBoxed, "gtype", generic_s_gtype, 0);
     rb_define_method(gBoxed, "gtype", generic_gtype, 0);
+    rb_define_method(gBoxed, "initialize", rbgobj_boxed_init, 0);
     rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
     rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 0);
 
