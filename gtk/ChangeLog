@@ -1,3 +1,7 @@
+2004-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilechooser.c: Added Gtk::FileChooserEmbed.
+
 2004-08-30  Geoff Youngs <g@intersect-uk.co.uk>
 
 	* src/rbgtktreeiter.c: Fix memory leaks of Gtk::TreeIter#path.

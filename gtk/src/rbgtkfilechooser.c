@@ -4,7 +4,7 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2004/08/22 13:30:40 $
+  $Date: 2004/08/29 17:00:22 $
  
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
@@ -310,6 +310,7 @@ Init_gtk_file_chooser()
 #if GTK_CHECK_VERSION(2,4,0)
 
     VALUE gFileCho = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
+    VALUE fse;
 
     rb_define_method(gFileCho, "set_action", fcho_set_action, 1);
     rb_define_method(gFileCho, "action", fcho_get_action, 0);
@@ -353,16 +354,16 @@ Init_gtk_file_chooser()
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
     /* GtkFileSystemError */
-    {
-        VALUE fse = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError", mGtk, rb_eRuntimeError);
-        rb_define_const(fse, "NONEXISTENT", INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
-        rb_define_const(fse, "NOT_FOLDER", INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
-        rb_define_const(fse, "INVALID_URI", INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
-        rb_define_const(fse, "BAD_FILENAME", INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
-        rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
-        rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
-    }
-    
+    fse = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError", mGtk, rb_eRuntimeError);
+    rb_define_const(fse, "NONEXISTENT", INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
+    rb_define_const(fse, "NOT_FOLDER", INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
+    rb_define_const(fse, "INVALID_URI", INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
+    rb_define_const(fse, "BAD_FILENAME", INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
+    rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
+    rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+
+    G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);
+
 #endif
 }
 
