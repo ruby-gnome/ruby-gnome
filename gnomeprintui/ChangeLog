@@ -1,3 +1,8 @@
+2004-11-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgpui-print-job-preview.c (gpui_job_preview_new): added
+	  g_object_ref. XXX: Is it good way???
+
 2004-11-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: removed libgnomeprintui-enum-types.{c,h} when make

@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require "gnomeprintui2"
 
 class Renderer
