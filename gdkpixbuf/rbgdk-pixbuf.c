@@ -1,10 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgdk-pixdata.c -
+  rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2002/12/07 14:51:05 $
+  $Date: 2002/12/07 14:51:38 $
 
   Copyright (C) 2002 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
