@@ -2,7 +2,7 @@
 
 	* src/rbgtk.h: Synchronize version number to Ruby/GLib.
 	* src/init.c: Code cleanup.
-	* sample/misc/label.rb, sample/misc/toolbar.rb,
+	* REAMDE, sample/misc/label.rb, sample/misc/toolbar.rb,
           sample/testgtk/notebook.rb, src/init.c, src/rbgdkdisplay.c,
           src/rbgdkdraw.c, src/rbgdkevent.c, src/rbgdkkeymap.c,
           src/rbgdkpixmap.c, src/rbgdkscreen.c, src/rbgdkselection.c,
