@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2002/11/08 17:05:33 $
+  $Date: 2003/01/30 15:50:54 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -131,6 +131,8 @@ extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, 
 extern VALUE rbgobj_boxed_create(VALUE klass);
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
+extern void rbgobj_boxed_not_copy_obj(GType gtype);
+
 
 #ifdef __cplusplus
 }

@@ -1,3 +1,8 @@
+2003-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c, rbgobject.h: Add rbgobj_boxed_not_copy_obj().
+	Some boxed object shouldn't copy when gpoint convert to VALUE.
+
 2002-12-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c (type_is_value_type): fix typo
