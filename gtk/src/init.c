@@ -3,8 +3,8 @@
 
   init.c -
 
-  $Author: mutoh $
-  $Date: 2004/03/09 18:21:55 $
+  $Author: silicio $
+  $Date: 2005/03/02 12:06:36 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -46,12 +46,6 @@ require_minor()
 void
 Init_gtk2()
 {
-#ifndef GDK_WINDOWING_WIN32
-#ifdef G_THREADS_ENABLED
-    g_thread_init (NULL);
-    gdk_threads_init();
-#endif
-#endif
 #if 0
     rb_protect(&require_minor, Qnil, NULL);
 #else

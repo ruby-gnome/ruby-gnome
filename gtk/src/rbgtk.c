@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: sakai $
-  $Date: 2003/02/14 18:58:19 $
+  $Author: silicio $
+  $Date: 2005/03/02 12:06:36 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -58,10 +58,6 @@ exec_callback(widget, proc)
 #endif
 
 #ifdef USE_POLL_FUNC
-
-#ifdef HAVE_SYS_SELECT_H
-# include <sys/select.h>
-#endif
 
 static gint 
 rbgtk_poll (GPollFD *fds,

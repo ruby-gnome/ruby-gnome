@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: silicio $
+  $Date: 2005/03/02 12:06:36 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -143,11 +143,27 @@ gtk_m_events_pending(self)
     return gtk_events_pending() ? Qtrue : Qfalse;
 }
 
+
+/* 
+ * An empty timeout 
+ */
+static gint
+empty_timeout_func(gpointer data) { return TRUE; }
+
 static VALUE
 gtk_m_main(self)
     VALUE self;
 {
     rb_ary_push(rbgtk_main_threads, rb_thread_current());
+
+    /* This forces the custom g_poll function to be called 
+     * with a minimum timeout of 100ms so that the GMainLoop
+     * iterates from time to time even if there is no event.
+     * Another way could be to add a wakeup pipe to the selectable
+     * fds and than wake up the select only when needed.
+     */
+    g_timeout_add(100, empty_timeout_func, NULL);
+
     gtk_main();
     return Qnil;
 }

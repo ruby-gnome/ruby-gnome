@@ -3,18 +3,26 @@
 
   rbgtkthreads.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: silicio $
+  $Date: 2005/03/02 12:06:36 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"
 
-/*
-    gdk_threads_init() is called in Init_gtk2().
-*/
 #ifdef   G_THREADS_ENABLED
+static VALUE
+rbgdk_threads_init(self)
+    VALUE self;
+{
+#ifndef GDK_WINDOWING_WIN32
+    g_thread_init(NULL);
+    gdk_threads_init();
+#endif
+    return self;
+}
+
 static VALUE
 rbgdk_threads_enter(self)
     VALUE self;
@@ -50,6 +58,7 @@ Init_gtk_gdk_threads()
 #ifdef   G_THREADS_ENABLED
     VALUE mGdkThreads = rb_define_module_under(mGdk, "Threads");
 
+    rb_define_module_function(mGdkThreads, "init",  rbgdk_threads_init, 0);
     rb_define_module_function(mGdkThreads, "enter", rbgdk_threads_enter, 0);
     rb_define_module_function(mGdkThreads, "leave", rbgdk_threads_leave, 0);
     rb_define_module_function(mGdkThreads, "synchronize", rbgdk_threads_synchronize, 0);
