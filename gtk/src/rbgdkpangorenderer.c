@@ -4,7 +4,7 @@
   rbgdkpangorenderer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/30 11:24:36 $
+  $Date: 2005/01/31 09:36:31 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -78,8 +78,12 @@ static VALUE
 prenderer_set_stipple(self, part, stipple)
     VALUE self, part, stipple;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                    NIL_P(stipple) ? NULL : GDK_BITMAP(RVAL2GOBJ(stipple)));
+#else
+      rb_warning("Gdk::PangoRender#set_tipple is not supported (Require pango-1.8.1 or later");
+#endif
     return self;
 }
 
@@ -87,9 +91,13 @@ static VALUE
 prenderer_set_override_color(self, part, color)
     VALUE self, part, color;
 {
+#if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_override_color(_SELF(self), 
                                           RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                           NIL_P(color) ? NULL : (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+#else
+      rb_warning("Gdk::PangoRender#set_override_color is not supported (Require pango-1.8.1 or later");
+#endif
     return self;
 }
 #endif

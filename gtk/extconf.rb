@@ -46,6 +46,7 @@ raise "can't find gdkkeysyms.h" if gdkincl.nil?
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
+have_func('pango_render_part_get_type')
 
 if target=="x11"
   have_func("XReadBitmapFileData")
