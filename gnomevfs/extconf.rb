@@ -2,41 +2,21 @@
 extconf.rb for Ruby/GConf extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+
+PACKAGE_NAME = "gnomevfs"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/gnomevfs/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
-pkgnames   = ['gnome-vfs-2.0', 'gnome-vfs-module-2.0']
+PKGConfig.have_package('gnome-vfs-2.0') or exit 1
+PKGConfig.have_package('gnome-vfs-module-2.0') or exit 1
+setup_win32(PACKAGE_NAME)
 
-pkgnames.each do |pkgname|
-	PKGConfig.have_package(pkgname) or exit 1
-end
-
-check_win32
-
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
-
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
-
-srcdir = File.dirname($0) == "." ? "." :
-  File.expand_path(File.dirname($0) + "/src")
-
-Dir.mkdir('src') unless File.exist? 'src'
-Dir.chdir "src"
-begin
-  create_makefile("gnomevfs", srcdir)
-ensure
-  Dir.chdir('..')
-end
-
+add_depend_package("glib2", "glib/src", TOPDIR)
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEVFS_COMPILATION")
 create_top_makefile

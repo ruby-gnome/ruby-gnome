@@ -1,3 +1,8 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+	* src/gnomevfs.h: Fix NUM2ULL duplication for Ruby-1.9.x.
+
 2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/gnomevfs.rb:  Support GLib::Log.set_log_domain.

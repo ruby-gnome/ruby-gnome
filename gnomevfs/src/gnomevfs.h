@@ -54,10 +54,12 @@ extern "C" {
 # define OFFT2NUM INT2NUM
 #endif
 
+#ifndef NUM2ULL
 #ifdef rb_num2ull
 # define NUM2ULL(x)		(rb_num2ull((VALUE)x))
 #else
 # define NUM2ULL(x)             NUM2INT(x)
+#endif
 #endif
 
 /* GnomeVFS::Error handling functions */
