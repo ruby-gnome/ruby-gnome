@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2003/10/23 07:03:18 $
+  $Author: mutoh $
+  $Date: 2003/11/19 16:48:16 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -229,6 +229,7 @@ gdkevent_s_get_graphics_expose(self, window)
 }
 
 /* GdkEvent */
+#if GTK_MINOR_VERSION >= 2
 static VALUE
 gdkevent_initialize(self, type)
     VALUE self, type;
@@ -240,6 +241,7 @@ gdkevent_initialize(self, type)
     G_INITIALIZE(self, gdk_event_new(gtype));
     return Qnil;
 }
+#endif
 
 static VALUE
 gdkevent_type(self)
@@ -535,7 +537,7 @@ gdkeventclient_send_client_message(argc, argv, self)
                               NUM2UINT(xid)));
 #else
         rb_warn("this arguments number has been supported since 2.2");
-        return false;
+        return Qfalse;
 #endif
     }
 }

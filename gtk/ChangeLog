@@ -1,3 +1,7 @@
+2003-11-20  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Fix compilation problems for GTK+-2.0.x.
+
 2003-11-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextbuffer.c (txt_get_text, txt_get_slice): fix memory
