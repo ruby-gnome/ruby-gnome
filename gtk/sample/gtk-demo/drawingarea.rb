@@ -16,7 +16,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: drawingarea.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+  $Id: drawingarea.rb,v 1.4 2005/02/01 17:26:06 mutoh Exp $
 =end
 
 require 'common'
@@ -214,7 +214,7 @@ module Demo
       # we avoid getting a huge number of events faster than we
       # can cope.
       
-      x, y, state = event.window.pointer
+      win, x, y, state = event.window.pointer
 
       if (state & Gdk::Window::BUTTON1_MASK) != 0
 	draw_brush(widget, x, y)

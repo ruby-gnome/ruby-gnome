@@ -1,3 +1,7 @@
+2005-02-02  Joao Pedrosa  <joaopedrosa@gmail.com>
+
+	* sample/gtk-demo/drawingarea.rb: Fixed a bug.
+
 2005-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkevent.c: Added Gdk::EventOwnerChange for GTK+-2.6.
