@@ -1,14 +1,19 @@
+2004-03-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Check png.h and jpeglib.h.
+	* README: Modified.
+
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: remove nasty hack by using Dir.entries.
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
-                                                                                
-   * extconf.rb: Exit with 1 when the package is not found.
+
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 
 2003-03-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

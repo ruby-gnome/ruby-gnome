@@ -5,11 +5,14 @@ Ruby/Libart2 is a Ruby binding of Libart_lgpl.
 Requirements
 ------------
   Ruby: http://www.ruby-lang.org/
+  Ruby/GLib2: http://ruby-gnome2.sourceforge.net/ (mkmf-gnome2.rb only)
   Libart_lgpl: http://www.levien.com/libart/
+  libpng http://www.libpng.org/pub/png/
+  libjpeg
 
 Install
 -------
-   0. install ruby-1.6.x and libart_lgpl.
+   0. install ruby-1.6.x and libart_lgpl, libpng, libjpeg, Ruby/GLib2.
    1. ruby extconf.rb
    2. make
    3. su
@@ -17,7 +20,7 @@ Install
 
 Copying
 -------
-    Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+    Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
 
     This program is free software.
     You can distribute/modify this program under the terms of

@@ -20,6 +20,14 @@ rescue
 end
 
 $libs += " -lz "
+unless have_header("png.h")
+  puts "libpng is not found."
+  exit 1
+end
+unless have_header("jpeglib.h")
+  puts "jpeglib is not found."
+  exit 1
+end
 have_library("png", "png_create_write_struct")
 have_library("jpeg", "jpeg_set_defaults")
 
