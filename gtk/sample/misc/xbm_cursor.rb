@@ -4,8 +4,8 @@
   Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2003/01/19 14:28:23 $
-  $Id: xbm_cursor.rb,v 1.3 2003/01/19 14:28:23 mutoh Exp $
+  $Date: 2003/02/10 11:40:12 $
+  $Id: xbm_cursor.rb,v 1.4 2003/02/10 11:40:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -29,8 +29,8 @@ Gtk.init
 window = Gtk::Window.new
 window.realize
 
-source = Gdk::Bitmap.create_from_data(window.window, cursor_bits, 19, 19)
-mask = Gdk::Bitmap.create_from_data(window.window, cursor_mask_bits, 19, 19)
+source = Gdk::Pixmap.create_from_data(window.window, cursor_bits, 19, 19)
+mask = Gdk::Pixmap.create_from_data(window.window, cursor_mask_bits, 19, 19)
 
 fg = Gdk::Color.new(65535, 0, 0)
 bg = Gdk::Color.new(65535, 65535, 0)

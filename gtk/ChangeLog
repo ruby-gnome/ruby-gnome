@@ -1,3 +1,7 @@
+2003-02-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/sample/misc/xbm_cursor.rb: Use Gdk::Pixmap instead of Gdk::Bitmap.
+
 2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkgc.c: Support GTK+-2.2.x.
