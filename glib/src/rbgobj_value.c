@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2003/07/17 14:28:35 $
+  $Date: 2003/08/20 16:52:57 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -71,9 +71,9 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             return str ? rb_str_new2(str) : Qnil;
         }
       case G_TYPE_ENUM:
-        return UINT2NUM(g_value_get_enum(value));
+        return rbgobj_make_enum(g_value_get_enum(value), G_VALUE_TYPE(value));
       case G_TYPE_FLAGS:
-        return UINT2NUM(g_value_get_flags(value));        
+        return rbgobj_make_flags(g_value_get_flags(value), G_VALUE_TYPE(value));
       case G_TYPE_OBJECT:
       case G_TYPE_INTERFACE:
         {
@@ -150,10 +150,10 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         g_value_set_uint64(result, rbglib_num_to_uint64(val));
         return;
       case G_TYPE_ENUM:
-        g_value_set_enum(result, NUM2UINT(val));
+        g_value_set_enum(result, rbgobj_get_enum(val, G_VALUE_TYPE(result)));
         return;
       case G_TYPE_FLAGS:
-        g_value_set_flags(result, NUM2UINT(val));
+        g_value_set_flags(result, rbgobj_get_flags(val, G_VALUE_TYPE(result)));
         return;
       case G_TYPE_FLOAT:
         g_value_set_float(result, NUM2DBL(val));

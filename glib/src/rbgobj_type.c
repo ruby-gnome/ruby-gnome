@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/08/16 05:39:43 $
+  $Date: 2003/08/20 16:52:57 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -92,10 +92,8 @@ rbgobj_lookup_class_by_gtype(gtype)
           case G_TYPE_BOXED:
           case G_TYPE_PARAM:
           case G_TYPE_OBJECT:
-#if 0
           case G_TYPE_ENUM:
           case G_TYPE_FLAGS:
-#endif
             cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
                                       get_superclass(gtype));
             break;
@@ -106,12 +104,6 @@ rbgobj_lookup_class_by_gtype(gtype)
             if (gtype != G_TYPE_INTERFACE)
                 rb_include_module(cinfo->klass, GTYPE2CLASS(G_TYPE_INTERFACE));
             break;
-
-          case G_TYPE_ENUM:
-          case G_TYPE_FLAGS:
-            cinfo->klass = rb_cInteger;
-            rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
-            return cinfo;
 
           default:
             /* we should raise exception? */
@@ -151,6 +143,10 @@ rbgobj_lookup_class_by_gtype(gtype)
             g_free(interfaces);
 
             rbgobj_define_property_accessors(cinfo->klass);
+        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
+            rbgobj_init_enum_class(cinfo->klass);
+        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {
+            rbgobj_init_flags_class(cinfo->klass);
         }
 
         if (gclass)

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/08/16 05:39:43 $
+  $Date: 2003/08/20 16:52:57 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -153,6 +153,10 @@ extern void rbgobj_boxed_unref(VALUE obj, VALUE other);
 /* rbgobj_enum.c */
 extern void rbgobj_constant_remap(const char *original, const char *replacement);
 extern void rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix);
+extern VALUE rbgobj_make_enum(gint n, GType gtype);
+extern gint rbgobj_get_enum(VALUE obj, GType gtype);
+extern VALUE rbgobj_make_flags(guint n, GType gtype);
+extern guint rbgobj_get_flags(VALUE obj, GType gtype);
 
 #ifdef __cplusplus
 }

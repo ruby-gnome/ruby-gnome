@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2003/07/22 04:02:22 $
+   $Date: 2003/08/20 16:52:57 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
 ************************************************/
@@ -47,6 +47,10 @@ extern GObject* rbgobj_get_gobject(VALUE obj);
 
 extern VALUE rbgobj_get_value_from_gobject(GObject* gobj);
 extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec);
+
+extern void rbgobj_init_flags_class(VALUE klass);
+extern void rbgobj_init_enum_class(VALUE klass);
+
 
 #ifndef HAVE_OBJECT_ALLOCATE
 VALUE rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self);

@@ -25,6 +25,10 @@ EXPORTS
 	rbgobj_lookup_class_by_gtype
 	rbgobj_ptr2cptr
 	rbgobj_ptr_new
+	rbgobj_make_enum
+	rbgobj_get_enum
+	rbgobj_make_flags
+	rbgobj_get_flags
 	rbgobj_register_g2r_func
 	rbgobj_register_r2g_func
 	rbgobj_register_property_getter
