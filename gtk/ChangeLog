@@ -1,5 +1,7 @@
 2004-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* extconf.rb:  Remove src/rbgtkinits.c, rbgdkkeysyms.h when 
+	run "make distclean".
 	* src/rbgtkwindow.c: Add Gtk::Window#fullscreen, #unfullscreen. 
 
 2004-03-10  Masao Mutoh  <mutoh@highway.ne.jp>

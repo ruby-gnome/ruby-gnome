@@ -83,9 +83,11 @@ begin
     end
     $objs << "rbgtkinits.o"
 
-    
     set_output_lib('libruby-gtk2.a')
     $defs << "-DRUBY_GTK2_COMPILATION"
+
+    $distcleanfiles += ["rbgdkkeysyms.h", "rbgtkinits.c"]
+
     create_makefile("gtk2", src_dir)
     $defs.delete("-DRUBY_GTK2_COMPILATION")
     raise Interrupt if not FileTest.exist? "Makefile"
@@ -113,9 +115,6 @@ begin
 
 rbgtkinits.c:;	   $(RUBY) $(srcdir)/makeinits.rb $(srcdir)/*.c > $@
 rbgdkkeysyms.h:;	$(RUBY) $(srcdir)/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
-
-allclean: clean
-	rm -rf rbgdkkeysyms* *.a rbgtkinits*
 "
     mfile.close
   ensure
