@@ -2,7 +2,8 @@
 
 	* src/rbatknoopobjectfactory.c: Fix a wrong definition. 
 	* src/rbatkimage.c, src/rbatkhypertext.c, rbatkhyperlink.c, 
-	rbatkeditabletext.c, rbatkimplementor.c, rbatkobject.c: Added. 
+	rbatkeditabletext.c, rbatkimplementor.c, rbatkobject.c,
+	rbatkrelation.c, rbatkregistry.c, rbatkobjectfactory.c: Added. 
 
 2003-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
