@@ -44,7 +44,7 @@ gp_job_render(VALUE self, VALUE context)
                                                   GP_CONTEXT(context)));
 }
 
-/* pageops: wether you want to send begingpage/showpage to output */
+/* pageops: whether you want to send begingpage/showpage to output */
 static VALUE
 gp_job_render_page(VALUE self, VALUE context, VALUE page, VALUE pageops)
 {

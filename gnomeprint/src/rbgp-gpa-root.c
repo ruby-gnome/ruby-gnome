@@ -50,7 +50,7 @@ Init_gnome_print_gpa_root(VALUE mGnome, VALUE mGP)
   rb_define_module_function(mGPA, "printers", gp_gpa_get_printers, 0);
   
 
-  cPrinter = rb_define_class_under(mGPA, "Printer", rb_cObject);
+  cPrinter = rb_define_class_under(mGnome, "PrintPrinter", rb_cObject);
 
   rb_define_method(cPrinter, "initialize", printer_initialize, 2);
 

@@ -1,5 +1,14 @@
 2004-10-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gpa-root.c: Gnome::PrintGPA::Printer ->
+	  Gnome::PrintPrinter.
+
+	* src/rbgp-gnome-print-unit.c: handled base as GnomePrintUnitBase
+	  not as integer.
+
+	* src/rbgp-gnome-print-unit.c (PrintUnit#convert_*): added error
+	  handling.
+
 	* src/rbgp-utils.c: ADDED: utilities for handing error.
 
 	* src/rbgp-gnome-print.c: added error handling.

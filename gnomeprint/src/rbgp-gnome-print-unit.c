@@ -5,12 +5,14 @@
 #define RVAL2GPU(obj) ((GnomePrintUnit *)RVAL2BOXED(obj, GNOME_TYPE_PRINT_UNIT))
 #define GPU2RVAL(obj) (BOXED2RVAL(obj, GNOME_TYPE_PRINT_UNIT))
 #define CONST_GPU2RVAL(obj) (GPU2RVAL((GnomePrintUnit *)obj))
+#define RVAL2GPUB(obj) (RVAL2GFLAGS(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
+#define GPUB2RVAL(obj) (GFLAGS2RVAL(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
 
 
 static VALUE
 gp_unit_get_identity(VALUE self, VALUE base)
 {
-  return CONST_GPU2RVAL(gnome_print_unit_get_identity(NUM2INT(base)));
+  return CONST_GPU2RVAL(gnome_print_unit_get_identity(RVAL2GPUB(base)));
 }
 
 static VALUE
@@ -35,7 +37,7 @@ static VALUE
 gp_unit_get_list(VALUE self, VALUE bases)
 {
   VALUE array;
-  GList *list = gnome_print_unit_get_list(NUM2INT(bases));
+  GList *list = gnome_print_unit_get_list(RVAL2GPUB(bases));
   array = GLIST2ARY2(list, GNOME_TYPE_PRINT_UNIT);
   gnome_print_unit_free_list(list);
   return array;
@@ -51,7 +53,7 @@ gp_unit_get_version(VALUE self)
 static VALUE
 gp_unit_get_base(VALUE self)
 {
-  return INT2NUM(RVAL2GPU(self)->base);
+  return GPUB2RVAL(RVAL2GPU(self)->base);
 }
 
 static VALUE
@@ -91,12 +93,19 @@ gp_convert_distance(VALUE self, VALUE distance, VALUE to)
 {
   gboolean ret;
   gdouble dist = NUM2DBL(distance);
+  VALUE result;
   
   ret = gnome_print_convert_distance(&dist,
                                      RVAL2GPU(self),
                                      RVAL2GPU(to));
+
+  if (ret) {
+    result = rb_float_new(dist);
+  } else {
+    result = Qnil;
+  }
   
-  return rb_float_new(dist);
+  return result;
 }
 
 static VALUE
@@ -105,6 +114,7 @@ gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
 {
   gboolean ret;
   gdouble dist = NUM2DBL(distance);
+  VALUE result;
   
   ret = gnome_print_convert_distance_full(&dist,
                                           RVAL2GPU(self),
@@ -112,7 +122,13 @@ gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
                                           NUM2DBL(ctmscale),
                                           NUM2DBL(devicescale));
 
-  return rb_float_new(dist);
+  if (ret) {
+    result = rb_float_new(dist);
+  } else {
+    result = Qnil;
+  }
+  
+  return result;
 }
 
 
@@ -131,7 +147,7 @@ Init_gnome_print_unit(VALUE mGnome, VALUE mGP)
                   rb_funcall(cBase,
                              rb_intern("new"),
                              1,
-                             INT2NUM(GNOME_PRINT_UNITS_ALL)));
+                             GPUB2RVAL(GNOME_PRINT_UNITS_ALL)));
 
   rb_define_method(cUnit, "version", gp_unit_get_version, 0);
   rb_define_method(cUnit, "base", gp_unit_get_base, 0);
