@@ -1,3 +1,11 @@
+2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
+
+	* src/rbgconf.c: Removed a redundant comment.
+	* src/rbgconf-entry.c: Changed is_default? to default? and
+	set_is_default to set_default.
+	* extconf.rb: Added a check to compile glib2 before gconf2.
+	* lib/gconf2.rb: New file.
+
 2002-11-12  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*: initial upload.
