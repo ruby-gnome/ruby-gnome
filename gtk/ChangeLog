@@ -1,3 +1,12 @@
+Thu Jun 13 01:25:29 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * src/rbgdkwindow.c: Add Gdk::Window#propery_get, #propery_delete.
+	But they are not implemented yet. 
+
+Tue Jun 11 00:17:22 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * src/rbgdkwindow.c: code cleanup in gdkwin_prop_change().
+
 Mon Jun 10 19:32:31 2002 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
    * lib/gtk2.rb: File added

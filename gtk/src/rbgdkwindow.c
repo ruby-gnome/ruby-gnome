@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/09 14:30:00 $
+  $Date: 2002/06/12 16:28:54 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -300,68 +300,142 @@ static VALUE
 gdkwin_prop_change(self, property, type, mode, src)
     VALUE self, property, type, mode, src;
 {
-  GdkWindow*	w;
-  int           f, l;
-  GdkAtom	p, t;
-  void*		d;
+  int        fmt, len, i;
+  Atom       atom;
+  void*      dat;
+  GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
+  GdkAtom    otype, ntype;
 
-  w = get_gdkwindow(self);
+  otype = ntype = get_gdkatom(type);
 
-  p = get_gdkatom(property);
-  t = get_gdkatom(type);
+/* They are not available in Ruby/GTK 2
+  if(ntype == GDK_SELECTION_TYPE_ATOM){
+    len = RARRAY(src)->len;
 
-  if(t == GDK_SELECTION_TYPE_ATOM){
-    static Atom x;
-    x = get_gdkatom(src);
-    d = &x;
-    f = 32;
-    l = 1;
+    dat = (Atom*)ALLOC_N(Atom, len);
 
-  } else if(t == GDK_SELECTION_TYPE_BITMAP){
-    static Pixmap x;
-    x = ((GdkPixmapPrivate*)get_gdkbitmap(src))->xwindow;
-    d = (void*)&x;
-    f = 32;
-    l = 1;
+    for(i = 0; i < len; i++){
+        ((Atom*)dat)[i] = get_gdkatom(rb_ary_entry(src, i));
+    }
+    fmt = 32;
+
+  } else if(ntype == GDK_SELECTION_TYPE_BITMAP){
+    dat = (void*)&(((GdkPixmapPrivate*)get_gdkbitmap(src))->xwindow);
+    fmt = 32;
+    len = 1;
   
-  } else if(t == GDK_SELECTION_TYPE_COLORMAP){
-    static Colormap x;
-    x = ((GdkColormapPrivate*)get_gdkcolormap(src))->xcolormap;
-    d = (void*)&x;
-    f = 32;
-    l = 1;
+  } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
+    dat = (void*)&(((GdkColormapPrivate*)get_gdkcolormap(src))->xcolormap);
+    fmt = 32;
+    len = 1;
+  } else if(ntype == GDK_SELECTION_TYPE_INTEGER){
+*/
+  if(ntype == GDK_SELECTION_TYPE_INTEGER){
+    i = NUM2INT(src);
+    dat = (void*)&i;
+    fmt = 32;
+    len = 1;
+/*
+  } else if(ntype == GDK_SELECTION_TYPE_PIXMAP){
+    dat = (void*)&(((GdkPixmapPrivate*)get_gdkpixmap(src))->xwindow);
+    fmt = 32;
+    len = 1;
   
-  } else if(t == GDK_SELECTION_TYPE_INTEGER){
-    static int x;
-    x = NUM2INT(src);
-    d = (void*)&x;
-    f = 32;
-    l = 1;
-  
-  } else if(t == GDK_SELECTION_TYPE_PIXMAP){
-    static Pixmap x;
-    x = ((GdkPixmapPrivate*)get_gdkpixmap(src))->xwindow;
-    d = (void*)&x;
-    f = 32;
-    l = 1;
-  
-  } else if(t == GDK_SELECTION_TYPE_WINDOW||t == GDK_SELECTION_TYPE_DRAWABLE){
-    static Window x;
-    x = ((GdkPixmapPrivate*)get_gdkwindow(src))->xwindow;
-    d = (void*)&x;
-    f = 32;
-    l = 1;
+  } else if(ntype == GDK_SELECTION_TYPE_WINDOW||
+	     ntype == GDK_SELECTION_TYPE_DRAWABLE){
+    dat = (void*)&(((GdkPixmapPrivate*)get_gdkwindow(src))->xwindow);
+    fmt = 32;
+    len = 1;
+*/
+  } else if(ntype == GDK_SELECTION_TYPE_STRING) {
+    dat = RSTRING(src)->ptr;
+    fmt = 8;
+    len = RSTRING(src)->len;
 
-  } else  if(t == GDK_SELECTION_TYPE_STRING || t == gdk_atom_intern("COMPOUND_TEXT", FALSE)){
-    d = (void*)RSTRING(src)->ptr;
-    f = 8;
-    l = RSTRING(src)->len;
+  } else if(ntype == compound_text){
+	  gdk_string_to_compound_text(RSTRING(src)->ptr,
+				&ntype, &fmt, (guchar**)&dat, &len);
 
   } else {
-    rb_raise(rb_eArgError, "no supperted type.");
+	  rb_raise(rb_eArgError, "no supperted type.");
   }
 
-  gdk_property_change(w, p, t, f, NUM2INT(mode), d, l);
+  gdk_property_change(get_gdkwindow(self),
+		 get_gdkatom(property), ntype, fmt, NUM2INT(mode), dat, len);
+
+  if(otype == GDK_SELECTION_TYPE_ATOM) {
+	  xfree(dat);
+  } else if(otype == compound_text) {
+	  gdk_free_compound_text(dat);
+  }
+
+  return self;
+}
+
+static VALUE
+gdkwin_prop_get(self, property, type, offset, length, delete)
+    VALUE self, property, type, offset, length, delete;
+{
+  /* for argument processing */
+  GdkWindow*    w;
+  GdkAtom       p, t;
+  gulong        o, l;
+  gint          d;
+  GdkAtom       rtype;
+  gint          rfmt, rlen;
+  void*		rdat;
+
+  /* for inner processing */
+  int		i;
+  VALUE		ret;
+
+  if(gdk_property_get(get_gdkwindow(self), get_gdkatom(property),
+       get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
+       RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
+    return Qnil;
+  }
+
+  switch(rfmt){
+  case 8:
+  default:
+    ret = rb_str_new(rdat, rlen);
+    break;
+
+  case 16:
+    ret = rb_ary_new();
+
+    for( i = 0; i < rlen; i++){
+        rb_ary_push(ret, rb_Integer(((unsigned short*)rdat)[i]));
+    }
+    break;
+
+  case 32:
+/*
+    ret = rb_ary_new();
+
+    if(rtype != GDK_SELECTION_TYPE_ATOM){
+        for(i = 0; i < rlen; i++){
+            rb_ary_push(ret, INT2FIX(((unsigned long *)rdat)[i]));
+        }
+    } else {
+        for(i = 0; i < rlen; i++){
+            rb_ary_push(ret, make_gdkatom((GdkAtom)(unsigned long *)rdat[i]));
+        }
+    }
+*/
+	rb_warning("not implemented yet.");
+    break;
+  }
+
+  return rb_ary_new3(3, make_gdkatom(rtype), ret, rb_Integer(rlen));
+}
+
+static VALUE
+gdkwin_prop_delete(self, property)
+    VALUE self, property;
+{
+  gdk_property_delete(get_gdkwindow(self), get_gdkatom(property));
+  return self;
 }
 
 VALUE gdkWindowAttr;
@@ -407,6 +481,8 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "get_geometry", gdkwin_get_geometry, 0);
 
     rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, 4);
+    rb_define_method(gdkWindow, "property_get", gdkwin_prop_get, 5);
+    rb_define_method(gdkWindow, "property_delete", gdkwin_prop_delete, 1);
 
     /* GdkWindowHints */
     rb_define_const(gdkWindow, "HINT_POS", INT2FIX(GDK_HINT_POS));

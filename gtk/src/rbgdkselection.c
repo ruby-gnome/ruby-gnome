@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/06/12 16:28:54 $
 
   Copyright (C) 2002 MUTOH Masao
 ************************************************/
@@ -58,9 +58,13 @@ static VALUE
 gdkselection_send_notify(self, requestor, selection, target, property, time)
     VALUE self, requestor, selection, target, property, time;
 {
-    gdk_selection_send_notify(NUM2INT(requestor), get_gdkatom(selection),
-                            get_gdkatom(target), get_gdkatom(property),
-                            NUM2INT(time));
+    if( property == Qnil){
+        gdk_selection_send_notify(NUM2INT(requestor), get_gdkatom(selection),
+				  get_gdkatom(target), GDK_NONE, NUM2INT(time));
+    } else {
+        gdk_selection_send_notify(NUM2INT(requestor), get_gdkatom(selection),
+				  get_gdkatom(target), get_gdkatom(property), NUM2INT(time));
+    }
     return Qnil;
 }
 
@@ -74,26 +78,4 @@ Init_gtk_gdk_selection()
     rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
     rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
     rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, 5);
-
-    /* GdkSelection */
-    rb_define_const(mGdkSelection, "PRIMARY", make_gdkatom(GDK_SELECTION_PRIMARY));
-    rb_define_const(mGdkSelection, "SECONDARY", make_gdkatom(GDK_SELECTION_SECONDARY));
-
-    /* GdkSelectionType */
-    rb_define_const(mGdkSelection, "TYPE_ATOM", make_gdkatom(GDK_SELECTION_TYPE_ATOM));
-    rb_define_const(mGdkSelection, "TYPE_BITMAP", make_gdkatom(GDK_SELECTION_TYPE_BITMAP));
-    rb_define_const(mGdkSelection, "TYPE_COLORMAP", make_gdkatom(GDK_SELECTION_TYPE_COLORMAP));
-    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", make_gdkatom(GDK_SELECTION_TYPE_DRAWABLE));
-    rb_define_const(mGdkSelection, "TYPE_INTEGER", make_gdkatom(GDK_SELECTION_TYPE_INTEGER));
-    rb_define_const(mGdkSelection, "TYPE_PIXMAP", make_gdkatom(GDK_SELECTION_TYPE_PIXMAP));
-    rb_define_const(mGdkSelection, "TYPE_WINDOW", make_gdkatom(GDK_SELECTION_TYPE_WINDOW));
-    rb_define_const(mGdkSelection, "TYPE_STRING", make_gdkatom(GDK_SELECTION_TYPE_STRING));
-
-    /* GdkTarget */
-    rb_define_const(mGdkSelection, "TARGET_BITMAP", make_gdkatom(GDK_TARGET_BITMAP));
-    rb_define_const(mGdkSelection, "TARGET_COLORMAP", make_gdkatom(GDK_TARGET_COLORMAP));
-    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", make_gdkatom(GDK_TARGET_DRAWABLE));
-    rb_define_const(mGdkSelection, "TARGET_PIXMAP", make_gdkatom(GDK_TARGET_PIXMAP));
-    rb_define_const(mGdkSelection, "TARGET_STRING", make_gdkatom(GDK_TARGET_STRING));
-
 }
