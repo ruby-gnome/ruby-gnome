@@ -1,0 +1,62 @@
+#include "rbgp.h"
+
+#define WE_ARE_LIBGNOMEPRINT_INTERNALS
+#include <libgnomeprint/private/gpa-root.h>
+
+static VALUE cPrinter;
+static ID s_name, s_description;
+
+static VALUE
+gp_gpa_get_printers(VALUE self)
+{
+  VALUE array = rb_ary_new();
+  GPANode *printers = GPA_NODE(gpa_get_printers());
+  GPANode *printer;
+
+  printer = gpa_node_get_child (printers, NULL);
+  while (printer) {
+    const guchar *id = gpa_node_id(printer);
+    guchar *name = gpa_node_get_value(printer);
+    rb_ary_push(array,
+                rb_funcall(cPrinter,
+                           rb_intern("new"),
+                           2,
+                           CSTR2RVAL(id),
+                           CSTR2RVAL2(name)));
+    printer = gpa_node_get_child(printers, printer);
+  }
+  gpa_node_unref(printers);
+  
+  return array;
+}
+
+
+static VALUE
+printer_initialize(VALUE self, VALUE name, VALUE description)
+{
+  rb_ivar_set(self, s_name, name);
+  rb_ivar_set(self, s_description, description);
+  return self;
+}
+
+
+void
+Init_gnome_print_gpa_root(VALUE mGnome, VALUE mGP)
+{
+  VALUE mGPA = rb_define_module_under(mGnome, "PrintGPA");
+  
+  gpa_init();
+
+  rb_define_module_function(mGPA, "printers", gp_gpa_get_printers, 0);
+  
+
+  cPrinter = rb_define_class_under(mGPA, "Printer", rb_cObject);
+
+  rb_define_method(cPrinter, "initialize", printer_initialize, 2);
+
+  s_name = rb_intern("@name");
+  s_description = rb_intern("@description");
+  
+  rb_define_attr(cPrinter, "name", 1, 0);
+  rb_define_attr(cPrinter, "description", 1, 0);
+}

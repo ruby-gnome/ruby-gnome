@@ -1,0 +1,21 @@
+Ruby/LibGnomePrint
+==============
+
+Ruby/LibGnomePrint is a Ruby binding of libgnomeprint. 
+
+Requirements
+------------
+
+    Ruby:               http://www.ruby-lang.org/
+    libgnomeprint [*]:  http://www.gnome.org/
+
+    [*]: 2.8 or newer is required.
+
+Install
+-------
+
+    0. install ruby and libgnomeprint. 
+    1. ruby extconf.rb
+    2. make
+    3. su
+    4. make install
