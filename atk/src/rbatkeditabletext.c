@@ -4,7 +4,7 @@
   rbatkeditabletext.c -
 
   $Author: mutoh $
-  $Date: 2003/12/07 17:18:16 $
+  $Date: 2003/12/23 15:59:28 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -78,7 +78,7 @@ rbatk_edit_delete_text(self, start_pos, end_pos)
 }
 
 static VALUE
-rbatk_edit_paste_test(self, position)
+rbatk_edit_paste_text(self, position)
     VALUE self, position;
 {
     atk_editable_text_paste_text(_SELF(self), NUM2INT(position));
@@ -96,7 +96,7 @@ Init_atk_editabletext()
    rb_define_method(editable, "copy_text", rbatk_edit_copy_text, 2);
    rb_define_method(editable, "cut_text", rbatk_edit_cut_text, 2);
    rb_define_method(editable, "delete_text", rbatk_edit_delete_text, 2);
-   rb_define_method(editable, "paste_text", rbatk_edit_paste_test, 1);
+   rb_define_method(editable, "paste_text", rbatk_edit_paste_text, 1);
 
    G_DEF_SETTERS(editable);
 }
