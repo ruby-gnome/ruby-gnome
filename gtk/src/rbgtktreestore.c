@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2003/07/11 19:39:08 $
+  $Date: 2003/11/14 07:14:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -182,6 +182,53 @@ tstore_clear(self)
     gtk_tree_store_clear(_SELF(self));
     return self;
 }
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+tstore_iter_is_valid(self, iter)
+    VALUE self, iter;
+{
+    return CBOOL2RVAL(gtk_tree_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+}
+static VALUE
+tstore_reorder(self, parent, new_order)
+    VALUE self, parent, new_order;
+{
+    gint i;
+    gint len = RARRAY(new_order)->len;
+    gint* gnew_order = g_new(gint, len);
+
+    for (i = 0; i < len; i++){
+        gnew_order[i] = RARRAY(new_order)->ptr[i];
+    }
+
+    gtk_tree_store_reorder(_SELF(self), RVAL2ITR(parent), gnew_order);
+    g_free(gnew_order);
+    return self;
+}
+static VALUE
+tstore_swap(self, iter1, iter2)
+    VALUE self, iter1, iter2;
+{
+    gtk_tree_store_swap(_SELF(self), RVAL2ITR(iter1), RVAL2ITR(iter2));
+    return self;
+}
+static VALUE
+tstore_move_before(self, iter, position)
+    VALUE self, iter, position;
+{
+    gtk_tree_store_move_before(_SELF(self), RVAL2ITR(iter), 
+                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    return self;
+}
+static VALUE
+tstore_move_after(self, iter, position)
+    VALUE self, iter, position;
+{
+    gtk_tree_store_move_after(_SELF(self), RVAL2ITR(iter), 
+                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    return self;
+}
+#endif
 
 void
 Init_gtk_tree_store()
@@ -203,6 +250,14 @@ Init_gtk_tree_store()
     rb_define_method(ts, "ancestor?", tstore_is_ancestor, 2);
     rb_define_method(ts, "iter_depth", tstore_iter_depth, 1);
     rb_define_method(ts, "clear", tstore_clear, 0);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(ts, "iter_is_valid?", tstore_iter_is_valid, 1);
+    rb_define_method(ts, "reorder", tstore_reorder, 2);
+    rb_define_method(ts, "swap", tstore_swap, 2);
+    rb_define_method(ts, "move_before", tstore_move_before, 2);
+    rb_define_method(ts, "move_after", tstore_move_after, 2);
+#endif
+
 }
 
 

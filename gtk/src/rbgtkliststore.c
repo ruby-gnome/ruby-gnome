@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Date: 2003/11/14 07:14:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -160,6 +160,54 @@ lstore_clear(self)
     return self;
 }
 
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+lstore_iter_is_valid(self, iter)
+    VALUE self, iter;
+{
+    return CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+}
+static VALUE
+lstore_reorder(self, new_order)
+    VALUE self, new_order;
+{
+    gint i;
+    gint len = RARRAY(new_order)->len;
+    gint* gnew_order = g_new(gint, len);
+
+    for (i = 0; i < len; i++){
+        gnew_order[i] = RARRAY(new_order)->ptr[i];
+    }
+
+    gtk_list_store_reorder(_SELF(self), gnew_order);
+    g_free(gnew_order);
+    return self;
+}
+static VALUE
+lstore_swap(self, iter1, iter2)
+    VALUE self, iter1, iter2;
+{
+    gtk_list_store_swap(_SELF(self), RVAL2ITR(iter1), RVAL2ITR(iter2));
+    return self;
+}
+static VALUE
+lstore_move_before(self, iter, position)
+    VALUE self, iter, position;
+{
+    gtk_list_store_move_before(_SELF(self), RVAL2ITR(iter), 
+                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    return self;
+}
+static VALUE
+lstore_move_after(self, iter, position)
+    VALUE self, iter, position;
+{
+    gtk_list_store_move_after(_SELF(self), RVAL2ITR(iter), 
+                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    return self;
+}
+#endif
+
 void
 Init_gtk_list_store()
 {
@@ -177,6 +225,14 @@ Init_gtk_list_store()
     rb_define_method(ls, "prepend", lstore_prepend, 0);
     rb_define_method(ls, "append", lstore_append, 0);
     rb_define_method(ls, "clear", lstore_clear, 0);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_method(ls, "iter_is_valid?", lstore_iter_is_valid, 1);
+    rb_define_method(ls, "reorder", lstore_reorder, 1);
+    rb_define_method(ls, "swap", lstore_swap, 2);
+    rb_define_method(ls, "move_before", lstore_move_before, 2);
+    rb_define_method(ls, "move_after", lstore_move_after, 2);
+#endif
+
 }
 
 
