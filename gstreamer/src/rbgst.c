@@ -35,6 +35,7 @@ static void Init_gst_classes(void) {
     extern void Init_gst_bin(void);
     extern void Init_gst_caps(void);
     extern void Init_gst_clock(void);
+    extern void Init_gst_clock_entry(void);
     extern void Init_gst_cpu(void);
     extern void Init_gst_element(void);
     extern void Init_gst_elementfactory(void);
@@ -70,6 +71,7 @@ static void Init_gst_classes(void) {
     Init_gst_bin();
     Init_gst_caps();
     Init_gst_clock();
+    Init_gst_clock_entry();
     Init_gst_cpu();
     Init_gst_element();
     Init_gst_elementfactory();
