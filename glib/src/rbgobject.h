@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:43:11 $
+  $Date: 2002/08/05 16:16:34 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -51,8 +51,6 @@ typedef struct {
 /* rbgobject.c */
 extern ID id_relatives;
 extern ID id_relative_callbacks;
-extern ID id_delete;
-extern ID id_class_info;
 
 extern GObject* rbgobj_get_gobject(VALUE obj);
 extern void rbgobj_initialize_gobject(VALUE obj, GObject* gobj);
@@ -73,7 +71,6 @@ extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
 extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
                                  void* mark, void* free); 
 
-extern VALUE rbgobj_cGObject;
 extern VALUE rbgobj_cParamSpec;
 extern VALUE rbgobj_cBoxed;
 
@@ -98,9 +95,6 @@ extern VALUE rbgobj_boxed_class(GType gtype);
 extern GType rbgobj_boxed_class_gtype(VALUE klass);
 extern gpointer rbgobj_boxed_get(VALUE obj);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
-
-/* rbgobj_signal.c */
-extern VALUE gobj_sig_connect(int argc, VALUE* argv, VALUE self);
 
 #ifdef __cplusplus
 }

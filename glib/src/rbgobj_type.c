@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:39:48 $
+  $Date: 2002/08/05 16:16:34 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -15,6 +15,7 @@
 #include "st.h"
 
 static ID id_new;
+static ID id_class_info;
 static VALUE gtype_to_cinfo;
 
 static void
@@ -102,6 +103,7 @@ void Init_gobject_gtype()
 {
     g_type_init();
     id_new = rb_intern("new");
+    id_class_info = rb_intern("__gobject_class_info__");
     rb_global_variable(&gtype_to_cinfo);
     gtype_to_cinfo = rb_hash_new();    
 }

@@ -1,21 +1,27 @@
+2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+ 
+	* src/rbgobject.h: remove declaration of id_class_info and id_delete
+	* src/rbgobject.h, src/rbgobj_object.c, src/rbgobj_signal.c:
+	remove global variable rbgobj_cGObject.
+
 2002-08-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
-	* glib/src/rbglib.[ch]: fix mGLib declaration and definition
+	* src/rbglib.[ch]: fix mGLib declaration and definition
 
 2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
-	* glib/src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
 	enable calling of rbgobj_define_property_accessors() and
 	rbgobj_define_signal_constants().
 
 2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
-	* glib/src/rbgobj_type.c: abolish rbgobj_register_class()
-	* glib/src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	* src/rbgobj_type.c: abolish rbgobj_register_class()
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
 	now this function create a new class on demand.
-	* glib/src/rbgobj_type.c: abolish rbgobj_lookup_rbclass()
-	* glib/src/rbgobject.c: fix typo
-	* glib/src/rbgobject.c: add rbgobj_define_signal_constants()
+	* src/rbgobj_type.c: abolish rbgobj_lookup_rbclass()
+	* src/rbgobject.c: fix typo
+	* src/rbgobject.c: add rbgobj_define_signal_constants()
 	which define constants for signal names.
 
 2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:43:10 $
+  $Date: 2002/08/05 16:16:33 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -237,31 +237,31 @@ _gobject_from_ruby(VALUE from, GValue* to)
 void 
 Init_gobject_gobject()
 {
-    rbgobj_cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "GObject", mGLib);
+    VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "GObject", mGLib);
 
-    rbgobj_register_r2g_func(rbgobj_cGObject, _gobject_from_ruby);
+    rbgobj_register_r2g_func(cGObject, _gobject_from_ruby);
     rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
 
 #ifdef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(rbgobj_cGObject, "allocate", &gobj_s_allocate, 0);
+    rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
 #else
-    rb_define_singleton_method(rbgobj_cGObject, "new", &gobj_s_new, -1);
+    rb_define_singleton_method(cGObject, "new", &gobj_s_new, -1);
 #endif
 
-    rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_s_gobject_new, 2);
-    rb_define_method(rbgobj_cGObject, "set_property", gobj_set_property, 2);
-    rb_define_method(rbgobj_cGObject, "get_property", gobj_get_property, 1);
-    rb_define_alias(rbgobj_cGObject, "property", "get_property");
-    rb_define_method(rbgobj_cGObject, "freeze_notify", gobj_freeze_notify, 0);
-    rb_define_method(rbgobj_cGObject, "notify", gobj_notify, 1);
-    rb_define_method(rbgobj_cGObject, "thaw_notify", gobj_thaw_notify, 0);
+    rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, 2);
+    rb_define_method(cGObject, "set_property", gobj_set_property, 2);
+    rb_define_method(cGObject, "get_property", gobj_get_property, 1);
+    rb_define_alias(cGObject, "property", "get_property");
+    rb_define_method(cGObject, "freeze_notify", gobj_freeze_notify, 0);
+    rb_define_method(cGObject, "notify", gobj_notify, 1);
+    rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
 
-    rb_define_method(rbgobj_cGObject, "initialize", gobj_initialize, -1);
-    rb_define_method(rbgobj_cGObject, "g_type", gobj_get_g_type, 0);
-    rb_define_method(rbgobj_cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
-    rb_define_method(rbgobj_cGObject, "inspect", gobj_inspect, 0);
-    rb_define_method(rbgobj_cGObject, "clone", gobj_clone, 0);
+    rb_define_method(cGObject, "initialize", gobj_initialize, -1);
+    rb_define_method(cGObject, "g_type", gobj_get_g_type, 0);
+    rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
+    rb_define_method(cGObject, "inspect", gobj_inspect, 0);
+    rb_define_method(cGObject, "clone", gobj_clone, 0);
 
-    rb_define_method(rbgobj_cGObject, "singleton_method_added", gobj_smethod_added, 1);
+    rb_define_method(cGObject, "singleton_method_added", gobj_smethod_added, 1);
 }
 

@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:43:11 $
+  $Date: 2002/08/05 16:16:34 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -25,7 +25,7 @@ static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 
 ID id_relatives;
 ID id_relative_callbacks;
-ID id_delete;
+static ID id_delete;
 ID id_class_info;
 
 /**********************************************************************/
@@ -371,7 +371,6 @@ Init_gobject()
     /* IDs */
     id_relatives = rb_intern("__relatives__");
     id_relative_callbacks = rb_intern("__relative_callbacks__");
-    id_class_info = rb_intern("__gobject_class_info__");
     id_delete = rb_intern("delete");
 
     Init_gobject_gtype();
