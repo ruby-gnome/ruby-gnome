@@ -48,7 +48,7 @@ begin
     $objs = $source_files.collect do |item|
       item.gsub(/\.c$/, obj_ext)
     end
-    $objs << "rbbonoboinits#{obj_ext}"
+    add_obj("rbbonoboinits#{obj_ext}")
 
     #
     # create Makefiles

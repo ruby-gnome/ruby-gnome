@@ -81,7 +81,7 @@ begin
     $objs = $source_files.collect do |item|
       item.gsub(/\.c$/, obj_ext)
     end
-    $objs << "rbgtkinits.o"
+    add_obj("rbgtkinits.o")
 
     set_output_lib('libruby-gtk2.a')
     $defs << "-DRUBY_GTK2_COMPILATION"

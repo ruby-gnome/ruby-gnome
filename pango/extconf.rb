@@ -40,9 +40,9 @@ begin
   Dir.glob("#{srcdir}/*.c") do |f|
     f = File.basename(f)
     f.sub!(/.c$/, ".o")
-    add_uniq_to_objs(f)
+    add_obj(f)
   end
-  add_uniq_to_objs("rbpangoinits.o")
+  add_obj("rbpangoinits.o")
 
   $defs << "-DRUBY_PANGO_COMPILATION"
   create_makefile("pango", srcdir)

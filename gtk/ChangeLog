@@ -1,3 +1,7 @@
+2004-10-17  Vincent Isambart <isambart@netcourrier.com>
+
+	* extconf.rb: Replaced "$objs <<" with add_obj.
+
 2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/gtk2.rb: Improved log handling.

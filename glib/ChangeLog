@@ -1,5 +1,9 @@
 2004-10-17  Vincent Isambart <isambart@netcourrier.com>
 
+	* src/lib/mkmf-gnome2.rb: Renamed add_uniq_to_objs to add_obj.
+
+2004-10-17  Vincent Isambart <isambart@netcourrier.com>
+
 	* src/lib/mkmf-gnome2.rb: Added the add_uniq_to_objs function.
 
 2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>

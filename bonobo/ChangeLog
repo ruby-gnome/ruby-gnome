@@ -1,3 +1,7 @@
+2004-10-17  Vincent Isambart <isambart@netcourrier.com>
+
+	* extconf.rb: Replaced "$objs <<" with add_obj.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
    * extconf.rb: Exit with 1 when the package is not found.
