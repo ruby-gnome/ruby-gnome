@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2003/05/20 17:12:02 $
+  $Author: sakai $
+  $Date: 2003/07/20 05:04:26 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -59,6 +59,9 @@ extern "C" {
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
+
+#define G_DEF_CONSTANTS(mod, type, strip_prefix) \
+	rbgobj_add_constants(mod, type, strip_prefix)
 
 typedef enum
 {
@@ -142,6 +145,8 @@ extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
 
+/* rbgobj_enum.c */
+extern void rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix);
 
 #ifdef __cplusplus
 }

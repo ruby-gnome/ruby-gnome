@@ -1,3 +1,8 @@
+2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h, src/rbgobj_enum.c, src/glib2.def: add new function
+	rbgobj_add_constants() and new macro G_DEF_CONSTANTS().
+
 2003-07-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (signal_add_emission_hook): fix to treat `detail'

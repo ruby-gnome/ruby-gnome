@@ -30,6 +30,7 @@ EXPORTS
 	rbgobj_register_property_getter
 	rbgobj_register_property_setter
 	rbgobj_set_signal_func
+	rbgobj_add_constants
 	rbgobj_signal_wrap
 	g_rclosure_new
 	rbgobj_ruby_value_get_type
