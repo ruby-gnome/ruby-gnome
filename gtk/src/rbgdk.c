@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/09 14:51:43 $
+  $Author: sakai $
+  $Date: 2003/08/20 13:06:43 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -238,6 +238,13 @@ gdk_s_windowing_fb(self)
 #endif
 }
 
+static VALUE
+gdk_m_target(self)
+    VALUE self;
+{
+    return rb_str_new2(RUBY_GTK2_TARGET);
+}
+
 void
 Init_gtk_gdk()
 {
@@ -262,6 +269,8 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "windowing_x11?", gdk_s_windowing_x11, 0);
     rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
     rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);
+
+    rb_define_module_function(mGdk, "target", gdk_m_target, 0);
     
     /* GdkGrabStatus */
     G_DEF_CONSTANTS(mGdk, GDK_TYPE_GRAB_STATUS, "GDK_");

@@ -1,5 +1,10 @@
 2003-08-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
-	
+
+	* extconf.rb: check Xlib features only if gdk target is x11.
+
+	* src/rbgdk.c: new module function Gdk.target which returns gdk
+	target as a string.
+
 	* src/rbgdkevent.c: use G_DEF_CONSTANTS() for
 	GDK_TYPE_SCROLL_DIRECTION, GDK_TYPE_VISIBILITY_STATE,
 	GDK_TYPE_CROSSING_MODE, GDK_TYPE_NOTIFY_TYPE, GDK_TYPE_PROPERTY_STATE

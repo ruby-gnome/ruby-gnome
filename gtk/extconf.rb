@@ -15,6 +15,12 @@ pkgname= 'gtk+-2.0'
 PKGConfig.have_package(pkgname) or exit
 check_win32
 
+STDOUT.print("checking for target... ")
+STDOUT.flush
+target = PKGConfig.variable(pkgname, "target")
+$defs << "-DRUBY_GTK2_TARGET=\\\"#{target}\\\""
+STDOUT.print(target, "\n")
+
 #
 # detect location of GDK include files
 #
@@ -32,9 +38,11 @@ raise "can't find gdkkeysyms.h" if gdkincl.nil?
 
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
-have_func("XReadBitmapFileData")
-have_header('X11/Xlib.h')
-have_func("XGetErrorText")
+if target=="x11"
+  have_func("XReadBitmapFileData")
+  have_header('X11/Xlib.h')
+  have_func("XGetErrorText")
+end
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src', 'pango/src'].map{|d|
