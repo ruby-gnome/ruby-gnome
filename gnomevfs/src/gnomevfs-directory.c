@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-08-04
+ * Latest Revision: 2003-08-05
  *
  *****************************************************************************/
 
@@ -213,15 +213,7 @@ directory_visit_files(argc, argv, self)
 	}
 	G_RELATIVE(self, func);
 
-	Check_Type(r_list, T_ARRAY);
-	n = RARRAY(r_list)->len;
-	for (i = 0; i < n; i++) {
-		VALUE s;
-
-		s = rb_ary_entry(r_list, i);
-		Check_Type(s, T_STRING);
-		list = g_list_append(list, RVAL2CSTR(s));
-	}
+	list = STRARY2GLIST(r_list);
 
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_directory_visit_files_at_uri(

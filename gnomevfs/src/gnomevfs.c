@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-27
+ * Latest Revision: 2003-08-05
  *
  *****************************************************************************/
 
@@ -37,6 +37,39 @@
 /* Global Variables **********************************************************/
 
 /* Function Implementations **************************************************/
+
+GList *
+strary2glist(ary)
+	VALUE ary;
+{
+	GList *list = NULL;
+	VALUE str;
+	int i = 0;
+
+	Check_Type(ary, T_ARRAY);
+	for (i = 0; i < RARRAY(ary)->len; i++) {
+		str = rb_ary_entry(ary, i);
+		Check_Type(str, T_STRING);
+		list = g_list_append(list, RVAL2CSTR(str));
+	}
+
+	return list;
+}
+
+static VALUE
+glist2strary(self, list)
+	GList *list;
+{
+	VALUE ary;
+	
+	ary = rb_ary_new();
+	while (list) {
+		rb_ary_push(ary, CSTR2RVAL(list->data));
+		list = list->next;
+	}
+
+	return ary;
+}
 
 static VALUE
 gnomevfs_init(void)
@@ -93,6 +126,31 @@ gnomevfs_find_directory(argc, argv, self)
 	}
 }
 
+static VALUE
+gnomevfs_get_mime_type_for_data(self, data)
+	VALUE self, data, size;
+{
+	const char *data;
+	int size;
+
+	data = RVAL2CSTR(data);
+	size = strlen(data);
+	return CSTR2RVAL(gnome_vfs_get_mime_type_for_data(data, size));
+}
+
+static VALUE
+gnomevfs_get_mime_type(self, uri)
+	VALUE self, uri;
+{
+	char *mime;
+	VALUE str;
+
+	mime = gnome_vfs_get_mime_type(RVAL2CSTR(uri));
+	str = CSTR2RVAL(mime);
+	g_free(mime);
+	return str;
+}
+
 void
 Init_gnomevfs(void)
 {
@@ -106,12 +164,20 @@ Init_gnomevfs(void)
 	rb_define_module_function(m_gvfs, "shutdown", gnomevfs_shutdown, 0);
 	rb_define_module_function(m_gvfs, "find_directory",
 				  gnomevfs_find_directory, -1);
+	rb_define_module_function(m_gvfs, "get_mime_type_data",
+				  gnomevfs_get_mime_type_data, 1);
+	rb_define_module_function(m_gvfs, "get_mime_type",
+				  gnomevfs_get_mime_type, 1);
+
 	rb_define_const(m_gvfs,
 			"DIRECTORY_KIND_DESKTOP",
 			INT2FIX(GNOME_VFS_DIRECTORY_KIND_DESKTOP));
 	rb_define_const(m_gvfs,
 			"DIRECTORY_KIND_TRASH",
 			INT2FIX(GNOME_VFS_DIRECTORY_KIND_TRASH));
+	rb_define_const(m_gvfs,
+			"MIME_TYPE_UNKNOWN",
+			CSTR2RVAL(GNOME_VFS_MIME_TYPE_UNKNOWN));
 
 	Init_gnomevfs_result(m_gvfs);
 	Init_gnomevfs_uri(m_gvfs);
@@ -119,6 +185,7 @@ Init_gnomevfs(void)
 	Init_gnomevfs_directory(m_gvfs);
 	Init_gnomevfs_file(m_gvfs);
 	Init_gnomevfs_monitor(m_gvfs);
+	Init_gnomevfs_application_registry(m_gvfs);
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

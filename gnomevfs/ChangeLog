@@ -1,3 +1,14 @@
+2003-08-07  Nikolai Weibull  <lone-star@home.se>
+
+	* src/gnomevfs-mime.c,src/gnomevfs-application-registry.c,
+	src/gnomevfs-mime-application.c: New files.  These add support for the
+	mime handling parts of GnomeVFS.
+
+2003-08-04  Nikolai Weibull  <lone-star@home.se>
+
+	* src/gnomevfs-file.c,src/gnomevfs-directory.c: Added object tainting
+	and security level checking.
+
 2003-07-27  Nikolai Weibull  <lone-star@home.se>
 
 	* src/gnomevfs-file.c: Fixed a bunch of minor bugs (that prevented all
