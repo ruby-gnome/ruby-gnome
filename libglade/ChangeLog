@@ -1,3 +1,7 @@
+2002-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/treeview.glade, treeview.rb: Add a sample for Gtk::TreeView.
+
 2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* depend: Add a file to install ruby-glade-create-templete.
@@ -6,7 +10,7 @@
 
 2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* ruby-glade-create-templete: Add a file.
+	* ruby-glade-create-template: Add a file.
 
 2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
