@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -37,7 +37,7 @@ static VALUE
 gdkwin_get_window_type(self)
     VALUE self;
 {
-    return INT2FIX(gdk_window_get_window_type(_SELF(self)));
+    return GENUM2RVAL(gdk_window_get_window_type(_SELF(self)), GDK_TYPE_WINDOW_TYPE);
 }
 
 static VALUE
@@ -129,7 +129,7 @@ static VALUE
 gdkwin_get_state(self)
     VALUE self;
 {
-    return INT2FIX(gdk_window_get_state(_SELF(self)));
+    return GENUM2RVAL(gdk_window_get_state(_SELF(self)), GDK_TYPE_WINDOW_STATE);
 }
 
 /* I think it should be not implemented in Ruby
@@ -579,7 +579,7 @@ gdkwin_get_pointer(self)
     int x, y;
     GdkModifierType state;
     gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), INT2FIX((int)state));
+    return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), GENUM2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
 
 }
 
@@ -621,7 +621,7 @@ static VALUE
 gdkwin_set_events(self, mask)
     VALUE self, mask;
 {
-    gdk_window_set_events(_SELF(self), NUM2INT(mask));
+    gdk_window_set_events(_SELF(self), RVAL2GENUM(mask, GDK_TYPE_EVENT_MASK));
     return self;
 }
 
@@ -671,7 +671,7 @@ static VALUE
 gdkwin_set_decorations(self, decor)
     VALUE self, decor;
 {
-    gdk_window_set_decorations(_SELF(self), NUM2INT(decor));
+    gdk_window_set_decorations(_SELF(self), RVAL2GENUM(decor, GDK_TYPE_WM_DECORATION));
     return self;
 }
 
@@ -684,7 +684,7 @@ static VALUE
 gdkwin_set_functions(self, func)
     VALUE self, func;
 {
-    gdk_window_set_functions(_SELF(self), NUM2INT(func));
+    gdk_window_set_functions(_SELF(self), RVAL2GENUM(func, GDK_TYPE_WM_FUNCTION));
     return self;
 }
 

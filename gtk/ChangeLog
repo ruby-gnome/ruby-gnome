@@ -1,10 +1,16 @@
+2003-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdk.c, rbgdkcursor.c, rbgdkregion.c, rbgdkgc.c, rbgdkrgb.c, 
+	rbgdkimage.c, rbgdkpixbuf.c, rbgdkvisual.c: Apply enum/flags changes.
+	* src/makecursors.rb: Removed. 
+
 2003-08-28 Martin Povolny <xpovolny@fi.muni.cz>
 
    * src/rbgtktreeview.c: fix non-functional treeview_get_path_at_pos
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
-                                                                                
-   * extconf.rb: Exit with 1 when the package is not found.
+
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

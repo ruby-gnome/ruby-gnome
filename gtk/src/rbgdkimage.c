@@ -3,8 +3,8 @@
 
   rbgdkimage.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,7 +20,7 @@ static VALUE
 gdkimage_initialize(self, type, visual, w, h)
     VALUE self, type, visual, w, h;
 {
-    G_INITIALIZE(self, gdk_image_new((GdkImageType)NUM2INT(type),
+    G_INITIALIZE(self, gdk_image_new((GdkImageType)RVAL2GENUM(type, GDK_TYPE_IMAGE_TYPE),
                                           GDK_VISUAL(RVAL2GOBJ(visual)),
                                           NUM2INT(w), NUM2INT(h)));
     return Qnil;

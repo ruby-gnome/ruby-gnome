@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -34,7 +34,7 @@ render_to_drawable(argc, argv, self)
     }
 
     if (!NIL_P(args[8]))
-	dither = FIX2INT(args[8]);
+	dither = RVAL2GENUM(args[8], GDK_TYPE_RGB_DITHER);
     if (!NIL_P(args[9]))
 	x_dither = NUM2INT(args[9]);
     if (!NIL_P(args[10]))

@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:02 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -144,12 +144,12 @@ static VALUE
 gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time)
     VALUE self, win, owner_events, event_mask, confine_to, cursor, time;
 {
-    return INT2NUM(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
+    return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RTEST(owner_events),
-                     NUM2INT(event_mask),
+                     RVAL2GENUM(event_mask, GDK_TYPE_EVENT_MASK),
                      NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
                      NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
-                     NUM2INT(time)));
+                     NUM2INT(time)), GDK_TYPE_GRAB_STATUS);
 }
 
 static VALUE
@@ -164,7 +164,9 @@ static VALUE
 gdk_s_keyboard_grab(self, win, owner_events, time)
     VALUE self, win, owner_events, time;
 {
-    return INT2NUM(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), RTEST(owner_events), NUM2INT(time)));
+    return GENUM2RVAL(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), 
+                                        RTEST(owner_events), NUM2INT(time)), 
+                      GDK_TYPE_GRAB_STATUS);
 }
 
 static VALUE

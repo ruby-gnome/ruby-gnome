@@ -3,8 +3,8 @@
 
   rbgdkregion.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -54,7 +54,7 @@ gdkregion_initialize(argc, argv, self)
             gpoints[i].y = NUM2INT(RARRAY(RARRAY(points_or_rectangle)->ptr[i])->ptr[1]);
         }
         region = gdk_region_polygon(gpoints, RARRAY(points_or_rectangle)->len, 
-                                    FIX2INT(fill_rule));
+                                    RVAL2GENUM(fill_rule, GDK_TYPE_FILL_RULE));
     } else if (RVAL2GTYPE(points_or_rectangle) == GDK_TYPE_RECTANGLE){
         region = gdk_region_rectangle((GdkRectangle*)RVAL2BOXED(points_or_rectangle, 
                                                                 GDK_TYPE_RECTANGLE));
@@ -151,9 +151,10 @@ static VALUE
 gdkregion_rect_in(self, rect)
     VALUE self, rect;
 {
-    return INT2FIX(gdk_region_rect_in(_SELF(self),
-                                      (GdkRectangle*)RVAL2BOXED(rect, 
-                                                                GDK_TYPE_RECTANGLE)));
+    return GENUM2RVAL(gdk_region_rect_in(
+                          _SELF(self),
+                          (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE)),
+                      GDK_TYPE_OVERLAP_TYPE);
 }
 
 static VALUE

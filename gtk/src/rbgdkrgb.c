@@ -3,8 +3,8 @@
 
   rbgdkrgb.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -37,7 +37,7 @@ gdkdraw_draw_rgb_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
     gdk_draw_rgb_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
 					   NUM2INT(x), NUM2INT(y),
 					   NUM2INT(w), NUM2INT(h),
-					   NUM2INT(dither),
+					   RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
 					   RVAL2CSTR(buf),
 					   NUM2INT(rowstride));
     return self;
@@ -51,7 +51,7 @@ gdkdraw_draw_rgb_image_dithalign(self, win, gc, x, y, w, h, dither, buf, rowstri
     gdk_draw_rgb_image_dithalign(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
 								 NUM2INT(x), NUM2INT(y),
 								 NUM2INT(w), NUM2INT(h),
-								 NUM2INT(dither),
+								 RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
 								 RVAL2CSTR(buf),
 								 NUM2INT(rowstride),
 								 NUM2INT(xdith), NUM2INT(ydith));
@@ -65,7 +65,7 @@ gdkdraw_draw_gray_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
     gdk_draw_gray_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
 						NUM2INT(x), NUM2INT(y),
 						NUM2INT(w), NUM2INT(h),
-						NUM2INT(dither),
+						RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
 						RVAL2CSTR(buf),
 						NUM2INT(rowstride));
     return self;
@@ -78,7 +78,7 @@ gdkdraw_draw_rgb_32_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
     gdk_draw_rgb_32_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
 						  NUM2INT(x), NUM2INT(y),
 						  NUM2INT(w), NUM2INT(h),
-						  NUM2INT(dither),
+						  RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
 						  RVAL2CSTR(buf),
 						  NUM2INT(rowstride));
     return self;

@@ -3,8 +3,8 @@
 
   rbgdkcursor.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:02 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2001-2003 Masao Mutoh
 ************************************************/
@@ -22,7 +22,7 @@ gdkcursor_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "15", &source_or_type, &mask, &fg, &bg, &x, &y);
     if (argc == 1){
-        cursor = gdk_cursor_new(NUM2INT(source_or_type));
+        cursor = gdk_cursor_new(RVAL2GENUM(source_or_type, GDK_TYPE_CURSOR_TYPE));
     } else {
         cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(source_or_type)), 
                                             NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 

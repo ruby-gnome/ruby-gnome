@@ -3,8 +3,8 @@
 
   rbgdkvisual.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -48,7 +48,7 @@ gdkvisual_s_query_visual_types(self)
     gdk_query_visual_types(&visual_types, &count);
     ary = rb_ary_new2(count);
     for (i = 0; i < count; i++) {
-        rb_ary_push(ary, INT2NUM((visual_types)[i]));
+        rb_ary_push(ary, GENUM2RVAL((visual_types)[i], GDK_TYPE_VISUAL_TYPE));
     }
     return ary;
 }
@@ -107,7 +107,7 @@ gdkvisual_s_get_best_with_type(self, type)
     VALUE self, type;
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(
-                                    (GdkVisualType)NUM2INT(type)));
+                                    (GdkVisualType)GENUM2RVAL(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
 static VALUE
@@ -116,14 +116,14 @@ gdkvisual_s_get_best_with_both(self, depth, type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_both(
                                     NUM2INT(depth),
-                                    (GdkVisualType)NUM2INT(type)));
+                                    (GdkVisualType)RVAL2GENUM(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
 static VALUE
 gdkvisual_type(self)
     VALUE self;
 {
-    return INT2FIX(_SELF(self)->type);
+    return GENUM2RVAL(_SELF(self)->type, GDK_TYPE_VISUAL_TYPE);
 }
 
 static VALUE
@@ -137,7 +137,7 @@ static VALUE
 gdkvisual_byte_order(self)
     VALUE self;
 {
-    return INT2FIX(_SELF(self)->byte_order);
+    return GENUM2RVAL(_SELF(self)->byte_order, GDK_TYPE_BYTE_ORDER);
 }
 
 static VALUE

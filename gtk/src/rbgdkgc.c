@@ -3,8 +3,8 @@
 
   rbgtkalignment.c -
 
-  $Author: sakai $
-  $Date: 2003/08/22 06:41:45 $
+  $Author: mutoh $
+  $Date: 2003/08/29 19:14:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -74,7 +74,7 @@ gdkgc_set_function(self, func)
     VALUE self, func;
 {
     GdkFunction f;
-    f = (GdkFunction) NUM2INT(func);
+    f = (GdkFunction)(RVAL2GENUM(func, GDK_TYPE_FUNCTION));
     if (f > GDK_SET)
         rb_raise(rb_eArgError, "function out of range");
   
@@ -86,7 +86,7 @@ static VALUE
 gdkgc_set_fill(self, fill)
     VALUE self, fill;
 {
-    gdk_gc_set_fill(_SELF(self), NUM2INT(fill));
+    gdk_gc_set_fill(_SELF(self), RVAL2GENUM(fill, GDK_TYPE_FILL));
     return self;
 }
 
@@ -152,7 +152,7 @@ static VALUE
 gdkgc_set_subwindow(self, mode)
     VALUE self, mode;
 {
-    gdk_gc_set_subwindow(_SELF(self), NUM2INT(mode));
+    gdk_gc_set_subwindow(_SELF(self), RVAL2GENUM(mode, GDK_TYPE_SUBWINDOW_MODE));
     return self;
 }
 
@@ -169,8 +169,9 @@ gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
     VALUE self, line_width, line_style, cap_style, join_style;
 {
     gdk_gc_set_line_attributes(_SELF(self), NUM2INT(line_width),
-                               NUM2INT(line_style), NUM2INT(cap_style),
-                               NUM2INT(join_style));
+                               RVAL2GENUM(line_style, GDK_TYPE_LINE_STYLE), 
+                               RVAL2GENUM(cap_style, GDK_TYPE_CAP_STYLE),
+                               RVAL2GENUM(join_style, GDK_TYPE_JOIN_STYLE));
     return self;
 }
 
