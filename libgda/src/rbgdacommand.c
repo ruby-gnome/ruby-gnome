@@ -48,7 +48,7 @@
 VALUE cGdaCommand;
 
 /*
- * Class method: new(text, type, options)
+ * Class method: new(text, type, options=Gda::Command::OPTION_STOP_ON_ERRORS)
  * text: text of the command.
  * type: type of the command (see Gda::Command::Type).
  * options: options for the command (see Gda::Command::Options).
@@ -58,12 +58,16 @@ VALUE cGdaCommand;
  * 
  * Returns: a newly allocated Gda::Command object.
  */
-static VALUE rb_gda_command_new(self, text, command_type, options)
-    VALUE self, text, command_type, options;
+static VALUE rb_gda_command_new(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
+    VALUE text, command_type, options;
+
+    rb_scan_args(argc, argv, "21", &text, &command_type, &options);
     GdaCommand *cmd = gda_command_new(RVAL2CSTR(text),
                                       RVAL2GENUM(command_type, GDA_TYPE_COMMAND_TYPE),
-                                      RVAL2GFLAGS(options, GDA_TYPE_COMMAND_OPTIONS));
+                                      NIL_P(options) ? GDA_COMMAND_OPTION_STOP_ON_ERRORS : RVAL2GFLAGS(options, GDA_TYPE_COMMAND_OPTIONS));
     if (cmd != NULL) {
         G_INITIALIZE(self, cmd);
     }
@@ -186,7 +190,7 @@ static VALUE rb_gda_command_get_transaction(self)
 void Init_gda_command(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_COMMAND, "Command", mGda);
 
-    rb_define_method(c, "initialize", rb_gda_command_new, 3);
+    rb_define_method(c, "initialize", rb_gda_command_new, -1);
    
     rb_define_method(c, "set_text", rb_gda_command_set_text, 1);
     rb_define_method(c, "text",     rb_gda_command_get_text, 0);

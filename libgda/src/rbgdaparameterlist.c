@@ -28,17 +28,27 @@
 VALUE cGdaParameterList;
 
 /*
- * Class method: new
+ * Class method: new(*parameters=nil)
+ * parameters: a list of Gda::Parameter objects.
  *
- * Creates a new Gda::ParameterList.
+ * Creates a new Gda::ParameterList from optional Gda::Parameter objects.
  *
  * Returns: the newly created Gda::ParameterList object.
  */
-static VALUE rb_gda_param_list_new(self)
-    VALUE self;
+static VALUE rb_gda_param_list_new(self, params)
+    VALUE self, params;
 {
-    GdaParameterList *list = gda_parameter_list_new();
+    GdaParameterList *list;
+    int i;
+    
+    list = gda_parameter_list_new();
     if (list != NULL) {
+        for (i = 0; i < RARRAY(params)->len; i++) {
+            gda_parameter_list_add_parameter(
+                list,
+                g_boxed_copy(GDA_TYPE_PARAMETER,
+                             RGDA_PARAMETER(rb_ary_entry(params, i))));
+        }
         G_INITIALIZE(self, list);
     }
     return Qnil;
@@ -203,7 +213,7 @@ static VALUE rb_gda_param_list_clear(self)
 void Init_gda_parameter_list(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_PARAMETER_LIST, "ParameterList", mGda);
 
-    rb_define_method(c, "initialize", rb_gda_param_list_new, 0);
+    rb_define_method(c, "initialize", rb_gda_param_list_new, -2);
 
     rb_define_method(c, "add", rb_gda_param_list_add, 1);
     rb_define_alias(c, "<<", "add");

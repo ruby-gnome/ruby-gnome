@@ -36,7 +36,7 @@ class TC_everything < Test::Unit::TestCase
             ds2 = Gda::DataSource.find(ds.name)
             assert_instance_of(Gda::DataSource, ds2)
             assert_equal(ds, ds2)
-            
+           
             assert_instance_of(String, ds.name)
             assert_instance_of(String, ds.provider)
             assert_instance_of(String, ds.cnc_string)
@@ -126,16 +126,16 @@ class TC_everything < Test::Unit::TestCase
     end
 
     def test_parameters
-        list = Gda::ParameterList.new
+        list = Gda::ParameterList.new(Gda::Parameter.new('nil', nil),
+                                      Gda::Parameter.new('number',  123))
         list << Gda::Parameter.new('string',  'hello world')
-        list << Gda::Parameter.new('number',  123)
         list << Gda::Parameter.new('boolean', true)
 
-	assert !list.empty?
-        assert_equal(3, list.length)
+        assert !list.empty?
+        assert_equal(4, list.length)
         arr = list.parameters
         assert_instance_of(Array, arr)
-        assert_equal(3, arr.length)
+        assert_equal(4, arr.length)
 
         i = 0
         list.each_parameter do |param|
@@ -144,6 +144,8 @@ class TC_everything < Test::Unit::TestCase
             assert_instance_of(Gda::Value, param.value)
             assert_instance_of(Gda::Parameter, list.find(param.name))
             case param.name
+                when 'nil'
+                    assert_equal('NULL', param.value.to_s)
                 when 'string'
                     assert_equal('hello world', param.value.to_s)
                 when 'number'
@@ -155,11 +157,11 @@ class TC_everything < Test::Unit::TestCase
             end
             i += 1
         end
-        assert_equal(3, i)
+        assert_equal(4, i)
        
         arr = list.names
         assert_instance_of(Array, arr)
-        assert_equal(3, arr.length)
+        assert_equal(4, arr.length)
         
         i = 0
         list.each_name do |name|
@@ -168,10 +170,11 @@ class TC_everything < Test::Unit::TestCase
             assert_instance_of(Gda::Parameter, param)
             i += 1
         end
-        assert_equal(3, i)
+        assert_equal(4, i)
 
         assert_nil list.find("does_not_exist")
         list.clear
+        assert_nil list.find('nil')
         assert_nil list.find('string')
         assert_nil list.find('number')
         assert_nil list.find('boolean')

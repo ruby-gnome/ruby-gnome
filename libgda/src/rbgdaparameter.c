@@ -32,11 +32,12 @@ VALUE cGdaParameter;
 /*
  * Class method: new(name, value)
  * name: the name for the parameter being created.
- * value: a value for the parameter (which can be either a boolean, string,
- * integer, or an existing Gda::Value).
+ * value: a value for the parameter, which can be either a boolean, string,
+ * integer, or an existing Gda::Value (it can be nil as well). 
  *
  * Creates a new Gda::Parameter object, which is usually used with
- * Gda::ParameterList.
+ * Gda::ParameterList.  Raises an exception if the 'value' parameter is
+ * an unknown object (not nil, boolean, string, integer or Gda::Value).
  *
  * Returns: a newly created Gda::Parameter object.
  */
@@ -45,7 +46,11 @@ static VALUE rb_gda_parameter_new(self, name, value)
 {
     GdaParameter *param = NULL;
 
-    if (TYPE(value) == T_TRUE || TYPE(value) == T_FALSE) {
+    if (NIL_P(value)) {
+        param = gda_parameter_new_from_value(RVAL2CSTR(name),
+	                                     gda_value_new_null());
+    }
+    else if (TYPE(value) == T_TRUE || TYPE(value) == T_FALSE) {
         param = gda_parameter_new_boolean(RVAL2CSTR(name),
                                           RVAL2CBOOL(value));
     }
@@ -64,7 +69,7 @@ static VALUE rb_gda_parameter_new(self, name, value)
                                              RGDA_VALUE(value));   
     }
     else {
-        /* FIXME throw an exception here */
+        rb_raise(rb_eArgError, "Invalid object for the 'value' parameter.");
     }
 
     if (param != NULL) {

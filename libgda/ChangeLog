@@ -1,3 +1,13 @@
+2004-01-02  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdacommand.c: The 'options' parameter of Gda::Command.new
+	  is fixed by default to Gda::Command::OPTION_STOP_ON_ERRORS.
+	* src/rbgdaparameter.c: Gda::Parameter.new accepts nil as 'value' and
+	  raises an exception is the 'value' object type is not supported.
+	* src/rbgdaparameterlist.c: Gda::ParameterList.new can optionally
+	  accept a list of Gda::Parameter that will be automatically inserted.
+	* tests/tc_all.rb: Follow these changes.
+
 2003-12-28  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaconnection.c: Added Gda::Connection#get_schema.
