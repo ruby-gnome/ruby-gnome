@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/10/27 17:13:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -25,7 +25,7 @@ rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
     gint* format;
     gint* length;
 {
-    void* dat;
+    void* dat = NULL;
     gint fmt, len;
     GdkAtom ntype = RVAL2ATOM(type);
     
@@ -39,7 +39,8 @@ rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
         fmt = 8;
         len = RSTRING(src)->len;
     } else if(ntype == compound_text){
-        gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, (guchar**)&dat, &len);
+        guchar* str = (guchar*)dat;
+        gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);
     } else if(type != Qnil && size != Qnil && src != Qnil) {
     	dat = RVAL2CSTR(src);
 	fmt = NUM2INT(size);
