@@ -1,5 +1,7 @@
 2003-11-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* sample/type-register.rb: add new file.
+
 	* rename test/test-glib2.rb to tests/test-glib2.rb.
 
 	* src/rbgobj_object.c: rename GLib::Object.register_type to
