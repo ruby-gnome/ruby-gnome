@@ -1,3 +1,8 @@
+2005-02-25  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgtkactiongroup.c: Fixed a GC problem in
+	actiongroup_add_radio_actions ().
+
 2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c, rbgtkaccelgroup.c: Fix compilation problems 

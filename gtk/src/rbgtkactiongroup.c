@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: lrz $
+  $Date: 2005/02/25 14:49:07 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -233,6 +233,7 @@ actiongroup_add_radio_actions(argc, argv, self)
     if (NIL_P(value)) value = -1;
     if (NIL_P(proc) && rb_block_given_p()){
         proc = G_BLOCK_PROC();
+        G_RELATIVE(self, proc);
     }
     n_entries = (guint)RARRAY(entries)->len;
     gentries = g_new0(GtkRadioActionEntry, n_entries);
