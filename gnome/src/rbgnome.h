@@ -29,9 +29,9 @@ void Init_bonobo_dock_item(VALUE);
 void Init_bonobo_dock_band(VALUE);
 
 void Init_gnome_about(VALUE);
-void Init_gnome_app_helper(VALUE, VALUE);
 void Init_gnome_app(VALUE);
 void Init_gnome_appbar(VALUE);
+void Init_gnome_app_helper(VALUE);
 void Init_gnome_client(VALUE);
 void Init_gnome_color_picker(VALUE);
 void Init_gnome_config(VALUE);

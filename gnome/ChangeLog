@@ -1,3 +1,17 @@
+2002-10-17  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/gnome-app-helper.rb: Add Gnome::AppBar sample. 
+	* src/rbgnome-app-helper.c: Change Gnome::UIInfo implementation.
+	Delete uiinfo_end(). Add fill_ui_info(), ui_info_to_ary(),
+	app_install_appbar_menu_hints(), and app_install_statusbar_menu_hints().
+	Change ary_to_ui_info(), free_ui_info(), app_create_menus(),
+	app_create_toolbar(), app_insert_menus(), and Init_gnome_app_helper().
+	* src/rbgnome-appbar.c: Add appbar_get_status().
+	* src/rbgnome-program.c: Fix TYPO.
+	* src/rbgnome.c: Call Init_gnome_app_helper(). Fix TYPO.
+	* src/rbgnome-app.c: Change Init_gnome_app().
+	* src/rbgnome.h: Change the argument of Init_gnome_app_helper.
+
 2002-10-16  KUBO Takehiro  <kubo@jiubao.org>
 
 	* sample/gnome-app-helper.rb: Add toolbar sample.

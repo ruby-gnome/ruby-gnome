@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-appbar.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-appbar.c,v 1.4 2002/10/17 14:34:39 tkubo Exp $ */
+/* base on libgnomeui/gnome-appbar.h */
 
 /* Gnome::AppBar widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ * Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -44,6 +46,14 @@ appbar_set_status(self, status)
     gnome_appbar_set_status(_SELF(self),
                             RVAL2CSTR(status));
     return self;
+}
+
+/* get the statusbar */
+static VALUE
+appbar_get_status(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gnome_appbar_get_status(_SELF(self)));
 }
 
 /* What to show when showing nothing else; defaults to nothing */
@@ -155,6 +165,7 @@ Init_gnome_appbar(mGnome)
     /* Instance methods */
     rb_define_method(gnoAppBar, "initialize", appbar_initialize, 3);
     rb_define_method(gnoAppBar, "set_status", appbar_set_status, 1);
+    rb_define_method(gnoAppBar, "status", appbar_get_status, 0);
     rb_define_method(gnoAppBar, "set_default", appbar_set_default, 1);
     rb_define_method(gnoAppBar, "push", appbar_push, 1);
     rb_define_method(gnoAppBar, "pop", appbar_pop, 0);
@@ -165,4 +176,6 @@ Init_gnome_appbar(mGnome)
     rb_define_method(gnoAppBar, "set_prompt", appbar_set_prompt, 2);
     rb_define_method(gnoAppBar, "clear_prompt", appbar_clear_prompt, 0);
     rb_define_method(gnoAppBar, "get_response", appbar_get_response, 0);
+
+    G_DEF_SETTERS(gnoAppBar);
 }

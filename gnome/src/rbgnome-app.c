@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.4 2002/10/15 14:55:09 tkubo Exp $ */
+/* $Id: rbgnome-app.c,v 1.5 2002/10/17 14:34:39 tkubo Exp $ */
 /* based on libgnomeui/gnome-app.h */
 
 /* Gnome::App widget for Ruby/GNOME2
@@ -321,8 +321,6 @@ Init_gnome_app(mGnome)
     rb_define_method(gnoApp, "enable_layout_config", app_enable_layout_config, 1);
     rb_define_method(gnoApp, "dock", app_get_dock, 0);
     rb_define_method(gnoApp, "get_dock_item_by_name", app_get_dock_item_by_name, 1);
-
-    Init_gnome_app_helper(mGnome, gnoApp);
 
     G_DEF_SETTERS(gnoApp);
 }

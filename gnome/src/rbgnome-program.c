@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.2 2002/10/14 13:56:24 tkubo Exp $ */
+/* $Id: rbgnome-program.c,v 1.3 2002/10/17 14:34:39 tkubo Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -308,7 +308,7 @@ Init_gnome_program(mGnome)
     rb_define_const(mGnome, "FILE_DOMAIN_APP_SOUND", INT2FIX(GNOME_FILE_DOMAIN_APP_SOUND));
     rb_define_const(mGnome, "FILE_DOMAIN_APP_PIXMAP", INT2FIX(GNOME_FILE_DOMAIN_APP_PIXMAP));
     rb_define_const(mGnome, "FILE_DOMAIN_APP_CONFIG", INT2FIX(GNOME_FILE_DOMAIN_APP_CONFIG));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_HEL", INT2FIX(GNOME_FILE_DOMAIN_APP_HELP));
+    rb_define_const(mGnome, "FILE_DOMAIN_APP_HELP", INT2FIX(GNOME_FILE_DOMAIN_APP_HELP));
 
     rb_define_method(gnoModuleInfo, "name", module_get_name, 0);
     rb_define_method(gnoModuleInfo, "version", module_get_version, 0);

@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-app-helper.rb,v 1.2 2002/10/16 13:49:27 tkubo Exp $
+# $Id: gnome-app-helper.rb,v 1.3 2002/10/17 14:33:27 tkubo Exp $
 #
 # gnome-app-helper.rb - sample script of Gnome::App#create_menus()
 #                       and Gnome::App#toolbar().
@@ -23,19 +23,29 @@
 #
 require 'gnome2'
 
-Gnome::Program.new('test-app-helper', '0.1', Gnome::ModuleInfo::LIBGNOMEUI)
+program = Gnome::Program.new('test-app-helper', '0.1', Gnome::ModuleInfo::LIBGNOMEUI)
 
 class SampleApp < Gnome::App
+
+  include Gnome::I18n
 
   APP_NAME = 'test-app-helper'
   TITLE = 'App Helper Sample'
 
-  include Gnome::I18n
-
   def initialize
     super(APP_NAME, TITLE)
 
+    self.set_default_size(200, 200)
+    self.signal_connect("delete_event") do 
+      Gtk::main_quit()
+    end
+
+    bar = Gnome::AppBar.new(false, true, Gnome::PREFERENCES_USER)
+    self.statusbar = bar
+
     @label = Gtk::Label.new(TITLE)
+    self.set_contents(@label)
+
     callback = proc { |item, arg| @label.text = arg }
 
     file_menu = [
@@ -104,7 +114,6 @@ class SampleApp < Gnome::App
       Gnome::UIInfo::menu_help_tree(help_menu),
       Gnome::UIInfo::menu_game_tree(game_menu),
     ]
-    self.create_menus(main_menu)
     
     radio_toolbar = [
       [Gnome::App::UI_ITEM, "Red", "Red Book", callback, 'toolbar/red',
@@ -135,14 +144,10 @@ class SampleApp < Gnome::App
       Gnome::UIInfo::separator,
       Gnome::UIInfo::radiolist(radio_toolbar)
     ]
+
+    menu_info = self.create_menus(main_menu)
+    bar.install_menu_hints(menu_info)
     self.create_toolbar(main_toolbar)
-
-    self.set_default_size(200, 200)
-
-    self.set_contents(@label)
-    self.signal_connect("delete_event") do 
-      Gtk::main_quit()
-    end
   end
 end
 
