@@ -4,7 +4,7 @@ REQUIREMENTS
 Ruby 1.6.2
 Gtk+ 2.0.0
 GdkPixbuf 2.0
-Ruby-Gtk2
+Ruby/GTK2
 
 INSTALL INSTRUCTIONS
 ===========
@@ -15,10 +15,5 @@ $ make
 $ ruby sample/test.rb some_image
 
 CONTACT INFORMATION
-===========
-
-You can contact me via email at <mutoh@highway.ne.jp>; you
-can also visit the Ruby-GNOME2 website (http://ruby-gnome2.sf.net/),
-which has a facility for reporting bugs and submitting fixes.
-Finally, you can send a message to the ruby-gnome2 mailing list(see website),
-where I or other Ruby-GNOME2 users can help you.
+==========
+Ruby-GNOME2 Website is http://ruby-gnome2.sf.net/.

@@ -23,8 +23,10 @@
 #include "rbgobject.h"
 #include "rbgtk.h"
 
+#define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s))
+
 static VALUE
-new_from_file(self, file_name)
+initialize(self, file_name)
     VALUE self, file_name;
 {
     GdkPixbuf *buf;
@@ -36,7 +38,9 @@ new_from_file(self, file_name)
     buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr, NULL);
     if (buf == NULL)
 	rb_raise(rb_eRuntimeError, "error occurred in loading image");
-    return GOBJ2RVAL(buf);
+
+    G_INITIALIZE(self, buf);
+    return Qnil;
 }
 
 static VALUE
@@ -65,7 +69,7 @@ render_to_drawable(argc, argv, self)
     if (!NIL_P(args[10]))
 	y_dither = NUM2INT(args[10]);
 
-    gdk_pixbuf_render_to_drawable(GDK_PIXBUF(RVAL2GOBJ(self)),
+    gdk_pixbuf_render_to_drawable(_SELF(self),
 				  GDK_DRAWABLE(RVAL2GOBJ(args[0])),
 				  GDK_GC(RVAL2GOBJ(args[1])),
 				  NUM2INT(args[2]),
@@ -84,22 +88,26 @@ render_pm(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE alpha_value;
+    VALUE colormap_or_alpha, alpha;
     GdkPixmap *pixmap;
     GdkBitmap *mask;
-    int alpha;
 
-    rb_scan_args(argc, argv, "01", &alpha_value);
+    rb_scan_args(argc, argv, "01", &colormap_or_alpha, &alpha);
 
-    if (NIL_P(alpha_value))
-	alpha = 0;
-    else
-	alpha = NUM2INT(alpha_value);
+    if (rb_obj_is_kind_of(colormap_or_alpha, GTYPE2CLASS(GDK_TYPE_COLORMAP))){
+        gdk_pixbuf_render_pixmap_and_mask_for_colormap(_SELF(self),
+                                                       RVAL2GOBJ(colormap_or_alpha),
+                                                       &pixmap,
+                                                       &mask,
+                                                       NIL_P(alpha)?0:NUM2INT(alpha));
+    } else {
+        gdk_pixbuf_render_pixmap_and_mask(_SELF(self),
+                                          &pixmap,
+                                          &mask,
+                                          NIL_P(colormap_or_alpha)?
+                                          0:NUM2INT(colormap_or_alpha));
+    }
 
-    gdk_pixbuf_render_pixmap_and_mask(GDK_PIXBUF(RVAL2GOBJ(self)),
-				      &pixmap,
-				      &mask,
-				      alpha);
     return rb_ary_new3(2,
                        pixmap ? GOBJ2RVAL(pixmap) : Qnil,
                        mask ? GOBJ2RVAL(mask) : Qnil);
@@ -115,6 +123,7 @@ scale(argc, argv, self)
     VALUE args[10];
     int dest_width, dest_height;
     GdkInterpType interp_type = GDK_INTERP_NEAREST;
+    GdkPixbuf* dest;
 
     rb_scan_args(argc, argv, "28", &args[0], &args[1], &args[2], &args[3], &args[4], &args[5], &args[6], &args[7], &args[8], &args[9]);
 
@@ -124,15 +133,25 @@ scale(argc, argv, self)
 	dest_width = NUM2INT(args[0]);
 	dest_height = NUM2INT(args[1]);
 	if (!NIL_P(args[2]))
-	    interp_type = NUM2INT(args[2]);
+	    interp_type = FIX2INT(args[2]);
 
-	ret = GOBJ2RVAL(gdk_pixbuf_scale_simple(GDK_PIXBUF(RVAL2GOBJ(self)),
+	ret = GOBJ2RVAL(gdk_pixbuf_scale_simple(_SELF(self),
 						  dest_width,
 						  dest_height,
 						  interp_type));
 	break;
-      case 7:
-	rb_raise(rb_eArgError, "Full version is not yet supported\n");
+      case 8:
+      case 9:
+        if (!NIL_P(args[9]))
+            interp_type = FIX2INT(args[9]);
+
+        gdk_pixbuf_scale(_SELF(self), dest, 
+                         NUM2INT(args[0]), NUM2INT(args[1]), 
+                         NUM2INT(args[2]), NUM2INT(args[3]),
+                         DBL2INT(args[4]), DBL2INT(args[5]),
+                         DBL2INT(args[6]), DBL2INT(args[7]),
+                         interp_type);
+        ret = GOBJ2RVAL(dest);
 	break;
       default:
 	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
@@ -142,45 +161,63 @@ scale(argc, argv, self)
 }
 
 static VALUE
+get_colorspace(self)
+    VALUE self;
+{
+    return INT2FIX(gdk_pixbuf_get_colorspace(_SELF(self)));
+}
+
+static VALUE
 get_n_channels(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_n_channels(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_n_channels(_SELF(self)));
 }
 
 static VALUE
 get_has_alpha(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_has_alpha(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_has_alpha(_SELF(self)));
 }
 
 static VALUE
 get_bits_per_sample(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_bits_per_sample(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_bits_per_sample(_SELF(self)));
 }
+/*
+guchar*     gdk_pixbuf_get_pixels           (const GdkPixbuf *pixbuf);
+*/
 
 static VALUE
 get_width(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_width(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_width(_SELF(self)));
 }
 
 static VALUE
 get_height(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_height(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_height(_SELF(self)));
 }
 
 static VALUE
 get_rowstride(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_rowstride(GDK_PIXBUF(RVAL2GOBJ(self))));
+    return INT2FIX(gdk_pixbuf_get_rowstride(_SELF(self)));
+}
+
+static VALUE
+get_option(self, key)
+    VALUE self, key;
+{
+    const gchar* ret = gdk_pixbuf_get_option(_SELF(self), STR2CSTR(key));
+    return ret ? CSTR2STR(ret) : Qnil;
 }
 
 void Init_gdk_pixbuf2()
@@ -189,33 +226,74 @@ void Init_gdk_pixbuf2()
     gdk_rgb_init(); /* initialize it anyway */
     gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
-    rb_define_singleton_method(gdkPixbuf, "new", new_from_file, 1);
+    /*
+     * Initialization and Versions 
+     */
+    rb_define_const(gdkPixbuf, "VERSION", INT2FIX(gdk_pixbuf_version));
+    rb_define_const(gdkPixbuf, "MAJOR", INT2FIX(GDK_PIXBUF_MAJOR));
+    rb_define_const(gdkPixbuf, "MINOR", INT2FIX(GDK_PIXBUF_MINOR));
+    rb_define_const(gdkPixbuf, "MICRO", INT2FIX(GDK_PIXBUF_MICRO));
 
-    /* structure */
-    /* rb_define_method(gdkPixbuf, "get_format", ..., 0); */
-    rb_define_method(gdkPixbuf, "get_n_channels", get_n_channels, 0);
-    rb_define_method(gdkPixbuf, "get_has_alpha", get_has_alpha, 0);
-    rb_define_method(gdkPixbuf, "get_bits_per_sample", get_bits_per_sample, 0);
-    /* rb_define_method(gdkPixbuf, "get_pixels", ..., 0); */
-    rb_define_method(gdkPixbuf, "get_width", get_width, 0);
-    rb_define_method(gdkPixbuf, "get_height", get_height, 0);
-    rb_define_method(gdkPixbuf, "get_rowstride", get_rowstride, 0);
+    /* 
+     * The GdkPixbuf Structure 
+     */
+    rb_define_method(gdkPixbuf, "colorspace", get_colorspace, 0);
+    rb_define_method(gdkPixbuf, "n_channels", get_n_channels, 0);
+    rb_define_method(gdkPixbuf, "has_alpha?", get_has_alpha, 0);
+    rb_define_method(gdkPixbuf, "bits_per_sample", get_bits_per_sample, 0);
+    /* rb_define_method(gdkPixbuf, "pixels", ..., 0); */
+    rb_define_method(gdkPixbuf, "width", get_width, 0);
+    rb_define_method(gdkPixbuf, "height", get_height, 0);
+    rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
+    rb_define_method(gdkPixbuf, "option", get_option, 0);
+    /* GdkPixbufError(not yet) */
+    /* GdkColorspace */
+    rb_define_const(gdkPixbuf, "COLORSPACE_RGB", INT2FIX(GDK_COLORSPACE_RGB));
+    /* GdkPixbufAlphaMode */
+    rb_define_const(gdkPixbuf, "ALPHA_BILEVEL", INT2FIX(GDK_PIXBUF_ALPHA_BILEVEL));
+    rb_define_const(gdkPixbuf, "ALPHA_FULL", INT2FIX(GDK_PIXBUF_ALPHA_FULL));
 
-    /* rendering */
+    /* 
+     * File Loading 
+     */
+    rb_define_method(gdkPixbuf, "initialize", initialize, 1);
+
+    /*
+     * File saving
+     */
+    /* 
+     * Image Data in Memory
+     */
+    /* 
+     * Inline data
+     */
+    /*
+     * Scaling
+     */
+    rb_define_method(gdkPixbuf, "scale", scale, -1);
+    /* rb_define_method(gdkPixbuf, "composite", composite, -1); */
+    /* GdkInterpType */
+    rb_define_const(gdkPixbuf, "INTERP_NEAREST", INT2FIX(GDK_INTERP_NEAREST));
+    rb_define_const(gdkPixbuf, "INTERP_TILES", INT2FIX(GDK_INTERP_TILES));
+    rb_define_const(gdkPixbuf, "INTERP_BILINEAR", INT2FIX(GDK_INTERP_BILINEAR));
+    rb_define_const(gdkPixbuf, "INTERP_HYPER", INT2FIX(GDK_INTERP_HYPER));
+
+    /* 
+     * Rendering
+     * The functions to render pixbufs to GDK drawables are contained in GDK.
+     * But in Ruby/GdkPixbuf contained them, not Ruby/GDK.
+     */
     /* rb_define_method(gdkPixbuf, "render_to_drawable_alpha", ..., ...,); */
     rb_define_method(gdkPixbuf, "render_to_drawable", render_to_drawable, -1);
     /* rb_define_method(gdkPixbuf, "render_threshold_alpha", ..., ...); */
     rb_define_method(gdkPixbuf, "render_pixmap_and_mask", render_pm, -1);
 
-    /* scaling */
-    rb_define_method(gdkPixbuf, "scale", scale, -1);
-    /* rb_define_method(gdkPixbuf, "composite", composite, -1); */
-
-    /* constants */
-    rb_define_const(gdkPixbuf, "ALPHA_BILEVEL",
-		    INT2FIX(GDK_PIXBUF_ALPHA_BILEVEL));
-    rb_define_const(gdkPixbuf, "ALPHA_FULL",
-		    INT2FIX(GDK_PIXBUF_ALPHA_FULL));
-    /* aliases */
-    rb_define_alias(gdkPixbuf, "to_pixmap_and_mask", "render_pixmap_and_mask");
+    /*
+     * Drawables to Pixbufs
+     * The functions to render pixbufs to GDK drawables are contained in GDK.
+     * But in Ruby/GdkPixbuf contained them, not Ruby/GDK.
+     */
+    /*
+     * Utilities
+     */
 }

@@ -1,3 +1,9 @@
+2002-11-05  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
+
+	* rbgdk-pixbuf.c: Apply Ruby-GNOME2 rules.Code cleanup.Some modified.
+	* sample/test.rb: Removed.
+	* sample/*.rb: Follow Ruby/GTK2, rbgdk-pixbuf.c changes.
+
 2002-09-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Append -fnative-struct to $CFLAGS when G_OS_WIN32 is defined
