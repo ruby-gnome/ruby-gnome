@@ -1,12 +1,12 @@
 require "mkmf"
 
-rubyglib_dir = ARGV.shift || File.dirname(__FILE__)+"/../glib"
+rubyglib_dir = File.expand_path(File.dirname(__FILE__))+"/../glib"
 unless FileTest.exist?(rubyglib_dir)
   raise "Directory #{rubyglib_dir} not found.  Please specify Ruby/GLib2 source dir."
 end
 $CFLAGS += "-I#{rubyglib_dir}/src "
 
-rubygtk_dir = ARGV.shift || File.dirname(__FILE__)+"/../gtk"
+rubygtk_dir = File.expand_path(File.dirname(__FILE__))+"/../gtk"
 unless FileTest.exist?(rubyglib_dir)
   raise "Directory #{rubygtk_dir} not found.  Please specify Ruby/GTK2 source dir."
 end
