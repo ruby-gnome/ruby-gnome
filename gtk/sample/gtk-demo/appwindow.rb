@@ -1,4 +1,4 @@
-# $Id: appwindow.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
+# $Id: appwindow.rb,v 1.3 2003/03/23 12:59:17 mutoh Exp $
 =begin
 = Application main window
 
@@ -89,19 +89,16 @@ module Demo
       ## Create the toolbar
       toolbar = Gtk::Toolbar.new
       # toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
-      toolbar.insert(-1,
-		     Gtk::Stock::OPEN,
-		     "This is a demo button with an 'open' icon",
-		     nil, -1) do toolbar_cb end
-      toolbar.insert(-1,
-		     Gtk::Stock::QUIT,
-		     "This is a demo button with an 'quit' icon",
-		     nil, -1) do toolbar_cb end
+      toolbar.append(Gtk::Stock::OPEN,
+		     "This is a demo button with an 'open' icon"
+		     ) do toolbar_cb end
+      toolbar.append(Gtk::Stock::QUIT,
+		     "This is a demo button with an 'quit' icon"
+		     ) do toolbar_cb end
       toolbar.append_space
-      toolbar.insert(-1,
-		     :demo_gtk_logo,
-		     "This is a demo button with an 'gtk' icon",
-		     nil) do toolbar_cb end
+      toolbar.append(:demo_gtk_logo,
+		     "This is a demo button with an 'gtk' icon"
+		     ) do toolbar_cb end
       table.attach(toolbar,
 		   # X direction            # Y direction
 		   0, 1,                    1, 2,
