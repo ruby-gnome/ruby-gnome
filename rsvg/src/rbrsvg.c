@@ -23,25 +23,20 @@
 
 #include <librsvg/rsvg-gz.h>
 
+#ifdef HAVE_LIBRSVG_ENUM_TYPES_H
+#  include <librsvg/librsvg-enum-types.h>
+#else
+#  include "librsvg-enum-types.h"
+#endif
+
 #define _SELF(self) ((RsvgHandle *)DATA_PTR(self))
 
-static VALUE eError;
 static VALUE cHandle;
 
 static ID id_at;
 static ID id_call;
 static ID id_callback;
 static ID id_closed;
-
-void
-rb_rsvg_check_error(GError *error)
-{
-  if (error) {
-    VALUE message = rb_str_new2(error->message);
-    g_error_free(error);
-    rb_raise(eError, StringValuePtr(message));
-  }
-}
 
 static void
 exec_callback(gint *width, gint *height, gpointer self)
@@ -131,7 +126,7 @@ rb_rsvg_handle_write(VALUE self, VALUE buf)
   result = rsvg_handle_write(_SELF(self), RVAL2CSTR(buf),
                              RSTRING(buf)->len, &error);
 
-  rb_rsvg_check_error(error);
+  if (!result) RAISE_GERROR(error);
   
   return CBOOL2RVAL(result);
 }
@@ -150,9 +145,9 @@ rb_rsvg_handle_close(VALUE self)
 
   if (result) {
     rb_ivar_set(self, id_closed, Qtrue);
+  } else {
+    RAISE_GERROR(error);
   }
-  
-  rb_rsvg_check_error(error);
   
   return CBOOL2RVAL(result);
 }
@@ -180,7 +175,7 @@ rb_rsvg_pixbuf_from_file(VALUE self, VALUE file_name)
 
   pixbuf = rsvg_pixbuf_from_file(RVAL2CSTR(file_name), &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
   
   return GOBJ2RVAL(pixbuf);
 }
@@ -197,7 +192,7 @@ rb_rsvg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
                                          NUM2DBL(y_zoom),
                                          &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -214,7 +209,7 @@ rb_rsvg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
                                          NUM2INT(height),
                                          &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -231,7 +226,7 @@ rb_rsvg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
                                              NUM2INT(max_height),
                                              &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -254,7 +249,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max(VALUE self,
                                                   NUM2INT(max_height),
                                                   &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -290,7 +285,7 @@ rb_rsvg_pixbuf_from_file_at_size_ex(VALUE self, VALUE file_name,
                                             NUM2INT(height),
                                             &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -305,7 +300,7 @@ rb_rsvg_pixbuf_from_file_ex(VALUE self, VALUE file_name)
                                     RVAL2CSTR(file_name),
                                     &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -323,7 +318,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_ex(VALUE self, VALUE file_name,
                                             NUM2DBL(y_zoom),
                                             &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -341,7 +336,7 @@ rb_rsvg_pixbuf_from_file_at_max_size_ex(VALUE self, VALUE file_name,
                                                 NUM2INT(max_height),
                                                 &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -365,7 +360,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
                                                      NUM2INT(max_height),
                                                      &error);
 
-  rb_rsvg_check_error(error);
+  if (error) RAISE_GERROR(error);
 
   return GOBJ2RVAL(pixbuf);
 }
@@ -374,8 +369,9 @@ void
 Init_rsvg2(void) {
   VALUE mRSVG = rb_define_module("RSVG");
 
-  eError = rb_define_class_under(mRSVG, "Error", rb_eStandardError);
   cHandle = rb_define_class_under(mRSVG, "Handle", rb_cObject);
+
+  G_DEF_ERROR(RSVG_ERROR, "Error", mRSVG, rb_eRuntimeError, RSVG_TYPE_ERROR);
 
   id_call = rb_intern("call");
   id_at = rb_intern("at");

@@ -1,3 +1,9 @@
+2004-11-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: added librsvg-enum-types.{c,h} generation code.
+
+	* src/rbrsvg.c: used G_DEF_ERROR and RAISE_GERROR.
+
 2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbrsvg.c: Fixed warnings under rsvg-2.6.x. 
