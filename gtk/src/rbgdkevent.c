@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/13 18:01:37 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -669,6 +669,6 @@ Init_gtk_gdk_event()
     rb_define_alias(gdkEventClient, "send_client_message_toall",
 					"send_clientmessage_toall");
 
-    rbgobj_register_r2g_func(gdkEvent, &gdkevent_r2g);
+    rbgobj_register_r2g_func(GDK_TYPE_EVENT, &gdkevent_r2g);
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 }

@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Date: 2002/08/13 18:01:38 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1414,7 +1414,7 @@ Init_gtk_ctree()
 
     VALUE gCTreeNode = rb_define_class_under(mGtk, "CTreeNode", rb_cData);
 /*
-	rbgobj_register_r2g_func(gCTreeNode, _ctree_node_from_ruby);
+    rbgobj_register_r2g_func(GTK_TYPE_CTREE_NODE, _ctree_node_from_ruby);
     rbgobj_register_g2r_func(GTK_TYPE_CTREE_NODE, _ctree_node_to_ruby);
 */
  

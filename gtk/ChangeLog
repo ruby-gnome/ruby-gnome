@@ -1,3 +1,7 @@
+2002-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgdkevent.c, src/rbgtkctree.c: follow change of rbgobj_register_r2g_func()
+
 2002-08-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtksocket.c: rename Gtk::Socket#xwindow to Gtk::Socket#id
