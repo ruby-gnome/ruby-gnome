@@ -4,7 +4,7 @@
   rbgtkscrolledwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/23 18:02:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,40 +37,31 @@ scwin_set_policy(self, hpolicy, vpolicy)
     VALUE self, hpolicy, vpolicy;
 {
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
-								   (GtkPolicyType)NUM2INT(hpolicy),
-								   (GtkPolicyType)NUM2INT(vpolicy));
+                                   (GtkPolicyType)NUM2INT(hpolicy),
+                                   (GtkPolicyType)NUM2INT(vpolicy));
     return self;
+}
+
+static VALUE
+scwin_get_policy(self)
+    VALUE self;
+{
+    GtkPolicyType hpolicy, vpolicy;
+
+    gtk_scrolled_window_get_policy(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
+                                   &hpolicy, &vpolicy);
+    return rb_ary_new3(2, INT2FIX(hpolicy), INT2FIX(vpolicy));
 }
 
 static VALUE
 scwin_add_with_viewport(self, other)
     VALUE self, other;
 {
-    gtk_scrolled_window_add_with_viewport(
-		GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
-		GTK_WIDGET(RVAL2GOBJ(other)));
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
+                                          GTK_WIDGET(RVAL2GOBJ(other)));
     return self;
 }
 
-static VALUE
-scwin_get_hadjustment(self)
-    VALUE self;
-{
-    GtkAdjustment *adj =
-		gtk_scrolled_window_get_hadjustment(
-			GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
-    return GOBJ2RVAL(adj);
-}
-
-static VALUE
-scwin_get_vadjustment(self)
-    VALUE self;
-{
-    GtkAdjustment *adj =
-		gtk_scrolled_window_get_vadjustment(
-			GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
-    return GOBJ2RVAL(adj);
-}
 
 void 
 Init_gtk_scrolled_window()
@@ -79,9 +70,6 @@ Init_gtk_scrolled_window()
 
     rb_define_method(gScrolledWin, "initialize", scwin_initialize, -1);
     rb_define_method(gScrolledWin, "set_policy", scwin_set_policy, 2);
+    rb_define_method(gScrolledWin, "policy", scwin_get_policy, 0);
     rb_define_method(gScrolledWin, "add_with_viewport", scwin_add_with_viewport, 1);
-    rb_define_method(gScrolledWin, "hadjustment", scwin_get_hadjustment, 0);
-    rb_define_method(gScrolledWin, "get_hadjustment", scwin_get_hadjustment, 0);
-    rb_define_method(gScrolledWin, "vadjustment", scwin_get_vadjustment, 0);
-    rb_define_method(gScrolledWin, "get_vadjustment", scwin_get_vadjustment, 0);
 }

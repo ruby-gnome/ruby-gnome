@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/17 15:23:10 $
+  $Date: 2002/10/23 18:02:09 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,8 +22,6 @@ gboolean    gdk_init_check                  (gint *argc,
                                              gchar ***argv);
 void        gdk_parse_args                  (gint *argc,
                                              gchar ***argv);
-*/
-
 gchar*      gdk_get_display_arg_name        (void);
 gchar*      gdk_set_locale                  (void);
 void        gdk_set_sm_client_id            (const gchar *sm_client_id);
@@ -33,6 +31,8 @@ G_CONST_RETURN char* gdk_get_program_class  (void);
 void        gdk_set_program_class           (const char *program_class);
 
 gchar*      gdk_get_display                 (void);
+
+*/
 
 static VALUE
 gdk_s_flush(self)

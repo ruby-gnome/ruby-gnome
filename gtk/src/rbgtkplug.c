@@ -1,9 +1,10 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkplug.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:43:27 $
+  $Date: 2002/10/23 18:02:18 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -30,10 +31,18 @@ plug_initialize(argc, argv, self)
         id = NUM2UINT(socket_id);
 #endif
     }
-
+    
     RBGTK_INITIALIZE(self, gtk_plug_new(id));
     return Qnil;
 }
+
+/*
+GtkWidget*  gtk_plug_new_for_display        (GdkDisplay *display,
+GdkNativeWindow socket_id);
+void        gtk_plug_construct_for_display  (GtkPlug *plug,
+GdkDisplay *display,
+                                             GdkNativeWindow socket_id);
+*/
 
 static VALUE
 plug_construct(self, socket_id)

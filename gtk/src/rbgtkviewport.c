@@ -4,7 +4,7 @@
   rbgtkviewport.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/23 18:02:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -31,59 +31,9 @@ vport_initialize(argc, argv, self)
     return Qnil;
 }
 
-static VALUE
-vport_get_hadj(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gtk_viewport_get_hadjustment(GTK_VIEWPORT(RVAL2GOBJ(self))));
-}
-
-static VALUE
-vport_get_vadj(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gtk_viewport_get_vadjustment(GTK_VIEWPORT(RVAL2GOBJ(self))));
-}
-
-static VALUE
-vport_set_vadj(self, adj)
-    VALUE self, adj;
-{
-    gtk_viewport_set_vadjustment(GTK_VIEWPORT(RVAL2GOBJ(self)),
-								 GTK_ADJUSTMENT(RVAL2GOBJ(adj)));
-
-    return self;
-}
-
-static VALUE
-vport_set_hadj(self, adj)
-    VALUE self, adj;
-{
-    gtk_viewport_set_hadjustment(GTK_VIEWPORT(RVAL2GOBJ(self)),
-								 GTK_ADJUSTMENT(RVAL2GOBJ(adj)));
-
-    return self;
-}
-
-static VALUE
-vport_set_shadow(self, type)
-    VALUE self, type;
-{
-    gtk_viewport_set_shadow_type(GTK_VIEWPORT(RVAL2GOBJ(self)),
-								 (GtkShadowType)NUM2INT(type));
-
-    return self;
-}
-
 void 
 Init_gtk_viewport()
 {
     VALUE gViewport = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);
-
     rb_define_method(gViewport, "initialize", vport_initialize, -1);
-    rb_define_method(gViewport, "get_hadjustment", vport_get_hadj, 0);
-    rb_define_method(gViewport, "get_vadjustment", vport_get_vadj, 0);
-    rb_define_method(gViewport, "set_hadjustment", vport_set_hadj, 1);
-    rb_define_method(gViewport, "set_vadjustment", vport_set_vadj, 1);
-    rb_define_method(gViewport, "set_shadow_type", vport_set_shadow, 1);
 }

@@ -1,3 +1,29 @@
+2002-10-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstatusbar.c: Code clean up. Add Gtk::StatusBar#resize_grip?, #set_resize_grip. 
+	* src/rbgtkcombo.c: Remove property methods. Code cleanup.
+	* src/rbgtkvbbox.c: Remove Gtk::HBoxButton#set/get_spacing_default, set/get_layout_default.
+	* src/rbgtkhbbox.c: Remove Gtk::HBoxButton#set/get_spacing_default, set/get_layout_default.
+	* src/rbgtkbox.c: Remove property methods. Code clean up. Add Gtk::Box#pack_start/end_defaults. 
+	* src/rbgtkviewport.c, src/rbgtkscrolledwindow.c, src/rbgtkhandlebox.c, src/rbgtkplug.c: 
+	Remove property methods. Code clean up.
+	* src/rbgtkmessagedialog.c: Implement Gtk::MessageDialog.
+	* src/rbgtkfontselection.c: Remove property methods.
+	* src/rbgtkfontselectiondialog.c: Code clean up. Remove property methods.
+	Remove Gtk::FontSelectionDialog#font
+	Gtk::FontSelectionDialog#initialize accept both no parameter and title.
+	* src/rbgtkdialog.c: Implement Gtk::Dialog#run, #response, #add_button, #add_action_widget, 
+	#set_default_response, #set_response_sensitive.
+	Implement constants(GtkDialogFlags, GtkResponseType).
+	* src/rbgtkfilesel.c: Remove Gtk::FileSelection#action_area. 
+	Add Gtk::FileSelection#fileop_dialog, #selections.
+	Gtk::FileSelection#initialize accept both no parameter and title.
+	* src/rbgtkcolorselectiondialog.c: Separate from rbgtkcolorsel.c. 
+	Gtk::ColorSelectionDialog#initialize accept both no parameter and title.
+	* src/rbgtkcolorsel.c: Remove Gtk::ColorSelection#set/get_color.
+	Add Gtk:ColorSelection#set_previous_color, #previous_color, #previous_alpha,
+	#set_previous_alpha, adjusting?.
+
 2002-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwindow.c: Implement Gtk::Window#active_focus, #active_default, #set_gravity, 

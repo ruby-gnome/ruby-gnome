@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/10/17 15:23:10 $
+  $Date: 2002/10/23 18:02:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -649,9 +649,7 @@ static VALUE
 gdkwin_keyboard_grab(self, owner_events, time)
     VALUE self, owner_events, time;
 {
-    gdk_keyboard_grab(_SELF(self),
-					  RTEST(owner_events),
-					  NUM2INT(time));
+    gdk_keyboard_grab(_SELF(self), RTEST(owner_events), NUM2INT(time));
     return self;
 }
 
