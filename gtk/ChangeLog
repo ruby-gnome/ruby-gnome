@@ -1,3 +1,13 @@
+2003-12-21  Kenichi Komiya <kom@mail1.accsnet.ne.jp>
+
+	* src/rbgtkbindingset.c: Add Gtk::BindingSet#add_signal. Fix some bugs.
+	* src/rbgtkobject.c: Add Gtk::Object.binding_set.
+	* sample/misc/bindings.rb: Added.
+
+2003-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkobject.c (Init_gtk_object): Remove Gtk::Object#activate_binding.
+
 2003-12-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtksizegroup.c: Apply Enums, properties.

@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/12/20 15:23:38 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -120,10 +120,51 @@ gobj_bindings_activate(self, keyval, modifiers)
                                   NUM2UINT(modifiers)) ? Qtrue : Qfalse;
 }
 
+/* Move from Bindings */
+static VALUE
+gobj_s_binding_set(self)
+    VALUE self;
+{
+    GType gtype;
+    gpointer gclass;
+    GtkBindingSet* binding_set;
+
+    Check_Type(self, T_CLASS);
+
+    gtype = CLASS2GTYPE(self);
+
+    if (!G_TYPE_IS_CLASSED(gtype)) {
+        rb_raise(rb_eTypeError, "%s is not a classed GType",
+                 rb_class2name(self));
+    }
+    gclass = g_type_class_ref(gtype);
+    if (!gclass) {
+        rb_raise(rb_eRuntimeError, "couldn't get class reference");
+    }
+    if (!GTK_IS_OBJECT_CLASS(gclass)) {
+        g_type_class_unref(gclass);
+        rb_raise(rb_eTypeError, "%s is not a Gtk Object class",
+                 rb_class2name(self));
+    }
+
+    binding_set = gtk_binding_set_by_class(gclass);
+    if (!binding_set) {
+        g_type_class_unref(gclass);
+        rb_raise(rb_eRuntimeError, "couldn't get BindingSet from %s",
+                 rb_class2name(self));
+    }
+    g_type_class_unref(gclass);
+
+    return BOXED2RVAL(binding_set, GTK_TYPE_BINDING_SET);
+}
+
+
 void 
 Init_gtk_object()
 {
     VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
+
+    rb_define_singleton_method(gObject, "binding_set", gobj_s_binding_set, 0);
 
     rb_define_method(gObject, "type_name", gobj_get_type_name, 0);
     rb_define_method(gObject, "flags", gobj_get_flags, 0);
