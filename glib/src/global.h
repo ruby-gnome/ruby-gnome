@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2003/02/17 16:00:11 $
+   $Date: 2003/04/07 11:26:29 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
 ************************************************/
@@ -31,11 +31,14 @@ typedef struct {
 } boxed_holder;
 
 extern VALUE rbgobj_cInstantiatable;
-extern VALUE rbgobj_mInterfaceCommons;
+extern VALUE rbgobj_mMetaInterface;
 #define cInstantiatable   rbgobj_cInstantiatable
-#define mInterfaceCommons rbgobj_mInterfaceCommons
+#define mMetaInterface rbgobj_mMetaInterface
 
 extern void rbgobj_define_property_accessors(VALUE klass);
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+extern void rbgobj_define_action_methods(VALUE klass);
+#endif
 
 extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);

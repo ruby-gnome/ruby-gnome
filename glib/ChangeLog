@@ -1,3 +1,31 @@
+2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_signal.c: Implement a new function
+	rbgobj_define_action_methods() experimentaly.
+	This function defines methods that emit	action signals.
+
+	Action signals are signals that may freely be emitted on alive
+	objects from user code via g_signal_emit() and friends, without
+	the need of being embedded into extra code that performs pre or
+	post emission adjustments on the object. They can also be thought
+	of as by third-party code generically callable object methods.
+
+	* src/rbgobj_signal.c: Extend GLib::Object.signals to
+	GLib::Object.signals([inherited_too])
+
+	* src/rbgobj_object.c: Extend GLib::Object.properties to
+	GLib::Object.properties([inherited_too])
+
+	* src/global.h, src/rbgobj_signal.c, rbgobj_type.c:
+	gsub(/mInterfaceCommons/, 'mMetaInterface') and define
+	GLib::MetaInterface.
+
+	* src/rbgobj_paramspecs.c (GLib::Param::String#default_value): 
+	use rbg_cstr2rval() instead of rb_str_new2(). Because we need to
+	allow NULL.
+
+	* src/rbgobj_type.c: simplify the format of GLib::Type#inspect
+
 2003-04-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c: rename signal_emit_by_name and

@@ -3,8 +3,8 @@
 
   rbgobj_paramspecs.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Author: sakai $
+  $Date: 2003/04/07 11:26:30 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -178,7 +178,7 @@ string_initialize(self, name, nick, blurb, default_value, flags)
     return Qnil;
 }
 
-DEF_DEFAULT_VALUE_FUNC(string, rb_str_new2, G_PARAM_SPEC_STRING)
+DEF_DEFAULT_VALUE_FUNC(string, rbg_cstr2rval, G_PARAM_SPEC_STRING)
 
 static VALUE
 param_initialize(self, name, nick, blurb, param_type, flags)

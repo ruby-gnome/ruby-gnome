@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/04/04 13:48:42 $
+  $Date: 2003/04/07 11:26:30 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -83,6 +83,8 @@ rbgobj_lookup_class_by_gtype(gtype)
     if (!NIL_P(c)){
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
     } else {
+        void* gclass = NULL;
+
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
@@ -100,7 +102,7 @@ rbgobj_lookup_class_by_gtype(gtype)
 
           case G_TYPE_INTERFACE:
             cinfo->klass = rb_module_new();
-            rb_extend_object(cinfo->klass, mInterfaceCommons);
+            rb_extend_object(cinfo->klass, mMetaInterface);
             if (gtype != G_TYPE_INTERFACE)
                 rb_include_module(cinfo->klass, GTYPE2CLASS(G_TYPE_INTERFACE));
             break;
@@ -123,10 +125,18 @@ rbgobj_lookup_class_by_gtype(gtype)
         rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
         rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
 
+        if (G_TYPE_IS_CLASSED(gtype))
+            gclass = g_type_class_ref(gtype);
+
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+        if ((G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
+            && !G_TYPE_IS_FUNDAMENTAL(gtype))
+            rbgobj_define_action_methods(cinfo->klass);
+#endif
+
         if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT){
             GType* interfaces = NULL;
             guint n_interfaces = 0;
-            gpointer oclass = g_type_class_ref(gtype);
             int i;
 
             interfaces = g_type_interfaces(gtype, &n_interfaces);
@@ -138,9 +148,10 @@ rbgobj_lookup_class_by_gtype(gtype)
             g_free(interfaces);
 
             rbgobj_define_property_accessors(cinfo->klass);
-
-            g_type_class_unref(oclass);
         }
+
+        if (gclass)
+            g_type_class_unref(gclass);
     }
 
     return cinfo;
@@ -215,8 +226,7 @@ type_inspect(self)
     gchar* str;
     VALUE result;
 
-    str = g_strdup_printf("#<GLib::Type %ld name=\"%s\">",
-                          gtype, g_type_name(gtype));
+    str = g_strdup_printf("GLib::Type[\"%s\"]", g_type_name(gtype));
     result = rb_str_new2(str);
     g_free(str);
 
@@ -566,7 +576,7 @@ Init_type()
 
 /**********************************************************************/
 
-VALUE mInterfaceCommons;
+VALUE mMetaInterface;
 
 static VALUE
 interface_get_gtype(iface)
@@ -578,8 +588,8 @@ interface_get_gtype(iface)
 static void 
 Init_interface_commons()
 {
-    mInterfaceCommons = rb_module_new();
-    rb_define_method(mInterfaceCommons, "gtype", interface_get_gtype, 0);
+    mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
+    rb_define_method(mMetaInterface, "gtype", interface_get_gtype, 0);
 }
 
 /**********************************************************************/
@@ -625,7 +635,7 @@ static void
 Init_instantiatable()
 {
     cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
-    rb_extend_object(cInstantiatable, mInterfaceCommons);
+    rb_extend_object(cInstantiatable, mMetaInterface);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cInstantiatable, "allocate", instantiatable_s_allocate, 0);

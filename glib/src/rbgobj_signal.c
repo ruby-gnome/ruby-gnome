@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/06 06:08:46 $
+  $Date: 2003/04/07 11:26:30 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -210,23 +210,36 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 
 #endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
-static VALUE
-gobj_s_signals(VALUE self)
+void
+_signal_list(VALUE result, GType gtype)
 {
-    GType gtype = CLASS2GTYPE(self);
-    guint n_ids;
-    guint* ids;
-    VALUE result;
-    guint i;
-
-    if (GTYPE2CLASS(gtype) != self)
-        return rb_ary_new2(0);
-
-    ids = g_signal_list_ids(gtype, &n_ids);
-
-    result = rb_ary_new2(n_ids);
+    guint n_ids, i;
+    guint* ids = g_signal_list_ids(gtype, &n_ids);
     for (i = 0; i < n_ids; i++)
-        rb_ary_store(result, i, rb_str_new2(g_signal_name(ids[i])));
+        rb_ary_push(result, rb_str_new2(g_signal_name(ids[i])));
+}
+
+static VALUE
+gobj_s_signals(int argc, VALUE* argv, VALUE self)
+{
+    GType gtype;
+    VALUE inherited_too, result;
+
+    rb_scan_args(argc, argv, "01", &inherited_too);
+    gtype = CLASS2GTYPE(self);
+    result = rb_ary_new();
+
+    if (RTEST(inherited_too)){
+        guint n_interfaces, i;
+        GType* interfaces = g_type_interfaces(gtype, &n_interfaces);
+        for (i = 0; i < n_interfaces; i++)
+            _signal_list(result, interfaces[i]);
+
+        for (; gtype; gtype = g_type_parent(gtype))
+            _signal_list(result, gtype);
+    } else if (GTYPE2CLASS(gtype) == self) {
+        _signal_list(result, gtype);
+    }
 
     return result;
 }
@@ -476,10 +489,10 @@ Init_signal_misc()
     rb_global_variable(&signal_func_table);
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    rb_define_method(mInterfaceCommons, "signal_new", gobj_s_signal_new, -1);
+    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
 #endif
-    rb_define_method(mInterfaceCommons, "signals", gobj_s_signals, 0);
-    rb_define_method(mInterfaceCommons, "signal", gobj_s_signal, 1);
+    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
+    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
 
     rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
     rb_define_method(cInstantiatable, "signal_connect_after",
@@ -670,9 +683,60 @@ Init_signal_class()
 
 /**********************************************************************/
 
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+
+void
+rbgobj_define_action_methods(VALUE klass)
+{
+    GString* source = g_string_new(NULL);
+    guint n_ids;
+    guint* ids;
+    int i;
+
+    ids = g_signal_list_ids(CLASS2GTYPE(klass), &n_ids);
+
+    for (i = 0; i < n_ids; i++){
+        GSignalQuery query;
+        g_signal_query(ids[i], &query);
+
+        if (query.signal_flags & G_SIGNAL_ACTION) {
+            gchar* method_name = g_strdup(query.signal_name);
+            gchar* p;
+            GString* args;
+            int j;
+
+            for (p = method_name; *p; p++)
+                if (*p == '-')
+                    *p = '_';
+
+            args = g_string_new(NULL);
+            for (j = 0; j < query.n_params; j++)
+                g_string_append_printf(args, ",x%d", j);
+
+            g_string_append_printf(
+                source,
+                "def %s(%s)\n  signal_emit('%s'%s)\nend\n",
+                method_name,
+                (query.n_params > 0) ? args->str + 1 : "", // hack
+                query.signal_name,
+                args->str);
+
+            g_free(method_name);
+            g_string_free(args, TRUE);
+        }
+    }
+
+    rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2(source->str));
+}
+
+#endif // RBGLIB_ENABLE_EXPERIMENTAL
+
+/**********************************************************************/
+
 void
 Init_gobject_gsignal()
 {
     Init_signal_class();
     Init_signal_misc();
 }
+

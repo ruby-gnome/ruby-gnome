@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/04/04 13:48:42 $
+  $Date: 2003/04/07 11:26:29 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -116,20 +116,25 @@ gobj_s_property(self, property_name)
 }
 
 static VALUE
-gobj_s_properties(self)
-     VALUE self;
+gobj_s_properties(int argc, VALUE* argv, VALUE self)
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     gint n_properties;
     GParamSpec** props;
+    VALUE inherited_too;
     VALUE ary;
     int i;
 
+    rb_scan_args(argc, argv, "01", &inherited_too);
+
     props = g_object_class_list_properties(oclass, &n_properties);
 
-    ary = rb_ary_new2(n_properties);
-    for (i = 0; i < n_properties; i++)
-        rb_ary_store(ary, i, rb_str_new2(props[i]->name));
+    ary = rb_ary_new();
+    for (i = 0; i < n_properties; i++){
+        if (RTEST(inherited_too)
+            || GTYPE2CLASS(props[i]->owner_type) == self)
+            rb_ary_push(ary, rb_str_new2(props[i]->name));
+    }
 
     g_type_class_unref(oclass);
     return ary;
@@ -509,7 +514,7 @@ Init_gobject_gobject()
 #endif
 
     rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
-    rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, 0);
+    rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
