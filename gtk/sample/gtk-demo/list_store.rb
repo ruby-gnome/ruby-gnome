@@ -1,9 +1,9 @@
-# $Id: list_store.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: list_store.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Tree View/List Store
 
-The GtkListStore is used to store data in list form, to be used
-later on by a GtkTreeView to display it. This demo builds a
+The Gtk::ListStore is used to store data in list form, to be used
+later on by a Gtk::TreeView to display it. This demo builds a
 simple GtkListStore and displays it. See the Stock Browser
 demo for a more advanced example.
 =end

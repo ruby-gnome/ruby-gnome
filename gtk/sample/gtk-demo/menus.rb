@@ -1,32 +1,32 @@
-# $Id: menus.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: menus.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Menus
 
 There are several widgets involved in displaying menus. The
-GtkMenuBar widget is a horizontal menu bar, which normally appears
-at the top of an application. The GtkMenu widget is the actual menu
-that pops up. Both GtkMenuBar and GtkMenu are subclasses of
-GtkMenuShell; a GtkMenuShell contains menu items
-(GtkMenuItem). Each menu item contains text and/or images and can
+Gtk::MenuBar widget is a horizontal menu bar, which normally appears
+at the top of an application. The Gtk::Menu widget is the actual menu
+that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
+Gtk::MenuShell; a Gtk::MenuShell contains menu items
+(Gtk::MenuItem). Each menu item contains text and/or images and can
 be selected by the user.
 
-There are several kinds of menu item, including plain GtkMenuItem,
-GtkCheckMenuItem which can be checked/unchecked, GtkRadioMenuItem
+There are several kinds of menu item, including plain Gtk::MenuItem,
+Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
 which is a check menu item that's in a mutually exclusive group,
-GtkSeparatorMenuItem which is a separator bar, GtkTearoffMenuItem
-which allows a GtkMenu to be torn off, and GtkImageMenuItem which
-can place a GtkImage or other widget next to the menu text.
+Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
+which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
+can place a Gtk::Image or other widget next to the menu text.
 
-A GtkMenuItem can have a submenu, which is simply a GtkMenu to pop
+A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
 up when the menu item is selected. Typically, all menu items in a menu bar
 have submenus.
 
-The GtkOptionMenu widget is a button that pops up a GtkMenu when clicked.
+The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
 It's used inside dialogs and such.
 
-GtkItemFactory provides a higher-level interface for creating menu bars
+Gtk::ItemFactory provides a higher-level interface for creating menu bars
 and menus; while you can construct menus manually, most people don't
-do that. There's a separate demo for GtkItemFactory.
+do that. There's a separate demo for Gtk::ItemFactory.
 =end
 require 'common'
 

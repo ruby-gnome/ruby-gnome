@@ -1,8 +1,8 @@
-# $Id: item_factory.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: item_factory.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Item Factory
 
-The GtkItemFactory object allows the easy creation of menus
+The Gtk::ItemFactory object allows the easy creation of menus
 from an array of descriptions of menu items.
 =end
 require 'common'

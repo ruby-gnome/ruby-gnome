@@ -1,11 +1,10 @@
-# $Id: appwindow.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: appwindow.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Application main window
 
 Demonstrates a typical application window, with menubar, toolbar, statusbar.
 =end
 require 'common'
-require 'gdk_pixbuf2'
 
 module Demo
   class AppWindow < BasicWindow

@@ -1,8 +1,8 @@
-# $Id: drawingarea.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: drawingarea.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Drawing Area
 
-GtkDrawingArea is a blank area where you can draw custom displays
+Gtk::DrawingArea is a blank area where you can draw custom displays
 of various kinds.
 
 This demo has two drawing areas. The checkerboard area shows
@@ -109,8 +109,8 @@ module Demo
     CHECK_SIZE = 10
     SPACING = 2
     def checkerboard_expose(da)
-      # At the start of an expose handler, a clip region of event->area
-      # is set on the window, and event->area has been cleared to the
+      # At the start of an expose handler, a clip region of event.area
+      # is set on the window, and event.area has been cleared to the
       # widget's background color. The docs for
       # gdk_window_begin_paint_region give more details on how this
       # works.
@@ -135,7 +135,7 @@ module Demo
 		 gc2
 	       end
 	  
-	  # If we're outside event->area, this will do nothing.
+	  # If we're outside event.area, this will do nothing.
 	  # It might be mildly more efficient if we handled
 	  # the clipping ourselves, but again we're feeling lazy.
 
@@ -200,10 +200,10 @@ module Demo
       end
 
       # This call is very important; it requests the next motion event.
-      # If you don't call gdk_window_get_pointer you'll only get
+      # If you don't call Gdk::Window#pointer you'll only get
       # a single motion event. The reason is that we specified
-      # GDK_POINTER_MOTION_HINT_MASK to gtk_widget_set_events.
-      # If we hadn't specified that, we could just use event->x, event->y
+      # Gdk::POINTER_MOTION_HINT_MASK to Gtk::Widget#set_events.
+      # If we hadn't specified that, we could just use event.x, event.y
       # as the pointer location. But we'd also get deluged in events.
       # By requesting the next event as we handle the current one,
       # we avoid getting a huge number of events faster than we

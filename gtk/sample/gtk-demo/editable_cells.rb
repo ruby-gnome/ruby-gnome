@@ -1,10 +1,10 @@
-# $Id: editable_cells.rb,v 1.2 2003/03/02 07:08:19 kzys Exp $
+# $Id: editable_cells.rb,v 1.3 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Tree View/Editable Cells
 
-This demo demonstrates the use of editable cells in a GtkTreeView. If
-you're new to the GtkTreeView widgets and associates, look into
-the GtkListStore example first.
+This demo demonstrates the use of editable cells in a Gtk::TreeView. If
+you're new to the Gtk::TreeView widgets and associates, look into
+the Gtk::ListStore example first.
 =end
 require 'common'
 

@@ -1,11 +1,11 @@
-# $Id: tree_store.rb,v 1.1 2003/03/02 07:15:44 kzys Exp $
+# $Id: tree_store.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Tree View/Tree Store
 
-The GtkTreeStore is used to store data in tree form, to be
-used later on by a GtkTreeView to display it. This demo builds
-a simple GtkTreeStore and displays it. If you're new to the
-GtkTreeView widgets and associates, look into the GtkListStore
+The Gtk::TreeStore is used to store data in tree form, to be
+used later on by a Gtk::TreeView to display it. This demo builds
+a simple Gtk::TreeStore and displays it. If you're new to the
+GtkTreeView widgets and associates, look into the Gtk::ListStore
 example first.
 =end
 require 'common'

@@ -1,9 +1,11 @@
-# $Id: textview.rb,v 1.2 2003/03/21 04:45:00 mutoh Exp $
+# $Id: textview.rb,v 1.3 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Text Widget
 
-The Gtk::TextView widget displays a Gtk::TextBuffer. One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
-This demo has two views displaying a single buffer, and shows off the widget's text formatting features.
+The Gtk::TextView widget displays a Gtk::TextBuffer. 
+One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
+This demo has two views displaying a single buffer, 
+and shows off the widget's text formatting features.
 =end
 require 'common'
 

@@ -1,14 +1,14 @@
-# $Id: images.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: images.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
 = Images
 
-GtkImage is used to display an image; the image can be in a number of formats.
-Typically, you load an image into a GdkPixbuf, then display the pixbuf.
+Gtk::Image is used to display an image; the image can be in a number of formats.
+Typically, you load an image into a Gdk::Pixbuf, then display the pixbuf.
 
 This demo code shows some of the more obscure cases, in the simple
-case a call to gtk_image_new_from_file is all you need.
+case a call to Gtk::Image.new is all you need.
 
-If you want to put image data in your program as a C variable,
+If you want to put image data in your program as a String variable,
 use the make-inline-pixbuf program that comes with GTK+.
 This way you won't need to depend on loading external files, your
 application binary can be self-contained.
@@ -55,9 +55,9 @@ module Demo
 	pixbuf = Gdk::Pixbuf.new(filename)
       rescue
 	# This code shows off error handling. You can just use
-	# gtk_image_new_from_file instead if you don't want to report
+	# Gtk::Image.new instead if you don't want to report
 	# errors to the user. If the file doesn't load when using
-	# gtk_image_new_from_file, a 'missing image' icon will
+	# Gtk::Image.new, a 'missing image' icon will
 	# be displayed instead.
 	dialog = Gtk::MessageDialog.new(self,
 					Gtk::Dialog::DESTROY_WITH_PARENT,
@@ -171,10 +171,10 @@ module Demo
 	end
 	
 	@pixbuf_loader.signal_connect('area_updated') do
-	  # We know the pixbuf inside the GtkImage has changed, but the image
+	  # We know the pixbuf inside the Gtk::Image has changed, but the image
 	  # itself doesn't know this; so queue a redraw.  If we wanted to be
 	  # really efficient, we could use a drawing area or something
-	  # instead of a GtkImage, so we could control the exact position of
+	  # instead of a Gtk::Image, so we could control the exact position of
 	  # the pixbuf on the display, then we could queue a draw for only
 	  # the updated area of the image.
 	  image.queue_draw
