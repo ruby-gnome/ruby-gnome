@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/08/25 09:33:37 $
+  $Date: 2003/09/03 07:11:02 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -74,6 +74,7 @@ typedef enum
 {
     RBGOBJ_ABSTRACT_BUT_CREATABLE = 1 << 0,
     RBGOBJ_BOXED_NOT_COPY         = 1 << 1,
+    RBGOBJ_DEFINED_BY_RUBY        = 1 << 2,
 } RGObjClassFlag;
     
 typedef struct {

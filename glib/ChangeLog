@@ -1,5 +1,8 @@
 2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_object.c (register_type): if the super type is not defined
+	by ruby, then include a new module that defines #initialize.
+
 	* src/rbgobj_param.c (value_validate): use rb_ensure().
 
 	* src/rbgobj_param.c: disable GLib::Param#value_defaults? since the

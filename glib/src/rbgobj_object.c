@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/08/25 08:47:36 $
+  $Date: 2003/09/03 07:11:02 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -475,16 +475,6 @@ class_init_func(gpointer g_class_, gpointer class_data)
 #endif
 }
 
-// FIXME: use rb_protect
-static void
-instance_init_func(GTypeInstance* instance, gpointer g_class)
-{
-    VALUE obj = GOBJ2RVAL(instance);
-    ID id_instance_init = rb_intern("instance_init");
-    if (rb_respond_to(obj, id_instance_init))
-        rb_funcall(obj, id_instance_init, 0);
-}
-
 static VALUE
 register_type(int argc, VALUE* argv, VALUE self)
 {
@@ -493,7 +483,7 @@ register_type(int argc, VALUE* argv, VALUE self)
     GType parent_type;
     GTypeInfo* info;
 
-    rb_scan_args(argc, argv, "11&", &type_name, &flags, &class_init_proc);
+    rb_scan_args(argc, argv, "02&", &type_name, &flags, &class_init_proc);
 
     {
         const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
@@ -533,7 +523,7 @@ register_type(int argc, VALUE* argv, VALUE self)
         info->class_data     = (gpointer)class_init_proc;
         info->instance_size  = query.instance_size;
         info->n_preallocs    = 0;
-        info->instance_init  = instance_init_func;
+        info->instance_init  = NULL;
         info->value_table    = NULL;
     }
 
@@ -545,7 +535,21 @@ register_type(int argc, VALUE* argv, VALUE self)
         G_RELATIVE(self, class_init_proc);
 
         rbgobj_register_class(self, type, TRUE, TRUE);
-        rb_define_method(self, "initialize", gobj_initialize, -1);
+
+        {
+            RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class(self);
+            cinfo->flags |= RBGOBJ_DEFINED_BY_RUBY;
+        }
+
+        {
+            GType parent = g_type_parent(type);
+            const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(parent);
+            if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
+                VALUE m = rb_module_new();
+                rb_define_method(m, "initialize", gobj_initialize, -1);
+                rb_include_module(self, m);
+            }
+        }
 
         return Qnil;
     }
