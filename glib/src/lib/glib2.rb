@@ -158,7 +158,7 @@ module GLib
     LOG_DOMAIN = "GLib-GObject"
   end
 
-  module Thread
+  class Thread
     LOG_DOMAIN = "GThread"
   end
 

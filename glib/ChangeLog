@@ -1,3 +1,9 @@
+2005-02-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.c, rbglib_threads.c: Added GLib::Threads. 
+	* src/lib/pkg-config.rb: Added PKGConfig.cflags_only_I, .cflags_only_other.
+	* src/rbglib.h: Increment version information.
+
 2005-02-26  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* src/rbgobj_type.c (rbgobj_lookup_class): Fixed a problem in Ruby 1.9.

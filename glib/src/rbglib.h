@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/11/13 17:17:32 $
+  $Date: 2005/03/05 06:55:37 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -22,7 +22,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define RBGLIB_MAJOR_VERSION 0
-#define RBGLIB_MINOR_VERSION 11
+#define RBGLIB_MINOR_VERSION 12
 #define RBGLIB_MICRO_VERSION 0
 
 #ifndef StringValue

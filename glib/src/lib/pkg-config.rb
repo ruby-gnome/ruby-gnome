@@ -9,6 +9,7 @@
 # license of Ruby-GNOME2.
 #
 
+require 'mkmf'
 require 'shellwords'
 
 module PKGConfig
@@ -36,6 +37,14 @@ module PKGConfig
 
   def cflags(pkg)
     `#{@@cmd} --cflags #{pkg}`.chomp
+  end
+
+  def cflags_only_I(pkg)
+    `#{@@cmd} --cflags-only-I #{pkg}`.chomp
+  end
+
+  def cflags_only_other(pkg)
+    `#{@@cmd} --cflags-only-other #{pkg}`.chomp
   end
 
   def variable(pkg, var)
