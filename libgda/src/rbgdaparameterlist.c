@@ -21,35 +21,6 @@
 
 #include "rbgda.h"
 
-static GdaParameterList* parameter_list_copy(GdaParameterList* list) {
-    GdaParameterList *new_list;
-    GList *node, *names;
-
-    new_list = gda_parameter_list_new();
-    names = gda_parameter_list_get_names(list);
-    for (node = g_list_first(names);
-         node != NULL;
-         node = g_list_next(node))
-    {
-        GdaParameter *param = gda_parameter_list_find(list, (const gchar *)node->data);
-        if (param != NULL) {    /* normally should always be non-null... */
-            gda_parameter_list_add_parameter(new_list, param);
-        }
-    }
-    g_list_free(names);
-    return new_list;
-}
-
-GType gda_parameter_list_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaParameterList",
-            (GBoxedCopyFunc)parameter_list_copy,
-            (GBoxedFreeFunc)gda_parameter_list_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_param_list_new(self)
     VALUE self;
 {

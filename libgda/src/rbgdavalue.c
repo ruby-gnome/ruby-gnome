@@ -23,16 +23,6 @@
 
 VALUE cGdaValue;
 
-GType gda_value_get_type_bis(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaValue",
-            (GBoxedCopyFunc)gda_value_copy,
-            (GBoxedFreeFunc)gda_value_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_value_to_s(self)
     VALUE self;
 {

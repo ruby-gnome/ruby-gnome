@@ -21,22 +21,6 @@
 
 #include "rbgda.h"
 
-static GdaParameter* parameter_copy(GdaParameter* parameter) {
-    GdaValue *value = GDA_VALUE(gda_parameter_get_value(parameter));
-    return gda_parameter_new_from_value(gda_parameter_get_name(parameter),
-                                        value);
-}
-
-GType gda_parameter_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaParameter",
-            (GBoxedCopyFunc)parameter_copy,
-            (GBoxedFreeFunc)gda_parameter_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_parameter_new(self, name, value)
     VALUE self, name, value;
 {

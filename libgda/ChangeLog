@@ -1,3 +1,11 @@
+2003-11-05  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgda.h, src/rbgdacommand.c, src/rbgdafieldattributes.c,
+	  src/rbgdaparameter.c, src/rbgdaparameterlist.c,
+	  src/rbgdaquarklist.c, src/rbgdarow.c, src/rbgdavalue.c:
+	  Removed all gboxed code, since all GDA classes we support
+	  are now following GLib type system.
+
 2003-10-27  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* sample/print_config.rb: New file.

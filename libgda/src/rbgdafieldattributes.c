@@ -21,16 +21,6 @@
 
 #include "rbgda.h"
 
-GType gda_field_attributes_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaFieldAttributes",
-            (GBoxedCopyFunc)gda_field_attributes_copy,
-            (GBoxedFreeFunc)gda_field_attributes_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_field_new(self)
     VALUE self;
 {

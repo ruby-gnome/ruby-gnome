@@ -40,19 +40,9 @@ extern VALUE cGdaValue;
 #define GDA_PARAMETER(o)        ((GdaParameter *)o)
 #define GDA_PARAMETER_LIST(o)   ((GdaParameterList *)o)
 #define GDA_PROVIDER(o)         ((GdaProviderInfo *)o)
-#define GDA_QUARKLIST(o)        ((GdaQuarkList *)o)
+#define GDA_QUARK_LIST(o)       ((GdaQuarkList *)o)
 #define GDA_ROW(o)              ((GdaRow *)o)
 #define GDA_VALUE(o)            ((GdaValue *)o)
-
-#define GDA_TYPE_COMMAND          (gda_command_get_type())
-#define GDA_TYPE_DATASOURCE       (gda_datasource_get_type())
-#define GDA_TYPE_FIELD_ATTRIBUTES (gda_field_attributes_get_type())
-#define GDA_TYPE_PARAMETER        (gda_parameter_get_type())
-#define GDA_TYPE_PARAMETER_LIST   (gda_parameter_list_get_type())
-#define GDA_TYPE_PROVIDER         (gda_provider_get_type())
-#define GDA_TYPE_QUARKLIST        (gda_quarklist_get_type())
-#define GDA_TYPE_ROW              (gda_row_get_type())
-#define GDA_TYPE_VALUE            (gda_value_get_type_bis())
 
 #define RGDA_CLIENT(o)           (GDA_CLIENT(RVAL2GOBJ(o)))
 #define RGDA_COMMAND(o)          (GDA_COMMAND(RVAL2BOXED(o, GDA_TYPE_COMMAND)))
@@ -68,7 +58,7 @@ extern VALUE cGdaValue;
 #define RGDA_PARAMETER(o)        (GDA_PARAMETER(RVAL2BOXED(o, GDA_TYPE_PARAMETER)))
 #define RGDA_PARAMETER_LIST(o)   (GDA_PARAMETER_LIST(RVAL2BOXED(o, GDA_TYPE_PARAMETER_LIST)))
 #define RGDA_PROVIDER(o)         (GDA_PROVIDER(RVAL2BOXED(o, GDA_TYPE_PROVIDER)))
-#define RGDA_QUARKLIST(o)        (GDA_QUARKLIST(RVAL2BOXED(o, GDA_TYPE_QUARKLIST)))
+#define RGDA_QUARKLIST(o)        (GDA_QUARK_LIST(RVAL2BOXED(o, GDA_TYPE_QUARK_LIST)))
 #define RGDA_ROW(o)              (GDA_ROW(RVAL2BOXED(o, GDA_TYPE_ROW)))
 #define RGDA_SELECT(o)           (GDA_SELECT(RVAL2GOBJ(o)))
 #define RGDA_TABLE(o)            (GDA_TABLE(RVAL2GOBJ(o)))
@@ -89,22 +79,12 @@ extern VALUE cGdaValue;
 #define RGDA_PARAMETER_NEW(o)        (BOXED2RVAL(GDA_PARAMETER(o), GDA_TYPE_PARAMETER))
 #define RGDA_PARAMETER_LIST_NEW(o)   (BOXED2RVAL(GDA_PARAMETER_LIST(o), GDA_TYPE_PARAMETER_LIST))
 #define RGDA_PROVIDER_NEW(o)         (BOXED2RVAL(GDA_PROVIDER(o), GDA_TYPE_PROVIDER))
-#define RGDA_QUARKLIST_NEW(o)        (BOXED2RVAL(GDA_QUARKLIST(o), GDA_TYPE_QUARKLIST))
+#define RGDA_QUARKLIST_NEW(o)        (BOXED2RVAL(GDA_QUARK_LIST(o), GDA_TYPE_QUARK_LIST))
 #define RGDA_ROW_NEW(o)              (BOXED2RVAL(GDA_ROW(o), GDA_TYPE_ROW))
 #define RGDA_SELECT_NEW(o)           (GOBJ2RVAL(GDA_SELECT(o)))
 #define RGDA_TABLE_NEW(o)            (GOBJ2RVAL(GDA_TABLE(o)))
 #define RGDA_TRANSACTION_NEW(o)      (GOBJ2RVAL(GDA_TRANSACTION(o)))
 #define RGDA_VALUE_NEW(o)            (BOXED2RVAL(GDA_VALUE(o), GDA_TYPE_VALUE))
-
-GType gda_command_get_type();
-GType gda_datasource_get_type();
-GType gda_field_attributes_get_type();
-GType gda_parameter_get_type();
-GType gda_parameter_list_get_type();
-GType gda_provider_get_type();
-GType gda_quarklist_get_type();
-GType gda_row_get_type();
-GType gda_value_get_type_bis();   /* gda_value_get_type() exists already :| */
 
 /* rbgdaconnection.c */
 VALUE rb_gda_connection_close(VALUE self);

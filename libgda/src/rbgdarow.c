@@ -21,31 +21,6 @@
 
 #include "rbgda.h"
 
-static GdaRow* row_copy(GdaRow* row) {
-    GList *entries = NULL;
-    GdaRow* new_row;
-    int i;
-
-    g_return_val_if_fail (row != NULL, NULL);
-    for (i = 0; i < gda_row_get_length(row); i++) {
-        entries = g_list_append(entries, 
-                                (gpointer) gda_row_get_value(row, i));
-    }
-    new_row = gda_row_new_from_list(gda_row_get_model(row),
-                                    entries);
-    return new_row;
-}
-
-GType gda_row_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaRow",
-            (GBoxedCopyFunc)row_copy,
-            (GBoxedFreeFunc)gda_row_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_row_new(argc, argv, self)
     int argc;   
     VALUE *argv, self;

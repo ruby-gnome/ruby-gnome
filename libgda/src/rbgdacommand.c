@@ -21,23 +21,6 @@
 
 #include "rbgda.h"
 
-static GdaCommand* command_copy(GdaCommand* command) {
-    g_return_val_if_fail (command != NULL, NULL);
-    return gda_command_new(gda_command_get_text(command),
-                           gda_command_get_command_type(command),
-                           gda_command_get_options(command));
-}
-
-GType gda_command_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaCommand",
-            (GBoxedCopyFunc)command_copy,
-            (GBoxedFreeFunc)gda_command_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_command_new(self, text, command_type, options)
     VALUE self, text, command_type, options;
 {

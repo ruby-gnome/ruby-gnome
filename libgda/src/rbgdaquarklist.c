@@ -21,23 +21,6 @@
 
 #include "rbgda.h"
 
-GdaQuarkList *gda_quark_list_copy(list)
-    GdaQuarkList *list;
-{
-    /* FIXME */
-    return list;
-}
-
-GType gda_quarklist_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaQuarkList",
-            (GBoxedCopyFunc)gda_quark_list_copy,
-            (GBoxedFreeFunc)gda_quark_list_free);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_quarklist_new(argc, argv, self)
     int argc;
     VALUE *argv, self;
@@ -92,7 +75,7 @@ static VALUE rb_gda_quarklist_clear(self)
 }
 
 void Init_gda_quarklist(void) {
-    VALUE c = G_DEF_CLASS(GDA_TYPE_QUARKLIST, "QuarkList", mGda);
+    VALUE c = G_DEF_CLASS(GDA_TYPE_QUARK_LIST, "QuarkList", mGda);
     rb_define_method(c, "initialize", rb_gda_quarklist_new, -1);
     rb_define_method(c, "add_from_string", rb_gda_quarklist_add_from_string, -1);
     rb_define_alias(c, "add", "add_from_string");
