@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/26 14:42:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -341,14 +341,7 @@ static VALUE
 gobj_destroy(self)
     VALUE self;
 {
-    VALUE iv = rb_ivar_get(self, id_gobject_data);
-
-    if (NIL_P(iv) || RDATA(iv)->data == 0) {
-		/* destroyed object */
-		return Qnil;
-    }
     gtk_object_destroy(GTK_OBJECT(RVAL2GOBJ(self)));
-    rb_ivar_set(self, id_relatives, Qnil);
     return Qnil;
 }
 

@@ -1,3 +1,8 @@
+2002-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkobject.c (gobj_destroy): follow Ruby/GLib's change of
+	  internal data structure.
+
 2002-07-20  Guillaume Pierronnet <moumar@netcourrier.com>
 
 	* src/rbgtkpacker.c: Add file. Support Gtk::Packer.
