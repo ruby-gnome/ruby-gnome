@@ -1,3 +1,7 @@
+2002-12-03  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb: delete obsolete depended libraries.
+
 2002-11-27  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-popup-menu.c: use id_call defined as static instead of
