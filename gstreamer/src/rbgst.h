@@ -75,6 +75,7 @@ extern gboolean debug_mode;
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
 #define RGST_TYPE(o)                (GST_TYPE(RVAL2BOXED(o, GST_TYPE_TYPE)))
 #define RGST_TYPE_FACTORY(o)        (GST_TYPE_FACTORY(RVAL2GOBJ(o)))
+#define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
 
 #define RGST_GOBJ_NEW(o)    (rbgst_new_gstobject(o))
 
