@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 15:01:52 $
+  $Date: 2002/06/22 16:36:41 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -126,7 +126,7 @@ rbgobj_make_gobject(klass, gobj)
 {
     VALUE obj = rb_obj_alloc(klass);
     gobj = g_object_ref(gobj);
-    rbgobj_set_gobject(obj, gobj);
+    rbgobj_initialize_gobject(obj, gobj);
     return obj;
 }
 
