@@ -1,3 +1,9 @@
+2002-07-10  Alex Boussinet <dbug@wanadoo.fr>
+
+   * src/rbgtksocket.c: Add Gtk::Socket#xwindow.
+   * sample/t-gtkplug.rb, sample/t-gtksocket.rb:
+     Add sample for Gtk::Socket, Gtk::Plug.
+
 2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkim.c: Remove file.
