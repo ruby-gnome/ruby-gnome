@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2004/08/29 12:28:57 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:53:38 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -226,9 +226,10 @@ get_file_info(self, filename)
     VALUE self, filename;
 {
     gint width, height;
+
     GdkPixbufFormat* format = gdk_pixbuf_get_file_info(RVAL2CSTR(filename), 
                                                        &width, &height);
-    return format ? BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT) : Qnil;
+    return format ? rb_ary_new3(3, BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT), INT2NUM(width), INT2NUM(height)) : Qnil;
 }
 
 #endif
