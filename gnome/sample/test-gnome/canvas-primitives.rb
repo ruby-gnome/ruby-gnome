@@ -155,7 +155,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			       "fill_stipple", stipple,
 			       "outline_color", "black",
 			       "width_units", 4.0))
-      #TODO? stipple.unref()
     end
 
     setup_item(root.item_new(Gnome::CanvasRect,
@@ -202,7 +201,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			       "fill_stipple", stipple,
 			       "outline_color", "black",
 			       "width_pixels", 0))
-      #TODO? stipple.unref()
     end
   end
 
@@ -240,7 +238,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 					      "anchor", Gtk::ANCHOR_NW,
 					      "fill_color", "blue",
 					      "fill_stipple", stipple)
-      #TODO? stipple.unref()
     end
 
     make_anchor(root, 470.0, 75.0).item_new(Gnome::CanvasText,
@@ -282,7 +279,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			    "anchor", anchor)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
-	#TODO? im.destroy_image()
       end
     end
   end
@@ -303,7 +299,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			    "anchor", Gtk::ANCHOR_CENTER)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
-	#TODO? im.destroy_image()
       end
     end
     plant_flower (root,  20.0, 170.0, Gtk::ANCHOR_NW, aa);
@@ -339,7 +334,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 		       "cap_style", Gdk::CAP_ROUND)
       end
     end
-    points.free()
   end
 
   SCALE = 7.0
@@ -383,10 +377,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 			       "width_units", 4.0,
 			       "cap_style", Gdk::CAP_PROJECTING,
 			       "join_style", Gdk::JOIN_MITER))
-      #TODO? stipple.unref()
     end
-
-    points.free()
   end
 
   def setup_lines(root)
@@ -412,7 +403,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			     "arrow_shape_a", 8.0,
 			     "arrow_shape_b", 12.0,
 			     "arrow_shape_c", 4.0))
-    points.free()
 
     points = Gnome::CanvasPoints.new(2)
     points[0] = 356.0
@@ -442,7 +432,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			     "arrow_shape_a", 6.0,
 			     "arrow_shape_b", 6.0,
 			     "arrow_shape_c", 4.0))
-    points.free()
   end
 
   def setup_polygons(root)
@@ -465,9 +454,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 			       "fill_color", "blue",
 			       "fill_stipple", stipple,
 			       "outline_color", "black"))
-      #TODO? stipple.unref()
     end
-    points.free()
 
     points = Gnome::CanvasPoints.new(14)
     points[0] = 270.0
@@ -503,7 +490,6 @@ class CanvasSamplePrimitives < Gtk::VBox
 			     "fill_color", "tan",
 			     "outline_color", "black",
 			     "width_units", 3.0))
-    points.free()
   end
 
   def setup_widgets(root)

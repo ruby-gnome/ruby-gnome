@@ -11,40 +11,12 @@ points_s_new(klass, num)
 }
 
 static VALUE
-points_ref(self)
-    VALUE self;
-{
-    GnomeCanvasPoints *gcp;
-    Data_Get_Struct(self, GnomeCanvasPoints, gcp);
-    gnome_canvas_points_ref(gcp);
-    return Qnil;
-}
-
-static VALUE
-points_free(self)
-    VALUE self;
-{
-    GnomeCanvasPoints *gcp;
-    Data_Get_Struct(self, GnomeCanvasPoints, gcp);
-    if (gcp->ref_count == 1) {
-	gnome_canvas_points_free(gcp);
-	DATA_PTR(self) = NULL;
-    } else {
-	gnome_canvas_points_free(gcp);
-    }
-    return Qnil;
-}
-
-static VALUE
 points_aref(self, offset)
     VALUE self, offset;
 {
     GnomeCanvasPoints *gcp;
     int i = NUM2INT(offset);
     Data_Get_Struct(self, GnomeCanvasPoints, gcp);
-    if (gcp == NULL) {
-	rb_raise(rb_eRuntimeError, "object is already freed.");
-    }
     if (i < 0 || gcp->num_points * 2 <= i) {
 	rb_raise(rb_eIndexError, "index %d out of coordinate", i);
     }
@@ -58,9 +30,6 @@ points_aset(self, offset, val)
     GnomeCanvasPoints *gcp;
     int i = NUM2INT(offset);
     Data_Get_Struct(self, GnomeCanvasPoints, gcp);
-    if (gcp == NULL) {
-	rb_raise(rb_eRuntimeError, "object is already freed.");
-    }
     if (i < 0 || gcp->num_points * 2 <= i) {
 	rb_raise(rb_eIndexError, "index %d out of coordinate", i);
     }
@@ -92,9 +61,6 @@ Init_gnome_canvas_util()
     gnoCanvasPoints = rb_define_class_under(mGnome, "CanvasPoints", rb_cObject);
 
     rb_define_singleton_method(gnoCanvasPoints, "new", points_s_new, 1);
-    rb_define_method(gnoCanvasPoints, "ref", points_ref, 0);
-    rb_define_method(gnoCanvasPoints, "free", points_free, 0);
-    rb_define_alias(gnoCanvasPoints, "unref", "free");
     rb_define_method(gnoCanvasPoints, "[]", points_aref, 1);
     rb_define_method(gnoCanvasPoints, "[]=", points_aset, 2);
 

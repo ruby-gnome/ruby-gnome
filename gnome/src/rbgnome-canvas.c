@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas.c,v 1.3 2002/07/29 15:50:00 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.4 2002/08/06 12:45:24 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -19,6 +19,7 @@
  */
 
 #include "rbgnome.h"
+#include "rbart.h"
 
 VALUE gnoCanvas;
 
@@ -141,12 +142,12 @@ canvas_request_redraw(self, x1, y1, x2, y2)
 }
 
 static VALUE
-canvas_w2c_affline(self, affline)
-    VALUE self, affline;
+canvas_w2c_affine(self)
+    VALUE self;
 {
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
+    double affine[6];
+    gnome_canvas_w2c_affine(GNOME_CANVAS(get_widget(self)), affine);
+    return make_art_affine(affine);
 }
 
 static VALUE
@@ -270,8 +271,8 @@ Init_gnome_canvas()
             canvas_request_redraw_uta, 1);
     rb_define_method(gnoCanvas, "request_redraw",
             canvas_request_redraw, 4);
-    rb_define_method(gnoCanvas, "w2c_affline",
-            canvas_w2c_affline, 1);
+    rb_define_method(gnoCanvas, "w2c_affine",
+            canvas_w2c_affine, 0);
     rb_define_method(gnoCanvas, "w2c",
             canvas_w2c, 2);
     rb_define_method(gnoCanvas, "c2w",

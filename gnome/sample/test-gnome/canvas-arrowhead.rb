@@ -19,7 +19,6 @@ class CanvasSampleArrowhead < Gtk::VBox
     text.set("text", dim.to_s,
 	     "x", tx,
 	     "y", ty)
-    points.free()
   end
 
   def move_drag_box(item, x, y)
@@ -49,7 +48,6 @@ class CanvasSampleArrowhead < Gtk::VBox
     points[8] = points[0];
     points[9] = points[1];
     @outline.set("points", points)
-    points.free()
 
     # Drag boxes
     move_drag_box(@width_drag_box, LEFT, MIDDLE - 10 * @width / 2.0)
@@ -214,7 +212,6 @@ class CanvasSampleArrowhead < Gtk::VBox
 			 "fill_color", "black",
 			 "first_arrowhead", true,
 			 "last_arrowhead", true)
-    points.free()
     item
   end
 
@@ -264,7 +261,6 @@ EOS
 			       "fill_color", "mediumseagreen",
 			       "width_pixels", DEFAULT_WIDTH * 20,
 			       "last_arrowhead", true)
-    points.free()
 
     # Arrow outline
     @outline = root.item_new(Gnome::CanvasLine,
@@ -306,7 +302,6 @@ EOS
 		  "points", points,
 		  "fill_color", "black",
 		  "width_pixels", 2)
-    points.free()
 
     # Sample arrows
     @sample_1 = create_sample_arrow(root, RIGHT + 100, 30, RIGHT + 100, MIDDLE - 30);

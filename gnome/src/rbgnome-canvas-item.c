@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas-item.c,v 1.3 2002/07/29 15:50:00 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.4 2002/08/06 12:45:23 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -19,6 +19,7 @@
  */
 
 #include "rbgnome.h"
+#include "rbart.h"
 extern VALUE cImlibImage;
 
 VALUE gnoCanvasItem;
@@ -179,34 +180,20 @@ citem_move(self, dx, dy)
 }
 
 static VALUE
-citem_affine_relative(self, ary)
-    VALUE self, ary;
+citem_affine_relative(self, affine)
+    VALUE self, affine;
 {
-    int i;
-    double* affine;
-    Check_Type(ary, T_ARRAY);
-    affine = ALLOCA_N(double, 6);
-    for (i = 0; i < 6; ++i) {
-        affine[i] = NUM2DBL(RARRAY(ary)->ptr[i]);
-    }
     gnome_canvas_item_affine_relative(GNOME_CANVAS_ITEM(get_gobject(self)),
-                                       affine);
+                                       get_art_affine(affine));
     return Qnil;
 }
 
 static VALUE
-citem_affine_absolute(self, ary)
-    VALUE self, ary;
+citem_affine_absolute(self, affine)
+    VALUE self, affine;
 {
-    int i;
-    double* affine;
-    Check_Type(ary, T_ARRAY);
-    affine = ALLOCA_N(double, 6);
-    for (i = 0; i < 6; ++i) {
-        affine[i] = NUM2DBL(RARRAY(ary)->ptr[i]);
-    }
     gnome_canvas_item_affine_absolute(GNOME_CANVAS_ITEM(get_gobject(self)),
-                                      affine);
+                                      get_art_affine(affine));
     return Qnil;
 }
 
@@ -323,6 +310,24 @@ citem_i2w(self, x, y)
 }
 
 static VALUE
+citem_i2c_affine(self)
+    VALUE self;
+{
+    double affine[6];
+    gnome_canvas_item_i2c_affine(GNOME_CANVAS_ITEM(get_gobject(self)), affine);
+    return make_art_affine(affine);
+}
+
+static VALUE
+citem_i2w_affine(self)
+    VALUE self;
+{
+    double affine[6];
+    gnome_canvas_item_i2w_affine(GNOME_CANVAS_ITEM(get_gobject(self)), affine);
+    return make_art_affine(affine);
+}
+
+static VALUE
 citem_reparent(self, new_group)
     VALUE self, new_group;
 {
@@ -413,6 +418,10 @@ Init_gnome_canvas_item()
                      citem_w2i, 2);
     rb_define_method(gnoCanvasItem, "i2w",
                      citem_i2w, 2);
+    rb_define_method(gnoCanvasItem, "i2w_affine",
+                     citem_i2w_affine, 0);
+    rb_define_method(gnoCanvasItem, "i2c_affine",
+                     citem_i2c_affine, 0);
     rb_define_method(gnoCanvasItem, "reparent",
 		     citem_reparent, 1);
     rb_define_method(gnoCanvasItem, "grab_focus",
