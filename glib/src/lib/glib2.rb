@@ -148,7 +148,11 @@ module GLib
         if lvl == LEVEL_CRITICAL || lvl = LEVEL_ERROR  
           raise "#{domain}-#{LEVELS[lvl]} **:#{message}"
         else
-          $stderr.puts "#{domain}-#{LEVELS[lvl]} **:#{message}"
+          if $DEBUG
+            raise "#{domain}-#{LEVELS[lvl]} **:#{message}"
+          else
+            $stderr.puts "#{domain}-#{LEVELS[lvl]} **:#{message}"
+          end
         end
       end
     end

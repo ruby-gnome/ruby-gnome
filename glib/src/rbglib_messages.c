@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2004/04/19 16:29:38 $
+  $Date: 2004/10/31 14:44:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -27,9 +27,12 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     const gchar *message;
     gpointer user_data;
 {
-    rb_funcall((VALUE)user_data, id_call, 3,
-	       CSTR2RVAL(log_domain), INT2NUM(log_level),
-	       CSTR2RVAL(message));
+    if (TYPE(user_data) == T_BLOCK){
+        rb_funcall((VALUE)user_data, id_call, 3,
+                   CSTR2RVAL(log_domain), INT2NUM(log_level),
+                   CSTR2RVAL(message));
+
+    }
 }
 
 static VALUE

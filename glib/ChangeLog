@@ -1,3 +1,7 @@
+2004-10-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: Check the paratmeter is Block or not. 
+
 2004-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Added GLib.check_binding_version?
