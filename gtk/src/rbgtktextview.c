@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/06/07 14:22:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -166,7 +166,8 @@ static VALUE
 textview_get_window(self, wintype)
     VALUE self, wintype;
 {
-    GdkWindow* win = gtk_text_view_get_window(_SELF(self), NUM2INT(win));
+    GdkWindow* win = NULL;
+    win = gtk_text_view_get_window(_SELF(self), NUM2INT(wintype));
     return win ? GOBJ2RVAL(win): Qnil;
 }
 
