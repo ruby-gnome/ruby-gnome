@@ -1,3 +1,8 @@
+2002-09-27  KUBO Takehiro  <kubo@jiubao.org>
+
+	* canvas-arrowhead.rb, canvas-primitives.rb: restore here 
+	documents scatterd by 'M-x indent-region'.
+
 2002-09-26  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-util.c: delete Gnome::CanvasPoints and

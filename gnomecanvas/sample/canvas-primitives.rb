@@ -455,10 +455,10 @@ class CanvasSamplePrimitives < Gtk::VBox
     show()
 
     w = Gtk::Label.new(<<EOS)
-    Drag an item with button 1.  Click button 2 on an item to lower it,
-      or button 3 to raise it.  Shift+click with buttons 2 or 3 to send
-    an item to the bottom or top, respectively.
-      EOS
+Drag an item with button 1.  Click button 2 on an item to lower it,
+or button 3 to raise it.  Shift+click with buttons 2 or 3 to send
+an item to the bottom or top, respectively.
+EOS
     pack_start(w, false, false, 0)
     w.show()
 

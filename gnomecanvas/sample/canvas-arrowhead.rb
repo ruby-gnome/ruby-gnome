@@ -205,10 +205,10 @@ class CanvasSampleArrowhead < Gtk::VBox
     show
 
     w = Gtk::Label.new(<<EOS)
-    This demo allows you to edit arrowhead shapes.  Drag the little boxes
-    to change the shape of the line and its arrowhead.  You can see the
-    arrows at their normal scale on the right hand side of the window.
-      EOS
+This demo allows you to edit arrowhead shapes.  Drag the little boxes
+to change the shape of the line and its arrowhead.  You can see the
+arrows at their normal scale on the right hand side of the window.
+EOS
     pack_start(w, false, false, 0)
     w.show()
 
