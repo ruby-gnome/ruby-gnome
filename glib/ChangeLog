@@ -1,3 +1,7 @@
+2002-08-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/utils_int64.c: rb_global_variable(&max_PRUint32)
+
 2002-08-18  Masao Mutoh <mutoh@highway.ne.jp>
 
    * src/rbobjmanager.[ch]: Add file. Support RB_DEF_CLASS system.

@@ -4,7 +4,7 @@
   utils_int64.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 14:32:55 $
+  $Date: 2002/08/20 03:42:22 $
 
   Copyright (C) 2002  Masahiro Sakai
                       Kenichi Komiya
@@ -151,5 +151,6 @@ Init_utils_int64()
     id_uminus = rb_intern("-@");
     id_abs    = rb_intern("abs");
 
+    rb_global_variable(&max_PRUint32);
     max_PRUint32 = UINT2NUM(G_MAXUINT);
 }
