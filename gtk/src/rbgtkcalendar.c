@@ -4,7 +4,7 @@
   rbgtkcalendar.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Date: 2003/01/08 16:46:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,16 +45,16 @@ static VALUE
 cal_mark_day(self, day)
     VALUE self, day;
 {
-    gint ret = gtk_calendar_mark_day(_SELF(self), NUM2INT(day));
-    return INT2FIX(ret);
+    gtk_calendar_mark_day(_SELF(self), NUM2INT(day));
+    return self;
 }
 
 static VALUE
 cal_unmark_day(self, day)
     VALUE self, day;
 {
-    gint ret = gtk_calendar_unmark_day(_SELF(self), NUM2INT(day));
-    return INT2FIX(ret);
+    gtk_calendar_unmark_day(_SELF(self), NUM2INT(day));
+    return self;
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/10/14 17:24:14 $
+  $Date: 2003/01/08 16:46:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -105,7 +105,7 @@ gdkcolor_to_a(self)
 {
     GdkColor *c = _SELF(self);
     return rb_ary_new3(3, INT2FIX(c->red), 
-					   INT2FIX(c->green), INT2FIX(c->blue));
+                       INT2FIX(c->green), INT2FIX(c->blue));
 }
 
 static VALUE
@@ -118,7 +118,7 @@ gdkcolor_equal(self, other)
 void
 Init_gtk_gdk_color()
 {
-	VALUE gdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
+    VALUE gdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
     rb_define_singleton_method(gdkColor, "parse", gdkcolor_s_parse, 1);
     rb_define_method(gdkColor, "initialize", gdkcolor_initialize, 3);

@@ -55,6 +55,7 @@ end
 raise "can't found gdkcursor.h or gdkkeysyms.h" if gdkincl.nil?
 
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
+$CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../pango/src')) + $CFLAGS
 
 gdkx = `#{config_cmd} --variable=target`.chomp == 'x11'
 

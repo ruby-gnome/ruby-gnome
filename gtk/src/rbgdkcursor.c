@@ -4,9 +4,9 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:08:30 $
+  $Date: 2003/01/08 16:46:57 $
 
-  Copyright (C) 2001 MUTOH Masao
+  Copyright (C) 2001-2003 Masao Mutoh
 ************************************************/
 
 #include "global.h"
