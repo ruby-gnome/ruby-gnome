@@ -4,8 +4,8 @@
 
   rbbr.rb - Ruby Meta-Level Information Browser
 
-  $Author: mutoh $
-  $Date: 2002/06/22 05:26:49 $
+  $Author: sakai $
+  $Date: 2002/10/02 04:38:44 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -20,8 +20,8 @@
 
   meta/metainfo.rb - API for Meta-level Information
 
-  $Author: mutoh $
-  $Date: 2002/06/22 05:26:49 $
+  $Author: sakai $
+  $Date: 2002/10/02 04:38:44 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -308,8 +308,8 @@ require 'gtk2'
 
   gtkutil.rb - Gtk Utility
 
-  $Author: mutoh $
-  $Date: 2002/06/22 05:26:49 $
+  $Author: sakai $
+  $Date: 2002/10/02 04:38:44 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -430,8 +430,8 @@ end
 
   meta/browser.rb - Meta-Level Information Browser
 
-  $Author: mutoh $
-  $Date: 2002/06/22 05:26:49 $
+  $Author: sakai $
+  $Date: 2002/10/02 04:38:44 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -641,6 +641,42 @@ module RBBR
     end
   end
 
+  class PropertyList < BrowseList
+    def initialize
+      super(["Name", "Type", "Flags", "Nick", "Blurb"])
+    end
+
+    def update_list(modul)
+      if modul <= GLib::Object
+        modul.list_properties.sort{|a,b| a.name<=>b.name }.each do |prop|
+          if prop.owner_type == modul.gtype
+            flags = ''
+            flags << 'r' if prop.flags & GLib::ParamSpec::READABLE
+            flags << 'w' if prop.flags & GLib::ParamSpec::WRITABLE
+            self.append([prop.name, prop.value_type.name, flags,
+                         prop.nick, prop.blurb])
+          end
+        end
+      end
+    end
+  end
+
+  class SignalList < BrowseList
+    def initialize
+      super(["Name", "Return type", "Parameters"])
+    end
+
+    def update_list(modul)
+      if modul < GLib::Instantiatable or modul < GLib::Interface
+        modul.signal_list.each{|signal_id|
+          signal = GLib::Signal.query(signal_id)
+          self.append([signal.name, signal.return_type.name,
+                        signal.param_types.map{|t| t.name}.join(", ") ])
+        }
+      end
+    end
+  end
+
   class Browser < Gtk::Window
     def initialize
       super
@@ -720,12 +756,16 @@ module RBBR
       protected_instance_method_list = ProtectedInstanceMethodList.new
       private_instance_method_list = PrivateInstanceMethodList.new
       constant_list = ConstantList.new
+      property_list = PropertyList.new
+      signal_list   = SignalList.new
       [ 
 	[public_instance_method_list, "Public Instance Methods"],
 	[protected_instance_method_list, "Protected Instance Methods"],
 	[private_instance_method_list, "Private Instance Methods"],
 	[singleton_method_list, "Singleton Methods"],
 	[constant_list, "Constants"],
+	[property_list, "GObject Properties"],
+	[signal_list, "GObject Signals"],
       ].each_with_index do |(list, label), index|
 	scwin = Gtk::ScrolledWindow.new
 	scwin.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
@@ -1093,12 +1133,16 @@ module RBBR
       protected_instance_method_list = ProtectedInstanceMethodList.new
       private_instance_method_list = PrivateInstanceMethodList.new
       constant_list = ConstantList.new
+      property_list = PropertyList.new
+      signal_list   = SignalList.new
       [ 
 	[public_instance_method_list, "Public Instance Methods"],
 	[protected_instance_method_list, "Protected Instance Methods"],
 	[private_instance_method_list, "Private Instance Methods"],
 	[singleton_method_list, "Singleton Methods"],
 	[constant_list, "Constants"],
+	[property_list, "GObject Properties"],
+	[signal_list, "GObject SignalList"],
       ].each_with_index do |(list, label), index|
 	scwin = Gtk::ScrolledWindow.new
 	scwin.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
