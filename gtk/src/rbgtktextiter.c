@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Author: sakai $
+  $Date: 2002/10/02 14:46:23 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -13,19 +13,13 @@
 
 static VALUE cTextIter;
 
-VALUE
+static inline VALUE
 make_gtktextiter(GtkTextIter* iter)
-{
-    return Data_Wrap_Struct(cTextIter, NULL, &gtk_text_iter_free, iter);
-}
+{ return BOXED2RVAL(iter, GTK_TYPE_TEXT_ITER); }
 
-GtkTextIter*
+static inline GtkTextIter*
 get_gtktextiter(VALUE obj)
-{
-    GtkTextIter* iter;
-    Data_Get_Struct(obj, GtkTextIter, iter);
-    return iter;
-}
+{ return RVAL2BOXED(obj, GTK_TYPE_TEXT_ITER); }
 
 
 // GtkTextIter *gtk_text_iter_copy     (const GtkTextIter *iter);
@@ -344,7 +338,7 @@ void     gtk_text_iter_order           (GtkTextIter *first,
 void
 Init_gtk_textiter()
 {
-    cTextIter = rb_define_class_under(mGtk, "TextIter", rb_cData);
+    cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(cTextIter, rb_mComparable);
 
 #if 0

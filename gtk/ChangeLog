@@ -1,5 +1,7 @@
 2002-10-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgtktextiter.c: make Gtk::TextIter be boxed type.
+
 	* doc/rbbr.rb: implement PropertyList and SignalList for displaying
 	properties and signals respectively.
 

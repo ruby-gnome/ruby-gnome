@@ -3,16 +3,13 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Author: sakai $
+  $Date: 2002/10/02 14:46:23 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
 
 #include "global.h"
-
-extern VALUE make_gtktextiter(GtkTextIter* iter);
-extern GtkTextIter* get_gtktextiter(VALUE obj);
 
 static VALUE
 txt_initialize(argc, argv, self)
@@ -45,7 +42,7 @@ static VALUE
 txt_get_tag_table(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_buffer_get_char_count(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_text_buffer_get_tag_table(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -125,8 +122,8 @@ txt_delete(self, start, end)
     VALUE self, start, end;
 {
     gtk_text_buffer_delete(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
-                           get_gtktextiter(start),
-                           get_gtktextiter(end));
+                           RVAL2BOXED(start, GTK_TYPE_TEXT_ITER),
+                           RVAL2BOXED(end, GTK_TYPE_TEXT_ITER));
     return self;
 }
 
