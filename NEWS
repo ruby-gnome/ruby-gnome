@@ -1,3 +1,111 @@
+Ruby-GNOME2-0.9.0 (2004-03-07)
+
+  * Ruby/GLib
+      - Improved, fixed bugs: [Kenichi Komiya, Vincent Isambart, Masao Mutoh]
+         GLib::Object, GLib::Param::Flags, mkmf-gnome2.rb, sample/type-register.rb
+      - Added new macros: [Masao Mutoh]
+         G_DEF_CLASS3()
+
+  * Ruby/ATK [NEW]
+      - Added and compeleted: [Masao Mutoh]
+         Atk::Action, Atk::Document, Atk::GObjectAccessible, Atk::NoOpObject, 
+         Atk::NoOpObjectFactory, Atk::Value, Atk::Component, Atk::Image, 
+         Atk::HyperText, Atk::HyperLink, Atk::EditableText, Atk::Implementor, 
+         Atk::Object, Atk::Relation, Atk::Registry, Atk::ObjectFactory, 
+         Atk::State, Atk::StateSet, Atk::EditableText, Atk::Table 
+      - Added: [Masao Mutoh]
+         Atk::Util, Atk::Component, Atk::Selection, Atk::Text
+
+  * Ruby/GdkPixbuf
+      - None.
+
+  * Ruby/Pango 
+      - None.
+
+  * Ruby/GTK
+      - Completed: [Masao Mutoh]
+      - Added and completed: [Masao Mutoh]
+      - Added: [Kenichi Komiya, Masao, Mutoh]
+         Gtk::TextAppearance, sample/misc/bindings.rb, properties.rb, 
+         style_property.rb, settings.rb
+      - Added some methods, improved, fixed bugs: [Kenichi Komiya, Masahiro Sakai, 
+          Vincent Isambart, Dafydd Harries, Masao Mutoh]
+         Gdk::Window, Gtk::SizeGroup, Gtk::Object, Gtk::BindingSet, 
+         Gtk::TextTagTable, Gtk::TextTag, Gdk::Colormap, Gtk::TreeViewColumn, 
+         Gtk::TextIter, Gtk::SpinButton, Gtk::Allocation, Gtk::TextView, 
+         Gtk::TextBuffer, Gtk::Widget, Gtk::Container, Gtk::Setting, Gtk::TreePath, 
+         Gtk::TreeIter, Gdk::Display, Gtk::TextAttributes, Gdk::Property, 
+         Gdk::Keymap, Gdk::Pixmap, Gdk::Drawable, Gdk::Screen, Gdk::Event, 
+         Gdk::EventExpose, Gdk::Selection, Gdk::GC,  
+         sample/gtk-demo/main.rb, stock_browser.rb, list_store.rb, tree_store.rb,
+         sample/testgtk/notebook.rb,
+         sample/misc/label.rb, toolbar.rb, 
+         extconf.rb
+      - Removed: [Masao Mutoh]
+         Gtk::Object#activate_binding
+          Use Gtk::Object#bindings_activate insted.
+         Gtk::TextAttribute#copy
+          Use GLib::Boxed#copy instead.
+         Gdk::EventKey#string, #length.
+         makedefconst.rb
+          Don't use anymore.
+      - Deperecated: [Masao Mutoh]
+         Gtk::TextBuffer#insert_with_tags, #insert_pixbuf, #insert_child_anchor.
+          They will be removed until 1.0.0.
+          Use Gtk::TextBuffer#insert instead.
+
+  * Ruby/GNOME
+      - Fixed bugs: [Masao Mutoh]
+         Gnome::Program
+
+  * Ruby/GnomeCanvas
+      - Added: [Masao Mutoh]
+         Gnome::CanvasShape, Gnome::CanvasRE, Gnome::CanvasClipgroup
+      - Fixed bugs: [Vincent Isambart, Masao Mutoh]
+         extconf.rb, sample/canvas-curve.rb
+
+  * Ruby/Libglade
+      - Added: [Masao Mutoh]
+         sample/custom.[rb|glade]
+      - Added methods: [Archit Baweja, Masao Mutoh]
+         GladeXML#widget_names, #filename, #[], #require, #provide
+      - Improved, fixed bugs: [Masao Mutoh]
+         bin/ruby-glade-create-template
+
+  * Ruby/Libart
+      - Improved: [Masao Mutoh]
+         extconf.rb
+
+  * Ruby/GConf
+      - None.
+
+  * Ruby/GStreamer 
+      - Added some methods, improved, fixed bugs: [Laurent Sansonetti]
+         Gst, Gst::Bin, Gst::Pad, Gst::PadTemplate, Gst::Type, Gst::Element
+         sample/gst-inspect.rb, media-type2.rb
+        
+  * Ruby/GnomeVFS
+      - Added some methods, improved, fixed bugs: [Masahiro Sakai, Masao Mutoh]
+         GnomeVFS::FileInfo, Gnome::VFS::File, GnomeVFS::ProtocolError, 
+         GnomeVFS::NoMasterBrowserError
+
+  * Ruby/GtkHtml2
+      - Added some methods, fixed bugs: [Vincent Isambart, Masao Mutoh]
+         Gtk::HtmlView, Gtk::HtmlStream, extconf.rb
+
+  * Ruby/GtkGLExt
+      - Added some methods, improved, fixed bugs: [Vincent Isambart, Masao Mutoh]
+         Gdk::GLDrawable, sample/*.rb
+
+  * Ruby/Libgda
+      - Added: [Laurent Sansonetti] 
+        GeometricPoint, Gda::Money, Gdak::Time
+      - Added some methods, improved, fixed bugs: [Nikolai Weibull, Laurent Sansonetti]
+         Gda::Error, Gda::ParameterList, Gda::Provider, Gda::DataSource, 
+         Gda::Connection, Gda::Parameter, Gda::Command, Gda::Row, Gda::Value, 
+         Gda::DataModel, Gda::ModelList, Gda::FieldAttributes
+         tests/*.rb, src/lib/libgda.rb
+
 Ruby-GNOME2-0.8.1 (2003-11-23)
 
   * Ruby/GTK
