@@ -10,7 +10,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.6.x, GTK+, libgnomecanvas, Ruby/GLib2, Ruby/GTK2.
+   0. install ruby-1.6.x or later, GTK+, libgnomecanvas, Ruby/GLib2, Ruby/GTK2.
    1. ruby extconf.rb
    2. make
    3. su
@@ -26,4 +26,4 @@ Copying
 
 Project Website
 ---------------
-   http://ruby-gnome2.sourceforge.net/
+   http://ruby-gnome2.sourceforge.jp/

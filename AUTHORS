@@ -1,5 +1,8 @@
 The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 ------------------------------------------------------------------------
+Chikara Takamatsu <c_takamatu@ybb.ne.jp>
+     Japanese Website, Website
+
 Dario Linsky <dlinsky@web.de>
      German Website(M).
 
@@ -14,7 +17,7 @@ Geoff Youngs <g@intersect-uk.co.uk>
      Ruby/Pango, Ruby/GLib. Ruby-GNOME2 Icon, Website.
 
 Joao Pedrosa <joaopedrosa@yahoo.com>
-     Portuguese-BR Website(M), Website.
+     Portuguese-BR Website(M), Website, Ruby/GTK.
 
 Joshua Keith <joshuakeith@linuxmail.org>
      Tutorial(M), Website, Ruby-GNOME2 Icon.
@@ -23,7 +26,7 @@ Junichiro Kita <kita@kitaj.no-ip.com>
      Ruby/GTK Tutorial(Japanese) (M)
 
 KATO Kazuyoshi <kzys@8-p.info>
-     Ruby/GTK(Especially gtk-demo), Gdk::Pixbuf.
+     Ruby/GTK(mainly gtk-demo), Ruby/GdkPixbuf, Ruby/GLib, Ruby/Libart. 
 
 Kouhei Sutou  <kou@cozmixng.org>
      Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M).
@@ -53,6 +56,9 @@ Masao Mutoh <mutoh@highway.ne.jp>
 Matthew Berg <galt@gothpoodle.com>
      Ruby/GTK TreeView Tutorial(M), Website, Ruby/GTK.
 
+Mirko Maischberger <mirko@lilik.it>
+     Ruby/GtkMozEmbed(M), Ruby/GTK, Website.
+ 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
 

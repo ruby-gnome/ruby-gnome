@@ -11,7 +11,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.6.x, GTK+, libgnome, libgnomeui, libgnomecanvas,
+   0. install ruby-1.6.x or later, GTK+, libgnome, libgnomeui, libgnomecanvas,
       Ruby/GLib2, Ruby/GTK2 and Ruby/GnomeCanvas2.
    1. ruby extconf.rb
    2. make
@@ -20,7 +20,7 @@ Install
 
 Copying
 -------
-   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
+   Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
 
    This program is free software.
    You can distribute/modify this program under the terms of
@@ -28,4 +28,4 @@ Copying
 
 Project Website
 ---------------
-   http://ruby-gnome2.sourceforge.net/
+   http://ruby-gnome2.sourceforge.jp/
