@@ -17,6 +17,12 @@ $CFLAGS += " " + ['glib/src'].map{|d|
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")
 
+have_header("assert.h")
+
+if have_library("gstmedia-info-0.6", "gst_media_info_read")
+	$CFLAGS += " -DHAVE_MEDIA_INFO"
+end
+
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
@@ -24,7 +30,5 @@ begin
 ensure
   Dir.chdir('..')
 end
-
-have_header("assert.h")
 
 create_top_makefile
