@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/04/13 09:05:34 $
+  $Date: 2003/04/13 09:14:10 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -599,6 +599,8 @@ Init_type()
     _def_fundamental_type(ary, G_TYPE_ULONG,     "ULONG");
     _def_fundamental_type(ary, G_TYPE_INT64,     "INT64");
     _def_fundamental_type(ary, G_TYPE_UINT64,    "UINT64");
+    _def_fundamental_type(ary, G_TYPE_ENUM,      "ENUM");
+    _def_fundamental_type(ary, G_TYPE_FLAGS,     "FLAGS");
     _def_fundamental_type(ary, G_TYPE_FLOAT,     "FLOAT");
     _def_fundamental_type(ary, G_TYPE_DOUBLE,    "DOUBLE");
     _def_fundamental_type(ary, G_TYPE_STRING,    "STRING");
