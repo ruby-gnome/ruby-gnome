@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/05/26 16:30:37 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,8 @@
 ************************************************/
 
 #include "global.h"
+
+static ID call;
 
 static VALUE
 menu_initialize(self)
@@ -47,14 +49,21 @@ menu_insert(self, child, pos)
 }
 
 static void
-menu_pos_func(menu, x, y, data)
+menu_pos_func(menu, px, py, data)
     GtkMenu *menu;
-    gint x, y;
+    gint *px, *py;
     gpointer data;
 {
+    VALUE arr;
     VALUE m = get_value_from_gobject(GTK_OBJECT(menu));
 
-    rb_funcall((VALUE)data, 3, m, INT2FIX(x), INT2FIX(y));
+    arr = rb_funcall((VALUE)data, call, 3, m, INT2FIX(*px), INT2FIX(*py));
+    Check_Type(arr, T_ARRAY);
+    if (RARRAY(arr)->len != 2) {
+	rb_raise(rb_eTypeError, "wrong number of result (%d for 2)", RARRAY(arr)->len);
+    }
+    *px = NUM2INT(RARRAY(arr)->ptr[0]);
+    *py = NUM2INT(RARRAY(arr)->ptr[1]);
 }
 
 static VALUE
@@ -124,4 +133,6 @@ void Init_gtk_menu()
     rb_define_method(gMenu, "popdown", menu_popdown, 0);
     rb_define_method(gMenu, "get_active", menu_get_active, 0);
     rb_define_method(gMenu, "set_active", menu_set_active, 1);
+
+    call = rb_intern("call");
 }

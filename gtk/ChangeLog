@@ -1,3 +1,10 @@
+Sun May 27 01:04:09 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * src/rbgtkmenu.c: BugFix for Gtk::Menu#popup's segfault
+    ([ruby-talk:40381] by Nobuyoshi Nakada  <nobu.nakada@nifty.ne.jp>)
+   * src/rbgtkobject.c: BugFix for Gtk::Notebook#append_page/append_page_menu.
+     (Ruby-GNOME Bug [534381])
+
 Sun May 26 23:52:15 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
    * src/rbgtklayout.c: Fix Gtk::Layout#vadjustment to
