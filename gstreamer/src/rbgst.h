@@ -52,8 +52,6 @@ extern gboolean debug_mode;
 #define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
-#define RGST_AUTOPLUG(o)            (GST_AUTOPLUG(RVAL2GOBJ(o)))
-#define RGST_AUTOPLUG_FACTORY(o)    (GST_AUTOPLUG_FACTORY(RVAL2GOBJ(o)))
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
 #define RGST_CLOCK(o)               (GST_CLOCK(RVAL2GOBJ(o)))
@@ -74,14 +72,10 @@ extern gboolean debug_mode;
 #define RGST_REGISTRY(o)            (GST_REGISTRY(RVAL2GOBJ(o)))
 #define RGST_SCHEDULER_FACTORY(o)   (GST_SCHEDULER_FACTORY(RVAL2GOBJ(o)))
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
-#define RGST_TYPE(o)                (GST_TYPE(RVAL2BOXED(o, GST_TYPE_TYPE)))
-#define RGST_TYPE_FACTORY(o)        (GST_TYPE_FACTORY(RVAL2GOBJ(o)))
 #define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
 
 #define RGST_GOBJ_NEW(o)    (rbgst_new_gstobject(o))
 
-#define RGST_AUTOPLUG_NEW(o)            (RGST_GOBJ_NEW(GST_AUTOPLUG(o)))
-#define RGST_AUTOPLUG_FACTORY_NEW(o)    (RGST_GOBJ_NEW(GST_AUTOPLUG_FACTORY(o)))
 #define RGST_BIN_NEW(o)                 (RGST_GOBJ_NEW(GST_BIN(o)))
 #define RGST_CAPS_NEW(o)                (BOXED2RVAL(GST_CAPS(o), GST_TYPE_CAPS))
 #define RGST_CLOCK_NEW(o)               (RGST_GOBJ_NEW(GST_CLOCK(o)))
@@ -102,26 +96,23 @@ extern gboolean debug_mode;
 #define RGST_SCHEDULER_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_SCHEDULER_FACTORY(o)))
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
 #define RGST_THREAD_NEW(o)              (RGST_GOBJ_NEW(GST_THREAD(o)))
-#define RGST_TYPE_FACTORY_NEW(o)        (RGST_GOBJ_NEW(GST_TYPE_FACTORY(o)))
-#define RGST_TYPE_NEW(o)                (BOXED2RVAL(GST_TYPE(o), GST_TYPE_TYPE))
-#define RGST_TYPE_FIND_NEW(o)           (RGST_GOBJ_NEW(GST_TYPE_FIND(o)))
 
-GType gst_clock_handle_get_type();
-GType gst_event_mask_get_type();
-GType gst_format_get_type2();
-GType gst_plugin_get_type();
-GType gst_query_type_get_type2();
-GType gst_type_get_type();
+GType gst_clock_handle_get_type ();
+GType gst_event_mask_get_type ();
+GType gst_format_get_type2 ();
+GType gst_plugin_get_type ();
+GType gst_query_type_get_type2 ();
+GType gst_type_get_type ();
 
 /* misc.c interface */
-void rbgst_initialize_gstobject(VALUE obj, GstObject *gstobj);
-VALUE rbgst_new_gstobject(void *);
-VALUE rb_str_format(char *fmt, ...);
-VALUE rb_ary_yield(VALUE arr);
+void rbgst_initialize_gstobject (VALUE obj, GstObject * gstobj);
+VALUE rbgst_new_gstobject (void *);
+VALUE rb_str_format (char *fmt, ...);
+VALUE rb_ary_yield (VALUE arr);
 
 /* implemented in rbgstpluginfeature.c */
-gboolean is_valid_pluginfeature_type(const GType type);
-VALUE instanciate_pluginfeature(GstPluginFeature *feature);
+gboolean is_valid_pluginfeature_type (const GType type);
+VALUE instanciate_pluginfeature (GstPluginFeature * feature);
 
 #define DBL2NUM(v)      (rb_float_new(v))
 
@@ -142,4 +133,4 @@ VALUE instanciate_pluginfeature(GstPluginFeature *feature);
 #define NUM2ULL(v)      (rb_num2ull(v))
 #endif
 
-#endif /* __RBGST_H_ */
+#endif                          /* __RBGST_H_ */

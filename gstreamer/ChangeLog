@@ -1,3 +1,10 @@
+2004-07-25  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.c (Gst.set_debug): Removed. 
+	* src/rbgst.h: Removed obsolete macros.
+	* src/rbgstbin.c (#get_by_interface, #get_all_by_interface,
+	  #each_by_interface): Added.  Existing code has been refactored.
+
 2004-07-23  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README: We require 0.8.x now. 

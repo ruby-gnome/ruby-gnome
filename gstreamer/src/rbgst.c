@@ -28,67 +28,68 @@ VALUE mGst;
 static void
 Init_gst_classes (void)
 {
-	extern void Init_gst_bin (void);
-	extern void Init_gst_caps (void);
-	extern void Init_gst_clock (void);
-	extern void Init_gst_clock_entry (void);
-	extern void Init_gst_cpu (void);
-	extern void Init_gst_element (void);
-	extern void Init_gst_elementfactory (void);
-	extern void Init_gst_event (void);
-	extern void Init_gst_eventmask (void);
-	extern void Init_gst_eventseek (void);
-	extern void Init_gst_eventsegmentseek (void);
-	extern void Init_gst_eventsize (void);
-	extern void Init_gst_format (void);
-	extern void Init_gst_indexfactory (void);
-	extern void Init_gst_object (void);
-	extern void Init_gst_pad (void);
-	extern void Init_gst_padtemplate (void);
-	extern void Init_gst_parse (void);
-	extern void Init_gst_pipeline (void);
-	extern void Init_gst_plugin (void);
-	extern void Init_gst_pluginfeature (void);
-	extern void Init_gst_querytype (void);
-	extern void Init_gst_registry (void);
-	extern void Init_gst_schedulerfactory (void);
-	extern void Init_gst_systemclock (void);
-	extern void Init_gst_thread (void);
-	extern void Init_gst_xml (void);
-#ifdef HAVE_MEDIA_INFO
-	extern void Init_gst_mediatype (void);
-#endif
-	
-	Init_gst_bin ();
-	Init_gst_caps ();
-	Init_gst_clock ();
-	Init_gst_clock_entry ();
-	Init_gst_cpu ();
-	Init_gst_element ();
-	Init_gst_elementfactory ();
-	Init_gst_event ();
-	Init_gst_eventmask ();
-	Init_gst_eventseek ();
-	Init_gst_eventsegmentseek ();
-	Init_gst_eventsize ();
-	Init_gst_format ();
-	Init_gst_indexfactory ();
-	Init_gst_object ();
-	Init_gst_pad ();
-	Init_gst_padtemplate ();
-	Init_gst_parse ();
-	Init_gst_pipeline ();
-	Init_gst_plugin ();
-	Init_gst_pluginfeature ();
-	Init_gst_querytype ();
-	Init_gst_registry ();
-	Init_gst_schedulerfactory ();
-	Init_gst_systemclock ();
-	Init_gst_thread ();
-	Init_gst_xml ();
+    extern void Init_gst_bin (void);
+    extern void Init_gst_caps (void);
+    extern void Init_gst_clock (void);
+    extern void Init_gst_clock_entry (void);
+    extern void Init_gst_cpu (void);
+    extern void Init_gst_element (void);
+    extern void Init_gst_elementfactory (void);
+    extern void Init_gst_event (void);
+    extern void Init_gst_eventmask (void);
+    extern void Init_gst_eventseek (void);
+    extern void Init_gst_eventsegmentseek (void);
+    extern void Init_gst_eventsize (void);
+    extern void Init_gst_format (void);
+    extern void Init_gst_indexfactory (void);
+    extern void Init_gst_object (void);
+    extern void Init_gst_pad (void);
+    extern void Init_gst_padtemplate (void);
+    extern void Init_gst_parse (void);
+    extern void Init_gst_pipeline (void);
+    extern void Init_gst_plugin (void);
+    extern void Init_gst_pluginfeature (void);
+    extern void Init_gst_querytype (void);
+    extern void Init_gst_registry (void);
+    extern void Init_gst_schedulerfactory (void);
+    extern void Init_gst_systemclock (void);
+    extern void Init_gst_thread (void);
+    extern void Init_gst_xml (void);
 
 #ifdef HAVE_MEDIA_INFO
-	Init_gst_mediatype ();
+    extern void Init_gst_mediatype (void);
+#endif
+
+    Init_gst_bin ();
+    Init_gst_caps ();
+    Init_gst_clock ();
+    Init_gst_clock_entry ();
+    Init_gst_cpu ();
+    Init_gst_element ();
+    Init_gst_elementfactory ();
+    Init_gst_event ();
+    Init_gst_eventmask ();
+    Init_gst_eventseek ();
+    Init_gst_eventsegmentseek ();
+    Init_gst_eventsize ();
+    Init_gst_format ();
+    Init_gst_indexfactory ();
+    Init_gst_object ();
+    Init_gst_pad ();
+    Init_gst_padtemplate ();
+    Init_gst_parse ();
+    Init_gst_pipeline ();
+    Init_gst_plugin ();
+    Init_gst_pluginfeature ();
+    Init_gst_querytype ();
+    Init_gst_registry ();
+    Init_gst_schedulerfactory ();
+    Init_gst_systemclock ();
+    Init_gst_thread ();
+    Init_gst_xml ();
+
+#ifdef HAVE_MEDIA_INFO
+    Init_gst_mediatype ();
 #endif
 }
 
@@ -108,55 +109,54 @@ Init_gst_classes (void)
 extern VALUE rb_progname, rb_argv;
 
 static VALUE
-rb_gst_init (int argc, VALUE *argv, VALUE self)
-{ 
-	gint i, gargc;
-	VALUE argary;
-	gchar** gargv;
+rb_gst_init (int argc, VALUE * argv, VALUE self)
+{
+    gint i, gargc;
+    VALUE argary;
+    gchar **gargv;
 
-	/*
-	 * Convert arguments in a Ruby array.
-	 * If no arguments are provided, we use the command line ones.
-	 */
-	rb_scan_args (argc, argv, "01", &argary);
+    /*
+     * Convert arguments in a Ruby array.
+     * If no arguments are provided, we use the command line ones.
+     */
+    rb_scan_args (argc, argv, "01", &argary);
 
-	if (NIL_P (argary)) {
-		gargc = RARRAY (rb_argv)->len;
-		argary = rb_argv;
-	} 
-	else {
-		Check_Type (argary, T_ARRAY);
-		gargc = RARRAY (argary)->len;
-	}
+    if (NIL_P (argary)) {
+        gargc = RARRAY (rb_argv)->len;
+        argary = rb_argv;
+    } else {
+        Check_Type (argary, T_ARRAY);
+        gargc = RARRAY (argary)->len;
+    }
 
-	/*
-	 * Fill the gargv array with the provided arguments.
-	 */
-	gargv = ALLOCA_N (char*, gargc + 1);
-	gargv[0] = (gchar *) STR2CSTR (rb_progname);
+    /*
+     * Fill the gargv array with the provided arguments.
+     */
+    gargv = ALLOCA_N (char *, gargc + 1);
 
-	for (i = 0; i < gargc; i++) {
-		if (TYPE (RARRAY (argary)->ptr[i]) == T_STRING) {
-			gargv[i+1] = (gchar *) STR2CSTR (RARRAY (argary)->ptr[i]);
-		}
-		else {
-			gargv[i+1] = "";
-		}
-	}
-	gargc++;
+    gargv[0] = (gchar *) STR2CSTR (rb_progname);
 
-	/*
-	 * Now, we can initialize GStreamer. 
-	 */
-	if (gst_init_check (&gargc, &gargv) == FALSE) 
-		rb_raise (rb_eRuntimeError, "failed to initialize GStreamer");
+    for (i = 0; i < gargc; i++) {
+        if (TYPE (RARRAY (argary)->ptr[i]) == T_STRING) {
+            gargv[i + 1] = (gchar *) STR2CSTR (RARRAY (argary)->ptr[i]);
+        } else {
+            gargv[i + 1] = "";
+        }
+    }
+    gargc++;
 
-	/* 
-	 * Initialize all included classes 
-	 */
-	Init_gst_classes ();
-	
-	return Qtrue;
+    /*
+     * Now, we can initialize GStreamer. 
+     */
+    if (gst_init_check (&gargc, &gargv) == FALSE)
+        rb_raise (rb_eRuntimeError, "failed to initialize GStreamer");
+
+    /*
+     * Initialize all included classes 
+     */
+    Init_gst_classes ();
+
+    return Qtrue;
 }
 
 /*
@@ -171,18 +171,18 @@ rb_gst_init (int argc, VALUE *argv, VALUE self)
  * Returns: an Array of 3 fixnums (major, minor and macro numbers).
  */
 static VALUE
-rb_gst_version (VALUE self) 
+rb_gst_version (VALUE self)
 {
-	guint major, minor, micro;
-	VALUE arr;
+    guint major, minor, micro;
+    VALUE arr;
 
-	gst_version (&major, &minor, &micro);
-	arr = rb_ary_new ();
-	rb_ary_push (arr, INT2FIX (major));
-	rb_ary_push (arr, INT2FIX (minor));
-	rb_ary_push (arr, INT2FIX (micro));
+    gst_version (&major, &minor, &micro);
+    arr = rb_ary_new ();
+    rb_ary_push (arr, INT2FIX (major));
+    rb_ary_push (arr, INT2FIX (minor));
+    rb_ary_push (arr, INT2FIX (micro));
 
-	return arr;
+    return arr;
 }
 
 /* Class method: has_threads?
@@ -191,7 +191,7 @@ rb_gst_version (VALUE self)
 static VALUE
 rb_gst_has_threads (VALUE self)
 {
-	return CBOOL2RVAL (gst_has_threads ());
+    return CBOOL2RVAL (gst_has_threads ());
 }
 
 /*
@@ -210,75 +210,59 @@ rb_gst_has_threads (VALUE self)
 static VALUE
 rb_gst_use_threads (VALUE self, VALUE value)
 {
-	gst_use_threads (RVAL2CBOOL (value));
-	return value;
-}
-
-/*
- * Class method: set_debug(state)
- * state: a boolean state.
- *
- * Enables or disable debug mode, according to the provided parameter.
- * When debug mode is on, Ruby/GStreamer will print various information
- * on the screen (as instance, when the GC cames), useful to trace and fix bugs.  
- *
- * Returns: always nil.
- */
-gboolean debug_mode = FALSE;
-
-static VALUE
-rb_gst_set_debug (VALUE self, VALUE value)
-{
-	debug_mode = RVAL2CBOOL (value);
-	return Qnil;
+    gst_use_threads (RVAL2CBOOL (value));
+    return value;
 }
 
 void
 Init_gst (void)
 {
-	mGst = rb_define_module ("Gst");
+    mGst = rb_define_module ("Gst");
 
-	rb_define_module_function (mGst, "init", rb_gst_init, -1);
-	rb_define_module_function (mGst, "version", rb_gst_version, 0);
-	rb_define_module_function (mGst, "has_threads?", rb_gst_has_threads, 0);
-	rb_define_module_function (mGst, "use_threads", rb_gst_use_threads, 1);
-	rb_define_module_function (mGst, "set_debug", rb_gst_set_debug,	1);
+    rb_define_module_function (mGst, "init", rb_gst_init, -1);
+    rb_define_module_function (mGst, "version", rb_gst_version, 0);
+    rb_define_module_function (mGst, "has_threads?", rb_gst_has_threads, 0);
+    rb_define_module_function (mGst, "use_threads", rb_gst_use_threads, 1);
 
-	/* Constant: SECOND
-	 * Constant that defines one GStreamer second.
-	 */
-	rb_define_const (mGst, "SECOND",  INT2FIX (GST_SECOND));
+    /*
+     * Constant: SECOND
+     * * Constant that defines one GStreamer second.
+     */
+    rb_define_const (mGst, "SECOND", INT2FIX (GST_SECOND));
 
+    /*
+     * Constant: MSECOND
+     * * Constant that defines one GStreamer millisecond.
+     */
+    rb_define_const (mGst, "MSECOND", INT2FIX (GST_MSECOND));
 
-	/* Constant: MSECOND
-	 * Constant that defines one GStreamer millisecond.
-	 */
-	rb_define_const (mGst, "MSECOND", INT2FIX (GST_MSECOND));
+    /*
+     * Constant: USECOND
+     * * Constant that defines one GStreamer microsecond.
+     */
+    rb_define_const (mGst, "USECOND", INT2FIX (GST_USECOND));
 
+    /*
+     * Constant: NSECOND
+     * * Constant that defines one GStreamer nanosecond.
+     */
+    rb_define_const (mGst, "NSECOND", INT2FIX (GST_NSECOND));
 
-	/* Constant: USECOND
-	 * Constant that defines one GStreamer microsecond.
-	 */
-	rb_define_const (mGst, "USECOND", INT2FIX (GST_USECOND));
+    /*
+     * Constant: VERSION_MAJOR
+     * * GStreamer's major version.
+     */
+    rb_define_const (mGst, "VERSION_MAJOR", INT2FIX (GST_VERSION_MAJOR));
 
+    /*
+     * Constant: VERSION_MINOR
+     * * GStreamer's minor version.
+     */
+    rb_define_const (mGst, "VERSION_MINOR", INT2FIX (GST_VERSION_MINOR));
 
-	/* Constant: NSECOND
-	 * Constant that defines one GStreamer nanosecond.
-	 */
-	rb_define_const (mGst, "NSECOND", INT2FIX (GST_NSECOND));
-
-	/* Constant: VERSION_MAJOR
-	 * GStreamer's major version.
-	 */
-	rb_define_const (mGst, "VERSION_MAJOR", INT2FIX (GST_VERSION_MAJOR));
-	
-	/* Constant: VERSION_MINOR
-	 * GStreamer's minor version.
-	 */
-	rb_define_const (mGst, "VERSION_MINOR", INT2FIX (GST_VERSION_MINOR));
-
-	/* Constant: VERSION_MICRO
-	 * GStreamer's micro version.
-	 */
-	rb_define_const (mGst, "VERSION_MICRO", INT2FIX (GST_VERSION_MICRO));
+    /*
+     * Constant: VERSION_MICRO
+     * * GStreamer's micro version.
+     */
+    rb_define_const (mGst, "VERSION_MICRO", INT2FIX (GST_VERSION_MICRO));
 }
