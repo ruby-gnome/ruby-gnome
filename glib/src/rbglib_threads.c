@@ -4,7 +4,7 @@
   rbglib_threads.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 07:04:19 $
+  $Date: 2005/03/06 14:10:17 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -17,8 +17,10 @@ static VALUE
 gt_init(self)
     VALUE self;
 {
+#ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
     g_thread_init(NULL);
+#endif
 #endif
     return self;
 }
@@ -27,11 +29,16 @@ static VALUE
 gt_supported(self)
     VALUE self;
 {
+#ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
     return CBOOL2RVAL(g_thread_supported());
 #else
     return Qfalse;
 #endif
+#else
+    return Qfalse;
+#endif
+
 }
 
 void

@@ -17,6 +17,7 @@ PKGConfig.have_package('gobject-2.0') or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_func("g_spawn_close_id")
+have_func("g_thread_init")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION")
 
