@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: ogs $
-  $Date: 2002/11/28 17:33:04 $
+  $Date: 2002/12/09 16:33:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,7 +50,8 @@
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GTK_TYPE_CLIPBOARD (gtk_clipboard_get_type())
-
+#define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
+#define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
@@ -70,6 +71,8 @@ extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_treerowreference_get_type();
 extern GType gtk_clipboard_get_type();
+extern GType gtk_accel_key_get_type();
+extern GType gtk_accel_group_entry_get_type();
 
 /*
  * Gtk::TreeIter callback

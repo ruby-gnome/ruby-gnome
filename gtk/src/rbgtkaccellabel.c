@@ -1,10 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgtkcontainer.c -
+  rbgtkaccellabel.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Author: ogs $
+  $Date: 2002/12/09 16:33:11 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/

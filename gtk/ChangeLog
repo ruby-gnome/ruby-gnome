@@ -1,3 +1,12 @@
+2002-12-10  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtkaccelkey.c: Add a file.
+	* src/rbgtkaccelgroupentry.c: Add a file.
+	* src/rbgtkaccelgroup.c: Add Gtk::AccelGroup#from_object, #connect,
+	#connect_by_path, #disconnect_key, #query, #find.
+	* src/rbgtkaccellabel.c: Fix filename in header.
+	* src/rbgtk.h: Add GTK_TYPE_ACCEL_KEY, GTK_TYPE_ACCEL_GROUP_ENTRY.
+
 2002-12-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkimage.c: Gtk::Image#stock return Symbol instead of String. 

@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Author: ogs $
+  $Date: 2002/12/09 16:33:11 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,29 +23,110 @@ gaccelgrp_initialize(self)
     return Qnil;
 }
 
-/*
-void        gtk_accel_group_connect         (GtkAccelGroup *accel_group,
-                                             guint accel_key,
-                                             GdkModifierType accel_mods,
-                                             GtkAccelFlags accel_flags,
-                                             GClosure *closure);
-void        gtk_accel_group_connect_by_path (GtkAccelGroup *accel_group,
-                                             const gchar *accel_path,
-                                             GClosure *closure);
+static VALUE
+gaccelgrp_connect(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE key, mods, flags, func;
+    GClosure *rclosure;
+    
+    rb_scan_args(argc, argv, "31", &key, &mods, &flags, &func);
+    if(NIL_P(func))
+        func = rb_f_lambda();
+    G_RELATIVE(self, func);
+    rclosure = g_rclosure_new(func, Qnil, NULL);
+
+    gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
+                            FIX2INT(mods), FIX2INT(flags), rclosure);
+    return self;
+}
+
+static VALUE
+gaccelgrp_connect_by_path(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE path, func;
+    GClosure *rclosure;
+
+    rb_scan_args(argc, argv, "11", &path, &func);
+    if(NIL_P(func))
+        func = rb_f_lambda();
+    G_RELATIVE(self, func);
+    rclosure = g_rclosure_new(func, Qnil, NULL);
+
+    gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
+    return self;
+}
+
+static VALUE
+gaccelgrp_disconnect_key(self, key, mods)
+    VALUE self, key, mods;
+{
+    return gtk_accel_group_disconnect_key(_SELF(self), NUM2UINT(key),
+                                          FIX2INT(mods)) ? Qtrue : Qfalse;
+}
+
+static VALUE
+gaccelgrp_query(self, key, mods)
+    VALUE self, key, mods;
+{
+    GtkAccelGroupEntry *entries;
+    guint n_entries;
+    int cnt;
+    VALUE result;
+
+    entries = gtk_accel_group_query(_SELF(self), NUM2UINT(key),
+                                    FIX2INT(mods), &n_entries);
+    if(n_entries == 0){
+        return Qnil;
+    }
+    else{
+        result = rb_ary_new2(n_entries);
+        for(cnt=0; cnt<n_entries; cnt++, entries++)
+            rb_ary_push(result, BOXED2RVAL(entries, GTK_TYPE_ACCEL_GROUP_ENTRY));
+        return result;
+    }
+}
+
+#if 0
 gboolean    (*GtkAccelGroupActivate)        (GtkAccelGroup *accel_group,
                                              GObject *acceleratable,
                                              guint keyval,
                                              GdkModifierType modifier);
 gboolean    gtk_accel_group_disconnect      (GtkAccelGroup *accel_group,
                                              GClosure *closure);
-gboolean    gtk_accel_group_disconnect_key  (GtkAccelGroup *accel_group,
-                                             guint accel_key,
-                                             GdkModifierType accel_mods);
-GtkAccelGroupEntry* gtk_accel_group_query   (GtkAccelGroup *accel_group,
-                                             guint accel_key,
-                                             GdkModifierType accel_mods,
-                                             guint *n_entries);
-*/
+GtkAccelGroup* gtk_accel_group_from_accel_closure
+                                            (GClosure *closure);
+#endif
+
+static gboolean
+gaccelgrp_find_func(key, closure, func)
+    GtkAccelKey *key;
+    GClosure *closure;
+    gpointer func;
+{
+    return RTEST(rb_funcall((VALUE)func, id_call, 2,
+                            BOXED2RVAL(key, GTK_TYPE_ACCEL_KEY),
+                            BOXED2RVAL(closure, G_TYPE_CLOSURE)));
+}
+
+static VALUE
+gaccelgrp_find(self)
+    VALUE self;
+{
+    GtkAccelKey *result;
+    VALUE func = rb_f_lambda();
+    G_RELATIVE(self, func);
+
+    result = gtk_accel_group_find(_SELF(self),
+                                  gaccelgrp_find_func,
+                                  (gpointer)func);
+    return result ? BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY) : Qnil;
+}
 
 static VALUE
 gaccelgrp_lock(self)
@@ -63,10 +144,6 @@ gaccelgrp_unlock(self)
     return Qnil;
 }
 
-/*
-GtkAccelGroup* gtk_accel_group_from_accel_closure
-                                            (GClosure *closure);
-*/
 
 static VALUE
 gaccelgrp_s_activate(self, obj, key, modtype)
@@ -77,24 +154,12 @@ gaccelgrp_s_activate(self, obj, key, modtype)
                                      NUM2INT(modtype)) ? Qtrue : Qfalse;
 }
 
-/*
-GSList*     gtk_accel_groups_from_object    (GObject *object);
-GtkAccelKey* gtk_accel_group_find           (GtkAccelGroup *accel_group,
-                                             gboolean (*find_func) (GtkAccelKey *key,GClosure    *closure,gpointer     data),
-                                             gpointer data);
-struct      GtkAccelKey;
-gboolean    gtk_accelerator_valid           (guint keyval,
-                                             GdkModifierType modifiers);
-void        gtk_accelerator_parse           (const gchar *accelerator,
-                                             guint *accelerator_key,
-                                             GdkModifierType *accelerator_mods);
-gchar*      gtk_accelerator_name            (guint accelerator_key,
-                                             GdkModifierType accelerator_mods);
-void        gtk_accelerator_set_default_mod_mask
-                                            (GdkModifierType default_mod_mask);
-guint       gtk_accelerator_get_default_mod_mask
-                                            (void);
-*/
+static VALUE
+gaccelgrp_s_from_object(self, object)
+    VALUE self, object;
+{
+    return GSLIST2ARY(gtk_accel_groups_from_object(RVAL2GOBJ(object)));
+}
 
 void 
 Init_gtk_accel_group()
@@ -102,7 +167,14 @@ Init_gtk_accel_group()
     VALUE gAccelGroup = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 
     rb_define_singleton_method(gAccelGroup, "activate", gaccelgrp_s_activate, 3);
+    rb_define_singleton_method(gAccelGroup, "from_object", gaccelgrp_s_from_object, 1);
+    
     rb_define_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
     rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);
     rb_define_method(gAccelGroup, "unlock", gaccelgrp_unlock, 0);
+    rb_define_method(gAccelGroup, "connect", gaccelgrp_connect, -1);
+    rb_define_method(gAccelGroup, "connect_by_path", gaccelgrp_connect_by_path, -1);
+    rb_define_method(gAccelGroup, "disconnect_key", gaccelgrp_disconnect_key, 2);
+    rb_define_method(gAccelGroup, "query", gaccelgrp_query, 2);
+    rb_define_method(gAccelGroup, "find", gaccelgrp_find, 0);
 }
