@@ -1,3 +1,7 @@
+#
+# Unicode
+$KCODE = "U"
+
 # for dropline GTK2-Runtime DLL
 # http://www.dropline.net/gtk/
 if /mingw|mswin/ =~ RUBY_PLATFORM
