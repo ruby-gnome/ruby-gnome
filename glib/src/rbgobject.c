@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/10 00:08:14 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -24,7 +24,6 @@
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 ID id_relatives;
-ID id_relative_callbacks;
 static ID id_delete;
 static ID id_module_eval;
 
@@ -368,7 +367,6 @@ Init_gobject()
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
     /* IDs */
     id_relatives = rb_intern("__relatives__");
-    id_relative_callbacks = rb_intern("__relative_callbacks__");
     id_delete = rb_intern("delete");
     id_module_eval = rb_intern("module_eval");
 

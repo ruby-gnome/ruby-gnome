@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/08/10 00:08:15 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -57,7 +57,6 @@ typedef struct {
 
 /* rbgobject.c */
 extern ID id_relatives;
-extern ID id_relative_callbacks;
 
 extern GObject* rbgobj_get_gobject(VALUE obj);
 extern void rbgobj_initialize_gobject(VALUE obj, GObject* gobj);
