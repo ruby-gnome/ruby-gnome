@@ -1,3 +1,8 @@
+2003-07-28  Geoff Youngs  <g@intersect-uk.co.uk>
+	* src/rbgobj_enums.c: add rbgobj_constant_* to allow renaming
+	invalid constants.
+	* src/rbgobject.h: add G_RENAME_CONSTANT
+
 2003-07-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c (rclosure_marshal): don't stop jumps.
