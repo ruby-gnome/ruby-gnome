@@ -1,6 +1,6 @@
 2003-12-09  Laurent Sansonetti  <lrz@gnome.org>
 
-	* src/rbgdadatasource.c: Removed obsolete code.
+	* src/rbgdadatasource.c, src/rbgdaprovider.c: Removed obsolete code.
 	* README: Ruby/Libgda needs libgda 1.1.1 (development branch).
 
 2003-11-29  Laurent Sansonetti  <lrz@gnome.org>

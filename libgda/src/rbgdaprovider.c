@@ -21,28 +21,6 @@
 
 #include "rbgda.h"
 
-static GdaProviderInfo* provider_copy(const GdaProviderInfo* provider) {
-    GdaProviderInfo* new_provider;
-    g_return_val_if_fail (provider != NULL, NULL);
-    new_provider = g_new(GdaProviderInfo, sizeof(GdaProviderInfo));
-    new_provider->id = g_strdup(provider->id); 
-    new_provider->location = g_strdup(provider->location);
-    new_provider->description = g_strdup(provider->description);
-    /* TODO should copy provider->gda_params */
-    new_provider->gda_params = NULL;
-    return new_provider;
-}
-
-GType gda_provider_get_type(void) {
-    static GType our_type = 0;
-    if (our_type == 0) {
-        our_type = g_boxed_type_register_static ("GdaProvider",
-            (GBoxedCopyFunc)provider_copy,
-            (GBoxedFreeFunc)gda_config_free_provider_info);
-    }
-    return our_type;
-}
-
 static VALUE rb_gda_get_providers(self)
     VALUE self;
 {
