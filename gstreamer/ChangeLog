@@ -1,3 +1,10 @@
+2004-08-02  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstelement.c (#get_static_pad, #get_request_pad, 
+	  #release_request_pad, #get_compatible_pad, #get_pad_template,
+	  #pad_templates, #each_pad_template, #get_compatible_pad_template):
+	  Added.
+
 2004-08-01  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Initializes Gst::Scheduler.

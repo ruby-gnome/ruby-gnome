@@ -891,8 +891,9 @@ rb_gst_element_set_index (VALUE self, VALUE index)
 static VALUE
 rb_gst_element_get_scheduler (VALUE self)
 {
-    GstScheduler *scheduler = gst_element_get_scheduler (RGST_ELEMENT (self))
-        return scheduler != NULL ? RGST_SCHEDULER_NEW (scheduler) : Qnil;
+    GstScheduler *scheduler = gst_element_get_scheduler (RGST_ELEMENT (self));
+
+    return scheduler != NULL ? RGST_SCHEDULER_NEW (scheduler) : Qnil;
 }
 
 /*
@@ -909,6 +910,188 @@ rb_gst_element_set_scheduler (VALUE self, VALUE scheduler)
 {
     gst_element_set_scheduler (RGST_ELEMENT (self), RGST_SCHEDULER (scheduler));
     return self;
+}
+
+/*
+ * Method: get_static_pad(name)
+ * name: the name of the static Gst::Pad to retrieve.
+ *
+ * Retrieves a pad from the element by name.  This version only retrieves
+ * already existing (i.e. 'static') pads.
+ *
+ * Returns: the requested Gst::Pad if found, otherwise nil.
+ */
+static VALUE
+rb_gst_element_get_static_pad (VALUE self, VALUE name)
+{
+    GstPad *pad =
+        gst_element_get_static_pad (RGST_ELEMENT (self), RVAL2CSTR (name));
+    return pad != NULL ? RGST_PAD_NEW (pad) : Qnil;
+}
+
+/*
+ * Method: get_request_pad(name)
+ * name: the name of the request Gst::Pad to retrieve.
+ *
+ * Retrieves a pad from the element by name.  This version only retrieves
+ * request pads.
+ *
+ * Returns: the requested Gst::Pad if found, otherwise nil.
+ */
+static VALUE
+rb_gst_element_get_request_pad (VALUE self, VALUE name)
+{
+    GstPad *pad =
+        gst_element_get_request_pad (RGST_ELEMENT (self), RVAL2CSTR (name));
+    return pad != NULL ? RGST_PAD_NEW (pad) : Qnil;
+}
+
+/*
+ * Method: release_request_pad(pad)
+ * pad: the Gst::Pad to release.
+ *
+ * Makes the element free the previously requested pad ass obtained with
+ * Gst::Element#get_requested_pad.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_release_request_pad (VALUE self, VALUE pad)
+{
+    gst_element_release_request_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    return self;
+}
+
+/*
+ * Method: add_pad(pad)
+ * pad: the Gst::Pad to add to the element.
+ *
+ * Adds a pad (link point) to the element.  Pads are automatically activated
+ * when the element is in state Gst::Element::PLAYING.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_add_pad (VALUE self, VALUE pad)
+{
+    gst_element_add_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    return self;
+}
+
+/*
+ * Method: remove_pad(pad)
+ * pad: the Gst::Pad to remove from the element.
+ *
+ * Removes the given pad from the element.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_element_remove_pad (VALUE self, VALUE pad)
+{
+    gst_element_remove_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    return self;
+}
+
+/*
+ * Method: get_compatible_pad(pad, caps=nil)
+ * pad: the Gst::Pad to find a compatible one for.
+ * caps: the Gst::Caps to use as a filter.
+ *
+ * Looks for an unlinked pad to which the given pad can link to.  It is not
+ * guaranteed that linking the pads will work, though it should work in most
+ * cases.  You can eventually pass a Gst::Caps that will act as a filter, but
+ * this is not mandatory.
+ *
+ * Returns: the Gst::Pad to which a link can be made, or nil if one could not
+ * be found.
+ */
+static VALUE
+rb_gst_element_get_compatible_pad (int argc, VALUE * argv, VALUE self)
+{
+    VALUE pad, caps;
+    GstPad *pad2;
+
+    rb_scan_args (argc, argv, "11", &pad, &caps);
+
+    pad2 = NIL_P (caps)
+        ? gst_element_get_compatible_pad (RGST_ELEMENT (self), RGST_PAD (pad))
+        : gst_element_get_compatible_pad_filtered (RGST_ELEMENT (self),
+                                                   RGST_PAD (pad),
+                                                   RGST_CAPS (caps));
+    return pad2 != NULL ? RGST_PAD_NEW (pad2) : Qnil;
+}
+
+/*
+ * Method: get_pad_template(name)
+ * name: the name of the Gst::PadTemplate to get.
+ *
+ * Retrieves a Gst::PadTemplate from this element with the given name.
+ *
+ * Returns: the Gst::PadTemplate with the given name, or nil if none was found.
+ */
+static VALUE
+rb_gst_element_get_pad_template (VALUE self, VALUE name)
+{
+    GstPadTemplate *pad =
+        gst_element_get_pad_template (RGST_ELEMENT (self), RVAL2CSTR (name));
+    return pad != NULL ? RGST_PAD_TEMPLATE_NEW (pad) : Qnil;
+}
+
+/*
+ * Method: pad_templates
+ *
+ * Retrieves a list of pad templates associated with the element.
+ * 
+ * Returns: an Array of Gst::PadTemplate objects.
+ */
+static VALUE
+rb_gst_element_get_pad_templates (VALUE self)
+{
+    GList *list;
+    VALUE ary;
+
+    ary = rb_ary_new ();
+
+    for (list = gst_element_get_pad_template_list (RGST_ELEMENT (self));
+         list != NULL; list = g_list_next (list))
+        rb_ary_push (ary, RGST_PAD_TEMPLATE_NEW (list->data));
+
+    g_list_free (list);
+    return ary;
+}
+
+/*
+ * Method: each_pad_template { |pad_template| ... }
+ *
+ * Calls the block for each pad template associated with the element,
+ * passing a reference to a Gst::PadTemplate object as parameter.
+ *
+ * Returns: always nil.
+ */
+static VALUE
+rb_gst_element_each_pad_template (VALUE self)
+{
+    return rb_ary_yield (rb_gst_element_get_pad_templates (self));
+}
+
+/*
+ * Method: get_compatible_pad_template(pad)
+ * pad: the Gst::PadTemplate to find a compatible template for.
+ *
+ * Retrieves a pad template from the element that is compatible with the given
+ * pad template.  Pads from compatible templates can be linked together.
+ *
+ * Returns: a compatible Gst::PadTemplate, or nil if none was found.
+ */
+static VALUE
+rb_gst_element_get_compatible_pad_template (VALUE self, VALUE pad)
+{
+    GstPadTemplate *pad2 =
+        gst_element_get_compatible_pad_template (RGST_ELEMENT (self),
+                                                 RGST_PAD_TEMPLATE (pad));
+
+    return pad2 != NULL ? RGST_PAD_TEMPLATE_NEW (pad2) : Qnil;
 }
 
 void
@@ -947,9 +1130,25 @@ Init_gst_element (void)
     rb_define_method (c, "each_pad", rb_gst_element_each_pad, 0);
     rb_define_method (c, "pads", rb_gst_element_get_pads, 0);
     rb_define_method (c, "get_pad", rb_gst_element_get_pad, 1);
+    rb_define_method (c, "get_static_pad", rb_gst_element_get_static_pad, 1);
+    rb_define_method (c, "get_request_pad", rb_gst_element_get_request_pad, 1);
+    rb_define_method (c, "release_request_pad",
+                      rb_gst_element_release_request_pad, 1);
+    rb_define_method (c, "get_compatible_pad",
+                      rb_gst_element_get_compatible_pad, -1);
+    rb_define_method (c, "get_pad_template", rb_gst_element_get_pad_template,
+                      1);
+    rb_define_method (c, "pad_templates", rb_gst_element_get_pad_templates, 0);
+    rb_define_method (c, "each_pad_template", rb_gst_element_each_pad_template,
+                      0);
+    rb_define_method (c, "get_compatible_pad_template",
+                      rb_gst_element_get_compatible_pad_template, 1);
     rb_define_method (c, "link_pads", rb_gst_element_link_pads, 1);
     rb_define_method (c, "unlink_pads", rb_gst_element_unlink_pads, 1);
+    rb_define_method (c, "add_pad", rb_gst_element_add_pad, 1);
+    rb_define_method (c, "remove_pad", rb_gst_element_remove_pad, 1);
     rb_define_method (c, "add_ghost_pad", rb_gst_element_add_ghost_pad, -1);
+    rb_define_alias (c, "remove_ghost_pad", "remove_pad");
     rb_define_method (c, "indexable?", rb_gst_element_is_indexable, 0);
     rb_define_method (c, "query", rb_gst_element_query, -1);
     rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
