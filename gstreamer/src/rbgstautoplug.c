@@ -22,7 +22,7 @@
 #include "rbgst.h"
 
 /*
- *  Class Gst::Autoplug
+ *  Class: Gst::Autoplug
  *
  *  Automatically create and link elements.
  */

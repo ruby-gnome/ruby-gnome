@@ -87,14 +87,14 @@ static VALUE rb_gst_querytype_each(self)
  *  Gets the type id of this querytype, as an integer value.
  *
  *  Meaningful types are:
- *    - Gst::QueryType::NONE
- *    - Gst::QueryType::TOTAL
- *    - Gst::QueryType::POSITION
- *    - Gst::QueryType::LATENCY
- *    - Gst::QueryType::JITTER
- *    - Gst::QueryType::START
- *    - Gst::QueryType::SEGMENT_END
- *    - Gst::QueryType::RATE
+ *    - Gst::QueryType::NONE;
+ *    - Gst::QueryType::TOTAL;
+ *    - Gst::QueryType::POSITION;
+ *    - Gst::QueryType::LATENCY;
+ *    - Gst::QueryType::JITTER;
+ *    - Gst::QueryType::START;
+ *    - Gst::QueryType::SEGMENT_END;
+ *    - Gst::QueryType::RATE.
  */
 static VALUE rb_gst_querytype_get_type_id(self)
     VALUE self;

@@ -22,7 +22,7 @@
 #include "rbgst.h"
 
 /*
- *  Class: Gst::Parse
+ *  Module: Gst::Parse
  *
  *  Parses command-line syntax into a pipeline. 
  */

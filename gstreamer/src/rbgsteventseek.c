@@ -30,43 +30,43 @@
 VALUE cGstEventSeek;
 
 /*
- *  Constant: SEEK_METHOD_CUR
+ *  Constant: METHOD_CUR
  *  Seek to a relative position.
  */
 static VALUE constSeekMethodCur = INT2FIX(GST_SEEK_METHOD_CUR);
 
 /*
- *  Constant: SEEK_METHOD_SET
+ *  Constant: METHOD_SET
  *  Seek to an absolute position.
  */
 static VALUE constSeekMethodSet = INT2FIX(GST_SEEK_METHOD_SET);
 
 /*
- *  Constant: SEEK_METHOD_END
+ *  Constant: METHOD_END
  *  Seek relative to the end of the stream.
  */
 static VALUE constSeekMethodEnd = INT2FIX(GST_SEEK_METHOD_END);
 
 /*
- *  Constant: SEEK_FLAG_FLUSH
+ *  Constant: FLAG_FLUSH
  *  Flush any pending data while seeking.
  */
 static VALUE constSeekFlagFlush = INT2FIX(GST_SEEK_FLAG_FLUSH);
 
 /*
- *  Constant: SEEK_FLAG_ACCURATE
+ *  Constant: FLAG_ACCURATE
  *  Seek as accuratly as possible.
  */
 static VALUE constSeekFlagAccurate = INT2FIX(GST_SEEK_FLAG_ACCURATE);
 
 /*
- *  Constant: SEEK_FLAG_KEY_UNIT
+ *  Constant: FLAG_KEY_UNIT
  *  Seek to a nearby key unit.
  */
 static VALUE constSeekFlagKeyUnit = INT2FIX(GST_SEEK_FLAG_KEY_UNIT);
 
 /*
- *  Constant: SEEK_FLAG_SEGMENT_LOOP
+ *  Constant: FLAG_SEGMENT_LOOP
  *  Loop between start and stop in a segmented seek.
  */
 static VALUE constSeekFlagSegmentLoop = INT2FIX(GST_SEEK_FLAG_SEGMENT_LOOP);
@@ -77,15 +77,15 @@ static VALUE constSeekFlagSegmentLoop = INT2FIX(GST_SEEK_FLAG_SEGMENT_LOOP);
  *  Allocate a new seek event with the given parameters.
  * 
  *  Meaningful types are:
- *      - Gst::EventSeek::METHOD_CUR
- *      - Gst::EventSeek::METHOD_SET
- *      - Gst::EventSeek::METHOD_END
+ *      - Gst::EventSeek::METHOD_CUR;
+ *      - Gst::EventSeek::METHOD_SET;
+ *      - Gst::EventSeek::METHOD_END.
  *
  *  Types can be OR'ed (|) with:
- *      - Gst::EventSeek::FLAG_FLUSH
- *      - Gst::EventSeek::FLAG_ACCURATE
- *      - Gst::EventSeek::FLAG_KEY_UNIT
- *      - Gst::EventSeek::FLAG_SEGMENT_LOOP
+ *      - Gst::EventSeek::FLAG_FLUSH;
+ *      - Gst::EventSeek::FLAG_ACCURATE;
+ *      - Gst::EventSeek::FLAG_KEY_UNIT;
+ *      - Gst::EventSeek::FLAG_SEGMENT_LOOP.
  */
 static VALUE rb_gst_eventseek_new(self, type, offset)
     VALUE self, type, offset;
