@@ -75,7 +75,7 @@ class TestGLib < Test::Unit::TestCase
       box = Gtk::HBox.new
       10.times{
 	box.add mybutton.new
-	GC.start
+#	GC.start
       }
       assert(box.children.all?{|item| item.is_a? mybutton })
     rescue LoadError
