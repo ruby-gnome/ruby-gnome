@@ -1,0 +1,48 @@
+Ruby/Libart
+===========
+Ruby/Libart is a Ruby binding of libart. This is a part of Ruby-GNOME.
+
+  Ruby
+    Object-Oriented scripting language. Smart syntax.
+        http://www.ruby-lang.org/
+
+  Libart
+    Libart is a library for high-performance 2D graphics.
+        http://www.levien.com/libart/
+
+  Ruby/Libart (this library)
+
+  If you have any questions or requests, see Ruby-GNOME website.
+        http://ruby-gnome.sf.net/
+
+Install
+-------
+
+    0. install ruby-1.6.x and Libart.
+
+    1. create Makefile
+       $ ruby extconf.rb
+       If libart-config is installed with other name (ex. libart12-config), 
+       $ ruby extconf.rb <other name>
+
+    2. make and install.
+       $ make
+       $ su
+       # make install
+
+Copying
+-------
+
+    Copyright (c) 2002 Ruby-GNOME Project Team
+
+    This program is free software.
+    You can distribute/modify this program under the terms of
+    the GNU LIBRARY General Public License version 2.
+
+Maintainers
+-----------
+(Current)
+  Masao Mutoh <mutoh@highway.ne.jp>
+  http://ruby-gnome.sf.net/
+(First author)
+  KUBO Takehiro <kubo@jiubao.org>

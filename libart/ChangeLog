@@ -1,0 +1,20 @@
+2002-09-01  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/Makefile: Remove file.
+
+2002-08-06  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* Makefile: Remove file. (Noticed by  KUBO Takehiro  <kubo@jiubao.org>)
+
+2002-08-06  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/gnome-canvas.rb: Modify libart sample.
+
+2002-08-05  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* Modify documents. add CVS.
+
+2002-08-04  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb, src/rbart.c, src/rbart.h, src/rbart_affine.c,
+	sample/gnome-canvas.rb: New files.
