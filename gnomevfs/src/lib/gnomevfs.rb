@@ -93,4 +93,9 @@ module GnomeVFS
       seek(arg)
     end
   end
+  LOG_DOMAIN = "libgnomevfs"
 end
+
+GLib::Log.set_log_domain(GnomeVFS::LOG_DOMAIN)
+GLib::Log.set_log_domain("gnome-vfs-modules")
+GLib::Log.set_log_domain("GnomeVFSMonikers")
