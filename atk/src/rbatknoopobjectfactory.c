@@ -4,7 +4,7 @@
   rbatknoopobjectfactory.c -
 
   $Author: mutoh $
-  $Date: 2003/12/04 18:06:17 $
+  $Date: 2003/12/07 17:18:16 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -24,7 +24,7 @@ rbatk_no_op_object_factory_initialize(self)
 void
 Init_atk_noopobjectfactory()
 {
-    VALUE noop = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT, "NoOpObjectFactory", mAtk);
+    VALUE noop = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
 
     rb_define_method(noop, "initialize", rbatk_no_op_object_factory_initialize, 0);
 }

@@ -1,3 +1,13 @@
+2003-12-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatknoopobjectfactory.c: Fix a wrong definition. 
+	* src/rbatkimage.c, src/rbatkhypertext.c, rbatkhyperlink.c, 
+	rbatkeditabletext.c, rbatkimplementor.c, rbatkobject.c: Added. 
+
+2003-12-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* atk/rbatkcomponent.c: Added.
+
 2003-12-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* atk/*: Initial import. Added Atk::Action, Atk::Document, 

@@ -4,7 +4,7 @@
   rbatkgobjectaccessible.c -
 
   $Author: mutoh $
-  $Date: 2003/12/04 18:06:17 $
+  $Date: 2003/12/07 17:18:16 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -30,7 +30,7 @@ rbatk_gobjectaccessible_get_object(self)
 void
 Init_atk_gobjectaccessible()
 {
-    VALUE macc = G_DEF_INTERFACE(ATK_TYPE_GOBJECT_ACCESSIBLE, "GObjectAccessible", mAtk);
+    VALUE macc = G_DEF_CLASS(ATK_TYPE_GOBJECT_ACCESSIBLE, "GObjectAccessible", mAtk);
 
     rb_define_singleton_method(macc, "for_object", rbatk_gobjectaccessible_s_for_object, 1);
     rb_define_method(macc, "object", rbatk_gobjectaccessible_get_object, 0);
