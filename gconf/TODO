@@ -1,3 +1,0 @@
-do we need more G_RELATIVE's?
-do we need to run gconf_init?
-do we need to free any GConfValues from GCVAL2RVAL's?
