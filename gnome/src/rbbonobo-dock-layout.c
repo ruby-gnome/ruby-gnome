@@ -1,8 +1,11 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-layout.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbbonobo-dock-layout.c,v 1.3 2002/10/26 06:22:24 tkubo Exp $ */
+/* based on libbonoboui/bonobo/bonobo-doc-layout.h */
+/* renamed from rbgnome-dock-layout.c */
 
-/* Bonobo::DockLayout class for Ruby/Gnome
+/* Bonobo::DockLayout class for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,7 +22,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "rbgnome.h"
+#include "rbbonobo.h"
 
 #define _SELF(self) BONOBO_DOCK_LAYOUT(RVAL2GOBJ(self))
 static VALUE bnbDockLayoutItem;

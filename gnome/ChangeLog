@@ -1,3 +1,35 @@
+2002-10-26  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbbonobo.h: Add new file. header file for bonobo.
+	* src/rbbonobo-dock-band.c: Include rbbonobo.h instead of rbgnome.h.
+	Bonobo::DockBand#get_orientation -> #orientation.
+	Apply G_DEF_SETTERS.
+	* src/rbbonobo-dock-item.c: Include rbbonobo.h instead of rbgnome.h.
+	Bonobo::DockItem#get_child -> #child.
+	Bonobo::DockItem#get_name -> #name.
+	Bonobo::DockItem#get_shadow_type -> #shadow_type.
+	Bonobo::DockItem#get_orientation -> #orientation.
+	Bonobo::DockItem#get_behavior -> #behavior.
+	* src/rbbonobo-dock-layout.c: Include rbbonobo.h instead of rbgnome.h.
+	* src/rbbonobo-dock.c: Include rbbonobo.h instead of rbgnome.h.
+	Bonobo::Dock#get_client_area -> #client_area.
+	Bonobo::DockItem#get_layout -> #layout.
+	Apply G_DEF_SETTERS.
+	* src/rbbonobo-i18n.c: Add a new file. Rename from Gnome::I18n to
+	Bonobo::I18n except GNOME APIs.
+	* src/rbgnome-help.c: Add a new file. Add a new module Gnome::Help
+	* src/rbgnome-config.c: Suppress gcc warning at config_set_vector()
+	and config_private_set_vector().
+	Gnome::Config.section? -> Gnome::Config.has_section?
+	Gnome::Config.private_section? -> Gnome::Config.private_has_section?
+	* src/rbgnome-i18n.c: 
+	Delete Gnome::I18n.bindtextdomain, textdomain, gettext, _,
+	gettext_noop, N_, dgettext, and dcgettext. Use Bonobo::I18n.* instead. 
+	Add Gnome::I18n.push_c_numeric_locale and pop_c_numeric_locale.
+	* src/rbgnome.h: Delete declarations of Bonobo.
+	* src/rbgnome.c: Delete deprecated methods Gnome::init and
+	Gnome::is_program_in_path.
+
 2002-10-20  KUBO Takehiro  <kubo@jiubao.org>
 
 	* sample/animator_demo.rb: removed.

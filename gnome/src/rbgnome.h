@@ -23,11 +23,7 @@
 
 struct timeval rb_time_timeval(VALUE);
 
-void Init_bonobo_dock(VALUE);
-void Init_bonobo_dock_layout(VALUE);
-void Init_bonobo_dock_item(VALUE);
-void Init_bonobo_dock_band(VALUE);
-
+void Init_gnome_program(VALUE);
 void Init_gnome_about(VALUE);
 void Init_gnome_app(VALUE);
 void Init_gnome_appbar(VALUE);
@@ -43,6 +39,7 @@ void Init_gnome_druid_page_standard(VALUE);
 void Init_gnome_entry(VALUE);
 void Init_gnome_file_entry(VALUE);
 void Init_gnome_font_picker(VALUE);
+void Init_gnome_help(VALUE);
 void Init_gnome_href(VALUE);
 void Init_gnome_i18n(VALUE);
 void Init_gnome_icon_entry(VALUE);
@@ -50,7 +47,6 @@ void Init_gnome_icon_item(VALUE);
 void Init_gnome_icon_list(VALUE);
 void Init_gnome_icon_selection(VALUE);
 void Init_gnome_pixmap_entry(VALUE);
-void Init_gnome_program(VALUE);
 void Init_gnome_scores(VALUE);
 void Init_gnome_stock_icons(VALUE);
 void Init_gnome_uidefs(VALUE);

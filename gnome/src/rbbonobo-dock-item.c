@@ -1,8 +1,11 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-item.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbbonobo-dock-item.c,v 1.3 2002/10/26 06:22:24 tkubo Exp $ */
+/* based on libbonoboui/bonobo/bonobo-doc-item.h */
+/* renamed from rbgnome-dock-item.c */
 
-/* Bonobo::DockItem widget for Ruby/Gnome
+/* Bonobo::DockItem widget for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,7 +22,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "rbgnome.h"
+#include "rbbonobo.h"
 
 #define _SELF(self) BONOBO_DOCK_ITEM(RVAL2GOBJ(self))
 
@@ -58,10 +61,10 @@ static VALUE
 dockitem_get_name(self)
     VALUE self;
 {
-    char* result;
-    VALUE obj;
-    result = bonobo_dock_item_get_name(_SELF(self));
-    SET_STR_AND_GFREE(obj, result);
+    char* result = bonobo_dock_item_get_name(_SELF(self));
+    VALUE obj = result ? rb_str_new2(result) : Qnil;
+    if (result)
+        g_free(result);
     return obj;
 }
 
@@ -156,11 +159,13 @@ Init_bonobo_dock_item(mBonobo)
      * instance methods
      */
     rb_define_method(bnbDockItem, "initialize", dockitem_initialize, 2);
-    rb_define_method(bnbDockItem, "get_child", dockitem_get_child, 0);
-    rb_define_method(bnbDockItem, "get_name", dockitem_get_name, 0);
+    rb_define_method(bnbDockItem, "child", dockitem_get_child, 0);
+    rb_define_method(bnbDockItem, "name", dockitem_get_name, 0);
     rb_define_method(bnbDockItem, "set_shadow_type", dockitem_set_shadow_type, 1);
-    rb_define_method(bnbDockItem, "get_shadow_type", dockitem_get_shadow_type, 0);
+    rb_define_method(bnbDockItem, "shadow_type", dockitem_get_shadow_type, 0);
     rb_define_method(bnbDockItem, "set_orientation", dockitem_set_orientation, 1);
-    rb_define_method(bnbDockItem, "get_orientation", dockitem_get_orientation, 0);
-    rb_define_method(bnbDockItem, "get_behavior", dockitem_get_behavior, 0);
+    rb_define_method(bnbDockItem, "orientation", dockitem_get_orientation, 0);
+    rb_define_method(bnbDockItem, "behavior", dockitem_get_behavior, 0);
+
+    G_DEF_SETTERS(bnbDockItem);
 }

@@ -1,8 +1,11 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbbonobo-dock.c,v 1.3 2002/10/26 06:22:24 tkubo Exp $ */
+/* based on libbonoboui/bonobo/bonobo-doc.h */
+/* renamed from rbgnome-dock.c */
 
-/* Bonobo::Dock widget for Ruby/Gnome
+/* Bonobo::Dock widget for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,7 +22,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "rbgnome.h"
+#include "rbbonobo.h"
 
 #define _SELF(self) BONOBO_DOCK(RVAL2GOBJ(self))
 
@@ -178,8 +181,10 @@ Init_bonobo_dock(mBonobo)
     rb_define_method(bnbDock, "add_item", dock_add_item, 6);
     rb_define_method(bnbDock, "add_floating_item", dock_add_floating_item, 4);
     rb_define_method(bnbDock, "set_client_area", dock_set_client_area, 1);
-    rb_define_method(bnbDock, "get_client_area", dock_get_client_area, 0);
+    rb_define_method(bnbDock, "client_area", dock_get_client_area, 0);
     rb_define_method(bnbDock, "get_item_by_name", dock_get_item_by_name, 1);
-    rb_define_method(bnbDock, "get_layout", dock_get_layout, 0);
+    rb_define_method(bnbDock, "layout", dock_get_layout, 0);
     rb_define_method(bnbDock, "add_from_layout", dock_add_from_layout, 1);
+
+    G_DEF_SETTERS(bnbDock);
 }

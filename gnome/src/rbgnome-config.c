@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-config.c,v 1.4 2002/10/20 07:33:51 tkubo Exp $ */
+/* $Id: rbgnome-config.c,v 1.5 2002/10/26 06:22:24 tkubo Exp $ */
 /* based on libgnome/gnome-config.h */
 
 /* Gnome::Config for Ruby/GNOME2
@@ -343,12 +343,12 @@ config_set_vector(self, path, new_value)
     VALUE self, path, new_value;
 {
     int argc;
-    char **argv;
+    const char **argv;
     int i;
 
     Check_Type(new_value, T_ARRAY);
     argc = RARRAY(new_value)->len;
-    argv = ALLOCA_N(char *, argc);
+    argv = ALLOCA_N(char const *, argc);
     for (i = 0; i < argc; i++) {
         argv[i] = RVAL2CSTR(RARRAY(new_value)->ptr[i]);
     }
@@ -402,12 +402,12 @@ config_private_set_vector(self, path, new_value)
     VALUE self, path, new_value;
 {
     int argc;
-    char **argv;
+    const char **argv;
     int i;
 
     Check_Type(new_value, T_ARRAY);
     argc = RARRAY(new_value)->len;
-    argv = ALLOCA_N(char *, argc);
+    argv = ALLOCA_N(char const *, argc);
     for (i = 0; i < argc; i++) {
         argv[i] = RVAL2CSTR(RARRAY(new_value)->ptr[i]);
     }
@@ -650,8 +650,8 @@ Init_gnome_config(mGnome)
     rb_define_module_function(mGnomeConfig, "private_set_vector", config_private_set_vector, 2);
 
     /* Returns true if /path/section is defined */
-    rb_define_module_function(mGnomeConfig, "section?", config_has_section, 1);
-    rb_define_module_function(mGnomeConfig, "private_section?", config_private_has_section, 1);
+    rb_define_module_function(mGnomeConfig, "has_section?", config_has_section, 1);
+    rb_define_module_function(mGnomeConfig, "private_has_section?", config_private_has_section, 1);
 
     rb_define_module_function(mGnomeConfig, "drop_all", config_drop_all, 0);
     rb_define_module_function(mGnomeConfig, "sync", config_sync, 0);

@@ -1,8 +1,11 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbbonobo-dock-band.c,v 1.2 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbbonobo-dock-band.c,v 1.3 2002/10/26 06:22:24 tkubo Exp $ */
+/* based on libbonoboui/bonobo/bonobo-doc-band.h */
+/* renamed from rbgnome-dock-band.c */
 
-/* Bonobo::DockBand widget for Ruby/Gnome
+/* Bonobo::DockBand widget for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,7 +22,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "rbgnome.h"
+#include "rbbonobo.h"
 
 #define _SELF(self) BONOBO_DOCK_BAND(RVAL2GOBJ(self))
 
@@ -212,7 +215,7 @@ Init_bonobo_dock_band(mBonobo)
      */
     rb_define_method(bnbDockBand, "initialize", dockband_initialize, 0);
     rb_define_method(bnbDockBand, "set_orientation", dockband_set_orientation, 1);
-    rb_define_method(bnbDockBand, "get_orientation", dockband_get_orientation, 0);
+    rb_define_method(bnbDockBand, "orientation", dockband_get_orientation, 0);
     rb_define_method(bnbDockBand, "insert", dockband_insert, 3);
     rb_define_method(bnbDockBand, "prepend", dockband_prepend, 2);
     rb_define_method(bnbDockBand, "append", dockband_append, 2);
@@ -227,4 +230,6 @@ Init_bonobo_dock_band(mBonobo)
     rb_define_method(bnbDockBand, "drag_end", dockband_drag_end, 1);
     rb_define_method(bnbDockBand, "get_item_by_name", dockband_get_item_by_name, 1);
     rb_define_method(bnbDockBand, "layout_add", dockband_layout_add, 3);
+
+    G_DEF_SETTERS(bnbDockBand);
 }
