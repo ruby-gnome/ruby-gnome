@@ -13,6 +13,7 @@ PACKAGE_NAME = "glib2"
 require 'mkmf-gnome2'
 
 PKGConfig.have_package('gobject-2.0') or exit 1
+PKGConfig.have_package('gthread-2.0')
 
 setup_win32(PACKAGE_NAME)
 

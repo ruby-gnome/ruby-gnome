@@ -75,10 +75,10 @@ module PKGConfig
     STDOUT.flush
     if check_version?(pkg, major, minor, micro)
       STDOUT.print "yes\n"
-      libs = libs_only_l(pkg)
+      libraries = libs_only_l(pkg)
       dldflags = libs(pkg)
-      dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
-      $libs   += ' ' + libs
+      dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libraries)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
+      $libs   += ' ' + libraries
       if /mswin32/ =~ RUBY_PLATFORM
 	$DLDFLAGS += ' ' + dldflags
       else
