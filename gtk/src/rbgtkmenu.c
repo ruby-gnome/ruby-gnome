@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2003/05/31 18:22:39 $
+  $Date: 2003/06/16 14:24:40 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -206,7 +206,6 @@ Init_gtk_menu()
     rb_define_method(gMenu, "accel_group", menu_get_accel_group, 0);
     rb_define_method(gMenu, "set_accel_path", menu_set_accel_path, 1);
     rb_define_method(gMenu, "tearoff_state?", menu_get_tearoff_state, 0);
-    rb_define_method(gMenu, "set_path", menu_set_accel_path, 1);
     rb_define_method(gMenu, "active", menu_get_active, 0);
     rb_define_method(gMenu, "set_active", menu_set_active, 1);
     rb_define_method(gMenu, "set_tearoff_state", menu_set_tearoff_state, 1);

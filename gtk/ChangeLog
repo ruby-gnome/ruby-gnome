@@ -1,3 +1,8 @@
+2003-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenu.c: Remove Gtk::Menu#set_path. 
+	Use Gtk::Menu#set_accel_path instead.
+
 2003-06-07  Geoff Youngs  <g@intersect-uk.co.uk>
 
 	* src/rbgdkwindow.c: Gdk::Window.foreign() added
