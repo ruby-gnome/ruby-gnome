@@ -1,8 +1,8 @@
 2002-08-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtksocket.c: rename Gtk::Socket#xwindow to Gtk::Socket#id
-	* src/rbgtksocket.c: implement Gtk::Socket#add_id tp wrap gtk_socket_add_id()
-	* src/rbgtkplug.c: implement Gtk::Socket#id to wrap gtk_plug_get_id()
+	* src/rbgtksocket.c: implement Gtk::Socket#add_id to wrap gtk_socket_add_id()
+	* src/rbgtkplug.c: implement Gtk::Plug#id to wrap gtk_plug_get_id()
 	* src/rbgtkplug.c: Gtk::Plug#initialize allow omitting socket id
 
 2002-08-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
