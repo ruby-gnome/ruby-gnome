@@ -4,7 +4,7 @@
   global.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -116,7 +116,7 @@ arg_to_value(arg)
 		}
 #ifdef GTK_TYPE_GDK_COLORMAP
 		else if (arg->type == GTK_TYPE_GDK_COLORMAP) {
-			return make_gdkcmap(GTK_VALUE_BOXED(*arg));
+			return GOBJ2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 #endif
 #ifdef GTK_TYPE_GDK_FONT
@@ -131,7 +131,7 @@ arg_to_value(arg)
 #endif
 #ifdef GTK_TYPE_GDK_VISUAL
 		else if (arg->type == GTK_TYPE_GDK_VISUAL) {
-			return make_gdkvisual(GTK_VALUE_BOXED(*arg));
+			return GOBJ2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 #endif
 		else if (arg->type == GTK_TYPE_STYLE) {

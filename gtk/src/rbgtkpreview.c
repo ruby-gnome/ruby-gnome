@@ -4,7 +4,7 @@
   rbgtkpreview.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -108,14 +108,14 @@ static VALUE
 preview_get_visual(self)
     VALUE self;
 {
-    return make_gdkvisual(gtk_preview_get_visual());
+    return GOBJ2RVAL(gtk_preview_get_visual());
 }
 
 static VALUE
 preview_get_cmap(self)
     VALUE self;
 {
-    return make_gdkcmap(gtk_preview_get_cmap());
+    return GOBJ2RVAL(gtk_preview_get_cmap());
 }
 
 static VALUE

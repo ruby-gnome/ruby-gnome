@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -77,11 +77,13 @@ arg_set_value(arg, value)
 			GTK_VALUE_BOXED(*arg) = get_gdkevent(value);
 #ifdef GTK_TYPE_GDK_COLORMAP
 		else if (arg->type == GTK_TYPE_GDK_COLORMAP)
-			GTK_VALUE_BOXED(*arg) = get_gdkcmap(value);
+			GTK_VALUE_BOXED(*arg) = GDK_COLORMAP(RVAL2GOBJ(value));
 #endif
 #ifdef GTK_TYPE_GDK_FONT
+#ifndef GTK_DISABLE_DEPRECATED
 		else if (arg->type == GTK_TYPE_GDK_FONT)
 			GTK_VALUE_BOXED(*arg) = get_gdkfont(value);
+#endif
 #endif
 #ifdef GTK_TYPE_GDK_PIXMAP
 		else if (arg->type == GTK_TYPE_GDK_PIXMAP)
@@ -89,7 +91,7 @@ arg_set_value(arg, value)
 #endif
 #ifdef GTK_TYPE_GDK_VISUAL
 		else if (arg->type == GTK_TYPE_GDK_VISUAL)
-			GTK_VALUE_BOXED(*arg) = get_gdkvisual(value);
+			GTK_VALUE_BOXED(*arg) = GDK_VISUAL(RVAL2GOBJ(value));
 #endif
 #ifdef GTK_TYPE_ACCEL_GROUP
         else if (arg->type == GTK_TYPE_ACCEL_GROUP)
@@ -147,31 +149,31 @@ signal_setup_args(obj, sig, argc, params, args)
 		if (signal_comp(signame, "drag_begin", GTK_TYPE_WIDGET) ||
 			signal_comp(signame, "drag_end", GTK_TYPE_WIDGET) ||
 			signal_comp(signame, "drag_data_delete", GTK_TYPE_WIDGET)) {
-			rb_ary_push(args, make_gdkdragcontext(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			return;
 		}
 		if (signal_comp(signame, "drag_leave", GTK_TYPE_WIDGET)){
-			rb_ary_push(args, make_gdkdragcontext(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[1])));
 			return;
 		}
 		if (signal_comp(signame, "drag_motion", GTK_TYPE_WIDGET) ||
 			signal_comp(signame, "drag_drop", GTK_TYPE_WIDGET)){
-			rb_ary_push(args, make_gdkdragcontext(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[1])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[2])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[3])));
 			return;
 		}
 		if (signal_comp(signame, "drag_data_get", GTK_TYPE_WIDGET)){
-			rb_ary_push(args, make_gdkdragcontext(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			rb_ary_push(args, make_gtkselectiondata(GTK_VALUE_POINTER(params[1])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[2])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[3])));
 			return;
 		}
 		if (signal_comp(signame, "drag_data_received", GTK_TYPE_WIDGET)){
-			rb_ary_push(args, make_gdkdragcontext(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[1])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[2])));
 			rb_ary_push(args, make_gtkselectiondata(GTK_VALUE_POINTER(params[3])));

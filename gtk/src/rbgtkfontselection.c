@@ -15,6 +15,7 @@ fs_initialize(self)
     return Qnil;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 fs_get_font(self)
     VALUE self;
@@ -22,6 +23,7 @@ fs_get_font(self)
     return make_gdkfont(gtk_font_selection_get_font(
                 GTK_FONT_SELECTION(RVAL2GOBJ(self))));
 }
+#endif
 
 static VALUE
 fs_get_font_name(self)
@@ -71,7 +73,9 @@ void Init_gtk_font_selection()
     rbgtk_register_class(&cinfo);
 
     rb_define_method(gFontSelection, "initialize", fs_initialize, 0);
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gFontSelection, "font", fs_get_font, 0);
+#endif
     rb_define_method(gFontSelection, "font_name", fs_get_font_name, 0);
     rb_define_method(gFontSelection, "font_name=", fs_set_font_name, 1);
     rb_define_method(gFontSelection, "preview_text", fs_get_preview_text, 0);

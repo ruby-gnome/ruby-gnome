@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -191,7 +191,7 @@ get_gtkselectiondata(value)
     return selectiondata;
 }
 
-#ifdef GTK_DISABLE_DEPRECATED
+#ifndef GTK_DISABLE_DEPRECATED
 VALUE
 make_gtkprevinfo(info)
     GtkPreviewInfo *info;
@@ -492,7 +492,7 @@ void Init_gtk_gtk()
 
     Init_gtk_accel_group();
     gRcStyle = rb_define_class_under(mGtk, "RcStyle", rb_cData);
-#ifdef GTK_DISABLE_DEPRECATED
+#ifndef GTK_DISABLE_DEPRECATED
     gPreviewInfo = rb_define_class_under(mGtk, "PreviewInfo", rb_cData);
 #endif
     Init_gtk_requisiton();

@@ -1,6 +1,24 @@
-2002-07-04  WATANABE Hirofumi <eban@os.rim.or.jp>
+2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb, src/rbgtk.h: Fix for Win32.
+	* src/rbgdkvisual.c, src/rbgdkcolormap.c:File divide from rbgdkcolor.c.
+	* src/rbgdkvisual.c, src/rbgdkcolormap.c, src/rbgdkdnd.c:
+	Support GOBJ2RVAL/RVAL2GOBJ
+	(Though Gdk::Visual, Gdk::Colormap, Gdk::DragContext is not descendant
+	of Glib::GObject).
+	* src/rbgdkrgb.c, src/rbgdkvisual.c, src/rbgdkdnd.c: 
+	Change get_hoge to hoge.
+	* src/rbgdkcolormap.c, src/rbgdkdnd.c: Change "new" to "initialize"
+	* src/rbgdkdnd.c: Remove Gdk::DragContext::Constants.
+	* src/*.c: Change make_gdkvisual/cmap/dragcontext to GOBJ2RVAL(), 
+	get_gdkvisual/cmap/dragcontext, to RVAL2GOBJ()
+	* src/rbgdkfont.c, src/rbgdkdraw.c, src/rbgdkgc.c, 
+	src/rbgdkim.c, src/rbgdkgc.c, src/rbgtk.h, src/rbgtk.c, 
+	src/rbgtkfontselection.c, src/rbgtkfontselectiondialog.c, 
+	src/rbgtkobject.c, src/rbgtktext.c: Add GTK_DISABLE_DEPRECATED macro.
+	
+2002-07-04  WATANABE Hirofumi <eban@os.rim.or.jp>
+	
+   	* extconf.rb, src/rbgtk.h: Fix for Win32.
 
 2002-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
 

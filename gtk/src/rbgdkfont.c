@@ -3,10 +3,12 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
+
+#ifndef GTK_DISABLE_DEPRECATED
 
 #include "global.h"
 
@@ -173,3 +175,5 @@ Init_gtk_gdk_font()
     rb_define_method(gdkFont, "text_measure", font_text_measure, 2);
     rb_define_method(gdkFont, "text_height", font_text_height, 2);
 }
+
+#endif

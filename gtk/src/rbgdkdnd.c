@@ -4,49 +4,49 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:14 $
 
-  Copyright (C) 2002 MUTOH Masao
+  Copyright (C) 2002 Masao Mutoh
 ************************************************/
 #include "global.h"
 
-VALUE gdkDragContext;
-VALUE gdkDragContextConst;
+#define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
 
-/* GdkDragContext */
+VALUE gdkDragContext;
+
 static VALUE
 gdkdragcontext_protocol(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkdragcontext(self)->protocol);
+    return INT2NUM(_SELF(self)->protocol);
 }
 
 static VALUE
 gdkdragcontext_is_source(self)
     VALUE self;
 {
-    return get_gdkdragcontext(self)->is_source ? Qtrue : Qfalse;
+    return _SELF(self)->is_source ? Qtrue : Qfalse;
 }
 
 static VALUE
 gdkdragcontext_source_window(self)
     VALUE self;
 {
-    return GOBJ2RVAL(get_gdkdragcontext(self)->source_window);
+    return GOBJ2RVAL(_SELF(self)->source_window);
 }
 
 static VALUE
 gdkdragcontext_dest_window(self)
     VALUE self;
 {
-    return GOBJ2RVAL(get_gdkdragcontext(self)->dest_window);
+    return GOBJ2RVAL(_SELF(self)->dest_window);
 }
 
 static VALUE
 gdkdragcontext_targets(self)
     VALUE self;
 {
-    GList *list = get_gdkdragcontext(self)->targets, *cur;
+    GList *list = _SELF(self)->targets, *cur;
     VALUE ary = rb_ary_new();
 
     for (cur = list; cur != NULL; cur = cur->next) {
@@ -59,36 +59,36 @@ static VALUE
 gdkdragcontext_actions(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkdragcontext(self)->actions);
+    return INT2NUM(_SELF(self)->actions);
 }
 
 static VALUE
 gdkdragcontext_suggested_action(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkdragcontext(self)->suggested_action);
+    return INT2NUM(_SELF(self)->suggested_action);
 }
 
 static VALUE
 gdkdragcontext_action(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkdragcontext(self)->action);
+    return INT2NUM(_SELF(self)->action);
 }
 
 static VALUE
 gdkdragcontext_start_time(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkdragcontext(self)->start_time);
+    return INT2NUM(_SELF(self)->start_time);
 }
 
-/* Singleton Methods */
 static VALUE
-gdkdragcontext_s_new(self)
+gdkdragcontext_initialize(self)
     VALUE self;
 {   
-    return new_gdkdragcontext(gdk_drag_context_new());
+	RBGOBJ_INITIALIZE(self, gdk_drag_context_new());
+    return Qnil;
 }
 
 static VALUE
@@ -104,14 +104,14 @@ static VALUE
 gdkdragcontext_get_selection(self)
     VALUE self;
 {
-    return make_gdkatom(gdk_drag_get_selection(get_gdkdragcontext(self)));
+    return make_gdkatom(gdk_drag_get_selection(_SELF(self)));
 }
 
 static VALUE
 gdkdragcontext_drag_abort(self, time)
     VALUE self, time;
 {
-    gdk_drag_abort(get_gdkdragcontext(self), NUM2INT(time));
+    gdk_drag_abort(_SELF(self), NUM2INT(time));
     return Qnil;
 }
 
@@ -119,7 +119,7 @@ static VALUE
 gdkdragcontext_drop_reply(self, ok, time)
     VALUE self, ok, time;
 {
-    gdk_drop_reply(get_gdkdragcontext(self), RTEST(ok), NUM2INT(time));
+    gdk_drop_reply(_SELF(self), RTEST(ok), NUM2INT(time));
     return Qnil;
 }
 
@@ -127,7 +127,7 @@ static VALUE
 gdkdragcontext_drag_drop(self, time)
     VALUE self, time;
 {
-    gdk_drag_drop(get_gdkdragcontext(self), NUM2INT(time));
+    gdk_drag_drop(_SELF(self), NUM2INT(time));
     return Qnil;
 }
 
@@ -137,7 +137,7 @@ gdkdragcontext_find_window(self, drag_window, x_root, y_root, protocol)
 {
     GdkWindow *dest_window;
     int prot = NUM2INT(protocol);
-    gdk_drag_find_window(get_gdkdragcontext(self),
+    gdk_drag_find_window(_SELF(self),
                          GDK_WINDOW(RVAL2GOBJ(drag_window)), 
                          NUM2INT(x_root),
                          NUM2INT(y_root),
@@ -152,7 +152,7 @@ gdkdragcontext_motion(self, dest_window, protocol, x_root, y_root,
     VALUE self, dest_window, protocol, x_root, y_root, 
   		  suggested_action, possible_actions, time;
 {
-    gboolean ret = gdk_drag_motion(get_gdkdragcontext(self), 
+    gboolean ret = gdk_drag_motion(_SELF(self), 
 								   GDK_WINDOW(RVAL2GOBJ(dest_window)), 
                                    NUM2INT(protocol), NUM2INT(x_root), NUM2INT(y_root), 
                                    NUM2INT(suggested_action), NUM2INT(possible_actions), 
@@ -164,7 +164,7 @@ static VALUE
 gdkdragcontext_drop_finish(self, success, time)
     VALUE self, success, time;
 {
-    gdk_drop_finish(get_gdkdragcontext(self), RTEST(success), NUM2INT(time));
+    gdk_drop_finish(_SELF(self), RTEST(success), NUM2INT(time));
     return Qnil;
 }
 
@@ -172,20 +172,27 @@ static VALUE
 gdkdragcontext_drag_status(self, action, time)
     VALUE self, action, time;
 {
-    gdk_drag_status(get_gdkdragcontext(self), NUM2INT(action), NUM2INT(time));
+    gdk_drag_status(_SELF(self), NUM2INT(action), NUM2INT(time));
     return Qnil;
 }
 
 void
 Init_gtk_gdk_dnd()
 {
+	static RGObjClassInfo cinfo;
+
     gdkDragContext = rb_define_class_under(mGdk, "DragContext", rb_cData);
+	cinfo.klass = gdkDragContext;
+    cinfo.gtype = GDK_TYPE_DRAG_CONTEXT;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
-    rb_define_singleton_method(gdkDragContext, "new", gdkdragcontext_s_new, 0);
-    rb_define_singleton_method(gdkDragContext, "get_protocol", gdkdragcontext_s_get_protocol, 2);
+    rb_define_singleton_method(gdkDragContext, "protocol", gdkdragcontext_s_get_protocol, 2);
 
+    rb_define_method(gdkDragContext, "initialize", gdkdragcontext_initialize, 0);
     rb_define_method(gdkDragContext, "protocol", gdkdragcontext_protocol, 0);
-    rb_define_method(gdkDragContext, "is_source", gdkdragcontext_is_source, 0);
+    rb_define_method(gdkDragContext, "source?", gdkdragcontext_is_source, 0);
     rb_define_method(gdkDragContext, "source_window", gdkdragcontext_source_window, 0);
     rb_define_method(gdkDragContext, "dest_window", gdkdragcontext_dest_window, 0);
     rb_define_method(gdkDragContext, "targets", gdkdragcontext_targets, 0);
@@ -194,8 +201,7 @@ Init_gtk_gdk_dnd()
     rb_define_method(gdkDragContext, "action", gdkdragcontext_action, 0);
     rb_define_method(gdkDragContext, "start_time", gdkdragcontext_start_time, 0);
 
-    rb_define_method(gdkDragContext, "get_selection", gdkdragcontext_get_selection, 0);
-    rb_define_alias(gdkDragContext, "selection", "get_selection");
+    rb_define_method(gdkDragContext, "selection", gdkdragcontext_get_selection, 0);
     rb_define_method(gdkDragContext, "drag_abort", gdkdragcontext_drag_abort, 1);
     rb_define_method(gdkDragContext, "drop_reply", gdkdragcontext_drop_reply, 2);
     rb_define_method(gdkDragContext, "drag_drop", gdkdragcontext_drag_drop, 1);
@@ -204,17 +210,17 @@ Init_gtk_gdk_dnd()
     rb_define_method(gdkDragContext, "drop_finish", gdkdragcontext_drop_finish, 2);
     rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
 
-    gdkDragContextConst = rb_define_module_under(gdkDragContext, "Constants");
-    rb_define_const(gdkDragContextConst, "PROTO_MOTIF", INT2FIX(GDK_DRAG_PROTO_MOTIF));
-    rb_define_const(gdkDragContextConst, "PROTO_XDND", INT2FIX(GDK_DRAG_PROTO_XDND));
-    rb_define_const(gdkDragContextConst, "PROTO_ROOTWIN", INT2FIX(GDK_DRAG_PROTO_ROOTWIN));
-    rb_define_const(gdkDragContextConst, "PROTO_NONE", INT2FIX(GDK_DRAG_PROTO_NONE));
-    rb_define_const(gdkDragContextConst, "ACTION_DEFAULT", INT2FIX(GDK_ACTION_DEFAULT));
-    rb_define_const(gdkDragContextConst, "ACTION_COPY", INT2FIX(GDK_ACTION_COPY));
-    rb_define_const(gdkDragContextConst, "ACTION_MOVE", INT2FIX(GDK_ACTION_MOVE));
-    rb_define_const(gdkDragContextConst, "ACTION_LINK", INT2FIX(GDK_ACTION_LINK));
-    rb_define_const(gdkDragContextConst, "ACTION_PRIVATE", INT2FIX(GDK_ACTION_PRIVATE));
-    rb_define_const(gdkDragContextConst, "ACTION_ASK", INT2FIX(GDK_ACTION_ASK));
+	/* Constants */
+    rb_define_const(gdkDragContext, "PROTO_MOTIF", INT2FIX(GDK_DRAG_PROTO_MOTIF));
+    rb_define_const(gdkDragContext, "PROTO_XDND", INT2FIX(GDK_DRAG_PROTO_XDND));
+    rb_define_const(gdkDragContext, "PROTO_ROOTWIN", INT2FIX(GDK_DRAG_PROTO_ROOTWIN));
+    rb_define_const(gdkDragContext, "PROTO_NONE", INT2FIX(GDK_DRAG_PROTO_NONE));
+    rb_define_const(gdkDragContext, "ACTION_DEFAULT", INT2FIX(GDK_ACTION_DEFAULT));
+    rb_define_const(gdkDragContext, "ACTION_COPY", INT2FIX(GDK_ACTION_COPY));
+    rb_define_const(gdkDragContext, "ACTION_MOVE", INT2FIX(GDK_ACTION_MOVE));
+    rb_define_const(gdkDragContext, "ACTION_LINK", INT2FIX(GDK_ACTION_LINK));
+    rb_define_const(gdkDragContext, "ACTION_PRIVATE", INT2FIX(GDK_ACTION_PRIVATE));
+    rb_define_const(gdkDragContext, "ACTION_ASK", INT2FIX(GDK_ACTION_ASK));
 
-    rb_include_module(gdkDragContext, gdkDragContextConst);
+    rb_include_module(gdkDragContext, gdkDragContext);
 }

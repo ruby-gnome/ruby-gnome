@@ -46,6 +46,8 @@ raise "can't found gdkcursor.h or gdkkeysyms.h" if gdkincl.nil?
 
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
 
+gdkx = have_header("gdk/gdkx.h")
+
 #
 # create Makefiles
 #
@@ -56,7 +58,7 @@ begin
 
   lib_ary = []
   if /cygwin|mingw/ =~ PLATFORM
-    $CFLAGS += " -fnative-struct -DNATIVE_WIN32"
+    $CFLAGS += " -fnative-struct -DNATIVE_WIN32" unless gdkx
   elsif /mswin32/ !~ PLATFORM
     lib_ary = [# ["X11", "XOpenDisplay"],
                # ["Xext", "XShmQueryVersion"],

@@ -15,6 +15,7 @@ fsd_initialize(self, title)
     return Qnil;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 fsd_get_font(self)
     VALUE self;
@@ -22,6 +23,7 @@ fsd_get_font(self)
     return make_gdkfont(gtk_font_selection_dialog_get_font(
                 GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))));
 }
+#endif
 
 static VALUE
 fsd_get_font_name(self)
@@ -135,7 +137,9 @@ void Init_gtk_font_selection_dialog()
     rbgtk_register_class(&cinfo);
 
     rb_define_method(gFontSelectionDialog, "initialize", fsd_initialize, 1);
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gFontSelectionDialog, "font", fsd_get_font, 0);
+#endif
     rb_define_method(gFontSelectionDialog, "font_name", fsd_get_font_name, 0);
     rb_define_method(gFontSelectionDialog, "font_name=", fsd_set_font_name, 1);
     rb_define_method(gFontSelectionDialog, "preview_text", fsd_get_preview_text, 0);

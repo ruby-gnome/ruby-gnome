@@ -4,7 +4,7 @@
   rbgdkim.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -193,6 +193,7 @@ gdkicattr_set_spot_location(self, point)
     return self;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 gdkicattr_preedit_fontset(self)
      VALUE self;
@@ -208,6 +209,7 @@ gdkicattr_set_preedit_fontset(self, font)
     get_gdkicattr(self)->preedit_fontset = get_gdkfont(font);
     return self;
 }
+#enfif
 
 static VALUE
 gdkicattr_preedit_area(self)
@@ -237,15 +239,14 @@ static VALUE
 gdkicattr_preedit_cmap(self)
      VALUE self;
 {
-    GdkColormap *cmap = get_gdkicattr(self)->preedit_colormap;
-    return make_gdkcmap(cmap);
+    return RVAL2GOBJ(get_gdkicattr(self)->preedit_colormap);
 }
 
 static VALUE
 gdkicattr_set_preedit_cmap(self, cmap)
      VALUE self, cmap;
 {
-    get_gdkicattr(self)->preedit_colormap = get_gdkcmap(cmap);
+    get_gdkicattr(self)->preedit_colormap = GDK_COLORMAP(RVAL2GOBJ(cmap));
     return self;
 }
 
@@ -321,8 +322,10 @@ Init_gtk_gdk_im()
     rb_define_method(gdkICAttr, "focus_window=", gdkicattr_set_focus_window, 1);
     rb_define_method(gdkICAttr, "spot_location", gdkicattr_spot_location, 0);
     rb_define_method(gdkICAttr, "spot_location=", gdkicattr_set_spot_location, 1);
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gdkICAttr, "preedit_fontset", gdkicattr_preedit_fontset, 0);
     rb_define_method(gdkICAttr, "preedit_fontset=", gdkicattr_set_preedit_fontset, 1);
+#endif
     rb_define_method(gdkICAttr, "preedit_area", gdkicattr_preedit_area, 0);
     rb_define_method(gdkICAttr, "preedit_area=", gdkicattr_set_preedit_area, 1);
     rb_define_method(gdkICAttr, "preedit_area_needed", gdkicattr_preedit_area_needed, 0);

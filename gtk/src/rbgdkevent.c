@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -414,7 +414,7 @@ static VALUE
 gdkeventDND_context(self)
     VALUE self;
 {
-    return make_gdkdragcontext(get_gdkevent(self)->dnd.context);
+    return GOBJ2RVAL(get_gdkevent(self)->dnd.context);
 }
 
 static VALUE

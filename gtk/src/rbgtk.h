@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/07/04 14:10:10 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -159,7 +159,9 @@ extern VALUE mGdk;
 extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
 extern VALUE gdkError;
+#ifndef GTK_DISABLE_DEPRECATED
 extern VALUE gdkFont;
+#endif
 extern VALUE gdkColor;
 extern VALUE gdkColormap;
 extern VALUE gdkDrawable;
@@ -261,17 +263,8 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 extern VALUE make_gdkregion(GdkRegion* region);
 extern GdkRegion* get_gdkregion(VALUE region);
 
-extern VALUE make_gdkfont(GdkFont* font);
-extern GdkFont* get_gdkfont(VALUE font);
-
-extern VALUE make_gdkcmap(GdkColormap* cmap);
-extern GdkColormap* get_gdkcmap(VALUE cmap);
-
 extern VALUE make_gdkcursor(GdkCursor* cursor);
 extern GdkCursor* get_gdkcursor(VALUE cursor);
-
-extern VALUE make_gdkvisual(GdkVisual* visual);
-extern GdkVisual* get_gdkvisual(VALUE visual);
 
 typedef void(*gdkdrawfunc)();
 
@@ -284,11 +277,13 @@ extern GdkEvent* get_gdkevent(VALUE event);
 extern VALUE rbgdk_geometry_make(GdkGeometry *geo);
 extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
 
-extern VALUE make_gdkdragcontext(GdkDragContext* context);
-extern VALUE new_gdkdragcontext(GdkDragContext* context);
-extern GdkDragContext* get_gdkdragcontext(VALUE context);
-
 extern VALUE make_gdkatom(GdkAtom atom);
 extern GdkAtom get_gdkatom(VALUE atom);
+
+#ifdef GTK_DISABLE_DEPRECATED
+extern VALUE make_gdkfont(GdkFont* font);
+extern GdkFont* get_gdkfont(VALUE font);
+#endif
+
 
 #endif /* _RBGTK_H */

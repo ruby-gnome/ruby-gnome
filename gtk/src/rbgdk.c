@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/06 20:56:14 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,7 +53,7 @@ get_tobj(obj, klass)
 
     return ptr;
 }
-
+#ifndef GTK_DISABLE_DEPRECATED
 VALUE
 make_gdkfont(font)
     GdkFont *font;
@@ -83,58 +83,7 @@ get_gdkfont(font)
 
     return gfont;
 }
-
-VALUE
-make_gdkcmap(cmap)
-    GdkColormap *cmap;
-{
-    if (cmap == NULL) return Qnil;
-
-    gdk_colormap_ref(cmap);
-    return Data_Wrap_Struct(gdkColormap, 0, gdk_colormap_unref, cmap);
-}
-
-GdkColormap*
-get_gdkcmap(cmap)
-    VALUE cmap;
-{
-    GdkColormap *gcmap;
-
-    if (NIL_P(cmap)) return NULL;
-
-    if (!rb_obj_is_kind_of(cmap, gdkColormap)) {
-        rb_raise(rb_eTypeError, "not a GdkColormap");
-    }
-    Data_Get_Struct(cmap, GdkColormap, gcmap);
-
-    return gcmap;
-}
-
-VALUE
-make_gdkvisual(visual)
-    GdkVisual *visual;
-{
-    if (visual == NULL) return Qnil;
-
-    g_object_ref(visual);
-    return Data_Wrap_Struct(gdkVisual, 0, g_object_unref, visual);
-}
-
-GdkVisual*
-get_gdkvisual(visual)
-    VALUE visual;
-{
-    GdkVisual *gvisual;
-
-    if (NIL_P(visual)) return NULL;
-
-    if (!rb_obj_is_kind_of(visual, gdkVisual)) {
-        rb_raise(rb_eTypeError, "not a GdkVisual");
-    }
-    Data_Get_Struct(visual, GdkVisual, gvisual);
-
-    return gvisual;
-}
+#endif
 
 VALUE
 make_gdkevent(ev)
@@ -276,62 +225,6 @@ get_gdkcursor(cursor)
     return gcursor;
 }
 
-static void
-delete_gdkdragcontext(context)
-    GdkDragContext *context;
-{
-    gdk_drag_context_unref(context);
-    rb_hash_aset(gdk_object_list, INT2NUM((VALUE)context), Qnil);
-}
-
-VALUE
-new_gdkdragcontext(context)
-    GdkDragContext *context;
-{
-    VALUE obj;
-
-    if (context == NULL) return Qnil;
-
-    obj = Data_Wrap_Struct(gdkDragContext, 0, delete_gdkdragcontext, context);
-    rb_hash_aset(gdk_object_list, INT2NUM((VALUE)context), INT2NUM(obj));
-
-    return obj;
-}
-
-VALUE
-make_gdkdragcontext(context)
-    GdkDragContext *context;
-{
-    VALUE obj;
-
-    if (context == NULL) return Qnil;
-
-    obj = rb_hash_aref(gdk_object_list, INT2NUM((VALUE)context));
-    if (obj == Qnil) {
-        gdk_drag_context_ref(context);
-        obj = new_gdkdragcontext(context);
-    } else {
-        obj = NUM2INT(obj);
-    }
-    return obj;
-}
-
-GdkDragContext*
-get_gdkdragcontext(context)
-    VALUE context;
-{
-    GdkDragContext *gcontext;
-
-    if (NIL_P(context)) return NULL;
-
-    if (!rb_obj_is_kind_of(context, gdkDragContext)) {
-        rb_raise(rb_eTypeError, "not a GdkDragContext");
-    }
-    Data_Get_Struct(context, GdkDragContext, gcontext);
-
-    return gcontext;
-}
-
 struct _rbgdkatom {
   GdkAtom atom;
 };
@@ -418,12 +311,15 @@ gdk_s_events_pending(self)
 }
 
 extern void Init_gtk_gdk_const();
+extern void Init_gtk_gdk_colormap();
 extern void Init_gtk_gdk_color();
 extern void Init_gtk_gdk_cursor();
 extern void Init_gtk_gdk_visual();
 extern void Init_gtk_gdk_draw();
 extern void Init_gtk_gdk_event();
+#ifndef GTK_DISABLE_DEPRECATED
 extern void Init_gtk_gdk_font();
+#endif
 extern void Init_gtk_gdk_gc();
 extern void Init_gtk_gdk_image();
 #ifdef USE_XIM
@@ -458,11 +354,14 @@ Init_gtk_gdk()
     rb_define_singleton_method(mGdk, "events_pending", gdk_s_events_pending, 0);
 
     Init_gtk_gdk_const();
+    Init_gtk_gdk_colormap();
     Init_gtk_gdk_color();
     Init_gtk_gdk_cursor();
     Init_gtk_gdk_draw();
     Init_gtk_gdk_event();
+#ifndef GTK_DISABLE_DEPRECATED
     Init_gtk_gdk_font();
+#endif
     Init_gtk_gdk_gc();
     Init_gtk_gdk_dnd();
     Init_gtk_gdk_image();

@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -143,6 +143,7 @@ gdkgc_set_fill(self, fill)
 	return self;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 gdkgc_set_font(self, font)
 	VALUE self, font;
@@ -150,6 +151,7 @@ gdkgc_set_font(self, font)
 	gdk_gc_set_font(_SELF(self), get_gdkfont(font));
 	return self;
 }
+#endif
 
 static VALUE
 gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
@@ -218,7 +220,9 @@ Init_gtk_gdk_gc()
 	rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
 	rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
 	rb_define_method(gdkGC, "set_fill", gdkgc_set_fill, 1);
+#ifndef GTK_DISABLE_DEPRECATED
 	rb_define_method(gdkGC, "set_font", gdkgc_set_font, 1);
+#endif
 	rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
 	rb_define_method(gdkGC, "set_stipple", gdkgc_set_stipple, 1);
 	rb_define_method(gdkGC, "set_subwindow", gdkgc_set_subwindow, 1);

@@ -4,7 +4,7 @@
   rbgtktext.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -102,6 +102,7 @@ txt_thaw(self)
     return self;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 txt_insert(self, font, fore, back, str)
     VALUE self, font, fore, back, str;
@@ -116,6 +117,8 @@ txt_insert(self, font, fore, back, str)
 
     return self;
 }
+
+#endif
 
 static VALUE
 txt_backward_delete(self, nchars)
@@ -161,7 +164,9 @@ void Init_gtk_text()
     rb_define_method(gText, "get_length", txt_get_length, 0);
     rb_define_method(gText, "freeze", txt_freeze, 0);
     rb_define_method(gText, "thaw", txt_thaw, 0);
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gText, "insert", txt_insert, 4);
+#endif
     rb_define_method(gText, "backward_delete", txt_backward_delete, 1);
     rb_define_method(gText, "forward_delete", txt_forward_delete, 1);
     rb_define_method(gText, "has_cursor?", txt_has_cursor, 0);

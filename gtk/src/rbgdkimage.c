@@ -4,7 +4,7 @@
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,7 +53,7 @@ gdkimage_s_newbmap(klass, visual, data, w, h)
     if (RSTRING(data)->len < (width * height)) {
         rb_raise(rb_eArgError, "data too short");
     }
-    return make_gdkimage(gdk_image_new_bitmap(get_gdkvisual(visual),
+    return make_gdkimage(gdk_image_new_bitmap(GDK_VISUAL(RVAL2GOBJ(visual)),
                          RSTRING(data)->ptr,
                          width, height));
 }
@@ -65,7 +65,7 @@ gdkimage_s_new(klass, type, visual, w, h)
     VALUE klass, type, visual, w, h;
 {
     return make_gdkimage(gdk_image_new((GdkImageType)NUM2INT(type),
-                         get_gdkvisual(visual),
+                         GDK_VISUAL(RVAL2GOBJ(visual)),
                          NUM2INT(w), NUM2INT(h)));
 }
 

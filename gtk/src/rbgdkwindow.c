@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/07/01 17:27:11 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -256,7 +256,7 @@ static VALUE
 gdkwin_set_colormap(self, colormap)
     VALUE self, colormap;
 {
-	gdk_window_set_colormap(_SELF(self),get_gdkcmap(colormap));
+	gdk_window_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
 	return self;
 }
 
@@ -376,14 +376,14 @@ static VALUE
 gdkwin_get_visual(self)
 	VALUE self;
 {
-	return make_gdkvisual(gdk_window_get_visual(_SELF(self)));
+	return GOBJ2RVAL(gdk_window_get_visual(_SELF(self)));
 }
 
 static VALUE
 gdkwin_get_colormap(self)
 	VALUE self;
 {
-	return make_gdkcmap(gdk_window_get_colormap(_SELF(self)));
+	return GOBJ2RVAL(gdk_window_get_colormap(_SELF(self)));
 }
 
 static VALUE
@@ -520,7 +520,7 @@ gdkwin_prop_change(self, property, type, mode, src)
     fmt = 32;
     len = 1;  
   } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
-    dat = (void*)&(((GdkColormapPrivate*)get_gdkcmap(src))->xcolormap);
+    dat = (void*)&(((GdkColormapPrivate*)GDK_COLORMAP(RVAL2GOBJ(src)))->xcolormap);
     fmt = 32;
     len = 1;
   } else if(ntype == GDK_SELECTION_TYPE_INTEGER){

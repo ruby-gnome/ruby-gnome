@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/06/24 15:15:59 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -82,7 +82,7 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
     GdkBitmap *mask;
 
     new = gdk_pixmap_colormap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), 
-					      get_gdkcmap(colormap),
+					      GDK_COLORMAP(RVAL2GOBJ(colormap)),
 					      &mask,
 					      get_gdkcolor(tcolor),
 					      STR2CSTR(fname));
@@ -108,7 +108,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
     }
 
     new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
-						get_gdkcmap(colormap),
+						GDK_COLORMAP(RVAL2GOBJ(colormap)),
 						&mask,
 						get_gdkcolor(tcolor),
 						buf);

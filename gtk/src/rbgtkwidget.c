@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/06 20:56:15 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,7 +13,7 @@
 
 #include "global.h"
 
-#define _SELF(w) (GTK_WIDGET(RVAL2GOBJ(self)))
+#define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
 
 static VALUE
 widget_show(self)
@@ -343,14 +343,14 @@ static VALUE
 widget_get_colormap(self)
     VALUE self;
 {
-    return make_gdkcmap(gtk_widget_get_colormap(_SELF(self)));
+    return GOBJ2RVAL(gtk_widget_get_colormap(_SELF(self)));
 }
 
 static VALUE
 widget_get_visual(self)
     VALUE self;
 {
-    return make_gdkvisual(gtk_widget_get_visual(_SELF(self)));
+    return GOBJ2RVAL(gtk_widget_get_visual(_SELF(self)));
 }
 
 static VALUE
@@ -403,7 +403,7 @@ static VALUE
 widget_push_cmap(self, cmap)
     VALUE self, cmap;
 {
-    gtk_widget_push_colormap(get_gdkcmap(cmap));
+    gtk_widget_push_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return Qnil;
 }
 
@@ -411,7 +411,7 @@ static VALUE
 widget_push_visual(self, visual)
     VALUE self, visual;
 {
-    gtk_widget_push_visual(get_gdkvisual(visual));
+    gtk_widget_push_visual(GDK_VISUAL(RVAL2GOBJ(visual)));
     return visual;
 }
 
@@ -458,7 +458,7 @@ DEFINE_IS_WIDGET(TOPLEVEL)
 widget_set_default_cmap(self, cmap)
     VALUE self, cmap;
 {
-    gtk_widget_set_default_colormap(get_gdkcmap(cmap));
+    gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return Qnil;
 }
 
@@ -466,7 +466,7 @@ static VALUE
 widget_set_default_visual(self, visual)
     VALUE self, visual;
 {
-    gtk_widget_set_default_visual(get_gdkvisual(visual));
+    gtk_widget_set_default_visual(GDK_VISUAL(RVAL2GOBJ(visual)));
     return visual;
 }
 
@@ -474,14 +474,14 @@ static VALUE
 widget_get_default_cmap(self)
     VALUE self;
 {
-    return make_gdkcmap(gtk_widget_get_default_colormap());
+    return GOBJ2RVAL(gtk_widget_get_default_colormap());
 }
 
 static VALUE
 widget_get_default_visual(self)
     VALUE self;
 {
-    return make_gdkvisual(gtk_widget_get_default_visual());
+    return GOBJ2RVAL(gtk_widget_get_default_visual());
 }
 
 static VALUE
@@ -761,7 +761,7 @@ static VALUE
 widget_drag_get_data(self, context, target, time)
     VALUE self, context, target, time;
 {
-    gtk_drag_get_data(_SELF(self), get_gdkdragcontext(context), 
+    gtk_drag_get_data(_SELF(self), GDK_DRAG_CONTEXT(RVAL2GOBJ(self)),
                       get_gdkatom(target), NUM2INT(time));
     return self;
 }
@@ -780,7 +780,7 @@ static VALUE
 widget_drag_source_set_icon(self, colormap, pixmap, mask)
     VALUE self, colormap, pixmap, mask;
 {
-    gtk_drag_source_set_icon(_SELF(self), get_gdkcmap(colormap),
+    gtk_drag_source_set_icon(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)),
                              GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
 							 GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
