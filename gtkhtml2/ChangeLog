@@ -1,3 +1,7 @@
+2003-08-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gtkhtml2.rb: Added.
+
 2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkhtmlview.c: Fix segfault for Gtk::HtmlView#document.
