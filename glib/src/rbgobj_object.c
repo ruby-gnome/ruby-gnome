@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 04:59:07 $
+  $Date: 2002/08/01 17:43:10 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -237,14 +237,8 @@ _gobject_from_ruby(VALUE from, GValue* to)
 void 
 Init_gobject_gobject()
 {
-    static RGObjClassInfo cinfo;
+    rbgobj_cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "GObject", mGLib);
 
-    rbgobj_cGObject = rb_define_class_under(mGLib, "GObject", rb_cObject);
-    cinfo.klass = rbgobj_cGObject;
-    cinfo.gtype = G_TYPE_OBJECT;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgobj_register_class(&cinfo);
     rbgobj_register_r2g_func(rbgobj_cGObject, _gobject_from_ruby);
     rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
 

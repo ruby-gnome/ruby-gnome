@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:38:47 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:43:10 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -14,25 +14,13 @@
 #include "global.h"
 #include "st.h"
 
-static VALUE gobject_type_hash;
+static ID id_new;
+static VALUE gtype_to_cinfo;
 
-void
-rbgobj_register_class(const RGObjClassInfo* cinfo)
+static void
+cinfo_mark(RGObjClassInfo* cinfo)
 {
-    VALUE data;
-
-    if (!RTEST(rb_ary_includes(rb_mod_ancestors(cinfo->klass), rbgobj_cGObject)))
-        fprintf(stderr,
-                "rbgobj_register_class: %s is not a subclass of GLib::GObject\n",
-                rb_class2name(cinfo->klass));
-    if (G_TYPE_FUNDAMENTAL(cinfo->gtype) != G_TYPE_OBJECT)
-        fprintf(stderr,
-                "rbgobj_register_class: %s is not a subtype of GObject\n",
-                 g_type_name(cinfo->gtype));
-
-    data = Data_Wrap_Struct(rb_cData, NULL, NULL, (RGObjClassInfo*)cinfo);
-    rb_ivar_set(cinfo->klass, id_class_info, data);
-    rb_hash_aset(gobject_type_hash, INT2NUM(cinfo->gtype), cinfo->klass);
+    rb_gc_mark(cinfo->klass);
 }
 
 const RGObjClassInfo *
@@ -52,29 +40,43 @@ const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype(gtype)
     GType gtype;
 {
-    VALUE klass = rb_hash_aref(gobject_type_hash, INT2NUM(gtype));
+    RGObjClassInfo* cinfo;
+    VALUE c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
 
-    if (NIL_P(klass))
-        return NULL;
-    else
-        return rbgobj_lookup_class(klass);
-}
+    if (!NIL_P(c)){
+        Data_Get_Struct(c, RGObjClassInfo, cinfo);
+    } else {
+        if (G_TYPE_FUNDAMENTAL(gtype) != G_TYPE_OBJECT){
+            /* we should raise exception? */
+            fprintf(stderr,
+                "rbgobj_lookup_class_by_gtype: %s is not a subtype of GObject\n",
+                g_type_name(gtype));
+            return NULL;
+        }
 
-VALUE
-rbgobj_lookup_rbclass(const GObject* gobj)
-{
-    GType gtype;
+        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
-    for (gtype = G_OBJECT_TYPE(gobj);
-         gtype != G_TYPE_INVALID;
-         gtype = g_type_parent(gtype))
-    {
-        VALUE klass = rb_hash_aref(gobject_type_hash, INT2NUM(gtype));
-        if (!NIL_P(klass))
-            return klass;
+        if (gtype == G_TYPE_OBJECT){
+            cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
+        } else {
+            const RGObjClassInfo* cinfo_super
+                = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+            cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+        }
+
+        cinfo->gtype = gtype;
+        cinfo->mark  = NULL;
+        cinfo->free  = NULL;
+
+        rb_ivar_set(cinfo->klass, id_class_info, c);
+        rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+#if 0
+        rbgobj_define_property_accessors(cinfo->klass);
+        rbgobj_define_signal_constants(cinfo->klass);
+#endif
     }
 
-    rb_raise(rb_eTypeError, "not a GObject");
+    return cinfo;
 }
 
 VALUE
@@ -85,21 +87,11 @@ rbgobj_define_class(gtype, name, module, mark, free)
 	void* mark;
 	void* free;
 {
-	VALUE klass;
-	RGObjClassInfo* cinfo;
-	klass = rb_define_class_under(module, name, GTYPE2CLASS(g_type_parent(gtype)));
-	cinfo = ALLOC(RGObjClassInfo);
-	
-	cinfo->klass = klass;
-	cinfo->gtype = gtype;
-	cinfo->mark = mark;
-	cinfo->free = free;
-/*
-	rbgobj_define_property_acccessors(klass);
-*/
-	rbgobj_register_class(cinfo);
-
-	return klass;
+        RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+        cinfo->mark = mark;
+        cinfo->free = free;
+        rb_define_const(module, name, cinfo->klass);
+        return cinfo->klass;
 }
 
 /**********************************************************************/
@@ -110,7 +102,7 @@ rbgobj_define_class(gtype, name, module, mark, free)
 void Init_gobject_gtype()
 {
     g_type_init();
-
-    rb_global_variable(&gobject_type_hash);
-    gobject_type_hash = rb_hash_new();    
+    id_new = rb_intern("new");
+    rb_global_variable(&gtype_to_cinfo);
+    gtype_to_cinfo = rb_hash_new();    
 }

@@ -1,3 +1,13 @@
+2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* glib/src/rbgobj_type.c: abolish rbgobj_register_class()
+	* glib/src/rbgobj_type.c (rbgobj_lookup_class_by_gtype):
+	now this function create a new class on demand.
+	* glib/src/rbgobj_type.c: abolish rbgobj_lookup_rbclass()
+	* glib/src/rbgobject.c: fix typo
+	* glib/src/rbgobject.c: add rbgobj_define_signal_constants()
+	which define constants for signal names.
+
 2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (_gobject_to_ruby): check NULL before calling

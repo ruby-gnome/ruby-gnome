@@ -4,7 +4,7 @@
   rbgobj_typemodule.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:46:35 $
+  $Date: 2002/08/01 17:43:10 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -12,8 +12,6 @@
 **********************************************************************/
 
 #include "global.h"
-
-VALUE rbgobj_cTypeModule;
 
 static VALUE
 use(self)
@@ -61,19 +59,9 @@ void     g_type_module_add_interface (GTypeModule           *module,
 void
 Init_gobject_gtypemodule()
 {
-    static RGObjClassInfo cinfo;
-
-    rbgobj_cTypeModule = rb_define_class_under(mGLib, "TypeModule", rbgobj_cGObject);
-
-    cinfo.klass = rbgobj_cTypeModule;
-    cinfo.gtype = G_TYPE_TYPE_MODULE;
-    cinfo.mark = 0;
-    cinfo.free = 0;
-    rbgobj_register_class(&cinfo);
-
-    rb_define_method(rbgobj_cTypeModule, "use", use, 0);
-    rb_define_method(rbgobj_cTypeModule, "unuse", unuse, 0);
-
-    rb_define_method(rbgobj_cTypeModule, "name", get_name, 0);
-    rb_define_method(rbgobj_cTypeModule, "name", set_name, 1);
+    VALUE cTypeModule = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
+    rb_define_method(cTypeModule, "use", use, 0);
+    rb_define_method(cTypeModule, "unuse", unuse, 0);
+    rb_define_method(cTypeModule, "name", get_name, 0);
+    rb_define_method(cTypeModule, "name=", set_name, 1);
 }

@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 04:59:07 $
+  $Date: 2002/08/01 17:43:11 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -19,6 +19,7 @@
 #include "ruby.h"
 #include "st.h"
 #include "global.h"
+#include <ctype.h>
 
 static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 
@@ -147,7 +148,8 @@ rbgobj_get_value_from_gobject(gobj)
     if (holder)
         return holder->self;
     else {
-        VALUE obj = rbgobj_create_object(rbgobj_lookup_rbclass(gobj));
+        VALUE obj = rbgobj_create_object(
+            rbgobj_lookup_class_by_gtype(G_OBJECT_TYPE(gobj))->klass);
         gobj = g_object_ref(gobj);
         rbgobj_initialize_gobject(obj, gobj);
         return obj;
@@ -196,7 +198,7 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 }
 
 void
-rbgobj_define_property_acccessors(klass)
+rbgobj_define_property_accessors(klass)
     VALUE klass;
 {
     GType gtype;
@@ -240,6 +242,41 @@ rbgobj_define_property_acccessors(klass)
                        INT2NUM(__LINE__ - 5));
             g_free(s);
         }
+    }
+
+    g_type_class_unref(oclass);
+}
+
+void
+rbgobj_define_signal_constants(klass)
+    VALUE klass;
+{
+    GType gtype;
+    gpointer oclass;
+    guint n_ids;
+    guint* ids;
+    int i;
+
+    gtype = rbgobj_lookup_class(klass)->gtype;
+    oclass = g_type_class_ref(gtype);
+
+    ids = g_signal_list_ids(gtype, &n_ids);
+
+    for (i = 0; i < n_ids; i++){
+        const gchar* sname = g_signal_name(ids[i]);
+        gchar* cname;
+        gchar* p;
+
+        cname = g_strconcat("SIGNAL_", sname, NULL);
+        for (p = cname + strlen("SIGNAL_"); *p; p++){
+            if (*p == '-')
+                *p = '_';
+            else
+                *p = toupper(*p);
+        }
+        
+        rb_define_const(klass, cname, rb_str_new2(sname));
+        g_free(cname);
     }
 
     g_type_class_unref(oclass);

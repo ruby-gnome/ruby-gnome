@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:38:47 $
+  $Author: sakai $
+  $Date: 2002/08/01 17:43:11 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -64,15 +64,14 @@ extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern GObject* rbgobj_gobject_new(VALUE type, VALUE params_hash);
 extern void rbgobj_define_property_accessors(VALUE klass);
-	extern VALUE rbgobj_create_object(VALUE klass);
+extern void rbgobj_define_signal_constants(VALUE klass);
+extern VALUE rbgobj_create_object(VALUE klass);
 
 /* rbgobj_type.c */
-extern void rbgobj_register_class(const RGObjClassInfo* cinfo);
 extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
 extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
-extern VALUE rbgobj_lookup_rbclass(const GObject* gobj);
 extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
-								 void* mark, void* free); 
+                                 void* mark, void* free); 
 
 extern VALUE rbgobj_cGObject;
 extern VALUE rbgobj_cParamSpec;
