@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/10/02 15:39:06 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,6 +45,7 @@
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
+#define GTK_TYPE_TREE_ROW_REFERENCE (gtk_treerowreference_get_type())
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
@@ -67,6 +68,7 @@ extern VALUE mEditable;
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
+extern GType gtk_treerowreference_get_type();
 
 /*
  * for gdk

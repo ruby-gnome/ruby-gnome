@@ -1,3 +1,13 @@
+2002-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcelleditable.c, src/rbgtkcellrenderer.c, 
+	src/rbgtkcellrendererpixbuf.c, src/rbgtkcellrenderertext.c, 
+	src/rbgtkcellrenderertoggle.c, src/rbgtktreeiter.c, 
+	src/rbgtktreemodel.c, src/rbgtktreepath.c, src/rbgtktreerowreference.c, 
+	src/rbgtktreestore.c, src/rbgtktreeview.c, src/rbgtktreeviewcolumn.c: 
+	Add files.
+	* src/rbgtk.h: Add GTK_TYPE_TREE_ROW_REFERENCE.
+
 2002-10-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextiter.c: make Gtk::TextIter be boxed type.
