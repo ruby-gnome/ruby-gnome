@@ -4,7 +4,7 @@
   rbpangoanalysis.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -46,6 +46,7 @@ ana_initialize(self)
     return Qnil;
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 ana_set_shape_engine(self, engine)
     VALUE self, engine;
@@ -73,6 +74,7 @@ ana_get_lang_engine(self)
 {
     return GOBJ2RVAL(_SELF(self)->lang_engine);
 }
+#endif
 
 static VALUE
 ana_set_font(self, font)
@@ -155,10 +157,12 @@ Init_pango_analysis()
     VALUE pana = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
     
     rb_define_method(pana, "initialize", ana_initialize, 0);
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(pana, "set_shape_engine", ana_set_shape_engine, 1);
     rb_define_method(pana, "shape_engine", ana_get_shape_engine, 0);
     rb_define_method(pana, "set_lang_engine", ana_set_lang_engine, 1);
     rb_define_method(pana, "lang_engine", ana_get_lang_engine, 0);
+#endif
     rb_define_method(pana, "set_font", ana_set_font, 1);
     rb_define_method(pana, "font", ana_get_font, 0);
     rb_define_method(pana, "set_level", ana_set_level, 1);

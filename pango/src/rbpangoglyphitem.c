@@ -4,7 +4,7 @@
   rbpangoglyphitem.c -
 
   $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -25,6 +25,18 @@ glyph_item_copy(ref)
   *new_ref = *ref;
   return new_ref;
 }
+
+#if ! HAVE_PANGO_GLYPH_ITEM_FREE
+static void
+pango_glyph_item_free(PangoGlyphItem* glyph_item)
+{
+    if (glyph_item->item)
+        pango_item_free(glyph_item->item);
+    if (glyph_item->glyphs)
+        pango_glyph_string_free(glyph_item->glyphs);
+    g_free(glyph_item);
+}
+#endif
 
 GType
 pango_glyph_item_get_type(void)

@@ -1,3 +1,11 @@
+2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbpangoglyphitem.c, rbpangomain.c, 
+	rbpangologattr.c, rbpangolayoutline.c, rbpangolayoutiter.c, 
+	rbpangolayout.c, rbpangoanalysis.c, rbpangoattribute.c: 
+	Fix compiling errors on pango-1.2.x.
+	* README: Revised.
+
 2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/rbpangoattribute.c:  Fix a compiling problem on 

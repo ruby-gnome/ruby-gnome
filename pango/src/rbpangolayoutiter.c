@@ -4,7 +4,7 @@
   rbpangolayoutiter.c -
 
   $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -19,11 +19,17 @@ static PangoLayoutIter*
 layout_iter_copy(ref)
     const PangoLayoutIter* ref;
 {
+#if PANGO_CHECK_VERSION(1,4,0)
   PangoLayoutIter* new_ref;
   g_return_val_if_fail (ref != NULL, NULL);
+  /* This may be broken on pango-1.2.x, but 
+     for backward compatibility. */
   new_ref = g_new(PangoLayoutIter, 1);
   *new_ref = *ref;
   return new_ref;
+#else
+  return (PangoLayoutIter*)ref;
+#endif
 }
 
 GType

@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -180,6 +180,7 @@ layout_line_set_runs(self, ary)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 layout_line_is_paragraph_start(self)
     VALUE self;
@@ -209,6 +210,7 @@ layout_line_set_resolved_dir(self, val)
     _SELF(self)->resolved_dir = NUM2UINT(val);
     return self;
 }
+#endif
 
 void
 Init_pango_layout_line()
@@ -228,10 +230,12 @@ Init_pango_layout_line()
     rb_define_method(pLine, "set_length", layout_line_set_length, 1); 
     rb_define_method(pLine, "runs", layout_line_get_runs, 0); 
     rb_define_method(pLine, "set_runs", layout_line_set_runs, 1); 
+
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(pLine, "paragraph_start?", layout_line_is_paragraph_start, 0); 
     rb_define_method(pLine, "set_paragraph_start", layout_line_set_paragraph_start, 1); 
     rb_define_method(pLine, "resolved_dir", layout_line_get_resolved_dir, 0); 
     rb_define_method(pLine, "set_resolved_dir", layout_line_set_resolved_dir, 1); 
-
+#endif
     G_DEF_SETTERS(pLine);
 }

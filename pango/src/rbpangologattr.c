@@ -4,7 +4,7 @@
   rbpangologattr.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -75,7 +75,10 @@ ATTR_BOOL(is_word_end);
 ATTR_BOOL(is_sentence_boundary);
 ATTR_BOOL(is_sentence_start);
 ATTR_BOOL(is_sentence_end);
+
+#if PANGO_CHECK_VERSION(1,4,0)
 ATTR_BOOL(backspace_deletes_character);
+#endif
 
 void
 Init_pango_logattr()
@@ -95,8 +98,10 @@ Init_pango_logattr()
     DEFINE_ACCESSOR(logattr, sentence_start);
     DEFINE_ACCESSOR(logattr, sentence_end);
 
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(logattr, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
     rb_define_method(logattr, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
+#endif
 
     G_DEF_SETTERS(logattr);
 }

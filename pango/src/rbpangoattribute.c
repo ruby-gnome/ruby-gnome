@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/02/17 05:10:52 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -386,6 +386,7 @@ attr_AttrScale_initialize(self, scale)
     return Qnil;
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 attr_AttrFallback_initialize(self, enable_fallback)
     VALUE self, enable_fallback;
@@ -393,6 +394,7 @@ attr_AttrFallback_initialize(self, enable_fallback)
     DATA_PTR(self) = pango_attr_fallback_new(RTEST(enable_fallback));
     return Qnil;
 }
+#endif
 
 MAKE_ATTRINT_INIT(AttrRise, rise);
 
@@ -485,7 +487,7 @@ Init_pango_attribute()
     rb_define_const(tmpklass, "LARGE", rb_float_new(PANGO_SCALE_LARGE));
     rb_define_const(tmpklass, "X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
     rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
-#if PANGO_CHECK_VERSION(1,8,0)
+#if PANGO_CHECK_VERSION(1,4,0)
     MAKE_ATTR(PANGO_ATTR_FALLBACK, AttrFallback, pattrbool, 1);
 #endif
     /* PangoAttrType */

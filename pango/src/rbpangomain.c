@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -35,6 +35,7 @@ rpango_reorder_items(self, logical_items)
     return ret ? GLIST2ARY2(ret, PANGO_TYPE_ITEM) : Qnil;
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rpango_unichar_direction(self, ch)
     VALUE self, ch;
@@ -50,6 +51,7 @@ rpango_find_base_dir(self, text)
     return GENUM2RVAL(pango_find_base_dir(RVAL2CSTR(text), RSTRING(text)->len), 
                       PANGO_TYPE_DIRECTION);
 }
+#endif
 
 static VALUE
 rpango_break(self, text, analysis)
@@ -193,8 +195,11 @@ void
 Init_pango_main()
 {
     rb_define_module_function(mPango, "reorder_items", rpango_reorder_items, 1);
+
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_module_function(mPango, "unichar_direction", rpango_unichar_direction, 1);
     rb_define_module_function(mPango, "find_base_dir", rpango_find_base_dir, 1);
+#endif
     rb_define_module_function(mPango, "break", rpango_break, 2);
     rb_define_module_function(mPango, "get_log_attrs", rpango_get_log_attrs, 3);
     rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);

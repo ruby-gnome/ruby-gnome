@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/03/05 16:23:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -206,6 +206,7 @@ layout_get_justify(self)
     return CBOOL2RVAL(pango_layout_get_justify(_SELF(self)));
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 layout_set_auto_dir(self, auto_dir)
     VALUE self, auto_dir;
@@ -219,6 +220,7 @@ layout_get_auto_dir(self)
 {
     return CBOOL2RVAL(pango_layout_get_auto_dir(_SELF(self)));
 }
+#endif
 
 static VALUE
 layout_set_alignment(self, align)
@@ -518,8 +520,10 @@ Init_pango_layout()
     rb_define_method(pLayout, "set_spacing", layout_set_spacing, 1);
     rb_define_method(pLayout, "set_justify", layout_set_justify, 1);
     rb_define_method(pLayout, "justify?", layout_get_justify, 0);
+#if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(pLayout, "set_auto_dir", layout_set_auto_dir, 1);
     rb_define_method(pLayout, "auto_dir?", layout_get_auto_dir, 0);
+#endif
     rb_define_method(pLayout, "set_alignment", layout_set_alignment, 1);
     rb_define_method(pLayout, "alignment", layout_get_alignment, 0);
     rb_define_method(pLayout, "set_tabs", layout_set_tabs, 1);
