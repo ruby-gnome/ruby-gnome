@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-31
+ * Latest Revision: 2003-08-04
  *
  *****************************************************************************/
 
@@ -184,6 +184,7 @@ file_m_chmod(argc, argv, self)
 	GnomeVFSFileInfo *info;
 	VALUE value;
 
+	rb_secure(2);
 	info = gnome_vfs_file_info_new();
 	rb_scan_args(argc, argv, "1*", &r_mode, &paths);
 	info->permissions = FIX2INT(r_mode);
@@ -203,6 +204,7 @@ file_m_chown(argc, argv, self)
 	GnomeVFSFileInfo *info;
 	VALUE value;
 
+	rb_secure(2);
 	info = gnome_vfs_file_info_new();
 	rb_scan_args(argc, argv, "2*", &r_owner, &r_group, &paths);
 	/* XXX: hm...how about -1? works for UNIX, but what else? */
@@ -279,6 +281,10 @@ file_m_truncate(self, uri, length)
 {
 	GnomeVFSResult result;
 
+	rb_secure(2);
+	/* XXX: how to do this?
+	 * SafeStringValue(uri);
+	 */
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_truncate_uri(RVAL2GVFSURI(uri),
 						NUM2ULONG(length));
@@ -349,6 +355,9 @@ handle_gets(handle, sep, len)
 		}
 	}
 
+	if (!NIL_P(str)) {
+		OBJ_TAINT(str);
+	}
 	return str;
 }
 
@@ -544,10 +553,9 @@ file_pos(argc, argv, self)
 	VALUE offset;
 
 	if (rb_scan_args(argc, argv, "01", &offset) == 1) {
-		/* XXX: these should be NUM2ULL() */
 		return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self),
 						      GNOME_VFS_SEEK_START,
-						      NUM2ULONG(offset)));
+						      OFF2NUM(offset)));
 	} else {
 		return file_tell(self);
 	}
@@ -654,7 +662,6 @@ file_puts(argc, argv, self)
 	return Qnil;
 }
 
-/* XXX: should this perhaps not raise expections? */
 static VALUE
 bytes_from_end(self)
 	VALUE self;
@@ -753,11 +760,7 @@ file_readline(argc, argv, self)
 
 	get_gets_separator(argc, argv, &sep, &len);
 	line = handle_gets(_SELF(self), sep, len);
-	if (!NIL_P(line)) {
-		return line;
-	} else {
-		return GVFSRESULT2RVAL(GNOME_VFS_ERROR_EOF);
-	}
+	return NIL_P(line) ? GVSRESULT2RVAL(GNOME_VFS_ERROR_EOF) : line;
 }
 
 static VALUE
@@ -784,7 +787,6 @@ static VALUE
 file_rewind(self)
 	VALUE self;
 {
-	/* XXX: is 0ULL portable enough? */
 	return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self),
 					      GNOME_VFS_SEEK_START, 0ULL));
 }
@@ -804,9 +806,8 @@ file_seek(argc, argv, self)
 		whence = GNOME_VFS_SEEK_START;
 	}
 
-	/* XXX: these should be NUM2ULL() */
 	return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self), whence,
-					      NUM2ULONG(offset)));
+					      OFF2NUM(offset)));
 }
 
 static VALUE
@@ -836,8 +837,9 @@ static VALUE
 file_truncate(self, length)
 	VALUE self, length;
 {
+	rb_secure(2);
 	return GVFSRESULT2RVAL(gnome_vfs_truncate_handle(_SELF(self),
-							 NUM2ULONG(length)));
+							 NUM2ULL(length)));
 }
 
 void

@@ -56,6 +56,8 @@ extern "C" {
 # define ULL2NUM ULONG2NUM
 #endif
 
+#define NUM2ULL(x)		(rb_num2ull((VALUE)x))
+
 /* GnomeVFS::Error handling functions */
 #define GVFSRESULT2RVAL(res)	(gnomevfs_result_to_rval(res))
 #define RAISE_IF_ERROR(res)	((void)gnomevfs_result_to_rval(res))

@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-31
+ * Latest Revision: 2003-08-04
  *
  *****************************************************************************/
 
@@ -337,18 +337,20 @@ uri_same_fs(self, other)
 {
 	GnomeVFSResult result;
 	gboolean same_fs;
+	gchar *text_uri;
 
-	//if (RTEST(rb_obj_is_kind_of(other, g_gvfs_uri))) {
+	if (RTEST(rb_obj_is_kind_of(other, g_gvfs_uri))) {
 		result = gnome_vfs_check_same_fs_uris(_SELF(self),
 						      RVAL2GVFSURI(other),
 						      &same_fs);
-	/* }  XXX: this needs URI to string conversion
-	     else {
-		result = gnome_vfs_check_same_fs(_SELF(self),
-						 RVAL2GVFSURI(other),
+	} else {
+		text_uri = gnome_vfs_uri_to_string(_SELF(self),
+						   GNOME_VFS_URI_HIDE_NONE);
+		result = gnome_vfs_check_same_fs(text_uri,
+						 RVAL2CSTR(other),
 						 &same_fs);
+		g_free(text_uri);
 	}
-	*/
 
 	if (result == GNOME_VFS_OK) {
 		return CBOOL2RVAL(same_fs);

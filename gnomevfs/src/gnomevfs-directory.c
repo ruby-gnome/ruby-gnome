@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-27
+ * Latest Revision: 2003-08-04
  *
  *****************************************************************************/
 
@@ -100,6 +100,8 @@ directory_make_directory(argc, argv, self)
 		perm = 0777;
 	}
 
+	SafeStringValue(path);
+	rb_secure(2);
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_make_directory_for_uri(RVAL2GVFSURI(uri),
 							  perm);
@@ -111,16 +113,20 @@ directory_make_directory(argc, argv, self)
 }
 
 static VALUE
-directory_remove_directory(self, arg)
-	VALUE self, arg;
+directory_remove_directory(self, uri)
+	VALUE self, uri;
 {
 	GnomeVFSResult result;
 
-	if (RTEST(rb_obj_is_kind_of(arg, g_gvfs_uri))) {
+	/* XXX: how to use this?
+	SafeStringValue(uri);
+	*/
+	rb_secure(2);
+	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_remove_directory_from_uri(
-							RVAL2GVFSURI(arg));
+							RVAL2GVFSURI(uri));
 	} else {
-		result = gnome_vfs_remove_directory(RVAL2CSTR(arg));
+		result = gnome_vfs_remove_directory(RVAL2CSTR(uri));
 	}
 
 	return GVFSRESULT2RVAL(result);
@@ -280,6 +286,9 @@ directory_initialize(argc, argv, self)
 	GnomeVFSDirectoryHandle *handle;
 	GnomeVFSResult result;
 
+	/* XXX: how to do this?
+	 * SafeStringValue(uri);
+	 */
 	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
 		options = FIX2INT(r_options);
 	} else {
