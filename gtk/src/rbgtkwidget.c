@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/02/04 16:23:44 $
+  $Date: 2003/05/08 16:45:59 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -112,7 +112,7 @@ widget_queue_resize(self)
     return self;
 }
 
-/* This method name will be conflict to 
+/* Note this method is not
    gtk_widget_get_size_request */
 static VALUE
 widget_size_request(self)
@@ -120,24 +120,24 @@ widget_size_request(self)
 {
     GtkRequisition req;
     gtk_widget_size_request(_SELF(self), &req);
-    return BOXED2RVAL(&req, GTK_TYPE_REQUISITION);
+    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
 }
 
 static VALUE
 widget_get_child_requisition(self)
     VALUE self;
 {
-    GtkRequisition r;
+    GtkRequisition req;
 
-    gtk_widget_get_child_requisition(_SELF(self), &r);
-    return BOXED2RVAL(&r, GTK_TYPE_REQUISITION);
+    gtk_widget_get_child_requisition(_SELF(self), &req);
+    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
 }
 
 static VALUE
 widget_size_allocate(self, alloc)
     VALUE self, alloc;
 {
-    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GDK_TYPE_RECTANGLE));
+    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
     return self;
 }
 
@@ -191,7 +191,7 @@ static VALUE
 widget_activate(self)
     VALUE self;
 {
-    return (gtk_widget_activate(_SELF(self)) ? Qtrue : Qfalse);
+    return gtk_widget_activate(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -203,12 +203,14 @@ widget_reparent(self, parent)
 }
 
 static VALUE
-widget_intersect(self, area, intersect)
-    VALUE self, area, intersect;
+widget_intersect(self, area)
+    VALUE self, area;
 {
-    return INT2NUM(gtk_widget_intersect(_SELF(self),
+    GdkRectangle intersection;
+    gboolean ret = gtk_widget_intersect(_SELF(self),
                                         (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
-                                        (GdkRectangle*)RVAL2BOXED(intersect, GDK_TYPE_RECTANGLE)));
+                                        &intersection);
+    return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
 }
 
 static VALUE
@@ -339,8 +341,7 @@ static VALUE
 widget_hide_on_delete(self)
 	VALUE self;
 {
-    gtk_widget_hide_on_delete(_SELF(self));
-    return self;
+    return gtk_widget_hide_on_delete(_SELF(self)) ? Qtrue: Qfalse;
 }
 
 static VALUE
@@ -775,13 +776,17 @@ widget_get_settings(self)
     return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
 }
 
-/* This method's name will conflict to gtk_widget_size_requst.
-   But gtk_widget_size_request returns Gtk::Requisiton and
-   it include width and height.
-void gtk_widget_get_size_request     (GtkWidget *widget,
-                                      gint *width,
-                                      gint *height);
+/*
+  Note this method is not gtk_widget_size_request()
 */
+static VALUE
+widget_get_size_request(self)
+    VALUE self;
+{
+    gint width, height;
+    gtk_widget_get_size_request(_SELF(self), &width, &height);
+    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
+}
 
 static VALUE
 widget_set_child_visible(self, is_visible)
@@ -837,7 +842,7 @@ static VALUE
 widget_get_allocation(self)
     VALUE self;
 {
-    return BOXED2RVAL(&(_SELF(self)->allocation), GDK_TYPE_RECTANGLE);
+    return BOXED2RVAL(&(_SELF(self)->allocation), GTK_TYPE_ALLOCATION);
 }
 
 static VALUE
@@ -856,7 +861,8 @@ static VALUE
 widget_get_requisition(self)
     VALUE self;
 {
-    return BOXED2RVAL(&(_SELF(self)->requisition), GTK_TYPE_REQUISITION);
+    GtkRequisition req = _SELF(self)->requisition;
+    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
 }
 
 static VALUE
@@ -948,12 +954,12 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
     rb_define_method(gWidget, "list_accel_closures", widget_list_accel_closures, 0);
     rb_define_method(gWidget, "event", widget_event, 1);
-    rb_define_method(gWidget, "activate?", widget_activate, 0);
+    rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
 /*
     rb_define_method(gWidget, "style_properties", widget_style_properties, 0);
 */
-    rb_define_method(gWidget, "intersect", widget_intersect, 2);
+    rb_define_method(gWidget, "intersect", widget_intersect, 1);
     rb_define_method(gWidget, "focus?", widget_is_focus, 0);
     rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
     rb_define_method(gWidget, "grab_default", widget_grab_default, 0);
@@ -962,7 +968,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "parent_window", widget_get_parent_window, 0);
     rb_define_method(gWidget, "add_events", widget_add_events, 1);
     rb_define_method(gWidget, "toplevel", widget_get_toplevel, 0);
-    rb_define_method(gWidget, "ancestor", widget_get_ancestor, 1);
+    rb_define_method(gWidget, "get_ancestor", widget_get_ancestor, 1);
     rb_define_method(gWidget, "colormap", widget_get_colormap, 0);
     rb_define_method(gWidget, "set_colormap", widget_set_colormap, 1);
     rb_define_method(gWidget, "visual", widget_get_visual, 0);
@@ -1006,6 +1012,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
     rb_define_method(gWidget, "settings", widget_get_settings, 0);
     rb_define_method(gWidget, "set_child_visible", widget_set_child_visible, 1);
+    rb_define_method(gWidget, "get_size_request", widget_get_size_request, 0);
     rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
     rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
     rb_define_method(gWidget, "window", widget_window, 0);

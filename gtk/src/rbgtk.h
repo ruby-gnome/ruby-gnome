@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/04/30 19:44:40 $
+  $Date: 2003/05/08 16:45:59 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -36,6 +36,7 @@
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_SPAN (gdk_span_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
+#define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 
@@ -71,6 +72,7 @@ RUBY_GTK2_VAR GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj);
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
+extern GType gtk_allocation_get_type();
 extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
 

@@ -4,7 +4,7 @@
   rbgtkimcontext.c -
 
   $Author: mutoh $
-  $Date: 2003/05/05 16:58:55 $
+  $Date: 2003/05/08 16:45:59 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -37,7 +37,7 @@ static VALUE
 imcontext_filter_keypress(self, event)
     VALUE self, event;
 {
-    return gtk_im_context_filter_keypress(_SELF(self), RVAL2GEV(event)) ? Qtrue : Qfalse;
+    return gtk_im_context_filter_keypress(_SELF(self), (GdkEventKey*)RVAL2GEV(event)) ? Qtrue : Qfalse;
 }
 
 static VALUE

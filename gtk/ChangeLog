@@ -1,3 +1,18 @@
+2003-05-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkinput.c: Add constants of GdkExtensionMode. 
+	Add Gdk::Input.set_extension_events. 
+	* src/rbgtkwidget.c: Remove Gtk::Requisiton. Use [width, height] instead.
+	ditto for Gtk::Widget#size_request, #child_requisition.
+	Add Gtk::Widget#get_size_request.
+	Rename Gtk::Widget#activate? to #activate, #ancestor to #get_ancestor.
+	Bugfix for bad parameter numbers of Gtk::Widget#intersect.
+	Return true not self for Gtk::Widget#hide_on_delete.
+	* src/rbgtkrequisition: Removed.
+	* src/rbgtkallocation.c, src/rbgtk.h, src/rbgtkwidget.c: 
+	Improve Gtk::Allocation.
+	* src/rbgtkimcontext.c: Fix a warning. 
+
 2003-05-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkimcontext.c: Add Gtk::IMContext. 
