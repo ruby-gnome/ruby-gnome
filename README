@@ -25,7 +25,7 @@ Release packages
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
     - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
     - Ruby/Libart2       - libart_lgpl 2.3.12 or later
-    - Ruby/Libgda        - libgda 1.1.99 or later
+    - Ruby/Libgda        - libgda 1.0.3 or later
     - Ruby/Libglade2     - Libglade 2.0.x or later
     - Ruby/PanelApplet   - gnome-panel 2.6.0 or later
     - Ruby/RSVG          - librsvg 2.8.0 or later

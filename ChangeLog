@@ -1,7 +1,3 @@
-2005-03-02  Laurent Sansonetti  <lrz@gnome.org>
-
-	* README: Ruby/Libgda now requires libgda 1.1.99 or newer.
-
 2005-02-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: added dummy $makefile_created = true for mkmf.rb in
