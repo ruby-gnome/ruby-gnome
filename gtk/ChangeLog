@@ -1,3 +1,11 @@
+2003-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkproperty.c: Add Gdk::Property (move from Gdk::Window).
+	Add Gdk::Property.text_proerty_to_text_list, 
+	.text_property_to_utf8_list, .string_to_compound_text,
+	.utf8_to_string_target, .utf8_to_compound_text.
+	* src/rbgdkwindow.c: Move gdk_property_* to rbgdkproperty.c. 
+
 2003-10-14  KATO Kazuyoshi  <kzys@users.sf.net>
 
 	* sample/gtk-demo/changedisplay.rb: Added.

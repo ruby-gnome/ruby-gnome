@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: kzys $
-  $Date: 2003/10/14 13:27:56 $
+  $Author: mutoh $
+  $Date: 2003/10/15 17:52:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -832,104 +832,6 @@ gdkwin_s_set_pointer_hooks(get_pointer_hook, window_at_pointer_hook)
 }
 */
 
-/* Properties */
-static VALUE
-gdkwin_prop_change(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    int        fmt, len;
-    void*      dat;
-    GdkAtom    ntype;
-    VALUE property, type, size=Qnil, mode, src;
-    
-    if(5 == argc)
-        rb_scan_args(argc, argv, "50", &property, &type, &size, &mode, &src);
-    else
-        rb_scan_args(argc, argv, "40", &property, &type, &mode, &src);
-    
-    rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
-    
-    gdk_property_change(_SELF(self), RVAL2ATOM(property), 
-                        ntype, fmt, RVAL2GENUM(mode, GDK_TYPE_PROP_MODE), dat, len);
-
-    rbgtk_atom2selectiondata_free(ntype, dat);
-
-    return self;
-}
-
-static VALUE
-gdkwin_prop_get(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    /* for argument processing */
-    GdkAtom     rtype;
-    gint        rfmt, rlen;
-    void*	rdat;
-    VALUE property, type, offset=INT2FIX(0), length=INT2FIX(9999), delete;
-    
-    /* for inner processing */
-    int		i;
-    VALUE	ret = 0;
-    
-    if(5 == argc)
-        rb_scan_args(argc, argv, "50", &property, &type, &offset, &length, &delete);
-    else
-        rb_scan_args(argc, argv, "30", &property, &type, &delete);
-    
-    
-    if(gdk_property_get(_SELF(self), RVAL2ATOM(property), RVAL2ATOM(type),
-                        NUM2INT(offset), NUM2INT(length),
-                        RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
-        return Qnil;
-    }
-    
-    switch(rfmt){
-      case 8:
-      default:
-        ret = rb_str_new(rdat, rlen);
-        break;
-        
-      case 16:
-        ret = rb_ary_new();
-        
-        for( i = 0; i < rlen; i++){
-            rb_ary_push(ret, rb_Integer(((unsigned short*)rdat)[i]));
-        }
-        break;
-        
-      case 32:
-/*
-  ret = rb_ary_new();
-
-  if(rtype != GDK_SELECTION_TYPE_ATOM){
-  for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, INT2FIX(((unsigned long *)rdat)[i]));
-  }
-  } else {
-  for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, RVAL2BOXED((GdkAtom)(unsigned long *)rdat[i], GDK_TYPE_ATOM));
-  }
-  }
-*/
-        rb_warning("not implemented yet.");
-        break;
-    }
-    
-    return rb_ary_new3(3, BOXED2RVAL(&rtype, GDK_TYPE_ATOM), 
-                       ret, INT2NUM(rlen));
-}
-
-static VALUE
-gdkwin_prop_delete(self, property)
-    VALUE self, property;
-{
-    gdk_property_delete(_SELF(self), RVAL2ATOM(property));
-    return self;
-}
 
 void
 Init_gtk_gdk_window()
@@ -1016,9 +918,6 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "decorations", gdkwin_get_decorations, 0);
     rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
     rb_define_method(gdkWindow, "toplevels", gdkwin_get_toplevels, 0);
-    rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, -1);
-    rb_define_method(gdkWindow, "property_get", gdkwin_prop_get, -1);
-    rb_define_method(gdkWindow, "property_delete", gdkwin_prop_delete, 1);
 
     G_DEF_SETTERS(gdkWindow);
 
@@ -1065,10 +964,6 @@ Init_gtk_gdk_window()
     /* GdkWMFunction */
     G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", gdkWindow);
     G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_FUNCTION, "GDK_");
-
-    /* GdkPropMode from GdkProperties */
-    G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", gdkWindow);
-    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_PROP_MODE, "GDK_");
 
     rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
 }
