@@ -1,3 +1,12 @@
+2002-11-18  Nikolai :: lone-star :: Weibull <lone-star@home.se>
+
+	* src/*.[ch]: Updated headers to use LGPL license, not GPL.
+
+2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
+
+	* src/*.[ch]: Updated headers to be more CVS-like using $Author: pcppopper $
+	and $Date: 2002/11/18 17:44:42 $ macros.
+
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/rbgconf.c: Removed a redundant comment.
