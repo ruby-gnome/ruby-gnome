@@ -1,3 +1,7 @@
+2004-08-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgstparse.c: Improved error handling. 
+
 2004-08-05  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Fixed bad comments (for the constants).

@@ -43,10 +43,10 @@ rb_gst_parse_launch (VALUE self, VALUE command)
 	GstBin *bin;
 
 	error = NULL;
-	bin = gst_parse_launch (RVAL2CSTR (command), &error);
+	bin = (GstBin*)gst_parse_launch (RVAL2CSTR (command), &error);
 	if (bin != NULL)
 		return RGST_BIN_NEW (bin);
-	rb_raise (rb_eRuntimeError, error->message);	
+        RAISE_GERROR(error);
 #else
 	rb_raise (rb_eRuntimeError, 
 		  "This function has been disabled "
@@ -60,4 +60,7 @@ Init_gst_parse (void)
 {
 	VALUE c = rb_define_module_under (mGst, "Parse"); 
 	rb_define_module_function (c, "launch", rb_gst_parse_launch, 1);
+
+        G_DEF_ERROR(GST_PARSE_ERROR, "ParseError", mGst, rb_eRuntimeError,
+                    GST_TYPE_PARSE_ERROR);
 }
