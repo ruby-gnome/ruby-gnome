@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2003/11/21 16:06:03 $
+  $Date: 2003/11/23 08:38:36 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -13,10 +13,6 @@
 ************************************************/
 
 #include "global.h"
-
-#define RBGTK_MAJOR_VERSION 0
-#define RBGTK_MINOR_VERSION 8
-#define RBGTK_MICRO_VERSION 1
 
 /*
  * constants

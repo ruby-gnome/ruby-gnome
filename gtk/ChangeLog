@@ -1,3 +1,7 @@
+2003-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.h: Move version info from rbgtkconst.c.
+
 2003-11-21  Matthew Berg <galt@gothpoodle.com>
 
 	* src/rbgtktreemodelsort.c: Add Gtk::TreeModelSort#iter_is_valid?.

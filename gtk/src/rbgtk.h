@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/11/02 18:29:29 $
+  $Date: 2003/11/23 08:38:36 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -21,6 +21,10 @@
 #include <gtk/gtk.h>
 
 #include <signal.h>
+
+#define RBGTK_MAJOR_VERSION 0
+#define RBGTK_MINOR_VERSION 8
+#define RBGTK_MICRO_VERSION 1
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
