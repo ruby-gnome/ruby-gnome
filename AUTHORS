@@ -4,7 +4,10 @@ Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
 
 Joshua Keith <joshuakeith@linuxmail.org>
-     Webmaster(M), Tutorial(M)
+     Tutorial(M), Website, Ruby-GNOME2 Icon.
+
+KATO Kazuyoshi <kadu@zb.wakwak.com>
+     Ruby/GTK(Especially gtk-demo).
 
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
@@ -15,7 +18,7 @@ Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 Masao Mutoh <mutoh@highway.ne.jp>
      Chief maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), 
-     Ruby/Pango(M), rbbr(M), Others. Project management.
+     Ruby/Pango(M), rbbr(M), Webmaster, Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M).
@@ -25,6 +28,9 @@ Nobuyoshi Nakada <nobu.nokada@softhome.net>
 
 OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
      Ruby/GTK
+
+TAMURA.Kenichi <sgs02516@nifty.com>
+     Japanese ML archives by w3ml on SF.jp(M)
 
 All members of Ruby-GNOME2 Mailing lists.
 And many others who have contributed patches, reported bugs. Thanks!
