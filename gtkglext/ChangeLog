@@ -1,3 +1,7 @@
+2004-06-30 Vincent Isambart <isambart@netcourrier.com>
+
+	* sample/*.rb: corrected some minor bugs when quitting on Mac OS X
+
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkgldrawable.c: Update Copyright.

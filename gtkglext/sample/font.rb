@@ -57,11 +57,7 @@ def realize(w)
             exit 1
         end
 
-        begin
-            font_metrics = font.metrics
-        rescue TypeError, ArgumentError # the error depend on if I give no or a nil arg to font.metrics
-            raise "Sorry, but this example does not work with Ruby-GNOME2 0.6.0 because of a bug in Ruby/Pango."
-        end
+        font_metrics = font.metrics
         $font_height = font_metrics.ascent + font_metrics.descent
         $font_height = Pango.pixels($font_height)
 
@@ -114,7 +110,10 @@ window.title = "font"
 window.resize_mode = Gtk::RESIZE_IMMEDIATE
 # Get automatically redrawn if any of their children changed allocation.
 window.reallocate_redraws = true
-window.signal_connect("delete_event") { Gtk.main_quit }
+window.signal_connect("delete_event") do
+    Gtk.main_quit
+    true
+end
 
 # VBox
 vbox = Gtk::VBox.new
@@ -180,7 +179,6 @@ drawing_area.show
 # Simple quit button
 button = Gtk::Button.new("Quit")
 button.signal_connect("clicked") do
-    window.destroy
     Gtk.main_quit
 end
 vbox.pack_start(button, false, false)
