@@ -80,7 +80,7 @@ static VALUE rb_gda_datasource_new(self, name, provider, cnc_string,
     new->cnc_string = RVAL2CSTR(cnc_string);
     new->description = RVAL2CSTR(description);
     new->username = RVAL2CSTR(username);
-    new->password = RVAL2CSTR(password);
+    new->password = NIL_P(password) ? NULL : RVAL2CSTR(password);
     G_INITIALIZE(self, new);
     return Qnil;
 }

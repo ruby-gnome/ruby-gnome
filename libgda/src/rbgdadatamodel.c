@@ -238,11 +238,16 @@ static VALUE rb_gda_datamodel_to_tab_separated(self)
     return CSTR2RVAL(gda_data_model_to_tab_separated(RGDA_DATAMODEL(self)));
 }
 
-static VALUE rb_gda_datamodel_to_xml(self, standalone)
-    VALUE self, standalone;
+static VALUE rb_gda_datamodel_to_xml(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
+    VALUE standalone;
+
+    rb_scan_args(argc, argv, "01", &standalone);
+    
     return CSTR2RVAL(gda_data_model_to_xml(RGDA_DATAMODEL(self), 
-                                           RVAL2CBOOL(standalone)));
+                                           NIL_P(standalone) ? FALSE : RVAL2CBOOL(standalone)));
 }
 
 static VALUE rb_gda_datamodel_get_command_text(self)
@@ -310,7 +315,7 @@ void Init_gda_datamodel(void) {
 
     rb_define_method(c, "to_comma_separated", rb_gda_datamodel_to_comma_separated, 0);
     rb_define_method(c, "to_tab_separated",   rb_gda_datamodel_to_tab_separated,   0);
-    rb_define_method(c, "to_xml",             rb_gda_datamodel_to_xml,             1);
+    rb_define_method(c, "to_xml",             rb_gda_datamodel_to_xml,            -1);
 
 /*  TODO:
 xmlNodePtr  gda_data_model_to_xml_node      (GdaDataModel *model,

@@ -1,3 +1,10 @@
+2003-10-25  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdadatasource.c: Gda::DataSource.new now allows nil
+	  as password.
+	* src/rbgdadatamodel.c: Gda::DataModel#to_xml can now be used
+	  without the standalone parameter (which is false by default).
+
 2003-10-06  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdaexport.c: New file.
