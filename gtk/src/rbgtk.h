@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2002/11/11 15:32:34 $
+  $Author: ogs $
+  $Date: 2002/11/28 17:33:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -49,6 +49,7 @@
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
+#define GTK_TYPE_CLIPBOARD (gtk_clipboard_get_type())
 
 
 extern VALUE glist2ary(GList* list);
@@ -68,6 +69,7 @@ extern VALUE mGdk;
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_treerowreference_get_type();
+extern GType gtk_clipboard_get_type();
 
 /*
  * Gtk::TreeIter callback

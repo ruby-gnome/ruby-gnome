@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: ogs $
-  $Date: 2002/11/22 16:34:59 $
+  $Date: 2002/11/28 17:33:04 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -17,6 +17,8 @@
 #define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
 #define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
+#define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
+#define RVAL2CLIPBOARD(c) ((GtkClipboard*)RVAL2BOXED(c, GTK_TYPE_CLIPBOARD))
 
 static VALUE
 txt_initialize(argc, argv, self)
@@ -159,22 +161,30 @@ txt_get_slice(self, start, end, include_hidden_chars)
                                                RTEST(include_hidden_chars)));
 }
 
-#if 0
-/* Insert a pixbuf */
-void gtk_text_buffer_insert_pixbuf         (GtkTextBuffer *buffer,
-                                            GtkTextIter   *iter,
-                                            GdkPixbuf     *pixbuf);
+static VALUE
+txt_insert_pixbuf(self, iter, pixbuf)
+    VALUE self, iter, pixbuf;
+{
+    gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
+                                  GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+    return self;
+}
 
-/* Insert a child anchor */
-void               gtk_text_buffer_insert_child_anchor (GtkTextBuffer      *buffer,
-                                                        GtkTextIter        *iter,
-                                                        GtkTextChildAnchor *anchor);
+static VALUE
+txt_insert_child_anchor(self, iter, anchor)
+    VALUE self, iter, anchor;
+{
+    gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
+                                        GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self)));
+    return self;
+}
 
-/* Convenience, create and insert a child anchor */
-GtkTextChildAnchor *gtk_text_buffer_create_child_anchor (GtkTextBuffer *buffer,
-                                                         GtkTextIter   *iter);
-
-#endif
+static VALUE
+txt_create_child_anchor(self, iter)
+    VALUE self, iter;
+{
+    return GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2ITR(iter)));
+}
 
 static VALUE
 txt_create_mark(self, name, where, left_gravity)
@@ -228,14 +238,14 @@ txt_place_cursor(self, where)
     return self;
 }
 
-#if 0
-/* Obtain iterators pointed at various places, then you can move the
- * iterator around using the GtkTextIter operators
- */
-void gtk_text_buffer_get_iter_at_child_anchor (GtkTextBuffer      *buffer,
-                                               GtkTextIter        *iter,
-                                               GtkTextChildAnchor *anchor);
-#endif
+static VALUE
+txt_get_iter_at_child_anchor(self, anchor)
+    VALUE self, anchor;
+{
+    GtkTextIter iter;
+    gtk_text_buffer_get_iter_at_child_anchor(_SELF(self), &iter, RVAL2ANCHOR(anchor));
+    return ITR2RVAL(&iter);
+}
 
 static VALUE
 txt_get_modified(self)
@@ -252,22 +262,47 @@ txt_set_modified(self, setting)
     return setting;
 }
 
-#if 0
-void gtk_text_buffer_add_selection_clipboard    (GtkTextBuffer     *buffer,
-						 GtkClipboard      *clipboard);
-void gtk_text_buffer_remove_selection_clipboard (GtkTextBuffer     *buffer,
-						 GtkClipboard      *clipboard);
+static VALUE
+txt_add_selection_clipboard(self, clipboard)
+    VALUE self, clipboard;
+{
+    gtk_text_buffer_add_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    return self;
+}
 
-void            gtk_text_buffer_cut_clipboard           (GtkTextBuffer *buffer,
-							 GtkClipboard  *clipboard,
-                                                         gboolean       default_editable);
-void            gtk_text_buffer_copy_clipboard          (GtkTextBuffer *buffer,
-							 GtkClipboard  *clipboard);
-void            gtk_text_buffer_paste_clipboard         (GtkTextBuffer *buffer,
-							 GtkClipboard  *clipboard,
-							 GtkTextIter   *override_location,
-                                                         gboolean       default_editable);
-#endif
+static VALUE
+txt_remove_selection_clipboard(self, clipboard)
+    VALUE self, clipboard;
+{
+    gtk_text_buffer_remove_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    return self;
+}
+
+static VALUE
+txt_cut_clipboard(self, clipboard, default_editable)
+    VALUE self, clipboard, default_editable;
+{
+    gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RTEST(default_editable));
+    return self;
+}
+
+static VALUE
+txt_copy_clipboard(self, clipboard)
+    VALUE self, clipboard;
+{
+    gtk_text_buffer_copy_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    return self;
+}
+
+static VALUE
+txt_paste_clipboard(self, clipboard, location, default_editable)
+    VALUE self, clipboard, location, default_editable;
+{
+    gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard),
+                                    NIL_P(location) ? NULL : RVAL2ITR(location),
+                                    RTEST(default_editable));
+    return self;
+}
 
 static VALUE
 txt_get_selection_bounds(self)
@@ -512,6 +547,10 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "get_text", txt_get_text, 3);
     rb_define_method(gTextBuffer, "get_slice", txt_get_slice, 3);
 
+    rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 1);
+    rb_define_method(gTextBuffer, "insert_child_anchor", txt_insert_child_anchor, 2);
+    rb_define_method(gTextBuffer, "create_child_anchor", txt_create_child_anchor, 1);
+    
     rb_define_method(gTextBuffer, "create_mark", txt_create_mark, 3);
     rb_define_method(gTextBuffer, "delete_mark", txt_delete_mark, 1);
 
@@ -526,6 +565,12 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
     rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
 
+    rb_define_method(gTextBuffer, "add_selection_clipboard", txt_add_selection_clipboard, 1);
+    rb_define_method(gTextBuffer, "remove_selection_clipboard", txt_remove_selection_clipboard, 1);
+    rb_define_method(gTextBuffer, "cut_clipboard", txt_cut_clipboard, 2);
+    rb_define_method(gTextBuffer, "copy_clipboard", txt_copy_clipboard, 1);
+    rb_define_method(gTextBuffer, "paste_clipboard", txt_paste_clipboard, 3);
+    
     rb_define_method(gTextBuffer, "selection_bounds", txt_get_selection_bounds, 0);
     rb_define_method(gTextBuffer, "delete_selection", txt_delete_selection, -1);
 
@@ -541,6 +586,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "bounds", txt_get_bounds, 0);
     rb_define_method(gTextBuffer, "get_iter_at_mark", txt_get_iter_at_mark, 1);
     rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
+    rb_define_method(gTextBuffer, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 2);
     
     rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);

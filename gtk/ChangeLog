@@ -1,3 +1,13 @@
+2002-11-29  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtktextbuffer.c: Add Gtk::TextBuffer#insert_pixbuf,
+	#insert_child_anchor, #create_child_anchor, #add_selection_clipboard,
+	#remove_selection_clipboard, #cut_clipboard, #copy_clipboard,
+	#paste_clipboard, #get_iter_at_child_anchor.
+	* src/rbgtk.h: Add GTK_TYPE_CLIPBOARD.
+	* src/rbgtktextattributes.c: Add file.
+	* src/rbgtkclipboard.c: Add file.
+
 2002-11-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeysyms/*: Abolished. Create rbgdkkeysyms.h instead.
