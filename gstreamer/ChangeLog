@@ -1,3 +1,9 @@
+2003-08-10  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgstautoplug.c, src/rbgstelement.c, src/rbgsteventseek.c,
+	  src/rbgsteventsegmentseek.c, src/rbgstformat.c, src/rbgstpad.c,
+	  src/rbgstparse.c, src/rbgstquerytype.c: Fixed typos in C comments.
+
 2003-08-09  Hiroshi Igarashi  <iga@ruby-lang.org>
 
 	* src/rbgst.c: Fixed a compilation bug with old 2.x GCC.
