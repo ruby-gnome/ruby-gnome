@@ -9,6 +9,8 @@
 	* src/rbgdaprovider.c (::model): Enabled again.
 	* src/rbgdaquarklist.c (#clear): Enabled again.
 	* tests/tc_all.rb: Re-test previously disabled methods.
+	* src/rbgdaconnection.c (#reset!, #clear_errors, #create_table,
+	  #drop_table): Added.
 
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
