@@ -4,7 +4,7 @@
   rbgtklabel.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,63 +26,44 @@ label_initialize(argc, argv, self)
 }
 
 static VALUE
-label_get(self)
-    VALUE self;
-{
-    gchar* str;
-    gtk_label_get(GTK_LABEL(RVAL2GOBJ(self)), &str);
-    return rb_str_new2(str);
-}
-
-static VALUE
 label_set_text(self, str)
     VALUE self, str;
 {
     gtk_label_set_text(GTK_LABEL(RVAL2GOBJ(self)), RVAL2CSTR(str));
-    return Qnil;
+    return self;
 }
 
+/*
+void        gtk_label_set_markup            (GtkLabel *label,
+                                             const gchar *str);
+void        gtk_label_set_markup_with_mnemonic
+                                            (GtkLabel *label,
+                                             const gchar *str);
+void        gtk_label_get_layout_offsets    (GtkLabel *label,
+                                             gint *x,
+                                             gint *y);
+*/
+
 static VALUE
-label_get_jtype(self)
+label_get_text(self)
     VALUE self;
 {
-    return INT2FIX(GTK_LABEL(RVAL2GOBJ(self))->jtype);
+    return CSTR2RVAL(gtk_label_get_text(GTK_LABEL(RVAL2GOBJ(self))));
 }
 
-static VALUE
-label_set_jtype(self, jtype)
-    VALUE self, jtype;
-{
-    GtkJustification j;
-    j = (GtkJustification) NUM2INT(jtype);
-    gtk_label_set_justify(GTK_LABEL(RVAL2GOBJ(self)), j);
-    return self;
-}
-
-static VALUE
-label_set_line_wrap(self, wrap)
-    VALUE self, wrap;
-{
-    gtk_label_set_line_wrap(GTK_LABEL(RVAL2GOBJ(self)), (gboolean)RTEST(wrap));
-    return self;
-}
-
-static VALUE
-label_set_pattern(self, pattern)
-    VALUE self, pattern;
-{
-    gtk_label_set_pattern(GTK_LABEL(RVAL2GOBJ(self)), RVAL2CSTR(pattern));
-    return self;
-}
-
-static VALUE
-label_parse_uline(self, string)
-    VALUE self, string;
-{
-    guint i = gtk_label_parse_uline(GTK_LABEL(RVAL2GOBJ(self)),
-				    RVAL2CSTR(string));
-    return INT2FIX(i);
-}
+/*
+GtkWidget*  gtk_label_new_with_mnemonic     (const char *str);
+void        gtk_label_select_region         (GtkLabel *label,
+                                             gint start_offset,
+                                             gint end_offset);
+void        gtk_label_set_text_with_mnemonic
+                                            (GtkLabel *label,
+                                             const gchar *str);
+PangoLayout* gtk_label_get_layout           (GtkLabel *label);
+gboolean    gtk_label_get_selection_bounds  (GtkLabel *label,
+                                             gint *start,
+                                             gint *end);
+*/
 
 void 
 Init_gtk_label()
@@ -90,18 +71,8 @@ Init_gtk_label()
     VALUE gLabel = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 
     rb_define_method(gLabel, "initialize", label_initialize, -1);
-    rb_define_method(gLabel, "get", label_get, 0);
-    rb_define_alias(gLabel, "get_text", "get");
-    rb_define_alias(gLabel, "text", "get");
-    rb_define_method(gLabel, "set", label_set_text, 1);
-    rb_define_alias(gLabel, "set_text", "set");
-    rb_define_alias(gLabel, "text=", "set");
-    rb_define_method(gLabel, "jtype", label_get_jtype, 0);
-    rb_define_method(gLabel, "jtype=", label_set_jtype, 1);
-    rb_define_method(gLabel, "set_line_wrap", label_set_line_wrap, 1);
-    rb_define_method(gLabel, "set_pattern", label_set_pattern, 1);
-    rb_define_method(gLabel, "parse_uline", label_parse_uline, 1);
+    rb_define_method(gLabel, "text", label_get_text, 0);
+    rb_define_method(gLabel, "set_text", label_set_text, 1);
 
-    rb_define_alias(gLabel, "get_justify", "jtype");
-    rb_define_alias(gLabel, "set_justify", "jtype=");
+    G_DEF_SETTERS(gLabel);
 }

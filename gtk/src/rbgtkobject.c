@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,13 @@
 ************************************************/
 
 #include "global.h"
+
+/*
+GtkObject*  gtk_object_new                  (GtkType type,
+                                             const gchar *first_property_name,
+                                             ...);
+void        gtk_object_sink                 (GtkObject *object);
+*/
 
 static VALUE
 gobj_destroy(self)
@@ -57,32 +64,16 @@ Init_gtk_object()
 {
     VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
-    /* GtkArgFlags */
-    rb_define_const(gObject, "ARG_READABLE", INT2NUM(GTK_ARG_READABLE));
-    rb_define_const(gObject, "ARG_WRITABLE", INT2NUM(GTK_ARG_WRITABLE));
-    rb_define_const(gObject, "ARG_CONSTRUCT", INT2NUM(GTK_ARG_CONSTRUCT));
-    rb_define_const(gObject, "ARG_CONSTRUCT_ONLY", INT2NUM(GTK_ARG_CONSTRUCT_ONLY));
-    rb_define_const(gObject, "ARG_CHILD_ARG", INT2NUM(GTK_ARG_CHILD_ARG));
-    rb_define_const(gObject, "ARG_READWRITE", INT2NUM(GTK_ARG_READWRITE));
-    /* GtkSignalRunType */
-    rb_define_const(gObject, "RUN_FIRST", INT2FIX(GTK_RUN_FIRST));
-    rb_define_const(gObject, "RUN_LAST", INT2FIX(GTK_RUN_LAST));
-    rb_define_const(gObject, "RUN_BOTH", INT2FIX(GTK_RUN_BOTH));
-    rb_define_const(gObject, "RUN_NO_RECURSE", INT2FIX(GTK_RUN_NO_RECURSE));
-    rb_define_const(gObject, "RUN_ACTION", INT2FIX(GTK_RUN_ACTION));
-    rb_define_const(gObject, "RUN_NO_HOOKS", INT2FIX(GTK_RUN_NO_HOOKS));
-
-    /*
-     * instance methods
-     */
-
     rb_define_method(gObject, "flags", gobj_get_flags, 0);
-    rb_define_method(gObject, "flags=", gobj_set_flags, 1);
+    rb_define_method(gObject, "set_flags", gobj_set_flags, 1);
     rb_define_method(gObject, "unset_flags", gobj_unset_flags, 1);
-    rb_define_alias(gObject, "get_flags", "flags");
-    rb_define_alias(gObject, "set_flags", "flags=");
-    rb_define_method(gObject, "gtk_type", gobj_get_gtk_type, 0);
-
     rb_define_method(gObject, "destroy", gobj_destroy, 0);
 
+    /* GtkObjectFlags */
+    rb_define_const(gObject, "IN_DESTRUCTION", INT2FIX(GTK_IN_DESTRUCTION));
+    rb_define_const(gObject, "FLOATING", INT2FIX(GTK_FLOATING));
+    rb_define_const(gObject, "RESERVED_1", INT2FIX(GTK_RESERVED_1));
+    rb_define_const(gObject, "RESERVED_2", INT2FIX(GTK_RESERVED_2));
+
+    G_DEF_SETTERS(gObject);
 }

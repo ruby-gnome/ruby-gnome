@@ -1,3 +1,19 @@
+2002-10-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcontainer.c: Remove property methods. Remove Gtk::Container#foreach.
+	* src/rbgtkimage.c: Replace file. Accept plural gtype in Gtk::Image#initialize. 
+	Remove Gtk::Image#get/set. Implement GtkImageType.
+	* src/rbgtktipsquery.c: Removed.
+	* src/rbgtkaccellabel.c: Remove property methods. Gtk::AccelLabel#get_accel_width -> #accel_width.
+	* src/rbgtkobject.c:  Remove Gtk::Object#gtk_type.
+	Remove GtkArgFlags, GtkSignalRunType. 
+	* src/rbgtkaccelgroup.c: Remove Gtk::AccelGroup#attach, #dettach.
+	Remove constants(Gtk::AccelGroup::ACCEL_VISIBLE/LOCKED/MASK). Use Gtk::ACCEL_* instead.
+	Gtk::AccelGroup.activate return true/false not self.
+	* src/rbgtkmisc.c: Remove property methods. Implement Gtk::Misc#padding, #alignment.
+	* src/rbgtklabel.c: Remove property methods.
+	* src/rbgtktreeview.c: Fix typos. Pointed out by Joshua Keith <joshuakeith@linuxmail.org>.
+
 2002-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c, src/rbgdkwindow.c: 

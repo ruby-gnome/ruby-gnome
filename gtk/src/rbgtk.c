@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -28,7 +28,7 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
     VALUE obj;
     GtkObject *gtkobj;
 {
-    gtkobj = gtk_object_ref(gtkobj);
+    gtkobj = g_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
     G_INITIALIZE(obj, gtkobj);
 }

@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -382,39 +382,39 @@ void
 Init_gtk_treeview()
 {
     VALUE gTv = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
-
-	rb_define_method(gTv, "initialize", treeview_initialize, -1);
-	rb_define_method(gTv, "selection", treeview_get_selection, 0);
-	rb_define_method(gTv, "columns_sutosize", treeview_columns_autosize, 0);
-	rb_define_method(gTv, "append_column", treeview_append_column, 1);
-	rb_define_method(gTv, "remove_column", treeview_remove_column, 1);
-	rb_define_method(gTv, "insert_column", treeview_insert_column, 2);
-	rb_define_method(gTv, "get_column", treeview_get_column, 1);
-	rb_define_method(gTv, "columns", treeview_get_columns, 0);
-	rb_define_method(gTv, "move_colun_after", treeview_move_column_after, 2);
-	rb_define_method(gTv, "scroll_to_point", treeview_scroll_to_point, 2);
-	rb_define_method(gTv, "scroll_to_cell", treeview_scroll_to_cell, 5);
-	rb_define_method(gTv, "set_cursor", treeview_set_cursor, 3);
-	rb_define_method(gTv, "cursor", treeview_get_cursor, 0);
-	rb_define_method(gTv, "row_activated", treeview_row_activated, 2);
-	rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
-	rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
-	rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
-	rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
-	rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
-	rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
-	rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
-	rb_define_method(gTv, "get_background_area", treeview_get_background_area, 2);
-	rb_define_method(gTv, "visible_rect", treeview_get_visible_rect, 0);
-	rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
-	rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
-	rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
-	rb_define_method(gTv, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
-	rb_define_method(gTv, "unset_rows_drag_dest", treeview_unset_rows_drag_dest, 0);
-	rb_define_method(gTv, "set_drag_dest_row", treeview_set_drag_dest_row, 2);
-	rb_define_method(gTv, "drag_dest_row", treeview_get_drag_dest_row, 0);
-	rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
-	rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
+    
+    rb_define_method(gTv, "initialize", treeview_initialize, -1);
+    rb_define_method(gTv, "selection", treeview_get_selection, 0);
+    rb_define_method(gTv, "columns_autosize", treeview_columns_autosize, 0);
+    rb_define_method(gTv, "append_column", treeview_append_column, 1);
+    rb_define_method(gTv, "remove_column", treeview_remove_column, 1);
+    rb_define_method(gTv, "insert_column", treeview_insert_column, 2);
+    rb_define_method(gTv, "get_column", treeview_get_column, 1);
+    rb_define_method(gTv, "columns", treeview_get_columns, 0);
+    rb_define_method(gTv, "move_column_after", treeview_move_column_after, 2);
+    rb_define_method(gTv, "scroll_to_point", treeview_scroll_to_point, 2);
+    rb_define_method(gTv, "scroll_to_cell", treeview_scroll_to_cell, 5);
+    rb_define_method(gTv, "set_cursor", treeview_set_cursor, 3);
+    rb_define_method(gTv, "cursor", treeview_get_cursor, 0);
+    rb_define_method(gTv, "row_activated", treeview_row_activated, 2);
+    rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
+    rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
+    rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
+    rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
+    rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
+    rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
+    rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
+    rb_define_method(gTv, "get_background_area", treeview_get_background_area, 2);
+    rb_define_method(gTv, "visible_rect", treeview_get_visible_rect, 0);
+    rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
+    rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
+    rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
+    rb_define_method(gTv, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
+    rb_define_method(gTv, "unset_rows_drag_dest", treeview_unset_rows_drag_dest, 0);
+    rb_define_method(gTv, "set_drag_dest_row", treeview_set_drag_dest_row, 2);
+    rb_define_method(gTv, "drag_dest_row", treeview_get_drag_dest_row, 0);
+    rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
+    rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
     
     /* Constants */
     rb_define_const(gTv, "DROP_BEFORE", INT2NUM(GTK_TREE_VIEW_DROP_BEFORE));

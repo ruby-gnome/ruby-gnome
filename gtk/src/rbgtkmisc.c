@@ -4,7 +4,7 @@
   rbgtkmisc.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,12 +13,13 @@
 
 #include "global.h"
 
+#define _SELF(s) (GTK_MISC(RVAL2GOBJ(s)))
+
 static VALUE
 misc_set_align(self, xalign, yalign)
     VALUE self, xalign, yalign;
 {
-    gtk_misc_set_alignment(GTK_MISC(RVAL2GOBJ(self)),
-			   NUM2DBL(xalign), NUM2DBL(yalign));
+    gtk_misc_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
 
@@ -26,39 +27,29 @@ static VALUE
 misc_set_padding(self, xpad, ypad)
     VALUE self, xpad, ypad;
 {
-    gtk_misc_set_padding(GTK_MISC(RVAL2GOBJ(self)),
-			 NUM2DBL(xpad), NUM2DBL(ypad));
+    gtk_misc_set_padding(_SELF(self), NUM2DBL(xpad), NUM2DBL(ypad));
     return self;
 }
 
 static VALUE
-misc_get_xalign(self)
+misc_get_align(self)
     VALUE self;
 {
-    return rb_float_new(GTK_MISC(RVAL2GOBJ(self))->xalign);
+    gfloat xalign, yalign;
+    gtk_misc_get_alignment(_SELF(self), &xalign, &yalign);
+
+    return rb_ary_new3(2, rb_float_new(xalign), rb_float_new(yalign));
 }
 
 static VALUE
-misc_get_yalign(self)
+misc_get_padding(self)
     VALUE self;
 {
-    return rb_float_new(GTK_MISC(RVAL2GOBJ(self))->yalign);
-}
+    gint xpad, ypad;
+    gtk_misc_get_padding(_SELF(self), &xpad, &ypad);
 
-static VALUE
-misc_get_xpad(self)
-    VALUE self;
-{
-    return INT2NUM(GTK_MISC(RVAL2GOBJ(self))->xpad);
+    return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
 }
-
-static VALUE
-misc_get_ypad(self)
-    VALUE self;
-{
-    return INT2NUM(GTK_MISC(RVAL2GOBJ(self))->ypad);
-}
-
 void 
 Init_gtk_misc()
 {
@@ -66,8 +57,6 @@ Init_gtk_misc()
 
     rb_define_method(gMisc, "set_alignment", misc_set_align, 2);
     rb_define_method(gMisc, "set_padding", misc_set_padding, 2);
-    rb_define_method(gMisc, "xalign", misc_get_xalign, 0);
-    rb_define_method(gMisc, "yalign", misc_get_yalign, 0);
-    rb_define_method(gMisc, "xpad", misc_get_xpad, 0);
-    rb_define_method(gMisc, "ypad", misc_get_ypad, 0);
+    rb_define_method(gMisc, "alignment", misc_get_align, 0);
+    rb_define_method(gMisc, "padding", misc_get_padding, 0);
 }

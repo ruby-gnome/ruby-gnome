@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/19 13:20:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -122,7 +122,7 @@ gdkbmap_initialize(self, win, w, h)
     VALUE self, win, w, h;
 {
 	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
-										  NUM2INT(w), NUM2INT(h), 1));
+                                          NUM2INT(w), NUM2INT(h), 1));
 	return Qnil;
 }
 
@@ -151,7 +151,7 @@ gdkbmap_create_from_xbm(self, win, fname)
         rb_raise(rb_eArgError, "Bitmap not created from %s", RVAL2CSTR(fname));
 
     new = gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)), 
-									  data, width, height);
+                                      data, width, height);
     XFree(data);
     return GOBJ2RVAL(new);
 }
@@ -161,8 +161,8 @@ gdkbmap_create_from_xbm(self, win, fname)
 void
 Init_gtk_gdk_pixmap()
 {
-	VALUE gdkPixmap;
-	VALUE gdkBitmap;
+    VALUE gdkPixmap;
+    VALUE gdkBitmap;
 
     /* 
      * GdkPixmap
