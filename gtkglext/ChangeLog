@@ -1,3 +1,9 @@
+2004-09-23 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/lib/gtkglext.rb: Improved log handling.
+	Defined Gtk::GL::LOG_DOMAIN and Gdk::GL::LOG_DOMAIN.
+	(Thanks to Masao because he did 99.9% of this ;o))
+
 2004-06-30 Vincent Isambart <isambart@netcourrier.com>
 
 	* sample/*.rb: corrected some minor bugs when quitting on Mac OS X
