@@ -11,7 +11,6 @@ SRCDIR = TOPDIR + '/libart/src'
 $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
-require 'glib2'
 
 PKGConfig.have_package('libart-2.0') or exit 1
 
