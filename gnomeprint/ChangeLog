@@ -1,3 +1,11 @@
+2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print.c (Init_gnome_print): Adapted
+	  Gnome::PrintReturnCode to GEnum/GFlags policy of Ruby-GNOME2.
+
+	* src/rbgp-gnome-print-unit.c (Init_gnome_print_unit): Adapted
+	  Gnome::PrintUnitBase to GEnum/GFlags policy of Ruby-GNOME2.
+
 2004-11-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/gnomeprint2.rb: added backward compatibility for Rabbit

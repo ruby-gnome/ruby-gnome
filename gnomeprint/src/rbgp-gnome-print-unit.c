@@ -157,15 +157,17 @@ Init_gnome_print_unit(VALUE mGnome)
   VALUE cBase;
   
   cBase = G_DEF_CLASS(GNOME_TYPE_PRINT_PRINT_UNIT_BASE,
-                      "PrintUnitBase", mGnome);
+                      "PrintUnitBase", cUnit);
+  G_DEF_CONSTANTS(cUnit, GNOME_TYPE_PRINT_PRINT_UNIT_BASE, "GNOME_PRINT_");
 
   rb_define_const(cUnit, "PS_UNIT", CONST_GPU2RVAL(GNOME_PRINT_PS_UNIT));
 
-  rb_define_const(cBase, "ALL",
+  rb_define_const(cUnit, "UNIT_ALL",
                   rb_funcall(cBase,
                              rb_intern("new"),
                              1,
                              GPUB2RVAL(GNOME_PRINT_UNITS_ALL)));
+  rb_define_const(cBase, "ALL", rb_const_get(cUnit, rb_intern("UNIT_ALL")));
 
   rb_define_method(cUnit, "version", gp_unit_get_version, 0);
   rb_define_method(cUnit, "base", gp_unit_get_base, 0);

@@ -7,9 +7,9 @@ Requirements
 ------------
 
     Ruby:               http://www.ruby-lang.org/
-    libgnomeprint [*]:  http://www.gnome.org/
+    libgnomeprint [*]:  http://www.gnome.org/projects/gnome-print/
 
-    [*]: 2.8 or newer is required.
+    [*]: 2.8 or later is required.
 
 Install
 -------

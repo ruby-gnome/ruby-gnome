@@ -517,9 +517,12 @@ void
 Init_gnome_print(VALUE mGnome)
 {
   VALUE cGPC = G_DEF_CLASS(GNOME_TYPE_PRINT_CONTEXT, "PrintContext", mGnome);
+  VALUE mGP = rb_define_module_under(mGnome, "Print");
+  VALUE mGPP = Init_gnome_print_pango(mGnome);
+  
   VALUE cGPRC = G_DEF_CLASS(GNOME_TYPE_PRINT_PRINT_RETURN_CODE,
                             "PrintReturnCode", mGnome);
-  VALUE mGPP = Init_gnome_print_pango(mGnome);
+  G_DEF_CONSTANTS(mGP, GNOME_TYPE_PRINT_PRINT_RETURN_CODE, "GNOME_PRINT_");
 
   rb_include_module(cGPC, mGPP);
   

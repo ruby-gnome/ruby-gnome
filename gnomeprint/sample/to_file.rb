@@ -112,7 +112,7 @@ class Renderer
   end
 
   def draw_image
-    filename = Dir["sample/*.png"].first
+    filename = Dir["**/*.png"].first
     pixbuf = Gdk::Pixbuf.new(filename)
     @context.save do
       @context.translate(350, 500)
