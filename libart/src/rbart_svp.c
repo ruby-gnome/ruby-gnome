@@ -1,3 +1,14 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/**********************************************************************
+
+   rbart_svp.c -
+
+   $Author: mutoh $
+   $Date: 2003/02/01 16:55:26 $
+
+   Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
+
+**********************************************************************/
 #include "rbart.h"
 
 VALUE artSVP;

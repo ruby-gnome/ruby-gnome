@@ -3,9 +3,9 @@
   gnome-canvas.rb - Affine transformation sample using Ruby/GnomeCanvas2.
 
   $Author: mutoh $
-  $Date: 2002/11/05 11:53:41 $
+  $Date: 2003/02/01 16:55:26 $
 
-  Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
+  Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 =end
 

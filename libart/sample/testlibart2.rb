@@ -1,3 +1,12 @@
+=begin
+   testlibart2.rb
+
+   $Author: mutoh $
+   $Date: 2003/02/01 16:55:26 $
+
+   Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
+=end
+
 require 'libart2'
 
 module Art

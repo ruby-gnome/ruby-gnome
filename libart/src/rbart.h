@@ -4,9 +4,9 @@
   rbart.h - header file for Art module of ruby
 
   $Author: mutoh $
-  $Date: 2003/01/04 06:04:28 $
+  $Date: 2003/02/01 16:55:26 $
 
-  Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
+  Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 **********************************************************************/
 
