@@ -1,3 +1,9 @@
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgobj_object.c (gobj_set_property, gobj_get_property):
+	accept nil as an argument of val. raise more kindly exception when
+	property name was not found.
+
 2002-09-18  KUBO Takehiro <kubo@jiubao.org>
 
 	* src/rbgobject.c (rbgobj_gobject_new): fix size parameter of memset()

@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/12 19:04:28 $
+  $Author: tkubo $
+  $Date: 2002/09/21 09:50:54 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -100,11 +100,12 @@ gobj_set_property(self, prop_name, val)
         StringValuePtr(prop_name));
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property");
+        rb_raise(rb_eArgError, "No such property: %s", StringValuePtr(prop_name));
     else {
         GValue tmp = {0,};
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        rbgobj_rvalue_to_gvalue(val, &tmp);
+        if (!NIL_P(val))
+            rbgobj_rvalue_to_gvalue(val, &tmp);
         g_object_set_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
         g_value_unset(&tmp);
         return self;
@@ -124,7 +125,7 @@ gobj_get_property(self, prop_name)
         StringValuePtr(prop_name));
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property");
+        rb_raise(rb_eArgError, "No such property: %s", StringValuePtr(prop_name));
     else {
         GValue tmp = {0,};
         VALUE ret;
