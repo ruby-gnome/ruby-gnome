@@ -1,3 +1,8 @@
+2003-07-27  Nikolai Weibull  <lone-star@home.se>
+
+	* src/gnomevfs-file.c: Fixed a bunch of minor bugs (that prevented all
+	operation).  Also added record separation in the gets() method.
+
 2003-07-26  Nikolai Weibull  <lone-star@home.se>
 
 	* NEWS: Removed file.

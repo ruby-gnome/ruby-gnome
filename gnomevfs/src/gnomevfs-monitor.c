@@ -20,7 +20,7 @@
  *
  * Author: Nikolai Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-26
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
@@ -133,7 +133,7 @@ monitor_add(argc, argv, self)
 {
 	VALUE monitor;
 
-	monitor = rb_funcall(self, rb_intern("new"), argc, argv);
+	monitor = rb_funcall2(self, rb_intern("new"), argc, argv);
 	return monitor;
 }
 
@@ -151,7 +151,7 @@ Init_gnomevfs_monitor(m_gvfs)
 	VALUE gvfs_monitor = G_DEF_CLASS(GNOMEVFS_TYPE_MONITOR, "Monitor",
 					 m_gvfs);
 
-	rb_define_singleton_method(gvfs_monitor, "initialize",
+	rb_define_method(gvfs_monitor, "initialize",
 				   monitor_initialize, -1);
 	rb_define_singleton_method(gvfs_monitor, "add", monitor_add, -1);
 	rb_define_singleton_method(gvfs_monitor, "cancel", monitor_cancel, 0);

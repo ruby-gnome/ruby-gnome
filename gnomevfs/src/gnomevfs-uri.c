@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-24
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 

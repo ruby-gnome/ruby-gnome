@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-26
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
@@ -117,6 +117,8 @@ Init_gnomevfs(void)
 	Init_gnomevfs_uri(m_gvfs);
 	Init_gnomevfs_file_info(m_gvfs);
 	Init_gnomevfs_directory(m_gvfs);
+	Init_gnomevfs_file(m_gvfs);
+	Init_gnomevfs_monitor(m_gvfs);
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

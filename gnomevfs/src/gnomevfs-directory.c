@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
@@ -199,7 +199,6 @@ directory_read_next(self)
 {
 	GnomeVFSFileInfo *info;
 	GnomeVFSResult result;
-	VALUE r_result;
 
 	info = gnome_vfs_file_info_new();
 	result = gnome_vfs_directory_read_next(_SELF(self), info);

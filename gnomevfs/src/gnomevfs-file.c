@@ -20,13 +20,14 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-26
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
 
 #include "gnomevfs.h"
+#include "string.h"
 
 /* Defines *******************************************************************/
 
@@ -142,10 +143,9 @@ file_create_or_open(argc, argv, self)
 
 	file = rb_funcall2(self, rb_intern("new"), argc, argv);
 	if (rb_block_given_p()) {
-		rb_ensure(rb_yield, file, file_close, file);
-		return Qnil;
+		return rb_ensure(rb_yield, file, file_close, file);
 	}
-	return Qnil;
+	return file;
 }
 
 static VALUE
@@ -385,45 +385,58 @@ file_tell(self)
 }
 
 static VALUE
-file_gets(self)
-	VALUE self;
+handle_gets(handle, sep, len)
+	GnomeVFSHandle *handle;
+	char *sep;
+	int len;
 {
 	guint8 buf[8192];
-	/* XXX: why -3? */
-	guint8 *bp, *bpend = buf + sizeof(buf) - 3;
+	guint8 *bp, *bpend;
 	guint8 c;
 	gboolean append;
 	VALUE str;
-	GnomeVFSHandle *handle;
+	char last;
 	GnomeVFSFileSize bytes_read;
 	GnomeVFSResult result;
 
-	handle = _SELF(self);
 	bp = buf;
+	bpend = buf + sizeof(buf) - 3;
 	append = FALSE;
 	str = Qnil;
+	last = sep[len - 1];
 
 	for ( ; ; ) {
 		result = gnome_vfs_read(handle, &c, 1, &bytes_read);
 		if (result == GNOME_VFS_OK) {
 			*bp++ = c;
-			if (c == '\n' || bp == bpend) {
+
+			if (c == last || bp == bpend) {
 				if (append) {
 					rb_str_cat(str, buf, bp - buf);
 				} else {
 					str = rb_str_new(buf, bp - buf);
+					append = TRUE;
 				}
 
-				if (c == '\n') {
+				if (len == 1 && c == *sep) {
+					break;
+				} else if (memcmp(RSTRING(str)->ptr +
+						  RSTRING(str)->len - len,
+						  sep, len) == 0) {
 					break;
 				} else {
 					bp = buf;
 				}
 			}
-			if (bp == bpend) {
-				break;
-			}
 		} else if (result == GNOME_VFS_ERROR_EOF) {
+			if (bp - buf > 0) {
+				if (append) {
+					rb_str_cat(str, buf, bp - buf);
+				} else {
+					str = rb_str_new(buf, bp - buf);
+				}
+			}
+
 			break;
 		} else {
 			return GVFSRESULT2RVAL(result);
@@ -431,6 +444,28 @@ file_gets(self)
 	}
 
 	return str;
+}
+
+static VALUE
+file_gets(argc, argv, self)
+	int argc;
+	VALUE *argv;
+	VALUE self;
+{
+	VALUE r_separator;
+	char *sep;
+	int len;
+
+	if (rb_scan_args(argc, argv, "01", &r_separator) == 1) {
+		Check_Type(r_separator, T_STRING);
+		sep = RSTRING(r_separator)->ptr;
+		len = RSTRING(r_separator)->len;
+	} else {
+		sep = "\n";
+		len = 1;
+	}
+
+	return handle_gets(_SELF(self), sep, len);
 }
 
 static VALUE
@@ -616,8 +651,7 @@ Init_gnomevfs_file(m_gvfs)
 {
 	g_gvfs_file = G_DEF_CLASS(GNOMEVFS_TYPE_FILE, "File", m_gvfs);
 
-	rb_define_singleton_method(g_gvfs_file, "initialize", file_initialize,
-				   -1);
+	rb_define_method(g_gvfs_file, "initialize", file_initialize, -1);
 	rb_define_singleton_method(g_gvfs_file, "create", file_create_or_open,
 				   -1);
 	rb_define_singleton_method(g_gvfs_file, "open", file_create_or_open,
@@ -644,8 +678,9 @@ Init_gnomevfs_file(m_gvfs)
 	rb_define_method(g_gvfs_file, "close", file_close, 0);
 	rb_define_method(g_gvfs_file, "read", file_read, -1);
 	rb_define_method(g_gvfs_file, "readchar", file_readchar, 0);
-	rb_define_method(g_gvfs_file, "gets", file_gets, 0);
+	rb_define_method(g_gvfs_file, "gets", file_gets, -1);
 	rb_define_method(g_gvfs_file, "write", file_write, 1);
+	rb_define_alias(g_gvfs_file, "<<", "write");
 	rb_define_method(g_gvfs_file, "seek", file_write, -1);
 	rb_define_method(g_gvfs_file, "tell", file_tell, 0);
 	rb_define_alias(g_gvfs_file, "pos", "tell");
