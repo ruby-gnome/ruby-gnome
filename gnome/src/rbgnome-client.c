@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.5 2002/10/27 05:59:58 tkubo Exp $ */
+/* $Id: rbgnome-client.c,v 1.6 2002/11/16 15:21:58 tkubo Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
@@ -47,7 +47,7 @@ call_argv_command(func, self, args)
 }
 
 static VALUE
-rbgnome_master_client(self)
+client_s_master_client(self)
     VALUE self;
 {
     return GOBJ2RVAL(gnome_master_client());
@@ -360,40 +360,40 @@ Init_gnome_client(mGnome)
     id_call = rb_intern("call");
 
     /* GnomeInteractStyle */
-    rb_define_const(mGnome, "INTERACT_NONE", INT2FIX(GNOME_INTERACT_NONE));
-    rb_define_const(mGnome, "INTERACT_ERRORS", INT2FIX(GNOME_INTERACT_ERRORS));
-    rb_define_const(mGnome, "INTERACT_ANY", INT2FIX(GNOME_INTERACT_ANY));
+    rb_define_const(gnoClient, "INTERACT_NONE", INT2FIX(GNOME_INTERACT_NONE));
+    rb_define_const(gnoClient, "INTERACT_ERRORS", INT2FIX(GNOME_INTERACT_ERRORS));
+    rb_define_const(gnoClient, "INTERACT_ANY", INT2FIX(GNOME_INTERACT_ANY));
 
     /* GnomeDialogType */
-    rb_define_const(mGnome, "DIALOG_ERROR", INT2FIX(GNOME_DIALOG_ERROR));
-    rb_define_const(mGnome, "DIALOG_NORMAL", INT2FIX(GNOME_DIALOG_NORMAL));
+    rb_define_const(gnoClient, "DIALOG_ERROR", INT2FIX(GNOME_DIALOG_ERROR));
+    rb_define_const(gnoClient, "DIALOG_NORMAL", INT2FIX(GNOME_DIALOG_NORMAL));
 
     /* GnomeSaveStyle */
-    rb_define_const(mGnome, "SAVE_GLOBAL", INT2FIX(GNOME_SAVE_GLOBAL));
-    rb_define_const(mGnome, "SAVE_LOCAL", INT2FIX(GNOME_SAVE_LOCAL));
-    rb_define_const(mGnome, "SAVE_BOTH", INT2FIX(GNOME_SAVE_BOTH));
+    rb_define_const(gnoClient, "SAVE_GLOBAL", INT2FIX(GNOME_SAVE_GLOBAL));
+    rb_define_const(gnoClient, "SAVE_LOCAL", INT2FIX(GNOME_SAVE_LOCAL));
+    rb_define_const(gnoClient, "SAVE_BOTH", INT2FIX(GNOME_SAVE_BOTH));
 
     /* GnomeRestartStyle */
-    rb_define_const(mGnome, "RESTART_IF_RUNNING", INT2FIX(GNOME_RESTART_IF_RUNNING));
-    rb_define_const(mGnome, "RESTART_ANYWAY", INT2FIX(GNOME_RESTART_ANYWAY));
-    rb_define_const(mGnome, "RESTART_IMMEDIATELY", INT2FIX(GNOME_RESTART_IMMEDIATELY));
-    rb_define_const(mGnome, "RESTART_NEVER", INT2FIX(GNOME_RESTART_NEVER));
+    rb_define_const(gnoClient, "RESTART_IF_RUNNING", INT2FIX(GNOME_RESTART_IF_RUNNING));
+    rb_define_const(gnoClient, "RESTART_ANYWAY", INT2FIX(GNOME_RESTART_ANYWAY));
+    rb_define_const(gnoClient, "RESTART_IMMEDIATELY", INT2FIX(GNOME_RESTART_IMMEDIATELY));
+    rb_define_const(gnoClient, "RESTART_NEVER", INT2FIX(GNOME_RESTART_NEVER));
 
     /* GnomeClientState */
-    rb_define_const(mGnome, "CLIENT_IDLE", INT2FIX(GNOME_CLIENT_IDLE));
-    rb_define_const(mGnome, "CLIENT_SAVING_PHASE_1", INT2FIX(GNOME_CLIENT_SAVING_PHASE_1));
-    rb_define_const(mGnome, "CLIENT_WAITING_FOR_PHASE_2", INT2FIX(GNOME_CLIENT_WAITING_FOR_PHASE_2));
-    rb_define_const(mGnome, "CLIENT_SAVING_PHASE_2", INT2FIX(GNOME_CLIENT_SAVING_PHASE_2));
-    rb_define_const(mGnome, "CLIENT_FROZEN", INT2FIX(GNOME_CLIENT_FROZEN));
-    rb_define_const(mGnome, "CLIENT_DISCONNECTED", INT2FIX(GNOME_CLIENT_DISCONNECTED));
-    rb_define_const(mGnome, "CLIENT_REGISTERING", INT2FIX(GNOME_CLIENT_REGISTERING));
+    rb_define_const(gnoClient, "IDLE", INT2FIX(GNOME_CLIENT_IDLE));
+    rb_define_const(gnoClient, "SAVING_PHASE_1", INT2FIX(GNOME_CLIENT_SAVING_PHASE_1));
+    rb_define_const(gnoClient, "WAITING_FOR_PHASE_2", INT2FIX(GNOME_CLIENT_WAITING_FOR_PHASE_2));
+    rb_define_const(gnoClient, "SAVING_PHASE_2", INT2FIX(GNOME_CLIENT_SAVING_PHASE_2));
+    rb_define_const(gnoClient, "FROZEN", INT2FIX(GNOME_CLIENT_FROZEN));
+    rb_define_const(gnoClient, "DISCONNECTED", INT2FIX(GNOME_CLIENT_DISCONNECTED));
+    rb_define_const(gnoClient, "REGISTERING", INT2FIX(GNOME_CLIENT_REGISTERING));
 
     /* GnomeClientFlags */
-    rb_define_const(mGnome, "CLIENT_IS_CONNECTED", INT2FIX(GNOME_CLIENT_IS_CONNECTED));
-    rb_define_const(mGnome, "CLIENT_RESTARTED", INT2FIX(GNOME_CLIENT_RESTARTED));
-    rb_define_const(mGnome, "CLIENT_RESTORED", INT2FIX(GNOME_CLIENT_RESTORED));
+    rb_define_const(gnoClient, "IS_CONNECTED", INT2FIX(GNOME_CLIENT_IS_CONNECTED));
+    rb_define_const(gnoClient, "RESTARTED", INT2FIX(GNOME_CLIENT_RESTARTED));
+    rb_define_const(gnoClient, "RESTORED", INT2FIX(GNOME_CLIENT_RESTORED));
 
-    rb_define_module_function(mGnome, "master_client", rbgnome_master_client, 0);
+    rb_define_singleton_method(gnoClient, "master_client", client_s_master_client, 0);
     rb_define_method(gnoClient, "config_prefix", client_get_config_prefix, 0);
     rb_define_method(gnoClient, "global_config_prefix", client_get_global_config_prefix, 0);
     rb_define_method(gnoClient, "set_global_config_prefix", client_set_global_config_prefix, 1);
@@ -425,7 +425,7 @@ Init_gnome_client(mGnome)
     rb_define_method(gnoClient, "previous_id", client_get_previous_id, 0);
     rb_define_method(gnoClient, "desktop_id", client_get_desktop_id, 0);
     rb_define_method(gnoClient, "request_interaction", client_request_interaction, -1);
-    rb_define_module_function(mGnome, "interaction_key_return", rbgnome_interaction_key_return, 2);
+    rb_define_singleton_method(gnoClient, "interaction_key_return", rbgnome_interaction_key_return, 2);
 
     G_DEF_SETTERS(gnoClient);
 }

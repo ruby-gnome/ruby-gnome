@@ -1,3 +1,14 @@
+2002-11-17  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-client.c:
+	rename Gnome::CLIENT_* to Gnome::Client::*.
+	rename Gnome::INTERACT_* to Gnome::Client::INTERACT_*.
+	rename Gnome::DIALOG_* to Gnome::Client::DIALOG_*.
+	rename Gnome::SAVE_* to Gnome::Client::SAVE_*.
+	rename Gnome::RESTART_* to Gnome::Client::RESTART_*.
+	rename Gnome.master_client() to Gnome::Client.master_client().
+	rename Gnome.interaction_key_return() to Gnome::Client.interaction_key_return().
+
 2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-app.c: add Gnome::App#name and Gnome::App#prefix.
