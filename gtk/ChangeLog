@@ -1,3 +1,22 @@
+2002-10-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkitemfactory.c: Change parameter order of Gtk::ItemFactory#create_item, 
+	#create_items. 
+	* src/rbgtkwidget.c, src/rbgtkdrag.c: Move Dnd methods to rbgtkdrag.c.
+	* src/rbgtkwidget.c: Remove property methods/obsolete methods.
+	Add Gtk::Widget#set_accel_path, #set_parent_window
+	#parent_window, #set_direction, #direction, .set_default_direction,
+	.default_direction, #modifier_style, #modify_fg/bg/text/base/font,
+	#create_pango_context, #pango_layout, #render_icon,
+	.push/pop_composite_child, #set_double_buffered, #set_redraw_on_allocate,
+	#mnemonic_activate.
+	Add constants(GtkWidgetHelpType, GtkTextDirection).
+	* src/rbgtkwindow.c: Add Gtk::Window::POS_CENTER_ALWAYS, 
+	Gtk::Window::POS_CENTER_ON_PARENT.
+	* src/rbgtkselectiondata.c: Remove Gtk::SelectionData#copy. 
+	Add Gtk::SelectionData#set_text, #text, #targets_include_text, #remove_all.
+	* src/rbgdkrectangle.c: Fix gdkrect_initialize didn't return Qnil.
+
 2002-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkconstants.c, src/rbgtkwindow.c: Move GtkWindowPosition, GtkWindowType to 

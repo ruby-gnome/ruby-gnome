@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:02 $
+  $Date: 2002/10/30 13:34:35 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -78,34 +78,34 @@ rbgtk_poll (GPollFD *fds,
     FD_ZERO (&xset);
 
     for (f = fds; f < &fds[nfds]; ++f) {
-		if (f->fd >= 0)	{
-			if (f->events & G_IO_IN)
-				FD_SET (f->fd, &rset);
-			if (f->events & G_IO_OUT)
-				FD_SET (f->fd, &wset);
-			if (f->events & G_IO_PRI)
-				FD_SET (f->fd, &xset);
-			if (f->fd > maxfd && (f->events & (G_IO_IN|G_IO_OUT|G_IO_PRI)))
-				maxfd = f->fd;
-		}
+        if (f->fd >= 0)	{
+            if (f->events & G_IO_IN)
+                FD_SET (f->fd, &rset);
+            if (f->events & G_IO_OUT)
+                FD_SET (f->fd, &wset);
+            if (f->events & G_IO_PRI)
+                FD_SET (f->fd, &xset);
+            if (f->fd > maxfd && (f->events & (G_IO_IN|G_IO_OUT|G_IO_PRI)))
+                maxfd = f->fd;
+        }
     }
     tv.tv_sec = timeout / 1000;
     tv.tv_usec = (timeout % 1000) * 1000;
 
     ready = rb_thread_select (maxfd + 1, &rset, &wset, &xset,
-							  timeout == -1 ? NULL : &tv);
+                              timeout == -1 ? NULL : &tv);
     if (ready > 0) {
-		for (f = fds; f < &fds[nfds]; ++f) {
-			f->revents = 0;
-			if (f->fd >= 0) {
-				if (FD_ISSET (f->fd, &rset))
-					f->revents |= G_IO_IN;
-				if (FD_ISSET (f->fd, &wset))
-					f->revents |= G_IO_OUT;
-				if (FD_ISSET (f->fd, &xset))
-					f->revents |= G_IO_PRI;
-			}
-		}
+        for (f = fds; f < &fds[nfds]; ++f) {
+            f->revents = 0;
+            if (f->fd >= 0) {
+                if (FD_ISSET (f->fd, &rset))
+                    f->revents |= G_IO_IN;
+                if (FD_ISSET (f->fd, &wset))
+                    f->revents |= G_IO_OUT;
+                if (FD_ISSET (f->fd, &xset))
+                    f->revents |= G_IO_PRI;
+            }
+        }
     }
 
     return ready;

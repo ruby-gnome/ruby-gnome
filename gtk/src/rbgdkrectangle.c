@@ -4,7 +4,7 @@
   rbgdkrectangle.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:42:00 $
+  $Date: 2002/10/30 13:34:35 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -31,6 +31,7 @@ gdkrect_initialize(self, x, y, width, height)
     new.height = NUM2INT(height);
 
     G_INITIALIZE(self, &new);
+    return Qnil;
 }
 
 static VALUE
