@@ -1,3 +1,7 @@
+2004-12-16  leon breedt  <bitserf@gmail.com>
+
+	* rbgdk-pixbuf-format.c, rbgdkpixbuf.h: Fix compilation problems.
+
 2004-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbufanimation.c: Fix a wrong number of arguments for 

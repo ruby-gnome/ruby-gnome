@@ -4,7 +4,7 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2004/11/14 02:46:38 $
+  $Date: 2004/12/16 14:36:05 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -13,7 +13,6 @@
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 
 #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
-#define GDK_PIXBUF_ENABLE_BACKEND
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
 #endif
 
