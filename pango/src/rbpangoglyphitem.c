@@ -4,9 +4,9 @@
   rbpangoglyphitem.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 18:46:23 $
+  $Date: 2005/03/05 18:48:13 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
