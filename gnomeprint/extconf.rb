@@ -15,8 +15,6 @@ PKGConfig.have_package("libgnomeprint-2.2", 2, 8) or exit 1
 setup_win32(PACKAGE_NAME)
 
 add_depend_package("glib2", "glib/src", TOPDIR)
-add_depend_package("pango", "pango/src", TOPDIR)
-add_depend_package("libart2", "libart/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINT2_COMPILATION")
 create_top_makefile
