@@ -1,3 +1,8 @@
+2002-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_boxed.c, rbgobj_type.c, rbgobj_param.c, rbgobj_object.c: 
+	Apply rb_define_alloc_func() of ruby-1.8.x.
+
 2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.c: Check 2nd argument is hash. 

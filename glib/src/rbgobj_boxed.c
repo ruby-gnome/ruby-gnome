@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: sakai $
-  $Date: 2002/10/02 12:27:55 $
+  $Author: mutoh $
+  $Date: 2002/12/25 16:24:23 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -167,7 +167,11 @@ Init_gobject_gboxed()
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(gBoxed, "allocate", rbgobj_boxed_s_allocate, 0);
+#else
+    rb_define_alloc_func(gBoxed, rbgobj_boxed_s_allocate);
+#endif
 #ifndef HAVE_OBJECT_ALLOCATE
     rb_define_singleton_method(gBoxed, "new", rbgobj_boxed_s_new, -1);
 #endif

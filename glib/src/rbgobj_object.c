@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2002/11/22 12:11:28 $
+  $Author: mutoh $
+  $Date: 2002/12/25 16:24:23 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -386,7 +386,11 @@ Init_gobject_gobject()
 {
     VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
 
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
+#else
+    rb_define_alloc_func(cGObject, gobj_s_allocate);
+#endif
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
     rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 #endif

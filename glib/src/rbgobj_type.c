@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2002/12/09 15:05:24 $
+  $Date: 2002/12/25 16:24:23 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -630,8 +630,11 @@ Init_instantiatable()
     cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
     rb_extend_object(cInstantiatable, mInterfaceCommons);
 
-    rb_define_singleton_method(cInstantiatable, "allocate", &instantiatable_s_allocate, 0);
-
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+    rb_define_singleton_method(cInstantiatable, "allocate", instantiatable_s_allocate, 0);
+#else
+    rb_define_alloc_func(cInstantiatable, instantiatable_s_allocate);
+#endif
 #ifndef HAVE_OBJECT_ALLOCATE
     id_allocate = rb_intern("allocate");
     rb_define_singleton_method(cInstantiatable, "new", &instantiatable_s_new, -1);

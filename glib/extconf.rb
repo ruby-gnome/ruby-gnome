@@ -55,6 +55,7 @@ else
   STDOUT.print "no\n"
 end
 
+have_func("rb_define_alloc_func") # for ruby-1.8
 
 src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
 

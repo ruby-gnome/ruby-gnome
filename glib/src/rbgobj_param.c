@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: sakai $
-  $Date: 2002/10/14 11:04:18 $
+  $Author: mutoh $
+  $Date: 2002/12/25 16:24:23 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -258,7 +258,12 @@ Init_gobject_gparam_spec()
     rb_define_const(cParamSpec, "MASK",           INT2FIX(G_PARAM_MASK));
     rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
 
+
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cParamSpec, "allocate", pspec_s_allocate, 0);
+#else
+    rb_define_alloc_func(cParamSpec, pspec_s_allocate);
+#endif
 
     rb_define_method(cParamSpec, "inspect", inspect, 0);
 
