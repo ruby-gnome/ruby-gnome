@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/01/21 18:47:06 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -682,41 +682,76 @@ widget_mnemonic_activate(self, group_cycling)
     return gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)) ? Qtrue : Qfalse;
 }
 
-/* Can we implement this?
 static VALUE
-widget_class_install_style_property(self, pspec)
-    VALUE self, pspec;
+widget_s_install_style_property(self, spec)
+    VALUE self, spec;
 {
-    gtk_widget_class_install_style_property((GtkWidgetClass*)G_OBJECT_GET_CLASS(_SELF(self)), 
-                                            RVAL2GOBJ(pspec));
-    return self;
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
+    GtkWidgetClass* gclass;
+    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+
+    if (cinfo->klass != self)
+        rb_raise(rb_eTypeError, "%s isn't registered class",
+                 rb_class2name(self));
+
+    gclass = (GtkWidgetClass *)g_type_class_ref(cinfo->gtype);
+    gtk_widget_class_install_style_property(gclass, pspec); 
+    return Qnil;
 }
 
+/* Do we need this?
 void        gtk_widget_class_install_style_property_parser
                                             (GtkWidgetClass *klass,
                                              GParamSpec *pspec,
                                              GtkRcPropertyParser parser);
-GParamSpec* gtk_widget_class_find_style_property
-                                            (GtkWidgetClass *klass,
-                                             const gchar *property_name);
 */
+
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-widget_style_properties(self)
+widget_s_find_style_property(self, property_name)
+     VALUE self, property_name;
+{
+    GtkWidgetClass* oclass;
+    const char* name;
+    GParamSpec* prop;
+    VALUE result;
+
+    if (SYMBOL_P(property_name)) {
+        name = rb_id2name(SYM2ID(property_name));
+    } else {
+        StringValue(property_name);
+        name = StringValuePtr(property_name);
+    }
+
+    oclass = (GtkWidgetClass*)g_type_class_ref(CLASS2GTYPE(self));
+
+    prop = gtk_widget_class_find_style_property(oclass, name);
+    if (!prop){
+        g_type_class_unref(oclass);
+        rb_raise(rb_eval_string("GLib::NoPropertyError"), "no such property: %s", name);
+    }
+
+    result = GOBJ2RVAL(prop);
+    g_type_class_unref(oclass);
+    return result;
+}
+
+static VALUE
+widget_s_style_properties(self)
     VALUE self;
 {
     GtkWidgetClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     gint n_properties;
-    GParamSpec** props;
     VALUE ary;
     int i;
 
-    props = gtk_widget_class_list_style_properties(oclass, &n_properties);
+    GParamSpec** props = gtk_widget_class_list_style_properties(oclass, &n_properties);
 
     ary = rb_ary_new2(n_properties);
     for (i = 0; i < n_properties; i++)
         rb_ary_store(ary, i, rb_str_new2(props[i]->name));
 
+    g_free(props);
     g_type_class_unref(oclass);
     return ary;
 }
@@ -768,12 +803,11 @@ widget_style_get_property(self, prop_name)
         rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
     else {
         // FIXME: use rb_ensure to call g_value_unset()
-        GValueToRValueFunc getter = NULL;
         GValue gval = {0,};
         VALUE ret;
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
         gtk_widget_style_get_property(GTK_WIDGET(RVAL2GOBJ(self)), name, &gval);
-        ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
+        ret = GVAL2RVAL(&gval);
         g_value_unset(&gval);
         return ret;
     }
@@ -977,8 +1011,10 @@ Init_gtk_widget()
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
+    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gWidget, "style_properties", widget_style_properties, 0);
+    rb_define_singleton_method(gWidget, "style_property", widget_s_find_style_property, 1);
+    rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, 0);
 #endif
     rb_define_method(gWidget, "intersect", widget_intersect, 1);
     rb_define_method(gWidget, "focus?", widget_is_focus, 0);
