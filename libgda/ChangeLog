@@ -1,3 +1,8 @@
+2003-12-15  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdadatasource.c: Constructor did not accept nil as the
+	  username parameter.
+
 2003-12-14  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaclient.c, src/rbgdavalue.c: Fixed some typos in the
