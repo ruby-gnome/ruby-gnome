@@ -30,7 +30,14 @@
 static VALUE
 gp_unit_get_identity(VALUE self, VALUE base)
 {
-  return CONST_GPU2RVAL(gnome_print_unit_get_identity(RVAL2GPUB(base)));
+  const GnomePrintUnit *unit;
+  unit = gnome_print_unit_get_identity(RVAL2GPUB(base));
+
+  if (unit == NULL) {
+    return Qnil;
+  } else {
+    return CONST_GPU2RVAL(unit);
+  }
 }
 
 static VALUE
@@ -42,13 +49,27 @@ gp_unit_get_default(VALUE self)
 static VALUE
 gp_unit_get_by_name(VALUE self, VALUE name)
 {
-  return CONST_GPU2RVAL(gnome_print_unit_get_by_name(RVAL2CSTR(name)));
+  const GnomePrintUnit *unit;
+  unit = gnome_print_unit_get_by_name(RVAL2CSTR(name));
+
+  if (unit == NULL) {
+    return Qnil;
+  } else {
+    return CONST_GPU2RVAL(unit);
+  }
 }
 
 static VALUE
 gp_unit_get_by_abbreviation(VALUE self, VALUE abbreviation)
 {
-  return CONST_GPU2RVAL(gnome_print_unit_get_by_abbreviation(RVAL2CSTR(abbreviation)));
+  const GnomePrintUnit *unit;
+  unit = gnome_print_unit_get_by_abbreviation(RVAL2CSTR(abbreviation));
+
+  if (unit == NULL) {
+    return Qnil;
+  } else {
+    return CONST_GPU2RVAL(unit);
+  }
 }
 
 static VALUE
