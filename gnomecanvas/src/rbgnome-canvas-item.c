@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.8 2002/09/29 13:19:16 tkubo Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.9 2002/10/02 13:36:50 tkubo Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -179,7 +179,7 @@ citem_grab(self, event_mask, cursor, etime)
         gnome_canvas_item_grab(_SELF(self),
                                NUM2INT(event_mask),
                                (GdkCursor *)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
-                               NIL_P(etime) ? 0 : NUM2INT(etime)));
+                               NIL_P(etime) ? 0 : NUM2UINT(etime)));
 }
 
 static VALUE
@@ -187,7 +187,7 @@ citem_ungrab(self, etime)
     VALUE self, etime;
 {
     gnome_canvas_item_ungrab(_SELF(self),
-                             NIL_P(etime) ? 0 : NUM2INT(etime));
+                             NIL_P(etime) ? 0 : NUM2UINT(etime));
     return Qnil;
 }
 
@@ -260,13 +260,9 @@ citem_get_bounds(self)
                        rb_float_new(x2), rb_float_new(y2));
 }
 
-static VALUE
-citem_request_update(self)
-    VALUE self;
-{
-    gnome_canvas_item_request_update(_SELF(self));
-    return Qnil;
-}
+#if 0 /* This should be used only by item implementations. */
+void gnome_canvas_item_request_update (GnomeCanvasItem *item);
+#endif
 
 static VALUE
 citem_parent(self)
@@ -310,7 +306,6 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasItem, "reparent", citem_reparent, 1);
     rb_define_method(gnoCanvasItem, "grab_focus", citem_grab_focus, 0);
     rb_define_method(gnoCanvasItem, "get_bounds", citem_get_bounds, 0);
-    rb_define_method(gnoCanvasItem, "request_update", citem_request_update, 0);
     rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
     rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 
@@ -321,7 +316,6 @@ Init_gnome_canvas_item(mGnome)
     G_DEF_CLASS(GNOME_TYPE_CANVAS_POLYGON, "CanvasPolygon", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_RECT, "CanvasRect", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_ELLIPSE, "CanvasEllipse", mGnome);
-    G_DEF_CLASS(GNOME_TYPE_CANVAS_RICH_TEXT, "CanvasRichText", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_TEXT, "CanvasText", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_WIDGET, "CanvasWidget", mGnome);
 }

@@ -4,6 +4,24 @@
 
 static VALUE gnoCanvasPathDef;
 
+/* #define EXPERIMENTAL_DEFINE_AS_BOXED 1 */
+
+#ifdef EXPERIMENTAL_DEFINE_AS_BOXED
+#define _SELF(self) (GnomeCanvasPathDef *)RVAL2BOXED(self, rbgno_canvas_path_def_get_type())
+#define _WRAP(self) BOXED2RVAL(self, rbgno_canvas_path_def_get_type())
+
+GType
+rbgno_canvas_path_def_get_type()
+{
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GnomeCanvasPathDef",
+                                                 (GBoxedCopyFunc)gnome_canvas_path_def_ref,
+                                                 (GBoxedFreeFunc)gnome_canvas_path_def_unref);
+    return our_type;
+}
+
+#else /* !EXPERIMENTAL_DEFINE_AS_BOXED */
 #define _SELF(self) ((GnomeCanvasPathDef *)rbgobj_ptr2cptr(self))
 #define _WRAP(path) rbgno_make_canvas_path_def(path)
 
@@ -13,6 +31,7 @@ rbgno_make_canvas_path_def(path)
 {
     return Data_Wrap_Struct(gnoCanvasPathDef, NULL, gnome_canvas_path_def_unref, path);
 }
+#endif /* EXPERIMENTAL_DEFINE_AS_BOXED */
 
 static VALUE
 cpathdef_s_new(argc, argv, self)
@@ -262,7 +281,12 @@ void
 Init_gnome_canvas_path_def(mGnome)
     VALUE mGnome;
 {
+#ifdef EXPERIMENTAL_DEFINE_AS_BOXED
+    gnoCanvasPathDef = G_DEF_CLASS(rbgno_canvas_path_def_get_type(), "CanvasPathDef", mGnome);
+    rbgobj_register_property_type(GNOME_TYPE_CANVAS_BPATH, "bpath", rbgno_canvas_path_def_get_type());
+#else /* !EXPERIMENTAL_DEFINE_AS_BOXED */
     gnoCanvasPathDef = rb_define_class_under(mGnome, "CanvasPathDef", rb_cObject);
+#endif /* EXPERIMENTAL_DEFINE_AS_BOXED */
 
     rb_define_singleton_method(gnoCanvasPathDef, "new", cpathdef_s_new, -1);
     rb_define_method(gnoCanvasPathDef, "duplicate", cpathdef_duplicate, 0);

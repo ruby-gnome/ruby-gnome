@@ -1,3 +1,22 @@
+2002-10-02  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-item.c: use NUM2UINT instead of NUM2INT 
+	because etime is guint32. delete citem_request_update() because
+	this should be used only by item implementations.
+	* src/rbgnome-canvas-path-def.c: add experimental implementation
+	which defines Gnome::CanvasPathDef as boxed. This feature is 
+	disabled by default.
+	* src/rbgnome-canvas-util.c: add set_coords_from_points_data(),
+	canvas_s_color(), canvas_s_get_miter_points(),
+	canvas_s_get_butt_points(), and canvas_s_polygon_to_point().
+	* src/rbgnome-canvas.c: add canvas_set_center_scroll_region()
+	and canvas_get_color_pixel(). remove canvas_request_redraw_uta(),
+	and canvas_request_redraw(). implement canvas_get_color(),
+	canvas_set_dither(), and canvas_get_dither().
+	* src/rbgnome-canvas-rich-text.c: add a file.
+	* src/rbgnomecanvas.c, src/rbgnomecanvas.h: call
+	Init_gnome_canvas_rich_text() when this module is loaded.
+
 2002-09-29  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-item.c: Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).

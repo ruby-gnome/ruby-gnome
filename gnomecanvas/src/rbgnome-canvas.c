@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.6 2002/09/29 03:45:19 tkubo Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.7 2002/10/02 13:36:51 tkubo Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -73,6 +73,24 @@ canvas_get_scroll_region(self)
 }
 
 static VALUE
+canvas_set_center_scroll_region(self, center_scroll_region)
+    VALUE self, center_scroll_region;
+{
+    gnome_canvas_set_center_scroll_region(_SELF(self),
+                                          RTEST(center_scroll_region));
+    return self;
+}
+
+static VALUE
+canvas_get_center_scroll_region(self)
+    VALUE self;
+{
+    gboolean result;
+    result = gnome_canvas_get_center_scroll_region(_SELF(self));
+    return result ? Qtrue : Qfalse;
+}
+
+static VALUE
 canvas_set_pixels_per_unit(self, n)
     VALUE self, n;
 {
@@ -121,26 +139,14 @@ canvas_get_item_at(self, x, y)
     return GOBJ2RVAL(item);
 }
 
-static VALUE
-canvas_request_redraw_uta(self, uta)
-    VALUE self, uta;
-{
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
-}
 
-static VALUE
-canvas_request_redraw(self, x1, y1, x2, y2)
-    VALUE self, x1, y1, x2, y2;
-{
-    gnome_canvas_request_redraw(_SELF(self),
-                                NUM2INT(x1),
-                                NUM2INT(y1),
-                                NUM2INT(x2),
-                                NUM2INT(y2));
-    return Qnil;
-}
+#if 0 /* For use only by item type implementations. */
+void gnome_canvas_request_redraw_uta (GnomeCanvas *canvas, ArtUta *uta);
+#endif
+
+#if 0 /* For use only by item type implementations. */
+void gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2);
+#endif
 
 static VALUE
 canvas_w2c_affine(self)
@@ -204,12 +210,19 @@ canvas_world_to_window(self, worldx, worldy)
 }
 
 static VALUE
-canvas_get_color(self, spec, color)
-    VALUE self, spec, color;
+canvas_get_color(self, spec)
+    VALUE self, spec;
 {
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
+    GdkColor color;
+    gnome_canvas_get_color(_SELF(self), RVAL2CSTR(spec), &color);
+    return BOXED2RVAL(&color, GDK_TYPE_COLOR);
+}
+
+static VALUE
+canvas_get_color_pixel(self, rgba)
+    VALUE self, rgba;
+{
+    return ULONG2NUM(gnome_canvas_get_color_pixel(_SELF(self), NUM2UINT(rgba)));
 }
 
 static VALUE
@@ -218,25 +231,22 @@ canvas_set_stipple_origin(self, gc)
 {
     gnome_canvas_set_stipple_origin(_SELF(self),
                                     GDK_GC(RVAL2GOBJ(gc)));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 canvas_set_dither(self, dither)
     VALUE self, dither;
 {
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
+    gnome_canvas_set_dither(_SELF(self), NUM2UINT(dither));
+    return self;
 }
 
 static VALUE
 canvas_get_dither(self)
     VALUE self;
 {
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
+    return gnome_canvas_get_dither(_SELF(self));
 }
 
 static VALUE
@@ -256,19 +266,21 @@ Init_gnome_canvas(mGnome)
     rb_define_method(gnoCanvas, "root", canvas_root, 0);
     rb_define_method(gnoCanvas, "set_scroll_region", canvas_set_scroll_region, 4);
     rb_define_method(gnoCanvas, "get_scroll_region", canvas_get_scroll_region, 0);
+    rb_define_method(gnoCanvas, "set_center_scroll_region", canvas_set_center_scroll_region, 1);
+    rb_define_method(gnoCanvas, "get_center_scroll_region", canvas_get_center_scroll_region, 0);
+    rb_define_method(gnoCanvas, "center_scroll_region?", canvas_get_center_scroll_region, 0);
     rb_define_method(gnoCanvas, "set_pixels_per_unit", canvas_set_pixels_per_unit, 1);
     rb_define_method(gnoCanvas, "scroll_to", canvas_scroll_to, 2);
     rb_define_method(gnoCanvas, "get_scroll_offsets", canvas_get_scroll_offsets, 0);
     rb_define_method(gnoCanvas, "update_now", canvas_update_now, 0);
     rb_define_method(gnoCanvas, "get_item_at", canvas_get_item_at, 2);
-    rb_define_method(gnoCanvas, "request_redraw_uta", canvas_request_redraw_uta, 1);
-    rb_define_method(gnoCanvas, "request_redraw", canvas_request_redraw, 4);
     rb_define_method(gnoCanvas, "w2c_affine", canvas_w2c_affine, 0);
     rb_define_method(gnoCanvas, "w2c", canvas_w2c, 2);
     rb_define_method(gnoCanvas, "c2w", canvas_c2w, 2);
     rb_define_method(gnoCanvas, "window_to_world", canvas_window_to_world, 2);
     rb_define_method(gnoCanvas, "world_to_window", canvas_world_to_window, 2);
-    rb_define_method(gnoCanvas, "get_color", canvas_get_color, 2);
+    rb_define_method(gnoCanvas, "get_color", canvas_get_color, 1);
+    rb_define_method(gnoCanvas, "get_color_pixel", canvas_get_color_pixel, 1);
     rb_define_method(gnoCanvas, "set_stipple_origin", canvas_set_stipple_origin, 1);
     rb_define_method(gnoCanvas, "set_dither", canvas_set_dither, 1);
     rb_define_method(gnoCanvas, "get_dither", canvas_get_dither, 0);
