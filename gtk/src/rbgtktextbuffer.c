@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/13 13:28:28 $
+  $Author: sakai $
+  $Date: 2003/11/19 12:52:34 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -154,17 +154,24 @@ txt_get_text(argc, argv, self)
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
     GtkTextBuffer* buffer = _SELF(self);
+    gchar* ret;
+    VALUE result;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
     if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
     if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
     if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
-      
-    return CSTR2RVAL(gtk_text_buffer_get_text(buffer,
-                                              NIL_P(start) ? &start_iter : RVAL2ITR(start),
-                                              NIL_P(start) ? &end_iter : RVAL2ITR(end),
-                                              RTEST(include_hidden_chars)));
+
+    ret = gtk_text_buffer_get_text(
+            buffer,
+            NIL_P(start) ? &start_iter : RVAL2ITR(start),
+            NIL_P(start) ? &end_iter : RVAL2ITR(end),
+            RTEST(include_hidden_chars));
+    result = CSTR2RVAL(ret);
+    g_free(ret);
+
+    return result;
 }
 
 static VALUE
@@ -183,17 +190,24 @@ txt_get_slice(argc, argv, self)
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
     GtkTextBuffer* buffer = _SELF(self);
+    gchar* ret;
+    VALUE result;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
     if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
     if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
     if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
-      
-    return CSTR2RVAL(gtk_text_buffer_get_slice(buffer,
-                                               NIL_P(start) ? &start_iter : RVAL2ITR(start),
-                                               NIL_P(start) ? &end_iter : RVAL2ITR(end),
-                                               RTEST(include_hidden_chars)));
+
+    ret = gtk_text_buffer_get_slice(
+            buffer,
+            NIL_P(start) ? &start_iter : RVAL2ITR(start),
+            NIL_P(start) ? &end_iter : RVAL2ITR(end),
+            RTEST(include_hidden_chars));
+    result = CSTR2RVAL(ret);
+    g_free(ret);
+
+    return result;
 }
 
 static VALUE
