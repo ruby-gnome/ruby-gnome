@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -25,7 +25,7 @@ Init_gtk2()
 
     argc = (int)RARRAY(rb_argv)->len;
     argv = ALLOCA_N(char*,argc+1);
-    argv[0] = STR2CSTR(rb_progname);
+    argv[0] = RVAL2CSTR(rb_progname);
     for (i = 0; i < argc; i++) {
 		if (TYPE(RARRAY(rb_argv)->ptr[i]) == T_STRING) {
 			argv[i+1] = RSTRING(RARRAY(rb_argv)->ptr[i])->ptr;

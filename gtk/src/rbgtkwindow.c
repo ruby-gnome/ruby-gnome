@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,7 +45,7 @@ static VALUE
 gwin_set_title(self, title)
     VALUE self, title;
 {
-    gtk_window_set_title(GTK_WINDOW(RVAL2GOBJ(self)), STR2CSTR(title));
+    gtk_window_set_title(GTK_WINDOW(RVAL2GOBJ(self)), RVAL2CSTR(title));
     return self;
 }
 
@@ -64,8 +64,8 @@ gwin_set_wmclass(self, wmclass1, wmclass2)
     VALUE self, wmclass1, wmclass2;
 {
     gtk_window_set_wmclass(GTK_WINDOW(RVAL2GOBJ(self)),
-						   NIL_P(wmclass1)?NULL:STR2CSTR(wmclass1),
-						   NIL_P(wmclass2)?NULL:STR2CSTR(wmclass2));
+						   NIL_P(wmclass1)?NULL:RVAL2CSTR(wmclass1),
+						   NIL_P(wmclass2)?NULL:RVAL2CSTR(wmclass2));
     return self;
 }
 

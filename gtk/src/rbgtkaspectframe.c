@@ -4,7 +4,7 @@
   rbgtkaspectframe.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 aframe_initialize(self, label, xalign, yalign, ratio, obey_child)
     VALUE self, label, xalign, yalign, ratio, obey_child;
 {
-    RBGTK_INITIALIZE(self, gtk_aspect_frame_new(NIL_P(label)?NULL:STR2CSTR(label),
+    RBGTK_INITIALIZE(self, gtk_aspect_frame_new(NIL_P(label)?NULL:RVAL2CSTR(label),
 					  NUM2DBL(xalign),
 					  NUM2DBL(yalign),
 					  NUM2DBL(ratio),

@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -67,9 +67,9 @@ tbar_append_item(self, text, ttext, ptext, icon, func)
     }
     G_RELATIVE(self, func);
     ret = gtk_toolbar_append_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								  NIL_P(text)?NULL:STR2CSTR(text),
-								  NIL_P(ttext)?NULL:STR2CSTR(ttext),
-								  NIL_P(ptext)?NULL:STR2CSTR(ptext),
+								  NIL_P(text)?NULL:RVAL2CSTR(text),
+								  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+								  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 								  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 								  GTK_SIGNAL_FUNC(exec_callback),
 								  (gpointer)func);
@@ -87,9 +87,9 @@ tbar_prepend_item(self, text, ttext, ptext, icon, func)
     }
     G_RELATIVE(self, func);
     ret = gtk_toolbar_prepend_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								   NIL_P(text)?NULL:STR2CSTR(text),
-								   NIL_P(ttext)?NULL:STR2CSTR(ttext),
-								   NIL_P(ptext)?NULL:STR2CSTR(ptext),
+								   NIL_P(text)?NULL:RVAL2CSTR(text),
+								   NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+								   NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 								   NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 								   GTK_SIGNAL_FUNC(exec_callback),
 								   (gpointer)func);
@@ -107,9 +107,9 @@ tbar_insert_item(self, text, ttext, ptext, icon, func, pos)
     }
     G_RELATIVE(self, func);
     ret = gtk_toolbar_insert_item(GTK_TOOLBAR(RVAL2GOBJ(self)),
-								  NIL_P(text)?NULL:STR2CSTR(text),
-								  NIL_P(ttext)?NULL:STR2CSTR(ttext),
-								  NIL_P(ptext)?NULL:STR2CSTR(ptext),
+								  NIL_P(text)?NULL:RVAL2CSTR(text),
+								  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+								  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 								  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 								  GTK_SIGNAL_FUNC(exec_callback),
 								  (gpointer)func,
@@ -147,8 +147,8 @@ tbar_append_widget(self, widget, ttext, ptext)
 {
     gtk_toolbar_append_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
                               GTK_WIDGET(RVAL2GOBJ(widget)),
-                              NIL_P(ttext)?NULL:STR2CSTR(ttext),
-                              NIL_P(ptext)?NULL:STR2CSTR(ptext));
+                              NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+                              NIL_P(ptext)?NULL:RVAL2CSTR(ptext));
     return self;
 }
 
@@ -158,8 +158,8 @@ tbar_prepend_widget(self, widget, ttext, ptext)
 {
     gtk_toolbar_prepend_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
 							   GTK_WIDGET(RVAL2GOBJ(widget)),
-							   NIL_P(ttext)?NULL:STR2CSTR(ttext),
-							   NIL_P(ptext)?NULL:STR2CSTR(ptext));
+							   NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+							   NIL_P(ptext)?NULL:RVAL2CSTR(ptext));
     return self;
 }
 
@@ -169,8 +169,8 @@ tbar_insert_widget(self, widget, ttext, ptext, pos)
 {
     gtk_toolbar_insert_widget(GTK_TOOLBAR(RVAL2GOBJ(self)),
                               GTK_WIDGET(RVAL2GOBJ(widget)),
-                              NIL_P(ttext)?NULL:STR2CSTR(ttext),
-                              NIL_P(ptext)?NULL:STR2CSTR(ptext),
+                              NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+                              NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
                               NUM2INT(pos));
     return self;
 }
@@ -191,9 +191,9 @@ tbar_append_element(self, type, widget, text, ttext, ptext, icon)
     ret = gtk_toolbar_append_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
 									 NUM2INT(type),
 									 NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									 NIL_P(text)?NULL:STR2CSTR(text),
-									 NIL_P(ttext)?NULL:STR2CSTR(ttext),
-									 NIL_P(ptext)?NULL:STR2CSTR(ptext),
+									 NIL_P(text)?NULL:RVAL2CSTR(text),
+									 NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+									 NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 									 NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 									 GTK_SIGNAL_FUNC(callback),
 									 (gpointer)func);
@@ -216,9 +216,9 @@ tbar_prepend_element(self, type, widget, text, ttext, ptext, icon)
     ret = gtk_toolbar_prepend_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
 									  NUM2INT(type),
 									  NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									  NIL_P(text)?NULL:STR2CSTR(text),
-									  NIL_P(ttext)?NULL:STR2CSTR(ttext),
-									  NIL_P(ptext)?NULL:STR2CSTR(ptext),
+									  NIL_P(text)?NULL:RVAL2CSTR(text),
+									  NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+									  NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 									  NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 									  GTK_SIGNAL_FUNC(callback),
 									  (gpointer)func);
@@ -241,9 +241,9 @@ tbar_insert_element(self, type, widget, text, ttext, ptext, icon, position)
     ret = gtk_toolbar_insert_element(GTK_TOOLBAR(RVAL2GOBJ(self)),
 									 NUM2INT(type),
 									 NIL_P(widget)?NULL:GTK_WIDGET(RVAL2GOBJ(widget)),
-									 NIL_P(text)?NULL:STR2CSTR(text),
-									 NIL_P(ttext)?NULL:STR2CSTR(ttext),
-									 NIL_P(ptext)?NULL:STR2CSTR(ptext),
+									 NIL_P(text)?NULL:RVAL2CSTR(text),
+									 NIL_P(ttext)?NULL:RVAL2CSTR(ttext),
+									 NIL_P(ptext)?NULL:RVAL2CSTR(ptext),
 									 NIL_P(icon)?NULL:GTK_WIDGET(RVAL2GOBJ(icon)),
 									 GTK_SIGNAL_FUNC(callback),
 									 (gpointer)func,

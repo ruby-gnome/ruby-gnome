@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -348,7 +348,7 @@ note_set_menu_label_text(self, child, text)
 {
     gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(RVAL2GOBJ(self)),
                                      GTK_WIDGET(RVAL2GOBJ(child)),
-                                     STR2CSTR(text));
+                                     RVAL2CSTR(text));
     return self;
 }
 
@@ -376,7 +376,7 @@ note_set_tab_label_text(self, child, text)
 {
     gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(RVAL2GOBJ(self)),
                                     GTK_WIDGET(RVAL2GOBJ(child)),
-                                    STR2CSTR(text));
+                                    RVAL2CSTR(text));
     return self;
 }
 

@@ -2,8 +2,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: sakai $
-  $Date: 2002/08/04 13:45:42 $
+  $Author: mutoh $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -14,7 +14,7 @@ static VALUE
 alabel_initialize(self, string)
 	 VALUE self, string;
 {
-  RBGTK_INITIALIZE(self, gtk_accel_label_new(STR2CSTR(string)));
+  RBGTK_INITIALIZE(self, gtk_accel_label_new(RVAL2CSTR(string)));
   return Qnil;
 }
 

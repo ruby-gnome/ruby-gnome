@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -91,7 +91,7 @@ ctree_initialize(self, titles, tree_column)
         len = RARRAY(titles)->len;
         buf = ALLOCA_N(char*, len);
         for (i=0; i<len; i++) {
-            buf[i] = STR2CSTR(RARRAY(titles)->ptr[i]);
+            buf[i] = RVAL2CSTR(RARRAY(titles)->ptr[i]);
         }
         widget = gtk_ctree_new_with_titles(len, NUM2INT(tree_column), buf);
     } else {
@@ -145,7 +145,7 @@ ctree_insert_node(self, parent, sibling, texts, spacing,
     c_texts = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
         VALUE text = RARRAY(texts)->ptr[i];
-        c_texts[i] = NIL_P(text)?0:STR2CSTR(text);
+        c_texts[i] = NIL_P(text)?0:RVAL2CSTR(text);
     }
     result = gtk_ctree_insert_node(GTK_CTREE(RVAL2GOBJ(self)),
                                    c_parent, c_sibling, c_texts,
@@ -691,7 +691,7 @@ ctree_node_set_text(self, node, column, text)
     gtk_ctree_node_set_text(GTK_CTREE(RVAL2GOBJ(self)),
                             RVAL2CTREENODE(node),
                             NUM2INT(column),
-                            STR2CSTR(text));
+                            RVAL2CSTR(text));
     return self;
 }
 
@@ -738,7 +738,7 @@ ctree_node_set_pixtext(self, node, column, text, spacing, pixmap, mask)
     gtk_ctree_node_set_pixtext(GTK_CTREE(RVAL2GOBJ(self)),
                                RVAL2CTREENODE(node),
                                NUM2INT(column),
-                               STR2CSTR(text),
+                               RVAL2CSTR(text),
                                NUM2INT(spacing),
 							   RVAL2PIXMAP(pixmap),
 							   RVAL2BITMAP(mask));
@@ -766,7 +766,7 @@ ctree_set_node_info(self, node, text, spacing,
 {
     gtk_ctree_set_node_info(GTK_CTREE(RVAL2GOBJ(self)),
 							RVAL2CTREENODE(node),
-							STR2CSTR(text),
+							RVAL2CSTR(text),
 							NUM2INT(spacing),
 							RVAL2PIXMAP(pixmap_closed),
 							RVAL2BITMAP(mask_closed),
@@ -901,8 +901,9 @@ ctree_node_get_pixtext(self, node, column)
 										&pixmap, &mask);
     if (!result) return Qnil;
 
-    return rb_ary_new3(4, CSTR2OBJ(text), INT2FIX(spacing),
-					   GOBJ2RVAL(pixmap), GOBJ2RVAL(mask));
+    return rb_ary_new3(4, text ? CSTR2RVAL(text) : Qnil, 
+                       INT2FIX(spacing), 
+                       GOBJ2RVAL(pixmap), GOBJ2RVAL(mask));
 }
 
 /*
@@ -935,7 +936,7 @@ ctree_get_node_info(self, node)
 
     if (!result) return Qnil;
     
-    return rb_ary_new3(8, CSTR2OBJ(text),
+    return rb_ary_new3(8, text ? CSTR2RVAL(text) : Qnil,
 					   INT2FIX(spacing),
 					   GOBJ2RVAL(pixmap_closed),
 					   GOBJ2RVAL(mask_closed),

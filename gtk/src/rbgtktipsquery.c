@@ -4,7 +4,7 @@
   rbgtktipsquery.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,8 +53,8 @@ tipsquery_set_labels(self, label_inactive, label_no_tip)
     VALUE self, label_inactive, label_no_tip;
 {
     gtk_tips_query_set_labels(GTK_TIPS_QUERY(RVAL2GOBJ(self)),
-							  STR2CSTR(label_inactive),
-							  STR2CSTR(label_no_tip));
+							  RVAL2CSTR(label_inactive),
+							  RVAL2CSTR(label_no_tip));
     return self;
 }
 

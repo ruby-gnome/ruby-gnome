@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,6 @@
 
 #include <signal.h>
 
-#define CSTR2OBJ(s) (s ? rb_str_new2(s) : Qnil)
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
 #define GEV2RVAL(ev) (make_gdkevent(ev))

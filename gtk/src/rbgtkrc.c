@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@ static VALUE
 rc_m_parse(self, rc)
     VALUE self, rc;
 {
-    gtk_rc_parse(STR2CSTR(rc));
+    gtk_rc_parse(RVAL2CSTR(rc));
     return Qnil;
 }
 
@@ -32,7 +32,7 @@ static VALUE
 rc_m_parse_string(self, rc)
     VALUE self, rc;
 {
-    gtk_rc_parse_string(STR2CSTR(rc));
+    gtk_rc_parse_string(RVAL2CSTR(rc));
     return Qnil;
 }
 
@@ -48,7 +48,7 @@ rc_m_add_widget_name_style(self, style, pat)
     VALUE self, style, pat;
 {
     gtk_rc_add_widget_name_style(GTK_RC_STYLE(RVAL2GOBJ(style)), 
-								 STR2CSTR(pat));
+								 RVAL2CSTR(pat));
     return Qnil;
 }
 
@@ -57,7 +57,7 @@ rc_m_add_widget_class_style(self, style, pat)
     VALUE self, style, pat;
 {
     gtk_rc_add_widget_class_style(GTK_RC_STYLE(RVAL2GOBJ(style)), 
-								  STR2CSTR(pat));
+								  RVAL2CSTR(pat));
     return Qnil;
 }
 

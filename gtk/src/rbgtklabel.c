@@ -4,7 +4,7 @@
   rbgtklabel.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,7 +21,7 @@ label_initialize(argc, argv, self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
-    RBGTK_INITIALIZE(self, gtk_label_new(NIL_P(label)?NULL:STR2CSTR(label)));
+    RBGTK_INITIALIZE(self, gtk_label_new(NIL_P(label)?NULL:RVAL2CSTR(label)));
     return Qnil;
 }
 
@@ -38,7 +38,7 @@ static VALUE
 label_set_text(self, str)
     VALUE self, str;
 {
-    gtk_label_set_text(GTK_LABEL(RVAL2GOBJ(self)), STR2CSTR(str));
+    gtk_label_set_text(GTK_LABEL(RVAL2GOBJ(self)), RVAL2CSTR(str));
     return Qnil;
 }
 
@@ -71,7 +71,7 @@ static VALUE
 label_set_pattern(self, pattern)
     VALUE self, pattern;
 {
-    gtk_label_set_pattern(GTK_LABEL(RVAL2GOBJ(self)), STR2CSTR(pattern));
+    gtk_label_set_pattern(GTK_LABEL(RVAL2GOBJ(self)), RVAL2CSTR(pattern));
     return self;
 }
 
@@ -80,7 +80,7 @@ label_parse_uline(self, string)
     VALUE self, string;
 {
     guint i = gtk_label_parse_uline(GTK_LABEL(RVAL2GOBJ(self)),
-				    STR2CSTR(string));
+				    RVAL2CSTR(string));
     return INT2FIX(i);
 }
 

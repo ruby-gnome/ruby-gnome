@@ -4,13 +4,12 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
-
 #include "global.h"
 
 static VALUE
@@ -150,14 +149,15 @@ static VALUE
 gtk_m_signal_lookup(self, name, type)
     VALUE self, name, type;
 {
-    return INT2NUM(gtk_signal_lookup(STR2CSTR(name), NUM2INT(type)));
+    return INT2NUM(gtk_signal_lookup(RVAL2CSTR(name), NUM2INT(type)));
 }
 
 static VALUE
 gtk_m_signal_name(self, signal_id)
     VALUE self, signal_id;
 {
-    return CSTR2OBJ(gtk_signal_name(NUM2INT(signal_id)));
+    G_CONST_RETURN gchar* name = gtk_signal_name(NUM2INT(signal_id));
+    return name ? CSTR2RVAL(name) : Qnil;
 }
 
 VALUE rbgtk_log_handler_procs = Qnil;
@@ -182,7 +182,7 @@ rbgtk_m_log_set_handler(self, log_domain, log_levels)
     VALUE proc;
 
     proc = rb_f_lambda();
-    handler_id = g_log_set_handler(STR2CSTR(log_domain), NUM2INT(log_levels),
+    handler_id = g_log_set_handler(RVAL2CSTR(log_domain), NUM2INT(log_levels),
 				   rbgtk_log_handler, (gpointer)proc);
     rb_hash_aset(rbgtk_log_handler_procs, INT2NUM(handler_id), proc);
     return INT2NUM(handler_id);
@@ -192,7 +192,7 @@ static VALUE
 rbgtk_m_log_remove_handler(self, log_domain, handler_id)
     VALUE self, log_domain, handler_id;
 {
-    g_log_remove_handler(STR2CSTR(log_domain), NUM2INT(handler_id));
+    g_log_remove_handler(RVAL2CSTR(log_domain), NUM2INT(handler_id));
     rb_funcall(rbgtk_log_handler_procs, rb_intern("delete"),
 	       1, INT2NUM(handler_id));
     return Qnil;

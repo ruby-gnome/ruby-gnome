@@ -4,7 +4,7 @@
   rbgtkfilesel.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 fsel_initialize(self, title)
     VALUE self, title;
 {
-    RBGTK_INITIALIZE(self, gtk_file_selection_new(STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gtk_file_selection_new(RVAL2CSTR(title)));
     return Qnil;
 }
 
@@ -26,7 +26,7 @@ fsel_set_fname(self, fname)
     VALUE self, fname;
 {
     gtk_file_selection_set_filename(GTK_FILE_SELECTION(RVAL2GOBJ(self)),
-									STR2CSTR(fname));
+									RVAL2CSTR(fname));
     return Qnil;
 }
 
@@ -42,7 +42,7 @@ static VALUE
 fsel_complete(self, pattern)
     VALUE self, pattern;
 {
-    gtk_file_selection_complete(GTK_FILE_SELECTION(RVAL2GOBJ(self)), STR2CSTR(pattern));
+    gtk_file_selection_complete(GTK_FILE_SELECTION(RVAL2GOBJ(self)), RVAL2CSTR(pattern));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,8 +37,8 @@ gdkcolor_s_parse(self, name)
     VALUE name;
 {
     GdkColor c;
-    if (! gdk_color_parse(STR2CSTR(name), &c)) {
-        rb_raise(rb_eArgError, "can't parse color name `%s'", STR2CSTR(name));
+    if (! gdk_color_parse(RVAL2CSTR(name), &c)) {
+        rb_raise(rb_eArgError, "can't parse color name `%s'", RVAL2CSTR(name));
     }
     return BOXED2RVAL(&c, GDK_TYPE_COLOR);
 }

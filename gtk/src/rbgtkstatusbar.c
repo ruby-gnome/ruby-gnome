@@ -4,7 +4,7 @@
   rbgtkstatusbar.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,7 +29,7 @@ statusbar_push(self, id, text)
 {
   gint message_id;
   message_id = gtk_statusbar_push(GTK_STATUSBAR(RVAL2GOBJ(self)), 
-				  NUM2INT(id), STR2CSTR(text));
+				  NUM2INT(id), RVAL2CSTR(text));
   return INT2FIX(message_id);
 }
 
@@ -50,7 +50,7 @@ statusbar_get_context_id(self, text)
 {
   gint context_id;
   context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(RVAL2GOBJ(self)),
-					    STR2CSTR(text));
+					    RVAL2CSTR(text));
   return INT2FIX(context_id);
 }
 

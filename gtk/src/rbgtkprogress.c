@@ -4,7 +4,7 @@
   rbgtkprogress.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,7 +47,7 @@ progress_set_format_string(self, format)
      VALUE self, format;
 {
     gtk_progress_set_format_string(GTK_PROGRESS(RVAL2GOBJ(self)),
-				   STR2CSTR(format));
+				   RVAL2CSTR(format));
     return self;
 }
 
@@ -117,17 +117,21 @@ static VALUE
 progress_get_current_text(self)
      VALUE self;
 {
-    return CSTR2OBJ(gtk_progress_get_current_text(
-                GTK_PROGRESS(RVAL2GOBJ(self))));
+    gchar* text = gtk_progress_get_current_text(
+        GTK_PROGRESS(RVAL2GOBJ(self)));
+
+    return text ? CSTR2RVAL(text) : Qnil;
 }
 
 static VALUE
 progress_get_text_from_value(self, value)
      VALUE self, value;
 {
-    return CSTR2OBJ(gtk_progress_get_text_from_value(
-                GTK_PROGRESS(RVAL2GOBJ(self)),
-                NUM2DBL(value)));
+    gchar* val = gtk_progress_get_text_from_value(
+        GTK_PROGRESS(RVAL2GOBJ(self)),
+        NUM2DBL(value));
+
+    return val ? CSTR2RVAL(val) : Qnil;
 }
 
 static VALUE

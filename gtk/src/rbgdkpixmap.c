@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,9 +47,9 @@ gdkpmap_create_from_xpm(self, win, color, fname)
 
     new = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), &mask,
                           (color==Qnil)?NULL:(GdkColor*)RVAL2BOXED(color), 
-                          STR2CSTR(fname));
+                          RVAL2CSTR(fname));
     if (!new) {
-		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
+		rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
     }
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
@@ -66,7 +66,7 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
     Check_Type(data, T_ARRAY);
     buf = ALLOCA_N(char*, RARRAY(data)->len);
     for (i=0; i < RARRAY(data)->len; i++) {
-		buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
+		buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
     }
     new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)), 
 						   &mask, 
@@ -87,9 +87,9 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
 					      GDK_COLORMAP(RVAL2GOBJ(colormap)),
 					      &mask,
 					      (tcolor==Qnil)?NULL:(GdkColor*)RVAL2BOXED(tcolor),
-					      STR2CSTR(fname));
+					      RVAL2CSTR(fname));
     if (!new) {
-		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
+		rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
     }
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
@@ -106,7 +106,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
     Check_Type(data, T_ARRAY);
     buf = ALLOCA_N(char*, RARRAY(data)->len);
     for (i=0; i<RARRAY(data)->len; i++) {
-	buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
+	buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
     }
 
     new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
@@ -151,8 +151,8 @@ gdkbmap_create_from_xbm(self, win, fname)
     int x, y;
 
     Check_Type(fname, T_STRING);
-    if (XReadBitmapFileData(STR2CSTR(fname), &width, &height, &data, &x, &y))
-        rb_raise(rb_eArgError, "Bitmap not created from %s", STR2CSTR(fname));
+    if (XReadBitmapFileData(RVAL2CSTR(fname), &width, &height, &data, &x, &y))
+        rb_raise(rb_eArgError, "Bitmap not created from %s", RVAL2CSTR(fname));
 
     new = gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)), 
 									  data, width, height);

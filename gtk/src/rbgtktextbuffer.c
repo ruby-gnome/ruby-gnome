@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -57,7 +57,7 @@ txt_set_text(argc, argv, self)
     VALUE text, len;
     rb_scan_args(argc, argv, "11", &text, &len);
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
-                             STR2CSTR(text),
+                             RVAL2CSTR(text),
                              NIL_P(len) ? RSTRING(text)->len : NUM2INT(len));
     return self;
 }

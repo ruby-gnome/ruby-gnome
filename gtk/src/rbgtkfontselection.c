@@ -1,9 +1,10 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************
 
   rbgtkfontselection.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 **********************************************************/
@@ -24,7 +25,7 @@ fs_get_font(self)
     VALUE self;
 {
     return BOXED2RVAL(gtk_font_selection_get_font(
-                GTK_FONT_SELECTION(RVAL2GOBJ(self))), GDK_TYPE_FONT);
+                          GTK_FONT_SELECTION(RVAL2GOBJ(self))), GDK_TYPE_FONT);
 }
 #endif
 
@@ -32,8 +33,10 @@ static VALUE
 fs_get_font_name(self)
     VALUE self;
 {
-    return CSTR2OBJ(gtk_font_selection_get_font_name(
-                GTK_FONT_SELECTION(RVAL2GOBJ(self))));
+    gchar* name = gtk_font_selection_get_font_name(
+        GTK_FONT_SELECTION(RVAL2GOBJ(self)));
+    
+    return name ? CSTR2RVAL(name) : Qnil;
 }
 
 static VALUE
@@ -41,8 +44,8 @@ fs_set_font_name(self, name)
     VALUE self, name;
 {
     gboolean retval = gtk_font_selection_set_font_name(
-                            GTK_FONT_SELECTION(RVAL2GOBJ(self)),
-                            STR2CSTR(name));
+        GTK_FONT_SELECTION(RVAL2GOBJ(self)),
+        RVAL2CSTR(name));
     return retval ? Qtrue : Qfalse;
 }
 
@@ -50,8 +53,10 @@ static VALUE
 fs_get_preview_text(self)
     VALUE self;
 {
-    return CSTR2OBJ(gtk_font_selection_get_preview_text(
-                GTK_FONT_SELECTION(RVAL2GOBJ(self))));
+    G_CONST_RETURN gchar* text = gtk_font_selection_get_preview_text(
+        GTK_FONT_SELECTION(RVAL2GOBJ(self)));
+
+    return text ? CSTR2RVAL(text) : Qnil;
 }
 
 static VALUE
@@ -60,7 +65,7 @@ fs_set_preview_text(self, text)
 {
     gtk_font_selection_set_preview_text(
         GTK_FONT_SELECTION(RVAL2GOBJ(self)),
-        STR2CSTR(text));
+        RVAL2CSTR(text));
     return Qnil;
 }
 

@@ -4,7 +4,7 @@
   rbgtkframe.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,7 +21,7 @@ frame_initialize(argc, argv, self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
-    RBGTK_INITIALIZE(self, gtk_frame_new(NIL_P(label)?NULL:STR2CSTR(label)));
+    RBGTK_INITIALIZE(self, gtk_frame_new(NIL_P(label)?NULL:RVAL2CSTR(label)));
     return Qnil;
 }
 
@@ -29,7 +29,7 @@ static VALUE
 frame_set_label(self, label)
     VALUE self, label;
 {
-    gtk_frame_set_label(GTK_FRAME(RVAL2GOBJ(self)), STR2CSTR(label));
+    gtk_frame_set_label(GTK_FRAME(RVAL2GOBJ(self)), RVAL2CSTR(label));
     return self;
 }
 

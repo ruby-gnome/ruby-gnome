@@ -4,7 +4,7 @@
   rbgdkkeyval.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -18,14 +18,14 @@ keyval_to_name(self, keyval)
     VALUE self, keyval;
 {
     gchar* name = gdk_keyval_name(NUM2INT(keyval));
-    return CSTR2OBJ(name);
+    return name ? CSTR2RVAL(name) : Qnil;
 }
 
 static VALUE
 keyval_from_name(self, keyval_name)
     VALUE self, keyval_name;
 {
-    return INT2NUM(gdk_keyval_from_name(STR2CSTR(keyval_name)));
+    return INT2NUM(gdk_keyval_from_name(RVAL2CSTR(keyval_name)));
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtktooltips.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -31,8 +31,8 @@ ttips_set_tip(self, win, text, priv)
 {
     gtk_tooltips_set_tip(GTK_TOOLTIPS(RVAL2GOBJ(self)),
 			 GTK_WIDGET(RVAL2GOBJ(win)),
-			 NIL_P(text)?NULL:STR2CSTR(text),
-			 NIL_P(priv)?NULL:STR2CSTR(priv));
+			 NIL_P(text)?NULL:RVAL2CSTR(text),
+			 NIL_P(priv)?NULL:RVAL2CSTR(priv));
 
     return self;
 }

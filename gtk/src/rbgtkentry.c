@@ -4,7 +4,7 @@
   rbgtkentry.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,7 +34,7 @@ static VALUE
 entry_set_text(self, text)
     VALUE self, text;
 {
-    gtk_entry_set_text(GTK_ENTRY(RVAL2GOBJ(self)), STR2CSTR(text));
+    gtk_entry_set_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
 
     return self;
 }
@@ -43,7 +43,7 @@ static VALUE
 entry_append_text(self, text)
     VALUE self, text;
 {
-    gtk_entry_append_text(GTK_ENTRY(RVAL2GOBJ(self)), STR2CSTR(text));
+    gtk_entry_append_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
     return self;
 }
 
@@ -51,7 +51,7 @@ static VALUE
 entry_prepend_text(self, text)
     VALUE self, text;
 {
-    gtk_entry_prepend_text(GTK_ENTRY(RVAL2GOBJ(self)), STR2CSTR(text));
+    gtk_entry_prepend_text(GTK_ENTRY(RVAL2GOBJ(self)), RVAL2CSTR(text));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -129,7 +129,7 @@ gdkdraw_draw_rgb_image(self, gc, x, y, w, h, dither, buf, rowstride)
 					   NUM2INT(x), NUM2INT(y),
 					   NUM2INT(w), NUM2INT(h),
 					   NUM2INT(dither),
-					   STR2CSTR(buf),
+					   RVAL2CSTR(buf),
 					   NUM2INT(rowstride));
     return self;
 }
@@ -143,7 +143,7 @@ gdkdraw_draw_rgb_image_dithalign(self, gc, x, y, w, h, dither, buf, rowstride,
 								 NUM2INT(x), NUM2INT(y),
 								 NUM2INT(w), NUM2INT(h),
 								 NUM2INT(dither),
-								 STR2CSTR(buf),
+								 RVAL2CSTR(buf),
 								 NUM2INT(rowstride),
 								 NUM2INT(xdith), NUM2INT(ydith));
     return self;
@@ -157,7 +157,7 @@ gdkdraw_draw_gray_image(self, gc, x, y, w, h, dither, buf, rowstride)
 						NUM2INT(x), NUM2INT(y),
 						NUM2INT(w), NUM2INT(h),
 						NUM2INT(dither),
-						STR2CSTR(buf),
+						RVAL2CSTR(buf),
 						NUM2INT(rowstride));
     return self;
 }
@@ -170,7 +170,7 @@ gdkdraw_draw_rgb_32_image(self, gc, x, y, w, h, dither, buf, rowstride)
 						  NUM2INT(x), NUM2INT(y),
 						  NUM2INT(w), NUM2INT(h),
 						  NUM2INT(dither),
-						  STR2CSTR(buf),
+						  RVAL2CSTR(buf),
 						  NUM2INT(rowstride));
     return self;
 }

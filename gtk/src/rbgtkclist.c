@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,7 +43,7 @@ clist_initialize(self, titles)
 		len = RARRAY(titles)->len;
 		buf = ALLOCA_N(char*, len);
 		for (i=0; i<len; i++) {
-			buf[i] = STR2CSTR(RARRAY(titles)->ptr[i]);
+			buf[i] = RVAL2CSTR(RARRAY(titles)->ptr[i]);
 		}
 		widget = gtk_clist_new_with_titles(len, buf);
     }
@@ -143,7 +143,7 @@ clist_set_col_title(self, col, title)
 {
     gtk_clist_set_column_title(GTK_CLIST(RVAL2GOBJ(self)),
 							   NUM2INT(col),
-							   STR2CSTR(title));
+							   RVAL2CSTR(title));
     return self;
 }
 
@@ -275,7 +275,7 @@ clist_set_text(self, row, col, text)
 {
     gtk_clist_set_text(GTK_CLIST(RVAL2GOBJ(self)),
 					   NUM2INT(row), NUM2INT(col),
-					   STR2CSTR(text));
+					   RVAL2CSTR(text));
     return self;
 }
 
@@ -296,7 +296,7 @@ clist_set_pixtext(self, row, col, text, spacing, pixmap, mask)
 {
     gtk_clist_set_pixtext(GTK_CLIST(RVAL2GOBJ(self)),
 						  NUM2INT(row), NUM2INT(col),
-						  STR2CSTR(text),
+						  RVAL2CSTR(text),
 						  NUM2INT(spacing),
 						  GDK_PIXMAP(RVAL2GOBJ(pixmap)),
 						  GDK_BITMAP(RVAL2GOBJ(mask)));
@@ -385,7 +385,7 @@ clist_append(self, text)
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:RVAL2CSTR(RARRAY(text)->ptr[i]);
     }
     i = gtk_clist_append(GTK_CLIST(RVAL2GOBJ(self)), buf);
     return INT2FIX(i);
@@ -405,7 +405,7 @@ clist_prepend(self, text)
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:RVAL2CSTR(RARRAY(text)->ptr[i]);
     }
     i = gtk_clist_prepend(GTK_CLIST(RVAL2GOBJ(self)), buf);
     return INT2FIX(i);
@@ -425,7 +425,7 @@ clist_insert(self, row, text)
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:RVAL2CSTR(RARRAY(text)->ptr[i]);
     }
     i = gtk_clist_insert(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row), buf);
     return INT2FIX(i);
@@ -735,8 +735,9 @@ static VALUE
 clist_get_column_title(self, column)
 	VALUE self, column;
 {
-    return CSTR2OBJ(gtk_clist_get_column_title(GTK_CLIST(RVAL2GOBJ(self)),
-                                               NUM2INT(column)));
+    gchar* title = gtk_clist_get_column_title(GTK_CLIST(RVAL2GOBJ(self)),
+                                              NUM2INT(column));
+    return title ? CSTR2RVAL(title) : Qnil;
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgdkfont.c -
 
   $Author: mutoh $
-  $Date: 2002/09/10 17:42:54 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -19,7 +19,7 @@ static VALUE
 font_load_font(self, name)
      VALUE self, name;
 {
-  GdkFont *font = gdk_font_load(STR2CSTR(name));
+  GdkFont *font = gdk_font_load(RVAL2CSTR(name));
   return BOXED2RVAL(font, GDK_TYPE_FONT);
 }
 
@@ -27,7 +27,7 @@ static VALUE
 font_load_fontset(self, name)
      VALUE self, name;
 {
-  GdkFont *font = gdk_fontset_load(STR2CSTR(name));
+  GdkFont *font = gdk_fontset_load(RVAL2CSTR(name));
   return BOXED2RVAL(font, GDK_TYPE_FONT);
 }
 
@@ -35,21 +35,21 @@ static VALUE
 font_string_width(self, str)
      VALUE self, str;
 {
-  return INT2NUM(gdk_string_width(_SELF(self), STR2CSTR(str)));
+  return INT2NUM(gdk_string_width(_SELF(self), RVAL2CSTR(str)));
 }
 
 static VALUE
 font_string_measure(self, str)
      VALUE self, str;
 {
-  return INT2NUM(gdk_string_measure(_SELF(self), STR2CSTR(str)));
+  return INT2NUM(gdk_string_measure(_SELF(self), RVAL2CSTR(str)));
 }
 
 static VALUE
 font_string_height(self, str)
      VALUE self, str;
 {
-  return INT2NUM(gdk_string_height(_SELF(self), STR2CSTR(str)));
+  return INT2NUM(gdk_string_height(_SELF(self), RVAL2CSTR(str)));
 }
 
 static VALUE
@@ -88,7 +88,7 @@ font_string_extents(self, str)
 {
   gint lbearing, rbearing, width, ascent, descent;
 
-  gdk_string_extents(_SELF(self), STR2CSTR(str),
+  gdk_string_extents(_SELF(self), RVAL2CSTR(str),
                      &lbearing, &rbearing, &width, &ascent, &descent);
   return rb_ary_new3(5,
                      INT2NUM(lbearing), INT2NUM(rbearing),
@@ -128,7 +128,7 @@ font_text_width(self, text, length)
      VALUE self, text, length;
 {
   return INT2NUM(gdk_text_width(_SELF(self),
-                                STR2CSTR(text),
+                                RVAL2CSTR(text),
                                 NUM2INT(length)));
 }
 
@@ -137,7 +137,7 @@ font_text_measure(self, text, length)
      VALUE self, text, length;
 {
   return INT2NUM(gdk_text_measure(_SELF(self),
-                                  STR2CSTR(text),
+                                  RVAL2CSTR(text),
                                   NUM2INT(length)));
 }
 
@@ -146,7 +146,7 @@ font_text_height(self, text, length)
      VALUE self, text, length;
 {
   return INT2NUM(gdk_text_height(_SELF(self), 
-                                 STR2CSTR(text),
+                                 RVAL2CSTR(text),
                                  NUM2INT(length)));
 }
 

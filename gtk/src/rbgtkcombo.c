@@ -4,7 +4,7 @@
   rbgtkcombo.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -63,7 +63,7 @@ combo_item_string(self, item, val)
 {
     gtk_combo_set_item_string(GTK_COMBO(RVAL2GOBJ(self)),
 			      GTK_ITEM(RVAL2GOBJ(item)),
-			      NIL_P(val)?NULL:STR2CSTR(val));
+			      NIL_P(val)?NULL:RVAL2CSTR(val));
     return self;
 }
 
@@ -77,10 +77,10 @@ combo_popdown_strings(self, ary)
     Check_Type(ary, T_ARRAY);
     for (i=0; i<RARRAY(ary)->len; i++) {
 	/* check to avoid memory leak */
-	STR2CSTR(RARRAY(ary)->ptr[i]);
+	RVAL2CSTR(RARRAY(ary)->ptr[i]);
     }
     for (i=0; i<RARRAY(ary)->len; i++) {
-	glist = g_list_append(glist, STR2CSTR(RARRAY(ary)->ptr[i]));
+	glist = g_list_append(glist, RVAL2CSTR(RARRAY(ary)->ptr[i]));
     }
 
     gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);

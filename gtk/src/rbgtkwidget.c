@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/09/11 16:35:59 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -141,7 +141,7 @@ widget_add_accel(self, sig, accel, key, mod, flag)
 	VALUE self, sig, accel, key, mod, flag;
 {
     gtk_widget_add_accelerator(_SELF(self),
-                               STR2CSTR(sig),
+                               RVAL2CSTR(sig),
                                GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
                                NUM2INT(key),
                                NUM2INT(mod),
@@ -243,7 +243,7 @@ static VALUE
 widget_set_name(self, name)
     VALUE self, name;
 {
-    gtk_widget_set_name(_SELF(self), STR2CSTR(name));
+    gtk_widget_set_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
 
@@ -675,7 +675,7 @@ static VALUE
 widget_set_composite_name(self, name)
     VALUE self, name;
 {
-    gtk_widget_set_composite_name(_SELF(self), STR2CSTR(name));
+    gtk_widget_set_composite_name(_SELF(self), RVAL2CSTR(name));
     return Qnil;
 }
 
@@ -718,7 +718,7 @@ get_target_entry(targets)
         e_flags = rb_ary_entry(ary, 1);
         e_info = rb_ary_entry(ary, 2);
 
-		entries[i].target = NIL_P(e_target) ? NULL:STR2CSTR(e_target);
+		entries[i].target = NIL_P(e_target) ? NULL:RVAL2CSTR(e_target);
 		entries[i].flags = NIL_P(e_flags) ? 0:NUM2INT(e_flags);
 		entries[i].info = NIL_P(e_info) ? 0:NUM2INT(e_info);
 

@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -22,7 +22,7 @@ ifact_initialize(self, type, path, accel)
     VALUE type, path, accel;
 {
     RBGTK_INITIALIZE(self, gtk_item_factory_new(FIX2INT(type),
-												STR2CSTR(path),
+												RVAL2CSTR(path),
 												GTK_ACCEL_GROUP(RVAL2GOBJ(accel))));
     return Qnil;
 }
@@ -108,9 +108,9 @@ ifact_create_item(argc, argv, self)
 
     entry = ALLOC(GtkItemFactoryEntry);
 
-    entry->path = NIL_P(path)?NULL:STR2CSTR(path);
-    entry->accelerator = NIL_P(accel)?NULL:STR2CSTR(accel);
-    entry->item_type = NIL_P(item_type)?NULL:STR2CSTR(item_type);
+    entry->path = NIL_P(path)?NULL:RVAL2CSTR(path);
+    entry->accelerator = NIL_P(accel)?NULL:RVAL2CSTR(accel);
+    entry->item_type = NIL_P(item_type)?NULL:RVAL2CSTR(item_type);
     entry->callback = item_exec_callback_wrap;
     if (menuitem_type_check(entry->item_type) != 0) {
         action = rb_rescue((VALUE(*)())rb_f_lambda, 0, NULL, 0);
@@ -167,9 +167,9 @@ ifact_create_items(argc, argv, self)
         rb_type = rb_ary_entry(rb_entry, 2);
         rb_func = rb_ary_entry(rb_entry, 3);
         rb_data = rb_ary_entry(rb_entry, 4);
-        entries[i].path = NIL_P(rb_path)?NULL:STR2CSTR(rb_path);
-        entries[i].accelerator = NIL_P(rb_accel)?NULL:STR2CSTR(rb_accel);
-        entries[i].item_type = NIL_P(rb_type)?NULL:STR2CSTR(rb_type);
+        entries[i].path = NIL_P(rb_path)?NULL:RVAL2CSTR(rb_path);
+        entries[i].accelerator = NIL_P(rb_accel)?NULL:RVAL2CSTR(rb_accel);
+        entries[i].item_type = NIL_P(rb_type)?NULL:RVAL2CSTR(rb_type);
         if (menuitem_type_check(entries[i].item_type) != 0) {
             if (!NIL_P(rb_func)) {
                 entries[i].callback = items_exec_callback_wrap;
@@ -195,7 +195,7 @@ ifact_get_gobject(self, path)
     VALUE menuobj;
 
     p_menu = gtk_item_factory_get_widget(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
-										 STR2CSTR(path));
+										 RVAL2CSTR(path));
     if (GTK_IS_OPTION_MENU(p_menu))
         menuobj = rb_obj_alloc(GTYPE2CLASS(GTK_TYPE_OPTION_MENU));
     else if (GTK_IS_MENU(p_menu))
@@ -216,7 +216,7 @@ ifact_get_item(self, path)
     VALUE item;
 
     p_item = gtk_item_factory_get_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
-                                       STR2CSTR(path));
+                                       RVAL2CSTR(path));
     item = distinguish_item_type(p_item);
     RBGTK_INITIALIZE(item, p_item);
 
@@ -228,7 +228,7 @@ ifact_delete_item(self, path)
     VALUE self, path;
 {
     gtk_item_factory_delete_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
-                                 STR2CSTR(path));
+                                 RVAL2CSTR(path));
     return Qnil;
 }
 

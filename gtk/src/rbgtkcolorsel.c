@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -107,7 +107,7 @@ static VALUE
 cdialog_initialize(self, title)
     VALUE self, title;
 {
-    RBGTK_INITIALIZE(self, gtk_color_selection_dialog_new(STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gtk_color_selection_dialog_new(RVAL2CSTR(title)));
     return Qnil;
 }
 

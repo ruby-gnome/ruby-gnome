@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/14 15:43:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -249,7 +249,7 @@ static VALUE
 gdkwin_set_title(self, title)
     VALUE self, title;
 {
-	gdk_window_set_title(_SELF(self),STR2CSTR(title));
+	gdk_window_set_title(_SELF(self),RVAL2CSTR(title));
 	return self;
 }
 
@@ -301,7 +301,7 @@ static VALUE
 gdkwin_set_icon_name(self, name)
     VALUE self, name;
 {
-    gdk_window_set_icon_name(_SELF(self), STR2CSTR(name));
+    gdk_window_set_icon_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
 
@@ -451,7 +451,7 @@ static VALUE
 gdkwin_set_role(self, role)
     VALUE self, role;
 {
-    gdk_window_set_role(_SELF(self), STR2CSTR(role));
+    gdk_window_set_role(_SELF(self), RVAL2CSTR(role));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgtktreeitem.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/14 15:43:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@ titem_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &label) == 1) {
-		widget = gtk_tree_item_new_with_label(STR2CSTR(label));
+		widget = gtk_tree_item_new_with_label(RVAL2CSTR(label));
     }
     else {
 		widget = gtk_tree_item_new();
