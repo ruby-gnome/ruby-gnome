@@ -1,3 +1,9 @@
+2003-08-01  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgstparse.c, tests/tc_parse.rb: New files.
+	* src/rbgst.c: Initializes the Gst::Parse module.
+	* src/rbgstmediainfo.c: Removed a debug warning.
+
 2003-07-30  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgstpad.c: Added method query.
