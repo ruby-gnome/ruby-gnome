@@ -308,6 +308,49 @@ static VALUE rb_gst_pad_is_negotiating(self)
     return rb_funcall(self, rb_intern("flag?"), 1, constFlagNegotiating);
 }
 
+/*
+ *  Method: query(aQueryType, aFormat = Gst::Format::DEFAULT) -> aFixnum
+ *
+ *  Performs a query on the pad.
+ *
+ *  Meaningful query types are:
+ *      - Gst::QueryType::TOTAL
+ *      - Gst::QueryType::POSITION
+ *      - Gst::QueryType::LATENCY
+ *      - Gst::QueryType::JITTER
+ *      - Gst::QueryType::START
+ *      - Gst::QueryType::SEGMENT_END
+ *      - Gst::QueryType::RATE
+ *
+ *  Meaningful formats are:
+ *      - Gst::Format::DEFAULT
+ *      - Gst::Format::BYTES
+ *      - Gst::Format::TIME
+ *      - Gst::Format::BUFFERS
+ *      - Gst::Format::PERCENT
+ *      - Gst::Format::UNITS
+ *
+ *  Returns a fixnum, or nil if the query could not be performed.
+ */
+static VALUE rb_gst_pad_query(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
+{
+    VALUE query_type, format;
+    GstFormat gstformat;
+    gint64 value;
+
+    rb_scan_args(argc, argv, "11", &query_type, &format);
+    gstformat = NIL_P(format) ? GST_FORMAT_DEFAULT : FIX2INT(format);
+    return gst_pad_query(RGST_PAD(self),
+                         FIX2INT(query_type),
+                         &gstformat,
+                         &value)
+        ? INT2FIX(value)
+        : Qnil;
+}
+
+
 void Init_gst_pad(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_PAD, "Pad", mGst);
     
@@ -349,5 +392,7 @@ void Init_gst_pad(void) {
 
     rb_define_method(c, "disabled?",    rb_gst_pad_is_disabled,    0);
     rb_define_method(c, "negotiating?", rb_gst_pad_is_negotiating, 0);
+
+    rb_define_method(c, "query", rb_gst_pad_query, -1);
 }
 
