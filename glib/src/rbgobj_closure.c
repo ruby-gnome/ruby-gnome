@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2002/09/25 05:41:06 $
+  $Author: mutoh $
+  $Date: 2002/09/29 12:48:20 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -113,7 +113,7 @@ static VALUE
 closure_in_marshal(self)
     VALUE self;
 {
-    GClosure* closure = RVAL2BOXED(self);
+    GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return closure->in_marshal ? Qtrue : Qfalse;
 }
 
@@ -121,7 +121,7 @@ static VALUE
 closure_is_invalid(self)
     VALUE self;
 {
-    GClosure* closure = RVAL2BOXED(self);
+    GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return closure->is_invalid ? Qtrue : Qfalse;
 }
 

@@ -1,3 +1,8 @@
+2002-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_closure.c, src/rbgobj_boxed.c, src/rbgobject.h:
+	Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).
+
 2002-09-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c (marker_remove): fix a bug which can cause

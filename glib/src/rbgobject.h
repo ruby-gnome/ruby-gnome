@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Author: mutoh $
+  $Date: 2002/09/29 12:48:20 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -53,7 +53,7 @@ extern "C" {
 #define GOBJ2RVAL(gobj) (rbgobj_ruby_object_from_instance(gobj))
 #define GVAL2RVAL(v)    (rbgobj_gvalue_to_rvalue(v))
 
-#define RVAL2BOXED(obj)         (rbgobj_boxed_get(obj))
+#define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
 
 typedef struct {
@@ -115,7 +115,7 @@ extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
 
 /* rbgobj_boxed.c */
 extern VALUE rbgobj_boxed_create(VALUE klass);
-extern gpointer rbgobj_boxed_get(VALUE obj);
+extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
 
 #ifdef __cplusplus

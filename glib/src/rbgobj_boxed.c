@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: sakai $
-  $Date: 2002/09/24 16:47:25 $
+  $Author: mutoh $
+  $Date: 2002/09/29 12:48:20 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -88,14 +88,19 @@ rbgobj_boxed_initialize(obj, boxed)
 }
 
 gpointer
-rbgobj_boxed_get(self)
-    VALUE self;
+rbgobj_boxed_get(obj, gtype)
+    VALUE obj, gtype;
 {
     boxed_holder* holder;
-    Data_Get_Struct(self, boxed_holder, holder);
+    Data_Get_Struct(obj, boxed_holder, holder);
+
+    if (!RTEST(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
+        rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
+                 rb_class2name(CLASS_OF(obj)), 
+                 rb_class2name(GTYPE2CLASS(gtype)));
 
     if (!holder->boxed)
-        rb_raise(rb_eArgError, "uninitialize %s", rb_class2name(CLASS_OF(self)));
+        rb_raise(rb_eArgError, "uninitialize %s", rb_class2name(CLASS_OF(obj)));
 
     return holder->boxed;
 }
