@@ -1,3 +1,13 @@
+2004-04-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Fix a bug which GLib.__add_one_arg_setter(klass) 
+	doen't work for module function and moved from src/rbgutil.c.
+
+2004-04-30  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/rbglib_utils.c: Added.
+	* src/rbglib.c: Follow rbglib_utils.c added.
+
 2004-04-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_type.c: Accept a ruby class when GType[...] is required.

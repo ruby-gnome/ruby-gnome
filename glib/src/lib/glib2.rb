@@ -15,11 +15,41 @@ if /mingw|mswin/ =~ RUBY_PLATFORM
   end
 end
 
+module GLib
+  def self.__add_one_arg_setter(klass)
+    #for Instance methods.
+    ary = klass.instance_methods(false)
+    ary.each do |m|
+      if /^set_(.*)/ =~ m and not ary.include? "#{$1}=" and klass.instance_method(m).arity == 1
+	begin
+          klass.module_eval("def #{$1}=(val); set_#{$1}(val); val; end\n")
+        rescue SyntaxError
+          $stderr.print "Couldn't create #{klass}\##{$1}=(v).\n" if $DEBUG
+        end
+      end
+    end
+    #for Class methods/Module functions.
+    if Object.method(:methods).arity == -1
+      ary = klass.methods(false)
+    else
+      ary = klass.methods
+    end
+    ary.each do |m|
+      if /^set_(.*)/ =~ m and not ary.include? "#{$1}=" and klass.method(m).arity == 1
+	begin
+          klass.module_eval("def self.#{$1}=(val); set_#{$1}(val); val; end\n")
+        rescue SyntaxError
+          $stderr.print "Couldn't create #{klass}\##{$1}=(v).\n" if $DEBUG
+        end
+      end
+    end
+  end
+end
+
 require 'glib2.so'
 
-
 module GLib
-
+  
   class Type
 
     def decendants

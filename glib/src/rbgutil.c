@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/03/23 18:22:06 $
+  $Date: 2004/04/30 10:50:02 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -145,30 +145,4 @@ Init_gutil()
     id_to_a = rb_intern("to_a");
     id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
     id_allocate = rb_intern("allocate");
-
-    rb_eval_string(
-        "module GLib\n"
-        "  def self.__add_one_arg_setter(klass)\n"
-        "    ary = klass.instance_methods(false)\n"
-#ifdef HAVE_NODE_ATTRASGN
-        "    klass.module_eval do\n"
-        "      ary.each do |m|\n"
-        "        if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and instance_method(m).arity == 1\n"
-        "          alias_method \"#{$1}=\", \"set_#{$1}\"\n"
-        "        end\n"
-        "      end\n"
-        "    end\n"
-#else
-        "    ary.each do |m|\n"
-        "      if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and klass.instance_method(m).arity == 1\n"
-	"        begin\n"
-        "          klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
-        "        rescue SyntaxError\n"
-        "          $stderr.print \"Couldn't create #{klass}\\##{$1}=(v).\\n\" if $DEBUG\n"
-        "        end\n"
-        "      end\n"
-        "    end\n"
-#endif
-        "  end\n"
-        "end\n");
 }
