@@ -577,10 +577,10 @@ rb_gst_element_query (int argc, VALUE *argv, VALUE self)
 	gint64 value;
 
 	rb_scan_args (argc, argv, "11", &query_type, &format);
-	gstformat = NIL_P (format) ? GST_FORMAT_DEFAULT : FIX2INT (format);
+	gstformat = NIL_P (format) ? GST_FORMAT_DEFAULT : RVAL2GENUM (format, GST_TYPE_FORMAT);
 	
 	if (gst_element_query (RGST_ELEMENT (self),
-			       FIX2INT (query_type),
+			       RVAL2GENUM (query_type, GST_TYPE_QUERY_TYPE),
 			       &gstformat, &value)) {
 		format = INT2FIX (gstformat);		
 		return ULL2NUM (value);
