@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-26
  *
  *****************************************************************************/
 
@@ -206,10 +206,10 @@ create_symbolic_link(self, uri, reference)
 	if (RTEST(rb_obj_is_kind_of(reference, g_gvfs_uri))) {
 		gchar *str;
 
-		str = gnome_vfs_uri_to_string(RVAL2GVSURI(reference));
+		str = gnome_vfs_uri_to_string(RVAL2GVFSURI(reference),
+					      GNOME_VFS_URI_HIDE_NONE);
 		result = GVFSRESULT2RVAL(
-			gnome_vfs_create_symbolic_link(str,
-						       RVAL2CSTR(reference)));
+				gnome_vfs_create_symbolic_link(tmp, str));
 		g_free(str);
 	} else {
 		result = GVFSRESULT2RVAL(
@@ -473,15 +473,15 @@ file_m_set_stat(self, uri, info, mask)
 
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_set_file_info_uri(RVAL2GVFSURI(uri),
-						     RVAL2GVFSINFO(info),
+						     RVAL2GVFSFILEINFO(info),
 						     FIX2INT(mask));
 	} else {
 		result = gnome_vfs_set_file_info(RVAL2CSTR(uri),
-						 RVAL2GVFSINFO(info),
+						 RVAL2GVFSFILEINFO(info),
 						 FIX2INT(mask));
 	}
 
-	return CHECK_RESULT(result, GVFSFILEINFO2RVAL(info));
+	return GVFSRESULT2RVAL(result);
 }
 
 static VALUE
@@ -510,18 +510,23 @@ file_stat(argc, argv, self)
 static VALUE
 apply_set_info(paths, info, mask)
 	VALUE paths;
-	int mask;
+	GnomeVFSFileInfo *info;
+	GnomeVFSSetFileInfoMask mask;
 {
+	VALUE path;
 	int i, n;
+	GnomeVFSResult result;
 
+	Check_Type(paths, T_ARRAY);
 	for (i = 0, n = RARRAY(paths)->len; i < n; i++) {
-		if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+		path = rb_ary_entry(paths, i);
+		if (RTEST(rb_obj_is_kind_of(path, g_gvfs_uri))) {
 			result = GVFSRESULT2RVAL(
-				gnome_vfs_set_file_info_uri(RVAL2GVFSURI(uri),
+				gnome_vfs_set_file_info_uri(RVAL2GVFSURI(path),
 					info, mask));
 		} else {
 			result = GVFSRESULT2RVAL(
-				gnome_vfs_set_file_info(RVAL2CSTR(uri), info,
+				gnome_vfs_set_file_info(RVAL2CSTR(path), info,
 							mask));
 		}
 		if (result != GNOME_VFS_OK) {
@@ -539,8 +544,7 @@ file_m_chmod(argc, argv, self)
 	VALUE self;
 {
 	VALUE r_mode, paths;
-	GnomeVFSInfo *info;
-	GnomeVFSResult result;
+	GnomeVFSFileInfo *info;
 	VALUE value;
 
 	info = gnome_vfs_file_info_new();
@@ -559,8 +563,7 @@ file_m_chown(argc, argv, self)
 	VALUE self;
 {
 	VALUE r_owner, r_group, paths;
-	GnomeVFSInfo *info;
-	GnomeVFSResult result;
+	GnomeVFSFileInfo *info;
 	VALUE value;
 
 	info = gnome_vfs_file_info_new();

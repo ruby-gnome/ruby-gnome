@@ -1,0 +1,14 @@
+2003-07-26  Nikolai Weibull  <lone-star@home.se>
+
+	* NEWS: Removed file.
+
+2003-07-24  Nikolai Weibull  <lone-star@home.se>
+
+	* COPYING.LIB,ChangeLog,NEWS,README,extconf.rb,src,tests,
+	src/gnomevfs-application-registry.c,src/gnomevfs-directory.c,
+	src/gnomevfs-directory.h,src/gnomevfs-file.c,src/gnomevfs-file.h,
+	src/gnomevfs-fileinfo.c,src/gnomevfs-fileinfo.h,src/gnomevfs-mime.c,
+	src/gnomevfs-monitor.c,src/gnomevfs-monitor.h,src/gnomevfs-result.c,
+	src/gnomevfs-result.h,src/gnomevfs-uri.c,src/gnomevfs-uri.h,
+	src/gnomevfs.c,src/gnomevfs.h,tests/test1.rb,tests/test2.rb,
+	tests/test3.rb: Initial import.

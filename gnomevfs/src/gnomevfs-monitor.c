@@ -20,11 +20,13 @@
  *
  * Author: Nikolai Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-26
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
+
+#include "gnomevfs.h"
 
 /* Defines *******************************************************************/
 
@@ -82,7 +84,7 @@ monitor_callback(handle, monitor_uri, info_uri, event_type, data)
 }
 
 static VALUE
-monitor_initialize(argc, argv, self);
+monitor_initialize(argc, argv, self)
 	int argc;
 	VALUE *argv;
 	VALUE self;
@@ -151,8 +153,8 @@ Init_gnomevfs_monitor(m_gvfs)
 
 	rb_define_singleton_method(gvfs_monitor, "initialize",
 				   monitor_initialize, -1);
-	rb_define_singelton_method(gvfs_monitor, "add", monitor_add, -1);
-	rb_define_singelton_method(gvfs_monitor, "cancel", monitor_cancel, 0);
+	rb_define_singleton_method(gvfs_monitor, "add", monitor_add, -1);
+	rb_define_singleton_method(gvfs_monitor, "cancel", monitor_cancel, 0);
 
 	rb_define_method(gvfs_monitor, "remove", monitor_cancel, 0);
 
@@ -168,7 +170,7 @@ Init_gnomevfs_monitor(m_gvfs)
 	rb_define_const(gvfs_monitor, "EVENT_STARTEXECUTING",
 			INT2FIX(GNOME_VFS_MONITOR_EVENT_STARTEXECUTING));
 	rb_define_const(gvfs_monitor, "EVENT_STOPTEXECUTING",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_STOPTEXECUTING));
+			INT2FIX(GNOME_VFS_MONITOR_EVENT_STOPEXECUTING));
 	rb_define_const(gvfs_monitor, "EVENT_CREATED",
 			INT2FIX(GNOME_VFS_MONITOR_EVENT_CREATED));
 	rb_define_const(gvfs_monitor, "EVENT_METADATA_CHANGED",

@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-26
  *
  *****************************************************************************/
 
@@ -303,7 +303,7 @@ static VALUE
 fileinfo_link_count(self)
 	VALUE self;
 {
-	return UINT2FIX(_SELF(self)->link_count);
+	return UINT2NUM(_SELF(self)->link_count);
 }
 
 static VALUE
@@ -348,14 +348,6 @@ fileinfo_fifo_p(self)
 	VALUE self;
 {
 	return CBOOL2RVAL(_SELF(self)->type == GNOME_VFS_FILE_TYPE_FIFO);
-}
-
-static VALUE
-fileinfo_symlink_p(self)
-	VALUE self;
-{
-	return CBOOL2RVAL(
-		_SELF(self)->type == GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK);
 }
 
 static VALUE
@@ -492,6 +484,8 @@ Init_gnomevfs_file_info(m_gvfs)
 
 	rb_define_method(g_gvs_fileinfo, "initialize", fileinfo_initialize, 0);
 	rb_define_method(g_gvs_fileinfo, "symlink?", fileinfo_is_symlink, 0);
+	rb_define_method(g_gvs_fileinfo, "symbolic_link?", fileinfo_is_symlink,
+			 0);
 	rb_define_method(g_gvs_fileinfo, "set_symlink", fileinfo_set_symlink,
 			 1);
 	rb_define_method(g_gvs_fileinfo, "local?", fileinfo_is_local, 0);
@@ -534,9 +528,7 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_method(g_gvs_fileinfo, "regular?", fileinfo_regular_p, 0);
 	rb_define_method(g_gvs_fileinfo, "pipe?", fileinfo_fifo_p, 0);
 	rb_define_method(g_gvs_fileinfo, "fifo?", fileinfo_fifo_p, 0);
-	rb_define_method(g_gvs_fileinfo, "socket?", fileinfo_socket, 0);
-	rb_define_method(g_gvs_fileinfo, "symbolic_link?", fileinfo_symlink,
-			 0);
+	rb_define_method(g_gvs_fileinfo, "socket?", fileinfo_socket_p, 0);
 	/* XXX: these do the same thing for now... */
 	rb_define_method(g_gvs_fileinfo, "executable_real?",
 			 fileinfo_executable_real_p, 0);

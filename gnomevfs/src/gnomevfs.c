@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-26
  *
  *****************************************************************************/
 
@@ -53,7 +53,8 @@ gnomevfs_initialized(void)
 static VALUE
 gnomevfs_shutdown(void)
 {
-	return CBOOL2RVAL(gnome_vfs_shutdown());
+	gnome_vfs_shutdown();
+	return Qnil;
 }
 
 static VALUE
