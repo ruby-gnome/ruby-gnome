@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2003/04/04 18:08:12 $
+  $Author: sakai $
+  $Date: 2003/04/13 08:39:04 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -223,10 +223,10 @@ static VALUE
 txt_delete_mark(self, mark)
     VALUE self, mark;
 {
-    if(RVAL2GTYPE(mark) == G_TYPE_STRING)
-        gtk_text_buffer_delete_mark_by_name(_SELF(self), RVAL2CSTR(mark));
-    else
+    if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK)))
         gtk_text_buffer_delete_mark(_SELF(self), RVAL2MARK(mark));
+    else
+        gtk_text_buffer_delete_mark_by_name(_SELF(self), RVAL2CSTR(mark));
     return self;
 }
 
@@ -391,10 +391,10 @@ static VALUE
 txt_move_mark(self, mark, where)
     VALUE self, mark, where;
 {
-    if(RVAL2GTYPE(mark) == G_TYPE_STRING)
-        gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(mark), RVAL2ITR(where));
-    else
+    if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK)))
         gtk_text_buffer_move_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
+    else
+        gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(mark), RVAL2ITR(where));
     return self;
 }
 
@@ -438,16 +438,16 @@ txt_insert_with_tags(argc, argv, self)
     for(i=0; i<tarray->len; i++)
     {
         GtkTextTag *tag;
-        if(RVAL2GTYPE(tarray->ptr[i]) == G_TYPE_STRING){
+
+        if (rb_obj_is_kind_of(tarray->ptr[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
+            tag = RVAL2GOBJ(tarray->ptr[i]);
+        } else {
             tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
             if (tag == NULL)
             {
                 g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
                 return self;
             }
-        }
-        else{
-            tag = RVAL2GOBJ(tarray->ptr[i]);
         }
         gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITR(where));
     }
@@ -459,10 +459,11 @@ static VALUE
 txt_apply_tag(self, tag, start, end)
     VALUE self, tag, start, end;
 {
-    if(RVAL2GTYPE(tag) == G_TYPE_STRING)
-        gtk_text_buffer_apply_tag_by_name(_SELF(self), RVAL2CSTR(tag), RVAL2ITR(start), RVAL2ITR(end));
-    else
+    if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
         gtk_text_buffer_apply_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
+    else
+        gtk_text_buffer_apply_tag_by_name(_SELF(self), RVAL2CSTR(tag), RVAL2ITR(start), RVAL2ITR(end));
+
     return self;
 }
 
@@ -470,10 +471,11 @@ static VALUE
 txt_remove_tag(self, tag, start, end)
     VALUE self, tag, start, end;
 {
-    if(RVAL2GTYPE(tag) == G_TYPE_STRING)
-        gtk_text_buffer_remove_tag_by_name(_SELF(self), RVAL2CSTR(tag), RVAL2ITR(start), RVAL2ITR(end));
-    else
+    if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
         gtk_text_buffer_remove_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
+    else
+        gtk_text_buffer_remove_tag_by_name(_SELF(self), RVAL2CSTR(tag), RVAL2ITR(start), RVAL2ITR(end));
+
     return self;
 }
 

@@ -1,3 +1,10 @@
+2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktextbuffer.c (txt_delete_mark, txt_move_mark,
+	txt_insert_with_tags, txt_apply_tag, txt_remove_tag): 
+	Don't compare RVAL2GTYPE(tag) with G_TYPE_STRING.
+	Because any object with #to_str should be accepted.
+
 2003-04-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* sample/testgtk/testgtk.rb: cleanup
