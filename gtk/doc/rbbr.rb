@@ -5,7 +5,7 @@
   rbbr.rb - Ruby Meta-Level Information Browser
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/06/22 05:26:49 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 
@@ -21,7 +21,7 @@
   meta/metainfo.rb - API for Meta-level Information
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/06/22 05:26:49 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -302,14 +302,14 @@ class Class
 end
 
 require 'observer'
-require 'gtk'
+require 'gtk2'
 
 =begin
 
   gtkutil.rb - Gtk Utility
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/06/22 05:26:49 $
 
   Copyright (C) 2000 Hiroshi Igarashi
 
@@ -431,7 +431,7 @@ end
   meta/browser.rb - Meta-Level Information Browser
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/06/22 05:26:49 $
 
   Copyright (C) 2000-2001 Hiroshi Igarashi
 

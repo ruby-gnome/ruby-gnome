@@ -1,5 +1,5 @@
 require 'rbbr_rb.rb'
-require 'gtk'
+require 'gtk2'
 
 class ClassTree < ClassWalker
   def initialize(tree = nil)
