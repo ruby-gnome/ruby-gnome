@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-12-13  Neil Stevens <neil@hakubi.us>
 
 	* rbpanel-applet.c: Added gconf accssors(PanelApplet#gconf_*).
