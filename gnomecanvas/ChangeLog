@@ -1,0 +1,12 @@
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-group.c, src/rbgnome-canvas-item.c,
+	src/rbgnome-canvas-util.c, src/rbgnome-canvas.c:
+	Move from ruby-gnome2/gnome/src/.
+
+	* sample/canvas-arrowhead.rb, sample/canvas-features.rb,
+	sample/canvas-fifteen.rb, sample/canvas-primitives.rb,
+	sample/canvas.rb: Move from ruby-gnome2/gnome/sample/test-gnome/.
+
+(before 2002/09/21)
+	please see ruby-gnome2/gnome/ChangeLog.
