@@ -1,0 +1,9 @@
+2003-09-21  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* README, COPYING.LIB, extconf.rb, src/rbgda.c, src/rbgda.h,
+	  src/rbgdaprovider.c, src/lib/gda.rb, src/rbgdadatasource.c,
+	  src/rbgdaclient.c, src/rbgdaconnection.c, src/rbgdacommand.c,
+	  src/rbgdadatamodel.c, src/rbgdaerror.c, src/rbgdarow.c,
+	  src/rbgdavalue.c, src/rbgdadatamodelarray.c, src/rbgdatransaction.c,
+	  tests/tc_gda.rb, .cvsignore, sample/sql_console.rb: 
+	  Initial SF import.
