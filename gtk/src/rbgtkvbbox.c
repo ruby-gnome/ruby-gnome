@@ -3,8 +3,8 @@
 
   rbgtkvbbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -57,7 +57,14 @@ vbbox_set_layout_default(self, layout)
 
 void Init_gtk_vbutton_box()
 {
+    static rbgtk_class_info cinfo;
+
     gVBBox = rb_define_class_under(mGtk, "VButtonBox", gBBox);
+    cinfo.klass = gVBBox;
+    cinfo.gtype = GTK_TYPE_VBUTTON_BOX;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gVBBox, "initialize", vbbox_initialize, 0);
     rb_define_singleton_method(gVBBox, "get_spacing_default",

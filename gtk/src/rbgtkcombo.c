@@ -3,8 +3,8 @@
 
   rbgtkcombo.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -132,7 +132,14 @@ combo_list(self)
 
 void Init_gtk_combo()
 {
+    static rbgtk_class_info cinfo;
+
     gCombo = rb_define_class_under(mGtk, "Combo", gHBox);
+    cinfo.klass = gCombo;
+    cinfo.gtype = GTK_TYPE_COMBO;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gCombo, "initialize", combo_initialize, 0);
     rb_define_method(gCombo, "set_value_in_list", combo_val_in_list, 2);

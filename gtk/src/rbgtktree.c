@@ -3,8 +3,8 @@
 
   rbgtktree.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,7 +109,14 @@ tree_remove_item(self, child)
 
 void Init_gtk_tree()
 {
+    static rbgtk_class_info cinfo;
+
     gTree = rb_define_class_under(mGtk, "Tree", gContainer);
+    cinfo.klass = gTree;
+    cinfo.gtype = GTK_TYPE_TREE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gTree, "VIEW_LINE", INT2FIX(GTK_TREE_VIEW_LINE));
     rb_define_const(gTree, "VIEW_ITEM", INT2FIX(GTK_TREE_VIEW_ITEM));

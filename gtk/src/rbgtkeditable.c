@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/23 17:26:21 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -124,7 +124,14 @@ edit_paste_clipboard(self)
 
 void Init_gtk_editable()
 {
+    static rbgtk_class_info cinfo;
+
     gEditable = rb_define_class_under(mGtk, "Editable", gWidget);
+    cinfo.klass = gEditable;
+    cinfo.gtype = GTK_TYPE_EDITABLE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gEditable, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
     rb_define_const(gEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));

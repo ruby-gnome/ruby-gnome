@@ -3,8 +3,8 @@
 
   rbgtkhandlebox.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:02 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -80,7 +80,14 @@ hb_child_detached(self)
 
 void Init_gtk_handle_box()
 {
+    static rbgtk_class_info cinfo;
+
     gHandleBox = rb_define_class_under(mGtk, "HandleBox", gBin);
+    cinfo.klass = gHandleBox;
+    cinfo.gtype = GTK_TYPE_HANDLE_BOX;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gHandleBox, "initialize", hb_init, 0);
 

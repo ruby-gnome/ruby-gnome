@@ -3,8 +3,8 @@
 
   rbgtkstatusbar.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -69,7 +69,14 @@ statusbar_remove(self, cid, mid)
 
 void Init_gtk_statusbar()
 {
+    static rbgtk_class_info cinfo;
+
     gStatusBar = rb_define_class_under(mGtk, "Statusbar", gHBox);
+    cinfo.klass = gStatusBar;
+    cinfo.gtype = GTK_TYPE_STATUSBAR;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
     
     rb_define_const(gStatusBar, "SIGNAL_TEXT_PUSHDED", rb_str_new2("text_pushed"));
     rb_define_const(gStatusBar, "SIGNAL_TEXT_POPPED", rb_str_new2("text_popped"));

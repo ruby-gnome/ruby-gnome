@@ -3,8 +3,8 @@
 
   rbgtkbutton.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -92,7 +92,14 @@ button_get_relief(self)
 
 void Init_gtk_button()
 {
+    static rbgtk_class_info cinfo;
+
     gButton = rb_define_class_under(mGtk, "Button", gBin);
+    cinfo.klass = gButton;
+    cinfo.gtype = GTK_TYPE_BUTTON;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gButton, "SIGNAL_PRESSED", rb_str_new2("pressed"));
     rb_define_const(gButton, "SIGNAL_RELEASED", rb_str_new2("released"));

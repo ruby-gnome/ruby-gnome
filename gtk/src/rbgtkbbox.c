@@ -3,8 +3,8 @@
 
   rbgtkbbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -93,7 +93,14 @@ bbox_set_child_ipadding(self, ipad_x, ipad_y)
 
 void Init_gtk_button_box()
 {
+    static rbgtk_class_info cinfo;
+
     gBBox = rb_define_class_under(mGtk, "ButtonBox", gBox);
+    cinfo.klass = gBBox;
+    cinfo.gtype = GTK_TYPE_BUTTON_BOX;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gBBox, "get_spacing", bbox_get_spacing, 0);
     rb_define_method(gBBox, "get_layout", bbox_get_layout, 0);

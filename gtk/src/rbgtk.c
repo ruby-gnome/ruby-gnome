@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/23 17:26:21 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -332,7 +332,6 @@ VALUE
 get_gtk_type(gtkobj)
     GtkObject *gtkobj;
 {
-    VALUE klass = 0;
     GtkType gtype;
 
     for (gtype = GTK_OBJECT_TYPE(gtkobj);
@@ -344,99 +343,7 @@ get_gtk_type(gtkobj)
             return klass;
     }
 
-    if GTK_IS_ITEM_FACTORY(gtkobj) klass = gItemFactory;
-    else if GTK_IS_HSEPARATOR(gtkobj) klass = gHSeparator;
-    else if GTK_IS_VSEPARATOR(gtkobj) klass = gVSeparator;
-    else if GTK_IS_SEPARATOR(gtkobj) klass = gSeparator;
-    else if GTK_IS_HRULER(gtkobj) klass = gHRuler;
-    else if GTK_IS_VRULER(gtkobj) klass = gVRuler;
-    else if GTK_IS_RULER(gtkobj) klass = gRuler;
-    else if GTK_IS_HSCROLLBAR(gtkobj) klass = gHScrollbar;
-    else if GTK_IS_VSCROLLBAR(gtkobj) klass = gVScrollbar;
-    else if GTK_IS_SCROLLBAR(gtkobj) klass = gScrollbar;
-    else if GTK_IS_HSCALE(gtkobj) klass = gHScale;
-    else if GTK_IS_VSCALE(gtkobj) klass = gVScale;
-    else if GTK_IS_SCALE(gtkobj) klass = gScale;
-    else if GTK_IS_RANGE(gtkobj) klass = gRange;
-    else if GTK_IS_PROGRESS_BAR(gtkobj) klass = gProgressBar;
-    else if GTK_IS_ACCEL_LABEL(gtkobj) klass = gAccelLabel;
-    else if GTK_IS_LABEL(gtkobj) klass = gLabel;
-    else if GTK_IS_LAYOUT(gtkobj) klass = gLayout;
-    else if GTK_IS_IMAGE(gtkobj) klass = gImage;
-    else if GTK_IS_ARROW(gtkobj) klass = gArrow;
-    else if GTK_IS_MISC(gtkobj) klass = gMisc;
-    else if GTK_IS_SPIN_BUTTON(gtkobj) klass = gSButton;
-    else if GTK_IS_ENTRY(gtkobj) klass = gEntry;
-    else if GTK_IS_EDITABLE(gtkobj) klass = gEditable;
-    else if GTK_IS_CURVE(gtkobj) klass = gCurve;
-    else if GTK_IS_DRAWING_AREA(gtkobj) klass = gDrawArea;
-    else if GTK_IS_TOOLBAR(gtkobj) klass = gToolbar;
-    else if GTK_IS_TABLE(gtkobj) klass = gTable;
-    else if GTK_IS_SCROLLED_WINDOW(gtkobj) klass = gScrolledWin;
-    else if GTK_IS_VPANED(gtkobj) klass = gVPaned;
-    else if GTK_IS_HPANED(gtkobj) klass = gHPaned;
-    else if GTK_IS_PANED(gtkobj) klass = gPaned;
-    else if GTK_IS_NOTEBOOK(gtkobj) klass = gNotebook;
-    else if GTK_IS_MENU_BAR(gtkobj) klass = gMenuBar;
-    else if GTK_IS_MENU(gtkobj) klass = gMenu;
-    else if GTK_IS_MENU_SHELL(gtkobj) klass = gMenuShell;
-    else if GTK_IS_FIXED(gtkobj) klass = gFixed;
-    else if GTK_IS_RADIO_BUTTON(gtkobj) klass = gRButton;
-    else if GTK_IS_CHECK_BUTTON(gtkobj) klass = gCButton;
-    else if GTK_IS_TOGGLE_BUTTON(gtkobj) klass = gTButton;
-    else if GTK_IS_OPTION_MENU(gtkobj) klass = gOptionMenu;
-    else if GTK_IS_BUTTON(gtkobj) klass = gButton;
-    else if GTK_IS_GAMMA_CURVE(gtkobj) klass = gGamma;
-    else if GTK_IS_COLOR_SELECTION(gtkobj) klass = gColorSel;
-    else if GTK_IS_VBOX(gtkobj) klass = gVBox;
-    else if GTK_IS_STATUSBAR(gtkobj) klass = gStatusBar;
-    else if GTK_IS_COMBO(gtkobj) klass = gCombo;
-    else if GTK_IS_HBOX(gtkobj) klass = gHBox;
-    else if GTK_IS_HBUTTON_BOX(gtkobj) klass = gHBBox;
-    else if GTK_IS_VBUTTON_BOX(gtkobj) klass = gVBBox;
-    else if GTK_IS_BUTTON_BOX(gtkobj) klass = gBBox;
-    else if GTK_IS_BOX(gtkobj) klass = gBox;
-    else if GTK_IS_FILE_SELECTION(gtkobj) klass = gFileSel;
-    else if GTK_IS_FONT_SELECTION(gtkobj) klass = gFontSelection;
-    else if GTK_IS_FONT_SELECTION_DIALOG(gtkobj) klass = gFontSelectionDialog;
-    else if GTK_IS_INPUT_DIALOG(gtkobj) klass = gInputDialog;
-    else if GTK_IS_DIALOG(gtkobj) klass = gDialog;
-    else if GTK_IS_COLOR_SELECTION_DIALOG(gtkobj) klass = gColorSelDialog;
-    else if GTK_IS_WINDOW(gtkobj) klass = gWindow;
-    else if GTK_IS_VIEWPORT(gtkobj) klass = gViewport;
-    else if GTK_IS_TEAROFF_MENU_ITEM(gtkobj) klass = gTMenuItem;
-    else if GTK_IS_RADIO_MENU_ITEM(gtkobj) klass = gRMenuItem;
-    else if GTK_IS_CHECK_MENU_ITEM(gtkobj) klass = gCMenuItem;
-    else if GTK_IS_MENU_ITEM(gtkobj) klass = gMenuItem;
-    else if GTK_IS_ITEM(gtkobj) klass = gItem;
-    else if GTK_IS_ASPECT_FRAME(gtkobj) klass = gAspectFrame;
-    else if GTK_IS_EVENT_BOX(gtkobj) klass = gEventBox;
-    else if GTK_IS_ALIGNMENT(gtkobj) klass = gAlignment;
-    else if GTK_IS_HANDLE_BOX(gtkobj) klass = gHandleBox;
-    else if GTK_IS_CONTAINER(gtkobj) klass = gContainer;
-    else if GTK_IS_CALENDAR(gtkobj) klass = gCalendar;
-    else if GTK_IS_WIDGET(gtkobj) klass = gWidget;
-    else if GTK_IS_ADJUSTMENT(gtkobj) klass = gAdjustment;
-    else if GTK_IS_TOOLTIPS(gtkobj) klass = gTooltips;
-    else if GTK_IS_OBJECT(gtkobj) klass = gObject;
-
-#ifndef GTK_DISABLE_DEPRECATED
-    else if GTK_IS_CLIST(gtkobj) klass = gCList;
-    else if GTK_IS_CTREE(gtkobj) klass = gCTree;
-    else if GTK_IS_PIXMAP(gtkobj) klass = gPixmap;
-    else if GTK_IS_PROGRESS(gtkobj) klass = gProgress;
-    else if GTK_IS_PREVIEW(gtkobj) klass = gPreview;
-    else if GTK_IS_TIPS_QUERY(gtkobj) klass = gTipsQuery;
-#endif
-#ifdef GTK_ENABLE_BROKEN
-    else if GTK_IS_TEXT(gtkobj) klass = gText;
-    else if GTK_IS_TREE(gtkobj) klass = gTree;
-    else if GTK_IS_TREE_ITEM(gtkobj) klass = gTreeItem;
-#endif
-    else {
-	rb_raise(rb_eTypeError, "not a Gtk object");
-    }
-    return klass;
+    rb_raise(rb_eTypeError, "not a Gtk object");
 }
 
 VALUE

@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -161,7 +161,14 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 
 void Init_gtk_window()
 {
+    static rbgtk_class_info cinfo;
+
     gWindow = rb_define_class_under(mGtk, "Window", gBin);
+    cinfo.klass = gWindow;
+    cinfo.gtype = GTK_TYPE_WINDOW;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gWindow, "SIGNAL_MOVE_RESIZE", rb_str_new2("move_resize"));
     rb_define_const(gWindow, "SIGNAL_SET_FOCUS", rb_str_new2("set_focus"));

@@ -3,8 +3,8 @@
 
   rbgtkgamma.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:03 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,14 @@ gamma_curve(self)
 
 void Init_gtk_gamma_curve()
 {
+    static rbgtk_class_info cinfo;
+
     gGamma = rb_define_class_under(mGtk, "GammaCurve", gVBox);
+    cinfo.klass = gGamma;
+    cinfo.gtype = GTK_TYPE_GAMMA_CURVE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gGamma, "initialize", gamma_initialize, 0);
     rb_define_method(gGamma, "gamma", gamma_gamma, 0);

@@ -3,8 +3,8 @@
 
   rbgtkfilesel.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:12 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -152,7 +152,14 @@ fsel_hide_fileop_buttons(self)
 
 void Init_gtk_file_selection()
 {
+    static rbgtk_class_info cinfo;
+
     gFileSel = rb_define_class_under(mGtk, "FileSelection", gWindow);
+    cinfo.klass = gFileSel;
+    cinfo.gtype = GTK_TYPE_FILE_SELECTION;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gFileSel, "initialize", fsel_initialize, 1);
     rb_define_method(gFileSel, "set_filename", fsel_set_fname, 1);

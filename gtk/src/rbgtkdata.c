@@ -3,8 +3,8 @@
 
   rbgtkdata.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -104,7 +104,14 @@ adj_get_page_size(self)
 
 void Init_gtk_adjustment()
 {
+    static rbgtk_class_info cinfo;
+
     gAdjustment = rb_define_class_under(mGtk, "Adjustment", gData);
+    cinfo.klass = gAdjustment;
+    cinfo.gtype = GTK_TYPE_ADJUSTMENT;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gAdjustment, "initialize", adj_initialize, 6);
     rb_define_method(gAdjustment, "set_value", adj_set_value, 1);
@@ -169,7 +176,14 @@ ttips_disable(self)
 
 void Init_gtk_tooltips()
 {
+    static rbgtk_class_info cinfo;
+
     gTooltips = rb_define_class_under(mGtk, "Tooltips", gData);
+    cinfo.klass = gTooltips;
+    cinfo.gtype = GTK_TYPE_TOOLTIPS;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gTooltips, "initialize", ttips_initialize, 0);
     rb_define_method(gTooltips, "set_tip", ttips_set_tip, 3);

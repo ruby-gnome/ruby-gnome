@@ -3,8 +3,8 @@
 
   rbgtkbin.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,14 @@ bin_child(self)
 
 void Init_gtk_bin()
 {
+    static rbgtk_class_info cinfo;
+
     gBin = rb_define_class_under(mGtk, "Bin", gContainer);
+    cinfo.klass = gBin;
+    cinfo.gtype = GTK_TYPE_BIN;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /* rb_define_const(   gBin, "SIGNAL_", rb_str_new2("")); */
 

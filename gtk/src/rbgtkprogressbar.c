@@ -3,8 +3,8 @@
 
   rbgtkprogressbar.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:03 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -90,7 +90,14 @@ pbar_update(self, percentage)
 
 void Init_gtk_progress_bar()
 {
+    static rbgtk_class_info cinfo;
+
     gProgressBar = rb_define_class_under(mGtk, "ProgressBar", gProgress);
+    cinfo.klass = gProgressBar;
+    cinfo.gtype = GTK_TYPE_PROGRESS_BAR;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /* GtkProgressBarStyle */
     rb_define_const(gProgressBar, "CONTINUOUS", INT2FIX(GTK_PROGRESS_CONTINUOUS));

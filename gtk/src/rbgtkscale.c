@@ -3,8 +3,8 @@
 
   rbgtkscale.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,7 +41,14 @@ scale_set_value_pos(self, pos)
 
 void Init_gtk_scale()
 {
+  static rbgtk_class_info cinfo;
+
   gScale = rb_define_class_under(mGtk, "Scale", gRange);
+  cinfo.klass = gScale;
+  cinfo.gtype = GTK_TYPE_SCALE;
+  cinfo.mark = 0;
+  cinfo.free = 0;
+  rbgtk_register_class(&cinfo);
 
   rb_define_method(gScale, "set_digits", scale_set_digits, 1);
   rb_define_method(gScale, "set_draw_value", scale_set_draw_value, 1);

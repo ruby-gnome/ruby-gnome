@@ -3,8 +3,8 @@
 
   rbgtkviewport.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -82,7 +82,14 @@ vport_set_shadow(self, type)
 
 void Init_gtk_viewport()
 {
+    static rbgtk_class_info cinfo;
+
     gViewport = rb_define_class_under(mGtk, "Viewport", gBin);
+    cinfo.klass = gViewport;
+    cinfo.gtype = GTK_TYPE_VIEWPORT;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gViewport, "initialize", vport_initialize, -1);
     rb_define_method(gViewport, "get_hadjustment", vport_get_hadj, 0);

@@ -3,8 +3,8 @@
 
   rbgtkframe.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,7 +55,14 @@ frame_set_shadow_type(self, type)
 
 void Init_gtk_frame()
 {
+    static rbgtk_class_info cinfo;
+
     gFrame = rb_define_class_under(mGtk, "Frame", gBin);
+    cinfo.klass = gBin;
+    cinfo.gtype = GTK_TYPE_FRAME;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gFrame, "initialize", frame_initialize, -1);
     rb_define_method(gFrame, "set_label", frame_set_label, 1);

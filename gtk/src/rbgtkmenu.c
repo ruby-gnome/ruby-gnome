@@ -3,8 +3,8 @@
 
   rbgtkmenu.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/26 16:30:37 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -123,7 +123,14 @@ menu_set_active(self, active)
 
 void Init_gtk_menu()
 {
+    static rbgtk_class_info cinfo;
+
     gMenu = rb_define_class_under(mGtk, "Menu", gMenuShell);
+    cinfo.klass = gMenu;
+    cinfo.gtype = GTK_TYPE_MENU;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gMenu, "initialize", menu_initialize, 0);
     rb_define_method(gMenu, "append", menu_append, 1);

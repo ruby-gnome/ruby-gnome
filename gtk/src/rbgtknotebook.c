@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -454,7 +454,14 @@ get_notepage(page)
 
 void Init_gtk_notebook()
 {
+    static rbgtk_class_info cinfo;
+
     gNotebook = rb_define_class_under(mGtk, "Notebook", gContainer);
+    cinfo.klass = gNotebook;
+    cinfo.gtype = GTK_TYPE_NOTEBOOK;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
   
     rb_define_const(gNotebook, "SIGNAL_SWITCH_PAGE", rb_str_new2("switch_page"));
 

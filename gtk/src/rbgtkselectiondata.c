@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 2002 MUTOH Masao
 ************************************************/
@@ -71,6 +71,7 @@ void
 Init_gtk_selectiondata()
 {
     gSelectionData = rb_define_class_under(mGtk, "SelectionData", rb_cData);
+
     rb_define_method(gSelectionData, "selection", gtkselectiondata_selection, 0);
     rb_define_method(gSelectionData, "target", gtkselectiondata_target, 0);
     rb_define_method(gSelectionData, "type", gtkselectiondata_type, 0);

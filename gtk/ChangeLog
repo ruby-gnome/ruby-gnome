@@ -1,3 +1,8 @@
+Thu May 30 02:12:35 2002 Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/*.c: Add rbgtk_register_class() call.
+	* src/rbgtk.c (get_gtk_type): Get rid of hardcoding GTK_IS_*.
+
 Tue May 29 00:22:25 2002  Masao Mutoh <mutoh@highway.ne.jp>
 
    * README: Modified.

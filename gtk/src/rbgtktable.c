@@ -3,8 +3,8 @@
 
   rbgtktable.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -93,7 +93,14 @@ tbl_set_col_spacings(self, spc)
 
 void Init_gtk_table()
 {
+    static rbgtk_class_info cinfo;
+
     gTable = rb_define_class_under(mGtk, "Table", gContainer);
+    cinfo.klass = gTable;
+    cinfo.gtype = GTK_TYPE_TABLE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gTable, "initialize", tbl_initialize, -1);
     rb_define_method(gTable, "attach", tbl_attach, -1);

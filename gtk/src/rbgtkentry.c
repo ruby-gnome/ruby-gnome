@@ -3,8 +3,8 @@
 
   rbgtkentry.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:12 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -71,7 +71,14 @@ entry_set_max_length(self, max)
 
 void Init_gtk_entry()
 {
+    static rbgtk_class_info cinfo;
+
     gEntry = rb_define_class_under(mGtk, "Entry", gEditable);
+    cinfo.klass = gEntry;
+    cinfo.gtype = GTK_TYPE_ENTRY;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gEntry, "initialize", entry_initialize, 0);
     rb_define_method(gEntry, "set_text", entry_set_text, 1);

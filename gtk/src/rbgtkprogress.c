@@ -3,8 +3,8 @@
 
   rbgtkprogress.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -164,7 +164,14 @@ progress_configure(self, value, min, max)
 
 void Init_gtk_progress()
 {
+    static rbgtk_class_info cinfo;
+
     gProgress = rb_define_class_under(mGtk, "Progress", gWidget);
+    cinfo.klass = gProgress;
+    cinfo.gtype = GTK_TYPE_PROGRESS;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /*
      * instance methods

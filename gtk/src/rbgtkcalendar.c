@@ -3,8 +3,8 @@
 
   rbgtkcalendar.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:07 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -152,7 +152,14 @@ cal_thaw(self)
 
 void Init_gtk_calendar()
 {
+    static rbgtk_class_info cinfo;
+
     gCalendar = rb_define_class_under(mGtk, "Calendar", gWidget);
+    cinfo.klass = gCalendar;
+    cinfo.gtype = GTK_TYPE_CALENDAR;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gCalendar, "SHOW_HEADING",
 		    INT2FIX(GTK_CALENDAR_SHOW_HEADING));

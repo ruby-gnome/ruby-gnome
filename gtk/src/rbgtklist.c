@@ -3,8 +3,8 @@
 
   rbgtklist.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -150,7 +150,14 @@ list_child_position(self, child)
 
 void Init_gtk_list()
 {
+    static rbgtk_class_info cinfo;
+
     gList = rb_define_class_under(mGtk, "List", gContainer);
+    cinfo.klass = gList;
+    cinfo.gtype = GTK_TYPE_LIST;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gList, "SIGNAL_SELECTION_CHANGED", rb_str_new2("selection_changed"));
     rb_define_const(gList, "SIGNAL_SELECT_CHILD", rb_str_new2("select_child"));

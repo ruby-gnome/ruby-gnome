@@ -3,8 +3,8 @@
 
   rbgtkmisc.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -61,7 +61,14 @@ misc_get_ypad(self)
 
 void Init_gtk_misc()
 {
+    static rbgtk_class_info cinfo;
+
     gMisc = rb_define_class_under(mGtk, "Misc", gWidget);
+    cinfo.klass = gMisc;
+    cinfo.gtype = GTK_TYPE_MISC;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gMisc, "set_alignment", misc_set_align, 2);
     rb_define_method(gMisc, "set_padding", misc_set_padding, 2);

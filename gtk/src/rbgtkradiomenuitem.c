@@ -3,8 +3,8 @@
 
   rbgtkradiomenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:12 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -76,7 +76,14 @@ rmitem_set_group(self, grp_ary)
 
 void Init_gtk_radio_menu_item()
 {
+    static rbgtk_class_info cinfo;
+
     gRMenuItem = rb_define_class_under(mGtk, "RadioMenuItem", gCMenuItem);
+    cinfo.klass = gRMenuItem;
+    cinfo.gtype = GTK_TYPE_RADIO_MENU_ITEM;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gRMenuItem, "initialize", rmitem_initialize, -1);
     rb_define_method(gRMenuItem, "group", rmitem_group, 0);

@@ -3,8 +3,8 @@
 
   rbgtklistitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -36,7 +36,14 @@ litem_initialize(argc, argv, self)
 
 void Init_gtk_list_item()
 {
+    static rbgtk_class_info cinfo;
+
     gListItem = rb_define_class_under(mGtk, "ListItem", gItem);
+    cinfo.klass = gListItem;
+    cinfo.gtype = GTK_TYPE_LIST_ITEM;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /*
       rb_define_const(gListItem, "SIGNAL_", rb_str_new2(""));

@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:02 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -51,7 +51,14 @@ mshell_deactivate(self)
 
 void Init_gtk_menu_shell()
 {
+    static rbgtk_class_info cinfo;
+
     gMenuShell = rb_define_class_under(mGtk, "MenuShell", gContainer);
+    cinfo.klass = gMenuShell;
+    cinfo.gtype = GTK_TYPE_MENU_SHELL;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gMenuShell, "SIGNAL_DEACTIVATE", rb_str_new2("deactivate"));
 

@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -285,7 +285,14 @@ tbar_set_tooltips(self, enable)
 
 void Init_gtk_toolbar()
 {
+    static rbgtk_class_info cinfo;
+
     gToolbar = rb_define_class_under(mGtk, "Toolbar", gContainer);
+    cinfo.klass = gToolbar;
+    cinfo.gtype = GTK_TYPE_TOOLBAR;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gToolbar, "CHILD_SPACE", INT2NUM(GTK_TOOLBAR_CHILD_SPACE));
     rb_define_const(gToolbar, "CHILD_BUTTON", INT2NUM(GTK_TOOLBAR_CHILD_BUTTON));

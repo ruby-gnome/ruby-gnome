@@ -3,8 +3,8 @@
 
   rbgtkimage.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,7 +47,14 @@ image_get(self)
 
 void Init_gtk_image()
 {
+    static rbgtk_class_info cinfo;
+
     gImage = rb_define_class_under(mGtk, "Image", gMisc);
+    cinfo.klass = gImage;
+    cinfo.gtype = GTK_TYPE_IMAGE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gImage, "initialize", image_initialize, 2);
     rb_define_method(gImage, "set", image_set, 2);

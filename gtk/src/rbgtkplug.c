@@ -2,8 +2,8 @@
 
   rbgdkpixmap.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -29,7 +29,14 @@ plug_construct(self, socket_id)
 
 void Init_gtk_plug()
 {
+    static rbgtk_class_info cinfo;
+
     gPlug = rb_define_class_under(mGtk, "Plug", gWindow);
+    cinfo.klass = gPlug;
+    cinfo.gtype = GTK_TYPE_PLUG;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
     
     rb_define_method(gPlug, "initialize", plug_initialize, 1);
     rb_define_method(gPlug, "construct", plug_construct, 1);

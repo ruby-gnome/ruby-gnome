@@ -3,8 +3,8 @@
 
   rbgtkvbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -30,7 +30,14 @@ vbox_initialize(argc, argv, self)
 
 void Init_gtk_vbox()
 {
+    static rbgtk_class_info cinfo;
+
     gVBox = rb_define_class_under(mGtk, "VBox", gBox);
+    cinfo.klass = gVBox;
+    cinfo.gtype = GTK_TYPE_VBOX;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /* rb_define_const(gVBox, "SIGNAL_", rb_str_new2("")); */
 

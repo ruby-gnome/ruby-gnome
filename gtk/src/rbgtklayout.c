@@ -3,8 +3,8 @@
 
   rbgtklayout.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/26 14:58:16 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -119,7 +119,14 @@ layout_get_bin_window(self)
 void
 Init_gtk_layout()
 {
+    static rbgtk_class_info cinfo;
+
     gLayout = rb_define_class_under(mGtk, "Layout", gContainer);
+    cinfo.klass = gLayout;
+    cinfo.gtype = GTK_TYPE_LAYOUT;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /* Instance methods */
     rb_define_method(gLayout, "initialize", layout_initialize, 2);

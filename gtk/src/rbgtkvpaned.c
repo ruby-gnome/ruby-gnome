@@ -3,8 +3,8 @@
 
   rbgtkvpaned.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,14 @@ vpaned_initialize(self)
 
 void Init_gtk_vpaned()
 {
+    static rbgtk_class_info cinfo;
+
     gVPaned = rb_define_class_under(mGtk, "VPaned", gPaned);
+    cinfo.klass = gVPaned;
+    cinfo.gtype = GTK_TYPE_VPANED;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gVPaned, "initialize", vpaned_initialize, 0);
 }

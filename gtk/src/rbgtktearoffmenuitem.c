@@ -3,8 +3,8 @@
 
   rbgtktearoffmenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,7 +26,14 @@ tmitem_initialize(self)
 
 void Init_gtk_tearoff_menu_item()
 {
+    static rbgtk_class_info cinfo;
+
     gTMenuItem = rb_define_class_under(mGtk, "TearoffMenuItem", gMenuItem);
+    cinfo.klass = gTMenuItem;
+    cinfo.gtype = GTK_TYPE_TEAROFF_MENU_ITEM;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gTMenuItem, "initialize", tmitem_initialize, 0);
 }

@@ -3,8 +3,8 @@
 
   rbgtkmenubar.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:03 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,7 +48,14 @@ mbar_insert(self, child, pos)
 
 void Init_gtk_menu_bar()
 {
+    static rbgtk_class_info cinfo;
+
     gMenuBar = rb_define_class_under(mGtk, "MenuBar", gMenuShell);
+    cinfo.klass = gMenuBar;
+    cinfo.gtype = GTK_TYPE_MENU_BAR;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_method(gMenuBar, "initialize", mbar_initialize, 0);
     rb_define_method(gMenuBar, "append", mbar_append, 1);

@@ -3,8 +3,8 @@
 
   rbgtkbox.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -122,7 +122,14 @@ box_set_child_packing(self, child, expand, fill, padding, pack_type)
 
 void Init_gtk_box()
 {
+    static rbgtk_class_info cinfo;
+
     gBox = rb_define_class_under(mGtk, "Box", gContainer);
+    cinfo.klass = gBox;
+    cinfo.gtype = GTK_TYPE_BOX;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /* rb_define_const(gBox, "SIGNAL_", rb_str_new2("")); */
 

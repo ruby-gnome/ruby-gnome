@@ -3,8 +3,8 @@
 
   rbgtkspinbutton.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -134,7 +134,14 @@ sbtn_set_snap_to_ticks(self,n)
 
 void Init_gtk_spin_button()
 {
+    static rbgtk_class_info cinfo;
+
     gSButton = rb_define_class_under(mGtk, "SpinButton", gEntry);
+    cinfo.klass = gSButton;
+    cinfo.gtype = GTK_TYPE_SPIN_BUTTON;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /*
      * instance methods

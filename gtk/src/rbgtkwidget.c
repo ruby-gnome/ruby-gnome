@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -907,7 +907,14 @@ DEFINE_EVENT_FUNC(no_expose_event, any)
 
 void Init_gtk_widget()
 {
+    static rbgtk_class_info cinfo;
+
     gWidget = rb_define_class_under(mGtk, "Widget", gObject);
+    cinfo.klass = gWidget;
+    cinfo.gtype = GTK_TYPE_WIDGET;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     /*
      * constants

@@ -2,8 +2,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -49,7 +49,15 @@ alabel_refetch(self)
 void
 Init_gtk_accel_label()
 {
+    static rbgtk_class_info cinfo;
+
     gAccelLabel = rb_define_class_under(mGtk, "AccelLabel", gLabel);
+    cinfo.klass = gAccelLabel;
+    cinfo.gtype = GTK_TYPE_ACCEL_LABEL;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
+
     rb_define_method(gAccelLabel, "initialize", alabel_initialize, 1);
     rb_define_method(gAccelLabel, "set_accel_widget",
             alabel_set_accel_widget, 1);

@@ -3,8 +3,8 @@
 
   rbgtkrange.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -45,7 +45,14 @@ range_set_adj(self, adj)
 
 void Init_gtk_range()
 {
+  static rbgtk_class_info cinfo;
+
   gRange = rb_define_class_under(mGtk, "Range", gWidget);
+  cinfo.klass = gRange;
+  cinfo.gtype = GTK_TYPE_RANGE;
+  cinfo.mark = 0;
+  cinfo.free = 0;
+  rbgtk_register_class(&cinfo);
 
   rb_define_method(gRange, "get_adjustment", range_get_adj, 0);
   rb_define_method(gRange, "set_update_policy", range_set_update_policy, 1);

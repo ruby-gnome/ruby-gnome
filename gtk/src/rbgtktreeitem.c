@@ -3,8 +3,8 @@
 
   rbgtktreeitem.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Author: igapy $
+  $Date: 2002/05/30 00:46:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -107,7 +107,14 @@ titem_collapse(self)
 
 void Init_gtk_tree_item()
 {
+    static rbgtk_class_info cinfo;
+
     gTreeItem = rb_define_class_under(mGtk, "TreeItem", gItem);
+    cinfo.klass = gTreeItem;
+    cinfo.gtype = GTK_TYPE_TREE_ITEM;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
     rb_define_const(gTreeItem, "SIGNAL_EXPAND", rb_str_new2("expand"));
     rb_define_const(gTreeItem, "SIGNAL_COLLAPSE", rb_str_new2("collapse"));
