@@ -1,7 +1,7 @@
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Revised.
-	* rbglade.c (Init_libglade2): Add GladeXML#get_tooltips.
+	* rbglade.c: Added GladeXML#get_tooltips.
 	* bin/ruby-glade-create-tmplate: Improved to support Gnome::App 
 	and Tooltips and L10n.
 

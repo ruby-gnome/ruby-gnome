@@ -13,9 +13,13 @@ Requirements
    Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
    Ruby/GNOME2: http://ruby-gnome2.sourceforge.net/ (If you use GNOME widgets)
 
+   ruby-glade-create-template requires:
+   REXML: http://www.germane-software.com/software/rexml/ 
+          (Included in ruby-1.8.x or later)
+
 Install
 -------
-   0. install libgnome2, libglade2, libxml2, libz, ruby-1.6.x.
+   0. install libgnome2, libglade2, libxml2, libz, ruby.
    1. ruby extconf.rb
    2. make
    3. su

@@ -6,7 +6,7 @@
 #
 # Usage: ruby ruby-glade-create-template yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.9 2004/08/06 18:44:47 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.10 2004/08/07 07:41:04 mutoh Exp $
 #
 # Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
@@ -14,7 +14,7 @@
 require 'libglade2'
 require 'rexml/document'
 
-LG_VERSION = %Q[$Revision: 1.9 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.10 $].scan(/\d/).join(".")
 
 unless ARGV.size == 1
   puts "ruby-glade-create-template #{LG_VERSION}"
@@ -47,7 +47,7 @@ end
 filename = File.basename(path, ".*")
 
 # Create class name from the filename.
-classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
+classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("") + "Glade"
 
 if type_gnome
   Gnome::Program.new("ruby-glade-create-template", LG_VERSION)
@@ -97,11 +97,13 @@ doc.elements.each("//widget") do |e|
     }
   elsif /MenuItem/ =~ e.attributes["class"]
     label = "nil"
-    tooltip = "nil"
+    tooltip = nil
     e.elements.each("property[@name='tooltip']") do |v|
       tooltip = "'#{v.text}'"
     end
-    uiinfos << [%Q!Gnome::UIInfo.item_none(#{label}, #{tooltip}, callback_dummy)!, e.attributes['id'], true]
+    if tooltip
+      uiinfos << [%Q!Gnome::UIInfo.item_none(#{label}, #{tooltip}, callback_dummy)!, e.attributes['id'], true]
+    end
   elsif /Tool|Action/ =~ e.attributes["class"]
     tooltip = nil
     e.elements.each("property[@name='tooltip']") do |v|
@@ -113,40 +115,39 @@ doc.elements.each("//widget") do |e|
   end
 end
 
-additional_methods = "\n"
-# Create an additional method for creating uiinfo menu hints of GnomeApp.
-uiinfo_method = "\n"
+additional_methods = ""
+# Create an additional method for creating additional menu hints of GnomeApp.
+additional_method_body = ""
 if gnomeapp and uiinfos.size > 0
-  uiinfo_method << "  # Creates menu hints.\n"
-  uiinfo_method << "  def create_uiinfo_menus(name)\n"
-  uiinfo_method << "    app = @glade['#{gnomeapp}']\n"
-  uiinfo_method << "    tips = @glade.get_tooltips(app.toplevel)\n"
-  uiinfo_method << "    callback_dummy = Proc.new{} #Dummy \n"
-  uiinfo_method << "    uiinfos = [\n"
+  additional_method_body << "\n  # Creates menu hints.\n"
+  additional_method_body << "  def create_uiinfo_menus(name)\n"
+  additional_method_body << "    app = @glade['#{gnomeapp}']\n"
+  additional_method_body << "    tips = @glade.get_tooltips(app.toplevel)\n"
+  additional_method_body << "    callback_dummy = Proc.new{} #Dummy \n"
+  additional_method_body << "    uiinfos = [\n"
   uiinfos.each do |info|
-    uiinfo_method << "      #{info[0]},\n"
+    additional_method_body << "      #{info[0]},\n"
   end
-  uiinfo_method << "    ]\n"
+  additional_method_body << "    ]\n"
   uiinfos.each_with_index do |info, i|
-    uiinfo_method << "    uiinfos[#{i}][9] = @glade['#{info[1]}']\n"
-    uiinfo_method << "    tips.set_tip(uiinfos[#{i}][9], nil, nil)\n" if info[2]
+    additional_method_body << "    uiinfos[#{i}][9] = @glade['#{info[1]}']\n"
+    additional_method_body << "    tips.set_tip(uiinfos[#{i}][9], nil, nil)\n" if info[2]
   end
-  uiinfo_method << "    app.install_menu_hints(uiinfos)\n"
-  uiinfo_method << "  end"
-  additional_methods << "    create_uiinfo_menus(domain)\n"
+  additional_method_body << "    app.install_menu_hints(uiinfos)\n"
+  additional_method_body << "  end"
+  additional_methods << "\n    create_uiinfo_menus(domain)"
 end
 
 # Create an additional method for creating tooltips.
-tooltips_method = "\n"
 if tooltips.size > 0
-  tooltips_method << "  # Creates tooltips.\n"
-  tooltips_method << "  def create_tooltips\n"
-  tooltips_method << "    @tooltip = Gtk::Tooltips.new\n"
+  additional_method_body << "\n  # Creates tooltips.\n"
+  additional_method_body << "  def create_tooltips\n"
+  additional_method_body << "    @tooltip = Gtk::Tooltips.new\n"
   tooltips.each do |v|
-    tooltips_method << "    #{v}\n"
+    additional_method_body << "    #{v}\n"
   end
-  tooltips_method << "  end"
-  additional_methods << "    create_tooltips"
+  additional_method_body << "  end"
+  additional_methods << "\n    create_tooltips"
 end
 
 # Creates handler methods
@@ -157,9 +158,9 @@ if signals.size > 0
     (0...signal.param_types.size).each do |i|
       args << ", arg#{i}"
     end
-    handler_methods << "  def #{handler}(#{args})\n"
+    handler_methods << "\n  def #{handler}(#{args})\n"
     handler_methods << "    puts \"#{handler}() is not implemented yet.\"\n"
-    handler_methods << "  end\n"
+    handler_methods << "  end"
   end
 end
 
@@ -168,27 +169,30 @@ end
 #
 puts <<CLASS_DEF
 #!/usr/bin/env ruby
+#
+# This file is gererated by ruby-glade-create-template #{LG_VERSION}.
+#
 require 'libglade2'
 
 # Support L10n (Requires RAA:Ruby-GetText-Package)
 begin
   require 'gettext'
 rescue LoadError
-  module GetText
-    module_function
-    def _(str)
-      str
-    end
-    def bindtextdomain(domainname, path = nil, locale = nil, charset = nil)
+  unless defined? GetText
+    module GetText
+      module_function
+      def _(str)
+        str
+      end
+      def bindtextdomain(domainname, path = nil, locale = nil, charset = nil)
+      end
     end
   end
 end
 
 class #{classname}
   include GetText
-  #{uiinfo_method}
-  #{tooltips_method}
-
+  #{additional_method_body}
   def initialize(path_or_data, root = nil, domain = nil, localedir = nil, flag = GladeXML::FILE)
     GetText.bindtextdomain(domain, localedir, nil, "UTF-8")
     @glade = GladeXML.new(path_or_data, root, domain, localedir, flag) {|handler| method(handler)}
