@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/09/24 03:00:02 $
+  $Date: 2002/09/29 13:36:29 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -387,16 +387,91 @@ void	g_signal_chain_from_overridden	      (const GValue      *instance_and_param
 
 /**********************************************************************/
 
+/* G_CONST_RETURN gchar* g_signal_name         (guint               signal_id); */
+
+static VALUE cQuery;
+
+static VALUE
+signal_query(_, sig_id)
+     VALUE _, sig_id;
+{
+    VALUE result;
+    GSignalQuery* query;
+
+    result = Data_Make_Struct(cQuery, GSignalQuery, NULL, free, query);
+    g_signal_query(NUM2UINT(sig_id), query);
+    return result;
+}
+
+static VALUE
+query_signal_id(self)
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return UINT2NUM(query->signal_id);
+}
+
+static VALUE
+query_signal_name(self)
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return rb_str_new2(query->signal_name);
+}
+
+static VALUE
+query_itype(self)
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return rbgobj_gtype_new(query->itype);
+}
+
+static VALUE
+query_return_type(self)
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return rbgobj_gtype_new(query->return_type);
+}
+
+static VALUE
+query_signal_flags(self)
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return UINT2NUM(query->signal_flags);
+}
+
+static VALUE
+query_param_types(self)
+{
+    GSignalQuery* query;
+    VALUE result;
+    int i;
+    Data_Get_Struct(self, GSignalQuery, query);
+
+    result = rb_ary_new2(query->n_params);
+    for (i = 0; i < query->n_params; i++)
+        rb_ary_store(result, i, rbgobj_gtype_new(query->param_types[i]));
+
+    return result;
+}
+
+/**********************************************************************/
+
 void
 Init_gobject_gsignal()
 {
+    VALUE mSignal = rb_define_module_under(mGLib, "Signal");
+
     id_send = rb_intern("__send__");
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    rb_define_singleton_method(cInstantiatable, "signal_new", gobj_s_signal_new, -1);
+    rb_define_method(mInterfaceCommons, "signal_new", gobj_s_signal_new, -1);
 #endif
-    rb_define_singleton_method(cInstantiatable, "signal_list", gobj_s_signal_list, 0);
-    rb_define_singleton_method(cInstantiatable, "signal_lookup", gobj_s_signal_lookup, 1);
+    rb_define_method(mInterfaceCommons, "signal_list", gobj_s_signal_list, 0);
+    rb_define_method(mInterfaceCommons, "signal_lookup", gobj_s_signal_lookup, 1);
 
     rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
     rb_define_method(cInstantiatable, "signal_connect_after",
@@ -420,34 +495,43 @@ Init_gobject_gsignal()
     rb_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-    /* --- run, match and connect types --- */
-    {
-        VALUE mSignal = rb_define_module_under(mGLib, "Signal");
 
-        /* GSignalFlags */
-        rb_define_const(mSignal, "RUN_FIRST",   INT2FIX(G_SIGNAL_RUN_FIRST));
-        rb_define_const(mSignal, "RUN_LAST",    INT2FIX(G_SIGNAL_RUN_LAST));
-        rb_define_const(mSignal, "RUN_CLEANUP", INT2FIX(G_SIGNAL_RUN_CLEANUP));
-        rb_define_const(mSignal, "NO_RECURSE",  INT2FIX(G_SIGNAL_NO_RECURSE));
-        rb_define_const(mSignal, "DETAILED",    INT2FIX(G_SIGNAL_DETAILED));
-        rb_define_const(mSignal, "ACTION",      INT2FIX(G_SIGNAL_ACTION));
-        rb_define_const(mSignal, "NO_HOOKS",    INT2FIX(G_SIGNAL_NO_HOOKS));
+    rb_define_singleton_method(mSignal, "query", signal_query, 1);
 
-        rb_define_const(mSignal, "FLAGS_MASK",  INT2FIX(G_SIGNAL_FLAGS_MASK));
+    cQuery = rb_define_class_under(mSignal, "Query", rb_cData);
+    rb_define_method(cQuery, "signal_id", query_signal_id, 0);
+    rb_define_alias(cQuery, "id", "signal_id");
+    rb_define_method(cQuery, "signal_name", query_signal_name, 0);
+    rb_define_alias(cQuery, "name", "signal_name");
+    rb_define_method(cQuery, "signal_flags", query_signal_flags, 0);
+    rb_define_alias(cQuery, "flags", "signal_flags");
+    rb_define_method(cQuery, "itype", query_itype, 0);
+    rb_define_method(cQuery, "return_type", query_return_type, 0);
+    rb_define_method(cQuery, "param_types", query_param_types, 0);
 
-        /* GConnectFlags */
-        rb_define_const(mSignal, "CONNECT_AFTER",   INT2FIX(G_CONNECT_AFTER));
-        rb_define_const(mSignal, "CONNECT_SWAPPED", INT2FIX(G_CONNECT_SWAPPED));
+    /* GSignalFlags */
+    rb_define_const(mSignal, "RUN_FIRST",   INT2FIX(G_SIGNAL_RUN_FIRST));
+    rb_define_const(mSignal, "RUN_LAST",    INT2FIX(G_SIGNAL_RUN_LAST));
+    rb_define_const(mSignal, "RUN_CLEANUP", INT2FIX(G_SIGNAL_RUN_CLEANUP));
+    rb_define_const(mSignal, "NO_RECURSE",  INT2FIX(G_SIGNAL_NO_RECURSE));
+    rb_define_const(mSignal, "DETAILED",    INT2FIX(G_SIGNAL_DETAILED));
+    rb_define_const(mSignal, "ACTION",      INT2FIX(G_SIGNAL_ACTION));
+    rb_define_const(mSignal, "NO_HOOKS",    INT2FIX(G_SIGNAL_NO_HOOKS));
 
-        /* GSignalMatchType */
-        rb_define_const(mSignal, "MATCH_ID",        INT2FIX(G_SIGNAL_MATCH_ID));
-        rb_define_const(mSignal, "MATCH_DETAIL",    INT2FIX(G_SIGNAL_MATCH_DETAIL));
-        rb_define_const(mSignal, "MATCH_CLOSURE",   INT2FIX(G_SIGNAL_MATCH_CLOSURE));
-        rb_define_const(mSignal, "MATCH_FUNC",      INT2FIX(G_SIGNAL_MATCH_FUNC));
-        rb_define_const(mSignal, "MATCH_DATA",      INT2FIX(G_SIGNAL_MATCH_DATA));
-        rb_define_const(mSignal, "MATCH_UNBLOCKED", INT2FIX(G_SIGNAL_MATCH_UNBLOCKED));
+    rb_define_const(mSignal, "FLAGS_MASK",  INT2FIX(G_SIGNAL_FLAGS_MASK));
 
-        rb_define_const(mSignal, "MATCH_MASK", INT2FIX(G_SIGNAL_MATCH_MASK));
-        rb_define_const(mSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
-    }
+    /* GConnectFlags */
+    rb_define_const(mSignal, "CONNECT_AFTER",   INT2FIX(G_CONNECT_AFTER));
+    rb_define_const(mSignal, "CONNECT_SWAPPED", INT2FIX(G_CONNECT_SWAPPED));
+
+    /* GSignalMatchType */
+    rb_define_const(mSignal, "MATCH_ID",        INT2FIX(G_SIGNAL_MATCH_ID));
+    rb_define_const(mSignal, "MATCH_DETAIL",    INT2FIX(G_SIGNAL_MATCH_DETAIL));
+    rb_define_const(mSignal, "MATCH_CLOSURE",   INT2FIX(G_SIGNAL_MATCH_CLOSURE));
+    rb_define_const(mSignal, "MATCH_FUNC",      INT2FIX(G_SIGNAL_MATCH_FUNC));
+    rb_define_const(mSignal, "MATCH_DATA",      INT2FIX(G_SIGNAL_MATCH_DATA));
+    rb_define_const(mSignal, "MATCH_UNBLOCKED", INT2FIX(G_SIGNAL_MATCH_UNBLOCKED));
+
+    rb_define_const(mSignal, "MATCH_MASK", INT2FIX(G_SIGNAL_MATCH_MASK));
+    rb_define_const(mSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
 }

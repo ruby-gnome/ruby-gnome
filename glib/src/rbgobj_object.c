@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/09/24 03:00:02 $
+  $Date: 2002/09/29 13:36:28 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -90,12 +90,19 @@ gobj_s_find_property(self, property_name)
      VALUE self, property_name;
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
+    const char* name;
     VALUE result;
 
-    StringValue(property_name);     
-    result = GOBJ2RVAL(g_object_class_find_property(oclass, StringValuePtr(property_name)));
+    if (SYMBOL_P(property_name)) {
+        name = rb_id2name(SYM2ID(property_name));
+    } else {
+        StringValue(property_name);
+        name = StringValuePtr(property_name);
+    }
 
-    g_type_class_unref(oclass);                       
+    result = GOBJ2RVAL(g_object_class_find_property(oclass, name));
+
+    g_type_class_unref(oclass);
     return result;
 }
 
@@ -124,21 +131,26 @@ gobj_set_property(self, prop_name, val)
     VALUE self, prop_name, val;
 {
     GParamSpec* pspec;
+    const char* name;
 
-    StringValue(prop_name);
+    if (SYMBOL_P(prop_name)) {
+        name = rb_id2name(SYM2ID(prop_name));
+    } else {
+        StringValue(prop_name);
+        name = StringValuePtr(prop_name);
+    }
 
-    pspec = g_object_class_find_property(
-        G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
-        StringValuePtr(prop_name));
+    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+                                         name);
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s", StringValuePtr(prop_name));
+        rb_raise(rb_eArgError, "No such property: %s", name);
     else {
         GValue tmp = {0,};
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
         if (!NIL_P(val))
             rbgobj_rvalue_to_gvalue(val, &tmp);
-        g_object_set_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
+        g_object_set_property(RVAL2GOBJ(self), name, &tmp);
         g_value_unset(&tmp);
         return self;
     }
@@ -149,20 +161,25 @@ gobj_get_property(self, prop_name)
     VALUE self, prop_name;
 {
     GParamSpec* pspec;
+    const char* name;
 
-    StringValue(prop_name);
+    if (SYMBOL_P(prop_name)) {
+        name = rb_id2name(SYM2ID(prop_name));
+    } else {
+        StringValue(prop_name);
+        name = StringValuePtr(prop_name);
+    }
 
-    pspec = g_object_class_find_property(
-        G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
-        StringValuePtr(prop_name));
+    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
+                                         name);
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s", StringValuePtr(prop_name));
+        rb_raise(rb_eArgError, "No such property: %s", name);
     else {
         GValue tmp = {0,};
         VALUE ret;
         g_value_init(&tmp, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        g_object_get_property(RVAL2GOBJ(self), StringValuePtr(prop_name), &tmp);
+        g_object_get_property(RVAL2GOBJ(self), name, &tmp);
         ret = GVAL2RVAL(&tmp);
         g_value_unset(&tmp);
         return ret;
@@ -288,7 +305,7 @@ Init_gobject_gobject()
     rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 #endif
 
-    rb_define_singleton_method(cGObject, "find_property", &gobj_s_find_property, 0);
+    rb_define_singleton_method(cGObject, "find_property", &gobj_s_find_property, 1);
     rb_define_singleton_method(cGObject, "list_properties", &gobj_s_list_properties, 0);
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);

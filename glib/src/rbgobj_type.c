@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/09/24 16:47:25 $
+  $Date: 2002/09/29 13:36:29 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -20,7 +20,6 @@ static ID id_new;
 static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
-static VALUE mInterfaceCommons;
 
 static void
 cinfo_mark(RGObjClassInfo* cinfo)
@@ -106,6 +105,8 @@ rbgobj_lookup_class_by_gtype(gtype)
           case G_TYPE_INTERFACE:
             cinfo->klass = rb_module_new();
             rb_extend_object(cinfo->klass, mInterfaceCommons);
+            if (gtype != G_TYPE_INTERFACE)
+                rb_include_module(cinfo->klass, GTYPE2CLASS(G_TYPE_INTERFACE));
             break;
 
           default:
@@ -516,6 +517,8 @@ Init_type()
 
 /**********************************************************************/
 
+VALUE mInterfaceCommons;
+
 static VALUE
 interface_get_gtype(iface)
     VALUE iface;
@@ -588,6 +591,14 @@ Init_instantiatable()
 
 /**********************************************************************/
 
+static void
+Init_interface()
+{
+    G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
+}
+
+/**********************************************************************/
+
 /*
  * Init
  */
@@ -607,4 +618,5 @@ void Init_gobject_gtype()
 
     Init_interface_commons();
     Init_instantiatable();
+    Init_interface();
 }

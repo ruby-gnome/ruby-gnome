@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/09/24 03:00:02 $
+  $Date: 2002/09/29 13:36:29 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -107,11 +107,11 @@ static VALUE
 inspect(VALUE self)
 {
     GParamSpec* pspec = RVAL2GOBJ(self);
-    gchar* str = g_strdup_printf("#<%s: name=\"%s\" nick=\"%s\" blurb=\"%s\">",
+    gchar* str = g_strdup_printf("#<%s: name=\"%s\" value_type=\"%s\" owner_type=\"%s\">",
                                  rb_class2name(CLASS_OF(self)),
                                  g_param_spec_get_name(pspec),
-                                 g_param_spec_get_nick(pspec),
-                                 g_param_spec_get_blurb(pspec));
+                                 g_type_name(G_PARAM_SPEC_VALUE_TYPE(pspec)),
+                                 g_type_name(pspec->owner_type));
     VALUE result = rb_str_new2(str);
     g_free(str);
     return result;
@@ -126,13 +126,15 @@ get_name(VALUE self)
 static VALUE
 get_nick(VALUE self)
 {
-    return rb_str_new2(g_param_spec_get_nick(rbgobj_param_spec_get_struct(self)));
+    const gchar* str = g_param_spec_get_nick(rbgobj_param_spec_get_struct(self));
+    return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE
 get_blurb(VALUE self)
 {
-    return rb_str_new2(g_param_spec_get_blurb(rbgobj_param_spec_get_struct(self)));
+    const gchar* str = g_param_spec_get_blurb(rbgobj_param_spec_get_struct(self));
+    return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE

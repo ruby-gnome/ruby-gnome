@@ -20,8 +20,10 @@ typedef struct {
     GType type;
 } boxed_holder;
 
-extern VALUE rbglib_cInstantiatable;
-#define cInstantiatable rbglib_cInstantiatable
+extern VALUE rbgobj_cInstantiatable;
+extern VALUE rbgobj_mInterfaceCommons;
+#define cInstantiatable   rbgobj_cInstantiatable
+#define mInterfaceCommons rbgobj_mInterfaceCommons
 
 extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);

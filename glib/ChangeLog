@@ -1,3 +1,18 @@
+2002-09-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_param.c (inspect): change format: including value type and
+	owner type. excluding nick and blurb.
+	* src/rbgobj_param.c (get_nick, get_blurb): return nil if the string
+	is NULL.
+	* src/rbgobj_signal.c: introduce GLIb::Signal::Query to wrap
+	GSignalQuery.
+	* src/rbgobj_type.c: define GLib::Interface and include it to each
+	interface. This inclusion is intended to represent that interfaces
+	are subtypes of GLib::Inteface.
+	* src/rbgobj_object.c (gobj_s_find_property, gobj_set_property,
+	gobj_get_property): accept Symbol as property name.
+	* src/rbgobj_object.c: fix parameter number of GLib::Object.find_property
+
 2002-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_closure.c, src/rbgobj_boxed.c, src/rbgobject.h:
