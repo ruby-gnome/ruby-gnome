@@ -1,5 +1,9 @@
 2002-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktreeselection.c: Fix bad definition of the class.
+
+2002-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* src/rbgtktreeselection.c: Add a file.
 	* src/rbgtkconst.c: Modify GtkSelectionMode.
 

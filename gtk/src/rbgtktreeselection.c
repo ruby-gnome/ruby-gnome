@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2002/10/06 16:14:08 $
+  $Date: 2002/10/06 16:43:44 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -138,7 +138,7 @@ treeselection_select_range(self, start_path, end_path)
 void
 Init_gtk_treeselection()
 {
-    VALUE gTs = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeSelection", mGtk); 
+    VALUE gTs = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
     
     rb_define_method(gTs, "set_mode", treeselection_set_mode, 1);
     rb_define_method(gTs, "mode", treeselection_get_mode, 0);
