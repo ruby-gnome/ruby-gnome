@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/10 00:05:39 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,9 +20,9 @@
 #include "rbgobject.h"
 #include <gtk/gtk.h>
 
-#if defined HAVE_GDK_GDKX_H
+#if defined GDK_WINDOWING_X11
 # include <gdk/gdkx.h> /* for GDK_ROOT_WINDOW() */
-#elif defined G_OS_WIN32
+#elif defined GDK_WINDOWING_WIN32
 # if !defined HWND_DESKTOP
 #  define HWND_DESKTOP 0
 # endif
@@ -31,7 +31,6 @@
 #include <signal.h>
 
 #define CSTR2OBJ(s) (s ? rb_str_new2(s) : Qnil)
-#define RUBY_GTK_OBJ_KEY "__ruby_gtk_object__"
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
@@ -41,6 +40,7 @@ extern GSList* ary2gslist(VALUE ary);
 extern VALUE gslist2ary(GSList *list);
 extern VALUE arg_to_value(GtkArg* arg);
 
+extern ID id_relative_callbacks;
 extern ID id_call;
 
 extern VALUE mRC;
@@ -102,10 +102,9 @@ extern GtkSelectionData *get_gtkselectiondata(VALUE value);
 extern VALUE make_gtkprevinfo(GtkPreviewInfo* info);
 extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
 
-extern void add_relative(VALUE obj, VALUE relative);
-extern void add_relative_removable(VALUE obj, VALUE relative,
-                                   ID obj_ivar_id, VALUE hash_key);
-extern void remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
+#define add_relative rbgobj_add_relative
+#define add_relative_removable rbgobj_add_relative_removable
+#define remove_relative rbgobj_remove_relative
 
 /*
  * for gdk

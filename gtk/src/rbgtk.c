@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 05:05:08 $
+  $Date: 2002/08/10 00:05:39 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,11 +29,9 @@ VALUE gSelectionData;
 VALUE gPreviewInfo;
 #endif
 
-#ifdef GTK_ENABLE_BROKEN
-#endif
-
 VALUE mRC;
 
+ID id_relative_callbacks;
 ID id_call;
 
 void
@@ -44,29 +42,6 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
 	gtkobj = gtk_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
     RBGOBJ_INITIALIZE(obj, gtkobj);
-}
-
-void
-add_relative(obj, relative)
-    VALUE obj, relative;
-{
-    rbgobj_add_relative(obj, relative);
-}
-
-void 
-add_relative_removable(obj, relative, obj_ivar_id, hash_key)
-	VALUE obj, relative, hash_key;
-	ID    obj_ivar_id;
-{
-    rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key);
-}
-
-void 
-remove_relative(obj, obj_ivar_id, hash_key)
-	VALUE obj, hash_key;
-	ID    obj_ivar_id;
-{
-    rbgobj_remove_relative(obj, obj_ivar_id, hash_key);
 }
 
 VALUE

@@ -3,7 +3,7 @@
   rbgtksocket.c -
 
   $Author: sakai $
-  $Date: 2002/08/05 16:24:02 $
+  $Date: 2002/08/10 00:05:39 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -20,6 +20,7 @@ socket_initialize(self)
     return Qnil;
 }
 
+#ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 socket_steal(self, wid)
     VALUE self, wid;
@@ -33,6 +34,7 @@ socket_steal(self, wid)
 
     return Qnil;
 }
+#endif
 
 static VALUE
 socket_plug_window(self)
@@ -41,7 +43,7 @@ socket_plug_window(self)
     return GOBJ2RVAL(GTK_SOCKET(RVAL2GOBJ(self))->plug_window);
 }
 
-#if defined HAVE_GDK_GDKX_H
+#if defined GDK_WINDOWING_X11
 static VALUE
 socket_get_socket_id(self)
     VALUE self;
@@ -59,9 +61,11 @@ Init_gtk_socket()
     VALUE gSocket = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
     rb_define_method(gSocket, "initialize",  socket_initialize, 0);
+#ifndef GTK_DISABLE_DEPRECATED
     rb_define_method(gSocket, "steal", socket_steal, 1);
+#endif
     rb_define_method(gSocket, "plug_window", socket_plug_window, 0);
-#if defined HAVE_GDK_GDKX_H
+#if deffned GDK_WINDOWING_X11
     rb_define_method(gSocket, "xwindow", socket_get_socket_id, 0);
 #endif
 #endif

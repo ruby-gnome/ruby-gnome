@@ -1,3 +1,15 @@
+2002-08-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use 'pkg-config --variable=target' to know windowing API
+	instead of checking 'gdk/gdkx.h'
+	* src/rbgtk.[ch]: move id_relative_callbacks from glib
+	* src/rbgtk.h: use GDK_WINDOWING_X11 and GDK_WINDOWING_WIN32 instead of
+	HAVE_GDK_GDKX_H and G_OS_WIN32.
+	* src/rbgtksocket.c: ditto
+	* src/rbgtk.[ch]: make add_relative(), add_relative_removable(), 
+	remove_relative() be macros for corresponding glib2.so API.
+	* src/rbgtk.h: remove RUBY_GTK_OBJ_KEY
+
 2002-08-07  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/rbgtktextchild.c, src/rbgtktextmark.c, src/rbgtktexttag.c:
