@@ -1,3 +1,8 @@
+2003-10-01  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaclient.c: Added #notify_connection_closed_event (which 
+	  declaration was missing in gda-client.h).
+
 2003-09-30  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* src/rbgdaconnection.c: Added a few methods (#set_client, #provider, 

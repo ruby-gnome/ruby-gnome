@@ -153,6 +153,18 @@ static VALUE rb_gda_client_notify_connection_opened_event(self, conn)
     return self;
 }
 
+static VALUE rb_gda_client_notify_connection_closed_event(self, conn)
+    VALUE self, conn;
+{
+    /* not exported in libgda <= 1.0.0 */
+    void gda_client_notify_connection_closed_event(GdaClient *, 
+                                                   GdaConnection *);
+
+    gda_client_notify_connection_closed_event(RGDA_CLIENT(self),
+                                              RGDA_CONNECTION(conn));
+    return self;
+}
+
 static VALUE rb_gda_client_notify_transaction_started_event(self, conn, tr)
     VALUE self, conn, tr;
 {
@@ -200,6 +212,8 @@ void Init_gda_client(void) {
     rb_define_method(c, "notify_error_event", rb_gda_client_notify_error_event, 2);
     rb_define_method(c, "notify_connection_opened_event", 
                      rb_gda_client_notify_connection_opened_event, 1);
+    rb_define_method(c, "notify_connection_closed_event", 
+                     rb_gda_client_notify_connection_closed_event, 1);
     rb_define_method(c, "notify_transaction_started_event", 
                      rb_gda_client_notify_transaction_started_event, 2);
     rb_define_method(c, "notify_transaction_committed_event", 
