@@ -1,5 +1,7 @@
 2004-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* lib/libglade2.rb: Fix a warning when execute ruby with -d option.
+	Add header comments.
 	* rbglade.c: GladeXML.new accept data.
 	Add GladeXML::FILE, BUFFER for GladeXML.new.
 	GladeXML.new works unless block.
