@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 16:52:57 $
+  $Date: 2003/09/20 01:27:39 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -20,6 +20,7 @@ static ID id_new;
 static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
+static void rbgobj_init_interface(VALUE interface);
 
 static void
 cinfo_mark(RGObjClassInfo* cinfo)
@@ -100,9 +101,6 @@ rbgobj_lookup_class_by_gtype(gtype)
 
           case G_TYPE_INTERFACE:
             cinfo->klass = rb_module_new();
-            rb_extend_object(cinfo->klass, mMetaInterface);
-            if (gtype != G_TYPE_INTERFACE)
-                rb_include_module(cinfo->klass, GTYPE2CLASS(G_TYPE_INTERFACE));
             break;
 
           default:
@@ -129,7 +127,7 @@ rbgobj_lookup_class_by_gtype(gtype)
         if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
             rbgobj_define_action_methods(cinfo->klass);
 
-        if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT){
+        if (G_TYPE_IS_INSTANTIATABLE(gtype)){
             GType* interfaces = NULL;
             guint n_interfaces = 0;
             int i;
@@ -141,12 +139,16 @@ rbgobj_lookup_class_by_gtype(gtype)
                     rbgobj_lookup_class_by_gtype(interfaces[i])->klass);
             }
             g_free(interfaces);
+        }
 
+        if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT) {
             rbgobj_define_property_accessors(cinfo->klass);
         } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
             rbgobj_init_enum_class(cinfo->klass);
         } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {
             rbgobj_init_flags_class(cinfo->klass);
+        } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_INTERFACE) {
+            rbgobj_init_interface(cinfo->klass);
         }
 
         if (gclass)
@@ -679,6 +681,27 @@ Init_instantiatable()
 }
 
 /**********************************************************************/
+
+static VALUE
+interface_s_append_features(self, klass)
+     VALUE self, klass;
+{
+    if (!rb_obj_is_kind_of(klass, cInstantiatable))
+        rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
+    return rb_call_super(1, &klass);
+}
+
+static void
+rbgobj_init_interface(interface)
+    VALUE interface;
+{
+    rb_extend_object(interface, mMetaInterface);
+    rb_define_singleton_method(interface, "append_features",
+                               interface_s_append_features, 1);
+    /* pseudo inheritance */
+    if (CLASS2GTYPE(interface) != G_TYPE_INTERFACE)
+        rb_include_module(interface, GTYPE2CLASS(G_TYPE_INTERFACE));
+}
 
 static void
 Init_interface()

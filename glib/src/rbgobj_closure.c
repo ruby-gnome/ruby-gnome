@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2003/09/18 11:50:33 $
+  $Date: 2003/09/20 01:27:39 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -233,6 +233,7 @@ Init_closure()
     rb_define_method(cClosure, "initialize", closure_initialize, 0);
     rb_define_method(cClosure, "in_marshal?", closure_in_marshal, 0);
     rb_define_method(cClosure, "invalid?", closure_is_invalid, 0);
+    rb_define_method(cClosure, "invalidate", closure_invalidate, 0);
 }
 
 /**********************************************************************/

@@ -1,3 +1,9 @@
+2003-09-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: override #append_features of interface modules to
+	prevent including them into classes which is not subclass of
+	GLib::Instantiatable.
+
 2003-09-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c: implement GLib::Closure#invalidate.
