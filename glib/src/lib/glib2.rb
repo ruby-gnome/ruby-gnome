@@ -126,7 +126,7 @@ module GLib
       log(DOMAIN,  LEVEL_WARNING, caller(1)[0] << ": " << str)
     end
     
-    def set_error_domain(domain)
+    def set_log_domain(domain)
       level = GLib::Log::LEVEL_CRITICAL
       if $DEBUG
         level = 255
@@ -158,8 +158,8 @@ module GLib
   end
 end
 
-GLib::Log.set_error_domain(GLib::LOG_DOMAIN)
-GLib::Log.set_error_domain(GLib::Object::LOG_DOMAIN)
-GLib::Log.set_error_domain(GLib::Thread::LOG_DOMAIN)
-GLib::Log.set_error_domain(GLib::Module::LOG_DOMAIN)
+GLib::Log.set_log_domain(GLib::LOG_DOMAIN)
+GLib::Log.set_log_domain(GLib::Object::LOG_DOMAIN)
+GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
+GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
