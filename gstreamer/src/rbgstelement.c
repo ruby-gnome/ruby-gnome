@@ -778,7 +778,7 @@ static VALUE rb_gst_element_query(argc, argv, self)
                              FIX2INT(query_type),
                              &gstformat,
                              &value)
-        ? INT2FIX(value)
+        ? ULL2NUM(value)
         : Qnil;
 }
 
