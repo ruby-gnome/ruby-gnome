@@ -4,7 +4,7 @@
   rbgtktooltips.c -
 
   $Author: mutoh $
-  $Date: 2002/11/03 18:04:43 $
+  $Date: 2002/12/01 15:50:22 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -55,9 +55,15 @@ ttips_set_tip(self, win, text, priv)
     return self;
 }
 
-/*
-GtkTooltipsData* gtk_tooltips_data_get      (GtkWidget *widget);
-*/
+static VALUE
+ttips_s_data_get(self, widget)
+    VALUE self, widget;
+{
+    GtkTooltipsData* data = gtk_tooltips_data_get(GTK_WIDGET(RVAL2GOBJ(widget)));
+
+    return rb_ary_new3(3, GOBJ2RVAL(data->widget), CSTR2RVAL(data->tip_text),
+                       CSTR2RVAL(data->tip_private));
+}
 
 static VALUE
 ttips_force_window(self)
@@ -77,4 +83,6 @@ Init_gtk_tooltips()
     rb_define_method(gTooltips, "enable", ttips_enable, 0);
     rb_define_method(gTooltips, "disable", ttips_disable, 0);
     rb_define_method(gTooltips, "force_window", ttips_force_window, 0);
+
+    rb_define_singleton_method(gTooltips, "get_data", ttips_s_data_get, 1);
 }

@@ -1,3 +1,10 @@
+2002-12-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtklabel.c: Support mnemonic label in Gtk::Label#initialize, #set_text.
+	Add Gtk::Label#set_markup, #layout_offsets, #select_region, #layout, selection_bounds
+	* src/rbgtktooltips.c: Add Gtk::Tooltips.get_data().
+	* sample/misc/label.rb: Add a file.
+
 2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkimagemenuitem.c: Support mnemonic label, stockitem in #initialize.
