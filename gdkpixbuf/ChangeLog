@@ -1,3 +1,7 @@
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+
 2002-11-05  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
 
 	* rbgdk-pixbuf.c: Bugfix for "undefined symbol: DBL2INT", "CSTR2STR",

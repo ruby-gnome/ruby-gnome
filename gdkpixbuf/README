@@ -1,27 +1,29 @@
-REQUIREMENTS
-===========
+Ruby/GdkPixbuf2
+===============
+Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x.
 
-Ruby 1.6.2
-Gtk+ 2.0.0
-GdkPixbuf 2.0
-Ruby/GTK2
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   Ruby/GLib2, Ruby/GTK2: http://ruby-gnome2.sourceforge.net/
 
-INSTALL INSTRUCTIONS
-====================
-
-$ ruby extconf.rb /location/of/ruby-gtk/source/directory
-$ make
-# make install
-$ ruby sample/test.rb some_image
+Install
+-------
+   0. install ruby-1.6.x, GTK+ and Ruby/GTK2.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
 Copying
-=======
-    Copyright (c) 2002 Ruby-GNOME2 Project Team
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
 
-    This program is free software.
-    You can distribute/modify this program under the terms of
-    the GNU LIBRARY General Public License version 2.
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
 
-CONTACT INFORMATION
-===================
-Ruby-GNOME2 Website is http://ruby-gnome2.sf.net/.
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/
