@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Date: 2002/07/07 05:59:16 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,6 +16,7 @@
 
 #include "ruby.h"
 #include "rubysig.h"
+#include "rbg.h"
 #include "rbglib.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
@@ -280,7 +281,7 @@ extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
 extern VALUE make_gdkatom(GdkAtom atom);
 extern GdkAtom get_gdkatom(VALUE atom);
 
-#ifdef GTK_DISABLE_DEPRECATED
+#ifndef GTK_DISABLE_DEPRECATED
 extern VALUE make_gdkfont(GdkFont* font);
 extern GdkFont* get_gdkfont(VALUE font);
 #endif
