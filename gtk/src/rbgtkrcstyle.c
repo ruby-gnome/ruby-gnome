@@ -4,7 +4,7 @@
   rbgtkrcstyle.c -
 
   $Author: mutoh $
-  $Date: 2003/05/18 17:02:42 $
+  $Date: 2003/05/23 18:47:57 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -111,7 +111,7 @@ rcstyle_set_ ## type(self, idx, r, g, b) \
   color->red   = NUM2INT(r); \
   color->green = NUM2INT(g); \
   color->blue  = NUM2INT(b); \
-  return(BOXED2RVAL(color, GDK_TYPE_COLOR)); \
+  return self;\
 } \
 static VALUE \
 rcstyle_ ## type(self, idx) \

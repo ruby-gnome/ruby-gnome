@@ -1,3 +1,13 @@
+2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstyle.c: Add Gtk::Style#text_aa, #set_text_aa, #font_desc, 
+	#set_font_desc, #xthickness, #set_xthickness, #ythickness, #set_ythickness,
+	#set_fg_gc, #set_bg_gc, #set_light_gc, #set_dark_gc, #set_mid_gc,
+	#set_text_gc, #set_base_gc, #set_text_aa_gc, #set_black_gc, #set_white_gc,
+	#set_bg_pixmap, #paint_*, #lookup_icon_set, #render_icon, 
+	#apply_default_background
+	* src/rbgtkcelleditable.c: Gtk::CellEditable.start_editing accept nil. 
+
 2003-05-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbar.c: Fixed incorrect calls of G_RELATIVE. 

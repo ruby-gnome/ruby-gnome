@@ -4,7 +4,7 @@
   rbgtkcelleditable.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/05/23 18:47:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -17,7 +17,8 @@ static VALUE
 celledit_start_editing(self, event)
      VALUE self, event;
 {
-    gtk_cell_editable_start_editing(_SELF(self), RVAL2GEV(event));
+    gtk_cell_editable_start_editing(_SELF(self), 
+                                    NIL_P(event) ? NULL : RVAL2GEV(event));
     return self;
 }
 
