@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2002/08/13 17:56:41 $
+  $Author: mutoh $
+  $Date: 2002/08/20 14:51:58 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -79,36 +79,43 @@ VALUE
 rbgobj_create_object(klass)
     VALUE klass;
 {
-    gobj_holder* holder;
     VALUE result;
 
-    result = Data_Make_Struct(klass, gobj_holder, rbgobj_mark, rbgobj_free, holder);
-    holder->self  = result;
-    holder->gobj  = NULL;
-    holder->cinfo = NULL;
-    holder->destroyed = FALSE;
-    
+	if (G_TYPE_FUNDAMENTAL(CLASS2GTYPE(klass)) == G_TYPE_BOXED){
+		result = rbgobj_boxed_create(klass);
+    } else {
+		gobj_holder* holder;
+		result = Data_Make_Struct(klass, gobj_holder, rbgobj_mark, rbgobj_free, holder);
+		holder->self  = result;
+		holder->gobj  = NULL;
+		holder->cinfo = NULL;
+		holder->destroyed = FALSE;
+	}
     return result;
 }
 
 void
-rbgobj_initialize_gobject(obj, gobj)
+rbgobj_initialize_object(obj, cobj)
     VALUE obj;
-    GObject* gobj;
+    gpointer cobj;
 {
-    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
-    if (holder)
-        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
+	if (G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj)) == G_TYPE_BOXED){
+		rbgobj_boxed_initialize(obj, cobj);
+	} else {
+		gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
+		if (holder)
+			rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
 
-    Data_Get_Struct(obj, gobj_holder, holder);
-    holder->cinfo = rbgobj_lookup_class(rb_class_of(obj));
-    holder->gobj  = gobj;
-    holder->destroyed = FALSE;
+		Data_Get_Struct(obj, gobj_holder, holder);
+		holder->cinfo = RVAL2CINFO(obj);
+		holder->gobj  = (GObject*)cobj;
+		holder->destroyed = FALSE;
+		
+		g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
+		g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
 
-    g_object_set_qdata(gobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
-    g_object_weak_ref(gobj, rbgobj_weak_notify, holder);
-
-    rb_ivar_set(obj, id_relatives, Qnil);
+		rb_ivar_set(obj, id_relatives, Qnil);
+	}
 }
 
 GObject*
@@ -149,7 +156,7 @@ rbgobj_get_value_from_gobject(gobj)
     else {
         VALUE obj = rbgobj_create_object(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
-        rbgobj_initialize_gobject(obj, gobj);
+        rbgobj_initialize_object(obj, (gpointer)gobj);
         return obj;
     }
 }

@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: sakai $
-  $Date: 2002/08/13 17:56:41 $
+  $Author: mutoh $
+  $Date: 2002/08/20 14:51:58 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -12,11 +12,6 @@
 **********************************************************************/
 
 #include "global.h"
-
-typedef struct {
-    gpointer boxed;
-    GType type;
-} boxed_holder;
 
 static void
 boxed_mark(boxed_holder* p)
@@ -37,6 +32,34 @@ boxed_free(boxed_holder* p)
 }
 
 /**********************************************************************/
+VALUE
+rbgobj_boxed_create(klass)
+    VALUE klass;
+{
+    boxed_holder* holder;
+    VALUE result;
+	RGObjClassInfo *cinfo;
+
+	cinfo = rbgobj_lookup_class(klass);
+    result = Data_Make_Struct(klass, boxed_holder, 
+							  boxed_mark, boxed_free, holder);
+    holder->type = cinfo->gtype;
+    holder->boxed = (gpointer)NULL;
+
+    return result;
+}
+
+void
+rbgobj_boxed_initialize(obj, boxed)
+    VALUE obj;
+    gpointer boxed;
+{ 
+    boxed_holder* holder;
+    Data_Get_Struct(obj, boxed_holder, holder);
+    holder->boxed = g_boxed_copy(holder->type, boxed);
+
+    rb_ivar_set(obj, id_relatives, Qnil);
+}
 
 gpointer
 rbgobj_boxed_get(self)
@@ -44,6 +67,10 @@ rbgobj_boxed_get(self)
 {
     boxed_holder* holder;
     Data_Get_Struct(self, boxed_holder, holder);
+
+    if (!holder->boxed)
+        rb_raise(rb_eArgError, "uninitialize %s", rb_class2name(CLASS_OF(self)));
+
     return holder->boxed;
 }
 
