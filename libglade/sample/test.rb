@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: test.rb,v 1.4 2003/02/01 17:01:56 mutoh Exp $
+  $Id: test.rb,v 1.5 2004/01/07 15:15:32 mutoh Exp $
 =end
 
 require 'libglade2'
@@ -12,7 +12,7 @@ require 'libglade2'
 class Test
   def initialize
     @glade = GladeXML.new("test.glade") {|handler| method(handler)}
-    @entry = @glade.get_widget("entrybox")
+    @entry = @glade["entrybox"]
   end
   
   def say_hello(widget)

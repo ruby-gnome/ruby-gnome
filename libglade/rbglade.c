@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2003/08/22 12:02:27 $
+  $Date: 2004/01/07 15:15:32 $
 
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project
@@ -98,4 +98,5 @@ void Init_libglade2()
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
+    rb_define_alias(cGladeXML, "[]", "get_widget");
 }

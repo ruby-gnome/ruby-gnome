@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.2 2003/02/01 17:01:57 mutoh Exp $
+  $Id: treeview.rb,v 1.3 2004/01/07 15:15:32 mutoh Exp $
 =end
 
 require 'libglade2'
@@ -13,7 +13,7 @@ require 'libglade2'
 class Treeview
   def initialize(path)
     @glade = GladeXML.new(path) {|handler| method(handler)}
-    @treeview = @glade.get_widget("treeview1")
+    @treeview = @glade["treeview1"]
     @model = Gtk::TreeStore.new(String)
     column = Gtk::TreeViewColumn.new("Test", Gtk::CellRendererText.new, {:text => 0})
     @treeview.append_column(column)
