@@ -1,3 +1,9 @@
+2003-05-27  Geoff Youngs  <g@intersect-uk.co.uk>
+
+	* rbgobject.c - altered rbgobj_instance_from_ruby_object()
+	and rbgobj_ruby_object_from_instance() to
+	convert between NULL and nil automatically
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/depend: Add a file.
