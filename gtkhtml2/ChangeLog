@@ -3,6 +3,6 @@
 	* src/rbgtkhtmlview.c: Fix segfault for Gtk::HtmlView#document.
 	* sample/test-gtkhtml.rb: Define default size of the window. 
 
-2003-08-08  Martin Povolny <mpovolny@users.sourceforge.net>
+2003-08-08  Martin Povolný <xpovolny@fi.muni.cz>
 
 	* Initial import.
