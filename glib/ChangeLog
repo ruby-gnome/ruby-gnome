@@ -1,5 +1,10 @@
 2003-09-18  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_closure.c: implement GLib::Closure#invalidate.
+
+	* src/rbgobj_closure.c: don't invoke Proc objects after ruby is
+	terminated.
+
 	* src/rbgobj_signal.c: implement GLib::MetaInterface#signal_override
 	and GLib::Instantiatable#signal_chain_from_overridden experimentaly.
 

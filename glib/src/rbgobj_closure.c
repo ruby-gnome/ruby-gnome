@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2003/08/06 11:55:06 $
+  $Date: 2003/09/18 11:50:33 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -13,6 +13,7 @@
 #include "global.h"
 
 static ID id_call;
+static gboolean rclosure_initialized = FALSE;
 
 typedef struct _GRClosure GRClosure;
 
@@ -88,6 +89,11 @@ rclosure_marshal(GClosure*       closure,
 {
     struct marshal_arg arg;
     int state;
+
+    if (!rclosure_initialized) {
+        g_closure_invalidate(closure);
+        return;
+    }
  
     arg.closure         = closure;
     arg.return_value    = return_value;
@@ -160,6 +166,12 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 }
 
 static void
+rclosure_end_proc(VALUE _)
+{
+    rclosure_initialized = FALSE;
+}
+
+static void
 Init_rclosure()
 {
     rclosure_table = g_hash_table_new_full(g_direct_hash, g_direct_equal,
@@ -172,6 +184,9 @@ Init_rclosure()
     rb_global_variable(&rclosure_table_wrapper);
 
     id_call = rb_intern("call");
+
+    rclosure_initialized = TRUE;
+    rb_set_end_proc(rclosure_end_proc, Qnil);
 }
 
 /**********************************************************************/
@@ -200,6 +215,15 @@ closure_is_invalid(self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return closure->is_invalid ? Qtrue : Qfalse;
+}
+
+static VALUE
+closure_invalidate(self)
+    VALUE self;
+{
+    GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
+    g_closure_invalidate(closure);
+    return self;
 }
 
 static void
