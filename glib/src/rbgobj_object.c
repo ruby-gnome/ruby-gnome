@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/10/14 11:04:18 $
+  $Date: 2002/10/14 14:49:55 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -89,8 +89,9 @@ static VALUE
 gobj_s_property(self, property_name)
      VALUE self, property_name;
 {
-    GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
+    GObjectClass* oclass;
     const char* name;
+    GParamSpec* prop;
     VALUE result;
 
     if (SYMBOL_P(property_name)) {
@@ -100,8 +101,15 @@ gobj_s_property(self, property_name)
         name = StringValuePtr(property_name);
     }
 
-    result = GOBJ2RVAL(g_object_class_find_property(oclass, name));
+    oclass = g_type_class_ref(CLASS2GTYPE(self));
 
+    prop = g_object_class_find_property(oclass, name);
+    if (!prop){
+        g_type_class_unref(oclass);
+        rb_raise(rb_eNameError, "no such property: %s", name);
+    }
+
+    result = GOBJ2RVAL(prop);
     g_type_class_unref(oclass);
     return result;
 }

@@ -1,5 +1,7 @@
 2002-10-14  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_object.c (GLib::Object.property): raise exception if the
+	property doesn't exist.
 	* src/rbgobj_param.c: rename GLib::ParamSpec to GLib::Param
 	* src/rbgobj_signal.c (GLib::Instantiatable#signal_conect): accept
 	symbol as signal name.
