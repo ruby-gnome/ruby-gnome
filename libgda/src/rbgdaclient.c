@@ -39,8 +39,8 @@ static VALUE rb_gda_client_open_connection(argc, argv, self)
 
     conn = gda_client_open_connection(RGDA_CLIENT(self),
                                       RVAL2CSTR(dsn),  
-                                      RVAL2CSTR(username),  
-                                      RVAL2CSTR(password),  
+                                      NIL_P(username) ? NULL : RVAL2CSTR(username),  
+                                      NIL_P(password) ? NULL : RVAL2CSTR(password),  
                                       NIL_P(options) ? 0 : FIX2INT(options));
     if (rb_block_given_p()) {
         if (conn == NULL) {

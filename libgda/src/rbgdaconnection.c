@@ -157,6 +157,31 @@ static VALUE rb_gda_connection_get_errors(self)
     return arr;
 }
 
+static VALUE rb_gda_connection_begin_transaction(self, tr)
+    VALUE self, tr;
+{
+    gda_connection_begin_transaction(RGDA_CONNECTION(self),
+                                     RGDA_TRANSACTION(tr));
+    return self;
+}
+
+
+static VALUE rb_gda_connection_commit_transaction(self, tr)
+    VALUE self, tr;
+{
+    gda_connection_commit_transaction(RGDA_CONNECTION(self),
+                                      RGDA_TRANSACTION(tr));
+    return self;
+}
+
+static VALUE rb_gda_connection_rollback_transaction(self, tr)
+    VALUE self, tr;
+{
+    gda_connection_rollback_transaction(RGDA_CONNECTION(self),
+                                        RGDA_TRANSACTION(tr));
+    return self;
+}
+
 void Init_gda_connection(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_CONNECTION, "Connection", mGda);
 
@@ -174,6 +199,10 @@ void Init_gda_connection(void) {
     rb_define_method(c, "execute_command",        rb_gda_connection_execute_command,        -1);
     rb_define_method(c, "execute_single_command", rb_gda_connection_execute_single_command, -1);
     rb_define_method(c, "execute_non_query",      rb_gda_connection_execute_non_query,      -1);
+
+    rb_define_method(c, "begin_transaction",    rb_gda_connection_begin_transaction,    1);
+    rb_define_method(c, "commit_transaction",   rb_gda_connection_commit_transaction,   1);
+    rb_define_method(c, "rollback_transaction", rb_gda_connection_rollback_transaction, 1);
 
     rb_define_method(c, "errors", rb_gda_connection_get_errors, 0);
 

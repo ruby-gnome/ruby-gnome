@@ -1,3 +1,11 @@
+2003-09-25  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdavalue.c: Added Gda::Value#<=>.
+	* src/rbgdaconnection.c: Added Gda::Connection#begin_transaction, 
+	  #commit_transaction and #rollback_transaction.
+	* src/rbgdaclient.c: Gda::Client#open_connection can now accept nil
+	  values as username and password.
+	* sample/sample.rb, sample/sample.sql: New files.
 
 2003-09-24  Laurent Sansonetti  <laurent@datarescue.be>
 
