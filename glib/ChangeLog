@@ -1,3 +1,8 @@
+2003-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.h, rbgobj_type.c: Remove rbgobj_exist_class().
+	Use rb_const_define_at() instead. Pointed out by Masahiro Sakai.
+
 2003-05-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_type.c, rbgobject.h: Add rbgobj_exist_class(). 

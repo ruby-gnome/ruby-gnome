@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2003/05/18 17:03:35 $
+  $Date: 2003/05/20 17:12:02 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -103,7 +103,6 @@ extern void rbgobj_register_class(VALUE klass,
 extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
-extern gboolean rbgobj_exist_class(GType gtype);
 
 /* rbgobj_signal.c */
 typedef VALUE (*GValToRValSignalFunc)(guint num,const GValue* values);
