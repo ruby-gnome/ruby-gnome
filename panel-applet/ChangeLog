@@ -1,6 +1,11 @@
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbpanel-applet.c: Rewritten.
+	* extconf.rb: Rewritten.
+	
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
