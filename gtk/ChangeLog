@@ -1,3 +1,7 @@
+2003-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeviewcolumn.c: Fix a segfault in Gtk::TreeViewColumn#set_cell_data_func.
+
 2003-12-21  Kenichi Komiya <kom@mail1.accsnet.ne.jp>
 
 	* src/rbgtkbindingset.c: Fix a segfault.
