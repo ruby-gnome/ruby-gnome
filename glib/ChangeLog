@@ -1,3 +1,11 @@
+2003-11-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* sample/type-register.rb: call GLib::Object#notify when a
+	property is updated.
+
+	* src/rbgobj_signal.c: remove GLib::MetaInterface#signal_override
+	and GLib::Instantiatable#signal_chain_from_overridden.
+
 2003-11-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib.c: remove duplication of #include <locale.h>.

@@ -51,6 +51,7 @@ class MyButton < Gtk::Button
   def fuga=(arg)
     puts "MyButton#fuga= is called"
     @fuga = arg
+    notify("fuga")
   end
 end
 

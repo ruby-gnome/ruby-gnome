@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/11/05 12:56:54 $
+  $Date: 2003/11/15 06:07:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -503,40 +503,6 @@ guint	 g_signal_handlers_disconnect_matched (gpointer		  instance,
 #endif
 
 static VALUE
-gobj_s_sig_override(klass, sig)
-    VALUE klass;
-    VALUE sig;
-{
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
-    const gchar* sig_name;
-    guint signal_id;
-
-    if (cinfo->klass != klass)
-        rb_raise(rb_eTypeError, "%s isn't registerd class",
-                 rb_class2name(klass));
-
-    if (SYMBOL_P(sig))
-        sig_name = rb_id2name(SYM2ID(sig));
-    else {
-        StringValue(sig);
-        sig_name = StringValuePtr(sig);
-    }
-    signal_id = g_signal_lookup(sig_name, cinfo->gtype);
-
-    if (!signal_id)
-        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
-
-    {
-        VALUE proc = G_BLOCK_PROC();
-        GClosure* rclosure = g_rclosure_new(proc, Qnil,
-                                            rbgobj_get_signal_func(signal_id));
-        g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
-    }
-
-    return klass;
-}
-
-static VALUE
 chain_from_overridden_body(struct emit_arg* arg)
 {
     g_value_init(arg->instance_and_params->values,
@@ -681,10 +647,6 @@ Init_signal_misc()
     rb_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-    rb_define_method(mMetaInterface, "signal_override",
-                     gobj_s_sig_override, 1);
-    rb_define_method(cInstantiatable, "signal_chain_from_overridden",
-                     gobj_sig_chain_from_overridden, -1);
     rb_define_singleton_method(cInstantiatable, "method_added",
                                gobj_s_method_added, 1);
 }
