@@ -1,3 +1,7 @@
+2003-10-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* test/test-glib2.rb: new file.
+
 2003-10-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c (get_prop_func, set_prop_func): replace '-' with
