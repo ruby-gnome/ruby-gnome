@@ -90,7 +90,7 @@ static VALUE rb_gst_clock_entry_new(argc, argv, self)
 /*
  *  Method: single_shot? -> aBoolean
  *
- *  Checks if the Gst::ClockEntry timer is single-shot.
+ *  Checks if the entry is single-shot.
  */
 static VALUE rb_gst_clock_entry_is_single_shot(self)
     VALUE self;
@@ -101,7 +101,7 @@ static VALUE rb_gst_clock_entry_is_single_shot(self)
 /*
  *  Method: periodic? -> aBoolean
  *
- *  Checks if the Gst::ClockEntry timer is periodic.
+ *  Checks if the entry is periodic.
  */
 static VALUE rb_gst_clock_entry_is_periodic(self)
     VALUE self;
@@ -182,7 +182,7 @@ static gboolean __callback_dispatcher(clock, time, id, user_data)
  *  Method: wait_async { |aClock, aTime, aEntryClock| ... } -> aFixnum
  *
  *  Register a block code, which will be called passing references
- *  to the Gst::Clock, the time (in nanoseconds) and the Gst::EntryClock as
+ *  to the Gst::Clock, the time (in nanoseconds) and the Gst::ClockEntry as
  *  parameters.
  *
  *  Returns a code (as a Fixnum):
@@ -266,9 +266,9 @@ static VALUE rb_gst_clock_entry_get_clock(self)
  *
  *  Gets the status of the entry, as a Fixnum integer.
  *  Possible values are:
- *      * Gst::Entry::OK;
- *      * Gst::Entry::EARLY;
- *      * Gst::Entry::RESTART.
+ *      * Gst::ClockEntry::OK;
+ *      * Gst::ClockEntry::EARLY;
+ *      * Gst::ClockEntry::RESTART.
  */
 static VALUE rb_gst_clock_entry_get_status(self)
     VALUE self;
