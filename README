@@ -20,6 +20,7 @@ Release packages
     - Ruby/GnomeCanvas2
     - Ruby/Libart2
     - Ruby/Libglade2
+    - Ruby/GConf2
 
 Install
 -------
