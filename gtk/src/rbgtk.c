@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 00:05:39 $
+  $Date: 2002/08/27 12:09:54 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,8 +109,10 @@ exec_callback(widget, proc)
 # undef USE_POLL_FUNC /* rb_thread_select() may cause busy wait */
 #endif
 
+/* We can't use rbgtk_poll() on native Win32.
+   Because GPollFD doesn't have file descriptor but HANDLE. */
 #ifdef NATIVE_WIN32
-# undef USE_POLL_FUNC /* I don't know whether this works for win32. */
+# undef USE_POLL_FUNC
 #endif
 
 #ifdef USE_POLL_FUNC
@@ -184,6 +186,12 @@ idle()
     return Qtrue;
 }
 
+static void
+idle_remove(VALUE data)
+{
+    gtk_idle_remove(NUM2UINT(data));
+}
+
 #endif /* !USE_POLL_FUNC */
  
 /*
@@ -218,7 +226,7 @@ Init_gtk_gtk()
 #ifdef USE_POLL_FUNC
     g_main_set_poll_func(rbgtk_poll);
 #else
-    gtk_idle_add((GtkFunction)idle, 0);
+    rb_set_end_proc(idle_remove, UINT2NUM(gtk_idle_add((GtkFunction)idle, 0)));
 #endif
 
 }
