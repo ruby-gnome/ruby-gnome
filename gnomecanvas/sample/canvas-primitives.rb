@@ -41,7 +41,7 @@ class CanvasSamplePrimitives < Gtk::VBox
       end
     when Gdk::Event::BUTTON_RELEASE
       item.ungrab(event.time)
-      @dragging = FALSE;
+      @dragging = false;
     end
   end
 
@@ -272,10 +272,10 @@ class CanvasSamplePrimitives < Gtk::VBox
       image.signal_connect("destroy", im) do |item, im|
       end
     end
-    plant_flower (root,  20.0, 170.0, Gtk::ANCHOR_NW, aa);
-    plant_flower (root, 180.0, 170.0, Gtk::ANCHOR_NE, aa);
-    plant_flower (root,  20.0, 280.0, Gtk::ANCHOR_SW, aa);
-    plant_flower (root, 180.0, 280.0, Gtk::ANCHOR_SE, aa);
+    plant_flower(root,  20.0, 170.0, Gtk::ANCHOR_NW, aa);
+    plant_flower(root, 180.0, 170.0, Gtk::ANCHOR_NE, aa);
+    plant_flower(root,  20.0, 280.0, Gtk::ANCHOR_SW, aa);
+    plant_flower(root, 180.0, 280.0, Gtk::ANCHOR_SE, aa);
   end
 
   VERTICES = 10
@@ -345,8 +345,8 @@ class CanvasSamplePrimitives < Gtk::VBox
   end
 
   def setup_lines(root)
-    polish_diamond (root)
-    make_hilbert (root)
+    polish_diamond(root)
+    make_hilbert(root)
 
     # Arrow tests
     points = [[340.0, 170.0], [340.0, 230.0], [390.0, 230.0], [390.0, 170.0]]
@@ -461,6 +461,7 @@ class CanvasSamplePrimitives < Gtk::VBox
 
   def initialize(aa)
     super(false, 4)
+    @dragging = false
     border_width = 4
     show()
 

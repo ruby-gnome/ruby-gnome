@@ -78,7 +78,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
       @current_points[6] = x;
       @current_points[7] = y;
 
-      path_def = Gnome::CanvasPathDef.new ();
+      path_def = Gnome::CanvasPathDef.new();
 
       path_def.moveto(@current_points[0], @current_points[1])
 
@@ -120,10 +120,10 @@ class CanvasSampleBezierCurve < Gtk::VBox
         draw_curve(item, event.x, event.y)
         @current_state = STATE_FIRST_PRESS
       when STATE_FIRST_RELEASE
-        draw_curve (item, event.x, event.y)
+        draw_curve(item, event.x, event.y)
         @current_state = STATE_SECOND_PRESS
       when STATE_SECOND_PRESS
-        draw_curve (item, event.x, event.y)
+        draw_curve(item, event.x, event.y)
         @current_state = STATE_INIT
       else
         raise format("shouldn't have reached here %d", @current_state)
@@ -133,13 +133,13 @@ class CanvasSampleBezierCurve < Gtk::VBox
 
       case @current_state
       when STATE_FIRST_PRESS
-        draw_curve (item, event.x, event.y)
+        draw_curve(item, event.x, event.y)
         @current_state = STATE_FIRST_RELEASE
       end
     when Gdk::Event::MOTION_NOTIFY
       case @current_state
       when STATE_FIRST_PRESS
-        draw_curve (item, event.x, event.y)
+        draw_curve(item, event.x, event.y)
       end
     end
     false
