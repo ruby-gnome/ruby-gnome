@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:15 $
+  $Date: 2002/12/16 17:48:47 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,7 +50,13 @@ static VALUE
 dialog_add_button(self, button_text, response_id)
     VALUE self, button_text, response_id;
 {
-    return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self), RVAL2CSTR(button_text), 
+    gchar* name;
+    if (SYMBOL_P(button_text)) {
+        name = rb_id2name(SYM2ID(button_text));
+    } else {
+        name = RVAL2CSTR(button_text);
+    }
+    return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self), name, 
                                            NUM2INT(response_id)));
 }
 

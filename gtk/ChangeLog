@@ -1,5 +1,6 @@
 2002-12-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkdialog.c: Gtk::Dialog#add_button accept Gtk::Stock. 
 	* src/rbgtkconst.c: Remove GtkCurveType(It was moved to Gtk::Curve). 
 
 2002-12-14  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
