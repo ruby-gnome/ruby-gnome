@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglwidget.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
-/*
+/* $Id: rbgtkwidget.c,v 1.1 2003/08/20 22:36:02 isambart Exp $ */
+/* OpenGL extension to Gtk::Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,12 +20,12 @@
 
 #include "rbgtkglext.h"
 
-#define _SELF(i) GTK_WIDGET(RVAL2GOBJ(i))
+#define _SELF(i)    GTK_WIDGET(RVAL2GOBJ(i))
 #define _CONTEXT(i) GDK_GL_CONTEXT(RVAL2GOBJ(i))
-#define _CONFIG(i) GDK_GL_CONFIG(RVAL2GOBJ(i))
+#define _CONFIG(i)  GDK_GL_CONFIG(RVAL2GOBJ(i))
 
 static VALUE
-gtkglwidget_set_gl_capability(argc, argv, self)
+widget_set_gl_capability(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
@@ -58,21 +58,21 @@ gtkglwidget_set_gl_capability(argc, argv, self)
 }
 
 static VALUE
-gtkglwidget_is_gl_capable(self)
+widget_is_gl_capable(self)
     VALUE self;
 {
     return CBOOL2RVAL(gtk_widget_is_gl_capable(_SELF(self)));
 }
 
 static VALUE
-gtkglwidget_get_gl_config(self)
+widget_get_gl_config(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_widget_get_gl_config(_SELF(self)));
 }
 
 static VALUE
-gtkglwidget_create_gl_context(self, share_list, direct, render_type)
+widget_create_gl_context(self, share_list, direct, render_type)
     VALUE self, share_list, direct, render_type;
 {
     return GOBJ2RVAL(gtk_widget_create_gl_context(_SELF(self),
@@ -82,36 +82,37 @@ gtkglwidget_create_gl_context(self, share_list, direct, render_type)
 }
 
 static VALUE
-gtkglwidget_get_gl_context(self)
+widget_get_gl_context(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_widget_get_gl_context(_SELF(self)));
 }
 
 static VALUE
-gtkglwidget_get_gl_window(self)
+widget_get_gl_window(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_widget_get_gl_window(_SELF(self)));
 }
 
 static VALUE
-gtkglwidget_get_gl_drawable(self)
+widget_get_gl_drawable(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_widget_get_gl_drawable(_SELF(self)));
 }
 
 void
-Init_gtk_gl_widget(void)
+Init_gtkglext_gtk_widget(void)
 {
-    VALUE gtkGlWidget = rb_const_get(mGtk, rb_intern("Widget"));
+    /* Gtk::Widget */
+    VALUE Widget = rb_const_get(mGtk, rb_intern("Widget"));
 
-    rb_define_method(gtkGlWidget, "set_gl_capability", gtkglwidget_set_gl_capability, -1);
-    rb_define_method(gtkGlWidget, "gl_capable?", gtkglwidget_is_gl_capable, 0);
-    rb_define_method(gtkGlWidget, "gl_config", gtkglwidget_get_gl_config, 0);
-    rb_define_method(gtkGlWidget, "create_gl_context", gtkglwidget_create_gl_context, 3);
-    rb_define_method(gtkGlWidget, "gl_context", gtkglwidget_get_gl_context, 0);
-    rb_define_method(gtkGlWidget, "gl_window", gtkglwidget_get_gl_window, 0);
-    rb_define_method(gtkGlWidget, "gl_drawable", gtkglwidget_get_gl_drawable, 0);
+    rb_define_method(Widget, "set_gl_capability", widget_set_gl_capability,-1);
+    rb_define_method(Widget, "gl_capable?",       widget_is_gl_capable,     0);
+    rb_define_method(Widget, "gl_config",         widget_get_gl_config,     0);
+    rb_define_method(Widget, "create_gl_context", widget_create_gl_context, 3);
+    rb_define_method(Widget, "gl_context",        widget_get_gl_context,    0);
+    rb_define_method(Widget, "gl_window",         widget_get_gl_window,     0);
+    rb_define_method(Widget, "gl_drawable",       widget_get_gl_drawable,   0);
 }

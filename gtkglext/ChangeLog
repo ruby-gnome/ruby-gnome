@@ -1,3 +1,12 @@
+2003-08-21 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgtkwidget.c, src/rbgdkwindow.c, src/rbgdkpixmap.c: Added
+	* src/*.c: Classes in Gtk/Gdk::GL have been moved to Gtk/Gdk and
+	renamed by adding a 'GL' prefix to their name. For example,
+	Gdk::GL::Config became Gdk::GLConfig. Most Variables/functions were
+	also renamed in the C code.
+	* sample/*.rb: modified to follow changes
+
 2003-08-20 Vincent Isambart <isambart@netcourrier.com>
 
 	* src/rbgdkglconfig.c, src/rbgtkglext.c: moved

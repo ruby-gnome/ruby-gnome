@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglpixmap.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
-/*
+/* $Id: rbgdkglpixmap.c,v 1.3 2003/08/20 22:36:02 isambart Exp $ */
+/* Gdk::GLPixmap Widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,9 +24,10 @@
 #define _GL_CONFIG(i) GDK_GL_CONFIG(RVAL2GOBJ(i))
 #define _PIXMAP(i)    GDK_PIXMAP(RVAL2GOBJ(i))
 
-#define _SELF(i) _GL_PIXMAP(i)
+#define _SELF(i)      _GL_PIXMAP(i)
+
 static VALUE
-gdkglpixmap_initialize(self, glconfig, pixmap)
+glpixmap_initialize(self, glconfig, pixmap)
     VALUE self, glconfig, pixmap;
 {
     G_INITIALIZE(self, gdk_gl_pixmap_new(_GL_CONFIG(glconfig),
@@ -36,7 +37,7 @@ gdkglpixmap_initialize(self, glconfig, pixmap)
 }
 
 static VALUE
-gdkglpixmap_destroy(self)
+glpixmap_destroy(self)
     VALUE self;
 {
     gdk_gl_pixmap_destroy(_SELF(self));
@@ -44,70 +45,19 @@ gdkglpixmap_destroy(self)
 }
 
 static VALUE
-gdkglpixmap_get_pixmap(self)
+glpixmap_get_pixmap(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_pixmap_get_pixmap(_SELF(self)));
 }
 
-#undef _SELF
-
-/* OpenGL extension to GdkPixmap */
-#define _SELF(i) _PIXMAP(i)
-
-static VALUE
-gdkpixmap_set_gl_capability(self, glconfig)
-    VALUE self, glconfig;
-{
-    return GOBJ2RVAL(gdk_pixmap_set_gl_capability(_SELF(self),
-                                                  _GL_CONFIG(glconfig),
-                                                  NULL));
-}
-
-static VALUE
-gdkpixmap_unset_gl_capability(self)
-    VALUE self;
-{
-    gdk_pixmap_unset_gl_capability(_SELF(self));
-    return self;
-}
-
-static VALUE
-gdkpixmap_is_gl_capable(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(gdk_pixmap_is_gl_capable(_SELF(self)));
-}
-
-static VALUE
-gdkpixmap_get_gl_pixmap(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gdk_pixmap_get_gl_pixmap(_SELF(self)));
-}
-
-static VALUE
-gdkpixmap_get_gl_drawable(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gdk_pixmap_get_gl_drawable(_SELF(self)));
-}
-
 void
-Init_gdk_gl_pixmap(void)
+Init_gtkglext_gdk_glpixmap(void)
 {
-    VALUE gdkGlPixmap = G_DEF_CLASS(GDK_TYPE_GL_PIXMAP, "Pixmap", mGdkGl);
+    /* Gdk::GLPixmap */
+    VALUE GLPixmap = G_DEF_CLASS(GDK_TYPE_GL_PIXMAP, "GLPixmap", mGdk);
 
-    rb_define_method(gdkGlPixmap, "initialize", gdkglpixmap_initialize, 3);
-    rb_define_method(gdkGlPixmap, "destroy", gdkglpixmap_destroy, 0);
-    rb_define_method(gdkGlPixmap, "pixmap", gdkglpixmap_get_pixmap, 0);
-
-    /* OpenGL extension to GdkPixmap */
-    VALUE gdkPixmap = rb_const_get(mGdk, rb_intern("Pixmap"));
-
-    rb_define_method(gdkPixmap, "set_gl_capability", gdkpixmap_set_gl_capability, 2);
-    rb_define_method(gdkPixmap, "unset_gl_capability", gdkpixmap_unset_gl_capability, 0);
-    rb_define_method(gdkPixmap, "gl_capable?", gdkpixmap_is_gl_capable, 0);
-    rb_define_method(gdkPixmap, "gl_pixmap", gdkpixmap_get_gl_pixmap, 0);
-    rb_define_method(gdkPixmap, "gl_drawable", gdkpixmap_get_gl_drawable, 0);
+    rb_define_method(GLPixmap, "initialize", glpixmap_initialize, 3);
+    rb_define_method(GLPixmap, "destroy",    glpixmap_destroy,    0);
+    rb_define_method(GLPixmap, "pixmap",     glpixmap_get_pixmap, 0);
 }

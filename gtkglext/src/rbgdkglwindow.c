@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglwindow.c,v 1.2 2003/08/20 14:43:19 isambart Exp $ */
-/*
+/* $Id: rbgdkglwindow.c,v 1.3 2003/08/20 22:36:02 isambart Exp $ */
+/* Gdk::GLWindow widget
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,8 +25,9 @@
 #define _WINDOW(i)    GDK_WINDOW(RVAL2GOBJ(i))
 
 #define _SELF(i) _GL_WINDOW(i)
+
 static VALUE
-gdkglwindow_initialize(self, glconfig, window)
+glwindow_initialize(self, glconfig, window)
     VALUE self, glconfig, window;
 {
     G_INITIALIZE(self, gdk_gl_window_new(_GL_CONFIG(glconfig),
@@ -36,7 +37,7 @@ gdkglwindow_initialize(self, glconfig, window)
 }
 
 static VALUE
-gdkglwindow_destroy(self)
+glwindow_destroy(self)
     VALUE self;
 {
     gdk_gl_window_destroy(_SELF(self));
@@ -44,70 +45,19 @@ gdkglwindow_destroy(self)
 }
 
 static VALUE
-gdkglwindow_get_window(self)
+glwindow_get_window(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_window_get_window(_SELF(self)));
 }
 
-#undef _SELF
-
-/* OpenGL extension to GdkWindow */
-#define _SELF(i) _WINDOW(i)
-
-static VALUE
-gdkwindow_set_gl_capability(self, glconfig)
-    VALUE self, glconfig;
-{
-    return GOBJ2RVAL(gdk_window_set_gl_capability(_SELF(self),
-                                                  _GL_CONFIG(glconfig),
-                                                  NULL));
-}
-
-static VALUE
-gdkwindow_unset_gl_capability(self)
-    VALUE self;
-{
-    gdk_window_unset_gl_capability(_SELF(self));
-    return self;
-}
-
-static VALUE
-gdkwindow_is_gl_capable(self)
-    VALUE self;
-{
-    return CBOOL2RVAL(gdk_window_is_gl_capable(_SELF(self)));
-}
-
-static VALUE
-gdkwindow_get_gl_window(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gdk_window_get_gl_window(_SELF(self)));
-}
-
-static VALUE
-gdkwindow_get_gl_drawable(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gdk_window_get_gl_drawable(_SELF(self)));
-}
-
 void
-Init_gdk_gl_window(void)
+Init_gtkglext_gdk_glwindow(void)
 {
-    VALUE gdkGlWindow = G_DEF_CLASS(GDK_TYPE_GL_WINDOW, "Window", mGdkGl);
+    /* Gdk::GLWindow */
+    VALUE GLWindow = G_DEF_CLASS(GDK_TYPE_GL_WINDOW, "GLWindow", mGdk);
 
-    rb_define_method(gdkGlWindow, "initialize", gdkglwindow_initialize, 3);
-    rb_define_method(gdkGlWindow, "destroy", gdkglwindow_destroy, 0);
-    rb_define_method(gdkGlWindow, "window", gdkglwindow_get_window, 0);
-
-    /* OpenGL extension to GdkWindow */
-    VALUE gdkWindow = rb_const_get(mGdk, rb_intern("Window"));
-
-    rb_define_method(gdkWindow, "set_gl_capability", gdkwindow_set_gl_capability, 2);
-    rb_define_method(gdkWindow, "unset_gl_capability", gdkwindow_unset_gl_capability, 0);
-    rb_define_method(gdkWindow, "gl_capable?", gdkwindow_is_gl_capable, 0);
-    rb_define_method(gdkWindow, "gl_window", gdkwindow_get_gl_window, 0);
-    rb_define_method(gdkWindow, "gl_window", gdkwindow_get_gl_drawable, 0);
+    rb_define_method(GLWindow, "initialize", glwindow_initialize, 3);
+    rb_define_method(GLWindow, "destroy",    glwindow_destroy,    0);
+    rb_define_method(GLWindow, "window",     glwindow_get_window, 0);
 }

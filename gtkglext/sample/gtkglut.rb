@@ -20,14 +20,14 @@
 require 'gtkglext'
 
 module GLUT
-    RGB     = Gdk::GL::Config::MODE_RGB
-    RGBA    = Gdk::GL::Config::MODE_RGBA
-    SINGLE  = Gdk::GL::Config::MODE_SINGLE
-    DOUBLE  = Gdk::GL::Config::MODE_DOUBLE
-    DEPTH   = Gdk::GL::Config::MODE_DEPTH
-    ACCUM   = Gdk::GL::Config::MODE_ACCUM
-    ALPHA   = Gdk::GL::Config::MODE_ALPHA
-    STENCIL = Gdk::GL::Config::MODE_STENCIL
+    RGB     = Gdk::GLConfig::MODE_RGB
+    RGBA    = Gdk::GLConfig::MODE_RGBA
+    SINGLE  = Gdk::GLConfig::MODE_SINGLE
+    DOUBLE  = Gdk::GLConfig::MODE_DOUBLE
+    DEPTH   = Gdk::GLConfig::MODE_DEPTH
+    ACCUM   = Gdk::GLConfig::MODE_ACCUM
+    ALPHA   = Gdk::GLConfig::MODE_ALPHA
+    STENCIL = Gdk::GLConfig::MODE_STENCIL
 
     @@window_size = [300, 300]
     @@window_pos  = [100, 100]
@@ -46,7 +46,7 @@ module GLUT
     end
 
     def GLUT.InitDisplayMode(mode)
-        @@glconfig = Gdk::GL::Config.new(mode)
+        @@glconfig = Gdk::GLConfig.new(mode)
         raise "can't initialize OpenGL" if !@@glconfig
     end
 

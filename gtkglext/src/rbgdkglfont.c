@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglfont.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
-/*
+/* $Id: rbgdkglfont.c,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* OpenGL Pango Font Rendering
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,40 +24,39 @@
 #define _FONT_DESC(d) ((PangoFontDescription*)RVAL2BOXED(d, PANGO_TYPE_FONT_DESCRIPTION))
 
 static VALUE
-gdk_gl_font_m_use_pango_font(argc, argv, self)
+m_use_pango_font(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
 #ifndef GDK_MULTIHEAD_SAFE
     if (argc == 4) {
-        return GOBJ2RVAL(gdk_gl_font_use_pango_font(
-                    _FONT_DESC(argv[0]), /* font_desc */
-                    NUM2INT(argv[1]),    /* first */
-                    NUM2INT(argv[2]),    /* count */
-                    NUM2INT(argv[3])));  /* list_base */
+        PangoFont* font;
+        font = gdk_gl_font_use_pango_font(
+            _FONT_DESC(argv[0])/*font_desc*/, NUM2INT(argv[1])/*first*/,
+            NUM2INT(argv[2])/*count*/,        NUM2INT(argv[3])/*list_base*/);
+        return GOBJ2RVAL(font);
     }
     else
 #endif /* !defined GDK_MULTIHEAD_SAFE */
 #ifdef GDKGLEXT_MULTIHEAD_SUPPORT
     if (argc == 5) {
-        return GOBJ2RVAL(gdk_gl_font_use_pango_font_for_display(
-                    _DISPLAY(argv[0]),   /* display */
-                    _FONT_DESC(argv[1]), /* font_desc */
-                    NUM2INT(argv[2]),    /* first */
-                    NUM2INT(argv[3]),    /* count */
-                    NUM2INT(argv[4])));  /* list_base */
+        PangoFont* font;        
+        font = gdk_gl_font_use_pango_font_for_display(
+            _DISPLAY(argv[0])/*display*/, _FONT_DESC(argv[1])/*font_desc*/,
+            NUM2INT(argv[2])/*first*/,    NUM2INT(argv[3])/*count*/,
+            NUM2INT(argv[4])/*list_base*/);
+        return GOBJ2RVAL(font);
     }
     else
 #endif /* defined GDKGLEXT_MULTIHEAD_SUPPORT */
-        rb_raise(rb_eArgError, "wrong number of arguments");
+        rb_raise(rb_eArgError, "wrong number of arguments - should be 4 or 5");
 
     return Qfalse; /* for possible warnings */
 }
 
 void
-Init_gdk_gl_font(void)
+Init_gtkglext_gdk_gl_font(void)
 {
-    VALUE mGdkGlFont = rb_define_module_under(mGdkGl, "Font");
-    rb_define_module_function(mGdkGlFont, "use_pango_font", gdk_gl_font_m_use_pango_font, -1);
+    rb_define_module_function(mGdkGL, "use_pango_font", m_use_pango_font, -1);
 }

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.h,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
-/*
+/* $Id: rbgtkglext.h,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* GtkGLExt main header
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,19 +25,20 @@
 #include <gdk/gdkgl.h>
 #include <gtk/gtkgl.h>
 
-void Init_gdk_gl_query(void);
-void Init_gdk_gl_config(void);
-void Init_gdk_gl_drawable(void);
-void Init_gdk_gl_context(void);
-void Init_gtk_gl_widget(void);
-void Init_gdk_gl_pixmap(void);
-void Init_gdk_gl_shapes(void);
-void Init_gdk_gl_font(void);
-void Init_gdk_gl_window(void);
-void Init_gdk_gl_window(void);
-void Init_gdk_gl_font(void);
+void Init_gtkglext_gdk_gl_query(void);   /* Gdk::GL - query  */
+void Init_gtkglext_gdk_gl_font(void);    /* Gdk::GL - fonts  */
+void Init_gtkglext_gdk_gl_shapes(void);  /* Gdk::GL - shapes */
 
-extern VALUE mGdkGl;
-extern VALUE mGtkGl;
+void Init_gtkglext_gdk_glconfig(void);   /* Gdk::GLConfig   */
+void Init_gtkglext_gdk_gldrawable(void); /* Gdk::GLDrawable */
+void Init_gtkglext_gdk_glcontext(void);  /* Gdk::GLContext  */
+void Init_gtkglext_gdk_glpixmap(void);   /* Gdk::GLPixmap   */
+void Init_gtkglext_gdk_glwindow(void);   /* Gdk::GLWindow   */
+void Init_gtkglext_gtk_widget(void);     /* Gtk::Widget     */
+void Init_gtkglext_gdk_pixmap(void);     /* Gdk::Pixmap     */
+void Init_gtkglext_gdk_window(void);     /* Gdk::Window     */
+
+extern VALUE mGdk, mGdkGL;
+extern VALUE mGtk, mGtkGL;
 
 #endif /* ! _RBGTKGLEXT_H_included */

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglquery.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
-/*
+/* $Id: rbgdkglquery.c,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* Functions to query OpenGL support information
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@
 #define _DISPLAY(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
 
 static VALUE
-gdk_gl_m_query_extension(argc, argv, self)
+m_query_extension(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
@@ -36,7 +36,9 @@ gdk_gl_m_query_extension(argc, argv, self)
 #endif /* !defined GDK_MULTIHEAD_SAFE */
 #ifdef GDKGLEXT_MULTIHEAD_SUPPORT
     if (argc== 1) {
-        return CBOOL2RVAL(gdk_gl_query_extension_for_display(_DISPLAY(argv[0])));
+        gboolean extension;
+        extension = gdk_gl_query_extension_for_display(_DISPLAY(argv[0]));
+        return CBOOL2RVAL(extension);
     }
     else
 #endif /* defined GDKGLEXT_MULTIHEAD_SUPPORT */
@@ -46,14 +48,14 @@ gdk_gl_m_query_extension(argc, argv, self)
 }
 
 static VALUE
-gdk_gl_m_query_gl_extension(self, ext)
+m_query_gl_extension(self, ext)
     VALUE self, ext;
 {
     return gdk_gl_query_gl_extension(RVAL2CSTR(ext));
 }
 
 static VALUE
-gdk_gl_m_query_version(argc, argv, self)
+m_query_version(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
@@ -74,15 +76,15 @@ gdk_gl_m_query_version(argc, argv, self)
     }
     else
 #endif /* !defined GDKGLEXT_MULTIHEAD_SUPPORT */
-        rb_raise(rb_eArgError, "wrong number of arguments");
+        rb_raise(rb_eArgError, "wrong number of arguments - should be 0 or 1");
 
     return rb_ary_new3(2, INT2NUM(minor), INT2NUM(major));
 }
 
 void
-Init_gdk_gl_query(void)
+Init_gtkglext_gdk_gl_query(void)
 {
-    rb_define_module_function(mGdkGl, "query_extension?", gdk_gl_m_query_extension, -1);
-    rb_define_module_function(mGdkGl, "query_gl_extension?", gdk_gl_m_query_gl_extension, 1);
-    rb_define_module_function(mGdkGl, "query_version", gdk_gl_m_query_version, -1);
+    rb_define_module_function(mGdkGL, "query_extension?",    m_query_extension,   -1);
+    rb_define_module_function(mGdkGL, "query_gl_extension?", m_query_gl_extension, 1);
+    rb_define_module_function(mGdkGL, "query_version",       m_query_version,     -1);
 }

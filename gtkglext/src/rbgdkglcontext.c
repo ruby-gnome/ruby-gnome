@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkglcontext.c,v 1.1 2003/08/17 10:45:46 isambart Exp $ */
-/*
+/* $Id: rbgdkglcontext.c,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* Gdk::GLContext
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,23 +20,26 @@
 
 #include "rbgtkglext.h"
 
-#define _SELF(i) GDK_GL_CONTEXT(RVAL2GOBJ(i))
-#define _DRAWABLE(i) GDK_GL_DRAWABLE(RVAL2GOBJ(i))
-#define _CONTEXT(i) GDK_GL_CONTEXT(RVAL2GOBJ(i))
+#define _GL_DRAWABLE(i) GDK_GL_DRAWABLE(RVAL2GOBJ(i))
+#define _GL_CONTEXT(i)  GDK_GL_CONTEXT(RVAL2GOBJ(i))
+#define _SELF(i)        _GL_CONTEXT(i)
 
 static VALUE
-gdkglcontext_initialize(self, gldrawable, share_list, direct, render_type)
+glcontext_initialize(self, gldrawable, share_list, direct, render_type)
     VALUE self, gldrawable, share_list, direct, render_type;
 {
-    G_INITIALIZE(self, gdk_gl_context_new(_DRAWABLE(gldrawable),
-                                          _CONTEXT(share_list),
-                                          RVAL2CBOOL(direct),
-                                          NUM2INT(render_type)));
+    GdkGLContext* glcontext;
+    
+    glcontext = gdk_gl_context_new(_GL_DRAWABLE(gldrawable),
+                                   _GL_CONTEXT(share_list),
+                                   RVAL2CBOOL(direct),
+                                   NUM2INT(render_type));
+    G_INITIALIZE(self, glcontext);
     return Qnil;
 }
 
 static VALUE
-gdkglcontext_destroy(self)
+glcontext_destroy(self)
     VALUE self;
 {
     gdk_gl_context_destroy(_SELF(self));
@@ -44,68 +47,71 @@ gdkglcontext_destroy(self)
 }
 
 static VALUE
-gdkglcontext_copy(self, src, mask)
+glcontext_copy(self, src, mask)
     VALUE self, src, mask;
 {
-    return CBOOL2RVAL(gdk_gl_context_copy(_SELF(self), _CONTEXT(src), NUM2INT(mask)));
+    gboolean ok;
+    
+    ok = gdk_gl_context_copy(_SELF(self), _GL_CONTEXT(src), NUM2INT(mask));
+    return CBOOL2RVAL(ok);
 }
 
 static VALUE
-gdkglcontext_get_gl_drawable(self)
+glcontext_get_gl_drawable(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_context_get_gl_drawable(_SELF(self)));
 }
 
 static VALUE
-gdkglcontext_get_gl_config(self)
+glcontext_get_gl_config(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_context_get_gl_config(_SELF(self)));
 }
 
 static VALUE
-gdkglcontext_get_share_list(self)
+glcontext_get_share_list(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_context_get_share_list(_SELF(self)));
 }
 
 static VALUE
-gdkglcontext_is_direct(self)
+glcontext_is_direct(self)
     VALUE self;
 {
     return CBOOL2RVAL(gdk_gl_context_is_direct(_SELF(self)));
 }
 
 static VALUE
-gdkglcontext_get_render_type(self)
+glcontext_get_render_type(self)
     VALUE self;
 {
     return INT2NUM(gdk_gl_context_get_render_type(_SELF(self)));
 }
 
 static VALUE
-gdkglcontext_get_current(self)
+glcontext_get_current(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_gl_context_get_current());
 }
 
 void
-Init_gdk_gl_context(void)
+Init_gtkglext_gdk_glcontext(void)
 {
-    VALUE gdkGlContext = G_DEF_CLASS(GDK_TYPE_GL_CONTEXT, "Context", mGdkGl);
+    /* Gdk::GLContext */
+    VALUE GLContext = G_DEF_CLASS(GDK_TYPE_GL_CONTEXT, "GLContext", mGdk);
 
-    rb_define_method(gdkGlContext, "initialize", gdkglcontext_initialize, 4);
+    rb_define_method(GLContext, "initialize",  glcontext_initialize,      4);
+    rb_define_method(GLContext, "destroy",     glcontext_destroy,         0);
+    rb_define_method(GLContext, "copy",        glcontext_copy,            2);
+    rb_define_method(GLContext, "gl_drawable", glcontext_get_gl_drawable, 0);
+    rb_define_method(GLContext, "gl_config",   glcontext_get_gl_config,   0);
+    rb_define_method(GLContext, "share_list",  glcontext_get_share_list,  0);
+    rb_define_method(GLContext, "direct?",     glcontext_is_direct,       0);
+    rb_define_method(GLContext, "render_type", glcontext_get_render_type, 0);
 
-    rb_define_method(gdkGlContext, "destroy", gdkglcontext_destroy, 0);
-    rb_define_method(gdkGlContext, "copy", gdkglcontext_copy, 2);
-    rb_define_method(gdkGlContext, "gl_drawable", gdkglcontext_get_gl_drawable, 0);
-    rb_define_method(gdkGlContext, "gl_config", gdkglcontext_get_gl_config, 0);
-    rb_define_method(gdkGlContext, "share_list", gdkglcontext_get_share_list, 0);
-    rb_define_method(gdkGlContext, "direct?", gdkglcontext_is_direct, 0);
-    rb_define_method(gdkGlContext, "render_type", gdkglcontext_get_render_type, 0);
-
-    rb_define_singleton_method(gdkGlContext, "current", gdkglcontext_get_current, 0);
+    rb_define_singleton_method(GLContext, "current", glcontext_get_current, 0);
 }
