@@ -1,6 +1,17 @@
+2004-01-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/style_property.r[bc]: Added.
+	* src/rbgtkwidget.c: gtk_widget_class_install_style_property_parser() 
+	was implemented as Gtk::Widget.install_style_property(){...}.
+
+2004-01-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwidget.c: Fix Gtk::Widget.style_properties.
+
 2004-01-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkwidget.c: Add Gtk::Widget.install_style_property, .style_property.
+	* src/rbgtkwidget.c: Add Gtk::Widget.install_style_property, 
+	.style_property.
 
 2004-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
 

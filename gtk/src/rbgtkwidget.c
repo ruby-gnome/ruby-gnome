@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/01/21 19:03:15 $
+  $Date: 2004/01/25 15:52:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -15,6 +15,8 @@
 #include "global.h"
 
 #define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
+
+static VALUE style_prop_func_table;
 
 static VALUE
 widget_get_flags(self)
@@ -682,29 +684,60 @@ widget_mnemonic_activate(self, group_cycling)
     return gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)) ? Qtrue : Qfalse;
 }
 
+/*
+ * Gtk::Widget.install_style_property(...) do |spec, str|
+ *   #parse str
+ *   new_val = ....   # parse value from string.
+ *   new_val          # return new_val or nil if you can't convert the value.
+ * end
+ */
+static gboolean
+rc_property_parser(pspec, rc_string, property_value)
+    const GParamSpec *pspec;
+    const GString *rc_string;
+    GValue *property_value;
+{
+    VALUE spec = GOBJ2RVAL((gpointer)pspec);
+    VALUE func = rb_hash_aref(style_prop_func_table, spec);
+    VALUE ret = rb_funcall(func, id_call, 2, spec, CSTR2RVAL(rc_string->str));
+    if (NIL_P(ret)) {
+        return FALSE;
+    } else if (RTEST(ret)){
+        rbgobj_rvalue_to_gvalue(ret, property_value);
+        return TRUE;
+    } else {
+        rb_raise(rb_eArgError, "Gtk::Widget#install_style_property() block should return new value or nil");
+    }
+}
+
 static VALUE
-widget_s_install_style_property(self, spec)
-    VALUE self, spec;
+widget_s_install_style_property(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkWidgetClass* gclass;
-    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    GParamSpec* pspec;
+    VALUE spec;
+
+    rb_scan_args(argc, argv, "10", &spec);
+    pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registered class",
                  rb_class2name(self));
 
     gclass = (GtkWidgetClass *)g_type_class_ref(cinfo->gtype);
-    gtk_widget_class_install_style_property(gclass, pspec); 
+    if (rb_block_given_p()){
+        VALUE func = G_BLOCK_PROC();
+        rb_hash_aset(style_prop_func_table, spec, func);
+        gtk_widget_class_install_style_property_parser(gclass, pspec, rc_property_parser);
+    } else {
+        gtk_widget_class_install_style_property(gclass, pspec); 
+    }
     return self;
 }
-
-/* Do we need this?
-void        gtk_widget_class_install_style_property_parser
-                                            (GtkWidgetClass *klass,
-                                             GParamSpec *pspec,
-                                             GtkRcPropertyParser parser);
-*/
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
@@ -737,19 +770,29 @@ widget_s_find_style_property(self, property_name)
 }
 
 static VALUE
-widget_s_style_properties(self)
+widget_s_style_properties(argc, argv, self)
+    int argc;
+    VALUE* argv;
     VALUE self;
 {
     GtkWidgetClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     gint n_properties;
+    GParamSpec** props;
+    VALUE inherited_too;
     VALUE ary;
     int i;
 
-    GParamSpec** props = gtk_widget_class_list_style_properties(oclass, &n_properties);
+    if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
+        inherited_too = Qtrue;
 
-    ary = rb_ary_new2(n_properties);
-    for (i = 0; i < n_properties; i++)
-        rb_ary_store(ary, i, rb_str_new2(props[i]->name));
+    props = gtk_widget_class_list_style_properties(oclass, &n_properties);
+
+    ary = rb_ary_new();
+    for (i = 0; i < n_properties; i++){
+        if (RTEST(inherited_too)
+            || GTYPE2CLASS(props[i]->owner_type) == self)
+            rb_ary_push(ary, rb_str_new2(props[i]->name));
+    }
 
     g_free(props);
     g_type_class_unref(oclass);
@@ -983,6 +1026,9 @@ Init_gtk_widget()
 {
     VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
 
+    rb_global_variable(&style_prop_func_table);
+    style_prop_func_table = rb_hash_new();
+
     /*
      * instance methods
      */
@@ -1011,10 +1057,10 @@ Init_gtk_widget()
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
-    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, 1);
+    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, -1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWidget, "style_property", widget_s_find_style_property, 1);
-    rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, 0);
+    rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, -1);
 #endif
     rb_define_method(gWidget, "intersect", widget_intersect, 1);
     rb_define_method(gWidget, "focus?", widget_is_focus, 0);
