@@ -4,12 +4,6 @@ extconf.rb for gtk extention library
 
 require "mkmf"
 
-begin
-  require 'glib2'
-rescue LoadError
-  raise "Install glib2 before gtk2."
-end
-
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)

@@ -1,3 +1,7 @@
+2002-11-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Remove checking either gdk2 is installed or not.
+
 2002-11-19  OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtktextbuffer.c: Add Gtk::TextBuffer#get_iter_at_line_offset, #get_iter_at_line_index,
