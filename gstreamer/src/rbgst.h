@@ -41,10 +41,12 @@ extern gboolean debug_mode;
 #define RBGST_INITIALIZE(obj,gstobj) \
     (rbgst_initialize_gstobject(obj, GST_OBJECT(gstobj)))
 
+#define GST_EVENT_MASK(o)   ((GstEventMask *) o)
 #define GST_FORMAT(o)       ((GstFormat *) o)
 #define GST_QUERY_TYPE(o)   ((GstQueryType *) o)
 #define GST_TYPE(o)         ((GstType *) o)
 
+#define GST_TYPE_EVENT_MASK     (gst_event_mask_get_type())
 #define GST_TYPE_FORMAT         (gst_format_get_type())
 #define GST_TYPE_PLUGIN         (gst_plugin_get_type())
 #define GST_TYPE_QUERY_TYPE     (gst_query_type_get_type())
@@ -58,6 +60,7 @@ extern gboolean debug_mode;
 #define RGST_ELEMENT(o)             (GST_ELEMENT(RVAL2GOBJ(o)))
 #define RGST_ELEMENT_FACTORY(o)     (GST_ELEMENT_FACTORY(RVAL2GOBJ(o)))
 #define RGST_EVENT(o)               (GST_EVENT(RVAL2BOXED(o, GST_TYPE_EVENT)))
+#define RGST_EVENT_MASK(o)          (GST_EVENT_MASK(RVAL2BOXED(o, GST_TYPE_EVENT_MASK)))
 #define RGST_FORMAT(o)              (GST_FORMAT(RVAL2BOXED(o, GST_TYPE_FORMAT)))
 #define RGST_INDEX_FACTORY(o)       (GST_INDEX_FACTORY(RVAL2GOBJ(o)))
 #define RGST_OBJECT(o)              (GST_OBJECT(RVAL2GOBJ(o)))
@@ -83,6 +86,7 @@ extern gboolean debug_mode;
 #define RGST_ELEMENT_FACTORY_NEW(o)     (RGST_GOBJ_NEW(GST_ELEMENT_FACTORY(o)))
 #define RGST_ELEMENT_NEW(o)             (RGST_GOBJ_NEW(GST_ELEMENT(o)))
 #define RGST_EVENT_NEW(o)               (BOXED2RVAL(GST_EVENT(o), GST_TYPE_EVENT))
+#define RGST_EVENT_MASK_NEW(o)          (BOXED2RVAL(GST_EVENT_MASK(o), GST_TYPE_EVENT_MASK))
 #define RGST_FORMAT_NEW(o)              (BOXED2RVAL(GST_FORMAT(o), GST_TYPE_FORMAT))
 #define RGST_INDEX_FACTORY_NEW(o)       (RGST_GOBJ_NEW(GST_INDEX_FACTORY(o)))
 #define RGST_OBJECT_NEW(o)              (RGST_GOBJ_NEW(GST_OBJECT(o)))
@@ -99,6 +103,7 @@ extern gboolean debug_mode;
 #define RGST_TYPE_NEW(o)                (BOXED2RVAL(GST_TYPE(o), GST_TYPE_TYPE))
 #define RGST_TYPE_FIND_NEW(o)           (RGST_GOBJ_NEW(GST_TYPE_FIND(o)))
 
+GType gst_event_mask_get_type();
 GType gst_format_get_type();
 GType gst_plugin_get_type();
 GType gst_query_type_get_type();
