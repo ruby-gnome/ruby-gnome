@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2003/08/15 13:12:08 $
  *
  *****************************************************************************/
 
@@ -495,7 +495,7 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_method(g_gvs_fileinfo, "set_sgid", fileinfo_set_sgid, 1);
 	rb_define_method(g_gvs_fileinfo, "sticky?", fileinfo_is_sticky, 0);
 	rb_define_method(g_gvs_fileinfo, "set_sticky", fileinfo_set_sticky, 1);
-	rb_define_method(g_gvs_fileinfo, "mime_type?", fileinfo_get_mime_type,
+	rb_define_method(g_gvs_fileinfo, "mime_type", fileinfo_get_mime_type,
 			 0);
 	rb_define_method(g_gvs_fileinfo, "==", fileinfo_matches, 1);
 	rb_define_method(g_gvs_fileinfo, "name", fileinfo_name, 0);

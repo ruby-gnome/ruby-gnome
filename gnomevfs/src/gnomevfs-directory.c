@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2003/08/15 13:12:08 $
  *
  *****************************************************************************/
 
@@ -142,8 +142,10 @@ directory_visit_callback(rel_path, info, recursing_will_loop, data, recurse)
 {
 	*recurse = RTEST(rb_funcall((VALUE)data,
 				    g_id_call,
+				    3,
+				    CSTR2RVAL(rel_path),
 				    GVFSFILEINFO2RVAL(info),
-				    recursing_will_loop));
+				    CBOOL2RVAL(recursing_will_loop)));
 	return TRUE;
 }
 
@@ -158,10 +160,10 @@ directory_visit(argc, argv, self)
 
 	argc = rb_scan_args(argc, argv, "12&", &uri, &info_options,
 			     &visit_options, &func);
-	if (argc < 4) {
+	if (argc < 3) {
 		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
 	}
-	if (argc < 3) {
+	if (argc < 2) {
 		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
 	}
 
