@@ -4,7 +4,7 @@
   rbgtkaboutdialog.c -
 
   $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -90,7 +90,7 @@ aboutdialog_s_set_email_hook(self)
 {
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
-    gtk_about_dialog_set_email_hook(activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
+    gtk_about_dialog_set_email_hook((GtkAboutDialogActivateLinkFunc)activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
 
@@ -100,25 +100,25 @@ aboutdialog_s_set_url_hook(self)
 {
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
-    gtk_about_dialog_set_url_hook(activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
+    gtk_about_dialog_set_url_hook((GtkAboutDialogActivateLinkFunc)activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
 
 
-struct prop_data {
+typedef struct {
     const char *name;
     gpointer value;
-};
+} prop_data;
 
-static int ABOUT_PROP_NUM = 15;
+#define ABOUT_PROP_NUM (15)
 
 static VALUE
 aboutdialog_s_show_about_dialog(self, parent, props)
     VALUE self, parent, props;
 {
-    struct prop_data pd[ABOUT_PROP_NUM];
     int i;
     VALUE ary;
+    prop_data pd[ABOUT_PROP_NUM];
 
     Check_Type(props, T_HASH);
 

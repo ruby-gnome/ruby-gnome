@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:33 $
+  $Date: 2005/01/29 11:44:15 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -228,10 +228,10 @@ Init_gtk_treemodel()
     G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", mTreeModel);
     G_DEF_CONSTANTS(mTreeModel, GTK_TYPE_TREE_MODEL_FLAGS, "GTK_TREE_MODEL_");
 
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_changed", signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_inserted", signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_has_child_toggled", signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "rows_reordered", signal_rows_reordered_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_changed", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_inserted", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_has_child_toggled", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "rows_reordered", (GValToRValSignalFunc)signal_rows_reordered_func);
 
     G_DEF_SETTERS(mTreeModel);
 }

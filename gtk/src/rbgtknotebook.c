@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -382,5 +382,5 @@ Init_gtk_notebook()
     rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
 
     G_DEF_SETTERS(gNotebook);
-    G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", signal_g2r_func);
+    G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", (GValToRValSignalFunc)signal_g2r_func);
 }

@@ -4,7 +4,7 @@
   rbgtksettings.c -
 
   $Author: mutoh $
-  $Date: 2004/05/24 17:22:58 $
+  $Date: 2005/01/29 11:44:15 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
@@ -64,7 +64,7 @@ settings_s_install_property(self, spec)
     if (rb_block_given_p()){
         VALUE func = G_BLOCK_PROC();
         rb_hash_aset(prop_func_table, spec, func);
-        gtk_settings_install_property_parser(pspec, rc_property_parser);
+        gtk_settings_install_property_parser(pspec, (GtkRcPropertyParser)rc_property_parser);
     } else {
         gtk_settings_install_property(pspec);
     }

@@ -4,7 +4,7 @@
   rbgtkactiongroup.c -
 
   $Author: mutoh $
-  $Date: 2005/01/11 17:01:40 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -290,7 +290,9 @@ actiongroup_set_translate_func(self)
 {
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
-    gtk_action_group_set_translate_func(_SELF(self), translate_func, (gpointer)func, NULL);
+    gtk_action_group_set_translate_func(_SELF(self), 
+                                        (GtkTranslateFunc)translate_func, 
+                                        (gpointer)func, NULL);
     return self;
 }
 

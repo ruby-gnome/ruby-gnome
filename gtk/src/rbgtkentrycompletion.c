@@ -4,7 +4,7 @@
   rbgtkentrycompletion.c -
 
   $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -47,7 +47,8 @@ entryc_set_match_func(self)
 {
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
-    gtk_entry_completion_set_match_func(_SELF(self), entryc_match_func,
+    gtk_entry_completion_set_match_func(_SELF(self), 
+                                        (GtkEntryCompletionMatchFunc)entryc_match_func,
                                         (gpointer)func, NULL);
     return self;
 }

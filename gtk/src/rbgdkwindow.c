@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: isambart $
-  $Date: 2004/08/01 17:04:17 $
+  $Author: mutoh $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -373,6 +373,8 @@ invalidate_child_func_wrap(window, func)
     return RTEST(result);
 }
 
+typedef gboolean (*ChildFunc) (GdkWindow*, gpointer);
+
 static VALUE
 gdkwin_invalidate_maybe_recurse(self, region)
     VALUE self, region;
@@ -384,7 +386,7 @@ gdkwin_invalidate_maybe_recurse(self, region)
     }
     gdk_window_invalidate_maybe_recurse(_SELF(self),
                                         RVAL2BOXED(region, GDK_TYPE_REGION),
-                                        invalidate_child_func_wrap,
+                                        (ChildFunc)invalidate_child_func_wrap,
                                         (gpointer)func);
     return self;
 }
@@ -647,7 +649,7 @@ static VALUE
 gdkwin_set_skip_taskbar_hint(self, hint)
     VALUE self, hint;
 {
-    gdkwin_set_skip_taskbar_hint(_SELF(self), RTEST(hint));
+    gdk_window_set_skip_taskbar_hint(_SELF(self), RTEST(hint));
     return self;
 }
 
@@ -655,7 +657,7 @@ static VALUE
 gdkwin_set_skip_pager_hint(self, hint)
     VALUE self, hint;
 {
-    gdkwin_set_skip_pager_hint(_SELF(self), RTEST(hint));
+    gdk_window_set_skip_pager_hint(_SELF(self), RTEST(hint));
     return self;
 }
 #endif

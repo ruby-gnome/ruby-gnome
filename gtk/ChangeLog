@@ -1,3 +1,13 @@
+2005-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkregion.c, rbgdkwindow.c, rbgtkaboutdialog.c, 
+        rbgtkactiongroup.c, rbgtkcelllayout.c, rbgtkclipboard.c, 
+        rbgtkcombobox.c, rbgtkentrycompletion.c, rbgtkfilefilter.c,
+        rbgtkiconview.c, rbgtkmain.c, rbgtkmenu.c, rbgtknotebook.c,  
+        rbgtksettings.c, rbgtktreemodel.c, rbgtktreemodelfilter.c, 
+        rbgtktreeview.c, rbgtktreeviewcolumn.c, rbgtkwidget.c, gtk2.def: 
+        Fix compiling errors on MS VC++.
+
 2005-01-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Added Gtk::Dialog.alternative_dialog_button_order?, 

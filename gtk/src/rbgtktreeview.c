@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2005/01/10 17:56:38 $
+  $Date: 2005/01/29 11:44:15 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -116,7 +116,7 @@ treeview_insert_column(argc, argv, self)
                                                          NUM2INT(args[0]),
                                                          RVAL2CSTR(args[1]),
                                                          RVAL2CELLRENDERER(args[2]),
-                                                         cell_data_func,
+                                                         (GtkTreeCellDataFunc)cell_data_func,
                                                          (gpointer)func,
                                                          NULL);
         return INT2NUM(ret);
@@ -601,7 +601,7 @@ treeview_set_row_separator_func(self)
 
     G_RELATIVE(self, func);
     gtk_tree_view_set_row_separator_func(_SELF(self), 
-                                         row_separator_func, 
+                                         (GtkTreeViewRowSeparatorFunc)row_separator_func, 
                                          (gpointer)func, 
                                          (GtkDestroyNotify)NULL);
     return self;
@@ -669,8 +669,8 @@ Init_gtk_treeview()
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
     /* Option Signals */
-    G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "row-expanded", treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "test-collapse-row", treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "test-expand-row", treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "row-expanded", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "test-collapse-row", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "test-expand-row", (GValToRValSignalFunc)treeview_signal_func);
 }

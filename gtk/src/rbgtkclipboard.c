@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2005/01/24 16:47:18 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -214,7 +214,8 @@ clipboard_request_targets(self)
     G_RELATIVE(self, func);
 
     gtk_clipboard_request_targets(_SELF(self),
-                                  clipboard_target_received_func, (gpointer)func);
+                                  (GtkClipboardTargetsReceivedFunc)clipboard_target_received_func, 
+                                  (gpointer)func);
     return self;
 }
 #endif

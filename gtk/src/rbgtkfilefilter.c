@@ -4,7 +4,7 @@
   rbgtkfilefilter.c -
  
   $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Date: 2005/01/29 11:44:14 $
  
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
@@ -84,7 +84,7 @@ ffil_add_custom(self, needed)
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_file_filter_add_custom(_SELF(self), RVAL2GFLAGS(needed, GTK_TYPE_FILE_FILTER_FLAGS), 
-                               filter_func, (gpointer)func, NULL);
+                               (GtkFileFilterFunc)filter_func, (gpointer)func, NULL);
     return self;
 }
 

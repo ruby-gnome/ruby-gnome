@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2004/07/31 05:44:45 $
+  $Date: 2005/01/29 11:44:15 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -745,7 +745,8 @@ widget_s_install_style_property(self, spec)
     if (rb_block_given_p()){
         VALUE func = G_BLOCK_PROC();
         rb_hash_aset(style_prop_func_table, spec, func);
-        gtk_widget_class_install_style_property_parser(gclass, pspec, rc_property_parser);
+        gtk_widget_class_install_style_property_parser(gclass, pspec, 
+                                                       (GtkRcPropertyParser)rc_property_parser);
     } else {
         gtk_widget_class_install_style_property(gclass, pspec); 
     }
@@ -1281,7 +1282,7 @@ Init_gtk_widget()
     G_DEF_CONSTANTS(gWidget, GTK_TYPE_TEXT_DIRECTION, "GTK_");
 
     /* Special signals */
-    G_DEF_SIGNAL_FUNC(gWidget, "size-request", widget_signal_size_request);
-    G_DEF_SIGNAL_FUNC(gWidget, "size-allocate", widget_signal_size_allocate);
+    G_DEF_SIGNAL_FUNC(gWidget, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
+    G_DEF_SIGNAL_FUNC(gWidget, "size-allocate", (GValToRValSignalFunc)widget_signal_size_allocate);
     
 }

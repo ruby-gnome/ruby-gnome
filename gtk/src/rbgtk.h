@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -70,6 +70,10 @@ RUBY_GTK2_VAR VALUE mGdk;
 /*
  * for gtk2.0/gtk2.2
  */
+typedef GtkClipboard* (*RBGtkClipboardGetFunc) (VALUE);
+typedef VALUE (*RBGtkClipboardMakeFunc) (GtkClipboard*);
+typedef GtkTreeRowReference* (*RBGtkTreeRowReferenceGetFunc) (VALUE);
+
 #define RBGTK_TYPE_CLIPBOARD (rbgtk_clipboard_get_type())
 #define RVAL2CLIPBOARD(obj) rbgtk_get_clipboard(obj)
 #define CLIPBOARD2RVAL(val) rbgtk_make_clipboard(val)

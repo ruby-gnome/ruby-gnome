@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2003/10/06 11:29:23 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -110,7 +110,7 @@ gdkregion_spans_intersect_foreach(self, spans, sorted)
     }
     gdk_region_spans_intersect_foreach(_SELF(self), 
                                        gspans, RARRAY(spans)->len, RTEST(sorted), 
-                                       gdkregion_span_func, (GdkSpanFunc)func);
+                                       (GdkSpanFunc)gdkregion_span_func, (gpointer)func);
     return self;
 }
 

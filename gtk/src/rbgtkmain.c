@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2004/12/12 17:55:06 $
+  $Date: 2005/01/29 11:44:14 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -48,6 +48,8 @@ gtk_m_get_default_language(self)
 {
     return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
 }
+
+typedef void (*SignalFunc) (int);
 
 static VALUE
 gtk_m_init(argc, argv, self)
@@ -109,9 +111,9 @@ gtk_m_init(argc, argv, self)
         setlocale(LC_NUMERIC, "C");
 
 #ifdef NT
-        signal(SIGINT,  sigfunc[0]);
-        signal(SIGSEGV, sigfunc[1]);
-        signal(SIGTERM, sigfunc[2]);
+        signal(SIGINT,  (SignalFunc)sigfunc[0]);
+        signal(SIGSEGV, (SignalFunc)sigfunc[1]);
+        signal(SIGTERM, (SignalFunc)sigfunc[2]);
 #else
         signal(SIGHUP,  sigfunc[0]);
         signal(SIGINT,  sigfunc[1]);
@@ -227,7 +229,7 @@ gtk_m_init_add(self)
 {
     volatile VALUE func = G_BLOCK_PROC();
     
-    gtk_init_add(gtk_m_function, (gpointer)func);
+    gtk_init_add((GtkFunction)gtk_m_function, (gpointer)func);
     G_RELATIVE(self, func);
     return Qnil;
 }
@@ -240,7 +242,7 @@ gtk_m_quit_add(self, main_level)
     VALUE id;
 
     id = INT2FIX(gtk_quit_add(NUM2UINT(main_level), 
-                                gtk_m_function, (gpointer)func));
+                                (GtkFunction)gtk_m_function, (gpointer)func));
     G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
 }
