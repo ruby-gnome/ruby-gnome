@@ -1,5 +1,9 @@
 2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkim.c: Remove file.
+
+2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* src/rbgdkvisual.c, src/rbgdkcolormap.c:File divide from rbgdkcolor.c.
 	* src/rbgdkvisual.c, src/rbgdkcolormap.c, src/rbgdkdnd.c:
 	Support GOBJ2RVAL/RVAL2GOBJ
