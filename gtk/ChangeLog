@@ -1,3 +1,7 @@
+2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/treeview.rb: Add a file.
+
 2002-12-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Implement gtk_dialog_new_with_buttons in Gtk::Dialog#intialize, 
