@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: mutoh $
+  $Date: 2003/07/29 13:28:56 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -46,7 +46,7 @@ rbgtk_get_target_entry(targets)
 }
 
 static VALUE
-gtkdrag_drag_dest_set(self, widget, flags, targets, actions)
+gtkdrag_dest_set(self, widget, flags, targets, actions)
     VALUE self, widget, flags, targets, actions;
 {
     int num;
@@ -61,7 +61,7 @@ gtkdrag_drag_dest_set(self, widget, flags, targets, actions)
 }
 
 static VALUE
-gtkdrag_drag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
+gtkdrag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
     VALUE self, widget, proxy_window, protocol, use_coordinates;
 {
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
@@ -71,22 +71,48 @@ gtkdrag_drag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinate
 }
 
 static VALUE
-gtkdrag_drag_dest_unset(self, widget)
+gtkdrag_dest_unset(self, widget)
     VALUE self,widget;
 {
     gtk_drag_dest_unset(RVAL2WIDGET(widget));
     return self;
 }
 
-/*
-GdkAtom     gtk_drag_dest_find_target       (GtkWidget *widget,
-                                             GdkDragContext *context,
-                                             GtkTargetList *target_list);
-GtkTargetList* gtk_drag_dest_get_target_list
-                                            (GtkWidget *widget);
-void        gtk_drag_dest_set_target_list   (GtkWidget *widget,
-                                             GtkTargetList *target_list);
-*/
+static VALUE
+gtkdrag_dest_find_target(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE widget, context, target_list;
+    GdkAtom ret;
+    rb_scan_args(argc, argv, "21", &widget, &context, &target_list);
+
+    ret = gtk_drag_dest_find_target(
+        RVAL2WIDGET(widget), RVAL2DC(context),
+        RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+ 
+    return BOXED2RVAL(&ret, GDK_TYPE_ATOM);
+}
+
+static VALUE
+gtkdrag_dest_get_target_list(self, widget)
+    VALUE self, widget;
+{
+    return BOXED2RVAL(gtk_drag_dest_get_target_list(RVAL2WIDGET(widget)), 
+                      GTK_TYPE_TARGET_LIST);
+}
+
+static VALUE
+gtkdrag_dest_set_target_list(self, widget, target_list)
+    VALUE self, widget, target_list;
+{
+    gtk_drag_dest_set_target_list(
+        RVAL2WIDGET(widget), 
+        RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+
+    return self;
+}
 
 static VALUE
 gtkdrag_finish(self, context, success, del, time)
@@ -98,7 +124,7 @@ gtkdrag_finish(self, context, success, del, time)
 }
 
 static VALUE
-gtkdrag_drag_get_data(self, widget, context, target, time)
+gtkdrag_get_data(self, widget, context, target, time)
     VALUE self, widget, context, target, time;
 {
     gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context), RVAL2ATOM(target),
@@ -130,18 +156,14 @@ gtkdrag_unhighlight(self, widget)
 }
 
 static VALUE
-gtkdrag_begin(self, widget, targets, actions, button, event)
-    VALUE self, widget, targets, actions, button, event;
+gtkdrag_begin(self, widget, target_list, actions, button, event)
+    VALUE self, widget, target_list, actions, button, event;
 {
-/*	return GOBJ2RVAL(gtk_drag_begin(RVAL2GOBJ(self), );
-GdkDragContext* gtk_drag_begin              (GtkWidget *widget,
-                                             GtkTargetList *targets,
-                                             GdkDragAction actions,
-                                             gint button,
-                                             GdkEvent *event); */
-
-    rb_notimplement();
-    return self;
+    return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(self),
+                                    RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
+                                    NUM2INT(actions),
+                                    NUM2INT(button),
+                                    RVAL2GEV(event)));
 }
 
 static VALUE
@@ -197,7 +219,7 @@ gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
 }
 
 static VALUE
-gtkdrag_drag_source_set(self, widget, flags, targets, actions)
+gtkdrag_source_set(self, widget, flags, targets, actions)
     VALUE self, flags, targets, actions;
 {
     gtk_drag_source_set(RVAL2WIDGET(widget), NUM2INT(flags), 
@@ -207,7 +229,7 @@ gtkdrag_drag_source_set(self, widget, flags, targets, actions)
 }
 
 static VALUE
-gtkdrag_drag_source_set_icon(argc, argv, self)
+gtkdrag_source_set_icon(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
@@ -232,7 +254,7 @@ gtkdrag_drag_source_set_icon(argc, argv, self)
 }
 
 static VALUE
-gtkdrag_drag_source_unset(self, widget)
+gtkdrag_source_unset(self, widget)
     VALUE self, widget;
 {
     gtk_drag_source_unset(RVAL2WIDGET(widget));
@@ -244,11 +266,14 @@ Init_gtk_drag()
 {
     VALUE mGtkDrag = rb_define_module_under(mGtk, "Drag");
 
-    rb_define_module_function(mGtkDrag, "dest_set", gtkdrag_drag_dest_set, 4);
-    rb_define_module_function(mGtkDrag, "dest_set_proxy", gtkdrag_drag_dest_set_proxy, 4);
-    rb_define_module_function(mGtkDrag, "dest_unset", gtkdrag_drag_dest_unset, 1);
+    rb_define_module_function(mGtkDrag, "dest_set", gtkdrag_dest_set, 4);
+    rb_define_module_function(mGtkDrag, "dest_set_proxy", gtkdrag_dest_set_proxy, 4);
+    rb_define_module_function(mGtkDrag, "dest_unset", gtkdrag_dest_unset, 1);
+    rb_define_module_function(mGtkDrag, "find_target", gtkdrag_dest_find_target, -1);
+    rb_define_module_function(mGtkDrag, "get_target_list", gtkdrag_dest_get_target_list, 1);
+    rb_define_module_function(mGtkDrag, "set_target_list", gtkdrag_dest_set_target_list, 2);
     rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
-    rb_define_module_function(mGtkDrag, "get_data", gtkdrag_drag_get_data, 4);
+    rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);
     rb_define_module_function(mGtkDrag, "get_source_widget", gtkdrag_get_source_widget, 1);
     rb_define_module_function(mGtkDrag, "highlight", gtkdrag_highlight, 1);
     rb_define_module_function(mGtkDrag, "unhighlight", gtkdrag_unhighlight, 1);
@@ -256,9 +281,9 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "threshold?", gtkdrag_check_threshold, 5);
     rb_define_module_function(mGtkDrag, "set_icon", gtkdrag_set_icon, -1);
     rb_define_module_function(mGtkDrag, "set_icon_default", gtkdrag_set_icon_default, 1);
-    rb_define_module_function(mGtkDrag, "source_set", gtkdrag_drag_source_set, 4);
-    rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_drag_source_set_icon, -1);
-    rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_drag_source_unset, 1);
+    rb_define_module_function(mGtkDrag, "source_set", gtkdrag_source_set, 4);
+    rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_source_set_icon, -1);
+    rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_source_unset, 1);
 
     G_DEF_SETTERS(mGtkDrag);
 

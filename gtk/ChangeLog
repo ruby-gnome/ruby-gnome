@@ -1,3 +1,8 @@
+2003-07-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdrag.c: Gtk::Drag.begin, .get_target_list, .set_target_list.
+	* src/rbgtktextview.c: Gtk::TextView#scroll_to_iter return true or false.
+
 2003-07-29  Geoff Youngs  <g@intersect-uk.co.uk>
 
 	* src/rbgdkevent.c: Use G_RENAME_CONSTANTS for [23]BUTTON_PRESS

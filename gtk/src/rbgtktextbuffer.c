@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2003/07/18 13:41:41 $
+  $Author: mutoh $
+  $Date: 2003/07/29 13:28:56 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -351,7 +351,7 @@ txt_delete_selection(argc, argv, self)
     VALUE  self;
 {
     VALUE interactive, default_editable;
-    rb_scan_args(argc, argv, "20", &interactive, &default_editable); /* FIXME: allow ommiting */
+    rb_scan_args(argc, argv, "20", &interactive, &default_editable); 
     return gtk_text_buffer_delete_selection(_SELF(self),
         RTEST(interactive), RTEST(default_editable)) ? Qtrue : Qfalse;
 }

@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/07/29 13:28:56 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -65,10 +65,9 @@ static VALUE
 textview_scroll_to_iter(self, iter, within_margin, use_align, xalign, yalign)
     VALUE self, iter, within_margin, use_align, xalign, yalign;
 {
-    gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
-                                 NUM2DBL(within_margin), RTEST(use_align), 
-                                 NUM2DBL(xalign), NUM2DBL(yalign));
-    return self;
+    return gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
+                                        NUM2DBL(within_margin), RTEST(use_align), 
+                                        NUM2DBL(xalign), NUM2DBL(yalign)) ? Qtrue : Qfalse;
 }
 
 static VALUE
