@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.10 2004/03/07 11:40:06 mutoh Exp $ */
+/* $Id: rbgnome-program.c,v 1.11 2004/09/23 00:29:58 mutoh Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -339,21 +339,21 @@ static VALUE
 program_human_readable_name(self)
     VALUE self;
 {
-    return rb_str_new2(gnome_program_get_human_readable_name(_SELF(self)));
+    return CSTR2RVAL(gnome_program_get_human_readable_name(_SELF(self)));
 }
 
 static VALUE
 program_app_id(self)
     VALUE self;
 {
-    return rb_str_new2(gnome_program_get_app_id(_SELF(self)));
+    return CSTR2RVAL(gnome_program_get_app_id(_SELF(self)));
 }
 
 static VALUE
 program_app_version(self)
     VALUE self;
 {
-    return rb_str_new2(gnome_program_get_app_version(_SELF(self)));
+    return CSTR2RVAL(gnome_program_get_app_version(_SELF(self)));
 }
 
 static VALUE
@@ -377,14 +377,14 @@ program_locate_file(argc, argv, self)
     if (RTEST(multi)) {
         obj = rb_ary_new();
         for (list = ret_locations; list != NULL; list = list->next) {
-            rb_ary_push(obj, rb_str_new2(list->data));
+            rb_ary_push(obj, CSTR2RVAL(list->data));
             g_free(list->data);
             list->data = NULL;
         }
         if (ret_locations)
             g_slist_free(ret_locations);
     } else {
-        obj = result ? rb_str_new2(result) : Qnil;
+        obj = result ? CSTR2RVAL(result) : Qnil;
         if (result)
             g_free(result);
     }
@@ -412,7 +412,7 @@ program_get_args(self)
     args = poptGetArgs(g_value_get_pointer(&value));
     if (args != NULL)
         for (;*args != NULL;args++)
-            rb_ary_push(ary, rb_str_new2(*args));
+            rb_ary_push(ary, CSTR2RVAL(*args));
 	g_value_unset(&value);
     return ary;
 }
@@ -486,7 +486,7 @@ module_get_name(self)
     VALUE self;
 {
     GnomeModuleInfo *gmi = RVAL2BOXED(self, GNOME_TYPE_MODULE_INFO);
-    return rb_str_new2(gmi->name);
+    return CSTR2RVAL(gmi->name);
 }
 
 static VALUE
@@ -494,7 +494,7 @@ module_get_version(self)
     VALUE self;
 {
     GnomeModuleInfo *gmi = RVAL2BOXED(self, GNOME_TYPE_MODULE_INFO);
-    return rb_str_new2(gmi->version);
+    return CSTR2RVAL(gmi->version);
 }
 
 static VALUE
@@ -502,7 +502,7 @@ module_get_description(self)
     VALUE self;
 {
     GnomeModuleInfo *gmi = RVAL2BOXED(self, GNOME_TYPE_MODULE_INFO);
-    return rb_str_new2(gmi->description);
+    return CSTR2RVAL(gmi->description);
 }
 
 static VALUE
@@ -517,7 +517,7 @@ module_get_requirements(self)
         return obj;
     for (req = gmi->requirements; req->module_info != NULL; req++) {
         rb_ary_push(obj, rb_ary_new3(2, _WRAP(req->module_info),
-                                     rb_str_new2(req->required_version)));
+                                     CSTR2RVAL(req->required_version)));
     }
     return obj;
 }
@@ -535,7 +535,7 @@ module_get_opt_prefix(self)
     VALUE self;
 {
     GnomeModuleInfo *gmi = RVAL2BOXED(self, GNOME_TYPE_MODULE_INFO);
-    return gmi->opt_prefix ? rb_str_new2(gmi->opt_prefix) : Qnil;
+    return gmi->opt_prefix ? CSTR2RVAL(gmi->opt_prefix) : Qnil;
 }
 
 static VALUE
@@ -561,7 +561,7 @@ module_get_to_s(self)
     GnomeModuleInfo *gmi = RVAL2BOXED(self, GNOME_TYPE_MODULE_INFO);
     char buf[256];
     g_snprintf(buf, sizeof(buf), "#<Gnome::Module:%s %s (%s)>", gmi->name, gmi->version, gmi->description);
-    return rb_str_new2(buf);
+    return CSTR2RVAL(buf);
 }
 
 static VALUE

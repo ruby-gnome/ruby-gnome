@@ -1,3 +1,9 @@
+2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gnome2.rb: Support GLib::Log.set_log_domain.
+	Define Gnome::LOG_DOMAIN.
+	* src/rbgnome-program.c: Use CSTR2RVAL instead of rb_str_new.
+
 2004-08-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-help.c, rbgnome-url.c: Improve error handling. 
