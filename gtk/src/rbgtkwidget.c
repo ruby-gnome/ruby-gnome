@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -1052,12 +1052,15 @@ Init_gtk_widget()
      * constants
      */
     /* GtkWidgetFlags */
+    G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", gWidget);
     G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_FLAGS, "GTK_");
 
     /* GtkWidgetHelpType */
+    G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", gWidget);
     G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
 
     /* GtkTextDirection */
+    G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", gWidget);
     G_DEF_CONSTANTS(gWidget, GTK_TYPE_TEXT_DIRECTION, "GTK_");
 
     /* Special signals */

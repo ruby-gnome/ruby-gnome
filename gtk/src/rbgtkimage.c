@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -105,6 +105,7 @@ Init_gtk_image()
     rb_define_method(gImage, "set", image_set, -1);
 
     /* GtkImageType */
+    G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", gImage);
     G_DEF_CONSTANTS(gImage, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");

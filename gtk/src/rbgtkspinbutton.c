@@ -4,7 +4,7 @@
   rbgtkspinbutton.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -128,8 +128,10 @@ Init_gtk_spin_button()
     rb_define_method(gSButton, "range", sbtn_get_range, 0);
 
     /* GtkSpinType */
+    G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", gSButton);
     G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
 
     /* GtkSpinButtonUpdatePolicy */
+    G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", gSButton);
     G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
 }

@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -489,5 +489,6 @@ Init_gtk_textiter()
     G_DEF_SETTERS(cTextIter);
 
     /* GtkTextSearchFlags */
+    G_DEF_CLASS(GTK_TYPE_TEXT_SEARCH_FLAGS, "SearchFlags", cTextIter);
     G_DEF_CONSTANTS(cTextIter, GTK_TYPE_TEXT_SEARCH_FLAGS, "GTK_TEXT_");
 }

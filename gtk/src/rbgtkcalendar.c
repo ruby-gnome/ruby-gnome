@@ -4,7 +4,7 @@
   rbgtkcalendar.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -121,5 +121,6 @@ Init_gtk_calendar()
     rb_define_method(gCalendar, "freeze", cal_freeze, 0);
     rb_define_method(gCalendar, "thaw", cal_thaw, 0);
 
+    G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", gCalendar);
     G_DEF_CONSTANTS(gCalendar, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
 }

@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -874,39 +874,51 @@ Init_gtk_gdk_window()
    G_DEF_SETTERS(gdkWindow);
 
    /* GdkWindowType */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_TYPE, "GDK_WINDOW_");
    
    /* GdkWindowClass */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_CLASS, "Class", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_CLASS, "GDK_");
 
    /* GdkWindowHints */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_HINTS, "Hints", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_HINTS, "GDK_");
 
    /* GdkGravity */
+   G_DEF_CLASS(GDK_TYPE_GRAVITY, "Gravity", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_GRAVITY, "GDK_");
 
    /* GdkWindowEdge */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_EDGE, "Edge", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_EDGE, "GDK_WINDOW_");
 
    /* GdkWindowTypeHint */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE_HINT, "TypeHint", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_TYPE_HINT, "GDK_WINDOW_");
 
    /* GdkWindowAttibutesType */
+   G_DEF_CLASS(GDK_TYPE_WINDOW_ATTRIBUTES_TYPE, "AttributesType", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WINDOW_ATTRIBUTES_TYPE, "GDK_");
 
    /* GdkFilterReturn */
+   G_DEF_CLASS(GDK_TYPE_FILTER_RETURN, "FilterReturn", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_FILTER_RETURN, "GDK_");
 
    /* GdkModifierType */
+   G_DEF_CLASS(GDK_TYPE_MODIFIER_TYPE, "ModifierType", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_MODIFIER_TYPE, "GDK_");
    
    /* GdkWMDecoration */
+   G_DEF_CLASS(GDK_TYPE_WM_DECORATION, "WMDecoration", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_DECORATION, "GDK_");
    
    /* GdkWMFunction */
+   G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_WM_FUNCTION, "GDK_");
 
    /* GdkPropMode from GdkProperties */
+   G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", gdkWindow);
    G_DEF_CONSTANTS(gdkWindow, GDK_TYPE_PROP_MODE, "GDK_");
 
    rb_define_const(gdkWindow, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   

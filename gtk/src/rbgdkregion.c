@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -240,8 +240,10 @@ Init_gtk_gdk_region()
     rb_define_method(gdkRegion, "xor", gdkregion_xor, 1);
 
     /* GdkOverlapType */
+    G_DEF_CLASS(GDK_TYPE_OVERLAP_TYPE, "OverlapType", gdkRegion);
     G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_OVERLAP_TYPE, "GDK_");
 
     /* GdkFillRule */
+    G_DEF_CLASS(GDK_TYPE_FILL_RULE, "FillRule", gdkRegion);
     G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_FILL_RULE, "GDK_");
 }

@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:07 $
+  $Date: 2003/08/20 17:07:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -21,6 +21,7 @@ void
 Init_gtk_gdk_const()
 {
     /* GdkStatus */
+    G_DEF_CLASS(GDK_TYPE_STATUS, "Status", mGdk);
     G_DEF_CONSTANTS(mGdk, GDK_TYPE_STATUS, "GDK_");
 
     /* GdkInputSource */

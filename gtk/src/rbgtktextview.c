@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/07/29 13:28:56 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -308,6 +308,7 @@ Init_gtk_textview()
     G_DEF_SETTERS(cTextView);
 
     /* GtkTextWindowType */
+    G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", cTextView);
     G_DEF_CONSTANTS(cTextView, GTK_TYPE_TEXT_WINDOW_TYPE, "GTK_TEXT_");
  
     rb_define_const(cTextView, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));

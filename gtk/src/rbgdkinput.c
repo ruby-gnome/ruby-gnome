@@ -4,7 +4,7 @@
   rbgdkinput.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -72,9 +72,11 @@ Init_gtk_gdk_input()
     rb_define_module_function(mGdkInput, "set_extension_events", input_set_extension_events, 3);
 
     /* GdkInputCondition */
+    G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", mGdkInput);
     G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
     /* GdkExtensionMode */
+    G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", mGdkInput);
     G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_EXTENSION_MODE, "GDK_");
 }
 

@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -202,6 +202,8 @@ Init_gtk_gdk_dragcontext()
     rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
 
 	/* Constants */
+    G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", gdkDragContext);
+    G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", gdkDragContext);
     G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
     G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_ACTION, "GDK_");
 }

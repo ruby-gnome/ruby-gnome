@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -259,23 +259,30 @@ Init_gtk_gdk_gc()
     G_DEF_SETTERS(gdkGC);
 
     /* GdkGCValuesMask */
+    G_DEF_CLASS(GDK_TYPE_GC_VALUES_MASK, "ValuesMask", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
 
     /* GdkFunction */
+    G_DEF_CLASS(GDK_TYPE_FUNCTION, "Function", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FUNCTION, "GDK_");
 
     /* GdkFill */
+    G_DEF_CLASS(GDK_TYPE_FILL, "Fill", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FILL, "GDK_");
 
     /* GdkSubwindowMode */
+    G_DEF_CLASS(GDK_TYPE_SUBWINDOW_MODE, "SubWindowMode", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_SUBWINDOW_MODE, "GDK_");
 
     /* GdkLineStyle */
+    G_DEF_CLASS(GDK_TYPE_LINE_STYLE, "LineStyle", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_LINE_STYLE, "GDK_");
 
     /* GdkCapStyle */
+    G_DEF_CLASS(GDK_TYPE_CAP_STYLE, "CapStyle", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_CAP_STYLE, "GDK_");
 
     /* GdkJoinStyle */
+    G_DEF_CLASS(GDK_TYPE_JOIN_STYLE, "JoinStyle", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_JOIN_STYLE, "GDK_");
 }

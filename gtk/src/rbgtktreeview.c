@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/20 16:13:57 $
+  $Author: sakai $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -563,6 +563,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
     
     /* Constants */
+    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
     /* Option Signals */

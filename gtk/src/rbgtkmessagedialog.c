@@ -3,8 +3,8 @@
 
   rbgtkmessagedialog.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/30 17:26:32 $
+  $Author: sakai $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -37,8 +37,10 @@ Init_gtk_message_dialog()
     rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
 
     /* GtkMessageType */
+    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", gMessageDialog);
     G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_MESSAGE_TYPE, "GTK_MESSAGE_");
 
     /* GtkButtonsType */
+    G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", gMessageDialog);
     G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_BUTTONS_TYPE, "GTK_");
 }

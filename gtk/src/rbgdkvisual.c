@@ -4,7 +4,7 @@
   rbgdkvisual.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -251,8 +251,10 @@ Init_gtk_gdk_visual()
     rb_define_method(gdkVisual, "blue_prec", gdkvisual_blue_prec, 0);
 
     /* GdkVisualType */
+    G_DEF_CLASS(GDK_TYPE_VISUAL_TYPE, "Type", gdkVisual);
     G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_VISUAL_TYPE, "GDK_VISUAL_");
 
     /* GdkByteOrder */
+    G_DEF_CLASS(GDK_TYPE_BYTE_ORDER, "ByteOrder", gdkVisual);
     G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_BYTE_ORDER, "GDK_");
 }

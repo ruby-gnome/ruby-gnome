@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 06:09:51 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -628,6 +628,7 @@ Init_gtk_gdk_event()
     /* GdkEventScroll */
     ev = gdkevents[GDK_SCROLL];
     /* GdkScrollDirection */
+    G_DEF_CLASS(GDK_TYPE_SCROLL_DIRECTION, "Direction", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_SCROLL_DIRECTION, "GDK_SCROLL_");
 
     /* GdkEventMotion */
@@ -649,6 +650,7 @@ Init_gtk_gdk_event()
     ev = gdkevents[GDK_VISIBILITY_NOTIFY];
     rb_define_method(ev, "state", gdkeventvisibility_state, 0);
     /* GdkVisibilityState */
+    G_DEF_CLASS(GDK_TYPE_VISIBILITY_STATE, "State", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_VISIBILITY_STATE, "GDK_VISIBILITY_");
 
     /* GdkEventCrossing */
@@ -664,8 +666,10 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "focus?", gdkeventcrossing_focus, 0);
     rb_define_method(ev, "state", gdkeventcrossing_state, 0);
     /* GdkCrossingMode */
+    G_DEF_CLASS(GDK_TYPE_CROSSING_MODE, "CrossingMode", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_CROSSING_MODE, "GDK_CROSSING_");
     /* GdkNotifyType */
+    G_DEF_CLASS(GDK_TYPE_NOTIFY_TYPE, "NotifyType", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_NOTIFY_TYPE, "GDK_");
 
     /* GdkEventFocus */
@@ -687,6 +691,7 @@ Init_gtk_gdk_event()
     /* GdkPropertyState */ 
     /* Notice! You cant use Gdk::Property::DELETE 
        because it has defined by Gdk::Event already. */
+    G_DEF_CLASS(GDK_TYPE_PROPERTY_STATE, "State", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_PROPERTY_STATE, "GDK_");
 
     /* GdkEventSelection */
@@ -727,11 +732,13 @@ Init_gtk_gdk_event()
     /* GdkEventWindowState */
     ev = gdkevents[GDK_WINDOW_STATE];
     /* GdkWindowState */
+    G_DEF_CLASS(GDK_TYPE_WINDOW_STATE, "WindowState", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_WINDOW_STATE, "GDK_WINDOW_STATE_");
 
     /* GdkEventSetting */
     ev = gdkevents[GDK_SETTING];
     /* GdkSettingAction */
+    G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "SettingAction", mGdk);
     G_DEF_CONSTANTS(mGdk, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
@@ -743,10 +750,15 @@ Init_gtk_gdk_event()
     rb_define_const(gdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
 
     /* GdkEventType */
+    /* XXX */
+    G_RENAME_CONSTANT("2BUTTON_PRESS","BUTTON2_PRESS");
+    G_RENAME_CONSTANT("3BUTTON_PRESS","BUTTON3_PRESS");
+    G_DEF_CLASS(GDK_TYPE_EVENT_TYPE, "Type", gdkEvent);
     G_RENAME_CONSTANT("2BUTTON_PRESS","BUTTON2_PRESS");
     G_RENAME_CONSTANT("3BUTTON_PRESS","BUTTON3_PRESS");
     G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_TYPE, "GDK_");
 
     /* GdkEventMask */
+    G_DEF_CLASS(GDK_TYPE_EVENT_MASK, "Mask", gdkEvent);
     G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_MASK, "GDK_");
 }

@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/22 16:08:50 $
+  $Author: sakai $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -572,8 +572,10 @@ Init_gtk_window()
     G_DEF_SETTERS(gWindow);
 
     /* GtkWindowPosition (from General constants) */
+    G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", gWindow);
     G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_POSITION, "GTK_WIN_");
 
     /* GtkWindowType (from General constants) */
+    G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", gWindow);
     G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
 }

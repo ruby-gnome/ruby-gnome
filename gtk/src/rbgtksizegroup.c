@@ -4,7 +4,7 @@
   rbgtksizegroup.c -
  
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -66,6 +66,7 @@ Init_sizegrp()
     G_DEF_SETTERS(gSizeGroup);
 
     /* GtkSizeGroupMode */
+    G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", gSizeGroup);
     G_DEF_CONSTANTS(gSizeGroup, GTK_TYPE_SIZE_GROUP_MODE, "GTK_SIZE_GROUP_");
 }
 

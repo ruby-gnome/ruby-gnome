@@ -4,7 +4,7 @@
   rbgtkarrow.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -42,5 +42,6 @@ Init_gtk_arrow()
     rb_define_method(gArrow, "set", arrow_set, 2);
 
     /* GtkArrowType (from General constants) */
+    G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", gArrow);
     G_DEF_CONSTANTS(gArrow, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
 }

@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:02 $
 
   Copyright (C) 2001-2003 Masao Mutoh
 ************************************************/
@@ -50,5 +50,7 @@ Init_gtk_gdk_cursor()
 
     rb_define_method(gdkCursor, "initialize", gdkcursor_initialize, -1);
     rb_define_method(gdkCursor, "pixmap?", gdkcursor_is_pixmap, 0);
+
+    G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", gdkCursor);
     G_DEF_CONSTANTS(gdkCursor, GDK_TYPE_CURSOR_TYPE, "GDK_");
 }

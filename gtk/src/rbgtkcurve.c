@@ -4,7 +4,7 @@
   rbgtkcurve.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -95,6 +95,8 @@ Init_gtk_curve()
     rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
 
     /* GtkCurveType(from standard constants) */
+
+    G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", gCurve);
     G_DEF_CONSTANTS(gCurve, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
 }
 

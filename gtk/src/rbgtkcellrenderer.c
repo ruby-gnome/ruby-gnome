@@ -4,7 +4,7 @@
   rbgtkcellrenderer.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -98,8 +98,10 @@ Init_gtk_cellrenderer()
     rb_define_method(renderer, "set_fixed_size", cellrenderer_set_fixed_size, 2);
 
     /* GtkCellRendererState */
+    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_STATE, "State", renderer);
     G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_STATE, "GTK_CELL_RENDERER_");
 
     /* GtkCellRendererMode */
+    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_MODE, "Mode", renderer);
     G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_MODE, "GTK_CELL_RENDERER_");
 }

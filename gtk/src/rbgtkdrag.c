@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/29 13:28:56 $
+  $Author: sakai $
+  $Date: 2003/08/20 17:07:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -288,8 +288,10 @@ Init_gtk_drag()
     G_DEF_SETTERS(mGtkDrag);
 
     /* GtkDestDefaults */
+    G_DEF_CLASS(GTK_TYPE_DEST_DEFAULTS, "DestDefaults", mGtkDrag);
     G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_DEST_DEFAULTS, "GTK_");
 
     /* GtkTargetFlags */
+    G_DEF_CLASS(GTK_TYPE_TARGET_FLAGS, "TargetFlags", mGtkDrag);
     G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_TARGET_FLAGS, "GTK_");
 }

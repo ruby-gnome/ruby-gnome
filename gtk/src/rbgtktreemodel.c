@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/31 16:15:18 $
+  $Author: sakai $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -220,6 +220,7 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "rows_reordered", treemodel_rows_reordered, 3);
 
     /* GtkTreeModelFlags */
+    G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", mTreeModel);
     G_DEF_CONSTANTS(mTreeModel, GTK_TYPE_TREE_MODEL_FLAGS, "GTK_TREE_MODEL_");
 
     G_DEF_SIGNAL_FUNC(mTreeModel, "row_changed", signal_func);

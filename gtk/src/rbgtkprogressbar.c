@@ -4,7 +4,7 @@
   rbgtkprogressbar.c -
 
   $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Date: 2003/08/20 17:07:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -42,6 +42,7 @@ Init_gtk_progress_bar()
 */
 
     /* GtkProgressBarOrientation */
+    G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", gProgressBar);
     G_DEF_CONSTANTS(gProgressBar, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
 
     rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);

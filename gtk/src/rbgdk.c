@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 13:06:43 $
+  $Date: 2003/08/20 17:07:02 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -273,6 +273,7 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "target", gdk_m_target, 0);
     
     /* GdkGrabStatus */
+    G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", mGdk);
     G_DEF_CONSTANTS(mGdk, GDK_TYPE_GRAB_STATUS, "GDK_");
 
     G_DEF_SETTERS(mGdk);
