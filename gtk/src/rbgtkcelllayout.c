@@ -4,7 +4,7 @@
   rbgtkcelllayout.c -
 
   $Author: mutoh $
-  $Date: 2004/05/28 18:59:40 $
+  $Date: 2004/05/30 16:41:13 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -55,8 +55,16 @@ static VALUE
 layout_add_attribute(self, cell, attribute, column)
     VALUE self, cell, attribute, column;
 {
+    gchar* name;
+
+    if (SYMBOL_P(attribute)) {
+        name = rb_id2name(SYM2ID(attribute));
+    } else {
+        name = RVAL2CSTR(attribute);
+    }
+
     gtk_cell_layout_add_attribute(_SELF(self), RVAL2RENDERER(cell),
-                                  RVAL2CSTR(attribute), NUM2INT(column));
+                                  name, NUM2INT(column));
     return self;
 }
 
@@ -93,21 +101,20 @@ layout_clear_attributes(self, cell)
 }
 
 static VALUE
-layout_set_attributes(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+layout_set_attributes(self, cell, attrs)
+    VALUE self, cell, attrs;
 {
     gint i;
-    VALUE cell, attrs;
-    rb_scan_args(argc, argv, "1*", &cell, &attrs);
+    VALUE ary;
+    Check_Type(attrs, T_HASH);
 
     layout_clear_attributes(self, cell);
 
-    for (i = 0; i < RARRAY(attrs)->len; i++){
+    ary = rb_funcall(attrs, rb_intern("to_a"), 0);
+    for (i = 0; i < RARRAY(ary)->len; i++){
         layout_add_attribute(self, cell, 
-                             RARRAY(RARRAY(attrs)->ptr[i])->ptr[0],
-                             RARRAY(RARRAY(attrs)->ptr[i])->ptr[1]);
+                             RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
+                             RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
     }
     return self;
 }
@@ -126,6 +133,6 @@ Init_gtk_celllayout()
     rb_define_method(layout, "add_attribute", layout_add_attribute, 3);
     rb_define_method(layout, "set_cell_data_func", layout_set_cell_data_func, 1);
     rb_define_method(layout, "clear_attributes", layout_clear_attributes, 1);
-    rb_define_method(layout, "set_attributes", layout_set_attributes, -1);
+    rb_define_method(layout, "set_attributes", layout_set_attributes, 2);
 #endif
 }

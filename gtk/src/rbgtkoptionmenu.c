@@ -4,7 +4,7 @@
   rbgtkoptionmenu.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2004/05/30 16:41:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -13,6 +13,8 @@
 ************************************************/
 
 #include "global.h"
+
+#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
 
 static VALUE
 omenu_initialize(self)
@@ -45,9 +47,12 @@ omenu_get_history(self)
     return INT2NUM(gtk_option_menu_get_history(GTK_OPTION_MENU(RVAL2GOBJ(self))));
 }
 
+#endif
+
 void 
 Init_gtk_option_menu()
 {
+#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE gOptionMenu = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);
 
     rb_define_method(gOptionMenu, "initialize", omenu_initialize, 0);
@@ -56,4 +61,5 @@ Init_gtk_option_menu()
     rb_define_method(gOptionMenu, "history", omenu_get_history, 0);
 
     G_DEF_SETTERS(gOptionMenu);
+#endif
 }

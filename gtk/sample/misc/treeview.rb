@@ -5,11 +5,10 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.4 2003/08/31 15:29:44 mutoh Exp $
+  $Id: treeview.rb,v 1.5 2004/05/30 16:41:13 mutoh Exp $
 =end
 
 require 'gtk2'
-require 'gdk_pixbuf2'
 
 Gtk.init
 

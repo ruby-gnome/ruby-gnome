@@ -4,7 +4,7 @@
   rbgtkcombo.c -
 
   $Author: mutoh $
-  $Date: 2004/03/09 17:01:49 $
+  $Date: 2004/05/30 16:41:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,6 +14,7 @@
 
 #include "global.h"
 
+#ifndef GTK_DISABLE_DEPRECATED /* Since 2.4 */
 
 static VALUE
 combo_set_popdown_strings(self, ary)
@@ -96,10 +97,12 @@ combo_entry(self)
 {
     return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->entry);
 }
+#endif
 
 void 
 Init_gtk_combo()
 {
+#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE gCombo = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
 
     rb_define_method(gCombo, "initialize", combo_initialize, -1);
@@ -112,4 +115,6 @@ Init_gtk_combo()
     rb_define_method(gCombo, "entry", combo_entry, 0);
 
     G_DEF_SETTERS(gCombo);
+#endif
 }
+

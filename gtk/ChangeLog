@@ -1,6 +1,16 @@
+2004-05-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilechooser.c: Fix definitions of Gtk::FileChooser::Action. 
+	* sample/misc/filechooser.rb: ditto.
+	* sample/misc/combobox.rb, expander.rb, color_font_button.rb: Added for GTK+-2.4.
+	* src/rbgtkcombobox.c, rbgtkcomboboxentry.c, rbgtkexpander.c, rbgtkcolorbutton.c,
+	rbgtkfontbutton.c, rbgtkfilechooserwidget.c, rbgtkaction.c, rbgtktoggleaction.c,
+	rbgtkradioaction.c: Added for GTK+-2.4.
+	* src/rbgtkoptionmenu.c, rbgtkcombo.c: Deprecated(GTK_DISABLE_DEPRECATED).
+
 2004-05-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkcelllayout.c: Added for 2.4. 
+	* src/rbgtkcelllayout.c: Added for GTK+-2.4. 
 	* src/rbgdkdevice.c, rbgdkinput.c: Move Gdk::Input.set_extension_events to 
 	Gdk::Device. 
 	* src/rbgtkcontainer.c: Gtk::Container#set_focus_(h|v)adjustment accept nil. 
@@ -14,8 +24,8 @@
 
 	* src/rbgtkstock.c: Fix compilation error of GTK_STOCK_HARDDISK/NETWORK.
 	Reported by John Platte.
-	* src/rbgtkmessagedialog.c: Added Gtk::MessageDialog#set_markup for 2.4. 
-	* src/rbgtkbutton.c: Added Gtk::Button#set_alignment, #alignment for 2.4.
+	* src/rbgtkmessagedialog.c: Added Gtk::MessageDialog#set_markup for GTK+-2.4. 
+	* src/rbgtkbutton.c: Added Gtk::Button#set_alignment, #alignment for GTK+-2.4.
 	* src/rbgtkborder.c: Added.
 	* sample/misc/entry.rb, settings.rb: Modified.
 	* sample/misc/entrycompletion.rb: Added.
@@ -25,8 +35,8 @@
 2004-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkclipboard.c: Added Gtk::Clipboard#request_targets, 
-	#wait_for_targets for 2.4.
-	* src/rbgtkdrag.c: Add Gtk::Drag.source_(set|get)_target_list for 2.4.
+	#wait_for_targets for GTK+-2.4.
+	* src/rbgtkdrag.c: Add Gtk::Drag.source_(set|get)_target_list for GTK+-2.4.
 
 2004-05-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
@@ -43,9 +53,9 @@
 
 2004-05-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkrc.c: Add Gtk::RC.reset_styles for 2.4. 
-	* src/rbgtkstock.c: Add missing constants and support 2.4. 
-	* src/rbgtkaccelmap.c: Define as a class since 2.4 otherwise as a module.
+	* src/rbgtkrc.c: Add Gtk::RC.reset_styles for GTK+-2.4. 
+	* src/rbgtkstock.c: Add missing constants and support GTK+-2.4. 
+	* src/rbgtkaccelmap.c: Define as a class since GTK+-2.4 otherwise as a module.
 	Add Gtk::AccelMap.get, .lock_path, .unlock_path.
 	* src/rbgtkaccelkey.c: Add Gtk::AccelKey#set_key, #set_mods, #set_flags.
 

@@ -5,7 +5,7 @@
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: filechooser.rb,v 1.1 2004/05/16 07:21:17 mutoh Exp $
+  $Id: filechooser.rb,v 1.2 2004/05/30 16:41:13 mutoh Exp $
 =end
 
 require "gtk2"
@@ -19,7 +19,7 @@ end
 Gtk.init
 
 dialog =  Gtk::FileChooserDialog.new("Gtk::FileChooser sample", nil, 
-				     Gtk::FileChooser::Action::OPEN,
+				     Gtk::FileChooser::ACTION_OPEN,
 				     "gnome-vfs",
 				     [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT],
 				     [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL]

@@ -4,7 +4,7 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2004/05/23 17:02:11 $
+  $Date: 2004/05/30 16:41:13 $
  
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
@@ -361,7 +361,7 @@ Init_gtk_file_chooser()
 
     /* GtkFileChooserAction */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_ACTION_");
+    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
 
     fchoerror_not = rb_define_class_under(mGtk, "FileChooserNotExistentError", rb_eRuntimeError);
     fchoerror_bad = rb_define_class_under(mGtk, "FileChooserBadFileNameError", rb_eRuntimeError);
