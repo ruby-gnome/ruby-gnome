@@ -1,3 +1,7 @@
+2003-12-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas-util.c: Fix a segfault of cpoint_to_ruby(). 
+
 2003-09-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas.c, rbgnome-canvas-item.c: Apply Enum/Flags.
@@ -8,8 +12,8 @@
 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
-
+	* extconf.rb: Exit with 1 when the package is not found.
+	
 2003-08-17  Vincent Isambart <isambart@netcourrier.com>
 
 	* sample/canvas-primitives.rb: Follow Ruby/GTK2 changes.

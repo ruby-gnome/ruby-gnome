@@ -27,9 +27,13 @@ static VALUE
 cpoint_to_ruby(from)
     GValue *from;
 {
-    GnomeCanvasPoints *points = (GnomeCanvasPoints *)g_value_get_boxed(from);
-    VALUE ary = rb_ary_new2(points->num_points);
     int i;
+    GnomeCanvasPoints* points = (GnomeCanvasPoints *)g_value_get_boxed(from);
+    VALUE ary;
+
+    if (! points) return Qnil;
+
+    ary = rb_ary_new2(points->num_points);
 
     for (i = 0;i < points->num_points;i++) {
         rb_ary_push(ary, rb_ary_new3(2,
