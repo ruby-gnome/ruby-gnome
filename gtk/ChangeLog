@@ -1,3 +1,10 @@
+2004-05-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcontainer.c: Gtk::Container#focus_hadjustment/vadjustment return nil
+	when NULL is returned. 
+	* src/rbgdkevent.c: Rename from Gdk::EventCrossing::CrossingMode 
+	to Gdk::EventCrossing::Mode
+
 2004-05-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextview.c: Fix a bug of Gtk::TextView#move_child. 

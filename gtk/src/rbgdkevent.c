@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/03/24 17:54:30 $
+  $Date: 2004/05/12 17:39:46 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -769,7 +769,7 @@ Init_gtk_gdk_event()
     G_DEF_SETTERS(ev);
 
     /* GdkCrossingMode */
-    G_DEF_CLASS(GDK_TYPE_CROSSING_MODE, "CrossingMode", ev);
+    G_DEF_CLASS(GDK_TYPE_CROSSING_MODE, "Mode", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_CROSSING_MODE, "GDK_CROSSING_");
     /* GdkNotifyType */
     G_DEF_CLASS(GDK_TYPE_NOTIFY_TYPE, "NotifyType", ev);
