@@ -1,3 +1,10 @@
+2002-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: devide from rbgobj_objectc[ch].
+	* src/rbgobj_object.c, src/rbgobject.h: abolish rbgobj_force_get_gobject().
+	* src/rbgobject.h: add G_DEF_CLASS(), G_DEF_CLASS2(), GTYPE2CLASS().
+	* src/rbgobj_type.c: add rbgobj_define_class()
+
 2002-07-31  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c: use g_closure_add_invalidate_notifier()

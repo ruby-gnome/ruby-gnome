@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2002/07/28 11:34:21 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:38:47 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -75,6 +75,31 @@ rbgobj_lookup_rbclass(const GObject* gobj)
     }
 
     rb_raise(rb_eTypeError, "not a GObject");
+}
+
+VALUE
+rbgobj_define_class(gtype, name, module, mark, free)
+	GType gtype;
+	gchar* name;
+	VALUE module;
+	void* mark;
+	void* free;
+{
+	VALUE klass;
+	RGObjClassInfo* cinfo;
+	klass = rb_define_class_under(module, name, GTYPE2CLASS(g_type_parent(gtype)));
+	cinfo = ALLOC(RGObjClassInfo);
+	
+	cinfo->klass = klass;
+	cinfo->gtype = gtype;
+	cinfo->mark = mark;
+	cinfo->free = free;
+/*
+	rbgobj_define_property_acccessors(klass);
+*/
+	rbgobj_register_class(cinfo);
+
+	return klass;
 }
 
 /**********************************************************************/

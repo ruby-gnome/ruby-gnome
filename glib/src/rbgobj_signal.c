@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2002/07/31 07:47:33 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:38:47 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -13,7 +13,7 @@
 
 #include "global.h"
 
-static VALUE
+VALUE
 gobj_sig_connect(argc, argv, self)
     int argc;
     VALUE *argv;

@@ -4,6 +4,7 @@
 
 extern void Init_gobject();
 extern void Init_gobject_gtype();
+extern void Init_gobject_gobject();
 extern void Init_gobject_gclosure();
 extern void Init_gobject_gvalue();
 extern void Init_gobject_gsignal();

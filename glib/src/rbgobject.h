@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2002/07/31 07:47:33 $
+  $Author: mutoh $
+  $Date: 2002/07/31 17:38:47 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -21,33 +21,40 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* rbgobj_type.c */
+/* macros */
+#define RBGOBJ_INITIALIZE(obj, gobj)\
+ (rbgobj_initialize_gobject(obj, G_OBJECT(gobj)))
+#define G_DEF_CLASS(gtype, name, module)\
+ (rbgobj_define_class(gtype, name, module, 0, 0))
+#define G_DEF_CLASS2(gtype, name, module, mark, free)\
+ (rbgobj_define_class(gtype, name, module, mark, free))
 
-typedef struct _RGObjClassInfo RGObjClassInfo;
-struct _RGObjClassInfo {
+#define GTYPE2CLASS(gtype) (rbgobj_lookup_class_by_gtype(gtype)->klass)
+#define RVAL2GOBJ(obj) (rbgobj_get_gobject(obj))
+#define GOBJ2RVAL(gobj) (rbgobj_get_value_from_gobject(G_OBJECT(gobj)))
+#define GVAL2RVAL(v) rbgobj_gvalue_to_rvalue((GValue*)v)
+
+typedef struct {
     VALUE klass;
     GType gtype;
     void (*mark)(GObject *);
     void (*free)(GObject *);
-};
+} RGObjClassInfo;
 
-extern void rbgobj_register_class(const RGObjClassInfo* cinfo);
-extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
-extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
-extern VALUE rbgobj_lookup_rbclass(const GObject* gobj);
+typedef struct {
+    VALUE self;
+    GObject* gobj;
+    const RGObjClassInfo* cinfo;
+    gboolean destroyed;
+} gobj_holder;
 
-extern ID id_class_info;
-extern ID id_gobject_data;
+/* rbgobject.c */
 extern ID id_relatives;
 extern ID id_relative_callbacks;
 extern ID id_delete;
-
-#define RVAL2GOBJ(obj) (rbgobj_get_gobject(obj))
-#define GOBJ2RVAL(gobj) (rbgobj_get_value_from_gobject(G_OBJECT(gobj)))
-#define RBGOBJ_INITIALIZE(obj, gobj) (rbgobj_initialize_gobject(obj, G_OBJECT(gobj)))
+extern ID id_class_info;
 
 extern GObject* rbgobj_get_gobject(VALUE obj);
-extern GObject* rbgobj_force_get_gobject(VALUE obj);
 extern void rbgobj_initialize_gobject(VALUE obj, GObject* gobj);
 extern VALUE rbgobj_get_value_from_gobject(GObject* gobj);
 
@@ -55,10 +62,17 @@ extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
                                              ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
-
-extern void rbgobj_define_property_acccessors(VALUE klass);
-
 extern GObject* rbgobj_gobject_new(VALUE type, VALUE params_hash);
+extern void rbgobj_define_property_accessors(VALUE klass);
+	extern VALUE rbgobj_create_object(VALUE klass);
+
+/* rbgobj_type.c */
+extern void rbgobj_register_class(const RGObjClassInfo* cinfo);
+extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
+extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
+extern VALUE rbgobj_lookup_rbclass(const GObject* gobj);
+extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
+								 void* mark, void* free); 
 
 extern VALUE rbgobj_cGObject;
 extern VALUE rbgobj_cParamSpec;
@@ -85,6 +99,9 @@ extern VALUE rbgobj_boxed_class(GType gtype);
 extern GType rbgobj_boxed_class_gtype(VALUE klass);
 extern gpointer rbgobj_boxed_get(VALUE obj);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
+
+/* rbgobj_signal.c */
+extern VALUE gobj_sig_connect(int argc, VALUE* argv, VALUE self);
 
 #ifdef __cplusplus
 }
