@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2003/07/02 17:53:44 $
+  $Date: 2003/07/04 19:09:55 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -13,14 +13,6 @@
 
 #if GTK_MINOR_VERSION >= 2
 #define _SCREEN(i) GDK_SCREEN(RVAL2GOBJ(i))
-
-static VALUE
-gdkscreen_initialize(self)
-    VALUE self;
-{
-      G_INITIALIZE(self, gdk_screen_get_default());
-      return Qnil;
-}
 
 static VALUE
 gdkscreen_default(self)
@@ -106,7 +98,6 @@ Init_gtk_gdk_screen()
 #if GTK_MINOR_VERSION >= 2
     VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 
-    rb_define_method(gdkScreen, "initialize", gdkscreen_initialize, 0);
     rb_define_singleton_method(gdkScreen, "default", gdkscreen_default, 0);
     rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
     rb_define_method(gdkScreen, "width", gdkscreen_width, 0);

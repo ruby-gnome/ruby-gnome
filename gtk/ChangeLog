@@ -4,6 +4,7 @@
 	* src/rbgtkitemfactory.c: Remove Gtk::ItemFactory.add_foreign() as deprecated.
 	Clean up of Gtk::ItemFactory#create_items.
 	Fix error for Gtk::ItemFactory#construct.
+	* src/rbgdkscreen.c: Remove Gdk::Screen#initialize.
 
 2003-07-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
