@@ -1,3 +1,96 @@
+Ruby-GNOME2-0.8.0 (2003-11-16)
+
+  * Ruby/GLib
+      - Provide methods for creating GObject from ruby side. Now you can create your 
+        own signals and properties: [Masahiro, Sakai]
+         GLib::MetaInterface, GLib::Instantiatable, GLib::Signal
+      - Added some methods, improved and Fixed some bugs: [Masahiro Sakai, Masao Mutoh]
+         GLib::Closure, GLib, GLib::Instantiatable, GLib::Object, mkmf-gnome2.rb
+      - Added new macros: [Masao Mutoh]
+         G_RENAME_NICK()
+      - Added: [Masahiro, Sakai]
+         sample/type-register.rb, tests/*.rb
+
+  * Ruby/GdkPixbuf
+      - Added some methods, improved and Fixed some bugs: [KATO Kazuyoshi, Masao Mutoh]
+         Gdk::Pixbuf
+
+  * Ruby/Pango 
+      - rbpango.h is installed with glib/gtk2 headers.
+      - Added new methods: [Masao Mutoh]
+         Pango::Layout
+      - Added: [Masao Mutoh]
+         PangoLogAttr, PangoAnalysis
+
+  * Ruby/GTK
+      - Completed: [Masao Mutoh]
+         Gdk::Geometry, Gdk::Event*, Gdk::Pixbuf, Gdk::Drawable, Gdk::DragContext, 
+         Gdk::Selection, Gdk::RGB, Gdk::GC, Gdk::Atom, Gdk::Image, Gdk::Colormap, 
+         Gdk::Keyval, Gdk::Screen, Gdk::Visual, Gdk::Window, Gdk::Display,  Gdk
+      - Added and completed: [Masao Mutoh]
+         Gdk::Property, Gdk::Keymap, Gdk::TimeCoord, 
+      - Added some methods, improved, fixed bugs: [Matthew Berg, Martin Povolny, 
+        KATO Kazuyoshi, Laurent Sansonetti, Masahiro Sakai, Masao Mutoh] 
+         Gtk::AccelGroup, Gtk::Accelmap, Gtk::Clipboard, Gtk::Notebook, Gtk::Drag, 
+         Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore, Gtk::TreeStore,
+         Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath, Gtk::TreeRowReference
+      - Added: [Kato Kazuyoshi]
+         sample/gtk-demo/changedisplay.rb, sample/gtk-demo/pixbufs.rb.
+      - Removed: [Masao Mutoh]
+         Gtk::Clipboard#owner
+         Gdk::Span
+         Gdk::Region#eql?, #&, #-, #|
+
+  * Ruby/GNOME
+      - Added some methods, improved, fixed bugs: [Masao Mutoh]
+         Gnome::AppHelper, Gnome::DruidPageStandard
+      - Apply Enum/Flags. [Masao Mutoh]
+
+  * Ruby/GnomeCanvas
+      - None.
+
+  * Ruby/Libglade
+      - None.
+
+  * Ruby/Libart
+      - None.
+
+  * Ruby/GConf
+      - None.
+
+  * Ruby/GStreamer 
+      - Update maintainer's e-mail address [Laurent Sansonetti]
+        
+  * Ruby/GnomeVFS
+      - None.
+
+  * Ruby/GtkHtml2
+      - Added and completed: [Masao Mutoh]
+         Gtk::HtmlContext, Gtk::HtmlBoxTable,
+         Gtk::HtmlBoxTableRowGroup,
+      - Completed: [Masao Mutoh]
+         Gtk::HtmlView
+      - Added: [Masao Mutoh]
+         Gtk::HtmlBox, Gtk::HtmlBoxBlock, Gtk::HtmlBoxTableCaption, 
+         Gtk::HtmlBoxText, Gtk::BoxRoot, Gtk::BoxForm,
+         Gtk::HtmlParser, Gtk::HtmlEmbedded, Gtk::HtmlBoxEmbedded
+
+  * Ruby/GtkGLExt
+      - None.
+
+  * Ruby/Libgda [NEW]
+      - Added and compeleted: [Laurent Sansonetti]
+         Gda, Gda::Client, Gda::Command, Gda::Provider, 
+         Gda::DataSource, Gda::Connection, Gda::DataModelArray,
+         Gda::DataModelHash, Gda::DataModelList, Gda::Error,
+         Gda::Export, Gda::FieldAttributes, Gda::Parameter, 
+         Gda::ParameterList, Gda::QuarkList, Gda::Row, 
+         Gda::Select, Gda::Table, Gda::Transaction
+      - Added
+         Gda::DataModel
+         sample/*.rb, tests/*.rb
+        
+
 Ruby-GNOME2-0.7.0 (2003-09-07)
 
   * The whole Ruby-GNOME2

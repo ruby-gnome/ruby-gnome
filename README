@@ -26,6 +26,7 @@ Release packages
     - Ruby/GStreamer    - GStreamer 0.6.x or later
     - Ruby/GtkHtml2     - GtkHtml2 2.0.x or later
     - Ruby/GtkGLExt     - GtkGLExt 1.0.3 or later
+    - Ruby/Libgda       - libgda 1.0.0 or later
 
 
 Install
@@ -73,6 +74,7 @@ Dependencies
       Ruby/GStreamer   depends on Ruby/GLib.
       Ruby/GtkHtml2    depends on Ruby/GTK.
       Ruby/GtkGLExt    depends on Ruby/GTK, rbogl.
+      Ruby/Libgda      depends on Ruby/GLib.
 
 Copying
 -------

@@ -14,7 +14,7 @@ Junichiro Kita <kita@kitaj.no-ip.com>
      Ruby/GTK Tutorial(Japanese) (M)
 
 KATO Kazuyoshi <kadu@zb.wakwak.com>
-     Ruby/GTK(Especially gtk-demo).
+     Ruby/GTK(Especially gtk-demo), Gdk::Pixbuf.
 
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
@@ -26,7 +26,7 @@ Martin Povolný <xpovolny@fi.muni.cz>
      Ruby/GtkHtml2(M). Ruby/GTK, 
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
-     Vice maintainer. Ruby/GLib(M) and most of the important design
+     Vice maintainer. Ruby/GLib(M) and almost of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>

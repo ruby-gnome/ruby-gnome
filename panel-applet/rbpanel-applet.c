@@ -4,7 +4,7 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2003/08/27 17:32:18 $
+  $Date: 2003/11/16 08:25:25 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -123,8 +123,7 @@ void
 Init_panelapplet2()
 {
     VALUE mGnome = rb_define_module("Gnome");
-    VALUE cApplet = rb_define_class_under(mGnome, "PanelApplet", GTYPE2CLASS(PANEL_TYPE_APPLET));
-
+    VALUE cApplet = G_DEF_CLASS(PANEL_TYPE_APPLET, "PanelApplet", mGnome);
     id_call = rb_intern("call");
 
     rb_define_singleton_method(cApplet, "main", rbpanel_s_main, -1);
