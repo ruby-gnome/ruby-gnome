@@ -1,3 +1,8 @@
+2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_enums.c: fixed rgbobj_get_enum - a VALUE was not
+	converted to int before calling rbgobj_make_enum.
+
 2003-08-29  Vincent Isambart <isambart@netcourrier.com>
 
 	* src/rbgobj_enums.c: fixed rgbobj_get_flags - a VALUE was not

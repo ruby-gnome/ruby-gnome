@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: isambart $
-  $Date: 2003/08/29 19:48:50 $
+  $Author: sakai $
+  $Date: 2003/08/30 11:09:35 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -191,7 +191,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
-        obj = rbgobj_make_enum(obj, gtype);
+        obj = rbgobj_make_enum(NUM2INT(obj), gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return enum_get_holder(obj)->value->value;
