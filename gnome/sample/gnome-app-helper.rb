@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-app-helper.rb,v 1.4 2002/10/27 05:59:01 tkubo Exp $
+# $Id: gnome-app-helper.rb,v 1.5 2002/11/16 09:54:49 tkubo Exp $
 #
 # gnome-app-helper.rb - sample script of Gnome::App#create_menus()
 #                       and Gnome::App#toolbar().
@@ -23,17 +23,16 @@
 #
 require 'gnome2'
 
-program = Gnome::Program.new('test-app-helper', '0.1', Gnome::ModuleInfo::LIBGNOMEUI)
-
 class SampleApp < Gnome::App
 
   include Bonobo::I18n
 
-  APP_NAME = 'test-app-helper'
+  NAME = 'test-app-helper'
   TITLE = 'App Helper Sample'
+  VERSION = '0.1'
 
   def initialize
-    super(APP_NAME, TITLE)
+    super(NAME, TITLE)
 
     self.set_default_size(200, 200)
     self.signal_connect("delete_event") do 
@@ -151,6 +150,7 @@ class SampleApp < Gnome::App
   end
 end
 
+Gnome::Program.new(SampleApp::NAME, SampleApp::VERSION)
 app = SampleApp.new()
 app.show_all()
 

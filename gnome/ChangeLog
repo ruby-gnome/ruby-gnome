@@ -1,3 +1,21 @@
+2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-app.c: add Gnome::App#name and Gnome::App#prefix.
+	* sample/gnome-config.rb: add a sample script for Gnome::Config.
+	* sample/gnome-app-helper.rb, sample/gnome-druid.rb: use constants
+	instead of immediate value.
+
+2002-11-16  KUBO Takehiro  <kubo@jiubao.org>
+
+	* README: modified.
+	* extconf.rb: add -Wall to CFLAGS when is a gcc. change default
+	$LDLIBS and $CFLAGS for GNOME2.
+	* src/rbgnome-program.c: use `EXTERN' instead of plain `extern'
+	for rb_progname and rb_argv.
+	* src/rbgnome-app-helper.c, src/rbgnome-stock-icons.c: define
+	stock-id as a Symbol not a String.
+	* sample/test-gnome/test-gnome-app.rb: delete workaround code.
+
 2002-11-16  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* ToDo: Removed.

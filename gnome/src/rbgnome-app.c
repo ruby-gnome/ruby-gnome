@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.6 2002/10/27 05:59:58 tkubo Exp $ */
+/* $Id: rbgnome-app.c,v 1.7 2002/11/16 09:55:17 tkubo Exp $ */
 /* based on libgnomeui/gnome-app.h */
 
 /* Gnome::App widget for Ruby/GNOME2
@@ -299,6 +299,22 @@ app_get_dock_item_by_name(self, name)
     return result ? GOBJ2RVAL(result) : Qnil;
 }
 
+/* Application name. */
+static VALUE
+app_get_name(self)
+    VALUE self;
+{
+    return rb_str_new2(_SELF(self)->name);
+}
+
+/* Prefix for gnome-config (used to save the layout).  */
+static VALUE
+app_get_prefix(self)
+    VALUE self;
+{
+    return rb_str_new2(_SELF(self)->prefix);
+}
+
 void
 Init_gnome_app(mGnome)
     VALUE mGnome;
@@ -320,6 +336,10 @@ Init_gnome_app(mGnome)
     rb_define_method(gnoApp, "enable_layout_config", app_enable_layout_config, 1);
     rb_define_method(gnoApp, "dock", app_get_dock, 0);
     rb_define_method(gnoApp, "get_dock_item_by_name", app_get_dock_item_by_name, 1);
+
+    /* attributes */
+    rb_define_method(gnoApp, "name", app_get_name, 0);
+    rb_define_method(gnoApp, "prefix", app_get_prefix, 0);
 
     G_DEF_SETTERS(gnoApp);
 }

@@ -1,5 +1,5 @@
 # -*- indent-tabs-mode: nil -*-
-# $Id: gnome-druid.rb,v 1.4 2002/11/07 13:05:31 tkubo Exp $
+# $Id: gnome-druid.rb,v 1.5 2002/11/16 09:54:50 tkubo Exp $
 #
 # test-druid.rb - sample script of Gnome::Druid
 #                 This program was based of test-druid of libgnomeui
@@ -27,10 +27,15 @@
 require 'gnome2'
 
 class TestDruid < Gtk::Window
+
+  NAME = 'test-gnome-druid'
+  TITLE = 'Druid Sample'
+  VERSION = '1.0'
+
   def initialize
     super(Gtk::Window::TOPLEVEL)
 
-    self.set_title("Druid Sample")
+    self.set_title(TITLE)
     self.signal_connect("delete_event") do
       Gtk::main_quit()
     end
@@ -85,7 +90,7 @@ EOS
   end
 end
 
-Gnome::Program.new('test-gnome-druid', '0.1')
+Gnome::Program.new(TestDruid::NAME, TestDruid::VERSION)
 
 window = TestDruid.new()
 window.show_all()
