@@ -19,7 +19,7 @@ include "testgtkrc2"
 #include "/usr/local/share/themes/Notif/gtk/gtkrc"
 #include "/usr/local/share/themes/Default/gtk/gtkrc"
 
-pixmap_path "."
+#pixmap_path "."
 
 style "defaultfont"
 {

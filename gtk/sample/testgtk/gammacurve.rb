@@ -1,6 +1,6 @@
 =begin header
 
-  gammacurve.rb - a part of testgtk.c rewritten in ruby-gtk
+  gammacurve.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -33,11 +33,10 @@ class GammaCurveSample < SampleWindow
 
   def initialize
     super("test")
-    border_width(10)
+    set_border_width(10)
 
     @curve = Gtk::GammaCurve::new()
     add(@curve)
-    @curve.show
     @count = 0
   end
 

@@ -1,6 +1,6 @@
 =begin header
 
-  notebook.rb - a part of testgtk.c rewritten in ruby-gtk
+  notebook.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -82,10 +82,10 @@ class NotebookSample < SampleWindow
   def initialize
     super("notebook")
 
-    box1 = Gtk::VBox::new(false, 0)
+    box1 = Gtk::VBox.new(false, 0)
     add(box1)
 
-    @notebook = Gtk::Notebook::new()
+    @notebook = Gtk::Notebook.new()
     @notebook.signal_connect("switch_page") do |widget, page, num_page|
       unless destroyed?
 	page_switch(widget, page, num_page)
@@ -93,7 +93,7 @@ class NotebookSample < SampleWindow
     end
     @notebook.set_tab_pos(Gtk::POS_TOP)
     box1.pack_start(@notebook, true, true, 0)
-    @notebook.border_width(10)
+    @notebook.set_border_width(10)
 
     @notebook.realize
     @book_open, @book_open_mask =
@@ -103,14 +103,14 @@ class NotebookSample < SampleWindow
 
     create_pages(1, 5)
 
-    separator = Gtk::HSeparator::new()
+    separator = Gtk::HSeparator.new()
     box1.pack_start(separator, false, true, 10)
 
-    box2 = Gtk::HBox::new(false, 5)
-    box2.border_width(10)
+    box2 = Gtk::HBox.new(false, 5)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
 
-    cbutton1 = Gtk::CheckButton::new("popup menu")
+    cbutton1 = Gtk::CheckButton.new("popup menu")
     box2.pack_start(cbutton1, true, false, 0)
     cbutton1.signal_connect("clicked") do
       if cbutton1.active?
@@ -120,14 +120,14 @@ class NotebookSample < SampleWindow
       end
     end
 
-    cbutton2 = Gtk::CheckButton::new("homogeneous tabs")
+    cbutton2 = Gtk::CheckButton.new("homogeneous tabs")
     box2.pack_start(cbutton2, true, false, 0)
     cbutton2.signal_connect("clicked") do
       @notebook.set_homogeneous_tabs(cbutton2.active?)
     end
 
-    box2 = Gtk::HBox::new(false, 5)
-    box2.border_width(10)
+    box2 = Gtk::HBox.new(false, 5)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
 
     label = Gtk::Label.new("Notebook Style :")
@@ -139,7 +139,7 @@ class NotebookSample < SampleWindow
       OptionMenuItem.new("Scrollable", proc { scrollable_notebook }) ], 0)
     box2.pack_start(omenu, false, true, 0)
 
-    button = Gtk::Button::new("Show all Pages")
+    button = Gtk::Button.new("Show all Pages")
     box2.pack_start(button, false, true, 0)
     button.signal_connect('clicked') do
       @notebook.foreach do |w|
@@ -147,33 +147,33 @@ class NotebookSample < SampleWindow
       end
     end
 
-    box2 = Gtk::HBox::new(true, 10)
-    box2.border_width(10)
+    box2 = Gtk::HBox.new(true, 10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
 
-    button = Gtk::Button::new("prev")
+    button = Gtk::Button.new("prev")
     button.signal_connect("clicked") do
       @notebook.prev_page
     end
     box2.pack_start(button, true, true, 0)
 
-    button = Gtk::Button::new("next")
+    button = Gtk::Button.new("next")
     button.signal_connect("clicked") do
       @notebook.next_page
     end
     box2.pack_start(button, true, true, 0)
 
-    button = Gtk::Button::new("rotate")
+    button = Gtk::Button.new("rotate")
     button.signal_connect("clicked") do
       @notebook.set_tab_pos((@notebook.tab_pos + 1) % 4)
     end
     box2.pack_start(button, true, true, 0)
 
-    separator = Gtk::HSeparator::new()
+    separator = Gtk::HSeparator.new()
     box1.pack_start(separator, false, true, 5)
 
-    button = Gtk::Button::new("close")
-    button.border_width(5)
+    button = Gtk::Button.new("close")
+    button.set_border_width(5)
     button.signal_connect("clicked") do
       destroy
     end
@@ -213,17 +213,17 @@ class NotebookSample < SampleWindow
     start_page.upto(end_page) do |i|
       buffer = "Page #{i}"
 
-      child = Gtk::Frame::new(buffer)
-      child.border_width(10)
+      child = Gtk::Frame.new(buffer)
+      child.set_border_width(10)
 
-      vbox = Gtk::VBox::new(true, 0)
-      vbox.border_width(10)
+      vbox = Gtk::VBox.new(true, 0)
+      vbox.set_border_width(10)
       child.add(vbox)
 
-      hbox = Gtk::HBox::new(true, 0)
+      hbox = Gtk::HBox.new(true, 0)
       vbox.pack_start(hbox, false, true, 5)
 
-      button1 = Gtk::CheckButton::new("Fill Tab")
+      button1 = Gtk::CheckButton.new("Fill Tab")
       hbox.pack_start(button1, true, true, 5)
       button1.set_active(true)
       button1.signal_connect('toggled') do
@@ -231,14 +231,14 @@ class NotebookSample < SampleWindow
 	@notebook.set_tab_label_packing(child, expand, button1.active?, pack)
       end
 
-      button2 = Gtk::CheckButton::new("Expand Tab")
+      button2 = Gtk::CheckButton.new("Expand Tab")
       hbox.pack_start(button2, true, true, 5)
       button2.signal_connect('toggled') do
 	expand, fill, pack = @notebook.query_tab_label_packing(child)
 	@notebook.set_tab_label_packing(child, button2.active?, fill, pack)
       end
 
-      button3 = Gtk::CheckButton::new("Pack end")
+      button3 = Gtk::CheckButton.new("Pack end")
       hbox.pack_start(button3, true, true, 5)
       button3.signal_connect('toggled') do
 	expand, fill, pack = @notebook.query_tab_label_packing(child)
@@ -246,7 +246,7 @@ class NotebookSample < SampleWindow
 				       if button3.active? then Gtk::PACK_END else Gtk::PACK_START end)
       end
 
-      button = Gtk::Button::new("Hide Page")
+      button = Gtk::Button.new("Hide Page")
       vbox.pack_end(button, false, false, 5)
       button.signal_connect('clicked') do
 	child.hide
@@ -254,19 +254,19 @@ class NotebookSample < SampleWindow
 
       child.show_all
 
-      label_box = Gtk::HBox::new(false, 0)
-      pixwid = Gtk::Pixmap::new(@book_closed, @book_closed_mask)
+      label_box = Gtk::HBox.new(false, 0)
+      pixwid = Gtk::Image.new(@book_closed, @book_closed_mask)
       label_box.pack_start(pixwid, false, true, 0)
       pixwid.set_padding(3, 1)
-      label = Gtk::Label::new(buffer)
+      label = Gtk::Label.new(buffer)
       label_box.pack_start(label, false, true, 0)
       label_box.show_all
       
-      menu_box = Gtk::HBox::new(false, 0)
-      pixwid = Gtk::Pixmap::new(@book_closed, @book_closed_mask)
+      menu_box = Gtk::HBox.new(false, 0)
+      pixwid = Gtk::Image.new(@book_closed, @book_closed_mask)
       menu_box.pack_start(pixwid, false, true, 0)
       pixwid.set_padding(3, 1)
-      label = Gtk::Label::new(buffer)
+      label = Gtk::Label.new(buffer)
       menu_box.pack_start(label, false, true, 0)
       menu_box.show_all
 
@@ -275,11 +275,11 @@ class NotebookSample < SampleWindow
   end
 
   def page_switch(widget, page, page_num)
-    oldpage = widget.cur_page
+    oldpage = widget.page
     if (page == oldpage)
       return
     end
-    page.tab_label.children[0].set(@book_open, @book_open_mask)
+    page.tab_label(@book_open, @book_open_mask)
     page.menu_label.children[0].set(@book_open, @book_open_mask)
     if (oldpage)
       oldpage.tab_label.children[0].set(@book_closed, @book_closed_mask)

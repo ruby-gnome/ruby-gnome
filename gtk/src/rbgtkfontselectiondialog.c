@@ -4,7 +4,7 @@
   rbgtkfontselectiondialog.c -
 
   $Author: mutoh $
-  $Date: 2002/10/23 18:02:16 $
+  $Date: 2002/11/04 16:19:18 $
 
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 ************************************************/
@@ -91,7 +91,7 @@ Init_gtk_font_selection_dialog()
     VALUE gFontSelectionDialog = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, 
                                              "FontSelectionDialog", mGtk);
 
-    rb_define_method(gFontSelectionDialog, "initialize", fsd_initialize, 1);
+    rb_define_method(gFontSelectionDialog, "initialize", fsd_initialize, -1);
     rb_define_method(gFontSelectionDialog, "font_name", fsd_get_font_name, 0);
     rb_define_method(gFontSelectionDialog, "set_font_name", fsd_set_font_name, 1);
     rb_define_method(gFontSelectionDialog, "preview_text", fsd_get_preview_text, 0);

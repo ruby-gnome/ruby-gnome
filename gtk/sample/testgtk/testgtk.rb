@@ -2,7 +2,7 @@
 
 =begin header
 
-  testgtk.rb - testgtk.c rewritten in ruby-gtk
+  testgtk.rb - testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -37,7 +37,6 @@ require 'radiobutton'
 require 'buttonbox'
 require 'toolbar'
 require 'statusbar'
-require 'tree'
 require 'handlebox'
 require 'reparent'
 require 'pixmap'
@@ -49,10 +48,9 @@ require 'scrolledwindow'
 require 'entry'
 require 'spinbutton'
 require 'cursors'
-require 'list'
-require 'clist'
+require 'liststore'
+require 'treestore'
 require 'colorselect'
-require 'ctree'
 require 'dialog'
 require 'range'
 require 'rulers'
@@ -83,9 +81,7 @@ def create_main_window
     ["button box", ButtonBoxSample],
     ["buttons", ButtonSample],
     ["check buttons", CheckButtonSample],
-    ["clist", CListSample],
     ["color selection", ColorSelectionSample],
-    ["ctree", CTreeSample],
     ["cursors", nil],
     ["dialog", DialogSample],
     #["dnd", nil],
@@ -98,7 +94,8 @@ def create_main_window
     ["item factory", nil],   #create_item_factory
     ["labels", LabelSample],
     ["layout", LayoutSample],
-    ["list", nil],
+#    ["liststore", ListStoreSample],
+    ["liststore", nil],
     ["menus", MenuSample],
     ["modal window", nil],   #create_modal_window
     ["notebook", NotebookSample],
@@ -126,17 +123,17 @@ def create_main_window
     ["toggle buttons", ToggleButtonSample],
     ["toolbar", ToolbarSample],
     ["tooltips", TooltipsSample],
-    ["tree", nil], #TreeSample],
+    ["treestore", nil],
+#    ["treestore", TreeStoreSample],
     ["WM hints", WMHintsSample],
   ]
   nbuttons = buttons.size
 
-  window = Gtk::Window.new(Gtk::WINDOW_TOPLEVEL)
+  window = Gtk::Window.new
   window.set_title($0)
-  window.set_policy(false, false, false);
   window.set_name("main window")
-  window.set_usize(200, 400)
-  window.set_uposition(20, 20)
+  window.set_default_size(200, 400)
+  window.move(20, 20)
 
   window.signal_connect("destroy") do Gtk.main_quit end
   window.signal_connect("delete_event") do false end
@@ -160,7 +157,7 @@ def create_main_window
   box1.pack_start(label, false, false, 0)
 
   buffer =
-      sprintf("Ruby/GTK v%d.%d.%d",
+      sprintf("Ruby/GTK2 v%d.%d%d",
 	      Gtk::BINDING_VERSION[0],
 	      Gtk::BINDING_VERSION[1],
 	      Gtk::BINDING_VERSION[2])
@@ -168,15 +165,15 @@ def create_main_window
   box1.pack_start(label, false, false, 0)
 
   scrolled_window = Gtk::ScrolledWindow.new(nil, nil)
-  scrolled_window.border_width(10)
+  scrolled_window.set_border_width(10)
   scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
                              Gtk::POLICY_AUTOMATIC)
   box1.pack_start(scrolled_window, true, true, 0)
 
   box2 = Gtk::VBox.new(false, 0)
-  box2.border_width(10)
+  box2.set_border_width(10)
   scrolled_window.add_with_viewport(box2);
-  box2.set_focus_vadjustment(scrolled_window.get_vadjustment)
+  box2.set_focus_vadjustment(scrolled_window.vadjustment)
 
   for i in 0..(nbuttons-1)
     button = Gtk::Button.new(buttons[i][0])
@@ -194,7 +191,7 @@ def create_main_window
   box1.pack_start(separator, false, true, 0)
 
   box2 = Gtk::VBox.new(false, 10)
-  box2.border_width(10)
+  box2.set_border_width(10)
   box1.pack_start(box2, false, true, 0)
 
   button = Gtk::Button.new("close")

@@ -4,7 +4,7 @@
   rbgtkprogressbar.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:25 $
+  $Date: 2002/11/04 16:19:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,7 +53,7 @@ Init_gtk_progress_bar()
     rb_define_const(gProgressBar, "BOTTOM_TO_TOP", INT2FIX(GTK_PROGRESS_BOTTOM_TO_TOP));
     rb_define_const(gProgressBar, "TOP_TO_BOTTOM", INT2FIX(GTK_PROGRESS_TOP_TO_BOTTOM));
 
-    rb_define_method(gProgressBar, "initialize", pbar_initialize, -1);
+    rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);
     rb_define_method(gProgressBar, "pulse", pbar_pulse, 0);
     rb_define_method(gProgressBar, "update", pbar_update, 1);
 }

@@ -1,6 +1,6 @@
 =begin header
 
-  buttonbox.rb - a part of testgtk.c rewritten in ruby-gtk
+  buttonbox.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -44,17 +44,17 @@ class ButtonBoxSample < SampleWindow
     vbox.border_width = 10
     frame_horz.add(vbox)
 
-    vbox.pack_start(create_bbox(true, "Spread", 40, 85, 20,
-				Gtk::BUTTONBOX_SPREAD))
+    vbox.pack_start(create_bbox(true, "Spread", 40,
+				Gtk::ButtonBox::SPREAD))
 
-    vbox.pack_start(create_bbox(true, "Edge", 40, 85, 20,
-				Gtk::BUTTONBOX_EDGE), true, true, 5)
+    vbox.pack_start(create_bbox(true, "Edge", 40,
+				Gtk::ButtonBox::EDGE), true, true, 5)
 
-    vbox.pack_start(create_bbox(true, "Start", 40, 85, 20,
-				Gtk::BUTTONBOX_START), true, true, 5)
+    vbox.pack_start(create_bbox(true, "Start", 40,
+				Gtk::ButtonBox::START), true, true, 5)
 
-    vbox.pack_start(create_bbox(true, "End", 40, 85, 20,
-				Gtk::BUTTONBOX_END), true, true, 5)
+    vbox.pack_start(create_bbox(true, "End", 40,
+				Gtk::ButtonBox::END), true, true, 5)
 
     frame_vert = Gtk::Frame.new("Vertical Button Boxes")
     main_vbox.pack_start(frame_vert, true, true, 10)
@@ -63,20 +63,20 @@ class ButtonBoxSample < SampleWindow
     hbox.border_width = 10
     frame_vert.add(hbox)
 
-    hbox.pack_start(create_bbox(false, "Spread", 30, 85, 20,
-				Gtk::BUTTONBOX_SPREAD))
+    hbox.pack_start(create_bbox(false, "Spread", 30,
+				Gtk::ButtonBox::SPREAD))
 
-    hbox.pack_start(create_bbox(false, "Edge", 30, 85, 20,
-				Gtk::BUTTONBOX_EDGE), true, true, 5)
+    hbox.pack_start(create_bbox(false, "Edge", 30,
+				Gtk::ButtonBox::EDGE), true, true, 5)
 
-    hbox.pack_start(create_bbox(false, "Start", 30, 85, 20,
-				Gtk::BUTTONBOX_START), true, true, 5)
+    hbox.pack_start(create_bbox(false, "Start", 30,
+				Gtk::ButtonBox::START), true, true, 5)
 
-    hbox.pack_start(create_bbox(false, "End", 30, 85, 20,
-				Gtk::BUTTONBOX_END), true, true, 5)
+    hbox.pack_start(create_bbox(false, "End", 30,
+				Gtk::ButtonBox::END), true, true, 5)
   end
 
-  def create_bbox(horizontal, title, spacing, child_w, child_h, layout)
+  def create_bbox(horizontal, title, spacing, layout)
     frame = Gtk::Frame.new(title)
 
     if horizontal then
@@ -88,9 +88,8 @@ class ButtonBoxSample < SampleWindow
     bbox.border_width = 5
     frame.add(bbox)
 
-    bbox.set_layout(layout)
+    bbox.set_layout_style(layout)
     bbox.set_spacing(spacing)
-    bbox.set_child_size(child_w, child_h)
 
     button = Gtk::Button.new("OK")
     bbox.add(button)

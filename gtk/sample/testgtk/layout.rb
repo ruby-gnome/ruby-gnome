@@ -1,6 +1,6 @@
 =begin header
 
-  layout.rb - a part of testgtk.c rewritten in ruby-gtk
+  layout.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -33,9 +33,9 @@ class LayoutSample < SampleWindow
   def initialize
     super("Gtk::Layout")
 
-    set_usize(200, 200)
+    set_default_size(200, 200)
 
-    scrolledwindow = Gtk::ScrolledWindow.new(nil, nil)
+    scrolledwindow = Gtk::ScrolledWindow.new
 
     add(scrolledwindow)
       
@@ -47,7 +47,7 @@ class LayoutSample < SampleWindow
     @layout.hadjustment.step_increment = 10.0
     @layout.vadjustment.step_increment = 10.0
 
-    @layout.set_events(Gdk::EXPOSURE_MASK)
+    @layout.set_events(Gdk::Event::EXPOSURE_MASK)
     @layout.signal_connect("expose_event") do
       | w, event |
       layout_expose_handler(event)
@@ -65,6 +65,7 @@ class LayoutSample < SampleWindow
         end
 
 	@layout.put(button, j*100, i*100)
+        button.show
       end
     end
 
@@ -81,14 +82,11 @@ class LayoutSample < SampleWindow
 
   private
   def layout_expose_handler(event)
-    imin = (@layout.xoffset + event.area.x) / 10
-    imax = (@layout.xoffset + event.area.x + event.area.width + 9) / 10
+    imin = (event.area.x) / 10
+    imax = (event.area.x + event.area.width + 9) / 10
 
-    jmin = (@layout.yoffset + event.area.y) / 10
-    jmax = (@layout.yoffset + event.area.y + event.area.height + 9) / 10
-
-    @layout.window.clear_area(event.area.x, event.area.y,
-			      event.area.width, event.area.height)
+    jmin = (event.area.y) / 10
+    jmax = (event.area.y + event.area.height + 9) / 10
 
     for i in imin..imax-1 do
       for j in jmin..jmax-1 do
@@ -96,12 +94,12 @@ class LayoutSample < SampleWindow
 	  @layout.bin_window.draw_rectangle(
 			@layout.style.black_gc,
 			true,
-			10*i - @layout.xoffset, 10*j - @layout.yoffset, 
+			10*i, 10*j, 
 			1+i%10, 1+j%10)
 	end
       end
     end
-    true
+    false
   end
 
 end

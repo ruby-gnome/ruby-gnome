@@ -1,6 +1,6 @@
 =begin header
 
-  filesel.rb - a part of testgtk.c rewritten in ruby-gtk
+  filesel.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -37,7 +37,7 @@ class FileSelectionSample < Gtk::FileSelection
     @destroyed = false
     signal_connect("destroy") do destroy end
 
-    set_position(Gtk::WIN_POS_MOUSE)
+    set_window_position(Gtk::Window::POS_MOUSE)
     hide_fileop_buttons
 
     ok_button.signal_connect("clicked") do
@@ -53,13 +53,11 @@ class FileSelectionSample < Gtk::FileSelection
       hide_fileop_buttons
     end
     action_area.pack_start(button, false, false, 0)
-    button.show
 
     button = Gtk::Button::new("Show Fileops")
     button.signal_connect("clicked") do
       show_fileop_buttons
     end
     action_area.pack_start(button, false, false, 0)
-    button.show
   end
 end

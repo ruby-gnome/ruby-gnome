@@ -1,6 +1,6 @@
 =begin
 
-  dialog.rb - a part of testgtk.c rewritten in ruby-gtk
+  dialog.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
 =end
 
@@ -10,7 +10,7 @@ class DialogSample < SampleDialog
 
   def initialize
     super("Gtk::Dialog")
-    set_usize(200, 100)
+    set_default_size(200, 100)
 
     button = Gtk::Button::new("OK")
     button.flags |= Gtk::Widget::CAN_DEFAULT

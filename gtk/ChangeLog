@@ -1,3 +1,13 @@
+2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkprogressbar.c: Fix parameter number of Gtk::ProgreeBar#initialize. 
+	* sample/testgtk/testgtk.rb, sample.rb, pixmap.rb, testgtkrc, menu.rb, layout.rb, 
+	labels.rb, gammacurve.rb, fontselection.rb, filesel.rb, entry.rb, dialog.rb, 
+	colorselect.rb, button.rb, checkbutton.rb, buttonbox.rb, README: Follow Ruby/GTK2.
+	Remove ctree.rb, clist.rb, tree.rb, list.rb.
+	* src/rbgtklayout.c: Change parameter omitable of Gtk::Layout#initiazlie. 
+	* src/rbgtkfontselectiondialog.c: Fix parameter number of Gtk::FontSelectionDialog#initialize. 
+
 2002-11-04  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkliststore.c src/rbgtktreeiter.c src/rbgtktreemodel.c

@@ -14,21 +14,20 @@ class ColorSelectionSample < Gtk::ColorSelectionDialog
     @destroyed = false
     signal_connect("destroy") do destroy end
 
-    colorsel.set_opacity(true)
-    colorsel.set_update_policy(Gtk::UPDATE_CONTINUOUS)
-    set_position(Gtk::WIN_POS_MOUSE)
+    colorsel.set_has_opacity_control(true)
+    set_window_position(Gtk::Window::POS_MOUSE)
     colorsel.signal_connect("color_changed") do selection_changed end
     ok_button.signal_connect("clicked") do selection_ok end
     cancel_button.signal_connect("clicked") do destroy end
   end
 
   def selection_ok
-    color = colorsel.get_color
-    colorsel.set_color(color)
+    color = colorsel.current_color
+    colorsel.set_current_color(color)
   end
 
   def selection_changed
-    color = colorsel.get_color
+    color = colorsel.current_color
   end
 
 end

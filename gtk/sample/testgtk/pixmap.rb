@@ -1,10 +1,10 @@
 =begin header
 
-  pixmap.rb - a part of testgtk.c rewritten in ruby-gtk
+  pixmap.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:15 $
-  $Id: pixmap.rb,v 1.1 2002/05/19 12:39:15 mutoh Exp $
+  $Date: 2002/11/04 16:19:18 $
+  $Id: pixmap.rb,v 1.2 2002/11/04 16:19:18 mutoh Exp $
 
 Original Copyright:
  
@@ -33,50 +33,41 @@ require 'sample'
 class PixmapSample < SampleWindow
   def initialize
     super("pixmap")
-    border_width(0)
+    set_border_width(0)
     realize
 
     box1 = Gtk::VBox::new(false, 0)
     add(box1)
-    box1.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, true, true, 0)
-    box2.show
 
     button = Gtk::Button::new()
     box2.pack_start(button, false, false, 0)
-    button.show
 
-    style = button.get_style
+    style = button.style
 
     pixmapwid = new_pixmap("test.xpm", window, style.bg(Gtk::STATE_NORMAL))
 
     label = Gtk::Label::new("Pixmap\ntest")
     box3 = Gtk::HBox::new(false, 0)
-    box3.border_width(2)
+    box3.set_border_width(2)
     box3.add(pixmapwid)
     box3.add(label)
     button.add(box3)
-    pixmapwid.show
-    label.show
-    box3.show
 
     separator = Gtk::HSeparator::new()
     box1.pack_start(separator, false, true, 0)
-    separator.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
-    box2.show
 
     button = Gtk::Button::new("close")
     button.signal_connect("clicked") do destroy end
     box2.pack_start(button, true, true, 0)
     button.set_flags(Gtk::Widget::CAN_DEFAULT)
     button.grab_default
-    button.show
   end
 end

@@ -1,6 +1,6 @@
 =begin header
 
-  fontselection.rb - a part of testgtk.c rewritten in ruby-gtk
+  fontselection.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
   Rewritten by Neil Conway <neilconway@rogers.com>
 
@@ -34,7 +34,7 @@ class FontSelectionSample < Gtk::FontSelectionDialog
 
     def initialize
         super('Font Selection Dialog')
-        set_position(Gtk::WIN_POS_MOUSE)
+        set_window_position(Gtk::Window::POS_MOUSE)
 
         signal_connect('destroy') {
             destroy

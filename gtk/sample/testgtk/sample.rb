@@ -1,6 +1,6 @@
 =begin header
 
-  sample.rb - a part of testgtk.c rewritten in ruby-gtk
+  sample.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
 =end
 
@@ -29,9 +29,9 @@ end
 class SampleWindow < Gtk::Window
   include Sample
   def initialize(title)
-    super(Gtk::WINDOW_TOPLEVEL)
+    super()
     set_title(title)
-    border_width(0)
+    set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
@@ -44,7 +44,7 @@ class SampleDialog < Gtk::Dialog
   def initialize(title)
     super()
     set_title(title)
-    border_width(0)
+    set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
@@ -55,19 +55,19 @@ end
 
 def new_pixmap(filename, window, background)
   pixmap, mask = Gdk::Pixmap::create_from_xpm(window, background, filename)
-  wpixmap = Gtk::Pixmap::new(pixmap, mask)
+  wpixmap = Gtk::Image.new(pixmap, mask)
 end
 
-OptionMenuItem = Struct::new("OptionMenuItem", :name, :block)
+OptionMenuItem = Struct.new("OptionMenuItem", :name, :block)
 
 def build_option_menu(items, history)
-  omenu = Gtk::OptionMenu::new()
+  omenu = Gtk::OptionMenu.new()
 
-  menu = Gtk::Menu::new()
+  menu = Gtk::Menu.new()
   group = nil
 
   items.size.times do |i|
-    menu_item = Gtk::RadioMenuItem::new(group, items[i].name)
+    menu_item = Gtk::RadioMenuItem.new(group, items[i].name)
     menu_item.signal_connect("activate") do |widget|
        items[i].block.call(widget)
     end

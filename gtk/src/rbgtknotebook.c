@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:25 $
+  $Date: 2002/11/04 16:19:18 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -270,10 +270,43 @@ note_get_tab_pos(self)
     return INT2FIX(gtk_notebook_get_tab_pos(_SELF(self)));
 }
 
+/*
+ * Gtk::NotebookPage
+ */
+/*****************************************/
+static GtkNotebookPage*
+notepage_copy(page)
+    const GtkNotebookPage* page;
+{ 
+/*
+  GtkNotebookPage* new_page;
+  g_return_val_if_fail (page != NULL, NULL);
+  new_page = g_new(GtkNotebookPage, 1);
+  *new_page = *page;
+  return new_page;
+*/
+    return (GtkNotebookPage*)page;
+}
+
+GType
+notebookpage_get_type(void)
+{ 
+  static GType our_type = 0;
+  if (our_type == 0)
+    our_type = g_boxed_type_register_static ("GtkNotebookPage",
+                    (GBoxedCopyFunc)notepage_copy,
+                    (GBoxedFreeFunc)g_free);
+  return our_type;
+}
+
+/*****************************************/
+
+
 void 
 Init_gtk_notebook()
 {
     VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
+    G_DEF_CLASS((notebookpage_get_type()), "NotebookPage", mGtk);
 
     rb_define_method(gNotebook, "initialize", note_initialize, 0);
     rb_define_method(gNotebook, "append_page", note_append_page, -1);
