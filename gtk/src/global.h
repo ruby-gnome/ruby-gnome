@@ -4,7 +4,7 @@
   global.h -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/06/22 05:26:50 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -114,6 +114,7 @@ extern void Init_gtk_vscrollbar();
 extern void Init_gtk_vseparator();
 extern void Init_gtk_widget();
 extern void Init_gtk_window();
+extern void Init_gtk_windowgroup();
 extern void Init_gtk_itemfactory();
 extern void Init_gtk_selectiondata();
 extern void Init_gtk_drag();

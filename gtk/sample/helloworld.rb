@@ -5,6 +5,7 @@
 # see Gtk+ tutorial.
 #
 
+require 'glib2'
 require 'gtk2'
 
 def hello(widget)

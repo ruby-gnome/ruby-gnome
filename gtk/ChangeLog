@@ -1,3 +1,7 @@
+Sat Jun 22 14:21:44 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* src/rbgdkwindowgroup.c: File Added. Support Gtk::WindowGroup
+	* src/rbgtk.c, src/global.h: Support Gtk::WindowGroup
+
 Sat Jun 22 11:54:00 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
    * src/rbgdkwindow.c: Add Gdk::Window#copy_area, #register_dnd,

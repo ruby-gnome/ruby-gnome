@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:30:59 $
+  $Author: mutoh $
+  $Date: 2002/06/22 05:26:50 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -640,7 +640,7 @@ void Init_gtk_gtk()
     Init_gtk_style();
     Init_gtk_selectiondata();
     Init_gtk_drag();
-
+	Init_gtk_windowgroup();
     Init_gtk_object();
 
     Init_gtk_accel_group();
