@@ -4,6 +4,9 @@
 	  as password.
 	* src/rbgdadatamodel.c: Gda::DataModel#to_xml can now be used
 	  without the standalone parameter (which is false by default).
+	* src/rbgdaquarklist.c, tests/tc_quarklist.rb: New files.
+	* src/rbgda.c: Initializes Gda::QuarkList.
+	* src/rbgda.h: Added macros for Gda::QuarkList.
 
 2003-10-06  Laurent Sansonetti  <laurent@datarescue.be>
 

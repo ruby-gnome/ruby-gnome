@@ -44,6 +44,7 @@ static void Init_all_classes(void) {
     extern void Init_gda_parameter(void);
     extern void Init_gda_parameter_list(void);
     extern void Init_gda_provider(void);
+    extern void Init_gda_quarklist(void);
     extern void Init_gda_row(void);
     extern void Init_gda_select(void);
     extern void Init_gda_table(void);
@@ -64,6 +65,7 @@ static void Init_all_classes(void) {
     Init_gda_parameter();
     Init_gda_parameter_list();
     Init_gda_provider();
+    Init_gda_quarklist();
     Init_gda_row();
     Init_gda_select();
     Init_gda_table();
