@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/25 18:02:22 $
+  $Author: kzys $
+  $Date: 2003/03/02 06:56:52 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -17,6 +17,7 @@
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
+#define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
 static VALUE
 treeview_initialize(argc, argv, self)
@@ -70,31 +71,64 @@ treeview_remove_column(self, column)
 }  
 
 static VALUE
-treeview_insert_column(self, column, position)
-    VALUE self, column, position;
+treeview_insert_column(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE  self;
 {
-    return INT2NUM(gtk_tree_view_insert_column(_SELF(self), 
-                                               TREEVIEW_COL(column),
-                                               NUM2INT(position)));
+    VALUE args[4];
+
+    rb_scan_args(argc, argv, "22", /* NORMAL    ATTRIBUTES  DATA_FUNC */
+                 &args[0],         /* column    position    position  */
+                 &args[1],         /* position  title       title     */
+                 &args[2],         /*           renderer    renderer  */
+                 &args[3]);        /*           attributes  func      */
+
+    if (argc == 2) {
+        return INT2NUM(gtk_tree_view_insert_column(_SELF(self),
+                                                   TREEVIEW_COL(args[0]),
+                                                   NUM2INT(args[1])));
+    } else if (argc == 4) {
+        if (TYPE(args[3]) == T_HASH) {
+            int i;
+            int col;
+            int ret;
+            gchar* name;
+            VALUE ary;
+            GtkCellRenderer* renderer = RVAL2CELLRENDERER(args[2]);
+
+            GtkTreeViewColumn* column = gtk_tree_view_column_new();
+            gtk_tree_view_column_set_title(column, RVAL2CSTR(args[1]));
+            gtk_tree_view_column_pack_start(column, renderer, TRUE);
+
+            ret = gtk_tree_view_insert_column(_SELF(self), column, NUM2INT(args[0]));
+            ary = rb_funcall(args[3], rb_intern("to_a"), 0);
+            for (i = 0; i < RARRAY(ary)->len; i++) {
+                VALUE val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+                if (SYMBOL_P(val)) {
+                    name = rb_id2name(SYM2ID(val));
+                } else {
+                    name = RVAL2CSTR(val);
+                }
+                col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+                gtk_tree_view_column_add_attribute(column,
+                                                   renderer,
+                                                   name, col);
+            }
+            return INT2NUM(ret);
+        }  else if (rb_obj_is_kind_of(args[3], rb_cProc)) {
+            rb_notimplement();
+            return Qnil;
+        } else {
+            rb_raise(rb_eArgError, "invalid argument %s (expect Hash or Proc)",
+                     rb_class2name(CLASS_OF(args[3])));
+        }
+    } else {
+	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+    }
+
+    return Qnil;
 }
-
-/* XXXX these 2 methods are not implemented yet.
-   gint        gtk_tree_view_insert_column_with_attributes
-   (GtkTreeView *tree_view,
-   gint position,
-   const gchar *title,
-   GtkCellRenderer *cell,
-   ...);
-
-   gint        gtk_tree_view_insert_column_with_data_func
-   (GtkTreeView *tree_view,
-   gint position,
-   const gchar *title,
-   GtkCellRenderer *cell,
-   GtkTreeCellDataFunc func,
-   gpointer data,
-   GDestroyNotify dnotify);
-*/
 
 static VALUE
 treeview_get_column(self, num)
@@ -418,7 +452,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "columns_autosize", treeview_columns_autosize, 0);
     rb_define_method(gTv, "append_column", treeview_append_column, 1);
     rb_define_method(gTv, "remove_column", treeview_remove_column, 1);
-    rb_define_method(gTv, "insert_column", treeview_insert_column, 2);
+    rb_define_method(gTv, "insert_column", treeview_insert_column, -1);
     rb_define_method(gTv, "get_column", treeview_get_column, 1);
     rb_define_method(gTv, "columns", treeview_get_columns, 0);
     rb_define_method(gTv, "move_column_after", treeview_move_column_after, 2);
