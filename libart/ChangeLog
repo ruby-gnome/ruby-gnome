@@ -1,6 +1,8 @@
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+	* extconf.rb: Follow mkmf-gnome2.rb changes. Support MSVC++.
+	Need to add GTK_INCLUDE_PATH as the environment variable.
+	* sample/rose.rb, testlibart2.rb: Work on mswin32/mingw.
 
 2005-01-12  Masao Mutoh  <mutoh@highway.ne.jp>
 

@@ -2,7 +2,7 @@
    testlibart2.rb
 
    $Author: mutoh $
-   $Date: 2004/11/13 11:19:13 $
+   $Date: 2005/02/01 06:11:52 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 =end
@@ -151,11 +151,11 @@ def main
   canvas.render_vpath_with_context(slice, pie_context.with({:color => Art::Canvas.color(0.5, 0.5, 1.0)}))
   canvas.render_vpath_with_context(slice, line_context)
 
-  File.open('testlibart2.png', 'w') do |file|
+  File.open('testlibart2.png', 'wb') do |file|
     file.write(canvas.to_png(Art::Canvas::PNG_INTERLACE_ADAM7))
   end
 
-  File.open('testlibart2.jpeg', 'w') do |file|
+  File.open('testlibart2.jpeg', 'wb') do |file|
     file.write(canvas.to_jpeg)
   end
 

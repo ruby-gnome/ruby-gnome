@@ -2,7 +2,7 @@
    rose.rb
 
    $Author: mutoh $
-   $Date: 2004/11/13 11:19:13 $
+   $Date: 2005/02/01 06:11:52 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 =end
@@ -116,7 +116,7 @@ directions.each do |from|
     slice = Art::Vpath.slice(0.0, 0.0, 0.9, 360.0 * direction_index[from] / directions.length - overlap, 360.0 * direction_index[to] / directions.length + overlap)
     canvas.render_vpath_with_context(slice, pie_fill_context)
     canvas.render_vpath_with_context(slice, line_context)
-    File.open("rose-#{width}x#{height}-#{from}-#{to}.png", 'w') do |file|
+    File.open("rose-#{width}x#{height}-#{from}-#{to}.png", 'wb') do |file|
       file.write(canvas.to_png)
     end
   end
