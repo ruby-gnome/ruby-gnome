@@ -1,3 +1,7 @@
+2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangofontmap.c: Comment out test code.
+
 2003-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Fix segfault when Pango::Context#layout, #font_description 
