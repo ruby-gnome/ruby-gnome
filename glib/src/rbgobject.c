@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/21 10:54:49 $
+  $Date: 2002/09/21 15:53:45 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -230,19 +230,25 @@ rbgobj_define_property_accessors(klass)
 
     for (i = 0; i < n_properties; i++){
         GParamSpec* pspec = pspecs[i];
+        char* buf;
         char* prop_name;
         char* p;
 
         if (pspec->owner_type != gtype)
             continue;
 
-        prop_name = g_strdup(pspec->name);
-        for (p = prop_name; *p; p++)
+        buf = g_strdup(pspec->name);
+        for (p = buf; *p; p++)
             if (*p == '-')
                 *p = '_';
 
+        if (!strncmp(buf, "is_", 3))
+            prop_name = buf + 3;
+        else
+            prop_name = buf;
+
         if (RTEST(rb_ary_includes(prop_exclude_list, rb_str_new2(prop_name)))){
-            g_free(prop_name);
+            g_free(buf);
             continue;
         }
 
@@ -264,7 +270,7 @@ rbgobj_define_property_accessors(klass)
                 prop_name, pspec->name);
         }
 
-        g_free(prop_name);
+        g_free(buf);
     }
 
     rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
