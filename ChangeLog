@@ -1,3 +1,7 @@
+2004-03-14  Dafydd Harries <daf@muse.19inch.net>
+
+	* exec_make.rb: exit with 1 when failure occurred.
+
 2004-03-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* NEWS: Updated.

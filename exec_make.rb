@@ -1,7 +1,7 @@
 =begin
   exec_make.rb is called by top-level Makefile.
 
-  $Id: exec_make.rb,v 1.2 2003/09/06 09:14:40 sakai Exp $
+  $Id: exec_make.rb,v 1.3 2004/03/14 01:49:34 mutoh Exp $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
 =end
@@ -36,3 +36,4 @@ puts "FAILED: #{failure.join(' ')}" if failure.size > 0
 puts "-----"
 puts "Done."
 
+exit(1) if failure.select { |x| x != "NONE" }.length > 0
