@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: isambart $
-  $Date: 2004/08/01 17:04:17 $
+  $Author: mutoh $
+  $Date: 2005/02/17 05:35:35 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -122,7 +122,7 @@ gaccelgrp_find(self)
     volatile VALUE func = G_BLOCK_PROC();
 
     result = gtk_accel_group_find(_SELF(self),
-                                  gaccelgrp_find_func,
+                                  (GtkAccelGroupFindFunc)gaccelgrp_find_func,
                                   (gpointer)func);
     return result ? BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY) : Qnil;
 }

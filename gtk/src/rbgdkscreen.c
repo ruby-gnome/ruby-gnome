@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/11/14 11:01:43 $
+  $Date: 2005/02/17 05:35:35 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -277,7 +277,7 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
     ret = gdk_spawn_on_screen(_SELF(self),
                               NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                               gargv, genvp, NUM2INT(flags),
-                              child_setup, (gpointer)func,
+                              (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                               &child_pid, &err);
 
     if (! ret){
@@ -338,7 +338,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
     ret = gdk_spawn_on_screen_with_pipes(_SELF(self),
                                          NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                                          gargv, genvp, NUM2INT(flags),
-                                         child_setup, (gpointer)func,
+                                         (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                                          &child_pid, 
                                          &standard_input, &standard_output,
                                          &standard_error, &err);

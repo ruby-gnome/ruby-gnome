@@ -1,3 +1,8 @@
+2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkscreen.c, rbgtkaccelgroup.c: Fix compilation problems 
+	on MSVC++.
+
 2005-02-13  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* sample/gtk-demo/appwindow.rb, buttom_box.rb, changedisplay.rb, colorsel.rb,
