@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/09/18 07:16:19 $
+  $Date: 2003/09/21 18:24:25 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -15,6 +15,8 @@
 
 static VALUE cSignal;
 VALUE rbgobj_signal_wrap(guint sig_id);
+
+#define default_handler_method_prefix "do_"
 
 /**********************************************************************/
 
@@ -102,7 +104,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         VALUE proc;
         ID method_id;
 
-        method_id = rb_to_id(rb_str_concat(rb_str_new2("do_"), signal_name));
+        method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), signal_name));
 
         factory = rb_eval_string("lambda{|mid| lambda{|obj,*args| obj.__send__(mid, *args) } }");
         proc = rb_funcall(factory, rb_intern("call"), 1, ID2SYM(method_id));
@@ -476,9 +478,13 @@ gobj_s_sig_override(klass, sig)
     VALUE klass;
     VALUE sig;
 {
-    GType gtype = CLASS2GTYPE(klass);
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
     const gchar* sig_name;
     guint signal_id;
+
+    if (cinfo->klass != klass)
+        rb_raise(rb_eTypeError, "%s isn't registerd class",
+                 rb_class2name(klass));
 
     if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
@@ -486,7 +492,7 @@ gobj_s_sig_override(klass, sig)
         StringValue(sig);
         sig_name = StringValuePtr(sig);
     }
-    signal_id = g_signal_lookup(sig_name, gtype);
+    signal_id = g_signal_lookup(sig_name, cinfo->gtype);
 
     if (!signal_id)
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
@@ -495,7 +501,7 @@ gobj_s_sig_override(klass, sig)
         VALUE proc = G_BLOCK_PROC();
         GClosure* rclosure = g_rclosure_new(proc, Qnil,
                                             rbgobj_get_signal_func(signal_id));
-        g_signal_override_class_closure(signal_id, gtype, rclosure);
+        g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
     }
 
     return klass;
@@ -565,6 +571,44 @@ gobj_sig_chain_from_overridden(argc, argv, self)
                      emit_ensure, (VALUE)&arg);
 }
 
+static VALUE
+gobj_s_method_added(klass, id)
+    VALUE klass, id;
+{
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
+    const char* name = rb_id2name(SYM2ID(id));
+    const int prefix_len = strlen(default_handler_method_prefix);
+    guint signal_id;
+
+    if (cinfo->klass != klass) return Qnil;
+    if (strncmp(default_handler_method_prefix, name, prefix_len)) return Qnil;
+
+    signal_id = g_signal_lookup(name + prefix_len, cinfo->gtype);    
+    if (!signal_id) return Qnil;
+        
+    {
+        VALUE f = rb_eval_string(
+          "lambda{|klass, id|\n"
+          "  instance_method = klass.instance_method(id)\n"
+          "  lambda{|instance,*args|\n"
+          "    instance_method.bind(instance).call(*args)\n"
+          "  }\n"
+          "}\n");
+        VALUE proc = rb_funcall(f, rb_intern("call"), 2, klass, id);
+        GClosure* rclosure = g_rclosure_new(proc, Qnil,
+                                            rbgobj_get_signal_func(signal_id));
+        g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
+    }
+
+    {
+        VALUE mod = rb_define_module_under(klass, "SignalHook__");
+        rb_include_module(klass, mod);
+        rb_define_method(mod, name, gobj_sig_chain_from_overridden, -1);
+    }
+
+    return Qnil;
+}
+
 #endif
 
 static void
@@ -607,6 +651,8 @@ Init_signal_misc()
                      gobj_s_sig_override, 1);
     rb_define_method(cInstantiatable, "signal_chain_from_overridden",
                      gobj_sig_chain_from_overridden, -1);
+    rb_define_singleton_method(cInstantiatable, "method_added",
+                               gobj_s_method_added, 1);
 #endif
 }
 

@@ -1,3 +1,12 @@
+2003-09-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (gobj_s_sig_override): check if the class is
+	registered.
+
+	* src/rbgobj_signal.c (gobj_s_method_added): when a method named
+	'do_<signal_name>' is defined then override default handler by the
+	method.
+
 2003-09-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c: override #append_features of interface modules to
