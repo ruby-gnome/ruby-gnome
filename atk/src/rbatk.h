@@ -1,14 +1,12 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
-                                                                                
   rbatk.h -
-                                                                                
+
   $Author: mutoh $
-  $Date: 2004/10/17 23:06:07 $
-                                                                                
-  Copyright (C) 2003 Masao Mutoh
+  $Date: 2004/11/13 17:35:07 $
+
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
-                                                                                
 #include "ruby.h"
 #include <atk/atk.h>
 #include <atk/atk-enum-types.h>

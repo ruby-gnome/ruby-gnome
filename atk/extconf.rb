@@ -32,6 +32,7 @@ have_func('atk_component_get_layer')
 have_func('atk_component_mdi_zorder')
 have_func('atk_hyperlink_is_selected_link')
 have_func('atk_text_get_bounded_ranges')
+have_func('atk_role_get_localized_name')
 
 $distcleanfiles << "rbatkinits.c" if $distcleanfiles
 

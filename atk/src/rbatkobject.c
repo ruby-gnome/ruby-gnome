@@ -4,7 +4,7 @@
   rbatkobject.c -
 
   $Author: mutoh $
-  $Date: 2004/10/17 23:06:07 $
+  $Date: 2004/11/13 17:35:07 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -128,7 +128,12 @@ static VALUE
 rbatkrole_get_localized_name(self)
     VALUE self;
 {
+#ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
     return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
+#else
+    rb_warning("not supported in this version of ATK.");
+    return Qnil;
+#endif
 }
 
 static VALUE
