@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2004/07/31 10:17:17 $
+  $Date: 2004/08/18 16:42:35 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -17,12 +17,14 @@
 VALUE mGLib;
 
 extern void Init_utils_int64();
+extern void Init_gutil();
+extern void Init_glib_error();
 extern void Init_glib_convert();
 extern void Init_glib_messages();
 extern void Init_glib_spawn();
+extern void Init_glib_fileutils();
 extern void Init_glib_utils();
 extern void Init_gobject();
-extern void Init_gutil();
 
 char *
 rbg_string_value_ptr(ptr)
@@ -137,12 +139,14 @@ void Init_glib2()
 
 /*    Init_mem(); */
     Init_utils_int64();
+    Init_gutil();
+    Init_glib_error();
     Init_glib_convert();
     Init_glib_messages();
     Init_glib_spawn();
+    Init_glib_fileutils();
     Init_glib_utils();
     Init_gobject();
-    Init_gutil();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);

@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/08/15 14:11:15 $
+  $Date: 2004/08/18 16:42:35 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -53,6 +53,9 @@ typedef int GPid;
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
+#define RAISE_GERROR(error) rb_exc_raise(rbgerr_gerror2exception(error))
+#define G_DEF_ERROR(domain, klass) rbgerr_define_gerror(domain, klass)
+#define G_DEF_ERROR2(domain, name, module, parent) rbgerr_define_gerror2(domain, name, module, parent)
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
 #  ifdef RUBY_GLIB2_COMPILATION
@@ -69,8 +72,10 @@ extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 extern VALUE rbg_cstr2rval(const char* str);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);
 
-/* rbglib_spawn.c */
-extern void rbglib_spawn_error(GError* error);
+/* rbgerror.h */
+extern VALUE rbgerr_gerror2exception(GError *error);
+extern VALUE rbgerr_define_gerror(GQuark domain, VALUE klass);
+extern VALUE rbgerr_define_gerror2(GQuark domain, gchar* name, VALUE module, VALUE parent);
 
 #ifdef __cplusplus
 }

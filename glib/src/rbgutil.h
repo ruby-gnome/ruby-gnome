@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:14:47 $
+  $Date: 2004/08/18 16:42:36 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -35,9 +35,6 @@ extern "C" {
 #define GSLIST2ARY(list)             (rbgutil_gslist2ary(list))
 #define GSLIST2ARY2(list, gtype)     (rbgutil_gslist2ary_boxed(list, gtype))
 
-#define RAISE_GERROR(error)    rb_exc_raise(rbgutil_gerror2exception(error))
-
-extern VALUE rbgutil_gerror2exception(GError *error);
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_glist2ary(GList* list);

@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: mutoh $
-  $Date: 2004/08/07 12:20:59 $
+  $Date: 2004/08/18 16:42:35 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -12,20 +12,10 @@
 **********************************************************************/
 #include "global.h"
 #include "rbglib.h"
-#include <errno.h>
 
-static VALUE spawn_error[20];
 static ID id_call;
 static ID id_new;
 
-void
-rbglib_spawn_error(error)
-    GError *error;
-{
-    VALUE exc = rb_funcall(spawn_error[error->code], id_new, 1, CSTR2RVAL(error->message));
-    g_error_free(error);
-    rb_exc_raise(exc);
-}
 static void
 child_setup(func)
     gpointer func;
@@ -90,8 +80,7 @@ rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
                                    &standard_input, &standard_output,
                                    &standard_error, &err);
     
-    if (! ret)
-        rbglib_spawn_error(err);
+    if (! ret) RAISE_GERROR(err);
     
     return rb_ary_new3(4, INT2NUM((gint)child_pid), 
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_input)),
@@ -152,7 +141,7 @@ rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
                         &child_pid, &err);
 
     if (! ret){
-        rbglib_spawn_error(err);
+        RAISE_GERROR(err);
     }
     
     return INT2NUM((int)child_pid);
@@ -215,7 +204,7 @@ rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
 
 
     if (! ret){
-        rbglib_spawn_error(err);
+        RAISE_GERROR(err);
     }
 
     if (standard_output) {
@@ -234,7 +223,7 @@ rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
     }
 
     if (! ret)
-        rbglib_spawn_error(err);
+        RAISE_GERROR(err);
 
     return rb_ary_new3(3, std_out, std_err, INT2FIX(exit_status));
 
@@ -274,7 +263,7 @@ rbglib_m_spawn_command_line_sync(self, str)
     }
 
     if (! ret)
-        rbglib_spawn_error(err);
+        RAISE_GERROR(err);
 
     return rb_ary_new3(3, std_out, std_err, INT2FIX(exit_status));
 }
@@ -291,7 +280,7 @@ rbglib_m_spawn_command_line_async(self, str)
     command_line = RSTRING(str)->ptr;
     ret = CBOOL2RVAL(g_spawn_command_line_async(command_line, &err));
     if (err != NULL)
-        rbglib_spawn_error(err);
+        RAISE_GERROR(err);
 
     return ret;
 }
@@ -310,6 +299,7 @@ void
 Init_glib_spawn()
 {
     VALUE mGSpawn = rb_define_module_under(mGLib, "Spawn");
+    VALUE cSpawnError = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", mGLib, rb_eIOError);
 
     id_call = rb_intern("call");
     id_new = rb_intern("new");
@@ -332,57 +322,24 @@ Init_glib_spawn()
     rb_define_const(mGSpawn, "CHILD_INHERITS_STDIN", INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
     rb_define_const(mGSpawn, "FILE_AND_ARGV_ZERO", INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
 
-    spawn_error[G_SPAWN_ERROR_FORK] = rb_define_class_under(mGLib, "SpawnForkError", rb_eStandardError);
-    spawn_error[G_SPAWN_ERROR_READ] = rb_define_class_under(mGLib, "SpawnReadError", rb_eStandardError);
-    spawn_error[G_SPAWN_ERROR_CHDIR] = rb_define_class_under(mGLib, "SpawnChDirError", rb_eStandardError);
-    spawn_error[G_SPAWN_ERROR_FAILED] = rb_define_class_under(mGLib, "SpawnFailed", rb_eStandardError);
-
-#ifdef EACCES
-    spawn_error[G_SPAWN_ERROR_ACCES]  = rb_const_get(rb_mErrno, rb_intern("EACCES"));
-#endif
-#ifdef EPERM
-    spawn_error[G_SPAWN_ERROR_PERM]   = rb_const_get(rb_mErrno, rb_intern("EPERM"));
-#endif
-#ifdef E2BIG
-    spawn_error[G_SPAWN_ERROR_2BIG]   = rb_const_get(rb_mErrno, rb_intern("E2BIG"));
-#endif
-#ifdef ENOEXEC
-    spawn_error[G_SPAWN_ERROR_NOEXEC] = rb_const_get(rb_mErrno, rb_intern("ENOEXEC"));
-#endif
-#ifdef ENAMETOOLONG
-    spawn_error[G_SPAWN_ERROR_NAMETOOLONG] = rb_const_get(rb_mErrno, rb_intern("ENAMETOOLONG"));
-#endif
-#ifdef ENOENT
-    spawn_error[G_SPAWN_ERROR_NOENT]  = rb_const_get(rb_mErrno, rb_intern("ENOENT"));
-#endif
-#ifdef ENOMEM
-    spawn_error[G_SPAWN_ERROR_NOMEM]  = rb_const_get(rb_mErrno, rb_intern("ENOMEM"));
-#endif
-#ifdef ENOTDIR
-    spawn_error[G_SPAWN_ERROR_NOTDIR] = rb_const_get(rb_mErrno, rb_intern("ENOTDIR"));
-#endif
-#ifdef ELOOP
-    spawn_error[G_SPAWN_ERROR_LOOP]   = rb_const_get(rb_mErrno, rb_intern("ELOOP"));
-#endif
-#ifdef ETXTBSY
-    spawn_error[G_SPAWN_ERROR_TXTBUSY] = rb_const_get(rb_mErrno, rb_intern("ETXTBSY"));
-#endif
-#ifdef EIO
-    spawn_error[G_SPAWN_ERROR_IO]     = rb_const_get(rb_mErrno, rb_intern("EIO"));
-#endif
-#ifdef ENFILE
-    spawn_error[G_SPAWN_ERROR_NFILE]  = rb_const_get(rb_mErrno, rb_intern("ENFILE"));
-#endif
-#ifdef EMFILE
-    spawn_error[G_SPAWN_ERROR_MFILE]  = rb_const_get(rb_mErrno, rb_intern("EMFILE"));
-#endif
-#ifdef EINVAL
-    spawn_error[G_SPAWN_ERROR_INVAL]  = rb_const_get(rb_mErrno, rb_intern("EINVAL"));
-#endif
-#ifdef EISDIR
-    spawn_error[G_SPAWN_ERROR_ISDIR]  = rb_const_get(rb_mErrno, rb_intern("EISDIR"));
-#endif
-#ifdef ELIBBAD
-    spawn_error[G_SPAWN_ERROR_LIBBAD] = rb_const_get(rb_mErrno, rb_intern("ELIBBAD"));
-#endif
+    rb_define_const(cSpawnError, "FORK", INT2NUM(G_SPAWN_ERROR_FORK));
+    rb_define_const(cSpawnError, "READ", INT2NUM(G_SPAWN_ERROR_READ));
+    rb_define_const(cSpawnError, "CHDIR", INT2NUM(G_SPAWN_ERROR_CHDIR));
+    rb_define_const(cSpawnError, "EACCES", INT2NUM(G_SPAWN_ERROR_ACCES));
+    rb_define_const(cSpawnError, "EPERM", INT2NUM(G_SPAWN_ERROR_PERM));
+    rb_define_const(cSpawnError, "E2BIG", INT2NUM(G_SPAWN_ERROR_2BIG));
+    rb_define_const(cSpawnError, "ENOEXEC", INT2NUM(G_SPAWN_ERROR_NOEXEC));
+    rb_define_const(cSpawnError, "ENAMETOOLONG", INT2NUM(G_SPAWN_ERROR_NAMETOOLONG));
+    rb_define_const(cSpawnError, "ENOENT", INT2NUM(G_SPAWN_ERROR_NOENT));
+    rb_define_const(cSpawnError, "ENOMEM", INT2NUM(G_SPAWN_ERROR_NOMEM));
+    rb_define_const(cSpawnError, "ENOTDIR", INT2NUM(G_SPAWN_ERROR_NOTDIR));
+    rb_define_const(cSpawnError, "ELOOP", INT2NUM(G_SPAWN_ERROR_LOOP));
+    rb_define_const(cSpawnError, "ETXTBUSY", INT2NUM(G_SPAWN_ERROR_TXTBUSY));
+    rb_define_const(cSpawnError, "EIO", INT2NUM(G_SPAWN_ERROR_IO));
+    rb_define_const(cSpawnError, "ENFILE", INT2NUM(G_SPAWN_ERROR_NFILE));
+    rb_define_const(cSpawnError, "EMFILE", INT2NUM(G_SPAWN_ERROR_MFILE));
+    rb_define_const(cSpawnError, "EINVAL", INT2NUM(G_SPAWN_ERROR_INVAL));
+    rb_define_const(cSpawnError, "EISDIR", INT2NUM(G_SPAWN_ERROR_ISDIR));
+    rb_define_const(cSpawnError, "ELIBBAD", INT2NUM(G_SPAWN_ERROR_LIBBAD));
+    rb_define_const(cSpawnError, "FAILED", INT2NUM(G_SPAWN_ERROR_FAILED));
 }

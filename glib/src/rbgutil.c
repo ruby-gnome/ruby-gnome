@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/04/30 10:50:02 $
+  $Date: 2004/08/18 16:42:35 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -17,15 +17,6 @@ static ID id_add_one_arg_setter;
 static ID id_set_property;
 static ID id_to_a;
 static ID id_allocate;
-
-VALUE
-rbgutil_gerror2exception(error)
-    GError *error;
-{
-    VALUE exc = rb_exc_new2(rb_eRuntimeError, error->message);
-    g_error_free(error);
-    return exc;
-}
 
 void
 rbgutil_set_properties(self, hash)

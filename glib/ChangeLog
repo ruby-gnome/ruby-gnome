@@ -1,3 +1,11 @@
+2004-08-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgerror.c, rbglib.h: Added. Replace rbgutil_gerror2exception.
+	* src/rbgutil.[ch]: Removed rbgutil_gerror2exception.
+	* src/rbgfileutils.c: Added for GLib::FileError.
+	* src/rbgutil.c: Improved RAISE_GERROR.
+	* src/rbglib.c, glib2.def: Follow these changes. 
+
 2004-08-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: Increment version number.

@@ -48,11 +48,12 @@ EXPORTS
 	rbg_string_value_ptr
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
-	rbgutil_gerror2exception
 	rbgutil_glist2ary
 	rbgutil_glist2ary_boxed
 	rbgutil_gslist2ary
 	rbgutil_gslist2ary_boxed
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
-	rbglib_spawn_error
+        rbgerr_define_gerror
+        rbgerr_define_gerror2
+        rbgerr_gerror2exception
