@@ -160,30 +160,38 @@ static VALUE rb_gst_pad_get_formats(self)
     VALUE self;
 {
     const GstFormat *formats; 
-    GstPad *pad;
     VALUE arr;
 
-    pad = RGST_PAD(self);
     arr = rb_ary_new();
-    formats = gst_pad_get_formats(pad);
+    formats = gst_pad_get_formats(RGST_PAD(self));
     
     while (formats && *formats) {
-        rb_ary_push(arr, RGST_FORMAT_NEW((GstFormat *)formats));
+        rb_ary_push(arr, RGST_FORMAT_NEW(formats));
         formats++;
     }
     return arr;
 }
 
 /*
- *  Method: event_masks -> nil
- *  Not yet implemented.
+ *  Method: event_masks -> anArray 
+ *
+ *  Gets the list of event masks from the pad, in an array 
+ *  of Gst::EventMask objects.
  */
 static VALUE rb_gst_pad_get_event_masks(self) 
     VALUE self;
 {
-    /* TODO */
-    rb_notimplement();
-    return Qnil;
+    const GstEventMask *masks; 
+    VALUE arr;
+
+    arr = rb_ary_new();
+    masks = gst_pad_get_event_masks(RGST_PAD(self));
+    
+    while (masks && masks->type) {
+        rb_ary_push(arr, RGST_EVENT_MASK_NEW(masks));
+        masks++;
+    }
+    return arr;
 }
 
 /*
@@ -223,17 +231,15 @@ static VALUE rb_gst_pad_each_format(self)
 }   
    
 /*
- *  Method: each_event_mask -> nil
- *  Not yet implemented.
+ *  Method: each_event_mask { |anEventMaskObject| block } -> nil 
+ *
+ *  Calls the block for each event mask from the pad, passing
+ *  a reference to the Gst::EventMask object as parameter.
  */ 
 static VALUE rb_gst_pad_each_event_mask(self)
     VALUE self;
 {
-    /*  TODO
-     *  return rb_ary_yield(rb_gst_pad_get_event_masks(self));
-     */
-    rb_notimplement();
-    return Qnil;
+    return rb_ary_yield(rb_gst_pad_get_event_masks(self));
 }   
     
 /*
