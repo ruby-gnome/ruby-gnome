@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2003/05/08 16:45:59 $
+  $Date: 2003/05/09 16:21:16 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -365,7 +365,7 @@ widget_s_push_colormap(self, cmap)
     VALUE self, cmap;
 {
     gtk_widget_push_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
-    return self;
+    return cmap;
 }
 
 static VALUE
@@ -373,7 +373,7 @@ widget_s_pop_colormap(self)
     VALUE self;
 {
     gtk_widget_pop_colormap();
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -381,7 +381,7 @@ widget_s_set_default_colormap(self, cmap)
     VALUE self, cmap;
 {
     gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
-    return Qnil;
+    return cmap;
 }
 
 static VALUE
@@ -1001,12 +1001,12 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
     rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
     rb_define_method(gWidget, "set_scroll_adjustment", widget_set_scroll_adjustments, 2);
-    rb_define_method(gWidget, "mnemonic_activate?", widget_mnemonic_activate, 1);
+    rb_define_method(gWidget, "mnemonic_activate", widget_mnemonic_activate, 1);
     rb_define_method(gWidget, "region_intersect", widget_region_intersect, 1);
     rb_define_method(gWidget, "send_expose", widget_send_expose, 1);
     rb_define_method(gWidget, "style_get_property", widget_style_get_property, 1);
     rb_define_method(gWidget, "accessible", widget_get_accessible, 0);
-    rb_define_method(gWidget, "child_focus?", widget_child_focus, 1);
+    rb_define_method(gWidget, "child_focus", widget_child_focus, 1);
     rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
     rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
     rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
