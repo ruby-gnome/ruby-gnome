@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: pcppopper $
+  $Date: 2003/03/26 17:19:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -168,7 +168,7 @@ static VALUE
 tvc_get_sort_column_id(self)
     VALUE self;
 {
-    return gtk_tree_view_column_get_sort_column_id(_SELF(self));
+    return INT2NUM(gtk_tree_view_column_get_sort_column_id(_SELF(self)));
 }
 
 static VALUE
