@@ -12,5 +12,5 @@ module Gtk
   LOG_DOMAIN = "Gtk"
 end
 
-GLib::Log.set_error_domain(Gdk::LOG_DOMAIN)
-GLib::Log.set_error_domain(Gtk::LOG_DOMAIN)
+GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
+GLib::Log.set_log_domain(Gtk::LOG_DOMAIN)

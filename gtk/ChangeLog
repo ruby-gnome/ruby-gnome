@@ -2,6 +2,7 @@
 
 	* src/lib/gtk2.rb: Improved log handling.
 	Define Gtk::LOG_DOMAIN, Gdk::LOG_DOMAIN.
+	Rename GLib::Log.set_error_domain to GLib::Log.set_log_domain.
 
 2004-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
