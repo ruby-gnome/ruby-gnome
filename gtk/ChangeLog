@@ -1,3 +1,8 @@
+2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkconst.c: Update version number.
+	* src/depend: Use old style.
+
 2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextbuffer.c (txt_insert_child_anchor): pass correct
