@@ -1,3 +1,7 @@
+2005-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Removed to call GLib::Log.cancel_handler.
+
 2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf-gnome2.rb: Don't remove Makefile with 'nmake clean'.
