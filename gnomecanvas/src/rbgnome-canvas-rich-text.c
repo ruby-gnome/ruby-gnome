@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-rich-text.c,v 1.1 2002/10/02 13:36:51 tkubo Exp $ */
+/* $Id: rbgnome-canvas-rich-text.c,v 1.2 2002/10/03 13:09:59 tkubo Exp $ */
 
 /* Gnome::CanvasRichText widget for Ruby/Gnome
  * Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
@@ -21,25 +21,6 @@
 #include "rbgnomecanvas.h"
 
 #define _SELF(self) GNOME_CANVAS_RICH_TEXT(RVAL2GOBJ(self))
-
-#if 1 /* delete this after Gtk::TextIter become Boxed. */
-extern GtkTextIter *get_gtktextiter(VALUE obj);
-extern VALUE make_gtktextiter(GtkTextIter* iter);
-#undef RVAL2BOXED
-#undef BOXED2RVAL
-#define RVAL2BOXED(obj, gtype) \
-  ((gtype == GTK_TYPE_TEXT_ITER) ? (gpointer)get_gtktextiter(obj) : rbgobj_boxed_get(obj, gtype))
-#define BOXED2RVAL(cobj, gtype) \
-  ((gtype == GTK_TYPE_TEXT_ITER) ? wrap_make_gtktextiter(cobj) : rbgobj_make_boxed(cobj, gtype))
-static VALUE
-wrap_make_gtktextiter(cobj)
-    GtkTextIter *cobj;
-{
-    GtkTextIter *new = (GtkTextIter *)g_new(GtkTextIter, 1);
-    *new = *cobj;
-    return make_gtktextiter(new);
-}
-#endif
 
 static VALUE
 crtext_cut_clipboard(self)

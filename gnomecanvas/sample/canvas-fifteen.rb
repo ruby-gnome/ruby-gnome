@@ -16,9 +16,9 @@ class CanvasSampleFifteen < Gtk::VBox
   def piece_event(item, event)
     case event.event_type
     when Gdk::ENTER_NOTIFY
-      item.text.set({"fill_color" => "white"})
+      item.text.set({:fill_color => "white"})
     when Gdk::LEAVE_NOTIFY
-      item.text.set({"fill_color" => "black"})
+      item.text.set({:fill_color => "black"})
     when Gdk::BUTTON_PRESS
       y = item.pos / 4
       x = item.pos % 4
@@ -149,24 +149,24 @@ class CanvasSampleFifteen < Gtk::VBox
       y = i / 4
       x = i % 4
 
-      self.set({"x" => x * PIECE_SIZE,
-                 "y" => y * PIECE_SIZE})
+      self.set({:x => x * PIECE_SIZE,
+                 :y => y * PIECE_SIZE})
       Gnome::CanvasRect.new(self,
-                            {"x1" => 0.0,
-                              "y1" => 0.0,
-                              "x2" => PIECE_SIZE,
-                              "y2" => PIECE_SIZE,
-                              "fill_color" => get_piece_color(x, y),
-                              "outline_color" => "black",
-                              "width_pixels" => 0})
+                            {:x1 => 0.0,
+                              :y1 => 0.0,
+                              :x2 => PIECE_SIZE,
+                              :y2 => PIECE_SIZE,
+                              :fill_color => get_piece_color(x, y),
+                              :outline_color => "black",
+                              :width_pixels => 0})
       
       @text = Gnome::CanvasText.new(self,
-                                    {"text" => i.to_s,
-                                      "x" => PIECE_SIZE / 2.0,
-                                      "y" => PIECE_SIZE / 2.0,
-                                      "font" => "Sans bold 24",
-                                      "anchor" => Gtk::ANCHOR_CENTER,
-                                      "fill_color" => "black"})
+                                    {:text => i.to_s,
+                                      :x => PIECE_SIZE / 2.0,
+                                      :y => PIECE_SIZE / 2.0,
+                                      :font => "Sans bold 24",
+                                      :anchor => Gtk::ANCHOR_CENTER,
+                                      :fill_color => "black"})
       @num = i
       @pos = i
       self.signal_connect("event") do |item, event|

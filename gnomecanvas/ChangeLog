@@ -1,3 +1,12 @@
+2002-10-03  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-rich-text.c: delete workaround code for
+	Gtk::TextIter.
+	* sample/canvas-arrowhead.rb, sample/canvas-curve.rb,
+	sample/canvas-features.rb, sample/canvas-fifteen.rb,
+	sample/canvas-primitives.rb, sample/canvas-rich-text.rb:
+	change hash key of properties from String to Symbol.
+
 2002-10-02  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-item.c: use NUM2UINT instead of NUM2INT 

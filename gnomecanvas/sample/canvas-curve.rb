@@ -50,13 +50,13 @@ class CanvasSampleBezierCurve < Gtk::VBox
       path_def.lineto(@current_points[2], @current_points[3])
 
       unless @current_item.nil?
-        @current_item.set({"bpath" => path_def})
+        @current_item.set({:bpath => path_def})
       else
         @current_item = Gnome::CanvasBpath.new(root,
-                                               {"bpath" => path_def,
-                                                 "outline_color" => "blue",
-                                                 "width_pixels" => 5,
-                                                 "cap_style" => Gdk::CAP_ROUND})
+                                               {:bpath => path_def,
+                                                 :outline_color => "blue",
+                                                 :width_pixels => 5,
+                                                 :cap_style => Gdk::CAP_ROUND})
         @current_item.signal_connect("event") do |item, event|
           item_event(item, event)
         end
@@ -72,7 +72,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
                        @current_points[4], @current_points[5],
                        @current_points[2], @current_points[3])
 
-      @current_item.set({"bpath" => path_def})
+      @current_item.set({:bpath => path_def})
 
     when STATE_SECOND_PRESS
       @current_points[6] = x;
@@ -86,7 +86,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
                        @current_points[6], @current_points[7],
                        @current_points[2], @current_points[3])
 
-      @current_item.set({"bpath" => path_def})
+      @current_item.set({:bpath => path_def})
       @current_item = nil
       
     else
@@ -158,20 +158,20 @@ class CanvasSampleBezierCurve < Gtk::VBox
     root = canvas.root
 
     item = Gnome::CanvasRect.new(root,
-                                 {"outline_color" => "black",
-                                   "fill_color" => "white",
-                                   "x1" => 0.0,
-                                   "y1" => 0.0,
-                                   "x2" => 600.0,
-                                   "y2" => 250.0})
+                                 {:outline_color => "black",
+                                   :fill_color => "white",
+                                   :x1 => 0.0,
+                                   :y1 => 0.0,
+                                   :x2 => 600.0,
+                                   :y2 => 250.0})
 
     Gnome::CanvasText.new(root,
-                          {"text" => aa ? "AntiAlias" : "Non-AntiAlias",
-                            "x" => 270.0,
-                            "y" => 5.0,
-                            "font" => "Sans 12",
-                            "anchor" => Gtk::ANCHOR_N,
-                            "fill_color" => "black"})
+                          {:text => aa ? "AntiAlias" : "Non-AntiAlias",
+                            :x => 270.0,
+                            :y => 5.0,
+                            :font => "Sans 12",
+                            :anchor => Gtk::ANCHOR_N,
+                            :fill_color => "black"})
 
     Gtk::Widget.pop_colormap()
 
