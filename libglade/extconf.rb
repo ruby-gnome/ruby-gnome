@@ -1,3 +1,6 @@
+=begin
+extconf.rb for Ruby/Libglade2 extention library
+=end
 require "mkmf"
 
 rubyglib_dir = File.expand_path(File.dirname(__FILE__))+"/../glib"
@@ -21,4 +24,4 @@ $CFLAGS += " -I../glib/src -I../gtk/src  "
 $CFLAGS += `pkg-config libglade-2.0 --cflags`.chomp
 $CFLAGS += ' -g'
 
-create_makefile("libglade2")
+create_makefile("libglade2")  

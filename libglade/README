@@ -24,7 +24,6 @@ Install
    It requires libglade2, libxml2, and libz.  You may have to
    provide extconf.rb with the paths to these.
 
-
 Usage
 -----
    The constructor takes the path to a glade file, and optionally the name
@@ -80,6 +79,14 @@ GladeXML class
 
    initialize(glade_file [, root_widget], &handler_block)
    get_widget(widget_name) -> aWidget
+
+
+ruby-glade-create-template
+--------------------------
+   Create a ruby-glade template .rb file from a .glade file.
+
+   $ruby-glade-create-template.rb yourgladefile.glade > file.rb
+
 
 Copying
 -------

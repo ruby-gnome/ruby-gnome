@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+#
+# ruby-glade-create-template.rb
+#
+# Create a ruby-glade template .rb file from a .glade file.
+#
+# Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
+#
+# Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
+#
+
+require 'gtk2'
+begin
+  $EXIST_GNOME = true
+  require 'gnome2'
+rescue LoadError
+  $EXIST_GNOME = false
+  puts "Ruby/GNOME2 is not supported." if $DEBUG
+end
+
+unless ARGV.size == 1
+  puts "ruby-glade-create-template"
+  puts "\nUsage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb\n\n"
+  exit(-1)
+end
+
+filename = ARGF.filename
+classname = ((filename.split("."))[0]).capitalize
+signals = []
+objects = []
+ARGF.each_line do |line|
+  if /<signal name="(.*)" handler="([^"]*)" / =~ line
+    signals << [$1, $2]
+  elsif /id="(.*)"/ =~ line
+    objects << $1
+  end
+end
+
+puts <<HEADER
+require 'libglade2'
+
+class #{classname}
+  def initialize
+    @glade = GladeXML.new("#{filename}") {|handler| method(handler)}
+HEADER
+
+objects.each do |name|
+   puts "    @#{name} = @glade.get_widget('#{name}')"
+end
+
+puts "  end"
+
+signals.each do |name, handler|
+puts <<METHOD
+  def #{handler}(*args)
+    puts "#{handler}() is not implemented yet."
+  end
+
+METHOD
+end
+
+puts "end\n\n"
+
+if $EXIST_GNOME
+puts <<FOOTER_GNOME
+#If you use only Ruby/GTK2 widgets, call Gtk.init here. 
+#Gtk.init
+#If you use Ruby/GNOME2 widgets, call Gnome::Program.new here. 
+Gnome::Program.new("YOUR_APPLICATION_NAME", "YOUR_APPLICATION_VERSION")
+FOOTER_GNOME
+else
+    puts "Gtk.init"
+end
+puts <<FOOTER
+#{classname}.new
+Gtk.main
+FOOTER

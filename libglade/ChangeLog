@@ -1,3 +1,7 @@
+2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* ruby-glade-create-templete: Add a file.
+
 2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* lib/libglade2.rb: Move ruby part from rbglade.c.
