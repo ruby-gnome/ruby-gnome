@@ -56,7 +56,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
                                                {:bpath => path_def,
                                                  :outline_color => "blue",
                                                  :width_pixels => 5,
-                                                 :cap_style => Gdk::CAP_ROUND})
+                                                 :cap_style => Gdk::GC::CAP_ROUND})
         @current_item.signal_connect("event") do |item, event|
           item_event(item, event)
         end
@@ -95,9 +95,9 @@ class CanvasSampleBezierCurve < Gtk::VBox
   end
 
   def item_event(item, event)
-    if (event.event_type == Gdk::BUTTON_PRESS &&
+    if (event.event_type == Gdk::Event::BUTTON_PRESS &&
         event.button == 1 &&
-        (event.state & Gdk::SHIFT_MASK == Gdk::SHIFT_MASK))
+        (event.state & Gdk::Window::SHIFT_MASK == Gdk::Window::SHIFT_MASK))
       if (item == @current_item)
         @current_item = nil
         @current_state = STATE_INIT
@@ -112,7 +112,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
 
   def canvas_event(item, event)
     case event.event_type
-    when Gdk::BUTTON_PRESS
+    when Gdk::Event::BUTTON_PRESS
       return false if event.button != 1
 
       case @current_state
@@ -128,7 +128,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
       else
         raise format("shouldn't have reached here %d", @current_state)
       end
-    when Gdk::BUTTON_RELEASE
+    when Gdk::Event::BUTTON_RELEASE
       return false if event.button != 1
 
       case @current_state
@@ -136,7 +136,7 @@ class CanvasSampleBezierCurve < Gtk::VBox
         draw_curve (item, event.x, event.y)
         @current_state = STATE_FIRST_RELEASE
       end
-    when Gdk::MOTION_NOTIFY
+    when Gdk::Event::MOTION_NOTIFY
       case @current_state
       when STATE_FIRST_PRESS
         draw_curve (item, event.x, event.y)
@@ -146,12 +146,11 @@ class CanvasSampleBezierCurve < Gtk::VBox
   end
 
   def create_canvas(aa)
-    Gtk::Widget.push_colormap(Gdk::Rgb.cmap())
+    Gtk::Widget.push_colormap(Gdk::RGB.cmap())
 
     canvas = Gnome::Canvas.new(aa)
 
-    #canvas.set_size_request(600, 250)
-    canvas.set_usize(600, 250) #?
+    canvas.set_size_request(600, 250) #?
     canvas.set_scroll_region(0, 0, 600, 250)
     canvas.show()
 

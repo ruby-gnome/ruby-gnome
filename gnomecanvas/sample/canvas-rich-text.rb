@@ -83,7 +83,7 @@ EOS
     # Create the canvas and board
 
     canvas = Gnome::Canvas.new()
-    canvas.set_usize(600, 450)
+    canvas.set_size_request(600, 450)
     frame.add(canvas)
     canvas.show()
 

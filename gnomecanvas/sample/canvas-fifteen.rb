@@ -15,11 +15,11 @@ class CanvasSampleFifteen < Gtk::VBox
 
   def piece_event(item, event)
     case event.event_type
-    when Gdk::ENTER_NOTIFY
+    when Gdk::Event::ENTER_NOTIFY
       item.text.set({:fill_color => "white"})
-    when Gdk::LEAVE_NOTIFY
+    when Gdk::Event::LEAVE_NOTIFY
       item.text.set({:fill_color => "black"})
-    when Gdk::BUTTON_PRESS
+    when Gdk::Event::BUTTON_PRESS
       y = item.pos / 4
       x = item.pos % 4
 
@@ -115,7 +115,7 @@ class CanvasSampleFifteen < Gtk::VBox
     # Create the canvas and board
 
     @canvas = Gnome::Canvas.new()
-    @canvas.set_usize(PIECE_SIZE * 4 + 1, PIECE_SIZE * 4 + 1)
+    @canvas.set_size_request(PIECE_SIZE * 4 + 1, PIECE_SIZE * 4 + 1)
     @canvas.set_scroll_region(0, 0, PIECE_SIZE * 4 + 1, PIECE_SIZE * 4 + 1)
     frame.add(@canvas)
     @canvas.show()

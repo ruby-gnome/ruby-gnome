@@ -4,42 +4,42 @@ class CanvasSamplePrimitives < Gtk::VBox
 
   def item_event(item, event)
     case event.event_type
-    when Gdk::BUTTON_PRESS
+    when Gdk::Event::BUTTON_PRESS
       item_x, item_y = item.parent.w2i(event.x, event.y)
       case event.button
       when 1
-        if event.state & Gdk::SHIFT_MASK == Gdk::SHIFT_MASK
+        if event.state & Gdk::Window::SHIFT_MASK == Gdk::Window::SHIFT_MASK
           item.destroy()
         else
           @x = item_x;
           @y = item_y;
           fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
-          item.grab(Gdk::POINTER_MOTION_MASK | Gdk::BUTTON_RELEASE_MASK,
+          item.grab(Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::BUTTON_RELEASE_MASK,
                     fleur,
                     event.time)
           @dragging = true
         end
       when 2
-        if event.state & Gdk::SHIFT_MASK == Gdk::SHIFT_MASK
+        if event.state & Gdk::Window::SHIFT_MASK == Gdk::Window::SHIFT_MASK
           item.lower_to_bottom()
         else
           item.lower(1)
         end
       when 3
-        if event.state & Gdk::SHIFT_MASK == Gdk::SHIFT_MASK
+        if event.state & Gdk::Window::SHIFT_MASK == Gdk::Window::SHIFT_MASK
           item.raise_to_top()
         else
           item.raise(1)
         end
       end
-    when Gdk::MOTION_NOTIFY
+    when Gdk::Event::MOTION_NOTIFY
       item_x, item_y = item.parent.w2i(event.x, event.y)
-      if @dragging && (event.state & Gdk::BUTTON1_MASK == Gdk::BUTTON1_MASK)
+      if @dragging && (event.state & Gdk::Window::BUTTON1_MASK == Gdk::Window::BUTTON1_MASK)
         item.move(item_x - @x, item_y - @y)
         @x = item_x;
         @y = item_y;
       end
-    when Gdk::BUTTON_RELEASE
+    when Gdk::Event::BUTTON_RELEASE
       item.ungrab(event.time)
       @dragging = FALSE;
     end
@@ -249,8 +249,8 @@ class CanvasSamplePrimitives < Gtk::VBox
                                       :pixbuf => im,
                                       :x => x,
                                       :y => y,
-                                      :width => im.get_width,
-                                      :height => im.get_height,
+                                      :width => im.width,
+                                      :height => im.height,
                                       :anchor => anchor)
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
@@ -265,8 +265,8 @@ class CanvasSamplePrimitives < Gtk::VBox
                                       {:pixbuf => im,
                                         :x => 100.0,
                                         :y => 225.0,
-                                        :width => im.get_width,
-                                        :height => im.get_height,
+                                        :width => im.width,
+                                        :height => im.height,
                                         :anchor => Gtk::ANCHOR_CENTER})
       setup_item(image)
       image.signal_connect("destroy", im) do |item, im|
@@ -300,7 +300,7 @@ class CanvasSamplePrimitives < Gtk::VBox
                               {:points => points,
                                 :fill_color => "black",
                                 :width_units => 1.0,
-                                :cap_style => Gdk::CAP_ROUND})
+                                :cap_style => Gdk::GC::CAP_ROUND})
       end
     end
   end
@@ -330,8 +330,8 @@ class CanvasSamplePrimitives < Gtk::VBox
                                        {:points => points,
                                          :fill_color_rgba => 0xff000080,
                                          :width_units => 4.0,
-                                         :cap_style => Gdk::CAP_PROJECTING,
-                                         :join_style => Gdk::JOIN_MITER}))
+                                         :cap_style => Gdk::GC::CAP_PROJECTING,
+                                         :join_style => Gdk::GC::JOIN_MITER}))
     else
       stipple = Gdk::Bitmap.create_from_data(nil, Gray50_Bits, Gray50_Width, Gray50_Height)
       setup_item(Gnome::CanvasLine.new(root,
@@ -339,8 +339,8 @@ class CanvasSamplePrimitives < Gtk::VBox
                                          :fill_color => "red",
                                          :fill_stipple => stipple,
                                          :width_units => 4.0,
-                                         :cap_style => Gdk::CAP_PROJECTING,
-                                         :join_style => Gdk::JOIN_MITER}))
+                                         :cap_style => Gdk::GC::CAP_PROJECTING,
+                                         :join_style => Gdk::GC::JOIN_MITER}))
     end
   end
 
@@ -504,7 +504,7 @@ EOS
     end
 
     w = Gtk::SpinButton.new(adj, 0.0, 2)
-    w.set_usize(50, 0)
+    w.set_size_request(50, -1)
     hbox.pack_start(w, false, false, 0)
     w.show()
 
@@ -525,7 +525,7 @@ EOS
                  0, 0)
     frame.show()
 
-    canvas.set_usize(600, 450)
+    canvas.set_size_request(600, 450)
     canvas.set_scroll_region(0, 0, 600, 450);
     frame.add(canvas)
     canvas.show()

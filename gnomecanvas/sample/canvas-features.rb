@@ -4,7 +4,7 @@ class CanvasSampleFeatures < Gtk::VBox
   PAD_SMALL = 4
 
   def item_event(item, event)
-    if (event.event_type != Gdk::BUTTON_PRESS) || (event.button != 1)
+    if (event.event_type != Gdk::Event::BUTTON_PRESS) || (event.button != 1)
       return
     end
     if (item.parent == @parent1)
@@ -36,7 +36,7 @@ class CanvasSampleFeatures < Gtk::VBox
     frame.show()
 
     canvas = Gnome::Canvas.new()
-    canvas.set_usize(400, 200)
+    canvas.set_size_request(400, 200)
     canvas.set_scroll_region(0, 0, 400, 200)
     frame.add(canvas)
     canvas.show()

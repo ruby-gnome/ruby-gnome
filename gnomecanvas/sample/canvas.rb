@@ -42,7 +42,7 @@ require 'canvas-curve'
 
 class CanvasSample < Gtk::Window
   def initialize
-    super(Gtk::WINDOW_TOPLEVEL)
+    super(Gtk::Window::TOPLEVEL)
     self.signal_connect("delete_event") do |widget, event|
       Gtk::main_quit()
     end
@@ -62,6 +62,7 @@ class CanvasSample < Gtk::Window
   end
 end
 
+Gtk.init
 canvas = CanvasSample.new()
 Gtk::main()
 

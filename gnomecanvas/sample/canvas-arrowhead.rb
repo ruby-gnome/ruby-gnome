@@ -110,18 +110,18 @@ class CanvasSampleArrowhead < Gtk::VBox
                                   :width_pixels => 1})
     box.signal_connect("event") do |item, event|
       case event.event_type
-      when Gdk::ENTER_NOTIFY
+      when Gdk::Event::ENTER_NOTIFY
         item.set({:fill_color => "red"})
-      when Gdk::LEAVE_NOTIFY
-        if event.state & Gdk::BUTTON1_MASK == 0
+      when Gdk::Event::LEAVE_NOTIFY
+        if event.state & Gdk::Window::BUTTON1_MASK == 0
           item.set({:fill_color => nil})
         end
-      when Gdk::BUTTON_PRESS
+      when Gdk::Event::BUTTON_PRESS
         fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
-        item.grab(Gdk::POINTER_MOTION_MASK | Gdk::BUTTON_RELEASE_MASK,
+        item.grab(Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::BUTTON_RELEASE_MASK,
                   fleur,
                   event.time)
-      when Gdk::BUTTON_RELEASE
+      when Gdk::Event::BUTTON_RELEASE
         item.ungrab(event.time)
       end
     end
@@ -132,8 +132,8 @@ class CanvasSampleArrowhead < Gtk::VBox
   end
 
   def width_event(item, event)
-    return if event.event_type != Gdk::MOTION_NOTIFY
-    return if event.state & Gdk::BUTTON1_MASK == 0
+    return if event.event_type != Gdk::Event::MOTION_NOTIFY
+    return if event.state & Gdk::Window::BUTTON1_MASK == 0
     width = (MIDDLE - event.y) / 5.0
     return if width < 0.0
     @width = width
@@ -141,8 +141,8 @@ class CanvasSampleArrowhead < Gtk::VBox
   end
 
   def shape_a_event(item, event)
-    return if event.event_type != Gdk::MOTION_NOTIFY
-    return if event.state & Gdk::BUTTON1_MASK == 0
+    return if event.event_type != Gdk::Event::MOTION_NOTIFY
+    return if event.state & Gdk::Window::BUTTON1_MASK == 0
     shape_a = (RIGHT - event.x) / 10.0
     return if shape_a < 0.0 || shape_a > 30.0
     @shape_a = shape_a
@@ -150,8 +150,8 @@ class CanvasSampleArrowhead < Gtk::VBox
   end
 
   def shape_b_c_event(item, event)
-    return if event.event_type != Gdk::MOTION_NOTIFY
-    return if event.state & Gdk::BUTTON1_MASK == 0
+    return if event.event_type != Gdk::Event::MOTION_NOTIFY
+    return if event.state & Gdk::Window::BUTTON1_MASK == 0
     change = false
     shape_b = (RIGHT - event.x) / 10.0
     if shape_b >= 0.0 && shape_b <= 30.0
@@ -222,7 +222,7 @@ EOS
     frame.show()
 
     canvas = Gnome::Canvas.new()
-    canvas.set_usize(500, 350)
+    canvas.set_size_request(500, 350)
     canvas.set_scroll_region(0, 0, 500, 350)
     frame.add(canvas)
     canvas.show()
@@ -245,8 +245,8 @@ EOS
     @outline = Gnome::CanvasLine.new(root,
                                      {:fill_color => "black",
                                        :width_pixels => 2,
-                                       :cap_style => Gdk::CAP_ROUND,
-                                       :join_style => Gdk::JOIN_ROUND})
+                                       :cap_style => Gdk::GC::CAP_ROUND,
+                                       :join_style => Gdk::GC::JOIN_ROUND})
 
     # Drag boxes
     @width_drag_box = create_drag_box(root) do |item, event|
