@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:22 $
+  $Date: 2002/09/16 03:47:30 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -211,6 +211,8 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
     }
 }
 
+static VALUE prop_exclude_list;
+
 void
 rbgobj_define_property_accessors(klass)
     VALUE klass;
@@ -238,24 +240,34 @@ rbgobj_define_property_accessors(klass)
             if (*p == '-')
                 *p = '_';
 
+        if (RTEST(rb_ary_includes(prop_exclude_list, rb_str_new2(prop_name)))){
+            g_free(prop_name);
+            continue;
+        }
+
         if (pspec->flags & G_PARAM_READABLE){
             char* s = g_strdup_printf("def %s; get_property('%s'); end",
                                       prop_name, pspec->name);
-            rb_funcall(klass, id_module_eval, 3,
-                       rb_str_new2(s),
-                       rb_str_new2(__FILE__),
-                       INT2NUM(__LINE__ - 5));
+            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
             g_free(s);
         }
+
         if (pspec->flags & G_PARAM_WRITABLE){
-            char* s = g_strdup_printf("def %s=(val); set_property('%s', val); val; end",
-                                      prop_name, pspec->name);
-            rb_funcall(klass, id_module_eval, 3,
-                       rb_str_new2(s),
-                       rb_str_new2(__FILE__),
-                       INT2NUM(__LINE__ - 5));
+            char* s;
+            s = g_strdup_printf(
+                    "def %s=(val); set_property('%s', val); val; end",
+                    prop_name, pspec->name);
+            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
+            g_free(s);
+
+            s = g_strdup_printf(
+                    "def set_%s(val); set_property('%s', val); end",
+                    prop_name, pspec->name);
+            rb_funcall(klass, id_module_eval, 1, rb_str_new2(s));
             g_free(s);
         }
+
+        g_free(prop_name);
     }
 
     g_type_class_unref(oclass);
@@ -392,7 +404,13 @@ Init_gobject()
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
 
+    
+    prop_exclude_list = rb_funcall(rb_cObject, rb_intern("instance_methods"),
+                                   1, Qtrue);
+    rb_global_variable(&prop_exclude_list);
+
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
+
     /* IDs */
     id_relatives = rb_intern("__relatives__");
     id_delete = rb_intern("delete");

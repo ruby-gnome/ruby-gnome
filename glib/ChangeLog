@@ -1,3 +1,10 @@
+2002-09-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors):
+	  - Define not only 'hogehoge=' but alse 'set_hogehoge'
+	  - Exclude properties which name is conflict with method of 'Object'
+	  - Stop passing second and third argument of module_eval
+
 2002-09-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/global.h, src/rbglib.h: Move StringValue, StringValuePtr 
