@@ -1,3 +1,21 @@
+2003-06-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/init.c, src/rbgtkmain.c: Call setlocale(LC_NUMERIC, "C") for some locales 
+	which doesn't use "." as decimal-point.	Pointed out by Joao Pedrosa.
+	* src/rbgtkbindingset.c: Added.
+	* src/rbgtkobject.c: Add Gtk::Object#bindings_activate(from Bindings). 
+	* src/rbgtkeditable.c: Change return value of Gtk::Editable#selection_bounds 
+	same as Gtk::Label#selection_bounds.
+
+2003-06-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Code cleanup. 
+	Remove Gtk::Notebook#popup_disable/enable. 
+	Use Gtk::Notebook#enable_popup= instead.
+	Add constants for GtkNotebookTab.
+	Improve Gtk::Notebook#append/prepend_page_menu.
+	Change parameter order of Gtk::Notebook#insert_page, #insert_page_menu.
+
 2003-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmenu.c: Remove Gtk::Menu#set_path. 

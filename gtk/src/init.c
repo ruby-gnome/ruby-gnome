@@ -3,8 +3,8 @@
 
   init.c -
 
-  $Author: sakai $
-  $Date: 2003/03/19 19:12:46 $
+  $Author: mutoh $
+  $Date: 2003/06/21 18:19:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -14,6 +14,7 @@
 
 #include "global.h"
 #include "gmodule.h"
+#include <locale.h>
 
 extern void Init_gtk_gdk();
 extern void Init_gtk_gtk();
@@ -45,11 +46,12 @@ require_minor()
 void
 Init_gtk2()
 {
+#if 0
 #ifdef G_THREADS_ENABLED
     g_thread_init (NULL);
     gdk_threads_init();
 #endif
-
+#endif
 #if 0
     rb_protect(&require_minor, Qnil, NULL);
 #else
@@ -57,6 +59,7 @@ Init_gtk2()
 #endif
 
     gtk_set_locale();
+    setlocale(LC_NUMERIC, "C");
 
     /*
      * For Gtk::TreeModel, Gtk::TreeIter. 

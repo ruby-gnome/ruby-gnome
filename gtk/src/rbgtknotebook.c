@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/06/21 18:19:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -49,7 +49,7 @@ note_append_page_menu(argc, argv, self)
 {
     VALUE child, tab_label, menu_label;
     
-    rb_scan_args(argc, argv, "21", &child, &tab_label, &menu_label);
+    rb_scan_args(argc, argv, "12", &child, &tab_label, &menu_label);
     gtk_notebook_append_page_menu(_SELF(self),
                                   RVAL2WIDGET(child),
                                   RVAL2WIDGET(tab_label),
@@ -81,7 +81,7 @@ note_prepend_page_menu(argc, argv, self)
 {
     VALUE child, tab_label, menu_label;
 
-    rb_scan_args(argc, argv, "21", &child, &tab_label, &menu_label);
+    rb_scan_args(argc, argv, "12", &child, &tab_label, &menu_label);
     gtk_notebook_prepend_page_menu(_SELF(self),
                                    RVAL2WIDGET(child),
                                    RVAL2WIDGET(tab_label),
@@ -91,9 +91,14 @@ note_prepend_page_menu(argc, argv, self)
 }
 
 static VALUE
-note_insert_page(self, child, label, pos)
-    VALUE self, child, label, pos;
+note_insert_page(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE pos, child, label;
+
+    rb_scan_args(argc, argv, "21", &pos, &child, &label);
     gtk_notebook_insert_page(_SELF(self),
                              RVAL2WIDGET(child),
                              NIL_P(label) ? NULL : RVAL2WIDGET(label),
@@ -102,13 +107,17 @@ note_insert_page(self, child, label, pos)
 }
 
 static VALUE
-note_insert_page_menu(self, child, tab_label, menu_label, pos)
-    VALUE self, child, tab_label, menu_label, pos;
+note_insert_page_menu(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE pos, child, tab_label, menu_label;
+
+    rb_scan_args(argc, argv, "22", &pos, &child, &tab_label, &menu_label);
     gtk_notebook_insert_page_menu(_SELF(self),
                                   RVAL2WIDGET(child),
                                   RVAL2WIDGET(tab_label),
-                                  NIL_P(menu_label) ? NULL :
                                   RVAL2WIDGET(menu_label),
                                   NUM2INT(pos));
     return self;
@@ -152,62 +161,6 @@ note_reorder_child(self, child, pos)
 {
     gtk_notebook_reorder_child(_SELF(self), RVAL2WIDGET(child),
                                NUM2INT(pos));
-    return self;
-}
-
-static VALUE
-note_set_tab_pos(self, pos)
-    VALUE self, pos;
-{
-    gtk_notebook_set_tab_pos(_SELF(self), NUM2INT(pos));
-    return self;
-}
-
-static VALUE
-note_set_show_tabs(self, show_tabs)
-    VALUE self, show_tabs;
-{
-    gtk_notebook_set_show_tabs(_SELF(self), RTEST(show_tabs));
-    return self;
-}
-
-static VALUE
-note_set_show_border(self, show_border)
-    VALUE self, show_border;
-{
-    gtk_notebook_set_show_border(_SELF(self), RTEST(show_border));
-    return self;
-}
-
-static VALUE
-note_set_scrollable(self, scrollable)
-    VALUE self, scrollable;
-{
-    gtk_notebook_set_scrollable(_SELF(self), RTEST(scrollable));
-    return self;
-}
-
-static VALUE
-note_set_tab_border(self, border_width)
-    VALUE self, border_width;
-{
-    gtk_notebook_set_tab_border(_SELF(self), NUM2UINT(border_width));
-    return self;
-}
-
-static VALUE
-note_popup_enable(self)
-    VALUE self;
-{
-    gtk_notebook_popup_enable(_SELF(self));
-    return self;
-}
-
-static VALUE
-note_popup_disable(self)
-    VALUE self;
-{
-    gtk_notebook_popup_disable(_SELF(self));
     return self;
 }
 
@@ -323,39 +276,11 @@ note_get_menu_label_text(self, child)
 }
 
 static VALUE
-note_get_scrollable(self)
-    VALUE self;
-{
-    return gtk_notebook_get_scrollable(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-note_get_show_border(self)
-    VALUE self;
-{
-    return gtk_notebook_get_show_border(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-note_get_show_tabs(self)
-    VALUE self;
-{
-    return gtk_notebook_get_show_tabs(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
 note_get_tab_label_text(self, child)
     VALUE self, child;
 {
     return CSTR2RVAL(gtk_notebook_get_tab_label_text(_SELF(self), 
                                                      RVAL2WIDGET(child)));
-}
-
-static VALUE
-note_get_tab_pos(self)
-    VALUE self;
-{
-    return INT2FIX(gtk_notebook_get_tab_pos(_SELF(self)));
 }
 
 /***********************************************/
@@ -413,20 +338,13 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "append_page_menu", note_append_page_menu, -1);
     rb_define_method(gNotebook, "prepend_page", note_prepend_page, -1);
     rb_define_method(gNotebook, "prepend_page_menu", note_prepend_page_menu, -1);
-    rb_define_method(gNotebook, "insert_page", note_insert_page, 3);
-    rb_define_method(gNotebook, "insert_page_menu", note_insert_page_menu, 4);
+    rb_define_method(gNotebook, "insert_page", note_insert_page, -1);
+    rb_define_method(gNotebook, "insert_page_menu", note_insert_page_menu, -1);
     rb_define_method(gNotebook, "remove_page", note_remove_page, 1);
     rb_define_method(gNotebook, "page_num", note_page_num, 1);
     rb_define_method(gNotebook, "next_page", note_next_page, 0);
     rb_define_method(gNotebook, "prev_page", note_prev_page, 0);
     rb_define_method(gNotebook, "reorder_child", note_reorder_child, 2);
-    rb_define_method(gNotebook, "set_tab_pos", note_set_tab_pos, 1);
-    rb_define_method(gNotebook, "set_show_tabs", note_set_show_tabs, 1);
-    rb_define_method(gNotebook, "set_show_border", note_set_show_border, 1);
-    rb_define_method(gNotebook, "set_scrollable", note_set_scrollable, 1);
-    rb_define_method(gNotebook, "set_tab_border", note_set_tab_border, 1);
-    rb_define_method(gNotebook, "popup_enable", note_popup_enable, 0);
-    rb_define_method(gNotebook, "popup_disable", note_popup_disable, 0);
     rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
     rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
 /*
@@ -438,13 +356,12 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "set_menu_label_text", note_set_menu_label_text, 2);
     rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
     rb_define_method(gNotebook, "set_tab_label_packing", note_set_tab_label_packing, 4);
-    rb_define_method(gNotebook, "scrollable?", note_get_scrollable, 0);
-    rb_define_method(gNotebook, "show_border?", note_get_show_border, 0);
-    rb_define_method(gNotebook, "show_tabs?", note_get_show_tabs, 0);
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
-    rb_define_method(gNotebook, "tab_pos", note_get_tab_pos, 0);
+    /* GtkNotebookTab */
+    rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
+    rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
 
     G_DEF_SETTERS(gNotebook);
     G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", signal_g2r_func);

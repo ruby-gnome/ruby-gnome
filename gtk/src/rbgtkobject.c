@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2003/04/25 19:26:26 $
+  $Date: 2003/06/21 18:19:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -110,6 +110,16 @@ gobj_unset_flags(self, flags)
     return self;
 }
 
+/* Move from Bindings */
+static VALUE
+gobj_bindings_activate(self, keyval, modifiers)
+    VALUE self, keyval, modifiers;
+{
+     return gtk_bindings_activate(GTK_OBJECT(RVAL2GOBJ(self)), 
+                                  NUM2UINT(keyval),
+                                  NUM2UINT(modifiers)) ? Qtrue : Qfalse;
+}
+
 void 
 Init_gtk_object()
 {
@@ -120,6 +130,7 @@ Init_gtk_object()
     rb_define_method(gObject, "set_flags", gobj_set_flags, 1);
     rb_define_method(gObject, "unset_flags", gobj_unset_flags, 1);
     rb_define_method(gObject, "destroy", gobj_destroy, 0);
+    rb_define_method(gObject, "bindings_activate", gobj_bindings_activate, 2);
 
     /* GtkObjectFlags */
     rb_define_const(gObject, "IN_DESTRUCTION", INT2FIX(GTK_IN_DESTRUCTION));

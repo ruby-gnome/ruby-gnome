@@ -4,7 +4,7 @@
   rbgtkeditable.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/06/21 18:19:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -31,7 +31,7 @@ edit_get_sel_bounds(self)
     gboolean ret;
     ret = gtk_editable_get_selection_bounds(GTK_EDITABLE(RVAL2GOBJ(self)),
                                             &start, &end);
-    return rb_ary_new3(3, ret ? Qtrue : Qfalse, INT2NUM(start), INT2NUM(end));
+    return ret ? rb_ary_new3(2, INT2NUM(start), INT2NUM(end)) : Qnil;
 }
 
 static VALUE
