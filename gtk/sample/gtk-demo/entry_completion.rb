@@ -1,8 +1,8 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: entry_completion.rb,v 1.2 2005/02/02 15:07:38 mutoh Exp $
+# $Id: entry_completion.rb,v 1.3 2005/02/25 17:09:24 kzys Exp $
 =begin
-= Entry Completion
+= Entry Completion (EntryCompletion)
 
 GtkEntryCompletion provides a mechanism for adding support for
 completion in GtkEntry.

@@ -1,3 +1,10 @@
+2005-02-26  KATO Kazuyoshi  <kzys@8-p.info>
+
+	* sample/gtk-demo/main.rb (Demo::Main::generate_index): 
+	Added backward compatibillity with old versions of GTK+.
+	* sample/gtk-demo/iconview.rb, entry_completion.rb, expander.rb:
+	Follow sample/gtk-demo/main.rb changes and code cleanup.
+
 2005-02-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgtkactiongroup.c: Fixed a GC problem in

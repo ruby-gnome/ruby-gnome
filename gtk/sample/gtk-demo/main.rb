@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.10 2005/02/06 18:25:13 kzys Exp $
+  $Id: main.rb,v 1.11 2005/02/25 17:09:25 kzys Exp $
 =end
 
 require 'gtk2'
@@ -60,57 +60,60 @@ module Demo
       @source_buffer.create_tag('reserved',
                                {'foreground' => 'purple'})
     end
-    
+
     def script_info(path)
       title = nil
       klass = nil
-      
-      File.open(path) do |file|
-        file.each do |ln|
-          if not title and ln =~ /^=\s+(.*)$/
+      depend = nil
+
+      file = File.open(path)
+      file.each do |ln|
+        if not title and ln =~ /^=\s+(.*)$/
+          title = $1
+          if title =~ /^(.*)\((.+?)\)$/
             title = $1
-          elsif not klass and ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
-            klass = $1
+            depend = $2
           end
-          
-          if title and klass
-            return title, klass.to_sym
-          end
+        elsif not klass and ln =~ /\s*class\s+([A-Z][A-Za-z0-9_]*)/
+          klass = $1
+        end
+
+        if title and klass
+          break
         end
       end
-      
-      unless title
-        title = klass.gsub(/([A-Z])/, ' \1').strip
-      end
 
-      return title, klass.to_sym
+      return title, klass.to_sym, depend
     end
 
-    def generate_index 
+    def generate_index
       # Target scripts
-      scripts = Dir.glob('*.rb') - %w(common.rb geninclude.rb main.rb)
+      scripts = Dir.glob('*.rb') - %w(common.rb main.rb)
 
       # Generate index tree
       children = {}
       index = []
-      
+
       scripts.each do |fn|
-        title, klass = script_info(fn)
-                
+        title, klass, depend = script_info(fn)
+
+        if depend and not Gtk.const_defined?(depend)
+          next
+        end
+
         if title =~ %r{^(.+?)/(.+)$}
           parent = $1
           child = $2
-          
+
           unless children[parent]
             children[parent] = []
             index += [[parent, nil, nil, []]]
           end
-          
+
           children[parent] += [[child, fn, klass]]
         else
           index += [[title, fn, klass]]
         end
-        
       end
 
       # Expand children
@@ -128,7 +131,7 @@ module Demo
 
       index
     end
-    
+
     def create_tree
       model = Gtk::TreeStore.new(String, String, String, TrueClass)
 

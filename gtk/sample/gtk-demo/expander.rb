@@ -1,8 +1,8 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: expander.rb,v 1.1 2005/01/31 00:17:11 kzys Exp $
+# $Id: expander.rb,v 1.2 2005/02/25 17:09:25 kzys Exp $
 =begin
-= Expander
+= Expander (Expander)
 
 GtkExpander allows to provide additional content that is initially hidden.
 This is also known as "disclosure triangle".
