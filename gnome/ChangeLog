@@ -1,6 +1,6 @@
-2002-12-15  Masao Mutoh <mutoh@highway.ne.jp>
+2002-12-22  Masao Mutoh <mutoh@highway.ne.jp>
 
-	* src/rbbonobo*: Move Ruby/Bonobo.
+	* src/rbbonobo*: Move to Ruby/Bonobo.
 	* sample/gnome-app-helper.rb: Remove Bonobo::I18n.
 
 2002-12-08  Masao Mutoh <mutoh@highway.ne.jp>
