@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2002-11-12
+ * Latest Revision: 2002-11-14
  *
  *****************************************************************************/
 
@@ -38,7 +38,6 @@
 
 /* Function Implementations **************************************************/
 
-/* XXX: do we need to call gconf_init() from here? */
 void
 Init_gconf2(void)
 {

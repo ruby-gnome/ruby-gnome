@@ -1,5 +1,12 @@
 require "mkmf"
 
+# TODO: do we need this? hopefully glib2 is ahead of us in build-order?
+begin
+  require 'glib2'
+rescue LoadError
+  raise "Install glib2 before gtk2."
+end
+
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)

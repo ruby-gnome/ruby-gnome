@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2002-11-13
+ * Latest Revision: 2002-11-14
  *
  *****************************************************************************/
 
@@ -145,10 +145,9 @@ Init_gconf_entry(m_gconf)
 
 	rb_define_method(gconf_entry, "key", entry_get_key, 0);
 	rb_define_method(gconf_entry, "value", entry_get_value, 0);
-	/* FIXME: should there be a is_default alias for this? */
-	rb_define_method(gconf_entry, "is_default?", entry_get_is_default, 0);
+	rb_define_method(gconf_entry, "default?", entry_get_is_default, 0);
 	rb_define_method(gconf_entry, "schema_name", entry_get_schema_name, 0);
-	rb_define_method(gconf_entry, "set_is_default", entry_set_is_default,
+	rb_define_method(gconf_entry, "set_default", entry_set_is_default,
 			 1);
 	rb_define_method(gconf_entry, "set_schema_name", entry_set_schema_name,
 			 1);
