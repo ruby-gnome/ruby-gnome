@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2004/10/31 14:44:44 $
+  $Date: 2004/11/01 14:59:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -32,6 +32,8 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
                    CSTR2RVAL(log_domain), INT2NUM(log_level),
                    CSTR2RVAL(message));
 
+    } else {
+        g_log_default_handler(log_domain, log_level, message, user_data);
     }
 }
 
