@@ -1,3 +1,8 @@
+2004-07-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/simple-view.rb, simple-controller.rb, basic-gconf-app.rb: 
+	Added by Giovanni Corriga.
+
 2004-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-client.c: Make GConf::Client#initialize/.new obsolete. 
@@ -99,7 +104,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/06/15 17:36:51 $ macros.
+	and $Date: 2004/07/03 07:38:02 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
