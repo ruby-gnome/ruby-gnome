@@ -4,14 +4,14 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2002/12/19 12:56:57 $
+  $Date: 2003/02/01 17:01:56 $
 
 
-  Copyright (C) 2002 Ruby-GNOME2 Project
+  Copyright (C) 2002,2003 Ruby-GNOME2 Project
 
   This program is free software.
   You can distribute/modify this program under the terms of
-  the GNU LIBRARY General Public License version 2.
+  the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
   Original author: Avi Bryant <avi@beta4.com>
 ************************************************/

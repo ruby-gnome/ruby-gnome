@@ -1,4 +1,13 @@
 #!/usr/bin/env ruby
+=begin
+  treeview.rb - Ruby/Libglade2 sample script.
+
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: treeview.rb,v 1.2 2003/02/01 17:01:57 mutoh Exp $
+=end
+
 require 'libglade2'
 
 class Treeview
