@@ -1,3 +1,22 @@
+2004-01-26  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdageometricpoint.c,
+	  src/rbgdamoney.c,
+	  src/rbgdatime.c:
+	  Added new classes.
+	* src/rbgda.c: Initializes Gda::GeometricPoint, Gda::Money and
+	  Gda::Time + removed initialization for Gda::Value.
+	* src/rbgda.h: Exported Gda::GeometricPoint, Gda::Money and
+	  Gda::Time classes + fixed RGDA_VALUE and RGDA_VALUE_NEW macros.
+	* src/rbgdadatamodel.c,
+	  src/rbgdadatamodellist.c,
+	  src/rbgdaparameter.c: 
+	  Follow RGDA_VALUE changes.
+	* src/rbgdafieldattributes.c: Removed #gdatype and #set_gdatype.
+	* src/rbgdavalue.c: Added RB <-> GDA values conversion functions,
+	  by Nikolai Weibull + removed old code.
+	* tests/tc_all.rb: Follow these changes.
+
 2004-01-14  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdarow.c: Added Gda::Row#[].

@@ -305,7 +305,8 @@ static VALUE rb_gda_datamodel_append_row(self, values)
     int i;
     
     for (i = 0; i < RARRAY(values)->len; i++) {
-        list = g_list_append(list, RGDA_VALUE(rb_ary_entry(values, i)));
+        list = g_list_append(list, RGDA_VALUE(rb_ary_entry(values, i),
+                                              GDA_VALUE_TYPE_NULL));
     }
 
     if (list == NULL) {

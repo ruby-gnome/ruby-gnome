@@ -130,38 +130,43 @@ class TC_everything < Test::Unit::TestCase
                                       Gda::Parameter.new('number',  123))
         list << Gda::Parameter.new('string',  'hello world')
         list << Gda::Parameter.new('boolean', true)
+        list << Gda::Parameter.new('time', time_at_now = Time.now)
 
         assert !list.empty?
-        assert_equal(4, list.length)
+        assert_equal(5, list.length)
         arr = list.parameters
         assert_instance_of(Array, arr)
-        assert_equal(4, arr.length)
+        assert_equal(5, arr.length)
 
         i = 0
         list.each_parameter do |param|
             assert_instance_of(Gda::Parameter, param)
             assert_instance_of(String, param.name)
-            assert_instance_of(Gda::Value, param.value)
             assert_instance_of(Gda::Parameter, list.find(param.name))
             case param.name
                 when 'nil'
-                    assert_equal('NULL', param.value.to_s)
+                    assert_instance_of(NilClass, param.value)
                 when 'string'
-                    assert_equal('hello world', param.value.to_s)
+                    assert_instance_of(String, param.value)
+                    assert_equal("hello world", param.value)
                 when 'number'
-                    assert_equal('123.00', param.value.to_s)
+                    assert_instance_of(Fixnum, param.value)
+                    assert_equal(123, param.value)
                 when 'boolean'
-                    assert_equal('TRUE', param.value.to_s)
+                    assert_instance_of(TrueClass, param.value)
+                when 'time'
+                    assert_instance_of(Time, param.value)
+                    assert_equal(time_at_now, param.value)
                 else
                     assert false
             end
             i += 1
         end
-        assert_equal(4, i)
+        assert_equal(5, i)
        
         arr = list.names
         assert_instance_of(Array, arr)
-        assert_equal(4, arr.length)
+        assert_equal(5, arr.length)
         
         i = 0
         list.each_name do |name|
@@ -170,7 +175,7 @@ class TC_everything < Test::Unit::TestCase
             assert_instance_of(Gda::Parameter, param)
             i += 1
         end
-        assert_equal(4, i)
+        assert_equal(5, i)
 
         assert_nil list.find("does_not_exist")
         list.clear

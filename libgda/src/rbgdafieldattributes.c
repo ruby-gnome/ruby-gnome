@@ -176,9 +176,10 @@ static VALUE rb_gda_field_set_scale(self, scale)
                                    FIX2LONG(scale));
     return self;
 }
-  
+ 
+#if 0    /* FIXME re-implement these methods in the-Ruby-way */
 /*
- * Method: gdatype
+ * DEPRECATED Method: gdatype
  *
  * Returns: the gdatype of the field attributes (see Gda::Value::Type).
  */
@@ -190,7 +191,7 @@ static VALUE rb_gda_field_get_gdatype(self)
 }
 
 /*
- * Method: set_gdatype(gdatype)
+ * DEPRECATED Method: set_gdatype(gdatype)
  * gdatype: the new gdatype of the field attributes (see Gda::Value::Type).
  *
  * Sets the gdatype of the field attributes.
@@ -204,6 +205,7 @@ static VALUE rb_gda_field_set_gdatype(self, gdatype)
                                      RVAL2GENUM(gdatype, GDA_TYPE_VALUE_TYPE));
     return self;
 }
+#endif
 
 /*
  * Method: allow_null?
@@ -391,9 +393,10 @@ void Init_gda_field_attributes(void) {
     rb_define_method(c, "scale",     rb_gda_field_get_scale, 0);
     rb_define_method(c, "set_scale", rb_gda_field_set_scale, 1);
 
+/*  Deprecated
     rb_define_method(c, "gdatype",     rb_gda_field_get_gdatype, 0);
     rb_define_method(c, "set_gdatype", rb_gda_field_set_gdatype, 1);
-
+*/
     rb_define_method(c, "allow_null?",    rb_gda_field_get_allow_null,  0);
     rb_define_method(c, "set_allow_null", rb_gda_field_set_allow_null, 1);
 

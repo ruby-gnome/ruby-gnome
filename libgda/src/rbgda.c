@@ -39,6 +39,8 @@ static void Init_all_classes(void) {
     extern void Init_gda_error(void);
     extern void Init_gda_export(void);
     extern void Init_gda_field_attributes(void);
+    extern void Init_gda_geometric_point(void);
+    extern void Init_gda_money(void);
     extern void Init_gda_parameter(void);
     extern void Init_gda_parameter_list(void);
     extern void Init_gda_provider(void);
@@ -46,8 +48,8 @@ static void Init_all_classes(void) {
     extern void Init_gda_row(void);
     extern void Init_gda_select(void);
     extern void Init_gda_table(void);
+    extern void Init_gda_time(void);
     extern void Init_gda_transaction(void);
-    extern void Init_gda_value(void);
 
     Init_gda_client();
     Init_gda_command();
@@ -60,6 +62,8 @@ static void Init_all_classes(void) {
     Init_gda_error();
     Init_gda_export();
     Init_gda_field_attributes();
+    Init_gda_geometric_point();
+    Init_gda_money();
     Init_gda_parameter();
     Init_gda_parameter_list();
     Init_gda_provider();
@@ -67,8 +71,8 @@ static void Init_all_classes(void) {
     Init_gda_row();
     Init_gda_select();
     Init_gda_table();
+    Init_gda_time();
     Init_gda_transaction();
-    Init_gda_value();
 }
 
 /*

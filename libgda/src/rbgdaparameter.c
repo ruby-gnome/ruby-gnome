@@ -32,46 +32,19 @@ VALUE cGdaParameter;
 /*
  * Class method: new(name, value)
  * name: the name for the parameter being created.
- * value: a value for the parameter, which can be either a boolean, string,
- * integer, or an existing Gda::Value (it can be nil as well). 
+ * value: a value for the parameter, as a Gda::Value object.
  *
  * Creates a new Gda::Parameter object, which is usually used with
- * Gda::ParameterList.  Raises an exception if the 'value' parameter is
- * an unknown object (not nil, boolean, string, integer or Gda::Value).
+ * Gda::ParameterList.
  *
  * Returns: a newly created Gda::Parameter object.
  */
 static VALUE rb_gda_parameter_new(self, name, value)
     VALUE self, name, value;
 {
-    GdaParameter *param = NULL;
-
-    if (NIL_P(value)) {
-        param = gda_parameter_new_from_value(RVAL2CSTR(name),
-	                                     gda_value_new_null());
-    }
-    else if (TYPE(value) == T_TRUE || TYPE(value) == T_FALSE) {
-        param = gda_parameter_new_boolean(RVAL2CSTR(name),
-                                          RVAL2CBOOL(value));
-    }
-    else if (TYPE(value) == T_STRING) {
-        param = gda_parameter_new_string(RVAL2CSTR(name),
-                                         RVAL2CSTR(value));
-    }
-    else if (TYPE(value) == T_FIXNUM
-          || TYPE(value) == T_BIGNUM
-          || TYPE(value) == T_FLOAT) {
-        param = gda_parameter_new_double(RVAL2CSTR(name),
-                                         NUM2DBL(value));   
-    }
-    else if (CLASS_OF(value) == cGdaValue) {
-        param = gda_parameter_new_from_value(RVAL2CSTR(name),
-                                             RGDA_VALUE(value));   
-    }
-    else {
-        rb_raise(rb_eArgError, "Invalid object for the 'value' parameter.");
-    }
-
+    GdaParameter *param = gda_parameter_new_from_value(
+        RVAL2CSTR(name),
+        RGDA_VALUE(value, GDA_VALUE_TYPE_NULL));
     if (param != NULL) {
         G_INITIALIZE(self, param);
     }
@@ -128,7 +101,7 @@ static VALUE rb_gda_parameter_set_value(self, value)
     VALUE self, value;
 {
     gda_parameter_set_value(RGDA_PARAMETER(self),
-                            RGDA_VALUE(value));
+                            RGDA_VALUE(value, GDA_VALUE_TYPE_NULL));
     return self;
 }
 

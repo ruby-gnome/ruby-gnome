@@ -67,8 +67,9 @@ static VALUE rb_gda_datamodel_list_new(self, args)
 static VALUE rb_gda_datamodel_list_append_value(self, value)
     VALUE self, value;
 {
-    const GdaRow *row = gda_data_model_list_append_value(RGDA_DATAMODEL_LIST(self),
-                                       (const GdaValue *)RGDA_VALUE(value));
+    const GdaRow *row = gda_data_model_list_append_value(
+        RGDA_DATAMODEL_LIST(self),
+        (const GdaValue *)RGDA_VALUE(value, GDA_VALUE_TYPE_NULL));
     return row != NULL
         ? RGDA_ROW_NEW(row)
         : Qnil;

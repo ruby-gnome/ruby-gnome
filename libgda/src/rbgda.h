@@ -43,6 +43,8 @@ extern VALUE cGdaDataSource;
 extern VALUE cGdaError;
 extern VALUE cGdaExport;
 extern VALUE cGdaFieldAttributes;
+extern VALUE cGdaGeometricPoint;
+extern VALUE cGdaMoney;
 extern VALUE cGdaParameter;
 extern VALUE cGdaParameterList;
 extern VALUE cGdaProvider;
@@ -50,8 +52,8 @@ extern VALUE cGdaQuarkList;
 extern VALUE cGdaRow;
 extern VALUE cGdaSelect;
 extern VALUE cGdaTable;
+extern VALUE cGdaTime;
 extern VALUE cGdaTransaction;
-extern VALUE cGdaValue;
 
 #define GDA_COMMAND(o)          ((GdaCommand *)o)
 #define GDA_DATASOURCE(o)       ((GdaDataSourceInfo *)o)
@@ -82,7 +84,7 @@ extern VALUE cGdaValue;
 #define RGDA_SELECT(o)           (GDA_SELECT(RVAL2GOBJ(o)))
 #define RGDA_TABLE(o)            (GDA_TABLE(RVAL2GOBJ(o)))
 #define RGDA_TRANSACTION(o)      (GDA_TRANSACTION(RVAL2GOBJ(o)))
-#define RGDA_VALUE(o)            (GDA_VALUE(RVAL2BOXED(o, GDA_TYPE_VALUE)))
+#define RGDA_VALUE(o,t)          (GDA_VALUE(rb_rb_value_to_gda_value(o, t)))
 
 #define RGDA_CLIENT_NEW(o)           (GOBJ2RVAL(GDA_CLIENT(o)))
 #define RGDA_COMMAND_NEW(o)          (BOXED2RVAL(GDA_COMMAND(o), GDA_TYPE_COMMAND))
@@ -103,10 +105,14 @@ extern VALUE cGdaValue;
 #define RGDA_SELECT_NEW(o)           (GOBJ2RVAL(GDA_SELECT(o)))
 #define RGDA_TABLE_NEW(o)            (GOBJ2RVAL(GDA_TABLE(o)))
 #define RGDA_TRANSACTION_NEW(o)      (GOBJ2RVAL(GDA_TRANSACTION(o)))
-#define RGDA_VALUE_NEW(o)            (BOXED2RVAL(GDA_VALUE(o), GDA_TYPE_VALUE))
+#define RGDA_VALUE_NEW(o)            (rb_gda_value_to_rb_value(GDA_VALUE(o)))
 
 /* rbgdaconnection.c */
 VALUE rb_gda_connection_close(VALUE self);
+
+/* rbgdavalue.c */
+VALUE rb_gda_value_to_rb_value(GdaValue *value);
+GdaValue *rb_rb_value_to_gda_value(VALUE value, GdaValueType type);
 
 #endif /* __RBGDA_H_ */
 

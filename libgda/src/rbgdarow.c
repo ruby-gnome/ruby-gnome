@@ -61,7 +61,8 @@ static VALUE rb_gda_row_new(argc, argv, self)
 
         for (i = 0; i < RARRAY(values)->len; i++) {
             vals = g_list_append(vals,
-                                 RGDA_VALUE(rb_ary_entry(values, i)));
+                                 RGDA_VALUE(rb_ary_entry(values, i),
+                                            GDA_VALUE_TYPE_NULL));
         }
         row = gda_row_new_from_list(RGDA_DATAMODEL(model), vals);
     }
