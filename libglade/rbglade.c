@@ -4,10 +4,10 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/01/07 15:15:32 $
+  $Date: 2004/01/31 17:16:49 $
 
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project
 
   This program is free software.
   You can distribute/modify this program under the terms of
@@ -90,7 +90,21 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-void Init_libglade2()
+ static VALUE
+rb_gladexml_filename(VALUE self)
+{
+    GladeXML *xml;
+    char *filename;
+    
+    xml = GLADE_XML(RVAL2GOBJ(self));
+    filename = xml->filename;
+    
+    return filename ? rb_str_new2(filename) : Qnil;
+}
+
+
+void 
+Init_libglade2()
 {
     instances = rb_ary_new();
     rb_global_variable(&instances);
@@ -99,4 +113,5 @@ void Init_libglade2()
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
     rb_define_alias(cGladeXML, "[]", "get_widget");
+    rb_define_method(cGladeXML, "filename"  , rb_gladexml_filename, 0);
 }

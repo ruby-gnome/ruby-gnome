@@ -1,3 +1,7 @@
+2004-02-01  Archit Baweja  <bighead@users.sourceforge.net>
+
+	* rbglade.c: Added GladeXML#filename.
+
 2004-01-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c: Add GladeXML#[] as an alias of GladeXML#get_widget.
