@@ -1,3 +1,8 @@
+2005-03-12  Hiroyuki Ikezoe <poincare@ikezoe.net>
+
+	* src/rbgtkactiongroup.c: Gtk::ActionGroup#set_translate_domain 
+	accept nil as domain. 
+
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkliststore.c: Fix a warning. 

@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: lrz $
-  $Date: 2005/02/25 14:49:07 $
+  $Author: mutoh $
+  $Date: 2005/03/11 15:27:43 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -301,7 +301,8 @@ static VALUE
 actiongroup_set_translation_domain(self, domain)
     VALUE self, domain;
 {
-    gtk_action_group_set_translation_domain(_SELF(self), RVAL2CSTR(domain));
+    gtk_action_group_set_translation_domain(_SELF(self), 
+                                            NIL_P(domain) ? (const gchar*)NULL : RVAL2CSTR(domain));
     return self;
 }
 
