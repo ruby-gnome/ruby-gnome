@@ -2,10 +2,10 @@
 =begin
   treeview.rb - Ruby/Libglade2 sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.3 2004/01/07 15:15:32 mutoh Exp $
+  $Id: treeview.rb,v 1.4 2004/03/23 11:46:48 mutoh Exp $
 =end
 
 require 'libglade2'

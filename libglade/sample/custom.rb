@@ -2,12 +2,12 @@
 =begin
   custom.rb - Ruby/Libglade2 custom widget sample script.
 
-  (Notice)You need Ruby/GtkHtml2 for this sample.
+  Note: You need Ruby/GtkHtml2 for this sample.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project
+  Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: custom.rb,v 1.2 2004/03/05 16:34:24 mutoh Exp $
+  $Id: custom.rb,v 1.3 2004/03/23 11:46:48 mutoh Exp $
 =end
 
 require 'libglade2'

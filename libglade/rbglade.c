@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/03/03 17:39:48 $
+  $Date: 2004/03/23 11:46:47 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -21,6 +21,9 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <gmodule.h>
+
+static const int RB_GLADE_XML_FILE = 1;
+static const int RB_GLADE_XML_BUFFER = 2;
 
 static VALUE cGladeXML;
 static VALUE instances;
@@ -55,37 +58,39 @@ rb_gladexml_get_widget(VALUE self, VALUE nameString)
 static VALUE
 rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE fileString, rootString, domainString, handler_proc;
+    VALUE text, rootString, domainString, flag;
     GladeXML *xml;
-    char *fileName;
     char *root;
     char *domain;
+    int dflag;
 
-    rb_scan_args(argc, argv, "13", &fileString, &rootString, &domainString, &handler_proc);
+    rb_scan_args(argc, argv, "13", &text, &rootString, &domainString, &flag);
 
-    fileName = NIL_P(fileString) ? 0 : STR2CSTR(fileString);
-    root = NIL_P(rootString) ? 0 : STR2CSTR(rootString);
-    domain = NIL_P(domainString) ? 0 : STR2CSTR(domainString);
-
-    if (NIL_P(handler_proc) && rb_block_given_p())
-        handler_proc = G_BLOCK_PROC();
+    root = NIL_P(rootString) ? 0 : RVAL2CSTR(rootString);
+    domain = NIL_P(domainString) ? 0 : RVAL2CSTR(domainString);
 
     glade_init();
 
-    xml = glade_xml_new(fileName, root, domain);
+    dflag = NIL_P(flag) ? RB_GLADE_XML_FILE : NUM2INT(flag); 
+    if (dflag == RB_GLADE_XML_FILE){
+        xml = glade_xml_new(RVAL2CSTR(text), root, domain);
+    } else if (dflag == RB_GLADE_XML_BUFFER) {
+        StringValue(text);
+        xml = glade_xml_new_from_buffer(RVAL2CSTR(text), RSTRING(text)->len, root, domain);
+    } else {
+         rb_raise(rb_eArgError, "flag is wrong valiable %d", dflag);
+    }
 
-    if(xml)
-    {
+    if (xml) {
         G_INITIALIZE(self, xml);
         /* Once constructed, this means a GladeXML object can never be freed. */
         rb_ary_push(instances, self);
-        rb_iv_set(self, "@handler_proc", handler_proc);
-        glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
-    }
-    else
-    {
-        /* why does that raise not work properly?? */
-        rb_raise(rb_eIOError, "could not load glade file %s", fileName);
+        if (rb_block_given_p()){
+            rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
+            glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
+        }
+    } else {
+        rb_raise(rb_eIOError, "could not load glade file %s", RVAL2CSTR(text));
     }
 
     return self;
@@ -189,4 +194,7 @@ Init_libglade2()
     rb_define_singleton_method(cGladeXML, "set_custom_widget_handler", rb_gladexml_set_custom_widget_handler, 1);
     rb_define_singleton_method(cGladeXML, "require", rb_gladexml_require, 1);
     rb_define_singleton_method(cGladeXML, "provide", rb_gladexml_provide, 1);
+    rb_define_const(cGladeXML, "FILE", INT2FIX(RB_GLADE_XML_FILE));
+    rb_define_const(cGladeXML, "BUFFER", INT2FIX(RB_GLADE_XML_BUFFER));
+
 }
