@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2003/02/09 04:50:30 $
+  $Date: 2003/02/09 05:10:42 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -84,7 +84,7 @@ extern VALUE rbgobj_create_object(VALUE klass);
 
 extern void rbgobj_define_property_accessors(VALUE klass);
 extern void rbgobj_define_signal_constants(VALUE klass);
-extern void rbgobj_boxed_abstract_but_create_instance_class(GType gtype);
+extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
 
 /* rbgobj_type.c */

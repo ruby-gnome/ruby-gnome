@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2003/02/09 04:50:29 $
+  $Date: 2003/02/09 05:10:42 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -23,7 +23,7 @@
 static GHashTable* not_abstract_table;
 
 void
-rbgobj_boxed_abstract_but_create_instance_class(gtype)
+rbgobj_add_abstract_but_create_instance_class(gtype)
     GType gtype;
 {
     g_hash_table_insert(not_abstract_table, (gpointer)gtype, (gpointer)gtype);
