@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/02/26 17:33:08 $
+  $Date: 2004/02/26 18:07:42 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -849,6 +849,7 @@ Init_gtk_gdk_event()
      */
     rb_define_const(gdkEvent, "CURRENT_TIME", INT2FIX(GDK_CURRENT_TIME));
     rb_define_const(gdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
+    rb_define_const(gdkEvent, "PRIORITY_REDRAW", INT2FIX(GDK_PRIORITY_REDRAW));
 
     /* GdkEventType */
     /* XXX */

@@ -6,6 +6,7 @@
 	Gdk::Event#put returns self.
 	Move Gdk::Event#window, #window= to Gdk::EventAny. 
 	Add G_DEF_SETTERS to each classes.
+	Add Gdk::Event::PRIORITY_REDRAW.
 	* src/rbgdkwindow.c: Move Gdk::Window#toplevels to 
 	Gdk::Window.toplevels and fix a memory leak.
 	Fix two bugs of Gdk::Window.at_pointer and #pointer.
