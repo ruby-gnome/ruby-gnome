@@ -1,7 +1,7 @@
 =begin
   exec_make.rb is called by top-level Makefile.
 
-  $Id: exec_make.rb,v 1.1 2003/08/27 17:28:04 mutoh Exp $
+  $Id: exec_make.rb,v 1.2 2003/09/06 09:14:40 sakai Exp $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
 =end
@@ -12,7 +12,13 @@ EXECUTE = ARGV[1..-1].join(' ')
 success = []
 failure = []
 SUBDIRS.each do |subdir| 
-	ret = system("(cd #{subdir} && #{EXECUTE})")
+	Dir.chdir(subdir)
+	begin
+		ret = system(EXECUTE)
+	ensure
+		Dir.chdir("..")
+	end
+
 	if ret
 		success << subdir 
 	else

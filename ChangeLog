@@ -1,3 +1,8 @@
+2003-09-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* exec_make.rb: don't use parenthesis in the argument of system()
+	for mingw32 support.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Revised.
