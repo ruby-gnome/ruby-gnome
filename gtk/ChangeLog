@@ -1,3 +1,7 @@
+2004-03-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/init.c: Fix a problem on MinGW.
+
 2004-03-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombo.c: Fix a bug(Sorry, I added some debug code...).
