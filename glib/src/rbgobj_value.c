@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 06:23:51 $
+  $Date: 2002/07/27 14:46:35 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -151,7 +151,15 @@ str_to_gvalue(VALUE from, GValue* to)
 static void
 int_to_gvalue(VALUE from, GValue* to)
 {
-    g_value_set_int(to, NUM2INT(from));
+    if (0)
+        ;
+    else if (G_VALUE_HOLDS_ENUM(from))
+        g_value_set_enum(to, NUM2INT(from));
+    else if (G_VALUE_HOLDS_FLAGS(from))
+        g_value_set_flags(to, NUM2INT(from));
+    else {
+        g_value_set_int(to, NUM2INT(from));
+    }
 }
 
 static void
@@ -185,5 +193,6 @@ void Init_gobject_gvalue()
     rbgobj_register_r2g_func(rb_cTrueClass, &bool_to_gvalue);
     rbgobj_register_r2g_func(rb_cFalseClass, &bool_to_gvalue);
     rbgobj_register_r2g_func(rb_cString, &str_to_gvalue);
+    rbgobj_register_r2g_func(rb_cInteger, &int_to_gvalue);
     rbgobj_register_r2g_func(rb_cFloat, &float_to_gvalue);
 }

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/07/27 06:23:51 $
+  $Date: 2002/07/27 14:46:35 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -60,6 +60,8 @@ extern GObject* rbgobj_gobject_new(VALUE type, VALUE params_hash);
 
 extern VALUE rbgobj_cGObject;
 extern VALUE rbgobj_cParamSpec;
+extern VALUE rbgobj_cBoxed;
+
 
 /* rbgobj_closure.c */
 extern GClosure* g_rclosure_new(VALUE callback_proc);
@@ -72,9 +74,17 @@ extern void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func);
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
 extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
 
-/* rbobj_param.c */
+/* rbgobj_param.c */
 extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
 extern VALUE rbgobj_param_spec_wrap(GParamSpec* pspec);
+
+#if 0
+/* rbgobj_boxed.c */
+extern VALUE rbgobj_boxed_class(GType gtype);
+extern GType rbgobj_boxed_class_gtype(VALUE klass);
+extern gpointer rbgobj_boxed_get(VALUE obj);
+extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
+#endif
 
 #ifdef __cplusplus
 }

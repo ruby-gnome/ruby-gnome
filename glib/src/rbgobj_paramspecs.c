@@ -4,8 +4,8 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2002/07/26 14:31:33 $
-  created at: Sun Jun  9 20:31:47 JST 2002
+  $Date: 2002/07/27 14:46:35 $
+  created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
 

@@ -1,5 +1,13 @@
 2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_object.c: abolish rbgobj_make_gobject_auto_type() and
+	rbgobj_make_gobject()
+	* src/rbgobj_boxed.c, src/rbgobj_enums.c, src/rbgobj_typemodule.c,
+	src/rbgobj_signal.c: created
+	* src/rbgobj_object.c: move signal stuff to src/rbgobj_signal.c
+
+2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
 	* src/rbgobj_object.c: implement GObject.gobject_new experimentaly.
 	  example:
 	   w = GLib::GObject.gobject_new("GtkWindow", "title" => "Hello World")

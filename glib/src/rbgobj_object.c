@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 06:23:51 $
+  $Date: 2002/07/27 14:46:35 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -23,9 +23,6 @@
 VALUE rbgobj_cGObject;
 
 static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
-
-static VALUE rbgobj_make_gobject(VALUE klass, GObject* gobj);
-static VALUE rbgobj_make_gobject_auto_type(GObject* gobj);
 
 ID id_relatives;
 ID id_relative_callbacks;
@@ -87,6 +84,8 @@ gobj_free(gobj_holder* holder)
     free(holder);
 }
 
+/**********************************************************************/
+
 static VALUE
 gobj_s_allocate(klass)
     VALUE klass;
@@ -115,6 +114,8 @@ VALUE gobj_s_new(int argc, VALUE* argv, VALUE klass)
 }
 #endif
 
+/**********************************************************************/
+
 void
 rbgobj_initialize_gobject(obj, gobj)
     VALUE obj;
@@ -134,8 +135,6 @@ rbgobj_initialize_gobject(obj, gobj)
 
     rb_ivar_set(obj, id_relatives, Qnil);
 }
-
-/**********************************************************************/
 
 GObject*
 rbgobj_get_gobject(obj)
@@ -184,31 +183,14 @@ rbgobj_get_value_from_gobject(gobj)
     GObject* gobj;
 {
     gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
-    return holder ? holder->self : rbgobj_make_gobject_auto_type(gobj);
-}
-
-VALUE
-rbgobj_make_gobject(klass, gobj)
-    VALUE klass;
-    GObject* gobj;
-{
-    gobj_holder* holder = g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
-
-    if (holder) {
+    if (holder)
         return holder->self;
-    } else {
-        VALUE obj = gobj_s_allocate(klass);
+    else {
+        VALUE obj = gobj_s_allocate(rbgobj_lookup_rbclass(gobj));
         gobj = g_object_ref(gobj);
         rbgobj_initialize_gobject(obj, gobj);
         return obj;
     }
-}
-
-VALUE
-rbgobj_make_gobject_auto_type(gobj)
-    GObject* gobj;
-{
-    return rbgobj_make_gobject(rbgobj_lookup_rbclass(gobj), gobj);
 }
 
 void
@@ -338,7 +320,7 @@ gobj_s_gobject_new(self, type, params_hash)
     VALUE self, type, params_hash;
 {
     GObject* gobj = rbgobj_gobject_new(type, params_hash);
-    VALUE result = rbgobj_make_gobject_auto_type(gobj);
+    VALUE result = rbgobj_get_value_from_gobject(gobj);
 
     // XXX: Ughhhhh
     if (!strncmp("Gtk", g_type_name(G_OBJECT_TYPE(gobj)), 3))
@@ -399,16 +381,6 @@ gobj_get_property(self, prop_name)
 }
 
 static VALUE
-gobj_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    rb_raise(rb_eRuntimeError, "can't instantiate class %s",
-             rb_class2name(CLASS_OF(self)));
-}
-
-static VALUE
 gobj_inspect(self)
     VALUE self;
 {
@@ -430,116 +402,14 @@ gobj_inspect(self)
     return rb_str_new2(s);
 }
 
-/**********************************************************************/
-
 static VALUE
-gobj_sig_connect(argc, argv, self)
+gobj_initialize(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    VALUE sig, after;
-    ID id = 0;
-    int i;
-    GClosure* rclosure;
-
-    rb_scan_args(argc, argv, "11", &sig, &after);
-    StringValue(sig);
-
-    rclosure = g_rclosure_new(rb_f_lambda());
-    i = g_signal_connect_closure(rbgobj_get_gobject(self),
-                                 StringValuePtr(sig), rclosure, RTEST(after));
-
-    return INT2FIX(i);
-}
-
-/* XXX */
-static VALUE
-gobj_sig_emit(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE sig_id;
-    VALUE rest;
-    GSignalQuery query;
-    GValueArray* params;
-    GValue return_value = {0,};
-    int i;
-    VALUE result;
-
-    rb_scan_args(argc, argv, "1*", &sig_id, &rest);
-    g_signal_query(NUM2INT(sig_id), &query);
-
-    params = g_value_array_new(query.n_params + 1);
-    rbgobj_rvalue_to_gvalue(self, &(params->values[0]));
-    for (i = 0; i < query.n_params; i++)
-        rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i), &(params->values[i+1]));
-
-    //g_value_init(&return_value, ); // XXX
-
-    g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
-
-    g_value_array_free(params);
-    result = rbgobj_gvalue_to_rvalue(&return_value);
-    g_value_unset(&return_value);
-    
-    return self;
-}
-
-/* TODO */
-static VALUE
-gobj_sig_emit_by_name(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    rb_notimplement();
-    return self;
-}
-
-static VALUE
-gobj_sig_emit_stop(self, sig_id)
-    VALUE self, sig_id;
-{
-    g_signal_stop_emission(rbgobj_get_gobject(self),
-                           NUM2INT(sig_id), 0);
-    return self;
-}
-
-static VALUE
-gobj_sig_emit_stop_by_name(self, sig_name)
-    VALUE self, sig_name;
-{
-    GObject* gobj = rbgobj_get_gobject(self);
-    StringValue(sig_name);
-    g_signal_stop_emission(gobj,
-						   g_signal_lookup(StringValuePtr(sig_name), G_OBJECT_TYPE(gobj)), 0);
-    return self;
-}
-
-static VALUE
-gobj_sig_handler_block(self, id)
-	VALUE self, id;
-{
-    g_signal_handler_block(rbgobj_get_gobject(self), NUM2INT(id));
-    return self;
-}
-
-static VALUE
-gobj_sig_handler_unblock(self, id)
-	VALUE self, id;
-{
-    g_signal_handler_unblock(rbgobj_get_gobject(self), NUM2INT(id));
-    return self;
-}
-
-static VALUE
-gobj_sig_handler_disconnect(self, id)
-    VALUE self, id;
-{
-    g_signal_handler_disconnect(rbgobj_get_gobject(self), NUM2INT(id));
-    return self;
+    rb_raise(rb_eRuntimeError, "can't instantiate class %s",
+             rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
@@ -547,6 +417,14 @@ gobj_get_g_type(self)
     VALUE self;
 {
     return INT2NUM(G_OBJECT_TYPE(rbgobj_get_gobject(self)));
+}
+
+static VALUE
+gobj_ref_count(self)
+    VALUE self;
+{
+    GObject* gobj = rbgobj_force_get_gobject(self);
+    return INT2NUM(gobj ? gobj->ref_count : 0);
 }
 
 static VALUE
@@ -572,13 +450,7 @@ gobj_smethod_added(self, id)
     return Qnil;
 }
 
-static VALUE
-gobj_ref_count(self)
-    VALUE self;
-{
-    GObject* gobj = rbgobj_force_get_gobject(self);
-    return INT2NUM(gobj ? gobj->ref_count : 0);
-}
+/**********************************************************************/
 
 static VALUE
 _gobject_to_ruby(const GValue* from)
@@ -591,6 +463,8 @@ _gobject_from_ruby(VALUE from, GValue* to)
 {
     g_value_set_object(to, rbgobj_get_gobject(from));
 }
+
+/**********************************************************************/
 
 void Init_gobject_gobj()
 {
@@ -614,37 +488,15 @@ void Init_gobject_gobj()
     rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_s_gobject_new, 2);
     rb_define_method(rbgobj_cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(rbgobj_cGObject, "get_property", gobj_get_property, 1);
+    rb_define_alias(rbgobj_cGObject, "property", "get_property");
 
     rb_define_method(rbgobj_cGObject, "initialize", gobj_initialize, -1);
     rb_define_method(rbgobj_cGObject, "g_type", gobj_get_g_type, 0);
-
-    rb_define_method(rbgobj_cGObject, "signal_connect", gobj_sig_connect, -1);
-/*
-  rb_define_method(rbgobj_cGObject, "signal_connect_after",
-  gobj_sig_connect_after, -1);
-*/
-
-    rb_define_method(rbgobj_cGObject, "signal_emit",
-                     gobj_sig_emit, -1);
-    rb_define_method(rbgobj_cGObject, "signal_emit_by_name",
-                     gobj_sig_emit_by_name, -1);
-    rb_define_method(rbgobj_cGObject, "signal_emit_stop",
-                     gobj_sig_emit_stop, 1);
-    rb_define_method(rbgobj_cGObject, "signal_emit_stop_by_name",
-                     gobj_sig_emit_stop_by_name, 1);
-    rb_define_method(rbgobj_cGObject, "signal_handler_block",
-                     gobj_sig_handler_block, 1);
-    rb_define_method(rbgobj_cGObject, "signal_handler_unblock",
-                     gobj_sig_handler_unblock, 1);
-    rb_define_method(rbgobj_cGObject, "signal_disconnect",
-                     gobj_sig_handler_disconnect, 1);
-
-    rb_define_method(rbgobj_cGObject, "singleton_method_added", gobj_smethod_added, 1);
+    rb_define_method(rbgobj_cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
     rb_define_method(rbgobj_cGObject, "inspect", gobj_inspect, 0);
     rb_define_method(rbgobj_cGObject, "clone", gobj_clone, 0);
 
-    /* for debugging */
-    rb_define_method(rbgobj_cGObject, "ref_count", gobj_ref_count, 0);
+    rb_define_method(rbgobj_cGObject, "singleton_method_added", gobj_smethod_added, 1);
 }
 
 /**********************************************************************/
@@ -663,4 +515,9 @@ void Init_gobject()
     Init_gobject_gparam();
 
     Init_gobject_gobj();
+    Init_gobject_gsignal();
+
+    Init_gobject_gtypemodule();
+    Init_gobject_gboxed();
+    Init_gobject_genums();
 }
