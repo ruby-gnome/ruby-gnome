@@ -1,3 +1,8 @@
+2003-09-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb: append "-I$(sitearchdir)" to $CPPFLAGS not
+	$CFLAGS. and stop overriding create_makefile().
+
 2003-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (gobj_s_signal_new): use #instance_method,

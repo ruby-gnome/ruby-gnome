@@ -137,11 +137,7 @@ def set_output_lib(filename)
   end
 end
 
-alias :old_create_makefile :create_makefile
-def create_makefile(lib, src_prefix = nil)
-  $CFLAGS << " -I$(sitearchdir) "
-  old_create_makefile(lib, src_prefix)
-end
+$CPPFLAGS << " -I$(sitearchdir) "
 
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
