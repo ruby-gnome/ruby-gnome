@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:31:23 $
+  $Date: 2002/09/30 14:53:08 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -41,4 +41,5 @@ void Init_glib2()
 
     Init_utils_int64();
     Init_gobject();
+    Init_gutil();
 }

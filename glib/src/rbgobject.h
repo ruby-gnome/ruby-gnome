@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:48:20 $
+  $Date: 2002/09/30 14:53:08 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -16,6 +16,7 @@
 #include <glib-object.h>
 #include "ruby.h"
 #include "rbglib.h"
+#include "rbgutil.h"
 
 #ifdef __cplusplus
 extern "C" {
