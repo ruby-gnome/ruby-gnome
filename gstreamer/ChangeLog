@@ -1,3 +1,7 @@
+2003-08-09  Hiroshi Igarashi  <iga@ruby-lang.org>
+
+	* src/rbgst.c: Fixed a compilation bug with old 2.x GCC.
+
 2003-08-09  Laurent Sansonetti  <laurent@datarescue.be>
 
 	* sample/media-type2.rb: New file (thanks to Nikolai Weibull).
