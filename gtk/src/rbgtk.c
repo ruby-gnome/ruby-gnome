@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2002/08/29 13:07:00 $
+  $Author: sakai $
+  $Date: 2002/08/30 18:24:46 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -86,7 +86,7 @@ exec_callback(widget, proc)
 
 /* We can't use rbgtk_poll() on native Win32.
    Because GPollFD doesn't have file descriptor but HANDLE. */
-#ifdef NATIVE_WIN32
+#ifdef G_OS_WIN32
 # undef USE_POLL_FUNC
 #endif
 

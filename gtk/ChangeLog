@@ -1,3 +1,11 @@
+2002-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgtk.c: abolish NATIVE_WIN32, use G_OS_WIN32 instead
+	* src/rbgtk.h: include appropriate header file for GDK_ROOT_WINDOW
+	when gdk target is linux-fb or directfb
+	* rbgdkwindow.c: don't define Gdk::Window.root_window if
+	GDK_ROOT_WINDOW isn't defined.
+
 2002-08-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmenubar.c: Remove Gtk::MenuBar#set_shadow_type

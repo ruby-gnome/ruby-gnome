@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Author: sakai $
+  $Date: 2002/08/30 18:24:46 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -98,12 +98,14 @@ gdkwin_foreign_new(self, anid)
     return GOBJ2RVAL(window);
 }
 
+#ifdef GDK_ROOT_WINDOW
 static VALUE
 gdkwin_root_window(self)
     VALUE self;
 {
     return INT2NUM(GDK_ROOT_WINDOW());
 }
+#endif
 
 static VALUE
 gdkwin_clear(self)
@@ -645,7 +647,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "keyboard_grab", gdkwin_keyboard_grab, 2);
     rb_define_method(gdkWindow, "keyboard_ungrab", gdkwin_keyboard_ungrab, 1);
     rb_define_singleton_method(gdkWindow, "foreign_new", gdkwin_foreign_new, 1);
+#ifdef GDK_ROOT_WINDOW
     rb_define_singleton_method(gdkWindow, "root_window", gdkwin_root_window, 0);
+#endif
     rb_define_method(gdkWindow, "clear", gdkwin_clear, 0);
     rb_define_method(gdkWindow, "clear_area", gdkwin_clear_area, 4);
     rb_define_method(gdkWindow, "clear_area_e", gdkwin_clear_area_e, 4);

@@ -58,7 +58,7 @@ begin
 
   lib_ary = []
   if /cygwin|mingw/ =~ PLATFORM
-    $CFLAGS += " -fnative-struct -DNATIVE_WIN32" unless gdkx
+    $CFLAGS += " -fnative-struct" unless gdkx
   elsif /mswin32/ !~ PLATFORM
     lib_ary = [# ["X11", "XOpenDisplay"],
                # ["Xext", "XShmQueryVersion"],
