@@ -4,9 +4,10 @@
   rbgtktreepath.c -
 
   $Author: mutoh $
-  $Date: 2004/02/11 17:22:12 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
 #include "global.h"

@@ -1,9 +1,29 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.h: Synchronize version number to Ruby/GLib.
+	* src/init.c: Code cleanup.
+	* sample/misc/label.rb, sample/misc/toolbar.rb,
+          sample/testgtk/notebook.rb, src/init.c, src/rbgdkdisplay.c,
+          src/rbgdkdraw.c, src/rbgdkevent.c, src/rbgdkkeymap.c,
+          src/rbgdkpixmap.c, src/rbgdkscreen.c, src/rbgdkselection.c,
+          src/rbgdkwindow.c, src/rbgtk.h, src/rbgtkallocation.c,
+          src/rbgtkcombo.c, src/rbgtkcontainer.c, src/rbgtkobject.c,
+          src/rbgtksettings.c, src/rbgtkspinbutton.c, src/rbgdkgc.c,
+          src/rbgtktextattributes.c, src/rbgtktextbuffer.c,
+          src/rbgtktreeiter.c, src/rbgtktreepath.c, src/rbgtktreeview.c,
+          src/rbgtktreeviewcolumn.c, src/rbgtkwidget.c: Update Copyright.
+	
+2004-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcontainer.c: Fix a memleaks for Gtk::Container#child_properties. 
+	* src/rbgdkevent.c: Removed Gdk::EventKey#string, #length.
+
 2004-03-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdkdraw.c, src/rbgdkgc.c, src/rbgdkpixmap.c, src/rbgdkwindow.c:
 	Fix #elif conditions.
 
-2004-03-03    <mutoh@localhost.localdomain>
+2004-03-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkselection.c, rbgtkwidget.c: Fix warnings for GTK+-2.0.x. 
 
@@ -52,7 +72,6 @@
 	Add Gdk::Window#set_skip_taskbar_hint, #set_skip_pager_hint.
 	Gdk::Window#pointer returns nil when the window contains the pointer isn't 
 	known to GDK.
-	(Init_gtk_gdk_window): 
 
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 

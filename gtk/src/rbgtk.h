@@ -4,9 +4,9 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2004/03/01 15:04:46 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -22,9 +22,9 @@
 
 #include <signal.h>
 
-#define RBGTK_MAJOR_VERSION 0
-#define RBGTK_MINOR_VERSION 9
-#define RBGTK_MICRO_VERSION 0
+#define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 #define RubyGtkContainerHookModule "RubyGtkContainerHook__"
 

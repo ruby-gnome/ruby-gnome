@@ -4,9 +4,9 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2004/02/26 18:07:42 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -362,8 +362,6 @@ ATTR_BOOL(any, send_event);
 ATTR_UINT(key, time);
 ATTR_FLAGS(key, state, GDK_TYPE_MODIFIER_TYPE);
 ATTR_INT(key, keyval);
-ATTR_INT(key, length);
-ATTR_STR(key, string);
 ATTR_UINT(key, hardware_keycode);
 ATTR_UINT(key, group);
 
@@ -669,8 +667,6 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, key, time);
     DEFINE_ACCESSOR(ev, key, state);
     DEFINE_ACCESSOR(ev, key, keyval);
-    DEFINE_ACCESSOR(ev, key, length);
-    DEFINE_ACCESSOR(ev, key, string);
     DEFINE_ACCESSOR(ev, key, hardware_keycode);
     DEFINE_ACCESSOR(ev, key, group);
     G_DEF_SETTERS(ev);

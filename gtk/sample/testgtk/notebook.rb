@@ -2,9 +2,9 @@
 
   notebook.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 
-  $Id: notebook.rb,v 1.9 2004/02/12 07:33:52 mutoh Exp $
+  $Id: notebook.rb,v 1.10 2004/03/05 16:24:30 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 

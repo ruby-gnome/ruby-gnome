@@ -3,9 +3,10 @@
 
   rbgtkalignment.c -
 
-  $Author: sakai $
-  $Date: 2004/03/05 14:39:13 $
+  $Author: mutoh $
+  $Date: 2004/03/05 16:24:30 $
 
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
 ************************************************/

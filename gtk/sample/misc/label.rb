@@ -2,10 +2,10 @@
 =begin
   label.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003,2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: label.rb,v 1.4 2004/02/12 07:33:52 mutoh Exp $
+  $Id: label.rb,v 1.5 2004/03/05 16:24:30 mutoh Exp $
 =end
 
 require 'gtk2'

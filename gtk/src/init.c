@@ -4,9 +4,9 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2004/03/01 15:04:46 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -14,7 +14,6 @@
 
 #include "global.h"
 #include "gmodule.h"
-#include <locale.h>
 
 extern void Init_gtk_gdk();
 extern void Init_gtk_gtk();

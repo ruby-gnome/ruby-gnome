@@ -4,9 +4,9 @@
   rbgdkkeymap.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 #include "global.h"
 

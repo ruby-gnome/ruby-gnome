@@ -4,9 +4,9 @@
   rbgtkspinbutton.c -
 
   $Author: mutoh $
-  $Date: 2004/01/09 16:25:44 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi

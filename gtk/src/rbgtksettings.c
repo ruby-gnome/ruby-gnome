@@ -4,8 +4,9 @@
   rbgtksettings.c -
 
   $Author: mutoh $
-  $Date: 2004/01/31 18:50:30 $
+  $Date: 2004/03/05 16:24:30 $
 
+  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 

@@ -4,9 +4,9 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"

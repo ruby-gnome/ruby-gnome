@@ -4,9 +4,9 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2004/02/11 08:22:04 $
+  $Date: 2004/03/05 16:24:30 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -449,7 +449,7 @@ cont_s_child_properties(argc, argv, self)
             || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, rb_str_new2(props[i]->name));
     }
-
+    g_free(props);
     g_type_class_unref(oclass);
     return ary;
 }
