@@ -1,5 +1,7 @@
 2004-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkstock.c: Fix compilation error of GTK_STOCK_HARDDISK/NETWORK.
+	Reported by John Platte.
 	* src/rbgtkmessagedialog.c: Added Gtk::MessageDialog#set_markup for 2.4. 
 	* src/rbgtkbutton.c: Added Gtk::Button#set_alignment, #alignment for 2.4.
 	* src/rbgtkborder.c: Added.

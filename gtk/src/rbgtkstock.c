@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: mutoh $
-  $Date: 2004/05/20 16:57:59 $
+  $Date: 2004/05/24 17:44:58 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -120,7 +120,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "GO_DOWN", CSTR2SYM(GTK_STOCK_GO_DOWN));
     rb_define_const(mGtkStock, "GO_FORWARD", CSTR2SYM(GTK_STOCK_GO_FORWARD));
     rb_define_const(mGtkStock, "GO_UP", CSTR2SYM(GTK_STOCK_GO_UP));
+#if GTK_CHECK_VERSION(2,4,0)
     rb_define_const(mGtkStock, "HARDDISK", CSTR2SYM(GTK_STOCK_HARDDISK));
+#endif
     rb_define_const(mGtkStock, "HELP", CSTR2SYM(GTK_STOCK_HELP));
     rb_define_const(mGtkStock, "HOME", CSTR2SYM(GTK_STOCK_HOME));
 #if GTK_CHECK_VERSION(2,4,0)
@@ -134,7 +136,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
     rb_define_const(mGtkStock, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
     rb_define_const(mGtkStock, "MISSING_IMAGE", CSTR2SYM(GTK_STOCK_MISSING_IMAGE));
+#if GTK_CHECK_VERSION(2,4,0)
     rb_define_const(mGtkStock, "NETWORK", CSTR2SYM(GTK_STOCK_NETWORK));
+#endif
     rb_define_const(mGtkStock, "NEW", CSTR2SYM(GTK_STOCK_NEW));
     rb_define_const(mGtkStock, "NO", CSTR2SYM(GTK_STOCK_NO));
     rb_define_const(mGtkStock, "OK", CSTR2SYM(GTK_STOCK_OK));
