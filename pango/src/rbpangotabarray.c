@@ -4,7 +4,7 @@
   rbpangoarray.c -
 
   $Author: sakai $
-  $Date: 2003/08/15 13:02:59 $
+  $Date: 2003/08/21 01:12:49 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -115,5 +115,6 @@ Init_pango_array()
     G_DEF_SETTERS(pTabArray);
 
     /* PangoTabAlign */
+    G_DEF_CLASS(PANGO_TYPE_TAB_ALIGN, "TabAlign", pTabArray);
     G_DEF_CONSTANTS(pTabArray, PANGO_TYPE_TAB_ALIGN, "PANGO_");    
 }

@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: sakai $
-  $Date: 2003/08/15 13:02:59 $
+  $Date: 2003/08/21 01:12:49 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -375,6 +375,7 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_UNDERLINE, AttrUnderline, pattrint, 1);
     /* PangoUnderline */
+    G_DEF_CLASS(PANGO_TYPE_UNDERLINE, "Underline", tmpklass);
     G_DEF_CONSTANTS(tmpklass, PANGO_TYPE_UNDERLINE, "PANGO_UNDERLINE_");
 
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
@@ -394,21 +395,23 @@ Init_pango_attribute()
     rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
 
     /* PangoAttrType */
-    rb_define_const(pattr, "TYPE_INVALID", INT2FIX(PANGO_ATTR_INVALID));
-    rb_define_const(pattr, "TYPE_LANGUAGE", INT2FIX(PANGO_ATTR_LANGUAGE));
-    rb_define_const(pattr, "TYPE_FAMILY", INT2FIX(PANGO_ATTR_FAMILY));
-    rb_define_const(pattr, "TYPE_STYLE", INT2FIX(PANGO_ATTR_STYLE));
-    rb_define_const(pattr, "TYPE_WEIGHT", INT2FIX(PANGO_ATTR_WEIGHT));
-    rb_define_const(pattr, "TYPE_VARIANT", INT2FIX(PANGO_ATTR_VARIANT));
-    rb_define_const(pattr, "TYPE_STRETCH", INT2FIX(PANGO_ATTR_STRETCH));
-    rb_define_const(pattr, "TYPE_SIZE", INT2FIX(PANGO_ATTR_SIZE));
-    rb_define_const(pattr, "TYPE_FONT_DESC", INT2FIX(PANGO_ATTR_FONT_DESC));
-    rb_define_const(pattr, "TYPE_FOREGROUND", INT2FIX(PANGO_ATTR_FOREGROUND));
-    rb_define_const(pattr, "TYPE_BACKGROUND", INT2FIX(PANGO_ATTR_BACKGROUND));
-    rb_define_const(pattr, "TYPE_UNDERLINE", INT2FIX(PANGO_ATTR_UNDERLINE));
-    rb_define_const(pattr, "TYPE_STRIKETHROUGH", INT2FIX(PANGO_ATTR_STRIKETHROUGH));
-    rb_define_const(pattr, "TYPE_RISE", INT2FIX(PANGO_ATTR_RISE));
-    rb_define_const(pattr, "TYPE_SHAPE", INT2FIX(PANGO_ATTR_SHAPE));
-    rb_define_const(pattr, "TYPE_SCALE", INT2FIX(PANGO_ATTR_SCALE));
+    G_DEF_CLASS(PANGO_TYPE_ATTR_TYPE, "Type", pattr);
+#define INT2ATTRTYPE(x) rbgobj_make_enum((x), PANGO_TYPE_ATTR_TYPE)
+    rb_define_const(pattr, "TYPE_INVALID", INT2ATTRTYPE(PANGO_ATTR_INVALID));
+    rb_define_const(pattr, "TYPE_LANGUAGE", INT2ATTRTYPE(PANGO_ATTR_LANGUAGE));
+    rb_define_const(pattr, "TYPE_FAMILY", INT2ATTRTYPE(PANGO_ATTR_FAMILY));
+    rb_define_const(pattr, "TYPE_STYLE", INT2ATTRTYPE(PANGO_ATTR_STYLE));
+    rb_define_const(pattr, "TYPE_WEIGHT", INT2ATTRTYPE(PANGO_ATTR_WEIGHT));
+    rb_define_const(pattr, "TYPE_VARIANT", INT2ATTRTYPE(PANGO_ATTR_VARIANT));
+    rb_define_const(pattr, "TYPE_STRETCH", INT2ATTRTYPE(PANGO_ATTR_STRETCH));
+    rb_define_const(pattr, "TYPE_SIZE", INT2ATTRTYPE(PANGO_ATTR_SIZE));
+    rb_define_const(pattr, "TYPE_FONT_DESC", INT2ATTRTYPE(PANGO_ATTR_FONT_DESC));
+    rb_define_const(pattr, "TYPE_FOREGROUND", INT2ATTRTYPE(PANGO_ATTR_FOREGROUND));
+    rb_define_const(pattr, "TYPE_BACKGROUND", INT2ATTRTYPE(PANGO_ATTR_BACKGROUND));
+    rb_define_const(pattr, "TYPE_UNDERLINE", INT2ATTRTYPE(PANGO_ATTR_UNDERLINE));
+    rb_define_const(pattr, "TYPE_STRIKETHROUGH", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH));
+    rb_define_const(pattr, "TYPE_RISE", INT2ATTRTYPE(PANGO_ATTR_RISE));
+    rb_define_const(pattr, "TYPE_SHAPE", INT2ATTRTYPE(PANGO_ATTR_SHAPE));
+    rb_define_const(pattr, "TYPE_SCALE", INT2ATTRTYPE(PANGO_ATTR_SCALE));
 
 }

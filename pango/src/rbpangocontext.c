@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: sakai $
-  $Date: 2003/08/15 16:09:28 $
+  $Date: 2003/08/21 01:12:49 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -157,5 +157,6 @@ Init_pango_context()
     G_DEF_SETTERS(pContext);
 
     /* PangoDirection */
+    G_DEF_CLASS(PANGO_TYPE_DIRECTION, "Direction", pContext);
     G_DEF_CONSTANTS(pContext, PANGO_TYPE_DIRECTION, "PANGO_");
 }

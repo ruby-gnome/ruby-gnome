@@ -4,7 +4,7 @@
   rbpangofontdescription.c -
 
   $Author: sakai $
-  $Date: 2003/08/15 13:02:59 $
+  $Date: 2003/08/21 01:12:49 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -235,17 +235,22 @@ Init_pango_font_description()
     G_DEF_SETTERS(pFontDesc);
 
     /* PangoStyle */
+    G_DEF_CLASS(PANGO_TYPE_STYLE, "Style", pFontDesc);
     G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STYLE, "PANGO_");
 
     /* PangoWeight */
+    G_DEF_CLASS(PANGO_TYPE_WEIGHT, "Weight", pFontDesc);
     G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_WEIGHT, "PANGO_");
 
     /* PangoVariant */
+    G_DEF_CLASS(PANGO_TYPE_VARIANT, "Variant", pFontDesc);
     G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_VARIANT, "PANGO_");
 
     /* PangoStretch */
+    G_DEF_CLASS(PANGO_TYPE_STRETCH, "Stretch", pFontDesc);
     G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STRETCH, "PANGO_");
 
     /* PangoFontMask */
+    G_DEF_CLASS(PANGO_TYPE_FONT_MASK, "FontMask", pFontDesc);
     G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_FONT_MASK, "PANGO_");
 }
