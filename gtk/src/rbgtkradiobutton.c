@@ -3,8 +3,8 @@
 
   rbgtkradiobutton.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: geoff_youngs $
+  $Date: 2004/08/03 16:55:21 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -33,6 +33,8 @@ create_button(group, label, use_underline)
     } else if (TYPE(label) == T_SYMBOL){
         widget = gtk_radio_button_new_with_label_from_widget(_GROUP(group), rb_id2name(SYM2ID(label)));
         gtk_button_set_use_stock(GTK_BUTTON(widget), TRUE);
+    } else if (label == Qnil){
+        widget = gtk_radio_button_new_from_widget(_GROUP(group));
     } else {
         rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
                          rb_class2name(CLASS_OF(label)));
