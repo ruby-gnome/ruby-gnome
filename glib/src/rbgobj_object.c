@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/09/03 07:11:02 $
+  $Date: 2003/10/25 15:35:01 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -442,8 +442,9 @@ get_prop_func(GObject* object,
               GValue* value,
               GParamSpec* pspec)
 {
-    ID m = rb_intern("do_get_property");
-    VALUE ret = rb_funcall(GOBJ2RVAL(object), m, 1, GOBJ2RVAL(pspec));
+    const gchar* name = g_param_spec_get_name(pspec);
+    ID m = rb_intern(name);
+    VALUE ret = rb_funcall(GOBJ2RVAL(object), m, 0);
     rbgobj_rvalue_to_gvalue(ret, value);
 }
 
@@ -454,9 +455,11 @@ set_prop_func(GObject* object,
               const GValue* value,
               GParamSpec* pspec)
 {
-    ID m = rb_intern("do_set_property");
-    rb_funcall(GOBJ2RVAL(object), m, 2,
-               GVAL2RVAL(value), GOBJ2RVAL(pspec));
+    const gchar* name = g_param_spec_get_name(pspec);
+    gchar* mname = g_strconcat(name, "=", NULL);
+    ID m = rb_intern(mname);
+    g_free(mname);
+    rb_funcall(GOBJ2RVAL(object), m, 1, GVAL2RVAL(value));
 }
 
 // FIXME: use rb_protect

@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/10/24 06:44:31 $
+  $Date: 2003/10/25 15:35:01 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -87,7 +87,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     int i;
     guint sig;
 
-    rb_scan_args(argc, argv, "50", &signal_name, &signal_flags,
+    rb_scan_args(argc, argv, "4*", &signal_name, &signal_flags,
                  &accumulator, &return_type, &params);
 
     if (cinfo->klass != self)

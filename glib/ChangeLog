@@ -1,3 +1,11 @@
+2003-10-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (get_prop_func, set_prop_func): do not call
+	#do_get_property and #do_set_property, but #foo and #foo=.
+
+	* src/rbgobj_signal.c (gobj_s_signal_new): change the arity of
+	GLib::Instantiatable#signal_new.
+
 2003-10-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (emit_body, chain_from_overridden_body):
