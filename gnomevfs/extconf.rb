@@ -5,9 +5,12 @@ extconf.rb for Ruby/GConf extention library
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
-pkgname   = 'gnome-vfs-2.0'
+pkgnames   = ['gnome-vfs-2.0', 'gnome-vfs-module-2.0']
 
-PKGConfig.have_package(pkgname) or exit
+pkgnames.each do |pkgname|
+	PKGConfig.have_package(pkgname) or exit
+end
+
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
@@ -24,15 +27,6 @@ if /cygwin|mingw/ =~ RUBY_PLATFORM
     $LDFLAGS << " -L#{top}/#{d}"
   }
 end
-
-STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
-if Object.respond_to? :allocate
-  STDOUT.print "yes\n"
-  $defs << "-DHAVE_OBJECT_ALLOCATE"
-else
-  STDOUT.print "no\n"
-end
-
 
 srcdir = File.dirname($0) == "." ? "." :
   File.expand_path(File.dirname($0) + "/src")

@@ -533,19 +533,27 @@ Init_gnomevfs_file_info(m_gvfs)
 			 fileinfo_executable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "executable?",
 			 fileinfo_executable_real_p, 0);
-	rb_define_method(g_gvs_fileinfo, "readable_real??",
-			 fileinfo_executable_real_p, 0);
+	rb_define_method(g_gvs_fileinfo, "readable_real?",
+			 fileinfo_readable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "readable?",
-			 fileinfo_executable_real_p, 0);
+			 fileinfo_readable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "writable_real?",
-			 fileinfo_executable_real_p, 0);
+			 fileinfo_writable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "writable?",
-			 fileinfo_executable_real_p, 0);
+			 fileinfo_writable_real_p, 0);
 	rb_define_method(g_gvs_fileinfo, "grpowned?", fileinfo_grpowned_p, 0);
 	rb_define_method(g_gvs_fileinfo, "owned?", fileinfo_owned_p, 0);
 	rb_define_method(g_gvs_fileinfo, "permissions", fileinfo_permissions,
 			 0);
 	rb_define_method(g_gvs_fileinfo, "mode", fileinfo_permissions, 0);
+	rb_define_method(g_gvs_fileinfo, "set_name", fileinfo_set_name, 1);
+	rb_define_method(g_gvs_fileinfo, "set_permissions", fileinfo_set_permissions, 1);
+	rb_define_method(g_gvs_fileinfo, "set_mode", fileinfo_set_permissions, 1);
+	rb_define_method(g_gvs_fileinfo, "set_uid", fileinfo_set_uid, 1);
+	rb_define_method(g_gvs_fileinfo, "set_gid", fileinfo_set_gid, 1);
+	rb_define_method(g_gvs_fileinfo, "set_owner", fileinfo_set_owner, 2);
+	rb_define_method(g_gvs_fileinfo, "set_utime", fileinfo_utime, 2);
+        
 
 	/* XXX: this is renamed...bad, but their naming is worse */
 	rb_define_const(g_gvs_fileinfo,

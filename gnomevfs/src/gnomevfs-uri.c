@@ -426,6 +426,8 @@ Init_gnomevfs_uri(m_gvfs)
 	rb_define_method(g_gvfs_uri, "set_password", uri_set_password, 1);
 	rb_define_method(g_gvfs_uri, "==", uri_equal, 1);
 	rb_define_method(g_gvfs_uri, "parent?", uri_is_parent, 2);
+	rb_define_method(g_gvfs_uri, "path", uri_get_path, 0);
+	rb_define_method(g_gvfs_uri, "fragment_identifier", uri_get_fragment_identifier, 0);
 	rb_define_method(g_gvfs_uri, "extract_dirname", uri_extract_dirname,
 			 0);
 	rb_define_method(g_gvfs_uri, "extract_short_name",

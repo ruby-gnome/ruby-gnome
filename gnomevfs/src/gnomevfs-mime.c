@@ -419,7 +419,7 @@ Init_gnomevfs_mime(m_gvfs)
 	VALUE gvfs_mime = rb_define_module_under(m_gvfs, "Mime");
 
 	rb_define_module_function(gvfs_mime, "get_default_action_type",
-				  mime_get_default_application, 1);
+				  mime_get_default_action_type, 1);
 	rb_define_module_function(gvfs_mime, "get_default_application",
 				  mime_get_default_application, 1);
 	rb_define_module_function(gvfs_mime, "get_short_list_applications",

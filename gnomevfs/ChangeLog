@@ -1,3 +1,8 @@
+2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/gnomevfs-mime.c, gnomevfs-uri.c, gnomevfs-fileinfo.c: Fix warnings.
+	* extconf.rb: Call gnome-vfs-module-2.0.
+
 2003-08-07  Nikolai Weibull  <lone-star@home.se>
 
 	* src/gnomevfs-mime.c,src/gnomevfs-application-registry.c,
