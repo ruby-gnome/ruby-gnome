@@ -1,3 +1,8 @@
+2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): use --libs-only-l
+	and --libs-only-L instead of --libs.
+
 2003-08-02  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf-gnome2.rb: fix for other libraries can't compile

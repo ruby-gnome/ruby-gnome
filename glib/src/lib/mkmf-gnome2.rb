@@ -17,6 +17,16 @@ module PKGConfig
   end
   module_function :libs
 
+  def libs_only_L(pkg)
+    `#{@@cmd} --libs-only-L #{pkg}`.chomp
+  end
+  module_function :libs_only_L
+
+  def libs_only_l(pkg)
+    `#{@@cmd} --libs-only-l #{pkg}`.chomp
+  end
+  module_function :libs_only_l
+
   def cflags(pkg)
     `#{@@cmd} --cflags #{pkg}`.chomp
   end
@@ -32,7 +42,8 @@ module PKGConfig
     STDOUT.flush
     if exists? pkg
       STDOUT.print "yes\n"
-      $libs   += ' ' + libs(pkg)
+      $libs   += ' ' + libs_only_l(pkg)
+      $LDFLAGS += ' ' + libs_only_L(pkg)
       $CFLAGS += ' ' + cflags(pkg)
       true
     else
