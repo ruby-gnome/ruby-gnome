@@ -15,4 +15,9 @@ module Gdk
       loader
     end
   end
+  class Pixbuf
+    LOG_DOMAIN = "GdkPixbuf"
+  end
 end
+
+GLib::Log.set_log_domain(Gdk::Pixbuf::LOG_DOMAIN)
