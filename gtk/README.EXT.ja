@@ -1,0 +1,320 @@
+Ruby/GTKの実装と拡張に関するメモ
+
+* この文書について
+
+この文書では、Ruby/GTKに手を入れたり新しいウィジェット・シグナル
+を追加するために必要な事項を説明します。Rubyの拡張ライブラリの作
+り方やGTK+については既に理解しているものとします。
+
+関数等の仕様は今後変更される可能性があります
+
+* ソースファイルの説明
+
+* 初期化
+
+* クラス管理
+
+** 属性値
+
+クラス毎に保持する情報は次の通り。
+
+*** 値
+
+GtkType gtype
+VALUE klass
+
+*** C関数
+
+initialize
+mark
+free
+signal argument
+setter/getter
+
+** クラスの登録(register)
+
+void rbgtk_register_class(rbgtk_class_info *cinfo);
+
+    構造体cinfoに設定されたクラス情報を登録する。
+
+** クラスの検索(lookup)
+
+rbgtk_class_info *rbgtk_lookup_class(VALUE klass);
+
+    Rubyのクラスklassでクラス情報を検索する。
+
+rbgtk_class_info *rbgtk_lookup_class_by_gtype(GtkType gtype);
+
+    GTK+の型gtypeでクラス情報を検索する。
+
+* 参照管理
+
+Ruby/GTKが扱うオブジェクトは
+    * Cレベルでreference countによる参照管理がなされているもの
+	Gdk::Drawable(とそのサブクラス)
+        Gtk::Object(とそのサブクラス)
+    * Cレベルで参照管理がなされていないもの
+        Dataのサブクラス
+の2つに大別することができます。
+
+** 参照管理に関係する大域変数
+
+これらの変数はrb_global_variable()してあるので、ここに登録されて
+いるオブジェクトはGCされません。
+
+VALUE gdk_object_list;
+
+    GdkDrawable*からVALUEへの写像(Hashオブジェクト)
+
+st_table *gtk_object_list;
+
+    GtkObject*からVALUEへの写像
+
+
+** Ruby/GTKオブジェクトの生成・初期化・参照関係・破壊
+
+*** 生成
+
+VALUE make_gobject(VALUE klass, GtkObject *gtkobj);
+
+    クラスklassのオブジェクトを生成した後、set_gobjectにより初期
+    化する。
+
+void set_gobject(VALUE obj, GtkObject *gtkobj);
+
+    Gtk::Objectオブジェクトの初期化を行う。おおまかには以下の処
+    理を行う。
+
+        GtkObjectを参照するDataオブジェクトを作成
+	GtkObjectに(user_data経由で)Gtk::Objectを参照させる
+	Gtk::Objectのid_relativesをnilに初期化
+	Gtk::Objectに(gtkdata経由で)Dataオブジェクトを参照させる
+	destroy時にdelete_gobjectが呼ばれるように登録
+	gtk_object_listに登録
+
+void set_widget(VALUE obj, GtkWidget *widget);
+
+    get_gobjectのGtkWidget版。
+
+VALUE make_widget(VALUE klass, GtkWidget *widget);
+
+    make_gobjectのGtkWidget版。
+
+*** オブジェクト間の参照関係
+
+void add_relative(VALUE obj, VALUE relative);
+
+    オブジェクトobjからオブジェクトrelativeを参照させることによ
+    り、オブジェクトobjが生きている間はrelativeがGCされないようにする。
+
+*** 破壊
+
+void delete_gobject(GtkObject *gtkobj, VALUE obj);
+
+    destroyされたGtk::Objectをgtk_object_listから削除し、また
+    Gtk::Objectから(正確にはDataオブジェクトから)参照しないよう
+    にする。
+
+void clear_gobject(VALUE obj);
+
+    (objのインスタンス変数"relatives"にnilを代入して)objから他の
+    オブジェクトへの参照を削除する。GtkObjectをdestroyした後に呼
+    ばれる。
+
+** Ruby <=> C 間のデータ変換
+
+メソッドに渡されたRubyオブジェクトを対応するCポインタに変換した
+り、またメソッドから値を返すのにCポインタを対応するRubyオブジェ
+クトに変換するためには、この節で説明する変換関数を使用します。
+
+*** C => Ruby 変換
+
+VALUE make_gobject_auto_type(GtkObject *gtkobj);
+
+    gtkobjを表すRubyオブジェクトを適切なクラスのインスタンスとし
+    て新しく作成する。
+    
+VALUE get_value_from_gobject(GtkObject *obj);
+
+    GtkObject(のuser_data)からGtk::Objectを取り出す。対応する
+    Gtk::Object(のサブクラス)のインスタンスがまだ生成されていな
+    ければ、make_gobject_auto_typeにより生成した上で
+    gtk_object_listに登録する。
+
+*** Ruby => C 変換
+
+GtkObject *get_gobject(VALUE obj);
+
+    Gtk::Object(正確にはData)オブジェクトからGtkObject*を取り出
+    す。
+
+GtkObject *force_get_gobject(VALUE obj);
+
+    get_gobjectのwrapperで、objが変換できず例外が発生したときに
+    NULLを返す。
+
+GtkWidget *get_widget(VALUE obj obj);
+
+    get_gobjectのGtkWidget版。
+
+GtkWidget *force_get_widget(VALUE obj);
+
+    force_get_gobjectのGtkWidget版。
+
+
+(以下未説明)
+VALUE get_gtk_type(GtkObject *gtkobj);
+
+    ポインタgtkobjの指すデータのクラスを調べ、対応するRubyのクラ
+    スオブジェクトとして返す。
+
+* API定義の方針
+
+ここでは、メソッドの名前や引数、定数の名前など、
+Ruby/GTKのAPIを定義する方針について説明する。
+
+** 現状(旧CHANGELOG.jaより抜粋)
+
+  ・method名の変更
+    Gtkで(マクロまで含めて)定義されていない getter,setterメソッドは
+  それぞれ attr, attr= 形式に統一。ただし、真偽値を返す getter の場
+  合は、Gtk に関数が定義されていても ruby 側ではメソッド名に `?' を
+  付けることにする。
+
+     => 推奨(元のメソッドも使用はできる)
+     => 変更(元のメソッドは廃止)
+
+    ・Gtk::Widget#set_allocation -> allocation= # Gtkで定義されていない
+    ・Gtk::Widget#set_requision -> requisition= # Gtkで定義されていない
+
+    ・Gtk::Widget#ancestor? -> is_ancestor?     # Gtkで定義されている
+    ・Gtk::Widget#child? -> is_child?           # Gtkで定義されている
+
+	
+     setter である border_width は Gtk にある。しかし getter はない。
+   よって、原則では border_width という名前で getter, setter の両方
+   が定義されるべきだが、分かりにくいので border_width= も定義して
+   おいた(一応 border_width も setter になる)。
+    ・Gtk::Container#border_width(w) => border_width=(w)
+    ・Gtk::Container#get_border_width -> border_width()
+
+     Gtk::Adjustment では set_value(v) だけが Gtk で定義されている。
+   原則では set_value(v) と value() というメソッドができることにな
+   るが、非対称で嫌なので、set_value(v) と value=(v) を設けておいた。
+    ・Gtk::Adjustment#set_value(w) => value=(w)
+    ・Gtk::Adjustment#get_value() ->  value()
+
+    ・Gtk::ToggleButton#active => active?
+
+     Gtk::DrawingArea には requisition をセットする size(w,h) 関数が定
+   義されている。まぎらわしいので size= を定義したいところだが、ruby/gtk
+   では同様の動作をする Gtk::Widget に requisition=(w,h) があるので、そ
+   れを利用するのがよい。
+     Gtk::DrawingArea#size(w,h) => requisition=(w,h)
+
+
+     Gtk::OptionMenu では 別の Menu widget を保持している。この menu を
+   得る Gtk関数は用意されていないので、原則通りに menu というメソッドで
+   実装する。従来あった get_menu のメソッド名は廃止。
+     Gtk::OptionMenu#get_menu() => menu()
+
+     Gtk::Style には fg[] など、state番号をインデックスにした配列をメン
+   バとして持っている。Gtk でのアクセスメソッドは定義されていない。
+     ruby では `fg[]' といったメソッド名は定義できないので、インデックス
+   を引数にとる fg(idx) というメソッドにすることになる。同様に、setterは
+   fg=(idx, value) となる。しかし、前者はともかく後者はとても気持ち悪い。
+   よって、この場合は例外的に set_fg(idx, value) とすることにする。
+     同じく Style のメンバに font がある。これは配列ではないが、対称性の
+   ために set_font(f) 形式を採用しておく。
+
+     従来は Gdk::Font のインスタンス生成には Gdk::Font::load_font と同じ
+   く Gdk::Font::load_fontset を提供していた。これは Gtk では
+   gdk_font_load という名前になっており、ruby でも Gdk::Font::font_load
+   とするのが原則に従う。Font::font_ と続くのを嫌っていたのだが、この際
+   戻すことにする。
+     Gdk::Font::load_font -> Gdk::Font::font_load
+     Gdk::Font::load_fontset -> Gdk::Font::fontset_load
+
+** メソッド名
+
+*** 述語
+
+*** setter/getter
+
+** メソッドの引数
+
+*** 省略可能引数
+
+*** 文字列引数
+
+*** 配列引数
+
+* シグナルとイベント
+
+** シグナル処理
+
+Ruby/GTKはGTK+のシグナルのコールバックとしてRubyのブロック
+(Procオブジェクト)を登録できる。
+
+GTK+のシグナル登録関数gtk_signal_connectに直接Rubyのブロックを登
+録できないので、C関数signal_callbackを登録しておき、間接的にRuby
+ブロックを呼び出している。
+
+またGtk::Object#singleton_method_addedをoverrideすることにより
+(具体的にはC関数gobj_smethod_added)、特異メソッドを定義するだけ
+でこのメソッドが同名のシグナルのコールバックとして呼ばれるように
+している。
+
+void
+signal_callback(GtkWidget *widget, VALUE data, int nparams, GtkArg *params)
+
+    Gtk::Object#signal_connect内部で登録される関数。
+    data - 3要素のRuby配列[proc, id, args]
+        この配列の要素は次の通り。
+        proc - 呼び出すべきProcオブジェクト(Gtk::Object#signal_connectで
+               渡されたブロックパラメータ)。
+	id   - シグナルの(Ruby世界における)ID表現。
+	args - 任意個の引数(signal_connect(name, *args)のargs)。
+    nparams - シグナル固有の引数の個数
+    params  - シグナル固有の引数
+    
+static void
+signal_setup_args(VALUE obj, ID sig, int argc, GtkArg *params, VALUE args);
+
+    Ruby世界用にシグナル引数を用意する。
+
+static void
+signal_sync_args(VALUE obj, ID sig, int argc, GtkArg *params, VALUE args);
+
+    Ruby世界からGTK+世界へシグナル引数の更新を伝播させる。
+
+** シグナルの追加
+
+(未完)
+
+* スレッド管理
+
+* Ruby/GTKの拡張
+
+** Ruby/GTK本体を拡張する
+
+基本的にここまで説明したことを理解していれば、Ruby/GTK本体のソー
+スファイルに手を入れることにより拡張が可能です。ソースファイルを
+追加した場合は、extconf.rb中の該当箇所にもファイル名を追加するの
+を忘れないようにして下さい。
+
+** Ruby/GTKの外部で拡張する。
+
+Ruby/GTKの本体であるgtk拡張ライブラリには手を入れずに、gtk拡張ラ
+イブラリをrequireするような形式の新しい拡張ライブラリを作ること
+によってRuby/GTKを拡張することもできます(予定)。
+
+*author
+
+五十嵐  宏  (Hiroshi IGARASHI)
+e-mail: iga@ruby-lang.org
+
+*local variables
+;;; Local Variables: ***
+;;; mode:outline ***
+;;; End: ***

@@ -1,0 +1,44 @@
+gnome-ruby -- Ruby bindings for GNOME
+=====================================
+
+*The current status of gnome-ruby is experimental*
+
+This is a set of bindings for the GNOME libraries for use from Ruby.
+
+To use them, you will need Ruby 1.6 and gnome-libs 1.0.50 or
+later installed on your system.
+
+
+Compilation and Installation
+============================
+
+To compile and install gnome-ruby, you should run:
+
+  ruby extconf.rb
+  make
+  make site-install
+
+To compile and install each sub-binding, you should run:
+
+  cd <each sub-directory>
+  ruby extconf.rb
+  make
+  make site-install
+
+*NOTICE*
+You should install a sub-binding with its dependencies.
+The current dependencies are:
+
+  gdkimlib depends on gtk.
+  gdkpixbuf depends on gtk.
+  gnome depends on gtk, gdkimlib.
+
+
+Contacting the Author
+=====================
+
+You can contact me via email at <neilconway@rogers.com>; you
+can also visit the Ruby-GNOME website (http://ruby-gnome.sf.net),
+which has a facility for reporting bugs and submitting fixes.
+Finally, you can send a message to the ruby-talk mailing list,
+where I or other Ruby-GNOME users can help you.

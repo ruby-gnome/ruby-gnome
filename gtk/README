@@ -1,0 +1,124 @@
+  Ruby
+    Object-Oriented scripting language. Smart syntax.
+        http://www.ruby-lang.org
+
+  GTK+
+    Gimp ToolKit. Powerful toolkit written in C.
+        http://www.gtk.org/
+
+  Ruby/GTK (this distribution)
+    Ruby extension library to use GTK+.
+    This language binding was first developed by Yukihiro Matsumoto,
+    it is now maintained by me.
+        http://ruby-gnome.sf.net
+
+    If you have any questions or requests, use one of the following:
+
+    neilconway@rogers.com         The current Ruby-GNOME maintainer
+    http://ruby-gnome.sf.net    The website contains a bug tracker and
+                                patch manager
+    ruby-talk@netlab.co.jp      English Mailing List. Not Ruby-GNOME
+                                specific, but there are other Ruby-GNOME
+                                users subscribed
+
+
+  Install
+
+    0. install ruby-1.6.x and GTK+-1.2.x
+
+    1. extract archive file.
+       $ gzip -dc ruby-gtk-x.xx.tar.gz | tar xf -
+
+    2. change directory to which you made last time.
+       $ cd gtk-x.xx
+
+    3. create Makefile
+       $ ruby extconf.rb
+       If gtk-config is installed with other name (ex. gtk12-config), 
+       $ ruby extconf.rb <other name>
+
+    4. make.
+       $ make
+
+    5. test sample scripts.
+       $ ruby -Isrc sample/*.rb
+       $ cd sample/testgtk; ruby -I../../src testgtk.rb
+       $ cd doc; ruby -I../src rbbr.rb
+    
+    6. make install if all tests have been OK.
+       $ su
+       # make install
+
+
+  Documents
+
+    doc/rbbr.rb         Simple Class Browser (see Install.5)
+
+  Sample Scripts
+
+    sample/helloworld.rb
+    sample/calendar.rb  sample for Gtk::Calendar
+    sample/drawing.rb
+    sample/text.rb
+    sample/texthook.rb
+    sample/test/*.rb
+    sample/testgtk/     Ports of testgtk.c in GTK+ distributions
+    sample/testim.rb    sample for Gdk::IM
+
+
+  Related links
+
+    - Ruby/GTK (official)
+      you can get latest version of Ruby/GTK.
+      -> http://ruby-gnome.sf.net
+
+    - Programming by Ruby/Gtk
+      there are many documents for Ruby/Gtk.
+      -> http://ruby.freak.ne.jp/gtk/index.html
+
+    - you can also get valuable information from WWW about GTK+.
+
+
+  Copying
+
+    You can redistribute Ruby/GTK and/or modify it under the same term
+    of Ruby.  License of Ruby is included with Ruby distribution in
+    the file "README".
+
+    The graphics files, testgtkrc file, and the origination for
+    testgtk.rb are from the GTK+ distribution, and are under
+    this copyright:
+
+/* GTK - The GIMP Toolkit
+ * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+  With Ruby, enjoy free and exciting programing.
+
+---
+Maintainers:
+(up to ver. 0.18)
+  by Dai.K. <MAP2303@mapletown.net>
+  http://www.minato.net/~j2/
+(up ver. 0.25)
+  Hiroshi IGARASHI <iga@ruby-lang.org>
+  http://www.ruby-lang.org/~iga/
+(from ver. 0.26)
+  Neil Conway <neilconway@rogers.com>
+  http://ruby-gnome.sf.net

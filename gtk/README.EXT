@@ -1,0 +1,196 @@
+0. About this file
+
+This memo is for people who want to hack, create new widget signal,
+and improve Ruby/Gtk.  I assume that you are already familiar with how
+to write Ruby extension library and Gtk+.
+
+* note that Ruby/Gtk is still under the heavy development.  That is,
+* API might change in the future.
+
+1. Source Code
+
+2. Initialization
+
+3. Reference Management
+
+There are two big category of objects that Ruby/Gtk has to handle.
+    * Objects which can not be managed with reference count at C level.
+	Gdk::Drawable(and its subclasses)
+	Gtk::Object(and its subclasses) FIXME: this means all widgets?
+    * No reference management at all at C level.
+	subclasses of Data
+
+3.1 Global variables under the Reference Management
+
+following variables will never be GC'ed because of rb_global_variable().
+
+VALUE gdk_object_list;
+
+    copy(reference?) from GdkDrawable* to VALUE(Hash object) FIXME
+
+VALUE gtk_object_list;
+
+    copy(reference?) from GtkObject* to VALUE (Hash object)
+
+3.2 Creation, Initialization, Reference relation, and Destruction
+
+3.2.1 Creation
+
+VALUE make_gobject(VALUE klass, GtkObject *gtkobj);
+
+    After creating class klass's object, call set_gobject to initialize.
+    FIXME: is this class klass or klass class?
+
+void set_gobject(VALUE obj, GtkObject *gtkobj);
+
+    The function initialize instance of Gtk::Object.
+
+	- Create Data object which has a reference an instance of GtkObject.
+	- Make GtkObject refer to, via user_data, Gtk::Object  FIXME: self reference?
+	- Initialize id_relatives of Gtk::Object with nil.
+	- Make Gtk::Object refer to, via gtkdata, Data object.
+	- Register delete_gobject to be called for destroy.
+	- Add it to gtk_object_list
+
+void set_widget(VALUE obj, GtkWidget *widget);
+
+    GtkWidget version of get_object.
+
+VALUE make_widget(VALUE klass, GtkWidget *widget);
+
+    GtkWidget version of make_gobject.
+
+3.2.2 Relationship among Objects
+
+void add_relative(VALUE obj, VALUE relative);
+
+    In order to make the object 'obj' be alive, it adds a reference of
+    object 'relative' to the object 'obj'.  GC does not collect the
+    object 'obj'
+
+3.2.3  Destruction
+
+void delete_gobject(GtkObject *gtkobj, VALUE obj);
+
+    The function removes destroyed Gtk::Object from gtk_object_list.
+    It also removes a reference from Gtk::Object.(actually from
+    object Data)
+
+void clear_gobject(VALUE obj);
+
+    The function removes all references of other objects from object
+    'obj'.  It is called after GtkObject is destroyed.
+
+3.3 Data passing between C and Ruby
+
+These functions are used for converting Ruby object, which is passed
+to method, to appropriate C data, or vice versa.
+
+3.3.1 C to Ruby
+
+VALUE make_gobject_auto_type(GtkObject *gtkobj);
+
+    Create a Ruby object, as an instance of appropriate class, from
+    'gtkobj'
+
+VALUE get_value_from_gobject(GtkObject *obj);
+
+    Extract Gtk::Object from (user_data of) GtkObject.  If its
+    instance is not created, that is user_data is NULL, its instance
+    is created with function make_gobject_auto_type, and registered to
+    gtk_object_list.
+
+3.3.2 Ruby to C
+
+GtkObject *get_gobject(VALUE obj);
+
+    Extract GtkObject* from Gtk::Object (or Data, to be accurate)
+
+GtkObject *force_get_gobject(VALUE obj);
+
+    This is a wrapper function of get_gobject.  It returns NULL if it
+    can't convert 'obj' to GtkObject*
+
+GtkWidget *get_widget(VALUE obj); FIXME .ja version has typo
+
+    GtkWidget version of get_gobject
+
+GtkWidget *force_get_widget(VALUE obj);
+
+    GtkWidget version of force_get_gobject
+
+(To be completed) FIXME: ?
+VALUE get_gtk_type(GtkObject *gtkobj);
+
+    Check pointer 'gtkobj' and returns corresponding Ruby class object
+
+4. Method Naming Convention
+
+4.0 Current State(from old CHANGELOG.jp)
+
+    - change of method name:
+      All getter and setter method which is NOT defined under Gtk+
+      will be form of attr, and attr=.  However, methods which return
+      true/false will have '?' at the end of its name. eg. attr?
+
+	-> recommended(original name can be used)
+	-> changed(original name will be disused) FIXME: -> or =>?
+
+	- Gtk::Widget#set_allocation - > allocation=  # not defined under Gtk+
+	- Gtk::Widget#set_requisition - > requisition=  # not defined under Gtk+
+
+	- Gtk::Widget#ancestor? -> is_ancestor?       # defined under Gtk+
+	- Gtk::Widget#child? -> is_child?             # defined under Gtk+
+
+      The setter function border_width is defined under Gtk+, but Gtk+
+      does not have corresponding setter function, so that with the
+      general rule those two functions should have defined under the
+      same name.  However, because of this ambiguity, we also defined
+      border_width=.  Note that border_width can be used as either
+      setter or getter.
+
+	- Gtk::Container#border_width(w) => border_width=(w)
+	- Gtk::Container#get_border-width -> border_width()
+
+      Only set_value(v) is defined under Gtk::Adjustment.  This
+      implies that we have set_value(v) and value() methods.  However,
+      I do not like this un-symmetrical name. so the functions are
+      defined:
+
+	- Gtk::Adjustment#set_value(w) => value=(w)
+	- Gtk::Adjustment#get_value() -> value()
+
+	- Gtk::toggleButton#active => active?
+
+      Gtk::DrawingArea has a function, which sets requisition,
+      size(w,h).  It might be a good idea to define a method size=,
+      but Ruby/Gtk already has requisition=(w,h) under Gtk::Widget,
+      which does the same thing, so use that instead.
+
+	- Gtk::DrawingArea#size(w,h) = > requisition=(w,h)
+
+      Gtk::OptionMenu holds other widget, such as Gtk::Menu, but Gtk+
+      doesn't have any method to extract holding widget.  So, we
+      define a method menu.  Method 'get_menu' is disused.
+
+	Gtk::OptionMenu#get_menu() => menu()
+
+      Gtk::Style has a member which has indexed state number, such as
+      fg[].  There is no access method for those members under Gtk.
+      Under the Ruby, there is no way to define method like 'fg[]'.
+      We define a method which takes index as an argument; fg(idx).
+      Same thing applies to setter method, and we would define
+      fg=(idx,value).  but we define set_fg(idx, value), instead.
+      Style also has a member called font.  This is not an array
+      member but, for consistency, we define set_font(f). FIXME:
+
+      We used to use Gdk::Font::load_font to create an instance of
+      Gdk::Font.  Even though, under Gtk+, the name of the function is
+      'gdk_font_load', we did not like to have 'font' repeated in the
+      name.
+
+	- Gdk::Font::load_font -> Gdk::Font::font_load
+	- Gdk::Font::load_font_set -> Gdk::Font::fontset_load
+
+	FIXME: how about Gdk::Font and Gdk::Fontset
+	e.g. Gdk::Font::load, Gdk::Fontset::load

@@ -1,0 +1,12 @@
+
+- slow thread change
+    It's is performed on Gtk+ timeout method to change ruby threads. Its
+    interval time, 100ms, is too long to change threads.
+    But if you set it to 1ms, then Gtk+ event handler is too late...
+
+- Gtk::OptionMenu#children does't return correct object.
+    If you call Gtk::OptionMenu#children before calling Gtk::OptionMenu#child,
+    correspoding object to Gtk::OptionMenu's child is not created yet,
+    and so Gtk::OptionMenu#children does't return child widget.
+
+- memory management for GDK object is imperfect.
