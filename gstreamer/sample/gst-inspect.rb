@@ -7,20 +7,16 @@
 
 #  Currently, the following points are still missing from the output:
 #    - GstElement custom functions 
-#    -   ''       event masks
 #    -   ''       dynamic parameters 
-#    -   ''       signals/actions [1]
-#
-#  [1]: will be fixed when Gst::Object will inherits from GLib::Object.
 
 require 'gst'
 
 $prefix = 0
 def prefix; $prefix += 1; yield; $prefix -= 1; end
 
-def puts(s)
-    print " " * $prefix * 4 
-    super s
+def puts(o)
+   print " " * ($prefix * 4) 
+   super o 
 end
 
 def print_hierarchy(e)
@@ -53,11 +49,42 @@ def print_caps(c)
 end
 
 def print_format(f)
-    puts "(#{f.id}) :".ljust(10) + f.nick + " (#{f.description})" 
+    puts "(#{f.type_id}) :".ljust(10) + f.nick + " (#{f.description})" 
+end
+
+def get_consts(klass)
+    res = {}
+    klass.constants.each do |x|
+        res[eval(klass.name + "::" + x)] = x
+    end
+    res
+end
+
+def print_event_mask(m)
+    event_name = get_consts(Gst::Event)[m.type_id].downcase
+    flags = case m.type_id
+    when Gst::Event::SEEK
+        get_consts(Gst::EventSeek)
+    when Gst::Event::SEEK_SEGMENT
+        get_consts(Gst::EventSegmentSeek)
+    when Gst::Event::SIZE
+        get_consts(Gst::EventSize)
+    else
+        {}
+    end
+    flags.delete_if do |flag, name| 
+        Gst::Event.constants.include?(flag)
+    end
+    s = event_name
+    m.type_flags.each do |flag|
+        flag_name = flags.has_key?(flag) ? flags[flag].downcase : flag.to_s 
+		s += " | " + flag_name
+    end
+    puts s
 end
 
 def print_query(q)
-    puts "(#{q.id}) :".ljust(10) + q.nick + " (#{q.description})" 
+    puts "(#{q.type_id}) :".ljust(10) + q.nick + " (#{q.description})" 
 end
 
 def print_pad(p)
@@ -76,12 +103,12 @@ def print_pad(p)
                 prefix { p.each_format { |f| print_format(f) } }
             end
         end
-#        if p.provides_event_masks?
-#            prefix do
-#                puts "Provides event masks:"
-#                prefix { p.each_event_mask { |e| print_event_mask(e) } }
-#            end
-#        end
+        if p.provides_event_masks?
+            prefix do
+                puts "Provides event masks:"
+                prefix { p.each_event_mask { |m| print_event_mask(m) } }
+            end
+        end
         if p.provides_query_types?
             prefix do
                 puts "Provides query types:"
@@ -155,10 +182,10 @@ def print_element_info(f)
     puts ""
     puts "Pads:"
     prefix do
-        if pads = e.pads
-            pads.each { |pad| print_pad(pad) }
-        else
+        if e.pads.empty?
             puts "none"
+        else
+            e.pads.each { |pad| print_pad(pad) }
         end   
     end    
     puts ""
@@ -167,6 +194,15 @@ def print_element_info(f)
         e.each_property do |key, descr, val|
             puts key.concat(":").ljust(15) + descr
             puts " ".ljust(15) + "#{val.class.to_s} (default: '#{val}')"
+        end
+    end
+    puts ""
+    puts "Signals:"
+    prefix do
+        if e.class.signals.empty?
+            puts "none"
+        else
+            e.class.signals.each { |x| puts x }
         end
     end
 end
