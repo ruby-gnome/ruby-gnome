@@ -1,5 +1,8 @@
 2003-10-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_enum.c (rbgobj_get_enum, rbgobj_get_flags): check if the
+	argument GType is subtype of GEnum or GFlags.
+
 	* src/rbgobj_signal.c: new method
 	GLib::Instantiatable#signal_has_handler_pending?.
 

@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: sakai $
-  $Date: 2003/08/31 05:39:57 $
+  $Date: 2003/10/22 16:38:23 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -187,11 +187,17 @@ rbgobj_make_enum(gint n, GType gtype)
 gint
 rbgobj_get_enum(VALUE obj, GType gtype)
 {
-    VALUE klass = GTYPE2CLASS(gtype);
+    VALUE klass;
+
+    if (!g_type_is_a(gtype, G_TYPE_ENUM))
+        rb_raise(rb_eTypeError, "%s is not a %s",
+                 g_type_name(gtype), g_type_name(G_TYPE_ENUM));
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
         obj = rbgobj_make_enum(NUM2INT(obj), gtype);
+
+    klass = GTYPE2CLASS(gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return enum_get_holder(obj)->value->value;
@@ -440,11 +446,17 @@ rbgobj_make_flags(guint n, GType gtype)
 guint
 rbgobj_get_flags(VALUE obj, GType gtype)
 {
-    VALUE klass = GTYPE2CLASS(gtype);
+    VALUE klass;
+
+    if (!g_type_is_a(gtype, G_TYPE_FLAGS))
+        rb_raise(rb_eTypeError, "%s is not a %s",
+                 g_type_name(gtype), g_type_name(G_TYPE_FLAGS));
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
         obj = rbgobj_make_flags(NUM2UINT(obj), gtype);
+
+    klass = GTYPE2CLASS(gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return flags_get_holder(obj)->value;
