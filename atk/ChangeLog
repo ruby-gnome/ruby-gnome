@@ -1,3 +1,8 @@
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbatk.h, rbatkobject.c: 
+	Fix compiling warning under atk-1.0.3.
+
 2004-10-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatktextrectangle.c, rbatktextrange.c: Added.
