@@ -5,7 +5,8 @@ Ruby-GNOME2 -- Ruby bindings for GNOME-2.0
 
    To use them, you will need Ruby-1.6 and glib-2.0.0, gtk+-2.0.0, pango-1.1.0,
    gconf2-1.2.0, libgnome-2.0.0, libart_lgpl-2.3.0, libgnomecanvas-2.0.0, 
-   libgnomeui-2.0.0, libglade-2.0.0 or later installed on your system. 
+   libgnomeui-2.0.0, libglade-2.0.0, gnome-vfs-2.2.3, gstreamer-0.6.2 or later
+   installed on your system. 
    Keep in mind that you will need both the runtime libraries and the header 
    files installed.
 
@@ -17,6 +18,10 @@ Release packages
     - Ruby/Pango
     - Ruby/GTK2
 
+   ruby-gstreamer
+    - Ruby/GLib2
+    - Ruby/GStreamer
+
    ruby-gnome2-all
     - ruby-gtk2
     - Ruby/GNOME2
@@ -24,6 +29,9 @@ Release packages
     - Ruby/Libart2
     - Ruby/Libglade2
     - Ruby/GConf2
+    - Ruby/GnomeVFS
+    - Ruby/GStreamer
+
 
 Install
 -------
@@ -54,6 +62,8 @@ Dependencies
       Ruby/GNOME       depends on Ruby/GnomeCanvas.
       Ruby/Libglade    depends on Ruby/GTK, Ruby/GNOME(optional).
       Ruby/GConf       depends on Ruby/GLib.
+      Ruby/GnomeVFS    depends on Ruby/GLib.
+      Ruby/GStreamer   depends on Ruby/GLib.
 
 Copying
 -------
