@@ -1,5 +1,10 @@
 2002-09-25  KUBO Takehiro  <kubo@jiubao.org>
 
+	* rbbonobo-dock-band.c, rbbonobo-dock-item.c, rbbonobo-dock-layout.c,
+	rbbonobo-dock.c: renamed from rbgnome-dock*.c.
+
+2002-09-25  KUBO Takehiro  <kubo@jiubao.org>
+
 	* rbgnome-animator.c, rbgnome-calculator.c, rbgnome-canvas-group.c,
 	rbgnome-canvas-item.c, rbgnome-canvas-util.c, rbgnome-canvas.c,
 	rbgnome-dentry-edit.c, rbgnome-desktop-entry.c, rbgnome-dock-band.c,
