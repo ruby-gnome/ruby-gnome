@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: bindings.rb,v 1.3 2003/12/21 08:22:19 mutoh Exp $
+  $Id: bindings.rb,v 1.4 2004/03/07 12:47:12 mutoh Exp $
 =end
 
 =begin
@@ -30,7 +30,7 @@ require 'gtk2'
 Gtk.init
 
 class Pager < Gtk::TextView
-  type_register("Pager")
+  type_register
   
   # widget's key binding can be defined like this
   binding_set.add_signal(Gdk::Keyval::GDK_space, 0,
