@@ -3,8 +3,8 @@
 
   rbgtkviewport.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,7 @@ vport_get_hadj(self)
 {
     GtkAdjustment *adj = gtk_viewport_get_hadjustment(GTK_VIEWPORT(get_widget(self)));
 
-    return make_gobject(gAdjustment, GTK_OBJECT(adj));
+    return GOBJ2RVAL(adj);
 }
 
 static VALUE
@@ -47,7 +47,7 @@ vport_get_vadj(self)
     GtkWidget *widget = get_widget(self);
     GtkAdjustment *adj = gtk_viewport_get_vadjustment(GTK_VIEWPORT(widget));
 
-    return make_gobject(gAdjustment, GTK_OBJECT(adj));
+    return GOBJ2RVAL(adj);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtkcolorsel.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -127,7 +127,7 @@ cdialog_get_colorsel(self)
 
     if (NIL_P(sel)) {
 	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->colorsel;
-	sel = make_widget(gColorSel, w);
+	sel = GOBJ2RVAL(w);
 	rb_iv_set(self, "colorsel", sel);
     }
 
@@ -142,7 +142,7 @@ cdialog_get_ok_button(self)
 
     if (NIL_P(b)) {
 	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->ok_button;
-	b = make_widget(gButton, w);
+	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "ok_button", b);
     }
 
@@ -158,7 +158,7 @@ cdialog_get_cancel_button(self)
     if (NIL_P(b)) {
 	GtkWidget *w
 	    = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->cancel_button;
-	b = make_widget(gButton, w);
+	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "cancel_button", b);
     }
 
@@ -174,7 +174,7 @@ cdialog_get_help_button(self)
     if (NIL_P(b)) {
 	GtkWidget *w
 	    = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->help_button;
-	b = make_widget(gButton, w);
+	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "help_button", b);
     }
 

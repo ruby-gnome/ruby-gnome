@@ -3,8 +3,8 @@
 
   rbgtkcombo.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -99,35 +99,35 @@ static VALUE
 combo_entry(self)
     VALUE self;
 {
-    return make_widget(gEntry, GTK_COMBO(get_widget(self))->entry);
+    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->entry);
 }
 
 static VALUE
 combo_button(self)
     VALUE self;
 {
-    return make_widget(gButton, GTK_COMBO(get_widget(self))->button);
+    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->button);
 }
 
 static VALUE
 combo_popup(self)
     VALUE self;
 {
-    return make_widget(gScrolledWin, GTK_COMBO(get_widget(self))->popup);
+    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->popup);
 }
 
 static VALUE
 combo_popwin(self)
     VALUE self;
 {
-    return make_widget(gWindow, GTK_COMBO(get_widget(self))->popwin);
+    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->popwin);
 }
 
 static VALUE
 combo_list(self)
     VALUE self;
 {
-    return make_widget(gList, GTK_COMBO(get_widget(self))->list);
+    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->list);
 }
 
 void Init_gtk_combo()

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: sakai $
-  $Date: 2002/06/20 13:46:36 $
+  $Date: 2002/06/21 18:30:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -218,11 +218,8 @@ extern VALUE get_value_from_gobject(GtkObject* obj);
 extern GtkObject* get_gobject(VALUE obj);
 extern void set_gobject(VALUE obj, GtkObject *gtkobj);
 extern GtkWidget* get_widget(VALUE obj);
-extern VALUE make_gobject(VALUE klass, GtkObject* gtkobj);
-extern VALUE make_widget(VALUE klass, GtkWidget* widget);
 
 extern VALUE get_gtk_type(GtkObject* gtkobj);
-extern VALUE make_gobject_auto_type(GtkObject* gtkobj);
 
 extern VALUE make_gstyle(GtkStyle* style);
 extern GtkStyle* get_gstyle(VALUE style);

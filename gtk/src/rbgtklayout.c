@@ -3,8 +3,8 @@
 
   rbgtklayout.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -63,7 +63,7 @@ layout_get_hadjustment(self)
 {
     GtkAdjustment* hadjustment;
     hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT(get_widget(self)));
-    return make_gobject(gAdjustment, GTK_OBJECT(hadjustment));
+    return GOBJ2RVAL(hadjustment);
 }
 
 static VALUE
@@ -72,7 +72,7 @@ layout_get_vadjustment(self)
 {
     GtkAdjustment* vadjustment;
     vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT(get_widget(self)));
-    return make_gobject(gAdjustment, GTK_OBJECT(vadjustment));
+    return GOBJ2RVAL(vadjustment);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -363,7 +363,7 @@ note_get_menu_label(self, child)
 {
     GtkWidget *label = gtk_notebook_get_menu_label(GTK_NOTEBOOK(get_widget(self)),
                                                    get_widget(child));
-    return make_gobject(gLabel, GTK_OBJECT(label));
+    return GOBJ2RVAL(label);
 }
 
 static VALUE
@@ -397,7 +397,7 @@ note_get_tab_label(self, child)
 {
     GtkWidget *label = gtk_notebook_get_tab_label(GTK_NOTEBOOK(get_widget(self)),
                                                   get_widget(child));
-    return make_gobject(gLabel, GTK_OBJECT(label));
+    return GOBJ2RVAL(G_OBJECT(label));
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,16 +47,10 @@ tbar_get_widget(widget, type)
         ret = Qnil;
 	break;
       case GTK_TOOLBAR_CHILD_BUTTON:
-	ret = make_widget(gButton, widget);
-	break;
       case GTK_TOOLBAR_CHILD_TOGGLEBUTTON:
-	ret = make_widget(gTButton, widget);
-	break;
       case GTK_TOOLBAR_CHILD_RADIOBUTTON:
-	ret = make_widget(gRButton, widget);
-	break;
       case GTK_TOOLBAR_CHILD_WIDGET:
-	ret = make_widget(gWidget, widget);
+	ret = GOBJ2RVAL(widget);
 	break;
     }
     return ret;
@@ -79,7 +73,7 @@ tbar_append_item(self, text, ttext, ptext, icon, func)
 				  NIL_P(icon)?NULL:get_widget(icon),
 				  GTK_SIGNAL_FUNC(exec_callback),
 				  (gpointer)func);
-    return ret ? make_widget(gWidget, ret) : Qnil;
+    return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
 static VALUE
@@ -99,7 +93,7 @@ tbar_prepend_item(self, text, ttext, ptext, icon, func)
 				   NIL_P(icon)?NULL:get_widget(icon),
 				   GTK_SIGNAL_FUNC(exec_callback),
 				   (gpointer)func);
-    return ret ? make_widget(gWidget, ret) : Qnil;
+    return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
 static VALUE
@@ -120,7 +114,7 @@ tbar_insert_item(self, text, ttext, ptext, icon, func, pos)
 				  GTK_SIGNAL_FUNC(exec_callback),
 				  (gpointer)func,
 				  NUM2INT(pos));
-    return ret ? make_widget(gWidget, ret) : Qnil;
+    return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
 static VALUE

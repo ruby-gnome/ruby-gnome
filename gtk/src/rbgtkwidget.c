@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -557,13 +557,7 @@ widget_parent(self)
     VALUE self;
 {
     GtkWidget *p = get_widget(self)->parent;
-    VALUE obj;
-
-    if (p == NULL) {
-        return Qnil;
-    }
-    obj = get_value_from_gobject((GtkObject *)p);
-    return obj? obj: make_gobject(gWidget, (GtkObject *)p);
+    return p ? GOBJ2RVAL(p) : Qnil;
 }
 
 static VALUE

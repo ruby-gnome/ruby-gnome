@@ -3,8 +3,8 @@
 
   rbgtkspinbutton.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,9 +48,8 @@ static VALUE
 sbtn_get_adjustment(self)
     VALUE self;
 {
-    return make_gobject(gAdjustment,
-			GTK_OBJECT(gtk_spin_button_get_adjustment(
-			    GTK_SPIN_BUTTON(get_widget(self)))));
+    return GOBJ2RVAL(gtk_spin_button_get_adjustment(
+                         GTK_SPIN_BUTTON(get_widget(self))));
 }
 static VALUE
 sbtn_digits(self)

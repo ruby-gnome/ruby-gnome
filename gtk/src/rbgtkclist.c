@@ -3,8 +3,8 @@
 
   rbgtkclist.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/28 15:19:24 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -612,7 +612,7 @@ clist_get_hadjustment(self)
     GtkAdjustment *tmp;
 
     tmp = gtk_clist_get_hadjustment(GTK_CLIST(get_widget(self)));
-    return make_gobject(gAdjustment, (GtkObject*)tmp);
+    return GOBJ2RVAL(tmp);
 }
 
 static VALUE
@@ -632,7 +632,7 @@ clist_get_vadjustment(self)
     GtkAdjustment *tmp;
 
     tmp = gtk_clist_get_vadjustment(GTK_CLIST(get_widget(self)));
-    return make_gobject(gAdjustment, (GtkObject*)tmp);
+    return GOBJ2RVAL(G_OBJECT(tmp));
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   global.c -
 
-  $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:30:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -146,7 +146,7 @@ arg_to_value(arg)
 #endif
 #ifdef GTK_TYPE_TOOLTIPS
 	else if (arg->type == GTK_TYPE_TOOLTIPS) {
-	  return make_gobject(gTooltips, GTK_OBJECT(GTK_VALUE_BOXED(*arg)));
+	  return GOBJ2RVAL(GTK_VALUE_BOXED(*arg));
 	}
 #endif
 	else if (arg->type == GTK_TYPE_CTREE_NODE) {

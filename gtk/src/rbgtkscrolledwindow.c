@@ -3,8 +3,8 @@
 
   rbgtkscrolledwindow.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -59,7 +59,7 @@ scwin_get_hadjustment(self)
     GtkAdjustment *adj =
 	gtk_scrolled_window_get_hadjustment(
 	    GTK_SCROLLED_WINDOW(get_widget(self)));
-    return make_gobject(gAdjustment, GTK_OBJECT(adj));
+    return GOBJ2RVAL(adj);
 }
 
 static VALUE
@@ -69,7 +69,7 @@ scwin_get_vadjustment(self)
     GtkAdjustment *adj =
 	gtk_scrolled_window_get_vadjustment(
 	    GTK_SCROLLED_WINDOW(get_widget(self)));
-    return make_gobject(gAdjustment, GTK_OBJECT(adj));
+    return GOBJ2RVAL(adj);
 }
 
 void Init_gtk_scrolled_window()

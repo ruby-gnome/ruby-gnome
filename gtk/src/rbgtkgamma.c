@@ -3,8 +3,8 @@
 
   rbgtkgamma.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,7 +32,7 @@ static VALUE
 gamma_curve(self)
     VALUE self;
 {
-    return make_gobject(gCurve, GTK_OBJECT(GTK_GAMMA_CURVE(get_widget(self))->curve));
+    return GOBJ2RVAL(GTK_GAMMA_CURVE(get_widget(self))->curve);
 }
 
 void Init_gtk_gamma_curve()

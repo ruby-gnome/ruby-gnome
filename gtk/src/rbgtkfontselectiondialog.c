@@ -68,7 +68,7 @@ fsd_get_font_selection(self)
     fs = rb_iv_get(self, "@__font_selection");
     if (NIL_P(fs)) {
         GtkWidget *w = GTK_FONT_SELECTION_DIALOG(get_widget(self))->fontsel;
-        fs = make_widget(gFontSelection, w);
+        fs = GOBJ2RVAL(w);
         rb_iv_set(self, "@__font_selection", fs);
     }
 

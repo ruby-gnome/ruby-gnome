@@ -3,8 +3,8 @@
 
   rbgtkrange.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: sakai $
+  $Date: 2002/06/21 18:31:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,7 +20,7 @@ range_get_adj(self)
     GtkWidget *widget = get_widget(self);
     GtkAdjustment *adj = gtk_range_get_adjustment(GTK_RANGE(widget));
 
-    return make_gobject(gAdjustment, GTK_OBJECT(adj));
+    return GOBJ2RVAL(adj);
 }
 
 static VALUE

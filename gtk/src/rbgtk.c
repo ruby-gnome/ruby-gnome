@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: sakai $
-  $Date: 2002/06/11 17:47:46 $
+  $Date: 2002/06/21 18:30:59 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -217,14 +217,6 @@ void remove_relative(obj, obj_ivar_id, hash_key)
     rbgobj_remove_relative(obj, obj_ivar_id, hash_key);
 }
 
-VALUE
-make_gobject(klass, gtkobj)
-    VALUE klass;
-    GtkObject *gtkobj;
-{
-    return rbgobj_make_gobject(klass, G_OBJECT(gtkobj));
-}
-
 void
 set_widget(obj, widget)
     VALUE obj;
@@ -234,25 +226,10 @@ set_widget(obj, widget)
 }
 
 VALUE
-make_widget(klass, widget)
-    VALUE klass;
-    GtkWidget *widget;
-{
-    return make_gobject(klass, GTK_OBJECT(widget));
-}
-
-VALUE
 get_gtk_type(gtkobj)
     GtkObject *gtkobj;
 {
     return rbgobj_lookup_rbclass(G_OBJECT(gtkobj));
-}
-
-VALUE
-make_gobject_auto_type(gtkobj)
-    GtkObject *gtkobj;
-{
-    return make_gobject(get_gtk_type(gtkobj), gtkobj);
 }
 
 VALUE
