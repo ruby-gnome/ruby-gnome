@@ -1,6 +1,7 @@
 2003-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgdkproperty.c: Add Gdk::Property (move from Gdk::Window).
+	* src/rbgdkproperty.c: Add a file. 
+	Move Gdk::Property from Gdk::Window.
 	Add Gdk::Property.text_proerty_to_text_list, 
 	.text_property_to_utf8_list, .string_to_compound_text,
 	.utf8_to_string_target, .utf8_to_compound_text.
