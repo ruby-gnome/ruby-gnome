@@ -1,3 +1,11 @@
+2004-06-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextiter.c: Added Gtk::TextIter# forward_visible_word_ends,
+	#backward_visible_word_starts, #forward_visible_word_end, 
+	#backword_visible_word_start, #forward_visible_cursor_position,
+	#backward_visible_cursor_position, #forward_visible_cursor_positions,
+	#backward_visible_cursor_positions.
+
 2004-06-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwindow.c: Added Gtk::Window#set_destroy_with_parent.
