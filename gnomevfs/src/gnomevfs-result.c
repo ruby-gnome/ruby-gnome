@@ -1,3 +1,4 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*****************************************************************************
  *
  * gnomevfs-result.c: GnomeVFSResult wrapper.
@@ -21,112 +22,85 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/03/05 16:00:03 $
+ * $Date: 2004/08/26 16:27:28 $
  *
  *****************************************************************************/
 
-/* Includes ******************************************************************/
-
 #include "gnomevfs.h"
 
-/* Defines *******************************************************************/
+GQuark
+gnome_vfs_error_quark(void)
+{
+  static GQuark quark = 0;
+  if (quark == 0)
+    quark = g_quark_from_static_string ("gnome-vfs-error-quark");
+  return quark;
+}
 
-/* Type Definitions **********************************************************/
-
-/* Function Declarations *****************************************************/
-
-/* Global Variables **********************************************************/
-
-static struct _GVFSToMy {
-	int gvfs_code;
-	char *rb_class_name;
-	VALUE rb_class;
-} s_gvfs_to_my[] = {
-	{ GNOME_VFS_ERROR_NOT_FOUND, "NotFoundError" },
-	{ GNOME_VFS_ERROR_GENERIC, "GenericError" },
-	{ GNOME_VFS_ERROR_INTERNAL, "InternalError" },
-	{ GNOME_VFS_ERROR_BAD_PARAMETERS, "BadParametersError" },
-	{ GNOME_VFS_ERROR_NOT_SUPPORTED, "NotSupportedError" },
-	{ GNOME_VFS_ERROR_IO, "IOError" },
-	{ GNOME_VFS_ERROR_CORRUPTED_DATA, "CorruptedDataError" },
-	{ GNOME_VFS_ERROR_WRONG_FORMAT, "WrongFormatError" },
-	{ GNOME_VFS_ERROR_BAD_FILE, "badFileError" },
-	{ GNOME_VFS_ERROR_TOO_BIG, "TooBigError" },
-	{ GNOME_VFS_ERROR_NO_SPACE, "NoSpaceError" },
-	{ GNOME_VFS_ERROR_READ_ONLY, "ReadOnlyError" },
-	{ GNOME_VFS_ERROR_INVALID_URI, "InvalidURIError" },
-	{ GNOME_VFS_ERROR_NOT_OPEN, "NotOpenError" },
-	{ GNOME_VFS_ERROR_INVALID_OPEN_MODE, "InvalidOpenModeError" },
-	{ GNOME_VFS_ERROR_ACCESS_DENIED, "AccessDeniedError" },
-	{ GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES, "TooManyOpenFilesError" },
-	{ GNOME_VFS_ERROR_EOF, "EOFError" },
-	{ GNOME_VFS_ERROR_NOT_A_DIRECTORY, "NotADirectoryError" },
-	{ GNOME_VFS_ERROR_IN_PROGRESS, "InProgressError" },
-	{ GNOME_VFS_ERROR_INTERRUPTED, "InterruptedError" },
-	{ GNOME_VFS_ERROR_FILE_EXISTS, "FileExistsError" },
-	{ GNOME_VFS_ERROR_LOOP, "LoopError" },
-	{ GNOME_VFS_ERROR_NOT_PERMITTED, "NotPermittedError" },
-	{ GNOME_VFS_ERROR_IS_DIRECTORY, "IsDirectoryError" },
-	{ GNOME_VFS_ERROR_NO_MEMORY, "NoMemoryError" },
-	{ GNOME_VFS_ERROR_HOST_NOT_FOUND, "HostNotFoundError" },
-	{ GNOME_VFS_ERROR_INVALID_HOST_NAME, "InvalidHostNameError" },
-	{ GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS, "HostHasNoAddressError" },
-	{ GNOME_VFS_ERROR_LOGIN_FAILED, "LoginFailedError" },
-	{ GNOME_VFS_ERROR_CANCELLED, "CancelledError" },
-	{ GNOME_VFS_ERROR_DIRECTORY_BUSY, "DirectoryBusyError" },
-	{ GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY, "DirectoryNotEmptyError" },
-	{ GNOME_VFS_ERROR_TOO_MANY_LINKS, "TooManyLinksError" },
-	{ GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM, "ReadOnlyFileSystemError" },
-	{ GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM, "NotSameFileSystemError" },
-	{ GNOME_VFS_ERROR_NAME_TOO_LONG, "NameTooLongError" },
-	{ GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE, "ServiceNotAvailableError" },
-	{ GNOME_VFS_ERROR_SERVICE_OBSOLETE, "ServiceObsoleteError" },
-#ifdef GNOME_VFS_ERROR_NO_MASTER_BROWSER
-	{ GNOME_VFS_ERROR_PROTOCOL_ERROR, "ProtocolError" },
-	{ GNOME_VFS_ERROR_NO_MASTER_BROWSER, "NoMasterBrowserError" }
-#else
-	{ GNOME_VFS_ERROR_PROTOCOL_ERROR, "ProtocolError" }
-#endif
-};
-
-/* Function Implementations **************************************************/
+#define GNOME_VFS_ERROR gnome_vfs_error_quark()
 
 VALUE
 gnomevfs_result_to_rval(result)
-	GnomeVFSResult result;
+    GnomeVFSResult result;
 {
-	int i, n;
-
-	if (result == GNOME_VFS_OK) {
-		return Qtrue;
-	} else {
-		for (i = 0, n = G_N_ELEMENTS(s_gvfs_to_my); i < n; i++) {
-			if (result == s_gvfs_to_my[i].gvfs_code) {
-				rb_raise(s_gvfs_to_my[i].rb_class,
-					"GnomeVFS Error: %s",
-					gnome_vfs_result_to_string(result));
-				return Qnil;
-			}
-		}
-		rb_raise(g_gvfs_error, "Unknown GnomeVFS Error (%d): %s",
-			 result, gnome_vfs_result_to_string(result));
-		return Qnil;
-	}
+    if (result == GNOME_VFS_OK) {
+        return Qtrue;
+    } else {
+        GError* error = g_error_new(GNOME_VFS_ERROR, result, 
+                                    gnome_vfs_result_to_string(result));
+        RAISE_GERROR(error);
+    }
+    return Qnil;
 }
 
 void
 Init_gnomevfs_result(m_gvfs)
-	VALUE m_gvfs;
+    VALUE m_gvfs;
 {
-	int i, n;
-
-	g_gvfs_error = rb_define_class_under(m_gvfs, "Error",
-					   rb_eStandardError);
-	for (i = 0, n = G_N_ELEMENTS(s_gvfs_to_my); i < n; i++) {
-		s_gvfs_to_my[i].rb_class = rb_define_class_under(m_gvfs,
-						s_gvfs_to_my[i].rb_class_name,
-						g_gvfs_error);
-	}
+    VALUE gerror = G_DEF_ERROR2(GNOME_VFS_ERROR, "Error", m_gvfs, rb_eRuntimeError);
+        
+    rb_define_const(gerror, "NOT_FOUND", INT2NUM(GNOME_VFS_ERROR_NOT_FOUND));
+    rb_define_const(gerror, "GENERIC", INT2NUM(GNOME_VFS_ERROR_GENERIC));
+    rb_define_const(gerror, "INTERNAL", INT2NUM(GNOME_VFS_ERROR_INTERNAL));
+    rb_define_const(gerror, "BAD_PARAMETERS", INT2NUM(GNOME_VFS_ERROR_BAD_PARAMETERS));
+    rb_define_const(gerror, "NOT_SUPPORTED", INT2NUM(GNOME_VFS_ERROR_NOT_SUPPORTED));
+    rb_define_const(gerror, "ERROR_IO", INT2NUM(GNOME_VFS_ERROR_IO));
+    rb_define_const(gerror, "CORRUPTED_DATA", INT2NUM(GNOME_VFS_ERROR_CORRUPTED_DATA));
+    rb_define_const(gerror, "WRONG_FORMAT", INT2NUM(GNOME_VFS_ERROR_WRONG_FORMAT));
+    rb_define_const(gerror, "BAD_FILE", INT2NUM(GNOME_VFS_ERROR_BAD_FILE));
+    rb_define_const(gerror, "TOO_BIG", INT2NUM(GNOME_VFS_ERROR_TOO_BIG));
+    rb_define_const(gerror, "NO_SPACE", INT2NUM(GNOME_VFS_ERROR_NO_SPACE));
+    rb_define_const(gerror, "READ_ONLY", INT2NUM(GNOME_VFS_ERROR_READ_ONLY));
+    rb_define_const(gerror, "INVALID_URI", INT2NUM(GNOME_VFS_ERROR_INVALID_URI));
+    rb_define_const(gerror, "NOT_OPEN", INT2NUM(GNOME_VFS_ERROR_NOT_OPEN));
+    rb_define_const(gerror, "INVALID_OPEN_MODE", INT2NUM(GNOME_VFS_ERROR_INVALID_OPEN_MODE));
+    rb_define_const(gerror, "ACCESS_DENIED", INT2NUM(GNOME_VFS_ERROR_ACCESS_DENIED));
+    rb_define_const(gerror, "TOO_MANY_OPEN_FILES", INT2NUM(GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES));
+    rb_define_const(gerror, "EOF", INT2NUM(GNOME_VFS_ERROR_EOF));
+    rb_define_const(gerror, "NOT_A_DIRECTORY", INT2NUM(GNOME_VFS_ERROR_NOT_A_DIRECTORY));
+    rb_define_const(gerror, "IN_PROGRESS", INT2NUM(GNOME_VFS_ERROR_IN_PROGRESS));
+    rb_define_const(gerror, "INTERRUPTED", INT2NUM(GNOME_VFS_ERROR_INTERRUPTED));
+    rb_define_const(gerror, "FILE_EXISTS", INT2NUM(GNOME_VFS_ERROR_FILE_EXISTS));
+    rb_define_const(gerror, "LOOP", INT2NUM(GNOME_VFS_ERROR_LOOP));
+    rb_define_const(gerror, "NOT_PERMITTED", INT2NUM(GNOME_VFS_ERROR_NOT_PERMITTED));
+    rb_define_const(gerror, "IS_DIRECTORY", INT2NUM(GNOME_VFS_ERROR_IS_DIRECTORY));
+    rb_define_const(gerror, "NO_MEMORY", INT2NUM(GNOME_VFS_ERROR_NO_MEMORY));
+    rb_define_const(gerror, "HOST_NOT_FOUND", INT2NUM(GNOME_VFS_ERROR_HOST_NOT_FOUND));
+    rb_define_const(gerror, "INVALID_HOST_NAME", INT2NUM(GNOME_VFS_ERROR_INVALID_HOST_NAME));
+    rb_define_const(gerror, "HOST_HAS_NO_ADDRESS", INT2NUM(GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS));
+    rb_define_const(gerror, "LOGIN_FAILED", INT2NUM(GNOME_VFS_ERROR_LOGIN_FAILED));
+    rb_define_const(gerror, "CANCELLED", INT2NUM(GNOME_VFS_ERROR_CANCELLED));
+    rb_define_const(gerror, "DIRECTORY_BUSY", INT2NUM(GNOME_VFS_ERROR_DIRECTORY_BUSY));
+    rb_define_const(gerror, "DIRECTORY_NOT_EMPTY", INT2NUM(GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY));
+    rb_define_const(gerror, "TOO_MANY_LINKS", INT2NUM(GNOME_VFS_ERROR_TOO_MANY_LINKS));
+    rb_define_const(gerror, "READ_ONLY_FILE_SYSTEM", INT2NUM(GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM));
+    rb_define_const(gerror, "NOT_SAME_FILE_SYSTEM", INT2NUM(GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM));
+    rb_define_const(gerror, "NAME_TOO_LONG", INT2NUM(GNOME_VFS_ERROR_NAME_TOO_LONG));
+    rb_define_const(gerror, "SERVICE_NOT_AVAILABLE", INT2NUM(GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE));
+    rb_define_const(gerror, "SERVICE_OBSOLETE", INT2NUM(GNOME_VFS_ERROR_SERVICE_OBSOLETE));
+    rb_define_const(gerror, "PROTOCOL_ERROR", INT2NUM(GNOME_VFS_ERROR_PROTOCOL_ERROR));
+#ifdef GNOME_VFS_ERROR_NO_MASTER_BROWSER
+    rb_define_const(gerror, "NO_MASTER_BROWSER", INT2NUM(GNOME_VFS_ERROR_NO_MASTER_BROWSER));
+#endif
 }
 
-/* vim: set sts=0 sw=8 ts=8: *************************************************/

@@ -1,3 +1,7 @@
+2004-08-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/gnomevfs-result.c: Improve error handling. 
+
 2004-05-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* tests/*.rb: Improve to work anywhere on UNIX environment.
