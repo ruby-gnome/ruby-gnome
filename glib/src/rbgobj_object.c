@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:34:56 $
+  $Date: 2005/01/09 09:21:11 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -252,10 +252,9 @@ gobj_set_property(self, prop_name, val)
                     Data_Get_Struct(obj, void, setter);
             }
         }
-
-        if (setter)
+        if (setter) {
             setter(val, &gval);
-        else {
+        } else {
             rbgobj_rvalue_to_gvalue(val, &gval);
         }
 
