@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 04:49:14 $
+  $Author: mutoh $
+  $Date: 2004/08/22 13:26:50 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -16,7 +16,7 @@
 static void
 boxed_mark(boxed_holder* p)
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
+    const RGObjClassInfo* cinfo = GTYPE2CINFO(p->type);
     if (cinfo && cinfo->mark)
         cinfo->mark(p->boxed);
 }
@@ -24,7 +24,7 @@ boxed_mark(boxed_holder* p)
 static void
 boxed_free(boxed_holder* p)
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
+    const RGObjClassInfo* cinfo = GTYPE2CINFO(p->type);
 
     if (cinfo && cinfo->free)
         cinfo->free(p->boxed);
@@ -166,7 +166,7 @@ rbgobj_make_boxed(p, gtype)
     gpointer p;
     GType gtype;
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(gtype);
+    const RGObjClassInfo* cinfo = GTYPE2CINFO(gtype);
     VALUE result = rbgobj_boxed_create(cinfo->klass);
     boxed_holder* holder;
 
@@ -187,7 +187,7 @@ void
 rbgobj_boxed_not_copy_obj(gtype)
     GType gtype;
 {
-    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    RGObjClassInfo* cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
     cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
 }
 

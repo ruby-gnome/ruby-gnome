@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2004/05/15 17:46:15 $
+  $Date: 2004/08/22 13:26:50 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -79,15 +79,16 @@ get_superclass(gtype)
       default:
         {
             const RGObjClassInfo* cinfo_super =
-                rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+                rbgobj_lookup_class_by_gtype(g_type_parent(gtype), Qnil);
             return cinfo_super->klass;
         }
     }
 }
 
 const RGObjClassInfo *
-rbgobj_lookup_class_by_gtype(gtype)
+rbgobj_lookup_class_by_gtype(gtype, parent)
     GType gtype;
+    VALUE parent;
 {
     RGObjClassInfo* cinfo;
     RGObjClassInfoDynamic* cinfod; 
@@ -111,8 +112,12 @@ rbgobj_lookup_class_by_gtype(gtype)
     case G_TYPE_OBJECT:
     case G_TYPE_ENUM:
     case G_TYPE_FLAGS:
-        cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
-                                  get_superclass(gtype));
+      if (NIL_P(parent)){
+          cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
+                                    get_superclass(gtype));
+      } else {
+          cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
+      }
         break;
         
     case G_TYPE_INTERFACE:
@@ -155,7 +160,7 @@ rbgobj_lookup_class_by_gtype(gtype)
         for (i = 0; i < n_interfaces; i++){
             rb_include_module(
                 cinfo->klass,
-                rbgobj_lookup_class_by_gtype(interfaces[i])->klass);
+                rbgobj_lookup_class_by_gtype(interfaces[i], Qnil)->klass);
         }
         g_free(interfaces);
     }
@@ -177,18 +182,19 @@ rbgobj_lookup_class_by_gtype(gtype)
 }
 
 VALUE
-rbgobj_define_class(gtype, name, module, mark, free)
+rbgobj_define_class(gtype, name, module, mark, free, parent)
     GType gtype;
     const gchar* name;
     VALUE module;
     void* mark;
     void* free;
+    VALUE parent;
 {
     RGObjClassInfo* cinfo;
     if (gtype == 0)
         rb_bug("rbgobj_define_class: Invalid gtype [%s]\n", name);
 
-    cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype, parent);
     cinfo->mark = mark;
     cinfo->free = free;
     rb_define_const(module, name, cinfo->klass);

@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: lrz $
-  $Date: 2003/10/08 15:34:19 $
+  $Author: mutoh $
+  $Date: 2004/08/22 13:26:50 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -64,7 +64,7 @@ rbgobj_param_spec_initialize(self, pspec)
     g_param_spec_sink(pspec);
 
     holder->instance = pspec;
-    holder->cinfo    = rbgobj_lookup_class_by_gtype(G_PARAM_SPEC_TYPE(pspec));
+    holder->cinfo    = GTYPE2CINFO(G_PARAM_SPEC_TYPE(pspec));
     g_param_spec_set_qdata(pspec, qparamspec, (gpointer)self);
 }
 

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:52:27 $
+  $Date: 2004/08/22 13:26:50 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -27,7 +27,7 @@ void
 rbgobj_add_abstract_but_create_instance_class(gtype)
     GType gtype;
 {
-    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    RGObjClassInfo* cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
     cinfo->flags |= RBGOBJ_ABSTRACT_BUT_CREATABLE;
 }
 
@@ -571,7 +571,7 @@ type_register(int argc, VALUE* argv, VALUE self)
 
         {
             GType parent = g_type_parent(type);
-            const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(parent);
+            const RGObjClassInfo* cinfo =  GTYPE2CINFO(parent);
             VALUE m = rb_define_module_under(self, RubyGObjectHookModule);
 
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2004/03/05 15:52:27 $
+  $Date: 2004/08/22 13:26:50 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -29,16 +29,18 @@ extern "C" {
  (rbgobj_initialize_object(obj, (gpointer)cobj))
 
 #define G_DEF_CLASS(gtype, name, module)\
- (rbgobj_define_class(gtype, name, module, 0, 0))
+    (rbgobj_define_class(gtype, name, module, 0, 0, Qnil))
 #define G_DEF_CLASS2(gtype, name, module, mark, free)\
- (rbgobj_define_class(gtype, name, module, mark, free))
+    (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
 #define G_DEF_CLASS3(gtype_name, name, module)\
- (rbgobj_define_class_dynamic(gtype_name, name, module, 0, 0))
+    (rbgobj_define_class_dynamic(gtype_name, name, module, 0, 0))
+#define G_DEF_CLASS4(gtype, name, module, parent) \
+    (rbgobj_define_class(gtype, name, module, 0, 0, parent))
 
 #define G_DEF_INTERFACE(gtype, name, module)\
- (rbgobj_define_class(gtype, name, module, 0, 0))
+    (rbgobj_define_class(gtype, name, module, 0, 0, Qnil))
 #define G_DEF_INTERFACE2(gtype, name, module, mark, free)\
- (rbgobj_define_class(gtype, name, module, mark, free))
+    (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
 
 #define G_RELATIVE(obj, rel) (rbgobj_add_relative(obj, rel))
 #define G_RELATIVE2(obj, rel, id, hash_key)\
@@ -50,7 +52,7 @@ extern "C" {
 (rbgobj_set_signal_func(klass, sig_name, func))
 
 #define CLASS2CINFO(klass) (rbgobj_lookup_class(klass))
-#define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype))
+#define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype, Qnil))
 #define RVAL2CINFO(obj)    (rbgobj_lookup_class(CLASS_OF(obj)))
 #define GTYPE2CLASS(gtype) (GTYPE2CINFO(gtype)->klass)
 #define CLASS2GTYPE(klass) (rbgobj_lookup_class(klass)->gtype)
@@ -109,9 +111,9 @@ extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
 /* rbgobj_type.c */
 extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
-extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
+extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent);
 extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
-                                 void* mark, void* free); 
+                                 void* mark, void* free, VALUE parent); 
 extern VALUE rbgobj_define_class_dynamic(const gchar* gtype_name, 
                                          const gchar* name, VALUE module, 
                                          void* mark, void* free); 
@@ -171,6 +173,7 @@ extern VALUE rbgobj_make_enum(gint n, GType gtype);
 extern gint rbgobj_get_enum(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_flags(guint n, GType gtype);
 extern guint rbgobj_get_flags(VALUE obj, GType gtype);
+    extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 
 #ifdef __cplusplus
 }

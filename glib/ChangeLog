@@ -1,4 +1,12 @@
+2004-08-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_enums.c: makes rbgobj_define_const to a global function.
+	* src/rbglib_error.c: Fix bugs. Re-implement rbgerr_define_gerror.
+
 2004-08-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c: rbgobj_define_class() can define parent compulsorily.
+	* src/rbgobj_param.c, rbgobj_object.c, rbgobj_boxed.c: Follow above change.
 
 	* src/rbgerror.c, rbglib.h: Added. Replace rbgutil_gerror2exception.
 	* src/rbgutil.[ch]: Removed rbgutil_gerror2exception.

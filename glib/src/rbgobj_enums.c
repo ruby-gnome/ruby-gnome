@@ -3,12 +3,12 @@
 
   rbgobj_enums.c -
 
-  $Author: sakai $
-  $Date: 2003/11/15 14:44:24 $
+  $Author: mutoh $
+  $Date: 2004/08/22 13:26:50 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
+  Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
-
 **********************************************************************/
 
 #include "global.h"
@@ -68,7 +68,7 @@ rbgobj_constant_lookup(const char *name)
       return NULL;
 }
 
-static void 
+void 
 rbgobj_define_const(VALUE mod, const char *name,
 			VALUE value)
 {

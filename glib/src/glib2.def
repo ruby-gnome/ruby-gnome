@@ -55,5 +55,4 @@ EXPORTS
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
         rbgerr_define_gerror
-        rbgerr_define_gerror2
         rbgerr_gerror2exception
