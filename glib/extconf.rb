@@ -20,20 +20,29 @@ if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
 end
 
 
-unless system(pkgconfig, '--exists', pkgname)
+unless system("#{pkgconfig} #{pkgconfig_opt} --exists #{pkgname}")
   STDERR.printf("%s doesn't exist\n", pkgname)
   exit
 end
 
 $libs   += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
 $CFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
-$CFLAGS += ' -g -Wall'
+
+STDOUT.print("checking for GCC... ")
+if /gcc/ =~ Config::CONFIG['CC']
+  STDOUT.print "yes\n"
+  $CFLAGS += ' -Wall' 
+  is_gcc = true
+else
+  STDOUT.print "no\n"
+  is_gcc = false
+end
 
 STDOUT.print("checking for G_OS_WIN32... ")
 STDOUT.flush
 if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
   STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
+  $CFLAGS += ' -fnative-struct' if is_gcc
 else
   STDOUT.print "no\n"
 end
