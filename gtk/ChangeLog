@@ -2,6 +2,7 @@
 
 	* src/rbgdkim.c: Remove file.
 	* src/rbgtk.h: Fix compile error for rbgdkfont.c(#ifdef GTK_DISABLE_DEPRECATED was wrong)
+	* src/rbgdkcolormap.c: Remove Gdk::Colormap#alloc.
 
 2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
 

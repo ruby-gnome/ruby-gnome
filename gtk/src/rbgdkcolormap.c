@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:14 $
+  $Date: 2002/07/07 06:06:08 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -92,7 +92,6 @@ Init_gtk_gdk_colormap()
     rb_define_singleton_method(gdkColormap, "system",
                                gdkcmap_s_get_system, 0);
     rb_define_method(gdkColormap, "initialize", gdkcmap_initialize, 2);
-    rb_define_method(gdkColormap, "alloc", gdkcmap_alloc, 1);
     rb_define_method(gdkColormap, "alloc_color", gdkcmap_alloc_color, 3);
     rb_define_method(gdkColormap, "colors", gdkcmap_colors, 0);
 }
