@@ -40,6 +40,8 @@ begin
   end
   $objs << "rbpangoinits.o"
 
+  $defs << "-DRUBY_PANGO_COMPILATION"
+
   #
   # create Makefiles
   #

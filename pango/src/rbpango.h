@@ -3,8 +3,8 @@
 
   rbpango.h -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Author: sakai $
+  $Date: 2003/03/07 00:33:09 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -13,8 +13,18 @@
 #include <pango/pango.h>
 #include "rbgobject.h"
 
+#if defined(G_PLATFORM_WIN32) && !defined(RUBY_PANGO_STATIC_COMPILATION)
+#  ifdef RUBY_PANGO_COMPILATION
+#    define RUBY_PANGO_VAR __declspec(dllexport)
+#  else
+#    define RUBY_PANGO_VAR extern __declspec(dllimport)
+#  endif
+#else
+#  define RUBY_PANGO_VAR extern
+#endif
+
 extern void Init_pango_inits();
-extern VALUE mPango;
+RUBY_PANGO_VAR VALUE mPango;
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 
