@@ -3,8 +3,8 @@
 
   rbpangofontmap.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 15:28:05 $
+  $Author: sakai $
+  $Date: 2003/08/16 05:30:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -44,11 +44,25 @@ font_map_load_fontset(self, context, desc, lang)
                                                  RVAL2LANG(lang)));
 }
 
-/*
-void        pango_font_map_list_families    (PangoFontMap *fontmap,
-                                             PangoFontFamily ***families,
-                                             int *n_families);
-*/
+static VALUE
+font_map_list_families(self)
+    VALUE self;
+{
+    int n_families;
+    PangoFontFamily** families;
+    int i;
+    VALUE result;
+
+    pango_font_map_list_families(_SELF(self),
+                                 &families,
+                                 &n_families);
+
+    result = rb_ary_new2(n_families);
+    for (i = 0; i < n_families; i++)
+      rb_ary_store(result, i, GOBJ2RVAL(families[i]));
+
+    return result;
+}
 
 void
 Init_pango_font_map()
@@ -60,4 +74,5 @@ Init_pango_font_map()
 	 */
     rb_define_method(pMap, "load_font", font_map_load_font, 2);
     rb_define_method(pMap, "load_fontset", font_map_load_fontset, 3);
+    rb_define_method(pMap, "list_families", font_map_list_families, 0);
 }

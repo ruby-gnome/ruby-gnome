@@ -1,5 +1,14 @@
 2003-08-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbpangolanguage.c: implement Pango::Language#to_s
+
+	* src/rbpangolanguage.c (language_to_str): use
+	pango_language_to_string()
+
+	* src/rbpangofontmap.c: implment Pango::FontMap#list_families
+
+	* src/rbpangofontfamily.c: implement Pango::FontFamily#list_faces
+
 	* src/pango/rbpangocontext.c: implement Pango::Context#list_families
 
 	* src/pango/rbpangofont.c: fix Pango::Font.metrics

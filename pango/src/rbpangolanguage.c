@@ -3,8 +3,8 @@
 
   rbpangolanguage.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Author: sakai $
+  $Date: 2003/08/16 05:30:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -47,7 +47,7 @@ static VALUE
 language_to_str(self)
     VALUE self;
 {
-    return CSTR2RVAL((char*)_SELF(self));
+    return CSTR2RVAL(pango_language_to_string(_SELF(self)));
 }
 
 void
@@ -59,4 +59,5 @@ Init_pango_language()
     rb_define_singleton_method(pLanguage, "to_string", language_s_to_string, 1);
     rb_define_method(pLanguage, "matches", language_matches, -1);
     rb_define_method(pLanguage, "to_str", language_to_str, 0);
+    rb_define_alias(pLanguage, "to_s", "to_str");
 }
