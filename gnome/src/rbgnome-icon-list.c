@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-list.c,v 1.7 2003/09/03 23:56:03 sakai Exp $ */
+/* $Id: rbgnome-icon-list.c,v 1.8 2003/11/08 18:49:45 mutoh Exp $ */
 /* based on libgnomeui/gnome-icon-list.h */
 
 /* Gnome::IconList widget for Ruby/GNOME2
@@ -108,7 +108,7 @@ icon_list_append_pixbuf(self, im, icon_filename, text)
     VALUE self, im, icon_filename, text;
 {
     return INT2NUM(gnome_icon_list_append_pixbuf(_SELF(self),
-                                                 GDK_PIXBUF(RVAL2GOBJ(im)),                                  
+                                                 GDK_PIXBUF(RVAL2GOBJ(im)), 
                                                  RVAL2CSTR(icon_filename),
                                                  RVAL2CSTR(text)));
 }
@@ -141,14 +141,14 @@ static VALUE
 icon_list_get_selection_mode(self)
     VALUE self;
 {
-    return INT2NUM(gnome_icon_list_get_selection_mode(_SELF(self)));
+    return GENUM2RVAL(gnome_icon_list_get_selection_mode(_SELF(self)), GTK_TYPE_SELECTION_MODE);
 }
 
 static VALUE
 icon_list_set_selection_mode(self, mode)
     VALUE self, mode;
 {
-    gnome_icon_list_set_selection_mode(_SELF(self), NUM2INT(mode));
+    gnome_icon_list_set_selection_mode(_SELF(self), RVAL2GENUM(mode, GTK_TYPE_SELECTION_MODE));
     return self;
 }
 
@@ -348,8 +348,9 @@ static VALUE
 icon_list_icon_is_visible(self, pos)
     VALUE self, pos;
 {
-    return INT2NUM(gnome_icon_list_icon_is_visible(_SELF(self),
-                                                   NUM2INT(pos)));
+    return GENUM2RVAL(gnome_icon_list_icon_is_visible(_SELF(self),
+                                                      NUM2INT(pos)),
+                      GTK_TYPE_VISIBILITY);
 }
 
 static VALUE
@@ -391,9 +392,9 @@ Init_gnome_icon_list(mGnome)
 
     id_icon_data = rb_intern("___icon_data___");
 
-    rb_define_const(gnoIconList, "ICONS", INT2FIX(GNOME_ICON_LIST_ICONS));
-    rb_define_const(gnoIconList, "TEXT_BELOW", INT2FIX(GNOME_ICON_LIST_TEXT_BELOW));
-    rb_define_const(gnoIconList, "TEXT_RIGHT", INT2FIX(GNOME_ICON_LIST_TEXT_RIGHT));
+    /* GnomeIconListMode */
+    G_DEF_CLASS(GNOME_TYPE_ICON_LIST_MODE, "Mode", gnoIconList);
+    G_DEF_CONSTANTS(gnoIconList, GNOME_TYPE_ICON_LIST_MODE, "GNOME_ICON_LIST_");
 
     rb_define_const(gnoIconList, "IS_EDITABLE", INT2FIX(GNOME_ICON_LIST_IS_EDITABLE));
 #if 0 /* who needs this constant in ruby? */

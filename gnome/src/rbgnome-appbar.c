@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-appbar.c,v 1.6 2003/02/02 12:51:05 tkubo Exp $ */
+/* $Id: rbgnome-appbar.c,v 1.7 2003/11/08 18:49:45 mutoh Exp $ */
 /* base on libgnomeui/gnome-appbar.h */
 
 /* Gnome::AppBar widget for Ruby/Gnome
@@ -33,8 +33,8 @@ appbar_initialize(self, has_progress, has_status, interactivity)
     GtkWidget *appbar;
     appbar = gnome_appbar_new(RTEST(has_progress),
                               RTEST(has_status),
-                              NUM2INT(interactivity));
-	RBGTK_INITIALIZE(self, appbar);
+                              RVAL2GENUM(interactivity, GNOME_TYPE_PREFERENCES_TYPE));
+    RBGTK_INITIALIZE(self, appbar);
     return Qnil;
 }
 

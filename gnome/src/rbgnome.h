@@ -28,6 +28,7 @@
 
 #include "rbgtk.h"
 #include <rubyio.h>
+#include <libgnome/libgnometypebuiltins.h>
 
 #define SET_STR_AND_GFREE(obj, str) do { \
     if ((str) != NULL) { \

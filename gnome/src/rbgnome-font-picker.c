@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-font-picker.c,v 1.6 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-font-picker.c,v 1.7 2003/11/08 18:49:45 mutoh Exp $ */
 /* based on libgnomeui/gnome-font-picker.h */
 
 /* Gnome::FontPicker widget for Ruby/GNOME2
@@ -79,10 +79,9 @@ Init_gnome_font_picker(mGnome)
     rb_define_method(gnoFontPicker, "set_widget", picker_set_widget, 1);
     rb_define_method(gnoFontPicker, "widget", picker_get_widget, 0);
 
-    rb_define_const(gnoFontPicker, "MODE_PIXMAP", INT2NUM(GNOME_FONT_PICKER_MODE_PIXMAP));
-    rb_define_const(gnoFontPicker, "MODE_FONT_INFO", INT2NUM(GNOME_FONT_PICKER_MODE_FONT_INFO));
-    rb_define_const(gnoFontPicker, "MODE_USER_WIDGET", INT2NUM(GNOME_FONT_PICKER_MODE_USER_WIDGET));
-    rb_define_const(gnoFontPicker, "MODE_UNKNOWN", INT2NUM(GNOME_FONT_PICKER_MODE_UNKNOWN));
+    /* GnomeFontPickerMode */
+    G_DEF_CLASS(GNOME_TYPE_FONT_PICKER_MODE, "Mode", gnoFontPicker);
+    G_DEF_CONSTANTS(gnoFontPicker, GNOME_TYPE_FONT_PICKER_MODE, "GNOME_FONT_PICKER_");
 
     G_DEF_SETTER(gnoFontPicker, "widget");
 }

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.22 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome.c,v 1.23 2003/11/08 18:49:45 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -28,9 +28,8 @@ Init_gnome2()
     VALUE mGnome = rb_define_module("Gnome");
 
     /* GnomePreferencesType */
-    rb_define_const(mGnome, "PREFERENCES_NEVER", INT2FIX(GNOME_PREFERENCES_NEVER));
-    rb_define_const(mGnome, "PREFERENCES_USER", INT2FIX(GNOME_PREFERENCES_USER));
-    rb_define_const(mGnome, "PREFERENCES_ALWAYS", INT2FIX(GNOME_PREFERENCES_ALWAYS));
+    G_DEF_CLASS(GNOME_TYPE_PREFERENCES_TYPE, "PreferencesType", mGnome);
+    G_DEF_CONSTANTS(mGnome, GNOME_TYPE_PREFERENCES_TYPE, "GNOME_");
 
     Init_gnome_program(mGnome);
     Init_gnome_about(mGnome);

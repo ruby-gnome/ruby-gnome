@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.7 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-program.c,v 1.8 2003/11/08 18:49:45 mutoh Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -364,7 +364,8 @@ program_locate_file(argc, argv, self)
 
     ret_locations = NULL;
     result = gnome_program_locate_file(NIL_P(self) ? NULL : _SELF(self),
-                                       NUM2INT(domain), RVAL2CSTR(file_name),
+                                       RVAL2GENUM(domain, GNOME_TYPE_FILE_DOMAIN),
+                                       RVAL2CSTR(file_name),
                                        RTEST(only_if_exists),
                                        RTEST(multi) ? &ret_locations : NULL);
     if (RTEST(multi)) {
@@ -624,20 +625,8 @@ Init_gnome_program(mGnome)
     rb_define_method(gnoProgram, "print_usage", program_print_usage, 0);
 
     /* Gnome installed files */
-    rb_define_const(mGnome, "FILE_DOMAIN_LIBDIR", INT2FIX(GNOME_FILE_DOMAIN_LIBDIR));
-    rb_define_const(mGnome, "FILE_DOMAIN_DATADIR", INT2FIX(GNOME_FILE_DOMAIN_DATADIR));
-    rb_define_const(mGnome, "FILE_DOMAIN_SOUND", INT2FIX(GNOME_FILE_DOMAIN_SOUND));
-    rb_define_const(mGnome, "FILE_DOMAIN_PIXMAP", INT2FIX(GNOME_FILE_DOMAIN_PIXMAP));
-    rb_define_const(mGnome, "FILE_DOMAIN_CONFIG", INT2FIX(GNOME_FILE_DOMAIN_CONFIG));
-    rb_define_const(mGnome, "FILE_DOMAIN_HELP", INT2FIX(GNOME_FILE_DOMAIN_HELP));
-
-    /* Application files */
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_LIBDIR", INT2FIX(GNOME_FILE_DOMAIN_APP_LIBDIR));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_DATADIR", INT2FIX(GNOME_FILE_DOMAIN_APP_DATADIR));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_SOUND", INT2FIX(GNOME_FILE_DOMAIN_APP_SOUND));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_PIXMAP", INT2FIX(GNOME_FILE_DOMAIN_APP_PIXMAP));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_CONFIG", INT2FIX(GNOME_FILE_DOMAIN_APP_CONFIG));
-    rb_define_const(mGnome, "FILE_DOMAIN_APP_HELP", INT2FIX(GNOME_FILE_DOMAIN_APP_HELP));
+    G_DEF_CLASS(GNOME_TYPE_FILE_DOMAIN, "FileDomain", gnoProgram);
+    G_DEF_CONSTANTS(gnoProgram, GNOME_TYPE_FILE_DOMAIN, "GNOME_");
 
     rb_define_method(gnoModuleInfo, "name", module_get_name, 0);
     rb_define_method(gnoModuleInfo, "version", module_get_version, 0);

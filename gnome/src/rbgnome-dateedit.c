@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-dateedit.c,v 1.7 2003/02/02 12:51:05 tkubo Exp $ */
+/* $Id: rbgnome-dateedit.c,v 1.8 2003/11/08 18:49:45 mutoh Exp $ */
 /* based on libgnomeui/gnome-dateedit.h */
 
 /* Gnome::DateEdit widget for Ruby/GNOME2
@@ -47,7 +47,7 @@ dateedit_initialize(argc, argv, self)
                                    RTEST(use_24_format));
     } else {
 	dateedit = gnome_date_edit_new_flags(tv.tv_sec,
-                                         NUM2INT(show_time));
+                                             RVAL2GFLAGS(show_time, GNOME_TYPE_DATE_EDIT_FLAGS));
     }
     RBGTK_INITIALIZE(self, dateedit);
     return Qnil;
@@ -71,9 +71,11 @@ Init_gnome_dateedit(mGnome)
     id_at = rb_intern("at");
 
     /* GnomeDateEditFlags */
-    rb_define_const(gnoDateEdit, "SHOW_TIME", INT2FIX(GNOME_DATE_EDIT_SHOW_TIME));
-    rb_define_const(gnoDateEdit, "USE_24_HR", INT2FIX(GNOME_DATE_EDIT_24_HR));
-    rb_define_const(gnoDateEdit, "WEEK_STARTS_ON_MONDAY", INT2FIX(GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY));
+    G_RENAME_CONSTANT("24_HR", "USE_24_HR");
+    G_RENAME_NICK("24-hr", "use-24-hr");
+    G_DEF_CLASS(GNOME_TYPE_DATE_EDIT_FLAGS, "Flags", gnoDateEdit);
+    G_RENAME_CONSTANT("24_HR", "USE_24_HR");
+    G_DEF_CONSTANTS(gnoDateEdit, GNOME_TYPE_DATE_EDIT_FLAGS, "GNOME_DATE_EDIT_");
 
     /* Instance methods */
     rb_define_method(gnoDateEdit, "initialize", dateedit_initialize, -1);

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page-edge.c,v 1.2 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-druid-page-edge.c,v 1.3 2003/11/08 18:49:45 mutoh Exp $ */
 
 /* Gnome::DruidPageEdge widget for Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -35,7 +35,7 @@ dedge_initialize(argc, argv, self)
     GtkWidget *result;
 
     rb_scan_args(argc, argv, "16", &position, &antialiased, &title, &text, &logo, &watermark, &top_watermark);
-    result = gnome_druid_page_edge_new_with_vals(NUM2INT(position),
+    result = gnome_druid_page_edge_new_with_vals(RVAL2GENUM(position, GNOME_TYPE_EDGE_POSITION),
                                                  RTEST(antialiased),
                                                  NIL_P(title) ? NULL : RVAL2CSTR(title),
                                                  NIL_P(text) ? NULL : RVAL2CSTR(text),
@@ -133,9 +133,8 @@ Init_gnome_druid_page_edge(mGnome)
     VALUE gnoDruidPageEdge = G_DEF_CLASS(GNOME_TYPE_DRUID_PAGE_EDGE, "DruidPageEdge", mGnome);
 
     /* GnomeEdgePosition */
-	rb_define_const(mGnome, "EDGE_START", INT2FIX(GNOME_EDGE_START));
-	rb_define_const(mGnome, "EDGE_FINISH", INT2FIX(GNOME_EDGE_FINISH));
-	rb_define_const(mGnome, "EDGE_OTHER", INT2FIX(GNOME_EDGE_OTHER));
+    G_DEF_CLASS(GNOME_TYPE_EDGE_POSITION, "EdgePosition", mGnome);
+    G_DEF_CONSTANTS(mGnome, GNOME_TYPE_EDGE_POSITION, "GNOME_");
 
     rb_define_method(gnoDruidPageEdge, "initialize", dedge_initialize, -1);
     rb_define_method(gnoDruidPageEdge, "set_bg_color", dedge_set_bg_color, 1);

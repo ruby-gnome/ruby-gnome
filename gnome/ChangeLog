@@ -1,3 +1,8 @@
+2003-11-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/*.c: Apply G_DEF_CONSTANTS.
+	* src/rbgnome-app-helper.c: Fix warnings in compiling time. 
+
 2003-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-druid-page-standard.c: Add Gnome::DruidPageStandard#vbox.

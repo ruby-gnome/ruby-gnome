@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.13 2003/02/02 12:51:05 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.14 2003/11/08 18:49:45 mutoh Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -493,16 +493,16 @@ fill_ui_info(uiinfo, ary, uitype)
                      "wrong array size for UIInfo entry (%d for 10)",
                      RARRAY(item)->len);;
 
-        type = NUM2INT(RARRAY(item)->ptr[0]);
+        type = RVAL2GENUM(RARRAY(item)->ptr[0], GNOME_TYPE_UI_INFO_TYPE);
         uiinfo[i].label = NIL_P(RARRAY(item)->ptr[1])?0:RVAL2CSTR(RARRAY(item)->ptr[1]);
         uiinfo[i].hint = NIL_P(RARRAY(item)->ptr[2])?0:RVAL2CSTR(RARRAY(item)->ptr[2]);
         moreinfo = RARRAY(item)->ptr[3];
         uiinfo[i].user_data = (gpointer)RARRAY(item)->ptr[4];
         uiinfo[i].unused_data = NULL;
-        uiinfo[i].pixmap_type = NUM2INT(RARRAY(item)->ptr[5]);
+        uiinfo[i].pixmap_type = RVAL2GENUM(RARRAY(item)->ptr[5], GNOME_TYPE_UI_PIXMAP_TYPE);
         pixmap_info = RARRAY(item)->ptr[6];
         uiinfo[i].accelerator_key = NUM2INT(RARRAY(item)->ptr[7]);
-        uiinfo[i].ac_mods = NUM2INT(RARRAY(item)->ptr[8]);
+        uiinfo[i].ac_mods = RVAL2GFLAGS(RARRAY(item)->ptr[8], GDK_TYPE_MODIFIER_TYPE);
         uiinfo[i].widget = NIL_P(RARRAY(item)->ptr[9])?0:GTK_WIDGET(RVAL2GOBJ((RARRAY(item)->ptr[9])));
 
         switch (uitype) {
@@ -651,6 +651,7 @@ free_ui_info(uiinfo)
             free_ui_info(inf->moreinfo);
             break;
           default:
+            break;
         }
         /* free pixmap_info */
         switch (inf->pixmap_type) {
@@ -659,6 +660,7 @@ free_ui_info(uiinfo)
                 g_free((gpointer)inf->pixmap_info);
             break;
           default:
+            break;
         }
     }
     g_free(uiinfo);
@@ -907,63 +909,16 @@ Init_gnome_app_helper(mGnome)
     id_call = rb_intern("call");
 
     /* GnomeUIInfoType */
-    rb_define_const(gnoApp, "UI_ENDOFINFO", INT2FIX(GNOME_APP_UI_ENDOFINFO));
-    rb_define_const(gnoApp, "UI_ITEM", INT2FIX(GNOME_APP_UI_ITEM));
-    rb_define_const(gnoApp, "UI_TOGGLEITEM", INT2FIX(GNOME_APP_UI_TOGGLEITEM));
-    rb_define_const(gnoApp, "UI_RADIOITEMS", INT2FIX(GNOME_APP_UI_RADIOITEMS));
-    rb_define_const(gnoApp, "UI_SUBTREE", INT2FIX(GNOME_APP_UI_SUBTREE));
-    rb_define_const(gnoApp, "UI_SEPARATOR", INT2FIX(GNOME_APP_UI_SEPARATOR));
-    rb_define_const(gnoApp, "UI_HELP", INT2FIX(GNOME_APP_UI_HELP));
-#if 0 /* Don't use from ruby */
-    rb_define_const(gnoApp, "UI_BUILDER_DATA", INT2FIX(GNOME_APP_UI_BUILDER_DATA));
-#endif
-    rb_define_const(gnoApp, "UI_ITEM_CONFIGURABLE", INT2FIX(GNOME_APP_UI_ITEM_CONFIGURABLE));
-    rb_define_const(gnoApp, "UI_SUBTREE_STOCK", INT2FIX(GNOME_APP_UI_SUBTREE_STOCK));
-    rb_define_const(gnoApp, "UI_INCLUDE", INT2FIX(GNOME_APP_UI_INCLUDE));
+    G_DEF_CLASS(GNOME_TYPE_UI_INFO_TYPE, "UIInfoType", gnoApp);
+    G_DEF_CONSTANTS(gnoApp, GNOME_TYPE_UI_INFO_TYPE, "GNOME_APP_");
 
     /* GnomeUIInfoConfigurableTypes */
-    /* 0 */
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_NEW", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_NEW));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_OPEN", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_OPEN));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_SAVE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_SAVE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_SAVE_AS", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_SAVE_AS));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_REVERT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_REVERT));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PRINT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PRINT));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PRINT_SETUP", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PRINT_SETUP));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_CLOSE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_CLOSE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_QUIT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_QUIT));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_CUT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_CUT));
-    /* 10 */
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_COPY", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_COPY));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PASTE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PASTE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_CLEAR", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_CLEAR));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_UNDO", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_UNDO));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_REDO", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_REDO));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_FIND", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_FIND));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_FIND_AGAIN", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_FIND_AGAIN));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_REPLACE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_REPLACE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PROPERTIES", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PROPERTIES));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PREFERENCES", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PREFERENCES));
-    /* 20 */
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_ABOUT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_ABOUT));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_SELECT_ALL", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_SELECT_ALL));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_NEW_WINDOW", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_NEW_WINDOW));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_CLOSE_WINDOW", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_CLOSE_WINDOW));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_NEW_GAME", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_NEW_GAME));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_PAUSE_GAME", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_PAUSE_GAME));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_RESTART_GAME", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_RESTART_GAME));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_UNDO_MOVE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_UNDO_MOVE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_REDO_MOVE", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_REDO_MOVE));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_HINT", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_HINT));
-    /* 30 */
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_SCORES", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_SCORES));
-    rb_define_const(gnoApp, "CONFIGURABLE_ITEM_END_GAME", INT2FIX(GNOME_APP_CONFIGURABLE_ITEM_END_GAME));
+    G_DEF_CLASS(GNOME_TYPE_UI_INFO_CONFIGURABLE_TYPES, "UIInfoConfigurableTypes", gnoApp);
+    G_DEF_CONSTANTS(gnoApp, GNOME_TYPE_UI_INFO_CONFIGURABLE_TYPES, "GNOME_APP_");
 
     /* GnomeUIPixmapType */
-    rb_define_const(gnoApp, "PIXMAP_NONE", INT2FIX(GNOME_APP_PIXMAP_NONE));
-    rb_define_const(gnoApp, "PIXMAP_STOCK", INT2FIX(GNOME_APP_PIXMAP_STOCK));
-    rb_define_const(gnoApp, "PIXMAP_DATA", INT2FIX(GNOME_APP_PIXMAP_DATA));
-    rb_define_const(gnoApp, "PIXMAP_FILENAME", INT2FIX(GNOME_APP_PIXMAP_FILENAME));
+    G_DEF_CLASS(GNOME_TYPE_UI_PIXMAP_TYPE, "UIPixmapType", gnoApp);
+    G_DEF_CONSTANTS(gnoApp, GNOME_TYPE_UI_PIXMAP_TYPE, "GNOME_APP_");
 
     /* */
     rb_define_module_function(mGnomeUIInfo, "separator", uiinfo_separator, 0);
