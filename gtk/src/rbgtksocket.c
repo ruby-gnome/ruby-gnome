@@ -3,7 +3,7 @@
   rbgtksocket.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 00:05:39 $
+  $Date: 2002/08/12 09:39:49 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -34,7 +34,21 @@ socket_steal(self, wid)
 
     return Qnil;
 }
-#endif
+#endif /* GTK_DISABLE_DEPRECATED */
+
+static VALUE
+socket_add_id(self, wid)
+    VALUE self, wid;
+{
+    gtk_socket_add_id(GTK_SOCKET(RVAL2GOBJ(self)),
+#ifdef GDK_NATIVE_WINDOW_POINTER
+                      GUINT_TO_POINTER(NUM2ULONG(wid)),
+#else
+                      (guint32)NUM2UINT(wid),
+#endif                      
+                      );
+    return self;
+}
 
 static VALUE
 socket_plug_window(self)
@@ -43,14 +57,17 @@ socket_plug_window(self)
     return GOBJ2RVAL(GTK_SOCKET(RVAL2GOBJ(self))->plug_window);
 }
 
-#if defined GDK_WINDOWING_X11
 static VALUE
 socket_get_socket_id(self)
     VALUE self;
 {
-    return INT2NUM(GDK_WINDOW_XWINDOW(GTK_WIDGET(RVAL2GOBJ(self))->window));
-}
+    GdkNativeWindow id =  gtk_socket_get_socket_id(RVAL2GOBJ(self));
+#ifdef GDK_NATIVE_WINDOW_POINTER
+    return UINT2NUM(GPOINTER_TO_UINT(id));
+#else
+    return UINT2NUM(id);
 #endif
+}
 
 #endif /* HAVE_GTK_SOCKET_GET_TYPE */
 
@@ -65,8 +82,10 @@ Init_gtk_socket()
     rb_define_method(gSocket, "steal", socket_steal, 1);
 #endif
     rb_define_method(gSocket, "plug_window", socket_plug_window, 0);
-#if deffned GDK_WINDOWING_X11
-    rb_define_method(gSocket, "xwindow", socket_get_socket_id, 0);
+    rb_define_method(gSocket, "add_id", socket_add_id, 1);
+    rb_define_method(gSocket, "id", socket_get_socket_id, 0);
+#ifdef GDK_WINDOWING_X11
+    rb_define_alias(gSocket, "xwindow", "id");
 #endif
 #endif
 }
