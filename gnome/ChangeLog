@@ -1,3 +1,15 @@
+2002-07-30  KUBO Takehiro <kubo@jiubao.org>
+   * src/rbgnome-canvas-util.c: Add file. Support Gnome::Canvas,
+   CanvasGroup, CanvasItem, CanvasLine, CanvasRect, CanvasText, CanvasImage,
+   CanvasWidget, CanvasPoints.
+   * sample/test-gnome/canvas-arrowhead.rb, canvas-features.rb, 
+   canvas-fifteen.rb, canvas-primitives.rb, canvas.rb, flower.png, toroid.png:
+   Add file. Add Gnome::Canvas* sample to test-gnome.rb.
+   * sample/test-gnome/test-gnome.rb, src/rbgnome-canvas-group.c, 
+   src/rbgnome-canvas-item.c, rbgnome-canvas.c, rbgnome.[ch]:
+   Support Gnome::Canvas, CanvasGroup, CanvasItem, CanvasLine, CanvasRect,
+   CanvasText, CanvasImage, CanvasWidget, CanvasPoints.
+
 2002-07-28  KUBO Takehiro <kubo@jiubao.org>
 
 	* src/rbgnome.c: Bugfix for Gnome::init when options is not set.

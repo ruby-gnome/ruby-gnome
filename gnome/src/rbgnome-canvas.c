@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.3 2002/07/29 15:50:00 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -23,12 +23,17 @@
 VALUE gnoCanvas;
 
 static VALUE
-canvas_initialize(self)
-    VALUE self;
+canvas_s_new(klass)
+    VALUE klass;
 {
-    GtkWidget* canvas = gnome_canvas_new();
-    set_widget(self, canvas);
-    return Qnil;
+    return make_widget(klass, gnome_canvas_new());
+}
+
+static VALUE
+canvas_s_new_aa(klass)
+    VALUE klass;
+{
+    return make_widget(klass, gnome_canvas_new_aa());
 }
 
 static VALUE
@@ -36,7 +41,7 @@ canvas_root(self)
     VALUE self;
 {
     GnomeCanvasGroup* cg = gnome_canvas_root(GNOME_CANVAS(get_widget(self)));
-    return make_gnobject_auto_type(GTK_OBJECT(cg));
+    return get_value_from_gno_obj(GTK_OBJECT(cg));
 }
 
 static VALUE
@@ -232,13 +237,20 @@ canvas_get_dither(self)
     return Qnil;
 }
 
+static VALUE
+canvas_get_aa(self)
+    VALUE self;
+{
+    return GNOME_CANVAS(get_widget(self))->aa ? Qtrue : Qfalse;
+}
+
 void
 Init_gnome_canvas()
 {
     gnoCanvas = rb_define_class_under(mGnome, "Canvas", gLayout);
 
-    rb_define_method(gnoCanvas, "initialize", canvas_initialize, 0);
-    /* TODO: Gnome::Canvas.new_aa */
+    rb_define_singleton_method(gnoCanvas, "new", canvas_s_new, 0);
+    rb_define_singleton_method(gnoCanvas, "new_aa", canvas_s_new_aa, 0);
     rb_define_method(gnoCanvas, "root", canvas_root, 0);
     rb_define_method(gnoCanvas, "set_scroll_region",
             canvas_set_scroll_region, 4);
@@ -277,6 +289,7 @@ Init_gnome_canvas()
     rb_define_method(gnoCanvas, "get_dither",
             canvas_get_dither, 0);
     /* TODO: wrap structure elements. */
+    rb_define_method(gnoCanvas, "aa?", canvas_get_aa, 0);
 
     rb_define_alias(gnoCanvas, "w2c_d", "w2c");
 

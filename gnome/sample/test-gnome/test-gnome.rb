@@ -37,6 +37,7 @@ require 'gnome'
 require 'sample'
 
 require 'calculator'
+require 'canvas'
 require 'clock'
 require 'color-picker'
 require 'paper-selector'
@@ -58,7 +59,7 @@ def create_main_window
     [ "app-util/appbar/dialog-util", nil ],     # create_app_util
     [ "app-helper", nil ],                      # create_app_helper
     [ "calculator", CalculatorSample ],
-    [ "canvas", nil ],                          # create_canvas
+    [ "canvas", CanvasSample ],
     [ "clock", ClockSample ],
     [ "color picker", ColorPickerSample ],
     [ "druid", nil ],                           # create_druid

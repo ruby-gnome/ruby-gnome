@@ -1,4 +1,4 @@
-/* $Id: rbgnome.c,v 1.5 2002/07/28 04:35:25 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.6 2002/07/29 15:50:00 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -36,6 +36,13 @@ get_gnome_type(gnobj)
     else if GNOME_IS_APPBAR(gnobj) klass = gnoAppBar;
     else if GNOME_IS_CALCULATOR(gnobj) klass = gnoCalculator;
     else if GNOME_IS_CANVAS(gnobj) klass = gnoCanvas;
+    else if GNOME_IS_CANVAS_LINE(gnobj) klass = gnoCanvasLine;
+    else if GNOME_IS_CANVAS_POLYGON(gnobj) klass = gnoCanvasPolygon;
+    else if GNOME_IS_CANVAS_RECT(gnobj) klass = gnoCanvasRect;
+    else if GNOME_IS_CANVAS_ELLIPSE(gnobj) klass = gnoCanvasEllipse;
+    else if GNOME_IS_CANVAS_TEXT(gnobj) klass = gnoCanvasText;
+    else if GNOME_IS_CANVAS_IMAGE(gnobj) klass = gnoCanvasImage;
+    else if GNOME_IS_CANVAS_WIDGET(gnobj) klass = gnoCanvasWidget;
     else if GNOME_IS_CANVAS_ITEM(gnobj) klass = gnoCanvasItem;
     else if GNOME_IS_CANVAS_GROUP(gnobj) klass = gnoCanvasGroup;
     else if GNOME_IS_CLIENT(gnobj) klass = gnoClient;
@@ -275,6 +282,7 @@ Init_gnome()
     Init_gnome_calculator();
     Init_gnome_canvas();
     Init_gnome_canvas_item();
+    Init_gnome_canvas_util();
     Init_gnome_client();
     Init_gnome_color_picker();
     Init_gnome_dateedit();
