@@ -15,6 +15,7 @@ $CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|
 }.join(" ")
 
 have_header("libintl.h")
+have_func("bindtextdomain")
 have_func("bind_textdomain_codeset")
 
 if /cygwin|mingw/ =~ RUBY_PLATFORM

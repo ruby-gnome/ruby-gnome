@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/05/23 11:24:25 $
+  $Date: 2004/07/11 15:09:28 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -92,25 +92,40 @@ xml_connect(const gchar *handler_name, GObject *_source,
 static VALUE
 rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE text, rootString, domainString, flag;
+    VALUE text, rootString, domainString, localedir_or_flag, flag;
     GladeXML *xml;
-    char *root;
-    char *domain;
-    int dflag;
+    char* root;
+    char* domain;
+    char* localedir = NULL;
+    int dflag = 0;
 
-    rb_scan_args(argc, argv, "13", &text, &rootString, &domainString, &flag);
+    rb_scan_args(argc, argv, "14", &text, &rootString, &domainString, &localedir_or_flag, &flag);
 
     root = NIL_P(rootString) ? NULL : RVAL2CSTR(rootString);
     domain = NIL_P(domainString) ? NULL : RVAL2CSTR(domainString);
+    if (TYPE(localedir_or_flag) == T_STRING){
+        localedir = RVAL2CSTR(localedir_or_flag);
+        dflag = NIL_P(flag) ? RB_GLADE_XML_FILE : NUM2INT(flag); 
+    } else if (NIL_P(localedir_or_flag)){
+        dflag = NIL_P(flag) ? RB_GLADE_XML_FILE : NUM2INT(flag); 
+    } else {
+        dflag = NUM2INT(localedir_or_flag);
+    }
 
     glade_init();
 
+#ifdef HAVE_BINDTEXTDOMAIN
+    if (localedir){
+        bindtextdomain(domain, localedir);
+    }
+    if (domain){
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-    if (domain)
         bind_textdomain_codeset(domain, "UTF-8");
 #endif
-
-    dflag = NIL_P(flag) ? RB_GLADE_XML_FILE : NUM2INT(flag); 
+        textdomain(domain);
+    }
+#endif
+    
     if (dflag == RB_GLADE_XML_FILE){
         xml = glade_xml_new(RVAL2CSTR(text), root, domain);
     } else if (dflag == RB_GLADE_XML_BUFFER) {

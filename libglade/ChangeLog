@@ -1,3 +1,17 @@
+2004-07-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/README, l10n*, makemo.rb, po/*: Added.
+
+2004-07-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: Accept locale-dir as an argument of GladeXML.new.
+
+2004-07-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: Support localedir as an argument of GladeXML.new.
+	* bin/ruby-glade-create-template: Created class requires all arguments 
+	of GladeXML.new. 
+
 2004-05-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c: Avoid a memory leak. 

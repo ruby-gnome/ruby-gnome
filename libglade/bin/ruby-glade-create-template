@@ -6,37 +6,46 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.7 2004/04/28 18:53:15 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.8 2004/07/11 15:09:28 mutoh Exp $
 #
 # Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
 require 'libglade2'
 
-LG_VERSION = %Q[$Revision: 1.7 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.8 $].scan(/\d/).join(".")
 
-begin
-  $EXIST_GNOME = true
-  require 'gnome2'
-rescue LoadError
-  $EXIST_GNOME = false
-  puts "Ruby/GNOME2 is not supported." if $DEBUG
+path = ARGV[0]
+
+#
+# Support GNOME ?
+#
+type_gnome = false
+IO.readlines(path).each do |line|
+  if /<requires lib\=\"gnome\"\/>/ =~ line
+    type_gnome = true
+    begin
+      require 'gnome2'
+    rescue LoadError
+      puts "The .glade requires Ruby/GNOME2, but it is not available on your system."
+      exit 1
+    end
+  end
 end
 
 unless ARGV.size == 1
   puts "ruby-glade-create-template #{LG_VERSION}"
   puts "\nUsage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb\n\n"
-  exit(-1)
+  exit 1
 end
 
 #
 # Analyse .glade file.
 #
-path = ARGV[0]
 filename = File.basename(path, ".*")
 classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
 
-if $EXIST_GNOME
+if type_gnome
   Gnome::Program.new("ruby-glade-create-template", LG_VERSION)
 else
   Gtk.init
@@ -60,8 +69,8 @@ HEADER
 
 puts <<INITIALIZE
 class #{classname}
-  def initialize(path)
-    @glade = GladeXML.new(path) {|handler| method(handler)}
+  def initialize(path_or_data, root = nil, domain = nil, localedir = nil, flag = GladeXML::FILE)
+    @glade = GladeXML.new(path_or_data, root, domain, localedir, flag) {|handler| method(handler)}
   end
 INITIALIZE
 
@@ -80,21 +89,22 @@ end
 
 puts "end\n\n"
 
-if $EXIST_GNOME
-puts <<FOOTER_GNOME
+puts <<FOOTER_CONST
 if __FILE__ == $0
-  #If you use only Ruby/GTK2 widgets, call Gtk.init here. 
-  #Gtk.init
-  #If you use Ruby/GNOME2 widgets, call Gnome::Program.new here. 
-  Gnome::Program.new("YOUR_APPLICATION_NAME", "YOUR_APPLICATION_VERSION")
+  # Set values as your own application. 
+  PROG_PATH = "#{path}"
+  PROG_NAME = "YOUR_APPLICATION_NAME"
+FOOTER_CONST
+if type_gnome
+puts <<FOOTER_GNOME
+  PROG_VERSION = "YOUR_APPLICATION_VERSION"
+  Gnome::Program.new(PROG_NAME, PROG_VERSION)
 FOOTER_GNOME
 else
-  puts "Gtk.init"
+  puts "  Gtk.init"
 end
 puts <<FOOTER
-
-  #Set correct path by yourself.
-  #{classname}.new("#{path}")
+  #{classname}.new(PROG_PATH, nil, PROG_NAME)
   Gtk.main
 end
 FOOTER
