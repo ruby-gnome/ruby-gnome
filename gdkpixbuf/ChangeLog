@@ -1,3 +1,8 @@
+2004-07-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Remove Gdk::Pixbuf::VERSION which causes a segfault
+	on Win32 and tml's GTK+-2.4.0. Pointed out by Laurent.
+
 2003-12-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Fix lack of the data in Gdk::Pixbuf.pixels.

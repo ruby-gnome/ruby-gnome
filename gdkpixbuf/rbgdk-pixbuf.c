@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2003/12/20 13:56:16 $
+  $Date: 2004/07/03 07:46:56 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -80,6 +80,19 @@ get_option(self, key)
 {
     const gchar* ret = gdk_pixbuf_get_option(_SELF(self), RVAL2CSTR(key));
     return ret ? CSTR2RVAL(ret) : Qnil;
+}
+
+static VALUE
+get_single_pixel(self, rx, ry)
+    VALUE self, rx, ry;
+{
+        //Could probably be optimized..
+        guint x = NUM2INT(rx);
+        guint y = NUM2INT(ry);
+        guint r = gdk_pixbuf_get_rowstride(_SELF(self));
+        guint n = gdk_pixbuf_get_n_channels(_SELF(self));
+        guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
+        return rb_str_new(pixels + (y * r + x * n), n);
 }
 
 /****************************************************/
@@ -380,9 +393,12 @@ Init_gdk_pixbuf2()
     /*
      * Initialization and Versions 
      */
+/* Removed. This crashes Ruby/GTK on Windows + GTK+-2.4.x.
+   Pointed out by Laurent.
 #ifdef HAVE_GDK_PIXBUF_VERSION
     rb_define_const(gdkPixbuf, "VERSION", CSTR2RVAL(gdk_pixbuf_version));
 #endif
+*/
     rb_define_const(gdkPixbuf, "MAJOR", INT2FIX(GDK_PIXBUF_MAJOR));
     rb_define_const(gdkPixbuf, "MINOR", INT2FIX(GDK_PIXBUF_MINOR));
     rb_define_const(gdkPixbuf, "MICRO", INT2FIX(GDK_PIXBUF_MICRO));
@@ -431,6 +447,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "scale!", scale, -1);
     rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
     rb_define_method(gdkPixbuf, "composite!", composite, -1);
+    rb_define_method(gdkPixbuf, "get_single_pixel", get_single_pixel, 2);
     /* GdkInterpType */
     G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", gdkPixbuf);
     G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_INTERP_TYPE, "GDK_");
