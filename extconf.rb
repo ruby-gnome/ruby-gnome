@@ -1,9 +1,9 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.10 2004/03/07 15:19:34 mutoh Exp $
+  $Id: extconf.rb,v 1.11 2004/08/15 15:06:39 mutoh Exp $
 
-  Copyright (C) 2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
 =end
 
 require 'mkmf'
@@ -20,6 +20,7 @@ $ruby = arg_config("--ruby", $ruby)
 $srcdir = File.dirname(__FILE__)
 $topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
 $topdir = $configure_args["--topdir"] ||= Dir.pwd
+$strict = $configure_args["--strict"] ? "--strict" : ""
 
 subdirs = ARGV.select{|v|  /^--/ !~ v}
 
@@ -66,7 +67,7 @@ File.open("Makefile", "w") do |makefile|
   makefile.print("\
 TOPSRCDIR = #{$topsrcdir}
 SUBDIRS = #{targets.join(' ')}
-COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb
+COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb #{$strict}
 
 all:
 	$(COMMAND) '$(SUBDIRS)' $(MAKE) all;

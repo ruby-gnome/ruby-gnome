@@ -1,3 +1,11 @@
+2004-08-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README, NEWS: Revised.
+	* extconf.rb, exec_make.rb: Add --strict option. 
+	If you don't give this option, it doesn't exit with 1
+	(exit(1)) because it doesn't mean failure of compilation
+	and instalation of almost of all libraries.
+
 2004-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Revised.

@@ -12,10 +12,6 @@ Release packages
     - Ruby/GdkPixbuf2   - GTK+ 2.0.x or later
     - Ruby/GTK2         - GTK+ 2.0.x or later
 
-   ruby-gstreamer
-    - Ruby/GLib2        - GLib-2.0.x or later
-    - Ruby/GStreamer    - GStreamer 0.6.x or later
-
    ruby-gnome2-all
     - ruby-gtk2
     - Ruby/GNOME2        - libgnome-2.0.x, libgnomeui-2.0.x or later
@@ -24,7 +20,7 @@ Release packages
     - Ruby/Libglade2     - Libglade 2.0.x or later
     - Ruby/GConf2        - GConf 2.0.x or later
     - Ruby/GnomeVFS      - GnomeVFS 2.0.x or later
-    - Ruby/GStreamer     - GStreamer 0.6.x or later
+    - Ruby/GStreamer     - GStreamer 0.8.x or later
     - Ruby/GtkHtml2      - GtkHtml2 2.0.x or later
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
     - Ruby/Libgda        - libgda 1.0.3 or later
@@ -57,6 +53,8 @@ extconf.rb options
    --ruby      : ruby directory
    --topsrcdir : top source directory
    --topdir    : top directory
+   --strict    : if some libraries fail to compile/install, "make"
+                 command returns 1(exit 1)
 
 Dependencies
 ------------

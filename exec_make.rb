@@ -1,13 +1,22 @@
 =begin
   exec_make.rb is called by top-level Makefile.
 
-  $Id: exec_make.rb,v 1.3 2004/03/14 01:49:34 mutoh Exp $
+  $Id: exec_make.rb,v 1.4 2004/08/15 15:06:39 mutoh Exp $
 
-  Copyright (C) 2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
 =end
 
-SUBDIRS = ARGV[0].split(" ")
-EXECUTE = ARGV[1..-1].join(' ')
+puts "ARGV = " + ARGV.inspect
+
+argv = ARGV
+strict = false
+if ARGV[0] == "--strict" || ARGV[0] == "-s"
+  strict = true
+  argv = ARGV[1..-1]
+end
+
+SUBDIRS = argv[0].split(" ")
+EXECUTE = argv[1..-1].join(' ')
 
 success = []
 failure = []
@@ -36,4 +45,6 @@ puts "FAILED: #{failure.join(' ')}" if failure.size > 0
 puts "-----"
 puts "Done."
 
-exit(1) if failure.select { |x| x != "NONE" }.length > 0
+if strict && (failure.select { |x| x != "NONE" }.length > 0)
+	exit(1)
+end
