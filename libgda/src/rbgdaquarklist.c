@@ -104,9 +104,8 @@ static VALUE rb_gda_quarklist_find(self, name)
         : Qnil;
 }
 
-#if 0
 /*
- * FIXME GDA HEAD ONLY Method: clear
+ * Method: clear
  *
  * Removes all key->pair values from the quark list.
  *
@@ -118,7 +117,6 @@ static VALUE rb_gda_quarklist_clear(self)
     gda_quark_list_clear(RGDA_QUARKLIST(self));
     return self;
 }
-#endif
 
 void Init_gda_quarklist(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_QUARK_LIST, "QuarkList", mGda);
@@ -126,7 +124,7 @@ void Init_gda_quarklist(void) {
     rb_define_method(c, "add_from_string", rb_gda_quarklist_add_from_string, -1);
     rb_define_alias(c, "add", "add_from_string");
     rb_define_method(c, "find", rb_gda_quarklist_find, 1);
-    /* rb_define_method(c, "clear", rb_gda_quarklist_clear, 0); */
+    rb_define_method(c, "clear", rb_gda_quarklist_clear, 0);
 
     cGdaQuarkList = c;
 }

@@ -7,6 +7,8 @@
 	* src/rbgdadatamodel.c (#editable?, #editing?, #begin_edit, #cancel_edit,
 	  #end_edit): Renamed.
 	* src/rbgdaprovider.c (::model): Enabled again.
+	* src/rbgdaquarklist.c (#clear): Enabled again.
+	* tests/tc_all.rb: Re-test previously disabled methods.
 
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
