@@ -1,0 +1,137 @@
+2004-05-21  Archit Baweja  <bighead@users.sourceforge.net>
+
+	* src/rbgtksourceiter.c: changed all calls to RVAL2GENUM to RVAL2GFLAGS
+	Likewise for GENUM2RVAL. Allows OR-ing of Gtk::TextIter::SearchFlags::*
+
+2004-05-19  Archit Baweja  <bighead@users.sourceforge.net>
+
+	* src/rbgtksourceiter.c: Fixed a bug when setting the SearchFlags
+	  constants.
+ 
+2004-05-16  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgtksourcebuffer.c (#create_marker): name and type parameters
+	  can be nil.
+	* src/rbgtksourcelanguage.c (#set_mime_types): arr can be nil.
+
+=== Ruby/GtkSourceView 0.2.0 ===
+
+2004-05-15  Laurent Sansonetti  <lrz@gnome.org>
+
+	* NEWS: Added.
+	* src/rbgtksourcebuffer.c:
+	* src/rbgtksourceiter.c:
+	* src/rbgtksourcelanguage.c:
+	* src/rbgtksourcelanguagesmanager.c:
+	* src/rbgtksourcemain.c:
+	* src/rbgtksourcemarker.c:
+	* src/rbgtksourcetag.c:
+	* src/rbgtksourcetagstyle.c:
+	* src/rbgtksourcetagtable.c:
+	* src/rbgtksourceview.c: Changed coding style and added documentation
+	  for tools/extdoc.rb.
+
+2004-05-12  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgtksourcebuffer.c:
+	- Renamed #undo -> #undo! and #redo -> #redo!.
+	- Replaced #begin_not_undoable_action and #end_not_undoable_action
+	  with #not_undoable_action which takes a block.
+	- Created #non_undoable_action as an alias to #not_undoable_action.
+	- Fixed a bug in #initialize.
+
+2004-05-11  Laurent Sansonetti  <lrz@gnome.org>
+
+	* README: Updated.
+	* src/rbgtksourcelanguage.c (#each_tag, #each_mime_type): Added.
+	* src/rbgtksourcemain.h: Removed unused exports and added preprocessor
+	  checks between the actual code to avoid multiple inclusion problems.
+	* src/rbgtksourcetagtable.c (#add_tags): Re-implemented to accept a list
+	  of parameters instead of an array + defined '<<' as a shortcut for 
+	  this method.
+	* src/lib/gtksourceview.rb: Created.
+
+2004-03-23  Laurent Sansonetti  <lrz@gnome.org>
+
+	* extconf.rb: Removed pango-related comments.
+
+2004-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourceiter.c: Added as additional methods of Gtk::TextIter. 
+
+2004-03-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourcebuffer.c: Remove implementation for properties. 
+	Rename Gtk::SourceBuffer#get_markers_in_region to #get_markers.
+	* src/rbgtksourceview.c: Unify Gtk::SourceView.new and Gtk::SourceView.new_with_buffer.
+	Remove implementation for properties.
+	* src/rbgtksourcetag.c: Rename Gtk::SourceTag#get_style to #tag_style, 
+	#set_style to #tag_style=. 
+	Remove implementation for properties.
+	* src/rbgtksourcemarker.c: Rename Gtk::SourceMarker#get_name to #name,
+	#get_marker_type to #marker_type, #get_line to #line, #get_buffer to #buffer.
+	* src/rbgtksourcelanguagesmanager.c: 
+	Rename Gtk::SourceLanguagesManager#get_language_from_mime_type to #get_language.
+	Fix a segfault of #lang_files_dirs.
+	* extconf.rb: Code cleanup.
+	* src/lib/rbgtksourceview.rb: Added.
+	* sample/sourcelanguagesmanager.rb: Added.
+	* src/rbgtksourcelanguagesmanager.c: 
+	Rename Gtk::SourceLanguagesManager#get_available_languages to #available_languages,
+	#get_lang_files_dirs to #lang_files_dirs
+	* src/*.c: Return Qnil in *_new() methods.
+	* src/rbgtksourcetagstyle.c: Remove Gtk::SourceTagStyle#copy, #free.
+	Don't use them from Ruby side.
+	* src/rbgtksourcelanguage.c: Fix a memory leak. 
+	Rename Gtk::SourceLanguage#get_section to #section,
+	#get_mime_types to #mime_types.
+
+2004-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourcebuffer.c: Unify Gtk::SourceBuffer.new and 
+	Gtk::SourceBuffer.new_with_language to Gtk::SourceBuffer.new. 
+	Code cleanup. 
+	Rename Gtk::SourceBuffer#get_check_brackets to #check_brackets?,
+	#can_undo to #can_undo?, 
+	#can_redo to #can_redo?, 
+	#get_highlight to #highlight?,
+	#get_max_undo_levels to #max_undo_levels,
+	#get_language to #language, 
+	#get_escape_char to #escape_char,
+	#get_first_marker to #first_marker
+	#get_last_marker to #last_marker
+
+2004-03-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourcetag.c: Add a first argument as id for
+	Gtk::SyntaxTag.new, Gtk::SyntaxTag.new.
+	Rename Gtk.line_comment_tag_new to Gtk::SyntaxTag#line_comment_tag_new
+	and add a first argument as id.
+	Rename Gtk.string_tag_new to Gtk::SyntaxTag#string_tag_new and add a 
+	first argument as id.
+	Rename Gtk.keyword_list_tag_new to Gtk::PatternTag#keyword_list_tag_new
+	and add a first argument as id.
+	* src/rbgtksourcelanguage.c: Fix memleaks.
+	Rename Gtk::SourceLanguage#get_escape_char to 
+	Gtk::SourceLanguage#escape_char and it returns a string.
+	Rename #get_name -> #name, #get_style_scheme -> #style_scheme,
+	#get_escape_char -> #escape_char, #get_tags -> #tags,
+	#get_mime_types -> #mime_types, #get_section -> #section,
+	Gtk::SourceLanguage#set_tag_style can omit 2nd argument and 
+	fix a bug.
+	* src/*.c: Fix compilation error.
+
+2004-03-10  Laurent Sansonetti <lrz@gnome.org>
+
+	* README: Fixed requirements and updated copyright.
+
+2004-02-20  Archit Baweja  <bighead@users.sourceforge.net>
+
+	* src/rbgtksourcemain.h: include gtksourceview/gtksourceiter.h 
+	for GtkSourcView-0.7.1.
+
+2003-05-12
+	* Initial release
+	  Two functions remain unconverted:
+	  	gtk_keyword_list_tag_new()
+		gtk_source_buffer_find_bracket_match()
