@@ -1,10 +1,39 @@
+2003-12-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/gnomevfs.rb (GnomeVFS::FileInfo) include Comparable.
+
+	* src/lib/gnomevfs.rb (GnomeVFS::FileInfo#setuid?,
+ 	GnomeVFS::FileInfo#setgid?, GnomeVFS::FileInfo#<=>): new methods.
+ 
+	* src/lib/gnomevfs.rb (GnomeVFS::File#atime, GnomeVFS::File#mtime,
+ 	GnomeVFS::File#ctime, GnomeVFS::File#pos=): new methods. 
+ 
+	* src/lib/gnomevfs.rb (GnomeVFS::File): new singleton methods:
+ 	foreach, read, readlines, readlink, utime, exists?, exist?, ftype,
+ 	file?, directory?, symlink?, chardev?, blockdev?, socket?, pipe?,
+ 	size?, zero?, readable?, writable?, executable?, readable_real?,
+ 	writable_real?, executable_real?, owned?, grpowned?, sticky?,
+ 	setuid?, setgid?, size, atime, mtime, ctime.
+ 
+	* src/gnomevfs-file.c (GnomeVFS::File): include Enumerable.
+ 
+	* src/gnomevfs-file.c: change GnomeVFS::File.stat to follow symbolic
+ 	link, and add new method GnomeVFS::File.lstat which doesn't follow
+ 	symbolic link.
+ 
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
                                                                                 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
+
+2003-08-12  Nikolai Weibull  <lone-star@home.se>
+
+	* src/gnomevfs-directory.c: Fixed a bug with the visit functions.
+	Also added rel_path to items passed to the block.
 
 2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/gnomevfs-mime.c, gnomevfs-uri.c, gnomevfs-fileinfo.c: Fix warnings.
+	* src/gnomevfs-mime.c, gnomevfs-uri.c, gnomevfs-fileinfo.c: Fix 
+	warnings.
 	* extconf.rb: Call gnome-vfs-module-2.0.
 
 2003-08-07  Nikolai Weibull  <lone-star@home.se>

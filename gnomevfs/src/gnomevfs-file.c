@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2004/01/11 13:57:03 $
  *
  *****************************************************************************/
 
@@ -225,6 +225,38 @@ file_m_chown(argc, argv, self)
 }
 
 static VALUE
+file_m_lstat(argc, argv, self)
+	int argc;
+	VALUE *argv;
+	VALUE self;
+{
+	VALUE uri, r_options;
+	GnomeVFSFileInfo *info;
+	GnomeVFSFileInfoOptions options;
+	GnomeVFSResult result;
+
+	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 1) {
+		options = FIX2INT(r_options);
+	} else {
+		options = GNOME_VFS_FILE_INFO_DEFAULT;
+	}
+
+	info = gnome_vfs_file_info_new();
+
+	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+		result = gnome_vfs_get_file_info_uri(RVAL2GVFSURI(uri),
+						     info,
+						     options);
+	} else {
+		result = gnome_vfs_get_file_info(RVAL2CSTR(uri),
+						 info,
+						 options);
+	}
+
+	return CHECK_RESULT(result, GVFSFILEINFO2RVAL(info));
+}
+
+static VALUE
 file_m_stat(argc, argv, self)
 	int argc;
 	VALUE *argv;
@@ -240,6 +272,7 @@ file_m_stat(argc, argv, self)
 	} else {
 		options = GNOME_VFS_FILE_INFO_DEFAULT;
 	}
+	options |= GNOME_VFS_FILE_INFO_FOLLOW_LINKS;
 
 	info = gnome_vfs_file_info_new();
 
@@ -849,6 +882,7 @@ Init_gnomevfs_file(m_gvfs)
 	s_default_rsep = rb_str_new2("\n");
 
 	g_gvfs_file = G_DEF_CLASS(GNOMEVFS_TYPE_FILE, "File", m_gvfs);
+	rb_include_module(g_gvfs_file, rb_mEnumerable);
 
 	rb_define_singleton_method(g_gvfs_file, "create", file_create_or_open,
 				   -1);
@@ -865,7 +899,8 @@ Init_gnomevfs_file(m_gvfs)
 	rb_define_singleton_method(g_gvfs_file, "symlink",
 				   create_symbolic_link, 2);
 	rb_define_singleton_method(g_gvfs_file, "stat", file_m_stat, -1);
-	rb_define_singleton_method(g_gvfs_file, "file_info", file_m_stat, -1);
+	rb_define_singleton_method(g_gvfs_file, "lstat", file_m_lstat, -1);
+	rb_define_singleton_method(g_gvfs_file, "file_info", file_m_lstat, -1);
 	rb_define_singleton_method(g_gvfs_file, "set_file_info",
 				   file_m_set_stat, 3);
 	rb_define_singleton_method(g_gvfs_file, "truncate", file_m_truncate,
