@@ -25,6 +25,7 @@ have_func('atk_hyperlink_is_selected_link')
 have_func('atk_text_get_bounded_ranges')
 have_func('atk_role_get_localized_name')
 have_func('atk_text_clip_type_get_type')
+have_func('atk_text_free_ranges')
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_distcleanfile("rbatkinits.c")

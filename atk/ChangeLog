@@ -1,6 +1,10 @@
+2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatktext.c: Fix a compiling problem on MSVC++/atk-1.9.0.
+
 2005-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbatktext.c: Fix a compiling problem on MSVC++/Pango-1.8.0.
+	* src/rbatktext.c: Fix a compiling problem on MSVC++/atk-1.8.0.
 
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 

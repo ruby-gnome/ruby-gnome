@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2005/01/31 09:05:52 $
+  $Date: 2005/02/17 05:01:23 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -187,7 +187,9 @@ rbatk_text_get_bounded_ranges(self, rect, coord_type, x_clip_type, y_clip_type)
         rb_ary_push(ary, BOXED2RVAL(ranges[i], ATK_TYPE_TEXT_RANGE));
         i++;
     }
+#ifdef HAVE_ATK_TEXT_FREE_RANGES
     atk_text_free_ranges(ranges);
+#endif
     return ary;
 }
 #endif
