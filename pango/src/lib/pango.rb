@@ -9,7 +9,7 @@ module Pango
       begin
         if text
           s, e = iter.range
-          yield(iter, text[s, e -s], s, e)
+          yield(iter, text[s, e - s], s, e)
         else
           yield(iter)
         end

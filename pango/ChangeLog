@@ -1,3 +1,7 @@
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/pango.rb: Works ruby-1.6.x again.
+
 2004-11-06  Geoff Youngs  <g@intersect-uk.co.uk>
 
 	* src/rbpangoitem.c: Pango::Item#split
