@@ -4,7 +4,7 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2004/05/16 07:21:17 $
+  $Date: 2004/05/23 17:02:11 $
  
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
@@ -14,6 +14,24 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
+
+VALUE fchoerror_not;
+VALUE fchoerror_bad;
+
+static VALUE
+fcho_error(error)
+    GError* error;
+{
+    VALUE exc;
+    if (error->code == GTK_FILE_CHOOSER_ERROR_NONEXISTENT)
+        exc = rb_exc_new2(fchoerror_not, error->message);
+    else
+        exc = rb_exc_new2(fchoerror_bad, error->message);
+    
+    g_error_free(error);
+    rb_exc_raise(exc);
+}
+    
 
 static VALUE
 gslist2ary_free(list)
@@ -250,7 +268,7 @@ fcho_add_shortcut_folder(self, folder)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_add_shortcut_folder(_SELF(self), RVAL2CSTR(folder), &error))
-        RAISE_GERROR(error);
+        fcho_error(error);
     return self;
 }
 
@@ -260,7 +278,7 @@ fcho_remove_shortcut_folder(self, folder)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_remove_shortcut_folder(_SELF(self), RVAL2CSTR(folder), &error))
-        RAISE_GERROR(error);
+        fcho_error(error);
     return self;
 }
 
@@ -278,7 +296,7 @@ fcho_add_shortcut_folder_uri(self, uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_add_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
-        RAISE_GERROR(error);
+        fcho_error(error);
     return self;
 }
 
@@ -288,7 +306,7 @@ fcho_remove_shortcut_folder_uri(self, uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_remove_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
-        RAISE_GERROR(error);
+        fcho_error(error);
     return self;
 }
 
@@ -345,9 +363,8 @@ Init_gtk_file_chooser()
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", gFileCho);
     G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_ACTION_");
 
-    /* GtkFileChooserError */
-    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ERROR, "Error", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ERROR, "GTK_FILE_CHOOSER_ERROR_");
+    fchoerror_not = rb_define_class_under(mGtk, "FileChooserNotExistentError", rb_eRuntimeError);
+    fchoerror_bad = rb_define_class_under(mGtk, "FileChooserBadFileNameError", rb_eRuntimeError);
 
 #endif
 }

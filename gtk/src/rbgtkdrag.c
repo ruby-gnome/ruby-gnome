@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2003/09/25 15:32:36 $
+  $Date: 2004/05/23 17:02:11 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -208,16 +208,16 @@ gtkdrag_set_icon_default(self, context)
     VALUE self, context;
 {
     gtk_drag_set_icon_default(RVAL2DC(context));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
     VALUE self, widget, start_x, start_y, current_x, current_y;
 {
-    return gtk_drag_check_threshold(RVAL2WIDGET(widget), 
-                                    NUM2INT(start_x), NUM2INT(start_y),
-                                    NUM2INT(current_x), NUM2INT(current_y)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_drag_check_threshold(RVAL2WIDGET(widget), 
+                                               NUM2INT(start_x), NUM2INT(start_y),
+                                               NUM2INT(current_x), NUM2INT(current_y)));
 }
 
 static VALUE
@@ -264,6 +264,28 @@ gtkdrag_source_unset(self, widget)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gtkdrag_source_set_target_list(self, widget, targetlist)
+    VALUE self, widget, targetlist;
+{
+    GtkTargetList* tlist = NULL;
+    if (! NIL_P(targetlist))
+        tlist = (GtkTargetList*)RVAL2BOXED(targetlist, GTK_TYPE_TARGET_LIST);
+
+    gtk_drag_source_set_target_list(RVAL2WIDGET(widget),tlist);
+    return self;
+}
+
+static VALUE
+gtkdrag_source_get_target_list(self, widget)
+    VALUE self, widget;
+{
+    GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
+    return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
+}
+#endif
+
 void
 Init_gtk_drag()
 {
@@ -287,7 +309,10 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "source_set", gtkdrag_source_set, 4);
     rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_source_set_icon, -1);
     rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_source_unset, 1);
-
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_module_function(mGtkDrag, "source_set_target_list", gtkdrag_source_set_target_list, 2);
+    rb_define_module_function(mGtkDrag, "source_get_target_list", gtkdrag_source_get_target_list, 1);
+#endif
     G_DEF_SETTERS(mGtkDrag);
 
     /* GtkDestDefaults */

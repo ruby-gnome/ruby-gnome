@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2004/05/23 17:02:11 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -153,6 +153,36 @@ clipboard_request_text(self)
     return self;
 }
 
+static void
+clipboard_target_received_func(clipboard, atoms, n_atoms, func)
+    GtkClipboard* clipboard;
+    GdkAtom* atoms;
+    gint n_atoms;
+    gpointer func;
+{
+    gint i;
+    VALUE ary = rb_ary_new();
+    for (i = 0; i < n_atoms; i++){
+        rb_ary_push(ary, BOXED2RVAL(atoms[i], GDK_TYPE_ATOM));
+    }
+        
+    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), ary);
+}
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+clipboard_request_targets(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+
+    gtk_clipboard_request_targets(_SELF(self),
+                                  clipboard_target_received_func, (gpointer)func);
+    return self;
+}
+#endif
+
 static VALUE
 clipboard_wait_for_contents(self, target)
     VALUE self, target;
@@ -176,8 +206,37 @@ static VALUE
 clipboard_wait_is_text_available(self)
     VALUE self;
 {
-    return gtk_clipboard_wait_is_text_available(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_clipboard_wait_is_text_available(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+clipboard_wait_for_targets(self)
+    VALUE self;
+{
+    gint i;
+    VALUE ary = Qnil;
+    GdkAtom* targets;
+    gint n_targets = 0;
+    gboolean ret = gtk_clipboard_wait_for_targets(_SELF(self), &targets, &n_targets);
+
+    if (ret){
+        ary = rb_ary_new();
+        for (i = 0; i < n_targets; i++){
+            if ((GdkAtom)targets == (GdkAtom)GDK_NONE){
+                rb_ary_push(ary, rb_eval_string("Gdk::Atom::NONE"));
+            }
+            else
+                rb_ary_push(ary, BOXED2RVAL(targets, GDK_TYPE_ATOM));
+            targets++;
+        } 
+        /* How can I this ?
+        g_free(&o_targets);
+        */
+    }
+    return ary;
+}
+#endif
 
 void 
 Init_gtk_clipboard()
@@ -196,9 +255,15 @@ Init_gtk_clipboard()
 
     rb_define_method(gClipboard, "request_contents", clipboard_request_contents, 1);
     rb_define_method(gClipboard, "request_text", clipboard_request_text, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gClipboard, "request_targets", clipboard_request_targets, 0);
+#endif
     rb_define_method(gClipboard, "wait_for_contents", clipboard_wait_for_contents, 1);
     rb_define_method(gClipboard, "wait_for_text", clipboard_wait_for_text, 0);
     rb_define_method(gClipboard, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gClipboard, "wait_for_targets", clipboard_wait_for_targets, 0);
+#endif
 
     G_DEF_SETTERS(gClipboard);
   }

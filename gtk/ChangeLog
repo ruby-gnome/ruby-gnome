@@ -1,3 +1,16 @@
+2004-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkclipboard.c: Added Gtk::Clipboard#request_targets, 
+	#wait_for_targets for 2.4.
+	* src/rbgtkdrag.c: Add Gtk::Drag.source_(set|get)_target_list for 2.4.
+
+2004-05-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilechooser.c: Add Gtk::FileChooserNotExistentError, 
+	Gtk::FileChooserBadFileNameError for error handling.
+	* src/rbgtkiconinfo.c: Added. 
+	* src/rbgtkicontheme.c: Added. 
+
 2004-05-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Gtk::Dialog#run accept a block.
