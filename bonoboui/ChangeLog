@@ -1,3 +1,7 @@
+2003-03-19  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbbonobo.h: Add a file.
+
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Use ../mkmf-gnome2.rb
