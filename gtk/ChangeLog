@@ -1,3 +1,15 @@
+2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtk.h, src/global.h: Move id_relative_callbacks and id_call
+	from src/rbgtk.h to src/global.h
+	* src/rbgdkrgb.c: Change mGdkRgb to local variable.
+	* src/rbgtkaccelgroupentry.c: Remove GTK_TYPE_ACCEL_GROUP_ENTRY.
+	Because it is aleady defined in rbgtk.h
+	* src/rbgtkaccelmap.c (accel_map_foreach_func): Change to static function.
+	* src/rbgtkbox.c (box_query_child_packing, box_set_child_packing):
+	ditto
+	* src/rbgtkclipboard.c (clipboard_text_received_func): ditto
+
 2003-02-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdkregion.c (gdkregion_spans_intersect_foreach):

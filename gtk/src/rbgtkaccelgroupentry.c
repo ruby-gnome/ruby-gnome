@@ -3,15 +3,14 @@
 
   rbgtkaccelgroupentry.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Author: sakai $
+  $Date: 2003/02/17 11:29:20 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
 #define _SELF(s) ((GtkAccelGroupEntry*)RVAL2BOXED(s, GTK_TYPE_ACCEL_GROUP_ENTRY))
-#define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 
 static GtkAccelGroupEntry*
 agentry_copy(const GtkAccelGroupEntry *agentry)

@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: mutoh $
-  $Date: 2003/01/25 18:02:22 $
+  $Author: sakai $
+  $Date: 2003/02/17 11:29:20 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -87,7 +87,7 @@ GtkSelectionData* gtk_clipboard_wait_for_contents
                                              GdkAtom target);
 #endif
 
-void
+static void
 clipboard_text_received_func(clipboard, text, func)
     GtkClipboard *clipboard;
     const gchar *text;

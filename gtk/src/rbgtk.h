@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/02/17 11:29:20 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -53,9 +53,6 @@
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
-
-extern ID id_relative_callbacks;
-extern ID id_call;
 
 extern VALUE mGtk;
 extern VALUE mGdk;

@@ -3,8 +3,8 @@
 
   rbgdkrgb.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/02/17 11:29:20 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -13,8 +13,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE mGdkRgb;
 
 #define RVAL2DRAW(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
@@ -89,7 +87,7 @@ gdkdraw_draw_rgb_32_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
 void
 Init_gtk_gdk_rgb()
 {
-    mGdkRgb = rb_define_module_under(mGdk, "RGB");
+    VALUE mGdkRgb = rb_define_module_under(mGdk, "RGB");
 
     rb_define_module_function(mGdkRgb, "cmap", rgb_get_cmap, 0);
     rb_define_module_function(mGdkRgb, "visual", rgb_get_visual, 0);

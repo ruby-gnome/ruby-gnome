@@ -4,7 +4,7 @@
   rbgtkaccelmap.c -
 
   $Author: sakai $
-  $Date: 2003/02/16 13:25:17 $
+  $Date: 2003/02/17 11:29:20 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -62,7 +62,7 @@ accel_map_add_filter(self, pattern)
     return Qnil;
 }
 
-void
+static void
 accel_map_foreach_func(func, path, key, mods, changed)
     gpointer func;
     const gchar *path;
