@@ -1,5 +1,7 @@
 2005-02-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbpangomatrix.c: Added accessors for xx, xy, yx, yy, x0, y0.
+	Added #to_a.
 	* src/rbpangoattribute.c: Fix a segfault. 
 	Make a subclass of Data instead of GLib::Boxed.
 

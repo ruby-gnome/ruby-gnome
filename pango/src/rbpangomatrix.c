@@ -4,7 +4,7 @@
   rbpangomatrix.c -
 
   $Author: mutoh $
-  $Date: 2005/01/28 09:48:46 $
+  $Date: 2005/02/11 19:17:23 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -13,6 +13,25 @@
 
 #if PANGO_CHECK_VERSION(1,6,0)
 #define _SELF(self) ((PangoMatrix*)(RVAL2BOXED(self, PANGO_TYPE_MATRIX)))
+
+#define ATTR_FLOAT(name)\
+static VALUE \
+matrix_get_ ## name (self)\
+    VALUE self;\
+{\
+    return rb_float_new(_SELF(self)->name);\
+}\
+static VALUE \
+matrix_set_ ## name (self, val)\
+    VALUE self, val;\
+{\
+    _SELF(self)->name = NUM2DBL(val);\
+    return self;\
+}
+
+#define DEFINE_ACCESSOR(name) \
+    rb_define_method(matrix, G_STRINGIFY(name), matrix_get_ ## name, 0);\
+    rb_define_method(matrix, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
 
 static VALUE
 matrix_initialize(argc, argv, self)
@@ -68,6 +87,23 @@ matrix_concat(self, new_matrix)
     pango_matrix_concat(_SELF(self), _SELF(new_matrix));
     return self;
 }
+
+ATTR_FLOAT(xx);
+ATTR_FLOAT(xy);
+ATTR_FLOAT(yx);
+ATTR_FLOAT(yy);
+ATTR_FLOAT(x0);
+ATTR_FLOAT(y0);
+
+static VALUE
+matrix_to_a(self)
+    VALUE self;
+{
+    PangoMatrix* matrix = _SELF(self);
+    return rb_ary_new3(6, NUM2INT(matrix->xx), NUM2INT(matrix->xy), NUM2INT(matrix->yx),
+                       NUM2INT(matrix->yy), NUM2INT(matrix->x0), NUM2INT(matrix->y0));
+}
+
 #endif
 
 void
@@ -81,6 +117,17 @@ Init_pango_matrix()
     rb_define_method(matrix, "scale!", matrix_scale, 2);
     rb_define_method(matrix, "rotate!", matrix_rotate, 1);
     rb_define_method(matrix, "concat!", matrix_concat, 1);
+
+    rb_define_method(matrix, "to_a", matrix_to_a, 0);
+
+    DEFINE_ACCESSOR(xx);
+    DEFINE_ACCESSOR(xy);
+    DEFINE_ACCESSOR(yx);
+    DEFINE_ACCESSOR(yy);
+    DEFINE_ACCESSOR(x0);
+    DEFINE_ACCESSOR(y0);
+
+    G_DEF_SETTERS(matrix);
 
 #endif
 }
