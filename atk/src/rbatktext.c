@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:42:15 $
+  $Date: 2005/01/31 09:05:52 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -306,8 +306,10 @@ Init_atk_text()
     rb_define_method(mText, "character_count", rbatk_text_get_character_count, 0);
     rb_define_method(mText, "get_offset_at_point", rbatk_text_get_offset_at_point, 3);
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+#ifdef HAVE_ATK_TEXT_CLIP_TYPE_GET_TYPE
     rb_define_method(mText, "get_bounded_ranges", rbatk_text_get_bounded_ranges, 4);
     rb_define_method(mText, "get_range_extents", rbatk_text_get_range_extents, 3);
+#endif
 #endif
     rb_define_method(mText, "n_selections", rbatk_text_get_n_selections, 0);
     rb_define_method(mText, "get_selection", rbatk_text_get_selection, 1);
@@ -330,7 +332,9 @@ Init_atk_text()
 #endif    
     /* AtkTextClipType */
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+#ifdef HAVE_ATK_TEXT_CLIP_TYPE_GET_TYPE
     G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", mText);
     G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
+#endif
 #endif
 }
