@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2002/09/24 16:47:25 $
+  $Author: mutoh $
+  $Date: 2002/10/31 17:12:32 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -323,37 +323,6 @@ rbgobj_define_property_accessors(klass)
     g_string_free(source, TRUE);
 
     g_type_class_unref(oclass);
-}
-
-void
-rbgobj_define_signal_constants(klass)
-    VALUE klass;
-{
-    GType gtype;
-    guint n_ids;
-    guint* ids;
-    int i;
-
-    gtype = rbgobj_lookup_class(klass)->gtype;
-
-    ids = g_signal_list_ids(gtype, &n_ids);
-
-    for (i = 0; i < n_ids; i++){
-        const gchar* sname = g_signal_name(ids[i]);
-        gchar* cname;
-        gchar* p;
-
-        cname = g_strconcat("SIGNAL_", sname, NULL);
-        for (p = cname + strlen("SIGNAL_"); *p; p++){
-            if (*p == '-')
-                *p = '_';
-            else
-                *p = toupper(*p);
-        }
-        
-        rb_define_const(klass, cname, rb_str_new2(sname));
-        g_free(cname);
-    }
 }
 
 struct param_setup_arg {

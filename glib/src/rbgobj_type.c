@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 11:23:43 $
+  $Date: 2002/10/31 17:12:32 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -140,7 +140,6 @@ rbgobj_lookup_class_by_gtype(gtype)
             }
             g_free(interfaces);
 
-            rbgobj_define_signal_constants(cinfo->klass);
             rbgobj_define_property_accessors(cinfo->klass);
 
             g_type_class_unref(oclass);
