@@ -1,3 +1,8 @@
+2004-06-03  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgtkdrag.c (Gtk::Drag.begin): Fixed a bug when decoding the
+	first parameter.
+
 2004-06-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextiter.c: Added Gtk::TextIter# forward_visible_word_ends,

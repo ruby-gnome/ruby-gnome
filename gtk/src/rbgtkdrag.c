@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2004/05/23 17:02:11 $
+  $Date: 2004/06/03 15:13:00 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -161,7 +161,7 @@ static VALUE
 gtkdrag_begin(self, widget, target_list, actions, button, event)
     VALUE self, widget, target_list, actions, button, event;
 {
-    return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(self),
+    return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
                                     RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
                                     RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION),
                                     NUM2INT(button),
