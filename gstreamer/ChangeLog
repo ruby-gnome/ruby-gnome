@@ -2,7 +2,7 @@
 
 	* src/rbgstcaps.c, src/rbgstclock.c, src/rbgstformat.c, src/rbgstplugin.c,
 	  src/rbgstquerytype.c src/rbgsttype.c: 
-      Fixed '==' operators (they were broken when used againt nil values).
+	  Fixed '==' operators (they were broken when used against nil values).
 	* src/rbgstmediainfo.c, sample/media-type.rb:  New files.
 	* src/rbgst.c: Initializes the media-info extension if needed.
 	* extconf.rb: Checks if the gstmedia-info library is installed,
