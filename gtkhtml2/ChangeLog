@@ -1,3 +1,9 @@
+2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gtkhtml2.rb: Support GLib::Log.set_log_domain.
+	Define Gtk::Html::LOG_DOMAIN,Gtk::HtmlView::LOG_DOMAIN,
+	Gtk::HtmlDocument::LOG_DOMAIN.
+
 2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README, src/rbgtkhtmlview.c: Update Copyright
