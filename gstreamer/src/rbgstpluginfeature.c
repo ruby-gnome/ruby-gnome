@@ -39,8 +39,39 @@ static VALUE rb_gst_pluginfeature_get_name(self)
     return CSTR2RVAL(GST_PLUGIN_FEATURE_NAME(feature));
 }
 
+/*
+ *  Method: ensure_loaded -> aBoolean
+ *
+ *  Check if the plugin containing the feature is loaded.
+ *  If not, the plugin will be loaded.
+ *
+ *  Returns a boolean indicating the feature is loaded.
+ */
+static VALUE rb_gst_pluginfeature_ensure_loaded(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gst_plugin_feature_ensure_loaded(
+        RGST_PLUGIN_FEATURE(self))
+    );
+}
+
+/*
+ *  Method: unload_thyself -> self
+ *
+ *  Unload the feature. This will decrease the refcount in the 
+ *  plugin and will eventually unload the plugin.
+ */
+static VALUE rb_gst_pluginfeature_unload_thyself(self)
+    VALUE self;
+{
+    gst_plugin_feature_unload_thyself(RGST_PLUGIN_FEATURE(self));
+    return self;
+}
+
 void Init_gst_pluginfeature(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_PLUGIN_FEATURE, "PluginFeature", mGst);
     rb_define_method(c, "name", rb_gst_pluginfeature_get_name, 0);
+    rb_define_method(c, "ensure_loaded", rb_gst_pluginfeature_ensure_loaded, 0);
+    rb_define_method(c, "unload_thyself", rb_gst_pluginfeature_unload_thyself, 0);
 }
 
