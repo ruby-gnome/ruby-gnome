@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: mutoh $ 
-  $Date: 2002/10/08 18:53:21 $
+  $Date: 2002/10/09 15:22:13 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -50,14 +50,14 @@ treeselection_get_tree_view(self)
     return GOBJ2RVAL(gtk_tree_selection_get_tree_view(_SELF(self)));
 }
 
-/* Is this correct?
 static VALUE
-treeselection_get_selected(self, iter)
-    VALUE self, iter;
+treeselection_get_selected(self)
+    VALUE self;
 {
-    return (gtk_tree_selection_get_selected(_SELF(self), NULL, RVAL2ITR(iter)));
+    GtkTreeIter iter;
+    return (gtk_tree_selection_get_selected(_SELF(self), (GtkTreeModel**)NULL, &iter)) ? 
+        ITR2RVAL(&iter) : Qnil;
 }
-*/
 
 static void
 treeselection_foreach_func(model, path, iter, data)
@@ -161,7 +161,7 @@ Init_gtk_treeselection()
     rb_define_method(gTs, "set_mode", treeselection_set_mode, 1);
     rb_define_method(gTs, "mode", treeselection_get_mode, 0);
     rb_define_method(gTs, "tree_view", treeselection_get_tree_view, 0);
-/*    rb_define_method(gTs, "get_selected", treeselection_get_selected, 1);*/
+    rb_define_method(gTs, "selected", treeselection_get_selected, 0);
     rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);
     rb_define_method(gTs, "select_path", treeselection_select_path, 1);
     rb_define_method(gTs, "unselect_path", treeselection_unselect_path, 1);

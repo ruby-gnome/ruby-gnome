@@ -1,3 +1,7 @@
+2002-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeselection.c: Add Gtk::Selection#selected.
+
 2002-10-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeviewcolumn.c: Gtk::TreeViewColumn.new - Accept Symbol for properties.
