@@ -20,7 +20,7 @@
  * 
  * $Author: pcppopper $
  * 
- * $Date: 2003/04/13 00:19:20 $
+ * $Date: 2003/06/17 19:13:06 $
  * 
  *****************************************************************************/
 
@@ -42,7 +42,7 @@ extern "C" {
 
 /* other utility macros */
 #define CBOOL2RVAL(b)	((b) ? Qtrue : Qfalse)
-#define RVAL2CBOOL(b)   (
+/* #define RVAL2CBOOL(b)   ( */
 
 /* Type Definitions **********************************************************/
 

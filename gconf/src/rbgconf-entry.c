@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/02/04 21:28:46 $
+ * $Date: 2003/06/17 19:13:06 $
  *
  *****************************************************************************/
 
@@ -54,8 +54,6 @@ gconf_entry_copy(entry)
 	 * UPDATE: it works without copying. but is that perhaps by pure
 	 * chance?
 	 */
-	
-	/*
 	GConfEntry *new_entry;
 
 	g_return_val_if_fail(entry != NULL, NULL);
@@ -65,8 +63,16 @@ gconf_entry_copy(entry)
 			gconf_value_copy(gconf_entry_get_value(entry)));
 	
 	return new_entry;
-	*/
+	/*
+	 * XXX: this is the old behavior, may be responsible for causing the
+	 * following:
+	 * (gconfclock_client.rb:2381): GConf-CRITICAL **: file gconf-value.c:
+	 * line 1495
+	 * (gconf_entry_unref): assertion `REAL_ENTRY (entry)->refcount > 0'
+	 * failed
+	 *
 	return entry;
+	*/
 }
 
 GType

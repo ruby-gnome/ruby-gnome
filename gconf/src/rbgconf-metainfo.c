@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: pcppopper $
  *
- * $Date: 2003/05/24 13:23:34 $
+ * $Date: 2003/06/17 19:13:06 $
  *
  *****************************************************************************/
 
@@ -30,7 +30,6 @@
 
 /* Defines *******************************************************************/
 
-#define GCONF_TYPE_METAINFO	(metainfo_get_gobject_type())
 #define _SELF(s)  	((GConfMetaInfo *)RVAL2BOXED(s, GCONF_TYPE_METAINFO))
 
 /* Type Definitions **********************************************************/

@@ -20,7 +20,7 @@
  * 
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  * 
- * Latest Revision: 2003-04-13
+ * Latest Revision: 2003-06-17
  * 
  *****************************************************************************/
 
@@ -37,12 +37,14 @@ extern "C" {
 
 /* Defines *******************************************************************/
 
+#define GCONF_TYPE_METAINFO	(metainfo_get_gobject_type())
+
 /* Type Definitions **********************************************************/
 
 /* Function Declarations *****************************************************/
 
-extern void Init_gconf_metainfo(VALUE m_gconf);
-extern GType metainfo_get_gobject_type();
+void Init_gconf_metainfo(VALUE m_gconf);
+GType metainfo_get_gobject_type();
 
 /* Global Variables **********************************************************/
 
