@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: ogs $
-  $Date: 2002/11/28 17:33:04 $
+  $Date: 2002/12/02 14:19:09 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -547,7 +547,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "get_text", txt_get_text, 3);
     rb_define_method(gTextBuffer, "get_slice", txt_get_slice, 3);
 
-    rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 1);
+    rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 2);
     rb_define_method(gTextBuffer, "insert_child_anchor", txt_insert_child_anchor, 2);
     rb_define_method(gTextBuffer, "create_child_anchor", txt_create_child_anchor, 1);
     

@@ -1,3 +1,11 @@
+2002-12-02  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtkiconfactory.c: Add a file.
+	* src/rbgtkiconset.c: Add a file.
+	* src/rbgtkiconsource.c: Add a file.
+	* src/rbgtkiconsize.c: Add a file.
+	* src/rbgtktextbuffer.c: Fix a small bug.
+
 2002-12-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtklabel.c: Support mnemonic label in Gtk::Label#initialize, #set_text.
