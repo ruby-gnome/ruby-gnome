@@ -94,7 +94,6 @@ require 'mkmf-gnome2'
 
 pkg_infos   = [
   ['gtk+-2.0', []],
-  ['libgnomeprint-2.2', [2, 8]],
   ['libgnomeprintui-2.2', []],
 ]
 

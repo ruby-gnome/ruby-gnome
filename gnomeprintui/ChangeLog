@@ -1,3 +1,8 @@
+2004-11-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: removed libgnomeprint from required packages. This
+	  must be checked by Ruby/GnomePrint.
+
 2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/dialog.rb: renamed to dialog.rb from to_file.rb.
