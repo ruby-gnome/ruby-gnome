@@ -342,12 +342,14 @@ static VALUE rb_gst_pad_query(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &query_type, &format);
     gstformat = NIL_P(format) ? GST_FORMAT_DEFAULT : FIX2INT(format);
-    return gst_pad_query(RGST_PAD(self),
-                         FIX2INT(query_type),
-                         &gstformat,
-                         &value)
-        ? ULL2NUM(value)
-        : Qnil;
+
+    if (gst_pad_query(RGST_PAD(self), FIX2INT(query_type),
+                      &gstformat, &value))
+    {
+        format = INT2FIX(&gstformat);
+        return ULL2NUM(value);
+    }
+    return Qnil;
 }
 
 /*
