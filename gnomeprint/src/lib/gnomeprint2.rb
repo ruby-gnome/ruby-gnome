@@ -3,15 +3,6 @@ require "libart2"
 require "pango"
 require "gnomeprint2.so"
 
-# for Rabbit <= 0.0.5
-module Gnome
-  class GPANode
-    alias description value 
-    alias name id
-  end
-  PrinterGPA = GPANode
-end
-
 module Gnome
   module Print
     LOG_DOMAIN = "GnomePrint"

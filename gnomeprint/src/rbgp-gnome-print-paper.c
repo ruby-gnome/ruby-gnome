@@ -128,7 +128,7 @@ gp_paper_get_generic(int argc, VALUE *argv, VALUE self)
     return gp_paper_get_default(self);
   } else {
     VALUE name, width, height, mustfit;
-    rb_scan_args(argc, argv, "13", &name, &height, &mustfit);
+    rb_scan_args(argc, argv, "12", &name, &height, &mustfit);
     
     if (TYPE(name) == T_STRING) {
       if (argc > 1)

@@ -1,3 +1,11 @@
+2004-12-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/gnomeprint2.rb: removed backward compatibility for Rabbit
+	  0.0.5. (It wasn't backward compatibility for typo...)
+
+	* src/rbgp-gnome-print-paper.c (gp_paper_get_generic): fixed wrong
+	  arg number bug pointed by Kazuhiko <kazuhiko@fdiary.net>. Thanks!
+
 2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gnome-print.c (Init_gnome_print): Adapted
