@@ -1,3 +1,7 @@
+Sun May 26 21:50:00 2002 Akinori MUSHA <knu@iDaemons.org>
+
+   * extconf.rb: Support --with-gnome-config (Ruby-GNOME patch [532458])
+
 Tue Feb  5 19:09:34 2002 Neil Conway <neilconway@rogers.com>
 
 	* rbpanel-applet.c: Major changes, additions and improvements.

@@ -1,58 +1,31 @@
-=begin
-top-level extconf.rb for gnome extention library
-=end
-
 require 'mkmf'
 
-#
-# detect sub-directories
-#
-subdirs = Dir["*"].select do |subdir|
-  File.file?(subdir + "/extconf.rb")
+gnome_config = with_config('gnome-config', 'gnome-config')
+
+while /^--/ =~ ARGV[0]
+  ARGV.shift
 end
 
-#
-# generate top-level Makefile
-#
-File.open("Makefile", "w") do |makefile|
-  makefile.print("\
-SUBDIRS = #{subdirs.join(' ')}
-
-all:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) all); \\
-	done;
-
-install:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) install); \\
-	done;
-
-site-install:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) site-install); \\
-	done;
-
-clean:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\$subdir && \$(MAKE) clean); \\
-	done; \\
-
-distclean:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) distclean); \\
-	done;
-	rm -f Makefile mkmf.log
-")
+rbgtk_dir = "../gtk"
+rbgtk_dir = ARGV[0] if ARGV[0]
+unless FileTest.exist?(rbgtk_dir)
+  raise "directry #{rbgtk_dir} not found.  Please specify Ruby-GTK source dir."
 end
 
-#
-# generate sub-directory Makefiles
-#
-subdirs.each do |subdir|
-  STDERR.puts("#{$0}: Entering directory `#{subdir}'")
-  Dir.chdir(subdir)
-  system("#{Config::CONFIG['RUBY_INSTALL_NAME']} extconf.rb")
-  Dir.chdir("..")
-  STDERR.puts("#{$0}: Leaving directory `#{subdir}'")
+rbgnome_dir = "../gnome"
+rbgnome_dir = ARGV[1] if ARGV[1]
+unless FileTest.exist?(rbgnome_dir)
+  raise "directry #{rbgnome_dir} not found.  Please specify Ruby-GNOME source dir."
 end
+
+$CFLAGS += " -I#{rbgtk_dir}/src -I#{rbgnome_dir}/src " + `gnome-config --cflags applets`.chomp
+$LDFLAGS += ' ' + `#{gnome_config} --libs applets`.chomp
+
+have_library("X11", "XOpenDisplay") &&
+have_library("Xi", "XOpenDevice") &&
+have_library("Xext", "XextFindDisplay") &&
+have_library("Xmu", "XmuInternAtom") &&
+have_func("g_print") &&
+have_func("gtk_init") &&
+have_func("applet_widget_init") &&
+create_makefile('panel_applet')

@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 23:20:22 $
+  $Date: 2002/05/26 12:56:22 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
@@ -41,7 +41,7 @@ Init_gtk_gdk_cursor()
 {
     gdkCursor = rb_define_class_under(mGdk, "Cursor", rb_cData);
     rb_define_singleton_method(gdkCursor, "new", gdkcursor_s_new, -1);
-#include "rbgdkcursors.h"
+#include "rbgdkcursor.h"
     rb_define_const(gdkCursor, "LAST_CURSOR", INT2FIX(GDK_LAST_CURSOR));
     rb_define_const(gdkCursor, "CURSOR_IS_PIXMAP", 
 		    INT2FIX(GDK_CURSOR_IS_PIXMAP));

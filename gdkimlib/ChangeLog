@@ -1,6 +1,6 @@
-Sun May 26 15:08:10 Masao Mutoh <mutoh@highway.ne.jp>
+Sun May 26 15:08:10 2002 Akinori MUSHA <knu@iDaemons.org>
 
-	* extconf.rb: Apply patch Ruby-GNOME [532437] by knu.
+	* extconf.rb: Support --with-imlib-config (Ruby-GNOME patch [532437])
 
 Mon Mar 18 16:52:39 2002 Seiya Nishizawa <seiya@kugi.kyoto-u.ac.jp>
 
