@@ -1,5 +1,6 @@
 2004-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkallocation.c: Add Gtk::Allocation#to_rect. 
 	* src/rbgtktextbuffer.c: Gtk::TextBuffer#insert_with_tags, 
 	#insert_pixbuf,	#insert_child_anchor are deprecated. 
 	Use Gtk::TextBuffer#insert instead.

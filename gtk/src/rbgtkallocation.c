@@ -4,7 +4,7 @@
   rbgtkallocation.c -
 
   $Author: mutoh $
-  $Date: 2003/05/08 16:45:59 $
+  $Date: 2004/01/13 14:49:43 $
 
   Copyright (C) 2002,2003  Masao Mutoh
 ************************************************/
@@ -136,6 +136,13 @@ alloc_to_a(self)
                      INT2FIX(a->width), INT2FIX(a->height));
 }
 
+static VALUE
+alloc_to_rect(self)
+    VALUE self;
+{
+    return BOXED2RVAL(_SELF(self), GDK_TYPE_RECTANGLE);
+}
+
 void 
 Init_gtk_allocation()
 {
@@ -155,6 +162,7 @@ Init_gtk_allocation()
     rb_define_method(galloc, "set_width", alloc_set_w, 1);
     rb_define_method(galloc, "set_height", alloc_set_h, 1);
     rb_define_method(galloc, "to_a", alloc_to_a, 0);
+    rb_define_method(galloc, "to_rect", alloc_to_rect, 0);
 
     G_DEF_SETTERS(galloc);
 }
