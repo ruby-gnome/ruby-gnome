@@ -76,6 +76,7 @@ extern VALUE cGstEventSeek;
 #define RGST_SCHEDULER_FACTORY(o)   (GST_SCHEDULER_FACTORY(RVAL2GOBJ(o)))
 #define RGST_STRUCTURE(o)           (GST_STRUCTURE(RVAL2BOXED(o, GST_TYPE_STRUCTURE)))
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
+#define RGST_TYPE_FIND_FACTORY(o)   (GST_TYPE_FIND_FACTORY(RVAL2GOBJ(o)))
 #define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
 
 #define RGST_GOBJ_NEW(o)    (rbgst_new_gstobject(o))
@@ -104,6 +105,7 @@ extern VALUE cGstEventSeek;
 #define RGST_STRUCTURE_NEW(o)           (BOXED2RVAL(GST_STRUCTURE(o), GST_TYPE_STRUCTURE))
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
 #define RGST_THREAD_NEW(o)              (RGST_GOBJ_NEW(GST_THREAD(o)))
+#define RGST_TYPE_FIND_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_TYPE_FIND_FACTORY(o)))
 
 GType gst_clock_entry_get_type ();
 GType gst_event_mask_get_type ();

@@ -58,6 +58,7 @@ Init_gst_classes (void)
     extern void Init_gst_structure (void);
     extern void Init_gst_systemclock (void);
     extern void Init_gst_thread (void);
+	extern void Init_gst_typefindfactory (void);
     extern void Init_gst_xml (void);
 
 #ifdef HAVE_MEDIA_INFO
@@ -94,6 +95,7 @@ Init_gst_classes (void)
     Init_gst_structure ();
     Init_gst_systemclock ();
     Init_gst_thread ();
+	Init_gst_typefindfactory ();
     Init_gst_xml ();
 
 #ifdef HAVE_MEDIA_INFO

@@ -74,7 +74,7 @@ rb_gst_padtemplate_get_direction (VALUE self)
 static VALUE
 rb_gst_padtemplate_get_caps (VALUE self)
 {
-	return RBGST_CAPS (gst_pad_template_get_caps (RGST_PAD_TEMPLATE (self)));
+	return RGST_CAPS_NEW (gst_pad_template_get_caps (RGST_PAD_TEMPLATE (self)));
 }
 
 /*

@@ -94,6 +94,51 @@ rb_gst_plugin_each_feature (VALUE self)
 	return rb_ary_yield (rb_gst_plugin_get_features (self));
 }
 
+
+
+static VALUE
+rb_gst_plugin_get_filename (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_filename ( RGST_PLUGIN (self)));
+}
+
+
+
+static VALUE
+rb_gst_plugin_get_description (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_description ( RGST_PLUGIN (self)));
+}
+
+
+
+static VALUE
+rb_gst_plugin_get_package (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_package ( RGST_PLUGIN (self)));
+}
+
+
+
+static VALUE
+rb_gst_plugin_get_license (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_license ( RGST_PLUGIN (self)));
+}
+
+
+
+static VALUE
+rb_gst_plugin_get_origin (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_origin ( RGST_PLUGIN (self)));
+}
+
+
+
+
+
+
 /*
  * Method: ==(plugin)
  * Returns: true if two Gst::Plugin objects are refered by the same file,
@@ -108,6 +153,15 @@ rb_gst_plugin_is_equal (VALUE self, VALUE other_plugin)
 			    rb_gst_plugin_get_filename (other_plugin));
 }
 
+
+
+static VALUE
+rb_gst_plugin_get_name (VALUE self)
+{
+	return CSTR2RVAL (gst_plugin_get_name ( RGST_PLUGIN (self)));
+}
+
+
 void
 Init_gst_plugin (void)
 {
@@ -117,4 +171,11 @@ Init_gst_plugin (void)
 	rb_define_method (c, "features", rb_gst_plugin_get_features, 0);
 	rb_define_method (c, "each_feature", rb_gst_plugin_each_feature, 0);
 	rb_define_method (c, "==", rb_gst_plugin_is_equal, 1);
+	rb_define_method (c, "name", rb_gst_plugin_get_name, 0);
+	rb_define_method (c, "filename", rb_gst_plugin_get_filename, 0);
+	rb_define_method (c, "description", rb_gst_plugin_get_description, 0);
+	rb_define_method (c, "package", rb_gst_plugin_get_package, 0);
+	rb_define_method (c, "license", rb_gst_plugin_get_license, 0);
+	rb_define_method (c, "origin", rb_gst_plugin_get_origin, 0);
+
 }

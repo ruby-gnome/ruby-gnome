@@ -41,13 +41,6 @@ def print_prop(name, obj)
     end
 end
 
-def print_caps(c)
-    puts c.name + " (" + ((c.fixed?) ? "fixed" : "NOT fixed") + ")"
-    t = Gst::Type.find_by_id(c.type_id)
-    puts "MIME type: " + (t ? t.mime : "unknown/unknown")
-    prefix { c.each_property { |name, obj| print_prop(name, obj) } }
-end
-
 def print_format(f)
     puts "(#{f.type_id}) :".ljust(10) + f.nick + " (#{f.description})" 
 end
@@ -146,8 +139,7 @@ def print_element_info(f)
             end
             puts "Avaibility: " + pres
             if p.has_caps?
-                puts "Capabilities:"
-                prefix { p.each_caps { |c| print_caps(c) } }
+                puts "Capabilities:" + p.caps.to_s
             end
         end
     end
@@ -178,7 +170,7 @@ def print_element_info(f)
     end
     puts ""
     puts "Indexing capabilities:"
-    prefix { puts ((e.indexable?) ? "element can do indexing" : "none") }
+    prefix { puts((e.indexable?) ? "element can do indexing" : "none") }
     puts ""
     puts "Pads:"
     prefix do

@@ -82,6 +82,8 @@ instanciate_pluginfeature (GstPluginFeature *feature)
 		return RGST_SCHEDULER_FACTORY_NEW (feature);
 	else if (GST_IS_INDEX_FACTORY (feature))
 		return RGST_INDEX_FACTORY_NEW (feature);
+	else if (GST_IS_TYPE_FIND_FACTORY (feature))
+		return RGST_TYPE_FIND_FACTORY_NEW (feature);
 	else
 		rb_raise(rb_eArgError,
 			 "Invalid plugin feature of type ``%s''",

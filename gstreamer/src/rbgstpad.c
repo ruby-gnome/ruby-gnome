@@ -330,7 +330,7 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
 static VALUE
 rb_gst_pad_get_caps (VALUE self)
 {
-    return RBGST_CAPS (gst_pad_get_caps (RGST_PAD (self))); 	
+    return RGST_CAPS_NEW (gst_pad_get_caps (RGST_PAD (self))); 	
 }
 
 /*

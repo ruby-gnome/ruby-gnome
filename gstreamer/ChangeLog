@@ -1,3 +1,21 @@
+2005-02-09  Jack, Paul  <pjack@sfaf.org>
+
+	* src/rbgsttypefindfactory.c: Added.
+	* sample/gst-inspect.rb: Replaced print_caps function 
+	with caps.to_s
+	* src/rbgst.c: Added call to Init_gst_typefindfactory.
+	* src/rbgst.h: Added RGST_TYPE_FIND_FACTORY macro
+	and RGST_TYPE_FIND_FACTORY_NEW macro
+	* src/rbgstpad.c: Replaced nonexistent RBGST_CAPS macro 
+	with RGST_CAPS_NEW macro.
+	* src/rbgstpadtemplate.c: Replaced nonexistent RBGST_CAPS 
+	macro with RGST_CAPS_NEW macro.
+  	* src/rbgstplugin.c: Added filename, description, package, 
+	license, origin and name accessor methods.
+	* src/rbgstpluginfeature.c: Added ability to instantiate 
+	Gst::TypeFindFactory.
+	* src/rbgsttypefindfactory.c: New file.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
