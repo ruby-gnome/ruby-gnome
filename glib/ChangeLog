@@ -1,3 +1,8 @@
+2003-10-08  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgobj_param.c: Removed a compilation warning in function
+	value_validate_ensure().
+
 2003-10-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib.c: call g_mem_set_vtable() to make glib to use

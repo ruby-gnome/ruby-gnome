@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: sakai $
-  $Date: 2003/09/03 01:00:00 $
+  $Author: lrz $
+  $Date: 2003/10/08 15:34:19 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -217,6 +217,7 @@ static VALUE
 value_validate_ensure(struct validate_arg* arg)
 {
     g_value_unset(arg->value);
+    return Qnil;
 }
 
 static VALUE
