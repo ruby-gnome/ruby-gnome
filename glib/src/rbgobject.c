@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:12:32 $
+  $Date: 2002/11/19 15:33:56 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -171,15 +171,15 @@ rbgobj_get_gobject(obj)
     gobj_holder* holder;
 
     if (!RTEST(rb_obj_is_kind_of(obj, GTYPE2CLASS(G_TYPE_OBJECT))))
-        rb_raise(rb_eTypeError, "not a GLib::GObject");
+        rb_raise(rb_eTypeError, "not a GLib::Object");
 
     Data_Get_Struct(obj, gobj_holder, holder);
 
     if (holder->destroyed)
-        rb_raise(rb_eArgError, "destroyed GLib::GObject");
+        rb_raise(rb_eArgError, "destroyed GLib::Object");
 
     if (!holder->gobj)
-        rb_raise(rb_eArgError, "uninitialize GLib::GObject");
+        rb_raise(rb_eArgError, "uninitialize GLib::Object");
 
     return holder->gobj;
 }

@@ -1,3 +1,7 @@
+2002-11-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: Fix typos in error messages(GLib::GObject to GLib::Object).
+
 2002-11-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_signal.c: BugFix of rbgobj_set/get_signal_func.
