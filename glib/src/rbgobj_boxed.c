@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/04/04 13:48:41 $
+  $Date: 2003/07/13 16:26:45 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -78,21 +78,62 @@ rbgobj_boxed_gtype(self)
 }
 
 static VALUE
-rbgobj_boxed_copy(self)
+rbgobj_boxed_inspect(self)
     VALUE self;
 {
-    boxed_holder* holder1;
-    boxed_holder* holder2;
-    VALUE result = rbgobj_boxed_create(CLASS_OF(self));
+    boxed_holder* holder;
+    gchar* s;
+    VALUE result;
 
-    Data_Get_Struct(self, boxed_holder, holder1);
-    Data_Get_Struct(result, boxed_holder, holder2);
+    Data_Get_Struct(self, boxed_holder, holder);
 
-    holder2->boxed = g_boxed_copy(holder1->type, holder1->boxed);
-    holder2->own   = TRUE;
+    s = g_strdup_printf("#<%s:%p ptr=%p own=%s>",
+                        rb_class2name(CLASS_OF(self)),
+                        (void *)self,
+                        holder->boxed,
+                        holder->own ? "true" : "false");
+
+    result = rb_str_new2(s);
+    g_free(s);
 
     return result;
 }
+
+static VALUE
+rbgobj_boxed_init_copy(self, orig)
+    VALUE self, orig;
+{
+    boxed_holder* holder1;
+    boxed_holder* holder2;
+
+    if (self == orig) return self;
+
+    if (!rb_obj_is_instance_of(orig, rb_obj_class(self))) {
+	rb_raise(rb_eTypeError, "wrong argument class");
+    }
+
+    Data_Get_Struct(self, boxed_holder, holder1);
+    Data_Get_Struct(orig, boxed_holder, holder2);
+
+    holder1->boxed = g_boxed_copy(holder2->type, holder2->boxed);
+    holder1->own   = TRUE;
+
+    if (!holder1->boxed)
+      rb_raise(rb_eRuntimeError, "g_boxed_copy() failed");
+
+    return self;
+}
+
+#if RUBY_VERSION_CODE < 180
+static VALUE
+rbgobj_boxed_copy(self)
+    VALUE self;
+{
+    VALUE result = rbgobj_boxed_create(CLASS_OF(self));
+    rbgobj_boxed_init_copy(result, self);
+    return result;
+}
+#endif
 
 /**********************************************************************/
 
@@ -184,6 +225,12 @@ static void
 boxed_from_ruby(VALUE from, GValue* to)
 {
     boxed_holder* holder;
+
+    if (NIL_P(from)) {
+        g_value_set_boxed(to, NULL);
+        return;
+    }
+
     Data_Get_Struct(from, boxed_holder, holder);
 
     if (g_type_is_a(holder->type, G_VALUE_TYPE(to)))
@@ -214,6 +261,14 @@ Init_gobject_gboxed()
 
     rb_define_singleton_method(gBoxed, "gtype", rbgobj_boxed_s_gtype, 0);
     rb_define_method(gBoxed, "gtype", rbgobj_boxed_gtype, 0);
+    rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
+    rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 0);
+
+#if RUBY_VERSION_CODE < 180
     rb_define_method(gBoxed, "copy", rbgobj_boxed_copy, 0);
     rb_define_alias(gBoxed, "clone", "copy");
+    rb_define_alias(gBoxed, "dup", "copy");
+#else
+    rb_define_alias(gBoxed, "copy", "dup");
+#endif
 }

@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Author: sakai $
+  $Date: 2003/07/13 16:26:45 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -107,11 +107,11 @@ static VALUE
 inspect(VALUE self)
 {
     GParamSpec* pspec = RVAL2GOBJ(self);
-    gchar* str = g_strdup_printf("#<%s: name=\"%s\" value_type=\"%s\" owner_type=\"%s\">",
+    VALUE v = rb_inspect(GTYPE2CLASS(pspec->owner_type));
+    gchar* str = g_strdup_printf("#<%s: %s#%s>",
                                  rb_class2name(CLASS_OF(self)),
-                                 g_param_spec_get_name(pspec),
-                                 g_type_name(G_PARAM_SPEC_VALUE_TYPE(pspec)),
-                                 g_type_name(pspec->owner_type));
+                                 StringValuePtr(v),
+                                 g_param_spec_get_name(pspec));
     VALUE result = rb_str_new2(str);
     g_free(str);
     return result;
@@ -153,6 +153,12 @@ static VALUE
 get_owner_type(VALUE self)
 {
     return rbgobj_gtype_new(rbgobj_param_spec_get_struct(self)->owner_type);
+}
+
+static VALUE
+get_owner(VALUE self)
+{
+    return GTYPE2CLASS(rbgobj_param_spec_get_struct(self)->owner_type);
 }
 
 static VALUE
@@ -238,6 +244,24 @@ get_ref_count(self)
     return INT2NUM(G_PARAM_SPEC(rbgobj_param_spec_get_struct(self))->ref_count);
 }
 
+
+#define param_is_flag(flag) \
+    static VALUE \
+    param_is_##flag(self) \
+        VALUE self; \
+    { \
+        GParamSpec* pspec = G_PARAM_SPEC(rbgobj_param_spec_get_struct(self)); \
+        return (pspec->flags & flag) ? Qtrue : Qfalse; \
+    }
+
+param_is_flag(G_PARAM_READABLE)
+param_is_flag(G_PARAM_WRITABLE)
+param_is_flag(G_PARAM_CONSTRUCT)
+param_is_flag(G_PARAM_CONSTRUCT_ONLY)
+param_is_flag(G_PARAM_LAX_VALIDATION)
+param_is_flag(G_PARAM_PRIVATE)
+param_is_flag(G_PARAM_READWRITE)
+
 /**********************************************************************/
 
 static void
@@ -253,7 +277,6 @@ Init_gobject_gparam_spec()
     rb_define_const(cParamSpec, "CONSTRUCT_ONLY", INT2FIX(G_PARAM_CONSTRUCT_ONLY));
     rb_define_const(cParamSpec, "LAX_VALIDATION", INT2FIX(G_PARAM_LAX_VALIDATION));
     rb_define_const(cParamSpec, "PRIVATE",        INT2FIX(G_PARAM_PRIVATE));
-
     rb_define_const(cParamSpec, "READWRITE",      INT2FIX(G_PARAM_READWRITE));
     rb_define_const(cParamSpec, "MASK",           INT2FIX(G_PARAM_MASK));
     rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
@@ -273,7 +296,9 @@ Init_gobject_gparam_spec()
 
     rb_define_method(cParamSpec, "flags", get_flags, 0);
     rb_define_method(cParamSpec, "value_type", get_value_type, 0);
+    //rb_define_alias(cParamSpec, "type", "value_type");
     rb_define_method(cParamSpec, "owner_type", get_owner_type, 0);
+    rb_define_method(cParamSpec, "owner", get_owner, 0);
 
     rb_define_method(cParamSpec, "default=", value_set_default, 1);
     rb_define_method(cParamSpec, "defaults", value_defaults, 1);
@@ -283,6 +308,14 @@ Init_gobject_gparam_spec()
 
     /* for debugging */
     rb_define_method(cParamSpec, "ref_count", get_ref_count, 0);
+
+    rb_define_method(cParamSpec, "readable?",       param_is_G_PARAM_READABLE, 0);
+    rb_define_method(cParamSpec, "writable?",       param_is_G_PARAM_WRITABLE, 0);
+    rb_define_method(cParamSpec, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
+    rb_define_method(cParamSpec, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
+    rb_define_method(cParamSpec, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
+    rb_define_method(cParamSpec, "private?",        param_is_G_PARAM_PRIVATE, 0);
+    rb_define_method(cParamSpec, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
 }
 
 /**********************************************************************/

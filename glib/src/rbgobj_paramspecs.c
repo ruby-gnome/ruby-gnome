@@ -4,7 +4,7 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2003/04/12 13:14:16 $
+  $Date: 2003/07/13 16:26:45 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -20,7 +20,7 @@ typename##_default_value(self) \
     return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->default_value); \
 } \
 
-#define DEF_NUMERIC_PSPEC_METHODS_FUNC(typename, from_ruby, to_ruby, pspec_cast) \
+#define DEF_NUMERIC_PSPEC_METHODS_FUNC(pspec_type, typename, from_ruby, to_ruby, pspec_cast) \
 static VALUE \
 typename##_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags) \
    VALUE self, name, nick, blurb, minimum, maximum, default_value, flags; \
@@ -49,22 +49,28 @@ VALUE typename##_minimum(self) \
 static \
 VALUE typename##_maximum(self) \
 { \
-    return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->minimum); \
+    return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->maximum); \
 } \
 \
-DEF_DEFAULT_VALUE_FUNC(typename, to_ruby, pspec_cast) \
+static \
+VALUE typename##_range(self) \
+{ \
+    pspec_type* pspec = pspec_cast(rbgobj_param_spec_get_struct(self)); \
+    return rb_range_new(pspec->minimum, pspec->maximum, 0); \
+} \
+DEF_DEFAULT_VALUE_FUNC(typename, to_ruby, pspec_cast)
 
 
-DEF_NUMERIC_PSPEC_METHODS_FUNC(char, NUM2INT, INT2FIX, G_PARAM_SPEC_CHAR)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(uchar, NUM2UINT, INT2FIX, G_PARAM_SPEC_UCHAR)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(int, NUM2INT, INT2NUM, G_PARAM_SPEC_INT)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(uint, NUM2UINT, UINT2NUM, G_PARAM_SPEC_UINT)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(long, NUM2LONG, INT2NUM, G_PARAM_SPEC_LONG)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(ulong, NUM2ULONG, UINT2NUM, G_PARAM_SPEC_ULONG)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(int64, rbglib_num_to_int64, rbglib_int64_to_num, G_PARAM_SPEC_INT64)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(uint64, rbglib_num_to_uint64, rbglib_uint64_to_num, G_PARAM_SPEC_UINT64)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(float, NUM2DBL, rb_float_new, G_PARAM_SPEC_FLOAT)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(double, NUM2DBL, rb_float_new, G_PARAM_SPEC_DOUBLE)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecChar, char, NUM2INT, INT2FIX, G_PARAM_SPEC_CHAR)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecUChar, uchar, NUM2UINT, INT2FIX, G_PARAM_SPEC_UCHAR)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecInt, int, NUM2INT, INT2NUM, G_PARAM_SPEC_INT)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecUInt, uint, NUM2UINT, UINT2NUM, G_PARAM_SPEC_UINT)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecLong, long, NUM2LONG, INT2NUM, G_PARAM_SPEC_LONG)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecULong, ulong, NUM2ULONG, UINT2NUM, G_PARAM_SPEC_ULONG)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecInt64, int64, rbglib_num_to_int64, rbglib_int64_to_num, G_PARAM_SPEC_INT64)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecUInt64, uint64, rbglib_num_to_uint64, rbglib_uint64_to_num, G_PARAM_SPEC_UINT64)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecFloat, float, NUM2DBL, rb_float_new, G_PARAM_SPEC_FLOAT)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecDouble, double, NUM2DBL, rb_float_new, G_PARAM_SPEC_DOUBLE)
 
 static VALUE
 float_epsilon(self)
@@ -275,6 +281,7 @@ Init_gobject_gparamspecs()
     rb_define_method(c, "initialize", typename##_initialize, 7); \
     rb_define_method(c, "minimum", typename##_minimum, 0); \
     rb_define_method(c, "maximum", typename##_maximum, 0); \
+    rb_define_method(c, "range", typename##_range, 0); \
     rb_define_method(c, "default_value", typename##_default_value, 0); \
     rb_define_alias(c, "default", "default_value"); \
   } G_STMT_END

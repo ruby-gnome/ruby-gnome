@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:14:47 $
+  $Author: sakai $
+  $Date: 2003/07/13 16:26:45 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -39,39 +39,6 @@ rbgobj_get_signal_func(guint signal_id)
     if (!NIL_P(func_obj))
         Data_Get_Struct(func_obj, void, func);
     return func;
-}
-
-/**********************************************************************/
-
-static guint
-to_signal_id(signal, gtype)
-     VALUE signal;
-     GType gtype;
-{
-    if (rb_obj_is_kind_of(signal, cSignal)) {
-        GSignalQuery* query;
-        Data_Get_Struct(signal, GSignalQuery, query);
-        return query->signal_id;
-    } else if (rb_respond_to(signal, rb_intern("to_str"))){
-        StringValue(signal);
-        return g_signal_lookup(StringValuePtr(signal), gtype);
-    } else {
-        return NUM2UINT(signal);
-    }
-}
-
-static GQuark
-to_gquark(obj)
-     VALUE obj;
-{
-    if (NIL_P(obj)) {
-        return 0;
-    } else if (rb_respond_to(obj, rb_intern("to_str"))){
-        StringValue(obj);
-        return g_quark_from_string(StringValuePtr(obj));
-    } else {
-        return NUM2UINT(obj);
-    }
 }
 
 /**********************************************************************/
@@ -175,7 +142,10 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         rb_raise(rb_eTypeError, "%s isn't registerd class",
                  rb_class2name(self));
 
-    StringValue(signal_name);
+    if (SYMBOL_P(signal_name))
+        signal_name = rb_str_new2(rb_id2name(SYM2ID(sig)));
+    else
+        StringValue(signal_name);
 
     {
         ID method_id;
@@ -253,11 +223,20 @@ gobj_s_signals(int argc, VALUE* argv, VALUE self)
 static VALUE
 gobj_s_signal(VALUE self, VALUE name)
 {
+    const char* sig_name;
     guint sig_id;
-    StringValue(name);
-    sig_id = g_signal_lookup(StringValuePtr(name), CLASS2GTYPE(self));
+
+    if (SYMBOL_P(name)){
+        sig_name = rb_id2name(SYM2ID(name));
+    } else {
+        StringValue(name);
+        sig_name = StringValuePtr(name);
+    }
+    
+    sig_id = g_signal_lookup(sig_name, CLASS2GTYPE(self));
     if (!sig_id)
-        rb_raise(rb_eNameError, "no such signal: %s", StringValuePtr(name));
+        rb_raise(rb_eNameError, "no such signal: %s", sig_name);
+
     return rbgobj_signal_wrap(sig_id);
 }
 
@@ -378,37 +357,48 @@ gobj_sig_emit(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE detailed_signal, params;
+    VALUE sig, params;
+    const char* sig_name;
     guint signal_id;
     GQuark detail;
 
-    rb_scan_args(argc, argv, "1*", &detailed_signal, &params);
-    StringValue(detailed_signal);
+    rb_scan_args(argc, argv, "1*", &sig, &params);
 
-    if (!g_signal_parse_name(StringValuePtr(detailed_signal),
+    if (SYMBOL_P(sig))
+        sig_name = rb_id2name(SYM2ID(sig));
+    else {
+        StringValue(sig);
+        sig_name = StringValuePtr(sig);
+    }
+
+    if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
                              &signal_id, &detail, FALSE))        
-        rb_raise(rb_eArgError, "invalid signal \"%s\"",
-                 StringValuePtr(detailed_signal));
+        rb_raise(rb_eArgError, "invalid signal \"%s\"", sig_name);
 
     return emit_impl(self, signal_id, detail, params);
 }
 
 static VALUE
-gobj_sig_emit_stop(self, detailed_signal)
-    VALUE self, detailed_signal;
+gobj_sig_emit_stop(self, sig)
+    VALUE self, sig;
 {
     gpointer instance = RVAL2GOBJ(self);
+    const char* sig_name;
     guint signal_id;
     GQuark detail;
 
-    StringValue(detailed_signal);
+    if (SYMBOL_P(sig))
+        sig_name = rb_id2name(SYM2ID(sig));
+    else {
+        StringValue(sig);
+        sig_name = StringValuePtr(sig);
+    }
 
-    if (!g_signal_parse_name(StringValuePtr(detailed_signal),
+    if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
                              &signal_id, &detail, FALSE))        
-        rb_raise(rb_eArgError, "invalid signal \"%s\"",
-                 StringValuePtr(detailed_signal));
+        rb_raise(rb_eArgError, "invalid signal \"%s\"", sig_name);
 
     g_signal_stop_emission(instance, signal_id, detail);
     return self;
@@ -550,6 +540,7 @@ rbgobj_signal_wrap(sig_id)
 
 static VALUE
 query_signal_id(self)
+    VALUE self;
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -558,6 +549,7 @@ query_signal_id(self)
 
 static VALUE
 query_signal_name(self)
+    VALUE self;
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -566,6 +558,7 @@ query_signal_name(self)
 
 static VALUE
 query_itype(self)
+    VALUE self;
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -573,7 +566,17 @@ query_itype(self)
 }
 
 static VALUE
+query_owner(self)
+    VALUE self;
+{
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    return GTYPE2CLASS(query->itype);
+}
+
+static VALUE
 query_return_type(self)
+    VALUE self;
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -582,6 +585,7 @@ query_return_type(self)
 
 static VALUE
 query_signal_flags(self)
+    VALUE self;
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -590,6 +594,7 @@ query_signal_flags(self)
 
 static VALUE
 query_param_types(self)
+    VALUE self;
 {
     GSignalQuery* query;
     VALUE result;
@@ -603,9 +608,32 @@ query_param_types(self)
     return result;
 }
 
+static VALUE
+query_inspect(self)
+    VALUE self;
+{
+    GSignalQuery* query;
+    gchar* s;
+    VALUE result, v;
+
+    Data_Get_Struct(self, GSignalQuery, query);
+
+    v = rb_inspect(GTYPE2CLASS(query->itype));
+
+    s = g_strdup_printf("#<%s: %s#%s>",
+                        rb_class2name(CLASS_OF(self)),
+                        StringValuePtr(v),
+                        query->signal_name);
+    result = rb_str_new2(s);
+    g_free(s);
+
+    return result;
+}
+
 #define query_is_flag(flag) \
     static VALUE \
     query_is_##flag(self) \
+        VALUE self; \
     { \
         GSignalQuery* query; \
         Data_Get_Struct(self, GSignalQuery, query); \
@@ -656,26 +684,32 @@ g_signal_add_emission_hook_closure (guint     signal_id,
 static VALUE
 signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
 {
-    VALUE tmp, proc;
-    guint signal_id, hook_id;
-    GQuark detail;
+    GSignalQuery* query;
+    VALUE detail_obj, proc;
+    guint hook_id;
+    GQuark detail = 0;
     GClosure* closure;
 
-    if (rb_scan_args(argc, argv, "01&", &tmp, &proc) == 1)
-        detail = to_gquark(tmp);
-    else
-        detail = 0;
-    signal_id = to_signal_id(self);
+    if (rb_scan_args(argc, argv, "01&", &detail, &proc) == 1) {
+        if (SYMBOL_P(detail_obj))
+            detail = g_quark_from_string(rb_id2name(SYM2ID(detail_obj)));
+        else
+            detail = g_quark_from_string(StringValuePtr(detail_obj));
+    }
 
-    closure = g_rclosure_new(proc, Qnil, rbgobj_get_signal_func(signal_id));
-    hook_id = g_signal_add_emission_hook_closure(signal_id, detail, closure);
+    Data_Get_Struct(self, GSignalQuery, query);
+
+    closure = g_rclosure_new(proc, Qnil, rbgobj_get_signal_func(query->signal_id));
+    hook_id = g_signal_add_emission_hook_closure(query->signal_id, detail, closure);
     return ULONG2NUM(hook_id);
 }
 
 static VALUE
 signal_remove_emission_hook(VALUE self, VALUE hook_id)
 {
-    g_signal_remove_emission_hook(to_signal_id(self), NUM2ULONG(hook_id));
+    GSignalQuery* query;
+    Data_Get_Struct(self, GSignalQuery, query);
+    g_signal_remove_emission_hook(query->signal_id, NUM2ULONG(hook_id));
     return Qnil;
 }
 
@@ -688,8 +722,10 @@ Init_signal_class()
     rb_define_method(cSignal, "name", query_signal_name, 0);
     rb_define_method(cSignal, "flags", query_signal_flags, 0);
     rb_define_method(cSignal, "itype", query_itype, 0);
+    rb_define_method(cSignal, "owner", query_owner, 0);
     rb_define_method(cSignal, "return_type", query_return_type, 0);
     rb_define_method(cSignal, "param_types", query_param_types, 0);
+    rb_define_method(cSignal, "inspect", query_inspect, 0);
 
     rb_define_method(cSignal, "add_emission_hook", signal_add_emission_hook, -1);
     rb_define_method(cSignal, "remove_emission_hook", signal_remove_emission_hook, 1);

@@ -3,8 +3,8 @@
 
   rbgobj_valuetypes.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/09 17:31:16 $
+  $Author: sakai $
+  $Date: 2003/07/13 16:26:45 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -61,12 +61,62 @@ ptr_gtype(self)
     return ptr_s_gtype(CLASS_OF(self));
 }
 
+#ifndef RBGOBJ_USE_DLPTR
+static VALUE
+ptr_inspect(self)
+    VALUE self;
+{
+    gpointer ptr;
+    gchar* s;
+    VALUE result;
+
+    Data_Get_Struct(self, void, ptr);
+
+    s = g_strdup_printf("#<%s:%p ptr=%p>",
+                        rb_class2name(CLASS_OF(self)),
+                        (void *)self,
+                        ptr);
+
+    result = rb_str_new2(s);
+    g_free(s);
+
+    return result;
+}
+
+static VALUE
+ptr_eql(self, other)
+    VALUE self, other;
+{
+    gpointer ptr1, ptr2;
+    if (!rb_obj_is_kind_of(other, GTYPE2CLASS(G_TYPE_POINTER)))
+        return Qnil;
+    Data_Get_Struct(self, void, ptr1);
+    Data_Get_Struct(other, void, ptr2);
+    return (ptr1==ptr2) ? Qtrue : Qfalse;
+}
+
+static VALUE
+ptr_hash(self)
+    VALUE self;
+{
+    gpointer ptr;
+    Data_Get_Struct(self, void, ptr);
+    return INT2FIX((long)ptr);
+}
+#endif
+
 static void
 Init_gtype_pointer()
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", mGLib);
     rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 1);
     rb_define_method(cPtr, "gtype", ptr_gtype, 1);
+#ifndef RBGOBJ_USE_DLPTR
+    rb_define_method(cPtr, "inspect", ptr_inspect, 0);
+    rb_define_method(cPtr, "==", ptr_eql, 1);
+    rb_define_method(cPtr, "eql?", ptr_eql, 1);
+    rb_define_method(cPtr, "hash", ptr_hash, 0);
+#endif
 }
 
 /**********************************************************************/

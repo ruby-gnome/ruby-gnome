@@ -1,3 +1,37 @@
+2003-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/depend: use $(srcdir) to allow building in different directories.
+
+	* src/rbgobj_param.c (inspect): change inspect format.
+
+	* src/rbgobj_param.c: new methods:
+	GLib::Param#owner, GLib::Param#readable?,
+	GLib::Param#writable?, GLib::Param#construct?,
+	GLib::Param#construct_only?, GLib::Param#lax_validation?,
+	GLib::Param#private?, GLib::Param#readwrite?
+
+	* src/rbgobj_paramspec.c: new methods:
+	GLib::Param::Char#range, GLib::Param::UChar#range,
+	GLib::Param::Int#range, GLib::Param::UInt#range,
+	GLib::Param::Long#range, GLib::Param::ULong#range,
+	GLib::Param::Int64#range, GLib::Param::UInt64#range,
+	GLib::Param::Float#range, GLib::Param::Double#range
+
+	* src/rbgobj_boxed.c: implement GLib::Boxed#inspect and
+	GLib::Boxed#initialize_copy.
+	(boxed_from_ruby): accept nil and set NULL.
+
+	* src/rbgobj_signal.c: implement GLib::Signal#inspect and
+	GLib::Signal#owner.
+	(to_signal_id, to_gquark): removed.
+	(gobj_s_signal_new, gobj_s_signal, gobj_sig_emit, gobj_sig_emit_stop):
+	accept Symbol.
+	(query_signal_id, query_signal_name, query_itype, query_return_type,
+	query_signal_flags, query_param_types): fix argument declaration.
+
+	* src/rbgobj_valuetypes.c: implement GLib::Pointer#inspect,
+	GLib::Pointer#==, GLib::Pointer#eql? and GLib::Pointer#hash.
+
 2003-07-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_value.c, rbgobj_type.c: 
