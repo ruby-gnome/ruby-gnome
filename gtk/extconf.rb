@@ -8,7 +8,7 @@ require "mkmf"
 # detect GTK+ configurations
 #
 if /mswin32/ !~ PLATFORM
-  config_cmd = with_config("pkg-config", "pkg-config gtk+-x11-2.0")
+  config_cmd = with_config("pkg-config", "pkg-config gtk+-2.0")
   while /^--/ =~ ARGV[0]
     ARGV.shift
   end
@@ -83,6 +83,9 @@ begin
       raise Interrupt, msg
     end
   end
+  have_func('gtk_plug_get_type')
+  have_func('gtk_socket_get_type')
+  have_func('_gtk_accel_group_attach')
   have_func("XReadBitmapFileData")
   obj_ext = ".#{$OBJEXT}"
 

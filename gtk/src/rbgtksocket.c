@@ -2,13 +2,15 @@
 
   rbgtksocket.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/05 16:24:02 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
 
 #include "global.h"
+
+#ifdef HAVE_GTK_SOCKET_GET_TYPE
 
 static VALUE
 socket_initialize(self)
@@ -48,9 +50,12 @@ socket_get_socket_id(self)
 }
 #endif
 
+#endif /* HAVE_GTK_SOCKET_GET_TYPE */
+
 void 
 Init_gtk_socket()
 {
+#ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE gSocket = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
     rb_define_method(gSocket, "initialize",  socket_initialize, 0);
@@ -58,5 +63,6 @@ Init_gtk_socket()
     rb_define_method(gSocket, "plug_window", socket_plug_window, 0);
 #if defined HAVE_GDK_GDKX_H
     rb_define_method(gSocket, "xwindow", socket_get_socket_id, 0);
+#endif
 #endif
 }

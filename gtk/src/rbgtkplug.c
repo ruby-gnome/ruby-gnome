@@ -2,13 +2,15 @@
 
   rbgdkplug.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/05 16:24:02 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
 
 #include "global.h"
+
+#ifdef HAVE_GTK_PLUG_GET_TYPE
 
 static VALUE
 plug_initialize(self, socket_id)
@@ -35,10 +37,14 @@ plug_construct(self, socket_id)
     return Qnil;
 }
 
+#endif /* HAVE_GTK_PLUG_GET_TYPE */
+
 void Init_gtk_plug()
 {
+#ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE gPlug = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
     
     rb_define_method(gPlug, "initialize", plug_initialize, 1);
     rb_define_method(gPlug, "construct", plug_construct, 1);
+#endif
 }

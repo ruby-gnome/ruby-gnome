@@ -1,3 +1,12 @@
+2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgtkplug.c, src/rbgtksocket: check whether functions
+	are available or not. (for win32)
+	* extconf.rb, src/rbgtkaccelgroup.c: check whether
+	_gtk_accel_group_attach() and _gtk_accel_group_detach() are available
+	or not. (for win32)
+	* extconf.rb: use 'gtk+-2.0' instead of 'gtk+-x11-2.0'
+
 2002-08-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktree.c: suppress warnings
