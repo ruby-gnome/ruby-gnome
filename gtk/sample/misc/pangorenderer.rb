@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   pangorenderer.rb - Ruby/GTK sample script.
 
   Copyright (c) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pangorenderer.rb,v 1.2 2005/02/12 16:03:46 mutoh Exp $
+  $Id: pangorenderer.rb,v 1.3 2005/03/22 17:41:28 silicio Exp $
 =end
 
 require 'gtk2'

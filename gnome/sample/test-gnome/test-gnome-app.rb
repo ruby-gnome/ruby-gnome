@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   test-gnome-app.rb - testGNOME rewritten in Ruby/GNOME

@@ -1,4 +1,9 @@
-2005-03-06    <mutoh@localhost.localdomain>
+2005-03-22  Mirko Maischberger  <mirko@lilik.it>
+
+	* sample/*.rb: sh-bang (!#) normalization.
+	Reported by Mezz
+	
+2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf-format.c: Fix a compilation problemn on GTK+-2.0.x.
 	* README: Revised.

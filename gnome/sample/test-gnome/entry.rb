@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   entry.rb - Entry test rewritten in Ruby/GNOME

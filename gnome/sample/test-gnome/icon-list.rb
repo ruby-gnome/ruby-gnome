@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   icon-list.rb - IconList test rewritten in Ruby/GNOME

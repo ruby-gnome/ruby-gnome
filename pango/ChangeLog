@@ -1,3 +1,8 @@
+2005-03-22  Mirko Maischberger  <mirko@lilik.it>
+	
+	* sample/parse.rb: sh-bang (!#) normalization.
+	Reported by Mezz 
+
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoglyphitem.c, src/rbpangocontext.c, rbpangofontfamily.c, 

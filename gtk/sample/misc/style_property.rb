@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   style_property.rb - Ruby/GTK sample script.
 
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: style_property.rb,v 1.1 2004/01/25 15:52:38 mutoh Exp $
+  $Id: style_property.rb,v 1.2 2005/03/22 17:41:28 silicio Exp $
 =end
 
 require 'gtk2'

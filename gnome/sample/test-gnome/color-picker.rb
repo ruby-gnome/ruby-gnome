@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   color-picker.rb - ColorPicker test rewritten in Ruby/GNOME

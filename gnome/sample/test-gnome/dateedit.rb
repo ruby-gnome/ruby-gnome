@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   dateedit.rb - DateEdit test rewritten in Ruby/GNOME

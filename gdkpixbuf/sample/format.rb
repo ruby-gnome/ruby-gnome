@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   format.rb - Ruby/GdkPixbuf sample script.
 
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: format.rb,v 1.2 2005/03/05 06:50:42 mutoh Exp $
+  $Id: format.rb,v 1.3 2005/03/22 17:41:24 silicio Exp $
 =end
 
 require 'gtk2'

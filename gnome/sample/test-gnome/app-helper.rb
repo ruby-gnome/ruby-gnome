@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   app-helper.rb - App Helper test rewritten in Ruby/GNOME

@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   scale.rb - Ruby/GdkPixbuf sample script.
 
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: scale.rb,v 1.8 2003/07/12 09:20:48 mutoh Exp $
+  $Id: scale.rb,v 1.9 2005/03/22 17:41:25 silicio Exp $
 =end
 
 require 'gtk2'

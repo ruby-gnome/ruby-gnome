@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   rotate.rb - Ruby/GdkPixbuf sample script.
 
   Copyright (c) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: rotate.rb,v 1.1 2005/03/05 06:50:42 mutoh Exp $
+  $Id: rotate.rb,v 1.2 2005/03/22 17:41:25 silicio Exp $
 =end
 
 require 'gtk2'

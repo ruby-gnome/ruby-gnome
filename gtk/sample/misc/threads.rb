@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   threads.rb - Ruby/GTK sample script.
 
   Copyright (c) 2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: threads.rb,v 1.2 2005/03/02 12:06:36 silicio Exp $
+  $Id: threads.rb,v 1.3 2005/03/22 17:41:28 silicio Exp $
 =end
 
 require 'gtk2'

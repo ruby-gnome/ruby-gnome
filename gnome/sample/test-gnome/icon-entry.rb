@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   icon-entry.rb - IconEntry test rewritten in Ruby/GNOME

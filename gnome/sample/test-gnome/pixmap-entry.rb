@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   pixmap-entry.rb - PixmapEntry test rewritten in Ruby/GNOME

@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   dialog2.rb - Ruby/GTK sample script.
 
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: dialog2.rb,v 1.4 2003/02/01 16:46:22 mutoh Exp $
+  $Id: dialog2.rb,v 1.5 2005/03/22 17:41:28 silicio Exp $
 =end
 
 require 'gtk2'

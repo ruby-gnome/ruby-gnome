@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 
 =begin header
 
@@ -6,7 +6,7 @@
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.11 2004/08/15 14:38:17 mutoh Exp $
+  $Id: testgtk.rb,v 1.12 2005/03/22 17:41:28 silicio Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 

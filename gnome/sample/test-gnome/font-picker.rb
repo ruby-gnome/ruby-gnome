@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin header
 
   font-picker.rb - FontPicker test rewritten in Ruby/GNOME

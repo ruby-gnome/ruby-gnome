@@ -1,11 +1,11 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 =begin
   treeview.rb - Ruby/GTK sample script.
 
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.5 2004/05/30 16:41:13 mutoh Exp $
+  $Id: treeview.rb,v 1.6 2005/03/22 17:41:28 silicio Exp $
 =end
 
 require 'gtk2'
