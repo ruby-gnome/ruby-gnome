@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/10/17 15:23:10 $
+  $Date: 2002/11/08 17:08:39 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,11 +19,6 @@
 void
 Init_gtk_gdk_const()
 {
-    /* GdkInputCondition */
-    rb_define_const(mGdk, "INPUT_READ", INT2FIX(GDK_INPUT_READ));
-    rb_define_const(mGdk, "INPUT_WRITE", INT2FIX(GDK_INPUT_WRITE));
-    rb_define_const(mGdk, "INPUT_EXCEPTION", INT2FIX(GDK_INPUT_EXCEPTION));
-
     /* GdkStatus */
     rb_define_const(mGdk, "OK", INT2FIX(GDK_OK));
     rb_define_const(mGdk, "ERROR", INT2FIX(GDK_ERROR));

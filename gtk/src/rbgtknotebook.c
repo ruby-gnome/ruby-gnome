@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/11/06 15:21:30 $
+  $Date: 2002/11/08 17:08:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,6 +16,11 @@
 #define _SELF(self) GTK_NOTEBOOK(RVAL2GOBJ(self))
 #define RVAL2WIDGET(w) GTK_WIDGET(RVAL2GOBJ(w))
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
+
+typedef struct {
+    VALUE parent;
+    GtkNotebookPage* page;
+} GtkNotebookPageData;
 
 static VALUE
 note_initialize(self)
@@ -271,50 +276,45 @@ note_get_tab_pos(self)
     return INT2FIX(gtk_notebook_get_tab_pos(_SELF(self)));
 }
 
+/***********************************************/
 /*
  * Gtk::NotebookPage
  */
-/*****************************************/
-static GtkNotebookPage*
-notepage_copy(page)
-    const GtkNotebookPage* page;
-{ 
-/*
-  GtkNotebookPage* new_page;
+GtkNotebookPageData*
+notebookpage_copy (const GtkNotebookPage* page)
+{
+  GtkNotebookPageData* data;
   g_return_val_if_fail (page != NULL, NULL);
-  new_page = g_new(GtkNotebookPage, 1);
-  *new_page = *page;
-  return new_page;
-*/
-    return (GtkNotebookPage*)page;
+  data = g_new(GtkNotebookPageData, 1);
+  data->page = (GtkNotebookPage*)page;
+  return data;
 }
 
 GType
 gtk_notebookpage_get_type(void)
-{ 
+{
   static GType our_type = 0;
   if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GtkNotebookPage",
-                    (GBoxedCopyFunc)notepage_copy,
+    our_type = g_boxed_type_register_static ("GtkNotebookPageData",
+                    (GBoxedCopyFunc)notebookpage_copy,
                     (GBoxedFreeFunc)g_free);
   return our_type;
 }
 
-static void 
-notebookpage_r2g(VALUE from, GValue *to)
+static VALUE
+signal_g2r_func(gobj, num, values)
+    GObject* gobj;
+    guint num;
+    const GValue* values;
 {
-    GtkNotebookPage* page = (GtkNotebookPage*)RVAL2BOXED(from, GTK_TYPE_NOTEBOOK_PAGE);
-    g_value_set_boxed(to, page);
-}
-
-static VALUE 
-notebookpage_g2r(const GValue *from)
-{
-    return BOXED2RVAL(g_value_get_boxed(from), GTK_TYPE_NOTEBOOK_PAGE);
+    GtkNotebookPageData npp;
+    npp.parent = GVAL2RVAL(&values[0]);
+    npp.page = (GtkNotebookPage*)g_value_get_pointer(&values[1]);
+    return rb_ary_new3(3, GVAL2RVAL(&values[0]), BOXED2RVAL(&npp, GTK_TYPE_NOTEBOOK_PAGE),
+                       GVAL2RVAL(&values[2]));
 }
 
 /*****************************************/
-
 
 void 
 Init_gtk_notebook()
@@ -347,7 +347,5 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
     rb_define_method(gNotebook, "tab_pos", note_get_tab_pos, 0);
 
-    rbgobj_register_r2g_func(GTK_TYPE_NOTEBOOK_PAGE, notebookpage_r2g);
-    rbgobj_register_g2r_func(GTK_TYPE_NOTEBOOK_PAGE, notebookpage_g2r);
-
+    G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", signal_g2r_func);
 }

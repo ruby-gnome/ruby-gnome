@@ -275,6 +275,9 @@ class NotebookSample < SampleWindow
   end
 
   def page_switch(widget, page, page_num)
+p "----"
+p page
+p page_num
     oldpage = widget.page
     if (page == oldpage)
       return

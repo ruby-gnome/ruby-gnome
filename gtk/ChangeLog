@@ -1,3 +1,12 @@
+2002-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkconst.c, src/rbgdkinput.c: Move GdkInputCondition to src/rbgdkinput.c.
+	* src/rbgdkinput.c: Add a file.
+	* src/rbgtkmain.c, rbgdkinput.c: Move Gtk.input_add/remove to Gdk::Input.add/remove.
+	* src/rbgtkmain.c: Rename Gtk.get_current_event to Gtk.current_event, Gtk.main_iteration 
+	to Gtk.main_iteration?.
+	Remove Gtk.signal_lookup, .signal_name.
+
 2002-11-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkmain.c: use `EXTERN' instead of plain `extern' for

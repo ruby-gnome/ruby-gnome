@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:35 $
+  $Date: 2002/11/08 17:08:40 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -64,8 +64,8 @@ exec_callback(widget, proc)
 
 static gint 
 rbgtk_poll (GPollFD *fds,
-			guint    nfds,
-			gint     timeout)
+            guint    nfds,
+            gint     timeout)
 {
     struct timeval tv;
     fd_set rset, wset, xset;

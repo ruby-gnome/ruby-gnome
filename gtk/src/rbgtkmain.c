@@ -1,10 +1,11 @@
+
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkmain.c -
 
-  $Author: sakai $
-  $Date: 2002/11/08 14:07:54 $
+  $Author: mutoh $
+  $Date: 2002/11/08 17:08:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -119,41 +120,6 @@ timeout_remove(self, id)
     return Qnil;
 }
 
-static void
-exec_input(data, source, condition)
-    gpointer data;
-    gint source;
-    GdkInputCondition condition;
-{
-    rb_funcall((VALUE)data, id_call, 0);
-}
-
-static VALUE
-input_add(self, filedescriptor, gdk_input_condition)
-    VALUE self, filedescriptor, gdk_input_condition;
-{
-    VALUE id;
-    VALUE func;
-
-    func = rb_f_lambda();
-    id = INT2FIX(gdk_input_add(NUM2INT(rb_funcall(filedescriptor,
-                                                  rb_intern("to_i"), 0)),
-                               (GdkInputCondition)NUM2INT(gdk_input_condition),
-                               (GdkInputFunction)exec_input,
-                               (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
-    return id;
-}
-
-static VALUE
-input_remove(self, id)
-    VALUE self, id;
-{
-    gdk_input_remove(NUM2INT(id));
-    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
-    return Qnil;
-}
-
 static VALUE
 idle_add(self)
     VALUE self;
@@ -184,59 +150,6 @@ gtk_m_get_current_event(self)
 }
 
 static VALUE
-gtk_m_signal_lookup(self, name, type)
-    VALUE self, name, type;
-{
-    return INT2NUM(gtk_signal_lookup(RVAL2CSTR(name), NUM2INT(type)));
-}
-
-static VALUE
-gtk_m_signal_name(self, signal_id)
-    VALUE self, signal_id;
-{
-    const gchar* name = gtk_signal_name(NUM2INT(signal_id));
-    return name ? CSTR2RVAL(name) : Qnil;
-}
-
-VALUE rbgtk_log_handler_procs = Qnil;
-
-static void
-rbgtk_log_handler(log_domain, log_level, message, user_data)
-    const gchar *log_domain;
-    GLogLevelFlags log_level;
-    const gchar *message;
-    gpointer user_data;
-{
-    rb_funcall((VALUE)user_data, id_call, 3,
-	       rb_str_new2(log_domain), INT2NUM(log_level),
-	       rb_str_new2(message));
-}
-
-static VALUE
-rbgtk_m_log_set_handler(self, log_domain, log_levels)
-    VALUE self, log_domain, log_levels;
-{
-    guint handler_id;
-    VALUE proc;
-
-    proc = rb_f_lambda();
-    handler_id = g_log_set_handler(RVAL2CSTR(log_domain), NUM2INT(log_levels),
-				   rbgtk_log_handler, (gpointer)proc);
-    rb_hash_aset(rbgtk_log_handler_procs, INT2NUM(handler_id), proc);
-    return INT2NUM(handler_id);
-}
-
-static VALUE
-rbgtk_m_log_remove_handler(self, log_domain, handler_id)
-    VALUE self, log_domain, handler_id;
-{
-    g_log_remove_handler(RVAL2CSTR(log_domain), NUM2INT(handler_id));
-    rb_funcall(rbgtk_log_handler_procs, rb_intern("delete"),
-	       1, INT2NUM(handler_id));
-    return Qnil;
-}
-
-static VALUE
 rbgtk_m_grab_add(self, widget)
     VALUE self, widget;
 {
@@ -260,20 +173,12 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
-    rb_define_module_function(mGtk, "main_iteration", gtk_m_main_iteration, 0);
+    rb_define_module_function(mGtk, "main_iteration?", gtk_m_main_iteration, 0);
     rb_define_module_function(mGtk, "timeout_add", timeout_add, 1);
     rb_define_module_function(mGtk, "timeout_remove", timeout_remove, 1);
-    rb_define_module_function(mGtk, "input_add", input_add, 2);
-    rb_define_module_function(mGtk, "input_remove", input_remove, 1);
     rb_define_module_function(mGtk, "idle_add", idle_add, 0);
     rb_define_module_function(mGtk, "idle_remove", idle_remove, 1);
-    rb_define_module_function(mGtk, "get_current_event", gtk_m_get_current_event, 0);
-    rb_define_module_function(mGtk, "signal_lookup", gtk_m_signal_lookup, 2);
-    rb_define_module_function(mGtk, "signal_name", gtk_m_signal_name, 1);
+    rb_define_module_function(mGtk, "current_event", gtk_m_get_current_event, 0);
     rb_define_module_function(mGtk, "grab_add", rbgtk_m_grab_add, 1);
     rb_define_module_function(mGtk, "grab_remove", rbgtk_m_grab_remove, 1);
-    rb_global_variable(&rbgtk_log_handler_procs);
-    rbgtk_log_handler_procs = rb_hash_new();
-    rb_define_module_function(mGtk, "log_set_handler", rbgtk_m_log_set_handler, 2);
-    rb_define_module_function(mGtk, "log_remove_handler", rbgtk_m_log_remove_handler, 2);
 }
