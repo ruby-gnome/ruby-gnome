@@ -93,6 +93,54 @@ static VALUE rb_gda_datamodel_row_removed(self, rownum)
 }
 
 /*
+ * Method: emit_column_inserted(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_inserted' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_inserted(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_inserted(RGDA_DATAMODEL(self), 
+                                   FIX2INT(colnum));
+    return self;
+}
+
+/*
+ * Method: emit_column_updated(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_updated' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_updated(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_updated(RGDA_DATAMODEL(self),
+                                  FIX2INT(colnum));
+    return self;
+}
+
+/*
+ * Method: emit_column_removed(colnum)
+ * colnum: a column number.
+ *
+ * Emits the 'column_removed' and 'changed' signals on the model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_column_removed(self, colnum)
+    VALUE self, colnum;
+{
+    gda_data_model_column_removed(RGDA_DATAMODEL(self),
+                                  FIX2INT(colnum));
+    return self;
+}
+
+/*
  * Method: freeze!
  *
  * Disables notifications of changes on the data model. To re-enable
@@ -219,6 +267,28 @@ static VALUE rb_gda_datamodel_get_column_pos(self, col_title)
 {
     return INT2FIX(gda_data_model_get_column_position(RGDA_DATAMODEL(self),
                                                       RVAL2CSTR(col_title)));
+}
+
+/*
+ * Method: get_value_at(colnum, rownum)
+ * colnum: a column number.
+ * rownum: a row number.
+ *
+ * Retrieves the data stored in the given position in the data model.
+ * This is the main function for accessing data in a model.
+ *
+ * Returns: a Ruby object according to the type of the column is successful,
+ * nil otherwise (out-of-bound position, etc...).
+ */
+static VALUE rb_gda_datamodel_get_value_at(self, colnum, rownum)
+    VALUE self, colnum, rownum;
+{
+    const GdaValue *val = gda_data_model_get_value_at(RGDA_DATAMODEL(self),
+                                                      FIX2INT(colnum),
+                                                      FIX2INT(rownum));
+    return val != NULL
+        ? RGDA_VALUE_NEW(val)
+        : Qnil;
 }
 
 /*
@@ -352,72 +422,119 @@ static VALUE rb_gda_datamodel_remove_row(self, row)
 }
 
 /*
- * Method: editable?
+ * Method: append_column(attributes)
+ * attributes: a Gda::FieldAttributes object describing the column to add.
+ *
+ * Appends a column to the data model.
+ *
+ * Returns: true if successful, false otherwise.
+ */
+static VALUE rb_gda_datamodel_append_column(self, column)
+    VALUE self, column;
+{
+    return CBOOL2RVAL(gda_data_model_append_column(RGDA_DATAMODEL(self),
+                                                   RGDA_FIELD_ATTRIBUTES(column)));
+}
+
+/*
+ * Method: update_column(column_id, attributes)
+ * column_id: the number of the column to be updated.
+ * attributes: a Gda::FieldAttributes object describing the column to update.
+ *
+ * Updates an existing column in the data model.
+ *
+ * Returns: true if successful, false otherwise.
+ */
+static VALUE rb_gda_datamodel_update_column(self, column_id, column)
+    VALUE self, column_id, column;
+{
+    return CBOOL2RVAL(gda_data_model_update_column(RGDA_DATAMODEL(self),
+                                                   FIX2INT(column_id),
+                                                   RGDA_FIELD_ATTRIBUTES(column)));
+}
+
+/*
+ * Method: remove_column(column_id)
+ * column_id: the number of the column to be updated.
+ *
+ * Removes an existing column in the data model.
+ *
+ * Returns: true if successful, false otherwise.
+ */
+static VALUE rb_gda_datamodel_remove_column(self, column_id)
+    VALUE self, column_id;
+{
+    return CBOOL2RVAL(gda_data_model_remove_column(RGDA_DATAMODEL(self),
+                                                   FIX2INT(column_id)));
+}
+
+/*
+ * Method: updatable?
  *
  * Returns: true if the model can be updated, false otherwise.
  */
-static VALUE rb_gda_datamodel_is_editable(self)
+static VALUE rb_gda_datamodel_is_updatable(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gda_data_model_is_editable(RGDA_DATAMODEL(self)));
+    return CBOOL2RVAL(gda_data_model_is_updatable(RGDA_DATAMODEL(self)));
 }
 
 /*
- * Method: editing?
+ * Method: has_changed?
  *
  * Checks whether this data model is in updating mode or not. Updating
- * mode is set to true when Gda::DataModel#begin_edit has been
+ * mode is set to true when Gda::DataModel#begin_update has been
  * called successfully, and is not set back to false until either
- * Gda::DataModel#cancel_edit or Gda::DataModel#end_edit have been called.
+ * Gda::DataModel#cancel_update or Gda::DataModel#end_update have been called.
      
  * Returns: true if updating mode, false otherwise.
  */
-static VALUE rb_gda_datamodel_is_editing(self)
+static VALUE rb_gda_datamodel_has_changed(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gda_data_model_is_editing(RGDA_DATAMODEL(self)));
+    return CBOOL2RVAL(gda_data_model_has_changed(RGDA_DATAMODEL(self)));
 }
 
 /*
- * Method: begin_edit
+ * Method: begin_update
  *
  * Starts update of this data model. This method should be the
  * first called when modifying the data model.
  *
  * Returns: true on success, false if there was an error.
  */
-static VALUE rb_gda_datamodel_begin_edit(self)
+static VALUE rb_gda_datamodel_begin_update(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gda_data_model_begin_edit(RGDA_DATAMODEL(self)));
+    return CBOOL2RVAL(gda_data_model_begin_update(RGDA_DATAMODEL(self)));
 }
 
 /*
- * Method: cancel_edit
+ * Method: cancel_update
  *
  * Cancels update of this data model. This means that all changes
  * will be discarded, and the old data put back in the model.
  *
  * Returns: true on success, false if there was an error.
  */
-static VALUE rb_gda_datamodel_cancel_edit(self)
+static VALUE rb_gda_datamodel_cancel_update(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gda_data_model_cancel_edit(RGDA_DATAMODEL(self)));
+    return CBOOL2RVAL(gda_data_model_cancel_update(RGDA_DATAMODEL(self)));
 }
 
 /*
- * Method: end_edit
+ * Method: end_update
  *
  * Approves all modifications and send them to the underlying
  * data source/store.
  *
  * Returns: true on success, false if there was an error.
  */
-static VALUE rb_gda_datamodel_end_edit(self)
+static VALUE rb_gda_datamodel_end_update(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gda_data_model_end_edit(RGDA_DATAMODEL(self)));
+    return CBOOL2RVAL(gda_data_model_end_update(RGDA_DATAMODEL(self)));
 }
 
 /*
@@ -529,6 +646,9 @@ void Init_gda_datamodel(void) {
     rb_define_method(c, "emit_row_inserted", rb_gda_datamodel_row_inserted, 1); 
     rb_define_method(c, "emit_row_updated",  rb_gda_datamodel_row_updated,  1); 
     rb_define_method(c, "emit_row_removed",  rb_gda_datamodel_row_removed,  1); 
+    rb_define_method(c, "emit_column_inserted", rb_gda_datamodel_column_inserted, 1); 
+    rb_define_method(c, "emit_column_updated",  rb_gda_datamodel_column_updated,  1); 
+    rb_define_method(c, "emit_column_removed",  rb_gda_datamodel_column_removed,  1); 
 
     rb_define_method(c, "freeze!", rb_gda_datamodel_freeze, 0);
     rb_define_method(c, "thaw!",   rb_gda_datamodel_thaw,   0);
@@ -540,7 +660,8 @@ void Init_gda_datamodel(void) {
 
     rb_define_method(c, "describe_column",     rb_gda_datamodel_describe_column, 1);
     rb_define_method(c, "get_column_position", rb_gda_datamodel_get_column_pos,  1);
-
+    rb_define_method(c, "get_value_at", rb_gda_datamodel_get_value_at, 2);
+    
     rb_define_method(c, "rows",     rb_gda_datamodel_get_rows,   0);
     rb_define_method(c, "each_row", rb_gda_datamodel_each_row,   0);
     rb_define_method(c, "n_rows",   rb_gda_datamodel_get_n_rows, 0);
@@ -549,13 +670,17 @@ void Init_gda_datamodel(void) {
     rb_define_method(c, "append_row", rb_gda_datamodel_append_row, -2);
     rb_define_method(c, "remove_row", rb_gda_datamodel_remove_row,  1);
     rb_define_method(c, "update_row", rb_gda_datamodel_update_row,  1);
+   
+    rb_define_method(c, "append_column", rb_gda_datamodel_append_column, 1);
+    rb_define_method(c, "update_column", rb_gda_datamodel_update_column, 2);
+    rb_define_method(c, "remove_column", rb_gda_datamodel_remove_column, 1);
     
-    rb_define_method(c, "editable?", rb_gda_datamodel_is_editable, 0);
-    rb_define_method(c, "editing?",  rb_gda_datamodel_is_editing,  0);
+    rb_define_method(c, "updatable?", rb_gda_datamodel_is_updatable, 0);
+    rb_define_method(c, "changed?",  rb_gda_datamodel_has_changed,  0);
     
-    rb_define_method(c, "begin_edit",  rb_gda_datamodel_begin_edit,  0);
-    rb_define_method(c, "cancel_edit", rb_gda_datamodel_cancel_edit, 0);
-    rb_define_method(c, "end_edit",    rb_gda_datamodel_end_edit,    0);
+    rb_define_method(c, "begin_update",  rb_gda_datamodel_begin_update,  0);
+    rb_define_method(c, "cancel_update", rb_gda_datamodel_cancel_update, 0);
+    rb_define_method(c, "end_update",    rb_gda_datamodel_end_update,    0);
 
     rb_define_method(c, "to_comma_separated", rb_gda_datamodel_to_comma_separated, 0);
     rb_define_method(c, "to_tab_separated",   rb_gda_datamodel_to_tab_separated,   0);

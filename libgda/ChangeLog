@@ -1,3 +1,12 @@
+2005-03-02  Laurent Sansonetti  <lrz@gnome.org>
+
+	* README: we require 1.1.99 or newer now.
+	* src/rbgdadatamodel.c (#emit_column_inserted, #emit_column_updated,
+	  #emit_column_removed, #get_value_at, #append_column, #update_column,
+	  #remove_column): Added.
+	* src/rbgdadatamodel.c (#editable?, #editing?, #begin_edit, #cancel_edit,
+	  #end_edit): Renamed.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
