@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: button.rb,v 1.6 2003/04/01 16:26:31 mutoh Exp $
+  $Id: button.rb,v 1.7 2003/05/04 03:49:58 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -22,7 +22,7 @@ box1.show
 
 table = Gtk::Table.new(3, 3, false)
 table.set_row_spacings(5)
-table.set_col_spacings(5)
+table.set_column_spacings(5)
 table.set_border_width(10)
 box1.pack_start(table, true, true, 0)
 table.show

@@ -1,4 +1,4 @@
-# $Id: sizegroup.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
+# $Id: sizegroup.rb,v 1.3 2003/05/04 03:49:58 mutoh Exp $
 =begin
 = Size Groups
 
@@ -29,7 +29,7 @@ module Demo
       set_resizable(false)
 
       signal_connect('response') do
-	quit
+	destroy
       end
 
       vbox = Gtk::VBox.new(false, 5)
@@ -45,7 +45,7 @@ module Demo
       table = Gtk::Table.new(2, 2, false)
       table.set_border_width(5)
       table.set_row_spacings(5)
-      table.set_col_spacings(10)
+      table.set_column_spacings(10)
       frame.add(table)
 
       add_row(table, 0, size_group, '_Foreground', color_options)
@@ -58,7 +58,7 @@ module Demo
       table = Gtk::Table.new(2, 2, false)
       table.set_border_width(5)
       table.set_row_spacings(5)
-      table.set_col_spacings(10)
+      table.set_column_spacings(10)
       frame.add(table)
 
       add_row(table, 0, size_group, '_Dashing', dash_options)

@@ -1,4 +1,4 @@
-# $Id: textview.rb,v 1.3 2003/03/21 13:59:46 mutoh Exp $
+# $Id: textview.rb,v 1.4 2003/05/04 03:49:58 mutoh Exp $
 =begin
 = Text Widget
 
@@ -99,10 +99,10 @@ module Demo
 			{ "size" => 20 * Pango::SCALE})
 
       buffer.create_tag( "xx-small",
-			{"scale", Pango::Attribute::SCALE_XX_SMALL})
+			{"scale", Pango::AttrScale::XX_SMALL})
 
       buffer.create_tag( "x-large",
-			{"scale" => Pango::Attribute::SCALE_X_LARGE})
+			{"scale" => Pango::AttrScale::X_LARGE})
       
       buffer.create_tag( "monospace",
 			{"family" => "monospace"})
@@ -157,10 +157,10 @@ module Demo
 			{"strikethrough" => true})
       
       buffer.create_tag( "underline",
-			{"underline" => Pango::Attribute::UNDERLINE_SINGLE})
+			{"underline" => Pango::AttrUnderline::SINGLE})
 
       buffer.create_tag( "double_underline",
-			{"underline" => Pango::Attribute::UNDERLINE_DOUBLE})
+			{"underline" => Pango::AttrUnderline::DOUBLE})
 
       buffer.create_tag( "superscript",
 			{"rise" => (10 * Pango::SCALE),	 #  10 pixels 

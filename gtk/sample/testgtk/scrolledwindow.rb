@@ -5,8 +5,8 @@
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/02/01 16:46:23 $
-  $Id: scrolledwindow.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Date: 2003/05/04 03:49:58 $
+  $Id: scrolledwindow.rb,v 1.6 2003/05/04 03:49:58 mutoh Exp $
 
 Original Copyright:
  
@@ -45,7 +45,7 @@ class ScrolledWindowSample < SampleDialog
 
     table = Gtk::Table.new(20, 20, false)
     table.set_row_spacings(10)
-    table.set_col_spacings(10)
+    table.set_column_spacings(10)
     scrolled_window.add_with_viewport(table)
     table.set_focus_hadjustment(scrolled_window.hadjustment)
     table.set_focus_vadjustment(scrolled_window.vadjustment)

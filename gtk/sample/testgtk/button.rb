@@ -4,8 +4,8 @@
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/02/01 16:46:23 $
-  $Id: button.rb,v 1.4 2003/02/01 16:46:23 mutoh Exp $
+  $Date: 2003/05/04 03:49:58 $
+  $Id: button.rb,v 1.5 2003/05/04 03:49:58 mutoh Exp $
 
 Original Copyright:
  
@@ -40,7 +40,7 @@ class ButtonSample < SampleWindow
 
     table = Gtk::Table::new(3, 3, false)
     table.set_row_spacings(5)
-    table.set_col_spacings(5)
+    table.set_column_spacings(5)
     table.set_border_width(10)
     box1.pack_start(table, true, true, 0)
 

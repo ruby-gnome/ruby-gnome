@@ -1,4 +1,4 @@
-# $Id: editable_cells.rb,v 1.3 2003/03/21 13:59:46 mutoh Exp $
+# $Id: editable_cells.rb,v 1.4 2003/05/04 03:49:57 mutoh Exp $
 =begin
 = Tree View/Editable Cells
 
@@ -73,7 +73,7 @@ module Demo
 	iter = model.append
 
 	article.each_with_index do |value, index|
-	  model.set_value(iter, index, value)
+	  iter.set_value(index, value)
 	end
       end
       return model
@@ -138,11 +138,11 @@ module Demo
       when COLUMN_NUMBER
 	i = iter.path.indices[0]
 	@articles[i].number = new_text.to_i
-	model.set_value(iter, column, @articles[i].number)
+	iter.set_value(column, @articles[i].number)
       when COLUMN_PRODUCT
 	i = iter.path.indices[0]
 	@articles[i].product = new_text
-	model.set_value(iter, column, @articles[i].product)
+	iter.set_value(column, @articles[i].product)
       end
     end
 
@@ -152,7 +152,7 @@ module Demo
 
       iter = model.append
       foo.each_with_index do |value, index|
-	model.set_value(iter, index, value)
+	iter.set_value(index, value)
       end
     end
 

@@ -1,3 +1,7 @@
+2003-05-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/*/*.rb: Fix follow changes below.
+
 2003-05-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktable.c: Rename Gtk::Table#set_row_spacing, #row_spacing=, #row_spacing,

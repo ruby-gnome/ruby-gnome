@@ -1,4 +1,4 @@
-# $Id: dialog.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: dialog.rb,v 1.2 2003/05/04 03:49:57 mutoh Exp $
 =begin
 = Dialog and Message Boxes
 
@@ -46,7 +46,7 @@ module Demo
 
       table = Gtk::Table.new(2, 2, false)
       table.set_row_spacings(4)
-      table.set_col_spacings(4)
+      table.set_column_spacings(4)
       hbox.pack_start(table, false, false, 0)
 
       label = Gtk::Label.new('_Entry 1', true)
@@ -103,7 +103,7 @@ EOS
 
       table = Gtk::Table.new(2, 2, false)
       table.set_row_spacings(4)
-      table.set_col_spacings(4)
+      table.set_column_spacings(4)
       hbox.pack_start(table, true, true, 0)
       label = Gtk::Label.new('_Entry 1', true)
       table.attach_defaults(label,

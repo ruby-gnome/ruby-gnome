@@ -1,4 +1,4 @@
-# $Id: tree_store.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
+# $Id: tree_store.rb,v 1.3 2003/05/04 03:49:58 mutoh Exp $
 =begin
 = Tree View/Tree Store
 
@@ -182,20 +182,20 @@ module Demo
       TOPLEVEL.each do |month_name, holidays|
 	iter = model.append(nil)
 
-	model.set_value(iter, HOLIDAY_NAME_COLUMN, month_name)
+	iter.set_value(HOLIDAY_NAME_COLUMN, month_name)
 	(ALEX_COLUMN..DAVE_COLUMN).each do |index|
-	  model.set_value(iter, index, false)
+	  iter.set_value(index, false)
 	end
 
 	# add children
 	holidays.each do |holiday|
 	  child_iter = model.append(iter)
-	  model.set_value(child_iter, HOLIDAY_NAME_COLUMN, holiday.label)
+	  child_iter.set_value(HOLIDAY_NAME_COLUMN, holiday.label)
 	  %w(alex havoc tim owen dave).each_with_index do |person, i|
-	    model.set_value(child_iter, ALEX_COLUMN + i, holiday[person])
+	    child_iter.set_value(ALEX_COLUMN + i, holiday[person])
 	  end
-	  model.set_value(child_iter, VISIBLE_COLUMN, true)
-	  model.set_value(child_iter, WORLD_COLUMN, holiday.world_holiday)
+	  child_iter.set_value(VISIBLE_COLUMN, true)
+	  child_iter.set_value(WORLD_COLUMN, holiday.world_holiday)
 	end
 	
       end
@@ -255,13 +255,13 @@ module Demo
 
       # get toggled iter
       iter = model.get_iter(path)
-      toggle_item = model.get_value(iter, column)
+      toggle_item = iter.get_value(column)
 
       # do something with the value
       toggle_item ^= 1
 
       # set new value
-      model.set_value(iter, column, toggle_item)
+      iter.set_value(column, toggle_item)
     end
   end
 end
