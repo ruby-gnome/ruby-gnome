@@ -79,32 +79,47 @@ static VALUE rb_gda_connection_get_client(self)
         : Qnil;
 }
 
-/* 
- *  FIXME 
- *  #execute_command, #execute_single_command and #execute_non_query should accept
- *  parameters (as Gda::Parameter objects).
- */
-static VALUE rb_gda_connection_execute_single_command(self, cmd)
-    VALUE self, cmd;
+static GdaParameterList *parse_params(argc, argv, cmd)
+    int argc;
+    VALUE *argv, *cmd;
 {
-    GdaDataModel *mod = gda_connection_execute_single_command(RGDA_CONNECTION(self),
-                                                              RGDA_COMMAND(cmd),
-                                                              NULL);
+    VALUE list;
+    rb_scan_args(argc, argv, "11", cmd, &list);
+    return NIL_P(list) 
+        ? NULL 
+        : RGDA_PARAMETER_LIST(list);
+}
+
+static VALUE rb_gda_connection_execute_single_command(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
+{
+    GdaParameterList *plist;
+    GdaDataModel *mod;
+    VALUE cmd;
+    
+    plist = parse_params(argc, argv, &cmd);
+    mod = gda_connection_execute_single_command(RGDA_CONNECTION(self),
+                                                RGDA_COMMAND(cmd),
+                                                plist);
     return mod != NULL
         ? RGDA_DATAMODEL_NEW(mod)
         : Qnil;
 }
 
-static VALUE rb_gda_connection_execute_command(self, cmd)
-    VALUE self, cmd;
+static VALUE rb_gda_connection_execute_command(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
+    GdaParameterList *plist;
+    VALUE cmd, arr;
     GList *list;
-    VALUE arr;
     
     arr = rb_ary_new();
+    plist = parse_params(argc, argv, &cmd);
     for (list = gda_connection_execute_command(RGDA_CONNECTION(self),
                                                RGDA_COMMAND(cmd),
-                                               NULL);
+                                               plist);
          list != NULL;
          list = g_list_next(list))
     {
@@ -113,13 +128,17 @@ static VALUE rb_gda_connection_execute_command(self, cmd)
     return arr;        
 }
 
-static VALUE rb_gda_connection_execute_non_query(self, cmd)
-    VALUE self, cmd;
+static VALUE rb_gda_connection_execute_non_query(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
 {
+    GdaParameterList *plist;
+    VALUE cmd;
+
+    plist = parse_params(argc, argv, &cmd);
     return INT2FIX(gda_connection_execute_non_query(RGDA_CONNECTION(self),
                                                     RGDA_COMMAND(cmd),
-                                                    NULL));
-                                               
+                                                    plist));
 }
 
 static VALUE rb_gda_connection_get_errors(self)
@@ -152,9 +171,9 @@ void Init_gda_connection(void) {
     rb_define_method(c, "options",        rb_gda_connection_get_options,        0);
     rb_define_method(c, "client",         rb_gda_connection_get_client,         0);
 
-    rb_define_method(c, "execute_command",        rb_gda_connection_execute_command,        1);
-    rb_define_method(c, "execute_single_command", rb_gda_connection_execute_single_command, 1);
-    rb_define_method(c, "execute_non_query",      rb_gda_connection_execute_non_query,      1);
+    rb_define_method(c, "execute_command",        rb_gda_connection_execute_command,        -1);
+    rb_define_method(c, "execute_single_command", rb_gda_connection_execute_single_command, -1);
+    rb_define_method(c, "execute_non_query",      rb_gda_connection_execute_non_query,      -1);
 
     rb_define_method(c, "errors", rb_gda_connection_get_errors, 0);
 

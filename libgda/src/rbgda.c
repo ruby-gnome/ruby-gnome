@@ -37,6 +37,8 @@ static void Init_all_classes(void) {
     extern void Init_gda_datamodel_array(void);
     extern void Init_gda_datasource(void);
     extern void Init_gda_error(void);
+    extern void Init_gda_parameter(void);
+    extern void Init_gda_parameter_list(void);
     extern void Init_gda_provider(void);
     extern void Init_gda_row(void);
     extern void Init_gda_transaction(void);
@@ -49,6 +51,8 @@ static void Init_all_classes(void) {
     Init_gda_datamodel_array();
     Init_gda_datasource();
     Init_gda_error();
+    Init_gda_parameter();
+    Init_gda_parameter_list();
     Init_gda_provider();
     Init_gda_row();
     Init_gda_transaction();
@@ -155,12 +159,24 @@ static VALUE rb_gda_main_quit(self)
     return Qnil;
 }
 
+static VALUE rb_gda_sql_replace_placeholders(self, text, plist)
+    VALUE text, plist;
+{
+    const gchar *sql = gda_sql_replace_placeholders(RVAL2CSTR(text), 
+                                                    RGDA_PARAMETER_LIST(plist));
+    return sql != NULL
+        ? CSTR2RVAL(sql)
+        : Qnil;
+}
+
 void Init_libgda(void) {
     /* Create the module. */
     mGda = rb_define_module("Gda");
     rb_define_module_function(mGda, "init", rb_gda_init, -1);
     rb_define_module_function(mGda, "main", rb_gda_main,  0);
     rb_define_module_function(mGda, "main_quit", rb_gda_main_quit, 0);
+    rb_define_module_function(mGda, "sql_replace_placeholders",
+                              rb_gda_sql_replace_placeholders, 2);
 
     /* Initialize all subclasses. */
     Init_all_classes();

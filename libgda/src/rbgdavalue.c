@@ -21,6 +21,8 @@
 
 #include "rbgda.h"
 
+VALUE cGdaValue;
+
 GType gda_value_get_type_bis(void) {
     static GType our_type = 0;
     if (our_type == 0) {
@@ -40,5 +42,6 @@ static VALUE rb_gda_value_to_s(self)
 void Init_gda_value(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_VALUE, "Value", mGda);
     rb_define_method(c, "to_s", rb_gda_value_to_s, 0);
+    cGdaValue = c;
 }
 

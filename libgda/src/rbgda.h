@@ -31,14 +31,21 @@
 /* Gda module */
 extern VALUE mGda;
 
+/* Gda::Value class */
+extern VALUE cGdaValue;
+
 #define GDA_COMMAND(o)          ((GdaCommand *)o)
 #define GDA_DATASOURCE(o)       ((GdaDataSourceInfo *)o)
+#define GDA_PARAMETER(o)        ((GdaParameter *)o)
+#define GDA_PARAMETER_LIST(o)   ((GdaParameterList *)o)
 #define GDA_PROVIDER(o)         ((GdaProviderInfo *)o)
 #define GDA_ROW(o)              ((GdaRow *)o)
 #define GDA_VALUE(o)            ((GdaValue *)o)
 
 #define GDA_TYPE_COMMAND        (gda_command_get_type())
 #define GDA_TYPE_DATASOURCE     (gda_datasource_get_type())
+#define GDA_TYPE_PARAMETER      (gda_parameter_get_type())
+#define GDA_TYPE_PARAMETER_LIST (gda_parameter_list_get_type())
 #define GDA_TYPE_PROVIDER       (gda_provider_get_type())
 #define GDA_TYPE_ROW            (gda_row_get_type())
 #define GDA_TYPE_VALUE          (gda_value_get_type_bis())
@@ -50,6 +57,8 @@ extern VALUE mGda;
 #define RGDA_DATAMODEL_ARRAY(o) (GDA_DATA_MODEL_ARRAY(RVAL2GOBJ(o)))
 #define RGDA_DATASOURCE(o)      (GDA_DATASOURCE(RVAL2BOXED(o, GDA_TYPE_DATASOURCE)))
 #define RGDA_ERROR(o)           (GDA_ERROR(RVAL2GOBJ(o)))
+#define RGDA_PARAMETER(o)       (GDA_PARAMETER(RVAL2BOXED(o, GDA_TYPE_PARAMETER)))
+#define RGDA_PARAMETER_LIST(o)  (GDA_PARAMETER_LIST(RVAL2BOXED(o, GDA_TYPE_PARAMETER_LIST)))
 #define RGDA_PROVIDER(o)        (GDA_PROVIDER(RVAL2BOXED(o, GDA_TYPE_PROVIDER)))
 #define RGDA_ROW(o)             (GDA_ROW(RVAL2BOXED(o, GDA_TYPE_ROW)))
 #define RGDA_TRANSACTION(o)     (GDA_TRANSACTION(RVAL2GOBJ(o)))
@@ -62,6 +71,8 @@ extern VALUE mGda;
 #define RGDA_DATAMODEL_NEW(o)       (GOBJ2RVAL(GDA_DATA_MODEL(o)))
 #define RGDA_DATASOURCE_NEW(o)      (BOXED2RVAL(GDA_DATASOURCE(o), GDA_TYPE_DATASOURCE))
 #define RGDA_ERROR_NEW(o)           (GOBJ2RVAL(GDA_ERROR(o)))
+#define RGDA_PARAMETER_NEW(o)       (BOXED2RVAL(GDA_PARAMETER(o), GDA_TYPE_PARAMETER))
+#define RGDA_PARAMETER_LIST_NEW(o)  (BOXED2RVAL(GDA_PARAMETER_LIST(o), GDA_TYPE_PARAMETER_LIST))
 #define RGDA_PROVIDER_NEW(o)        (BOXED2RVAL(GDA_PROVIDER(o), GDA_TYPE_PROVIDER))
 #define RGDA_ROW_NEW(o)             (BOXED2RVAL(GDA_ROW(o), GDA_TYPE_ROW))
 #define RGDA_TRANSACTION_NEW(o)     (GOBJ2RVAL(GDA_TRANSACTION(o)))
@@ -69,6 +80,8 @@ extern VALUE mGda;
 
 GType gda_command_get_type();
 GType gda_datasource_get_type();
+GType gda_parameter_get_type();
+GType gda_parameter_list_get_type();
 GType gda_provider_get_type();
 GType gda_row_get_type();
 GType gda_value_get_type_bis();   /* gda_value_get_type() exists already :| */
