@@ -35,7 +35,8 @@ static VALUE rb_gda_param_list_add(self, param)
     VALUE self, param;
 {
     gda_parameter_list_add_parameter(RGDA_PARAMETER_LIST(self),
-                                     RGDA_PARAMETER(param));
+                                     g_boxed_copy(GDA_TYPE_PARAMETER,
+				                  (RGDA_PARAMETER(param))));
     return self;
 }
 

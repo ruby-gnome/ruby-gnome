@@ -1,3 +1,8 @@
+2003-11-20  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaparameterlist.c: Fixed GC-related bug in
+	  Gda::ParameterList#add (fix provided by Masao Mutoh).
+
 2003-11-19  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README: libgda 1.0.2 or newer is needed.
