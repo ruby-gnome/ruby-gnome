@@ -3,8 +3,8 @@
 
   rbgdkpixmap.c -
 
-  $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Author: mutoh $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -32,9 +32,10 @@ gdkpmap_create_from_data(self, win, data, w, h, depth, fg, bg)
 {
     Check_Type(data, T_STRING);
     return GOBJ2RVAL(gdk_pixmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
-				      RSTRING(data)->ptr,
+					  RSTRING(data)->ptr,
 				      NUM2INT(w), NUM2INT(h), NUM2INT(depth),
-				      get_gdkcolor(fg), get_gdkcolor(bg)));
+				      (GdkColor*)RVAL2COBJ("Gdk::Color",fg), 
+					  (GdkColor*)RVAL2COBJ("Gdk::Color",bg)));
 }
 
 static VALUE
@@ -45,7 +46,7 @@ gdkpmap_create_from_xpm(self, win, tcolor, fname)
     GdkBitmap *mask;
 
     new = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), &mask,
-				     get_gdkcolor(tcolor), STR2CSTR(fname));
+				     (GdkColor*)RVAL2COBJ("Gdk::Color", tcolor), STR2CSTR(fname));
     if (!new) {
 		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
     }
@@ -67,7 +68,9 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
 		buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
     }
     new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)), 
-									   &mask, get_gdkcolor(tcolor), buf);
+									   &mask, 
+									   (GdkColor*)RVAL2COBJ("Gdk::Color",tcolor), 
+									   buf);
 
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
@@ -82,7 +85,7 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
     new = gdk_pixmap_colormap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), 
 					      GDK_COLORMAP(RVAL2GOBJ(colormap)),
 					      &mask,
-					      get_gdkcolor(tcolor),
+					      (GdkColor*)RVAL2COBJ("Gdk::Color",tcolor),
 					      STR2CSTR(fname));
     if (!new) {
 		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
@@ -108,7 +111,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
     new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
 						GDK_COLORMAP(RVAL2GOBJ(colormap)),
 						&mask,
-						get_gdkcolor(tcolor),
+						(GdkColor*)RVAL2COBJ("Gdk::Color", tcolor),
 						buf);
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }

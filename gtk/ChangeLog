@@ -1,3 +1,11 @@
+2002-08-18  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgdkcolor.c: Support  RB_DEF_CLASS system.
+	Remove Gdk::ColorContext temporarily. 
+	Add Gdk::Color#==.
+	* src/rbgdkcursor.c, rbgdk.c, rbgtk.h: Apply RB_DEF_CLASS system.
+	* sample/cursor.rb: Support Ruby/GTK2.
+
 2002-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdkevent.c, src/rbgtkctree.c: follow change of rbgobj_register_r2g_func()

@@ -3,8 +3,8 @@
 
   rbgtkclist.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Author: mutoh $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -308,7 +308,8 @@ clist_set_foreground(self, row, color)
     VALUE self, row, color;
 {
     gtk_clist_set_foreground(GTK_CLIST(RVAL2GOBJ(self)),
-							 NUM2INT(row), get_gdkcolor(color));
+							 NUM2INT(row), 
+							 (GdkColor*)RVAL2COBJ("Gdk::Color", color));
     return self;
 }
 
@@ -317,7 +318,8 @@ clist_set_background(self, row, color)
     VALUE self, row, color;
 {
     gtk_clist_set_background(GTK_CLIST(RVAL2GOBJ(self)),
-							 NUM2INT(row), get_gdkcolor(color));
+							 NUM2INT(row), 
+							 (GdkColor*)RVAL2COBJ("Gdk::Color", color));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: sakai $
-  $Date: 2002/08/10 00:05:39 $
+  $Author: mutoh $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -62,13 +62,10 @@ extern VALUE mGdkRgb;
 #ifndef GTK_DISABLE_DEPRECATED
 extern VALUE gdkFont;
 #endif
-extern VALUE gdkColor;
 extern VALUE gdkPoint;
 extern VALUE gdkRectangle;
 extern VALUE gdkRegion;
-extern VALUE gdkCursor;
 extern VALUE gdkAtom;
-extern VALUE gdkColorContext;
 extern VALUE gdkEvent;
 
 extern VALUE gdkEventType;
@@ -114,9 +111,6 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
-#define make_gdkcolor(c) make_tobj(c, gdkColor, sizeof(GdkColor))
-#define get_gdkcolor(c) ((GdkColor*)get_tobj(c, gdkColor))
-
 #define make_gallocation(c) make_tobj(c, gAllocation, sizeof(GtkAllocation))
 #define get_gallocation(c) ((GtkAllocation*)get_tobj(c, gAllocation))
 
@@ -131,9 +125,6 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 extern VALUE make_gdkregion(GdkRegion* region);
 extern GdkRegion* get_gdkregion(VALUE region);
-
-extern VALUE make_gdkcursor(GdkCursor* cursor);
-extern GdkCursor* get_gdkcursor(VALUE cursor);
 
 typedef void(*gdkdrawfunc)();
 

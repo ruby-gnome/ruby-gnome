@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/07/06 20:56:14 $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,20 +13,52 @@
 
 #include "global.h"
 
-
-VALUE gdkColor;
+#define _SELF(c) ((GdkColor*)RVAL2COBJ("Gdk::Color", c))
 
 static VALUE
-gdkcolor_s_new(self, r, g, b)
-    VALUE self;
-    VALUE r, g, b;
+gdkcolor_s_allocate(self)
+	VALUE self;
 {
-    GdkColor c;
-    c.pixel = 0;
-    c.red = NUM2INT(r);
-    c.green = NUM2INT(g);
-    c.blue = NUM2INT(b);
-    return make_gdkcolor(&c);
+	GdkColor c;
+	c.pixel = 0;
+	c.red = 0;
+	c.green = 0;
+	c.blue = 0;
+
+	return COBJ2RVAL("Gdk::Color", &c);
+}
+#ifdef HAVE_OBJECT_ALLOCATE
+#define gdkcolor_s_new rb_class_new_instance
+#else
+static VALUE
+gdkcolor_s_new(argc, argv, klass)
+    int argc;
+    VALUE* argv;
+    VALUE klass;
+{
+	VALUE obj = gdkcolor_s_allocate(klass);
+	rb_obj_call_init(obj, argc ,argv);
+    return obj;
+}
+#endif
+
+static VALUE
+gdkcolor_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+	int red, green, blue;
+	GdkColor *c = DATA_PTR(self);
+
+	rb_scan_args(argc, argv, "30", &red, &green, &blue);
+
+    c->pixel = 0;
+    c->red = NUM2INT(red);
+    c->green = NUM2INT(green);
+    c->blue = NUM2INT(blue);
+
+	return self;
 }
 
 static VALUE
@@ -38,21 +70,22 @@ gdkcolor_s_parse(self, name)
     if (! gdk_color_parse(STR2CSTR(name), &c)) {
         rb_raise(rb_eArgError, "can't parse color name `%s'", STR2CSTR(name));
     }
-    return make_gdkcolor(&c);
+    return COBJ2RVAL("Gdk::Color", &c);
 }
 
 static VALUE
 gdkcolor_pixel(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkcolor(self)->pixel);
+    return INT2NUM(_SELF(self)->pixel);
 }
 
 static VALUE
 gdkcolor_red(self)
     VALUE self;
 {
-    return INT2FIX(get_gdkcolor(self)->red);
+
+    return INT2FIX(_SELF(self)->red);
 }
 
 static VALUE
@@ -60,7 +93,7 @@ gdkcolor_set_red(self, red)
     VALUE self;
     VALUE red;
 {
-    get_gdkcolor(self)->red = NUM2INT(red);
+    _SELF(self)->red = NUM2INT(red);
     return red;
 }
 
@@ -68,7 +101,7 @@ static VALUE
 gdkcolor_green(self)
     VALUE self;
 {
-    return INT2FIX(get_gdkcolor(self)->green);
+    return INT2FIX(_SELF(self)->green);
 }
 
 static VALUE
@@ -76,7 +109,7 @@ gdkcolor_set_green(self, green)
     VALUE self;
     VALUE green;
 {
-    get_gdkcolor(self)->green = NUM2INT(green);
+    _SELF(self)->green = NUM2INT(green);
     return green;
 }
 
@@ -84,7 +117,7 @@ static VALUE
 gdkcolor_blue(self)
     VALUE self;
 {
-    return INT2FIX(get_gdkcolor(self)->blue);
+    return INT2FIX(_SELF(self)->blue);
 }
 
 static VALUE
@@ -92,7 +125,7 @@ gdkcolor_set_blue(self, blue)
     VALUE self;
     VALUE blue;
 {
-    get_gdkcolor(self)->blue = NUM2INT(blue);
+    _SELF(self)->blue = NUM2INT(blue);
     return blue;
 }
 
@@ -100,23 +133,30 @@ static VALUE
 gdkcolor_to_a(self)
     VALUE self;
 {
-    GdkColor *c = get_gdkcolor(self);
-    return rb_ary_new3(3, INT2FIX(c->red), INT2FIX(c->green), INT2FIX(c->blue));
+    GdkColor *c = _SELF(self);
+    return rb_ary_new3(3, INT2FIX(c->red), 
+					   INT2FIX(c->green), INT2FIX(c->blue));
 }
 
-/*
- * Gdk::ColorContext
- */
-VALUE gdkColorContext;
+static VALUE
+gdkcolor_equal(self, other)
+	VALUE self, other;
+{
+	return (gdk_color_equal(_SELF(self), _SELF(other)))? Qtrue : Qfalse;
+}
 
 void
 Init_gtk_gdk_color()
 {
-    /* Gdk::Color */
-    gdkColor = rb_define_class_under(mGdk, "Color", rb_cData);
+	VALUE gdkColor = RB_DEF_CLASS2("Color", mGdk, "Data", GdkColor, 0, 
+								   gdk_color_copy, gdk_color_free);
 
-    rb_define_singleton_method(gdkColor, "new", gdkcolor_s_new, 3);
+    rb_define_singleton_method(gdkColor, "allocate", gdkcolor_s_allocate, 0);
+#ifndef HAVE_OBJECT_ALLOCATE
+    rb_define_singleton_method(gdkColor, "new", gdkcolor_s_new, -1);
+#endif
     rb_define_singleton_method(gdkColor, "parse", gdkcolor_s_parse, 1);
+    rb_define_method(gdkColor, "initialize", gdkcolor_initialize, -1);
     rb_define_method(gdkColor, "pixel", gdkcolor_pixel, 0);
     rb_define_method(gdkColor, "red", gdkcolor_red, 0);
     rb_define_method(gdkColor, "red=", gdkcolor_set_red, 1);
@@ -125,8 +165,6 @@ Init_gtk_gdk_color()
     rb_define_method(gdkColor, "blue", gdkcolor_blue, 0);
     rb_define_method(gdkColor, "blue=", gdkcolor_set_blue, 1);
     rb_define_method(gdkColor, "to_a", gdkcolor_to_a, 0);
-
-    /* Gdk::ColorContext */
-    gdkColorContext = rb_define_class_under(mGdk, "ColorContext", rb_cData);
+    rb_define_method(gdkColor, "==", gdkcolor_equal, 1);
 }
 

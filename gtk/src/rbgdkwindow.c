@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,7 +47,7 @@ gdkwin_pointer_grab(self, owner_events, event_mask, confine_to, cursor, time)
 		     RTEST(owner_events),
 		     NUM2INT(event_mask),
 		     _SELF(confine_to),
-		     get_gdkcursor(cursor),
+		     (GdkCursor*)RVAL2COBJ("Gdk::Cursor", cursor),
 		     NUM2INT(time));
     return self;
 }
@@ -145,7 +145,8 @@ static VALUE
 gdkwin_set_background(self, color)
     VALUE self, color;
 {
-    gdk_window_set_background(_SELF(self), get_gdkcolor(color));
+    gdk_window_set_background(_SELF(self), 
+							  (GdkColor*)RVAL2COBJ("Gdk::Color", color));
     return self;
 }
 
@@ -284,7 +285,7 @@ static VALUE
 gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
 {
-    gdk_window_set_cursor(_SELF(self), get_gdkcursor(cursor));
+    gdk_window_set_cursor(_SELF(self), (GdkCursor*)RVAL2COBJ("Gdk::Cursor", cursor));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -41,7 +41,7 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
     VALUE self, color, writeable, best_match;
 {
     gboolean result;
-    GdkColor *c = get_gdkcolor(color);
+    GdkColor *c = (GdkColor*)RVAL2COBJ("Gdk::Color", color);
     result = gdk_colormap_alloc_color(_SELF(self), c,
                                       RTEST(writeable), RTEST(best_match));
     return result ? INT2NUM(c->pixel) : Qnil;
@@ -66,7 +66,7 @@ gdkcmap_colors(self)
           visual->type == GDK_VISUAL_PSEUDO_COLOR) {
         ary = rb_ary_new2(cmap->size);
         for (i = 0; i < cmap->size; i++) {
-            rb_ary_push(ary, make_gdkcolor(colors));
+            rb_ary_push(ary, COBJ2RVAL("Gdk::Color", colors));
             colors++;
         }
         return ary;

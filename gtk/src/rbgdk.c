@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -194,32 +194,6 @@ get_gdkevent(event)
     Data_Get_Struct(event, GdkEvent, gevent);
 
     return gevent;
-}
-
-VALUE
-make_gdkcursor(cursor)
-    GdkCursor *cursor;
-{
-    if (cursor == NULL) return Qnil;
-
-    gdk_cursor_ref(cursor);
-    return Data_Wrap_Struct(gdkCursor, 0, gdk_cursor_unref, cursor);
-}
-
-GdkCursor*
-get_gdkcursor(cursor)
-    VALUE cursor;
-{
-    GdkCursor *gcursor;
-
-    if (NIL_P(cursor)) return NULL;
-
-    if (!rb_obj_is_kind_of(cursor, gdkCursor)) {
-        rb_raise(rb_eTypeError, "not a GdkCursor");
-    }
-    Data_Get_Struct(cursor, GdkCursor, gcursor);
-
-    return gcursor;
 }
 
 struct _rbgdkatom {

@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/18 06:28:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -66,7 +66,7 @@ style_fg(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->fg[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->fg[i]);
 }
 
 static VALUE
@@ -77,7 +77,7 @@ style_bg(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->bg[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->bg[i]);
 }
 
 static VALUE
@@ -88,7 +88,7 @@ style_light(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->light[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->light[i]);
 }
 
 static VALUE
@@ -99,7 +99,7 @@ style_dark(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->dark[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->dark[i]);
 }
 
 static VALUE
@@ -110,7 +110,7 @@ style_mid(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->mid[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->mid[i]);
 }
 
 static VALUE
@@ -121,7 +121,7 @@ style_text(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->text[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->text[i]);
 }
 
 static VALUE
@@ -132,7 +132,7 @@ style_base(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&_SELF(self)->base[i]);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->base[i]);
 }
 
 #define DEFINE_STYLE_SET_COLOR(func, type) \
@@ -151,7 +151,7 @@ func(self, idx, r, g, b) \
   color->red   = NUM2INT(r); \
   color->green = NUM2INT(g); \
   color->blue  = NUM2INT(b); \
-  return(make_gdkcolor(color)); \
+  return(COBJ2RVAL("Gdk::Color", color)); \
 } \
 
 DEFINE_STYLE_SET_COLOR(style_set_fg, fg)
@@ -166,14 +166,14 @@ DEFINE_STYLE_SET_COLOR(style_set_fg, fg)
 style_black(self)
     VALUE self;
 {
-    return make_gdkcolor(&_SELF(self)->black);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->black);
 }
 
 static VALUE
 style_white(self)
     VALUE self;
 {
-    return make_gdkcolor(&_SELF(self)->white);
+    return COBJ2RVAL("Gdk::Color", &_SELF(self)->white);
 }
 
 static VALUE
