@@ -1,3 +1,7 @@
+2003-01-12  Tom Payne <ruby-gnome-users-en@tompayne.org>
+
+	* sample/testlibart2.rb: Add a file.
+
 2003-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
    * README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
