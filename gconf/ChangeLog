@@ -1,6 +1,11 @@
+2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-client.c, rbgconf_changeset.c: 
+	Replace rb_f_lambda() to G_BLOCK_PROC() for ruby-1.8.x.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
@@ -45,7 +50,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/05/27 14:49:13 $ macros.
+	and $Date: 2003/06/26 15:17:01 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
