@@ -3,6 +3,8 @@ extconf.rb for Ruby/RSVG extention library
 =end
 
 def mkenums(output, config, files)
+  makefile_created = $makefile_created
+  $makefile_created = true
   args = []
   %w(fhead fprod ftail eprod vhead vprod vtail comments template).each do |param|
     param = param.intern
@@ -20,6 +22,8 @@ def mkenums(output, config, files)
     out.print(for_read.read)
   end
   Process.waitpid(pid)
+ensure
+  $makefile_created = makefile_created
 end
 
 def mkenums_h(prefix, files)

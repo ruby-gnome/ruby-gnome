@@ -1,3 +1,8 @@
+2005-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb (mkenums): added dummy $makefile_created setup code
+	  for inhibiting failed message of mkmf.rb in ruby 1.9.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
