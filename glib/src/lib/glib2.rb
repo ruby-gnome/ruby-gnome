@@ -143,8 +143,9 @@ module GLib
     end
   end
 
+  LOG_DOMAINS = ["GLib", "GThread", "GModule", "GLib-GObject", "GLib-Genmarshal"]
 end
 
-["GLib", "GThread", "GModule", "GLib-GObject", "GLib-Genmarshal"].each do |domain|
+GLib::LOG_DOMAINS.each do |domain|
   GLib::Log.set_error_domain(domain)
 end
