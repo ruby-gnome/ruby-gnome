@@ -1,6 +1,7 @@
 2003-08-03  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgobj_valuetypes.c: Fix error for gcc 2.95.4.
+	Reported by Hiroshi Igarashi.
 
 2003-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
