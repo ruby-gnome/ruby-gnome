@@ -1,4 +1,4 @@
-# $Id: common.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
+# $Id: common.rb,v 1.2 2003/08/16 13:36:50 kzys Exp $
 require 'gtk2'
 
 module Demo
@@ -20,7 +20,7 @@ module Demo
       if title
 	set_title("#{title} in Ruby/GTK")
       end
-      
+
       signal_connect("delete_event") do |widget, event|
 	quit
       end
