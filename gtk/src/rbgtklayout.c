@@ -4,7 +4,7 @@
   rbgtklayout.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/26 14:58:16 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -129,7 +129,7 @@ Init_gtk_layout()
     rb_define_method(gLayout, "get_hadjustment", layout_get_hadjustment, 0);
     rb_define_method(gLayout, "hadjustment", layout_get_hadjustment, 0);
     rb_define_method(gLayout, "get_vadjustment", layout_get_vadjustment, 0);
-    rb_define_method(gLayout, "vadjustment", layout_get_hadjustment, 0);
+    rb_define_method(gLayout, "vadjustment", layout_get_vadjustment, 0);
     rb_define_method(gLayout, "set_hadjustment", layout_set_hadjustment, 1);
     rb_define_method(gLayout, "hadjustment=", layout_set_hadjustment, 1);
     rb_define_method(gLayout, "set_vadjustment", layout_set_vadjustment, 1);

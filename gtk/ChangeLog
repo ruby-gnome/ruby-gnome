@@ -1,3 +1,9 @@
+Sun May 26 23:52:15 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * src/rbgtklayout.c: Fix Gtk::Layout#vadjustment to
+     use layout_get_vadjustment, NOT layout_get_hadjustment
+	  (Ruby-GNOME patch [555101])
+
 Sun May 26 19:00:14 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
    * extconf.rb: Support --with-pkg-config (like Ruby-GNOME patch [532458])
