@@ -1,3 +1,14 @@
+2002-11-23  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
+
+	* src/rbgtktextbuffer.c : Add Gtk::TextBuffer#insert_interactive,
+	#insert_interactive_at_cursor, insert_range, insert_range_interactive,
+	#delete_interactive, #get_text, #get_slice, #create_mark,
+	#delete_mark, #get_mark, #place_cursor, #selection_bounds.
+	* src/rbgtktextiter.c : Add Gtk::TextIter#editable?, #can_insert?,
+	#attributes, #forward_to_end, #forward_to_tag_toggle,
+	#backward_to_tag_toggle, #forward_find_char, #backward_find_char.
+	The parenthesis mismatch of RVAL2TAG is fixed.
+
 2002-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkimage.c: Gtk::Image#initialize, #set support Gtk::IconSet, 
