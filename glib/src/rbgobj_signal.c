@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Author: sakai $
+  $Date: 2003/04/05 08:51:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -13,36 +13,12 @@
 
 #include "global.h"
 
+static VALUE cSignal;
 VALUE rbgobj_signal_wrap(guint sig_id);
+
+/**********************************************************************/
+
 static VALUE signal_func_table;
-
-GValToRValSignalFunc
-rbgobj_get_signal_func(obj, sig_name)
-    VALUE obj, sig_name;
-{
-    GValToRValSignalFunc func = NULL;
-    VALUE funcobj, klass, gklass;
-    ID key;
-    char* p;
-    char* gsig_name = RVAL2CSTR(sig_name);
-    klass = CLASS_OF(obj);
-    gklass = GTYPE2CLASS(G_TYPE_OBJECT);
-    for (p = gsig_name; *p; p++)
-        if (*p == '_')  *p = '-';
-
-    while (klass != gklass){
-        key = rb_intern(g_strdup_printf("%s%s", rb_class2name(klass), gsig_name));
-        funcobj = rb_hash_aref(signal_func_table, key);
-    
-        if (!NIL_P(funcobj)){
-            Data_Get_Struct(funcobj, void, func);
-            break;
-        } else {
-            klass = RCLASS(klass)->super;
-        }
-    }
-    return func;
-}
 
 void
 rbgobj_set_signal_func(klass, sig_name, func)
@@ -50,14 +26,52 @@ rbgobj_set_signal_func(klass, sig_name, func)
     gchar* sig_name; 
     GValToRValSignalFunc func;
 {
-    ID key;
-    char* p; 
-    char* gsig_name = g_strdup(sig_name);
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    for (p = gsig_name; *p; p++)
-        if (*p == '_')  *p = '-';
-    key = rb_intern(g_strdup_printf("%s%s", rb_class2name(klass), gsig_name));
-    rb_hash_aset(signal_func_table, key, obj);
+    guint signal_id = g_signal_lookup(sig_name, CLASS2GTYPE(klass));
+    rb_hash_aset(signal_func_table, UINT2NUM(signal_id), obj);
+}
+
+static GValToRValSignalFunc
+rbgobj_get_signal_func(guint signal_id)
+{
+    GValToRValSignalFunc func = NULL;
+    VALUE func_obj = rb_hash_aref(signal_func_table, UINT2NUM(signal_id));
+    if (!NIL_P(func_obj))
+        Data_Get_Struct(func_obj, void, func);
+    return func;
+}
+
+/**********************************************************************/
+
+static guint
+to_signal_id(signal, gtype)
+     VALUE signal;
+     GType gtype;
+{
+    if (rb_obj_is_kind_of(signal, cSignal)) {
+        GSignalQuery* query;
+        Data_Get_Struct(signal, GSignalQuery, query);
+        return query->signal_id;
+    } else if (rb_respond_to(signal, rb_intern("to_str"))){
+        StringValue(signal);
+        return g_signal_lookup(StringValuePtr(signal), gtype);
+    } else {
+        return NUM2UINT(signal);
+    }
+}
+
+static GQuark
+to_gquark(obj)
+     VALUE obj;
+{
+    if (NIL_P(obj)) {
+        return 0;
+    } else if (rb_respond_to(obj, rb_intern("to_str"))){
+        StringValue(obj);
+        return g_quark_from_string(StringValuePtr(obj));
+    } else {
+        return NUM2UINT(obj);
+    }
 }
 
 /**********************************************************************/
@@ -187,8 +201,6 @@ gobj_s_signal(VALUE self, VALUE name)
     return rbgobj_signal_wrap(sig_id);
 }
 
-/**********************************************************************/
-
 static VALUE
 gobj_sig_connect(argc, argv, self)
     int argc;
@@ -215,7 +227,7 @@ gobj_sig_connect(argc, argv, self)
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(rb_f_lambda(), rest, 
-                              rbgobj_get_signal_func(self, CSTR2RVAL(sig_name)));
+                              rbgobj_get_signal_func(signal_id));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
 
     return INT2FIX(i);
@@ -247,7 +259,7 @@ gobj_sig_connect_after(argc, argv, self)
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(rb_f_lambda(), rest, 
-                              rbgobj_get_signal_func(self, CSTR2RVAL(sig_name)));
+                              rbgobj_get_signal_func(signal_id));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
 
     return INT2FIX(i);
@@ -297,33 +309,6 @@ emit_impl(self, signal_id, detail, args)
         return result;
     } else {
         return Qnil;
-    }
-}
-
-static guint
-to_signal_id(signal, gtype)
-     VALUE signal;
-     GType gtype;
-{
-    if (rb_respond_to(signal, rb_intern("to_str"))){
-        StringValue(signal);
-        return g_signal_lookup(StringValuePtr(signal), gtype);
-    } else {
-        return NUM2UINT(signal);
-    }
-}
-
-static GQuark
-to_gquark(obj)
-     VALUE obj;
-{
-    if (NIL_P(obj)) {
-        return 0;
-    } else if (rb_respond_to(obj, rb_intern("to_str"))){
-        StringValue(obj);
-        return g_quark_from_string(StringValuePtr(obj));
-    } else {
-        return NUM2UINT(obj);
     }
 }
 
@@ -470,11 +455,45 @@ void	g_signal_chain_from_overridden	      (const GValue      *instance_and_param
 					       GValue            *return_value);
 #endif
 
+static void
+Init_signal_misc()
+{
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+    id_send = rb_intern("__send__");
+#endif
+    signal_func_table = rb_hash_new();
+    rb_global_variable(&signal_func_table);
+
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+    rb_define_method(mInterfaceCommons, "signal_new", gobj_s_signal_new, -1);
+#endif
+    rb_define_method(mInterfaceCommons, "signals", gobj_s_signals, 0);
+    rb_define_method(mInterfaceCommons, "signal", gobj_s_signal, 1);
+
+    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
+    rb_define_method(cInstantiatable, "signal_connect_after",
+                     gobj_sig_connect_after, -1);
+
+    rb_define_method(cInstantiatable, "signal_emit",
+                     gobj_sig_emit, -1);
+    rb_define_method(cInstantiatable, "signal_emit_by_name",
+                     gobj_sig_emit_by_name, -1);
+    rb_define_method(cInstantiatable, "signal_emit_stop",
+                     gobj_sig_emit_stop, -1);
+    rb_define_method(cInstantiatable, "signal_emit_stop_by_name",
+                     gobj_sig_emit_stop_by_name, 1);
+    rb_define_method(cInstantiatable, "signal_handler_block",
+                     gobj_sig_handler_block, 1);
+    rb_define_method(cInstantiatable, "signal_handler_unblock",
+                     gobj_sig_handler_unblock, 1);
+    rb_define_method(cInstantiatable, "signal_handler_disconnect",
+                     gobj_sig_handler_disconnect, 1);
+
+    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
+                     gobj_sig_handler_is_connected, 1);
+}
+
 /**********************************************************************/
-
-/* G_CONST_RETURN gchar* g_signal_name         (guint               signal_id); */
-
-static VALUE cSignal;
 
 VALUE
 rbgobj_signal_wrap(sig_id)
@@ -543,46 +562,68 @@ query_param_types(self)
     return result;
 }
 
-/**********************************************************************/
+static gboolean
+hook_func(GSignalInvocationHint* ihint,
+          guint                  n_param_values,
+          const GValue*          param_values,
+          gpointer               data)
+{
+    GClosure* closure = data;
+    GValue ret_val ={0,};
+    gboolean ret;
 
-void
-Init_gobject_gsignal()
+    g_value_init(&ret_val, G_TYPE_BOOLEAN);
+    g_closure_invoke(closure, &ret_val, n_param_values, param_values, ihint);
+    ret = g_value_get_boolean(&ret_val);
+    g_value_unset(&ret_val);
+
+    return ret;
+}
+
+static gulong
+g_signal_add_emission_hook_closure (guint     signal_id,
+                                    GQuark    detail,
+                                    GClosure* closure)
+{
+    guint hook_id;
+    g_closure_ref(closure);
+    g_closure_sink(closure);
+    hook_id = g_signal_add_emission_hook(signal_id, detail,
+                                         &hook_func, closure,
+                                         (GDestroyNotify)&g_closure_unref);
+    return hook_id;
+}
+
+static VALUE
+signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
+{
+    VALUE tmp, proc;
+    guint signal_id, hook_id;
+    GQuark detail;
+    GClosure* closure;
+
+    if (rb_scan_args(argc, argv, "01&", &tmp, &proc) == 1)
+        detail = to_gquark(tmp);
+    else
+        detail = 0;
+    signal_id = to_signal_id(self);
+
+    closure = g_rclosure_new(proc, Qnil, rbgobj_get_signal_func(signal_id));
+    hook_id = g_signal_add_emission_hook_closure(signal_id, detail, closure);
+    return ULONG2NUM(hook_id);
+}
+
+static VALUE
+signal_remove_emission_hook(VALUE self, VALUE hook_id)
+{
+    g_signal_remove_emission_hook(to_signal_id(self), NUM2ULONG(hook_id));
+    return Qnil;
+}
+
+static void
+Init_signal_class()
 {
     cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
-
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    id_send = rb_intern("__send__");
-#endif
-    signal_func_table = rb_hash_new();
-    rb_global_variable(&signal_func_table);
-
-#ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    rb_define_method(mInterfaceCommons, "signal_new", gobj_s_signal_new, -1);
-#endif
-    rb_define_method(mInterfaceCommons, "signals", gobj_s_signals, 0);
-    rb_define_method(mInterfaceCommons, "signal", gobj_s_signal, 1);
-
-    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
-    rb_define_method(cInstantiatable, "signal_connect_after",
-                     gobj_sig_connect_after, -1);
-
-    rb_define_method(cInstantiatable, "signal_emit",
-                     gobj_sig_emit, -1);
-    rb_define_method(cInstantiatable, "signal_emit_by_name",
-                     gobj_sig_emit_by_name, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop",
-                     gobj_sig_emit_stop, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop_by_name",
-                     gobj_sig_emit_stop_by_name, 1);
-    rb_define_method(cInstantiatable, "signal_handler_block",
-                     gobj_sig_handler_block, 1);
-    rb_define_method(cInstantiatable, "signal_handler_unblock",
-                     gobj_sig_handler_unblock, 1);
-    rb_define_method(cInstantiatable, "signal_handler_disconnect",
-                     gobj_sig_handler_disconnect, 1);
-
-    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
-                     gobj_sig_handler_is_connected, 1);
 
     rb_define_method(cSignal, "signal_id", query_signal_id, 0);
     rb_define_alias(cSignal, "id", "signal_id");
@@ -593,6 +634,8 @@ Init_gobject_gsignal()
     rb_define_method(cSignal, "itype", query_itype, 0);
     rb_define_method(cSignal, "return_type", query_return_type, 0);
     rb_define_method(cSignal, "param_types", query_param_types, 0);
+    rb_define_method(cSignal, "add_emission_hook", signal_add_emission_hook, -1);
+    rb_define_method(cSignal, "remove_emission_hook", signal_remove_emission_hook, 1);
 
     /* GSignalFlags */
     rb_define_const(cSignal, "RUN_FIRST",   INT2FIX(G_SIGNAL_RUN_FIRST));
@@ -619,4 +662,13 @@ Init_gobject_gsignal()
 
     rb_define_const(cSignal, "MATCH_MASK", INT2FIX(G_SIGNAL_MATCH_MASK));
     rb_define_const(cSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
+}
+
+/**********************************************************************/
+
+void
+Init_gobject_gsignal()
+{
+    Init_signal_class();
+    Init_signal_misc();
 }

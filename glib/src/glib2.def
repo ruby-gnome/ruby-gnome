@@ -29,7 +29,6 @@ EXPORTS
 	rbgobj_register_r2g_func
 	rbgobj_register_property_getter
 	rbgobj_register_property_setter
-	rbgobj_get_signal_func
 	rbgobj_set_signal_func
 	rbgobj_signal_wrap
 	g_rclosure_new

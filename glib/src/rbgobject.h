@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/04/04 13:48:42 $
+  $Date: 2003/04/05 08:51:33 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -103,7 +103,6 @@ extern GType rbgobj_gtype_get(VALUE obj);
 /* rbgobj_signal.c */
 typedef VALUE (*GValToRValSignalFunc)(guint num,const GValue* values);
 extern void rbgobj_set_signal_func(VALUE klass, gchar* sig_name, GValToRValSignalFunc func);
-extern GValToRValSignalFunc rbgobj_get_signal_func(VALUE obj, VALUE sig_name);
 extern VALUE rbgobj_signal_wrap(guint sig_id);
 
 
