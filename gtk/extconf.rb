@@ -81,11 +81,6 @@ have_func('gtk_socket_get_type')
 have_func('_gtk_accel_group_attach')
 have_func("XReadBitmapFileData")
 
-p $CFLAGS
-p $CPPFLAGS
-p $LIBS
-p $defs
-
 #
 # create Makefiles
 #
