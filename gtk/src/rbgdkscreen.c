@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:30:40 $
+  $Date: 2004/11/14 11:01:43 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -217,6 +217,7 @@ gdkscreen_get_setting(argc, argv, self)
     return value;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
 static void
 child_setup(func)
     gpointer func;
@@ -226,7 +227,6 @@ child_setup(func)
     }
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
     VALUE self, working_directory, argv, envp, flags;

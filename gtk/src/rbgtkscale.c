@@ -4,7 +4,7 @@
   rbgtkscale.c -
 
   $Author: mutoh $
-  $Date: 2004/07/24 08:03:14 $
+  $Date: 2004/11/14 11:01:43 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -37,9 +37,11 @@ rbscale_get_layout_offsets(self)
 void 
 Init_gtk_scale()
 {
-    VALUE gScale = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
 #if GTK_CHECK_VERSION(2,4,0)
+    VALUE gScale = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
     rb_define_method(gScale, "layout", rbscale_get_layout, 0);
     rb_define_method(gScale, "layout_offsets", rbscale_get_layout_offsets, 0);
+#else
+    G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
 #endif
 }

@@ -1,5 +1,6 @@
-2004-11-14    <mutoh@localhost.localdomain>
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkscreen.c, rbgtkscale.c: Fix warning for GTK+-2.2.x.
 	* src/rbgtkclipboard.c: Fix warning for GTK+-2.0.x. 
 
 2004-11-06  Geoff Youngs  <g@intersect-uk.co.uk>
