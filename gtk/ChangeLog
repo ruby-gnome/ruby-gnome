@@ -1,3 +1,11 @@
+2003-07-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeview.c: Enhanced Gtk::TreeView#insert_column.
+	* src/rbgtktreeviewcolumn.c: Gtk::TreeViewColumn#add_attribute 
+	accept Symbol as a attribute.
+	Add Gtk::TreeViewColumn#set_attributes.
+	Remove Gtk::TreeViewColumn#cell_data_func=.
+
 2003-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: use G_DEF_CONSTANTS() for defining enum/flags constants.

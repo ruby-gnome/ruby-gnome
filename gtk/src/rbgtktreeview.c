@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: mutoh $
+  $Date: 2003/07/20 16:13:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -70,6 +70,20 @@ treeview_remove_column(self, column)
                                                TREEVIEW_COL(column)));
 }  
 
+static void
+cell_data_func(column, cell, model, iter, func)
+    GtkTreeViewColumn* column;
+    GtkCellRenderer* cell;
+    GtkTreeModel* model;
+    GtkTreeIter* iter;
+    gpointer func;
+{
+    iter->user_data3 = model;
+    rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(column),
+               GOBJ2RVAL(cell), GOBJ2RVAL(model), 
+               BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+}
+
 static VALUE
 treeview_insert_column(argc, argv, self)
     int argc;
@@ -82,47 +96,53 @@ treeview_insert_column(argc, argv, self)
                  &args[0],         /* column    position    position  */
                  &args[1],         /* position  title       title     */
                  &args[2],         /*           renderer    renderer  */
-                 &args[3]);        /*           attributes  func      */
+                 &args[3]);        /*           attributes            */
 
     if (argc == 2) {
         return INT2NUM(gtk_tree_view_insert_column(_SELF(self),
                                                    TREEVIEW_COL(args[0]),
                                                    NUM2INT(args[1])));
+    } else if (argc == 3) {
+        int ret;
+        VALUE func = G_BLOCK_PROC();
+
+        G_RELATIVE(self, func);
+        ret = gtk_tree_view_insert_column_with_data_func(_SELF(self),
+                                                         NUM2INT(args[0]),
+                                                         RVAL2CSTR(args[1]),
+                                                         RVAL2CELLRENDERER(args[2]),
+                                                         cell_data_func,
+                                                         func, NULL);
+        return INT2NUM(ret);
     } else if (argc == 4) {
-        if (TYPE(args[3]) == T_HASH) {
-            int i;
-            int col;
-            int ret;
-            gchar* name;
-            VALUE ary;
-            GtkCellRenderer* renderer = RVAL2CELLRENDERER(args[2]);
+        int i;
+        int col;
+        int ret;
+        gchar* name;
+        VALUE ary;
+        GtkCellRenderer* renderer = RVAL2CELLRENDERER(args[2]);
+        
+        GtkTreeViewColumn* column = gtk_tree_view_column_new();
 
-            GtkTreeViewColumn* column = gtk_tree_view_column_new();
-            gtk_tree_view_column_set_title(column, RVAL2CSTR(args[1]));
-            gtk_tree_view_column_pack_start(column, renderer, TRUE);
-
-            ret = gtk_tree_view_insert_column(_SELF(self), column, NUM2INT(args[0]));
-            ary = rb_funcall(args[3], rb_intern("to_a"), 0);
-            for (i = 0; i < RARRAY(ary)->len; i++) {
-                VALUE val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
-                if (SYMBOL_P(val)) {
-                    name = rb_id2name(SYM2ID(val));
-                } else {
-                    name = RVAL2CSTR(val);
-                }
-                col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
-                gtk_tree_view_column_add_attribute(column,
-                                                   renderer,
-                                                   name, col);
+        Check_Type(args[3], T_HASH);
+        gtk_tree_view_column_set_title(column, RVAL2CSTR(args[1]));
+        gtk_tree_view_column_pack_start(column, renderer, TRUE);
+        
+        ret = gtk_tree_view_insert_column(_SELF(self), column, NUM2INT(args[0]));
+        ary = rb_funcall(args[3], rb_intern("to_a"), 0);
+        for (i = 0; i < RARRAY(ary)->len; i++) {
+            VALUE val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            if (SYMBOL_P(val)) {
+                name = rb_id2name(SYM2ID(val));
+            } else {
+                name = RVAL2CSTR(val);
             }
-            return INT2NUM(ret);
-        }  else if (rb_obj_is_kind_of(args[3], rb_cProc)) {
-            rb_notimplement();
-            return Qnil;
-        } else {
-            rb_raise(rb_eArgError, "invalid argument %s (expect Hash or Proc)",
-                     rb_class2name(CLASS_OF(args[3])));
+            col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+            gtk_tree_view_column_add_attribute(column,
+                                               renderer,
+                                               name, col);
         }
+        return INT2NUM(ret);
     } else {
 	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
     }
