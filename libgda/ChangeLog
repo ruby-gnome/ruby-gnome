@@ -1,6 +1,8 @@
 2004-01-28  Nikolai Weibull  <source@pcppopper.org>
 
 	* src/lib/libgda.rb: Added requirement on date.
+	* src/rbgdavalaue.c: Added missing argument in call to
+	rb_rb_value_to_gda_value_try_as_string().
 
 2004-01-26  Laurent Sansonetti  <lrz@gnome.org>
 

@@ -386,7 +386,7 @@ GdaValue *rb_rb_value_to_gda_value(value, type)
             ts.timezone = NUM2LONG(rb_funcall(value, rb_intern("gmtoff"), 0));
             return gda_value_new_timestamp(&ts);
         } else {
-            return rb_rb_value_to_gda_value_try_as_string(value,
+            return rb_rb_value_to_gda_value_try_as_string(value, type,
                                 "cannot convert value to timestamp");
         }
         
