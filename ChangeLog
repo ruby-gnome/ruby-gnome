@@ -1,3 +1,12 @@
+2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+	* AUTHORS: Modified.
+	* exec_make.rb: Added
+	* extconf.rb: Improved. 
+	If the libraries are not found, they're ignored.
+	And you can specify to target libraries.
+
 2003-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Updated.

@@ -1,5 +1,9 @@
 =begin
-top-level extconf.rb for gnome extention library
+  top-level extconf.rb for Ruby-GNOME2
+
+  $Id: extconf.rb,v 1.7 2003/08/27 17:28:04 mutoh Exp $
+
+  Copyright (C) 2003 Ruby-GNOME2 Project Team
 =end
 
 require 'mkmf'
@@ -11,18 +15,48 @@ priorlibs = ["glib", "gdkpixbuf", "pango", "gtk"]
 # detect sub-directories
 #
 $ruby = arg_config("--ruby", Config::CONFIG['RUBY_INSTALL_NAME'])
+
 $srcdir = File.dirname(__FILE__)
 $topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
 $topdir = $configure_args["--topdir"] ||= Dir.pwd
-subdirs = Dir.glob($topsrcdir+"/*/**/extconf.rb")
-subdirs.collect! do |subdir|
-  subdir[0..$topsrcdir.size] = ""
-  File.dirname(subdir)
+
+subdirs = ARGV.select{|v|  /^--/ !~ v}
+
+if subdirs.size == 0
+  subdirs = Dir.glob($topsrcdir+"/*/**/extconf.rb")
+  subdirs.collect! do |subdir|
+    subdir[0..$topsrcdir.size] = ""
+    File.dirname(subdir)
+  end
+  priorlibs &= subdirs
+  subdirs -= priorlibs
+  subdirs = priorlibs + subdirs #Change the order
 end
 
-subdirs -= priorlibs
-subdirs = priorlibs + subdirs #Change order
-
+#
+# generate sub-directory Makefiles
+#
+targets = []
+ignore = []
+subdirs.each do |subdir|
+  STDERR.puts("#{$0}: Entering directory `#{subdir}'")
+  File.mkpath(subdir)
+  topdir = File.join(*([".."] * subdir.split(/\/+/).size))
+  /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
+  srcdir = File.join(dir, subdir)
+  ret = system($ruby, "-C", subdir, File.join(srcdir, "extconf.rb"),
+   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}",
+   *ARGV)
+  STDERR.puts("#{$0}: Leaving directory '#{subdir}'")
+  if ret
+    targets << subdir
+  else
+    ignore << subdir
+  end
+end
+puts "\n-----"
+puts "Target libraries: #{targets.join(', ')}" if targets.size > 0
+puts "Ignored libraries: #{ignore.join(', ')}" if ignore.size > 0
 
 #
 # generate top-level Makefile
@@ -30,47 +64,27 @@ subdirs = priorlibs + subdirs #Change order
 File.open("Makefile", "w") do |makefile|
   makefile.print("\
 TOPSRCDIR = #{$topsrcdir}
-SUBDIRS = #{priorlibs.join(' ')} #{subdirs.join(' ')}
+SUBDIRS = #{targets.join(' ')}
+COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb
 
 all:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) all); \\
-	done;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) all;
 
 install:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) install); \\
-	done;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) install;
 
 site-install:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) site-install); \\
-	done;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) site-install;
 
 clean:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\$subdir && \$(MAKE) clean); \\
-	done; \\
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) clean;
 
 distclean:
-	for subdir in \$(SUBDIRS); do \\
-		(cd \$\${subdir} && \$(MAKE) distclean); \\
-	done;
+	$(COMMAND) '$(SUBDIRS)' $(MAKE) distclean;
 	rm -f Makefile mkmf.log
 ")
 end
 
-#
-# generate sub-directory Makefiles
-#
-subdirs.each do |subdir|
-  STDERR.puts("#{$0}: Entering directory `#{subdir}'")
-  File.mkpath(subdir)
-  topdir = File.join(*([".."] * subdir.split(/\/+/).size))
-  /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
-  srcdir = File.join(dir, subdir)
-  system($ruby, "-C", subdir, File.join(srcdir, "extconf.rb"),
-   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}",
-   *ARGV)
-  STDERR.puts("#{$0}: Leaving directory `#{subdir}'")
-end
+puts "-----"
+puts "Done."
+

@@ -1,37 +1,31 @@
-Ruby-GNOME2 -- Ruby bindings for GNOME-2.0
+Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
 ==========================================
 
-   This is a set of bindings for the GNOME-2.0 libraries for use from Ruby.
-
-   To use them, you will need Ruby-1.6 and glib-2.0.0, gtk+-2.0.0, pango-1.1.0,
-   gconf2-1.2.0, libgnome-2.0.0, libart_lgpl-2.3.0, libgnomecanvas-2.0.0, 
-   libgnomeui-2.0.0, libglade-2.0.0, gnome-vfs-2.2.3, gstreamer-0.6.2, 
-   libgtkhtml-2.2.0 or later installed on your system. 
-   Keep in mind that you will need both the runtime libraries and the header 
-   files installed.
+   This is a set of bindings for the GNOME-2.x libraries for use from Ruby.
 
 Release packages
 ----------------
    ruby-gtk2
-    - Ruby/GLib2
-    - Ruby/GdkPixbuf2
-    - Ruby/Pango
-    - Ruby/GTK2
+    - Ruby/GLib2        - GLib 2.0.x or later
+    - Ruby/Pango        - Pango 1.1.x or later
+    - Ruby/GdkPixbuf2   - GTK+ 2.0.x or later
+    - Ruby/GTK2         - GTK+ 2.0.x or later
 
    ruby-gstreamer
-    - Ruby/GLib2
-    - Ruby/GStreamer
+    - Ruby/GLib2        - GLib-2.0.x or later
+    - Ruby/GStreamer    - GStreamer 0.6.x or later
 
    ruby-gnome2-all
     - ruby-gtk2
-    - Ruby/GNOME2
-    - Ruby/GnomeCanvas2
-    - Ruby/Libart2
-    - Ruby/Libglade2
-    - Ruby/GConf2
-    - Ruby/GnomeVFS
-    - Ruby/GStreamer
-    - Ruby/GtkHtml2
+    - Ruby/GNOME2       - libgnome-2.0.x, libgnomeui-2.0.x or later
+    - Ruby/GnomeCanvas2 - libgnomecanvas-2.0.x or later
+    - Ruby/Libart2      - libart_lgpl 2.3.12 or later
+    - Ruby/Libglade2    - Libglade 2.0.x or later
+    - Ruby/GConf2       - GConf 2.0.x or later
+    - Ruby/GnomeVFS     - GnomeVFS 2.0.x or later
+    - Ruby/GStreamer    - GStreamer 0.6.x or later
+    - Ruby/GtkHtml2     - GtkHtml2 2.0.x or later
+    - Ruby/GtkGLExt     - GtkGLExt 1.0.3 or later
 
 
 Install
@@ -41,13 +35,25 @@ Install
    3. su
    4. make install
 
-   To compile and install a particular sub-binding, you should run:
+   To compile and install a particular sub-binding, 
+   you can add arguments:
 
-   0. cd <each sub-directory>
-   1. ruby extconf.rb
-   2. make
-   3. su
-   4. make install
+     ruby extconf.rb [subdir]...
+       e.g.) ruby extconf.rb glib pango gdkpixbuf 
+
+   Or you can compile each sub-binding:
+
+     0. cd <each sub-directory>
+     1. ruby extconf.rb
+     2. make
+     3. su
+     4. make install
+
+extconf.rb options
+-------------------
+   --ruby      : ruby directory
+   --topsrcdir : top source directory
+   --topdir    : top directory
 
 Dependencies
 ------------
@@ -66,6 +72,7 @@ Dependencies
       Ruby/GnomeVFS    depends on Ruby/GLib.
       Ruby/GStreamer   depends on Ruby/GLib.
       Ruby/GtkHtml2    depends on Ruby/GTK.
+      Ruby/GtkGLExt    depends on Ruby/GTK, rbogl.
 
 Copying
 -------
@@ -78,3 +85,4 @@ Copying
 Project Website
 ---------------
    http://ruby-gnome2.sourceforge.jp/
+
