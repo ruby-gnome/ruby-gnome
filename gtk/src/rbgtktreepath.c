@@ -3,8 +3,8 @@
 
   rbgtktreepath.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Author: sakai $
+  $Date: 2003/10/23 07:06:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -40,7 +40,10 @@ static VALUE
 treepath_to_string(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_tree_path_to_string(_SELF(self)));
+    gchar* s = gtk_tree_path_to_string(_SELF(self));
+    VALUE result = CSTR2RVAL(s);
+    g_free(s);
+    return result;
 }
 
 /* Do we need this ? 

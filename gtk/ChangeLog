@@ -1,5 +1,7 @@
 2003-10-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgtktreepath.c (treepath_to_string): fix memory leak.
+
 	* src/rbgdkevent.c: fix DEFINE_ACCESSOR() macro to use G_STRINGIFY().
 
 2003-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
