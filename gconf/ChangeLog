@@ -1,3 +1,8 @@
+2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gconf2.rb: Support GLib::Log.set_log_domain.
+	Define GConf::LOG_DOMAIN.
+
 2004-08-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-error.c: Improved error handling.
@@ -114,7 +119,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/08/22 17:47:48 $ macros.
+	and $Date: 2004/09/23 00:45:17 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
