@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2002/09/29 13:36:29 $
+  $Date: 2002/10/14 11:04:18 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -244,7 +244,7 @@ static void
 Init_gobject_gparam_spec()
 {    
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
-    cParamSpec = G_DEF_CLASS(G_TYPE_PARAM, "ParamSpec", mGLib);
+    cParamSpec = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
 
     /* GParamFlags */
     rb_define_const(cParamSpec, "READABLE",       INT2FIX(G_PARAM_READABLE));

@@ -1,3 +1,16 @@
+2002-10-14  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_param.c: rename GLib::ParamSpec to GLib::Param
+	* src/rbgobj_signal.c (GLib::Instantiatable#signal_conect): accept
+	symbol as signal name.
+	* src/rbgobj_signal.c: rename
+	GLib::Signal::Query to GLIb::Signal and
+	GLib::Object.signal_list to GLIb::Object.signals and
+	GLib::Object.signal_lookup to GLIb::Object.signal
+	* src/rbgobj_object.c: rename
+	GLib::Object.list_properties to GLIb::Object.properties and
+	GLib::Object.find_property to GLIb::Object.property
+
 2002-10-13  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
 	
 	* src/rbgobj_valuetypes.c (rbgobj_ptr2cptr): check argument type

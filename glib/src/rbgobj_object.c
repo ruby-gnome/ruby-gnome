@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/10/13 06:41:58 $
+  $Date: 2002/10/14 11:04:18 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -86,7 +86,7 @@ void        g_object_class_install_property   (GObjectClass   *oclass,
 #endif
 
 static VALUE
-gobj_s_find_property(self, property_name)
+gobj_s_property(self, property_name)
      VALUE self, property_name;
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
@@ -107,7 +107,7 @@ gobj_s_find_property(self, property_name)
 }
 
 static VALUE
-gobj_s_list_properties(self)
+gobj_s_properties(self)
      VALUE self;
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
@@ -369,8 +369,8 @@ Init_gobject_gobject()
     rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
 #endif
 
-    rb_define_singleton_method(cGObject, "find_property", &gobj_s_find_property, 1);
-    rb_define_singleton_method(cGObject, "list_properties", &gobj_s_list_properties, 0);
+    rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
+    rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, 0);
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
