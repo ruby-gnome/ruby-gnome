@@ -1,5 +1,8 @@
 2003-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdk.c: Add Gdk.display_arg_name, .set_locale, 
+	.set_sm_client_id, .notify_startup_complete, .program_class,
+	.set_program_class, .display, .error_trap_push, .error_trap_pop.
 	* src/rbgdktimecoord.c: Added. 
 	* src/rbgtk.h: Add GDK_TYPE_TIME_COORD.
 	* src/rbgdkdevice.c: Added.

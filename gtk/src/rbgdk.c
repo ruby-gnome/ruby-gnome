@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2003/10/13 13:28:28 $
+  $Date: 2003/11/03 15:17:18 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -16,24 +16,70 @@
 
 VALUE mGdk;
 
-/*
+/* We don't need them.
 void        gdk_init                        (gint *argc,
                                              gchar ***argv);
 gboolean    gdk_init_check                  (gint *argc,
                                              gchar ***argv);
 void        gdk_parse_args                  (gint *argc,
                                              gchar ***argv);
-gchar*      gdk_get_display_arg_name        (void);
-gchar*      gdk_set_locale                  (void);
-void        gdk_set_sm_client_id            (const gchar *sm_client_id);
-void        gdk_exit                        (gint error_code);
-
-G_CONST_RETURN char* gdk_get_program_class  (void);
-void        gdk_set_program_class           (const char *program_class);
-
-gchar*      gdk_get_display                 (void);
-
 */
+
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+gdk_s_get_display_arg_name(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_get_display_arg_name());
+}
+#endif
+
+static VALUE
+gdk_s_set_locale(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_set_locale());
+}
+
+static VALUE
+gdk_s_set_sm_client_id(self, sm_client_id)
+    VALUE self, sm_client_id;
+{
+    gdk_set_sm_client_id(RVAL2CSTR(sm_client_id));
+    return Qnil;
+}
+
+#if GTK_MINOR_VERSION >= 2
+static VALUE
+gdk_s_notify_startup_complete(self)
+    VALUE self;
+{
+    gdk_notify_startup_complete();
+    return Qnil;
+}
+#endif
+
+static VALUE
+gdk_s_get_program_class(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_get_program_class());
+}
+
+static VALUE
+gdk_s_set_program_class(self, program_class)
+    VALUE self, program_class;
+{
+    gdk_set_program_class(RVAL2CSTR(program_class));
+    return self;
+}
+
+static VALUE
+gdk_s_get_display(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_get_display());
+}
 
 #ifdef HAVE_X11_XLIB_H 
 #ifdef HAVE_XGETERRORTEXT
@@ -157,7 +203,7 @@ gdk_s_pointer_ungrab(self, time)
     VALUE self, time;
 {
     gdk_pointer_ungrab(NUM2INT(time));
-    return self;
+    return Qnil;
 }
 
 static VALUE
@@ -174,7 +220,7 @@ gdk_s_keyboard_ungrab(self, time)
     VALUE self, time;
 {
     gdk_keyboard_ungrab(NUM2INT(time));
-    return self;
+    return Qnil;
 }
 
 static VALUE
@@ -189,7 +235,7 @@ gdk_s_set_double_click_time(self, msec)
     VALUE self, msec;
 {
     gdk_set_double_click_time(NUM2UINT(msec));
-    return self;
+    return Qnil;
 }
 
 static VALUE
@@ -200,13 +246,22 @@ gdk_s_beep(self)
     return Qnil;
 }
 
-/*
-gboolean    gdk_get_use_xshm                (void);
-void        gdk_set_use_xshm                (gboolean use_xshm);
+static VALUE
+gdk_s_error_trap_push(self)
+    VALUE self;
+{
+    gdk_error_trap_push();
+    return Qnil;
+}
 
-void        gdk_error_trap_push             (void);
-gint        gdk_error_trap_pop              (void);
-*/
+static VALUE
+gdk_s_error_trap_pop(self)
+    VALUE self;
+{
+    gdk_error_trap_pop();
+    return Qnil;
+}
+
 static VALUE
 gdk_s_windowing_x11(self)
     VALUE self;
@@ -252,6 +307,18 @@ Init_gtk_gdk()
 {
     mGdk = rb_define_module("Gdk");
 
+#if GTK_MINOR_VERSION >= 2
+    rb_define_module_function(mGdk, "display_arg_name", gdk_s_get_display_arg_name, 0);
+#endif
+    rb_define_module_function(mGdk, "set_locale", gdk_s_set_locale, 0);
+    rb_define_module_function(mGdk, "set_sm_client_id", gdk_s_set_sm_client_id, 1);
+#if GTK_MINOR_VERSION >= 2
+    rb_define_module_function(mGdk, "notify_startup_complete", gdk_s_notify_startup_complete, 0);
+#endif
+    rb_define_module_function(mGdk, "program_class", gdk_s_get_program_class, 0);
+    rb_define_module_function(mGdk, "set_program_class", gdk_s_set_program_class, 1);
+    rb_define_module_function(mGdk, "display", gdk_s_get_display, 0);
+
 #ifdef HAVE_X11_XLIB_H
     rb_define_module_function(mGdk, "set_x_error_handler", gdk_s_set_x_error_handler , 0);
     rb_define_module_function(mGdk, "set_x_io_error_handler", gdk_s_set_x_io_error_handler , 0);
@@ -268,6 +335,8 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "keyboard_grab", gdk_s_keyboard_grab, 3);
     rb_define_module_function(mGdk, "keyboard_ungrab", gdk_s_keyboard_ungrab, 1);
     rb_define_module_function(mGdk, "pointer_is_grabbed?", gdk_s_pointer_is_grabbed, 0);
+    rb_define_module_function(mGdk, "error_trap_push", gdk_s_error_trap_push, 0);
+    rb_define_module_function(mGdk, "error_trap_pop", gdk_s_error_trap_pop, 0);
     rb_define_module_function(mGdk, "windowing_x11?", gdk_s_windowing_x11, 0);
     rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
     rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);

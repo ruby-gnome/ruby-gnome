@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/10/15 17:52:50 $
+  $Date: 2003/11/03 15:17:18 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -815,23 +815,9 @@ gdkwin_s_get_default_root_window(self)
     return GOBJ2RVAL(gdk_get_default_root_window());
 }
 
-/*
-  GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
+/* Would you need this?
+GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 */
-
-/*
-static VALUE
-gdkwin_s_set_pointer_hooks(get_pointer_hook, window_at_pointer_hook)
-    VALUE get_pointer_hook, window_at_pointer_hook;
-{
-    GdkPointerHooks hooks;
-    hooks.get_pointer = get_pointer;
-    hooks.window_at_pointer = window_at_pointer;
-    GdkPointerHooks gdk_set_pointer_hooks((const GdkPointerHooks*)&hooks);
-    return 
-}
-*/
-
 
 void
 Init_gtk_gdk_window()
