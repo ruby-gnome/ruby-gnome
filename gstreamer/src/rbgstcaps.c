@@ -221,6 +221,29 @@ static VALUE rb_gst_caps_each_property(self)
     return Qnil;
 }
 
+/*
+ *  Method: mime -> aString
+ *
+ *  Get the mime type of the caps as a string.
+ */
+static VALUE rb_gst_caps_get_mime(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gst_caps_get_mime(RGST_CAPS(self)));
+}
+
+/*
+ *  Method: set_mime(aMimeString) -> self
+ *
+ *  Set the mime type of the caps as a string.
+ */
+static VALUE rb_gst_caps_set_mime(self, mime)
+    VALUE self, mime;
+{
+    gst_caps_set_mime(RGST_CAPS(self), RVAL2CSTR(mime));
+    return self;
+}
+
 void Init_gst_caps(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_CAPS, "Caps", mGst);
 
@@ -231,5 +254,9 @@ void Init_gst_caps(void) {
     rb_define_method(c, "each_property",  rb_gst_caps_each_property, 0);
     rb_define_method(c, "has_property?",  rb_gst_caps_has_property, 1);
     rb_define_method(c, "has_fixed_property?",  rb_gst_caps_has_fixed_property, 1);
+    rb_define_method(c, "mime",     rb_gst_caps_get_mime, 0);
+    rb_define_method(c, "set_mime", rb_gst_caps_set_mime, 1);
+
+    G_DEF_SETTERS(c);
 }
 
