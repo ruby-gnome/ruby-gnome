@@ -4,7 +4,7 @@
   rbgtktreerowreference.c -
 
   $Author: mutoh $
-  $Date: 2003/07/14 18:12:53 $
+  $Date: 2003/11/01 09:37:25 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -49,8 +49,7 @@ static VALUE
 treerowref_get_path(self)
     VALUE self;
 {
-    return BOXED2RVAL(gtk_tree_row_reference_get_path(_SELF(self)), 
-                      RBGTK_TYPE_TREE_ROW_REFERENCE);
+    return TREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
 }
 
 static VALUE
