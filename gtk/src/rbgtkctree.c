@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,9 +15,9 @@
 
 #include "global.h"
 
-#define RVAL2CTREENODE(n) ((n == Qnil)?NULL:GTK_CTREE_NODE(RVAL2BOXED(n)))
-#define RVAL2PIXMAP(p) ((p == Qnil)?NULL:GDK_PIXMAP(RVAL2GOBJ(p)))
-#define RVAL2BITMAP(p) ((p == Qnil)?NULL:GDK_BITMAP(RVAL2GOBJ(p)))
+#define RVAL2CTREENODE(n) (NIL_P(n)?NULL:(GtkCTreeNode*)RVAL2BOXED(n, ctreenode_get_type()))
+#define RVAL2PIXMAP(p) (NIL_P(p)?NULL:GDK_PIXMAP(RVAL2GOBJ(p)))
+#define RVAL2BITMAP(p) (NI_P(p)?NULL:GDK_BITMAP(RVAL2GOBJ(p)))
 #define BOXED2RTREENODE(b) BOXED2RVAL(b, ctreenode_get_type())
 
 /*****************************************/
@@ -961,7 +961,7 @@ ctree_node_set_row_style(self, node, style)
 {
     gtk_ctree_node_set_row_style(GTK_CTREE(RVAL2GOBJ(self)),
                                  RVAL2CTREENODE(node),
-                                 GTK_STYLE(GOBJ2RVAL(style)));
+                                 GTK_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -995,7 +995,7 @@ ctree_node_set_cell_style(self, node, column, style)
     gtk_ctree_node_set_cell_style(GTK_CTREE(RVAL2GOBJ(self)),
                                   RVAL2CTREENODE(node),
                                   NUM2INT(column),
-                                  GTK_STYLE(GOBJ2RVAL(style)));
+                                  GTK_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -1025,7 +1025,7 @@ ctree_node_set_foreground(self, node, color)
 {
     gtk_ctree_node_set_foreground(GTK_CTREE(RVAL2GOBJ(self)),
                                   RVAL2CTREENODE(node),
-                                  (GdkColor*)RVAL2BOXED(color));
+                                  (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 
@@ -1038,7 +1038,7 @@ ctree_node_set_background(self, node, color)
 {
     gtk_ctree_node_set_background(GTK_CTREE(RVAL2GOBJ(self)),
                                   RVAL2CTREENODE(node),
-                                  (GdkColor*)RVAL2BOXED(color));
+                                  (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 

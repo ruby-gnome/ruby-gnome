@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -14,7 +14,7 @@
 
 VALUE mGdkSelection;
 
-#define RVAL2GATOM(v) (((GdkAtomData*)RVAL2BOXED(v))->atom)
+#define RVAL2GATOM(v) (((GdkAtomData*)RVAL2BOXED(v, GDK_TYPE_ATOM))->atom)
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE

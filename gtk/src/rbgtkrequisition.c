@@ -4,7 +4,7 @@
   rbgtkrequisition.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002  Masao Mutoh
 
@@ -17,7 +17,7 @@
 
 #include "global.h"
 
-#define _SELF(r) ((GtkRequisition*)RVAL2BOXED(r))
+#define _SELF(r) ((GtkRequisition*)RVAL2BOXED(r, GTK_TYPE_REQUISITION))
 
 static VALUE 
 grequisition_initialize(self, w, h)

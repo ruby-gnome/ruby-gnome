@@ -4,7 +4,7 @@
   rbgdkrectangle.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -17,7 +17,7 @@
 
 #include "global.h"
 
-#define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r))
+#define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
 gdkrect_initialize(self, x, y, width, height)

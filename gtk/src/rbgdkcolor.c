@@ -4,7 +4,7 @@
   rbgdkcolor.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,7 +13,7 @@
 
 #include "global.h"
 
-#define _SELF(c) ((GdkColor*)RVAL2BOXED(c))
+#define _SELF(c) ((GdkColor*)RVAL2BOXED(c, GDK_TYPE_COLOR))
 
 static VALUE
 gdkcolor_initialize(self, red, green, blue)

@@ -4,7 +4,7 @@
   rbgdkatom.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,7 +12,7 @@
 
 #include "global.h"
 
-#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(self))->atom)
+#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(self, GDK_TYPE_ATOM))->atom)
 
 /*****************************************/
 GdkAtomData*

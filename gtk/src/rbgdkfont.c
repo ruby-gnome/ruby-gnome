@@ -4,7 +4,7 @@
   rbgdkfont.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -13,7 +13,7 @@
 
 #include "global.h"
 
-#define _SELF(f) ((GdkFont*)RVAL2BOXED(f))
+#define _SELF(f) ((GdkFont*)RVAL2BOXED(f, GDK_TYPE_FONT))
 
 static VALUE
 font_load_font(self, name)

@@ -1,3 +1,7 @@
+2002-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/*.c: Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).
+
 2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgdkpixmap.c (gdkbmap_create_from_data, 

@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:02 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -187,7 +187,7 @@ static VALUE
 style_set_font(self, f)
     VALUE self, f;
 {
-    gtk_style_set_font(_SELF(self), (GdkFont*)RVAL2BOXED(f));
+    gtk_style_set_font(_SELF(self), (GdkFont*)RVAL2BOXED(f, GDK_TYPE_FONT));
     return self;
 }
 

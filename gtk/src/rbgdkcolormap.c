@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -41,7 +41,7 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
     VALUE self, color, writeable, best_match;
 {
     gboolean result;
-    GdkColor *c = (GdkColor*)RVAL2BOXED(color);
+    GdkColor *c = (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR);
     result = gdk_colormap_alloc_color(_SELF(self), c,
                                       RTEST(writeable), RTEST(best_match));
     return result ? INT2NUM(c->pixel) : Qnil;

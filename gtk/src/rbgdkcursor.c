@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: mutoh $
-  $Date: 2002/09/16 08:44:48 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2001 MUTOH Masao
 ************************************************/
@@ -26,8 +26,8 @@ gdkcursor_initialize(argc, argv, self)
     } else {
 		cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(source_or_type)), 
 		  		   		NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
-		   		 		NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg), 
-		  	   			NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg), 
+		   		 		NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR), 
+		  	   			NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR), 
 		   				NUM2INT(x), NUM2INT(y));
     }
 
@@ -40,7 +40,8 @@ static VALUE
 gdkcursor_is_pixmap(self)
     VALUE self;
 {
-    return (((GdkCursor*)RVAL2BOXED(self))->type == GDK_CURSOR_IS_PIXMAP) ? Qtrue : Qfalse;
+    return (((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
+            GDK_CURSOR_IS_PIXMAP) ? Qtrue : Qfalse;
 }
 
 void

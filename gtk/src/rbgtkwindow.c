@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -153,7 +153,7 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 {
     gtk_window_set_geometry_hints(GTK_WINDOW(RVAL2GOBJ(self)),
 								  GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
-								  (GdkGeometry*)RVAL2BOXED(geometry),
+								  (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
 								  NUM2INT(geom_mask));
 
     return self;

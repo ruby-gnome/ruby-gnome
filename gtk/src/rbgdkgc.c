@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -54,7 +54,8 @@ static VALUE
 gdkgc_set_foreground(self, color)
 	VALUE self, color;
 {
-	gdk_gc_set_foreground(_SELF(self), (GdkColor*)RVAL2BOXED(color));
+	gdk_gc_set_foreground(_SELF(self), 
+                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
 	return self;
 }
 
@@ -62,7 +63,8 @@ static VALUE
 gdkgc_set_background(self, color)
 	VALUE self, color;
 {
-	gdk_gc_set_background(_SELF(self), (GdkColor*)RVAL2BOXED(color));
+	gdk_gc_set_background(_SELF(self), 
+                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
 	return self;
 }
 
@@ -86,7 +88,8 @@ static VALUE
 gdkgc_set_clip_rectangle(self, rectangle)
 	VALUE self, rectangle;
 {
-	gdk_gc_set_clip_rectangle(_SELF(self), (GdkRectangle*)RVAL2BOXED(rectangle));
+	gdk_gc_set_clip_rectangle(_SELF(self), 
+                              (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_COLOR));
 	return rectangle;
 }
 
@@ -94,7 +97,8 @@ static VALUE
 gdkgc_set_clip_region(self, region)
 	VALUE self, region;
 {
-	gdk_gc_set_clip_region(_SELF(self), (GdkRegion*)RVAL2BOXED(region));
+	gdk_gc_set_clip_region(_SELF(self), 
+                           (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
 	return region;
 }
 
@@ -145,7 +149,8 @@ static VALUE
 gdkgc_set_font(self, font)
 	VALUE self, font;
 {
-	gdk_gc_set_font(_SELF(self), (GdkFont*)RVAL2BOXED(font));
+	gdk_gc_set_font(_SELF(self), 
+                    (GdkFont*)RVAL2BOXED(font, GDK_TYPE_FONT));
 	return self;
 }
 #endif

@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,7 +12,7 @@
 ************************************************/
 #include "global.h"
 
-#define _SELF(r) ((GdkRegion*)RVAL2BOXED(r))
+#define _SELF(r) ((GdkRegion*)RVAL2BOXED(r, GDK_TYPE_REGION))
 
 /**********************************/
 GType
@@ -76,7 +76,8 @@ gdkregion_rect_in(self, rect)
     VALUE self, rect;
 {
     return INT2FIX(gdk_region_rect_in(_SELF(self),
-                                      (GdkRectangle*)RVAL2BOXED(rect)));
+                                      (GdkRectangle*)RVAL2BOXED(rect, 
+                                                                GDK_TYPE_RECTANGLE)));
 }
 
 static VALUE
@@ -100,7 +101,7 @@ gdkregion_union_with_rect(self, rect)
     VALUE self, rect;
 {
     gdk_region_union_with_rect(_SELF(self),
-                               (GdkRectangle*)RVAL2BOXED(rect));
+                               (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE));
     return self;
 }
 

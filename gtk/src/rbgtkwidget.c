@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -115,7 +115,7 @@ static VALUE
 widget_draw(self, rect)
     VALUE self, rect;
 {
-    gtk_widget_draw(_SELF(self), (GdkRectangle*)RVAL2BOXED(rect));
+    gtk_widget_draw(_SELF(self), (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE));
     return self;
 }
 
@@ -132,7 +132,7 @@ static VALUE
 widget_size_allocate(self, alloc)
     VALUE self, alloc;
 {
-    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc));
+    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GDK_TYPE_RECTANGLE));
     return self;
 }
 
@@ -203,8 +203,8 @@ widget_intersect(self, area, intersect)
     VALUE self, area, intersect;
 {
     return INT2NUM(gtk_widget_intersect(_SELF(self),
-                                        (GdkRectangle*)RVAL2BOXED(area),
-                                        (GdkRectangle*)RVAL2BOXED(intersect)));
+                                        (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
+                                        (GdkRectangle*)RVAL2BOXED(intersect, GDK_TYPE_RECTANGLE)));
 }
 
 static VALUE
@@ -762,7 +762,7 @@ widget_drag_get_data(self, context, target, time)
     VALUE self, context, target, time;
 {
     gtk_drag_get_data(_SELF(self), GDK_DRAG_CONTEXT(RVAL2GOBJ(self)),
-                      (((GdkAtomData*)RVAL2BOXED(target))->atom), 
+                      (((GdkAtomData*)RVAL2BOXED(target, GDK_TYPE_ATOM))->atom), 
                       NUM2INT(time));
     return self;
 }
@@ -801,7 +801,7 @@ widget_selection_owner_set(self, selection, time)
     VALUE self, selection, time;
 {
     int ret = gtk_selection_owner_set(_SELF(self), 
-                                      (((GdkAtomData*)RVAL2BOXED(selection))->atom),
+                                      (((GdkAtomData*)RVAL2BOXED(selection, GDK_TYPE_ATOM))->atom),
                                       NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
@@ -811,8 +811,8 @@ widget_selection_add_target(self, selection, target, info)
     VALUE self, selection, target, info;
 {
     gtk_selection_add_target(_SELF(self), 
-							 (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
-                             (((GdkAtomData*)RVAL2BOXED(target))->atom),
+							 (((GdkAtomData*)RVAL2BOXED(selection, GDK_TYPE_ATOM))->atom), 
+                             (((GdkAtomData*)RVAL2BOXED(target, GDK_TYPE_ATOM))->atom),
 							 NUM2INT(info));
     return self;
 }
@@ -822,7 +822,7 @@ widget_selection_add_targets(self, selection, targets)
     VALUE self, selection, targets;
 {
     gtk_selection_add_targets(_SELF(self), 
-                              (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
+                              (((GdkAtomData*)RVAL2BOXED(selection, GDK_TYPE_ATOM))->atom), 
                               get_target_entry(targets), RARRAY(targets)->len);
     return self;
 }
@@ -832,8 +832,8 @@ widget_selection_convert(self, selection, target, time)
     VALUE self, selection, target, time;
 {
     int ret = gtk_selection_convert(_SELF(self), 
-                                    (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
-                                    (((GdkAtomData*)RVAL2BOXED(target))->atom),
+                                    (((GdkAtomData*)RVAL2BOXED(selection, GDK_TYPE_ATOM))->atom), 
+                                    (((GdkAtomData*)RVAL2BOXED(target, GDK_TYPE_ATOM))->atom),
 									NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }

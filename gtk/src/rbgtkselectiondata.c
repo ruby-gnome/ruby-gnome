@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 06:50:56 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,7 +12,7 @@
 
 #include "global.h"
 
-#define _SELF(d) ((GtkSelectionData*)RVAL2BOXED(d))
+#define _SELF(d) ((GtkSelectionData*)RVAL2BOXED(d, GTK_TYPE_SELECTION_DATA))
 
 static VALUE
 gtkselectiondata_selection(self)
@@ -56,7 +56,7 @@ gtkselectiondata_set(self, type, format, data)
     VALUE self, type, format, data;
 {
     gtk_selection_data_set(_SELF(self), 
-                           (((GdkAtomData*)RVAL2BOXED(type))->atom),
+                           (((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom),
 						   NUM2INT(format), RSTRING(data)->ptr, 
 						   RSTRING(data)->len);
     return self;

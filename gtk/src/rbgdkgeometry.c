@@ -4,7 +4,7 @@
   rbgdkgeometry.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -39,7 +39,7 @@ gdk_geometry_get_type(void)
 }
 /*****************************************/
 
-#define _SELF(g) ((GdkGeometry*)RVAL2BOXED(g))
+#define _SELF(g) ((GdkGeometry*)RVAL2BOXED(g, GDK_TYPE_GEOMETRY))
 
 static VALUE
 geo_initialize(self)

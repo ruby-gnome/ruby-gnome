@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Date: 2002/09/29 12:50:20 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,7 +43,7 @@ gdkwin_pointer_grab(self, owner_events, event_mask, confine_to, cursor, time)
 					 RTEST(owner_events),
 					 NUM2INT(event_mask),
 					 _SELF(confine_to),
-					 (GdkCursor*)RVAL2BOXED(cursor),
+					 (GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
 					 NUM2INT(time));
     return self;
 }
@@ -144,7 +144,7 @@ gdkwin_set_background(self, color)
     VALUE self, color;
 {
     gdk_window_set_background(_SELF(self), 
-							  (GdkColor*)RVAL2BOXED(color));
+							  (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
     return self;
 }
 
@@ -283,7 +283,7 @@ static VALUE
 gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
 {
-    gdk_window_set_cursor(_SELF(self), (GdkCursor*)RVAL2BOXED(cursor));
+    gdk_window_set_cursor(_SELF(self), (GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
     return self;
 }
 
@@ -503,7 +503,7 @@ gdkwin_prop_change(self, property, type, mode, src)
 	GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 	GdkAtom    otype, ntype;
 
-	otype = ntype = ((GdkAtomData*)RVAL2BOXED(type))->atom;
+	otype = ntype = ((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom;
 
 /* They are not available in Ruby/GTK 2
    if(ntype == GDK_SELECTION_TYPE_ATOM){
@@ -512,7 +512,7 @@ gdkwin_prop_change(self, property, type, mode, src)
    dat = (Atom*)ALLOC_N(Atom, len);
 
    for(i = 0; i < len; i++){
-   ((Atom*)dat)[i] = ((GdkAtomData*)RVAL2BOXED(rb_ary_entry(src, i))->atom);
+   ((Atom*)dat)[i] = ((GdkAtomData*)RVAL2BOXED(rb_ary_entry(src, i), GDK_TYPE_ATOM)->atom);
    }
    fmt = 32;
 
@@ -557,7 +557,7 @@ gdkwin_prop_change(self, property, type, mode, src)
 	}
 
 	gdk_property_change(_SELF(self),
-						(((GdkAtomData*)RVAL2BOXED(property))->atom), 
+						(((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom), 
                         ntype, fmt, NUM2INT(mode), dat, len);
 
 	if(otype == GDK_SELECTION_TYPE_ATOM) {
@@ -583,8 +583,8 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
 	VALUE		ret = 0;
 
 	if(gdk_property_get(_SELF(self), 
-                        (((GdkAtomData*)RVAL2BOXED(property))->atom),
-						(((GdkAtomData*)RVAL2BOXED(type))->atom),
+                        (((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom),
+						(((GdkAtomData*)RVAL2BOXED(type, GDK_TYPE_ATOM))->atom),
                         NUM2INT(offset), NUM2INT(length),
 						RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
 		return Qnil;
@@ -614,7 +614,7 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
   }
   } else {
   for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, RVAL2BOXED((GdkAtom)(unsigned long *)rdat[i]));
+  rb_ary_push(ret, RVAL2BOXED((GdkAtom)(unsigned long *)rdat[i], GDK_TYPE_ATOM));
   }
   }
 */
@@ -631,7 +631,7 @@ gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
 	gdk_property_delete(_SELF(self), 
-                        (((GdkAtomData*)RVAL2BOXED(property))->atom));
+                        (((GdkAtomData*)RVAL2BOXED(property, GDK_TYPE_ATOM))->atom));
 	return self;
 }
 
