@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************************
 
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/08/10 16:07:09 $
+  $Date: 2002/09/01 13:19:21 $
 
   Copyright (C) 2002  Masahiro Sakai
 

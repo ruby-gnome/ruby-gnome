@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************************
 
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/08/13 17:56:41 $
+  $Date: 2002/09/01 13:19:21 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -65,9 +65,9 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
         return UINT2NUM(g_value_get_ulong(value));
 #endif
       case G_TYPE_INT64:
-        return rbgobj_int64_to_num(g_value_get_int64(value));
+        return rbglib_int64_to_num(g_value_get_int64(value));
       case G_TYPE_UINT64:
-        return rbgobj_uint64_to_num(g_value_get_uint64(value));
+        return rbglib_uint64_to_num(g_value_get_uint64(value));
       case G_TYPE_FLOAT:
         return rb_float_new(g_value_get_float(value));
       case G_TYPE_DOUBLE:
@@ -115,9 +115,8 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
 
       case G_TYPE_INTERFACE:
       default:
-        /* XXX */
-        printf("rbgobj_gvalue_to_rvalue: unsupported gobject type: %s\n",
-               g_type_name(G_VALUE_TYPE(value)));
+        g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
+                  g_type_name(G_VALUE_TYPE(value)));
         return Qnil;
     }
 }
@@ -150,10 +149,10 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         g_value_set_ulong(result, NUM2ULONG(val));
         return;
       case G_TYPE_INT64:
-        g_value_set_int64(result, rbgobj_num_to_int64(val));
+        g_value_set_int64(result, rbglib_num_to_int64(val));
         return;
       case G_TYPE_UINT64:
-        g_value_set_uint64(result, rbgobj_num_to_uint64(val));
+        g_value_set_uint64(result, rbglib_num_to_uint64(val));
         return;
       case G_TYPE_ENUM:
         g_value_set_enum(result, NUM2UINT(val));
@@ -203,9 +202,8 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 
       case G_TYPE_INTERFACE:
       default:
-        /* XXX */
-        printf("rbgobj_rvalue_to_gvalue: unsupported (ruby) class: %s\n",
-               rb_class2name(CLASS_OF(val)));
+        g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
+                  g_type_name(G_VALUE_TYPE(result)));
     }
 }
 

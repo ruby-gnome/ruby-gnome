@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************************
 
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2002/08/09 12:44:01 $
+  $Date: 2002/09/01 13:19:21 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -61,8 +61,8 @@ DEF_NUMERIC_PSPEC_METHODS_FUNC(int, NUM2INT, INT2NUM, G_PARAM_SPEC_INT)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(uint, NUM2UINT, UINT2NUM, G_PARAM_SPEC_UINT)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(long, NUM2LONG, INT2NUM, G_PARAM_SPEC_LONG)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(ulong, NUM2ULONG, UINT2NUM, G_PARAM_SPEC_ULONG)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(int64, rbgobj_num_to_int64, rbgobj_int64_to_num, G_PARAM_SPEC_INT64)
-DEF_NUMERIC_PSPEC_METHODS_FUNC(uint64, rbgobj_num_to_uint64, rbgobj_uint64_to_num, G_PARAM_SPEC_UINT64)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(int64, rbglib_num_to_int64, rbglib_int64_to_num, G_PARAM_SPEC_INT64)
+DEF_NUMERIC_PSPEC_METHODS_FUNC(uint64, rbglib_num_to_uint64, rbglib_uint64_to_num, G_PARAM_SPEC_UINT64)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(float, NUM2DBL, rb_float_new, G_PARAM_SPEC_FLOAT)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(double, NUM2DBL, rb_float_new, G_PARAM_SPEC_DOUBLE)
 

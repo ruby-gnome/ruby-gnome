@@ -1,3 +1,18 @@
+2002-09-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c: fix GLib::Object#signal_emit.
+	* src/rbgobj_signal.c: implement GLib::Object.signal_lookup and 
+	GLib::Object.signal_list
+	* src/rbgobj_signal.c: implement GLib::Object.signal_new.
+	This is an experimental interface.
+	* src/rbgobj_value.c (rbgobj_gvalue_to_rvalue, rbgobj_rvalue_to_gvalue): 
+	fix error messsage and use g_warning().
+	* src/utils_int64.c: use 0xffffffffL instead of G_MAXUINT
+	* src/utils_int64.c, src/global.h, src/rbgobj_paramspecs.c,
+	src/rbgobj_value.c: change prefix of int64 functions from 'rbgobj_' to
+	'rbglib_'.
+	* src/*.[ch]: add 'indent-tabs-mode: nil' to header 
+
 2002-08-29  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgobj_boxed.c: Add GLib::Boxed.new, GLib::Boxed#allocate.

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************************
 
   utils_int64.c -
 
   $Author: sakai $
-  $Date: 2002/08/20 03:42:22 $
+  $Date: 2002/09/01 13:19:22 $
 
   Copyright (C) 2002  Masahiro Sakai
                       Kenichi Komiya
@@ -115,25 +115,25 @@ PRInt64ToRuby(PRInt64 aNative)
 /**********************************************************************/
 
 VALUE
-rbgobj_int64_to_num(guint64 val)
+rbglib_int64_to_num(guint64 val)
 {
     return PRInt64ToRuby(val);
 }
 
 VALUE
-rbgobj_uint64_to_num(guint64 val)
+rbglib_uint64_to_num(guint64 val)
 {
     return PRUint64ToRuby(val);
 }
 
 gint64
-rbgobj_num_to_int64(VALUE val)
+rbglib_num_to_int64(VALUE val)
 {
     return RubyToPRInt64(val);
 }
 
 guint64
-rbgobj_num_to_uint64(VALUE val)
+rbglib_num_to_uint64(VALUE val)
 {
     return RubyToPRUint64(val);
 }
@@ -152,5 +152,5 @@ Init_utils_int64()
     id_abs    = rb_intern("abs");
 
     rb_global_variable(&max_PRUint32);
-    max_PRUint32 = UINT2NUM(G_MAXUINT);
+    max_PRUint32 = UINT2NUM(0xffffffffL);
 }

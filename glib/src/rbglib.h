@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /**********************************************************************
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2002/08/18 06:24:51 $
+  $Author: sakai $
+  $Date: 2002/09/01 13:19:21 $
 
   Copyright (C) 2002  Masahiro Sakai
 

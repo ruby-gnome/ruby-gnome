@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbobjmanager.c -
 
-  $Author: mutoh $
-  $Date: 2002/08/18 06:24:51 $
+  $Author: sakai $
+  $Date: 2002/09/01 13:19:22 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
