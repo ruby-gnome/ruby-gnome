@@ -1,3 +1,9 @@
+2002-11-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Add Gtk::NotebookPage.
+	* src/rbgtktreeiter.c: Remove Gtk::TreeIter#get_current_item. 
+	* sample/testgtk/testgtk.rb: Add Gtk.init.
+
 2002-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmain.c, init.c: define Gtk.init. 

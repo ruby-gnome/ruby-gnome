@@ -258,5 +258,6 @@ if $DEBUG
 #  end
 end
 
+Gtk.init
 main
 puts("#{$0}: done.")

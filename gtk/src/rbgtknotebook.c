@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/11/04 16:19:18 $
+  $Date: 2002/11/06 15:21:30 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,6 +15,7 @@
 
 #define _SELF(self) GTK_NOTEBOOK(RVAL2GOBJ(self))
 #define RVAL2WIDGET(w) GTK_WIDGET(RVAL2GOBJ(w))
+#define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
 
 static VALUE
 note_initialize(self)
@@ -289,7 +290,7 @@ notepage_copy(page)
 }
 
 GType
-notebookpage_get_type(void)
+gtk_notebookpage_get_type(void)
 { 
   static GType our_type = 0;
   if (our_type == 0)
@@ -299,6 +300,19 @@ notebookpage_get_type(void)
   return our_type;
 }
 
+static void 
+notebookpage_r2g(VALUE from, GValue *to)
+{
+    GtkNotebookPage* page = (GtkNotebookPage*)RVAL2BOXED(from, GTK_TYPE_NOTEBOOK_PAGE);
+    g_value_set_boxed(to, page);
+}
+
+static VALUE 
+notebookpage_g2r(const GValue *from)
+{
+    return BOXED2RVAL(g_value_get_boxed(from), GTK_TYPE_NOTEBOOK_PAGE);
+}
+
 /*****************************************/
 
 
@@ -306,7 +320,7 @@ void
 Init_gtk_notebook()
 {
     VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
-    G_DEF_CLASS((notebookpage_get_type()), "NotebookPage", mGtk);
+    G_DEF_CLASS(GTK_TYPE_NOTEBOOK_PAGE, "NotebookPage", mGtk);
 
     rb_define_method(gNotebook, "initialize", note_initialize, 0);
     rb_define_method(gNotebook, "append_page", note_append_page, -1);
@@ -332,4 +346,8 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
     rb_define_method(gNotebook, "tab_pos", note_get_tab_pos, 0);
+
+    rbgobj_register_r2g_func(GTK_TYPE_NOTEBOOK_PAGE, notebookpage_r2g);
+    rbgobj_register_g2r_func(GTK_TYPE_NOTEBOOK_PAGE, notebookpage_g2r);
+
 }

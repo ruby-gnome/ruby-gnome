@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: igapy $
-  $Date: 2002/11/04 14:11:57 $
+  $Author: mutoh $
+  $Date: 2002/11/06 15:21:30 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -42,23 +42,6 @@ treeiter_get_value(self, model, column)
     GValue value = {0, };
     gtk_tree_model_get_value(RVAL2MODEL(model), _SELF(self), NUM2INT(column), &value);
     return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
-}
-
-static VALUE
-treeiter_get_current_item(self, model)
-    VALUE self, model;
-{
-    gint i;
-    GtkTreeIter* iter = _SELF(self);
-    GtkTreeModel* gmodel = RVAL2MODEL(model);
-    gint num = gtk_tree_model_get_n_columns(gmodel);
-    VALUE ary = rb_ary_new();
-    for (i = 0; i < num; i++){
-        GValue value = {0,};
-        gtk_tree_model_get_value(gmodel, iter, i, &value);
-        rb_ary_push(ary, (G_VALUE_TYPE(&value) != G_TYPE_INVALID) ? GVAL2RVAL(&value) : Qnil);
-    }
-    return ary;
 }
 
 static VALUE
@@ -130,7 +113,6 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "first!", treeiter_first, 1);
     rb_define_method(gTreeIter, "next!", treeiter_next, 1);
     rb_define_method(gTreeIter, "get_value", treeiter_get_value, 2);
-    rb_define_method(gTreeIter, "get_current_item", treeiter_get_current_item, 1);
     rb_define_method(gTreeIter, "first_child", treeiter_children, 1);
     rb_define_method(gTreeIter, "path", treeiter_get_path, 1);
     rb_define_method(gTreeIter, "has_child?", treeiter_has_child, 1);
