@@ -2,7 +2,11 @@
 extconf.rb for Ruby/GLib extention library
 =end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/glib/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 PACKAGE_NAME = "glib2"
 
@@ -14,16 +18,7 @@ setup_win32(PACKAGE_NAME)
 
 have_func("g_spawn_close_id")
 
-srcdir =  File.expand_path(File.dirname($0) + "/src")
-
-Dir.mkdir('src') unless File.exist? 'src'
-Dir.chdir "src"
-begin
-  $defs << "-DRUBY_GLIB2_COMPILATION"
-  create_makefile(PACKAGE_NAME, srcdir)
-ensure
-  Dir.chdir('..')
-end
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION")
 
 create_top_makefile
 

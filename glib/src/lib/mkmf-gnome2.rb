@@ -1,74 +1,16 @@
+#
+# mkmf-gnome2.rb
+#
+# Extended mkmf for Ruby-GNOME2 and Ruby/GLib based libraries.
+#
+# Copyright(C) 2003-2005 Ruby-GNOME2 Project.
+#
+# This program is licenced under the same
+# license of Ruby-GNOME2.
+#
+
 require 'mkmf'
-require 'shellwords'
-
-module PKGConfig
-  @@cmd = with_config('pkg-config', ENV["PKG_CONFIG"] ||  'pkg-config')
-  if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
-    @@cmd += ' --msvc-syntax'
-  end
-
-  module_function
-  def exist?(pkg)
-    system("#{@@cmd} --exists #{pkg}")
-  end
-
-  def libs(pkg)
-    `#{@@cmd} --libs #{pkg}`.chomp
-  end
-
-  def libs_only_L(pkg)
-    `#{@@cmd} --libs-only-L #{pkg}`.chomp
-  end
-
-  def libs_only_l(pkg)
-    `#{@@cmd} --libs-only-l #{pkg}`.chomp
-  end
-
-  def cflags(pkg)
-    `#{@@cmd} --cflags #{pkg}`.chomp
-  end
-
-  def variable(pkg, var)
-    `#{@@cmd} --variable=#{var} #{pkg}`.chomp
-  end
-
-  def modversion(pkg)
-    `#{@@cmd} --modversion #{pkg}`.chomp
-  end
-
-  def check_version?(pkg, major = 0, minor = 0, micro = 0)
-    return false unless exist?(pkg)
-    ver = modversion(pkg).split(".").collect{|item| item.to_i}
-    (0..2).each {|i| ver[i] = 0 unless ver[i]}
-
-    (ver[0] > major ||
-     (ver[0] == major && ver[1] > minor) ||
-     (ver[0] == major && ver[1] == minor &&
-      ver[2] >= micro))
-  end
-
-  def have_package(pkg, major = 0, minor = 0, micro = 0)
-    if major > 0
-      STDOUT.print("checking for #{pkg} version (>= #{major}.#{minor}.#{micro})... ")
-    else
-      STDOUT.print("checking for #{pkg}... ")
-    end
-    STDOUT.flush
-    if check_version?(pkg, major, minor, micro)
-      STDOUT.print "yes\n"
-      libs = libs_only_l(pkg)
-      dldflags = libs(pkg)
-      dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
-      $libs   += ' ' + libs
-      $DLDFLAGS += ' ' + dldflags
-      $CFLAGS += ' ' + cflags(pkg)
-      true
-    else
-      STDOUT.print "no\n"
-      false
-    end
-  end
-end
+require 'pkg-config'
 
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
@@ -170,7 +112,24 @@ def add_depend_package(target_name, target_srcdir, topdir)
   end
 end
 
-$CPPFLAGS << " -I$(sitearchdir) "
+def add_distcleanfile(file)
+  $distcleanfiles = [] unless $distcleanfiles 
+  $distcleanfiles << file
+end
+
+def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
+  begin
+    Dir.mkdir(srcdir) unless File.exist? srcdir
+    Dir.chdir srcdir
+
+    yield if block_given?
+
+    $defs << defs if defs
+    create_makefile(pkg_name, srcdir)
+  ensure
+    Dir.chdir('..')
+  end
+end
 
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
@@ -210,6 +169,9 @@ END
   end
   mfile.close
 end
+
+
+$CPPFLAGS << " -I$(sitearchdir) "
 
 #Other options
 have_func("rb_define_alloc_func") # for ruby-1.8

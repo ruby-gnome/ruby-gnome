@@ -1,3 +1,8 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes.
+	* src/lib/pkgconfig.rb: Separated from mkmf-gnome2.rb.
+
 2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_message.c, rbglib_spawn.c, rbgobject.c, rbgobj_boxed.c, 
