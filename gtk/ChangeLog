@@ -1,3 +1,11 @@
+2002-12-28  Kazuo Saito <ksaito@uranus.dti.ne.jp>
+
+	* src/rbgtk.h: Fix a bad definition of treeiter_set_value_table.
+
+2002-12-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkaccelerator.c: Fix typo. 
+
 2002-12-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkconst.c: Increment the version information.

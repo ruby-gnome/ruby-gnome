@@ -4,7 +4,7 @@
   rbgtkaccelerator.c -
 
   $Author: mutoh $
-  $Date: 2002/12/05 17:27:40 $
+  $Date: 2002/12/28 04:48:57 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -56,7 +56,7 @@ Init_gtk_accelerator()
 
     rb_define_singleton_method(mGtkAccel, "valid", accel_valid, 2);
     rb_define_singleton_method(mGtkAccel, "parse", accel_parse, 1);
-    /* name is prereserved by Ruby */
+    /* name is reserved by Ruby */
     rb_define_singleton_method(mGtkAccel, "to_name", accel_name, 2);
     rb_define_singleton_method(mGtkAccel, "set_default_mod_mask", accel_set_default_mod_mask, 1);
     rb_define_singleton_method(mGtkAccel, "default_mod_mask", accel_get_default_mod_mask, 0);

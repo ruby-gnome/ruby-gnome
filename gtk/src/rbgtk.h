@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: ogs $
-  $Date: 2002/12/09 16:33:10 $
+  $Author: mutoh $
+  $Date: 2002/12/28 04:48:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -80,7 +80,7 @@ extern GType gtk_accel_group_entry_get_type();
 typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
                                          gint column, GValue *value);
 void rbgtk_register_treeiter_set_value_func(VALUE klass, rbgtkiter_set_value_func);
-VALUE treeiter_set_value_table;
+extern VALUE treeiter_set_value_table;
 
 
 /*
