@@ -1,3 +1,8 @@
+2002-10-14  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-path-def.c: use rbgobj_register_property_getter()
+	and rbgobj_register_property_setter().
+
 2002-10-06  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-canvas-item.c: Delete citem_do_set() and use
