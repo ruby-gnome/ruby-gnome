@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/11/30 16:23:13 $
+  $Date: 2005/03/05 06:50:42 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -150,6 +150,27 @@ initialize(argc, argv, self)
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
+    } else if (argc == 4) {
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+        buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
+                                                NUM2INT(arg2), NUM2INT(arg3), 
+                                                RTEST(arg4), &error);
+        if (buf == NULL){
+            rb_gc();
+            error = NULL;
+            buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
+                                                    NUM2INT(arg2), NUM2INT(arg3), 
+                                                    RTEST(arg4), &error);
+        }
+#else
+        rb_warning("Not supported in GTK+-2.4.x.");
+        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+        if (buf == NULL){
+            error = NULL;
+            rb_gc();
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
+        }
+#endif
     } else if (argc == 3) {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
         buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(arg1),
@@ -468,6 +489,22 @@ composite(argc, argv, self)
     return ret;
 }
 
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+static VALUE
+rotate_simple(self, angle)
+    VALUE self, angle;
+{
+    return GOBJ2RVAL(gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION)));
+}
+
+static VALUE
+flip(self, horizontal)
+    VALUE self, horizontal;
+{
+    return GOBJ2RVAL(gdk_pixbuf_flip(_SELF(self), RTEST(horizontal)));
+}
+#endif
+
 static VALUE
 add_alpha(self, substitute_color, r, g, b)
     VALUE self, substitute_color, r, g, b;
@@ -607,11 +644,20 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "scale!", scale, -1);
     rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
     rb_define_method(gdkPixbuf, "composite!", composite, -1);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkPixbuf, "rotate", rotate_simple, 1);
+    rb_define_method(gdkPixbuf, "flip", flip, 1);
+#endif
 
     /* GdkInterpType */
     G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", gdkPixbuf);
     G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_INTERP_TYPE, "GDK_");
 
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+    /* GdkPixbufRotation */
+    G_DEF_CLASS(GDK_TYPE_PIXBUF_ROTATION, "GdkPixbufRotation", gdkPixbuf);
+    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ROTATION, "GDK_PIXBUF_");
+#endif
     /*
      * Utilities
      */

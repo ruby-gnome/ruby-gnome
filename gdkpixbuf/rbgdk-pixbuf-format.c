@@ -4,7 +4,7 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2004/12/16 14:36:05 $
+  $Date: 2005/03/05 06:50:42 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -126,7 +126,34 @@ get_signature(self)
     }
     return array;
 }
+#endif
 
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+static VALUE
+is_scalable(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_pixbuf_format_is_scalable(_SELF(self)));
+}
+static VALUE
+is_disabled(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_pixbuf_format_is_disabled(_SELF(self)));
+}
+static VALUE
+set_disabled(self, disabled)
+    VALUE self, disabled;
+{
+    gdk_pixbuf_format_set_disabled(_SELF(self), RTEST(disabled));
+    return self;
+}
+static VALUE
+get_license(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gdk_pixbuf_format_get_license(_SELF(self)));
+}
 #endif
 
 void
@@ -143,6 +170,13 @@ Init_gdk_pixbuf_format(VALUE mGdk)
     rb_define_method(format, "domain", get_domain, 0);
     rb_define_method(format, "signature", get_signature, 0);
 #endif
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+    rb_define_method(format, "scalable?", is_scalable, 0);
+    rb_define_method(format, "disabled?", is_disabled, 0);
+    rb_define_method(format, "set_disabled", set_disabled, 1);
+    rb_define_method(format, "license", get_license, 0);
 
+#endif
+    G_DEF_SETTERS(format);
 }
 

@@ -1,3 +1,12 @@
+2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Implement gdk_pixbuf_new_from_file_at_scale 
+	as Gdk::Pixbuf.new. 
+	* rbgdk-pixbuf-format.c: Added Gdk::PixbufFormat#scalable?,
+	#disable?, #set_disabled, #license.
+	* rbgdk-pixbuf.c: Added Gdk::Pixbuf#rotate, #flip for GTK+-2.6. 
+	* sample/flip.rb, rotate.rb: Added.
+
 2005-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Use create_makefile_at_srcdir.
