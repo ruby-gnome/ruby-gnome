@@ -1,6 +1,6 @@
 Ruby/PanelApplet
 ================
-Ruby/PanelApplet2 is a Ruby binding of libpanel-applet-2.x.
+Ruby/PanelApplet2 is a Ruby binding of libpanel-applet-2.4.x.
 
 Requirements
 ------------

@@ -1,3 +1,101 @@
+Ruby-GNOME2-0.10.0 (2004-08-07)
+
+  * Ruby/GLib [Masao Mutoh]
+      - Added: [Kazuhiro NISHIYAMA, Masao, Mutoh]
+         GLib::Spawn, sample/utils.rb, sample/type-register2.rb
+      - Added some methods, improved, fixed bugs: [Laurent Sansonetti, 
+        Pascal Terjan, Masao Mutoh]
+         GLib, GLib::Object, GLib::Log, glib2.rb, 
+
+  * Ruby/ATK [Masao Mutoh]
+      - None.
+
+  * Ruby/Pango [Masao Mutoh]
+      - Fix bugs.
+
+  * Ruby/GdkPixbuf [Masao Mutoh]
+      - Removed version information.
+
+  * Ruby/GTK 
+      - Support GTK+-2.4.x.
+      - Added: [Seiya Nishizawa, Masao, Mutoh]
+         Gtk::ToolButton, Gtk::ToolItem, Gtk::ToggleToolButton, 
+         Gtk::SeperatorToolItem, Gtk::ComboBox, Gtk::ComboBoxEntry, 
+         Gtk::Expander, Gtk::ColorButton, Gtk::FontButton, Gtk::FileChooserWidget, 
+         Gtk::FileChooser, Gtk::FileFilter, Gtk::FileChooserDialog, Gtk::Action, 
+         Gtk::ToggleAction, Gtk::IconInfo, Gtk::IconTheme, Gtk::UIManager, 
+         Gtk::RadioAction, Gtk::CellLayout, Gtk::ActionGroup, 
+         sample/misc/entrycompletion.c, filechooser.rb, combobox.rb, expander.rb, 
+         color_font_button.rb, uimanager.rb, uimanager2.rb, uimanager2.xml
+      - Improved, fixed bugs: [Geoff Youngs, Vincent Isambart, 
+        Kazuhiro NISHIYAMA, Masao Mutoh]
+         Gtk::Style, Gtk::Widget, Gtk::TextView, Gtk::Container, Gdk::EventClient, 
+         Gtk::Dialog, Gtk::Entry, Gdk::Selection, Gtk::Drag, Gdk, Gdk::Atom, 
+         Gtk::Editable, Gtk::Stock, Gtk::TextIter, Gtk::TextMark, Gtk::Style,
+         sample/misc/dialog2.rb, entry.rb, settings.rb, 
+      - Renamed, Moved: [Masao Mutoh]
+         Gtk::EventCrossing::CrossingMode to Gtk::EventCrossing::Mode,
+         Gdk::SettingAction to Gdk::EventSetting::Action
+         Gdk::Input.set_extension_events to Gdk::Device. 
+      - Deperecated: [Masao Mutoh]
+         Gtk::Combo, Gtk::OptionMenu since GTK+-2.4.
+
+  * Ruby/GNOME
+      - None.
+
+  * Ruby/GnomeCanvas
+      - None.
+
+  * Ruby/Libglade
+      - Added: [Masao Mutoh]
+         sample/l10n*, makemo.rb, sample/po/*.
+      - Added methods: [Masao Mutoh]
+         GladeXML#get_tooltips.
+      - Improved, fixed bugs: [Masao Mutoh]
+         GladeXML, bin/ruby-glade-create-template
+
+  * Ruby/Libart
+      - None.
+
+  * Ruby/GConf
+      - Added some methods, Improved, fixed bugs: [Giovanni Corriga, Pascal Terjan, 
+        Kazuhiro NISHIYAMA, Masao Mutoh]
+         GConf::Client
+      - Deprecated: [Masao Mutoh]
+         GConf::Client.new. Use GConf::Client.default instead.
+
+  * Ruby/GStreamer
+      - Requires GStreamer-0.8.x or later. 
+      - Added: [Laurent Sansonetti]
+         Gst::Clock, Gst::Scheduler
+      - Added methods, improved, Fixed bugs: [Laurent Sansonetti]
+         Gst::Element, Gst::Bin, Gst::Caps, Gst::Structure, 
+      - Removed: [Laurent Sansonetti]
+         Gst::Autoplug, Gst::AutoplugFactory, Gst::Type,
+         Gst::TypeFactory, Gst::TypeFind
+         Gst.set_debug, 
+
+  * Ruby/GnomeVFS
+      - Fixed bugs: [Pascal Terjan, Giovanni Corriga, Masao Mutoh]
+
+  * Ruby/GtkHtml2
+      - None.
+
+  * Ruby/GtkGLExt
+      - Fixed bugs: [Vincent Isambart]
+
+  * Ruby/Libgda 
+      - Added methods, fixed bugs: [Laurent Sansonetti]
+        Gda::Command, Gda::Connection
+      - Removed: [Laurent Sansonetti]
+        Gda::Export
+
+  * Ruby/PanelApplet [NEW]
+      - Added. [Masao Mutoh]
+
+  * Ruby/GtkSourceView [NEW]
+     - Added. [Laurent Sansonetti]
+
 Ruby-GNOME2-0.9.1 (2004-03-14)
 
   * Ruby/GLib [Masao Mutoh]

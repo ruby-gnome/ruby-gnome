@@ -1,11 +1,17 @@
 The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 ------------------------------------------------------------------------
+Dario Linsky <dlinsky@web.de>
+     German Website(M).
+
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
 
 Geoff Youngs <g@intersect-uk.co.uk>
-     Ruby/GtkSourceView(M), Ruby/GTK, Ruby/GdkPixbuf, 
-     Ruby/Pango, Ruby/GLib. Ruby-GNOME2 Icon.
+     Ruby/GTK, Ruby/GdkPixbuf, Ruby/GtkSourceView,
+     Ruby/Pango, Ruby/GLib. Ruby-GNOME2 Icon, Website.
+
+Joao Pedrosa <joaopedrosa@yahoo.com>
+     Portuguese-BR Website(M), Website.
 
 Joshua Keith <joshuakeith@linuxmail.org>
      Tutorial(M), Website, Ruby-GNOME2 Icon.
@@ -20,7 +26,11 @@ KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <lrz@gnome.org>
-     Ruby/GStreamer(M), Ruby/Libgda(M), French Website(M), Website, Tutorials.
+     Ruby/GStreamer(M), Ruby/Libgda(M), Ruby/GtkSourceView(M), 
+     Ruby/GLib, Ruby/GTK, French Website(M), Website, Tutorials.
+
+Malte Milatz <malte@gmx-topmail.de>
+     German Website.
 
 Martin Povolný <xpovolny@fi.muni.cz>
      Ruby/GtkHtml2(M). Ruby/GTK, 
@@ -31,11 +41,11 @@ Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 Masao Mutoh <mutoh@highway.ne.jp>
      Chief maintainer. Ruby/ATK(M), Ruby/GTK(M), Ruby/GdkPixbuf(M), 
-     Ruby/Libglade(M), Ruby/Pango(M), rbbr(M), Website(M), Others. 
-     Project management.
+     Ruby/Libglade(M), Ruby/Pango(M), Ruby/PanelApplet(M), Ruby/rbbr(M), 
+     Website(M), Others.  Project management.
 
 Matthew Berg <galt@gothpoodle.com>
-   Ruby/GTK TreeView Tutorial(M), Website, Ruby/GTK.
+     Ruby/GTK TreeView Tutorial(M), Website, Ruby/GTK.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
@@ -45,6 +55,9 @@ Nobuyoshi Nakada <nobu.nokada@softhome.net>
 
 OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
      Ruby/GTK.
+
+Sam Stephenson <sstephenson@gmail.com>
+     Website.
 
 TAMURA.Kenichi <sgs02516@nifty.com>
      Japanese ML archives by w3ml on SF.jp(M), Ruby/GLib.

@@ -1,3 +1,7 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README, src/rbgnome-canvas-item.c, src/rbgnomecanvas.h: Update Copyright.
+
 2004-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/canvas-curve.rb: Replace Gdk::RGB.cmap to Gdk::RGB.colormap.

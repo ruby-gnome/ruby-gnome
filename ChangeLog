@@ -1,3 +1,12 @@
+2004-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+	* NEWS: Updated.
+
+2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+
 2004-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Updated dependencies for Ruby/Libgda.
