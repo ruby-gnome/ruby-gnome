@@ -21,67 +21,72 @@ else
   STDOUT.print "no\n"
 end
 
+top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
+$CFLAGS += " " + ['glib/src'].map{|d|
+  "-I" + File.join(top, d)
+}.join(" ")
+
 have_func("rb_define_alloc_func") # for ruby-1.8
 
-$CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
 
-mdir = $mdir
+set_output_lib('libruby-pango.a')
+if /cygwin|mingw/ =~ RUBY_PLATFORM
+  top = "../.."
+  [
+    ["glib/src", "ruby-glib2"],
+  ].each{|d,l|
+    $LDFLAGS << " -L#{top}/#{d}"
+    $libs << " -l#{l}"
+  }
+end
+
+
 begin
-  $mdir = "pango/src"
+  srcdir = File.dirname($0) == "." ? "." :
+    File.expand_path(File.dirname($0) + "/src")
+
+  Dir.mkdir "src" unless File.exist? "src"
   Dir.chdir "src"
-  File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
 
-  obj_ext = ".#{$OBJEXT}"
+  begin
+    File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
 
-  $libs = $libs.split(/\s/).uniq.join(' ')
-  $source_files = Dir.glob('*.c')
-  $objs = $source_files.collect do |item|
-	item.gsub(/\.c$/, obj_ext)
-  end
-  $objs << "rbpangoinits.o"
+    obj_ext = ".#{$OBJEXT}"
 
-  $defs << "-DRUBY_PANGO_COMPILATION"
+    $libs = $libs.split(/\s/).uniq.join(' ')
+    $source_files = Dir.glob("#{srcdir}/*.c").map{|fname|
+      fname[0, srcdir.length+1] = ''
+      fname
+    }
+    $objs = $source_files.collect do |item|
+      item.gsub(/\.c$/, obj_ext)
+    end
+    $objs << "rbpangoinits.o"
 
-  #
-  # create Makefiles
-  #
-  srcdir = File.dirname($0) == "." ? "." : "../src"
-  create_makefile("pango", srcdir)
-  raise Interrupt if not FileTest.exist? "Makefile"
+    #
+    # create Makefiles
+    #
+    $defs << "-DRUBY_PANGO_COMPILATION"
+    create_makefile("pango", srcdir)
+    raise Interrupt if not FileTest.exist? "Makefile"
 
-  mfile = File.open("Makefile", "a")
-  $source_files.each do |e|
-	mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbpango.h \n"
-  end
-  mfile.print "\
+    mfile = File.open("Makefile", "a")
+    $source_files.each do |e|
+      mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbpango.h \n"
+    end
+    mfile.print "\
 rbpangoinits.c:;    $(RUBY) $(srcdir)/makeinits.rb $(srcdir)/*.c > $@
 allclean: clean
 	rm -rf *.a
 "
-  mfile.close
-  Dir.chdir ".."
+    mfile.close
+  ensure
+    Dir.chdir ".."
+  end
 
-  mfile = File.open("Makefile", "w")
-  mfile.print "\
-all:
-		@cd src; make all
-
-install:;	@cd src; make install
-site-install:;	@cd src; make site-install
-clean:
-		@cd src; make allclean
-distclean:	clean
-		@cd src; make distclean
-		@rm -f Makefile extconf.h conftest.*
-		@rm -f core *~ mkmf.log
-"
-  mfile.close
-
+  create_top_makefile()
 rescue Interrupt
-#  if $DEBUG
-    print "  [error] " + $!.to_s + "\n"
-#  end
-  Dir.chdir ".."
-ensure
-  $mdir = mdir
+  print "  [error] " + $!.to_s + "\n"
 end
+
+

@@ -14,10 +14,10 @@ unless FileTest.exist?(rbgnome_dir)
   raise "directry #{rbgnome_dir} not found.  Please specify Ruby-GNOME source dir."
 end
 
-$CFLAGS += "-I#{rbgtk_dir}/src -I#{rbgnome_dir}/src " + `gnome-config --cflags applets`.chomp
-$LDFLAGS += `gnome-config --libs applets`.chomp
-
+PKGConfig.have_package("libpanelapplet-2.0") or exit
 check_win32
+
+$CFLAGS += " -I#{rbgtk_dir}/src -I#{rbgnome_dir}/src "
 
 have_library("X11", "XOpenDisplay") &&
 have_library("Xi", "XOpenDevice") &&

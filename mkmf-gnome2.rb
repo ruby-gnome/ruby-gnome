@@ -110,3 +110,65 @@ def check_win32()
 
   nil
 end
+
+
+def set_output_lib(filename)
+  if /cygwin|mingw/ =~ RUBY_PLATFORM
+    if RUBY_VERSION > "1.8"
+      CONFIG["DLDFLAGS"].gsub!(/ -Wl,--out-implib=[^ ]+/, '')
+      CONFIG["DLDFLAGS"] << " -Wl,--out-implib=#{filename}" if filename
+    else
+      CONFIG["DLDFLAGS"].gsub!(/ --output-lib\s+[^ ]+/, '')
+      CONFIG["DLDFLAGS"] << " --output-lib #{filename}" if filename
+    end
+  end
+end
+
+
+def create_top_makefile(sub_dirs = ["src"])
+  mfile = File.open("Makefile", "w")
+=begin
+  if /mswin32/ =~ PLATFORM
+    mfile.print <<END
+
+all:
+		@cd src
+		@nmake -nologo
+
+install:
+		@cd src
+		@nmake -nologo install DESTDIR=$(DESTDIR)
+
+site-install:
+		@cd src
+		@nmake -nologo site-install DESTDIR=$(DESTDIR)
+
+clean:
+		@cd src
+		@nmake -nologo clean
+		@cd ..
+		@-rm -f Makefile extconf.h conftest.*
+		@-rm -f *.lib *~
+END
+  else
+=end
+    mfile.print <<END
+all:
+#{sub_dirs.map{|d| "	@cd #{d}; make all\n"}.join('')}
+
+install:
+#{sub_dirs.map{|d| "	@cd #{d}; make install\n"}.join('')}
+site-install:
+#{sub_dirs.map{|d| "	@cd #{d}; make site-install\n"}.join('')}
+clean:
+#{sub_dirs.map{|d| "	@cd #{d}; make clean\n"}.join('')}
+distclean:	clean
+#{sub_dirs.map{|d| "	@cd #{d}; make distclean\n"}.join('')}
+	@rm -f Makefile extconf.h conftest.*
+	@rm -f core *~ mkmf.log
+END
+#  end
+  mfile.close
+end
+
+

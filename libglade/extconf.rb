@@ -6,21 +6,23 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
 require "mkmf"
 require 'mkmf-gnome2'
 
-rubyglib_dir = File.expand_path(File.dirname(__FILE__))+"/../glib"
-unless FileTest.exist?(rubyglib_dir)
-  raise "Directory #{rubyglib_dir} not found.  Please specify Ruby/GLib2 source dir."
-end
-$CFLAGS += " -I#{rubyglib_dir}/src "
-
-rubygtk_dir = File.expand_path(File.dirname(__FILE__))+"/../gtk"
-unless FileTest.exist?(rubygtk_dir)
-  raise "Directory #{rubygtk_dir} not found.  Please specify Ruby/GTK2 source dir."
-end
-$CFLAGS += " -I#{rubygtk_dir}/src "
-
 PKGConfig.have_package('libglade-2.0') or exit
 check_win32
 
-$CFLAGS += " -I#{rubyglib_dir}/src -II#{rubygtk_dir}/src  "
+top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
+$CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|
+  "-I" + File.join(top, d)
+}.join(" ")
+
+if /cygwin|mingw/ =~ RUBY_PLATFORM
+  top = ".."
+  [
+    ["glib/src", "ruby-glib2"],
+    ["gtk/src", "ruby-gtk2"],
+  ].each{|d,l|
+    $LDFLAGS << " -L#{top}/#{d}"
+    $libs << " -l#{l}"
+  }
+end
 
 create_makefile("libglade2")  

@@ -5,12 +5,24 @@ require 'mkmf-gnome2'
 PKGConfig.have_package('gdk-pixbuf-2.0') or exit
 check_win32
 
-rubyglib_dir = File.dirname(__FILE__)+"/../glib"
-$CFLAGS += " -I#{rubyglib_dir}/src "
+top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
+$CFLAGS += " " + ['glib/src'].map{|d|
+  "-I" + File.join(top, d)
+}.join(" ")
 
-# tml's libgdk_pixbuf-2.0-0.dll doesn't export gdk_pixbuf_version.
-have_func('gdk_pixbuf_version') # XXX
+if have_func("g_print") && have_func("gdk_pixbuf_new")
+  # tml's libgdk_pixbuf-2.0-0.dll doesn't export gdk_pixbuf_version.
+  have_func('gdk_pixbuf_version') # XXX
 
-have_func("g_print") &&
-have_func("gdk_pixbuf_new") &&
-create_makefile('gdk_pixbuf2')
+  if /cygwin|mingw/ =~ RUBY_PLATFORM
+    top = '..'
+    [
+      ["glib/src", "ruby-glib2"],
+    ].each{|d,l|
+      $LDFLAGS << " -L#{top}/#{d}"
+      $libs << " -l#{l}"
+    }
+  end
+
+  create_makefile('gdk_pixbuf2')
+end

@@ -29,56 +29,19 @@ else
   STDOUT.print "no\n"
 end
 
+set_output_lib('libruby-glib2.a')
 
-src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
+srcdir = File.dirname($0) == "." ? "." :
+  File.expand_path(File.dirname($0) + "/src")
 
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
   $defs << "-DRUBY_GLIB2_COMPILATION"
-  create_makefile("glib2", src_dir)
+  create_makefile("glib2", srcdir)
 ensure
   Dir.chdir('..')
 end
 
-File.open("Makefile", "w"){|mfile|
-  if /mswin32/ =~ PLATFORM
-    mfile.print "\
+create_top_makefile
 
-all:
-		@cd src
-		@nmake -nologo
-
-install:
-		@cd src
-		@nmake -nologo install DESTDIR=$(DESTDIR)
-
-site-install:
-		@cd src
-		@nmake -nologo site-install DESTDIR=$(DESTDIR)
-
-clean:
-		@cd src
-		@nmake -nologo clean
-		@cd ..
-		@-rm -f Makefile extconf.h conftest.*
-		@-rm -f glib2.lib *~
-"
-  else
-    mfile.print "\
-
-all:
-		@cd src; make all
-
-install:;	@cd src; make install
-site-install:;	@cd src; make site-install
-clean:
-		@cd src; make clean
-		@rm -f core glib2.a *~
-distclean:	clean
-		@cd src; make distclean
-		@rm -f Makefile extconf.h conftest.*
-		@rm -f core *~ mkmf.log
-"
-  end
-}
