@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2002/10/08 18:53:21 $
+  $Date: 2002/10/13 17:32:38 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -21,27 +21,32 @@ tvc_initialize(argc, argv, self)
     VALUE self;
 {
     int i;
+    int col;
     GtkTreeViewColumn* tvc;
+    GtkCellRenderer* renderer;
     gchar* name;
-
+    VALUE ary, val;
+ 
+    tvc = gtk_tree_view_column_new();
     if (argc > 1){
-        tvc = gtk_tree_view_column_new_with_attributes(RVAL2CSTR(argv[0]), 
-                                                       RVAL2CELLRENDERER(argv[1]), NULL);
-    } else {
-        tvc = gtk_tree_view_column_new();
+        gtk_tree_view_column_set_title(tvc, RVAL2CSTR(argv[0]));
+        gtk_tree_view_column_pack_start(tvc, RVAL2CELLRENDERER(argv[1]), TRUE);
     }
 
     RBGTK_INITIALIZE(self, tvc);
 
-    if (argc > 2){
-        for (i = 2; i < argc; i++) {
-            if (SYMBOL_P(argv[i])) {
-                name = rb_id2name(SYM2ID(argv[i]));
+    if (argc == 3){
+        ary = rb_funcall(argv[2], rb_intern("to_a"), 0);
+        renderer = RVAL2CELLRENDERER(argv[1]);
+        for (i = 0; i < RARRAY(ary)->len; i++) {
+            val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            if (SYMBOL_P(val)) {
+                name = rb_id2name(SYM2ID(val));
             } else {
-                name = RVAL2CSTR(argv[i]);
+                name = RVAL2CSTR(val);
             }
-            gtk_tree_view_column_add_attribute(_SELF(self), RVAL2CELLRENDERER(argv[1]), 
-                                               name, i - 2);
+            col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+            gtk_tree_view_column_add_attribute(_SELF(self), renderer, name, col);
         }       
     }
 
@@ -118,14 +123,6 @@ tvc_set_spacing(self, spacing)
 }
 
 static VALUE
-tvc_spacing_equal(self, spacing)
-    VALUE self, spacing;
-{
-    gtk_tree_view_column_set_spacing(_SELF(self), NUM2INT(spacing));
-    return spacing;
-}
-
-static VALUE
 tvc_get_spacing(self)
     VALUE self;
 {
@@ -147,15 +144,6 @@ tvc_set_sort_column_id(self, sort_column_id)
     gtk_tree_view_column_set_sort_column_id(_SELF(self), 
                                             NUM2INT(sort_column_id));
     return self;
-}
-
-static VALUE
-tvc_sort_column_id_equal(self, sort_column_id)
-    VALUE self, sort_column_id;
-{
-    gtk_tree_view_column_set_sort_column_id(_SELF(self), 
-                                            NUM2INT(sort_column_id));
-    return sort_column_id;
 }
 
 static VALUE
@@ -226,12 +214,9 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "add_attribute", tvc_add_attribute, 3);
     rb_define_method(tvc, "clear_attributes", tvc_clear_attributes, 1);
     rb_define_method(tvc, "set_spacing", tvc_set_spacing, 1);
-/*    rb_define_method(tvc, "spacing=", tvc_spacing_equal, 1);
- */
     rb_define_method(tvc, "spacing", tvc_get_spacing, 0);
     rb_define_method(tvc, "clicked", tvc_clicked, 0);
     rb_define_method(tvc, "set_sort_column_id", tvc_set_sort_column_id, 1);
-    rb_define_method(tvc, "sort_column_id=", tvc_sort_column_id_equal, 1);
     rb_define_method(tvc, "sort_column_id", tvc_get_sort_column_id, 0);
     rb_define_method(tvc, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
     rb_define_method(tvc, "cell_size", tvc_cell_get_size, 0 );
@@ -242,5 +227,5 @@ Init_gtk_treeviewcolumn()
     rb_define_const(tvc, "AUTOSIZE", GTK_TREE_VIEW_COLUMN_AUTOSIZE); 
     rb_define_const(tvc, "FIXED", GTK_TREE_VIEW_COLUMN_FIXED); 
 
-    rb_funcall(mGLib, rb_intern("__add_one_arg_setter"), 1, tvc);
+	 G_DEF_SETTERS(tvc);
 }

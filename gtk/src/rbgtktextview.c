@@ -1,38 +1,45 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbgtktextview.c -
+
+  $Author $
+  $Date: 2002/10/13 17:32:38 $
+
+  Copyright (C) 2002 Masahiro Sakai
+************************************************/
 #include "global.h"
 
 static VALUE
-rbgtk_text_view_set_buffer(VALUE self, VALUE v0)
+textview_set_buffer(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     GtkTextBuffer *gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 =
-        NIL_P(v0) ? NULL : G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(v0),
-                                                      GTK_TYPE_TEXT_BUFFER,
-                                                      GtkTextBuffer);
+    g_self = G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
+                                        GtkTextView);
+    gv0 = NIL_P(v0) ? NULL : G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(v0),
+                                                        GTK_TYPE_TEXT_BUFFER,
+                                                        GtkTextBuffer);
     gtk_text_view_set_buffer(g_self, gv0);
     return self;
-
 }
 
 static VALUE
-rbgtk_text_view_get_buffer(VALUE self)
+textview_get_buffer(self)
+    VALUE self;
 {
     GtkTextView *g_self;
     GtkTextBuffer *ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
+    g_self = G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
+                                        GtkTextView);
     ret = gtk_text_view_get_buffer(g_self);
     return ret ? GOBJ2RVAL(ret) : Qnil;
-
 }
 
 static VALUE
-rbgtk_text_view_scroll_to_iter(VALUE self, VALUE v0, VALUE v1, VALUE v2,
-                               VALUE v3, VALUE v4)
+textview_scroll_to_iter(self, v0, v1, v2, v3, v4)
+    VALUE self, v0, v1, v2, v3, v4;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -57,8 +64,8 @@ rbgtk_text_view_scroll_to_iter(VALUE self, VALUE v0, VALUE v1, VALUE v2,
 }
 
 static VALUE
-rbgtk_text_view_scroll_to_mark(VALUE self, VALUE v0, VALUE v1, VALUE v2,
-                               VALUE v3, VALUE v4)
+textview_scroll_to_mark(self, v0, v1, v2, v3, v4)
+    VALUE self, v0, v1, v2, v3, v4;
 {
     GtkTextView *g_self;
     GtkTextMark *gv0;
@@ -83,7 +90,8 @@ rbgtk_text_view_scroll_to_mark(VALUE self, VALUE v0, VALUE v1, VALUE v2,
 }
 
 static VALUE
-rbgtk_text_view_scroll_mark_onscreen(VALUE self, VALUE v0)
+textview_scroll_mark_onscreen(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     GtkTextMark *gv0;
@@ -100,7 +108,8 @@ rbgtk_text_view_scroll_mark_onscreen(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_move_mark_onscreen(VALUE self, VALUE v0)
+textview_move_mark_onscreen(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -118,7 +127,8 @@ rbgtk_text_view_move_mark_onscreen(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_place_cursor_onscreen(VALUE self)
+textview_place_cursor_onscreen(self)
+    VALUE self;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -131,7 +141,8 @@ rbgtk_text_view_place_cursor_onscreen(VALUE self)
 }
 
 static VALUE
-rbgtk_text_view_get_visible_rect(VALUE self, VALUE v0)
+textview_get_visible_rect(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     GdkRectangle *gv0;
@@ -147,34 +158,8 @@ rbgtk_text_view_get_visible_rect(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_set_cursor_visible(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gboolean gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = RTEST(v0);
-    gtk_text_view_set_cursor_visible(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_cursor_visible(VALUE self)
-{
-    GtkTextView *g_self;
-    gboolean ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_cursor_visible(g_self);
-    return ret ? Qtrue : Qfalse;
-
-}
-
-static VALUE
-rbgtk_text_view_get_iter_location(VALUE self, VALUE v0, VALUE v1)
+textview_get_iter_location(self, v0, v1)
+    VALUE self, v0, v1;
 {
     GtkTextView *g_self;
     const GtkTextIter *gv0;
@@ -194,8 +179,8 @@ rbgtk_text_view_get_iter_location(VALUE self, VALUE v0, VALUE v1)
 }
 
 static VALUE
-rbgtk_text_view_get_iter_at_location(VALUE self, VALUE v0, VALUE v1,
-                                     VALUE v2)
+textview_get_iter_at_location(self, v0, v1, v2)
+    VALUE self, v0, v1, v2;
 {
     GtkTextView *g_self;
     GtkTextIter *gv0;
@@ -223,7 +208,8 @@ rbgtk_text_view_get_iter_at_location(VALUE self, VALUE v0, VALUE v1,
 /* gtk_text_view_window_to_buffer_coords not generated */
 
 static VALUE
-rbgtk_text_view_get_window(VALUE self, VALUE v0)
+textview_get_window(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     GdkWindow *ret;
@@ -238,7 +224,8 @@ rbgtk_text_view_get_window(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_get_window_type(VALUE self, VALUE v0)
+textview_get_window_type(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     GtkTextWindowType ret;
@@ -256,7 +243,8 @@ rbgtk_text_view_get_window_type(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_set_border_window_size(VALUE self, VALUE v0, VALUE v1)
+textview_set_border_window_size(self, v0, v1)
+    VALUE self, v0, v1;
 {
     GtkTextView *g_self;
     GtkTextWindowType gv0;
@@ -272,7 +260,8 @@ rbgtk_text_view_set_border_window_size(VALUE self, VALUE v0, VALUE v1)
 }
 
 static VALUE
-rbgtk_text_view_get_border_window_size(VALUE self, VALUE v0)
+textview_get_border_window_size(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gint ret;
@@ -287,7 +276,8 @@ rbgtk_text_view_get_border_window_size(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_forward_display_line(VALUE self, VALUE v0)
+textview_forward_display_line(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -304,7 +294,8 @@ rbgtk_text_view_forward_display_line(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_backward_display_line(VALUE self, VALUE v0)
+textview_backward_display_line(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -321,7 +312,8 @@ rbgtk_text_view_backward_display_line(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_forward_display_line_end(VALUE self, VALUE v0)
+textview_forward_display_line_end(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -338,7 +330,8 @@ rbgtk_text_view_forward_display_line_end(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_backward_display_line_start(VALUE self, VALUE v0)
+textview_backward_display_line_start(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -355,7 +348,8 @@ rbgtk_text_view_backward_display_line_start(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_starts_display_line(VALUE self, VALUE v0)
+textview_starts_display_line(self, v0)
+    VALUE self, v0;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -372,7 +366,8 @@ rbgtk_text_view_starts_display_line(VALUE self, VALUE v0)
 }
 
 static VALUE
-rbgtk_text_view_move_visually(VALUE self, VALUE v0, VALUE v1)
+textview_move_visually(self, v0, v1)
+    VALUE self, v0, v1;
 {
     GtkTextView *g_self;
     gboolean ret;
@@ -391,7 +386,8 @@ rbgtk_text_view_move_visually(VALUE self, VALUE v0, VALUE v1)
 }
 
 static VALUE
-rbgtk_text_view_add_child_at_anchor(VALUE self, VALUE v0, VALUE v1)
+textview_add_child_at_anchor(self, v0, v1)
+    VALUE self, v0, v1;
 {
     GtkTextView *g_self;
     GtkWidget *gv0;
@@ -413,8 +409,8 @@ rbgtk_text_view_add_child_at_anchor(VALUE self, VALUE v0, VALUE v1)
 }
 
 static VALUE
-rbgtk_text_view_add_child_in_window(VALUE self, VALUE v0, VALUE v1,
-                                    VALUE v2, VALUE v3)
+textview_add_child_in_window(self, v0, v1, v2, v3)
+    VALUE self, v0, v1, v2, v3;
 {
     GtkTextView *g_self;
     GtkWidget *gv0;
@@ -437,7 +433,8 @@ rbgtk_text_view_add_child_in_window(VALUE self, VALUE v0, VALUE v1,
 }
 
 static VALUE
-rbgtk_text_view_move_child(VALUE self, VALUE v0, VALUE v1, VALUE v2)
+textview_move_child(self, v0, v1, v2)
+    VALUE self, v0, v1, v2;
 {
     GtkTextView *g_self;
     GtkWidget *gv0;
@@ -457,284 +454,9 @@ rbgtk_text_view_move_child(VALUE self, VALUE v0, VALUE v1, VALUE v2)
 
 }
 
-#if 0
-
 static VALUE
-rbgtk_text_view_set_wrap_mode(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    GtkWrapMode gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2UINT(v0);
-    gtk_text_view_set_wrap_mode(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_wrap_mode(VALUE self)
-{
-    GtkTextView *g_self;
-    GtkWrapMode ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_wrap_mode(g_self);
-    return UINT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_editable(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gboolean gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = RTEST(v0);
-    gtk_text_view_set_editable(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_editable(VALUE self)
-{
-    GtkTextView *g_self;
-    gboolean ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_editable(g_self);
-    return ret ? Qtrue : Qfalse;
-
-}
-
-static VALUE
-rbgtk_text_view_set_pixels_above_lines(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_pixels_above_lines(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_pixels_above_lines(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_pixels_above_lines(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_pixels_below_lines(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_pixels_below_lines(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_pixels_below_lines(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_pixels_below_lines(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_pixels_inside_wrap(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_pixels_inside_wrap(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_pixels_inside_wrap(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_pixels_inside_wrap(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_justification(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    GtkJustification gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2UINT(v0);
-    gtk_text_view_set_justification(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_justification(VALUE self)
-{
-    GtkTextView *g_self;
-    GtkJustification ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_justification(g_self);
-    return UINT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_left_margin(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_left_margin(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_left_margin(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_left_margin(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_right_margin(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_right_margin(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_right_margin(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_right_margin(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_indent(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    gint gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 = NUM2INT(v0);
-    gtk_text_view_set_indent(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_indent(VALUE self)
-{
-    GtkTextView *g_self;
-    gint ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_indent(g_self);
-    return INT2NUM(ret);
-
-}
-
-static VALUE
-rbgtk_text_view_set_tabs(VALUE self, VALUE v0)
-{
-    GtkTextView *g_self;
-    PangoTabArray *gv0;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    gv0 =
-        NIL_P(v0) ? NULL : (PangoTabArray *) RVAL2BOXED(v0,
-                                                         PANGO_TYPE_TAB_ARRAY);
-    gtk_text_view_set_tabs(g_self, gv0);
-    return self;
-
-}
-
-static VALUE
-rbgtk_text_view_get_tabs(VALUE self)
-{
-    GtkTextView *g_self;
-    PangoTabArray *ret;
-    g_self =
-        G_TYPE_CHECK_INSTANCE_CAST(RVAL2GOBJ(self), GTK_TYPE_TEXT_VIEW,
-                                   GtkTextView);
-    ret = gtk_text_view_get_tabs(g_self);
-    return ret ? BOXED2RVAL(ret, PANGO_TYPE_TAB_ARRAY) : Qnil;
-
-}
-
-#endif
-
-static VALUE
-rbgtk_text_view_get_default_attributes(VALUE self)
+textview_get_default_attributes(self)
+    VALUE self;
 {
     GtkTextView *g_self;
     GtkTextAttributes *ret;
@@ -748,7 +470,7 @@ rbgtk_text_view_get_default_attributes(VALUE self)
 
 
 static VALUE
-initialize(argc, argv, self)
+textview_initialize(argc, argv, self)
     int argc;
     VALUE* argv;
     VALUE self;
@@ -769,114 +491,43 @@ void
 Init_gtk_textview()
 {
     VALUE cTextView = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
-    rb_define_method(cTextView, "set_buffer", rbgtk_text_view_set_buffer,
-                     1);
-    rb_define_method(cTextView, "get_buffer", rbgtk_text_view_get_buffer,
-                     0);
-    rb_define_method(cTextView, "scroll_to_iter",
-                     rbgtk_text_view_scroll_to_iter, 5);
-    rb_define_method(cTextView, "scroll_to_mark",
-                     rbgtk_text_view_scroll_to_mark, 5);
-    rb_define_method(cTextView, "scroll_mark_onscreen",
-                     rbgtk_text_view_scroll_mark_onscreen, 1);
-    rb_define_method(cTextView, "move_mark_onscreen",
-                     rbgtk_text_view_move_mark_onscreen, 1);
-    rb_define_method(cTextView, "place_cursor_onscreen",
-                     rbgtk_text_view_place_cursor_onscreen, 0);
-    rb_define_method(cTextView, "get_visible_rect",
-                     rbgtk_text_view_get_visible_rect, 1);
-    rb_define_method(cTextView, "set_cursor_visible",
-                     rbgtk_text_view_set_cursor_visible, 1);
-    rb_define_method(cTextView, "get_cursor_visible",
-                     rbgtk_text_view_get_cursor_visible, 0);
-    rb_define_method(cTextView, "get_iter_location",
-                     rbgtk_text_view_get_iter_location, 2);
-    rb_define_method(cTextView, "get_iter_at_location",
-                     rbgtk_text_view_get_iter_at_location, 3);
+    rb_define_method(cTextView, "set_buffer", textview_set_buffer, 1);
+    rb_define_method(cTextView, "get_buffer", textview_get_buffer, 0);
+    rb_define_method(cTextView, "scroll_to_iter", textview_scroll_to_iter, 5);
+    rb_define_method(cTextView, "scroll_to_mark", textview_scroll_to_mark, 5);
+    rb_define_method(cTextView, "scroll_mark_onscreen", textview_scroll_mark_onscreen, 1);
+    rb_define_method(cTextView, "move_mark_onscreen", textview_move_mark_onscreen, 1);
+    rb_define_method(cTextView, "place_cursor_onscreen", textview_place_cursor_onscreen, 0);
+    rb_define_method(cTextView, "get_visible_rect", textview_get_visible_rect, 1);
+    rb_define_method(cTextView, "get_iter_location", textview_get_iter_location, 2);
+    rb_define_method(cTextView, "get_iter_at_location", textview_get_iter_at_location, 3);
 #if 0
-    rb_define_method(cTextView, "get_line_yrange",
-                     rbgtk_text_view_get_line_yrange, 3);
+    rb_define_method(cTextView, "get_line_yrange", textview_get_line_yrange, 3);
 #endif
 #if 0
-    rb_define_method(cTextView, "get_line_at_y",
-                     rbgtk_text_view_get_line_at_y, 3);
+    rb_define_method(cTextView, "get_line_at_y", textview_get_line_at_y, 3);
 #endif
 #if 0
-    rb_define_method(cTextView, "buffer_to_window_coords",
-                     rbgtk_text_view_buffer_to_window_coords, 5);
+    rb_define_method(cTextView, "buffer_to_window_coords", textview_buffer_to_window_coords, 5);
 #endif
 #if 0
-    rb_define_method(cTextView, "window_to_buffer_coords",
-                     rbgtk_text_view_window_to_buffer_coords, 5);
+    rb_define_method(cTextView, "window_to_buffer_coords", textview_window_to_buffer_coords, 5);
 #endif
-    rb_define_method(cTextView, "get_window", rbgtk_text_view_get_window,
-                     1);
-    rb_define_method(cTextView, "get_window_type",
-                     rbgtk_text_view_get_window_type, 1);
-    rb_define_method(cTextView, "set_border_window_size",
-                     rbgtk_text_view_set_border_window_size, 2);
-    rb_define_method(cTextView, "get_border_window_size",
-                     rbgtk_text_view_get_border_window_size, 1);
-    rb_define_method(cTextView, "forward_display_line",
-                     rbgtk_text_view_forward_display_line, 1);
-    rb_define_method(cTextView, "backward_display_line",
-                     rbgtk_text_view_backward_display_line, 1);
-    rb_define_method(cTextView, "forward_display_line_end",
-                     rbgtk_text_view_forward_display_line_end, 1);
-    rb_define_method(cTextView, "backward_display_line_start",
-                     rbgtk_text_view_backward_display_line_start, 1);
-    rb_define_method(cTextView, "starts_display_line",
-                     rbgtk_text_view_starts_display_line, 1);
-    rb_define_method(cTextView, "move_visually",
-                     rbgtk_text_view_move_visually, 2);
-    rb_define_method(cTextView, "add_child_at_anchor",
-                     rbgtk_text_view_add_child_at_anchor, 2);
-    rb_define_method(cTextView, "add_child_in_window",
-                     rbgtk_text_view_add_child_in_window, 4);
-    rb_define_method(cTextView, "move_child", rbgtk_text_view_move_child,
-                     3);
-#if 0
-    rb_define_method(cTextView, "set_wrap_mode",
-                     rbgtk_text_view_set_wrap_mode, 1);
-    rb_define_method(cTextView, "get_wrap_mode",
-                     rbgtk_text_view_get_wrap_mode, 0);
-    rb_define_method(cTextView, "set_editable",
-                     rbgtk_text_view_set_editable, 1);
-    rb_define_method(cTextView, "get_editable",
-                     rbgtk_text_view_get_editable, 0);
-    rb_define_method(cTextView, "set_pixels_above_lines",
-                     rbgtk_text_view_set_pixels_above_lines, 1);
-    rb_define_method(cTextView, "get_pixels_above_lines",
-                     rbgtk_text_view_get_pixels_above_lines, 0);
-    rb_define_method(cTextView, "set_pixels_below_lines",
-                     rbgtk_text_view_set_pixels_below_lines, 1);
-    rb_define_method(cTextView, "get_pixels_below_lines",
-                     rbgtk_text_view_get_pixels_below_lines, 0);
-    rb_define_method(cTextView, "set_pixels_inside_wrap",
-                     rbgtk_text_view_set_pixels_inside_wrap, 1);
-    rb_define_method(cTextView, "get_pixels_inside_wrap",
-                     rbgtk_text_view_get_pixels_inside_wrap, 0);
-    rb_define_method(cTextView, "set_justification",
-                     rbgtk_text_view_set_justification, 1);
-    rb_define_method(cTextView, "get_justification",
-                     rbgtk_text_view_get_justification, 0);
-    rb_define_method(cTextView, "set_left_margin",
-                     rbgtk_text_view_set_left_margin, 1);
-    rb_define_method(cTextView, "get_left_margin",
-                     rbgtk_text_view_get_left_margin, 0);
-    rb_define_method(cTextView, "set_right_margin",
-                     rbgtk_text_view_set_right_margin, 1);
-    rb_define_method(cTextView, "get_right_margin",
-                     rbgtk_text_view_get_right_margin, 0);
-    rb_define_method(cTextView, "set_indent", rbgtk_text_view_set_indent,
-                     1);
-    rb_define_method(cTextView, "get_indent", rbgtk_text_view_get_indent,
-                     0);
-    rb_define_method(cTextView, "set_tabs", rbgtk_text_view_set_tabs, 1);
-    rb_define_method(cTextView, "get_tabs", rbgtk_text_view_get_tabs, 0);
-#endif
-    rb_define_method(cTextView, "get_default_attributes",
-                     rbgtk_text_view_get_default_attributes, 0);
+    rb_define_method(cTextView, "get_window", textview_get_window, 1);
+    rb_define_method(cTextView, "get_window_type", textview_get_window_type, 1);
+    rb_define_method(cTextView, "set_border_window_size", textview_set_border_window_size, 2);
+    rb_define_method(cTextView, "get_border_window_size", textview_get_border_window_size, 1);
+    rb_define_method(cTextView, "forward_display_line", textview_forward_display_line, 1);
+    rb_define_method(cTextView, "backward_display_line", textview_backward_display_line, 1);
+    rb_define_method(cTextView, "forward_display_line_end", textview_forward_display_line_end, 1);
+    rb_define_method(cTextView, "backward_display_line_start", textview_backward_display_line_start, 1);
+    rb_define_method(cTextView, "starts_display_line", textview_starts_display_line, 1);
+    rb_define_method(cTextView, "move_visually", textview_move_visually, 2);
+    rb_define_method(cTextView, "add_child_at_anchor", textview_add_child_at_anchor, 2);
+    rb_define_method(cTextView, "add_child_in_window", textview_add_child_in_window, 4);
+    rb_define_method(cTextView, "move_child", textview_move_child, 3);
+    rb_define_method(cTextView, "get_default_attributes", textview_get_default_attributes, 0);
+    rb_define_method(cTextView, "initialize", textview_initialize, -1);
 
-    rb_define_method(cTextView, "initialize", initialize, -1);
+    G_DEF_SETTERS(cTextView);
 }

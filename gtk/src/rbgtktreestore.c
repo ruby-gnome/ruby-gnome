@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/10/13 17:32:38 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -46,7 +46,6 @@ tstore_set_column_types(argc, argv, self)
     VALUE  self;
 {
     gint cnt;
-    GtkTreeStore* store;
     GType* buf;
   
     if (argc == 0) rb_raise(rb_eArgError, "need more than 1 class type.");
@@ -170,6 +169,7 @@ tstore_clear(self)
     VALUE self;
 {
     gtk_tree_store_clear(_SELF(self));
+    return self;
 }
 
 void

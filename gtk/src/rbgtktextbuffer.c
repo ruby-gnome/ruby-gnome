@@ -3,13 +3,16 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2002/10/02 14:46:23 $
+  $Author: mutoh $
+  $Date: 2002/10/13 17:32:38 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
 
 #include "global.h"
+
+#define _SELF(s) (GTK_TEXT_BUFFER(RVAL2GOBJ(self)))
+#define RVAL2ITR(i) (GtkTextIter*)RVAL2BOXED(self, GTK_TYPE_TEXT_ITER)
 
 static VALUE
 txt_initialize(argc, argv, self)
@@ -28,56 +31,47 @@ static VALUE
 txt_get_line_count(self)
     VALUE self;
 {
-    return INT2NUM(gtk_text_buffer_get_line_count(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return INT2NUM(gtk_text_buffer_get_line_count(_SELF(self)));
 }
 
 static VALUE
 txt_get_char_count(self)
     VALUE self;
 {
-    return INT2NUM(gtk_text_buffer_get_char_count(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return INT2NUM(gtk_text_buffer_get_char_count(_SELF(self)));
 }
 
 static VALUE
 txt_get_tag_table(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_buffer_get_tag_table(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_text_buffer_get_tag_table(_SELF(self)));
 }
 
 static VALUE
-txt_set_text(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+txt_set_text(self, text)
+    VALUE self, text;
 {
-    VALUE text, len;
-    rb_scan_args(argc, argv, "11", &text, &len);
-    gtk_text_buffer_set_text(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
-                             RVAL2CSTR(text),
-                             NIL_P(len) ? RSTRING(text)->len : NUM2INT(len));
+    gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
     return self;
 }
 
 static VALUE
-txt_set_text2(self, text)
-    VALUE self, text;
+txt_insert(self, iter, text)
+    VALUE self, iter, text;
 {
-    txt_set_text(1, &text, self);
-    return text;
+    gtk_text_buffer_insert(_SELF(self), RVAL2ITR(iter), RVAL2CSTR(text), RSTRING(text)->len);
+    return self;
+}
+
+static VALUE
+txt_insert_at_cursor(self, text)
+{
+    gtk_text_buffer_insert_at_cursor(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
+    return self;
 }
 
 #if 0
-
-/* Insert into the buffer */
-void gtk_text_buffer_insert            (GtkTextBuffer *buffer,
-                                        GtkTextIter   *iter,
-                                        const gchar   *text,
-                                        gint           len);
-void gtk_text_buffer_insert_at_cursor  (GtkTextBuffer *buffer,
-                                        const gchar   *text,
-                                        gint           len);
-
 gboolean gtk_text_buffer_insert_interactive           (GtkTextBuffer *buffer,
                                                        GtkTextIter   *iter,
                                                        const gchar   *text,
@@ -122,8 +116,7 @@ txt_delete(self, start, end)
     VALUE self, start, end;
 {
     gtk_text_buffer_delete(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
-                           RVAL2BOXED(start, GTK_TYPE_TEXT_ITER),
-                           RVAL2BOXED(end, GTK_TYPE_TEXT_ITER));
+                           RVAL2ITR(start), RVAL2ITR(end));
     return self;
 }
 
@@ -184,14 +177,14 @@ static VALUE
 txt_get_insert(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_buffer_get_insert(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_text_buffer_get_insert(_SELF(self)));
 }
 
 static VALUE
 txt_get_selection_bound(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_buffer_get_selection_bound(GTK_TEXT_BUFFER(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_text_buffer_get_selection_bound(_SELF(self)));
 }
 
 #if 0
@@ -268,14 +261,14 @@ static VALUE
 txt_get_modified(self)
     VALUE self;
 {
-    return gtk_text_buffer_get_modified(GTK_TEXT_BUFFER(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return gtk_text_buffer_get_modified(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 txt_set_modified(self, setting)
     VALUE self, setting;
 {
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(RVAL2GOBJ(self)), RTEST(setting));
+    gtk_text_buffer_set_modified(_SELF(self), RTEST(setting));
     return setting;
 }
 
@@ -310,17 +303,15 @@ txt_delete_selection(argc, argv, self)
 {
     VALUE interactive, default_editable;
     rb_scan_args(argc, argv, "20", &interactive, &default_editable); /* FIXME: allow ommiting */
-    return gtk_text_buffer_delete_selection(
-        GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
-        RTEST(interactive),
-        RTEST(default_editable)) ? Qtrue : Qfalse;
+    return gtk_text_buffer_delete_selection(_SELF(self),
+        RTEST(interactive), RTEST(default_editable)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 txt_end_user_action(self)
     VALUE self;
 {
-    gtk_text_buffer_end_user_action(GTK_TEXT_BUFFER(RVAL2GOBJ(self)));
+    gtk_text_buffer_end_user_action(_SELF(self));
     return self;
 }
 
@@ -328,7 +319,7 @@ static VALUE
 txt_begin_user_action(self)
     VALUE self;
 {
-    gtk_text_buffer_begin_user_action(GTK_TEXT_BUFFER(RVAL2GOBJ(self)));
+    gtk_text_buffer_begin_user_action(_SELF(self));
     if (rb_block_given_p())
         rb_ensure(rb_yield, self, txt_end_user_action, self);
     return self;
@@ -344,8 +335,9 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "cher_count", txt_get_char_count, 0);
     rb_define_method(gTextBuffer, "tag_table", txt_get_tag_table, 0);
 
-    rb_define_method(gTextBuffer, "set_text", txt_set_text, -1);
-    rb_define_method(gTextBuffer, "text=", txt_set_text2, 1);
+    rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
+    rb_define_method(gTextBuffer, "insert", txt_insert, 2);
+    rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
 
     rb_define_method(gTextBuffer, "delete", txt_delete, 2);
 
@@ -353,11 +345,13 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
 
     rb_define_method(gTextBuffer, "modified", txt_get_modified, 0);
-    rb_define_method(gTextBuffer, "modified=", txt_set_modified, 1);
+    rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
 
     rb_define_method(gTextBuffer, "delete_selection", txt_delete_selection, -1);
 
     rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
     rb_define_method(gTextBuffer, "end_user_action", txt_end_user_action, 0);
+
+    G_DEF_SETTERS(gTextBuffer);
 }
 

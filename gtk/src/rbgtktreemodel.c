@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2002/10/08 18:53:21 $
+  $Date: 2002/10/13 17:32:38 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -277,5 +277,7 @@ Init_gtk_treemodel()
 
     rb_define_const(mTreeModel, "ITERS_PERSIST", INT2NUM(GTK_TREE_MODEL_ITERS_PERSIST));
     rb_define_const(mTreeModel, "LIST_ONLY", INT2NUM(GTK_TREE_MODEL_LIST_ONLY));
+
+    G_DEF_SETTERS(mTreeModel);
 }
 
