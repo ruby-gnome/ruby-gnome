@@ -1,3 +1,15 @@
+Ruby-GNOME2-0.8.1 (2003-11-23)
+
+  * Ruby/GTK
+    - Fixed compilation problems for GTK+-2.0.x. [Masao Mutoh]
+    - Fixed some bugs. [Masahiro Sakai, Masao Mutoh]
+    - Added Gtk::Tree* methods for GTK+-2.2.x. [Matthew Berg]
+  * Ruby/GtkHtml2
+    - Fixed compilation problems for libgtkhtml-2.4.1 [Masahiro Sakai]
+  * Ruby/Libgda
+    - Fixed a bug [Laurent Sansonetti]
+    *Notice* Ruby/Libgda needs libgda-1.0.2(not released yet) or later.
+
 Ruby-GNOME2-0.8.0 (2003-11-16)
 
   * Ruby/GLib
