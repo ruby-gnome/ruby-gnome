@@ -21,4 +21,4 @@ have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 
-create_makefile(PACKAGE_NAME)
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR)
