@@ -1,0 +1,49 @@
+EXPORTS
+	Init_glib2
+	mGLib		DATA
+	rbgobj_cType	DATA
+	rbgobj_add_relative
+	rbgobj_add_relative_removable
+	rbgobj_remove_relative
+	rbgobj_define_class
+	rbgobj_instance_from_ruby_object
+	rbgobj_ruby_object_from_instance
+	rbgobj_get_value_from_gobject_if_exist
+	rbgobj_create_object
+	rbgobj_gobject_new
+	rbgobj_boxed_create
+	rbgobj_boxed_get
+	rbgobj_boxed_not_copy_obj
+	rbgobj_make_boxed
+	rbgobj_add_abstract_but_create_instance_class
+	rbgobj_gtype_get
+	rbgobj_gtype_new
+	rbgobj_gvalue_to_rvalue
+	rbgobj_rvalue_to_gvalue
+	rbgobj_initialize_object
+	rbgobj_lookup_class
+	rbgobj_lookup_class_by_gtype
+	rbgobj_ptr2cptr
+	rbgobj_ptr_new
+	rbgobj_register_g2r_func
+	rbgobj_register_r2g_func
+	rbgobj_register_property_getter
+	rbgobj_register_property_setter
+	rbgobj_get_signal_func
+	rbgobj_set_signal_func
+	rbgobj_signal_wrap
+	g_rclosure_new
+	rbgobj_ruby_value_get_type
+	g_value_get_ruby_value
+	g_value_set_ruby_value
+	rbg_cstr2rval
+	rbg_string_value_ptr
+	rbgutil_id_module_eval		DATA
+	rbgutil_def_setters
+	rbgutil_gerror2exception
+	rbgutil_glist2ary
+	rbgutil_glist2ary_boxed
+	rbgutil_gslist2ary
+	rbgutil_gslist2ary_boxed
+	rbgutil_set_properties
+	rbgutil_sym_g2r_func

@@ -1,3 +1,7 @@
+2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/libart2.def: Add a file.
+
 2003-02-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart_canvas.c: Work under ruby-1.6.7(or older). 

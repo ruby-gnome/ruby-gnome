@@ -1,3 +1,7 @@
+2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/gtk2.def: Add a file
+
 2003-03-17  Geoff Youngs <g@intersect-uk.co.uk>
 
 	* src/rbgtktreeiter.c (treeiter_eql): moved declaration of

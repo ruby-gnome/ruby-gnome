@@ -1,3 +1,7 @@
+2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/pango.def: Add a file
+
 2003-03-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangomain.c: Add Pango.pixels 

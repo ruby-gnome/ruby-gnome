@@ -1,0 +1,19 @@
+EXPORTS
+    Init_libart2
+    artBpath       DATA
+    artCanvas      DATA
+    artCanvasColor DATA
+    artSVP         DATA
+    artVpath       DATA
+    artVpathDash   DATA
+    get_art_bpath
+    get_art_svp
+    get_art_vpath
+    get_art_vpath_dash
+    make_art_bpath
+    make_art_svp
+    make_art_vpath
+    make_art_vpath_dash
+    rbart_get_art_affine
+    rbart_get_art_canvas
+    rbart_make_art_affine

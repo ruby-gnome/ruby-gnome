@@ -1,0 +1,18 @@
+EXPORTS
+    Init_pango
+    mPango     DATA
+    attrstring DATA
+    pattr      DATA
+    pattrbool  DATA
+    pattrcolor DATA
+    pattrfloat DATA
+    pattrint   DATA
+    pango_add_attribute
+    pango_attr_iter_get_type
+    pango_get_attribute
+    pango_get_attribute_klass
+    pango_item_get_type
+    pango_layout_iter_get_type
+    pango_layout_line_get_type
+    pango_make_attribute
+    pango_rectangle_get_type
