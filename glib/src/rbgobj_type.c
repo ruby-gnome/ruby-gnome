@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/31 17:00:19 $
+  $Date: 2003/08/16 05:39:43 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -163,7 +163,7 @@ rbgobj_lookup_class_by_gtype(gtype)
 VALUE
 rbgobj_define_class(gtype, name, module, mark, free)
     GType gtype;
-    gchar* name;
+    const gchar* name;
     VALUE module;
     void* mark;
     void* free;

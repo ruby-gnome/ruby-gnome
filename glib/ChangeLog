@@ -1,3 +1,8 @@
+2003-08-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h, src/rbgobj_type.c, let rbgobj_define_class() to
+	take `const gchar*', not `gchar*'.
+
 2003-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): append linker

@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: geoff_youngs $
-  $Date: 2003/07/28 08:56:21 $
+  $Author: sakai $
+  $Date: 2003/08/16 05:39:43 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -99,7 +99,7 @@ extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 /* rbgobj_type.c */
 extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
 extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype);
-extern VALUE rbgobj_define_class(GType gtype, gchar* name, VALUE module,
+extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
                                  void* mark, void* free); 
 extern void rbgobj_register_class(VALUE klass,
                                   GType gtype,
