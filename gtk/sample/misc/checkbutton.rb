@@ -5,7 +5,7 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: checkbutton.rb,v 1.2 2002/11/05 10:39:10 mutoh Exp $
+  $Id: checkbutton.rb,v 1.3 2002/11/30 17:40:47 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -23,14 +23,12 @@ box2 = Gtk::VBox.new(false, 10)
 box2.set_border_width(10)
 box1.pack_start(box2, true, true, 0)
 
-button = Gtk::CheckButton.new("button1")
-box2.pack_start(button, true, true, 0)
-
-button = Gtk::CheckButton.new("button2")
-box2.pack_start(button, true, true, 0)
-
-button = Gtk::CheckButton.new("button3")
-box2.pack_start(button, true, true, 0)
+button1 = Gtk::CheckButton.new("_button1")
+button2 = Gtk::CheckButton.new("_button2", false)
+button3 = Gtk::CheckButton.new(Gtk::Stock::QUIT)
+box2.add(button1)
+box2.add(button2)
+box2.add(button3)
 
 separator = Gtk::HSeparator.new
 box1.pack_start(separator, false, true, 0)

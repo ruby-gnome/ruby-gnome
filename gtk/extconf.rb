@@ -120,8 +120,8 @@ begin
   $source_files.each do |e|
     if e == "rbgdk.c"
       mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
-    elsif e == "rbgdkconst.c"
-      mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
+    elsif e == "rbgdkcursor.c"
+      mfile.print "rbgdkcursor#{obj_ext}: rbgdkcursor.c rbgdkcursor.h\n"
     elsif e == "rbgdkkeyval.c"
       mfile.print "rbgdkkeyval#{obj_ext}: rbgdkkeyval.c rbgdkkeysyms.h\n"
     elsif e == "init.c"

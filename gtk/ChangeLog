@@ -1,3 +1,13 @@
+2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/button2.rb: Add a file.
+	* sample/misc/togglebutton.rb, checkbutton.rb, radiobutton.rb: 
+	Add sample for mnemonic label and stock item.
+	* src/rbgtkbutton.c, rbgtktogglebutton.c, rbgtkcheckbutton.c, rbgtkradiobutton.c: 
+	Support mnemonic label or stock item in #initialize.
+	* extconf.rb: Fix compile error about rbgdkcursor.h.
+	Reported by Thorsten Roggendorf <schrotie@uni-bielefeld.de>, Bugs item #643915.
+
 2002-11-29  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtktextbuffer.c: Add Gtk::TextBuffer#insert_pixbuf,

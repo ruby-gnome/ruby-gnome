@@ -4,7 +4,7 @@
   rbgtkbutton.c -
 
   $Author: mutoh $
-  $Date: 2002/10/21 17:29:30 $
+  $Date: 2002/11/30 17:40:47 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,25 +19,29 @@ button_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE label;
-    GtkWidget *widget;
+    VALUE label, use_underline;
+    GtkWidget *widget = NULL;
 
-    if (rb_scan_args(argc, argv, "01", &label) == 1) {
-	widget = gtk_button_new_with_label(RVAL2CSTR(label));
-    }
-    else {
+    if (rb_scan_args(argc, argv, "02", &label, &use_underline) > 0) {
+        if (TYPE(label) == T_STRING){
+            if (NIL_P(use_underline) || RTEST(use_underline)){
+                widget = gtk_button_new_with_mnemonic(RVAL2CSTR(label));
+            } else {
+                widget = gtk_button_new_with_label(RVAL2CSTR(label));
+            }
+        } else if (TYPE(label) == T_SYMBOL){
+            widget = gtk_button_new_from_stock(rb_id2name(SYM2ID(label)));
+        } else {
+            rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
+                     rb_class2name(CLASS_OF(label)));
+        }
+    } else {
 	widget = gtk_button_new();
     }
 
     RBGTK_INITIALIZE(self, widget); 
     return Qnil;
 }
-
-/*
- Should't we implement them?
-GtkWidget*  gtk_button_new_with_mnemonic    (const gchar *label);
-GtkWidget*  gtk_button_new_from_stock       (const gchar *stock_id);
-*/
 
 static VALUE
 button_pressed(self)

@@ -4,7 +4,7 @@
   rbgtkradiobutton.c -
 
   $Author: mutoh $
-  $Date: 2002/10/21 17:29:30 $
+  $Date: 2002/11/30 17:40:47 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,56 +13,54 @@
 
 #include "global.h"
 
+static VALUE gRButton;
+
+#define _GROUP(s) (NIL_P(s) ? NULL : GTK_RADIO_BUTTON(RVAL2GOBJ(s)))
+
+static GtkWidget*
+create_button(group, label, use_underline)
+    VALUE group, label, use_underline;
+{
+    GtkWidget* widget = NULL;
+
+    if (TYPE(label) == T_STRING){
+        if (NIL_P(use_underline) || RTEST(use_underline)){
+            widget = gtk_radio_button_new_with_mnemonic_from_widget(_GROUP(group), RVAL2CSTR(label));
+        } else {
+            widget = gtk_radio_button_new_with_label_from_widget(_GROUP(group), RVAL2CSTR(label));
+        }
+    } else if (TYPE(label) == T_SYMBOL){
+        widget = gtk_radio_button_new_with_label_from_widget(_GROUP(group), rb_id2name(SYM2ID(label)));
+        gtk_button_set_use_stock(GTK_BUTTON(widget), TRUE);
+    } else {
+        rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
+                         rb_class2name(CLASS_OF(label)));
+    }
+    return widget;
+}
+
 static VALUE
 rbtn_initialize(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    VALUE arg1, arg2;
+    VALUE group_or_label, label_or_use_underline, use_underline;
     GtkWidget *widget;
-    GSList *list = NULL;
-    char *label = NULL;
-    
-    if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
-        TYPE(arg1) == T_STRING) {
-        label = RSTRING(arg1)->ptr;
-    }
-    else {
-        if (!NIL_P(arg2)) {
-            label = RVAL2CSTR(arg2);
+
+    if (rb_scan_args(argc, argv, "03", &group_or_label, &label_or_use_underline, &use_underline) > 0) {
+        if (rb_obj_is_kind_of(group_or_label, gRButton)){
+            widget = create_button(group_or_label, label_or_use_underline, use_underline);
+        } else {
+            widget = create_button(Qnil, group_or_label, label_or_use_underline);
         }
-        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_BUTTON))) {
-            list = GTK_RADIO_BUTTON(RVAL2GOBJ(arg1))->group;
-        }
-        else {
-            list = ary2gslist(arg1);
-        }
+    } else {
+        widget = gtk_radio_button_new(NULL);
     }
-    if (label) {
-        widget = gtk_radio_button_new_with_label(list, label);
-    }
-    else {
-        widget = gtk_radio_button_new(list);
-    }
+   
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-
-/*
-GtkWidget*  gtk_radio_button_new_from_widget
-                                            (GtkRadioButton *group);
-                                         
-GtkWidget*  gtk_radio_button_new_with_label_from_widget
-                                            (GtkRadioButton *group,
-                                             const gchar *label);
-GtkWidget*  gtk_radio_button_new_with_mnemonic
-                                            (GSList *group,
-                                             const gchar *label);
-GtkWidget*  gtk_radio_button_new_with_mnemonic_from_widget
-                                            (GtkRadioButton *group,
-                                             const gchar *label);
-*/
 
 static VALUE
 rbtn_group(self)
@@ -74,7 +72,7 @@ rbtn_group(self)
 void 
 Init_gtk_radio_button()
 {
-    VALUE gRButton = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
+    gRButton = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
 
     rb_define_method(gRButton, "initialize", rbtn_initialize, -1);
     rb_define_method(gRButton, "group", rbtn_group, 0);
