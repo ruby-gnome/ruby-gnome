@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -103,7 +103,7 @@ gwin_add_accel(self, accel)
     VALUE self, accel;
 {
     gtk_window_add_accel_group(GTK_WINDOW(RVAL2GOBJ(self)),
-							   get_gtkaccelgrp(accel));
+							   GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
     return self;
 }
 
@@ -112,7 +112,7 @@ gwin_rm_accel(self, accel)
     VALUE self, accel;
 {
     gtk_window_remove_accel_group(GTK_WINDOW(RVAL2GOBJ(self)),
-								  get_gtkaccelgrp(accel));
+								  GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
     return self;
 }
 
@@ -163,7 +163,7 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 
 void Init_gtk_window()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gWindow = rb_define_class_under(mGtk, "Window", gBin);
     cinfo.klass = gWindow;

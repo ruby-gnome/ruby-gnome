@@ -4,7 +4,7 @@
   global.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -126,7 +126,7 @@ arg_to_value(arg)
 #endif
 #ifdef GTK_TYPE_GDK_PIXMAP
 		else if (arg->type == GTK_TYPE_GDK_PIXMAP) {
-			return make_gdkpixmap(GTK_VALUE_BOXED(*arg));
+			return GOBJ2RVAL(GDK_PIXMAP((GTK_VALUE_BOXED(*arg))));
 		}
 #endif
 #ifdef GTK_TYPE_GDK_VISUAL
@@ -135,13 +135,13 @@ arg_to_value(arg)
 		}
 #endif
 		else if (arg->type == GTK_TYPE_STYLE) {
-			return make_gstyle(GTK_VALUE_BOXED(*arg));
+			return GOBJ2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 		else if (arg->type == GTK_TYPE_TOOLTIPS) {
 			return GOBJ2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 		else if (arg->type == GTK_TYPE_CTREE_NODE) {
-			return make_ctree_node(GTK_VALUE_BOXED(*arg));
+			return GVAL2RVAL(GTK_VALUE_BOXED(*arg));
 		}
 		else {
 			goto unsupported;

@@ -3,7 +3,7 @@
   rbgtksocket.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -31,12 +31,12 @@ static VALUE
 socket_plug_window(self)
     VALUE self;
 {
-    return make_gdkwindow(GTK_SOCKET(RVAL2GOBJ(self))->plug_window);
+    return GOBJ2RVAL(GTK_SOCKET(RVAL2GOBJ(self))->plug_window);
 }
 
 void Init_gtk_socket()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gSocket = rb_define_class_under(mGtk, "Socket", gContainer);
     cinfo.klass = gSocket;

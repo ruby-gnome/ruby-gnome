@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -279,7 +279,7 @@ tbar_set_tooltips(self, enable)
 
 void Init_gtk_toolbar()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gToolbar = rb_define_class_under(mGtk, "Toolbar", gContainer);
     cinfo.klass = gToolbar;

@@ -125,7 +125,7 @@ fsd_get_apply_button(self)
 
 void Init_gtk_font_selection_dialog()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
     gFontSelectionDialog = rb_define_class_under(mGtk,
                                 "FontSelectionDialog", gWindow);
     cinfo.klass = gFontSelectionDialog;

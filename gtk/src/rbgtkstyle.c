@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,36 +13,39 @@
 
 #include "global.h"
 
+#define _SELF(w) GTK_STYLE(RVAL2GOBJ(w))
+
 /*
  * Style
  */
 static VALUE
-style_s_new(klass)
-    VALUE klass;
+style_initialize(self)
+    VALUE self;
 {
-    return make_gstyle(gtk_style_new());
+    RBGOBJ_INITIALIZE(self, gtk_style_new());
+	return Qnil;
 }
 
 static VALUE
 style_copy(self)
     VALUE self;
 {
-    return make_gstyle(gtk_style_copy(get_gstyle(self)));
+    return GOBJ2RVAL(gtk_style_copy(_SELF(self)));
 }
 
 static VALUE
 style_attach(self, win)
     VALUE self, win;
 {
-    return make_gstyle(gtk_style_attach(get_gstyle(self),
-                                        get_gdkwindow(win)));
+    return GOBJ2RVAL(gtk_style_attach(_SELF(self),
+									  GDK_WINDOW(RVAL2GOBJ(win))));
 }
 
 static VALUE
 style_detach(self)
     VALUE self;
 {
-    gtk_style_detach(get_gstyle(self));
+    gtk_style_detach(_SELF(self));
     return self;
 }
 
@@ -50,7 +53,7 @@ static VALUE
 style_set_background(self, win, state_type)
     VALUE self, win, state_type;
 {
-    gtk_style_set_background(get_gstyle(self), get_gdkwindow(win),
+    gtk_style_set_background(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
                              (GtkStateType)NUM2INT(state_type));
     return self;
 }
@@ -63,7 +66,7 @@ style_fg(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->fg[i]);
+    return make_gdkcolor(&_SELF(self)->fg[i]);
 }
 
 static VALUE
@@ -74,7 +77,7 @@ style_bg(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->bg[i]);
+    return make_gdkcolor(&_SELF(self)->bg[i]);
 }
 
 static VALUE
@@ -85,7 +88,7 @@ style_light(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->light[i]);
+    return make_gdkcolor(&_SELF(self)->light[i]);
 }
 
 static VALUE
@@ -96,7 +99,7 @@ style_dark(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->dark[i]);
+    return make_gdkcolor(&_SELF(self)->dark[i]);
 }
 
 static VALUE
@@ -107,7 +110,7 @@ style_mid(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->mid[i]);
+    return make_gdkcolor(&_SELF(self)->mid[i]);
 }
 
 static VALUE
@@ -118,7 +121,7 @@ style_text(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->text[i]);
+    return make_gdkcolor(&_SELF(self)->text[i]);
 }
 
 static VALUE
@@ -129,7 +132,7 @@ style_base(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkcolor(&get_gstyle(self)->base[i]);
+    return make_gdkcolor(&_SELF(self)->base[i]);
 }
 
 #define DEFINE_STYLE_SET_COLOR(func, type) \
@@ -142,7 +145,7 @@ func(self, idx, r, g, b) \
   int i = NUM2INT(idx); \
  \
   if (i < 0 || 5 < i) rb_raise(rb_eArgError, "state out of range"); \
-  style = get_gstyle(self); \
+  style = _SELF(self); \
   if (style->fg_gc[0] != NULL) rb_raise(rb_eArgError, "you must not change widget style."); \
   color =  &(style-> type [i]); \
   color->red   = NUM2INT(r); \
@@ -159,18 +162,18 @@ DEFINE_STYLE_SET_COLOR(style_set_fg, fg)
     DEFINE_STYLE_SET_COLOR(style_set_text, text)
     DEFINE_STYLE_SET_COLOR(style_set_base, base)
 
-static VALUE
+	static VALUE
 style_black(self)
     VALUE self;
 {
-    return make_gdkcolor(&get_gstyle(self)->black);
+    return make_gdkcolor(&_SELF(self)->black);
 }
 
 static VALUE
 style_white(self)
     VALUE self;
 {
-    return make_gdkcolor(&get_gstyle(self)->white);
+    return make_gdkcolor(&_SELF(self)->white);
 }
 
 static VALUE
@@ -181,7 +184,7 @@ style_fg_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->fg_gc[i]);
+    return make_gdkgc(_SELF(self)->fg_gc[i]);
 }
 
 static VALUE
@@ -192,7 +195,7 @@ style_bg_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->bg_gc[i]);
+    return make_gdkgc(_SELF(self)->bg_gc[i]);
 }
 
 static VALUE
@@ -203,7 +206,7 @@ style_light_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->light_gc[i]);
+    return make_gdkgc(_SELF(self)->light_gc[i]);
 }
 
 static VALUE
@@ -214,7 +217,7 @@ style_dark_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->dark_gc[i]);
+    return make_gdkgc(_SELF(self)->dark_gc[i]);
 }
 
 static VALUE
@@ -225,7 +228,7 @@ style_mid_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->mid_gc[i]);
+    return make_gdkgc(_SELF(self)->mid_gc[i]);
 }
 
 static VALUE
@@ -236,7 +239,7 @@ style_text_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->text_gc[i]);
+    return make_gdkgc(_SELF(self)->text_gc[i]);
 }
 
 static VALUE
@@ -247,21 +250,21 @@ style_base_gc(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkgc(get_gstyle(self)->base_gc[i]);
+    return make_gdkgc(_SELF(self)->base_gc[i]);
 }
 
 static VALUE
 style_black_gc(self)
     VALUE self;
 {
-    return make_gdkgc(get_gstyle(self)->black_gc);
+    return make_gdkgc(_SELF(self)->black_gc);
 }
 
 static VALUE
 style_white_gc(self)
     VALUE self;
 {
-    return make_gdkgc(get_gstyle(self)->white_gc);
+    return make_gdkgc(_SELF(self)->white_gc);
 }
 
 static VALUE
@@ -272,7 +275,7 @@ style_bg_pixmap(self, idx)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    return make_gdkpixmap(get_gstyle(self)->bg_pixmap[i]);
+    return GOBJ2RVAL(_SELF(self)->bg_pixmap[i]);
 }
 
 
@@ -280,7 +283,7 @@ static VALUE
 style_draw_hline(self, win, state_type, x1, x2, y)
     VALUE self, win, state_type, x1, x2, y;
 {
-    gtk_draw_hline(get_gstyle(self), get_gdkwindow(win),
+    gtk_draw_hline(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
                    (GtkStateType)NUM2INT(state_type),
                    NUM2INT(x1), NUM2INT(x2), NUM2INT(y));
     return self;
@@ -290,7 +293,7 @@ static VALUE
 style_draw_vline(self, win, state_type, y1, y2, x)
     VALUE self, win, state_type, y1, y2, x;
 {
-    gtk_draw_vline(get_gstyle(self), get_gdkwindow(win),
+    gtk_draw_vline(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
                    (GtkStateType)NUM2INT(state_type),
                    NUM2INT(y1), NUM2INT(y2), NUM2INT(x));
     return self;
@@ -300,7 +303,7 @@ static VALUE
 style_draw_shadow(self,win,state_type,shadow_type,x,y,w,h)
     VALUE self, win, state_type, shadow_type, x, y, w, h;
 {
-    gtk_draw_shadow(get_gstyle(self), get_gdkwindow(win),
+    gtk_draw_shadow(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
                     (GtkStateType)NUM2INT(state_type),
                     (GtkShadowType)NUM2INT(shadow_type),
                     NUM2INT(x), NUM2INT(y), 
@@ -327,7 +330,7 @@ style_draw_polygon(self,win,state_type,shadow_type,pnts,fill)
         points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
 
-    gtk_draw_polygon(get_gstyle(self), get_gdkwindow(win),
+    gtk_draw_polygon(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
                      (GtkStateType)NUM2INT(state_type),
                      (GtkShadowType)NUM2INT(shadow_type),
                      points, RARRAY(pnts)->len,
@@ -339,11 +342,11 @@ style_draw_polygon(self,win,state_type,shadow_type,pnts,fill)
 static VALUE
 style_draw_arrow(self,)     /* 9 */
 {
-    gtk_draw_polygon(get_gstyle(self), get_gdkwindow(win),
-             (GtkStateType)NUM2INT(state_type),
-             (GtkShadowType)NUM2INT(shadow_type),
-             points, RARRAY(pnts)->len,
-             RTEST(fill));
+    gtk_draw_polygon(_SELF(self), GDK_WINDOW(RVAL2GOBJ(win)),
+					 (GtkStateType)NUM2INT(state_type),
+					 (GtkShadowType)NUM2INT(shadow_type),
+					 points, RARRAY(pnts)->len,
+					 RTEST(fill));
     return self;
 }
 
@@ -365,9 +368,16 @@ style_draw_string(self,)    /* 5 */
 
 void Init_gtk_style()
 {
-    gStyle = rb_define_class_under(mGtk, "Style", rb_cData);
+    static RGObjClassInfo cinfo;
+    gStyle = rb_define_class_under(mGtk, "Style", rbgobj_cGObject);
 
-    rb_define_singleton_method(gStyle, "new", style_s_new, 0);
+    cinfo.klass = gStyle;
+    cinfo.gtype = GTK_TYPE_STYLE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
+
+    rb_define_method(gStyle, "initialize", style_initialize, 0);
     rb_define_method(gStyle, "copy", style_copy, 0);
     rb_define_method(gStyle, "clone", style_copy, 0);
     rb_define_method(gStyle, "dup", style_copy, 0);

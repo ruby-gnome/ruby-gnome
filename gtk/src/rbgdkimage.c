@@ -4,7 +4,7 @@
   rbgdkimage.c -
 
   $Author: mutoh $
-  $Date: 2002/05/23 17:26:21 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -73,7 +73,7 @@ static VALUE
 gdkimage_s_get(klass, win, x, y, w, h)
     VALUE klass, win, x, y, w, h;
 {
-    return make_gdkimage(gdk_image_get(get_gdkdrawable(win),
+    return make_gdkimage(gdk_image_get(GDK_DRAWABLE(RVAL2GOBJ(win)),
                          NUM2INT(x), NUM2INT(y),
                          NUM2INT(w), NUM2INT(h)));
 }

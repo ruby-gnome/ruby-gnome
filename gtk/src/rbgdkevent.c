@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,7 +50,7 @@ static VALUE
 gdkevent_s_get_graphics_expose(self, window)
     VALUE self, window;
 {
-    return make_gdkevent(gdk_event_get_graphics_expose(get_gdkwindow(window)));
+    return make_gdkevent(gdk_event_get_graphics_expose(GDK_WINDOW(RVAL2GOBJ(window))));
 }
 
 /* GdkEvent */
@@ -88,7 +88,7 @@ static VALUE
 gdkeventany_window(self)
     VALUE self;
 {
-    return make_gdkwindow(get_gdkevent(self)->any.window);
+    return GOBJ2RVAL(get_gdkevent(self)->any.window);
 }
 
 static VALUE
@@ -248,7 +248,7 @@ static VALUE
 gdkeventcrossing_subwindow(self)
     VALUE self;
 {
-    return make_gdkwindow(get_gdkevent(self)->crossing.subwindow);
+    return GOBJ2RVAL(get_gdkevent(self)->crossing.subwindow);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtkseparator.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,7 +15,7 @@
 
 void Init_gtk_separator()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gSeparator = rb_define_class_under(mGtk, "Separator", gWidget);
     cinfo.klass = gSeparator;

@@ -61,7 +61,7 @@ fs_set_preview_text(self, text)
 
 void Init_gtk_font_selection()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gFontSelection = rb_define_class_under(mGtk, "FontSelection", gNotebook);
     cinfo.klass = gFontSelection;

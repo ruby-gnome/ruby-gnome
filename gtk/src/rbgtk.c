@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -127,15 +127,11 @@ VALUE gTreeItem;
 
 VALUE mRC;
 
-static st_table *gtk_object_list;
-static VALUE gtk_object_list_v;
-static VALUE gtk_type_hash;
-
 ID id_call;
 
 void
 rbgtk_register_class(cinfo)
-    rbgtk_class_info *cinfo;
+    RGObjClassInfo *cinfo;
 {
     rbgobj_register_class(cinfo);
 }
@@ -157,92 +153,20 @@ add_relative(obj, relative)
     rbgobj_add_relative(obj, relative);
 }
 
-void add_relative_removable(obj, relative, obj_ivar_id, hash_key)
+void 
+add_relative_removable(obj, relative, obj_ivar_id, hash_key)
 	VALUE obj, relative, hash_key;
 	ID    obj_ivar_id;
 {
     rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key);
 }
 
-void remove_relative(obj, obj_ivar_id, hash_key)
+void 
+remove_relative(obj, obj_ivar_id, hash_key)
 	VALUE obj, hash_key;
 	ID    obj_ivar_id;
 {
     rbgobj_remove_relative(obj, obj_ivar_id, hash_key);
-}
-
-VALUE
-make_gstyle(style)
-    GtkStyle *style;
-{
-    gtk_style_ref(style);
-    return Data_Wrap_Struct(gStyle, 0, gtk_style_unref, style);
-}
-
-GtkStyle*
-get_gstyle(style)
-    VALUE style;
-{
-    GtkStyle *gstyle;
-
-    if (NIL_P(style)) return NULL;
-    if (!rb_obj_is_instance_of(style, gStyle)) {
-		rb_raise(rb_eTypeError, "not a GtkStyle");
-    }
-    Data_Get_Struct(style, GtkStyle, gstyle);
-
-    return gstyle;
-}
-
-#if !defined _WIN32
-VALUE
-make_grcstyle(style)
-    GtkRcStyle *style;
-{
-    gtk_rc_style_ref(style);
-    return Data_Wrap_Struct(gRcStyle, 0, gtk_rc_style_unref, style);
-}
-#endif
-
-GtkRcStyle*
-get_grcstyle(style)
-    VALUE style;
-{
-    GtkRcStyle *gstyle;
-
-    if (NIL_P(style)) return NULL;
-    if (!rb_obj_is_instance_of(style, gRcStyle)) {
-		rb_raise(rb_eTypeError, "not a GtkRcStyle");
-    }
-    Data_Get_Struct(style, GtkRcStyle, gstyle);
-
-    return gstyle;
-}
-
-VALUE
-make_gtkaccelgrp(accel)
-    GtkAccelGroup *accel;
-{
-    gtk_accel_group_ref(accel);
-    return Data_Wrap_Struct(gAccelGroup,
-                            0,
-                            gtk_accel_group_unref,
-							accel);
-}
-
-GtkAccelGroup*
-get_gtkaccelgrp(value)
-    VALUE value;
-{
-    GtkAccelGroup *accel;
-
-    if (NIL_P(value)) return NULL;
-    if (!rb_obj_is_instance_of(value, gAccelGroup)) {
-        rb_raise(rb_eTypeError, "not a GtkAccelGroup");
-    }
-    Data_Get_Struct(value, GtkAccelGroup, accel);
-
-    return accel;
 }
 
 VALUE
@@ -297,8 +221,7 @@ exec_callback(widget, proc)
     GtkWidget *widget;
     gpointer proc;
 {
-    rb_funcall((VALUE)proc, id_call, 1,
-			   GOBJ2RVAL(GTK_OBJECT(widget)));
+    rb_funcall((VALUE)proc, id_call, 1, GOBJ2RVAL(widget));
 }
 
 /* 
@@ -552,16 +475,6 @@ idle()
  */
 void Init_gtk_gtk()
 {
-    gtk_object_list_v = Qnil;
-    rb_global_variable(&gtk_object_list_v);
-    gtk_object_list = st_init_numtable();
-    gtk_object_list_v = Data_Wrap_Struct(rb_cObject,
-                                         rb_mark_tbl, st_free_table,
-                                         gtk_object_list);
-    rb_global_variable(&gtk_type_hash);
-    gtk_type_hash = rb_hash_new();
-
-    /* IDs */
     id_call = rb_intern("call");
 
     mGtk = rb_define_module("Gtk");

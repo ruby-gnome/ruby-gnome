@@ -4,7 +4,7 @@
   rbgtktipsquery.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -60,7 +60,7 @@ tipsquery_set_labels(self, label_inactive, label_no_tip)
 
 void Init_gtk_tips_query()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gTipsQuery = rb_define_class_under(mGtk, "TipsQuery", gLabel);
     cinfo.klass = gTipsQuery;

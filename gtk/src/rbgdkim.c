@@ -4,7 +4,7 @@
   rbgdkim.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:02 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,7 @@ static VALUE
 gdkim_m_begin(self, ic, window)
      VALUE self, ic, window;
 {
-    gdk_im_begin(get_gdkic(ic), get_gdkwindow(window));
+    gdk_im_begin(get_gdkic(ic), GDK_WINDOW(RVAL2GOBJ(window)));
     return Qnil;
 }
 
@@ -150,14 +150,14 @@ gdkicattr_client_window(self)
      VALUE self;
 {
     GdkWindow *win = get_gdkicattr(self)->client_window;
-    return make_gdkwindow(win);
+    return GOBJ2RVAL(win);
 }
 
 static VALUE
 gdkicattr_set_client_window(self, win)
      VALUE self, win;
 {
-    get_gdkicattr(self)->client_window = get_gdkwindow(win);
+    get_gdkicattr(self)->client_window = GDK_WINDOW(RVAL2GOBJ(win));
     return self;
 }
 
@@ -166,14 +166,14 @@ gdkicattr_focus_window(self)
      VALUE self;
 {
     GdkWindow *win = get_gdkicattr(self)->focus_window;
-    return make_gdkwindow(win);
+    return GOBJ2RVAL(win);
 }
 
 static VALUE
 gdkicattr_set_focus_window(self, win)
      VALUE self, win;
 {
-    get_gdkicattr(self)->focus_window = get_gdkwindow(win);
+    get_gdkicattr(self)->focus_window = GDK_WINDOW(RVAL2GOBJ(win));
     return self;
 }
 

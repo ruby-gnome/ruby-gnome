@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -91,7 +91,7 @@ colorsel_get_color(self)
 
 void Init_gtk_color_selection()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gColorSel = rb_define_class_under(mGtk, "ColorSelection", gVBox);
     cinfo.klass = gColorSel;
@@ -183,7 +183,7 @@ cdialog_get_help_button(self)
 
 void Init_gtk_color_selection_dialog()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gColorSelDialog = rb_define_class_under(mGtk, "ColorSelectionDialog", gWindow);
     cinfo.klass = gColorSelDialog;

@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -285,8 +285,8 @@ clist_set_pixmap(self, row, col, pixmap, mask)
 {
     gtk_clist_set_pixmap(GTK_CLIST(RVAL2GOBJ(self)),
 						 NUM2INT(row), NUM2INT(col),
-						 get_gdkpixmap(pixmap),
-						 (GdkBitmap*)get_gdkpixmap(mask));
+						 GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+						 GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -298,8 +298,8 @@ clist_set_pixtext(self, row, col, text, spacing, pixmap, mask)
 						  NUM2INT(row), NUM2INT(col),
 						  STR2CSTR(text),
 						  NUM2INT(spacing),
-						  get_gdkpixmap(pixmap),
-						  (GdkBitmap*)get_gdkpixmap(mask));
+						  GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+						  GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -327,7 +327,7 @@ clist_set_cell_style(self, row, column, style)
 {
     gtk_clist_set_cell_style(GTK_CLIST(RVAL2GOBJ(self)),
 							 NUM2INT(row), NUM2INT(column),
-							 get_gstyle(style));
+							 GTK_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -338,7 +338,7 @@ clist_get_cell_style(self, row, column)
     GtkStyle* style;
     style = gtk_clist_get_cell_style(GTK_CLIST(RVAL2GOBJ(self)),
 									 NUM2INT(row), NUM2INT(column));
-    return make_gstyle(style);
+    return GOBJ2RVAL(style);
 }
 
 static VALUE
@@ -346,7 +346,7 @@ clist_set_row_style(self, row, style)
     VALUE self, row, style;
 {
     gtk_clist_set_row_style(GTK_CLIST(RVAL2GOBJ(self)),
-							NUM2INT(row), get_gstyle(style));
+							NUM2INT(row), GTK_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -769,7 +769,7 @@ clist_find_row_from_data(self, data)
 
 void Init_gtk_clist()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gCList = rb_define_class_under(mGtk, "CList", gContainer);
     cinfo.klass = gCList;

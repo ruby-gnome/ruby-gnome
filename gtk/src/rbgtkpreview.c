@@ -4,7 +4,7 @@
   rbgtkpreview.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -33,7 +33,7 @@ static VALUE
 preview_put(self, win, gc, srcx, srcy, dstx, dsty, w, h)
     VALUE self, win, gc, srcx, srcy, dstx, dsty, w, h;
 {
-    gtk_preview_put(GTK_PREVIEW(RVAL2GOBJ(self)), get_gdkwindow(win),
+    gtk_preview_put(GTK_PREVIEW(RVAL2GOBJ(self)), GDK_WINDOW(RVAL2GOBJ(win)),
 		    get_gdkgc(gc),
 		    NUM2INT(srcx), NUM2INT(srcy),
 		    NUM2INT(dstx), NUM2INT(dsty),
@@ -128,7 +128,7 @@ preview_get_info(self)
 
 void Init_gtk_preview()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gPreview = rb_define_class_under(mGtk, "Preview", gWidget);
     cinfo.klass = gPreview;

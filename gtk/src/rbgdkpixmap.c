@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:10 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,31 +19,24 @@
 VALUE gdkPixmap;
 
 static VALUE
-gdkpmap_s_new(self, win, w, h, depth)
+gdkpmap_initialize(self, win, w, h, depth)
     VALUE self, win, w, h, depth;
 {
-    GdkPixmap *new;
-    GdkWindow *window = get_gdkwindow(win);
-
-    new = gdk_pixmap_new(window, NUM2INT(w), NUM2INT(h), NUM2INT(depth));
-    return new_gdkpixmap(new);
+	RBGTK_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
+										  NUM2INT(w), NUM2INT(h), 
+										  NUM2INT(depth)));
+	return Qnil;
 }
 
 static VALUE
 gdkpmap_create_from_data(self, win, data, w, h, depth, fg, bg)
     VALUE self, win, data, w, h, depth, fg, bg;
 {
-    GdkPixmap *new;
-    GdkWindow *window = get_gdkwindow(win);
-
     Check_Type(data, T_STRING);
-    new = gdk_pixmap_create_from_data(window,
+    return GOBJ2RVAL(gdk_pixmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
 				      RSTRING(data)->ptr,
-				      NUM2INT(w), NUM2INT(h),
-				      NUM2INT(depth),
-				      get_gdkcolor(fg),
-				      get_gdkcolor(bg));
-    return new_gdkpixmap(new);
+				      NUM2INT(w), NUM2INT(h), NUM2INT(depth),
+				      get_gdkcolor(fg), get_gdkcolor(bg)));
 }
 
 static VALUE
@@ -52,16 +45,13 @@ gdkpmap_create_from_xpm(self, win, tcolor, fname)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
-    GdkWindow *window = get_gdkwindow(win);
 
-    new = gdk_pixmap_create_from_xpm(window, &mask,
-				     get_gdkcolor(tcolor),
-				     STR2CSTR(fname));
+    new = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), &mask,
+				     get_gdkcolor(tcolor), STR2CSTR(fname));
     if (!new) {
-	rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
+		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
     }
-    return rb_assoc_new(new_gdkpixmap(new),
-			new_gdkbitmap(mask));
+    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
 
 static VALUE
@@ -70,22 +60,18 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
-    GdkWindow *window = get_gdkwindow(win);
     int i;
     gchar **buf;
 
     Check_Type(data, T_ARRAY);
     buf = ALLOCA_N(char*, RARRAY(data)->len);
-    for (i=0; i<RARRAY(data)->len; i++) {
-	buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
+    for (i=0; i < RARRAY(data)->len; i++) {
+		buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
     }
+    new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)), 
+									   &mask, get_gdkcolor(tcolor), buf);
 
-    new = gdk_pixmap_create_from_xpm_d(window, &mask,
-				       get_gdkcolor(tcolor),
-				       buf);
-
-    return rb_assoc_new(new_gdkpixmap(new),
-			new_gdkbitmap(mask));
+    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
 
 static VALUE
@@ -94,18 +80,16 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
-    GdkWindow *window = get_gdkwindow(win);
 
-    new = gdk_pixmap_colormap_create_from_xpm(window, 
+    new = gdk_pixmap_colormap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), 
 					      get_gdkcmap(colormap),
 					      &mask,
 					      get_gdkcolor(tcolor),
 					      STR2CSTR(fname));
     if (!new) {
-	rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
+		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
     }
-    return rb_assoc_new(new_gdkpixmap(new),
-			new_gdkbitmap(mask));
+    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
 
 static VALUE
@@ -114,7 +98,6 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
-    GdkWindow *window = get_gdkwindow(win);
     int i;
     gchar **buf;
 
@@ -124,14 +107,12 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 	buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
     }
 
-    new = gdk_pixmap_colormap_create_from_xpm_d(window,
+    new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
 						get_gdkcmap(colormap),
 						&mask,
 						get_gdkcolor(tcolor),
 						buf);
-
-    return rb_assoc_new(new_gdkpixmap(new),
-			new_gdkbitmap(mask));
+    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
 
 
@@ -142,28 +123,22 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 VALUE gdkBitmap;
 
 static VALUE
-gdkbmap_s_new(self, win, w, h)
+gdkbmap_initialize(self, win, w, h)
     VALUE self, win, w, h;
 {
-    GdkPixmap *new;
-    GdkWindow *window = get_gdkwindow(win);
-
-    new = gdk_pixmap_new(window, NUM2INT(w), NUM2INT(h), 1);
-    return new_gdkbitmap(new);
+	RBGTK_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
+										  NUM2INT(w), NUM2INT(h), 1));
+	return Qnil;
 }
 
 static VALUE
 gdkbmap_create_from_data(self, win, data, w, h)
     VALUE self, win, data, w, h;
 {
-    GdkBitmap *new;
-    GdkWindow *window = get_gdkwindow(win);
-
     Check_Type(data, T_STRING);
-    new = gdk_bitmap_create_from_data(window,
-				      RSTRING(data)->ptr,
-				      NUM2INT(w), NUM2INT(h));
-    return new_gdkbitmap(new);
+    return GOBJ2RVAL(gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
+												 RSTRING(data)->ptr,
+												 NUM2INT(w), NUM2INT(h)));
 }
 
 #ifdef HAVE_XREADBITMAPFILEDATA
@@ -172,7 +147,6 @@ gdkbmap_create_from_xbm(self, win, fname)
     VALUE self, win, fname;
 {
     GdkBitmap *new;
-    GdkWindow *window = get_gdkwindow(win);
     unsigned char *data;
     unsigned int width, height;
     int x, y;
@@ -180,9 +154,11 @@ gdkbmap_create_from_xbm(self, win, fname)
     Check_Type(fname, T_STRING);
     if (XReadBitmapFileData(STR2CSTR(fname), &width, &height, &data, &x, &y))
         rb_raise(rb_eArgError, "Bitmap not created from %s", STR2CSTR(fname));
-    new = gdk_bitmap_create_from_data(window, data, width, height);
+
+    new = gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)), 
+									  data, width, height);
     XFree(data);
-    return new_gdkbitmap(new);
+    return GOBJ2RVAL(new);
 }
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
@@ -190,12 +166,21 @@ gdkbmap_create_from_xbm(self, win, fname)
 void
 Init_gtk_gdk_pixmap()
 {
+    static RGObjClassInfo cinfo_pixmap;
+    static RGObjClassInfo cinfo_bitmap;
+
     /* 
      * GdkPixmap
      */
     gdkPixmap = rb_define_class_under(mGdk, "Pixmap", gdkDrawable);
 
-    rb_define_singleton_method(gdkPixmap, "new", gdkpmap_s_new, 4);
+    cinfo_pixmap.klass = gdkPixmap;
+    cinfo_pixmap.gtype = GDK_TYPE_PIXMAP;
+    cinfo_pixmap.mark = 0;
+    cinfo_pixmap.free = 0;
+    rbgtk_register_class(&cinfo_pixmap);
+
+    rb_define_method(gdkPixmap, "initialize", gdkpmap_initialize, 4);
     rb_define_singleton_method(gdkPixmap, "create_from_data",
 			       gdkpmap_create_from_data, 7);
     rb_define_singleton_method(gdkPixmap, "create_from_xpm",
@@ -207,12 +192,20 @@ Init_gtk_gdk_pixmap()
     rb_define_singleton_method(gdkPixmap, "colormap_create_from_xpm_d",
 			       gdkpmap_colormap_create_from_xpm_d, 4);
 
+    rb_define_method(gdkPixmap, "initialize", gdkpmap_initialize, 4);
+
     /*
      * GdkBitmap
      */
     gdkBitmap = rb_define_class_under(mGdk, "Bitmap", gdkPixmap);
 
-    rb_define_singleton_method(gdkBitmap, "new", gdkbmap_s_new, 3);
+    cinfo_bitmap.klass = gdkBitmap;
+    cinfo_bitmap.gtype = GDK_TYPE_PIXMAP;
+    cinfo_bitmap.mark = 0;
+    cinfo_bitmap.free = 0;
+    rbgtk_register_class(&cinfo_bitmap);
+
+    rb_define_method(gdkBitmap, "initialize", gdkbmap_initialize, 3);
     rb_define_singleton_method(gdkBitmap, "create_from_data",
 			       gdkbmap_create_from_data, 4);
 #ifdef HAVE_XREADBITMAPFILEDATA

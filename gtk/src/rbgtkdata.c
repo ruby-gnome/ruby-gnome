@@ -4,7 +4,7 @@
   rbgtkdata.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -104,7 +104,7 @@ adj_get_page_size(self)
 
 void Init_gtk_adjustment()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gAdjustment = rb_define_class_under(mGtk, "Adjustment", gData);
     cinfo.klass = gAdjustment;
@@ -176,7 +176,7 @@ ttips_disable(self)
 
 void Init_gtk_tooltips()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gTooltips = rb_define_class_under(mGtk, "Tooltips", gData);
     cinfo.klass = gTooltips;

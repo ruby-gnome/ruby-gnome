@@ -4,7 +4,7 @@
   rbgtkviewport.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -77,7 +77,7 @@ vport_set_shadow(self, type)
 
 void Init_gtk_viewport()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gViewport = rb_define_class_under(mGtk, "Viewport", gBin);
     cinfo.klass = gViewport;

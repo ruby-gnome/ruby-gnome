@@ -4,7 +4,7 @@
   rbgtklayout.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -113,13 +113,13 @@ static VALUE
 layout_get_bin_window(self)
     VALUE self;
 {
-    return make_gdkwindow(GTK_LAYOUT(RVAL2GOBJ(self))->bin_window);
+    return GOBJ2RVAL(GTK_LAYOUT(RVAL2GOBJ(self))->bin_window);
 }
 
 void
 Init_gtk_layout()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gLayout = rb_define_class_under(mGtk, "Layout", gContainer);
     cinfo.klass = gLayout;

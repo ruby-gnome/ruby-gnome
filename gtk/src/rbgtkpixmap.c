@@ -4,7 +4,7 @@
   rbgtkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,29 +16,22 @@
 #include "global.h"
 
 static VALUE
-pixmap_initialize(self, val, mask)
-    VALUE self, val, mask;
+pixmap_initialize(self, pixmap, mask)
+    VALUE self, pixmap, mask;
 {
-    GdkPixmap *pixdata;
-    GdkBitmap *maskdata;
-
-    pixdata = get_gdkpixmap(val);
-    maskdata = get_gdkbitmap(mask);
-    RBGTK_INITIALIZE(self, gtk_pixmap_new(pixdata, maskdata));
+    RBGTK_INITIALIZE(self, gtk_pixmap_new(GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+										  GDK_BITMAP(RVAL2GOBJ(mask))));
     return Qnil;
 }
 
 static VALUE
-pixmap_set(self, val, mask)
-    VALUE self, val, mask;
+pixmap_set(self, pixmap, mask)
+    VALUE self, pixmap, mask;
 {
-    GdkPixmap *pixdata;
-    GdkBitmap *maskdata;
-
-    pixdata = get_gdkpixmap(val);
-    maskdata = get_gdkbitmap(mask);
-    gtk_pixmap_set(GTK_PIXMAP(RVAL2GOBJ(self)), pixdata, maskdata);
-    return self;
+    gtk_pixmap_set(GTK_PIXMAP(RVAL2GOBJ(self)), 
+				   GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+				   GDK_BITMAP(RVAL2GOBJ(mask)));
+	return self;
 }
 
 static VALUE
@@ -49,14 +42,12 @@ pixmap_get(self)
     GdkBitmap *mask;
 
     gtk_pixmap_get(GTK_PIXMAP(RVAL2GOBJ(self)), &val, &mask);
-
-    return rb_assoc_new(make_gdkpixmap(val),
-			make_gdkbitmap(mask));
+	return rb_assoc_new(GOBJ2RVAL(val),GOBJ2RVAL(mask));
 }
 
 void Init_gtk_pixmap()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gPixmap = rb_define_class_under(mGtk, "Pixmap", gMisc);
     cinfo.klass = gPixmap;

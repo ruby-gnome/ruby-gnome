@@ -4,7 +4,7 @@
   rbgtkcheckbutton.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -35,7 +35,7 @@ cbtn_initialize(argc, argv, self)
 
 void Init_gtk_check_button()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gCButton = rb_define_class_under(mGtk, "CheckButton", gTButton);
     cinfo.klass = gCButton;

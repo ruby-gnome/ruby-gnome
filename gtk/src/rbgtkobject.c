@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -85,7 +85,7 @@ arg_set_value(arg, value)
 #endif
 #ifdef GTK_TYPE_GDK_PIXMAP
 		else if (arg->type == GTK_TYPE_GDK_PIXMAP)
-			GTK_VALUE_BOXED(*arg) = get_gdkpixmap(value);
+			GTK_VALUE_BOXED(*arg) = GDK_PIXMAP(RVAL2GOBJ(value));
 #endif
 #ifdef GTK_TYPE_GDK_VISUAL
 		else if (arg->type == GTK_TYPE_GDK_VISUAL)
@@ -93,7 +93,7 @@ arg_set_value(arg, value)
 #endif
 #ifdef GTK_TYPE_ACCEL_GROUP
         else if (arg->type == GTK_TYPE_ACCEL_GROUP)
-			GTK_VALUE_BOXED(*arg) = get_gtkaccelgrp(value);
+			GTK_VALUE_BOXED(*arg) = RVAL2GOBJ(value);
 #endif
 #ifdef GTK_TYPE_ACCELERATOR_TABLE
 		else if (arg->type == GTK_TYPE_ACCELERATOR_TABLE)
@@ -101,7 +101,7 @@ arg_set_value(arg, value)
 #endif
 #ifdef GTK_TYPE_STYLE
 		else if (arg->type == GTK_TYPE_STYLE)
-			GTK_VALUE_BOXED(*arg) = get_gstyle(value);
+			GTK_VALUE_BOXED(*arg) = RVAL2GOBJ(value);
 #endif
 #ifdef GTK_TYPE_TOOLTIPS
 		else if (arg->type == GTK_TYPE_TOOLTIPS)
@@ -383,7 +383,7 @@ gobj_get_gtk_type(self)
 
 void Init_gtk_object()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gObject = rb_define_class_under(mGtk, "Object", rbgobj_cGObject);
     cinfo.klass = gObject;

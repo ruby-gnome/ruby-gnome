@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -142,7 +142,7 @@ widget_add_accel(self, sig, accel, key, mod, flag)
 {
     gtk_widget_add_accelerator(_SELF(self),
                                STR2CSTR(sig),
-                               get_gtkaccelgrp(accel),
+                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
                                NUM2INT(key),
                                NUM2INT(mod),
                                NUM2INT(flag));
@@ -154,7 +154,7 @@ widget_rm_accel(self, accel, key, mod)
     VALUE self, accel, key, mod;
 {
     gtk_widget_remove_accelerator(_SELF(self),
-                                  get_gtkaccelgrp(accel),
+                                  GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
                                   NUM2INT(key),
                                   NUM2INT(mod));
     return self;
@@ -219,7 +219,7 @@ static VALUE
 widget_set_style(self, style)
     VALUE self, style;
 {
-    gtk_widget_set_style(_SELF(self), get_gstyle(style));
+    gtk_widget_set_style(_SELF(self), GTK_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -315,7 +315,7 @@ static VALUE
 widget_window(self)
     VALUE self;
 {
-    return make_gdkwindow(_SELF(self)->window);
+    return GOBJ2RVAL(_SELF(self)->window);
 }
 
 static VALUE
@@ -357,7 +357,7 @@ static VALUE
 widget_get_style(self)
     VALUE self;
 {
-    return make_gstyle(gtk_widget_get_style(_SELF(self)));
+    return GOBJ2RVAL(gtk_widget_get_style(_SELF(self)));
 }
 
 static VALUE
@@ -488,7 +488,7 @@ static VALUE
 widget_get_default_style(self)
     VALUE self;
 {
-    return make_gstyle(gtk_widget_get_default_style());
+    return GOBJ2RVAL(gtk_widget_get_default_style());
 }
 
 static VALUE
@@ -496,7 +496,7 @@ widget_shape_combine_mask(self, shape_mask, offset_x, offset_y)
     VALUE self, shape_mask, offset_x, offset_y;
 {
     gtk_widget_shape_combine_mask(_SELF(self),
-                                  get_gdkbitmap(shape_mask),
+								  GDK_BITMAP(RVAL2GOBJ(shape_mask)),
                                   NUM2INT(offset_x),
                                   NUM2INT(offset_y));
     return self;
@@ -621,7 +621,7 @@ widget_modify_style(self, style)
     VALUE self, style;
 {
     gtk_widget_modify_style(_SELF(self),
-                            get_grcstyle(style));
+                            GTK_RC_STYLE(RVAL2GOBJ(style)));
     return self;
 }
 
@@ -751,7 +751,8 @@ static VALUE
 widget_drag_dest_set_proxy(self, proxy_window, protocol, use_coordinates)
     VALUE self, proxy_window, protocol, use_coordinates;
 {
-    gtk_drag_dest_set_proxy(_SELF(self), get_gdkwindow(proxy_window),
+    gtk_drag_dest_set_proxy(_SELF(self), 
+							GDK_WINDOW(RVAL2GOBJ(proxy_window)),
 							NUM2INT(protocol), RTEST(use_coordinates)); 
     return self;
 }
@@ -780,7 +781,8 @@ widget_drag_source_set_icon(self, colormap, pixmap, mask)
     VALUE self, colormap, pixmap, mask;
 {
     gtk_drag_source_set_icon(_SELF(self), get_gdkcmap(colormap),
-                             get_gdkpixmap(pixmap), get_gdkbitmap(mask));
+                             GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
+							 GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -903,7 +905,7 @@ DEFINE_EVENT_FUNC(button_press_event, button)
 
 	void Init_gtk_widget()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gWidget = rb_define_class_under(mGtk, "Widget", gObject);
     cinfo.klass = gWidget;

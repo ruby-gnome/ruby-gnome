@@ -4,7 +4,7 @@
   rbgtkaspectframe.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,7 +37,7 @@ aframe_set(self, xalign, yalign, ratio, obey_child)
 
 void Init_gtk_aspect_frame()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gAspectFrame = rb_define_class_under(mGtk, "AspectFrame", gFrame);
     cinfo.klass = gAspectFrame;

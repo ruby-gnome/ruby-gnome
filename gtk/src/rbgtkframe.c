@@ -4,7 +4,7 @@
   rbgtkframe.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -55,7 +55,7 @@ frame_set_shadow_type(self, type)
 
 void Init_gtk_frame()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gFrame = rb_define_class_under(mGtk, "Frame", gBin);
     cinfo.klass = gBin;

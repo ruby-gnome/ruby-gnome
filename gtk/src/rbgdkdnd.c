@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/05/21 17:32:25 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 2002 MUTOH Masao
 ************************************************/
@@ -32,14 +32,14 @@ static VALUE
 gdkdragcontext_source_window(self)
     VALUE self;
 {
-    return make_gdkwindow(get_gdkdragcontext(self)->source_window);
+    return GOBJ2RVAL(get_gdkdragcontext(self)->source_window);
 }
 
 static VALUE
 gdkdragcontext_dest_window(self)
     VALUE self;
 {
-    return make_gdkwindow(get_gdkdragcontext(self)->dest_window);
+    return GOBJ2RVAL(get_gdkdragcontext(self)->dest_window);
 }
 
 static VALUE
@@ -138,12 +138,12 @@ gdkdragcontext_find_window(self, drag_window, x_root, y_root, protocol)
     GdkWindow *dest_window;
     int prot = NUM2INT(protocol);
     gdk_drag_find_window(get_gdkdragcontext(self),
-                         get_gdkwindow(drag_window), 
+                         GDK_WINDOW(RVAL2GOBJ(drag_window)), 
                          NUM2INT(x_root),
                          NUM2INT(y_root),
                          &dest_window, 
                          (GdkDragProtocol*)&prot);
-    return make_gdkwindow(dest_window);
+    return GOBJ2RVAL(dest_window);
 }
 
 static VALUE
@@ -152,7 +152,8 @@ gdkdragcontext_motion(self, dest_window, protocol, x_root, y_root,
     VALUE self, dest_window, protocol, x_root, y_root, 
   		  suggested_action, possible_actions, time;
 {
-    gboolean ret = gdk_drag_motion(get_gdkdragcontext(self), get_gdkwindow(dest_window), 
+    gboolean ret = gdk_drag_motion(get_gdkdragcontext(self), 
+								   GDK_WINDOW(RVAL2GOBJ(dest_window)), 
                                    NUM2INT(protocol), NUM2INT(x_root), NUM2INT(y_root), 
                                    NUM2INT(suggested_action), NUM2INT(possible_actions), 
                                    NUM2INT(time));

@@ -4,7 +4,7 @@
   rbgtkcheckmenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -77,7 +77,7 @@ cmitem_toggled(self)
 
 void Init_gtk_check_menu_item()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gCMenuItem = rb_define_class_under(mGtk, "CheckMenuItem", gMenuItem);
     cinfo.klass = gCMenuItem;

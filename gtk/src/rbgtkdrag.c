@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 2002 MUTOH Masao
 ************************************************/
@@ -55,8 +55,10 @@ gtkdrag_set_icon_pixmap(self, context, colormap, pixmap, mask, hot_x, hot_y)
     VALUE self, context, colormap, pixmap, mask, hot_x, hot_y;
 {
     gtk_drag_set_icon_pixmap(get_gdkdragcontext(context), 
-							 get_gdkcmap(colormap), get_gdkpixmap(pixmap),
-							 get_gdkbitmap(mask), NUM2INT(hot_x), NUM2INT(hot_y));
+							 get_gdkcmap(colormap), 
+							 GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+							 GDK_BITMAP(RVAL2GOBJ(mask)), 
+							 NUM2INT(hot_x), NUM2INT(hot_y));
     return Qnil;
 }
 

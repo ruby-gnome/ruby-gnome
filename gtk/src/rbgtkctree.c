@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -37,23 +37,31 @@ ctree_mark(ctree)
         gtk_ctree_pre_recursive(ctree, NULL, ctree_node_mark, NULL);
 }
 
-VALUE
-make_ctree_node(node)
-    GtkCTreeNode* node;
-{
-    if (!node) return Qnil;
-    return Data_Wrap_Struct(gCTreeNode, 0, 0, node);
-}
-
 static GtkCTreeNode*
 get_ctree_node(node)
-     VALUE node;
+	VALUE node;
 {
     GtkCTreeNode* c_node;
 
     if (NIL_P(node)) return NULL;
     Data_Get_Struct(node, GtkCTreeNode, c_node);
     return c_node;
+}
+
+VALUE
+_ctree_node_to_ruby(node)
+    GtkCTreeNode* node;
+{
+    if (!node) return Qnil;
+    return Data_Wrap_Struct(gCTreeNode, 0, 0, node);
+}
+
+static void
+_ctree_node_from_ruby(from, to)
+	VALUE from;
+	GValue* to;
+{
+	g_value_set_object(to, G_OBJECT(get_ctree_node(from)));
 }
 
 /*
@@ -68,7 +76,7 @@ get_ctree_node(node)
  */
 static VALUE
 ctree_initialize(self, titles, tree_column)
-     VALUE self, titles, tree_column;
+	VALUE self, titles, tree_column;
 {
     GtkWidget *widget;
 
@@ -113,9 +121,9 @@ ctree_initialize(self, titles, tree_column)
  */
 static VALUE
 ctree_insert_node(self, parent, sibling, texts, spacing,
-          pixmap_closed, mask_closed,
-          pixmap_opened, mask_opened,
-          is_leaf, expanded)
+				  pixmap_closed, mask_closed,
+				  pixmap_opened, mask_opened,
+				  is_leaf, expanded)
     VALUE self, parent, sibling, texts, spacing;
     VALUE pixmap_closed, mask_closed;
     VALUE pixmap_opened, mask_opened;
@@ -139,13 +147,13 @@ ctree_insert_node(self, parent, sibling, texts, spacing,
     result = gtk_ctree_insert_node(GTK_CTREE(RVAL2GOBJ(self)),
                                    c_parent, c_sibling, c_texts,
                                    NUM2INT(spacing),
-                                   get_gdkpixmap(pixmap_closed),
-                                   get_gdkbitmap(mask_closed),
-                                   get_gdkpixmap(pixmap_opened),
-                                   get_gdkbitmap(mask_opened),
+                                   GDK_PIXMAP(RVAL2GOBJ(pixmap_closed)),
+                                   GDK_BITMAP(RVAL2GOBJ(mask_closed)),
+                                   GDK_PIXMAP(RVAL2GOBJ(pixmap_opened)),
+                                   GDK_BITMAP(RVAL2GOBJ(mask_opened)),
                                    RTEST(is_leaf),
                                    RTEST(expanded));
-    return make_ctree_node(result);
+    return GVAL2RVAL(result);
 }
 
 /*
@@ -158,7 +166,7 @@ ctree_insert_node(self, parent, sibling, texts, spacing,
  */
 static VALUE
 ctree_remove_node(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gtk_ctree_remove_node(GTK_CTREE(RVAL2GOBJ(self)), get_ctree_node(node));
     return self;
@@ -166,7 +174,7 @@ ctree_remove_node(self, node)
 
 static VALUE
 ctree_insert_gnode(self, parent, sibling, gnode, func, data)
-     VALUE self, parent, sibling, gnode, func, data;
+	VALUE self, parent, sibling, gnode, func, data;
 {
     /* TODO */
     rb_notimplement();
@@ -175,7 +183,7 @@ ctree_insert_gnode(self, parent, sibling, gnode, func, data)
 
 static VALUE
 ctree_export_to_gnode(self, parent, sibling, gnode, func, data)
-     VALUE self, parent, sibling, gnode, func, data;
+	VALUE self, parent, sibling, gnode, func, data;
 {
     /* TODO */
     rb_notimplement();
@@ -211,7 +219,7 @@ ctree_post_recursive(self, node)
 
     while (c_node) {
         tmp = GTK_CTREE_ROW(c_node)->sibling;
-        ctree_post_recursive(self, make_ctree_node(c_node));
+        ctree_post_recursive(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)));
         c_node = tmp;
     }
 
@@ -261,7 +269,7 @@ ctree_post_recursive_to_depth(self, node, depth)
     if (c_node && GTK_CTREE_ROW(c_node)->level <= c_depth) {
         while (c_node) {
             tmp = GTK_CTREE_ROW(c_node)->sibling;
-            ctree_post_recursive_to_depth(self, make_ctree_node(c_node), depth);
+            ctree_post_recursive_to_depth(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)), depth);
             c_node = tmp;
         }
     }
@@ -302,7 +310,7 @@ ctree_pre_recursive(self, node)
 
     while (c_node) {
         tmp = GTK_CTREE_ROW(c_node)->sibling;
-        ctree_pre_recursive(self, make_ctree_node(c_node));
+        ctree_pre_recursive(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)));
         c_node = tmp;
     }
 
@@ -350,7 +358,7 @@ ctree_pre_recursive_to_depth(self, node, depth)
     if (c_node && GTK_CTREE_ROW(c_node)->level <= c_depth) {
         while (c_node) {
             tmp = GTK_CTREE_ROW(c_node)->sibling;
-            ctree_pre_recursive_to_depth(self, make_ctree_node(c_node), depth);
+            ctree_pre_recursive_to_depth(self, GTK_CTREE_NODE(GVAL2RVAL(c_node)), depth);
             c_node = tmp;
         }
     }
@@ -386,11 +394,10 @@ ctree_is_viewable_p(self, node)
  */
 static VALUE
 ctree_last(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
-    GtkCTreeNode* result = gtk_ctree_last(GTK_CTREE(RVAL2GOBJ(self)),
-                                          get_ctree_node(node));
-    return make_ctree_node(result);
+    return GVAL2RVAL(gtk_ctree_last(GTK_CTREE(RVAL2GOBJ(self)),
+									get_ctree_node(node)));
 }
 
 /*
@@ -404,7 +411,7 @@ ctree_last(self, node)
  */
 static VALUE
 ctree_find(self, node, child)
-     VALUE self, node, child;
+	VALUE self, node, child;
 {
     gboolean result = gtk_ctree_find(GTK_CTREE(RVAL2GOBJ(self)),
                                      get_ctree_node(node),
@@ -419,7 +426,7 @@ ctree_find(self, node, child)
  */
 static VALUE
 ctree_is_ancestor_p(self, node, child)
-     VALUE self, node, child;
+	VALUE self, node, child;
 {
     gboolean result = gtk_ctree_is_ancestor(GTK_CTREE(RVAL2GOBJ(self)),
                                             get_ctree_node(node),
@@ -443,15 +450,15 @@ ctree_is_ancestor_p(self, node, child)
  */
 static VALUE
 ctree_find_by_row_data(self, node, data)
-     VALUE self, node, data;
+	VALUE self, node, data;
 {
     GtkCTreeNode *result;
 
     result = gtk_ctree_find_by_row_data_custom(
-    GTK_CTREE(RVAL2GOBJ(self)), get_ctree_node(node),
-    data, ...);
+		GTK_CTREE(RVAL2GOBJ(self)), get_ctree_node(node),
+		data, ...);
 
-    return make_ctree_node(result);
+    return GVAL2RVAL(resulte);
 }
 
 /*
@@ -469,7 +476,7 @@ ctree_find_by_row_data(self, node, data)
  */
 static VALUE
 ctree_find_all_by_row_data(self, node, data)
-     VALUE self, node, data;
+	VALUE self, node, data;
 {
 }
 #endif /* 0 */
@@ -481,7 +488,7 @@ ctree_find_all_by_row_data(self, node, data)
  */
 static VALUE
 ctree_is_hot_spot_p(self, x, y)
-     VALUE self, x, y;
+	VALUE self, x, y;
 {
     gboolean result = gtk_ctree_is_hot_spot(GTK_CTREE(RVAL2GOBJ(self)),
                                             NUM2INT(x),
@@ -501,12 +508,12 @@ ctree_is_hot_spot_p(self, x, y)
  */
 static VALUE
 ctree_move(self, node, new_parent, new_sibling)
-     VALUE self, node, new_parent, new_sibling;
+	VALUE self, node, new_parent, new_sibling;
 {
     gtk_ctree_move(GTK_CTREE(RVAL2GOBJ(self)),
-           get_ctree_node(node),
-           get_ctree_node(new_parent),
-           get_ctree_node(new_sibling));
+				   get_ctree_node(node),
+				   get_ctree_node(new_parent),
+				   get_ctree_node(new_sibling));
     return self;
 }
 
@@ -622,7 +629,7 @@ ctree_collapse_to_depth(self, node, depth)
  */
 static VALUE
 ctree_toggle_expansion(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gtk_ctree_toggle_expansion(GTK_CTREE(RVAL2GOBJ(self)),
                                get_ctree_node(node));
@@ -636,7 +643,7 @@ ctree_toggle_expansion(self, node)
  */
 static VALUE
 ctree_toggle_expansion_recursive(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gtk_ctree_toggle_expansion_recursive(GTK_CTREE(RVAL2GOBJ(self)),
                                          get_ctree_node(node));
@@ -723,7 +730,7 @@ ctree_unselect_recursive(self, node)
  */
 static VALUE
 ctree_node_set_text(self, node, column, text)
-     VALUE self, node, column, text;
+	VALUE self, node, column, text;
 {
     gtk_ctree_node_set_text(GTK_CTREE(RVAL2GOBJ(self)),
                             get_ctree_node(node),
@@ -745,13 +752,13 @@ ctree_node_set_text(self, node, column, text)
  */
 static VALUE
 ctree_node_set_pixmap(self, node, column, pixmap, mask)
-     VALUE self, node, column, pixmap, mask;
+	VALUE self, node, column, pixmap, mask;
 {
     gtk_ctree_node_set_pixmap(GTK_CTREE(RVAL2GOBJ(self)),
                               get_ctree_node(node),
                               NUM2INT(column),
-                              get_gdkpixmap(pixmap),
-                              get_gdkbitmap(mask));
+							  GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+							  GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -770,15 +777,15 @@ ctree_node_set_pixmap(self, node, column, pixmap, mask)
  */
 static VALUE
 ctree_node_set_pixtext(self, node, column, text, spacing, pixmap, mask)
-     VALUE self, node, column, text, spacing, pixmap, mask;
+	VALUE self, node, column, text, spacing, pixmap, mask;
 {
     gtk_ctree_node_set_pixtext(GTK_CTREE(RVAL2GOBJ(self)),
                                get_ctree_node(node),
                                NUM2INT(column),
                                STR2CSTR(text),
                                NUM2INT(spacing),
-                               get_gdkpixmap(pixmap),
-                               get_gdkbitmap(mask));
+							   GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+							   GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -793,23 +800,23 @@ ctree_node_set_pixtext(self, node, column, text, spacing, pixmap, mask)
  */
 static VALUE
 ctree_set_node_info(self, node, text, spacing,
-            pixmap_closed, mask_closed,
-            pixmap_opened, mask_opened,
-            is_leaf, expanded)
-     VALUE self, node, text, spacing;
-     VALUE pixmap_closed, mask_closed;
-     VALUE pixmap_opened, mask_opened;
-     VALUE is_leaf, expanded;
+					pixmap_closed, mask_closed,
+					pixmap_opened, mask_opened,
+					is_leaf, expanded)
+	VALUE self, node, text, spacing;
+	VALUE pixmap_closed, mask_closed;
+	VALUE pixmap_opened, mask_opened;
+	VALUE is_leaf, expanded;
 {
     gtk_ctree_set_node_info(GTK_CTREE(RVAL2GOBJ(self)),
-                get_ctree_node(node),
-                STR2CSTR(text),
-                NUM2INT(spacing),
-                get_gdkpixmap(pixmap_closed),
-                get_gdkbitmap(mask_closed),
-                get_gdkpixmap(pixmap_opened),
-                get_gdkbitmap(mask_opened),
-                RTEST(is_leaf), RTEST(expanded));
+							get_ctree_node(node),
+							STR2CSTR(text),
+							NUM2INT(spacing),
+							GDK_PIXMAP(RVAL2GOBJ(pixmap_closed)),
+							GDK_BITMAP(RVAL2GOBJ(mask_closed)),
+							GDK_PIXMAP(RVAL2GOBJ(pixmap_opened)),
+							GDK_BITMAP(RVAL2GOBJ(mask_opened)),
+							RTEST(is_leaf), RTEST(expanded));
     return self;
 }
 
@@ -820,7 +827,7 @@ ctree_set_node_info(self, node, text, spacing,
  */
 static VALUE
 ctree_node_set_shift(self, node, column, vertical, horizontal)
-     VALUE self, node, column, vertical, horizontal;
+	VALUE self, node, column, vertical, horizontal;
 {
     gtk_ctree_node_set_shift(GTK_CTREE(RVAL2GOBJ(self)),
                              get_ctree_node(node),
@@ -838,7 +845,7 @@ ctree_node_set_shift(self, node, column, vertical, horizontal)
  */
 static VALUE
 ctree_node_set_selectable(self, node, selectable)
-     VALUE self, node, selectable;
+	VALUE self, node, selectable;
 {
     gtk_ctree_node_set_selectable(GTK_CTREE(RVAL2GOBJ(self)),
                                   get_ctree_node(node),
@@ -854,12 +861,12 @@ ctree_node_set_selectable(self, node, selectable)
  */
 static VALUE
 ctree_node_get_selectable(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gboolean result;
 
     result = gtk_ctree_node_get_selectable(GTK_CTREE(RVAL2GOBJ(self)),
-                       get_ctree_node(node));
+										   get_ctree_node(node));
 
     return result?Qtrue:Qfalse;
 }
@@ -871,7 +878,7 @@ ctree_node_get_selectable(self, node)
  */
 static VALUE
 ctree_node_get_cell_type(self, node, column)
-     VALUE self, node, column;
+	VALUE self, node, column;
 {
     GtkCellType result;
 
@@ -890,15 +897,15 @@ ctree_node_get_cell_type(self, node, column)
  */
 static VALUE
 ctree_node_get_text(self, node, column)
-     VALUE self, node, column;
+	VALUE self, node, column;
 {
     gint result;
     gchar* text;
 
     result = gtk_ctree_node_get_text(GTK_CTREE(RVAL2GOBJ(self)),
-                     get_ctree_node(node),
-                     NUM2INT(column),
-                     &text);
+									 get_ctree_node(node),
+									 NUM2INT(column),
+									 &text);
     if (!result) return Qnil;
 
     return rb_str_new2(text);
@@ -906,7 +913,7 @@ ctree_node_get_text(self, node, column)
 
 static VALUE
 ctree_node_get_pixmap(self, node, column)
-     VALUE self, node, column;
+	VALUE self, node, column;
 {
     gint result;
     GdkPixmap* pixmap;
@@ -918,12 +925,12 @@ ctree_node_get_pixmap(self, node, column)
                                        &pixmap, &mask);
     if (!result) return Qnil;
 
-    return rb_ary_new3(2, make_gdkpixmap(pixmap), make_gdkbitmap(mask));
+    return rb_ary_new3(2, GOBJ2RVAL(pixmap), GOBJ2RVAL(mask));
 }
 
 static VALUE
 ctree_node_get_pixtext(self, node, column)
-     VALUE self, node, column;
+	VALUE self, node, column;
 {
     gint result;
     gchar* text;
@@ -932,14 +939,14 @@ ctree_node_get_pixtext(self, node, column)
     GdkBitmap* mask;
 
     result = gtk_ctree_node_get_pixtext(GTK_CTREE(RVAL2GOBJ(self)),
-                    get_ctree_node(node),
-                    NUM2INT(column),
-                    &text, &spacing,
-                    &pixmap, &mask);
+										get_ctree_node(node),
+										NUM2INT(column),
+										&text, &spacing,
+										&pixmap, &mask);
     if (!result) return Qnil;
 
     return rb_ary_new3(4, CSTR2OBJ(text), INT2FIX(spacing),
-                          make_gdkpixmap(pixmap), make_gdkbitmap(mask));
+					   GOBJ2RVAL(pixmap), GOBJ2RVAL(mask));
 }
 
 /*
@@ -964,22 +971,22 @@ ctree_get_node_info(self, node)
     gboolean is_leaf, expanded;
 
     result = gtk_ctree_get_node_info(GTK_CTREE(RVAL2GOBJ(self)),
-                     get_ctree_node(node),
-                     &text, &spacing,
-                     &pixmap_closed, &mask_closed,
-                     &pixmap_opened, &mask_opened,
-                     &is_leaf, &expanded);
+									 get_ctree_node(node),
+									 &text, &spacing,
+									 &pixmap_closed, &mask_closed,
+									 &pixmap_opened, &mask_opened,
+									 &is_leaf, &expanded);
 
     if (!result) return Qnil;
     
     return rb_ary_new3(8, CSTR2OBJ(text),
-                          INT2FIX(spacing),
-                          make_gdkpixmap(pixmap_closed),
-                          make_gdkbitmap(mask_closed),
-                          make_gdkpixmap(pixmap_opened),
-                          make_gdkbitmap(mask_opened),
-                          is_leaf?Qtrue:Qfalse,
-                          expanded?Qtrue:Qfalse);
+					   INT2FIX(spacing),
+					   GOBJ2RVAL(pixmap_closed),
+					   GOBJ2RVAL(mask_closed),
+					   GOBJ2RVAL(pixmap_opened),
+					   GOBJ2RVAL(mask_opened),
+					   is_leaf?Qtrue:Qfalse,
+					   expanded?Qtrue:Qfalse);
 }
 
 /*
@@ -993,11 +1000,11 @@ ctree_get_node_info(self, node)
  */
 static VALUE
 ctree_node_set_row_style(self, node, style)
-     VALUE self, node, style;
+	VALUE self, node, style;
 {
     gtk_ctree_node_set_row_style(GTK_CTREE(RVAL2GOBJ(self)),
                                  get_ctree_node(node),
-                                 get_gstyle(style));
+                                 GTK_STYLE(GOBJ2RVAL(style)));
     return self;
 }
 
@@ -1011,12 +1018,12 @@ ctree_node_set_row_style(self, node, style)
  */
 static VALUE
 ctree_node_get_row_style(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     GtkStyle* result;
     result = gtk_ctree_node_get_row_style(GTK_CTREE(RVAL2GOBJ(self)),
                                           get_ctree_node(node));
-    return make_gstyle(result);
+    return GOBJ2RVAL(result);
 }
 
 /*
@@ -1026,12 +1033,12 @@ ctree_node_get_row_style(self, node)
  */
 static VALUE
 ctree_node_set_cell_style(self, node, column, style)
-     VALUE self, node, column, style;
+	VALUE self, node, column, style;
 {
     gtk_ctree_node_set_cell_style(GTK_CTREE(RVAL2GOBJ(self)),
                                   get_ctree_node(node),
                                   NUM2INT(column),
-                                  get_gstyle(style));
+                                  GTK_STYLE(GOBJ2RVAL(style)));
     return self;
 }
 
@@ -1042,14 +1049,14 @@ ctree_node_set_cell_style(self, node, column, style)
  */
 static VALUE
 ctree_node_get_cell_style(self, node, column)
-     VALUE self, node, column;
+	VALUE self, node, column;
 {
     GtkStyle* result;
 
     result = gtk_ctree_node_get_cell_style(GTK_CTREE(RVAL2GOBJ(self)),
                                            get_ctree_node(node),
                                            NUM2INT(column));
-    return make_gstyle(result);
+    return GOBJ2RVAL(result);
 }
 
 /*
@@ -1057,7 +1064,7 @@ ctree_node_get_cell_style(self, node, column)
  */
 static VALUE
 ctree_node_set_foreground(self, node, color)
-     VALUE self, node, color;
+	VALUE self, node, color;
 {
     gtk_ctree_node_set_foreground(GTK_CTREE(RVAL2GOBJ(self)),
                                   get_ctree_node(node),
@@ -1070,7 +1077,7 @@ ctree_node_set_foreground(self, node, color)
  */
 static VALUE
 ctree_node_set_background(self, node, color)
-     VALUE self, node, color;
+	VALUE self, node, color;
 {
     gtk_ctree_node_set_background(GTK_CTREE(RVAL2GOBJ(self)),
                                   get_ctree_node(node),
@@ -1089,7 +1096,7 @@ ctree_node_set_background(self, node, color)
  */
 static VALUE
 ctree_node_set_row_data(self, node, data)
-     VALUE self, node, data;
+	VALUE self, node, data;
 {
     gtk_ctree_node_set_row_data(GTK_CTREE(RVAL2GOBJ(self)),
                                 get_ctree_node(node),
@@ -1107,7 +1114,7 @@ ctree_node_set_row_data(self, node, data)
  */
 static VALUE
 ctree_node_get_row_data(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     return (VALUE)gtk_ctree_node_get_row_data(GTK_CTREE(RVAL2GOBJ(self)),
                                               get_ctree_node(node));
@@ -1126,7 +1133,7 @@ ctree_node_get_row_data(self, node)
  */
 static VALUE
 ctree_node_moveto(self, node, column, row_align, col_align)
-     VALUE self, node, column, row_align, col_align;
+	VALUE self, node, column, row_align, col_align;
 {
     gtk_ctree_node_moveto(GTK_CTREE(RVAL2GOBJ(self)),
                           get_ctree_node(node),
@@ -1145,11 +1152,11 @@ ctree_node_moveto(self, node, column, row_align, col_align)
  */
 static VALUE
 ctree_node_is_visible_p(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     GtkVisibility result;
     result = gtk_ctree_node_is_visible(GTK_CTREE(RVAL2GOBJ(self)),
-                       get_ctree_node(node));
+									   get_ctree_node(node));
     return result?Qtrue:Qnil; /* FIX2INT(result); */
 }
 
@@ -1194,7 +1201,7 @@ ctree_set_spacing(self, spacing)
  */
 static VALUE
 ctree_set_line_style(self, style)
-     VALUE self, style;
+	VALUE self, style;
 {
     gtk_ctree_set_line_style(GTK_CTREE(RVAL2GOBJ(self)), NUM2INT(style));
     return self;
@@ -1207,14 +1214,14 @@ ctree_set_line_style(self, style)
  */
 static VALUE
 ctree_get_line_style(self)
-     VALUE self;
+	VALUE self;
 {
     return INT2FIX(GTK_CTREE(RVAL2GOBJ(self))->line_style);
 }
 
 static VALUE
 ctree_set_expander_style(self, style)
-     VALUE self, style;
+	VALUE self, style;
 {
     gtk_ctree_set_expander_style(GTK_CTREE(RVAL2GOBJ(self)), NUM2INT(style));
     return self;
@@ -1234,7 +1241,7 @@ ctree_set_drag_compare_func(self, cmp_func)
  */
 static VALUE
 ctree_sort_node(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gtk_ctree_sort_node(GTK_CTREE(RVAL2GOBJ(self)), get_ctree_node(node));
     return self;
@@ -1247,7 +1254,7 @@ ctree_sort_node(self, node)
  */
 static VALUE
 ctree_sort_recursive(self, node)
-     VALUE self, node;
+	VALUE self, node;
 {
     gtk_ctree_sort_recursive(GTK_CTREE(RVAL2GOBJ(self)),
                              get_ctree_node(node));
@@ -1261,11 +1268,11 @@ ctree_sort_recursive(self, node)
  */
 static VALUE
 ctree_node_nth(self, row)
-     VALUE self, row;
+	VALUE self, row;
 {
     GtkCTreeNode *result = gtk_ctree_node_nth(GTK_CTREE(RVAL2GOBJ(self)),
                                               NUM2INT(row));
-    return make_ctree_node(result);
+    return GVAL2RVAL(result);
 }
 
 static VALUE
@@ -1295,7 +1302,7 @@ ctree_each_selection(self)
         GtkCTreeNode* node;
         node = GTK_CTREE_NODE(sellist->data);
         sellist = sellist->next;
-        rb_yield(make_ctree_node(node));
+        rb_yield(GVAL2RVAL(node));
     }
 
     return Qnil;
@@ -1308,7 +1315,7 @@ ctree_each_selection(self)
  */
 static VALUE
 ctree_get_tree_column(self)
-     VALUE self;
+	VALUE self;
 {
     return INT2NUM(GTK_CTREE(RVAL2GOBJ(self))->tree_column);
 }
@@ -1317,45 +1324,44 @@ ctree_get_tree_column(self)
 
 static VALUE
 ctreenode_get_next(self)
-     VALUE self;
+	VALUE self;
 {
-    return make_ctree_node(GTK_CTREE_NODE_NEXT(get_ctree_node(self)));
+    return GVAL2RVAL(GTK_CTREE_NODE_NEXT(get_ctree_node(self)));
 }
 
 static VALUE
 ctreenode_get_prev(self)
-     VALUE self;
+	VALUE self;
 {
-    return make_ctree_node(GTK_CTREE_NODE_PREV(get_ctree_node(self)));
+    return GVAL2RVAL(GTK_CTREE_NODE_PREV(get_ctree_node(self)));
 }
 
 static VALUE
 ctreenode_get_parent(self)
-     VALUE self;
+	VALUE self;
 {
-    GtkCTreeNode* result = GTK_CTREE_ROW(get_ctree_node(self))->parent;
-    return make_ctree_node(result);
+    return GVAL2RVAL(GTK_CTREE_ROW(get_ctree_node(self))->parent);
 }
 
 static VALUE
 ctreenode_get_sibling(self)
-     VALUE self;
+	VALUE self;
 {
     GtkCTreeNode *result = GTK_CTREE_ROW(get_ctree_node(self))->sibling;
-    return make_ctree_node(result);
+    return GVAL2RVAL(result);
 }
 
 static VALUE
 ctreenode_get_children(self)
-     VALUE self;
+	VALUE self;
 {
     GtkCTreeNode *result = GTK_CTREE_ROW(get_ctree_node(self))->children;
-    return make_ctree_node(result);
+    return GVAL2RVAL(result);
 }
 
 static VALUE
 ctreenode_is_leaf(self)
-     VALUE self;
+	VALUE self;
 {
     GtkCTreeNode* node = get_ctree_node(self);
     return (GTK_CTREE_ROW(node)->is_leaf)?Qtrue:Qfalse;
@@ -1363,7 +1369,7 @@ ctreenode_is_leaf(self)
 
 static VALUE
 ctreenode_expanded(self)
-     VALUE self;
+	VALUE self;
 {
     GtkCTreeNode* node = get_ctree_node(self);
     return (GTK_CTREE_ROW(node)->expanded)?Qtrue:Qfalse;
@@ -1371,7 +1377,8 @@ ctreenode_expanded(self)
 
 void Init_gtk_ctree()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
+    static RGObjClassInfo cinfo_node;
 
     gCTree = rb_define_class_under(mGtk, "CTree", gCList);
     cinfo.klass = gCTree;
@@ -1379,8 +1386,13 @@ void Init_gtk_ctree()
     cinfo.mark = ctree_mark;
     cinfo.free = 0;
     rbgtk_register_class(&cinfo);
+
     gCTreeNode = rb_define_class_under(mGtk, "CTreeNode", rb_cData);
 
+	rbgobj_register_r2g_func(gCTreeNode, _ctree_node_from_ruby);
+    rbgobj_register_g2r_func(GTK_TYPE_CTREE_NODE, _ctree_node_to_ruby);
+
+ 
     /* constants */
 
     /*

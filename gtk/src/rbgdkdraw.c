@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/05/28 15:13:20 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,14 +17,16 @@
  * Gdk::Drawable
  */
 
+#define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
+
 VALUE gdkDrawable;
 
 static VALUE
 gdkdraw_draw_point(self, gc, x, y)
     VALUE self, gc, x, y;
 {
-    gdk_draw_point(get_gdkdrawable(self), get_gdkgc(gc),
-		   NUM2INT(x), NUM2INT(y));
+    gdk_draw_point(_SELF(self), get_gdkgc(gc),
+				   NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -32,9 +34,9 @@ static VALUE
 gdkdraw_draw_line(self, gc, x1, y1, x2, y2)
     VALUE self, gc, x1, y1, x2, y2;
 {
-    gdk_draw_line(get_gdkdrawable(self), get_gdkgc(gc),
-		  NUM2INT(x1), NUM2INT(y1),
-		  NUM2INT(x2), NUM2INT(y2));
+    gdk_draw_line(_SELF(self), get_gdkgc(gc),
+				  NUM2INT(x1), NUM2INT(y1),
+				  NUM2INT(x2), NUM2INT(y2));
     return self;
 }
 
@@ -42,10 +44,10 @@ static VALUE
 gdkdraw_draw_rect(self, gc, filled, x, y, w, h)
     VALUE self, gc, filled, x, y, w, h;
 {
-    gdk_draw_rectangle(get_gdkdrawable(self), get_gdkgc(gc),
-		       RTEST(filled),
-		       NUM2INT(x), NUM2INT(y),
-		       NUM2INT(w), NUM2INT(h));
+    gdk_draw_rectangle(_SELF(self), get_gdkgc(gc),
+					   RTEST(filled),
+					   NUM2INT(x), NUM2INT(y),
+					   NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -53,11 +55,11 @@ static VALUE
 gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
     VALUE self, gc, filled, x, y, w, h, a1, a2;
 {
-    gdk_draw_arc(get_gdkdrawable(self), get_gdkgc(gc),
-		 RTEST(filled),
-		 NUM2INT(x), NUM2INT(y),
-		 NUM2INT(w), NUM2INT(h),
-		 NUM2INT(a1), NUM2INT(a2));
+    gdk_draw_arc(_SELF(self), get_gdkgc(gc),
+				 RTEST(filled),
+				 NUM2INT(x), NUM2INT(y),
+				 NUM2INT(w), NUM2INT(h),
+				 NUM2INT(a1), NUM2INT(a2));
     return self;
 }
 
@@ -71,17 +73,17 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-	Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-	if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-	    rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-	}
-	points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-	points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+		}
+		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
-    gdk_draw_polygon(get_gdkdrawable(self), get_gdkgc(gc),
-		     RTEST(filled),
-		     points,
-		     RARRAY(pnts)->len);
+    gdk_draw_polygon(_SELF(self), get_gdkgc(gc),
+					 RTEST(filled),
+					 points,
+					 RARRAY(pnts)->len);
     return self;
 }
 
@@ -90,9 +92,9 @@ gdkdraw_draw_text(self, font, gc, x, y, str)
     VALUE self, font, gc, x, y, str;
 {
     Check_Type(str, T_STRING);
-    gdk_draw_text(get_gdkdrawable(self), get_gdkfont(font), get_gdkgc(gc),
-		  NUM2INT(x), NUM2INT(y),
-		  RSTRING(str)->ptr, RSTRING(str)->len);
+    gdk_draw_text(_SELF(self), get_gdkfont(font), get_gdkgc(gc),
+				  NUM2INT(x), NUM2INT(y),
+				  RSTRING(str)->ptr, RSTRING(str)->len);
     return self;
 }
 
@@ -100,11 +102,11 @@ static VALUE
 gdkdraw_draw_pmap(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
     VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
 {
-    gdk_draw_pixmap(get_gdkdrawable(self), get_gdkgc(gc),
-		    get_gdkdrawable(src),
-		    NUM2INT(xsrc), NUM2INT(ysrc),
-		    NUM2INT(xdst), NUM2INT(ydst),
-		    NUM2INT(w), NUM2INT(h));
+    gdk_draw_pixmap(_SELF(self), get_gdkgc(gc),
+					_SELF(src),
+					NUM2INT(xsrc), NUM2INT(ysrc),
+					NUM2INT(xdst), NUM2INT(ydst),
+					NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -113,11 +115,11 @@ gdkdraw_draw_bmap(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
     VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
 {
     /* why there's no gdk_draw_bitmap()?? */
-    gdk_draw_pixmap(get_gdkdrawable(self), get_gdkgc(gc),
-		    get_gdkdrawable(src),
-		    NUM2INT(xsrc), NUM2INT(ysrc),
-		    NUM2INT(xdst), NUM2INT(ydst),
-		    NUM2INT(w), NUM2INT(h));
+    gdk_draw_pixmap(_SELF(self), get_gdkgc(gc),
+					_SELF(src),
+					NUM2INT(xsrc), NUM2INT(ysrc),
+					NUM2INT(xdst), NUM2INT(ydst),
+					NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -125,12 +127,12 @@ static VALUE
 gdkdraw_draw_rgb_image(self, gc, x, y, w, h, dither, buf, rowstride)
     VALUE self, gc, x, y, w, h, dither, buf, rowstride;
 {
-    gdk_draw_rgb_image(get_gdkdrawable(self), get_gdkgc(gc),
-                    NUM2INT(x), NUM2INT(y),
-                    NUM2INT(w), NUM2INT(h),
-                    NUM2INT(dither),
-                    STR2CSTR(buf),
-					NUM2INT(rowstride));
+    gdk_draw_rgb_image(_SELF(self), get_gdkgc(gc),
+					   NUM2INT(x), NUM2INT(y),
+					   NUM2INT(w), NUM2INT(h),
+					   NUM2INT(dither),
+					   STR2CSTR(buf),
+					   NUM2INT(rowstride));
     return self;
 }
 
@@ -139,13 +141,13 @@ gdkdraw_draw_rgb_image_dithalign(self, gc, x, y, w, h, dither, buf, rowstride,
 								 xdith, ydith)
     VALUE self, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 {
-    gdk_draw_rgb_image_dithalign(get_gdkdrawable(self), get_gdkgc(gc),
-                    NUM2INT(x), NUM2INT(y),
-                    NUM2INT(w), NUM2INT(h),
-                    NUM2INT(dither),
-                    STR2CSTR(buf),
-					NUM2INT(rowstride),
-			        NUM2INT(xdith), NUM2INT(ydith));
+    gdk_draw_rgb_image_dithalign(_SELF(self), get_gdkgc(gc),
+								 NUM2INT(x), NUM2INT(y),
+								 NUM2INT(w), NUM2INT(h),
+								 NUM2INT(dither),
+								 STR2CSTR(buf),
+								 NUM2INT(rowstride),
+								 NUM2INT(xdith), NUM2INT(ydith));
     return self;
 }
 
@@ -153,12 +155,12 @@ static VALUE
 gdkdraw_draw_gray_image(self, gc, x, y, w, h, dither, buf, rowstride)
     VALUE self, gc, x, y, w, h, dither, buf, rowstride;
 {
-    gdk_draw_gray_image(get_gdkdrawable(self), get_gdkgc(gc),
-                    NUM2INT(x), NUM2INT(y),
-                    NUM2INT(w), NUM2INT(h),
-                    NUM2INT(dither),
-                    STR2CSTR(buf),
-                    NUM2INT(rowstride));
+    gdk_draw_gray_image(_SELF(self), get_gdkgc(gc),
+						NUM2INT(x), NUM2INT(y),
+						NUM2INT(w), NUM2INT(h),
+						NUM2INT(dither),
+						STR2CSTR(buf),
+						NUM2INT(rowstride));
     return self;
 }
 
@@ -166,12 +168,12 @@ static VALUE
 gdkdraw_draw_rgb_32_image(self, gc, x, y, w, h, dither, buf, rowstride)
     VALUE self, gc, x, y, w, h, dither, buf, rowstride;
 {
-    gdk_draw_rgb_32_image(get_gdkdrawable(self), get_gdkgc(gc),
-                    NUM2INT(x), NUM2INT(y),
-                    NUM2INT(w), NUM2INT(h),
-                    NUM2INT(dither),
-                    STR2CSTR(buf),
-                    NUM2INT(rowstride));
+    gdk_draw_rgb_32_image(_SELF(self), get_gdkgc(gc),
+						  NUM2INT(x), NUM2INT(y),
+						  NUM2INT(w), NUM2INT(h),
+						  NUM2INT(dither),
+						  STR2CSTR(buf),
+						  NUM2INT(rowstride));
     return self;
 }
 
@@ -179,11 +181,11 @@ static VALUE
 gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
     VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
 {
-    gdk_draw_image(get_gdkdrawable(self), get_gdkgc(gc),
-		   get_gdkimage(image),
-		   NUM2INT(xsrc), NUM2INT(ysrc),
-		   NUM2INT(xdst), NUM2INT(ydst),
-		   NUM2INT(w), NUM2INT(h));
+    gdk_draw_image(_SELF(self), get_gdkgc(gc),
+				   get_gdkimage(image),
+				   NUM2INT(xsrc), NUM2INT(ysrc),
+				   NUM2INT(xdst), NUM2INT(ydst),
+				   NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -197,16 +199,16 @@ gdkdraw_draw_pnts(self, gc, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-	Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-	if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-	    rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-	}
-	points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-	points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+		}
+		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
-    gdk_draw_points(get_gdkdrawable(self), get_gdkgc(gc),
-		    points,
-		    RARRAY(pnts)->len);
+    gdk_draw_points(_SELF(self), get_gdkgc(gc),
+					points,
+					RARRAY(pnts)->len);
     return self;
 }
 
@@ -220,17 +222,17 @@ gdkdraw_draw_segs(self, gc, segs)
     Check_Type(segs, T_ARRAY);
     segments = ALLOCA_N(GdkSegment,RARRAY(segs)->len);
     for (i=0; i<RARRAY(segs)->len; i++) {
-	Check_Type(RARRAY(segs)->ptr[i], T_ARRAY);
-	if (RARRAY(RARRAY(segs)->ptr[i])->len < 4) {
-	    rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
-	}
-	segments[i].x1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[0]);
-	segments[i].y1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[1]);
-	segments[i].x2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[2]);
-	segments[i].y2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[3]);
+		Check_Type(RARRAY(segs)->ptr[i], T_ARRAY);
+		if (RARRAY(RARRAY(segs)->ptr[i])->len < 4) {
+			rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
+		}
+		segments[i].x1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[0]);
+		segments[i].y1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[1]);
+		segments[i].x2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[2]);
+		segments[i].y2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[3]);
     }
-    gdk_draw_segments(get_gdkdrawable(self), get_gdkgc(gc),
-		      segments, RARRAY(segs)->len);
+    gdk_draw_segments(_SELF(self), get_gdkgc(gc),
+					  segments, RARRAY(segs)->len);
     return self;
 }
 
@@ -244,16 +246,16 @@ gdkdraw_draw_lines(self, gc, pnts)
     Check_Type(pnts, T_ARRAY);
     points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
     for (i=0; i<RARRAY(pnts)->len; i++) {
-	Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-	if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
-	    rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-	}
-	points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-	points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+		Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
+		if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+			rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+		}
+		points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
+		points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
-    gdk_draw_lines(get_gdkdrawable(self), get_gdkgc(gc),
-		   points,
-		   RARRAY(pnts)->len);
+    gdk_draw_lines(_SELF(self), get_gdkgc(gc),
+				   points,
+				   RARRAY(pnts)->len);
     return self;
 }
 
@@ -263,10 +265,10 @@ gdkdraw_get_geometry(self)
 {
     gint x, y, width, height, depth;
 
-    gdk_window_get_geometry(get_gdkdrawable(self),
-			    &x, &y, &width, &height, &depth);
+    gdk_window_get_geometry(_SELF(self),
+							&x, &y, &width, &height, &depth);
     return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
-		       INT2NUM(width), INT2NUM(height), INT2NUM(depth));
+					   INT2NUM(width), INT2NUM(height), INT2NUM(depth));
 }
 
 

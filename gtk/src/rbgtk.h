@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,6 +34,8 @@
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
+/* Move to glib ASAP by M.Mutoh */
+#define GVAL2RVAL(v) rbgobj_gvalue_to_rvalue((GValue*)v)
 
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
@@ -43,13 +45,7 @@ extern VALUE arg_to_value(GtkArg* arg);
 
 extern ID id_call;
 
-typedef RGObjClassInfo rbgtk_class_info;
-
-extern void rbgtk_register_class(rbgtk_class_info *cinfo);
-
-extern VALUE warn_handler;
-extern VALUE mesg_handler;
-extern VALUE print_handler;
+extern void rbgtk_register_class(RGObjClassInfo *cinfo);
 
 extern VALUE mRC;
 extern VALUE mGtk;
@@ -214,22 +210,9 @@ extern VALUE mGdkRgb;
  */
 extern void rbgtk_initialize_gobject(VALUE obj, GtkObject *gtkobj);
 
-extern VALUE make_gstyle(GtkStyle* style);
-extern GtkStyle* get_gstyle(VALUE style);
-
-#ifndef NT
-extern VALUE make_grcstyle(GtkRcStyle* style);
-#endif
-extern GtkRcStyle* get_grcstyle(VALUE style);
-
-extern VALUE make_ctree_node(GtkCTreeNode* node);
 extern VALUE make_notepage(GtkNotebookPage* page);
 
-/* extern void exec_callback(GtkWidget *widget, VALUE proc); */
 extern void exec_callback(GtkWidget *widget, gpointer proc);
-
-extern VALUE make_gtkaccelgrp(GtkAccelGroup* accel);
-extern GtkAccelGroup *get_gtkaccelgrp(VALUE value);
 
 extern VALUE make_gtkselectiondata(GtkSelectionData* selectiondata);
 extern GtkSelectionData *get_gtkselectiondata(VALUE value);
@@ -247,6 +230,8 @@ extern void remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
  */
 extern VALUE make_tobj(gpointer obj, VALUE klass, int size);
 extern gpointer get_tobj(VALUE obj, VALUE klass);
+
+#define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
 #define make_gdkcolor(c) make_tobj(c, gdkColor, sizeof(GdkColor))
 #define get_gdkcolor(c) ((GdkColor*)get_tobj(c, gdkColor))
@@ -288,23 +273,6 @@ extern VALUE make_gdkvisual(GdkVisual* visual);
 extern GdkVisual* get_gdkvisual(VALUE visual);
 
 typedef void(*gdkdrawfunc)();
-
-extern VALUE make_gdkdraw(VALUE klass, GdkDrawable* draw,
-						  void (*ref)(), void (*unref)());
-
-extern VALUE make_gdkwindow(GdkWindow* window);
-extern VALUE make_gdkpixmap(GdkPixmap* pixmap);
-extern VALUE make_gdkbitmap(GdkBitmap* bitmap);
-
-extern VALUE new_gdkwindow(GdkWindow* window);
-extern VALUE new_gdkpixmap(GdkPixmap* pixmap);
-extern VALUE new_gdkbitmap(GdkBitmap* bitmap);
-
-extern GdkWindow* get_gdkdraw(VALUE draw, VALUE klass, const char* kname);
-#define get_gdkdrawable(w) get_gdkdraw((w),gdkDrawable,"GdkDrawable")
-#define get_gdkwindow(w) get_gdkdraw((w),gdkWindow,"GdkWindow")
-#define get_gdkpixmap(w) get_gdkdraw((w),gdkPixmap,"GdkPixmap")
-#define get_gdkbitmap(w) get_gdkdraw((w),gdkBitmap,"GdkBitmap")
 
 extern VALUE make_gdkimage(GdkImage* image);
 extern GdkImage* get_gdkimage(VALUE image);

@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -23,7 +23,7 @@ ifact_initialize(self, type, path, accel)
 {
     RBGTK_INITIALIZE(self, gtk_item_factory_new(FIX2INT(type),
 												STR2CSTR(path),
-												get_gtkaccelgrp(accel)));
+												GTK_ACCEL_GROUP(RVAL2GOBJ(accel))));
     return Qnil;
 }
 
@@ -241,7 +241,7 @@ ifact_s_path_from_widget(self, widget)
 
 void Init_gtk_itemfactory()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gItemFactory = rb_define_class_under(mGtk, "ItemFactory", gObject);
     gIFConst = rb_define_module_under(gItemFactory, "Constants");

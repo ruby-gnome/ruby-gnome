@@ -4,7 +4,7 @@
   rbgtktreeitem.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -101,7 +101,7 @@ titem_collapse(self)
 
 void Init_gtk_tree_item()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gTreeItem = rb_define_class_under(mGtk, "TreeItem", gItem);
     cinfo.klass = gTreeItem;

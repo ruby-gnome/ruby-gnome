@@ -1,3 +1,16 @@
+2002-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c, src/rbgtk.h: Change rbgtk_class_info to RGObjClassInfo.
+	Remove gtk_type_hash
+	* src/rbgtk.h: Remove unused extern definition(warn/mesg/print_handler)
+	* src/*.[ch]: Change make_gstyle(), make_gtkaccelgrp(), 
+	make_gdkwindow(),make_gdkpixmap(), make_gdkbitmap(), new_gdkwindow(), 
+	new_gdkpixmap(), new_gdkbitmap()to GOBJ2RVAL, 
+	get_gstyle(), get_gtkaccelgrp(), get_gdkwindow(), get_gdkpixmap(), 
+	get_gdkbitmap()  to RVAL2GOBJ().
+	* src/rbgtkaccelgroup.c, src/rbgtkstyle.c: 
+	Correspond to RGObjClassInfo.
+	
 2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtk.c, src/rbgtk.h: Remove gobj_mark(),rbgtk_lookup_class(),

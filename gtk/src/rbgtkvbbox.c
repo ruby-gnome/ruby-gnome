@@ -4,7 +4,7 @@
   rbgtkvbbox.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -57,7 +57,7 @@ vbbox_set_layout_default(self, layout)
 
 void Init_gtk_vbutton_box()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gVBBox = rb_define_class_under(mGtk, "VButtonBox", gBBox);
     cinfo.klass = gVBBox;

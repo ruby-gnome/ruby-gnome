@@ -4,7 +4,7 @@
   rbgtkmenushell.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -51,7 +51,7 @@ mshell_deactivate(self)
 
 void Init_gtk_menu_shell()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gMenuShell = rb_define_class_under(mGtk, "MenuShell", gContainer);
     cinfo.klass = gMenuShell;

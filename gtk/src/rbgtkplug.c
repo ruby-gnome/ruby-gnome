@@ -3,7 +3,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 19:50:57 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -29,7 +29,7 @@ plug_construct(self, socket_id)
 
 void Init_gtk_plug()
 {
-    static rbgtk_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     gPlug = rb_define_class_under(mGtk, "Plug", gWindow);
     cinfo.klass = gPlug;

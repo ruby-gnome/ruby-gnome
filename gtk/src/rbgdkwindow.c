@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 03:14:53 $
+  $Date: 2002/06/23 16:13:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,6 +17,8 @@
  * Gdk::Window
  */
 
+#define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
+
 VALUE gdkWindow;
 
 static VALUE
@@ -24,7 +26,7 @@ gdkwin_get_size(self)
     VALUE self;
 {
     int width, height;
-    gdk_window_get_size(get_gdkwindow(self), &width, &height);
+    gdk_window_get_size(_SELF(self), &width, &height);
     return rb_assoc_new(INT2NUM(width), INT2NUM(height));
 }
 
@@ -34,7 +36,7 @@ gdkwin_get_pointer(self)
 {
     int x, y;
     GdkModifierType state;
-    gdk_window_get_pointer(get_gdkwindow(self), &x, &y, &state);
+    gdk_window_get_pointer(_SELF(self), &x, &y, &state);
     return rb_ary_new3(3, INT2FIX(x), INT2FIX(y), INT2FIX((int)state));
 
 }
@@ -43,10 +45,10 @@ static VALUE
 gdkwin_pointer_grab(self, owner_events, event_mask, confine_to, cursor, time)
     VALUE self, owner_events, event_mask, confine_to, cursor, time;
 {
-    gdk_pointer_grab(get_gdkwindow(self),
+    gdk_pointer_grab(_SELF(self),
 		     RTEST(owner_events),
 		     NUM2INT(event_mask),
-		     get_gdkwindow(confine_to),
+		     _SELF(confine_to),
 		     get_gdkcursor(cursor),
 		     NUM2INT(time));
     return self;
@@ -71,7 +73,7 @@ static VALUE
 gdkwin_keyboard_grab(self, owner_events, time)
     VALUE self, owner_events, time;
 {
-    gdk_keyboard_grab(get_gdkwindow(self),
+    gdk_keyboard_grab(_SELF(self),
 		     RTEST(owner_events),
 		     NUM2INT(time));
     return self;
@@ -91,7 +93,7 @@ gdkwin_foreign_new(self, anid)
 {
     GdkWindow *window;
     window = gdk_window_foreign_new(NUM2INT(anid));
-    return make_gdkwindow(window);
+    return GOBJ2RVAL(window);
 }
 
 static VALUE
@@ -105,7 +107,7 @@ static VALUE
 gdkwin_clear(self)
     VALUE self;
 {
-    gdk_window_clear(get_gdkwindow(self));
+    gdk_window_clear(_SELF(self));
     return self;
 }
 
@@ -113,7 +115,7 @@ static VALUE
 gdkwin_clear_area(self, x,y,w,h)
     VALUE self,x,y,w,h;
 {
-    gdk_window_clear_area(get_gdkwindow(self),
+    gdk_window_clear_area(_SELF(self),
 			  NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
@@ -122,8 +124,8 @@ static VALUE
 gdkwin_copy_area(self, gc, x, y, src_window, src_x, src_y, width, height)
 	VALUE self, gc, x, y, src_window, src_x, src_y, width, height;
 {
-	gdk_window_copy_area(get_gdkwindow(self), get_gdkgc(gc),
-						 NUM2INT(x), NUM2INT(y), get_gdkwindow(src_window),
+	gdk_window_copy_area(_SELF(self), get_gdkgc(gc),
+						 NUM2INT(x), NUM2INT(y), _SELF(src_window),
 						 NUM2INT(src_x), NUM2INT(src_y), NUM2INT(width), NUM2INT(height));
 	return self;
 }
@@ -132,7 +134,7 @@ static VALUE
 gdkwin_clear_area_e(self, x,y,w,h)
     VALUE self,x,y,w,h;
 {
-    gdk_window_clear_area_e(get_gdkwindow(self),
+    gdk_window_clear_area_e(_SELF(self),
 			    NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
@@ -141,7 +143,7 @@ static VALUE
 gdkwin_set_background(self, color)
     VALUE self, color;
 {
-    gdk_window_set_background(get_gdkwindow(self), get_gdkcolor(color));
+    gdk_window_set_background(_SELF(self), get_gdkcolor(color));
     return self;
 }
 
@@ -149,8 +151,9 @@ static VALUE
 gdkwin_set_back_pixmap(self, pixmap, parent_relative)
     VALUE self, pixmap, parent_relative;
 {
-    gdk_window_set_back_pixmap(get_gdkwindow(self), get_gdkpixmap(pixmap),
-			       RTEST(parent_relative));
+    gdk_window_set_back_pixmap(_SELF(self), 
+							   GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+							   RTEST(parent_relative));
     return self;
 }
 
@@ -158,7 +161,7 @@ static VALUE
 gdkwin_move(self, x,y)
     VALUE self, x,y;
 {
-    gdk_window_move(get_gdkwindow(self),
+    gdk_window_move(_SELF(self),
 		    NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -167,7 +170,7 @@ static VALUE
 gdkwin_raise(self)
     VALUE self;
 {
-    gdk_window_raise(get_gdkwindow(self));
+    gdk_window_raise(_SELF(self));
     return self;
 }
 
@@ -175,7 +178,7 @@ static VALUE
 gdkwin_lower(self)
     VALUE self;
 {
-    gdk_window_lower(get_gdkwindow(self));
+    gdk_window_lower(_SELF(self));
     return self;
 }
 
@@ -183,7 +186,7 @@ static VALUE
 gdkwin_register_dnd(self)
     VALUE self;
 {
-    gdk_window_register_dnd(get_gdkwindow(self));
+    gdk_window_register_dnd(_SELF(self));
     return self;
 }
 
@@ -191,7 +194,7 @@ static VALUE
 gdkwin_set_override_redirect(self, override_redirect)
     VALUE self, override_redirect;
 {
-    gdk_window_set_override_redirect(get_gdkwindow(self), 
+    gdk_window_set_override_redirect(_SELF(self), 
 									 RTEST(override_redirect));
     return self;
 }
@@ -200,8 +203,8 @@ static VALUE
 gdkwin_shape_combine_mask(self, shape_mask, offset_x, offset_y)
     VALUE self, shape_mask, offset_x, offset_y;
 {
-    gdk_window_shape_combine_mask(get_gdkwindow(self), 
-								  get_gdkbitmap(shape_mask), 
+    gdk_window_shape_combine_mask(_SELF(self), 
+								  GDK_BITMAP(RVAL2OBJ(shape_mask)), 
 								  NUM2INT(offset_x), NUM2INT(offset_y));
     return self;
 }
@@ -210,7 +213,7 @@ static VALUE
 gdkwin_set_child_shapes(self)
     VALUE self;
 {
-    gdk_window_set_child_shapes(get_gdkwindow(self));
+    gdk_window_set_child_shapes(_SELF(self));
     return self;
 }
 
@@ -218,7 +221,7 @@ static VALUE
 gdkwin_merge_child_shapes(self)
     VALUE self;
 {
-    gdk_window_merge_child_shapes(get_gdkwindow(self));
+    gdk_window_merge_child_shapes(_SELF(self));
     return self;
 }   
 
@@ -226,7 +229,7 @@ static VALUE
 gdkwin_set_static_gravities(self, use_static)
     VALUE self, use_static;
 {
-	return (gdk_window_set_static_gravities(get_gdkwindow(self),
+	return (gdk_window_set_static_gravities(_SELF(self),
 						NUM2INT(use_static))) ? Qtrue : Qfalse;
 }
 
@@ -234,7 +237,7 @@ static VALUE
 gdkwin_set_hints(self, x, y, min_w, min_h, max_w, max_h, flags)
     VALUE self, x, y, min_w, min_h, max_w, max_h, flags;
 {
-    gdk_window_set_hints(get_gdkwindow(self), NUM2INT(x), NUM2INT(y),
+    gdk_window_set_hints(_SELF(self), NUM2INT(x), NUM2INT(y),
 						 NUM2INT(min_w), NUM2INT(min_h), 
 						 NUM2INT(max_w), NUM2INT(max_h),
 						 NUM2INT(flags));
@@ -245,7 +248,7 @@ static VALUE
 gdkwin_set_title(self, title)
     VALUE self, title;
 {
-	gdk_window_set_title(get_gdkwindow(self),STR2CSTR(title));
+	gdk_window_set_title(_SELF(self),STR2CSTR(title));
 	return self;
 }
 
@@ -253,7 +256,7 @@ static VALUE
 gdkwin_set_colormap(self, colormap)
     VALUE self, colormap;
 {
-	gdk_window_set_colormap(get_gdkwindow(self),get_gdkcmap(colormap));
+	gdk_window_set_colormap(_SELF(self),get_gdkcmap(colormap));
 	return self;
 }
 
@@ -261,7 +264,7 @@ static VALUE
 gdkwin_resize(self, w,h)
     VALUE self, w,h;
 {
-    gdk_window_resize(get_gdkwindow(self),
+    gdk_window_resize(_SELF(self),
 		      NUM2INT(w), NUM2INT(h));
     return self;
 }
@@ -270,7 +273,7 @@ static VALUE
 gdkwin_move_resize(self, x,y,w,h)
     VALUE self, x,y,w,h;
 {
-    gdk_window_move_resize(get_gdkwindow(self),
+    gdk_window_move_resize(_SELF(self),
 			   NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
@@ -279,7 +282,7 @@ static VALUE
 gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
 {
-    gdk_window_set_cursor(get_gdkwindow(self), get_gdkcursor(cursor));
+    gdk_window_set_cursor(_SELF(self), get_gdkcursor(cursor));
     return self;
 }
 
@@ -287,8 +290,9 @@ static VALUE
 gdkwin_set_icon(self, icon, pixmap, mask)
     VALUE self, icon, pixmap, mask;
 {
-    gdk_window_set_icon(get_gdkwindow(self), get_gdkwindow(icon),
-			get_gdkpixmap(pixmap), get_gdkbitmap(mask));
+    gdk_window_set_icon(_SELF(self), _SELF(icon),
+						GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+						GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
@@ -296,7 +300,7 @@ static VALUE
 gdkwin_set_icon_name(self, name)
     VALUE self, name;
 {
-    gdk_window_set_icon_name(get_gdkwindow(self), STR2CSTR(name));
+    gdk_window_set_icon_name(_SELF(self), STR2CSTR(name));
     return self;
 }
 
@@ -304,7 +308,7 @@ static VALUE
 gdkwin_set_decorations(self, decor)
     VALUE self, decor;
 {
-    gdk_window_set_decorations(get_gdkwindow(self), NUM2INT(decor));
+    gdk_window_set_decorations(_SELF(self), NUM2INT(decor));
     return self;
 }
 
@@ -312,7 +316,7 @@ static VALUE
 gdkwin_set_functions(self, func)
     VALUE self, func;
 {
-    gdk_window_set_functions(get_gdkwindow(self), NUM2INT(func));
+    gdk_window_set_functions(_SELF(self), NUM2INT(func));
     return self;
 }
 
@@ -321,7 +325,7 @@ gdkwin_get_root_origin(self)
     VALUE self;
 {
     int x, y;
-    gdk_window_get_root_origin(get_gdkwindow(self), &x, &y);
+    gdk_window_get_root_origin(_SELF(self), &x, &y);
     return rb_assoc_new(INT2FIX(x), INT2FIX(y));
 }
 
@@ -329,14 +333,14 @@ static VALUE
 gdkwin_get_events(self)
     VALUE self;
 {
-    return INT2NUM(gdk_window_get_events(get_gdkwindow(self)));
+    return INT2NUM(gdk_window_get_events(_SELF(self)));
 }
 
 static VALUE
 gdkwin_set_events(self, mask)
     VALUE self, mask;
 {
-    gdk_window_set_events(get_gdkwindow(self), NUM2INT(mask));
+    gdk_window_set_events(_SELF(self), NUM2INT(mask));
     return self;
 }
 
@@ -344,7 +348,7 @@ static VALUE
 gdkwin_reparent(self, new_parent, x, y)
     VALUE self, new_parent, x, y;
 {
-    gdk_window_reparent(get_gdkwindow(self), get_gdkwindow(new_parent),
+    gdk_window_reparent(_SELF(self), _SELF(new_parent),
 			NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -354,7 +358,7 @@ gdkwin_get_geometry(self)
     VALUE self;
 {
     gint x, y, w, h, d;
-    gdk_window_get_geometry(get_gdkwindow(self), &x, &y, &w, &h, &d);
+    gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h, &d);
     return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
 		       INT2NUM(w), INT2NUM(h), INT2NUM(d));
 }
@@ -364,7 +368,7 @@ gdkwin_get_position(self)
 	VALUE self;
 {
 	gint x, y;
-	gdk_window_get_position(get_gdkwindow(self), &x, &y);
+	gdk_window_get_position(_SELF(self), &x, &y);
 	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
@@ -372,21 +376,21 @@ static VALUE
 gdkwin_get_visual(self)
 	VALUE self;
 {
-	return make_gdkvisual(gdk_window_get_visual(get_gdkwindow(self)));
+	return make_gdkvisual(gdk_window_get_visual(_SELF(self)));
 }
 
 static VALUE
 gdkwin_get_colormap(self)
 	VALUE self;
 {
-	return make_gdkcolormap(gdk_window_get_colormap(get_gdkwindow(self)));
+	return make_gdkcolormap(gdk_window_get_colormap(_SELF(self)));
 }
 
 static VALUE
 gdkwin_get_type(self)
 	VALUE self;
 {
-	return INT2FIX(gdk_window_get_type(get_gdkwindow(self)));
+	return INT2FIX(gdk_window_get_type(_SELF(self)));
 }
 
 static VALUE
@@ -394,7 +398,7 @@ gdkwin_get_origin(self)
 	VALUE self;
 {
 	gint x, y;
-	gdk_window_get_origin(get_gdkwindow(self), &x, &y);
+	gdk_window_get_origin(_SELF(self), &x, &y);
 	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
@@ -403,7 +407,7 @@ gdkwin_get_deskrelative_origin(self)
 	VALUE self;
 {
 	gint x, y;
-	gdk_window_get_deskrelative_origin(get_gdkwindow(self), &x, &y);
+	gdk_window_get_deskrelative_origin(_SELF(self), &x, &y);
 	return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
@@ -411,24 +415,24 @@ static VALUE
 gdkwin_get_parent(self)
 	VALUE self;
 {
-	return make_gdkwindow(gdk_window_get_parent(get_gdkwindow(self)));
+	return GOBJ2RVAL(gdk_window_get_parent(_SELF(self)));
 }
 
 static VALUE
 gdkwin_get_toplevel(self)
 	VALUE self;
 {
-	return make_gdkwindow(gdk_window_get_toplevel(get_gdkwindow(self)));
+	return GOBJ2RVAL(gdk_window_get_toplevel(_SELF(self)));
 }
 
 static VALUE
 gdkwin_get_children(self)
 	VALUE self;
 {
-	GList* list = gdk_window_get_children(get_gdkwindow(self));
+	GList* list = gdk_window_get_children(_SELF(self));
 	VALUE ary = rb_ary_new();
 	while (list) {
-		rb_ary_push(ary, make_gdkwindow(list->data));
+		rb_ary_push(ary, GOBJ2RVAL(list->data));
 		list = list->next;
 	}
 	return ary;
@@ -438,7 +442,7 @@ static VALUE
 gdkwin_set_transient_for(self, leader)
     VALUE self, leader;
 {   
-    gdk_window_set_transient_for(get_gdkwindow(self), get_gdkwindow(leader));
+    gdk_window_set_transient_for(_SELF(self), _SELF(leader));
     return self;
 }
 
@@ -446,7 +450,7 @@ static VALUE
 gdkwin_set_role(self, role)
     VALUE self, role;
 {
-    gdk_window_set_role(get_gdkwindow(self), STR2CSTR(role));
+    gdk_window_set_role(_SELF(self), STR2CSTR(role));
     return self;
 }
 
@@ -454,7 +458,7 @@ static VALUE
 gdkwin_set_group(self, leader)
     VALUE self, leader;
 {
-    gdk_window_set_group(get_gdkwindow(self), get_gdkwindow(leader));
+    gdk_window_set_group(_SELF(self), _SELF(leader));
     return self;
 }
 
@@ -466,7 +470,7 @@ gdkwin_get_toplevels(self)
 	GList* list = gdk_window_get_toplevels();
 	VALUE ary = rb_ary_new();
 	while (list) {
-		rb_ary_push(ary, make_gdkwindow(list->data));
+		rb_ary_push(ary, GOBJ2RVAL(list->data));
 		list = list->next;
 	}
 	return ary;
@@ -476,7 +480,7 @@ static VALUE
 gdkwin_show(self)
     VALUE self;
 {
-    gdk_window_show(get_gdkwindow(self));
+    gdk_window_show(_SELF(self));
     return Qnil;
 }
 
@@ -484,7 +488,7 @@ static VALUE
 gdkwin_hide(self)
     VALUE self;
 {
-    gdk_window_hide(get_gdkwindow(self));
+    gdk_window_hide(_SELF(self));
     return Qnil;
 }
 
@@ -512,10 +516,9 @@ gdkwin_prop_change(self, property, type, mode, src)
     fmt = 32;
 
   } else if(ntype == GDK_SELECTION_TYPE_BITMAP){
-    dat = (void*)&(((GdkPixmapPrivate*)get_gdkbitmap(src))->xwindow);
+    dat = (void*)&(((GdkPixmapPrivate*)GDK_BITMAP(RVAL2GOBJ(src)))->xwindow);
     fmt = 32;
-    len = 1;
-  
+    len = 1;  
   } else if(ntype == GDK_SELECTION_TYPE_COLORMAP){
     dat = (void*)&(((GdkColormapPrivate*)get_gdkcolormap(src))->xcolormap);
     fmt = 32;
@@ -529,13 +532,13 @@ gdkwin_prop_change(self, property, type, mode, src)
     len = 1;
 /*
   } else if(ntype == GDK_SELECTION_TYPE_PIXMAP){
-    dat = (void*)&(((GdkPixmapPrivate*)get_gdkpixmap(src))->xwindow);
+    dat = (void*)&(((GdkPixmapPrivate*)GDK_PIXMAP(RVAL2GOBJ(src)))->xwindow);
     fmt = 32;
     len = 1;
   
   } else if(ntype == GDK_SELECTION_TYPE_WINDOW||
 	     ntype == GDK_SELECTION_TYPE_DRAWABLE){
-    dat = (void*)&(((GdkPixmapPrivate*)get_gdkwindow(src))->xwindow);
+    dat = (void*)&(((GdkPixmapPrivate*)_SELF(src))->xwindow);
     fmt = 32;
     len = 1;
 */
@@ -552,7 +555,7 @@ gdkwin_prop_change(self, property, type, mode, src)
 	  rb_raise(rb_eArgError, "no supperted type.");
   }
 
-  gdk_property_change(get_gdkwindow(self),
+  gdk_property_change(_SELF(self),
 		 get_gdkatom(property), ntype, fmt, NUM2INT(mode), dat, len);
 
   if(otype == GDK_SELECTION_TYPE_ATOM) {
@@ -581,7 +584,7 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
   int		i;
   VALUE		ret;
 
-  if(gdk_property_get(get_gdkwindow(self), get_gdkatom(property),
+  if(gdk_property_get(_SELF(self), get_gdkatom(property),
        get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
        RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
     return Qnil;
@@ -626,7 +629,7 @@ static VALUE
 gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
-  gdk_property_delete(get_gdkwindow(self), get_gdkatom(property));
+  gdk_property_delete(_SELF(self), get_gdkatom(property));
   return self;
 }
 
