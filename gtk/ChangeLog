@@ -1,3 +1,14 @@
+2004-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/tree_progress.rb: Improved.
+	* src/rbgtkcellrendererprogress.c: Improved. 
+
+2004-12-28  Darren Willis  <dazjw@paradise.net.nz>
+
+	* src/rbgtkcellrendererprogress.c: Added for GTK+-2.6.x.
+	* sample/misc/tree_progress.rb: Added. A sample script for 
+	Gtk::CellRendererProgress.
+
 2004-12-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkconst.c: Added Gtk::ScrollStep for GTK+-2.4.x. 
