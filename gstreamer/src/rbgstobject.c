@@ -28,48 +28,9 @@
  */
 
 /*
- *  Method: name -> aString
- *
- *  Gets the name of the object.
- */
-static VALUE rb_gst_object_get_name(self)
-    VALUE self;
-{
-    GstObject *object = RGST_OBJECT(self);
-    return CSTR2RVAL(gst_object_get_name(object));
-}
-
-/*
- *  Method: set_name(aString) -> self
- *
- *  Sets the name of the object, getting rid of the old name if there was one.
- */
-static VALUE rb_gst_object_set_name(self, new_name)
-    VALUE self, new_name;
-{
-    GstObject *object = RGST_OBJECT(self);
-    gst_object_set_name(object, RVAL2CSTR(new_name));
-    return self;
-}
-
-/*
- *  Method: name=(aString) -> aString
- *
- *  Sets the name of the object, getting rid of the old name if there was one.
- *  This does exactly the same thing as Gst::Object#set_name but it returns
- *  the new name instead of a reference to the object.
- */
-static VALUE rb_gst_object_set_name2(self, new_name)
-    VALUE self, new_name;
-{
-    rb_gst_object_set_name(self, new_name);
-    return new_name;
-}
-
-/*
  *  Method: flags -> aFixnum
  *
- *  Gets the entire set of flags for the object.
+ *  Gets the entire set of flags for the object, as a Fixnum.
  */ 
 static VALUE rb_gst_object_get_flags(self)
     VALUE self;
@@ -153,14 +114,6 @@ static VALUE rb_gst_object_is_floating(self)
 void Init_gst_object(void) {
     VALUE c = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);   
  
-    /*
-     *  Name
-     */
-
-    rb_define_method(c, "set_name", rb_gst_object_set_name,  1);
-    rb_define_method(c, "name=",    rb_gst_object_set_name2, 1);
-    rb_define_method(c, "name",     rb_gst_object_get_name,  0);
-   
     /*
      *  Flags
      */

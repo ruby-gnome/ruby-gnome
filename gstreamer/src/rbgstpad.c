@@ -30,7 +30,7 @@
 /*
  *  Method: name -> aString
  *
- *  Gets the pad's name. 
+ *  Gets the pad's name, as a String. 
  */
 
 static VALUE rb_gst_pad_get_name(self)
@@ -43,7 +43,10 @@ static VALUE rb_gst_pad_get_name(self)
 /*
  *  Method: direction -> aFixnum
  *
- *  Gets the pad's direction.
+ *  Gets the pad's direction, which can be:
+ *      - Gst::Pad::DIRECTION_UNKNOWN;
+ *      - Gst::Pad::DIRECTION_SRC;
+ *      - Gst::Pad::DIRECTION_SINK.
  */
 
 static VALUE rb_gst_pad_get_direction(self)
@@ -223,6 +226,8 @@ static VALUE rb_gst_pad_get_query_types(self)
  *
  *  Calls the block for each supported format from the pad, passing
  *  a reference to the Gst::Format object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_pad_each_format(self)
     VALUE self;
@@ -235,6 +240,8 @@ static VALUE rb_gst_pad_each_format(self)
  *
  *  Calls the block for each event mask from the pad, passing
  *  a reference to the Gst::EventMask object as parameter.
+ *
+ *  Always returns nil.
  */ 
 static VALUE rb_gst_pad_each_event_mask(self)
     VALUE self;
@@ -247,6 +254,8 @@ static VALUE rb_gst_pad_each_event_mask(self)
  *
  *  Calls the block for each supported query from the pad, passing
  *  a reference to the Gst::QueryType object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_pad_each_query_type(self)
     VALUE self;

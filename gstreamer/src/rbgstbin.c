@@ -77,7 +77,6 @@ static VALUE rb_gst_bin_new(argc, argv, self)
     bin = gst_bin_new(name != Qnil ? RVAL2CSTR(name) : NULL);
     if (bin != NULL) {
         RBGST_INITIALIZE(self, bin);
-        return RGST_BIN_NEW(bin);
     }
     return Qnil;
 }
@@ -250,6 +249,8 @@ static VALUE rb_gst_bin_remove_all(self)
  *
  *  Calls the block for each element in the bin, passing a reference to
  *  the Gst::Element as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_bin_each_element(self)
     VALUE self;

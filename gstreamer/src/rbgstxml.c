@@ -133,7 +133,9 @@ static VALUE rb_gst_xml_get_topelements(self)
  *  Method: each_topelement { |aGstElement| ... } -> nil
  *
  *  Calls the block for each topelement, passing a reference to
- *  a Gst::Element object as parameter.
+ *  a Gst::Element object as parameteri.
+ *
+ *  Always returns nil.
  */
 
 static VALUE rb_gst_xml_each_topelement(self)

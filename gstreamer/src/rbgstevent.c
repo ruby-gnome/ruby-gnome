@@ -188,12 +188,12 @@ static VALUE rb_gst_event_src(self)
 /*
  *  Method: timestamp -> aFixnum
  *
- *  Gets the timestamp of this event.
+ *  Gets the timestamp of this event, as a Bignum.
  */
 static VALUE rb_gst_event_timestamp(self)
     VALUE self;
 {
-    return INT2NUM(GST_EVENT_TIMESTAMP(RGST_EVENT(self)));
+    return ULL2NUM(GST_EVENT_TIMESTAMP(RGST_EVENT(self)));
 }
 
 void Init_gst_event(void) {

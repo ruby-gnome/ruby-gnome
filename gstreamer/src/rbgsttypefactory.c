@@ -45,7 +45,7 @@ static VALUE rb_gst_typefactory_find(self, name)
 /*
  *  Method: mime -> aString
  *
- *  Gets the mime type handled by the factory. 
+ *  Gets the mime type handled by the factory, as a String. 
  */
 static VALUE rb_gst_typefactory_get_mime(self)
     VALUE self;
@@ -57,7 +57,7 @@ static VALUE rb_gst_typefactory_get_mime(self)
 /*
  *  Method: exts -> aString
  *
- *  Gets the files extentions handled by the factory. 
+ *  Gets the files extentions handled by the factory, as a String. 
  */
 static VALUE rb_gst_typefactory_get_exts(self)
     VALUE self;
@@ -69,7 +69,7 @@ static VALUE rb_gst_typefactory_get_exts(self)
 /*
  *  Method: to_s -> aString
  *
- *  Gets a string representing the factory.
+ *  Gets a String representing the factory.
  */
 static VALUE rb_gst_typefactory_to_s(self)
     VALUE self;

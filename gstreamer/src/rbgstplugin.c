@@ -48,7 +48,7 @@ GType gst_plugin_get_type(void) {
 /*
  *  Method: name -> aString
  *
- *  Gets (short) name of the plugin.
+ *  Gets (short) name of the plugin, as a String.
  */
 static VALUE rb_gst_plugin_get_name(self)
     VALUE self;
@@ -60,7 +60,7 @@ static VALUE rb_gst_plugin_get_name(self)
 /*
  *  Method: longname -> aString
  *
- *  Gets long name (descriptive) of the plugin.
+ *  Gets long name (descriptive) of the plugin, as a String.
  */
 static VALUE rb_gst_plugin_get_longname(self)
     VALUE self;
@@ -72,7 +72,7 @@ static VALUE rb_gst_plugin_get_longname(self)
 /*
  *  Method: filename -> aString
  *
- *  Gets the file name where the plugin cames from.
+ *  Gets the file name where the plugin cames from, as a String.
  */
 static VALUE rb_gst_plugin_get_filename(self)
     VALUE self;
@@ -147,6 +147,8 @@ static VALUE rb_gst_plugin_get_features(self)
  *
  *  Calls the block for each feature this plugin provides, passing
  *  a reference to the Gst::PluginFeature object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_plugin_each_feature(self)
     VALUE self;

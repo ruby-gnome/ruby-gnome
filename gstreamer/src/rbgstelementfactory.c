@@ -192,7 +192,7 @@ static VALUE rb_gst_elementfactory_rank_secondary(self)
 /*
  *  Method: to_s -> aString
  *
- *  Gets a string representing the factory.
+ *  Gets a String representing the factory.
  */
 static VALUE rb_gst_elementfactory_to_s(self)
     VALUE self;
@@ -230,6 +230,8 @@ static VALUE rb_gst_elementfactory_get_pad_templates(self)
  *
  *  Calls the block for each pad template of the factory, passing a
  *  reference to the Gst::PadTemplate as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_elementfactory_each_pad_template(self)
     VALUE self;

@@ -248,7 +248,7 @@ static VALUE constSecond = INT2FIX(GST_SECOND);
 
 /*
  *  Constant: MSECOND
- *  Constant that defines one GStreamer milmisecond.
+ *  Constant that defines one GStreamer millisecond.
  */
 static VALUE constMsecond = INT2FIX(GST_MSECOND);
 

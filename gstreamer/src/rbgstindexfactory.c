@@ -24,13 +24,13 @@
 /*
  *  Class: Gst::IndexFactory < Gst::PluginFeature
  *
- *  Create indexs from a factory.  
+ *  Create indexes from a factory.  
  */
 
 /*
  *  Method: to_s -> aString
  *
- *  Gets a string representing the factory.
+ *  Gets a String representing the factory, as a String.
  */
 static VALUE rb_gst_indexfactory_to_s(self)
     VALUE self;

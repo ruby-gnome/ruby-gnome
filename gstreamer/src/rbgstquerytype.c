@@ -64,7 +64,9 @@ static VALUE rb_gst_querytype_find(self, nick)
  *  Class method: each { |aQueryTypeObject| block } -> nil
  *
  *  Calls the block for each registered querytype, passing a reference
- *  to the Gst::QueryType object as parameter. 
+ *  to the Gst::QueryType object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_querytype_each(self)
     VALUE self;
@@ -84,9 +86,8 @@ static VALUE rb_gst_querytype_each(self)
 /*
  *  Method: type_id -> aFixnum
  *
- *  Gets the type id of this querytype, as an integer value.
+ *  Gets the type id of this querytype, which may be:
  *
- *  Meaningful types are:
  *    - Gst::QueryType::NONE;
  *    - Gst::QueryType::TOTAL;
  *    - Gst::QueryType::POSITION;
@@ -106,7 +107,7 @@ static VALUE rb_gst_querytype_get_type_id(self)
 /*
  *  Method: nick -> aString
  *
- *  Gets the short nick of the querytype. 
+ *  Gets the short nick of the querytype, as a String. 
  */
 static VALUE rb_gst_querytype_get_nick(self)
     VALUE self;
@@ -118,7 +119,7 @@ static VALUE rb_gst_querytype_get_nick(self)
 /*
  *  Method: description -> aString
  *
- *  Gets a longer description of the querytype. 
+ *  Gets a longer description of the querytype, as a String. 
  */
 static VALUE rb_gst_querytype_get_description(self)
     VALUE self;

@@ -51,7 +51,7 @@ static VALUE rb_gst_parse_launch(self, command)
 #else
     rb_raise(rb_eRuntimeError, 
              "This function has been disabled "
-             "when GStreamer were compiled");
+             "when GStreamer was compiled");
 #endif
     return Qnil;
 }

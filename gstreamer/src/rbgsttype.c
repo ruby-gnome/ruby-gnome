@@ -69,7 +69,9 @@ static VALUE rb_gst_type_get_types(self)
  *  Class method: each { |aTypeObject| block } -> nil
  *
  *  Calls the block for each registred types, passing a reference to
- *  the Gst::Type as parameter. 
+ *  the Gst::Type as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_type_each(self)
     VALUE self;
@@ -111,7 +113,7 @@ static VALUE rb_gst_type_find_by_mime(self, mime)
 /*
  *  Method: id -> aFixnum
  *
- *  Gets the ID number of the type.
+ *  Gets the ID number of the type, as a Fixnum.
  */
 static VALUE rb_gst_type_get_id(self)
     VALUE self;
@@ -123,7 +125,7 @@ static VALUE rb_gst_type_get_id(self)
 /*
  *  Method: mime -> aString
  *
- *  Gets the MIME type of the type. 
+ *  Gets the MIME type of the type, as a String. 
  */
 static VALUE rb_gst_type_get_mime(self)
     VALUE self;
@@ -136,7 +138,7 @@ static VALUE rb_gst_type_get_mime(self)
  *  Method: exts -> aString
  *
  *  Gets files extentions handled by the type, if there
- *  are any.  This method may otherwise return nil. 
+ *  are any, as a String.  This method may otherwise return nil. 
  */
 static VALUE rb_gst_type_get_exts(self)
     VALUE self;

@@ -49,7 +49,7 @@ GType gst_event_mask_get_type(void) {
  *  Method: type_id -> aFixnum
  *
  *  Gets the type id of the Gst::Event type referred by this
- *  event mask.
+ *  event mask, as a Fixnum.
  */
 static VALUE rb_gst_eventmask_get_type_id(self)
     VALUE self;

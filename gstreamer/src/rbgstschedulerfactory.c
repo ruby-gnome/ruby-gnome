@@ -30,7 +30,7 @@
 /*
  *  Method: to_s -> aString
  *
- *  Gets a string representing the factory.
+ *  Gets a String representing the factory.
  */
 static VALUE rb_gst_schedulerfactory_to_s(self)
     VALUE self;

@@ -30,7 +30,7 @@
 /*
  *  Method: name -> aString
  *
- *  Gets the name of the feature.
+ *  Gets the name of the feature, as a String.
  */
 static VALUE rb_gst_pluginfeature_get_name(self)
     VALUE self;
@@ -45,7 +45,7 @@ static VALUE rb_gst_pluginfeature_get_name(self)
  *  Check if the plugin containing the feature is loaded.
  *  If not, the plugin will be loaded.
  *
- *  Returns a boolean indicating the feature is loaded.
+ *  Returns a boolean indicating if the feature is loaded.
  */
 static VALUE rb_gst_pluginfeature_ensure_loaded(self)
     VALUE self;

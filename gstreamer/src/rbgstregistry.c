@@ -54,7 +54,9 @@ static VALUE rb_gst_registry_get_plugins(self)
  *  Class method: each_plugin { |aPlugin| block } -> nil
  *
  *  Calls the block for each plugin in the pool, passing a reference to
- *  the Gst::Plugin as parameter. 
+ *  the Gst::Plugin as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_registry_each_plugin(self)
     VALUE self;
@@ -107,6 +109,8 @@ static VALUE rb_gst_registry_get_registries(self)
  *
  *  Calls the block for each registries in the pool, passing a reference to
  *  the Gst::Registry as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_registry_each(self)
     VALUE self;
@@ -117,7 +121,7 @@ static VALUE rb_gst_registry_each(self)
 /*
  *  Method: name -> aString
  *
- *  Gets the name of the registry.
+ *  Gets the name of the registry, as a String.
  */
 static VALUE rb_gst_registry_get_name(self)
     VALUE self;
@@ -129,7 +133,8 @@ static VALUE rb_gst_registry_get_name(self)
 /*
  *  Method: details -> aString
  *
- *  Gets some details about the registry.  May be nil.
+ *  Gets some details about the registry, as a String.  
+ *  Returns nil if the registry has no details.
  */
 static VALUE rb_gst_registry_get_details(self)
     VALUE self;
@@ -179,6 +184,8 @@ static VALUE rb_gst_registry_get_paths(self)
  *
  *  Calls the block for each path of the registry, passing a reference to
  *  the path String as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_registry_each_path(self)
     VALUE self;

@@ -30,7 +30,7 @@
 /*
  *  Method: name -> aString
  *
- *  Gets the name of the caps.
+ *  Gets the name of the caps, as a String.
  */
 static VALUE rb_gst_caps_get_name(self)
     VALUE self;
@@ -41,7 +41,7 @@ static VALUE rb_gst_caps_get_name(self)
 /*
  *  Method: type_id -> aFixnum
  *
- *  Gets the type ID of the caps. 
+ *  Gets the type ID of the caps, as a Fixnum.
  */
 static VALUE rb_gst_caps_get_type_id(self)
     VALUE self;
@@ -188,6 +188,8 @@ static VALUE rb_prop(prop)
  *  Calls the block for each property of the Gst::Caps, passing references
  *  of name (String), value (an Object), and fixed state (a Boolean)
  *  as parameters.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_caps_each_property(self)
     VALUE self;
@@ -224,7 +226,7 @@ static VALUE rb_gst_caps_each_property(self)
 /*
  *  Method: mime -> aString
  *
- *  Get the mime type of the caps as a string.
+ *  Get the mime type of the caps, as a String.
  */
 static VALUE rb_gst_caps_get_mime(self)
     VALUE self;
@@ -235,7 +237,7 @@ static VALUE rb_gst_caps_get_mime(self)
 /*
  *  Method: set_mime(aMimeString) -> self
  *
- *  Set the mime type of the caps as a string.
+ *  Set the mime type of the caps, as a String.
  */
 static VALUE rb_gst_caps_set_mime(self, mime)
     VALUE self, mime;

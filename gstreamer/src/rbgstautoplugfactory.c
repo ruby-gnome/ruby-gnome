@@ -70,7 +70,9 @@ static VALUE rb_gst_autoplugfactory_make(self, name)
 /*
  *  Method: create -> anAutoplug
  *
- *  Creates a new Gst::Autoplug instance from the current autoplug factory. 
+ *  Creates and returns a new Gst::Autoplug instance from the current autoplug 
+ *  factory. 
+ *
  *  Returns nil if the autoplug object could not be constructed.
  */
 static VALUE rb_gst_autoplugfactory_create(self)
@@ -85,7 +87,7 @@ static VALUE rb_gst_autoplugfactory_create(self)
 /*
  *  Method: to_s -> aString
  *
- *  Gets a string representing the factory.
+ *  Gets a String representing the factory.
  */
 static VALUE rb_gst_autoplugfactory_to_s(self)
     VALUE self;

@@ -31,7 +31,7 @@
  *  Method: speed -> anInteger
  *
  *  Gets the speed of the clock.  
- *  The returned integer can be either a Fixnum or a Float.
+ *  The returned value can be either a Fixnum or a Float.
  */
 static VALUE rb_gst_clock_get_speed(self)
     VALUE self;
@@ -42,7 +42,7 @@ static VALUE rb_gst_clock_get_speed(self)
 /*
  *  Method: time -> aFixnum
  *
- *  Gets the time of the clock (in nanoseconds).  
+ *  Gets the time of the clock (in nanoseconds), as a Bignum.
  */
 static VALUE rb_gst_clock_get_time(self)
     VALUE self;

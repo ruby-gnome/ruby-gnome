@@ -30,14 +30,14 @@
 /*
  *  Method: name -> aString
  *
- *  Gets the name of the pad template.
- *  This overrides Gst::Object#get_name.
+ *  Gets the name of the pad template, as a String.
+ *  This overrides Gst::Object#name.
  */
 static VALUE rb_gst_padtemplate_get_name(self)
     VALUE self;
 {
     /* 
-     *  We can't call Gst::Object#get_name since the real name
+     *  We can't call Gst::Object#name since the real name
      *  of the pad template is in the "name_template" field of 
      *  GstPadTemplate.
      */
@@ -48,7 +48,7 @@ static VALUE rb_gst_padtemplate_get_name(self)
 /*
  *  Method: presence -> aFixnum
  *
- *  Gets presence:
+ *  Gets presence, which can be:
  *
  *    - Gst::Pad::PRESENCE_ALWAYS;
  *    - Gst::Pad::PRESENCE_SOMETIMES;
@@ -64,7 +64,7 @@ static VALUE rb_gst_padtemplate_get_presence(self)
 /*
  *  Method: direction -> aFixnum
  *
- *  Gets direction:
+ *  Gets direction, which can be:
  *
  *    - Gst::Pad::DIRECTION_SRC;
  *    - Gst::Pad::DIRECTION_SINK;
@@ -94,12 +94,6 @@ static VALUE rb_gst_padtemplate_get_caps(self)
     arr = rb_ary_new();
 
     for (list = pad->caps; list != NULL; list = list->next) {
-        /*
-         *  Increment the ref count of the Caps, since it was not
-         *  created with gst_caps_new(), and it will be unref() from
-         *  the GC.  
-         */
-        //GstCaps *caps = gst_caps_ref(list);
         rb_ary_push(arr, RGST_CAPS_NEW(list));
     }
     return arr;
@@ -110,6 +104,8 @@ static VALUE rb_gst_padtemplate_get_caps(self)
  *
  *  Calls the block for each capability of the pad template, 
  *  passing a reference to the Gst::Caps object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_padtemplate_each_caps(self)
     VALUE self;

@@ -65,6 +65,8 @@ static VALUE rb_gst_format_find(self, nick)
  *
  *  Calls the block for each registered format, passing a reference
  *  to the Gst::Format object as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_format_each(self)
     VALUE self;
@@ -84,9 +86,7 @@ static VALUE rb_gst_format_each(self)
 /*
  *  Method: type_id -> aFixnum
  *
- *  Gets the type id of this format, as an integer value.
- *  
- *  Meaningful types are:
+ *  Gets the type id of this format:
  *    - Gst::Format::UNDEFINED;
  *    - Gst::Format::DEFAULT;
  *    - Gst::Format::BYTES;
@@ -105,7 +105,7 @@ static VALUE rb_gst_format_get_type_id(self)
 /*
  *  Method: nick -> aString
  *
- *  Gets the short nick of the format. 
+ *  Gets the short nick of the format, as a String. 
  */
 static VALUE rb_gst_format_get_nick(self)
     VALUE self;
@@ -117,7 +117,7 @@ static VALUE rb_gst_format_get_nick(self)
 /*
  *  Method: description -> aString
  *
- *  Gets a longer description of the format. 
+ *  Gets a longer description of the format, as a String. 
  */
 static VALUE rb_gst_format_get_description(self)
     VALUE self;

@@ -35,8 +35,6 @@
  *  If element name is ommited (or nil), then the thread will receive a guaranteed
  *  unique name, consisting of the "thread" string and a number.
  *  If name is given, it will be given the name supplied.
- *
- *  Returns nil if the thread could not be created.
  */
 static VALUE rb_gst_thread_new(argc, argv, self)
     int argc;
@@ -50,7 +48,6 @@ static VALUE rb_gst_thread_new(argc, argv, self)
     bin = gst_thread_new(name != Qnil ? RVAL2CSTR(name) : NULL);
     if (bin != NULL) {
         RBGST_INITIALIZE(self, bin);
-        return RGST_THREAD_NEW(bin);
     }
     return Qnil;
 }

@@ -79,7 +79,7 @@ static VALUE constStateAsync = INT2FIX(GST_STATE_ASYNC);
  *  the intermediary states and calling the class's state change function 
  *  for each.
  *
- *  Returns an integer code, according to the result of the operation:
+ *  Returns a Fixnum code, according to the result of the operation:
  *
  *    - Gst::Element::STATE_FAILURE;
  *    - Gst::Element::STATE_SUCCESS;
@@ -131,7 +131,7 @@ static VALUE rb_gst_element_get_state(self)
 /*
  *  Method: stop -> aFixnum
  *
- *  Calls Gst::Element#set_state with Gst::Element::STATE_NULL.
+ *  Synonym for Gst::Element#set_state with Gst::Element::STATE_NULL.
  */
 static VALUE rb_gst_element_stop(self)
     VALUE self;
@@ -142,7 +142,7 @@ static VALUE rb_gst_element_stop(self)
 /*
  *  Method: ready -> aFixnum
  *
- *  Calls Gst::Element#set_state with Gst::Element::STATE_READY.
+ *  Synonym for Gst::Element#set_state with Gst::Element::STATE_READY.
  */
 static VALUE rb_gst_element_ready(self)
     VALUE self;
@@ -153,7 +153,7 @@ static VALUE rb_gst_element_ready(self)
 /*
  *  Method: pause -> aFixnum
  *
- *  Calls Gst::Element#set_state with Gst::Element::STATE_PAUSED.
+ *  Synonym for Gst::Element#set_state with Gst::Element::STATE_PAUSED.
  */
 static VALUE rb_gst_element_pause(self)
     VALUE self;
@@ -164,7 +164,7 @@ static VALUE rb_gst_element_pause(self)
 /*
  *  Method: play -> aFixnum
  *
- *  Calls Gst::Element#set_state with Gst::Element::STATE_PLAYING.
+ *  Synonym for Gst::Element#set_state with Gst::Element::STATE_PLAYING.
  */
 static VALUE rb_gst_element_play (self)
     VALUE self;
@@ -269,6 +269,7 @@ static int check_property(element, name, value)
  *  which are generated on-the-fly according to the Gst::Element type.
  *
  *  Example:
+ *
  *      e = Gst::ElementFactory.make("filesrc")
  *      e.set_property("location", "a_file.ogg")
  *      # This does exactly the same
@@ -301,6 +302,7 @@ static VALUE rb_gst_element_set_property(self, name, value)
  *  which are generated on-the-fly according to the Gst::Element type.
  *
  *  Example:
+ *
  *      e = Gst::ElementFactory.make("filesrc")
  *      # ...
  *      puts "Location is " + e.get_property("location")
@@ -328,6 +330,8 @@ static VALUE rb_gst_element_get_property(self, name)
  *  Calls the block for each property of the element, passing
  *  name (aString), description (aStringDescr) and value (anObject) of the property 
  *  as parameters.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_element_each_property(self)
     VALUE self;
@@ -505,6 +509,8 @@ static VALUE rb_gst_element_get_pads(self)
  *
  *  Calls the block for each pad associated with the element, passing a 
  *  reference to the Gst::Pad as parameter.
+ *
+ *  Always returns nil.
  */
 static VALUE rb_gst_element_each_pad(self)
     VALUE self;
@@ -582,7 +588,7 @@ static VALUE rb_gst_element_unlink_pads(self, other_element)
 }
 
 /*
- *  Method: add_ghost_pad(aPad, aPadNameString=nil) = aPad
+ *  Method: add_ghost_pad(aPad, aPadNameString=nil) -> aPad
  *
  *  Creates a ghost pad from the given pad, and adds it to the list of
  *  pads of the element.
@@ -762,7 +768,7 @@ static VALUE rb_gst_element_is_indexable(self)
  *      - Gst::Format::PERCENT;
  *      - Gst::Format::UNITS.
  *
- *  Returns a fixnum, or nil if the query could not be performed.
+ *  Returns a Fixnum value, or nil if the query could not be performed.
  */
 static VALUE rb_gst_element_query(argc, argv, self)
     int argc;
