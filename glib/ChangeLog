@@ -1,3 +1,8 @@
+2004-04-27  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* src/rbglib_spawn.c: Added.
+	* src/rbglib.c: Follow above changes.
+
 2004-04-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: Fix bugs, Add GLib::Log.log, set_fatal_mask, 
