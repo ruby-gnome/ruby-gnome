@@ -1,3 +1,10 @@
+2003-08-17  KATO Kazuyoshi  <kzys@users.sf.net>
+
+	* sample/gtk-demo/stock_browser.rb: Added.
+	* sample/gtk-demo/main.rb: When ARGV passed, Show only class/file
+	which read from ARGV.
+	* sample/gtk-demo/common.rb: Code cleanup.
+
 2003-08-17 Martin Povolny <xpovolny@fi.muni.cz>
     * src/rbgdkatom.c: Fix memory leak in gdkatom_name reported by 
     Jan Becvar <jean@solnet.cz>.

@@ -1,9 +1,47 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.2 2003/05/18 17:02:41 mutoh Exp $
+# $Id: main.rb,v 1.3 2003/08/17 09:30:44 kzys Exp $
 
 require 'gtk2'
 
 module Demo
+  INDEX = [
+    ["Application main window",
+      "appwindow.rb",     :AppWindow,     []],
+    ["Button Boxes",
+      "button_box.rb",    :ButtonBox,     []],
+    ["Change Display",
+      "changedisplay.rb", :ChangeDisplay, []],
+    ["Color Selector",
+      "colorsel.rb",      :ColorSel,      []],
+    ["Dialog and Message Boxes",
+      "dialog.rb",        :Dialog,        []],
+    ["Drawing Area",
+      "drawingarea.rb",   :DrawingArea,   []],
+    ["Images",
+      "images.rb",        :Images,        []],
+	["Item Factory",
+      "item_factory.rb",  :ItemFactory,   []],
+    ["Menus",
+      "menus.rb",         :Menus,         []],
+    ["Paned Widgets",
+      "panes.rb",         :Panes,         []],
+    ["Pixbufs",
+      "pixbufs.rb",       :Pixbufs,       []],
+    ["Size Groups",
+      "sizegroup.rb",     :SizeGroup,     []],
+    ["Stock Item and Icon Browser",
+      "stock_browser.rb", :StockBrowser,  []],
+    ["Text Widget",
+      "textview.rb",      :TextView,      []],
+    ["Tree View", nil, nil,
+      [
+	["Editable Cells", "editable_cells.rb", :EditableCells],
+	["List Store",     "list_store.rb",     :ListStore],
+	["Tree Store",     "tree_store.rb",     :TreeStore],
+      ]
+    ],
+  ]
+
   class Main < Gtk::Window
     TITLE_COLUMN    = 0
     FILENAME_COLUMN = 1
@@ -17,43 +55,6 @@ module Demo
 
       @info_buffer = Gtk::TextBuffer.new
       @source_buffer = Gtk::TextBuffer.new
-      @demos = [
-	["Application main window",
-	  "appwindow.rb",     :AppWindow,     []],
-	["Button Boxes",
-	  "button_box.rb",    :ButtonBox,     []],
-	["Change Display",
-	  "changedisplay.rb", :ChangeDisplay, []],
-	["Color Selector",
-	  "colorsel.rb",      :ColorSel,      []],
-	["Dialog and Message Boxes",
-	  "dialog.rb",        :Dialog,        []],
-	["Drawing Area",
-	  "drawingarea.rb",   :DrawingArea,   []],
-	["Images",
-	  "images.rb",        :Images,        []],
-	["Item Factory",
-	  "item_factory.rb",  :ItemFactory,   []],
-	["Menus",
-	  "menus.rb",         :Menus,         []],
-	["Paned Widgets",
-	  "panes.rb",         :Panes,         []],
-	["Pixbufs",
-	  "pixbufs.rb",       :Pixbuf,        []],
-	["Size Groups",
-	  "sizegroup.rb",     :SizeGroup,     []],
-	["Stock Item and Icon Browser",
-	  "stock_browser.rb", :StockBrowser,  []],
-	["Text Widget",
-	  "textview.rb",      :TextView,      []],
-	["Tree View", nil, nil,
-	  [
-	    ["Editable Cells", "editable_cells.rb", :EditableCells],
-	    ["List Store",     "list_store.rb",     :ListStore],
-	    ["Tree Store",     "tree_store.rb",     :TreeStore],
-	  ]
-	],
-      ]
 
       set_title('Ruby/GTK+ Code Demos')
       signal_connect('destroy') do
@@ -101,7 +102,7 @@ module Demo
       selection.set_mode(Gtk::SELECTION_BROWSE)
       tree_view.set_size_request(200, -1)
 
-      @demos.each do |*args| # title, filename, class, children
+      DEMOS.each do |*args| # title, filename, class, children
 	iter = model.append(nil)
 
 	args[0, 3].each_with_index do |value, column|
@@ -146,9 +147,11 @@ module Demo
 	begin
           lib = iter.get_value(FILENAME_COLUMN)
           if lib
-            require(lib) 
+            #require(lib)
+	    load(lib)
             
             klass = eval(iter.get_value(FUNC_COLUMN))
+	    @instances[klass] = nil
             if @instances[klass]
               @instances[klass].show
             else
@@ -289,11 +292,30 @@ module Demo
   end
 end
 
-
 Gtk.init
 
-main = Demo::Main.new
-main.set_default_size(600, 400)
-main.show_all
+target = ARGV.shift
+if target
+  Demo::INDEX.each do |title, filename, klass_symbol, children|
+    if target == filename or target == klass_symbol.id2name
+      require filename
+      
+      window = Demo.const_get(klass_symbol).new
+      window.show_all
+      
+      class << window
+	def quit
+	  Gtk.main_quit
+	end
+      end
+      
+      break
+    end
+  end
+else
+  main = Demo::Main.new
+  main.set_default_size(600, 400)
+  main.show_all
+end
 
 Gtk.main
