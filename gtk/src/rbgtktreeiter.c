@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: mutoh $
-  $Date: 2003/03/09 15:14:52 $
+  $Author: sakai $
+  $Date: 2003/03/14 03:12:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -145,7 +145,12 @@ treeiter_eql(self, other)
 {
     gint i, num1, num2;
     GtkTreeIter* iter1 = _SELF(self);
-    GtkTreeIter* iter2 = _SELF(other);
+    GtkTreeIter* iter2;
+
+    if (!rb_obj_is_kind_of(other, GTYPE2CLASS(GTK_TYPE_TREE_ITER)))
+        return Qfalse;
+
+    iter2 = _SELF(other);
 
     GtkTreeModel* model1 = (GtkTreeModel*)iter1->user_data3;
     GtkTreeModel* model2 = (GtkTreeModel*)iter2->user_data3;

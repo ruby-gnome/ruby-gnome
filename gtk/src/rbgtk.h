@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: sakai $
-  $Date: 2003/03/07 00:26:34 $
+  $Date: 2003/03/14 03:12:21 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -37,6 +37,8 @@
 #endif
 
 #include <signal.h>
+
+#undef G_THREADS_ENABLED
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
@@ -95,7 +97,6 @@ extern GType gtk_accel_group_entry_get_type();
 typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
                                          gint column, GValue *value);
 extern void rbgtk_register_treeiter_set_value_func(VALUE klass, rbgtkiter_set_value_func);
-RUBY_GTK2_VAR VALUE treeiter_set_value_table;
 
 /*
  * Gtk::SelectionData

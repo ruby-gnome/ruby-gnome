@@ -3,8 +3,8 @@
 
   rbgtktreerowreference.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: sakai $
+  $Date: 2003/03/14 03:12:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -98,14 +98,16 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
 void 
 Init_gtk_treerowreference()
 {
-  VALUE gTreeref = G_DEF_CLASS(RBGTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
+    if (rbgtk_tree_row_reference_get_type) {
+        VALUE gTreeref = G_DEF_CLASS(RBGTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   
-  rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
-  rb_define_method(gTreeref, "path", treerowref_get_path, 0);
-  rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
+        rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
+        rb_define_method(gTreeref, "path", treerowref_get_path, 0);
+        rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
 
-  rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
-  rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
-  rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
+        rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
+        rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
+        rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
+    }
 }
 

@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: sakai $
-  $Date: 2003/02/17 11:29:20 $
+  $Date: 2003/03/14 03:12:21 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -128,6 +128,7 @@ clipboard_wait_is_text_available(self)
 void 
 Init_gtk_clipboard()
 {
+  if (rbgtk_clipboard_get_type){
     VALUE gClipboard = G_DEF_CLASS(RBGTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 
     rb_define_method(gClipboard, "initialize", clipboard_initialize, 1);
@@ -139,4 +140,5 @@ Init_gtk_clipboard()
     rb_define_method(gClipboard, "request_text", clipboard_request_text, 0);
     rb_define_method(gClipboard, "wait_for_text", clipboard_wait_for_text, 0);
     rb_define_method(gClipboard, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
+  }
 }

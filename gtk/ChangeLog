@@ -1,3 +1,20 @@
+2003-03-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/global.h, src/init.c: move declarations of Init_gtk_gdk(), 
+	Init_gtk_gtk() and Init_gtk_inits() from src/global.h to src/init.c.
+
+	* src/rbgtk.h, src/global.h: move treeiter_set_value_table declaration
+	from src/rbgtk.h to src/global.h.
+
+	* src/rbgtktreerowreference.c, src/rbgtkclipboard.c:
+	don't initialize if rbgtk_tree_row_reference_get_type or
+	rbgtk_clipboard_get_type is not set.
+
+	* src/init.c: rb_protect() when requiring gtk22.so or gtk20.so.
+
+	* src/rbgtktreeiter.c: Gtk::TreeIter#== should accept not only
+	Gtk::TreeIter instance, but arbitary objects.
+
 2003-03-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: remove unused variables: gdkx, rubylibdir, sitelibdir.
