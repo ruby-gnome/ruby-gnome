@@ -1,3 +1,8 @@
+Mon Dec  9 04:10:23 2002  Hiroshi IGARASHI  <iga@ruby-lang.org>
+
+	* src/rbgtkmain.c (gtk_m_main, gtk_m_main_quit): Thread#join by
+	Gtk.main thread isn't needed.
+
 2002-12-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: Improve Gtk::ItemFactory#create_item/s.

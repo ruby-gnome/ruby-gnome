@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: igapy $
-  $Date: 2002/12/07 14:11:52 $
+  $Date: 2002/12/08 19:17:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,7 +16,6 @@
 EXTERN VALUE rb_progname, rb_argv;
 
 static VALUE rbgtk_main_threads = Qnil;
-static VALUE rbgtk_quit_threads = Qnil;
 
 static VALUE
 gtk_m_init(argc, argv, self)
@@ -67,11 +66,6 @@ gtk_m_main(self)
 {
     rb_ary_push(rbgtk_main_threads, rb_thread_current());
     gtk_main();
-    if (!NIL_P(rbgtk_quit_threads) &&
-	rbgtk_quit_threads != rb_thread_current()) {
-	rb_funcall(rbgtk_quit_threads, rb_intern("join"), 0);
-	rbgtk_quit_threads = Qnil;
-    }
     return Qnil;
 }
 
@@ -86,9 +80,7 @@ static VALUE
 gtk_m_main_quit(self)
     VALUE self;
 {
-    if (!NIL_P(rbgtk_quit_threads)) return Qnil;
     gtk_main_quit();
-    rbgtk_quit_threads = rb_thread_current();
     rb_thread_wakeup(rb_ary_pop(rbgtk_main_threads));
     return Qnil;
 }
@@ -184,7 +176,6 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "init", gtk_m_init, -1);
     rb_global_variable(&rbgtk_main_threads);
     rbgtk_main_threads = rb_ary_new();
-    rb_global_variable(&rbgtk_quit_threads);
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
