@@ -1,9 +1,15 @@
+2002-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Add -Wall option to CFLAGS when Compiler is gcc.
+	* doc/rbbr_rb.rb, doc/rbdump.rb: Remove files.
+
 2002-10-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextview.c: file added.
 
 2002-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktreeviewcolumn.c: Fix return a segfault of tvc_get_spacing().
 	* doc/gtkbrows.rb, doc/rbbr_gtk.rb: Remove files.
 
 2002-10-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
