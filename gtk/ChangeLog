@@ -4,7 +4,6 @@
 	#swap, #move_before, #move_after.
 	* src/rbgtktreestore.c: Add Gtk::TreeStore#iter_is_valid?, #reorder, 
 	#swap, #move_before, #move_after.
-	* src/lib/gtk2.rb: Add Gtk::TreeIter#valid?, #move_before, #move_after.
 
 2003-11-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
