@@ -68,12 +68,45 @@ end
 
 
 def check_win32()
-  STDOUT.print("checking for G_OS_WIN32... ")
+  $G_PLATFORM_WIN32 = false
+  $G_OS_WIN32       = false
+  $G_WITH_CYGWIN    = false
+
+  STDOUT.print("checking for G_PLATFORM_WIN32... ")
   STDOUT.flush
-  if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+  if macro_defined?('G_PLATFORM_WIN32', "#include <glibconfig.h>\n")
     STDOUT.print "yes\n"
-    $CFLAGS += ' -fnative-struct' if $cc_is_gcc
+    $G_PLATFORM_WIN32 = true
   else
     STDOUT.print "no\n"
   end
+
+  if $G_PLATFORM_WIN32
+    STDOUT.print("checking for G_OS_WIN32... ")
+    STDOUT.flush
+    if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+      STDOUT.print "yes\n"
+      $G_OS_WIN32 = true
+      if $cc_is_gcc
+	if /^2\./ =~ `#{Config::CONFIG['CC']} -dumpversion`.chomp
+	  $CFLAGS += ' -fnative-struct'
+	else
+	  $CFLAGS += ' -mms-bitfields'
+	end
+      end
+    else
+      STDOUT.print "no\n"
+    end
+
+#    STDOUT.print("checking for G_WITH_CYGWIN... ")
+#    STDOUT.flush
+#    if macro_defined?('G_WITH_CYGWIN', "#include <glibconfig.h>\n")
+#      STDOUT.print "yes\n"
+#      $G_WITH_CYGWIN = true
+#    else
+#      STDOUT.print "no\n"
+#    end
+  end
+
+  nil
 end
