@@ -3,15 +3,15 @@
 
   rbgdkdisplaymanager.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/04 15:25:57 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
@@ -41,7 +41,7 @@ gdkdisplaymanager_get_core_pointer(self)
 void 
 Init_gtk_gdk_display_manager()
 {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     VALUE gdkDisplayManager = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
 
     rb_define_singleton_method(gdkDisplayManager, "get", gdkdisplaymanager_get, 0);

@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/06 16:47:54 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -181,7 +181,7 @@ note_get_nth_page(self, page_num)
     return page ? GOBJ2RVAL(page) : Qnil;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 note_get_n_pages(self)
     VALUE self;
@@ -363,7 +363,7 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "reorder_child", note_reorder_child, 2);
     rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
     rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gNotebook, "n_pages", note_get_n_pages, 0);
 #endif
     rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);

@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/20 16:39:04 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -272,7 +272,7 @@ treeview_expand_row(self, path, open_all)
                                     RTEST(open_all)) ? Qtrue: Qfalse;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 treeview_expand_to_path(self, path)
     VALUE self, path;
@@ -533,7 +533,7 @@ treeview_signal_func(num, values)
     return rb_ary_new3(3, GOBJ2RVAL(view), ITR2RVAL(iter), GVAL2RVAL(&values[2]));
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
     VALUE self, path, focus_column, focus_cell, start_editing;
@@ -569,7 +569,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
     rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
-   #if GTK_MINOR_VERSION >= 2
+   #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
    #endif
     rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
@@ -590,7 +590,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
     rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
     rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTv, "set_cursor_on_cell", treeview_set_cursor_on_cell, 4);
 #endif
     

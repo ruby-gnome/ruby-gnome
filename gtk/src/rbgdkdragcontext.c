@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/02 14:49:52 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -162,7 +162,7 @@ gdkdragcontext_find_window(argc, argv, self)
                              NUM2INT(x_root), NUM2INT(y_root),
                              &dest_window, &prot);
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
         gdk_drag_find_window_for_screen(_SELF(self),
                                         GDK_WINDOW(RVAL2GOBJ(drag_window)), 

@@ -3,8 +3,8 @@
 
   rbgtkinvisible.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/04 18:34:04 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -25,7 +25,7 @@ invisible_initialize(argc, argv, self)
     if (argc == 0){
         RBGTK_INITIALIZE(self, gtk_invisible_new());
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         RBGTK_INITIALIZE(self, gtk_invisible_new_for_screen(
                              GDK_SCREEN(RVAL2GOBJ(screen))));
 #else
@@ -35,7 +35,7 @@ invisible_initialize(argc, argv, self)
     return Qnil;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 invisible_set_screen(self, screen)
     VALUE self, screen;
@@ -59,7 +59,7 @@ Init_invisible()
 
     rb_define_method(gInvisible, "initialize", invisible_initialize, -1);
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gInvisible, "set_screen", invisible_set_screen, 1);
     rb_define_method(gInvisible, "screen", invisible_get_screen, 0);
 #endif

@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/06 16:54:25 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -700,7 +700,7 @@ GParamSpec* gtk_widget_class_find_style_property
                                             (GtkWidgetClass *klass,
                                              const gchar *property_name);
 */
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 widget_style_properties(self)
     VALUE self;
@@ -761,7 +761,7 @@ widget_style_get_property(self, prop_name)
         StringValue(prop_name);
         name = StringValuePtr(prop_name);
     }
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     pspec = gtk_widget_class_find_style_property(oclass, name);
 #endif
     if (!pspec)
@@ -977,7 +977,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWidget, "style_properties", widget_style_properties, 0);
 #endif
     rb_define_method(gWidget, "intersect", widget_intersect, 1);

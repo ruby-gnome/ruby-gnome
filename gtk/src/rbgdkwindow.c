@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/08 19:18:24 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -77,7 +77,7 @@ gdkwin_foreign_new(argc, argv, self)
     	win = gdk_window_foreign_new(NUM2UINT(arg[0]));
 	break;
       case 2:
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
 #else
     	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 

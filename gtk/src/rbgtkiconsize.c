@@ -3,8 +3,8 @@
 
   rbgtkiconsize.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/31 17:10:08 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -22,7 +22,7 @@ icon_size_lookup(self, size)
         return Qnil;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 icon_size_lookup_for_settings(self, settings, size)
     VALUE self, settings, size;
@@ -76,7 +76,7 @@ Init_icon_size()
     VALUE mIconSize = rb_define_module_under(mGtk, "IconSize");
 
     rb_define_module_function(mIconSize, "lookup", icon_size_lookup, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_module_function(mIconSize, "lookup_for_settings", icon_size_lookup_for_settings, 2);
 #endif
     rb_define_module_function(mIconSize, "register", icon_size_register, 3);

@@ -3,8 +3,8 @@
 
   rbgtktreestore.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/14 07:14:57 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -89,7 +89,7 @@ static VALUE
 tstore_remove(self, iter)
     VALUE self, iter;
 {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     return gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
 #else
     gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter));
@@ -182,7 +182,7 @@ tstore_clear(self)
     gtk_tree_store_clear(_SELF(self));
     return self;
 }
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 tstore_iter_is_valid(self, iter)
     VALUE self, iter;
@@ -250,7 +250,7 @@ Init_gtk_tree_store()
     rb_define_method(ts, "ancestor?", tstore_is_ancestor, 2);
     rb_define_method(ts, "iter_depth", tstore_iter_depth, 1);
     rb_define_method(ts, "clear", tstore_clear, 0);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(ts, "iter_is_valid?", tstore_iter_is_valid, 1);
     rb_define_method(ts, "reorder", tstore_reorder, 2);
     rb_define_method(ts, "swap", tstore_swap, 2);

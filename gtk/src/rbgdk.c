@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/03 15:17:18 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -25,7 +25,7 @@ void        gdk_parse_args                  (gint *argc,
                                              gchar ***argv);
 */
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdk_s_get_display_arg_name(self)
     VALUE self;
@@ -49,7 +49,7 @@ gdk_s_set_sm_client_id(self, sm_client_id)
     return Qnil;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdk_s_notify_startup_complete(self)
     VALUE self;
@@ -307,12 +307,12 @@ Init_gtk_gdk()
 {
     mGdk = rb_define_module("Gdk");
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_module_function(mGdk, "display_arg_name", gdk_s_get_display_arg_name, 0);
 #endif
     rb_define_module_function(mGdk, "set_locale", gdk_s_set_locale, 0);
     rb_define_module_function(mGdk, "set_sm_client_id", gdk_s_set_sm_client_id, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_module_function(mGdk, "notify_startup_complete", gdk_s_notify_startup_complete, 0);
 #endif
     rb_define_module_function(mGdk, "program_class", gdk_s_get_program_class, 0);

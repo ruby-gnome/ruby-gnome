@@ -3,8 +3,8 @@
 
   rbgdkselection.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/02 18:34:05 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -30,7 +30,7 @@ gdkselection_owner_set(argc, argv, self)
                                       RVAL2ATOM(selection), 
                                       NUM2UINT(time), RTEST(send_event));
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
         ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                   GDK_WINDOW(RVAL2GOBJ(owner)), 
@@ -57,7 +57,7 @@ gdkselection_owner_get(argc, argv, self)
         rb_scan_args(argc, argv, "10", &selection);
         return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         rb_scan_args(argc, argv, "20", &display, &selection);
         return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                              RVAL2ATOM(selection)));
@@ -107,7 +107,7 @@ gdkselection_send_notify(argc, argv, self)
                                   NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                   NUM2INT(time));
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
         gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                               NUM2UINT(requestor), RVAL2ATOM(selection),

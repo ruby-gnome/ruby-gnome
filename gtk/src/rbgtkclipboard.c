@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: mutoh $
-  $Date: 2003/09/09 15:17:22 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -25,7 +25,7 @@ clipboard_get(argc, argv, self)
         rb_scan_args(argc, argv, "10", &selection);
         clipboard = gtk_clipboard_get(RVAL2ATOM(selection));
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, selection;
         rb_scan_args(argc, argv, "20", &display, &selection);
         clipboard = gtk_clipboard_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
@@ -41,7 +41,7 @@ static VALUE
 clipboard_get_display(self)
     VALUE self;
 {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     return GOBJ2RVAL(gtk_clipboard_get_display(_SELF(self)));
 #else
 	 return Qnil;

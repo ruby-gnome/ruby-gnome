@@ -3,15 +3,15 @@
 
   rbgdkdisplay.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/03 12:51:01 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
 
 #include "global.h"
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
 
 static VALUE
@@ -203,7 +203,7 @@ gdkscreen_get_setting(self,name)
 void 
 Init_gtk_gdk_screen()
 {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 
     rb_define_singleton_method(gdkScreen, "default", gdkscreen_default, 0);
@@ -218,8 +218,12 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
     rb_define_method(gdkScreen, "width", gdkscreen_width, 0);
     rb_define_method(gdkScreen, "height", gdkscreen_height, 0);
+#ifdef HAVE_GDK_SCREEN_GET_WIDTH_MM
     rb_define_method(gdkScreen, "width_mm", gdkscreen_width_mm, 0);
+#endif
+#ifdef HAVE_GDK_SCREEN_GET_HEIGHT_MM
     rb_define_method(gdkScreen, "height_mm", gdkscreen_height_mm, 0);
+#endif
     rb_define_method(gdkScreen, "visuals", gdkscreen_list_visuals, 0);
     rb_define_method(gdkScreen, "toplevel_windows", gdkscreen_get_toplevel_windows, 0);
     rb_define_method(gdkScreen, "display_name", gdkscreen_make_display_name, 0);

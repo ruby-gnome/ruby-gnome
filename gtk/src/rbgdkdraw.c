@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/20 16:48:15 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -138,7 +138,7 @@ gdkdraw_draw_lines(self, gc, pnts)
     return self;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkdraw_draw_pixbuf(self, gc, pixbuf, src_x, src_y, dest_x, dest_y, 
                     width, height, dither, x_dither, y_dither)
@@ -331,7 +331,7 @@ gdkdraw_get_xid(self)
 }
 #endif
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkdraw_get_display(self)
     VALUE self;
@@ -364,7 +364,7 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_points, 2);
     rb_define_method(gdkDrawable, "draw_line", gdkdraw_draw_line, 5);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkDrawable, "draw_pixbuf", gdkdraw_draw_pixbuf, 11);
 #endif
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
@@ -380,7 +380,7 @@ Init_gtk_gdk_draw()
 #ifdef GDK_WINDOWING_X11
     rb_define_method(gdkDrawable, "xid", gdkdraw_get_xid, 0);
 #endif
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkDrawable, "display", gdkdraw_get_display, 0);
     rb_define_method(gdkDrawable, "screen", gdkdraw_get_screen, 0);
 #endif

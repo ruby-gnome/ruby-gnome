@@ -3,8 +3,8 @@
 
   rbgtktreeselection.c -
 
-  $Author: mutoh $ 
-  $Date: 2003/11/20 16:39:04 $
+  $Author: sakai $ 
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -177,7 +177,7 @@ treeselection_select_range(self, start_path, end_path)
     return self;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 treeselection_get_selected_rows(self)
     VALUE self;
@@ -227,7 +227,7 @@ Init_gtk_treeselection()
     rb_define_method(gTs, "select_all", treeselection_select_all, 0);
     rb_define_method(gTs, "unselect_all", treeselection_unselect_all, 0);
     rb_define_method(gTs, "select_range", treeselection_select_range, 2);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTs, "selected_rows", treeselection_get_selected_rows, 0);
     rb_define_method(gTs, "count_selected_rows", treeselection_count_selected_rows, 0);
     rb_define_method(gTs, "unselect_range", treeselection_unselect_range, 2);

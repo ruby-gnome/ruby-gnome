@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/20 16:39:04 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -250,7 +250,7 @@ tvc_cell_is_visible(self)
     return gtk_tree_view_column_cell_is_visible(_SELF(self)) ? Qtrue : Qfalse;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 
 static VALUE
 tvc_focus_cell(self, renderer)
@@ -285,7 +285,7 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
     rb_define_method(tvc, "cell_size", tvc_cell_get_size, -1);
     rb_define_method(tvc, "cell_is_visible?", tvc_cell_is_visible, 0);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(tvc, "focus_cell", tvc_focus_cell, 1);
 #endif
     /* GtkTreeViewColumnSizing */

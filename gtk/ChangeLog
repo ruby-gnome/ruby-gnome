@@ -1,3 +1,8 @@
+2003-11-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: use "#if GTK_CHECK_VERSION(2,2,0)" instead of
+	"#if GTK_MINOR_VERSION >= 2" for conditional compiling.
+
 2003-11-21  Matthew Berg <galt@gothpoodle.com>
 
 	* src/rbgtktreeselection.c: Gtk::TreeSelection#selected_rows,

@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/20 16:39:04 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -205,7 +205,7 @@ treeiter_eql(self, other)
     return Qtrue;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 treeiter_to_string(self)
     VALUE self;
@@ -238,7 +238,7 @@ Init_gtk_treeiter()
     rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
     rb_define_method(gTreeIter, "[]=", treeiter_set_value_eql, 2);
     rb_define_method(gTreeIter, "==", treeiter_eql, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTreeIter, "to_str", treeiter_to_string, 0);
 #endif
 }

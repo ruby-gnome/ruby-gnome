@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/19 16:48:16 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -229,7 +229,7 @@ gdkevent_s_get_graphics_expose(self, window)
 }
 
 /* GdkEvent */
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkevent_initialize(self, type)
     VALUE self, type;
@@ -327,7 +327,7 @@ gdkevent_s_set_show_events(self, show_events)
     gdk_set_show_events(RTEST(show_events));
     return self;
 }
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkevent_set_screen(self, screen)
     VALUE self, screen;
@@ -526,11 +526,11 @@ gdkeventclient_send_client_message(argc, argv, self)
 {
     VALUE xid, display;
     rb_scan_args(argc, argv, "11", &xid, &display);
-    if NIL_P(display){
+    if (NIL_P(display)){
         return CBOOL2RVAL(gdk_event_send_client_message(
                               get_gdkevent(self), NUM2INT(xid)));
     } else {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
         return CBOOL2RVAL(gdk_event_send_client_message_for_display(
                               GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                               get_gdkevent(self),
@@ -634,7 +634,7 @@ Init_gtk_gdk_event()
 
 
     /* GdkEvent */
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkEvent, "initialize", gdkevent_initialize, 1);
 #endif
     rb_define_method(gdkEvent, "event_type", gdkevent_type, 0);
@@ -654,7 +654,7 @@ Init_gtk_gdk_event()
     rb_define_singleton_method(gdkEvent, "set_show_events", gdkevent_s_set_show_events, 1);
     rb_define_singleton_method(gdkEvent, "setting_get", gdkevent_s_setting_get, 1);
     rb_define_singleton_method(gdkEvent, "add_client_message_filter", gdkevent_s_add_client_message_filter, 1);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkEvent, "screen", gdkevent_screen, 0);
     rb_define_method(gdkEvent, "set_screen", gdkevent_set_screen, 1);
 #endif

@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/14 07:14:57 $
+  $Author: sakai $
+  $Date: 2003/11/20 18:27:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -89,7 +89,7 @@ static VALUE
 lstore_remove(self, iter)
     VALUE self, iter;
 {
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     return gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
 #else
     gtk_list_store_remove(_SELF(self), RVAL2ITR(iter));
@@ -160,7 +160,7 @@ lstore_clear(self)
     return self;
 }
 
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 lstore_iter_is_valid(self, iter)
     VALUE self, iter;
@@ -225,7 +225,7 @@ Init_gtk_list_store()
     rb_define_method(ls, "prepend", lstore_prepend, 0);
     rb_define_method(ls, "append", lstore_append, 0);
     rb_define_method(ls, "clear", lstore_clear, 0);
-#if GTK_MINOR_VERSION >= 2
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(ls, "iter_is_valid?", lstore_iter_is_valid, 1);
     rb_define_method(ls, "reorder", lstore_reorder, 1);
     rb_define_method(ls, "swap", lstore_swap, 2);
