@@ -4,7 +4,7 @@
   rbpangolayoutiter.c -
 
   $Author: mutoh $
-  $Date: 2004/10/27 16:52:03 $
+  $Date: 2005/01/09 18:44:14 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -119,6 +119,7 @@ void        pango_layout_iter_get_layout_extents
                                             (PangoLayoutIter *iter,
                                              PangoRectangle *ink_rect,
 */
+
 
 void
 Init_pango_layout_iter()

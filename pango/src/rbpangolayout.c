@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2003/09/10 18:17:50 $
+  $Date: 2005/01/09 18:44:14 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -106,6 +106,14 @@ layout_set_font_description(self, desc)
 }
 
 static VALUE
+layout_get_font_description(self)
+    VALUE self;
+{
+    const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
+    return desc ? BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
+}
+
+static VALUE
 layout_set_width(self, width)
     VALUE self, width;
 {
@@ -134,6 +142,23 @@ layout_get_wrap(self)
 {
     return GENUM2RVAL(pango_layout_get_wrap(_SELF(self)), PANGO_TYPE_WRAP_MODE);
 }
+
+#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
+static VALUE
+layout_set_ellipsize(self, ellipsize)
+    VALUE self, ellipsize;
+{
+    pango_layout_set_ellipsize(_SELF(self), RVAL2GENUM(ellipsize, 
+                                                       PANGO_TYPE_ELLIPSIZE_MODE));
+    return self;
+}
+static VALUE
+layout_get_ellipsize(self)
+    VALUE self;
+{
+    return GENUM2RVAL(pango_layout_get_ellipsize(_SELF(self)), PANGO_TYPE_ELLIPSIZE_MODE);
+}
+#endif
 
 static VALUE
 layout_set_indent(self, indent)
@@ -172,12 +197,25 @@ layout_set_justify(self, justify)
     pango_layout_set_justify(_SELF(self), RTEST(justify));
     return self;
 }
-
 static VALUE
 layout_get_justify(self)
     VALUE self;
 {
     return CBOOL2RVAL(pango_layout_get_justify(_SELF(self)));
+}
+
+static VALUE
+layout_set_auto_dir(self, auto_dir)
+    VALUE self, auto_dir;
+{
+    pango_layout_set_auto_dir(_SELF(self), RTEST(auto_dir));
+    return self;
+}
+static VALUE
+layout_get_auto_dir(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(pango_layout_get_auto_dir(_SELF(self)));
 }
 
 static VALUE
@@ -317,9 +355,13 @@ layout_get_line(self, line)
                       PANGO_TYPE_LAYOUT_LINE);
 }
 
-/*
-GSList*     pango_layout_get_lines          (PangoLayout *layout);
-*/
+static VALUE
+layout_get_lines(self)
+    VALUE self;
+{
+    return GSLIST2ARY2(pango_layout_get_lines(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
+}
+
 
 static VALUE
 layout_get_iter(self)
@@ -344,16 +386,23 @@ Init_pango_layout()
     rb_define_method(pLayout, "set_attributes", layout_set_attributes, 1);
     rb_define_method(pLayout, "attributes", layout_get_attributes, 0);
     rb_define_method(pLayout, "set_font_description", layout_set_font_description, 1);
+    rb_define_method(pLayout, "font_description", layout_get_font_description, 0);
     rb_define_method(pLayout, "set_width", layout_set_width, 1);
     rb_define_method(pLayout, "width", layout_get_width, 0);
     rb_define_method(pLayout, "set_wrap", layout_set_wrap, 1);
     rb_define_method(pLayout, "wrap", layout_get_wrap, 0);
+#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
+    rb_define_method(pLayout, "set_ellipsize", layout_set_ellipsize, 1);
+    rb_define_method(pLayout, "ellipsize", layout_get_ellipsize, 0);
+#endif
     rb_define_method(pLayout, "set_indent", layout_set_indent, 1);
     rb_define_method(pLayout, "indent", layout_get_indent, 0);
     rb_define_method(pLayout, "spacing", layout_get_spacing, 0);
     rb_define_method(pLayout, "set_spacing", layout_set_spacing, 1);
     rb_define_method(pLayout, "set_justify", layout_set_justify, 1);
     rb_define_method(pLayout, "justify?", layout_get_justify, 0);
+    rb_define_method(pLayout, "set_auto_dir", layout_set_auto_dir, 1);
+    rb_define_method(pLayout, "auto_dir?", layout_get_auto_dir, 0);
     rb_define_method(pLayout, "set_alignment", layout_set_alignment, 1);
     rb_define_method(pLayout, "alignment", layout_get_alignment, 0);
     rb_define_method(pLayout, "set_tabs", layout_set_tabs, 1);
@@ -368,6 +417,7 @@ Init_pango_layout()
     rb_define_method(pLayout, "pixel_size", layout_get_pixel_size, 0);
     rb_define_method(pLayout, "line_count", layout_get_line_count, 0);
     rb_define_method(pLayout, "get_line", layout_get_line, 1);
+    rb_define_method(pLayout, "lines", layout_get_lines, 0);
     rb_define_method(pLayout, "iter", layout_get_iter, 0);
 
     G_DEF_SETTERS(pLayout);
@@ -379,4 +429,10 @@ Init_pango_layout()
     /* PangoAlignment */
     G_DEF_CLASS(PANGO_TYPE_ALIGNMENT, "Alignment", pLayout);
     G_DEF_CONSTANTS(pLayout, PANGO_TYPE_ALIGNMENT, "PANGO_");
+
+#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
+    /* PangoEllipsizeMode */
+    G_DEF_CLASS(PANGO_TYPE_ELLIPSIZE_MODE, "EllipsizeMode", pLayout);
+    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_ELLIPSIZE_MODE, "PANGO_");
+#endif
 }

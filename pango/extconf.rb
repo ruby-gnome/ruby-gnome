@@ -7,7 +7,9 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package('pango') or exit 1
 check_win32
+
 have_func("pango_layout_iter_get_type")
+have_func("pango_layout_set_ellipsize")
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src'].map{|d|
