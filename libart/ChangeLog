@@ -1,3 +1,10 @@
+2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart_canvas.c: Change some function names which caused error 
+	of  Ruby/GnomeCanvas.
+	* extconf.rb: Work under GNOME-2.2.
+	But this changes may be not good solution...
+
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* All files: Update copyright.
@@ -8,8 +15,8 @@
 
 2003-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
-   License version 2." to "the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.".
+	* README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
+	License version 2." to "the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.".
 
 2003-01-04  Tom Payne <ruby-gnome-users-en@tompayne.org>
 

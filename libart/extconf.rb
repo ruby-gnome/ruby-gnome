@@ -4,9 +4,6 @@ extconf.rb for libart extention library
 
 require "mkmf"
 
-have_library("png", "png_create_write_struct")
-have_library("jpeg", "jpeg_set_defaults")
-
 config_cmd = with_config("libart2-config", "libart2-config")
 
 begin
@@ -19,6 +16,10 @@ rescue
   $libs = '-L/usr/local/lib -lart_lgpl_2 -lm'
   $CFLAGS = '-I/usr/local/include/libart-2.0'
 end
+
+$libs += " -lz "
+have_library("png", "png_create_write_struct")
+have_library("jpeg", "jpeg_set_defaults")
 
 #
 # create Makefiles

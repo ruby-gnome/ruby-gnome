@@ -4,7 +4,7 @@
   rbart.h - header file for Art module of ruby
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:55:26 $
+  $Date: 2003/02/08 18:51:44 $
 
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
@@ -22,8 +22,8 @@ extern VALUE artVpath;
 extern VALUE artVpathDash;
 extern VALUE artCanvas;
 
-extern double *get_art_affine(VALUE);
-extern VALUE make_art_affine(double[6]);
+extern double *rbart_get_art_affine(VALUE);
+extern VALUE rbart_make_art_affine(double[6]);
 
 extern void Init_art_affine(VALUE);
 

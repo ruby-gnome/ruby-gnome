@@ -4,7 +4,7 @@
    rbart_vpath.c -
 
    $Author: mutoh $
-   $Date: 2003/02/01 16:55:26 $
+   $Date: 2003/02/08 18:51:44 $
 
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
 
@@ -127,7 +127,7 @@ vpath_affine_transform(r_self, r_affine)
 	VALUE r_self;
 	VALUE r_affine;
 {
-	return make_art_vpath(art_vpath_affine_transform(get_art_vpath(r_self), get_art_affine(r_affine)));
+	return make_art_vpath(art_vpath_affine_transform(get_art_vpath(r_self), rbart_get_art_affine(r_affine)));
 }
 
 static VALUE
