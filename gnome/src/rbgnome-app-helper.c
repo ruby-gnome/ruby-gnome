@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.7 2002/10/17 14:34:39 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.8 2002/10/19 16:36:25 tkubo Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -722,11 +722,15 @@ ui_info_to_ary(uiinfo)
             rb_ary_push(item, rb_str_new2(uiinfo->pixmap_info));
             break;
           case GNOME_APP_PIXMAP_DATA:
-            xpm_data = rb_ary_new();
-            for (xpm = (char **)uiinfo->pixmap_info; *xpm != NULL; xpm++) {
-                rb_ary_push(xpm_data, rb_str_new2(*xpm));
+            if (uiinfo->pixmap_info == NULL) {
+                xpm_data = Qnil;
+            } else {
+                xpm_data = rb_ary_new();
+                for (xpm = (char **)uiinfo->pixmap_info; *xpm != NULL; xpm++) {
+                    rb_ary_push(xpm_data, rb_str_new2(*xpm));
+                }
+                rb_ary_push(item, xpm_data);
             }
-            rb_ary_push(item, xpm_data);
             break;
         }
         rb_ary_push(item, INT2FIX(uiinfo->accelerator_key)); /* 7 */

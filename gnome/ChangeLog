@@ -1,3 +1,29 @@
+2002-10-19  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-app-helper.c: Fix segmentation fault when xpm_data is 
+	not specified.
+	* src/rbgnome-appbar.c: Gnome::AppBar#get_progress -> Gnome::AppBar#progress.
+	Gnome::AppBar#get_response -> Gnome::AppBar#response.
+	* src/rbgnome-client.c: add constants of Gnome::Client.
+	Add Gnome::Client.master_client, Gnome::Client#set_restart_style,
+	Gnome::Client#get_flags, Gnome::Client#set_priority,
+	Gnome::Client#set_restart_command, Gnome::Client#set_discard_command,
+	Gnome::Client#set_resign_command, Gnome::Client#set_shutdown_command,
+	Gnome::Client#set_clone_command, Gnome::Client#request_save,
+	and Gnome::Client#desktop_id.
+	Gnome::Client#config_prefix -> Gnome::Client#get_config_prefix
+	Gnome::Client#global_config_prefix -> Gnome::Client#get_global_config_prefix
+	Gnome::Client#get_id -> Gnome::Client#id
+	Gnome::Client#get_previous_id -> Gnome::Client#previous_id
+	* src/rbgnome-color-picker.c: Add check code to Gnome::ColorPicker#set_d,
+	Gnome::ColorPicker#set_i8, and Gnome::ColorPicker#set_i16.
+	Add Gnome::ColorPicker#dither?, Gnome::ColorPicker#use_alpha?,
+	and Gnome::ColorPicker#title.
+	Gnome::ColorPicker#get_d -> Gnome::ColorPicker#d
+	Gnome::ColorPicker#get_i8 -> Gnome::ColorPicker#i8
+	Gnome::ColorPicker#get_i16 -> Gnome::ColorPicker#i16
+	* src/rbgnome.c: fix typos.
+
 2002-10-17  KUBO Takehiro  <kubo@jiubao.org>
 
 	* sample/gnome-app-helper.rb: Add Gnome::AppBar sample. 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-appbar.c,v 1.4 2002/10/17 14:34:39 tkubo Exp $ */
+/* $Id: rbgnome-appbar.c,v 1.5 2002/10/19 16:36:25 tkubo Exp $ */
 /* base on libgnomeui/gnome-appbar.h */
 
 /* Gnome::AppBar widget for Ruby/Gnome
@@ -171,11 +171,11 @@ Init_gnome_appbar(mGnome)
     rb_define_method(gnoAppBar, "pop", appbar_pop, 0);
     rb_define_method(gnoAppBar, "clear_stack", appbar_clear_stack, 0);
     rb_define_method(gnoAppBar, "set_progress_percentage", appbar_set_progress_percentage, 1);
-    rb_define_method(gnoAppBar, "get_progress", appbar_get_progress, 0);
+    rb_define_method(gnoAppBar, "progress", appbar_get_progress, 0);
     rb_define_method(gnoAppBar, "refresh", appbar_refresh, 0);
     rb_define_method(gnoAppBar, "set_prompt", appbar_set_prompt, 2);
     rb_define_method(gnoAppBar, "clear_prompt", appbar_clear_prompt, 0);
-    rb_define_method(gnoAppBar, "get_response", appbar_get_response, 0);
+    rb_define_method(gnoAppBar, "response", appbar_get_response, 0);
 
     G_DEF_SETTERS(gnoAppBar);
 }

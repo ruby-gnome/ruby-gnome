@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.14 2002/10/17 14:34:39 tkubo Exp $ */
+/* $Id: rbgnome.c,v 1.15 2002/10/19 16:36:25 tkubo Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -184,9 +184,9 @@ Init_gnome2()
     rb_define_const(mGnome, "POPT_ARGS", rb_str_new2(""));
 
     /* GnomePreferencesType */
-    rb_define_const(mGnome, "RREFERENCES_NEVER", INT2FIX(GNOME_PREFERENCES_NEVER));
+    rb_define_const(mGnome, "PREFERENCES_NEVER", INT2FIX(GNOME_PREFERENCES_NEVER));
     rb_define_const(mGnome, "PREFERENCES_USER", INT2FIX(GNOME_PREFERENCES_USER));
-    rb_define_const(mGnome, "RREFERENCES_ALWAYS", INT2FIX(GNOME_PREFERENCES_ALWAYS));
+    rb_define_const(mGnome, "PREFERENCES_ALWAYS", INT2FIX(GNOME_PREFERENCES_ALWAYS));
 
     Init_bonobo_dock(mBonobo);
     Init_bonobo_dock_layout(mBonobo);

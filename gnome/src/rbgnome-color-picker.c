@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-color-picker.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-color-picker.c,v 1.4 2002/10/19 16:36:25 tkubo Exp $ */
+/* based on libgnomeui/gnome-color-picker.h */
 
 /* Gnome::ColorPicker widget for Ruby-Gnome
  * Copyright (C) 2001 Neil Conway
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -52,8 +54,19 @@ static VALUE
 cpicker_set_d(self, r, g, b, a)
     VALUE self, r, g, b, a;
 {
-    gnome_color_picker_set_d(_SELF(self),
-                             NUM2DBL(r), NUM2DBL(g), NUM2DBL(b), NUM2DBL(a));
+    gdouble dr = NUM2DBL(r);
+    gdouble dg = NUM2DBL(g);
+    gdouble db = NUM2DBL(b);
+    gdouble da = NUM2DBL(a);
+    if (dr < 0 || 1.0 < dr)
+        rb_raise(rb_eArgError, "out of range (%f for [0.0, 1.0])", dr);
+    if (dg < 0 || 1.0 < dg)
+        rb_raise(rb_eArgError, "out of range (%f for [0.0, 1.0])", dg);
+    if (db < 0 || 1.0 < db)
+        rb_raise(rb_eArgError, "out of range (%f for [0.0, 1.0])", db);
+    if (da < 0 || 1.0 < da)
+        rb_raise(rb_eArgError, "out of range (%f for [0.0, 1.0])", da);
+    gnome_color_picker_set_d(_SELF(self), dr, dg, db, da);
     return self;
 }
 
@@ -77,9 +90,21 @@ static VALUE
 cpicker_set_i8(self, r, g, b, a)
     VALUE self, r, g, b, a;
 {
+    gint ir = NUM2INT(r);
+    gint ig = NUM2INT(g);
+    gint ib = NUM2INT(b);
+    gint ia = NUM2INT(a);
+    if (ir < 0 || 255 < ir)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ir);
+    if (ig < 0 || 255 < ig)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ig);
+    if (ib < 0 || 255 < ib)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ib);
+    if (ia < 0 || 255 < ia)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ia);
     gnome_color_picker_set_i8(_SELF(self),
-			      (guint8)NUM2INT(r), (guint8)NUM2INT(g),
-			      (guint8)NUM2INT(b), (guint8)NUM2INT(a));
+                              (guint8)ir, (guint8)ig,
+                              (guint8)ib, (guint8)ia);
     return self;
 }
 
@@ -103,9 +128,21 @@ static VALUE
 cpicker_set_i16(self, r, g, b, a)
     VALUE self, r, g, b, a;
 {
-    gnome_color_picker_set_i8(_SELF(self),
-                              (gushort)NUM2INT(r), (gushort)NUM2INT(g),
-                              (gushort)NUM2INT(b), (gushort)NUM2INT(a));
+    gint ir = NUM2INT(r);
+    gint ig = NUM2INT(g);
+    gint ib = NUM2INT(b);
+    gint ia = NUM2INT(a);
+    if (ir < 0 || 65535 < ir)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ir);
+    if (ig < 0 || 65535 < ig)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ig);
+    if (ib < 0 || 65535 < ib)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ib);
+    if (ia < 0 || 65535 < ia)
+        rb_raise(rb_eArgError, "out of range (%d for [0, 255])", ia);
+    gnome_color_picker_set_i16(_SELF(self),
+                               (gushort)ir, (gushort)ig,
+                               (gushort)ib, (gushort)ia);
     return self;
 }
 
@@ -135,12 +172,26 @@ cpicker_set_dither(self, dither)
 }
 
 static VALUE
+cpicker_get_dither(self)
+    VALUE self;
+{
+    return gnome_color_picker_get_dither(_SELF(self)) ? Qtrue : Qfalse;
+}
+
+static VALUE
 cpicker_set_use_alpha(self, use_alpha)
     VALUE self, use_alpha;
 {
     gnome_color_picker_set_use_alpha(_SELF(self),
                                      RTEST(use_alpha));
     return self;
+}
+
+static VALUE
+cpicker_get_use_alpha(self)
+    VALUE self;
+{
+    return gnome_color_picker_get_use_alpha(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -152,6 +203,13 @@ cpicker_set_title(self, title)
     return self;
 }
 
+static VALUE
+cpicker_get_title(self)
+    VALUE self;
+{
+    return rb_str_new2(gnome_color_picker_get_title(_SELF(self)));
+}
+
 void
 Init_gnome_color_picker(mGnome)
     VALUE mGnome;
@@ -161,12 +219,17 @@ Init_gnome_color_picker(mGnome)
     /* Instance methods */
     rb_define_method(gnoColorPicker, "initialize", cpicker_initialize, 0);
     rb_define_method(gnoColorPicker, "set_d", cpicker_set_d, 4);
-    rb_define_method(gnoColorPicker, "get_d", cpicker_get_d, 0);
+    rb_define_method(gnoColorPicker, "d", cpicker_get_d, 0);
     rb_define_method(gnoColorPicker, "set_i8", cpicker_set_i8, 4);
-    rb_define_method(gnoColorPicker, "get_i8", cpicker_get_i8, 0);
+    rb_define_method(gnoColorPicker, "i8", cpicker_get_i8, 0);
     rb_define_method(gnoColorPicker, "set_i16", cpicker_set_i16, 4);
-    rb_define_method(gnoColorPicker, "get_i16", cpicker_get_i16, 0);
+    rb_define_method(gnoColorPicker, "i16", cpicker_get_i16, 0);
     rb_define_method(gnoColorPicker, "set_dither", cpicker_set_dither, 1);
+    rb_define_method(gnoColorPicker, "dither?", cpicker_get_dither, 0);
     rb_define_method(gnoColorPicker, "set_use_alpha", cpicker_set_use_alpha, 1);
+    rb_define_method(gnoColorPicker, "use_alpha?", cpicker_get_use_alpha, 0);
     rb_define_method(gnoColorPicker, "set_title", cpicker_set_title, 1);
+    rb_define_method(gnoColorPicker, "title", cpicker_get_title, 0);
+
+    G_DEF_SETTERS(gnoColorPicker);
 }
