@@ -1,3 +1,16 @@
+2002-10-14  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-dateedit.c: delete dateedit_get_date().
+	* src/rbgnome-program.c: add a file. implement Gnome::Program and
+	Gnome::ModuleInfo.
+	* src/rbgnome-util.c: remove rbgnome_libdir_file(), 
+	rbgnome_datadir_file(), rbgnome_sound_file(), rbgnome_pixmap_file(),
+	rbgnome_config_file(), rbgnome_unconditional_libdir_file(),
+	rbgnome_unconditional_datadir_file(), rbgnome_unconditional_sound_file(),
+	rbgnome_unconditional_pixmap_file, and rbgnome_unconditional_config_file().
+	add rgutil_prepend_user_home(),	rgutil_home_file(), and rgutil_user_shell().
+	* src/rbgnome.c, src/rbgnome.h: call Init_gnome_program() in Init_gnome().
+
 2002-10-13  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-about.c: Modify comment.

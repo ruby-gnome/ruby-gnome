@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-dateedit.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-dateedit.c,v 1.4 2002/10/13 15:33:24 tkubo Exp $ */
 
 /* Gnome::DateEdit widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -69,15 +69,6 @@ dateedit_set_popup_range(self, low_hour, up_hour)
 }
 
 static VALUE
-dateedit_get_date(self)
-    VALUE self;
-{
-    time_t sec;
-    sec = gnome_date_edit_get_date(_SELF(self));
-    return rb_time_new(sec, 0);
-}
-
-static VALUE
 dateedit_set_flags(self, flags)
     VALUE self, flags;
 {
@@ -109,7 +100,6 @@ Init_gnome_dateedit(mGnome)
     rb_define_method(gnoDateEdit, "initialize", dateedit_initialize, -1);
     rb_define_method(gnoDateEdit, "set_time", dateedit_set_time, 1);
     rb_define_method(gnoDateEdit, "set_popup_range",  dateedit_set_popup_range, 2);
-    rb_define_method(gnoDateEdit, "get_date", dateedit_get_date, 0);
     rb_define_method(gnoDateEdit, "set_flags", dateedit_set_flags, 1);
     rb_define_method(gnoDateEdit, "get_flags", dateedit_get_flags, 0);
 }

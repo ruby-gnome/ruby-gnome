@@ -45,6 +45,7 @@ void Init_gnome_icon_entry(VALUE);
 void Init_gnome_icon_list(VALUE);
 void Init_gnome_icon_selection(VALUE);
 void Init_gnome_pixmap_entry(VALUE);
+void Init_gnome_program(VALUE);
 void Init_gnome_scores(VALUE);
 void Init_gnome_uidefs(VALUE);
 void Init_gnome_url(VALUE);

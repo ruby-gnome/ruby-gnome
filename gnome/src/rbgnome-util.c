@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-util.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-util.c,v 1.4 2002/10/13 15:33:24 tkubo Exp $ */
+/* based on libgnome/gnome-util.h */
 
-/* Utility functions for Ruby/Gnome
+/* Utility functions for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,117 +24,41 @@
 #include "rbgnome.h"
 
 static VALUE
-rbgnome_libdir_file(self, filename)
+rgutil_prepend_user_home(self, filename)
     VALUE self, filename;
 {
-    VALUE ret;
-    char *file = gnome_libdir_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
+    char *result = gnome_util_prepend_user_home(RVAL2CSTR(filename));
+    VALUE obj = rb_str_new2(result);
+    g_free(result);
+    return obj;
 }
 
 static VALUE
-rbgnome_datadir_file(self, filename)
+rgutil_home_file(self, filename)
     VALUE self, filename;
 {
-    VALUE ret;
-    char *file = gnome_datadir_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
+    char *result = gnome_util_home_file(RVAL2CSTR(filename));
+    VALUE obj = rb_str_new2(result);
+    g_free(result);
+    return obj;
 }
 
 static VALUE
-rbgnome_sound_file(self, filename)
-    VALUE self, filename;
+rgutil_user_shell(self)
+    VALUE self;
 {
-    VALUE ret;
-    char *file = gnome_sound_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_pixmap_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_pixmap_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_config_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_config_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_unconditional_libdir_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_unconditional_libdir_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_unconditional_datadir_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_unconditional_datadir_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_unconditional_sound_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_unconditional_sound_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_unconditional_pixmap_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_unconditional_pixmap_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
-}
-
-static VALUE
-rbgnome_unconditional_config_file(self, filename)
-    VALUE self, filename;
-{
-    VALUE ret;
-    char *file = gnome_unconditional_config_file(RVAL2CSTR(filename));
-    SET_STR_AND_GFREE(ret, file);
-    return ret;
+    char *result = gnome_util_user_shell();
+    VALUE obj = result ? rb_str_new2(result) : Qnil;
+    if (result)
+        g_free(result);
+    return obj;
 }
 
 void
 Init_gnome_util(mGnome)
     VALUE mGnome;
 {
-    rb_define_module_function(mGnome, "libdir_file", rbgnome_libdir_file, 1);
-    rb_define_module_function(mGnome, "datadir_file", rbgnome_datadir_file, 1);
-    rb_define_module_function(mGnome, "sound_file", rbgnome_sound_file, 1);
-    rb_define_module_function(mGnome, "pixmap_file", rbgnome_pixmap_file, 1);
-    rb_define_module_function(mGnome, "config_file", rbgnome_config_file, 1);
-    rb_define_module_function(mGnome, "unconditional_libdir_file", rbgnome_unconditional_libdir_file, 1);
-    rb_define_module_function(mGnome, "unconditional_datadir_file", rbgnome_unconditional_datadir_file, 1);
-    rb_define_module_function(mGnome, "unconditional_sound_file", rbgnome_unconditional_sound_file, 1);
-    rb_define_module_function(mGnome, "unconditional_pixmap_file", rbgnome_unconditional_pixmap_file, 1);
-    rb_define_module_function(mGnome, "unconditional_config_file", rbgnome_unconditional_config_file, 1);
+    rb_define_module_function(mGnome, "util_prepend_user_home", rgutil_prepend_user_home, 1);
+    rb_define_module_function(mGnome, "util_home_file", rgutil_home_file, 1);
+    rb_define_module_function(mGnome, "util_user_shell", rgutil_user_shell,0);
 }
