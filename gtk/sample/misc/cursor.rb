@@ -4,7 +4,7 @@
   Copyright (C) 2001,2002 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cursor.rb,v 1.2 2002/11/05 10:39:10 mutoh Exp $
+  $Id: cursor.rb,v 1.3 2002/11/30 18:00:32 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -15,6 +15,7 @@ window = Gtk::Window.new
 window.realize
 
 button = Gtk::Button.new("Click!")
+button.use_underline = false
 
 cursors = (Gdk::Cursor.constants - Gdk::Cursor.superclass.constants).sort{|a, b| 
   Gdk::Cursor.const_get(a) <=> Gdk::Cursor.const_get(b)}
@@ -22,7 +23,7 @@ cursors = (Gdk::Cursor.constants - Gdk::Cursor.superclass.constants).sort{|a, b|
 cnt = 0
 button.signal_connect('clicked') do
   cursor = eval("Gdk::Cursor::" + cursors[cnt])
-  button.child.set_text("Gdk::Cursor::" + cursors[cnt] + ", value = " + cursor.to_s)
+  button.set_label("Gdk::Cursor::" + cursors[cnt] + ", value = " + cursor.to_s)
   window.window.set_cursor(Gdk::Cursor.new(cursor))
   cnt += 1
   cnt = 0 if cnt == cursors.size

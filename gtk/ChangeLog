@@ -1,5 +1,6 @@
 2002-12-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/misc/cursor.rb: Code clean up.
 	* sample/misc/button2.rb: Add a file.
 	* sample/misc/togglebutton.rb, checkbutton.rb, radiobutton.rb: 
 	Add sample for mnemonic label and stock item.
