@@ -1,0 +1,11 @@
+INSTALL_SCRIPT = $(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0755, true)'
+GLADE_CREATOR = ruby-glade-create-template
+BINDIR = $(bindir)
+
+$(BINDIR):
+	$(MAKEDIRS) $(BINDIR)
+
+$(BINDIR)/$(GLADE_CREATOR): $(srcdir)/bin/$(GLADE_CREATOR)
+	$(INSTALL_SCRIPT) $(srcdir)/bin/$(GLADE_CREATOR) $(BINDIR)
+
+install: $(BINDIR) $(BINDIR)/$(GLADE_CREATOR)

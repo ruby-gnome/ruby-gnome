@@ -1,5 +1,11 @@
 2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* depend: Add a file to install ruby-glade-create-templete.
+	Suggested by Nobuyoshi Nakada <nobu.nokada@softhome.net>
+	* bin/ruby-glade-create-templete: Move from ./.
+
+2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
 	* ruby-glade-create-templete: Add a file.
 
 2002-12-19  Masao Mutoh  <mutoh@highway.ne.jp>
