@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2002/12/25 16:24:23 $
+  $Author: sakai $
+  $Date: 2002/12/28 06:23:46 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -325,7 +325,7 @@ static VALUE
 type_is_value_type(self)
     VALUE self;
 {
-    return G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
