@@ -1,3 +1,9 @@
+2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c, rbgobject.h: Add rbgobj_boxed_abstract_but_create_instance_class() 
+	for the classes which can create instance itself but define as an abstract 
+	class in GTK+-2.2. (e.g. GdkGC).
+
 2003-02-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib.[ch]: change CSTR2RVAL's body to be a new function

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:03:08 $
+  $Date: 2003/02/09 04:50:29 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -20,12 +20,22 @@
 #include "st.h"
 #include "global.h"
 
+static GHashTable* not_abstract_table;
+
+void
+rbgobj_boxed_abstract_but_create_instance_class(gtype)
+    GType gtype;
+{
+    g_hash_table_insert(not_abstract_table, (gpointer)gtype, (gpointer)gtype);
+}
+
 static VALUE
 gobj_s_allocate(klass)
     VALUE klass;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
-    if (G_TYPE_IS_ABSTRACT(cinfo->gtype))
+    if (G_TYPE_IS_ABSTRACT(cinfo->gtype) && 
+		    ! (g_hash_table_lookup(not_abstract_table, (gconstpointer)(cinfo->gtype))))
         rb_raise(rb_eTypeError, "abstract class");
     return rbgobj_create_object(klass);
 }
@@ -385,6 +395,8 @@ void
 Init_gobject_gobject()
 {
     VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
+
+    not_abstract_table = g_hash_table_new(NULL, NULL);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
