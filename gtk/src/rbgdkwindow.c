@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Date: 2002/06/09 14:30:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -296,6 +296,74 @@ gdkwin_hide(self)
     return Qnil;
 }
 
+static VALUE
+gdkwin_prop_change(self, property, type, mode, src)
+    VALUE self, property, type, mode, src;
+{
+  GdkWindow*	w;
+  int           f, l;
+  GdkAtom	p, t;
+  void*		d;
+
+  w = get_gdkwindow(self);
+
+  p = get_gdkatom(property);
+  t = get_gdkatom(type);
+
+  if(t == GDK_SELECTION_TYPE_ATOM){
+    static Atom x;
+    x = get_gdkatom(src);
+    d = &x;
+    f = 32;
+    l = 1;
+
+  } else if(t == GDK_SELECTION_TYPE_BITMAP){
+    static Pixmap x;
+    x = ((GdkPixmapPrivate*)get_gdkbitmap(src))->xwindow;
+    d = (void*)&x;
+    f = 32;
+    l = 1;
+  
+  } else if(t == GDK_SELECTION_TYPE_COLORMAP){
+    static Colormap x;
+    x = ((GdkColormapPrivate*)get_gdkcolormap(src))->xcolormap;
+    d = (void*)&x;
+    f = 32;
+    l = 1;
+  
+  } else if(t == GDK_SELECTION_TYPE_INTEGER){
+    static int x;
+    x = NUM2INT(src);
+    d = (void*)&x;
+    f = 32;
+    l = 1;
+  
+  } else if(t == GDK_SELECTION_TYPE_PIXMAP){
+    static Pixmap x;
+    x = ((GdkPixmapPrivate*)get_gdkpixmap(src))->xwindow;
+    d = (void*)&x;
+    f = 32;
+    l = 1;
+  
+  } else if(t == GDK_SELECTION_TYPE_WINDOW||t == GDK_SELECTION_TYPE_DRAWABLE){
+    static Window x;
+    x = ((GdkPixmapPrivate*)get_gdkwindow(src))->xwindow;
+    d = (void*)&x;
+    f = 32;
+    l = 1;
+
+  } else  if(t == GDK_SELECTION_TYPE_STRING || t == gdk_atom_intern("COMPOUND_TEXT", FALSE)){
+    d = (void*)RSTRING(src)->ptr;
+    f = 8;
+    l = RSTRING(src)->len;
+
+  } else {
+    rb_raise(rb_eArgError, "no supperted type.");
+  }
+
+  gdk_property_change(w, p, t, f, NUM2INT(mode), d, l);
+}
+
 VALUE gdkWindowAttr;
 
 void
@@ -337,6 +405,8 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "show", gdkwin_show, 0);
     rb_define_method(gdkWindow, "hide", gdkwin_hide, 0);
     rb_define_method(gdkWindow, "get_geometry", gdkwin_get_geometry, 0);
+
+    rb_define_method(gdkWindow, "property_change", gdkwin_prop_change, 4);
 
     /* GdkWindowHints */
     rb_define_const(gdkWindow, "HINT_POS", INT2FIX(GDK_HINT_POS));
@@ -624,6 +694,7 @@ geo_set_max_aspect(self, max_aspect)
     geo->max_aspect = NUM2DBL(max_aspect);
     return self;
 }
+
 
 void Init_gtk_gdk_geometry()
 {

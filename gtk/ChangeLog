@@ -1,3 +1,9 @@
+Sun Jun 09 22:59:40 2002 Hiroshi Kuwagata <kgt@kokone.to>
+
+   * src/rbgdkatom.c,src/rbgdkconst.c,src/rbgdkevent.c,src/rbgdkwindow.c:
+     Add Gdk::Window#property_change, Gdk::SELECTION_TYPE_*
+     Change Gdk::EventSelction.
+
 Thu May 30 02:12:35 2002 Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/*.c: Add rbgtk_register_class() call.

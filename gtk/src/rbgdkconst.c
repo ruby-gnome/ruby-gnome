@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/05/28 15:13:20 $
+  $Date: 2002/06/09 14:30:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -323,5 +323,15 @@ Init_gtk_gdk_const()
   rb_define_const(mGdk, "RGB_DITHER_NONE", INT2FIX(GDK_RGB_DITHER_NONE));
   rb_define_const(mGdk, "RGB_DITHER_NORMAL", INT2FIX(GDK_RGB_DITHER_NORMAL));
   rb_define_const(mGdk, "RGB_DITHER_MAX", INT2FIX(GDK_RGB_DITHER_MAX));
+
+   /* GdkSelectionType */
+  rb_define_const(mGdk, "SELECTION_TYPE_ATOM", INT2FIX(GDK_SELECTION_TYPE_ATOM));
+  rb_define_const(mGdk, "SELECTION_TYPE_BITMAP", INT2FIX(GDK_SELECTION_TYPE_BITMAP));
+  rb_define_const(mGdk, "SELECTION_TYPE_COLORMAP", INT2FIX(GDK_SELECTION_TYPE_COLORMAP));
+  rb_define_const(mGdk, "SELECTION_TYPE_DRAWABLE", INT2FIX(GDK_SELECTION_TYPE_DRAWABLE));
+  rb_define_const(mGdk, "SELECTION_TYPE_INTEGER", INT2FIX(GDK_SELECTION_TYPE_INTEGER));
+  rb_define_const(mGdk, "SELECTION_TYPE_PIXMAP", INT2FIX(GDK_SELECTION_TYPE_PIXMAP));
+  rb_define_const(mGdk, "SELECTION_TYPE_WINDOW", INT2FIX(GDK_SELECTION_TYPE_WINDOW));
+  rb_define_const(mGdk, "SELECTION_TYPE_STRING", INT2FIX(GDK_SELECTION_TYPE_STRING));
 }
 
