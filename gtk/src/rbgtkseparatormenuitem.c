@@ -4,7 +4,7 @@
   rbgtkseparatormenuitem.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2003/02/22 17:23:39 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -24,5 +24,5 @@ Init_gtk_separator_menu_item()
 {
     VALUE gSMenuItem = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
 
-    rb_define_method(gSMenuItem, "initialize", smitem_initialize, -1);
+    rb_define_method(gSMenuItem, "initialize", smitem_initialize, 0);
 }

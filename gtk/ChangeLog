@@ -1,3 +1,9 @@
+2003-02-23  KATO Kazuyoshi <kadu@zb.wakwak.com>
+
+	* src/rbgdkwindow.c: Add Gdk::Window#invalidate.
+	* src/rbgtkseparatormenuitem.c: Bugfix for bad parameter value of 
+	Gtk::SeparatorMenuItem.
+
 2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.h, src/global.h: Move id_relative_callbacks and id_call

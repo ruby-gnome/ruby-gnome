@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/02/22 17:23:39 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -279,18 +279,70 @@ void        gdk_window_begin_paint_rect     (GdkWindow *window,
 void        gdk_window_begin_paint_region   (GdkWindow *window,
                                              GdkRegion *region);
 void        gdk_window_end_paint            (GdkWindow *window);
+*/
 
-void        gdk_window_invalidate_rect      (GdkWindow *window,
-                                             GdkRectangle *rect,
-                                             gboolean invalidate_children);
-void        gdk_window_invalidate_region    (GdkWindow *window,
-                                             GdkRegion *region,
-                                             gboolean invalidate_children);
-void        gdk_window_invalidate_maybe_recurse
-                                            (GdkWindow *window,
-                                             GdkRegion *region,
-                                             gboolean (*child_func) (GdkWindow *, gpointer),
-                                             gpointer user_data);
+static gboolean
+invalidate_child_func_wrap(window, func)
+    GdkWindow* window;
+    VALUE func;
+{
+    VALUE result = rb_funcall(func, id_call, 1, GOBJ2RVAL(window));
+    g_print("invalidate_child_func_wrap\n");
+    if (result == Qnil || result == Qfalse) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
+
+
+static VALUE
+gdkwin_invalidate(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE rect_or_region, invalidate_children_or_func;
+    
+    rb_scan_args(argc, argv, "11", &rect_or_region, &invalidate_children_or_func);
+
+    
+    if (rb_obj_is_kind_of(rect_or_region, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
+        gdk_window_invalidate_rect(_SELF(self),
+                                   RVAL2BOXED(rect_or_region, GDK_TYPE_RECTANGLE),
+                                   RTEST(invalidate_children_or_func));
+    } else if (rb_obj_is_kind_of(rect_or_region, GTYPE2CLASS(GDK_TYPE_REGION))) {
+        VALUE type = TYPE(invalidate_children_or_func);
+
+        if (type == T_TRUE || type == T_FALSE) {
+            gdk_window_invalidate_region(_SELF(self),
+                                         RVAL2BOXED(rect_or_region, GDK_TYPE_REGION),
+                                         RTEST(invalidate_children_or_func));
+        } else {
+            VALUE child_func;
+            if (type == T_NIL) {
+                child_func = rb_f_lambda();
+            } else if (rb_obj_is_kind_of(invalidate_children_or_func, rb_cProc)) {
+                child_func = invalidate_children_or_func;
+            } else {
+                rb_raise(rb_eArgError, 
+                         "invalid argument %s (expect Proc)",
+                         rb_class2name(CLASS_OF(invalidate_children_or_func)));
+            }
+            gdk_window_invalidate_maybe_recurse(_SELF(self),
+                                                RVAL2BOXED(rect_or_region, GDK_TYPE_REGION),
+                                                invalidate_child_func_wrap,
+                                                (gpointer) child_func);
+        }
+    } else {
+        rb_raise(rb_eArgError, 
+                 "invalid argument %s (expect Gdk::Rectangle or Gdk::Region)",
+                 rb_class2name(CLASS_OF(rect_or_region)));
+    }
+    return self;
+}
+
+/*
 GdkRegion*  gdk_window_get_update_area      (GdkWindow *window);
 void        gdk_window_freeze_updates       (GdkWindow *window);
 void        gdk_window_thaw_updates         (GdkWindow *window);
@@ -753,6 +805,7 @@ Init_gtk_gdk_window()
    rb_define_method(gdkWindow, "lower", gdkwin_lower, 0);
    rb_define_method(gdkWindow, "focus", gdkwin_focus, 1);
    rb_define_method(gdkWindow, "register_dnd", gdkwin_register_dnd, 0);
+   rb_define_method(gdkWindow, "invalidate", gdkwin_invalidate, -1);
    rb_define_method(gdkWindow, "set_override_redirect", gdkwin_set_override_redirect, 1);
    rb_define_method(gdkWindow, "shape_combine_mask", gdkwin_shape_combine_mask, 3);
    rb_define_method(gdkWindow, "set_child_shapes", gdkwin_set_child_shapes, 0);
