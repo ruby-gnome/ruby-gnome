@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: geoff_youngs $
+  $Date: 2003/07/29 07:42:53 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -761,6 +761,8 @@ Init_gtk_gdk_event()
     rb_define_const(gdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
 
     /* GdkEventType */
+    G_RENAME_CONSTANT("2BUTTON_PRESS","BUTTON2_PRESS");
+    G_RENAME_CONSTANT("3BUTTON_PRESS","BUTTON3_PRESS");
     G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_TYPE, "GDK_");
 
     /* GdkEventMask */
