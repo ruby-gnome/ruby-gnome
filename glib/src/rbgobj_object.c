@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/06/17 18:14:24 $
+  $Date: 2002/06/20 13:46:36 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -96,7 +96,7 @@ rbgobj_set_gobject(obj, gobj)
 {
     VALUE data;
 
-    const rbgobj_class_info* cinfo = rbgobj_lookup_class(rb_class_of(obj));
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class(rb_class_of(obj));
 
     /* XXX */
     if (cinfo)
@@ -439,7 +439,7 @@ _gobject_from_ruby(VALUE from, GValue* to)
 
 void Init_gobject_gobj()
 {
-    static rbgobj_class_info cinfo;
+    static RGObjClassInfo cinfo;
 
     rbgobj_cGObject = rb_define_class_under(mGLib, "GObject", rb_cObject);
     cinfo.klass = rbgobj_cGObject;

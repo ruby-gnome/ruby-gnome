@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: sakai $
-  $Date: 2002/06/11 17:47:46 $
+  $Date: 2002/06/20 13:46:36 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,7 +43,7 @@ extern ID id_relatives;
 extern ID id_relative_callbacks;
 extern ID id_call;
 
-typedef rbgobj_class_info rbgtk_class_info;
+typedef RGObjClassInfo rbgtk_class_info;
 
 extern void rbgtk_register_class(rbgtk_class_info *cinfo);
 extern rbgtk_class_info *rbgtk_lookup_class(VALUE klass);

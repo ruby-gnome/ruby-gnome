@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/06/17 18:14:24 $
+  $Date: 2002/06/20 13:46:36 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -17,28 +17,28 @@
 static VALUE gobject_type_hash;
 
 void
-rbgobj_register_class(const rbgobj_class_info* cinfo)
+rbgobj_register_class(const RGObjClassInfo* cinfo)
 {
     VALUE data = Data_Wrap_Struct(rb_cData, NULL, NULL,
-                                  (rbgobj_class_info*)cinfo);
+                                  (RGObjClassInfo*)cinfo);
     rb_ivar_set(cinfo->klass, id_class_info, data);
     rb_hash_aset(gobject_type_hash, INT2NUM(cinfo->gtype), cinfo->klass);
 }
 
-const rbgobj_class_info *
+const RGObjClassInfo *
 rbgobj_lookup_class(klass)
     VALUE klass;
 {
-    rbgobj_class_info *cinfo = NULL;
+    RGObjClassInfo *cinfo = NULL;
     if (RTEST(rb_ivar_defined(klass, id_class_info))) {
 	VALUE data = rb_ivar_get(klass, id_class_info);
 	if (!NIL_P(data))
-	    Data_Get_Struct(data, rbgobj_class_info, cinfo);
+	    Data_Get_Struct(data, RGObjClassInfo, cinfo);
     }
     return cinfo;
 }
 
-const rbgobj_class_info *
+const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype(gtype)
     GType gtype;
 {

@@ -1,3 +1,8 @@
+2002-06-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c, src/rbgobj_type.c, src/rbgobject.h:
+	rename rbgobj_class_info to RGObjClassInfo.
+
 2002-06-18  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/*.c: conform to Ruby/GNOME2 coding-style.
