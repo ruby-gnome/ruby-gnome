@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.13 2005/02/15 06:12:56 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.14 2005/02/15 06:45:18 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -31,12 +31,16 @@ canvas_initialize(argc, argv, self)
     VALUE *argv, self;
 {
     VALUE antialiased;
+    GtkWidget* canvas = NULL;
 
     rb_scan_args(argc, argv, "01", &antialiased);
     if (RTEST(antialiased))
-        RBGTK_INITIALIZE(self, gnome_canvas_new_aa());
+        canvas = gnome_canvas_new_aa();
     else
-        RBGTK_INITIALIZE(self, gnome_canvas_new());
+        canvas = gnome_canvas_new();
+
+    g_object_ref(canvas);
+    RBGTK_INITIALIZE(self, canvas);
 
     return Qnil;
 }
