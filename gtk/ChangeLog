@@ -1,5 +1,7 @@
 2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtklabel.c: Add Gtk::Label#markup=. 
+	Gtk::Label#text=(str) returns str.
 	* src/rbgdkdisplaymanager.c: GTK+-2.2.0 or later only. 
 
 2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
