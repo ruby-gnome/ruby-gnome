@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-about.c,v 1.4 2002/10/13 14:11:41 tkubo Exp $ */
+/* $Id: rbgnome-about.c,v 1.5 2002/10/30 13:36:48 tkubo Exp $ */
 /* based on libgnomeui/gnome-about.h */
 
 /* Gnome::About widget for Ruby/GNOME2
@@ -60,7 +60,7 @@ about_initialize(argc, argv, self)
                              RVAL2CSTR(comments),
                              c_authors,
                              c_documenters,
-                             RVAL2CSTR(translator_credits),
+                             NIL_P(translator_credits) ? NULL : RVAL2CSTR(translator_credits),
                              NIL_P(logo_pixbuf) ? NULL : GDK_PIXBUF(RVAL2GOBJ(logo_pixbuf)));
     RBGTK_INITIALIZE(self, result);
     return Qnil;

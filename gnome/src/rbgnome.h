@@ -27,6 +27,15 @@ VALUE rbgno_poptoption_raw_to_arary(struct poptOption *);
 VALUE rbgno_poptoption_array_to_obj(VALUE);
 void rbgno_poptoption_arg_to_hash(VALUE, struct poptOption *);
 
+
+enum RBUIInfoType {
+    RBUI_MENUS,
+    RBUI_TOOLBAR,
+    RBUI_MENU_HINTS,
+    RBUI_POPUP_MENU,
+};
+VALUE rbgno_ary_to_ui_info(VALUE, enum RBUIInfoType);
+
 void Init_gnome_program(VALUE);
 void Init_gnome_about(VALUE);
 void Init_gnome_app(VALUE);
@@ -51,6 +60,7 @@ void Init_gnome_icon_item(VALUE);
 void Init_gnome_icon_list(VALUE);
 void Init_gnome_icon_selection(VALUE);
 void Init_gnome_pixmap_entry(VALUE);
+void Init_gnome_popup_menu(VALUE);
 void Init_gnome_score(VALUE);
 void Init_gnome_scores(VALUE);
 void Init_gnome_stock_icons(VALUE);

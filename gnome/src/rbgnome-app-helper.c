@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.9 2002/10/27 05:59:58 tkubo Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.10 2002/10/30 13:36:48 tkubo Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -22,6 +22,8 @@
  */
 
 #include "rbgnome.h"
+
+static ID id_call;
 
 #define _SELF(self) GNOME_APP(RVAL2GOBJ(self))
 
@@ -426,6 +428,13 @@ DEF_UIINFO_TREE(uiinfo_menu_help_tree, "_Help");
 DEF_UIINFO_TREE(uiinfo_menu_game_tree, "_Game");
 
 static void
+menu_item_callback(GtkWidget *widget, gpointer data, GtkWidget *for_widget)
+{
+    VALUE proc = (VALUE)g_object_get_data(G_OBJECT(widget), GNOMEUIINFO_KEY_UIDATA);
+    rb_funcall(proc, id_call, 3, GOBJ2RVAL(widget), (VALUE)data, for_widget ? GOBJ2RVAL(for_widget) : Qnil);
+}
+
+static void
 do_ui_signal_connect(uiinfo, signal_name, uibdata)
     GnomeUIInfo *uiinfo;
     gchar *signal_name;
@@ -451,17 +460,11 @@ static GnomeUIBuilderData RbGnome_UIBuilder = {
     0
 };
 
-enum UIInfoType {
-    RBGNO_APP_MENUS,
-    RBGNO_APP_TOOLBAR,
-    RBGNO_APP_MENU_HINTS,
-};
-
 static void
 fill_ui_info(uiinfo, ary, uitype)
     GnomeUIInfo *uiinfo;
     VALUE ary;
-    enum UIInfoType uitype;
+    enum RBUIInfoType uitype;
 {
     GnomeUIInfoType type;
     GnomeUIInfo *sub;
@@ -501,9 +504,11 @@ fill_ui_info(uiinfo, ary, uitype)
         uiinfo[i].widget = NIL_P(RARRAY(item)->ptr[9])?0:GTK_WIDGET(RVAL2GOBJ((RARRAY(item)->ptr[9])));
 
         switch (uitype) {
-          case RBGNO_APP_MENUS:
+          case RBUI_MENUS:
+          case RBUI_MENU_HINTS:
+          case RBUI_POPUP_MENU:
             break;
-          case RBGNO_APP_TOOLBAR:
+          case RBUI_TOOLBAR:
             switch (type) {
               case GNOME_APP_UI_INCLUDE:
               case GNOME_APP_UI_RADIOITEMS:
@@ -515,16 +520,17 @@ fill_ui_info(uiinfo, ary, uitype)
                 rb_raise(rb_eArgError, "Invalid type for toolbar");
             }
             break;
-          case RBGNO_APP_MENU_HINTS:
-            if (!uiinfo[i].widget)
-                rb_raise(rb_eArgError, "empty widget found. Use the return value of Gnome::App#create_menus()");
-            break;
         }
 
-
-        if (NIL_P(uiinfo[i].user_data))
-            uiinfo[i].user_data = NULL;
-
+        switch (type) {
+          case GNOME_APP_UI_ITEM:
+          case GNOME_APP_UI_TOGGLEITEM:
+          case GNOME_APP_UI_ITEM_CONFIGURABLE:
+            break;
+          default:
+            if (NIL_P(uiinfo[i].user_data))
+                uiinfo[i].user_data = NULL;
+        }
 
 #define RAISE_TYPE_MISMATCH(pos, obj, expect) \
     rb_raise(rb_eArgError, \
@@ -547,7 +553,12 @@ fill_ui_info(uiinfo, ary, uitype)
             /* expect Proc */
             if (!rb_obj_is_kind_of(moreinfo, rb_cProc))
                 RAISE_TYPE_MISMATCH("moreinfo", moreinfo, "Proc");
-            uiinfo[i].moreinfo = (gpointer)moreinfo;
+            if (uitype == RBUI_POPUP_MENU) {
+                uiinfo[i].moreinfo = (gpointer)menu_item_callback;
+                uiinfo[i].user_data = (gpointer)moreinfo;
+            } else {
+                uiinfo[i].moreinfo = (gpointer)moreinfo;
+            }
             uiinfo[i].type = type;
             break;
           case GNOME_APP_UI_RADIOITEMS:
@@ -655,10 +666,10 @@ free_ui_info(uiinfo)
  * Don't use returned value after 'ary' is GCed.
  * This is only for short time lifetime.
  */
-static VALUE
-ary_to_ui_info(ary, uitype)
+VALUE
+rbgno_ary_to_ui_info(ary, uitype)
     VALUE ary;
-    enum UIInfoType uitype;
+    enum RBUIInfoType uitype;
 {
     GnomeUIInfo *uiinfo;
     VALUE obj;
@@ -742,10 +753,25 @@ ui_info_to_ary(uiinfo)
 }
 
 static VALUE
+app_fill_menus(self, menuinfo, accel_group, uline_accels, pos)
+    VALUE self, menuinfo, accel_group;
+{
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENUS);
+
+    gnome_app_fill_menu_custom(GTK_MENU_SHELL(RVAL2GOBJ(self)),
+                               DATA_PTR(uiinfo),
+                               &RbGnome_UIBuilder,
+                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)),
+                               RTEST(uline_accels),
+                               NUM2INT(pos));
+    return ui_info_to_ary(DATA_PTR(uiinfo));
+}
+
+static VALUE
 app_create_menus(self, menuinfo)
     VALUE self, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENUS);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENUS);
 
     gnome_app_create_menus_custom(GNOME_APP(RVAL2GOBJ(self)),
                                   DATA_PTR(uiinfo),
@@ -757,7 +783,7 @@ static VALUE
 app_fill_toolbar(self, menuinfo, accel_group)
     VALUE self, menuinfo, accel_group;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_TOOLBAR);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_TOOLBAR);
 
     gnome_app_fill_toolbar_custom(GTK_TOOLBAR(RVAL2GOBJ(self)),
                                   DATA_PTR(uiinfo),
@@ -770,7 +796,7 @@ static VALUE
 app_create_toolbar(self, menuinfo)
     VALUE self, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_TOOLBAR);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_TOOLBAR);
 
     gnome_app_create_toolbar_custom(_SELF(self),
                                     DATA_PTR(uiinfo),
@@ -815,7 +841,7 @@ static VALUE
 app_insert_menus(self, path, menuinfo)
     VALUE self, path, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENUS);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENUS);
 
     gnome_app_insert_menus_custom(_SELF(self),
                                   RVAL2CSTR(path),
@@ -828,7 +854,7 @@ static VALUE
 app_install_appbar_menu_hints(self, menuinfo)
     VALUE self, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENU_HINTS);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENU_HINTS);
 
     gnome_app_install_appbar_menu_hints(GNOME_APPBAR(RVAL2GOBJ(self)), DATA_PTR(uiinfo));
     return self;
@@ -838,7 +864,7 @@ static VALUE
 app_install_statusbar_menu_hints(self, menuinfo)
     VALUE self, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENU_HINTS);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENU_HINTS);
 
     gnome_app_install_statusbar_menu_hints(GTK_STATUSBAR(RVAL2GOBJ(self)), DATA_PTR(uiinfo));
     return self;
@@ -848,7 +874,7 @@ static VALUE
 app_install_menu_hints(self, menuinfo)
     VALUE self, menuinfo;
 {
-    VALUE uiinfo = ary_to_ui_info(menuinfo, RBGNO_APP_MENU_HINTS);
+    VALUE uiinfo = rbgno_ary_to_ui_info(menuinfo, RBUI_MENU_HINTS);
 
     gnome_app_install_menu_hints(GNOME_APP(RVAL2GOBJ(self)), DATA_PTR(uiinfo));
     return self;
@@ -873,6 +899,8 @@ Init_gnome_app_helper(mGnome)
     VALUE gtkMenuShell = GTYPE2CLASS(GTK_TYPE_MENU_SHELL);
     VALUE gtkStatusBar = GTYPE2CLASS(GTK_TYPE_STATUSBAR);
     VALUE gtkToolBar = GTYPE2CLASS(GTK_TYPE_TOOLBAR);
+
+    id_call = rb_intern("call");
 
     /* GnomeUIInfoType */
     rb_define_const(gnoApp, "UI_ENDOFINFO", INT2FIX(GNOME_APP_UI_ENDOFINFO));
@@ -1002,6 +1030,7 @@ Init_gnome_app_helper(mGnome)
     /*
      * instance methods
      */
+    rb_define_method(gtkMenuShell, "fill_menus", app_fill_menus, 4);
     rb_define_method(gnoApp, "create_menus", app_create_menus, 1);
     rb_define_method(gtkToolBar, "fill_toolbar", app_fill_toolbar, 2);
     rb_define_method(gnoApp, "create_toolbar", app_create_toolbar, 1);

@@ -1,5 +1,5 @@
 /* -*- c-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-help.c,v 1.1 2002/10/26 06:22:24 tkubo Exp $ */
+/* $Id: rbgnome-help.c,v 1.2 2002/10/30 13:36:48 tkubo Exp $ */
 /* based on libgnome/gnome-help.h */
 
 /* Gnome::Help for Ruby/GNOME2
@@ -22,21 +22,6 @@
 
 #include "rbgnome.h"
 
-static void raise_gerror(GError *error) NORETURN;
-
-static void
-raise_gerror(error)
-    GError *error;
-{
-    gchar *msg = g_locale_from_utf8(error->message, -1, NULL, NULL, NULL);
-    VALUE exc = rb_exc_new2(rb_eRuntimeError, msg ? msg : error->message);
-
-    if (msg)
-        g_free(msg);
-    g_error_free(error);
-    rb_exc_raise(exc);
-}
-
 static VALUE
 gnohelp_m_display(self, file_name, link_id)
     VALUE self, file_name, link_id;
@@ -46,7 +31,7 @@ gnohelp_m_display(self, file_name, link_id)
                                          NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                          &error);
     if (!result)
-        raise_gerror(error);
+        rbgutil_raise_gerror(error);
     return self;
 }
 
@@ -61,7 +46,7 @@ gnohelp_m_display_with_doc_id(self, pgm, doc_id, file_name, link_id)
                                                      NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                                      &error);
     if (!result)
-        raise_gerror(error);
+        rbgutil_raise_gerror(error);
     return self;
 }
 
@@ -76,7 +61,7 @@ gnohelp_m_display_desktop(self, pgm, doc_id, file_name, link_id)
                                                  NIL_P(link_id) ? NULL : RVAL2CSTR(link_id),
                                                  &error);
     if (!result)
-        raise_gerror(error);
+        rbgutil_raise_gerror(error);
     return self;
 }
 

@@ -1,3 +1,16 @@
+2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgnome-about.c: Gnome::Abount accepts nil as 7th argument.
+	* src/rbgnome-app-helper.c: Add Gtk::MenuShell#fill_menus.
+	Rename ary_to_ui_info to rbgno_ary_to_ui_info and export it.
+	Change rbgno_ary_to_ui_info to Support Gnome::PopupMenu.
+	* src/rbgnome-help.c: Delete raise_gerror and use
+	rbgutil_raise_gerror instead.
+	* src/rbgnome.h, src/rbgnome.c: call Init_gnome_popup_menu in 
+	Init_gnome2.
+	* src/rbgnome_popup_menu.c: Add a new file. Support
+	Gnome::PopupMenu.
+
 2002-10-28  KUBO Takehiro  <kubo@jiubao.org>
 
 	* sample/gnome-init-popt.rb: Removed.
