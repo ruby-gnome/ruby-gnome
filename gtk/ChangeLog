@@ -1,3 +1,8 @@
+2002-11-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkseparatormenuitem.c, rbgtkimagemenuitem.c, sample/misc/test.xpm:
+	Readd files(I have forgotten them)
+
 2002-11-15  OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtktexttagtable.c: Add file.
