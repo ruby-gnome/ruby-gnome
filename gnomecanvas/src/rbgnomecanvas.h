@@ -3,8 +3,8 @@
 
   rbgnomecanvas.h -
 
-  $Author: tkubo $
-  $Date: 2002/10/02 13:36:52 $
+  $Author: mutoh $
+  $Date: 2004/02/18 16:47:44 $
 
   Copyright (C) 2002 KUBO Takehiro 
 ************************************************/
@@ -20,5 +20,7 @@ extern void Init_gnome_canvas_util(VALUE);
 extern void Init_gnome_canvas_item(VALUE);
 extern void Init_gnome_canvas_rich_text(VALUE);
 extern void Init_gnome_canvas_path_def(VALUE);
+
+extern GType rbgno_canvas_path_def_get_type(void);
 
 #endif /* _RBGNOMECANVAS_H */

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.11 2003/09/09 15:09:25 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.12 2004/02/18 16:47:44 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -261,11 +261,28 @@ citem_canvas(self)
     return GOBJ2RVAL(GTK_OBJECT(_SELF(self)->canvas));
 }
 
+static VALUE
+citem_shape_set_path_def(self, def)
+    VALUE self, def;
+{
+    gnome_canvas_shape_set_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self)), 
+                                    (GnomeCanvasPathDef*)RVAL2BOXED(def, rbgno_canvas_path_def_get_type()));
+    return self;
+}
+
+static VALUE
+citem_shape_get_path_def(self)
+    VALUE self;
+{
+    return BOXED2RVAL(gnome_canvas_shape_get_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self))), rbgno_canvas_path_def_get_type());
+}
+
 void
 Init_gnome_canvas_item(mGnome)
     VALUE mGnome;
 {
     VALUE gnoCanvasItem = G_DEF_CLASS(GNOME_TYPE_CANVAS_ITEM, "CanvasItem", mGnome);
+    VALUE gnoCanvasShape = G_DEF_CLASS(GNOME_TYPE_CANVAS_SHAPE, "CanvasShape", mGnome);
 
     rb_define_method(gnoCanvasItem, "initialize", citem_intialize, 2);
     rb_define_method(gnoCanvasItem, "set", citem_set, 1);
@@ -290,6 +307,11 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasItem, "parent", citem_parent, 0);
     rb_define_method(gnoCanvasItem, "canvas", citem_canvas, 0);
 
+    rb_define_method(gnoCanvasShape, "set_path_def", citem_shape_set_path_def, 1);
+    rb_define_method(gnoCanvasShape, "path_def", citem_shape_get_path_def, 0);
+    G_DEF_SETTERS(gnoCanvasShape);
+
+    G_DEF_CLASS(GNOME_TYPE_CANVAS_RE, "CanvasRE", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_GROUP, "CanvasGroup", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_BPATH, "CanvasBpath", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_LINE, "CanvasLine", mGnome);
