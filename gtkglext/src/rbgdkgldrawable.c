@@ -1,7 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkgldrawable.c,v 1.5 2004/03/03 18:08:26 mutoh Exp $ */
+/* $Id: rbgdkgldrawable.c,v 1.6 2004/03/05 16:27:56 mutoh Exp $ */
 /* Gdk::GLDrawable Widget
- * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
+ * Copyright (C) 2004 Ruby-GNOME2 Project Team
+ * Copyright (C) 2003,2004 Vincent Isambart <isambart@netcourrier.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public

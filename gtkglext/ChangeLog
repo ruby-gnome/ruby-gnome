@@ -1,3 +1,7 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkgldrawable.c: Update Copyright.
+
 2004-03-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkgldrawable.c: Fix warning of Gdk::GLDrawable#gl_begin
