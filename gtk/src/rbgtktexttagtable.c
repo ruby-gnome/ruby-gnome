@@ -4,7 +4,7 @@
   rbgtktexttagtable.c -
  
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/12/21 08:22:19 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -17,7 +17,7 @@ static VALUE
 txt_tt_initialize(self)
     VALUE self;
 {
-    RBGTK_INITIALIZE(self, gtk_text_tag_table_new());
+    G_INITIALIZE(self, gtk_text_tag_table_new());
     return Qnil;
 }
 

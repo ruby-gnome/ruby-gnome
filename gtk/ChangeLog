@@ -1,5 +1,11 @@
 2003-12-21  Kenichi Komiya <kom@mail1.accsnet.ne.jp>
 
+	* src/rbgtkbindingset.c: Fix a segfault.
+	* src/rbgtktexttagtable.c, rbgtktexttag.c, rbgdkcolormap.c: 
+	Use G_INITIALIZE instead of RBGTK_INITIALIZE, because they are not Gtk::Object.
+
+2003-12-20  Kenichi Komiya <kom@mail1.accsnet.ne.jp>
+
 	* src/rbgtkbindingset.c: Add Gtk::BindingSet#add_signal. Fix some bugs.
 	* src/rbgtkobject.c: Add Gtk::Object.binding_set.
 	* sample/misc/bindings.rb: Added.

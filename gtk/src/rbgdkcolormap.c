@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2003/10/03 12:51:01 $
+  $Date: 2003/12/21 08:22:19 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -25,7 +25,7 @@ gdkcmap_initialize(self, visual, allocate)
 {
     GdkColormap *cmap  = gdk_colormap_new(GDK_VISUAL(RVAL2GOBJ(visual)),
                                           RTEST(allocate));
-    RBGTK_INITIALIZE(self, cmap);
+    G_INITIALIZE(self, cmap);
     return Qnil;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtktexttag.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/12/21 08:22:19 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -19,7 +19,7 @@ initialize(argc, argv, self)
 {
     VALUE name;
     rb_scan_args(argc, argv, "01", &name);
-    RBGTK_INITIALIZE(self, gtk_text_tag_new(NIL_P(name) ? NULL : RVAL2CSTR(name)));
+    G_INITIALIZE(self, gtk_text_tag_new(NIL_P(name) ? NULL : RVAL2CSTR(name)));
     return Qnil;
 }
 

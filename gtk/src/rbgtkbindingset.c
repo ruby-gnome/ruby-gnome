@@ -4,7 +4,7 @@
   rbgtkbindingset.c -
 
   $Author: mutoh $
-  $Date: 2003/12/20 15:37:53 $
+  $Date: 2003/12/21 08:22:19 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -29,7 +29,13 @@ gtk_bindingset_copy(const GtkBindingSet* bin)
     /* GtkBindingSet should not be copied */
     return (GtkBindingSet*)bin;
 }
-                                                                                
+
+static void
+gtk_bindingset_free(GtkBindingSet* bin)
+{
+    /* GtkBindingSet should not be freed */
+}
+
 GType
 gtk_bindingset_get_type(void)
 {
@@ -37,7 +43,7 @@ gtk_bindingset_get_type(void)
   if (our_type == 0)
     our_type = g_boxed_type_register_static ("GtkBindingSet",
                     (GBoxedCopyFunc)gtk_bindingset_copy,
-                    (GBoxedFreeFunc)g_free);
+                    (GBoxedFreeFunc)gtk_bindingset_free);
   return our_type;
 }
 /*****************************************/
