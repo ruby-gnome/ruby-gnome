@@ -89,41 +89,22 @@ VTAIL
   mkenums(c, config, files)
 end
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+PACKAGE_NAME = "gnomeprintui2"
+
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/gnomeprintui/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
+  
+PKGConfig.have_package("libgnomeprintui-2.2") or exit 1
+setup_win32(PACKAGE_NAME)
 
-pkg_infos   = [
-  ['gtk+-2.0', []],
-  ['libgnomeprintui-2.2', []],
-]
+add_depend_package("glib2", "glib/src", TOPDIR)
 
-pkg_infos.each do |name, version|
-	PKGConfig.have_package(name, *version) or exit 1
-end
-
-check_win32
-
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
-
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
-
-srcdir = File.dirname($0) == "." ? "." :
-  File.expand_path(File.dirname($0) + "/src")
-
-Dir.mkdir('src') unless File.exist? 'src'
-Dir.chdir "src"
-begin
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINTUI2_COMPILATION"){
   enum_type_prefix = "libgnomeprintui-enum-types"
   if !have_header("#{enum_type_prefix}.h")
     if maintainer
@@ -142,15 +123,7 @@ begin
     end
   end
 
-  if $distcleanfiles
-    %w(c h).each do |ext|
-      $distcleanfiles << "#{enum_type_prefix}.#{ext}"
-    end
-  end
-
-  create_makefile("gnomeprintui2", srcdir)
-ensure
-  Dir.chdir('..')
-end
-
+  add_distcleanfile(enum_type_prefix + ".c")
+  add_distcleanfile(enum_type_prefix + ".h")
+}
 create_top_makefile

@@ -1,3 +1,7 @@
+2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Follow mkmf-gnome2.rb changes. 
+
 2004-12-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/dialog.rb (Renderer::draw_arc): fixed wrong

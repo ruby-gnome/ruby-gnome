@@ -122,4 +122,9 @@ end
 
 Gtk.init
 
+begin
 Renderer.new.dialog
+rescue Exception
+  p "rescue"
+  p $!
+end
