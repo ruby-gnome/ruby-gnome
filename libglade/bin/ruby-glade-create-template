@@ -6,9 +6,9 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.5 2004/02/24 16:28:45 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.6 2004/03/05 16:34:24 mutoh Exp $
 #
-# Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
+# Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
 $DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER = true
@@ -22,7 +22,7 @@ class GladeXML
   end
 end
 
-LG_VERSION = %Q[$Revision: 1.5 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.6 $].scan(/\d/).join(".")
 
 begin
   $EXIST_GNOME = true
