@@ -1,3 +1,7 @@
+2003-02-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* mkmf-gnome2.rb: Added.
+
 2002-12-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* pango: Added.
