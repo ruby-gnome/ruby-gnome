@@ -1,5 +1,6 @@
-2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+2005-03-06    <mutoh@localhost.localdomain>
 
+	* rbgdk-pixbuf-format.c: Fix a compilation problemn on GTK+-2.0.x.
 	* README: Revised.
 
 2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>

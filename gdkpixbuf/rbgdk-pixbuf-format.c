@@ -4,7 +4,7 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 06:50:42 $
+  $Date: 2005/03/05 17:01:36 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -169,7 +169,6 @@ Init_gdk_pixbuf_format(VALUE mGdk)
     rb_define_method(format, "writable?", is_writable, 0);
     rb_define_method(format, "domain", get_domain, 0);
     rb_define_method(format, "signature", get_signature, 0);
-#endif
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
     rb_define_method(format, "scalable?", is_scalable, 0);
     rb_define_method(format, "disabled?", is_disabled, 0);
@@ -178,5 +177,6 @@ Init_gdk_pixbuf_format(VALUE mGdk)
 
 #endif
     G_DEF_SETTERS(format);
+#endif
 }
 
