@@ -86,7 +86,7 @@ begin
     set_output_lib('libruby-gtk2.a')
     $defs << "-DRUBY_GTK2_COMPILATION"
 
-    $distcleanfiles += ["rbgdkkeysyms.h", "rbgtkinits.c"]
+    $distcleanfiles += ["rbgdkkeysyms.h", "rbgtkinits.c"] if $distcleanfiles
 
     create_makefile("gtk2", src_dir)
     $defs.delete("-DRUBY_GTK2_COMPILATION")
