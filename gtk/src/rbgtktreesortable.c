@@ -5,7 +5,7 @@
 
   $Author: mutoh $
 
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/07/11 19:39:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -110,23 +110,19 @@ treesortable_has_default_sort_func(self)
 void
 Init_gtk_treesortable()
 {
-    VALUE mts = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable",
-				mGtk);
+    VALUE mts = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable", mGtk);
 
-    rb_define_method(mts, "sort_column_changed",
-		     treesortable_sort_column_changed, 0);
-    rb_define_method(mts, "sort_column_id",
-		     treesortable_get_sort_column_id, 0);
-    rb_define_method(mts, "set_sort_column_id",
-		     treesortable_set_sort_column_id, -1);
-    rb_define_method(mts, "set_sort_func",
-		     treesortable_set_sort_func, 1);
-    rb_define_method(mts, "set_default_sort_func",
-		     treesortable_set_default_sort_func, 0);
-    rb_define_method(mts, "has_default_sort_func?",
-		     treesortable_has_default_sort_func, 0);
+    rb_define_method(mts, "sort_column_changed", treesortable_sort_column_changed, 0);
+    rb_define_method(mts, "sort_column_id", treesortable_get_sort_column_id, 0);
+    rb_define_method(mts, "set_sort_column_id", treesortable_set_sort_column_id, -1);
+    rb_define_method(mts, "set_sort_func", treesortable_set_sort_func, 1);
+    rb_define_method(mts, "set_default_sort_func", treesortable_set_default_sort_func, 0);
+    rb_define_method(mts, "has_default_sort_func?", treesortable_has_default_sort_func, 0);
 
     G_DEF_SETTERS(mts);
+
+    rb_undef_method(mts, "sort_func=");
+    rb_define_const(mts, "DEFAULT_SORT_COLUMN_ID", GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID);
 }
 
 /* vim: set sts=4 sw=4 ts=8: */

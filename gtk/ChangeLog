@@ -1,3 +1,12 @@
+2003-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreedragsource.c, rbgtktreedragdest.c: Added.
+	* src/rbgtktreesortable.c: Add Gtk::TreeSortable::DEFAULT_SORT_COLUMN_ID.
+	Remove Gtk::TreeSortable#sort_func= which requires block.
+	* src/rbgtktreestore.c: Gtk::TreeStore#remove return true or false 
+	correctly in GTK+-2.2.
+	* src/rbgtktreemodel.c: Fix block argument for signals.
+
 2003-07-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkinvisible.c: Implement GTK+-2.2 methods. 

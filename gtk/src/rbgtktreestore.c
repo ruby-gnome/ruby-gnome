@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2003/05/27 10:59:22 $
+  $Date: 2003/07/11 19:39:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -89,13 +89,12 @@ static VALUE
 tstore_remove(self, iter)
     VALUE self, iter;
 {
-    /* XXX This method should return boolean.
-       but at least v2.0.6, it returns nothing(void).
+#if GTK_MINOR_VERSION >= 2
     return gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
-    */
+#else
     gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter));
-
     return Qtrue;
+#endif
 }
 
 static VALUE

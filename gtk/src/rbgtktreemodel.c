@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2003/07/01 14:43:20 $
+  $Date: 2003/07/11 19:39:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -155,6 +155,40 @@ treemodel_rows_reordered(self, path, iter, new_orders)
     return self;
 }
 
+static VALUE
+signal_func(num, values)
+    guint num;
+    const GValue* values;
+{
+    GtkTreeModel* model = g_value_get_object(&values[0]);
+    GtkTreePath* path = g_value_get_boxed(&values[1]);
+    GtkTreeIter* iter = g_value_get_boxed(&values[2]);
+    iter->user_data3 = model;
+    
+    return rb_ary_new3(3, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter));
+}
+
+static VALUE
+signal_rows_reordered_func(num, values)
+    guint num;
+    const GValue* values;
+{
+    GtkTreeModel* model = g_value_get_object(&values[0]);
+    GtkTreePath* path = g_value_get_boxed(&values[1]);
+    GtkTreeIter* iter = g_value_get_boxed(&values[2]);
+    gint* new_orders = (gint*)g_value_get_pointer(&values[3]);
+    gint len = gtk_tree_model_iter_n_children(model, iter);
+    VALUE orders = Qnil;
+    int i;
+
+    iter->user_data3 = model;
+
+    orders = rb_ary_new2(len);
+    for (i = 0; i < len; i++, new_orders++) {
+        rb_ary_push(orders, INT2NUM(*new_orders));
+    }
+    return rb_ary_new3(4, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter), orders);
+}
 
 void 
 Init_gtk_treemodel()
@@ -176,6 +210,11 @@ Init_gtk_treemodel()
     /* GtkTreeModelFlags */
     rb_define_const(mTreeModel, "ITERS_PERSIST", INT2NUM(GTK_TREE_MODEL_ITERS_PERSIST));
     rb_define_const(mTreeModel, "LIST_ONLY", INT2NUM(GTK_TREE_MODEL_LIST_ONLY));
+
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_changed", signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_inserted", signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "row_has_child_toggled", signal_func);
+    G_DEF_SIGNAL_FUNC(mTreeModel, "rows_reordered", signal_rows_reordered_func);
 
     G_DEF_SETTERS(mTreeModel);
 }
