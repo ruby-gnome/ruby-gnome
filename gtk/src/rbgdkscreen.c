@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2004/08/01 16:52:36 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -247,7 +247,7 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
     if (! NIL_P(argv)){
         Check_Type(argv, T_ARRAY);
         gargc = RARRAY(argv)->len;
-        gargv = ALLOCA_N(gchar*, gargc);
+        gargv = ALLOCA_N(gchar*, gargc + 1);
         for (i = 0; i < gargc; i++) {
             if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
                 gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
@@ -256,11 +256,13 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
                 gargv[i] = "";
             }
         }
+        gargv[gargc] = (gchar*)NULL;
     }
+
     if (! NIL_P(envp)){
         Check_Type(envp, T_ARRAY);
         genc = RARRAY(envp)->len;
-        genvp = ALLOCA_N(gchar*, genc);
+        genvp = ALLOCA_N(gchar*, genc + 1);
         for (i = 0; i < genc; i++) {
             if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
                 genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
@@ -269,6 +271,7 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
                 genvp[i] = "";
             }
         }
+        genvp[genc] = (gchar*)NULL;
     }
 
     ret = gdk_spawn_on_screen(_SELF(self),
@@ -305,7 +308,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
     if (! NIL_P(argv)){
         Check_Type(argv, T_ARRAY);
         gargc = RARRAY(argv)->len;
-        gargv = ALLOCA_N(gchar*, gargc);
+        gargv = ALLOCA_N(gchar*, gargc + 1);
         for (i = 0; i < gargc; i++) {
             if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
                 gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
@@ -314,12 +317,13 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
                 gargv[i] = "";
             }
         }
+        gargv[gargc] = (gchar*)NULL;
     }
 
     if (! NIL_P(envp)){
         Check_Type(envp, T_ARRAY);
         genc = RARRAY(envp)->len;
-        genvp = ALLOCA_N(gchar*, genc);
+        genvp = ALLOCA_N(gchar*, genc + 1);
         for (i = 0; i < genc; i++) {
             if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
                 genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
@@ -328,6 +332,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
                 genvp[i] = "";
             }
         }
+        genvp[genc] = (gchar*)NULL;
     }
 
     ret = gdk_spawn_on_screen_with_pipes(_SELF(self),
@@ -341,7 +346,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
     if (! ret)
         rbglib_spawn_error(err);
     
-    return rb_ary_new3(3, INT2NUM(child_pid), 
+    return rb_ary_new3(4, INT2NUM(child_pid), 
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_input)),
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_output)),
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_error)));

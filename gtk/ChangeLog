@@ -1,3 +1,8 @@
+2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkscreen.c: Fixed bugs for Gdk::Screen#spawn_on_screen, 
+	#spawn_on_screen_with_pipes. 
+
 2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdisplay.c: Added Gdk::Display#grab, #ungrab, 
