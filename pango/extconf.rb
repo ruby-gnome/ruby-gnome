@@ -22,27 +22,17 @@ have_func("pango_render_part_get_type")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 
-if $distcleanfiles
-  $distcleanfiles << "rbpangoinits.c"
-  $distcleanfiles << "rbpangoversion.h"
-end
+add_distcleanfile("rbpangoinits.c")
+add_distcleanfile("rbpangoversion.h")
 
-begin
-  Dir.mkdir('src') unless File.exist? 'src'
-  Dir.chdir "src"
-
-  pango_version = PKGConfig.modversion("pango")
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
+  pango_version = PKGConfig.modversion(PACKAGE_NAME)
 
   File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
   File.delete("rbpangoversion.h") if FileTest.exist?("rbpangoversion.h")
   system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
   system("ruby #{SRCDIR}/makeversion.rb #{pango_version} > rbpangoversion.h")
-
-  $defs << "-DRUBY_PANGO_COMPILATION"
-  create_makefile(PACKAGE_NAME, SRCDIR)
-ensure
-  Dir.chdir('..')
-end
+}
 
 create_top_makefile
 
