@@ -4,7 +4,7 @@
   rbgtkfontselection.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/02/22 18:01:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -26,4 +26,5 @@ Init_gtk_font_selection()
     VALUE gFontSelection = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
 
     rb_define_method(gFontSelection, "initialize", fs_initialize, 0);
+    rb_undef_method(gFontSelection, "font");
 }

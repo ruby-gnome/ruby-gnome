@@ -2,6 +2,7 @@
 
 	* sample/misc/toolbar.rb, sample/testgtk/toolbar.rb: 
 	Follow Gtk::Toolbar changes.
+	* src/rbgtkfontselection.c: Undefine Gtk::FontSelection#font as obsolete.
 
 2003-02-23  KATO Kazuyoshi <kadu@zb.wakwak.com>
 
