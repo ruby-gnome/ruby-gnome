@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/05/15 17:46:15 $
+  $Date: 2004/05/20 16:10:54 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -63,7 +63,7 @@ extern "C" {
 RUBY_GLIB2_VAR VALUE mGLib;
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
 extern VALUE rbg_cstr2rval(const char* str);
-extern VALUE rbg_cstr2rval_with_free(const char* str);
+extern VALUE rbg_cstr2rval_with_free(gchar* str);
 
 #ifdef __cplusplus
 }
