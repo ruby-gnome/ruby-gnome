@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2002/12/09 15:05:24 $
+  $Date: 2002/12/21 03:42:28 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -35,8 +35,12 @@ rbgutil_set_properties(self, hash)
     VALUE self, hash;
 {
     int i;
-    VALUE ary = rb_funcall(hash, id_to_a, 0);
-    GObject* obj = RVAL2GOBJ(self);
+    VALUE ary;
+    GObject* obj;
+
+    Check_Type(hash, T_HASH);
+    ary = rb_funcall(hash, id_to_a, 0);
+    obj = RVAL2GOBJ(self);
 
     g_object_freeze_notify(obj);
     for (i = 0; i < RARRAY(ary)->len; i++) {

@@ -1,3 +1,7 @@
+2002-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.c: Check 2nd argument is hash. 
+
 2002-12-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgutil.[ch]: Add G_SET_SYMBOL_PROPERTY(gtype, name).
