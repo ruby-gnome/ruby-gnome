@@ -1,3 +1,7 @@
+2003-02-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use ../mkmf-gnome2.rb
+
 2003-02-11  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbglib_convert.c: Add a file. Support string character set conversion.

@@ -1,51 +1,9 @@
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
 require 'mkmf'
-
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
+require 'mkmf-gnome2'
 
 
-pkgconfig = with_config('pkg-config', 'pkg-config')
-pkgname   = 'gobject-2.0'
-
-pkgconfig_opt = ''
-if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
-  pkgconfig_opt += ' --msvc-syntax'
-end
-
-
-unless system("#{pkgconfig} #{pkgconfig_opt} --exists #{pkgname}")
-  STDERR.printf("%s doesn't exist\n", pkgname)
-  exit
-end
-
-$libs   += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
-$CFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
-
-STDOUT.print("checking for GCC... ")
-if /gcc/ =~ Config::CONFIG['CC']
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -Wall' 
-  is_gcc = true
-else
-  STDOUT.print "no\n"
-  is_gcc = false
-end
-
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if is_gcc
-else
-  STDOUT.print "no\n"
-end
+PKGConfig.have_package('gobject-2.0') or exit
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate
@@ -56,6 +14,7 @@ else
 end
 
 have_func("rb_define_alloc_func") # for ruby-1.8
+
 
 src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
 
