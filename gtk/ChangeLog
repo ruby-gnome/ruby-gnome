@@ -1,3 +1,11 @@
+2005-01-31  KATO Kazuyoshi  <kzys@8-p.info>
+
+	* sample/gtk-demo/main.rb: Follow GTK+-2.6 gtk-demo.
+	* sample/gtk-demo/common.rb (Demo::self.find_file): Add to search /usr/local/share/gtk-2.0/demo.
+	* sample/gtk-demo/clipboard.rb: Added.
+	* sample/gtk-demo/entry_completion.rb: Added. 
+	* sample/gtk-demo/expander.rb: Added.
+
 2005-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpangorenderer.c: Fix compiling error on MS VC++.
