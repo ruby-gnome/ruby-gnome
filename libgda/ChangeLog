@@ -1,3 +1,13 @@
+2003-11-29  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaerror.c: Gda::Error.new has been improved
+	  to optionally accept parameters as description, number,
+	  source, sqlstate.
+	* src/rbgdaparameterlist.c: Added Gda::ParameterList#empty?
+	* src/rbgdaprovider.c: Added Gda::Provider#== and
+	  Gda::Provider#name (alias to #prov_id).
+	* tests/*.rb: Cleaned test suite.
+
 2003-11-28  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdaparameterlist.c: Fixed a bug in

@@ -111,6 +111,12 @@ static VALUE rb_gda_param_list_get_length(self)
     return INT2FIX(gda_parameter_list_get_length(RGDA_PARAMETER_LIST(self)));
 }
 
+static VALUE rb_gda_param_list_is_empty(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gda_parameter_list_get_length(RGDA_PARAMETER_LIST(self)) == 0);
+}
+
 static VALUE rb_gda_param_list_clear(self)
     VALUE self;
 {
@@ -137,6 +143,7 @@ void Init_gda_parameter_list(void) {
 
     rb_define_method(c, "length", rb_gda_param_list_get_length, 0);
     rb_define_alias(c, "size", "length");
+    rb_define_method(c, "empty?", rb_gda_param_list_is_empty, 0);
 
     rb_define_method(c, "clear", rb_gda_param_list_clear, 0);
 }

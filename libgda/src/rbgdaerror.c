@@ -21,16 +21,6 @@
 
 #include "rbgda.h"
 
-static VALUE rb_gda_error_new(self)
-    VALUE self;
-{
-    GdaError *error = gda_error_new();
-    if (error != NULL) {
-        G_INITIALIZE(self, error);
-    }
-    return Qnil;
-}
-
 static VALUE rb_gda_error_get_description(self)
     VALUE self;
 {
@@ -87,10 +77,40 @@ static VALUE rb_gda_error_set_sqlstate(self, sqlstate)
     return self;
 }
 
+static VALUE rb_gda_error_new(argc, argv, self)
+    int argc;
+    VALUE *argv, self;
+{
+    VALUE description, number, source, sqlstate;
+    GdaError *error;
+
+    rb_scan_args(argc, argv, "04", &description, &number, &source, &sqlstate);
+
+    error = gda_error_new();
+    if (error != NULL) {
+        G_INITIALIZE(self, error);
+    }
+
+    if (!NIL_P(description)) {
+        rb_gda_error_set_description(self, description);
+    }
+    if (!NIL_P(number)) {
+        rb_gda_error_set_number(self, number);
+    }
+    if (!NIL_P(source)) {
+        rb_gda_error_set_source(self, source);
+    }
+    if (!NIL_P(sqlstate)) {
+        rb_gda_error_set_sqlstate(self, sqlstate);
+    }
+    
+    return Qnil;
+}
+
 void Init_gda_error(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_ERROR, "Error", mGda);
 
-    rb_define_method(c, "initialize", rb_gda_error_new, 0);
+    rb_define_method(c, "initialize", rb_gda_error_new, -1);
 
     rb_define_method(c, "description", rb_gda_error_get_description, 0);
     rb_define_method(c, "number",      rb_gda_error_get_number,      0);

@@ -109,6 +109,16 @@ static VALUE rb_gda_provider_get_description(self)
     return CSTR2RVAL(info->description);
 }
 
+static VALUE rb_gda_provider_is_equal(self, other_prov)
+    VALUE self, other_prov;
+{
+    return NIL_P(other_prov)
+        ? Qfalse
+        : rb_equal(rb_gda_provider_get_id(self),
+                   rb_gda_provider_get_id(other_prov));
+}
+
+
 void Init_gda_provider(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_PROVIDER_INFO, "Provider", mGda);
 
@@ -119,7 +129,10 @@ void Init_gda_provider(void) {
                                rb_gda_provider_get_by_name, 1);
 
     rb_define_method(c, "prov_id",     rb_gda_provider_get_id,          0);
+    rb_define_alias(c, "name", "prov_id");
     rb_define_method(c, "location",    rb_gda_provider_get_location,    0);
     rb_define_method(c, "description", rb_gda_provider_get_description, 0);
+
+    rb_define_method(c, "==", rb_gda_provider_is_equal, 1);
 }
 
