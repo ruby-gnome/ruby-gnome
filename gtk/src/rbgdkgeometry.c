@@ -4,7 +4,7 @@
   rbgdkgeometry.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:24 $
+  $Date: 2003/10/17 16:30:51 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -52,9 +52,9 @@ geo_initialize(self)
 
 static VALUE
 geo_set(self, min_width, min_height, max_width,	max_height,
-		base_width, base_height, width_inc, height_inc,	min_aspect, max_aspect)
+		base_width, base_height, width_inc, height_inc,	min_aspect, max_aspect, gravity)
      VALUE self, min_width, min_height, max_width, max_height,
-     base_width, base_height, width_inc, height_inc, min_aspect, max_aspect;
+     base_width, base_height, width_inc, height_inc, min_aspect, max_aspect, gravity;
 {
     GdkGeometry *geo = _SELF(self);
     geo->min_width = NUM2INT(min_width);
@@ -67,6 +67,8 @@ geo_set(self, min_width, min_height, max_width,	max_height,
     geo->height_inc = NUM2INT(height_inc);
     geo->min_aspect = NUM2DBL(min_aspect);
     geo->max_aspect = NUM2DBL(max_aspect);
+    geo->win_gravity = RVAL2GENUM(gravity, GDK_TYPE_GRAVITY);
+
     return self;
 }
 
@@ -138,6 +140,13 @@ geo_max_aspect(self)
     VALUE self;
 {
     return rb_float_new(_SELF(self)->max_aspect);
+}
+
+static VALUE
+geo_win_gravity(self)
+    VALUE self;
+{
+    return GENUM2RVAL(_SELF(self)->win_gravity, GDK_TYPE_GRAVITY);
 }
 
 static VALUE
@@ -220,6 +229,14 @@ geo_set_max_aspect(self, max_aspect)
     return self;
 }
 
+static VALUE
+geo_set_win_gravity(self, gravity)
+    VALUE self, gravity;
+{
+    _SELF(self)->win_gravity = RVAL2GENUM(gravity, GDK_TYPE_GRAVITY);
+    return self;
+}
+
 void 
 Init_gtk_gdk_geometry()
 {
@@ -236,7 +253,8 @@ Init_gtk_gdk_geometry()
     rb_define_method(gdkGeometry, "height_inc", geo_height_inc, 0);
     rb_define_method(gdkGeometry, "min_aspect", geo_min_aspect, 0);
     rb_define_method(gdkGeometry, "max_aspect", geo_max_aspect, 0);
-    rb_define_method(gdkGeometry, "set", geo_set, 10);
+    rb_define_method(gdkGeometry, "win_gravity", geo_win_gravity, 0);
+    rb_define_method(gdkGeometry, "set", geo_set, 11);
     rb_define_method(gdkGeometry, "set_min_width", geo_set_min_width, 1);
     rb_define_method(gdkGeometry, "set_min_height", geo_set_min_height, 1);
     rb_define_method(gdkGeometry, "set_max_width", geo_set_max_width, 1);
@@ -247,6 +265,7 @@ Init_gtk_gdk_geometry()
     rb_define_method(gdkGeometry, "set_height_inc", geo_set_height_inc, 1);
     rb_define_method(gdkGeometry, "set_min_aspect", geo_set_min_aspect, 1);
     rb_define_method(gdkGeometry, "set_max_aspect", geo_set_max_aspect, 1);
+    rb_define_method(gdkGeometry, "set_win_gravity", geo_set_win_gravity, 1);
 
     G_DEF_SETTERS(gdkGeometry);
 

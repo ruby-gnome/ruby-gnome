@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2003/10/14 13:35:52 $
+  $Date: 2003/10/17 16:30:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -140,6 +140,20 @@ gdkeventkey_string(self)
     VALUE self;
 {
     return rb_str_new2(get_gdkevent(self)->key.string);
+}
+
+static VALUE
+gdkeventkey_hardware_keycode(self)
+    VALUE self;
+{
+    return UINT2NUM(get_gdkevent(self)->key.hardware_keycode);
+}
+
+static VALUE
+gdkeventkey_group(self)
+    VALUE self;
+{
+    return UINT2NUM(get_gdkevent(self)->key.group);
 }
 
 /* GdkEventButton */
@@ -681,6 +695,8 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "keyval", gdkeventkey_keyval, 0);
     rb_define_method(ev, "length", gdkeventkey_length, 0);
     rb_define_method(ev, "string", gdkeventkey_string, 0);
+    rb_define_method(ev, "hardware_keycode", gdkeventkey_hardware_keycode, 0);
+    rb_define_method(ev, "group", gdkeventkey_group, 0);
 
     /* GdkEventButton */
     ev = gdkevents[GDK_BUTTON_PRESS];

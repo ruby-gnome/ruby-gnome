@@ -1,3 +1,14 @@
+2003-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Add Gdk::EventKey#hardware_keycode, #group.
+
+2003-10-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkkeymap.c: Added. 
+	* src/rbgdkgeometry.c: Gdk::Geometry#set requires win_gravity 
+	as last parameter. 
+	Add Gdk::Geometry#win_gravity, #set_win_gravity.
+
 2003-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkproperty.c: Add a file. 
