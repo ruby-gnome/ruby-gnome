@@ -1,3 +1,7 @@
+2003-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: increment RBGLIB_MICRO_VERSION.
+
 2003-11-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_enums.c: disable range checks.
