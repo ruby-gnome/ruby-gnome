@@ -1,3 +1,7 @@
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Use ../mkmf-gnome2.rb
+
 2003-01-04  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public
@@ -28,8 +32,8 @@
 
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
-	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/01/04 06:10:50 $ macros.
+	* src/*.[ch]: Updated headers to be more CVS-like using $Author: sakai $
+	and $Date: 2003/02/13 19:56:37 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

@@ -2,7 +2,9 @@
 extconf.rb for libart extention library
 =end
 
-require "mkmf"
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
+require 'mkmf'
+require 'mkmf-gnome2'
 
 config_cmd = with_config("libart2-config", "libart2-config")
 
@@ -20,6 +22,9 @@ end
 $libs += " -lz "
 have_library("png", "png_create_write_struct")
 have_library("jpeg", "jpeg_set_defaults")
+
+check_win32
+
 
 #
 # create Makefiles

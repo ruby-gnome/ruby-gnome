@@ -1,53 +1,13 @@
-require "mkmf"
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
+require 'mkmf'
+require 'mkmf-gnome2'
 
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
-
-
-pkgconfig = with_config('pkg-config', 'pkg-config')
 pkgname   = 'gconf-2.0'
 
-pkgconfig_opt = ''
-if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
-  pkgconfig_opt += ' --msvc-syntax'
-end
-
-
-unless system("#{pkgconfig} #{pkgconfig_opt} --exists #{pkgname}")
-  STDERR.printf("%s doesn't exist\n", pkgname)
-  exit
-end
-
-$libs   += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
-$CFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
-
-STDOUT.print("checking for GCC... ")
-if /gcc/ =~ Config::CONFIG['CC']
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -Wall' 
-  is_gcc = true
-else
-  STDOUT.print "no\n"
-  is_gcc = false
-end
+PKGConfig.have_package(pkgname) or exit
+check_win32
 
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
-
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if is_gcc
-else
-  STDOUT.print "no\n"
-end
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate

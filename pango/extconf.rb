@@ -2,52 +2,16 @@
 extconf.rb for pango extention library
 =end
 
-require "mkmf"
-
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
+require 'mkmf'
+require 'mkmf-gnome2'
 
 #
 # detect configurations
 #
 
-begin
-  config_cmd = with_config("pkg-config", "pkg-config pango")
-  config_libs = "--libs"
-  config_cflags = "--cflags"
-  config_library = ""
-  version = `#{config_cmd} --version`
-  if not version.chomp.empty? then
-    $libs += ' ' + `#{config_cmd} #{config_libs} #{config_library}`.chomp
-    $CFLAGS += " -I../../glib/src " +
-      `#{config_cmd} #{config_cflags} #{config_library}`.chomp
-  else
-    raise "Can't find a config command"
-  end
-rescue
-  prefix = '/usr/local'
-  $LDFLAGS = '-L/usr/X11R6/lib -L#{prefix}/lib'
-  $CFLAGS = ' -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include '
-  $libs = ' -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 '
-end
-
-STDOUT.print("checking for GCC... ")
-STDOUT.flush
-if macro_defined?("__GNUC__", "")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -Wall' 
-  is_gcc = true
-else
-  STDOUT.print "no\n"
-  is_gcc = false
-end
+PKGConfig.have_package('pango') or exit
+check_win32
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate
@@ -58,6 +22,8 @@ else
 end
 
 have_func("rb_define_alloc_func") # for ruby-1.8
+
+$CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
 
 mdir = $mdir
 begin

@@ -1,3 +1,7 @@
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Use ../mkmf-gnome.rb
+
 2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* rbgdk-pixbufanimation.c,rbgdk-pixdata.c: Suppress warnings.

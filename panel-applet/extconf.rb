@@ -1,4 +1,6 @@
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
 require 'mkmf'
+require 'mkmf-gnome2'
 
 gnome_config = with_config('gnome-config', 'gnome-config')
 rbgtk_dir = with_config("ruby-gtk", File.dirname(__FILE__)+"/../gtk")
@@ -14,6 +16,8 @@ end
 
 $CFLAGS += "-I#{rbgtk_dir}/src -I#{rbgnome_dir}/src " + `gnome-config --cflags applets`.chomp
 $LDFLAGS += `gnome-config --libs applets`.chomp
+
+check_win32
 
 have_library("X11", "XOpenDisplay") &&
 have_library("Xi", "XOpenDevice") &&

@@ -1,3 +1,7 @@
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Use ../mkmf-gnome2.rb
+
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* All files: Update copyright.

@@ -1,43 +1,12 @@
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
 require 'mkmf'
+require 'mkmf-gnome2'
 
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
+PKGConfig.have_package('gdk-pixbuf-2.0') or exit
+check_win32
 
-
-while /^--/ =~ ARGV[0]
-  ARGV.shift
-end
-
-rubyglib_dir = ARGV.shift || File.dirname(__FILE__)+"/../glib"
-unless FileTest.exist?(rubyglib_dir)
-  raise "Directory #{rubyglib_dir} not found.  Please specify Ruby/GLib source dir."
-end
+rubyglib_dir = File.dirname(__FILE__)+"/../glib"
 $CFLAGS += " -I#{rubyglib_dir}/src "
-
-unless system('pkg-config', '--exists', 'gdk-pixbuf-2.0')
-  STDERR.print("gdk-pixbuf-2.0 doesn't exist\n")
-  exit
-end
-$LDFLAGS += ' ' + `pkg-config gdk-pixbuf-2.0 --libs`.chomp
-$CFLAGS  += ' ' + `pkg-config gdk-pixbuf-2.0 --cflags`.chomp
-
-$CFLAGS += ' -g'
-
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
-else
-  STDOUT.print "no\n"
-end
 
 have_func("g_print") &&
 have_func("gdk_pixbuf_new") &&

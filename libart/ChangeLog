@@ -1,3 +1,7 @@
+2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Use ../mkmf-gnome2.rb
+
 2003-02-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart_canvas.c: Change some function names which caused error 

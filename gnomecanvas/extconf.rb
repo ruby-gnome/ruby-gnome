@@ -2,54 +2,20 @@
 extconf.rb for gnomecanvas extention library
 =end
 
-require "mkmf"
-
-unless defined? macro_defined?
-  def macro_defined?(macro, src, opt="")
-    try_cpp(src + <<EOP, opt)
-#ifndef #{macro}
-# error
-#endif
-EOP
-  end
-end
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/..')
+require 'mkmf'
+require 'mkmf-gnome2'
 
 #
 # detect GTK+ configurations
 #
-if /mswin32/ !~ PLATFORM
-  config_cmd = with_config("pkg-config", "pkg-config libgnomecanvas-2.0")
-  while /^--/ =~ ARGV[0]
-    ARGV.shift
-  end
-  begin
-    version = `#{config_cmd} --version`
-    if not version.chomp.empty?
-      $libs += ' ' + `#{config_cmd} --libs`.chomp
-      $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
-    end
-  rescue
-    $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
-    $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
-    $libs = '-lm -lc'
-  end
-else
-  $LDFLAGS = '-L/usr/local/lib'
-  $CFLAGS = '-I/usr/local/include/gdk/win32 -I/usr/local/include/glib -I/usr/local/include'
-end
+
+PKGConfig.have_package('libgnomecanvas-2.0') or exit
+check_win32
 
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/src')) + $CFLAGS
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../gtk/src')) + $CFLAGS
 $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../libart/src')) + $CFLAGS
-
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
-else
-  STDOUT.print "no\n"
-end
 
 #
 # create Makefiles
@@ -58,6 +24,7 @@ mdir = $mdir
 begin
   $mdir = "gnomecanvas/src"
   src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
+  Dir.mkdir "src" unless File.exist? "src"
   Dir.chdir "src"
 
   have_func('gnome_canvas_set_center_scroll_region')
