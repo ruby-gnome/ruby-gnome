@@ -1,3 +1,8 @@
+2004-10-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpango.h, rbpangolayoutiter.c: Fix compiling warning under 
+	pango-1.6.x.
+
 2004-10-17  Vincent Isambart <isambart@netcourrier.com>
 
 	* extconf.rb: Changed add_uniq_to_objs to add_obj.

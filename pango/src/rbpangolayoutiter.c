@@ -4,7 +4,7 @@
   rbpangolayoutiter.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2004/10/27 16:52:03 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -14,6 +14,7 @@
 #define _SELF(r) ((PangoLayoutIter*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_ITER))
 
 /**********************************/
+#if ! HAVE_PANGO_LAYOUT_ITER_GET_TYPE
 static PangoLayoutIter*
 layout_iter_copy(ref)
     const PangoLayoutIter* ref;
@@ -32,6 +33,7 @@ pango_layout_iter_get_type(void)
                     (GBoxedFreeFunc)pango_layout_iter_free);
     return our_type;
 }
+#endif
 /**********************************/
 
 static VALUE
