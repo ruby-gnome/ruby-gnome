@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:35:05 $
+  $Date: 2002/08/25 12:54:11 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -481,6 +481,7 @@ Init_gtk_object()
     Init_gtk_statusbar();
     Init_gtk_table();
     Init_gtk_tearoff_menu_item();
+    Init_gtk_textbuffer();
     Init_gtk_textchild();
     Init_gtk_textmark();
     Init_gtk_texttag();

@@ -4,7 +4,7 @@
   global.h -
 
   $Author: sakai $
-  $Date: 2002/08/07 08:35:05 $
+  $Date: 2002/08/25 12:54:11 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -99,6 +99,7 @@ extern void Init_gtk_style();
 extern void Init_gtk_table();
 extern void Init_gtk_tearoff_menu_item();
 extern void Init_gtk_text();
+extern void Init_gtk_textbuffer();
 extern void Init_gtk_textchild();
 extern void Init_gtk_textmark();
 extern void Init_gtk_texttag();
