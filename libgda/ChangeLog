@@ -1,3 +1,7 @@
+2003-11-19  Laurent Sansonetti  <lrz@gnome.org>
+
+	* README: libgda 1.0.2 or newer is needed.
+
 2003-11-17  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgda.h, src/rbgdadatasource.c, src/rbgdaprovider.c:

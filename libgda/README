@@ -6,8 +6,10 @@ Ruby/Libgda is a Ruby binding of libgda (GNOME-DB Project).
 Requirements
 ------------
 
-    Ruby:       http://www.ruby-lang.org/
-    libgda:     http://www.gnome-db.org/
+    Ruby:           http://www.ruby-lang.org/
+    libgda [*]:     http://www.gnome-db.org/
+
+    [*]: 1.0.2 or newer is required.
 
 Install
 -------
