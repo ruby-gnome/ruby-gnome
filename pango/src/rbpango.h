@@ -4,7 +4,7 @@
   rbpango.h -
 
   $Author: mutoh $
-  $Date: 2003/11/09 17:10:47 $
+  $Date: 2004/03/14 09:45:16 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -25,8 +25,6 @@
 
 extern void Init_pango_inits();
 RUBY_PANGO_VAR VALUE mPango;
-
-#define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 
 #define PANGO_TYPE_ITEM (pango_item_get_type())
 #define PANGO_TYPE_ANALYSIS (pango_analysis_get_type())

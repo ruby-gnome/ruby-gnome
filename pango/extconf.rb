@@ -24,6 +24,8 @@ if /cygwin|mingw/ =~ RUBY_PLATFORM
 end
 set_output_lib('libruby-pango.a')
 
+$distcleanfiles << "rbpangoinits.c"
+
 begin
   srcdir = File.dirname($0) == "." ? "." :
     File.expand_path(File.dirname($0) + "/src")

@@ -4,7 +4,7 @@
   Copyright (c) 2003 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gdk_layout.rb,v 1.4 2003/09/01 14:39:24 mutoh Exp $
+  $Id: gdk_layout.rb,v 1.5 2004/03/14 09:45:16 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -24,4 +24,5 @@ end
 
 window.set_default_size(500,400).show_all
 
+GC.start
 Gtk.main

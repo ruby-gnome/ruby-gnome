@@ -1,3 +1,11 @@
+2004-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Remove src/rbpangoinits.c when run "make distclean".
+
+2003-12-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpango.h: Remove definition of CBOOL2RVAL(merged to Ruby/GLib).
+
 2003-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangologattr.c, src/rbpangoanalysis.c: Added. 
