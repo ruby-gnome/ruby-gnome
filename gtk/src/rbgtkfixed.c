@@ -4,7 +4,7 @@
   rbgtkfixed.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/10 17:43:03 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -39,7 +39,8 @@ fixed_move(self, win, x, y)
     return self;
 }
 
-void Init_gtk_fixed()
+void 
+Init_gtk_fixed()
 {
     VALUE gFixed = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);
 

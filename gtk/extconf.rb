@@ -88,12 +88,15 @@ begin
   have_func('_gtk_accel_group_attach')
   have_func("XReadBitmapFileData")
   obj_ext = ".#{$OBJEXT}"
+  opt_objs = ["rbgtkinits.o"]
 
   $libs = $libs.split(/\s/).uniq.join(' ')
   $source_files = Dir.glob('*.c')
   $objs = $source_files.collect do |item|
     item.gsub(/\.c$/, obj_ext)
   end
+  $objs -= opt_objs
+  $objs += opt_objs
 
   if /mswin32/ =~ PLATFORM
     $objs << "rbgdkkeysyms.lib"
@@ -114,6 +117,7 @@ begin
     mfile.print "#{e.gsub(/\.c$/, obj_ext)}: #{e} rbgtk.h global.h\n"
   end
   mfile.print "rbgdkconst#{obj_ext}: rbgdkconst.c rbgdkcursor.h\n"
+  mfile.print "rbgtkinits#{obj_ext}: rbgtkinits.c\n"
   mfile.print "rbgdk#{obj_ext}: rbgdk.c global.h\n"
 
   if /mswin32/ =~ PLATFORM
@@ -136,10 +140,11 @@ librbgdkkeysyms.a: makedefconst.rb rbgdkkeysyms.h
   mfile.print "\
 
 rbgdkcursor.h:;	$(RUBY) makecursors.rb #{gdkincl}/gdkcursor.h > $@
+rbgtkinits.c:;	   $(RUBY) makeinits.rb *.c > $@
 rbgdkkeysyms.h:;	$(RUBY) makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
 
 allclean: clean
-	rm -rf rbgdkkeysyms* *.a rbgdkcursors*
+	rm -rf rbgdkkeysyms* *.a rbgdkcursors* rbgtkinits*
 "
   mfile.close
   Dir.chdir ".."

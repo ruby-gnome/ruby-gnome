@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:09 $
+  $Date: 2002/09/10 17:43:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -174,6 +174,21 @@ style_white(self)
     VALUE self;
 {
     return BOXED2RVAL(&_SELF(self)->white, GDK_TYPE_COLOR);
+}
+
+static VALUE
+style_font(self)
+    VALUE self;
+{
+    return BOXED2RVAL(gtk_style_get_font(_SELF(self)), GDK_TYPE_FONT);
+}
+
+static VALUE
+style_set_font(self, f)
+    VALUE self, f;
+{
+    gtk_style_set_font(_SELF(self), (GdkFont*)RVAL2BOXED(f));
+    return self;
 }
 
 static VALUE
@@ -395,6 +410,8 @@ Init_gtk_style()
 
     rb_define_method(gStyle, "black", style_black, 0);
     rb_define_method(gStyle, "white", style_white, 0);
+    rb_define_method(gStyle, "font", style_font, 0);
+    rb_define_method(gStyle, "set_font", style_set_font, 1);
     rb_define_method(gStyle, "fg_gc", style_fg_gc, 1);
     rb_define_method(gStyle, "bg_gc", style_bg_gc, 1);
     rb_define_method(gStyle, "light_gc", style_light_gc, 1);

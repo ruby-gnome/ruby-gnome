@@ -3,8 +3,8 @@
 
   rbgtktree.c -
 
-  $Author: sakai $
-  $Date: 2002/08/04 14:30:33 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:36 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -108,7 +108,7 @@ tree_remove_item(self, child)
 }
 
 void 
-Init_gtk_tree()
+Init_gtk_tree() /* GTK_ENABLE_BROKEN */
 {
     VALUE gTree = G_DEF_CLASS(GTK_TYPE_TREE, "Tree", mGtk);
 

@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2002/08/25 12:54:11 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:34 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -337,9 +337,9 @@ txt_begin_user_action(self)
     return self;
 }
 
-void Init_gtk_textbuffer()
+void 
+Init_gtk_textbuffer()
 {
-    extern void Init_gtk_textiter();
     VALUE gTextBuffer = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
 
     rb_define_method(gTextBuffer, "initialize", txt_initialize, -1);
@@ -362,7 +362,5 @@ void Init_gtk_textbuffer()
 
     rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
     rb_define_method(gTextBuffer, "end_user_action", txt_end_user_action, 0);
-
-    Init_gtk_textiter();
 }
 

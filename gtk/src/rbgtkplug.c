@@ -2,8 +2,8 @@
 
   rbgdkplug.c -
 
-  $Author: sakai $
-  $Date: 2002/08/20 03:38:53 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:27 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -61,7 +61,8 @@ plug_get_id(self)
 
 #endif /* HAVE_GTK_PLUG_GET_TYPE */
 
-void Init_gtk_plug()
+void 
+Init_gtk_plug()
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE gPlug = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);

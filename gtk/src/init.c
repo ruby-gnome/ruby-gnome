@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/09/10 17:42:51 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -81,4 +81,6 @@ Init_gtk2()
 
     Init_gtk_gdk();
     Init_gtk_gtk();
+
+    Init_gtk_inits();
 }

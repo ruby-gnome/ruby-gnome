@@ -4,7 +4,7 @@
   rbgtktext.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/10 17:43:33 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -144,7 +144,8 @@ txt_has_cursor(self)
     /*  return GTK_TEXT(RVAL2GOBJ(self))->has_cursor? Qtrue: Qfalse; */
 }
 
-void Init_gtk_text()
+void 
+Init_gtk_text()  /* GTK_ENABLE_BROKEN */
 {
     VALUE gText = G_DEF_CLASS(GTK_TYPE_TEXT, "Text", mGtk);
 

@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/10 17:43:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,8 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-VALUE mRC;
 
 static VALUE
 rc_m_reparse_all(self)
@@ -63,9 +61,10 @@ rc_m_add_widget_class_style(self, style, pat)
     return Qnil;
 }
 
-void Init_gtk_rc()
+void 
+Init_gtk_rc()
 {
-    mRC = rb_define_module_under(mGtk, "RC");
+    VALUE mRC = rb_define_module_under(mGtk, "RC");
 
     rb_define_module_function(mRC, "reparse_all", rc_m_reparse_all, 0);
     rb_define_module_function(mRC, "parse", rc_m_parse, 1);

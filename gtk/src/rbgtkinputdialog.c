@@ -3,8 +3,8 @@
 
   rbgtkinputdialog.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:06 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,7 +21,8 @@ idiag_initialize(self)
     return Qnil;
 }
 
-void Init_gtk_input_dialog()
+void 
+Init_gtk_input_dialog()
 {
     VALUE gInputDialog = G_DEF_CLASS(GTK_TYPE_INPUT_DIALOG, "InputDialog", mGtk);
     rb_define_method(gInputDialog, "initialize", idiag_initialize, 0);

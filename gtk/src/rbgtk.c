@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/10 17:42:55 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -147,20 +147,6 @@ Init_gtk_gtk()
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relatives, Qnil);
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
-
-    Init_gtk_const();
-	Init_gtk_editable();
-    Init_gtk_main();
-    Init_gtk_object();
-    Init_gtk_rc();
-    Init_gtk_style();
-    Init_gtk_selectiondata();
-    Init_gtk_drag();
-	Init_gtk_windowgroup();
-
-    Init_gtk_accel_group();
-    Init_gtk_requisition();
-    Init_gtk_allocation();
 
 #ifdef USE_POLL_FUNC
     g_main_set_poll_func(rbgtk_poll);

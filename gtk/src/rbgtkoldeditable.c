@@ -3,8 +3,8 @@
 
   rbgtkoldeditable.c -
 
-  $Author: sakai $
-  $Date: 2002/08/05 17:52:00 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:25 $
 
   Copyright (C) 2002 Masahiro Sakai
 
@@ -12,7 +12,8 @@
 
 #include "global.h"
 
-void Init_gtk_oldeditable()
+void 
+Init_gtk_oldeditable()  /* GTK_DISABLE_DEPRECATED */
 {
 #ifndef GTK_DISABLE_DEPRECATED
     VALUE gOldEditable = G_DEF_CLASS(GTK_TYPE_OLD_EDITABLE, "OldEditable", mGtk);

@@ -4,7 +4,7 @@
   rbgtkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/10 17:43:26 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -46,7 +46,7 @@ pixmap_get(self)
 }
 
 void 
-Init_gtk_pixmap()
+Init_gtk_pixmap()  /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gPixmap = G_DEF_CLASS(GTK_TYPE_PIXMAP, "Pixmap", mGtk);
 

@@ -4,7 +4,7 @@
   rbgdkfont.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/10 17:42:54 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -151,7 +151,7 @@ font_text_height(self, text, length)
 }
 
 void
-Init_gtk_gdk_font()
+Init_gtk_gdk_font() /* GTK_DISABLE_DEPRECATED */
 {
   VALUE gdkFont = G_DEF_CLASS(GDK_TYPE_FONT, "Font", mGdk);
 

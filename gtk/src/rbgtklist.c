@@ -3,8 +3,8 @@
 
   rbgtklist.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:08 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -151,7 +151,7 @@ list_child_position(self, child)
 }
 
 void 
-Init_gtk_list()
+Init_gtk_list()  /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gList = G_DEF_CLASS(GTK_TYPE_LIST, "List", mGtk);
 

@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/09/10 17:42:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,7 +20,8 @@
 /*
  * constants
  */
-void Init_gtk_const()
+void 
+Init_gtk_const()
 {
     /*
      * version information

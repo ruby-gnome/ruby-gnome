@@ -4,7 +4,7 @@
   rbgtkpreview.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/10 17:43:27 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -130,7 +130,7 @@ preview_get_info(self)
 }
 
 void 
-Init_gtk_preview()
+Init_gtk_preview() /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gPreview = G_DEF_CLASS(GTK_TYPE_PREVIEW, "Preview", mGtk);
 

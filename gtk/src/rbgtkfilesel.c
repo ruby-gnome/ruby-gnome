@@ -4,7 +4,7 @@
   rbgtkfilesel.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/10 17:43:02 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -149,7 +149,8 @@ fsel_hide_fileop_buttons(self)
     return Qnil;
 }
 
-void Init_gtk_file_selection()
+void 
+Init_gtk_file_selection()
 {
     VALUE gFileSel = G_DEF_CLASS(GTK_TYPE_FILE_SELECTION, "FileSelection", mGtk);
     rb_define_method(gFileSel, "initialize", fsel_initialize, 1);

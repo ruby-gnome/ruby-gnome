@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -35,7 +35,8 @@ dialog_action_area(self)
     return GOBJ2RVAL(GTK_DIALOG(RVAL2GOBJ(self))->action_area);
 }
 
-void Init_gtk_dialog()
+void 
+Init_gtk_dialog()
 {
     VALUE gDialog = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
     rb_define_method(gDialog, "initialize", dialog_initialize, 0);

@@ -3,8 +3,8 @@
 
   rbgtktipsquery.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:32 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:35 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -59,7 +59,7 @@ tipsquery_set_labels(self, label_inactive, label_no_tip)
 }
 
 void 
-Init_gtk_tips_query()
+Init_gtk_tips_query()  /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gTipsQuery = G_DEF_CLASS(GTK_TYPE_TIPS_QUERY, "TipsQuery", mGtk);
 

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/10 17:43:37 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -164,7 +164,7 @@ static VALUE
 widget_event(self, event)
     VALUE self, event;
 {
-    return INT2NUM(gtk_widget_event(_SELF(self), GEV2RVAL(event)));
+    return INT2NUM(gtk_widget_event(_SELF(self), RVAL2GEV(event)));
 }
 
 static VALUE

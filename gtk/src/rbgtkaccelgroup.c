@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: sakai $
-  $Date: 2002/08/05 16:24:02 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:42:55 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -69,7 +69,8 @@ gaccelgrp_unlock(self)
     return Qnil;
 }
 
-void Init_gtk_accel_group()
+void 
+Init_gtk_accel_group()
 {
     VALUE gAccelGroup = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 

@@ -4,7 +4,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/10 17:43:19 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -198,7 +198,8 @@ rbgtk_m_log_remove_handler(self, log_domain, handler_id)
     return Qnil;
 }
 
-void Init_gtk_main()
+void 
+Init_gtk_main()
 {
     rb_define_module_function(mGtk, "events_pending", gtk_m_events_pending, 0);
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);

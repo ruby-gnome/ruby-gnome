@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:09 $
+  $Date: 2002/09/10 17:42:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -770,7 +770,7 @@ clist_find_row_from_data(self, data)
 }
 
 void 
-Init_gtk_clist()
+Init_gtk_clist()  /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gCList = G_DEF_CLASS2(GTK_TYPE_CLIST, "CList", mGtk, clist_mark, 0);
 

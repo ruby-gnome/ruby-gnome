@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/10 17:43:22 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -122,7 +122,8 @@ menu_set_active(self, active)
     return self;
 }
 
-void Init_gtk_menu()
+void 
+Init_gtk_menu()
 {
     VALUE gMenu = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 

@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 16:27:19 $
+  $Date: 2002/09/10 17:42:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1328,7 +1328,7 @@ ctreenode_expanded(self)
 }
 
 void 
-Init_gtk_ctree()
+Init_gtk_ctree()  /* GTK_DISABLE_DEPRECATED */
 {
     VALUE gCTree = G_DEF_CLASS2(GTK_TYPE_CTREE, "CTree", mGtk, ctree_mark, 0);
 

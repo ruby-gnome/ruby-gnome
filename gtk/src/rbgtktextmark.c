@@ -3,8 +3,8 @@
 
   rbgtktextmark.c -
 
-  $Author: sakai $
-  $Date: 2002/08/07 08:35:05 $
+  $Author: mutoh $
+  $Date: 2002/09/10 17:43:35 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -54,7 +54,8 @@ get_left_gravity(self)
     return gtk_text_mark_get_left_gravity(GTK_TEXT_MARK(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
 }
 
-void Init_gtk_textmark()
+void 
+Init_gtk_textmark()
 {
     VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
     rb_define_method(gTextMark, "visible=", set_visible, 1);
