@@ -4,7 +4,7 @@
   rbart.c -
 
   $Author: mutoh $
-  $Date: 2004/11/13 11:19:13 $
+  $Date: 2004/11/13 18:35:20 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -14,6 +14,8 @@
 #include "rbart.h"
 
 #ifndef HAVE_OBJECT_ALLOCATE
+static ID id_allocate;
+
 VALUE
 rbart_s_new(int argc, VALUE* argv, VALUE self)
 {
@@ -23,29 +25,28 @@ rbart_s_new(int argc, VALUE* argv, VALUE self)
 }
 #endif /* HAVE_OBJECT_ALLOCATE */
 
-#ifdef HAVE_OBJECT_ALLOCATE
 static VALUE
 rbart_s_allocate(klass)
     VALUE klass;
 {
     return Data_Wrap_Struct(klass, 0, xfree, 0);
 }
-#endif
 
 void
 rbart_init_func(klass, func)
     VALUE klass;
     void* func;
 {
-    if (func == NULL)
-        func = rbart_s_allocate;
+  if (func == NULL)
+    func = rbart_s_allocate;
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(klasss, "allocate", func, 0);
+  rb_define_singleton_method(klass, "allocate", func, 0);
 #else
-    rb_define_alloc_func(klass, func);
+  rb_define_alloc_func(klass, func);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(klass, "new", rbart_s_new, -1);
+  id_allocate = rb_intern("allocate");
+  rb_define_singleton_method(klass, "new", rbart_s_new, -1);
 #endif
 }
 
