@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/04/28 18:53:14 $
+  $Date: 2004/05/23 11:21:59 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -122,7 +122,9 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     if (xml) {
         G_INITIALIZE(self, xml);
         /* Once constructed, this means a GladeXML object can never be freed. */
+/* TEST!!! Commented out once.  
         rb_ary_push(instances, self);
+*/
         if (rb_block_given_p()){
             rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
             glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
