@@ -45,7 +45,6 @@ static VALUE rb_gda_get_datasources(self)
          node = g_list_next(node))
     {
         VALUE v = RGDA_DATASOURCE_NEW(node->data);
-        //rb_warn("name is %s", RGDA_DATASOURCE(v)->name);
         rb_ary_push(arr, v); 
     }
     gda_config_free_data_source_list(list);
@@ -97,17 +96,7 @@ static VALUE rb_gda_datasource_new(self, name, provider, cnc_string,
 static VALUE rb_gda_datasource_save(self)
     VALUE self;
 {
-    GdaDataSourceInfo *info = RGDA_DATASOURCE(self);
-#if defined(HAVE_GDA_CONFIG_SAVE_DATA_SOURCE_INFO)
-    gda_config_save_data_source_info(info);
-#else   /* <= 0.91.0 */
-    gda_config_save_data_source(info->name,
-                                info->provider,
-                                info->cnc_string,
-                                info->description,
-                                info->username,
-                                info->password);
-#endif
+    gda_config_save_data_source_info(RGDA_DATASOURCE(self));
     return self;
 
 }
