@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/06/15 17:36:51 $
+ * $Date: 2004/07/31 04:57:19 $
  *
  *****************************************************************************/
 
@@ -67,10 +67,10 @@ client_initialize(argc, argv, self)
                                                                                  
         /* check if we were passed an engine to use */
         if (rb_scan_args(argc, argv, "01", &engine) == 1) {
-		rb_warn("GConf::Client.new is deprecated. Use GConf::Client.get_for_engine(engine) instead.");
+		rb_warning("GConf::Client.new is deprecated. Use GConf::Client.get_for_engine(engine) instead.");
                 client = gconf_client_get_for_engine(RVAL2GCENGINE(engine));
         } else {
-		rb_warn("GConf::Client.new is deprecated. Use GConf::Client.default instead.");
+		rb_warning("GConf::Client.new is deprecated. Use GConf::Client.default instead.");
                 client = gconf_client_get_default();
         }
 

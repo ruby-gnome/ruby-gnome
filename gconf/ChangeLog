@@ -1,3 +1,8 @@
+2004-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgconf-client.c: Call rb_warning instead of rb_warn in
+	GConf::Client.new. After next release, it will be rb_warn.
+
 2004-07-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/simple-view.rb, simple-controller.rb, basic-gconf-app.rb: 
@@ -104,7 +109,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2004/07/03 07:38:02 $ macros.
+	and $Date: 2004/07/31 04:57:19 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
