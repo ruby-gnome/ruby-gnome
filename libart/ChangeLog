@@ -1,3 +1,8 @@
+2002-09-29  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbart.h, src/rbart_affine.c: add prefix to exported functions.
+	(get|make)_art_affine -> rbart_(get|make)_art_affine.
+
 2002-09-28  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbart_affine.c: Art::Affine.point() now accepts an array

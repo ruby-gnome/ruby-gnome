@@ -4,7 +4,7 @@
   rbart.h - header file for Art module of ruby
 
   $Author: tkubo $
-  $Date: 2002/09/28 14:27:08 $
+  $Date: 2002/09/28 19:13:35 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -18,8 +18,8 @@
 extern VALUE mArt;
 extern VALUE artAffine;
 
-double *get_art_affine(VALUE);
-VALUE make_art_affine(double[6]);
+double *rbart_get_art_affine(VALUE);
+VALUE rbart_make_art_affine(double[6]);
 
 void Init_art_affine(VALUE);
 
