@@ -149,8 +149,7 @@ install:
 site-install:
 #{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo site-install DESTDIR=$(DESTDIR)\n	@cd ..\n"}.join('')}
 clean:
-#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo clean\n	@cd ..\n"}.join('')}	@if exist Makefile del Makefile
-	@if exist extconf.h del extconf.h
+#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo clean\n	@cd ..\n"}.join('')}	@if exist extconf.h del extconf.h
 	@if exist conftest.* del conftest.*
 	@if exist *.lib del *.lib
 	@if exist *~ del *~
