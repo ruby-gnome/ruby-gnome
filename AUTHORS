@@ -1,18 +1,21 @@
-Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
+The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 ------------------------------------------------
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
+
+Joshua Keith <joshuakeith@linuxmail.org>
+     Webmaster(M), Tutorial(M)
 
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
-     Vice Maintainer. Ruby/GLib(M) and Almost of important designs 
+     Vice maintainer. Ruby/GLib(M) and most of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>
-     Maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), rbbr(M),
-     Others. Project management.
+     Chief maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), 
+     rbbr(M), Others. Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M).
