@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: sakai $
-  $Date: 2003/07/22 04:02:22 $
+  $Author: geoff_youngs $
+  $Date: 2003/07/28 08:56:21 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -62,6 +62,8 @@ extern "C" {
 
 #define G_DEF_CONSTANTS(mod, type, strip_prefix) \
 	rbgobj_add_constants(mod, type, strip_prefix)
+#define G_RENAME_CONSTANT(orig, alt) \
+	rbgobj_constant_remap(orig, alt)
 
 typedef enum
 {
@@ -145,8 +147,11 @@ extern VALUE rbgobj_boxed_create(VALUE klass);
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
+extern void rbgobj_boxed_ref(VALUE obj, VALUE other);
+extern void rbgobj_boxed_unref(VALUE obj, VALUE other);
 
 /* rbgobj_enum.c */
+extern void rbgobj_constant_remap(const char *original, const char *replacement);
 extern void rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix);
 
 #ifdef __cplusplus
