@@ -1,2 +1,2 @@
 install: 
-	$(INSTALL_DATA) rbgtk.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rbgtk.h $(RUBYARCHDIR)

@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Author: sakai $
+  $Date: 2003/07/14 14:44:13 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -439,6 +439,6 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "propagate_event", gtk_m_propagate_event, 2);
     rb_define_module_function(mGtk, "check_version", gtk_m_check_version, 3);
 
-    rb_define_const(mGtk, "PRIORITY_RESIZE", GTK_PRIORITY_RESIZE);
+    rb_define_const(mGtk, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 
 }

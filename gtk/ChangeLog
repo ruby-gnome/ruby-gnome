@@ -1,3 +1,10 @@
+2003-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkmain.c: fix segmentation fault caused by passing invalid
+	VALUE to rb_define_const().
+
+	* src/depend: use $(srcdir) to allow building in different directory.
+
 2003-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreedragsource.c, rbgtktreedragdest.c: Added.
