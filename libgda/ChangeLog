@@ -1,6 +1,12 @@
+2003-10-04  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* src/rbgdaselect.c: New file.
+	* src/rbgda.c: Initializes Gda::Select.
+	* src/rbgda.h: Added macros for Gda::Select.
+
 2003-10-03  Laurent Sansonetti  <laurent@datarescue.be>
 
-	* src/rbgdafieldattributes: New file.
+	* src/rbgdafieldattributes.c: New file.
 	* src/rbgda.c: Initializes Gda::FieldAttributes.
 	* src/rbgda.h: Added macros for Gda::FieldAttributes.
 	* src/rbgdadatamodel: Added a few methods (#emit_changed, 
