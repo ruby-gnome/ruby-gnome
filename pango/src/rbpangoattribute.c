@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2003/01/10 19:22:13 $
+  $Date: 2003/02/01 15:24:26 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -110,9 +110,13 @@ gboolean    pango_parse_markup              (const char *markup_text,
                                              gunichar *accel_char,
                                              GError **error);
 */
-/* Where do I implement it?
-PangoAttrType pango_attr_type_register      (const gchar *name);
-*/
+
+static VALUE
+attr_s_type_register(name)
+    VALUE name;
+{
+    return INT2NUM(pango_attr_type_register(RVAL2CSTR(name)));
+}
 
 static VALUE
 attr_equal(self, other)
@@ -323,6 +327,8 @@ Init_pango_attribute()
     VALUE tmpklass;
 
     pattr = rb_define_class_under(mPango, "Attribute", GTYPE2CLASS(G_TYPE_BOXED));
+
+    rb_define_singleton_method(pattr, "type_register", attr_s_type_register, 1);
     rb_define_method(pattr, "==", attr_equal, 1);
     rb_define_method(pattr, "start_index", attr_start_index, 0);
     rb_define_method(pattr, "end_index", attr_end_index, 0);

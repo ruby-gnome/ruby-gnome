@@ -4,9 +4,9 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:57 $
+  $Date: 2003/02/01 15:24:26 $
 
-  Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
 #include "rbpango.h"
@@ -14,6 +14,15 @@
 #define _SELF(self) (PANGO_CONTEXT(RVAL2GOBJ(self)))
 #define RVAL2DESC(v) ((PangoFontDescription*)RVAL2BOXED(v, PANGO_TYPE_FONT_DESCRIPTION))
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
+
+/*
+GList*      pango_itemize                   (PangoContext *context,
+                                             const char *text,
+                                             int start_index,
+                                             int length,
+                                             PangoAttrList *attrs,
+                                             PangoAttrIterator *cached_iter);
+*/
 
 #ifdef PANGO_ENABLE_BACKEND
 static VALUE
@@ -37,7 +46,8 @@ static VALUE
 rcontext_get_font_description(self)
     VALUE self;
 {
-    return GOBJ2RVAL(pango_context_get_font_description(_SELF(self)));
+    PangoFontDescription* ret = pango_context_get_font_description(_SELF(self));
+    return ret ? BOXED2RVAL(ret, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
 }
 
 static VALUE
@@ -52,7 +62,8 @@ static VALUE
 rcontext_get_language(self)
     VALUE self;
 {
-    return GOBJ2RVAL(pango_context_get_language(_SELF(self)));
+    PangoLanguage* ret = pango_context_get_language(_SELF(self));
+    return BOXED2RVAL(ret, PANGO_TYPE_LANGUAGE);
 }
 
 static VALUE

@@ -1,3 +1,9 @@
+2003-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangocontext.c: Fix segfault when Pango::Context#layout, #font_description 
+	are return NULL. 
+	* src/rbpangolayout.c: Fix wrong arguments of  Pango::Layout#set_mark.
+
 2003-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/attribute.rb: Add a file. 

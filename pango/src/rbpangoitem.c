@@ -4,7 +4,7 @@
   rbpangoitem.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:58 $
+  $Date: 2003/02/01 15:24:26 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -44,7 +44,9 @@ item_split(self, split_index, split_offset)
                                        NUM2INT(split_offset)), 
                       PANGO_TYPE_ITEM);
 }
-
+/*
+GList*      pango_reorder_items             (GList *logical_items);
+*/
 void
 Init_pango_item()
 {

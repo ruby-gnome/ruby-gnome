@@ -4,9 +4,9 @@
   rbpangofontdescription.c -
 
   $Author: mutoh $
-  $Date: 2003/01/10 19:22:13 $
+  $Date: 2003/02/01 15:24:26 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"

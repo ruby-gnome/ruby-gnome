@@ -4,9 +4,9 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:58 $
+  $Date: 2003/02/01 15:24:26 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -65,10 +65,10 @@ layout_set_markup(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE markup, length, accel_marker;
+    VALUE markup, accel_marker;
     gunichar accel_char = 0;
 
-    rb_scan_args(argc, argv, "21", &markup, &length, &accel_marker);
+    rb_scan_args(argc, argv, "11", &markup, &accel_marker);
 
     if (NIL_P(accel_marker)){
         pango_layout_set_markup(_SELF(self), RVAL2CSTR(markup), RSTRING(markup)->len);
