@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2002/11/12 16:36:18 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -476,7 +476,7 @@ Init_gtk_textbuffer()
 */
     rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
 
-    rb_define_method(gTextBuffer, "modified", txt_get_modified, 0);
+    rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
     rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
 
     rb_define_method(gTextBuffer, "delete_selection", txt_delete_selection, -1);

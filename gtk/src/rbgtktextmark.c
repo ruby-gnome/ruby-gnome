@@ -4,7 +4,7 @@
   rbgtktextmark.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:04 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -59,11 +59,11 @@ Init_gtk_textmark()
 {
     VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
     rb_define_method(gTextMark, "set_visible", set_visible, 1);
-    rb_define_method(gTextMark, "visible", get_visible, 0);
+    rb_define_method(gTextMark, "visible?", get_visible, 0);
     rb_define_method(gTextMark, "name", get_name, 0);
-    rb_define_method(gTextMark, "deleted", get_deleted, 0);
+    rb_define_method(gTextMark, "deleted?", get_deleted, 0);
     rb_define_method(gTextMark, "buffer", get_buffer, 0);
-    rb_define_method(gTextMark, "left_gravity", get_left_gravity, 0);
+    rb_define_method(gTextMark, "left_gravity?", get_left_gravity, 0);
 
     G_DEF_SETTERS(gTextMark);
 }

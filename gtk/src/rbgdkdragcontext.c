@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:41:59 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -151,7 +151,7 @@ gdkdragcontext_motion(self, dest_window, protocol, x_root, y_root,
   		  suggested_action, possible_actions, time;
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
-								   GDK_WINDOW(RVAL2GOBJ(dest_window)), 
+                                   GDK_WINDOW(RVAL2GOBJ(dest_window)), 
                                    NUM2INT(protocol), NUM2INT(x_root), NUM2INT(y_root), 
                                    NUM2INT(suggested_action), NUM2INT(possible_actions), 
                                    NUM2INT(time));

@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2002/11/08 17:08:40 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -168,12 +168,12 @@ rbgtk_m_grab_remove(self, widget)
 void 
 Init_gtk_main()
 {
-    rb_define_module_function(mGtk, "events_pending", gtk_m_events_pending, 0);
+    rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
     rb_define_module_function(mGtk, "init", gtk_m_init, -1);
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
-    rb_define_module_function(mGtk, "main_iteration?", gtk_m_main_iteration, 0);
+    rb_define_module_function(mGtk, "main_iteration", gtk_m_main_iteration, 0);
     rb_define_module_function(mGtk, "timeout_add", timeout_add, 1);
     rb_define_module_function(mGtk, "timeout_remove", timeout_remove, 1);
     rb_define_module_function(mGtk, "idle_add", idle_add, 0);

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/11/11 15:32:37 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -866,7 +866,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "remove_accelerator", widget_remove_accelerator, 3);
     rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
     rb_define_method(gWidget, "event", widget_event, 1);
-    rb_define_method(gWidget, "activate", widget_activate, 0);
+    rb_define_method(gWidget, "activate?", widget_activate, 0);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
     rb_define_method(gWidget, "intersect", widget_intersect, 2);
     rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
@@ -910,7 +910,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
     rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
     rb_define_method(gWidget, "set_scroll_adjustment", widget_set_scroll_adjustments, 2);
-    rb_define_method(gWidget, "mnemonic_activate", widget_mnemonic_activate, 1);
+    rb_define_method(gWidget, "mnemonic_activate?", widget_mnemonic_activate, 1);
     rb_define_method(gWidget, "set_child_visible", widget_set_child_visible, 1);
     rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
     rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
@@ -931,9 +931,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
     rb_define_method(gWidget, "has_grab?",    widget_HAS_GRAB, 0);
     rb_define_method(gWidget, "rc_style?",    widget_RC_STYLE, 0);
-    rb_define_method(gWidget, "composite_child?",    widget_COMPOSITE_CHILD, 0);
+    rb_define_method(gWidget, "composite_child?",  widget_COMPOSITE_CHILD, 0);
     rb_define_method(gWidget, "app_paintable?",    widget_APP_PAINTABLE, 0);
-    rb_define_method(gWidget, "double_buffered?",    widget_DOUBLE_BUFFERED, 0);
+    rb_define_method(gWidget, "double_buffered?",  widget_DOUBLE_BUFFERED, 0);
 
     /*
      * singleton methods

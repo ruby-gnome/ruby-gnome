@@ -4,7 +4,7 @@
   rbgtktreepath.c -
 
   $Author: mutoh $
-  $Date: 2002/10/02 15:39:06 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -95,7 +95,7 @@ treepath_next(self)
     VALUE self;
 {
     gtk_tree_path_next(_SELF(self));
-    return Qtrue;
+    return self;
 }
 
 static VALUE
@@ -148,10 +148,10 @@ Init_gtk_treepath()
     rb_define_method(gTreepath, "depth", treepath_get_depth, 0);
     rb_define_method(gTreepath, "indices", treepath_get_indices, 0);
     rb_define_method(gTreepath, "<=>", treepath_compare, 1);
-    rb_define_method(gTreepath, "next", treepath_next, 0);
-    rb_define_method(gTreepath, "prev", treepath_prev, 0);
-    rb_define_method(gTreepath, "up", treepath_up, 0);
-    rb_define_method(gTreepath, "down", treepath_down, 0);
+    rb_define_method(gTreepath, "next!", treepath_next, 0);
+    rb_define_method(gTreepath, "prev!", treepath_prev, 0);
+    rb_define_method(gTreepath, "up!", treepath_up, 0);
+    rb_define_method(gTreepath, "down!", treepath_down, 0);
     rb_define_method(gTreepath, "ancestor?", treepath_is_ancestor, 1);
     rb_define_method(gTreepath, "descendant?", treepath_is_descendant, 1);
 }

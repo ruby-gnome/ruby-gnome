@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/11/11 15:32:32 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -499,7 +499,7 @@ gdkeventclient_data_byte(self)
     VALUE ary = rb_ary_new2(20);
     int i;
     for (i=0; i<20; i++)
-		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.b[i]));
+        rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.b[i]));
 
     return ary;
 }
@@ -511,7 +511,7 @@ gdkeventclient_data_short(self)
     VALUE ary = rb_ary_new2(10);
     int i;
     for (i=0; i<10; i++)
-		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.s[i]));
+        rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.s[i]));
 
     return ary;
 }
@@ -523,7 +523,7 @@ gdkeventclient_data_long(self)
     VALUE ary = rb_ary_new2(5);
     int i;
     for (i=0; i<5; i++)
-		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.l[i]));
+        rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.l[i]));
 
     return ary;
 }
@@ -533,7 +533,7 @@ gdkeventclient_send_client_message(self, xid)
     VALUE self, xid;
 {
     return gdk_event_send_client_message(
-	    get_gdkevent(self), NUM2INT(xid)) ? Qtrue : Qfalse;
+        get_gdkevent(self), NUM2INT(xid)) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -615,7 +615,7 @@ Init_gtk_gdk_event()
 
     /* GdkEventAny */
     rb_define_method(gdkEventAny, "window", gdkeventany_window, 0);
-    rb_define_method(gdkEventAny, "send_event", gdkeventany_send_event, 0);
+    rb_define_method(gdkEventAny, "send_event?", gdkeventany_send_event, 0);
 
     /* GdkEventKey */
     ev = gdkevents[GDK_KEY_PRESS];
@@ -677,7 +677,7 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "y_root", gdkeventcrossing_y_root, 0);
     rb_define_method(ev, "mode", gdkeventcrossing_mode, 0);
     rb_define_method(ev, "detail", gdkeventcrossing_detail, 0);
-    rb_define_method(ev, "focus", gdkeventcrossing_focus, 0);
+    rb_define_method(ev, "focus?", gdkeventcrossing_focus, 0);
     rb_define_method(ev, "state", gdkeventcrossing_state, 0);
     /* GdkCrossingMode */
     rb_define_const(ev, "NORMAL", INT2FIX(GDK_CROSSING_NORMAL));
@@ -694,7 +694,7 @@ Init_gtk_gdk_event()
 
     /* GdkEventFocus */
     ev = gdkevents[GDK_FOCUS_CHANGE];
-    rb_define_method(ev, "in", gdkeventfocus_in, 0);
+    rb_define_method(ev, "in?", gdkeventfocus_in, 0);
 
     /* GdkEventConfigure */
     ev = gdkevents[GDK_CONFIGURE];

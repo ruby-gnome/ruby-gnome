@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:36 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -124,7 +124,7 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "set", gtkselectiondata_set, 3);
     rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);
     rb_define_method(gSelectionData, "text", gtkselectiondata_get_text, 0);
-    rb_define_method(gSelectionData, "targets_include_text", gtkselectiondata_targets_include_text, 0);
+    rb_define_method(gSelectionData, "targets_include_text?", gtkselectiondata_targets_include_text, 0);
     rb_define_singleton_method(gSelectionData, "remove_all", gtkselectiondata_s_remove_all, 1);
 
     G_DEF_SETTERS(gSelectionData);

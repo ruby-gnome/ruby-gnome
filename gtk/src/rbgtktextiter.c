@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 15:11:07 $
+  $Date: 2002/11/13 13:39:28 $
 
   Copyright (C) 2002 Masahiro Sakai
 ************************************************/
@@ -126,7 +126,7 @@ static VALUE
 has_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
+    return gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag))) ? Qtrue : Qfalse;
 }
 
 static VALUE
@@ -321,9 +321,9 @@ Init_gtk_textiter()
     rb_define_method(cTextIter, "child_anchor", get_child_anchor, 0);
 
     rb_define_method(cTextIter, "toggled_tags", get_toggled_tags, 1);
-    rb_define_method(cTextIter, "begins_tag", begins_tag, 1);
-    rb_define_method(cTextIter, "ends_tag", ends_tag, 1);
-    rb_define_method(cTextIter, "toggles_tag", toggles_tag, 1);
+    rb_define_method(cTextIter, "begins_tag?", begins_tag, 1);
+    rb_define_method(cTextIter, "ends_tag?", ends_tag, 1);
+    rb_define_method(cTextIter, "toggles_tag?", toggles_tag, 1);
     rb_define_method(cTextIter, "has_tag?", has_tag, 1);
     rb_define_method(cTextIter, "tags", get_tags, 0);
 

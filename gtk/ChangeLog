@@ -1,5 +1,24 @@
 2002-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkwidget.c: Rename Gtk::Widget#activate to #activate? 
+	#mnemonic_activate to #mnemonic_activate?
+	* src/rbgtktreepath.c: Fix return value of Gtk::TreePath#next. 
+	Rename #next to #next?, #prev to #prev?, #up to #up!, #down to #down!
+	* src/rbgtktextmark.c: Rename Gtk::TextMark#visible to #visible?,
+	#deleted to #deleted?, #left_gravity to #left_gravity?.
+	* src/rbgtktextiter.c: Bugfix of Gtk::TextIter#has_tag?.
+	Rename #begins_tag to #begins_tag?, #ends_tag? to #ends_tag?, 
+	#toggles_tag to #toggles_tag?.
+
+2002-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Rename Gtk::TextBuffer#modified to #modified?. 
+	* src/rbgtkselectiondata.c: Gtk::SelectionData#targets_include_text to 
+	#targets_include_text? 
+	* src/rbgtkmain.c: Rename Gtk.events_pending to Gtk.events_pending?,
+	Gtk.main_iteration? to Gtk.main_iteration.
+	* src/rbgdkevent.c: Gdk::EventAny#send_event to #send_event?
+	Gdk::EventCrossing#focus to #focus?, Gdk::EventFocus#in to #in?
 	* src/rbgtktoolbar.c: Fix redundant check. 
 	Pointed out by Nikolai Weibull <lone-star@home.se>.
 	* sample/textgtk/*.rb: Revise header comment.
