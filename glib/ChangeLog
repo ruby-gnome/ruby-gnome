@@ -1,3 +1,8 @@
+2005-02-26  KATO Kazuyoshi  <kzys@8-p.info>
+
+	* src/rbgobj_type.c (rbgobj_lookup_class): Fixed a problem in Ruby 1.9.
+	[ruby-list:40518] [ruby-dev:23690]
+
 2005-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Removed to call GLib::Log.cancel_handler.

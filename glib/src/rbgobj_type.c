@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Author: kzys $
+  $Date: 2005/02/25 15:19:19 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -51,8 +51,15 @@ rbgobj_lookup_class(klass)
         return cinfo;
     }
 
-    if (TYPE(klass) == T_CLASS)
-        return rbgobj_lookup_class(rb_funcall(klass, id_superclass, 0));
+    if (TYPE(klass) == T_CLASS) {
+        VALUE super;
+        if (FL_TEST(klass, FL_SINGLETON)) {
+            super = RCLASS(klass)->super;
+        } else {
+            super = rb_funcall(klass, id_superclass, 0);
+        }
+        return rbgobj_lookup_class(super);
+    }
 
     rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
 }
