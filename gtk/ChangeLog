@@ -1,3 +1,8 @@
+2003-11-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/src/rbgtkstyle.c (style_set_font_desc): Fix to release old
+	value and copy new value, to avoid segmentation fault.
+
 2003-11-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Fix a bug of Gdk::Window#pointer 

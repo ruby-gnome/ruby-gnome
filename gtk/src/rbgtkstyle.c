@@ -3,8 +3,8 @@
 
   rbgtkstyle.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/30 18:40:03 $
+  $Author: sakai $
+  $Date: 2003/11/12 18:40:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -466,7 +466,10 @@ static VALUE
 style_set_font_desc(self, font_desc)
     VALUE self, font_desc;
 {
-    _SELF(self)->font_desc = (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION);
+    GtkStyle *style = _SELF(self);
+    if (style->font_desc)
+        pango_font_description_free(style->font_desc);
+    style->font_desc = pango_font_description_copy((PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
     return self;
 }
 
