@@ -1,3 +1,12 @@
+2003-11-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgtkhtmlboxblock.c, src/rbgtkhtmlboxembedded.c,
+	src/rbgtkhtmlboxtable.c: check existence of
+	html_box_block_get_containing_width(), html_box_embedded_new(),
+	html_box_table_get_top_offset() and html_box_table_get_bottom_offset().
+	Because libgtkhtml-2.4.1 doesn't have implementations of
+	these function.
+
 2003-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkhtmlboxtabtablerow, src/rbgtkhtmlboxform.c: Added.

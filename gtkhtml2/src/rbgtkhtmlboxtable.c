@@ -3,8 +3,8 @@
 
   rbgtkhtmlboxtable.c
 
-  $Author: mutoh $
-  $Date: 2003/11/09 15:44:50 $
+  $Author: sakai $
+  $Date: 2003/11/17 14:22:57 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -62,19 +62,23 @@ table_add_tfoot(self, row)
     return self;
 }
 
+#ifdef HAVE_HTML_BOX_TABLE_GET_TOP_OFFSET
 static VALUE
 table_get_top_offset(self, boxwidth)
     VALUE self, boxwidth;
 {
     return INT2NUM(html_box_table_get_top_offset(_SELF(self), NUM2INT(boxwidth)));
 }
+#endif
 
+#ifdef HAVE_HTML_BOX_TABLE_GET_BOTTOM_OFFSET
 static VALUE
 table_get_bottom_offset(self, boxwidth)
     VALUE self, boxwidth;
 {
     return INT2NUM(html_box_table_get_bottom_offset(_SELF(self), NUM2INT(boxwidth)));
 }
+#endif
 
 static VALUE
 table_cell_added(self)
@@ -96,8 +100,12 @@ Init_html_box_table(mGtkHtml2)
     rb_define_method(boxtable, "add_thead", table_add_thead, 1);
     rb_define_method(boxtable, "add_tbody", table_add_tbody, 1);
     rb_define_method(boxtable, "add_tfoot", table_add_tfoot, 1);
+#ifdef HAVE_HTML_BOX_TABLE_GET_TOP_OFFSET
     rb_define_method(boxtable, "get_top_offset", table_get_top_offset, 1);
+#endif
+#ifdef HAVE_HTML_BOX_TABLE_GET_BOTTOM_OFFSET
     rb_define_method(boxtable, "get_bottom_offset", table_get_bottom_offset, 1);
+#endif
     rb_define_method(boxtable, "cell_added", table_cell_added, 0);
 
 }

@@ -3,8 +3,8 @@
 
   rbgtkhtmlboxblock.c
 
-  $Author: mutoh $
-  $Date: 2003/11/09 15:44:50 $
+  $Author: sakai $
+  $Date: 2003/11/17 14:22:57 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -20,6 +20,8 @@ rb_html_box_block_initialize(self)
     G_INITIALIZE(self, html_box_block_new());
     return Qnil;
 }
+
+#ifdef HAVE_HTML_BOX_BLOCK_GET_CONTAINING_WIDTH
 /*
 gint html_box_block_calculate_float_magic (HtmlBox *self, HtmlRelayout *relayout);
 */
@@ -29,6 +31,7 @@ rb_html_box_block_get_containing_width(self)
 {
     return INT2NUM(html_box_block_get_containing_width(_SELF(self)));
 }
+#endif
 
 void 
 Init_html_box_block(mGtkHtml2)
@@ -37,6 +40,8 @@ Init_html_box_block(mGtkHtml2)
     VALUE boxblock = G_DEF_CLASS(HTML_TYPE_BOX_BLOCK, "HtmlBoxBlock", mGtkHtml2);
 
     rb_define_method(boxblock, "initialize", rb_html_box_block_initialize, 0);
+#ifdef HTML_BOX_BLOCK_GET_CONTAINING_WIDTH
     rb_define_method(boxblock, "containing_width", rb_html_box_block_get_containing_width, 0);
+#endif
 }
 

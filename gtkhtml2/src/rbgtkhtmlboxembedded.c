@@ -3,8 +3,8 @@
 
   rbgtkhtmlboxembedded.c
 
-  $Author: mutoh $
-  $Date: 2003/11/09 15:44:50 $
+  $Author: sakai $
+  $Date: 2003/11/17 14:22:57 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -14,6 +14,7 @@
 
 #define _SELF(s) (HTML_BOX_EMBEDDED(RVAL2GOBJ(s)))
 
+#ifdef HAVE_HTML_BOX_EMBEDDED_NEW
 static VALUE
 emb_initialize(self)
     VALUE self;
@@ -21,6 +22,7 @@ emb_initialize(self)
     G_INITIALIZE(self, html_box_embedded_new());
     return Qnil;
 }
+#endif
 
 static VALUE
 emb_get_descent(self)
@@ -59,7 +61,9 @@ Init_html_box_embedded(mGtkHtml2)
 {
     VALUE emb = G_DEF_CLASS(HTML_TYPE_BOX_EMBEDDED, "HtmlBoxEmbedded", mGtkHtml2);
 
+#ifdef HAVE_HTML_BOX_EMBEDDED_NEW
     rb_define_method(emb, "initialize", emb_initialize, 0);
+#endif
     rb_define_method(emb, "descent", emb_get_descent, 0);
     rb_define_method(emb, "set_descent", emb_set_descent, 1);
     rb_define_method(emb, "set_view", emb_set_view, 1);
