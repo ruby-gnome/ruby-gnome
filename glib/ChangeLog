@@ -1,0 +1,3 @@
+2002-06-18  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* extconf.rb: check whether package exists or not.

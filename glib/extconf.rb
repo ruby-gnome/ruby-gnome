@@ -1,4 +1,10 @@
 require 'mkmf'
+
+unless system('pkg-config', '--exists', 'gobject-2.0')
+  STDERR.print("gobject-2.0 doesn't exist\n")
+  exit
+end
+
 $LDFLAGS = ' ' + `pkg-config gobject-2.0 --libs`.chomp
 $CFLAGS  = ' ' + `pkg-config gobject-2.0 --cflags`.chomp
 $CFLAGS += ' -g'
