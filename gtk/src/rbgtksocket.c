@@ -4,7 +4,7 @@
   rbgtksocket.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/05/27 10:59:22 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 2002 Neil Conway
@@ -68,8 +68,5 @@ Init_gtk_socket()
     rb_define_method(gSocket, "plug_window", socket_plug_window, 0);
     rb_define_method(gSocket, "add_id", socket_add_id, 1);
     rb_define_method(gSocket, "id", socket_get_socket_id, 0);
-#ifdef GDK_WINDOWING_X11
-    rb_define_alias(gSocket, "xwindow", "id");
-#endif
 #endif
 }

@@ -4,7 +4,7 @@
   rbgdkplug.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/05/27 10:59:22 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 2002 Neil Conway
@@ -54,7 +54,7 @@ plug_construct(self, socket_id)
 #else
     gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), (guint32)NUM2UINT(socket_id));
 #endif
-    return Qnil;
+    return self;
 }
 
 static VALUE

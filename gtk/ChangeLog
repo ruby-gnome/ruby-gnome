@@ -1,5 +1,14 @@
+2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/t-gtksocket.rb: Follow Gtk::Socket changes.
+	* src/rbgtktoolbar.c: Rename Gtk::Toolbar#unset_iconsize to #unset_icon_size.
+	* src/rbgtkplug.c: Gtk::Plug#construct return self.
+	* src/rbgtksocket.c: Removed Gtk::Socket#xwindow. 
+
 2003-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkliststore.c: Bugfix for SEGV when Gtk::ListStore#set_value is called.
+	* src/rbgtktreestore.c: ditto(Gtk::TreeStore#set_value). 
 	* sample/testgtk/rulers.rb, progressbar.rb: 
 	Follow Gtk::ProgressBar changes.
 

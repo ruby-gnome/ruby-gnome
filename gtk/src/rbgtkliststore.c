@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: sakai $
-  $Date: 2003/04/07 14:31:53 $
+  $Author: mutoh $
+  $Date: 2003/05/27 10:59:22 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -63,7 +63,7 @@ static VALUE
 lstore_set_value(self, iter, column, value)
     VALUE self, iter, column, value;
 {
-    GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(self), NUM2INT(column));
+    GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
     GValue gval = {0,};
     g_value_init(&gval, gtype);
 

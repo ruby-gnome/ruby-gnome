@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2003/05/22 17:06:05 $
+  $Date: 2003/05/27 10:59:22 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -285,7 +285,7 @@ Init_gtk_toolbar()
     rb_define_method(gToolbar, "icon_size", tbar_get_icon_size, 0);
     rb_define_method(gToolbar, "tooltips?", tbar_get_tooltips, 0);
     rb_define_method(gToolbar, "remove_space", tbar_remove_space, 1);
-    rb_define_method(gToolbar, "unset_iconsize", tbar_unset_icon_size, 0);
+    rb_define_method(gToolbar, "unset_icon_size", tbar_unset_icon_size, 0);
     rb_define_method(gToolbar, "unset_style", tbar_unset_style, 0);
 
     G_DEF_SETTERS(gToolbar);
