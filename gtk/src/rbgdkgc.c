@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Date: 2003/08/22 06:41:45 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -189,7 +189,7 @@ gdkgc_set_dashes(self, dash_offset, dash_list)
         buf[i] = (gchar)NUM2CHR(RARRAY(dash_list)->ptr[i]);
     }
     gdk_gc_set_dashes(_SELF(self), NUM2INT(dash_offset),
-                      buf, RSTRING(dash_list)->len);
+                      buf, RARRAY(dash_list)->len);
 
     return self;
 }

@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Date: 2003/08/22 06:41:45 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -112,7 +112,8 @@ treeview_insert_column(argc, argv, self)
                                                          RVAL2CSTR(args[1]),
                                                          RVAL2CELLRENDERER(args[2]),
                                                          cell_data_func,
-                                                         func, NULL);
+                                                         (gpointer)func,
+                                                         NULL);
         return INT2NUM(ret);
     } else if (argc == 4) {
         int i;

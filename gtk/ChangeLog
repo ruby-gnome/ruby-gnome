@@ -1,3 +1,9 @@
+2003-08-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktreeview.c (treeview_insert_column): suppres warning.
+
+	* src/rbgdkgc.c (gdkgc_set_dashes): fix to use RARRAY not RSTRING.
+
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: define enum/flags classes.
