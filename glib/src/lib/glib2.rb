@@ -173,7 +173,10 @@ GLib::Log.set_log_domain(GLib::Object::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
+=begin
+Don't we need this?
 ObjectSpace.define_finalizer(GLib) {
   GLib::Log.cancel_handler
   puts "GLib::Log.cancel_handler was called." if $DEBUG
 }
+=end
