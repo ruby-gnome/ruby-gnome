@@ -1,0 +1,24 @@
+REQUIREMENTS
+===========
+
+Ruby 1.6.2
+Gtk+ 1.2.6
+Ruby-Gtk 0.26
+GdkPixbuf 0.5.0
+
+INSTALL INSTRUCTIONS
+===========
+
+$ ruby extconf.rb /location/of/ruby-gtk/source/directory
+$ make
+# make install
+$ ruby sample/test.rb some_image
+
+CONTACT INFORMATION
+===========
+
+You can contact me via email at <neilconway@rogers.com>; you
+can also visit the Ruby-GNOME website (http://ruby-gnome.sf.net),
+which has a facility for reporting bugs and submitting fixes.
+Finally, you can send a message to the ruby-talk mailing list,
+where I or other Ruby-GNOME users can help you.
