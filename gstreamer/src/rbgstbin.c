@@ -94,12 +94,14 @@ static VALUE
 rb_gst_bin_add (int argc, VALUE * argv, VALUE self)
 {
     int i;
- 
+    VALUE klass = GTYPE2CLASS(GST_TYPE_ELEMENT);
+    GstBin* bin = RGST_BIN(self);
+
     for (i = 0; i < argc; i++) {
-       if (!rb_obj_is_kind_of(argv[i], GTYPE2CLASS(GST_TYPE_ELEMENT))) {
-	 rb_raise(rb_eTypeError, "GstElement expected");
+       if (!rb_obj_is_kind_of(argv[i], klass)) {
+	 rb_raise(rb_eTypeError, "Gst::Element expected");
        }
-       gst_bin_add (RGST_BIN (self), RGST_ELEMENT (argv[i]));
+       gst_bin_add (bin, RGST_ELEMENT (argv[i]));
     }
     return rb_gst_bin_get_elements (self);
 }

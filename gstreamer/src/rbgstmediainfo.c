@@ -97,9 +97,9 @@ static VALUE rb_gst_mediatype_new(argc, argv, self)
     info = gst_media_info_new(NULL);
 
     if (info != NULL) {
-        gst_media_info_set_source(info, source, NULL);
-        G_INITIALIZE(self, info);
-        return RGST_MEDIA_INFO_NEW(info);
+       gst_media_info_set_source(info, source, NULL);
+       G_INITIALIZE(self, info);
+       return RGST_MEDIA_INFO_NEW(info);
     }
     return Qnil;
 }
