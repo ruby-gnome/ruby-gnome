@@ -44,7 +44,7 @@ module GLib
         a = a.reject{|x| a.find{|y| y > x } }
         body = a.empty? ? '{}' : a.map{|x| x.nick }.join('|')
       end
-      format('<%s %s>', self.class.inspect, body)
+      format('#<%s %s>', self.class.inspect, body)
     end
   end
 

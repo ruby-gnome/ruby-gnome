@@ -1,5 +1,7 @@
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbglib2.rb: fix format of GLib::Flags#inspect.
+
 	* src/glib2.def, src/global.h, src/rbgobj_enums.c, src/rbgobj_type.c,
 	src/rbgobj_value.c, src/rbgobject.h, src/lib/glib2.rb: new classes
 	GLib::Enum and GLib::Flags.
