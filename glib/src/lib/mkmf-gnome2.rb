@@ -45,7 +45,7 @@ module PKGConfig
       STDOUT.print "yes\n"
       libs = libs_only_l(pkg)
       ldflags = libs(pkg)
-      ldflags = (Shellwords.shellwords(ldflags) - Shellwords.shellwords(libs)).quote.join(' ')
+      ldflags = (Shellwords.shellwords(ldflags) - Shellwords.shellwords(libs)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
       $libs   += ' ' + libs
       $LDFLAGS += ' ' + ldflags
       $CFLAGS += ' ' + cflags(pkg)
