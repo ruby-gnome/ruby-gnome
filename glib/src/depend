@@ -1,4 +1,4 @@
 install: 
-	$(INSTALL_DATA) $(srcdir)/rbglib.h $(RUBYARCHDIR)
-	$(INSTALL_DATA) $(srcdir)/rbgutil.h $(RUBYARCHDIR)
-	$(INSTALL_DATA) $(srcdir)/rbgobject.h $(RUBYARCHDIR)
+	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbglib.h $(sitearchdir)$(target_prefix)
+	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbgutil.h $(sitearchdir)$(target_prefix)
+	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbgobject.h $(sitearchdir)$(target_prefix)

@@ -1,3 +1,8 @@
+2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/depend: use old style
+	* src/glib2.def: Add rbgobj_constant_remap.
+
 2003-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_valuetypes.c: use GHashTable instead of Ruby's Hash
