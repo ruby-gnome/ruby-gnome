@@ -1,3 +1,14 @@
+2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayoutline.c: Added Pango::LayoutLine#extents, #pixel_extents
+	#get_x_ranges. Added the accessors.
+	* src/rbpangolayoutiter.c: Added Pango::LayoutIter#line, #char_extents,
+	#cluster_extents, #run_extents, #line_extents, #layout_extents
+	#run.
+	* src/rbpangoglyphitem.c: Added. 
+	* src/rbpangoglyphinfo.c: Fix a bug of Pango::GlyphInfo#set_glyph. 
+	* src/rbpangotabarray.c: Added a comment. 
+
 2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayout.c: Added Pango::Layout#log_attrs.

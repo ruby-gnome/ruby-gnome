@@ -4,7 +4,7 @@
   rbpangoarray.c -
 
   $Author: mutoh $
-  $Date: 2003/09/01 14:39:24 $
+  $Date: 2005/02/15 06:19:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -39,7 +39,14 @@ rtab_initialize(argc, argv, self)
      
     return Qnil;
 }
-
+/* This is implemented in rtab_initialize.
+PangoTabArray* pango_tab_array_new_with_positions
+                                            (gint size,
+                                             gboolean positions_in_pixels,
+                                             PangoTabAlign first_alignment,
+                                             gint first_position,
+                                             ...);
+*/
 static VALUE
 rtab_get_size(self)
     VALUE self;

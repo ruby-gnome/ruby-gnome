@@ -4,7 +4,7 @@
   rbpangoglyphinfo.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/02/15 06:19:54 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -58,6 +58,7 @@ gi_set_glyph(self, val)
     VALUE self, val;
 {
     _SELF(self)->glyph = NUM2UINT(val);
+    return self;
 }
 
 static VALUE
