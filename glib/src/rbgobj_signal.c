@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/04/07 11:26:30 $
+  $Date: 2003/04/08 11:45:07 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -234,6 +234,7 @@ gobj_s_signals(int argc, VALUE* argv, VALUE self)
         GType* interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++)
             _signal_list(result, interfaces[i]);
+        g_free(interfaces);
 
         for (; gtype; gtype = g_type_parent(gtype))
             _signal_list(result, gtype);
@@ -408,11 +409,26 @@ gobj_sig_emit_stop(self, detailed_signal)
     return self;
 }
 
+static VALUE gobj_sig_handler_unblock(VALUE self, VALUE id);
+
+static VALUE
+_sig_handler_block_ensure(arg)
+    VALUE arg;
+{
+    VALUE self = RARRAY(arg)->ptr[0];
+    VALUE id   = RARRAY(arg)->ptr[1];
+    gobj_sig_handler_unblock(self, id);
+    return Qnil;
+}
+
 static VALUE
 gobj_sig_handler_block(self, id)
     VALUE self, id;
 {
     g_signal_handler_block(RVAL2GOBJ(self), NUM2INT(id));
+    if (rb_block_given_p())
+        rb_ensure(rb_yield, self, _sig_handler_block_ensure,
+                  rb_ary_new3(2, self, id));
     return self;
 }
 

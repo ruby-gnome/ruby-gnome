@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/04/07 11:26:29 $
+  $Date: 2003/04/08 11:45:07 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -350,13 +350,12 @@ gobj_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(CLASS_OF(self));
     VALUE params_hash;
     GObject* gobj;
     
     rb_scan_args(argc, argv, "01", &params_hash);
 
-    gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
+    gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
 
     if (is_gtkobject(gobj)){
         gobj = g_object_ref(gobj);

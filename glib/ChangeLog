@@ -1,3 +1,21 @@
+2003-04-08    <sakai@tom.sfc.keio.ac.jp>
+	
+	* src/rbgobj_type.c: fix typo. ( interfaced? => interface? )
+	
+	* src/rbgobj_type.c: implement GLib::Type#<, GLib::Type#>,
+	GLib::Type#<= and GLib::Type#>=.
+
+	* src/rbgobj_signal.c: Extend GLib::Instantiatable#signal_handler_block
+	to take a block.
+
+	* src/rbgobj_signal.c (gobj_s_signals): Fix memory leak.
+
+	* src/rbgobj_object.c: Use RVAL2GTYPE().
+
+	* src/rbgobj_type.c (interface_get_gtype): Use CLASS2GTYPE().
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): ditto
+
 2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 	
 	* src/rbgobj_signal.c: Implement a new function

@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/04/07 11:26:30 $
+  $Date: 2003/04/08 11:45:08 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -237,11 +237,65 @@ static VALUE
 type_eq(self, other)
     VALUE self, other;
 {
-    if (RTEST(rb_obj_is_kind_of(other, rbgobj_cType)) &&
-        rbgobj_gtype_get(self) == rbgobj_gtype_get(other))
-        return Qtrue;
-    else
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qfalse;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+        return (a == b) ? Qtrue : Qfalse;
+    }
+}
+
+static VALUE
+type_lt_eq(self, other)
+    VALUE self, other;
+{
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+        return Qfalse;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+        return g_type_is_a(a, b) ? Qtrue : Qfalse;
+    }
+}
+
+static VALUE
+type_gt_eq(self, other)
+    VALUE self, other;
+{
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+        return Qfalse;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+        return g_type_is_a(b, a) ? Qtrue : Qfalse;
+    }
+}
+
+static VALUE
+type_lt(self, other)
+    VALUE self, other;
+{
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+        return Qfalse;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+        return (g_type_is_a(a, b) && a != b) ? Qtrue : Qfalse;
+    }
+}
+
+static VALUE
+type_gt(self, other)
+    VALUE self, other;
+{
+    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+        return Qfalse;
+    else {
+        GType a = rbgobj_gtype_get(self);
+        GType b = rbgobj_gtype_get(other);
+        return (g_type_is_a(b, a) && a != b) ? Qtrue : Qfalse;
+    }
 }
 
 static VALUE
@@ -456,7 +510,7 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 static inline
 void _register_fundamental_klass_to_gtype(VALUE klass, GType gtype)
 {   
-	RGObjClassInfo* cinfo;
+    RGObjClassInfo* cinfo;
     VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
 		    
     cinfo->klass = klass;
@@ -470,7 +524,7 @@ void _register_fundamental_klass_to_gtype(VALUE klass, GType gtype)
 static inline
 void _register_fundamental_gtype_to_klass(GType gtype, VALUE klass)
 {   
-	RGObjClassInfo* cinfo;
+    RGObjClassInfo* cinfo;
     VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
 		    
     cinfo->klass = klass;
@@ -492,6 +546,10 @@ Init_type()
     rb_define_method(rbgobj_cType, "initialize", type_initialize, 1);
     rb_define_method(rbgobj_cType, "inspect", type_inspect, 0);
     rb_define_method(rbgobj_cType, "==", type_eq, 1);
+    rb_define_method(rbgobj_cType, "<=", type_lt_eq, 1);
+    rb_define_method(rbgobj_cType, ">=", type_gt_eq, 1);
+    rb_define_method(rbgobj_cType, "<", type_lt, 1);
+    rb_define_method(rbgobj_cType, ">", type_gt, 1);
     rb_define_method(rbgobj_cType, "eql?", type_eq, 1);
     rb_define_method(rbgobj_cType, "hash", type_to_int, 0);
     rb_define_method(rbgobj_cType, "to_i", type_to_int, 0);
@@ -501,7 +559,7 @@ Init_type()
     rb_define_method(rbgobj_cType, "fundamental", type_fundamental, 0);
     rb_define_method(rbgobj_cType, "fundamental?", type_is_fundamental, 0);
     rb_define_method(rbgobj_cType, "derived?", type_is_derived, 0);
-    rb_define_method(rbgobj_cType, "interfaced?", type_is_interface, 0);
+    rb_define_method(rbgobj_cType, "interface?", type_is_interface, 0);
     rb_define_method(rbgobj_cType, "classed?", type_is_classed, 0);
     rb_define_method(rbgobj_cType, "instantiatable?", type_is_instantiatable, 0);
     rb_define_method(rbgobj_cType, "derivable?", type_is_derivable, 0);
@@ -582,7 +640,7 @@ static VALUE
 interface_get_gtype(iface)
     VALUE iface;
 {
-    return rbgobj_gtype_new(rbgobj_lookup_class(iface)->gtype);
+    return rbgobj_gtype_new(CLASS2GTYPE(iface));
 }
 
 static void 

@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2003/02/17 16:00:11 $
+  $Date: 2003/04/08 11:45:08 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -269,7 +269,7 @@ rbgobj_define_property_accessors(klass)
     int i;
     GString* source = g_string_new(NULL);
 
-    gtype  = rbgobj_lookup_class(klass)->gtype;
+    gtype  = CLASS2GTYPE(klass);
     oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
     pspecs = g_object_class_list_properties(oclass, &n_properties);
 
