@@ -1,3 +1,8 @@
+2003-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkhtmlstream.c: Add  Gtk::HtmlStream#written, #cancel, 
+	#set_cancel_func, #mime_type, #set_mime_type.
+
 2003-11-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb, src/rbgtkhtmlboxblock.c, src/rbgtkhtmlboxembedded.c,
