@@ -2,7 +2,7 @@ require 'mkmf'
 require 'shellwords'
 
 module PKGConfig
-  @@cmd = with_config('pkg-config', 'pkg-config')
+  @@cmd = with_config('pkg-config', ENV["PKG_CONFIG"] ||  'pkg-config')
   if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
     @@cmd += ' --msvc-syntax'
   end

@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2003/07/22 15:06:32 $
+  $Author: sakai $
+  $Date: 2003/09/06 05:46:16 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -19,6 +19,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+
+#define RBGLIB_MAJOR_VERSION 0
+#define RBGLIB_MINOR_VERSION 7
+#define RBGLIB_MICRO_VERSION 0
 
 #ifndef StringValue
 #define StringValue(s) ((s) = (TYPE(s) == T_STRING) ? (s) : rb_str_to_str(s))

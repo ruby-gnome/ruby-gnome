@@ -1,3 +1,9 @@
+2003-09-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c: define GLib::BINDING_VERSION.
+
+	* src/lib/mkmf-gnome2.rb: use PKG_CONFIG environment variable.
+
 2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf_gnome2.rb: Pass "-l$(sitearchdir)" at last of $CFLAGS.
