@@ -1,3 +1,64 @@
+Ruby-GNOME2-0.4 (2003-03-23)
+
+  * The whole Ruby-GNOME2
+      - Add mkmf-gnome2.rb for sub/optional libraries. [Masahiro Sakai]
+
+  * Ruby/GLib
+      - Win32 platform support(Cygwin, Mingw32) [Masahiro Sakai]
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Added some methods. [KUBO Takehiro, Masahiro Sakai]
+      - Fix some bugs and improvement. [Masahiro Sakai, Masao Mutoh]
+      
+  * Ruby/GdkPixbuf
+      - Win32 platform support(Cygwin, Mingw32) [Masahiro Sakai]
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Fix some bugs and improvement. [Masahiro Sakai]
+
+  * Ruby/Pango
+      - Win32 platform support(Cygwin, Mingw32) [Masahiro Sakai]
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Added a method(Pango.pixels) [Masao Mutoh]
+      - Fix some bugs and improvement. [Masahiro Sakai]
+
+  * Ruby/GTK
+      - Win32 platform support(Cygwin, Mingw32) [Masahiro Sakai]
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Multi-threading support. [Masao Mutoh]
+      - Added some methods, improved: [Kazuo Saito, Geoff Youngs,
+                                  KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh] 
+         Gtk::Toolbar, Gtk::ItemFactory, Gdk::Region, Gtk::AccelGroup, 
+         Gtk::AccelMap, Gtk::TextIter, Gtk::TextTagTable, Gtk::TreeModel, 
+         Gtk::TreeSelection, Gtk::Clipboard, Gtk::Box, Gdk::RGB, 
+         Gtk::AccelGroupEntry, Gdk::Window, Gtk::SeparatorMenuItem, 
+         Gtk::TreePath, Gtk::TreeView, Gtk::Combo, Gdk::Threads, 
+         Gtk::TreeIter, Gdk::Event, Gtk::Drag, 
+      - Added: [Kazuo Saito, KATO Kazuyoshi, Masao Mutoh]
+         sample/gtk-demo/*.rb, sample/misc/threads.rb
+      - Removed: [Masao Mutoh]
+         Gtk::Toolbar#insert_item/widget/element,
+         Gtk::Toolbar#prepend_item/widget/element, 
+         Gtk::Toolbar#append_item/widget/element.
+          Use Gtk::Toolbar#insert, prepend, append instead.
+         Gtk::Combo#list, button, popup, popwin, set_item_string, 
+
+  * Ruby/GNOME
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+
+  * Ruby/GnomeCanvas
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+
+  * Ruby/Libglade
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Improved: [Masao Mutoh]
+         bin/ruby-glade-create-template
+
+  * Ruby/Libart
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+      - Fix some bugs and improvement. [Masahiro Sakai]
+
+  * Ruby/GConf
+      - Support mkmf-gnome2.rb [Masahiro Sakai]
+
 Ruby-GNOME2-0.3 (2003-02-09)
 
   * Ruby/GLib
