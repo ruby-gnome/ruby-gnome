@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: sakai $
-  $Date: 2002/10/05 07:42:46 $
+  $Author: mutoh $
+  $Date: 2002/10/06 17:44:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -75,7 +75,7 @@ static VALUE
 treemodel_get_value(self, iter, column)
     VALUE self, iter, column;
 {
-    GValue value;
+    GValue value = {0, };
 
     gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &value);
     return GVAL2RVAL(&value);

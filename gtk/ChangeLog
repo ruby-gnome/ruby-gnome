@@ -4,6 +4,7 @@
 	* src/rbgtkconst.c: Modify GtkSelectionMode.
 	* src/rbgtktreeselection.c: Fix bad definition of the class.
 	* src/rbgdkwindow.c: Gdk::Window#set_icon(). Accept nil.
+	* src/rbgtktreemodel.c: Gtk::TreeModel#get_value(). Fix a segfault.
 
 2002-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
