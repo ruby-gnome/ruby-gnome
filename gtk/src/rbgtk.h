@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: sakai $
-  $Date: 2003/03/19 18:38:28 $
+  $Author: mutoh $
+  $Date: 2003/04/30 19:44:40 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -92,6 +92,16 @@ extern void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data);
  * Gtk::Drag
  */
 extern GtkTargetEntry* rbgtk_get_target_entry(VALUE targets);
+
+/*
+ * Gtk::Container
+ */
+extern void rbgtkcontainer_register_child_property_setter(GType gtype, 
+                                                          const char* prop_name, 
+                                                          RValueToGValueFunc func);
+extern void rbgtkcontainer_register_child_property_getter(GType gtype, 
+                                                          const char* prop_name, 
+                                                          GValueToRValueFunc func);
 
 /*
  * for gdk

@@ -4,7 +4,7 @@
   rbgtkprogressbar.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/04/30 19:44:41 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -36,8 +36,10 @@ Init_gtk_progress_bar()
     VALUE gProgressBar = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
 
     /* GtkProgressBarStyle */
+/* Deprecated.
     rb_define_const(gProgressBar, "CONTINUOUS", INT2FIX(GTK_PROGRESS_CONTINUOUS));
     rb_define_const(gProgressBar, "DISCRETE", INT2FIX(GTK_PROGRESS_DISCRETE));
+*/
 
     /* GtkProgressBarOrientation */
     rb_define_const(gProgressBar, "LEFT_TO_RIGHT", INT2FIX(GTK_PROGRESS_LEFT_TO_RIGHT));
@@ -47,4 +49,21 @@ Init_gtk_progress_bar()
 
     rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);
     rb_define_method(gProgressBar, "pulse", pbar_pulse, 0);
+
+    /* undef deprecated properties */
+    rb_undef_method(gProgressBar, "adjustment");
+    rb_undef_method(gProgressBar, "adjustment=");
+    rb_undef_method(gProgressBar, "set_adjustment");
+    rb_undef_method(gProgressBar, "bar_style");
+    rb_undef_method(gProgressBar, "bar_style=");
+    rb_undef_method(gProgressBar, "set_bar_style");
+    rb_undef_method(gProgressBar, "discrete_blocks");
+    rb_undef_method(gProgressBar, "discrete_blocks=");
+    rb_undef_method(gProgressBar, "set_discrete_blocks");
+    rb_undef_method(gProgressBar, "activity_blocks");
+    rb_undef_method(gProgressBar, "activity_blocks=");
+    rb_undef_method(gProgressBar, "set_activity_blocks");
+    rb_undef_method(gProgressBar, "activity_step");
+    rb_undef_method(gProgressBar, "activity_step=");
+    rb_undef_method(gProgressBar, "set_activity_step");
 }
