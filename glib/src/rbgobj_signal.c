@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/08/25 08:47:36 $
+  $Date: 2003/09/18 07:16:19 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -469,13 +469,102 @@ guint	 g_signal_handlers_disconnect_matched (gpointer		  instance,
 					       gpointer		  data);
 #endif
 
-#if 0
-/* --- chaining for language bindings --- */
-void	g_signal_override_class_closure	      (guint		  signal_id,
-					       GType		  instance_type,
-					       GClosure		 *class_closure);
-void	g_signal_chain_from_overridden	      (const GValue      *instance_and_params,
-					       GValue            *return_value);
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+
+static VALUE
+gobj_s_sig_override(klass, sig)
+    VALUE klass;
+    VALUE sig;
+{
+    GType gtype = CLASS2GTYPE(klass);
+    const gchar* sig_name;
+    guint signal_id;
+
+    if (SYMBOL_P(sig))
+        sig_name = rb_id2name(SYM2ID(sig));
+    else {
+        StringValue(sig);
+        sig_name = StringValuePtr(sig);
+    }
+    signal_id = g_signal_lookup(sig_name, gtype);
+
+    if (!signal_id)
+        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
+
+    {
+        VALUE proc = G_BLOCK_PROC();
+        GClosure* rclosure = g_rclosure_new(proc, Qnil,
+                                            rbgobj_get_signal_func(signal_id));
+        g_signal_override_class_closure(signal_id, gtype, rclosure);
+    }
+
+    return klass;
+}
+
+static VALUE
+chain_from_overridden_body(struct emit_arg* arg)
+{
+    g_value_init(arg->instance_and_params->values,
+                 G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
+    rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
+
+    {
+        GValue* params = arg->instance_and_params->values + 1;
+        int i;
+        for (i = 0; i < arg->query.n_params; i++) {
+            g_value_init(params + i, arg->query.param_types[i]);
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
+        }
+    }
+
+    {
+        gboolean use_ret = (arg->query.return_type != G_TYPE_NONE);
+        GValue return_value = {0,};
+
+        if (use_ret)
+            g_value_init(&return_value, arg->query.return_type);
+
+        g_signal_chain_from_overridden(arg->instance_and_params->values,
+                                       (use_ret) ? &return_value : NULL);
+
+        if (use_ret) {
+            VALUE ret = GVAL2RVAL(&return_value);
+            g_value_unset(&return_value);
+            return ret;
+        } else {
+            return Qnil;
+        }
+    }
+}
+
+static VALUE
+gobj_sig_chain_from_overridden(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
+{
+    struct emit_arg arg;
+
+    {
+        GSignalInvocationHint* hint;
+        hint = g_signal_get_invocation_hint(RVAL2GOBJ(self));
+        if (!hint)
+            rb_raise(rb_eRuntimeError, "can't get signal invocation hint");
+        g_signal_query(hint->signal_id, &arg.query);
+    }
+
+    if (arg.query.n_params != argc)
+        rb_raise(rb_eArgError, "wrong number of arguments(%d for %d)",
+                 argc, arg.query.n_params);
+
+    arg.self = self;
+    arg.args = rb_ary_new4(argc, argv);
+    arg.instance_and_params = g_value_array_new(1 + argc);
+
+    return rb_ensure(chain_from_overridden_body, (VALUE)&arg,
+                     emit_ensure, (VALUE)&arg);
+}
+
 #endif
 
 static void
@@ -512,6 +601,13 @@ Init_signal_misc()
 
     rb_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
+
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+    rb_define_method(mMetaInterface, "signal_override",
+                     gobj_s_sig_override, 1);
+    rb_define_method(cInstantiatable, "signal_chain_from_overridden",
+                     gobj_sig_chain_from_overridden, -1);
+#endif
 }
 
 /**********************************************************************/
