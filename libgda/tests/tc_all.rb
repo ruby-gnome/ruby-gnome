@@ -65,7 +65,8 @@ class TC_everything < Test::Unit::TestCase
     end
 
     def test_provider
-        assert Gda::Provider.model.is_a?(Gda::DataModel)
+        # FIXME GDA HEAD ONLY
+        # assert Gda::Provider.model.is_a?(Gda::DataModel)
         assert_nil(Gda::Provider.get_by_name("does_not_exist"))
 
         arr = []
@@ -96,9 +97,10 @@ class TC_everything < Test::Unit::TestCase
         list.add_from_string('hoge=FUGA')
         assert_equal('BAR', list.find('foo'))
         assert_equal('FUGA', list.find('hoge'))
-        list.clear
-        assert_nil list.find('foo')
-        assert_nil list.find('hoge')
+        # FIXME GDA HEAD ONLY
+        # list.clear
+        # assert_nil list.find('foo')
+        # assert_nil list.find('hoge')
 
         list = Gda::QuarkList.new('foo=BAR')
         assert_equal('BAR', list.find('foo'))
@@ -188,7 +190,7 @@ class TC_everything < Test::Unit::TestCase
     end
 
     def test_row
-        model = Gda::Provider.model
+        model = Gda::DataSource.model
         model.each_row do |row|
 	    row.size.times do |k|
             	assert_equal(row.get_value(k), row[k])

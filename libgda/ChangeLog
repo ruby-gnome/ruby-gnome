@@ -1,3 +1,11 @@
+2004-03-10  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdaprovider.c (#get_model),
+	  src/rbgdaquarklist.c (#clear):
+	  Disabled, because they are implemented in the
+	  development branch of libgda.
+	* tests/tc_all.rb: Follow API changes. 
+
 2004-03-07  Laurent Sansonetti  <lrz@gnome.org>
                                                                                                                         
 	* src/*.[ch]: Updated copyright.

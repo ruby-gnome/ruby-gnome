@@ -68,8 +68,9 @@ static VALUE rb_gda_provider_each(self)
     return Qnil;
 }
 
+#if 0
 /*
- * Class method: model
+ * FIXME GDA HEAD ONLY Class method: model
  *
  * Fills and returns a new Gda::DataModel object using information from all
  * providers which are currently installed in the system.
@@ -87,6 +88,7 @@ static VALUE rb_gda_provider_model(self)
         ? RGDA_DATAMODEL_NEW(model)
 	: Qnil;
 }
+#endif
 
 /*
  * Class method: get_by_name(name)
@@ -163,7 +165,7 @@ void Init_gda_provider(void) {
 
     rb_define_singleton_method(c, "providers", rb_gda_get_providers,  0);
     rb_define_singleton_method(c, "each",      rb_gda_provider_each,  0);
-    rb_define_singleton_method(c, "model",     rb_gda_provider_model, 0);
+    /* rb_define_singleton_method(c, "model",     rb_gda_provider_model, 0); */
     rb_define_singleton_method(c, "get_by_name", 
                                rb_gda_provider_get_by_name, 1);
 
