@@ -4,6 +4,16 @@ extconf.rb for gtk extention library
 
 require "mkmf"
 
+unless defined? macro_defined?
+  def macro_defined?(macro, src, opt="")
+    try_cpp(src + <<EOP, opt)
+#ifndef #{macro}
+# error
+#endif
+EOP
+  end
+end
+
 #
 # detect GTK+ configurations
 #
@@ -15,7 +25,7 @@ if /mswin32/ !~ PLATFORM
   begin
     version = `#{config_cmd} --version`
     if not version.chomp.empty?
-      $LDFLAGS += ' ' + `#{config_cmd} --libs`.chomp
+      $libs += ' ' + `#{config_cmd} --libs`.chomp
       $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
     end
   rescue
@@ -48,6 +58,16 @@ $CFLAGS = format('-I%s ', File.expand_path(File.dirname(__FILE__) + '/../glib/sr
 
 gdkx = `#{config_cmd} --variable=target`.chomp == 'x11'
 
+STDOUT.print("checking for G_OS_WIN32... ")
+STDOUT.flush
+if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+  STDOUT.print "yes\n"
+  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
+else
+  STDOUT.print "no\n"
+end
+
+
 #
 # create Makefiles
 #
@@ -56,33 +76,6 @@ begin
   $mdir = "gtk/src"
   Dir.chdir "src"
 
-  lib_ary = []
-  if /cygwin|mingw/ =~ PLATFORM
-    $CFLAGS += " -fnative-struct" unless gdkx
-  elsif /mswin32/ !~ PLATFORM
-    lib_ary = [# ["X11", "XOpenDisplay"],
-               # ["Xext", "XShmQueryVersion"],
-               # ["Xi", "XOpenDevice"],
-#                ["glib", "g_print"],
-#                ["gdk", "gdk_init"],
-#                ["gtk", "gtk_init"],
-    ]
-  else
-    lib_ary = [ ["glib-1.3", "g_print"],
-                ["gdk-1.3", "gdk_init"],
-                ["gtk-1.3", "gtk_init"] ]
-  end
-
-  lib_ary.each do |ary|
-
-    if not have_library(ary[0], ary[1])
-      msg = format("cannot found %s in %s.", ary[1], ary[0])
-      if ary[0] == "X11"
-	msg += " (or maybe `gtk-config --lib' is incorrect...)"
-      end
-      raise Interrupt, msg
-    end
-  end
   have_func('gtk_plug_get_type')
   have_func('gtk_socket_get_type')
   have_func('_gtk_accel_group_attach')

@@ -1,3 +1,9 @@
+2002-09-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Append -fnative-struct to $CFLAGS when G_OS_WIN32 is defined
+	* lib/gdk_pixbuf2.rb: rename from lib/gdk_pixbuf.rb
+	* sample/*.rb: ditto 
+
 2002-08-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb, rbgdk-pixbuf.c, lib/gdk_pixbuf.rb, sample/*.rb:

@@ -1,5 +1,5 @@
-require 'gtk'
-require 'gdk_pixbuf'
+require 'gtk2'
+require 'gdk_pixbuf2'
 
 pixbuf =  Gdk::Pixbuf.new(ARGV[0])
 

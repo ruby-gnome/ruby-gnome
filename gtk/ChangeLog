@@ -1,3 +1,8 @@
+2002-09-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: use $libs instead of $LDFLAGS
+	Append -fnative-struct to $CFLAGS when G_OS_WIN32 is defined
+
 2002-09-13  Masao Mutoh <mutoh@highway.ne.jp>
 
    * src/*.c: rename RBGOBJ_INITIALIZE to G_INITIALIZE.

@@ -1,5 +1,16 @@
 require 'mkmf'
 
+unless defined? macro_defined?
+  def macro_defined?(macro, src, opt="")
+    try_cpp(src + <<EOP, opt)
+#ifndef #{macro}
+# error
+#endif
+EOP
+  end
+end
+
+
 while /^--/ =~ ARGV[0]
   ARGV.shift
 end
@@ -31,6 +42,15 @@ $LDFLAGS += ' ' + `pkg-config gtk+-2.0 --libs`.chomp
 $CFLAGS  += ' ' + `pkg-config gtk+-2.0 --cflags`.chomp
 
 $CFLAGS += ' -g'
+
+STDOUT.print("checking for G_OS_WIN32... ")
+STDOUT.flush
+if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+  STDOUT.print "yes\n"
+  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
+else
+  STDOUT.print "no\n"
+end
 
 have_func("g_print") &&
 have_func("gdk_init") &&

@@ -1,5 +1,16 @@
 require 'mkmf'
 
+unless defined? macro_defined?
+  def macro_defined?(macro, src, opt="")
+    try_cpp(src + <<EOP, opt)
+#ifndef #{macro}
+# error
+#endif
+EOP
+  end
+end
+
+
 pkgconfig = with_config('pkg-config', 'pkg-config')
 pkgname   = 'gobject-2.0'
 
@@ -16,12 +27,16 @@ end
 
 $libs   += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
 $CFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
-$CFLAGS += ' -g'
+$CFLAGS += ' -g -Wall'
 
-if /mswin32|mingw|bcc/ =~ RUBY_PLATFORM and /gcc/ =~ Config::CONFIG['CC']
-  $CFLAGS += ' -fnative-struct'
+STDOUT.print("checking for G_OS_WIN32... ")
+STDOUT.flush
+if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+  STDOUT.print "yes\n"
+  $CFLAGS += ' -fnative-struct' if /gcc/ =~ Config::CONFIG['CC']
+else
+  STDOUT.print "no\n"
 end
-
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate
