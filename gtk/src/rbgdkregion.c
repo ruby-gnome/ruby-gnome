@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,55 +12,36 @@
 ************************************************/
 #include "global.h"
 
-VALUE gdkRegion;
+#define _SELF(r) ((GdkRegion*)RVAL2BOXED(r))
 
-VALUE
-make_gdkregion(region)
-    GdkRegion *region;
+/**********************************/
+GType
+gdk_region_get_type(void)
 {
-    return Data_Wrap_Struct(gdkRegion, 0, gdk_region_destroy, region);
+    static GType our_type = 0;
+
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GdkRegion",
+                    (GBoxedCopyFunc)gdk_region_copy,
+                    (GBoxedFreeFunc)gdk_region_destroy);
+    return our_type;
 }
-
-GdkRegion*
-get_gdkregion(region)
-    VALUE region;
-{
-    GdkRegion *gregion;
-
-    if (NIL_P(region)) return NULL;
-
-    if (!rb_obj_is_instance_of(region, gdkRegion)) {
-        rb_raise(rb_eTypeError, "not a GdkRegion");
-    }
-    Data_Get_Struct(region, GdkRegion, gregion);
-    if (gregion == 0) {
-        rb_raise(rb_eArgError, "destroyed GdkRegion");
-    }
-
-    return gregion;
-}
-
+/**********************************/
 static VALUE
-gdkregion_s_new(self)
+gdkregion_initialize(self)
     VALUE self;
 {
-    return make_gdkregion(gdk_region_new());
+    GdkRegion *region = gdk_region_new();
+    RBGOBJ_INITIALIZE(self, region);
+    return Qnil;
 }
-
-/*
-static VALUE
-gdk_region_s_polygon(points, fill_rule)
-    VALUE points, fill_rule
-{
-}
- */
 
 static VALUE
 gdkregion_get_clipbox(self)
     VALUE self;
 {
     GdkRectangle rect;
-    gdk_region_get_clipbox(get_gdkregion(self), &rect);
+    gdk_region_get_clipbox(_SELF(self), &rect);
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
@@ -68,25 +49,25 @@ static VALUE
 gdkregion_empty_p(self)
     VALUE self;
 {
-    return gdk_region_empty(get_gdkregion(self)) ? Qtrue : Qfalse;
+    return gdk_region_empty(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 gdkregion_equal(self, obj)
     VALUE self, obj;
 {
-    if (!rb_obj_is_instance_of(obj, gdkRegion)) {
+    if (!rb_obj_is_instance_of(obj, GTYPE2CLASS(GDK_TYPE_REGION))) {
         return Qnil;
     }
-    return gdk_region_equal(get_gdkregion(self),
-                            get_gdkregion(obj)) ? Qtrue : Qfalse;
+    return gdk_region_equal(_SELF(self),
+                            _SELF(obj)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 gdkregion_point_in(self, x, y)
     VALUE self, x, y;
 {
-    return gdk_region_point_in(get_gdkregion(self), NUM2INT(x),
+    return gdk_region_point_in(_SELF(self), NUM2INT(x),
                                NUM2INT(y)) ? Qtrue : Qfalse;
 }
 
@@ -94,7 +75,7 @@ static VALUE
 gdkregion_rect_in(self, rect)
     VALUE self, rect;
 {
-    return INT2FIX(gdk_region_rect_in(get_gdkregion(self),
+    return INT2FIX(gdk_region_rect_in(_SELF(self),
                                       (GdkRectangle*)RVAL2BOXED(rect)));
 }
 
@@ -102,7 +83,7 @@ static VALUE
 gdkregion_offset(self, dx, dy)
     VALUE self, dx, dy;
 {
-    gdk_region_offset(get_gdkregion(self), NUM2INT(dx), NUM2INT(dy));
+    gdk_region_offset(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return Qnil;
 }
 
@@ -110,7 +91,7 @@ static VALUE
 gdkregion_shrink(self, dx, dy)
     VALUE self, dx, dy;
 {
-    gdk_region_shrink(get_gdkregion(self), NUM2INT(dx), NUM2INT(dy));
+    gdk_region_shrink(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return Qnil;
 }
 
@@ -118,7 +99,7 @@ static VALUE
 gdkregion_union_with_rect(self, rect)
     VALUE self, rect;
 {
-    gdk_region_union_with_rect(get_gdkregion(self),
+    gdk_region_union_with_rect(_SELF(self),
                                (GdkRectangle*)RVAL2BOXED(rect));
     return self;
 }
@@ -127,7 +108,7 @@ static VALUE
 gdkregion_intersect(self, region)
     VALUE self, region;
 {
-    gdk_region_intersect(get_gdkregion(self), get_gdkregion(region));
+    gdk_region_intersect(_SELF(self), _SELF(region));
     return self;
 }
 
@@ -135,7 +116,7 @@ static VALUE
 gdkregion_union(self, region)
     VALUE self, region;
 {
-    gdk_region_union(get_gdkregion(self), get_gdkregion(region));
+    gdk_region_union(_SELF(self), _SELF(region));
     return self;
 }
 
@@ -143,7 +124,7 @@ static VALUE
 gdkregion_subtract(self, region)
     VALUE self, region;
 {
-    gdk_region_subtract(get_gdkregion(self), get_gdkregion(region));
+    gdk_region_subtract(_SELF(self), _SELF(region));
     return self;
 }
 
@@ -151,7 +132,7 @@ static VALUE
 gdkregion_xor(self, region)
     VALUE self, region;
 {
-    gdk_region_xor(get_gdkregion(self), get_gdkregion(region));
+    gdk_region_xor(_SELF(self), _SELF(region));
     return self;
 }
 
@@ -159,11 +140,10 @@ gdkregion_xor(self, region)
 void
 Init_gtk_gdk_region()
 {
-    gdkRegion = rb_define_class_under(mGdk, "Region", rb_cData);
+    VALUE gdkRegion = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
 
-    rb_define_singleton_method(gdkRegion, "new", gdkregion_s_new, 0);
+    rb_define_method(gdkRegion, "initialize", gdkregion_initialize, 0);
     rb_define_method(gdkRegion, "clipbox", gdkregion_get_clipbox, 0);
-    rb_define_method(gdkRegion, "get_clipbox", gdkregion_get_clipbox, 0);
     rb_define_method(gdkRegion, "empty?", gdkregion_empty_p, 0);
     rb_define_method(gdkRegion, "==", gdkregion_equal, 1);
     rb_define_method(gdkRegion, "eql?", gdkregion_equal, 1);

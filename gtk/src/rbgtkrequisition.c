@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkrequisition.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 2002  Masao Mutoh
 
@@ -17,6 +17,8 @@
 
 #include "global.h"
 
+#define _SELF(r) ((GtkRequisition*)RVAL2BOXED(r))
+
 static VALUE 
 grequisition_initialize(self, w, h)
     VALUE self, w, h;
@@ -25,7 +27,7 @@ grequisition_initialize(self, w, h)
 
     r.width = NUM2INT(w);
     r.height = NUM2INT(h);
-    RBGTK_INITIALIZE(self, make_grequisition(&r));
+	RBGOBJ_INITIALIZE(self, &r);
 	return Qnil;
 }
 
@@ -33,21 +35,21 @@ static VALUE
 grequisition_w(self)
     VALUE self;
 {
-    return INT2NUM(get_grequisition(self)->width);
+    return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
 grequisition_h(self)
     VALUE self;
 {
-    return INT2NUM(get_grequisition(self)->height);
+    return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
 grequisition_set_w(self, w)
     VALUE self, w;
 {
-    get_grequisition(self)->width = NUM2INT(w);
+    _SELF(self)->width = NUM2INT(w);
     return self;
 }
 
@@ -55,7 +57,7 @@ static VALUE
 grequisition_set_h(self, h)
     VALUE self, h;
 {
-    get_grequisition(self)->height = NUM2INT(h);
+    _SELF(self)->height = NUM2INT(h);
     return self;
 }
 
@@ -65,26 +67,13 @@ grequisition_to_a(self)
 {
     GtkRequisition *r;
 
-    r = get_grequisition(self);
+    r = _SELF(self);
     return rb_ary_new3(2, INT2FIX(r->width), INT2FIX(r->height));
-}
-
-static VALUE
-grequisition_to_s(self)
-    VALUE self;
-{
-    char str[2 +2*1 +5*2  +1]; /* member is guint16. max string size is 5 */
-    GtkRequisition *r;
-
-    r = get_grequisition(self);
-    sprintf(str, "(%5d, %5d)", r->width, r->height);
-    return rb_str_new2(str);
 }
 
 void Init_gtk_requisition()
 {
-	/* FIXME */
-    gRequisition = rb_define_class_under(mGtk, "Requisition", rb_cData);
+    VALUE gRequisition = G_DEF_CLASS(GTK_TYPE_REQUISITION, "Requisition", mGdk);
 
     rb_define_singleton_method(gRequisition, "initialize", grequisition_initialize, 2);
     rb_define_method(gRequisition, "width", grequisition_w, 0);
@@ -92,5 +81,4 @@ void Init_gtk_requisition()
     rb_define_method(gRequisition, "width=", grequisition_set_w, 1);
     rb_define_method(gRequisition, "height=", grequisition_set_h, 1);
     rb_define_method(gRequisition, "to_a", grequisition_to_a, 0);
-    rb_define_method(gRequisition, "to_s", grequisition_to_s, 0);
 }

@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,40 +16,6 @@
 VALUE mGdk;
 
 VALUE gdkEvent;
-
-VALUE
-make_tobj(obj, klass, size)
-    gpointer obj;
-    VALUE klass;
-    int size;
-{
-    gpointer copy;
-    VALUE data;
-
-    if (obj == NULL) return Qnil;
-
-    copy = xmalloc(size);
-    memcpy(copy, obj, size);
-    data = Data_Wrap_Struct(klass, 0, g_free, copy);
-
-    return data;
-}
-
-gpointer
-get_tobj(obj, klass)
-    VALUE obj, klass;
-{
-    void *ptr;
-
-    if (NIL_P(obj)) return NULL;
-
-    if (!rb_obj_is_instance_of(obj, klass)) {
-        rb_raise(rb_eTypeError, "not a %s", rb_class2name(klass));
-    }
-    Data_Get_Struct(obj, void, ptr);
-
-    return ptr;
-}
 
 VALUE
 make_gdkevent(ev)
@@ -163,37 +129,6 @@ get_gdkevent(event)
     Data_Get_Struct(event, GdkEvent, gevent);
 
     return gevent;
-}
-
-struct _rbgdkatom {
-  GdkAtom atom;
-};
-typedef struct _rbgdkatom GdkAtomData;
-
-VALUE
-make_gdkatom(atom)
-    GdkAtom atom;
-{
-    GdkAtomData data;
-    data.atom = atom;
-
-    return make_tobj(&data, gdkAtom, sizeof(GdkAtomData));
-}
-
-GdkAtom
-get_gdkatom(atom)
-    VALUE atom;
-{
-    GdkAtomData* gatom;
-
-    if (NIL_P(atom)) return 0;
-
-    if (!rb_obj_is_kind_of(atom, gdkAtom)) {
-        rb_raise(rb_eTypeError, "not a GdkAtom");
-    }
-    Data_Get_Struct(atom, GdkAtomData, gatom);
-
-    return gatom->atom;
 }
 
 /*

@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkwindow.c -
 
-  $Author: sakai $
-  $Date: 2002/08/30 18:24:46 $
+  $Author: mutoh $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,10 +12,6 @@
 ************************************************/
 
 #include "global.h"
-
-/*
- * Gdk::Window
- */
 
 #define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
 
@@ -507,7 +503,7 @@ gdkwin_prop_change(self, property, type, mode, src)
 	GdkAtom    compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 	GdkAtom    otype, ntype;
 
-	otype = ntype = get_gdkatom(type);
+	otype = ntype = ((GdkAtomData*)RVAL2BOXED(type))->atom;
 
 /* They are not available in Ruby/GTK 2
    if(ntype == GDK_SELECTION_TYPE_ATOM){
@@ -516,7 +512,7 @@ gdkwin_prop_change(self, property, type, mode, src)
    dat = (Atom*)ALLOC_N(Atom, len);
 
    for(i = 0; i < len; i++){
-   ((Atom*)dat)[i] = get_gdkatom(rb_ary_entry(src, i));
+   ((Atom*)dat)[i] = ((GdkAtomData*)RVAL2BOXED(rb_ary_entry(src, i))->atom);
    }
    fmt = 32;
 
@@ -561,7 +557,8 @@ gdkwin_prop_change(self, property, type, mode, src)
 	}
 
 	gdk_property_change(_SELF(self),
-						get_gdkatom(property), ntype, fmt, NUM2INT(mode), dat, len);
+						(((GdkAtomData*)RVAL2BOXED(property))->atom), 
+                        ntype, fmt, NUM2INT(mode), dat, len);
 
 	if(otype == GDK_SELECTION_TYPE_ATOM) {
 		xfree(dat);
@@ -585,8 +582,10 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
 	int		i;
 	VALUE		ret = 0;
 
-	if(gdk_property_get(_SELF(self), get_gdkatom(property),
-						get_gdkatom(type), NUM2INT(offset), NUM2INT(length),
+	if(gdk_property_get(_SELF(self), 
+                        (((GdkAtomData*)RVAL2BOXED(property))->atom),
+						(((GdkAtomData*)RVAL2BOXED(type))->atom),
+                        NUM2INT(offset), NUM2INT(length),
 						RTEST(delete), &rtype, &rfmt, &rlen, (guchar**)&rdat) == FALSE){
 		return Qnil;
 	}
@@ -615,7 +614,7 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
   }
   } else {
   for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, make_gdkatom((GdkAtom)(unsigned long *)rdat[i]));
+  rb_ary_push(ret, RVAL2BOXED((GdkAtom)(unsigned long *)rdat[i]));
   }
   }
 */
@@ -623,14 +622,16 @@ gdkwin_prop_get(self, property, type, offset, length, delete)
 		break;
 	}
 
-	return rb_ary_new3(3, make_gdkatom(rtype), ret, rb_Integer(rlen));
+	return rb_ary_new3(3, BOXED2RVAL(&rtype, GDK_TYPE_ATOM), 
+                       ret, rb_Integer(rlen));
 }
 
 static VALUE
 gdkwin_prop_delete(self, property)
     VALUE self, property;
 {
-	gdk_property_delete(_SELF(self), get_gdkatom(property));
+	gdk_property_delete(_SELF(self), 
+                        (((GdkAtomData*)RVAL2BOXED(property))->atom));
 	return self;
 }
 

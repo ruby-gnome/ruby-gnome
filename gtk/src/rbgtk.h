@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtk.h -
 
-  $Author: sakai $
-  $Date: 2002/08/30 18:24:47 $
+  $Author: mutoh $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -62,8 +62,6 @@ extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
 extern VALUE mGdkRgb;
 
-extern VALUE gdkRegion;
-extern VALUE gdkAtom;
 extern VALUE gdkEvent;
 
 extern VALUE gdkEventType;
@@ -101,16 +99,22 @@ extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
 /*
  * for gdk
  */
+/* Append type */
+#define GDK_TYPE_REGION (gdk_region_get_type())
+extern GType gdk_region_get_type (void);
+
+typedef struct {
+  GdkAtom atom;
+} GdkAtomData;
+
+#define GDK_TYPE_ATOM (gdk_atom_get_type())
+extern GType gdk_atom_get_type (void);
+
+
 extern VALUE make_tobj(gpointer obj, VALUE klass, int size);
 extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
-
-#define make_grequisition(c) make_tobj(c, gRequisition, sizeof(GtkRequisition))
-#define get_grequisition(c) ((GtkRequisition*)get_tobj(c, gRequisition))
-
-extern VALUE make_gdkregion(GdkRegion* region);
-extern GdkRegion* get_gdkregion(VALUE region);
 
 typedef void(*gdkdrawfunc)();
 
@@ -119,8 +123,5 @@ extern GdkEvent* get_gdkevent(VALUE event);
 
 extern VALUE rbgdk_geometry_make(GdkGeometry *geo);
 extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
-
-extern VALUE make_gdkatom(GdkAtom atom);
-extern GdkAtom get_gdkatom(VALUE atom);
 
 #endif /* _RBGTK_H */

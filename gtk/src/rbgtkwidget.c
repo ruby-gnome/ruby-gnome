@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -125,7 +125,7 @@ widget_size_request(self)
 {
     GtkRequisition req;
     gtk_widget_size_request(_SELF(self), &req);
-    return make_grequisition(&req);
+    return BOXED2RVAL(&req, GTK_TYPE_REQUISITION);
 }
 
 static VALUE
@@ -524,7 +524,7 @@ static VALUE
 widget_get_requisition(self)
     VALUE self;
 {
-    return make_grequisition(&(_SELF(self)->requisition));
+    return BOXED2RVAL(&(_SELF(self)->requisition), GTK_TYPE_REQUISITION);
 }
 
 static VALUE
@@ -544,7 +544,7 @@ widget_get_child_requisition(self)
     GtkRequisition r;
 
     gtk_widget_get_child_requisition(_SELF(self), &r);
-    return make_grequisition(&r);
+    return BOXED2RVAL(&r, GTK_TYPE_REQUISITION);
 }
 
 static VALUE
@@ -762,7 +762,8 @@ widget_drag_get_data(self, context, target, time)
     VALUE self, context, target, time;
 {
     gtk_drag_get_data(_SELF(self), GDK_DRAG_CONTEXT(RVAL2GOBJ(self)),
-                      get_gdkatom(target), NUM2INT(time));
+                      (((GdkAtomData*)RVAL2BOXED(target))->atom), 
+                      NUM2INT(time));
     return self;
 }
 
@@ -800,7 +801,8 @@ widget_selection_owner_set(self, selection, time)
     VALUE self, selection, time;
 {
     int ret = gtk_selection_owner_set(_SELF(self), 
-                                      get_gdkatom(selection), NUM2INT(time));
+                                      (((GdkAtomData*)RVAL2BOXED(selection))->atom),
+                                      NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
 
@@ -809,7 +811,8 @@ widget_selection_add_target(self, selection, target, info)
     VALUE self, selection, target, info;
 {
     gtk_selection_add_target(_SELF(self), 
-							 get_gdkatom(selection), get_gdkatom(target),
+							 (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
+                             (((GdkAtomData*)RVAL2BOXED(target))->atom),
 							 NUM2INT(info));
     return self;
 }
@@ -818,7 +821,8 @@ static VALUE
 widget_selection_add_targets(self, selection, targets)
     VALUE self, selection, targets;
 {
-    gtk_selection_add_targets(_SELF(self), get_gdkatom(selection), 
+    gtk_selection_add_targets(_SELF(self), 
+                              (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
                               get_target_entry(targets), RARRAY(targets)->len);
     return self;
 }
@@ -828,7 +832,9 @@ widget_selection_convert(self, selection, target, time)
     VALUE self, selection, target, time;
 {
     int ret = gtk_selection_convert(_SELF(self), 
-									get_gdkatom(selection), get_gdkatom(target), NUM2INT(time));
+                                    (((GdkAtomData*)RVAL2BOXED(selection))->atom), 
+                                    (((GdkAtomData*)RVAL2BOXED(target))->atom),
+									NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
 
@@ -839,34 +845,6 @@ widget_selection_remove_all(self)
     gtk_selection_remove_all(_SELF(self));
     return self;
 }
-
-/* yashi
-   static VALUE
-   signal_setup_args(self, sig, argc, params, args)
-   VALUE obj;
-   ID sig;
-   int argc;
-   GtkArg *params;
-   VALUE args;
-   {
-   char *signame = rb_id2name(sig);
-   ID id_supre = rb_intern("super");
-
-   if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
-   rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
-   return;
-   }
-   if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
-   rb_ary_push(args, make_grequisition(GTK_VALUE_POINTER(params[0])));
-   return;
-   }
-   if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
-   rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
-   return;
-   }
-   rb_func_call(self, id_super, sig, argc, params, args);
-   }
-*/
 
 #define DEFINE_EVENT_FUNC(EVENT,TYPE) \
 static VALUE \

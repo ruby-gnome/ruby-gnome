@@ -1,3 +1,11 @@
+2002-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkregion.c, src/rbgdkatom.c, src/rbgtk.h: 
+	make GDK_TYPE_REGION, GDK_TYPE_ATOM as boxed object	
+	and apply G_DEF_CLASS.
+	* src/rbgtkrequisition.c: Apply G_DEF_CLASS.
+	* src/rbgdk.c, src/rbgtk.h: remove make_tobj(), get_tobj().
+
 2002-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb, src/rbgtk.c: abolish NATIVE_WIN32, use G_OS_WIN32 instead

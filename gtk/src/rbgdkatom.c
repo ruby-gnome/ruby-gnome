@@ -1,18 +1,42 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkatom.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/09/07 06:50:56 $
 
-  Copyright (C) 2002 MUTOH Masao
+  Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 
 #include "global.h"
 
-VALUE gdkAtom;
+#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(self))->atom)
+
+/*****************************************/
+GdkAtomData*
+gdk_atom_copy (const GdkAtom atom)
+{
+  GdkAtomData* data;
+  g_return_val_if_fail (atom != NULL, NULL);
+  data = g_new(GdkAtomData, 1);
+  data->atom = atom;
+  return data;
+}
+
+GType
+gdk_atom_get_type (void)
+{
+  static GType our_type = 0;
+  if (our_type == 0)
+    our_type = g_boxed_type_register_static ("GdkAtomData",
+                    (GBoxedCopyFunc)gdk_atom_copy,
+                    (GBoxedFreeFunc)g_free);
+  return our_type;
+}
+
+/*****************************************/
 
 static VALUE
 gdkatom_s_intern(argc, argv, self)
@@ -25,15 +49,15 @@ gdkatom_s_intern(argc, argv, self)
   
     rb_scan_args(argc, argv, "11", &name, &exist);
 
-    return make_gdkatom(gdk_atom_intern(STR2CSTR(name), RTEST(exist)));
+    return BOXED2RVAL(gdk_atom_intern(STR2CSTR(name), RTEST(exist)), 
+                      GDK_TYPE_ATOM);
 }
 
 static VALUE
 gdkatom_name(self)
     VALUE self;
 {
-    gchar* name = gdk_atom_name(get_gdkatom(self));
-    
+    gchar* name = gdk_atom_name(_SELF(self));
     return name ? rb_str_new2(name) : Qnil;
 }
 
@@ -41,13 +65,14 @@ static VALUE
 gdkatom_eq(self, other)
     VALUE self, other;
 {
-    return (get_gdkatom(self) == get_gdkatom(other)) ? Qtrue : Qfalse;
+    return (_SELF(self) == _SELF(other)) ? Qtrue : Qfalse;
 }
 
 void
 Init_gtk_gdk_atom()
 {
-    gdkAtom = rb_define_class_under(mGdk, "Atom", rb_cData);
+    VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
+
     rb_define_singleton_method(gdkAtom, "intern", gdkatom_s_intern, -1);
 
     rb_define_method(gdkAtom, "name", gdkatom_name, 0);

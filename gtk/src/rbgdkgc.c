@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -94,7 +94,7 @@ static VALUE
 gdkgc_set_clip_region(self, region)
 	VALUE self, region;
 {
-	gdk_gc_set_clip_region(_SELF(self), get_gdkregion(region));
+	gdk_gc_set_clip_region(_SELF(self), (GdkRegion*)RVAL2BOXED(region));
 	return region;
 }
 

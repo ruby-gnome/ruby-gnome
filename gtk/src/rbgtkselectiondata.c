@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -18,21 +18,21 @@ static VALUE
 gtkselectiondata_selection(self)
     VALUE self;
 {
-    return make_gdkatom(_SELF(self)->selection);
+    return BOXED2RVAL(_SELF(self)->selection, GDK_TYPE_ATOM);
 }
 
 static VALUE
 gtkselectiondata_target(self)
     VALUE self;
 {
-    return make_gdkatom(_SELF(self)->target);
+    return BOXED2RVAL(_SELF(self)->target, GDK_TYPE_ATOM);
 }
 
 static VALUE
 gtkselectiondata_type(self)
     VALUE self;
 {
-    return make_gdkatom(_SELF(self)->type);
+    return BOXED2RVAL(_SELF(self)->type, GDK_TYPE_ATOM);
 }
 
 static VALUE
@@ -55,7 +55,8 @@ static VALUE
 gtkselectiondata_set(self, type, format, data)
     VALUE self, type, format, data;
 {
-    gtk_selection_data_set(_SELF(self), get_gdkatom(type),
+    gtk_selection_data_set(_SELF(self), 
+                           (((GdkAtomData*)RVAL2BOXED(type))->atom),
 						   NUM2INT(format), RSTRING(data)->ptr, 
 						   RSTRING(data)->len);
     return self;

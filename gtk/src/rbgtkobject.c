@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 13:07:01 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -139,7 +139,7 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
 		if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
-			rb_ary_push(args, make_grequisition(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GTK_TYPE_REQUISITION));
 			return;
 		}
 		if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
@@ -295,7 +295,8 @@ signal_sync_args(obj, sig, argc, params, args)
 
     if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))) {
 		if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
-			memcpy(GTK_VALUE_POINTER(params[0]), get_grequisition(rb_ary_pop(args)),
+			memcpy(GTK_VALUE_POINTER(params[0]), 
+                   (GtkRequisition*)RVAL2BOXED(rb_ary_pop(args)),
 				   sizeof(GtkRequisition));
 			return;
 		}

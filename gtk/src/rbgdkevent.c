@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -392,21 +392,21 @@ static VALUE
 gdkeventselection_selection(self)
     VALUE self;
 {
-    return make_gdkatom(get_gdkevent(self)->selection.selection);
+    return BOXED2RVAL(get_gdkevent(self)->selection.selection, GDK_TYPE_ATOM);
 }
 
 static VALUE
 gdkeventselection_target(self)
     VALUE self;
 {
-    return make_gdkatom(get_gdkevent(self)->selection.target);
+    return BOXED2RVAL(get_gdkevent(self)->selection.target, GDK_TYPE_ATOM);
 }
 
 static VALUE
 gdkeventselection_property(self)
     VALUE self;
 {
-    return make_gdkatom(get_gdkevent(self)->selection.property);
+    return BOXED2RVAL(get_gdkevent(self)->selection.property, GDK_TYPE_ATOM);
 }
 
 static VALUE

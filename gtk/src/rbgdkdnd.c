@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -48,7 +48,7 @@ gdkdragcontext_targets(self)
     VALUE ary = rb_ary_new();
 
     for (cur = list; cur != NULL; cur = cur->next) {
-        rb_ary_push(ary, make_gdkatom((GdkAtom)cur->data));
+        rb_ary_push(ary, BOXED2RVAL((GdkAtom)cur->data, GDK_TYPE_ATOM));
     }
     return ary;
 }
@@ -102,7 +102,7 @@ static VALUE
 gdkdragcontext_get_selection(self)
     VALUE self;
 {
-    return make_gdkatom(gdk_drag_get_selection(_SELF(self)));
+    return BOXED2RVAL(gdk_drag_get_selection(_SELF(self)), GDK_TYPE_ATOM);
 }
 
 static VALUE

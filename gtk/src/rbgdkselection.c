@@ -1,10 +1,10 @@
-/* -*- c-file-style: "ruby" -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/09/07 06:50:56 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -14,12 +14,15 @@
 
 VALUE mGdkSelection;
 
+#define RVAL2GATOM(v) (((GdkAtomData*)RVAL2BOXED(v))->atom)
+#define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
+
 static VALUE
 gdkselection_owner_set(self, owner, selection, time, send_event)
     VALUE self, owner, selection, time, send_event;
 {
     int ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
-                                      get_gdkatom(selection), 
+                                      RVAL2GATOM(selection), 
                                       NUM2INT(time), RTEST(send_event));
     return ret ? Qtrue : Qfalse;
 }
@@ -28,7 +31,7 @@ static VALUE
 gdkselection_owner_get(self, selection)
     VALUE self, selection;
 {
-    return GOBJ2RVAL(gdk_selection_owner_get(get_gdkatom(selection)));
+    return GOBJ2RVAL(gdk_selection_owner_get(RVAL2GATOM(selection)));
 }
 
 static VALUE
@@ -36,8 +39,8 @@ gdkselection_convert(self, requestor, selection, target, time)
     VALUE self, requestor, selection, target, time;
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
-						  get_gdkatom(selection), 
-						  get_gdkatom(target), NUM2INT(time));
+						  RVAL2GATOM(selection), 
+						  RVAL2GATOM(target), NUM2INT(time));
     return Qnil;
 }
 
@@ -51,7 +54,7 @@ gdkselection_property_get(self, requestor)
 
     gdk_selection_property_get(GDK_WINDOW(RVAL2GOBJ(requestor)), &data, 
                                &prop_type, &prop_format);
-    return rb_ary_new3(3, rb_str_new2(data), make_gdkatom(prop_type), 
+    return rb_ary_new3(3, rb_str_new2(data), GATOM2RVAL(prop_type), 
                        INT2NUM(prop_format));
 }
 
@@ -60,11 +63,12 @@ gdkselection_send_notify(self, requestor, selection, target, property, time)
     VALUE self, requestor, selection, target, property, time;
 {
     if( property == Qnil){
-        gdk_selection_send_notify(NUM2INT(requestor), get_gdkatom(selection),
-								  get_gdkatom(target), GDK_NONE, NUM2INT(time));
+        gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
+								  RVAL2GATOM(target), GDK_NONE, NUM2INT(time));
     } else {
-        gdk_selection_send_notify(NUM2INT(requestor), get_gdkatom(selection),
-								  get_gdkatom(target), get_gdkatom(property), NUM2INT(time));
+        gdk_selection_send_notify(NUM2INT(requestor), RVAL2GATOM(selection),
+								  RVAL2GATOM(target), RVAL2GATOM(property), 
+                                  NUM2INT(time));
     }
     return Qnil;
 }
@@ -82,20 +86,20 @@ Init_gtk_gdk_selection()
 
     /* Constants */
     /* GdkSelectionType */
-    rb_define_const(mGdkSelection, "TYPE_ATOM", make_gdkatom(GDK_SELECTION_TYPE_ATOM));
-    rb_define_const(mGdkSelection, "TYPE_BITMAP", make_gdkatom(GDK_SELECTION_TYPE_BITMAP));
-    rb_define_const(mGdkSelection, "TYPE_COLORMAP", make_gdkatom(GDK_SELECTION_TYPE_COLORMAP));
-    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", make_gdkatom(GDK_SELECTION_TYPE_DRAWABLE));
-    rb_define_const(mGdkSelection, "TYPE_INTEGER", make_gdkatom(GDK_SELECTION_TYPE_INTEGER));
-    rb_define_const(mGdkSelection, "TYPE_PIXMAP", make_gdkatom(GDK_SELECTION_TYPE_PIXMAP));
-    rb_define_const(mGdkSelection, "TYPE_WINDOW", make_gdkatom(GDK_SELECTION_TYPE_WINDOW));
-    rb_define_const(mGdkSelection, "TYPE_STRING", make_gdkatom(GDK_SELECTION_TYPE_STRING));
+    rb_define_const(mGdkSelection, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
+    rb_define_const(mGdkSelection, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));
+    rb_define_const(mGdkSelection, "TYPE_COLORMAP", GATOM2RVAL(GDK_SELECTION_TYPE_COLORMAP));
+    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", GATOM2RVAL(GDK_SELECTION_TYPE_DRAWABLE));
+    rb_define_const(mGdkSelection, "TYPE_INTEGER", GATOM2RVAL(GDK_SELECTION_TYPE_INTEGER));
+    rb_define_const(mGdkSelection, "TYPE_PIXMAP", GATOM2RVAL(GDK_SELECTION_TYPE_PIXMAP));
+    rb_define_const(mGdkSelection, "TYPE_WINDOW", GATOM2RVAL(GDK_SELECTION_TYPE_WINDOW));
+    rb_define_const(mGdkSelection, "TYPE_STRING", GATOM2RVAL(GDK_SELECTION_TYPE_STRING));
 
     /* GdkTarget */
-    rb_define_const(mGdkSelection, "TARGET_BITMAP", make_gdkatom(GDK_TARGET_BITMAP));
-    rb_define_const(mGdkSelection, "TARGET_COLORMAP", make_gdkatom(GDK_TARGET_COLORMAP));
-    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", make_gdkatom(GDK_TARGET_DRAWABLE));
-    rb_define_const(mGdkSelection, "TARGET_PIXMAP", make_gdkatom(GDK_TARGET_PIXMAP));
-    rb_define_const(mGdkSelection, "TARGET_STRING", make_gdkatom(GDK_TARGET_STRING));
+    rb_define_const(mGdkSelection, "TARGET_BITMAP", GATOM2RVAL(GDK_TARGET_BITMAP));
+    rb_define_const(mGdkSelection, "TARGET_COLORMAP", GATOM2RVAL(GDK_TARGET_COLORMAP));
+    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", GATOM2RVAL(GDK_TARGET_DRAWABLE));
+    rb_define_const(mGdkSelection, "TARGET_PIXMAP", GATOM2RVAL(GDK_TARGET_PIXMAP));
+    rb_define_const(mGdkSelection, "TARGET_STRING", GATOM2RVAL(GDK_TARGET_STRING));
 
 }
