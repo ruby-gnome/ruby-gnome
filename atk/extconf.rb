@@ -31,7 +31,7 @@ have_func('atk_object_remove_relationship')
 have_func('atk_component_get_layer')
 have_func('atk_component_mdi_zorder')
 
-$distcleanfiles << "rbatkinits.c"
+$distcleanfiles << "rbatkinits.c" if $distcleanfiles
 
 begin
   srcdir = File.dirname($0) == "." ? "." :
