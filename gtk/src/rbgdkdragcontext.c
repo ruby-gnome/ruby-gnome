@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: mutoh $
-  $Date: 2003/11/24 07:40:55 $
+  $Date: 2003/11/24 08:32:06 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -109,7 +109,7 @@ gdkdragcontext_s_get_protocol(argc, argv, self)
         ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 NUM2UINT(xid), &prot);
 #else
-        rb_warn("Not supported display option in GTK+-2.0.x.");
+        rb_warn("Not supported arguments for Gdk::Display in GTK+-2.0.x.");
         ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
 #endif
     }

@@ -1,5 +1,8 @@
 2003-11-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdk.c: Fix compilation error for GTK+-2.0. 
+	* sample/gtk-demo/README, ruby-gnome2-logo.png: Added.
+	* sample/gtk-demo/pixbufs.rb: Follow API change of Gdk::RGB.draw_rgb_image.
 	* src/rbgdk.c, rbgdkdragcontext.c: Fix compilation error for GTK+-2.0. 
 
 2003-11-22  Masao Mutoh  <mutoh@highway.ne.jp>

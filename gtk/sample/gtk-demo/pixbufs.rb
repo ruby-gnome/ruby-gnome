@@ -1,4 +1,4 @@
-# $Id: pixbufs.rb,v 1.2 2003/10/14 14:15:41 kzys Exp $
+# $Id: pixbufs.rb,v 1.3 2003/11/24 08:32:06 mutoh Exp $
 =begin
 = Pixbufs
 
@@ -30,6 +30,7 @@ module Demo
       'gnome-gimp.png',
       'gnome-gsame.png',
       'gnu-keys.png',
+      'ruby-gnome2-logo.png'
     ]
 
     CYCLE_LEN = 60
@@ -107,13 +108,13 @@ module Demo
       pixels = @frame.pixels
       pixels[0, rowstride * event.area.y + event.area.x * 3] = ''
 
-      Gdk::RGB.draw_rgb_image_dithalign(widget.window,
-                                        widget.style.black_gc,
-                                        event.area.x, event.area.y,
-                                        event.area.width, event.area.height,
-                                        Gdk::RGB::Dither::NORMAL,
-                                        pixels, rowstride,
-                                        event.area.x, event.area.y)
+      Gdk::RGB.draw_rgb_image(widget.window,
+                              widget.style.black_gc,
+                              event.area.x, event.area.y,
+                              event.area.width, event.area.height,
+                              Gdk::RGB::Dither::NORMAL,
+                              pixels, rowstride,
+                              event.area.x, event.area.y)
       true
     end
 
