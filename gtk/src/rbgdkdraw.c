@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -284,10 +284,18 @@ VALUE gdkSegment;
 void
 Init_gtk_gdk_draw()
 {
+    static RGObjClassInfo cinfo;
+
     /*
      * Gdk::Drawable
      */
-    gdkDrawable = rb_define_class_under(mGdk, "Drawable", rb_cData);
+    gdkDrawable = rb_define_class_under(mGdk, "Drawable", rbgobj_cGObject);
+    cinfo.klass = gdkDrawable;
+    cinfo.gtype = GDK_TYPE_DRAWABLE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
+
 
     /* instance methods */
     rb_define_method(gdkDrawable, "draw_point", gdkdraw_draw_point, 3);

@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:14 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -179,10 +179,10 @@ gdkdragcontext_drag_status(self, action, time)
 void
 Init_gtk_gdk_dnd()
 {
-	static RGObjClassInfo cinfo;
+    static RGObjClassInfo cinfo;
 
-    gdkDragContext = rb_define_class_under(mGdk, "DragContext", rb_cData);
-	cinfo.klass = gdkDragContext;
+    gdkDragContext = rb_define_class_under(mGdk, "DragContext", rbgobj_cGObject);
+    cinfo.klass = gdkDragContext;
     cinfo.gtype = GDK_TYPE_DRAG_CONTEXT;
     cinfo.mark = 0;
     cinfo.free = 0;

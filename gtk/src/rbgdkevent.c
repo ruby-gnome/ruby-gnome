@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:14:12 $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -526,7 +526,7 @@ void gdkevent_r2g(VALUE from, GValue *to)
 }
 
 static
-VALUE gdkevent_g2r(GValue *from)
+VALUE gdkevent_g2r(const GValue *from)
 {
     return make_gdkevent(g_value_get_boxed(from));
 }

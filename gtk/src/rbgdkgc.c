@@ -3,8 +3,8 @@
 
   rbgtkalignment.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -200,7 +200,7 @@ Init_gtk_gdk_gc()
 {
     static RGObjClassInfo cinfo;
 
-	gdkGC = rb_define_class_under(mGdk, "GC", rb_cData);
+    gdkGC = rb_define_class_under(mGdk, "GC", rbgobj_cGObject);
     cinfo.klass = gdkGC;
     cinfo.gtype = GDK_TYPE_GC;
     cinfo.mark = 0;

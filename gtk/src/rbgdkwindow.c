@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:14:12 $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -642,9 +642,17 @@ VALUE gdkWindowAttr;
 void
 Init_gtk_gdk_window()
 {
+    static RGObjClassInfo cinfo;
+
     /* Gdk::Window */
 
     gdkWindow = rb_define_class_under(mGdk, "Window", gdkDrawable);
+    cinfo.klass = gdkWindow;
+    cinfo.gtype = GDK_TYPE_WINDOW;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
+
 
     rb_define_method(gdkWindow, "get_size", gdkwin_get_size, 0);
     rb_define_method(gdkWindow, "get_pointer", gdkwin_get_pointer, 0);

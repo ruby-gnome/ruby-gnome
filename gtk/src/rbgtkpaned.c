@@ -3,8 +3,8 @@
 
   rbgtkpaned.c -
 
-  $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -117,7 +117,7 @@ void Init_gtk_paned()
 
     gPaned = rb_define_class_under(mGtk, "Paned", gContainer);
     cinfo.klass = gPaned;
-    cinfo.gtype = GTK_TYPE_SELECTION_DATA;
+    cinfo.gtype = GTK_TYPE_PANED;
     cinfo.mark = 0;
     cinfo.free = 0;
     rbgtk_register_class(&cinfo);

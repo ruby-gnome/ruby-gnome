@@ -1,3 +1,13 @@
+2002-07-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+ 
+	* src/rbgdkcolormap.c, src/rbgdkdnd.c, src/rbgdkdraw.c,
+	src/rbgdkevent.c, src/rbgdkgc.c, src/rbgdkimage.c, src/rbgdkvisual.c,
+	src/rbgdkwindow.c, src/rbgtkaccelgroup.c:
+	  make the following classes be subclasses of GLib::GObject.
+	    Gdk::Colormap, GdkDragContext, Gdk::Drawable, Gdk::GC, Gdk::Image,
+	    Gdk::Visual, Gdk::Window, Gtk::AccelGroup,
+	* src/rbgtkpaned.c: fixed cinfo.gtype
+
 2002-07-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtknotebook.c: Remove Gtk::NotebookPage temporarily.

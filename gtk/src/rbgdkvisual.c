@@ -3,8 +3,8 @@
 
   rbgdkvisual.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -222,10 +222,10 @@ gdkvisual_blue_prec(self)
 void
 Init_gtk_gdk_visual()
 {
-	static RGObjClassInfo cinfo;
+    static RGObjClassInfo cinfo;
 
-    gdkVisual = rb_define_class_under(mGdk, "Visual", rb_cData);
-	cinfo.klass = gdkVisual;
+    gdkVisual = rb_define_class_under(mGdk, "Visual", rbgobj_cGObject);
+    cinfo.klass = gdkVisual;
     cinfo.gtype = GDK_TYPE_VISUAL;
     cinfo.mark = 0;
     cinfo.free = 0;

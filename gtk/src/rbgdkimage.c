@@ -3,8 +3,8 @@
 
   rbgdkimage.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/06 20:56:15 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,26 +19,15 @@ VALUE
 make_gdkimage(image)
     GdkImage *image;
 {
-    return Data_Wrap_Struct(gdkImage, 0, gdk_image_destroy, image);
+    return GOBJ2RVAL(image);
 }
 
 GdkImage*
 get_gdkimage(image)
     VALUE image;
 {
-    GdkImage *gimage;
-
     if (NIL_P(image)) return NULL;
-
-    if (!rb_obj_is_instance_of(image, gdkImage)) {
-	rb_raise(rb_eTypeError, "not a GdkImage");
-    }
-    Data_Get_Struct(image, GdkImage, gimage);
-    if (gimage == 0) {
-	rb_raise(rb_eArgError, "destroyed GdkImage");
-    }
-
-    return gimage;
+    return GDK_IMAGE(RVAL2GOBJ(image));
 }
 
 #ifdef GDK_ENABLE_BROKEN
@@ -139,8 +128,16 @@ gdkimage_bpl(self)
     return INT2NUM((get_gdkimage(self))->bpl);
 }
 
-void Init_gtk_gdk_image() {
-    gdkImage = rb_define_class_under(mGdk, "Image", rb_cData);
+void Init_gtk_gdk_image()
+{
+    static RGObjClassInfo cinfo;
+
+    gdkImage = rb_define_class_under(mGdk, "Image", rbgobj_cGObject);
+    cinfo.klass = gdkImage;
+    cinfo.gtype = GDK_TYPE_IMAGE;
+    cinfo.mark = 0;
+    cinfo.free = 0;
+    rbgtk_register_class(&cinfo);
 
 #ifdef GDK_ENABLE_BROKEN
     rb_define_singleton_method(gdkImage, "new_bitmap", gdkimage_s_newbmap, 4);

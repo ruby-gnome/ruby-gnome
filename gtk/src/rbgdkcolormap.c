@@ -3,8 +3,8 @@
 
   rbgdkcolormap.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/07 06:06:08 $
+  $Author: sakai $
+  $Date: 2002/07/28 05:34:04 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -80,10 +80,10 @@ gdkcmap_colors(self)
 void
 Init_gtk_gdk_colormap()
 {
-	static RGObjClassInfo cinfo;
+    static RGObjClassInfo cinfo;
 
-    gdkColormap = rb_define_class_under(mGdk, "Colormap", rb_cData);
-	cinfo.klass = gdkColormap;
+    gdkColormap = rb_define_class_under(mGdk, "Colormap", rbgobj_cGObject);
+    cinfo.klass = gdkColormap;
     cinfo.gtype = GDK_TYPE_COLORMAP;
     cinfo.mark = 0;
     cinfo.free = 0;
