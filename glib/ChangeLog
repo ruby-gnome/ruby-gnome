@@ -1,3 +1,11 @@
+2004-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Added GLib.check_binding_version?
+	* src/rbglib_utils.c: GLib.check_version: Use static variables
+	instead of MACROS.
+	GLib.check_version -> GLib.check_version?.
+	* sample/utils.rb: ditto.
+
 2004-10-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_convert.c: Implemented GLib::ConvertError. 

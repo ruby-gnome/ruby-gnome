@@ -4,13 +4,13 @@
   Copyright (C) 2004 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2004/04/30 14:18:01 $
-  $Id: utils.rb,v 1.1 2004/04/30 14:18:01 mutoh Exp $
+  $Date: 2004/10/21 15:50:21 $
+  $Id: utils.rb,v 1.2 2004/10/21 15:50:21 mutoh Exp $
 =end
                                                                                 
 require 'glib2'
 
-if GLib.check_version(2, 2, 0)
+if GLib.check_version?(2, 2, 0)
   GLib.application_name = "application name"
   puts "GLib.application_name = #{GLib.application_name}"
 end
@@ -19,7 +19,7 @@ GLib.prgname = "program name"
 puts "GLib.prgname = #{GLib.prgname}"
 
 puts "GLib.getenv('HOME') = #{GLib.getenv('HOME')}"
-if GLib.check_version(2, 4, 0)
+if GLib.check_version?(2, 4, 0)
   GLib.setenv("FOO", "foo")
   puts "GLib.getenv('FOO') = #{GLib.getenv('FOO')}"
   GLib.unsetenv("FOO")

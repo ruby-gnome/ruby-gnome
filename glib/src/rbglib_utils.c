@@ -4,7 +4,7 @@
   rbglib_utils.c -
 
   $Author: mutoh $
-  $Date: 2004/04/30 14:18:01 $
+  $Date: 2004/10/21 15:50:21 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -228,12 +228,12 @@ static VALUE
 rbglib_m_check_version(self, major, minor, micro)
     VALUE self, major, minor, micro;
 {
-    return CBOOL2RVAL(GLIB_MAJOR_VERSION > NUM2UINT(major) ||
-                      (GLIB_MAJOR_VERSION == NUM2UINT(major) && 
-                       GLIB_MINOR_VERSION > NUM2UINT(minor)) ||
-                      (GLIB_MAJOR_VERSION == NUM2UINT(major) && 
-                       GLIB_MINOR_VERSION == NUM2UINT(minor) &&
-                       GLIB_MICRO_VERSION >= NUM2UINT(micro)));
+    return CBOOL2RVAL(glib_major_version > NUM2UINT(major) ||
+                      (glib_major_version == NUM2UINT(major) && 
+                       glib_minor_version > NUM2UINT(minor)) ||
+                      (glib_major_version == NUM2UINT(major) && 
+                       glib_minor_version == NUM2UINT(minor) &&
+                       glib_micro_version >= NUM2UINT(micro)));
 }
 
 void
@@ -266,6 +266,6 @@ Init_glib_utils()
     rb_define_module_function(mGLib, "bit_storage", rbglib_m_bit_storage, 1);
     rb_define_module_function(mGLib, "spaced_primes_closest", rbglib_m_spaced_primes_closest, 1);
     rb_define_module_function(mGLib, "parse_debug_string", rbglib_m_parse_debug_string, 2);
-    rb_define_module_function(mGLib, "check_version", rbglib_m_check_version, 3);
+    rb_define_module_function(mGLib, "check_version?", rbglib_m_check_version, 3);
 }
 

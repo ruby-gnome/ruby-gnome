@@ -20,6 +20,17 @@ if /mingw|mswin/ =~ RUBY_PLATFORM
 end
 
 module GLib
+  def check_binding_version?(major, minor, micro)
+    
+    BINDING_VERSION[0] > major ||
+      (BINDING_VERSION[0] == major && 
+       BINDING_VERSION[1] > minor) ||
+      (BINDING_VERSION[0] == major && 
+       BINDING_VERSION[1] == minor &&
+       BINDING_VERSION[2] >= micro)  
+  end
+  module_function :check_binding_version?
+
   def self.__add_one_arg_setter(klass)
     #for Instance methods.
     ary = klass.instance_methods(false)
