@@ -21,8 +21,6 @@
 
 #include "rbgda.h"
 
-VALUE cGdaValue;
-
 GdaQuarkList *gda_quark_list_copy(list)
     GdaQuarkList *list;
 {
