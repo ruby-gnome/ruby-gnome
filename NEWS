@@ -1,0 +1,9 @@
+Ruby-GNOME2-0.1
+  Initial release.
+  * Ruby/GLib
+  * Ruby/GTK
+  * Ruby/GdkPixbuf
+  * Ruby/GNOME
+  * Ruby/GnomeCanvas
+  * Ruby/Libglade
+  * Ruby/Libart

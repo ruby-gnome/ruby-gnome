@@ -1,39 +1,60 @@
 Ruby-GNOME2 -- Ruby bindings for GNOME-2.0
 ==========================================
 
-This is a set of bindings for the GNOME-2.0 libraries for use from Ruby.
+   This is a set of bindings for the GNOME-2.0 libraries for use from Ruby.
 
-To use them, you will need Ruby 1.6 and gnome-libs 2.0.0 or
-later installed on your system. Keep in mind that you will need both the
-runtime libraries and the header files installed.
+   To use them, you will need Ruby 1.6 and gnome-libs 2.0.0 or
+   later installed on your system. Keep in mind that you will need both the
+   runtime libraries and the header files installed.
 
-Compilation and Installation
-============================
+Release packages
+----------------
+   ruby-gtk2
+    - Ruby/GLib2
+    - Ruby/GTK2
 
-To compile and install all of the bindings included in this package,
-you should run:
+   ruby-gnome2-all
+    - ruby-gtk2
+    - Ruby/GdkPixbuf2
+    - Ruby/GNOME2
+    - Ruby/GnomeCanvas2
+    - Ruby/Libart2
+    - Ruby/Libglade2
 
-  ruby extconf.rb
-  make
-  make site-install
+Install
+-------
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
-To compile and install a particular sub-binding, you should run:
+   To compile and install a particular sub-binding, you should run:
 
-  cd <each sub-directory>
-  ruby extconf.rb
-  make
-  make site-install
+   0. cd <each sub-directory>
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
 
-*NOTICE*
-You should install a sub-binding with its dependencies.
-The current dependencies are:
+Dependencies
+------------
+   You should install a sub-binding with its dependencies.
+   The current dependencies are:
 
-  gtk depends on glib.
-  gdkpixbuf depends on gtk.
-  gnome depends on gtk
+      Ruby/GTK         depends on Ruby/GLib.
+      Ruby/GdkPixbuf   depends on Ruby/GTK.
+      Ruby/GNOME       depends on Ruby/GTK.
+      Ruby/GnomeCanvas depends on Ruby/GTK.
+      Ruby/Libglade    depends on Ruby/GTK, Ruby/GNOME(optional).
 
+Copying
+-------
+   Copyright (c) 2002 Ruby-GNOME2 Project Team
 
-Contacting the Author
-=====================
-The Ruby-GNOME2 website is http://ruby-gnome2.sf.net/.
-which has a mailing list and facility for reporting bugs and submitting fixes.
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LIBRARY General Public License version 2.
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/
