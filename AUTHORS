@@ -4,14 +4,19 @@ KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME, Ruby/GnomeCanvas, Ruby/Libart.
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
-     Vice Maintainer. Ruby/GLib and Almost of important designs in Ruby-GNOME2.
-     Porting to Win32 platform.
+     Vice Maintainer. Ruby/GLib and Almost of important designs 
+     of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>
-     Maintainer. Ruby/GTK, Ruby/GdkPixbuf, Ruby/Libglade, Project management.
+     Maintainer. Ruby/GTK, Ruby/GdkPixbuf, Ruby/Libglade, rbbr,
+     Project management.
 
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf.
+
+
+All members of Ruby-GNOME2 Mailing lists.
+And many others who have contributed patches, reported bugs. Thanks!
 
 ----------------------------------------
 Ruby-GNOME Maintainers.

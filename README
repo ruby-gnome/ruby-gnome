@@ -46,7 +46,9 @@ Dependencies
       Ruby/GdkPixbuf   depends on Ruby/GTK.
       Ruby/GNOME       depends on Ruby/GTK.
       Ruby/GnomeCanvas depends on Ruby/GTK.
+      Ruby/Libart      none.
       Ruby/Libglade    depends on Ruby/GTK, Ruby/GNOME(optional).
+      Ruby/GConf       depends on Ruby/GLib.
 
 Copying
 -------
