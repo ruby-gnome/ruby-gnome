@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: sakai $
+  $Date: 2003/02/14 18:58:19 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -146,7 +146,6 @@ Init_gtk_gtk()
     id_call = rb_intern("call");
 
     mGtk = rb_define_module("Gtk");
-    rb_ivar_set(mGtk, id_relatives, Qnil);
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
 
 #ifdef USE_POLL_FUNC

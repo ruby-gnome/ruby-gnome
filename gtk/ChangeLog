@@ -1,3 +1,7 @@
+2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtk.c: Remove dependence on id_relatives.
+
 2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Use ../mkmf-gnome2.rb
