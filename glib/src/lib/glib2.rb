@@ -158,6 +158,7 @@ module GLib
   end
 end
 
+GLib::Log.set_log_domain(nil)
 GLib::Log.set_log_domain(GLib::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Object::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
