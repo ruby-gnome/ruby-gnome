@@ -4,7 +4,7 @@
   rbgtkentry.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/07/20 15:00:41 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -14,10 +14,19 @@
 #include "global.h"
 
 static VALUE
-entry_initialize(self)
+entry_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
     VALUE self;
 {
-    RBGTK_INITIALIZE(self, gtk_entry_new());
+    VALUE maxlen;
+    rb_scan_args(argc, argv, "01", &maxlen);
+
+    if (!NIL_P(maxlen))
+      RBGTK_INITIALIZE(self, gtk_entry_new_with_max_length(NUM2INT(maxlen)));
+    else
+      RBGTK_INITIALIZE(self, gtk_entry_new());
+
     return Qnil;
 }
 
@@ -80,7 +89,7 @@ void Init_gtk_entry()
     cinfo.free = 0;
     rbgtk_register_class(&cinfo);
 
-    rb_define_method(gEntry, "initialize", entry_initialize, 0);
+    rb_define_method(gEntry, "initialize", entry_initialize, -1);
     rb_define_method(gEntry, "set_text", entry_set_text, 1);
     rb_define_method(gEntry, "append_text", entry_append_text, 1);
     rb_define_method(gEntry, "prepend_text", entry_prepend_text, 1);

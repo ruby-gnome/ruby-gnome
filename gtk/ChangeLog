@@ -1,8 +1,16 @@
+2002-07-20  Guillaume Pierronnet <moumar@netcourrier.com>
+
+	* src/rbgtkpacker.c: Add file. Support Gtk::Packer.
+	* src/rbgtk.c, rbgtk.h, rbgtkconst.c, rbgtkcontainer.c:
+	Support Gtk::Packer.
+	* src/rbgtkentry.c: Gtk::Entry.new() accept a "max_length"
+	as optionnal argument.
+
 2002-07-10  Alex Boussinet <dbug@wanadoo.fr>
 
-   * src/rbgtksocket.c: Add Gtk::Socket#xwindow.
-   * sample/t-gtkplug.rb, sample/t-gtksocket.rb:
-     Add sample for Gtk::Socket, Gtk::Plug.
+	* src/rbgtksocket.c: Add Gtk::Socket#xwindow.
+	* sample/t-gtkplug.rb, sample/t-gtksocket.rb:
+	Add sample for Gtk::Socket, Gtk::Plug.
 
 2002-07-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
