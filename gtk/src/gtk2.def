@@ -7,7 +7,7 @@ EXPORTS
     gdk_atom_get_type
     gdk_geometry_get_type
     gdk_region_get_type
-    gdk_span_get_type
+    gdk_windowattr_get_type
     get_gdkatom
     get_gdkevent
     gtk_accel_group_entry_get_type

@@ -1,5 +1,16 @@
+2003-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Add Gdk::Window#get_update_area,
+	#freeze_updates, #thaw_updates, #process_updates,
+	#internal_paint_info, #set_user_data, #shape_combine_region,
+	#user_data, #set_geometry_hints.
+	Gdk::Window.process_all_updates, .set_debug_updates,
+
 2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/gtk2.def: Add gdk_windowattr_get_type.
+	* src/rbgdkkeyval.c: Add Gdk::Keyval.convert_case. 
+	* src/rbgdkwindowattr.c: Added. 
 	* src/rbgtknotebook.c: Add Gtk::Notebook#n_pages.
 	Gtk::Notebook#page= works with negative value.
 
