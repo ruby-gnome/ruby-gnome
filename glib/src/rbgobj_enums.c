@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: sakai $
-  $Date: 2003/08/25 01:50:30 $
+  $Author: isambart $
+  $Date: 2003/08/29 19:48:50 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -444,7 +444,7 @@ rbgobj_get_flags(VALUE obj, GType gtype)
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
-        obj = rbgobj_make_flags(obj, gtype);
+        obj = rbgobj_make_flags(NUM2UINT(obj), gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return flags_get_holder(obj)->value;

@@ -1,6 +1,11 @@
+2003-08-29  Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgobj_enums.c: fixed rgbobj_get_flags - a VALUE was not
+	converted to unsigned int before calling rbgobj_make_flags.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
 
 2003-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
