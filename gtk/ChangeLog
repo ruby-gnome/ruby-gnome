@@ -1,3 +1,7 @@
+2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/sample/misc/stock.rb: Add header.
+
 2002-11-23  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 
 	* src/rbgtktextbuffer.c : Add Gtk::TextBuffer#insert_interactive,

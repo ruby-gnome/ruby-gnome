@@ -1,3 +1,11 @@
+=begin
+  stock.rb - Gtk::Stock sample script.
+
+  Copyright (C) 2001,2002 Masao Mutoh<mutoh@highway.ne.jp>
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: stock.rb,v 1.2 2002/11/23 04:31:22 mutoh Exp $
+=end
 
 require 'gtk2'
 
