@@ -4,9 +4,9 @@
   rbgdk-pixbufanimation.c -
 
   $Author: mutoh $
-  $Date: 2002/12/30 12:44:54 $
+  $Date: 2003/01/17 19:20:41 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 #include "rbgdk-pixbuf.h"
 

@@ -1,3 +1,13 @@
+2003-01-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* *.[ch]: Update Copyright. 
+	* sample/*: Update Copyright. Require 'gtk2'.
+	* sample/loader.rb: Added.
+
+2003-01-18  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* rbgdk-pixbuf-loader.c: Added.
+
 2002-12-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Move GTK+'s functions to Ruby/GTK. 

@@ -2,13 +2,13 @@
 =begin
   utils.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project Team
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: utils.rb,v 1.1 2002/11/21 16:49:42 mutoh Exp $
+  $Id: utils.rb,v 1.2 2003/01/17 19:20:46 mutoh Exp $
 =end
 
-require 'gdk_pixbuf2'
+require 'gtk2'
 
 filename = ARGV[0]
 unless filename

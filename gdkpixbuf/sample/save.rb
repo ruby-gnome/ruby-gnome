@@ -2,10 +2,10 @@
 =begin
   save.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002 Ruby-GNOME2 Project Team
+  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: save.rb,v 1.2 2002/11/21 16:49:41 mutoh Exp $
+  $Id: save.rb,v 1.3 2003/01/17 19:20:44 mutoh Exp $
 =end
 
 require 'gdk_pixbuf2'
