@@ -4,13 +4,6 @@ extconf.rb for gnomecanvas extention library
 
 require "mkmf"
 
-begin
-	require 'gtk2'
-	require 'libart2'
-rescue LoadError
-	raise "Install gtk2 and libart2 before gnomecanvas2."
-end
-
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)
