@@ -4,7 +4,7 @@
   rbgerror.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Date: 2004/08/22 13:27:47 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -27,7 +27,7 @@ rbgerr_gerror2exception(error)
     if (! error){
         return rb_exc_new2(rb_eRuntimeError, "GError parameter doesn't have a value.");
     }
-    printf("error->domain = %d\n", error->domain);
+
     klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
     if NIL_P(klass){
         exc = rb_exc_new2(generic_error, error->message);
@@ -53,7 +53,7 @@ rbgerr_define_gerror(domain, name, module, parent, gtype)
     VALUE klass = rb_define_class_under(module, name, parent);
     rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def code; @code; end\n"));
     rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def domain; @domain; end\n"));
-    printf("klass = %s, domain = %d\n", name, domain);
+
     rb_hash_aset(gerror_table, UINT2NUM(domain), klass);
 
     if (! NIL_P(gtype)){
