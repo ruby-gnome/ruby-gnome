@@ -3,8 +3,8 @@
 
   rbgdkatom.c -
 
-  $Author: mpovolny $
-  $Date: 2003/08/17 08:46:06 $
+  $Author: mutoh $
+  $Date: 2003/09/25 15:32:36 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -12,28 +12,27 @@
 
 #include "global.h"
 
-#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(self, GDK_TYPE_ATOM))->atom)
+#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
 
 /*****************************************/
 GdkAtomData*
 gdk_atom_copy (const GdkAtom atom)
 {
-  GdkAtomData* data;
-  g_return_val_if_fail (atom != NULL, NULL);
-  data = g_new(GdkAtomData, 1);
-  data->atom = atom;
-  return data;
+    GdkAtomData* data;
+    data = g_new(GdkAtomData, 1);
+    data->atom = atom;
+    return data;
 }
 
 GType
 gdk_atom_get_type (void)
 {
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GdkAtomData",
-                    (GBoxedCopyFunc)gdk_atom_copy,
-                    (GBoxedFreeFunc)g_free);
-  return our_type;
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GdkAtomData",
+                                                 (GBoxedCopyFunc)gdk_atom_copy,
+                                                 (GBoxedFreeFunc)g_free);
+    return our_type;
 }
 
 
@@ -42,7 +41,7 @@ get_gdkatom(atom)
     VALUE atom;
 {
     if (TYPE(atom) == T_STRING)
-      return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
+        return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
     return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
 }
 /*****************************************/
@@ -63,6 +62,22 @@ gdkatom_s_intern(argc, argv, self)
 }
 
 static VALUE
+gdkatom_initialize(self, num)
+    VALUE self, num;
+{
+    guint atom = FIX2INT(num);
+    if (atom == 0){
+        /* This is a trick for passing 0(NULL) */
+        G_INITIALIZE(self, 1);
+        _SELF(self) = GDK_NONE;
+    } else {
+        G_INITIALIZE(self, atom);
+    } 
+
+    return Qnil;
+}
+
+static VALUE
 gdkatom_name(self)
     VALUE self;
 {
@@ -76,6 +91,13 @@ gdkatom_name(self)
 }
 
 static VALUE
+gdkatom_to_i(self)
+    VALUE self;
+{
+    return UINT2NUM((guint)_SELF(self));
+}
+
+static VALUE
 gdkatom_eq(self, other)
     VALUE self, other;
 {
@@ -85,16 +107,20 @@ gdkatom_eq(self, other)
 void
 Init_gtk_gdk_atom()
 {
+    VALUE none;
     VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
 
     rb_define_singleton_method(gdkAtom, "intern", gdkatom_s_intern, -1);
 
+    rb_define_method(gdkAtom, "initialize", gdkatom_initialize, 1);
     rb_define_method(gdkAtom, "name", gdkatom_name, 0);
+    rb_define_method(gdkAtom, "to_i", gdkatom_to_i, 0);
     rb_define_method(gdkAtom, "==", gdkatom_eq, 1);
     rb_define_method(gdkAtom, "===", gdkatom_eq, 1);
     rb_define_method(gdkAtom, "eql?", gdkatom_eq, 1);
 
-    /* FIXME. GDK_NONE should be Gdk::Atom.
-    rb_define_const(gdkAtom, "NONE", BOXED2RVAL(GDK_NONE, GDK_TYPE_ATOM));
-    */
+    /* This is a trick to define GDK_NONE as a BOXED object */
+    none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);
+    rb_define_const(gdkAtom, "NONE", none);
+    _SELF(none) = GDK_NONE;
 }           

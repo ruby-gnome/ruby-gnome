@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: sakai $
-  $Date: 2003/07/18 13:41:41 $
+  $Author: mutoh $
+  $Date: 2003/09/25 15:32:36 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -144,17 +144,21 @@ gtkselectiondata_set_text(self, str)
     VALUE self, str;
 {
     StringValue(str);
-    gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
-                                RSTRING(str)->len);
-    return self;
+    return CBOOL2RVAL(gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
+                                                  RSTRING(str)->len));
 }
 
 static VALUE
 gtkselectiondata_get_text(self)
     VALUE self;
 {
+    VALUE ret = Qnil;
     gchar* text = gtk_selection_data_get_text(_SELF(self));
-    return text ? CSTR2RVAL(text) : Qnil;
+    if (text) {
+        ret = CSTR2RVAL(text);
+        g_free(text);
+    }
+    return ret;
 }
 
 static VALUE
@@ -170,10 +174,10 @@ gtkselectiondata_get_targets(self)
         int i;
         result = rb_ary_new2(n_atoms);
         for (i = 0; i < n_atoms; i++){
-            rb_ary_push(result, BOXED2RVAL(targets, GDK_TYPE_ATOM));
-            targets++;
+            rb_ary_push(result, BOXED2RVAL(targets[i], GDK_TYPE_ATOM));
         }
     }
+    g_free(targets);
     return result;
 }
 
@@ -208,6 +212,5 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "targets", gtkselectiondata_get_targets, 0);
     rb_define_method(gSelectionData, "targets_include_text?", gtkselectiondata_targets_include_text, 0);
 
-    G_DEF_SETTERS(gSelectionData);
 } 
 

@@ -4,7 +4,7 @@
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 
-  $Id: rulers.rb,v 1.6 2003/05/24 15:30:59 mutoh Exp $
+  $Id: rulers.rb,v 1.7 2003/09/25 15:32:36 mutoh Exp $
 
 =end
 
@@ -25,7 +25,8 @@ class RulerSample < SampleWindow
     hruler.set_range(100, 0, 0, 20)
     signal_connect("motion_notify_event") do |w, e|
 #      hruler.motion_notify_event(e)
-#      hruler.signal_emit("motion_notify_event", e)
+p e.dup
+      hruler.signal_emit("motion_notify_event", e)
     end
     table.attach(hruler, 1, 2, 0, 1,
 		 Gtk::EXPAND | Gtk::FILL, Gtk::FILL, 0, 0)

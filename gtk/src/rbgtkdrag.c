@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2003/08/30 18:40:02 $
+  $Date: 2003/09/25 15:32:36 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -92,7 +92,7 @@ gtkdrag_dest_find_target(argc, argv, self)
 
     ret = gtk_drag_dest_find_target(
         RVAL2WIDGET(widget), RVAL2DC(context),
-        RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+        NIL_P(target_list) ? NULL : RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
  
     return BOXED2RVAL(&ret, GDK_TYPE_ATOM);
 }
@@ -101,8 +101,8 @@ static VALUE
 gtkdrag_dest_get_target_list(self, widget)
     VALUE self, widget;
 {
-    return BOXED2RVAL(gtk_drag_dest_get_target_list(RVAL2WIDGET(widget)), 
-                      GTK_TYPE_TARGET_LIST);
+    GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
+    return list ? BOXED2RVAL(list, GTK_TYPE_TARGET_LIST) : Qnil;
 }
 
 static VALUE
@@ -111,7 +111,7 @@ gtkdrag_dest_set_target_list(self, widget, target_list)
 {
     gtk_drag_dest_set_target_list(
         RVAL2WIDGET(widget), 
-        RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+        NIL_P(target_list) ? NULL : RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
 
     return self;
 }
@@ -272,9 +272,9 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "dest_set", gtkdrag_dest_set, 4);
     rb_define_module_function(mGtkDrag, "dest_set_proxy", gtkdrag_dest_set_proxy, 4);
     rb_define_module_function(mGtkDrag, "dest_unset", gtkdrag_dest_unset, 1);
-    rb_define_module_function(mGtkDrag, "find_target", gtkdrag_dest_find_target, -1);
-    rb_define_module_function(mGtkDrag, "get_target_list", gtkdrag_dest_get_target_list, 1);
-    rb_define_module_function(mGtkDrag, "set_target_list", gtkdrag_dest_set_target_list, 2);
+    rb_define_module_function(mGtkDrag, "dest_find_target", gtkdrag_dest_find_target, -1);
+    rb_define_module_function(mGtkDrag, "dest_get_target_list", gtkdrag_dest_get_target_list, 1);
+    rb_define_module_function(mGtkDrag, "dest_set_target_list", gtkdrag_dest_set_target_list, 2);
     rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
     rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);
     rb_define_module_function(mGtkDrag, "get_source_widget", gtkdrag_get_source_widget, 1);

@@ -1,7 +1,21 @@
+2003-09-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkatom.c: Add Gdk::Atom.new, GDK_NONE.
+	* src/rbgtkdrag.c (Init_gtk_drag): 
+	Gtk::Drag.find_target -> Gtk::Drag.dest_find_target. 
+	     Accept nil for 3rd parameter.
+	Gtk::Drag.get_target_list -> Gtk::Drag.dest_get_target_list.
+	     Fix a segfault when returned NULL.
+	Gtk::Drag.set_target_list -> Gtk::Drag.dest_set_target_list.
+	     Fix a segfault when returned NULL.
+	* src/rbgtkselectiondata.c: Remove Gtk::SelectionData.text=.
+	Gtk::SelectionData.set_text returns true or false.
+	Fix memory reaks of Gtk::SelectionData.text, Gtk::SelectionData.targets.
+
 2003-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtknotebook.c: Imprement Gtk::Notebook#set_page explicitly.
-   Because "page" property doesn't accept negative value.
+   	Because "page" property doesn't accept negative value.
 
 2003-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
