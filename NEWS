@@ -1,3 +1,101 @@
+Ruby-GNOME2-0.6 (2003-08-09)
+
+  * Ruby/GLib
+      - mkmf-gnome2.rb,rbglib.h, rbgobject.h, rbgutil.h are installed 
+        to site-ruby directories.
+        The other libraries which depends on Ruby/GLib can compile
+        in any directotires. [Masahiro Sakai, Masao Mutoh]
+      - Support ruby-1.8.0 [Masao Mutoh]
+      - Added new macros: [Geoff Youngs, Masao Mutoh]
+         CBOOL2RVAL/RVAL2CBOOL, G_DEF_CONSTANTS, G_RENAME_CONSTANT
+      - Improved and Fixed some bugs. [Masahiro Sakai]
+         GLib::Object, GLib::Type, GLib::Closure, GLib::Signal,
+      - Added some methods: [Masahiro Sakai]
+         GLib::Param, GLib::Param::*, GLib::Boxed, GLib::Signal, GLib::Pointer
+      - Removed some methods. [Masahiro Sakai]
+         GLib::Param::*#default, #default_value        
+
+  * Ruby/GdkPixbuf
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+      - Separate Gdk::Pixbuf#scale to #scale and #scale!, 
+        #composite to #composite and #composite!. [Masao Mutoh]
+
+  * Ruby/Pango 
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+
+  * Ruby/GTK
+      - Follow Ruby/GLib changes. [Sakai, Masahiro, Masao Mutoh]
+      - rbgtk.h are installed to site-ruby directories.
+        The other libraries which depends on Ruby/GTK can compile
+        in any directotires. [Masao Mutoh]
+      - Completed: [Geoff Youngs, Masao Mutoh]
+         Gtk::Clipboard, Gtk::Menu, Gtk::Notebook, Gtk::Socket, Gtk::Plug,
+         Gtk::FileSelection, Gtk::ListStore, Gtk::TreeStore, Gtk::TreeModel,
+         Gtk::TextView, Gtk::Notebook, Gtk::ColorSelection, Gtk::Style, 
+         Gtk::ItemFactory, Gtk::Invisible, Gtk::TreeSortable, Gtk::TreeView,
+         Gtk::TreeSelection, Gtk::TreePath, Gtk::TreeViewColumn, Gtk::Drag,
+         Gtk::TextTag, Gtk module
+      - Added and completed. 
+         Gtk::TreeDragSource, Gtk::TreeDragDest, 
+      - Added some methods, improved, fixed bugs: [Geoff Youngs, 
+        Masahiro Sakai, Masao Mutoh] 
+         Gdk::Window, Gdk::Drawable, Gdk::EventProperty, Gdk module, 
+         Gtk::Object, Gtk::Editable, Gtk::TreeModel, 
+         Gtk module, Gtk::TextBuffer, Gtk::IMContext, Gtk::Menu
+      - Added: [Geoff Youngs, Masao Mutoh]
+         Gtk::BingindSet, Gdk::Display, Gdk::Screen
+      - Removed: [Masao Mutoh]
+         Gtk::Socket#xwindow, Gtk::Menu#set_path, 
+         Gtk::Notebook#popup_disable/enable, Gtk::ItemFactory.add_foreign
+         Gtk::TreeSortable#sort_func=, Gtk::TreePath#to_s
+
+  * Ruby/GNOME
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+      - Add Gnome::PixmapEntry#set_preview. [Masao Mutoh]
+
+  * Ruby/GnomeCanvas
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+
+  * Ruby/Libglade
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+
+  * Ruby/Libart
+      - Follow Ruby/GLib changes. [Masao Mutoh]
+
+  * Ruby/GConf
+      - Fix a bug [744158] [Masao Mutoh]
+
+  * Ruby/GStreamer [NEW]
+      - Merged with Ruby-GStreamer project. [Laurent Sansonetti]
+      - Version informations are also merged.
+      - Completed: [Laurent Sansonetti]
+         Gst, Gst::Autoplug, Gst::Cpu,  Gst::Format,
+         Gst::Object, Gst::PadTemplate, Gst::Pipeline, 
+         Gst::PluginFeature, Gst::QueryType, 
+         Gst::Type
+      - Added and completed. [Laurent Sansonetti]
+         Gst::AutoplugFactory, Gst::EventMask, Gsk::EventSeek, 
+         Gst::EventSegmentSeek, Gst::EventSize, Gst::Parse, 
+         Gst::SystemClock, Gst::Thread,Gst::MediaInfo, 
+         Gst::MediaInfoStream, Gst::MediaInfoTrack
+      - Added some methods, improved, fixed bugs: [Laurent Sansonetti]
+         Gst::Caps, Gst::Clock, Gst::Plugin, Gst::Pad, Gst::Element, 
+      - Added: [Nikolai :: lone-star :: Weibull, Laurent Sansonetti]
+         sample/media-type.rb, gst-inspect.rb, mediap-type2.rb
+        
+  * Ruby/GnomeVFS [NEW]
+      - Initial release. [Nikolai :: lone-star :: Weibull]
+      - Completed: [Nikolai :: lone-star :: Weibull]
+         GnomeVFS module, GnomeVFS::Directory, GnomeVFS::Monitor,
+         GnomeVFS::FileInfo, GnomeVFS::Error
+      - Added: [Nikolai :: lone-star :: Weibull]
+         GnomeVFS::File, GnomeVFS::URI
+
+  * Ruby/GtkHtml2 [NEW]
+      - Initial release. [Martin Povolný]
+      - Added: [Martin Povolný]
+         Gtk::HtmlDocument, Gtk::HtmlView
+
 Ruby-GNOME2-0.5 (2003-05-24)
 
   * Ruby/GLib
@@ -5,6 +103,7 @@ Ruby-GNOME2-0.5 (2003-05-24)
       - Fixed some bugs, Added methods and improved: [Masahiro Sakai]
          GLib::Object, GLib::ParamSpec, GLib::Signal, GLib::Type, 
          GLib::Instantiatable, GLib::MetaInterface, GLib::Param::String
+      - Added: [Geoff Youngs, Masao Mutoh]
          
   * Ruby/GdkPixbuf
       - Fixed a bug. [Geoff Youngs]
