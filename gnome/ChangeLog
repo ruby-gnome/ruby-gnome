@@ -1,3 +1,51 @@
+2002-10-20  KUBO Takehiro  <kubo@jiubao.org>
+
+	* sample/animator_demo.rb: removed.
+	* sample/gnome-druid.rb: add a new sample.
+	* src/rbgnome-config.c: Add new module functions.
+	  Gnome::Config.get_string_with_default
+	  Gnome::Config.get_translated_string_with_default
+	  Gnome::Config.get_int_with_default
+	  Gnome::Config.get_float_with_default
+	  Gnome::Config.get_bool_with_default
+	  Gnome::Config.get_vector_with_default
+	  Gnome::Config.private_get_string_with_default
+	  Gnome::Config.private_get_translated_string_with_default
+	  Gnome::Config.private_get_int_with_default
+	  Gnome::Config.private_get_float_with_default
+	  Gnome::Config.private_get_bool_with_default
+	  Gnome::Config.private_get_vector_with_default
+	  Gnome::Config.get_string
+	  Gnome::Config.get_translated_string
+	  Gnome::Config.get_int
+	  Gnome::Config.get_float
+	  Gnome::Config.get_bool
+	  Gnome::Config.get_vector
+	  Gnome::Config.private_get_string
+	  Gnome::Config.private_get_translated_string
+	  Gnome::Config.private_get_int
+	  Gnome::Config.private_get_float
+	  Gnome::Config.private_get_bool
+	  Gnome::Config.private_get_vector
+	  Gnome::Config.set_vector
+	  Gnome::Config.private_set_string
+	  Gnome::Config.private_set_translated_string
+	  Gnome::Config.private_set_int
+	  Gnome::Config.private_set_float
+	  Gnome::Config.private_set_bool
+	  Gnome::Config.private_set_vector
+	  Gnome::Config.section?
+	  Gnome::Config.private_section?
+	  Gnome::Config.private_get_real_path
+	* src/rbgnome-dateedit.c: New methods
+	  Gnome::DataEdit#time, Gnome::DateEdit#initial_time
+	  Gnome::DataEdit#get_flags -> Gnome::DataEdit#flags
+	* src/rbgnome-druid-page-edge.c: add a file.
+	* src/rbgnome-druid-page-standard.c: add a file.
+	* src/rbgnome-druid-page.c: add a file.
+	* src/rbgnome-druid.c: add a file.
+	* src/rbgnome.c, src/rbgnome.h: call Init_gnome_druid*().
+
 2002-10-19  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-app-helper.c: Fix segmentation fault when xpm_data is 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.15 2002/10/19 16:36:25 tkubo Exp $ */
+/* $Id: rbgnome.c,v 1.16 2002/10/20 07:33:51 tkubo Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -201,6 +201,10 @@ Init_gnome2()
     Init_gnome_color_picker(mGnome);
     Init_gnome_config(mGnome);
     Init_gnome_dateedit(mGnome);
+    Init_gnome_druid(mGnome);
+    Init_gnome_druid_page(mGnome);
+    Init_gnome_druid_page_edge(mGnome);
+    Init_gnome_druid_page_standard(mGnome);
     Init_gnome_entry(mGnome);
     Init_gnome_file_entry(mGnome);
     Init_gnome_font_picker(mGnome);
