@@ -1,3 +1,11 @@
+2005-01-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c: Added Gtk::Dialog.alternative_dialog_button_order?, 
+	#set_alternative_button_order for GTK+-2.6.x.
+	* src/rbgtkclipboard.c: Added Gtk::Clipboard#set_image, #request_image,
+	#wait_for_image, #wait_is_image_available?, #wait_is_target_available?
+	#set_can_store, #store for GTK+-2.6.x.
+
 2005-01-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkicontheme.c: Added Gtk::IconTheme#get_icon_sizes for GTK+-2.6.x.

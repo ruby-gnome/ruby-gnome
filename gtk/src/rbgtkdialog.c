@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2004/05/20 16:57:59 $
+  $Date: 2005/01/24 16:47:18 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -147,6 +147,42 @@ dialog_set_response_sensitive(self, response_id, setting)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+dialog_s_alternative_dialog_button_order(self, screen)
+    VALUE self, screen;
+{
+    gboolean ret = gtk_alternative_dialog_button_order(NIL_P(screen) ? NULL : 
+                                                       GDK_SCREEN(RVAL2GOBJ(screen)));
+    return CBOOL2RVAL(ret);
+}
+
+/* Use gtk_dialog_set_alternative_button_order_from_array() instead.
+void        gtk_dialog_set_alternative_button_order
+                                            (GtkDialog *dialog,
+                                             gint first_response_id,
+                                             ...);
+*/
+
+static VALUE
+dialog_set_alternative_button_order(self, new_order)
+    VALUE self, new_order;
+{
+    gint i;
+    gint len = RARRAY(new_order)->len;
+    gint* gnew_order = g_new(gint, len);
+
+    for (i = 0; i < len; i++){
+        gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
+    }
+
+    gtk_dialog_set_alternative_button_order_from_array(_SELF(self), len, gnew_order);
+    g_free(gnew_order);
+    return self;
+}
+
+#endif
+
 static VALUE
 dialog_vbox(self)
     VALUE self;
@@ -175,6 +211,13 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "add_buttons", dialog_add_buttons, -1);
     rb_define_method(gDialog, "add_action_widget", dialog_add_action_widget, 2);
     rb_define_method(gDialog, "set_default_response", dialog_set_default_response, 1);
+
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_singleton_method(gDialog, "alternative_dialog_button_order?", 
+                               dialog_s_alternative_dialog_button_order, 1);
+    rb_define_method(gDialog, "set_alternative_button_order", dialog_set_alternative_button_order, 1);
+#endif
+
     rb_define_method(gDialog, "set_response_sensitive", dialog_set_response_sensitive, 2);
     rb_define_method(gDialog, "vbox", dialog_vbox, 0);
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);
