@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:53 $
+  $Date: 2003/11/01 19:44:29 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -22,7 +22,7 @@ gdkgc_initialize(self, win)
     return Qnil;
 }
 
-/* Shouldn't we implement them?
+/* we don't need them.
 GdkGC*      gdk_gc_new_with_values          (GdkDrawable *drawable,
                                              GdkGCValues *values,
                                              GdkGCValuesMask values_mask);
@@ -213,6 +213,130 @@ gdkgc_set_colormap(self, colormap)
 }
 
 static VALUE
+gdkgc_get_foreground(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return BOXED2RVAL(&val.foreground, GDK_TYPE_COLOR);
+}
+
+static VALUE
+gdkgc_get_background(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return BOXED2RVAL(&val.background, GDK_TYPE_COLOR);
+}
+
+static VALUE
+gdkgc_get_function(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GENUM2RVAL(val.function, GDK_TYPE_FUNCTION);
+}
+
+static VALUE
+gdkgc_get_fill(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GENUM2RVAL(val.fill, GDK_TYPE_FILL);
+}
+
+static VALUE
+gdkgc_get_tile(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GOBJ2RVAL(val.tile);
+}
+
+static VALUE
+gdkgc_get_stipple(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GOBJ2RVAL(val.stipple);
+}    
+
+static VALUE
+gdkgc_get_ts_origin(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return rb_ary_new3(2, INT2NUM(val.ts_x_origin), 
+                       INT2NUM(val.ts_y_origin));
+}
+ 
+static VALUE
+gdkgc_get_clip_origin(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return rb_ary_new3(2, INT2NUM(val.clip_x_origin), 
+                       INT2NUM(val.clip_y_origin));
+}
+
+static VALUE
+gdkgc_get_clip_mask(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GOBJ2RVAL(val.clip_mask);
+}
+
+static VALUE
+gdkgc_get_subwindow(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return GENUM2RVAL(val.subwindow_mode, GDK_TYPE_SUBWINDOW_MODE);
+}
+
+static VALUE
+gdkgc_get_exposures(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return CBOOL2RVAL(val.graphics_exposures);
+}
+
+static VALUE
+gdkgc_get_line_attributes(self)
+    VALUE self;
+{
+    GdkGCValues val;
+    gdk_gc_get_values(_SELF(self), &val);
+
+    return rb_ary_new3(3, GENUM2RVAL(val.line_width, GDK_TYPE_LINE_STYLE),
+                       GENUM2RVAL(val.cap_style, GDK_TYPE_CAP_STYLE),
+                       GENUM2RVAL(val.join_style, GDK_TYPE_JOIN_STYLE));
+}
+
+static VALUE
 gdkgc_get_colormap(self)
     VALUE self;
 {
@@ -248,12 +372,26 @@ Init_gtk_gdk_gc()
     rb_define_method(gdkGC, "set_clip_mask", gdkgc_set_clip_mask, 1);
     rb_define_method(gdkGC, "set_clip_rectangle", gdkgc_set_clip_rectangle, 1);
     rb_define_method(gdkGC, "set_clip_region", gdkgc_set_clip_region, 1);
-    rb_define_method(gdkGC, "set_subwindow", gdkgc_set_subwindow, 1);
+    rb_define_method(gdkGC, "set_subwindow_mode", gdkgc_set_subwindow, 1);
     rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
     rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
     rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
     rb_define_method(gdkGC, "copy", gdkgc_copy, 0);
     rb_define_method(gdkGC, "set_colormap", gdkgc_set_colormap, 1);
+
+    rb_define_method(gdkGC, "foreground", gdkgc_get_foreground, 0);
+    rb_define_method(gdkGC, "background", gdkgc_get_background, 0);
+    rb_define_method(gdkGC, "function", gdkgc_get_function, 0);
+    rb_define_method(gdkGC, "fill", gdkgc_get_fill, 0);
+    rb_define_method(gdkGC, "tile", gdkgc_get_tile, 0);
+    rb_define_method(gdkGC, "stipple", gdkgc_get_stipple, 0);
+    rb_define_method(gdkGC, "ts_origin", gdkgc_get_ts_origin, 0);
+    rb_define_method(gdkGC, "clip_origin", gdkgc_get_clip_origin, 0);
+    rb_define_method(gdkGC, "clip_mask", gdkgc_get_clip_mask, 0);
+    rb_define_method(gdkGC, "subwindow_mode", gdkgc_get_subwindow, 0);
+    rb_define_method(gdkGC, "exposures?", gdkgc_get_exposures, 0);
+    rb_define_method(gdkGC, "line_attributes", gdkgc_get_line_attributes, 0);
+
     rb_define_method(gdkGC, "colormap", gdkgc_get_colormap, 0);
     rb_define_method(gdkGC, "offset", gdkgc_offset, 2);
 

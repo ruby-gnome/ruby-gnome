@@ -1,5 +1,9 @@
 2003-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkgc.c: Add Gdk::GC#foreground, #background, #function,
+	#fill, #tile, #stipple, #ts_origin, #clip_origin, #clip_mask,
+	#subwindow_mode, #exposures?, #line_attributes.
+	Rename Gdk::GC#set_subwindow to Gdk::GC#set_subwindow_mode.
 	* src/rbgtktreeiter.c: Fix a segfault in Gtk::TreeIter#next!.
 	Pointed out by Matthew Berg.
 
