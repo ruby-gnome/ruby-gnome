@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/03/23 11:46:47 $
+  $Date: 2004/03/23 17:55:25 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -21,6 +21,10 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <gmodule.h>
+
+#ifdef HAVE_LIBINTL_H
+#include <libintl.h>
+#endif
 
 static const int RB_GLADE_XML_FILE = 1;
 static const int RB_GLADE_XML_BUFFER = 2;
@@ -66,10 +70,15 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "13", &text, &rootString, &domainString, &flag);
 
-    root = NIL_P(rootString) ? 0 : RVAL2CSTR(rootString);
-    domain = NIL_P(domainString) ? 0 : RVAL2CSTR(domainString);
+    root = NIL_P(rootString) ? NULL : RVAL2CSTR(rootString);
+    domain = NIL_P(domainString) ? NULL : RVAL2CSTR(domainString);
 
     glade_init();
+
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+    if (domain)
+        bind_textdomain_codeset(domain, "UTF-8");
+#endif
 
     dflag = NIL_P(flag) ? RB_GLADE_XML_FILE : NUM2INT(flag); 
     if (dflag == RB_GLADE_XML_FILE){
