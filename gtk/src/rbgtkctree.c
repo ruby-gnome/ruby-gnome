@@ -3,8 +3,8 @@
 
   rbgtkctree.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Author: sakai $
+  $Date: 2002/09/29 15:43:34 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@
 
 #define RVAL2CTREENODE(n) (NIL_P(n)?NULL:(GtkCTreeNode*)RVAL2BOXED(n, ctreenode_get_type()))
 #define RVAL2PIXMAP(p) (NIL_P(p)?NULL:GDK_PIXMAP(RVAL2GOBJ(p)))
-#define RVAL2BITMAP(p) (NI_P(p)?NULL:GDK_BITMAP(RVAL2GOBJ(p)))
+#define RVAL2BITMAP(p) (NIL_P(p)?NULL:GDK_BITMAP(RVAL2GOBJ(p)))
 #define BOXED2RTREENODE(b) BOXED2RVAL(b, ctreenode_get_type())
 
 /*****************************************/

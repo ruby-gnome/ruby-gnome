@@ -1,3 +1,9 @@
+2002-09-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktext.c, src/rbgtkctree.c: fix typo
+	GD_TYPE_COLOR -> GDK_TYPE_COLOR
+	NI_P -> NIL_P
+
 2002-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/*.c: Change RVAL2BOXED(obj) to RVAL2BOXED(obj, gtype).
