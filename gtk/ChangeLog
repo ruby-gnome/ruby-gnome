@@ -8,16 +8,15 @@
 
 	* src/rbgtkradiobutton.c: Gtk::RadioButton.new(other_button) to create empty radio button in same group as other_button.
 	
-2004-08-01  Vincent Isambart <isambart@netcourrier.com>
-
-	* src/rbgdkwindow.c: Added check for GTK-2.4 for Gdk::Window#set_accept_focus.
-	* src/rbgtkaccelgroup.c: Added check for GTK-2.4 for Gtk::AccelGroup#activate.
-
->>>>>>> 1.423
 2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c: Fixed bugs for Gdk::Screen#spawn_on_screen, 
 	#spawn_on_screen_with_pipes. 
+
+2004-08-01  Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkwindow.c: Added check for GTK-2.4 for Gdk::Window#set_accept_focus.
+	* src/rbgtkaccelgroup.c: Added check for GTK-2.4 for Gtk::AccelGroup#activate.
 
 2004-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
