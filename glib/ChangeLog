@@ -3,6 +3,7 @@
 	* src/rbgobject.h: Add G_DEF_CLASS3(). This is for real-gtype
 	but its foo_get_type() isn't public method such as GdkScreenX11.
 	* src/rbgobj_type.c: Add RGObjClassInfoDynamic and G_DEF_CLASS3().
+	* src/glib2.def: ditto.
 
 2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
