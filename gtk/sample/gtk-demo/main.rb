@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.12 2005/03/05 11:16:03 mutoh Exp $
+  $Id: main.rb,v 1.13 2005/03/20 03:36:56 kzys Exp $
 =end
 
 require 'gtk2'
@@ -46,7 +46,7 @@ module Demo
 			   Gtk::Label.new('_Source', true))
 
       @info_buffer.create_tag('title',
-                             {'font' => 'Bitstream Vera Sans 18'})
+                             {'font' => 'Sans-Serif 18'})
 
       @source_buffer.create_tag('comment',
                                {'foreground' => 'red'})
@@ -215,7 +215,7 @@ module Demo
       scrolled_window.add(text_view)
 
       if is_source
-	font_desc = Pango::FontDescription.new('Bitstream Vera Sans Mono 12')
+	font_desc = Pango::FontDescription.new('Monospace 12')
 	text_view.modify_font(font_desc)
 
 	text_view.set_wrap_mode(Gtk::TextTag::WRAP_NONE)
@@ -271,6 +271,7 @@ module Demo
 	    start = @source_buffer.get_iter_at_offset(0)
 	  elsif line =~ /^=\s+(.*)$/
 	    title = $1
+            title.gsub!(/\s*\(.*\)$/, '') # Delete depend field
 
 	    last = start
 
