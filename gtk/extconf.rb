@@ -26,15 +26,15 @@ end
 gdkincl = nil
 tmpincl = $CFLAGS.gsub(/-D\w+/, '').split('-I') + ['/usr/include']
 tmpincl.each do |i|
-  i.strip!
+p  i.strip!
   
-  if FileTest.exist?(i + "/gdk/gdkcursors.h") and
+  if FileTest.exist?(i + "/gdk/gdkcursor.h") and
       FileTest.exist?(i + "/gdk/gdkkeysyms.h")
     gdkincl = i + "/gdk"
     break
   end
 end
-raise "can't found gdkcursors.h or gdkkeysyms.h" if gdkincl.nil?
+raise "can't found gdkcursor.h or gdkkeysyms.h" if gdkincl.nil?
 
 #
 # create Makefiles
@@ -48,9 +48,9 @@ begin
   if /cygwin|mingw/ =~ PLATFORM
     $CFLAGS += " -fnative-struct -DNATIVE_WIN32"
   elsif /mswin32/ !~ PLATFORM
-    lib_ary = [ ["X11", "XOpenDisplay"],
-                ["Xext", "XShmQueryVersion"],
-                ["Xi", "XOpenDevice"],
+    lib_ary = [# ["X11", "XOpenDisplay"],
+               # ["Xext", "XShmQueryVersion"],
+               # ["Xi", "XOpenDevice"],
     ]
   else
     lib_ary = [ ["glib2", "g_print"],

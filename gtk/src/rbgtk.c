@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/19 23:20:22 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -363,13 +363,17 @@ get_gtk_type(gtkobj)
     else if GTK_IS_IMAGE(gtkobj) klass = gImage;
     else if GTK_IS_ARROW(gtkobj) klass = gArrow;
     else if GTK_IS_MISC(gtkobj) klass = gMisc;
+/*
     else if GTK_IS_TEXT(gtkobj) klass = gText;
+*/
     else if GTK_IS_SPIN_BUTTON(gtkobj) klass = gSButton;
     else if GTK_IS_ENTRY(gtkobj) klass = gEntry;
     else if GTK_IS_EDITABLE(gtkobj) klass = gEditable;
     else if GTK_IS_CURVE(gtkobj) klass = gCurve;
     else if GTK_IS_DRAWING_AREA(gtkobj) klass = gDrawArea;
+/*
     else if GTK_IS_TREE(gtkobj) klass = gTree;
+*/
     else if GTK_IS_TOOLBAR(gtkobj) klass = gToolbar;
     else if GTK_IS_TABLE(gtkobj) klass = gTable;
     else if GTK_IS_SCROLLED_WINDOW(gtkobj) klass = gScrolledWin;
@@ -407,7 +411,9 @@ get_gtk_type(gtkobj)
     else if GTK_IS_COLOR_SELECTION_DIALOG(gtkobj) klass = gColorSelDialog;
     else if GTK_IS_WINDOW(gtkobj) klass = gWindow;
     else if GTK_IS_VIEWPORT(gtkobj) klass = gViewport;
+/*
     else if GTK_IS_TREE_ITEM(gtkobj) klass = gTreeItem;
+*/
     else if GTK_IS_TEAROFF_MENU_ITEM(gtkobj) klass = gTMenuItem;
     else if GTK_IS_RADIO_MENU_ITEM(gtkobj) klass = gRMenuItem;
     else if GTK_IS_CHECK_MENU_ITEM(gtkobj) klass = gCMenuItem;

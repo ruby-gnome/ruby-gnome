@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/19 23:20:22 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -116,8 +116,8 @@ make_gdkvisual(visual)
 {
     if (visual == NULL) return Qnil;
 
-    gdk_visual_ref(visual);
-    return Data_Wrap_Struct(gdkVisual, 0, gdk_visual_unref, visual);
+    g_object_ref(visual);
+    return Data_Wrap_Struct(gdkVisual, 0, g_object_unref, visual);
 }
 
 GdkVisual*
@@ -145,11 +145,10 @@ delete_gdkdraw(obj)
 
     klass = rb_class_of(obj);
     Data_Get_Struct(draw, GdkDrawable, draw);
-    if (0);
-    else if (klass == gdkWindow) gdk_window_unref(draw);
-    else if (klass == gdkBitmap) gdk_bitmap_unref(draw);
-    else if (klass == gdkPixmap) gdk_pixmap_unref(draw);
-    else {
+    if (klass == gdkWindow || klass == gdkBitmap ||
+        klass == gdkPixmap){
+        gdk_drawable_unref(GDK_DRAWABLE(draw));
+    } else {
         rb_p(klass);
         rb_raise(rb_eTypeError, "not a Gdk::Drawable object.");
     }
@@ -199,7 +198,7 @@ static void
 delete_gdkwindow(window)
     GdkWindow *window;
 {
-    gdk_window_unref(window);
+    gdk_window_unref(GDK_DRAWABLE(window));
     rb_hash_aset(gdk_object_list, INT2NUM((VALUE)window), Qnil);
 }
 
@@ -227,7 +226,7 @@ make_gdkwindow(window)
 
     obj = rb_hash_aref(gdk_object_list, INT2NUM((VALUE)window));
     if (obj == Qnil) {
-        gdk_window_ref(window);
+        gdk_window_ref(GDK_DRAWABLE(window));
         obj = new_gdkwindow(window);
     } else {
         obj = NUM2INT(obj);
@@ -239,7 +238,7 @@ static void
 delete_gdkpixmap(pixmap)
     GdkPixmap *pixmap;
 {
-    gdk_pixmap_unref(pixmap);
+    gdk_pixmap_unref(GDK_DRAWABLE(pixmap));
     rb_hash_aset(gdk_object_list, INT2NUM((VALUE)pixmap), Qnil);
 }
 
@@ -267,7 +266,7 @@ make_gdkpixmap(pixmap)
 
     obj = rb_hash_aref(gdk_object_list, INT2NUM((VALUE)pixmap));
     if (obj == Qnil) {
-        gdk_pixmap_ref(pixmap);
+        gdk_pixmap_ref(GDK_DRAWABLE(pixmap));
         obj = new_gdkpixmap(pixmap);
     } else {
         obj = NUM2INT(obj);
@@ -279,8 +278,8 @@ static void
 delete_gdkbitmap(bitmap)
     GdkBitmap *bitmap;
 {
-    gdk_bitmap_unref(bitmap);
-    rb_hash_aset(gdk_object_list, INT2NUM((VALUE)bitmap), Qnil);
+	gdk_drawable_unref(GDK_DRAWABLE(bitmap));
+	rb_hash_aset(gdk_object_list, INT2NUM((VALUE)bitmap), Qnil);
 }
 
 VALUE
@@ -307,7 +306,7 @@ make_gdkbitmap(bitmap)
 
     obj = rb_hash_aref(gdk_object_list, INT2NUM((VALUE)bitmap));
     if (obj == Qnil) {
-        gdk_bitmap_ref(bitmap);
+        gdk_drawable_ref(GDK_DRAWABLE(bitmap));
         obj = new_gdkbitmap(bitmap);
     } else {
         obj = NUM2INT(obj);
@@ -436,7 +435,7 @@ make_gdkgc(gc)
     if (gc == NULL) return Qnil;
 
     gdk_gc_ref(gc);
-    return Data_Wrap_Struct(gdkGC, 0, gdk_gc_destroy, gc);
+    return Data_Wrap_Struct(gdkGC, 0, gdk_gc_unref, gc);
 }
 
 GdkGC*
@@ -464,8 +463,8 @@ make_gdkcursor(cursor)
 {
     if (cursor == NULL) return Qnil;
 
-    /* gdk_cursor_ref(cursor); */
-    return Data_Wrap_Struct(gdkCursor, 0, gdk_cursor_destroy, cursor);
+    gdk_cursor_ref(cursor);
+    return Data_Wrap_Struct(gdkCursor, 0, gdk_cursor_unref, cursor);
 }
 
 GdkCursor*
@@ -540,36 +539,20 @@ get_gdkdragcontext(context)
     return gcontext;
 }
 
-<<<<<<< rbgdk.c
 struct _rbgdkatom {
   GdkAtom atom;
 };
 typedef struct _rbgdkatom GdkAtomData;
 
-=======
-struct _rbgdkatom {
-    GdkAtom atom;
-};
-typedef struct _rbgdkatom GdkAtomData;
-
->>>>>>> 1.17
 VALUE
 make_gdkatom(atom)
     GdkAtom atom;
 {
-<<<<<<< rbgdk.c
-	GdkAtomData data;
-    data.atom = atom;
-
-    return make_tobj(&data, gdkAtom, sizeof(GdkAtomData));
-} 
-=======
     GdkAtomData data;
     data.atom = atom;
 
     return make_tobj(&data, gdkAtom, sizeof(GdkAtomData));
 }
->>>>>>> 1.17
 
 GdkAtom
 get_gdkatom(atom)

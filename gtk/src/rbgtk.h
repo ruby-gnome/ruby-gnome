@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/05/19 23:20:22 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -186,7 +186,6 @@ extern VALUE gdkGCValues;
 extern VALUE gdkSegment;
 extern VALUE gdkWindowAttr;
 extern VALUE gdkCursor;
-extern VALUE gdkCursorConst;
 extern VALUE gdkAtom;
 extern VALUE gdkColorContext;
 extern VALUE gdkEvent;
@@ -206,13 +205,6 @@ extern VALUE gdkEventProperty;
 extern VALUE gdkEventSelection;
 extern VALUE gdkEventDND;
 extern VALUE gdkEventProximity;
-/*
-extern VALUE gdkEventDragBegin;
-extern VALUE gdkEventDragRequest;
-extern VALUE gdkEventDropEnter;
-extern VALUE gdkEventDropLeave;
-extern VALUE gdkEventDropDataAvailable;
-*/
 extern VALUE gdkEventClient;
 extern VALUE gdkEventOther;
 extern VALUE gdkDragContext;
