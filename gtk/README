@@ -75,9 +75,11 @@
 
   Copying
 
-    You can redistribute Ruby/GTK2 and/or modify it under the same term
-    of Ruby.  License of Ruby is included with Ruby distribution in
-    the file "README".
+    Copyright (c) 1998-2002 Ruby-GNOME2 Project Team
+
+    This program is free software.
+    You can distribute/modify this program under the terms of
+    the GNU LIBRARY General Public License version 2.
 
     The graphics files, testgtkrc file, and the origination for
     testgtk.rb are from the GTK+ distribution, and are under
