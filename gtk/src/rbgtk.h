@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/11/23 08:38:36 $
+  $Date: 2004/02/11 17:21:47 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -26,6 +26,8 @@
 #define RBGTK_MINOR_VERSION 8
 #define RBGTK_MICRO_VERSION 1
 
+#define RubyGtkContainerHookModule "RubyGtkContainerHook__"
+
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
 #define GEV2RVAL(ev) (make_gdkevent(ev))
@@ -46,6 +48,7 @@
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 #define GTK_TYPE_BINDING_SET (gtk_bindingset_get_type())
+#define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
 #  ifdef RUBY_GTK2_COMPILATION
@@ -85,6 +88,7 @@ extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
 extern GType gtk_target_list_get_type();
 extern GType gtk_bindingset_get_type();
+extern GType gtk_text_appearance_get_type();
 
 /*
  * Gtk::TreeIter callback

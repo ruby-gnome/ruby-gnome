@@ -1,3 +1,9 @@
+2004-02-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextappearance.c: Add Gtk::TextAppearance.
+	* src/rbgtktextattributes.c: Add all accessors.
+	* src/gtk2.def, rbgtk.h: Add rbgtk_text_appearance_get_type.
+
 2004-02-11  Dafydd Harries <daf@muse.19inch.net>
 
 	* src/rbgtkcontainer.c: Add Gtk::Container#<< as an alias of #add.
