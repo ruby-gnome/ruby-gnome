@@ -70,17 +70,7 @@ void Init_gda_transaction(void) {
     rb_define_method(c, "name", rb_gda_transaction_get_name, 0);
     rb_define_method(c, "set_name", rb_gda_transaction_set_name, 1);
 
-    rb_define_const(c, "ISOLATION_UNKNOWN", 
-                    INT2FIX(GDA_TRANSACTION_ISOLATION_UNKNOWN));
-    rb_define_const(c, "ISOLATION_READ_COMMITED", 
-                    INT2FIX(GDA_TRANSACTION_ISOLATION_READ_COMMITTED));
-    rb_define_const(c, "ISOLATION_READ_UNCOMMITED", 
-                    INT2FIX(GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED));
-    rb_define_const(c, "ISOLATION_REPEATABLE_READ", 
-                    INT2FIX(GDA_TRANSACTION_ISOLATION_REPEATABLE_READ));
-    rb_define_const(c, "ISOLATION_SERIALIZABLE", 
-                    INT2FIX(GDA_TRANSACTION_ISOLATION_SERIALIZABLE));
-
+    G_DEF_CONSTANTS(c, GDA_TYPE_TRANSACTION_ISOLATION, "GDA_TRANSACTION_");
     G_DEF_SETTERS(c);
 }
 

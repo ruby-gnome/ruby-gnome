@@ -109,18 +109,9 @@ void Init_gda_command(void) {
     
     rb_define_method(c, "set_transaction", rb_gda_command_set_transaction, 1);
     rb_define_method(c, "transaction",     rb_gda_command_get_transaction, 0);
-    
-    rb_define_const(c, "OPTION_IGNORE_ERRORS",  INT2FIX(GDA_COMMAND_OPTION_IGNORE_ERRORS));
-    rb_define_const(c, "OPTION_STOP_ON_ERRORS", INT2FIX(GDA_COMMAND_OPTION_STOP_ON_ERRORS));
-    rb_define_const(c, "OPTION_BAD_OPTION",     INT2FIX(GDA_COMMAND_OPTION_BAD_OPTION));
 
-    rb_define_const(c, "TYPE_SQL",       INT2FIX(GDA_COMMAND_TYPE_SQL));
-    rb_define_const(c, "TYPE_XML",       INT2FIX(GDA_COMMAND_TYPE_XML));
-    rb_define_const(c, "TYPE_PROCEDURE", INT2FIX(GDA_COMMAND_TYPE_PROCEDURE));
-    rb_define_const(c, "TYPE_TABLE",     INT2FIX(GDA_COMMAND_TYPE_TABLE));
-    rb_define_const(c, "TYPE_SCHEMA",    INT2FIX(GDA_COMMAND_TYPE_SCHEMA));
-    rb_define_const(c, "TYPE_INVALID",   INT2FIX(GDA_COMMAND_TYPE_INVALID));
-
+    G_DEF_CONSTANTS(c, GDA_TYPE_COMMAND_OPTIONS, "GDA_COMMAND_");
+    G_DEF_CONSTANTS(c, GDA_TYPE_COMMAND_TYPE,    "GDA_COMMAND_");
     G_DEF_SETTERS(c);
 }
 

@@ -171,7 +171,7 @@ static VALUE rb_gda_datasource_is_equal(self, other_data)
 }
 
 void Init_gda_datasource(void) {
-    VALUE c = G_DEF_CLASS(GDA_TYPE_DATASOURCE, "DataSource", mGda);
+    VALUE c = G_DEF_CLASS(GDA_TYPE_DATA_SOURCE_INFO, "DataSource", mGda);
 
     rb_define_singleton_method(c, "datasources", rb_gda_get_datasources,  0);
     rb_define_singleton_method(c, "each",        rb_gda_datasource_each,  0);

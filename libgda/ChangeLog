@@ -1,3 +1,12 @@
+2003-11-17  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgda.h, src/rbgdadatasource.c, src/rbgdaprovider.c:
+	  Fixed bug (GDA_TYPE_DATASOURCE was used instead of
+	  GDA_TYPE_DATA_SOURCE_INFO, same thing for PROVIDER).
+	* src/rbgdaclient.c, src/rbgdacommand.c, src/rbgdaconnection.c,
+	  src/rbgdaexport.c, src/rbgdatransaction.c:
+	  Uses G_DEF_CONSTANTS().
+
 2003-11-14  Laurent Sansonetti  <lrz@gnome.org>
 
 	* Changed my e-mail address (laurent@datarescue.be -> lrz@gnome.org).

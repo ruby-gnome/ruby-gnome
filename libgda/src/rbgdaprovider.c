@@ -110,7 +110,7 @@ static VALUE rb_gda_provider_get_description(self)
 }
 
 void Init_gda_provider(void) {
-    VALUE c = G_DEF_CLASS(GDA_TYPE_PROVIDER, "Provider", mGda);
+    VALUE c = G_DEF_CLASS(GDA_TYPE_PROVIDER_INFO, "Provider", mGda);
 
     rb_define_singleton_method(c, "providers", rb_gda_get_providers,  0);
     rb_define_singleton_method(c, "each",      rb_gda_provider_each,  0);

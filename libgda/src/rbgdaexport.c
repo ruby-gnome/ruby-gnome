@@ -142,9 +142,7 @@ void Init_gda_export(void) {
     rb_define_method(c, "connection",     rb_gda_export_get_connection, 0);
     rb_define_method(c, "set_connection", rb_gda_export_set_connection, 1);
 
-    rb_define_const(c, "FLAGS_TABLE_DATA", 
-                    INT2FIX(GDA_EXPORT_FLAGS_TABLE_DATA));
-
+    G_DEF_CONSTANTS(c, GDA_TYPE_EXPORT_FLAGS, "GDA_EXPORT_");
     G_DEF_SETTER(c, "connection");
 }
 

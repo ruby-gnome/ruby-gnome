@@ -221,17 +221,6 @@ void Init_gda_client(void) {
     rb_define_method(c, "notify_transaction_cancelled_event", 
                      rb_gda_client_notify_transaction_cancelled_event, 2);
 
-    rb_define_const(c, "EVENT_ERROR", 
-                    INT2FIX(GDA_CLIENT_EVENT_ERROR));
-    rb_define_const(c, "EVENT_CONNECTION_OPENED", 
-                    INT2FIX(GDA_CLIENT_EVENT_CONNECTION_OPENED));
-    rb_define_const(c, "EVENT_CONNECTION_CLOSED", 
-                    INT2FIX(GDA_CLIENT_EVENT_CONNECTION_CLOSED));
-    rb_define_const(c, "EVENT_TRANSACTION_STARTED", 
-                    INT2FIX(GDA_CLIENT_EVENT_TRANSACTION_STARTED));
-    rb_define_const(c, "EVENT_TRANSACTION_COMMITTED", 
-                    INT2FIX(GDA_CLIENT_EVENT_TRANSACTION_COMMITTED));
-    rb_define_const(c, "EVENT_TRANSACTION_CANCELLED", 
-                    INT2FIX(GDA_CLIENT_EVENT_TRANSACTION_CANCELLED));
+    G_DEF_CONSTANTS(c, GDA_TYPE_CLIENT_EVENT, "GDA_CLIENT_");
 }
 
