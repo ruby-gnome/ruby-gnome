@@ -1,4 +1,4 @@
-/* $Id: rbgnome.c,v 1.6 2002/07/29 15:50:00 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.7 2002/08/19 11:49:08 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -24,89 +24,88 @@ static VALUE
 get_gnome_type(gnobj)
      GtkObject* gnobj;
 {
-    VALUE klass;
+  VALUE klass;
 
-    if (0);
-    else if GTK_IS_CLOCK(gnobj) klass = gClock;
-    else if GTK_IS_DIAL(gnobj) klass = gDial;
-    else if GTK_IS_PIXMAP_MENU_ITEM(gnobj) klass = gPixmapMenuItem;
-    else if GNOME_IS_ABOUT(gnobj) klass = gnoAbout;
-    else if GNOME_IS_ANIMATOR(gnobj) klass = gnoAnimator;
-    else if GNOME_IS_APP(gnobj) klass = gnoApp;
-    else if GNOME_IS_APPBAR(gnobj) klass = gnoAppBar;
-    else if GNOME_IS_CALCULATOR(gnobj) klass = gnoCalculator;
-    else if GNOME_IS_CANVAS(gnobj) klass = gnoCanvas;
-    else if GNOME_IS_CANVAS_LINE(gnobj) klass = gnoCanvasLine;
-    else if GNOME_IS_CANVAS_POLYGON(gnobj) klass = gnoCanvasPolygon;
-    else if GNOME_IS_CANVAS_RECT(gnobj) klass = gnoCanvasRect;
-    else if GNOME_IS_CANVAS_ELLIPSE(gnobj) klass = gnoCanvasEllipse;
-    else if GNOME_IS_CANVAS_TEXT(gnobj) klass = gnoCanvasText;
-    else if GNOME_IS_CANVAS_IMAGE(gnobj) klass = gnoCanvasImage;
-    else if GNOME_IS_CANVAS_WIDGET(gnobj) klass = gnoCanvasWidget;
-    else if GNOME_IS_CANVAS_ITEM(gnobj) klass = gnoCanvasItem;
-    else if GNOME_IS_CANVAS_GROUP(gnobj) klass = gnoCanvasGroup;
-    else if GNOME_IS_CLIENT(gnobj) klass = gnoClient;
-    else if GNOME_IS_COLOR_PICKER(gnobj) klass = gnoColorPicker;
-    else if GNOME_IS_DATE_EDIT(gnobj) klass = gnoDateEdit;
-    else if GNOME_IS_DENTRY_EDIT(gnobj) klass = gnoDEntryEdit;
-    else if GNOME_IS_DIALOG(gnobj) klass = gnoDialog;
-    else if GNOME_IS_DOCK(gnobj) klass = gnoDock;
-    else if GNOME_IS_DOCK_BAND(gnobj) klass = gnoDockBand;
-    else if GNOME_IS_DOCK_ITEM(gnobj) klass = gnoDockItem;
-    else if GNOME_IS_DOCK_LAYOUT(gnobj) klass = gnoDockLayout;
-    else if GNOME_IS_ENTRY(gnobj) klass = gnoEntry;
-    else if GNOME_IS_FILE_ENTRY(gnobj) klass = gnoFileEntry;
-    else if GNOME_IS_FONT_PICKER(gnobj) klass = gnoFontPicker;
-    else if GNOME_IS_HREF(gnobj) klass = gnoHRef;
-    else if GNOME_IS_ICON_ENTRY(gnobj) klass = gnoIconEntry;
-    else if GNOME_IS_ICON_LIST(gnobj) klass = gnoIconList;
-    else if GNOME_IS_ICON_SELECTION(gnobj) klass = gnoIconEntry;
-    else if GNOME_IS_LESS(gnobj) klass = gnoLess;
-    else if GNOME_IS_MESSAGE_BOX(gnobj) klass = gnoMessageBox;
-    else if GNOME_IS_NUMBER_ENTRY(gnobj) klass = gnoNumberEntry;
-    else if GNOME_IS_PAPER_SELECTOR(gnobj) klass = gnoPaperSelector;
-    else if GNOME_IS_PIXMAP(gnobj) klass = gnoPixmap;
-    else if GNOME_IS_PIXMAP_ENTRY(gnobj) klass = gnoPixmapEntry;
-    else if GNOME_IS_PROPERTY_BOX(gnobj) klass = gnoPropertyBox;
-    else if GNOME_IS_PROC_BAR(gnobj) klass = gnoProcBar;
-    else if GNOME_IS_SCORES(gnobj) klass = gnoScores;
-    else if GNOME_IS_SPELL(gnobj) klass = gnoSpell;
-    else if GNOME_IS_STOCK(gnobj) klass = gnoStock;
-    else klass = get_gtk_type(gnobj);
+  if (0);
+  else if GTK_IS_CLOCK(gnobj) klass = gClock;
+  else if GTK_IS_DIAL(gnobj) klass = gDial;
+  else if GTK_IS_PIXMAP_MENU_ITEM(gnobj) klass = gPixmapMenuItem;
+  else if GNOME_IS_ABOUT(gnobj) klass = gnoAbout;
+  else if GNOME_IS_ANIMATOR(gnobj) klass = gnoAnimator;
+  else if GNOME_IS_APP(gnobj) klass = gnoApp;
+  else if GNOME_IS_APPBAR(gnobj) klass = gnoAppBar;
+  else if GNOME_IS_CALCULATOR(gnobj) klass = gnoCalculator;
+  else if GNOME_IS_CANVAS(gnobj) klass = gnoCanvas;
+  else if GNOME_IS_CANVAS_LINE(gnobj) klass = gnoCanvasLine;
+  else if GNOME_IS_CANVAS_POLYGON(gnobj) klass = gnoCanvasPolygon;
+  else if GNOME_IS_CANVAS_RECT(gnobj) klass = gnoCanvasRect;
+  else if GNOME_IS_CANVAS_ELLIPSE(gnobj) klass = gnoCanvasEllipse;
+  else if GNOME_IS_CANVAS_TEXT(gnobj) klass = gnoCanvasText;
+  else if GNOME_IS_CANVAS_IMAGE(gnobj) klass = gnoCanvasImage;
+  else if GNOME_IS_CANVAS_WIDGET(gnobj) klass = gnoCanvasWidget;
+  else if GNOME_IS_CANVAS_GROUP(gnobj) klass = gnoCanvasGroup;
+  else if GNOME_IS_CLIENT(gnobj) klass = gnoClient;
+  else if GNOME_IS_COLOR_PICKER(gnobj) klass = gnoColorPicker;
+  else if GNOME_IS_DATE_EDIT(gnobj) klass = gnoDateEdit;
+  else if GNOME_IS_DENTRY_EDIT(gnobj) klass = gnoDEntryEdit;
+  else if GNOME_IS_DIALOG(gnobj) klass = gnoDialog;
+  else if GNOME_IS_DOCK(gnobj) klass = gnoDock;
+  else if GNOME_IS_DOCK_BAND(gnobj) klass = gnoDockBand;
+  else if GNOME_IS_DOCK_ITEM(gnobj) klass = gnoDockItem;
+  else if GNOME_IS_DOCK_LAYOUT(gnobj) klass = gnoDockLayout;
+  else if GNOME_IS_ENTRY(gnobj) klass = gnoEntry;
+  else if GNOME_IS_FILE_ENTRY(gnobj) klass = gnoFileEntry;
+  else if GNOME_IS_FONT_PICKER(gnobj) klass = gnoFontPicker;
+  else if GNOME_IS_HREF(gnobj) klass = gnoHRef;
+  else if GNOME_IS_ICON_ENTRY(gnobj) klass = gnoIconEntry;
+  else if GNOME_IS_ICON_LIST(gnobj) klass = gnoIconList;
+  else if GNOME_IS_ICON_SELECTION(gnobj) klass = gnoIconEntry;
+  else if GNOME_IS_LESS(gnobj) klass = gnoLess;
+  else if GNOME_IS_MESSAGE_BOX(gnobj) klass = gnoMessageBox;
+  else if GNOME_IS_NUMBER_ENTRY(gnobj) klass = gnoNumberEntry;
+  else if GNOME_IS_PAPER_SELECTOR(gnobj) klass = gnoPaperSelector;
+  else if GNOME_IS_PIXMAP(gnobj) klass = gnoPixmap;
+  else if GNOME_IS_PIXMAP_ENTRY(gnobj) klass = gnoPixmapEntry;
+  else if GNOME_IS_PROPERTY_BOX(gnobj) klass = gnoPropertyBox;
+  else if GNOME_IS_PROC_BAR(gnobj) klass = gnoProcBar;
+  else if GNOME_IS_SCORES(gnobj) klass = gnoScores;
+  else if GNOME_IS_SPELL(gnobj) klass = gnoSpell;
+  else if GNOME_IS_STOCK(gnobj) klass = gnoStock;
+  else klass = get_gtk_type(gnobj);
 
-    return klass;
+  return klass;
 }
 
 VALUE
 make_gnobject_auto_type(gnobj)
-    GtkObject* gnobj;
+	 GtkObject* gnobj;
 {
-    return make_gobject(get_gnome_type(gnobj), gnobj);
+  return make_gobject(get_gnome_type(gnobj), gnobj);
 }
 
 VALUE
 get_value_from_gno_obj(gnobj)
-    GtkObject* gnobj;
+	 GtkObject* gnobj;
 {
-    VALUE ret = (VALUE)gtk_object_get_data(gnobj, RUBY_GTK_OBJ_KEY);
-    if (!ret)
-        ret = make_gnobject_auto_type(gnobj);
-    return ret;
+  VALUE ret = (VALUE)gtk_object_get_data(gnobj, RUBY_GTK_OBJ_KEY);
+  if (!ret)
+	ret = make_gnobject_auto_type(gnobj);
+  return ret;
 }
 
 static VALUE
 gnome_s_is_program_in_path(self, program)
-    VALUE self, program;
+	 VALUE self, program;
 {
-    VALUE res;
-    char* path = gnome_is_program_in_path(STR2CSTR(program));
-    if (path) {
-        res = rb_str_new2(path);
-        g_free(path);
-    } else {
-        res = Qnil;
-    }
-    return res;
+  VALUE res;
+  char* path = gnome_is_program_in_path(STR2CSTR(program));
+  if (path) {
+	res = rb_str_new2(path);
+	g_free(path);
+  } else {
+	res = Qnil;
+  }
+  return res;
 }
 
 static VALUE
@@ -241,6 +240,16 @@ gnome_s_init(in_argc, in_argv, self)
   rb_hash_aset(hash, rb_str_new2(""), ary);
   
   poptFreeContext(ctx);
+
+  rbgtk_register_r2b_func(GTK_TYPE_GNOME_CANVAS_POINTS,
+						  (RValueToBValueFunc)get_gnome_canvas_points);
+  rbgtk_register_b2r_func(GTK_TYPE_GNOME_CANVAS_POINTS,
+						  (BValueToRValueFunc)make_gnome_canvas_points);
+
+#ifdef HAVE_GDKIMLIB
+  rbgtk_register_r2b_func(GTK_TYPE_GDK_IMLIB_IMAGE,
+						  (RValueToBValueFunc)get_gdkimlib_image);
+#endif
   return hash;
 }
 
@@ -249,70 +258,70 @@ VALUE mGnome;
 void
 Init_gnome()
 {
-    mGnome = rb_define_module("Gnome");
+  mGnome = rb_define_module("Gnome");
 
-    rb_define_module_function(mGnome, "init", gnome_s_init, -1);
+  rb_define_module_function(mGnome, "init", gnome_s_init, -1);
 
-    rb_define_module_function(mGnome, "is_program_in_path",
-                              gnome_s_is_program_in_path, 1);
+  rb_define_module_function(mGnome, "is_program_in_path",
+							gnome_s_is_program_in_path, 1);
 
-	/* popt */
-    rb_define_const(mGnome, "POPT_ARG_NONE", INT2FIX(POPT_ARG_NONE));
-    rb_define_const(mGnome, "POPT_ARG_STRING", INT2FIX(POPT_ARG_STRING));
-    rb_define_const(mGnome, "POPT_ARG_INT",	INT2FIX(POPT_ARG_INT));
-	/* POPT_ARGS is for Ruby/GNOME only */
-    rb_define_const(mGnome, "POPT_ARGS", rb_str_new2(""));
+  /* popt */
+  rb_define_const(mGnome, "POPT_ARG_NONE", INT2FIX(POPT_ARG_NONE));
+  rb_define_const(mGnome, "POPT_ARG_STRING", INT2FIX(POPT_ARG_STRING));
+  rb_define_const(mGnome, "POPT_ARG_INT",	INT2FIX(POPT_ARG_INT));
+  /* POPT_ARGS is for Ruby/GNOME only */
+  rb_define_const(mGnome, "POPT_ARGS", rb_str_new2(""));
 
-    /* GnomePreferencesType */
-    rb_define_const(mGnome, "REFERENCES_NEVER",
-					INT2FIX(GNOME_PREFERENCES_NEVER));
-    rb_define_const(mGnome, "REFERENCES_USER",
-					INT2FIX(GNOME_PREFERENCES_USER));
-    rb_define_const(mGnome, "REFERENCES_ALWAYS",
-					INT2FIX(GNOME_PREFERENCES_ALWAYS));
+  /* GnomePreferencesType */
+  rb_define_const(mGnome, "REFERENCES_NEVER",
+				  INT2FIX(GNOME_PREFERENCES_NEVER));
+  rb_define_const(mGnome, "REFERENCES_USER",
+				  INT2FIX(GNOME_PREFERENCES_USER));
+  rb_define_const(mGnome, "REFERENCES_ALWAYS",
+				  INT2FIX(GNOME_PREFERENCES_ALWAYS));
 
-    Init_gtk_dial();
-    Init_gtk_clock();
-    Init_gtk_pixmap_menu_item();
+  Init_gtk_dial();
+  Init_gtk_clock();
+  Init_gtk_pixmap_menu_item();
 
-    Init_gnome_animator();
-    Init_gnome_app();
-    Init_gnome_appbar();
-    Init_gnome_app_helper();
-    Init_gnome_calculator();
-    Init_gnome_canvas();
-    Init_gnome_canvas_item();
-    Init_gnome_canvas_util();
-    Init_gnome_client();
-    Init_gnome_color_picker();
-    Init_gnome_dateedit();
-    Init_gnome_dentry_edit();
-    Init_gnome_desktop_entry();
-    Init_gnome_dialog();
-    Init_gnome_dock();
-    Init_gnome_dock_band();
-    Init_gnome_dock_item();
-    Init_gnome_dock_layout();
-    Init_gnome_entry();
-    Init_gnome_file_entry();
-    Init_gnome_font_picker();
-    Init_gnome_href();
-    Init_gnome_icon_entry();
-    Init_gnome_icon_selection();
-    Init_gnome_less();
-    Init_gnome_messagebox();
-    Init_gnome_number_entry();
-    Init_gnome_paper_selector();
-    Init_gnome_pixmap();
-    Init_gnome_pixmap_entry();
-    Init_gnome_proc_bar();
-    Init_gnome_scores();
-    Init_gnome_spell();
-    Init_gnome_stock();
+  Init_gnome_animator();
+  Init_gnome_app();
+  Init_gnome_appbar();
+  Init_gnome_app_helper();
+  Init_gnome_calculator();
+  Init_gnome_canvas();
+  Init_gnome_canvas_item();
+  Init_gnome_canvas_util();
+  Init_gnome_client();
+  Init_gnome_color_picker();
+  Init_gnome_dateedit();
+  Init_gnome_dentry_edit();
+  Init_gnome_desktop_entry();
+  Init_gnome_dialog();
+  Init_gnome_dock();
+  Init_gnome_dock_band();
+  Init_gnome_dock_item();
+  Init_gnome_dock_layout();
+  Init_gnome_entry();
+  Init_gnome_file_entry();
+  Init_gnome_font_picker();
+  Init_gnome_href();
+  Init_gnome_icon_entry();
+  Init_gnome_icon_selection();
+  Init_gnome_less();
+  Init_gnome_messagebox();
+  Init_gnome_number_entry();
+  Init_gnome_paper_selector();
+  Init_gnome_pixmap();
+  Init_gnome_pixmap_entry();
+  Init_gnome_proc_bar();
+  Init_gnome_scores();
+  Init_gnome_spell();
+  Init_gnome_stock();
 
-    Init_gnome_config();
-    Init_gnome_i18n();
-    Init_gnome_uidefs();
-    Init_gnome_url();
-    Init_gnome_util();
+  Init_gnome_config();
+  Init_gnome_i18n();
+  Init_gnome_uidefs();
+  Init_gnome_url();
+  Init_gnome_util();
 }

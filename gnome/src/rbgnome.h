@@ -79,6 +79,11 @@ VALUE get_value_from_gno_obj(GtkObject*);
 GnomeDesktopEntry* get_dentry(VALUE);
 VALUE make_dentry(GnomeDesktopEntry*);
 
+GnomeCanvasPoints* get_gnome_canvas_points(VALUE);
+VALUE make_gnome_canvas_points(GnomeCanvasPoints*);
+
+GdkImlibImage *get_gdkimlib_image(VALUE);
+
 void rbgnome_register_citem_type(VALUE, GtkType);
 
 void Init_gtk_dial();

@@ -1,3 +1,11 @@
+2002-08-19  KUBO Takehiro <kubo@jiubao.org>
+
+	* src/rbgnome-canvas-item.c: Remove set_gtkarg(). Modify citem_set().
+	Add get_gdkimlib_image,citem_get(),Init_gnome_canvas_item().
+	* src/rbgnome-canvas-util.c: Add get_gnome_canvas_points(), 
+	make_gnome_canvas_points()
+	* src/rbgnome.[ch]: Support GtkArg system.
+
 2002-08-18  KUBO Takehiro <kubo@jiubao.org>
             
    * src/rbgnome-canvas-item.c: BugFix Gnome::CanvasItem#grab, #ungrab.

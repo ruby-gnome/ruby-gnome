@@ -2,6 +2,29 @@
 extern VALUE cImlibImage;
 VALUE gnoCanvasPoints;
 
+GnomeCanvasPoints*
+get_gnome_canvas_points(obj)
+    VALUE obj;
+{
+    GnomeCanvasPoints *gcp;
+    if (!rb_obj_is_instance_of(obj, gnoCanvasPoints)) {
+	rb_raise(rb_eTypeError, "not a GnomeCanvasPoints");
+    }
+    Data_Get_Struct(obj, GnomeCanvasPoints, gcp);
+    return gcp;
+}
+
+/* This function is for newly created GnomeCanvasPoints pointer.
+ * If it was already wrapped by other ruby object, you must call
+ * gnome_canvas_points_ref in advance.
+ */
+VALUE
+make_gnome_canvas_points(gcp)
+    GnomeCanvasPoints* gcp;
+{
+    return Data_Wrap_Struct(gnoCanvasPoints, 0, gnome_canvas_points_free, gcp);
+}
+
 static VALUE
 points_s_new(klass, num)
     VALUE klass, num;

@@ -1,4 +1,4 @@
-/* $Id: rbgnome-canvas-item.c,v 1.5 2002/08/17 17:30:34 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.6 2002/08/19 11:49:08 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -31,98 +31,19 @@ VALUE gnoCanvasText;
 VALUE gnoCanvasImage;
 VALUE gnoCanvasWidget;
 
-static void
-set_gtkarg(type, name, value, arg)
-    GtkType type;
-    char *name;
-    VALUE value;
-    GtkArg *arg;
-{
-    GtkArgInfo *info;
-    char *error;
-    VALUE exc;
-
-    error = gtk_object_arg_get_info(type, name, &info);
-    if (error != NULL) {
-	exc = rb_exc_new2(rb_eArgError, error);
-	g_free(error);
-	rb_exc_raise(exc);
-    }
-    arg->name = name;
-    arg->type = info->type;
-    switch (arg->type) {
-    case GTK_TYPE_UINT:
-	GTK_VALUE_UINT(*arg) = NUM2UINT(value);
-	return;
-    case GTK_TYPE_DOUBLE:
-	GTK_VALUE_DOUBLE(*arg) = NUM2DBL(value);
-	return;
-    case GTK_TYPE_STRING:
-	if (NIL_P(value)) {
-	    GTK_VALUE_STRING(*arg) = NULL;
-	} else {
-	    Check_Type(value, T_STRING);
-	    GTK_VALUE_STRING(*arg) = STR2CSTR(value);
-	}
-	return;
-    case GTK_TYPE_BOOL:
-	switch (value) {
-	case Qtrue:
-	    GTK_VALUE_BOOL(*arg) = TRUE;
-	    break;
-	case Qfalse:
-	    GTK_VALUE_BOOL(*arg) = FALSE;
-	    break;
-	default:
-	    rb_raise(rb_eTypeError, "wrong argument type for %s (except a boolean)", arg->name);
-	}
-	return;
-    case GTK_TYPE_BOXED:
-	rb_notimplement(); /* FIXME */
-	return;
-    case GTK_TYPE_OBJECT:
-	GTK_VALUE_OBJECT (*arg) = (gpointer)get_gobject(value);
-	return;
-    }
-    if (arg->type == GTK_TYPE_JUSTIFICATION) {
-	GTK_VALUE_ENUM(*arg) = NUM2UINT(value);
-    } else if (arg->type == GTK_TYPE_ANCHOR_TYPE) {
-	GTK_VALUE_ENUM(*arg) = NUM2UINT(value);
-    } else if (arg->type == GTK_TYPE_GDK_CAP_STYLE) {
-	GTK_VALUE_ENUM(*arg) = NUM2UINT(value);
-    } else if (arg->type == GTK_TYPE_GDK_JOIN_STYLE) {
-	GTK_VALUE_ENUM(*arg) = NUM2UINT(value);
-    } else if (arg->type == GTK_TYPE_GDK_LINE_STYLE) {
-	GTK_VALUE_ENUM(*arg) = NUM2UINT(value);
-    } else if (arg->type == GTK_TYPE_GDK_COLOR) {
-	GTK_VALUE_BOXED(*arg) = get_gdkcolor(value);
-    } else if (arg->type == GTK_TYPE_GDK_WINDOW) {
-	GTK_VALUE_BOXED(*arg) = get_gdkbitmap(value);
-    } else if (arg->type == GTK_TYPE_GDK_FONT) {
-	GTK_VALUE_BOXED(*arg) = get_gdkfont(value);
-    } else if (arg->type == GTK_TYPE_GNOME_CANVAS_POINTS) {
-	GnomeCanvasPoints *gcp;
-
-	if (!rb_obj_is_kind_of(value, gnoCanvasPoints)) {
-	    rb_raise(rb_eTypeError, "not a GnomeCanvasPoints");
-	}
-	Data_Get_Struct(value, GnomeCanvasPoints, gcp);
-	GTK_VALUE_POINTER(*arg) = gcp;
 #ifdef HAVE_GDKIMLIB
-    } else if (arg->type == GTK_TYPE_GDK_IMLIB_IMAGE) {
-	GdkImlibImage *im;
+GdkImlibImage *get_gdkimlib_image(obj)
+    VALUE obj;
+{
+    GdkImlibImage *im;
 
-	if (rb_obj_is_kind_of(value, cImlibImage) != Qtrue) {
-	    rb_raise(rb_eTypeError, "not a GdkImlibImage");
-	}
-	Data_Get_Struct(value, GdkImlibImage, im);
-	GTK_VALUE_POINTER(*arg) = im;
-#endif
-    } else {
-	rb_raise(rb_eTypeError, "wrong argument name %s", arg->name);
+    if (!rb_obj_is_kind_of(obj, cImlibImage)) {
+	rb_raise(rb_eTypeError, "not a GdkImlibImage");
     }
-    
+    Data_Get_Struct(obj, GdkImlibImage, im);
+    return im;
 }
+#endif
 
 static VALUE
 citem_set(argc, argv, self)
@@ -130,43 +51,59 @@ citem_set(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    GnomeCanvasItem* ci;
+    GnomeCanvasItem *ci = GNOME_CANVAS_ITEM(get_gobject(self));
+    VALUE ary, key, val;
     GtkArg *arg;
-    VALUE *ary; /* push temporary string to stack to prevent freed. */
-    GtkType type;
-    char *type_name;
-    char *arg_name_prefix;
-    int i, narg;
+    int i;
 
-    if (argc & 1) {
-	rb_raise(rb_eArgError, "wrong # of argument. The pairs of 'name' and 'value' are borken.");
+    if (argc > 0 && TYPE(argv[0]) == T_HASH) {
+	if (argc != 1)
+	    rb_raise(rb_eArgError, "wrong # of argument.");
+	ary = rb_funcall(argv[0], rb_intern("to_a"), 0, NULL);
+	argc = RARRAY(ary)->len;
+	arg = ALLOCA_N(GtkArg, argc);
+	for (i = 0;i < argc;i++) {
+	    key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+	    val = RARRAY(RARRAY(ary)->ptr[i])->ptr[1];
+	    rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
+	    rbgtk_arg_set(&(arg[i]), val);
+	}
+    } else {
+	if (argc & 1) {
+	    rb_raise(rb_eArgError, "wrong # of argument. The pairs of 'name' and 'value' are borken.");
+	}
+	argc /= 2;
+	arg = ALLOCA_N(GtkArg, argc);
+	for (i = 0;i < argc; i++) {
+	    key = argv[i * 2];
+	    val = argv[i * 2 + 1];
+	    rbgtk_arg_init(&(arg[i]), GTK_OBJECT_TYPE(ci), STR2CSTR(key));
+	    rbgtk_arg_set(&(arg[i]), val);
+	}
     }
-    ci = GNOME_CANVAS_ITEM(get_gobject(self));
-
-    /* setup arg_name_prefix */
-    type = GTK_OBJECT_TYPE(ci);
-    if (gtk_type_parent(type) != GNOME_TYPE_CANVAS_ITEM) {
-	type = gtk_type_parent(type);
-    }
-    type_name = gtk_type_name(type);
-    arg_name_prefix = ALLOCA_N(char, strlen(type_name) + 3);
-    strcpy(arg_name_prefix, type_name);
-    strcat(arg_name_prefix, "::");
-
-    narg = argc / 2;
-    arg = ALLOCA_N(GtkArg, narg);
-    ary = ALLOCA_N(VALUE, narg);
-
-    for (i = 0;i < narg; i++) {
-	VALUE arg_name;
-	Check_Type(argv[i * 2], T_STRING);
-	arg_name = rb_str_new2(arg_name_prefix);
-	arg_name = rb_str_append(arg_name, argv[i * 2]);
-	ary[i] = arg_name;
-	set_gtkarg(GTK_OBJECT_TYPE(ci), STR2CSTR(arg_name), argv[i * 2 + 1], &(arg[i]));
-    }
-    gnome_canvas_item_setv(ci, narg, arg);
+    gnome_canvas_item_setv(ci, argc, arg);
     return Qnil;
+}
+
+static VALUE
+citem_get(self, name)
+    VALUE self, name;
+{
+    GtkObject *gobj;
+    GtkArg arg;
+    VALUE obj;
+
+    gobj = get_gobject(self);
+    rbgtk_arg_init(&arg, GTK_OBJECT_TYPE(gobj), STR2CSTR(name));
+    gtk_object_getv(gobj, 1, &arg);
+    if (arg.type == GTK_TYPE_INVALID) {
+	rb_raise(rb_eTypeError, "wrong argument name %s", arg.name);
+    }
+    obj = rbgtk_arg_get(&arg);
+    if (arg.type == GTK_TYPE_STRING) {
+	g_free(GTK_VALUE_STRING(arg));
+    }
+    return obj;
 }
 
 static VALUE
@@ -388,6 +325,8 @@ Init_gnome_canvas_item()
     gnoCanvasItem = rb_define_class_under(mGnome, "CanvasItem", gObject);
     rb_define_method(gnoCanvasItem, "set",
                      citem_set, -1);
+    rb_define_method(gnoCanvasItem, "get",
+                     citem_get, 1);
     rb_define_method(gnoCanvasItem, "move",
                      citem_move, 2);
     rb_define_method(gnoCanvasItem, "affine_relative",
