@@ -1,3 +1,9 @@
+2003-07-22  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: add CBOOL2RVAL, RVAL2CBOOL.
+
+	* src/lib/mkmf-gnome2.rb: Change include orders.
+
 2003-07-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_enums.c (rbgobj_flags_add_constants): use UINT2NUM()

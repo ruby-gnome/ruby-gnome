@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: sakai $
-  $Date: 2003/03/06 18:10:39 $
+  $Author: mutoh $
+  $Date: 2003/07/22 15:06:32 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -40,6 +40,9 @@ extern "C" {
 
 #define RVAL2CSTR(v) (StringValuePtr(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
+
+#define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
+#define RVAL2CBOOL(b)   (RTEST(b))
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
 #  ifdef RUBY_GLIB2_COMPILATION

@@ -43,8 +43,6 @@ module PKGConfig
   module_function :have_package
 end
 
-$CFLAGS += ' -I$(sitearchdir)'
-
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)
@@ -127,6 +125,7 @@ end
 
 
 def create_top_makefile(sub_dirs = ["src"])
+  $CFLAGS += ' -I$(sitearchdir)'
   mfile = File.open("Makefile", "w")
 =begin
   if /mswin32/ =~ PLATFORM
