@@ -1,3 +1,8 @@
+2004-02-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Add information of Ruby/ATK.
+	* AUTHORS: ditto.
+
 2004-02-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Correct ruby path.

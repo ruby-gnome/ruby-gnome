@@ -7,6 +7,7 @@ Release packages
 ----------------
    ruby-gtk2
     - Ruby/GLib2        - GLib 2.0.x or later
+    - Ruby/ATK          - ATK 1.4.x or later
     - Ruby/Pango        - Pango 1.1.x or later
     - Ruby/GdkPixbuf2   - GTK+ 2.0.x or later
     - Ruby/GTK2         - GTK+ 2.0.x or later
@@ -62,9 +63,10 @@ Dependencies
 
       Ruby/GLib        none.
       Ruby/Libart      none.
+      Ruby/ATK         depends on Ruby/GLib.
       Ruby/Pango       depends on Ruby/GLib.
       Ruby/GdkPixbuf   depends on Ruby/GLib.
-      Ruby/GTK         depends on Ruby/GLib, Ruby/GdkPixbuf, Ruby/Pango.
+      Ruby/GTK         depends on Ruby/GLib, Ruby/ATK, Ruby/Pango, Ruby/GdkPixbuf
       Ruby/GnomeCanvas depends on Ruby/GTK, Ruby/Libart.
       Ruby/GNOME       depends on Ruby/GnomeCanvas.
       Ruby/Libglade    depends on Ruby/GTK, Ruby/GNOME(optional).

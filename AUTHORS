@@ -20,7 +20,7 @@ KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <lrz@gnome.org>
-     Ruby/GStreamer(M), Ruby/Libgda(M), French Website(M), Website, Tutorial.
+     Ruby/GStreamer(M), Ruby/Libgda(M), French Website(M), Website, Tutorials.
 
 Martin Povolný <xpovolny@fi.muni.cz>
      Ruby/GtkHtml2(M). Ruby/GTK, 
@@ -30,8 +30,9 @@ Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
      of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>
-     Chief maintainer. Ruby/GTK(M), Ruby/GdkPixbuf(M), Ruby/Libglade(M), 
-     Ruby/Pango(M), rbbr(M), Website(M), Others. Project management.
+     Chief maintainer. Ruby/ATK(M), Ruby/GTK(M), Ruby/GdkPixbuf(M), 
+     Ruby/Libglade(M), Ruby/Pango(M), rbbr(M), Website(M), Others. 
+     Project management.
 
 Matthew Berg <galt@gothpoodle.com>
    Ruby/GTK TreeView Tutorial(M), Website, Ruby/GTK.
