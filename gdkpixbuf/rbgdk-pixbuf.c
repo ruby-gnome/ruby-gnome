@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: sakai $
-  $Date: 2003/08/21 07:43:58 $
+  $Author: mutoh $
+  $Date: 2003/08/31 17:43:15 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -19,7 +19,7 @@ static VALUE
 get_colorspace(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_colorspace(_SELF(self)));
+    return GENUM2RVAL(gdk_pixbuf_get_colorspace(_SELF(self)), GDK_TYPE_COLORSPACE);
 }
 
 static VALUE
@@ -94,7 +94,7 @@ initialize(argc, argv, self)
                  &arg3, &arg4, &arg5);
 
     if (argc == 5){
-        buf = gdk_pixbuf_new(FIX2INT(arg1),
+        buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
                              RTEST(arg2), NUM2INT(arg3),
                              NUM2INT(arg4), NUM2INT(arg5));
     } else {
@@ -194,7 +194,7 @@ scale_simple(argc, argv, self)
                  &interp_type);
 
     if (!NIL_P(interp_type))
-        type = FIX2INT(interp_type);
+        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
     
     return GOBJ2RVAL(gdk_pixbuf_scale_simple(_SELF(self),
                                              NUM2INT(dest_width),
@@ -218,7 +218,7 @@ scale(argc, argv, self)
                  &scale_x, &scale_y, &interp_type);
 
     if (!NIL_P(interp_type))
-        type = FIX2INT(interp_type);
+        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
 
     gdk_pixbuf_scale(_SELF(dest), _SELF(self),
                      NUM2INT(dest_x), NUM2INT(dest_y), 
@@ -237,7 +237,7 @@ composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
     if (!NIL_P(interp_type))
-        type = FIX2INT(interp_type);
+        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
 
     return GOBJ2RVAL(gdk_pixbuf_composite_color_simple(
                          _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
@@ -264,7 +264,7 @@ composite(argc, argv, self)
     switch (argc) {
       case 11:
 	if (!NIL_P(args[9]))
-	    interp_type = FIX2INT(args[9]);
+	    interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
 
         gdk_pixbuf_composite(_SELF(args[0]), _SELF(self), 
                              NUM2INT(args[1]), NUM2INT(args[2]),
@@ -276,7 +276,7 @@ composite(argc, argv, self)
         break;
       case 16:
 	if (!NIL_P(args[9]))
-	    interp_type = FIX2INT(args[9]);
+	    interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
 
         gdk_pixbuf_composite_color(_SELF(args[0]), _SELF(self),
                                    NUM2INT(args[1]), NUM2INT(args[2]),
@@ -366,6 +366,8 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
 
     /* GdkPixbufError(not yet) */
+    G_DEF_CLASS(GDK_TYPE_PIXBUF_ERROR, "Error", gdkPixbuf);
+    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ERROR, "GDK_PIXBUF_");
 
     /* GdkColorspace */
     G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", gdkPixbuf);

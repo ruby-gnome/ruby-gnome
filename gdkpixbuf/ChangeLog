@@ -1,6 +1,10 @@
+2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c:  Apply enum/flags.
+
 2003-08-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Exit with 1 when the package is not found.
+	* extconf.rb: Exit with 1 when the package is not found.
                                                                                 
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
