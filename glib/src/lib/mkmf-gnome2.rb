@@ -7,40 +7,54 @@ module PKGConfig
     @@cmd += ' --msvc-syntax'
   end
 
-  def exists?(pkg)
+  module_function
+  def exist?(pkg)
     system("#{@@cmd} --exists #{pkg}")
   end
-  module_function :exists?
 
   def libs(pkg)
     `#{@@cmd} --libs #{pkg}`.chomp
   end
-  module_function :libs
 
   def libs_only_L(pkg)
     `#{@@cmd} --libs-only-L #{pkg}`.chomp
   end
-  module_function :libs_only_L
 
   def libs_only_l(pkg)
     `#{@@cmd} --libs-only-l #{pkg}`.chomp
   end
-  module_function :libs_only_l
 
   def cflags(pkg)
     `#{@@cmd} --cflags #{pkg}`.chomp
   end
-  module_function :cflags
 
   def variable(pkg, var)
     `#{@@cmd} --variable=#{var} #{pkg}`.chomp
   end
-  module_function :variable
 
-  def have_package(pkg)
-    STDOUT.print("checking for #{pkg}... ")
+  def modversion(pkg)
+    `#{@@cmd} --modversion #{pkg}`.chomp
+  end
+
+  def check_version?(pkg, major = 0, minor = 0, micro = 0)
+    return false unless exist?(pkg)
+    ver = modversion(pkg).split(".").collect{|item| item.to_i}
+    (0..2).each {|i| ver[i] = 0 unless ver[i]}
+
+    (ver[0] > major ||
+     (ver[0] == major && ver[1] > minor) ||
+     (ver[0] == major && ver[1] == minor &&
+      ver[2] >= micro))
+  end
+
+  def have_package(pkg, major = 0, minor = 0, micro = 0)
+    if major > 0
+      STDOUT.print("checking for #{pkg} version (>= #{major}.#{minor}.#{micro})... ")
+    else
+      STDOUT.print("checking for #{pkg}... ")
+    end
     STDOUT.flush
-    if exists? pkg
+    if check_version?(pkg, major, minor, micro)
       STDOUT.print "yes\n"
       libs = libs_only_l(pkg)
       ldflags = libs(pkg)
@@ -54,7 +68,6 @@ module PKGConfig
       false
     end
   end
-  module_function :have_package
 end
 
 unless defined? macro_defined?
