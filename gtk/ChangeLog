@@ -1,5 +1,11 @@
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkselectiondata.c: Removed Gtk::SelectionData.remove_all.
+	Use Gtk::Selection.remove_all instead.
+	* src/rbgtktargetlist.c: Added. 
+	* src/rbgtkselection.c: Add Gtk::Selection.add_targets.
+	* src/rbgtkconst.c: Update version information. 
+	* src/rbgtkmain.c: Add Gtk.check_version. 
 	* src/rbgtkaccessible.c: Added.
 	* src/rbgtkstyle.c: Add Gtk::Style#text_aa, #set_text_aa, #font_desc, 
 	#set_font_desc, #xthickness, #set_xthickness, #ythickness, #set_ythickness,

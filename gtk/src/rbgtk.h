@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/05/08 16:45:59 $
+  $Date: 2003/05/24 11:32:12 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -39,7 +39,7 @@
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
-
+#define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
 #  ifdef RUBY_GTK2_COMPILATION
@@ -75,6 +75,7 @@ extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_allocation_get_type();
 extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
+extern GType gtk_target_list_get_type();
 
 /*
  * Gtk::TreeIter callback

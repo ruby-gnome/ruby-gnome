@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2003/01/30 16:16:59 $
+  $Date: 2003/05/24 11:32:12 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -71,7 +71,8 @@ static VALUE
 gtkselectiondata_selection(self)
     VALUE self;
 {
-    return BOXED2RVAL(_SELF(self)->selection, GDK_TYPE_ATOM);
+    GdkAtom selection = _SELF(self)->selection;
+    return BOXED2RVAL(&selection, GDK_TYPE_ATOM);
 }
 
 static VALUE
@@ -137,7 +138,7 @@ gtkselectiondata_set(argc, argv, self)
 
     return self;
 }
-
+    
 static VALUE
 gtkselectiondata_set_text(self, str)
     VALUE self, str;
@@ -151,28 +152,35 @@ static VALUE
 gtkselectiondata_get_text(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_selection_data_get_text(_SELF(self)));
+    gchar* text = gtk_selection_data_get_text(_SELF(self));
+    return text ? CSTR2RVAL(text) : Qnil;
 }
 
-/*
-gboolean    gtk_selection_data_get_targets  (GtkSelectionData *selection_data,
-                                             GdkAtom **targets,
-                                             gint *n_atoms);
-*/
+static VALUE
+gtkselectiondata_get_targets(self)
+    VALUE self;
+{
+    GdkAtom* targets;
+    gint n_atoms;
+    VALUE result = Qnil;
+    gboolean ret = gtk_selection_data_get_targets(_SELF(self),
+                                                  &targets, &n_atoms);
+    if (ret) {
+        int i;
+        result = rb_ary_new2(n_atoms);
+        for (i = 0; i < n_atoms; i++){
+            rb_ary_push(result, BOXED2RVAL(targets, GDK_TYPE_ATOM));
+            targets++;
+        }
+    }
+    return result;
+}
 
 static VALUE
 gtkselectiondata_targets_include_text(self)
     VALUE self;
 {
     return gtk_selection_data_targets_include_text(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-gtkselectiondata_s_remove_all(self, widget)
-    VALUE self, widget;
-{
-    gtk_selection_remove_all(GTK_WIDGET(RVAL2GOBJ(widget)));
-    return self;
 }
 
 void
@@ -196,8 +204,8 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "set", gtkselectiondata_set, -1);
     rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);
     rb_define_method(gSelectionData, "text", gtkselectiondata_get_text, 0);
+    rb_define_method(gSelectionData, "targets", gtkselectiondata_get_targets, 0);
     rb_define_method(gSelectionData, "targets_include_text?", gtkselectiondata_targets_include_text, 0);
-    rb_define_singleton_method(gSelectionData, "remove_all", gtkselectiondata_s_remove_all, 1);
 
     G_DEF_SETTERS(gSelectionData);
 } 

@@ -4,7 +4,7 @@
   rbgtkselection.c -
 
   $Author: mutoh $
-  $Date: 2003/01/25 18:02:22 $
+  $Date: 2003/05/24 11:32:12 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -36,25 +36,31 @@ gtkdrag_selection_add_target(self, widget, selection, target, info)
     return self;
 }
 
-/*
 static VALUE
 gtkdrag_selection_add_targets(self, widget, selection, targets)
     VALUE self, widget, selection, targets;
 {
     gtk_selection_add_targets(RVAL2WIDGET(widget), 
                               RVAL2ATOM(selection),
-                              get_target_entry(targets), RARRAY(targets)->len);
+                              rbgtk_get_target_entry(targets), RARRAY(targets)->len);
     return self;
 }
-*/
+
+static VALUE
+gtkdrag_selection_clear_targets(self, widget, selection)
+    VALUE self, widget, selection;
+{
+    gtk_selection_clear_targets(RVAL2WIDGET(widget), RVAL2ATOM(selection));
+    return self;
+}
 
 static VALUE
 gtkdrag_selection_convert(self, widget, selection, target, time)
     VALUE self, widget, selection, target, time;
 {
-    int ret = gtk_selection_convert(RVAL2WIDGET(widget), 
-                                    RVAL2ATOM(selection), RVAL2ATOM(target),
-                                    NUM2INT(time));
+    gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
+                                         RVAL2ATOM(selection), RVAL2ATOM(target),
+                                         NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
 
@@ -71,11 +77,10 @@ Init_gtk_selection()
 {
     VALUE mSelection =  rb_define_module_under(mGtk, "Selection");
 
-    rb_define_method(mSelection, "owner_set", gtkdrag_selection_owner_set, 2);
-    rb_define_method(mSelection, "add_target", gtkdrag_selection_add_target, 3);
-/*
-    rb_define_method(mSelection, "add_targets", gtkdrag_selection_add_targets, 2);
-*/
-    rb_define_method(mSelection, "convert", gtkdrag_selection_convert, 3);
-    rb_define_method(mSelection, "remove_all", gtkdrag_selection_remove_all, 0);
+    rb_define_module_function(mSelection, "owner_set", gtkdrag_selection_owner_set, 3);
+    rb_define_module_function (mSelection, "add_target", gtkdrag_selection_add_target, 4);
+    rb_define_module_function(mSelection, "add_targets", gtkdrag_selection_add_targets, 3);
+    rb_define_module_function(mSelection, "clear_targets", gtkdrag_selection_clear_targets, 2);
+    rb_define_module_function(mSelection, "convert", gtkdrag_selection_convert, 4);
+    rb_define_module_function(mSelection, "remove_all", gtkdrag_selection_remove_all, 1);
 }

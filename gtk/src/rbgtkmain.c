@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2003/04/20 16:56:36 $
+  $Date: 2003/05/24 11:32:12 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -219,6 +219,17 @@ rbgtk_m_grab_remove(self, widget)
     return Qnil;
 }
 
+/* From Version Information */
+static VALUE
+rbgtk_m_check_version(self, major, minor, micro)
+    VALUE self, major, minor, micro;
+{
+    gchar * ret = NULL;
+    ret = gtk_check_version(FIX2INT(major),
+                            FIX2INT(minor), FIX2INT(micro));
+    return ret ? CSTR2RVAL(ret) : Qnil;
+}
+
 void 
 Init_gtk_main()
 {
@@ -237,4 +248,6 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "current_event", gtk_m_get_current_event, 0);
     rb_define_module_function(mGtk, "grab_add", rbgtk_m_grab_add, 1);
     rb_define_module_function(mGtk, "grab_remove", rbgtk_m_grab_remove, 1);
+    rb_define_module_function(mGtk, "check_version", rbgtk_m_check_version, 3);
+ 
 }
