@@ -9,7 +9,7 @@ require 'mkmf-gnome2'
 # detect configurations
 #
 
-PKGConfig.have_package('gtksourceview-1.0') or exit
+PKGConfig.have_package('gtksourceview-1.0') or exit 1
 check_win32
 
 top = File.expand_path(File.dirname(__FILE__) + '/..')

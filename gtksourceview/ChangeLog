@@ -1,3 +1,7 @@
+2004-10-18  Vincent Isambart  <isambart@netcourrier.com>
+
+	* extconf.rb: Exit with error code 1 after failure.
+
 2004-08-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtksourceiter.c: Fix a warning to define 
