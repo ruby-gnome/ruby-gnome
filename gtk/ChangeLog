@@ -1,9 +1,14 @@
-2003-05-01  Masao Mutoh  <mutoh@highway.ne.jp>
+2003-05-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktable.c: Rename Gtk::Table#set_row_spacing, #row_spacing=, #row_spacing,
+	#set_column_spacing, #column_spacing=, #column_spacing #default_col_spacing to 
+	Gtk::Table#set_row_spacings, #row_spacings=, #row_spacings, #set_column_spacings, 
+	#column_spacings=, #column_spacings, default_column_spacing
+	Add Gtk::Tabel#set_row_spacing(row), #set_column_spacing(col).
 	* src/rbgtkprogressbar.c: Remove methods for deprecated properties.
 	* src/rbgtkcontainer.c: Add Gtk::Container.child_property, .child_properties, 
-	.child_install_property, Gtk::Container#child_type, 
-	Gtk::Container#child_get_property, Gtk::Container#child_set_property.
+	Gtk::Container#child_type, Gtk::Container#child_get_property, 
+	Gtk::Container#child_set_property.
 	* src/rbgtkcontainer.c, rbgtk.h: Add rbgtkcontainer_register_child_property_setter/getter.
 	
 2003-04-26  Masao Mutoh  <mutoh@highway.ne.jp>

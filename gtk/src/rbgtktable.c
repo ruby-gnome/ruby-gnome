@@ -4,7 +4,7 @@
   rbgtktable.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Date: 2003/05/02 18:22:16 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -80,10 +80,40 @@ tbl_attach_defaults(self, widget, left_attach, right_attach, top_attach,
 }
 
 static VALUE
+tbl_set_row_spacing(self, row, spc)
+    VALUE self, row, spc;
+{
+    gtk_table_set_row_spacing(_SELF(self), NUM2UINT(row), NUM2UINT(spc));
+    return self;
+}
+
+static VALUE
+tbl_get_row_spacing(self, row)
+    VALUE self, row;
+{
+    return UINT2NUM(gtk_table_get_row_spacing(_SELF(self), NUM2UINT(row)));
+}
+
+static VALUE
+tbl_set_col_spacing(self, col, spc)
+    VALUE self, col, spc;
+{
+    gtk_table_set_col_spacing(_SELF(self), NUM2UINT(col), NUM2UINT(spc));
+    return self;
+}
+
+static VALUE
+tbl_get_col_spacing(self, col)
+    VALUE self, col;
+{
+    return UINT2NUM(gtk_table_get_col_spacing(_SELF(self), NUM2UINT(col)));
+}
+
+static VALUE
 tbl_set_row_spacings(self, spc)
     VALUE self, spc;
 {
-    gtk_table_set_row_spacings(_SELF(self), NUM2INT(spc));
+    gtk_table_set_row_spacings(_SELF(self), NUM2UINT(spc));
     return self;
 }
 
@@ -91,8 +121,22 @@ static VALUE
 tbl_set_col_spacings(self, spc)
     VALUE self, spc;
 {
-    gtk_table_set_col_spacings(_SELF(self), NUM2INT(spc));
+    gtk_table_set_col_spacings(_SELF(self), NUM2UINT(spc));
     return self;
+}
+
+static VALUE
+tbl_get_row_spacings(self)
+    VALUE self;
+{
+    return UINT2NUM(_SELF(self)->row_spacing);
+}
+
+static VALUE
+tbl_get_col_spacings(self)
+    VALUE self;
+{
+    return UINT2NUM(_SELF(self)->column_spacing);
 }
 
 static VALUE
@@ -114,14 +158,29 @@ Init_gtk_table()
 {
     VALUE gTable = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 
+    /* Undef properties, column/row-spacing confuse us ... */
+    rb_undef_method(gTable, "set_row_spacing");
+    rb_undef_method(gTable, "set_column_spacing");
+    rb_undef_method(gTable, "row_spacing=");
+    rb_undef_method(gTable, "column_spacing=");
+    rb_undef_method(gTable, "row_spacing");
+    rb_undef_method(gTable, "column_spacing");
+
     rb_define_method(gTable, "initialize", tbl_initialize, -1);
     rb_define_method(gTable, "resize", tbl_resize, 2);
     rb_define_method(gTable, "attach", tbl_attach, -1);
     rb_define_method(gTable, "attach_defaults", tbl_attach_defaults, 5);
+    rb_define_method(gTable, "set_row_spacing", tbl_set_row_spacing, 2);
+    rb_define_method(gTable, "set_column_spacing", tbl_set_col_spacing, 2);
+    rb_define_method(gTable, "get_row_spacing", tbl_get_row_spacing, 1);
+    rb_define_method(gTable, "get_column_spacing", tbl_get_col_spacing, 1);
     rb_define_method(gTable, "set_row_spacings", tbl_set_row_spacings, 1);
-    rb_define_method(gTable, "set_col_spacings", tbl_set_col_spacings, 1);
+    rb_define_method(gTable, "set_column_spacings", tbl_set_col_spacings, 1);
+    rb_define_method(gTable, "row_spacings", tbl_get_row_spacings, 0);
+    rb_define_method(gTable, "column_spacings", tbl_get_col_spacings, 0);
     rb_define_method(gTable, "default_row_spacing", tbl_get_default_row_spacing, 0);
-    rb_define_method(gTable, "default_col_spacing", tbl_get_default_col_spacing, 0);
+    rb_define_method(gTable, "default_column_spacing", tbl_get_default_col_spacing, 0);
 
     G_DEF_SETTERS(gTable);
+
 }

@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2003/04/30 19:44:41 $
+  $Date: 2003/05/02 18:22:15 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -243,12 +243,10 @@ cont_child_get_property(self, child, prop_name)
                     Data_Get_Struct(obj, void, getter);
             }
         }
-
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
         gtk_container_child_get_property(GTK_CONTAINER(RVAL2GOBJ(self)), 
                                          GTK_WIDGET(RVAL2GOBJ(child)),
                                          name , &gval);
-
         ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
         g_value_unset(&gval);
         return ret;
@@ -399,15 +397,15 @@ cont_s_child_property(self, property_name)
     g_type_class_unref(oclass);
     return result;
 }
-
+/*
 static VALUE
-cont_s_child_install_property(argc, argv, self)
+cont_s_install_child_property(argc, argv, self)
     int argc;
     VALUE* argv;
     VALUE self;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-    gpointer gclass;
+    GtkContainerClass* gclass;
     GParamSpec* pspec;
     VALUE pspec_obj, prop_id;
 
@@ -418,18 +416,14 @@ cont_s_child_install_property(argc, argv, self)
     rb_scan_args(argc, argv, "11", &pspec_obj, &prop_id);
     pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
 
-    gclass = g_type_class_ref(cinfo->gtype);
+    gclass = (GtkContainerClass *)g_type_class_ref(cinfo->gtype);
     gtk_container_class_install_child_property(
-        (GtkContainerClass *)gclass, NIL_P(prop_id) ? 1: NUM2INT(prop_id), 
+        gclass, NIL_P(prop_id) ? 1: NUM2INT(prop_id), 
         pspec);
-
-    g_type_class_unref(gclass);
-
-    /* FIXME: define accessor methods */
 
     return Qnil;
 }
-
+*/
 static VALUE
 cont_s_child_properties(argc, argv, self)
     int argc;
@@ -485,8 +479,9 @@ Init_gtk_container()
     rb_define_method(gContainer, "unset_focus_chain", cont_unset_focus_chain, 0);
     rb_define_singleton_method(gContainer, "child_property", cont_s_child_property, 1);
     rb_define_singleton_method(gContainer, "child_properties", cont_s_child_properties, -1);
-    rb_define_singleton_method(gContainer, "child_install_property", cont_s_child_install_property, -1);
-
+/*
+    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, -1);
+*/
     G_DEF_SETTERS(gContainer);
 
     rb_global_variable(&type_to_prop_setter_table);
