@@ -1,23 +1,33 @@
+#!/usr/local/bin/ruby
+=begin
+  button.rb - Ruby/GTK sample script.
+
+  Copyright (c) 2002 Ruby-GNOME2 Project
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: button.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
+=end
+
 require 'gtk2'
 
-window = Gtk::Window::new(Gtk::WINDOW_TOPLEVEL)
+window = Gtk::Window.new
 window.set_title("buttons")
-window.border_width(0)
+window.set_border_width(0)
 
-box1 = Gtk::VBox::new(FALSE, 0)
+box1 = Gtk::VBox.new(false, 0)
 window.add(box1)
 box1.show
 
-table = Gtk::Table::new(3, 3, FALSE)
+table = Gtk::Table.new(3, 3, false)
 table.set_row_spacings(5)
 table.set_col_spacings(5)
-table.border_width(10)
-box1.pack_start(table, TRUE, TRUE, 0)
+table.set_border_width(10)
+box1.pack_start(table, true, true, 0)
 table.show
 
 button = []
 0.upto(8) do |i|
-  button.push Gtk::Button::new("button"+(i+1).to_s)
+  button.push Gtk::Button.new("button"+(i+1).to_s)
 end
 0.upto(8) do |i|
   button[i].signal_connect("clicked") do |w|
@@ -41,25 +51,25 @@ table.attach(button[6], 1, 2, 0, 1, nil, nil, 0, 0)
 table.attach(button[7], 2, 3, 1, 2, nil, nil, 0, 0)
 table.attach(button[8], 0, 1, 1, 2, nil, nil, 0, 0)
 
-separator = Gtk::HSeparator::new()
-box1.pack_start(separator, FALSE, TRUE, 0)
+separator = Gtk::HSeparator.new
+box1.pack_start(separator, false, true, 0)
 separator.show
 
-box2 = Gtk::VBox::new(FALSE, 10)
-box2.border_width(10)
-box1.pack_start(box2, FALSE, TRUE, 0)
+box2 = Gtk::VBox.new(false, 10)
+box2.set_border_width(10)
+box1.pack_start(box2, false, true, 0)
 box2.show
 
-close = Gtk::Button::new("close")
+close = Gtk::Button.new("close")
 close.signal_connect("clicked") do
   window.destroy
   exit
 end
-box2.pack_start(close, TRUE, TRUE, 0)
+box2.pack_start(close, true, true, 0)
 close.set_flags(Gtk::Widget::CAN_DEFAULT);
 close.grab_default
 close.show
 
 window.show
 
-Gtk::main()
+Gtk.main

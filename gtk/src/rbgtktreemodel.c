@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2002/11/02 11:18:52 $
+  $Date: 2002/11/03 18:04:43 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -57,6 +57,32 @@ treemodel_get_iter(self, path)
     iter.user_data3 = model;
 
     return ret ? ITR2RVAL(&iter) : Qnil;
+}
+
+static VALUE
+treemodel_get_value(self, iter, column)
+    VALUE self, iter, column;
+{
+    GValue value = {0, };
+    gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &value);
+    return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
+}
+
+static VALUE
+treemodel_get_current_item(self, iter)
+    VALUE self, iter;
+{
+    gint i;
+    GtkTreeIter* giter = RVAL2ITR(iter);
+    GtkTreeModel* gmodel = _SELF(self);
+    gint num = gtk_tree_model_get_n_columns(gmodel);
+    VALUE ary = rb_ary_new();
+    for (i = 0; i < num; i++){
+        GValue value = {0,};
+        gtk_tree_model_get_value(gmodel, giter, i, &value);
+        rb_ary_push(ary, (G_VALUE_TYPE(&value) != G_TYPE_INVALID) ? GVAL2RVAL(&value) : Qnil);
+    }
+    return ary;
 }
 
 /* These methods may be neededless.
@@ -157,6 +183,8 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "n_columns", treemodel_get_n_columns, 0);
     rb_define_method(mTreeModel, "get_column_type", treemodel_get_column_type, 1);
     rb_define_method(mTreeModel, "get_iter", treemodel_get_iter, 1);
+    rb_define_method(mTreeModel, "get_value", treemodel_get_value, 2);
+    rb_define_method(mTreeModel, "get_current_item", treemodel_get_current_item, 1);
     rb_define_method(mTreeModel, "each", treemodel_foreach, 0);
     rb_define_method(mTreeModel, "row_changed", treemodel_row_changed, 2);
     rb_define_method(mTreeModel, "row_inserted", treemodel_row_inserted, 2);
@@ -164,6 +192,7 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "row_deleted", treemodel_row_deleted, 1);
     rb_define_method(mTreeModel, "rows_reordered", treemodel_rows_reordered, 3);
 
+    /* GtkTreeModelFlags */
     rb_define_const(mTreeModel, "ITERS_PERSIST", INT2NUM(GTK_TREE_MODEL_ITERS_PERSIST));
     rb_define_const(mTreeModel, "LIST_ONLY", INT2NUM(GTK_TREE_MODEL_LIST_ONLY));
 

@@ -4,8 +4,8 @@
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2002/10/31 17:08:29 $
-  $Id: keyboard_grab.rb,v 1.3 2002/10/31 17:08:29 mutoh Exp $
+  $Date: 2002/11/03 18:04:42 $
+  $Id: keyboard_grab.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
 =end
 
 require 'gtk2'

@@ -4,7 +4,7 @@
   Copyright (C) 2001,2002 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cursor.rb,v 1.5 2002/10/31 17:08:29 mutoh Exp $
+  $Id: cursor.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
 =end
 
 require 'gtk2'

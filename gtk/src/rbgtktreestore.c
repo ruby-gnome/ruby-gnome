@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2002/11/02 11:18:52 $
+  $Date: 2002/11/03 18:04:43 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -63,7 +63,9 @@ static VALUE
 tstore_set_value(self, iter, column, value)
     VALUE self, iter, column, value;
 {
-    GValue gval = {RVAL2GTYPE(value),};
+    GValue gval = {0,};
+    g_value_init(&gval, RVAL2GTYPE(value));
+
     rbgobj_rvalue_to_gvalue(value, &gval);
 
     gtk_tree_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);

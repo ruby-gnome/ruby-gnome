@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Date: 2002/11/03 18:04:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,13 +50,6 @@ gobj_unset_flags(self, flags)
 {
     GTK_OBJECT_UNSET_FLAGS(RVAL2GOBJ(self), NUM2INT(flags));
     return self;
-}
-
-static VALUE
-gobj_get_gtk_type(self)
-    VALUE self;
-{
-    return INT2NUM(GTK_OBJECT_TYPE(RVAL2GOBJ(self)));
 }
 
 void 

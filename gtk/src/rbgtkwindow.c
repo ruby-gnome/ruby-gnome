@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:36 $
+  $Date: 2002/11/03 18:04:43 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,15 +41,6 @@ gwin_set_wmclass(self, wmclass_name, wmclass_class)
     gtk_window_set_wmclass(_SELF(self),
                            NIL_P(wmclass_name)?NULL:RVAL2CSTR(wmclass_name),
                            NIL_P(wmclass_class)?NULL:RVAL2CSTR(wmclass_class));
-    return self;
-}
-
-static VALUE
-gwin_set_policy(self, allow_shrink, allow_grow, auto_shrink)
-    VALUE self, allow_shrink, allow_grow, auto_shrink;
-{
-    gtk_window_set_policy(_SELF(self), RTEST(allow_shrink), 
-                          RTEST(allow_grow), RTEST(auto_shrink));
     return self;
 }
 
@@ -439,7 +430,6 @@ Init_gtk_window()
 
     rb_define_method(gWindow, "initialize", gwin_initialize, -1);
     rb_define_method(gWindow, "set_wmclass", gwin_set_wmclass, 2);
-    rb_define_method(gWindow, "set_policy", gwin_set_policy, 3);
     rb_define_method(gWindow, "add_accel_group", gwin_add_accel_group, 1);
     rb_define_method(gWindow, "remove_accel_group", gwin_remove_accel_group, 1);
     rb_define_method(gWindow, "active_focus", gwin_activate_focus, 0);

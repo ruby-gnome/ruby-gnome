@@ -4,7 +4,7 @@
   Copyright (c) 2002 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: drawing.rb,v 1.3 2002/10/31 17:08:29 mutoh Exp $
+  $Id: drawing.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
 =end
 
 require 'gtk2'

@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2002/11/02 11:18:52 $
+  $Date: 2002/11/03 18:04:43 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -17,6 +17,8 @@
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
 #define RVAL2MODEL(m) (GTK_TREE_MODEL(RVAL2GOBJ(m)))
+
+static ID id_set_value;
 
 static VALUE
 treeiter_first(self, model)
@@ -108,19 +110,32 @@ treeiter_parent(self, model)
     return ret ? ITR2RVAL(&parent) : Qnil;
 }
 
+static VALUE
+treeiter_set_value(self, model, column, value)
+    VALUE self, model, column, value;
+{
+    if (GTK_IS_TREE_MODEL(RVAL2GOBJ(model)) == FALSE)
+        rb_raise(rb_eTypeError, "1st parameter is not an object which include Gtk::TreeModel.");
+
+    return rb_funcall(model, id_set_value, 3, self, column, value);
+}
+
 void 
 Init_gtk_treeiter()
 {
     VALUE gTreeIter = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
 
+    id_set_value = rb_intern("set_value");
+
     rb_define_method(gTreeIter, "first!", treeiter_first, 1);
     rb_define_method(gTreeIter, "next!", treeiter_next, 1);
     rb_define_method(gTreeIter, "get_value", treeiter_get_value, 2);
-    rb_define_method(gTreeIter, "current_item", treeiter_get_current_item, 1);
-    rb_define_method(gTreeIter, "children", treeiter_children, 1);
+    rb_define_method(gTreeIter, "get_current_item", treeiter_get_current_item, 1);
+    rb_define_method(gTreeIter, "first_child", treeiter_children, 1);
     rb_define_method(gTreeIter, "path", treeiter_get_path, 1);
     rb_define_method(gTreeIter, "has_child?", treeiter_has_child, 1);
     rb_define_method(gTreeIter, "n_children", treeiter_n_children, 1);
     rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 3);
     rb_define_method(gTreeIter, "parent", treeiter_parent, 1);
+    rb_define_method(gTreeIter, "set_value", treeiter_set_value, 3);
 }

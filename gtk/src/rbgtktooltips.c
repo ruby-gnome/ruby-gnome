@@ -4,7 +4,7 @@
   rbgtktooltips.c -
 
   $Author: mutoh $
-  $Date: 2002/10/26 16:04:04 $
+  $Date: 2002/11/03 18:04:43 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -63,7 +63,8 @@ static VALUE
 ttips_force_window(self)
     VALUE self;
 {
-      gtk_tooltips_force_window(_SELF(self));
+    gtk_tooltips_force_window(_SELF(self));
+    return self;
 }
 void 
 

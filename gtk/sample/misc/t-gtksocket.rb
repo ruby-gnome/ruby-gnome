@@ -9,7 +9,7 @@ Sample script using Gtk::Socket and Gtk::Plug.
 
 Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
 
-$Id: t-gtksocket.rb,v 1.2 2002/10/31 17:08:29 mutoh Exp $
+$Id: t-gtksocket.rb,v 1.1 2002/11/03 18:04:42 mutoh Exp $
 =end
 
 class MyGtkSocket < Gtk::Window
