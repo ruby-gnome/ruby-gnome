@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/09 18:30:02 $
+  $Author: kzys $
+  $Date: 2003/10/14 13:26:07 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -42,9 +42,16 @@ get_bits_per_sample(self)
 {
     return INT2FIX(gdk_pixbuf_get_bits_per_sample(_SELF(self)));
 }
-/*
-guchar*     gdk_pixbuf_get_pixels           (const GdkPixbuf *pixbuf);
-*/
+
+static VALUE
+get_pixels(self)
+    VALUE self;
+{
+    guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
+    return rb_str_new(pixels,
+                      gdk_pixbuf_get_width(_SELF(self)) *
+                      gdk_pixbuf_get_height(_SELF(self)) * 3);
+}
 
 static VALUE
 get_width(self)
@@ -387,7 +394,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "n_channels", get_n_channels, 0);
     rb_define_method(gdkPixbuf, "has_alpha?", get_has_alpha, 0);
     rb_define_method(gdkPixbuf, "bits_per_sample", get_bits_per_sample, 0);
-    /* rb_define_method(gdkPixbuf, "pixels", ..., 0); */
+    rb_define_method(gdkPixbuf, "pixels", get_pixels, 0);
     rb_define_method(gdkPixbuf, "width", get_width, 0);
     rb_define_method(gdkPixbuf, "height", get_height, 0);
     rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
