@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2003/09/01 14:39:24 $
+  $Date: 2003/09/10 18:17:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -244,15 +244,24 @@ layout_xy_to_index(self, x, y)
     return rb_ary_new3(3, CBOOL2RVAL(ret), INT2NUM(index), INT2NUM(trailing));
 }
 
-/*    
-void        pango_layout_index_to_pos       (PangoLayout *layout,
-                                             int index,
-                                             PangoRectangle *pos);
-void        pango_layout_get_cursor_pos     (PangoLayout *layout,
-                                             int index,
-                                             PangoRectangle *strong_pos,
-                                             PangoRectangle *weak_pos);
-*/
+static VALUE
+layout_index_to_pos(self, index)
+    VALUE self, index;
+{
+    PangoRectangle pos;
+    pango_layout_index_to_pos(_SELF(self), NUM2INT(index), &pos);
+    return BOXED2RVAL(&pos, PANGO_TYPE_RECTANGLE);
+}
+
+static VALUE
+layout_get_cursor_pos(self, index)
+    VALUE self, index;
+{
+    PangoRectangle strong_pos, weak_pos;
+    pango_layout_get_cursor_pos(_SELF(self), NUM2INT(index), &strong_pos, &weak_pos);
+    return rb_ary_new3(2, BOXED2RVAL(&strong_pos, PANGO_TYPE_RECTANGLE),
+                       BOXED2RVAL(&weak_pos, PANGO_TYPE_RECTANGLE));
+}
 
 static VALUE
 layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
@@ -352,11 +361,13 @@ Init_pango_layout()
     rb_define_method(pLayout, "set_single_paragraph_mode", layout_set_single_paragraph_mode, 1);
     rb_define_method(pLayout, "single_paragraph_mode?", layout_get_single_paragraph_mode, 0);
     rb_define_method(pLayout, "xy_to_index", layout_xy_to_index, 2);
+    rb_define_method(pLayout, "index_to_pos", layout_index_to_pos, 1);
+    rb_define_method(pLayout, "get_cursor_pos", layout_get_cursor_pos, 1);
     rb_define_method(pLayout, "move_cursor_visually", layout_move_cursor_visually, 4);
     rb_define_method(pLayout, "size", layout_get_size, 0);
     rb_define_method(pLayout, "pixel_size", layout_get_pixel_size, 0);
     rb_define_method(pLayout, "line_count", layout_get_line_count, 0);
-    rb_define_method(pLayout, "line", layout_get_line, 0);
+    rb_define_method(pLayout, "get_line", layout_get_line, 1);
     rb_define_method(pLayout, "iter", layout_get_iter, 0);
 
     G_DEF_SETTERS(pLayout);

@@ -1,3 +1,8 @@
+2003-09-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayout.c: Add Pango::Layout#index_to_pos, get_cursor_pos. 
+	Move Pango::Layout#line to Pango::Layout#get_line.
+
 2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c, rbpangofontdescription.c, rbpangotabarray.c
