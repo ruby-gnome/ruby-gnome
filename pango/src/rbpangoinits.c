@@ -1,0 +1,47 @@
+extern void   Init_pango_attribute();
+extern void   Init_pango_attriterator();
+extern void   Init_pango_attrlist();
+extern void   Init_pango_color();
+extern void   Init_pango_context();
+extern void   Init_pango_font();
+extern void   Init_pango_font_description();
+extern void   Init_pango_font_face();
+extern void   Init_pango_font_family();
+extern void   Init_pango_font_map();
+extern void   Init_pango_font_metrics();
+extern void   Init_pango_fontset();
+extern void   Init_pango_fontset_simple();
+extern void   Init_pango_glyph_string();
+extern void   Init_pango_item();
+extern void   Init_pango_language();
+extern void   Init_pango_layout();
+extern void   Init_pango_layout_iter();
+extern void   Init_pango_layout_line();
+extern void   Init_pango_main();
+extern void   Init_pango_rectangle();
+extern void   Init_pango_array();
+void Init_pango_inits()
+{
+   Init_pango_attribute();
+   Init_pango_attriterator();
+   Init_pango_attrlist();
+   Init_pango_color();
+   Init_pango_context();
+   Init_pango_font();
+   Init_pango_font_description();
+   Init_pango_font_face();
+   Init_pango_font_family();
+   Init_pango_font_map();
+   Init_pango_font_metrics();
+   Init_pango_fontset();
+   Init_pango_fontset_simple();
+   Init_pango_glyph_string();
+   Init_pango_item();
+   Init_pango_language();
+   Init_pango_layout();
+   Init_pango_layout_iter();
+   Init_pango_layout_line();
+   Init_pango_main();
+   Init_pango_rectangle();
+   Init_pango_array();
+}

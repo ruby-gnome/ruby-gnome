@@ -7,6 +7,8 @@
 	* sample/to_drawable: Move to gtk/sample/misc/.
 	* rbgdkpixbuf.h: Add a file.
 	* *.c: Include rbgdkpixbuf.h.
+	* README, COPYING.LIB: Change license term from "the GNU LIBRARY General Public 
+	License version 2." to "the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.".
 
 2002-12-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
 

@@ -1,0 +1,125 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbpangoarray.c -
+
+  $Author: mutoh $
+  $Date: 2002/12/31 07:00:58 $
+
+  Copyright (C) 2002 Masao Mutoh
+************************************************/
+
+#include "rbpango.h"
+
+#define _SELF(self) ((PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY))
+
+static VALUE
+rtab_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE size, positions_in_pixels, attr_ary;
+    PangoTabArray *array;
+    int i;
+
+    rb_scan_args(argc, argv, "2*", &size, &positions_in_pixels, &attr_ary);
+
+    array = pango_tab_array_new(NUM2INT(size), 
+                                RTEST(positions_in_pixels));
+    G_INITIALIZE(self, array);
+
+    if (! NIL_P(attr_ary)){
+        for (i = 0; i < RARRAY(attr_ary)->len; i++) {
+            pango_tab_array_set_tab(array, i, 
+                                    FIX2INT(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[0]),
+                                    FIX2INT(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[1]));
+        }
+    }
+     
+    return Qnil;
+}
+
+static VALUE
+rtab_get_size(self)
+    VALUE self;
+{
+    return INT2NUM(pango_tab_array_get_size(_SELF(self)));
+}
+
+static VALUE
+rtab_resize(self, size)
+    VALUE self, size;
+{
+    pango_tab_array_resize(_SELF(self), NUM2INT(size));
+    return self;
+}
+
+static VALUE
+rtab_set_tab(self, tab_index, align, location)
+    VALUE self, tab_index, align, location;
+{
+    pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), FIX2INT(align),
+                            NUM2INT(location));
+    return self;
+}
+
+static VALUE
+rtab_get_tab(self, tab_index)
+    VALUE self, tab_index;
+{
+    PangoTabAlign align;
+    gint location;
+    pango_tab_array_get_tab(_SELF(self), NUM2INT(tab_index),
+                            &align, &location);
+    return rb_ary_new3(2, INT2FIX(align), INT2NUM(location));
+}
+
+static VALUE
+rtab_get_tabs(self)
+    VALUE self;
+{
+    PangoTabAlign* aligns;
+    gint* locations;
+    VALUE ary = rb_ary_new();
+    PangoTabArray* tab_array = _SELF(self);
+    gint i;
+
+    pango_tab_array_get_tabs(tab_array, &aligns, &locations);
+
+    for (i = 0; i < pango_tab_array_get_size(tab_array); i++){
+        rb_ary_push(ary, rb_ary_new3(2, INT2FIX(aligns[i]), INT2NUM(locations[i])));
+    }
+    return ary;
+}
+
+static VALUE
+rtab_get_positions_in_pixels(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(pango_tab_array_get_positions_in_pixels(_SELF(self)));
+}
+
+void
+Init_pango_array()
+{
+    VALUE pTabArray = G_DEF_CLASS(PANGO_TYPE_TAB_ARRAY, "TabArray", mPango);
+    rb_define_method(pTabArray, "initialize", rtab_initialize, -1);
+    rb_define_method(pTabArray, "size", rtab_get_size, 0);
+    rb_define_method(pTabArray, "resize", rtab_resize, 1);
+    rb_define_method(pTabArray, "set_tab", rtab_set_tab, 3);
+    rb_define_method(pTabArray, "get_tab", rtab_get_tab, 1);
+    rb_define_method(pTabArray, "tabs", rtab_get_tabs, 0);
+    rb_define_method(pTabArray, "positions_in_pixels?", rtab_get_positions_in_pixels, 0);
+
+    G_DEF_SETTERS(pTabArray);
+
+    /* PangoTabAlign */
+    rb_define_const(pTabArray, "TAB_LEFT", INT2FIX(PANGO_TAB_LEFT));
+    /* These constants are not supporte yet
+    rb_define_const(pTabArray, "TAB_RIGHT", INT2FIX(PANGO_TAB_RIGHT));
+    rb_define_const(pTabArray, "TAB_CENTER", INT2FIX(PANGO_TAB_CENTER));
+    rb_define_const(pTabArray, "TAB_NUMERIC", INT2FIX(PANGO_TAB_NUMERIC));
+    */
+    
+}
