@@ -4,7 +4,7 @@
   rbgtkoldeditable.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/05 17:52:00 $
 
   Copyright (C) 2002 Masahiro Sakai
 
@@ -16,7 +16,5 @@ void Init_gtk_oldeditable()
 {
 #ifndef GTK_DISABLE_DEPRECATED
     VALUE gOldEditable = G_DEF_CLASS(GTK_TYPE_OLD_EDITABLE, "OldEditable", mGtk);
-
-    rb_include_module(gOldEditable, mEditable);
 #endif
 }

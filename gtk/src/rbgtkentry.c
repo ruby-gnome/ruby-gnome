@@ -4,7 +4,7 @@
   rbgtkentry.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/05 17:52:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -82,8 +82,6 @@ void
 Init_gtk_entry()
 {
     VALUE gEntry = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
-
-    rb_include_module(gEntry, mEditable);
 
     rb_define_method(gEntry, "initialize", entry_initialize, -1);
     rb_define_method(gEntry, "set_text", entry_set_text, 1);

@@ -4,7 +4,7 @@
   rbgtkeditable.c -
 
   $Author: sakai $
-  $Date: 2002/08/02 13:44:31 $
+  $Date: 2002/08/05 17:52:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -143,7 +143,7 @@ edit_paste_clipboard(self)
 void 
 Init_gtk_editable()
 {
-    mEditable = rb_define_module_under(mGtk, "Editable");
+    mEditable = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
 
     /* FIXME */
     rb_define_const(mEditable, "SIGNAL_INSERT_TEXT", rb_str_new2("insert_text"));
