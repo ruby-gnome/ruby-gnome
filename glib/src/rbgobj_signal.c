@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: mutoh $
-  $Date: 2002/11/08 17:05:33 $
+  $Date: 2002/11/11 15:35:54 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -21,10 +21,25 @@ rbgobj_get_signal_func(obj, sig_name)
     VALUE obj, sig_name;
 {
     GValToRValSignalFunc func = NULL;
-    VALUE key = rb_ary_new3(2, CLASS_OF(obj), sig_name);
-    VALUE funcobj = rb_hash_aref(signal_func_table, key);
-    if (!NIL_P(funcobj)){
-        Data_Get_Struct(funcobj, void, func);
+    VALUE funcobj, klass, gklass;
+    ID key;
+    char* p;
+    char* gsig_name = RVAL2CSTR(sig_name);
+    klass = CLASS_OF(obj);
+    gklass = GTYPE2CLASS(G_TYPE_OBJECT);
+    for (p = gsig_name; *p; p++)
+        if (*p == '_')  *p = '-';
+
+    while (klass != gklass){
+        key = rb_intern(g_strdup_printf("%s%s", rb_class2name(klass), gsig_name));
+        funcobj = rb_hash_aref(signal_func_table, key);
+    
+        if (!NIL_P(funcobj)){
+            Data_Get_Struct(funcobj, void, func);
+            break;
+        } else {
+            klass = RCLASS(klass)->super;
+        }
     }
     return func;
 }
@@ -35,8 +50,13 @@ rbgobj_set_signal_func(klass, sig_name, func)
     gchar* sig_name; 
     GValToRValSignalFunc func;
 {
+    ID key;
+    char* p; 
+    char* gsig_name = g_strdup(sig_name);
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    VALUE key = rb_ary_new3(2, klass, CSTR2RVAL(sig_name));
+    for (p = gsig_name; *p; p++)
+        if (*p == '_')  *p = '-';
+    key = rb_intern(g_strdup_printf("%s%s", rb_class2name(klass), gsig_name));
     rb_hash_aset(signal_func_table, key, obj);
 }
 

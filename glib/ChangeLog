@@ -1,3 +1,7 @@
+2002-11-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_signal.c: BugFix of rbgobj_set/get_signal_func.
+
 2002-11-10  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: stop appending '-g' to $CFLAGS.
