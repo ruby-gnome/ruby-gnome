@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2002/12/30 13:15:18 $
+  $Date: 2002/12/30 13:16:53 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -87,15 +87,13 @@ render_pm(argc, argv, self)
 void
 Init_gtk_gdk_pixbuf()
 {
-/*
-    VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);
-*/
+    /*
+	  *  This defines Gdk::Pixbuf methods of GDK side.
+	  */
     VALUE gdkPixbuf = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
     /* 
      * Rendering
-     * The functions to render pixbufs to GDK drawables are contained in GDK.
-     * But in Ruby/GdkPixbuf contained them, not Ruby/GDK.
      */
     /* rb_define_method(gdkPixbuf, "render_to_drawable_alpha", ..., ...,); */
     rb_define_method(gdkPixbuf, "render_to_drawable", render_to_drawable, -1);
@@ -104,7 +102,5 @@ Init_gtk_gdk_pixbuf()
 
     /*
      * Drawables to Pixbufs
-     * The functions to render pixbufs to GDK drawables are contained in GDK.
-     * But in Ruby/GdkPixbuf contained them, not Ruby/GDK.
      */
 }
