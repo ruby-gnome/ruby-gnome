@@ -1,5 +1,6 @@
 2004-08-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/misc/gtk-demo/apple-red.png, gnome-*.png: Added.
 	* src/rbgdkpango.c: Fix compiling errors on GTK+-2.0.x. 
 	* src/rbgdkproperty.c: ditto.  Reported by Noritsugu Nakamura.
 
