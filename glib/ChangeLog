@@ -1,3 +1,23 @@
+2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h: Add rbgobj_signal_wrap() declaration.
+
+	* src/rbgobject.h, src/global.h: Move declaration of
+	rbgobj_define_property_accessors() from rbgobject.h to global.h
+
+	* src/rbgobject.h: Remove rbgobj_define_signal_constants() declaration.
+	This function no longer exists.
+
+2003-02-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgutil.c:
+	Check whether NODE_ATTRASGN is used in ruby. If NODE_ATTRASGN is
+	used, G_DEF_SETTERS uses alias_method instead of generating wrapper
+	methods.
+	Patch from Nobuyoshi Nakada <nobu.nokada@softhome.net>
+
+	* src/rbgobject.c (rbgobj_define_property_accessors): ditto
+
 2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.c: make id_relatives be static variable.

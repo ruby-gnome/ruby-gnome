@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: sakai $
-  $Date: 2003/02/14 17:54:40 $
+  $Date: 2003/02/17 16:00:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -129,11 +129,21 @@ Init_gutil()
         "module GLib\n"
         "  def self.__add_one_arg_setter(klass)\n"
         "    ary = klass.instance_methods\n"
+#ifdef HAVE_NODE_ATTRASGN
+        "    klass.module_eval do\n"
+        "      ary.each do |m|\n"
+        "        if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and instance_method(m).arity == 1\n"
+        "          alias_method \"#{$1}=\", \"set_#{$1}\"\n"
+        "        end\n"
+        "      end\n"
+        "    end\n"
+#else
         "    ary.each do |m|\n"
         "      if /^set_(.*)/ =~ m and not ary.include? \"#{$1}=\" and klass.instance_method(m).arity == 1\n"
         "        klass.module_eval(\"def #{$1}=(val); set_#{$1}(val); val; end\\n\")\n"
         "      end\n"
         "    end\n"
+#endif
         "  end\n"
         "end\n");
 }

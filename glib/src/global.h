@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2003/02/14 14:09:21 $
+   $Date: 2003/02/17 16:00:11 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
 ************************************************/
@@ -34,6 +34,8 @@ extern VALUE rbgobj_cInstantiatable;
 extern VALUE rbgobj_mInterfaceCommons;
 #define cInstantiatable   rbgobj_cInstantiatable
 #define mInterfaceCommons rbgobj_mInterfaceCommons
+
+extern void rbgobj_define_property_accessors(VALUE klass);
 
 extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);

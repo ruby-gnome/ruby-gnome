@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2003/02/14 18:55:52 $
+  $Date: 2003/02/17 16:00:11 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -308,11 +308,16 @@ rbgobj_define_property_accessors(klass)
 
         if (pspec->flags & G_PARAM_WRITABLE){
             g_string_append_printf(source,
-                "def %s=(val); set_property('%s', val); val; end\n",
-                prop_name, pspec->name);
-            g_string_append_printf(source,
                 "def set_%s(val); set_property('%s', val); end\n",
                 prop_name, pspec->name);
+#ifdef HAVE_NODE_ATTRASGN
+            g_string_append_printf(source, "alias %s= set_%s\n",
+                                   prop_name, prop_name);
+#else
+            g_string_append_printf(source,
+                "def %s=(val); set_property('%s', val); val; end\n",
+                prop_name, pspec->name);
+#endif
         }
 
         g_free(buf);
