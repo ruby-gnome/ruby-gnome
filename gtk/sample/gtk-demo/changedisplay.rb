@@ -1,32 +1,37 @@
-# $Id: changedisplay.rb,v 1.2 2003/10/15 12:48:13 kzys Exp $
+
 =begin
-= Change Display
+  changedisplay.rb - Change Display
 
-Demonstrates migrating a window between different displays and
-screens. A display is a mouse and keyboard with some number of
-associated monitors. A screen is a set of monitors grouped
-into a single physical work area. The neat thing about having
-multiple displays is that they can be on a completely separate
-computers, as long as there is a network connection to the
-computer where the application is running.
+  Demonstrates migrating a window between different displays and
+  screens. A display is a mouse and keyboard with some number of
+  associated monitors. A screen is a set of monitors grouped
+  into a single physical work area. The neat thing about having
+  multiple displays is that they can be on a completely separate
+  computers, as long as there is a network connection to the
+  computer where the application is running.
 
-Only some of the windowing systems where GTK+ runs have the
-concept of multiple displays and screens. (The X Window System
-is the main example.) Other windowing systems can only
-handle one keyboard and mouse, and combine all monitors into
-a single screen.
+  Only some of the windowing systems where GTK+ runs have the
+  concept of multiple displays and screens. (The X Window System
+  is the main example.) Other windowing systems can only
+  handle one keyboard and mouse, and combine all monitors into
+  a single screen.
 
-This is a moderately complex example, and demonstrates:
+  This is a moderately complex example, and demonstrates:
 
- - Tracking the currently open displays and screens
+  - Tracking the currently open displays and screens
 
- - Changing the screen for a window
+  - Changing the screen for a window
 
- - Letting the user choose a window by clicking on it
+  - Letting the user choose a window by clicking on it
 
- - Using GtkListStore and GtkTreeView
+  - Using Gtk::ListStore and Gtk::TreeView
 
- - Using GtkDialog
+  - Using Gtk::Dialog
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: changedisplay.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
 =end
 
 require 'common'

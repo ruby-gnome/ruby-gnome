@@ -1,5 +1,12 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.7 2004/02/12 07:33:52 mutoh Exp $
+=begin
+  main.rb - Main class of gtk-demo.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: main.rb,v 1.8 2005/01/03 18:55:02 mutoh Exp $
+=end
 
 require 'gtk2'
 
@@ -11,6 +18,7 @@ module Demo
     ["Color Selector",              "colorsel.rb",      :ColorSel],
     ["Dialog and Message Boxes",    "dialog.rb",        :Dialog],
     ["Drawing Area",                "drawingarea.rb",   :DrawingArea],
+    ["Icon View",                   "iconview.rb",      :IconView],
     ["Images",                      "images.rb",        :Images],
     ["Item Factory",                "item_factory.rb",  :ItemFactory],
     ["Menus",                       "menus.rb",         :Menus],

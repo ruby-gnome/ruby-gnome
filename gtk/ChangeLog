@@ -1,3 +1,12 @@
+2005-01-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcellrenderercombo.c: Added for GTK+-2.6.x.
+	* src/rbgtkiconview.c: Added for GTK+-2.6.x.
+	* sample/gtk-demo/iconview.rb: Added for Gtk::IconView.
+	* sample/gtk-demo/main.rb, gnome-fs-directory.png, 
+	gnome-fs-regular.png: Ditto.
+	* sample/gtk-demo/*.rb: Added some informations at the headers.
+
 2004-12-31  Ferenc Engard <ferenc@engard.hu>
 
 	* sample/gtk-demo/dialog.rb: Fix a bug.

@@ -1,11 +1,15 @@
-# $Id: stock_browser.rb,v 1.3 2004/03/01 15:04:46 mutoh Exp $
 =begin
-= Stock Item and Icon Browser
+  stock_browser.rb - Stock Item and Icon Browser
 
-This source code for this demo doesn't demonstrate anything
-particularly useful in applications. The purpose of the 'demo' is
-just to provide a handy place to browse the available stock icons
-and stock items.
+  This source code for this demo doesn't demonstrate anything
+  particularly useful in applications. The purpose of the 'demo' is
+  just to provide a handy place to browse the available stock icons
+  and stock items.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: stock_browser.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
 

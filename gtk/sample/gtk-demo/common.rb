@@ -1,4 +1,12 @@
-# $Id: common.rb,v 1.4 2003/10/14 13:50:24 kzys Exp $
+=begin
+  common.rb - Common class for gtk-demo.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: common.rb,v 1.5 2005/01/03 18:55:02 mutoh Exp $
+=end
+
 require 'gtk2'
 
 module Demo

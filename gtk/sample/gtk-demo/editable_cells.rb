@@ -1,10 +1,14 @@
-# $Id: editable_cells.rb,v 1.5 2003/09/07 11:41:00 mutoh Exp $
 =begin
-= Tree View/Editable Cells
+  editable_cells - Tree View/Editable Cells
 
-This demo demonstrates the use of editable cells in a Gtk::TreeView. If
-you're new to the Gtk::TreeView widgets and associates, look into
-the Gtk::ListStore example first.
+  This demo demonstrates the use of editable cells in a Gtk::TreeView. If
+  you're new to the Gtk::TreeView widgets and associates, look into
+  the Gtk::ListStore example first.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: editable_cells.rb,v 1.6 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
 

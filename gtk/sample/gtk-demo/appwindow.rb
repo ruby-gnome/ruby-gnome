@@ -1,9 +1,14 @@
-# $Id: appwindow.rb,v 1.3 2003/03/23 12:59:17 mutoh Exp $
 =begin
-= Application main window
+  appwindow.rb -  Application main window
 
-Demonstrates a typical application window, with menubar, toolbar, statusbar.
+  Demonstrates a typical application window, with menubar, toolbar, statusbar.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: appwindow.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
 =end
+
 require 'common'
 
 module Demo

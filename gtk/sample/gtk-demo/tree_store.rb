@@ -1,12 +1,16 @@
-# $Id: tree_store.rb,v 1.5 2004/03/01 15:04:46 mutoh Exp $
 =begin
-= Tree View/Tree Store
+  tree_store.rb - Tree View/Tree Store
 
-The Gtk::TreeStore is used to store data in tree form, to be
-used later on by a Gtk::TreeView to display it. This demo builds
-a simple Gtk::TreeStore and displays it. If you're new to the
-GtkTreeView widgets and associates, look into the Gtk::ListStore
-example first.
+  The Gtk::TreeStore is used to store data in tree form, to be
+  used later on by a Gtk::TreeView to display it. This demo builds
+  a simple Gtk::TreeStore and displays it. If you're new to the
+  GtkTreeView widgets and associates, look into the Gtk::ListStore
+  example first.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: tree_store.rb,v 1.6 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
 

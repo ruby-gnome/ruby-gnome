@@ -1,16 +1,20 @@
-# $Id: panes.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
-= Paned Widgets
+  panes.rb - Paned Widgets
+  
+  The Gtk::HPaned and Gtk::VPaned Widgets divide their content
+  area into two panes with a divider in between that the
+  user can adjust. A separate child is placed into each
+  pane.
+  
+  There are a number of options that can be set for each pane.
+  This test contains both a horizontal (HPaned) and a vertical
+  (VPaned) widget, and allows you to adjust the options for
+  each side of each widget.
 
-The Gtk::HPaned and Gtk::VPaned Widgets divide their content
-area into two panes with a divider in between that the
-user can adjust. A separate child is placed into each
-pane.
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
 
-There are a number of options that can be set for each pane.
-This test contains both a horizontal (HPaned) and a vertical
-(VPaned) widget, and allows you to adjust the options for
-each side of each widget.
+  $Id: panes.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
   

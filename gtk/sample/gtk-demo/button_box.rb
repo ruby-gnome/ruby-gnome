@@ -1,8 +1,12 @@
-# $Id: button_box.rb,v 1.1 2003/02/25 15:07:22 kzys Exp $
 =begin
-= Button Boxes
+  button_box.rb - Button Boxes
 
-The Button Box widgets are used to arrange buttons with padding.
+  The Button Box widgets are used to arrange buttons with padding.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: button_box.rb,v 1.2 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
 

@@ -1,32 +1,36 @@
-# $Id: menus.rb,v 1.2 2003/03/21 13:59:46 mutoh Exp $
 =begin
-= Menus
+  menus.rb - Menus
 
-There are several widgets involved in displaying menus. The
-Gtk::MenuBar widget is a horizontal menu bar, which normally appears
-at the top of an application. The Gtk::Menu widget is the actual menu
-that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
-Gtk::MenuShell; a Gtk::MenuShell contains menu items
-(Gtk::MenuItem). Each menu item contains text and/or images and can
-be selected by the user.
+  There are several widgets involved in displaying menus. The
+  Gtk::MenuBar widget is a horizontal menu bar, which normally appears
+  at the top of an application. The Gtk::Menu widget is the actual menu
+  that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
+  Gtk::MenuShell; a Gtk::MenuShell contains menu items
+  (Gtk::MenuItem). Each menu item contains text and/or images and can
+  be selected by the user.
+  
+  There are several kinds of menu item, including plain Gtk::MenuItem,
+  Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
+  which is a check menu item that's in a mutually exclusive group,
+  Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
+  which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
+  can place a Gtk::Image or other widget next to the menu text.
+  
+  A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
+  up when the menu item is selected. Typically, all menu items in a menu bar
+  have submenus.
+  
+  The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
+  It's used inside dialogs and such.
+  
+  Gtk::ItemFactory provides a higher-level interface for creating menu bars
+  and menus; while you can construct menus manually, most people don't
+  do that. There's a separate demo for Gtk::ItemFactory.
 
-There are several kinds of menu item, including plain Gtk::MenuItem,
-Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
-which is a check menu item that's in a mutually exclusive group,
-Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
-which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
-can place a Gtk::Image or other widget next to the menu text.
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
 
-A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
-up when the menu item is selected. Typically, all menu items in a menu bar
-have submenus.
-
-The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
-It's used inside dialogs and such.
-
-Gtk::ItemFactory provides a higher-level interface for creating menu bars
-and menus; while you can construct menus manually, most people don't
-do that. There's a separate demo for Gtk::ItemFactory.
+  $Id: menus.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
 

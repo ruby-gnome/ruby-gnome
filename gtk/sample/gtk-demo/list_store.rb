@@ -1,11 +1,15 @@
-# $Id: list_store.rb,v 1.3 2004/03/01 15:04:46 mutoh Exp $
 =begin
-= Tree View/List Store
+  list_store.rb - Tree View/List Store
 
-The Gtk::ListStore is used to store data in list form, to be used
-later on by a Gtk::TreeView to display it. This demo builds a
-simple GtkListStore and displays it. See the Stock Browser
-demo for a more advanced example.
+  The Gtk::ListStore is used to store data in list form, to be used
+  later on by a Gtk::TreeView to display it. This demo builds a
+  simple Gtk::ListStore and displays it. See the Stock Browser
+  demo for a more advanced example.
+
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: list_store.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
 =end
 require 'common'
     
