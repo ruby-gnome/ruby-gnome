@@ -1,3 +1,15 @@
+2005-02-23  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstregistrypool.c: Added.
+	* src/rbgsttagsetter.c: Added.
+	* src/rbgst.c: Initializes Gst::RegistryPool and Gst::TagSetter.
+	* src/rbgst.h: Added helper macro for Gst::TagSetter and Gst::Plugin.
+	* src/rbgstscheduler.c (Gst::Scheduler::Flags): Added.
+	* src/rbgstschedulerfactory.c (::default_name, ::set_default_name): Added.
+	* src/rbgstthread.c (::current): Added.
+	* src/rbgsttypefindfactory.c (#extensions): Implemented.
+	* src/rbgstxml.c (#parse_memory): Added.
+
 2005-02-21  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Initialize Gst::Tag, do not initialize Gst::Structure.

@@ -21,15 +21,8 @@
 
 #include "rbgst.h"
 
-/* Class: Gst::TypeFindFactory
- * I have no idea so don't ask.
- */
+/* FIXME: Document me */
 
-/*
- * Class method: list
- *
- * Returns: array of all the registered typefind factories.
- */
 static VALUE
 rb_gst_type_find_factory_get_list (void)
 {
@@ -49,53 +42,42 @@ rb_gst_type_find_factory_get_list (void)
 	return arr;
 }
 
-
-/*
- * Method: extensions
- *
- */
 static VALUE 
 rb_gst_type_find_factory_get_extensions (VALUE self) 
 {
-  // TODO Implement this!
-  return Qnil;
+    VALUE ary;
+    gchar **exts;
+    
+    ary = rb_ary_new ();
+    exts = gst_type_find_factory_get_extensions (
+                RGST_TYPE_FIND_FACTORY (self));
+    while (*exts != NULL) {
+        rb_ary_push (ary, CSTR2RVAL (*exts));
+        exts++;
+    }
+    return ary;
 }
 
-
-
-/*
- * Method: caps
- *
- * Returns: the capabilities of this TypeFindFactory
- */
 static VALUE
 rb_gst_type_find_factory_get_caps (VALUE self)
 {
-	return RGST_CAPS_NEW( gst_type_find_factory_get_caps (RGST_TYPE_FIND_FACTORY (self)));
+	return RGST_CAPS_NEW (gst_type_find_factory_get_caps (RGST_TYPE_FIND_FACTORY (self)));
 }
 
-
-
-/*
- * Method: call_function
- *
- * Returns: nil
- */
+#if 0   /* requires Gst::TypeFind */
 static VALUE 
 rb_gst_type_find_factory_call_function (VALUE self, VALUE find)
 {
-	// TODO Implement this!!! (it really does return nil though)
-	// gst_type_find_factory_call_function(RGST_TYPE_FIND_FACTORY (self), );
-  return Qnil;
+    gst_type_find_factory_call_function(RGST_TYPE_FIND_FACTORY (self), );
+    return Qnil;
 }
-
-
+#endif
 
 static VALUE
 rb_gst_type_find_factory_to_s (VALUE self)
 {
 	GstTypeFindFactory *factory = RGST_TYPE_FIND_FACTORY (self);
-	return rb_str_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME(factory));
+	return rb_str_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME (factory));
 }
 
 void
@@ -106,6 +88,6 @@ Init_gst_typefindfactory (void)
 	rb_define_singleton_method(c, "list", rb_gst_type_find_factory_get_list, 0);
 	rb_define_method(c, "extensions", rb_gst_type_find_factory_get_extensions, 0);
 	rb_define_method(c, "caps", rb_gst_type_find_factory_get_caps, 0);
-	rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);
+	//rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);
 	rb_define_method(c, "to_s", rb_gst_type_find_factory_to_s, 0);
 }

@@ -25,6 +25,21 @@
  */
 
 /*
+ * Class method: current
+ *
+ * Returns: the current running thread, as a Gst::Thread object, or nil if
+ * there is no active thread.
+ */
+static VALUE
+rb_gst_thread_current (VALUE self)
+{
+	GstThread *thread = gst_thread_get_current ();
+	return thread != NULL
+		? RGST_THREAD_NEW (thread)
+		: Qnil;
+}
+
+/*
  * Class method: new(name=nil)
  * name: a name which will be attributed to the thread.
  *
@@ -54,6 +69,7 @@ Init_gst_thread (void)
 {
 	VALUE c = G_DEF_CLASS (GST_TYPE_THREAD, "Thread", mGst);
 
+	rb_define_singleton_method (c, "current", rb_gst_thread_current, 0);
 	rb_define_method (c, "initialize", rb_gst_thread_new, -1);
 
 	G_DEF_CLASS (GST_TYPE_THREAD_STATE, "State", c);

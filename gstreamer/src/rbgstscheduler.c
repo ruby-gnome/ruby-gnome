@@ -422,6 +422,10 @@ Init_gst_scheduler (void)
     rb_define_method (c, "show", rb_gst_scheduler_show, 0);
     rb_define_method (c, "state", rb_gst_scheduler_get_state, 0);
 
+    /* XXX do not seem to be used in gst itself... we define them anyway */
+    G_DEF_CLASS (GST_TYPE_SCHEDULER_FLAGS, "Flags", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_SCHEDULER_FLAGS, "GST_SCHEDULER_");
+    
     G_DEF_CLASS (GST_TYPE_SCHEDULER_STATE, "State", c);
     G_DEF_CONSTANTS (c, GST_TYPE_SCHEDULER_STATE, "GST_SCHEDULER_");
 }

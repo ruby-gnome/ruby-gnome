@@ -92,6 +92,32 @@ rb_gst_xml_parse_file (int argc, VALUE *argv, VALUE self)
 }
 
 /*
+ * Method: parse_memory(string, rootname=nil)
+ * string: an XML description inside a string.
+ * rootname: a root name (optional).
+ *
+ * Basically the same as Gst::XML#parse_file except that this method will
+ * take the XML directly from the memory.
+ *  
+ * Returns: true on success, false on failure.
+ */
+static VALUE
+rb_gst_xml_parse_memory (int argc, VALUE *argv, VALUE self)
+{
+	VALUE memory, rootname;
+	gchar *cstr;
+    
+	rb_scan_args (argc, argv, "11", &memory, &rootname);	
+	cstr = RVAL2CSTR (memory);
+	return CBOOL2RVAL (gst_xml_parse_memory (RGST_XML (self),
+						 cstr, 
+						 strlen (cstr), 
+						 NIL_P (rootname) 
+				       	   	     ? NULL 
+		    			   	     : RVAL2CSTR (rootname)));
+}
+
+/*
  * Method: get_element(element_name)
  * element_name: the name of an element.
  *
@@ -141,7 +167,6 @@ rb_gst_xml_get_topelements (VALUE self)
  *
  * Returns: always nil.
  */
-
 static VALUE
 rb_gst_xml_each_topelement (VALUE self)
 {
@@ -157,6 +182,7 @@ Init_gst_xml (void)
 	
 	rb_define_method (c, "initialize", rb_gst_xml_new, 0);
 	rb_define_method (c, "parse_file", rb_gst_xml_parse_file, -1);
+	rb_define_method (c, "parse_memory", rb_gst_xml_parse_memory, -1);
 	rb_define_method (c, "get_element", rb_gst_xml_get_element, 1);
 	rb_define_method (c, "topelements", rb_gst_xml_get_topelements, 0);
 	rb_define_method (c, "each_topelement", rb_gst_xml_each_topelement, 0);

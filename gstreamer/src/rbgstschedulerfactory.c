@@ -24,6 +24,21 @@
  * Create schedulers from a factory.  
  */
 
+/* FIXME: document me */
+static VALUE
+rb_gst_sf_default_name (VALUE self)
+{
+	return CSTR2RVAL (gst_scheduler_factory_get_default_name ());
+}
+
+/* FIXME: document me */
+static VALUE
+rb_gst_sf_set_default_name (VALUE self, VALUE name)
+{
+	gst_scheduler_factory_set_default_name (RVAL2CSTR (name));
+	return self;
+}
+
 /* Method: to_s
  * Returns: a String representing the factory.
  */
@@ -39,6 +54,12 @@ rb_gst_schedulerfactory_to_s (VALUE self)
 void
 Init_gst_schedulerfactory (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_SCHEDULER_FACTORY, "SchedulerFactory", mGst); 
+	VALUE c = G_DEF_CLASS (GST_TYPE_SCHEDULER_FACTORY, "SchedulerFactory", 
+			       mGst); 
+
+	rb_define_singleton_method (c, "default_name", rb_gst_sf_default_name, 0);
+	rb_define_singleton_method (c, "set_default_name", 
+				    rb_gst_sf_set_default_name, 1);
+	G_DEF_SETTERS (CLASS_OF (c));
 	rb_define_method (c, "to_s", rb_gst_schedulerfactory_to_s, 0);
 }
