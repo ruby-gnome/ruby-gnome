@@ -1,3 +1,15 @@
+2003-11-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>	
+
+	* sample/type-register.rb: remove Japanese comments.
+
+	* src/rbglib.h: increment RBGLIB_MINOR_VERSION.
+
+	* src/rbgobj_object.c: do not depend on C99, Thanks to Hiroshi
+	IGARASHI.
+
+	* src/rbgobj_object.c: remove unnecessary #endif, Thanks to Nobuyoshi
+	Nakada.
+
 2003-11-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* sample/type-register.rb: add new file.

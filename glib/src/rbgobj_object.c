@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/11/05 12:56:54 $
+  $Date: 2003/11/06 16:53:43 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -451,8 +451,10 @@ get_prop_func(GObject* object,
         g_free(name);
     }
 
-    VALUE ret = rb_funcall(GOBJ2RVAL(object), ruby_getter, 0);
-    rbgobj_rvalue_to_gvalue(ret, value);
+    {
+        VALUE ret = rb_funcall(GOBJ2RVAL(object), ruby_getter, 0);
+        rbgobj_rvalue_to_gvalue(ret, value);
+    }
 }
 
 // FIXME: use rb_protect
@@ -585,8 +587,6 @@ Init_gobject_subclass()
     rb_global_variable(&proc_mod_eval);
     proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
 }
-
-#endif
 
 /**********************************************************************/
 

@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: sakai $
-  $Date: 2003/09/06 05:46:16 $
+  $Date: 2003/11/06 16:53:43 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -21,7 +21,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define RBGLIB_MAJOR_VERSION 0
-#define RBGLIB_MINOR_VERSION 7
+#define RBGLIB_MINOR_VERSION 8
 #define RBGLIB_MICRO_VERSION 0
 
 #ifndef StringValue

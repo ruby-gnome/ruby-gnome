@@ -5,12 +5,14 @@ class MyButton < Gtk::Button
   type_register("MyButton")
 
   def initialize(label = nil)
-    # XXX: type_registerするとsuperがGLib::Object#initialize相当になる
+    # XXX: 
+    # When type_register() is used.
+    # super is equivalent to GLib::Object#initialize.
     super("label" => label)
     @fuga = 0
   end
 
-  # 既存のシグナルのデフォルトハンドラをオーバーライド
+  # override existing default handler of "clicked" signal.
   def signal_do_clicked(*args)
     puts "MyButton#signal_do_clicked enter"
     #p caller
@@ -18,21 +20,21 @@ class MyButton < Gtk::Button
     puts "MyButton#signal_do_clicked leave"
   end
 
-  # 新しいシグナルを定義
-  signal_new("hoge",                  # 名前
-             GLib::Signal::RUN_FIRST, # フラグ
-             nil,                     # accumulator (XXX: 仕様が未確定)
-             GLib::Type["void"],      # 返り値の型
-             GLib::Type["gint"], GLib::Type["gint"] # 引数の型
+  # define new signal "hoge"
+  signal_new("hoge",                  # name
+             GLib::Signal::RUN_FIRST, # flags
+             nil,                     # accumulator (XXX: not supported yet)
+             GLib::Type["void"],      # return type
+             GLib::Type["gint"], GLib::Type["gint"] # parameter types
              )
-  # 新しいシグナルのデフォルトハンドラ
+  # define default handler of "hoge" signal
   def signal_do_hoge(a, b)
     puts "MyButton#signal_do_hoge enter"
     #p caller
     puts "MyButton#signal_do_hoge leave"
   end
 
-  # 新しいプロパティの作成
+  # define new property "fuga"
   install_property(GLib::Param::Int.new("fuga", # name
                                         "Fuga", # nick
                                         "fuga hoge", # blurb
@@ -41,7 +43,7 @@ class MyButton < Gtk::Button
                                         0,     # default
                                         GLib::Param::READABLE |
                                         GLib::Param::WRITABLE))
-  # プロパティの実装
+  # implementation of the property "fuga"
   def fuga
     puts "MyButton#fuga is called"
     @fuga
@@ -55,14 +57,14 @@ end
 class MyButton2 < MyButton
   type_register("MyButton2")
 
-  # clickedシグナルのデフォルトハンドラをオーバーライド
+  # override default handler of "clicked" signal
   def signal_do_clicked(*args)
     puts "MyButton2#signal_do_clicked enter"
     super(*args)
     puts "MyButton2#signal_do_clicked leave"
   end
 
-  # hogeシグナルのデフォルトハンドラをオーバーライド
+  # override default handler of "hoge" signal
   def signal_do_hoge(a, b)
     puts "MyButton2#signal_do_hoge enter"
     #p caller
