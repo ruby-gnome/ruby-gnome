@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/06/10 18:51:43 $
+  $Date: 2002/06/17 18:14:24 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -17,13 +17,15 @@
 static VALUE r2g_func_table;
 static VALUE g2r_func_table;
 
-void rbgobj_register_r2g_func(VALUE klass, RValueToGValueFunc func)
+void
+rbgobj_register_r2g_func(VALUE klass, RValueToGValueFunc func)
 {
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
     rb_hash_aset(r2g_func_table, klass, obj);
 }
 
-void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
+void
+rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 {
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
     rb_hash_aset(g2r_func_table, INT2FIX(gtype), obj);
@@ -31,7 +33,8 @@ void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 
 /**********************************************************************/
 
-VALUE rbgobj_gvalue_to_rvalue(GValue* value)
+VALUE
+rbgobj_gvalue_to_rvalue(GValue* value)
 {
     GType gtype;
 
@@ -83,7 +86,8 @@ VALUE rbgobj_gvalue_to_rvalue(GValue* value)
     return Qnil;
 }
 
-void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
+void
+rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 {
     VALUE mods;
     VALUE* c;
@@ -115,33 +119,33 @@ void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 /**********************************************************************/
 /* Ruby -> GLib */
 
-static
-void nil_to_gvalue(VALUE from, GValue* to)
+static void
+nil_to_gvalue(VALUE from, GValue* to)
 {
     /* ??? */
 }
 
-static
-void bool_to_gvalue(VALUE from, GValue* to)
+static void
+bool_to_gvalue(VALUE from, GValue* to)
 {
     g_value_set_boolean(to, RTEST(from));
 }
 
-static
-void str_to_gvalue(VALUE from, GValue* to)
+static void
+str_to_gvalue(VALUE from, GValue* to)
 {
     StringValue(from);
     g_value_set_string(to, StringValuePtr(from));
 }
 
-static
-void int_to_gvalue(VALUE from, GValue* to)
+static void
+int_to_gvalue(VALUE from, GValue* to)
 {
     g_value_set_int(to, NUM2INT(from));
 }
 
-static
-void float_to_gvalue(VALUE from, GValue* to)
+static void
+float_to_gvalue(VALUE from, GValue* to)
 {
     g_value_set_double(to, NUM2DBL(from));
 }

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/06/10 18:51:43 $
+  $Date: 2002/06/17 18:14:24 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -100,9 +100,9 @@ rbgobj_set_gobject(obj, gobj)
 
     /* XXX */
     if (cinfo)
-	data = Data_Wrap_Struct(rb_cData, cinfo->mark, &g_object_unref, gobj);
+	data = Data_Wrap_Struct(rb_cData, cinfo->mark, g_object_unref, gobj);
     else
-	data = Data_Wrap_Struct(rb_cData, gobj_mark, &g_object_unref, gobj);
+	data = Data_Wrap_Struct(rb_cData, gobj_mark, g_object_unref, gobj);
 
     g_object_set_data_full(gobj, RUBY_GOBJECT_OBJ_KEY,
                            (gpointer)obj, delete_gobject);
@@ -141,7 +141,8 @@ rbgobj_make_gobject_auto_type(gobj)
     return rbgobj_make_gobject(rbgobj_lookup_rbclass(gobj), gobj);
 }
 
-void rbgobjct_add_relative(obj, relative)
+void
+rbgobjct_add_relative(obj, relative)
     VALUE obj, relative;
 {
     VALUE ary = rb_ivar_get(obj, id_relatives);
@@ -297,10 +298,8 @@ gobj_sig_connect(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &sig, &after);
     StringValue(sig);
-    id = rb_intern(StringValuePtr(sig));
-    rclosure = g_rclosure_new(rb_f_lambda());
 
-    StringValue(sig);
+    rclosure = g_rclosure_new(rb_f_lambda());
     i = g_signal_connect_closure(rbgobj_get_gobject(self),
                                  StringValuePtr(sig), rclosure, RTEST(after));
 
@@ -410,8 +409,8 @@ gobj_clone(self)
     rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
 }
 
-static
-VALUE gobj_smethod_added(self, id)
+static VALUE
+gobj_smethod_added(self, id)
     VALUE self, id;
 {
     GObject *obj = rbgobj_get_gobject(self);
@@ -426,14 +425,14 @@ VALUE gobj_smethod_added(self, id)
     return Qnil;
 }
 
-static
-VALUE _gobject_to_ruby(GValue* from)
+static VALUE
+_gobject_to_ruby(GValue* from)
 {
     return rbgobj_get_value_from_gobject(g_value_get_object(from));
 }
 
-static
-void _gobject_from_ruby(VALUE from, GValue* to)
+static void
+_gobject_from_ruby(VALUE from, GValue* to)
 {
     g_value_set_object(to, rbgobj_get_gobject(from));
 }
@@ -448,8 +447,8 @@ void Init_gobject_gobj()
     cinfo.mark = 0;
     cinfo.free = 0;
     rbgobj_register_class(&cinfo);
-    rbgobj_register_r2g_func(rbgobj_cGObject, &_gobject_from_ruby);
-    rbgobj_register_g2r_func(G_TYPE_OBJECT, &_gobject_to_ruby);
+    rbgobj_register_r2g_func(rbgobj_cGObject, _gobject_from_ruby);
+    rbgobj_register_g2r_func(G_TYPE_OBJECT, _gobject_to_ruby);
 
     rb_define_singleton_method(rbgobj_cGObject, "gobject_new", gobj_new, 2);
 

@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/06/10 18:51:43 $
+  $Date: 2002/06/17 18:14:24 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -41,12 +41,13 @@ struct _GRClosure
     VALUE callback;
 };
 
-void rclosure_marshal(GClosure*      closure,
-                      GValue         *return_value,
-                      guint           n_param_values,
-                      const GValue   *param_values,
-                      gpointer        invocation_hint,
-                      gpointer        marshal_data)
+void
+rclosure_marshal(GClosure*      closure,
+                 GValue         *return_value,
+                 guint           n_param_values,
+                 const GValue   *param_values,
+                 gpointer        invocation_hint,
+                 gpointer        marshal_data)
 {
     int i;
     VALUE* params = ALLOCA_N(VALUE, n_param_values);
@@ -65,20 +66,21 @@ void rclosure_marshal(GClosure*      closure,
 
 static VALUE rclosure_list;
 
-static
-void rclosure_remove(GClosure* closure, gpointer data)
+static void
+rclosure_remove(GClosure* closure, gpointer data)
 {
     VALUE obj = (VALUE)data;
     rb_hash_aset(rclosure_list, obj, Qnil);
 }
 
-static
-void rclosure_mark(GRClosure* closure)
+static void
+rclosure_mark(GRClosure* closure)
 {
     rb_gc_mark(closure->callback);
 }
 
-GClosure* g_rclosure_new(VALUE callback_proc)
+GClosure*
+g_rclosure_new(VALUE callback_proc)
 {
     GRClosure* closure;
     VALUE obj;
@@ -96,8 +98,8 @@ GClosure* g_rclosure_new(VALUE callback_proc)
     return (GClosure*)closure;
 }
 
-static
-void Init_rclosure()
+static void
+Init_rclosure()
 {
     rb_global_variable(&rclosure_list);
     rclosure_list = rb_hash_new();
