@@ -4,7 +4,7 @@
   rbgtktoolitem.c -
 
   $Author: mutoh $
-  $Date: 2004/05/31 17:42:24 $
+  $Date: 2004/08/05 18:38:52 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -50,11 +50,18 @@ toolitem_get_expand(self)
 }
 
 static VALUE
-toolitem_set_tooltip(self, tooltip, tip_text, tip_private)
-    VALUE self, tooltip, tip_text, tip_private;
+toolitem_set_tooltip(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE tooltip, tip_text, tip_private;
+
+    rb_scan_args(argc, argv, "21", &tooltip, &tip_text, &tip_private);
+
     gtk_tool_item_set_tooltip(_SELF(self), GTK_TOOLTIPS(RVAL2GOBJ(tooltip)),
-                              RVAL2CSTR(tip_text), RVAL2CSTR(tip_private));
+                              RVAL2CSTR(tip_text), 
+                              NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
     return self;
 }
 
@@ -150,7 +157,7 @@ Init_gtk_toolitem()
     rb_define_method(gToolItem, "homogeneous?", toolitem_get_homogeneous, 0);
     rb_define_method(gToolItem, "set_expand", toolitem_set_expand, 1);
     rb_define_method(gToolItem, "expand?", toolitem_get_expand, 0);
-    rb_define_method(gToolItem, "set_tooltip", toolitem_set_tooltip, 3);
+    rb_define_method(gToolItem, "set_tooltip", toolitem_set_tooltip, -1);
     rb_define_method(gToolItem, "set_use_drag_window", toolitem_set_use_drag_window, 1);
     rb_define_method(gToolItem, "use_drag_window?", toolitem_get_use_drag_window, 0);
     rb_define_method(gToolItem, "icon_size", toolitem_get_icon_size, 0);

@@ -1,3 +1,8 @@
+2004-08-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolitem.c: 3rd argument of Gtk::ToolItem#set_tooltip becomes
+	omittable.
+
 2004-08-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkliststore.c: Fix a bug of Gtk::ListStore#restore.
