@@ -52,6 +52,7 @@ Init_gst_classes (void)
     extern void Init_gst_querytype (void);
     extern void Init_gst_registry (void);
     extern void Init_gst_schedulerfactory (void);
+    extern void Init_gst_structure (void);
     extern void Init_gst_systemclock (void);
     extern void Init_gst_thread (void);
     extern void Init_gst_xml (void);
@@ -84,6 +85,7 @@ Init_gst_classes (void)
     Init_gst_querytype ();
     Init_gst_registry ();
     Init_gst_schedulerfactory ();
+    Init_gst_structure ();
     Init_gst_systemclock ();
     Init_gst_thread ();
     Init_gst_xml ();

@@ -1,3 +1,22 @@
+2004-07-28  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.c: Initializes Gst::Structure.
+	* src/rbgst.h: Added helper macros for Gst::Structure and fixed
+	  the declaration of the Gst::ClockEntry's GType function. 
+	* src/rbgstcaps.c (#initialize, #set_any, #append, #append_structure, 
+	  #size, #get_structure, #set_simple, #any?, #empty?, #simple?, 
+	  #equal?, #equal_fixed?, #always_compatible?, #subset?, #intersect, 
+	  #union, #normalize, #simplify, #simplify!, #replace!, #to_string, 
+	  #subtract): Added. 
+	* src/rbgstclock.c (#event_time, #get_event_time_delay, #next_id):
+	  Added.
+	* src/rbgstclockentry.c: Indentation clean.
+	* src/rbgstelement.c (#enable_threadsafe_properties,
+	  #disable_threadsafe_properties, #set_pending_properties,
+	  #set_clock, #time, #set_time, #set_time_delay, #adjust_time):
+	  Added. 
+	* src/rbgststructure.c: Added.
+
 2004-07-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c (Gst.set_debug): Removed. 

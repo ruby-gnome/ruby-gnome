@@ -26,25 +26,28 @@
  */
 
 static GstClockEntry *
-clock_entry_copy (const GstClockEntry* clock_entry)
+clock_entry_copy (const GstClockEntry * clock_entry)
 {
-	GstClockEntry* new_clock_entry;
-	g_return_val_if_fail (clock_entry != NULL, NULL);
-	new_clock_entry = g_new (GstClockEntry, sizeof (GstClockEntry));
-	*new_clock_entry = *clock_entry;
-	return new_clock_entry;
+    GstClockEntry *new_clock_entry;
+
+    g_return_val_if_fail (clock_entry != NULL, NULL);
+    new_clock_entry = g_new (GstClockEntry, sizeof (GstClockEntry));
+    *new_clock_entry = *clock_entry;
+    return new_clock_entry;
 }
 
 GType
 gst_clock_entry_get_type (void)
 {
-	static GType our_type = 0;
-	if (our_type == 0) {
-		our_type = g_boxed_type_register_static ("GstClockID",
-			(GBoxedCopyFunc) clock_entry_copy,
-			(GBoxedFreeFunc) g_free);
-	}
-	return our_type;
+    static GType our_type = 0;
+
+    if (our_type == 0) {
+        our_type = g_boxed_type_register_static ("GstClockID",
+                                                 (GBoxedCopyFunc)
+                                                 clock_entry_copy,
+                                                 (GBoxedFreeFunc) g_free);
+    }
+    return our_type;
 }
 
 /*
@@ -66,25 +69,27 @@ gst_clock_entry_get_type (void)
  * Returns: a new Gst::ClockEntry object.
  */
 static VALUE
-rb_gst_clock_entry_new (int argc, VALUE *argv, VALUE self)
+rb_gst_clock_entry_new (int argc, VALUE * argv, VALUE self)
 {
-	VALUE clock, time, interval;
-	GstClockID id;
+    VALUE clock, time, interval;
+    GstClockID id;
 
-	rb_scan_args (argc, argv, "21", &clock, &time, &interval);
+    rb_scan_args (argc, argv, "21", &clock, &time, &interval);
 
-	/* Single-shot */
-	if (NIL_P (interval))
-		id = gst_clock_new_single_shot_id (RGST_CLOCK (clock),
-						   NUM2ULL (time));
-	/* Periodic */
-	else
-		id = gst_clock_new_periodic_id( RGST_CLOCK (clock),
-						NUM2ULL (time),
-						NUM2ULL (interval));
+    /*
+     * Single-shot 
+     */
+    if (NIL_P (interval))
+        id = gst_clock_new_single_shot_id (RGST_CLOCK (clock), NUM2ULL (time));
+    /*
+     * Periodic 
+     */
+    else
+        id = gst_clock_new_periodic_id (RGST_CLOCK (clock),
+                                        NUM2ULL (time), NUM2ULL (interval));
 
-	G_INITIALIZE (self, GST_CLOCK_ENTRY (id)); 
-	return Qnil;
+    G_INITIALIZE (self, GST_CLOCK_ENTRY (id));
+    return Qnil;
 }
 
 /* Method: single_shot?
@@ -93,8 +98,8 @@ rb_gst_clock_entry_new (int argc, VALUE *argv, VALUE self)
 static VALUE
 rb_gst_clock_entry_is_single_shot (VALUE self)
 {
-	return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (
-		RGST_CLOCK_ENTRY (self)) == GST_CLOCK_ENTRY_SINGLE);
+    return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (RGST_CLOCK_ENTRY (self)) ==
+                       GST_CLOCK_ENTRY_SINGLE);
 }
 
 /* Method: periodic?
@@ -103,8 +108,8 @@ rb_gst_clock_entry_is_single_shot (VALUE self)
 static VALUE
 rb_gst_clock_entry_is_periodic (VALUE self)
 {
-	return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (
-		RGST_CLOCK_ENTRY (self)) == GST_CLOCK_ENTRY_PERIODIC);
+    return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (RGST_CLOCK_ENTRY (self)) ==
+                       GST_CLOCK_ENTRY_PERIODIC);
 }
 
 /*
@@ -117,8 +122,8 @@ rb_gst_clock_entry_is_periodic (VALUE self)
 static VALUE
 rb_gst_clock_entry_unschedule (VALUE self)
 {
-	gst_clock_id_unschedule (RGST_CLOCK_ENTRY (self));
-	return self;
+    gst_clock_id_unschedule (RGST_CLOCK_ENTRY (self));
+    return self;
 }
 
 /*
@@ -131,13 +136,13 @@ rb_gst_clock_entry_unschedule (VALUE self)
 static VALUE
 rb_gst_clock_entry_wait (VALUE self)
 {
-	return GENUM2RVAL (gst_clock_id_wait (RGST_CLOCK_ENTRY (self), NULL),
-			   GST_TYPE_CLOCK_RETURN);
+    return GENUM2RVAL (gst_clock_id_wait (RGST_CLOCK_ENTRY (self), NULL),
+                       GST_TYPE_CLOCK_RETURN);
 }
 
 struct __callback {
-	GstClockID id;
-	VALUE callback;
+    GstClockID id;
+    VALUE callback;
 };
 
 static GSList *__callbacks = NULL;
@@ -145,26 +150,29 @@ static GSList *__callbacks = NULL;
 static struct __callback *
 __callback_get (GstClockID id)
 {
-	GSList *i;
-	for (i = __callbacks; i != NULL; i = g_slist_next (i)) {
-		struct __callback *e = (struct __callback *) i->data;
-		if (e->id == id)
-			return e;
-	}
-	return NULL;
+    GSList *i;
+
+    for (i = __callbacks; i != NULL; i = g_slist_next (i)) {
+        struct __callback *e = (struct __callback *)i->data;
+
+        if (e->id == id)
+            return e;
+    }
+    return NULL;
 }
 
 static gboolean
-__callback_dispatcher (GstClock *clock, GstClockTime time, GstClockID id, gpointer user_data)
+__callback_dispatcher (GstClock * clock, GstClockTime time, GstClockID id,
+                       gpointer user_data)
 {
-	struct __callback *e = __callback_get (id);
-	g_assert (e != NULL);
-	return RVAL2CBOOL (rb_funcall (e->callback,
-				       rb_intern ("call"),
-				       3,
-				       RGST_CLOCK_NEW (clock), 
-				       ULL2NUM (time), 
-				       RGST_CLOCK_ENTRY_NEW (id)));
+    struct __callback *e = __callback_get (id);
+
+    g_assert (e != NULL);
+    return RVAL2CBOOL (rb_funcall (e->callback,
+                                   rb_intern ("call"),
+                                   3,
+                                   RGST_CLOCK_NEW (clock),
+                                   ULL2NUM (time), RGST_CLOCK_ENTRY_NEW (id)));
 }
 
 /*
@@ -179,24 +187,24 @@ __callback_dispatcher (GstClock *clock, GstClockTime time, GstClockID id, gpoint
 static VALUE
 rb_gst_clock_entry_wait_async (VALUE self)
 {
-	GstClockID id = (GstClockID) RGST_CLOCK_ENTRY (self);
-	
-	if (__callback_get (id) != NULL)
-		rb_raise (rb_eRuntimeError,
-			  "An asynch callback is already registred to this entry.");
-	else {
-		struct __callback *e = g_malloc (sizeof (struct __callback));
-		g_assert (e != NULL);
-		e->id = id;
-		e->callback = G_BLOCK_PROC ();
-		__callbacks = g_slist_append (__callbacks, e);
-		return GENUM2RVAL (INT2FIX (gst_clock_id_wait_async (
-						id,
-						__callback_dispatcher,
-						NULL)),
-				   GST_TYPE_CLOCK_RETURN);
-	}
-	return Qnil;
+    GstClockID id = (GstClockID) RGST_CLOCK_ENTRY (self);
+
+    if (__callback_get (id) != NULL)
+        rb_raise (rb_eRuntimeError,
+                  "An asynch callback is already registred to this entry.");
+    else {
+        struct __callback *e = g_malloc (sizeof (struct __callback));
+
+        g_assert (e != NULL);
+        e->id = id;
+        e->callback = G_BLOCK_PROC ();
+        __callbacks = g_slist_append (__callbacks, e);
+        return GENUM2RVAL (INT2FIX (gst_clock_id_wait_async (id,
+                                                             __callback_dispatcher,
+                                                             NULL)),
+                           GST_TYPE_CLOCK_RETURN);
+    }
+    return Qnil;
 }
 
 /*
@@ -209,8 +217,8 @@ rb_gst_clock_entry_wait_async (VALUE self)
 static VALUE
 rb_gst_clock_entry_unlock (VALUE self)
 {
-	gst_clock_id_unlock (RGST_CLOCK_ENTRY (self));
-	return self;
+    gst_clock_id_unlock (RGST_CLOCK_ENTRY (self));
+    return self;
 }
 
 /* Method: time
@@ -219,7 +227,7 @@ rb_gst_clock_entry_unlock (VALUE self)
 static VALUE
 rb_gst_clock_entry_get_time (VALUE self)
 {
-	return ULL2NUM (GST_CLOCK_ENTRY_TIME (RGST_CLOCK_ENTRY (self)));
+    return ULL2NUM (GST_CLOCK_ENTRY_TIME (RGST_CLOCK_ENTRY (self)));
 }
 
 /* Method: interval
@@ -229,7 +237,7 @@ rb_gst_clock_entry_get_time (VALUE self)
 static VALUE
 rb_gst_clock_entry_get_interval (VALUE self)
 {
-	return ULL2NUM (GST_CLOCK_ENTRY_INTERVAL (RGST_CLOCK_ENTRY (self)));
+    return ULL2NUM (GST_CLOCK_ENTRY_INTERVAL (RGST_CLOCK_ENTRY (self)));
 }
 
 /* Method: clock
@@ -238,7 +246,7 @@ rb_gst_clock_entry_get_interval (VALUE self)
 static VALUE
 rb_gst_clock_entry_get_clock (VALUE self)
 {
-	return RGST_CLOCK_NEW (GST_CLOCK_ENTRY_CLOCK (RGST_CLOCK_ENTRY (self)));
+    return RGST_CLOCK_NEW (GST_CLOCK_ENTRY_CLOCK (RGST_CLOCK_ENTRY (self)));
 }
 
 /* Method: status
@@ -247,30 +255,29 @@ rb_gst_clock_entry_get_clock (VALUE self)
 static VALUE
 rb_gst_clock_entry_get_status (VALUE self)
 {
-	return GENUM2RVAL (GST_CLOCK_ENTRY_STATUS (RGST_CLOCK_ENTRY (self)),
-			   GST_TYPE_CLOCK_ENTRY_STATUS);
+    return GENUM2RVAL (GST_CLOCK_ENTRY_STATUS (RGST_CLOCK_ENTRY (self)),
+                       GST_TYPE_CLOCK_ENTRY_STATUS);
 }
 
 void
 Init_gst_clock_entry (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
+    VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
 
-	rb_define_method (c, "initialize", rb_gst_clock_entry_new, -1);
-	rb_define_method (c, "single_shot?", rb_gst_clock_entry_is_single_shot, 0);
-	rb_define_method (c, "periodic?", rb_gst_clock_entry_is_periodic, 0);
-	rb_define_method (c, "wait", rb_gst_clock_entry_wait, 0);
-	rb_define_method (c, "wait_async", rb_gst_clock_entry_wait_async, 0);
-	rb_define_method (c, "unschedule", rb_gst_clock_entry_unschedule, 0);
-	rb_define_method (c, "unlock", rb_gst_clock_entry_unlock, 0);
-	rb_define_method (c, "clock", rb_gst_clock_entry_get_clock, 0);
-	rb_define_method (c, "time", rb_gst_clock_entry_get_time, 0);
-	rb_define_method (c, "interval", rb_gst_clock_entry_get_interval, 0);
-	rb_define_method (c, "status", rb_gst_clock_entry_get_status, 0);
+    rb_define_method (c, "initialize", rb_gst_clock_entry_new, -1);
+    rb_define_method (c, "single_shot?", rb_gst_clock_entry_is_single_shot, 0);
+    rb_define_method (c, "periodic?", rb_gst_clock_entry_is_periodic, 0);
+    rb_define_method (c, "wait", rb_gst_clock_entry_wait, 0);
+    rb_define_method (c, "wait_async", rb_gst_clock_entry_wait_async, 0);
+    rb_define_method (c, "unschedule", rb_gst_clock_entry_unschedule, 0);
+    rb_define_method (c, "unlock", rb_gst_clock_entry_unlock, 0);
+    rb_define_method (c, "clock", rb_gst_clock_entry_get_clock, 0);
+    rb_define_method (c, "time", rb_gst_clock_entry_get_time, 0);
+    rb_define_method (c, "interval", rb_gst_clock_entry_get_interval, 0);
+    rb_define_method (c, "status", rb_gst_clock_entry_get_status, 0);
 
-	G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
-	G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_STATUS, "Status", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_STATUS, "GST_CLOCK_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_STATUS, "Status", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_STATUS, "GST_CLOCK_ENTRY_");
 }
-

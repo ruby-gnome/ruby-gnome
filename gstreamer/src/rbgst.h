@@ -71,6 +71,7 @@ extern gboolean debug_mode;
 #define RGST_QUERY_TYPE(o)          (GST_QUERY_TYPE2(RVAL2BOXED(o, GST_TYPE_QUERY_TYPE2)))
 #define RGST_REGISTRY(o)            (GST_REGISTRY(RVAL2GOBJ(o)))
 #define RGST_SCHEDULER_FACTORY(o)   (GST_SCHEDULER_FACTORY(RVAL2GOBJ(o)))
+#define RGST_STRUCTURE(o)           (GST_STRUCTURE(RVAL2BOXED(o, GST_TYPE_STRUCTURE)))
 #define RGST_THREAD(o)              (GST_THREAD(RVAL2GOBJ(o)))
 #define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
 
@@ -94,10 +95,11 @@ extern gboolean debug_mode;
 #define RGST_QUERY_TYPE_NEW(o)          (BOXED2RVAL(GST_QUERY_TYPE2(o), GST_TYPE_QUERY_TYPE2))
 #define RGST_REGISTRY_NEW(o)            (RGST_GOBJ_NEW(GST_REGISTRY(o)))
 #define RGST_SCHEDULER_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_SCHEDULER_FACTORY(o)))
+#define RGST_STRUCTURE_NEW(o)           (BOXED2RVAL(GST_STRUCTURE(o), GST_TYPE_STRUCTURE))
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
 #define RGST_THREAD_NEW(o)              (RGST_GOBJ_NEW(GST_THREAD(o)))
 
-GType gst_clock_handle_get_type ();
+GType gst_clock_entry_get_type ();
 GType gst_event_mask_get_type ();
 GType gst_format_get_type2 ();
 GType gst_plugin_get_type ();

@@ -30,7 +30,7 @@
 static VALUE
 rb_gst_clock_get_speed (VALUE self)
 {
-	return DBL2NUM (gst_clock_get_speed (RGST_CLOCK (self)));
+    return DBL2NUM (gst_clock_get_speed (RGST_CLOCK (self)));
 }
 
 /*
@@ -45,17 +45,17 @@ rb_gst_clock_get_speed (VALUE self)
 static VALUE
 rb_gst_clock_set_speed (VALUE self, VALUE speed)
 {
-	gst_clock_set_speed (RGST_CLOCK (self), DBL2NUM (speed));
-	return self;
+    gst_clock_set_speed (RGST_CLOCK (self), DBL2NUM (speed));
+    return self;
 }
 
 /* Method: resolution
  * Returns: the accuracy of the clock.
  */
-static VALUE 
+static VALUE
 rb_gst_clock_get_resolution (VALUE self)
 {
-	return ULL2NUM (gst_clock_get_resolution (RGST_CLOCK (self)));
+    return ULL2NUM (gst_clock_get_resolution (RGST_CLOCK (self)));
 }
 
 /*
@@ -69,8 +69,8 @@ rb_gst_clock_get_resolution (VALUE self)
 static VALUE
 rb_gst_clock_set_resolution (VALUE self, VALUE resolution)
 {
-	gst_clock_set_resolution (RGST_CLOCK (self), ULL2NUM (resolution));
-	return self;
+    gst_clock_set_resolution (RGST_CLOCK (self), ULL2NUM (resolution));
+    return self;
 }
 
 /* Method: time
@@ -79,7 +79,7 @@ rb_gst_clock_set_resolution (VALUE self, VALUE resolution)
 static VALUE
 rb_gst_clock_get_time (VALUE self)
 {
-	return ULL2NUM (gst_clock_get_time (RGST_CLOCK (self)));
+    return ULL2NUM (gst_clock_get_time (RGST_CLOCK (self)));
 }
 
 /* Method: active?
@@ -88,7 +88,7 @@ rb_gst_clock_get_time (VALUE self)
 static VALUE
 rb_gst_clock_is_active (VALUE self)
 {
-	return CBOOL2RVAL (gst_clock_is_active (RGST_CLOCK (self)));
+    return CBOOL2RVAL (gst_clock_is_active (RGST_CLOCK (self)));
 }
 
 /*
@@ -103,8 +103,8 @@ rb_gst_clock_is_active (VALUE self)
 static VALUE
 rb_gst_clock_set_active (VALUE self, VALUE active)
 {
-	gst_clock_set_active (RGST_CLOCK (self), RVAL2CBOOL (active));
-	return self;
+    gst_clock_set_active (RGST_CLOCK (self), RVAL2CBOOL (active));
+    return self;
 }
 
 /*
@@ -117,8 +117,8 @@ rb_gst_clock_set_active (VALUE self, VALUE active)
 static VALUE
 rb_gst_clock_reset (VALUE self)
 {
-	gst_clock_reset (RGST_CLOCK (self));
-	return self;
+    gst_clock_reset (RGST_CLOCK (self));
+    return self;
 }
 
 /*
@@ -135,8 +135,8 @@ rb_gst_clock_reset (VALUE self)
 static VALUE
 rb_gst_clock_handle_discont (VALUE self, VALUE time)
 {
-	return CBOOL2RVAL (gst_clock_handle_discont (RGST_CLOCK (self), 
-						     NUM2ULL (time)));
+    return CBOOL2RVAL (gst_clock_handle_discont (RGST_CLOCK (self),
+                                                 NUM2ULL (time)));
 }
 
 /*
@@ -149,34 +149,93 @@ rb_gst_clock_handle_discont (VALUE self, VALUE time)
 static VALUE
 rb_gst_clock_is_equal (VALUE self, VALUE other_clock)
 {
-	if (NIL_P (other_clock))
-		return Qfalse;
-	else {
-		GstClock *c1 = RGST_CLOCK (self);
-		GstClock *c2 = RGST_CLOCK (other_clock);
-		return CBOOL2RVAL (GST_CLOCK_DIFF (c1, c2) == 0);
-	}
+    if (NIL_P (other_clock))
+        return Qfalse;
+    else {
+        GstClock *c1 = RGST_CLOCK (self);
+        GstClock *c2 = RGST_CLOCK (other_clock);
+
+        return CBOOL2RVAL (GST_CLOCK_DIFF (c1, c2) == 0);
+    }
+}
+
+/*
+ * Method: event_time
+ *
+ * Gets the "event time" of a given clock. An event on the clock happens 
+ * whenever this method is called. This ensures that multiple events that 
+ * happen shortly after each other are treated as if they happened at the same 
+ * time. GStreamer uses to keep state changes of multiple elements in sync.
+ *
+ * Returns: the time of the event (in nanoseconds).
+ */
+static VALUE
+rb_gst_clock_get_event_time (VALUE self)
+{
+    return ULL2NUM (gst_clock_get_event_time (RGST_CLOCK (self)));
+}
+
+/*
+ * Method: get_event_time_delay(delay)
+ * delay: time before the event actually occurs (in nanoseconds).
+ *
+ * Gets the "event time" of a given clock. An event on the clock happens 
+ * whenever this method is called. This ensures that multiple events that 
+ * happen shortly after each other are treated as if they happened at the same 
+ * time. GStreamer uses to keep state changes of multiple elements in sync.
+ * 
+ * When calling this method, the specified delay will be added to the current 
+ * time to produce the event time. This can be used for events that are 
+ * scheduled to happen at some point in the future.
+ * 
+ * Returns: the time of the event (in nanoseconds).
+ */
+static VALUE
+rb_gst_clock_get_event_time_delay (VALUE self, VALUE delay)
+{
+    return ULL2NUM (gst_clock_get_event_time_delay (RGST_CLOCK (self),
+                                                    NUM2ULL (delay)));
+}
+
+/*
+ * Method: next_id
+ *
+ * Gets the clock ID of the next event.
+ * 
+ * Returns: the clock ID of the next event, or nil is no event is pending.
+ */
+static VALUE
+rb_gst_clock_get_next_id (VALUE self)
+{
+    GstClockID id = gst_clock_get_next_id (RGST_CLOCK (self));
+
+    return id == NULL ? Qnil : RGST_CLOCK_ENTRY_NEW (id);
 }
 
 void
 Init_gst_clock (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK, "Clock", mGst);
+    VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK, "Clock", mGst);
 
-	rb_define_method (c, "speed", rb_gst_clock_get_speed, 0);
-	rb_define_method (c, "set_speed", rb_gst_clock_set_speed, 1);
-	rb_define_method (c, "resolution", rb_gst_clock_get_resolution, 0);
-	rb_define_method (c, "set_resolution", rb_gst_clock_set_resolution, 1);
-	rb_define_method (c, "active?",	rb_gst_clock_is_active, 0);
-	rb_define_method (c, "set_active", rb_gst_clock_set_active, 1); 
-	rb_define_method (c, "time", rb_gst_clock_get_time, 0);
-	rb_define_method (c, "reset!", rb_gst_clock_reset, 0);
-	rb_define_method (c, "handle_discont", rb_gst_clock_handle_discont, 1);
-	rb_define_method (c, "==", rb_gst_clock_is_equal, 1);
+    rb_define_method (c, "speed", rb_gst_clock_get_speed, 0);
+    rb_define_method (c, "set_speed", rb_gst_clock_set_speed, 1);
+    rb_define_method (c, "resolution", rb_gst_clock_get_resolution, 0);
+    rb_define_method (c, "set_resolution", rb_gst_clock_set_resolution, 1);
+    rb_define_method (c, "active?", rb_gst_clock_is_active, 0);
+    rb_define_method (c, "set_active", rb_gst_clock_set_active, 1);
+    rb_define_method (c, "time", rb_gst_clock_get_time, 0);
+    rb_define_method (c, "event_time", rb_gst_clock_get_event_time, 0);
+    rb_define_method (c, "get_event_time_delay",
+                      rb_gst_clock_get_event_time_delay, 1);
+    rb_define_method (c, "next_id", rb_gst_clock_get_next_id, 0);
+    rb_define_alias (c, "next_entry", "next_id");
+    rb_define_method (c, "reset!", rb_gst_clock_reset, 0);
+    rb_define_method (c, "handle_discont?", rb_gst_clock_handle_discont, 1);
+    rb_define_method (c, "==", rb_gst_clock_is_equal, 1);
 
-	G_DEF_CLASS (GST_TYPE_CLOCK_FLAGS, "Flags", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
-	G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
-	G_DEF_SETTERS(c);
+    G_DEF_CLASS (GST_TYPE_CLOCK_FLAGS, "Flags", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
+    G_DEF_SETTERS (c);
 }
