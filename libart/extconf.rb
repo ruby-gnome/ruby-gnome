@@ -50,11 +50,11 @@ begin
 
     lib_ary.each do |ary|
       if not have_library(ary[0], ary[1])
-	msg = format("cannot found %s in %s.", ary[1], ary[0])
-	if ary[0] == "art_lgpl_2"
-	  msg += " (or maybe `libart2-config --lib' is incorrect...)"
-	end
-	raise Interrupt, msg
+        msg = format("cannot found %s in %s.", ary[1], ary[0])
+        if ary[0] == "art_lgpl_2"
+          msg += " (or maybe `libart2-config --lib' is incorrect...)"
+        end
+        raise Interrupt, msg
       end
     end
 
@@ -89,4 +89,5 @@ allclean: clean
 
 rescue Interrupt
   print "  [error] " + $!.to_s + "\n"
+  exit 1
 end
