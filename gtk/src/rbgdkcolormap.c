@@ -4,7 +4,7 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2003/01/12 18:09:10 $
+  $Date: 2003/10/03 12:51:01 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -35,7 +35,18 @@ gdkcmap_s_get_system(self)
 {
     return GOBJ2RVAL(gdk_colormap_get_system());
 }
- 
+
+/* Don't implement this. Because API is ugly
+   (especially treating of "success"). 
+   Use Gdk::Colormap#alloc_color instead.
+gint        gdk_colormap_alloc_colors       (GdkColormap *colormap,
+                                             GdkColor *colors,
+                                             gint ncolors,
+                                             gboolean writeable,
+                                             gboolean best_match,
+                                             gboolean *success);
+*/
+
 static VALUE
 gdkcmap_alloc_color(self, color, writeable, best_match)
     VALUE self, color, writeable, best_match;
@@ -45,6 +56,33 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
     result = gdk_colormap_alloc_color(_SELF(self), c,
                                       RTEST(writeable), RTEST(best_match));
     return result ? INT2NUM(c->pixel) : Qnil;
+}
+
+/* Don't implement Gdk::Colormap#free_colors.
+   Because it should be pair with Gdk::Colormap#alloc_colors */
+static VALUE
+gdkcmap_free_color(self, color)
+    VALUE self, color;
+{
+    gdk_colormap_free_colors(_SELF(self), 
+                             (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR), 1);
+    return self;
+}
+
+static VALUE
+gdkcmap_query_color(self, pixel)
+    VALUE self, pixel;
+{
+    GdkColor color;
+    gdk_colormap_query_color(_SELF(self), NUM2ULONG(pixel), &color);
+    return BOXED2RVAL(&color, GDK_TYPE_COLOR);
+}
+
+static VALUE
+gdkcmap_get_visual(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_colormap_get_visual(_SELF(self)));
 }
 
 static VALUE
@@ -84,6 +122,9 @@ Init_gtk_gdk_colormap()
                                gdkcmap_s_get_system, 0);
     rb_define_method(gdkColormap, "initialize", gdkcmap_initialize, 2);
     rb_define_method(gdkColormap, "alloc_color", gdkcmap_alloc_color, 3);
+    rb_define_method(gdkColormap, "free_color", gdkcmap_free_color, 1);
+    rb_define_method(gdkColormap, "query_color", gdkcmap_query_color, 1);
+    rb_define_method(gdkColormap, "visual", gdkcmap_get_visual, 0);
     rb_define_method(gdkColormap, "colors", gdkcmap_colors, 0);
 }
 

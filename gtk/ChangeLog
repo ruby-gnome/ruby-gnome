@@ -1,3 +1,15 @@
+2003-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkscreen.c: Add Gdk::Screen#default_colormap, #set_default_colormap,
+	#system_colormap, #system_visual, #rgb_colormap, #rgb_visual, #root_window,
+	#display, #visuals, #toplevel_windows, #display_name, #broadcast_client_message.
+	Unify Gdk::Screen#monitor_at_point and #montior_at_window to #get_monitor.
+	* src/rbgdkdisplay.c: Add Gdk::Display#event, #peek_event, #put_event,
+	#set_double_click_time.
+	Remove Gdk::Display#screen. Use Gdk::Display#get_screen or #[] instead.
+	Rename Gdk::Display.new to Gdk::Display.open and accept block.
+	* src/rbgdkcolormap.c: Add Gdk::Colormap#free_color, #query_color, #visual. 
+
 2003-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkimage.c: Add Gdk::Image#colormap, #colormap=, set_colormap, 
