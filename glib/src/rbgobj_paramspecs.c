@@ -3,8 +3,8 @@
 
   rbgobj_paramspecs.c -
 
-  $Author: sakai $
-  $Date: 2003/08/31 05:39:57 $
+  $Author: mutoh $
+  $Date: 2004/01/31 18:55:18 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -127,7 +127,7 @@ flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
     GParamSpec* pspec;
     GType gtype = rbgobj_gtype_get(flags_type);
 
-    pspec = g_param_spec_enum(StringValuePtr(name),
+    pspec = g_param_spec_flags(StringValuePtr(name),
                               StringValuePtr(nick),
                               StringValuePtr(blurb),
                               gtype,
