@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2003/02/04 16:23:43 $
+  $Date: 2003/04/25 19:26:26 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -126,6 +126,11 @@ Init_gtk_object()
     rb_define_const(gObject, "FLOATING", INT2FIX(GTK_FLOATING));
     rb_define_const(gObject, "RESERVED_1", INT2FIX(GTK_RESERVED_1));
     rb_define_const(gObject, "RESERVED_2", INT2FIX(GTK_RESERVED_2));
+
+    /* undef deprecated properties */
+    rb_undef_method(gObject, "user_data");
+    rb_undef_method(gObject, "user_data=");
+    rb_undef_method(gObject, "set_user_data");
 
     G_DEF_SETTERS(gObject);
 }

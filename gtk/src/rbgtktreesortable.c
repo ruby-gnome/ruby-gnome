@@ -1,11 +1,11 @@
-/* -*- c-file-style "ruby"; indent-tabs-mode: nil -*- */
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
   rbgtktreesortable.c -
 
-  $Author: pcppopper $
+  $Author: mutoh $
 
-  $Date: 2003/04/02 16:02:26 $
+  $Date: 2003/04/25 19:26:26 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/

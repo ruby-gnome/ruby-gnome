@@ -1,3 +1,11 @@
+2003-04-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkobject.c: Remove Gtk::Object#user_data, #user_data=, #set_user_data. 
+
+2003-04-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreesortable.c: Small fix for xemacs 
+
 2003-04-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkaccelgroup.c: Gtk::AccelGroup#connect accept block instead of GLib::Closure.
