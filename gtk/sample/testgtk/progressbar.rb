@@ -1,7 +1,7 @@
 =begin header
 
   progressbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: progressbar.rb,v 1.4 2002/11/12 16:36:18 mutoh Exp $
+  $Id: progressbar.rb,v 1.5 2002/11/14 13:37:35 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -48,12 +48,7 @@ class ProgressBarSample < SampleDialog
     align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
     vbox2.pack_start(align, FALSE, FALSE, 5)
 
-    adj = Gtk::Adjustment.new(0, 1, 300, 0, 0, 0)
-    adj.signal_connect("value_changed") do value_changed end
-
     @pbar = Gtk::ProgressBar.new
-    @pbar.set_text("%v from [%l,%u] (=%p%%)")
-
     align.add(@pbar)
     @timer = Gtk::timeout_add(100) do progress_timeout end
 
@@ -104,16 +99,6 @@ class ProgressBarSample < SampleDialog
     tab.attach(hbox, 1, 2, 1, 2,
 	       Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
 	       5, 5)
-
-    label = Gtk::Label.new("Format : ")
-    hbox.pack_start(label, false, true, 0)
-
-    @entry = Gtk::Entry.new()
-    @entry.signal_connect("changed") do |w| entry_changed(w) end
-    hbox.pack_start(@entry)
-    @entry.set_text("%v from [%l,%u] (=%p%%)")
-    @entry.set_size_request(100, -1)
-    @entry.set_sensitive(false)
 
     label = Gtk::Label.new("Text align :")
     tab.attach(label, 0, 1, 2, 3,
@@ -186,19 +171,7 @@ class ProgressBarSample < SampleDialog
     tab.attach(hbox, 1, 2, 5, 6,
 		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
 		5, 5)
-    label = Gtk::Label.new("Step size : ")
-    hbox.pack_start(label, false, true, 0)
-    adj = Gtk::Adjustment.new(3, 1, 20, 1, 5, 0)
-    @step_spin = Gtk::SpinButton.new(adj, 0, 0)
-    adj.signal_connect("value_changed") do adjust_step end
-    hbox.pack_start(@step_spin, false, true, 0)
-    @step_spin.set_sensitive(false)
-
-    hbox = Gtk::HBox.new(false, 0)
-    tab.attach(hbox, 1, 2, 6, 7,
-		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-		5, 5)
-    label = Gtk::Label.new("Blocks :     ")
+    label = Gtk::Label.new("Blocks : ")
     hbox.pack_start(label, false, true, 0)
     adj = Gtk::Adjustment.new(5, 2, 10, 1, 5, 0)
     @act_blocks_spin = Gtk::SpinButton.new(adj, 0, 0)
@@ -252,59 +225,32 @@ class ProgressBarSample < SampleDialog
 
   private
   def progress_timeout
-    @pbar.pulse
     adj = @pbar.adjustment
-
-    new_val = adj.value + 1
+    new_val = adj.value.floor + 1.0
     new_val = adj.lower if new_val > adj.upper
-
-#    @pbar.update(new_val)
-
+    adj.value = new_val
+#    @pbar.set_fraction(new_val / 100.0)
+    @label.set_text(sprintf("%d%%", new_val))
     true
-  end
-
-  private
-  def value_changed
-    if @pbar.activity_mode? then
-      buf = sprintf("???");
-    else
-      #buf = sprintf("%.0f%%", 100 *  @pbar.get_current_percentage)
-      buf = sprintf("%d%%", 100 *  @pbar.fraction)
-    end
-    @label.set_text(buf)
   end
 
   private
   def toggle_show_text(cbutton)
     @pbar.set_show_text(cbutton.active?)
-    @entry.set_sensitive(cbutton.active?)
     @x_align_spin.set_sensitive(cbutton.active?)
     @y_align_spin.set_sensitive(cbutton.active?)
   end
 
   private
-  def entry_changed(entry)
-#FIXME
-#    @pbar.set_format_string(entry.get_text)
-#
-  end
-
-  private
   def adjust_align
-    @pbar.set_text_alignment(
-	@x_align_spin.value,
-	@y_align_spin.value)
+    @pbar.text_xalign = @x_align_spin.value
+    @pbar.text_yalign = @y_align_spin.value
   end
 
   private
   def adjust_blocks
     @pbar.set_fraction(0)
     @pbar.set_discrete_blocks(@block_spin.value_as_int)
-  end
-
-  private
-  def adjust_step
-    @pbar.set_activity_step(@step_spin.value_as_int)
   end
 
   private
@@ -315,7 +261,6 @@ class ProgressBarSample < SampleDialog
   private
   def toggle_activity_mode(cbutton)
     @pbar.set_activity_mode(cbutton.active?)
-    @step_spin.set_sensitive(cbutton.active?)
     @act_blocks_spin.set_sensitive(cbutton.active?)
   end
 end

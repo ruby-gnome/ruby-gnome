@@ -1,3 +1,7 @@
+2002-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/progressbar.rb: Follow Ruby/GTK2.
+
 2002-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/fileselection.rb: Fix a bug when button is clicked.
