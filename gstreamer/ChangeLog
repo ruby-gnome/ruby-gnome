@@ -1,0 +1,19 @@
+2003-07-25  Laurent Sansonetti  <laurent@datarescue.be>
+
+	* AUTHORS: removed
+	* .cvsignore, AUTHORS, COPYING.LIB, README, extconf.rb,
+	  sample/audio-player.rb, sample/gst-inspect.rb,
+	  sample/mp3-player.rb, src/.cvsignore, src/misc.c, src/rbgst.c,
+	  src/rbgst.h, src/rbgstautoplug.c, src/rbgstautoplugfactory.c,
+	  src/rbgstbin.c, src/rbgstcaps.c, src/rbgstclock.c,
+	  src/rbgstcpu.c, src/rbgstelement.c, src/rbgstelementfactory.c,
+	  src/rbgstevent.c, src/rbgstformat.c, src/rbgstindexfactory.c,
+	  src/rbgstobject.c, src/rbgstpad.c, src/rbgstpadtemplate.c,
+	  src/rbgstpipeline.c, src/rbgstplugin.c, src/rbgstpluginfeature.c,
+	  src/rbgstquerytype.c, src/rbgstregistry.c,
+	  src/rbgstschedulerfactory.c, src/rbgstsystemclock.c,
+	  src/rbgstthread.c, src/rbgsttype.c, src/rbgsttypefactory.c,
+	  src/rbgsttypefind.c, src/lib/gst.rb, tests/misc.rb,
+	  tests/tc_all.rb, tests/tc_clock.rb, tests/tc_cpu.rb,
+	  tests/tc_element.rb, tests/tc_modfunc.rb, tests/tc_pad.rb,
+	  tests/tc_plugin.rb, tests/tc_type.rb: initial SF import
