@@ -102,7 +102,8 @@ require 'mkmf-gnome2'
 PKGConfig.have_package("libgnomeprintui-2.2") or exit 1
 setup_win32(PACKAGE_NAME)
 
-add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
+add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINTUI2_COMPILATION"){
   enum_type_prefix = "libgnomeprintui-enum-types"
