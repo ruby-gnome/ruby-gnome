@@ -1,5 +1,8 @@
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* rbpangofontdescription.c: new method Pango::FontDescription#to_s
+	(alias to Pango::FontDescription#to_str).
+
 	* src/*.c: define enum/flags classes.
 
 2003-08-17  Vincent Isambart <vincent.isambart@laposte.net>

@@ -4,7 +4,7 @@
   rbpangofontdescription.c -
 
   $Author: sakai $
-  $Date: 2003/08/21 01:12:49 $
+  $Date: 2003/08/21 01:19:02 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -230,6 +230,7 @@ Init_pango_font_description()
     rb_define_method(pFontDesc, "merge", font_desc_merge, 2);
     rb_define_method(pFontDesc, "better_match", font_desc_better_match, 2);
     rb_define_method(pFontDesc, "to_str", font_desc_to_string, 0);
+    rb_define_alias(pFontDesc, "to_s", "to_str");
     rb_define_method(pFontDesc, "to_filename", font_desc_to_filename, 0);
 
     G_DEF_SETTERS(pFontDesc);
