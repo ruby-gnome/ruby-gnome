@@ -1,3 +1,10 @@
+2002-11-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtktextbuffer.c: Apply patch from OGASAWARA Takeshi
+	<t-ogs@earth.email.ne.jp> -- implement #get_end_iter,
+	#move_mark_by_name, #move_mark, #create_tag, #insert_with_tags,
+	#insert_with_tags_by_name. Thanks!
+
 2002-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/tooltips.rb, wmhints.rb, toolbar.rb, togglebutton.rb, testgtk.rb, 
