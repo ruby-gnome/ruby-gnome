@@ -1,9 +1,16 @@
+2002-11-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Gdk::Pixbuf.new accept xpm data and colorspace.
+	Add Gdk::Pixbuf#get_subpixbuf, #dup.
+	* sample/xpm.rb: Add a sample.
+	* sample/scale.rb: Code cleanup.
+
 2002-11-19  Masao Mutoh  <mutoh@ejp1177linux.jpn.hp.com>
 
-   * rbgdk-pixbuf.c: Implement Gdk::Pixbuf#save.
-   Improve an error handling of Gdk::Pixbuf#initialize.
-   Change default interp_type of Gdk::Pixbuf#scale.
-   * sample/save.rb: Add a file.
+	* rbgdk-pixbuf.c: Implement Gdk::Pixbuf#save.
+	Improve an error handling of Gdk::Pixbuf#initialize.
+	Change default interp_type of Gdk::Pixbuf#scale.
+	* sample/save.rb: Add a file.
 
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 

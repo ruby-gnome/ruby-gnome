@@ -30,23 +30,60 @@
 
 /****************************************************/
 /* File opening */
+/* Image Data in Memory */
 static VALUE
-initialize(self, file_name)
-    VALUE self, file_name;
+initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
     GdkPixbuf* buf;
     GError* error = NULL;
+    VALUE arg1, arg2, arg3, arg4, arg5;
+    gchar** data;
+    int i;
 
-    if (TYPE(file_name) != T_STRING) {
-	rb_raise(rb_eArgError, "argument must be string");
+    rb_scan_args(argc, argv, "15", &arg1, &arg2,
+                 &arg3, &arg4, &arg5);
+
+    if (argc == 5){
+        buf = gdk_pixbuf_new(FIX2INT(arg1),
+                             RTEST(arg2), NUM2INT(arg3),
+                             NUM2INT(arg4), NUM2INT(arg5));
+    } else {
+        if (TYPE(arg1) == T_STRING) {
+            buf = gdk_pixbuf_new_from_file(RSTRING(arg1)->ptr, &error);
+            if (buf == NULL)
+                RAISE_GERROR(error);
+        } else if (TYPE(arg1) == T_ARRAY) {
+            data = ALLOCA_N(char*, RARRAY(arg1)->len);
+            for (i=0; i < RARRAY(arg1)->len; i++) {
+		data[i] = RVAL2CSTR(RARRAY(arg1)->ptr[i]);
+            }
+            buf = gdk_pixbuf_new_from_xpm_data((const char**)data);
+        } else {
+            rb_raise(rb_eArgError, "1st argument is not correct.");
+        }
     }
-
-    buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr, &error);
-    if (buf == NULL)
-	RAISE_GERROR(error);
-
+    
     G_INITIALIZE(self, buf);
     return Qnil;
+}
+
+static VALUE
+new_subpixbuf(self, src_x, src_y, width, height)
+    VALUE self, src_x, src_y, width, height;
+{
+    return GOBJ2RVAL(gdk_pixbuf_new_subpixbuf(_SELF(self), 
+                                              NUM2INT(src_x), NUM2INT(src_y), 
+                                              NUM2INT(width), NUM2INT(height)));
+}
+  
+static VALUE
+copy(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_pixbuf_copy(_SELF(self)));
 }
 
 /****************************************************/
@@ -94,6 +131,7 @@ save(argc, argv, self)
     return self;
 }
 
+/****************************************************/
 static VALUE
 render_to_drawable(argc, argv, self)
     int argc;
@@ -164,6 +202,8 @@ render_pm(argc, argv, self)
                        mask ? GOBJ2RVAL(mask) : Qnil);
 }
 
+/****************************************************/
+/* Scaling */
 static VALUE
 scale(argc, argv, self)
     int argc;
@@ -176,7 +216,8 @@ scale(argc, argv, self)
     GdkInterpType interp_type = GDK_INTERP_BILINEAR;
     GdkPixbuf* dest = NULL;
 
-    rb_scan_args(argc, argv, "28", &args[0], &args[1], &args[2], &args[3], &args[4], &args[5], &args[6], &args[7], &args[8], &args[9]);
+    rb_scan_args(argc, argv, "28", &args[0], &args[1], &args[2], &args[3], &args[4], 
+                 &args[5], &args[6], &args[7], &args[8], &args[9]);
 
     switch (argc) {
       case 2:
@@ -305,17 +346,17 @@ void Init_gdk_pixbuf2()
     rb_define_const(gdkPixbuf, "ALPHA_FULL", INT2FIX(GDK_PIXBUF_ALPHA_FULL));
 
     /* 
-     * File Loading 
+     * File Loading, Image Data in Memory
      */
-    rb_define_method(gdkPixbuf, "initialize", initialize, 1);
+    rb_define_method(gdkPixbuf, "initialize", initialize, -1);
+    rb_define_method(gdkPixbuf, "get_subpixbuf", new_subpixbuf, 4);
+    rb_define_method(gdkPixbuf, "dup", copy, 0);
 
     /*
      * File saving
      */
     rb_define_method(gdkPixbuf, "save", save, -1);
-    /* 
-     * Image Data in Memory
-     */
+
     /* 
      * Inline data
      */
