@@ -18,35 +18,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "global.h"
 #include <gdk-pixbuf/gdk-pixbuf.h>
-
-VALUE gdkPixbuf;
-
-static VALUE
-make_pixbuf(buf)
-    GdkPixbuf *buf;
-{
-    return Data_Wrap_Struct(gdkPixbuf, 0, gdk_pixbuf_unref, buf);
-}
-
-static GdkPixbuf*
-get_pixbuf(buf)
-    VALUE buf;
-{
-    GdkPixbuf *ptr;
-
-    if (NIL_P(buf))
-	rb_raise(rb_eArgError, "oops");
-
-    if (!rb_obj_is_kind_of(buf, gdkPixbuf)) {
-	rb_raise(rb_eTypeError, "not a GdkPixbuf");
-    }
-
-    Data_Get_Struct(buf, GdkPixbuf, ptr);
-
-    return ptr;
-}
+#include <gdk/gdkpixbuf.h>
+#include "rbgobject.h"
+#include "rbgtk.h"
 
 static VALUE
 new_from_file(self, file_name)
@@ -58,10 +33,10 @@ new_from_file(self, file_name)
 	rb_raise(rb_eArgError, "argument must be string");
     }
 
-    buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr);
+    buf = gdk_pixbuf_new_from_file(RSTRING(file_name)->ptr, NULL);
     if (buf == NULL)
 	rb_raise(rb_eRuntimeError, "error occurred in loading image");
-    return make_pixbuf(buf);
+    return GOBJ2RVAL(buf);
 }
 
 static VALUE
@@ -90,9 +65,9 @@ render_to_drawable(argc, argv, self)
     if (!NIL_P(args[10]))
 	y_dither = NUM2INT(args[10]);
 
-    gdk_pixbuf_render_to_drawable(get_pixbuf(self),
-				  get_gdkdrawable(args[0]),
-				  get_gdkgc(args[1]),
+    gdk_pixbuf_render_to_drawable(GDK_PIXBUF(RVAL2GOBJ(self)),
+				  GDK_DRAWABLE(RVAL2GOBJ(args[0])),
+				  GDK_GC(RVAL2GOBJ(args[1])),
 				  NUM2INT(args[2]),
 				  NUM2INT(args[3]),
 				  NUM2INT(args[4]),
@@ -121,11 +96,13 @@ render_pm(argc, argv, self)
     else
 	alpha = NUM2INT(alpha_value);
 
-    gdk_pixbuf_render_pixmap_and_mask(get_pixbuf(self),
+    gdk_pixbuf_render_pixmap_and_mask(GDK_PIXBUF(RVAL2GOBJ(self)),
 				      &pixmap,
 				      &mask,
 				      alpha);
-    return rb_ary_new3(2, new_gdkpixmap(pixmap), new_gdkbitmap(mask));
+    return rb_ary_new3(2,
+                       pixmap ? GOBJ2RVAL(pixmap) : Qnil,
+                       mask ? GOBJ2RVAL(mask) : Qnil);
 }
 
 static VALUE
@@ -149,7 +126,7 @@ scale(argc, argv, self)
 	if (!NIL_P(args[2]))
 	    interp_type = NUM2INT(args[2]);
 
-	ret = make_pixbuf(gdk_pixbuf_scale_simple(get_pixbuf(self),
+	ret = GOBJ2RVAL(gdk_pixbuf_scale_simple(GDK_PIXBUF(RVAL2GOBJ(self)),
 						  dest_width,
 						  dest_height,
 						  interp_type));
@@ -168,48 +145,49 @@ static VALUE
 get_n_channels(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_n_channels(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_n_channels(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
 static VALUE
 get_has_alpha(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_has_alpha(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_has_alpha(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
 static VALUE
 get_bits_per_sample(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_bits_per_sample(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_bits_per_sample(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
 static VALUE
 get_width(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_width(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_width(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
 static VALUE
 get_height(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_height(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_height(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
 static VALUE
 get_rowstride(self)
     VALUE self;
 {
-    return INT2FIX(gdk_pixbuf_get_rowstride(get_pixbuf(self)));
+    return INT2FIX(gdk_pixbuf_get_rowstride(GDK_PIXBUF(RVAL2GOBJ(self))));
 }
 
-void Init_gdk_pixbuf()
+void Init_gdk_pixbuf2()
 {
+    VALUE gdkPixbuf;
     gdk_rgb_init(); /* initialize it anyway */
-    gdkPixbuf = rb_define_class_under(mGdk, "Pixbuf", rb_cData);
+    gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
     rb_define_singleton_method(gdkPixbuf, "new", new_from_file, 1);
 

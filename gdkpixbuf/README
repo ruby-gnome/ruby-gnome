@@ -3,8 +3,8 @@ REQUIREMENTS
 
 Ruby 1.6.2
 Gtk+ 2.0.0
-Ruby-Gtk 0.26
-GdkPixbuf 1.0
+GdkPixbuf 2.0
+Ruby-Gtk2
 
 INSTALL INSTRUCTIONS
 ===========
