@@ -2,6 +2,7 @@
  *
  * gnomevfs-result.c: GnomeVFSResult wrapper.
  *
+ * Copyright (C) 2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  *
  * This library is free software; you can redistribute it and/or
@@ -20,7 +21,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/03/03 18:32:03 $
+ * $Date: 2004/03/05 16:00:03 $
  *
  *****************************************************************************/
 

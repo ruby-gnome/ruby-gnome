@@ -2,6 +2,7 @@
  *
  * gnomevfs.h: GnomeVFS interface
  *
+ * Copyright (C) 2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  *
  * This library is free software; you can redistribute it and/or

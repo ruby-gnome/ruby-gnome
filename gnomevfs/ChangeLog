@@ -1,3 +1,8 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* REAMDE, src/gnomevfs-fileinfo.c src/gnomevfs-result.c src/gnomevfs.h:
+	Update Copyright.
+
 2004-03-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/gnomevfs.h, gnomevfs-result.c, gnomevfs-fileinfo.c: 
