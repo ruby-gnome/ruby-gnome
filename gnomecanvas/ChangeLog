@@ -1,6 +1,10 @@
+2003-08-17  Vincent Isambart <isambart@netcourrier.com>
+
+	* sample/canvas-primitives.rb: Follow Ruby/GTK2 changes.
+
 2003-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Follow mkmf-gnome2.rb position changes.
+	* extconf.rb: Follow mkmf-gnome2.rb position changes.
 
 2003-05-25  Masao Mutoh  <mutoh@highway.ne.jp>
 

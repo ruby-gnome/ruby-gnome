@@ -445,16 +445,16 @@ class CanvasSamplePrimitives < Gtk::VBox
   end
 
   def key_press(canvas, event)
-    x, y = canvas.get_scroll_offsets()
+    x, y = canvas.scroll_offsets
 
     case event.keyval
-    when Gdk::GDK_Up
+    when Gdk::Keyval::GDK_Up
       canvas.scroll_to(x, y - 20)
-    when Gdk::GDK_Down
+    when Gdk::Keyval::GDK_Down
       canvas.scroll_to(x, y + 20)
-    when Gdk::GDK_Left
+    when Gdk::Keyval::GDK_Left
       canvas.scroll_to(x - 10, y)
-    when Gdk::GDK_Right
+    when Gdk::Keyval::GDK_Right
       canvas.scroll_to(x + 10, y)
     end
   end
