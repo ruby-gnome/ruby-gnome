@@ -2,8 +2,6 @@ EXPORTS
     Init_gtk2
     mGdk DATA
     mGtk DATA
-    ary2glist
-    ary2gslist
     exec_callback
     gdkEvent DATA
     gdk_atom_copy
@@ -11,7 +9,6 @@ EXPORTS
     gdk_geometry_get_type
     gdk_region_get_type
     gdk_span_get_type
-    gdkregion_span_func
     get_gdkatom
     get_gdkevent
     gtk_accel_group_entry_get_type

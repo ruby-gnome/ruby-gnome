@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: sakai $
-  $Date: 2003/02/16 13:25:17 $
+  $Date: 2003/03/19 09:44:12 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -86,7 +86,7 @@ gdkregion_get_rectangles(self)
     return ary;
 }
 
-void
+static void
 gdkregion_span_func(span, func)
     GdkSpan* span;
     gpointer func;

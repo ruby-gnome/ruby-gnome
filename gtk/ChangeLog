@@ -1,5 +1,10 @@
 2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/global.c (ary2glist, ary2gslist): remove functions that are
+	no longer used.
+
+	* src/rbgdkregion.c (gdkregion_span_func): change to static function.
+
 	* src/gtk2.def: Add a file
 
 2003-03-17  Geoff Youngs <g@intersect-uk.co.uk>
