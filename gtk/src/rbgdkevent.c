@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/20 16:48:15 $
+  $Author: sakai $
+  $Date: 2003/10/23 07:03:18 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -194,8 +194,8 @@ gdkevent ## type ## _set_axes(self, x, y)\
 }
 
 #define DEFINE_ACCESSOR(event, type, name) \
-    rb_define_method(event, "## name ##", gdkevent ## type ## _## name, 0);\
-    rb_define_method(event, "set_## name ##", gdkevent ## type ## _set_## name, 1);
+    rb_define_method(event, G_STRINGIFY(name), gdkevent ## type ## _## name, 0);\
+    rb_define_method(event, G_STRINGIFY(set_ ## name), gdkevent ## type ## _set_## name, 1);
 
 /***********************************************/
 

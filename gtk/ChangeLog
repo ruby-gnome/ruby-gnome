@@ -1,3 +1,7 @@
+2003-10-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgdkevent.c: fix DEFINE_ACCESSOR() macro to use G_STRINGIFY().
+
 2003-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpixbuf.c: Add Gdk::Pixbuf.from_drawable. 
