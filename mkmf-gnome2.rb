@@ -60,18 +60,20 @@ STDOUT.flush
 if macro_defined?("__GNUC__", "")
   STDOUT.print "yes\n"
   $CFLAGS += ' -Wall' 
-  is_gcc = true
+  $cc_is_gcc = true
 else
   STDOUT.print "no\n"
-  is_gcc = false
+  $cc_is_gcc = false
 end
 
 
-STDOUT.print("checking for G_OS_WIN32... ")
-STDOUT.flush
-if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-  STDOUT.print "yes\n"
-  $CFLAGS += ' -fnative-struct' if is_gcc
-else
-  STDOUT.print "no\n"
+def check_win32()
+  STDOUT.print("checking for G_OS_WIN32... ")
+  STDOUT.flush
+  if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
+    STDOUT.print "yes\n"
+    $CFLAGS += ' -fnative-struct' if $cc_is_gcc
+  else
+    STDOUT.print "no\n"
+  end
 end

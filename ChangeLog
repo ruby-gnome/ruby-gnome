@@ -1,3 +1,8 @@
+2003-02-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* mkmf-gnome2.rb: Stop checking G_OS_WIN32 automatically.
+	Thus you need to call check_win32() explicitly.
+
 2003-02-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* mkmf-gnome2.rb: Added.
