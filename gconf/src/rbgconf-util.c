@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: mutoh $
  *
- * $Date: 2003/02/04 21:28:48 $
+ * $Date: 2004/03/14 01:19:24 $
  *
  *****************************************************************************/
 
@@ -60,12 +60,13 @@ rb_ary_to_gconfval_list(ary_val, list_type)
 		/* uh, oh. not all elements were of the same type. */
 		if (type != GCONF_VALUE_INVALID && type != val->type) {
 			*list_type = GCONF_VALUE_INVALID;
-			return NULL;
+			return list;
 		}
+		type = val->type;
 
 		list = g_slist_append(list, val);
 	}
-
+	*list_type = type;
 	return list;
 }
 
@@ -102,18 +103,7 @@ rb_value_to_gconf_value(val)
 		GSList *list;
 
 		list = rb_ary_to_gconfval_list(val, &type);
-		if (type != GCONF_VALUE_INVALID) {
-			gval = gconf_value_new(GCONF_VALUE_LIST);
-			gconf_value_set_list_type(gval, type);
-			gconf_value_set_list_nocopy(gval, list);
-		} else if (g_slist_length(list) == 2) {
-			gval = gconf_value_new(GCONF_VALUE_PAIR);
-			gconf_value_set_car_nocopy(gval,
-				(GConfValue *)g_slist_nth_data(list, 0));
-			gconf_value_set_car_nocopy(gval,
-				(GConfValue *)g_slist_nth_data(list, 1));
-			g_slist_free(list);
-		} else {
+		if (type == GCONF_VALUE_INVALID) {
 			GSList *i;
 			for (i = list; i != NULL; i = i->next) {
 				gconf_value_free((GConfValue *)i->data);
@@ -122,6 +112,17 @@ rb_value_to_gconf_value(val)
 
 			rb_raise(rb_eArgError,
 				 "all elements must be of same type");
+		} else if (g_slist_length(list) == 2) {
+			gval = gconf_value_new(GCONF_VALUE_PAIR);
+			gconf_value_set_car_nocopy(gval,
+				(GConfValue *)g_slist_nth_data(list, 0));
+			gconf_value_set_cdr_nocopy(gval,
+				(GConfValue *)g_slist_nth_data(list, 1));
+			g_slist_free(list);
+		} else {
+			gval = gconf_value_new(GCONF_VALUE_LIST);
+			gconf_value_set_list_type(gval, type);
+			gconf_value_set_list_nocopy(gval, list);
 		}
 		break;
 	}
@@ -165,13 +166,8 @@ static VALUE
 gconfval_pair_to_rb_ary(car, cdr)
 	GConfValue *car, *cdr;
 {
-	VALUE ary;
-
-	ary = rb_ary_new2(2);
-	rb_ary_push(ary, gconf_value_to_rb_value(car));
-	rb_ary_push(ary, gconf_value_to_rb_value(cdr));
-
-	return ary;
+	return rb_assoc_new(gconf_value_to_rb_value(car),
+			gconf_value_to_rb_value(cdr));
 }
 
 /*
@@ -197,7 +193,7 @@ gconf_value_to_rb_value(gval)
 		val = CSTR2RVAL(gconf_value_get_string(gval));
 		break;
 	case GCONF_VALUE_INT:
-		val = INT2FIX(gconf_value_get_int(gval));
+		val = INT2NUM(gconf_value_get_int(gval));
 		break;
 	case GCONF_VALUE_FLOAT:
 		val = rb_float_new(gconf_value_get_float(gval));

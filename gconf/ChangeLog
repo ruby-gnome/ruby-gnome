@@ -1,3 +1,8 @@
+2004-03-14  Kazuhiro NISHIYAMA <zn@mbf.nifty.com>
+
+	* src/rbgconf-util.c: Fix using array values, integer values.
+	* tests/unittest.rb: Added.
+	
 2003-09-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgconf-client.c: Apply enums/flags.
@@ -67,7 +72,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2003/09/01 16:10:41 $ macros.
+	and $Date: 2004/03/14 01:19:24 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
