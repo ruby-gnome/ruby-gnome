@@ -333,24 +333,7 @@ rb_gst_pad_get_caps (VALUE self)
     GstCaps *caps = gst_pad_get_caps (RGST_PAD (self));
     return caps != NULL
         ? RGST_CAPS_NEW (caps)
-        : Qnil;    
-}
-
-/*
- * Method: each_caps { |caps| ... }
- *
- * Calls the block for each capability of the pad, 
- * passing a reference to the Gst::Caps object as parameter.
- *
- * Returns: always nil.
- */
-static VALUE
-rb_gst_pad_each_caps (VALUE self)
-{
-    VALUE ary = rb_gst_pad_get_caps (self);
-	if (!NIL_P (ary))
-        rb_ary_yield (ary);
-    return Qnil;
+        : Qnil;
 }
 
 void
@@ -377,7 +360,6 @@ Init_gst_pad (void)
 	rb_define_method (c, "query", rb_gst_pad_query,	-1);
 	rb_define_method (c, "send_event", rb_gst_pad_send_event, 1);
 	rb_define_method (c, "caps", rb_gst_pad_get_caps, 0);
-	rb_define_method (c, "each_caps", rb_gst_pad_each_caps ,0);
 
 	G_DEF_CLASS (GST_TYPE_PAD_LINK_RETURN, "LinkReturn", c);
 	G_DEF_CONSTANTS (c, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");

@@ -59,11 +59,13 @@ GstStructure *ruby_hash_to_gst_structure (VALUE hash)
     for (i = 0; i < RARRAY (ary)->len; i++) {
         VALUE pair = RARRAY (ary)->ptr[i];
         GValue value = { 0, };
-        
+    
+        g_value_init (&value, RVAL2GTYPE (RARRAY (pair)->ptr[1]));
         rbgobj_rvalue_to_gvalue (RARRAY (pair)->ptr[1], &value);
         gst_structure_set_value (gst_struct,
                                  RVAL2CSTR (RARRAY (pair)->ptr[0]),
                                  &value);
+        g_value_unset (&value);
     }
     
     return gst_struct; 

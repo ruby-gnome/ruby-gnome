@@ -5,7 +5,8 @@
 	* src/rbgstcaps.c: Fixed #initialize (GstCaps does not inherit from
 	GstObject anymore) and API reference still referencing the deprecated
 	Gst::Structure.
-	* src/rbgstpad.c (#caps, #each_caps): Fixed segfault.
+	* src/rbgstpad.c (#each_caps): Removed.
+	* src/rbgststructure.c: Fixed hash-to-gst-structure conversion. 
 	
 2005-03-04  Laurent Sansonetti  <lrz@gnome.org>
 
