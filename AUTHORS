@@ -22,6 +22,9 @@ KUBO Takehiro <kubo@jiubao.org>
 Laurent Sansonetti <laurent@datarescue.be>
      Ruby/GStreamer(M).
 
+Martin Povolný <xpovolny@fi.muni.cz>
+     Ruby/GtkHtml2(M).
+
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
      Vice maintainer. Ruby/GLib(M) and most of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
@@ -55,3 +58,6 @@ Ruby-GNOME Maintainers.
   Hiroshi IGARASHI <iga@ruby-lang.org>
 (up to Ruby-GNOME ver. 0.18)
   by Dai.K. <MAP2303@mapletown.net> 
+
+
+charset = UTF-8.
