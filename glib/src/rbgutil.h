@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: sakai $
-  $Date: 2003/03/06 18:10:39 $
+  $Date: 2003/03/06 18:18:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -15,6 +15,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include "ruby.h"
+#include "rbglib.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,7 @@
 2003-03-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgutil.h: #include rbglib.h for RUBY_GLIB2_VAR.
+
 	* src/rbglib.h, rbgutil.h: define RUBY_GLIB2_VAR macro, and
 	use RUBY_GLIB2_VAR for defining 'exported' variables.
 
