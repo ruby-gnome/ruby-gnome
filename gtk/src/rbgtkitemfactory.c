@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:15:32 $
+  $Date: 2003/07/04 18:34:04 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -33,24 +33,21 @@ ifact_initialize(self, type, path, accel)
 }
 
 static VALUE
-ifact_construct(self, type, path, accel)
-    VALUE self, type, path, accel;
+ifact_construct(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
-    gtk_item_factory_construct(_SELF(self), FIX2INT(type), 
+    VALUE type, path, accel;
+    GtkItemFactory* ifact = _SELF(self);
+    ifact->accel_group = NULL;
+
+    rb_scan_args(argc, argv, "21", &type, &path, &accel);
+    gtk_item_factory_construct(ifact, FIX2INT(type), 
                                RVAL2CSTR(path), RVAL2ACCEL(accel));
     return self;
 }
  
-static VALUE
-ifact_s_add_foreign(self, accel_widget, full_path, accel_group, keyval, modifiers)
-    VALUE self, accel_widget, full_path, accel_group, keyval, modifiers;
-{
-    gtk_item_factory_add_foreign(RVAL2WIDGET(accel_widget), RVAL2CSTR(full_path),
-                                 RVAL2ACCEL(accel_group), NUM2UINT(keyval),
-                                 FIX2INT(modifiers));
-    return self;
-}
-
 static VALUE
 ifact_s_from_widget(self, widget)
     VALUE self, widget;
@@ -189,17 +186,12 @@ ifact_create_item(argc, argv, self)
 }
 
 static VALUE
-ifact_create_items(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+ifact_create_items(self, ary)
+    VALUE self, ary;
 {
-    VALUE ary, cb_data;
     VALUE entry, path, accel, type, func, data, extdata;
     GtkItemFactoryEntry *entries;
     guint i, len, n_menu_entries;
-
-    rb_scan_args(argc, argv, "11", &ary, &cb_data);
 
     n_menu_entries = RARRAY(ary)->len;
     entries = ALLOC_N(GtkItemFactoryEntry, n_menu_entries);
@@ -277,16 +269,15 @@ Init_gtk_itemfactory()
 {
     VALUE gItemFactory = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 
-    rb_define_singleton_method(gItemFactory, "add_foreign", ifact_s_add_foreign, 4);
     rb_define_singleton_method(gItemFactory, "from_widget", ifact_s_from_widget, 1);
     rb_define_singleton_method(gItemFactory, "path_from_widget", ifact_s_path_from_widget, 1);
 
     rb_define_method(gItemFactory, "initialize", ifact_initialize, 3);
-    rb_define_method(gItemFactory, "construct", ifact_construct, 3);
+    rb_define_method(gItemFactory, "construct", ifact_construct, -1);
     rb_define_method(gItemFactory, "get_item", ifact_get_item, 1);
     rb_define_method(gItemFactory, "get_widget", ifact_get_widget, 1);
     rb_define_method(gItemFactory, "create_item", ifact_create_item, -1);
-    rb_define_method(gItemFactory, "create_items", ifact_create_items, -1);
+    rb_define_method(gItemFactory, "create_items", ifact_create_items, 1);
     rb_define_method(gItemFactory, "delete_item", ifact_delete_item, 1);
     rb_define_method(gItemFactory, "popup", ifact_popup, 4);
 
