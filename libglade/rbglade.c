@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/02/24 16:28:45 $
+  $Date: 2004/03/03 17:39:48 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -161,6 +161,20 @@ rb_gladexml_set_custom_widget_handler(VALUE self, VALUE setting)
     return self;
 }
 
+static VALUE
+rb_gladexml_require(VALUE self, VALUE library)
+{
+  glade_require(RVAL2CSTR(library));
+  return self;
+}
+
+static VALUE
+rb_gladexml_provide(VALUE self, VALUE library)
+{
+  glade_provide(RVAL2CSTR(library));
+  return self;
+}                                        
+
 void 
 Init_libglade2()
 {
@@ -173,4 +187,6 @@ Init_libglade2()
     rb_define_alias(cGladeXML, "[]", "get_widget");
     rb_define_method(cGladeXML, "filename"  , rb_gladexml_filename, 0);
     rb_define_singleton_method(cGladeXML, "set_custom_widget_handler", rb_gladexml_set_custom_widget_handler, 1);
+    rb_define_singleton_method(cGladeXML, "require", rb_gladexml_require, 1);
+    rb_define_singleton_method(cGladeXML, "provide", rb_gladexml_provide, 1);
 }
