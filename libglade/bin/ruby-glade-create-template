@@ -6,6 +6,8 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
+# $Id: ruby-glade-create-template,v 1.3 2003/03/20 15:55:45 mutoh Exp $
+#
 # Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
@@ -19,7 +21,7 @@ class GladeXML
   end
 end
 
-LG_VERSION = %Q[$Revision: 1.2 $]
+LG_VERSION = %Q[$Revision: 1.3 $].scan(/\d/).join(".")
 
 begin
   $EXIST_GNOME = true
