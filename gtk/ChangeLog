@@ -3,7 +3,8 @@
 	* src/rbgdkevent.c: Move Gdk::Event.get_graphics_expose to 
 	Gdk::EventExpose.get_graphics_expose. 
 	Gdk::Event#put returns self.
-	Move Gdk::Event#window, #window= to Gdk::EventAny 
+	Move Gdk::Event#window, #window= to Gdk::EventAny. 
+	Add G_DEF_SETTERS to each classes.
 	* src/rbgdkwindow.c: Move Gdk::Window#toplevels to 
 	Gdk::Window.toplevels and fix a memory leak.
 	Fix two bugs of Gdk::Window.at_pointer and #pointer.
