@@ -1,5 +1,12 @@
 2003-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_signal.c: new exception class GLib::NoSignalError.
+
+	* src/rbgobj_object.c: new exception class GLib::NoPropertyError.
+
+	* src/lib/glib2.rb: append Dropline GTK2-Runtime DLL path into PATH
+	environmental variable. (proposed by TAMURA.KENICHI <sgs02516@nifty.com>)
+
 	* src/rbgobj_object.c: remove GLib::Object#property.
 
 	* src/rbgobj_enums.c (rbgobj_get_enum, rbgobj_get_flags): 

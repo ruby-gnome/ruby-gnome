@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/08/25 01:50:30 $
+  $Date: 2003/08/25 08:47:36 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -19,6 +19,8 @@
 #include "ruby.h"
 #include "st.h"
 #include "global.h"
+
+static VALUE eNoPropertyError;
 
 void
 rbgobj_add_abstract_but_create_instance_class(gtype)
@@ -132,7 +134,7 @@ gobj_s_property(self, property_name)
     prop = g_object_class_find_property(oclass, name);
     if (!prop){
         g_type_class_unref(oclass);
-        rb_raise(rb_eNameError, "no such property: %s", name);
+        rb_raise(eNoPropertyError, "no such property: %s", name);
     }
 
     result = GOBJ2RVAL(prop);
@@ -233,7 +235,7 @@ gobj_set_property(self, prop_name, val)
                                          name);
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s", name);
+        rb_raise(eNoPropertyError, "No such property: %s", name);
     else {
         // FIXME: use rb_ensure to call g_value_unset()
         RValueToGValueFunc setter = NULL;
@@ -280,7 +282,7 @@ gobj_get_property(self, prop_name)
                                          name);
 
     if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s", name);
+        rb_raise(eNoPropertyError, "No such property: %s", name);
     else {
         // FIXME: use rb_ensure to call g_value_unset()
         GValueToRValueFunc getter = NULL;
@@ -593,6 +595,9 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "inspect", gobj_inspect, 0);
 
     rb_define_method(cGObject, "singleton_method_added", gobj_smethod_added, 1);
+
+    eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
+                                             rb_eNameError);
 
     rb_global_variable(&type_to_prop_setter_table);
     rb_global_variable(&type_to_prop_getter_table);

@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/08/09 06:32:42 $
+  $Date: 2003/08/25 08:47:36 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -42,6 +42,8 @@ rbgobj_get_signal_func(guint signal_id)
 }
 
 /**********************************************************************/
+
+VALUE eNoSignalError;
 
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
 
@@ -191,7 +193,7 @@ gobj_s_signal(VALUE self, VALUE name)
     
     sig_id = g_signal_lookup(sig_name, CLASS2GTYPE(self));
     if (!sig_id)
-        rb_raise(rb_eNameError, "no such signal: %s", sig_name);
+        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
     return rbgobj_signal_wrap(sig_id);
 }
@@ -219,7 +221,7 @@ gobj_sig_connect(argc, argv, self)
     }
 
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
-        rb_raise(rb_eNameError, "no such signal: %s", sig_name);
+        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
@@ -251,7 +253,7 @@ gobj_sig_connect_after(argc, argv, self)
     }
 
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
-        rb_raise(rb_eNameError, "no such signal: %s", sig_name);
+        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
     rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
@@ -259,6 +261,20 @@ gobj_sig_connect_after(argc, argv, self)
 
     return INT2FIX(i);
 }
+
+#if 0
+static VALUE
+gobj_sig_get_invocation_hint(self)
+     VALUE self;
+{
+    GSignalInvocationHint* hint;
+    hint = g_signal_get_invocation_hint(RVAL2GOBJ(self));
+    return rb_ary_new3(3,
+                       rbgobj_signal_wrap(hint->signal_id),
+                       hint->detail ? rb_str_new2(g_quark_to_string(hint->detail)) : Qnil,
+                       INT2NUM(hint->run_type));
+}
+#endif
 
 struct emit_arg{
     VALUE self;
@@ -272,7 +288,8 @@ struct emit_arg{
 static VALUE
 emit_body(struct emit_arg* arg)
 {
-    g_value_init(arg->instance_and_params->values, G_TYPE_OBJECT);
+    g_value_init(arg->instance_and_params->values,
+                 G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
     rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
 
     {
@@ -334,8 +351,8 @@ gobj_sig_emit(argc, argv, self)
 
     if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
-                             &signal_id, &arg.detail, FALSE))        
-        rb_raise(rb_eArgError, "invalid signal \"%s\"", sig_name);
+                             &signal_id, &arg.detail, FALSE))
+        rb_raise(eNoSignalError, "invalid signal \"%s\"", sig_name);
 
     g_signal_query(signal_id, &arg.query);
 
@@ -369,7 +386,7 @@ gobj_sig_emit_stop(self, sig)
     if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
                              &signal_id, &detail, FALSE))        
-        rb_raise(rb_eArgError, "invalid signal \"%s\"", sig_name);
+        rb_raise(eNoSignalError, "invalid signal \"%s\"", sig_name);
 
     g_signal_stop_emission(instance, signal_id, detail);
     return self;
@@ -476,6 +493,11 @@ Init_signal_misc()
     rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
     rb_define_method(cInstantiatable, "signal_connect_after",
                      gobj_sig_connect_after, -1);
+
+#if 0
+    rb_define_method(cInstantiatable, "signal_invocation_hint",
+                     gobj_sig_get_invocation_hint, 0);
+#endif
 
     rb_define_method(cInstantiatable, "signal_emit",
                      gobj_sig_emit, -1);
@@ -738,6 +760,8 @@ Init_signal_class()
 
     rb_define_const(cSignal, "MATCH_MASK", INT2FIX(G_SIGNAL_MATCH_MASK));
     rb_define_const(cSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
+
+    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
 }
 
 /**********************************************************************/
