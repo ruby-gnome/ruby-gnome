@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2004/04/19 16:27:07 $
+  $Date: 2004/04/19 16:29:38 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -55,6 +55,13 @@ rbglib_m_log_remove_handler(self, domain, handler_id)
 }
 
 static VALUE
+rbglib_m_log_set_always_fatal(self, fatal_mask)
+    VALUE self, fatal_mask;
+{
+    return INT2NUM(g_log_set_always_fatal(NUM2INT(fatal_mask)));
+}
+
+static VALUE
 rbglib_m_log_set_fatal_mask(self, domain, fatal_mask)
     VALUE self, domain, fatal_mask;
 {
@@ -81,6 +88,7 @@ Init_glib_messages()
     rbglib_log_handler_procs = rb_hash_new();
     rb_define_module_function(mGLog, "set_handler", rbglib_m_log_set_handler, 2);
     rb_define_module_function(mGLog, "remove_handler", rbglib_m_log_remove_handler, 2);
+    rb_define_module_function(mGLog, "set_always_fatal", rbglib_m_log_set_always_fatal, 1);
     rb_define_module_function(mGLog, "set_fatal_mask", rbglib_m_log_set_fatal_mask, 2);
     rb_define_module_function(mGLog, "log", rbglib_m_log, 3);
 
