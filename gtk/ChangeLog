@@ -1,3 +1,11 @@
+2005-02-13  KATO Kazuyoshi  <kzys@8-p.info>
+
+	* sample/gtk-demo/appwindow.rb, buttom_box.rb, changedisplay.rb, colorsel.rb,
+	  dialog.rb, drawingarea.rb, iconview.rb, images.rb, item_factory.rb,
+	  menus.rb, panes.rb, pixbufs.rb, sizegroup.rb, stock_browser.rb: 
+	  Change comment style to follow sample/gtk-demo/main.rb changes.
+	* sample/gtk-demo/clipboard.rb, menus.rb, panes.rb: ditto.
+
 2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpangorenderer.c: Added Pango::Renderer.default. 

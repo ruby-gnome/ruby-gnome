@@ -1,13 +1,12 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: colorsel.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-  colorsel.rb - Color Selector 
+= Color Selector 
 
-  Gtk::ColorSelection lets the user choose a color. Gtk::ColorSelectionDialog
-  is a prebuilt dialog containing a Gtk::ColorSelection.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: colorsel.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+Gtk::ColorSelection lets the user choose a color. Gtk::ColorSelectionDialog
+is a prebuilt dialog containing a Gtk::ColorSelection.
 =end
 require 'common'
 

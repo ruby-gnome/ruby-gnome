@@ -1,23 +1,22 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: panes.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-  panes.rb - Paned Widgets
-  
-  The Gtk::HPaned and Gtk::VPaned Widgets divide their content
-  area into two panes with a divider in between that the
-  user can adjust. A separate child is placed into each
-  pane.
-  
-  There are a number of options that can be set for each pane.
-  This test contains both a horizontal (HPaned) and a vertical
-  (VPaned) widget, and allows you to adjust the options for
-  each side of each widget.
+= panes.rb - Paned Widgets
 
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+The Gtk::HPaned and Gtk::VPaned Widgets divide their content
+area into two panes with a divider in between that the
+user can adjust. A separate child is placed into each
+pane.
 
-  $Id: panes.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+There are a number of options that can be set for each pane.
+This test contains both a horizontal (HPaned) and a vertical
+(VPaned) widget, and allows you to adjust the options for
+each side of each widget.
 =end
 require 'common'
-  
+
 module Demo
   class Panes < BasicWindow
     def initialize
@@ -26,7 +25,7 @@ module Demo
 
       vbox = Gtk::VBox.new(false, 0)
       add(vbox)
-      
+
       vpaned = Gtk::VPaned.new
       vbox.pack_start(vpaned, true, true, 0)
       vpaned.border_width = 5
@@ -38,7 +37,7 @@ module Demo
       frame.shadow_type = Gtk::SHADOW_IN
       frame.set_size_request(60, 60)
       hpaned.add1(frame)
-      
+
       button = Gtk::Button.new('_Hi there', true)
       frame.add(button)
 
@@ -66,36 +65,36 @@ module Demo
     def create_pane_options(paned, frame_label, label1, label2)
       frame = Gtk::Frame.new(frame_label)
       frame.border_width = 4
-      
+
       table = Gtk::Table.new(3, 2, true)
       frame.add(table)
-      
+
       label = Gtk::Label.new(label1)
       table.attach_defaults(label, 0, 1, 0, 1)
-      
+
       check_button = Gtk::CheckButton.new('_Resize', true)
       table.attach_defaults(check_button, 0, 1, 1, 2)
       check_button.signal_connect('toggled') do
 	toggle_resize(paned.child1)
       end
-      
+
       check_button = Gtk::CheckButton.new('_Shrink', true)
       table.attach_defaults(check_button, 0, 1, 2, 3)
       check_button.active = true
-      check_button.signal_connect('toggled') do 
+      check_button.signal_connect('toggled') do
 	toggle_shrink(paned.child1)
       end
-  
+
       label = Gtk::Label.new(label2)
       table.attach_defaults(label, 1, 2, 0, 1)
-  
+
       check_button = Gtk::CheckButton.new('_Resize')
       table.attach_defaults(check_button, 1, 2, 1, 2)
       check_button.active = true
       check_button.signal_connect('toggled') do
 	toggle_resize(paned.child2)
       end
-  
+
       check_button = Gtk::CheckButton.new('_Shrink')
       table.attach_defaults(check_button, 1, 2, 2, 3)
       check_button.active = true
@@ -109,13 +108,13 @@ module Demo
     def toggle_resize(child)
       paned = child.parent
       is_child1 = (child == paned.child1)
-      
+
       resize = if is_child1
 		 paned.child1_resize?
 	       else
 		 paned.child2_resize?
 	       end
-      
+
       shrink = if is_child1
 		 paned.child1_shrink?
 	       else
@@ -139,7 +138,7 @@ module Demo
 	       else
 		 paned.child2_resize?
 	       end
-      
+
       shrink = if is_child1
 		 paned.child1_shrink?
 	       else

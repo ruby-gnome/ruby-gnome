@@ -1,13 +1,11 @@
-# $Id: dialog.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: dialog.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-  dialog.rb - Dialog and Message Boxes
+= Dialog and Message Boxes
 
-  Dialog widgets are used to pop up a transient window for user feedback.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: dialog.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+Dialog widgets are used to pop up a transient window for user feedback.
 =end
 
 require 'common'

@@ -1,14 +1,13 @@
+# Copyright (c) 2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: iconview.rb,v 1.2 2005/02/12 23:02:43 kzys Exp $
 =begin
-  iconview.rb - Icon View
+= Icon View
 
-  The Gtk::IconView widget is used to display and manipulate icons.  
-  It uses a Gtk::TreeModel for data storage, so the list store example 
-  might be helpful.
-
-  Copyright (c) 2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: iconview.rb,v 1.1 2005/01/03 18:55:02 mutoh Exp $
+The Gtk::IconView widget is used to display and manipulate icons.  
+It uses a Gtk::TreeModel for data storage, so the list store example 
+might be helpful.
 =end
 require 'common'
 

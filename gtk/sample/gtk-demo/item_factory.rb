@@ -1,13 +1,12 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: item_factory.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-  item_factory.rb - Item Factory
+= Item Factory
 
-  The Gtk::ItemFactory object allows the easy creation of menus
-  from an array of descriptions of menu items.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: item_factory.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+The Gtk::ItemFactory object allows the easy creation of menus
+from an array of descriptions of menu items.
 =end
 require 'common'
 

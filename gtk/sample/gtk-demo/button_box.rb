@@ -1,12 +1,11 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: button_box.rb,v 1.3 2005/02/12 23:02:43 kzys Exp $
 =begin
-  button_box.rb - Button Boxes
+= Button Boxes
 
-  The Button Box widgets are used to arrange buttons with padding.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: button_box.rb,v 1.2 2005/01/03 18:55:02 mutoh Exp $
+The Button Box widgets are used to arrange buttons with padding.
 =end
 require 'common'
 

@@ -1,22 +1,21 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: sizegroup.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-  sizegroup.rb - Size Groups
-  
-  Gtk::SizeGroup provides a mechanism for grouping a number of
-  widgets together so they all request the same amount of space.
-  This is typically useful when you want a column of widgets to 
-  have the same size, but you can't use a Gtk::Table widget.
-  
-  Note that size groups only affect the amount of space requested,
-  not the size that the widgets finally receive. If you want the
-  widgets in a Gtk::SizeGroup to actually be the same size, you need
-  to pack them in such a way that they get the size they request
-  and not more. For example, if you are packing your widgets
-  into a table, you would not include the Gtk::FILL flag.
-  
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+= Size Groups
 
-  $Id: sizegroup.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+Gtk::SizeGroup provides a mechanism for grouping a number of
+widgets together so they all request the same amount of space.
+This is typically useful when you want a column of widgets to
+have the same size, but you can't use a Gtk::Table widget.
+
+Note that size groups only affect the amount of space requested,
+not the size that the widgets finally receive. If you want the
+widgets in a Gtk::SizeGroup to actually be the same size, you need
+to pack them in such a way that they get the size they request
+and not more. For example, if you are packing your widgets
+into a table, you would not include the Gtk::FILL flag.
 =end
 require 'common'
 

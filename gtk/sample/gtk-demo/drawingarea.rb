@@ -1,22 +1,21 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: drawingarea.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-  drawingarea.rb - Drawing Area
+= Drawing Area
 
-  Gtk::DrawingArea is a blank area where you can draw custom displays
-  of various kinds.
+Gtk::DrawingArea is a blank area where you can draw custom displays
+of various kinds.
 
-  This demo has two drawing areas. The checkerboard area shows
-  how you can just draw something; all you have to do is write
-  a signal handler for expose_event, as shown here.
+This demo has two drawing areas. The checkerboard area shows
+how you can just draw something; all you have to do is write
+a signal handler for expose_event, as shown here.
 
-  The 'scribble' area is a bit more advanced, and shows how to handle
-  events such as button presses and mouse motion. Click the mouse
-  and drag in the scribble area to draw squiggles. Resize the window
-  to clear the area.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: drawingarea.rb,v 1.4 2005/02/01 17:26:06 mutoh Exp $
+The 'scribble' area is a bit more advanced, and shows how to handle
+events such as button presses and mouse motion. Click the mouse
+and drag in the scribble area to draw squiggles. Resize the window
+to clear the area.
 =end
 
 require 'common'

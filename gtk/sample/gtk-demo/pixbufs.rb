@@ -1,20 +1,19 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: pixbufs.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
 =begin
-  pixbufs.rb - Pixbufs
+= Pixbufs
 
-  A Gdk::Pixbuf represents an image, normally in RGB or RGBA format.
-  Pixbufs are normally used to load files from disk and perform
-  image scaling.
+A Gdk::Pixbuf represents an image, normally in RGB or RGBA format.
+Pixbufs are normally used to load files from disk and perform
+image scaling.
 
-  This demo is not all that educational, but looks cool. It was written
-  by Extreme Pixbuf Hacker Federico Mena Quintero. It also shows
-  off how to use Gtk::DrawingArea to do a simple animation.
+This demo is not all that educational, but looks cool. It was written
+by Extreme Pixbuf Hacker Federico Mena Quintero. It also shows
+off how to use Gtk::DrawingArea to do a simple animation.
 
-  Look at the Image demo for additional pixbuf usage examples.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: pixbufs.rb,v 1.4 2005/01/03 18:55:02 mutoh Exp $
+Look at the Image demo for additional pixbuf usage examples.
 =end
 
 require 'common'

@@ -1,36 +1,35 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: menus.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-  menus.rb - Menus
+= Menus
 
-  There are several widgets involved in displaying menus. The
-  Gtk::MenuBar widget is a horizontal menu bar, which normally appears
-  at the top of an application. The Gtk::Menu widget is the actual menu
-  that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
-  Gtk::MenuShell; a Gtk::MenuShell contains menu items
-  (Gtk::MenuItem). Each menu item contains text and/or images and can
-  be selected by the user.
-  
-  There are several kinds of menu item, including plain Gtk::MenuItem,
-  Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
-  which is a check menu item that's in a mutually exclusive group,
-  Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
-  which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
-  can place a Gtk::Image or other widget next to the menu text.
-  
-  A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
-  up when the menu item is selected. Typically, all menu items in a menu bar
-  have submenus.
-  
-  The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
-  It's used inside dialogs and such.
-  
-  Gtk::ItemFactory provides a higher-level interface for creating menu bars
-  and menus; while you can construct menus manually, most people don't
-  do that. There's a separate demo for Gtk::ItemFactory.
+There are several widgets involved in displaying menus. The
+Gtk::MenuBar widget is a horizontal menu bar, which normally appears
+at the top of an application. The Gtk::Menu widget is the actual menu
+that pops up. Both Gtk::MenuBar and Gtk::Menu are subclasses of
+Gtk::MenuShell; a Gtk::MenuShell contains menu items
+(Gtk::MenuItem). Each menu item contains text and/or images and can
+be selected by the user.
 
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
+There are several kinds of menu item, including plain Gtk::MenuItem,
+Gtk::CheckMenuItem which can be checked/unchecked, Gtk::RadioMenuItem
+which is a check menu item that's in a mutually exclusive group,
+Gtk::SeparatorMenuItem which is a separator bar, Gtk::TearoffMenuItem
+which allows a Gtk::Menu to be torn off, and Gtk::ImageMenuItem which
+can place a Gtk::Image or other widget next to the menu text.
 
-  $Id: menus.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+A Gtk::MenuItem can have a submenu, which is simply a Gtk::Menu to pop
+up when the menu item is selected. Typically, all menu items in a menu bar
+have submenus.
+
+The Gtk::OptionMenu widget is a button that pops up a Gtk::Menu when clicked.
+It's used inside dialogs and such.
+
+Gtk::ItemFactory provides a higher-level interface for creating menu bars
+and menus; while you can construct menus manually, most people don't
+do that. There's a separate demo for Gtk::ItemFactory.
 =end
 require 'common'
 
@@ -39,24 +38,24 @@ module Demo
     def initialize
       super('menus')
       self.border_width = 0
-      
+
       accel_group = Gtk::AccelGroup.new
       add_accel_group(accel_group)
-      
-      
+
+
       box1 = Gtk::VBox.new(false, 0)
       add(box1)
-      
+
       menubar = Gtk::MenuBar.new
       box1.pack_start(menubar, false, true, 0)
-      
+
       menu = create_menu(2, true)
-      
+
       menuitem = Gtk::MenuItem.new("test\nline2")
       menuitem.submenu = menu
       menubar.append(menuitem)
       menuitem.show
-      
+
       menuitem = Gtk::MenuItem.new('foo')
       menuitem.submenu = create_menu(3, true)
       menubar.append(menuitem)
@@ -67,19 +66,19 @@ module Demo
       menuitem.right_justified = true
       menubar.append(menuitem)
       menuitem.show
-      
+
       box2 = Gtk::VBox.new(false, 10)
       box2.border_width = 10
       box1.pack_start(box2, true, true, 0)
       box2.show
-      
+
       menu = create_menu(1, false)
       # menu.accel_group = accel_group
 
       menuitem = Gtk::SeparatorMenuItem.new
       menu.append(menuitem)
       menuitem.show
-      
+
       menuitem = Gtk::CheckMenuItem.new('Accelerate Me')
       menu.append(menuitem)
       menuitem.show
@@ -109,7 +108,7 @@ module Demo
 			       Gdk::Keyval::GDK_F3,
 			       0,
 			       Gtk::ACCEL_VISIBLE)
-      
+
       optionmenu = Gtk::OptionMenu.new
       optionmenu.menu = menu
       optionmenu.history = 3

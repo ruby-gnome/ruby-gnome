@@ -1,21 +1,20 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: images.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-  images.rb - Images
+= Images
 
-  Gtk::Image is used to display an image; the image can be in a number of formats.
-  Typically, you load an image into a Gdk::Pixbuf, then display the pixbuf.
+Gtk::Image is used to display an image; the image can be in a number of formats.
+Typically, you load an image into a Gdk::Pixbuf, then display the pixbuf.
 
-  This demo code shows some of the more obscure cases, in the simple
-  case a call to Gtk::Image.new is all you need.
+This demo code shows some of the more obscure cases, in the simple
+case a call to Gtk::Image.new is all you need.
 
-  If you want to put image data in your program as a String variable,
-  use the make-inline-pixbuf program that comes with GTK+.
-  This way you won't need to depend on loading external files, your
-  application binary can be self-contained.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: images.rb,v 1.3 2005/01/03 18:55:02 mutoh Exp $
+If you want to put image data in your program as a String variable,
+use the make-inline-pixbuf program that comes with GTK+.
+This way you won't need to depend on loading external files, your
+application binary can be self-contained.
 =end
 require 'common'
 

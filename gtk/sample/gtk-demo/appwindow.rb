@@ -1,12 +1,11 @@
+# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# This program is licenced under the same licence as Ruby-GNOME2.
+#
+# $Id: appwindow.rb,v 1.6 2005/02/12 23:02:43 kzys Exp $
 =begin
-  appwindow.rb -  Application main window
+=  Application main window
 
-  Demonstrates a typical application window, with menubar, toolbar, statusbar.
-
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
-  This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: appwindow.rb,v 1.5 2005/01/09 09:20:29 mutoh Exp $
+Demonstrates a typical application window, with menubar, toolbar, statusbar.
 =end
 
 require 'common'

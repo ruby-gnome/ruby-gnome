@@ -1,7 +1,6 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: clipboard.rb,v 1.1 2005/01/30 23:14:15 kzys Exp $
-
+# $Id: clipboard.rb,v 1.2 2005/02/12 23:02:43 kzys Exp $
 =begin
 = Clipboard
 
