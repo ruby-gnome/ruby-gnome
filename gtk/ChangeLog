@@ -1,6 +1,7 @@
 2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/sample/misc/stock.rb: Add header.
+	* src/rbgdkkeyval.c: Fix a small bug.
 
 2002-11-23  OGASAWARA, Takeshi  <t-ogs@earth.email.ne.jp>
 

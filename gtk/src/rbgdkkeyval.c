@@ -4,7 +4,7 @@
   rbgdkkeyval.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:42:00 $
+  $Date: 2002/11/23 05:22:13 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -56,8 +56,8 @@ keyval_to_lower(self, keyval)
     return INT2NUM(gdk_keyval_to_lower(NUM2INT(keyval)));
 }
 
-void 
-Init_gtk_gdk_keyval() 
+void
+Init_gtk_gdk_keyval()
 {
     VALUE mGdkKeyval = rb_define_module_under(mGdk, "Keyval");
     rb_define_module_function(mGdkKeyval, "name", keyval_to_name, 1);
