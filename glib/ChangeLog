@@ -1,3 +1,8 @@
+2003-03-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib_messages.c: change rbglib_log_handler_procs to static
+	variable.
+
 2003-03-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib_convert.c: implement

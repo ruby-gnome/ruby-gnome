@@ -3,8 +3,8 @@
 
   rbglib_messages.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:08 $
+  $Author: sakai $
+  $Date: 2003/03/14 03:30:37 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -17,7 +17,7 @@
 
 #include "global.h"
 
-VALUE rbglib_log_handler_procs = Qnil;
+static VALUE rbglib_log_handler_procs = Qnil;
 static ID id_call;
 
 static void
