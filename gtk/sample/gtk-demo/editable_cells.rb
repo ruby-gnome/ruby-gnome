@@ -1,4 +1,4 @@
-# $Id: editable_cells.rb,v 1.4 2003/05/04 03:49:57 mutoh Exp $
+# $Id: editable_cells.rb,v 1.5 2003/09/07 11:41:00 mutoh Exp $
 =begin
 = Tree View/Editable Cells
 
@@ -161,8 +161,8 @@ module Demo
       selection = treeview.selection
 
       if iter = selection.selected
-	model.remove(iter)
 	@articles.delete_at(iter.path.indices[0])
+	model.remove(iter)
       end
     end
   end

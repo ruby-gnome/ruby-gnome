@@ -1,4 +1,4 @@
-# $Id: tree_store.rb,v 1.3 2003/05/04 03:49:58 mutoh Exp $
+# $Id: tree_store.rb,v 1.4 2003/09/07 11:41:00 mutoh Exp $
 =begin
 = Tree View/Tree Store
 
@@ -127,7 +127,7 @@ module Demo
     ].collect do |month_name, holidays|
       [
 	month_name, 
-	holidays.collect do |*args| TreeItem.new(*args) end,
+	holidays.collect do |args| TreeItem.new(args) end,
       ]
     end
 
@@ -190,7 +190,7 @@ module Demo
 	# add children
 	holidays.each do |holiday|
 	  child_iter = model.append(iter)
-	  child_iter.set_value(HOLIDAY_NAME_COLUMN, holiday.label)
+	  child_iter.set_value(HOLIDAY_NAME_COLUMN, holiday.label[0])
 	  %w(alex havoc tim owen dave).each_with_index do |person, i|
 	    child_iter.set_value(ALEX_COLUMN + i, holiday[person])
 	  end

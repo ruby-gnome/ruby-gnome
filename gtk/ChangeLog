@@ -1,7 +1,8 @@
 2003-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtktreeiter.c: Fix bugs of Gtk::TreeIter#nth_child.
-
+	* sample/gtk-demo/tree_store.rb: Fix handling of block argument for ruby-1.8.
+	* sample/gtk-demo/editable_cells.rb: Fix segfault of removing items action.
+	
 2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtklabel.c: Add Gtk::Label#markup=. 
