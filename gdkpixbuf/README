@@ -10,7 +10,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.6.x, GTK+ and Ruby/GTK2.
+   0. install ruby-1.6.x, GTK+, Ruby/GLib2 and Ruby/GTK2.
    1. ruby extconf.rb
    2. make
    3. su
