@@ -24,8 +24,8 @@ class MyButton < Gtk::Button
   signal_new("hoge",                  # name
              GLib::Signal::RUN_FIRST, # flags
              nil,                     # accumulator (XXX: not supported yet)
-             nil,                     # return type (void == nil)
-	     Integer, Integer         # parameter types
+             GLib::Type["void"],      # return type
+             GLib::Type["gint"], GLib::Type["gint"] # parameter types
              )
   # define default handler of "hoge" signal
   def signal_do_hoge(a, b)
@@ -69,6 +69,7 @@ class MyButton2 < MyButton
   def signal_do_hoge(a, b)
     puts "MyButton2#signal_do_hoge enter"
     puts "a, b = #{a}, #{b}"
+    #p caller
     super
     puts "MyButton2#signal_do_hoge leave"
   end

@@ -1,5 +1,7 @@
 2004-04-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgobj_type.c: Accept a ruby class when GType[...] is required.
+	* sample/type-register2.rb: Added.
 	* src/rbglib_spawn.c: Improve error classes.
 	Separate module from GLib to GLib::Spawn.
 	Add GLib::Spawn.close_pid.

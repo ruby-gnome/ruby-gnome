@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2004/03/09 17:27:24 $
+  $Date: 2004/04/27 09:01:57 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -253,9 +253,12 @@ GType
 rbgobj_gtype_get(self)
     VALUE self;
 {
-    if (!RTEST(rb_obj_is_kind_of(self, rbgobj_cType)))
-        rb_raise(rb_eTypeError, "Not a GLib::Type");
-    return NUM2ULONG(rb_ivar_get(self, id_gtype));
+    if (RTEST(rb_obj_is_kind_of(self, rbgobj_cType))) {
+        return NUM2ULONG(rb_ivar_get(self, id_gtype));
+    } else {
+        return CLASS2GTYPE(self);
+    }
+    rb_raise(rb_eTypeError, "Not a GLib::Type");
 }
 
 static VALUE
@@ -778,9 +781,12 @@ void Init_gobject_gtype()
     _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
     _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
     _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(Qnil, G_TYPE_NONE);
     _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
     _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
     _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(Qtrue, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(Qfalse, G_TYPE_BOOLEAN);
     _register_fundamental_klass_to_gtype(rb_cObject, RBGOBJ_TYPE_RUBY_VALUE);
 
     _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
