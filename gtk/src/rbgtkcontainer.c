@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: mutoh $
+  $Date: 2004/08/07 08:36:09 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -29,25 +29,6 @@ cont_is_resize_container(self)
     VALUE self;
 {
     return GTK_IS_RESIZE_CONTAINER(_SELF(self)) ? Qtrue : Qfalse;
-}
-
-static VALUE
-cont_add(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-{
-    VALUE other, properties;
-    GtkWidget *child;
-
-    rb_scan_args(argc, argv, "11", &other, &properties);
-
-    child = GTK_WIDGET(RVAL2GOBJ(other));
-    gtk_container_add(_SELF(self), child);
-    if (! NIL_P(properties)){
-        G_SET_PROPERTIES(other, properties);
-    }
-    return self;
 }
 
 static VALUE
@@ -79,6 +60,22 @@ cont_foreach(argc, argv, self)
         callback = G_BLOCK_PROC();
     }
     gtk_container_foreach(_SELF(self), exec_callback, (gpointer)callback);
+    return self;
+}
+
+static VALUE
+cont_forall(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE callback;
+
+    rb_scan_args(argc, argv, "01", &callback);
+    if (NIL_P(callback)) {
+        callback = G_BLOCK_PROC();
+    }
+    gtk_container_forall(_SELF(self), exec_callback, (gpointer)callback);
     return self;
 }
 
@@ -303,6 +300,40 @@ cont_child_set_property(self, child, prop_name, val)
         return self;
     }
 }
+
+static VALUE
+cont_add(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE other, properties;
+    GtkWidget *child;
+
+    rb_scan_args(argc, argv, "11", &other, &properties);
+
+    child = GTK_WIDGET(RVAL2GOBJ(other));
+    gtk_widget_freeze_child_notify(child);
+    gtk_container_add(_SELF(self), child);
+    if (child->parent && (! NIL_P(properties))){
+        int i;
+        VALUE ary;
+        GObject* obj;
+                                                                                
+        Check_Type(properties, T_HASH);
+        ary = rb_funcall(properties, rb_intern("to_a"), 0);
+        obj = RVAL2GOBJ(self);
+        
+        for (i = 0; i < RARRAY(ary)->len; i++) {
+            cont_child_set_property(self, other, 
+                       RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
+                       RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+        }
+    }
+    gtk_widget_thaw_child_notify(child);
+    return self;
+}
+
 /*
 void        gtk_container_child_get_valist  (GtkContainer *container,
                                              GtkWidget *child,
@@ -312,11 +343,6 @@ void        gtk_container_child_set_valist  (GtkContainer *container,
                                              GtkWidget *child,
                                              const gchar *first_property_name,
                                              va_list var_args);
-*/
-/* Use gtk_container_foreach instead
-void        gtk_container_forall            (GtkContainer *container,
-                                             GtkCallback callback,
-                                             gpointer callback_data);
 */
 
 static VALUE
@@ -697,6 +723,7 @@ Init_gtk_container()
     rb_define_method(gContainer, "remove", cont_remove, 1);
     rb_define_method(gContainer, "check_resize", cont_check_resize, 0);
     rb_define_method(gContainer, "each", cont_foreach, -1);
+    rb_define_method(gContainer, "each_forall", cont_forall, -1);
     rb_define_method(gContainer, "children", cont_get_children, 0);
     rb_define_method(gContainer, "set_reallocate_redraws", cont_set_reallocate_redraws, 1);
     rb_define_method(gContainer, "set_focus_child", cont_set_focus_child, 1);
