@@ -4,9 +4,9 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2002/06/23 16:13:32 $
+  $Date: 2002/08/29 07:24:40 $
 
-  Copyright (C) 2002 MUTOH Masao
+  Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 
@@ -79,4 +79,23 @@ Init_gtk_gdk_selection()
     rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
     rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
     rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, 5);
+
+    /* Constants */
+    /* GdkSelectionType */
+    rb_define_const(mGdkSelection, "TYPE_ATOM", make_gdkatom(GDK_SELECTION_TYPE_ATOM));
+    rb_define_const(mGdkSelection, "TYPE_BITMAP", make_gdkatom(GDK_SELECTION_TYPE_BITMAP));
+    rb_define_const(mGdkSelection, "TYPE_COLORMAP", make_gdkatom(GDK_SELECTION_TYPE_COLORMAP));
+    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", make_gdkatom(GDK_SELECTION_TYPE_DRAWABLE));
+    rb_define_const(mGdkSelection, "TYPE_INTEGER", make_gdkatom(GDK_SELECTION_TYPE_INTEGER));
+    rb_define_const(mGdkSelection, "TYPE_PIXMAP", make_gdkatom(GDK_SELECTION_TYPE_PIXMAP));
+    rb_define_const(mGdkSelection, "TYPE_WINDOW", make_gdkatom(GDK_SELECTION_TYPE_WINDOW));
+    rb_define_const(mGdkSelection, "TYPE_STRING", make_gdkatom(GDK_SELECTION_TYPE_STRING));
+
+    /* GdkTarget */
+    rb_define_const(mGdkSelection, "TARGET_BITMAP", make_gdkatom(GDK_TARGET_BITMAP));
+    rb_define_const(mGdkSelection, "TARGET_COLORMAP", make_gdkatom(GDK_TARGET_COLORMAP));
+    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", make_gdkatom(GDK_TARGET_DRAWABLE));
+    rb_define_const(mGdkSelection, "TARGET_PIXMAP", make_gdkatom(GDK_TARGET_PIXMAP));
+    rb_define_const(mGdkSelection, "TARGET_STRING", make_gdkatom(GDK_TARGET_STRING));
+
 }

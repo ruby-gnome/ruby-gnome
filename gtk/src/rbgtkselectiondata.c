@@ -3,50 +3,51 @@
 
   rbgtkselectiondata.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/08/29 07:24:40 $
 
-  Copyright (C) 2002 MUTOH Masao
+  Copyright (C) 2002 Masao Mutoh
 ************************************************/
 
 
 #include "global.h"
 
-/* Gtkselectiondata */
+#define _SELF(d) ((GtkSelectionData*)RVAL2BOXED(d))
+
 static VALUE
 gtkselectiondata_selection(self)
     VALUE self;
 {
-    return make_gdkatom(get_gtkselectiondata(self)->selection);
+    return make_gdkatom(_SELF(self)->selection);
 }
 
 static VALUE
 gtkselectiondata_target(self)
     VALUE self;
 {
-    return make_gdkatom(get_gtkselectiondata(self)->target);
+    return make_gdkatom(_SELF(self)->target);
 }
 
 static VALUE
 gtkselectiondata_type(self)
     VALUE self;
 {
-    return make_gdkatom(get_gtkselectiondata(self)->type);
+    return make_gdkatom(_SELF(self)->type);
 }
 
 static VALUE
 gtkselectiondata_format(self)
     VALUE self;
 {
-    return INT2NUM(get_gtkselectiondata(self)->format);
+    return INT2NUM(_SELF(self)->format);
 }
 
 static VALUE
 gtkselectiondata_data(self)
     VALUE self;
 {
-    return rb_str_new(get_gtkselectiondata(self)->data, 
-					  get_gtkselectiondata(self)->length);
+    return rb_str_new(_SELF(self)->data, 
+					  _SELF(self)->length);
 }
 
 /* Instance Methods */
@@ -54,7 +55,7 @@ static VALUE
 gtkselectiondata_set(self, type, format, data)
     VALUE self, type, format, data;
 {
-    gtk_selection_data_set(get_gtkselectiondata(self), get_gdkatom(type),
+    gtk_selection_data_set(_SELF(self), get_gdkatom(type),
 						   NUM2INT(format), RSTRING(data)->ptr, 
 						   RSTRING(data)->len);
     return self;
@@ -64,13 +65,13 @@ static VALUE
 gtkselectiondata_copy(self)
     VALUE self;
 {
-    return make_gtkselectiondata(gtk_selection_data_copy(get_gtkselectiondata(self)));
+    return BOXED2RVAL(gtk_selection_data_copy(_SELF(self)), GTK_TYPE_SELECTION_DATA);
 }
 
 void
 Init_gtk_selectiondata()
 {
-    gSelectionData = rb_define_class_under(mGtk, "SelectionData", rb_cData);
+    VALUE gSelectionData = G_DEF_CLASS(GTK_TYPE_SELECTION_DATA, "SelectionData", mGtk);
 
     rb_define_method(gSelectionData, "selection", gtkselectiondata_selection, 0);
     rb_define_method(gSelectionData, "target", gtkselectiondata_target, 0);

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/08/28 17:09:58 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,9 +48,7 @@ extern VALUE mGtk;
 extern VALUE mGtkDrag;
 extern VALUE mEditable;
 
-extern VALUE gAllocation;
 extern VALUE gRequisition;
-extern VALUE gSelectionData;
 extern VALUE gData;
 
 extern VALUE mGdk;
@@ -58,11 +56,6 @@ extern VALUE mGdkKeyval;
 extern VALUE mGdkSelection;
 extern VALUE mGdkRgb;
 
-
-#ifndef GTK_DISABLE_DEPRECATED
-extern VALUE gdkFont;
-#endif
-extern VALUE gdkRectangle;
 extern VALUE gdkRegion;
 extern VALUE gdkAtom;
 extern VALUE gdkEvent;
@@ -92,9 +85,6 @@ extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 
-extern VALUE make_gtkselectiondata(GtkSelectionData* selectiondata);
-extern GtkSelectionData *get_gtkselectiondata(VALUE value);
-
 extern VALUE make_gtkprevinfo(GtkPreviewInfo* info);
 extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
 
@@ -110,14 +100,8 @@ extern gpointer get_tobj(VALUE obj, VALUE klass);
 
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
-#define make_gallocation(c) make_tobj(c, gAllocation, sizeof(GtkAllocation))
-#define get_gallocation(c) ((GtkAllocation*)get_tobj(c, gAllocation))
-
 #define make_grequisition(c) make_tobj(c, gRequisition, sizeof(GtkRequisition))
 #define get_grequisition(c) ((GtkRequisition*)get_tobj(c, gRequisition))
-
-#define make_gdkrectangle(r) make_tobj(r, gdkRectangle, sizeof(GdkRectangle))
-#define get_gdkrectangle(r) ((GdkRectangle*)get_tobj(r, gdkRectangle))
 
 extern VALUE make_gdkregion(GdkRegion* region);
 extern GdkRegion* get_gdkregion(VALUE region);
@@ -135,11 +119,5 @@ extern GdkGeometry *rbgdk_geometry_get(VALUE geo);
 
 extern VALUE make_gdkatom(GdkAtom atom);
 extern GdkAtom get_gdkatom(VALUE atom);
-
-#ifndef GTK_DISABLE_DEPRECATED
-extern VALUE make_gdkfont(GdkFont* font);
-extern GdkFont* get_gdkfont(VALUE font);
-#endif
-
 
 #endif /* _RBGTK_H */

@@ -4,7 +4,7 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 2001 Neil Conway
 ************************************************/
@@ -86,7 +86,7 @@ static VALUE
 gdkgc_set_clip_rectangle(self, rectangle)
 	VALUE self, rectangle;
 {
-	gdk_gc_set_clip_rectangle(_SELF(self), get_gdkrectangle(rectangle));
+	gdk_gc_set_clip_rectangle(_SELF(self), (GdkRectangle*)RVAL2BOXED(rectangle));
 	return rectangle;
 }
 
@@ -145,7 +145,7 @@ static VALUE
 gdkgc_set_font(self, font)
 	VALUE self, font;
 {
-	gdk_gc_set_font(_SELF(self), get_gdkfont(font));
+	gdk_gc_set_font(_SELF(self), (GdkFont*)RVAL2BOXED(font));
 	return self;
 }
 #endif

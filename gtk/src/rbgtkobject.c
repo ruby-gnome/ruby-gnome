@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: sakai $
-  $Date: 2002/08/25 12:54:11 $
+  $Author: mutoh $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -82,7 +82,7 @@ arg_set_value(arg, value)
 #ifdef GTK_TYPE_GDK_FONT
 #ifndef GTK_DISABLE_DEPRECATED
 		else if (arg->type == GTK_TYPE_GDK_FONT)
-			GTK_VALUE_BOXED(*arg) = get_gdkfont(value);
+			GTK_VALUE_BOXED(*arg) = (GdkFont*)RVAL2BOXED(value);
 #endif
 #endif
 #ifdef GTK_TYPE_GDK_PIXMAP
@@ -135,7 +135,7 @@ signal_setup_args(obj, sig, argc, params, args)
 
     if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))) {
 		if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
-			rb_ary_push(args, make_gdkrectangle(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
 			return;
 		}
 		if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
@@ -143,7 +143,7 @@ signal_setup_args(obj, sig, argc, params, args)
 			return;
 		}
 		if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
-			rb_ary_push(args, make_gallocation(GTK_VALUE_POINTER(params[0])));
+			rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
 			return;
 		}
 		if (signal_comp(signame, "drag_begin", GTK_TYPE_WIDGET) ||
@@ -167,7 +167,8 @@ signal_setup_args(obj, sig, argc, params, args)
 		}
 		if (signal_comp(signame, "drag_data_get", GTK_TYPE_WIDGET)){
 			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
-			rb_ary_push(args, make_gtkselectiondata(GTK_VALUE_POINTER(params[1])));
+			rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[1]), 
+                                         GTK_TYPE_SELECTION_DATA));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[2])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[3])));
 			return;
@@ -176,7 +177,8 @@ signal_setup_args(obj, sig, argc, params, args)
 			rb_ary_push(args, GOBJ2RVAL(GTK_VALUE_POINTER(params[0])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[1])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[2])));
-			rb_ary_push(args, make_gtkselectiondata(GTK_VALUE_POINTER(params[3])));
+			rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[3]), 
+                                         GTK_TYPE_SELECTION_DATA));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[4])));
 			rb_ary_push(args, INT2NUM(GTK_VALUE_INT(params[5])));
 			return;

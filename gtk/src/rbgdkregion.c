@@ -4,97 +4,13 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/08/28 17:09:57 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
-
 #include "global.h"
-
-/*
- * Gdk::Rectangle
- */
-
-VALUE gdkRectangle;
-
-static VALUE
-gdkrect_s_new(self, x, y, width, height)
-    VALUE self, x, y, width, height;
-{
-    GdkRectangle new;
-    new.x = NUM2INT(x);
-    new.y = NUM2INT(y);
-    new.width = NUM2INT(width);
-    new.height = NUM2INT(height);
-    return make_gdkrectangle(&new);
-}
-
-static VALUE
-gdkrect_x(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkrectangle(self)->x);
-}
-
-static VALUE
-gdkrect_y(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkrectangle(self)->y);
-}
-
-static VALUE
-gdkrect_w(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkrectangle(self)->width);
-}
-
-static VALUE
-gdkrect_h(self)
-    VALUE self;
-{
-    return INT2NUM(get_gdkrectangle(self)->height);
-}
-
-static VALUE
-gdkrect_set_x(self, x)
-    VALUE self, x;
-{
-    get_gdkrectangle(self)->x = NUM2INT(x);
-    return self;
-}
-
-static VALUE
-gdkrect_set_y(self, y)
-    VALUE self, y;
-{
-    get_gdkrectangle(self)->y = NUM2INT(y);
-    return self;
-}
-
-static VALUE
-gdkrect_set_w(self, width)
-    VALUE self, width;
-{
-    get_gdkrectangle(self)->width = NUM2INT(width);
-    return self;
-}
-
-static VALUE
-gdkrect_set_h(self, height)
-    VALUE self, height;
-{
-    get_gdkrectangle(self)->height = NUM2INT(height);
-    return self;
-}
-
-
-/*
- * Gdk::Region
- */
 
 VALUE gdkRegion;
 
@@ -145,7 +61,7 @@ gdkregion_get_clipbox(self)
 {
     GdkRectangle rect;
     gdk_region_get_clipbox(get_gdkregion(self), &rect);
-    return make_gdkrectangle(&rect);
+    return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
 static VALUE
@@ -179,7 +95,7 @@ gdkregion_rect_in(self, rect)
     VALUE self, rect;
 {
     return INT2FIX(gdk_region_rect_in(get_gdkregion(self),
-                                      get_gdkrectangle(rect)));
+                                      (GdkRectangle*)RVAL2BOXED(rect)));
 }
 
 static VALUE
@@ -203,7 +119,7 @@ gdkregion_union_with_rect(self, rect)
     VALUE self, rect;
 {
     gdk_region_union_with_rect(get_gdkregion(self),
-                               get_gdkrectangle(rect));
+                               (GdkRectangle*)RVAL2BOXED(rect));
     return self;
 }
 
@@ -243,20 +159,6 @@ gdkregion_xor(self, region)
 void
 Init_gtk_gdk_region()
 {
-    /* Gdk::Rectangle */
-    gdkRectangle = rb_define_class_under(mGdk, "Rectangle", rb_cData);
-
-    rb_define_singleton_method(gdkRectangle, "new", gdkrect_s_new, 4);
-    rb_define_method(gdkRectangle, "x", gdkrect_x, 0);
-    rb_define_method(gdkRectangle, "y", gdkrect_y, 0);
-    rb_define_method(gdkRectangle, "width", gdkrect_w, 0);
-    rb_define_method(gdkRectangle, "height", gdkrect_h, 0);
-    rb_define_method(gdkRectangle, "x=", gdkrect_set_x, 1);
-    rb_define_method(gdkRectangle, "y=", gdkrect_set_y, 1);
-    rb_define_method(gdkRectangle, "width=", gdkrect_set_w, 1);
-    rb_define_method(gdkRectangle, "height=", gdkrect_set_h, 1);
-
-    /* Gdk::Region */
     gdkRegion = rb_define_class_under(mGdk, "Region", rb_cData);
 
     rb_define_singleton_method(gdkRegion, "new", gdkregion_s_new, 0);

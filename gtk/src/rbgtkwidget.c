@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: sakai $
-  $Date: 2002/08/02 13:44:32 $
+  $Author: mutoh $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -115,7 +115,7 @@ static VALUE
 widget_draw(self, rect)
     VALUE self, rect;
 {
-    gtk_widget_draw(_SELF(self), get_gdkrectangle(rect));
+    gtk_widget_draw(_SELF(self), (GdkRectangle*)RVAL2BOXED(rect));
     return self;
 }
 
@@ -132,7 +132,7 @@ static VALUE
 widget_size_allocate(self, alloc)
     VALUE self, alloc;
 {
-    gtk_widget_size_allocate(_SELF(self), get_gallocation(alloc));
+    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc));
     return self;
 }
 
@@ -203,8 +203,8 @@ widget_intersect(self, area, intersect)
     VALUE self, area, intersect;
 {
     return INT2NUM(gtk_widget_intersect(_SELF(self),
-                                        get_gdkrectangle(area),
-                                        get_gdkrectangle(intersect)));
+                                        (GdkRectangle*)RVAL2BOXED(area),
+                                        (GdkRectangle*)RVAL2BOXED(intersect)));
 }
 
 static VALUE
@@ -506,7 +506,7 @@ static VALUE
 widget_get_alloc(self)
     VALUE self;
 {
-    return make_gallocation(&(_SELF(self)->allocation));
+    return BOXED2RVAL(&(_SELF(self)->allocation), GDK_TYPE_RECTANGLE);
 }
 static VALUE
 widget_set_alloc(self, x,y,w,h)
@@ -853,7 +853,7 @@ widget_selection_remove_all(self)
    ID id_supre = rb_intern("super");
 
    if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
-   rb_ary_push(args, make_gdkrectangle(GTK_VALUE_POINTER(params[0])));
+   rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
    return;
    }
    if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
@@ -861,7 +861,7 @@ widget_selection_remove_all(self)
    return;
    }
    if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
-   rb_ary_push(args, make_gallocation(GTK_VALUE_POINTER(params[0])));
+   rb_ary_push(args, BOXED2RVAL(GTK_VALUE_POINTER(params[0]), GDK_TYPE_RECTANGLE));
    return;
    }
    rb_func_call(self, id_super, sig, argc, params, args);
@@ -903,7 +903,7 @@ DEFINE_EVENT_FUNC(button_press_event, button)
 	DEFINE_EVENT_FUNC(client_event, client)
 	DEFINE_EVENT_FUNC(no_expose_event, any)
 
-void 
+    void 
 Init_gtk_widget()
 {
     VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);

@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: sakai $
-  $Date: 2002/08/27 12:09:54 $
+  $Author: mutoh $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,9 +21,7 @@ VALUE mGtk;
 VALUE mEditable;
 
 VALUE gData;
-VALUE gAllocation;
 VALUE gRequisition;
-VALUE gSelectionData;
 
 #ifndef GTK_DISABLE_DEPRECATED
 VALUE gPreviewInfo;
@@ -42,28 +40,6 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
 	gtkobj = gtk_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
     RBGOBJ_INITIALIZE(obj, gtkobj);
-}
-
-VALUE
-make_gtkselectiondata(selectiondata)
-    GtkSelectionData *selectiondata;
-{
-    return Data_Wrap_Struct(gSelectionData, 0, 0, selectiondata);
-}
-
-GtkSelectionData*
-get_gtkselectiondata(value)
-    VALUE value;
-{
-    GtkSelectionData *selectiondata;
-
-    if (NIL_P(value)) return NULL;
-    if (!rb_obj_is_instance_of(value, gSelectionData)) {
-        rb_raise(rb_eTypeError, "not a GtkSelectionData");
-    }
-    Data_Get_Struct(value, GtkSelectionData, selectiondata);
-
-    return selectiondata;
 }
 
 #ifndef GTK_DISABLE_DEPRECATED

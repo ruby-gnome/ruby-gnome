@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/08/18 06:28:32 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -50,37 +50,6 @@ get_tobj(obj, klass)
 
     return ptr;
 }
-#ifndef GTK_DISABLE_DEPRECATED
-VALUE
-make_gdkfont(font)
-    GdkFont *font;
-{
-    VALUE obj;
-
-    if (font == NULL) return Qnil;
-
-    gdk_font_ref(font);
-    obj = Data_Wrap_Struct(gdkFont, 0, gdk_font_unref, font);
-
-    return obj;
-}
-
-GdkFont*
-get_gdkfont(font)
-    VALUE font;
-{
-    GdkFont *gfont;
-
-    if (NIL_P(font)) return NULL;
-
-    if (!rb_obj_is_instance_of(font, gdkFont)) {
-        rb_raise(rb_eTypeError, "not a GdkFont");
-    }
-    Data_Get_Struct(font, GdkFont, gfont);
-
-    return gfont;
-}
-#endif
 
 VALUE
 make_gdkevent(ev)
@@ -295,6 +264,7 @@ extern void Init_gtk_gdk_gc();
 extern void Init_gtk_gdk_image();
 extern void Init_gtk_gdk_keyval();
 extern void Init_gtk_gdk_pixmap();
+extern void Init_gtk_gdk_rectangle();
 extern void Init_gtk_gdk_region();
 extern void Init_gtk_gdk_rgb();
 extern void Init_gtk_gdk_window();
@@ -335,6 +305,7 @@ Init_gtk_gdk()
     Init_gtk_gdk_pixmap();
     Init_gtk_gdk_window();
     Init_gtk_gdk_geometry();
+    Init_gtk_gdk_rectangle();
     Init_gtk_gdk_region();
     Init_gtk_gdk_rgb();
     Init_gtk_gdkkeysyms();

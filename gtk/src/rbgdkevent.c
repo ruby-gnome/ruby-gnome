@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2002/08/13 18:01:37 $
+  $Author: mutoh $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -103,7 +103,7 @@ static VALUE
 gdkeventexpose_area(self)
     VALUE self;
 {
-    return make_gdkrectangle(&get_gdkevent(self)->expose.area);
+    return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
 }
 
 static VALUE

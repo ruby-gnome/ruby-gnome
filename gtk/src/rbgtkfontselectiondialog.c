@@ -3,7 +3,7 @@
   rbgtkfontselectiondialog.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
 ************************************************/
@@ -23,8 +23,8 @@ static VALUE
 fsd_get_font(self)
     VALUE self;
 {
-    return make_gdkfont(gtk_font_selection_dialog_get_font(
-                GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))));
+    return BOXED2RVAL(gtk_font_selection_dialog_get_font(
+             GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))), GDK_TYPE_FONT);
 }
 #endif
 

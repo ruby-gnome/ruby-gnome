@@ -4,7 +4,7 @@
   rbgtktext.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:09 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,7 +109,7 @@ txt_insert(self, font, fore, back, str)
 {
     Check_Type(str, T_STRING);
     gtk_text_insert(GTK_TEXT(RVAL2GOBJ(self)), 
-		    get_gdkfont(font),
+		    (GdkFont*)RVAL2BOXED(font),
 		    (GdkColor*)RVAL2BOXED(fore),
 		    (GdkColor*)RVAL2BOXED(back),
 		    RSTRING(str)->ptr,

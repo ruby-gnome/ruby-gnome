@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Date: 2002/08/29 07:24:40 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -91,7 +91,8 @@ gdkdraw_draw_text(self, font, gc, x, y, str)
     VALUE self, font, gc, x, y, str;
 {
     Check_Type(str, T_STRING);
-    gdk_draw_text(_SELF(self), get_gdkfont(font), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_text(_SELF(self), (GdkFont*)RVAL2BOXED(font), 
+                  GDK_GC(RVAL2GOBJ(gc)),
 				  NUM2INT(x), NUM2INT(y),
 				  RSTRING(str)->ptr, RSTRING(str)->len);
     return self;
