@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Date: 2004/02/26 17:46:19 $
 
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
@@ -187,8 +187,8 @@ gdkscreen_broadcast_client_message(self, event)
 }
 
 static VALUE
-gdkscreen_get_setting(self,name)
-    VALUE self,name;
+gdkscreen_get_setting(self, name)
+    VALUE self, name;
 {
       GValue val;
       if (gdk_screen_get_setting(_SELF(self), RVAL2CSTR(name), &val))
@@ -227,7 +227,7 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "monitor_geometry", gdkscreen_monitor_geometry, 1);
     rb_define_method(gdkScreen, "get_monitor", gdkscreen_get_monitor, -1);
     rb_define_method(gdkScreen, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
-    rb_define_method(gdkScreen, "setting", gdkscreen_get_setting, 1);
+    rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, 1);
 
     G_DEF_SETTERS(gdkScreen);
 

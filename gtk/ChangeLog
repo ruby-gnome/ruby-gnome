@@ -1,5 +1,6 @@
 2004-02-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkscreen.c: Change Gdk::Screen#setting to #get_setting. 
 	* src/rbgdkevent.c: Move Gdk::Event.get_graphics_expose to 
 	Gdk::EventExpose.get_graphics_expose. 
 	Gdk::Event#put returns self.
