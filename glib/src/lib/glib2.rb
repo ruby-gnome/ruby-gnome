@@ -3,12 +3,15 @@
 if /mingw|mswin/ =~ RUBY_PLATFORM
   begin
     require 'win32/registry'
-    GTK2Dir =
-      Win32::Registry::HKEY_CURRENT_USER.open('Software\GTK\2.0')['Path']
-    ENV['PATH'] = %w(bin lib).collect{|dir|
-      "#{GTK2Dir}\\#{dir};"
-    }.join('') + ENV['PATH']
-  rescue LoadError, Win32::Registry::Error
+    begin
+      GTK2Dir =
+        Win32::Registry::HKEY_CURRENT_USER.open('Software\GTK\2.0')['Path']
+      ENV['PATH'] = %w(bin lib).collect{|dir|
+        "#{GTK2Dir}\\#{dir};"
+      }.join('') + ENV['PATH']
+    rescue Win32::Registry::Error
+    end
+  rescue LoadError
   end
 end
 

@@ -1,5 +1,8 @@
 2003-08-30  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/lib/glib2.rb: rescue LoadError and Win32::Registry::Error
+	separately.
+
 	* src/lib/glib2.rb: On mingw32 and mswin32 platform, require
 	'win32/registry' unconditionaly and rescue LoadError.
 	(proposed by TAMURA.KENICHI <sgs02516@nifty.com>)
