@@ -1,5 +1,6 @@
 2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkkeyval.c: Rename Gdk::Keyval.name to Gdk::Keyval.to_name.
 	* src/sample/misc/stock.rb: Add header.
 	* src/rbgdkkeyval.c: Fix a small bug.
 	* src/rbgtkselection.c: Rename method names(remove prefix selection_).
