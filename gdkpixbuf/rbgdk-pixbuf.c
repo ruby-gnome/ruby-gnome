@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2004/08/27 20:29:28 $
+  $Date: 2004/08/27 20:42:24 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -442,6 +442,24 @@ fill(self, pixel)
     return self;
 }
 
+/* From Module Interface */
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+static VALUE
+get_formats(self)
+    VALUE self;
+{
+    return GSLIST2ARY2(gdk_pixbuf_get_formats(), GDK_TYPE_PIXBUF_FORMAT);
+}
+
+static VALUE
+set_option(self, key, value)
+    VALUE self, key, value;
+{
+    return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self), 
+                                            RVAL2CSTR(key), RVAL2CSTR(value)));
+}
+#endif
+
 void 
 Init_gdk_pixbuf2()
 {
@@ -524,6 +542,14 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "copy_area", copy_area, 7);
     rb_define_method(gdkPixbuf, "saturate_and_pixelate", saturate_and_pixelate, 2);
     rb_define_method(gdkPixbuf, "fill!", fill, 1);
+
+    /*
+     * Module Interface
+     */
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+    rb_define_singleton_method(gdkPixbuf, "formats", get_formats, 0);
+    rb_define_method(gdkPixbuf, "set_option", set_option, 2);
+#endif
 
     Init_gdk_pixbuf_animation(mGdk);
     Init_gdk_pixdata(mGdk);

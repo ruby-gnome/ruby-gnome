@@ -4,14 +4,12 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2004/08/27 20:29:28 $
+  $Date: 2004/08/27 20:42:24 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
-#define GDK_PIXBUF_ENABLE_BACKEND
 #include "rbgdk-pixbuf.h"
-#include <gdk-pixbuf/gdk-pixbuf-io.h>
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 #define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
@@ -41,12 +39,12 @@ gdk_pixbuf_format_get_type(void)
 }
 /**********************************/
 
-static VALUE
-get_formats(self)
-    VALUE self;
-{
-    return GSLIST2ARY2(gdk_pixbuf_get_formats(), GDK_TYPE_PIXBUF_FORMAT);
-}
+/* Move to rbgdk-pixbuf.c
+gboolean    gdk_pixbuf_set_option           (GdkPixbuf *pixbuf,
+                                             const gchar *key,
+                                             const gchar *value);
+GSList*     gdk_pixbuf_get_formats          (void);
+*/
 
 static VALUE
 get_name(self)
@@ -132,8 +130,6 @@ Init_gdk_pixbuf_format(VALUE mGdk)
 {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
     VALUE format = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
-
-    rb_define_singleton_method(format, "formats", get_formats, 0);
 
     rb_define_method(format, "name", get_name, 0);
     rb_define_method(format, "description", get_description, 0);

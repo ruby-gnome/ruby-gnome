@@ -4,11 +4,13 @@
   rbgdk-pixbuf.h -
 
   $Author: mutoh $
-  $Date: 2004/08/27 20:29:28 $
+  $Date: 2004/08/27 20:42:24 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
 
+#define GDK_PIXBUF_ENABLE_BACKEND
+#include <gdk-pixbuf/gdk-pixbuf-io.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include "rbgobject.h"
