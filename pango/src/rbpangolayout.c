@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 15:24:26 $
+  $Date: 2003/02/02 09:10:53 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -241,7 +241,7 @@ layout_xy_to_index(self, x, y)
                                             NUM2INT(x), NUM2INT(y), 
                                             &index, &trailing);
 
-    return rb_ary_new3(2, CBOOL2RVAL(ret), NUM2INT(index), NUM2INT(trailing));
+    return rb_ary_new3(3, CBOOL2RVAL(ret), INT2NUM(index), INT2NUM(trailing));
 }
 
 /*    
@@ -263,7 +263,7 @@ layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
                                       NUM2INT(old_index), NUM2INT(old_trailing),
                                       NUM2INT(direction),
                                       &new_index, &new_trailing);
-    return rb_ary_new3(2, NUM2INT(new_index), NUM2INT(new_trailing));
+    return rb_ary_new3(2, INT2NUM(new_index), INT2NUM(new_trailing));
 }
 
 /*
@@ -281,7 +281,7 @@ layout_get_size(self)
 {
     int width, height;
     pango_layout_get_size(_SELF(self), &width, &height);
-    return rb_ary_new3(NUM2INT(width), NUM2INT(height));
+    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
 static VALUE
@@ -290,7 +290,7 @@ layout_get_pixel_size(self)
 {
     int width, height;
     pango_layout_get_pixel_size(_SELF(self), &width, &height);
-    return rb_ary_new3(NUM2INT(width), NUM2INT(height));
+    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
 static VALUE

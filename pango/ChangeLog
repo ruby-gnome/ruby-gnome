@@ -1,3 +1,9 @@
+2003-02-02  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* src/rbpangolayout.c: Fix a couple of the returned arrays in Pango::Layout 
+	used the wrong macros (ie. NUM2INT instead of INT2NUM)
+	* src/rbpangomain.c: Add Pango::SCALE.
+
 2003-02-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gdk_layout.rb: Add a file. 
