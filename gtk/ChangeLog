@@ -1,3 +1,8 @@
+2003-04-21  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgtkframe.c: Remove Gtk::Frame#shadow, #set_shadow, #shadow= as deprecated properties.
+	* src/rbgtkhandlebox.c: Remove Gtk::HandleBox#shadow, #set_shadow, #shadow= as deprecated properties.
+
 2003-04-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextbuffer.c (txt_delete_mark, txt_move_mark,
@@ -8,6 +13,10 @@
 2003-04-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* sample/testgtk/testgtk.rb: cleanup
+
+2003-04-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmain.c:  Gtk.grab_add, Gtk.grab_remove return nil.
 
 2003-04-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

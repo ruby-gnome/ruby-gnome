@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Date: 2003/04/20 16:56:36 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -208,7 +208,7 @@ rbgtk_m_grab_add(self, widget)
     VALUE self, widget;
 {
     gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
-    return self;
+    return Qnil;
 }
 
 static VALUE
@@ -216,7 +216,7 @@ rbgtk_m_grab_remove(self, widget)
     VALUE self, widget;
 {
     gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
-    return self;
+    return Qnil;
 }
 
 void 
