@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Date: 2002/11/02 11:18:52 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,8 +12,8 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
-#define RVAL2ITR(i) ((GtkTreeIter*)(RVAL2BOXED(i, GTK_TYPE_TREE_ITER)))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
+#define ITR2RVAL(i) (BOXED2RVAL2(i, GTK_TYPE_TREE_ITER))
+#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 lstore_initialize(argc, argv, self)
@@ -65,6 +65,7 @@ lstore_set_value(self, iter, column, value)
 {
     GValue gval = {RVAL2GTYPE(value),};
     rbgobj_rvalue_to_gvalue(value, &gval);
+
     gtk_list_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);
     return self;
 }
@@ -102,8 +103,7 @@ lstore_insert(self, position)
     VALUE self, position;
 {
     GtkTreeIter iter;
-    gtk_list_store_insert(_SELF(self), &iter, 
-                          NUM2INT(position));
+    gtk_list_store_insert(_SELF(self), &iter, NUM2INT(position));
     return ITR2RVAL(&iter);
 }
 
@@ -114,7 +114,6 @@ lstore_insert_before(self, sibling)
     GtkTreeIter iter;
     gtk_list_store_insert_before(_SELF(self), &iter, 
                                  NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
-  
     return ITR2RVAL(&iter);
 }
 
@@ -125,7 +124,6 @@ lstore_insert_after(self, sibling)
     GtkTreeIter iter;
     gtk_list_store_insert_after(_SELF(self), &iter, 
                                 NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
-  
     return ITR2RVAL(&iter);
 }
 
@@ -135,7 +133,6 @@ lstore_prepend(self)
 {
     GtkTreeIter iter;
     gtk_list_store_prepend(_SELF(self), &iter);
-  
     return ITR2RVAL(&iter);
 }
 

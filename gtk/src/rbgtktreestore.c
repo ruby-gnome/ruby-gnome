@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2002/10/13 17:32:38 $
+  $Date: 2002/11/02 11:18:52 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -12,8 +12,8 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_TREE_STORE(RVAL2GOBJ(s)))
-#define RVAL2ITR(i) ((GtkTreeIter*)(RVAL2BOXED(i, GTK_TYPE_TREE_ITER)))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
+#define ITR2RVAL(i) (BOXED2RVAL2(i, GTK_TYPE_TREE_ITER))
+#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 tstore_initialize(argc, argv, self)
@@ -65,6 +65,7 @@ tstore_set_value(self, iter, column, value)
 {
     GValue gval = {RVAL2GTYPE(value),};
     rbgobj_rvalue_to_gvalue(value, &gval);
+
     gtk_tree_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);
     return self;
 }
@@ -111,7 +112,6 @@ tstore_insert_before(self, parent, sibling)
     gtk_tree_store_insert_before(_SELF(self), &iter, 
                                  NIL_P(parent) ? NULL : RVAL2ITR(parent), 
                                  NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
-  
     return ITR2RVAL(&iter);
 }
 
@@ -123,7 +123,6 @@ tstore_insert_after(self, parent, sibling)
     gtk_tree_store_insert_after(_SELF(self), &iter, 
                                 NIL_P(parent) ? NULL : RVAL2ITR(parent), 
                                 NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
-  
     return ITR2RVAL(&iter);
 }
 
@@ -134,7 +133,6 @@ tstore_prepend(self, parent)
     GtkTreeIter iter;
     gtk_tree_store_prepend(_SELF(self), &iter, 
                            NIL_P(parent)?NULL:RVAL2ITR(parent));
-  
     return ITR2RVAL(&iter);
 }
 
@@ -145,7 +143,6 @@ tstore_append(self, parent)
     GtkTreeIter iter;
     gtk_tree_store_append(_SELF(self), &iter, 
                           NIL_P(parent)?NULL:RVAL2ITR(parent));
-  
     return ITR2RVAL(&iter);
 }
 
