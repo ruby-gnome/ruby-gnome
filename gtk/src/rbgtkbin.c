@@ -4,7 +4,7 @@
   rbgtkbin.c -
 
   $Author: mutoh $
-  $Date: 2002/09/12 19:06:01 $
+  $Date: 2002/10/20 15:33:39 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 bin_child(self)
     VALUE self;
 {
-    GtkWidget *child = GTK_BIN(RVAL2GOBJ(self))->child;
+    GtkWidget *child = gtk_bin_get_child(RVAL2GOBJ(self));
     return child ? GOBJ2RVAL(child) : Qnil;
 }
 

@@ -4,7 +4,7 @@
   rbgtkframe.c -
 
   $Author: mutoh $
-  $Date: 2002/09/14 15:43:41 $
+  $Date: 2002/10/20 15:33:39 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,14 +26,6 @@ frame_initialize(argc, argv, self)
 }
 
 static VALUE
-frame_set_label(self, label)
-    VALUE self, label;
-{
-    gtk_frame_set_label(GTK_FRAME(RVAL2GOBJ(self)), RVAL2CSTR(label));
-    return self;
-}
-
-static VALUE
 frame_set_label_align(self, xalign, yalign)
     VALUE self, xalign, yalign;
 {
@@ -45,12 +37,14 @@ frame_set_label_align(self, xalign, yalign)
 }
 
 static VALUE
-frame_set_shadow_type(self, type)
-    VALUE self, type;
+frame_get_label_align(self)
+    VALUE self;
 {
-    gtk_frame_set_shadow_type(GTK_FRAME(RVAL2GOBJ(self)),
-			      (GtkShadowType)NUM2INT(type));
-    return self;
+    gfloat xalign, yalign;
+    gtk_frame_get_label_align(GTK_FRAME(RVAL2GOBJ(self)),
+			      &xalign, &yalign);
+
+    return rb_ary_new3(2, rb_float_new(xalign), rb_float_new(yalign));
 }
 
 void 
@@ -59,8 +53,7 @@ Init_gtk_frame()
     VALUE gFrame = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);
 
     rb_define_method(gFrame, "initialize", frame_initialize, -1);
-    rb_define_method(gFrame, "set_label", frame_set_label, 1);
     rb_define_method(gFrame, "set_label_align", frame_set_label_align, 2);
-    rb_define_method(gFrame, "set_shadow_type", frame_set_shadow_type, 1);
+    rb_define_method(gFrame, "label_align", frame_get_label_align, 0);
 }
 
