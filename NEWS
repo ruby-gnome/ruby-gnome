@@ -59,6 +59,10 @@ Ruby-GNOME2-0.4 (2003-03-23)
   * Ruby/GConf
       - Support mkmf-gnome2.rb [Masahiro Sakai]
 
+  * Misc
+    - Project website is moving from http://ruby-gnome2.sourceforge.net/
+      to http://ruby-gnome2.sourceforge.jp/.
+
 Ruby-GNOME2-0.3 (2003-02-09)
 
   * Ruby/GLib
