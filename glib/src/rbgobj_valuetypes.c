@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2003/08/06 00:53:02 $
+  $Date: 2003/08/06 02:14:03 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -276,7 +276,7 @@ ruby_value_r2g(VALUE from, GValue* to)
 static void
 Init_boxed_ruby_value()
 {
-    boxed_ruby_value_table = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, free);
+    boxed_ruby_value_table = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
 
     boxed_ruby_value_table_wrapper =
       Data_Wrap_Struct(rb_cData,
