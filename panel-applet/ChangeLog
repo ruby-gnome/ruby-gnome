@@ -1,15 +1,20 @@
-Sun May 26 21:50:00 2002 Akinori MUSHA <knu@iDaemons.org>
+2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   * extconf.rb: Support --with-gnome-config (Ruby-GNOME patch [532458])
+	* README: Add file.
+	* ChangeLog: Convert date format.
 
-Tue Feb  5 19:09:34 2002 Neil Conway <neilconway@rogers.com>
+2002-05-26  Akinori MUSHA <knu@iDaemons.org>
+
+	* extconf.rb: Support --with-gnome-config (Ruby-GNOME patch [532458])
+
+2002-02-05  Neil Conway <neilconway@rogers.com>
 
 	* rbpanel-applet.c: Major changes, additions and improvements.
 
-Sat Nov 24 16:31:12 2001 Neil Conway <neilconway@rogers.com>
+2001-11-24  Neil Conway <neilconway@rogers.com>
 
 	* MANIFEST: File removed.
 
-Tue May 22 06:33:43 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-05-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* import panel-applet binding.
