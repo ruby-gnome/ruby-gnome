@@ -1,4 +1,4 @@
-# $Id: stock_browser.rb,v 1.1 2003/08/17 09:30:44 kzys Exp $
+# $Id: stock_browser.rb,v 1.2 2003/10/14 13:50:25 kzys Exp $
 =begin
 = Stock Item and Icon Browser
 
@@ -22,94 +22,85 @@ module Gtk
 end
 
 module Demo
-  StockItemDisplay =
-    Struct.new('StockItemDisplay',
-	       :type_label, :const_label, :id_label,
-	       :label_accel_label, :icon_image)
-  StockItemInfo =
-    Struct.new('StockItemInfo',
-	       :id, :item, :small_icon, :const, :accel_str)
-  StockItem =
-    Struct.new('StockItem',
-	       :stock_id, :label, :modifier, :keyval, :translation_domain)
   class StockBrowser < BasicWindow
+    Item =
+      Struct.new('Item',
+		 :stock_id, :label, :modifier, :keyval, :translation_domain)
+    ItemInfo =
+      Struct.new('ItemInfo', :id, :item, :small_icon, :const, :accel_str)
+    ItemDisplay =
+      Struct.new('ItemDisplay',
+		 :type_label, :const_label, :id_label, :label_accel_label,
+		 :icon_image)
+
     def initialize
       super('Stock Icons and Items')
       set_default_size(-1, 500)
-      
+
       self.border_width = 8
-      
+
       hbox = Gtk::HBox.new(false, 8)
       add(hbox)
-      
+
       sw = Gtk::ScrolledWindow.new
       sw.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
       hbox.pack_start(sw, false, false, 0)
-      
-      model = create_model 
-      
+
+      model = create_model
+
       treeview = Gtk::TreeView.new(model)
       sw.add(treeview)
-      
+
       column = Gtk::TreeViewColumn.new
       column.title = 'Const'
-      
+
       cell_renderer = Gtk::CellRendererPixbuf.new
       column.pack_start(cell_renderer, false)
       #column.set_attributes(cell_renderer, 'stock_id', 1, nil)
-      
+
       cell_renderer = Gtk::CellRendererText.new
       column.pack_start(cell_renderer, true)
       column.set_cell_data_func(cell_renderer) do |column, cell, model, iter|
 	info = model.get_value(iter, 0)
 	cell.text = info.const
       end
-      
+
       treeview.append_column(column)
-      
+
       cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1,
-					    'Label',
-					    cell_renderer,
+      treeview.insert_column_with_data_func(-1, 'Label', cell_renderer,
 					    proc do |col, cell, model, iter|
 					      info = model.get_value(iter, 0)
 					      if info
 						cell.text = info.item.label
 					      end
 					    end,
-					     nil,
-					     nil)
-      
-      accel_set_func = 
+					    nil, nil)
+
+      accel_set_func =
       cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1,
-					    'Accel',
-					    cell_renderer,
+      treeview.insert_column_with_data_func(-1, 'Accel', cell_renderer,
 					    proc do |col, cell, model, iter|
 					      info = model.get_value(iter, 0)
 					      if info
 						cell.text = info.accel_str
 					      end
 					    end,
-					    nil,
-					    nil)
-      
+					    nil, nil)
+
       cell_renderer = Gtk::CellRendererText.new
-      treeview.insert_column_with_data_func(-1,
-					    'ID',
-					    cell_renderer,
+      treeview.insert_column_with_data_func(-1, 'ID', cell_renderer,
 					    proc do |col, cell, model, iter|
 					      info = model.get_value(iter, 0)
 					      if info
 						cell.text = info.id
 					      end
 					    end,
-					    nil,
-					    nil)
-      
+					    nil, nil)
+
       align = Gtk::Alignment.new(0.5, 0.0, 0.0, 0.0)
       hbox.pack_end(align, false, false, 0)
-      
+
       frame = Gtk::Frame.new('Selected Item')
       align.add(frame)
 
@@ -117,12 +108,12 @@ module Demo
       vbox.border_width = 4
       frame.add(vbox)
 
-      display = StockItemDisplay.new
+      display = ItemDisplay.new
       class << treeview
-	@stock_display = nil
-	attr_accessor :stock_display
+	@display = nil
+	attr_accessor :display
       end
-      treeview.stock_display = display
+      treeview.display = display
 
       display.type_label = Gtk::Label.new
       display.const_label = Gtk::Label.new
@@ -133,48 +124,48 @@ module Demo
       vbox.pack_start(display.type_label, false, false, 0)
 
       vbox.pack_start(display.icon_image, false, false, 0)
-      
+
       vbox.pack_start(display.label_accel_label, false, false, 0)
       vbox.pack_start(display.const_label, false, false, 0)
       vbox.pack_start(display.id_label, false, false, 0)
 
       selection = treeview.selection
       selection.mode = Gtk::SELECTION_SINGLE
-      
+
       selection.signal_connect('changed') do |s|
 	selection_changed(s)
       end
     end
-    
-    def create_model
-      store = Gtk::ListStore.new(StockItemInfo, String, String, String)
 
-      list_ids = Gtk::Stock.list_ids
+    def create_model
+      store = Gtk::ListStore.new(ItemInfo, String, String, String)
+
+      list_ids = Gtk::Stock.ids
       list_ids.sort! do |a, b|
 	a.to_s <=> b.to_s
       end
       list_ids.each do |stock_id|
-	info = StockItemInfo.new
-	
+	info = ItemInfo.new
+
 	info.id = stock_id
 
 	begin
-	  info.item = StockItem.new(*Gtk::Stock.lookup(stock_id))
+	  info.item = Item.new(*Gtk::Stock.lookup(stock_id))
 	rescue ArgumentError
-	  info.item = StockItem.new
+	  info.item = Item.new
 	end
-	    
+
 	# only show icons for stock IDs that have default icons
 	icon_set = Gtk::IconFactory.lookup_default(info.id.to_s)
 	if icon_set
 	  # See what sizes this stock icon really exists at
 	  sizes = icon_set.sizes
-	  
+
 	  # Use menu size if it exists, otherwise first size found
 	  size = sizes.find do |s| s == Gtk::IconSize::MENU end || sizes.first
-	  
+
 	  info.small_icon = render_icon(info.id, size, '')
-		    
+
 	  unless size == Gtk::IconSize::MENU
 	    # Make the result the proper size for our thumbnail
 	    w, h = Gtk::IconSize.lookup(size)
@@ -182,7 +173,7 @@ module Demo
 	    scaled = info.small_icon.scale(w, h, Gdk::Pixbuf::INTERP_BILINEAR)
 	    info.small_icon = scaled
 	  end
-	  
+
 	else
 	  info.small_icon = nil
 	end
@@ -195,18 +186,18 @@ module Demo
 	end
 
 	info.const = id_to_const(info.id)
-	
+
 	iter = store.append
 	store.set_value(iter, 0, info)
 	store.set_value(iter, 1, info.id)
       end
-      
+
       return store
     end
 
     def selection_changed(selection)
       treeview = selection.tree_view
-      display = treeview.stock_display
+      display = treeview.display
 
       iter = selection.selected
       info = iter.get_value(0)

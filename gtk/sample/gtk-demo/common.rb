@@ -1,4 +1,4 @@
-# $Id: common.rb,v 1.3 2003/08/18 20:43:28 kzys Exp $
+# $Id: common.rb,v 1.4 2003/10/14 13:50:24 kzys Exp $
 require 'gtk2'
 
 module Demo
@@ -9,13 +9,12 @@ module Demo
 	return path
       end
     end
+
     raise Exception
   end
 
   class BasicWindow < Gtk::Window
     def initialize(title = nil)
-      puts "#{self.class}#initialize"
-
       super(Gtk::Window::TOPLEVEL)
       if title
 	set_title("#{title} in Ruby/GTK")
