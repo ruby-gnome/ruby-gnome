@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: geoff_youngs $
-  $Date: 2003/06/07 14:44:34 $
+  $Date: 2003/06/09 14:10:12 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -61,24 +61,28 @@ gdkwin_foreign(argc, argv, self)
     VALUE self;
 {
     VALUE arg[2];
-    
+    GdkWindow * win = NULL;
     
     rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
 
     switch(argc)
     {
     case 1:
-    	return GOBJ2RVAL(gdk_window_foreign_new(NUM2UINT(arg[0])));
+    	win = gdk_window_foreign_new(NUM2UINT(arg[0]));
+	break;
     case 2:
 #if GTK_MINOR_VERSION >= 2
-    	return GOBJ2RVAL(gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1]))); 
+    	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
 #else
-    	return GOBJ2RVAL(gdk_window_foreign_new(NUM2UINT(arg[1]))); 
+    	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
 	/* XXX: Should the program be warned? */
 #endif
     	break;
-    default:
-    	return Qnil;
+    }
+    if (win == NULL)
+        return Qnil;
+    else {
+        return GOBJ2RVAL(win);
     }
 }
 
