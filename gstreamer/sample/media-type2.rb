@@ -1,6 +1,6 @@
 
 # This is a Ruby implementation of the GStreamer media-info library,
-# graciously provided by Nikolai Wellbull <lone-star@home.se>.
+# graciously provided by Nikolai Weilbull <lone-star@home.se>.
 #
 # It works exactly like media-type.rb.
 
