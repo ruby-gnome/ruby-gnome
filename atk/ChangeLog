@@ -1,3 +1,7 @@
+2004-10-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatktextrectangle.c, rbatktextrange.c: Added.
+
 2004-10-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatkrelation.c: Added Atk::Relation::Type.for_name.

@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2004/10/17 23:06:07 $
+  $Date: 2004/10/19 13:33:43 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -328,7 +328,7 @@ Init_atk_text()
 #endif    
     /* AtkTextClipType */
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
-   G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", mText);
+    G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", mText);
     G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
 #endif
 }
