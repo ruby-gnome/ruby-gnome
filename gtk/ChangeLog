@@ -1,3 +1,8 @@
+2004-06-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktoolbutton.c, rbgtktoolitem.c, rbgtktoggletoolbutton.c,
+	rbgtkseperatortoolitem.c: Added for GTK+-2.4. 
+
 2004-05-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkfilechooser.c: Fix definitions of Gtk::FileChooser::Action. 
