@@ -1,3 +1,8 @@
+2004-12-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/to_file.rb (Renderer::draw_arc): fixed wrong
+	  Gnome::PrintContext#set_rbg_color argument.
+
 2004-12-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/gnomeprint2.rb: removed backward compatibility for Rabbit
