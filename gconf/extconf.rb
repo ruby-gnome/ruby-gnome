@@ -12,6 +12,16 @@ $CFLAGS += " " + ['glib/src'].map{|d|
   "-I" + File.join(top, d)
 }.join(" ")
 
+if /cygwin|mingw/ =~ RUBY_PLATFORM
+  top = "../.."
+  [
+    ["glib/src", "ruby-glib2"],
+  ].each{|d,l|
+    $libs << " -l#{l}"
+    $LDFLAGS << " -L#{top}/#{d}"
+  }
+end
+
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate
   STDOUT.print "yes\n"

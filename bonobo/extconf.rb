@@ -19,6 +19,15 @@ $CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|
   "-I" + File.join(top, d)
 }.join(" ")
 
+if /cygwin|mingw/ =~ RUBY_PLATFORM
+  top = "../.."
+  [
+    ["glib/src", "ruby-glib2"],
+  ].each{|d,l|
+    $libs << " -l#{l}"
+    $LDFLAGS << " -L#{top}/#{d}"
+  }
+end
 
 begin
   srcdir = File.dirname($0) == "." ? "." :

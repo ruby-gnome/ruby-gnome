@@ -30,6 +30,7 @@ begin
     lib_ary = [
       ["X11", "XOpenDisplay"],
       ["gnome-2", "gnome_program_init"],
+      ["popt", "poptGetArgs"],
     ]
 
     lib_ary.each do |ary|
@@ -41,6 +42,17 @@ begin
 	end
 	raise Interrupt, msg
       end
+    end
+
+    if /cygwin|mingw/ =~ RUBY_PLATFORM
+      top = "../.."
+      [
+    	["glib/src", "ruby-glib2"],
+    	["gtk/src", "ruby-gtk2"],
+      ].each{|d,l|
+    	$libs << " -l#{l}"
+    	$LDFLAGS << " -L#{top}/#{d}"
+      }
     end
 
     obj_ext = ".#{$OBJEXT}"

@@ -1,3 +1,7 @@
+2003-03-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: cygwin support
+
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Use ../mkmf-gnome2.rb
@@ -33,7 +37,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: sakai $
-	and $Date: 2003/02/13 19:56:37 $ macros.
+	and $Date: 2003/03/25 02:12:11 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

@@ -3,8 +3,8 @@
 
   rbbonobo-ui-engine.c -
 
-  $Author: mutoh $
-  $Date: 2002/12/22 14:27:43 $
+  $Author: sakai $
+  $Date: 2003/03/25 02:12:11 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -32,9 +32,9 @@ ucomponent_initialize(argc, argv, self)
     rb_scan_args(argc, argv, "01", &name);
 
     if (NIL_P(name)){
-        RBGTK_INITIALIZE(self, bonobo_ui_compoent_new_default());
+        RBGTK_INITIALIZE(self, bonobo_ui_component_new_default());
     } else {
-        RBGTK_INITIALIZE(self, bonobo_ui_compoent_new(RVAL2CSTR(name)));
+        RBGTK_INITIALIZE(self, bonobo_ui_component_new(RVAL2CSTR(name)));
     }
     return Qnil;
 }  
@@ -180,10 +180,10 @@ Init_bonobo_ui_component()
 {
     VALUE uiComponent = G_DEF_CLASS(BONOBO_TYPE_UI_COMPONENT, "Component", mBonoboUI);
 
-    rb_define_methods(uiComponent, "construct", ucomponent_construct, 1);
-    rb_define_methods(uiComponent, "initialize", ucomponent_initialize, -1);
-    rb_define_methods(uiComponent, "set_name", ucomponent_set_name, 1);
-    rb_define_methods(uiComponent, "name", ucomponent_get_name, 0);
+    rb_define_method(uiComponent, "construct", ucomponent_construct, 1);
+    rb_define_method(uiComponent, "initialize", ucomponent_initialize, -1);
+    rb_define_method(uiComponent, "set_name", ucomponent_set_name, 1);
+    rb_define_method(uiComponent, "name", ucomponent_get_name, 0);
 
     G_DEF_SETTERS(uiComponent);
 }
