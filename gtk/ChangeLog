@@ -1,5 +1,6 @@
 2003-05-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkaccessible.c: Added.
 	* src/rbgtkstyle.c: Add Gtk::Style#text_aa, #set_text_aa, #font_desc, 
 	#set_font_desc, #xthickness, #set_xthickness, #ythickness, #set_ythickness,
 	#set_fg_gc, #set_bg_gc, #set_light_gc, #set_dark_gc, #set_mid_gc,
