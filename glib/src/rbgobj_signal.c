@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2003/10/22 16:14:50 $
+  $Date: 2003/10/24 06:44:31 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -330,11 +330,10 @@ emit_body(struct emit_arg* arg)
     {
         GValue* params = arg->instance_and_params->values + 1;
         int i;
-        VALUE val;
         for (i = 0; i < arg->query.n_params; i++){
-            val = rb_ary_entry(arg->args, i);
-            g_value_init(params + i, RVAL2GTYPE(val));
-            rbgobj_rvalue_to_gvalue(val, params + i);
+            GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
+            g_value_init(params + i, gtype);
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
         }
     }
 
@@ -343,7 +342,8 @@ emit_body(struct emit_arg* arg)
         GValue return_value = {0,};
 
         if (use_ret)
-            g_value_init(&return_value, arg->query.return_type);
+            g_value_init(&return_value,
+                         arg->query.return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE);
 
         g_signal_emitv(arg->instance_and_params->values,
                        arg->query.signal_id, arg->detail,
@@ -553,7 +553,8 @@ chain_from_overridden_body(struct emit_arg* arg)
         GValue* params = arg->instance_and_params->values + 1;
         int i;
         for (i = 0; i < arg->query.n_params; i++) {
-            g_value_init(params + i, arg->query.param_types[i]);
+            GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
+            g_value_init(params + i, gtype);
             rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
         }
     }
@@ -563,7 +564,8 @@ chain_from_overridden_body(struct emit_arg* arg)
         GValue return_value = {0,};
 
         if (use_ret)
-            g_value_init(&return_value, arg->query.return_type);
+            g_value_init(&return_value,
+                         arg->query.return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE);
 
         g_signal_chain_from_overridden(arg->instance_and_params->values,
                                        (use_ret) ? &return_value : NULL);

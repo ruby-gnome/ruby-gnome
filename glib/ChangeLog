@@ -1,3 +1,9 @@
+2003-10-24  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_signal.c (emit_body, chain_from_overridden_body):
+	remove G_SIGNAL_TYPE_STATIC_SCOPE flag from parameters and
+	return value.
+
 2003-10-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_enum.c (rbgobj_get_enum, rbgobj_get_flags): check if the
