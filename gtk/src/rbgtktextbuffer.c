@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 17:04:03 $
+  $Date: 2004/06/03 17:28:45 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -289,6 +289,16 @@ txt_place_cursor(self, where)
     gtk_text_buffer_place_cursor(_SELF(self), RVAL2ITR(where));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+txt_select_range(self, ins, bound)
+    VALUE self, ins, bound;
+{
+    gtk_text_buffer_select_range(_SELF(self), RVAL2ITR(ins), RVAL2ITR(bound));
+    return self;
+}
+#endif
 
 static VALUE
 txt_get_iter_at_child_anchor(self, anchor)
@@ -637,7 +647,9 @@ Init_gtk_textbuffer()
 */
     rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
     rb_define_method(gTextBuffer, "place_cursor", txt_place_cursor, 1);
-
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gTextBuffer, "select_range", txt_select_range, 2);
+#endif
     rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
     rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
 

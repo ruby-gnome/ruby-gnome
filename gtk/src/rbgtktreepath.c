@@ -4,7 +4,7 @@
   rbgtktreepath.c -
 
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2004/06/03 17:28:45 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003,2004 Masao Mutoh
@@ -23,14 +23,21 @@ treepath_initialize(argc, argv, self)
     VALUE path;
     GtkTreePath* widget;
     
-    if (rb_scan_args(argc, argv, "01", &path) == 1) {
-        widget = gtk_tree_path_new_from_string(RVAL2CSTR(path));
+    if (argc == 1) {
+        path = argv[0];
+        if (TYPE(path) == T_STRING){
+            widget = gtk_tree_path_new_from_string(RVAL2CSTR(path));
+        } else {
+            widget = gtk_tree_path_new();
+            gtk_tree_path_append_index(widget, NUM2INT(path));
+        }
         if (widget == NULL)
             rb_raise(rb_eArgError, "Invalid path %s was passed.", RVAL2CSTR(path));
-
-    }
-    else {
+    } else {
+        int i;
         widget = gtk_tree_path_new();
+        for (i = 0; i < argc; i++)
+            gtk_tree_path_append_index(widget, NUM2INT(argv[i]));
     }
     
     G_INITIALIZE(self, widget);

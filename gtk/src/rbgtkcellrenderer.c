@@ -4,7 +4,7 @@
   rbgtkcellrenderer.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2004/06/03 17:28:45 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -69,6 +69,16 @@ cellrenderer_start_editing(self, event, widget, path, background_area,
     return edit ? GOBJ2RVAL(edit) : Qnil;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+cellrenderer_editing_canceled(self)
+    VALUE self;
+{
+    gtk_cell_renderer_editing_canceled(_SELF(self));
+    return self;
+}
+#endif
+
 static VALUE
 cellrenderer_get_fixed_size(self)
     VALUE self;
@@ -96,6 +106,9 @@ Init_gtk_cellrenderer()
     rb_define_method(renderer, "render", cellrenderer_render, 6);
     rb_define_method(renderer, "activate", cellrenderer_activate, 6);
     rb_define_method(renderer, "start_editing", cellrenderer_start_editing, 6);
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(renderer, "editing_canceled", cellrenderer_editing_canceled, 0);
+#endif
     rb_define_method(renderer, "fixed_size", cellrenderer_get_fixed_size, 0);
     rb_define_method(renderer, "set_fixed_size", cellrenderer_set_fixed_size, 2);
 

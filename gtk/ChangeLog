@@ -1,3 +1,9 @@
+2004-06-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcellrenderer.c: Added Gtk::CellRenderer#editing_canceled for GTK+-2.4. 
+	* src/rbgtktreepath.c: Added Gtk::TreePath.new(index1, index2, ...) for GTK+-2.4.
+	* src/rbgtktextbuffer.c: Added Gtk::TextBuffer#select_range for GTK+-2.4.
+
 2004-06-03  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgtkdrag.c (Gtk::Drag.begin): Fixed a bug when decoding the
