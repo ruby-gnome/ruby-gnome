@@ -35,7 +35,7 @@ else
 end
 
 include_path = nil
-if ENV['GTK_BASEPATH']
+if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   include_path = (ENV['GTK_BASEPATH'] + "\\INCLUDE").gsub("\\", "/")
   $hdrdir = include_path
   $CFLAGS += " -I#{include_path} " 
