@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2002/11/18 17:44:45 $
+ * $Date: 2002/11/21 11:53:51 $
  *
  *****************************************************************************/
 
@@ -256,7 +256,7 @@ client_all_entries(self, dir)
 	entry_ary = rb_ary_new2(g_slist_length(entries));
 	while (i != NULL) {
 		rb_ary_push(entry_ary, GCENTRY2RVAL(i->data));
-		i = i->next;
+		i = g_slist_next(i);
 	}
 
 	g_slist_free(entries);
@@ -276,7 +276,7 @@ client_all_dirs(self, dir)
 	while (i != NULL) {
 		rb_ary_push(dirs_ary, CSTR2RVAL(i->data));
 		g_free(i->data);
-		i = i->next;
+		i = g_slist_next(i);
 	}
 
 	g_slist_free(dirs);

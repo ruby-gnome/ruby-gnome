@@ -1,3 +1,13 @@
+CBOOL2RVAL	rbgconf-util.h	/^#define CBOOL2RVAL(b)	((b) ? Qtrue : Qfalse)$/
+ERRORS_COUNT	rbgconf-error.c	33
+GCCHANGESET2RVAL	rbgconf-changeset.h	/^#define GCCHANGESET2RVAL(set)	(BOXED2RVAL(set, GCO/
+GCENTRY2RVAL	rbgconf-entry.h	/^#define GCENTRY2RVAL(entry)	(BOXED2RVAL(entry, GCO/
+GCONF_TYPE_CHANGESET	rbgconf-changeset.h	40
+GCONF_TYPE_ENGINE	rbgconf-engine.h	40
+GCONF_TYPE_ENTRY	rbgconf-entry.h	40
+GCONF_TYPE_SCHEMA	rbgconf-schema.h	40
+GCSCHEMA2RVAL	rbgconf-schema.h	/^#define GCSCHEMA2RVAL(schema)	(BOXED2RVAL(schema, /
+GCVAL2RVAL	rbgconf-util.h	/^#define GCVAL2RVAL(val)	(gconf_value_to_rb_value(v/
 Init_gconf2	rbgconf.c	/^Init_gconf2(void)$/
 Init_gconf_changeset	rbgconf-changeset.c	/^Init_gconf_changeset(m_gconf)$/
 Init_gconf_client	rbgconf-client.c	/^Init_gconf_client(m_gconf)$/
@@ -5,6 +15,18 @@ Init_gconf_engine	rbgconf-engine.c	/^Init_gconf_engine(m_gconf)$/
 Init_gconf_entry	rbgconf-entry.c	/^Init_gconf_entry(m_gconf)$/
 Init_gconf_error	rbgconf-error.c	/^Init_gconf_error(m_gconf)$/
 Init_gconf_schema	rbgconf-schema.c	/^Init_gconf_schema(m_gconf)$/
+RBGCONF_CHANGESET_H	rbgconf-changeset.h	30
+RBGCONF_CLIENT_H	rbgconf-client.h	30
+RBGCONF_ENGINE_H	rbgconf-engine.h	30
+RBGCONF_ENTRY_H	rbgconf-entry.h	30
+RBGCONF_ERROR_H	rbgconf-error.h	30
+RBGCONF_H	rbgconf.h	30
+RBGCONF_SCHEMA_H	rbgconf-schema.h	30
+RBGCONF_UTIL_H	rbgconf-util.h	30
+RVAL2GCCHANGESET	rbgconf-changeset.h	/^#define RVAL2GCCHANGESET(set)	\\$/
+RVAL2GCENGINE	rbgconf-engine.h	/^#define RVAL2GCENGINE(en)	\\$/
+RVAL2GCSCHEMA	rbgconf-schema.h	/^#define RVAL2GCSCHEMA(val)	\\$/
+RVAL2GCVAL	rbgconf-util.h	/^#define RVAL2GCVAL(val)	(rb_value_to_gconf_value(v/
 _SELF	rbgconf-changeset.c	/^#define _SELF(s)	((GConfChangeSet *)RVAL2BOXED(s, /
 change_set_clear	rbgconf-changeset.c	/^change_set_clear(self)$/
 change_set_foreach	rbgconf-changeset.c	/^change_set_foreach(self)$/
