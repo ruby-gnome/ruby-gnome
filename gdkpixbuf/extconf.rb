@@ -13,6 +13,8 @@ $CFLAGS += " " + ['glib/src'].map{|d|
   "-I" + File.join(top, d)
 }.join(" ")
 
+have_header("gdk-pixbuf/gdk-pixbuf-io.h")
+
 if have_func("g_print") && have_func("gdk_pixbuf_new")
 # Removed. This crashes Ruby/GTK on Windows + GTK+-2.4.x.
 #   Pointed out by Laurent.

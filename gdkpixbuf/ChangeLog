@@ -1,3 +1,7 @@
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf-loader.c, extconf.rb: Support GTK+-2.0.x again.
+
 2004-11-06  Geoff Youngs  <g@intersect-uk.co.uk>
 
 	* rbgdk-pixbuf.c: Gdk::Pixbuf.get_file_info()
