@@ -3,8 +3,8 @@
 
   rbgdkpixmap.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/14 15:43:40 $
+  $Author: tkubo $
+  $Date: 2002/09/21 10:16:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -31,11 +31,11 @@ gdkpmap_create_from_data(self, win, data, w, h, depth, fg, bg)
     VALUE self, win, data, w, h, depth, fg, bg;
 {
     Check_Type(data, T_STRING);
-    return GOBJ2RVAL(gdk_pixmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
-					  RSTRING(data)->ptr,
-				      NUM2INT(w), NUM2INT(h), NUM2INT(depth),
-				      (fg==Qnil)?NULL:(GdkColor*)RVAL2BOXED(fg),
-                      (bg==Qnil)?NULL:(GdkColor*)RVAL2BOXED(bg)));
+    return GOBJ2RVAL(gdk_pixmap_create_from_data(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
+                                                 RSTRING(data)->ptr,
+                                                 NUM2INT(w), NUM2INT(h), NUM2INT(depth),
+                                                 NIL_P(fg) ? NULL : (GdkColor*)RVAL2BOXED(fg),
+                                                 NIL_P(bg) ? NULL : (GdkColor*)RVAL2BOXED(bg)));
 }
 
 static VALUE
@@ -135,9 +135,9 @@ gdkbmap_create_from_data(self, win, data, w, h)
     VALUE self, win, data, w, h;
 {
     Check_Type(data, T_STRING);
-    return GOBJ2RVAL(gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
-												 RSTRING(data)->ptr,
-												 NUM2INT(w), NUM2INT(h)));
+    return GOBJ2RVAL(gdk_bitmap_create_from_data(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
+                                                 RSTRING(data)->ptr,
+                                                 NUM2INT(w), NUM2INT(h)));
 }
 
 #ifdef HAVE_XREADBITMAPFILEDATA

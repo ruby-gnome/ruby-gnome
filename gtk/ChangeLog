@@ -1,3 +1,8 @@
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgdkpixmap.c (gdkbmap_create_from_data, 
+	gdkpmap_create_from_data): accept nil for the argument of window.
+
 2002-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdraw.c: Remove Deprecated methods
