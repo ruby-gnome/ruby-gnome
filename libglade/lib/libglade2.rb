@@ -6,6 +6,12 @@ rescue LoadError
 end
 require 'libglade2.so'
 
+if $DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER
+  GladeXML.set_custom_widget_handler(false)
+else
+  GladeXML.set_custom_widget_handler(true)
+end
+
 class GladeXML
   def canonical_handler(handler)
     return handler.gsub(/[-\s]/, "_")
@@ -24,7 +30,7 @@ class GladeXML
     else
       sig_conn_proc = source.method(:signal_connect)
     end
-    
+
     if signal_proc
       case signal_proc.arity
       when 0
@@ -38,15 +44,44 @@ class GladeXML
   end
 
   def widget_names(nocache = false)
-    @widget_names = [] if nocache || ! @widget_names
+    build_names(nocache)[0]
+  end
+
+  def custom_creation_methods(nocache = false)
+    build_names(nocache)[1]
+  end
+
+  private
+  def escape_xml(str)
+    str.gsub(/&(.*?);/n) {
+      match = $1.dup
+      case match
+      when /\Aamp\z/ni           then '&'
+      when /\Aquot\z/ni          then '"'
+      when /\Agt\z/ni            then '>'
+      when /\Alt\z/ni            then '<'
+      else
+	match
+      end
+    }
+  end
+
+  def build_names(nocache)
+    if nocache || ! @widget_names
+      @widget_names = []
+      @custom_methods = []
+    end
     if @widget_names.size == 0
-      regexp = Regexp.new("<widget class=\".*\" id=\"(.*)\"")
+      regexp_name = Regexp.new("<widget class=\".*\" id=\"(.*)\"")
+      regexp_custom = Regexp.new("<property name=\"creation_function\">(.*)</property>")
       IO.readlines(filename).each { |line|
-	if md = regexp.match(line)
-	  @widget_names << md[1]
+	if md = regexp_name.match(line)
+	  @widget_names << escape_xml(md[1])
+	elsif md = regexp_custom.match(line)
+	  @custom_methods << escape_xml(md[1])
 	end
       }
     end
-    @widget_names
+    [@widget_names, @custom_methods]    
   end
 end

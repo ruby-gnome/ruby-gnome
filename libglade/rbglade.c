@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/01/31 17:16:49 $
+  $Date: 2004/02/24 16:28:45 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -20,6 +20,7 @@
 #include "rbgtk.h"
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include <gmodule.h>
 
 static VALUE cGladeXML;
 static VALUE instances;
@@ -90,7 +91,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
- static VALUE
+static VALUE
 rb_gladexml_filename(VALUE self)
 {
     GladeXML *xml;
@@ -102,6 +103,63 @@ rb_gladexml_filename(VALUE self)
     return filename ? rb_str_new2(filename) : Qnil;
 }
 
+static GtkWidget*
+custom_widget_handler(GladeXML *xml, gchar *func_name, gchar *name,
+                      gchar *string1, gchar *string2, gint int1, gint int2,
+                      gpointer user_data)
+{
+    VALUE widget;
+    int state = 0;
+    GtkWidget* ret;
+
+    widget = rb_eval_string_protect(func_name, &state);
+    if (state == 0){
+        if (rb_obj_is_kind_of(widget, GTYPE2CLASS(GTK_TYPE_WIDGET))){
+            ret = (GtkWidget*)RVAL2GOBJ(widget);
+            gtk_widget_show_all(ret);
+            return ret;
+        } else {
+            return NULL;
+        }
+    } else {
+        typedef GtkWidget *(* create_func)(gchar *name,
+                                           gchar *string1, gchar *string2,
+                                           gint int1, gint int2);
+        GModule *allsymbols;
+        create_func func;
+        if (!g_module_supported()) {
+            rb_raise(rb_eRuntimeError, "%s() isn't found or gmodule doesn't supported.", func_name);
+            return NULL;
+        }
+        allsymbols = g_module_open(NULL, 0);
+        if (g_module_symbol(allsymbols, func_name, (gpointer)&func))
+            return (* func)(name, string1, string2, int1, int2);
+        rb_raise(rb_eRuntimeError, "%s() isn't found.", func_name);
+        return NULL;
+    }
+}
+
+static GtkWidget*
+disable_custom_widget_handler(GladeXML *xml, gchar *func_name, gchar *name,
+                              gchar *string1, gchar *string2, gint int1, gint int2,
+                              gpointer user_data)
+{
+    return NULL;
+}
+
+static gboolean custom_widget_supported = FALSE;
+
+static VALUE
+rb_gladexml_set_custom_widget_handler(VALUE self, VALUE setting)
+{
+    if (! custom_widget_supported && RTEST(setting)){
+        glade_set_custom_handler(custom_widget_handler, NULL);
+        custom_widget_supported = TRUE;
+    } else {
+        glade_set_custom_handler(disable_custom_widget_handler, NULL);
+    }
+    return self;
+}
 
 void 
 Init_libglade2()
@@ -114,4 +172,5 @@ Init_libglade2()
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
     rb_define_alias(cGladeXML, "[]", "get_widget");
     rb_define_method(cGladeXML, "filename"  , rb_gladexml_filename, 0);
+    rb_define_singleton_method(cGladeXML, "set_custom_widget_handler", rb_gladexml_set_custom_widget_handler, 1);
 }

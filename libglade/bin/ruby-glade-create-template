@@ -6,11 +6,12 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.4 2003/08/28 15:16:31 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.5 2004/02/24 16:28:45 mutoh Exp $
 #
 # Copyright (c) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
+$DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER = true
 require 'libglade2'
 
 class GladeXML
@@ -21,7 +22,7 @@ class GladeXML
   end
 end
 
-LG_VERSION = %Q[$Revision: 1.4 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.5 $].scan(/\d/).join(".")
 
 begin
   $EXIST_GNOME = true
@@ -44,22 +45,13 @@ path = ARGV[0]
 filename = File.basename(path, ".*")
 classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("")
 
-objects = []
-=begin
-ARGF.each_line do |line|
-  if /id="(.*)"/ =~ line
-    objects << $1
-  end
-end
-=end
-
 if $EXIST_GNOME
   Gnome::Program.new("ruby-glade-create-template", LG_VERSION)
 else
   Gtk.init
 end
-glade = GladeXML.new(path) 
 
+glade = GladeXML.new(path) 
 
 #
 # Print template.
@@ -68,17 +60,14 @@ glade = GladeXML.new(path)
 puts <<HEADER
 #!/usr/bin/env ruby
 require 'libglade2'
+HEADER
 
+puts <<INITIALIZE
 class #{classname}
   def initialize(path)
     @glade = GladeXML.new(path) {|handler| method(handler)}
-HEADER
-
-objects.each do |name|
-   puts "    @#{name.gsub(/[-\s]/, "_")} = @glade.get_widget('#{name}')"
-end
-
-puts "  end"
+  end
+INITIALIZE
 
 # Handler methods.
 if glade.signals
@@ -107,7 +96,15 @@ else
 end
 puts <<FOOTER
 
-# Set correct path yourself.
+#Set correct path by yourself.
 #{classname}.new("#{path}")
 Gtk.main
 FOOTER
+
+if glade.custom_creation_methods.size > 0
+  puts "#You may need to implement some custom creation methods which return new widget."
+  glade.custom_creation_methods.each do |v|
+    puts "#" + v
+  end
+end
+

@@ -1,3 +1,10 @@
+2004-02-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Add GladeXML#custom_creation_methods.
+	* rbglade.c: Add GladeXML.set_custom_widget_handler.
+	* sample/custom.[rb|glade}: Added for custom widget.
+	* bin/ruby-glade-create-template: Support custom widget.
+	
 2004-02-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* lib/libglade2.rb: Improve GladeXML#widget_names.
