@@ -1,3 +1,7 @@
+2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Revised.
+
 2005-02-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Implement gdk_pixbuf_new_from_file_at_scale 
