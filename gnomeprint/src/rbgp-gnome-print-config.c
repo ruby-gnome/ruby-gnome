@@ -49,7 +49,7 @@ gp_config_to_string(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gp_config_from_string(int argc, VALUE* argv, VALUE self)
+gp_config_from_string(int argc, VALUE *argv, VALUE self)
 {
   VALUE flags; /* currently not used in libgnomeprint. */
   VALUE string;
@@ -58,9 +58,11 @@ gp_config_from_string(int argc, VALUE* argv, VALUE self)
     flags = INT2NUM(0);
   }
   
-  return GOBJ2RVAL(gnome_print_config_from_string(RVAL2CSTR(string),
-                                                  NUM2UINT(flags)));
+  G_INITIALIZE(self, gnome_print_config_from_string(RVAL2CSTR(string),
+                                                    NUM2UINT(flags)));
+  return Qnil;
 }
+
 
 static VALUE
 gp_config_get(VALUE self, VALUE key)
@@ -289,7 +291,7 @@ Init_gnome_print_config(VALUE mGnome, VALUE mGP)
 
   rb_define_module_function(c, "default", gp_config_default, 0);
   
-  rb_define_module_function(c, "new", gp_config_from_string, -1);
+  rb_define_method(c, "initialize", gp_config_from_string, -1);
 
   rb_define_method(c, "dup", gp_config_dup, 0);
   rb_define_method(c, "to_s", gp_config_to_string, -1);

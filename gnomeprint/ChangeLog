@@ -1,5 +1,8 @@
 2004-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gnome-print-config.c: PrintConfig.new ->
+	  PrintConfig#initialize.
+
 	* src/rbgp-gnome-print-config.c (PrintConfig.new): removed
 	  PrintConfig.default function.
 
