@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2003/08/05 16:15:04 $
+  $Date: 2003/08/25 01:50:30 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -34,6 +34,9 @@ rbgobj_initialize_object(obj, cobj)
     VALUE obj;
     gpointer cobj;
 {
+    if (!cobj)
+        rb_raise(rb_eRuntimeError, "failed to initialize");
+
     switch (G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj))){
     case G_TYPE_OBJECT:
         rbgobj_gobject_initialize(obj, cobj);

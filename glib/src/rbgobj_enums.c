@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: sakai $
-  $Date: 2003/08/20 16:52:57 $
+  $Date: 2003/08/25 01:50:30 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -191,7 +191,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
-        return NUM2INT(obj);
+        obj = rbgobj_make_enum(obj, gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return enum_get_holder(obj)->value->value;
@@ -444,7 +444,7 @@ rbgobj_get_flags(VALUE obj, GType gtype)
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
-        return NUM2UINT(obj);
+        obj = rbgobj_make_flags(obj, gtype);
 
     if (rb_obj_is_kind_of(obj, klass))
         return flags_get_holder(obj)->value;

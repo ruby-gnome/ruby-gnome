@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/08/01 15:48:30 $
+  $Date: 2003/08/25 01:50:30 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -583,7 +583,6 @@ Init_gobject_gobject()
 
     rb_define_method(cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(cGObject, "get_property", gobj_get_property, 1);
-    rb_define_alias(cGObject, "property", "get_property");
     rb_define_method(cGObject, "freeze_notify", gobj_freeze_notify, 0);
     rb_define_method(cGObject, "notify", gobj_notify, 1);
     rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);

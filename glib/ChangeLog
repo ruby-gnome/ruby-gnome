@@ -1,3 +1,13 @@
+2003-08-25  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c: remove GLib::Object#property.
+
+	* src/rbgobj_enums.c (rbgobj_get_enum, rbgobj_get_flags): 
+	create temporary enum/flags object if the argument is an integer.
+
+	* src/rbgobject.c (rbgobj_initialize_object): raise RuntimeError
+	if the argument is NULL.
+
 2003-08-21  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_boxed.c: define GLib::Boxed#initialize which simply raise
