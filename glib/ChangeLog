@@ -1,3 +1,8 @@
+2003-10-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib.c: call g_mem_set_vtable() to make glib to use
+	ruby_xmalloc(), ruby_xrealloc(), ruby_xfree().
+
 2003-09-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/lib/mkmf-gnome2.rb: append "-I$(sitearchdir)" to $CPPFLAGS not
