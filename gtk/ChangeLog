@@ -1,3 +1,11 @@
+2003-03-02  KATO Kazuyoshi  <kzys@users.sf.net>
+
+	* src/rbgtktreepath.c: Implement Gtk::TreePath#indices.
+
+	* src/rbgtktreeview.c:
+	Implement gtk_tree_view_insert_column_with_attributes style to
+	Gtk::TreeView#insert.
+
 2003-02-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/toolbar.rb, sample/testgtk/toolbar.rb: 
