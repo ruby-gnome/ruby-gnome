@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.h,v 1.2 2003/08/20 22:36:02 isambart Exp $ */
+/* $Id: rbgtkglext.h,v 1.3 2003/12/26 15:06:26 isambart Exp $ */
 /* GtkGLExt main header
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -38,7 +38,7 @@ void Init_gtkglext_gtk_widget(void);     /* Gtk::Widget     */
 void Init_gtkglext_gdk_pixmap(void);     /* Gdk::Pixmap     */
 void Init_gtkglext_gdk_window(void);     /* Gdk::Window     */
 
-extern VALUE mGdk, mGdkGL;
-extern VALUE mGtk, mGtkGL;
+extern VALUE mGdkGL;
+extern VALUE mGtkGL;
 
 #endif /* ! _RBGTKGLEXT_H_included */

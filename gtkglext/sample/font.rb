@@ -116,7 +116,10 @@ window.title = "font"
 window.resize_mode = Gtk::RESIZE_IMMEDIATE
 # Get automatically redrawn if any of their children changed allocation.
 window.reallocate_redraws = true
-window.signal_connect("delete_event") { Gtk.main_quit }
+window.signal_connect("delete_event") do
+    Gtk.main_quit
+    true
+end
 
 # VBox
 vbox = Gtk::VBox.new
@@ -189,7 +192,10 @@ drawing_area.show
 
 # Simple quit button
 button = Gtk::Button.new("Quit")
-button.signal_connect("clicked") { Gtk.main_quit }
+button.signal_connect("clicked") do
+    window.destroy
+    Gtk.main_quit
+end
 vbox.pack_start(button, false, false)
 button.show
 

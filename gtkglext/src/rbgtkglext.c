@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.c,v 1.4 2003/08/21 11:51:08 isambart Exp $ */
+/* $Id: rbgtkglext.c,v 1.5 2003/12/26 15:06:26 isambart Exp $ */
 /* Ruby/GtkGLExt initialization
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -20,8 +20,8 @@
 
 #include "rbgtkglext.h"
 
-VALUE mGdk, mGdkGL;
-VALUE mGtk, mGtkGL;
+VALUE mGdkGL;
+VALUE mGtkGL;
 
 EXTERN VALUE rb_progname, rb_argv;
 
@@ -93,6 +93,8 @@ gdk_gl_m_init(argc, argv, self)
 void
 Init_gtkglext(void)
 {
+    VALUE mGdk, mGtk;
+
     mGtk   = rb_define_module("Gtk"); /* Gtk */
     mGtkGL = rb_define_module_under(mGtk, "GL"); /* Gtk::GL */
     mGdk   = rb_define_module("Gdk"); /* Gdk */

@@ -1,3 +1,8 @@
+2003-12-26 Vincent Isambart <isambart@netcourrier.com>
+
+	* src/rbgdkglext.c: mGdk and mGdk are no more global variables.
+	* sample/*.rb: corrected the behavior of the "Quit" button.
+
 2003-09-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: win32 support.
