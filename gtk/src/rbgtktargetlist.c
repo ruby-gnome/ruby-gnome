@@ -4,9 +4,9 @@
   rbgtktargetlist.c -
 
   $Author: mutoh $
-  $Date: 2003/05/24 11:32:12 $
+  $Date: 2005/01/23 16:47:15 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -67,6 +67,33 @@ target_list_add_table(self, targets)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+target_list_add_text_targets(self, info)
+    VALUE self, info;
+{
+    gtk_target_list_add_text_targets(_SELF(self), NUM2UINT(info));
+    return self;
+}
+
+static VALUE
+target_list_add_image_targets(self, info, writable)
+    VALUE self, info, writable;
+{
+    gtk_target_list_add_image_targets(_SELF(self), NUM2UINT(info), RTEST(writable));
+    return self;
+}
+
+static VALUE
+target_list_add_uri_targets(self, info)
+    VALUE self, info;
+{
+    gtk_target_list_add_uri_targets(_SELF(self), NUM2UINT(info));
+    return self;
+}
+#endif
+
+
 static VALUE
 target_list_remove(self, target)
     VALUE self, target;
@@ -95,6 +122,11 @@ Init_gtk_target_list()
     rb_define_method(gTargetList, "initialize", target_list_initialize, 1);
     rb_define_method(gTargetList, "add", target_list_add, 3);
     rb_define_method(gTargetList, "add_table", target_list_add_table, 1);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gTargetList, "add_text_targets", target_list_add_text_targets, 1);
+    rb_define_method(gTargetList, "add_image_targets", target_list_add_image_targets, 2);
+    rb_define_method(gTargetList, "add_uri_targets", target_list_add_uri_targets, 1);
+#endif
     rb_define_method(gTargetList, "remove", target_list_remove, 1);
     rb_define_method(gTargetList, "find", target_list_find, 1);
 }

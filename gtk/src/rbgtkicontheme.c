@@ -4,9 +4,9 @@
   rbgtkicontheme.c -
 
   $Author: mutoh $
-  $Date: 2004/08/22 13:30:40 $
+  $Date: 2005/01/23 16:47:15 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -163,6 +163,24 @@ it_list_icons(argc, argv, self)
     return ary;
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+it_get_icon_sizes(self, icon_name)
+    VALUE self, icon_name;
+{
+    VALUE ary = rb_ary_new();
+
+    gint* sizes = gtk_icon_theme_get_icon_sizes(_SELF(self), RVAL2CSTR(icon_name));
+    gint* tmp_sizes = sizes;
+    while (*tmp_sizes) {
+        rb_ary_push(ary, INT2NUM(*tmp_sizes));
+        tmp_sizes++;
+    }
+    g_free(sizes);
+    return ary;
+}
+#endif
+
 static VALUE
 it_get_example_icon_name(self)
     VALUE self;
@@ -207,6 +225,9 @@ Init_gtk_icon_theme()
     rb_define_method(it, "lookup_icon", it_lookup_icon, 3);
     rb_define_method(it, "load_icon", it_load_icon, 3);
     rb_define_method(it, "icons", it_list_icons, -1);
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(it, "get_icon_sizes", it_get_icon_sizes, 1);
+#endif
     rb_define_method(it, "example_icon_name", it_get_example_icon_name, 0);
     rb_define_method(it, "rescan_if_needed", it_rescan_if_needed, 0);
 

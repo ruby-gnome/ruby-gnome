@@ -3,10 +3,10 @@
 
   rbgtkselectiondata.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/11/06 10:42:48 $
+  $Author: mutoh $
+  $Date: 2005/01/23 16:47:15 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 
@@ -144,9 +144,16 @@ static VALUE
 gtkselectiondata_set_text(self, str)
     VALUE self, str;
 {
+    gboolean ret;
     StringValue(str);
-    return CBOOL2RVAL(gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
-                                                  RSTRING(str)->len));
+
+    ret = gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
+                                      RSTRING(str)->len);
+
+    if (!ret) 
+        rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
+
+    return self;
 }
 
 static VALUE
@@ -161,6 +168,72 @@ gtkselectiondata_get_text(self)
     }
     return ret;
 }
+
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gtkselectiondata_set_pixbuf(self, pixbuf)
+    VALUE self, pixbuf;
+{
+    gboolean ret = gtk_selection_data_set_pixbuf(_SELF(self), 
+                                                 GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+    if (!ret) 
+        rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
+
+    return self;
+}
+
+static VALUE
+gtkselectiondata_get_pixbuf(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_selection_data_get_pixbuf(_SELF(self)));
+}
+
+static VALUE
+gtkselectiondata_set_uris(self, uris)
+    VALUE self, uris;
+{
+    gboolean ret;
+    gchar** guris;
+    int i, n_targets;
+    
+    Check_Type(uris, T_ARRAY);
+    n_targets = RARRAY(uris)->len;
+ 
+    guris = g_new(gchar*, n_targets + 1);
+
+    for (i = 0; i < n_targets; i++) {
+        guris[i] = RVAL2CSTR(RARRAY(uris)->ptr[i]);
+    }
+    guris[n_targets] = NULL;
+
+    ret = gtk_selection_data_set_uris(_SELF(self), guris);
+
+    g_strfreev(guris);
+
+    if (!ret) 
+        rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
+
+    return self;
+}
+
+static VALUE
+gtkselectiondata_get_uris(self)
+    VALUE self;
+{
+    VALUE ary = rb_ary_new();
+    gchar** uris = gtk_selection_data_get_uris(_SELF(self));
+
+    if (uris) {
+        while (*uris){
+            rb_ary_push(ary, CSTR2RVAL(*uris));
+            uris++;
+        }
+        g_strfreev(uris);
+    }
+    return ary;
+}
+#endif
 
 static VALUE
 gtkselectiondata_get_targets(self)
@@ -181,12 +254,20 @@ gtkselectiondata_get_targets(self)
     g_free(targets);
     return result;
 }
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gtkselectiondata_targets_include_image(self, writable)
+    VALUE self, writable;
+{
+    return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RTEST(writable)));
+}
+#endif
 
 static VALUE
 gtkselectiondata_targets_include_text(self)
     VALUE self;
 {
-    return gtk_selection_data_targets_include_text(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_selection_data_targets_include_text(_SELF(self)));
 }
 
 void
@@ -205,13 +286,23 @@ Init_gtk_selectiondata()
     rb_define_method(gSelectionData, "data", gtkselectiondata_data, 0);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gSelectionData, "display", gtkselectiondata_display, 0);
-#endif
+#endif 
 
     rb_define_method(gSelectionData, "set", gtkselectiondata_set, -1);
-    rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);
     rb_define_method(gSelectionData, "text", gtkselectiondata_get_text, 0);
+    rb_define_method(gSelectionData, "set_text", gtkselectiondata_set_text, 1);
+
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gSelectionData, "pixbuf", gtkselectiondata_get_pixbuf, 0);
+    rb_define_method(gSelectionData, "set_pixbuf", gtkselectiondata_set_pixbuf, 1);
+    rb_define_method(gSelectionData, "uris", gtkselectiondata_get_uris, 0);
+    rb_define_method(gSelectionData, "set_uris", gtkselectiondata_set_uris, 1);
+    rb_define_method(gSelectionData, "targets_include_image", gtkselectiondata_targets_include_image, 1);
+#endif
     rb_define_method(gSelectionData, "targets", gtkselectiondata_get_targets, 0);
-    rb_define_method(gSelectionData, "targets_include_text?", gtkselectiondata_targets_include_text, 0);
+    rb_define_method(gSelectionData, "targets_include_text", gtkselectiondata_targets_include_text, 0);
+
+    G_DEF_SETTERS(gSelectionData);
 
 } 
 

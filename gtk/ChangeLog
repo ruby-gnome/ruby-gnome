@@ -1,3 +1,13 @@
+2005-01-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkicontheme.c: Added Gtk::IconTheme#get_icon_sizes for GTK+-2.6.x.
+	* src/rbgtkselectiondata.c: 
+	Rename Gtk::Selection#targets_include_text? to #targets_include_text.
+	Gtk::SelectionData#pixbuf, #set_pixbuf, #uris, #set_uris, 
+	#target_include_image for GTK+-2.6.x.
+	* src/rbgtktargetlist.c: Added Gtk::TargetList#add_(text|image|uri)_targets
+	for GTK+-2.6.x.
+
 2005-01-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombo.c: Fix a memory leak reported by DaVinci.
