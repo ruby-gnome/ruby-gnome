@@ -1,6 +1,10 @@
 #
-# Unicode
-$KCODE = "U"
+# glib2.rb
+# Copyright(C) 2005 Ruby-GNOME2 Project.
+#
+# This program is licenced under the same 
+# license of Ruby-GNOME2.
+#
 
 # for dropline GTK2-Runtime DLL
 # http://www.dropline.net/gtk/

@@ -1,3 +1,8 @@
+2005-01-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Remove $KCODE="U". Reported by Dafydd Harries.
+	Added header information.
+
 2005-01-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Improved error handling. 
