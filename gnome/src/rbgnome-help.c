@@ -1,5 +1,5 @@
 /* -*- c-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-help.c,v 1.4 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-help.c,v 1.5 2004/08/26 17:47:45 mutoh Exp $ */
 /* based on libgnome/gnome-help.h */
 
 /* Gnome::Help for Ruby/GNOME2
@@ -80,4 +80,8 @@ Init_gnome_help(mGnome)
     rb_define_module_function(mGnomeHelp, "display", gnohelp_m_display, 2);
     rb_define_module_function(mGnomeHelp, "display_with_doc_id", gnohelp_m_display_with_doc_id, 4);
     rb_define_module_function(mGnomeHelp, "display_desktop", gnohelp_m_display_desktop, 4);
+
+    G_DEF_ERROR(GNOME_HELP_ERROR, "HelpError", mGnome, rb_eRuntimeError,
+                GNOME_TYPE_HELP_ERROR);
+
 }

@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-url.c,v 1.4 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-url.c,v 1.5 2004/08/26 17:47:45 mutoh Exp $ */
 
 /* Gnome::URL module for Ruby/Gnome
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -27,21 +27,11 @@ url_show(self, url)
     VALUE self, url;
 {
     GError *error = NULL;
-    VALUE exc;
 
-    if (gnome_url_show(RVAL2CSTR(url), &error)) {
-        /* success */
-        return Qnil;
+    if (! gnome_url_show(RVAL2CSTR(url), &error)) {
+        RAISE_GERROR(error);
     }
-    /* fail */
-    if (error && error->message != NULL) {
-        exc = rb_exc_new2(rb_eRuntimeError, error->message);
-    } else {
-        exc = rb_exc_new2(rb_eRuntimeError, "url_show error");
-    }
-    if (error)
-        g_error_free(error);
-    rb_exc_raise(exc);
+    return Qnil;
 }
 
 void
@@ -50,4 +40,8 @@ Init_gnome_url(mGnome)
 {
     VALUE mGnomeURL = rb_define_module_under(mGnome, "URL");
     rb_define_module_function(mGnomeURL, "show", url_show, 1);
+
+    G_DEF_ERROR(GNOME_URL_ERROR, "URLError", mGnome, rb_eRuntimeError,
+                GNOME_TYPE_URL_ERROR);
+
 }
