@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2005/01/30 11:24:36 $
+  $Date: 2005/03/05 19:03:06 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -111,7 +111,6 @@ lstore_insert(argc, argv, self)
     VALUE position, values;
     GtkTreeIter iter;
     GtkListStore* store = _SELF(self);
-    GtkTreeModel* model = GTK_TREE_MODEL(store);
 
     rb_scan_args(argc, argv, "11", &position, &values);
 
@@ -133,7 +132,7 @@ lstore_insert(argc, argv, self)
         for (cnt = 0; cnt < n_values; cnt++) {
             Check_Type(RARRAY(RARRAY(ary)->ptr[cnt]), T_ARRAY);
             columns[cnt] = NUM2INT(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[1]);
-            gtype = gtk_tree_model_get_column_type(model, columns[cnt]);
+            gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(store), columns[cnt]);
             gvalues[cnt].g_type = 0;
             g_value_init(&gvalues[cnt], gtype);
             rbgobj_rvalue_to_gvalue(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[0], &gvalues[cnt]);

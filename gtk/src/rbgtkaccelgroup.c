@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2005/02/17 05:35:35 $
+  $Date: 2005/03/05 19:03:06 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -103,6 +103,7 @@ gaccelgrp_s_from_accel_closure(self, closure)
                          (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
 }
 
+#if GTK_CHECK_VERSION(2,2,0)
 static gboolean
 gaccelgrp_find_func(key, closure, func)
     GtkAccelKey *key;
@@ -126,6 +127,7 @@ gaccelgrp_find(self)
                                   (gpointer)func);
     return result ? BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY) : Qnil;
 }
+#endif
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
@@ -205,5 +207,7 @@ Init_gtk_accel_group()
     rb_define_method(gAccelGroup, "disconnect", gaccelgrp_disconnect, 1);
     rb_define_method(gAccelGroup, "disconnect_key", gaccelgrp_disconnect_key, 2);
     rb_define_method(gAccelGroup, "query", gaccelgrp_query, 2);
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gAccelGroup, "find", gaccelgrp_find, 0);
+#endif
 }

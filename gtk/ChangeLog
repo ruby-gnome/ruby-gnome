@@ -1,5 +1,7 @@
 2005-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkliststore.c: Fix a warning. 
+	* src/rbgtkaccelgroup.c: Fix compiling problem on GTK+-2.0.x. 
 	* README: Revised.
 
 2005-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
