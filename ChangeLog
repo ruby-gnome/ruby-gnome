@@ -1,3 +1,7 @@
+Wed May 29 21:51:30 2002 Masao Mutoh <mutoh@highway.ne.jp>
+
+   * gdkimlib/: the package was removed.
+
 Wed May 29 00:25:47 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
    * README: Modified.
