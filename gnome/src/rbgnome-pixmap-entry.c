@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-pixmap-entry.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-pixmap-entry.c,v 1.4 2002/10/13 14:11:42 tkubo Exp $ */
+/* based on libgnomeui/gnome-pixmap-entry.h */
 
-/* Gnome::PixmapEntry widget for Ruby/Gnome
- * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+/* Gnome::PixmapEntry widget for Ruby/GNOME2
+ * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>,
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -50,24 +52,17 @@ pentry_set_pixmap_subdir(self, subdir)
 }
 
 static VALUE
-pentry_gnome_file_entry(self)
+pentry_scrolled_window(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gnome_pixmap_entry_gnome_file_entry(_SELF(self)));
+    return GOBJ2RVAL(gnome_pixmap_entry_scrolled_window(_SELF(self)));
 }
 
 static VALUE
-pentry_gnome_entry(self)
+pentry_preview_widget(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gnome_pixmap_entry_gnome_entry(_SELF(self)));
-}
-
-static VALUE
-pentry_gtk_entry(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gnome_pixmap_entry_gtk_entry(_SELF(self)));
+    return GOBJ2RVAL(gnome_pixmap_entry_preview_widget(_SELF(self)));
 }
 
 static VALUE
@@ -109,10 +104,12 @@ Init_gnome_pixmap_entry(mGnome)
     /* Instance methods */
     rb_define_method(gnoPixmapEntry, "initialize", pentry_initialize, -1);
     rb_define_method(gnoPixmapEntry, "set_pixmap_subdir", pentry_set_pixmap_subdir, 1);
-    rb_define_method(gnoPixmapEntry, "gnome_file_entry", pentry_gnome_file_entry, 0);
-    rb_define_method(gnoPixmapEntry, "gnome_entry", pentry_gnome_entry, 0);
-    rb_define_method(gnoPixmapEntry, "gtk_entry", pentry_gtk_entry, 0);
+    rb_define_method(gnoPixmapEntry, "scrolled_window", pentry_scrolled_window, 0);
+    rb_define_method(gnoPixmapEntry, "preview_widget", pentry_preview_widget, 0);
     rb_define_method(gnoPixmapEntry, "set_preview", pentry_set_preview, 1);
     rb_define_method(gnoPixmapEntry, "set_preview_size", pentry_set_preview_size, 2);
-    rb_define_method(gnoPixmapEntry, "get_filename", pentry_get_filename, 0);
+    rb_define_method(gnoPixmapEntry, "filename", pentry_get_filename, 0);
+
+    G_DEF_SETTER(gnoPixmapEntry, "pixmap_subdir");
+    G_DEF_SETTER(gnoPixmapEntry, "preview");
 }

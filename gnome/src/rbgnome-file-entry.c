@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-file-entry.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-file-entry.c,v 1.4 2002/10/13 14:11:42 tkubo Exp $ */
+/* based on libgnomeui/gnome-file-entry.h */
 
-/* Gnome::FileEntry widget for Ruby/Gnome
+/* Gnome::FileEntry widget for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -73,11 +75,18 @@ fentry_set_default_path(self, path)
 
 /*sets up the file entry to be a directory picker rather then a file picker*/
 static VALUE
-fentry_set_directory(self, directory_entry)
+fentry_set_directory_entry(self, directory_entry)
     VALUE self, directory_entry;
 {
-    gnome_file_entry_set_directory(_SELF(self), RTEST(directory_entry));
+    gnome_file_entry_set_directory_entry(_SELF(self), RTEST(directory_entry));
     return self;
+}
+
+static VALUE
+fentry_get_directory_entry(self)
+    VALUE self;
+{
+    return gnome_file_entry_get_directory_entry(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 /*returns a filename which is a full path with WD or the default
@@ -97,6 +106,16 @@ fentry_get_full_path(self, file_must_exist)
     return obj;
 }
 
+/* set the filename to something, this is like setting the internal
+ * GtkEntry */
+static VALUE
+fentry_set_filename(self, filename)
+    VALUE self, filename;
+{
+    gnome_file_entry_set_filename(_SELF(self), RVAL2CSTR(filename));
+    return self;
+}
+
 /*set modality of the file browse dialog, only applies for the
   next time a dialog is created*/
 static VALUE
@@ -106,6 +125,13 @@ fentry_set_modal(self, is_modal)
     gnome_file_entry_set_modal(_SELF(self),
                                RTEST(is_modal));
     return self;
+}
+
+static VALUE
+fentry_get_modal(self)
+    VALUE self;
+{
+    return gnome_file_entry_get_modal(_SELF(self)) ? Qtrue : Qfalse;
 }
 
 void
@@ -120,8 +146,17 @@ Init_gnome_file_entry(mGnome)
     rb_define_method(gnoFileEntry, "gtk_entry", fentry_gtk_entry, 0);
     rb_define_method(gnoFileEntry, "set_title", fentry_set_title, 1);
     rb_define_method(gnoFileEntry, "set_default_path", fentry_set_default_path, 1);
-    rb_define_method(gnoFileEntry, "set_directory", fentry_set_directory, 1);
+    rb_define_method(gnoFileEntry, "set_directory_entry", fentry_set_directory_entry, 1);
+    rb_define_method(gnoFileEntry, "directory_entry?", fentry_get_directory_entry, 0);
     rb_define_method(gnoFileEntry, "get_full_path", fentry_get_full_path, 1);
+    rb_define_method(gnoFileEntry, "set_filename", fentry_set_filename, 1);
     rb_define_method(gnoFileEntry, "set_modal", fentry_set_modal, 1);
+    rb_define_method(gnoFileEntry, "modal?", fentry_get_modal, 0);
+
+    G_DEF_SETTER(gnoFileEntry, "title");
+    G_DEF_SETTER(gnoFileEntry, "default_path");
+    G_DEF_SETTER(gnoFileEntry, "directory_entry");
+    G_DEF_SETTER(gnoFileEntry, "filename");
+    G_DEF_SETTER(gnoFileEntry, "modal");
 }
 

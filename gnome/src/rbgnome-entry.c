@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-entry.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-entry.c,v 1.4 2002/10/13 14:11:42 tkubo Exp $ */
+/* based on libgnomeui/gnome-entry.h */
 
-/* Gnome::Entry widget for Ruby/Gnome
+/* Gnome::Entry widget for Ruby/GNOME2
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -54,11 +56,26 @@ entry_set_history_id(self, history_id)
 }
 
 static VALUE
+entry_get_history_id(self)
+    VALUE self;
+{
+    const gchar *result = gnome_entry_get_history_id(_SELF(self));
+    return result ? rb_str_new2(result) : Qnil;
+}
+
+static VALUE
 entry_set_max_saved(self, max_saved)
     VALUE self, max_saved;
 {
     gnome_entry_set_max_saved(_SELF(self), (guint)NUM2INT(max_saved));
     return self;
+}
+
+static VALUE
+entry_get_max_saved(self)
+    VALUE self;
+{
+    return UINT2NUM(gnome_entry_get_max_saved(_SELF(self)));
 }
 
 static VALUE
@@ -77,6 +94,14 @@ entry_append_history(self, save, text)
     return self;
 }
 
+static VALUE
+entry_clear_history(self)
+    VALUE self;
+{
+    gnome_entry_clear_history(_SELF(self));
+    return self;
+}
+
 void
 Init_gnome_entry(mGnome)
     VALUE mGnome;
@@ -86,7 +111,13 @@ Init_gnome_entry(mGnome)
     rb_define_method(gnoEntry, "initialize", entry_initialize, -1);
     rb_define_method(gnoEntry, "gtk_entry", entry_gtk_entry, 0);
     rb_define_method(gnoEntry, "set_history_id", entry_set_history_id, 1);
+    rb_define_method(gnoEntry, "history_id", entry_get_history_id, 0);
     rb_define_method(gnoEntry, "set_max_saved", entry_set_max_saved, 1);
+    rb_define_method(gnoEntry, "max_saved", entry_get_max_saved, 0);
     rb_define_method(gnoEntry, "prepend_history", entry_prepend_history, 2);
     rb_define_method(gnoEntry, "append_history", entry_append_history, 2);
+    rb_define_method(gnoEntry, "clear_history", entry_clear_history, 0);
+
+    G_DEF_SETTER(gnoEntry, "history_id");
+    G_DEF_SETTER(gnoEntry, "max_saved");
 }

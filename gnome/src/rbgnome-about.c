@@ -1,8 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-about.c,v 1.3 2002/09/25 17:17:24 tkubo Exp $ */
+/* $Id: rbgnome-about.c,v 1.4 2002/10/13 14:11:41 tkubo Exp $ */
+/* based on libgnomeui/gnome-about.h */
 
-/* Gnome::About widget for Ruby/Gnome
+/* Gnome::About widget for Ruby/GNOME2
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>
+ *               2002 KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public

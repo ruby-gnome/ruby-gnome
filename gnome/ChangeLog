@@ -1,5 +1,26 @@
 2002-10-13  KUBO Takehiro  <kubo@jiubao.org>
 
+	* src/rbgnome-about.c: Modify comment.
+	* src/rbgnome-entry.c: Add entry_get_history_id(),
+	entry_get_max_saved(), entry_clear_history().
+	Modify Init_gnome_entry().
+	* src/rbgnome-file-entry.c: Delete fentry_set_directory().
+	Add fentry_set_directory_entry(), fentry_get_directory_entry(),
+	fentry_set_filename(), and fentry_get_modal().
+	Modify Init_gnome_file_entry().
+	* src/rbgnome-font-picker.c: Add picker_get_title(),
+	and picker_get_widget(). Modify picker_set_use_font_in_label(),
+	picker_set_show_size(), picker_set_widget(), picker_get_font_name(),
+	and picker_get_preview_text().
+	Delete picker_get_font().
+	* src/rbgnome-pixmap-entry.c: Delete pentry_gnome_file_entry(),
+	pentry_gnome_entry(), and pentry_gtk_entry().
+	Add pentry_scrolled_window() and pentry_preview_widget().
+	Modify Init_gnome_pixmap_entry().
+	* src/rbgnome.c: Modify Init_gnome(): call Init_gnome_about().
+
+2002-10-13  KUBO Takehiro  <kubo@jiubao.org>
+
 	* src/rbgnome-dialog.c, src/rbgnome-messagebox.c, src/rbgnome-pixmap.c,
 	src/rbgnome-property-box.c: delete files for deprecated classes.
 	* src/rbgnome-uidefs.c: delete deprecated constants.
