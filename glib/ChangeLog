@@ -1,3 +1,7 @@
+2003-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c: Fix a typo. Pointed out by Kazuhiro NISHIYAMA.
+
 2003-12-21  Kenichi Komiya <kom@mail1.accsnet.ne.jp>
 
 	* src/rbgobj_object.c: Check when the first argument is nil or Hash.

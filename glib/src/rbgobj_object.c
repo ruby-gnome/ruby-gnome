@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2003/12/20 15:26:28 $
+  $Date: 2003/12/21 13:54:44 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -68,7 +68,7 @@ gobj_s_gobject_new(argc, argv, self)
         Check_Type(params_hash, T_HASH);
 
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registerd class",
+        rb_raise(rb_eTypeError, "%s isn't registered class",
                  rb_class2name(self));
 
     gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
@@ -95,7 +95,7 @@ gobj_s_install_property(int argc, VALUE* argv, VALUE self)
     VALUE pspec_obj, prop_id;
 
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registerd class",
+        rb_raise(rb_eTypeError, "%s isn't registered class",
                  rb_class2name(self));
 
     rb_scan_args(argc, argv, "11", &pspec_obj, &prop_id);
