@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:58 $
+  $Date: 2003/01/03 16:34:48 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -60,8 +60,40 @@ void        pango_shape                     (const gchar *text,
                                              PangoGlyphString *glyphs);
 */
 
+/* This method from rbpangoattribute.c */
+static VALUE
+rpango_parse_markup(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE markup_text, accel_marker;
+    PangoAttrList *attr_list;
+    gchar* text;
+    gunichar accel_char;
+    GError *error = NULL;
+    gboolean ret;
+    char c;
+
+    rb_scan_args(argc, argv, "11", &markup_text, &accel_marker);
+
+    ret = pango_parse_markup(RVAL2CSTR(markup_text),
+                             RSTRING(markup_text)->len,
+                             NIL_P(accel_marker) ? 0 : NUM2CHR(accel_marker),
+                             &attr_list, &text, &accel_char, &error);
+
+    if (!ret) RAISE_GERROR(error);
+
+    c = (char)accel_char;
+    return rb_ary_new3(3, 
+                       attr_list ? BOXED2RVAL(attr_list, PANGO_TYPE_ATTR_LIST) : Qnil,
+                       text ? CSTR2RVAL(text) : Qnil,
+                       accel_char ? rb_str_new(&c, 1) : Qnil);
+}
+
 void
 Init_pango_main()
 {
     rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
+    rb_define_module_function(mPango, "parse_markup", rpango_parse_markup, -1);
 }

@@ -4,7 +4,7 @@
   rbpangoattriterator.c -
 
   $Author: mutoh $
-  $Date: 2002/12/31 07:00:57 $
+  $Date: 2003/01/03 16:34:48 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -38,16 +38,37 @@ static VALUE
 attriterator_range(self)
     VALUE self;
 {
-    gint start, end;
+    gint start = 0;
+    gint end = 0;
     pango_attr_iterator_range(_SELF(self), &start, &end);
     return rb_ary_new3(2, INT2NUM(start), INT2NUM(end));
 }
 
 static VALUE
-attriterator_get(self, type)
-    VALUE self, type;
+attriterator_get(argc, argv, self)
+    int argc;
+    VALUE* argv;
+    VALUE self;
 {
-    return ATTR2RVAL(pango_attr_iterator_get(_SELF(self), FIX2INT(type)));
+    VALUE type, ret;
+    PangoAttribute* attr;
+    int i;
+
+    rb_scan_args(argc, argv, "01", &type);
+
+    if (NIL_P(type)){
+        PangoAttrIterator* iter = _SELF(self);
+        ret = rb_ary_new();
+        for (i = 0; i < PANGO_ATTR_SCALE + 1; i++){
+            attr = pango_attr_iterator_get(iter, i);
+            if (attr)
+                rb_ary_push(ret, ATTR2RVAL(attr));
+        }
+    } else {
+        attr = pango_attr_iterator_get(_SELF(self), FIX2INT(type));
+        ret = attr ? ATTR2RVAL(attr) : Qnil;
+    }
+    return ret;
 }
 
 static VALUE
@@ -77,8 +98,6 @@ attriterator_get_font(self)
     return ret;
 }
 
-
-
 void
 Init_pango_attriterator()
 {
@@ -86,6 +105,6 @@ Init_pango_attriterator()
     
     rb_define_method(pAttriterator, "next!", attriterator_next, 0);
     rb_define_method(pAttriterator, "range", attriterator_range, 0);
-    rb_define_method(pAttriterator, "get", attriterator_get, 1);
+    rb_define_method(pAttriterator, "get", attriterator_get, -1);
     rb_define_method(pAttriterator, "font", attriterator_get_font, 0);
 }
