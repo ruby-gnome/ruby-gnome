@@ -3,8 +3,8 @@
 
   rbgtksizegroup.c -
  
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:04 $
+  $Author: mutoh $
+  $Date: 2003/12/03 16:00:24 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -16,23 +16,8 @@ static VALUE
 sizegrp_initialize(self, mode)
     VALUE self;
 {
-    G_INITIALIZE(self, gtk_size_group_new(FIX2INT(mode)));
+    G_INITIALIZE(self, gtk_size_group_new(RVAL2GENUM(mode, GTK_TYPE_SIZE_GROUP_MODE)));
     return Qnil;
-}
-
-static VALUE
-sizegrp_set_mode(self, mode)
-    VALUE self, mode;
-{
-    gtk_size_group_set_mode(_SELF(self), FIX2INT(mode));
-    return self;
-}
-
-static VALUE
-sizegrp_get_mode(self)
-    VALUE self;
-{
-    return INT2FIX(gtk_size_group_get_mode(_SELF(self)));
 }
 
 static VALUE
@@ -57,13 +42,8 @@ Init_sizegrp()
     VALUE gSizeGroup = G_DEF_CLASS(GTK_TYPE_SIZE_GROUP, "SizeGroup", mGtk);
 
     rb_define_method(gSizeGroup, "initialize", sizegrp_initialize, 1);
-
-    rb_define_method(gSizeGroup, "set_mode", sizegrp_set_mode, 1);
-    rb_define_method(gSizeGroup, "mode", sizegrp_get_mode, 0);
     rb_define_method(gSizeGroup, "add_widget", sizegrp_add_widget, 1);
     rb_define_method(gSizeGroup, "remove_widget", sizegrp_remove_widget, 1);
-
-    G_DEF_SETTERS(gSizeGroup);
 
     /* GtkSizeGroupMode */
     G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", gSizeGroup);
