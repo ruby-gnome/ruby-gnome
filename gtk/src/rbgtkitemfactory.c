@@ -3,8 +3,8 @@
 
   rbgtkitemfactory.c -
 
-  $Author: mutoh $
-  $Date: 2003/07/04 18:34:04 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -286,15 +286,15 @@ Init_gtk_itemfactory()
     rb_define_const(gItemFactory, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
     rb_define_const(gItemFactory, "TYPE_OPTION_MENU", INT2FIX(GTK_TYPE_OPTION_MENU));
 
-    rb_define_const(gItemFactory, "TITLE", rb_str_new2("<Title>"));
-    rb_define_const(gItemFactory, "ITEM", rb_str_new2("<Item>"));
-    rb_define_const(gItemFactory, "CHECK_ITEM", rb_str_new2("<CheckItem>"));
-    rb_define_const(gItemFactory, "TOGGLE_ITEM", rb_str_new2("<ToggleItem>"));
-    rb_define_const(gItemFactory, "RADIO_ITEM", rb_str_new2("<RadioItem>"));
-    rb_define_const(gItemFactory, "IMAGE_ITEM", rb_str_new2("<ImageItem>"));
-    rb_define_const(gItemFactory, "STOCK_ITEM", rb_str_new2("<StockItem>"));
-    rb_define_const(gItemFactory, "SEPARATOR", rb_str_new2("<Separator>"));
-    rb_define_const(gItemFactory, "BRANCH", rb_str_new2("<Branch>"));
-    rb_define_const(gItemFactory, "LAST_BRANCH", rb_str_new2("<LastBranch>"));
-    rb_define_const(gItemFactory, "TEAROFF", rb_str_new2("<Tearoff>"));
+    rb_define_const(gItemFactory, "TITLE", CSTR2RVAL("<Title>"));
+    rb_define_const(gItemFactory, "ITEM", CSTR2RVAL("<Item>"));
+    rb_define_const(gItemFactory, "CHECK_ITEM", CSTR2RVAL("<CheckItem>"));
+    rb_define_const(gItemFactory, "TOGGLE_ITEM", CSTR2RVAL("<ToggleItem>"));
+    rb_define_const(gItemFactory, "RADIO_ITEM", CSTR2RVAL("<RadioItem>"));
+    rb_define_const(gItemFactory, "IMAGE_ITEM", CSTR2RVAL("<ImageItem>"));
+    rb_define_const(gItemFactory, "STOCK_ITEM", CSTR2RVAL("<StockItem>"));
+    rb_define_const(gItemFactory, "SEPARATOR", CSTR2RVAL("<Separator>"));
+    rb_define_const(gItemFactory, "BRANCH", CSTR2RVAL("<Branch>"));
+    rb_define_const(gItemFactory, "LAST_BRANCH", CSTR2RVAL("<LastBranch>"));
+    rb_define_const(gItemFactory, "TEAROFF", CSTR2RVAL("<Tearoff>"));
 }

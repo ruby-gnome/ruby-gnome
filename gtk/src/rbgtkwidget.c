@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2004/03/24 17:54:33 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:32 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -785,7 +785,7 @@ widget_s_style_properties(argc, argv, self)
     for (i = 0; i < n_properties; i++){
         if (RTEST(inherited_too)
             || GTYPE2CLASS(props[i]->owner_type) == self)
-            rb_ary_push(ary, rb_str_new2(props[i]->name));
+            rb_ary_push(ary, CSTR2RVAL(props[i]->name));
     }
 
     g_free(props);

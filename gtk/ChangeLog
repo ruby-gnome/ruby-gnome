@@ -1,3 +1,17 @@
+2004-06-16  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgdk.c:
+	* src/rbgdkatom.c:
+	* src/rbgtkcontainer.c:
+	* src/rbgtkeditable.c:
+ 	* src/rbgtkitemfactory.c:
+	* src/rbgtkstock.c:
+	* src/rbgtktextiter.c: 
+	* src/rbgtktextmark.c:
+	* src/rbgtkwidget.c: 
+	Introduced CSTR2RVAL () and CSTR2RVAL2 () in some places that were still using
+	rb_str_new2 ().
+
 2004-06-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbar.c: Added Gtk::Toolbar#item_index, #n_item, #drop_index,

@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2004/05/28 18:59:40 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -449,7 +449,7 @@ cont_s_child_properties(argc, argv, self)
     for (i = 0; i < n_properties; i++){
         if (RTEST(inherited_too)
             || GTYPE2CLASS(props[i]->owner_type) == self)
-            rb_ary_push(ary, rb_str_new2(props[i]->name));
+            rb_ary_push(ary, CSTR2RVAL(props[i]->name));
     }
     g_free(props);
     g_type_class_unref(oclass);

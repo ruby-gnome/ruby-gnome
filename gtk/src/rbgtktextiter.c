@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2004/06/02 18:08:09 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -45,35 +45,35 @@ get_char(self)
     gchar buf[10];
     gint len = g_unichar_to_utf8(gtk_text_iter_get_char(_SELF(self)), buf);
     buf[len] = '\0';
-    return rb_str_new2(buf);
+    return CSTR2RVAL(buf);
 }
 
 static VALUE
 get_slice(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_slice(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_text(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_visible_slice(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_visible_slice(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_visible_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
 get_visible_text(self, rhs)
     VALUE self, rhs;
 {
-    return rb_str_new2(gtk_text_iter_get_visible_text(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_visible_text(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
@@ -194,7 +194,7 @@ static VALUE
 get_language(self)
     VALUE self;
 {
-    return rb_str_new2(pango_language_to_string(gtk_text_iter_get_language(_SELF(self))));
+    return CSTR2RVAL(pango_language_to_string(gtk_text_iter_get_language(_SELF(self))));
 }
 
 def_predicate(is_end)

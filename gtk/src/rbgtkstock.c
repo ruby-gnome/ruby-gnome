@@ -3,8 +3,8 @@
 
   rbgtkstock.c -
 
-  $Author: mutoh $
-  $Date: 2004/05/24 17:44:58 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -49,10 +49,10 @@ stock_m_lookup(klass, stock_id)
     if (gtk_stock_lookup(SYM2CSTR(stock_id), &item)) {
         return rb_ary_new3(5,
                            CSTR2SYM(item.stock_id),
-                           rb_str_new2(item.label),
+                           CSTR2RVAL(item.label),
                            UINT2NUM(item.modifier),
                            UINT2NUM(item.keyval),
-                           item.translation_domain ? rb_str_new2(item.translation_domain) : Qnil);
+                           CSTR2RVAL(item.translation_domain));
     }
     rb_raise(rb_eArgError, "no such stock-id: %s", SYM2CSTR(stock_id));
 }

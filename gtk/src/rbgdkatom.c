@@ -3,8 +3,8 @@
 
   rbgdkatom.c -
 
-  $Author: mutoh $
-  $Date: 2003/09/29 12:51:02 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -81,13 +81,7 @@ static VALUE
 gdkatom_name(self)
     VALUE self;
 {
-    VALUE result;
-
-    gchar* name = gdk_atom_name(_SELF(self));
-    result = name ? rb_str_new2(name) : Qnil;
-    g_free(name);
-
-    return result;
+    return CSTR2RVAL2(gdk_atom_name(_SELF(self)));
 }
 
 static VALUE

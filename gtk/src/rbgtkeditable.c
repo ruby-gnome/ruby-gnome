@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: sakai $
-  $Date: 2003/07/18 13:41:41 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -61,18 +61,9 @@ static VALUE
 edit_get_chars(self, start, end)
     VALUE self, start, end;
 {
-    gchar *s;
-    VALUE ret;
-
-    s = gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)), /* check s */
-			       NUM2INT(start), NUM2INT(end));  /* check start,end */
-    if (s) {
-        ret = rb_str_new2(s);
-        g_free(s);
-    } else {
-        ret = Qnil;
-    }
-    return ret;
+    return CSTR2RVAL2(
+    	gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)),   /* check s */
+			       NUM2INT(start), NUM2INT(end)));  /* check start,end */
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtktextmark.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -30,7 +30,7 @@ static VALUE
 get_name(self)
     VALUE self;
 {
-    return rb_str_new2(gtk_text_mark_get_name(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return CSTR2RVAL(gtk_text_mark_get_name(GTK_TEXT_MARK(RVAL2GOBJ(self))));
 }
 
 static VALUE

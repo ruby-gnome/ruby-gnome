@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/24 06:41:49 $
+  $Author: lrz $
+  $Date: 2004/06/17 22:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -306,7 +306,7 @@ static VALUE
 gdk_m_target(self)
     VALUE self;
 {
-    return rb_str_new2(RUBY_GTK2_TARGET);
+    return CSTR2RVAL(RUBY_GTK2_TARGET);
 }
 
 void
