@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2004/07/24 07:43:00 $
+  $Date: 2004/07/31 10:17:17 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -107,9 +107,10 @@ void Init_glib2()
 {
     mGLib = rb_define_module("GLib");
 
-    setlocale(LC_ALL, "");
-    setlocale(LC_NUMERIC, "C");
-    
+    setlocale (LC_CTYPE, "");
+#if LC_MESSAGES
+    setlocale (LC_MESSAGES, "");
+#endif    
     rb_define_const(mGLib, "VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(glib_major_version),
