@@ -3,8 +3,8 @@
 
   rbgtklayout.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,9 +21,9 @@ layout_initialize(self, hadjustment, vadjustment)
 {
     GtkWidget* layout;
     layout = gtk_layout_new(
-		NIL_P(hadjustment)?0:GTK_ADJUSTMENT(get_gobject(hadjustment)),
-		NIL_P(vadjustment)?0:GTK_ADJUSTMENT(get_gobject(hadjustment)));
-    set_widget(self, layout);
+		NIL_P(hadjustment)?0:GTK_ADJUSTMENT(RVAL2GOBJ(hadjustment)),
+		NIL_P(vadjustment)?0:GTK_ADJUSTMENT(RVAL2GOBJ(hadjustment)));
+    RBGTK_INITIALIZE(self, layout);
     return Qnil;
 }
 
@@ -31,8 +31,8 @@ static VALUE
 layout_put(self, widget, x, y)
     VALUE self, widget, x, y;
 {
-    gtk_layout_put(GTK_LAYOUT(get_widget(self)),
-		   get_widget(widget),
+    gtk_layout_put(GTK_LAYOUT(RVAL2GOBJ(self)),
+		   GTK_WIDGET(RVAL2GOBJ(widget)),
 		   NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -41,8 +41,8 @@ static VALUE
 layout_move(self, widget, x,  y)
     VALUE self, widget, x, y;
 {
-    gtk_layout_move(GTK_LAYOUT(get_widget(self)),
-		    get_widget(widget),
+    gtk_layout_move(GTK_LAYOUT(RVAL2GOBJ(self)),
+		    GTK_WIDGET(RVAL2GOBJ(widget)),
 		    NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -51,7 +51,7 @@ static VALUE
 layout_set_size(self, width, height)
     VALUE self, width, height;
 {
-    gtk_layout_set_size(GTK_LAYOUT(get_widget(self)),
+    gtk_layout_set_size(GTK_LAYOUT(RVAL2GOBJ(self)),
 			NUM2UINT(width),
 			NUM2UINT(height));
     return self;
@@ -62,7 +62,7 @@ layout_get_hadjustment(self)
     VALUE self;
 {
     GtkAdjustment* hadjustment;
-    hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT(get_widget(self)));
+    hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT(RVAL2GOBJ(self)));
     return GOBJ2RVAL(hadjustment);
 }
 
@@ -71,7 +71,7 @@ layout_get_vadjustment(self)
     VALUE self;
 {
     GtkAdjustment* vadjustment;
-    vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT(get_widget(self)));
+    vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT(RVAL2GOBJ(self)));
     return GOBJ2RVAL(vadjustment);
 }
 
@@ -79,8 +79,8 @@ static VALUE
 layout_set_hadjustment(self, adjustment)
     VALUE self, adjustment;
 {
-    gtk_layout_set_hadjustment(GTK_LAYOUT(get_widget(self)),
-			       GTK_ADJUSTMENT(get_gobject(adjustment)));
+    gtk_layout_set_hadjustment(GTK_LAYOUT(RVAL2GOBJ(self)),
+			       GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
     return self;
 }
 
@@ -88,8 +88,8 @@ static VALUE
 layout_set_vadjustment(self, adjustment)
     VALUE self, adjustment;
 {
-    gtk_layout_set_vadjustment(GTK_LAYOUT(get_widget(self)),
-			       GTK_ADJUSTMENT(get_gobject(adjustment)));
+    gtk_layout_set_vadjustment(GTK_LAYOUT(RVAL2GOBJ(self)),
+			       GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
     return self;
 }
 
@@ -97,7 +97,7 @@ static VALUE
 layout_freeze(self)
     VALUE self;
 {
-    gtk_layout_freeze(GTK_LAYOUT(get_widget(self)));
+    gtk_layout_freeze(GTK_LAYOUT(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -105,7 +105,7 @@ static VALUE
 layout_thaw(self)
     VALUE self;
 {
-    gtk_layout_thaw(GTK_LAYOUT(get_widget(self)));
+    gtk_layout_thaw(GTK_LAYOUT(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -113,7 +113,7 @@ static VALUE
 layout_get_bin_window(self)
     VALUE self;
 {
-    return make_gdkwindow(GTK_LAYOUT(get_widget(self))->bin_window);
+    return make_gdkwindow(GTK_LAYOUT(RVAL2GOBJ(self))->bin_window);
 }
 
 void

@@ -2,8 +2,8 @@
 
   rbgtksocket.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -14,7 +14,7 @@ static VALUE
 socket_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_socket_new());
+    RBGTK_INITIALIZE(self, gtk_socket_new());
     return Qnil;
 }
 
@@ -22,7 +22,7 @@ static VALUE
 socket_steal(self, wid)
     VALUE self, wid;
 {
-    gtk_socket_steal(GTK_SOCKET(get_widget(self)),
+    gtk_socket_steal(GTK_SOCKET(RVAL2GOBJ(self)),
                      (guint32)NUM2INT(wid));
     return Qnil;
 }
@@ -31,7 +31,7 @@ static VALUE
 socket_plug_window(self)
     VALUE self;
 {
-    return make_gdkwindow(GTK_SOCKET(get_widget(self))->plug_window);
+    return make_gdkwindow(GTK_SOCKET(RVAL2GOBJ(self))->plug_window);
 }
 
 void Init_gtk_socket()

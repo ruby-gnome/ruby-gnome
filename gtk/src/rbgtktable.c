@@ -3,8 +3,8 @@
 
   rbgtktable.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,9 +22,9 @@ tbl_initialize(argc, argv, self)
     VALUE row, col, homogeneous;
 
     rb_scan_args(argc, argv, "21", &row, &col, &homogeneous);
-    set_widget(self, gtk_table_new(NUM2INT(row),
-					   NUM2INT(col),
-					   RTEST(homogeneous)));
+    RBGTK_INITIALIZE(self, gtk_table_new(NUM2INT(row),
+										 NUM2INT(col),
+										 RTEST(homogeneous)));
     return Qnil;
 }
 
@@ -41,18 +41,18 @@ tbl_attach(argc, argv, self)
     xopt = yopt = GTK_EXPAND | GTK_FILL;
     xspc = yspc = 0;
     rb_scan_args(argc, argv, "54",
-		 &child, &left, &right, &top, &bottom,
-		 &arg0, &arg1, &arg2, &arg3);
+				 &child, &left, &right, &top, &bottom,
+				 &arg0, &arg1, &arg2, &arg3);
     if (!NIL_P(arg0)) xopt = NUM2INT(arg0);
     if (!NIL_P(arg1)) yopt = NUM2INT(arg1);
     if (!NIL_P(arg2)) xspc = NUM2INT(arg2);
     if (!NIL_P(arg3)) yspc = NUM2INT(arg3);
 
-    gtk_table_attach(GTK_TABLE(get_widget(self)),
-		     get_widget(child),
-		     NUM2INT(left),NUM2INT(right),
-		     NUM2INT(top),NUM2INT(bottom),
-		     xopt, yopt, xspc, yspc);
+    gtk_table_attach(GTK_TABLE(RVAL2GOBJ(self)),
+					 GTK_WIDGET(RVAL2GOBJ(child)),
+					 NUM2INT(left),NUM2INT(right),
+					 NUM2INT(top),NUM2INT(bottom),
+					 xopt, yopt, xspc, yspc);
 
     return self;
 }
@@ -61,8 +61,8 @@ static VALUE
 tbl_set_row_spacing(self, row, spc)
     VALUE self, row, spc;
 {
-    gtk_table_set_row_spacing(GTK_TABLE(get_widget(self)),
-			      NUM2INT(row), NUM2INT(spc));
+    gtk_table_set_row_spacing(GTK_TABLE(RVAL2GOBJ(self)),
+							  NUM2INT(row), NUM2INT(spc));
     return self;
 }
 
@@ -70,8 +70,8 @@ static VALUE
 tbl_set_col_spacing(self, col, spc)
     VALUE self, col, spc;
 {
-    gtk_table_set_col_spacing(GTK_TABLE(get_widget(self)),
-			      NUM2INT(col), NUM2INT(spc));
+    gtk_table_set_col_spacing(GTK_TABLE(RVAL2GOBJ(self)),
+							  NUM2INT(col), NUM2INT(spc));
     return self;
 }
 
@@ -79,7 +79,7 @@ static VALUE
 tbl_set_row_spacings(self, spc)
     VALUE self, spc;
 {
-    gtk_table_set_row_spacings(GTK_TABLE(get_widget(self)), NUM2INT(spc));
+    gtk_table_set_row_spacings(GTK_TABLE(RVAL2GOBJ(self)), NUM2INT(spc));
     return self;
 }
 
@@ -87,7 +87,7 @@ static VALUE
 tbl_set_col_spacings(self, spc)
     VALUE self, spc;
 {
-    gtk_table_set_col_spacings(GTK_TABLE(get_widget(self)), NUM2INT(spc));
+    gtk_table_set_col_spacings(GTK_TABLE(RVAL2GOBJ(self)), NUM2INT(spc));
     return self;
 }
 

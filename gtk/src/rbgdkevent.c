@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2002/06/11 17:47:46 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -356,14 +356,14 @@ static VALUE
 gdkeventproperty_atom(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->property.atom);
+    return INT2NUM((int)(get_gdkevent(self)->property.atom));
 }
 
 static VALUE
 gdkeventproperty_time(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->property.time);
+    return INT2NUM((int)(get_gdkevent(self)->property.time));
 }
 
 static VALUE
@@ -452,7 +452,7 @@ static VALUE
 gdkeventclient_message_type(self)
     VALUE self;
 {
-    return INT2NUM(get_gdkevent(self)->client.message_type);
+    return INT2NUM((int)(get_gdkevent(self)->client.message_type));
 }
 
 static VALUE
@@ -469,7 +469,7 @@ gdkeventclient_data_byte(self)
     VALUE ary = rb_ary_new2(20);
     int i;
     for (i=0; i<20; i++)
-	rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.b[i]));
+		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.b[i]));
 
     return ary;
 }
@@ -481,7 +481,7 @@ gdkeventclient_data_short(self)
     VALUE ary = rb_ary_new2(10);
     int i;
     for (i=0; i<10; i++)
-	rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.s[i]));
+		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.s[i]));
 
     return ary;
 }
@@ -493,7 +493,7 @@ gdkeventclient_data_long(self)
     VALUE ary = rb_ary_new2(5);
     int i;
     for (i=0; i<5; i++)
-	rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.l[i]));
+		rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.l[i]));
 
     return ary;
 }
@@ -554,7 +554,7 @@ Init_gtk_gdk_event()
     rb_define_singleton_method(gdkEvent, "peek", gdkevent_s_peek, 0);
     rb_define_singleton_method(gdkEvent, "get", gdkevent_s_get, 0);
     rb_define_singleton_method(gdkEvent, "get_graphics_expose", 
-			       gdkevent_s_get_graphics_expose, 1);
+							   gdkevent_s_get_graphics_expose, 1);
     rb_define_method(gdkEvent, "put", gdkevent_put, 0);
     rb_define_method(gdkEvent, "copy", gdkevent_copy, 0);
     rb_define_method(gdkEvent, "get_time", gdkevent_get_time, 0);
@@ -642,11 +642,11 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventClient, "data_short", gdkeventclient_data_short, 0);
     rb_define_method(gdkEventClient, "data_long", gdkeventclient_data_long, 0);
     rb_define_method(gdkEventClient, "send_client_message", 
-		     gdkeventclient_send_client_message, 1);
+					 gdkeventclient_send_client_message, 1);
     rb_define_method(gdkEventClient, "send_clientmessage_toall", 
-		     gdkeventclient_send_clientmessage_toall, 0);
+					 gdkeventclient_send_clientmessage_toall, 0);
     rb_define_alias(gdkEventClient, "send_client_message_toall",
-                                    "send_clientmessage_toall");
+					"send_clientmessage_toall");
 
     rbgobj_register_r2g_func(gdkEvent, &gdkevent_r2g);
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);

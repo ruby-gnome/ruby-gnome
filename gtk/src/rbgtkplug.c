@@ -2,8 +2,8 @@
 
   rbgdkpixmap.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -15,7 +15,7 @@ plug_initialize(self, socket_id)
     VALUE self, socket_id;
 {
     GtkWidget* plug = gtk_plug_new((guint32)NUM2INT(socket_id));
-    set_widget(self, plug);
+    RBGTK_INITIALIZE(self, plug);
     return Qnil;
 }
 
@@ -23,7 +23,7 @@ static VALUE
 plug_construct(self, socket_id)
     VALUE self, socket_id;
 {
-    gtk_plug_construct(GTK_PLUG(get_widget(self)), (guint32)NUM2INT(socket_id));
+    gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), (guint32)NUM2INT(socket_id));
     return Qnil;
 }
 

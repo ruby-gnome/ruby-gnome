@@ -3,8 +3,8 @@
 
   rbgtkcalendar.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,7 @@ static VALUE
 cal_init(self)
     VALUE self;
 {
-    set_widget(self, gtk_calendar_new());
+    RBGTK_INITIALIZE(self, gtk_calendar_new());
     return Qnil;
 }
 
@@ -33,7 +33,7 @@ cal_select_month(self, month, year)
 {
     gint ret;
 
-    ret = gtk_calendar_select_month(GTK_CALENDAR(get_widget(self)),
+    ret = gtk_calendar_select_month(GTK_CALENDAR(RVAL2GOBJ(self)),
 				    NUM2INT(month)-1,
 				    NUM2INT(year));
     return INT2FIX(ret);
@@ -43,7 +43,7 @@ static VALUE
 cal_select_day(self, day)
     VALUE self, day;
 {
-    gtk_calendar_select_day(GTK_CALENDAR(get_widget(self)), NUM2INT(day));
+    gtk_calendar_select_day(GTK_CALENDAR(RVAL2GOBJ(self)), NUM2INT(day));
     return self;
 }
 
@@ -53,7 +53,7 @@ cal_mark_day(self, day)
 {
     gint ret;
 
-    ret = gtk_calendar_mark_day(GTK_CALENDAR(get_widget(self)), NUM2INT(day));
+    ret = gtk_calendar_mark_day(GTK_CALENDAR(RVAL2GOBJ(self)), NUM2INT(day));
     return INT2FIX(ret);
 }
 
@@ -63,7 +63,7 @@ cal_unmark_day(self, day)
 {
     gint ret;
 
-    ret = gtk_calendar_unmark_day(GTK_CALENDAR(get_widget(self)),
+    ret = gtk_calendar_unmark_day(GTK_CALENDAR(RVAL2GOBJ(self)),
 				  NUM2INT(day));
     return INT2FIX(ret);
 }
@@ -72,7 +72,7 @@ static VALUE
 cal_clear_marks(self)
     VALUE self;
 {
-    gtk_calendar_clear_marks(GTK_CALENDAR(get_widget(self)));
+    gtk_calendar_clear_marks(GTK_CALENDAR(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -80,7 +80,7 @@ static VALUE
 cal_display_options(self, flags)
     VALUE self, flags;
 {
-    gtk_calendar_display_options(GTK_CALENDAR(get_widget(self)),
+    gtk_calendar_display_options(GTK_CALENDAR(RVAL2GOBJ(self)),
 				 NUM2INT(flags));
     return self;
 }
@@ -92,7 +92,7 @@ cal_get_date(self)
     VALUE ret;
     guint year, month, day;
 
-    gtk_calendar_get_date(GTK_CALENDAR(get_widget(self)),
+    gtk_calendar_get_date(GTK_CALENDAR(RVAL2GOBJ(self)),
 			  &year, &month, &day);
     ret = rb_ary_new();
     rb_ary_push(ret, INT2FIX(year));
@@ -107,7 +107,7 @@ cal_get_year(self)
 {
     guint year, month, day;
 
-    gtk_calendar_get_date(GTK_CALENDAR(get_widget(self)),
+    gtk_calendar_get_date(GTK_CALENDAR(RVAL2GOBJ(self)),
 			  &year, &month, &day);
     return INT2FIX(year);
 }
@@ -118,7 +118,7 @@ cal_get_month(self)
 {
     guint year, month, day;
 
-    gtk_calendar_get_date(GTK_CALENDAR(get_widget(self)),
+    gtk_calendar_get_date(GTK_CALENDAR(RVAL2GOBJ(self)),
 			  &year, &month, &day);
     return INT2FIX(month+1);
 }
@@ -129,7 +129,7 @@ cal_get_day(self)
 {
     guint year, month, day;
 
-    gtk_calendar_get_date(GTK_CALENDAR(get_widget(self)),
+    gtk_calendar_get_date(GTK_CALENDAR(RVAL2GOBJ(self)),
 			  &year, &month, &day);
     return INT2FIX(day);
 }
@@ -138,7 +138,7 @@ static VALUE
 cal_freeze(self)
     VALUE self;
 {
-    gtk_calendar_freeze(GTK_CALENDAR(get_widget(self)));
+    gtk_calendar_freeze(GTK_CALENDAR(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -146,7 +146,7 @@ static VALUE
 cal_thaw(self)
     VALUE self;
 {
-    gtk_calendar_thaw(GTK_CALENDAR(get_widget(self)));
+    gtk_calendar_thaw(GTK_CALENDAR(RVAL2GOBJ(self)));
     return self;
 }
 

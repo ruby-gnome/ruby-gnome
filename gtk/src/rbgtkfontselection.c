@@ -11,7 +11,7 @@ static VALUE
 fs_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_font_selection_new());
+    RBGTK_INITIALIZE(self, gtk_font_selection_new());
     return Qnil;
 }
 
@@ -20,7 +20,7 @@ fs_get_font(self)
     VALUE self;
 {
     return make_gdkfont(gtk_font_selection_get_font(
-                GTK_FONT_SELECTION(get_widget(self))));
+                GTK_FONT_SELECTION(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -28,7 +28,7 @@ fs_get_font_name(self)
     VALUE self;
 {
     return CSTR2OBJ(gtk_font_selection_get_font_name(
-                GTK_FONT_SELECTION(get_widget(self))));
+                GTK_FONT_SELECTION(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -36,7 +36,7 @@ fs_set_font_name(self, name)
     VALUE self, name;
 {
     gboolean retval = gtk_font_selection_set_font_name(
-                            GTK_FONT_SELECTION(get_widget(self)),
+                            GTK_FONT_SELECTION(RVAL2GOBJ(self)),
                             STR2CSTR(name));
     return retval ? Qtrue : Qfalse;
 }
@@ -46,7 +46,7 @@ fs_get_preview_text(self)
     VALUE self;
 {
     return CSTR2OBJ(gtk_font_selection_get_preview_text(
-                GTK_FONT_SELECTION(get_widget(self))));
+                GTK_FONT_SELECTION(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -54,7 +54,7 @@ fs_set_preview_text(self, text)
     VALUE self, text;
 {
     gtk_font_selection_set_preview_text(
-        GTK_FONT_SELECTION(get_widget(self)),
+        GTK_FONT_SELECTION(RVAL2GOBJ(self)),
         STR2CSTR(text));
     return Qnil;
 }

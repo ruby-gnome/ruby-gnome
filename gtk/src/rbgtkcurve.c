@@ -3,8 +3,8 @@
 
   rbgtkcurve.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 curve_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_curve_new());
+    RBGTK_INITIALIZE(self, gtk_curve_new());
     return Qnil;
 }
 
@@ -25,7 +25,7 @@ static VALUE
 curve_reset(self)
     VALUE self;
 {
-    gtk_curve_reset(GTK_CURVE(get_widget(self)));
+    gtk_curve_reset(GTK_CURVE(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -33,7 +33,7 @@ static VALUE
 curve_set_gamma(self, gamma)
     VALUE self, gamma;
 {
-    gtk_curve_set_gamma(GTK_CURVE(get_widget(self)), NUM2DBL(gamma));
+    gtk_curve_set_gamma(GTK_CURVE(RVAL2GOBJ(self)), NUM2DBL(gamma));
     return self;
 }
 
@@ -41,7 +41,7 @@ static VALUE
 curve_set_range(self, min_x, max_x, min_y, max_y)
     VALUE self, min_x, max_x, min_y, max_y;
 {
-    gtk_curve_set_range(GTK_CURVE(get_widget(self)),
+    gtk_curve_set_range(GTK_CURVE(RVAL2GOBJ(self)),
 			NUM2DBL(min_x), NUM2DBL(max_x),
 			NUM2DBL(min_y), NUM2DBL(max_y));
     return self;
@@ -51,7 +51,7 @@ static VALUE
 curve_set_curve_type(self, type)
     VALUE self, type;
 {
-    gtk_curve_set_curve_type(GTK_CURVE(get_widget(self)), NUM2INT(type));
+    gtk_curve_set_curve_type(GTK_CURVE(RVAL2GOBJ(self)), NUM2INT(type));
     return self;
 }
 
@@ -66,7 +66,7 @@ curve_set_vector(self, length, vector)
     c_vec = ALLOCA_N(gfloat, len);
     for (i = 0; i < len; i++)
       c_vec[i] = NUM2DBL(RARRAY(vector)->ptr[i]);
-    gtk_curve_set_vector(GTK_CURVE(get_widget(self)), len, c_vec);
+    gtk_curve_set_vector(GTK_CURVE(RVAL2GOBJ(self)), len, c_vec);
     return self;
 }
 
@@ -80,7 +80,7 @@ curve_get_vector(self, length)
     VALUE vector = rb_ary_new2(len);
 
     c_vec = ALLOCA_N(gfloat, len);
-    gtk_curve_get_vector(GTK_CURVE(get_widget(self)), len, c_vec);
+    gtk_curve_get_vector(GTK_CURVE(RVAL2GOBJ(self)), len, c_vec);
     for (i = 0; i < len; i++)
       rb_ary_push(vector, rb_float_new(c_vec[i]));
     return vector;

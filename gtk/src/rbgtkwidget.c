@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,11 +13,13 @@
 
 #include "global.h"
 
+#define _SELF(w) (GTK_WIDGET(RVAL2GOBJ(self)))
+
 static VALUE
 widget_show(self)
     VALUE self;
 {
-    gtk_widget_show(get_widget(self));
+    gtk_widget_show(_SELF(self));
     return self;
 }
 
@@ -25,7 +27,7 @@ static VALUE
 widget_show_all(self)
     VALUE self;
 {
-    gtk_widget_show_all(get_widget(self));
+    gtk_widget_show_all(_SELF(self));
     return self;
 }
 
@@ -33,7 +35,7 @@ static VALUE
 widget_show_now(self)
     VALUE self;
 {
-    gtk_widget_show_now(get_widget(self));
+    gtk_widget_show_now(_SELF(self));
     return self;
 }
 
@@ -41,7 +43,7 @@ static VALUE
 widget_hide(self)
     VALUE self;
 {
-    gtk_widget_hide(get_widget(self));
+    gtk_widget_hide(_SELF(self));
     return self;
 }
 
@@ -49,7 +51,7 @@ static VALUE
 widget_hide_all(self)
     VALUE self;
 {
-    gtk_widget_hide_all(get_widget(self));
+    gtk_widget_hide_all(_SELF(self));
     return self;
 }
 
@@ -57,7 +59,7 @@ static VALUE
 widget_map(self)
     VALUE self;
 {
-    gtk_widget_map(get_widget(self));
+    gtk_widget_map(_SELF(self));
     return self;
 }
 
@@ -65,7 +67,7 @@ static VALUE
 widget_unmap(self)
     VALUE self;
 {
-    gtk_widget_unmap(get_widget(self));
+    gtk_widget_unmap(_SELF(self));
     return self;
 }
 
@@ -73,7 +75,7 @@ static VALUE
 widget_realize(self)
     VALUE self;
 {
-    gtk_widget_realize(get_widget(self));
+    gtk_widget_realize(_SELF(self));
     return self;
 }
 
@@ -81,7 +83,7 @@ static VALUE
 widget_unrealize(self)
     VALUE self;
 {
-    gtk_widget_unrealize(get_widget(self));
+    gtk_widget_unrealize(_SELF(self));
     return self;
 }
 
@@ -89,7 +91,7 @@ static VALUE
 widget_queue_draw(self)
     VALUE self;
 {
-    gtk_widget_queue_draw(get_widget(self));
+    gtk_widget_queue_draw(_SELF(self));
     return self;
 }
 
@@ -97,7 +99,7 @@ static VALUE
 widget_queue_resize(self)
     VALUE self;
 {
-    gtk_widget_queue_resize(get_widget(self));
+    gtk_widget_queue_resize(_SELF(self));
     return self;
 }
 
@@ -105,7 +107,7 @@ static VALUE
 widget_queue_clear(self)
     VALUE self;
 {
-    gtk_widget_queue_clear(get_widget(self));
+    gtk_widget_queue_clear(_SELF(self));
     return self;
 }
 
@@ -113,7 +115,7 @@ static VALUE
 widget_draw(self, rect)
     VALUE self, rect;
 {
-    gtk_widget_draw(get_widget(self), get_gdkrectangle(rect));
+    gtk_widget_draw(_SELF(self), get_gdkrectangle(rect));
     return self;
 }
 
@@ -122,7 +124,7 @@ widget_size_request(self)
     VALUE self;
 {
     GtkRequisition req;
-    gtk_widget_size_request(get_widget(self), &req);
+    gtk_widget_size_request(_SELF(self), &req);
     return make_grequisition(&req);
 }
 
@@ -130,15 +132,15 @@ static VALUE
 widget_size_allocate(self, alloc)
     VALUE self, alloc;
 {
-    gtk_widget_size_allocate(get_widget(self), get_gallocation(alloc));
+    gtk_widget_size_allocate(_SELF(self), get_gallocation(alloc));
     return self;
 }
 
 static VALUE
 widget_add_accel(self, sig, accel, key, mod, flag)
-     VALUE self, sig, accel, key, mod, flag;
+	VALUE self, sig, accel, key, mod, flag;
 {
-    gtk_widget_add_accelerator(get_widget(self),
+    gtk_widget_add_accelerator(_SELF(self),
                                STR2CSTR(sig),
                                get_gtkaccelgrp(accel),
                                NUM2INT(key),
@@ -151,7 +153,7 @@ static VALUE
 widget_rm_accel(self, accel, key, mod)
     VALUE self, accel, key, mod;
 {
-    gtk_widget_remove_accelerator(get_widget(self),
+    gtk_widget_remove_accelerator(_SELF(self),
                                   get_gtkaccelgrp(accel),
                                   NUM2INT(key),
                                   NUM2INT(mod));
@@ -162,21 +164,21 @@ static VALUE
 widget_event(self, event)
     VALUE self, event;
 {
-    return INT2NUM(gtk_widget_event(get_widget(self), get_gdkevent(event)));
+    return INT2NUM(gtk_widget_event(_SELF(self), get_gdkevent(event)));
 }
 
 static VALUE
 widget_activate(self)
     VALUE self;
 {
-    return (gtk_widget_activate(get_widget(self)) ? Qtrue : Qfalse);
+    return (gtk_widget_activate(_SELF(self)) ? Qtrue : Qfalse);
 }
 
 static VALUE
 widget_grab_focus(self)
     VALUE self;
 {
-    gtk_widget_grab_focus(get_widget(self));
+    gtk_widget_grab_focus(_SELF(self));
     return self;
 }
 
@@ -184,7 +186,7 @@ static VALUE
 widget_grab_default(self)
     VALUE self;
 {
-    gtk_widget_grab_default(get_widget(self));
+    gtk_widget_grab_default(_SELF(self));
     return self;
 }
 
@@ -192,7 +194,7 @@ static VALUE
 widget_reparent(self, parent)
     VALUE self, parent;
 {
-    gtk_widget_reparent(get_widget(self), get_widget(parent));
+    gtk_widget_reparent(_SELF(self), _SELF(parent));
     return self;
 }
 
@@ -200,7 +202,7 @@ static VALUE
 widget_intersect(self, area, intersect)
     VALUE self, area, intersect;
 {
-    return INT2NUM(gtk_widget_intersect(get_widget(self),
+    return INT2NUM(gtk_widget_intersect(_SELF(self),
                                         get_gdkrectangle(area),
                                         get_gdkrectangle(intersect)));
 }
@@ -209,7 +211,7 @@ static VALUE
 widget_set_state(self, state)
     VALUE self, state;
 {
-    gtk_widget_set_state(get_widget(self), (GtkStateType)NUM2INT(state));
+    gtk_widget_set_state(_SELF(self), (GtkStateType)NUM2INT(state));
     return self;
 }
 
@@ -217,7 +219,7 @@ static VALUE
 widget_set_style(self, style)
     VALUE self, style;
 {
-    gtk_widget_set_style(get_widget(self), get_gstyle(style));
+    gtk_widget_set_style(_SELF(self), get_gstyle(style));
     return self;
 }
 
@@ -225,7 +227,7 @@ static VALUE
 widget_set_app_paintable(self, app_paintable)
     VALUE self, app_paintable;
 {
-    gtk_widget_set_app_paintable(get_widget(self), RTEST(app_paintable));
+    gtk_widget_set_app_paintable(_SELF(self), RTEST(app_paintable));
     return self;
 }
 
@@ -233,7 +235,7 @@ static VALUE
 widget_set_parent(self, parent)
     VALUE self, parent;
 {
-    gtk_widget_set_parent(get_widget(self), get_widget(parent));
+    gtk_widget_set_parent(_SELF(self), _SELF(parent));
     return self;
 }
 
@@ -241,7 +243,7 @@ static VALUE
 widget_set_name(self, name)
     VALUE self, name;
 {
-    gtk_widget_set_name(get_widget(self), STR2CSTR(name));
+    gtk_widget_set_name(_SELF(self), STR2CSTR(name));
     return self;
 }
 
@@ -249,14 +251,14 @@ static VALUE
 widget_get_name(self)
     VALUE self;
 {
-    return rb_str_new2(gtk_widget_get_name(get_widget(self)));
+    return rb_str_new2(gtk_widget_get_name(_SELF(self)));
 }
 
 static VALUE
 widget_set_sensitive(self, sensitive)
     VALUE self, sensitive;
 {
-    gtk_widget_set_sensitive(get_widget(self), RTEST(sensitive));
+    gtk_widget_set_sensitive(_SELF(self), RTEST(sensitive));
     return self;
 }
 
@@ -264,7 +266,7 @@ static VALUE
 widget_set_uposition(self, x, y)
     VALUE self, x, y;
 {
-    gtk_widget_set_uposition(get_widget(self), NUM2INT(x), NUM2INT(y));
+    gtk_widget_set_uposition(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -272,7 +274,7 @@ static VALUE
 widget_set_usize(self, w, h)
     VALUE self, w, h;
 {
-    gtk_widget_set_usize(get_widget(self), NUM2INT(w), NUM2INT(h));
+    gtk_widget_set_usize(_SELF(self), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -280,7 +282,7 @@ static VALUE
 widget_set_events(self, events)
     VALUE self, events;
 {
-    gtk_widget_set_events(get_widget(self), NUM2INT(events));
+    gtk_widget_set_events(_SELF(self), NUM2INT(events));
     return self;
 }
 
@@ -288,7 +290,7 @@ static VALUE
 widget_set_extension_events(self, mode)
     VALUE self, mode;
 {
-    gtk_widget_set_extension_events(get_widget(self),
+    gtk_widget_set_extension_events(_SELF(self),
                                     (GdkExtensionMode)NUM2INT(mode));
     return self;
 }
@@ -297,7 +299,7 @@ static VALUE
 widget_add_events(self, events)
     VALUE self, events;
 {
-    gtk_widget_add_events(get_widget(self), NUM2INT(events));
+    gtk_widget_add_events(_SELF(self), NUM2INT(events));
     return self;
 }
 
@@ -305,7 +307,7 @@ static VALUE
 widget_unparent(self)
     VALUE self;
 {
-    gtk_widget_unparent(get_widget(self));
+    gtk_widget_unparent(_SELF(self));
     return self;
 }
 
@@ -313,49 +315,49 @@ static VALUE
 widget_window(self)
     VALUE self;
 {
-    return make_gdkwindow(get_widget(self)->window);
+    return make_gdkwindow(_SELF(self)->window);
 }
 
 static VALUE
 widget_get_toplevel(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(gtk_widget_get_toplevel(get_widget(self))));
+    return GOBJ2RVAL(gtk_widget_get_toplevel(_SELF(self)));
 }
 
 static VALUE
 widget_get_ancestor(self, type)
     VALUE self, type;
 {
-    GtkWidget *widget = get_widget(self);
+    GtkWidget *widget = _SELF(self);
 #if 0
     if (rb_obj_is_kind_of(type, rb_cClass)) {
     }
 #endif
     widget = gtk_widget_get_ancestor(widget, NUM2INT(type));
 
-    return get_value_from_gobject(GTK_OBJECT(widget));
+    return GOBJ2RVAL(widget);
 }
 
 static VALUE
 widget_get_colormap(self)
     VALUE self;
 {
-    return make_gdkcmap(gtk_widget_get_colormap(get_widget(self)));
+    return make_gdkcmap(gtk_widget_get_colormap(_SELF(self)));
 }
 
 static VALUE
 widget_get_visual(self)
     VALUE self;
 {
-    return make_gdkvisual(gtk_widget_get_visual(get_widget(self)));
+    return make_gdkvisual(gtk_widget_get_visual(_SELF(self)));
 }
 
 static VALUE
 widget_get_style(self)
     VALUE self;
 {
-    return make_gstyle(gtk_widget_get_style(get_widget(self)));
+    return make_gstyle(gtk_widget_get_style(_SELF(self)));
 }
 
 static VALUE
@@ -364,7 +366,7 @@ widget_get_pointer(self)
 {
     int x, y;
 
-    gtk_widget_get_pointer(get_widget(self), &x, &y);
+    gtk_widget_get_pointer(_SELF(self), &x, &y);
     return rb_assoc_new(INT2FIX(x), INT2FIX(y));
 }
 
@@ -372,14 +374,14 @@ static VALUE
 widget_is_ancestor(self, ancestor)
     VALUE self, ancestor;
 {
-    return (gtk_widget_is_ancestor(get_widget(self), get_widget(ancestor)) ? Qtrue : Qfalse);
+    return (gtk_widget_is_ancestor(_SELF(self), _SELF(ancestor)) ? Qtrue : Qfalse);
 }
 
 static VALUE
 widget_hide_on_delete(self)
-  VALUE self;
+	VALUE self;
 {
-    gtk_widget_hide_on_delete(get_widget(self));
+    gtk_widget_hide_on_delete(_SELF(self));
     return Qnil;
 }
 
@@ -387,14 +389,14 @@ static VALUE
 widget_get_events(self)
     VALUE self;
 {
-    return INT2NUM(gtk_widget_get_events(get_widget(self)));
+    return INT2NUM(gtk_widget_get_events(_SELF(self)));
 }
 
 static VALUE
 widget_get_extension_events(self)
     VALUE self;
 {
-    return INT2NUM(gtk_widget_get_extension_events(get_widget(self)));
+    return INT2NUM(gtk_widget_get_extension_events(_SELF(self)));
 }
 
 static VALUE
@@ -434,25 +436,25 @@ static VALUE \
 widget_ ## STATE (self) \
     VALUE self; \
 { \
-    return( GTK_WIDGET_ ## STATE (get_widget(self))? Qtrue: Qfalse ); \
+    return( GTK_WIDGET_ ## STATE (_SELF(self))? Qtrue: Qfalse ); \
 }
 DEFINE_IS_WIDGET(TOPLEVEL)
-DEFINE_IS_WIDGET(NO_WINDOW)
-DEFINE_IS_WIDGET(REALIZED)
-DEFINE_IS_WIDGET(MAPPED)
-DEFINE_IS_WIDGET(VISIBLE)
-DEFINE_IS_WIDGET(DRAWABLE)
-DEFINE_IS_WIDGET(SENSITIVE)
-DEFINE_IS_WIDGET(PARENT_SENSITIVE)
-DEFINE_IS_WIDGET(IS_SENSITIVE)
-DEFINE_IS_WIDGET(CAN_FOCUS)
-DEFINE_IS_WIDGET(HAS_FOCUS)
-DEFINE_IS_WIDGET(CAN_DEFAULT)
-DEFINE_IS_WIDGET(HAS_DEFAULT)
-DEFINE_IS_WIDGET(HAS_GRAB)
-DEFINE_IS_WIDGET(RC_STYLE)
+	DEFINE_IS_WIDGET(NO_WINDOW)
+	DEFINE_IS_WIDGET(REALIZED)
+	DEFINE_IS_WIDGET(MAPPED)
+	DEFINE_IS_WIDGET(VISIBLE)
+	DEFINE_IS_WIDGET(DRAWABLE)
+	DEFINE_IS_WIDGET(SENSITIVE)
+	DEFINE_IS_WIDGET(PARENT_SENSITIVE)
+	DEFINE_IS_WIDGET(IS_SENSITIVE)
+	DEFINE_IS_WIDGET(CAN_FOCUS)
+	DEFINE_IS_WIDGET(HAS_FOCUS)
+	DEFINE_IS_WIDGET(CAN_DEFAULT)
+	DEFINE_IS_WIDGET(HAS_DEFAULT)
+	DEFINE_IS_WIDGET(HAS_GRAB)
+	DEFINE_IS_WIDGET(RC_STYLE)
 
-static VALUE
+	static VALUE
 widget_set_default_cmap(self, cmap)
     VALUE self, cmap;
 {
@@ -493,7 +495,7 @@ static VALUE
 widget_shape_combine_mask(self, shape_mask, offset_x, offset_y)
     VALUE self, shape_mask, offset_x, offset_y;
 {
-    gtk_widget_shape_combine_mask(get_widget(self),
+    gtk_widget_shape_combine_mask(_SELF(self),
                                   get_gdkbitmap(shape_mask),
                                   NUM2INT(offset_x),
                                   NUM2INT(offset_y));
@@ -504,13 +506,13 @@ static VALUE
 widget_get_alloc(self)
     VALUE self;
 {
-    return make_gallocation(&(get_widget(self)->allocation));
+    return make_gallocation(&(_SELF(self)->allocation));
 }
 static VALUE
 widget_set_alloc(self, x,y,w,h)
     VALUE self, x,y,w,h;
 {
-    GtkAllocation *a = &(get_widget(self)->allocation);
+    GtkAllocation *a = &(_SELF(self)->allocation);
     a->x      = NUM2INT(x);
     a->y      = NUM2INT(y);
     a->width  = NUM2INT(w);
@@ -522,14 +524,14 @@ static VALUE
 widget_get_requisition(self)
     VALUE self;
 {
-    return make_grequisition(&(get_widget(self)->requisition));
+    return make_grequisition(&(_SELF(self)->requisition));
 }
 
 static VALUE
 widget_set_requisition(self, w,h)
     VALUE self,w,h;
 {
-    GtkRequisition *r = &(get_widget(self)->requisition);
+    GtkRequisition *r = &(_SELF(self)->requisition);
     r->width  = NUM2INT(w);
     r->height = NUM2INT(h);
     return self;
@@ -541,7 +543,7 @@ widget_get_child_requisition(self)
 {
     GtkRequisition r;
 
-    gtk_widget_get_child_requisition(get_widget(self), &r);
+    gtk_widget_get_child_requisition(_SELF(self), &r);
     return make_grequisition(&r);
 }
 
@@ -549,14 +551,14 @@ static VALUE
 widget_state(self)
     VALUE self;
 {
-    return INT2FIX(get_widget(self)->state);
+    return INT2FIX(_SELF(self)->state);
 }
 
 static VALUE
 widget_parent(self)
     VALUE self;
 {
-    GtkWidget *p = get_widget(self)->parent;
+    GtkWidget *p = _SELF(self)->parent;
     return p ? GOBJ2RVAL(p) : Qnil;
 }
 
@@ -570,7 +572,7 @@ widget_path(self)
     VALUE str_path;
     /* VALUE str_path_reversed; */
 
-    gtk_widget_path(get_widget(self), &path_length, &path, &path_reversed);
+    gtk_widget_path(_SELF(self), &path_length, &path, &path_reversed);
     str_path = rb_str_new(path, path_length);
     /* str_path_reversed = rb_str_new(path_reversed, path_length); */
     g_free(path);
@@ -589,7 +591,7 @@ widget_class_path(self)
     VALUE str_path;
     /* VALUE str_path_reversed; */
 
-    gtk_widget_class_path(get_widget(self), &path_length, &path, &path_reversed);
+    gtk_widget_class_path(_SELF(self), &path_length, &path, &path_reversed);
     str_path = rb_str_new(path, path_length);
     /* str_path_reversed = rb_str_new(path_reversed, path_length); */
     g_free(path);
@@ -602,7 +604,7 @@ static VALUE
 widget_set_rc_style(self)
     VALUE self;
 {
-    gtk_widget_set_rc_style(get_widget(self));
+    gtk_widget_set_rc_style(_SELF(self));
     return self;
 }
 
@@ -610,7 +612,7 @@ static VALUE
 widget_ensure_style(self)
     VALUE self;
 {
-    gtk_widget_ensure_style(get_widget(self));
+    gtk_widget_ensure_style(_SELF(self));
     return self;
 }
 
@@ -618,7 +620,7 @@ static VALUE
 widget_modify_style(self, style)
     VALUE self, style;
 {
-    gtk_widget_modify_style(get_widget(self),
+    gtk_widget_modify_style(_SELF(self),
                             get_grcstyle(style));
     return self;
 }
@@ -627,7 +629,7 @@ static VALUE
 widget_restore_default_style(self)
     VALUE self;
 {
-    gtk_widget_restore_default_style(get_widget(self));
+    gtk_widget_restore_default_style(_SELF(self));
     return self;
 }
 
@@ -635,7 +637,7 @@ static VALUE
 widget_reset_rc_styles(self)
     VALUE self;
 {
-    gtk_widget_reset_rc_styles(get_widget(self));
+    gtk_widget_reset_rc_styles(_SELF(self));
     return self;
 }
 
@@ -659,7 +661,7 @@ static VALUE
 widget_get_composite_name(self)
     VALUE self;
 {
-    char *name = gtk_widget_get_composite_name(get_widget(self));
+    char *name = gtk_widget_get_composite_name(_SELF(self));
     VALUE val;
     if (name == NULL) val = Qnil;
     else {
@@ -673,7 +675,7 @@ static VALUE
 widget_set_composite_name(self, name)
     VALUE self, name;
 {
-    gtk_widget_set_composite_name(get_widget(self), STR2CSTR(name));
+    gtk_widget_set_composite_name(_SELF(self), STR2CSTR(name));
     return Qnil;
 }
 
@@ -681,7 +683,7 @@ static VALUE
 widget_reset_shapes(self)
     VALUE self;
 {
-    gtk_widget_reset_shapes(get_widget(self));
+    gtk_widget_reset_shapes(_SELF(self));
     return Qnil;
 }
 
@@ -689,9 +691,9 @@ static VALUE
 widget_set_scroll_adjustments(self, h, v)
     VALUE self, h, v;
 {
-    gboolean res = gtk_widget_set_scroll_adjustments(get_widget(self),
-                                                     GTK_ADJUSTMENT(get_widget(h)),
-                                                     GTK_ADJUSTMENT(get_widget(v)));
+    gboolean res = gtk_widget_set_scroll_adjustments(_SELF(self),
+                                                     GTK_ADJUSTMENT(_SELF(h)),
+                                                     GTK_ADJUSTMENT(_SELF(v)));
     return res ? Qtrue : Qfalse;
 }
 
@@ -732,7 +734,7 @@ widget_drag_dest_set(self, flags, targets, actions)
     GtkTargetEntry *entries = get_target_entry(targets);
     int num = RARRAY(targets)->len;
 
-    gtk_drag_dest_set(get_widget(self), NUM2INT(flags), entries, 
+    gtk_drag_dest_set(_SELF(self), NUM2INT(flags), entries, 
                       num, NUM2INT(actions));
     return self;
 }
@@ -741,7 +743,7 @@ static VALUE
 widget_drag_dest_unset(self)
     VALUE self;
 {
-    gtk_drag_dest_unset(get_widget(self));
+    gtk_drag_dest_unset(_SELF(self));
     return self;
 }
 
@@ -749,8 +751,8 @@ static VALUE
 widget_drag_dest_set_proxy(self, proxy_window, protocol, use_coordinates)
     VALUE self, proxy_window, protocol, use_coordinates;
 {
-    gtk_drag_dest_set_proxy(get_widget(self), get_gdkwindow(proxy_window),
-                              NUM2INT(protocol), RTEST(use_coordinates)); 
+    gtk_drag_dest_set_proxy(_SELF(self), get_gdkwindow(proxy_window),
+							NUM2INT(protocol), RTEST(use_coordinates)); 
     return self;
 }
 
@@ -758,7 +760,7 @@ static VALUE
 widget_drag_get_data(self, context, target, time)
     VALUE self, context, target, time;
 {
-    gtk_drag_get_data(get_widget(self), get_gdkdragcontext(context), 
+    gtk_drag_get_data(_SELF(self), get_gdkdragcontext(context), 
                       get_gdkatom(target), NUM2INT(time));
     return self;
 }
@@ -767,7 +769,7 @@ static VALUE
 widget_drag_source_set(self, flags, targets, actions)
     VALUE self, flags, targets, actions;
 {
-    gtk_drag_source_set(get_widget(self), NUM2INT(flags), 
+    gtk_drag_source_set(_SELF(self), NUM2INT(flags), 
                         get_target_entry(targets), 
                         RARRAY(targets)->len, NUM2INT(actions));
     return self;
@@ -777,7 +779,7 @@ static VALUE
 widget_drag_source_set_icon(self, colormap, pixmap, mask)
     VALUE self, colormap, pixmap, mask;
 {
-    gtk_drag_source_set_icon(get_widget(self), get_gdkcmap(colormap),
+    gtk_drag_source_set_icon(_SELF(self), get_gdkcmap(colormap),
                              get_gdkpixmap(pixmap), get_gdkbitmap(mask));
     return self;
 }
@@ -786,7 +788,7 @@ static VALUE
 widget_drag_source_unset(self)
     VALUE self;
 {
-    gtk_drag_source_unset(get_widget(self));
+    gtk_drag_source_unset(_SELF(self));
     return self;
 }
 
@@ -795,7 +797,7 @@ static VALUE
 widget_selection_owner_set(self, selection, time)
     VALUE self, selection, time;
 {
-    int ret = gtk_selection_owner_set(get_widget(self), 
+    int ret = gtk_selection_owner_set(_SELF(self), 
                                       get_gdkatom(selection), NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
@@ -804,9 +806,9 @@ static VALUE
 widget_selection_add_target(self, selection, target, info)
     VALUE self, selection, target, info;
 {
-    gtk_selection_add_target(get_widget(self), 
-                   get_gdkatom(selection), get_gdkatom(target),
-                   NUM2INT(info));
+    gtk_selection_add_target(_SELF(self), 
+							 get_gdkatom(selection), get_gdkatom(target),
+							 NUM2INT(info));
     return self;
 }
 
@@ -814,7 +816,7 @@ static VALUE
 widget_selection_add_targets(self, selection, targets)
     VALUE self, selection, targets;
 {
-    gtk_selection_add_targets(get_widget(self), get_gdkatom(selection), 
+    gtk_selection_add_targets(_SELF(self), get_gdkatom(selection), 
                               get_target_entry(targets), RARRAY(targets)->len);
     return self;
 }
@@ -823,8 +825,8 @@ static VALUE
 widget_selection_convert(self, selection, target, time)
     VALUE self, selection, target, time;
 {
-    int ret = gtk_selection_convert(get_widget(self), 
-                   get_gdkatom(selection), get_gdkatom(target), NUM2INT(time));
+    int ret = gtk_selection_convert(_SELF(self), 
+									get_gdkatom(selection), get_gdkatom(target), NUM2INT(time));
     return ret ? Qtrue : Qfalse;
 }
 
@@ -832,36 +834,36 @@ static VALUE
 widget_selection_remove_all(self)
     VALUE self;
 {
-    gtk_selection_remove_all(get_widget(self));
+    gtk_selection_remove_all(_SELF(self));
     return self;
 }
 
 /* yashi
-static VALUE
-signal_setup_args(self, sig, argc, params, args)
-    VALUE obj;
-    ID sig;
-    int argc;
-    GtkArg *params;
-    VALUE args;
-{
-    char *signame = rb_id2name(sig);
-    ID id_supre = rb_intern("super");
+   static VALUE
+   signal_setup_args(self, sig, argc, params, args)
+   VALUE obj;
+   ID sig;
+   int argc;
+   GtkArg *params;
+   VALUE args;
+   {
+   char *signame = rb_id2name(sig);
+   ID id_supre = rb_intern("super");
 
-    if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
-        rb_ary_push(args, make_gdkrectangle(GTK_VALUE_POINTER(params[0])));
-        return;
-    }
-    if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
-        rb_ary_push(args, make_grequisition(GTK_VALUE_POINTER(params[0])));
-        return;
-    }
-    if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
-        rb_ary_push(args, make_gallocation(GTK_VALUE_POINTER(params[0])));
-        return;
-    }
-    rb_func_call(self, id_super, sig, argc, params, args);
-}
+   if (signal_comp(signame, "draw", GTK_TYPE_WIDGET)) {
+   rb_ary_push(args, make_gdkrectangle(GTK_VALUE_POINTER(params[0])));
+   return;
+   }
+   if (signal_comp(signame, "size_request", GTK_TYPE_WIDGET)) {
+   rb_ary_push(args, make_grequisition(GTK_VALUE_POINTER(params[0])));
+   return;
+   }
+   if (signal_comp(signame, "size_allocate", GTK_TYPE_WIDGET)) {
+   rb_ary_push(args, make_gallocation(GTK_VALUE_POINTER(params[0])));
+   return;
+   }
+   rb_func_call(self, id_super, sig, argc, params, args);
+   }
 */
 
 #define DEFINE_EVENT_FUNC(EVENT,TYPE) \
@@ -869,37 +871,37 @@ static VALUE \
 widget_event_ ## EVENT (self, event) \
     VALUE self, event; \
 { \
-    GtkWidget *widget = get_widget(self); \
+    GtkWidget *widget = _SELF(self); \
     GTK_WIDGET_CLASS(G_OBJECT_GET_CLASS(widget))->EVENT \
         (widget, &get_gdkevent(event)->TYPE); \
     return Qnil; \
 }
 DEFINE_EVENT_FUNC(button_press_event, button)
-DEFINE_EVENT_FUNC(button_release_event, button)
-DEFINE_EVENT_FUNC(motion_notify_event, motion)
-DEFINE_EVENT_FUNC(delete_event, any)
-DEFINE_EVENT_FUNC(destroy_event, any)
-DEFINE_EVENT_FUNC(expose_event, expose)
-DEFINE_EVENT_FUNC(key_press_event, key)
-DEFINE_EVENT_FUNC(key_release_event, key)
-DEFINE_EVENT_FUNC(enter_notify_event, crossing)
-DEFINE_EVENT_FUNC(leave_notify_event, crossing)
-DEFINE_EVENT_FUNC(configure_event, configure)
-DEFINE_EVENT_FUNC(focus_in_event, focus_change)
-DEFINE_EVENT_FUNC(focus_out_event, focus_change)
-DEFINE_EVENT_FUNC(map_event, any)
-DEFINE_EVENT_FUNC(unmap_event, any)
-DEFINE_EVENT_FUNC(property_notify_event, property)
-DEFINE_EVENT_FUNC(selection_clear_event, selection)
-DEFINE_EVENT_FUNC(selection_request_event, selection)
-DEFINE_EVENT_FUNC(selection_notify_event, selection)
-DEFINE_EVENT_FUNC(proximity_in_event, proximity)
-DEFINE_EVENT_FUNC(proximity_out_event, proximity)
-DEFINE_EVENT_FUNC(visibility_notify_event, visibility)
-DEFINE_EVENT_FUNC(client_event, client)
-DEFINE_EVENT_FUNC(no_expose_event, any)
+	DEFINE_EVENT_FUNC(button_release_event, button)
+	DEFINE_EVENT_FUNC(motion_notify_event, motion)
+	DEFINE_EVENT_FUNC(delete_event, any)
+	DEFINE_EVENT_FUNC(destroy_event, any)
+	DEFINE_EVENT_FUNC(expose_event, expose)
+	DEFINE_EVENT_FUNC(key_press_event, key)
+	DEFINE_EVENT_FUNC(key_release_event, key)
+	DEFINE_EVENT_FUNC(enter_notify_event, crossing)
+	DEFINE_EVENT_FUNC(leave_notify_event, crossing)
+	DEFINE_EVENT_FUNC(configure_event, configure)
+	DEFINE_EVENT_FUNC(focus_in_event, focus_change)
+	DEFINE_EVENT_FUNC(focus_out_event, focus_change)
+	DEFINE_EVENT_FUNC(map_event, any)
+	DEFINE_EVENT_FUNC(unmap_event, any)
+	DEFINE_EVENT_FUNC(property_notify_event, property)
+	DEFINE_EVENT_FUNC(selection_clear_event, selection)
+	DEFINE_EVENT_FUNC(selection_request_event, selection)
+	DEFINE_EVENT_FUNC(selection_notify_event, selection)
+	DEFINE_EVENT_FUNC(proximity_in_event, proximity)
+	DEFINE_EVENT_FUNC(proximity_out_event, proximity)
+	DEFINE_EVENT_FUNC(visibility_notify_event, visibility)
+	DEFINE_EVENT_FUNC(client_event, client)
+	DEFINE_EVENT_FUNC(no_expose_event, any)
 
-void Init_gtk_widget()
+	void Init_gtk_widget()
 {
     static rbgtk_class_info cinfo;
 
@@ -1149,7 +1151,7 @@ void Init_gtk_widget()
 
     /* private method */
     /* need rb_call_super, which will hopefully be implemented in Ruby 1.5 - yashi
-    rb_define_private_method(gWidget, "signal_setup_args", 4);
+	   rb_define_private_method(gWidget, "signal_setup_args", 4);
     */
 
     /* child initialization */

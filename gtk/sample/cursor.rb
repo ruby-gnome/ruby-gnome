@@ -4,8 +4,8 @@
   Copyright (C) 2001 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2002/05/21 17:32:21 $
-  $Id: cursor.rb,v 1.2 2002/05/21 17:32:21 mutoh Exp $
+  $Date: 2002/06/22 19:50:57 $
+  $Id: cursor.rb,v 1.3 2002/06/22 19:50:57 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -16,13 +16,13 @@ window.realize
 
 button = Gtk::Button.new("Click!")
 
-cursors = Gdk::Cursor::Constants.constants.sort - 
+cursors = Gdk::Cursor.constants.sort - 
           ["LAST_CURSOR", "CURSOR_IS_PIXMAP","NUM_GLYPHS"]
 
 cnt = 0
 button.signal_connect(Gtk::Button::SIGNAL_CLICKED) do
   p cursors[cnt]
-  cursor = eval("Gdk::Cursor::Constants::" + cursors[cnt])
+  cursor = eval("Gdk::Cursor::" + cursors[cnt])
   button.child.set_text(cnt.to_s + ":" + cursors[cnt])
   window.window.set_cursor(Gdk::Cursor.new(cursor))
   cnt += 1

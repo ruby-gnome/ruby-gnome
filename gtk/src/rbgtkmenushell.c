@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,8 +17,8 @@ static VALUE
 mshell_append(self, child)
     VALUE self, child;
 {
-    gtk_menu_shell_append(GTK_MENU_SHELL(get_widget(self)),
-			  get_widget(child));
+    gtk_menu_shell_append(GTK_MENU_SHELL(RVAL2GOBJ(self)),
+						  GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -26,8 +26,8 @@ static VALUE
 mshell_prepend(self, child)
     VALUE self, child;
 {
-    gtk_menu_shell_prepend(GTK_MENU_SHELL(get_widget(self)),
-			   get_widget(child));
+    gtk_menu_shell_prepend(GTK_MENU_SHELL(RVAL2GOBJ(self)),
+						   GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -35,9 +35,9 @@ static VALUE
 mshell_insert(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_menu_shell_insert(GTK_MENU_SHELL(get_widget(self)),
-			  get_widget(child),
-			  NUM2INT(pos));
+    gtk_menu_shell_insert(GTK_MENU_SHELL(RVAL2GOBJ(self)),
+						  GTK_WIDGET(RVAL2GOBJ(child)),
+						  NUM2INT(pos));
     return self;
 }
 
@@ -45,7 +45,7 @@ static VALUE
 mshell_deactivate(self)
     VALUE self;
 {
-    gtk_menu_shell_deactivate(GTK_MENU_SHELL(get_widget(self)));
+    gtk_menu_shell_deactivate(GTK_MENU_SHELL(RVAL2GOBJ(self)));
     return self;
 }
 

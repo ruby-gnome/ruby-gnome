@@ -3,8 +3,8 @@
 
   rbgtktreeitem.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,13 +24,13 @@ titem_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &label) == 1) {
-	widget = gtk_tree_item_new_with_label(STR2CSTR(label));
+		widget = gtk_tree_item_new_with_label(STR2CSTR(label));
     }
     else {
-	widget = gtk_tree_item_new();
+		widget = gtk_tree_item_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -38,8 +38,8 @@ static VALUE
 titem_set_subtree(self, subtree)
     VALUE self, subtree;
 {
-    gtk_tree_item_set_subtree(GTK_TREE_ITEM(get_widget(self)),
-			      get_widget(subtree));
+    gtk_tree_item_set_subtree(GTK_TREE_ITEM(RVAL2GOBJ(self)),
+							  GTK_WIDGET(RVAL2GOBJ(subtree)));
     return self;
 }
 
@@ -47,19 +47,15 @@ static VALUE
 titem_subtree(self)
     VALUE self;
 {
-    GtkWidget *t;
-
-    t = GTK_TREE_ITEM_SUBTREE(GTK_TREE_ITEM(get_widget(self)));
-    return t ? get_value_from_gobject(GTK_OBJECT(t)) : Qnil;
+    GtkWidget* t = GTK_TREE_ITEM_SUBTREE(RVAL2GOBJ(self));
+    return t ? GOBJ2RVAL(GTK_OBJECT(t)) : Qnil;
 }
 
 static VALUE
 titem_leaf_p(self)
     VALUE self;
 {
-    GtkWidget *t;
-
-    t = GTK_TREE_ITEM_SUBTREE(GTK_TREE_ITEM(get_widget(self)));
+    GtkWidget* t = GTK_TREE_ITEM_SUBTREE(RVAL2GOBJ(self));
     return t ? Qtrue : Qfalse;
 }
 
@@ -67,9 +63,7 @@ static VALUE
 titem_expanded_p(self)
     VALUE self;
 {
-    GtkTreeItem *i;
-
-    i = GTK_TREE_ITEM(get_widget(self));
+    GtkTreeItem* i = GTK_TREE_ITEM(RVAL2GOBJ(self));
     return i->expanded ? Qtrue : Qfalse;
 }
 
@@ -77,7 +71,7 @@ static VALUE
 titem_select(self)
     VALUE self;
 {
-    gtk_tree_item_select(GTK_TREE_ITEM(get_widget(self)));
+    gtk_tree_item_select(GTK_TREE_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -85,7 +79,7 @@ static VALUE
 titem_deselect(self)
     VALUE self;
 {
-    gtk_tree_item_deselect(GTK_TREE_ITEM(get_widget(self)));
+    gtk_tree_item_deselect(GTK_TREE_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -93,7 +87,7 @@ static VALUE
 titem_expand(self)
     VALUE self;
 {
-    gtk_tree_item_expand(GTK_TREE_ITEM(get_widget(self)));
+    gtk_tree_item_expand(GTK_TREE_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -101,7 +95,7 @@ static VALUE
 titem_collapse(self)
     VALUE self;
 {
-    gtk_tree_item_collapse(GTK_TREE_ITEM(get_widget(self)));
+    gtk_tree_item_collapse(GTK_TREE_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 

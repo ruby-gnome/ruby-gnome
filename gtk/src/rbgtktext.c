@@ -3,8 +3,8 @@
 
   rbgtktext.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -26,10 +26,10 @@ txt_initialize(argc, argv, self)
     GtkAdjustment *v_adj = NULL;
 
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
-    if (!NIL_P(arg1)) h_adj = GTK_ADJUSTMENT(get_gobject(arg1));
-    if (!NIL_P(arg2)) v_adj = GTK_ADJUSTMENT(get_gobject(arg2));
+    if (!NIL_P(arg1)) h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
+    if (!NIL_P(arg2)) v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg2));
 
-    set_widget(self, gtk_text_new(h_adj, v_adj));
+    RBGTK_INITIALIZE(self, gtk_text_new(h_adj, v_adj));
     return Qnil;
 }
 
@@ -37,7 +37,7 @@ static VALUE
 txt_set_line_wrap(self, line_wrap)
     VALUE self, line_wrap;
 {
-    gtk_text_set_line_wrap(GTK_TEXT(get_widget(self)), RTEST(line_wrap));
+    gtk_text_set_line_wrap(GTK_TEXT(RVAL2GOBJ(self)), RTEST(line_wrap));
     return self;
 }
 
@@ -45,7 +45,7 @@ static VALUE
 txt_set_word_wrap(self, word_wrap)
     VALUE self, word_wrap;
 {
-    gtk_text_set_word_wrap(GTK_TEXT(get_widget(self)), RTEST(word_wrap));
+    gtk_text_set_word_wrap(GTK_TEXT(RVAL2GOBJ(self)), RTEST(word_wrap));
     return self;
 }
 
@@ -53,9 +53,9 @@ static VALUE
 txt_set_adjustments(self, h_adj, v_adj)
     VALUE self, h_adj, v_adj;
 {
-    gtk_text_set_adjustments(GTK_TEXT(get_widget(self)),
-			     GTK_ADJUSTMENT(get_gobject(h_adj)),
-			     GTK_ADJUSTMENT(get_gobject(v_adj)));
+    gtk_text_set_adjustments(GTK_TEXT(RVAL2GOBJ(self)),
+			     GTK_ADJUSTMENT(RVAL2GOBJ(h_adj)),
+			     GTK_ADJUSTMENT(RVAL2GOBJ(v_adj)));
 
     return self;
 }
@@ -64,7 +64,7 @@ static VALUE
 txt_set_point(self, index)
     VALUE self, index;
 {
-    gtk_text_set_point(GTK_TEXT(get_widget(self)), NUM2INT(index));
+    gtk_text_set_point(GTK_TEXT(RVAL2GOBJ(self)), NUM2INT(index));
     return self;
 }
 
@@ -72,7 +72,7 @@ static VALUE
 txt_get_point(self)
     VALUE self;
 {
-    int index = gtk_text_get_point(GTK_TEXT(get_widget(self)));
+    int index = gtk_text_get_point(GTK_TEXT(RVAL2GOBJ(self)));
     
     return INT2FIX(index);
 }
@@ -81,7 +81,7 @@ static VALUE
 txt_get_length(self)
     VALUE self;
 {
-    int len = gtk_text_get_length(GTK_TEXT(get_widget(self)));
+    int len = gtk_text_get_length(GTK_TEXT(RVAL2GOBJ(self)));
     
     return INT2FIX(len);
 }
@@ -90,7 +90,7 @@ static VALUE
 txt_freeze(self)
     VALUE self;
 {
-    gtk_text_freeze(GTK_TEXT(get_widget(self)));
+    gtk_text_freeze(GTK_TEXT(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -98,7 +98,7 @@ static VALUE
 txt_thaw(self)
     VALUE self;
 {
-    gtk_text_thaw(GTK_TEXT(get_widget(self)));
+    gtk_text_thaw(GTK_TEXT(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -107,7 +107,7 @@ txt_insert(self, font, fore, back, str)
     VALUE self, font, fore, back, str;
 {
     Check_Type(str, T_STRING);
-    gtk_text_insert(GTK_TEXT(get_widget(self)), 
+    gtk_text_insert(GTK_TEXT(RVAL2GOBJ(self)), 
 		    get_gdkfont(font),
 		    get_gdkcolor(fore),
 		    get_gdkcolor(back),
@@ -121,7 +121,7 @@ static VALUE
 txt_backward_delete(self, nchars)
     VALUE self, nchars;
 {
-    gtk_text_backward_delete(GTK_TEXT(get_widget(self)), NUM2INT(nchars));
+    gtk_text_backward_delete(GTK_TEXT(RVAL2GOBJ(self)), NUM2INT(nchars));
     return self;
 }
 
@@ -129,7 +129,7 @@ static VALUE
 txt_forward_delete(self, nchars)
     VALUE self, nchars;
 {
-    gtk_text_forward_delete(GTK_TEXT(get_widget(self)), NUM2INT(nchars));
+    gtk_text_forward_delete(GTK_TEXT(RVAL2GOBJ(self)), NUM2INT(nchars));
     return self;
 }
 
@@ -138,7 +138,7 @@ txt_has_cursor(self)
     VALUE self;
 {
     rb_notimplement();
-    /*  return GTK_TEXT(get_widget(self))->has_cursor? Qtrue: Qfalse; */
+    /*  return GTK_TEXT(RVAL2GOBJ(self))->has_cursor? Qtrue: Qfalse; */
 }
 
 void Init_gtk_text()

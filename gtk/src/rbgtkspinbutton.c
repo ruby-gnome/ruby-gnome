@@ -3,8 +3,8 @@
 
   rbgtkspinbutton.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -27,21 +27,21 @@ sbtn_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3);
 
-    if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(get_gobject(arg1));
+    if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
     climb_rate = (NIL_P(arg2))? 0.0: NUM2DBL(arg2);
     digits     = (NIL_P(arg3))?   0: NUM2INT(arg3);
 
     widget = gtk_spin_button_new(adj, climb_rate, digits);
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 static VALUE
 sbtn_set_adjustment(self,adj)
     VALUE self, adj;
 {
-    gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(get_widget(self))
-				   ,GTK_ADJUSTMENT(get_gobject(adj)));
+    gtk_spin_button_set_adjustment(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
+				   ,GTK_ADJUSTMENT(RVAL2GOBJ(adj)));
     return self;
 }
 static VALUE
@@ -49,19 +49,19 @@ sbtn_get_adjustment(self)
     VALUE self;
 {
     return GOBJ2RVAL(gtk_spin_button_get_adjustment(
-                         GTK_SPIN_BUTTON(get_widget(self))));
+                         GTK_SPIN_BUTTON(RVAL2GOBJ(self))));
 }
 static VALUE
 sbtn_digits(self)
     VALUE self;
 {
-    return INT2NUM(GTK_SPIN_BUTTON(get_widget(self))->digits);
+    return INT2NUM(GTK_SPIN_BUTTON(RVAL2GOBJ(self))->digits);
 }
 static VALUE
 sbtn_set_digits(self,n)
     VALUE self, n;
 {
-    (void)gtk_spin_button_set_digits(GTK_SPIN_BUTTON(get_widget(self))
+    (void)gtk_spin_button_set_digits(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
 				     , NUM2INT(n));
     return self;
 }
@@ -70,7 +70,7 @@ sbtn_get_value_as_float(self)
     VALUE self;
 {
     float w;
-    w = gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(get_widget(self)));
+    w = gtk_spin_button_get_value_as_float(GTK_SPIN_BUTTON(RVAL2GOBJ(self)));
     return rb_float_new(w);
 }
 static VALUE
@@ -78,14 +78,14 @@ sbtn_get_value_as_int(self)
     VALUE self;
 {
     int w;
-    w = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(get_widget(self)));
+    w = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(RVAL2GOBJ(self)));
     return INT2NUM(w);
 }
 static VALUE
 sbtn_set_value(self,n)
     VALUE self, n;
 {
-    (void)gtk_spin_button_set_value(GTK_SPIN_BUTTON(get_widget(self))
+    (void)gtk_spin_button_set_value(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
 				    , NUM2DBL(n));
     return self;
 }
@@ -93,7 +93,7 @@ static VALUE
 sbtn_set_numeric(self,n)
     VALUE self, n;
 {
-    (void)gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(get_widget(self))
+    (void)gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
 				      , RTEST(n));
     return self;
 }
@@ -101,7 +101,7 @@ static VALUE
 sbtn_set_update_policy(self,w)
     VALUE self, w;
 {
-    (void)gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(get_widget(self))
+    (void)gtk_spin_button_set_update_policy(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
 					    ,NUM2INT(w) );
     return self;
 }
@@ -109,7 +109,7 @@ static VALUE
 sbtn_spin(self,n,m)
     VALUE self, n, m;
 {
-    (void)gtk_spin_button_spin(GTK_SPIN_BUTTON(get_widget(self))
+    (void)gtk_spin_button_spin(GTK_SPIN_BUTTON(RVAL2GOBJ(self))
 			       ,NUM2INT(n)
 			       ,NUM2DBL(m));
     return self;
@@ -118,7 +118,7 @@ static VALUE
 sbtn_set_wrap(self,n)
     VALUE self, n;
 {
-    (void)gtk_spin_button_set_wrap(GTK_SPIN_BUTTON(get_widget(self)),
+    (void)gtk_spin_button_set_wrap(GTK_SPIN_BUTTON(RVAL2GOBJ(self)),
 				   RTEST(n));
     return self;
 }
@@ -126,7 +126,7 @@ static VALUE
 sbtn_set_snap_to_ticks(self,n)
     VALUE self, n;
 {
-    (void)gtk_spin_button_set_snap_to_ticks(GTK_SPIN_BUTTON(get_widget(self)),
+    (void)gtk_spin_button_set_snap_to_ticks(GTK_SPIN_BUTTON(RVAL2GOBJ(self)),
 					    RTEST(n));
     return self;
 }

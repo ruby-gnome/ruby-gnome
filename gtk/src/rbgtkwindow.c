@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,13 +24,13 @@ gwin_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &type) == 1) {
-	tp = NUM2INT(type);
+		tp = NUM2INT(type);
     } else {
-	tp = GTK_WINDOW_TOPLEVEL;
+		tp = GTK_WINDOW_TOPLEVEL;
     }
     widget = gtk_window_new(tp);
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -38,8 +38,8 @@ static VALUE
 gwin_set_policy(self, shrink, grow, auto_shrink)
     VALUE self, shrink, grow, auto_shrink;
 {
-    gtk_window_set_policy(GTK_WINDOW(get_widget(self)),
-			  RTEST(shrink), RTEST(grow), RTEST(auto_shrink));
+    gtk_window_set_policy(GTK_WINDOW(RVAL2GOBJ(self)),
+						  RTEST(shrink), RTEST(grow), RTEST(auto_shrink));
     return self;
 }
 
@@ -47,7 +47,7 @@ static VALUE
 gwin_set_title(self, title)
     VALUE self, title;
 {
-    gtk_window_set_title(GTK_WINDOW(get_widget(self)), STR2CSTR(title));
+    gtk_window_set_title(GTK_WINDOW(RVAL2GOBJ(self)), STR2CSTR(title));
     return self;
 }
 
@@ -55,8 +55,8 @@ static VALUE
 gwin_set_position(self, pos)
     VALUE self, pos;
 {
-    gtk_window_position(GTK_WINDOW(get_widget(self)),
-			(GtkWindowPosition)NUM2INT(pos));
+    gtk_window_position(GTK_WINDOW(RVAL2GOBJ(self)),
+						(GtkWindowPosition)NUM2INT(pos));
 
     return self;
 }
@@ -65,9 +65,9 @@ static VALUE
 gwin_set_wmclass(self, wmclass1, wmclass2)
     VALUE self, wmclass1, wmclass2;
 {
-    gtk_window_set_wmclass(GTK_WINDOW(get_widget(self)),
-			   NIL_P(wmclass1)?NULL:STR2CSTR(wmclass1),
-			   NIL_P(wmclass2)?NULL:STR2CSTR(wmclass2));
+    gtk_window_set_wmclass(GTK_WINDOW(RVAL2GOBJ(self)),
+						   NIL_P(wmclass1)?NULL:STR2CSTR(wmclass1),
+						   NIL_P(wmclass2)?NULL:STR2CSTR(wmclass2));
     return self;
 }
 
@@ -75,7 +75,8 @@ static VALUE
 gwin_set_focus(self, win)
     VALUE self, win;
 {
-    gtk_window_set_focus(GTK_WINDOW(get_widget(self)), get_widget(win));
+    gtk_window_set_focus(GTK_WINDOW(RVAL2GOBJ(self)), 
+						 GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -83,8 +84,8 @@ static VALUE
 gwin_set_default_size(self, w, h)
     VALUE self, w, h;
 {
-    gtk_window_set_default_size(GTK_WINDOW(get_widget(self)),
-				NUM2INT(w), NUM2INT(h));
+    gtk_window_set_default_size(GTK_WINDOW(RVAL2GOBJ(self)),
+								NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -92,7 +93,8 @@ static VALUE
 gwin_set_default(self, win)
     VALUE self, win;
 {
-    gtk_window_set_default(GTK_WINDOW(get_widget(self)), get_widget(win));
+    gtk_window_set_default(GTK_WINDOW(RVAL2GOBJ(self)), 
+						   GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -100,8 +102,8 @@ static VALUE
 gwin_add_accel(self, accel)
     VALUE self, accel;
 {
-    gtk_window_add_accel_group(GTK_WINDOW(get_widget(self)),
-			       get_gtkaccelgrp(accel));
+    gtk_window_add_accel_group(GTK_WINDOW(RVAL2GOBJ(self)),
+							   get_gtkaccelgrp(accel));
     return self;
 }
 
@@ -109,8 +111,8 @@ static VALUE
 gwin_rm_accel(self, accel)
     VALUE self, accel;
 {
-    gtk_window_remove_accel_group(GTK_WINDOW(get_widget(self)),
-				  get_gtkaccelgrp(accel));
+    gtk_window_remove_accel_group(GTK_WINDOW(RVAL2GOBJ(self)),
+								  get_gtkaccelgrp(accel));
     return self;
 }
 
@@ -118,7 +120,7 @@ static VALUE
 gwin_grab_add(self)
     VALUE self;
 {
-    gtk_grab_add(get_widget(self));
+    gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -126,7 +128,7 @@ static VALUE
 gwin_grab_remove(self)
     VALUE self;
 {
-    gtk_grab_remove(get_widget(self));
+    gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -134,7 +136,7 @@ static VALUE
 gwin_set_modal(self, modal)
     VALUE self, modal;
 {
-    gtk_window_set_modal(GTK_WINDOW(get_widget(self)), RTEST(modal));
+    gtk_window_set_modal(GTK_WINDOW(RVAL2GOBJ(self)), RTEST(modal));
     return self;
 }
 
@@ -142,8 +144,8 @@ static VALUE
 gwin_set_transient_for(self, parent)
     VALUE self, parent;
 {
-    gtk_window_set_transient_for(GTK_WINDOW(get_widget(self)),
-				 GTK_WINDOW(get_widget(parent)));
+    gtk_window_set_transient_for(GTK_WINDOW(RVAL2GOBJ(self)),
+								 GTK_WINDOW(RVAL2GOBJ(parent)));
     return self;
 }
 
@@ -151,10 +153,10 @@ static VALUE
 gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
     VALUE self, geometry_widget, geometry, geom_mask;
 {
-    gtk_window_set_geometry_hints(GTK_WINDOW(get_widget(self)),
-				  get_widget(geometry_widget),
-				  rbgdk_geometry_get(geometry),
-				  NUM2INT(geom_mask));
+    gtk_window_set_geometry_hints(GTK_WINDOW(RVAL2GOBJ(self)),
+								  GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
+								  rbgdk_geometry_get(geometry),
+								  NUM2INT(geom_mask));
 
     return self;
 }

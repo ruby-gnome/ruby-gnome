@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -40,8 +40,7 @@ static VALUE
 rc_m_get_style(self, w)
     VALUE self, w;
 {
-    GtkStyle *s = gtk_rc_get_style(get_widget(w));
-    return make_gstyle(s);
+    return make_gstyle(gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(w))));
 }
 
 static VALUE

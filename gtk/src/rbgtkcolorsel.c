@@ -3,8 +3,8 @@
 
   rbgtkcolorsel.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,7 +21,7 @@ static VALUE
 colorsel_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_color_selection_new());
+    RBGTK_INITIALIZE(self, gtk_color_selection_new());
     return Qnil;
 }
 
@@ -29,7 +29,7 @@ static VALUE
 colorsel_set_update_policy(self, policy)
     VALUE self, policy;
 {
-    gtk_color_selection_set_update_policy(GTK_COLOR_SELECTION(get_widget(self)),
+    gtk_color_selection_set_update_policy(GTK_COLOR_SELECTION(RVAL2GOBJ(self)),
 					  (GtkUpdateType)NUM2INT(policy));
     return self;
 }
@@ -43,7 +43,7 @@ colorsel_set_color(self, color)
     GtkColorSelection *colorsel;
 
     Check_Type(color, T_ARRAY);
-    colorsel = GTK_COLOR_SELECTION(get_widget(self));
+    colorsel = GTK_COLOR_SELECTION(RVAL2GOBJ(self));
     if (gtk_color_selection_get_has_opacity_control(colorsel)) {
 		arylen = 4;
     } else {
@@ -72,7 +72,7 @@ colorsel_get_color(self)
     int arylen;
     GtkColorSelection *colorsel;
 
-    colorsel = GTK_COLOR_SELECTION(get_widget(self));
+    colorsel = GTK_COLOR_SELECTION(RVAL2GOBJ(self));
     gtk_color_selection_get_color(colorsel, buf);
     if (gtk_color_selection_get_has_opacity_control(colorsel)) {
 		arylen = 4;
@@ -115,7 +115,7 @@ static VALUE
 cdialog_initialize(self, title)
     VALUE self, title;
 {
-    set_widget(self, gtk_color_selection_dialog_new(STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gtk_color_selection_dialog_new(STR2CSTR(title)));
     return Qnil;
 }
 
@@ -126,7 +126,7 @@ cdialog_get_colorsel(self)
     VALUE sel = rb_iv_get(self, "colorsel");
 
     if (NIL_P(sel)) {
-	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->colorsel;
+	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->colorsel;
 	sel = GOBJ2RVAL(w);
 	rb_iv_set(self, "colorsel", sel);
     }
@@ -141,7 +141,7 @@ cdialog_get_ok_button(self)
     VALUE b = rb_iv_get(self, "ok_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->ok_button;
+	GtkWidget *w = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->ok_button;
 	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "ok_button", b);
     }
@@ -157,7 +157,7 @@ cdialog_get_cancel_button(self)
 
     if (NIL_P(b)) {
 	GtkWidget *w
-	    = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->cancel_button;
+	    = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->cancel_button;
 	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "cancel_button", b);
     }
@@ -173,7 +173,7 @@ cdialog_get_help_button(self)
 
     if (NIL_P(b)) {
 	GtkWidget *w
-	    = GTK_COLOR_SELECTION_DIALOG(get_widget(self))->help_button;
+	    = GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(self))->help_button;
 	b = GOBJ2RVAL(w);
 	rb_iv_set(self, "help_button", b);
     }

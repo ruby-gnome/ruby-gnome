@@ -3,8 +3,8 @@
 
   rbgtkscale.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 scale_set_digits(self, digits)
     VALUE self, digits;
 {
-    gtk_scale_set_digits(GTK_SCALE(get_widget(self)), NUM2INT(digits));
+    gtk_scale_set_digits(GTK_SCALE(RVAL2GOBJ(self)), NUM2INT(digits));
     return self;
 }
 
@@ -25,7 +25,7 @@ static VALUE
 scale_set_draw_value(self, draw_value)
     VALUE self, draw_value;
 {
-    gtk_scale_set_draw_value(GTK_SCALE(get_widget(self)),
+    gtk_scale_set_draw_value(GTK_SCALE(RVAL2GOBJ(self)),
 			     RTEST(draw_value));
     return self;
 }
@@ -34,7 +34,7 @@ static VALUE
 scale_set_value_pos(self, pos)
     VALUE self, pos;
 {
-    gtk_scale_set_value_pos(GTK_SCALE(get_widget(self)), 
+    gtk_scale_set_value_pos(GTK_SCALE(RVAL2GOBJ(self)), 
 			    (GtkPositionType)NUM2INT(pos));
     return self;
 }

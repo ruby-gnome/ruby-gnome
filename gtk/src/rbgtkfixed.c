@@ -3,8 +3,8 @@
 
   rbgtkfixed.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 fixed_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_fixed_new());
+    RBGTK_INITIALIZE(self, gtk_fixed_new());
     return Qnil;
 }
 
@@ -25,7 +25,8 @@ static VALUE
 fixed_put(self, win, x, y)
     VALUE self, win, x, y;
 {
-    gtk_fixed_put(GTK_FIXED(get_widget(self)), get_widget(win), NUM2INT(x), NUM2INT(y));
+    gtk_fixed_put(GTK_FIXED(RVAL2GOBJ(self)), GTK_WIDGET(RVAL2GOBJ(win)), 
+				  NUM2INT(x), NUM2INT(y));
     return self;
 }
 
@@ -33,7 +34,8 @@ static VALUE
 fixed_move(self, win, x, y)
     VALUE self, win, x, y;
 {
-    gtk_fixed_move(GTK_FIXED(get_widget(self)), get_widget(win), NUM2INT(x), NUM2INT(y));
+    gtk_fixed_move(GTK_FIXED(RVAL2GOBJ(self)), GTK_WIDGET(RVAL2GOBJ(win)), 
+				   NUM2INT(x), NUM2INT(y));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,7 +20,7 @@ static VALUE
 edit_sel_region(self, start, end)
     VALUE self, start, end;
 {
-    gtk_editable_select_region(GTK_EDITABLE(get_widget(self)),
+    gtk_editable_select_region(GTK_EDITABLE(RVAL2GOBJ(self)),
 			       NUM2INT(start), NUM2INT(end));
     return self;
 }
@@ -32,7 +32,7 @@ edit_insert_text(self, new_text, pos)
     gint p = NUM2INT(pos);
 
     Check_Type(new_text, T_STRING);
-    gtk_editable_insert_text(GTK_EDITABLE(get_widget(self)),
+    gtk_editable_insert_text(GTK_EDITABLE(RVAL2GOBJ(self)),
 			     RSTRING(new_text)->ptr,
 			     RSTRING(new_text)->len,
 			     &p);
@@ -43,7 +43,7 @@ static VALUE
 edit_delete_text(self, start, end)
     VALUE self, start, end;
 {
-    gtk_editable_delete_text(GTK_EDITABLE(get_widget(self)),
+    gtk_editable_delete_text(GTK_EDITABLE(RVAL2GOBJ(self)),
 			     NUM2INT(start), NUM2INT(end));
     return self;
 }
@@ -55,7 +55,7 @@ edit_get_chars(self, start, end)
     gchar *s;
     VALUE ret;
 
-    s = gtk_editable_get_chars(GTK_EDITABLE(get_widget(self)), /* check s */
+    s = gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)), /* check s */
 			       NUM2INT(start), NUM2INT(end));  /* check start,end */
     if (s) {
         ret = rb_str_new2(s);
@@ -70,7 +70,7 @@ static VALUE
 edit_delete_selection(self)
     VALUE self;
 {
-    gtk_editable_delete_selection(GTK_EDITABLE(get_widget(self)));
+    gtk_editable_delete_selection(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -78,14 +78,14 @@ static VALUE
 edit_get_position(self)
     VALUE self;
 {
-    return INT2NUM(gtk_editable_get_position(GTK_EDITABLE(get_widget(self))));
+    return INT2NUM(gtk_editable_get_position(GTK_EDITABLE(RVAL2GOBJ(self))));
 }
 
 static VALUE
 edit_set_position(self, position)
     VALUE self, position;
 {
-    gtk_editable_set_position(GTK_EDITABLE(get_widget(self)),
+    gtk_editable_set_position(GTK_EDITABLE(RVAL2GOBJ(self)),
 			      NUM2INT(position));
     return self;
 }
@@ -94,7 +94,7 @@ static VALUE
 edit_set_editable(self, editable)
     VALUE self, editable;
 {
-    gtk_editable_set_editable(GTK_EDITABLE(get_widget(self)), RTEST(editable));
+    gtk_editable_set_editable(GTK_EDITABLE(RVAL2GOBJ(self)), RTEST(editable));
     return self;
 }
 
@@ -102,7 +102,7 @@ static VALUE
 edit_cut_clipboard(self)
     VALUE self;
 {
-    gtk_editable_cut_clipboard(GTK_EDITABLE(get_widget(self)));
+    gtk_editable_cut_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -110,7 +110,7 @@ static VALUE
 edit_copy_clipboard(self)
     VALUE self;
 {
-    gtk_editable_copy_clipboard(GTK_EDITABLE(get_widget(self)));
+    gtk_editable_copy_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -118,7 +118,7 @@ static VALUE
 edit_paste_clipboard(self)
     VALUE self;
 {
-    gtk_editable_paste_clipboard(GTK_EDITABLE(get_widget(self)));
+    gtk_editable_paste_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkmenuitem.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,13 +23,13 @@ mitem_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &label) == 1) {
-	widget = gtk_menu_item_new_with_label(STR2CSTR(label));
+		widget = gtk_menu_item_new_with_label(STR2CSTR(label));
     }
     else {
-	widget = gtk_menu_item_new();
+		widget = gtk_menu_item_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -37,8 +37,8 @@ static VALUE
 mitem_set_submenu(self, child)
     VALUE self, child;
 {
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(get_widget(self)),
-			      get_widget(child));
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(RVAL2GOBJ(self)),
+							  GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -46,7 +46,7 @@ static VALUE
 mitem_select(self)
     VALUE self;
 {
-    gtk_menu_item_select(GTK_MENU_ITEM(get_widget(self)));
+    gtk_menu_item_select(GTK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -54,7 +54,7 @@ static VALUE
 mitem_deselect(self)
     VALUE self;
 {
-    gtk_menu_item_deselect(GTK_MENU_ITEM(get_widget(self)));
+    gtk_menu_item_deselect(GTK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -62,7 +62,7 @@ static VALUE
 mitem_activate(self)
     VALUE self;
 {
-    gtk_menu_item_activate(GTK_MENU_ITEM(get_widget(self)));
+    gtk_menu_item_activate(GTK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -70,7 +70,7 @@ static VALUE
 mitem_right_justify(self)
     VALUE self;
 {
-    gtk_menu_item_right_justify(GTK_MENU_ITEM(get_widget(self)));
+    gtk_menu_item_right_justify(GTK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 

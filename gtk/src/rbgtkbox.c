@@ -3,8 +3,8 @@
 
   rbgtkbox.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -27,21 +27,21 @@ box_pack_start_or_end(argc, argv, self, start)
     expand = fill = Qtrue; padding = 0;
     switch (rb_scan_args(argc, argv, "13", &arg0, &arg1, &arg2, &arg3)) {
       case 4:
-	padding = NUM2INT(arg3);
+		padding = NUM2INT(arg3);
       case 3:
-	fill = RTEST(arg2);
+		fill = RTEST(arg2);
       case 2:
-	expand = RTEST(arg1);
+		expand = RTEST(arg1);
       default:
-	child = get_widget(arg0);
-	break;
+		child = GTK_WIDGET(RVAL2GOBJ(arg0));
+		break;
     }
-    widget = get_widget(self);
+    widget = GTK_WIDGET(RVAL2GOBJ(self));
 
     if (start)
-	gtk_box_pack_start(GTK_BOX(get_widget(self)), child, expand, fill, padding);
+		gtk_box_pack_start(GTK_BOX(RVAL2GOBJ(self)), child, expand, fill, padding);
     else
-	gtk_box_pack_end(GTK_BOX(get_widget(self)), child, expand, fill, padding);
+		gtk_box_pack_end(GTK_BOX(RVAL2GOBJ(self)), child, expand, fill, padding);
 }
 
 static VALUE
@@ -66,17 +66,17 @@ box_pack_end(argc, argv, self)
 
 static VALUE
 box_set_homogeneous(self, homogeneous)
-     VALUE self, homogeneous;
+	VALUE self, homogeneous;
 {
-    gtk_box_set_homogeneous(GTK_BOX(get_widget(self)), RTEST(homogeneous));
+    gtk_box_set_homogeneous(GTK_BOX(RVAL2GOBJ(self)), RTEST(homogeneous));
     return self;
 }
 
 static VALUE
 box_set_spacing(self, spacing)
-     VALUE self, spacing;
+	VALUE self, spacing;
 {
-    gtk_box_set_spacing(GTK_BOX(get_widget(self)), NUM2INT(spacing));
+    gtk_box_set_spacing(GTK_BOX(RVAL2GOBJ(self)), NUM2INT(spacing));
     return self;
 }
 
@@ -84,22 +84,23 @@ static VALUE
 box_reorder_child(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_box_reorder_child(GTK_BOX(get_widget(self)),
-			  get_widget(child), NUM2INT(pos));
+    gtk_box_reorder_child(GTK_BOX(RVAL2GOBJ(self)),
+						  GTK_WIDGET(RVAL2GOBJ(child)), NUM2INT(pos));
     return self;
 }
 
 VALUE
 box_query_child_packing(self, child)
-     VALUE self, child;
+	VALUE self, child;
 {
     gboolean expand, fill;
     guint padding;
     GtkPackType pack_type;
     VALUE ary;
 
-    gtk_box_query_child_packing(GTK_BOX(get_widget(self)), get_widget(child),
-				&expand, &fill, &padding, &pack_type);
+    gtk_box_query_child_packing(GTK_BOX(RVAL2GOBJ(self)), 
+								GTK_WIDGET(RVAL2GOBJ(child)),
+								&expand, &fill, &padding, &pack_type);
 
     ary = rb_ary_new2(4);
     rb_ary_push(ary, expand==FALSE?Qfalse:Qtrue);
@@ -112,11 +113,12 @@ box_query_child_packing(self, child)
 
 VALUE
 box_set_child_packing(self, child, expand, fill, padding, pack_type)
-     VALUE self, child, expand, fill, padding, pack_type;
+	VALUE self, child, expand, fill, padding, pack_type;
 {
-    gtk_box_set_child_packing(GTK_BOX(get_widget(self)), get_widget(child),
-			      RTEST(expand), RTEST(fill),
-			      NUM2UINT(padding), NUM2INT(pack_type));
+    gtk_box_set_child_packing(GTK_BOX(RVAL2GOBJ(self)), 
+							  GTK_WIDGET(RVAL2GOBJ(child)),
+							  RTEST(expand), RTEST(fill),
+							  NUM2UINT(padding), NUM2INT(pack_type));
     return self;
 }
 

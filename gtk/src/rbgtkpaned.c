@@ -3,8 +3,8 @@
 
   rbgtkpaned.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,8 @@ static VALUE
 paned_add1(self, child)
     VALUE self, child;
 {
-    gtk_paned_add1(GTK_PANED(get_widget(self)), get_widget(child));
+    gtk_paned_add1(GTK_PANED(RVAL2GOBJ(self)), 
+				   GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -25,7 +26,8 @@ static VALUE
 paned_add2(self, child)
     VALUE self, child;
 {
-    gtk_paned_add2(GTK_PANED(get_widget(self)), get_widget(child));
+    gtk_paned_add2(GTK_PANED(RVAL2GOBJ(self)), 
+				   GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -33,8 +35,9 @@ static VALUE
 paned_pack1(self, child, resize, shrink)
     VALUE self, child, resize, shrink;
 {
-    gtk_paned_pack1(GTK_PANED(get_widget(self)), get_widget(child),
-		    RTEST(resize), RTEST(shrink));
+    gtk_paned_pack1(GTK_PANED(RVAL2GOBJ(self)), 
+					GTK_WIDGET(RVAL2GOBJ(child)),
+					RTEST(resize), RTEST(shrink));
     return self;
 }
 
@@ -42,8 +45,9 @@ static VALUE
 paned_pack2(self, child, resize, shrink)
     VALUE self, child, resize, shrink;
 {
-    gtk_paned_pack2(GTK_PANED(get_widget(self)), get_widget(child),
-		    RTEST(resize), RTEST(shrink));
+    gtk_paned_pack2(GTK_PANED(RVAL2GOBJ(self)), 
+					GTK_WIDGET(RVAL2GOBJ(child)),
+					RTEST(resize), RTEST(shrink));
     return self;
 }
 
@@ -51,7 +55,7 @@ static VALUE
 paned_gutter_size(self, size)
     VALUE self, size;
 {
-    gtk_paned_gutter_size(GTK_PANED(get_widget(self)), NUM2INT(size));
+    gtk_paned_gutter_size(GTK_PANED(RVAL2GOBJ(self)), NUM2INT(size));
     return self;
 }
 
@@ -59,7 +63,7 @@ static VALUE
 paned_set_position(self, pos)
     VALUE self, pos;
 {
-    gtk_paned_set_position(GTK_PANED(get_widget(self)), NUM2INT(pos));
+    gtk_paned_set_position(GTK_PANED(RVAL2GOBJ(self)), NUM2INT(pos));
     return self;
 }
 
@@ -67,44 +71,44 @@ static VALUE
 paned_child1(self)
     VALUE self;
 {
-    GtkWidget *child = GTK_PANED(get_widget(self))->child1;
-    return (child == NULL) ? Qnil : get_value_from_gobject(GTK_OBJECT(child));
+    GtkWidget *child = GTK_PANED(RVAL2GOBJ(self))->child1;
+    return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
 paned_child2(self)
     VALUE self;
 {
-    GtkWidget *child = GTK_PANED(get_widget(self))->child2;
-    return (child == NULL) ? Qnil : get_value_from_gobject(GTK_OBJECT(child));
+    GtkWidget *child = GTK_PANED(RVAL2GOBJ(self))->child2;
+    return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
 paned_child1_resize(self)
     VALUE self;
 {
-    return GTK_PANED(get_widget(self))->child1_resize ? Qtrue : Qfalse;
+    return GTK_PANED(RVAL2GOBJ(self))->child1_resize ? Qtrue : Qfalse;
 }
 
 static VALUE
 paned_child1_shrink(self)
     VALUE self;
 {
-    return GTK_PANED(get_widget(self))->child1_shrink ? Qtrue : Qfalse;
+    return GTK_PANED(RVAL2GOBJ(self))->child1_shrink ? Qtrue : Qfalse;
 }
 
 static VALUE
 paned_child2_resize(self)
     VALUE self;
 {
-    return GTK_PANED(get_widget(self))->child2_resize ? Qtrue : Qfalse;
+    return GTK_PANED(RVAL2GOBJ(self))->child2_resize ? Qtrue : Qfalse;
 }
 
 static VALUE
 paned_child2_shrink(self)
     VALUE self;
 {
-    return GTK_PANED(get_widget(self))->child2_shrink ? Qtrue : Qfalse;
+    return GTK_PANED(RVAL2GOBJ(self))->child2_shrink ? Qtrue : Qfalse;
 }
 
 void Init_gtk_paned()

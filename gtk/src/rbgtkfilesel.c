@@ -3,8 +3,8 @@
 
   rbgtkfilesel.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 fsel_initialize(self, title)
     VALUE self, title;
 {
-    set_widget(self, gtk_file_selection_new(STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gtk_file_selection_new(STR2CSTR(title)));
     return Qnil;
 }
 
@@ -25,8 +25,8 @@ static VALUE
 fsel_set_fname(self, fname)
     VALUE self, fname;
 {
-    gtk_file_selection_set_filename(GTK_FILE_SELECTION(get_widget(self)),
-				    STR2CSTR(fname));
+    gtk_file_selection_set_filename(GTK_FILE_SELECTION(RVAL2GOBJ(self)),
+									STR2CSTR(fname));
     return Qnil;
 }
 
@@ -35,14 +35,14 @@ fsel_get_fname(self)
     VALUE self;
 {
     return rb_str_new2(
-            gtk_file_selection_get_filename(GTK_FILE_SELECTION(get_widget(self))));
+		gtk_file_selection_get_filename(GTK_FILE_SELECTION(RVAL2GOBJ(self))));
 }
 
 static VALUE
 fsel_complete(self, pattern)
     VALUE self, pattern;
 {
-    gtk_file_selection_complete(GTK_FILE_SELECTION(get_widget(self)), STR2CSTR(pattern));
+    gtk_file_selection_complete(GTK_FILE_SELECTION(RVAL2GOBJ(self)), STR2CSTR(pattern));
     return self;
 }
 
@@ -53,9 +53,9 @@ fsel_ok_button(self)
     VALUE b = rb_iv_get(self, "ok_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w = GTK_FILE_SELECTION(get_widget(self))->ok_button;
-	b = GOBJ2RVAL(w);
-	rb_iv_set(self, "ok_button", b);
+		GtkWidget *w = GTK_FILE_SELECTION(RVAL2GOBJ(self))->ok_button;
+		b = GOBJ2RVAL(w);
+		rb_iv_set(self, "ok_button", b);
     }
 
     return b;
@@ -68,9 +68,9 @@ fsel_cancel_button(self)
     VALUE b = rb_iv_get(self, "cancel_button");
 
     if (NIL_P(b)) {
-	GtkWidget *w = GTK_FILE_SELECTION(get_widget(self))->cancel_button;
-	b = GOBJ2RVAL(w);
-	rb_iv_set(self, "cancel_button", b);
+		GtkWidget *w = GTK_FILE_SELECTION(RVAL2GOBJ(self))->cancel_button;
+		b = GOBJ2RVAL(w);
+		rb_iv_set(self, "cancel_button", b);
     }
 
     return b;
@@ -83,9 +83,9 @@ fsel_action_area(self)
     VALUE area = rb_iv_get(self, "action_area");
 
     if (NIL_P(area)) {
-	GtkWidget *w = GTK_FILE_SELECTION(get_widget(self))->action_area;
-	area = GOBJ2RVAL(w);
-	rb_iv_set(self, "action_area", area);
+		GtkWidget *w = GTK_FILE_SELECTION(RVAL2GOBJ(self))->action_area;
+		area = GOBJ2RVAL(w);
+		rb_iv_set(self, "action_area", area);
     }
 
     return area;
@@ -95,50 +95,49 @@ static VALUE
 fsel_dir_list(self)
     VALUE self;
 {
-    GtkObject *obj = GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->dir_list);
-    return get_value_from_gobject(obj);
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->dir_list);
 }
 
 static VALUE
 fsel_file_list(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->file_list));
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->file_list);
 }
 
 static VALUE
 fsel_history_pulldown(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->history_pulldown));
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->history_pulldown);
 }
 
 static VALUE
 fsel_fileop_c_dir(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->fileop_c_dir));
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->fileop_c_dir);
 }
 
 static VALUE
 fsel_fileop_del_file(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->fileop_del_file));
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->fileop_del_file);
 }
 
 static VALUE
 fsel_fileop_ren_file(self)
     VALUE self;
 {
-    return get_value_from_gobject(GTK_OBJECT(GTK_FILE_SELECTION(get_widget(self))->fileop_ren_file));
+    return GOBJ2RVAL(GTK_FILE_SELECTION(RVAL2GOBJ(self))->fileop_ren_file);
 }
 
 static VALUE
 fsel_show_fileop_buttons(self)
     VALUE self;
 {
-    gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(get_widget(self)));
+    gtk_file_selection_show_fileop_buttons(GTK_FILE_SELECTION(RVAL2GOBJ(self)));
     return Qnil;
 }
 
@@ -146,7 +145,7 @@ static VALUE
 fsel_hide_fileop_buttons(self)
     VALUE self;
 {
-    gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(get_widget(self)));
+    gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(RVAL2GOBJ(self)));
     return Qnil;
 }
 

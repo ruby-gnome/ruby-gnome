@@ -3,8 +3,8 @@
 
   rbgtkbin.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,8 +17,8 @@ static VALUE
 bin_child(self)
     VALUE self;
 {
-    GtkWidget *child = GTK_BIN(get_widget(self))->child;
-    return child ? get_value_from_gobject(GTK_OBJECT(child)) : Qnil;
+    GtkWidget *child = GTK_BIN(RVAL2GOBJ(self))->child;
+    return child ? GOBJ2RVAL(child) : Qnil;
 }
 
 void Init_gtk_bin()

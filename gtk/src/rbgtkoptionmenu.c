@@ -3,8 +3,8 @@
 
   rbgtkoptionmenu.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 omenu_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_option_menu_new());
+    RBGTK_INITIALIZE(self, gtk_option_menu_new());
     return Qnil;
 }
 
@@ -26,8 +26,8 @@ omenu_set_menu(self, child)
     VALUE self, child;
 {
     rb_iv_set(self, "option_menu", child);
-    gtk_option_menu_set_menu(GTK_OPTION_MENU(get_widget(self)),
-			     get_widget(child));
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(RVAL2GOBJ(self)),
+							 GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -42,7 +42,7 @@ static VALUE
 omenu_remove_menu(self)
     VALUE self;
 {
-    gtk_option_menu_remove_menu(GTK_OPTION_MENU(get_widget(self)));
+    gtk_option_menu_remove_menu(GTK_OPTION_MENU(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -50,8 +50,8 @@ static VALUE
 omenu_set_history(self, index)
     VALUE self, index;
 {
-    gtk_option_menu_set_history(GTK_OPTION_MENU(get_widget(self)),
-				NUM2INT(index));
+    gtk_option_menu_set_history(GTK_OPTION_MENU(RVAL2GOBJ(self)),
+								NUM2INT(index));
     return self;
 }
 

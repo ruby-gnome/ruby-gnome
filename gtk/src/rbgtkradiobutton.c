@@ -3,8 +3,8 @@
 
   rbgtkradiobutton.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -25,28 +25,27 @@ rbtn_initialize(argc, argv, self)
     char *label = NULL;
     
     if (rb_scan_args(argc, argv, "02", &arg1, &arg2) == 1 &&
-	TYPE(arg1) == T_STRING) {
-	label = RSTRING(arg1)->ptr;
+		TYPE(arg1) == T_STRING) {
+		label = RSTRING(arg1)->ptr;
     }
     else {
-	if (!NIL_P(arg2)) {
-	    label = STR2CSTR(arg2);
-	}
-	if (rb_obj_is_kind_of(arg1, gRButton)) {
-	    GtkWidget *b = get_widget(arg1);
-	    list = GTK_RADIO_BUTTON(b)->group;
-	}
-	else {
-	    list = ary2gslist(arg1);
-	}
+		if (!NIL_P(arg2)) {
+			label = STR2CSTR(arg2);
+		}
+		if (rb_obj_is_kind_of(arg1, gRButton)) {
+			list = GTK_RADIO_BUTTON(RVAL2GOBJ(arg1))->group;
+		}
+		else {
+			list = ary2gslist(arg1);
+		}
     }
     if (label) {
-	widget = gtk_radio_button_new_with_label(list, label);
+		widget = gtk_radio_button_new_with_label(list, label);
     }
     else {
-	widget = gtk_radio_button_new(list);
+		widget = gtk_radio_button_new(list);
     }
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -54,9 +53,7 @@ static VALUE
 rbtn_group(self)
     VALUE self;
 {
-    GtkWidget *widget = get_widget(self);
-    
-    return gslist2ary(gtk_radio_button_group(GTK_RADIO_BUTTON(widget)));
+    return gslist2ary(gtk_radio_button_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 
 void Init_gtk_radio_button()

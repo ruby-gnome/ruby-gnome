@@ -3,8 +3,8 @@
 
   rbgtkrange.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,17 +17,14 @@ static VALUE
 range_get_adj(self)
 	 VALUE self;
 {
-    GtkWidget *widget = get_widget(self);
-    GtkAdjustment *adj = gtk_range_get_adjustment(GTK_RANGE(widget));
-
-    return GOBJ2RVAL(adj);
+    return GOBJ2RVAL(gtk_range_get_adjustment(GTK_RANGE(RVAL2GOBJ(self))));
 }
 
 static VALUE
 range_set_update_policy(self, policy)
     VALUE self, policy;
 {
-    gtk_range_set_update_policy(GTK_RANGE(get_widget(self)),
+    gtk_range_set_update_policy(GTK_RANGE(RVAL2GOBJ(self)),
 				(GtkUpdateType)NUM2INT(policy));
     return self;
 }
@@ -37,8 +34,8 @@ range_set_adj(self, adj)
     VALUE self, adj;
 {
 	if (! NIL_P(adj))
-	  gtk_range_set_adjustment(GTK_RANGE(get_widget(self)),
-							   GTK_ADJUSTMENT(get_gobject(adj)));
+	  gtk_range_set_adjustment(GTK_RANGE(RVAL2GOBJ(self)),
+							   GTK_ADJUSTMENT(RVAL2GOBJ(adj)));
 
     return self;
 }

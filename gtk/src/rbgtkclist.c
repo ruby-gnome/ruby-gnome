@@ -3,8 +3,8 @@
 
   rbgtkclist.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,13 +19,13 @@ clist_mark(clist)
     GtkCList *clist;
 {
     if (clist) {
-	GList *list;
-	for (list = clist->row_list; list; list=list->next) {
-	    GtkCListRow *row = GTK_CLIST_ROW(list);
-	    if (row && row->data) {
-		rb_gc_mark_maybe((VALUE)row->data);
-	    }
-	}
+		GList *list;
+		for (list = clist->row_list; list; list=list->next) {
+			GtkCListRow *row = GTK_CLIST_ROW(list);
+			if (row && row->data) {
+				rb_gc_mark_maybe((VALUE)row->data);
+			}
+		}
     }
 }
 
@@ -36,21 +36,21 @@ clist_initialize(self, titles)
     GtkWidget *widget;
 
     if (TYPE(titles) == T_ARRAY) {
-	char **buf;
-	int i, len;
+		char **buf;
+		int i, len;
 
-	Check_Type(titles, T_ARRAY);
-	len = RARRAY(titles)->len;
-	buf = ALLOCA_N(char*, len);
-	for (i=0; i<len; i++) {
-	    buf[i] = STR2CSTR(RARRAY(titles)->ptr[i]);
-	}
-	widget = gtk_clist_new_with_titles(len, buf);
+		Check_Type(titles, T_ARRAY);
+		len = RARRAY(titles)->len;
+		buf = ALLOCA_N(char*, len);
+		for (i=0; i<len; i++) {
+			buf[i] = STR2CSTR(RARRAY(titles)->ptr[i]);
+		}
+		widget = gtk_clist_new_with_titles(len, buf);
     }
     else {
-	widget = gtk_clist_new(NUM2INT(titles));
+		widget = gtk_clist_new(NUM2INT(titles));
     }
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
 
     return Qnil;
 }
@@ -59,8 +59,8 @@ static VALUE
 clist_set_sel_mode(self, mode)
     VALUE self, mode;
 {
-    gtk_clist_set_selection_mode(GTK_CLIST(get_widget(self)),
-				 (GtkSelectionMode)NUM2INT(mode));
+    gtk_clist_set_selection_mode(GTK_CLIST(RVAL2GOBJ(self)),
+								 (GtkSelectionMode)NUM2INT(mode));
     return self;
 }
 
@@ -68,14 +68,14 @@ static VALUE
 clist_get_sel_mode(self)
     VALUE self;
 {
-    return INT2NUM(GTK_CLIST(get_widget(self))->selection_mode);
+    return INT2NUM(GTK_CLIST(RVAL2GOBJ(self))->selection_mode);
 }
 
 static VALUE
 clist_freeze(self)
     VALUE self;
 {
-    gtk_clist_freeze(GTK_CLIST(get_widget(self)));
+    gtk_clist_freeze(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -83,7 +83,7 @@ static VALUE
 clist_thaw(self)
     VALUE self;
 {
-    gtk_clist_thaw(GTK_CLIST(get_widget(self)));
+    gtk_clist_thaw(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -91,7 +91,7 @@ static VALUE
 clist_col_titles_show(self)
     VALUE self;
 {
-    gtk_clist_column_titles_show(GTK_CLIST(get_widget(self)));
+    gtk_clist_column_titles_show(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -99,7 +99,7 @@ static VALUE
 clist_col_titles_hide(self)
     VALUE self;
 {
-    gtk_clist_column_titles_hide(GTK_CLIST(get_widget(self)));
+    gtk_clist_column_titles_hide(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -107,8 +107,8 @@ static VALUE
 clist_col_title_active(self, column)
     VALUE self, column;
 {
-    gtk_clist_column_title_active(GTK_CLIST(get_widget(self)),
-				  NUM2INT(column));
+    gtk_clist_column_title_active(GTK_CLIST(RVAL2GOBJ(self)),
+								  NUM2INT(column));
     return self;
 }
 
@@ -116,8 +116,8 @@ static VALUE
 clist_col_title_passive(self, column)
     VALUE self, column;
 {
-    gtk_clist_column_title_passive(GTK_CLIST(get_widget(self)),
-				   NUM2INT(column));
+    gtk_clist_column_title_passive(GTK_CLIST(RVAL2GOBJ(self)),
+								   NUM2INT(column));
     return self;
 }
 
@@ -125,7 +125,7 @@ static VALUE
 clist_col_titles_active(self)
     VALUE self;
 {
-    gtk_clist_column_titles_active(GTK_CLIST(get_widget(self)));
+    gtk_clist_column_titles_active(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -133,7 +133,7 @@ static VALUE
 clist_col_titles_passive(self)
     VALUE self;
 {
-    gtk_clist_column_titles_passive(GTK_CLIST(get_widget(self)));
+    gtk_clist_column_titles_passive(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -141,9 +141,9 @@ static VALUE
 clist_set_col_title(self, col, title)
     VALUE self, col, title;
 {
-    gtk_clist_set_column_title(GTK_CLIST(get_widget(self)),
-			       NUM2INT(col),
-			       STR2CSTR(title));
+    gtk_clist_set_column_title(GTK_CLIST(RVAL2GOBJ(self)),
+							   NUM2INT(col),
+							   STR2CSTR(title));
     return self;
 }
 
@@ -151,9 +151,9 @@ static VALUE
 clist_set_col_widget(self, col, win)
     VALUE self, col, win;
 {
-    gtk_clist_set_column_widget(GTK_CLIST(get_widget(self)),
-				NUM2INT(col),
-				get_widget(win));
+    gtk_clist_set_column_widget(GTK_CLIST(RVAL2GOBJ(self)),
+								NUM2INT(col),
+								GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -161,20 +161,18 @@ static VALUE
 clist_get_col_widget(self, col)
     VALUE self, col;
 {
-    GtkWidget *widget = NULL;
-
-    widget = gtk_clist_get_column_widget(GTK_CLIST(get_widget(self)),
-					 NUM2INT(col));
-    return widget?get_value_from_gobject(GTK_OBJECT(widget)):Qnil;
+    GtkWidget *widget = gtk_clist_get_column_widget(GTK_CLIST(RVAL2GOBJ(self)),
+													NUM2INT(col));
+    return widget ? GOBJ2RVAL(widget) : Qnil;
 }
 
 static VALUE
 clist_set_col_just(self, col, just)
     VALUE self, col, just;
 {
-    gtk_clist_set_column_justification(GTK_CLIST(get_widget(self)),
-				       NUM2INT(col),
-				       (GtkJustification)NUM2INT(just));
+    gtk_clist_set_column_justification(GTK_CLIST(RVAL2GOBJ(self)),
+									   NUM2INT(col),
+									   (GtkJustification)NUM2INT(just));
     return self;
 }
 
@@ -182,9 +180,9 @@ static VALUE
 clist_set_col_visibility(self, col, visible)
     VALUE self, col, visible;
 {
-    gtk_clist_set_column_visibility(GTK_CLIST(get_widget(self)),
-				    NUM2INT(col),
-				    RTEST(visible));
+    gtk_clist_set_column_visibility(GTK_CLIST(RVAL2GOBJ(self)),
+									NUM2INT(col),
+									RTEST(visible));
     return self;
 }
 
@@ -192,9 +190,9 @@ static VALUE
 clist_set_col_resizeable(self, col, resize)
     VALUE self, col, resize;
 {
-    gtk_clist_set_column_resizeable(GTK_CLIST(get_widget(self)),
-				    NUM2INT(col),
-				    RTEST(resize));
+    gtk_clist_set_column_resizeable(GTK_CLIST(RVAL2GOBJ(self)),
+									NUM2INT(col),
+									RTEST(resize));
     return self;
 }
 
@@ -202,9 +200,9 @@ static VALUE
 clist_set_col_auto_resize(self, col, resize)
     VALUE self, col, resize;
 {
-    gtk_clist_set_column_auto_resize(GTK_CLIST(get_widget(self)),
-				     NUM2INT(col),
-				     RTEST(resize));
+    gtk_clist_set_column_auto_resize(GTK_CLIST(RVAL2GOBJ(self)),
+									 NUM2INT(col),
+									 RTEST(resize));
     return self;
 }
 
@@ -212,8 +210,8 @@ static VALUE
 clist_set_col_width(self, col, width)
     VALUE self, col, width;
 {
-    gtk_clist_set_column_width(GTK_CLIST(get_widget(self)),
-			       NUM2INT(col), NUM2INT(width));
+    gtk_clist_set_column_width(GTK_CLIST(RVAL2GOBJ(self)),
+							   NUM2INT(col), NUM2INT(width));
     return self;
 }
 
@@ -221,8 +219,8 @@ static VALUE
 clist_set_col_max_width(self, col, width)
     VALUE self, col, width;
 {
-    gtk_clist_set_column_max_width(GTK_CLIST(get_widget(self)),
-				   NUM2INT(col), NUM2INT(width));
+    gtk_clist_set_column_max_width(GTK_CLIST(RVAL2GOBJ(self)),
+								   NUM2INT(col), NUM2INT(width));
     return self;
 }
 
@@ -230,8 +228,8 @@ static VALUE
 clist_set_col_min_width(self, col, width)
     VALUE self, col, width;
 {
-    gtk_clist_set_column_min_width(GTK_CLIST(get_widget(self)),
-				   NUM2INT(col), NUM2INT(width));
+    gtk_clist_set_column_min_width(GTK_CLIST(RVAL2GOBJ(self)),
+								   NUM2INT(col), NUM2INT(width));
     return self;
 }
 
@@ -239,7 +237,7 @@ static VALUE
 clist_set_row_height(self, height)
     VALUE self, height;
 {
-    gtk_clist_set_row_height(GTK_CLIST(get_widget(self)), NUM2INT(height));
+    gtk_clist_set_row_height(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(height));
     return self;
 }
 
@@ -247,7 +245,7 @@ static VALUE
 clist_get_row_height(self)
     VALUE self;
 {
-    return INT2NUM( GTK_CLIST(get_widget(self))->row_height );
+    return INT2NUM( GTK_CLIST(RVAL2GOBJ(self))->row_height );
 }
 
 static VALUE
@@ -255,9 +253,9 @@ clist_get_selection_info(self, x, y)
     VALUE self, x, y;
 {
     gint n, row, column;
-    n = gtk_clist_get_selection_info(GTK_CLIST(get_widget(self)),
-				     NUM2INT(x), NUM2INT(y),
-				     &row, &column);
+    n = gtk_clist_get_selection_info(GTK_CLIST(RVAL2GOBJ(self)),
+									 NUM2INT(x), NUM2INT(y),
+									 &row, &column);
     return n ? rb_ary_new3(2, INT2FIX(row), INT2FIX(column)) : Qnil;
 }
 
@@ -265,9 +263,9 @@ static VALUE
 clist_moveto(self, row, col, row_align, col_align)
     VALUE self, row, col, row_align, col_align;
 {
-    gtk_clist_moveto(GTK_CLIST(get_widget(self)),
-		     NUM2INT(row), NUM2INT(col),
-		     (gfloat)NUM2DBL(row_align), (gfloat)NUM2DBL(col_align));
+    gtk_clist_moveto(GTK_CLIST(RVAL2GOBJ(self)),
+					 NUM2INT(row), NUM2INT(col),
+					 (gfloat)NUM2DBL(row_align), (gfloat)NUM2DBL(col_align));
     return self;
 }
 
@@ -275,9 +273,9 @@ static VALUE
 clist_set_text(self, row, col, text)
     VALUE self, row, col, text;
 {
-    gtk_clist_set_text(GTK_CLIST(get_widget(self)),
-		       NUM2INT(row), NUM2INT(col),
-		       STR2CSTR(text));
+    gtk_clist_set_text(GTK_CLIST(RVAL2GOBJ(self)),
+					   NUM2INT(row), NUM2INT(col),
+					   STR2CSTR(text));
     return self;
 }
 
@@ -285,10 +283,10 @@ static VALUE
 clist_set_pixmap(self, row, col, pixmap, mask)
     VALUE self, row, col, pixmap, mask;
 {
-    gtk_clist_set_pixmap(GTK_CLIST(get_widget(self)),
-			 NUM2INT(row), NUM2INT(col),
-			 get_gdkpixmap(pixmap),
-			 (GdkBitmap*)get_gdkpixmap(mask));
+    gtk_clist_set_pixmap(GTK_CLIST(RVAL2GOBJ(self)),
+						 NUM2INT(row), NUM2INT(col),
+						 get_gdkpixmap(pixmap),
+						 (GdkBitmap*)get_gdkpixmap(mask));
     return self;
 }
 
@@ -296,12 +294,12 @@ static VALUE
 clist_set_pixtext(self, row, col, text, spacing, pixmap, mask)
     VALUE self, row, col, text, spacing, pixmap, mask;
 {
-    gtk_clist_set_pixtext(GTK_CLIST(get_widget(self)),
-			  NUM2INT(row), NUM2INT(col),
-			  STR2CSTR(text),
-			  NUM2INT(spacing),
-			  get_gdkpixmap(pixmap),
-			  (GdkBitmap*)get_gdkpixmap(mask));
+    gtk_clist_set_pixtext(GTK_CLIST(RVAL2GOBJ(self)),
+						  NUM2INT(row), NUM2INT(col),
+						  STR2CSTR(text),
+						  NUM2INT(spacing),
+						  get_gdkpixmap(pixmap),
+						  (GdkBitmap*)get_gdkpixmap(mask));
     return self;
 }
 
@@ -309,8 +307,8 @@ static VALUE
 clist_set_foreground(self, row, color)
     VALUE self, row, color;
 {
-    gtk_clist_set_foreground(GTK_CLIST(get_widget(self)),
-			     NUM2INT(row), get_gdkcolor(color));
+    gtk_clist_set_foreground(GTK_CLIST(RVAL2GOBJ(self)),
+							 NUM2INT(row), get_gdkcolor(color));
     return self;
 }
 
@@ -318,8 +316,8 @@ static VALUE
 clist_set_background(self, row, color)
     VALUE self, row, color;
 {
-    gtk_clist_set_background(GTK_CLIST(get_widget(self)),
-			     NUM2INT(row), get_gdkcolor(color));
+    gtk_clist_set_background(GTK_CLIST(RVAL2GOBJ(self)),
+							 NUM2INT(row), get_gdkcolor(color));
     return self;
 }
 
@@ -327,9 +325,9 @@ static VALUE
 clist_set_cell_style(self, row, column, style)
     VALUE self, row, column, style;
 {
-    gtk_clist_set_cell_style(GTK_CLIST(get_widget(self)),
-			     NUM2INT(row), NUM2INT(column),
-			     get_gstyle(style));
+    gtk_clist_set_cell_style(GTK_CLIST(RVAL2GOBJ(self)),
+							 NUM2INT(row), NUM2INT(column),
+							 get_gstyle(style));
     return self;
 }
 
@@ -338,8 +336,8 @@ clist_get_cell_style(self, row, column)
     VALUE self, row, column;
 {
     GtkStyle* style;
-    style = gtk_clist_get_cell_style(GTK_CLIST(get_widget(self)),
-				     NUM2INT(row), NUM2INT(column));
+    style = gtk_clist_get_cell_style(GTK_CLIST(RVAL2GOBJ(self)),
+									 NUM2INT(row), NUM2INT(column));
     return make_gstyle(style);
 }
 
@@ -347,8 +345,8 @@ static VALUE
 clist_set_row_style(self, row, style)
     VALUE self, row, style;
 {
-    gtk_clist_set_row_style(GTK_CLIST(get_widget(self)),
-			    NUM2INT(row), get_gstyle(style));
+    gtk_clist_set_row_style(GTK_CLIST(RVAL2GOBJ(self)),
+							NUM2INT(row), get_gstyle(style));
     return self;
 }
 
@@ -357,7 +355,7 @@ clist_get_row_style(self, row)
     VALUE self, row;
 {
     GtkStyle* style;
-    style = gtk_clist_get_row_style(GTK_CLIST(get_widget(self)), NUM2INT(row));
+    style = gtk_clist_get_row_style(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row));
     return make_gstyle(style);
 }
 
@@ -365,9 +363,9 @@ static VALUE
 clist_set_shift(self, row, col, verticle, horizontal)
     VALUE self, row, col, verticle, horizontal;
 {
-    gtk_clist_set_shift(GTK_CLIST(get_widget(self)),
-			NUM2INT(row), NUM2INT(col),
-			NUM2INT(verticle), NUM2INT(horizontal));
+    gtk_clist_set_shift(GTK_CLIST(RVAL2GOBJ(self)),
+						NUM2INT(row), NUM2INT(col),
+						NUM2INT(verticle), NUM2INT(horizontal));
     return self;
 }
 
@@ -379,15 +377,15 @@ clist_append(self, text)
     int i, len;
 
     Check_Type(text, T_ARRAY);
-    len = GTK_CLIST(get_widget(self))->columns;
+    len = GTK_CLIST(RVAL2GOBJ(self))->columns;
     if (len > RARRAY(text)->len) {
-	rb_raise(rb_eArgError, "text too short");
+		rb_raise(rb_eArgError, "text too short");
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-	buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
     }
-    i = gtk_clist_append(GTK_CLIST(get_widget(self)), buf);
+    i = gtk_clist_append(GTK_CLIST(RVAL2GOBJ(self)), buf);
     return INT2FIX(i);
 }
 
@@ -399,15 +397,15 @@ clist_prepend(self, text)
     int i, len;
 
     Check_Type(text, T_ARRAY);
-    len = GTK_CLIST(get_widget(self))->columns;
+    len = GTK_CLIST(RVAL2GOBJ(self))->columns;
     if (len > RARRAY(text)->len) {
-	rb_raise(rb_eArgError, "text too short");
+		rb_raise(rb_eArgError, "text too short");
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-	buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
     }
-    i = gtk_clist_prepend(GTK_CLIST(get_widget(self)), buf);
+    i = gtk_clist_prepend(GTK_CLIST(RVAL2GOBJ(self)), buf);
     return INT2FIX(i);
 }
 
@@ -419,15 +417,15 @@ clist_insert(self, row, text)
     int i, len;
 
     Check_Type(text, T_ARRAY);
-    len = GTK_CLIST(get_widget(self))->columns;
+    len = GTK_CLIST(RVAL2GOBJ(self))->columns;
     if (len > RARRAY(text)->len) {
-	rb_raise(rb_eArgError, "text too short");
+		rb_raise(rb_eArgError, "text too short");
     }
     buf = ALLOCA_N(char*, len);
     for (i=0; i<len; i++) {
-	buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
+		buf[i] = (RARRAY(text)->ptr[i]==Qnil)?0:STR2CSTR(RARRAY(text)->ptr[i]);
     }
-    i = gtk_clist_insert(GTK_CLIST(get_widget(self)), NUM2INT(row), buf);
+    i = gtk_clist_insert(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row), buf);
     return INT2FIX(i);
 }
 
@@ -435,7 +433,7 @@ static VALUE
 clist_remove(self, row)
     VALUE self, row;
 {
-    gtk_clist_remove(GTK_CLIST(get_widget(self)), NUM2INT(row));
+    gtk_clist_remove(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row));
     return self;
 }
 
@@ -443,8 +441,8 @@ static VALUE
 clist_set_row_data(self, row, data)
     VALUE self, row, data;
 {
-    gtk_clist_set_row_data(GTK_CLIST(get_widget(self)),
-			   NUM2INT(row), (gpointer)data);
+    gtk_clist_set_row_data(GTK_CLIST(RVAL2GOBJ(self)),
+						   NUM2INT(row), (gpointer)data);
     return self;
 }
 
@@ -452,8 +450,8 @@ static VALUE
 clist_get_row_data(self, row)
     VALUE self, row;
 {
-    return (VALUE)gtk_clist_get_row_data(GTK_CLIST(get_widget(self)),
-					 NUM2INT(row));
+    return (VALUE)gtk_clist_get_row_data(GTK_CLIST(RVAL2GOBJ(self)),
+										 NUM2INT(row));
 }
 
 static VALUE
@@ -462,8 +460,8 @@ clist_get_text(self, row, col)
 {
     char* text;
 
-    gtk_clist_get_text(GTK_CLIST(get_widget(self)),
-		       NUM2INT(row), NUM2INT(col), &text);
+    gtk_clist_get_text(GTK_CLIST(RVAL2GOBJ(self)),
+					   NUM2INT(row), NUM2INT(col), &text);
     return rb_str_new2(text);
 }
 
@@ -471,8 +469,8 @@ static VALUE
 clist_select_row(self, row, col)
     VALUE self, row, col;
 {
-    gtk_clist_select_row(GTK_CLIST(get_widget(self)),
-			 NUM2INT(row), NUM2INT(col));
+    gtk_clist_select_row(GTK_CLIST(RVAL2GOBJ(self)),
+						 NUM2INT(row), NUM2INT(col));
     return self;
 }
 
@@ -480,8 +478,8 @@ static VALUE
 clist_unselect_row(self, row, col)
     VALUE self, row, col;
 {
-    gtk_clist_unselect_row(GTK_CLIST(get_widget(self)),
-			   NUM2INT(row), NUM2INT(col));
+    gtk_clist_unselect_row(GTK_CLIST(RVAL2GOBJ(self)),
+						   NUM2INT(row), NUM2INT(col));
     return self;
 }
 
@@ -489,7 +487,7 @@ static VALUE
 clist_clear(self)
     VALUE self;
 {
-    gtk_clist_clear(GTK_CLIST(get_widget(self)));
+    gtk_clist_clear(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -497,7 +495,7 @@ static VALUE
 clist_set_sort_column(self, col)
     VALUE self, col;
 {
-    gtk_clist_set_sort_column(GTK_CLIST(get_widget(self)), NUM2INT(col));
+    gtk_clist_set_sort_column(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(col));
     return self;
 }
 
@@ -505,14 +503,14 @@ static VALUE
 clist_get_sort_column(self)
     VALUE self;
 {
-    return INT2NUM(GTK_CLIST(get_widget(self))->sort_column);
+    return INT2NUM(GTK_CLIST(RVAL2GOBJ(self))->sort_column);
 }
 
 static VALUE
 clist_set_sort_type(self, stype)
     VALUE self, stype;
 {
-    gtk_clist_set_sort_type(GTK_CLIST(get_widget(self)), NUM2INT(stype));
+    gtk_clist_set_sort_type(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(stype));
     return self;
 }
 
@@ -520,14 +518,14 @@ static VALUE
 clist_get_sort_type(self)
     VALUE self;
 {
-    return INT2FIX(GTK_CLIST(get_widget(self))->sort_type);
+    return INT2FIX(GTK_CLIST(RVAL2GOBJ(self))->sort_type);
 }
 
 static VALUE
 clist_sort(self)
     VALUE self;
 {
-    gtk_clist_sort(GTK_CLIST(get_widget(self)));    
+    gtk_clist_sort(GTK_CLIST(RVAL2GOBJ(self)));    
     return self;
 }
 
@@ -538,14 +536,14 @@ clist_each_selection(self)
     GtkCList* clist;
     GList* sellist;
 
-    clist = GTK_CLIST(get_widget(self));
+    clist = GTK_CLIST(RVAL2GOBJ(self));
     sellist = clist->selection;
 
     while (sellist) {
-	gint row;
-	row = GPOINTER_TO_INT(sellist->data);
-	sellist = sellist->next;
-	rb_yield(INT2NUM(row));
+		gint row;
+		row = GPOINTER_TO_INT(sellist->data);
+		sellist = sellist->next;
+		rb_yield(INT2NUM(row));
     }
 
     return Qnil;
@@ -558,14 +556,14 @@ clist_each(self)
     GtkCList* clist;
     GList* rowlist;
 
-    clist = GTK_CLIST(get_widget(self));
+    clist = GTK_CLIST(RVAL2GOBJ(self));
     rowlist = clist->row_list;
 
     while (rowlist) {
-	gint row;
-	row = GPOINTER_TO_INT(rowlist->data);
-	rowlist = rowlist->next;
-	rb_yield(INT2NUM(row));
+		gint row;
+		row = GPOINTER_TO_INT(rowlist->data);
+		rowlist = rowlist->next;
+		rb_yield(INT2NUM(row));
     }
 
     return Qnil;
@@ -575,15 +573,15 @@ static VALUE
 clist_get_focus_row(self)
     VALUE self;
 {
-    return INT2NUM(GTK_CLIST(get_widget(self))->focus_row);
+    return INT2NUM(GTK_CLIST(RVAL2GOBJ(self))->focus_row);
 }
 
 static VALUE
 clist_set_reorderable(self, reorderable)
     VALUE self, reorderable;
 {
-    gtk_clist_set_reorderable(GTK_CLIST(get_widget(self)),
-			      RTEST(reorderable));
+    gtk_clist_set_reorderable(GTK_CLIST(RVAL2GOBJ(self)),
+							  RTEST(reorderable));
     return self;
 }
 
@@ -591,7 +589,7 @@ static VALUE
 clist_undo_selection(self)
     VALUE self;
 {
-    gtk_clist_undo_selection(GTK_CLIST(get_widget(self)));
+    gtk_clist_undo_selection(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -599,9 +597,9 @@ static VALUE
 clist_set_hadjustment(self, adjust)
     VALUE self, adjust;
 {
-    gtk_clist_set_hadjustment(GTK_CLIST(get_widget(self)),
+    gtk_clist_set_hadjustment(GTK_CLIST(RVAL2GOBJ(self)),
                               NIL_P(adjust) ? NULL :
-			        GTK_ADJUSTMENT(get_gobject(adjust)));
+							  GTK_ADJUSTMENT(RVAL2GOBJ(adjust)));
     return Qnil;
 }
 
@@ -611,7 +609,7 @@ clist_get_hadjustment(self)
 {
     GtkAdjustment *tmp;
 
-    tmp = gtk_clist_get_hadjustment(GTK_CLIST(get_widget(self)));
+    tmp = gtk_clist_get_hadjustment(GTK_CLIST(RVAL2GOBJ(self)));
     return GOBJ2RVAL(tmp);
 }
 
@@ -619,9 +617,9 @@ static VALUE
 clist_set_vadjustment(self, adjust)
     VALUE self, adjust;
 {
-    gtk_clist_set_vadjustment(GTK_CLIST(get_widget(self)),
+    gtk_clist_set_vadjustment(GTK_CLIST(RVAL2GOBJ(self)),
                               NIL_P(adjust) ?  NULL :
-			        GTK_ADJUSTMENT(get_gobject(adjust)));
+							  GTK_ADJUSTMENT(RVAL2GOBJ(adjust)));
     return Qnil;
 }
 
@@ -631,7 +629,7 @@ clist_get_vadjustment(self)
 {
     GtkAdjustment *tmp;
 
-    tmp = gtk_clist_get_vadjustment(GTK_CLIST(get_widget(self)));
+    tmp = gtk_clist_get_vadjustment(GTK_CLIST(RVAL2GOBJ(self)));
     return GOBJ2RVAL(G_OBJECT(tmp));
 }
 
@@ -639,134 +637,134 @@ static VALUE
 clist_get_rows(self)
     VALUE self;
 {
-    return INT2NUM(GTK_CLIST(get_widget(self))->rows);
+    return INT2NUM(GTK_CLIST(RVAL2GOBJ(self))->rows);
 }
 
 static VALUE
 clist_get_columns(self)
     VALUE self;
 {
-    return INT2NUM(GTK_CLIST(get_widget(self))->columns);
+    return INT2NUM(GTK_CLIST(RVAL2GOBJ(self))->columns);
 }
 
 static VALUE
 clist_row_is_visible(self, row)
-	 VALUE self, row;
+	VALUE self, row;
 {
     GtkVisibility retval;
-    retval = gtk_clist_row_is_visible(GTK_CLIST(get_widget(self)),
+    retval = gtk_clist_row_is_visible(GTK_CLIST(RVAL2GOBJ(self)),
 				                      NUM2INT(row));
     return (retval==GTK_VISIBILITY_NONE) ? Qnil : INT2NUM(retval);
 }
 
 static VALUE
 clist_swap_rows(self, row1, row2)
-	 VALUE self, row1, row2;
+	VALUE self, row1, row2;
 {
-    gtk_clist_swap_rows(GTK_CLIST(get_widget(self)),
+    gtk_clist_swap_rows(GTK_CLIST(RVAL2GOBJ(self)),
                         NUM2INT(row1), NUM2INT(row2));
     return self;
 }
 
 static VALUE
 clist_row_move(self, source_row, dest_row)
-	 VALUE self, source_row, dest_row;
+	VALUE self, source_row, dest_row;
 {
-    gtk_clist_row_move(GTK_CLIST(get_widget(self)),
-		       NUM2INT(source_row), NUM2INT(dest_row));
+    gtk_clist_row_move(GTK_CLIST(RVAL2GOBJ(self)),
+					   NUM2INT(source_row), NUM2INT(dest_row));
     return self;
 }
 
 static VALUE
 clist_set_auto_sort(self, auto_sort)
-	 VALUE self, auto_sort;
+	VALUE self, auto_sort;
 {
-    gtk_clist_set_auto_sort(GTK_CLIST(get_widget(self)), RTEST(auto_sort));
+    gtk_clist_set_auto_sort(GTK_CLIST(RVAL2GOBJ(self)), RTEST(auto_sort));
     return self;
 }
 
 static VALUE
 clist_select_all(self)
-	 VALUE self;
+	VALUE self;
 {
-    gtk_clist_select_all(GTK_CLIST(get_widget(self)));
+    gtk_clist_select_all(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
 clist_unselect_all(self)
-	 VALUE self;
+	VALUE self;
 {
-    gtk_clist_unselect_all(GTK_CLIST(get_widget(self)));
+    gtk_clist_unselect_all(GTK_CLIST(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
 clist_set_selectable(self, row, selectable)
-	 VALUE self, row, selectable;
+	VALUE self, row, selectable;
 {
-    gtk_clist_set_selectable(GTK_CLIST(get_widget(self)), NUM2INT(row), RTEST(selectable));
+    gtk_clist_set_selectable(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row), RTEST(selectable));
     return self;
 }
 
 static VALUE
 clist_get_selectable(self, row)
-	 VALUE self, row;
+	VALUE self, row;
 {
-    return gtk_clist_get_selectable(GTK_CLIST(get_widget(self)), NUM2INT(row)) ? Qtrue : Qfalse;
+    return gtk_clist_get_selectable(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row)) ? Qtrue : Qfalse;
 }
 
 static VALUE
 clist_optimal_column_width(self, column)
-	 VALUE self, column;
+	VALUE self, column;
 {
-    return INT2NUM(gtk_clist_optimal_column_width(GTK_CLIST(get_widget(self)), NUM2INT(column)));
+    return INT2NUM(gtk_clist_optimal_column_width(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(column)));
 }
 
 static VALUE
 clist_set_use_drag_icons(self, use_icons)
-	 VALUE self, use_icons;
+	VALUE self, use_icons;
 {
-    gtk_clist_set_use_drag_icons(GTK_CLIST(get_widget(self)), RTEST(use_icons));
+    gtk_clist_set_use_drag_icons(GTK_CLIST(RVAL2GOBJ(self)), RTEST(use_icons));
     return self;
 }
 
 static VALUE
 clist_get_column_title(self, column)
-	 VALUE self, column;
+	VALUE self, column;
 {
-    return CSTR2OBJ(gtk_clist_get_column_title(GTK_CLIST(get_widget(self)),
+    return CSTR2OBJ(gtk_clist_get_column_title(GTK_CLIST(RVAL2GOBJ(self)),
                                                NUM2INT(column)));
 }
 
 static VALUE
 clist_set_shadow_type(self, type)
-	 VALUE self, type;
+	VALUE self, type;
 {
-    gtk_clist_set_shadow_type(GTK_CLIST(get_widget(self)), NUM2INT(type));
+    gtk_clist_set_shadow_type(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(type));
     return self;
 }
 
 static VALUE
 clist_set_button_actions(self, button, button_actions)
-	 VALUE self, button, button_actions;
+	VALUE self, button, button_actions;
 {
-    gtk_clist_set_button_actions(GTK_CLIST(get_widget(self)), NUM2INT(button), NUM2INT(button_actions));
+    gtk_clist_set_button_actions(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(button), NUM2INT(button_actions));
     return self;
 }
 
 static VALUE
 clist_get_cell_type(self, row, column)
-	 VALUE self, row, column;
+	VALUE self, row, column;
 {
-    return INT2FIX(gtk_clist_get_cell_type(GTK_CLIST(get_widget(self)), NUM2INT(row), NUM2INT(column)));
+    return INT2FIX(gtk_clist_get_cell_type(GTK_CLIST(RVAL2GOBJ(self)), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
 clist_find_row_from_data(self, data)
-	 VALUE self, data;
+	VALUE self, data;
 {
-    return INT2FIX(gtk_clist_find_row_from_data(GTK_CLIST(get_widget(self)), (gpointer)data));
+    return INT2FIX(gtk_clist_find_row_from_data(GTK_CLIST(RVAL2GOBJ(self)), (gpointer)data));
 }
 
 void Init_gtk_clist()

@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 05:26:50 $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -131,11 +131,7 @@ static st_table *gtk_object_list;
 static VALUE gtk_object_list_v;
 static VALUE gtk_type_hash;
 
-ID id_gtkdata;
-ID id_relatives;
-ID id_relative_callbacks;
 ID id_call;
-ID id_class_info;
 
 void
 rbgtk_register_class(cinfo)
@@ -144,56 +140,14 @@ rbgtk_register_class(cinfo)
     rbgobj_register_class(cinfo);
 }
 
-rbgtk_class_info *
-rbgtk_lookup_class(klass)
-    VALUE klass;
-{
-    return (rbgtk_class_info*)rbgobj_lookup_class(klass);
-}
-
-rbgtk_class_info *
-rbgtk_lookup_class_by_gtype(gtype)
-    GtkType gtype;
-{
-    return (rbgtk_class_info*)rbgobj_lookup_class_by_gtype(gtype);
-}
-
-static void
-gobj_mark(obj)
-    GtkObject *obj;
-{
-    /* just for type mark */
-}
-
-GtkObject*
-get_gobject(obj)
-    VALUE obj;
-{
-    return GTK_OBJECT(rbgobj_get_gobject(obj));
-}
-
 void
-set_gobject(obj, gtkobj)
+rbgtk_initialize_gtkobject(obj, gtkobj)
     VALUE obj;
     GtkObject *gtkobj;
 {
-    rbgobj_set_gobject(obj, G_OBJECT(gtkobj));
-}
-
-GtkWidget*
-get_widget(obj)
-    VALUE obj;
-{
-    GtkObject *data = get_gobject(obj);
-
-    return GTK_WIDGET(data);
-}
-
-VALUE
-get_value_from_gobject(obj)
-    GtkObject *obj;
-{
-    return rbgobj_get_value_from_gobject(G_OBJECT(obj));
+	gtkobj = gtk_object_ref(gtkobj);
+    gtk_object_sink(gtkobj);
+    RBGOBJ_INITIALIZE(obj, gtkobj);
 }
 
 void
@@ -204,32 +158,17 @@ add_relative(obj, relative)
 }
 
 void add_relative_removable(obj, relative, obj_ivar_id, hash_key)
-     VALUE obj, relative, hash_key;
-     ID    obj_ivar_id;
+	VALUE obj, relative, hash_key;
+	ID    obj_ivar_id;
 {
     rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key);
 }
 
 void remove_relative(obj, obj_ivar_id, hash_key)
-     VALUE obj, hash_key;
-     ID    obj_ivar_id;
+	VALUE obj, hash_key;
+	ID    obj_ivar_id;
 {
     rbgobj_remove_relative(obj, obj_ivar_id, hash_key);
-}
-
-void
-set_widget(obj, widget)
-    VALUE obj;
-    GtkWidget *widget;
-{
-    set_gobject(obj, GTK_OBJECT(widget));
-}
-
-VALUE
-get_gtk_type(gtkobj)
-    GtkObject *gtkobj;
-{
-    return rbgobj_lookup_rbclass(G_OBJECT(gtkobj));
 }
 
 VALUE
@@ -248,7 +187,7 @@ get_gstyle(style)
 
     if (NIL_P(style)) return NULL;
     if (!rb_obj_is_instance_of(style, gStyle)) {
-	rb_raise(rb_eTypeError, "not a GtkStyle");
+		rb_raise(rb_eTypeError, "not a GtkStyle");
     }
     Data_Get_Struct(style, GtkStyle, gstyle);
 
@@ -273,7 +212,7 @@ get_grcstyle(style)
 
     if (NIL_P(style)) return NULL;
     if (!rb_obj_is_instance_of(style, gRcStyle)) {
-	rb_raise(rb_eTypeError, "not a GtkRcStyle");
+		rb_raise(rb_eTypeError, "not a GtkRcStyle");
     }
     Data_Get_Struct(style, GtkRcStyle, gstyle);
 
@@ -288,7 +227,7 @@ make_gtkaccelgrp(accel)
     return Data_Wrap_Struct(gAccelGroup,
                             0,
                             gtk_accel_group_unref,
-			    accel);
+							accel);
 }
 
 GtkAccelGroup*
@@ -345,7 +284,7 @@ get_gtkprevinfo(value)
     if (NIL_P(value)) return NULL;
 
     if (!rb_obj_is_instance_of(value, gPreviewInfo)) {
-	rb_raise(rb_eTypeError, "not a PreviewInfo");
+		rb_raise(rb_eTypeError, "not a PreviewInfo");
     }
     Data_Get_Struct(value, GtkPreviewInfo, info);
 
@@ -359,7 +298,7 @@ exec_callback(widget, proc)
     gpointer proc;
 {
     rb_funcall((VALUE)proc, id_call, 1,
-	       get_value_from_gobject(GTK_OBJECT(widget)));
+			   GOBJ2RVAL(GTK_OBJECT(widget)));
 }
 
 /* 
@@ -414,7 +353,7 @@ gallocation_to_a(self)
 
     a = get_gallocation(self);
     return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
-		       INT2FIX(a->width), INT2FIX(a->height));
+					   INT2FIX(a->width), INT2FIX(a->height));
 }
 
 static VALUE
@@ -543,8 +482,8 @@ void Init_gtk_requisiton()
 
 static gint 
 rbgtk_poll (GPollFD *fds,
-	    guint    nfds,
-	    gint     timeout)
+			guint    nfds,
+			gint     timeout)
 {
     struct timeval tv;
     fd_set rset, wset, xset;
@@ -557,34 +496,34 @@ rbgtk_poll (GPollFD *fds,
     FD_ZERO (&xset);
 
     for (f = fds; f < &fds[nfds]; ++f) {
-	if (f->fd >= 0)	{
-	    if (f->events & G_IO_IN)
-		FD_SET (f->fd, &rset);
-	    if (f->events & G_IO_OUT)
-		FD_SET (f->fd, &wset);
-	    if (f->events & G_IO_PRI)
-		FD_SET (f->fd, &xset);
-	    if (f->fd > maxfd && (f->events & (G_IO_IN|G_IO_OUT|G_IO_PRI)))
-		maxfd = f->fd;
-	}
+		if (f->fd >= 0)	{
+			if (f->events & G_IO_IN)
+				FD_SET (f->fd, &rset);
+			if (f->events & G_IO_OUT)
+				FD_SET (f->fd, &wset);
+			if (f->events & G_IO_PRI)
+				FD_SET (f->fd, &xset);
+			if (f->fd > maxfd && (f->events & (G_IO_IN|G_IO_OUT|G_IO_PRI)))
+				maxfd = f->fd;
+		}
     }
     tv.tv_sec = timeout / 1000;
     tv.tv_usec = (timeout % 1000) * 1000;
 
     ready = rb_thread_select (maxfd + 1, &rset, &wset, &xset,
-			      timeout == -1 ? NULL : &tv);
+							  timeout == -1 ? NULL : &tv);
     if (ready > 0) {
-	for (f = fds; f < &fds[nfds]; ++f) {
-	    f->revents = 0;
-	    if (f->fd >= 0) {
-		if (FD_ISSET (f->fd, &rset))
-		    f->revents |= G_IO_IN;
-		if (FD_ISSET (f->fd, &wset))
-		    f->revents |= G_IO_OUT;
-		if (FD_ISSET (f->fd, &xset))
-		    f->revents |= G_IO_PRI;
-	    }
-	}
+		for (f = fds; f < &fds[nfds]; ++f) {
+			f->revents = 0;
+			if (f->fd >= 0) {
+				if (FD_ISSET (f->fd, &rset))
+					f->revents |= G_IO_IN;
+				if (FD_ISSET (f->fd, &wset))
+					f->revents |= G_IO_OUT;
+				if (FD_ISSET (f->fd, &xset))
+					f->revents |= G_IO_PRI;
+			}
+		}
     }
 
     return ready;
@@ -623,12 +562,7 @@ void Init_gtk_gtk()
     gtk_type_hash = rb_hash_new();
 
     /* IDs */
-    id_gtkdata = rb_intern("gtkdata");
-    id_relatives = rb_intern("relatives");
-    id_relative_callbacks = rb_intern("relative_callbacks");
-    
     id_call = rb_intern("call");
-    id_class_info = rb_intern("gtk_class_info");
 
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relatives, Qnil);

@@ -3,8 +3,8 @@
 
   rbgtkcombo.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 combo_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_combo_new());
+    RBGTK_INITIALIZE(self, gtk_combo_new());
     return Qnil;
 }
 
@@ -25,7 +25,7 @@ static VALUE
 combo_val_in_list(self, val, ok)
     VALUE self, val, ok;
 {
-    gtk_combo_set_value_in_list(GTK_COMBO(get_widget(self)),
+    gtk_combo_set_value_in_list(GTK_COMBO(RVAL2GOBJ(self)),
 				RTEST(val), RTEST(ok));
     return self;
 }
@@ -34,7 +34,7 @@ static VALUE
 combo_use_arrows(self, val)
     VALUE self, val;
 {
-    gtk_combo_set_use_arrows(GTK_COMBO(get_widget(self)),
+    gtk_combo_set_use_arrows(GTK_COMBO(RVAL2GOBJ(self)),
 			     RTEST(val));
     return self;
 }
@@ -43,7 +43,7 @@ static VALUE
 combo_use_arrows_always(self, val)
     VALUE self, val;
 {
-    gtk_combo_set_use_arrows_always(GTK_COMBO(get_widget(self)),
+    gtk_combo_set_use_arrows_always(GTK_COMBO(RVAL2GOBJ(self)),
                                     RTEST(val));
     return self;
 }
@@ -52,7 +52,7 @@ static VALUE
 combo_case_sensitive(self, val)
     VALUE self, val;
 {
-    gtk_combo_set_case_sensitive(GTK_COMBO(get_widget(self)),
+    gtk_combo_set_case_sensitive(GTK_COMBO(RVAL2GOBJ(self)),
 				 RTEST(val));
     return self;
 }
@@ -61,8 +61,8 @@ static VALUE
 combo_item_string(self, item, val)
     VALUE self, item, val;
 {
-    gtk_combo_set_item_string(GTK_COMBO(get_widget(self)),
-			      GTK_ITEM(get_widget(item)),
+    gtk_combo_set_item_string(GTK_COMBO(RVAL2GOBJ(self)),
+			      GTK_ITEM(RVAL2GOBJ(item)),
 			      NIL_P(val)?NULL:STR2CSTR(val));
     return self;
 }
@@ -83,7 +83,7 @@ combo_popdown_strings(self, ary)
 	glist = g_list_append(glist, STR2CSTR(RARRAY(ary)->ptr[i]));
     }
 
-    gtk_combo_set_popdown_strings(GTK_COMBO(get_widget(self)), glist);
+    gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);
     return self;
 }
 
@@ -91,7 +91,7 @@ static VALUE
 combo_disable_activate(self)
     VALUE self;
 {
-    gtk_combo_disable_activate(GTK_COMBO(get_widget(self)));
+    gtk_combo_disable_activate(GTK_COMBO(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -99,35 +99,35 @@ static VALUE
 combo_entry(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->entry);
+    return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->entry);
 }
 
 static VALUE
 combo_button(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->button);
+    return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->button);
 }
 
 static VALUE
 combo_popup(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->popup);
+    return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->popup);
 }
 
 static VALUE
 combo_popwin(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->popwin);
+    return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->popwin);
 }
 
 static VALUE
 combo_list(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_COMBO(get_widget(self))->list);
+    return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->list);
 }
 
 void Init_gtk_combo()

@@ -3,8 +3,8 @@
 
   rbgtktipsquery.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 tipsquery_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_tips_query_new());
+    RBGTK_INITIALIZE(self, gtk_tips_query_new());
     return Qnil;
 }
 
@@ -27,7 +27,7 @@ static VALUE
 tipsquery_start(self)
     VALUE self;
 {
-    gtk_tips_query_start_query(GTK_TIPS_QUERY(get_widget(self)));
+    gtk_tips_query_start_query(GTK_TIPS_QUERY(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -35,7 +35,7 @@ static VALUE
 tipsquery_stop(self)
     VALUE self;
 {
-    gtk_tips_query_stop_query(GTK_TIPS_QUERY(get_widget(self)));
+    gtk_tips_query_stop_query(GTK_TIPS_QUERY(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -43,8 +43,8 @@ static VALUE
 tipsquery_set_caller(self, win)
     VALUE self, win;
 {
-    gtk_tips_query_set_caller(GTK_TIPS_QUERY(get_widget(self)),
-			      get_widget(win));
+    gtk_tips_query_set_caller(GTK_TIPS_QUERY(RVAL2GOBJ(self)),
+							  GTK_WIDGET(RVAL2GOBJ(win)));
     return self;
 }
 
@@ -52,9 +52,9 @@ static VALUE
 tipsquery_set_labels(self, label_inactive, label_no_tip)
     VALUE self, label_inactive, label_no_tip;
 {
-    gtk_tips_query_set_labels(GTK_TIPS_QUERY(get_widget(self)),
-			      STR2CSTR(label_inactive),
-			      STR2CSTR(label_no_tip));
+    gtk_tips_query_set_labels(GTK_TIPS_QUERY(RVAL2GOBJ(self)),
+							  STR2CSTR(label_inactive),
+							  STR2CSTR(label_no_tip));
     return self;
 }
 

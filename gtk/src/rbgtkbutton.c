@@ -3,8 +3,8 @@
 
   rbgtkbutton.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,7 +29,7 @@ button_initialize(argc, argv, self)
 	widget = gtk_button_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -37,7 +37,7 @@ static VALUE
 button_pressed(self)
     VALUE self;
 {
-    gtk_button_pressed(GTK_BUTTON(get_widget(self)));
+    gtk_button_pressed(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -45,7 +45,7 @@ static VALUE
 button_released(self)
     VALUE self;
 {
-    gtk_button_released(GTK_BUTTON(get_widget(self)));
+    gtk_button_released(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -53,7 +53,7 @@ static VALUE
 button_clicked(self)
     VALUE self;
 {
-    gtk_button_clicked(GTK_BUTTON(get_widget(self)));
+    gtk_button_clicked(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -61,7 +61,7 @@ static VALUE
 button_enter(self)
     VALUE self;
 {
-    gtk_button_enter(GTK_BUTTON(get_widget(self)));
+    gtk_button_enter(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -69,7 +69,7 @@ static VALUE
 button_leave(self)
     VALUE self;
 {
-    gtk_button_leave(GTK_BUTTON(get_widget(self)));
+    gtk_button_leave(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -77,7 +77,7 @@ static VALUE
 button_set_relief(self, style)
     VALUE self, style;
 {
-    gtk_button_set_relief(GTK_BUTTON(get_widget(self)), NUM2INT(style));
+    gtk_button_set_relief(GTK_BUTTON(RVAL2GOBJ(self)), NUM2INT(style));
     return self;
 }
 
@@ -86,7 +86,7 @@ button_get_relief(self)
     VALUE self;
 {
     GtkReliefStyle style;
-    style = gtk_button_get_relief(GTK_BUTTON(get_widget(self)));
+    style = gtk_button_get_relief(GTK_BUTTON(RVAL2GOBJ(self)));
     return INT2FIX(style);
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkdata.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,12 +34,12 @@ static VALUE
 adj_initialize(self, value, lower, upper, step_inc, page_inc, page_size)
     VALUE self, value, lower, upper, step_inc, page_inc, page_size;
 {
-    set_gobject(self, GTK_OBJECT(gtk_adjustment_new(NUM2DBL(value),
+    RBGTK_INITIALIZE(self, gtk_adjustment_new(NUM2DBL(value),
 						    NUM2DBL(lower),
 						    NUM2DBL(upper),
 						    NUM2DBL(step_inc),
 						    NUM2DBL(page_inc),
-						    NUM2DBL(page_size))));
+						    NUM2DBL(page_size)));
     return Qnil;
 }
 
@@ -47,7 +47,7 @@ static VALUE
 adj_set_value(self, value)
     VALUE self, value;
 {
-    gtk_adjustment_set_value(GTK_ADJUSTMENT(get_gobject(self)),
+    gtk_adjustment_set_value(GTK_ADJUSTMENT(RVAL2GOBJ(self)),
 			     NUM2DBL(value));
     return Qnil;
 }
@@ -56,35 +56,35 @@ static VALUE
 adj_get_value(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->value);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->value);
 }
 
 static VALUE
 adj_get_lower(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->lower);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->lower);
 }
 
 static VALUE
 adj_get_upper(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->upper);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->upper);
 }
 
 static VALUE
 adj_get_step_increment(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->step_increment);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->step_increment);
 }
 
 static VALUE
 adj_set_step_increment(self, inc)
     VALUE self, inc;
 {
-    GTK_ADJUSTMENT(get_gobject(self))->step_increment = NUM2DBL(inc);
+    GTK_ADJUSTMENT(RVAL2GOBJ(self))->step_increment = NUM2DBL(inc);
     return self;
 }
 
@@ -92,14 +92,14 @@ static VALUE
 adj_get_page_increment(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->page_increment);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->page_increment);
 }
 
 static VALUE
 adj_get_page_size(self)
     VALUE self;
 {
-    return rb_float_new(GTK_ADJUSTMENT(get_gobject(self))->page_size);
+    return rb_float_new(GTK_ADJUSTMENT(RVAL2GOBJ(self))->page_size);
 }
 
 void Init_gtk_adjustment()
@@ -133,7 +133,7 @@ static VALUE
 ttips_initialize(self)
     VALUE self;
 {
-    set_gobject(self, GTK_OBJECT(gtk_tooltips_new()));
+    RBGTK_INITIALIZE(self, gtk_tooltips_new());
     return Qnil;
 }
 
@@ -141,8 +141,8 @@ static VALUE
 ttips_set_tip(self, win, text, priv)
     VALUE self, win, text, priv;
 {
-    gtk_tooltips_set_tip(GTK_TOOLTIPS(get_gobject(self)),
-			 get_widget(win),
+    gtk_tooltips_set_tip(GTK_TOOLTIPS(RVAL2GOBJ(self)),
+			 GTK_WIDGET(RVAL2GOBJ(win)),
 			 NIL_P(text)?NULL:STR2CSTR(text),
 			 NIL_P(priv)?NULL:STR2CSTR(priv));
 
@@ -153,7 +153,7 @@ static VALUE
 ttips_set_delay(self, delay)
     VALUE self, delay;
 {
-    gtk_tooltips_set_delay(GTK_TOOLTIPS(get_gobject(self)), NUM2INT(delay));
+    gtk_tooltips_set_delay(GTK_TOOLTIPS(RVAL2GOBJ(self)), NUM2INT(delay));
 
     return self;
 }
@@ -162,7 +162,7 @@ static VALUE
 ttips_enable(self)
     VALUE self;
 {
-    gtk_tooltips_enable(GTK_TOOLTIPS(get_gobject(self)));
+    gtk_tooltips_enable(GTK_TOOLTIPS(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -170,7 +170,7 @@ static VALUE
 ttips_disable(self)
     VALUE self;
 {
-    gtk_tooltips_disable(GTK_TOOLTIPS(get_gobject(self)));
+    gtk_tooltips_disable(GTK_TOOLTIPS(RVAL2GOBJ(self)));
     return self;
 }
 

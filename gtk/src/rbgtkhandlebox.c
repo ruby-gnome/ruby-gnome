@@ -3,8 +3,8 @@
 
   rbgtkhandlebox.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 hb_init(self)
     VALUE self;
 {
-    set_widget(self, gtk_handle_box_new());
+    RBGTK_INITIALIZE(self, gtk_handle_box_new());
     return Qnil;
 }
 
@@ -27,7 +27,7 @@ static VALUE
 hb_set_shadow_type(self, shadow)
     VALUE self, shadow;
 {
-    gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(get_widget(self)),
+    gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(RVAL2GOBJ(self)),
 				   NUM2INT(shadow));
     return self;
 }
@@ -36,7 +36,7 @@ static VALUE
 hb_set_handle_pos(self, pos)
     VALUE self, pos;
 {
-    gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(get_widget(self)),
+    gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(RVAL2GOBJ(self)),
 				       NUM2INT(pos));
     return self;
 }
@@ -45,7 +45,7 @@ static VALUE
 hb_set_snap_edge(self, edge)
     VALUE self, edge;
 {
-    gtk_handle_box_set_snap_edge(GTK_HANDLE_BOX(get_widget(self)),
+    gtk_handle_box_set_snap_edge(GTK_HANDLE_BOX(RVAL2GOBJ(self)),
 				 NUM2INT(edge));
     return self;
 }
@@ -54,28 +54,28 @@ static VALUE
 hb_shadow_type(self)
     VALUE self;
 {
-    return INT2FIX(GTK_HANDLE_BOX(get_widget(self))->shadow_type);
+    return INT2FIX(GTK_HANDLE_BOX(RVAL2GOBJ(self))->shadow_type);
 }
 
 static VALUE
 hb_handle_pos(self)
     VALUE self;
 {
-    return INT2FIX(GTK_HANDLE_BOX(get_widget(self))->handle_position);
+    return INT2FIX(GTK_HANDLE_BOX(RVAL2GOBJ(self))->handle_position);
 }
 
 static VALUE
 hb_snap_edge(self)
     VALUE self;
 {
-    return INT2FIX(GTK_HANDLE_BOX(get_widget(self))->snap_edge);
+    return INT2FIX(GTK_HANDLE_BOX(RVAL2GOBJ(self))->snap_edge);
 }
 
 static VALUE
 hb_child_detached(self)
     VALUE self;
 {
-    return GTK_HANDLE_BOX(get_widget(self))->child_detached ? Qtrue : Qfalse;
+    return GTK_HANDLE_BOX(RVAL2GOBJ(self))->child_detached ? Qtrue : Qfalse;
 }
 
 void Init_gtk_handle_box()

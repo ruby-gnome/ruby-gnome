@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:30:59 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -31,6 +31,9 @@
 
 #define CSTR2OBJ(s) (s ? rb_str_new2(s) : Qnil)
 #define RUBY_GTK_OBJ_KEY "__ruby_gtk_object__"
+#define RBGTK_INITIALIZE(obj,gtkobj)\
+ (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
+
 
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
@@ -38,16 +41,11 @@ extern GSList* ary2gslist(VALUE ary);
 extern VALUE gslist2ary(GSList *list);
 extern VALUE arg_to_value(GtkArg* arg);
 
-extern ID id_gtkdata;
-extern ID id_relatives;
-extern ID id_relative_callbacks;
 extern ID id_call;
 
 typedef RGObjClassInfo rbgtk_class_info;
 
 extern void rbgtk_register_class(rbgtk_class_info *cinfo);
-extern rbgtk_class_info *rbgtk_lookup_class(VALUE klass);
-extern rbgtk_class_info *rbgtk_lookup_class_by_gtype(GtkType gtype);
 
 extern VALUE warn_handler;
 extern VALUE mesg_handler;
@@ -214,12 +212,7 @@ extern VALUE mGdkRgb;
 /*
  * for gtk
  */
-extern VALUE get_value_from_gobject(GtkObject* obj);
-extern GtkObject* get_gobject(VALUE obj);
-extern void set_gobject(VALUE obj, GtkObject *gtkobj);
-extern GtkWidget* get_widget(VALUE obj);
-
-extern VALUE get_gtk_type(GtkObject* gtkobj);
+extern void rbgtk_initialize_gobject(VALUE obj, GtkObject *gtkobj);
 
 extern VALUE make_gstyle(GtkStyle* style);
 extern GtkStyle* get_gstyle(VALUE style);
@@ -244,7 +237,6 @@ extern GtkSelectionData *get_gtkselectiondata(VALUE value);
 extern VALUE make_gtkprevinfo(GtkPreviewInfo* info);
 extern GtkPreviewInfo* get_gtkprevinfo(VALUE value);
 
-extern void set_widget(VALUE obj, GtkWidget *widget);
 extern void add_relative(VALUE obj, VALUE relative);
 extern void add_relative_removable(VALUE obj, VALUE relative,
                                    ID obj_ivar_id, VALUE hash_key);

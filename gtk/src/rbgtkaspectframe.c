@@ -3,8 +3,8 @@
 
   rbgtkaspectframe.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 aframe_initialize(self, label, xalign, yalign, ratio, obey_child)
     VALUE self, label, xalign, yalign, ratio, obey_child;
 {
-    set_widget(self, gtk_aspect_frame_new(NIL_P(label)?NULL:STR2CSTR(label),
+    RBGTK_INITIALIZE(self, gtk_aspect_frame_new(NIL_P(label)?NULL:STR2CSTR(label),
 					  NUM2DBL(xalign),
 					  NUM2DBL(yalign),
 					  NUM2DBL(ratio),
@@ -29,7 +29,7 @@ static VALUE
 aframe_set(self, xalign, yalign, ratio, obey_child)
     VALUE self, xalign, yalign, ratio, obey_child;
 {
-    gtk_aspect_frame_set(GTK_ASPECT_FRAME(get_widget(self)),
+    gtk_aspect_frame_set(GTK_ASPECT_FRAME(RVAL2GOBJ(self)),
 			 NUM2DBL(xalign), NUM2DBL(yalign),
 			 NUM2DBL(ratio), RTEST(obey_child));
     return self;

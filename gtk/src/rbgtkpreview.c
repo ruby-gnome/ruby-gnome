@@ -3,8 +3,8 @@
 
   rbgtkpreview.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 preview_initialize(self, type)
     VALUE self, type;
 {
-    set_widget(self, gtk_preview_new((GtkPreviewType)NUM2INT(type)));
+    RBGTK_INITIALIZE(self, gtk_preview_new((GtkPreviewType)NUM2INT(type)));
     return Qnil;
 }
 
@@ -25,7 +25,7 @@ static VALUE
 preview_size(self, w, h)
     VALUE self, w, h;
 {
-    gtk_preview_size(GTK_PREVIEW(get_widget(self)), NUM2INT(w), NUM2INT(h));
+    gtk_preview_size(GTK_PREVIEW(RVAL2GOBJ(self)), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
@@ -33,7 +33,7 @@ static VALUE
 preview_put(self, win, gc, srcx, srcy, dstx, dsty, w, h)
     VALUE self, win, gc, srcx, srcy, dstx, dsty, w, h;
 {
-    gtk_preview_put(GTK_PREVIEW(get_widget(self)), get_gdkwindow(win),
+    gtk_preview_put(GTK_PREVIEW(RVAL2GOBJ(self)), get_gdkwindow(win),
 		    get_gdkgc(gc),
 		    NUM2INT(srcx), NUM2INT(srcy),
 		    NUM2INT(dstx), NUM2INT(dsty),
@@ -48,7 +48,7 @@ preview_draw_row(self, data, x, y, w)
     int width = NUM2INT(w);
     int dlen = width;
 
-    if (GTK_PREVIEW(get_widget(self))->type == GTK_PREVIEW_COLOR) {
+    if (GTK_PREVIEW(RVAL2GOBJ(self))->type == GTK_PREVIEW_COLOR) {
 	dlen *= 3;
     }
     Check_Type(data, T_STRING);
@@ -56,7 +56,7 @@ preview_draw_row(self, data, x, y, w)
 	rb_raise(rb_eArgError, "data too short");
     }
 
-    gtk_preview_draw_row(GTK_PREVIEW(get_widget(self)), RSTRING(data)->ptr,
+    gtk_preview_draw_row(GTK_PREVIEW(RVAL2GOBJ(self)), RSTRING(data)->ptr,
 			 NUM2INT(x), NUM2INT(y), width);
     return self;
 }
@@ -65,7 +65,7 @@ static VALUE
 preview_set_expand(self, expand)
     VALUE self, expand;
 {
-    gtk_preview_set_expand(GTK_PREVIEW(get_widget(self)), NUM2INT(expand));
+    gtk_preview_set_expand(GTK_PREVIEW(RVAL2GOBJ(self)), NUM2INT(expand));
     return self;
 }
 

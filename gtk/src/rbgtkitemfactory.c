@@ -3,8 +3,8 @@
 
   rbgtkitemfactory.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -21,15 +21,15 @@ ifact_initialize(self, type, path, accel)
     VALUE self;
     VALUE type, path, accel;
 {
-    set_gobject(self, GTK_OBJECT(gtk_item_factory_new(FIX2INT(type),
-                                                      STR2CSTR(path),
-                                                      get_gtkaccelgrp(accel))));
+    RBGTK_INITIALIZE(self, gtk_item_factory_new(FIX2INT(type),
+												STR2CSTR(path),
+												get_gtkaccelgrp(accel)));
     return Qnil;
 }
 
 static VALUE
 distinguish_item_type(p_item)
-     GtkWidget *p_item;
+	GtkWidget *p_item;
 {
     if (GTK_IS_RADIO_MENU_ITEM(p_item))
         return rb_obj_alloc(gRMenuItem);
@@ -54,14 +54,14 @@ menuitem_type_check(item_type)
     char *item_type;
 {
     if (item_type == NULL) {
-       return -1;
+		return -1;
     }
     if ((strcmp(item_type, "<Branch>") == 0) 
-       || (strcmp(item_type, "<LastBranch>") == 0)
-       || (strcmp(item_type, "<Separator>") == 0))
-       return 0;
+		|| (strcmp(item_type, "<LastBranch>") == 0)
+		|| (strcmp(item_type, "<Separator>") == 0))
+		return 0;
     else 
-       return -1;
+		return -1;
 }
 
 static void
@@ -72,7 +72,7 @@ item_exec_callback_wrap(p_item, ifact, iter)
 {
     VALUE item;
     item = distinguish_item_type(p_item);
-    set_widget(item, GTK_WIDGET(p_item));
+    RBGTK_INITIALIZE(item, GTK_WIDGET(p_item));
 
     if (!NIL_P(iter)) {
         rb_funcall(iter, id_call, 1, item);
@@ -119,17 +119,17 @@ ifact_create_item(argc, argv, self)
     }
   
     if (NIL_P(item_type)) {
-        gtk_item_factory_create_item(GTK_ITEM_FACTORY(get_gobject(self)),
+        gtk_item_factory_create_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                      entry, (gpointer)self, cb_type);
     }
     else if (menuitem_type_check(entry->item_type) == 0) {
         entry->callback = NULL;
         entry->callback_action = 0;
-        gtk_item_factory_create_item(GTK_ITEM_FACTORY(get_gobject(self)),
+        gtk_item_factory_create_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                      entry, (gpointer)self, cb_type);
     }
     else {
-        gtk_item_factory_create_item(GTK_ITEM_FACTORY(get_gobject(self)),
+        gtk_item_factory_create_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                      entry, (gpointer)self, cb_type);
     }
 
@@ -180,7 +180,7 @@ ifact_create_items(argc, argv, self)
         }
     }
 
-    gtk_item_factory_create_items (GTK_ITEM_FACTORY(get_gobject(self)),
+    gtk_item_factory_create_items (GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                    n_menu_entries, entries, NULL);
     g_free(entries);
 
@@ -188,14 +188,14 @@ ifact_create_items(argc, argv, self)
 }
 
 static VALUE
-ifact_get_widget(self, path)
+ifact_get_gobject(self, path)
     VALUE self, path;
 {
     GtkWidget *p_menu;
     VALUE menuobj;
 
-    p_menu = gtk_item_factory_get_widget(GTK_ITEM_FACTORY(get_gobject(self)),
-                                       STR2CSTR(path));
+    p_menu = gtk_item_factory_get_widget(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
+										 STR2CSTR(path));
     if (GTK_IS_OPTION_MENU(p_menu))
         menuobj = rb_obj_alloc(gOptionMenu);
     else if (GTK_IS_MENU(p_menu))
@@ -203,7 +203,7 @@ ifact_get_widget(self, path)
     else
         menuobj = rb_obj_alloc(gMenuBar);
 
-    set_widget(menuobj, p_menu);
+    RBGTK_INITIALIZE(menuobj, p_menu);
   
     return menuobj;
 }
@@ -215,10 +215,10 @@ ifact_get_item(self, path)
     GtkWidget *p_item;
     VALUE item;
 
-    p_item = gtk_item_factory_get_item(GTK_ITEM_FACTORY(get_gobject(self)),
+    p_item = gtk_item_factory_get_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                        STR2CSTR(path));
     item = distinguish_item_type(p_item);
-    set_widget(item, p_item);
+    RBGTK_INITIALIZE(item, p_item);
 
     return item;
 }
@@ -227,7 +227,7 @@ static VALUE
 ifact_delete_item(self, path)
     VALUE self, path;
 {
-    gtk_item_factory_delete_item(GTK_ITEM_FACTORY(get_gobject(self)),
+    gtk_item_factory_delete_item(GTK_ITEM_FACTORY(RVAL2GOBJ(self)),
                                  STR2CSTR(path));
     return Qnil;
 }
@@ -236,7 +236,7 @@ static VALUE
 ifact_s_path_from_widget(self, widget)
     VALUE self, widget;
 {
-    return rb_str_new2(gtk_item_factory_path_from_widget(get_widget(widget)));
+    return rb_str_new2(gtk_item_factory_path_from_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
 
 void Init_gtk_itemfactory()
@@ -273,7 +273,7 @@ void Init_gtk_itemfactory()
     rb_define_method(gItemFactory, "create_item", ifact_create_item, -1);
     rb_define_method(gItemFactory, "create_items", ifact_create_items, -1);
     rb_define_method(gItemFactory, "delete_item", ifact_delete_item, 1);
-    rb_define_method(gItemFactory, "get_widget", ifact_get_widget, 1);
+    rb_define_method(gItemFactory, "get_widget", ifact_get_gobject, 1);
     rb_define_method(gItemFactory, "get_item", ifact_get_item, 1);
  
     rb_define_singleton_method(gItemFactory, "path_from_widget",

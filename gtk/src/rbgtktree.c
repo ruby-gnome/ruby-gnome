@@ -3,8 +3,8 @@
 
   rbgtktree.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 tree_initialize(self)
     VALUE self;
 {
-    set_widget(self, (GtkWidget *)gtk_tree_new());
+    RBGTK_INITIALIZE(self, (GtkWidget *)gtk_tree_new());
     return Qnil;
 }
 
@@ -27,7 +27,7 @@ static VALUE
 tree_append(self, child)
     VALUE self, child;
 {
-    gtk_tree_append(GTK_TREE(get_widget(self)), get_widget(child));
+    gtk_tree_append(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child));
     return self;
 }
 
@@ -35,7 +35,7 @@ static VALUE
 tree_prepend(self, child)
     VALUE self, child;
 {
-    gtk_tree_prepend(GTK_TREE(get_widget(self)), get_widget(child));
+    gtk_tree_prepend(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child));
     return self;
 }
 
@@ -43,7 +43,7 @@ static VALUE
 tree_insert(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_tree_insert(GTK_TREE(get_widget(self)), get_widget(child),
+    gtk_tree_insert(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child),
 		    NUM2INT(pos));
     return self;
 }
@@ -52,7 +52,7 @@ static VALUE
 tree_set_sel_mode(self, mode)
     VALUE self, mode;
 {
-    gtk_tree_set_selection_mode(GTK_TREE(get_widget(self)),
+    gtk_tree_set_selection_mode(GTK_TREE(RVAL2GOBJ(self)),
 								(GtkSelectionMode)NUM2INT(mode));
     return self;
 }
@@ -61,7 +61,7 @@ static VALUE
 tree_set_view_lines(self, lines)
     VALUE self, lines;
 {
-    gtk_tree_set_view_lines(GTK_TREE(get_widget(self)),
+    gtk_tree_set_view_lines(GTK_TREE(RVAL2GOBJ(self)),
 			    RTEST(lines));
     return self;
 }
@@ -70,7 +70,7 @@ static VALUE
 tree_set_view_mode(self, mode)
     VALUE self, mode;
 {
-    gtk_tree_set_selection_mode(GTK_TREE(get_widget(self)),
+    gtk_tree_set_selection_mode(GTK_TREE(RVAL2GOBJ(self)),
 				NUM2INT(mode));
     return self;
 }
@@ -79,15 +79,15 @@ static VALUE
 tree_child_position(self, child)
     VALUE self, child;
 {
-    return INT2NUM(gtk_tree_child_position(GTK_TREE(get_widget(self)),
-					   get_widget(child)));
+    return INT2NUM(gtk_tree_child_position(GTK_TREE(RVAL2GOBJ(self)),
+					   RVAL2GOBJ(child)));
 }
 
 static VALUE
 tree_clear_items(self, start, end)
     VALUE self, start, end;
 {
-    gtk_tree_clear_items(GTK_TREE(get_widget(self)),
+    gtk_tree_clear_items(GTK_TREE(RVAL2GOBJ(self)),
 			 NUM2INT(start), NUM2INT(end));
     return self;
 }
@@ -96,14 +96,14 @@ static VALUE
 tree_is_root_tree_p(self)
     VALUE self;
 {
-    return GTK_IS_ROOT_TREE(GTK_TREE(get_widget(self))) ? Qtrue : Qfalse;
+    return GTK_IS_ROOT_TREE(GTK_TREE(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
 }
 
 static VALUE
 tree_remove_item(self, child)
     VALUE self, child;
 {
-    gtk_tree_remove_item(GTK_TREE(get_widget(self)), get_widget(child));
+    gtk_tree_remove_item(GTK_TREE(RVAL2GOBJ(self)), RVAL2GOBJ(child));
     return self;
 }
 

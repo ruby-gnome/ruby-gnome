@@ -3,8 +3,8 @@
 
   rbgtkarrow.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 arrow_initialize(self, arrow_t, shadow_t)
     VALUE self, arrow_t, shadow_t;
 {
-    set_widget(self, gtk_arrow_new((GtkArrowType)NUM2INT(arrow_t),
+    RBGTK_INITIALIZE(self, gtk_arrow_new((GtkArrowType)NUM2INT(arrow_t),
 				   (GtkShadowType)NUM2INT(shadow_t)));
     return Qnil;
 }
@@ -26,7 +26,7 @@ static VALUE
 arrow_set(self, arrow_t, shadow_t)
     VALUE self, arrow_t, shadow_t;
 {
-    gtk_arrow_set(GTK_ARROW(get_widget(self)),
+    gtk_arrow_set(GTK_ARROW(RVAL2GOBJ(self)),
 		  (GtkArrowType)NUM2INT(arrow_t),
 		  (GtkShadowType)NUM2INT(shadow_t));
     return self;

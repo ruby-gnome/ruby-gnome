@@ -3,8 +3,8 @@
 
   rbgtkalignment.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 align_initialize(self, xalign, yalign, xscale, yscale)
     VALUE self, xalign, yalign, xscale, yscale;
 {
-    set_widget(self, gtk_alignment_new(NUM2DBL(xalign),
+    RBGTK_INITIALIZE(self, gtk_alignment_new(NUM2DBL(xalign),
 				       NUM2DBL(yalign),
 				       NUM2DBL(xscale),
 				       NUM2DBL(yscale)));
@@ -28,7 +28,7 @@ static VALUE
 align_set(self, xalign, yalign, xscale, yscale)
     VALUE self, xalign, yalign, xscale, yscale;
 {
-    gtk_alignment_set(GTK_ALIGNMENT(get_widget(self)),
+    gtk_alignment_set(GTK_ALIGNMENT(RVAL2GOBJ(self)),
 		      NUM2DBL(xalign), NUM2DBL(yalign),
 		      NUM2DBL(xscale), NUM2DBL(yscale));
     return self;

@@ -3,8 +3,8 @@
 
   rbgtkmisc.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 misc_set_align(self, xalign, yalign)
     VALUE self, xalign, yalign;
 {
-    gtk_misc_set_alignment(GTK_MISC(get_widget(self)),
+    gtk_misc_set_alignment(GTK_MISC(RVAL2GOBJ(self)),
 			   NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
@@ -26,7 +26,7 @@ static VALUE
 misc_set_padding(self, xpad, ypad)
     VALUE self, xpad, ypad;
 {
-    gtk_misc_set_padding(GTK_MISC(get_widget(self)),
+    gtk_misc_set_padding(GTK_MISC(RVAL2GOBJ(self)),
 			 NUM2DBL(xpad), NUM2DBL(ypad));
     return self;
 }
@@ -35,28 +35,28 @@ static VALUE
 misc_get_xalign(self)
     VALUE self;
 {
-    return rb_float_new(GTK_MISC(get_widget(self))->xalign);
+    return rb_float_new(GTK_MISC(RVAL2GOBJ(self))->xalign);
 }
 
 static VALUE
 misc_get_yalign(self)
     VALUE self;
 {
-    return rb_float_new(GTK_MISC(get_widget(self))->yalign);
+    return rb_float_new(GTK_MISC(RVAL2GOBJ(self))->yalign);
 }
 
 static VALUE
 misc_get_xpad(self)
     VALUE self;
 {
-    return INT2NUM(GTK_MISC(get_widget(self))->xpad);
+    return INT2NUM(GTK_MISC(RVAL2GOBJ(self))->xpad);
 }
 
 static VALUE
 misc_get_ypad(self)
     VALUE self;
 {
-    return INT2NUM(GTK_MISC(get_widget(self))->ypad);
+    return INT2NUM(GTK_MISC(RVAL2GOBJ(self))->ypad);
 }
 
 void Init_gtk_misc()

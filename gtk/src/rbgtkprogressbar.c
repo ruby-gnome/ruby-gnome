@@ -3,8 +3,8 @@
 
   rbgtkprogressbar.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,13 +24,13 @@ pbar_initialize(argc, argv, self)
     GtkWidget* widget;
 
     if (rb_scan_args(argc, argv, "01", &arg) == 1) {
-	adj = NIL_P(arg)?0:GTK_ADJUSTMENT(get_gobject(arg));
+	adj = NIL_P(arg)?0:GTK_ADJUSTMENT(RVAL2GOBJ(arg));
 	widget = gtk_progress_bar_new_with_adjustment(adj);
     } else {
 	widget = gtk_progress_bar_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -38,7 +38,7 @@ static VALUE
 pbar_set_bar_style(self, style)
      VALUE self, style;
 {
-    gtk_progress_bar_set_bar_style(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_set_bar_style(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 				   NUM2INT(style));
     return self;
 }
@@ -47,7 +47,7 @@ static VALUE
 pbar_set_discrete_blocks(self, blocks)
      VALUE self, blocks;
 {
-    gtk_progress_bar_set_discrete_blocks(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_set_discrete_blocks(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 					 NUM2INT(blocks));
     return self;
 }
@@ -56,7 +56,7 @@ static VALUE
 pbar_set_activity_step(self, step)
      VALUE self, step;
 {
-    gtk_progress_bar_set_activity_step(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_set_activity_step(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 				       NUM2INT(step));
     return self;
 }
@@ -65,7 +65,7 @@ static VALUE
 pbar_set_activity_blocks(self, blocks)
      VALUE self, blocks;
 {
-    gtk_progress_bar_set_activity_blocks(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_set_activity_blocks(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 					 NUM2INT(blocks));
     return self;
 }
@@ -74,7 +74,7 @@ static VALUE
 pbar_set_orientation(self, orientation)
      VALUE self, orientation;
 {
-    gtk_progress_bar_set_orientation(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_set_orientation(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 				     NUM2INT(orientation));
     return self;
 }
@@ -83,7 +83,7 @@ static VALUE
 pbar_update(self, percentage)
     VALUE self, percentage;
 {
-    gtk_progress_bar_update(GTK_PROGRESS_BAR(get_widget(self)),
+    gtk_progress_bar_update(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
 			    NUM2DBL(percentage));
     return self;
 }    

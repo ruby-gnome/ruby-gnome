@@ -3,8 +3,8 @@
 
   rbgtklistitem.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -30,7 +30,7 @@ litem_initialize(argc, argv, self)
 	widget = gtk_list_item_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 

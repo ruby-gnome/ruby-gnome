@@ -3,8 +3,8 @@
 
   rbgtkdrawingarea.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 darea_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_drawing_area_new());
+    RBGTK_INITIALIZE(self, gtk_drawing_area_new());
     return Qnil;
 }
 
@@ -25,7 +25,7 @@ static VALUE
 darea_size(self, w, h)
     VALUE self, w, h;
 {
-    gtk_drawing_area_size(GTK_DRAWING_AREA(get_widget(self)),
+    gtk_drawing_area_size(GTK_DRAWING_AREA(RVAL2GOBJ(self)),
 			  NUM2INT(w), NUM2INT(h));
     return self;
 }

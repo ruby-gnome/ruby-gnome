@@ -3,8 +3,8 @@
 
   rbgtkscrolledwindow.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -25,10 +25,10 @@ scwin_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
-    if (!NIL_P(arg1)) h_adj = GTK_ADJUSTMENT(get_gobject(arg1));
-    if (!NIL_P(arg2)) v_adj = GTK_ADJUSTMENT(get_gobject(arg2));
+    if (!NIL_P(arg1)) h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
+    if (!NIL_P(arg2)) v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg2));
 
-    set_widget(self, gtk_scrolled_window_new(h_adj, v_adj));
+    RBGTK_INITIALIZE(self, gtk_scrolled_window_new(h_adj, v_adj));
     return Qnil;
 }
 
@@ -36,9 +36,9 @@ static VALUE
 scwin_set_policy(self, hpolicy, vpolicy)
     VALUE self, hpolicy, vpolicy;
 {
-    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(get_widget(self)),
-				   (GtkPolicyType)NUM2INT(hpolicy),
-				   (GtkPolicyType)NUM2INT(vpolicy));
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
+								   (GtkPolicyType)NUM2INT(hpolicy),
+								   (GtkPolicyType)NUM2INT(vpolicy));
     return self;
 }
 
@@ -47,8 +47,8 @@ scwin_add_with_viewport(self, other)
     VALUE self, other;
 {
     gtk_scrolled_window_add_with_viewport(
-				   GTK_SCROLLED_WINDOW(get_widget(self)),
-				   get_widget(other));
+		GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
+		GTK_WIDGET(RVAL2GOBJ(other)));
     return self;
 }
 
@@ -57,8 +57,8 @@ scwin_get_hadjustment(self)
     VALUE self;
 {
     GtkAdjustment *adj =
-	gtk_scrolled_window_get_hadjustment(
-	    GTK_SCROLLED_WINDOW(get_widget(self)));
+		gtk_scrolled_window_get_hadjustment(
+			GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
     return GOBJ2RVAL(adj);
 }
 
@@ -67,8 +67,8 @@ scwin_get_vadjustment(self)
     VALUE self;
 {
     GtkAdjustment *adj =
-	gtk_scrolled_window_get_vadjustment(
-	    GTK_SCROLLED_WINDOW(get_widget(self)));
+		gtk_scrolled_window_get_vadjustment(
+			GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
     return GOBJ2RVAL(adj);
 }
 

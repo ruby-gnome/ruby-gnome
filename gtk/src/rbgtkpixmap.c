@@ -3,8 +3,8 @@
 
   rbgtkpixmap.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@ pixmap_initialize(self, val, mask)
 
     pixdata = get_gdkpixmap(val);
     maskdata = get_gdkbitmap(mask);
-    set_widget(self, gtk_pixmap_new(pixdata, maskdata));
+    RBGTK_INITIALIZE(self, gtk_pixmap_new(pixdata, maskdata));
     return Qnil;
 }
 
@@ -37,7 +37,7 @@ pixmap_set(self, val, mask)
 
     pixdata = get_gdkpixmap(val);
     maskdata = get_gdkbitmap(mask);
-    gtk_pixmap_set(GTK_PIXMAP(get_widget(self)), pixdata, maskdata);
+    gtk_pixmap_set(GTK_PIXMAP(RVAL2GOBJ(self)), pixdata, maskdata);
     return self;
 }
 
@@ -48,7 +48,7 @@ pixmap_get(self)
     GdkPixmap  *val;
     GdkBitmap *mask;
 
-    gtk_pixmap_get(GTK_PIXMAP(get_widget(self)), &val, &mask);
+    gtk_pixmap_get(GTK_PIXMAP(RVAL2GOBJ(self)), &val, &mask);
 
     return rb_assoc_new(make_gdkpixmap(val),
 			make_gdkbitmap(mask));

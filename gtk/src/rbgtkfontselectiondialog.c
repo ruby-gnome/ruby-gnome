@@ -11,7 +11,7 @@ static VALUE
 fsd_initialize(self, title)
     VALUE self, title;
 {
-    set_widget(self, gtk_font_selection_dialog_new(STR2CSTR(title)));
+    RBGTK_INITIALIZE(self, gtk_font_selection_dialog_new(STR2CSTR(title)));
     return Qnil;
 }
 
@@ -20,7 +20,7 @@ fsd_get_font(self)
     VALUE self;
 {
     return make_gdkfont(gtk_font_selection_dialog_get_font(
-                GTK_FONT_SELECTION_DIALOG(get_widget(self))));
+                GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -28,7 +28,7 @@ fsd_get_font_name(self)
     VALUE self;
 {
     return CSTR2OBJ(gtk_font_selection_dialog_get_font_name(
-                GTK_FONT_SELECTION_DIALOG(get_widget(self))));
+                GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -36,7 +36,7 @@ fsd_set_font_name(self, fontname)
     VALUE self, fontname;
 {
     gboolean retval = gtk_font_selection_dialog_set_font_name(
-                            GTK_FONT_SELECTION_DIALOG(get_widget(self)),
+                            GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self)),
                             STR2CSTR(fontname));
     return retval ? Qtrue : Qfalse;
 }
@@ -46,7 +46,7 @@ fsd_get_preview_text(self)
     VALUE self;
 {
     return CSTR2OBJ(gtk_font_selection_dialog_get_preview_text(
-                GTK_FONT_SELECTION_DIALOG(get_widget(self))));
+                GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -54,7 +54,7 @@ fsd_set_preview_text(self, text)
     VALUE self, text;
 {
     gtk_font_selection_dialog_set_preview_text(
-        GTK_FONT_SELECTION_DIALOG(get_widget(self)),
+        GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self)),
         STR2CSTR(text));
     return Qnil;
 }
@@ -67,7 +67,7 @@ fsd_get_font_selection(self)
 
     fs = rb_iv_get(self, "@__font_selection");
     if (NIL_P(fs)) {
-        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(get_widget(self))->fontsel;
+        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->fontsel;
         fs = GOBJ2RVAL(w);
         rb_iv_set(self, "@__font_selection", fs);
     }
@@ -83,7 +83,7 @@ fsd_get_ok_button(self)
 
     button = rb_iv_get(self, "@__ok_button");
     if (NIL_P(button)) {
-        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(get_widget(self))->ok_button;
+        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->ok_button;
         button = make_widget(gButton, w);
         rb_iv_set(self, "@__ok_button", button);
     }
@@ -99,7 +99,7 @@ fsd_get_cancel_button(self)
 
     button = rb_iv_get(self, "@__cancel_button");
     if (NIL_P(button)) {
-        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(get_widget(self))->cancel_button;
+        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->cancel_button;
         button = make_widget(gButton, w);
         rb_iv_set(self, "@__cancel_button", button);
     }
@@ -115,7 +115,7 @@ fsd_get_apply_button(self)
 
     button = rb_iv_get(self, "@__apply_button");
     if (NIL_P(button)) {
-        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(get_widget(self))->apply_button;
+        GtkWidget *w = GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self))->apply_button;
         button = make_widget(gButton, w);
         rb_iv_set(self, "@__apply_button", button);
     }

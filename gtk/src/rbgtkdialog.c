@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 dialog_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_dialog_new());
+    RBGTK_INITIALIZE(self, gtk_dialog_new());
     return Qnil;
 }
 
@@ -25,16 +25,14 @@ static VALUE
 dialog_vbox(self)
     VALUE self;
 {
-    GtkWidget *dialog = get_widget(self);
-    return GOBJ2RVAL(GTK_DIALOG(dialog)->vbox);
+    return GOBJ2RVAL(GTK_DIALOG(RVAL2GOBJ(self))->vbox);
 }
 
 static VALUE
 dialog_action_area(self)
     VALUE self;
 {
-    GtkWidget *dialog = get_widget(self);
-    return GOBJ2RVAL(GTK_DIALOG(dialog)->action_area);
+    return GOBJ2RVAL(GTK_DIALOG(RVAL2GOBJ(self))->action_area);
 }
 
 void Init_gtk_dialog()

@@ -4,7 +4,7 @@
   rbgtkwindowgroup.c -
 
   $Author: mutoh $
-  $Date: 2002/06/22 05:26:50 $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -18,28 +18,28 @@ VALUE gWindowGroup;
  */
 static VALUE
 rbgwingrp_initialize(self)
-	 VALUE self;
+	VALUE self;
 {
-  rbgobj_set_gobject(self, G_OBJECT(gtk_window_group_new()));
-  return Qnil;
+	RBGOBJ_INITIALIZE(self, gtk_window_group_new());
+	return Qnil;
 }
 
 static VALUE
 rbgwingrp_add_window(self, window)
-	 VALUE self, window;
+	VALUE self, window;
 {
-  gtk_window_group_add_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
-							  GTK_WINDOW(RVAL2GOBJ(window)));
-  return self;
+	gtk_window_group_add_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
+								GTK_WINDOW(RVAL2GOBJ(window)));
+	return self;
 }
 
 static VALUE
 rbgwingrp_remove_window(self, window)
-	 VALUE self, window;
+	VALUE self, window;
 {
-  gtk_window_group_remove_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
-								 GTK_WINDOW(RVAL2GOBJ(window)));
-  return self;
+	gtk_window_group_remove_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
+								   GTK_WINDOW(RVAL2GOBJ(window)));
+	return self;
 }
   
 
@@ -55,7 +55,7 @@ Init_gtk_windowgroup()
     cinfo.free = 0;
     rbgobj_register_class(&cinfo);
 
-    rb_define_method(gWindowGroup, "initialize", rbgwingrp_initialize, 0);
+	rb_define_method(gWindowGroup, "initialize", rbgwingrp_initialize, 0);
 	rb_define_method(gWindowGroup, "add", rbgwingrp_add_window, 1);
 	rb_define_method(gWindowGroup, "remove", rbgwingrp_remove_window, 1);
 }

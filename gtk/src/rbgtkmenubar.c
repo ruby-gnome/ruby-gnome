@@ -3,8 +3,8 @@
 
   rbgtkmenubar.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 mbar_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_menu_bar_new());
+    RBGTK_INITIALIZE(self, gtk_menu_bar_new());
     return Qnil;
 }
 
@@ -25,7 +25,8 @@ static VALUE
 mbar_append(self, child)
     VALUE self, child;
 {
-    gtk_menu_bar_append(GTK_MENU_BAR(get_widget(self)), get_widget(child));
+    gtk_menu_bar_append(GTK_MENU_BAR(RVAL2GOBJ(self)), 
+						GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -33,7 +34,8 @@ static VALUE
 mbar_prepend(self, child)
     VALUE self, child;
 {
-    gtk_menu_bar_prepend(GTK_MENU_BAR(get_widget(self)), get_widget(child));
+    gtk_menu_bar_prepend(GTK_MENU_BAR(RVAL2GOBJ(self)), 
+						 GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -41,12 +43,13 @@ static VALUE
 mbar_insert(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_menu_bar_insert(GTK_MENU_BAR(get_widget(self)),
-			get_widget(child), NUM2INT(pos));
+    gtk_menu_bar_insert(GTK_MENU_BAR(RVAL2GOBJ(self)),
+						GTK_WIDGET(RVAL2GOBJ(child)), NUM2INT(pos));
     return self;
 }
 
-void Init_gtk_menu_bar()
+void 
+Init_gtk_menu_bar()
 {
     static rbgtk_class_info cinfo;
 

@@ -3,8 +3,8 @@
 
   rbgtkstatusbar.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 statusbar_initialize(self)
      VALUE self;
 {
-  set_widget(self, gtk_statusbar_new());
+  RBGTK_INITIALIZE(self, gtk_statusbar_new());
   return Qnil;
 }
 
@@ -30,7 +30,7 @@ statusbar_push(self, id, text)
      VALUE text;
 {
   gint message_id;
-  message_id = gtk_statusbar_push(GTK_STATUSBAR(get_widget(self)), 
+  message_id = gtk_statusbar_push(GTK_STATUSBAR(RVAL2GOBJ(self)), 
 				  NUM2INT(id), STR2CSTR(text));
   return INT2FIX(message_id);
 }
@@ -40,7 +40,7 @@ statusbar_pop(self, id)
      VALUE self;
      VALUE id;
 {
-  gtk_statusbar_pop(GTK_STATUSBAR(get_widget(self)), NUM2INT(id));
+  gtk_statusbar_pop(GTK_STATUSBAR(RVAL2GOBJ(self)), NUM2INT(id));
   return Qnil;
 
 }
@@ -51,7 +51,7 @@ statusbar_get_context_id(self, text)
      VALUE text;
 {
   gint context_id;
-  context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(get_widget(self)),
+  context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(RVAL2GOBJ(self)),
 					    STR2CSTR(text));
   return INT2FIX(context_id);
 }
@@ -62,7 +62,7 @@ statusbar_remove(self, cid, mid)
      VALUE cid;
      VALUE mid;
 {
-  gtk_statusbar_remove(GTK_STATUSBAR(get_widget(self)),
+  gtk_statusbar_remove(GTK_STATUSBAR(RVAL2GOBJ(self)),
 		       NUM2INT(cid), NUM2INT(mid)); 
   return Qnil;
 }

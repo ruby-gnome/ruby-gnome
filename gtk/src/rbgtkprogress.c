@@ -3,8 +3,8 @@
 
   rbgtkprogress.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 progress_set_show_text(self, show_text)
      VALUE self, show_text;
 {
-    gtk_progress_set_show_text(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_show_text(GTK_PROGRESS(RVAL2GOBJ(self)),
 			       RTEST(show_text));
     return self;
 }
@@ -28,7 +28,7 @@ static VALUE
 progress_show_text_p(self)
      VALUE self;
 {
-    gboolean result = GTK_PROGRESS(get_widget(self))->show_text;
+    gboolean result = GTK_PROGRESS(RVAL2GOBJ(self))->show_text;
     return result?Qtrue:Qfalse;
 }
 
@@ -36,7 +36,7 @@ static VALUE
 progress_set_text_alignment(self, x_align, y_align)
      VALUE self, x_align, y_align;
 {
-    gtk_progress_set_text_alignment(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_text_alignment(GTK_PROGRESS(RVAL2GOBJ(self)),
 				    (gfloat)NUM2DBL(x_align),
 				    (gfloat)NUM2DBL(y_align));
     return self;
@@ -46,7 +46,7 @@ static VALUE
 progress_set_format_string(self, format)
      VALUE self, format;
 {
-    gtk_progress_set_format_string(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_format_string(GTK_PROGRESS(RVAL2GOBJ(self)),
 				   STR2CSTR(format));
     return self;
 }
@@ -55,8 +55,8 @@ static VALUE
 progress_set_adjustment(self, adjustment)
      VALUE self, adjustment;
 {
-    gtk_progress_set_adjustment(GTK_PROGRESS(get_widget(self)),
-				GTK_ADJUSTMENT(get_widget(adjustment)));
+    gtk_progress_set_adjustment(GTK_PROGRESS(RVAL2GOBJ(self)),
+				GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
     return self;
 }
 
@@ -64,15 +64,15 @@ static VALUE
 progress_get_adjustment(self)
      VALUE self;
 {
-    GtkAdjustment* result = GTK_PROGRESS(get_widget(self))->adjustment;
-    return result?get_value_from_gobject(GTK_OBJECT(result)):Qnil;
+    GtkAdjustment* result = GTK_PROGRESS(RVAL2GOBJ(self))->adjustment;
+    return result ? GOBJ2RVAL(result) : Qnil;
 }
 
 static VALUE
 progress_set_percentage(self, percentage)
     VALUE self, percentage;
 {
-    gtk_progress_set_percentage(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_percentage(GTK_PROGRESS(RVAL2GOBJ(self)),
 				(gfloat)NUM2DBL(percentage));
     return self;
 }
@@ -81,7 +81,7 @@ static VALUE
 progress_set_value(self, value)
     VALUE self, value;
 {
-    gtk_progress_set_value(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_value(GTK_PROGRESS(RVAL2GOBJ(self)),
 			   (gfloat)NUM2DBL(value));
     return self;
 }
@@ -91,7 +91,7 @@ progress_get_value(self)
      VALUE self;
 {
     gfloat result;
-    result = gtk_progress_get_value(GTK_PROGRESS(get_widget(self)));
+    result = gtk_progress_get_value(GTK_PROGRESS(RVAL2GOBJ(self)));
     return rb_float_new((double)result);
 }
 
@@ -99,7 +99,7 @@ static VALUE
 progress_set_activity_mode(self, activity_mode)
      VALUE self, activity_mode;
 {
-    gtk_progress_set_activity_mode(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_set_activity_mode(GTK_PROGRESS(RVAL2GOBJ(self)),
 				   RTEST(activity_mode));
     return self;
 }
@@ -109,7 +109,7 @@ progress_activity_mode_p(self)
      VALUE self;
 {
     gboolean result;
-    result = GTK_PROGRESS(get_widget(self))->activity_mode;
+    result = GTK_PROGRESS(RVAL2GOBJ(self))->activity_mode;
     return result?Qtrue:Qfalse;
 }
 
@@ -118,7 +118,7 @@ progress_get_current_text(self)
      VALUE self;
 {
     return CSTR2OBJ(gtk_progress_get_current_text(
-                GTK_PROGRESS(get_widget(self))));
+                GTK_PROGRESS(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -126,7 +126,7 @@ progress_get_text_from_value(self, value)
      VALUE self, value;
 {
     return CSTR2OBJ(gtk_progress_get_text_from_value(
-                GTK_PROGRESS(get_widget(self)),
+                GTK_PROGRESS(RVAL2GOBJ(self)),
                 NUM2DBL(value)));
 }
 
@@ -136,7 +136,7 @@ progress_get_current_percentage(self)
 {
     gfloat result;
     result = gtk_progress_get_current_percentage(
-		GTK_PROGRESS(get_widget(self)));
+		GTK_PROGRESS(RVAL2GOBJ(self)));
     return rb_float_new((double)result);    
 }
 
@@ -146,7 +146,7 @@ progress_get_percentage_from_value(self, value)
 {
     gfloat result;
     result = gtk_progress_get_percentage_from_value(
-		GTK_PROGRESS(get_widget(self)),
+		GTK_PROGRESS(RVAL2GOBJ(self)),
 		(gfloat)NUM2DBL(value));
     return rb_float_new((double)result);
 }
@@ -155,7 +155,7 @@ static VALUE
 progress_configure(self, value, min, max)
      VALUE self, value, min, max;
 {
-    gtk_progress_configure(GTK_PROGRESS(get_widget(self)),
+    gtk_progress_configure(GTK_PROGRESS(RVAL2GOBJ(self)),
 			   (gfloat)NUM2DBL(value),
 			   (gfloat)NUM2DBL(min),
 			   (gfloat)NUM2DBL(max));

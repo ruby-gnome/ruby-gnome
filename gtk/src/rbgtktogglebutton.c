@@ -3,8 +3,8 @@
 
   rbgtktogglebutton.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,7 +29,7 @@ tbtn_initialize(argc, argv, self)
 	widget = gtk_toggle_button_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -37,7 +37,7 @@ static VALUE
 tbtn_set_mode(self, mode)
     VALUE self, mode;
 {
-    gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(get_widget(self)),
+    gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
 			       RTEST(mode));
     return self;
 }
@@ -46,7 +46,7 @@ static VALUE
 tbtn_set_state(self, state)
     VALUE self, state;
 {
-    gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(get_widget(self)),
+    gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
 				RTEST(state));
     return self;
 }
@@ -55,7 +55,7 @@ static VALUE
 tbtn_toggled(self)
     VALUE self;
 {
-    gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(get_widget(self)));
+    gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -63,7 +63,7 @@ static VALUE
 tbtn_is_active(self)
     VALUE self;
 {
-    if (GTK_TOGGLE_BUTTON(get_widget(self))->active)
+    if (GTK_TOGGLE_BUTTON(RVAL2GOBJ(self))->active)
 	return Qtrue;
     return Qfalse;
 }
@@ -71,7 +71,7 @@ static VALUE
 tbtn_set_active(self, is_active)
     VALUE self, is_active;
 {
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(get_widget(self)),
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
 				 RTEST(is_active));
     return self;
 }

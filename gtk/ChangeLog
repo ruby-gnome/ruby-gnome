@@ -1,100 +1,116 @@
-Sat Jun 22 14:21:44 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c, src/rbgtk.h: Remove gobj_mark(),rbgtk_lookup_class(),
+	rbgtk_lookup_class_by_gtype(), get_gtk_type().
+	* src/rbgtkobject.c: Remove force_get_gobject(),null(),
+	clear_gobject(),id_gtkdata, id_relatives, id_relative_callbacks, 
+	id_class_info.
+   	* src/rbgtk.c: Rename set_gobject() to rbgtk_initialize_gtkobject().
+	and modified(by Masahiro Sakai <s01397ms@sfc.keio.ac.jp>).
+   	* src/rbgtk.h: Add RBGTK_INITIALIZE().
+   	* src/*.[ch]: Change set_widget(), set_gobject() to RBGTK_INITIALIZE().
+	Change get_gobject(), get_widget() to RVAL2GOBJ().
+	Change get_value_from_gobject() to GOBJ2RVAL().
+	* ChangeLog: Change Date format.
+
+2002-06-22  Masao Mutoh <mutoh@highway.ne.jp>
+
 	* src/rbgdkwindowgroup.c: File Added. Support Gtk::WindowGroup
 	* src/rbgtk.c, src/global.h: Support Gtk::WindowGroup
 
-Sat Jun 22 11:54:00 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-22  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * src/rbgdkwindow.c: Add Gdk::Window#copy_area, #register_dnd,
-   #override_redirect, #shape_combine_mask, #set_child_shapes,
-   #merge_child_shapes, #set_static_gravities, #set_hints, #set_title,
-   #set_colormap, #position, #visual, #colormap, #window_type, #origin,
-   #deskrelative_origin, #parent, #toplevel, #children, #set_transient_for,
-   #set_role, #set_group, #toplevels
+	* src/rbgdkwindow.c: Add Gdk::Window#copy_area, #register_dnd,
+  	#override_redirect, #shape_combine_mask, #set_child_shapes,
+  	#merge_child_shapes, #set_static_gravities, #set_hints, #set_title,
+  	#set_colormap, #position, #visual, #colormap, #window_type, #origin,
+  	#deskrelative_origin, #parent, #toplevel, #children, 
+	#set_transient_for, #set_role, #set_group, #toplevels
 
-Sat Jun 22 01:40:23 2002 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+2002-06-22  Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
-   * src/*.c: abolish make_gobject(), make_gobject_auto_type() and make_gwidget().
-     use GOBJ2RVAL() instead.
+	* src/*.c: abolish make_gobject(), make_gobject_auto_type() and 
+	make_gwidget().
+	use GOBJ2RVAL() instead.
 
-Sun Jun 16 23:14:34 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-16  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * README: Revise description of License obviously.
+	* README: Revise description of License obviously.
 
-Thu Jun 13 01:25:29 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-13  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * src/rbgdkwindow.c: Add Gdk::Window#propery_get, #propery_delete.
+	* src/rbgdkwindow.c: Add Gdk::Window#propery_get, #propery_delete.
 	But they are not implemented yet. 
 
-Tue Jun 11 00:17:22 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-06-11  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * src/rbgdkwindow.c: code cleanup in gdkwin_prop_change().
+	* src/rbgdkwindow.c: code cleanup in gdkwin_prop_change().
 
-Mon Jun 10 19:32:31 2002 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+2002-06-10  Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
-   * lib/gtk2.rb: File added
-   * src/rbgdkevent.c, src/rbgtk.c, src/rbgtk.h, src/rbgtkobject.c:
-     Use glib extension library.
+	* lib/gtk2.rb: File added
+	* src/rbgdkevent.c, src/rbgtk.c, src/rbgtk.h, src/rbgtkobject.c:
+	  Use glib extension library.
 
-Sun Jun 09 22:59:40 2002 Hiroshi Kuwagata <kgt@kokone.to>
+2002-06-09  Hiroshi Kuwagata <kgt@kokone.to>
 
-   * src/rbgdkatom.c,src/rbgdkconst.c,src/rbgdkevent.c,src/rbgdkwindow.c:
-     Add Gdk::Window#property_change, Gdk::SELECTION_TYPE_*
-     Change Gdk::EventSelction.
+	* src/rbgdkatom.c,src/rbgdkconst.c,src/rbgdkevent.c,src/rbgdkwindow.c:
+  	Add Gdk::Window#property_change, Gdk::SELECTION_TYPE_*
+  	Change Gdk::EventSelction.
 
-Thu May 30 02:12:35 2002 Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+2002-05-30  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/*.c: Add rbgtk_register_class() call.
 	* src/rbgtk.c (get_gtk_type): Get rid of hardcoding GTK_IS_*.
 
-Tue May 29 00:22:25 2002  Masao Mutoh <mutoh@highway.ne.jp>
+2002-05-29  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * README: Modified.
+	* README: Modified.
 
-Tue May 29 00:17:18 2002  Minero Aoki  <aamine@loveruby.net>
+2002-05-29  Minero Aoki  <aamine@loveruby.net>
 
-   * src/rbgtkclist.c: suppress warning with cast.
-    
-   * src/rbgtkctree.c: ditto.
+	* src/rbgtkclist.c: suppress warning with cast.
+ 
+	* src/rbgtkctree.c: ditto.
 
-Tue May 28 23:10:12 2002  Masao Mutoh <mutoh@highway.ne.jp>
-            
-   * src/rbgdkdraw.c: Add Gdk::Drawable#draw_rgb_image, 
-                      #draw_rgb_image_dithalign,
-                      #draw_gray_image, draw_rgb_32_image.
-          
-   * src/rbgdkconst.c: Add GdkRgbDither constants.
+2002-05-28  Masao Mutoh <mutoh@highway.ne.jp>
+	         
+	* src/rbgdkdraw.c: Add Gdk::Drawable#draw_rgb_image, 
+                   #draw_rgb_image_dithalign,
+                   #draw_gray_image, draw_rgb_32_image.
+       
+	* src/rbgdkconst.c: Add GdkRgbDither constants.
 
-Sun May 27 01:04:09 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-05-27  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * src/rbgtkmenu.c: BugFix for Gtk::Menu#popup's segfault
-    ([ruby-talk:40308] by mips <mips@cyberspace.org>)
-    ([ruby-talk:40314] by Guy Decoux <decoux@moulon.inra.fr>
-    ([ruby-talk:40381] by Nobuyoshi Nakada  <nobu.nakada@nifty.ne.jp>)
+	* src/rbgtkmenu.c: BugFix for Gtk::Menu#popup's segfault
+	([ruby-talk:40308] by mips <mips@cyberspace.org>)
+	([ruby-talk:40314] by Guy Decoux <decoux@moulon.inra.fr>
+	([ruby-talk:40381] by Nobuyoshi Nakada  <nobu.nakada@nifty.ne.jp>)
+	* src/rbgtkobject.c: BugFix for Gtk::Notebook#append_page/append_page_menu.
+	(Ruby-GNOME Bug [534381])
 
-   * src/rbgtkobject.c: BugFix for Gtk::Notebook#append_page/append_page_menu.
-     (Ruby-GNOME Bug [534381])
+2002-05-26  Masao Mutoh <mutoh@highway.ne.jp>
 
-Sun May 26 23:52:15 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* src/rbgtklayout.c: Fix Gtk::Layout#vadjustment to
+	use layout_get_vadjustment, NOT layout_get_hadjustment
+	(Ruby-GNOME patch [555101])
 
-   * src/rbgtklayout.c: Fix Gtk::Layout#vadjustment to
-     use layout_get_vadjustment, NOT layout_get_hadjustment
-	  (Ruby-GNOME patch [555101])
+2002-05-26  Masao Mutoh <mutoh@highway.ne.jp>
 
-Sun May 26 19:00:14 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* extconf.rb: Support --with-pkg-config (like Ruby-GNOME patch [532458])
 
-   * extconf.rb: Support --with-pkg-config (like Ruby-GNOME patch [532458])
-
-Fri May 24 02:34:04 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-05-24  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* extconf.rb: Same as Ruby-GNOME CVS. Code cleanup.
 
-Fri May 24 02:08:00 2002 Masahiro Sakai <zvm01052@nifty.ne.jp>
+2002-05-24  Masahiro Sakai <zvm01052@nifty.ne.jp>
 
 	* src/init.c src/rbgdkimage.c src/rbgtk.c src/rbgtkcontainer.c
-		src/rbgtkeditable.c src/rbgtkitem.c src/rbgtkitemfactory.c: 
-	  Add GDK_ENABLE_BROKEN, GTK_ENABLE_BROKEN
+	src/rbgtkeditable.c src/rbgtkitem.c src/rbgtkitemfactory.c: 
+	Add GDK_ENABLE_BROKEN, GTK_ENABLE_BROKEN
 
-Wed May 22 02:37:37 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-05-22  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/: Change require 'gtk' to 'gtk2'
 	  src/rbgtk.c src/rbgtkclist.c src/rbgtkctree.c src/rbgtklist.c
@@ -102,24 +118,24 @@ Wed May 22 02:37:37 2002 Masao Mutoh <mutoh@highway.ne.jp>
 	  src/rbgtkstyle.c src/rbgtktext.c src/rbgtktipsquery.c
 	  src/rbgtktree.c src/rbgtktreeitem.c: Add Deprecated macro.
 
-Tue May 20 00:52:38 2002 Masao Mutohh <mutoh@highway.ne.jp>
+2002-05-20  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * src/rbgtkitemfactory.c: Fix segmentation fault.
+	* src/rbgtkitemfactory.c: Fix segmentation fault.
 
-Sun May 19 23:00:33 2002 Masahiro Sakai <zvm01052@nifty.ne.jp>
+2002-05-19  Masahiro Sakai <zvm01052@nifty.ne.jp>
 
-   * First patch for GTK-2.0.
+	* First patch for GTK-2.0.
 
-Sun Mar 24 14:02:02 2002 Neil Conway <neilconway@rogers.com>
+2002-03-24  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtknotebook.c: Minor tweak -- use rb_define_alias().
 
-Tue Mar 19 10:00:47 2002 Neil Conway <neilconway@rogers.com>
+2002-03-19  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtk.c, src/rbgtk.h: Rename RUBY_OBJ_KEY to
 	RUBY_GTK_OBJ_KEY, as suggested by Mutoh Masao.
 
-Tue Mar 19 02:10:02 2002 Neil Conway <neilconway@rogers.com>
+2002-03-19  Neil Conway <neilconway@rogers.com>
 
 	* extconf.rb: No longer create a symlink to gtk.a during
 	compilation. This was reported by Bil Kleb
@@ -132,25 +148,25 @@ Tue Mar 19 02:10:02 2002 Neil Conway <neilconway@rogers.com>
 	* src/rbgdkfont.c: Code cleanup, fix indentation. (Woops,
 	the CVS changelog for this file is wrong.)
 
-Tue Mar 19 01:17:11 2002 Neil Conway <neilconway@rogers.com>
+2002-03-19  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtk.c, src/rbgtk.h: Change ruby_object_key to be a
 	#define, and move it to rbgtk.h -- thus, it can be accessed by
 	other packages.
 
-Sun Mar 17 16:39:35 2002 Neil Conway <neilconway@rogers.com>
+2002-03-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkstyle.c: Uncomment some methods, code cleanup.
 
-Sun Mar 17 16:22:26 2002 Neil Conway <neilconway@rogers.com>
+2002-03-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkconst.c: Increment version number.
 
-Sun Mar 17 15:32:27 2002 Neil Conway <neilconway@rogers.com>
+2002-03-17  Neil Conway <neilconway@rogers.com>
 
 	* README: Minor improvements.
 
-Fri Mar 15 13:57:46 2002 Neil Conway <neilconway@rogers.com>
+2002-03-15  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkitemfactory.c: Revert a braindead change to
 	item_exec_callback_wrap() that broke Gtk::ItemFactory.
@@ -160,7 +176,7 @@ Fri Mar 15 13:57:46 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtk.c: Remove some unused code.
 
-Tue Mar  5 14:52:38 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-03-05  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/dnd.rb: Code cleanup.
 
@@ -169,11 +185,11 @@ Tue Mar  5 14:52:38 2002 Masao Mutoh <mutoh@highway.ne.jp>
 	* src/rbgdk.c: Improve Gdk::Atom implementation, fix compiler
 	warnings.
 
-Sat Mar  2 21:09:02 2002 Neil Conway <neilconway@rogers.com>
+2002-03-02  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdk.c: Partial fix for get_gdkatom() problems.
 
-Sat Mar  2 17:08:08 2002 Neil Conway <neilconway@rogers.com>
+2002-03-02  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkstyle.c: Code cleanup (declare the types of a
 	few function parameters).
@@ -194,7 +210,7 @@ Sat Mar  2 17:08:08 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkdrag.c: Fix a couple DND bugs.
 
-Sat Mar  2 15:14:25 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-03-02  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkatom.c: Implement Gdk::Atom.
 
@@ -216,7 +232,7 @@ Sat Mar  2 15:14:25 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/dnd.rb: Add an example for the new DND support.
 
-Thu Feb 14 23:42:10 2002 Neil Conway <neilconway@rogers.com>
+2002-02-14  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkcolor.c: Lots of code cleanup, minor performance
 	optimizations.
@@ -227,23 +243,23 @@ Thu Feb 14 23:42:10 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwidget.c: Code cleanup.
 
-Thu Feb 14 23:03:22 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-02-14  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Change the make_xxx() to return Qnil if passed a
 	NULL argument. This fixes a bunch of possible segfaults in
 	one swell foop.
 
-Mon Feb 11 19:05:57 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-02-11  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkfontselection.c, src/rbgtkfontselectiondialog.c:
 	Fix segmentation fault in #set_filter, change #set_filter to
 	allow nil parameters.
 
-Tue Feb  5 21:58:25 2002 Neil Conway <neilconway@rogers.com>
+2002-02-05  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkctree.c: Major code cleanup.
 
-Tue Feb  5 19:10:48 2002 Neil Conway <neilconway@rogers.com>
+2002-02-05  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtksocket.c: Implement widget.
 
@@ -256,22 +272,22 @@ Tue Feb  5 19:10:48 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwindow.c: Add support for Gtk::Plug.
 
-Mon Feb  4 20:34:05 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-02-04  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/xbm_cursor.rb: Add copyright.
 
-Sun Feb  3 19:21:42 2002 Neil Conway <neilconway@rogers.com>
+2002-02-03  Neil Conway <neilconway@rogers.com>
 
 	* src/rbrange.c: Fix #default_vtrough_click and
 	#default_htrough_click.
 
 	* src/rbgtkctree.c: Fixs for lots of compiler warnings.
 
-Thu Jan 31 13:30:56 2002 Neil Conway <neilconway@rogers.com>
+2002-01-31  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkevent.c: Remove old pre-1.2.x code.
 
-Thu Jan 31 13:20:41 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-01-31  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkconst.c: Add some constants related to Gdk, DND and
 	DragContext.
@@ -289,16 +305,16 @@ Thu Jan 31 13:20:41 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtk.h: Updates for new Gdk DND and DragContext changes.
 
-Thu Jan 31 12:45:36 2002 Neil Conway <neilconway@rogers.com>
+2002-01-31  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkitemfactory.c: Remove unnecessary comment.
 
-Fri Jan 25 16:28:49 2002 Neil Conway <neilconway@rogers.com>
+2002-01-25  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwidget.c: Fix whitespace, code cleanup, implement
 	#set_scroll_adjustments.
 
-Thu Jan 17 23:12:12 2002 Masao Mutoh <mutoh@highway.ne.jp>
+2002-01-17  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombo.c: Make some methods return 'self' instead
 	of nil.
@@ -308,14 +324,14 @@ Thu Jan 17 23:12:12 2002 Masao Mutoh <mutoh@highway.ne.jp>
 	* sample/pointer_grab.rb, sample/keyboard_grab.rb,
 	sample/cursor.rb: Add copyright, minor code cleanup.
 
-Mon Jan 14 19:27:43 2002 Neil Conway <neilconway@rogers.com>
+2002-01-14  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkmain.c: Implement Gtk.signal_name.
 
 	* src/rbgtkobject.c: Implement #disconnect, add stubs for
 	#signal_emit and #signal_emit_by_name.
 
-Tue Jan  8 15:42:08 2002 Neil Conway <neilconway@rogers.com>
+2002-01-08  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkitemfactory.c, src/rbgdk.c: Replace free() with g_free().
 	All GTK+ widgets allocate memory using g_malloc(), and it is proper
@@ -329,16 +345,16 @@ Tue Jan  8 15:42:08 2002 Neil Conway <neilconway@rogers.com>
 	* src/rbgtkconst.c: Add constants for GtkFontType and
 	GtkFontFilterType.
 
-Tue Jan  8 15:21:39 2002 WATANABE Hirofumi <eban@os.rim.or.jp>
+2002-01-08  WATANABE Hirofumi <eban@os.rim.or.jp>
 
 	* extconf.rb: Fix for Win32/mingw.
 
-Tue Dec 18 08:26:41 2001 Neil Conway <neilconway@rogers.com>
+2001-12-18  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkconst.c: Update Ruby-GTK version to 0.27 -- I forgot
 	to do this for the 0.26 release.
-
-Fri Dec 14 18:46:14 2001 Neil Conway <neilconway@rogers.com>
+ 
+2001-12-14  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkclist.c, src/rbgtkcontainer.c, src/rbgtkmenu.c,
 	src/rbgtkmenuitem.c, src/rbgtkpreview.c, src/rbgtkwidget.c,
@@ -347,17 +363,17 @@ Fri Dec 14 18:46:14 2001 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkcursor.c: Remove some superflous comments.
 
-Sun Nov 25 17:06:56 2001 Neil Conway <neilconway@rogers.com>
+2001-11-25  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkclist.c, src/rbgtkctree.c, src/rbgdkkeyval.c,
 	src/rbgtkprogressbar.c: Use CSTR2OBJ macro.
 
-Sat Nov 24 16:29:15 2001 Neil Conway <neilconway@rogers.com>
+2001-11-24  Neil Conway <neilconway@rogers.com>
 
 	* MANIFEST-doc.in, MANIFEST-src.in, MANIFEST-sample.in,
 	MANIFEST.in: Files removed.
 
-Fri Nov 23 13:34:50 2001 Neil Conway <neilconway@rogers.com>
+2001-11-23  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtktogglebutton.c: Code cleanup.
 
@@ -368,57 +384,57 @@ Fri Nov 23 13:34:50 2001 Neil Conway <neilconway@rogers.com>
 	* src/makecursors.awk, src/makedefconst.sh, src/makekeysyms.awk:
 	Remove these files since they're no longer used.
 
-Thu Nov 22 15:55:03 2001 Masahiro Sakai <zvm01052@nifty.ne.jp>
+2001-11-22  Masahiro Sakai <zvm01052@nifty.ne.jp>
 
 	* src/rbgtkwindow.c, src/rbgtknotebook.c: Fix Gtk::FontSelection
 	to sub-class Gtk:Notebook instead of Object.
 
-Sun Nov 18 12:37:09 2001 Masao Mutoh <mutoh@highway.ne.jp>
+2001-11-18  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/cursor.rb, sample/keyboard_grab.rb, sample/pointer_grab.rb,
 	sample/xbm_cursor.rb: Add four sample files.
 
-Sun Nov 18 11:42:13 2001 Neil Conway <neilconway@rogers.com>
+2001-11-18  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdk.c, src/rbgdkgc.c: Move Gdk::GC to a separate file.
 
 	* src/rbgdk.c: Minor code cleanup.
 
-Sat Nov 17 23:47:30 2001 Neil Conway <neilconway@rogers.com>
+2001-11-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkaccellabel.c: Implement new widget.
 
-Sat Nov 17 19:11:08 2001 Neil Conway <neilconway@rogers.com>
+2001-11-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwidget.c: Correct some formatting.
 
-Sat Nov 17 18:18:41 2001 Neil Conway <neilconway@rogers.com>
+2001-11-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkfont.c: Fix 2 typos, remove bogus #text_length.
 
-Sat Nov 17 12:20:07 2001 Neil Conway <neilconway@rogers.com>
+2001-11-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdk.c, src/rbgdkim.c: Move some declarations from rbgdk.c
 	to where they belong, in rbgdkim.c.
 
-Sat Nov 17 11:47:29 2001 Neil Conway <neilconway@rogers.com>
+2001-11-17  Neil Conway <neilconway@rogers.com>
 
 	* sample/testgtk/fontselection.rb: File added. This should have
 	been in the CVS tree, but was only in my local tree. This makes
 	testgtk.rb work again.
 
-Fri Nov 16 16:35:26 2001 Neil Conway <neilconway@rogers.com>
+2001-11-16  Neil Conway <neilconway@rogers.com>
 
 	* rbgdkfont.c: Major refactoring and cleanup. Also, implement
 	#text_width, #text_height, #text_measure and #text_length.
 
-Fri Nov 16 16:13:26 2001 Neil Conway <neilconway@rogers.com>
+2001-11-16  Neil Conway <neilconway@rogers.com>
 
 	* rbgdk.c: Move the implementation of Gdk::Font to rbgdkfont.c.
 
 	* rbgdkfont.c: File added.
 
-Fri Nov 16 15:53:30 2001 Masao Mutoh <mutoh@highway.ne.jp>
+2001-11-16  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* rbgtkobject.c: Remove !=, that is used for comparison,
 	not substitution. [ruby-dev:15102]
@@ -433,53 +449,53 @@ Fri Nov 16 15:53:30 2001 Masao Mutoh <mutoh@highway.ne.jp>
 	rbgdk.h, rbgdkcursor.c: Implement Gdk::Cursor and
 	Gdk::Cursor::Constants.
 
-Fri Nov 16 15:12:55 2001 Neil Conway <neilconway@rogers.com>
+2001-11-16  Neil Conway <neilconway@rogers.com>
 
 	* NEWS: Update for new release.
 
-Fri Nov 16 14:45:57 2001 Neil Conway <neilconway@rogers.com>
+2001-11-16  Neil Conway <neilconway@rogers.com>
 
 	* VERSION: Remove this (pointless) file.
 
-Fri Oct 19 14:09:52 2001 Neil Conway <neilconway@rogers.com>
+2001-10-19  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkitemfactory.c: Implement Gtk::ItemFactory.parse_rc()
 	and Gtk::ItemFactory.parse_rc_string().
 
-Fri Oct 19 13:40:02 2001 Neil Conway <neilconway@rogers.com>
+2001-10-19  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkitemfactory.c: Minor cleanups.
 
 	* src/rbgtk.c, src/rbgtk.h: Add the Gtk::ItemFactory::Constants
 	module.
 
-Fri Oct 19 13:39:02 2001 Masao Mutoh <mutoh@highway.ne.jp>
+2001-10-19  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: Minor cleanups.
 
-Fri Oct 19 13:39:02 2001 dellin <dellin@team-ct.org>
+2001-10-19  dellin <dellin@team-ct.org>
 
 	* src/rbgtkitemfactory.c: fix item_exec_callback_wrap,
 	create Gtk::ItemFactory::Constants and move constants
 	from Gtk::ItemFactory, add ItemFactory#path_from_widget,
 	#delete_item,#get_item
 
-Fri Oct 19 13:39:02 2001 Masao Mutoh <mutoh@highway.ne.jp>
+2001-10-19  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: fix GC problems in ItemFactory#create_item/s
 
-Fri Oct 19 11:47:05 2001 Neil Conway <neilconway@rogers.com>
+2001-10-19  Neil Conway <neilconway@rogers.com>
 
 	* src/init.c, src/rbgdkcolor.c, src/rbgdkdraw.c,
 	src/rbgdkregion.c, src/rbgtk.c, src/rbgtkbin.c: Minor
 	code cleanup.
 
-Thu Oct 18 23:16:17 2001 Neil Conway <neilconway@rogers.com>
+2001-10-18  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwindow.c: Fix minor code whoops (the type
 	for a function parameter wasn't declared).
 
-Thu Oct 18 14:30:07 2001 Neil Conway <neilconway@rogers.com>
+2001-10-18  Neil Conway <neilconway@rogers.com>
 
 	* NEWS: File added.
 
@@ -489,7 +505,7 @@ Thu Oct 18 14:30:07 2001 Neil Conway <neilconway@rogers.com>
 	* sample/texthook.rb: Update for the change to
 	Gtk.signal_emit_stop
 
-Thu Oct 18 01:37:47 2001 Neil Conway <neilconway@rogers.com>
+2001-10-18  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkmain.c: Implement Gtk.signal_lookup
 
@@ -497,7 +513,7 @@ Thu Oct 18 01:37:47 2001 Neil Conway <neilconway@rogers.com>
 	into aliases. Implement #signal_n_emissions and
 	#signal_n_emissions_by_name.
 
-Wed Oct 17 21:09:42 2001 Neil Conway <neilconway@rogers.com>
+2001-10-17  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtklabel.c: Make some function definitions
 	into aliases.
@@ -518,19 +534,19 @@ Wed Oct 17 21:09:42 2001 Neil Conway <neilconway@rogers.com>
 	* src/rbgtkobject.c: Rename #emit_stop to #emit_stop_by_name.
 	Implement #emit_stop.
 
-Tue Oct 16 13:19:12 2001 Neil Conway <neilconway@rogers.com>
+2001-10-16  Neil Conway <neilconway@rogers.com>
 
 	* README.ja: File removed, once again. This file is
 	simple enough that no Japanese translation is needed.
 
-Tue Oct 16 13:09:30 2001 Nobuyoshi Nakada  <nobu.nakada@nifty.ne.jp>
+2001-10-16  Nobuyoshi Nakada  <nobu.nakada@nifty.ne.jp>
 
 	* src/init.c: Make application name default to the name of the
 	current Ruby script.
 
 	* src/rbgtk.h: improve RGTEST same as ruby's RTEST().
 
-Mon Oct 15 15:55:58 2001 Neil Conway <neilconway@rogers.com>
+2001-10-15  Neil Conway <neilconway@rogers.com>
 
 	* README.EXT: Fix typo (reported by MUTOH
 	Masao <mutoh@highway.ne.jp>).
@@ -542,33 +558,33 @@ Mon Oct 15 15:55:58 2001 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkimage.c, src/rbgdkkeyval.c: Add license info.
 
-Sun Oct 14 16:16:18 2001 Neil Conway <neilconway@rogers.com>
+2001-10-14  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkcombo.c: Implement Gtk::Combo#set_use_arrows_always
 
-Sat Oct 13 19:57:46 2001 Neil Conway <neilconway@rogers.com>
+2001-10-13  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdk.c: Implement 4 Gdk singleton methods: beep(),
 	flush(), screen_height_mm() and screen_width_mm().
 
 	* src/rbgdkimage.c: File created; moved the implementation
 	of Gdk::Image from rbgdk.c to here. Clean up some of the
-        Gdk::Image code as well.
+	     Gdk::Image code as well.
 
 	* src/rbgdkkeyval.c: File created; implement a module
 	called Gdk::Keyval which contains wrappers for the
 	gdk_keyval_* functions. [ruby-talk:22478]
 
-Sat Oct 13 19:44:04 2001 Masahiro Sakai <zvm01052@nifty.ne.jp>
+2001-10-13  Masahiro Sakai <zvm01052@nifty.ne.jp>
 
 	* src/rbgtk.c: change function that stores reference of objects
 	from gtk_object_set_user_data() to gtk_object_set_data()
 
-Mon Oct  8 16:13:13 2001  Neil Conway <neilconway@rogers.com>
+2001-10-08  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkfilesel.c: Code cleanup.
 
-Mon Oct  8 13:30:42 2001  Neil Conway <neilconway@rogers.com>
+2001-10-08  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkfilesel.c: Apply patch from Masao Mutoh
 	<mutoh@highway.ne.jp> -- remove #help_button because
@@ -591,7 +607,7 @@ Mon Oct  8 13:30:42 2001  Neil Conway <neilconway@rogers.com>
 	#history_pulldown, #fileop_c_dir, #fileop_del_file
 	and #fileop_ren_file.
 
-Mon Oct  8 13:30:42 2001  Neil Conway <neilconway@rogers.com>
+2001-10-08  Neil Conway <neilconway@rogers.com>
 
 	* extconf.rb: Remove 'mkmf.log' on 'distclean'.
 
@@ -600,7 +616,7 @@ Mon Oct  8 13:30:42 2001  Neil Conway <neilconway@rogers.com>
 
 	* MANIFEST-doc.in: Update for removal of Japanese docs.
 
-Fri Oct  5 18:41:02 2001  Neil Conway <neilconway@rogers.com>
+2001-10-05  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtktable.c, src/rbgtkdata.c, src/rbgdkevent.c:
 	Fix compiler warnings, minor cleanups.
@@ -619,7 +635,7 @@ Fri Oct  5 18:41:02 2001  Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtk.c: Update get_gtk_type() for new widgets.
 
-Fri Oct  5 01:09:42 2001  Neil Conway <neilconway@rogers.com>
+2001-10-05  Neil Conway <neilconway@rogers.com>
 
 	* ToDo, sample/testgtk/testgtk.rb, sample/testgtk/filesel.rb,
 	sample/testgtk/fontselection.rb, src/global.h, src/rbgtk.c,
@@ -628,67 +644,67 @@ Fri Oct  5 01:09:42 2001  Neil Conway <neilconway@rogers.com>
 	Apply a large patch to implement Gtk::FontSelection,
 	Gtk::FontSelectionDialog, add it to testgtk.rb and some cleanup.
 
-Fri Oct  5 01:04:30 2001  Neil Conway <neilconway@rogers.com>
+2001-10-05  Neil Conway <neilconway@rogers.com>
 
 	* src/global.c: Remove an obsolete comment.
 
-Fri Oct  5 00:43:12 2001  Neil Conway <neilconway@rogers.com>
+2001-10-05  Neil Conway <neilconway@rogers.com>
 
 	* src/global.c: Avoid needless downcast from 'long'
 	to 'int' in ary2gslist() and ary2glist().
 
-Sun Sep  9 02:23:07 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-09-09  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/init.c, src/rbgtk.c, src/rbgtkmain.c:
 	define Gtk.log_{set,remove}_handler to wrap
 	g_log_{set,remove}_handler().
 
-Sat Jul 21 22:33:20 2001  Tobias Peters <t-peters@gmx.de>
+2001-07-21  Tobias Peters <t-peters@gmx.de>
 
 	* src/rbgtk.h, src/rbgtk.c, src/rbgtkmain.c:
 	add new API add_relative_removable() and remove_relative()
 	to manage relativity more explicitly.
 
-Thu May 24 06:31:44 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-05-24  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* version 0.25 released.
 
-Thu May 24 06:31:44 2001  kadu <kadu3@m16.alpha-net.ne.jp>
+2001-05-24  kadu <kadu3@m16.alpha-net.ne.jp>
 
 	* doc/rbbr.rb: attach a document viewer with refe, ri.
 
-Tue May 22 06:22:53 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-05-22  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.h: define a missing constant of
 	Gtk::ItemFactory.
 
-Tue May 22 06:19:26 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-05-22  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c, src/rbgdkconst.c: define values of type GdkFunction.
 
-Sun May 20 23:02:17 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-05-20  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Gdk::GC#set_dashes takes an Array argument instead of
 	String.
 
-Mon May  7 00:47:49 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-05-07  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: Gdk::Colormap#colors returns the proper value.
 
-Sun Apr 22 17:39:21 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-04-22  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: define methods of Gdk::Image.
 
-Sun Apr 15 19:37:42 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-04-15  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: Gdk::Colormap#alloc_color returns
 	the pixel value now.
 
-Mon Apr  9 05:27:24 2001  Masao Mutoh <mutoh@highway.ne.jp>
+2001-04-09  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: define Gdk::Colormap#colors, Gdk::Color#pixel.
 
-Fri Mar 30 23:17:26 2001  Masahiro Sakai  <zvm01052@nifty.ne.jp>
+2001-03-30  Masahiro Sakai  <zvm01052@nifty.ne.jp>
 
 	* src/rbgtk.c (rbgtk_register_class): manage mappnig GtkType
 	to ruby class object.
@@ -697,30 +713,30 @@ Fri Mar 30 23:17:26 2001  Masahiro Sakai  <zvm01052@nifty.ne.jp>
 
 	* src/rbgtk.c (rbgtk_lookup_class_by_gtype): implemented newly.
 
-Wed Mar 28 06:54:25 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-03-28  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.c (rbgtk_lookup_class): check whether the instance
 	variable is defined.
 
-Sat Mar  3 08:10:54 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-03-03  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.h init.c rbgdk.c rbgtk.c rbgtkmain.c:
 	raise exception when FATAL/ERROR logs are emitted from GDK/GTK.
 
-Fri Feb 16 18:48:50 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-02-16  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* version 0.24 released.
 
-Fri Jan 19 20:49:49 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-19  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: fix dependencies for rbgdk.o, rbgdkconst.o.
 
-Sat Jan 13 01:47:59 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.h: declaration for function notimplemented() is disused
 	and causes compile errors now.
 
-Fri Jan 12 05:40:23 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-12  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdk.c: define Gdk.screen_{width,height}.
 
@@ -734,61 +750,61 @@ Fri Jan 12 05:40:23 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkwidget.c: define Gtk::Widget#set_app_paintable.
 
-Fri Jan 12 01:35:45 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-12  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* doc/rbbr.rb: new simple class browser.
 
-Thu Jan 11 19:32:44 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-11  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdkwindow.c: fix Gdk::Window#get_geometry (accessed
 	not-allocated memory area).
 
-Wed Jan 10 17:40:46 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-10  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkitemfactory.c: add new file.
 
 	* src/global.h, src/rbgtk.h, src/rbgtk.c, src/rbgtkobject.c:
 	add stuff about Gtk::ItemFactory.
 
-Wed Jan 10 17:08:21 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-10  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtktoolbar.c: Gtk::Toolbar#{append,prepend,insert}_item
 	should return a item created newly in the toolbar.
 
-Wed Jan 10 01:20:44 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-10  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkclist.c: add missing methods in Gtk::CList.
 
-Wed Jan 10 00:16:06 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-10  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkctree.c:
 	fixed Gtk::CTree#set_indent to call a correct function.
 
-Wed Jan 10 00:09:59 2001  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2001-01-10  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkclist.c, rbgtkctree.c, src/rbgtkfilesel.c:
-        fixed to use them.
+	     fixed to use them.
 
 	* src/rbgtk.h, src/rbgtk.c:
-        added functions to manage class info.
+	     added functions to manage class info.
 
-Sun Oct 22 20:18:25 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-10-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkmain.c (exec_interval): proc was called twice.
 
-Mon Oct  9 13:42:34 2000  MOROHOSHI Akihiko <moro@remus.dti.ne.jp>
+2000-10-09  MOROHOSHI Akihiko <moro@remus.dti.ne.jp>
 
 	* src/rbgtkclist.c (clist_marker_mark): improve GC marking.
 
 	* src/rbgtkctree.c (ctree_marker_mark, ctree_node_mark_recursive): 
 	ditto.
 
-Fri Sep 22 19:30:58 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-09-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: raise an exception if gdkcursors.h or gdkkeysyms.h
 	are not found.
 
-Tue Sep  5 06:28:00 2000  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
+2000-09-05  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
 
 	* src/rbgtkitem.c:
 	Gtk::TreeItem#subtree, subtree=, expanded?, leaf?
@@ -804,103 +820,103 @@ Tue Sep  5 06:28:00 2000  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
 	checkes type of CTreeNode.
 	define Gtk::CTree#[]
 
-Tue Sep  5 05:55:56 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-09-05  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdkwindow.c: define Gdk::Window#{show,hide}.
 
-Tue Sep  5 05:25:22 2000  Yasushi Shoji <yashi@yashi.com>
+2000-09-05  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgdk.c, src/rbgdkconst.c, src/rbgdkwindow.c, src/rbgtk.h,
 	src/rbgtkwindow.c: define Gdk::Geometry and
 	Gtk::Window#set_geometry_hints ([ruby-ext:01055]).
 
-Tue Sep  5 04:54:55 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-09-05  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkfilesel.c:
-        define Gtk::FileSelection#{dir_list,file_list}.
+	     define Gtk::FileSelection#{dir_list,file_list}.
 
-Sat Sep  2 19:06:04 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-09-02  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdkevent.c: should map gdouble to Float on returning value.
 
-Sat Sep  2 05:50:23 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-09-02  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkmain.c (gtk_m_events_pending, gtk_m_main_iteration):
-        Gtk.events_pending, Gtk.main_iteration should return true/false.
+	     Gtk.events_pending, Gtk.main_iteration should return true/false.
 
 	* src/rbgtkmain.c (gtk_m_get_current_event):
 	define Gtk.get_current_event.
 
-Sun Jun 25 10:39:50 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-06-25  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdkcolor.c (gdkcolor_to_a, Init_gtk_gdk_color):
 	define Gdk::Color#to_a giving array [red, green ,blue].
 
-Tue Jun 20 00:33:28 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-06-20  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: define distclean target in topdir Makefile.
 
-Wed Jun 07 16:28:16 2000  Masaki Fukushima <fukusima@goto.info.waseda.ac.jp>
+2000-06-07  Masaki Fukushima <fukusima@goto.info.waseda.ac.jp>
 
-        * src/rbgtk.c: use g_main_set_poll_func() and rb_thread_select()
+	     * src/rbgtk.c: use g_main_set_poll_func() and rb_thread_select()
 	to improve the response. This is applied only for ruby 1.5.4 and later.
 
-Mon Jun 05 16:13:05 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-06-05  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: support target `site-install'.
 
-Sat May 13 15:26:02 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-05-13  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.c (Init_gtk_gtk): restore calling Init_gtk_accel_group().
 
-Thu May 11 13:30:25 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-05-11  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgdkcolor.c: define the missing methods in Gdk::Color.
 
-Sun May 07 12:53:37 2000  Hiroyuki ARAKI  <hiro@zob.ne.jp>
+2000-05-07  Hiroyuki ARAKI  <hiro@zob.ne.jp>
 
 	* src/rbgdkpixmap.c:
 	define Gdk::Pixmap#colormap_create_from_xpm(?:_d)?.
 
-Sun May 07 11:59:25 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-05-07  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* doc/gtkbrows.rb: do not refer GdkImlib.
 
-Sat May 06 22:27:19 2000  Hiroyuki ARAKI  <hiro@zob.ne.jp>
+2000-05-06  Hiroyuki ARAKI  <hiro@zob.ne.jp>
 
 	* src/rbgdk.c: define some missing methods in Gdk::Font.
 
-Sat Apr 22 19:26:25 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-04-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/init.c (Init_gtk): call Init_gtk_xxx() after calling gtk_init().
 
-Sat Apr 22 19:10:34 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-04-22  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* sample/testgtk/testgtk.rb: display version of Ruby/GTK.
 
-Thu Mar 30 22:53:41 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkpaned.c (paned_child1, paned_child2):
 	use get_value_from_gobject to return correct objects.
 
-Thu Mar 30 22:46:47 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkconst.c, src/rbgtkclist.c (clist_row_is_visible):
 	change correspondence between C and Ruby in type GtkVisibility.
 
-Thu Mar 30 22:39:36 2000  Yasushi Shoji <yashi@yashi.com>
+2000-03-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkwindow.c: define Gtk::Window#set_transient_for
 
-Thu Mar 30 22:18:08 2000  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
+2000-03-30  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
 
 	* gtk-config.cygwin: gtk-config for cygwin.
 
-Thu Mar 30 21:53:37 2000  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
+2000-03-30  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
 
 	* extconf.rb, src/rbgtk.c, src/rbgtk.h: modify to support cygwin.
 
-Thu Mar 30 21:17:43 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtkwindow.c, src/rbgtkstyle.c, src/rbgtktable.c,
 	src/rbgtktext.c, src/rbgtktogglebutton.c, src/rbgtktoolbar.c,
@@ -912,79 +928,79 @@ Thu Mar 30 21:17:43 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
 	src/rbgtkcombo.c, src/rbgtkctree.c, src/rbgdkcolor.c,
 	src/rbgdkdraw.c, src/rbgdkwindow.c, src/rbgtkaspectframe.c,
 	src/rbgtkbox.c, src/rbgtkcheckmenuitem.c:
-        replace `RTEST' with `RGTEST'.
+	     replace `RTEST' with `RGTEST'.
 
-Thu Mar 30 21:15:00 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.h: define a macro `RGTEST' returning gboolean value.
 
-Thu Mar 30 20:50:46 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/global.h: declare Init_gtk_style().
 
-Thu Mar 30 20:49:01 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.c (Init_gtk_gtk): call Init_gtk_style().
 
-Thu Mar 30 20:01:17 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/init.c: move declarations of Init_gtk_xxx to `global.h'.
 
-Thu Mar 30 19:59:42 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/global.h: declare functions Init_gtk_xxx.
 
-Thu Mar 30 18:52:49 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: fix typos.
 
-Thu Mar 30 18:50:39 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* extconf.rb: add `rbgtk.h' to dependency.
 
-Thu Mar 30 18:48:26 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/global.h: this file contains private objects for ruby-gtk.
 
-Thu Mar 30 18:47:03 2000  Hiroshi IGARASHI  <iga@ruby-lang.org>
+2000-03-30  Hiroshi IGARASHI  <iga@ruby-lang.org>
 
 	* src/rbgtk.h: create a header file for public objects.
 
-Wed Mar 29 20:07:41 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-03-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/*.c: split files per class.
 	
-Wed Mar 29 20:02:47 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-03-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkimlib.c: gdkimlib is separated to other module.
 
-Mon Mar 27 18:23:42 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-03-27  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/testgtk/statusbar.rb, sample/testgtk/clist.rb,
 	sample/testgtk/ctree.rb:
 	avoid syntax error.
 
-Tue Feb 22 21:17:51 2000  YASUI Kentarow <kenyasui@alles.or.jp>
+2000-02-22  YASUI Kentarow <kenyasui@alles.or.jp>
 
 	* src/rbgtkclist.c:
 	define method row_is_visible and modify moveto in class Gtk::CList.
 
-Fri Feb 11 10:24:00 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-02-11  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* version 0.23 released.
 
-Fri Feb 11 10:22:37 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-02-11  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkrgb.c:
 	rename Gdk::Rgb to Gdk::RGB and call gdk_rgb_init()
 	before use functions gdk_rgb_xxx.
 
-Thu Feb 10 01:50:28 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-02-10  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c (gobj_sig_handler_{block,unblock}):
 	use NUM2INT() for API arguments.
 
-Sun Jan 30 16:09:34 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-01-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/test/test7.rb, sample/test/test8.rb, sample/test/testb.rb,
 	sample/test/testc.rb, sample/test/testd.rb, sample/test/teste.rb,
@@ -993,12 +1009,12 @@ Sun Jan 30 16:09:34 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 	sample/testim.rb:
 	use Gtk::Widget::CAN_* instead of Gtk::CAN_*.
 
-Sun Jan 30 02:35:13 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-01-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkconst.c (Init_gtk_const):
 	define constants Gtk::VERSION, Gtk::BINDING_VERSION.
 
-Sat Jan 29 09:58:32 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-01-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/testgtk/reparent.rb, sample/testgtk/savedposition.rb,
 	sample/testgtk/scrolledwindow.rb, sample/testgtk/statusbar.rb,
@@ -1011,39 +1027,39 @@ Sat Jan 29 09:58:32 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 	sample/testgtk/range.rb:
 	use Gtk::Widget::CAN_DEFAULT instead of Gtk::CAN_DEFAULT.
 
-Sat Jan 29 09:53:58 2000  Yasushi Shoji <yashi@yashi.com>
+2000-01-29  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtk.c (signal_comp, signal_setup_args):
 	allow signal name including "-".
 
-Thu Jan 27 16:40:48 2000  Yasushi Shoji <yashi@yashi.com>
+2000-01-27  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtk.c, src/rbgtkcontainer.c, src/global.h:
 	define Gtk::HandleBox.
 
-Tue Jan 25 17:42:21 2000  Hiroyuki ARAKI <hiro@zob.ne.jp>
+2000-01-25  Hiroyuki ARAKI <hiro@zob.ne.jp>
 
 	* src/rbgtkwindow.c: define Gtk::Window#{add,remove}_accel_group.
 
-Tue Jan 25 17:41:41 2000  Hiroyuki ARAKI <hiro@zob.ne.jp>
+2000-01-25  Hiroyuki ARAKI <hiro@zob.ne.jp>
 
 	* src/rbgtkwidget.c:
 	define Gtk::Widget#{add_accelerator,remove_accelerator,
 	remove_accelerators,accelerator_signal}.
 
-Tue Jan 25 17:40:05 2000  Hiroyuki ARAKI <hiro@zob.ne.jp>
+2000-01-25  Hiroyuki ARAKI <hiro@zob.ne.jp>
 
 	* src/global.h: support AccelGroup.
 
-Tue Jan 25 17:31:50 2000  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+2000-01-25  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* extconf.rb: don't use variable $?.
 
-Thu Dec 30 13:35:41 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkconst.c: arrange constants definitions.
 
-Thu Dec 30 13:32:20 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/testgtk/button.rb, sample/testgtk/checkbutton.rb,
 	sample/testgtk/clist.rb, sample/testgtk/dialog.rb,
@@ -1051,567 +1067,567 @@ Thu Dec 30 13:32:20 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 	sample/testgtk/notebook.rb, sample/testgtk/testgtk.rb:
 	Gtk::CAN_DEFAULT is obsolete.
 
-Thu Dec 30 11:32:02 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkwidget.c (Init_gtk_widget): define constants of Gtk::Widget.
 
-Thu Dec 30 11:18:04 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkeditable.c (Init_gtk_spin_button):
 	define constants of Gtk::SpinButton.
 
-Thu Dec 30 11:15:26 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c (Init_gtk_object): define constants of Gtk::Object.
 
-Thu Dec 30 08:15:54 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (make_gdkevent):
 	create Gdk::EventCrossing objects for event GDK_{ENTER,LEAVE}_NOTIFY.
 
-Mon Dec 27 23:44:08 1999  Masahiro Tomita <tommy@tmtm.org>
+1999-12-27  Masahiro Tomita <tommy@tmtm.org>
 
 	* src/rbgtk.c:
 	define methods Gtk::Object#signal_handler_{block,unblock}.
 
-Mon Dec 27 01:03:48 1999  Masahiro Tomita <tommy@tmtm.org>
+1999-12-27  Masahiro Tomita <tommy@tmtm.org>
 
 	* src/rbgtk.c (signal_setup_args, signal_sync_args):
 	add signals of Gtk::Editable.
 
-Mon Dec 20 18:45:53 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-20  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkevent.c (Init_gtk_gdk_event): event class name
 	begin with a capital letter.
 
-Sun Dec 19 16:48:09 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-19  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgdkcolor.c: define instance methods of Gdk::Visual.
 
-Fri Dec 17 20:25:53 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-17  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkcolor.c, src/rbgdk.c:
 	define constants and class methods in Gdk::Visual.
 
-Fri Dec 17 18:45:58 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-17  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgdkcolor.c: define Gdk::Colormap.new.
 
-Fri Dec 17 16:02:56 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-17  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtknotebook.c, src/rbgtkbutton.c, src/rbgtkbox.c,
 	src/rbgdkimlib.c, src/rbgtktoolbar.c, src/rbgtkclist.c:
 	use NUM2INT() instead of FIX2INT() for arguments.
 
-Sun Dec 12 15:24:06 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-12  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkcontainer.c:	[ruby-ext:00626] rename
 	Gtk::Paned#{handle,gutter}_size to Gtk::Paned#set_{handle,gutter}_size
 	and define some aliases in Gtk::Paned.
 
-Sun Dec 12 15:14:53 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-12  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkclist.c: [ruby-ext:00694] add Gtk::CList#get_column_widget
 	and fix typo.
 
-Sun Dec 12 14:59:19 1999  Minero Aoki <aamine@dp.u-netsurf.ne.jp>
+1999-12-12  Minero Aoki <aamine@dp.u-netsurf.ne.jp>
 
 	* src/rbgtkctree.c: [ruby-ext:00699] modify reference management
 	for row data in Gtk::CTree.
 
-Thu Dec 09 22:28:27 1999  Minero Aoki <aamine@dp.u-netsurf.ne.jp>
+1999-12-09  Minero Aoki <aamine@dp.u-netsurf.ne.jp>
 
 	* src/rbgtkctree.c: [ruby-ext:00664] modify reference management
 	for row data in Gtk::CTree.
 
-Thu Dec 09 21:37:53 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-12-09  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c (get_gtk_type): support Gtk::Calendar.
 
-Thu Dec 09 17:32:40 1999  Daisuke Furukawa <dfuru@suenaga.cse.nagoya-u.ac.jp>
+1999-12-09  Daisuke Furukawa <dfuru@suenaga.cse.nagoya-u.ac.jp>
 
 	* extconf.rb: [ruby-ext:00669] skip command line arguments
 	only beginning with "--".
 
-Thu Dec 09 17:28:36 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-09  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkcalendar.c:
 	[ruby-ext:00681] use NUM2INT() instead of FIX2INT().
 
-Thu Dec 09 17:17:25 1999  Yasushi Shoji <yashi@yashi.com>
+1999-12-09  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkcalendar.c:
-        [ruby-ext:00607] use 1..12 as representation of month
+	     [ruby-ext:00607] use 1..12 as representation of month
 	and add some methods in Gtk::Calendar.
 
-Tue Nov 30 20:23:20 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-30  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c (gobj_clone): Gtk::Object#clone should raise a exception.
 
-Tue Nov 30 20:06:40 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkctree.c (ctree_node_mark): don't mark row.data
 	if row.destroy != NULL.
 
-Tue Nov 30 09:12:44 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkmisc.c:
 	define aliases for methods Gtk::Label#{jtype,jtype=}.
 
-Tue Nov 30 09:09:34 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtktoolbar.c: define constants in Gtk::Toolbar.
 
-Tue Nov 30 09:02:26 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkbutton.c:
 	take boolean value as the argument of Gtk::ToggleButton#set_mode.
 
-Tue Nov 30 08:55:24 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-30  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkcontainer.c:
 	consider nil for 2nd,3rd arguments of Gtk::Menu#popup.
 
-Mon Nov 29 16:22:52 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* extconf.rb: add source src/rbgtkcalendar.c
 
-Mon Nov 29 16:21:08 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-29  Yasushi Shoji <yashi@yashi.com>
 
 	* src/global.h, src/rbgtk.c, src/rbgtkcalendar.c:
 	add some declaration and initialization for Gtk::Calendar.
 
-Mon Nov 29 16:13:35 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-29  Yasushi Shoji <yashi@yashi.com>
 
 	* sample/calendar.rb: add a sample script for Gtk::Calendar.
 
-Mon Nov 29 16:09:36 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkcontainer.c: fix the arity of Gtk::Menu#popup.
 
-Mon Nov 29 04:05:18 1999  Yasushi Shoji <yashi@yashi.com>
+1999-11-29  Yasushi Shoji <yashi@yashi.com>
 
 	* src/rbgtkcalendar.c: add file to define Gtk::Calendar.
 
-Sun Nov 28 21:29:30 1999  yamazaki <yamazaki@nal.go.jp>
+1999-11-28  yamazaki <yamazaki@nal.go.jp>
 
 	* src/rbgtkcontainer.c, src/rbgtknotebook.c:
 	use get_value_from_gobject instead of make_gobject_auto_type.
 
-Sun Nov 28 21:26:26 1999  yamazaki <yamazaki@nal.go.jp>
+1999-11-28  yamazaki <yamazaki@nal.go.jp>
 
 	* src/rbgtk.c (get_value_from_gobject): create ruby object if not exist.
 
-Sun Nov 28 18:39:50 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-28  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c: modify the notation by Gtk::Object#inspect.
 
-Sun Nov 28 18:29:42 1999  Yasushi Shoji  <yashi@yashi.com>
+1999-11-28  Yasushi Shoji  <yashi@yashi.com>
 
 	* src/rbgtknotebook.c:
-        accept nil or omission for argument on methods
+	     accept nil or omission for argument on methods
 	Gtk::Notebook#{append,prepend,insert}_page*
 
-Sat Nov 27 19:51:28 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-27  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/helloworld.rb (main): omit argument for Gtk::Window.new.
 
-Sat Nov 27 19:45:04 1999  Yasushi Shoji  <yashi@yashi.com>
+1999-11-27  Yasushi Shoji  <yashi@yashi.com>
 
 	* src/rbgtkcontainer.c: fix the super class of Gtk::ScrolledWindow.
 
-Sat Nov 27 19:42:11 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-11-27  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkcontainer.c: add some methods in Gtk::Tree.
 
-Sat Nov 27 19:32:54 1999  Yasushi Shoji  <yashi@yashi.com>
+1999-11-27  Yasushi Shoji  <yashi@yashi.com>
 
 	* src/rbgtkwindow.c (gwin_initialize):
 	accept omission of argument for Gtk::Window#initialize
 	(assume Gtk::WINDOW_TOPLEVEL then).
 
-Sat Nov 27 19:15:05 1999  yamazaki <yamazaki@nal.go.jp>
+1999-11-27  yamazaki <yamazaki@nal.go.jp>
 
 	* src/rbgdkcolor.c (gdkcolor_s_new): correct conversion from Ruby to C.
 
-Sat Nov 27 19:03:17 1999  Yasushi Shoji  <yashi@yashi.com>
+1999-11-27  Yasushi Shoji  <yashi@yashi.com>
 
 	* src/rbgtkwidget.c (Init_gtk_widget): add missing signals
 	in Gtk::Widget.
 
-Sat Oct 30 12:23:47 1999  Yasushi Shoji  <yashi@yashi.com>
+1999-10-30  Yasushi Shoji  <yashi@yashi.com>
 
 	* sample/testgtk/statusbar.rb, sample/testgtk/testgtk.rb:
 	enable "statusbar" sample in testgtk.
 
-Sat Oct 30 12:21:49 1999   Yasushi Shoji  <yashi@yashi.com>
+1999-10-30   Yasushi Shoji  <yashi@yashi.com>
 
 	* src/rbgtkbox.c: define Gtk::Statusbar#messages.
 
-Sun Oct 24 08:48:51 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-10-24  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* src/rbgtkcontainer.c: add methods of Gtk::Paned.
 
-Wed Oct 20 03:34:01 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-20  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* version 0.22 released.
 
-Tue Oct 19 18:23:53 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-19  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/global.h: declare functions {make,gtk}_grcstyle.
 
-Tue Oct 19 17:54:18 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-19  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c, src/rbgdkimlib.c, src/rbgtkctree.c:
 	remove unused variables.
 
-Tue Oct 19 17:51:59 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-19  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkwidget.c: define (not all) missing methods of Gtk::Widget.
 
-Sun Oct 17 22:25:59 1999  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
+1999-10-17  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
 
 	* src/rbgtkclist.c (clist_set_hadjustment, clist_set_vadjustment):
 	accept nil as argument.
 
-Sun Oct 17 11:23:43 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-17  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (make_gdkwindow, make_gdkpixmap, make_gdkbitmap):
 	return Qnil for NULL.
 
-Sun Oct 17 06:54:12 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-17  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* sample/texthook.rb:
 	fix to insert a character into the cursor position.
 
-Sat Oct 16 18:08:03 1999  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
+1999-10-16  Minero Aoki  <aamine@dp.u-netsurf.ne.jp>
 
 	* src/rbgtklist.c: remove g_list_free which are unnecessary.
 
-Sat Oct 16 17:33:47 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-16  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkeditable.c: define missing methods of Gtk::Editable.
 
-Sun Oct 10 06:42:51 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-10  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c, src/rbgdkpixmap.c, src/global.h:
 	improve reference management for GdkDrawables.
 
-Sat Oct 09 09:47:02 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-10-09  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/global.h, extconf.rb: remove disused rb13to12.[hc].
 
-Sat Oct 09 08:26:46 1999  EGUCHI Osamu  <eguchi@shizuokanet.ne.jp>
+1999-10-09  EGUCHI Osamu  <eguchi@shizuokanet.ne.jp>
 
 	* src/rbgdkwindow.c, src/rbgdkimlib.c: fix method definitions.
 
-Sat Oct 09 08:18:24 1999  EGUCHI Osamu  <eguchi@shizuokanet.ne.jp>
+1999-10-09  EGUCHI Osamu  <eguchi@shizuokanet.ne.jp>
 
 	* src/rbgdk.c: methods for functions which return no value return self.
 
-Sun Oct 03 03:02:52 1999  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
+1999-10-03  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
 
 	* src/global.h: add extern declaration for set_gobject().
 
-Sat Oct 02 20:42:48 1999  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
+1999-10-02  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
 
 	* extconf.rb, src/rbgdk.c, src/rbgdkim.c: support GTK+ without USE_XIM.
 
-Sun Sep 26 10:51:57 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-26  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkcontainer.c (tree_set_view_lines):
 	Gtk::Tree#set_view_lines takes boolean value as argument.
 
-Thu Sep 23 23:52:44 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-23  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c: add methods of Gdk::GC.
 
-Thu Sep 23 23:50:16 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-23  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkcolor.c (gdkcmap_alloc): Gdk::Colormap.alloc is obsoleted.
 
-Thu Sep 23 15:36:21 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-23  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (gdkgc_s_new, gdkimage_s_get): use get_gdkdrawable.
 
-Thu Sep 23 10:49:43 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-23  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c: add method Gdk::Font::string_extents.
 
-Thu Sep 23 10:48:49 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-23  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkregion.c:
 	add constants Gdk::OVERLAP_RECTANGLE_{IN,OUT,PART}.
 
-Mon Sep 13 15:08:36 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-13  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/global.h, src/rbgdkregion.c: add class Gdk::Region.
 
-Sun Sep 12 13:35:34 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-12  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* extconf.rb: add new source files.
 
-Sun Sep 12 13:34:29 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-12  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/global.h, src/rbgtk.c:
 	move declarations of functions Init_gtk_xxx from global.h.
 
-Sun Sep 12 13:28:54 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-12  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c: split into some files.
 
-Sun Sep 12 13:27:33 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-12  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkcolor.c, src/rbgdkconst.c, src/rbgdkdraw.c,
 	src/rbgdkevent.c, src/rbgdkpixmap.c, src/rbgdkregion.c,
 	src/rbgdkwindow.c:
 	split from src/rbgdk.c.
 
-Sun Sep 12 08:35:47 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-12  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/global.h, src/rbgtk.c, src/rbgtkcontainer.c:
 	fix typos (ViewPort -> Viewport).
 
-Sun Sep 12 04:49:45 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-12  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* src/rbgtkwindow.c: add some methods of Gtk::FileSelection.
 
-Sun Sep 12 04:46:59 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-12  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* sample/testgtk/filesel.rb, sample/testgtk/testgtk.rb:
-        add sample "filesel".
+	     add sample "filesel".
 
-Sun Sep 12 04:05:46 1999  Masaki Fukushima  <fukusima@goto.info.waseda.ac.jp>
+1999-09-12  Masaki Fukushima  <fukusima@goto.info.waseda.ac.jp>
 
 	* src/rbgtk.c (Init_gtk_gtk, idle): use gtk_idle_add() and
 	rb_thread_wait_for() to avoid ruby I/O delay.
 
-Wed Sep 08 18:13:30 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-08  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (gdkwin_set_back_pixmap):
 	Gdk::Window#set_back_pixmap takes true/false as 2nd argument.
 
-Wed Sep 08 17:19:13 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-09-08  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (gdkgc_s_new): Gdk::GC.new takes Gdk::Window as argument.
 
-Wed Sep 08 09:25:36 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* src/global.h: add class Gtk::Layout and module Gdk::Rgb.
 
-Wed Sep 08 09:25:06 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* src/init.c, src/rbgdkrgb.c: add module Gdk::Rgb.
 
-Wed Sep 08 09:24:01 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* src/rbgtk.c, src/rbgtklayout.c: add class Gtk::Layout.
 
-Wed Sep 08 09:21:04 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* src/rbgtkdata.c:
 	avoid warnings and add method Gtk::Adjustment#adj_set_step_increment.
 
-Wed Sep 08 09:14:56 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* sample/testgtk/layout.rb, sample/testgtk/testgtk.rb:
 	add layout sample.
 
-Wed Sep 08 09:13:53 1999  Minoru Inachi  <inachi@earth.interq.or.jp>
+1999-09-08  Minoru Inachi  <inachi@earth.interq.or.jp>
 
 	* extconf.rb: add src/rbgtklayout.c, src/rbgdkrgb.c
 
-Mon Sep 06 09:47:42 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-06  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* src/global.h, src/rbgdk.c:
 	add classes Gdk::IM, Gdk::IM::IC, Gdk::IM::ICAttr and
 	methods of Gdk::Point, Gdk::Rectangle.
 
-Mon Sep 06 09:31:07 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-06  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* sample/testim.rb, src/rbgdkim.c: add files.
 
-Mon Sep 06 08:31:53 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-06  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* extconf.rb: add src/rbgdkim.c.
 
-Sun Sep 05 09:03:04 1999  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
+1999-09-05  TAKAHASHI Hitoshi  <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
 	* src/rbgtkwidget.c (Init_gtk_widget): fix typos.
 
-Tue Aug 31 00:08:29 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-08-31  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdk.c (gdkgc_set_clip_mask): accpet nil argument as NULL.
 
-Sun Aug 29 08:00:08 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-08-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtkmisc.c (pixmap_initialize, pixmap_set):
 	Gtk::Pixmap.new and Gtk::Pixmap#set take Gdk::Bitmap as second argument.
 
-Sun Aug 29 04:56:48 1999  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
+1999-08-29  WATANABE Hirofumi  <watanabe@ase.ptg.sony.co.jp>
 
 	* src/makecursors.rb, src/makekeysyms.rb: rewrite in ruby style.
 
-Sat Aug 28 23:10:41 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-08-28  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkimlib.c (im_get_pixmap):
 	GdkImlib::Image#get_pixmap return Gdk::Pixmap and Gdk::Bitmap.
 
-Fri Aug 27 16:45:52 1999  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
+1999-08-27  Katsuyuki Komatsu  <komatsu@sarion.co.jp>
 
 	* extconf.rb, src/makecursors.rb, src/makekeysyms.rb:
 	use ruby instead of awk to generate header files.
 
-Fri Aug 27 08:38:34 1999  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
+1999-08-27  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgtk.c (get_object): raise TypeError for nil.
 
-Fri Aug 27 07:02:44 1999  Akira Yamada  <akira@arika.org>
+1999-08-27  Akira Yamada  <akira@arika.org>
 
 	* extconf.rb: recognize options --enable-imlib and --disable-imlib.
 
-Fri Aug 27 05:13:59 1999  Yasuhiro Fukuma  <yasuf@big.or.jp>
+1999-08-27  Yasuhiro Fukuma  <yasuf@big.or.jp>
 
 	* extconf.rb: accept imlib-config as config command.
 
 0.20 -> 0.21
 
   - [ruby-list:16255] (by Minoru Inachi)
-    - add class Gdk::ColorMap
-    - arguments of methods Gdk::GC#{set_foreground,set_background}
-      are passed as Gdk::Color
+	 - add class Gdk::ColorMap
+	 - arguments of methods Gdk::GC#{set_foreground,set_background}
+	   are passed as Gdk::Color
 
   - [ruby-ext:00387] (by Minero Aoki)
-    - fix a bug of Gtk::Editable#get_chars for invalid range arguments.
+	 - fix a bug of Gtk::Editable#get_chars for invalid range arguments.
 
   - (by Hiroshi IGARASHI)
-    - add methods Gtk::Widget#path, #class_path
-    - Gdk::Color.new(p, r, g, b) -> Gdk::Color.new(r, g, b)
+	 - add methods Gtk::Widget#path, #class_path
+	 - Gdk::Color.new(p, r, g, b) -> Gdk::Color.new(r, g, b)
 
   - (by Hiroshi IGARASHI)
-    - modify rbgdkimlib.c to invoke GC
-     based on amount of width x height of rendered images.
+	 - modify rbgdkimlib.c to invoke GC
+	  based on amount of width x height of rendered images.
 
   - (by Hiroshi IGARASHI)
-    - modify rbgtk.c to initialize instance variable `relatives'
-      to avoid warning message when $DEBUG is true.
+	 - modify rbgtk.c to initialize instance variable `relatives'
+	   to avoid warning message when $DEBUG is true.
 
   - [ruby-ext:00376] (by Katsuyuki Komatsu)
-    - modify extconf.rb for mswin32 Imlib support.
+	 - modify extconf.rb for mswin32 Imlib support.
 
   - [ruby-ext:00374] (by WATANABE Hirofumi)
-    - modify extconf.rb to find GDK header files correctly
-      when $CFLAGS contains -DXXXX flags.
+	 - modify extconf.rb to find GDK header files correctly
+	   when $CFLAGS contains -DXXXX flags.
 
   - [ruby-ext:00369] (by NAKAMURA Hideki)
-    - improve Garbage Collection for GdkImlib::Image
+	 - improve Garbage Collection for GdkImlib::Image
 
   - [ruby-ext:00368] (by Katsuyuki Komatsu)
-    - remove extern VALUE rb_cData; from global.h
-    - add EXTERN VALUE rb_argv, rb_argv0; into init.c
+	 - remove extern VALUE rb_cData; from global.h
+	 - add EXTERN VALUE rb_argv, rb_argv0; into init.c
 		  
   - (by Hiroshi IGARASHI)
-    - modify extconf.rb to obtain the path of ruby interpreter
-      to run makedefconst.rb from make-variable RUBY.
+	 - modify extconf.rb to obtain the path of ruby interpreter
+	   to run makedefconst.rb from make-variable RUBY.
 
   - [ruby-ext:00358] (by Minero Aoki)
-    - add methods Gtk::CList#row_height, row_height=
+	 - add methods Gtk::CList#row_height, row_height=
 
   - [ruby-ext:00357] (by Minero Aoki)
-    - add class Gtk::AccelGroup
-        .new()
-        .get_default()
-        .activate( Gtk::Object obj, Integer key, Integer modyfier )
-        #attach( Gtk::Object obj )
-        #detach( Gtk::Object obj )
-        #add( Integer key, Integer modifier, Integer flag,
-              Gtk::Object target, String signal )
-        #remove( Integer key, Integer modifier, Gtk::Object obj )
-        #activate( Integer key, Integer modifier )
-        #lock()
-        #unlock()
-        ::ACCEL_VISIBLE
-        ::ACCEL_SIGNAL_VISIBLE
-        ::ACCEL_LOCKED
-        ::ACCEL_MASK
+	 - add class Gtk::AccelGroup
+	     .new()
+	     .get_default()
+	     .activate( Gtk::Object obj, Integer key, Integer modyfier )
+	     #attach( Gtk::Object obj )
+	     #detach( Gtk::Object obj )
+	     #add( Integer key, Integer modifier, Integer flag,
+	           Gtk::Object target, String signal )
+	     #remove( Integer key, Integer modifier, Gtk::Object obj )
+	     #activate( Integer key, Integer modifier )
+	     #lock()
+	     #unlock()
+	     ::ACCEL_VISIBLE
+	     ::ACCEL_SIGNAL_VISIBLE
+	     ::ACCEL_LOCKED
+	     ::ACCEL_MASK
 
   - [ruby-ext:00342] (by TAKAHASHI Hitoshi)
-    - fixed a bug in Gtk::Dialog#action_area
+	 - fixed a bug in Gtk::Dialog#action_area
 
   - [ruby-ext:00339] (by TAKAHASHI Hitoshi)
-    - add class Gtk::NotebookPage
-    - add methods in Gtk::Notebook
-    - add sample/testgtk/notebook.rb
+	 - add class Gtk::NotebookPage
+	 - add methods in Gtk::Notebook
+	 - add sample/testgtk/notebook.rb
 
   - [ruby-ext:00338] (by TAKAHASHI Hitoshi)
-    - add class Gtk::Curve
-    - add following methods.
-      - Gdk::Window#get_root_origin
-      - GammaCurve#curve
-    - add sample/testgtk/{gammacurve,savedposition,range,reparent}.rb
+	 - add class Gtk::Curve
+	 - add following methods.
+	   - Gdk::Window#get_root_origin
+	   - GammaCurve#curve
+	 - add sample/testgtk/{gammacurve,savedposition,range,reparent}.rb
 
   - (by Hiroshi IGRARASHI)
-    - modify extconf.rb to compile without Imlib.
+	 - modify extconf.rb to compile without Imlib.
 
   - [ruby-list:15691] (by Hiroshi IGARASHI)
-    - modify extconf.rb to compile without `ar' -s option.
+	 - modify extconf.rb to compile without `ar' -s option.
 
   - [ruby-ext:00332] (by NAKAMURA Hideki)
-    - append the module GdkImlib for Imlib support. 
+	 - append the module GdkImlib for Imlib support. 
 
   - [ruby-ext:00333] (by Minoru Inachi)
-    - add the class Gtk::Progress and
-      make Gtk::ProgressBar the sub-class of Gtk::Progress
-    - add methods in Gtk::ProgressBar
+	 - add the class Gtk::Progress and
+	   make Gtk::ProgressBar the sub-class of Gtk::Progress
+	 - add methods in Gtk::ProgressBar
 
 0.19 -> 0.20
 
   - [ruby-ext:00315] (by TAKAHASHI Hitoshi)
-    - add testgtk/rulers.rb
-    - add methods Gtk::Widget#xxx_event
+	 - add testgtk/rulers.rb
+	 - add methods Gtk::Widget#xxx_event
 
   - [ruby-ext:00326] (by WATANABE Hirofumi)
-    In sample/testgtk/wmhints.rb,
-    define a method Gdk::Bitmap#create_from_xbm for non-X environments.
+	 In sample/testgtk/wmhints.rb,
+	 define a method Gdk::Bitmap#create_from_xbm for non-X environments.
 
   - [ruby-ext:00319][ruby-ext:00320] (by tommy@tmtm.org)
-    add Gdk::Window#raise, Gtk::Widget#parent
+	 add Gdk::Window#raise, Gtk::Widget#parent
 
   - [ruby-ext:00317] (by TAKAHASHI Hitoshi)
-    add Gdk::Bitmap#create_from_xbm
-    (GTK+ function correspond to this method is not exist.)
+	 add Gdk::Bitmap#create_from_xbm
+	 (GTK+ function correspond to this method is not exist.)
 
   - [ruby-ext:00312] (by Hiroshi Igarashi)
-    move Gtk::CheckButton#set_active to
-    Gtk::ToggleButton#set_active as GTK+
+	 move Gtk::CheckButton#set_active to
+	 Gtk::ToggleButton#set_active as GTK+
 
   - [ruby-ext:00303] (by TAKAHASHI Hitoshi)
-    - add sample/testgtk/{entry,shapedwindow,wmhints}.rb
-    - add some methods to Gdk::Window
+	 - add sample/testgtk/{entry,shapedwindow,wmhints}.rb
+	 - add some methods to Gdk::Window
 
   - [ruby-ext:00295] (by Minoru Inachi)
-    - add Gtk::CTree
-    - add sample/testgtk/ctree.rb
+	 - add Gtk::CTree
+	 - add sample/testgtk/ctree.rb
 
   - [ruby-ext:00301] (by Minero Aoki)
-    - add methods to Gtk::CList
-      Gtk::CList#set_hadjustment
-                 set_vadjustment
-                 get_hadjustment
-                 get_vadjustment
+	 - add methods to Gtk::CList
+	   Gtk::CList#set_hadjustment
+	              set_vadjustment
+	              get_hadjustment
+	              get_vadjustment
 
   - [ruby-dev:7260][ruby-dev:7275] (by Masaki Suketa)
-    support mswin32 + Windows native Gtk
+	 support mswin32 + Windows native Gtk
 
   - [ruby-ext:00288] (by Minero Aoki)
-    fix a bug in Gtk::Entry#get_text
+	 fix a bug in Gtk::Entry#get_text
 
 0.18 -> 0.19
 
   - change the maintainer with Hiroshi Igarashi.
 
   - replace shell scripts with ruby scripts for building.
-    - makedefconst.sh -> makedefconst.rb
+	 - makedefconst.sh -> makedefconst.rb
 
   - split rbgtk.c into rbgtk*.c to reduce re-compilation time.
 
@@ -1620,211 +1636,211 @@ Fri Aug 27 05:13:59 1999  Yasuhiro Fukuma  <yasuf@big.or.jp>
   - remove macro `rb_trap_exec' in rb13to12.h
 
   - [ruby-ext:00234] add methods. (by Toru Hoshina)
-    - Gtk.main_iteration
-    - Gtk.event_pending
+	 - Gtk.main_iteration
+	 - Gtk.event_pending
 
   - [ruby-list:14874] fix a bug in sample/text.rb (by Jun Adachi)
 
   - add some methods.
-    - Gdk::Color.new(p, r, g, b)
+	 - Gdk::Color.new(p, r, g, b)
 
   - change superclass of Gtk::Button from Gtk::Container to Gtk::Bin
 
   - remove Gtk::Window#shape_combine_mask
-    because this method is also implemented in Gtk::Widget
+	 because this method is also implemented in Gtk::Widget
 
   - update sample/testgtk
-    - enable text.rb
+	 - enable text.rb
 
   - [ruby-ext:00242] (by Minoru Inachi) Many thanks!
 
-    - add following methods to Gtk::Button
-        set_relief(style)
-          specify the relief style of button.
-        get_relief
-          return the relief style of button.
-   
-    - add following constants.
-        Gtk::RELIEF_NORMAL
-             RELIEF_HALF
-             RELIEF_NONE
-   
-    - add following methods to Gtk::Box
-        set_homogeneous(homogeneous)
-          equalize sizes of children widgets.
-        set_spacing(size)
-          specify total amount of spaces between children widgets.
-        reorder_child(child, pos)
-          reorder the specified child widget.
-        query_child_packing(child)
-          return the information [ expand, fill, padding, pack_type ]
-          about packing specified child widget.
-        set_child_packing(child, expand, fill, padding, pack_type)
-          set the information about packing specified child widget.
-   
-    - enable argument omissions in new methods of Gtk::VBox, Gtk::HBox
-      default values are homogeneous=false, spacing=0
-   
-    - change the constants names for Gtk::Box pack_type
-        Gtk::GTK_PACK_START -> Gtk::PACK_START
-        Gtk::GTK_PACK_END -> Gtk::PACK_END
-   
-    - add widget Gtk::TearoffMenuItem
-   
-    - add the following methods Gtk::Toolbar
-        set_button_relief(style)
-          set the relief style of buttons in Toolbar.
-        get_button_relief
-          return the relief style of buttons in Toolbar.
-        set_space_style
-          set the spacing style of buttons in Toolbar.
-   
-    - add the following constants for spacing style of Toolbar.
-        Gtk::Toolbar::SPACE_EMPTY
-                      SPACE_LINE
-   
-    - add the following methods to Gtk::CheckMenuItem
-        set_active(is_active)
-        active=(is_active)
-          set the status of the checkbutton.
-        active?
-          return the status of the checkbutton.
-   
-    - add the following methods to Gtk::CList
-        set_column_visibility(column, visible)
-          set visibility of a column.
-        set_column_resizeable(column. resize)
-          enable/disable column resize operations by mouse.
-        set_column_auto_resize(column, resize)
-          resize column automatically to its optimal width.
-        set_column_max_width(column, width)
-          set maximum width of specified column.
-        set_column_min_width(column, width)
-          set minimum width of specified column.
-        set_cell_style(row, column, style)
-          set styles of specified cell.
-        get_cell_style(row, column)
-          Return styles of specified cell.
-        set_row_style(row, style)
-          Set styles of specified row.
-        get_row_style(row)
-          Return styles of specified row.
-        set_sort_column(column)
-        sort_column=(column)
-          Specify the column to sort by.
-        sort_column
-          Return the column to sort by.
-        set_sort_type(type)
-        sort_type=(type)
-          Specify how to sort : ascending or descending.
-        sort_type
-          Return how to sort : ascending or descending.
-        sort
-          Sort the list with the current compare function.
-        selection_each
-          Iterator for each selected row to evaluate the block.
+	 - add following methods to Gtk::Button
+	     set_relief(style)
+	       specify the relief style of button.
+	     get_relief
+	       return the relief style of button.
+	
+	 - add following constants.
+	     Gtk::RELIEF_NORMAL
+	          RELIEF_HALF
+	          RELIEF_NONE
+	
+	 - add following methods to Gtk::Box
+	     set_homogeneous(homogeneous)
+	       equalize sizes of children widgets.
+	     set_spacing(size)
+	       specify total amount of spaces between children widgets.
+	     reorder_child(child, pos)
+	       reorder the specified child widget.
+	     query_child_packing(child)
+	       return the information [ expand, fill, padding, pack_type ]
+	       about packing specified child widget.
+	     set_child_packing(child, expand, fill, padding, pack_type)
+	       set the information about packing specified child widget.
+	
+	 - enable argument omissions in new methods of Gtk::VBox, Gtk::HBox
+	   default values are homogeneous=false, spacing=0
+	
+	 - change the constants names for Gtk::Box pack_type
+	     Gtk::GTK_PACK_START -> Gtk::PACK_START
+	     Gtk::GTK_PACK_END -> Gtk::PACK_END
+	
+	 - add widget Gtk::TearoffMenuItem
+	
+	 - add the following methods Gtk::Toolbar
+	     set_button_relief(style)
+	       set the relief style of buttons in Toolbar.
+	     get_button_relief
+	       return the relief style of buttons in Toolbar.
+	     set_space_style
+	       set the spacing style of buttons in Toolbar.
+	
+	 - add the following constants for spacing style of Toolbar.
+	     Gtk::Toolbar::SPACE_EMPTY
+	                   SPACE_LINE
+	
+	 - add the following methods to Gtk::CheckMenuItem
+	     set_active(is_active)
+	     active=(is_active)
+	       set the status of the checkbutton.
+	     active?
+	       return the status of the checkbutton.
+	
+	 - add the following methods to Gtk::CList
+	     set_column_visibility(column, visible)
+	       set visibility of a column.
+	     set_column_resizeable(column. resize)
+	       enable/disable column resize operations by mouse.
+	     set_column_auto_resize(column, resize)
+	       resize column automatically to its optimal width.
+	     set_column_max_width(column, width)
+	       set maximum width of specified column.
+	     set_column_min_width(column, width)
+	       set minimum width of specified column.
+	     set_cell_style(row, column, style)
+	       set styles of specified cell.
+	     get_cell_style(row, column)
+	       Return styles of specified cell.
+	     set_row_style(row, style)
+	       Set styles of specified row.
+	     get_row_style(row)
+	       Return styles of specified row.
+	     set_sort_column(column)
+	     sort_column=(column)
+	       Specify the column to sort by.
+	     sort_column
+	       Return the column to sort by.
+	     set_sort_type(type)
+	     sort_type=(type)
+	       Specify how to sort : ascending or descending.
+	     sort_type
+	       Return how to sort : ascending or descending.
+	     sort
+	       Sort the list with the current compare function.
+	     selection_each
+	       Iterator for each selected row to evaluate the block.
 	  A row number is passed as block argument.
-        selection_mode=
-          Set the CList's selection mode.
-        selection_mode
-          Return the CList's selection mode.
-        focus_row
-          Return the focused row.
-        set_reorderable(reorderable)
-          Enable clists reorder ability.
-        prepend([text])
-          Insert <var>[text, ...]</var> before the first row.
-   
-    - modify Gtk::CList#append, insert not to cause error
-      for nil element in passed array argumet.
-   
-    - modify Gtk::CList#insert to return the row number.
-   
-    - since Gtk::CList#remove conflict with Gtk::Continer#remove in name,
-      rename it to Gtk::CList#remove_row as Gtk--.
-   
-    - add the following constants for sort type.
-        Gtk::SORT_ASCENDING
-             SORT_DESCENDING
-   
-    - fix `#ifdef 0' to `#if 0' in rbgtk.c
-   
-    - doc/gtkbrows.rb
-      modify it to add clist simply without viewport.
-   
-    - doc/rbbr_gtk.rb
-      modify it to call set_column_auto_resize for CList.
-   
-    - sample/testgtk/menu.rb
-      modify it to insert TearoffMenuItem like the original testgtk.
-   
-    - sample/testgtk/toolbar.rb
-      modify it to add buttons Borders/Borderless, Empty/Lines,
-      and make the initial state Borderless like the original testgtk.
+	     selection_mode=
+	       Set the CList's selection mode.
+	     selection_mode
+	       Return the CList's selection mode.
+	     focus_row
+	       Return the focused row.
+	     set_reorderable(reorderable)
+	       Enable clists reorder ability.
+	     prepend([text])
+	       Insert <var>[text, ...]</var> before the first row.
+	
+	 - modify Gtk::CList#append, insert not to cause error
+	   for nil element in passed array argumet.
+	
+	 - modify Gtk::CList#insert to return the row number.
+	
+	 - since Gtk::CList#remove conflict with Gtk::Continer#remove in name,
+	   rename it to Gtk::CList#remove_row as Gtk--.
+	
+	 - add the following constants for sort type.
+	     Gtk::SORT_ASCENDING
+	          SORT_DESCENDING
+	
+	 - fix `#ifdef 0' to `#if 0' in rbgtk.c
+	
+	 - doc/gtkbrows.rb
+	   modify it to add clist simply without viewport.
+	
+	 - doc/rbbr_gtk.rb
+	   modify it to call set_column_auto_resize for CList.
+	
+	 - sample/testgtk/menu.rb
+	   modify it to insert TearoffMenuItem like the original testgtk.
+	
+	 - sample/testgtk/toolbar.rb
+	   modify it to add buttons Borders/Borderless, Empty/Lines,
+	   and make the initial state Borderless like the original testgtk.
 
   - [ruby-ext:00242] (by Minoru Inachi)
 
-    - add the following methods to Gtk::ColorSelectionDialog
-        colorsel
-          Return the Gtk::ColorSelection widget.
-        ok_button
-          Return the Ok Button widget.
-        cancel_button
-          Return the Cancel Button widget.
-        help_button
-          Return the Help Button widget.
-   
-    - in the method Gtk::ColorSelection#get_color, 
-      modify the conversion from data by gtk_color_selection_get_color
-      to ruby data.
-   
-    - enable Gtk::ColorSelection#get_color, set_color
-      to support opacity.
-   
-    - add the following methods to Gtk::Window
-        set_position(pos)
-          Set the display position of window.
+	 - add the following methods to Gtk::ColorSelectionDialog
+	     colorsel
+	       Return the Gtk::ColorSelection widget.
+	     ok_button
+	       Return the Ok Button widget.
+	     cancel_button
+	       Return the Cancel Button widget.
+	     help_button
+	       Return the Help Button widget.
+	
+	 - in the method Gtk::ColorSelection#get_color, 
+	   modify the conversion from data by gtk_color_selection_get_color
+	   to ruby data.
+	
+	 - enable Gtk::ColorSelection#get_color, set_color
+	   to support opacity.
+	
+	 - add the following methods to Gtk::Window
+	     set_position(pos)
+	       Set the display position of window.
 
   - [ruby-ext:00246] (by TAKAHASHI Hitoshi) Thanks!
-    - add class Gtk::TipsQuery
-    - bug fix in class Gtk::Tooltips
-    - bug fix in arg_to_value()
-    - add tooltips.rb in sample/testgtk
+	 - add class Gtk::TipsQuery
+	 - bug fix in class Gtk::Tooltips
+	 - bug fix in arg_to_value()
+	 - add tooltips.rb in sample/testgtk
 
   - [ruby-ext:00251] (by TAKAHASHI Hitoshi)
-    - add some methods to Gtk::Label
-    - add labels.rb in sample/testgtk
+	 - add some methods to Gtk::Label
+	 - add labels.rb in sample/testgtk
 
   - [ruby-ext:00255] (by Minoru Inachi)
-    - modify clist.rb in sample/testgtk
-    - add dialog.rb in sample/testgtk
+	 - modify clist.rb in sample/testgtk
+	 - add dialog.rb in sample/testgtk
 
   - [ruby-ext:00276] (by Minoru Inachi)
-    - modify buttonbox.rb in sample/testgtk
+	 - modify buttonbox.rb in sample/testgtk
 
 0.17 -> 0.18
   - undefine `#ifdef THREAD' (by Masaki Fukushima)
   - [ruby-ext:00226] (by Hiroshi IGARASHI)
-    - Gtk::Window#set_default_size
-    - Gtk::Window#set_modal
-    - Gtk::Text#set_word_wrap
-    - Gtk::POLICY_NEVER
-    - to fix some bugs.
+	 - Gtk::Window#set_default_size
+	 - Gtk::Window#set_modal
+	 - Gtk::Text#set_word_wrap
+	 - Gtk::POLICY_NEVER
+	 - to fix some bugs.
 
 0.16 -> 0.17
   - support gtk+-1.2.x and ruby-1.3.x (^^v
   - remove functions changed in gtk+-1.2.x...I'll suppurt them by 1.2 style.
-    - Drag and Drop
-    - IMStyle
-    - GtkAcceletorTable
+	 - Drag and Drop
+	 - IMStyle
+	 - GtkAcceletorTable
   - [ruby-ext:00159] (by Kazunori NISHI)
-    - change `sh' to `$(SHELL)' in extmake.rb
-    - change `[a-z]*' to `[a-z][a-z]' in makedefconst.sh 
+	 - change `sh' to `$(SHELL)' in extmake.rb
+	 - change `[a-z]*' to `[a-z][a-z]' in makedefconst.sh 
   - change timeout 1ms to 100ms. (by Masaki Fukushima)
-    it's temporary code...see KNOWNBUG.jp for more information.
+	 it's temporary code...see KNOWNBUG.jp for more information.
   - include testgtk.rb (by Hiroshi Igarashi)
   - [ruby-ext:00177] (by Hiroshi Igarashi)
-    - add some methods:) see ML message above.
+	 - add some methods:) see ML message above.
 
 0.15 -> 0.16
   - add to search /usr/include/gdk for extmake.rb. (by akira yamada)
@@ -1832,15 +1848,15 @@ Fri Aug 27 05:13:59 1999  Yasuhiro Fukuma  <yasuf@big.or.jp>
   - add constants for some widget specific enums.
   - split rbgdkkeysyms.h. It takes less time for gcc-2.7.x to compile.
   - add English changelog; which you reading now:)
-    I think it's bad to read...sorry my poor English.
-    Any suggestions for making this document more pretty are always welcome.
+	 I think it's bad to read...sorry my poor English.
+	 Any suggestions for making this document more pretty are always welcome.
 
 0.14 -> 0.15
   - debug timeout. (by Yukihiro Matsumoto)
   - add some events.
   - split source file.
-    not well knowing K&R, there may be mistake...
-    If you notice any mistakes, please inform me.
+	 not well knowing K&R, there may be mistake...
+	 If you notice any mistakes, please inform me.
   - debug GdkImage, GdkVisual.
 
 0.13 -> 0.14

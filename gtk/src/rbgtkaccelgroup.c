@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 15:48:28 $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -24,7 +24,7 @@ static VALUE
 gaccelgrp_s_activate(self, obj, key, modtype)
     VALUE self, obj, key, modtype;
 {
-    gtk_accel_groups_activate(G_OBJECT(get_gobject(obj)),
+    gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
                               NUM2INT(key),
                               NUM2INT(modtype));
     return self;
@@ -35,7 +35,7 @@ gaccelgrp_attach(self, obj)
     VALUE self, obj;
 {
      _gtk_accel_group_attach(get_gtkaccelgrp(self),
-                           G_OBJECT(get_gobject(obj)));
+                           G_OBJECT(RVAL2GOBJ(obj)));
     return Qnil;
 }
 
@@ -44,7 +44,7 @@ gaccelgrp_detach(self, obj)
     VALUE self, obj;
 {
     _gtk_accel_group_detach(get_gtkaccelgrp(self),
-                            G_OBJECT(get_gobject(obj)));
+                            G_OBJECT(RVAL2GOBJ(obj)));
     return Qnil;
 }
 

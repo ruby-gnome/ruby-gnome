@@ -3,8 +3,8 @@
 
   rbgtklist.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 list_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_list_new());
+    RBGTK_INITIALIZE(self, gtk_list_new());
     return Qnil;
 }
 
@@ -27,8 +27,8 @@ static VALUE
 list_set_sel_mode(self, mode)
     VALUE self, mode;
 {
-    gtk_list_set_selection_mode(GTK_LIST(get_widget(self)),
-				(GtkSelectionMode)NUM2INT(mode));
+    gtk_list_set_selection_mode(GTK_LIST(RVAL2GOBJ(self)),
+								(GtkSelectionMode)NUM2INT(mode));
     return self;
 }
 
@@ -36,14 +36,14 @@ static VALUE
 list_sel_mode(self)
     VALUE self;
 {
-    return INT2FIX(GTK_LIST(get_widget(self))->selection_mode);
+    return INT2FIX(GTK_LIST(RVAL2GOBJ(self))->selection_mode);
 }
 
 static VALUE
 list_selection(self)
     VALUE self;
 {
-    return glist2ary(GTK_LIST(get_widget(self))->selection);
+    return glist2ary(GTK_LIST(RVAL2GOBJ(self))->selection);
 }
 
 static VALUE
@@ -54,7 +54,7 @@ list_insert_items(self, items, pos)
 
     glist = ary2glist(items);
 
-    gtk_list_insert_items(GTK_LIST(get_widget(self)), glist, NUM2INT(pos));
+    gtk_list_insert_items(GTK_LIST(RVAL2GOBJ(self)), glist, NUM2INT(pos));
 
     return self;
 }
@@ -67,7 +67,7 @@ list_append_items(self, items)
 
     glist = ary2glist(items);
 
-    gtk_list_append_items(GTK_LIST(get_widget(self)), glist);
+    gtk_list_append_items(GTK_LIST(RVAL2GOBJ(self)), glist);
 
     return self;
 }
@@ -79,7 +79,7 @@ list_prepend_items(self, items)
     GList *glist;
 
     glist = ary2glist(items);
-    gtk_list_prepend_items(GTK_LIST(get_widget(self)), glist);
+    gtk_list_prepend_items(GTK_LIST(RVAL2GOBJ(self)), glist);
 
     return self;
 }
@@ -91,7 +91,7 @@ list_remove_items(self, items)
     GList *glist;
 
     glist = ary2glist(items);
-    gtk_list_remove_items(GTK_LIST(get_widget(self)), glist);
+    gtk_list_remove_items(GTK_LIST(RVAL2GOBJ(self)), glist);
 
     return self;
 }
@@ -100,8 +100,8 @@ static VALUE
 list_clear_items(self, start, end)
     VALUE self, start, end;
 {
-    gtk_list_clear_items(GTK_LIST(get_widget(self)),
-			 NUM2INT(start), NUM2INT(end));
+    gtk_list_clear_items(GTK_LIST(RVAL2GOBJ(self)),
+						 NUM2INT(start), NUM2INT(end));
     return self;
 }
 
@@ -109,7 +109,7 @@ static VALUE
 list_select_item(self, pos)
     VALUE self, pos;
 {
-    gtk_list_select_item(GTK_LIST(get_widget(self)), NUM2INT(pos));
+    gtk_list_select_item(GTK_LIST(RVAL2GOBJ(self)), NUM2INT(pos));
     return self;
 }
 
@@ -117,7 +117,7 @@ static VALUE
 list_unselect_item(self, pos)
     VALUE self, pos;
 {
-    gtk_list_unselect_item(GTK_LIST(get_widget(self)), NUM2INT(pos));
+    gtk_list_unselect_item(GTK_LIST(RVAL2GOBJ(self)), NUM2INT(pos));
     return self;
 }
 
@@ -125,7 +125,8 @@ static VALUE
 list_select_child(self, child)
     VALUE self, child;
 {
-    gtk_list_select_child(GTK_LIST(get_widget(self)), get_widget(child));
+    gtk_list_select_child(GTK_LIST(RVAL2GOBJ(self)), 
+						  GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -133,7 +134,8 @@ static VALUE
 list_unselect_child(self, child)
     VALUE self, child;
 {
-    gtk_list_unselect_child(GTK_LIST(get_widget(self)), get_widget(child));
+    gtk_list_unselect_child(GTK_LIST(RVAL2GOBJ(self)), 
+							GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -143,8 +145,8 @@ list_child_position(self, child)
 {
     gint pos;
 
-    pos = gtk_list_child_position(GTK_LIST(get_widget(self)),
-				  get_widget(child));
+    pos = gtk_list_child_position(GTK_LIST(RVAL2GOBJ(self)),
+								  GTK_WIDGET(RVAL2GOBJ(child)));
     return INT2FIX(pos);
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkmenu.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,7 +19,7 @@ static VALUE
 menu_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_menu_new());
+    RBGTK_INITIALIZE(self, gtk_menu_new());
     return Qnil;
 }
 
@@ -27,7 +27,8 @@ static VALUE
 menu_append(self, child)
     VALUE self, child;
 {
-    gtk_menu_append(GTK_MENU(get_widget(self)), get_widget(child));
+    gtk_menu_append(GTK_MENU(RVAL2GOBJ(self)), 
+					GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -35,7 +36,8 @@ static VALUE
 menu_prepend(self, child)
     VALUE self, child;
 {
-    gtk_menu_prepend(GTK_MENU(get_widget(self)), get_widget(child));
+    gtk_menu_prepend(GTK_MENU(RVAL2GOBJ(self)), 
+					 GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -43,8 +45,8 @@ static VALUE
 menu_insert(self, child, pos)
     VALUE self, child, pos;
 {
-    gtk_menu_insert(GTK_MENU(get_widget(self)),
-		    get_widget(child), NUM2INT(pos));
+    gtk_menu_insert(GTK_MENU(RVAL2GOBJ(self)),
+					GTK_WIDGET(RVAL2GOBJ(child)), NUM2INT(pos));
     return self;
 }
 
@@ -54,13 +56,12 @@ menu_pos_func(menu, px, py, data)
     gint *px, *py;
     gpointer data;
 {
-    VALUE arr;
-    VALUE m = get_value_from_gobject(GTK_OBJECT(menu));
-
-    arr = rb_funcall((VALUE)data, call, 3, m, INT2FIX(*px), INT2FIX(*py));
+    VALUE arr = rb_funcall((VALUE)data, call, 3, GOBJ2RVAL(menu), 
+						   INT2FIX(*px), INT2FIX(*py));
     Check_Type(arr, T_ARRAY);
     if (RARRAY(arr)->len != 2) {
-	rb_raise(rb_eTypeError, "wrong number of result (%d for 2)", RARRAY(arr)->len);
+		rb_raise(rb_eTypeError, "wrong number of result (%d for 2)", 
+				 RARRAY(arr)->len);
     }
     *px = NUM2INT(RARRAY(arr)->ptr[0]);
     *py = NUM2INT(RARRAY(arr)->ptr[1]);
@@ -76,23 +77,23 @@ menu_popup(self, pshell, pitem, func, button, activate_time)
     gpointer data = NULL;
 
     if (!NIL_P(func)) {
-	pfunc = menu_pos_func;
-	data = (gpointer)func;
-	add_relative(self, func);
+		pfunc = menu_pos_func;
+		data = (gpointer)func;
+		add_relative(self, func);
     }
     if (!NIL_P(pshell)){
-	gpshell = get_widget(pshell);
+		gpshell = GTK_WIDGET(RVAL2GOBJ(pshell));
     }
     if (!NIL_P(pitem)) {
-	gpitem = get_widget(pitem);
+		gpitem = GTK_WIDGET(RVAL2GOBJ(pitem));
     }
 
-    gtk_menu_popup(GTK_MENU(get_widget(self)),
-		   gpshell, gpitem,
-		   pfunc,
-		   data,
-		   NUM2INT(button),
-		   NUM2INT(activate_time));
+    gtk_menu_popup(GTK_MENU(RVAL2GOBJ(self)),
+				   gpshell, gpitem,
+				   pfunc,
+				   data,
+				   NUM2INT(button),
+				   NUM2INT(activate_time));
     return self;
 }
 
@@ -100,7 +101,7 @@ static VALUE
 menu_popdown(self)
     VALUE self;
 {
-    gtk_menu_popdown(GTK_MENU(get_widget(self)));
+    gtk_menu_popdown(GTK_MENU(RVAL2GOBJ(self)));
     return self;
 }
 
@@ -108,16 +109,16 @@ static VALUE
 menu_get_active(self)
     VALUE self;
 {
-    GtkWidget *mitem = gtk_menu_get_active(GTK_MENU(get_widget(self)));
+    GtkWidget *mitem = gtk_menu_get_active(GTK_MENU(RVAL2GOBJ(self)));
 
-    return (mitem == NULL) ? Qnil : get_value_from_gobject(GTK_OBJECT(mitem));
+    return (mitem == NULL) ? Qnil : GOBJ2RVAL(mitem);
 }
 
 static VALUE
 menu_set_active(self, active)
     VALUE self, active;
 {
-    gtk_menu_set_active(GTK_MENU(get_widget(self)), NUM2INT(active));
+    gtk_menu_set_active(GTK_MENU(RVAL2GOBJ(self)), NUM2INT(active));
     return self;
 }
 

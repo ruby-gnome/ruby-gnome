@@ -3,8 +3,8 @@
 
   rbgtkframe.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -21,7 +21,7 @@ frame_initialize(argc, argv, self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
-    set_widget(self, gtk_frame_new(NIL_P(label)?NULL:STR2CSTR(label)));
+    RBGTK_INITIALIZE(self, gtk_frame_new(NIL_P(label)?NULL:STR2CSTR(label)));
     return Qnil;
 }
 
@@ -29,7 +29,7 @@ static VALUE
 frame_set_label(self, label)
     VALUE self, label;
 {
-    gtk_frame_set_label(GTK_FRAME(get_widget(self)), STR2CSTR(label));
+    gtk_frame_set_label(GTK_FRAME(RVAL2GOBJ(self)), STR2CSTR(label));
     return self;
 }
 
@@ -37,7 +37,7 @@ static VALUE
 frame_set_label_align(self, xalign, yalign)
     VALUE self, xalign, yalign;
 {
-    gtk_frame_set_label_align(GTK_FRAME(get_widget(self)),
+    gtk_frame_set_label_align(GTK_FRAME(RVAL2GOBJ(self)),
 			      NUM2DBL(xalign),
 			      NUM2DBL(yalign));
 
@@ -48,7 +48,7 @@ static VALUE
 frame_set_shadow_type(self, type)
     VALUE self, type;
 {
-    gtk_frame_set_shadow_type(GTK_FRAME(get_widget(self)),
+    gtk_frame_set_shadow_type(GTK_FRAME(RVAL2GOBJ(self)),
 			      (GtkShadowType)NUM2INT(type));
     return self;
 }

@@ -3,8 +3,8 @@
 
   rbgtkvbox.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,7 +23,7 @@ vbox_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "02", &homogeneous, &spacing);
 
-    set_widget(self, gtk_vbox_new(RTEST(homogeneous),
+    RBGTK_INITIALIZE(self, gtk_vbox_new(RTEST(homogeneous),
 				  (NIL_P(spacing)?0:NUM2INT(spacing))));
     return Qnil;
 }

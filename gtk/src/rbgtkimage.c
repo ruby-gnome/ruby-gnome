@@ -3,8 +3,8 @@
 
   rbgtkimage.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 image_initialize(self, val, mask)
     VALUE self, val, mask;
 {
-    set_widget(self, gtk_image_new_from_image(
+    RBGTK_INITIALIZE(self, gtk_image_new_from_image(
         get_gdkimage(val),
         (GdkBitmap*)get_gdkpixmap(mask)));
     return Qnil;
@@ -27,7 +27,7 @@ static VALUE
 image_set(self, val, mask)
     VALUE self, val, mask;
 {
-    gtk_image_set(GTK_IMAGE(get_widget(self)), get_gdkimage(val),
+    gtk_image_set(GTK_IMAGE(RVAL2GOBJ(self)), get_gdkimage(val),
 		  get_gdkpixmap(mask));
     return self;
 }
@@ -39,7 +39,7 @@ image_get(self)
     GdkImage  *val;
     GdkBitmap *mask;
 
-    gtk_image_get(GTK_IMAGE(get_widget(self)), &val, &mask);
+    gtk_image_get(GTK_IMAGE(RVAL2GOBJ(self)), &val, &mask);
 
     return rb_assoc_new(make_gdkimage(val),
 			make_gdkpixmap(mask));

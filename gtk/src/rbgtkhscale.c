@@ -3,8 +3,8 @@
 
   rbgtkhscale.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -23,9 +23,9 @@ hscale_initialize(argc, argv, self)
     GtkAdjustment *adj = NULL;
 
     rb_scan_args(argc, argv, "01", &arg1);
-    if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(get_gobject(arg1));
+    if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
 
-    set_widget(self, gtk_hscale_new(adj));
+    RBGTK_INITIALIZE(self, gtk_hscale_new(adj));
     return Qnil;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkcheckmenuitem.c -
 
-  $Author: igapy $
-  $Date: 2002/05/30 00:46:41 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,7 +29,7 @@ cmitem_initialize(argc, argv, self)
 	widget = gtk_check_menu_item_new();
     }
 
-    set_widget(self, widget);
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -37,7 +37,7 @@ static VALUE
 cmitem_set_state(self, state)
     VALUE self, state;
 {
-    gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(get_widget(self)), 
+    gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)), 
 				  NUM2INT(state));
     return self;
 }
@@ -46,7 +46,7 @@ static VALUE
 cmitem_set_active(self, state)
     VALUE self, state;
 {
-    gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(get_widget(self)), 
+    gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)), 
 				  RTEST(state));
     return self;
 }
@@ -55,14 +55,14 @@ static VALUE
 cmitem_is_active(self)
     VALUE self;
 {
-    return GTK_CHECK_MENU_ITEM(get_widget(self))->active==0?Qfalse:Qtrue;
+    return GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self))->active==0?Qfalse:Qtrue;
 }
 
 static VALUE
 cmitem_set_show_toggle(self, always)
     VALUE self, always;
 {
-    gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(get_widget(self)), 
+    gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)), 
 					(gboolean)RTEST(always));
     return self;
 }
@@ -71,7 +71,7 @@ static VALUE
 cmitem_toggled(self)
     VALUE self;
 {
-    gtk_check_menu_item_toggled(GTK_CHECK_MENU_ITEM(get_widget(self)));
+    gtk_check_menu_item_toggled(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbgtkgamma.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:31:00 $
+  $Author: mutoh $
+  $Date: 2002/06/22 19:50:57 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -17,7 +17,7 @@ static VALUE
 gamma_initialize(self)
     VALUE self;
 {
-    set_widget(self, gtk_gamma_curve_new());
+    RBGTK_INITIALIZE(self, gtk_gamma_curve_new());
     return Qnil;
 }
 
@@ -25,14 +25,14 @@ static VALUE
 gamma_gamma(self)
     VALUE self;
 {
-    return rb_float_new(GTK_GAMMA_CURVE(get_widget(self))->gamma);
+    return rb_float_new(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->gamma);
 }
 
 static VALUE
 gamma_curve(self)
     VALUE self;
 {
-    return GOBJ2RVAL(GTK_GAMMA_CURVE(get_widget(self))->curve);
+    return GOBJ2RVAL(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->curve);
 }
 
 void Init_gtk_gamma_curve()
