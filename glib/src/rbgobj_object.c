@@ -4,9 +4,10 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2004/03/04 17:29:02 $
+  $Date: 2004/03/05 15:50:31 $
 
-  Copyright (C) 2002-2004  Masahiro Sakai
+  Copyright (C) 2002-2004  Ruby-GNOME2 Project
+  Copyright (C) 2002-2003  Masahiro Sakai
 
   This file is derived from rbgtkobject.c in Ruby/Gtk distribution.
   rbgtkobject.c -

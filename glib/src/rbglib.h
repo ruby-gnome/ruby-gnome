@@ -4,8 +4,9 @@
   rbglib.h -
 
   $Author: mutoh $
-  $Date: 2004/03/01 15:06:54 $
+  $Date: 2004/03/05 15:50:31 $
 
+  Copyright (C) 2002-2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/

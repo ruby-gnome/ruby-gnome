@@ -4,8 +4,9 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2004/02/22 16:20:59 $
+  $Date: 2004/03/05 15:50:32 $
 
+  Copyright (C) 2003,2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/

@@ -1,3 +1,8 @@
+#
+# mkmf-gnome2.rb - a mkmf tool for Ruby-GNOME2.
+#
+# Copyright (C) 2003,2004 Ruby-GNOME2 Project
+#
 require 'mkmf'
 require 'shellwords'
 

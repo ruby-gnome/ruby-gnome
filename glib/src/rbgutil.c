@@ -4,9 +4,9 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/03/03 17:21:50 $
+  $Date: 2004/03/05 15:50:32 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
 
 #include "global.h"
