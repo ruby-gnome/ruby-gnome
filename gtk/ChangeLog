@@ -1,4 +1,11 @@
-Tue May 20 00:52:38 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Wed May 22 02:37:37 2002 Masao Mutoh <mutoh@highway.ne.jp>
+	* sample/: Change require 'gtk' to 'gtk2'
+	  src/rbgtk.c src/rbgtkclist.c src/rbgtkctree.c src/rbgtklist.c
+	  src/rbgtklistitem.c src/rbgtkpixmap.c src/rbgtkprogress.c
+	  src/rbgtkstyle.c src/rbgtktext.c src/rbgtktipsquery.c
+	  src/rbgtktree.c src/rbgtktreeitem.c: Add Deprecated macro.
+
+Tue May 20 00:52:38 2002 Masao Mutohh <mutoh@highway.ne.jp>
 
    * src/rbgtkitemfactory.c: Fix segmentation fault.
 
@@ -56,7 +63,7 @@ Fri Mar 15 13:57:46 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtk.c: Remove some unused code.
 
-Tue Mar  5 14:52:38 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Tue Mar  5 14:52:38 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/dnd.rb: Code cleanup.
 
@@ -90,7 +97,7 @@ Sat Mar  2 17:08:08 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkdrag.c: Fix a couple DND bugs.
 
-Sat Mar  2 15:14:25 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Sat Mar  2 15:14:25 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkatom.c: Implement Gdk::Atom.
 
@@ -123,13 +130,13 @@ Thu Feb 14 23:42:10 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwidget.c: Code cleanup.
 
-Thu Feb 14 23:03:22 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Thu Feb 14 23:03:22 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Change the make_xxx() to return Qnil if passed a
 	NULL argument. This fixes a bunch of possible segfaults in
 	one swell foop.
 
-Mon Feb 11 19:05:57 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Mon Feb 11 19:05:57 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkfontselection.c, src/rbgtkfontselectiondialog.c:
 	Fix segmentation fault in #set_filter, change #set_filter to
@@ -152,7 +159,7 @@ Tue Feb  5 19:10:48 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgtkwindow.c: Add support for Gtk::Plug.
 
-Mon Feb  4 20:34:05 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Mon Feb  4 20:34:05 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/xbm_cursor.rb: Add copyright.
 
@@ -167,7 +174,7 @@ Thu Jan 31 13:30:56 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgdkevent.c: Remove old pre-1.2.x code.
 
-Thu Jan 31 13:20:41 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Thu Jan 31 13:20:41 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkconst.c: Add some constants related to Gdk, DND and
 	DragContext.
@@ -194,7 +201,7 @@ Fri Jan 25 16:28:49 2002 Neil Conway <neilconway@rogers.com>
 	* src/rbgtkwidget.c: Fix whitespace, code cleanup, implement
 	#set_scroll_adjustments.
 
-Thu Jan 17 23:12:12 2002 MUTOH Masao <mutoh@highway.ne.jp>
+Thu Jan 17 23:12:12 2002 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkcombo.c: Make some methods return 'self' instead
 	of nil.
@@ -269,7 +276,7 @@ Thu Nov 22 15:55:03 2001 Masahiro Sakai <zvm01052@nifty.ne.jp>
 	* src/rbgtkwindow.c, src/rbgtknotebook.c: Fix Gtk::FontSelection
 	to sub-class Gtk:Notebook instead of Object.
 
-Sun Nov 18 12:37:09 2001 MUTOH Masao <mutoh@highway.ne.jp>
+Sun Nov 18 12:37:09 2001 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* sample/cursor.rb, sample/keyboard_grab.rb, sample/pointer_grab.rb,
 	sample/xbm_cursor.rb: Add four sample files.
@@ -314,7 +321,7 @@ Fri Nov 16 16:13:26 2001 Neil Conway <neilconway@rogers.com>
 
 	* rbgdkfont.c: File added.
 
-Fri Nov 16 15:53:30 2001 MUTOH Masao <mutoh@highway.ne.jp>
+Fri Nov 16 15:53:30 2001 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* rbgtkobject.c: Remove !=, that is used for comparison,
 	not substitution. [ruby-dev:15102]
@@ -349,7 +356,7 @@ Fri Oct 19 13:40:02 2001 Neil Conway <neilconway@rogers.com>
 	* src/rbgtk.c, src/rbgtk.h: Add the Gtk::ItemFactory::Constants
 	module.
 
-Fri Oct 19 13:39:02 2001 MUTOH Masao <mutoh@highway.ne.jp>
+Fri Oct 19 13:39:02 2001 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: Minor cleanups.
 
@@ -360,7 +367,7 @@ Fri Oct 19 13:39:02 2001 dellin <dellin@team-ct.org>
 	from Gtk::ItemFactory, add ItemFactory#path_from_widget,
 	#delete_item,#get_item
 
-Fri Oct 19 13:39:02 2001 MUTOH Masao <mutoh@highway.ne.jp>
+Fri Oct 19 13:39:02 2001 Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: fix GC problems in ItemFactory#create_item/s
 
@@ -466,23 +473,23 @@ Mon Oct  8 16:13:13 2001  Neil Conway <neilconway@rogers.com>
 
 Mon Oct  8 13:30:42 2001  Neil Conway <neilconway@rogers.com>
 
-	* src/rbgtkfilesel.c: Apply patch from MUTOH Masao
+	* src/rbgtkfilesel.c: Apply patch from Masao Mutoh
 	<mutoh@highway.ne.jp> -- remove #help_button because
 	it doesn't exist in GTK+. Thanks!
 
-	* src/rbgtktoolbar.c: Apply patch from MUTOH Masao
+	* src/rbgtktoolbar.c: Apply patch from Masao Mutoh
 	<mutoh@highway.ne.jp> -- fix typo, allow setting
 	icons to nil. Thanks!
 
 	* src/rbgtktoolbar.c: Apply (another!) patch from
-	MUTOH Masao <mutoh@highway.ne.jp> -- implement
+	Masao Mutoh <mutoh@highway.ne.jp> -- implement
 	#append_element, #prepend_element, #insert_element.
 	Thanks!
 
 	* src/rbgtkradiomenuitem.c: Apply patch from dellin
 	<dellin@team-ct.org> -- implement #set_group.
 
-	* src/rbgtkfilesel.c: Apply patch from MUTOH Masao
+	* src/rbgtkfilesel.c: Apply patch from Masao Mutoh
 	<mutoh@highway.ne.jp> -- implement #complete,
 	#history_pulldown, #fileop_c_dir, #fileop_del_file
 	and #fileop_ren_file.
@@ -553,34 +560,34 @@ Thu May 24 06:31:44 2001  kadu <kadu3@m16.alpha-net.ne.jp>
 
 	* doc/rbbr.rb: attach a document viewer with refe, ri.
 
-Tue May 22 06:22:53 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Tue May 22 06:22:53 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.h: define a missing constant of
 	Gtk::ItemFactory.
 
-Tue May 22 06:19:26 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Tue May 22 06:19:26 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c, src/rbgdkconst.c: define values of type GdkFunction.
 
-Sun May 20 23:02:17 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Sun May 20 23:02:17 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Gdk::GC#set_dashes takes an Array argument instead of
 	String.
 
-Mon May  7 00:47:49 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Mon May  7 00:47:49 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: Gdk::Colormap#colors returns the proper value.
 
-Sun Apr 22 17:39:21 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Sun Apr 22 17:39:21 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: define methods of Gdk::Image.
 
-Sun Apr 15 19:37:42 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Sun Apr 15 19:37:42 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: Gdk::Colormap#alloc_color returns
 	the pixel value now.
 
-Mon Apr  9 05:27:24 2001  MUTOH Masao <mutoh@highway.ne.jp>
+Mon Apr  9 05:27:24 2001  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgdkcolor.c: define Gdk::Colormap#colors, Gdk::Color#pixel.
 
