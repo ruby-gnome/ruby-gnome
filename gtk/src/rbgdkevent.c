@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: geoff_youngs $
-  $Date: 2003/07/29 07:42:53 $
+  $Author: sakai $
+  $Date: 2003/08/20 06:09:51 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -628,10 +628,7 @@ Init_gtk_gdk_event()
     /* GdkEventScroll */
     ev = gdkevents[GDK_SCROLL];
     /* GdkScrollDirection */
-    rb_define_const(ev, "UP", INT2FIX(GDK_SCROLL_UP));
-    rb_define_const(ev, "DOWN", INT2FIX(GDK_SCROLL_DOWN));
-    rb_define_const(ev, "LEFT", INT2FIX(GDK_SCROLL_LEFT));
-    rb_define_const(ev, "RIGHT", INT2FIX(GDK_SCROLL_RIGHT));
+    G_DEF_CONSTANTS(ev, GDK_TYPE_SCROLL_DIRECTION, "GDK_SCROLL_");
 
     /* GdkEventMotion */
     ev = gdkevents[GDK_MOTION_NOTIFY];
@@ -652,10 +649,7 @@ Init_gtk_gdk_event()
     ev = gdkevents[GDK_VISIBILITY_NOTIFY];
     rb_define_method(ev, "state", gdkeventvisibility_state, 0);
     /* GdkVisibilityState */
-    rb_define_const(ev, "UNOBSCURED", INT2FIX(GDK_VISIBILITY_UNOBSCURED));
-    rb_define_const(ev, "PARTIAL", INT2FIX(GDK_VISIBILITY_PARTIAL));
-    rb_define_const(ev, "FULLY_OBSCURED", INT2FIX(GDK_VISIBILITY_FULLY_OBSCURED));
-
+    G_DEF_CONSTANTS(ev, GDK_TYPE_VISIBILITY_STATE, "GDK_VISIBILITY_");
 
     /* GdkEventCrossing */
     ev = gdkevents[GDK_ENTER_NOTIFY];
@@ -670,17 +664,9 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "focus?", gdkeventcrossing_focus, 0);
     rb_define_method(ev, "state", gdkeventcrossing_state, 0);
     /* GdkCrossingMode */
-    rb_define_const(ev, "NORMAL", INT2FIX(GDK_CROSSING_NORMAL));
-    rb_define_const(ev, "GRAB", INT2FIX(GDK_CROSSING_GRAB));
-    rb_define_const(ev, "UNGRAB", INT2FIX(GDK_CROSSING_UNGRAB));
+    G_DEF_CONSTANTS(ev, GDK_TYPE_CROSSING_MODE, "GDK_CROSSING_");
     /* GdkNotifyType */
-    rb_define_const(ev, "NOTIFY_ANCESTOR", INT2FIX(GDK_NOTIFY_ANCESTOR));
-    rb_define_const(ev, "NOTIFY_VIRTUAL", INT2FIX(GDK_NOTIFY_VIRTUAL));
-    rb_define_const(ev, "NOTIFY_INFERIOR", INT2FIX(GDK_NOTIFY_INFERIOR));
-    rb_define_const(ev, "NOTIFY_NONLINEAR", INT2FIX(GDK_NOTIFY_NONLINEAR));
-    rb_define_const(ev, "NOTIFY_NONLINEAR_VIRTUAL", INT2FIX(GDK_NOTIFY_NONLINEAR_VIRTUAL));
-    rb_define_const(ev, "NOTIFY_UNKNOWN", INT2FIX(GDK_NOTIFY_UNKNOWN));
-
+    G_DEF_CONSTANTS(ev, GDK_TYPE_NOTIFY_TYPE, "GDK_");
 
     /* GdkEventFocus */
     ev = gdkevents[GDK_FOCUS_CHANGE];
@@ -701,8 +687,7 @@ Init_gtk_gdk_event()
     /* GdkPropertyState */ 
     /* Notice! You cant use Gdk::Property::DELETE 
        because it has defined by Gdk::Event already. */
-    rb_define_const(ev, "PROPERTY_NEW_VALUE", INT2FIX(GDK_PROPERTY_NEW_VALUE));
-    rb_define_const(ev, "PROPERTY_DELETE", INT2FIX(GDK_PROPERTY_DELETE)); 
+    G_DEF_CONSTANTS(ev, GDK_TYPE_PROPERTY_STATE, "GDK_");
 
     /* GdkEventSelection */
     ev = gdkevents[GDK_SELECTION_CLEAR];
@@ -742,10 +727,7 @@ Init_gtk_gdk_event()
     /* GdkEventWindowState */
     ev = gdkevents[GDK_WINDOW_STATE];
     /* GdkWindowState */
-    rb_define_const(ev, "WITHDRAWN", INT2NUM(GDK_WINDOW_STATE_WITHDRAWN));
-    rb_define_const(ev, "ICONIFIED", INT2NUM(GDK_WINDOW_STATE_ICONIFIED));
-    rb_define_const(ev, "MAXIMIZED", INT2NUM(GDK_WINDOW_STATE_MAXIMIZED));
-    rb_define_const(ev, "STICKY", INT2NUM(GDK_WINDOW_STATE_STICKY));
+    G_DEF_CONSTANTS(ev, GDK_TYPE_WINDOW_STATE, "GDK_WINDOW_STATE_");
 
     /* GdkEventSetting */
     ev = gdkevents[GDK_SETTING];
