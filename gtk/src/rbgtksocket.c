@@ -3,7 +3,7 @@
   rbgtksocket.c -
 
   $Author: sakai $
-  $Date: 2002/08/12 09:39:49 $
+  $Date: 2002/08/20 03:38:53 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -42,9 +42,9 @@ socket_add_id(self, wid)
 {
     gtk_socket_add_id(GTK_SOCKET(RVAL2GOBJ(self)),
 #ifdef GDK_NATIVE_WINDOW_POINTER
-                      GUINT_TO_POINTER(NUM2ULONG(wid)),
+                      GUINT_TO_POINTER(NUM2ULONG(wid))
 #else
-                      (guint32)NUM2UINT(wid),
+                      (guint32)NUM2UINT(wid)
 #endif                      
                       );
     return self;
@@ -61,7 +61,7 @@ static VALUE
 socket_get_socket_id(self)
     VALUE self;
 {
-    GdkNativeWindow id =  gtk_socket_get_socket_id(RVAL2GOBJ(self));
+    GdkNativeWindow id =  gtk_socket_get_id(GTK_SOCKET(RVAL2GOBJ(self)));
 #ifdef GDK_NATIVE_WINDOW_POINTER
     return UINT2NUM(GPOINTER_TO_UINT(id));
 #else

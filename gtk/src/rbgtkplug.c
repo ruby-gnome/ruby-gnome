@@ -3,7 +3,7 @@
   rbgdkplug.c -
 
   $Author: sakai $
-  $Date: 2002/08/12 09:39:49 $
+  $Date: 2002/08/20 03:38:53 $
 
   Copyright (C) 2002 Neil Conway
 ************************************************/
@@ -21,7 +21,7 @@ plug_initialize(argc, argv, self)
     VALUE socket_id;
     GdkNativeWindow id;
 
-    if (rb_scan_arg(argc, argv, "01", &socket_id) == 0)
+    if (rb_scan_args(argc, argv, "01", &socket_id) == 0)
         id = 0;
     else {
 #ifdef GDK_NATIVE_WINDOW_POINTER
@@ -51,7 +51,7 @@ static VALUE
 plug_get_id(self)
     VALUE self;
 {
-    GdkNativeWindow id = gtk_plug_get_id();
+    GdkNativeWindow id = gtk_plug_get_id(GTK_PLUG(RVAL2GOBJ(self)));
 #ifdef GDK_NATIVE_WINDOW_POINTER
     return UINT2NUM(GPOINTER_TO_UINT(id));
 #else
