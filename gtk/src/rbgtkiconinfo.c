@@ -4,7 +4,7 @@
   rbgtkiconinfo.c -
 
   $Author: mutoh $
-  $Date: 2004/05/23 17:02:11 $
+  $Date: 2004/07/25 16:27:12 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -40,11 +40,14 @@ iconinfo_load_icon(self)
     VALUE self;
 {
     GError* error = NULL;
-    GdkPixbuf* ret = gtk_icon_info_load_icon(_SELF(self), &error);
+    GdkPixbuf* pixbuf = gtk_icon_info_load_icon(_SELF(self), &error);
+    VALUE ret;
 
-    if (ret)
-        RAISE_GERROR(error);
-    return GOBJ2RVAL(ret);
+    if (error) RAISE_GERROR(error);
+
+    ret = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return ret;
 }
 
 static VALUE

@@ -1,3 +1,8 @@
+2004-07-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkuimanager.c: Added. 
+	* src/rbgtkiconinfo.c: Fix a memory leak.
+
 2004-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkscale.c: Added Gtk::Scale#layout, #layout_offsets for 
