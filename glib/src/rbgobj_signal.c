@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/11 15:35:54 $
+  $Author: sakai $
+  $Date: 2002/11/22 12:11:28 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -62,6 +62,8 @@ rbgobj_set_signal_func(klass, sig_name, func)
 
 /**********************************************************************/
 
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+
 static ID id_send;
 
 typedef struct _DispatchClosure DispatchClosure;
@@ -108,6 +110,8 @@ dispatch_closure_new(ID method_id)
 
     return (GClosure*)closure;    
 }
+
+#endif /* RBGLIB_ENABLE_EXPERIMENTAL */
 
 /**********************************************************************/
 
@@ -167,7 +171,7 @@ gobj_s_signals(VALUE self)
 
     result = rb_ary_new2(n_ids);
     for (i = 0; i < n_ids; i++)
-        rb_ary_store(result, i, rbgobj_signal_wrap(ids[i]));
+        rb_ary_store(result, i, rb_str_new2(g_signal_name(ids[i])));
 
     return result;
 }
@@ -546,7 +550,9 @@ Init_gobject_gsignal()
 {
     cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
 
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
     id_send = rb_intern("__send__");
+#endif
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
 

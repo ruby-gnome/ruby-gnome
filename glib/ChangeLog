@@ -1,3 +1,10 @@
+2002-11-22  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c, src/rbgobj_signal.c: change
+	GLib::Instantiatable.signals and GLib::Object.properties to return
+	array of strings. (instead of array of specific objects)
+	* rbgobj_signal.c: disable some experimental code.
+
 2002-11-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.c: Fix typos in error messages(GLib::GObject to GLib::Object).

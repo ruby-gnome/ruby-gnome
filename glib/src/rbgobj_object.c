@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2002/11/08 17:06:47 $
+  $Author: sakai $
+  $Date: 2002/11/22 12:11:28 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -128,7 +128,7 @@ gobj_s_properties(self)
 
     ary = rb_ary_new2(n_properties);
     for (i = 0; i < n_properties; i++)
-        rb_ary_store(ary, i, GOBJ2RVAL(props[i]));
+        rb_ary_store(ary, i, rb_str_new2(props[i]->name));
 
     g_type_class_unref(oclass);
     return ary;
