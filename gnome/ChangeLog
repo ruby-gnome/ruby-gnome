@@ -1,3 +1,7 @@
+2002-11-16  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* ToDo: Removed.
+
 2002-11-10  KUBO Takehiro  <kubo@jiubao.org>
 
 	* src/rbgnome-app-helper.c: follow the change of prototype.
