@@ -65,14 +65,22 @@ exec_callback(gint *width, gint *height, gpointer self)
 static VALUE
 rb_rsvg_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
+#ifdef HAVE_RSVG_SET_DEFAULT_DPI_X_Y
   rsvg_set_default_dpi_x_y(NUM2DBL(dpi_x), NUM2DBL(dpi_y));
+#else
+  rb_warning("not supported in your librsvg");
+#endif
   return Qnil;
 }
 
 static VALUE
 rb_rsvg_handle_set_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
+#ifdef HAVE_RSVG_HANDLE_SET_DPI_X_Y
   rsvg_handle_set_dpi_x_y(_SELF(self), NUM2DBL(dpi_x), NUM2DBL(dpi_y));
+#else
+  rb_warning("not supported in your librsvg");
+#endif
   return Qnil;
 }
 

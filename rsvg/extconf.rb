@@ -14,6 +14,8 @@ pkg_infos.each do |name, version|
 end
 
 check_win32
+have_func("rsvg_set_default_dpi_x_y")
+have_func("rsvg_handle_set_dpi_x_y")
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src'].map{|d|

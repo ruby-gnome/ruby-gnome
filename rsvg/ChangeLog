@@ -1,3 +1,7 @@
+2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbrsvg.c: Fixed warnings under rsvg-2.6.x. 
+
 2004-11-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* README: Fixed requirements.
