@@ -4,7 +4,7 @@
   rbgdk-pixbufanimation.c -
 
   $Author: sakai $
-  $Date: 2003/02/13 08:19:53 $
+  $Date: 2003/02/17 15:31:42 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -13,7 +13,7 @@
 #define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
 #define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
 
-ID tvsec, tvusec;
+static ID tvsec, tvusec;
 
 static VALUE
 animation_initialize(self, filename)

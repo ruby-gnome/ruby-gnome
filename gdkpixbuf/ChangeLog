@@ -1,3 +1,7 @@
+2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rbgdk-pixbufanimation.c: change tvsec and tvusec to static variable.
+
 2003-02-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb: Use ../mkmf-gnome.rb
