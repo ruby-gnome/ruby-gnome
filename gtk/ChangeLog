@@ -1,3 +1,8 @@
+2003-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeiter.c: Fix a segfault in Gtk::TreeIter#next!.
+	Pointed out by Matthew Berg.
+
 2003-11-01  Laurent Sansonetti  <laurent@datarescue.be>
                                                                                                
 	* sample/misc/stock.rb: Follow Gtk::Image changes (was broken).

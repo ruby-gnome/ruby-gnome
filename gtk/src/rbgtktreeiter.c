@@ -4,7 +4,7 @@
   rbgtktreeiter.c -
 
   $Author: mutoh $
-  $Date: 2003/09/09 15:17:22 $
+  $Date: 2003/11/01 17:24:28 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -41,9 +41,13 @@ treeiter_next(self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
-    VALUE ret = (gtk_tree_model_iter_next(model, iter)) ? Qtrue : Qfalse;
+    gboolean ret = gtk_tree_model_iter_next(model, iter);
+    if (! ret){
+        gtk_tree_model_get_iter_first(model, iter);
+    }
     iter->user_data3 = model;
-    return ret;
+
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
