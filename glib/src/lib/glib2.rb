@@ -67,4 +67,21 @@ module GLib
     end
   end
 
+  module Log
+    DOMAIN = "Ruby/GLib"
+    module_function
+    def error(str)
+      log(DOMAIN, LEVEL_ERROR, caller(1)[0] << ": " << str)
+    end
+    def message(str)
+      log(DOMAIN, LEVEL_MESSAGE, caller(1)[0] << ": " << str)
+    end
+    def critical(str)
+      log(DOMAIN, LEVEL_CRITICAL, caller(1)[0] << ": " << str)
+    end
+    def warning(str)
+      log(DOMAIN,  LEVEL_WARNING, caller(1)[0] << ": " << str)
+    end
+  end
+
 end

@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2003/06/26 15:14:47 $
+  $Date: 2004/04/19 16:27:07 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -17,7 +17,7 @@
 
 #include "global.h"
 
-static VALUE rbglib_log_handler_procs = Qnil;
+static VALUE rbglib_log_handler_procs;
 static ID id_call;
 
 static void
@@ -28,31 +28,45 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     gpointer user_data;
 {
     rb_funcall((VALUE)user_data, id_call, 3,
-	       rb_str_new2(log_domain), INT2NUM(log_level),
-	       rb_str_new2(message));
+	       CSTR2RVAL(log_domain), INT2NUM(log_level),
+	       CSTR2RVAL(message));
 }
 
 static VALUE
-rbglib_m_log_set_handler(self, log_domain, log_levels)
-    VALUE self, log_domain, log_levels;
+rbglib_m_log_set_handler(self, domain, levels)
+    VALUE self, domain, levels;
 {
-    guint handler_id;
-    VALUE proc;
-
-    proc = G_BLOCK_PROC();
-    handler_id = g_log_set_handler(RVAL2CSTR(log_domain), NUM2INT(log_levels),
-				   rbglib_log_handler, (gpointer)proc);
-    rb_hash_aset(rbglib_log_handler_procs, INT2NUM(handler_id), proc);
-    return INT2NUM(handler_id);
+    VALUE proc = G_BLOCK_PROC();
+    guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+                                         NUM2INT(levels),
+                                         rbglib_log_handler, (gpointer)proc);
+    G_RELATIVE2(self, proc, UINT2NUM(handler_id), rbglib_log_handler_procs);
+    return UINT2NUM(handler_id);
 }
 
 static VALUE
-rbglib_m_log_remove_handler(self, log_domain, handler_id)
-    VALUE self, log_domain, handler_id;
+rbglib_m_log_remove_handler(self, domain, handler_id)
+    VALUE self, domain, handler_id;
 {
-    g_log_remove_handler(RVAL2CSTR(log_domain), NUM2INT(handler_id));
-    rb_funcall(rbglib_log_handler_procs, rb_intern("delete"),
-	       1, INT2NUM(handler_id));
+    g_log_remove_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+                         NUM2UINT(handler_id));
+    G_REMOVE_RELATIVE(self, handler_id, rbglib_log_handler_procs);
+    return Qnil;
+}
+
+static VALUE
+rbglib_m_log_set_fatal_mask(self, domain, fatal_mask)
+    VALUE self, domain, fatal_mask;
+{
+    return INT2NUM(g_log_set_fatal_mask(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+                                        NUM2INT(fatal_mask)));
+}
+
+static VALUE
+rbglib_m_log(self, domain, level, str)
+    VALUE self, domain, level, str;
+{
+    g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), RVAL2CSTR(str), NULL);
     return Qnil;
 }
 
@@ -67,4 +81,20 @@ Init_glib_messages()
     rbglib_log_handler_procs = rb_hash_new();
     rb_define_module_function(mGLog, "set_handler", rbglib_m_log_set_handler, 2);
     rb_define_module_function(mGLog, "remove_handler", rbglib_m_log_remove_handler, 2);
+    rb_define_module_function(mGLog, "set_fatal_mask", rbglib_m_log_set_fatal_mask, 2);
+    rb_define_module_function(mGLog, "log", rbglib_m_log, 3);
+
+    rb_define_const(mGLog, "FATAL_MASK", INT2NUM(G_LOG_FATAL_MASK));
+    rb_define_const(mGLog, "LEVEL_USER_SHIFT", INT2NUM(G_LOG_LEVEL_USER_SHIFT));
+
+    /* GLogLevelFlags */
+    rb_define_const(mGLog, "FLAG_RECURSION", INT2NUM(G_LOG_FLAG_RECURSION));
+    rb_define_const(mGLog, "FLAG_FATAL", INT2NUM(G_LOG_FLAG_FATAL));
+    rb_define_const(mGLog, "LEVEL_ERROR", INT2NUM(G_LOG_LEVEL_ERROR));
+    rb_define_const(mGLog, "LEVEL_CRITICAL", INT2NUM(G_LOG_LEVEL_CRITICAL));
+    rb_define_const(mGLog, "LEVEL_WARNING", INT2NUM(G_LOG_LEVEL_WARNING));
+    rb_define_const(mGLog, "LEVEL_MESSAGE", INT2NUM(G_LOG_LEVEL_MESSAGE));
+    rb_define_const(mGLog, "LEVEL_INFO", INT2NUM(G_LOG_LEVEL_INFO));
+    rb_define_const(mGLog, "LEVEL_DEBUG", INT2NUM(G_LOG_LEVEL_DEBUG));
+    rb_define_const(mGLog, "LEVEL_MASK", INT2NUM(G_LOG_LEVEL_MASK));
 }

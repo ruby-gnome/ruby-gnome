@@ -1,3 +1,9 @@
+2004-04-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: Fix bugs, Add GLib::Log.log, set_fatal_mask, 
+	some constants.
+	* src/lib/glib2.rb: Add GLib::Log.error, message, critical, warning.
+
 2004-04-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_convert.c: Add GLib.utf8_validate.
