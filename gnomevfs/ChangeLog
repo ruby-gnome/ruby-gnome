@@ -2,6 +2,9 @@
 
 	* src/gnomevfs-file.c: Fixed a bunch of minor bugs (that prevented all
 	operation).  Also added record separation in the gets() method.
+	* src/gnomevfs-file.c: Completed the interface.  Almost 100%
+	compatible with Ruby's IO class.  Only methods that cannot be
+	implemented are excluded.
 
 2003-07-26  Nikolai Weibull  <lone-star@home.se>
 
