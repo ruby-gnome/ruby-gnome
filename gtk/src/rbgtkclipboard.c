@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2004/05/23 17:02:11 $
+  $Date: 2004/11/13 18:36:23 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -153,6 +153,7 @@ clipboard_request_text(self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,4,0)
 static void
 clipboard_target_received_func(clipboard, atoms, n_atoms, func)
     GtkClipboard* clipboard;
@@ -169,7 +170,6 @@ clipboard_target_received_func(clipboard, atoms, n_atoms, func)
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), ary);
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 clipboard_request_targets(self)
     VALUE self;
