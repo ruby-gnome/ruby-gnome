@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2002/08/05 16:16:34 $
+  $Date: 2002/08/05 17:45:57 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -27,6 +27,11 @@ extern "C" {
 #define G_DEF_CLASS(gtype, name, module)\
  (rbgobj_define_class(gtype, name, module, 0, 0))
 #define G_DEF_CLASS2(gtype, name, module, mark, free)\
+ (rbgobj_define_class(gtype, name, module, mark, free))
+
+#define G_DEF_INTERFACE(gtype, name, module)\
+ (rbgobj_define_class(gtype, name, module, 0, 0))
+#define G_DEF_INTERFACE2(gtype, name, module, mark, free)\
  (rbgobj_define_class(gtype, name, module, mark, free))
 
 #define GTYPE2CLASS(gtype) (rbgobj_lookup_class_by_gtype(gtype)->klass)

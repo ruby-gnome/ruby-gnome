@@ -1,13 +1,27 @@
 require 'mkmf'
 
-unless system('pkg-config', '--exists', 'gobject-2.0')
-  STDERR.print("gobject-2.0 doesn't exist\n")
+pkgconfig = with_config('pkg-config', 'pkg-config')
+pkgname   = 'gobject-2.0'
+
+pkgconfig_opt = ''
+if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
+  pkgconfig_opt += ' --msvc-syntax'
+end
+
+
+unless system(pkgconfig, '--exists', pkgname)
+  STDERR.printf("%s doesn't exist\n", pkgname)
   exit
 end
 
-$LDFLAGS += ' ' + `pkg-config gobject-2.0 --libs`.chomp
-$CFLAGS  += ' ' + `pkg-config gobject-2.0 --cflags`.chomp
+$LDFLAGS += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --libs`.chomp
+$CFLAGS  += ' ' + `#{pkgconfig} #{pkgconfig_opt} #{pkgname} --cflags`.chomp
 $CFLAGS += ' -g'
+
+if /mswin32|mingw|bcc/ =~ RUBY_PLATFORM and /gcc/ =~ Config::CONFIG['CC']
+  $CFLAGS += ' -fnative-struct'
+end
+
 
 STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
 if Object.respond_to? :allocate

@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/08/05 16:16:34 $
+  $Date: 2002/08/05 17:45:56 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -47,22 +47,31 @@ rbgobj_lookup_class_by_gtype(gtype)
     if (!NIL_P(c)){
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
     } else {
-        if (G_TYPE_FUNDAMENTAL(gtype) != G_TYPE_OBJECT){
-            /* we should raise exception? */
-            fprintf(stderr,
-                "rbgobj_lookup_class_by_gtype: %s is not a subtype of GObject\n",
-                g_type_name(gtype));
-            return NULL;
-        }
-
         c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);
 
-        if (gtype == G_TYPE_OBJECT){
-            cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
-        } else {
-            const RGObjClassInfo* cinfo_super
-                = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
-            cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+        switch (G_TYPE_FUNDAMENTAL(gtype)){
+          case G_TYPE_OBJECT:
+            if (gtype == G_TYPE_OBJECT){
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 0);
+            } else {
+                const RGObjClassInfo* cinfo_super
+                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
+            }
+            break;
+
+          case G_TYPE_INTERFACE:
+            cinfo->klass = rb_module_new();
+            break;
+
+          default:
+            /* we should raise exception? */
+            fprintf(stderr,
+                    "%s: %s's fundamental type %s isn't supported\n",
+                    "rbgobj_lookup_class_by_gtype",
+                    g_type_name(gtype),
+                    g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
+            return NULL;
         }
 
         cinfo->gtype = gtype;
@@ -72,8 +81,22 @@ rbgobj_lookup_class_by_gtype(gtype)
         rb_ivar_set(cinfo->klass, id_class_info, c);
         rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
 
-        rbgobj_define_property_accessors(cinfo->klass);
-        rbgobj_define_signal_constants(cinfo->klass);
+        if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT){
+            GType* interfaces = NULL;
+            guint n_interfaces = 0;
+            int i;
+
+            interfaces = g_type_interfaces(gtype, &n_interfaces);
+            for (i = 0; i < n_interfaces; i++){
+                rb_include_module(
+                    cinfo->klass,
+                    rbgobj_lookup_class_by_gtype(interfaces[i])->klass);
+            }
+            g_free(interfaces);
+
+            rbgobj_define_signal_constants(cinfo->klass);
+            rbgobj_define_property_accessors(cinfo->klass);
+        }
     }
 
     return cinfo;

@@ -1,4 +1,13 @@
 2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_type.c: extend rbgobj_lookup_class_by_gtype() to deal
+	interfaces
+	* src/rbgobject.h: define macros: G_DEF_INTERFACE and G_DEF_INTERFACE2
+	* src/rbgobj_typeplugin.c: file added
+	* extconf.rb: use --msvc-syntax option for pkg-config if the compiler
+	is MSVC++.
+
+2002-08-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
  
 	* src/rbgobject.h: remove declaration of id_class_info and id_delete
 	* src/rbgobject.h, src/rbgobj_object.c, src/rbgobj_signal.c:

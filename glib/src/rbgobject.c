@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/05 16:16:34 $
+  $Date: 2002/08/05 17:45:57 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -381,6 +381,7 @@ Init_gobject()
     Init_gobject_gobject();
     Init_gobject_gsignal();
 
+    Init_gobject_gtypeplugin();
     Init_gobject_gtypemodule();
     Init_gobject_gboxed();
     Init_gobject_genums();
