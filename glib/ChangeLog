@@ -1,3 +1,7 @@
+2003-02-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: Check NODE_ATTRASGN only if try_compile is defined.
+
 2003-02-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.h: Add rbgobj_signal_wrap() declaration.

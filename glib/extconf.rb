@@ -18,7 +18,7 @@ have_func("rb_define_alloc_func") # for ruby-1.8
 
 STDOUT.print("checking for attribute assignment... ") # for ruby-1.7
 STDOUT.flush
-if try_compile <<SRC
+if defined? try_compile and try_compile <<SRC
 #include "ruby.h"
 #include "node.h"
 int node_attrasgn = (int)NODE_ATTRASGN;
