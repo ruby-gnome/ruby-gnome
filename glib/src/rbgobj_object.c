@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/06/20 13:46:36 $
+  $Date: 2002/06/21 18:26:11 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -22,6 +22,9 @@
 
 static const char* const RUBY_GOBJECT_OBJ_KEY = "__ruby_gobject_object__";
 
+static VALUE rbgobj_make_gobject(VALUE klass, GObject* gobj);
+static VALUE rbgobj_make_gobject_auto_type(GObject* gobj);
+
 ID id_gobject_data;
 ID id_relatives;
 ID id_relative_callbacks;
@@ -30,13 +33,6 @@ ID id_class_info;
 
 static st_table *gobject_object_list;
 static VALUE gobject_object_list_v;
-
-static void
-gobj_mark(obj)
-    GObject *obj;
-{
-    /* just for type mark */
-}
 
 GObject*
 rbgobj_get_gobject(obj)
@@ -102,7 +98,7 @@ rbgobj_set_gobject(obj, gobj)
     if (cinfo)
 	data = Data_Wrap_Struct(rb_cData, cinfo->mark, g_object_unref, gobj);
     else
-	data = Data_Wrap_Struct(rb_cData, gobj_mark, g_object_unref, gobj);
+	data = Data_Wrap_Struct(rb_cData, NULL, g_object_unref, gobj);
 
     g_object_set_data_full(gobj, RUBY_GOBJECT_OBJ_KEY,
                            (gpointer)obj, delete_gobject);
@@ -222,11 +218,14 @@ rbgobj_gobject_new(gtype, params_hash)
     size_t param_size = rb_enum_length(params_hash);
     GParameter* parameters = ALLOCA_N(GParameter, param_size);
     GObject* gobj;
+    VALUE result;
 
     rb_iterate(&_each_with_index, params_hash, _params_setup, (VALUE)parameters);
     gobj = g_object_newv(gtype, param_size, parameters);
 
-    return rbgobj_make_gobject_auto_type(gobj);    
+    result = rbgobj_make_gobject_auto_type(gobj);
+    g_object_unref(gobj);
+    return result;
 }
 
 static VALUE
@@ -274,13 +273,6 @@ gobj_inspect(self)
                 rbgobj_get_gobject(self));
     }
     return rb_str_new2(s);
-}
-
-static void
-clear_gobject(obj)
-    VALUE obj;
-{
-    rb_ivar_set(obj, id_relatives, Qnil);
 }
 
 /**********************************************************************/

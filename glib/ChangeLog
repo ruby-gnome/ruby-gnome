@@ -1,3 +1,11 @@
+2002-06-22  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
+
+	* src/rbgobject.h: create two macros; RVAL2GOBJ() and GOBJ2RVAL().
+	* src/rbgobject.h, rbgobj_object.c: make rbgobj_make_gobject() and
+	rbgobj_make_gobject_auto_type() be private.
+	* src/rbgobj_object.c: remove gobj_mark() and clear_gobject().
+	* src/rbglib.c: remove gError.
+
 2002-06-20  Masahiro Sakai  <s01397ms@sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c, src/rbgobj_type.c, src/rbgobject.h:
