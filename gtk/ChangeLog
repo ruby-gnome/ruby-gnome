@@ -1,3 +1,17 @@
+2003-01-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkdraw.c: Implement Gdk::Drawable#visual, #set_colormap, 
+	#colormap, #clip_region, #visible_region, #draw_glyphs, #draw_layout_line, 
+	#draw_layout, #get_image.
+	* src/rbgdkgc.c: Gdk::GC#set_rgb_(fg|bg)_color, #set_colormap, 
+	#colormap, #offset.
+	* src/rbgdkregion.c: Gdk::Region#new accept array of Gdk::Point or 
+	Gdk::Rectangle, nil.
+	Add Gdk::Region#rectangles, #spans_intersect_each.
+	* src/rbgdkspan.c: Add a file.
+	* src/rbgdkrectangle.c: Add Gdk::Rectangle#intersect(&), #union(|). 
+	* sample/misc/gc.rb: Add a file.
+
 2003-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpango.c: Add Gdk::Pango::AttrStipple#value.

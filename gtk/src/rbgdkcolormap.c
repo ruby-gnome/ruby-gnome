@@ -4,9 +4,9 @@
   rbgdkcolormap.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2003/01/12 18:09:10 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 
   This file is devided from rbgdkcolor.c.
   rbgdkcolor.c -

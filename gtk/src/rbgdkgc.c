@@ -4,14 +4,15 @@
   rbgtkalignment.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:41:59 $
+  $Date: 2003/01/12 18:09:10 $
 
+  Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
 ************************************************/
 
 #include "global.h"
 
-#define _SELF(s) ((GdkGC*)RVAL2GOBJ(s))
+#define _SELF(s) (GDK_GC(RVAL2GOBJ(s)))
 
 static VALUE
 gdkgc_initialize(self, win)
@@ -21,86 +22,164 @@ gdkgc_initialize(self, win)
     return Qnil;
 }
 
-static VALUE
-gdkgc_copy(self)
-	VALUE self;
-{
-    GdkGC copy;
-	gdk_gc_copy(&copy, _SELF(self));
-	return GOBJ2RVAL(&copy);
-}
-
-static VALUE
-gdkgc_set_function(self, func)
-	VALUE self, func;
-{
-	GdkFunction f;
-	f = (GdkFunction) NUM2INT(func);
-	if (f > GDK_SET)
-		rb_raise(rb_eArgError, "function out of range");
-  
-	gdk_gc_set_function(_SELF(self), f);
-	return self;
-}
+/* Shouldn't we implement them?
+GdkGC*      gdk_gc_new_with_values          (GdkDrawable *drawable,
+                                             GdkGCValues *values,
+                                             GdkGCValuesMask values_mask);
+void        gdk_gc_set_values               (GdkGC *gc,
+                                             GdkGCValues *values,
+                                             GdkGCValuesMask values_mask);
+void        gdk_gc_get_values               (GdkGC *gc,
+                                             GdkGCValues *values);
+*/
 
 static VALUE
 gdkgc_set_foreground(self, color)
-	VALUE self, color;
+    VALUE self, color;
 {
-	gdk_gc_set_foreground(_SELF(self), 
+    gdk_gc_set_foreground(_SELF(self), 
                           (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
-	return self;
+    return self;
 }
 
 static VALUE
 gdkgc_set_background(self, color)
-	VALUE self, color;
+    VALUE self, color;
 {
-	gdk_gc_set_background(_SELF(self), 
+    gdk_gc_set_background(_SELF(self), 
                           (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
-	return self;
+    return self;
 }
 
 static VALUE
-gdkgc_set_clip_mask(self, mask)
-	VALUE self, mask;
+gdkgc_set_rgb_fg_color(self, color)
+    VALUE self, color;
 {
-	gdk_gc_set_clip_mask(_SELF(self), GDK_BITMAP(RVAL2GOBJ(mask)));
-	return self;
+    gdk_gc_set_rgb_fg_color(_SELF(self), 
+                            (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    return self;
+}
+
+static VALUE
+gdkgc_set_rgb_bg_color(self, color)
+    VALUE self, color;
+{
+    gdk_gc_set_rgb_bg_color(_SELF(self), 
+                            (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    return self;
+}
+
+static VALUE
+gdkgc_set_function(self, func)
+    VALUE self, func;
+{
+    GdkFunction f;
+    f = (GdkFunction) NUM2INT(func);
+    if (f > GDK_SET)
+        rb_raise(rb_eArgError, "function out of range");
+  
+    gdk_gc_set_function(_SELF(self), f);
+    return self;
+}
+
+static VALUE
+gdkgc_set_fill(self, fill)
+    VALUE self, fill;
+{
+    gdk_gc_set_fill(_SELF(self), NUM2INT(fill));
+    return self;
+}
+
+static VALUE
+gdkgc_set_tile(self, tile)
+    VALUE self, tile;
+{
+    gdk_gc_set_tile(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(tile))); 
+    return self;
+}
+
+static VALUE
+gdkgc_set_stipple(self, stipple)
+    VALUE self, stipple;
+{
+    gdk_gc_set_stipple(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(stipple))); 
+    return self;
+}
+
+static VALUE
+gdkgc_set_ts_origin(self, x, y)
+    VALUE self, x, y;
+{
+    gdk_gc_set_ts_origin(_SELF(self), NUM2INT(x), NUM2INT(y)); 
+    return self;
 }
 
 static VALUE
 gdkgc_set_clip_origin(self, x, y)
-	VALUE self, x, y;
+    VALUE self, x, y;
 {
-	gdk_gc_set_clip_origin(_SELF(self), NUM2INT(x), NUM2INT(y));
-	return self;
+    gdk_gc_set_clip_origin(_SELF(self), NUM2INT(x), NUM2INT(y));
+    return self;
+}
+
+static VALUE
+gdkgc_set_clip_mask(self, mask)
+    VALUE self, mask;
+{
+    gdk_gc_set_clip_mask(_SELF(self), GDK_BITMAP(RVAL2GOBJ(mask)));
+    return self;
 }
 
 static VALUE
 gdkgc_set_clip_rectangle(self, rectangle)
-	VALUE self, rectangle;
+    VALUE self, rectangle;
 {
-	gdk_gc_set_clip_rectangle(_SELF(self), 
+    gdk_gc_set_clip_rectangle(_SELF(self), 
                               (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_COLOR));
-	return self;
+    return self;
 }
 
 static VALUE
 gdkgc_set_clip_region(self, region)
-	VALUE self, region;
+    VALUE self, region;
 {
-	gdk_gc_set_clip_region(_SELF(self), 
+    gdk_gc_set_clip_region(_SELF(self), 
                            (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
-	return self;
+    return self;
+}
+
+static VALUE
+gdkgc_set_subwindow(self, mode)
+    VALUE self, mode;
+{
+    gdk_gc_set_subwindow(_SELF(self), NUM2INT(mode));
+    return self;
+}
+
+static VALUE
+gdkgc_set_exposures(self, exposures)
+    VALUE self, exposures;
+{
+    gdk_gc_set_exposures(_SELF(self), RTEST(exposures));
+    return self;
+}
+
+static VALUE
+gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
+    VALUE self, line_width, line_style, cap_style, join_style;
+{
+    gdk_gc_set_line_attributes(_SELF(self), NUM2INT(line_width),
+                               NUM2INT(line_style), NUM2INT(cap_style),
+                               NUM2INT(join_style));
+    return self;
 }
 
 static VALUE
 gdkgc_set_dashes(self, dash_offset, dash_list)
-	VALUE self, dash_offset, dash_list;
+    VALUE self, dash_offset, dash_list;
 {
-	gchar *buf;
-	int   i;
+    gchar *buf;
+    int   i;
 
     Check_Type(dash_list, T_ARRAY);
 
@@ -112,65 +191,39 @@ gdkgc_set_dashes(self, dash_offset, dash_list)
     gdk_gc_set_dashes(_SELF(self), NUM2INT(dash_offset),
                       buf, RSTRING(dash_list)->len);
 
-	return self;
+    return self;
 }
 
 static VALUE
-gdkgc_set_exposures(self, exposures)
-	VALUE self, exposures;
+gdkgc_copy(self)
+    VALUE self;
 {
-	gdk_gc_set_exposures(_SELF(self), RTEST(exposures));
-	return self;
+    GdkGC copy;
+    gdk_gc_copy(&copy, _SELF(self));
+    return GOBJ2RVAL(&copy);
 }
 
 static VALUE
-gdkgc_set_fill(self, fill)
-	VALUE self, fill;
+gdkgc_set_colormap(self, colormap)
+    VALUE self, colormap;
 {
-	gdk_gc_set_fill(_SELF(self), NUM2INT(fill));
-	return self;
+    gdk_gc_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(self)));
+    return self;
 }
 
 static VALUE
-gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
-	VALUE self, line_width, line_style, cap_style, join_style;
+gdkgc_get_colormap(self)
+    VALUE self;
 {
-	gdk_gc_set_line_attributes(_SELF(self), NUM2INT(line_width),
-							   NUM2INT(line_style), NUM2INT(cap_style),
-							   NUM2INT(join_style));
-	return self;
+    return GOBJ2RVAL(gdk_gc_get_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkgc_set_stipple(self, stipple)
-	VALUE self, stipple;
+gdkgc_offset(self, x, y)
+    VALUE self, x, y;
 {
-	gdk_gc_set_stipple(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(stipple))); 
-	return self;
-}
-
-static VALUE
-gdkgc_set_subwindow(self, mode)
-	VALUE self, mode;
-{
-	gdk_gc_set_subwindow(_SELF(self), NUM2INT(mode));
-	return self;
-}
-
-static VALUE
-gdkgc_set_tile(self, tile)
-	VALUE self, tile;
-{
-	gdk_gc_set_tile(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(tile))); 
-	return self;
-}
-
-static VALUE
-gdkgc_set_ts_origin(self, x, y)
-	VALUE self, x, y;
-{
-	gdk_gc_set_ts_origin(_SELF(self), NUM2INT(x), NUM2INT(y)); 
-	return self;
+    gdk_gc_offset(_SELF(self), NUM2INT(x), NUM2INT(y));
+    return self;
 }
 
 void
@@ -178,23 +231,28 @@ Init_gtk_gdk_gc()
 {
     VALUE gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
 
-	rb_define_method(gdkGC, "initialize", gdkgc_initialize, 1);
-	rb_define_method(gdkGC, "copy", gdkgc_copy, 0);
-	rb_define_method(gdkGC, "set_function", gdkgc_set_function, 1);
-	rb_define_method(gdkGC, "set_foreground", gdkgc_set_foreground, 1);
-	rb_define_method(gdkGC, "set_background", gdkgc_set_background, 1);
-	rb_define_method(gdkGC, "set_clip_mask", gdkgc_set_clip_mask, 1);
-	rb_define_method(gdkGC, "set_clip_origin", gdkgc_set_clip_origin, 2);
-	rb_define_method(gdkGC, "set_clip_rectangle", gdkgc_set_clip_rectangle, 1);
-	rb_define_method(gdkGC, "set_clip_region", gdkgc_set_clip_region, 1);
-	rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
-	rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
-	rb_define_method(gdkGC, "set_fill", gdkgc_set_fill, 1);
-	rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
-	rb_define_method(gdkGC, "set_stipple", gdkgc_set_stipple, 1);
-	rb_define_method(gdkGC, "set_subwindow", gdkgc_set_subwindow, 1);
-	rb_define_method(gdkGC, "set_tile", gdkgc_set_tile, 1);
-	rb_define_method(gdkGC, "set_ts_origin", gdkgc_set_ts_origin, 2);
+    rb_define_method(gdkGC, "initialize", gdkgc_initialize, 1);
+    rb_define_method(gdkGC, "set_foreground", gdkgc_set_foreground, 1);
+    rb_define_method(gdkGC, "set_background", gdkgc_set_background, 1);
+    rb_define_method(gdkGC, "set_rgb_fg_color", gdkgc_set_rgb_fg_color, 1);
+    rb_define_method(gdkGC, "set_rgb_bg_color", gdkgc_set_rgb_bg_color, 1);
+    rb_define_method(gdkGC, "set_function", gdkgc_set_function, 1);
+    rb_define_method(gdkGC, "set_fill", gdkgc_set_fill, 1);
+    rb_define_method(gdkGC, "set_tile", gdkgc_set_tile, 1);
+    rb_define_method(gdkGC, "set_stipple", gdkgc_set_stipple, 1);
+    rb_define_method(gdkGC, "set_ts_origin", gdkgc_set_ts_origin, 2);
+    rb_define_method(gdkGC, "set_clip_origin", gdkgc_set_clip_origin, 2);
+    rb_define_method(gdkGC, "set_clip_mask", gdkgc_set_clip_mask, 1);
+    rb_define_method(gdkGC, "set_clip_rectangle", gdkgc_set_clip_rectangle, 1);
+    rb_define_method(gdkGC, "set_clip_region", gdkgc_set_clip_region, 1);
+    rb_define_method(gdkGC, "set_subwindow", gdkgc_set_subwindow, 1);
+    rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
+    rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
+    rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
+    rb_define_method(gdkGC, "copy", gdkgc_copy, 0);
+    rb_define_method(gdkGC, "set_colormap", gdkgc_set_colormap, 1);
+    rb_define_method(gdkGC, "colormap", gdkgc_get_colormap, 0);
+    rb_define_method(gdkGC, "offset", gdkgc_offset, 2);
 
     G_DEF_SETTERS(gdkGC);
 

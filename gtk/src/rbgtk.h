@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/12/28 04:48:57 $
+  $Date: 2003/01/12 18:09:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -48,6 +48,7 @@
 #define GTK_TYPE_TREE_ROW_REFERENCE (gtk_treerowreference_get_type())
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())
+#define GDK_TYPE_SPAN (gdk_span_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GTK_TYPE_CLIPBOARD (gtk_clipboard_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
@@ -93,6 +94,7 @@ typedef struct {
 extern GType gdk_atom_get_type(void);
 extern GType gdk_geometry_get_type(void);
 extern GType gdk_region_get_type(void);
+extern GType gdk_span_get_type(void);
 
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);

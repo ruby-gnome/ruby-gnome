@@ -4,8 +4,9 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/10/15 15:42:00 $
+  $Date: 2003/01/12 18:09:10 $
 
+  Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -28,12 +29,89 @@ gdk_region_get_type(void)
 }
 /**********************************/
 static VALUE
-gdkregion_initialize(self)
+gdkregion_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
     VALUE self;
 {
-    GdkRegion *region = gdk_region_new();
+    VALUE points_or_rectangle, fill_rule;
+    GdkRegion* region;
+    GdkPoint *gpoints;
+    int i;
+
+    rb_scan_args(argc, argv, "02", &points_or_rectangle, &fill_rule);
+    if (NIL_P(points_or_rectangle)){
+        region = gdk_region_new();
+    } else if (TYPE(points_or_rectangle) == T_ARRAY){
+        gpoints = ALLOCA_N(GdkPoint, RARRAY(points_or_rectangle)->len);
+
+        for (i = 0; i < RARRAY(points_or_rectangle)->len; i++) {
+            Check_Type(RARRAY(points_or_rectangle)->ptr[i], T_ARRAY);
+            if (RARRAY(RARRAY(points_or_rectangle)->ptr[i])->len < 2) {
+                rb_raise(rb_eArgError, "point %d should be array of size 2", i);
+            }
+            gpoints[i].x = NUM2INT(RARRAY(RARRAY(points_or_rectangle)->ptr[i])->ptr[0]);
+            gpoints[i].y = NUM2INT(RARRAY(RARRAY(points_or_rectangle)->ptr[i])->ptr[1]);
+        }
+        region = gdk_region_polygon(gpoints, RARRAY(points_or_rectangle)->len, 
+                                    FIX2INT(fill_rule));
+    } else if (RVAL2GTYPE(points_or_rectangle) == GDK_TYPE_RECTANGLE){
+        region = gdk_region_rectangle((GdkRectangle*)RVAL2BOXED(points_or_rectangle, 
+                                                                GDK_TYPE_RECTANGLE));
+    } else {
+        rb_raise(rb_eArgError, 
+                 "invalid argument %s (expect array of Gdk::Point or Gdk::Rectangle, nil)",
+                 rb_class2name(CLASS_OF(points_or_rectangle)));
+    }
+
     G_INITIALIZE(self, region);
     return Qnil;
+}
+
+static VALUE
+gdkregion_get_rectangles(self)
+    VALUE self;
+{
+    GdkRectangle* rectangles;
+    gint n_rect, i;
+    VALUE ary;
+
+    gdk_region_get_rectangles(_SELF(self), &rectangles, &n_rect);
+    ary = rb_ary_new2(n_rect);
+    for (i = 0; i < n_rect; i++) {
+        rb_ary_push(ary, BOXED2RVAL(rectangles, GDK_TYPE_RECTANGLE));
+        rectangles++;
+    }
+    g_free(rectangles);
+    return ary;
+}
+
+void
+gdkregion_span_func(span, func)
+    GdkSpan* span;
+    gpointer func;
+{
+    rb_funcall((VALUE)func, id_call, 1, BOXED2RVAL(span, GDK_TYPE_SPAN));
+}
+
+static VALUE
+gdkregion_spans_intersect_foreach(self, spans, sorted)
+    VALUE self, spans, sorted;
+{
+    int i;
+    GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY(spans)->len);
+    GdkSpan* span;
+    VALUE func = rb_f_lambda();
+
+    G_RELATIVE(self, func);
+    for (i = 0; i < RARRAY(spans)->len; i++) {
+        span = (GdkSpan*)RVAL2BOXED(RARRAY(spans)->ptr[i], GDK_TYPE_SPAN);
+        gspans[i] = *span;
+    }
+    gdk_region_spans_intersect_foreach(_SELF(self), 
+                                       gspans, RARRAY(spans)->len, RTEST(sorted), 
+                                       gdkregion_span_func, (GdkSpanFunc)func);
+    return self;
 }
 
 static VALUE
@@ -142,7 +220,9 @@ Init_gtk_gdk_region()
 {
     VALUE gdkRegion = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
 
-    rb_define_method(gdkRegion, "initialize", gdkregion_initialize, 0);
+    rb_define_method(gdkRegion, "initialize", gdkregion_initialize, -1);
+    rb_define_method(gdkRegion, "rectangles", gdkregion_get_rectangles, 0);
+    rb_define_method(gdkRegion, "spans_intersect_each", gdkregion_spans_intersect_foreach, 2);
     rb_define_method(gdkRegion, "clipbox", gdkregion_get_clipbox, 0);
     rb_define_method(gdkRegion, "empty?", gdkregion_empty, 0);
     rb_define_method(gdkRegion, "==", gdkregion_equal, 1);

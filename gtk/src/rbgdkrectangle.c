@@ -4,9 +4,9 @@
   rbgdkrectangle.c -
 
   $Author: mutoh $
-  $Date: 2002/10/30 13:34:35 $
+  $Date: 2003/01/12 18:09:10 $
 
-  Copyright (C) 2002 Masao Mutoh
+  Copyright (C) 2002,2003 Masao Mutoh
 
   This file is derived from rbgdkregion.c.
   rbgdkregion.c -
@@ -34,6 +34,25 @@ gdkrect_initialize(self, x, y, width, height)
     return Qnil;
 }
 
+static VALUE
+gdkrect_intersect(self, other)
+    VALUE self, other;
+{
+    GdkRectangle dest;
+    gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
+    return ret ? BOXED2RVAL(&dest, GDK_TYPE_RECTANGLE) : Qnil;
+}
+
+static VALUE
+gdkrect_union(self, other)
+    VALUE self, other;
+{
+    GdkRectangle dest;
+    gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
+    return BOXED2RVAL(&dest, GDK_TYPE_RECTANGLE);
+}
+
+/* Struct accessors */
 static VALUE
 gdkrect_x(self)
     VALUE self;
@@ -109,6 +128,10 @@ Init_gtk_gdk_rectangle()
     VALUE gdkRectangle = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
 
     rb_define_method(gdkRectangle, "initialize", gdkrect_initialize, 4);
+    rb_define_method(gdkRectangle, "intersect", gdkrect_intersect, 1);
+    rb_define_alias(gdkRectangle, "&", "intersect");
+    rb_define_method(gdkRectangle, "union", gdkrect_union, 1);
+    rb_define_alias(gdkRectangle, "|", "union");
     rb_define_method(gdkRectangle, "x", gdkrect_x, 0);
     rb_define_method(gdkRectangle, "y", gdkrect_y, 0);
     rb_define_method(gdkRectangle, "width", gdkrect_w, 0);
