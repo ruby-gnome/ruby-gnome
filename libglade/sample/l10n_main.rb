@@ -10,7 +10,7 @@
   Copyright (c) 2004,2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: l10n_main.rb,v 1.2 2005/02/12 04:10:52 mutoh Exp $
+  $Id: l10n_main.rb,v 1.3 2005/02/22 05:50:31 mutoh Exp $
 =end
 
 #
@@ -27,7 +27,7 @@ LOCALE_DIR = "locale"
 
 class L10n < L10nGlade
   include GetText
-  GetText.bindtextdomain(PROG_NAME, LOCALE_DIR)
+  GetText.bindtextdomain(PROG_NAME, LOCALE_DIR, nil, "UTF-8")
 
   def on_hello_button_clicked(widget)
     @glade["entry"].text = _("Hello World")

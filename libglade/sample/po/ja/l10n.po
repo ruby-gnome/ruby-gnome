@@ -22,10 +22,6 @@ msgstr "こんにちわ世界"
 msgid "Ruby/Libglade2 Sample"
 msgstr "Ruby/Libglade2サンプル"
 
-#: l10n.glade:37
-msgid "*"
-msgstr ""
-
 #: l10n.glade:51
 msgid "Say Hello"
 msgstr "押してね"
