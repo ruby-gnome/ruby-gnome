@@ -1,7 +1,6 @@
 require 'mkmf'
 require 'shellwords'
 
-
 module PKGConfig
   @@cmd = with_config('pkg-config', 'pkg-config')
   if /mswin32/ =~ RUBY_PLATFORM and /^cl\b/ =~ Config::CONFIG['CC']
@@ -138,6 +137,11 @@ def set_output_lib(filename)
   end
 end
 
+alias :old_create_makefile :create_makefile
+def create_makefile(lib, src_prefix = nil)
+  $CFLAGS << " -I$(sitearchdir) "
+  old_create_makefile(lib, src_prefix)
+end
 
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
@@ -210,4 +214,3 @@ else
   STDOUT.print "no\n"
 end
 
-$CFLAGS += ' -I$(sitearchdir)'
