@@ -1,3 +1,7 @@
+2004-09-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Improved error handling.
+
 2004-09-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/glib2.rb: Add GLib::Log.set_error_domain for improvement
