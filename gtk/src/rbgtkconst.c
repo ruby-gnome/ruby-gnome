@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/12/16 15:39:55 $
+  $Date: 2002/12/25 14:33:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -15,7 +15,7 @@
 
 #define RBGTK_MAJOR_VERSION 0
 #define RBGTK_MINOR_VERSION 0
-#define RBGTK_MICRO_VERSION 1
+#define RBGTK_MICRO_VERSION 2
 
 /*
  * constants

@@ -1,5 +1,6 @@
 2002-12-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkconst.c: Increment the version information.
 	* src/rbgtkviewport.c: Change behavior of Gtk::Viewport.new to have to 
 	set hadj, vadj.
 	* src/rbgdkevent.c: Don't copy a created object in make_gdkevent. 

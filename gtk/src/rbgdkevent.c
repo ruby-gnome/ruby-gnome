@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/12/25 13:11:58 $
+  $Date: 2002/12/25 14:33:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,11 +22,12 @@ make_gdkevent(ev)
     GdkEvent *ev;
 {
     if (ev == NULL) return Qnil;
-    /* Shouldn't I copy object here ?
       return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, 
       gdk_event_copy(ev));
-		*/
+    /* Shouldn't I copy object here ? ... 
+	  * But errors were occured when I execute Ruby/GnomeCanvas sample.
     return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, ev);
+		*/
 }
 
 GdkEvent*
