@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: sakai $
-  $Date: 2002/06/10 18:51:43 $
+  $Date: 2002/08/03 11:24:42 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -16,7 +16,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-VALUE mGLib;
+extern VALUE mGLib;
 
 #ifdef __cplusplus
 }
