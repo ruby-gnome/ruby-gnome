@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:46:35 $
+  $Date: 2002/07/28 11:34:21 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -153,12 +153,12 @@ int_to_gvalue(VALUE from, GValue* to)
 {
     if (0)
         ;
-    else if (G_VALUE_HOLDS_ENUM(from))
+    else if (G_VALUE_HOLDS_ENUM(to))
         g_value_set_enum(to, NUM2INT(from));
-    else if (G_VALUE_HOLDS_FLAGS(from))
+    else if (G_VALUE_HOLDS_FLAGS(to))
         g_value_set_flags(to, NUM2INT(from));
     else {
-        g_value_set_int(to, NUM2INT(from));
+        g_value_set_int(to, NUM2INT(to));
     }
 }
 

@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:46:35 $
+  $Date: 2002/07/28 11:34:21 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -28,13 +28,12 @@ gobj_sig_connect(argc, argv, self)
     StringValue(sig);
 
     rclosure = g_rclosure_new(rb_f_lambda());
-    i = g_signal_connect_closure(rbgobj_get_gobject(self),
+    i = g_signal_connect_closure(RVAL2GOBJ(self),
                                  StringValuePtr(sig), rclosure, RTEST(after));
 
     return INT2FIX(i);
 }
 
-/* XXX */
 static VALUE
 gobj_sig_emit(argc, argv, self)
     int argc;
@@ -53,12 +52,15 @@ gobj_sig_emit(argc, argv, self)
     g_signal_query(NUM2INT(sig_id), &query);
 
     params = g_value_array_new(query.n_params + 1);
-    rbgobj_rvalue_to_gvalue(self, &(params->values[0]));
-    for (i = 0; i < query.n_params; i++)
+
+    g_value_init(&params->values[0], G_TYPE_OBJECT);
+    rbgobj_rvalue_to_gvalue(self, params->values);
+    for (i = 0; i < query.n_params; i++){
+        g_value_init(&(params->values[i+1]), query.param_types[i+1]);
         rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i), &(params->values[i+1]));
+    }
 
-    //g_value_init(&return_value, ); // XXX
-
+    g_value_init(&return_value, query.return_type);
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
 
     g_value_array_free(params);
@@ -83,8 +85,7 @@ static VALUE
 gobj_sig_emit_stop(self, sig_id)
     VALUE self, sig_id;
 {
-    g_signal_stop_emission(rbgobj_get_gobject(self),
-                           NUM2INT(sig_id), 0);
+    g_signal_stop_emission(RVAL2GOBJ(self), NUM2INT(sig_id), 0);
     return self;
 }
 
@@ -92,7 +93,7 @@ static VALUE
 gobj_sig_emit_stop_by_name(self, sig_name)
     VALUE self, sig_name;
 {
-    GObject* gobj = rbgobj_get_gobject(self);
+    GObject* gobj = RVAL2GOBJ(self);
     StringValue(sig_name);
     g_signal_stop_emission(gobj,
 						   g_signal_lookup(StringValuePtr(sig_name), G_OBJECT_TYPE(gobj)), 0);
@@ -103,7 +104,7 @@ static VALUE
 gobj_sig_handler_block(self, id)
 	VALUE self, id;
 {
-    g_signal_handler_block(rbgobj_get_gobject(self), NUM2INT(id));
+    g_signal_handler_block(RVAL2GOBJ(self), NUM2INT(id));
     return self;
 }
 
@@ -111,7 +112,7 @@ static VALUE
 gobj_sig_handler_unblock(self, id)
 	VALUE self, id;
 {
-    g_signal_handler_unblock(rbgobj_get_gobject(self), NUM2INT(id));
+    g_signal_handler_unblock(RVAL2GOBJ(self), NUM2INT(id));
     return self;
 }
 
@@ -119,7 +120,7 @@ static VALUE
 gobj_sig_handler_disconnect(self, id)
     VALUE self, id;
 {
-    g_signal_handler_disconnect(rbgobj_get_gobject(self), NUM2INT(id));
+    g_signal_handler_disconnect(RVAL2GOBJ(self), NUM2INT(id));
     return self;
 }
 

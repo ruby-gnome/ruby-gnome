@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 14:46:34 $
+  $Date: 2002/07/28 11:34:21 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -48,7 +48,7 @@ rbgobj_make_boxed(p, gtype)
     boxed_holder* holder;
     VALUE result;
 
-    result = Data_Make_Struct(boxed_class(gtype), boxed_holder,
+    result = Data_Make_Struct(rbgobj_boxed_class(gtype), boxed_holder,
                               NULL, boxed_free, holder);
     holder->type  = gtype;
     holder->boxed = g_boxed_copy(gtype, p);
@@ -101,7 +101,7 @@ boxed_to_ruby(const GValue* from)
     GType gtype = G_VALUE_TYPE(from);
     VALUE result;
 
-    result = Data_Make_Struct(boxed_class(gtype), boxed_holder,
+    result = Data_Make_Struct(rbgobj_boxed_class(gtype), boxed_holder,
                               NULL, boxed_free, holder);
     holder->type  = gtype;
     holder->boxed = boxed;

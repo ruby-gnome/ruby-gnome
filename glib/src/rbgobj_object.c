@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2002/07/27 15:00:34 $
+  $Date: 2002/07/28 11:34:21 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -234,6 +234,56 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
     }
 }
 
+void
+rbgobj_define_property_acccessors(klass)
+    VALUE klass;
+{
+    GType gtype;
+    guint n_properties;
+    GParamSpec** pspecs;
+    GObjectClass* oclass;
+    int i;
+
+    gtype  = rbgobj_lookup_class(klass)->gtype;
+    oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
+    pspecs = g_object_class_list_properties(oclass, &n_properties);
+
+    for (i = 0; i < n_properties; i++){
+        GParamSpec* pspec = pspecs[i];
+        char* prop_name;
+        char* p;
+
+        if (pspec->owner_type != gtype)
+            continue;
+
+        prop_name = g_strdup(pspec->name);
+        for (p = prop_name; *p; p++)
+            if (*p == '-')
+                *p = '_';
+
+        if (pspec->flags & G_PARAM_READABLE){
+            char* s = g_strdup_printf("def %s; get_property('%s'); end",
+                                      prop_name, pspec->name);
+            rb_funcall(klass, rb_intern("module_eval"), 3,
+                       rb_str_new2(s),
+                       rb_str_new2(__FILE__),
+                       INT2NUM(__LINE__ - 5));
+            g_free(s);
+        }
+        if (pspec->flags & G_PARAM_WRITABLE){
+            char* s = g_strdup_printf("def %s=(val); set_property('%s', val); val; end",
+                                      prop_name, pspec->name);
+            rb_funcall(klass, rb_intern("module_eval"), 3,
+                       rb_str_new2(s),
+                       rb_str_new2(__FILE__),
+                       INT2NUM(__LINE__ - 5));
+            g_free(s);
+        }
+    }
+
+    g_type_class_unref(oclass);
+}
+
 /**********************************************************************/
 
 struct param_setup_arg {
@@ -320,13 +370,22 @@ gobj_s_gobject_new(self, type, params_hash)
     VALUE self, type, params_hash;
 {
     GObject* gobj = rbgobj_gobject_new(type, params_hash);
-    VALUE result = rbgobj_get_value_from_gobject(gobj);
+    VALUE result = GOBJ2RVAL(gobj);
 
     // XXX: Ughhhhh
-    if (!strncmp("Gtk", g_type_name(G_OBJECT_TYPE(gobj)), 3))
-        gtk_object_sink(gobj);
-    else
-        g_object_unref(gobj);
+    {
+        static GType gtype_gtkobject = G_TYPE_INVALID;
+        if (!gtype_gtkobject)
+            gtype_gtkobject = g_type_from_name("GtkObject");
+
+        if (gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject)){
+            // We can't call gtk_object_sink() here.
+            // But hopefully someone will call it.
+            //gtk_object_sink(gobj);
+        } else {
+            g_object_unref(gobj);
+        }
+    }
 
     return result;
 }
@@ -381,25 +440,50 @@ gobj_get_property(self, prop_name)
 }
 
 static VALUE
+gobj_freeze_notify(self)
+    VALUE self;
+{
+    g_object_freeze_notify(RVAL2GOBJ(self));
+    return self;
+}
+
+static VALUE
+gobj_notify(self, property_name)
+    VALUE self, property_name;
+{
+    StringValue(property_name);
+    g_object_notify(RVAL2GOBJ(self), StringValuePtr(property_name));
+    return self;
+}
+
+static VALUE
+gobj_thaw_notify(self)
+    VALUE self;
+{
+    g_object_thaw_notify(RVAL2GOBJ(self));
+    return self;
+}
+
+static VALUE
 gobj_inspect(self)
     VALUE self;
 {
     gobj_holder* holder;
     char *cname = rb_class2name(CLASS_OF(self));
     char *s;
+    VALUE result;
 
     Data_Get_Struct(self, gobj_holder, holder);
 
-    if (holder->gobj) {
-        s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
-        sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self,
-                rbgobj_get_gobject(self));
-    } else {
-        s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
-        sprintf(s, "#<%s: destroyed>", cname);
-    }
+    if (!holder->destroyed)
+        s = g_strdup_printf("#<%s:%p ptr=%p>", cname, (void *)self, holder->gobj);
+    else
+        s = g_strdup_printf("#<%s:%p destroyed>", cname, (void *)self);
 
-    return rb_str_new2(s);
+    result = rb_str_new2(s);
+    g_free(s);
+
+    return result;
 }
 
 static VALUE
@@ -416,7 +500,7 @@ static VALUE
 gobj_get_g_type(self)
     VALUE self;
 {
-    return INT2NUM(G_OBJECT_TYPE(rbgobj_get_gobject(self)));
+    return INT2NUM(G_OBJECT_TYPE(RVAL2GOBJ(self)));
 }
 
 static VALUE
@@ -438,7 +522,7 @@ static VALUE
 gobj_smethod_added(self, id)
     VALUE self, id;
 {
-    GObject *obj = rbgobj_get_gobject(self);
+    GObject *obj = RVAL2GOBJ(self);
     const char* name = rb_id2name(SYM2ID(id));
     
     if (g_signal_lookup(name, G_OBJECT_TYPE(obj))) {
@@ -455,13 +539,13 @@ gobj_smethod_added(self, id)
 static VALUE
 _gobject_to_ruby(const GValue* from)
 {
-    return rbgobj_get_value_from_gobject(g_value_get_object(from));
+    return GOBJ2RVAL(g_value_get_object(from));
 }
 
 static void
 _gobject_from_ruby(VALUE from, GValue* to)
 {
-    g_value_set_object(to, rbgobj_get_gobject(from));
+    g_value_set_object(to, RVAL2GOBJ(from));
 }
 
 /**********************************************************************/
@@ -489,6 +573,9 @@ void Init_gobject_gobj()
     rb_define_method(rbgobj_cGObject, "set_property", gobj_set_property, 2);
     rb_define_method(rbgobj_cGObject, "get_property", gobj_get_property, 1);
     rb_define_alias(rbgobj_cGObject, "property", "get_property");
+    rb_define_method(rbgobj_cGObject, "freeze_notify", gobj_freeze_notify, 0);
+    rb_define_method(rbgobj_cGObject, "notify", gobj_notify, 1);
+    rb_define_method(rbgobj_cGObject, "thaw_notify", gobj_thaw_notify, 0);
 
     rb_define_method(rbgobj_cGObject, "initialize", gobj_initialize, -1);
     rb_define_method(rbgobj_cGObject, "g_type", gobj_get_g_type, 0);

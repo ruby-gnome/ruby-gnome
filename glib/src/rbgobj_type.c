@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/06/23 11:03:28 $
+  $Date: 2002/07/28 11:34:21 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -19,8 +19,18 @@ static VALUE gobject_type_hash;
 void
 rbgobj_register_class(const RGObjClassInfo* cinfo)
 {
-    VALUE data = Data_Wrap_Struct(rb_cData, NULL, NULL,
-                                  (RGObjClassInfo*)cinfo);
+    VALUE data;
+
+    if (!RTEST(rb_ary_includes(rb_mod_ancestors(cinfo->klass), rbgobj_cGObject)))
+        fprintf(stderr,
+                "rbgobj_register_class: %s is not a subclass of GLib::GObject\n",
+                rb_class2name(cinfo->klass));
+    if (G_TYPE_FUNDAMENTAL(cinfo->gtype) != G_TYPE_OBJECT)
+        fprintf(stderr,
+                "rbgobj_register_class: %s is not a subtype of GObject\n",
+                 g_type_name(cinfo->gtype));
+
+    data = Data_Wrap_Struct(rb_cData, NULL, NULL, (RGObjClassInfo*)cinfo);
     rb_ivar_set(cinfo->klass, id_class_info, data);
     rb_hash_aset(gobject_type_hash, INT2NUM(cinfo->gtype), cinfo->klass);
 }

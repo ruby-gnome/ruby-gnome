@@ -1,3 +1,19 @@
+2002-07-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobj_s_gobject_new): refine GtkObject-specific
+	stuff
+	* src/rbgobj_object.c: implement GObject#freeze_notify, GObject#notify,
+	GObject#thaw_notify
+	* src/rbgobj_object.c (gobj_inspect): use g_strdup_printf() instead of
+	ALLOCA_N() and sprintf()
+	* src/rbgobj_type.c (rbgobj_register_class): add some check
+	* src/*.c: replace rbgobj_get_value_from_gobject() with GOBJ2RVAL()
+	* src/*.c: replace rbgobj_get_gobject() with RVAL2GOBJ()
+	* src/rbgobj_object.c:
+	  void rbgobj_define_property_acccessors(VALUE klass);
+	is added. This function defines accessor methods for properties.
+	* src/rbgobj_signal.c (gobj_sig_emit): call g_value_init()
+
 2002-07-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_object.c: abolish rbgobj_make_gobject_auto_type() and
