@@ -1,3 +1,7 @@
+2005-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Fix intl.h error on MSVC++.
+
 2005-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Fix compiling error on MSVC+.
