@@ -5,10 +5,8 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.8 2004/03/23 12:03:51 mutoh Exp $
+  $Id: libglade2.rb,v 1.9 2004/04/28 18:53:15 mutoh Exp $
 =end
-
-$DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER = nil
 
 require 'gtk2'
 begin
@@ -17,14 +15,11 @@ rescue LoadError
   puts "Ruby/GNOME2 is not supported." if $DEBUG
 end
 require 'libglade2.so'
-
-if $DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER
-  GladeXML.set_custom_widget_handler(false)
-else
-  GladeXML.set_custom_widget_handler(true)
-end
+GladeXML.set_custom_widget_handler(true)
 
 class GladeXML
+  attr_accessor :handler_proc
+
   def canonical_handler(handler)
     return handler.gsub(/[-\s]/, "_")
   end

@@ -6,23 +6,14 @@
 #
 # Usage: ruby ruby-glade-create-template.rb yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.6 2004/03/05 16:34:24 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.7 2004/04/28 18:53:15 mutoh Exp $
 #
 # Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
-$DISABLE_RUBY_LIBGLADE_CUSTOM_WIDGET_HANDLER = true
 require 'libglade2'
 
-class GladeXML
-  attr_reader :signals
-  def connect(source, target, signal_name, handler, data, after)
-    @signals = [] unless @signals
-    @signals << [source.class.signal(signal_name), self.canonical_handler(handler)]
-  end
-end
-
-LG_VERSION = %Q[$Revision: 1.6 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.7 $].scan(/\d/).join(".")
 
 begin
   $EXIST_GNOME = true
@@ -51,7 +42,12 @@ else
   Gtk.init
 end
 
-glade = GladeXML.new(path) 
+GladeXML.set_custom_widget_handler(false)
+glade = GladeXML.new(path)
+signals = []
+glade.signal_autoconnect_full{|source, target, signal_name, handler, data, after|
+  signals << [source.class.signal(signal_name), glade.canonical_handler(handler)]
+}
 
 #
 # Print template.
@@ -70,8 +66,8 @@ class #{classname}
 INITIALIZE
 
 # Handler methods.
-if glade.signals
-  glade.signals.each do |signal, handler|
+if signals.size > 0
+  signals.each do |signal, handler|
     args = "widget"
     (0...signal.param_types.size).each do |i|
       args << ", arg#{i}"
@@ -86,19 +82,21 @@ puts "end\n\n"
 
 if $EXIST_GNOME
 puts <<FOOTER_GNOME
-#If you use only Ruby/GTK2 widgets, call Gtk.init here. 
-#Gtk.init
-#If you use Ruby/GNOME2 widgets, call Gnome::Program.new here. 
-Gnome::Program.new("YOUR_APPLICATION_NAME", "YOUR_APPLICATION_VERSION")
+if __FILE__ == $0
+  #If you use only Ruby/GTK2 widgets, call Gtk.init here. 
+  #Gtk.init
+  #If you use Ruby/GNOME2 widgets, call Gnome::Program.new here. 
+  Gnome::Program.new("YOUR_APPLICATION_NAME", "YOUR_APPLICATION_VERSION")
 FOOTER_GNOME
 else
-    puts "Gtk.init"
+  puts "Gtk.init"
 end
 puts <<FOOTER
 
-#Set correct path by yourself.
-#{classname}.new("#{path}")
-Gtk.main
+  #Set correct path by yourself.
+  #{classname}.new("#{path}")
+  Gtk.main
+end
 FOOTER
 
 if glade.custom_creation_methods.size > 0

@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/03/23 17:55:25 $
+  $Date: 2004/04/28 18:53:14 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -32,6 +32,43 @@ static const int RB_GLADE_XML_BUFFER = 2;
 static VALUE cGladeXML;
 static VALUE instances;
 
+                            
+static VALUE
+rb_gladexml_get_widget(VALUE self, VALUE nameString)
+{
+    GtkWidget *widget = glade_xml_get_widget(GLADE_XML(RVAL2GOBJ(self)), STR2CSTR(nameString));
+    return widget ? GOBJ2RVAL(widget) : Qnil;
+}
+
+static void
+xml_autoconnect(const gchar *handler_name, GObject *_source,
+                const gchar *signal_name, const gchar *signal_data,
+                GObject *_target, gboolean _after, gpointer user_data)
+{
+    VALUE self = (VALUE)user_data;
+    VALUE source, target, after, signal, handler, data;
+    
+    source = _source? GOBJ2RVAL(_source) : Qnil;
+    target = _target? GOBJ2RVAL(_target) : Qnil;
+    
+    signal = signal_name ? rb_str_new2(signal_name) : Qnil;
+    handler = handler_name ? rb_str_new2(handler_name) : Qnil;
+    data = signal_data ? rb_str_new2(signal_data) : Qnil;
+    after = CBOOL2RVAL(_after);
+    
+    rb_funcall(rb_iv_get(self, "@autoconnect_proc"), rb_intern("call"), 
+               6, source, target, signal, handler, data, after); 
+}
+
+static VALUE
+rb_gladexml_signal_autoconnect_full(VALUE self)
+{
+    rb_iv_set(self, "@autoconnect_proc", G_BLOCK_PROC());
+    glade_xml_signal_autoconnect_full(GLADE_XML(RVAL2GOBJ(self)), 
+                                      xml_autoconnect, (gpointer)self);
+    return self;
+}
+
 static void
 xml_connect(const gchar *handler_name, GObject *_source,
             const gchar *signal_name, const gchar *signal_data,
@@ -50,15 +87,7 @@ xml_connect(const gchar *handler_name, GObject *_source,
     
     rb_funcall(self, rb_intern("connect"), 6, source, target, signal, handler, data, after); 
 }
-
-static VALUE
-rb_gladexml_get_widget(VALUE self, VALUE nameString)
-{
-    GtkWidget *widget;
-    widget = glade_xml_get_widget(GLADE_XML(RVAL2GOBJ(self)), STR2CSTR(nameString));
-    return widget ? GOBJ2RVAL(widget) : Qnil;
-}
-
+       
 static VALUE
 rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -166,11 +195,12 @@ static gboolean custom_widget_supported = FALSE;
 static VALUE
 rb_gladexml_set_custom_widget_handler(VALUE self, VALUE setting)
 {
-    if (! custom_widget_supported && RTEST(setting)){
+    if (RTEST(setting)){
         glade_set_custom_handler(custom_widget_handler, NULL);
         custom_widget_supported = TRUE;
     } else {
         glade_set_custom_handler(disable_custom_widget_handler, NULL);
+        custom_widget_supported = FALSE;
     }
     return self;
 }
@@ -196,6 +226,7 @@ Init_libglade2()
     rb_global_variable(&instances);
 
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
+    rb_define_method(cGladeXML, "signal_autoconnect_full", rb_gladexml_signal_autoconnect_full, 0);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
     rb_define_alias(cGladeXML, "[]", "get_widget");

@@ -1,3 +1,12 @@
+2004-04-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Add GladeXML#handler_proc, #handler_proc=.
+	* bin/ruby-glade-create-template: Fix a bug for creating GladeXML 
+	which includes custom widget. 
+	Use GladeXML#signal_autoconnect_full instead of overriding GladeXML#connect.
+	Enclose a program part outside main class with if __FILE__ == $0 ... end.
+	* rbglade.c: Add GladeXML#signal_autoconnect_full.
+
 2004-03-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, rbglade.c: Call bind_textdomain_codeset 
