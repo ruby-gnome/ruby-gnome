@@ -1,5 +1,12 @@
 2003-08-25  Laurent Sansonetti  <laurent@datarescue.be>
 
+	* src/rbgst.h, src/rbgstplugin.c, src/rbgstpluginfeature.c: 
+	  Introduced is_valid_pluginfeature_type() and 
+	  instanciate_pluginfeature().
+	* src/rbgstregistry.c: Added a lot of methods + some constants. 
+	  Class is now finished.
+	* tests/tc_registry.rb: New file.
+	* tests/tc_plugin.rb: Moved 'test_registry' in tests/tc_registry.rb.
 	* src/rbgstmediainfo.c: Implemented Gst::MediaInfoTrack#con_streams.
 
 2003-08-24  Laurent Sansonetti  <laurent@datarescue.be>
