@@ -33,7 +33,7 @@ raise "can't find gdkkeysyms.h" if gdkincl.nil?
 have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
 have_func("XReadBitmapFileData")
-
+have_header('X11/Xlib.h')
 
 top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
 $CFLAGS += " " + ['glib/src', 'pango/src'].map{|d|

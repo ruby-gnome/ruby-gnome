@@ -1,3 +1,8 @@
+2003-07-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdk.c: Add Gdk.set_x_error_handler, Gdk.set_x_io_error_handler.
+	* extconf.rb: Check "X11/Xlib.h" 
+
 2003-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdisplay.c: Gdk::Display.new doesn't call 

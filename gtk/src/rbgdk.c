@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:07 $
+  $Author: mutoh $
+  $Date: 2003/07/28 18:03:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -34,6 +34,65 @@ void        gdk_set_program_class           (const char *program_class);
 gchar*      gdk_get_display                 (void);
 
 */
+
+#ifdef HAVE_X11_XLIB_H
+#include <X11/Xlib.h>
+#include <errno.h>
+
+static VALUE rb_x_error;
+static VALUE rb_x_io_error;
+
+static int
+rbgdk_x_error(display, error) 
+    Display* display;
+    XErrorEvent* error;
+{
+     gchar buf[64];
+                                                                                
+     XGetErrorText(display, error->error_code, buf, 63);
+
+     rb_funcall((VALUE)rb_x_error, id_call, 4, INT2NUM(error->serial),
+                INT2NUM(error->error_code), INT2NUM(error->request_code),
+                INT2NUM(error->minor_code));
+     return 0;
+}
+
+static int
+rbgdk_x_io_error(display) 
+    Display* display;
+{
+    int errno_saved = errno;
+    const gchar* disp;
+    const gchar* error;
+
+    disp = display ? DisplayString(display) : gdk_get_display_arg_name();
+    error = g_strerror(errno_saved);
+    
+    rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp), 
+               INT2NUM(errno), CSTR2RVAL(error));
+    return 0;
+}
+
+static VALUE
+gdk_s_set_x_error_handler(self)
+    VALUE self;
+{
+    rb_x_error = G_BLOCK_PROC();
+    G_RELATIVE(self, rb_x_error);
+    XSetErrorHandler(rbgdk_x_error);
+    return Qnil;
+}
+
+static VALUE
+gdk_s_set_x_io_error_handler(self)
+    VALUE self;
+{
+    rb_x_io_error = G_BLOCK_PROC();
+    G_RELATIVE(self, rb_x_io_error);
+    XSetIOErrorHandler(rbgdk_x_io_error);
+    return Qnil;
+}
+#endif
 
 static VALUE
 gdk_s_flush(self)
@@ -174,6 +233,10 @@ Init_gtk_gdk()
 {
     mGdk = rb_define_module("Gdk");
 
+#ifdef HAVE_X11_XLIB_H
+    rb_define_module_function(mGdk, "set_x_error_handler", gdk_s_set_x_error_handler , 0);
+    rb_define_module_function(mGdk, "set_x_io_error_handler", gdk_s_set_x_io_error_handler , 0);
+#endif
     rb_define_module_function(mGdk, "screen_width", gdk_s_screen_width, 0);
     rb_define_module_function(mGdk, "screen_width_mm", gdk_s_screen_width_mm, 0);
     rb_define_module_function(mGdk, "screen_height", gdk_s_screen_height, 0);
