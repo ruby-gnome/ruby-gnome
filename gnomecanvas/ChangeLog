@@ -1,5 +1,7 @@
 2004-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgnome-canvas-util.c: Added GnomeCanvas.join_gdk_to_art, 
+	.cap_gdk_to_art, GnomeCanvasItem#reset_bounds, #update_bbox.
 	* src/rbgnome-canvas-item.c: Fix critical assertion of 
 	gnome_canvas_request_redraw().
 

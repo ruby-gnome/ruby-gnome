@@ -128,12 +128,74 @@ canvas_s_polygon_to_point(klass, points, x, y)
     return rb_float_new(result);
 }
 
+/*
+void        gnome_canvas_render_svp         (GnomeCanvasBuf *buf,
+                                             ArtSVP *svp,
+                                             guint32 rgba);
+void        gnome_canvas_update_svp         (GnomeCanvas *canvas,
+                                             ArtSVP **p_svp,
+                                             ArtSVP *new_svp);
+void        gnome_canvas_update_svp_clip    (GnomeCanvas *canvas,
+                                             ArtSVP **p_svp,
+                                             ArtSVP *new_svp,
+                                             ArtSVP *clip_svp);
+*/
+static VALUE
+canvasitem_reset_bounds(self)
+    VALUE self;
+{
+    gnome_canvas_item_reset_bounds(GNOME_CANVAS_ITEM(RVAL2GOBJ(self)));
+    return self;
+}
+
+/*
+void        gnome_canvas_item_update_svp    (GnomeCanvasItem *item,
+                                             ArtSVP **p_svp,
+                                             ArtSVP *new_svp);
+void        gnome_canvas_item_update_svp_clip
+                                            (GnomeCanvasItem *item,
+                                             ArtSVP **p_svp,
+                                             ArtSVP *new_svp,
+                                             ArtSVP *clip_svp);
+void        gnome_canvas_item_request_redraw_svp
+                                            (GnomeCanvasItem *item,
+                                             const ArtSVP *svp);
+*/
+
+static VALUE
+canvasitem_update_bbox(self, x1, y1, x2, y2)
+    VALUE self, x1, y1, x2, y2;
+{
+    gnome_canvas_update_bbox(GNOME_CANVAS_ITEM(RVAL2GOBJ(self)), 
+                             NUM2INT(x1), NUM2INT(y1), 
+                             NUM2INT(x2), NUM2INT(y2));
+    return self;
+}
+
+/*
+void        gnome_canvas_buf_ensure_buf     (GnomeCanvasBuf *buf);
+*/
+
+static VALUE
+canvas_s_join_gdk_to_art(self, gdk_join)
+    VALUE self, gdk_join;
+{
+    return INT2NUM(gnome_canvas_join_gdk_to_art(RVAL2GENUM(gdk_join, GDK_TYPE_JOIN_STYLE)));
+}
+
+static VALUE
+canvas_s_cap_gdk_to_art(self, gdk_cap)
+    VALUE self, gdk_cap;
+{
+    return INT2NUM(gnome_canvas_cap_gdk_to_art(RVAL2GENUM(gdk_cap, GDK_TYPE_CAP_STYLE)));
+}
 
 void
 Init_gnome_canvas_util(mGnome)
     VALUE mGnome;
 {
     VALUE gnoCanvas = GTYPE2CLASS(GNOME_TYPE_CANVAS);
+    VALUE gnoCanvasItem = GTYPE2CLASS(GNOME_TYPE_CANVAS_ITEM);
 
     rbgobj_register_g2r_func(GNOME_TYPE_CANVAS_POINTS, cpoint_to_ruby);
     rbgobj_register_r2g_func(GNOME_TYPE_CANVAS_POINTS, cpoint_from_ruby);
@@ -142,4 +204,10 @@ Init_gnome_canvas_util(mGnome)
     rb_define_singleton_method(gnoCanvas, "get_miter_points", canvas_s_get_miter_points, 7);
     rb_define_singleton_method(gnoCanvas, "get_butt_points", canvas_s_get_butt_points, 6);
     rb_define_singleton_method(gnoCanvas, "polygon_to_point", canvas_s_polygon_to_point, 3);
+
+    rb_define_method(gnoCanvasItem, "reset_bounds", canvasitem_reset_bounds, 0);
+    rb_define_method(gnoCanvasItem, "update_bbox", canvasitem_update_bbox, 4);
+
+    rb_define_singleton_method(gnoCanvas, "join_gdk_to_art", canvas_s_join_gdk_to_art, 1);
+    rb_define_singleton_method(gnoCanvas, "cap_gdk_to_art", canvas_s_cap_gdk_to_art, 1);
 }
