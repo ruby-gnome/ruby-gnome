@@ -1,5 +1,6 @@
 2003-01-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/misc/dndtreeview.rb: Add a sample.
 	* sample/misc/dnd.rb: Modified.
 	* src/rbgtkselectiondata.c: Fix problem to create object. 
 
