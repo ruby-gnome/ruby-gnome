@@ -1,6 +1,7 @@
 2003-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Fix memory leaks of Gdk::Pixbuf#scale, #composite. 
+	(Bugs [814787])
 
 2003-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
