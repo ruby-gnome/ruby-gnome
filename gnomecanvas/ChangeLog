@@ -8,7 +8,7 @@
 
 2002-11-20  Masao Mutoh <mutoh@highway.ne.jp>
 
-   * extconf.rb: Remove checking either gtk2, libart2 are installed or not.
+	* extconf.rb: Remove checking either gtk2, libart2 are installed or not.
 
 2002-11-17  KUBO Takehiro  <kubo@jiubao.org>
 

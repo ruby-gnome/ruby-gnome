@@ -1,4 +1,66 @@
-Ruby-GNOME2-0.1
+Ruby-GNOME2-0.2
+  * Ruby/GLib
+    - Some bugfixes and some improvement internal.
+
+  * Ruby/GTK
+    - Some bugfixes and some improvement internal.
+    - Require Ruby/GdkPixbuf.
+    - Completed:
+       Gtk::TextIter, Gtk::Label, Gtk::Tooltips, Gtk::Viewport.
+    - Added and completed:
+       Gtk::TextAttributes, Gtk::IconFactroy, Gtk::IconSet, 
+       Gtk::IconSource, Gtk::IconSize, Gtk::Accelerator, 
+       Gtk::AccelKey, Gtk::AccelGroupEntry, Gtk::SizeGroup, 
+    - Added some methods, improved:
+       Gtk module, Gtk::TextBuffer, Gtk::*MenuItem, Gtk::*Button, 
+       Gtk::ItemFactory, Gtk::Widget, Gtk::TreeViewColumn, 
+       Gtk::Notebook, Gtk::Image, Gtk::AccelLabel, Gtk::Invisible, 
+       Gtk::Dialog, Gtk::TreePath, Gdk::Keyval
+       sample/misc/*button.rb, stock.rb 
+       sample/testgtk/savedposition.rb
+    - Added:
+       Gtk::Clipboard, Gtk::AccelGroup, Gtk::AccelMap
+       sample/misc/button2.rb, label.rb, dialog.rb, dialog2.rb, 
+       treeview.rb 
+    - Removed:
+       Gdk::Bitmap(use Gdk::Pixmap(depth = 1) instead)
+
+  * Ruby/GdkPixbuf
+    - Follow Ruby/GLib changes.
+    - Add Gdk::Pixdata.
+
+  * Ruby/GNOME
+    - Follow Ruby/GLib changes.
+    - Fix problems which Ruby/GNOME can't work with Ruby/GdkPixbuf.
+    - Code cleanup.
+    - Remove Bonobo codes(Move to Ruby/Bonobo).
+
+  * Ruby/GnomeCanvas
+    - Follow Ruby/GLib changes.
+    - Follow Ruby 1.8.0pre1, 1.6.8.
+
+  * Ruby/Libglade
+    - Follow Ruby/GLib changes.
+    - Add bin/ruby-glade-create-template(Create .rb from .glade)
+    - Add sample/treeview*
+    - Improve the behavior to work when handlers aren't undefined not 
+      to occur signal_proc.arity error.
+
+  * Ruby/Libart
+    - Follow Ruby/GLib changes.
+
+  * Ruby/GConf
+    - Follow Ruby/GLib changes.
+
+  * Misc
+    - Project website
+      http://ruby-gnome2.sourceforge.net/
+    - Ruby/GTK Tutorial
+      http://ruby-gnome2.sourceforge.net/tut/toc.htm
+    - Ruby-GNOME2 reference manual(This project has just started).
+      http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=Ruby-GNOME2
+
+Ruby-GNOME2-0.1 (2002-11-23)
   Initial release.
   * Ruby/GLib
   * Ruby/GTK
