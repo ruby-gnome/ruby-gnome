@@ -41,12 +41,12 @@ rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
     GstCaps *caps;
     int i;
 
-    caps = gst_caps_new_empty ();
+    caps = gst_caps_new_any ();
     if (caps != NULL) {
         for (i = 0; i < argc; i++)
             gst_caps_append_structure (caps, 
                                        ruby_hash_to_gst_structure (argv[i]));
-        RBGST_INITIALIZE (self, caps);
+        G_INITIALIZE (self, caps);
     }
     return Qnil;
 }
@@ -153,7 +153,7 @@ rb_gst_caps_is_empty (VALUE self)
 }
 
 /* Method: simple?
- * Returns: whether the caps contains multiple Gst::Structure objects.
+ * Returns: whether the caps contains multiple structure.
  */
 static VALUE
 rb_gst_caps_is_simple (VALUE self)
@@ -276,9 +276,8 @@ rb_gst_caps_union (VALUE self, VALUE caps)
  * Method: normalize
  *
  * Creates a new Gst::Caps that represents the same set of formats as self,
- * but contains no lists.  Each list is expanded into separate 
-Gst::Structure
- * objects.
+ * but contains no lists.  Each list is expanded into separate structures
+ * (as Hash objects).
  *
  * Returns: a new Gst::Caps object.
  */

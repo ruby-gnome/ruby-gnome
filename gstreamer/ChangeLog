@@ -1,3 +1,12 @@
+2005-03-21  Laurent Sansonetti  <lrz@gnome.org>
+
+	Problems reported by Bas Kloet.
+
+	* src/rbgstcaps.c: Fixed #initialize (GstCaps does not inherit from
+	GstObject anymore) and API reference still referencing the deprecated
+	Gst::Structure.
+	* src/rbgstpad.c (#caps, #each_caps): Fixed segfault.
+	
 2005-03-04  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstregistrypool.c, src/rbgstschedulerfactory.c, src/rbgsttag.c,

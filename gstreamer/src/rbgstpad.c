@@ -330,7 +330,10 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
 static VALUE
 rb_gst_pad_get_caps (VALUE self)
 {
-    return RGST_CAPS_NEW (gst_pad_get_caps (RGST_PAD (self))); 	
+    GstCaps *caps = gst_pad_get_caps (RGST_PAD (self));
+    return caps != NULL
+        ? RGST_CAPS_NEW (caps)
+        : Qnil;    
 }
 
 /*
@@ -344,7 +347,10 @@ rb_gst_pad_get_caps (VALUE self)
 static VALUE
 rb_gst_pad_each_caps (VALUE self)
 {
-	return rb_ary_yield (rb_gst_pad_get_caps (self));
+    VALUE ary = rb_gst_pad_get_caps (self);
+	if (!NIL_P (ary))
+        rb_ary_yield (ary);
+    return Qnil;
 }
 
 void
