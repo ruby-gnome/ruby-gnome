@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2002/08/20 14:51:08 $
+  $Date: 2002/08/29 13:07:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,19 +34,20 @@ gdkpmap_create_from_data(self, win, data, w, h, depth, fg, bg)
     return GOBJ2RVAL(gdk_pixmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)),
 					  RSTRING(data)->ptr,
 				      NUM2INT(w), NUM2INT(h), NUM2INT(depth),
-				      (GdkColor*)RVAL2BOXED(fg),
-					  (GdkColor*)RVAL2BOXED(bg)));
+				      (fg==Qnil)?NULL:(GdkColor*)RVAL2BOXED(fg),
+                      (bg==Qnil)?NULL:(GdkColor*)RVAL2BOXED(bg)));
 }
 
 static VALUE
-gdkpmap_create_from_xpm(self, win, tcolor, fname)
-    VALUE self, win, tcolor, fname;
+gdkpmap_create_from_xpm(self, win, color, fname)
+    VALUE self, win, color, fname;
 {
     GdkPixmap *new;
     GdkBitmap *mask;
 
     new = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), &mask,
-				     (GdkColor*)RVAL2BOXED(tcolor), STR2CSTR(fname));
+                          (color==Qnil)?NULL:(GdkColor*)RVAL2BOXED(color), 
+                          STR2CSTR(fname));
     if (!new) {
 		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
     }
@@ -68,9 +69,9 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
 		buf[i] = STR2CSTR(RARRAY(data)->ptr[i]);
     }
     new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)), 
-									   &mask, 
-									   (GdkColor*)RVAL2BOXED(tcolor), 
-									   buf);
+						   &mask, 
+						   (tcolor==Qnil)?NULL:(GdkColor*)RVAL2BOXED(tcolor),
+						   buf);
 
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }
@@ -85,7 +86,7 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
     new = gdk_pixmap_colormap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), 
 					      GDK_COLORMAP(RVAL2GOBJ(colormap)),
 					      &mask,
-					      (GdkColor*)RVAL2BOXED(tcolor),
+					      (tcolor==Qnil)?NULL:(GdkColor*)RVAL2BOXED(tcolor),
 					      STR2CSTR(fname));
     if (!new) {
 		rb_raise(rb_eArgError, "Pixmap not created from %s", STR2CSTR(fname));
@@ -111,7 +112,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
     new = gdk_pixmap_colormap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
 						GDK_COLORMAP(RVAL2GOBJ(colormap)),
 						&mask,
-						(GdkColor*)RVAL2BOXED(tcolor),
+						(tcolor==Qnil)?NULL:(GdkColor*)RVAL2BOXED(tcolor),
 						buf);
     return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
 }

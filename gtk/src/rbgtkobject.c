@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/08/29 13:07:01 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -414,8 +414,6 @@ Init_gtk_object()
     rb_define_method(gObject, "destroy", gobj_destroy, 0);
 
     /* child initialize */
-    Init_gtk_data();
-
     Init_gtk_accel_label();
     Init_gtk_adjustment();
     Init_gtk_alignment();

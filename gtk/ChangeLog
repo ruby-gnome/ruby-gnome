@@ -1,6 +1,17 @@
 2002-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgdkrectangle.c: divide file from rbgdkregion.c.
+	* src/rbgdkdraw.c: Remove gdkSegment. Remove Gdk::Drawable#geometry,
+	because it was only for Gdk::Window.
+	Add Gdk::Drawable#size, #depth.
+	* src/rbgdkpixmap.c: Bugfix for Gdk::Pixmap#create_* when tcolor is Qnil.
+	* src/rbgdkimage.c: Apply G_DEF_CLASS.
+	* src/rbgtkdata.c, src/rbgtkobject.c: Remove Gtk::Data. Remove file.
+	* src/rbgtkadjustment.c, src/rbgtktooltips.c: 
+	Separate file from rbgtkdata.c.
+
+2002-08-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkrectangle.c: Separate file from rbgdkregion.c.
 	Apply G_DEF_CLASS.
 	* src/rbgdkregion.c: Remove Gdk::Rectangle part.
 	* src/rbgdkfont.c, src/rbgtkselectiondata.c: Apply G_DEF_CLASS.

@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/08/29 13:06:59 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,9 +13,6 @@
 
 #include "global.h"
 
-/*
- * Gdk::Drawable
- */
 
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
@@ -183,7 +180,7 @@ gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
     VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
 {
     gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-				   get_gdkimage(image),
+				   GDK_IMAGE(RVAL2GOBJ(image)),
 				   NUM2INT(xsrc), NUM2INT(ysrc),
 				   NUM2INT(xdst), NUM2INT(ydst),
 				   NUM2INT(w), NUM2INT(h));
@@ -261,24 +258,20 @@ gdkdraw_draw_lines(self, gc, pnts)
 }
 
 static VALUE
-gdkdraw_get_geometry(self)
+gdkdraw_get_size(self)
     VALUE self;
 {
-    gint x, y, width, height, depth;
-
-    gdk_window_get_geometry(_SELF(self),
-							&x, &y, &width, &height, &depth);
-    return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
-					   INT2NUM(width), INT2NUM(height), INT2NUM(depth));
+    gint width, height;
+    gdk_drawable_get_size(_SELF(self), &width, &height);
+    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
-
-/*
- * Gdk::Segment
- */
-
-VALUE gdkSegment;
-
+static VALUE
+gdkdraw_get_depth(self)
+    VALUE self;
+{
+    return INT2NUM(gdk_drawable_get_depth(_SELF(self)));
+}
 
 void
 Init_gtk_gdk_draw()
@@ -305,5 +298,6 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_pnts, 2);
     rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
     rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
-    rb_define_method(gdkDrawable, "geometry", gdkdraw_get_geometry, 0);
+    rb_define_method(gdkDrawable, "size", gdkdraw_get_size, 0);
+    rb_define_method(gdkDrawable, "depth", gdkdraw_get_depth, 0);
 }

@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/08/29 07:24:40 $
+  $Date: 2002/08/29 13:07:00 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -49,7 +49,6 @@ extern VALUE mGtkDrag;
 extern VALUE mEditable;
 
 extern VALUE gRequisition;
-extern VALUE gData;
 
 extern VALUE mGdk;
 extern VALUE mGdkKeyval;
@@ -107,9 +106,6 @@ extern VALUE make_gdkregion(GdkRegion* region);
 extern GdkRegion* get_gdkregion(VALUE region);
 
 typedef void(*gdkdrawfunc)();
-
-extern VALUE make_gdkimage(GdkImage* image);
-extern GdkImage* get_gdkimage(VALUE image);
 
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
