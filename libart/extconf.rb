@@ -4,7 +4,7 @@ extconf.rb for libart extention library
 
 require "mkmf"
 
-config_cmd = with_config("libart-config", "libart-config")
+config_cmd = with_config("libart2-config", "libart2-config")
 
 begin
   version = `#{config_cmd} --version`
@@ -13,8 +13,8 @@ begin
     $CFLAGS += ' ' + `#{config_cmd} --cflags`.chomp
   end
 rescue
-  $libs = '-L/usr/local/lib -lart_lgpl -lm'
-  $CFLAGS = '-I/usr/local/include/gnome-1.0'
+  $libs = '-L/usr/local/lib -lart_lgpl_2 -lm'
+  $CFLAGS = '-I/usr/local/include/libart-2.0'
 end
 
 #
@@ -25,15 +25,15 @@ begin
   $mdir = "libart/src"
   Dir.chdir "src"
 
-  lib_ary = [ ["art_lgpl", "art_affine_identity"],
+  lib_ary = [ ["art_lgpl_2", "art_affine_identity"],
   ]
 
   lib_ary.each do |ary|
 
     if not have_library(ary[0], ary[1])
       msg = format("cannot found %s in %s.", ary[1], ary[0])
-      if ary[0] == "art_lgpl"
-        msg += " (or maybe `libart-config --lib' is incorrect...)"
+      if ary[0] == "art_lgpl_2"
+        msg += " (or maybe `libart2-config --lib' is incorrect...)"
       end
       raise Interrupt, msg
     end
@@ -51,7 +51,7 @@ begin
   # create Makefiles
   #
   srcdir = File.dirname($0) == "." ? "." : "../src"
-  create_makefile("libart", srcdir)
+  create_makefile("libart2", srcdir)
   raise Interrupt if not FileTest.exist? "Makefile"
 
   mfile = File.open("Makefile", "a")

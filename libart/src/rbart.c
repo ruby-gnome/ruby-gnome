@@ -4,7 +4,7 @@
   rbart.c -
 
   $Author: tkubo $
-  $Date: 2002/09/20 14:51:20 $
+  $Date: 2002/09/20 15:29:53 $
 
   Copyright (C) 2002  KUBO Takehiro <kubo@jiubao.org>
 
@@ -15,7 +15,7 @@
 VALUE mArt;
 
 void
-Init_libart()
+Init_libart2()
 {
     mArt = rb_define_module("Art");
 

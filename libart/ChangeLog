@@ -1,3 +1,8 @@
+2002-09-21  KUBO Takehiro  <kubo@jiubao.org>
+
+	* extconf.rb, src/rbart.c: Use libart2-config instead of libart-config.
+	Rename library name from libart to libart2.
+
 2002-09-01  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/Makefile: Remove file.
