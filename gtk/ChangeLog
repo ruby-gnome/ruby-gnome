@@ -1,5 +1,7 @@
 2002-12-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkviewport.c: Change behavior of Gtk::Viewport.new to have to 
+	set hadj, vadj.
 	* src/rbgdkevent.c: Don't copy a created object in make_gdkevent. 
 	* src/rbgtkadjustment.c:  Add Gtk::Adjustment#set_step_increment, #set_page_increment.
 	* sample/testgtk/treestore.rb: Fix warning when run ruby with -d option.
