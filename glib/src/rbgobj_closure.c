@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/24 16:47:25 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -52,8 +52,8 @@ static VALUE rclosure_marker_list;
 static void
 marker_remove(gpointer data, GClosure* closure)
 {
-    VALUE obj = (VALUE)data;
-    rb_hash_aset(rclosure_marker_list, obj, Qnil);
+    VALUE marker = (VALUE)data;
+    rb_hash_aset(rclosure_marker_list, marker, Qnil);
     ((GRClosure*)closure)->callback   = Qnil;
     ((GRClosure*)closure)->extra_args = Qnil;
 }
@@ -97,7 +97,45 @@ Init_rclosure()
 
 /**********************************************************************/
 
+static VALUE
+closure_initialize(self)
+    VALUE self;
+{
+    GClosure* closure = g_rclosure_new(rb_f_lambda(), Qnil);
+    G_INITIALIZE(self, closure);
+    g_closure_sink(closure);
+    return self;
+}
+
+static VALUE
+closure_in_marshal(self)
+    VALUE self;
+{
+    GClosure* closure = RVAL2BOXED(self);
+    return closure->in_marshal ? Qtrue : Qfalse;
+}
+
+static VALUE
+closure_is_invalid(self)
+    VALUE self;
+{
+    GClosure* closure = RVAL2BOXED(self);
+    return closure->is_invalid ? Qtrue : Qfalse;
+}
+
+static void
+Init_closure()
+{
+    VALUE cClosure = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+    rb_define_method(cClosure, "initialize", closure_initialize, 0);
+    rb_define_method(cClosure, "in_marshal?", closure_in_marshal, 0);
+    rb_define_method(cClosure, "invalid?", closure_is_invalid, 0);
+}
+
+/**********************************************************************/
+
 void Init_gobject_gclosure()
 {
     Init_rclosure();
+    Init_closure();
 }

@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2002/09/01 13:19:21 $
+  $Date: 2002/09/24 16:47:25 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -27,21 +27,24 @@ boxed_free(boxed_holder* p)
     const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(p->type);
     if (cinfo && cinfo->free)
         cinfo->free(p->boxed);
-    g_boxed_free(p->type, p->boxed);
+    if (p->boxed)
+        g_boxed_free(p->type, p->boxed);
     free(p);
 }
 
 /**********************************************************************/
+
 static VALUE
 rbgobj_boxed_s_allocate(klass)
-	VALUE klass;
+    VALUE klass;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
     if (cinfo->gtype == G_TYPE_BOXED)
         rb_raise(rb_eTypeError, "abstract class");
 
-	return rbgobj_create_object(klass);
+    return rbgobj_create_object(klass);
 }
+
 #ifdef HAVE_OBJECT_ALLOCATE
 #define rbgobj_boxed_s_new rb_class_new_instance
 #else
@@ -51,8 +54,8 @@ rbgobj_boxed_s_new(argc, argv, klass)
     VALUE* argv;
     VALUE klass;
 {
-	VALUE obj = rbgobj_boxed_s_allocate(klass);
-	rb_obj_call_init(obj, argc ,argv);
+    VALUE obj = rbgobj_boxed_s_allocate(klass);
+    rb_obj_call_init(obj, argc, argv);
     return obj;
 }
 #endif
@@ -63,9 +66,9 @@ rbgobj_boxed_create(klass)
 {
     boxed_holder* holder;
 
-	const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
+    const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
     VALUE result = Data_Make_Struct(klass, boxed_holder, 
-							  boxed_mark, boxed_free, holder);
+                                    boxed_mark, boxed_free, holder);
     holder->type = cinfo->gtype;
     holder->boxed = (gpointer)NULL;
 
@@ -118,17 +121,8 @@ rbgobj_make_boxed(p, gtype)
 static VALUE
 boxed_to_ruby(const GValue* from)
 {
-    gpointer boxed = g_value_dup_boxed(from);
-    boxed_holder* holder;
-    GType gtype = G_VALUE_TYPE(from);
-    VALUE result;
-
-    result = Data_Make_Struct(GTYPE2CLASS(gtype), boxed_holder,
-                              NULL, boxed_free, holder);
-    holder->type  = gtype;
-    holder->boxed = boxed;
-
-    return result;
+    return rbgobj_make_boxed(g_value_get_boxed(from),
+                             G_VALUE_TYPE(from));
 }
 
 static void

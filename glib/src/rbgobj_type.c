@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Date: 2002/09/24 16:47:25 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -151,17 +151,17 @@ rbgobj_lookup_class_by_gtype(gtype)
 
 VALUE
 rbgobj_define_class(gtype, name, module, mark, free)
-	GType gtype;
-	gchar* name;
-	VALUE module;
-	void* mark;
-	void* free;
+    GType gtype;
+    gchar* name;
+    VALUE module;
+    void* mark;
+    void* free;
 {
-        RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
-        cinfo->mark = mark;
-        cinfo->free = free;
-        rb_define_const(module, name, cinfo->klass);
-        return cinfo->klass;
+    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    cinfo->mark = mark;
+    cinfo->free = free;
+    rb_define_const(module, name, cinfo->klass);
+    return cinfo->klass;
 }
 
 /**********************************************************************/

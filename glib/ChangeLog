@@ -6,12 +6,16 @@
 	* src/rbgobj_object.c: implement GLib::Object.list_properties and
 	GLib::Object.find_property
 	* src/rbgobj_signal.c: implement signal_handler_is_connected?
+	* src/*.c: untabify
+	* src/rbgobj_boxed.c (boxed_free): don't call g_boxed_free() if not
+	initilized.
+	* src/rbgobj_closure.c: implement GLib::Closure
 
 2002-09-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: introduce GLib::Instantiatable as a common superclass of 
 	GLib::Object and GLib::ParamSpec. GLib:Instantiatable corresponds to
-	TypeInstance structure in C.
+	GTypeInstance structure in C.
 	* src/*.c: arrange APIs
 	* src/rbgobject.c (rbgobj_define_signal_constants): stop calling
 	g_class_ref(). Now caller must ensure that the class is initialized.

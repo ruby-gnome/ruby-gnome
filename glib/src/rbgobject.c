@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2002/09/23 15:55:32 $
+  $Date: 2002/09/24 16:47:25 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -131,16 +131,16 @@ rbgobj_create_object(klass)
 {
     VALUE result;
 
-	if (G_TYPE_FUNDAMENTAL(CLASS2GTYPE(klass)) == G_TYPE_BOXED){
-		result = rbgobj_boxed_create(klass);
+    if (G_TYPE_FUNDAMENTAL(CLASS2GTYPE(klass)) == G_TYPE_BOXED){
+        result = rbgobj_boxed_create(klass);
     } else {
-		gobj_holder* holder;
-		result = Data_Make_Struct(klass, gobj_holder, rbgobj_mark, rbgobj_free, holder);
-		holder->self  = result;
-		holder->gobj  = NULL;
-		holder->cinfo = NULL;
-		holder->destroyed = FALSE;
-	}
+        gobj_holder* holder;
+        result = Data_Make_Struct(klass, gobj_holder, rbgobj_mark, rbgobj_free, holder);
+        holder->self  = result;
+        holder->gobj  = NULL;
+        holder->cinfo = NULL;
+        holder->destroyed = FALSE;
+    }
     return result;
 }
 
@@ -157,7 +157,7 @@ rbgobj_gobject_initialize(obj, cobj)
     holder->cinfo = RVAL2CINFO(obj);
     holder->gobj  = (GObject*)cobj;
     holder->destroyed = FALSE;
-		
+
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref((GObject*)cobj, rbgobj_weak_notify, holder);
 
@@ -242,8 +242,8 @@ rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
 
 void
 rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
-	VALUE obj, hash_key;
-	ID    obj_ivar_id;
+    VALUE obj, hash_key;
+    ID    obj_ivar_id;
 {
     VALUE hash = Qnil;
 
