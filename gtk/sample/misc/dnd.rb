@@ -4,8 +4,8 @@
   Copyright (C) 2002 MUTOH Masao<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2002/11/05 10:39:11 $
-  $Id: dnd.rb,v 1.2 2002/11/05 10:39:11 mutoh Exp $
+  $Date: 2002/12/30 13:15:18 $
+  $Id: dnd.rb,v 1.3 2002/12/30 13:15:18 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -19,9 +19,9 @@ class TestWindow < Gtk::Window
 
   def initialize(title)
     super()
-    set_usize(300,128)
+    set_default_size(300,128)
     set_title(title)
-    signal_connect(Gtk::Window::SIGNAL_DESTROY) { Gtk.main_quit }
+    signal_connect("destroy") { Gtk.main_quit }
 
     box = Gtk::VBox.new(false, 0)
     add(box)
