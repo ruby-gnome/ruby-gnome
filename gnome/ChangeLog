@@ -1,6 +1,10 @@
+2002-07-28  KUBO Takehiro <kubo@jiubao.org>
+
+	* src/rbgnome.c: Bugfix for Gnome::init when options is not set.
+
 2002-07-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
-   	* src/rbgnome.c: Change value of Gnome::POPT_ARGS from "args" to "".
+	* src/rbgnome.c: Change value of Gnome::POPT_ARGS from "args" to "".
 	as suggested by Kazuhiro NISHIYAMA <zn@mbf.nifty.com>.
 
 2002-07-25  Masao Mutoh  <mutoh@highway.ne.jp>

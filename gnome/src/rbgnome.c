@@ -1,4 +1,4 @@
-/* $Id: rbgnome.c,v 1.4 2002/07/28 03:58:10 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.5 2002/07/28 04:35:25 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -134,6 +134,7 @@ gnome_s_init(in_argc, in_argv, self)
   }
 
   len = 0;
+  options = NULL;
   if (! NIL_P(rb_options)){
 	len = RARRAY(rb_options)->len;
 	options = ALLOCA_N(struct poptOption, len + 1);
