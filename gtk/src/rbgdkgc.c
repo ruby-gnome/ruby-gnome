@@ -3,8 +3,8 @@
 
   rbgtkalignment.c -
 
-  $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Author: sakai $
+  $Date: 2004/03/05 14:39:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 2001 Neil Conway
@@ -427,9 +427,9 @@ Init_gtk_gdk_gc()
 
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkGCX11", "GCX11", mGdk);
-#elif GDK_WINDOWING_WIN32
+#elif defined(GDK_WINDOWING_WIN32)
     G_DEF_CLASS3("GdkGCWin32", "GCWin32", mGdk);
-#elif GDK_WINDOWING_FB
+#elif defined(GDK_WINDOWING_FB)
     G_DEF_CLASS3("GdkGCFB", "GCFB", mGdk);
 #endif
 }

@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: mutoh $
-  $Date: 2004/02/22 16:49:13 $
+  $Author: sakai $
+  $Date: 2004/03/05 14:39:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -387,9 +387,9 @@ Init_gtk_gdk_draw()
     
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkDrawableImplX11", "DrawableImplX11", mGdk);
-#elif GDK_WINDOWING_WIN32
+#elif defined(GDK_WINDOWING_WIN32)
     G_DEF_CLASS3("GdkDrawableImplWin32", "DrawableImplWin32", mGdk);
-#elif GDK_WINDOWING_FB
+#elif defined(GDK_WINDOWING_FB)
     G_DEF_CLASS3("GdkDrawableFB", "DrawableFB", mGdk);
 #endif
     
