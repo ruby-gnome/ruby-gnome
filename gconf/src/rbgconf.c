@@ -20,7 +20,7 @@
  *
  * $Author: pcppopper $
  *
- * $Date: 2003/02/04 21:28:49 $
+ * $Date: 2003/04/12 23:35:57 $
  *
  *****************************************************************************/
 
@@ -51,6 +51,7 @@ Init_gconf2(void)
 	Init_gconf_schema(m_gconf);
 	Init_gconf_engine(m_gconf);
 	Init_gconf_client(m_gconf);
+	Init_gconf_metainfo(m_gconf);
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/
