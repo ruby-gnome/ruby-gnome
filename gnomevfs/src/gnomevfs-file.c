@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-27
+ * Latest Revision: 2003-07-31
  *
  *****************************************************************************/
 
@@ -121,7 +121,6 @@ create_symbolic_link(self, uri, reference)
 
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		tmp = RVAL2GVFSURI(uri);
-		/* XXX: or? */
 		gnome_vfs_uri_ref(tmp);
 	} else {
 		tmp = gnome_vfs_uri_new(RVAL2CSTR(uri));
@@ -483,7 +482,6 @@ file_each_byte(self)
 	for ( ; ; ) {
 		result = gnome_vfs_read(handle, &c, 1, &bytes_read);
 		if (result == GNOME_VFS_OK) {
-			/* XXX: hm...need the & 0xff? */
 			rb_yield(INT2FIX(c & 0xff));
 		} else if (result == GNOME_VFS_ERROR_EOF) {
 			break;
@@ -505,8 +503,7 @@ file_getc(self)
 
 	result = gnome_vfs_read(_SELF(self), &c, 1, &bytes_read);
 	if (result == GNOME_VFS_OK) {
-		/* XXX: need the & 0xff? */
-		return (c & 0xff);
+		return INT2FIX(c & 0xff);
 	} else if (result == GNOME_VFS_ERROR_EOF) {
 		return Qnil;
 	} else {
@@ -684,32 +681,6 @@ bytes_from_end(self)
 
 	gnome_vfs_file_info_unref(info);
 	return value;
-	/* XXX: is the above better?
-
-	result = gnome_vfs_tell(_SELF(self), &offset);
-	if (result == GNOME_VFS_OK) {
-		result = gnome_vfs_seek(_SELF(self), GNOME_VFS_SEEK_END, 0);
-		if (result == GNOME_VFS_OK) {
-			result = gnome_vfs_tell(_SELF(self), &end);
-			if (result == GNOME_VFS_OK) {
-				result = gnome_vfs_seek(_SELF(self),
-							GNOME_VFS_SEEK_START,
-							offset);
-				if (result == GNOME_VFS_OK) {
-					return ULL2NUM(end - offset);
-				} else {
-					return GVFSRESULT2RVAL(result);
-				}
-			} else {
-				return GVFSRESULT2RVAL(result);
-			}
-		}
-			return GVFSRESULT2RVAL(result);
-		}
-	}
-		return GVFSRESULT2RVAL(result);
-	}
-*/
 }
 
 static VALUE
@@ -922,6 +893,19 @@ Init_gnomevfs_file(m_gvfs)
 	rb_define_method(g_gvfs_file, "truncate", file_truncate, 1);
 	rb_define_method(g_gvfs_file, "write", file_write, 1);
 	rb_define_alias(g_gvfs_file, "<<", "write");
+
+	rb_define_const(g_gvfs_file,
+			"OPEN_NONE",
+			INT2FIX(GNOME_VFS_OPEN_NONE));
+	rb_define_const(g_gvfs_file,
+			"OPEN_READ",
+			INT2FIX(GNOME_VFS_OPEN_READ));
+	rb_define_const(g_gvfs_file,
+			"OPEN_WRITE",
+			INT2FIX(GNOME_VFS_OPEN_WRITE));
+	rb_define_const(g_gvfs_file,
+			"OPEN_RANDOM",
+			INT2FIX(GNOME_VFS_OPEN_RANDOM));
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

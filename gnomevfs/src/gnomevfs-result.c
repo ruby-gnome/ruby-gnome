@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-25
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
@@ -103,7 +103,8 @@ gnomevfs_result_to_rval(result)
 				return Qnil;
 			}
 		}
-		/* XXX: should raise error */
+		rb_raise(g_gvfs_error, "Unknown GnomeVFS Error (%d): %s",
+			 result, gnome_vfs_result_to_string(result));
 		return Qnil;
 	}
 }
@@ -112,15 +113,14 @@ void
 Init_gnomevfs_result(m_gvfs)
 	VALUE m_gvfs;
 {
-	VALUE gvfs_error;
 	int i, n;
 
-	gvfs_error = rb_define_class_under(m_gvfs, "Error",
+	g_gvfs_error = rb_define_class_under(m_gvfs, "Error",
 					   rb_eStandardError);
 	for (i = 0, n = G_N_ELEMENTS(s_gvfs_to_my); i < n; i++) {
 		s_gvfs_to_my[i].rb_class = rb_define_class_under(m_gvfs,
 						s_gvfs_to_my[i].rb_class_name,
-						gvfs_error);
+						g_gvfs_error);
 	}
 }
 

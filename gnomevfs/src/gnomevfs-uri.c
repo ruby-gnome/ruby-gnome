@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-27
+ * Latest Revision: 2003-07-31
  *
  *****************************************************************************/
 
@@ -78,23 +78,73 @@ uri_resolve_relative(self, ref)
 							   RVAL2CSTR(ref)));
 }
 
-/*
- * XXX: gnome_vfs_uri_append_string
- * XXX: gnome_vfs_uri_append_path
- * XXX: gnome_vfs_uri_append_file_name
- */
 static VALUE
-rbgnome_vfs_uri_append_string(self, str)
-  VALUE self, str;
+uri_append_string(self, str)
+	VALUE self, str;
 {
 	GnomeVFSURI *uri;
 	GnomeVFSURI *new_uri;
 
 	uri = _SELF(self);
 	new_uri = gnome_vfs_uri_append_string(uri, RVAL2CSTR(str));
-	gnome_vfs_uri_unref(uri);  // XXX: is this needed?
+	gnome_vfs_uri_unref(uri);
+	gnome_vfs_uri_ref(new_uri);
 	*uri = *new_uri;
 	return self;
+}
+
+static VALUE
+uri_append_path(self, str)
+	VALUE self, str;
+{
+	GnomeVFSURI *uri;
+	GnomeVFSURI *new_uri;
+
+	uri = _SELF(self);
+	new_uri = gnome_vfs_uri_append_path(uri, RVAL2CSTR(str));
+	gnome_vfs_uri_unref(uri);
+	gnome_vfs_uri_ref(new_uri);
+	*uri = *new_uri;
+	return self;
+}
+
+static VALUE
+uri_append_file_name(self, str)
+	VALUE self, str;
+{
+	GnomeVFSURI *uri;
+	GnomeVFSURI *new_uri;
+
+	uri = _SELF(self);
+	new_uri = gnome_vfs_uri_append_file_name(uri, RVAL2CSTR(str));
+	gnome_vfs_uri_unref(uri);
+	gnome_vfs_uri_ref(new_uri);
+	*uri = *new_uri;
+	return self;
+}
+
+static VALUE
+uri_append_string_ret(self, str)
+	VALUE self, str;
+{
+	return GVFSURI2RVAL(gnome_vfs_uri_append_string(_SELF(self), 
+							RVAL2CSTR(str)));
+}
+
+static VALUE
+uri_append_path_ret(self, str)
+	VALUE self, str;
+{
+	return GVFSURI2RVAL(gnome_vfs_uri_append_path(_SELF(self), 
+						      RVAL2CSTR(str)));
+}
+
+static VALUE
+uri_append_file_name_ret(self, str)
+	VALUE self, str;
+{
+	return GVFSURI2RVAL(gnome_vfs_uri_append_file_name(_SELF(self),
+							   RVAL2CSTR(str)));
 }
 
 static VALUE
@@ -382,6 +432,16 @@ Init_gnomevfs_uri(m_gvfs)
 			 uri_extract_short_path_name, 0);
 	rb_define_method(g_gvfs_uri, "same_fs?", uri_same_fs, 1);
 	rb_define_method(g_gvfs_uri, "exists?", uri_exists, 0);
+
+	rb_define_method(g_gvfs_uri, "append_string!", uri_append_string, 1);
+	rb_define_method(g_gvfs_uri, "append_path!", uri_append_path, 1);
+	rb_define_method(g_gvfs_uri, "append_file_name!", uri_append_file_name,
+			 1);
+	rb_define_method(g_gvfs_uri, "append_string", uri_append_string_ret,
+			 1);
+	rb_define_method(g_gvfs_uri, "append_path", uri_append_path_ret, 1);
+	rb_define_method(g_gvfs_uri, "append_file_name",
+			 uri_append_file_name_ret, 1);
 
 	G_DEF_SETTERS(g_gvfs_uri);
 }

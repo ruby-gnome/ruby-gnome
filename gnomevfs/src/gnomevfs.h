@@ -20,7 +20,7 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-26
+ * Latest Revision: 2003-08-04
  *
  *****************************************************************************/
 
@@ -51,17 +51,64 @@ extern "C" {
 
 /* Defines *******************************************************************/
 
+/* XXX: this should be a global Ruby-GNOME2 #define */
 #ifndef ULL2NUM
 # define ULL2NUM ULONG2NUM
 #endif
 
+/* GnomeVFS::Error handling functions */
+#define GVFSRESULT2RVAL(res)	(gnomevfs_result_to_rval(res))
+#define RAISE_IF_ERROR(res)	((void)gnomevfs_result_to_rval(res))
+#define CHECK_RESULT(res, ret)	\
+	(((res) == GNOME_VFS_OK) ? (ret) : GVFSRESULT2RVAL(res))
+
 /* Type Definitions **********************************************************/
+
+#define GNOMEVFS_TYPE_DIRECTORY	(gnome_vfs_directory_get_type())
+#define GNOMEVFS_TYPE_FILE	(gnome_vfs_file_get_type())
+#define GNOMEVFS_TYPE_FILE_INFO	(gnome_vfs_file_info_get_type())
+#define GNOMEVFS_TYPE_MONITOR	(gnome_vfs_monitor_get_type())
+#define GNOMEVFS_TYPE_URI	(gnome_vfs_uri_get_type())
+
+#define GVFSDIRECTORY2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_DIRECTORY))
+#define GVFSFILE2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_FILE))
+#define GVFSFILEINFO2RVAL(info)	(BOXED2RVAL(info, GNOMEVFS_TYPE_FILE_INFO))
+#define GVFSURI2RVAL(uri)	(BOXED2RVAL(uri, GNOMEVFS_TYPE_URI))
+
+#define RVAL2GVFSDIRECTORY(uri)	\
+	((GnomeVFSDirectoryHandle *)RVAL2BOXED(uri, GNOMEVFS_TYPE_DIRECTORY))
+#define RVAL2GVFSFILE(uri)	\
+	((GnomeVFSHandle *)RVAL2BOXED(uri, GNOMEVFS_TYPE_FILE))
+#define RVAL2GVFSFILEINFO(info)	\
+	((GnomeVFSFileInfo *)RVAL2BOXED(info, GNOMEVFS_TYPE_FILE_INFO))
+#define RVAL2GVFSURI(uri)	\
+	((GnomeVFSURI *)RVAL2BOXED(uri, GNOMEVFS_TYPE_URI))
 
 /* Function Declarations *****************************************************/
 
+GType gnome_vfs_directory_get_type(void);
+GType gnome_vfs_file_get_type(void);
+GType gnome_vfs_file_info_get_type(void);
+GType gnome_vfs_monitor_get_type(void);
+GType gnome_vfs_uri_get_type(void);
+
+VALUE gnomevfs_result_to_rval(GnomeVFSResult result);
+
+void Init_gnomevfs_directory(VALUE m_gvfs);
+void Init_gnomevfs_file(VALUE m_gvfs);
+void Init_gnomevfs_file_info(VALUE m_gvfs);
+void Init_gnomevfs_monitor(VALUE m_gvfs);
+void Init_gnomevfs_result(VALUE m_gvfs);
+void Init_gnomevfs_uri(VALUE m_gvfs);
+
 /* Global Variables **********************************************************/
 
-VALUE g_id_call;
+VALUE g_id_call;		/* rb_intern("call") */
+
+VALUE g_gvfs_uri;		/* GnomeVFS::URI */
+VALUE g_gvfs_error;		/* GnomeVFS::Error */
+VALUE g_gvfs_file;		/* GnomeVFS::File */
+VALUE g_gvfs_dir;		/* GnomeVFS::Directory */
 
 /* End of Multiple Inclusion Guard and extern "C" specifiers for C++ *********/
 

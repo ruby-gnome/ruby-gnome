@@ -20,14 +20,13 @@
  *
  * Author: Nikolai :: lone-star :: Weibull <lone-star@home.se>
  *
- * Latest Revision: 2003-07-26
+ * Latest Revision: 2003-07-27
  *
  *****************************************************************************/
 
 /* Includes ******************************************************************/
 
 #include "gnomevfs.h"
-/* XXX: argh...for egetgid() */
 #include <unistd.h>
 #include <sys/types.h>
 

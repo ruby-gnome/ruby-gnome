@@ -95,9 +95,7 @@ monitor_initialize(argc, argv, self)
 	GnomeVFSMonitorHandle *handle;
 	GnomeVFSResult result;
 
-	/* XXX: is this the way to do it? */
 	rb_scan_args(argc, argv, "2&", &uri, &type, &func);
-
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		text_uri = gnome_vfs_uri_to_string(RVAL2GVFSURI(uri),
 						   GNOME_VFS_URI_HIDE_NONE);

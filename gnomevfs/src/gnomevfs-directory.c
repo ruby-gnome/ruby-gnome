@@ -41,8 +41,50 @@
 
 /* Function Implementations **************************************************/
 
+static VALUE directory_each(VALUE self);
+static VALUE directory_close(VALUE self);
+
 static VALUE
-make_directory(argc, argv, self)
+directory_foreach(self, uri)
+	VALUE self, uri;
+{
+	VALUE dir;
+
+	dir = rb_funcall(g_gvfs_dir, rb_intern("open"), 1, uri);
+	rb_ensure(directory_each, dir, directory_close, dir);
+	return Qnil;
+}
+
+static VALUE
+directory_list_load(argc, argv, self)
+	int argc;
+	VALUE *argv;
+	VALUE self;
+{
+	VALUE uri, r_options, ary;
+	GnomeVFSFileInfoOptions options;
+	GList *list;
+	GnomeVFSResult result;
+
+	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
+		options = FIX2INT(r_options);
+	} else {
+		/* XXX: or? */
+		options = GNOME_VFS_FILE_INFO_DEFAULT;
+	}
+
+	result = gnome_vfs_directory_list_load(&list, RVAL2CSTR(uri), options);
+	if (result == GNOME_VFS_OK) {
+		ary = GLIST2ARY(list);
+		gnome_vfs_file_info_list_free(list);
+		return ary;
+	} else {
+		return GVFSRESULT2RVAL(result);
+	}
+}
+
+static VALUE
+directory_make_directory(argc, argv, self)
 	int argc;
 	VALUE *argv;
 	VALUE self;
@@ -69,7 +111,7 @@ make_directory(argc, argv, self)
 }
 
 static VALUE
-remove_directory(self, arg)
+directory_remove_directory(self, arg)
 	VALUE self, arg;
 {
 	GnomeVFSResult result;
@@ -82,6 +124,120 @@ remove_directory(self, arg)
 	}
 
 	return GVFSRESULT2RVAL(result);
+}
+
+static gboolean
+directory_visit_callback(rel_path, info, recursing_will_loop, data, recurse)
+	const gchar *rel_path;
+	GnomeVFSFileInfo *info;
+	gboolean recursing_will_loop;
+	gpointer data;
+	gboolean *recurse;
+{
+	*recurse = RTEST(rb_funcall((VALUE)data,
+				    g_id_call,
+				    GVFSFILEINFO2RVAL(info),
+				    recursing_will_loop));
+	return TRUE;
+}
+
+static VALUE
+directory_visit(argc, argv, self)
+	int argc;
+	VALUE *argv;
+	VALUE self;
+{
+	VALUE uri, info_options, visit_options;
+	VALUE func;
+
+	argc = rb_scan_args(argc, argv, "12&", &uri, &info_options,
+			     &visit_options, &func);
+	if (argc < 4) {
+		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
+	}
+	if (argc < 3) {
+		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
+	}
+
+	if (NIL_P(func)) {
+		func = G_BLOCK_PROC();
+	}
+	G_RELATIVE(self, func);
+
+	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+		RAISE_IF_ERROR(gnome_vfs_directory_visit_uri(RVAL2GVFSURI(uri),
+			FIX2INT(info_options),
+			FIX2INT(visit_options),
+			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
+			(gpointer)func));
+	} else {
+		RAISE_IF_ERROR(gnome_vfs_directory_visit(RVAL2CSTR(uri),
+			FIX2INT(info_options),
+			FIX2INT(visit_options),
+			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
+			(gpointer)func));
+	}
+
+	return Qnil;
+}
+
+static VALUE
+directory_visit_files(argc, argv, self)
+	int argc;
+	VALUE *argv;
+	VALUE self;
+{
+	VALUE uri, r_list, info_options, visit_options;
+	GList *list = NULL;
+	int i, n;
+	VALUE func;
+	GnomeVFSResult result;
+
+	argc = rb_scan_args(argc, argv, "22&", &uri, &r_list, &info_options,
+			     &visit_options, &func);
+	if (argc < 4) {
+		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
+	}
+	if (argc < 3) {
+		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
+	}
+
+	if (NIL_P(func)) {
+		func = G_BLOCK_PROC();
+	}
+	G_RELATIVE(self, func);
+
+	Check_Type(r_list, T_ARRAY);
+	n = RARRAY(r_list)->len;
+	for (i = 0; i < n; i++) {
+		VALUE s;
+
+		s = rb_ary_entry(r_list, i);
+		Check_Type(s, T_STRING);
+		list = g_list_append(list, RVAL2CSTR(s));
+	}
+
+	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+		result = gnome_vfs_directory_visit_files_at_uri(
+			RVAL2GVFSURI(uri),
+			list,
+			FIX2INT(info_options),
+			FIX2INT(visit_options),
+			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
+			(gpointer)func);
+	} else {
+		result = gnome_vfs_directory_visit_files(
+			RVAL2CSTR(uri),
+			list,
+			FIX2INT(info_options),
+			FIX2INT(visit_options),
+			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
+			(gpointer)func);
+	}
+
+	g_list_free(list);
+
+	return CHECK_RESULT(result, Qnil);
 }
 
 static GnomeVFSDirectoryHandle *
@@ -147,8 +303,9 @@ directory_initialize(argc, argv, self)
 
 static VALUE
 directory_close(self)
+	VALUE self;
 {
-	return GVFSRESULT2RVAL(gnome_vfs_directory_close(_SELF(self)));
+	return CHECK_RESULT(gnome_vfs_directory_close(_SELF(self)), Qnil);
 }
 
 static VALUE
@@ -212,192 +369,41 @@ directory_read_next(self)
 	}
 }
 
-static VALUE
-directory_foreach(self, uri)
-	VALUE self, uri;
-{
-	VALUE dir;
-
-	dir = rb_funcall(g_gvfs_dir, rb_intern("open"), 1, uri);
-	rb_ensure(directory_each, dir, directory_close, dir);
-	return Qnil;
-}
-
-static gboolean
-directory_visit_callback(rel_path, info, recursing_will_loop, data, recurse)
-	const gchar *rel_path;
-	GnomeVFSFileInfo *info;
-	gboolean recursing_will_loop;
-	gpointer data;
-	gboolean *recurse;
-{
-	*recurse = RTEST(rb_funcall((VALUE)data,
-				    g_id_call,
-				    GVFSFILEINFO2RVAL(info),
-				    recursing_will_loop));
-	return TRUE;
-}
-
-static VALUE
-directory_visit(argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
-{
-	VALUE uri, info_options, visit_options;
-	VALUE func;
-	GnomeVFSResult result;
-
-	argc = rb_scan_args(argc, argv, "12&", &uri, &info_options,
-			     &visit_options, &func);
-	if (argc < 4) {
-		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
-	}
-	if (argc < 3) {
-		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
-	}
-
-	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
-	}
-	G_RELATIVE(self, func);
-
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
-		result = gnome_vfs_directory_visit_uri(RVAL2GVFSURI(uri),
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
-			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
-			(gpointer)func);
-	} else {
-		result = gnome_vfs_directory_visit(RVAL2CSTR(uri),
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
-			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
-			(gpointer)func);
-	}
-
-	return GVFSRESULT2RVAL(result);
-}
-
-static VALUE
-directory_visit_files(argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
-{
-	VALUE uri, r_list, info_options, visit_options;
-	GList *list = NULL;
-	int i, n;
-	VALUE func;
-	GnomeVFSResult result;
-
-	argc = rb_scan_args(argc, argv, "22&", &uri, &r_list, &info_options,
-			     &visit_options, &func);
-	if (argc < 4) {
-		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
-	}
-	if (argc < 3) {
-		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
-	}
-
-	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
-	}
-	G_RELATIVE(self, func);
-
-	Check_Type(r_list, T_ARRAY);
-	n = RARRAY(r_list)->len;
-	for (i = 0; i < n; i++) {
-		VALUE s;
-
-		s = rb_ary_entry(r_list, i);
-		Check_Type(s, T_STRING);
-		list = g_list_append(list, RVAL2CSTR(s));
-	}
-
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
-		result = gnome_vfs_directory_visit_files_at_uri(
-			RVAL2GVFSURI(uri),
-			list,
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
-			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
-			(gpointer)func);
-	} else {
-		result = gnome_vfs_directory_visit_files(
-			RVAL2CSTR(uri),
-			list,
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
-			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
-			(gpointer)func);
-	}
-
-	/* XXX: should we call g_free to unmalloc the strings from above? */
-	g_list_free(list);
-
-	return GVFSRESULT2RVAL(result);
-}
-
-static VALUE
-directory_list_load(argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
-{
-	VALUE uri, r_options, ary;
-	GnomeVFSFileInfoOptions options;
-	GList *list;
-	GnomeVFSResult result;
-
-	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
-		options = FIX2INT(r_options);
-	} else {
-		/* XXX: or? */
-		options = GNOME_VFS_FILE_INFO_DEFAULT;
-	}
-
-	result = gnome_vfs_directory_list_load(&list, RVAL2CSTR(uri), options);
-	if (result == GNOME_VFS_OK) {
-		ary = GLIST2ARY(list);
-		gnome_vfs_file_info_list_free(list);
-		return ary;
-	} else {
-		return GVFSRESULT2RVAL(result);
-	}
-}
-
 void
 Init_gnomevfs_directory(m_gvfs)
 	VALUE m_gvfs;
 {
 	g_gvfs_dir = G_DEF_CLASS(GNOMEVFS_TYPE_DIRECTORY, "Directory", m_gvfs);
 
-	rb_define_singleton_method(g_gvfs_dir, "make_directory",
-				   make_directory, -1);
-	rb_define_singleton_method(g_gvfs_dir, "mkdir", make_directory, -1);
-	rb_define_singleton_method(g_gvfs_dir, "remove_directory",
-				   remove_directory, 1);
-	rb_define_singleton_method(g_gvfs_dir, "rmdir", remove_directory, 1);
-	rb_define_singleton_method(g_gvfs_dir, "unlink", remove_directory, 1);
-	rb_define_singleton_method(g_gvfs_dir, "delete", remove_directory, 1);
-	rb_define_singleton_method(g_gvfs_dir, "open", directory_open, -1);
+	rb_include_module(g_gvfs_dir, rb_mEnumerable);
+
+	rb_define_singleton_method(g_gvfs_dir, "delete",
+				   directory_remove_directory, 1);
+	rb_define_singleton_method(g_gvfs_dir, "entries", directory_list_load,
+				   -1);
 	rb_define_singleton_method(g_gvfs_dir, "foreach", directory_foreach, 1);
+	rb_define_singleton_method(g_gvfs_dir, "list_load",
+				   directory_list_load, -1);
+	rb_define_singleton_method(g_gvfs_dir, "make_directory",
+				   directory_make_directory, -1);
+	rb_define_singleton_method(g_gvfs_dir, "mkdir",
+				   directory_make_directory, -1);
+	rb_define_singleton_method(g_gvfs_dir, "remove_directory",
+				   directory_remove_directory, 1);
+	rb_define_singleton_method(g_gvfs_dir, "open", directory_open, -1);
+	rb_define_singleton_method(g_gvfs_dir, "rmdir",
+				   directory_remove_directory, 1);
+	rb_define_singleton_method(g_gvfs_dir, "unlink",
+				   directory_remove_directory, 1);
 	rb_define_singleton_method(g_gvfs_dir, "visit", directory_visit, -1);
 	rb_define_singleton_method(g_gvfs_dir, "visit_files",
 				   directory_visit_files, -1);
-	rb_define_singleton_method(g_gvfs_dir, "list_load",
-				   directory_list_load, -1);
-	/*
-	rb_define_singleton_method(g_gvfs_dir, "entries", directory_list_load,
-				   -1);
-				   */
 
 	rb_define_method(g_gvfs_dir, "initialize", directory_initialize, -1);
 	rb_define_method(g_gvfs_dir, "close", directory_close, 0);
 	rb_define_method(g_gvfs_dir, "each", directory_each, 0);
-	rb_define_method(g_gvfs_dir, "read_next", directory_read_next, 0);
-	rb_define_alias(g_gvfs_dir, "read", "read_next");
+	rb_define_method(g_gvfs_dir, "read", directory_read_next, 0);
+	rb_define_alias(g_gvfs_dir, "read_next", "read");
 
 	rb_define_const(g_gvfs_dir,
 			"VISIT_DEFAULT",
