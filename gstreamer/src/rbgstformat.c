@@ -82,11 +82,20 @@ static VALUE rb_gst_format_each(self)
 }
 
 /*
- *  Method: id -> aFixnum
+ *  Method: type_id -> aFixnum
  *
- *  Gets the unique id of this format, as an integer value.
+ *  Gets the type id of this format, as an integer value.
+ *  
+ *  Meaningful types are:
+ *    - Gst::Format::UNDEFINED
+ *    - Gst::Format::DEFAULT
+ *    - Gst::Format::BYTES
+ *    - Gst::Format::TIME
+ *    - Gst::Format::BUFFERS
+ *    - Gst::Format::PERCENT
+ *    - Gst::Format::UNITS
  */
-static VALUE rb_gst_format_get_id(self)
+static VALUE rb_gst_format_get_type_id(self)
     VALUE self;
 {
     GstFormat *format = RGST_FORMAT(self);
@@ -191,8 +200,8 @@ void Init_gst_format(void) {
     rb_define_singleton_method(c, "each", rb_gst_format_each, 0);
     rb_define_singleton_method(c, "find", rb_gst_format_find, 1);
 
-    rb_define_method(c, "id",   rb_gst_format_get_id, 0);
-    rb_define_method(c, "nick", rb_gst_format_get_nick, 0);
+    rb_define_method(c, "type_id", rb_gst_format_get_type_id, 0);
+    rb_define_method(c, "nick",    rb_gst_format_get_nick,    0);
     rb_define_method(c, "description", 
                      rb_gst_format_get_description, 0);
 
