@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 16:26:45 $
+  $Date: 2003/07/16 03:41:55 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -217,8 +217,11 @@ rbgobj_boxed_not_copy_obj(gtype)
 static VALUE
 boxed_to_ruby(const GValue* from)
 {
-    return rbgobj_make_boxed(g_value_get_boxed(from),
-                             G_VALUE_TYPE(from));
+    gpointer boxed = g_value_get_boxed(from);
+    if (!boxed)
+        return Qnil;
+    else
+        return rbgobj_make_boxed(boxed, G_VALUE_TYPE(from));
 }
 
 static void

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2003/04/13 08:35:33 $
+  $Date: 2003/07/16 03:41:55 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -495,7 +495,7 @@ register_type(int argc, VALUE* argv, VALUE self)
         VALUE parent = rb_funcall(self, rb_intern("superclass"), 0); // FIXME?
         const RGObjClassInfo* cinfo = rbgobj_lookup_class(parent);
         if (cinfo->klass != parent)
-            rb_raise(rb_eTypeError, "parent class isn't registered");
+            rb_raise(rb_eTypeError, "super class must be registered to GLib");
         parent_type = cinfo->gtype;
     }
 

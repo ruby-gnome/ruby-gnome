@@ -1,3 +1,24 @@
+2003-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed.c (boxed_to_ruby): convert NULL to nil.
+
+	* src/rbgobj_object.c (register_type): change error message:
+	"parent class" to "super class".
+
+	* src/rbgobj_param.c: remove Param#default=.
+	rename Param#defaults to Param#value_defaults?.
+	rename Paramcompare to Param#value_compare.
+	implement Param#value_validate, #value_convert, 
+	(value_defaults) initialize tmp.
+
+	* src/rbgobj_paramspecs.c: remove *#default and *#default_value.
+
+	* src/rbgobj_type.c:
+	(get_superclass): change to static function.
+	(GLib::Type#initialize): check if the given integer is valid GType
+	by using g_type_name().
+	(GLib::Type#==, #<, #>, #<=, #>=): return nil when uncomparable.
+
 2003-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/depend: use $(srcdir) to allow building in different directories.

@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 16:26:45 $
+  $Date: 2003/07/16 03:41:55 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -162,21 +162,24 @@ get_owner(VALUE self)
 }
 
 static VALUE
-value_set_default(VALUE self, VALUE val)
+value_default(VALUE self)
 {
     GValue tmp = {0,};
+    VALUE result;
+
     g_value_init(&tmp,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
-    rbgobj_rvalue_to_gvalue(val, &tmp);
     g_param_value_set_default(rbgobj_param_spec_get_struct(self), &tmp);
+    result = rbgobj_gvalue_to_rvalue(&tmp);
     g_value_unset(&tmp);
-    return val;
+
+    return result;
 }
 
 static VALUE
 value_defaults(VALUE self, VALUE val)
 {
-    GValue tmp;
+    GValue tmp = {0,};
     gboolean result;
 
     g_value_init(&tmp,
@@ -188,29 +191,52 @@ value_defaults(VALUE self, VALUE val)
     return result ? Qtrue : Qfalse;
 }
 
-/* fixme: return modified value */
 static VALUE
 value_validate(self, value)
     VALUE self, value;
 {
     GValue tmp = {0,};
-    gboolean result;
+    gboolean b;
 
     g_value_init(&tmp,
                  G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
     rbgobj_rvalue_to_gvalue(value, &tmp);
-    result = g_param_value_validate(rbgobj_param_spec_get_struct(self), &tmp);
+    b = g_param_value_validate(rbgobj_param_spec_get_struct(self), &tmp);
+    value = rbgobj_gvalue_to_rvalue(&tmp);
     g_value_unset(&tmp);
 
-    return result ? Qtrue : Qfalse;
+    return rb_ary_new3(2, b ? Qtrue : Qfalse, value);
 }
 
-#if 0
-gboolean	g_param_value_convert		(GParamSpec    *pspec,
-						 const GValue  *src_value,
-						 GValue	       *dest_value,
-						 gboolean	strict_validation);
-#endif
+static VALUE
+value_convert(int argc, VALUE* argv, VALUE self)
+{
+    VALUE src, strict_validation;
+    VALUE src_type;
+    VALUE result;
+    GValue src_value = {0,};
+    GValue dest_value = {0,};
+    gboolean b;
+
+    rb_scan_args(argc, argv, "21", &src, &src_type, &strict_validation);
+
+    g_value_init(&src_value, rbgobj_gtype_get(src_type));
+    g_value_init(&dest_value,
+                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+
+    rbgobj_rvalue_to_gvalue(src, &src_value);
+
+    b = g_param_value_convert(rbgobj_param_spec_get_struct(self),
+                              &src_value, &dest_value,
+                              RTEST(strict_validation));
+
+    result = rbgobj_gvalue_to_rvalue(&dest_value);
+
+    g_value_unset(&src_value);
+    g_value_unset(&dest_value);
+
+    return rb_ary_new3(2, b ? Qtrue : Qfalse, result);
+}
 
 static VALUE
 values_compare(self, a, b)
@@ -296,15 +322,17 @@ Init_gobject_gparam_spec()
 
     rb_define_method(cParamSpec, "flags", get_flags, 0);
     rb_define_method(cParamSpec, "value_type", get_value_type, 0);
-    //rb_define_alias(cParamSpec, "type", "value_type");
     rb_define_method(cParamSpec, "owner_type", get_owner_type, 0);
     rb_define_method(cParamSpec, "owner", get_owner, 0);
 
-    rb_define_method(cParamSpec, "default=", value_set_default, 1);
-    rb_define_method(cParamSpec, "defaults", value_defaults, 1);
+    rb_define_method(cParamSpec, "value_default", value_default, 0);
+    rb_define_alias(cParamSpec, "default", "value_default");
 
-    rb_define_method(cParamSpec, "validate", value_validate, 0);
-    rb_define_method(cParamSpec, "compare", values_compare, 2);
+    // FIXME: better name
+    rb_define_method(cParamSpec, "value_defaults?", value_defaults, 1);
+    rb_define_method(cParamSpec, "value_validate", value_validate, 1);
+    rb_define_method(cParamSpec, "value_convert", value_convert, -1);
+    rb_define_method(cParamSpec, "value_compare", values_compare, 2);
 
     /* for debugging */
     rb_define_method(cParamSpec, "ref_count", get_ref_count, 0);

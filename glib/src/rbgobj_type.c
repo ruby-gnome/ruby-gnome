@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 02:29:47 $
+  $Date: 2003/07/16 03:41:55 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -45,7 +45,7 @@ rbgobj_lookup_class(klass)
     rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
 }
 
-VALUE
+static VALUE
 get_superclass(gtype)
     GType gtype;
 {
@@ -231,6 +231,9 @@ type_initialize(self, type)
 
     if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
         gtype = NUM2UINT(type);
+        // FIXME: XXX
+        if (!g_type_name(gtype))
+            gtype = G_TYPE_INVALID;
     } else {
         StringValue(type);
         gtype = g_type_from_name(StringValuePtr(type));
@@ -238,7 +241,6 @@ type_initialize(self, type)
 
     if (G_TYPE_INVALID == gtype)
         rb_raise(rb_eArgError, "invalid type");
-    /* FIXME: more check */
 
     rb_ivar_set(self, id_gtype, UINT2NUM(gtype));
  
@@ -265,7 +267,7 @@ type_eq(self, other)
     VALUE self, other;
 {
     if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
-        return Qfalse;
+        return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
@@ -278,7 +280,7 @@ type_lt_eq(self, other)
     VALUE self, other;
 {
     if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
-        return Qfalse;
+        return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
@@ -291,7 +293,7 @@ type_gt_eq(self, other)
     VALUE self, other;
 {
     if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
-        return Qfalse;
+        return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
@@ -304,7 +306,7 @@ type_lt(self, other)
     VALUE self, other;
 {
     if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
-        return Qfalse;
+        return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
@@ -317,7 +319,7 @@ type_gt(self, other)
     VALUE self, other;
 {
     if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
-        return Qfalse;
+        return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
@@ -634,7 +636,6 @@ Init_type()
     _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
     _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
     _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
-//    _register_fundamental_gtype_to_klass(G_TYPE_POINTER, rb_cObject);
 }
 
 /**********************************************************************/

@@ -4,7 +4,7 @@
   rbgobj_paramspecs.c -
 
   $Author: sakai $
-  $Date: 2003/07/13 16:26:45 $
+  $Date: 2003/07/16 03:41:55 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -12,13 +12,6 @@
 **********************************************************************/
 
 #include "global.h"
-
-#define DEF_DEFAULT_VALUE_FUNC(typename, to_ruby, pspec_cast) \
-static VALUE \
-typename##_default_value(self) \
-{ \
-    return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->default_value); \
-} \
 
 #define DEF_NUMERIC_PSPEC_METHODS_FUNC(pspec_type, typename, from_ruby, to_ruby, pspec_cast) \
 static VALUE \
@@ -57,9 +50,7 @@ VALUE typename##_range(self) \
 { \
     pspec_type* pspec = pspec_cast(rbgobj_param_spec_get_struct(self)); \
     return rb_range_new(pspec->minimum, pspec->maximum, 0); \
-} \
-DEF_DEFAULT_VALUE_FUNC(typename, to_ruby, pspec_cast)
-
+}
 
 DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecChar, char, NUM2INT, INT2FIX, G_PARAM_SPEC_CHAR)
 DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecUChar, uchar, NUM2UINT, INT2FIX, G_PARAM_SPEC_UCHAR)
@@ -104,9 +95,6 @@ boolean_initialize(self, name, nick, blurb, default_value, flags)
     return Qnil;
 }
 
-static inline VALUE to_bool(gboolean val){return val ? Qtrue : Qfalse;}
-DEF_DEFAULT_VALUE_FUNC(boolean, to_bool, G_PARAM_SPEC_BOOLEAN)
-
 static VALUE
 unichar_initialize(self, name, nick, blurb, default_value, flags)
    VALUE self, name, nick, blurb, default_value, flags;
@@ -123,8 +111,6 @@ unichar_initialize(self, name, nick, blurb, default_value, flags)
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
 }
-
-DEF_DEFAULT_VALUE_FUNC(unichar, INT2NUM, G_PARAM_SPEC_UNICHAR)
 
 static VALUE
 enum_initialize(self, name, nick, blurb, enum_type, default_value, flags)
@@ -144,8 +130,6 @@ enum_initialize(self, name, nick, blurb, enum_type, default_value, flags)
     return Qnil;
 }
 
-DEF_DEFAULT_VALUE_FUNC(enum, INT2FIX, G_PARAM_SPEC_ENUM)
-
 static VALUE
 flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
    VALUE self, name, nick, blurb, flags_type, default_value, flags;
@@ -164,8 +148,6 @@ flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
     return Qnil;
 }
 
-DEF_DEFAULT_VALUE_FUNC(flags, INT2FIX, G_PARAM_SPEC_FLAGS)
-
 static VALUE
 string_initialize(self, name, nick, blurb, default_value, flags)
    VALUE self, name, nick, blurb, default_value, flags;
@@ -183,8 +165,6 @@ string_initialize(self, name, nick, blurb, default_value, flags)
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
 }
-
-DEF_DEFAULT_VALUE_FUNC(string, rbg_cstr2rval, G_PARAM_SPEC_STRING)
 
 static VALUE
 param_initialize(self, name, nick, blurb, param_type, flags)
@@ -282,9 +262,13 @@ Init_gobject_gparamspecs()
     rb_define_method(c, "minimum", typename##_minimum, 0); \
     rb_define_method(c, "maximum", typename##_maximum, 0); \
     rb_define_method(c, "range", typename##_range, 0); \
+  } G_STMT_END
+
+#if 0
     rb_define_method(c, "default_value", typename##_default_value, 0); \
     rb_define_alias(c, "default", "default_value"); \
-  } G_STMT_END
+
+#endif
 
     c = G_DEF_CLASS(G_TYPE_PARAM_CHAR, "Char", cParamSpec);
     DEF_NUMERIC_PSPEC_METHODS(c, char);
@@ -318,31 +302,20 @@ Init_gobject_gparamspecs()
     DEF_NUMERIC_PSPEC_METHODS(c, double);
     rb_define_method(c, "epsilon", double_epsilon, 0);
 
-
     c = G_DEF_CLASS(G_TYPE_PARAM_BOOLEAN, "Boolean", cParamSpec);
     rb_define_method(c, "initialize", boolean_initialize, 5);
-    rb_define_method(c, "default_value", boolean_default_value, 0);
-    rb_define_alias(c, "default", "default_value");
 
     c = G_DEF_CLASS(G_TYPE_PARAM_UNICHAR, "UniChar", cParamSpec);
     rb_define_method(c, "initialize", unichar_initialize, 5);
-    rb_define_method(c, "default_value", unichar_default_value, 0);
-    rb_define_alias(c, "default", "default_value");
 
     c = G_DEF_CLASS(G_TYPE_PARAM_ENUM, "Enum", cParamSpec);
     rb_define_method(c, "initialize", enum_initialize, 6);
-    rb_define_method(c, "default_value", enum_default_value, 0);
-    rb_define_alias(c, "default", "default_value");
 
     c = G_DEF_CLASS(G_TYPE_PARAM_FLAGS, "Flags", cParamSpec);
     rb_define_method(c, "initialize", flags_initialize, 6);
-    rb_define_method(c, "default_value", flags_default_value, 0);
-    rb_define_alias(c, "default", "default_value");
 
     c = G_DEF_CLASS(G_TYPE_PARAM_STRING, "String", cParamSpec);
     rb_define_method(c, "initialize", string_initialize, 5);
-    rb_define_method(c, "default_value", string_default_value, 0);
-    rb_define_alias(c, "default", "default_value");
 
     c = G_DEF_CLASS(G_TYPE_PARAM_PARAM, "Param", cParamSpec);
     rb_define_method(c, "initialize", param_initialize, 5);
