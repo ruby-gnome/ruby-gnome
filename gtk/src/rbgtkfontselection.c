@@ -59,6 +59,8 @@ fs_set_preview_text(self, text)
     return Qnil;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 fs_set_filter(self, filter_type, font_type, foundries,
               weights, slants, setwidths, spacings, charsets)
@@ -145,6 +147,8 @@ fs_set_filter(self, filter_type, font_type, foundries,
     return Qnil;
 }
 
+#endif
+
 void Init_gtk_font_selection()
 {
     gFontSelection = rb_define_class_under(mGtk, "FontSelection", gNotebook);
@@ -155,9 +159,13 @@ void Init_gtk_font_selection()
     rb_define_method(gFontSelection, "font_name=", fs_set_font_name, 1);
     rb_define_method(gFontSelection, "preview_text", fs_get_preview_text, 0);
     rb_define_method(gFontSelection, "preview_text=", fs_set_preview_text, 1);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gFontSelection, "filter=", fs_set_filter, 10);
+#endif
 
     rb_define_alias(gFontSelection, "set_font_name", "font_name=");
     rb_define_alias(gFontSelection, "set_preview_text", "preview_text=");
+#if GTK_MAJOR_VERSION < 2
     rb_define_alias(gFontSelection, "set_filter", "filter=");
+#endif
 }

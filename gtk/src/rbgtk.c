@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:02 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -436,7 +436,9 @@ get_gtk_type(gtkobj)
     else if GTK_IS_WIDGET(gtkobj) klass = gWidget;
     else if GTK_IS_ADJUSTMENT(gtkobj) klass = gAdjustment;
     else if GTK_IS_TOOLTIPS(gtkobj) klass = gTooltips;
+#if GTK_MAJOR_VERSION < 2
     else if GTK_IS_DATA(gtkobj) klass = gData;
+#endif
     else if GTK_IS_OBJECT(gtkobj) klass = gObject;
     else {
 	rb_raise(rb_eTypeError, "not a Gtk object");
@@ -823,6 +825,12 @@ idle()
     return Qtrue;
 }
 
+static
+void remove_idle(VALUE arg)
+{
+    gtk_idle_remove(NUM2UINT(arg));
+}
+
 #endif /* !USE_POLL_FUNC */
  
 /*
@@ -869,6 +877,6 @@ void Init_gtk_gtk()
 #ifdef USE_POLL_FUNC
     g_main_set_poll_func(rbgtk_poll);
 #else
-    gtk_idle_add((GtkFunction)idle, 0);
+    rb_set_end_proc(&idle_remove, UINT2NUM(gtk_idle_add((GtkFunction)idle, 0)));
 #endif
 }

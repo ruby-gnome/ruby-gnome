@@ -4,7 +4,7 @@
   rbgtkrange.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:08 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -42,6 +42,8 @@ range_set_adj(self, adj)
 
     return self;
 }
+
+#if GTK_MAJOR_VERSION < 2
 
 static VALUE
 range_draw_bg(self)
@@ -157,6 +159,8 @@ range_default_vmotion(self, xdelta, ydelta)
     return self;
 }
 
+#endif
+
 void Init_gtk_range()
 {
   gRange = rb_define_class_under(mGtk, "Range", gWidget);
@@ -164,6 +168,7 @@ void Init_gtk_range()
   rb_define_method(gRange, "get_adjustment", range_get_adj, 0);
   rb_define_method(gRange, "set_update_policy", range_set_update_policy, 1);
   rb_define_method(gRange, "set_adjustment", range_set_adj, 1);
+#if GTK_MAJOR_VERSION < 2
   rb_define_method(gRange, "draw_background", range_draw_bg, 0);
   rb_define_method(gRange, "draw_trough", range_draw_trough, 0);
   rb_define_method(gRange, "draw_slider", range_draw_slider, 0);
@@ -178,6 +183,7 @@ void Init_gtk_range()
   rb_define_method(gRange, "default_vtrough_click", range_default_vtrough_click, 2);
   rb_define_method(gRange, "default_hmotion", range_default_hmotion, 2);
   rb_define_method(gRange, "default_vmotion", range_default_vmotion, 2);
+#endif
 
   /* child init */
   Init_gtk_scale();

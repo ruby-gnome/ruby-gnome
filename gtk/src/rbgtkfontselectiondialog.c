@@ -59,6 +59,8 @@ fsd_set_preview_text(self, text)
     return Qnil;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 fsd_set_filter(self, filter_type, font_type, foundries, weights,
                slants, setwidths, spacings, charsets)
@@ -146,6 +148,8 @@ fsd_set_filter(self, filter_type, font_type, foundries, weights,
     return Qnil;
 }
 
+#endif
+
 static VALUE
 fsd_get_font_selection(self)
     VALUE self;
@@ -221,7 +225,9 @@ void Init_gtk_font_selection_dialog()
     rb_define_method(gFontSelectionDialog, "font_name=", fsd_set_font_name, 1);
     rb_define_method(gFontSelectionDialog, "preview_text", fsd_get_preview_text, 0);
     rb_define_method(gFontSelectionDialog, "preview_text=", fsd_set_preview_text, 1);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gFontSelectionDialog, "filter=", fsd_set_filter, 8);
+#endif
     rb_define_method(gFontSelectionDialog, "font_selection", fsd_get_font_selection, 0);
     rb_define_method(gFontSelectionDialog, "ok_button", fsd_get_ok_button, 0);
     rb_define_method(gFontSelectionDialog, "cancel_button", fsd_get_cancel_button, 0);
@@ -229,5 +235,7 @@ void Init_gtk_font_selection_dialog()
 
     rb_define_alias(gFontSelectionDialog, "set_font_name", "font_name=");
     rb_define_alias(gFontSelectionDialog, "set_preview_text", "preview_text=");
+#if GTK_MAJOR_VERSION < 2
     rb_define_alias(gFontSelectionDialog, "set_filter", "filter=");
+#endif
 }

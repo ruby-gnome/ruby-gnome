@@ -4,7 +4,7 @@
   rbgtkpaned.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -47,6 +47,7 @@ paned_pack2(self, child, resize, shrink)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
 static VALUE
 paned_handle_size(self, size)
     VALUE self, size;
@@ -54,6 +55,7 @@ paned_handle_size(self, size)
     gtk_paned_handle_size(GTK_PANED(get_widget(self)), NUM2INT(size));
     return self;
 }
+#endif
 
 static VALUE
 paned_gutter_size(self, size)
@@ -123,7 +125,9 @@ void Init_gtk_paned()
     rb_define_method(gPaned, "add2", paned_add2, 1);
     rb_define_method(gPaned, "pack1", paned_pack1, 3);
     rb_define_method(gPaned, "pack2", paned_pack2, 3);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gPaned, "set_handle_size", paned_handle_size, 1);
+#endif
     rb_define_method(gPaned, "set_gutter_size", paned_gutter_size, 1);
     rb_define_method(gPaned, "set_position", paned_set_position, 1);
     rb_define_method(gPaned, "child1", paned_child1, 0);
@@ -133,7 +137,9 @@ void Init_gtk_paned()
     rb_define_method(gPaned, "child2_resize?", paned_child2_resize, 0);
     rb_define_method(gPaned, "child2_shrink?", paned_child2_shrink, 0);
 
+#if GTK_MAJOR_VERSION < 2
     rb_define_alias(gPaned, "handle_size=", "set_handle_size");
+#endif
     rb_define_alias(gPaned, "gutter_size=", "set_gutter_size");
     rb_define_alias(gPaned, "position=", "set_position");
 

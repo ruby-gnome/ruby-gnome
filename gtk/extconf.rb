@@ -8,30 +8,14 @@ require "mkmf"
 # detect GTK+ configurations
 #
 if /mswin32/ !~ PLATFORM
-  config_cmds = ["gtk-config"]
-  while /^--/ =~ ARGV[0]
-    ARGV.shift
-  end
-  if ARGV.size > 0
-    config_cmds.unshift(ARGV[0])
-  end
-  
-  begin
-    config_cmds.each do |config_cmd|
-      version = `#{config_cmd} --version`
-      if not version.chomp.empty?
-	config_libs, config_cflags = "--libs", "--cflags"
-	$LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
-	$libs = libs.join(' ') + ' ' + $libs
-	$CFLAGS = `#{config_cmd} #{config_cflags}`.chomp
-	break
-      end
-    end
-  rescue
-    $LDFLAGS = '-L/usr/X11R6/lib -L/usr/local/lib'
-    $CFLAGS = '-I/usr/X11R6/lib -I/usr/local/include'
-    $libs = '-lm -lc'
-  end
+  config_cmd = ENV.fetch("GTK_CONFIG"){
+    "gtk-config"
+    # "pkg-config gtk+-x11-2.0"
+  }
+  config_libs, config_cflags = "--libs", "--cflags"
+  $LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
+  $libs = libs.join(' ') + ' ' + $libs
+  $CFLAGS = `#{config_cmd} #{config_cflags}`.chomp
 else
   $LDFLAGS = '-L/usr/local/lib'
   $CFLAGS = '-I/usr/local/include/gdk/win32 -I/usr/local/include/glib -I/usr/local/include'
@@ -65,9 +49,9 @@ begin
   if /cygwin|mingw/ =~ PLATFORM
     $CFLAGS += " -fnative-struct -DNATIVE_WIN32"
   elsif /mswin32/ !~ PLATFORM
-    lib_ary = [ ["X11", "XOpenDisplay"],
-                ["Xext", "XShmQueryVersion"],
-                ["Xi", "XOpenDevice"],
+    lib_ary = [ #["X11", "XOpenDisplay"],
+                #["Xext", "XShmQueryVersion"],
+                #["Xi", "XOpenDevice"],
 #                ["glib", "g_print"],
 #                ["gdk", "gdk_init"],
 #                ["gtk", "gtk_init"],

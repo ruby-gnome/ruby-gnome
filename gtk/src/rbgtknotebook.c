@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -448,6 +448,8 @@ get_notepage(page)
     return c_page;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 notepage_child(self)
     VALUE self;
@@ -472,6 +474,7 @@ notepage_menu_label(self)
     return get_value_from_gobject(GTK_OBJECT(label));
 }
 
+#endif
 
 void Init_gtk_notebook()
 {
@@ -522,9 +525,11 @@ void Init_gtk_notebook()
 
     gNotePage = rb_define_class_under(mGtk, "NotebookPage", rb_cData);
 
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gNotePage, "child", notepage_child, 0);
     rb_define_method(gNotePage, "tab_label", notepage_tab_label, 0);
     rb_define_method(gNotePage, "menu_label", notepage_menu_label, 0);
+#endif
 
     Init_gtk_font_selection();
 }

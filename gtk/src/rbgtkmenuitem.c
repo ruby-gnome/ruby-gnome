@@ -4,7 +4,7 @@
   rbgtkmenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:09 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -42,6 +42,8 @@ mitem_set_submenu(self, child)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 mitem_set_placement(self, place)
     VALUE self, place;
@@ -60,6 +62,8 @@ mitem_configure(self, show_toggle, show_submenu)
 			    NUM2INT(show_submenu));
     return self;
 }
+
+#endif
 
 static VALUE
 mitem_select(self)
@@ -101,8 +105,10 @@ void Init_gtk_menu_item()
 
     rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
     rb_define_method(gMenuItem, "set_submenu", mitem_set_submenu, 1);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gMenuItem, "set_placement", mitem_set_placement, 1);
     rb_define_method(gMenuItem, "configure", mitem_configure, 2);
+#endif
     rb_define_method(gMenuItem, "select", mitem_select, 0);
     rb_define_method(gMenuItem, "deselect", mitem_deselect, 0);
     rb_define_method(gMenuItem, "activate", mitem_activate, 0);

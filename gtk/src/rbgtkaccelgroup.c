@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:06 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -19,6 +19,8 @@ gaccelgrp_s_new(self)
 {
     return make_gtkaccelgrp(gtk_accel_group_new());
 }
+
+#if GTK_MAJOR_VERSION < 2
 
 static VALUE
 gaccelgrp_s_get_default(self)
@@ -37,13 +39,21 @@ gaccelgrp_activate(self, key, modtype)
     return self;
 }
 
+#endif
+
 static VALUE
 gaccelgrp_s_activate(self, obj, key, modtype)
     VALUE self, obj, key, modtype;
 {
+#if GTK_MAJOR_VERSION < 2
     gtk_accel_groups_activate(get_gobject(obj),
                               NUM2INT(key),
                               NUM2INT(modtype));
+#else
+    gtk_accel_groups_activate(G_OBJECT(get_gobject(obj)),
+                              NUM2INT(key),
+                              NUM2INT(modtype));
+#endif
     return self;
 }
 
@@ -51,8 +61,13 @@ static VALUE
 gaccelgrp_attach(self, obj)
     VALUE self, obj;
 {
-    gtk_accel_group_attach(get_gtkaccelgrp(self),
+#if GTK_MAJOR_VERSION < 2
+     gtk_accel_group_attach(get_gtkaccelgrp(self),
                            GTK_OBJECT(get_gobject(obj)));
+#else
+     _gtk_accel_group_attach(get_gtkaccelgrp(self),
+                           G_OBJECT(get_gobject(obj)));
+#endif
     return Qnil;
 }
 
@@ -60,8 +75,13 @@ static VALUE
 gaccelgrp_detach(self, obj)
     VALUE self, obj;
 {
+#if GTK_MAJOR_VERSION < 2
     gtk_accel_group_detach(get_gtkaccelgrp(self),
                            GTK_OBJECT(get_gobject(obj)));
+#else
+    _gtk_accel_group_detach(get_gtkaccelgrp(self),
+                            G_OBJECT(get_gobject(obj)));
+#endif
     return Qnil;
 }
 
@@ -80,6 +100,8 @@ gaccelgrp_unlock(self)
     gtk_accel_group_unlock(get_gtkaccelgrp(self));
     return Qnil;
 }
+
+#if GTK_MAJOR_VERSION < 2
 
 static VALUE
 gaccelgrp_add(self, key, modtype, flag, obj, strsig)
@@ -105,22 +127,29 @@ gaccelgrp_remove(self, key, modtype, obj)
     return Qnil;
 }
 
+#endif
+
 void Init_gtk_accel_group()
 {
     gAccelGroup = rb_define_class_under(mGtk, "AccelGroup", rb_cData);
     rb_define_singleton_method(gAccelGroup, "new", gaccelgrp_s_new, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_singleton_method(gAccelGroup, "get_default", gaccelgrp_s_get_default, 0);
+#endif
     rb_define_singleton_method(gAccelGroup, "activate", gaccelgrp_s_activate, 3);
     rb_define_method(gAccelGroup, "attach", gaccelgrp_attach, 1);
     rb_define_method(gAccelGroup, "detach", gaccelgrp_detach, 1);
     rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);
     rb_define_method(gAccelGroup, "unlock", gaccelgrp_unlock, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gAccelGroup, "add", gaccelgrp_add, 5);
     rb_define_method(gAccelGroup, "remove", gaccelgrp_remove, 3);
     rb_define_method(gAccelGroup, "activate", gaccelgrp_activate, 2);
-    rb_define_method(gAccelGroup, "activate", gaccelgrp_activate, 2);
+#endif
     rb_define_const(gAccelGroup, "ACCEL_VISIBLE", INT2NUM(GTK_ACCEL_VISIBLE));
+#if GTK_MAJOR_VERSION < 2
     rb_define_const(gAccelGroup, "ACCEL_SIGNAL_VISIBLE", INT2NUM(GTK_ACCEL_SIGNAL_VISIBLE));
+#endif
     rb_define_const(gAccelGroup, "ACCEL_LOCKED", INT2NUM(GTK_ACCEL_LOCKED));
     rb_define_const(gAccelGroup, "ACCEL_MASK", INT2NUM(GTK_ACCEL_MASK));
 }

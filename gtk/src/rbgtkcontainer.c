@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:11 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -91,6 +91,8 @@ cont_each(self)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 cont_focus(self, direction)
     VALUE self, direction;
@@ -99,6 +101,8 @@ cont_focus(self, direction)
 			(GtkDirectionType)NUM2INT(direction));
     return self;
 }
+
+#endif
 
 static VALUE
 cont_set_focus_child(self, child)
@@ -165,7 +169,9 @@ void Init_gtk_container()
     rb_define_method(gContainer, "remove", cont_remove, 1);
     rb_define_method(gContainer, "foreach", cont_foreach, -1);
     rb_define_method(gContainer, "each", cont_each, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gContainer, "focus", cont_focus, 1);
+#endif
     rb_define_method(gContainer, "children", cont_children, 0);
     rb_define_method(gContainer, "set_focus_child", cont_set_focus_child, 1);
     rb_define_method(gContainer, "set_focus_vadjustment", cont_set_focus_vadjustment, 1);

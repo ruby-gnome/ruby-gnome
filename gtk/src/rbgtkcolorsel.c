@@ -4,7 +4,7 @@
   rbgtkcolorsel.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -34,6 +34,7 @@ colorsel_set_update_policy(self, policy)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
 static VALUE
 colorsel_set_opacity(self, opacity)
     VALUE self, opacity;
@@ -42,6 +43,7 @@ colorsel_set_opacity(self, opacity)
 				    RTEST(opacity));
     return self;
 }
+#endif
 
 static VALUE
 colorsel_set_color(self, color)
@@ -53,7 +55,11 @@ colorsel_set_color(self, color)
 
     Check_Type(color, T_ARRAY);
     colorsel = GTK_COLOR_SELECTION(get_widget(self));
+#if GTK_MAJOR_VERSION >= 2
+    if (gtk_color_selection_get_has_opacity_control(colorsel)) {
+#else
     if (colorsel->use_opacity) {
+#endif
 	arylen = 4;
     } else {
 	arylen = 3;
@@ -83,7 +89,11 @@ colorsel_get_color(self)
 
     colorsel = GTK_COLOR_SELECTION(get_widget(self));
     gtk_color_selection_get_color(colorsel, buf);
+#if GTK_MAJOR_VERSION == 2
+    if (gtk_color_selection_get_has_opacity_control(colorsel)) {
+#else
     if (colorsel->use_opacity) {
+#endif
 	arylen = 4;
     } else {
 	arylen = 3;
@@ -106,7 +116,9 @@ void Init_gtk_color_selection()
 
     rb_define_method(gColorSel, "initialize", colorsel_initialize, 0);
     rb_define_method(gColorSel, "set_update_policy", colorsel_set_update_policy, 1);
+#if GTK_MAJOR_VERSION != 2
     rb_define_method(gColorSel, "set_opacity", colorsel_set_opacity, 1);
+#endif
     rb_define_method(gColorSel, "set_color", colorsel_set_color, 1);
     rb_define_method(gColorSel, "get_color", colorsel_get_color, 0);
 }

@@ -4,7 +4,7 @@
   rbgtkbbox.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:01 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -13,6 +13,7 @@
 
 #include "global.h"
 
+#if GTK_MAJOR_VERSION < 2
 static VALUE
 bbox_get_child_size_default(self)
     VALUE self;
@@ -51,6 +52,8 @@ bbox_set_child_ipadding_default(self, ipad_x, ipad_y)
 					      NUM2INT(ipad_y));
     return Qnil;
 }
+
+#endif
 
 static VALUE
 bbox_get_spacing(self)
@@ -134,6 +137,7 @@ void Init_gtk_button_box()
 {
     gBBox = rb_define_class_under(mGtk, "ButtonBox", gBox);
 
+#if GTK_MAJOR_VERSION < 2
     rb_define_singleton_method(gBBox, "get_child_size_default",
 			       bbox_get_child_size_default, 0);
     rb_define_singleton_method(gBBox, "get_child_ipadding_default",
@@ -142,6 +146,7 @@ void Init_gtk_button_box()
 			       bbox_set_child_size_default, 2);
     rb_define_singleton_method(gBBox, "set_child_ipadding_default",
 			       bbox_set_child_ipadding_default, 2);
+#endif
     rb_define_method(gBBox, "get_spacing", bbox_get_spacing, 0);
     rb_define_method(gBBox, "get_layout", bbox_get_layout, 0);
     rb_define_method(gBBox, "get_child_size", bbox_get_child_size, 0);

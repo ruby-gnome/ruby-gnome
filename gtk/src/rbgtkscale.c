@@ -4,7 +4,7 @@
   rbgtkscale.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:09 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -39,6 +39,8 @@ scale_set_value_pos(self, pos)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 scale_value_width(self)
     VALUE self;
@@ -56,6 +58,8 @@ scale_draw_value(self)
     return self;
 }
 
+#endif
+
 void Init_gtk_scale()
 {
   gScale = rb_define_class_under(mGtk, "Scale", gRange);
@@ -63,8 +67,10 @@ void Init_gtk_scale()
   rb_define_method(gScale, "set_digits", scale_set_digits, 1);
   rb_define_method(gScale, "set_draw_value", scale_set_draw_value, 1);
   rb_define_method(gScale, "set_value_pos", scale_set_value_pos, 1);
+#if GTK_MAJOR_VERSION < 2
   rb_define_method(gScale, "value_width", scale_value_width, 0);
   rb_define_method(gScale, "draw_value", scale_draw_value, 0);
+#endif
 
   /* child init */
   Init_gtk_hscale();

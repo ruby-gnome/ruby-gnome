@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:04 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -236,6 +236,7 @@ ifact_s_path_from_widget(self, widget)
     return rb_str_new2(gtk_item_factory_path_from_widget(get_widget(widget)));
 }
 
+#if GTK_MAJOR_VERSION < 2
 static VALUE
 ifact_s_parse_rc(self, file_name)
     VALUE self, file_name;
@@ -251,6 +252,7 @@ ifact_s_parse_rc_string(self, rc_string)
     gtk_item_factory_parse_rc_string(STR2CSTR(rc_string));
     return Qnil;
 }
+#endif
 
 void Init_gtk_itemfactory()
 {
@@ -283,8 +285,10 @@ void Init_gtk_itemfactory()
  
     rb_define_singleton_method(gItemFactory, "path_from_widget",
                                ifact_s_path_from_widget, 1);
+#if GTK_MAJOR_VERSION < 2
     rb_define_singleton_method(gItemFactory, "parse_rc",
                                ifact_s_parse_rc, 1);
     rb_define_singleton_method(gItemFactory, "parse_rc_string",
                                ifact_s_parse_rc_string, 1);
+#endif
 }

@@ -4,7 +4,7 @@
   rbgtklayout.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:05 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -109,6 +109,8 @@ layout_thaw(self)
     return self;
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 layout_get_xoffset(self)
     VALUE self;
@@ -122,6 +124,8 @@ layout_get_yoffset(self)
 {
     return INT2NUM(GTK_LAYOUT(get_widget(self))->yoffset);
 }
+
+#endif
 
 static VALUE
 layout_get_bin_window(self)
@@ -150,8 +154,10 @@ Init_gtk_layout()
     rb_define_method(gLayout, "vadjustment=", layout_set_vadjustment, 1);
     rb_define_method(gLayout, "freeze", layout_freeze, 0);
     rb_define_method(gLayout, "thaw", layout_thaw, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gLayout, "xoffset", layout_get_xoffset, 0);
     rb_define_method(gLayout, "yoffset", layout_get_yoffset, 0);
+#endif
     rb_define_method(gLayout, "bin_window", layout_get_bin_window, 0);
 
     /* Signals */

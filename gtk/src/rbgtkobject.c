@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:03 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -64,7 +64,11 @@ arg_set_value(arg, value)
 	*GTK_RETLOC_STRING(*arg) = STR2CSTR(value);
 	break;
 
+#if GTK_MAJOR_VERSION < 2
     case GTK_TYPE_OBJECT:
+#else
+    case G_TYPE_OBJECT:
+#endif
 	*GTK_RETLOC_OBJECT(*arg) = get_gobject(value);
 	break;
 	    
@@ -73,7 +77,11 @@ arg_set_value(arg, value)
 	break;
 
     case GTK_TYPE_BOXED:
+#if GTK_MAJOR_VERSION < 2
 	if (arg->type == GTK_TYPE_GDK_EVENT)
+#else
+	if (arg->type == GDK_TYPE_EVENT)
+#endif
 	    GTK_VALUE_BOXED(*arg) = get_gdkevent(value);
 #ifdef GTK_TYPE_GDK_COLORMAP
 	else if (arg->type == GTK_TYPE_GDK_COLORMAP)
@@ -111,12 +119,14 @@ arg_set_value(arg, value)
 	    goto unsupported;
 
     unsupported:
+#if GTK_MAJOR_VERSION < 0
     case GTK_TYPE_INVALID:
     case GTK_TYPE_FOREIGN:
     case GTK_TYPE_CALLBACK:
     case GTK_TYPE_ARGS:
     case GTK_TYPE_SIGNAL:
     case GTK_TYPE_C_CALLBACK:
+#endif
     default:
 	rb_raise(rb_eTypeError, "unsupported return type %s (fundamental type %s)",
 		 gtk_type_name(arg->type),
@@ -401,6 +411,8 @@ gobj_inspect(self)
     return rb_str_new2(s);
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 gobj_sig_n_emissions(self, sig_id)
     VALUE self, sig_id;
@@ -416,6 +428,8 @@ gobj_sig_n_emissions_by_name(self, sig_name)
     return INT2NUM(gtk_signal_n_emissions_by_name(get_gobject(self),
                                                   STR2CSTR(sig_name)));
 }
+
+#endif
 
 /* TODO */
 static VALUE
@@ -589,18 +603,22 @@ void Init_gtk_object()
 {
     gObject = rb_define_class_under(mGtk, "Object", rb_cObject);
 
+#if GTK_MAJOR_VERSION < 2
     /* GtkObjectFlags */
     rb_define_const(gObject, "DESTROYED", INT2NUM(GTK_DESTROYED));
     rb_define_const(gObject, "FLOATING", INT2NUM(GTK_FLOATING));
     rb_define_const(gObject, "CONNECTED", INT2NUM(GTK_CONNECTED));
     rb_define_const(gObject, "CONSTRUCTED", INT2NUM(GTK_CONSTRUCTED));
+#endif
     /* GtkArgFlags */
     rb_define_const(gObject, "ARG_READABLE", INT2NUM(GTK_ARG_READABLE));
     rb_define_const(gObject, "ARG_WRITABLE", INT2NUM(GTK_ARG_WRITABLE));
     rb_define_const(gObject, "ARG_CONSTRUCT", INT2NUM(GTK_ARG_CONSTRUCT));
     rb_define_const(gObject, "ARG_CONSTRUCT_ONLY", INT2NUM(GTK_ARG_CONSTRUCT_ONLY));
     rb_define_const(gObject, "ARG_CHILD_ARG", INT2NUM(GTK_ARG_CHILD_ARG));
+#if GTK_MAJOR_VERSION < 2
     rb_define_const(gObject, "ARG_MASK", INT2NUM(GTK_ARG_MASK));
+#endif
     rb_define_const(gObject, "ARG_READWRITE", INT2NUM(GTK_ARG_READWRITE));
     /* GtkSignalRunType */
     rb_define_const(gObject, "RUN_FIRST", INT2FIX(GTK_RUN_FIRST));
@@ -627,9 +645,11 @@ void Init_gtk_object()
     rb_define_method(gObject, "gtk_type", gobj_get_gtk_type, 0);
 
     rb_define_method(gObject, "destroy", gobj_destroy, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gObject, "signal_n_emissions", gobj_sig_n_emissions, 1);
     rb_define_method(gObject, "signal_n_emissions_by_name",
             gobj_sig_n_emissions_by_name, 1);
+#endif
     rb_define_method(gObject, "signal_emit",
             gobj_sig_emit, -1);
     rb_define_method(gObject, "signal_emit_by_name",

@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:02 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -117,7 +117,11 @@ make_gdkvisual(visual)
     if (visual == NULL) return Qnil;
 
     gdk_visual_ref(visual);
+#if GTK_MAJOR_VERSION >= 2
+    return Data_Wrap_Struct(gdkVisual, 0, g_object_unref, visual);
+#else
     return Data_Wrap_Struct(gdkVisual, 0, gdk_visual_unref, visual);
+#endif
 }
 
 GdkVisual*

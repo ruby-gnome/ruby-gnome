@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:03 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -169,7 +169,7 @@ static VALUE
 style_font(self)
     VALUE self;
 {
-    return make_gdkfont(get_gstyle(self)->font);
+    return make_gdkfont(gtk_style_get_font(get_gstyle(self)));
 }
 
 static VALUE
@@ -180,11 +180,8 @@ style_set_font(self, f)
     GtkStyle *style = get_gstyle(self);
 
     if (style->fg_gc[0] != NULL) rb_raise(rb_eArgError, "you must not change widget style.");
-    if (style->font != NULL)
-	gdk_font_unref(style->font);
 
-    gdk_font_ref(font);
-    style->font = font;
+    gtk_style_set_font(style, font);
 
     return self;
 }

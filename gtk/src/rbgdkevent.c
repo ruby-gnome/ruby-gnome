@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:10 $
+  $Date: 2002/05/19 13:59:10 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -143,6 +143,7 @@ gdkeventmotion_y(self)
     return rb_float_new(get_gdkevent(self)->motion.y);
 }
 
+#if GTK_MAJOR_VERSION < 2
 static VALUE
 gdkeventmotion_pressure(self)
     VALUE self;
@@ -177,6 +178,8 @@ gdkeventmotion_deviceid(self)
 {
     return INT2NUM(get_gdkevent(self)->motion.deviceid);
 }
+
+#endif
 
 static VALUE
 gdkeventmotion_x_root(self)
@@ -228,6 +231,8 @@ gdkeventbutton_y(self)
     return rb_float_new(get_gdkevent(self)->button.y);
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 gdkeventbutton_pressure(self)
     VALUE self;
@@ -276,6 +281,8 @@ gdkeventbutton_deviceid(self)
 {
     return INT2NUM(get_gdkevent(self)->button.deviceid);
 }
+
+#endif
 
 static VALUE
 gdkeventbutton_x_root(self)
@@ -531,6 +538,8 @@ gdkeventproximity_time(self)
     return INT2NUM(get_gdkevent(self)->proximity.time);
 }
 
+#if GTK_MAJOR_VERSION < 2
+
 static VALUE
 gdkeventproximity_source(self)
     VALUE self;
@@ -544,6 +553,8 @@ gdkeventproximity_deviceid(self)
 {
     return INT2NUM(get_gdkevent(self)->proximity.deviceid);
 }
+
+#endif
 
 /* GdkEventClient */
 static VALUE
@@ -659,13 +670,17 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventMotion, "time", gdkeventmotion_time, 0);
     rb_define_method(gdkEventMotion, "x", gdkeventmotion_x, 0);
     rb_define_method(gdkEventMotion, "y", gdkeventmotion_y, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gdkEventMotion, "pressure", gdkeventmotion_pressure, 0);
     rb_define_method(gdkEventMotion, "xtilt", gdkeventmotion_xtilt, 0);
     rb_define_method(gdkEventMotion, "ytilt", gdkeventmotion_ytilt, 0);
+#endif
     rb_define_method(gdkEventMotion, "state", gdkeventmotion_state, 0);
     rb_define_method(gdkEventMotion, "is_hint", gdkeventmotion_is_hint, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gdkEventMotion, "source", gdkeventmotion_source, 0);
     rb_define_method(gdkEventMotion, "deviceid", gdkeventmotion_deviceid, 0);
+#endif
     rb_define_method(gdkEventMotion, "x_root", gdkeventmotion_x_root, 0);
     rb_define_method(gdkEventMotion, "y_root", gdkeventmotion_y_root, 0);
 
@@ -673,6 +688,7 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventButton, "time", gdkeventbutton_time, 0);
     rb_define_method(gdkEventButton, "x", gdkeventbutton_x, 0);
     rb_define_method(gdkEventButton, "y", gdkeventbutton_y, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gdkEventButton, "pressure", gdkeventbutton_pressure, 0);
     rb_define_method(gdkEventButton, "xtilt", gdkeventbutton_xtilt, 0);
     rb_define_method(gdkEventButton, "ytilt", gdkeventbutton_ytilt, 0);
@@ -680,6 +696,7 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventButton, "button", gdkeventbutton_button, 0);
     rb_define_method(gdkEventButton, "source", gdkeventbutton_source, 0);
     rb_define_method(gdkEventButton, "deviceid", gdkeventbutton_deviceid, 0);
+#endif
     rb_define_method(gdkEventButton, "x_root", gdkeventbutton_x_root, 0);
     rb_define_method(gdkEventButton, "y_root", gdkeventbutton_y_root, 0);
 
@@ -731,8 +748,10 @@ Init_gtk_gdk_event()
 
     /* GdkEventProximity */
     rb_define_method(gdkEventProximity, "time", gdkeventproximity_time, 0);
+#if GTK_MAJOR_VERSION < 2
     rb_define_method(gdkEventProximity, "source", gdkeventproximity_source, 0);
     rb_define_method(gdkEventProximity, "deviceid", gdkeventproximity_deviceid, 0);
+#endif
 
     /* GdkEventClient */
     rb_define_method(gdkEventClient, "message_type", gdkeventclient_message_type, 0);
