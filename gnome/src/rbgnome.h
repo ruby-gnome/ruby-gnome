@@ -66,6 +66,7 @@ extern VALUE gnoSpell;
 extern VALUE gnoStock;
 
 VALUE make_gnobject_auto_type(GtkObject*);
+VALUE get_value_from_gno_obj(GtkObject*);
 
 GnomeDesktopEntry* get_dentry(VALUE);
 VALUE make_dentry(GnomeDesktopEntry*);

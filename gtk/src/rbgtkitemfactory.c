@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
@@ -63,8 +63,9 @@ menuitem_type_check(item_type)
 }
 
 static void
-item_exec_callback_wrap(p_item, iter)
+item_exec_callback_wrap(p_item, ifact, iter)
     GtkWidget *p_item;
+    VALUE ifact;
     VALUE iter;
 {
     VALUE item;
@@ -236,24 +237,6 @@ ifact_s_path_from_widget(self, widget)
     return rb_str_new2(gtk_item_factory_path_from_widget(get_widget(widget)));
 }
 
-#if GTK_MAJOR_VERSION < 2
-static VALUE
-ifact_s_parse_rc(self, file_name)
-    VALUE self, file_name;
-{
-    gtk_item_factory_parse_rc(STR2CSTR(file_name));
-    return Qnil;
-}
-
-static VALUE
-ifact_s_parse_rc_string(self, rc_string)
-    VALUE self, rc_string;
-{
-    gtk_item_factory_parse_rc_string(STR2CSTR(rc_string));
-    return Qnil;
-}
-#endif
-
 void Init_gtk_itemfactory()
 {
     gItemFactory = rb_define_class_under(mGtk, "ItemFactory", gObject);
@@ -285,10 +268,4 @@ void Init_gtk_itemfactory()
  
     rb_define_singleton_method(gItemFactory, "path_from_widget",
                                ifact_s_path_from_widget, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_singleton_method(gItemFactory, "parse_rc",
-                               ifact_s_parse_rc, 1);
-    rb_define_singleton_method(gItemFactory, "parse_rc_string",
-                               ifact_s_parse_rc_string, 1);
-#endif
 }

@@ -4,7 +4,7 @@
   rbgdkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -30,9 +30,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "WINDOW_CHILD", INT2FIX(GDK_WINDOW_CHILD));
     rb_define_const(mGdk, "WINDOW_DIALOG", INT2FIX(GDK_WINDOW_DIALOG));
     rb_define_const(mGdk, "WINDOW_TEMP", INT2FIX(GDK_WINDOW_TEMP));
-#if GTK_MAJOR_VERSION < 2
-    rb_define_const(mGdk, "WINDOW_PIXMAP", INT2FIX(GDK_WINDOW_PIXMAP));
-#endif
     rb_define_const(mGdk, "WINDOW_FOREIGN", INT2FIX(GDK_WINDOW_FOREIGN));
 
     /* GdkWindowClass */
@@ -316,16 +313,6 @@ Init_gtk_gdk_const()
     rb_define_const(mGdk, "FUNC_MINIMIZE", INT2FIX(GDK_FUNC_MINIMIZE));
     rb_define_const(mGdk, "FUNC_MAXIMIZE", INT2FIX(GDK_FUNC_MAXIMIZE));
     rb_define_const(mGdk, "FUNC_CLOSE", INT2FIX(GDK_FUNC_CLOSE));
-
-#if GTK_MAJOR_VERSION < 2
-    /* GdkColorContextMode */
-    rb_define_const(mGdk, "CC_MODE_UNDEFINED", INT2FIX(GDK_CC_MODE_UNDEFINED));
-    rb_define_const(mGdk, "CC_MODE_BW", INT2FIX(GDK_CC_MODE_BW));
-    rb_define_const(mGdk, "CC_MODE_STD_CMAP", INT2FIX(GDK_CC_MODE_STD_CMAP));
-    rb_define_const(mGdk, "CC_MODE_TRUE", INT2FIX(GDK_CC_MODE_TRUE));
-    rb_define_const(mGdk, "CC_MODE_MY_GRAY", INT2FIX(GDK_CC_MODE_MY_GRAY));
-    rb_define_const(mGdk, "CC_MODE_PALETTE", INT2FIX(GDK_CC_MODE_PALETTE));
-#endif
 
     /* GdkOverlapType */
     rb_define_const(mGdk, "OVERLAP_RACTANGLE_IN", INT2FIX(GDK_OVERLAP_RECTANGLE_IN));

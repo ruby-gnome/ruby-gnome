@@ -4,7 +4,7 @@
   global.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -106,26 +106,12 @@ arg_to_value(arg)
 	return GTK_VALUE_STRING(*arg) ? rb_str_new2(GTK_VALUE_STRING(*arg)) : Qnil;
 	break;
 
-#if GTK_MAJOR_VERSION < 2
-  case GTK_TYPE_OBJECT:
-#else
   case G_TYPE_OBJECT:
-#endif
 	return GTK_VALUE_OBJECT(*arg) ? get_value_from_gobject(GTK_VALUE_OBJECT(*arg)) : Qnil;
 	break;
 
-#if GTK_MAJOR_VERSION < 2	    
-  case GTK_TYPE_SIGNAL:
-	/* signal type?? */
-	goto unsupported;
-#endif
-
   case GTK_TYPE_BOXED:
-#if GTK_MAJOR_VERSION < 2
-	if (arg->type == GTK_TYPE_GDK_EVENT) {
-#else
 	if (arg->type == GDK_TYPE_EVENT) {
-#endif
 	  return make_gdkevent(GTK_VALUE_BOXED(*arg));
 	}
 #ifdef GTK_TYPE_GDK_COLORMAP
@@ -176,12 +162,6 @@ arg_to_value(arg)
 	
   case GTK_TYPE_INVALID:
   case GTK_TYPE_NONE:
-#if GTK_MAJOR_VERSION < 2
-  case GTK_TYPE_FOREIGN:
-  case GTK_TYPE_CALLBACK:
-  case GTK_TYPE_ARGS:
-  case GTK_TYPE_C_CALLBACK:
-#endif
   unsupported:
   default:
 	rb_raise(rb_eTypeError, "unsupported arg type %s (fundamental type %s)",

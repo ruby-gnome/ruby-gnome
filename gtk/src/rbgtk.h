@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,8 +16,6 @@
 
 #include "ruby.h"
 #include "rubysig.h"
-#define GTK_ENABLE_BROKEN
-#define GDK_ENABLE_BROKEN
 #include <gtk/gtk.h>
 #if defined __CYGWIN__
 #define HWND_DESKTOP 0
@@ -30,6 +28,7 @@
 #include <signal.h>
 
 #define CSTR2OBJ(s) (s ? rb_str_new2(s) : Qnil)
+#define RUBY_GTK_OBJ_KEY "__ruby_gtk_object__"
 
 extern VALUE glist2ary(GList* list);
 extern GList* ary2glist(VALUE ary);
@@ -339,13 +338,6 @@ extern GdkEvent* get_gdkevent(VALUE event);
 
 extern VALUE make_gdkgc(GdkGC* gc);
 extern GdkGC* get_gdkgc(VALUE gc);
-
-#if GTK_MAJOR_VERSION < 2
-extern VALUE make_gdkic(GdkIC *ic);
-extern VALUE make_gdkicattr(GdkICAttr *attr);
-#define get_gdkic(a) ((GdkIC*)get_tobj(a, gdkIC))
-#define get_gdkicattr(a) ((GdkICAttr*)get_tobj(a, gdkICAttr))
-#endif
 
 extern VALUE rbgdk_geometry_make(GdkGeometry *geo);
 extern GdkGeometry *rbgdk_geometry_get(VALUE geo);

@@ -14,7 +14,7 @@
 
     If you have any questions or requests, use one of the following:
 
-    neilconway@rogers.com         The current Ruby-GNOME maintainer
+    neilconway@rogers.com       The current Ruby-GNOME maintainer
     http://ruby-gnome.sf.net    The website contains a bug tracker and
                                 patch manager
     ruby-talk@netlab.co.jp      English Mailing List. Not Ruby-GNOME
@@ -29,7 +29,7 @@
     1. extract archive file.
        $ gzip -dc ruby-gtk-x.xx.tar.gz | tar xf -
 
-    2. change directory to which you made last time.
+    2. change into the ruby-gtk directory
        $ cd gtk-x.xx
 
     3. create Makefile
@@ -116,7 +116,7 @@ Maintainers:
 (up to ver. 0.18)
   by Dai.K. <MAP2303@mapletown.net>
   http://www.minato.net/~j2/
-(up ver. 0.25)
+(up to ver. 0.25)
   Hiroshi IGARASHI <iga@ruby-lang.org>
   http://www.ruby-lang.org/~iga/
 (from ver. 0.26)

@@ -4,7 +4,7 @@
   rbgdkimlib.h -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:30 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1999-2000 NAKAMURA Hideki,
                           Hiroshi Igarashi

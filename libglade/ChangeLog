@@ -1,3 +1,45 @@
+Wed Mar 20 01:45:43 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbglade.c: More bugfixes. Also, cGladeXML is no longer a
+	sub-class of gObject (I thought this would work; apparently,
+	it doesn't).
+
+Tue Mar 19 01:21:17 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbglade.c: Fix a major bug in Gnome support (requiring changes
+	in both Ruby-Gtk and Ruby-Gnome); make GladeXML a sub-class of
+	gObject. Reported by Gary Lawrence Murphy <garym@canada.com>.
+
+Sun Mar 17 16:04:38 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbglade.c: Fix a serious bug: don't use get_gobject().
+        Reported by Gary Lawrence Murphy <garym@canada.com>.
+
+Fri Mar 15 15:28:03 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbglade.c, extconf.rb: Add support for libglade-gnome.
+	To enable this, pass the '--with-gnome' flag to extconf.rb,
+	and you should be able to use Gnome widgets within your
+	Ruby-libglade apps.
+
+	* README: Add blurb on new support for libglade-gnome.
+
+Fri Mar 15 14:40:12 2002 Neil Conway <neilconway@rogers.com>
+
+	* rbglade.c: Misc cleanups and improvements, mostly from my
+	previous patch.
+
+	* README: Update for new maintainer.
+
+Fri Mar 15 14:15:43 2002 Neil Conway <neilconway@rogers.com>
+
+	* lib/libglade.rb: Remove file.
+
+	* rbglade.c: Replace our version with the current upstream code.
+	Avi asked me to adopt this package, so the version in this CVS
+	tree is now the official package, and future releases of Ruby-Gnome
+	will include Ruby-libglade as a sub-binding.
+
 Tue Dec 18 18:36:10 2001 Neil Conway <neilconway@rogers.com>
 
 	* rbglade.c: Code cleanup; fix compiler warnings; change the

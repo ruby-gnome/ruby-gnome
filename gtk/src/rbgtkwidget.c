@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -117,26 +117,6 @@ widget_draw(self, rect)
     return self;
 }
 
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_draw_focus(self)
-    VALUE self;
-{
-    gtk_widget_draw_focus(get_widget(self));
-    return self;
-}
-
-static VALUE
-widget_draw_default(self)
-    VALUE self;
-{
-    gtk_widget_draw_default(get_widget(self));
-    return self;
-}
-
-#endif
-
 static VALUE
 widget_size_request(self)
     VALUE self;
@@ -178,31 +158,6 @@ widget_rm_accel(self, accel, key, mod)
     return self;
 }
 
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_rm_accels(self, sig, visible)
-     VALUE self, sig, visible;
-{
-    gtk_widget_remove_accelerators(get_widget(self),
-                                   STR2CSTR(sig),
-                                   (gboolean)RTEST(visible));
-    return self;
-}
-
-static VALUE
-widget_accel_signal(self, accel, key, mod)
-     VALUE self, accel, key, mod;
-{
-    return INT2NUM(gtk_widget_accelerator_signal(get_widget(self),
-                                                 get_gtkaccelgrp(accel),
-                                                 NUM2INT(key),
-                                                 NUM2INT(mod)));
-}
-
-#endif
-
 static VALUE
 widget_event(self, event)
     VALUE self, event;
@@ -240,18 +195,6 @@ widget_reparent(self, parent)
     gtk_widget_reparent(get_widget(self), get_widget(parent));
     return self;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_popup(self, x, y)
-    VALUE self, x, y;
-{
-    gtk_widget_popup(get_widget(self), NUM2INT(x), NUM2INT(y));
-    return self;
-}
-
-#endif
 
 static VALUE
 widget_intersect(self, area, intersect)
@@ -470,18 +413,6 @@ widget_push_visual(self, visual)
     return visual;
 }
 
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_push_style(self, style)
-    VALUE self, style;
-{
-    gtk_widget_push_style(get_gstyle(style));
-    return style;
-}
-
-#endif
-
 static VALUE
 widget_pop_cmap(self)
     VALUE self;
@@ -497,18 +428,6 @@ widget_pop_visual(self)
     gtk_widget_pop_visual();
     return Qnil;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_pop_style(self)
-    VALUE self;
-{
-    gtk_widget_pop_style();
-    return Qnil;
-}
-
-#endif
 
 #define DEFINE_IS_WIDGET(STATE) \
 static VALUE \
@@ -548,18 +467,6 @@ widget_set_default_visual(self, visual)
     gtk_widget_set_default_visual(get_gdkvisual(visual));
     return visual;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-widget_set_default_style(self, style)
-    VALUE self, style;
-{
-    gtk_widget_set_default_style(get_gstyle(style));
-    return Qnil;
-}
-
-#endif
 
 static VALUE
 widget_get_default_cmap(self)
@@ -963,18 +870,6 @@ signal_setup_args(self, sig, argc, params, args)
 }
 */
 
-#if GTK_MAJOR_VERSION < 2
-#define DEFINE_EVENT_FUNC(EVENT,TYPE) \
-static VALUE \
-widget_event_ ## EVENT (self, event) \
-    VALUE self, event; \
-{ \
-    GtkWidget *widget = get_widget(self); \
-    GTK_WIDGET_CLASS(GTK_OBJECT(widget)->klass)->EVENT \
-        (widget, &get_gdkevent(event)->TYPE); \
-    return Qnil; \
-}
-#else
 #define DEFINE_EVENT_FUNC(EVENT,TYPE) \
 static VALUE \
 widget_event_ ## EVENT (self, event) \
@@ -985,7 +880,6 @@ widget_event_ ## EVENT (self, event) \
         (widget, &get_gdkevent(event)->TYPE); \
     return Qnil; \
 }
-#endif
 DEFINE_EVENT_FUNC(button_press_event, button)
 DEFINE_EVENT_FUNC(button_release_event, button)
 DEFINE_EVENT_FUNC(motion_notify_event, motion)
@@ -1110,27 +1004,16 @@ void Init_gtk_widget()
     rb_define_method(gWidget, "queue_resize", widget_queue_resize, 0);
     rb_define_method(gWidget, "queue_clear", widget_queue_clear, 0);
     rb_define_method(gWidget, "draw", widget_draw, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gWidget, "draw_focus", widget_draw_focus, 0);
-    rb_define_method(gWidget, "draw_default", widget_draw_default, 0);
-#endif
     rb_define_method(gWidget, "size_request", widget_size_request, 0);
     rb_define_method(gWidget, "size_allocate", widget_size_allocate, 1);
     rb_define_method(gWidget, "add_accelerator", widget_add_accel, 5);
     rb_define_method(gWidget, "remove_accelerator", widget_rm_accel, 3);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gWidget, "remove_accelerators", widget_rm_accels, 2);
-    rb_define_method(gWidget, "accelerator_signal", widget_accel_signal, 3);
-#endif
     rb_define_method(gWidget, "event", widget_event, 1);
     rb_define_method(gWidget, "activate", widget_activate, 0);
     rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
     rb_define_method(gWidget, "grab_default", widget_grab_default, 0);
     rb_define_method(gWidget, "set_state", widget_set_state, 1);
     rb_define_method(gWidget, "reparent", widget_reparent, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gWidget, "popup", widget_popup, 2);
-#endif
     rb_define_method(gWidget, "intersect", widget_intersect, 2);
     rb_define_method(gWidget, "get_name", widget_get_name, 0);
     rb_define_method(gWidget, "set_name", widget_set_name, 1);
@@ -1246,22 +1129,12 @@ void Init_gtk_widget()
      */
     rb_define_singleton_method(gWidget, "push_colormap", widget_push_cmap, 1);
     rb_define_singleton_method(gWidget, "push_visual", widget_push_visual, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_singleton_method(gWidget, "push_style", widget_push_style, 1);
-#endif
     rb_define_singleton_method(gWidget, "pop_colormap", widget_pop_cmap, 0);
     rb_define_singleton_method(gWidget, "pop_visual", widget_pop_visual, 0);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_singleton_method(gWidget, "pop_style", widget_pop_style, 0);
-#endif
     rb_define_singleton_method(gWidget, "set_default_colormap",
                                widget_set_default_cmap, 1);
     rb_define_singleton_method(gWidget, "set_default_visual",
                                widget_set_default_visual, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_singleton_method(gWidget, "set_default_style",
-                               widget_set_default_style, 1);
-#endif
     rb_define_singleton_method(gWidget, "get_default_colormap",
                                widget_get_default_cmap, 0);
     rb_define_singleton_method(gWidget, "get_default_visual",

@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -117,11 +117,7 @@ make_gdkvisual(visual)
     if (visual == NULL) return Qnil;
 
     gdk_visual_ref(visual);
-#if GTK_MAJOR_VERSION >= 2
-    return Data_Wrap_Struct(gdkVisual, 0, g_object_unref, visual);
-#else
     return Data_Wrap_Struct(gdkVisual, 0, gdk_visual_unref, visual);
-#endif
 }
 
 GdkVisual*
@@ -544,20 +540,36 @@ get_gdkdragcontext(context)
     return gcontext;
 }
 
+<<<<<<< rbgdk.c
+struct _rbgdkatom {
+  GdkAtom atom;
+};
+typedef struct _rbgdkatom GdkAtomData;
+
+=======
 struct _rbgdkatom {
     GdkAtom atom;
 };
 typedef struct _rbgdkatom GdkAtomData;
 
+>>>>>>> 1.17
 VALUE
 make_gdkatom(atom)
     GdkAtom atom;
 {
+<<<<<<< rbgdk.c
+	GdkAtomData data;
+    data.atom = atom;
+
+    return make_tobj(&data, gdkAtom, sizeof(GdkAtomData));
+} 
+=======
     GdkAtomData data;
     data.atom = atom;
 
     return make_tobj(&data, gdkAtom, sizeof(GdkAtomData));
 }
+>>>>>>> 1.17
 
 GdkAtom
 get_gdkatom(atom)

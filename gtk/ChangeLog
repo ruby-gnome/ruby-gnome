@@ -1,3 +1,61 @@
+Tue May 20 00:52:38 2002 MUTOH Masao <mutoh@highway.ne.jp>
+
+   * src/rbgtkitemfactory.c: Fix segmentation fault.
+
+Sun May 19 23:00:33 2002 Masahiro Sakai <zvm01052@nifty.ne.jp>
+
+   * First patch for GTK-2.0.
+
+Sun Mar 24 14:02:02 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtknotebook.c: Minor tweak -- use rb_define_alias().
+
+Tue Mar 19 10:00:47 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtk.c, src/rbgtk.h: Rename RUBY_OBJ_KEY to
+	RUBY_GTK_OBJ_KEY, as suggested by Mutoh Masao.
+
+Tue Mar 19 02:10:02 2002 Neil Conway <neilconway@rogers.com>
+
+	* extconf.rb: No longer create a symlink to gtk.a during
+	compilation. This was reported by Bil Kleb
+	<W.L.Kleb@LaRC.NASA.Gov> ; I'm not really sure what the
+	reasoning behind the original behavior was...
+
+	* src/rbgtkstyle.c: #set_font: If passed an invalid Gdk::Font,
+	bail-out gracefully.
+
+	* src/rbgdkfont.c: Code cleanup, fix indentation. (Woops,
+	the CVS changelog for this file is wrong.)
+
+Tue Mar 19 01:17:11 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtk.c, src/rbgtk.h: Change ruby_object_key to be a
+	#define, and move it to rbgtk.h -- thus, it can be accessed by
+	other packages.
+
+Sun Mar 17 16:39:35 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtkstyle.c: Uncomment some methods, code cleanup.
+
+Sun Mar 17 16:22:26 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtkconst.c: Increment version number.
+
+Sun Mar 17 15:32:27 2002 Neil Conway <neilconway@rogers.com>
+
+	* README: Minor improvements.
+
+Fri Mar 15 13:57:46 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgtkitemfactory.c: Revert a braindead change to
+	item_exec_callback_wrap() that broke Gtk::ItemFactory.
+	Woops!
+
+	* sample/item_factory.rb: File added.
+
+	* src/rbgtk.c: Remove some unused code.
+
 Tue Mar  5 14:52:38 2002 MUTOH Masao <mutoh@highway.ne.jp>
 
 	* sample/dnd.rb: Code cleanup.

@@ -4,7 +4,7 @@
   rbgtkrange.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -43,124 +43,6 @@ range_set_adj(self, adj)
     return self;
 }
 
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-range_draw_bg(self)
-    VALUE self;
-{
-    gtk_range_draw_background(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_draw_trough(self)
-    VALUE self;
-{
-    gtk_range_draw_trough(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_draw_slider(self)
-    VALUE self;
-{
-    gtk_range_draw_slider(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_draw_step_forw(self)
-    VALUE self;
-{
-    gtk_range_draw_step_forw(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_draw_step_back(self)
-    VALUE self;
-{
-    gtk_range_draw_step_back(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_slider_update(self)
-    VALUE self;
-{
-    gtk_range_slider_update(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_trough_click(self, x, y)
-    VALUE self, x, y;
-{
-    int i;
-
-    i = gtk_range_trough_click(GTK_RANGE(get_widget(self)),
-			       NUM2INT(x), NUM2INT(y),
-			       0);
-    return INT2FIX(i);
-}
-
-static VALUE
-range_default_hslider_update(self)
-    VALUE self;
-{
-    gtk_range_default_hslider_update(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_default_vslider_update(self)
-    VALUE self;
-{
-    gtk_range_default_vslider_update(GTK_RANGE(get_widget(self)));
-    return self;
-}
-
-static VALUE
-range_default_htrough_click(self, x, y)
-    VALUE self, x, y;
-{
-    gfloat jump_perc;
-    int i = gtk_range_default_htrough_click(GTK_RANGE(get_widget(self)),
-					NUM2INT(x), NUM2INT(y), &jump_perc);
-    return rb_ary_new3(2, INT2FIX(i), rb_float_new(jump_perc));
-}
-
-static VALUE
-range_default_vtrough_click(self, x, y)
-    VALUE self, x, y;
-{
-    gfloat jump_perc;
-    int i = gtk_range_default_vtrough_click(GTK_RANGE(get_widget(self)),
-					NUM2INT(x), NUM2INT(y), &jump_perc);
-    return rb_ary_new3(2, INT2FIX(i), rb_float_new(jump_perc));
-}
-
-static VALUE
-range_default_hmotion(self, xdelta, ydelta)
-    VALUE self, xdelta, ydelta;
-{
-    gtk_range_default_hmotion(GTK_RANGE(get_widget(self)),
-			      NUM2INT(xdelta), NUM2INT(ydelta));
-    return self;
-}
-
-static VALUE
-range_default_vmotion(self, xdelta, ydelta)
-    VALUE self, xdelta, ydelta;
-{
-    gtk_range_default_vmotion(GTK_RANGE(get_widget(self)),
-			      NUM2INT(xdelta), NUM2INT(ydelta));
-    return self;
-}
-
-#endif
-
 void Init_gtk_range()
 {
   gRange = rb_define_class_under(mGtk, "Range", gWidget);
@@ -168,22 +50,6 @@ void Init_gtk_range()
   rb_define_method(gRange, "get_adjustment", range_get_adj, 0);
   rb_define_method(gRange, "set_update_policy", range_set_update_policy, 1);
   rb_define_method(gRange, "set_adjustment", range_set_adj, 1);
-#if GTK_MAJOR_VERSION < 2
-  rb_define_method(gRange, "draw_background", range_draw_bg, 0);
-  rb_define_method(gRange, "draw_trough", range_draw_trough, 0);
-  rb_define_method(gRange, "draw_slider", range_draw_slider, 0);
-  rb_define_method(gRange, "draw_step_forw", range_draw_step_forw, 0);
-  rb_define_method(gRange, "draw_step_back", range_draw_step_back, 0);
-  rb_define_method(gRange, "slider_update", range_slider_update, 0);
-  rb_define_method(gRange, "trough_click", range_trough_click, 2);
-  rb_define_method(gRange, "draw_background", range_draw_bg, 2);
-  rb_define_method(gRange, "default_hslider_update", range_default_hslider_update, 0);
-  rb_define_method(gRange, "default_vslider_update", range_default_vslider_update, 0);
-  rb_define_method(gRange, "default_htrough_click", range_default_htrough_click, 2);
-  rb_define_method(gRange, "default_vtrough_click", range_default_vtrough_click, 2);
-  rb_define_method(gRange, "default_hmotion", range_default_hmotion, 2);
-  rb_define_method(gRange, "default_vmotion", range_default_vmotion, 2);
-#endif
 
   /* child init */
   Init_gtk_scale();

@@ -1,4 +1,4 @@
-/* $Id: rbgnome.c,v 1.1 2002/05/19 12:39:24 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
 
 /* Gnome module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -75,6 +75,16 @@ make_gnobject_auto_type(gnobj)
     GtkObject* gnobj;
 {
     return make_gobject(get_gnome_type(gnobj), gnobj);
+}
+
+VALUE
+get_value_from_gno_obj(gnobj)
+    GtkObject* gnobj;
+{
+    VALUE ret = (VALUE)gtk_object_get_data(gnobj, RUBY_GTK_OBJ_KEY);
+    if (!ret)
+        ret = make_gnobject_auto_type(gnobj);
+    return ret;
 }
 
 static VALUE

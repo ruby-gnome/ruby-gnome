@@ -1,4 +1,4 @@
-/* $Id: rbgnome-app-helper.c,v 1.1 2002/05/19 12:39:28 mutoh Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
 
 /* Gnome::UIInfo module for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>

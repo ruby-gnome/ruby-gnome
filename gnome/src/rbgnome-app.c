@@ -1,4 +1,4 @@
-/* $Id: rbgnome-app.c,v 1.1 2002/05/19 12:39:25 mutoh Exp $ */
+/* $Id: rbgnome-app.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
 
 /* Gnome::App widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>

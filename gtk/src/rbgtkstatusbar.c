@@ -4,7 +4,7 @@
   rbgtkstatusbar.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -67,35 +67,6 @@ statusbar_remove(self, cid, mid)
   return Qnil;
 }
 
-#if GTK_MAJOR_VERSION < 2
-static VALUE
-gSMsg2ary(slist)
-    GSList *slist;
-{
-    VALUE msg;
-    VALUE ary = rb_ary_new();
-
-    while (slist) {
-	GtkStatusbarMsg *gSMsg = slist->data;
-	msg = rb_struct_new(sMsg,
-			    rb_tainted_str_new2(gSMsg->text),
-			    INT2FIX(gSMsg->context_id),
-			    INT2FIX(gSMsg->message_id));
-	rb_ary_push(ary, msg);
-	slist = slist->next;
-    }
-
-    return ary;
-}
-
-static VALUE
-statusbar_messages(self)
-    VALUE self;
-{
-    return gSMsg2ary(GTK_STATUSBAR(get_widget(self))->messages);
-}
-#endif
-
 void Init_gtk_statusbar()
 {
     gStatusBar = rb_define_class_under(mGtk, "Statusbar", gHBox);
@@ -108,9 +79,6 @@ void Init_gtk_statusbar()
     rb_define_method(gStatusBar, "pop", statusbar_pop, 1);
     rb_define_method(gStatusBar, "get_context_id", statusbar_get_context_id, 1);
     rb_define_method(gStatusBar, "remove", statusbar_remove, 2);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gStatusBar, "messages", statusbar_messages, 0);
-#endif
 
     sMsg = rb_struct_define("SMsg", "text", "context_id", "message_id", 0);   
 }

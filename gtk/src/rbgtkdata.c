@@ -4,7 +4,7 @@
   rbgtkdata.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -151,18 +151,6 @@ ttips_set_delay(self, delay)
     return self;
 }
 
-#if GTK_MAJOR_VERSION < 2
-static VALUE
-ttips_set_colors(self, back, fore)
-    VALUE self, back, fore;
-{
-    gtk_tooltips_set_colors(GTK_TOOLTIPS(get_gobject(self)),
-			    get_gdkcolor(back),
-			    get_gdkcolor(fore));
-    return self;
-}
-#endif
-
 static VALUE
 ttips_enable(self)
     VALUE self;
@@ -186,9 +174,6 @@ void Init_gtk_tooltips()
     rb_define_method(gTooltips, "initialize", ttips_initialize, 0);
     rb_define_method(gTooltips, "set_tip", ttips_set_tip, 3);
     rb_define_method(gTooltips, "set_delay", ttips_set_delay, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gTooltips, "set_colors", ttips_set_colors, 2);
-#endif
     rb_define_method(gTooltips, "enable", ttips_enable, 0);
     rb_define_method(gTooltips, "disable", ttips_disable, 0);
 }

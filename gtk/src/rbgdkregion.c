@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -249,66 +249,41 @@ static VALUE
 gdkregion_union_with_rect(self, rect)
     VALUE self, rect;
 {
-#if GTK_MAJOR_VERSION < 2
-    return make_gdkregion(gdk_region_union_with_rect(get_gdkregion(self),
-                                                     get_gdkrectangle(rect)));
-#else
     gdk_region_union_with_rect(get_gdkregion(self),
                                get_gdkrectangle(rect));
     return self;
-#endif
 }
 
 static VALUE
 gdkregion_intersect(self, region)
     VALUE self, region;
 {
-#if GTK_MAJOR_VERSION < 2
-    return make_gdkregion(gdk_regions_intersect(get_gdkregion(self),
-                                                get_gdkregion(region)));
-#else
     gdk_region_intersect(get_gdkregion(self), get_gdkregion(region));
     return self;
-#endif
 }
 
 static VALUE
 gdkregion_union(self, region)
     VALUE self, region;
 {
-#if GTK_MAJOR_VERSION < 2
-    return make_gdkregion(gdk_regions_union(get_gdkregion(self),
-                                            get_gdkregion(region)));
-#else
     gdk_region_union(get_gdkregion(self), get_gdkregion(region));
     return self;
-#endif
 }
 
 static VALUE
 gdkregion_subtract(self, region)
     VALUE self, region;
 {
-#if GTK_MAJOR_VERSION < 2
-    return make_gdkregion(gdk_regions_subtract(get_gdkregion(self),
-                                               get_gdkregion(region)));
-#else
     gdk_region_subtract(get_gdkregion(self), get_gdkregion(region));
     return self;
-#endif
 }
 
 static VALUE
 gdkregion_xor(self, region)
     VALUE self, region;
 {
-#if GTK_MAJOR_VERSION < 2
-    return make_gdkregion(gdk_regions_xor(get_gdkregion(self),
-                                          get_gdkregion(region)));
-#else
     gdk_region_xor(get_gdkregion(self), get_gdkregion(region));
     return self;
-#endif
 }
 
 

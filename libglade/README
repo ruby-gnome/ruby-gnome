@@ -1,5 +1,6 @@
 Libglade wrapper for Ruby
-by Avi Bryant <avi@beta4.com>
+originally by Avi Bryant <avi@beta4.com>
+   (now maintained by Neil Conway <neilconway@rogers.com>)
 
 This provides a very simple interface to the libglade library,
 to load interfaces dynamically from a glade file.
@@ -13,6 +14,16 @@ Installing:
 
 It requires libglade, libxml (1.x), and libz.  You may have to
 provide extconf.rb with the paths to these.
+
+There is also optional support for libglade-gnome: this allows
+you to utilize GNOME widgets from within your Ruby-libglade
+applications. To enable this, pass the '--with-gnome' flag
+to extconf.rb; in the status messages that follow, you should
+see this:
+
+$ ruby extconf.rb --with-gnome
+GNOME support is: enabled.
+...
 
 Usage:
 

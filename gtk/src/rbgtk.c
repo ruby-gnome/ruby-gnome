@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -16,8 +16,6 @@
 #ifdef HAVE_SYS_TIME_H
 # include <sys/time.h>
 #endif
-
-static const char* const ruby_object_key = "__ruby_gtk_object__";
 
 VALUE mGtk;
 VALUE gError;
@@ -228,7 +226,7 @@ set_gobject(obj, gtkobj)
 	data = Data_Wrap_Struct(rb_cData, cinfo->mark, cinfo->free, gtkobj);
     else
 	data = Data_Wrap_Struct(rb_cData, gobj_mark, 0, gtkobj);
-    gtk_object_set_data(gtkobj, ruby_object_key, (gpointer)obj);
+    gtk_object_set_data(gtkobj, RUBY_GTK_OBJ_KEY, (gpointer)obj);
 
     rb_ivar_set(obj, id_relatives, Qnil);
 
@@ -247,23 +245,12 @@ get_widget(obj)
     return GTK_WIDGET(data);
 }
 
-#if 0 /* FIXME: where is this function called from? -- yashi Feb 28, 2000*/
-static GtkWidget*
-force_get_widget(obj)
-    VALUE obj;
-{
-    GtkObject *data = force_get_gobject(obj);
-
-    return GTK_WIDGET(data);
-}
-#endif
-
 VALUE
 get_value_from_gobject(obj)
     GtkObject *obj;
 {
     VALUE  ret;
-    ret = (VALUE)gtk_object_get_data(obj, ruby_object_key);
+    ret = (VALUE)gtk_object_get_data(obj, RUBY_GTK_OBJ_KEY);
     if ( ! ret )
 	ret = make_gobject_auto_type(obj);
     return ret;
@@ -436,9 +423,6 @@ get_gtk_type(gtkobj)
     else if GTK_IS_WIDGET(gtkobj) klass = gWidget;
     else if GTK_IS_ADJUSTMENT(gtkobj) klass = gAdjustment;
     else if GTK_IS_TOOLTIPS(gtkobj) klass = gTooltips;
-#if GTK_MAJOR_VERSION < 2
-    else if GTK_IS_DATA(gtkobj) klass = gData;
-#endif
     else if GTK_IS_OBJECT(gtkobj) klass = gObject;
     else {
 	rb_raise(rb_eTypeError, "not a Gtk object");
@@ -825,12 +809,6 @@ idle()
     return Qtrue;
 }
 
-static
-void remove_idle(VALUE arg)
-{
-    gtk_idle_remove(NUM2UINT(arg));
-}
-
 #endif /* !USE_POLL_FUNC */
  
 /*
@@ -877,6 +855,6 @@ void Init_gtk_gtk()
 #ifdef USE_POLL_FUNC
     g_main_set_poll_func(rbgtk_poll);
 #else
-    rb_set_end_proc(&idle_remove, UINT2NUM(gtk_idle_add((GtkFunction)idle, 0)));
+    gtk_idle_add((GtkFunction)idle, 0);
 #endif
 }

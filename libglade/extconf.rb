@@ -1,10 +1,15 @@
-require 'mkmf'
+require "mkmf"
 
 $objs = ["rbglade.o"]
+my_libs = ["glade", "xml", "z"]
 
-dir_config("glade")
-dir_config("xml")
-dir_config("z")
+$use_gnome = with_config("gnome")
+puts "GNOME support is: #{$use_gnome ? 'enabled' : 'disabled'}."
+my_libs.push("glade-gnome") if $use_gnome
+
+my_libs.each do |lib|
+  dir_config(lib)
+end
 
 #
 # detect libglade configurations
@@ -21,10 +26,12 @@ begin
   config_cmds.each do |config_cmd|
     version = `#{config_cmd} --version`
     if not version.chomp.empty?
-      config_libs, config_cflags = "--libs", "--cflags"
+      puts "Using #{version.chomp}"
+      config_libs, config_cflags = "--libs #{'gnome' if $use_gnome}", "--cflags"
       $LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
       $libs = libs.join(' ') + ' ' + $libs
       $CFLAGS = `#{config_cmd} #{config_cflags}`.chomp
+      $CFLAGS << " -DENABLE_GNOME" if $use_gnome
       break
     end
   end
@@ -34,7 +41,7 @@ rescue
   $libs = '-lm -lc'
 end
 
-["glade", "xml", "z"].each do |lib|
+my_libs.each do |lib|
 	unless have_library(lib)
 		puts "\n***"
 		puts "Could not find lib#{lib}."

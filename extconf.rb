@@ -44,11 +44,6 @@ distclean:
 	done;
 	rm -f Makefile mkmf.log
 ")
-  if File.file?("makefile.mnt")
-    File.open("makefile.mnt") do |makefile_mnt|
-      makefile.print(makefile_mnt.read)
-    end
-  end
 end
 
 #

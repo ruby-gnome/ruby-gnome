@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -14,8 +14,8 @@
 #include "global.h"
 
 #define RBGTK_MAJOR_VERSION 0
-#define RBGTK_MINOR_VERSION 2
-#define RBGTK_MICRO_VERSION 7
+#define RBGTK_MINOR_VERSION 0
+#define RBGTK_MICRO_VERSION 0
 
 /*
  * constants
@@ -45,9 +45,6 @@ void Init_gtk_const()
 
     /* GtkAccelFlags */
     rb_define_const(mGtk, "ACCEL_VISIBLE", INT2FIX(GTK_ACCEL_VISIBLE));
-#if GTK_MAJOR_VERSION < 2
-    rb_define_const(mGtk, "ACCEL_SIGNAL_VISIBLE", INT2FIX(GTK_ACCEL_SIGNAL_VISIBLE));
-#endif
     rb_define_const(mGtk, "ACCEL_LOCKED", INT2FIX(GTK_ACCEL_LOCKED));
     rb_define_const(mGtk, "ACCEL_MASK", INT2FIX(GTK_ACCEL_MASK));
 
@@ -194,14 +191,6 @@ void Init_gtk_const()
     rb_define_const(mGtk, "TOOLBAR_TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
     rb_define_const(mGtk, "TOOLBAR_BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
 
-#if GTK_MAJOR_VERSION < 2
-    /* GtkTroughType */
-    rb_define_const(mGtk, "TROUGH_NONE", INT2FIX(GTK_TROUGH_NONE));
-    rb_define_const(mGtk, "TROUGH_START", INT2FIX(GTK_TROUGH_START));
-    rb_define_const(mGtk, "TROUGH_END", INT2FIX(GTK_TROUGH_END));
-    rb_define_const(mGtk, "TROUGH_JUMP", INT2FIX(GTK_TROUGH_JUMP));
-#endif
-
     /* GtkUpdateType */
     rb_define_const(mGtk, "UPDATE_CONTINUOUS", INT2FIX(GTK_UPDATE_CONTINUOUS));
     rb_define_const(mGtk, "UPDATE_DISCONTINUOUS", INT2FIX(GTK_UPDATE_DISCONTINUOUS));
@@ -224,9 +213,6 @@ void Init_gtk_const()
 
     /* GtkWindowType */
     rb_define_const(mGtk, "WINDOW_TOPLEVEL", INT2FIX(GTK_WINDOW_TOPLEVEL));
-#if GTK_MAJOR_VERSION < 2
-    rb_define_const(mGtk, "WINDOW_DIALOG", INT2FIX(GTK_WINDOW_DIALOG));
-#endif
     rb_define_const(mGtk, "WINDOW_POPUP", INT2FIX(GTK_WINDOW_POPUP));
 
     /* GtkSortType */
@@ -251,18 +237,6 @@ void Init_gtk_const()
     rb_define_const(mGtk, "ANCHOR_SE", INT2FIX(GTK_ANCHOR_SE));
     rb_define_const(mGtk, "ANCHOR_W", INT2FIX(GTK_ANCHOR_W));
     rb_define_const(mGtk, "ANCHOR_E", INT2FIX(GTK_ANCHOR_E));
-
-#if GTK_MAJOR_VERSION < 2
-    /* GtkFontType */
-    rb_define_const(mGtk, "FONT_BITMAP", INT2FIX(GTK_FONT_BITMAP));
-    rb_define_const(mGtk, "FONT_SCALABLE", INT2FIX(GTK_FONT_SCALABLE));
-    rb_define_const(mGtk, "FONT_SCALABLE_BITMAP", INT2FIX(GTK_FONT_SCALABLE_BITMAP));
-    rb_define_const(mGtk, "FONT_ALL", INT2FIX(GTK_FONT_ALL));
-
-    /* GtkFontFilterType */
-    rb_define_const(mGtk, "FONT_FILTER_BASE", INT2FIX(GTK_FONT_FILTER_BASE));
-    rb_define_const(mGtk, "FONT_FILTER_USER", INT2FIX(GTK_FONT_FILTER_USER));
-#endif
 
     /* GtkDestDefaults */
     rb_define_const(mGtk, "DEST_DEFAULT_MOTION", INT2FIX(GTK_DEST_DEFAULT_MOTION));

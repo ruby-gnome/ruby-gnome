@@ -1,4 +1,4 @@
-/* $Id: rbgnome-dock-item.c,v 1.1 2002/05/19 12:39:26 mutoh Exp $ */
+/* $Id: rbgnome-dock-item.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
 
 /* Gnome::DockItem widget for Ruby/Gnome
  * Copyright (C) 1999 Minoru Inachi <inachi@earth.interq.or.jp>

@@ -4,7 +4,7 @@
   rbgdkimlib.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 12:39:30 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 NAKAMURA Hideki,
                           Hiroshi Igarashi
@@ -640,6 +640,35 @@ im_create_image_from_data(self, data, alpha, w, h)
 {
     /* gdk_imlib_create_image_from_data() */
     rb_notimplement();
+}
+
+static VALUE
+im_create_image_from_drawable(self, win, mask, x, y, w, h)
+     VALUE self, win, mask, x, y, w, h;
+{
+    GdkImlibImage *im;
+    GdkWindow     *gwin;
+    GdkBitmap     *gmask;
+
+
+
+    Check_Type(x, T_FIXNUM);
+    Check_Type(y, T_FIXNUM);
+    Check_Type(w, T_FIXNUM);
+    Check_Type(h, T_FIXNUM);
+    Data_Get_Struct(win, GdkWindow, gwin);
+    Data_Get_Struct(mask, GdkBitmap, gmask);
+
+    im = gdk_imlib_create_image_from_drawable( gwin, gmask, x, y, w, h);
+
+    if(im == NULL && errno == ENOMEM){
+        rb_gc();
+    im = gdk_imlib_create_image_from_drawable( gwin, gmask, x, y, w, h);
+    }
+    if(im == NULL){
+	rb_raise(rb_eRuntimeError, "could not create\n");
+    }
+    return Data_Wrap_Struct(cImlibImage, 0, gdk_imlib_destroy_image, im);
 }
 
 static VALUE
@@ -1292,6 +1321,7 @@ Init_gdk_imlib()
     cImlibImage = rb_define_class_under(mImlib, "Image", rb_cData);
     rb_define_singleton_method(cImlibImage, "new", imlib_s_new, 1);
     rb_define_singleton_method(cImlibImage, "create_from_data", im_create_image_from_data, 4);
+    rb_define_singleton_method(cImlibImage, "create_from_drawable", im_create_image_from_drawable, 6);
     rb_define_singleton_method(cImlibImage, "render_limit", im_s_get_render_limit, 0);
     rb_define_singleton_method(cImlibImage, "render_limit=", im_s_set_render_limit, 1);
     rb_define_method(cImlibImage, "render", im_render, 2);

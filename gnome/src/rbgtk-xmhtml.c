@@ -1,4 +1,4 @@
-/* $Id: rbgtk-xmhtml.c,v 1.1 2002/05/19 12:39:27 mutoh Exp $ */
+/* $Id: rbgtk-xmhtml.c,v 1.2 2002/05/19 15:48:28 mutoh Exp $ */
 
 /* Gtk::XmHTML widget for Ruby/Gnome
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>

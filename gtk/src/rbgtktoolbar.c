@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -27,16 +27,12 @@ tbar_initialize(argc, argv, self)
     if (!NIL_P(arg1)) orientation = (GtkOrientation)NUM2INT(arg1);
     if (!NIL_P(arg2)) style = (GtkToolbarStyle)NUM2INT(arg2);
 
-#if GTK_MAJOR_VERSION >= 2
     {
         GtkWidget* w = gtk_toolbar_new();
         gtk_toolbar_set_orientation(GTK_TOOLBAR(w), orientation);
         gtk_toolbar_set_style(GTK_TOOLBAR(w), style);
         set_widget(self, w);
     }    
-#else
-    set_widget(self, gtk_toolbar_new(orientation, style));
-#endif
     return Qnil;
 }
 
@@ -279,16 +275,6 @@ tbar_set_style(self, style)
     return self;
 }
 
-#if GTK_MAJOR_VERSION < 2
-static VALUE
-tbar_set_space_size(self, size)
-    VALUE self, size;
-{
-    gtk_toolbar_set_space_size(GTK_TOOLBAR(get_widget(self)), NUM2INT(size));
-    return self;
-}
-#endif
-
 static VALUE
 tbar_set_tooltips(self, enable)
     VALUE self, enable;
@@ -296,37 +282,6 @@ tbar_set_tooltips(self, enable)
     gtk_toolbar_set_tooltips(GTK_TOOLBAR(get_widget(self)), RTEST(enable));
     return self;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-tbar_set_button_relief(self, style)
-    VALUE self, style;
-{
-    gtk_toolbar_set_button_relief(GTK_TOOLBAR(get_widget(self)),
-				  NUM2INT(style));
-    return self;
-}
-
-static VALUE
-tbar_get_button_relief(self)
-    VALUE self;
-{
-    GtkReliefStyle style;
-    style = gtk_toolbar_get_button_relief(GTK_TOOLBAR(get_widget(self)));
-    return INT2FIX(style);
-}
-
-static VALUE
-tbar_set_space_style(self, style)
-    VALUE self, style;
-{
-    gtk_toolbar_set_space_style(GTK_TOOLBAR(get_widget(self)),
-				NUM2INT(style));
-    return self;
-}
-
-#endif
 
 void Init_gtk_toolbar()
 {
@@ -361,13 +316,5 @@ void Init_gtk_toolbar()
     rb_define_method(gToolbar, "insert_element", tbar_insert_element, 7);
     rb_define_method(gToolbar, "set_orientation", tbar_set_orientation, 1);
     rb_define_method(gToolbar, "set_style", tbar_set_style, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gToolbar, "set_space_size", tbar_set_space_size, 1);
-#endif
     rb_define_method(gToolbar, "set_tooltips", tbar_set_tooltips, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gToolbar, "set_button_relief", tbar_set_button_relief, 1);
-    rb_define_method(gToolbar, "get_button_relief", tbar_get_button_relief, 0);
-    rb_define_method(gToolbar, "set_space_style", tbar_set_space_style, 1);
-#endif
 }

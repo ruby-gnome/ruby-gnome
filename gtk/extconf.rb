@@ -9,8 +9,7 @@ require "mkmf"
 #
 if /mswin32/ !~ PLATFORM
   config_cmd = ENV.fetch("GTK_CONFIG"){
-    "gtk-config"
-    # "pkg-config gtk+-x11-2.0"
+    "pkg-config gtk+-x11-2.0"
   }
   config_libs, config_cflags = "--libs", "--cflags"
   $LDFLAGS, *libs = `#{config_cmd} #{config_libs}`.chomp.split(/(-l.*)/)
@@ -49,17 +48,14 @@ begin
   if /cygwin|mingw/ =~ PLATFORM
     $CFLAGS += " -fnative-struct -DNATIVE_WIN32"
   elsif /mswin32/ !~ PLATFORM
-    lib_ary = [ #["X11", "XOpenDisplay"],
-                #["Xext", "XShmQueryVersion"],
-                #["Xi", "XOpenDevice"],
-#                ["glib", "g_print"],
-#                ["gdk", "gdk_init"],
-#                ["gtk", "gtk_init"],
+    lib_ary = [ ["X11", "XOpenDisplay"],
+                ["Xext", "XShmQueryVersion"],
+                ["Xi", "XOpenDevice"],
     ]
   else
-    lib_ary = [ ["glib-1.3", "g_print"],
-                ["gdk-1.3", "gdk_init"],
-                ["gtk-1.3", "gtk_init"] ]
+    lib_ary = [ ["glib2", "g_print"],
+                ["gdk2", "gdk_init"],
+                ["gtk2", "gtk_init"] ]
   end
 
   lib_ary.each do |ary|
@@ -91,12 +87,12 @@ begin
     $objs << "librbgdkkeysyms.a"
   end
 
-  create_makefile("gtk")
+  create_makefile("gtk2")
   raise Interrupt if not FileTest.exist? "Makefile"
 
   mfile = File.open("Makefile", "a")
   if /mswin32/ =~ PLATFORM
-    mfile.puts "	copy /Y  gtk.lib .."
+    mfile.puts "	copy /Y  gtk2.lib .."
     mfile.puts
   end
   mfile.print "\n"
@@ -162,13 +158,13 @@ clean:
 
 all:
 		@cd src; make all
-		@if [ ! -r gtk.a ]; then ln -sf src/gtk.a gtk.a; fi
+		@if [ ! -r gtk2.a ]; then ln -sf src/gtk2.a gtk2.a; fi
 
 install:;	@cd src; make install
 site-install:;	@cd src; make site-install
 clean:
 		@cd src; make allclean
-		@rm -f core gtk.a *~
+		@rm -f core gtk2.a *~
 distclean:	clean
 		@cd src; make distclean
 		@rm -f Makefile extconf.h conftest.*

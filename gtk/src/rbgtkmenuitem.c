@@ -4,7 +4,7 @@
   rbgtkmenuitem.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -41,29 +41,6 @@ mitem_set_submenu(self, child)
 			      get_widget(child));
     return self;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-mitem_set_placement(self, place)
-    VALUE self, place;
-{
-    gtk_menu_item_set_placement(GTK_MENU_ITEM(get_widget(self)), 
-				(GtkSubmenuPlacement)NUM2INT(place));
-    return self;
-}
-
-static VALUE
-mitem_configure(self, show_toggle, show_submenu)
-    VALUE self, show_toggle, show_submenu;
-{
-    gtk_menu_item_configure(GTK_MENU_ITEM(get_widget(self)), 
-			    NUM2INT(show_toggle),
-			    NUM2INT(show_submenu));
-    return self;
-}
-
-#endif
 
 static VALUE
 mitem_select(self)
@@ -105,10 +82,6 @@ void Init_gtk_menu_item()
 
     rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
     rb_define_method(gMenuItem, "set_submenu", mitem_set_submenu, 1);
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gMenuItem, "set_placement", mitem_set_placement, 1);
-    rb_define_method(gMenuItem, "configure", mitem_configure, 2);
-#endif
     rb_define_method(gMenuItem, "select", mitem_select, 0);
     rb_define_method(gMenuItem, "deselect", mitem_deselect, 0);
     rb_define_method(gMenuItem, "activate", mitem_activate, 0);

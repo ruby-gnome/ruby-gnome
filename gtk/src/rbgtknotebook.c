@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: mutoh $
-  $Date: 2002/05/19 13:59:10 $
+  $Date: 2002/05/19 15:48:28 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -33,11 +33,11 @@ note_append_page(argc, argv, self)
     rb_scan_args(argc, argv, "11", &child, &label);
 
     if (!NIL_P(label))
-	glabel = get_widget(label);
+        glabel = get_widget(label);
 
     gtk_notebook_append_page(GTK_NOTEBOOK(get_widget(self)),
-			     get_widget(child),
-			     glabel);
+                             get_widget(child),
+                             glabel);
     return self;
 }
 
@@ -53,12 +53,12 @@ note_append_page_menu(argc, argv, self)
     rb_scan_args(argc, argv, "21", &child, &tab_label, &menu_label);
 
     if (!NIL_P(menu_label))
-	gmenu_label = get_widget(menu_label);
+        gmenu_label = get_widget(menu_label);
 
     gtk_notebook_append_page_menu(GTK_NOTEBOOK(get_widget(self)),
-				  get_widget(child),
-				  get_widget(tab_label),
-				  gmenu_label);
+                                  get_widget(child),
+                                  get_widget(tab_label),
+                                  gmenu_label);
     return self;
 }
 
@@ -74,11 +74,11 @@ note_prepend_page(argc, argv, self)
     rb_scan_args(argc, argv, "11", &child, &label);
 
     if (!NIL_P(label))
-	glabel = get_widget(label);
+        glabel = get_widget(label);
 
     gtk_notebook_prepend_page(GTK_NOTEBOOK(get_widget(self)),
-			      get_widget(child),
-			      glabel);
+                              get_widget(child),
+                              glabel);
     return self;
 }
 
@@ -94,12 +94,12 @@ note_prepend_page_menu(argc, argv, self)
     rb_scan_args(argc, argv, "21", &child, &tab_label, &menu_label);
 
     if (!NIL_P(menu_label))
-	gmenu_label = get_widget(menu_label);
+        gmenu_label = get_widget(menu_label);
 
     gtk_notebook_prepend_page_menu(GTK_NOTEBOOK(get_widget(self)),
-				   get_widget(child),
-				   get_widget(tab_label),
-				   gmenu_label);
+                                   get_widget(child),
+                                   get_widget(tab_label),
+                                   gmenu_label);
     return self;
 }
 
@@ -110,12 +110,12 @@ note_insert_page(self, child, label, pos)
     GtkWidget *glabel = NULL;
 
     if (!NIL_P(label))
-	glabel = get_widget(label);
+        glabel = get_widget(label);
 
     gtk_notebook_insert_page(GTK_NOTEBOOK(get_widget(self)),
-			     get_widget(child),
-			     glabel,
-			     NUM2INT(pos));
+                             get_widget(child),
+                             glabel,
+                             NUM2INT(pos));
     return self;
 }
 
@@ -126,13 +126,13 @@ note_insert_page_menu(self, child, tab_label, menu_label, pos)
     GtkWidget *gmenu_label = NULL;
 
     if (!NIL_P(menu_label))
-	gmenu_label = get_widget(menu_label);
+        gmenu_label = get_widget(menu_label);
 
     gtk_notebook_insert_page_menu(GTK_NOTEBOOK(get_widget(self)),
-				  get_widget(child),
-				  get_widget(tab_label),
-				  gmenu_label,
-				  NUM2INT(pos));
+                                  get_widget(child),
+                                  get_widget(tab_label),
+                                  gmenu_label,
+                                  NUM2INT(pos));
     return self;
 }
 
@@ -187,7 +187,7 @@ note_page_num(self, child)
     VALUE self, child;
 {
     return INT2FIX(gtk_notebook_page_num(GTK_NOTEBOOK(get_widget(self)),
-					 get_widget(child)));
+                                         get_widget(child)));
 }
 
 static VALUE
@@ -195,7 +195,7 @@ note_get_nth_page(self, page_num)
     VALUE self, page_num;
 {
     GtkWidget *page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(get_widget(self)),
-						NUM2INT(page_num));
+                                                NUM2INT(page_num));
     return page ? get_value_from_gobject(GTK_OBJECT(page)) : Qnil;
 }
 
@@ -204,8 +204,8 @@ note_reorder_child(self, child, pos)
     VALUE self, child, pos;
 {
     gtk_notebook_reorder_child(GTK_NOTEBOOK(get_widget(self)),
-			       get_widget(child),
-			       NUM2INT(pos));
+                               get_widget(child),
+                               NUM2INT(pos));
     return self;
 }
 
@@ -243,7 +243,8 @@ static VALUE
 note_set_show_border(self, show_border)
     VALUE self, show_border;
 {
-    gtk_notebook_set_show_border(GTK_NOTEBOOK(get_widget(self)), RTEST(show_border));
+    gtk_notebook_set_show_border(GTK_NOTEBOOK(get_widget(self)),
+                                 RTEST(show_border));
     return self;
 }
 
@@ -258,7 +259,8 @@ static VALUE
 note_set_scrollable(self, scrollable)
     VALUE self, scrollable;
 {
-    gtk_notebook_set_scrollable(GTK_NOTEBOOK(get_widget(self)), RTEST(scrollable));
+    gtk_notebook_set_scrollable(GTK_NOTEBOOK(get_widget(self)),
+                                RTEST(scrollable));
     return self;
 }
 
@@ -274,7 +276,7 @@ note_set_homogeneous_tabs(self, homo)
     VALUE self, homo;
 {
     gtk_notebook_set_homogeneous_tabs(GTK_NOTEBOOK(get_widget(self)),
-				      RTEST(homo));
+                                      RTEST(homo));
     return self;
 }
 
@@ -334,8 +336,8 @@ note_query_tab_label_packing(self, child)
     VALUE ary;
 
     gtk_notebook_query_tab_label_packing(GTK_NOTEBOOK(get_widget(self)),
-					 get_widget(child),
-					 &expand, &fill, &pack_type);
+                     get_widget(child),
+                     &expand, &fill, &pack_type);
     ary = rb_ary_new2(3);
     rb_ary_push(ary, expand ? Qtrue : Qfalse);
     rb_ary_push(ary, fill ? Qtrue : Qfalse);
@@ -348,10 +350,10 @@ note_set_tab_label_packing(self, child, expand, fill, pack_type)
     VALUE self, child, expand, fill, pack_type;
 {
     gtk_notebook_set_tab_label_packing(GTK_NOTEBOOK(get_widget(self)),
-				       get_widget(child),
-				       RTEST(expand),
-				       RTEST(fill),
-				       NUM2INT(pack_type));
+                                       get_widget(child),
+                                       RTEST(expand),
+                                       RTEST(fill),
+                                       NUM2INT(pack_type));
     return self;
 }
 
@@ -360,7 +362,7 @@ note_get_menu_label(self, child)
     VALUE self, child;
 {
     GtkWidget *label = gtk_notebook_get_menu_label(GTK_NOTEBOOK(get_widget(self)),
-						   get_widget(child));
+                                                   get_widget(child));
     return make_gobject(gLabel, GTK_OBJECT(label));
 }
 
@@ -371,11 +373,11 @@ note_set_menu_label(self, child, label)
     GtkWidget *glabel = NULL;
 
     if (!NIL_P(label))
-	glabel = get_widget(label);
+        glabel = get_widget(label);
 
     gtk_notebook_set_menu_label(GTK_NOTEBOOK(get_widget(self)),
-				get_widget(child),
-				glabel);
+                                get_widget(child),
+                                glabel);
     return self;
 }
 
@@ -384,8 +386,8 @@ note_set_menu_label_text(self, child, text)
     VALUE self, child, text;
 {
     gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(get_widget(self)),
-				     get_widget(child),
-				     STR2CSTR(text));
+                                     get_widget(child),
+                                     STR2CSTR(text));
     return self;
 }
 
@@ -394,7 +396,7 @@ note_get_tab_label(self, child)
     VALUE self, child;
 {
     GtkWidget *label = gtk_notebook_get_tab_label(GTK_NOTEBOOK(get_widget(self)),
-						  get_widget(child));
+                                                  get_widget(child));
     return make_gobject(gLabel, GTK_OBJECT(label));
 }
 
@@ -405,11 +407,11 @@ note_set_tab_label(self, child, label)
     GtkWidget *glabel = NULL;
 
     if (!NIL_P(label))
-	glabel = get_widget(label);
+        glabel = get_widget(label);
 
     gtk_notebook_set_tab_label(GTK_NOTEBOOK(get_widget(self)),
-			       get_widget(child),
-			       glabel);
+                               get_widget(child),
+                               glabel);
     return self;
 }
 
@@ -418,8 +420,8 @@ note_set_tab_label_text(self, child, text)
     VALUE self, child, text;
 {
     gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(get_widget(self)),
-				    get_widget(child),
-				    STR2CSTR(text));
+                                    get_widget(child),
+                                    STR2CSTR(text));
     return self;
 }
 
@@ -441,40 +443,14 @@ get_notepage(page)
     GtkNotebookPage *c_page;
 
     if (NIL_P(page)) return NULL;
+
     if (!rb_obj_is_instance_of(page, gNotePage)) {
         rb_raise(rb_eTypeError, "not a NotebookPage");
     }
+
     Data_Get_Struct(page, GtkNotebookPage, c_page);
     return c_page;
 }
-
-#if GTK_MAJOR_VERSION < 2
-
-static VALUE
-notepage_child(self)
-    VALUE self;
-{
-    GtkWidget *child = get_notepage(self)->child;
-    return get_value_from_gobject(GTK_OBJECT(child));
-}
-
-static VALUE
-notepage_tab_label(self)
-    VALUE self;
-{
-    GtkWidget *label = get_notepage(self)->tab_label;
-    return get_value_from_gobject(GTK_OBJECT(label));
-}
-
-static VALUE
-notepage_menu_label(self)
-    VALUE self;
-{
-    GtkWidget *label = get_notepage(self)->menu_label;
-    return get_value_from_gobject(GTK_OBJECT(label));
-}
-
-#endif
 
 void Init_gtk_notebook()
 {
@@ -492,7 +468,6 @@ void Init_gtk_notebook()
     rb_define_method(gNotebook, "remove_page", note_remove_page, 1);
     rb_define_method(gNotebook, "set_page", note_set_page, 1);
     rb_define_method(gNotebook, "cur_page", note_cur_page, 0);
-    rb_define_method(gNotebook, "page", note_cur_page, 0);
     rb_define_method(gNotebook, "get_current_page", note_get_current_page, 0);
     rb_define_method(gNotebook, "next_page", note_next_page, 0);
     rb_define_method(gNotebook, "prev_page", note_prev_page, 0);
@@ -523,13 +498,9 @@ void Init_gtk_notebook()
     rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
 
-    gNotePage = rb_define_class_under(mGtk, "NotebookPage", rb_cData);
+    rb_define_alias(gNotebook, "page", "cur_page");
 
-#if GTK_MAJOR_VERSION < 2
-    rb_define_method(gNotePage, "child", notepage_child, 0);
-    rb_define_method(gNotePage, "tab_label", notepage_tab_label, 0);
-    rb_define_method(gNotePage, "menu_label", notepage_menu_label, 0);
-#endif
+    gNotePage = rb_define_class_under(mGtk, "NotebookPage", rb_cData);
 
     Init_gtk_font_selection();
 }

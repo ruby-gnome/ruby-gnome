@@ -1,4 +1,18 @@
+Tue May 20 00:30:47 2002 Masao Mutoh <mutoh@hgihway.ne.jp>
+	* Ruby-GNOME 2 is started.
+
+Tue Mar 12 22:21:47 2002 Neil Conway <neilconway@rogers.com>
+
+	* README: Clarify the installation instructions, on the
+	suggestion of Martin J. Brown, Jr. <mjbjr@beaudesign.com>.
+
+	* makefile.mnt: File removed.
+
+	* extconf.rb: Update for removal of makefile.mnt.
+
 Tue Mar 12 20:40:49 2002 Neil Conway <neilconway@rogers.com>
+
+	* addheader.rb: Update for new maintainer.
 
 Fri Nov 16 14:32:40 2001 Neil Conway <neilconway@rogers.com>
 

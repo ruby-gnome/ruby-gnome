@@ -1,3 +1,12 @@
+Tue Mar 19 09:59:53 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgnome.c: Update for change in rbgtk.h: now use the
+	name RUBY_GTK_OBJ_KEY.
+
+Tue Mar 19 01:19:03 2002 Neil Conway <neilconway@rogers.com>
+
+	* src/rbgnome.c, src/rbgnome.h: Implement get_value_from_gno_obj.
+
 Thu Feb  7 17:49:53 2002 Neil Conway <neilconway@rogers.com>
 
 	* src/rbgnome-file-entry.c: Code cleanup.
