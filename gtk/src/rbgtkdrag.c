@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: mutoh $
-  $Date: 2004/07/24 08:03:14 $
+  $Author: geoff_youngs $
+  $Date: 2004/11/06 10:44:38 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -57,6 +57,11 @@ gtkdrag_dest_set(self, widget, flags, targets, actions)
         gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
                           entries, 
                           num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    }
+    else
+    {
+        gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
+                          NULL, 0, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     }
     return self;
 }
