@@ -1,4 +1,4 @@
-2003-03-21  Masao Mutoh <mutoh@highway.ne.jp>
+2003-03-21  Masao Mutoh <oolbab@highway.ne.jp>
 
 	* sample/gtk-demo/*.rb: Modified comments.
 
@@ -142,9 +142,9 @@
 	
 2003-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtktoolbar.c: Remove Gtk::Treebar#insert_item/widget/element, 
-	Gtk::Treebar#prepend_item/widget/element, Gtk::Treebar#append_item/widget/element.
-	Use Gtk::Treebar#insert, prepend, append instead.
+	* src/rbgtktoolbar.c: Remove Gtk::Toolbar#insert_item/widget/element, 
+	Gtk::Toolbar#prepend_item/widget/element, Gtk::Toolbar#append_item/widget/element.
+	Use Gtk::Toolbar#insert, prepend, append instead.
 	
 2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
