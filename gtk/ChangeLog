@@ -1,3 +1,13 @@
+2004-05-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextview.c: Fix a bug of Gtk::TextView#move_child. 
+	Reported by Emmanuel Touzery.
+
+2004-04-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextview.c: Fix a bug of Gtk::TextView#add_child_in_window.
+	Reported by Emmanuel Touzery.
+
 2004-04-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Use $cleanfiles instead of $discleanfiles to remove 

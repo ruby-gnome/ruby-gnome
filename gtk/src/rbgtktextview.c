@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2004/04/30 18:03:27 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -256,7 +256,7 @@ textview_add_child_in_window(self, child, which_window, xpos, ypos)
     VALUE self, child, which_window, xpos, ypos;
 {
     gtk_text_view_add_child_in_window(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
-                                      FIX2INT(which_window), 
+                                      RVAL2GENUM(which_window, GTK_TYPE_TEXT_WINDOW_TYPE),
                                       NUM2INT(xpos), NUM2INT(ypos));
     return self;
 }
@@ -310,7 +310,7 @@ Init_gtk_textview()
     rb_define_method(cTextView, "move_visually", textview_move_visually, 2);
     rb_define_method(cTextView, "add_child_at_anchor", textview_add_child_at_anchor, 2);
     rb_define_method(cTextView, "add_child_in_window", textview_add_child_in_window, 4);
-    rb_define_method(cTextView, "move_child", textview_move_child, 2);
+    rb_define_method(cTextView, "move_child", textview_move_child, 3);
     rb_define_method(cTextView, "default_attributes", textview_get_default_attributes, 0);
 
     G_DEF_SETTERS(cTextView);
