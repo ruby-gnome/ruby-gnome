@@ -1,3 +1,7 @@
+2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkdisplaymanager.c: GTK+-2.2.0 or later only. 
+
 2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* sample/gtk-demo/main.rb (Demo::Main#create_tree): fix handling of
