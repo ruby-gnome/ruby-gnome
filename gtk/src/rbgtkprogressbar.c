@@ -4,7 +4,7 @@
   rbgtkprogressbar.c -
 
   $Author: mutoh $
-  $Date: 2002/11/04 16:19:18 $
+  $Date: 2002/11/11 15:32:34 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -29,15 +29,6 @@ pbar_pulse(self)
     return self;
 }
 
-static VALUE
-pbar_update(self, percentage)
-    VALUE self, percentage;
-{
-    gtk_progress_bar_update(GTK_PROGRESS_BAR(RVAL2GOBJ(self)),
-			    NUM2DBL(percentage));
-    return self;
-}    
-
 void 
 Init_gtk_progress_bar()
 {
@@ -55,5 +46,4 @@ Init_gtk_progress_bar()
 
     rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);
     rb_define_method(gProgressBar, "pulse", pbar_pulse, 0);
-    rb_define_method(gProgressBar, "update", pbar_update, 1);
 }

@@ -54,7 +54,6 @@ require 'colorselect'
 require 'dialog'
 require 'range'
 require 'rulers'
-require 'text'
 require 'notebook'
 require 'panes'
 require 'dnd'
@@ -119,7 +118,6 @@ def create_main_window
     ["test scrolling", nil],
     ["test selection", nil],
     ["test timeout", nil],
-    ["text", TextSample],
     ["toggle buttons", ToggleButtonSample],
     ["toolbar", ToolbarSample],
     ["tooltips", TooltipsSample],

@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:08:30 $
+  $Date: 2002/11/11 15:32:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -566,8 +566,8 @@ Init_gtk_gdk_event()
     gdkEvent = rb_define_class_under(mGdk, "Event", GTYPE2CLASS(G_TYPE_BOXED));
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
 
-    gdkevents[GDK_DELETE]        = gdkEvent; /* FIXME */
-    gdkevents[GDK_DESTROY]       = gdkEvent; /* FIXME */
+    gdkevents[GDK_DELETE]        = gdkEventAny;
+    gdkevents[GDK_DESTROY]       = gdkEventAny;
     gdkevents[GDK_EXPOSE]        = rb_define_class_under(mGdk, "EventExpose", gdkEventAny);
     gdkevents[GDK_MOTION_NOTIFY] = rb_define_class_under(mGdk, "EventMotion", gdkEventAny);
     gdkevents[GDK_BUTTON_PRESS]  = rb_define_class_under(mGdk, "EventButton", gdkEventAny);
@@ -580,8 +580,8 @@ Init_gtk_gdk_event()
     gdkevents[GDK_LEAVE_NOTIFY]  = gdkevents[GDK_ENTER_NOTIFY];
     gdkevents[GDK_FOCUS_CHANGE]  = rb_define_class_under(mGdk, "EventFocus", gdkEventAny);
     gdkevents[GDK_CONFIGURE]     = rb_define_class_under(mGdk, "EventConfigure", gdkEventAny);
-    gdkevents[GDK_MAP]           = gdkEvent; /* FIXME */
-    gdkevents[GDK_UNMAP]         = gdkEvent; /* FIXME */
+    gdkevents[GDK_MAP]           = gdkEventAny;
+    gdkevents[GDK_UNMAP]         = gdkEventAny;
     gdkevents[GDK_PROPERTY_NOTIFY]= rb_define_class_under(mGdk, "EventProperty", gdkEventAny);
     gdkevents[GDK_SELECTION_CLEAR]= rb_define_class_under(mGdk, "EventSelection", gdkEventAny);
     gdkevents[GDK_SELECTION_REQUEST]= gdkevents[GDK_SELECTION_CLEAR];

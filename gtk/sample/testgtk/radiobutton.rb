@@ -3,8 +3,8 @@
   radiobutton.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:16 $
-  $Id: radiobutton.rb,v 1.1 2002/05/19 12:39:16 mutoh Exp $
+  $Date: 2002/11/11 15:32:30 $
+  $Id: radiobutton.rb,v 1.2 2002/11/11 15:32:30 mutoh Exp $
 
 Original Copyright:
  
@@ -39,7 +39,7 @@ class RadioButtonSample < SampleWindow
     box1.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, true, true, 0)
     box2.show
 
@@ -62,7 +62,7 @@ class RadioButtonSample < SampleWindow
     separator.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
     box2.show
 

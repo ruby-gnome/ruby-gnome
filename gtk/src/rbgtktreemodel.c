@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: igapy $
-  $Date: 2002/11/04 14:11:57 $
+  $Author: mutoh $
+  $Date: 2002/11/11 15:32:35 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -68,23 +68,6 @@ treemodel_get_value(self, iter, column)
     return G_VALUE_TYPE(&value) != G_TYPE_INVALID ? GVAL2RVAL(&value) : Qnil;
 }
 
-static VALUE
-treemodel_get_current_item(self, iter)
-    VALUE self, iter;
-{
-    gint i;
-    GtkTreeIter* giter = RVAL2ITR(iter);
-    GtkTreeModel* gmodel = _SELF(self);
-    gint num = gtk_tree_model_get_n_columns(gmodel);
-    VALUE ary = rb_ary_new();
-    for (i = 0; i < num; i++){
-        GValue value = {0,};
-        gtk_tree_model_get_value(gmodel, giter, i, &value);
-        rb_ary_push(ary, (G_VALUE_TYPE(&value) != G_TYPE_INVALID) ? GVAL2RVAL(&value) : Qnil);
-    }
-    return ary;
-}
-
 /* These methods may be neededless.
 void        gtk_tree_model_ref_node (GtkTreeModel *tree_model,
                                              GtkTreeIter *iter);
@@ -105,6 +88,7 @@ treemodel_foreach_func(model, path, iter, func)
     GtkTreeIter* iter;
     gpointer func;
 {
+    iter->user_data3 = model;
     return RTEST(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(model), 
                             TREEPATH2RVAL(path), ITR2RVAL(iter)));
 }
@@ -184,7 +168,6 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "get_column_type", treemodel_get_column_type, 1);
     rb_define_method(mTreeModel, "get_iter", treemodel_get_iter, 1);
     rb_define_method(mTreeModel, "get_value", treemodel_get_value, 2);
-    rb_define_method(mTreeModel, "get_current_item", treemodel_get_current_item, 1);
     rb_define_method(mTreeModel, "each", treemodel_foreach, 0);
     rb_define_method(mTreeModel, "row_changed", treemodel_row_changed, 2);
     rb_define_method(mTreeModel, "row_inserted", treemodel_row_inserted, 2);

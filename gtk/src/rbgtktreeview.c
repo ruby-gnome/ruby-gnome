@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2002/10/19 13:20:41 $
+  $Date: 2002/11/11 15:32:36 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -15,6 +15,8 @@
 #define TREEVIEW_COL(c) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(c)))
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 #define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
+#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
+#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 treeview_initialize(argc, argv, self)
@@ -378,6 +380,21 @@ treeview_create_row_drag_icon(self, path)
   GtkDestroyNotify search_destroy);
 */
 
+/*
+ * Optional Signals
+ */
+static VALUE
+treeview_signal_func(num, values)
+    guint num;
+    const GValue* values;
+{
+    GtkTreeView* view = g_value_get_object(&values[0]);
+    GtkTreeIter* iter = g_value_get_boxed(&values[1]);
+    iter->user_data3 = gtk_tree_view_get_model(view);
+
+    return rb_ary_new3(3, GOBJ2RVAL(view), ITR2RVAL(iter), GVAL2RVAL(&values[2]));
+}
+
 void 
 Init_gtk_treeview()
 {
@@ -421,4 +438,10 @@ Init_gtk_treeview()
     rb_define_const(gTv, "DROP_AFTER", INT2NUM(GTK_TREE_VIEW_DROP_AFTER));
     rb_define_const(gTv, "DROP_INTO_OR_BEFORE", INT2NUM(GTK_TREE_VIEW_DROP_INTO_OR_BEFORE));
     rb_define_const(gTv, "DROP_INTO_OR_AFTER", INT2NUM(GTK_TREE_VIEW_DROP_INTO_OR_AFTER));
+
+    /* Option Signals */
+    G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "row-expanded", treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "test-collapse-row", treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(gTv, "test-expand-row", treeview_signal_func);
 }

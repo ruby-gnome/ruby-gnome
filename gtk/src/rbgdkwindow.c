@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:08:30 $
+  $Date: 2002/11/11 15:32:33 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -605,19 +605,19 @@ gdkwin_set_functions(self, func)
 
 static VALUE
 gdkwin_get_toplevels(self)
-	VALUE self;
+    VALUE self;
 {
-	GList* list = gdk_window_get_toplevels();
-	VALUE ary = rb_ary_new();
-	while (list) {
-		rb_ary_push(ary, GOBJ2RVAL(list->data));
-		list = list->next;
-	}
-	return ary;
+    return GLIST2ARY(gdk_window_get_toplevels());
+}
+
+static VALUE
+gdkwin_s_get_default_root_window(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_get_default_root_window());
 }
 
 /*
-GdkWindow*  gdk_get_default_root_window     (void);
 GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 */
 
@@ -815,6 +815,7 @@ Init_gtk_gdk_window()
    rb_define_method(gdkWindow, "pointer", gdkwin_get_pointer, 0);
    rb_define_method(gdkWindow, "parent", gdkwin_get_parent, 0);
    rb_define_method(gdkWindow, "toplevel", gdkwin_get_toplevel, 0);
+   rb_define_singleton_method(gdkWindow, "default_root_window", gdkwin_s_get_default_root_window, 0);
    rb_define_method(gdkWindow, "children", gdkwin_get_children, 0);
    rb_define_method(gdkWindow, "events", gdkwin_get_events, 0);
    rb_define_method(gdkWindow, "set_events", gdkwin_set_events, 1);

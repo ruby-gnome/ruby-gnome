@@ -251,12 +251,13 @@ class ProgressBarSample < SampleDialog
 
   private
   def progress_timeout
+    @pbar.pulse
     adj = @pbar.adjustment
 
     new_val = adj.value + 1
     new_val = adj.lower if new_val > adj.upper
 
-    @pbar.set_value(new_val)
+#    @pbar.update(new_val)
 
     true
   end

@@ -3,8 +3,8 @@
 
   rbgtktreeselection.c -
 
-  $Author: igapy $ 
-  $Date: 2002/11/04 14:11:57 $
+  $Author: mutoh $ 
+  $Date: 2002/11/11 15:32:35 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -55,8 +55,10 @@ treeselection_get_selected(self)
     VALUE self;
 {
     GtkTreeIter iter;
-    return (gtk_tree_selection_get_selected(_SELF(self), (GtkTreeModel**)NULL, &iter)) ? 
-        ITR2RVAL(&iter) : Qnil;
+    GtkTreeModel* model;
+    gboolean ret = gtk_tree_selection_get_selected(_SELF(self), &model, &iter);
+    iter.user_data3 = model;
+    return ret ? ITR2RVAL(&iter) : Qnil;
 }
 
 static void
@@ -66,6 +68,7 @@ treeselection_foreach_func(model, path, iter, data)
     GtkTreeIter* iter;
     gpointer data;
 {
+    iter->user_data3 = model;
     rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(model), 
                TREEPATH2RVAL(path), ITR2RVAL(iter));
 }

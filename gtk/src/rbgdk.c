@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2002/10/31 17:08:29 $
+  $Date: 2002/11/11 15:32:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -77,8 +77,8 @@ gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time
     gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RTEST(owner_events),
                      NUM2INT(event_mask),
-                     GDK_WINDOW(RVAL2GOBJ(confine_to)),
-                     (GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
+                     NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
+                     NIL_P(confine_to)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
                      NUM2INT(time));
     return self;
 }

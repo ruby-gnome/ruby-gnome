@@ -7,8 +7,8 @@ require 'sample'
 class RulerSample < SampleWindow
   def initialize
     super("rulers")
-    set_usize(300, 300)
-    set_events(Gdk::POINTER_MOTION_MASK | Gdk::POINTER_MOTION_HINT_MASK)
+    set_default_size(300, 300)
+    set_events(Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::POINTER_MOTION_HINT_MASK)
 
     table = Gtk::Table::new(2, 2, false)
     add(table)

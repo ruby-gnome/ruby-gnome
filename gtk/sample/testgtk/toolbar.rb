@@ -3,7 +3,7 @@
   toolbar.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: toolbar.rb,v 1.1 2002/05/19 12:39:13 mutoh Exp $
+  $Id: toolbar.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
 
 Original Copyright:
  
@@ -32,13 +32,10 @@ require 'sample'
 class ToolbarSample < SampleWindow
   def initialize
     super("Toolbar test")
-    set_policy(false, true, true)
-    border_width(0)
+    set_border_width(0)
     realize
 
-    toolbar = Gtk::Toolbar::new(Gtk::ORIENTATION_HORIZONTAL,
-                                 Gtk::TOOLBAR_BOTH)
-    toolbar.set_button_relief(Gtk::RELIEF_NONE)
+    toolbar = Gtk::Toolbar::new
 
     toolbar.append_item("Horizontal", "Horizontal toolbar layout",
                         "Toolbar/Horizontal",
@@ -59,17 +56,17 @@ class ToolbarSample < SampleWindow
                         "Toolbar/IconsOnly",
                         new_pixmap("test.xpm", window,
                                    style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_style(Gtk::TOOLBAR_ICONS)
+      toolbar.set_toolbar_style(Gtk::Toolbar::ICONS)
     end
     toolbar.append_item("Text", "Only show toolbar text", "Toolbar/TextOnly",
                         new_pixmap("test.xpm", window,
                                     style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_style(Gtk::TOOLBAR_TEXT)
+      toolbar.set_toolbar_style(Gtk::Toolbar::TEXT)
     end
     toolbar.append_item("Both", "Show toolbar icons and text", "Toolbar/Both",
                         new_pixmap("test.xpm", window,
                                     style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_style(Gtk::TOOLBAR_BOTH)
+      toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
     end
 
     toolbar.append_space
@@ -78,20 +75,6 @@ class ToolbarSample < SampleWindow
     entry.show
     toolbar.append_widget(entry, "This is an unusable GtkEntry ;)",
                           "Hey don't click me!!!")
-
-    toolbar.append_space
-
-    toolbar.append_item("Small", "Use small spaces", "Toolbar/Small",
-                        new_pixmap("test.xpm", window,
-                                    style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_space_size(5)
-    end
-
-    toolbar.append_item("Big", "Use big spaces", "Toolbar/Big",
-                        new_pixmap("test.xpm", window,
-                                    style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_space_size(10)
-    end
 
     toolbar.append_space
 
@@ -104,32 +87,6 @@ class ToolbarSample < SampleWindow
                         new_pixmap("test.xpm", window,
                                    style.bg(Gtk::STATE_NORMAL)), nil) do
       toolbar.set_tooltips(false)
-    end
-
-    toolbar.append_space
-
-    toolbar.append_item("Borders", "Show Borders", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_button_relief(Gtk::RELIEF_NORMAL)
-    end
-    toolbar.append_item("Borderless", "Hide Borders", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_button_relief(Gtk::RELIEF_NONE)
-    end
-
-    toolbar.append_space
-
-    toolbar.append_item("Empty", "Empty spaces", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_space_style(Gtk::Toolbar::SPACE_EMPTY)
-    end
-    toolbar.append_item("Lines", "Lines in spaces", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_space_style(Gtk::Toolbar::SPACE_LINE)
     end
 
     add(toolbar)

@@ -3,8 +3,8 @@
   togglebutton.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:13 $
-  $Id: togglebutton.rb,v 1.1 2002/05/19 12:39:13 mutoh Exp $
+  $Date: 2002/11/11 15:32:31 $
+  $Id: togglebutton.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
 
 Original Copyright:
  
@@ -36,33 +36,26 @@ class ToggleButtonSample < SampleWindow
 
     box1 = Gtk::VBox::new(false, 0)
     add(box1)
-    box1.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, true, true, 0)
-    box2.show
 
     button = Gtk::ToggleButton::new("button1")
     box2.pack_start(button, true, true, 0)
-    button.show
 
     button = Gtk::ToggleButton::new("button2")
     box2.pack_start(button, true, true, 0)
-    button.show
 
     button = Gtk::ToggleButton::new("button3")
     box2.pack_start(button, true, true, 0)
-    button.show
 
     separator = Gtk::HSeparator::new()
     box1.pack_start(separator, false, true, 0)
-    separator.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
-    box2.show
 
     button = Gtk::Button::new("close")
     button.signal_connect("clicked") do destroy end
@@ -70,6 +63,5 @@ class ToggleButtonSample < SampleWindow
     box2.pack_start(button, true, true, 0)
     button.set_flags(Gtk::Widget::CAN_DEFAULT)
     button.grab_default
-    button.show
   end
 end

@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: igapy $
-  $Date: 2002/11/04 14:11:56 $
+  $Author: mutoh $
+  $Date: 2002/11/11 15:32:34 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -105,7 +105,9 @@ lstore_insert(self, position)
     VALUE self, position;
 {
     GtkTreeIter iter;
-    gtk_list_store_insert(_SELF(self), &iter, NUM2INT(position));
+    GtkListStore* model = _SELF(self);
+    gtk_list_store_insert(model, &iter, NUM2INT(position));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -114,8 +116,9 @@ lstore_insert_before(self, sibling)
     VALUE self, sibling;
 {
     GtkTreeIter iter;
-    gtk_list_store_insert_before(_SELF(self), &iter, 
-                                 NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    GtkListStore* model = _SELF(self);
+    gtk_list_store_insert_before(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -124,8 +127,9 @@ lstore_insert_after(self, sibling)
     VALUE self, sibling;
 { 
     GtkTreeIter iter;
-    gtk_list_store_insert_after(_SELF(self), &iter, 
-                                NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    GtkListStore* model = _SELF(self);
+    gtk_list_store_insert_after(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -134,7 +138,9 @@ lstore_prepend(self)
     VALUE self;
 {
     GtkTreeIter iter;
-    gtk_list_store_prepend(_SELF(self), &iter);
+    GtkListStore* model = _SELF(self);
+    gtk_list_store_prepend(model, &iter);
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -143,7 +149,9 @@ lstore_append(self)
     VALUE self;
 {
     GtkTreeIter iter;
-    gtk_list_store_append(_SELF(self), &iter);
+    GtkListStore* model = _SELF(self);
+    gtk_list_store_append(model, &iter);
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -158,18 +166,20 @@ lstore_clear(self)
 void
 Init_gtk_list_store()
 {
-    VALUE ts = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
+    VALUE ls = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
   
-    rb_define_method(ts, "initialize", lstore_initialize, -1);
-    rb_define_method(ts, "set_column_types", lstore_set_column_types, -1);
-    rb_define_method(ts, "set_value", lstore_set_value, 3);
-    rb_define_method(ts, "remove", lstore_remove, 1);
-    rb_define_method(ts, "insert", lstore_insert, 1);
-    rb_define_method(ts, "insert_before", lstore_insert_before, 1);
-    rb_define_method(ts, "insert_after", lstore_insert_after, 1);
-    rb_define_method(ts, "prepend", lstore_prepend, 0);
-    rb_define_method(ts, "append", lstore_append, 0);
-    rb_define_method(ts, "clear", lstore_clear, 0);
+    rbgtk_register_treeiter_set_value_func(GTK_TYPE_LIST_STORE, 
+                                           (rbgtkiter_set_value_func)&gtk_list_store_set_value);
+    rb_define_method(ls, "initialize", lstore_initialize, -1);
+    rb_define_method(ls, "set_column_types", lstore_set_column_types, -1);
+    rb_define_method(ls, "set_value", lstore_set_value, 3);
+    rb_define_method(ls, "remove", lstore_remove, 1);
+    rb_define_method(ls, "insert", lstore_insert, 1);
+    rb_define_method(ls, "insert_before", lstore_insert_before, 1);
+    rb_define_method(ls, "insert_after", lstore_insert_after, 1);
+    rb_define_method(ls, "prepend", lstore_prepend, 0);
+    rb_define_method(ls, "append", lstore_append, 0);
+    rb_define_method(ls, "clear", lstore_clear, 0);
 }
 
 

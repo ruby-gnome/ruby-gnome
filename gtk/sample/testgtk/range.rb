@@ -37,14 +37,14 @@ class RangeSample < SampleWindow
     box1.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, true, true, 0)
     box2.show
 
     adjustment = Gtk::Adjustment::new(0.0, 0.0, 101.0, 0.1, 1.0, 1.0)
 
     scale = Gtk::HScale::new(adjustment)
-    scale.set_usize(150, 30)
+    scale.set_size_request(150, 50)
     scale.set_update_policy(Gtk::UPDATE_DELAYED)
     scale.set_digits(1)
     scale.set_draw_value(true)
@@ -61,7 +61,7 @@ class RangeSample < SampleWindow
     separator.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
     box2.show
 

@@ -3,7 +3,7 @@
   spinbutton.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: spinbutton.rb,v 1.1 2002/05/19 12:39:15 mutoh Exp $
+  $Id: spinbutton.rb,v 1.2 2002/11/11 15:32:31 mutoh Exp $
 
 Original Copyright:
  
@@ -81,14 +81,14 @@ class SpinButtonSample < SampleWindow
     super("GtkSpinButton")
       
     main_vbox = Gtk::VBox::new(false, 5)
-    main_vbox.border_width(10)
+    main_vbox.set_border_width(10)
     add(main_vbox) 
      
     frame = Gtk::Frame::new("Not accelerated")
     main_vbox.pack_start(frame, true, true, 0)
       
     vbox = Gtk::VBox::new(false, 0)
-    vbox.border_width(5)
+    vbox.set_border_width(5)
     frame.add(vbox)
       
     # Day, month, year spinners 
@@ -133,14 +133,14 @@ class SpinButtonSample < SampleWindow
     spinner = Gtk::SpinButton::new(adj, 0, 0)
     spinner.set_wrap(true)
     #spinner.set_shadow_type(Gtk::SHADOW_IN)
-    spinner.set_usize(55, 0)
+    spinner.set_size_request(55, 0)
     vbox2.pack_start(spinner, false, true, 0)
 
     frame = Gtk::Frame::new("Accelerated")
     main_vbox.pack_start(frame, true, true, 0)
   
     vbox = Gtk::VBox::new(false, 0)
-    vbox.border_width(5)
+    vbox.set_border_width(5)
     frame.add(vbox)
       
     hbox = Gtk::HBox::new(false, 0)
@@ -156,7 +156,7 @@ class SpinButtonSample < SampleWindow
     adj = Gtk::Adjustment::new(0.0, -10000.0, 10000.0, 0.5, 100.0, 0.0)
     @spinner1 = Gtk::SpinButton::new(adj, 1.0, 2)
     @spinner1.set_wrap(true)
-    @spinner1.set_usize(100, 0)
+    @spinner1.set_size_request(100, 0)
     @spinner1.set_update_policy(Gtk::SpinButton::UPDATE_ALWAYS)
     vbox2.pack_start(@spinner1, false, true, 0)
 
@@ -202,7 +202,7 @@ class SpinButtonSample < SampleWindow
     hbox.pack_start(button4, true, true, 5)
 
     vbox.pack_start(val_label, true, true, 0)
-    val_label.set("0")
+    val_label.set_text("0")
 
     hbox = Gtk::HBox::new(false, 0)
     main_vbox.pack_start(hbox, false, true, 0)

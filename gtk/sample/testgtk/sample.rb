@@ -6,6 +6,10 @@
 
 require 'gtk2'
 
+class Object
+  alias :type :class  if defined?(:class)
+end
+
 module Sample
   def destroy
     super

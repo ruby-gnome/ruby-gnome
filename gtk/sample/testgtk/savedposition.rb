@@ -33,20 +33,21 @@ class SavedPositionSample < SampleWindow
 
   def initialize
     super("Saved Position")
-    set_uposition(Pos[0], Pos[1])
+    move(Pos[0], Pos[1])
+    set_default_size(200, 100)
 
     main_vbox = Gtk::VBox::new(false, 5)
-    main_vbox.border_width(0)
+    main_vbox.set_border_width(0)
     add(main_vbox)
     main_vbox.show
 
     vbox = Gtk::VBox::new(false, 5)
-    vbox.border_width(10)
+    vbox.set_border_width(10)
     main_vbox.pack_start(vbox, true, true, 0)
     vbox.show
 
     hbox = Gtk::HBox::new(false, 0)
-    hbox.border_width(5)
+    hbox.set_border_width(5)
     vbox.pack_start(hbox, false, true, 0)
     hbox.show
 
@@ -60,7 +61,7 @@ class SavedPositionSample < SampleWindow
     x_label.show
 
     hbox = Gtk::HBox::new(false, 0)
-    hbox.border_width(5)
+    hbox.set_border_width(5)
     vbox.pack_start(hbox, false, true, 0)
     hbox.show
 
@@ -74,11 +75,11 @@ class SavedPositionSample < SampleWindow
     y_label.show
 
     signal_connect("configure_event") do
-      x, y = window.get_root_origin
+      x, y = window.root_origin
       Pos[0] = x
       Pos[1] = y
-      x_label.set x.to_s
-      y_label.set y.to_s
+      x_label.text = x.to_s
+      y_label.text = y.to_s
     end
 
     any = Gtk::HSeparator::new()
@@ -86,7 +87,7 @@ class SavedPositionSample < SampleWindow
     any.show
 
     hbox = Gtk::HBox::new(false, 0)
-    hbox.border_width(10)
+    hbox.set_border_width(10)
     main_vbox.pack_start(hbox, false, true, 0);
     hbox.show
 

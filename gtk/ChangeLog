@@ -1,5 +1,21 @@
+2002-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/tooltips.rb, wmhints.rb, toolbar.rb, togglebutton.rb, testgtk.rb, 
+	statusbar.rb, spinbutton.rb, shapedwindow.rb, scrolledwindow.rb, savedposition.rb, 
+	rulers.rb, sample.rb, reparent.rb, range.rb, radiobutton.rb, progressbar.rb: 
+	* sample/testgtk/text.rb: Removed.
+	* src/rbgdk.c: arg3, arg4 of Gdk.pointer_grab accept nil.
+	* src/rbgtkwidget.c: Improve Gtk::Widget#window. 
+	* src/rbgdkwindow.c: Add Gdk::Window#default_root_window.
+	* src/rbgdkevent.c: Fix some event definitions. 
+	* src/rbgtkwidget.c: Readd *_event methods.
+	* src/rbgtktree*.c: change Gtk::TreeIter. Now Gtk::TreeIter instance methods don't 
+	need Gtk::TreeModel.  
+	* src/rbgtkprogressbar.c: Remove Gtk::ProgreeBar#update.
+
 2002-11-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktreemodel.c: Remove Gtk::TreeModel#get_current_item.
 	* sample/testgtk/notebook.rb: Apply Ruby/GTK2.
 	* src/rbgtkimage.c: Add Gtk::Image#set.
 	* src/rbgtknotebook.c: Follow GLib changes.

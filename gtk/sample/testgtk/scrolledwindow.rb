@@ -3,8 +3,8 @@
   scrolledwindow.rb - a part of testgtk.c rewritten in ruby-gtk
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2002/05/19 12:39:13 $
-  $Id: scrolledwindow.rb,v 1.1 2002/05/19 12:39:13 mutoh Exp $
+  $Date: 2002/11/11 15:32:30 $
+  $Id: scrolledwindow.rb,v 1.2 2002/11/11 15:32:30 mutoh Exp $
 
 Original Copyright:
  
@@ -34,25 +34,25 @@ class ScrolledWindowSample < SampleDialog
   def initialize
     super("dialog")
 
-    scrolled_window = Gtk::ScrolledWindow::new(nil, nil)
-    scrolled_window.border_width(10)
+    scrolled_window = Gtk::ScrolledWindow.new
+    scrolled_window.set_border_width(10)
     scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
                                Gtk::POLICY_AUTOMATIC)
     vbox.pack_start(scrolled_window, true, true, 0)
     scrolled_window.show
 
-    table = Gtk::Table::new(20, 20, false)
+    table = Gtk::Table.new(20, 20, false)
     table.set_row_spacings(10)
     table.set_col_spacings(10)
     scrolled_window.add_with_viewport(table)
-    table.set_focus_hadjustment(scrolled_window.get_hadjustment)
-    table.set_focus_vadjustment(scrolled_window.get_vadjustment)
+    table.set_focus_hadjustment(scrolled_window.hadjustment)
+    table.set_focus_vadjustment(scrolled_window.vadjustment)
     table.show
 
     for i in 0..19
       for j in 0..19
         buffer = sprintf("button (%d,%d)\n", i, j)
-        button = Gtk::ToggleButton::new(buffer)
+        button = Gtk::ToggleButton.new(buffer)
         table.attach(button, i, i+1, j, j+1)
         button.show
       end

@@ -37,7 +37,7 @@ class ReparentSample < SampleWindow
     box1.show
 
     box2 = Gtk::HBox::new(false, 5)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, true, true, 0)
     box2.show
 
@@ -48,7 +48,7 @@ class ReparentSample < SampleWindow
     frame.show
 
     framebox1 = Gtk::VBox::new(false, 5)
-    framebox1.border_width(5)
+    framebox1.set_border_width(5)
     frame.add(framebox1)
     framebox1.show
 
@@ -61,9 +61,9 @@ class ReparentSample < SampleWindow
 
     framebox1.pack_start(label, false, true, 0)
     label.signal_connect("parent_set") do |child, old_parent|
-      print("set_parent for \"#{child.type}\":")
-      print(" new parent: \"#{if child.parent then child.parent.type else 'NULL' end}\",")
-      print(" old parent: \"#{if old_parent then old_parent.type else 'NULL' end}\",")
+      print("set_parent for \"#{child.class}\":")
+      print(" new parent: \"#{if child.parent then child.parent.class else 'NULL' end}\",")
+      print(" old parent: \"#{if old_parent then old_parent.class else 'NULL' end}\",")
       print(" data: 42\n")
     end
     label.show
@@ -73,7 +73,7 @@ class ReparentSample < SampleWindow
     frame.show
 
     framebox2 = Gtk::VBox::new(false, 5)
-    framebox2.border_width(5)
+    framebox2.set_border_width(5)
     frame.add(framebox2)
     framebox2.show
 
@@ -89,7 +89,7 @@ class ReparentSample < SampleWindow
     separator.show
 
     box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
     box2.show
 

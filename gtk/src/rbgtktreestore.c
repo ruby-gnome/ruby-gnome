@@ -3,8 +3,8 @@
 
   rbgtktreestore.c -
 
-  $Author: igapy $
-  $Date: 2002/11/04 14:11:57 $
+  $Author: mutoh $
+  $Date: 2002/11/11 15:32:36 $
 
   Copyright (C) 2002 Masao Mutoh
 ************************************************/
@@ -100,9 +100,11 @@ tstore_insert(self, parent, position)
     VALUE self, parent, position;
 {
     GtkTreeIter iter;
-    gtk_tree_store_insert(_SELF(self), &iter, 
+    GtkTreeStore* model = _SELF(self);
+    gtk_tree_store_insert(model, &iter, 
                           NIL_P(parent)?NULL:RVAL2ITR(parent), 
                           NUM2INT(position));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -111,9 +113,11 @@ tstore_insert_before(self, parent, sibling)
     VALUE self, parent, sibling;
 {
     GtkTreeIter iter;
-    gtk_tree_store_insert_before(_SELF(self), &iter, 
+    GtkTreeStore* model = _SELF(self);
+    gtk_tree_store_insert_before(model, &iter, 
                                  NIL_P(parent) ? NULL : RVAL2ITR(parent), 
                                  NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -122,9 +126,11 @@ tstore_insert_after(self, parent, sibling)
     VALUE self, parent, sibling;
 { 
     GtkTreeIter iter;
-    gtk_tree_store_insert_after(_SELF(self), &iter, 
+    GtkTreeStore* model = _SELF(self);
+    gtk_tree_store_insert_after(model, &iter, 
                                 NIL_P(parent) ? NULL : RVAL2ITR(parent), 
                                 NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -133,8 +139,10 @@ tstore_prepend(self, parent)
     VALUE self, parent;
 {
     GtkTreeIter iter;
-    gtk_tree_store_prepend(_SELF(self), &iter, 
+    GtkTreeStore* model = _SELF(self);
+    gtk_tree_store_prepend(model, &iter, 
                            NIL_P(parent)?NULL:RVAL2ITR(parent));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -143,8 +151,10 @@ tstore_append(self, parent)
     VALUE self, parent;
 {
     GtkTreeIter iter;
-    gtk_tree_store_append(_SELF(self), &iter, 
+    GtkTreeStore* model = _SELF(self);
+    gtk_tree_store_append(model, &iter, 
                           NIL_P(parent)?NULL:RVAL2ITR(parent));
+    iter.user_data3 = model;
     return ITR2RVAL(&iter);
 }
 
@@ -175,7 +185,10 @@ void
 Init_gtk_tree_store()
 {
     VALUE ts = G_DEF_CLASS(GTK_TYPE_TREE_STORE, "TreeStore", mGtk);
-  
+
+    rbgtk_register_treeiter_set_value_func(GTK_TYPE_TREE_STORE, 
+                                           (rbgtkiter_set_value_func)&gtk_tree_store_set_value);
+
     rb_define_method(ts, "initialize", tstore_initialize, -1);
     rb_define_method(ts, "set_column_types", tstore_set_column_types, -1);
     rb_define_method(ts, "set_value", tstore_set_value, 3);

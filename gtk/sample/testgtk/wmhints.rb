@@ -29,34 +29,30 @@ end
 class WMHintsSample < SampleWindow
   def initialize
     super("WM Hints")
-    border_width(0)
+    set_border_width(0)
     realize
 
     circles = Gdk::Bitmap::create_from_xbm(window, "circles.xbm")
     window.set_icon(nil, circles, circles)
     window.set_icon_name("WMHints Test Icon")
-    window.set_decorations(Gdk::DECOR_ALL | Gdk::DECOR_MENU)
-    window.set_functions(Gdk::FUNC_ALL | Gdk::FUNC_RESIZE)
+    window.set_decorations(Gdk::Window::DECOR_ALL | Gdk::Window::DECOR_MENU)
+    window.set_functions(Gdk::Window::FUNC_ALL | Gdk::Window::FUNC_RESIZE)
 
-    box1 = Gtk::VBox::new(false, 0)
+    box1 = Gtk::VBox.new(false, 0)
     add(box1)
-    box1.show
 
-    label = Gtk::Label::new("Try iconizing me!")
-    label.set_usize(150, 50)
+    label = Gtk::Label.new("Try iconizing me!")
+    label.set_size_request(150, 50)
     box1.pack_start(label, true, true, 0)
-    label.show
 
-    separator = Gtk::HSeparator::new()
+    separator = Gtk::HSeparator.new()
     box1.pack_start(separator, false, true, 0)
-    separator.show
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.border_width(10)
+    box2 = Gtk::VBox.new(false, 10)
+    box2.set_border_width(10)
     box1.pack_start(box2, false, true, 0)
-    box2.show
 
-    button = Gtk::Button::new("close")
+    button = Gtk::Button.new("close")
     button.signal_connect("clicked") do
       destroy
     end
@@ -64,6 +60,5 @@ class WMHintsSample < SampleWindow
     box2.pack_start(button, true, true, 0)
     button.set_flags(Gtk::Widget::CAN_DEFAULT)
     button.grab_default
-    button.show
   end
 end

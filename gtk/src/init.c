@@ -4,7 +4,7 @@
   init.c -
 
   $Author: mutoh $
-  $Date: 2002/11/05 10:39:11 $
+  $Date: 2002/11/11 15:32:32 $
 
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -12,6 +12,8 @@
 ************************************************/
 
 #include "global.h"
+
+VALUE treeiter_set_value_table;
 
 void
 Init_gtk2()
@@ -53,6 +55,13 @@ Init_gtk2()
         signal(SIGTERM, sigfunc[6]);
 #endif
     }
+
+    /*
+     * For Gtk::TreeModel, Gtk::TreeIter. 
+     * They should be initialized on this timing.
+     */
+    treeiter_set_value_table = rb_hash_new();
+    rb_global_variable(&treeiter_set_value_table);
 
     Init_gtk_gdk();
     Init_gtk_gtk();
