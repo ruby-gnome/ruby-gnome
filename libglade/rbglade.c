@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2004/05/23 11:21:59 $
+  $Date: 2004/05/23 11:24:25 $
 
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project
@@ -30,8 +30,9 @@ static const int RB_GLADE_XML_FILE = 1;
 static const int RB_GLADE_XML_BUFFER = 2;
 
 static VALUE cGladeXML;
+/*
 static VALUE instances;
-
+*/
                             
 static VALUE
 rb_gladexml_get_widget(VALUE self, VALUE nameString)
@@ -224,9 +225,10 @@ rb_gladexml_provide(VALUE self, VALUE library)
 void 
 Init_libglade2()
 {
+/*
     instances = rb_ary_new();
     rb_global_variable(&instances);
-
+*/
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
     rb_define_method(cGladeXML, "signal_autoconnect_full", rb_gladexml_signal_autoconnect_full, 0);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
