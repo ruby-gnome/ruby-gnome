@@ -1,5 +1,15 @@
 2003-09-21  Laurent Sansonetti  <laurent@datarescue.be>
 
+	* README, extconf.rb, sample/sql_console.rb, src/rbgda.c,
+	  src/rbgda.h, src/rbgdaclient.c, src/rbgdacommand.c,
+	  src/rbgdaconnection.c, src/rbgdadatamodel.c,
+	  src/rbgdadatamodelarray.c, src/rbgdadatasource.c,
+	  src/rbgdaerror.c, src/rbgdaprovider.c, src/rbgdarow.c,
+	  src/rbgdatransaction.c, src/rbgdavalue.c, tests/tc_gda.rb,
+	  src/lib/libgda.rb, src/lib/gda.rb:
+	  Renamed project name (Ruby/Gda -> Ruby/Libgda) and library
+	  name ('gda' -> 'libgda').
+
 	* README, COPYING.LIB, extconf.rb, src/rbgda.c, src/rbgda.h,
 	  src/rbgdaprovider.c, src/lib/gda.rb, src/rbgdadatasource.c,
 	  src/rbgdaclient.c, src/rbgdaconnection.c, src/rbgdacommand.c,
