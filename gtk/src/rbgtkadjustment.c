@@ -4,7 +4,7 @@
   rbgtkadjustment.c -
 
   $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Date: 2002/12/25 13:11:58 $
 
   Copyright (C) 2002 Masao Mutoh
 
@@ -109,10 +109,24 @@ adj_get_page_increment(self)
 }
 
 static VALUE
+adj_set_page_increment(self, inc)
+    VALUE self, inc;
+{
+    return _SELF(self)->page_increment = NUM2DBL(inc);
+}
+
+static VALUE
 adj_get_page_size(self)
     VALUE self;
 {
     return rb_float_new(_SELF(self)->page_size);
+}
+
+static VALUE
+adj_set_page_size(self, size)
+    VALUE self, size;
+{
+    return _SELF(self)->page_size = NUM2DBL(size);
 }
 
 void 
@@ -131,7 +145,9 @@ Init_gtk_adjustment()
     rb_define_method(gAdjustment, "step_increment", adj_get_step_increment, 0);
     rb_define_method(gAdjustment, "set_step_increment", adj_set_step_increment, 1);
     rb_define_method(gAdjustment, "page_increment", adj_get_page_increment, 0);
+    rb_define_method(gAdjustment, "set_page_increment", adj_set_page_increment, 1);
     rb_define_method(gAdjustment, "page_size", adj_get_page_size, 0);
+    rb_define_method(gAdjustment, "set_page_size", adj_set_page_size, 1);
 
     G_DEF_SETTERS(gAdjustment);
 }

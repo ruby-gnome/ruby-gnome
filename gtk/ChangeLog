@@ -1,3 +1,9 @@
+2002-12-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkevent.c: Don't copy a created object in make_gdkevent. 
+	* src/rbgtkadjustment.c:  Add Gtk::Adjustment#set_step_increment, #set_page_increment.
+	* sample/testgtk/treestore.rb: Fix warning when run ruby with -d option.
+
 2002-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreepath.c: Add Gtk::TreePath#to_s as alias of Gtk::TreePath#to_str.

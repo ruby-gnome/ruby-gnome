@@ -1,7 +1,7 @@
 =begin header
 
   wmhints.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: wmhints.rb,v 1.4 2002/12/22 13:34:44 mutoh Exp $
+  $Id: wmhints.rb,v 1.5 2002/12/25 13:11:58 mutoh Exp $
 =end
 
 require 'sample'
@@ -32,7 +32,7 @@ class WMHintsSample < SampleWindow
     set_border_width(0)
     realize
 
-    circles = Gdk::Bitmap::create_from_xbm(window, "circles.xbm")
+    circles = Gdk::Pixmap::create_from_xbm(window, "circles.xbm")
     window.set_icon(nil, circles, circles)
     window.set_icon_name("WMHints Test Icon")
     window.set_decorations(Gdk::Window::DECOR_ALL | Gdk::Window::DECOR_MENU)

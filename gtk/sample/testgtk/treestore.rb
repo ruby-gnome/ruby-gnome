@@ -1,7 +1,7 @@
 =begin header
 
   treestore.rb - a part of testgtk.c rewritten in Ruby/GTK2
-  $Id: treestore.rb,v 1.1 2002/11/15 17:08:44 mutoh Exp $
+  $Id: treestore.rb,v 1.2 2002/12/25 13:11:58 mutoh Exp $
 
 =end
 
@@ -206,7 +206,7 @@ class TreeStoreSample < SampleWindow
     mbox.pack_start(hbox, false, false, 0)
 
     button = Gtk::Button::new("Expand All")
-    hbox.pack_start (button)
+    hbox.pack_start(button)
     button.signal_connect("clicked") do expand_all end
 
     button = Gtk::Button::new("Collapse All")

@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/11/13 13:39:28 $
+  $Date: 2002/12/25 13:11:58 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -22,8 +22,11 @@ make_gdkevent(ev)
     GdkEvent *ev;
 {
     if (ev == NULL) return Qnil;
-    return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, 
-                            gdk_event_copy(ev));
+    /* Shouldn't I copy object here ?
+      return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, 
+      gdk_event_copy(ev));
+		*/
+    return Data_Wrap_Struct(gdkevents[ev->type], 0, gdk_event_free, ev);
 }
 
 GdkEvent*
