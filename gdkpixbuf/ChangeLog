@@ -1,5 +1,7 @@
 2004-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* rbgdk-pixbuf.c, rbgdk-pixbuf-format.c: 
+	Fix compiling warning/error under GTK+-2.2.4. 
 	* rbgdk-pixbuf-loader.c, extconf.rb: Support GTK+-2.0.x again.
 
 2004-11-06  Geoff Youngs  <g@intersect-uk.co.uk>

@@ -4,14 +4,19 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2004/08/27 20:42:24 $
+  $Date: 2004/11/14 02:46:38 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
 #include "rbgdk-pixbuf.h"
-
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+
+#ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
+#define GDK_PIXBUF_ENABLE_BACKEND
+#include <gdk-pixbuf/gdk-pixbuf-io.h>
+#endif
+
 #define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
 
 
@@ -128,7 +133,7 @@ get_signature(self)
 void
 Init_gdk_pixbuf_format(VALUE mGdk)
 {
-#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+#if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
     VALUE format = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
 
     rb_define_method(format, "name", get_name, 0);

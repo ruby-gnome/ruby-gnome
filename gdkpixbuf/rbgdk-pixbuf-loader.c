@@ -4,15 +4,11 @@
   rbgdk-pixbuf-loader.c -
 
   $Author: mutoh $
-  $Date: 2004/11/13 17:54:33 $
+  $Date: 2004/11/14 02:46:38 $
 
+  Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
-
-#ifdef HAVE_GDK_PIXBUF_IO_H
-#define GDK_PIXBUF_ENABLE_BACKEND
-#include <gdk-pixbuf/gdk-pixbuf-io.h>
-#endif
 
 #include "rbgdk-pixbuf.h"
 

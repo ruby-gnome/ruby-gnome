@@ -13,6 +13,7 @@ $CFLAGS += " " + ['glib/src'].map{|d|
   "-I" + File.join(top, d)
 }.join(" ")
 
+have_func("gdk_pixbuf_set_option")
 have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
 if have_func("g_print") && have_func("gdk_pixbuf_new")

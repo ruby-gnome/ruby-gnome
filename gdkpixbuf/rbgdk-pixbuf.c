@@ -3,12 +3,13 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/11/06 10:53:38 $
+  $Author: mutoh $
+  $Date: 2004/11/14 02:46:38 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
 ************************************************/
+
 #include "rbgdk-pixbuf.h"
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
@@ -280,7 +281,7 @@ save(argc, argv, self)
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
-/* Don't need this. Use Gdk::Pixbuf#save_to_buffer instead.
+/* XXX
 gboolean    gdk_pixbuf_save_to_callbackv    (GdkPixbuf *pixbuf,
                                              GdkPixbufSaveFunc save_func,
                                              gpointer user_data,
@@ -514,8 +515,13 @@ static VALUE
 set_option(self, key, value)
     VALUE self, key, value;
 {
+#if HAVE_GDK_PIXBUF_SET_OPTION
     return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self), 
                                             RVAL2CSTR(key), RVAL2CSTR(value)));
+#else
+    rb_warning("not supported in this version of GTK+");
+    return Qfalse;
+#endif
 }
 #endif
 
