@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2002/06/21 18:26:11 $
+  $Author: mutoh $
+  $Date: 2002/06/22 15:01:52 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -42,7 +42,7 @@ rbgobj_get_gobject(obj)
     GObject* result;
 
     if (NIL_P(obj)) { 
-	rb_raise(rb_eTypeError, "wrong argument type nil");
+		rb_raise(rb_eTypeError, "wrong argument type nil");
     }
 
     Check_Type(obj, T_OBJECT);
@@ -50,12 +50,12 @@ rbgobj_get_gobject(obj)
 
     /* if (NIL_P(data) || data->dmark != gobj_mark) { */
     if (NIL_P(data)) {
-	rb_raise(rb_eTypeError, "not a Glib::GObject");
+		rb_raise(rb_eTypeError, "not a Glib::GObject");
     }
 
     Data_Get_Struct(data, GObject, result);
     if (!result)
-	rb_raise(rb_eArgError, "destroyed GLib::GObject");
+		rb_raise(rb_eArgError, "destroyed GLib::GObject");
     return G_OBJECT(result);
 }
 
@@ -86,7 +86,7 @@ delete_gobject(gpointer user_data)
 }
 
 void
-rbgobj_set_gobject(obj, gobj)
+rbgobj_initialize_gobject(obj, gobj)
     VALUE obj;
     GObject* gobj;
 {
@@ -96,9 +96,9 @@ rbgobj_set_gobject(obj, gobj)
 
     /* XXX */
     if (cinfo)
-	data = Data_Wrap_Struct(rb_cData, cinfo->mark, g_object_unref, gobj);
+		data = Data_Wrap_Struct(rb_cData, cinfo->mark, g_object_unref, gobj);
     else
-	data = Data_Wrap_Struct(rb_cData, NULL, g_object_unref, gobj);
+		data = Data_Wrap_Struct(rb_cData, NULL, g_object_unref, gobj);
 
     g_object_set_data_full(gobj, RUBY_GOBJECT_OBJ_KEY,
                            (gpointer)obj, delete_gobject);
@@ -115,7 +115,7 @@ rbgobj_get_value_from_gobject(gobj)
 {
     VALUE ret = (VALUE)g_object_get_data(gobj, RUBY_GOBJECT_OBJ_KEY);
     if ( ! ret )
-	ret = rbgobj_make_gobject_auto_type(gobj);
+		ret = rbgobj_make_gobject_auto_type(gobj);
     return ret;
 }
 
@@ -144,16 +144,16 @@ rbgobjct_add_relative(obj, relative)
     VALUE ary = rb_ivar_get(obj, id_relatives);
 
     if (NIL_P(ary) || TYPE(ary) != T_ARRAY) {
-	ary = rb_ary_new();
-	rb_ivar_set(obj, id_relatives, ary);
+		ary = rb_ary_new();
+		rb_ivar_set(obj, id_relatives, ary);
     }
     rb_ary_push(ary, relative);
 }
 
 void
 rbgobjcet_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
-     VALUE obj, relative, hash_key;
-     ID    obj_ivar_id;
+	VALUE obj, relative, hash_key;
+	ID    obj_ivar_id;
 {
     VALUE hash = rb_ivar_get(obj, obj_ivar_id);
 
@@ -166,8 +166,8 @@ rbgobjcet_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
 
 void
 rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
-     VALUE obj, hash_key;
-     ID    obj_ivar_id;
+	VALUE obj, hash_key;
+	ID    obj_ivar_id;
 {
     VALUE hash = rb_ivar_get(obj, obj_ivar_id);
 
@@ -264,12 +264,12 @@ gobj_inspect(self)
     char *s;
 
     if (NIL_P(iv) || RDATA(iv)->data == 0) {
-	s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
-	sprintf(s, "#<%s: destroyed>", cname);
+		s = ALLOCA_N(char, 2+strlen(cname)+2+9+1+1);
+		sprintf(s, "#<%s: destroyed>", cname);
     }
     else {
-	s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
-	sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self,
+		s = ALLOCA_N(char, 2+strlen(cname)+1+18+1+4+18+1+1);
+		sprintf(s, "#<%s:%p ptr=%p>", cname, (void *)self,
                 rbgobj_get_gobject(self));
     }
     return rb_str_new2(s);
@@ -320,7 +320,7 @@ gobj_sig_emit(argc, argv, self)
     rbgobj_rvalue_to_gvalue(self, &(params->values[0]));
     for (i = 0; i < query.n_params; i++)
         rbgobj_rvalue_to_gvalue(rb_ary_entry(rest, i),
-                                   &(params->values[i+1]));
+								&(params->values[i+1]));
     g_value_init(&return_value, G_TYPE_NONE);
 
     g_signal_emitv(params->values, NUM2INT(sig_id), 0, &return_value);
@@ -359,13 +359,13 @@ gobj_sig_emit_stop_by_name(self, sig_name)
     GObject* gobj = rbgobj_get_gobject(self);
     StringValue(sig_name);
     g_signal_stop_emission(gobj,
-      g_signal_lookup(StringValuePtr(sig_name), G_OBJECT_TYPE(gobj)), 0);
+						   g_signal_lookup(StringValuePtr(sig_name), G_OBJECT_TYPE(gobj)), 0);
     return self;
 }
 
 static VALUE
 gobj_sig_handler_block(self, id)
-     VALUE self, id;
+	VALUE self, id;
 {
     g_signal_handler_block(rbgobj_get_gobject(self), NUM2INT(id));
     return self;
@@ -373,7 +373,7 @@ gobj_sig_handler_block(self, id)
 
 static VALUE
 gobj_sig_handler_unblock(self, id)
-     VALUE self, id;
+	VALUE self, id;
 {
     g_signal_handler_unblock(rbgobj_get_gobject(self), NUM2INT(id));
     return self;
@@ -449,8 +449,8 @@ void Init_gobject_gobj()
 
     rb_define_method(rbgobj_cGObject, "signal_connect", gobj_sig_connect, -1);
 /*
-    rb_define_method(rbgobj_cGObject, "signal_connect_after",
-                     gobj_sig_connect_after, -1);
+  rb_define_method(rbgobj_cGObject, "signal_connect_after",
+  gobj_sig_connect_after, -1);
 */
 
     rb_define_method(rbgobj_cGObject, "signal_emit",
