@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.8 2005/01/03 18:55:02 mutoh Exp $
+  $Id: main.rb,v 1.9 2005/01/30 23:14:15 kzys Exp $
 =end
 
 require 'gtk2'
@@ -15,18 +15,26 @@ module Demo
     ["Application main window",     "appwindow.rb",     :AppWindow],
     ["Button Boxes",                "button_box.rb",    :ButtonBox],
     ["Change Display",              "changedisplay.rb", :ChangeDisplay],
+    ["Clipboard", "clipboard.rb", :Clipboard],
     ["Color Selector",              "colorsel.rb",      :ColorSel],
     ["Dialog and Message Boxes",    "dialog.rb",        :Dialog],
     ["Drawing Area",                "drawingarea.rb",   :DrawingArea],
+    ["Entry Completion", "entry_completion.rb", :EntryCompletion],
+    ["Expander", "expander.rb", :Expander],
     ["Icon View",                   "iconview.rb",      :IconView],
     ["Images",                      "images.rb",        :Images],
-    ["Item Factory",                "item_factory.rb",  :ItemFactory],
     ["Menus",                       "menus.rb",         :Menus],
     ["Paned Widgets",               "panes.rb",         :Panes],
     ["Pixbufs",                     "pixbufs.rb",       :Pixbufs],
+    ["Rotated Text", "rotated_text.rb", :RotatedText],
     ["Size Groups",                 "sizegroup.rb",     :SizeGroup],
     ["Stock Item and Icon Browser", "stock_browser.rb", :StockBrowser],
-    ["Text Widget",                 "textview.rb",      :TextView],
+    ["Text Widget", nil, nil,
+     [
+        ["HyperText", "hypertext.rb", :HyperText],
+        ["Multiple Views", "textview.rb", :TextView],
+      ]
+    ],
     ["Tree View",                   nil,                nil,
       [
 	["Editable Cells", "editable_cells.rb", :EditableCells],

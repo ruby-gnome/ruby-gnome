@@ -4,21 +4,21 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: common.rb,v 1.5 2005/01/03 18:55:02 mutoh Exp $
+  $Id: common.rb,v 1.6 2005/01/30 23:14:15 kzys Exp $
 =end
 
 require 'gtk2'
 
 module Demo
   def self.find_file(basename)
-    %w(. /usr/share/gtk-2.0/demo).each do |dirname|
+    %w(. /usr/share/gtk-2.0/demo /usr/local/share/gtk-2.0/demo/).each do |dirname|
       path = File.join(dirname, basename)
       if File.exist?(path)
 	return path
       end
     end
 
-    raise Exception
+    raise "#{basename}: No such file or directory"
   end
 
   class BasicWindow < Gtk::Window
