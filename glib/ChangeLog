@@ -1,3 +1,8 @@
+2004-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_messages.c: Works again for ruby-1.8.x. 
+	Reported by Kohei Sutou.
+
 2004-10-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: Check the paratmeter is Block or not. 
