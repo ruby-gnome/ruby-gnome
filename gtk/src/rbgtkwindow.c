@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2004/03/13 15:14:11 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -234,6 +234,23 @@ gwin_unmaximize(self)
     gtk_window_unmaximize(_SELF(self));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,2,0) 
+static VALUE
+gwin_fullscreen(self)
+    VALUE self;
+{
+    gtk_window_fullscreen(_SELF(self));
+    return self;
+}
+static VALUE
+gwin_unfullscreen(self)
+    VALUE self;
+{
+    gtk_window_unfullscreen(_SELF(self));
+    return self;
+}
+#endif
 
 static VALUE
 gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
@@ -537,6 +554,10 @@ Init_gtk_window()
     rb_define_method(gWindow, "unstick", gwin_unstick, 0);
     rb_define_method(gWindow, "maximize", gwin_maximize, 0);
     rb_define_method(gWindow, "unmaximize", gwin_unmaximize, 0);
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gWindow, "fullscreen", gwin_fullscreen, 0);
+    rb_define_method(gWindow, "unfullscreen", gwin_unfullscreen, 0);
+#endif
     rb_define_method(gWindow, "begin_resize_drag", gwin_begin_resize_drag, 5);
     rb_define_method(gWindow, "begin_move_drag", gwin_begin_move_drag, 4);
     rb_define_method(gWindow, "set_decorated", gwin_set_decorated, 1);
