@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2003/06/22 17:37:51 $
+  $Date: 2003/10/06 11:29:23 $
 
   Copyright (C) 2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -33,7 +33,6 @@
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())
-#define GDK_TYPE_SPAN (gdk_span_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())

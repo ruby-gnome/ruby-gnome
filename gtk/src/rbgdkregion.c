@@ -4,7 +4,7 @@
   rbgdkregion.c -
 
   $Author: mutoh $
-  $Date: 2003/08/29 19:14:53 $
+  $Date: 2003/10/06 11:29:23 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -79,8 +79,7 @@ gdkregion_get_rectangles(self)
     gdk_region_get_rectangles(_SELF(self), &rectangles, &n_rect);
     ary = rb_ary_new2(n_rect);
     for (i = 0; i < n_rect; i++) {
-        rb_ary_push(ary, BOXED2RVAL(rectangles, GDK_TYPE_RECTANGLE));
-        rectangles++;
+        rb_ary_push(ary, BOXED2RVAL(&rectangles[i], GDK_TYPE_RECTANGLE));
     }
     g_free(rectangles);
     return ary;
@@ -91,7 +90,8 @@ gdkregion_span_func(span, func)
     GdkSpan* span;
     gpointer func;
 {
-    rb_funcall((VALUE)func, id_call, 1, BOXED2RVAL(span, GDK_TYPE_SPAN));
+    rb_funcall((VALUE)func, id_call, 3, 
+               INT2NUM(span->x), INT2NUM(span->y), INT2NUM(span->width));
 }
 
 static VALUE
@@ -100,12 +100,13 @@ gdkregion_spans_intersect_foreach(self, spans, sorted)
 {
     int i;
     GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY(spans)->len);
-    GdkSpan* span;
     volatile VALUE func = G_BLOCK_PROC();
 
+    G_RELATIVE(self, func);
     for (i = 0; i < RARRAY(spans)->len; i++) {
-        span = (GdkSpan*)RVAL2BOXED(RARRAY(spans)->ptr[i], GDK_TYPE_SPAN);
-        gspans[i] = *span;
+        gspans[i].x = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[0]);
+        gspans[i].y = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[1]);
+        gspans[i].width = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[2]);
     }
     gdk_region_spans_intersect_foreach(_SELF(self), 
                                        gspans, RARRAY(spans)->len, RTEST(sorted), 
@@ -162,7 +163,7 @@ gdkregion_offset(self, dx, dy)
     VALUE self, dx, dy;
 {
     gdk_region_offset(_SELF(self), NUM2INT(dx), NUM2INT(dy));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -170,15 +171,6 @@ gdkregion_shrink(self, dx, dy)
     VALUE self, dx, dy;
 {
     gdk_region_shrink(_SELF(self), NUM2INT(dx), NUM2INT(dy));
-    return Qnil;
-}
-
-static VALUE
-gdkregion_union_with_rect(self, rect)
-    VALUE self, rect;
-{
-    gdk_region_union_with_rect(_SELF(self),
-                               (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE));
     return self;
 }
 
@@ -191,10 +183,15 @@ gdkregion_intersect(self, region)
 }
 
 static VALUE
-gdkregion_union(self, region)
-    VALUE self, region;
+gdkregion_union(self, other)
+    VALUE self, other;
 {
-    gdk_region_union(_SELF(self), _SELF(region));
+    if (RVAL2GTYPE(other) == GDK_TYPE_RECTANGLE){
+        gdk_region_union_with_rect(_SELF(self),
+                                   (GdkRectangle*)RVAL2BOXED(other, GDK_TYPE_RECTANGLE));
+    } else {
+        gdk_region_union(_SELF(self), _SELF(other));
+    }
     return self;
 }
 
@@ -226,18 +223,13 @@ Init_gtk_gdk_region()
     rb_define_method(gdkRegion, "clipbox", gdkregion_get_clipbox, 0);
     rb_define_method(gdkRegion, "empty?", gdkregion_empty, 0);
     rb_define_method(gdkRegion, "==", gdkregion_equal, 1);
-    rb_define_method(gdkRegion, "eql?", gdkregion_equal, 1);
     rb_define_method(gdkRegion, "point_in?", gdkregion_point_in, 2);
     rb_define_method(gdkRegion, "rect_in", gdkregion_rect_in, 1);
     rb_define_method(gdkRegion, "offset", gdkregion_offset, 2);
     rb_define_method(gdkRegion, "shrink", gdkregion_shrink, 2);
-    rb_define_method(gdkRegion, "union_with_rect", gdkregion_union_with_rect, 1);
     rb_define_method(gdkRegion, "intersect", gdkregion_intersect, 1);
-    rb_define_method(gdkRegion, "&", gdkregion_intersect, 1);
     rb_define_method(gdkRegion, "union", gdkregion_union, 1);
-    rb_define_method(gdkRegion, "|", gdkregion_union, 1);
     rb_define_method(gdkRegion, "subtract", gdkregion_subtract, 1);
-    rb_define_method(gdkRegion, "-", gdkregion_subtract, 1);
     rb_define_method(gdkRegion, "xor", gdkregion_xor, 1);
 
     /* GdkOverlapType */
