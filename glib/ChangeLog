@@ -1,3 +1,8 @@
+2003-08-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/mkmf-gnome2.rb (PKGConfig.have_package): append linker
+	flags other than -l and -L into $LDFLAGS.
+
 2003-08-09  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c (gobj_sig_emit): fix to setup arg.self.

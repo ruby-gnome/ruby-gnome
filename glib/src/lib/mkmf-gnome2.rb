@@ -1,4 +1,5 @@
 require 'mkmf'
+require 'shellwords'
 
 
 module PKGConfig
@@ -42,8 +43,11 @@ module PKGConfig
     STDOUT.flush
     if exists? pkg
       STDOUT.print "yes\n"
-      $libs   += ' ' + libs_only_l(pkg)
-      $LDFLAGS += ' ' + libs_only_L(pkg)
+      libs = libs_only_l(pkg)
+      ldflags = libs(pkg)
+      ldflags = (Shellwords.shellwords(ldflags) - Shellwords.shellwords(libs)).quote.join(' ')
+      $libs   += ' ' + libs
+      $LDFLAGS += ' ' + ldflags
       $CFLAGS += ' ' + cflags(pkg)
       true
     else
