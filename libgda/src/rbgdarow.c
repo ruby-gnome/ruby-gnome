@@ -34,7 +34,7 @@ VALUE cGdaRow;
  *
  * Creates a new row from a list of values.
  *
- * If you don't want to specify rows, you can also build a row like this:
+ * If you don't want to specify values, you can also build a row like this:
  *
  * 	Gda::Row.new(model, 5)      # the model will hold 5 values 
  *

@@ -185,7 +185,8 @@ static VALUE rb_gda_field_set_scale(self, scale)
 static VALUE rb_gda_field_get_gdatype(self)
     VALUE self;
 {
-    return INT2FIX(gda_field_attributes_get_gdatype(RGDA_FIELD_ATTRIBUTES(self)));
+    return GENUM2RVAL(gda_field_attributes_get_gdatype(RGDA_FIELD_ATTRIBUTES(self)),
+                      GDA_TYPE_VALUE_TYPE);
 }
 
 /*
@@ -200,7 +201,7 @@ static VALUE rb_gda_field_set_gdatype(self, gdatype)
     VALUE self, gdatype;
 {
     gda_field_attributes_set_gdatype(RGDA_FIELD_ATTRIBUTES(self),
-                                     FIX2INT(gdatype));
+                                     RVAL2GENUM(gdatype, GDA_TYPE_VALUE_TYPE));
     return self;
 }
 

@@ -501,7 +501,8 @@ static VALUE rb_gda_datamodel_set_command_text(self, text)
 static VALUE rb_gda_datamodel_get_command_type(self)
     VALUE self;
 {
-    return INT2FIX(gda_data_model_get_command_type(RGDA_DATAMODEL(self)));
+    return GENUM2RVAL(gda_data_model_get_command_type(RGDA_DATAMODEL(self)),
+                      GDA_TYPE_COMMAND_TYPE);
 }
 
 /*
@@ -516,7 +517,7 @@ static VALUE rb_gda_datamodel_set_command_type(self, type)
     VALUE self, type;
 {
     gda_data_model_set_command_type(RGDA_DATAMODEL(self),
-                                    FIX2INT(type));
+                                    RVAL2GENUM(type, GDA_TYPE_COMMAND_TYPE));
     return self;
 }
 

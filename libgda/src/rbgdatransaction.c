@@ -58,7 +58,8 @@ static VALUE rb_gda_transaction_new(self, name)
 static VALUE rb_gda_transaction_get_isolation_level(self)
     VALUE self;
 {
-    return INT2FIX(gda_transaction_get_isolation_level(RGDA_TRANSACTION(self)));
+    return GENUM2RVAL(gda_transaction_get_isolation_level(RGDA_TRANSACTION(self)),
+                      GDA_TYPE_TRANSACTION_ISOLATION);
 }
 
 /*
@@ -73,7 +74,7 @@ static VALUE rb_gda_transaction_set_isolation_level(self, level)
     VALUE self, level;
 {
     gda_transaction_set_isolation_level(RGDA_TRANSACTION(self),
-                                        FIX2INT(level));
+                                        RVAL2GENUM(level, GDA_TYPE_TRANSACTION_ISOLATION));
     return self;
 }
 

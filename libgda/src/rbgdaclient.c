@@ -104,7 +104,7 @@ static VALUE rb_gda_client_open_connection(argc, argv, self)
                                       RVAL2CSTR(dsn),
                                       NIL_P(username) ? NULL : RVAL2CSTR(username),  
                                       NIL_P(password) ? NULL : RVAL2CSTR(password),  
-                                      NIL_P(options) ? 0 : FIX2INT(options));
+                                      NIL_P(options) ? 0 : RVAL2GFLAGS(options, GDA_TYPE_CONNECTION_OPTIONS));
     if (rb_block_given_p()) {
         if (conn == NULL) {
             rb_raise(rb_eRuntimeError, "Could not create connection...");
@@ -289,7 +289,7 @@ static VALUE rb_gda_client_notify_event(self, conn, event, params)
 {
     gda_client_notify_event(RGDA_CLIENT(self),
                             RGDA_CONNECTION(conn),
-                            FIX2INT(event),
+                            RVAL2GENUM(event, GDA_TYPE_CLIENT_EVENT),
                             NIL_P(params) ? NULL : RGDA_PARAMETER_LIST(params));
     return self;
 }

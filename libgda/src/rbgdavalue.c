@@ -59,8 +59,13 @@ static VALUE rb_gda_value_cmp(self, other_value)
 
 void Init_gda_value(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_VALUE, "Value", mGda);
+    
     rb_define_method(c, "to_s", rb_gda_value_to_s, 0);
     rb_define_method(c, "<=>",  rb_gda_value_cmp,  1);
+    
+    G_DEF_CLASS(GDA_TYPE_VALUE_TYPE, "Type", c);
+    G_DEF_CONSTANTS(c, GDA_TYPE_VALUE_TYPE, "GDA_VALUE_");
+    
     cGdaValue = c;
 }
 

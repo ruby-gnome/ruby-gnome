@@ -169,7 +169,7 @@ static VALUE rb_gda_export_run(argc, argv, self)
 
     rb_scan_args(argc, argv, "01", &flags);
     gda_export_run(RGDA_EXPORT(self), 
-                   NIL_P(flags) ? GDA_EXPORT_FLAGS_TABLE_DATA : FIX2INT(flags));
+                   NIL_P(flags) ? GDA_EXPORT_FLAGS_TABLE_DATA : RVAL2GENUM(flags, GDA_TYPE_EXPORT_FLAGS));
     return self;
 }
 

@@ -132,7 +132,8 @@ static VALUE rb_gda_connection_get_server_version(self)
 static VALUE rb_gda_connection_get_options(self)
     VALUE self;
 {
-    return INT2FIX(gda_connection_get_options(RGDA_CONNECTION(self)));
+    return GFLAGS2RVAL(gda_connection_get_options(RGDA_CONNECTION(self)),
+                       GDA_TYPE_CONNECTION_OPTIONS);
 }
 
 /*
@@ -459,7 +460,7 @@ static VALUE rb_gda_connection_supports(self, feature)
     VALUE self, feature;
 {
     return CBOOL2RVAL(gda_connection_supports(RGDA_CONNECTION(self),
-                                              FIX2INT(feature)));
+                                              RVAL2GENUM(feature, GDA_TYPE_CONNECTION_FEATURE)));
 }
 
 void Init_gda_connection(void) {

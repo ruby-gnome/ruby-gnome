@@ -1,3 +1,8 @@
+2003-12-17  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/*.c: Fixed GEnum/GFLags <=> Ruby conversions, added
+	  Gda::Value::Type constants and fixed a doc typo in a comment.
+
 2003-12-15  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgdadatasource.c: Constructor did not accept nil as the

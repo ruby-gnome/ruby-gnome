@@ -62,8 +62,8 @@ static VALUE rb_gda_command_new(self, text, command_type, options)
     VALUE self, text, command_type, options;
 {
     GdaCommand *cmd = gda_command_new(RVAL2CSTR(text),
-                                      FIX2INT(command_type),
-                                      FIX2INT(options));
+                                      RVAL2GENUM(command_type, GDA_TYPE_COMMAND_TYPE),
+                                      RVAL2GFLAGS(options, GDA_TYPE_COMMAND_OPTIONS));
     if (cmd != NULL) {
         G_INITIALIZE(self, cmd);
     }
@@ -109,7 +109,7 @@ static VALUE rb_gda_command_set_command_type(self, command_type)
     VALUE self, command_type;
 {
     gda_command_set_command_type(RGDA_COMMAND(self),
-                                 FIX2INT(command_type));
+                                 RVAL2GENUM(command_type, GDA_TYPE_COMMAND_TYPE));
     return self;
 }
 
@@ -121,7 +121,8 @@ static VALUE rb_gda_command_set_command_type(self, command_type)
 static VALUE rb_gda_command_get_command_type(self)
     VALUE self;
 {
-    return INT2FIX(gda_command_get_command_type(RGDA_COMMAND(self)));
+    return GENUM2RVAL(gda_command_get_command_type(RGDA_COMMAND(self)),
+                      GDA_TYPE_COMMAND_TYPE);
 }
 
 /*
@@ -136,7 +137,7 @@ static VALUE rb_gda_command_set_options(self, options)
     VALUE self, options;
 {
     gda_command_set_options(RGDA_COMMAND(self),
-                                 FIX2INT(options));
+                            RVAL2GFLAGS(options, GDA_TYPE_COMMAND_OPTIONS));
     return self;
 }
 
@@ -148,7 +149,8 @@ static VALUE rb_gda_command_set_options(self, options)
 static VALUE rb_gda_command_get_options(self)
     VALUE self;
 {
-    return INT2FIX(gda_command_get_options(RGDA_COMMAND(self)));
+    return GFLAGS2RVAL(gda_command_get_options(RGDA_COMMAND(self)),
+                       GDA_TYPE_COMMAND_OPTIONS);
 }
 
 /*
