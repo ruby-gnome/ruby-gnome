@@ -1,3 +1,8 @@
+2002-10-18  Masahro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c, src/rbgobj_valuetypes.c: use Hash#delete
+	instead of assigning nil.
+
 2002-10-17  KUBO Takehiro  <kubo@jiubao.org>
 
 	* rbgobj_object.c (gobj_set_property, gobj_get_property): fix a bug.

@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2002/09/29 12:48:20 $
+  $Author: sakai $
+  $Date: 2002/10/18 12:57:00 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -13,6 +13,7 @@
 #include "global.h"
 
 static ID id_call;
+static ID id_delete;
 
 typedef struct _GRClosure GRClosure;
 
@@ -54,7 +55,7 @@ marker_remove(gpointer data, GClosure* closure)
 {
     VALUE marker = (VALUE)data;
     RDATA(marker)->dmark = NULL;
-    rb_hash_aset(rclosure_marker_list, marker, Qnil);
+    rb_funcall(rclosure_marker_list, id_delete, 1, marker);
 
     ((GRClosure*)closure)->callback   = Qnil;
     ((GRClosure*)closure)->extra_args = Qnil;
@@ -95,6 +96,7 @@ Init_rclosure()
     rclosure_marker_list = rb_hash_new();
 
     id_call = rb_intern("call");
+    id_delete = rb_intern("delete");
 }
 
 /**********************************************************************/

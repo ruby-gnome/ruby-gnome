@@ -4,7 +4,7 @@
   rbgobj_valuetypes.c -
 
   $Author: sakai $
-  $Date: 2002/10/13 06:41:58 $
+  $Date: 2002/10/18 12:57:00 $
 
   Copyright (C) 2002  Masahiro Sakai
 
@@ -68,6 +68,7 @@ Init_gtype_pointer()
 /**********************************************************************/
 
 static VALUE boxed_ruby_value_markers;
+static ID id_delete;
 
 typedef struct {
     VALUE obj;
@@ -116,7 +117,7 @@ boxed_ruby_value_unref(VALUE val)
         counter->ref_count -= 1;
 
         if (!counter->ref_count)
-            rb_hash_aset(boxed_ruby_value_markers, key, Qnil);
+            rb_funcall(boxed_ruby_value_markers, id_delete, 1, key);
     }
 }
 
@@ -201,6 +202,7 @@ ruby_value_r2g(VALUE from, GValue* to)
 static void
 Init_boxed_ruby_value()
 {
+    id_delete = rb_intern("delete");
     boxed_ruby_value_markers = rb_hash_new();
     rb_global_variable(&boxed_ruby_value_markers);
 
