@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2002/09/29 12:50:20 $
+  $Date: 2002/10/06 16:58:26 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -291,9 +291,9 @@ static VALUE
 gdkwin_set_icon(self, icon, pixmap, mask)
     VALUE self, icon, pixmap, mask;
 {
-    gdk_window_set_icon(_SELF(self), _SELF(icon),
-						GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-						GDK_BITMAP(RVAL2GOBJ(mask)));
+    gdk_window_set_icon(_SELF(self), NIL_P(icon) ? NULL :_SELF(icon),
+						NIL_P(pixmap) ? NULL : GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+						NIL_P(mask) ? NULL : GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
