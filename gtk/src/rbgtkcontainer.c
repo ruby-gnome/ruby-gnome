@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2003/05/02 18:22:15 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -76,7 +76,7 @@ cont_foreach(argc, argv, self)
 
     rb_scan_args(argc, argv, "01", &callback);
     if (NIL_P(callback)) {
-        callback = rb_f_lambda();
+        callback = G_BLOCK_PROC();
     }
     gtk_container_foreach(_SELF(self), exec_callback, (gpointer)callback);
     return self;

@@ -5,7 +5,7 @@
 
   $Author: mutoh $
 
-  $Date: 2003/04/25 19:26:26 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -80,7 +80,7 @@ static VALUE
 treesortable_set_sort_func(self, sort_column_id)
     VALUE self, sort_column_id;
 {
-    volatile VALUE func = rb_f_lambda();
+    volatile VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_tree_sortable_set_sort_func(_SELF(self), NUM2INT(sort_column_id),
 				    (GtkTreeIterCompareFunc)sort_func,
@@ -92,7 +92,7 @@ static VALUE
 treesortable_set_default_sort_func(self)
     VALUE self;
 {
-    volatile VALUE func = rb_f_lambda();
+    volatile VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_tree_sortable_set_default_sort_func(_SELF(self),
 					    (GtkTreeIterCompareFunc)sort_func,

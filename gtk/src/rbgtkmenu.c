@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2003/06/16 14:24:40 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,7 +65,7 @@ menu_popup(self, pshell, pitem, button, activate_time)
     VALUE func;
 
     if (rb_block_given_p()) {
-        func = rb_f_lambda();
+        func = G_BLOCK_PROC();
         pfunc = menu_pos_func;
         data = (gpointer)func;
         G_RELATIVE(self, func);
@@ -169,7 +169,7 @@ static VALUE
 menu_attach_to_widget(self, attach_widget)
     VALUE self, attach_widget;
 {
-    menu_detacher = rb_f_lambda();
+    menu_detacher = G_BLOCK_PROC();
     G_RELATIVE(self, menu_detacher);
     gtk_menu_attach_to_widget(_SELF(self),
                               GTK_WIDGET(RVAL2GOBJ(attach_widget)),

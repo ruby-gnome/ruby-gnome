@@ -4,7 +4,7 @@
   rbgdkinput.c -
 
   $Author: mutoh $
-  $Date: 2003/05/08 16:45:59 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -33,7 +33,7 @@ input_add(self, filedescriptor, gdk_input_condition)
     VALUE id;
     VALUE func;
 
-    func = rb_f_lambda();
+    func = G_BLOCK_PROC();
     id = INT2FIX(gdk_input_add(NUM2INT(rb_funcall(filedescriptor,
                                                   rb_intern("to_i"), 0)),
                                (GdkInputCondition)NUM2INT(gdk_input_condition),

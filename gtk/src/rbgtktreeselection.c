@@ -3,8 +3,8 @@
 
   rbgtktreeselection.c -
 
-  $Author: sakai $ 
-  $Date: 2003/02/16 13:25:17 $
+  $Author: mutoh $ 
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -77,7 +77,7 @@ static VALUE
 treeselection_selected_foreach(self)
     VALUE self;
 {
-    volatile VALUE func = rb_f_lambda();
+    volatile VALUE func = G_BLOCK_PROC();
     gtk_tree_selection_selected_foreach(_SELF(self), 
                                         (GtkTreeSelectionForeachFunc)treeselection_foreach_func, 
                                         (gpointer)func);

@@ -1,3 +1,8 @@
+2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/*.c: Use G_BLOCK_PROC instead of rb_f_lambda(). 
+	This change is for ruby-1.8.x.
+
 2003-06-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/init.c, src/rbgtkmain.c: Call setlocale(LC_NUMERIC, "C") for 

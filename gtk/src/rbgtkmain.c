@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2003/06/22 17:37:51 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -211,7 +211,7 @@ static VALUE
 gtk_m_init_add(self)
     VALUE self;
 {
-    volatile VALUE func = rb_f_lambda();
+    volatile VALUE func = G_BLOCK_PROC();
     
     gtk_init_add(gtk_m_function, (gpointer)func);
     G_RELATIVE(self, func);
@@ -222,7 +222,7 @@ static VALUE
 gtk_m_quit_add(self, main_level)
     VALUE self, main_level;
 {
-    volatile VALUE func = rb_f_lambda();
+    volatile VALUE func = G_BLOCK_PROC();
     VALUE id;
 
     id = INT2FIX(gtk_quit_add(NUM2UINT(main_level), 
@@ -254,7 +254,7 @@ timeout_add(self, interval)
     VALUE id;
     VALUE func;
 
-    func = rb_f_lambda();
+    func = G_BLOCK_PROC();
     id = INT2FIX(gtk_timeout_add(NUM2INT(interval),
                                  (GtkFunction)gtk_m_function,
                                  (gpointer)func));
@@ -278,7 +278,7 @@ idle_add(self)
     VALUE id;
     VALUE func;
 
-    func = rb_f_lambda();
+    func = G_BLOCK_PROC();
     id = INT2FIX(gtk_idle_add((GtkFunction)gtk_m_function, (gpointer)func));
     G_RELATIVE2(self, func, id_relative_callbacks, id);
     return id;
@@ -291,7 +291,7 @@ idle_add_priority(self, priority)
     VALUE id;
     VALUE func;
 
-    func = rb_f_lambda();
+    func = G_BLOCK_PROC();
     id = INT2FIX(gtk_idle_add_priority(NUM2INT(priority),
                                        (GtkFunction)gtk_m_function, 
                                        (gpointer)func));
@@ -333,7 +333,7 @@ static VALUE
 gtk_m_key_snooper_install(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
+    VALUE func = G_BLOCK_PROC();
     VALUE id = INT2FIX(gtk_key_snooper_install(
                            (GtkKeySnoopFunc)gtk_m_key_snoop_func, 
                            (gpointer)func));

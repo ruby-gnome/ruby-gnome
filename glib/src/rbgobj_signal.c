@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2003/04/13 08:35:33 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:14:47 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -286,7 +286,7 @@ gobj_sig_connect(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
-    rclosure = g_rclosure_new(rb_f_lambda(), rest, 
+    rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
 
@@ -318,7 +318,7 @@ gobj_sig_connect_after(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(rb_eNameError, "no such signal: %s", sig_name);
 
-    rclosure = g_rclosure_new(rb_f_lambda(), rest, 
+    rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
 

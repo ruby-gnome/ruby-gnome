@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2003/04/13 08:35:32 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:14:47 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -123,7 +123,7 @@ static VALUE
 closure_initialize(self)
     VALUE self;
 {
-    GClosure* closure = g_rclosure_new(rb_f_lambda(), Qnil, NULL);
+    GClosure* closure = g_rclosure_new(G_BLOCK_PROC(), Qnil, NULL);
     G_INITIALIZE(self, closure);
     g_closure_sink(closure);
     return self;

@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: geoff_youngs $
-  $Date: 2003/06/09 14:10:12 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -353,7 +353,7 @@ gdkwin_invalidate(argc, argv, self)
         } else {
             VALUE child_func;
             if (type == T_NIL) {
-                child_func = rb_f_lambda();
+                child_func = G_BLOCK_PROC();
             } else if (rb_obj_is_kind_of(invalidate_children_or_func, rb_cProc)) {
                 child_func = invalidate_children_or_func;
             } else {

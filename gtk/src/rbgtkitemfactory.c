@@ -4,7 +4,7 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2003/05/21 17:10:07 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -179,7 +179,7 @@ ifact_create_item(argc, argv, self)
     rb_scan_args(argc, argv, "14", &path, &type, &accel, &extdata, &data);
 
     entry = ALLOC(GtkItemFactoryEntry);
-    func = rb_rescue((VALUE(*)())rb_f_lambda, 0, NULL, 0);
+    func = rb_rescue((VALUE(*)())G_BLOCK_PROC, 0, NULL, 0);
 
     create_factory_entry(entry, self, path, type, accel, extdata, func, data);
     

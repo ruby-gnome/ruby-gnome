@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: mutoh $
-  $Date: 2003/05/27 10:59:22 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -40,7 +40,7 @@ tbar_append(argc, argv, self)
 
     if (type == Qnil || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_append_item(_SELF(self), N_RVAL2CSTR(text),
@@ -50,7 +50,7 @@ tbar_append(argc, argv, self)
                                       (gpointer)func);
     } else if (TYPE(type) == T_FIXNUM) {
         rb_scan_args(argc, argv, "07", &element_type, &widget, &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_append_element(_SELF(self), NUM2INT(element_type), 
@@ -63,7 +63,7 @@ tbar_append(argc, argv, self)
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
         
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),
@@ -94,7 +94,7 @@ tbar_prepend(argc, argv, self)
 
     if (type == Qnil || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_prepend_item(_SELF(self), N_RVAL2CSTR(text),
@@ -104,7 +104,7 @@ tbar_prepend(argc, argv, self)
                                       (gpointer)func);
     } else if (TYPE(type) == T_FIXNUM) {
         rb_scan_args(argc, argv, "07", &element_type, &widget, &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_prepend_element(_SELF(self), NUM2INT(element_type), 
@@ -117,7 +117,7 @@ tbar_prepend(argc, argv, self)
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
         
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),
@@ -148,7 +148,7 @@ tbar_insert(argc, argv, self)
 
     if (type == Qnil || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "15", &pos, &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
         ret = gtk_toolbar_insert_item(_SELF(self),N_RVAL2CSTR(text),
                                       N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
@@ -158,7 +158,7 @@ tbar_insert(argc, argv, self)
                                       NUM2INT(pos));
     } else if (TYPE(type) == T_FIXNUM) {
         rb_scan_args(argc, argv, "17", &pos, &element_type, &widget, &text, &ttext, &ptext, &icon, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_insert_element(_SELF(self),
@@ -172,7 +172,7 @@ tbar_insert(argc, argv, self)
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "14", &pos, &stock_id, &ttext, &ptext, &func);
-        if (NIL_P(func)) func = rb_f_lambda();
+        if (NIL_P(func)) func = G_BLOCK_PROC();
         G_RELATIVE(self, func);
         
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),

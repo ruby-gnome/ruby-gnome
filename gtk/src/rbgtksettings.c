@@ -4,7 +4,7 @@
   rbgtksettings.c -
 
   $Author: mutoh $
-  $Date: 2003/05/18 17:02:42 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -40,7 +40,7 @@ static VALUE
 settings_s_install_property_parser(pspec, parser)
    VALUE pspec, parser;
 {
-   volatile VALUE func = rb_f_lambda();
+   volatile VALUE func = G_BLOCK_PROC();
    gtk_settings_install_property_parser(G_PARAM_SPEC(RVAL2GOBJ(pspec)), 
    (GtkRcPropertyParser)_rc_property_parser);
 }

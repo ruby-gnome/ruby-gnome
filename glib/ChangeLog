@@ -1,3 +1,9 @@
+2003-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.h: Define G_BLOCK_PROC for ruby-1.8.x.
+	* src/*c: Use G_BLOCK_PROC instead of rb_f_lambda().
+	* src/lib/mkmf-gnome2.rb: Check rb_block_proc().
+
 2003-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.c: Add GLib::PRIORITY_*. 

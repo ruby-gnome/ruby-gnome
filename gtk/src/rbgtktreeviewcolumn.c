@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: pcppopper $
-  $Date: 2003/03/26 17:19:33 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -117,7 +117,7 @@ static VALUE
 tvc_set_cell_data_func(self, renderer)
     VALUE self, renderer;
 {
-    VALUE func = rb_f_lambda();
+    VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2CELLRENDERER(renderer),
                                             cell_data_func, (gpointer)func, NULL);

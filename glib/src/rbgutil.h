@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: sakai $
-  $Date: 2003/03/06 18:18:50 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:14:47 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -48,6 +48,12 @@ extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
+
+#if HAVE_RB_BLOCK_PROC
+#define G_BLOCK_PROC rb_block_proc
+#else
+#define G_BLOCK_PROC rb_f_lambda
+#endif
 
 #ifdef __cplusplus
 }

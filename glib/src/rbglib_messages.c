@@ -3,8 +3,8 @@
 
   rbglib_messages.c -
 
-  $Author: sakai $
-  $Date: 2003/03/14 03:30:37 $
+  $Author: mutoh $
+  $Date: 2003/06/26 15:14:47 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -39,7 +39,7 @@ rbglib_m_log_set_handler(self, log_domain, log_levels)
     guint handler_id;
     VALUE proc;
 
-    proc = rb_f_lambda();
+    proc = G_BLOCK_PROC();
     handler_id = g_log_set_handler(RVAL2CSTR(log_domain), NUM2INT(log_levels),
 				   rbglib_log_handler, (gpointer)proc);
     rb_hash_aset(rbglib_log_handler_procs, INT2NUM(handler_id), proc);

@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2003/06/22 17:37:51 $
+  $Date: 2003/06/26 15:15:32 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -122,7 +122,7 @@ static VALUE
 clipboard_request_contents(self, target)
     VALUE self, target;
 {
-    VALUE func = rb_f_lambda();
+    VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_clipboard_request_contents(_SELF(self), RVAL2ATOM(target),
                                    (GtkClipboardReceivedFunc)clipboard_received_func,
@@ -145,7 +145,7 @@ static VALUE
 clipboard_request_text(self)
     VALUE self;
 {
-    VALUE func = rb_f_lambda();
+    VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
     gtk_clipboard_request_text(_SELF(self),
                                (GtkClipboardTextReceivedFunc)clipboard_text_received_func,
