@@ -1,3 +1,7 @@
+2003-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c: Add GLib::Object.destroyed?
+
 2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/glib2.def: Add a file

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2003/02/09 05:10:42 $
+  $Date: 2003/03/21 04:42:54 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -313,6 +313,20 @@ gobj_thaw_notify(self)
 }
 
 static VALUE
+gobj_is_destroyed(self)
+    VALUE self;
+{
+    gobj_holder* holder;
+
+    if (!RTEST(rb_obj_is_kind_of(self, GTYPE2CLASS(G_TYPE_OBJECT))))
+        rb_raise(rb_eTypeError, "not a GLib::Object");
+
+    Data_Get_Struct(self, gobj_holder, holder);
+
+    return (holder->destroyed) ? Qtrue : Qfalse;
+}
+
+static VALUE
 gobj_inspect(self)
     VALUE self;
 {
@@ -416,6 +430,7 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "freeze_notify", gobj_freeze_notify, 0);
     rb_define_method(cGObject, "notify", gobj_notify, 1);
     rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
+    rb_define_method(cGObject, "destroyed?", gobj_is_destroyed, 0);
 
     rb_define_method(cGObject, "initialize", gobj_initialize, -1);
     rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
