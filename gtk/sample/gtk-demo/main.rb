@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-# $Id: main.rb,v 1.4 2003/08/18 20:43:28 kzys Exp $
+# $Id: main.rb,v 1.5 2003/09/03 00:54:05 sakai Exp $
 
 require 'gtk2'
 
@@ -99,7 +99,7 @@ module Demo
       selection.set_mode(Gtk::SELECTION_BROWSE)
       tree_view.set_size_request(200, -1)
 
-      INDEX.each do |*args| # title, filename, class, children
+      INDEX.each do |args| # title, filename, class, children
 	iter = model.append(nil)
 
 	args[0, 3].each_with_index do |value, column|
@@ -109,7 +109,7 @@ module Demo
 	end
 
 	children = args[3]
-	children.each do |*args|
+	children.each do |args|
 	  child_iter = model.append(iter)
 
 	  args[0, 3].each_with_index do |value, column|

@@ -1,3 +1,8 @@
+2003-09-03  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* sample/gtk-demo/main.rb (Demo::Main#create_tree): fix handling of
+	block argument to work with latest ruby-1.8.
+
 2003-09-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c, rbgtkmessagedialog.c, rbgtkwindow.c, rbgtkimage.c, 
