@@ -4,9 +4,9 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/01/30 11:25:55 $
+  $Date: 2005/02/07 17:58:46 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -15,20 +15,37 @@
 #define RVAL2DESC(v) ((PangoFontDescription*)RVAL2BOXED(v, PANGO_TYPE_FONT_DESCRIPTION))
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
 
+static VALUE
+rcontext_itemize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg1, arg2, arg3, arg4, arg5, arg6;
+    GList* list;
+    
+    rb_scan_args(argc, argv, "42", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6);
+
+    if (TYPE(arg1) == T_STRING) {
+        list = pango_itemize(_SELF(self), 
+                             RVAL2CSTR(arg1),      /* text */ 
+                             NUM2INT(arg2),        /* start_index */ 
+                             NUM2INT(arg3),        /* length */
+                             (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
+                             NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+    } else {
+        list = pango_itemize_with_base_dir(_SELF(self), 
+                                           RVAL2GENUM(arg1, PANGO_TYPE_DIRECTION), /* base_dir */
+                                           RVAL2CSTR(arg2),      /* text */ 
+                                           NUM2INT(arg3),        /* start_index */ 
+                                           NUM2INT(arg4),        /* length */
+                                           (PangoAttrList*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_LIST), /* attrs */
+                                           NIL_P(arg6) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg6, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+    }
+    return GLIST2ARY2(list, PANGO_TYPE_ITEM);
+}
+
 /*
-GList*      pango_itemize                   (PangoContext *context,
-                                             const char *text,
-                                             int start_index,
-                                             int length,
-                                             PangoAttrList *attrs,
-                                             PangoAttrIterator *cached_iter);
-GList*      pango_itemize_with_base_dir     (PangoContext *context,
-                                             PangoDirection base_dir,
-                                             const char *text,
-                                             int start_index,
-                                             int length,
-                                             PangoAttrList *attrs,
-                                             PangoAttrIterator *cached_iter);
 GList*      pango_reorder_items             (GList *logical_items);
 */
 
@@ -174,6 +191,8 @@ void
 Init_pango_context()
 {
     VALUE pContext = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
+
+    rb_define_method(pContext, "itemize", rcontext_itemize, -1);
 
 #ifdef PANGO_ENABLE_BACKEND
     rb_define_method(pContext, "initialize", rcontext_initialize, 0);

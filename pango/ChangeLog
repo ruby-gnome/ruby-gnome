@@ -1,3 +1,9 @@
+2005-02-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangocontext.c: Added Pango::Context#itemize. 
+	* src/rbpangoattrlist.c: Fix wrong argument number of 
+	Pango::AttrList.new. 
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Added Pango::Context#font_map, 

@@ -4,7 +4,7 @@
   rbpangoattrlist.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2005/02/07 17:58:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -65,7 +65,7 @@ Init_pango_attrlist()
 {
     VALUE pAttrlist = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
     
-    rb_define_method(pAttrlist, "initialize", attrlist_initialize, 1);
+    rb_define_method(pAttrlist, "initialize", attrlist_initialize, 0);
     rb_define_method(pAttrlist, "insert", attrlist_insert, 1);
     rb_define_method(pAttrlist, "insert_before", attrlist_insert_before, 1);
     rb_define_method(pAttrlist, "change", attrlist_change, 1);

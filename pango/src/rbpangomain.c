@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2004/03/27 16:53:06 $
+  $Date: 2005/02/07 17:58:47 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -16,6 +16,10 @@
  */
 
 /*
+PangoDirection pango_unichar_direction      (gunichar ch);
+PangoDirection pango_find_base_dir          (const gchar *text,
+                                             gint length);
+
 static VALUE
 rpango_break(self, text)
      VALUE self, text;
