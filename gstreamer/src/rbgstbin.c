@@ -276,6 +276,25 @@ static VALUE rb_gst_bin_get_by_name(self, name)
 }
 
 /*
+ *  Method: get_by_name_recurse_up(aName) -> anElement
+ *
+ *  Gets the element with the given name from the bin, as a reference to 
+ *  a Gst::Element object. If the element is not found, a recursion is 
+ *  performed on the parent bin.
+ *
+ *  Returns nil if no element with the given name is found.
+ */
+static VALUE rb_gst_bin_get_by_name_recurse_up(self, name) 
+    VALUE self, name;
+{
+    GstElement *element = gst_bin_get_by_name_recurse_up(RGST_BIN(self),
+                                                         RVAL2CSTR(name));
+    return element != NULL
+        ? RGST_ELEMENT_NEW(element)
+        : Qnil;
+}
+
+/*
  *  Method: iterate -> aBoolean
  *
  *  Iterates over the elements in this bin.
@@ -292,7 +311,8 @@ static VALUE rb_gst_bin_iterate(self)
 /*
  *  Method: clock -> aClockObject
  *
- *  Gets the current clock of the (scheduler of the) bin.
+ *  Gets the current clock of the (scheduler of the) bin,
+ *  as a Gst::Clock object.
  *  This method overrides Gst::Element#get_clock.
  */
 static VALUE rb_gst_bin_get_clock(self)
@@ -306,6 +326,32 @@ static VALUE rb_gst_bin_get_clock(self)
     return clock != NULL
         ? RGST_CLOCK_NEW(clock)
         : Qnil;
+}
+
+/*
+ *  Method: auto_clock -> self
+ *
+ *  Let the bin select a clock automatically.
+ */
+static VALUE rb_gst_bin_auto_clock(self)
+    VALUE self;
+{
+    gst_bin_auto_clock(RGST_BIN(self));
+    return self;
+}
+
+/*
+ *  Method: use_clock(aClock) -> self
+ *
+ *  Force the bin to use the given clock.  Use nil to force it 
+ *  to use no clock at all.
+ */
+static VALUE rb_gst_bin_use_clock(self, clock)
+    VALUE self, clock;
+{
+    gst_bin_use_clock(RGST_BIN(self),
+                      NIL_P(clock) ? NULL : RGST_CLOCK(clock));
+    return self;
 }
 
 /*
@@ -387,6 +433,8 @@ void Init_gst_bin(void) {
     rb_define_method(c, "each_element", rb_gst_bin_each_element, 0);
 
     rb_define_method(c, "get_by_name", rb_gst_bin_get_by_name, 1);
+    rb_define_method(c, "get_by_name_recurse_up", 
+                     rb_gst_bin_get_by_name_recurse_up, 1);
 
     rb_define_method(c, "length", rb_gst_bin_length, 0);
     rb_define_alias(c, "size", "length");
@@ -394,6 +442,8 @@ void Init_gst_bin(void) {
     rb_define_method(c, "iterate", rb_gst_bin_iterate, 0);
 
     rb_define_method(c, "clock", rb_gst_bin_get_clock, 0);
+    rb_define_method(c, "auto_clock", rb_gst_bin_auto_clock, 0);
+    rb_define_method(c, "use_clock", rb_gst_bin_use_clock, 1);
 
     /*
      *  Flags
