@@ -4,7 +4,7 @@
   rbgtkctree.c -
 
   $Author: mutoh $
-  $Date: 2002/09/07 13:56:14 $
+  $Date: 2002/09/09 15:03:43 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -31,7 +31,6 @@ static void
 ctreenode_free (GtkCTreeNode* node)
 {
   g_list_free(&(node->list));
-  g_free(node);
 }
 
 GType

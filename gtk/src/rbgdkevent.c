@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2002/09/09 14:24:50 $
+  $Date: 2002/09/09 15:03:42 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -560,52 +560,46 @@ gdkevent_g2r(const GValue *from)
 void
 Init_gtk_gdk_event()
 {
-/*    static VALUE events[34];
- */
     VALUE ev;
     VALUE gdkEventAny;
-
-/*    gdkevents = events;*/
-
-    VALUE* events = gdkevents;
 
     gdkEvent = rb_define_class_under(mGdk, "Event", GTYPE2CLASS(G_TYPE_BOXED));
     gdkEventAny = rb_define_class_under(mGdk, "EventAny", gdkEvent);
 
-    events[GDK_DELETE]        = gdkEvent; /* FIXME */
-    events[GDK_DESTROY]       = gdkEvent; /* FIXME */
-    events[GDK_EXPOSE]        = rb_define_class_under(mGdk, "EventExpose", gdkEventAny);
-    events[GDK_MOTION_NOTIFY] = rb_define_class_under(mGdk, "EventMotion", gdkEventAny);
-    events[GDK_BUTTON_PRESS]  = rb_define_class_under(mGdk, "EventButton", gdkEventAny);
-    events[GDK_2BUTTON_PRESS] = events[GDK_BUTTON_PRESS];
-    events[GDK_3BUTTON_PRESS] = events[GDK_BUTTON_PRESS];
-    events[GDK_BUTTON_RELEASE]= events[GDK_BUTTON_PRESS];
-    events[GDK_KEY_PRESS]     = rb_define_class_under(mGdk, "EventKey", gdkEventAny);
-    events[GDK_KEY_RELEASE]   = events[GDK_KEY_PRESS];
-    events[GDK_ENTER_NOTIFY]  = rb_define_class_under(mGdk, "EventCrossing", gdkEventAny);
-    events[GDK_LEAVE_NOTIFY]  = events[GDK_ENTER_NOTIFY];
-    events[GDK_FOCUS_CHANGE]  = rb_define_class_under(mGdk, "EventFocus", gdkEventAny);
-    events[GDK_CONFIGURE]     = rb_define_class_under(mGdk, "EventConfigure", gdkEventAny);
-    events[GDK_MAP]           = gdkEvent; /* FIXME */
-    events[GDK_UNMAP]         = gdkEvent; /* FIXME */
-    events[GDK_PROPERTY_NOTIFY]= rb_define_class_under(mGdk, "EventProperty", gdkEventAny);
-    events[GDK_SELECTION_CLEAR]= rb_define_class_under(mGdk, "EventSelection", gdkEventAny);
-    events[GDK_SELECTION_REQUEST]= events[GDK_SELECTION_CLEAR];
-    events[GDK_SELECTION_NOTIFY] = events[GDK_SELECTION_CLEAR];
-    events[GDK_PROXIMITY_IN]  = rb_define_class_under(mGdk, "EventProximity", gdkEventAny);
-    events[GDK_PROXIMITY_OUT] = events[GDK_PROXIMITY_IN];
-    events[GDK_DRAG_ENTER]    = rb_define_class_under(mGdk, "EventDND", gdkEventAny);
-    events[GDK_DRAG_LEAVE]    = events[GDK_DRAG_ENTER];
-    events[GDK_DRAG_MOTION]   = events[GDK_DRAG_ENTER];
-    events[GDK_DRAG_STATUS]   = events[GDK_DRAG_ENTER];
-    events[GDK_DROP_START]    = events[GDK_DRAG_ENTER];
-    events[GDK_DROP_FINISHED] = events[GDK_DRAG_ENTER];
-    events[GDK_CLIENT_EVENT]  = rb_define_class_under(mGdk, "EventClient", gdkEventAny);
-    events[GDK_VISIBILITY_NOTIFY] = rb_define_class_under(mGdk, "EventVisibility", gdkEventAny);
-    events[GDK_NO_EXPOSE]     = rb_define_class_under(mGdk, "EventNoExpose", gdkEventAny);
-    events[GDK_SCROLL]        = rb_define_class_under(mGdk, "EventScroll", gdkEventAny);
-    events[GDK_WINDOW_STATE]  = rb_define_class_under(mGdk, "EventWindowState", gdkEventAny);
-    events[GDK_SETTING]       = rb_define_class_under(mGdk, "EventSetting", gdkEventAny);
+    gdkevents[GDK_DELETE]        = gdkEvent; /* FIXME */
+    gdkevents[GDK_DESTROY]       = gdkEvent; /* FIXME */
+    gdkevents[GDK_EXPOSE]        = rb_define_class_under(mGdk, "EventExpose", gdkEventAny);
+    gdkevents[GDK_MOTION_NOTIFY] = rb_define_class_under(mGdk, "EventMotion", gdkEventAny);
+    gdkevents[GDK_BUTTON_PRESS]  = rb_define_class_under(mGdk, "EventButton", gdkEventAny);
+    gdkevents[GDK_2BUTTON_PRESS] = gdkevents[GDK_BUTTON_PRESS];
+    gdkevents[GDK_3BUTTON_PRESS] = gdkevents[GDK_BUTTON_PRESS];
+    gdkevents[GDK_BUTTON_RELEASE]= gdkevents[GDK_BUTTON_PRESS];
+    gdkevents[GDK_KEY_PRESS]     = rb_define_class_under(mGdk, "EventKey", gdkEventAny);
+    gdkevents[GDK_KEY_RELEASE]   = gdkevents[GDK_KEY_PRESS];
+    gdkevents[GDK_ENTER_NOTIFY]  = rb_define_class_under(mGdk, "EventCrossing", gdkEventAny);
+    gdkevents[GDK_LEAVE_NOTIFY]  = gdkevents[GDK_ENTER_NOTIFY];
+    gdkevents[GDK_FOCUS_CHANGE]  = rb_define_class_under(mGdk, "EventFocus", gdkEventAny);
+    gdkevents[GDK_CONFIGURE]     = rb_define_class_under(mGdk, "EventConfigure", gdkEventAny);
+    gdkevents[GDK_MAP]           = gdkEvent; /* FIXME */
+    gdkevents[GDK_UNMAP]         = gdkEvent; /* FIXME */
+    gdkevents[GDK_PROPERTY_NOTIFY]= rb_define_class_under(mGdk, "EventProperty", gdkEventAny);
+    gdkevents[GDK_SELECTION_CLEAR]= rb_define_class_under(mGdk, "Gdkeventselection", gdkEventAny);
+    gdkevents[GDK_SELECTION_REQUEST]= gdkevents[GDK_SELECTION_CLEAR];
+    gdkevents[GDK_SELECTION_NOTIFY] = gdkevents[GDK_SELECTION_CLEAR];
+    gdkevents[GDK_PROXIMITY_IN]  = rb_define_class_under(mGdk, "EventProximity", gdkEventAny);
+    gdkevents[GDK_PROXIMITY_OUT] = gdkevents[GDK_PROXIMITY_IN];
+    gdkevents[GDK_DRAG_ENTER]    = rb_define_class_under(mGdk, "EventDND", gdkEventAny);
+    gdkevents[GDK_DRAG_LEAVE]    = gdkevents[GDK_DRAG_ENTER];
+    gdkevents[GDK_DRAG_MOTION]   = gdkevents[GDK_DRAG_ENTER];
+    gdkevents[GDK_DRAG_STATUS]   = gdkevents[GDK_DRAG_ENTER];
+    gdkevents[GDK_DROP_START]    = gdkevents[GDK_DRAG_ENTER];
+    gdkevents[GDK_DROP_FINISHED] = gdkevents[GDK_DRAG_ENTER];
+    gdkevents[GDK_CLIENT_EVENT]  = rb_define_class_under(mGdk, "EventClient", gdkEventAny);
+    gdkevents[GDK_VISIBILITY_NOTIFY] = rb_define_class_under(mGdk, "EventVisibility", gdkEventAny);
+    gdkevents[GDK_NO_EXPOSE]     = rb_define_class_under(mGdk, "EventNoExpose", gdkEventAny);
+    gdkevents[GDK_SCROLL]        = rb_define_class_under(mGdk, "Gdkeventscroll", gdkEventAny);
+    gdkevents[GDK_WINDOW_STATE]  = rb_define_class_under(mGdk, "EventWindowState", gdkEventAny);
+    gdkevents[GDK_SETTING]       = rb_define_class_under(mGdk, "Gdkeventsetting", gdkEventAny);
 
 
     /* GdkEvent */
@@ -624,16 +618,16 @@ Init_gtk_gdk_event()
     rb_define_method(gdkEventAny, "send_event", gdkeventany_send_event, 0);
 
     /* GdkEventExpose */
-    ev = events[GDK_EXPOSE];
+    ev = gdkevents[GDK_EXPOSE];
     rb_define_method(ev, "area", gdkeventexpose_area, 0);
     rb_define_method(ev, "count", gdkeventexpose_count, 0);
 
     /* GdkEventVisibility */
-    ev = events[GDK_VISIBILITY_NOTIFY];
+    ev = gdkevents[GDK_VISIBILITY_NOTIFY];
     rb_define_method(ev, "state", gdkeventvisibility_state, 0);
 
     /* GdkEventMotion */
-    ev = events[GDK_MOTION_NOTIFY];
+    ev = gdkevents[GDK_MOTION_NOTIFY];
     rb_define_method(ev, "time", gdkeventmotion_time, 0);
     rb_define_method(ev, "x", gdkeventmotion_x, 0);
     rb_define_method(ev, "y", gdkeventmotion_y, 0);
@@ -643,7 +637,7 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "y_root", gdkeventmotion_y_root, 0);
 
     /* GdkEventButton */
-    ev = events[GDK_BUTTON_PRESS];
+    ev = gdkevents[GDK_BUTTON_PRESS];
     rb_define_method(ev, "button", gdkeventbutton_button, 0);
     rb_define_method(ev, "state", gdkeventbutton_state, 0);
     rb_define_method(ev, "time",   gdkeventbutton_time, 0);
@@ -653,7 +647,7 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "y_root", gdkeventbutton_y_root, 0);
 
     /* GdkEventKey */
-    ev = events[GDK_KEY_PRESS];
+    ev = gdkevents[GDK_KEY_PRESS];
     rb_define_method(ev, "time",   gdkeventkey_time, 0);
     rb_define_method(ev, "state",  gdkeventkey_state, 0);
     rb_define_method(ev, "keyval", gdkeventkey_keyval, 0);
@@ -661,7 +655,7 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "string", gdkeventkey_string, 0);
 
     /* GdkEventCrossing */
-    ev = events[GDK_ENTER_NOTIFY];
+    ev = gdkevents[GDK_ENTER_NOTIFY];
     rb_define_method(ev, "subwindow", gdkeventcrossing_subwindow, 0);
     rb_define_method(ev, "time", gdkeventcrossing_time, 0);
     rb_define_method(ev, "x", gdkeventcrossing_x, 0);
@@ -674,24 +668,24 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "state", gdkeventcrossing_state, 0);
 
     /* GdkEventFocus */
-    ev = events[GDK_FOCUS_CHANGE];
+    ev = gdkevents[GDK_FOCUS_CHANGE];
     rb_define_method(ev, "in", gdkeventfocus_in, 0);
 
     /* GdkEventConfigure */
-    ev = events[GDK_CONFIGURE];
+    ev = gdkevents[GDK_CONFIGURE];
     rb_define_method(ev, "x", gdkeventconfigure_x, 0);
     rb_define_method(ev, "y", gdkeventconfigure_y, 0);
     rb_define_method(ev, "width", gdkeventconfigure_width, 0);
     rb_define_method(ev, "height", gdkeventconfigure_height, 0);
 
     /* GdkEventProperty */
-    ev = events[GDK_PROPERTY_NOTIFY];
+    ev = gdkevents[GDK_PROPERTY_NOTIFY];
     rb_define_method(ev, "atom", gdkeventproperty_atom, 0);
     rb_define_method(ev, "time", gdkeventproperty_time, 0);
     rb_define_method(ev, "state", gdkeventproperty_state, 0);
 
-    /* GdkEventSelection */
-    ev = events[GDK_SELECTION_CLEAR];
+    /* Gdkeventselection */
+    ev = gdkevents[GDK_SELECTION_CLEAR];
     rb_define_method(ev, "selection", gdkeventselection_selection, 0);
     rb_define_method(ev, "target", gdkeventselection_target, 0);
     rb_define_method(ev, "property", gdkeventselection_property, 0);
@@ -699,18 +693,18 @@ Init_gtk_gdk_event()
     rb_define_method(ev, "time", gdkeventselection_time, 0);
 
     /* GdkEventDND */
-    ev = events[GDK_DRAG_ENTER];
+    ev = gdkevents[GDK_DRAG_ENTER];
     rb_define_method(ev, "context", gdkeventDND_context, 0);
     rb_define_method(ev, "time", gdkeventDND_time, 0);
     rb_define_method(ev, "x_root", gdkeventDND_x_root, 0);
     rb_define_method(ev, "y_root", gdkeventDND_y_root, 0);
 
     /* GdkEventProximity */
-    ev = events[GDK_PROXIMITY_IN];
+    ev = gdkevents[GDK_PROXIMITY_IN];
     rb_define_method(ev, "time", gdkeventproximity_time, 0);
 
     /* GdkEventClient */
-    ev = events[GDK_CLIENT_EVENT];
+    ev = gdkevents[GDK_CLIENT_EVENT];
     rb_define_method(ev, "message_type", gdkeventclient_message_type, 0);
     rb_define_method(ev, "data_format", gdkeventclient_data_format, 0);
     rb_define_method(ev, "data_byte", gdkeventclient_data_byte, 0);
