@@ -5,10 +5,9 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.10 2004/07/11 15:09:28 mutoh Exp $
+  $Id: libglade2.rb,v 1.11 2004/07/11 15:11:55 mutoh Exp $
 =end
 
-require 'rbconfig'
 require 'gtk2'
 begin
   require 'gnome2'
