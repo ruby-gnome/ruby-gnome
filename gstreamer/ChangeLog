@@ -1,3 +1,7 @@
+2004-03-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* README: Update Copyright.
+
 2004-03-02  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.c: Defines Gst::[MAJOR|MINOR|MACRO]_VERSION.
