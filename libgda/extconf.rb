@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/Gda extention library
+extconf.rb for Ruby/Libgda extention library
 =end
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
@@ -36,7 +36,7 @@ have_func("gda_config_save_data_source_info")
 Dir.mkdir('src') unless File.exist? 'src'
 Dir.chdir "src"
 begin
-  create_makefile("gda", srcdir)
+  create_makefile("libgda", srcdir)
 ensure
   Dir.chdir('..')
 end
