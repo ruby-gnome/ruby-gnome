@@ -3,8 +3,8 @@
 
   rbgtktreemodel.c -
 
-  $Author: sakai $
-  $Date: 2003/07/20 05:05:08 $
+  $Author: mutoh $
+  $Date: 2003/07/31 16:15:18 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -37,6 +37,17 @@ treemodel_get_column_type(self, index)
 {
     return GTYPE2CLASS(gtk_tree_model_get_column_type(_SELF(self), 
                                                       NUM2INT(index)));
+}
+
+static VALUE
+treemodel_get_iter_first(self)
+    VALUE self;
+{
+    GtkTreeIter iter;
+    GtkTreeModel* model = _SELF(self);
+    gboolean ret = (gtk_tree_model_get_iter_first(model, &iter));
+    iter.user_data3 = model;
+    return ret ? ITR2RVAL(&iter) : Qnil;
 }
 
 static VALUE
@@ -198,6 +209,7 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "flags", treemodel_get_flags, 0);
     rb_define_method(mTreeModel, "n_columns", treemodel_get_n_columns, 0);
     rb_define_method(mTreeModel, "get_column_type", treemodel_get_column_type, 1);
+    rb_define_method(mTreeModel, "iter_first", treemodel_get_iter_first, 0);
     rb_define_method(mTreeModel, "get_iter", treemodel_get_iter, 1);
     rb_define_method(mTreeModel, "get_value", treemodel_get_value, 2);
     rb_define_method(mTreeModel, "each", treemodel_foreach, 0);

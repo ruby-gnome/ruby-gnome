@@ -1,3 +1,7 @@
+2003-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreemodel.c: Add Gtk::TreeModel#iter_first.
+
 2003-07-31  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmessagedialog.c: Fix constants.
