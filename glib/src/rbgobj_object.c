@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2003/03/21 04:42:54 $
+  $Author: sakai $
+  $Date: 2003/04/04 13:48:42 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -20,13 +20,12 @@
 #include "st.h"
 #include "global.h"
 
-static GHashTable* not_abstract_table;
-
 void
 rbgobj_add_abstract_but_create_instance_class(gtype)
     GType gtype;
 {
-    g_hash_table_insert(not_abstract_table, (gpointer)gtype, (gpointer)gtype);
+    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    cinfo->flags |= RBGOBJ_ABSTRACT_BUT_CREATABLE;
 }
 
 static VALUE
@@ -34,8 +33,8 @@ gobj_s_allocate(klass)
     VALUE klass;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
-    if (G_TYPE_IS_ABSTRACT(cinfo->gtype) && 
-		    ! (g_hash_table_lookup(not_abstract_table, (gconstpointer)(cinfo->gtype))))
+    if (G_TYPE_IS_ABSTRACT(cinfo->gtype) &&
+        !(cinfo->flags & RBGOBJ_ABSTRACT_BUT_CREATABLE))
         rb_raise(rb_eTypeError, "abstract class");
     return rbgobj_create_object(klass);
 }
@@ -58,21 +57,13 @@ gobj_s_gobject_new(argc, argv, self)
     VALUE* argv;
     VALUE self;
 {
-    VALUE type, params_hash;
-    GType gtype;
+    VALUE params_hash;
     GObject* gobj;
     VALUE result;
 
-    rb_scan_args(argc, argv, "11", &type, &params_hash);
+    rb_scan_args(argc, argv, "01", &params_hash);
 
-    if (RTEST(rb_obj_is_kind_of(type, rbgobj_cType))) {
-        gtype = rbgobj_gtype_get(type);
-    } else {
-        StringValue(type);
-        gtype = g_type_from_name(StringValuePtr(type));
-    }
-
-    gobj = rbgobj_gobject_new(gtype, params_hash);
+    gobj = rbgobj_gobject_new(CLASS2GTYPE(self), params_hash);
     result = GOBJ2RVAL(gobj);
 
     // XXX: Ughhhhh
@@ -405,12 +396,108 @@ gobj_smethod_added(self, id)
 
 /**********************************************************************/
 
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+
+#if 0
+typedef void   (*GBaseInitFunc)              (gpointer         g_class);
+typedef void   (*GBaseFinalizeFunc)          (gpointer         g_class);
+typedef void   (*GClassFinalizeFunc)         (gpointer         g_class,
+					      gpointer         class_data);
+typedef void   (*GInterfaceInitFunc)         (gpointer         g_iface,
+					      gpointer         iface_data);
+typedef void   (*GInterfaceFinalizeFunc)     (gpointer         g_iface,
+					      gpointer         iface_data);
+typedef gboolean (*GTypeClassCacheFunc)	     (gpointer	       cache_data,
+					      GTypeClass      *g_class);
+#endif
+
+static void
+class_init(gpointer g_class, gpointer class_data)
+{
+    VALUE class_init_proc = (VALUE)class_data;
+    // XXX
+    VALUE f = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
+    rb_funcall(f, rb_intern("call"), 2,
+               GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class)), class_init_proc);
+}
+
+static void
+instance_init(GTypeInstance* instance, gpointer g_class)
+{
+    VALUE obj = GOBJ2RVAL(instance);
+    ID id_instance_init = rb_intern("instance_init");
+    if (rb_respond_to(obj, id_instance_init))
+        rb_funcall(obj, id_instance_init, 0);
+}
+
+static VALUE
+noop(int argc, VALUE* argv, VALUE _)
+{
+    return Qnil;
+}
+
+static VALUE
+gobject_class_new(int argc, VALUE* argv, VALUE _)
+{
+    VALUE type_name, flags;
+    volatile VALUE class_init_proc;
+    GType parent_type;
+    GTypeInfo* info;
+
+    {
+        VALUE parent;
+        rb_scan_args(argc, argv, "21&", &parent, &type_name, &flags, &class_init_proc);
+        # FIXME: check arguments
+        parent_type = CLASS2GTYPE(parent);
+    }
+
+    {
+        GTypeQuery query;
+        g_type_query(parent_type, &query);
+
+        info = g_new0(GTypeInfo, 1);
+        info->class_size     = query.class_size;
+        info->base_init      = NULL;
+        info->base_finalize  = NULL;
+        info->class_init     = class_init;
+        info->class_finalize = NULL;
+        info->class_data     = (gpointer)class_init_proc;
+        info->instance_size  = query.instance_size;
+        info->n_preallocs    = 0;
+        info->instance_init  = instance_init;
+        info->value_table    = NULL;
+    }
+
+    {
+        GType type = g_type_register_static(parent_type,
+                                            StringValuePtr(type_name),
+                                            info,
+                                            NIL_P(flags) ? 0 : NUM2INT(flags));
+        VALUE klass = GTYPE2CLASS(type);
+        G_RELATIVE(klass, class_init_proc);
+
+        rb_define_alias(CLASS_OF(klass), "new", "new!");
+        rb_define_method(klass, "initialize", noop, -1);
+
+        return klass;
+    }
+}
+
+static void
+Init_gobject_class()
+{
+    VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
+    rb_define_module_function(cGObject, "class_new", gobject_class_new, -1);
+}
+
+#endif
+
+/**********************************************************************/
+
 void 
 Init_gobject_gobject()
 {
     VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
-
-    not_abstract_table = g_hash_table_new(NULL, NULL);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
@@ -418,7 +505,7 @@ Init_gobject_gobject()
     rb_define_alloc_func(cGObject, gobj_s_allocate);
 #endif
 #ifdef RBGLIB_ENABLE_EXPERIMENTAL
-    rb_define_singleton_method(cGObject, "gobject_new", gobj_s_gobject_new, -1);
+    rb_define_singleton_method(cGObject, "new!", gobj_s_gobject_new, -1);
 #endif
 
     rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
@@ -442,5 +529,9 @@ Init_gobject_gobject()
     rb_global_variable(&type_to_prop_getter_table);
     type_to_prop_setter_table = rb_hash_new();
     type_to_prop_getter_table = rb_hash_new();
+
+#ifdef RBGLIB_ENABLE_EXPERIMENTAL
+    Init_gobject_class();
+#endif
 }
 

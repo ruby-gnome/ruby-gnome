@@ -1,3 +1,19 @@
+2003-04-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (gobject_class_new): implement the function
+	experimentaly.
+
+	* src/rbgobj_object.c: abolish not_abstract_table and use
+	RGObjClassInfo's `flags' field.	
+
+	* src/rbgobj_boxed.c: abolish boxed_table and use RGObjClassInfo's
+	`flags' field.	
+
+	* src/rbgobject.c, src/rbgobject.h:
+	add `flags' field to RGObjClassInfo.
+
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype): code cleanup
+
 2003-03-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_object.c: Add GLib::Object.destroyed?

@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Author: sakai $
+  $Date: 2003/04/04 13:48:42 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -45,6 +45,34 @@ rbgobj_lookup_class(klass)
     rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
 }
 
+VALUE
+get_superclass(gtype)
+    GType gtype;
+{
+    switch (gtype) {
+      case G_TYPE_PARAM:
+      case G_TYPE_OBJECT:
+        return cInstantiatable;
+      case G_TYPE_BOXED:
+        return rb_cData;
+      case G_TYPE_POINTER:
+#ifdef RBGOBJ_USE_DLPTR
+        return rb_cDLPtrData;
+#else
+        return rb_cData;
+#endif
+      case G_TYPE_ENUM:
+      case G_TYPE_FLAGS:
+        return rb_cObject;
+      default:
+        {
+            const RGObjClassInfo* cinfo_super =
+                rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
+            return cinfo_super->klass;
+        }
+    }
+}
+
 const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype(gtype)
     GType gtype;
@@ -59,47 +87,15 @@ rbgobj_lookup_class_by_gtype(gtype)
 
         switch (G_TYPE_FUNDAMENTAL(gtype)){
           case G_TYPE_POINTER:
-            if (gtype == G_TYPE_POINTER) {
-#ifdef RBGOBJ_USE_DLPTR
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cDLPtrData);
-#else
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cData);
-#endif
-            } else {
-                const RGObjClassInfo* cinfo_super
-                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
-            }
-            break;
-
           case G_TYPE_BOXED:
-            if (gtype == G_TYPE_BOXED){
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, rb_cData);
-            } else {
-                const RGObjClassInfo* cinfo_super
-                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
-            }
-            break;
-
           case G_TYPE_PARAM:
-            if (gtype == G_TYPE_PARAM){
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cInstantiatable);
-            } else {
-                const RGObjClassInfo* cinfo_super
-                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
-            }
-            break;
-
           case G_TYPE_OBJECT:
-            if (gtype == G_TYPE_OBJECT){
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cInstantiatable);
-            } else {
-                const RGObjClassInfo* cinfo_super
-                    = rbgobj_lookup_class_by_gtype(g_type_parent(gtype));
-                cinfo->klass = rb_funcall(rb_cClass, id_new, 1, cinfo_super->klass);
-            }
+#if 0
+          case G_TYPE_ENUM:
+          case G_TYPE_FLAGS:
+#endif
+            cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
+                                      get_superclass(gtype));
             break;
 
           case G_TYPE_INTERFACE:
@@ -122,6 +118,7 @@ rbgobj_lookup_class_by_gtype(gtype)
         cinfo->gtype = gtype;
         cinfo->mark  = NULL;
         cinfo->free  = NULL;
+        cinfo->flags = 0;
 
         rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
         rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);

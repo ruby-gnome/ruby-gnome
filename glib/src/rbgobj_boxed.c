@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2003/02/14 18:55:51 $
+  $Date: 2003/04/04 13:48:41 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -12,8 +12,6 @@
 **********************************************************************/
 
 #include "global.h"
-
-static GHashTable* boxed_table;
 
 static void
 boxed_mark(boxed_holder* p)
@@ -148,18 +146,18 @@ rbgobj_make_boxed(p, gtype)
     gpointer p;
     GType gtype;
 {
-    VALUE result = rbgobj_boxed_create(GTYPE2CLASS(gtype));
+    const RGObjClassInfo* cinfo = rbgobj_lookup_class_by_gtype(gtype);
+    VALUE result = rbgobj_boxed_create(cinfo->klass);
     boxed_holder* holder;
-    gboolean copy_obj = (g_hash_table_lookup(boxed_table, (gconstpointer)gtype) == NULL);
 
     Data_Get_Struct(result, boxed_holder, holder);
     
-    if (copy_obj){
-        holder->boxed = g_boxed_copy(gtype, p);
-        holder->own   = TRUE;
-    } else {
+    if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY){
         holder->boxed = p;
         holder->own   = FALSE;
+    } else {
+        holder->boxed = g_boxed_copy(gtype, p);
+        holder->own   = TRUE;
     }
 
     return result;
@@ -169,7 +167,8 @@ void
 rbgobj_boxed_not_copy_obj(gtype)
     GType gtype;
 {
-    g_hash_table_insert(boxed_table, (gpointer)gtype, (gpointer)gtype);
+    RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class_by_gtype(gtype);
+    cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
 }
 
 /**********************************************************************/
@@ -203,8 +202,6 @@ Init_gobject_gboxed()
     VALUE gBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
-
-    boxed_table = g_hash_table_new(NULL, NULL);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(gBoxed, "allocate", rbgobj_boxed_s_allocate, 0);

@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2003/02/17 16:00:12 $
+  $Date: 2003/04/04 13:48:42 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -59,12 +59,19 @@ extern "C" {
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
+
+typedef enum
+{
+    RBGOBJ_ABSTRACT_BUT_CREATABLE = 1 << 0,
+    RBGOBJ_BOXED_NOT_COPY         = 1 << 1,
+} RGObjClassFlag;
     
 typedef struct {
     VALUE klass;
     GType gtype;
     void (*mark)(gpointer);
     void (*free)(gpointer);
+    int flags; /* RGObjClassFlag */
 } RGObjClassInfo;
 
 /* rbgobject.c */
