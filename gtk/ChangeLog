@@ -1,8 +1,13 @@
 2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/*.c: remove definitions of signal names.
+	  Now they are defined automatically by glib2.so
+
+2002-08-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
 	* src/rbgdkpixmap.c, src/rbgtkobject.c, src/rbgtkwindowgroup.c:
 	Remove rbgobj_register_class(). Use G_DEF_CLASS() instead.
-	* src/rbgtk.[ch]: Collect initialization calls (aka Init_hoge()) of
+	* src/*.c: Collect initialization calls (aka Init_hoge()) of
 	descendants of Gtk::Object, and put them into Init_gtk_object().
 
 2002-08-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>

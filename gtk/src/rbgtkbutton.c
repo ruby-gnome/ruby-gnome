@@ -4,7 +4,7 @@
   rbgtkbutton.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -94,12 +94,6 @@ void
 Init_gtk_button()
 {
     VALUE gButton = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
-
-    rb_define_const(gButton, "SIGNAL_PRESSED", rb_str_new2("pressed"));
-    rb_define_const(gButton, "SIGNAL_RELEASED", rb_str_new2("released"));
-    rb_define_const(gButton, "SIGNAL_CLICKED", rb_str_new2("clicked"));
-    rb_define_const(gButton, "SIGNAL_ENTER", rb_str_new2("enter"));
-    rb_define_const(gButton, "SIGNAL_LEAVE", rb_str_new2("leave"));
 
     rb_define_method(gButton, "initialize", button_initialize, -1);
     rb_define_method(gButton, "pressed", button_pressed, 0);

@@ -4,7 +4,7 @@
   rbgtkmenushell.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -53,8 +53,6 @@ void
 Init_gtk_menu_shell()
 {
     VALUE gMenuShell = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
-
-    rb_define_const(gMenuShell, "SIGNAL_DEACTIVATE", rb_str_new2("deactivate"));
 
     rb_define_method(gMenuShell, "append", mshell_append, 1);
     rb_define_method(gMenuShell, "prepend", mshell_prepend, 1);

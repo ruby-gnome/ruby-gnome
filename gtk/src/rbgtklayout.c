@@ -3,8 +3,8 @@
 
   rbgtklayout.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -137,8 +137,4 @@ Init_gtk_layout()
     rb_define_method(gLayout, "freeze", layout_freeze, 0);
     rb_define_method(gLayout, "thaw", layout_thaw, 0);
     rb_define_method(gLayout, "bin_window", layout_get_bin_window, 0);
-
-    /* Signals */
-    rb_define_const(gLayout, "SIGNAL_SET_SCROLL_ADJUSTMENTS",
-					rb_str_new2("set_scroll_adjustments"));
 }

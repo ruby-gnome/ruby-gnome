@@ -4,7 +4,7 @@
   rbgtkitem.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -44,11 +44,6 @@ void
 Init_gtk_item()
 {
     VALUE gItem = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
-
-    rb_define_const(gItem, "SIGNAL_SELECT", rb_str_new2("select"));
-    rb_define_const(gItem, "SIGNAL_DESELECT", rb_str_new2("deselect"));
-    rb_define_const(gItem, "SIGNAL_TOGGLE", rb_str_new2("toggle"));
-
     rb_define_method(gItem, "select", item_select, 0);
     rb_define_method(gItem, "deselect", item_deselect, 0);
     rb_define_method(gItem, "toggle", item_toggle, 0);

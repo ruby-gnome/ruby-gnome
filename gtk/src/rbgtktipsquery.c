@@ -3,8 +3,8 @@
 
   rbgtktipsquery.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -62,11 +62,6 @@ void
 Init_gtk_tips_query()
 {
     VALUE gTipsQuery = G_DEF_CLASS(GTK_TYPE_TIPS_QUERY, "TipsQuery", mGtk);
-
-    rb_define_const(gTipsQuery, "SIGNAL_START_QUERY", rb_str_new2("start_query"));
-    rb_define_const(gTipsQuery, "SIGNAL_STOP_QUERY", rb_str_new2("stop_query"));
-    rb_define_const(gTipsQuery, "SIGNAL_WIDGET_ENTERED", rb_str_new2("widget_entered"));
-    rb_define_const(gTipsQuery, "SIGNAL_WIDGET_SELECTED", rb_str_new2("widget_selected"));
 
     rb_define_method(gTipsQuery, "initialize", tipsquery_initialize, 0);
     rb_define_method(gTipsQuery, "start", tipsquery_start, 0);

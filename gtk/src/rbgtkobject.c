@@ -4,7 +4,7 @@
   rbgtkobject.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -399,11 +399,6 @@ Init_gtk_object()
     rb_define_const(gObject, "RUN_NO_RECURSE", INT2FIX(GTK_RUN_NO_RECURSE));
     rb_define_const(gObject, "RUN_ACTION", INT2FIX(GTK_RUN_ACTION));
     rb_define_const(gObject, "RUN_NO_HOOKS", INT2FIX(GTK_RUN_NO_HOOKS));
-
-    /*
-     * signals
-     */
-    rb_define_const(gObject, "SIGNAL_DESTROY", rb_str_new2("destroy"));
 
     /*
      * instance methods

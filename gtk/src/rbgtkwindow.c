@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:19 $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -162,9 +162,6 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 void Init_gtk_window()
 {
 	VALUE gWindow = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
-
-    rb_define_const(gWindow, "SIGNAL_MOVE_RESIZE", rb_str_new2("move_resize"));
-    rb_define_const(gWindow, "SIGNAL_SET_FOCUS", rb_str_new2("set_focus"));
 
     rb_define_method(gWindow, "initialize", gwin_initialize, -1);
     rb_define_method(gWindow, "set_title", gwin_set_title, 1);

@@ -3,8 +3,8 @@
 
   rbgtkstatusbar.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -69,9 +69,6 @@ void
 Init_gtk_statusbar()
 {
     VALUE gStatusBar = G_DEF_CLASS(GTK_TYPE_STATUSBAR, "Statusbar", mGtk);
-
-    rb_define_const(gStatusBar, "SIGNAL_TEXT_PUSHDED", rb_str_new2("text_pushed"));
-    rb_define_const(gStatusBar, "SIGNAL_TEXT_POPPED", rb_str_new2("text_popped"));
 
     rb_define_method(gStatusBar, "initialize", statusbar_initialize, 0);
     rb_define_method(gStatusBar, "push", statusbar_push, 2);

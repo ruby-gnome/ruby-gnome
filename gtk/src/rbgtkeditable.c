@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -145,7 +145,9 @@ Init_gtk_editable()
 {
     mEditable = rb_define_module_under(mGtk, "Editable");
 
-    rb_define_const(mEditable, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
+    /* FIXME */
+    rb_define_const(mEditable, "SIGNAL_INSERT_TEXT", rb_str_new2("insert_text"));
+    rb_define_const(mEditable, "SIGNAL_DELETE_TEXT", rb_str_new2("delete_text"));
     rb_define_const(mEditable, "SIGNAL_CHANGED", rb_str_new2("changed"));
 
     rb_define_method(mEditable, "select_region", edit_sel_region, 2);

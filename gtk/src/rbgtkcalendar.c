@@ -3,8 +3,8 @@
 
   rbgtkcalendar.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -163,21 +163,6 @@ Init_gtk_calendar()
 		    INT2FIX(GTK_CALENDAR_SHOW_WEEK_NUMBERS));
     rb_define_const(gCalendar, "WEEK_START_MONDAY",
 		    INT2FIX(GTK_CALENDAR_WEEK_START_MONDAY));
-
-    rb_define_const(gCalendar, "SIGNAL_MONTH_CHANGED",
-		    rb_str_new2("month_changed"));
-    rb_define_const(gCalendar, "SIGNAL_DAY_SELECTED",
-		    rb_str_new2("day_selected"));
-    rb_define_const(gCalendar, "SIGNAL_DAY_SELECTED_DOUBLE_CLICK",
-		    rb_str_new2("day_selected_double_click"));
-    rb_define_const(gCalendar, "SIGNAL_PREV_MONTH",
-		    rb_str_new2("prev_month"));
-    rb_define_const(gCalendar, "SIGNAL_NEXT_MONTH",
-		    rb_str_new2("next_month"));
-    rb_define_const(gCalendar, "SIGNAL_PREV_YEAR",
-		    rb_str_new2("prev_year"));
-    rb_define_const(gCalendar, "SIGNAL_NEXT_YEAR",
-		    rb_str_new2("next_year"));
 
     rb_define_method(gCalendar, "initialize", cal_init, 0);
     rb_define_method(gCalendar, "select_month", cal_select_month, 2);

@@ -3,8 +3,8 @@
 
   rbgtklist.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -154,10 +154,6 @@ void
 Init_gtk_list()
 {
     VALUE gList = G_DEF_CLASS(GTK_TYPE_LIST, "List", mGtk);
-
-    rb_define_const(gList, "SIGNAL_SELECTION_CHANGED", rb_str_new2("selection_changed"));
-    rb_define_const(gList, "SIGNAL_SELECT_CHILD", rb_str_new2("select_child"));
-    rb_define_const(gList, "SIGNAL_UNSELECT_CHILD", rb_str_new2("unselect_child"));
 
     rb_define_method(gList, "initialize", list_initialize, 0);
     rb_define_method(gList, "set_selection_mode", list_set_sel_mode, 1);

@@ -3,8 +3,8 @@
 
   rbgtkctree.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -1476,14 +1476,6 @@ Init_gtk_ctree()
     rb_define_const(gCTree, "EXPANSION_COLLAPSE_RECURSIVE", INT2FIX(GTK_CTREE_EXPANSION_COLLAPSE_RECURSIVE));
     rb_define_const(gCTree, "EXPANSION_TOGGLE", INT2FIX(GTK_CTREE_EXPANSION_TOGGLE));
     rb_define_const(gCTree, "EXPANSION_TOGGLE_RECURSIVE", INT2FIX(GTK_CTREE_EXPANSION_TOGGLE_RECURSIVE));
-
-    /* Signals */
-    rb_define_const(gCTree, "SIGNAL_TREE_SELECT_ROW", rb_str_new2("tree_select_row"));
-    rb_define_const(gCTree, "SIGNAL_TREE_UNSELECT_ROW", rb_str_new2("tree_unselect_row"));
-    rb_define_const(gCTree, "SIGNAL_TREE_EXPAND", rb_str_new2("tree_expand"));
-    rb_define_const(gCTree, "SIGNAL_TREE_COLLAPSE", rb_str_new2("tree_collapse"));
-    rb_define_const(gCTree, "SIGNAL_TREE_MOVE", rb_str_new2("tree_move"));
-    rb_define_const(gCTree, "SIGNAL_CHANGE_FOCUS_ROW_EXPANSION", rb_str_new2("change_focus_row_expansion"));
 
     /* instance methods */
     rb_define_method(gCTree, "initialize", ctree_initialize, 2);

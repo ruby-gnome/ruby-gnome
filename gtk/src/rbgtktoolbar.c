@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -292,9 +292,6 @@ Init_gtk_toolbar()
     rb_define_const(gToolbar, "ICONS", INT2FIX(GTK_TOOLBAR_ICONS));
     rb_define_const(gToolbar, "TEXT", INT2FIX(GTK_TOOLBAR_TEXT));
     rb_define_const(gToolbar, "BOTH", INT2FIX(GTK_TOOLBAR_BOTH));
-
-    rb_define_const(gToolbar, "SIGNAL_ORIENTATION_CHANGED", rb_str_new2("orientation_changed"));
-    rb_define_const(gToolbar, "SIGNAL_STYLE_CHANGED", rb_str_new2("style_changed"));
 
     rb_define_method(gToolbar, "initialize", tbar_initialize, -1);
     rb_define_method(gToolbar, "append_item", tbar_append_item, 5);

@@ -3,8 +3,8 @@
 
   rbgtkcurve.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -90,8 +90,6 @@ void
 Init_gtk_curve()
 {
     VALUE gCurve = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
-
-    rb_define_const(gCurve, "SIGNAL_CURVE_TYPE_CHANGED", rb_str_new2("curve-type-changed"));
 
     rb_define_method(gCurve, "initialize", curve_initialize, 0);
     rb_define_method(gCurve, "reset", curve_reset, 0);

@@ -3,8 +3,8 @@
 
   rbgtktree.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -113,11 +113,7 @@ Init_gtk_tree()
     VALUE gTree = G_DEF_CLASS(GTK_TYPE_TREE, "Tree", mGtk);
 
     rb_define_const(gTree, "VIEW_LINE", INT2FIX(GTK_TREE_VIEW_LINE));
-    rb_define_const(gTree, "VIEW_ITEM", INT2FIX(GTK_TREE_VIEW_ITEM));
-
-    rb_define_const(gTree, "SIGNAL_SELECTION_CHANGED", rb_str_new2("selection_changed"));
-    rb_define_const(gTree, "SIGNAL_SELECT_CHILD", rb_str_new2("select_child"));
-    rb_define_const(gTree, "SIGNAL_UNSELECT_CHILD", rb_str_new2("unselect_child"));
+    rb_define_const(gTree, "VIEW_ITEM", INT2FIX(GTK_TREE_VIEW_ITEM));;
 
     rb_define_method(gTree, "initialize", tree_initialize, 0);
     rb_define_method(gTree, "append", tree_append, 1);

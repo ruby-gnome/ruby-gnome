@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -144,12 +144,6 @@ void
 Init_gtk_container()
 {
     VALUE gContainer = G_DEF_CLASS(GTK_TYPE_CONTAINER, "Container", mGtk);
-
-    rb_define_const(gContainer, "SIGNAL_ADD", rb_str_new2("add"));
-    rb_define_const(gContainer, "SIGNAL_REMOVE", rb_str_new2("remove"));
-    rb_define_const(gContainer, "SIGNAL_NEED_RESIZE", rb_str_new2("need_resize"));
-    rb_define_const(gContainer, "SIGNAL_FOREACH", rb_str_new2("foreach"));
-    rb_define_const(gContainer, "SIGNAL_FOCUS", rb_str_new2("focus"));
 
     rb_define_method(gContainer, "border_width", cont_bwidth, -1);
     rb_define_method(gContainer, "border_width=", cont_set_bwidth, 1);

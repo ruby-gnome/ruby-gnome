@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -384,8 +384,6 @@ void
 Init_gtk_notebook()
 {
     VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
-
-    rb_define_const(gNotebook, "SIGNAL_SWITCH_PAGE", rb_str_new2("switch_page"));
 
     rb_define_method(gNotebook, "initialize", note_initialize, 0);
     rb_define_method(gNotebook, "append_page", note_append_page, -1);

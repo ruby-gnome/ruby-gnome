@@ -3,8 +3,8 @@
 
   rbgtkcolorsel.c -
 
-  $Author: mutoh $
-  $Date: 2002/07/31 17:23:54 $
+  $Author: sakai $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -93,7 +93,6 @@ void
 Init_gtk_color_selection()
 {
 	VALUE gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
-    rb_define_const(gColorSel, "SIGNAL_COLOR_CHANGED", rb_str_new2("color_changed"));
 
     rb_define_method(gColorSel, "initialize", colorsel_initialize, 0);
     rb_define_method(gColorSel, "set_update_policy", colorsel_set_update_policy, 1);

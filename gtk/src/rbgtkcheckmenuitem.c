@@ -4,7 +4,7 @@
   rbgtkcheckmenuitem.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -79,8 +79,6 @@ void
 Init_gtk_check_menu_item()
 {
     VALUE gCMenuItem = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
-
-    rb_define_const(gCMenuItem, "SIGNAL_TOGGLED", rb_str_new2("toggled"));
 
     rb_define_method(gCMenuItem, "initialize", cmitem_initialize, -1);
     rb_define_method(gCMenuItem, "set_state", cmitem_set_state, 1);

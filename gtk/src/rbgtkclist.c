@@ -4,7 +4,7 @@
   rbgtkclist.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -771,22 +771,7 @@ void
 Init_gtk_clist()
 {
     VALUE gCList = G_DEF_CLASS2(GTK_TYPE_CLIST, "CList", mGtk, clist_mark, 0);
-    
-    /* Signals */
-    rb_define_const(gCList, "SIGNAL_SELECT_ROW", rb_str_new2("select_row"));
-    rb_define_const(gCList, "SIGNAL_UNSELECT_ROW", rb_str_new2("unselect_row"));
-    rb_define_const(gCList, "SIGNAL_ROW_MOVE", rb_str_new2("row_move"));
-    rb_define_const(gCList, "SIGNAL_CLICK_COLUMN", rb_str_new2("click_column"));
-    rb_define_const(gCList, "SIGNAL_RESIZE_COLUMN", rb_str_new2("resize_column"));
-    rb_define_const(gCList, "SIGNAL_TOGGLE_FOCUS_ROW", rb_str_new2("toggle_focus_row"));
-    rb_define_const(gCList, "SIGNAL_SELECT_ALL", rb_str_new2("select_all"));
-    rb_define_const(gCList, "SIGNAL_UNSELECT_ALL", rb_str_new2("unselect_all"));
-    rb_define_const(gCList, "SIGNAL_UNDO_SELECTION", rb_str_new2("undo_selection"));
-    rb_define_const(gCList, "SIGNAL_END_SELECTION", rb_str_new2("end_selection"));
-    rb_define_const(gCList, "SIGNAL_START_SELECTION", rb_str_new2("start_selection"));
-    rb_define_const(gCList, "SIGNAL_TOGGLE_ADD_MODE", rb_str_new2("toggle_add_mode"));
-    rb_define_const(gCList, "SIGNAL_SCROLL_VERTICAL", rb_str_new2("scroll_vertical"));
-    rb_define_const(gCList, "SIGNAL_SCROLL_HORIZONTAL", rb_str_new2("scroll_horizontal"));
+
     rb_define_const(gCList, "CELL_EMPTY", INT2NUM(GTK_CELL_EMPTY));
     rb_define_const(gCList, "CELL_TEXT", INT2NUM(GTK_CELL_TEXT));
     rb_define_const(gCList, "CELL_PIXMAP", INT2NUM(GTK_CELL_PIXMAP));

@@ -4,7 +4,7 @@
   rbgtkdata.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -20,8 +20,6 @@ void
 Init_gtk_data()
 {
     gData = rb_define_class_under(mGtk, "Data", GTYPE2CLASS(GTK_TYPE_OBJECT));
-
-    rb_define_const(gData, "SIGNAL_DISCONNECT", rb_str_new2("disconnect"));
 }
 
 /*

@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:19 $
+  $Date: 2002/08/02 13:44:32 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -928,64 +928,6 @@ Init_gtk_widget()
     rb_define_const(gWidget, "NO_REPARENT", INT2NUM(GTK_NO_REPARENT));
     rb_define_const(gWidget, "APP_PAINTABLE", INT2NUM(GTK_APP_PAINTABLE));
     rb_define_const(gWidget, "RECEIVES_DEFAULT", INT2NUM(GTK_RECEIVES_DEFAULT));
-
-    /*
-     * signals
-     */
-    rb_define_const(gWidget, "SIGNAL_SHOW", rb_str_new2("show"));
-    rb_define_const(gWidget, "SIGNAL_HIDE", rb_str_new2("hide"));
-    rb_define_const(gWidget, "SIGNAL_MAP", rb_str_new2("map"));
-    rb_define_const(gWidget, "SIGNAL_UNMAP", rb_str_new2("unmap"));
-    rb_define_const(gWidget, "SIGNAL_REALIZE", rb_str_new2("realize"));
-    rb_define_const(gWidget, "SIGNAL_UNREALIZE", rb_str_new2("unrealize"));
-    rb_define_const(gWidget, "SIGNAL_DRAW", rb_str_new2("draw"));
-    rb_define_const(gWidget, "SIGNAL_DRAW_FOCUS", rb_str_new2("draw_focus"));
-    rb_define_const(gWidget, "SIGNAL_DRAW_DEFAULT", rb_str_new2("draw_default"));
-    rb_define_const(gWidget, "SIGNAL_SIZE_REQUEST", rb_str_new2("size_request"));
-    rb_define_const(gWidget, "SIGNAL_SIZE_ALLOCATE", rb_str_new2("size_allocate"));
-    rb_define_const(gWidget, "SIGNAL_STATE_CHANGED", rb_str_new2("state_changed"));
-    rb_define_const(gWidget, "SIGNAL_PARENT_SET", rb_str_new2("parent_set"));
-    rb_define_const(gWidget, "SIGNAL_STYLE_SET", rb_str_new2("style_set"));
-    rb_define_const(gWidget, "SIGNAL_ADD_ACCELERATOR", rb_str_new2("add_accelerator"));
-    rb_define_const(gWidget, "SIGNAL_REMOVE_ACCELERATOR", rb_str_new2("remove_accelerator"));
-    rb_define_const(gWidget, "SIGNAL_GRAB_FOCUS", rb_str_new2("grab_focus"));
-    rb_define_const(gWidget, "SIGNAL_EVENT", rb_str_new2("event"));
-    rb_define_const(gWidget, "SIGNAL_BUTTON_PRESS_EVENT", rb_str_new2("button_press_event"));
-    rb_define_const(gWidget, "SIGNAL_BUTTON_RELEASE_EVENT", rb_str_new2("button_release_event"));
-    rb_define_const(gWidget, "SIGNAL_MOTION_NOTIFY_EVENT", rb_str_new2("motion_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_DELETE_EVENT", rb_str_new2("delete_event"));
-    rb_define_const(gWidget, "SIGNAL_DESTROY_EVENT", rb_str_new2("destroy_event"));
-    rb_define_const(gWidget, "SIGNAL_EXPOSE_EVENT", rb_str_new2("expose_event"));
-    rb_define_const(gWidget, "SIGNAL_KEY_PRESS_EVENT", rb_str_new2("key_press_event"));
-    rb_define_const(gWidget, "SIGNAL_KEY_RELEASE_EVENT", rb_str_new2("key_release_event"));
-    rb_define_const(gWidget, "SIGNAL_ENTER_NOTIFY_EVENT", rb_str_new2("enter_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_LEAVE_NOTIFY_EVENT", rb_str_new2("leave_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_CONFIGURE_EVENT", rb_str_new2("configure_event"));
-    rb_define_const(gWidget, "SIGNAL_FOCUS_IN_EVENT", rb_str_new2("focus_in_event"));
-    rb_define_const(gWidget, "SIGNAL_FOCUS_OUT_EVENT", rb_str_new2("focus_out_event"));
-    rb_define_const(gWidget, "SIGNAL_MAP_EVENT", rb_str_new2("map_event"));
-    rb_define_const(gWidget, "SIGNAL_UNMAP_EVENT", rb_str_new2("unmap_event"));
-    rb_define_const(gWidget, "SIGNAL_PROPERTY_NOTIFY_EVENT", rb_str_new2("property_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_SELECTION_CLEAR_EVENT", rb_str_new2("selection_clear_event"));
-    rb_define_const(gWidget, "SIGNAL_SELECTION_REQUEST_EVENT", rb_str_new2("selection_request_event"));
-    rb_define_const(gWidget, "SIGNAL_SELECTION_NOTIFY_EVENT", rb_str_new2("selection_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_SELECTION_GET", rb_str_new2("selection_get"));
-    rb_define_const(gWidget, "SIGNAL_SELECTION_RECEIVED", rb_str_new2("selection_received"));
-    rb_define_const(gWidget, "SIGNAL_PROXIMITY_IN_EVENT", rb_str_new2("proximity_in_event"));
-    rb_define_const(gWidget, "SIGNAL_PROXIMITY_OUT_EVENT", rb_str_new2("proximity_out_event"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_BEGIN", rb_str_new2("drag_begin"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_END", rb_str_new2("drag_end"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_DATA_DELETE", rb_str_new2("drag_data_delete"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_LEAVE", rb_str_new2("drag_leave"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_MOTION", rb_str_new2("drag_motion"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_DROP", rb_str_new2("drag_drop"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_DATA_GET", rb_str_new2("drag_data_get"));
-    rb_define_const(gWidget, "SIGNAL_DRAG_DATA_RECEIVED", rb_str_new2("drag_data_received"));
-    rb_define_const(gWidget, "SIGNAL_CLIENT_EVENT", rb_str_new2("client_event"));
-    rb_define_const(gWidget, "SIGNAL_NO_EXPOSE_EVENT", rb_str_new2("no_expose_event"));
-    rb_define_const(gWidget, "SIGNAL_VISIBILITY_NOTIFY_EVENT", rb_str_new2("visibility_notify_event"));
-    rb_define_const(gWidget, "SIGNAL_DEBUG_MSG", rb_str_new2("debug_msg"));
-    rb_define_const(gWidget, "SIGNAL_LAST_SIGNAL", rb_str_new2("last_signal"));
 
     /*
      * instance methods

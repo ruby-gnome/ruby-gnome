@@ -4,7 +4,7 @@
   rbgtkmenuitem.c -
 
   $Author: sakai $
-  $Date: 2002/08/01 17:46:18 $
+  $Date: 2002/08/02 13:44:31 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -78,8 +78,6 @@ void
 Init_gtk_menu_item()
 {
     VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
-
-    rb_define_const(gMenuItem, "SIGNAL_ACTIVATE", rb_str_new2("activate"));
 
     rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
     rb_define_method(gMenuItem, "set_submenu", mitem_set_submenu, 1);
