@@ -28,11 +28,11 @@ doc.close_stream()
 
 doc.signal_connect( "link_clicked" ) {  |doc,link|
     puts "link_clicked #{link}"
-    htmlview.html = "<html><body><h1>#{link}</h1></body></html>"
-    #htmlview.document.clear
-    #htmlview.document.open_stream("text/html")
-    #htmlview.document.write_stream( "<html><body><h1>#{link}</h1></body></html>")
-    #htmlview.document.close_stream()
+    #htmlview.html = "<html><body><h1>#{link}</h1></body></html>"
+    htmlview.document.clear
+    htmlview.document.open_stream("text/html")
+    htmlview.document.write_stream( "<html><body><h1>#{link}</h1></body></html>")
+    htmlview.document.close_stream()
 }
 
 htmlview.document = doc

@@ -1,3 +1,7 @@
+2003-08-17 Martin Povolny <xpovolny@fi.muni.cz>
+    * src/rbgdkatom.c: Fix memory leak in gdkatom_name reported by 
+    Jan Becvar <jean@solnet.cz>.
+
 2003-08-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkconst.c: Update version number.
