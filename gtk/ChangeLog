@@ -1,3 +1,8 @@
+2002-10-05  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb: improvement for building in different directory.
+	(not completed)
+
 2002-10-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeviewcolumn.c: Change arguments of 

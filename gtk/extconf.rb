@@ -73,26 +73,33 @@ else
   STDOUT.print "no\n"
 end
 
+have_func('gtk_plug_get_type')
+have_func('gtk_socket_get_type')
+have_func('_gtk_accel_group_attach')
+have_func("XReadBitmapFileData")
 
 #
 # create Makefiles
 #
+
 mdir = $mdir
 begin
   $mdir = "gtk/src"
+  src_dir = File.expand_path(File.join(File.dirname(__FILE__), 'src'))
+
+  Dir.mkdir('src') unless File.exist? 'src'
   Dir.chdir "src"
 
-  have_func('gtk_plug_get_type')
-  have_func('gtk_socket_get_type')
-  have_func('_gtk_accel_group_attach')
-  have_func("XReadBitmapFileData")
   obj_ext = ".#{$OBJEXT}"
   rubylibdir = Config::CONFIG["rubylibdir"]
   sitelibdir = Config::CONFIG["sitelibdir"]
 
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   $libs = $libs.split(/\s/).uniq.join(' ')
-  $source_files = Dir.glob('*.c')
+  $source_files = Dir.glob(src_dir + '/*.c')
+  $source_files.each do |item|
+    item.gsub!(Regexp.new("\\A" + Regexp.quote(src_dir) + '/'), '')
+  end
   $objs = $source_files.collect do |item|
     item.gsub(/\.c$/, obj_ext)
   end
@@ -104,7 +111,7 @@ begin
     $objs << "librbgdkkeysyms.a"
   end
 
-  create_makefile("gtk2")
+  create_makefile("gtk2", src_dir)
 
   raise Interrupt if not FileTest.exist? "Makefile"
 
@@ -130,7 +137,7 @@ begin
   if /mswin32/ =~ PLATFORM
     mfile.print "\
 rbgdkkeysyms.lib: makedefconst.rb rbgdkkeysyms.h
-	$(RUBY) makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
+	$(RUBY) $(srcdir)/makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
 	cd rbgdkkeysyms
 	nmake ..\\$@
 	cd ..
@@ -139,16 +146,16 @@ rbgdkkeysyms.lib: makedefconst.rb rbgdkkeysyms.h
     mfile.print "\
 
 librbgdkkeysyms.a: makedefconst.rb rbgdkkeysyms.h
-	$(RUBY) makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
+	$(RUBY) $(srcdir)/makedefconst.rb rbgdkkeysyms.h Init_gtk_gdkkeysyms
 	cd rbgdkkeysyms; make ../$@; cd ..
 "
   end
 
   mfile.print "\
 
-rbgdkcursor.h:;	$(RUBY) makecursors.rb #{gdkincl}/gdkcursor.h > $@
-rbgtkinits.c:;	   $(RUBY) makeinits.rb *.c > $@
-rbgdkkeysyms.h:;	$(RUBY) makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
+rbgdkcursor.h:;	$(RUBY) $(srcdir)/makecursors.rb #{gdkincl}/gdkcursor.h > $@
+rbgtkinits.c:;	   $(RUBY) $(srcdir)/makeinits.rb $(srcdir)/*.c > $@
+rbgdkkeysyms.h:;	$(RUBY) $(srcdir)/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > $@
 
 allclean: clean
 	rm -rf rbgdkkeysyms* *.a rbgdkcursors* rbgtkinits*
