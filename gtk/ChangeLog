@@ -1,3 +1,7 @@
+2002-10-30  KUBO Takehiro  <kubo@jiubao.org>
+
+	* src/rbgtkentry.c: Fix small bug of Gtk::Entry#initialize.
+
 2002-10-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: Change parameter order of Gtk::ItemFactory#create_item, 

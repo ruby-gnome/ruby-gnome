@@ -3,8 +3,8 @@
 
   rbgtkentry.c -
 
-  $Author: mutoh $
-  $Date: 2002/10/25 17:51:24 $
+  $Author: tkubo $
+  $Date: 2002/10/30 14:50:50 $
 
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
@@ -44,7 +44,7 @@ Init_gtk_entry()
 {
     VALUE gEntry = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 
-    rb_define_method(gEntry, "initialize", entry_initialize, 1);
+    rb_define_method(gEntry, "initialize", entry_initialize, 0);
     rb_define_method(gEntry, "layout", entry_get_layout, 0);
     rb_define_method(gEntry, "layout_offsets", entry_get_layout_offsets, 0);
 }
