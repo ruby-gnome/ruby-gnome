@@ -1,3 +1,8 @@
+2002-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_type.c: Add _register_fundamental_gtype_to_klass()/
+	_register_fundamental_klass_to_gtype().
+
 2002-10-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib.h: define LONG2NUM and ULONG2NUM unless already defined.

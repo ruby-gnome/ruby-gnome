@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2002/09/29 13:36:29 $
+  $Author: mutoh $
+  $Date: 2002/10/02 11:23:43 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002  Masahiro Sakai
@@ -447,6 +447,34 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
     rb_ary_push(ary, c);
 }
 
+static inline
+void _register_fundamental_klass_to_gtype(VALUE klass, GType gtype)
+{   
+	RGObjClassInfo* cinfo;
+    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
+		    
+    cinfo->klass = klass;
+    cinfo->gtype = gtype;
+    cinfo->mark  = NULL;
+    cinfo->free  = NULL;
+    
+    rb_hash_aset(klass_to_cinfo, cinfo->klass, c); 
+}   
+
+static inline
+void _register_fundamental_gtype_to_klass(GType gtype, VALUE klass)
+{   
+	RGObjClassInfo* cinfo;
+    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, free, cinfo);  
+		    
+    cinfo->klass = klass;
+    cinfo->gtype = gtype;
+    cinfo->mark  = NULL;
+    cinfo->free  = NULL;
+    
+    rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+}   
+
 static void
 Init_type()
 {
@@ -513,6 +541,30 @@ Init_type()
     _def_fundamental_type(ary, G_TYPE_OBJECT,    "OBJECT");
     rb_define_const(rbgobj_cType, "FUNDAMENTAL_TYPES", ary); /* FIXME: better name */
     }
+
+    _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
+    _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
+    _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
+
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_FLOAT, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_DOUBLE, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
+    _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
+    _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
+    _register_fundamental_gtype_to_klass(G_TYPE_ENUM, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_FLAGS, rb_cInteger);
 }
 
 /**********************************************************************/
