@@ -1,3 +1,7 @@
+2005-04-15  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/rbpangolayoutline.c: Fixed a warning of Pango::LayoutLine#set_runs. 
+
 2005-03-22  Mirko Maischberger  <mirko@lilik.it>
 	
 	* sample/parse.rb: sh-bang (!#) normalization.

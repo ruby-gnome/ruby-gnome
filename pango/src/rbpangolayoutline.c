@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/04/14 16:41:21 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -160,7 +160,7 @@ layout_line_get_runs(self)
 
 static VALUE
 layout_line_set_runs(self, ary)
-    VALUE self;
+    VALUE self, ary;
 {
     int i, len;
     GSList* list = NULL;
