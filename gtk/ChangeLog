@@ -1,3 +1,13 @@
+2005-04-15  Pascal Terjan <pterjan@linuxfr.org>
+	
+	* src/rbgdktimecoord.c: Fixed a warning of Gdk::TimeCoord#set_axes.
+	* src/rbgdkwindow.c: Fixed a warning of Gdk::Window#set_cursor
+
+2005-04-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreemodel.c: Added Gtk::TreeModel#iter_is_valid?
+	Bugs item #1180406 by pdewacht.
+
 2005-03-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkrc.c: Fix memory leaks of Gtk::RC.theme_dir, 

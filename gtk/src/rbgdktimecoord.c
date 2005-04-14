@@ -4,7 +4,7 @@
   rbgdktimecoord.c -
 
   $Author: mutoh $
-  $Date: 2003/11/02 18:29:29 $
+  $Date: 2005/04/14 16:39:16 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -86,7 +86,7 @@ timecoord_axes(self)
 
 static VALUE
 timecoord_set_axes(self, axes)
-    VALUE self;
+    VALUE self, axes;
 {
     int i;
     GdkTimeCoord* coord = _SELF(self);

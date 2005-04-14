@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: mutoh $
-  $Date: 2005/02/07 16:56:39 $
+  $Date: 2005/04/14 16:39:16 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -607,7 +607,8 @@ gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
 {
     gdk_window_set_cursor(_SELF(self), 
-                          (GdkCursor*)NIL_P(cursor) ? NULL : RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
+                          (GdkCursor*)(NIL_P(cursor) ? NULL : RVAL2BOXED(cursor, GDK_TYPE_CURSOR)));
+
     return self;
 }
 

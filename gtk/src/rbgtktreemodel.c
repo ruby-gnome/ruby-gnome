@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:15 $
+  $Date: 2005/04/14 16:39:17 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -172,6 +172,13 @@ treemodel_rows_reordered(self, path, iter, new_orders)
 }
 
 static VALUE
+treemodel_iter_is_valid(self, iter)
+    VALUE self, iter;
+{
+    return Qtrue;
+}
+
+static VALUE
 signal_func(num, values)
     guint num;
     const GValue* values;
@@ -223,6 +230,7 @@ Init_gtk_treemodel()
     rb_define_method(mTreeModel, "row_has_child_toggled", treemodel_row_has_child_toggled, 2);
     rb_define_method(mTreeModel, "row_deleted", treemodel_row_deleted, 1);
     rb_define_method(mTreeModel, "rows_reordered", treemodel_rows_reordered, 3);
+    rb_define_method(mTreeModel, "iter_is_valid?", treemodel_iter_is_valid, 1);
 
     /* GtkTreeModelFlags */
     G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", mTreeModel);
