@@ -63,7 +63,11 @@ Init_gst_classes (void)
     extern void Init_gst_typefindfactory (void);
     extern void Init_gst_xml (void);
 
-#ifdef HAVE_MEDIA_INFO
+#if defined(HAVE_GST_OVERLAY)
+    extern void Init_gst_x_overlay (void);
+#endif
+    
+#if defined(HAVE_MEDIA_INFO)
     extern void Init_gst_mediatype (void);
 #endif
 
@@ -101,6 +105,10 @@ Init_gst_classes (void)
     Init_gst_thread ();
     Init_gst_typefindfactory ();
     Init_gst_xml ();
+
+#if defined(HAVE_GST_OVERLAY)
+    Init_gst_x_overlay ();
+#endif
 
 #ifdef HAVE_MEDIA_INFO
     Init_gst_mediatype ();

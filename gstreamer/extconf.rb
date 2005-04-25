@@ -23,5 +23,9 @@ if have_library("gstmedia-info-0.8", "gst_media_info_read")
   $CFLAGS += " -DHAVE_MEDIA_INFO"
 end
 
+if have_library("gstinterfaces-0.8", "gst_x_overlay_expose")
+  $CFLAGS += " -DHAVE_GST_OVERLAY"
+end
+
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GST_COMPILATION")
 create_top_makefile

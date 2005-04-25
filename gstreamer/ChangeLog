@@ -1,3 +1,8 @@
+2005-04-25  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstxoverlay.c: Added.
+	* extconf.rb, src/rbgst.h: Follow latest change.
+
 2005-03-21  Laurent Sansonetti  <lrz@gnome.org>
 
 	Problems reported by Bas Kloet.
