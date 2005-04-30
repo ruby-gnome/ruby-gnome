@@ -1,3 +1,7 @@
+2005-04-30  Laurent Sansonetti  <lrz@gnome.org>
+
+	* sample/video-player.rb: Added.
+
 2005-04-25  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgstxoverlay.c: Added.
