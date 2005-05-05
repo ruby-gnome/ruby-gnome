@@ -4,7 +4,7 @@
   rbgtkcellview.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:30 $
+  $Date: 2005/05/05 19:57:29 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -54,7 +54,8 @@ static VALUE
 cview_set_model(self, model)
     VALUE self, model;
 {
-    gtk_cell_view_set_model(_SELF(self), GTK_TREE_MODEL(RVAL2GOBJ(model)));
+    gtk_cell_view_set_model(_SELF(self), 
+                            NIL_P(model) ? (GtkTreeModel*)NULL : GTK_TREE_MODEL(RVAL2GOBJ(model)));
     return self;
 }
 
@@ -63,7 +64,8 @@ cview_set_displayed_row(self, path)
     VALUE self, path;
 {
     gtk_cell_view_set_displayed_row(_SELF(self),  
-                                    RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
+                                    NIL_P(path) ? (GtkTreePath*)NULL :
+                                    (GtkTreePath*)RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
     return self;
 }
 

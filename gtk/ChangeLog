@@ -1,3 +1,13 @@
+2005-05-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenutoolbutton.c: Gtk::MenuToolButton.new
+	accept nil for icon_widget/label. 
+
+2005-05-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcellview.c: Gtk::CellView#model= allows nil. 
+	Gtk::CellView#displayed_row= allows nil.
+
 2005-04-15  Pascal Terjan <pterjan@linuxfr.org>
 	
 	* src/rbgdktimecoord.c: Fixed a warning of Gdk::TimeCoord#set_axes.

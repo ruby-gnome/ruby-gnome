@@ -4,7 +4,7 @@
   rbgtkmenutoolbutton.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:30 $
+  $Date: 2005/05/05 19:57:29 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -23,7 +23,9 @@ menutoolbutton_initialize(argc, argv, self)
 {
     GtkToolItem* item;
 
-    if (argc == 1){
+    if (argc == 0){
+        item = gtk_menu_tool_button_new((GtkWidget*)NULL, (const gchar*)NULL);
+    } else if (TYPE(argv[0]) == T_SYMBOL || TYPE(argv[0]) == T_STRING){
         VALUE stock_id;
         rb_scan_args(argc, argv, "10", &stock_id);
 
@@ -34,10 +36,10 @@ menutoolbutton_initialize(argc, argv, self)
         }
     } else {
         VALUE icon_widget, label;
-        rb_scan_args(argc, argv, "20", &icon_widget, label);
+        rb_scan_args(argc, argv, "11", &icon_widget, &label);
 
         item = gtk_menu_tool_button_new(GTK_WIDGET(RVAL2GOBJ(icon_widget)),
-                                        RVAL2CSTR(label));
+                                        NIL_P(label) ? (const gchar*)NULL : RVAL2CSTR(label));
     }
 
     RBGTK_INITIALIZE(self, item);
