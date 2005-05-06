@@ -4,7 +4,7 @@
   rbgdkgc.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2005/05/06 20:17:11 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -332,7 +332,8 @@ gdkgc_get_line_attributes(self)
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
 
-    return rb_ary_new3(3, GENUM2RVAL(val.line_width, GDK_TYPE_LINE_STYLE),
+    return rb_ary_new3(4, INT2NUM(val.line_width),
+                       GENUM2RVAL(val.line_style, GDK_TYPE_LINE_STYLE),
                        GENUM2RVAL(val.cap_style, GDK_TYPE_CAP_STYLE),
                        GENUM2RVAL(val.join_style, GDK_TYPE_JOIN_STYLE));
 }
@@ -351,6 +352,15 @@ gdkgc_offset(self, x, y)
     gdk_gc_offset(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,2,0)
+static VALUE
+gdkgc_screen(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_gc_get_screen(_SELF(self)));
+}
+#endif
 
 void
 Init_gtk_gdk_gc()
@@ -396,11 +406,17 @@ Init_gtk_gdk_gc()
     rb_define_method(gdkGC, "colormap", gdkgc_get_colormap, 0);
     rb_define_method(gdkGC, "offset", gdkgc_offset, 2);
 
+#if GTK_CHECK_VERSION(2,2,0)
+    rb_define_method(gdkGC, "screen", gdkgc_screen, 0);
+#endif
+
     G_DEF_SETTERS(gdkGC);
 
     /* GdkGCValuesMask */
+/* Don't need them.
     G_DEF_CLASS(GDK_TYPE_GC_VALUES_MASK, "ValuesMask", gdkGC);
     G_DEF_CONSTANTS(gdkGC, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
+*/
 
     /* GdkFunction */
     G_DEF_CLASS(GDK_TYPE_FUNCTION, "Function", gdkGC);

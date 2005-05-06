@@ -4,7 +4,7 @@
   rbgtktoolbutton.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:31 $
+  $Date: 2005/05/06 20:17:11 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -22,17 +22,15 @@ toolbutton_initialize(argc, argv, self)
     VALUE obj, label;
     GtkToolItem* item;
 
-    rb_scan_args(argc, argv, "11", &obj, &label);
+    rb_scan_args(argc, argv, "02", &obj, &label);
 
-    if (NIL_P(label)){
-        if (TYPE(obj) == T_SYMBOL){
-            item = gtk_tool_button_new_from_stock(rb_id2name(SYM2ID(obj)));
-        } else {
-            item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
-        }
+    if (TYPE(obj) == T_SYMBOL){
+        item = gtk_tool_button_new_from_stock(rb_id2name(SYM2ID(obj)));
+    } else if (TYPE(obj) == T_STRING){
+        item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
     } else {
         item = gtk_tool_button_new(GTK_WIDGET(RVAL2GOBJ(obj)), 
-                                   RVAL2CSTR(label));
+                                   NIL_P(label) ? NULL : RVAL2CSTR(label));
     }
     RBGTK_INITIALIZE(self, item);
     return Qnil;

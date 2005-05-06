@@ -1,5 +1,13 @@
+2005-05-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkgc.c: Added Gdk::GC#screen.
+	Remove Gdk::GC::ValueMask which doesn't use anywhere.
+	Fix wrong return value of Gdk::GC#line_attributes.
+
 2005-05-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktoolbutton.c: Gtk::ToolButton.new accept nil
+	for icon_widget/label.
 	* src/rbgtkmenutoolbutton.c: Gtk::MenuToolButton.new
 	accept nil for icon_widget/label. 
 
