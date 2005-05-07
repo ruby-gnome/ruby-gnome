@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2005/01/30 11:24:36 $
+  $Date: 2005/05/07 19:12:52 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -48,6 +48,13 @@ gdkpango_attr_embossed_initialize(self, embossed)
 {
     DATA_PTR(self) = gdk_pango_attr_embossed_new(RTEST(embossed));
     return Qnil;
+}
+
+static VALUE
+gdkpango_attr_embossed_value(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
 }
 
 static VALUE
@@ -123,6 +130,7 @@ Init_gtk_gdk_pango()
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
     rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
+    rb_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
 
     klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);

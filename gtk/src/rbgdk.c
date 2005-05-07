@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: mutoh $
-  $Date: 2004/08/07 15:51:37 $
+  $Date: 2005/05/07 19:12:52 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -42,11 +42,11 @@ gdk_s_set_locale(self)
 }
 
 static VALUE
-gdk_s_set_sm_client_id(self, sm_client_id)
-    VALUE self, sm_client_id;
+gdk_s_set_sm_client_id(self, id)
+    VALUE self, id;
 {
-    gdk_set_sm_client_id(RVAL2CSTR(sm_client_id));
-    return Qnil;
+    gdk_set_sm_client_id(NIL_P(id) ? NULL : RVAL2CSTR(id));
+    return self;
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
@@ -55,7 +55,7 @@ gdk_s_notify_startup_complete(self)
     VALUE self;
 {
     gdk_notify_startup_complete();
-    return Qnil;
+    return self;
 }
 #endif
 
@@ -140,7 +140,7 @@ gdk_s_set_x_error_handler(self)
 #else
     rb_warn("Not supported on this environment.");
 #endif
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -154,7 +154,7 @@ gdk_s_set_x_io_error_handler(self)
 #else
     rb_warn("Not supported on this environment.");
 #endif
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -162,7 +162,7 @@ gdk_s_flush(self)
     VALUE self;
 {
     gdk_flush();
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -210,7 +210,7 @@ gdk_s_pointer_ungrab(self, time)
     VALUE self, time;
 {
     gdk_pointer_ungrab(NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -227,7 +227,7 @@ gdk_s_keyboard_ungrab(self, time)
     VALUE self, time;
 {
     gdk_keyboard_ungrab(NUM2INT(time));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -242,7 +242,7 @@ gdk_s_set_double_click_time(self, msec)
     VALUE self, msec;
 {
     gdk_set_double_click_time(NUM2UINT(msec));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -250,7 +250,7 @@ gdk_s_beep(self)
     VALUE self;
 {
     gdk_beep();
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -258,7 +258,7 @@ gdk_s_error_trap_push(self)
     VALUE self;
 {
     gdk_error_trap_push();
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -266,7 +266,7 @@ gdk_s_error_trap_pop(self)
     VALUE self;
 {
     gdk_error_trap_pop();
-    return Qnil;
+    return self;
 }
 
 static VALUE
