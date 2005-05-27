@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2005/05/07 19:12:52 $
+  $Date: 2005/05/27 18:33:33 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -54,7 +54,7 @@ static VALUE
 gdkpango_attr_embossed_value(self)
     VALUE self;
 {
-    return GOBJ2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
+    return CBOOL2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
 }
 
 static VALUE

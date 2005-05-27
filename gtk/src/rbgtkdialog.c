@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2005/01/24 16:47:18 $
+  $Date: 2005/05/27 18:33:33 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -77,7 +77,7 @@ dialog_initialize(argc, argv, self)
 
     if (argc == 0){
         RBGTK_INITIALIZE(self, gtk_dialog_new());
-    } else if (argc > 3){
+    } else if (argc > 2){
         GtkDialog* dialog = GTK_DIALOG(g_object_new(GTK_TYPE_DIALOG, NULL));
         GtkDialogFlags gflags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS);
         if (! NIL_P(title))
@@ -93,7 +93,8 @@ dialog_initialize(argc, argv, self)
             gtk_dialog_set_has_separator(dialog, FALSE);
 
         RBGTK_INITIALIZE(self, dialog);
-        rbgtk_dialog_add_buttons_internal(self, button_ary);
+        if (! NIL_P(button_ary))
+            rbgtk_dialog_add_buttons_internal(self, button_ary);
     } else {
         rb_raise(rb_eArgError, "invalid argument number");
     }
