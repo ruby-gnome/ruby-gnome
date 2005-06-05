@@ -224,7 +224,7 @@ gp_vpath(VALUE self, VALUE vpath, VALUE append)
 
 static VALUE
 gp_arcto(VALUE self, VALUE x, VALUE y, VALUE radius,
-         VALUE angle1, VALUE angle2, VALUE direction)
+         VALUE angle1, VALUE angle2, VALUE clockwise)
 {
   return check_return_code(gnome_print_arcto(_SELF(self),
                                              NUM2DBL(x),
@@ -232,7 +232,7 @@ gp_arcto(VALUE self, VALUE x, VALUE y, VALUE radius,
                                              NUM2DBL(radius),
                                              NUM2DBL(angle1),
                                              NUM2DBL(angle2),
-                                             NUM2INT(direction)));
+                                             RTEST(clockwise) ? 1 : 0));
 }
 
 static VALUE

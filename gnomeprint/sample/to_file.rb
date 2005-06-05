@@ -80,15 +80,15 @@ class Renderer
   end
 
   def draw_arc
-    @context.arc_to(50, 450, 10, 0, 90, 1)
+    @context.arc_to(50, 450, 10, 0, 90, true)
     @context.stroke
     @context.save do
       @context.set_rgb_color(1, 0.4, 0.9)
       @context.set_opacity(0.7)
-      @context.arc_to(40, 450, 10, 0, 359, 0)
+      @context.arc_to(40, 450, 10, 0, 359, false)
       @context.fill
     end
-    @context.arc_to(40, 450, 10, 0, 359, 0)
+    @context.arc_to(40, 450, 10, 0, 359, false)
     @context.stroke
   end
 
