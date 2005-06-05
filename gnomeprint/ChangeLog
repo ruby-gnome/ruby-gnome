@@ -1,5 +1,8 @@
 2005-06-05  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-utils.c (check_return_code): alwayes returns nil unless
+	  raises an exception.
+
 	* src/rbgp-gnome-print.c (gp_arcto): use boolean instead of 1
 	  or 0.
 

@@ -25,13 +25,11 @@ static ID s_new, s_to_s, s_code;
 VALUE
 check_return_code(gint code) 
 {
-  if (code == GNOME_PRINT_OK) {
-    return Qtrue;
-  } else {
+  if (code != GNOME_PRINT_OK) {
     VALUE rb_code = rb_funcall(cGPReturnCode, s_new, 1, INT2NUM(code));
     rb_exc_raise(rb_funcall(cGPError, s_new, 1, rb_code));
-    return Qfalse;
   }
+  return Qnil;
 }
 
 static VALUE
