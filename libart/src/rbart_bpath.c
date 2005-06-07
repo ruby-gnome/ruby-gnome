@@ -3,8 +3,8 @@
 
    rbart_bpath.c -
 
-   $Author: mutoh $
-   $Date: 2004/11/13 11:19:13 $
+   $Author: ktou $
+   $Date: 2005/06/07 14:07:46 $
 
    Copyright (C) 2004 Ruby-GNOME2 Project Team
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
@@ -83,8 +83,8 @@ bpath_initialize(argc, argv, self)
           case ART_LINETO:
             if (RARRAY(r_point)->len != 3)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 3)");
-            bpath[i].x1 = NUM2DBL(RARRAY(r_point)->ptr[1]);
-            bpath[i].y1 = NUM2DBL(RARRAY(r_point)->ptr[2]);
+            bpath[i].x3 = NUM2DBL(RARRAY(r_point)->ptr[1]);
+            bpath[i].y3 = NUM2DBL(RARRAY(r_point)->ptr[2]);
             break;
           case ART_CURVETO:
             if (RARRAY(r_point)->len != 7)
@@ -130,7 +130,7 @@ bpath_to_a(r_self)
           case ART_MOVETO:
           case ART_MOVETO_OPEN:
           case ART_LINETO:
-            rb_ary_push(r_result, rb_ary_new3(3, INT2NUM(bpath->code), rb_float_new(bpath->x1), rb_float_new(bpath->y1)));
+            rb_ary_push(r_result, rb_ary_new3(3, INT2NUM(bpath->code), rb_float_new(bpath->x3), rb_float_new(bpath->y3)));
             break;
           case ART_CURVETO:
             rb_ary_push(r_result, rb_ary_new3(7, INT2NUM(bpath->code), rb_float_new(bpath->x1), rb_float_new(bpath->y1), rb_float_new(bpath->x2), rb_float_new(bpath->y2), rb_float_new(bpath->x3), rb_float_new(bpath->y3)));

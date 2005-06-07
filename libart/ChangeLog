@@ -1,3 +1,13 @@
+2005-06-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbart_bpath.c (bpath_initialize): Use x3 and y3 instead of
+	  x1 and y1. Because Libart document says the following.
+
+	     For the ART_MOVETO, ART_MOVETO_OPEN, and ART_LINETO path
+	     codes, only the x3 and y3 fields are used.
+
+	  http://www.levien.com/libart/bpath.html
+
 2005-02-19  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* extconf.rb: extconf.rb don't require glib2.
