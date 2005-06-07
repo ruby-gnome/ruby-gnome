@@ -25,7 +25,6 @@
 
 #define _SELF(self) (GP_CONTEXT(self))
 #define RVAL2GPRC(r_obj) (RVAL2GENUM(r_obj, GNOME_TYPE_PRINT_PRINT_RETURN_CODE))
-#define RVAL2CONST_GF(font) ((const GnomeFont *)RVAL2GOBJ(font))
 
 
 static VALUE
@@ -332,13 +331,6 @@ gp_setdash(VALUE self, VALUE values, VALUE offset)
 }
 
 static VALUE
-gp_setfont(VALUE self, VALUE font)
-{
-  return check_return_code(gnome_print_setfont(_SELF(self),
-                                               RVAL2CONST_GF(font)));
-}
-
-static VALUE
 gp_clip(VALUE self)
 {
   return check_return_code(gnome_print_clip(_SELF(self)));
@@ -441,13 +433,6 @@ gp_show_sized(VALUE self, VALUE text, VALUE bytes)
   return check_return_code(gnome_print_show_sized(_SELF(self),
                                                   RVAL2CSTR(text),
                                                   NUM2INT(bytes)));
-}
-
-static VALUE
-gp_glyphlist(VALUE self, VALUE glyphlist)
-{
-  return check_return_code(gnome_print_glyphlist(_SELF(self),
-                                                 RVAL2GOBJ(glyphlist)));
 }
 
 
@@ -594,7 +579,6 @@ Init_gnome_print(VALUE mGnome)
   rb_define_method(cGPC, "set_line_join", gp_setlinejoin, 1);
   rb_define_method(cGPC, "set_line_cap", gp_setlinecap, 1);
   rb_define_method(cGPC, "set_dash", gp_setdash, 2);
-  rb_define_method(cGPC, "set_font", gp_setfont, 1);
   rb_define_method(cGPC, "clip", gp_clip, 0);
   rb_define_method(cGPC, "eoclip", gp_eoclip, 0);
 
@@ -616,7 +600,6 @@ Init_gnome_print(VALUE mGnome)
 /* Text drawing */
   rb_define_method(cGPC, "show", gp_show, 1);
   rb_define_method(cGPC, "show_sized", gp_show_sized, 2);
-  rb_define_method(cGPC, "glyph_list", gp_glyphlist, 1);
 
 /* Images */
   rb_define_method(cGPC, "gray_image", gp_grayimage, 4);

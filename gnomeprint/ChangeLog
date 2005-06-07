@@ -1,4 +1,9 @@
-2005-06-07  Kouhei Sutou  <kou@kono.cis.iwate-u.ac.jp>
+2005-06-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print.c (gp_setfont, gp_glyphlist, RVAL2CONST_GF):
+	  removed. use Pango instead of them.
+
+2005-06-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/to_file.rb (Renderer#draw_concat): added concat() sample.
 
