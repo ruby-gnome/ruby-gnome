@@ -1,3 +1,10 @@
+2005-06-07  Kouhei Sutou  <kou@kono.cis.iwate-u.ac.jp>
+
+	* sample/to_file.rb (Renderer#draw_concat): added concat() sample.
+
+	* src/rbgp-gnome-print.c (rb_array_to_gdouble_array): fixed
+	  strange conversion bug.
+
 2005-06-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gnome-print.c (gp_path): added generic function
@@ -56,7 +63,7 @@
 
 2004-12-10  Kouhei Sutou  <kou@cozmixng.org>
 
-	* sample/to_file.rb (Renderer::draw_arc): fixed wrong
+	* sample/to_file.rb (Renderer#draw_arc): fixed wrong
 	  Gnome::PrintContext#set_rbg_color argument.
 
 2004-12-07  Kouhei Sutou  <kou@cozmixng.org>

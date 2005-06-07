@@ -64,6 +64,7 @@ class Renderer
     draw_text
     draw_pango
     draw_image
+    draw_transformation
     @context.show_page
   end
 
@@ -215,6 +216,28 @@ class Renderer
     end
   end
 
+  def draw_transformation
+    draw_concat
+  end
+
+  def draw_concat
+    @context.save do
+      @context.set_rgb_color(0.7, 0.7, 0.9)
+      label("concat", 100, 580)
+      
+      @context.set_rgb_color(0.9, 0.7, 0.7)
+      
+      label("before", 80, 600)
+      @context.rect_stroked(100, 600, 10, 10)
+      
+      @context.set_rgb_color(0.7, 0.9, 0.7)
+      label("after", 110, 630)
+      @context.concat([1.0, 0, 0, 1.0, 20, 30])
+      @context.rect_stroked(100, 600, 10, 10)
+    end
+
+  end
+  
   def label(text, x, y)
     @context.save do
       @context.move_to(x, y)
