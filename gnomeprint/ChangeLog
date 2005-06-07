@@ -1,3 +1,17 @@
+2005-06-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print.c (gp_path): added generic function
+	  for bpath and vpath.
+	
+	* src/rbgp-gnome-print.c (gp_bpath, gp_vpath):
+	  - senconed argument 'append' is optional. default value is true.
+	  - use get_art_bpath()/get_arg_vpath() provided by Ruby/Libart
+	    instead of my macro.
+
+	* sample/to_file.rb:
+	  - added bpath and vpath sample.
+	  - added label of sample for easy to find the target sample.
+
 2005-06-05  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-utils.c (check_return_code): alwayes returns nil unless

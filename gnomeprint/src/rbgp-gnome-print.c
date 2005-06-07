@@ -21,11 +21,11 @@
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/libgnomeprint-enum-types.h>
 
+#include <rbart.h>
+
 #define _SELF(self) (GP_CONTEXT(self))
 #define RVAL2GPRC(r_obj) (RVAL2GENUM(r_obj, GNOME_TYPE_PRINT_PRINT_RETURN_CODE))
 #define RVAL2CONST_GF(font) ((const GnomeFont *)RVAL2GOBJ(font))
-#define BPATH_PTR(r_obj) ((ArtBpath *)(RDATA(r_obj)->data))
-#define VPATH_PTR(r_obj) ((ArtVpath *)(RDATA(r_obj)->data))
 
 
 static VALUE
@@ -207,19 +207,61 @@ gp_strokepath(VALUE self)
 }
 
 static VALUE
-gp_bpath(VALUE self, VALUE bpath, VALUE append)
+_gp_bpath(VALUE self, VALUE bpath, VALUE append)
 {
   return check_return_code(gnome_print_bpath(_SELF(self),
-                                             BPATH_PTR(bpath),
+                                             get_art_bpath(bpath),
                                              RTEST(append)));
 }
 
 static VALUE
-gp_vpath(VALUE self, VALUE vpath, VALUE append)
+gp_bpath(int argc, VALUE *argv, VALUE self)
+{
+  VALUE bpath, append;
+
+  if (rb_scan_args(argc, argv, "11", &bpath, &append) == 1) {
+    append = Qtrue;
+  }
+
+  return _gp_bpath(self, bpath, append);
+}
+
+static VALUE
+_gp_vpath(VALUE self, VALUE vpath, VALUE append)
 {
   return check_return_code(gnome_print_vpath(_SELF(self),
-                                             VPATH_PTR(vpath),
+                                             get_art_vpath(vpath),
                                              RTEST(append)));
+}
+
+static VALUE
+gp_vpath(int argc, VALUE *argv, VALUE self)
+{
+  VALUE vpath, append;
+
+  if (rb_scan_args(argc, argv, "11", &vpath, &append) == 1) {
+    append = Qtrue;
+  }
+  
+  return _gp_vpath(self, vpath, append);
+}
+
+static VALUE
+gp_path(int argc, VALUE *argv, VALUE self)
+{
+  VALUE path, append;
+
+  if (rb_scan_args(argc, argv, "11", &path, &append) == 1) {
+    append = Qtrue;
+  }
+  
+  if (rb_obj_is_kind_of(path, artBpath)) {
+    return _gp_bpath(self, path, append);
+  } else if (rb_obj_is_kind_of(path, artVpath)) {
+    return _gp_vpath(self, path, append);
+  } else {
+    rb_raise(rb_eTypeError, "not an Art::Bpath or an Art::Vpath");
+  }
 }
 
 static VALUE
@@ -542,8 +584,9 @@ Init_gnome_print(VALUE mGnome)
   rb_define_method(cGPC, "curve_to", gp_curveto, 6);
   rb_define_method(cGPC, "close_path", gp_closepath, 0);
   rb_define_method(cGPC, "stroke_path", gp_strokepath, 0);
-  rb_define_method(cGPC, "bpath", gp_bpath, 2);
-  rb_define_method(cGPC, "vpath", gp_vpath, 2);
+  rb_define_method(cGPC, "bpath", gp_bpath, -1);
+  rb_define_method(cGPC, "vpath", gp_vpath, -1);
+  rb_define_method(cGPC, "path", gp_path, -1);
   rb_define_method(cGPC, "arc_to", gp_arcto, 6);
 
 /* Graphic state manipulation */
