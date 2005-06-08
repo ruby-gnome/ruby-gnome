@@ -185,11 +185,18 @@ gp_config_get_generic(int argc, VALUE *argv, VALUE self)
 static VALUE
 gp_config_get_page_size(VALUE self)
 {
+  gboolean result;
   gdouble width, height;
-  gnome_print_config_get_page_size(_SELF(self),
-                                   &width,
-                                   &height);
-  return rb_ary_new3(2, rb_float_new(width), rb_float_new(height));
+  
+  result = gnome_print_config_get_page_size(_SELF(self),
+                                            &width,
+                                            &height);
+
+  if (result) {
+    return rb_ary_new3(2, rb_float_new(width), rb_float_new(height));
+  } else {
+    return Qnil;
+  }
 }
 
 

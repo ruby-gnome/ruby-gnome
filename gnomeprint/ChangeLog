@@ -1,5 +1,8 @@
 2005-06-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gnome-print-config.c (gp_config_get_page_size): checked
+	  return value of gnome_print_config_get_page_size().
+
 	* sample/to_file.rb (Renderer#draw_image_by_convenience): added
 	  sample for Gnome::PrintContext#image.
 
