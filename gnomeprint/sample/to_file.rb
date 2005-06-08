@@ -72,13 +72,15 @@ class Renderer
     @context.save do
       @context.set_rgb_color(0, 0, 1)
 
-      label("line", 150, 150)
+      label("line", 120, 200)
       
       @context.move_to(100, 100)
-      @context.line_to(200, 200)
+      @context.line_to(170, 200)
+      @context.line_width = 10
       @context.stroke
-      @context.line_stroked(100, 500, 200, 200)
-      # @context.line_stroked(200, 200, 100, 500)
+      @context.line_width = 20
+      @context.line_cap = Art::PATH_STROKE_CAP_ROUND
+      @context.line_stroked(100, 500, 170, 200)
     end
   end
 
@@ -88,8 +90,11 @@ class Renderer
 
       label("rectangle", 310, 300)
       
-      @context.rect_stroked(200, 200, 100, 100)
       @context.rect_filled(200, 300, 100, 100)
+      
+      @context.line_width = 10
+      @context.line_join = Art::PATH_STROKE_JOIN_ROUND
+      @context.rect_stroked(205, 190, 90, 90)
     end
   end
 
