@@ -25,9 +25,17 @@ static VALUE
 gp_job_new(int argc, VALUE *argv, VALUE self)
 {
   VALUE config;
-  rb_scan_args(argc, argv, "01", &config);
+  GnomePrintJob *job;
   
-  G_INITIALIZE(self, gnome_print_job_new(GP_CONFIG(config)));
+  rb_scan_args(argc, argv, "01", &config);
+
+  job = gnome_print_job_new(GP_CONFIG(config));
+  if (job) {
+    G_INITIALIZE(self, job);
+  } else {
+    check_return_code(GNOME_PRINT_ERROR_UNKNOWN);
+  }
+  
   return Qnil;
 }
 
@@ -81,8 +89,14 @@ gp_job_get_pages(VALUE self)
 static VALUE
 gp_job_print_to_file(VALUE self, VALUE output)
 {
+  gchar *g_output = NULL;
+
+  if (!NIL_P(output)) {
+    g_output = RVAL2CSTR(output);
+  }
+  
   return check_return_code(gnome_print_job_print_to_file(_SELF(self),
-                                                         RVAL2CSTR(output)));
+                                                         g_output));
 }
 
 static VALUE
@@ -93,7 +107,11 @@ gp_job_get_page_size(VALUE self)
   
   ret = gnome_print_job_get_page_size(_SELF(self), &width, &height);
   
-  return rb_ary_new3(2, rb_float_new(width), rb_float_new(height));
+  if (ret) {
+    return rb_ary_new3(2, rb_float_new(width), rb_float_new(height));
+  } else {
+    return Qnil;
+  }
 }
 
 void
