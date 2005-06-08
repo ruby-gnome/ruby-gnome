@@ -1,5 +1,16 @@
 2005-06-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/to_file.rb (Renderer#draw_image): use
+	  Gnome::PrintContext#image instead of using
+	  Gnome::PrintContext#rgb_image and Gnome::PrintContext#rgba_image
+	  directory.
+
+	* src/lib/gnomeprint2.rb (Gnome::PrintContext#image): added for
+	  convenience.
+
+	* sample/to_file.rb (Renderer#draw_line): added sample of
+	  Gnome::PrintContext#set_dash.
+
 	* sample/to_file.rb (Renderer#draw_rectangle, Renderer#draw_line):
 	  added sample of Gnome::PrintContext#line_cap= and
 	  Gnome::PrintContext#line_join=.

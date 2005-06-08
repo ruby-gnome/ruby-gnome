@@ -19,6 +19,20 @@ module Gnome
   module PrintLpdPlugin
     LOG_DOMAIN = "GnomePrintLpdPlugin"
   end
+
+  class PrintContext
+    def image(pixbuf)
+      save do
+        scale(pixbuf.width, pixbuf.height)
+        args = [pixbuf.pixels, pixbuf.width, pixbuf.height, pixbuf.rowstride]
+        if pixbuf.has_alpha?
+          rgba_image(*args)
+        else
+          rgb_image(*args)
+        end
+      end
+    end
+  end
 end
 
 GLib::Log.set_log_domain(Gnome::Print::LOG_DOMAIN)
