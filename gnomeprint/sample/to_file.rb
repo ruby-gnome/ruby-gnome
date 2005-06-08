@@ -167,11 +167,11 @@ class Renderer
     @context.save do
       @context.set_rgb_color(0, 1, 0)
 
-      label("vpath", 400, 600)
+      label("vpath", 400, 700)
       
       path = [
-        [Art::MOVETO_OPEN, 400, 600],
-        [Art::LINETO, 440, 680],
+        [Art::MOVETO_OPEN, 400, 700],
+        [Art::LINETO, 440, 780],
         [Art::END],
       ]
       vpath = Art::Vpath.new(path)
@@ -223,12 +223,56 @@ class Renderer
   def draw_image
     filename = Dir["**/*.png"].first
     pixbuf = Gdk::Pixbuf.new(filename)
+    draw_image_by_convenience(pixbuf)
+    draw_image_by_low_level_api(pixbuf)
+  end
+
+  def draw_image_by_convenience(pixbuf)
+    @context.set_rgb_color(0.3, 0.1, 0.1)
+    
     @context.save do
-      @context.translate(350, 450)
+      label("image(c)", 150, 450)
+      @context.translate(150, 450)
       @context.image(pixbuf)
+    end
+
+    @context.save do
+      label("image(c) x2", 250, 450)
+      @context.translate(250, 450)
+      @context.image(pixbuf) do |context, _pixbuf|
+        @context.scale(2, 2)
+      end
     end
   end
 
+  def draw_image_by_low_level_api(pixbuf)
+    @context.set_rgb_color(0.1, 0.3, 0.1)
+    
+    args = [pixbuf.pixels, pixbuf.width, pixbuf.height, pixbuf.rowstride]
+
+    @context.save do
+      label("image(l)", 150, 650)
+      @context.translate(150, 650)
+      @context.scale(pixbuf.width, pixbuf.height)
+      if pixbuf.has_alpha?
+        @context.rgba_image(*args)
+      else
+        @context.rgb_image(*args)
+      end
+    end
+
+    @context.save do
+      label("image(l) x2", 250, 650)
+      @context.translate(250, 650)
+      @context.scale(pixbuf.width * 2, pixbuf.height * 2)
+      if pixbuf.has_alpha?
+        @context.rgba_image(*args)
+      else
+        @context.rgb_image(*args)
+      end
+    end
+  end
+  
   def draw_transformation
     draw_concat
   end

@@ -24,6 +24,7 @@ module Gnome
     def image(pixbuf)
       save do
         scale(pixbuf.width, pixbuf.height)
+        yield(self, pixbuf) if block_given?
         args = [pixbuf.pixels, pixbuf.width, pixbuf.height, pixbuf.rowstride]
         if pixbuf.has_alpha?
           rgba_image(*args)
