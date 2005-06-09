@@ -55,17 +55,17 @@ class Renderer
   end
   
   def draw
-    @context.begin_page("1")
-    draw_line
-    draw_rectangle
-    draw_arc
-    draw_path
-    draw_curve
-    draw_text
-    draw_pango
-    draw_image
-    draw_transformation
-    @context.show_page
+    @context.begin_page("1") do
+      draw_line
+      draw_rectangle
+      draw_arc
+      draw_path
+      draw_curve
+      draw_text
+      draw_pango
+      draw_image
+      draw_transformation
+    end
   end
 
   def draw_line

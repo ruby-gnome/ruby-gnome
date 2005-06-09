@@ -1,5 +1,10 @@
 2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/to_file.rb (Renderer#draw): use block.
+
+	* src/rbgp-gnome-print-unit.c (Init_gnome_print_unit): removed
+	  Gnome::PrintUnit::UNIT_* constants.
+
 	* src/rbgp-gnome-print-unit.c (gp_convert_distance_full): added
 	  `_' between variable name.
 
