@@ -1,3 +1,8 @@
+2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print-paper.c (gp_paper_get_generic): fixed
+	  optional argument detecting.
+
 2005-06-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp-gnome-print-job.c (gp_job_print_to_file): supported nil.

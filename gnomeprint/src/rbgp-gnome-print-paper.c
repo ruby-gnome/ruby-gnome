@@ -108,12 +108,12 @@ gp_paper_get_by_size(VALUE self, VALUE width, VALUE height)
 }
 
 static VALUE
-gp_paper_get_closest_by_size(VALUE self, VALUE width, VALUE height, VALUE mustfit)
+gp_paper_get_closest_by_size(VALUE self, VALUE width, VALUE height, VALUE must_fit)
 {
   const GnomePrintPaper *paper;
   paper = gnome_print_paper_get_closest_by_size(NUM2DBL(width),
                                                 NUM2DBL(height),
-                                                RVAL2CBOOL(mustfit));
+                                                RVAL2CBOOL(must_fit));
   RETURN_GPP_OR_NIL(paper);
 }
 
@@ -127,8 +127,12 @@ gp_paper_get_generic(int argc, VALUE *argv, VALUE self)
   if (argc == 0) {
     return gp_paper_get_default(self);
   } else {
-    VALUE name, width, height, mustfit;
-    rb_scan_args(argc, argv, "12", &name, &height, &mustfit);
+    VALUE name, width, height, must_fit;
+    gboolean use_closest = TRUE;
+    
+    if (rb_scan_args(argc, argv, "12", &name, &height, &must_fit) == 2) {
+      use_closest = FALSE;
+    }
     
     if (TYPE(name) == T_STRING) {
       if (argc > 1)
@@ -136,10 +140,10 @@ gp_paper_get_generic(int argc, VALUE *argv, VALUE self)
       return gp_paper_get_by_name(self, name);
     } else {
       width = name;
-      if (NIL_P(mustfit)) {
-        return gp_paper_get_by_size(self, width, height);
+      if (use_closest) {
+        return gp_paper_get_closest_by_size(self, width, height, must_fit);
       } else {
-        return gp_paper_get_closest_by_size(self, width, height, mustfit);
+        return gp_paper_get_by_size(self, width, height);
       }
     }
   }
