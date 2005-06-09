@@ -146,7 +146,7 @@ gp_convert_distance(VALUE self, VALUE distance, VALUE to)
 
 static VALUE
 gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
-                         VALUE ctmscale, VALUE devicescale)
+                         VALUE ctm_scale, VALUE device_scale)
 {
   gboolean ret;
   gdouble dist = NUM2DBL(distance);
@@ -155,8 +155,8 @@ gp_convert_distance_full(VALUE self, VALUE distance, VALUE to,
   ret = gnome_print_convert_distance_full(&dist,
                                           RVAL2GPU(self),
                                           RVAL2GPU(to),
-                                          NUM2DBL(ctmscale),
-                                          NUM2DBL(devicescale));
+                                          NUM2DBL(ctm_scale),
+                                          NUM2DBL(device_scale));
 
   if (ret) {
     result = rb_float_new(dist);

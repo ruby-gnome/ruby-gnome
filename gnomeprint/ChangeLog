@@ -1,5 +1,8 @@
 2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gnome-print-unit.c (gp_convert_distance_full): added
+	  `_' between variable name.
+
 	* src/rbgp-gnome-print-paper.c (gp_paper_get_generic): fixed
 	  optional argument detecting.
 
