@@ -1,5 +1,7 @@
 2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/dialog.rb: rendered two pages.
+
 	* src/: renamed.
 	  - rbgpui-paper-selector.c -> rbgpui-print-paper-selector.c
 	  - rbgpui-config-dialog.c -> rbgpui-print-config-dialog.c
