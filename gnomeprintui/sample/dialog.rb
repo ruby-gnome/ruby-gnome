@@ -12,11 +12,11 @@ class Renderer
     @job.close
   end
   
-  def print
+  def print(dialog)
     @job.print
   end
 
-  def preview
+  def preview(dialog)
     prev = Gnome::PrintJobPreview.new(@job, "preview")
     prev.show_all
     prev.signal_connect("unrealize") {Gtk.main_quit}
@@ -24,20 +24,36 @@ class Renderer
   end
   
   def dialog
-    args = [@job, "preview", Gnome::PrintDialog::RANGE]
+    args = [
+      @job,
+      "preview",
+      Gnome::PrintDialog::RANGE | Gnome::PrintDialog::COPIES
+    ]
     dialog = Gnome::PrintDialog.new(*args)
+    args = [
+      Gnome::PrintDialog::RANGE_CURRENT |
+        Gnome::PrintDialog::RANGE_ALL |
+        Gnome::PrintDialog::RANGE_RANGE |
+        Gnome::PrintDialog::RANGE_SELECTION,
+      1,
+      @context.pages,
+      "Current",
+      "Range",
+    ]
+    dialog.construct_range_page(*args)
     response = dialog.run
-    dialog.destroy
+    dialog.hide_all
     case response
     when Gnome::PrintDialog::RESPONSE_PRINT
-      print
+      print(dialog)
     when Gnome::PrintDialog::RESPONSE_PREVIEW
-      preview
+      preview(dialog)
     when Gnome::PrintDialog::RESPONSE_CANCEL
       puts "canceled"
     else
       puts "???"
     end
+    dialog.destroy
   end
   
   private

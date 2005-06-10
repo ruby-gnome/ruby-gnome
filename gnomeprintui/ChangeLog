@@ -1,3 +1,27 @@
+2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/dialog.rb (Renderer#dialog): added sample of
+	  Gnome::PrintDialog#construct_range_page.
+
+	* src/rbgpui-print-dialog.c
+	  (gpui_dialog_construct_range_custom): implemented.
+	  (gpui_dialog_construct_range_any): ditto.
+	  (gpui_dialog_construct_range_page): ditto.
+	
+	* src/rbgpui-print-dialog.c (gpui_dialog_get_range): returned
+	  Gnome::PrintDialog::RangeFlags instead of
+	  Gnome::PrintDialog::RangeType. (perhaps this is a bug of
+	  libgnomeprintui)
+
+	* src/rbgpui-print-dialog.c (gpui_dialog_get_range_page):
+	  returned bit mask too.
+
+	* src/rbgpui-print-dialog.c (gpui_dialog_new): all arguments are
+	  optional.
+
+	* src/rbgpui-print-dialog.c (gpui_dialog_set_copies): fixed
+	  invalid argument handling bug.
+
 2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/dialog.rb: rendered two pages.
