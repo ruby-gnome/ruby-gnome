@@ -1,5 +1,8 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgpui-print-paper-selector.c (gpui_paper_selector_new):
+	  all arguments are optional.
+
 	* extconf.rb: added Ruby/GnomePrint to depend packages.
 
 	* src/rbgpui-print-unit-selector.c: use Ruby/GnomePrint API.

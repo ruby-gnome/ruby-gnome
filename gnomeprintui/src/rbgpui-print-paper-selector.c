@@ -24,19 +24,27 @@
 
 #define _SELF(self) (RVAL2GOBJ(self))
 #define RVAL2GPSF(obj) (RVAL2GENUM(obj, GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS))
-/* #define RVAL2GPSF(obj) (NUM2INT(obj)) */
 
 static VALUE
 gpui_paper_selector_new(int argc, VALUE *argv, VALUE self)
 {
   VALUE config, flags;
-  rb_scan_args(argc, argv, "11", &config, &flags);
+  GnomePrintConfig *pc;
+  int n_args;
+  
+  n_args = rb_scan_args(argc, argv, "02", &config, &flags);
 
-  if (NIL_P(flags)) {
-    G_INITIALIZE(self, gnome_paper_selector_new(RVAL2GOBJ(config)));
+  if (n_args == 0) {
+    pc = gnome_print_config_default();
   } else {
+    pc = RVAL2GOBJ(config);
+  }
+  
+  if (n_args == 2) {
     G_INITIALIZE(self, gnome_paper_selector_new_with_flags(RVAL2GOBJ(config),
                                                            RVAL2GPSF(flags)));
+  } else {
+    G_INITIALIZE(self, gnome_paper_selector_new(pc));
   }
   return Qnil;
 }
