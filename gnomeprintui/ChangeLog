@@ -1,5 +1,8 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgpui-print-preview.c (gpui_preview_new): implemented
+	  gnome_print_preview_new_full().
+
 	* extconf.rb: added Ruby/Libart2 to depend packages.
 
 	* sample/dialog.rb (Renderer#dialog): added sample of

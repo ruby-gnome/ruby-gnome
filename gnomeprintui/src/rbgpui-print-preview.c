@@ -18,6 +18,8 @@
 
 #include "rbgpui.h"
 
+#include <rbart.h>
+
 #include <libgnomeprintui/gnome-print-preview.h>
 
 #define _SELF(self) (RVAL2GOBJ(self))
@@ -26,17 +28,23 @@ static VALUE
 gpui_preview_new(int argc, VALUE *argv, VALUE self)
 {
   VALUE config, canvas, transform, region;
-  rb_scan_args(argc, argv, "22", &config, &canvas, &transform, &region);
+  int n_args;
 
-  if (NIL_P(transform) && NIL_P(region)) {
+  n_args = rb_scan_args(argc, argv, "22",
+                        &config, &canvas, &transform, &region);
+
+  if (n_args == 2) {
     G_INITIALIZE(self, gnome_print_preview_new(RVAL2GOBJ(config),
                                                RVAL2GOBJ(canvas)));
+  } else if (n_args == 4) {
+    G_INITIALIZE(self, gnome_print_preview_new_full(RVAL2GOBJ(config),
+                                                    RVAL2GOBJ(canvas),
+                                                    get_art_affine(transform),
+                                                    get_art_drect(region)));
   } else {
-    rb_raise(rb_eArgError, "Invalid args");
-/*     G_INITIALIZE(self, gnome_print_preview_new_full(RVAL2GOBJ(config), */
-/*                                                     RVAL2GOBJ(canvas), */
-/*                                                     NUM2DBL(transform), */
-/*                                                     RVAL2GOBJ(region))); */
+    rb_raise(rb_eArgError,
+             "wrong number of arguments (%d for 2 or 4)",
+             argc);
   }
   return Qnil;
 }
