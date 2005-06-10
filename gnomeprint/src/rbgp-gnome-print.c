@@ -19,6 +19,9 @@
 #include "rbgp.h"
 #include "rbgp-gnome-print-pango.h"
 #include <libgnomeprint/gnome-print.h>
+#define WE_ARE_LIBGNOMEPRINT_INTERNALS
+#include <libgnomeprint/private/gnome-print-private.h>
+#undef WE_ARE_LIBGNOMEPRINT_INTERNALS
 #include <libgnomeprint/libgnomeprint-enum-types.h>
 
 #include <rbart.h>
@@ -548,6 +551,13 @@ gp_rect_filled(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 }
 
 
+static VALUE
+gp_context_pages(VALUE self)
+{
+  return INT2NUM(_SELF(self)->pages);
+}
+
+
 void
 Init_gnome_print(VALUE mGnome)
 {
@@ -629,5 +639,9 @@ Init_gnome_print(VALUE mGnome)
   rb_define_method(cGPC, "rect_stroked", gp_rect_stroked, 4);
   rb_define_method(cGPC, "rect_filled", gp_rect_filled, 4);
 
+/* only for Ruby/GnomePrint */
+  rb_define_method(cGPC, "pages", gp_context_pages, 0);
+
+  
   G_DEF_SETTERS(cGPC);
 }
