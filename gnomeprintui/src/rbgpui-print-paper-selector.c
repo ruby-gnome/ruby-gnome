@@ -34,14 +34,14 @@ gpui_paper_selector_new(int argc, VALUE *argv, VALUE self)
   
   n_args = rb_scan_args(argc, argv, "02", &config, &flags);
 
-  if (n_args == 0) {
+  if (NIL_P(config)) {
     pc = gnome_print_config_default();
   } else {
     pc = RVAL2GOBJ(config);
   }
   
   if (n_args == 2) {
-    G_INITIALIZE(self, gnome_paper_selector_new_with_flags(RVAL2GOBJ(config),
+    G_INITIALIZE(self, gnome_paper_selector_new_with_flags(pc,
                                                            RVAL2GPSF(flags)));
   } else {
     G_INITIALIZE(self, gnome_paper_selector_new(pc));
