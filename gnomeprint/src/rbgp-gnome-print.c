@@ -139,8 +139,17 @@ static VALUE
 gp_context_new(int argc, VALUE *argv, VALUE self)
 {
   VALUE config;
+  GnomePrintConfig *gp_config;
+  
   rb_scan_args(argc, argv, "01", &config);
-  G_INITIALIZE(self, gnome_print_context_new(GP_CONFIG(config)));
+
+  if (NIL_P(config)) {
+    gp_config = gnome_print_config_default();
+  } else {
+    gp_config = GP_CONFIG(config);
+  }
+  
+  G_INITIALIZE(self, gnome_print_context_new(gp_config));
   return Qnil;
 }
 
