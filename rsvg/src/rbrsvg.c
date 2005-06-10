@@ -412,15 +412,15 @@ Init_rsvg2(void) {
 
 /* Extended Convenience API */
 
-  rb_define_method(cHandle, "pixbuf_from_file_at_size_ex",
+  rb_define_method(cHandle, "pixbuf_from_file_at_size",
                    rb_rsvg_pixbuf_from_file_at_size_ex, 3);
-  rb_define_method(cHandle, "pixbuf_from_file_ex",
+  rb_define_method(cHandle, "pixbuf_from_file",
                    rb_rsvg_pixbuf_from_file_ex, 1);
-  rb_define_method(cHandle, "pixbuf_from_file_at_zoom_ex",
+  rb_define_method(cHandle, "pixbuf_from_file_at_zoom",
                    rb_rsvg_pixbuf_from_file_at_zoom_ex, 3);
-  rb_define_method(cHandle, "pixbuf_from_file_at_max_size_ex",
+  rb_define_method(cHandle, "pixbuf_from_file_at_max_size",
                    rb_rsvg_pixbuf_from_file_at_max_size_ex, 3);
-  rb_define_method(cHandle, "pixbuf_from_file_at_zoom_with_max_ex",
+  rb_define_method(cHandle, "pixbuf_from_file_at_zoom_with_max",
                    rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex, 5);
   
   G_DEF_SETTERS(cHandle);

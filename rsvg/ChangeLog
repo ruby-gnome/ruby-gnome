@@ -1,3 +1,7 @@
+2005-06-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c: removed `_ex' suffix.
+
 2005-03-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* README: fixed dependencies.
