@@ -3,8 +3,8 @@
 
   rbart_affine.c - Art::Affine class of ruby
 
-  $Author: mutoh $
-  $Date: 2005/01/11 15:41:27 $
+  $Author: ktou $
+  $Date: 2005/06/10 14:33:01 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -119,7 +119,7 @@ affine_point(argc, argv, self)
     ArtPoint dst;
 
     if (argc == 1) {
-        if (BUILTIN_TYPE(argv[0]) != T_ARRAY)
+        if (TYPE(argv[0]) != T_ARRAY)
             goto arg_error;
         if (RARRAY(argv[0])-> len != 2)
             goto arg_error;

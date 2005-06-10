@@ -1,3 +1,8 @@
+2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbart_affine.c (affine_point): use TYPE instead of
+	  BUILTIN_TYPE.
+
 2005-06-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbart_bpath.c (bpath_initialize): Use x3 and y3 instead of
