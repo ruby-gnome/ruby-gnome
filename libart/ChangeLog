@@ -1,5 +1,7 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbart_rect.c: implemented Art::DRect and Art::IRect.
+
 	* src/rbart_affine.c (affine_point): use TYPE instead of
 	  BUILTIN_TYPE.
 
