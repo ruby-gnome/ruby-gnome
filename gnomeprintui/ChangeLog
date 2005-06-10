@@ -1,5 +1,7 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: added Ruby/Libart2 to depend packages.
+
 	* sample/dialog.rb (Renderer#dialog): added sample of
 	  Gnome::PrintDialog#construct_range_page.
 

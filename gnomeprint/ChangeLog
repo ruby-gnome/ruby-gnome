@@ -1,5 +1,7 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: added Ruby/Libart2 to depend packages.
+
 	* src/rbgp-gnome-print.c (gp_concat): use Art::Affine instead of
 	  an array.
 	
