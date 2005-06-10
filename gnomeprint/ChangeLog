@@ -1,5 +1,8 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgp-gnome-print.c (gp_concat): use Art::Affine instead of
+	  an array.
+	
 	* src/rbgp-gnome-print.c (gp_context_pages): added for convenience.
 
 	* src/rbgp-gnome-print.c (gp_context_new): argument config is

@@ -289,7 +289,7 @@ class Renderer
       
       @context.set_rgb_color(0.7, 0.9, 0.7)
       label("after", 110, 630)
-      @context.concat([1.0, 0, 0, 1.0, 20, 30])
+      @context.concat(Art::Affine.new([1.0, 0, 0, 1.0, 20, 30]))
       @context.rect_stroked(100, 600, 10, 10)
     end
 

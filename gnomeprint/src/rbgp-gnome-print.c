@@ -359,18 +359,8 @@ gp_eoclip(VALUE self)
 static VALUE
 gp_concat(VALUE self, VALUE matrix)
 {
-  VALUE ret;
-  gdouble *g_matrix;
-
-  if (RARRAY(matrix)->len != 6) {
-    rb_raise(rb_eArgError, "invalid argument. should be 6 element array");
-  }
-
-  g_matrix = rb_array_to_gdouble_array(matrix);
-  ret = gnome_print_concat(_SELF(self), g_matrix);
-  free(g_matrix);
-  
-  return check_return_code(ret);
+  return check_return_code(gnome_print_concat(_SELF(self),
+                                              get_art_affine(matrix)));
 }
 
 static VALUE
