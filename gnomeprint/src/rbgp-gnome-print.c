@@ -136,8 +136,10 @@ rb_array_to_gdouble_array(VALUE array)
 
 
 static VALUE
-gp_context_new(VALUE self, VALUE config)
+gp_context_new(int argc, VALUE *argv, VALUE self)
 {
+  VALUE config;
+  rb_scan_args(argc, argv, "01", &config);
   G_INITIALIZE(self, gnome_print_context_new(GP_CONFIG(config)));
   return Qnil;
 }
@@ -554,7 +556,7 @@ Init_gnome_print(VALUE mGnome)
   rb_define_method(cGPRC, "to_s", gp_rc_to_s, 0);
 
   
-  rb_define_method(cGPC, "initialize", gp_context_new, 1);
+  rb_define_method(cGPC, "initialize", gp_context_new, -1);
 
   rb_define_method(cGPC, "close", gp_context_close, 0);
   rb_define_method(cGPC, "create_transport", gp_context_create_transport, 0);

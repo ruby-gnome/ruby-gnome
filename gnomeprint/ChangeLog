@@ -1,3 +1,8 @@
+2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgp-gnome-print.c (gp_context_new): argument config is
+	  optional.
+
 2005-06-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/to_file.rb (Renderer#draw): use block.
