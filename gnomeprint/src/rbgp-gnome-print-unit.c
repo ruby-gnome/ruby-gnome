@@ -17,12 +17,6 @@
  */
 
 #include "rbgp.h"
-#include <libgnomeprint/gnome-print-unit.h>
-#include <libgnomeprint/libgnomeprint-enum-types.h>
-
-#define RVAL2GPUB(obj) (RVAL2GFLAGS(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
-#define GPUB2RVAL(obj) (GFLAGS2RVAL(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
-
 
 static VALUE
 gp_unit_get_identity(VALUE self, VALUE base)

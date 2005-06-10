@@ -26,6 +26,9 @@
 
 #include "rbgp-utils.h"
 
+#include <libgnomeprint/gnome-print-unit.h>
+#include <libgnomeprint/libgnomeprint-enum-types.h>
+
 #define GP_JOB(o) (GNOME_PRINT_JOB(RVAL2GOBJ(o)))
 #define GP_CONFIG(o) (GNOME_PRINT_CONFIG(RVAL2GOBJ(o)))
 #define GP_CONTEXT(o) (GNOME_PRINT_CONTEXT(RVAL2GOBJ(o)))
@@ -36,6 +39,9 @@
 #define RVAL2GPU(obj) ((GnomePrintUnit *)RVAL2BOXED(obj, GNOME_TYPE_PRINT_UNIT))
 #define GPU2RVAL(obj) (BOXED2RVAL(obj, GNOME_TYPE_PRINT_UNIT))
 #define CONST_GPU2RVAL(obj) (GPU2RVAL((GnomePrintUnit *)obj))
+
+#define RVAL2GPUB(obj) (RVAL2GFLAGS(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
+#define GPUB2RVAL(obj) (GFLAGS2RVAL(obj, GNOME_TYPE_PRINT_PRINT_UNIT_BASE))
 
 extern GType gnome_print_paper_get_type(void);
 
