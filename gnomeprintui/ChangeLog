@@ -1,5 +1,9 @@
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: added Ruby/GnomePrint to depend packages.
+
+	* src/rbgpui-print-unit-selector.c: use Ruby/GnomePrint API.
+
 	* src/rbgpui-print-preview.c (gpui_preview_new): implemented
 	  gnome_print_preview_new_full().
 

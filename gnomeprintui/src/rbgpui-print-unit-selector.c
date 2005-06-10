@@ -18,6 +18,8 @@
 
 #include "rbgpui.h"
 
+#include <rbgp.h>
+
 #include <gtk/gtkwidget.h>
 #include <libgnomeprintui/gnome-print-unit-selector.h>
 
@@ -26,30 +28,28 @@
 static VALUE
 gpui_unit_selector_new(VALUE self, VALUE bases)
 {
-  G_INITIALIZE(self, gnome_print_unit_selector_new(NUM2INT(bases)));
+  G_INITIALIZE(self, gnome_print_unit_selector_new(RVAL2GPUB(bases)));
   return Qnil;
 }
 
 static VALUE
 gpui_unit_selector_set_bases(VALUE self, VALUE bases)
 {
-  gnome_print_unit_selector_set_bases(_SELF(self), NUM2INT(bases));
+  gnome_print_unit_selector_set_bases(_SELF(self), RVAL2GPUB(bases));
   return Qnil;
 }
 
 static VALUE
 gpui_unit_selector_set_unit(VALUE self, VALUE unit)
 {
-  gnome_print_unit_selector_set_unit(_SELF(self), RVAL2GOBJ(unit));
+  gnome_print_unit_selector_set_unit(_SELF(self), RVAL2GPU(unit));
   return Qnil;
 }
 
 static VALUE
 gpui_unit_selector_get_unit(VALUE self)
 {
-  GnomePrintUnit *unit;
-  unit = (GnomePrintUnit *)gnome_print_unit_selector_get_unit(_SELF(self));
-  return GOBJ2RVAL(unit);
+  return CONST_GPU2RVAL(gnome_print_unit_selector_get_unit(_SELF(self)));
 }
 
 static VALUE
