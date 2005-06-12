@@ -108,7 +108,7 @@ add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINTUI2_COMPILATION"){
   enum_type_prefix = "libgnomeprintui-enum-types"
-  if !have_header("#{enum_type_prefix}.h")
+  unless have_header("libgnomeprintui/#{enum_type_prefix}.h")
     if maintainer
       include_paths = `pkg-config libgnomeprintui-2.2 --cflags-only-I`
       include_path = include_paths.split.find do |x|

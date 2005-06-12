@@ -1,3 +1,8 @@
+2005-06-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: added libgnomeprintui prefix to
+	  "#{enum_type_prefix}.h".
+
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgpui-print-paper-selector.c (gpui_paper_selector_new):
