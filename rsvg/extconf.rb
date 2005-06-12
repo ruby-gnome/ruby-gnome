@@ -108,7 +108,7 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_RSVG2_COMPILATION") {
   enum_type_prefix = "librsvg-enum-types"
-  if !have_header("#{enum_type_prefix}.h")
+  unless have_header("librsvg/#{enum_type_prefix}.h")
     include_paths = PKGConfig.cflags_only_I("librsvg-2.0")
     include_path = include_paths.split.find do |x|
       /librsvg/.match(x)
