@@ -17,7 +17,7 @@
  */
 
 #include "rbgpui.h"
-#include "libgnomeprintui-enum-types.h"
+#include "libgnomeprintui/libgnomeprintui-enum-types.h"
 
 #include <libgnomeprintui/gnome-print-dialog.h>
 

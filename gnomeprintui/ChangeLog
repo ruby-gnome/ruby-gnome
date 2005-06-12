@@ -1,5 +1,12 @@
 2005-06-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: fixed enum types handling.
+	* src/rbgpui-print-dialog.c: ditto.
+	* src/rbgpui-print-paper-selector.c: ditto.
+
+	* src/libgnomeprintui-enum-types.c.maintainer: updated.
+	* src/libgnomeprintui-enum-types.h.maintainer: updated.
+	
 	* extconf.rb: added libgnomeprintui/ prefix to
 	  "#{enum_type_prefix}.h".
 

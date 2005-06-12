@@ -15,20 +15,22 @@ def mkenums(output, config, files)
   args += files
   for_read, for_write = IO.pipe
   pid = fork do
+    $makefile_created = true
     STDOUT.reopen(for_write)
     for_write.close
     system('glib-mkenums', *args)
   end
   for_write.close
+  Process.waitpid(pid)
   File.open(output, "w") do |out|
     out.print(for_read.read)
   end
-  Process.waitpid(pid)
 end
 
-def mkenums_h(prefix, files)
+def mkenums_h(dir, prefix, files)
   header = prefix + ".h"
   const = "__#{header.upcase.gsub(/-|\./, '_')}__"
+  header = File.join(dir, header)
   config = {
     :fhead => <<-FHEAD,
 #ifndef #{const}
@@ -54,8 +56,8 @@ FTAIL
   mkenums(header, config, files)
 end
 
-def mkenums_c(prefix, files)
-  header = prefix + ".h"
+def mkenums_c(dir, prefix, files)
+  header = File.join(dir, prefix + ".h")
   c = prefix + ".c"
   config = {
     :fhead => <<-FHEAD,
@@ -107,25 +109,36 @@ add_depend_package("libart2", "libart/src", TOPDIR)
 add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINTUI2_COMPILATION"){
+  enum_type_dir = "libgnomeprintui"
   enum_type_prefix = "libgnomeprintui-enum-types"
-  unless have_header("libgnomeprintui/#{enum_type_prefix}.h")
+  unless have_header("#{enum_type_dir}/#{enum_type_prefix}.h")
+    FileUtils.mkdir_p(enum_type_dir)
+    enum_type_full_prefix = File.join(enum_type_dir, enum_type_prefix)
+    enum_type_c = "#{enum_type_prefix}.c"
+    enum_type_h = "#{enum_type_full_prefix}.h"
+    maintainer_enum_type_c = "#{enum_type_prefix}.c.maintainer"
+    maintainer_enum_type_h = "#{enum_type_prefix}.h.maintainer"
+    
     if maintainer
       include_paths = `pkg-config libgnomeprintui-2.2 --cflags-only-I`
       include_path = include_paths.split.find do |x|
         /libgnomeprintui/.match(x)
       end.sub(/^-I/, "")
       headers = Dir.glob(File.join(include_path, "libgnomeprintui", "*.h"))
-      mkenums_h(enum_type_prefix, headers)
-      mkenums_c(enum_type_prefix, headers)
-    else
-      %w(h c).each do |ext|
-        enum_type_filename = "#{enum_type_prefix}.#{ext}"
-        FileUtils.cp("#{enum_type_filename}.maintainer", enum_type_filename)
-      end
-    end
-  end
 
-  add_distcleanfile(enum_type_prefix + ".c")
-  add_distcleanfile(enum_type_prefix + ".h")
+      mkenums_c(enum_type_dir, enum_type_prefix, headers)
+      mkenums_h(enum_type_dir, enum_type_prefix, headers)
+
+      FileUtils.mv("#{enum_type_prefix}.c", maintainer_enum_type_c)
+      FileUtils.mv("#{File.join(enum_type_dir, enum_type_prefix)}.h",
+                   maintainer_enum_type_h)
+    end
+
+    FileUtils.cp(maintainer_enum_type_c, enum_type_c)
+    FileUtils.cp(maintainer_enum_type_h, enum_type_h)
+
+    add_distcleanfile(enum_type_c)
+    add_distcleanfile(enum_type_h)
+  end
 }
 create_top_makefile
