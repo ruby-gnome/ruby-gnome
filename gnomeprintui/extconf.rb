@@ -7,6 +7,8 @@ require "fileutils"
 maintainer = false
 
 def mkenums(output, config, files)
+  makefile_created = $makefile_created
+  $makefile_created = true
   args = []
   %w(fhead fprod ftail eprod vhead vprod vtail comments template).each do |param|
     param = param.intern
@@ -15,7 +17,6 @@ def mkenums(output, config, files)
   args += files
   for_read, for_write = IO.pipe
   pid = fork do
-    $makefile_created = true
     STDOUT.reopen(for_write)
     for_write.close
     system('glib-mkenums', *args)
@@ -25,6 +26,8 @@ def mkenums(output, config, files)
   File.open(output, "w") do |out|
     out.print(for_read.read)
   end
+ensure
+  $makefile_created = makefile_created
 end
 
 def mkenums_h(dir, prefix, files)
