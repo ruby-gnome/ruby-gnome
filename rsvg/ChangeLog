@@ -1,3 +1,7 @@
+2005-06-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c: fixed macro name. (HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H)
+
 2005-06-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: added librsvg/ prefix to "#{enum_type_prefix}.h".

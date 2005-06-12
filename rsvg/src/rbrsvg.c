@@ -23,7 +23,7 @@
 
 #include <librsvg/rsvg-gz.h>
 
-#ifdef HAVE_LIBRSVG_ENUM_TYPES_H
+#ifdef HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H
 #  include <librsvg/librsvg-enum-types.h>
 #else
 #  include "librsvg-enum-types.h"
