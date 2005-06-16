@@ -1,3 +1,19 @@
+2005-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_strv.c: Fix double free error. 
+	* src/rbglib_iochannel.c: Added GLib::IOChannel.
+	* src/rbglib.c, rbgobject.h: ditto.
+
+2005-03-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/spawn.rb: Add a comment. Bugs:1159417.
+	* extconf.rb: Add require gtherad-2.0. Bugs: 1159413
+
+2005-03-21  Vincent Isambart <isambart@netcourrier.com>
+
+	* src/lib/pkg-config.rb: Renames the "libs" local variable to "libraries"
+	to work ruby-1.9.x.
+
 2005-03-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h, rbgobject.h: Move some macros/definitions to rbgobject.h

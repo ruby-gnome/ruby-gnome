@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2005/03/13 14:39:58 $
+  $Date: 2005/06/16 13:27:33 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -30,6 +30,7 @@ extern void Init_glib_main_loop();
 extern void Init_glib_main_context();
 extern void Init_glib_source();
 extern void Init_glib_poll_fd();
+extern void Init_glib_io_channel();
 
 char *
 rbg_string_value_ptr(ptr)
@@ -160,6 +161,7 @@ void Init_glib2()
     Init_glib_main_context();
     Init_glib_source();
     Init_glib_poll_fd();
+    Init_glib_io_channel();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);

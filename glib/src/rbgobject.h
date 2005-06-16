@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2005/03/14 15:08:25 $
+  $Date: 2005/06/16 13:27:33 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -187,7 +187,6 @@ extern GType g_main_loop_get_type(void);
 extern GType g_main_context_get_type(void);
 extern GType g_source_get_type(void);
 extern GType g_poll_fd_get_type(void);
-
 
 #ifdef __cplusplus
 }

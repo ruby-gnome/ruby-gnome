@@ -4,7 +4,7 @@
   rbgobj_gstrv.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 07:21:01 $
+  $Date: 2005/06/16 13:27:33 $
 
   Copyright (C) 2005  Masao Mutoh
 **********************************************************************/
@@ -50,13 +50,16 @@ strv_from_ruby(VALUE from, GValue* to)
 
     g_value_set_boxed(to, gstrv);
 
+/* This occurs:
+   *** glibc detected *** double free or corruption (fasttop): 0x0a59a4e8 ***
     g_strfreev(gstrv);
+*/
 }
 
 void Init_gobject_gstrv()
 {
     /* GStrv is treated as Array */
-//    VALUE gBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Strv", mGLib);
+    G_DEF_CLASS(G_TYPE_STRV, "Strv", mGLib);
     rbgobj_register_g2r_func(G_TYPE_STRV, strv_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_STRV, strv_from_ruby);
 }
