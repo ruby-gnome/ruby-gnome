@@ -1,3 +1,10 @@
+2005-06-20  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgstelement.c:
+
+	Added a custom signal handler for the 'found_tag' signal that
+	converts the GstTagList.  Problem reported by Erik Karlsson.
+
 2005-04-30  Laurent Sansonetti  <lrz@gnome.org>
 
 	* sample/video-player.rb: Added.

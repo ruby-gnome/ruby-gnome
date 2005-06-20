@@ -1223,6 +1223,21 @@ rb_gst_element_no_more_pads (VALUE self)
     return self;
 }
 
+static VALUE 
+rb_gst_element_found_tag_sig (guint num, const GValue *values)
+{
+    GstElement *element, *source;
+    GstTagList *tag_list;
+
+    element = g_value_get_object (&values[0]);
+    source = g_value_get_object (&values[1]);
+    tag_list = g_value_get_boxed (&values[2]);
+
+    return rb_ary_new3 (3, RGST_ELEMENT_NEW (element), 
+                           RGST_ELEMENT_NEW (source),
+                           gst_structure_to_ruby_hash (tag_list));
+}
+
 void
 Init_gst_element (void)
 {
@@ -1327,4 +1342,7 @@ Init_gst_element (void)
      * TODO:
      * gst_element_clock_wait () 
      */
+
+    G_DEF_SIGNAL_FUNC (c, "found-tag", 
+                       (GValToRValSignalFunc)rb_gst_element_found_tag_sig);
 }
