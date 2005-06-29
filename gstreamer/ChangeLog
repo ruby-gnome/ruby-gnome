@@ -1,9 +1,14 @@
+2005-06-29  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbgst.h, src/rbgststructure.c, src/rbgsttagsetter.c: Properly
+	convert the Hash argument given to GstTagSetter#merge to a GstTagList
+	by naming the GstStructure accordingly.  Problem reported by Pablo 
+	Lorenzzoni.
+
 2005-06-20  Laurent Sansonetti  <lrz@gnome.org>
 
-	* src/rbgstelement.c:
-
-	Added a custom signal handler for the 'found_tag' signal that
-	converts the GstTagList.  Problem reported by Erik Karlsson.
+	* src/rbgstelement.c: Added a custom signal handler for the 'found_tag' 
+	signal that converts the GstTagList.  Problem reported by Erik Karlsson.
 
 2005-04-30  Laurent Sansonetti  <lrz@gnome.org>
 

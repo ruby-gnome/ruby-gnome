@@ -46,7 +46,8 @@ VALUE gst_structure_to_ruby_hash (GstStructure *gst_struct)
     return hash;
 }
 
-GstStructure *ruby_hash_to_gst_structure (VALUE hash)
+GstStructure *ruby_hash_to_gst_structure_with_name (VALUE hash, 
+                                                    const char *name)
 {
     GstStructure *gst_struct;
     VALUE ary;
@@ -54,7 +55,7 @@ GstStructure *ruby_hash_to_gst_structure (VALUE hash)
     
     Check_Type (hash, T_HASH);
 
-    gst_struct = gst_structure_empty_new ("");
+    gst_struct = gst_structure_empty_new (name);
     ary = rb_funcall (hash, rb_intern ("to_a"), 0);
     for (i = 0; i < RARRAY (ary)->len; i++) {
         VALUE pair = RARRAY (ary)->ptr[i];
@@ -71,3 +72,7 @@ GstStructure *ruby_hash_to_gst_structure (VALUE hash)
     return gst_struct; 
 }
 
+GstStructure *ruby_hash_to_gst_structure (VALUE hash)
+{
+    return ruby_hash_to_gst_structure_with_name (hash, "");
+}
