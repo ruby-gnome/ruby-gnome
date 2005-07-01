@@ -1,3 +1,26 @@
+2005-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* tests/test-iochannel.*: Added tests for GLib::IOChannel. 
+
+2005-06-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c: Rename GLib::IOChannel#fd => #fileno, #to_i. 
+	Improved #seek.
+
+2005-06-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c: Added GLib::IOChannel#each_char, #each, #each_line.
+
+2005-06-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c: Rename GLib::IOChannel#read_chars => #read.
+	Unify GLib::IOChannel#read_to_end => #read.
+
+2005-06-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c: Rename GLib::IOChannel#read_unichar => #readchar.
+	#read_line => #readline. Add #gets, #getc.
+
 2005-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_strv.c: Fix double free error. 
