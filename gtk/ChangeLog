@@ -1,3 +1,8 @@
+2005-07-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkdraw.c (gdkdraw_layout_line, gdkdraw_layout): Accept
+	nil as fg and bg.
+
 2005-05-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpango.c: Fix a bug of Gdk::PangoAttrEmbossed#value

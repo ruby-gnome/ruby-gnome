@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/07 16:56:39 $
+  $Author: ktou $
+  $Date: 2005/07/06 14:54:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -295,19 +295,11 @@ gdkdraw_layout_line(argc, argv, self)
 
     rb_scan_args(argc, argv, "42", &gc, &x, &y, &line, &fg, &bg);
 
-    if (argc == 4){
-        gdk_draw_layout_line(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
-                             NUM2INT(x), NUM2INT(y), 
-                             (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE));
-    } else if (argc == 6){
-        gdk_draw_layout_line_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
-                                         NUM2INT(x), NUM2INT(y), 
-                                         (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
-                                         (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
-                                         (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
-    } else {
-        rb_raise(rb_eArgError, "Wrong arguments");
-    }
+    gdk_draw_layout_line_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+                                     NUM2INT(x), NUM2INT(y),
+                                     (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
+                                     NIL_P(fg) ? NULL : (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
+                                     NIL_P(bg) ? NULL : (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
 
     return self;
 }
@@ -322,17 +314,10 @@ gdkdraw_layout(argc, argv, self)
 
     rb_scan_args(argc, argv, "42", &gc, &x, &y, &layout, &fg, &bg);
 
-    if (argc == 4){
-        gdk_draw_layout(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
-                        NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)));
-    } else if (argc == 6){
-        gdk_draw_layout_with_colors( _SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
-                                     NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)),
-                                     (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
-                                     (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
-    } else {
-        rb_raise(rb_eArgError, "Wrong arguments");
-    }
+    gdk_draw_layout_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+                                NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)),
+                                NIL_P(fg) ? NULL : (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
+                                NIL_P(bg) ? NULL : (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
 
     return self;
 }
