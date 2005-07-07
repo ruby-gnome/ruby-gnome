@@ -1,3 +1,7 @@
+2005-07-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkstyle.c (style_set_white): Fix typo. black -> white
+
 2005-07-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdraw.c (gdkdraw_layout_line, gdkdraw_layout): Accept

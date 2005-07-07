@@ -3,8 +3,8 @@
 
   rbgtkstyle.c -
 
-  $Author: mutoh $
-  $Date: 2004/07/29 18:35:06 $
+  $Author: ktou $
+  $Date: 2005/07/07 13:06:27 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -471,7 +471,7 @@ static VALUE
 style_set_white(self, r, g, b)
     VALUE self, r, g, b;
 {
-    GdkColor* color =  &(_SELF(self)->black);
+    GdkColor* color =  &(_SELF(self)->white);
     color->red   = NUM2INT(r); 
     color->green = NUM2INT(g); 
     color->blue  = NUM2INT(b); 
