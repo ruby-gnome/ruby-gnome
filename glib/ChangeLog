@@ -1,3 +1,7 @@
+2005-07-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/iochannel.rb: Added. 
+
 2005-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* tests/test-iochannel.*: Added tests for GLib::IOChannel. 
