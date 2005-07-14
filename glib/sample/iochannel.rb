@@ -1,12 +1,19 @@
-require 'gtk2'
+=begin
+  iochannel.rb - Sample for GLib::IOChannel.
+
+  Copyright (C) 2005 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: iochannel.rb,v 1.2 2005/07/14 17:05:22 mutoh Exp $
+=end
+
+require 'glib2'
 
 path = ARGV[0] || __FILE__
 
-=begin
 GLib::IOChannel.open(path) {|io|
   puts io.read
 }
-=end
 
 stdout = GLib::IOChannel.new(path, "r")
 stdout.add_watch(GLib::IOChannel::IN

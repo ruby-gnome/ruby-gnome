@@ -4,8 +4,7 @@
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/03/13 14:39:58 $
-  $Id: timeout.rb,v 1.1 2005/03/13 14:39:58 mutoh Exp $
+  $Id: timeout.rb,v 1.2 2005/07/14 17:05:22 mutoh Exp $
 =end
 
 require 'glib2'
