@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: dialog.rb,v 1.4 2005/03/22 17:41:28 silicio Exp $
+  $Id: dialog.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -41,7 +41,7 @@ button.signal_connect("clicked") do
   dialog.show_all
 end
 
-window.add(button).show_all
+window.add(button).show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main
 

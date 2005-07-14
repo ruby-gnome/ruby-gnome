@@ -2,47 +2,34 @@
 =begin
   togglebutton.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: togglebutton.rb,v 1.8 2005/03/22 17:41:28 silicio Exp $
+  $Id: togglebutton.rb,v 1.9 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 
-window = Gtk::Window.new
-window.set_title("toggle buttons")
-window.set_border_width(0)
+window = Gtk::Window.new("toggle buttons")
+window.border_width = 10
 
-box1 = Gtk::VBox.new(false, 0)
-window.add(box1)
-
-box2 = Gtk::VBox.new(false, 10)
-box2.set_border_width(10)
-box1.pack_start(box2, true, true, 0)
+box = Gtk::VBox.new(false, 10)
+window.add(box)
 
 button1 = Gtk::ToggleButton.new("_button1")
 button2 = Gtk::ToggleButton.new("_button2", false)
 button3 = Gtk::ToggleButton.new(Gtk::Stock::QUIT)
-box2.add(button1).add(button2).add(button3)
+box.add(button1).add(button2).add(button3)
 
-separator = Gtk::HSeparator.new()
-box1.pack_start(separator, false, true, 0)
-
-box2 = Gtk::VBox.new(false, 10)
-box2.set_border_width(10)
-box1.pack_start(box2, false, true, 0)
+box.pack_start(Gtk::HSeparator.new)
 
 close = Gtk::Button.new("close")
 close.signal_connect("clicked") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
-box2.pack_start(close, true, true, 0)
-close.set_flags(Gtk::Widget::CAN_DEFAULT)
-close.grab_default
-close.show
+box.add(close)
 
 window.show_all
 

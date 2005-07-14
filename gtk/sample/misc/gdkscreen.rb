@@ -1,10 +1,10 @@
 =begin
-  setting.rb - Gtk::Settings sample script.
+  gdkscreen.rb - Gdk::Screen sample script.
 
-  Copyright (C) 2004 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2004, 2005  Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gdkscreen.rb,v 1.1 2004/03/24 17:54:29 mutoh Exp $
+  $Id: gdkscreen.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'

@@ -5,7 +5,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pangorenderer.rb,v 1.3 2005/03/22 17:41:28 silicio Exp $
+  $Id: pangorenderer.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -21,7 +21,7 @@ if str = Gtk.check_version(2, 6, 0)
   exit
 end
 
-win = Gtk::Window.new
+win = Gtk::Window.new("Gdk::PangoRenderer sample")
 win.set_default_size(400, 400)
 win.realize
 

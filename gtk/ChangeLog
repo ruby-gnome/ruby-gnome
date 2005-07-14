@@ -1,3 +1,27 @@
+2005-07-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/xbm_cursor.rb, window.rb, uimanager.rb, uimanager2.rb,
+	toolbar.rb, togglebutton.rb, to_drawable.rb, threads.rb, 
+	style_property.rb, stock.rb, radiobutton.rb, pointer_grab.rb,
+	pangorenderer.rb, menu.rb: Code clean up. Apply Gtk::Window.new(title). 
+	* sample/misc/t-gtkplug.rb, t-gtksocket.rb, to_drawable.rb: 
+	Works again. Code clean up. Apply Gtk::Window.new(title). 
+	* src/rbgdkpixbuf.c: Fix a warning message of Gdk::Pixbuf#render_to_drawable.
+
+2005-07-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/bindings.rb, calender.rb, checkbutton.rb, colorselection.rb, 
+	combo_check.rb, dialog2.rb, dnd.rb, dndtreeview.rb, drawing.rb, entry.rb, 
+	entrycompletion.rb, expander.rb, filechooser.rb, frame.rb, gdkscreen.rb, 
+	image.rb, itemfactroy.rb, itemfactroy2.rb, keyboard_grab.rb, label.rb, 
+	buttonbox.rb: Code clean up. Apply Gtk::Window.new(title). 
+
+2005-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwindow.c: Gtk::Window.new accept "title" as the 1st argument. 
+	e.g.) Gtk::Window.new("Title").
+	* sample/misc/button.rb: Apply Gtk::Window.new(title) and code clean up.
+
 2005-07-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkstyle.c (style_set_white): Fix typo. black -> white

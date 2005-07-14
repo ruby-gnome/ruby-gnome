@@ -5,53 +5,40 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: image.rb,v 1.7 2005/03/22 17:41:28 silicio Exp $
+  $Id: image.rb,v 1.8 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Image")
 window.signal_connect("destroy") do
   Gtk.main_quit
 end
-window.set_title("pixmap")
-window.set_border_width(0)
-window.realize
+window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 0)
-window.add box1
-
-box2 = Gtk::HBox.new(false, 10)
-box2.set_border_width 10
-box1.pack_start box2, true, true, 0
+box1 = Gtk::VBox.new(false, 10)
+box1.border_width = 10
 
 button = Gtk::Button.new
-box2.pack_start button, false, false, 0
+box1.add(button)
 
 label = Gtk::Label.new("Gtk::Image\ntest")
-box3 = Gtk::HBox.new(false, 0)
-box3.set_border_width 2
-box3.add Gtk::Image.new("test.xpm")
-box3.add label
-button.add box3
+image = Gtk::Image.new("test.xpm")
 
-separator = Gtk::HSeparator.new
-box1.pack_start(separator, false, true, 0)
+box2 = Gtk::HBox.new(false, 5).add(image).add(label)
 
-box2 = Gtk::HBox.new(false, 10)
-box2.set_border_width(10)
-box1.pack_start(box2, false, true, 0)
+button.add(box2)
+
+box1.add(Gtk::HSeparator.new)
 
 button = Gtk::Button.new("close")
 button.signal_connect("clicked") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
-box2.pack_start(button, true, true, 0)
-button.set_flags(Gtk::Widget::CAN_DEFAULT)
-button.grab_default
+box1.add(button)
 
-window.show_all
+window.add(box1).show_all
 
 Gtk.main

@@ -1,11 +1,11 @@
 =begin
   xbm_cursor.rb - Gdk::Cursor sample script.
 
-  Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2001-2005 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2003/02/10 11:40:12 $
-  $Id: xbm_cursor.rb,v 1.4 2003/02/10 11:40:12 mutoh Exp $
+  $Date: 2005/07/14 17:01:50 $
+  $Id: xbm_cursor.rb,v 1.5 2005/07/14 17:01:50 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -26,7 +26,8 @@ cursor_mask_bits = [
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Gdk::Cursor sample")
+window.signal_connect("destroy"){Gtk.main_quit}
 window.realize
 
 source = Gdk::Pixmap.create_from_data(window.window, cursor_bits, 19, 19)
@@ -37,7 +38,8 @@ bg = Gdk::Color.new(65535, 65535, 0)
 
 cursor = Gdk::Cursor.new(source, mask, fg, bg, 10, 10)
 
-window.set_default_size(200,100).show_all
 window.window.set_cursor(cursor)
+window.add(Gtk::Label.new("Put your cursor on this window."))
+window.set_default_size(200, 100).show_all
 
 Gtk.main

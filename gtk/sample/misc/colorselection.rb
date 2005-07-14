@@ -4,7 +4,7 @@
   Copyright (C) 2005  Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: colorselection.rb,v 1.1 2005/03/22 15:42:55 mutoh Exp $
+  $Id: colorselection.rb,v 1.2 2005/07/14 17:01:48 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -22,6 +22,6 @@ Gtk::ColorSelection.set_change_palette_hook{|screen, colors|
 a = Gtk::ColorSelection.new
 a.has_palette = true
 
-Gtk::Window.new.add(a).show_all
+Gtk::Window.new.add(a).show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main

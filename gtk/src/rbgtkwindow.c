@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 15:49:24 $
+  $Date: 2005/07/14 17:01:50 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -22,16 +22,25 @@ gwin_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE type;
-    GtkWindowType tp;
+    VALUE arg;
+    GtkWindowType tp = GTK_WINDOW_TOPLEVEL;
+    gchar* title = NULL;
+    GtkWidget* window = NULL;
 
-    if (rb_scan_args(argc, argv, "01", &type) == 1) {
-        tp = RVAL2GENUM(type, GTK_TYPE_WINDOW_TYPE);
-    } else {
-        tp = GTK_WINDOW_TOPLEVEL;
+    if (rb_scan_args(argc, argv, "01", &arg) == 1) {
+        if (TYPE(arg) == T_STRING) {
+            StringValue(arg);
+            title = RVAL2CSTR(arg);
+        } else {
+            tp = RVAL2GENUM(arg, GTK_TYPE_WINDOW_TYPE);
+        }
     }
+    window = gtk_window_new(tp);
 
-    RBGTK_INITIALIZE(self, gtk_window_new(tp));
+    if (title)
+        gtk_window_set_title(GTK_WINDOW(window), title);
+
+    RBGTK_INITIALIZE(self, window);
     return Qnil;
 }
 

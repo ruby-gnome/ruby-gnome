@@ -2,37 +2,37 @@
 =begin
   itemfactory.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: itemfactory.rb,v 1.4 2005/03/22 17:41:28 silicio Exp $
+  *NOTE* Gtk::ItemFactory has been deprecated. Use Gtk::UIManager instead.
+
+  $Id: itemfactory.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
-require 'gdk_pixbuf2'
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::ItemFactory")
 window.signal_connect("destroy") do
   Gtk.main_quit
 end
 window.signal_connect("delete_event") do
   Gtk.main_quit
 end
-window.set_title("Gtk::ItemFactory")
 
 accelgroup = Gtk::AccelGroup.new
 window.add_accel_group(accelgroup)
 
 ifp = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR, "<main>", accelgroup)
 
-cal_stock = Proc.new {|d| p "StockItem, #{d}"}
+cal_stock = Proc.new {|d, item| p "StockItem, #{d}"}
 cal_quit = Proc.new{p "Quit"; Gtk.main_quit}
-cal_check = Proc.new {|d| p "CheckItem, #{d}"}
-cal_toggle = Proc.new {|d| p "ToggleItem, #{d}"}
-cal_radio = Proc.new {|d| p "RadioItem, #{d}"}
-cal_misc = Proc.new {|d| p "Misc #{d}"}
+cal_check = Proc.new {|d, item| p "CheckItem, #{d}"}
+cal_toggle = Proc.new {|d, item| p "ToggleItem, #{d}"}
+cal_radio = Proc.new {|d, item| p "RadioItem, #{d}"}
+cal_misc = Proc.new {|d, item| p "Misc #{d}"}
 ifp.create_items([
                    ["/_Stock"],
                    ["/_Stock/_New", "<StockItem>", "<control>N", Gtk::Stock::NEW, cal_stock, 1],
@@ -65,8 +65,8 @@ ifp.get_widget("/Stock/Open").sensitive = false
 ifp.delete_item("/Toggle/Toggle2")
 
 vbox = Gtk::VBox.new
-vbox.pack_start(ifp.get_widget("<main>"))
-vbox.pack_start(Gtk::Label.new("Gtk::ItemFactory sample").set_size_request(400, 200))
+vbox.add(ifp.get_widget("<main>"))
+vbox.add(Gtk::Label.new("Gtk::ItemFactory sample").set_size_request(400, 200))
 window.add(vbox)
 window.show_all
 

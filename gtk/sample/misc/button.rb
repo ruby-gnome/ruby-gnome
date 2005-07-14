@@ -2,30 +2,27 @@
 =begin
   button.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: button.rb,v 1.8 2005/03/22 17:41:27 silicio Exp $
+  $Id: button.rb,v 1.9 2005/07/14 17:01:48 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 
-window = Gtk::Window.new
-window.set_title("buttons")
-window.set_border_width(0)
+window = Gtk::Window.new("buttons")
+window.border_width = 0
 
 box1 = Gtk::VBox.new(false, 0)
 window.add(box1)
-box1.show
 
 table = Gtk::Table.new(3, 3, false)
 table.set_row_spacings(5)
 table.set_column_spacings(5)
 table.set_border_width(10)
 box1.pack_start(table, true, true, 0)
-table.show
 
 button = []
 0.upto(8) do |i|
@@ -34,7 +31,7 @@ end
 0.upto(8) do |i|
   button[i].signal_connect("clicked") do |w|
     p [i]
-    j = (i+1)%9
+    j = (i + 1) % 9
     if button[j].visible?
       button[j].hide
     else
@@ -55,22 +52,20 @@ table.attach(button[8], 0, 1, 1, 2, nil, nil, 0, 0)
 
 separator = Gtk::HSeparator.new
 box1.pack_start(separator, false, true, 0)
-separator.show
 
 box2 = Gtk::VBox.new(false, 10)
-box2.set_border_width(10)
+box2.border_width = 10
 box1.pack_start(box2, false, true, 0)
-box2.show
 
 close = Gtk::Button.new("close")
 close.signal_connect("clicked") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
-box2.pack_start(close, true, true, 0)
-close.set_flags(Gtk::Widget::CAN_DEFAULT)
-close.grab_default
-close.show
 
-window.show
+box2.pack_start(close, true, true, 0)
+close.can_default = true
+close.grab_default
+
+window.show_all
 
 Gtk.main

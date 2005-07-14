@@ -5,7 +5,7 @@
   Copyright (C) 2004 Darren Willis, Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: tree_progress.rb,v 1.1 2004/12/27 16:32:55 mutoh Exp $
+  $Id: tree_progress.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 
@@ -18,7 +18,6 @@ if str = Gtk.check_version(2, 6, 0)
   puts str
   exit
 end
-
 
 win = Gtk::Window.new
 model = Gtk::ListStore.new(String, Float)

@@ -2,19 +2,19 @@
 =begin
   gc.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gc.rb,v 1.4 2005/03/22 17:41:28 silicio Exp $
+  $Id: gc.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Gdk::GC sample")
 window.set_default_size(300, 300)
-window.set_app_paintable(true)
+window.app_paintable = true
 window.realize
 
 drawable = window.window      
@@ -54,7 +54,8 @@ window.signal_connect("expose-event") do |win, evt|
   drawable.draw_lines(gc, [[200, 260], [220, 210], [280, 230]])
 end
 
-window.show_all
+window.show_all.signal_connect("destroy"){Gtk.main_quit}
+
 Gtk.main
 
 

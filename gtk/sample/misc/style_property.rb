@@ -2,10 +2,10 @@
 =begin
   style_property.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: style_property.rb,v 1.2 2005/03/22 17:41:28 silicio Exp $
+  $Id: style_property.rb,v 1.3 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -51,13 +51,15 @@ Gtk.init
 
 Gtk::RC.parse("./style_property.rc")
 
-win = Gtk::Window.new
+win = Gtk::Window.new("Gtk::RC sample")
 b = MyButton.new("Hello")
 b.signal_connect("clicked"){ Gtk.main_quit }
 
 p MyButton.style_properties
 
+win.set_default_size(100, 100)
 win.add(b).show_all
+win.signal_connect("destroy"){ Gtk.main_quit }
 
 # You need to call them after "Gtk::Widget#show"
 # (Or in expose event).

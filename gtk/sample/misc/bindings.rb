@@ -2,10 +2,10 @@
 =begin
   bindings.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: bindings.rb,v 1.5 2005/03/22 17:41:27 silicio Exp $
+  $Id: bindings.rb,v 1.6 2005/07/14 17:01:48 mutoh Exp $
 =end
 
 =begin
@@ -45,8 +45,8 @@ class Pager < Gtk::TextView
     super()
     @buffer = self.buffer
     load
-    self.editable = false
-    self.set_size_request(400, 400)
+    set_editable(false)
+    set_size_request(400, 400)
   end
 
   def load
@@ -66,9 +66,9 @@ vbox = Gtk::VBox.new
 hbox = Gtk::HBox.new
 pager = Pager.new(path)
 
-hbox.add button1 = Gtk::Button.new("space")
-hbox.add button2 = Gtk::Button.new("back_space")
-hbox.add button3 = Gtk::Button.new("cancel j/k")
+hbox.add(button1 = Gtk::Button.new("space"))
+hbox.add(button2 = Gtk::Button.new("back_space"))
+hbox.add(button3 = Gtk::Button.new("cancel j/k"))
 
 button1.signal_connect("clicked") do
   Pager.binding_set.activate(Gdk::Keyval::GDK_space, 0, pager)
@@ -95,10 +95,9 @@ button3.signal_connect("clicked") do
   bset.entry_clear(Gdk::Keyval::GDK_k, 0)
 end
 
-sw.add pager
-vbox.add hbox
-vbox.add sw
-window.add vbox
+sw.add(pager)
+vbox.add(hbox).add(sw)
+window.add(vbox)
 window.show_all
 
 pager.grab_focus

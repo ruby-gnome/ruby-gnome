@@ -2,25 +2,25 @@
 =begin
   itemfactory2.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: itemfactory2.rb,v 1.4 2005/03/22 17:41:28 silicio Exp $
+  *NOTE* Gtk::ItemFactory has been deprecated. Use Gtk::UIManager instead.
+
+  $Id: itemfactory2.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
-require 'gdk_pixbuf2'
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::ItemFactory2")
 window.signal_connect("destroy") do
   Gtk.main_quit
 end
 window.signal_connect("delete_event") do
   Gtk.main_quit
 end
-window.set_title("Gtk::ItemFactory")
 
 accelgroup = Gtk::AccelGroup.new
 window.add_accel_group(accelgroup)
@@ -66,8 +66,8 @@ end
 
 ifp.get_widget("/Stock/Open").sensitive = false
 vbox = Gtk::VBox.new
-vbox.pack_start(ifp.get_widget("<main>"))
-vbox.pack_start(Gtk::Label.new("Gtk::ItemFactory sample").set_size_request(400, 200))
+vbox.add(ifp.get_widget("<main>"))
+vbox.add(Gtk::Label.new("Gtk::ItemFactory sample").set_size_request(400, 200))
 window.add(vbox)
 window.show_all
 

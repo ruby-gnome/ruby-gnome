@@ -4,15 +4,15 @@
   Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME.
 
-  $Date: 2003/01/19 14:28:23 $
-  $Id: pointer_grab.rb,v 1.3 2003/01/19 14:28:23 mutoh Exp $
+  $Date: 2005/07/14 17:01:49 $
+  $Id: pointer_grab.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Pointer grab/ungrab sample")
 
 cursor = Gdk::Cursor.new(Gdk::Cursor::WATCH)
 button1 = Gtk::Button.new("Grab Window!")
@@ -31,5 +31,6 @@ end
 
 window.add(Gtk::VBox.new.add(button1).add(button2))
 window.set_default_size(200,100).show_all
+window.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main

@@ -2,16 +2,17 @@
 =begin
   label.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: label.rb,v 1.6 2005/03/22 17:41:28 silicio Exp $
+  $Id: label.rb,v 1.7 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
 win = Gtk::Window.new
+win.signal_connect("destroy"){Gtk.main_quit}
 label1 = Gtk::Label.new("_Not Use Mnemonic")
 label1.selectable = true
 label2 = Gtk::Label.new("_Use Mnemonic", true)

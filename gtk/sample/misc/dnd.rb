@@ -1,11 +1,11 @@
 =begin
   dnd.rb - Drag and Drop sample script.
 
-  Copyright (C) 2002,2003 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh<mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2003/01/30 16:16:57 $
-  $Id: dnd.rb,v 1.7 2003/01/30 16:16:57 mutoh Exp $
+  $Date: 2005/07/14 17:01:49 $
+  $Id: dnd.rb,v 1.8 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -14,8 +14,7 @@ Gtk.init
 
 class SrcWindow < Gtk::Window
   def initialize
-    super
-    set_title("Source Window")
+    super("Source Window")
     @label = Gtk::Label.new("Drag here!")
     add(@label)
     set_default_size(100, 100)
@@ -34,8 +33,7 @@ end
     
 class DestWindow < Gtk::Window
   def initialize
-    super
-    set_title("Dest Window")
+    super("Dest Window")
 
     @label = Gtk::Label.new("Drop here!")
     add(@label)
@@ -62,8 +60,8 @@ end
 win1 = SrcWindow.new
 win2 = DestWindow.new
 
-win1.show_all
-win2.show_all
+win1.show_all.signal_connect("destroy"){Gtk.main_quit}
+win2.show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main
 

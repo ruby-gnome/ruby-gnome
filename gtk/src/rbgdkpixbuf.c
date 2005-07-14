@@ -3,8 +3,8 @@
 
   rbgdkpixbuf.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2005/07/14 17:01:50 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -40,7 +40,7 @@ pixbuf_render_to_drawable(argc, argv, self)
     int i;
 
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#pixbuf instead.");
+    rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#draw_pixbuf instead.");
 #endif
 
     rb_scan_args(argc, argv, "83", &gc, &src_x, &src_y, &dest_x, &dest_y,

@@ -2,10 +2,10 @@
 =begin
   filechooser.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004, 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: filechooser.rb,v 1.3 2005/03/22 17:41:28 silicio Exp $
+  $Id: filechooser.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require "gtk2"
@@ -30,7 +30,7 @@ extra_button.signal_connect("clicked") do
   puts "extra button is clicked"
 end
 
-dialog.set_extra_widget(extra_button)
+dialog.extra_widget = extra_button
 
 filter_rb = Gtk::FileFilter.new
 filter_rb.name = "Ruby Scripts"

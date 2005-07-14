@@ -1,13 +1,13 @@
 =begin
   uimanager.rb - 
 
-  Copyright (C) 2004 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2004,2005 Masao Mutoh
 
   Original version is demos/gtk-demo/ui_manager.c.
   
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager.rb,v 1.2 2004/07/31 05:44:45 mutoh Exp $
+  $Id: uimanager.rb,v 1.3 2005/07/14 17:01:50 mutoh Exp $
 =end
 
 ui_info = %Q[
@@ -126,5 +126,8 @@ vbox.pack_start(uimanager.get_widget("/MenuBar"), false, false)
 vbox.pack_start(Gtk::Label.new("Gtk::UIManager Sample"))
 window.add(vbox)
 window.set_default_size(100, 100).show_all
+
+window.signal_connect("destroy"){Gtk.main_quit}
+
 Gtk.main
 

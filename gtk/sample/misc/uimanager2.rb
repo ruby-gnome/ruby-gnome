@@ -1,11 +1,11 @@
 =begin
   uimanager2.rb - 
 
-  Copyright (C) 2004 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2004,2005 Masao Mutoh
 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager2.rb,v 1.2 2004/07/31 05:44:45 mutoh Exp $
+  $Id: uimanager2.rb,v 1.3 2005/07/14 17:01:50 mutoh Exp $
 =end
 require 'gtk2'
 
@@ -66,6 +66,7 @@ shape_radio_actions = [
 ]
 
 window = Gtk::Window.new
+window.signal_connect("destroy"){Gtk.main_quit}
 
 actiongroup = Gtk::ActionGroup.new("Actions")
 actiongroup.add_actions(actions)
@@ -87,5 +88,6 @@ vbox.pack_start(uimanager.get_widget("/MenuBar"), false, false)
 vbox.pack_start(Gtk::Label.new("Gtk::UIManager Sample"))
 window.add(vbox)
 window.set_default_size(100, 100).show_all
+
 Gtk.main
 

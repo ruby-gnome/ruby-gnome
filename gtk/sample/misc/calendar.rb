@@ -1,10 +1,10 @@
 =begin
   calendar.rb - Gtk::Calendar sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: calendar.rb,v 1.5 2003/04/01 16:21:14 mutoh Exp $
+  $Id: calendar.rb,v 1.6 2005/07/14 17:01:48 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -14,7 +14,7 @@ Gtk.init
 cal = Gtk::Calendar.new
 w = Gtk::Window.new
 w.add(cal).show_all.signal_connect('delete_event') do
-  Gtk::main_quit
+  Gtk.main_quit
 end
 
 date = Time.new
@@ -60,4 +60,4 @@ cal.signal_connect('next_year') do
   puts "next year: #{year}"
 end
 
-Gtk::main
+Gtk.main

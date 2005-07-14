@@ -1,10 +1,10 @@
 =begin
   drawing.rb - Gtk::Drawing sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: drawing.rb,v 1.5 2003/04/01 16:21:15 mutoh Exp $
+  $Id: drawing.rb,v 1.6 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -19,7 +19,7 @@ class Canvas < Gtk::DrawingArea
   end
 
   def expose_event(w,e)
-    if ! @buffer.nil?
+    unless @buffer.nil?
       rec = e.area
       w.window.draw_drawable(@bgc, @buffer, rec.x, rec.y,
 			   rec.x, rec.y, rec.width, rec.height)
@@ -84,7 +84,6 @@ Gtk.init
 
 window = Gtk::Window.new
 window.signal_connect("destroy") { Gtk.main_quit }
-window.realize
 window.set_title("drawing test")
 
 canvas = A.new

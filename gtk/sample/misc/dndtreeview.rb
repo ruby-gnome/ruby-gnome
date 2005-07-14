@@ -1,11 +1,11 @@
 =begin
   dndtreeview.rb - Drag and Drop sample script.
 
-  Copyright (C) 2003 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2003-2005 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2003/01/30 17:07:52 $
-  $Id: dndtreeview.rb,v 1.1 2003/01/30 17:07:52 mutoh Exp $
+  $Date: 2005/07/14 17:01:49 $
+  $Id: dndtreeview.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -18,9 +18,9 @@ class TestWindow < Gtk::Window
   TARGET_TABLE = [["GTK_TREE_MODEL_ROW", 0, 0]]
 
   def initialize()
-    super()
+    super("Drag and Drop Gtk::TreeView")
+
     set_default_size(300,128)
-    set_title("Drag and Drop Gtk::TreeView")
     signal_connect("destroy") { Gtk.main_quit }
 
     data = [["Hello", "KON-NI-CHIWA"],

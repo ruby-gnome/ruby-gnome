@@ -2,55 +2,52 @@
 =begin
   buttonbox.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: buttonbox.rb,v 1.7 2005/03/22 17:41:28 silicio Exp $
+  $Id: buttonbox.rb,v 1.8 2005/07/14 17:01:48 mutoh Exp $
 =end
 
 require 'gtk2'
 
 def create_bbox_window(horizontal, title, pos, spacing, layout)
-  window = Gtk::Window.new
-  window.set_title(title)
+  window = Gtk::Window.new(title)
   window.signal_connect("delete_event") do
-    window.hide
     window.destroy
   end
+
+  box1 = Gtk::VBox.new(false, 0)
+  window.add(box1)
+
   if horizontal
     window.set_default_size(550, 60)
     window.move(150, pos)
+    bbox = Gtk::HButtonBox.new
   else
     window.set_default_size(150, 400)
     window.move(pos, 200)
-  end
-  box1 = Gtk::VBox.new(false, 0)
-  window.add box1
-  if horizontal
-    bbox = Gtk::HButtonBox.new
-  else
     bbox = Gtk::VButtonBox.new
   end
-  bbox.set_layout_style layout
-  bbox.set_spacing spacing
-  box1.set_border_width 25
+
+  bbox.layout_style = layout
+  bbox.spacing = spacing
+  box1.border_width = 25
   box1.pack_start(bbox, true, true, 0)
+
   button = Gtk::Button.new("OK")
-  bbox.add button
+  bbox.add(button)
   button.signal_connect("clicked") do
-    window.hide
     window.destroy
   end
 
   button = Gtk::Button.new("Cancel")
-  bbox.add button
+  bbox.add(button)
   button.signal_connect("clicked") do
-    window.hide
     window.destroy
   end
 
   button = Gtk::Button.new("Help")
-  bbox.add button
+  bbox.add(button)
   window.show_all
 end
 
@@ -70,27 +67,28 @@ end
 
 Gtk.init
 
-window = Gtk::Window.new
+window = Gtk::Window.new("button box")
 window.signal_connect("delete_event") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
-window.set_title("button box")
-window.set_border_width(20)
+window.border_width = 20
 
 bbox = Gtk::HButtonBox.new
 window.add(bbox)
 
 button = Gtk::Button.new("Horizontal")
-def button.clicked(*args)
+
+button.signal_connect("clicked") do
   test_hbbox
 end
-bbox.add button
+
+bbox.add(button)
 
 button = Gtk::Button.new("Vertical")
-def button.clicked(*args)
+button.signal_connect("clicked") do
   test_vbbox
 end
-bbox.add button
+bbox.add(button)
 
 window.show_all
 

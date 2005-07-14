@@ -2,10 +2,12 @@
 =begin
   entrycompletion.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: entrycompletion.rb,v 1.2 2004/05/24 17:22:57 mutoh Exp $
+  Enter "G", "t" on the entry box.
+
+  $Id: entrycompletion.rb,v 1.3 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -34,6 +36,6 @@ end
 completion.model = model
 completion.text_column = 0
 
-window.add(entry).show_all
+window.add(entry).show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main

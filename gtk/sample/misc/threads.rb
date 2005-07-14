@@ -2,10 +2,10 @@
 =begin
   threads.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: threads.rb,v 1.3 2005/03/22 17:41:28 silicio Exp $
+  $Id: threads.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -35,11 +35,11 @@ start_button.signal_connect("clicked") do
       sleep(2)
     }
     @th = nil
-    start_button.sensitive=true
+    start_button.sensitive = true
     start_button.grab_focus
-    stop_button.sensitive=false
+    stop_button.sensitive = false
   }
-  stop_button.sensitive=true
+  stop_button.sensitive = true
   stop_button.grab_focus
 end
   
@@ -48,13 +48,13 @@ stop_button.signal_connect("clicked") do
     @th.kill
     puts "killed"
     @th = nil
-    start_button.sensitive=true
+    start_button.sensitive = true
     start_button.grab_focus
-    stop_button.sensitive=false
+    stop_button.sensitive = false
   end
 end
 
-stop_button.sensitive=false
+stop_button.sensitive = false
 
 box = Gtk::VBox.new.
   set_size_request(100,100)
