@@ -2,9 +2,9 @@
 
   shapedwindow.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: shapedwindow.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: shapedwindow.rb,v 1.6 2005/07/17 16:55:27 mutoh Exp $
 
 =end
 
@@ -14,7 +14,6 @@ $root_win = nil
 
 class ShapeSampleBasic < Gtk::Window
   include Sample
-  extend SampleClass
 
   def initialize(xpm_file, x, y, px, py, type)
     super(type)

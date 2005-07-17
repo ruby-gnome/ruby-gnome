@@ -2,9 +2,9 @@
 
   layout.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: layout.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: layout.rb,v 1.6 2005/07/17 16:55:27 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -52,8 +52,7 @@ class LayoutSample < SampleWindow
     @layout.vadjustment.step_increment = 10.0
 
     @layout.set_events(Gdk::Event::EXPOSURE_MASK)
-    @layout.signal_connect("expose_event") do
-      | w, event |
+    @layout.signal_connect("expose_event") do | w, event |
       layout_expose_handler(event)
     end
 
@@ -61,7 +60,7 @@ class LayoutSample < SampleWindow
       
     for i in 0..15 do
       for j in 0..15 do
-	buf = sprintf("Button %d, %d", i, j)
+	buf = "Button #{i}, #{j}"
 	if ((i + j) % 2) != 0 then
 	  button = Gtk::Button.new(buf)
 	else
@@ -74,13 +73,13 @@ class LayoutSample < SampleWindow
     end
 
     for i in 16..1279 do
-      buf = sprintf("Button %d, %d", i, 0)
+      buf = "Button #{i}, 0"
       if (i % 2) != 0 then
 	button = Gtk::Button.new(buf)
       else
 	button = Gtk::Label.new(buf)
       end
-      @layout.put(button, 0, i*100)
+      @layout.put(button, 0, i * 100)
     end
   end
 
@@ -98,8 +97,8 @@ class LayoutSample < SampleWindow
 	  @layout.bin_window.draw_rectangle(
 			@layout.style.black_gc,
 			true,
-			10*i, 10*j, 
-			1+i%10, 1+j%10)
+			10 * i, 10 * j, 
+			1 + i % 10, 1 + j % 10)
 	end
       end
     end

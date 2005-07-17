@@ -1,3 +1,12 @@
+2005-07-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/gammacurve.rb, filesel.rb, entry.rb, sample.rb, 
+	shapedwindow.rb, colorselect.rb, testgtk.rb, checkbutton.rb, 
+	button.rb: Code clean up. Apply Gtk::Window.new(title). 
+	* src/rbgtkdialog.c: Fixed wrong argument number of Gtk::Dialog.new. 
+	* sample/testgtk/colorpreview.rb, cursors.rb, dnd.rb, handlebox.rb, 
+	liststore.rb, mainloop.rb: Removed.
+
 2005-07-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/xbm_cursor.rb, window.rb, uimanager.rb, uimanager2.rb,

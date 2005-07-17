@@ -2,8 +2,8 @@
 
   buttonbox.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
-  $Id: buttonbox.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  $Id: buttonbox.rb,v 1.6 2005/07/17 16:55:26 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -34,8 +34,8 @@ require 'sample'
 class ButtonBoxSample < SampleWindow
   def initialize
     super("Button Boxes")
-    signal_connect("destroy") do destroy end
-    self.border_width = 10
+    signal_connect("destroy"){destroy}
+    set_border_width(10)
 
     main_vbox = Gtk::VBox.new
     add(main_vbox)

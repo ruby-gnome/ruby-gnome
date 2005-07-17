@@ -2,12 +2,12 @@
 
   checkbutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
-  $Id: checkbutton.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  $Id: checkbutton.rb,v 1.6 2005/07/17 16:55:26 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/02/01 16:46:23 $
-  $Id: checkbutton.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Date: 2005/07/17 16:55:26 $
+  $Id: checkbutton.rb,v 1.6 2005/07/17 16:55:26 mutoh Exp $
 
 Original Copyright:
  
@@ -37,33 +37,31 @@ class CheckButtonSample < SampleWindow
   def initialize
     super("check buttons")
 
-    box1 = Gtk::VBox::new(false, 0)
+    box1 = Gtk::VBox.new
     add(box1)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, true, true, 0)
+    box2 = Gtk::VBox.new(false, 10)
+    box2.border_width = 10
+    box1.add(box2)
 
-    button = Gtk::CheckButton::new("button1")
-    box2.pack_start(button, true, true, 0)
+    button = Gtk::CheckButton.new("button1")
+    box2.add(button)
 
-    button = Gtk::CheckButton::new("button2")
-    box2.pack_start(button, true, true, 0)
+    button = Gtk::CheckButton.new("button2")
+    box2.add(button)
 
-    button = Gtk::CheckButton::new("button3")
-    box2.pack_start(button, true, true, 0)
+    button = Gtk::CheckButton.new("button3")
+    box2.add(button)
 
-    separator = Gtk::HSeparator::new()
-    box1.pack_start(separator, false, true, 0)
+    box1.pack_start(Gtk::HSeparator.new)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
+    box2 = Gtk::VBox.new(false, 10)
+    box2.border_width = 10
+    box1.add(box2)
 
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do destroy end
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
 
-    box2.pack_start(button, true, true, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    box2.add(button)
   end
 end

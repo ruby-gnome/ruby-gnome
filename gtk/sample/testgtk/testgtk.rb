@@ -6,7 +6,7 @@
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.12 2005/03/22 17:41:28 silicio Exp $
+  $Id: testgtk.rb,v 1.13 2005/07/17 16:55:27 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -41,7 +41,6 @@ require 'radiobutton'
 require 'buttonbox'
 require 'toolbar'
 require 'statusbar'
-require 'handlebox'
 require 'reparent'
 require 'pixmap'
 require 'tooltips'
@@ -51,7 +50,6 @@ require 'menu'
 require 'scrolledwindow'
 require 'entry'
 require 'spinbutton'
-require 'cursors'
 require 'liststore'
 require 'treestore'
 require 'colorselect'
@@ -60,11 +58,9 @@ require 'range'
 require 'rulers'
 require 'notebook'
 require 'panes'
-require 'dnd'
 require 'shapedwindow'
 require 'wmhints'
 require 'progressbar'
-require 'colorpreview'
 require 'graypreview'
 require 'selection'
 require 'gammacurve'
@@ -85,26 +81,18 @@ def create_main_window
     ["buttons", ButtonSample],
     ["check buttons", CheckButtonSample],
     ["color selection", ColorSelectionSample],
-    ["cursors", nil],
     ["dialog", DialogSample],
-    #["dnd", nil],
     ["entry", EntrySample],
-    ["event watcher", nil],  #create_event_watcher
     ["file selection", FileSelectionSample],
     ["font selection", FontSelectionSample],
     ["gamma curve", GammaCurveSample],
-    ["handle box", nil],
-    ["item factory", nil],   #create_item_factory
     ["labels", LabelSample],
     ["layout", LayoutSample],
-#    ["liststore", ListStoreSample],
-    ["liststore", nil],
     ["menus", MenuSample],
     ["modal window", nil],   #create_modal_window
     ["notebook", NotebookSample],
     ["panes", nil],
     ["pixmap", PixmapSample],
-    ["preview color", nil],
     ["preview gray", nil],
     ["progress bar", ProgressBarSample],
     ["radio buttons", RadioButtonSample],

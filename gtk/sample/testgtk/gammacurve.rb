@@ -2,9 +2,9 @@
 
   gammacurve.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: gammacurve.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: gammacurve.rb,v 1.6 2005/07/17 16:55:27 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -36,10 +36,10 @@ class GammaCurveSample < SampleWindow
   include Math
 
   def initialize
-    super("test")
+    super("Gtk::GammaCurve")
     set_border_width(10)
 
-    @curve = Gtk::GammaCurve::new()
+    @curve = Gtk::GammaCurve.new
     add(@curve)
     @count = 0
   end

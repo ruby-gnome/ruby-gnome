@@ -2,9 +2,9 @@
 
   fontselection.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: fontselection.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: fontselection.rb,v 1.6 2005/07/17 16:55:27 mutoh Exp $
 
   Rewritten by Neil Conway <neilconway@rogers.com>
 
@@ -33,24 +33,24 @@ Original Copyright:
 require 'sample'
 
 class FontSelectionSample < Gtk::FontSelectionDialog
-    include Sample
-    extend SampleClass
+  include Sample
+  extend SampleClass
 
-    def initialize
-        super('Font Selection Dialog')
-        set_window_position(Gtk::Window::POS_MOUSE)
-
-        signal_connect('destroy') {
-            destroy
-        }
-
-        ok_button.signal_connect('clicked') {
-            puts font_name
-            destroy
-        }
-
-        cancel_button.signal_connect('clicked') {
-            destroy
-        }
-    end
+  def initialize
+    super('Font Selection Dialog')
+    set_window_position(Gtk::Window::POS_MOUSE)
+    
+    signal_connect('destroy') {
+      destroy
+    }
+    
+    ok_button.signal_connect('clicked') {
+      puts font_name
+      destroy
+    }
+    
+    cancel_button.signal_connect('clicked') {
+      destroy
+    }
+  end
 end

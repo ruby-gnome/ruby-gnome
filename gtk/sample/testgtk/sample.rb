@@ -2,17 +2,13 @@
 
   sample.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: sample.rb,v 1.7 2003/02/01 16:46:23 mutoh Exp $
+  $Id: sample.rb,v 1.8 2005/07/17 16:55:27 mutoh Exp $
 
 =end
 
 require 'gtk2'
-
-class Object
-  alias :type :class  if defined?(:class)
-end
 
 module Sample
   def destroy
@@ -23,6 +19,7 @@ module Sample
     @destroyed
   end
 end
+
 module SampleClass
   def invoke
     @singleton = new if @singleton.nil? or @singleton.destroyed?
@@ -36,33 +33,30 @@ end
 
 class SampleWindow < Gtk::Window
   include Sample
+  extend SampleClass
+
   def initialize(title)
-    super()
-    set_title(title)
+    super(title)
     set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
 end
-class << SampleWindow
-  include SampleClass
-end
+
 class SampleDialog < Gtk::Dialog
   include Sample
+  extend SampleClass
+
   def initialize(title)
-    super()
-    set_title(title)
+    super(title)
     set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
-end
-class << SampleDialog
-  include SampleClass
 end
 
 def new_pixmap(filename, window, background)
-  pixmap, mask = Gdk::Pixmap::create_from_xpm(window, background, filename)
+  pixmap, mask = Gdk::Pixmap.create_from_xpm(window, background, filename)
   wpixmap = Gtk::Image.new(pixmap, mask)
 end
 
