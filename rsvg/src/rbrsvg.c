@@ -21,7 +21,11 @@
 #include <rbglib.h>
 #include <rbgobject.h>
 
-#include <librsvg/rsvg-gz.h>
+#ifdef HAVE_LIBRSVG_RSVG_GZ_H
+#  include <librsvg/rsvg-gz.h>
+#else
+#  include <librsvg/rsvg.h>
+#endif
 
 #ifdef HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H
 #  include <librsvg/librsvg-enum-types.h>
@@ -87,7 +91,12 @@ rb_rsvg_handle_new(int argc, VALUE *argv, VALUE klass)
   rb_scan_args(argc, argv, "01", &gz);
 
   if (RTEST(gz)) {
+#ifdef HAVE_LIBRSVG_RSVG_GZ_H
     handle = rsvg_handle_new_gz();
+#else
+    rb_warning("gz handling is not supported in your librsvg");
+    handle = rsvg_handle_new();
+#endif
   } else {
     handle = rsvg_handle_new();
   }

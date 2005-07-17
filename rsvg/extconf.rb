@@ -103,6 +103,7 @@ setup_win32(PACKAGE_NAME)
 
 have_func("rsvg_set_default_dpi_x_y")
 have_func("rsvg_handle_set_dpi_x_y")
+have_header("librsvg/rsvg-gz.h")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 

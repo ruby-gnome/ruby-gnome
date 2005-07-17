@@ -1,3 +1,14 @@
+2005-07-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: check system has librsvg/rsvg-gz.h header or not.
+
+	* src/rbrsvg.c: include librsvg/rsvg.h instead of
+	librsvg/rsvg-gz.h if librsvg/rsvg-gz.h is not exist.
+
+	* src/rbrsvg.c (rb_rsvg_handle_new): use rsvg_handle_new for
+	fallback if librsvg/rsvg-gz.h is not exist and we are required
+	gz handling.
+
 2005-06-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: fixed macro name. (HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H)
