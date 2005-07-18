@@ -18,6 +18,7 @@
 
 #include "rbgpui.h"
 
+#ifdef HAVE_LIBGNOMEPRINTUI_GNOME_PRINT_CONFIG_DIALOG_H
 #include <libgnomeprintui/gnome-print-config-dialog.h>
 
 #define _SELF(self) (RVAL2GOBJ(self))
@@ -37,12 +38,15 @@ gpui_config_dialog_new(int argc, VALUE *argv, VALUE self)
   G_INITIALIZE(self, gnome_print_config_dialog_new(gpc));
   return Qnil;
 }
+#endif
 
 void
 Init_gnome_print_config_dialog(VALUE mGnome)
 {
+#ifdef HAVE_LIBGNOMEPRINTUI_GNOME_PRINT_CONFIG_DIALOG_H
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PRINT_CONFIG_DIALOG,
                         "PrintConfigDialog", mGnome);
 
   rb_define_method(c, "initialize", gpui_config_dialog_new, -1);
+#endif
 }

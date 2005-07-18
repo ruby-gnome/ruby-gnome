@@ -1,3 +1,11 @@
+2005-07-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: check system has
+	  libgnomeprintui/gnome-print-config-dialog.h header or not.
+
+	* src/rbgpui-print-config-dialog.c: disable if system doesn't have
+	  libgnomeprintui/gnome-print-config-dialog.h header.
+
 2005-06-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb (mkenums): kept $makefile_created value.
