@@ -91,6 +91,14 @@ class Renderer
         @context.line_width = 10
         @context.stroke
       end
+
+      @context.save do
+        @context.move_to(90, 100)
+        @context.line_to(100, 150)
+        @context.line_to(80, 190)
+        @context.line_to(90, 100)
+        @context.fill
+      end
       
       @context.line_width = 20
       @context.line_cap = Art::PATH_STROKE_CAP_ROUND

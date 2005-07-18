@@ -1,3 +1,8 @@
+2005-07-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/to_file.rb (Renderer#draw_line): added filled line
+	  sample.
+
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp.h: showed Gnome::PrintUnitBase <-> Ruby object
