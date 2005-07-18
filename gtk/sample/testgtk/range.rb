@@ -2,9 +2,9 @@
 
   range.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: range.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: range.rb,v 1.6 2005/07/18 17:13:32 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -36,46 +36,30 @@ class RangeSample < SampleWindow
   def initialize
     super("range controls")
 
-    box1 = Gtk::VBox::new(false, 0)
-    add(box1)
-    box1.show
+    vbox = Gtk::VBox.new(false, 10)
+    add(vbox)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, true, true, 0)
-    box2.show
+    adjustment = Gtk::Adjustment.new(0.0, 0.0, 101.0, 0.1, 1.0, 1.0)
 
-    adjustment = Gtk::Adjustment::new(0.0, 0.0, 101.0, 0.1, 1.0, 1.0)
-
-    scale = Gtk::HScale::new(adjustment)
+    scale = Gtk::HScale.new(adjustment)
     scale.set_size_request(150, 50)
-    scale.set_update_policy(Gtk::UPDATE_DELAYED)
-    scale.set_digits(1)
-    scale.set_draw_value(true)
-    box2.pack_start(scale, true, true, 0)
-    scale.show
+    scale.update_policy = Gtk::UPDATE_DELAYED
+    scale.digits = 1
+    scale.draw_value = true
 
-    scrollbar = Gtk::HScrollbar::new(adjustment)
-    scrollbar.set_update_policy(Gtk::UPDATE_CONTINUOUS)
-    box2.pack_start(scrollbar, true, true, 0)
-    scrollbar.show
+    vbox.add(scale)
 
-    separator = Gtk::HSeparator::new()
-    box1.pack_start(separator, false, true, 0)
-    separator.show
+    scrollbar = Gtk::HScrollbar.new(adjustment)
+    scrollbar.update_policy = Gtk::UPDATE_CONTINUOUS
+    vbox.add(scrollbar)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
-    box2.show
+    vbox.add(Gtk::HSeparator.new)
 
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do
-      destroy
-    end
-    box2.pack_start(button, true, true, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
+
+    vbox.pack_start(button, true, true, 0)
+    button.can_default = true
     button.grab_default
-    button.show
   end
 end

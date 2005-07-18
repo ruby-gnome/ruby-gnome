@@ -2,11 +2,11 @@
 
   pixmap.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/02/01 16:46:23 $
-  $Id: pixmap.rb,v 1.4 2003/02/01 16:46:23 mutoh Exp $
+  $Date: 2005/07/18 17:13:32 $
+  $Id: pixmap.rb,v 1.5 2005/07/18 17:13:32 mutoh Exp $
 
 Original Copyright:
  
@@ -35,41 +35,24 @@ require 'sample'
 class PixmapSample < SampleWindow
   def initialize
     super("pixmap")
-    set_border_width(0)
-    realize
 
-    box1 = Gtk::VBox::new(false, 0)
-    add(box1)
+    vbox = Gtk::VBox.new(false, 0)
+    add(vbox)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, true, true, 0)
+    button = Gtk::Button.new
+    vbox.pack_start(button, false, false, 10)
 
-    button = Gtk::Button::new()
-    box2.pack_start(button, false, false, 0)
+    label = Gtk::Label.new("Pixmap\ntest")
+    boxbutton = Gtk::HBox.new(false, 0)
+    boxbutton.border_width = 2
+    boxbutton.add(Gtk::Image.new("test.xpm"))
+    boxbutton.add(label)
+    button.add(boxbutton)
 
-    style = button.style
+    vbox.add(Gtk::HSeparator.new)
 
-    pixmapwid = new_pixmap("test.xpm", window, style.bg(Gtk::STATE_NORMAL))
-
-    label = Gtk::Label::new("Pixmap\ntest")
-    box3 = Gtk::HBox::new(false, 0)
-    box3.set_border_width(2)
-    box3.add(pixmapwid)
-    box3.add(label)
-    button.add(box3)
-
-    separator = Gtk::HSeparator::new()
-    box1.pack_start(separator, false, true, 0)
-
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
-
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do destroy end
-    box2.pack_start(button, true, true, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
-    button.grab_default
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
+    vbox.pack_start(button, false, false, 10)
   end
 end

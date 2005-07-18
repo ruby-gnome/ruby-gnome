@@ -2,11 +2,11 @@
 
   radiobutton.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/02/01 16:46:23 $
-  $Id: radiobutton.rb,v 1.6 2003/02/01 16:46:23 mutoh Exp $
+  $Date: 2005/07/18 17:13:32 $
+  $Id: radiobutton.rb,v 1.7 2005/07/18 17:13:32 mutoh Exp $
 
 Original Copyright:
  
@@ -35,35 +35,27 @@ require 'sample'
 class RadioButtonSample < SampleWindow
   def initialize
     super("radio buttons")
+    set_border_width(10)
 
-    box1 = Gtk::VBox::new(false, 0)
-    add(box1)
+    vbox = Gtk::VBox.new(false, 10)
+    add(vbox)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, true, true, 0)
+    button1 = Gtk::RadioButton.new("button1")
+    vbox.add(button1)
 
-    button1 = Gtk::RadioButton::new("button1")
-    box2.pack_start(button1, true, true, 0)
+    button2 = Gtk::RadioButton.new(button1, "button2")
+    vbox.add(button2)
 
-    button2 = Gtk::RadioButton::new(button1, "button2")
-    box2.pack_start(button2, true, true, 0)
+    button3 = Gtk::RadioButton.new(button1, "button3")
+    vbox.add(button3)
 
-    button3 = Gtk::RadioButton::new(button1, "button3")
-    box2.pack_start(button3, true, true, 0)
+    vbox.add(Gtk::HSeparator.new)
 
-    separator = Gtk::HSeparator::new()
-    box1.pack_start(separator, false, true, 0)
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
+    vbox.pack_start(button, false, true)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
-
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do destroy end
-    box2.pack_start(button, true, true, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    button.can_default = true
     button.grab_default
-    button.show_all
   end
 end

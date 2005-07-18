@@ -2,9 +2,9 @@
 
   notebook.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: notebook.rb,v 1.10 2004/03/05 16:24:30 mutoh Exp $
+  $Id: notebook.rb,v 1.11 2005/07/18 17:13:32 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -86,20 +86,21 @@ class NotebookSample < SampleWindow
   def initialize
     super("notebook")
 
-    box1 = Gtk::VBox.new(false, 0)
-    add(box1)
+    vbox = Gtk::VBox.new(false, 0)
+    add(vbox)
 
-    @notebook = Gtk::Notebook.new()
+    @notebook = Gtk::Notebook.new
     @notebook.signal_connect("switch_page") do |widget, page, num_page|
       unless destroyed?
 	page_switch(widget, page, num_page)
       end
     end
-    @notebook.set_tab_pos(Gtk::POS_TOP)
-    box1.pack_start(@notebook, true, true, 0)
-    @notebook.set_border_width(10)
+    @notebook.tab_pos = Gtk::POS_TOP
+    vbox.add(@notebook)
+    @notebook.border_width = 10
 
     @notebook.realize
+
     @book_open, @book_open_mask =
       Gdk::Pixmap::create_from_xpm_d(@notebook.window, nil, $book_open_xpm)
     @book_closed, @book_closed_mask =
@@ -107,72 +108,67 @@ class NotebookSample < SampleWindow
 
     create_pages(1, 5)
 
-    separator = Gtk::HSeparator.new()
-    box1.pack_start(separator, false, true, 10)
-
-    box2 = Gtk::HBox.new(false, 5)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
+    vbox.add(Gtk::HSeparator.new)
 
     cbutton1 = Gtk::CheckButton.new("popup menu")
-    box2.pack_start(cbutton1, true, false, 0)
-    cbutton1.signal_connect("clicked") do
-      @notebook.set_enable_popup(cbutton1.active?)
-    end
+    vbox.add(cbutton1)
+    cbutton1.signal_connect("clicked"){
+      @notebook.enable_popup = cbutton1.active?
+    }
 
-    box2 = Gtk::HBox.new(false, 5)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
+    hbox = Gtk::HBox.new(false, 5)
+    hbox.border_width = 10
+    vbox.pack_start(hbox, false, false, 0)
 
     label = Gtk::Label.new("Notebook Style :")
-    box2.pack_start(label, false, true, 0)
+    hbox.add(label)
 
     omenu = build_option_menu([
       OptionMenuItem.new("Standard", proc { standard_notebook }),
       OptionMenuItem.new("No tabs",  proc { notabs_notebook }),
       OptionMenuItem.new("Scrollable", proc { scrollable_notebook }) ], 0)
-    box2.pack_start(omenu, false, true, 0)
+
+    hbox.add(omenu)
 
     button = Gtk::Button.new("Show all Pages")
-    box2.pack_start(button, false, true, 0)
-    button.signal_connect('clicked') do
+
+    hbox.add(button)
+    button.signal_connect('clicked'){
       @notebook.each do |w|
 	w.show
       end
-    end
+    }
 
-    box2 = Gtk::HBox.new(true, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
+    hbox = Gtk::HBox.new(true, 10)
+    hbox.set_border_width(10)
+    vbox.pack_start(hbox, false, true, 0)
 
     button = Gtk::Button.new("prev")
-    button.signal_connect("clicked") do
+    button.signal_connect("clicked"){
       @notebook.prev_page
-    end
-    box2.pack_start(button, true, true, 0)
+    }
+    hbox.pack_start(button, true, true, 0)
 
     button = Gtk::Button.new("next")
-    button.signal_connect("clicked") do
+    button.signal_connect("clicked"){
       @notebook.next_page
-    end
-    box2.pack_start(button, true, true, 0)
+    }
+    hbox.pack_start(button, true, true, 0)
 
     button = Gtk::Button.new("rotate")
-    button.signal_connect("clicked") do
-      @notebook.set_tab_pos((@notebook.tab_pos.to_i + 1) % 4)
-    end
-    box2.pack_start(button, true, true, 0)
+    button.signal_connect("clicked"){
+      @notebook.tab_pos = (@notebook.tab_pos.to_i + 1) % 4
+    }
+    hbox.pack_start(button, true, true, 0)
 
-    separator = Gtk::HSeparator.new()
-    box1.pack_start(separator, false, true, 5)
+    vbox.add(Gtk::HSeparator.new)
 
     button = Gtk::Button.new("close")
-    button.set_border_width(5)
-    button.signal_connect("clicked") do
-      destroy
-    end
-    box1.pack_start(button, false, false, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    button.signal_connect("clicked"){destroy}
+
+    vbox.pack_start(button, false, false, 5)
+
+    button.can_default = true
     button.grab_default
   end
 
@@ -208,10 +204,10 @@ class NotebookSample < SampleWindow
       buffer = "Page #{i}"
 
       child = Gtk::Frame.new(buffer)
-      child.set_border_width(10)
+      child.border_width = 10
 
       vbox = Gtk::VBox.new(true, 0)
-      vbox.set_border_width(10)
+      vbox.border_width = 10
       child.add(vbox)
 
       hbox = Gtk::HBox.new(true, 0)
@@ -219,32 +215,32 @@ class NotebookSample < SampleWindow
 
       button1 = Gtk::CheckButton.new("Fill Tab")
       hbox.pack_start(button1, true, true, 5)
-      button1.set_active(true)
-      button1.signal_connect('toggled') do
+      button1.active = true
+      button1.signal_connect('toggled'){
 	expand, fill, pack = @notebook.query_tab_label_packing(child)
 	@notebook.set_tab_label_packing(child, expand, button1.active?, pack)
-      end
+      }
 
       button2 = Gtk::CheckButton.new("Expand Tab")
       hbox.pack_start(button2, true, true, 5)
-      button2.signal_connect('toggled') do
+      button2.signal_connect('toggled'){
 	expand, fill, pack = @notebook.query_tab_label_packing(child)
 	@notebook.set_tab_label_packing(child, button2.active?, fill, pack)
-      end
+      }
 
       button3 = Gtk::CheckButton.new("Pack end")
       hbox.pack_start(button3, true, true, 5)
-      button3.signal_connect('toggled') do
+      button3.signal_connect('toggled'){
 	expand, fill, pack = @notebook.query_tab_label_packing(child)
 	@notebook.set_tab_label_packing(child, expand, fill,
 				       if button3.active? then Gtk::PACK_END else Gtk::PACK_START end)
-      end
+      }
 
       button = Gtk::Button.new("Hide Page")
       vbox.pack_end(button, false, false, 5)
-      button.signal_connect('clicked') do
+      button.signal_connect('clicked'){
 	child.hide
-      end
+      }
 
       child.show_all
 

@@ -2,9 +2,9 @@
 
   progressbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: progressbar.rb,v 1.8 2003/05/24 15:30:59 mutoh Exp $
+  $Id: progressbar.rb,v 1.9 2005/07/18 17:13:32 mutoh Exp $
 
   Rewritten by Minoru Inachi <inachi@earth.interq.or.jp>
 
@@ -36,14 +36,14 @@ class ProgressBarSample < SampleDialog
 
   def initialize
     super("Gtk::ProgressBar")
-    self.border_width = 10
+    set_border_width(10)
 
     vbox1 = Gtk::VBox.new(false, 5)
     vbox1.border_width = 10
-    self.vbox.pack_start(vbox1, false, true, 0)
+    vbox.add(vbox1)
 
     frame = Gtk::Frame.new("Progress")
-    vbox1.pack_start(frame, false, true, 0)
+    vbox1.add(frame)
 
     vbox2 = Gtk::VBox.new(false, 5)
     frame.add(vbox2)
@@ -53,7 +53,7 @@ class ProgressBarSample < SampleDialog
 
     @pbar = Gtk::ProgressBar.new
     align.add(@pbar)
-    @timer = Gtk::timeout_add(100) do progress_timeout end
+    @timer = Gtk.timeout_add(100){progress_timeout}
 
     align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
     vbox2.pack_start(align, false, false, 5);
@@ -61,18 +61,18 @@ class ProgressBarSample < SampleDialog
     hbox = Gtk::HBox.new(false, 5)
     align.add(hbox)
     label = Gtk::Label.new("Label updated by user :")
-    hbox.pack_start(label, false, true, 0)
+    hbox.add(label)
     @label = Gtk::Label.new("")
-    hbox.pack_start(@label, false, true, 0)
+    hbox.add(@label)
 
     frame = Gtk::Frame.new("Options")
-    vbox1.pack_start(frame, false, true, 0)
+    vbox1.add(frame)
 
     vbox2 = Gtk::VBox.new(false, 5)
     frame.add(vbox2)
 
     tab = Gtk::Table.new(3, 2, false)
-    vbox2.pack_start(tab, false,true, 0)
+    vbox2.add(tab)
 
     label = Gtk::Label.new("Orientation :");
     tab.attach(label, 0, 1, 0, 1,
@@ -90,7 +90,7 @@ class ProgressBarSample < SampleDialog
     tab.attach(hbox, 1, 2, 0, 1,
 		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
 		5, 5);
-    hbox.pack_start(@omenu1)
+    hbox.add(@omenu1)
        
     check = Gtk::CheckButton.new("Show text")
     check.signal_connect("clicked") do |w| toggle_show_text(w) end
@@ -119,26 +119,26 @@ class ProgressBarSample < SampleDialog
       
     adj = Gtk::Adjustment.new(0.5, 0, 1, 0.1, 0.1, 0)
     @x_align_spin = Gtk::SpinButton.new(adj, 0, 1)
-    adj.signal_connect("value_changed") do adjust_align end
+    adj.signal_connect("value_changed"){adjust_align}
     hbox.pack_start(@x_align_spin, false, true, 0)
-    @x_align_spin.set_sensitive(false)
+    @x_align_spin.sensitive = false
 
     label = Gtk::Label.new("y :")
     hbox.pack_start(label, false, true, 5)
 
     adj = Gtk::Adjustment.new(0.5, 0, 1, 0.1, 0.1, 0)
     @y_align_spin = Gtk::SpinButton.new(adj, 0, 1)
-    adj.signal_connect("value_changed") do adjust_align end
+    adj.signal_connect("value_changed"){adjust_align}
     hbox.pack_start(@y_align_spin, false, true, 0)
-    @y_align_spin.set_sensitive(false)
+    @y_align_spin.sensitive = false
 
     button = Gtk::Button.new("close")
-    button.signal_connect("clicked") do
+    button.signal_connect("clicked"){
       Gtk::timeout_remove(@timer)
       destroy
-    end
-    button.flags |= Gtk::Widget::CAN_DEFAULT
-    self.action_area.pack_start(button)
+    }
+    button.can_default = true
+    self.action_area.add(button)
     button.grab_default
   end
 
@@ -153,7 +153,7 @@ class ProgressBarSample < SampleDialog
       i -= 1
     end
 
-    @pbar.set_orientation(i)
+    @pbar.orientation = i
   end
 
   private
@@ -161,15 +161,15 @@ class ProgressBarSample < SampleDialog
     new_val = @pbar.fraction + 0.05
     new_val = 0.0 if new_val > 1.0
     @pbar.fraction = new_val
-    @label.set_text("#{(new_val * 100).to_i}")
+    @label.text = "#{(new_val * 100).to_i}"
     true
   end
 
   private
   def toggle_show_text(cbutton)
-    @pbar.set_show_text(cbutton.active?)
-    @x_align_spin.set_sensitive(cbutton.active?)
-    @y_align_spin.set_sensitive(cbutton.active?)
+    @pbar.show_text = cbutton.active?
+    @x_align_spin.sensitive = cbutton.active?
+    @y_align_spin.sensitive = cbutton.active?
   end
 
   private

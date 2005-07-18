@@ -2,9 +2,9 @@
 
   reparent.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: reparent.rb,v 1.5 2003/02/01 16:46:23 mutoh Exp $
+  $Id: reparent.rb,v 1.6 2005/07/18 17:13:33 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -36,74 +36,56 @@ class ReparentSample < SampleWindow
   def initialize
     super("reparent")
 
-    box1 = Gtk::VBox::new(false, 0)
-    add(box1)
-    box1.show
+    vbox = Gtk::VBox.new(false, 0)
+    add(vbox)
 
-    box2 = Gtk::HBox::new(false, 5)
+    box2 = Gtk::HBox.new(false, 5)
     box2.set_border_width(10)
-    box1.pack_start(box2, true, true, 0)
-    box2.show
+    vbox.pack_start(box2, true, true, 0)
 
-    label = Gtk::Label::new("Hello World")
+    label = Gtk::Label.new("Hello World")
 
-    frame = Gtk::Frame::new("Frame 1")
+    frame = Gtk::Frame.new("Frame 1")
     box2.pack_start(frame, true, true, 0)
-    frame.show
 
-    framebox1 = Gtk::VBox::new(false, 5)
-    framebox1.set_border_width(5)
+    framebox1 = Gtk::VBox.new(false, 5)
+    framebox1.border_width = 5
     frame.add(framebox1)
-    framebox1.show
 
-    button = Gtk::Button::new("switch")
-    button.signal_connect("clicked") do
+    button = Gtk::Button.new("switch")
+    button.signal_connect("clicked"){
       label.reparent(framebox1)
-    end
+    }
     framebox1.pack_start(button, false, true, 0)
-    button.show
 
-    framebox1.pack_start(label, false, true, 0)
-    label.signal_connect("parent_set") do |child, old_parent|
-      print("set_parent for \"#{child.class}\":")
-      print(" new parent: \"#{if child.parent then child.parent.class else 'NULL' end}\",")
-      print(" old parent: \"#{if old_parent then old_parent.class else 'NULL' end}\",")
-      print(" data: 42\n")
-    end
-    label.show
+    framebox1.add(label)
+    label.signal_connect("parent_set"){ |child, old_parent|
+      puts "set_parent for \"#{child.class}\":"
+      puts " new parent: \"#{if child.parent then child.parent.class else 'NULL' end}\","
+      puts " old parent: \"#{if old_parent then old_parent.class else 'NULL' end}\","
+      puts " data: 42\n"
+    }
 
-    frame = Gtk::Frame::new("Frame 2")
+    frame = Gtk::Frame.new("Frame 2")
     box2.pack_start(frame, true, true, 0)
-    frame.show
 
-    framebox2 = Gtk::VBox::new(false, 5)
-    framebox2.set_border_width(5)
+    framebox2 = Gtk::VBox.new(false, 5)
+    framebox2.border_width = 5
     frame.add(framebox2)
-    framebox2.show
 
-    button = Gtk::Button::new("switch")
-    button.signal_connect("clicked") do
+    button = Gtk::Button.new("switch")
+    button.signal_connect("clicked"){
       label.reparent(framebox2)
-    end
+    }
     framebox2.pack_start(button, false, true, 0)
-    button.show
 
-    separator = Gtk::HSeparator::new()
-    box1.pack_start(separator, false, true, 0)
-    separator.show
+    vbox.pack_start(Gtk::HSeparator.new, false, true)
 
-    box2 = Gtk::VBox::new(false, 10)
-    box2.set_border_width(10)
-    box1.pack_start(box2, false, true, 0)
-    box2.show
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
 
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do
-      destroy
-    end
-    box2.pack_start(button, true, true, 0)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    vbox.pack_start(button, false, true, 10)
+    button.can_default = true
     button.grab_default
-    button.show
   end
 end
