@@ -1,3 +1,16 @@
+2005-07-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/sample.rb, wmhints.rb, toolbar.rb, 
+	tooltips.rb, testgtk.rb, statusbar.rb: 
+	Code clean up. Apply Gtk::Window.new(title). 
+	* tree_minus.xbm, tree_minus.xpm, tree_plus.xbm, tree_plus.xpm, 
+	line-arrow.xbm, line-wrap.xbm, circles.xpm: Removed.
+
+2005-07-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/shapedwindow.rb, scrolledwindow.rb, 
+	savedposition.rb: Code clean up. Apply Gtk::Window.new(title).
+
 2005-07-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/gammacurve.rb, filesel.rb, entry.rb, sample.rb, 

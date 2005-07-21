@@ -4,7 +4,7 @@
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: sample.rb,v 1.8 2005/07/17 16:55:27 mutoh Exp $
+  $Id: sample.rb,v 1.9 2005/07/21 17:47:19 mutoh Exp $
 
 =end
 
@@ -22,6 +22,7 @@ end
 
 module SampleClass
   def invoke
+    @singleton = nil unless defined? @singleton
     @singleton = new if @singleton.nil? or @singleton.destroyed?
     unless @singleton.visible?
       @singleton.show_all
@@ -37,7 +38,6 @@ class SampleWindow < Gtk::Window
 
   def initialize(title)
     super(title)
-    set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
@@ -49,23 +49,17 @@ class SampleDialog < Gtk::Dialog
 
   def initialize(title)
     super(title)
-    set_border_width(0)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end
 end
 
-def new_pixmap(filename, window, background)
-  pixmap, mask = Gdk::Pixmap.create_from_xpm(window, background, filename)
-  wpixmap = Gtk::Image.new(pixmap, mask)
-end
-
 OptionMenuItem = Struct.new("OptionMenuItem", :name, :block)
 
 def build_option_menu(items, history)
-  omenu = Gtk::OptionMenu.new()
+  omenu = Gtk::OptionMenu.new
 
-  menu = Gtk::Menu.new()
+  menu = Gtk::Menu.new
   group = nil
 
   items.size.times do |i|
@@ -75,12 +69,12 @@ def build_option_menu(items, history)
     end
     group = menu_item.group
     menu.append(menu_item)
-    menu_item.set_active(true) if i == history
+    menu_item.active = true if i == history
     menu_item.show
   end
 
-  omenu.set_menu(menu)
-  omenu.set_history(history)
+  omenu.menu = menu
+  omenu.history = history
 
   omenu
 end

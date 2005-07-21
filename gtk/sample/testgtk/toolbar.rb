@@ -2,10 +2,10 @@
 
   toolbar.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Id: toolbar.rb,v 1.6 2003/02/22 17:54:42 mutoh Exp $
+  $Id: toolbar.rb,v 1.7 2005/07/21 17:47:19 mutoh Exp $
 
 Original Copyright:
  
@@ -34,64 +34,49 @@ require 'sample'
 class ToolbarSample < SampleWindow
   def initialize
     super("Toolbar test")
-    set_border_width(0)
-    realize
 
-    toolbar = Gtk::Toolbar::new
+    toolbar = Gtk::Toolbar.new
 
     toolbar.append("Horizontal", "Horizontal toolbar layout",
-                        "Toolbar/Horizontal",
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_orientation(Gtk::ORIENTATION_HORIZONTAL)
-    end
+		   "Toolbar/Horizontal", Gtk::Image.new("test.xpm")){
+      toolbar.orientation = Gtk::ORIENTATION_HORIZONTAL
+    }
     toolbar.append("Vertical", "Vertical toolbar layout",
-                        "Toolbar/Vertical",
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_orientation(Gtk::ORIENTATION_VERTICAL)
-    end
+		   "Toolbar/Vertical", Gtk::Image.new("test.xpm")){
+      toolbar.orientation = Gtk::ORIENTATION_VERTICAL
+    }
 
     toolbar.append_space
 
     toolbar.append("Icons", "Only show toolbar icons",
-                        "Toolbar/IconsOnly",
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_toolbar_style(Gtk::Toolbar::ICONS)
-    end
+		   "Toolbar/IconsOnly", Gtk::Image.new("test.xpm")){
+      toolbar.toolbar_style = Gtk::Toolbar::ICONS
+    }
     toolbar.append("Text", "Only show toolbar text", "Toolbar/TextOnly",
-                        new_pixmap("test.xpm", window,
-                                    style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_toolbar_style(Gtk::Toolbar::TEXT)
-    end
+		   Gtk::Image.new("test.xpm")){
+      toolbar.toolbar_style = Gtk::Toolbar::TEXT
+    }
     toolbar.append("Both", "Show toolbar icons and text", "Toolbar/Both",
-                        new_pixmap("test.xpm", window,
-                                    style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_toolbar_style(Gtk::Toolbar::BOTH)
-    end
+                   Gtk::Image.new("test.xpm")){
+      toolbar.toolbar_style = Gtk::Toolbar::BOTH
+    }
 
     toolbar.append_space
 
-    entry = Gtk::Entry::new()
-    entry.show
-    toolbar.append(entry, "This is an unusable GtkEntry ;)",
-                          "Hey don't click me!!!")
+    toolbar.append(Gtk::Entry.new, "This is an unusable Gtk::Entry ;)",
+		   "Hey don't click me!!!")
 
     toolbar.append_space
 
     toolbar.append("Enable", "Enable tooltips", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_tooltips(true)
-    end
+		   Gtk::Image.new("test.xpm")){
+      toolbar.tooltips = true
+    }
     toolbar.append("Disable", "Disable tooltips", nil,
-                        new_pixmap("test.xpm", window,
-                                   style.bg(Gtk::STATE_NORMAL)), nil) do
-      toolbar.set_tooltips(false)
-    end
+		   Gtk::Image.new("test.xpm")){
+      toolbar.tooltips = false
+    }
 
     add(toolbar)
-    toolbar.show
   end
 end

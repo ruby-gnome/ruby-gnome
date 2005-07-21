@@ -6,7 +6,7 @@
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.14 2005/07/18 17:13:33 mutoh Exp $
+  $Id: testgtk.rb,v 1.15 2005/07/21 17:47:19 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -110,14 +110,10 @@ def create_main_window
   box1 = Gtk::VBox.new(false, 0)
   window.add(box1)
 
-  buffer = "Gtk+ v#{Gtk::MAJOR_VERSION}.#{Gtk::MINOR_VERSION}.#{Gtk::MICRO_VERSION}"
-
-  label = Gtk::Label.new(buffer)
+  label = Gtk::Label.new("Gtk+ v#{Gtk::MAJOR_VERSION}.#{Gtk::MINOR_VERSION}.#{Gtk::MICRO_VERSION}")
   box1.pack_start(label, false, false, 0)
 
-  buffer = "Ruby/GTK2 v#{Gtk::BINDING_VERSION.join(".")}"
-
-  label = Gtk::Label.new(buffer)
+  label = Gtk::Label.new("Ruby/GTK2 v#{Gtk::BINDING_VERSION.join(".")}")
   box1.pack_start(label, false, false, 0)
 
   scrolled_window = Gtk::ScrolledWindow.new(nil, nil)
@@ -143,22 +139,14 @@ def create_main_window
     box2.pack_start(button, true, true, 0)
   end
 
-  separator = Gtk::HSeparator.new
-  box1.pack_start(separator, false, true, 0)
-
-  box2 = Gtk::VBox.new(false, 10)
-  box2.set_border_width(10)
-  box1.pack_start(box2, false, true, 0)
+  box1.pack_start(Gtk::HSeparator.new, false, true, 0)
 
   button = Gtk::Button.new("close")
   button.signal_connect("clicked") do
     window.destroy
     Gtk.main_quit
   end
-  box2.pack_start(button, true, true, 0)
-  button.set_flags(Gtk::Widget::CAN_DEFAULT)
-  button.grab_default
-
+  box1.pack_start(button, false, true, 5)
   window.show_all
 end
 
@@ -170,7 +158,7 @@ def main
 end
 
 if $DEBUG
-  STDERR.sync = true
+  $stderr.sync = true
   Thread.start do
     loop do
       STDERR.print("+")
@@ -178,11 +166,11 @@ if $DEBUG
       sleep(1)
     end
   end
-  STDERR.puts("#{$0}: started GC-thread for debugging.")
+  $stderr.puts("#{$0}: started GC-thread for debugging.")
 
   # timeout
   Gtk.timeout_add(1000) do
-    STDERR.print("*")
+    $stderr.print("*")
     true
   end
 end

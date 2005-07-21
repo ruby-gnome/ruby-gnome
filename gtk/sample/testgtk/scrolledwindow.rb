@@ -2,11 +2,11 @@
 
   scrolledwindow.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
-  $Date: 2003/05/04 03:49:58 $
-  $Id: scrolledwindow.rb,v 1.6 2003/05/04 03:49:58 mutoh Exp $
+  $Date: 2005/07/21 17:47:19 $
+  $Id: scrolledwindow.rb,v 1.7 2005/07/21 17:47:19 mutoh Exp $
 
 Original Copyright:
  
@@ -37,35 +37,30 @@ class ScrolledWindowSample < SampleDialog
     super("dialog")
 
     scrolled_window = Gtk::ScrolledWindow.new
-    scrolled_window.set_border_width(10)
+    scrolled_window.border_width = 10
     scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
                                Gtk::POLICY_AUTOMATIC)
-    vbox.pack_start(scrolled_window, true, true, 0)
-    scrolled_window.show
+    vbox.add(scrolled_window)
 
     table = Gtk::Table.new(20, 20, false)
-    table.set_row_spacings(10)
-    table.set_column_spacings(10)
+    table.row_spacings = 10
+    table.column_spacings = 10
     scrolled_window.add_with_viewport(table)
-    table.set_focus_hadjustment(scrolled_window.hadjustment)
-    table.set_focus_vadjustment(scrolled_window.vadjustment)
-    table.show
+
+    table.focus_hadjustment = scrolled_window.hadjustment
+    table.focus_vadjustment = scrolled_window.vadjustment
 
     for i in 0..19
       for j in 0..19
-        buffer = sprintf("button (%d,%d)\n", i, j)
+        buffer = "button (#{i},#{j})"
         button = Gtk::ToggleButton.new(buffer)
-        table.attach(button, i, i+1, j, j+1)
-        button.show
+        table.attach(button, i, i + 1, j, j + 1)
       end
     end
 
-    button = Gtk::Button::new("close")
-    button.signal_connect("clicked") do destroy end
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    button = Gtk::Button.new("close")
+    button.signal_connect("clicked"){destroy}
     action_area.pack_start(button, true, true, 0)
-    button.grab_default
-    button.show
 
     set_default_size(300, 300)
   end

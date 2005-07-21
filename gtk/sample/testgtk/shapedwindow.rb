@@ -4,26 +4,31 @@
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: shapedwindow.rb,v 1.6 2005/07/17 16:55:27 mutoh Exp $
+  $Id: shapedwindow.rb,v 1.7 2005/07/21 17:47:19 mutoh Exp $
 
 =end
 
 require 'sample'
 
-$root_win = nil
-
 class ShapeSampleBasic < Gtk::Window
   include Sample
+  extend SampleClass
+
+  @@root_win = nil
 
   def initialize(xpm_file, x, y, px, py, type)
     super(type)
-    set_border_width(0)
     @destroyed = false
-    signal_connect("destroy") do destroy end
+    signal_connect("destroy"){destroy}
+
     realize
+
+    @@root_win = Gdk::Window.default_root_window unless @@root_win
+
     window.set_events(window.events | Gdk::Event::BUTTON_MOTION_MASK |
 	       Gdk::Event::POINTER_MOTION_HINT_MASK |
 	       Gdk::Event::BUTTON_PRESS_MASK)
+
     signal_connect("button_press_event") do |w, event|
       if (event.event_type == Gdk::Event::BUTTON_PRESS)
 	@x = event.x
@@ -41,7 +46,7 @@ class ShapeSampleBasic < Gtk::Window
       Gdk.pointer_ungrab(0)
     end
     signal_connect("motion_notify_event") do
-      xp, yp, mask = $root_win.pointer
+      xp, yp, mask = @@root_win.pointer
       move(xp  - @x, yp  - @y)
     end
 
@@ -52,16 +57,14 @@ class ShapeSampleBasic < Gtk::Window
     fixed = Gtk::Fixed.new
     fixed.set_size_request(100, 100)
     add(fixed)
-    fixed.show
 
-    realize
     gdk_pixmap, gdk_pixmap_mask =
       Gdk::Pixmap::create_from_xpm(window,
 				   style.bg(Gtk::STATE_NORMAL),
 				   xpm_file)
     pixmap = Gtk::Image.new(gdk_pixmap, gdk_pixmap_mask)
+
     fixed.put(pixmap, px, py)
-    pixmap.show
 
     shape_combine_mask(gdk_pixmap_mask, px, py)
   end
@@ -89,8 +92,6 @@ end
 ShapesSample = Class.new
 class << ShapesSample
   def invoke
-#    $root_win = Gdk::Window::foreign_new(Gdk::Window.root_window()) if ! $root_win
-    $root_win = Gdk::Window.default_root_window if ! $root_win
     ShapeSampleModeller.invoke
     ShapeSampleSheets.invoke
     ShapeSampleRings.invoke

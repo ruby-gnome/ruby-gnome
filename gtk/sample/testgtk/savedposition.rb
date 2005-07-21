@@ -2,9 +2,9 @@
 
   savedposition.rb - a part of testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: savedposition.rb,v 1.6 2003/02/01 16:46:23 mutoh Exp $
+  $Id: savedposition.rb,v 1.7 2005/07/21 17:47:19 mutoh Exp $
 
   Rewritten by TAKAHASHI Hitoshi <thitoshi@ne.scphys.kyoto-u.ac.jp>
 
@@ -39,69 +39,49 @@ class SavedPositionSample < SampleWindow
     super("Saved Position")
     move(Pos[0], Pos[1])
     set_default_size(200, 100)
+    set_border_width = 5
 
-    main_vbox = Gtk::VBox::new(false, 5)
-    main_vbox.set_border_width(0)
-    add(main_vbox)
-    main_vbox.show
+    vbox = Gtk::VBox.new
+    add(vbox)
 
-    vbox = Gtk::VBox::new(false, 5)
-    vbox.set_border_width(10)
-    main_vbox.pack_start(vbox, true, true, 0)
-    vbox.show
+    hbox1 = Gtk::HBox.new
+    hbox1.border_width = 5
+    vbox.add(hbox1)
 
-    hbox = Gtk::HBox::new(false, 0)
-    hbox.set_border_width(5)
-    vbox.pack_start(hbox, false, true, 0)
-    hbox.show
-
-    label = Gtk::Label::new("X Origin : ")
+    label = Gtk::Label.new("X Origin : ")
     label.set_alignment(0, 0.5)
-    hbox.pack_start(label, false, true, 0)
-    label.show
+    hbox1.add(label)
 
-    x_label = Gtk::Label::new("")
-    hbox.pack_start(x_label, true, true, 0)
-    x_label.show
+    x_label = Gtk::Label.new("")
+    hbox1.add(x_label)
 
-    hbox = Gtk::HBox::new(false, 0)
-    hbox.set_border_width(5)
-    vbox.pack_start(hbox, false, true, 0)
-    hbox.show
+    hbox2 = Gtk::HBox.new
+    hbox2.set_border_width(5)
+    vbox.add(hbox2)
 
-    label = Gtk::Label::new("Y Origin : ")
+    label = Gtk::Label.new("Y Origin : ")
     label.set_alignment(0, 0.5)
-    hbox.pack_start(label, false, true, 0)
-    label.show
-
-    y_label = Gtk::Label::new("")
-    hbox.pack_start(y_label, true, true, 0)
-    y_label.show
+    hbox2.add(label)
+ 
+    y_label = Gtk::Label.new("")
+    hbox2.add(y_label)
 
     signal_connect("configure_event") do
       x, y = window.root_origin
       Pos[0] = x
       Pos[1] = y
-      x_label.set_text(x.to_s)
-      y_label.set_text(y.to_s)
+      x_label.text = x.to_s
+      y_label.text = y.to_s
+      false
     end
 
-    any = Gtk::HSeparator::new()
-    main_vbox.pack_start(any, false, true, 0)
-    any.show
+    vbox.pack_start(Gtk::HSeparator.new, false, true, 10)
 
-    hbox = Gtk::HBox::new(false, 0)
-    hbox.set_border_width(10)
-    main_vbox.pack_start(hbox, false, true, 0);
-    hbox.show
+    button = Gtk::Button.new("Close")
+    button.signal_connect("clicked"){destroy}
 
-    button = Gtk::Button::new("Close")
-    button.signal_connect("clicked") do
-      destroy
-    end
-    hbox.pack_start(button, true, true, 5)
-    button.set_flags(Gtk::Widget::CAN_DEFAULT)
+    vbox.add(button)
+    button.can_default = true
     button.grab_default
-    button.show
   end
 end
