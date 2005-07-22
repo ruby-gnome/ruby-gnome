@@ -4,7 +4,7 @@
   rbpangocoverage.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/07/22 17:37:41 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -70,7 +70,7 @@ coverage_to_bytes(self)
     VALUE ret;
 
     pango_coverage_to_bytes(_SELF(self), &bytes, &n_bytes);
-    ret = rb_str_new(bytes, n_bytes);
+    ret = rb_str_new((const char*)bytes, n_bytes);
     g_free(bytes);
 
     return ret;
@@ -81,7 +81,7 @@ coverage_s_from_bytes(self, bytes)
     VALUE self, bytes;
 {
     StringValue(bytes);
-    return BOXED2RVAL(pango_coverage_from_bytes(RVAL2CSTR(bytes), 
+    return BOXED2RVAL(pango_coverage_from_bytes((guchar*)RVAL2CSTR(bytes), 
                                                 RSTRING(bytes)->len),
                       PANGO_TYPE_COVERAGE);
 }
