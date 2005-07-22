@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 06:50:42 $
+  $Date: 2005/07/22 17:46:34 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -60,7 +60,7 @@ get_pixels(self)
     VALUE self;
 {
     guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
-    return rb_str_new(pixels,
+    return rb_str_new((const char*)pixels,
                       gdk_pixbuf_get_height(_SELF(self)) * 
                       gdk_pixbuf_get_rowstride(_SELF(self)));
 }
@@ -110,14 +110,14 @@ initialize(argc, argv, self)
     rb_scan_args(argc, argv, "16", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7);
 
     if (argc == 7){
-        buf = gdk_pixbuf_new_from_data(RVAL2CSTR(arg1), 
+        buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
                                        RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
                                        RTEST(arg3),   NUM2INT(arg4),
                                        NUM2INT(arg5), NUM2INT(arg6),
                                        NUM2INT(arg7), NULL, NULL);
         if (buf == NULL){
             rb_gc();
-            buf = gdk_pixbuf_new_from_data(RVAL2CSTR(arg1), 
+            buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
                                            RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
                                            RTEST(arg3),   NUM2INT(arg4),
                                            NUM2INT(arg5), NUM2INT(arg6),

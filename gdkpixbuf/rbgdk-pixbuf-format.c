@@ -4,7 +4,7 @@
   rbgdk-pixbuf-format.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 17:01:36 $
+  $Date: 2005/07/22 17:46:34 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -119,8 +119,8 @@ get_signature(self)
     VALUE array = rb_ary_new();
     int i = 0;
     while(signature[i].prefix){
-        rb_ary_push(array, rb_ary_new3(3, CSTR2RVAL(signature[i].prefix),
-                                       CSTR2RVAL(signature[i].mask),
+        rb_ary_push(array, rb_ary_new3(3, CSTR2RVAL((const char*)signature[i].prefix),
+                                       CSTR2RVAL((const char*)signature[i].mask),
                                        INT2NUM(signature[i].relevance)));
         i++;
     }
