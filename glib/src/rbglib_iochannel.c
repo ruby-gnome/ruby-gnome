@@ -4,7 +4,7 @@
   rbglib_iochannel.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 17:32:18 $
+  $Date: 2005/07/22 18:33:07 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -729,12 +729,20 @@ ioc_puts(argc, argv, self)
             line = rb_str_new2("nil");
         }
         else {
-            line = rb_check_array_type(argv[i]);
-            if (!NIL_P(line)) {
-                rb_exec_recursive(ioc_puts_ary, line, self);
-                continue;
-            }
-            line = rb_obj_as_string(argv[i]);
+#if HAVE_RB_CHECK_ARRAY_TYPE
+          line = rb_check_array_type(argv[i]);
+#else
+          line = rb_check_convert_type(argv[i], T_ARRAY, "Array", "to_ary");
+#endif
+          if (!NIL_P(line)) {
+#if HAVE_RB_EXEC_RECURSIVE
+            rb_exec_recursive(ioc_puts_ary, line, self);
+#else
+            rb_protect_inspect(ioc_puts_ary, line, self);
+#endif
+            continue;
+          }
+          line = rb_obj_as_string(argv[i]);
         }
         ioc_write_chars(self, line);
         if (RSTRING(line)->len == 0 ||

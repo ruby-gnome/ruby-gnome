@@ -4,7 +4,7 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/14 15:08:24 $
+  $Date: 2005/07/22 18:33:08 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -227,12 +227,14 @@ mc_remove_poll(self, fd)
     return self;
 }
 
+#ifdef HAVE_G_MAIN_DEPTH
 static VALUE
 mc_s_depth(self)
     VALUE self;
 {
     return INT2NUM(g_main_depth());
 }
+#endif
 
 static gboolean
 source_func(func)
@@ -352,8 +354,9 @@ Init_glib_main_context()
 */
     rb_define_method(mc, "add_poll", mc_add_poll, 2);
     rb_define_method(mc, "remove_poll", mc_remove_poll, 1);
+#ifdef HAVE_G_MAIN_DEPTH
     rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
-
+#endif
     rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
     rb_define_module_function(timeout, "add", timeout_add, 1);
 

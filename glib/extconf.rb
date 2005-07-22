@@ -19,6 +19,10 @@ setup_win32(PACKAGE_NAME)
 
 have_func("g_spawn_close_id")
 have_func("g_thread_init")
+have_func("g_main_depth")
+
+have_func("rb_check_array_type")
+have_func("rb_exec_recursive")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION")
 

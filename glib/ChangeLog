@@ -1,3 +1,8 @@
+2005-07-23    <mutoh@localhost.localdomain>
+
+	* extconf.rb, src/rbglib_maincontext.c, rbglib_iochannel.c: 
+	Fix to work on ruby-1.6.8, GTK+-2.0.6. 
+
 2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_iochannel.c, rbgobj_object.c: Fix a compiling warning. 
