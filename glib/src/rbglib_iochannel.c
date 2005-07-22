@@ -4,7 +4,7 @@
   rbglib_iochannel.c -
 
   $Author: mutoh $
-  $Date: 2005/07/01 18:16:53 $
+  $Date: 2005/07/22 17:32:18 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -145,7 +145,7 @@ ioc_read_chars(argc, argv, self)
     rb_scan_args(argc, argv, "01", &count);
 
     if (NIL_P(count)){
-        gint length;
+        gsize length;
         status = g_io_channel_read_to_end(_SELF(self), &buf,
                                           &length, &err);
 

@@ -1,3 +1,11 @@
+2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c, rbgobj_object.c: Fix a compiling warning. 
+
+2005-07-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/iochannel.rb, timeout.rb: Modified header comments. 
+
 2005-07-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/iochannel.rb: Added. 

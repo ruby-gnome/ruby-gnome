@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Date: 2005/07/22 17:32:18 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -146,7 +146,7 @@ static VALUE
 gobj_s_properties(int argc, VALUE* argv, VALUE self)
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
-    gint n_properties;
+    guint n_properties;
     GParamSpec** props;
     VALUE inherited_too;
     VALUE ary;
