@@ -4,7 +4,7 @@
   rbgtkselectiondata.c -
 
   $Author: mutoh $
-  $Date: 2005/01/23 16:47:15 $
+  $Date: 2005/07/22 18:07:18 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -101,7 +101,7 @@ static VALUE
 gtkselectiondata_data(self)
     VALUE self;
 {
-    return rb_str_new(_SELF(self)->data, _SELF(self)->length);
+    return rb_str_new((const char*)_SELF(self)->data, _SELF(self)->length);
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
@@ -161,9 +161,9 @@ gtkselectiondata_get_text(self)
     VALUE self;
 {
     VALUE ret = Qnil;
-    gchar* text = gtk_selection_data_get_text(_SELF(self));
+    guchar* text = gtk_selection_data_get_text(_SELF(self));
     if (text) {
-        ret = CSTR2RVAL(text);
+        ret = CSTR2RVAL((const char*)text);
         g_free(text);
     }
     return ret;

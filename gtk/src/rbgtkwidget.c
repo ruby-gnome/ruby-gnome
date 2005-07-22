@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:15 $
+  $Date: 2005/07/22 18:07:18 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -790,7 +790,7 @@ widget_s_style_properties(argc, argv, self)
     VALUE self;
 {
     GtkWidgetClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
-    gint n_properties;
+    guint n_properties;
     GParamSpec** props;
     VALUE inherited_too;
     VALUE ary;

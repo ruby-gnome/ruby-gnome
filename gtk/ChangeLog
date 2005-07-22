@@ -1,3 +1,9 @@
+2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkrgb.c, rbgdkpixmap.c, rbgdkselection.c,
+	rbgtkselectiondata.c, rbgtkcontainer.c, rbgdkproperty.c,
+	rbgtkwidget.c, rbgdkgc.c: Fix compiling warning. 
+
 2005-07-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/testgtk/sample.rb, wmhints.rb, toolbar.rb, 

@@ -4,7 +4,7 @@
   rbgdkgc.c -
 
   $Author: mutoh $
-  $Date: 2005/05/06 20:17:11 $
+  $Date: 2005/07/22 18:07:01 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -180,18 +180,18 @@ static VALUE
 gdkgc_set_dashes(self, dash_offset, dash_list)
     VALUE self, dash_offset, dash_list;
 {
-    gchar *buf;
+    gint8 *buf;
     int   i;
 
     Check_Type(dash_list, T_ARRAY);
 
-    buf = ALLOCA_N(gchar, RARRAY(dash_list)->len);
+    buf = ALLOCA_N(gint8, RARRAY(dash_list)->len);
     for (i = 0; i < RARRAY(dash_list)->len; i++) {
         Check_Type(RARRAY(dash_list)->ptr[i], T_FIXNUM);
-        buf[i] = (gchar)NUM2CHR(RARRAY(dash_list)->ptr[i]);
+        buf[i] = (gint8)NUM2CHR(RARRAY(dash_list)->ptr[i]);
     }
     gdk_gc_set_dashes(_SELF(self), NUM2INT(dash_offset),
-                      buf, RARRAY(dash_list)->len);
+                      (gint8*)buf, RARRAY(dash_list)->len);
 
     return self;
 }

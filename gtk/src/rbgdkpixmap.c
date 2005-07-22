@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2004/08/01 07:10:03 $
+  $Date: 2005/07/22 18:07:01 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -140,7 +140,7 @@ gdkpmap_create_from_xbm(self, win, fname)
         rb_raise(rb_eArgError, "Bitmap not created from %s", RVAL2CSTR(fname));
 
     new = gdk_bitmap_create_from_data(GDK_WINDOW(RVAL2GOBJ(win)), 
-                                      data, width, height);
+                                      (const gchar*)data, width, height);
     XFree(data);
     return GOBJ2RVAL(new);
 }

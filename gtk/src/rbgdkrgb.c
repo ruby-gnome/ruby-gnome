@@ -3,8 +3,8 @@
 
   rbgdkrgb.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/11/06 10:47:47 $
+  $Author: mutoh $
+  $Date: 2005/07/22 18:07:18 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -33,14 +33,14 @@ rgb_draw_rgb_image(argc, argv, self)
                            NUM2INT(x), NUM2INT(y),
                            NUM2INT(w), NUM2INT(h),
                            RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                           RVAL2CSTR(buf),
+                           (guchar*)RVAL2CSTR(buf),
                            NUM2INT(rowstride));
     } else {
         gdk_draw_rgb_image_dithalign(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
                                      NUM2INT(x), NUM2INT(y),
                                      NUM2INT(w), NUM2INT(h),
                                      RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                                     RVAL2CSTR(buf),
+                                     (guchar*)RVAL2CSTR(buf),
                                      NUM2INT(rowstride),
                                      NUM2INT(xdith), NUM2INT(ydith));
     }
@@ -72,7 +72,8 @@ rgb_draw_indexed_image(self, win, gc, x, y, w, h, dither, buf, rowstride, colors
                            NUM2INT(x), NUM2INT(y),
                            NUM2INT(w), NUM2INT(h),
                            RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                           RVAL2CSTR(buf), NUM2INT(rowstride), cmap);
+                           (guchar*)RVAL2CSTR(buf), 
+                           NUM2INT(rowstride), cmap);
     gdk_rgb_cmap_free(cmap);
     return self;
 }
@@ -82,11 +83,11 @@ rgb_draw_gray_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
     VALUE self, win, gc, x, y, w, h, dither, buf, rowstride;
 {
     gdk_draw_gray_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
-						NUM2INT(x), NUM2INT(y),
-						NUM2INT(w), NUM2INT(h),
-						RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-						RVAL2CSTR(buf),
-						NUM2INT(rowstride));
+                        NUM2INT(x), NUM2INT(y),
+                        NUM2INT(w), NUM2INT(h),
+                        RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                        (guchar*)RVAL2CSTR(buf),
+                        NUM2INT(rowstride));
     return self;
 }
 
@@ -106,15 +107,15 @@ rgb_draw_rgb_32_image(argc, argv, self)
                               NUM2INT(x), NUM2INT(y),
                               NUM2INT(w), NUM2INT(h),
                               RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                              RVAL2CSTR(buf),
+                              (guchar*)RVAL2CSTR(buf),
                               NUM2INT(rowstride));
     } else {
         gdk_draw_rgb_32_image_dithalign(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
-                              NUM2INT(x), NUM2INT(y),
-                              NUM2INT(w), NUM2INT(h),
-                              RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                              RVAL2CSTR(buf),
-                              NUM2INT(rowstride), NUM2INT(xdith), NUM2INT(ydith));
+                                        NUM2INT(x), NUM2INT(y),
+                                        NUM2INT(w), NUM2INT(h),
+                                        RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                                        (guchar*)RVAL2CSTR(buf),
+                                        NUM2INT(rowstride), NUM2INT(xdith), NUM2INT(ydith));
     }
     return self;
 }

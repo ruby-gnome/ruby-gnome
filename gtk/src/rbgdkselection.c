@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: mutoh $
-  $Date: 2004/05/28 18:59:40 $
+  $Date: 2005/07/22 18:07:18 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -89,7 +89,7 @@ gdkselection_property_get(self, requestor)
     gdk_selection_property_get(GDK_WINDOW(RVAL2GOBJ(requestor)), &data, 
                                &prop_type, &prop_format);
 
-    ary = rb_ary_new3(3, CSTR2RVAL(data), GATOM2RVAL(prop_type), 
+    ary = rb_ary_new3(3, CSTR2RVAL((const char*)data), GATOM2RVAL(prop_type), 
                       INT2NUM(prop_format));
     g_free(data);
     return ary;
