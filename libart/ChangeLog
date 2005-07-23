@@ -1,3 +1,7 @@
+2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart_canvas.c: Fix compiling warnings. 
+
 2005-06-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbart_rect.c: implemented Art::DRect and Art::IRect.

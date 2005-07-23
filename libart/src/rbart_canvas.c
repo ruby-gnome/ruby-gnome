@@ -4,7 +4,7 @@
    rbart_canvas.c -
 
    $Author: mutoh $
-   $Date: 2004/11/13 11:19:13 $
+   $Date: 2005/07/23 12:53:17 $
 
    Copyright (C) 2004 Ruby-GNOME2 Project Team
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
@@ -236,7 +236,7 @@ user_empty_output_buffer(cinfo)
 {
     struct client_data *cd;
     cd = (struct client_data *) cinfo->client_data;
-    rb_str_cat(cd->r_result, cd->buffer, BUFSIZ);
+    rb_str_cat(cd->r_result, (const char*)cd->buffer, BUFSIZ);
     cinfo->dest->next_output_byte = cd->buffer;
     cinfo->dest->free_in_buffer = BUFSIZ;
     return TRUE;
@@ -248,7 +248,7 @@ user_term_destination(cinfo)
 {
     struct client_data *cd;
     cd = (struct client_data *) cinfo->client_data;
-    rb_str_cat(cd->r_result, cd->buffer, cinfo->dest->next_output_byte - cd->buffer);
+    rb_str_cat(cd->r_result, (const char*)cd->buffer, cinfo->dest->next_output_byte - cd->buffer);
 }
 
 
@@ -312,7 +312,7 @@ user_write_data(png_ptr, data, length)
 {
     VALUE r_buffer;
     r_buffer = (VALUE) png_get_io_ptr(png_ptr);
-    rb_str_cat(r_buffer, data, length);
+    rb_str_cat(r_buffer, (const char*)data, length);
 }
 
 static void
