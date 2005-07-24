@@ -1,3 +1,7 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbrsvg.c: Fix compiling warnings.
+
 2005-07-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: check system has librsvg/rsvg-gz.h header or not.

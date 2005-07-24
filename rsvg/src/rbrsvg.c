@@ -132,7 +132,7 @@ rb_rsvg_handle_write(VALUE self, VALUE buf)
   gboolean result;
   GError *error = NULL;
 
-  result = rsvg_handle_write(_SELF(self), RVAL2CSTR(buf),
+  result = rsvg_handle_write(_SELF(self), (const guchar*)RVAL2CSTR(buf),
                              RSTRING(buf)->len, &error);
 
   if (!result) RAISE_GERROR(error);
