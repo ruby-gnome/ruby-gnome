@@ -4,7 +4,7 @@
   rbpangoattriterator.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/07/24 07:00:32 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -98,6 +98,7 @@ attriterator_get_font(self)
     return ret;
 }
 
+#ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
 static VALUE
 attriterator_get_attrs(self)
     VALUE self;
@@ -119,6 +120,7 @@ attriterator_get_attrs(self)
 
     return ary;
 }  
+#endif
 
 void
 Init_pango_attriterator()
@@ -129,5 +131,7 @@ Init_pango_attriterator()
     rb_define_method(pAttriterator, "range", attriterator_range, 0);
     rb_define_method(pAttriterator, "get", attriterator_get, -1);
     rb_define_method(pAttriterator, "font", attriterator_get_font, 0);
+#ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
     rb_define_method(pAttriterator, "attrs", attriterator_get_attrs, 0);
+#endif
 }

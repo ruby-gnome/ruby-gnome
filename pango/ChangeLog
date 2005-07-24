@@ -1,3 +1,7 @@
+2005-07-24    <mutoh@localhost.localdomain>
+
+	* extconf.rb, src/rbpangoattriterator.: Fix to work on pango-1.1.x.
+
 2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocoverage.c: Fix a compiling warning. 
