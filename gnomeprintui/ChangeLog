@@ -1,3 +1,12 @@
+2005-07-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb (mkenums_h): renamed prefix to GNOME_TYPE_PRINT_ from
+	  GNOME_TYPE_PRINTUI_.
+	* src/rbgpui-print-dialog.c: ditto.
+	* src/rbgpui-print-paper-selector.c: ditto.
+	* src/libgnomeprintui-enum-types.c.maintainer: ditto.
+	* src/libgnomeprintui-enum-types.h.maintainer: ditto.
+
 2005-07-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: check system has

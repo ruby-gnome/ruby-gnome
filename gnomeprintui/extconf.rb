@@ -48,7 +48,7 @@ FHEAD
 FPROD
     :vhead => <<-VHEAD,
 GType @enum_name@_get_type (void);
-#define GNOME_TYPE_PRINTUI_@ENUMSHORT@ (@enum_name@_get_type())
+#define GNOME_TYPE_PRINT_@ENUMSHORT@ (@enum_name@_get_type())
 VHEAD
     :ftail => <<-FTAIL,
 G_END_DECLS

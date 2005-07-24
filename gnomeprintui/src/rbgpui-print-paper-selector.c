@@ -23,7 +23,7 @@
 #include <libgnomeprintui/gnome-print-paper-selector.h>
 
 #define _SELF(self) (RVAL2GOBJ(self))
-#define RVAL2GPSF(obj) (RVAL2GENUM(obj, GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS))
+#define RVAL2GPSF(obj) (RVAL2GENUM(obj, GNOME_TYPE_PRINT_PAPER_SELECTOR_FLAGS))
 
 static VALUE
 gpui_paper_selector_new(int argc, VALUE *argv, VALUE self)
@@ -55,8 +55,8 @@ Init_gnome_paper_selector(VALUE mGnome)
   VALUE c = G_DEF_CLASS(GNOME_TYPE_PAPER_SELECTOR, "PaperSelector", mGnome);
 
   /* GnomePaperSelectorFlags */
-  G_DEF_CLASS(GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS, "Flags", c);
-  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINTUI_PAPER_SELECTOR_FLAGS, "GNOME_PAPER_SELECTOR_");
+  G_DEF_CLASS(GNOME_TYPE_PRINT_PAPER_SELECTOR_FLAGS, "Flags", c);
+  G_DEF_CONSTANTS(c, GNOME_TYPE_PRINT_PAPER_SELECTOR_FLAGS, "GNOME_PAPER_SELECTOR_");
 
   rb_define_method(c, "initialize", gpui_paper_selector_new, -1);
 }
