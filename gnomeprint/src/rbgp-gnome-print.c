@@ -428,14 +428,14 @@ static VALUE
 gp_show(VALUE self, VALUE text)
 {
   return check_return_code(gnome_print_show(_SELF(self),
-                                            RVAL2CSTR(text)));
+                                            (const guchar *)RVAL2CSTR(text)));
 }
 
 static VALUE
 gp_show_sized(VALUE self, VALUE text, VALUE bytes)
 {
   return check_return_code(gnome_print_show_sized(_SELF(self),
-                                                  RVAL2CSTR(text),
+                                                  (const guchar *)RVAL2CSTR(text),
                                                   NUM2INT(bytes)));
 }
 
@@ -445,7 +445,7 @@ gp_grayimage(VALUE self, VALUE data,
              VALUE width, VALUE height, VALUE rowstride)
 {
   return check_return_code(gnome_print_grayimage(_SELF(self),
-                                                 RVAL2CSTR(data),
+                                                 (const guchar *)RVAL2CSTR(data),
                                                  NUM2INT(width),
                                                  NUM2INT(height),
                                                  NUM2INT(rowstride)));
@@ -456,7 +456,7 @@ gp_rgbimage(VALUE self, VALUE data,
             VALUE width, VALUE height, VALUE rowstride)
 {
   return check_return_code(gnome_print_rgbimage(_SELF(self),
-                                                RVAL2CSTR(data),
+                                                (const guchar *)RVAL2CSTR(data),
                                                 NUM2INT(width),
                                                 NUM2INT(height),
                                                 NUM2INT(rowstride)));
@@ -467,7 +467,7 @@ gp_rgbaimage(VALUE self, VALUE data,
              VALUE width, VALUE height, VALUE rowstride)
 {
   return check_return_code(gnome_print_rgbaimage(_SELF(self),
-                                                 RVAL2CSTR(data),
+                                                 (const guchar *)RVAL2CSTR(data),
                                                  NUM2INT(width),
                                                  NUM2INT(height),
                                                  NUM2INT(rowstride)));
@@ -491,7 +491,7 @@ gp_beginpage(int argc, VALUE *argv, VALUE self)
   if (NIL_P(name)) {
     c_name = NULL;
   } else {
-    c_name = RVAL2CSTR(name);
+    c_name = (guchar*)RVAL2CSTR(name);
   }
 
   result = check_return_code(gnome_print_beginpage(_SELF(self), c_name));

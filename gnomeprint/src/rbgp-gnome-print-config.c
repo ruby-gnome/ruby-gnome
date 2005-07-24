@@ -69,8 +69,8 @@ gp_config_get(VALUE self, VALUE key)
 {
   guchar *value;
   value = gnome_print_config_get(_SELF(self),
-                                 RVAL2CSTR(key));
-  return(value ? CSTR2RVAL(value) : Qnil);
+                                 (const guchar *)RVAL2CSTR(key));
+  return(value ? CSTR2RVAL((const char*)value) : Qnil);
 }
 
 static VALUE
@@ -80,7 +80,7 @@ gp_config_get_boolean(VALUE self, VALUE key)
   gboolean result;
   
   result = gnome_print_config_get_boolean(_SELF(self),
-                                          RVAL2CSTR(key),
+                                          (const guchar *)RVAL2CSTR(key),
                                           &value);
   return(result ? CBOOL2RVAL(value) : Qnil);
 }
@@ -92,7 +92,7 @@ gp_config_get_int(VALUE self, VALUE key)
   gboolean result;
 
   result = gnome_print_config_get_int(_SELF(self),
-                                      RVAL2CSTR(key),
+                                      (const guchar *)RVAL2CSTR(key),
                                       &value);
   return(result ? INT2NUM(value) : Qnil);
 }
@@ -104,7 +104,7 @@ gp_config_get_double(VALUE self, VALUE key)
   gboolean result;
 
   result = gnome_print_config_get_double(_SELF(self),
-                                         RVAL2CSTR(key),
+                                         (const guchar *)RVAL2CSTR(key),
                                          &value);
   return(result ? rb_float_new(value) : Qnil);
 }
@@ -117,7 +117,7 @@ gp_config_get_length(VALUE self, VALUE key)
   const GnomePrintUnit *unit = ALLOCA_N(GnomePrintUnit, 1);
   
   result = gnome_print_config_get_length(_SELF(self),
-                                         RVAL2CSTR(key),
+                                         (const guchar *)RVAL2CSTR(key),
                                          &value,
                                          &unit);
   if (result) {
@@ -139,7 +139,7 @@ gp_config_get_transform(VALUE self, VALUE key)
   int i;
   
   result = gnome_print_config_get_transform(_SELF(self),
-                                            RVAL2CSTR(key),
+                                            (const guchar *)RVAL2CSTR(key),
                                             value);
 
   if (result) {
@@ -204,15 +204,15 @@ static VALUE
 gp_config_set(VALUE self, VALUE key, VALUE value)
 {
   return CBOOL2RVAL(gnome_print_config_set(_SELF(self),
-                                           RVAL2CSTR(key),
-                                           RVAL2CSTR(value)));
+                                           (const guchar *)RVAL2CSTR(key),
+                                           (const guchar *)RVAL2CSTR(value)));
 }
 
 static VALUE
 gp_config_set_boolean(VALUE self, VALUE key, VALUE value)
 {
   return CBOOL2RVAL(gnome_print_config_set_boolean(_SELF(self),
-                                                   RVAL2CSTR(key),
+                                                   (const guchar *)RVAL2CSTR(key),
                                                    RVAL2CBOOL(value)));
 }
 
@@ -220,7 +220,7 @@ static VALUE
 gp_config_set_int(VALUE self, VALUE key, VALUE value)
 {
   return CBOOL2RVAL(gnome_print_config_set_int(_SELF(self),
-                                               RVAL2CSTR(key),
+                                               (const guchar *)RVAL2CSTR(key),
                                                NUM2INT(value)));
 }
 
@@ -228,7 +228,7 @@ static VALUE
 gp_config_set_double(VALUE self, VALUE key, VALUE value)
 {
   return CBOOL2RVAL(gnome_print_config_set_double(_SELF(self),
-                                                  RVAL2CSTR(key),
+                                                  (const guchar *)RVAL2CSTR(key),
                                                   NUM2DBL(value)));
 }
 
@@ -236,7 +236,7 @@ static VALUE
 gp_config_set_length(VALUE self, VALUE key, VALUE value, VALUE unit)
 {
   return CBOOL2RVAL(gnome_print_config_set_length(_SELF(self),
-                                                  RVAL2CSTR(key),
+                                                  (const guchar *)RVAL2CSTR(key),
                                                   NUM2DBL(value),
                                                   RVAL2GPU(unit)));
 }

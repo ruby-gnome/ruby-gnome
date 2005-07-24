@@ -57,7 +57,7 @@ gp_paper_int_ ## name(VALUE self)               \
 static VALUE                                    \
 gp_paper_string_ ## name(VALUE self)            \
 {                                               \
-    return CSTR2RVAL(_SELF(self)->name);        \
+    return CSTR2RVAL((const char*)_SELF(self)->name); \
 }
 
 #define ATTR_DOUBLE(name)                       \
@@ -94,7 +94,7 @@ static VALUE
 gp_paper_get_by_name(VALUE self, VALUE name)
 {
   const GnomePrintPaper *paper;
-  paper = gnome_print_paper_get_by_name(RVAL2CSTR(name));
+  paper = gnome_print_paper_get_by_name((const guchar*)RVAL2CSTR(name));
   RETURN_GPP_OR_NIL(paper);
 }
 

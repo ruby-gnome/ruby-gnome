@@ -42,7 +42,7 @@ gp_gpa_printer_default(VALUE self)
 static VALUE
 gp_gpa_printer_get_by_id(VALUE self, VALUE id)
 {
-  return GOBJ2RVAL(gpa_printer_get_by_id(RVAL2CSTR(id)));
+  return GOBJ2RVAL(gpa_printer_get_by_id((const guchar*)RVAL2CSTR(id)));
 }
 
 /* static VALUE */
@@ -67,7 +67,7 @@ gp_gpa_printer_default_settings(VALUE self)
 static VALUE
 gp_gpa_printer_settings_by_id(VALUE self, VALUE id)
 {
-  return GOBJ2RVAL(gpa_printer_get_settings_by_id(_SELF(self), RVAL2CSTR(id)));
+  return GOBJ2RVAL(gpa_printer_get_settings_by_id(_SELF(self), (const guchar*)RVAL2CSTR(id)));
 }
 
 static VALUE
@@ -93,7 +93,7 @@ gp_gpa_printer_state(VALUE self)
 static VALUE
 gp_gpa_printer_state_by_id(VALUE self, VALUE id)
 {
-  return GOBJ2RVAL(gpa_printer_get_state_by_id(_SELF(self), RVAL2CSTR(id)));
+  return GOBJ2RVAL(gpa_printer_get_state_by_id(_SELF(self), (const guchar*)RVAL2CSTR(id)));
 }
 
 static VALUE

@@ -41,7 +41,7 @@ static VALUE
 gp_unit_get_by_name(VALUE self, VALUE name)
 {
   const GnomePrintUnit *unit;
-  unit = gnome_print_unit_get_by_name(RVAL2CSTR(name));
+  unit = gnome_print_unit_get_by_name((const guchar*)RVAL2CSTR(name));
 
   if (unit == NULL) {
     return Qnil;
@@ -54,7 +54,7 @@ static VALUE
 gp_unit_get_by_abbreviation(VALUE self, VALUE abbreviation)
 {
   const GnomePrintUnit *unit;
-  unit = gnome_print_unit_get_by_abbreviation(RVAL2CSTR(abbreviation));
+  unit = gnome_print_unit_get_by_abbreviation((const guchar*)RVAL2CSTR(abbreviation));
 
   if (unit == NULL) {
     return Qnil;
@@ -95,25 +95,25 @@ gp_unit_get_unittobase(VALUE self)
 static VALUE
 gp_unit_get_name(VALUE self)
 {
-  return CSTR2RVAL(RVAL2GPU(self)->name);
+  return CSTR2RVAL((const char*)RVAL2GPU(self)->name);
 }
 
 static VALUE
 gp_unit_get_abbr(VALUE self)
 {
-  return CSTR2RVAL(RVAL2GPU(self)->abbr);
+  return CSTR2RVAL((const char*)RVAL2GPU(self)->abbr);
 }
 
 static VALUE
 gp_unit_get_plural(VALUE self)
 {
-  return CSTR2RVAL(RVAL2GPU(self)->plural);
+  return CSTR2RVAL((const char*)RVAL2GPU(self)->plural);
 }
 
 static VALUE
 gp_unit_get_abbr_plural(VALUE self)
 {
-  return CSTR2RVAL(RVAL2GPU(self)->abbr_plural);
+  return CSTR2RVAL((const char*)RVAL2GPU(self)->abbr_plural);
 }
 
 

@@ -24,19 +24,19 @@
 static VALUE
 gp_gpa_node_id(VALUE self)
 {
-  return CSTR2RVAL(gpa_node_id(RVAL2GOBJ(self)));
+  return CSTR2RVAL((const char*)gpa_node_id(RVAL2GOBJ(self)));
 }
 
 static VALUE
 gp_gpa_node_get_value(VALUE self)
 {
-  return CSTR2RVAL(gpa_node_get_value(RVAL2GOBJ(self)));
+  return CSTR2RVAL((const char*)gpa_node_get_value(RVAL2GOBJ(self)));
 }
 
 static VALUE
 gp_gpa_node_set_value(VALUE self, VALUE value)
 {
-  return CBOOL2RVAL(gpa_node_set_value(RVAL2GOBJ(self), RVAL2CSTR(value)));
+  return CBOOL2RVAL(gpa_node_set_value(RVAL2GOBJ(self), (const guchar*)RVAL2CSTR(value)));
 }
 
 

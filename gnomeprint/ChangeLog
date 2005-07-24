@@ -1,3 +1,9 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/src/rbgp-gnome-print-config.c, rbgp-gnome-print-paper.c, 
+	rbgp-gnome-print-unit.c, rbgp-gnome-print.c, rbgp-gpa-node.c, 
+	rbgp-gpa-printer.c: Fix compiling warnings.
+
 2005-07-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/to_file.rb (Renderer#draw_line): added filled line
