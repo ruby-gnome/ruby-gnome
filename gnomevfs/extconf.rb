@@ -14,6 +14,9 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package('gnome-vfs-2.0') or exit 1
 PKGConfig.have_package('gnome-vfs-module-2.0') or exit 1
+
+have_func("rb_exec_recursive")
+
 setup_win32(PACKAGE_NAME)
 
 add_depend_package("glib2", "glib/src", TOPDIR)

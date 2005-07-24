@@ -1,3 +1,7 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/gnomevfs-file.c: Fix for Ruby-1.9.x. 
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
