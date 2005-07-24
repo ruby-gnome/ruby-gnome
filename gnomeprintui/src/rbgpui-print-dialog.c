@@ -47,7 +47,7 @@ gpui_dialog_new(int argc, VALUE *argv, VALUE self)
   }
   
   G_INITIALIZE(self, gnome_print_dialog_new(RVAL2GOBJ(job),
-                                            RVAL2CSTR(title),
+                                            (const guchar*)RVAL2CSTR(title),
                                             g_flags));
   /* XXX: Is it good way??? */
   g_object_ref(_SELF(self));
@@ -115,8 +115,8 @@ gpui_dialog_construct_range_any(VALUE self, VALUE flags, VALUE widget,
   gnome_print_dialog_construct_range_any(_SELF(self),
                                          RVAL2GPDRF(flags),
                                          RVAL2GOBJ(widget),
-                                         RVAL2CSTR(current_label),
-                                         RVAL2CSTR(range_label));
+                                         (const guchar*)RVAL2CSTR(current_label),
+                                         (const guchar*)RVAL2CSTR(range_label));
   return Qnil;
 }
 
@@ -129,8 +129,8 @@ gpui_dialog_construct_range_page(VALUE self, VALUE flags,
                                           RVAL2GPDRF(flags),
                                           NUM2INT(start),
                                           NUM2INT(end),
-                                          RVAL2CSTR(current_label),
-                                          RVAL2CSTR(range_label));
+                                          (const guchar*)RVAL2CSTR(current_label),
+                                          (const guchar*)RVAL2CSTR(range_label));
   return Qnil;
 }
 

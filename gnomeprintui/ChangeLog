@@ -1,3 +1,8 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgpui-print-job-preview.c: Fix compiling warning. 
+	* src/rbgpui-print-dialog.c: ditto. 
+
 2005-07-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb (mkenums_h): renamed prefix to GNOME_TYPE_PRINT_ from
