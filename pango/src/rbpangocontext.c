@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 18:46:23 $
+  $Date: 2005/07/24 08:02:37 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -34,7 +34,7 @@ rcontext_itemize(argc, argv, self)
                              (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
                              NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
     } else {
-#if PANGO_CHECK_VERSION(1,2,0)
+#ifdef HAVE_PANGO_ITEMIZE_WITH_BASE_DIR
         list = pango_itemize_with_base_dir(_SELF(self), 
                                            RVAL2GENUM(arg1, PANGO_TYPE_DIRECTION), /* base_dir */
                                            RVAL2CSTR(arg2),      /* text */ 

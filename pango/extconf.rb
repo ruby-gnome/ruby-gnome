@@ -23,6 +23,8 @@ have_func("pango_attr_strikethrough_color_new")
 have_func("pango_attr_underline_color_new")
 have_func("pango_glyph_item_free")
 have_func("pango_attr_iterator_get_attrs")
+have_func("pango_itemize_with_base_dir")
+have_func("pango_font_family_is_monospace")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 

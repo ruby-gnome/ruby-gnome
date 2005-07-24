@@ -4,7 +4,7 @@
   rbpangofontfamily.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 18:46:23 $
+  $Date: 2005/07/24 08:02:38 $
 
   Copyright (C) 2002-2005 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -20,7 +20,7 @@ font_family_get_name(self)
     return CSTR2RVAL(pango_font_family_get_name(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,2,0)
+#ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
 static VALUE
 font_family_is_monospace(self)
     VALUE self;
@@ -57,7 +57,7 @@ Init_pango_font_family()
     VALUE pFamily = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
     
     rb_define_method(pFamily, "name", font_family_get_name, 0);
-#if PANGO_CHECK_VERSION(1,2,0)
+#ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
     rb_define_method(pFamily, "monospace?", font_family_is_monospace, 0);
 #endif
     rb_define_method(pFamily, "faces", font_family_list_faces, 0);

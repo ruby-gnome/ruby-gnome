@@ -1,5 +1,6 @@
-2005-07-24    <mutoh@localhost.localdomain>
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* extconf.rb src/rbpangofontfamily.c: Fix for pango-1.2.x. 
 	* extconf.rb, src/rbpangoattriterator.: Fix to work on pango-1.1.x.
 
 2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
