@@ -55,6 +55,10 @@ module PKGConfig
     `#{@@cmd} --modversion #{pkg}`.chomp
   end
 
+  def list_all
+    `#{@@cmd} --list-all`.chomp.split(/\n/).each{|v| /(\S+?)\s+(.*)/.match(v).to_a[1..2]}
+  end
+
   def check_version?(pkg, major = 0, minor = 0, micro = 0)
     return false unless exist?(pkg)
     ver = modversion(pkg).split(".").collect{|item| item.to_i}

@@ -1,3 +1,7 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/pkg-config.rb: Added PKGConfig.list_all.
+
 2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/rbglib_maincontext.c, rbglib_iochannel.c: 
