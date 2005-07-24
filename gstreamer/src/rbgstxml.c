@@ -85,10 +85,10 @@ rb_gst_xml_parse_file (int argc, VALUE *argv, VALUE self)
 	VALUE fname, rootname;
 	rb_scan_args (argc, argv, "11", &fname, &rootname);	
 	return CBOOL2RVAL (gst_xml_parse_file (RGST_XML (self),
-					       RVAL2CSTR (fname),
-					       NIL_P (rootname) 
-					       	   ? NULL 
-						   : RVAL2CSTR (rootname)));
+					       (const guchar*) RVAL2CSTR (fname),
+					       (const guchar*)(NIL_P (rootname) 
+                                                               ? NULL 
+                                                               : RVAL2CSTR (rootname))));
 }
 
 /*
@@ -110,11 +110,11 @@ rb_gst_xml_parse_memory (int argc, VALUE *argv, VALUE self)
 	rb_scan_args (argc, argv, "11", &memory, &rootname);	
 	cstr = RVAL2CSTR (memory);
 	return CBOOL2RVAL (gst_xml_parse_memory (RGST_XML (self),
-						 cstr, 
+						 (guchar*)cstr, 
 						 strlen (cstr), 
-						 NIL_P (rootname) 
-				       	   	     ? NULL 
-		    			   	     : RVAL2CSTR (rootname)));
+						 (const gchar*)(NIL_P (rootname) 
+                                                                ? NULL 
+                                                                : RVAL2CSTR (rootname))));
 }
 
 /*
@@ -132,7 +132,7 @@ static VALUE
 rb_gst_xml_get_element (VALUE self, VALUE element_name)
 {
 	GstElement *element = gst_xml_get_element (RGST_XML (self),
-						   RVAL2CSTR (element_name));
+						   (const guchar*)RVAL2CSTR (element_name));
 	return element != NULL
 		? RGST_ELEMENT_NEW (element)
 		: Qnil;

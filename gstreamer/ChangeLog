@@ -1,3 +1,7 @@
+2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgstxml.c: Fix compiling warning.
+
 2005-06-29  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/rbgst.h, src/rbgststructure.c, src/rbgsttagsetter.c: Properly
