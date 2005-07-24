@@ -56,7 +56,7 @@ module PKGConfig
   end
 
   def list_all
-    `#{@@cmd} --list-all`.chomp.split(/\n/).each{|v| /(\S+?)\s+(.*)/.match(v).to_a[1..2]}
+    `#{@@cmd} --list-all`.chomp.split(/\n/).collect{|v| /(\S+?)\s+(.*)/.match(v).to_a[1..2]}
   end
 
   def check_version?(pkg, major = 0, minor = 0, micro = 0)
