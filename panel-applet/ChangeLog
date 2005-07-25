@@ -1,6 +1,7 @@
 2005-07-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* extconf.rb: Check libpanel-applet version(2.6 or later).
+	* extconf.rb: Check libpanel-applet version(2.6 or later). 
+	Pointed out by Noritsugu Nakamura.
 
 2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
