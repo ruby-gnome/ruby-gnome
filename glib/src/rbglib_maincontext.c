@@ -4,7 +4,7 @@
   rbglib_maincontext.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 18:33:08 $
+  $Date: 2005/07/25 16:46:33 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -297,7 +297,7 @@ static VALUE
 child_watch_source_new(self, pid)
     VALUE self, pid;
 {
-    return BOXED2RVAL(g_child_watch_source_new(NUM2INT(pid)), G_TYPE_SOURCE);
+    return BOXED2RVAL(g_child_watch_source_new((GPid)NUM2INT(pid)), G_TYPE_SOURCE);
 }
 
 static void
@@ -306,7 +306,7 @@ child_watch_func(pid, status, func)
     gint status;
     gpointer func;
 {
-    rb_funcall((VALUE)func, id_call, 2, INT2NUM(pid), INT2NUM(status));
+    rb_funcall((VALUE)func, id_call, 2, INT2NUM((long)pid), INT2NUM(status));
 }
 
 static VALUE
@@ -315,7 +315,7 @@ child_watch_add(self, pid)
 {
     VALUE func = G_BLOCK_PROC();
     G_RELATIVE(self, func);
-    return UINT2NUM(g_child_watch_add(NUM2INT(pid), 
+    return UINT2NUM(g_child_watch_add((GPid)NUM2INT(pid), 
                                       (GChildWatchFunc)child_watch_func, (gpointer)func));
 }
 #endif

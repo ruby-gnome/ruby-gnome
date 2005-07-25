@@ -1,3 +1,7 @@
+2005-07-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_iochannel.c, rbglib_maincontext.c: Works on Win32 again.
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/pkg-config.rb: Added PKGConfig.list_all.

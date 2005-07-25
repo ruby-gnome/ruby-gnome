@@ -4,7 +4,7 @@
   rbglib_iochannel.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 18:33:07 $
+  $Date: 2005/07/25 16:46:32 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -53,7 +53,7 @@ ioc_initialize(argc, argv, self)
             io = g_io_channel_unix_new(NUM2INT(rb_funcall(arg1, rb_intern("to_i"), 0)));
         }
 #else
-        rb_raise("GLib::IOChannel.new(fd) is supported on UNIX environment only");
+        rb_raise(rb_eRuntimeError, "GLib::IOChannel.new(fd) is supported on UNIX environment only");
 #endif
     } else {
         GError* err = NULL;
@@ -95,7 +95,7 @@ ioc_s_open(argc, argv, self)
 #ifdef G_OS_UNIX
         io = g_io_channel_unix_new(NUM2INT(arg1));
 #else
-        rb_raise("GLib::IOChannel.new(fd) is supported on UNIX environment only");
+        rb_raise(rb_eRuntimeError, "GLib::IOChannel.new(fd) is supported on UNIX environment only");
 #endif
     } else {
         GError* err = NULL;
@@ -498,13 +498,15 @@ ioc_shutdown(argc, argv, self)
     VALUE flush;
     GError* err = NULL;
     gboolean gflush = TRUE;
+    GIOStatus status;
+
     rb_scan_args(argc, argv, "01", &flush);
 
     if (!NIL_P(flush)){
         gflush = RTEST(flush);
     }
 
-    GIOStatus status = g_io_channel_shutdown(_SELF(self), gflush, &err);
+    status = g_io_channel_shutdown(_SELF(self), gflush, &err);
     ioc_error(status, err);
 
     return self;
@@ -794,6 +796,7 @@ void
 Init_glib_io_channel()
 {
     VALUE io = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
+    VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
 
     rb_include_module(io, rb_mEnumerable);
 
@@ -867,7 +870,6 @@ Init_glib_io_channel()
     rb_define_const(io, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
 
     /* GIOChannelError */
-    VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
     rb_define_singleton_method(ioc_error, "from_errno", ioc_error_s_from_errno, 1);
 
     rb_define_const(ioc_error, "FBIG", INT2NUM(G_IO_CHANNEL_ERROR_FBIG));
