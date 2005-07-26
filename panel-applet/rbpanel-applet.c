@@ -4,7 +4,7 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2005/07/26 12:15:45 $
+  $Date: 2005/07/26 12:49:59 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -14,9 +14,7 @@
 #include <panel-applet.h>
 #include <panel-applet-gconf.h>
 
-#if HAVE_PANEL_APPLET_ENUMS_H
 #include <panel-applet-enums.h>
-#endif
 
 static ID id_call;
 
@@ -60,11 +58,7 @@ rbpanel_applet_get_background(self)
     } else {
         ret = GOBJ2RVAL(pixmap);
     }
-#ifdef PANEL_TYPE_PANEL_APPLET_BACKGROUND_TYPE
     return rb_assoc_new(GENUM2RVAL(type, PANEL_TYPE_PANEL_APPLET_BACKGROUND_TYPE), ret);
-#else
-    return rb_assoc_new(INT2NUM(type), ret);
-#endif
 }
 
 static VALUE
@@ -94,22 +88,14 @@ static VALUE
 rbpanel_applet_get_flags(self)
     VALUE self;
 {
-#ifdef PANEL_TYPE_PANEL_APPLET_FLAGS
     return GFLAGS2RVAL(panel_applet_get_flags(_SELF(self)), PANEL_TYPE_PANEL_APPLET_FLAGS);
-#else
-    return INT2NUM(panel_applet_get_flags(_SELF(self)));
-#endif
 }
 
 static VALUE
 rbpanel_applet_set_flags(self, flags)
     VALUE self, flags;
 {
-#ifdef PANEL_TYPE_PANEL_APPLET_FLAGS
     panel_applet_set_flags(_SELF(self), RVAL2GFLAGS(flags, PANEL_TYPE_PANEL_APPLET_FLAGS));
-#else
-    panel_applet_set_flags(_SELF(self), NUM2INT(flags));
-#endif
     return self;
 }
 
@@ -371,25 +357,12 @@ Init_panelapplet2()
     G_DEF_SETTERS(cApplet);
 
     /* PanelAppletBackGroundTypeFlags */
-#if PANEL_TYPE_PANEL_APPLET_BACKGROUND_TYPE
     G_DEF_CLASS(PANEL_TYPE_PANEL_APPLET_BACKGROUND_TYPE, "BackgroundType", cApplet);
     G_DEF_CONSTANTS(cApplet, PANEL_TYPE_PANEL_APPLET_BACKGROUND_TYPE, "PANEL_");
-#else
-    rb_define_const(cApplet, "NO_BACKGROUND", INT2NUM(PANEL_NO_BACKGROUND));
-    rb_define_const(cApplet, "COLOR_BACKGROUND", INT2NUM(PANEL_COLOR_BACKGROUND));
-    rb_define_const(cApplet, "PIXMAP_BACKGROUND", INT2NUM(PANEL_PIXMAP_BACKGROUND));
-#endif
 
     /* PanelAppletFlags */
-#if PANEL_TYPE_PANEL_APPLET_FLAGS
     G_DEF_CLASS(PANEL_TYPE_PANEL_APPLET_FLAGS, "Flags", cApplet);
     G_DEF_CONSTANTS(cApplet, PANEL_TYPE_PANEL_APPLET_FLAGS, "PANEL_APPLET_");
-#else
-    rb_define_const(cApplet, "FLAGS_NONE", INT2NUM(PANEL_APPLET_FLAGS_NONE));
-    rb_define_const(cApplet, "EXPAND_MAJOR", INT2NUM(PANEL_APPLET_EXPAND_MAJOR));
-    rb_define_const(cApplet, "EXPAND_MINOR", INT2NUM(PANEL_APPLET_EXPAND_MINOR));
-    rb_define_const(cApplet, "HAS_HANDLE", INT2NUM(PANEL_APPLET_HAS_HANDLE));
-#endif
 
     rb_define_const(cApplet, "ORIENT_UP", INT2NUM(PANEL_APPLET_ORIENT_UP));
     rb_define_const(cApplet, "ORIENT_DOWN", INT2NUM(PANEL_APPLET_ORIENT_DOWN));
