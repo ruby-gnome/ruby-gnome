@@ -18,6 +18,12 @@ module PKGConfig
     @@cmd += ' --msvc-syntax'
   end
 
+  @@list = {}
+  `#{@@cmd} --list-all`.chomp.split(/\n/).each{|v| 
+    pkg, name, desc = /(\S+?)\s+(.*?)\s-\s(.*)/.match(v).to_a[1..3]
+    @@list[pkg] = [name, desc]
+  }
+
   module_function
   def exist?(pkg)
     system("#{@@cmd} --exists #{pkg}")
@@ -55,8 +61,29 @@ module PKGConfig
     `#{@@cmd} --modversion #{pkg}`.chomp
   end
 
+  def version
+    `#{@@cmd} --version`.chomp
+  end
+
   def list_all
-    `#{@@cmd} --list-all`.chomp.split(/\n/).collect{|v| /(\S+?)\s+(.*)/.match(v).to_a[1..2]}
+    # Returns [pkg, name, description]
+    @@list.keys.collect{|key| [key] + @@list[key]}.sort
+  end
+
+  def name(pkg)
+    @@list[pkg][0]
+  end
+
+  def description(pkg)
+    @@list[pkg][1]
+  end
+
+  def provides(pkg)
+    `#{@@cmd} --print-provides #{pkg}`.chomp
+  end
+
+  def requires(pkg)
+    `#{@@cmd} --print-requires #{pkg}`.chomp.gsub("\n", ", ") 
   end
 
   def check_version?(pkg, major = 0, minor = 0, micro = 0)
