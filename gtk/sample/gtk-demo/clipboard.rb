@@ -1,6 +1,6 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
-# $Id: clipboard.rb,v 1.2 2005/02/12 23:02:43 kzys Exp $
+# $Id: clipboard.rb,v 1.3 2005/07/28 14:30:38 mutoh Exp $
 =begin
 = Clipboard
 
@@ -14,6 +14,11 @@ module Demo
   class Clipboard < Demo::BasicWindow
     def initialize
       super('Clipboard')
+
+      unless Gtk.check_version?(2, 2, 0)
+         add(Gtk::Label.new("This sample requires GTK+ 2.2.0 or later"))
+         return
+      end
 
       vbox = Gtk::VBox.new(false, 0)
       vbox.border_width = 8

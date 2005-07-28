@@ -1,7 +1,7 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: changedisplay.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
+# $Id: changedisplay.rb,v 1.5 2005/07/28 14:30:37 mutoh Exp $
 =begin
 = Change Display
 
@@ -63,13 +63,22 @@ module Demo
       set_default_size(300, 400)
       signal_connect('response') do |dialog, response_id|
 	if response_id == Gtk::Dialog::RESPONSE_OK
-	  query_change_display
+          if Gtk.check_version?(2, 2, 0)
+            query_change_display
+          else
+            puts "This sample requires GTK+ 2.2.0 or later"
+          end
 	else
 	  destroy # Gtk.main_quit?
 	end
       end
       signal_connect('destroy') do
 
+      end
+
+      unless Gtk.check_version?(2, 2, 0)
+         vbox.add(Gtk::Label.new("This sample requires GTK+ 2.2.0 or later"))
+         return
       end
 
       vbox = Gtk::VBox.new(false, 5)

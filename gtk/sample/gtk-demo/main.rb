@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.13 2005/03/20 03:36:56 kzys Exp $
+  $Id: main.rb,v 1.14 2005/07/28 14:30:38 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -83,7 +83,7 @@ module Demo
         end
       end
 
-      return title, klass.to_sym, depend
+      return title, klass.intern, depend
     end
 
     def generate_index
