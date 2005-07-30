@@ -1,3 +1,8 @@
+2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Increment version.
+	* sample/type-register.rb: Fix a bug.
+
 2005-07-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/pkg-config.rb: Added PKGConfig.name, .description,
