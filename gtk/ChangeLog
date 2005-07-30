@@ -1,5 +1,6 @@
 2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkatom.c: Fix compiling warnings on amd64. 
 	* sample/testgtk/spinbutton.rb: Fix a typo.
 	* sample/misc/itemfactory2.rb: Fix warnings.
 	* src/rbgtkitemfactory.c: Fix segfault on amd64.

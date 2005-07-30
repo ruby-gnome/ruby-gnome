@@ -1,7 +1,7 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: changedisplay.rb,v 1.5 2005/07/28 14:30:37 mutoh Exp $
+# $Id: changedisplay.rb,v 1.6 2005/07/30 11:22:15 mutoh Exp $
 =begin
 = Change Display
 
@@ -107,7 +107,7 @@ module Demo
 	add_display(display)
       end
 
-      handler_id = manager.signal_connect('display_opened') do
+      handler_id = manager.signal_connect('display_opened') do |display|
 	add_display(display)
       end
       signal_connect('destroy') do

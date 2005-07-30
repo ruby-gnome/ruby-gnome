@@ -3,8 +3,8 @@
 
   rbgdkatom.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: mutoh $
+  $Date: 2005/07/30 11:22:15 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -68,11 +68,11 @@ gdkatom_initialize(self, num)
     guint atom = FIX2INT(num);
     if (atom == 0){
         /* This is a trick for passing 0(NULL) */
-        G_INITIALIZE(self, 1);
-        _SELF(self) = GDK_NONE;
+        G_INITIALIZE(self, GUINT_TO_POINTER(1));
+        _SELF(self) = GUINT_TO_POINTER(GDK_NONE);
     } else {
-        G_INITIALIZE(self, atom);
-    } 
+        G_INITIALIZE(self, GUINT_TO_POINTER(atom));
+    }
 
     return Qnil;
 }
@@ -88,7 +88,7 @@ static VALUE
 gdkatom_to_i(self)
     VALUE self;
 {
-    return UINT2NUM((guint)_SELF(self));
+    return UINT2NUM(GPOINTER_TO_UINT(_SELF(self)));
 }
 
 static VALUE
