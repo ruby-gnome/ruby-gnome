@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.8 2005/02/15 06:12:56 mutoh Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.9 2005/07/30 03:21:27 ktou Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -28,13 +28,22 @@ static VALUE gnoCanvasPathDef;
 #define _SELF(self) (GnomeCanvasPathDef *)RVAL2BOXED(self, rbgno_canvas_path_def_get_type())
 #define _WRAP(self) BOXED2RVAL(self, rbgno_canvas_path_def_get_type())
 
+static GnomeCanvasPathDef *
+rbgno_canvas_path_def_copy(path_def)
+    GnomeCanvasPathDef *path_def;
+{
+	if (path_def)
+		gnome_canvas_path_def_ref(path_def);
+	return path_def;
+}
+
 GType
 rbgno_canvas_path_def_get_type()
 {
     static GType our_type = 0;
     if (our_type == 0)
         our_type = g_boxed_type_register_static ("GnomeCanvasPathDef",
-                                                 (GBoxedCopyFunc)gnome_canvas_path_def_ref,
+                                                 (GBoxedCopyFunc)rbgno_canvas_path_def_copy,
                                                  (GBoxedFreeFunc)gnome_canvas_path_def_unref);
     return our_type;
 }
