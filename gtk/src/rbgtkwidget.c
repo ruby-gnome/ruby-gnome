@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Author: ktou $
+  $Date: 2005/07/30 03:25:02 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -28,6 +28,7 @@ widget_get_flags(self)
 static VALUE
 widget_set_flags(self, flag)
     VALUE self;
+    VALUE flag;
 {
     GTK_WIDGET_SET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
     return self;
@@ -36,6 +37,7 @@ widget_set_flags(self, flag)
 static VALUE
 widget_unset_flags(self, flag)
     VALUE self;
+    VALUE flag;
 {
     GTK_WIDGET_UNSET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
     return self;
