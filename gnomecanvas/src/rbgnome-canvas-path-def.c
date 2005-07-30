@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.9 2005/07/30 03:21:27 ktou Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.10 2005/07/30 03:23:37 ktou Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -83,6 +83,12 @@ cpathdef_initialize(argc, argv, self)
         path = gnome_canvas_path_def_new();
     } else if (TYPE(obj) == T_FIXNUM) {
         path = gnome_canvas_path_def_new_sized(NUM2INT(obj));
+        gint length = NUM2INT(obj);
+        if (length > 0) {
+            path = gnome_canvas_path_def_new_sized(length);
+        } else {
+            rb_raise(rb_eArgError, "invalid value %d (expect > 0)", length);
+        }
     } else {
         path = gnome_canvas_path_def_new_from_bpath(get_art_bpath(obj));
     }

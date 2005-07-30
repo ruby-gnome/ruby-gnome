@@ -5,6 +5,9 @@
 	gnome_canvas_path_def_ref(). Because gnome_canvas_path_def_ref()
 	doesn't return gpointer.
 	
+	* src/rbgnome-canvas-path-def.c (cpathdef_initialize):
+	Improve argument check.
+
 2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README, COPYING.LIB src/*.c: 
