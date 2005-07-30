@@ -7,7 +7,7 @@ Dario Linsky <dlinsky@web.de>
      German Website(M).
 
 Erwan Loisant <eloisant@gmail.com>
-     Ruby/GStreamer(M).
+     Ruby/GStreamer.
 
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
@@ -29,13 +29,14 @@ KATO Kazuyoshi <kzys@8-p.info>
      Ruby/GTK(mainly gtk-demo), Ruby/GdkPixbuf, Ruby/GLib, Ruby/Libart. 
 
 Kouhei Sutou  <kou@cozmixng.org>
-     Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M).
+     Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M), 
+     Ruby/GnomeCanvas, Ruby/GTK, Ruby/Libart.
 
 KUBO Takehiro <kubo@jiubao.org>
      Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <lrz@gnome.org>
-     Ruby/GStreamer, Ruby/Libgda(M), Ruby/GtkSourceView(M), 
+     Ruby/GStreamer(M), Ruby/Libgda(M), Ruby/GtkSourceView(M), 
      Ruby/GLib, Ruby/GTK, French Website, Website, Tutorials.
 
 Malte Milatz <malte@gmx-topmail.de>
@@ -57,7 +58,8 @@ Matthew Berg <galt@gothpoodle.com>
      Ruby/GTK TreeView Tutorial(M), Website, Ruby/GTK.
 
 Mirko Maischberger <mirko@lilik.it>
-     Ruby/GtkMozEmbed(M), Ruby/GTK, Website.
+     Ruby/GtkMozEmbed(M), Ruby/GTK, Ruby/Pango, Ruby/GdkPixbuf, Ruby/GNOME, 
+     Website.
  
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
      Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
@@ -75,7 +77,8 @@ TAMURA.Kenichi <sgs02516@nifty.com>
      Japanese ML archives by w3ml on SF.jp(M), Ruby/GLib.
 
 Vincent Isambart <vincent.isambart@laposte.net>
-     Ruby/GtkGLExt(M), Ruby/GnomeCanvas, Ruby/Pango, French Website, Website.
+     Ruby/GtkGLExt(M), Ruby/GnomeCanvas, Ruby/Pango, Ruby/GLib, 
+     French Website, Website.
 
 All members of Ruby-GNOME2 Mailing lists.
 And many others who have contributed patches, reported bugs. Thanks!

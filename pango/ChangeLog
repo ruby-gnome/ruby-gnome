@@ -1,3 +1,9 @@
+2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayout.c (layout_get_font_description, 
+	layout_set_tabs): 
+	Fix type declarations. 
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayoutiter.c: Fix for pango-1.4.x. Reported by Noritsugu Nakamura.

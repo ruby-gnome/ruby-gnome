@@ -1,3 +1,113 @@
+Ruby-GNOME2-0.13.0 (2005-07-31)
+
+  * Ruby/GLib 
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Added and completed: [Masao Mutoh]
+        GLib:PollFD, GLib::Source, GLib::MainLoop, GLib::IOChannel, 
+        GLib::Idle, GLib::ChildWatch
+      - Added some methods, improved, fixed bugs: [Vincent Isambart, Masao Mutoh]
+        PKGConfig, extconf.rb, 
+      - Added: [Masao Mutoh]
+        GLib::MainContext, sample/iochannel.rb, idle.rb, timeout.rb, 
+        timeout2.rb, tests/test-iochannel.*, runner.rb,
+
+  * Ruby/ATK
+      - None.
+
+  * Ruby/Pango
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Support x86_64 [Masao Mutoh]
+        Pango::Layout
+      - Added some methods, improved, fixed bugs: [Mirko Maischberger, 
+        Pascal Terjan, Masao Mutoh]
+        sample/parse.rb, Pango::LayoutLine, Pango::Coverage, Pango::LayoutIter, 
+        Pango::FontFamily, Pango::Attriterator
+
+  * Ruby/GdkPixbuf
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Fixed bugs, Improved: [Mirko Maischberger, Masao Mutoh]
+        sample/*.rb
+
+  * Ruby/GTK
+      - Support x86_64 [Kouhei Sutou, Masao Mutoh]
+        Gdk::Atom, Gtk::ItemFactory, Gtk::Widget, Gtk::Drag, Gtk::SizeGroup
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods: [Hiroyuki Ikezoe, KATO Kazuyoshi, 
+        Pascal Terjan, Kouhei Sutou, Mirko Maischberger, Masao Mutoh]
+        Gtk::ActionGroup, Gtk::IconTheme, Gtk::RC, Gtk::TreeModel, Gdk::TimeCoord, 
+        Gdk::Window, Gtk::CellView, Gtk::ToolButton, Gtk::MenuToolButton, Gdk, 
+        Gdk::Display, Gdk::GC, Gdk::PangoAttrEmbossed, Gdk::Drawable, Gtk::Window,
+        sample/gtk-demo/main.rb, sample/misc/*.rb, sample/testgtk/*.rb.
+      - Added: [KATO Kazuyoshi, Masao Mutoh]
+        sample/gtk-demo/hypertext.rb, sample/misc/colorselection.rb
+
+  * Ruby/GNOME [Mirko Maischberger]
+      - sh-bang (!#) normalization
+        sample/test-gnome/*.rb
+
+  * Ruby/GnomeCanvas [Kouhei Sutou]
+      - Support x86_64, Improved. [Kouhei Sutou]
+        Gnome::CanvasPathDef
+
+  * Ruby/Libglade
+      - None.
+
+  * Ruby/Libart 
+      - Added [Kouhei Sutou]
+        Art::DRect, Art::IRect
+      - Fixed bugs, Improved, Added some methods: [Kouhei Sutou, Masao Mutoh]
+        Art::Affine, Art::BPath. Art::Canvas
+
+  * Ruby/GConf
+      - None.
+
+  * Ruby/GStreamer 
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Added: [Laurent Sansonetti]
+        Gst::XOverLay, sample/video-player.rb, 
+      - Fixed bugs, Improved, Added some methods: 
+        [Laurent Sansonetti]
+        Gst::Caps, Gst::Pad, Gst::Element, Gst::TagSetter
+
+  * Ruby/GnomeVFS [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods:
+        GnomeVFS::File
+
+  * Ruby/GtkHtml2
+      - None.
+
+  * Ruby/GtkGLExt
+      - None.
+
+  * Ruby/Libgda
+      - None.
+
+  * Ruby/PanelApplet [Masao Mutoh]
+      - Check libpanel-applet version(2.6 or later):
+        extconf.rb
+
+  * Ruby/GtkSourceView [Masao Mutoh]
+      - None.
+
+  * Ruby/GnomePrint
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods. [Kouhei Sutou]
+        Gnome::PrintContext, Gnome::PrintJob, Gnome::PrintConfig, 
+        Gnome::PrintUnit, Gnome::PrintPaper, src/lib/gnomeprint2.rb, 
+        sample/to_file.rb 
+
+  * Ruby/GnomePrintUI
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods. [Kouhei Sutou]
+        Gnome::PaperSelector, Gnome::PrintUnitSelector, Gnome::PrintPreview, 
+        Gnome::PrintDialog, Gnome::PrintConfigDialog, sample/dialog.rb, 
+
+  * Ruby/RSVG
+      - Fixed GCC 4.0 warnings [Masao Mutoh]
+      - Fixed bugs, Improved, Added some methods. [Kouhei Sutou]
+
+
+
 Ruby-GNOME2-0.12.0 (2005-03-06)
 
   * Ruby/GLib 

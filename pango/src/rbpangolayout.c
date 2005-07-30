@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/07/30 17:05:17 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -98,7 +98,7 @@ layout_get_attributes(self)
 
 static VALUE
 layout_set_font_description(self, desc)
-    VALUE self;
+    VALUE self, desc;
 {
     pango_layout_set_font_description(_SELF(self), 
                                       (PangoFontDescription*)RVAL2BOXED(desc, PANGO_TYPE_FONT_DESCRIPTION));
@@ -239,7 +239,7 @@ layout_get_alignment(self)
 
 static VALUE
 layout_set_tabs(self, tabs)
-    VALUE self;
+    VALUE self,tabs;
 {
     pango_layout_set_tabs(_SELF(self), 
                           (PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY));
