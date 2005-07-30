@@ -1,7 +1,17 @@
+2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/testgtk/spinbutton.rb: Fix a typo.
+	* sample/misc/itemfactory2.rb: Fix warnings.
+	* src/rbgtkitemfactory.c: Fix segfault on amd64.
+	* sample/gtk-demo/changedisplay.rb: Fix a out-of-scope warning.
+	* sample/misc/treeview.rb, treemodelfilter.rb: Quit program when destroy event is occured.
+	* src/rbgtkdrag.c (gtkdrag_source_set): Fix type declaration.
+	* src/rbgtksizegroup.c (sizegrp_initialize): ditto.
+
 2005-07-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkwidget.c (widget_set_flags, widget_unset_flags): 
-	Add type declaration.
+	Fix type declaration.
 
 2005-07-28  Masao Mutoh  <mutoh@highway.ne.jp>
 

@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: mutoh $
-  $Date: 2005/01/11 17:01:40 $
+  $Date: 2005/07/30 10:24:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -252,7 +252,7 @@ gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
 
 static VALUE
 gtkdrag_source_set(self, widget, flags, targets, actions)
-    VALUE self, flags, targets, actions;
+    VALUE self, widget, flags, targets, actions;
 {
     gtk_drag_source_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
                         rbgtk_get_target_entry(targets), 

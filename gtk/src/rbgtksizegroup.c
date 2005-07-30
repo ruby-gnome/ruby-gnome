@@ -4,8 +4,9 @@
   rbgtksizegroup.c -
  
   $Author: mutoh $
-  $Date: 2003/12/03 16:00:24 $
+  $Date: 2005/07/30 10:24:57 $
 
+  Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
@@ -14,7 +15,7 @@
 
 static VALUE
 sizegrp_initialize(self, mode)
-    VALUE self;
+    VALUE self, mode;
 {
     G_INITIALIZE(self, gtk_size_group_new(RVAL2GENUM(mode, GTK_TYPE_SIZE_GROUP_MODE)));
     return Qnil;

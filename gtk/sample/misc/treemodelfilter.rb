@@ -5,7 +5,7 @@
   Copyright (c) 2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treemodelfilter.rb,v 1.1 2004/06/07 16:09:31 mutoh Exp $
+  $Id: treemodelfilter.rb,v 1.2 2005/07/30 10:24:57 mutoh Exp $
 =end
 require 'gtk2'
 
@@ -51,5 +51,5 @@ treeview.append_column(column2)
   iter[1] = num
 end
 
-Gtk::Window.new.add(treeview).show_all
+Gtk::Window.new.add(treeview).show_all.signal_connect("destroy"){Gtk.main_quit}
 Gtk.main

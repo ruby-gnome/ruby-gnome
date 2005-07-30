@@ -3,8 +3,8 @@
 
   rbgtkitemfactory.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: mutoh $
+  $Date: 2005/07/30 10:24:57 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
@@ -18,6 +18,9 @@
 #define _SELF(self) (GTK_ITEM_FACTORY(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 #define RVAL2ACCEL(a)  (GTK_ACCEL_GROUP(RVAL2GOBJ(a)))
+
+static VALUE action_table;
+static guint action_id = 0;
 
 static VALUE
 ifact_initialize(self, type, path, accel)
@@ -112,11 +115,13 @@ menuitem_type_check(item_type)
 }
 
 static void
-items_exec_callback_wrap(callback_data, action, widget)
-    VALUE callback_data, action;
+items_exec_callback_wrap(callback_data, action_id, widget)
+    VALUE callback_data, action_id;
     GtkWidget* widget;
 {
     VALUE iter, data;
+    VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));
+
     iter = RARRAY(action)->ptr[0];
     data = RARRAY(action)->ptr[1];
     if (!NIL_P(iter)) {
@@ -146,7 +151,9 @@ create_factory_entry(entry, self, path, item_type, accel, extdata, func, data)
     }
     action = rb_ary_new3(2, func, data);
     G_RELATIVE(self, action);
-    entry->callback_action = action;
+    rb_hash_aset(action_table, UINT2NUM(action_id), action);
+    entry->callback_action = action_id;
+    action_id++;
 
     if (NIL_P(extdata)){
         entry->extra_data = NULL;
@@ -297,4 +304,8 @@ Init_gtk_itemfactory()
     rb_define_const(gItemFactory, "BRANCH", CSTR2RVAL("<Branch>"));
     rb_define_const(gItemFactory, "LAST_BRANCH", CSTR2RVAL("<LastBranch>"));
     rb_define_const(gItemFactory, "TEAROFF", CSTR2RVAL("<Tearoff>"));
+
+    action_table = rb_hash_new();
+    rb_global_variable(&action_table);
 }
+

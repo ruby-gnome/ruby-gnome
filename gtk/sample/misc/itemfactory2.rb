@@ -7,7 +7,7 @@
 
   *NOTE* Gtk::ItemFactory has been deprecated. Use Gtk::UIManager instead.
 
-  $Id: itemfactory2.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
+  $Id: itemfactory2.rb,v 1.6 2005/07/30 10:24:57 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -28,13 +28,13 @@ window.add_accel_group(accelgroup)
 ifp = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR, "<main>", accelgroup)
 
 ifp.create_item("/_Stock")
-ifp.create_item("/_Stock/_New", "<StockItem>", "<control>N", Gtk::Stock::NEW, 1) do |v|
+ifp.create_item("/_Stock/_New", "<StockItem>", "<control>N", Gtk::Stock::NEW, 1) do |v, _|
   p "StockItem #{v}"
 end
-item = ifp.create_item("/_Stock/_Open", "<StockItem>", "<control>O", Gtk::Stock::OPEN, 2) do |v|
+item = ifp.create_item("/_Stock/_Open", "<StockItem>", "<control>O", Gtk::Stock::OPEN, 2) do |v, _|
   p "StockItem #{v}"
 end
-ifp.create_item("/_Stock/_Quit", "<StockItem>", "<control>Q", Gtk::Stock::QUIT, 3) do |v|
+ifp.create_item("/_Stock/_Quit", "<StockItem>", "<control>Q", Gtk::Stock::QUIT, 3) do |v, _|
   p "Quit"
   Gtk.main_quit
 end
@@ -48,13 +48,13 @@ ifp.create_item("/_Check/Check_1", "<CheckItem>"){p "Check1"}
 ifp.create_item("/_Check/Check_2", "<CheckItem>"){p "Check2"}
 
 ifp.create_item("/_Toggle")
-ifp.create_item("/_Toggle/Toggle_1", "<ToggleItem>", nil, nil, 1){|v| p "Toggle#{v}"}
-ifp.create_item("/_Toggle/Toggle_2", "<ToggleItem>", nil, nil, 2){|v| p "Toggle#{v}"}
+ifp.create_item("/_Toggle/Toggle_1", "<ToggleItem>", nil, nil, 1){|v, _| p "Toggle#{v}"}
+ifp.create_item("/_Toggle/Toggle_2", "<ToggleItem>", nil, nil, 2){|v, _| p "Toggle#{v}"}
 
 ifp.create_item("/_Radio")
-ifp.create_item("/_Radio/Radio_1", "<RadioItem>", nil, nil, 1){|v| p "Radio#{v}"}
-ifp.create_item("/_Radio/Radio_2", "/Radio/Radio1", nil, nil, 2){|v| p "Radio#{v}"}
-ifp.create_item("/_Radio/Radio_3", "/Radio/Radio1", nil, nil, 3){|v| p "Radio#{v}"}
+ifp.create_item("/_Radio/Radio_1", "<RadioItem>", nil, nil, 1){|v, _| p "Radio#{v}"}
+ifp.create_item("/_Radio/Radio_2", "/Radio/Radio1", nil, nil, 2){|v, _| p "Radio#{v}"}
+ifp.create_item("/_Radio/Radio_3", "/Radio/Radio1", nil, nil, 3){|v, _| p "Radio#{v}"}
 
 ifp.create_item("/_Misc", "<LastBranch>")
 ifp.create_item("/_Misc/Tearoff", "<Tearoff>")

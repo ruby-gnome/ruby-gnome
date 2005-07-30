@@ -5,7 +5,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.6 2005/03/22 17:41:28 silicio Exp $
+  $Id: treeview.rb,v 1.7 2005/07/30 10:24:57 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -68,5 +68,6 @@ column = Gtk::TreeViewColumn.new("Gtk::CellRenderPixbuf", renderer, {
 tv.append_column(column)
 
 window.add(tv).set_default_size(300, 300).show_all
+window.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main

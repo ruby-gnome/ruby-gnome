@@ -4,7 +4,7 @@
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 
-  $Id: spinbutton.rb,v 1.6 2005/07/21 17:47:19 mutoh Exp $
+  $Id: spinbutton.rb,v 1.7 2005/07/30 10:24:57 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -44,7 +44,7 @@ class SpinButtonSample < SampleWindow
   end
 
   def initialize
-    super("GtkSpinButton")
+    super("Gtk::SpinButton")
       
     main_vbox = Gtk::VBox.new(false, 5)
     main_vbox.set_border_width(10)
