@@ -21,7 +21,7 @@
 #include "rbgst.h"
 
 VALUE
-rb_str_format (char *fmt, ...)
+rb_str_new_with_format (char *fmt, ...)
 {
 	char buf[1000];
 	va_list ap;

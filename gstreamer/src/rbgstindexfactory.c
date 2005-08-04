@@ -31,7 +31,7 @@ static VALUE
 rb_gst_indexfactory_to_s (VALUE self)
 {
 	GstIndexFactory *factory = RGST_INDEX_FACTORY (self); 
-	return rb_str_format ("Index: %s (%s)",
+	return rb_str_new_with_format ("Index: %s (%s)",
 			      GST_PLUGIN_FEATURE_NAME (factory),
 			      factory->longdesc);
 }

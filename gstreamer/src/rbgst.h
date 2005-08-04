@@ -117,7 +117,7 @@ GType gst_type_get_type ();
 /* misc.c interface */
 void rbgst_initialize_gstobject (VALUE obj, GstObject * gstobj);
 VALUE rbgst_new_gstobject (void *);
-VALUE rb_str_format (char *fmt, ...);
+VALUE rb_str_new_with_format (char *fmt, ...);
 VALUE rb_ary_yield (VALUE arr);
 
 /* implemented in rbgstpluginfeature.c */

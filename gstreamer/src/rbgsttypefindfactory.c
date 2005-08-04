@@ -101,7 +101,7 @@ static VALUE
 rb_gst_type_find_factory_to_s (VALUE self)
 {
 	GstTypeFindFactory *factory = RGST_TYPE_FIND_FACTORY (self);
-	return rb_str_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME (factory));
+	return rb_str_new_with_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME (factory));
 }
 
 void

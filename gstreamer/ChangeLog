@@ -1,3 +1,10 @@
+2005-08-04  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/misc.c, src/rbgstelementfactory.c, src/rbgstindexfactory.c, 
+	  src/rbgstschedulerfactory.c, src/rbgsttypefindfactory.c: Renamed
+	rb_str_format () to rb_str_new_with_format () as Ruby 1.9 introduces a 
+	new function with the same name.
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgstxml.c: Fix compiling warning.

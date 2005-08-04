@@ -109,7 +109,7 @@ static VALUE
 rb_gst_elementfactory_to_s (VALUE self)
 {
 	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self); 
-	return rb_str_format ("Element: %s (%s)",
+	return rb_str_new_with_format ("Element: %s (%s)",
 			      GST_PLUGIN_FEATURE_NAME(factory),
 			      factory->details.longname);
 }

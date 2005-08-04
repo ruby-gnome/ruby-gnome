@@ -55,7 +55,7 @@ static VALUE
 rb_gst_schedulerfactory_to_s (VALUE self)
 {
 	GstSchedulerFactory *factory = RGST_SCHEDULER_FACTORY (self); 
-	return rb_str_format ("Scheduler: %s (%s)",
+	return rb_str_new_with_format ("Scheduler: %s (%s)",
 			      GST_PLUGIN_FEATURE_NAME (factory),
 			      factory->longdesc);
 }
