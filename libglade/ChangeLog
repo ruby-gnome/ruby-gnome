@@ -1,3 +1,14 @@
+2005-08-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: GladeXML.new finds GETTEXT_PATH environment variable
+	if the localedir is nil. If it's not set, then use system path
+	(e.g. /usr/share/locale).
+
+2005-08-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* bin/ruby-glade-create-template: Fix to output uniq signal handlers.
+	Improved GetText.n_.
+
 2005-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Support libintl.h on mswin32.

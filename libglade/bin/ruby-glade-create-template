@@ -6,7 +6,7 @@
 #
 # Usage: ruby ruby-glade-create-template yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.11 2005/02/12 04:10:51 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.12 2005/08/04 18:32:53 mutoh Exp $
 #
 # Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
 #
@@ -14,7 +14,7 @@
 require 'libglade2'
 require 'rexml/document'
 
-LG_VERSION = %Q[$Revision: 1.11 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.12 $].scan(/\d/).join(".")
 
 unless ARGV.size == 1
   puts "ruby-glade-create-template #{LG_VERSION}"
@@ -58,9 +58,9 @@ end
 # Get signals.
 GladeXML.set_custom_widget_handler(false)
 glade = GladeXML.new(path)
-signals = []
+signals = {}
 glade.signal_autoconnect_full{|source, target, signal_name, handler, data, after|
-  signals << [source.class.signal(signal_name), glade.canonical_handler(handler)]
+  signals[glade.canonical_handler(handler)] = source.class.signal(signal_name)
 }
 
 # Get Menu for GnomeApp and Tooltips.
@@ -153,7 +153,7 @@ end
 # Creates handler methods
 handler_methods = ""
 if signals.size > 0
-  signals.each do |signal, handler|
+  signals.each do |handler, signal|
     args = "widget"
     (0...signal.param_types.size).each do |i|
       args << ", arg#{i}"
@@ -184,7 +184,7 @@ rescue LoadError
       def _(msgid); msgid; end
       def N_(msgid); msgid; end
       def n_(msgid, msgid_plural, n)
-	msgid
+	n == 1 ? msgid : msgid_plural
       end
       def s_(msgid, div = '|')
 	if index = msgid.rindex(div)

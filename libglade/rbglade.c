@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2005/02/12 04:10:51 $
+  $Date: 2005/08/04 18:32:53 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -121,6 +121,11 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 #ifdef HAVE_BINDTEXTDOMAIN
     if (localedir){
         bindtextdomain(domain, localedir);
+    } else {
+        const gchar* env = g_getenv("GETTEXT_PATH");
+        if (env){
+            bindtextdomain(domain, env);
+        }
     }
     if (domain){
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
