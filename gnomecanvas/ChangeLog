@@ -1,3 +1,7 @@
+2005-08-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas-item.c (citem_intialize): Check first parameter. 
+
 2005-08-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgnome-canvas-path-def.c (cpathdef_initialize):
