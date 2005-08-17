@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2005/05/07 19:12:52 $
+  $Date: 2005/08/17 15:04:46 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -27,12 +27,20 @@ static VALUE
 gdkdisplay_s_open(self, display_name)
     VALUE self, display_name;
 {
-    VALUE display = GOBJ2RVAL(gdk_display_open(RVAL2CSTR(display_name)));
-    if (rb_block_given_p()) {
-        rb_ensure(rb_yield, display, gdkdisplay_close, display);
-        return Qnil;
+    GdkDisplay* gdisplay = gdk_display_open(RVAL2CSTR(display_name));
+    g_object_ref(gdisplay);
+    if (! gdisplay) {
+        rb_raise(rb_eRuntimeError, "The display `%s' could not be opened.", 
+                 RVAL2CSTR(display_name));
     } else {
-        return display;
+        VALUE display = GOBJ2RVAL(gdisplay);
+        
+        if (rb_block_given_p()) {
+            rb_ensure(rb_yield, display, gdkdisplay_close, display);
+            return Qnil;
+        } else {
+            return display;
+        }
     }
 }
 
