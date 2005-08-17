@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2005/08/17 15:04:46 $
+  $Date: 2005/08/17 15:11:29 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -48,7 +48,11 @@ static VALUE
 gdkdisplay_s_get_default(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gdk_display_get_default());
+    GdkDisplay* gdisplay = gdk_display_get_default();
+     if (! gdisplay)
+        rb_raise(rb_eRuntimeError, "No default display is found.");
+    
+    return GOBJ2RVAL(gdisplay);
 }
 
 

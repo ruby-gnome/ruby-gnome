@@ -3,6 +3,7 @@
 	* src/rbgdkdisplay.c: Fix segfault when Gdk::Display#close is called.
 	Reported by Bram Senders.
 	And raise a RuntimeError when Gdk::Display#open is failed.
+	Gdk::Display#default: ditto. 
 
 2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
