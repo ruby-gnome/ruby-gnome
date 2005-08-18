@@ -1,3 +1,8 @@
+2005-08-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkpixmap.c (Init_gtkglext_gdk_pixmap): Fix wrong number
+	of argument of pixmap_set_gl_capability().
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 
