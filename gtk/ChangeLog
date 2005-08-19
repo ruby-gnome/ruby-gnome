@@ -1,3 +1,10 @@
+2005-08-20  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkimage.c (image_initialize): Fix a problem when first parameter is a String
+	and Second paramter is a Gtk::IconSize, not nil.
+	* src/rbgdkdisplay.c (gdkdisplay_s_open): Fix a problem if gdk_display_open returns NULL. 
+	Reported by Guillaume Cottenceau.
+
 2005-08-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdisplay.c: Fix segfault when Gdk::Display#close is called.

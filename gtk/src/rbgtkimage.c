@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 19:02:05 $
+  $Date: 2005/08/19 17:28:47 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -37,7 +37,7 @@ image_initialize(argc, argv, self)
 
     if (NIL_P(arg1)){
         widget = gtk_image_new();
-    } else if (TYPE(arg1) == T_STRING){
+    } else if (TYPE(arg1) == T_STRING && argc == 1){
         widget = gtk_image_new_from_file(RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
         widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
