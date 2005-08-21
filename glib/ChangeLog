@@ -1,3 +1,7 @@
+2005608-21  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/rbglib_utils.c: Added GLib.listenv and .host_name (2.8)
+
 2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: Increment version.

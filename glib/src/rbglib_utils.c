@@ -3,8 +3,8 @@
 
   rbglib_utils.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/11 19:14:12 $
+  $Author: pterjan $
+  $Date: 2005/08/21 10:31:13 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -67,6 +67,31 @@ rbglib_m_unsetenv(self, variable)
 {
     g_unsetenv(RVAL2CSTR(variable));
     return self;
+}
+#endif
+
+#if GLIB_CHECK_VERSION(2,8,0)
+static VALUE
+rbglib_m_listenv(self)
+    VALUE self;
+{
+    gchar** c_list;
+    gchar** c_var;
+    VALUE r_list = rb_ary_new();
+    c_list = g_listenv();
+    c_var = c_list;
+    while(*c_var) {
+        rb_ary_push(r_list, rb_str_new2(*(c_var++)));
+    }
+    g_strfreev(c_list);
+    return r_list;
+}
+
+static VALUE
+rbglib_m_host_name(self)
+    VALUE self;
+{
+    return CSTR2RVAL(g_get_host_name());
 }
 #endif
 
@@ -140,9 +165,12 @@ rbglib_m_path_get_dirname(self, fname)
 Use File.join()
 gchar*      g_build_filename                (const gchar *first_element,
                                              ...);
+gchar*      g_build_filenamev               (gchar **args);
 gchar*      g_build_path                    (const gchar *separator,
                                              const gchar *first_element,
                                              ...);
+gchar*      g_build_pathv                   (const gchar *separator,
+                                             gchar **args);
 */
 
 static VALUE
@@ -250,6 +278,10 @@ Init_glib_utils()
 #if GLIB_CHECK_VERSION(2,4,0)
     rb_define_module_function(mGLib, "setenv", rbglib_m_setenv, 2);
     rb_define_module_function(mGLib, "unsetenv", rbglib_m_unsetenv, 1);
+#endif
+#if GLIB_CHECK_VERSION(2,8,0)
+    rb_define_module_function(mGLib, "listenv", rbglib_m_listenv, 0);
+    rb_define_module_function(mGLib, "host_name", rbglib_m_host_name, 0);
 #endif
     rb_define_module_function(mGLib, "user_name", rbglib_m_user_name, 0);
     rb_define_module_function(mGLib, "real_name", rbglib_m_real_name, 0);
