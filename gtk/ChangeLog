@@ -1,3 +1,8 @@
+2005-08-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkdraw.c (gdkdraw_draw_trapezoids): Fix wrong argument
+	check.
+
 2005-08-20  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkimage.c (image_initialize): Fix a problem when first parameter is a String

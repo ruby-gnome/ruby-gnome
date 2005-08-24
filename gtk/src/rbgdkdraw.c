@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: ktou $
-  $Date: 2005/07/06 14:54:46 $
+  $Date: 2005/08/24 10:09:51 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -246,7 +246,7 @@ gdkdraw_draw_trapezoids(self, gc, trapezoids)
     gtrapezoids = ALLOCA_N(GdkTrapezoid, len);
     for (i = 0; i < len; i++) {
         Check_Type(RARRAY(trapezoids)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(trapezoids)->ptr[i])->len < 7) {
+        if (RARRAY(RARRAY(trapezoids)->ptr[i])->len < 6) {
             rb_raise(rb_eArgError, "trapezoids %d should be array of size 6", i);
         }
         gtrapezoids[i].y1 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[0]);
