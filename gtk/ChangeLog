@@ -2,6 +2,8 @@
 
 	* src/rbgdkdraw.c (gdkdraw_draw_trapezoids): Fix wrong argument
 	check.
+	
+	* src/rbgdkdisplay.c: Add getters.
 
 2005-08-20  Masao Mutoh  <mutoh@highway.ne.jp>
 

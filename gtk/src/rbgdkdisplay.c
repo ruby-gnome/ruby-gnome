@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: mutoh $
-  $Date: 2005/08/19 17:28:47 $
+  $Author: ktou $
+  $Date: 2005/08/24 13:09:52 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -195,13 +195,79 @@ gdkdisplay_set_double_click_time(self, msec)
     return self;
 }
 
+static VALUE
+gdkdisplay_get_double_click_time(self)
+    VALUE self;
+{
+    return UINT2NUM(_SELF(self)->double_click_time);
+}
+
+static VALUE
+gdkdisplay_get_button_click_time(self)
+    VALUE self;
+{
+    return rb_ary_new3(2,
+                       UINT2NUM(_SELF(self)->button_click_time[0]),
+                       UINT2NUM(_SELF(self)->button_click_time[1]));
+}
+
+static VALUE
+gdkdisplay_get_button_window(self)
+    VALUE self;
+{
+    return rb_ary_new3(2,
+                       GOBJ2RVAL(_SELF(self)->button_window[0]),
+                       GOBJ2RVAL(_SELF(self)->button_window[1]));
+}
+
+static VALUE
+gdkdisplay_get_button_number(self)
+    VALUE self;
+{
+    return rb_ary_new3(2,
+                       INT2NUM(_SELF(self)->button_number[0]),
+                       INT2NUM(_SELF(self)->button_number[1]));
+}
+
+static VALUE
+gdkdisplay_get_closed(self)
+    VALUE self;
+{
+    return _SELF(self)->closed ? Qtrue : Qfalse;
+}
+
 #if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+gdkdisplay_get_button_x(self)
+    VALUE self;
+{
+    return rb_ary_new3(2,
+                       INT2NUM(_SELF(self)->button_x[0]),
+                       INT2NUM(_SELF(self)->button_x[1]));
+}
+
+static VALUE
+gdkdisplay_get_button_y(self)
+    VALUE self;
+{
+    return rb_ary_new3(2,
+                       INT2NUM(_SELF(self)->button_y[0]),
+                       INT2NUM(_SELF(self)->button_y[1]));
+}
+
 static VALUE
 gdkdisplay_set_double_click_distance(self, distance)
     VALUE self, distance;
 {
     gdk_display_set_double_click_distance(_SELF(self), NUM2UINT(distance));
     return self;
+}
+
+static VALUE
+gdkdisplay_get_double_click_distance(self, distance)
+    VALUE self;
+{
+    return UINT2NUM(_SELF(self)->double_click_distance);
 }
 #endif
 
@@ -379,8 +445,16 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "peek_event", gdkdisplay_peek_event, 0);
     rb_define_method(gdkDisplay, "put_event", gdkdisplay_put_event, 1);
     rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 1);
+    rb_define_method(gdkDisplay, "double_click_time",  gdkdisplay_get_double_click_time, 0);
+    rb_define_method(gdkDisplay, "button_click_time",  gdkdisplay_get_button_click_time, 0);
+    rb_define_method(gdkDisplay, "button_window",  gdkdisplay_get_button_window, 0);
+    rb_define_method(gdkDisplay, "button_number",  gdkdisplay_get_button_number, 0);
+    rb_define_method(gdkDisplay, "closed?",  gdkdisplay_get_closed, 0);
 #if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gdkDisplay, "button_x",  gdkdisplay_get_button_x, 0);
+    rb_define_method(gdkDisplay, "button_y",  gdkdisplay_get_button_y, 0);
     rb_define_method(gdkDisplay, "set_double_click_distance", gdkdisplay_set_double_click_distance, 1);
+    rb_define_method(gdkDisplay, "double_click_distance", gdkdisplay_get_double_click_distance, 0);
 #endif
     rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
     rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
