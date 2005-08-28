@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/14 17:01:50 $
+  $Author: ggc $
+  $Date: 2005/08/28 20:03:57 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -204,6 +204,22 @@ gwin_set_default(self, win)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gwin_present(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE timestamp;
+    if (rb_scan_args(argc, argv, "01", &timestamp) == 1) {
+        gtk_window_present_with_time(_SELF(self), NUM2UINT(timestamp));
+    } else {
+        gtk_window_present(_SELF(self));
+    }
+    return self;
+}
+#else
 static VALUE
 gwin_present(self)
     VALUE self;
@@ -211,6 +227,7 @@ gwin_present(self)
     gtk_window_present(_SELF(self));
     return self;
 }
+#endif
 
 static VALUE
 gwin_iconify(self)
@@ -379,6 +396,9 @@ void        gtk_window_set_icon_name        (GtkWindow *window,
 void        gtk_window_set_focus_on_map     (GtkWindow *window,
                                              gboolean setting);
 gboolean    gtk_window_get_focus_on_map     (GtkWindow *window);
+
+void        gtk_window_set_urgency_hint     (GtkWindow *window,
+                                             gboolean setting);
 */
 
 
@@ -669,7 +689,11 @@ Init_gtk_window()
     rb_define_method(gWindow, "focus", gwin_get_focus, 0);
     rb_define_method(gWindow, "set_focus", gwin_set_focus, 1);
     rb_define_method(gWindow, "set_default", gwin_set_default, 1);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gWindow, "present", gwin_present, -1);
+#else
     rb_define_method(gWindow, "present", gwin_present, 0);
+#endif
     rb_define_method(gWindow, "iconify", gwin_iconify, 0);
     rb_define_method(gWindow, "deiconify", gwin_deiconify, 0);
     rb_define_method(gWindow, "stick", gwin_stick, 0);
