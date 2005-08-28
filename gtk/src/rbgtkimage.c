@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: ggc $
-  $Date: 2005/08/28 18:33:12 $
+  $Date: 2005/08/28 18:38:57 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -78,7 +78,7 @@ image_set(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &arg1, &arg2);
 
-    if (TYPE(arg1) == T_STRING){
+    if (TYPE(arg1) == T_STRING && argc == 1){
         gtk_image_set_from_file(_SELF(self), RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
         gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
