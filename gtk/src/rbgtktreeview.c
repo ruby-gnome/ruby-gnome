@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:15 $
+  $Author: ggc $
+  $Date: 2005/08/28 20:42:35 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -379,6 +379,23 @@ treeview_get_visible_rect(self)
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+treeview_get_visible_range(self)
+    VALUE self;
+{
+    GtkTreePath* start_path;
+    GtkTreePath* end_path;
+
+    gboolean valid_paths = gtk_tree_view_get_visible_range(_SELF(self), &start_path, &end_path);
+
+    return rb_ary_new3(3,
+                       RTEST(valid_paths),
+                       start_path ? TREEPATH2RVAL(start_path) : Qnil,
+                       end_path ? TREEPATH2RVAL(end_path) : Qnil);
+}
+#endif
+
 static VALUE
 treeview_get_bin_window(self)
     VALUE self;
@@ -635,15 +652,19 @@ Init_gtk_treeview()
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
     rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
-   #if GTK_CHECK_VERSION(2,2,0)
+#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
-   #endif
+#endif
     rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
     rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
     rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
     rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
     rb_define_method(gTv, "get_background_area", treeview_get_background_area, 2);
     rb_define_method(gTv, "visible_rect", treeview_get_visible_rect, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gTv, "visible_range", treeview_get_visible_range, 0);
+#endif
+
     rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
     rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
     rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
