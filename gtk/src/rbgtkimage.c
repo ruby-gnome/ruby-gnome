@@ -3,8 +3,8 @@
 
   rbgtkimage.c -
 
-  $Author: mutoh $
-  $Date: 2005/08/19 17:28:47 $
+  $Author: ggc $
+  $Date: 2005/08/28 18:33:12 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -123,12 +123,25 @@ gint        gtk_image_get_pixel_size        (GtkImage *image);
 
 */
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+image_clear(self)
+    VALUE self;
+{
+    gtk_image_clear(_SELF(self));
+    return self;
+}
+#endif
+
 void 
 Init_gtk_image()
 {
     VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     rb_define_method(gImage, "initialize", image_initialize, -1);
     rb_define_method(gImage, "set", image_set, -1);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gImage, "clear", image_clear, 0);
+#endif
 
     /* GtkImageType */
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", gImage);
