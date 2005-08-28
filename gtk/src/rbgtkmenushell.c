@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: mutoh $
-  $Date: 2004/06/19 16:21:34 $
+  $Author: ggc $
+  $Date: 2005/08/28 20:31:49 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -84,6 +84,7 @@ mshell_activate_item(self, menu_item, force_deactivate)
                                  RTEST(force_deactivate));
     return self;
 }
+
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 mshell_cancel(self)
@@ -93,6 +94,13 @@ mshell_cancel(self)
     return self;
 }
 #endif
+
+/* Defined as properties
+void        gtk_menu_shell_set_take_focus   (GtkMenuShell *menu_shell,
+                                             gboolean take_focus);
+gboolean    gtk_menu_shell_get_take_focus   (GtkMenuShell *menu_shell);
+*/
+
 void 
 Init_gtk_menu_shell()
 {
