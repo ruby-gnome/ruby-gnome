@@ -3,8 +3,8 @@
 
   rbpango.h -
 
-  $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Author: ggc $
+  $Date: 2005/08/28 18:44:40 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -34,13 +34,17 @@
 extern void Init_pango_inits();
 RUBY_PANGO_VAR VALUE mPango;
 
+#ifndef PANGO_TYPE_ITEM
 #define PANGO_TYPE_ITEM (pango_item_get_type())
+#endif
 #define PANGO_TYPE_ANALYSIS (pango_analysis_get_type())
 #define PANGO_TYPE_LOG_ATTR (pango_log_attr_get_type())
 #ifndef PANGO_TYPE_LAYOUT_ITER
 #define PANGO_TYPE_LAYOUT_ITER (pango_layout_iter_get_type())
 #endif
+#ifndef PANGO_TYPE_LAYOUT_LINE
 #define PANGO_TYPE_LAYOUT_LINE (pango_layout_line_get_type())
+#endif
 #define PANGO_TYPE_RECTANGLE (pango_rectangle_get_type())
 #define PANGO_TYPE_ATTR_ITERATOR (pango_attr_iter_get_type())
 #define PANGO_TYPE_COVERAGE (pango_coverage_get_type())
