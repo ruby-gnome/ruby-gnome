@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2005/06/16 13:27:33 $
+  $Author: ggc $
+  $Date: 2005/08/29 19:58:15 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -166,7 +166,7 @@ extern void rbgobj_boxed_not_copy_obj(GType gtype);
 extern void rbgobj_boxed_ref(VALUE obj, VALUE other);
 extern void rbgobj_boxed_unref(VALUE obj, VALUE other);
 
-/* rbgobj_enum.c */
+/* rbgobj_enums.c */
 extern void rbgobj_constant_remap(const char *original, const char *replacement);
 extern void rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix);
 extern VALUE rbgobj_make_enum(gint n, GType gtype);
