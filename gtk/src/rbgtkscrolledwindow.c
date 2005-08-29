@@ -3,8 +3,8 @@
 
   rbgtkscrolledwindow.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Author: ggc $
+  $Date: 2005/08/29 21:02:45 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,6 +65,24 @@ scwin_add_with_viewport(self, other)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+scwin_get_hscrollbar(self)
+    VALUE self;
+{
+    GtkWidget* hscrollbar = gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
+    return GOBJ2RVAL(hscrollbar);
+}
+
+static VALUE
+scwin_get_vscrollbar(self)
+    VALUE self;
+{
+    GtkWidget* vscrollbar = gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)));
+    return GOBJ2RVAL(vscrollbar);
+}
+#endif
+
 
 void 
 Init_gtk_scrolled_window()
@@ -75,4 +93,8 @@ Init_gtk_scrolled_window()
     rb_define_method(gScrolledWin, "set_policy", scwin_set_policy, 2);
     rb_define_method(gScrolledWin, "policy", scwin_get_policy, 0);
     rb_define_method(gScrolledWin, "add_with_viewport", scwin_add_with_viewport, 1);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gScrolledWin, "hscrollbar", scwin_get_hscrollbar, 0);
+    rb_define_method(gScrolledWin, "vscrollbar", scwin_get_vscrollbar, 0);
+#endif
 }
