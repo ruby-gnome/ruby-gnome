@@ -3,12 +3,13 @@
 
   rbgtkstock.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/09 19:02:05 $
+  $Author: ggc $
+  $Date: 2005/08/30 19:34:19 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
-#include "rbgtk.h"
+
+#include "global.h"
 
 #define Check_Symbol(sym) do { \
     if (!SYMBOL_P(sym)) \
@@ -72,6 +73,31 @@ stock_m_list_ids(klass)
     return ary;
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static gchar*
+translate_func(path, func)
+    const gchar* path;
+    gpointer func;
+{
+    VALUE ret = rb_funcall((VALUE)func, id_call, 1, CSTR2RVAL(path));
+    return RVAL2CSTR(ret);
+}
+
+static VALUE
+stock_m_set_translate_func(klass, domain)
+    VALUE klass;
+    VALUE domain;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(klass, func);
+    gtk_stock_set_translate_func(RVAL2CSTR(domain),
+                                 (GtkTranslateFunc)translate_func, 
+                                 (gpointer)func,
+                                 NULL);
+    return Qnil;
+}
+#endif
+
 void
 Init_gtk_stock()
 {
@@ -81,6 +107,9 @@ Init_gtk_stock()
     rb_define_singleton_method(mGtkStock, "add", stock_m_add, -1);
     rb_define_singleton_method(mGtkStock, "lookup", stock_m_lookup, 1);
     rb_define_singleton_method(mGtkStock, "ids", stock_m_list_ids, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_singleton_method(mGtkStock, "set_translate_func", stock_m_set_translate_func, 1);
+#endif
 
     /* Stock IDs (not all are stock items; some are images only) */
 #if GTK_CHECK_VERSION(2,6,0)
@@ -125,6 +154,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "FIND", CSTR2SYM(GTK_STOCK_FIND));
     rb_define_const(mGtkStock, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
     rb_define_const(mGtkStock, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_const(mGtkStock, "FULLSCREEN", CSTR2SYM(GTK_STOCK_FULLSCREEN));
+#endif
     rb_define_const(mGtkStock, "GOTO_BOTTOM", CSTR2SYM(GTK_STOCK_GOTO_BOTTOM));
     rb_define_const(mGtkStock, "GOTO_FIRST", CSTR2SYM(GTK_STOCK_GOTO_FIRST));
     rb_define_const(mGtkStock, "GOTO_LAST", CSTR2SYM(GTK_STOCK_GOTO_LAST));
@@ -141,6 +173,9 @@ Init_gtk_stock()
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_const(mGtkStock, "INDENT", CSTR2SYM(GTK_STOCK_INDENT));
 #endif
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_const(mGtkStock, "INFO", CSTR2SYM(GTK_STOCK_INFO));
+#endif
     rb_define_const(mGtkStock, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
     rb_define_const(mGtkStock, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
     rb_define_const(mGtkStock, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
@@ -148,6 +183,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "JUSTIFY_FILL", CSTR2SYM(GTK_STOCK_JUSTIFY_FILL));
     rb_define_const(mGtkStock, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
     rb_define_const(mGtkStock, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_const(mGtkStock, "LEAVE_FULLSCREEN", CSTR2SYM(GTK_STOCK_LEAVE_FULLSCREEN));
+#endif
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "MEDIA_FORWARD", CSTR2SYM(GTK_STOCK_MEDIA_FORWARD));
     rb_define_const(mGtkStock, "MEDIA_NEXT", CSTR2SYM(GTK_STOCK_MEDIA_NEXT));
