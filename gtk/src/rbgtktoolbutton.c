@@ -3,8 +3,8 @@
 
   rbgtktoolbutton.c -
 
-  $Author: mutoh $
-  $Date: 2005/05/06 20:17:11 $
+  $Author: ggc $
+  $Date: 2005/08/30 20:31:00 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -53,6 +53,9 @@ G_CONST_RETURN gchar* gtk_tool_button_get_stock_id
 void        gtk_tool_button_set_icon_widget (GtkToggletoolbutton *button,
                                              GtkWidget *icon_widget);
 GtkWidget*  gtk_tool_button_get_icon_widget (GtkToggletoolbutton *button);
+void        gtk_tool_button_set_icon_name   (GtkToolButton *button,
+                                             const gchar *icon_name);
+const gchar* gtk_tool_button_get_icon_name  (GtkToolButton *button);
 void        gtk_tool_button_set_label_widget
                                             (GtkToggletoolbutton *button,
                                              GtkWidget *label_widget);
