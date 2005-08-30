@@ -3,8 +3,8 @@
 
   rbgtksizegroup.c -
  
-  $Author: mutoh $
-  $Date: 2005/07/30 10:24:57 $
+  $Author: ggc $
+  $Date: 2005/08/30 19:19:42 $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -36,6 +36,14 @@ sizegrp_remove_widget(self, widget)
     gtk_size_group_remove_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
     return self;
 }
+
+/* Defined as properties
+void        gtk_size_group_set_ignore_hidden
+                                            (GtkSizeGroup *size_group,
+                                             gboolean ignore_hidden);
+gboolean    gtk_size_group_get_ignore_hidden
+                                            (GtkSizeGroup *size_group);
+*/
 
 void
 Init_sizegrp()
