@@ -3,8 +3,8 @@
 
   rbgtktreerowreference.c -
 
-  $Author: mutoh $
-  $Date: 2003/11/01 09:37:25 $
+  $Author: ggc $
+  $Date: 2005/08/30 20:51:46 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -51,6 +51,15 @@ treerowref_get_path(self)
 {
     return TREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+treerowref_get_model(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_tree_row_reference_get_model(_SELF(self)));
+}
+#endif
 
 static VALUE
 treerowref_valid(self)
@@ -104,6 +113,9 @@ Init_gtk_treerowreference()
   
         rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
         rb_define_method(gTreeref, "path", treerowref_get_path, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+        rb_define_method(gTreeref, "model", treerowref_get_model, 0);
+#endif
         rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
 
         rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
