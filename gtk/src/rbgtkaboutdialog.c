@@ -3,8 +3,8 @@
 
   rbgtkaboutdialog.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: ggc $
+  $Date: 2005/09/01 21:27:16 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -73,6 +73,11 @@ const gchar* gtk_about_dialog_get_logo_icon_name
 void        gtk_about_dialog_set_logo_icon_name
                                             (GtkAboutDialog *about,
                                              const gchar *icon_name);
+gboolean    gtk_about_dialog_get_wrap_license
+                                            (GtkAboutDialog *about);
+void        gtk_about_dialog_set_wrap_license
+                                            (GtkAboutDialog *about,
+                                             gboolean wrap_license);
 */
 
 static void
