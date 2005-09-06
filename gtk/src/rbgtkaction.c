@@ -3,8 +3,8 @@
 
   rbgtkaction.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/11 17:01:39 $
+  $Author: ggc $
+  $Date: 2005/09/06 20:06:54 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -190,8 +190,17 @@ action_get_accel_path(self)
 {
     return CSTR2RVAL(gtk_action_get_accel_path(_SELF(self)));
 }
-
 #endif
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+action_get_accel_closure(self)
+    VALUE self;
+{
+    return BOXED2RVAL(gtk_action_get_accel_closure(_SELF(self)), G_TYPE_CLOSURE);
+}
+#endif
+
 #endif
 
 void 
@@ -228,6 +237,10 @@ Init_gtk_action()
     rb_define_method(gAction, "set_sensitive", action_set_sensitive, 1);
     rb_define_method(gAction, "set_visible", action_set_visible, 1);
     rb_define_method(gAction, "accel_path", action_get_accel_path, 0);
+#endif
+
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gAction, "accel_closure", action_get_accel_closure, 0);
 #endif
 
     G_DEF_SETTERS(gAction);
