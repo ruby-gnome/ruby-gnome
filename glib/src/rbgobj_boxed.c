@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Author: ktou $
+  $Date: 2005/09/07 16:09:36 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -166,10 +166,16 @@ rbgobj_make_boxed(p, gtype)
     gpointer p;
     GType gtype;
 {
-    const RGObjClassInfo* cinfo = GTYPE2CINFO(gtype);
-    VALUE result = rbgobj_boxed_create(cinfo->klass);
+    const RGObjClassInfo* cinfo;
+    VALUE result;
     boxed_holder* holder;
 
+    if (!p)
+        return Qnil;
+    
+    cinfo = GTYPE2CINFO(gtype);
+    result = rbgobj_boxed_create(cinfo->klass);
+    
     Data_Get_Struct(result, boxed_holder, holder);
     
     if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY){
