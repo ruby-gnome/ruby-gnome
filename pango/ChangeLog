@@ -1,3 +1,8 @@
+2005-09-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpangolayout.c (layout_get_line): Return nil if line is out
+	of range.
+
 2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayout.c (layout_get_font_description, 

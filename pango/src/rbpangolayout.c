@@ -3,8 +3,8 @@
 
   rbpangolayout.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/30 17:05:17 $
+  $Author: ktou $
+  $Date: 2005/09/07 04:54:06 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -468,8 +468,14 @@ static VALUE
 layout_get_line(self, line)
     VALUE self, line;
 {
-    return BOXED2RVAL(pango_layout_get_line(_SELF(self), NUM2INT(line)), 
-                      PANGO_TYPE_LAYOUT_LINE);
+    PangoLayoutLine* layout_line;
+    layout_line = pango_layout_get_line(_SELF(self), NUM2INT(line));
+
+    if (layout_line) {
+        return BOXED2RVAL(layout_line, PANGO_TYPE_LAYOUT_LINE);
+    } else {
+        return Qnil;
+    }
 }
 
 static VALUE
