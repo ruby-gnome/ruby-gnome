@@ -3,8 +3,8 @@
 
   rbpangolayoutline.c -
 
-  $Author: mutoh $
-  $Date: 2005/04/14 16:41:21 $
+  $Author: ktou $
+  $Date: 2005/09/08 02:28:59 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -15,16 +15,14 @@
 #define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
 
 /**********************************/
+#if !PANGO_CHECK_VERSION(1,10,0)
 static PangoLayoutLine*
 layout_line_copy(ref)
-    const PangoLayoutLine* ref;
+    PangoLayoutLine* ref;
 {
-  PangoLayoutLine* new_ref;
   g_return_val_if_fail (ref != NULL, NULL);
-  new_ref = g_new(PangoLayoutLine, 1);
-  *new_ref = *ref;
-  pango_layout_line_ref(new_ref);
-  return new_ref;
+  pango_layout_line_ref(ref);
+  return ref;
 }
 
 GType
@@ -38,6 +36,7 @@ pango_layout_line_get_type(void)
                     (GBoxedFreeFunc)pango_layout_line_unref);
     return our_type;
 }
+#endif
 /**********************************/
 
 static VALUE
