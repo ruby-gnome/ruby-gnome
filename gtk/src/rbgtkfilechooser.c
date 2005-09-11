@@ -3,8 +3,8 @@
  
   rbgtkfilechooser.c -
  
-  $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Author: ggc $
+  $Date: 2005/09/11 17:18:48 $
  
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
@@ -313,6 +313,14 @@ fcho_list_shortcut_folder_uris(self)
 }
 #endif
 
+/* Properties.
+void        gtk_file_chooser_set_do_overwrite_confirmation
+                                            (GtkFileChooser *chooser,
+                                             gboolean do_overwrite_confirmation);
+gboolean    gtk_file_chooser_get_do_overwrite_confirmation
+                                           (GtkFileChooser *chooser);
+*/
+
 void 
 Init_gtk_file_chooser()
 {
@@ -370,6 +378,10 @@ Init_gtk_file_chooser()
     rb_define_const(fse, "BAD_FILENAME", INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
     rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
     rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+
+    /* GtkFileChooserConfirmation */
+    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", gFileCho);
+    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);
 
