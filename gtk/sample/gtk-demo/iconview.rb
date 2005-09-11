@@ -1,7 +1,7 @@
 # Copyright (c) 2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: iconview.rb,v 1.3 2005/02/25 17:09:25 kzys Exp $
+# $Id: iconview.rb,v 1.4 2005/09/11 19:48:54 ggc Exp $
 =begin
 = Icon View (IconView)
 
@@ -13,18 +13,20 @@ require 'common'
 
 module Demo
   class IconView < Demo::BasicWindow
-    COL_PATH, COL_DISPLAY_NAME, COL_PIXBUF, COL_IS_DIR =
-      (0..5).to_a
+    COL_PATH, COL_DISPLAY_NAME, COL_IS_DIR, COL_PIXBUF = (0..3).to_a
 
     def fill_store
       @store.clear
       Dir.glob(File.join(@parent, "*")).each do |path|
 	is_dir = FileTest.directory?(path)
 	iter = @store.append
+        # set COL_DISPLAY_NAME first because changing an iter will trigger the
+        # sort function; if we set something else first, the value of
+        # COL_DISPLAY_NAME for this row will be "nil" and the sort function will fail
+        iter[COL_DISPLAY_NAME] = GLib.filename_to_utf8(File.basename(path))
 	iter[COL_PATH] = path
-	iter[COL_DISPLAY_NAME] = GLib.filename_to_utf8(File.basename(path))
-	iter[COL_PIXBUF] = is_dir
-	iter[COL_IS_DIR] = is_dir ? @folder_pixbuf : @file_pixbuf
+	iter[COL_IS_DIR] = is_dir
+	iter[COL_PIXBUF] = is_dir ? @folder_pixbuf : @file_pixbuf
       end
     end
 
