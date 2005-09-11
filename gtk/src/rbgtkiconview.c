@@ -3,8 +3,8 @@
 
   rbgtkiconview.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: ggc $
+  $Date: 2005/09/11 20:57:58 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -172,6 +172,61 @@ iview_item_activated(self, path)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+iview_create_drag_icon(self, path)
+       VALUE self, path;
+{
+    return GOBJ2RVAL(gtk_icon_view_create_drag_icon(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH)));
+}
+
+static VALUE
+iview_enable_model_drag_dest(self, targets, actions)
+    VALUE self, targets, actions;
+{
+    gtk_icon_view_enable_model_drag_dest(_SELF(self),
+                                         rbgtk_get_target_entry(targets),
+                                         RARRAY(targets)->len,
+                                         RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    return self;
+}
+
+static VALUE
+iview_enable_model_drag_source(self, flags, targets, actions)
+    VALUE self, flags, targets, actions;
+{
+    gtk_icon_view_enable_model_drag_source(_SELF(self),
+                                           RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
+                                           rbgtk_get_target_entry(targets),
+                                           RARRAY(targets)->len,
+                                           RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    return self;
+}
+
+static VALUE
+iview_cursor(self)
+    VALUE self;
+{
+    GtkTreePath* path;
+    GtkCellRenderer* cell;
+    gboolean cursor_set = gtk_icon_view_get_cursor(_SELF(self), &path, &cell);
+    return rb_ary_new3(3, RTEST(cursor_set), BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell));
+}
+
+static VALUE
+iview_dest_item_at_pos(self, drag_x, drag_y)
+    VALUE self, drag_x, drag_y;
+{
+    GtkTreePath* path;
+    GtkIconViewDropPosition pos;
+    gboolean item_at_pos = gtk_icon_view_get_dest_item_at_pos(_SELF(self), NUM2INT(drag_x), NUM2INT(drag_y), &path, &pos);
+    return rb_ary_new3(3,
+                       RTEST(item_at_pos),
+                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                       GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+}
+#endif
+
 void
 Init_gtk_iconview()
 {
@@ -187,10 +242,16 @@ Init_gtk_iconview()
     rb_define_method(iview, "select_all", iview_select_all, 0);
     rb_define_method(iview, "unselect_all", iview_unselect_all, 0);
     rb_define_method(iview, "item_activated", iview_item_activated, 1);
+#endif
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(iview, "create_drag_icon", iview_create_drag_icon, 1);
+    rb_define_method(iview, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
+    rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
+    rb_define_method(iview, "cursor", iview_cursor, 0);
+    rb_define_method(iview, "dest_item_at_pos", iview_dest_item_at_pos, 2);
 
+    /* GtkIconViewDropPosition */
+    G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", iview);
+    G_DEF_CONSTANTS(iview, GTK_TYPE_ICON_VIEW_DROP_POSITION, "GTK_ICON_VIEW_");
 #endif
 }
-
-
- 
-
