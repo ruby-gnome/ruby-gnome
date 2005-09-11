@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/30 10:24:57 $
+  $Author: ggc $
+  $Date: 2005/09/11 15:12:06 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -233,6 +233,16 @@ gtkdrag_set_icon(argc, argv, self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gtkdrag_set_icon_name(self, context, name, hot_x, hot_y)
+    VALUE self, context, name, hot_x, hot_y;
+{
+    gtk_drag_set_icon_name(RVAL2DC(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
+    return self;
+}
+#endif
+
 static VALUE
 gtkdrag_set_icon_default(self, context)
     VALUE self, context;
@@ -285,6 +295,16 @@ gtkdrag_source_set_icon(argc, argv, self)
     }
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gtkdrag_source_set_icon_name(self, widget, icon_name)
+    VALUE self, widget, icon_name;
+{
+    gtk_drag_source_set_icon_name(RVAL2WIDGET(widget), RVAL2CSTR(icon_name));
+    return self;
+}
+#endif
 
 static VALUE
 gtkdrag_source_unset(self, widget)
@@ -364,9 +384,15 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "begin", gtkdrag_begin, 5);
     rb_define_module_function(mGtkDrag, "threshold?", gtkdrag_check_threshold, 5);
     rb_define_module_function(mGtkDrag, "set_icon", gtkdrag_set_icon, -1);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_module_function(mGtkDrag, "set_icon_name", gtkdrag_set_icon_name, 4);
+#endif
     rb_define_module_function(mGtkDrag, "set_icon_default", gtkdrag_set_icon_default, 1);
     rb_define_module_function(mGtkDrag, "source_set", gtkdrag_source_set, 4);
     rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_source_set_icon, -1);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_module_function(mGtkDrag, "source_set_icon_name", gtkdrag_source_set_icon_name, 2);
+#endif
     rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_source_unset, 1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_module_function(mGtkDrag, "source_set_target_list", gtkdrag_source_set_target_list, 2);
