@@ -3,8 +3,8 @@
 
   rbgtkentrycompletion.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/02 15:07:38 $
+  $Author: ggc $
+  $Date: 2005/09/11 15:40:21 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -115,6 +115,16 @@ void        gtk_entry_completion_set_popup_completion
                                             (GtkEntryCompletion *completion,
                                              gboolean popup_completion);
 gboolean    gtk_entry_completion_get_popup_completion
+                                            (GtkEntryCompletion *completion);
+void        gtk_entry_completion_set_popup_set_width
+                                            (GtkEntryCompletion *completion,
+                                             gboolean popup_set_width);
+gboolean    gtk_entry_completion_get_popup_set_width
+                                            (GtkEntryCompletion *completion);
+void        gtk_entry_completion_set_popup_single_match
+                                            (GtkEntryCompletion *completion,
+                                             gboolean popup_single_match);
+gboolean    gtk_entry_completion_get_popup_single_match
                                             (GtkEntryCompletion *completion);
 */
 
