@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/17 16:55:27 $
+  $Author: ggc $
+  $Date: 2005/09/11 13:24:17 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -29,7 +29,7 @@ dialog_add_button(self, button_text, response_id)
         name = RVAL2CSTR(button_text);
     }
     return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self), name, 
-                                           NUM2INT(response_id)));
+                                           RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE)));
 }
 
 VALUE
@@ -192,6 +192,15 @@ dialog_action_area(self)
     return GOBJ2RVAL(_SELF(self)->action_area);
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+dialog_response_for_widget(self, widget)
+    VALUE self, widget;
+{
+    return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
+}
+#endif
+
 void 
 Init_gtk_dialog()
 {
@@ -216,6 +225,10 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "set_response_sensitive", dialog_set_response_sensitive, 2);
     rb_define_method(gDialog, "vbox", dialog_vbox, 0);
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);
+
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gDialog, "response_for_widget", dialog_response_for_widget, 1);
+#endif
    
     G_DEF_SETTERS(gDialog);
    
