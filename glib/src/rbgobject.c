@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Date: 2005/09/11 19:48:20 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -65,8 +65,8 @@ rbgobj_instance_from_ruby_object(VALUE obj)
     case G_TYPE_PARAM:
         return rbgobj_param_spec_get_struct(obj);
     default:
-        rb_raise(rb_eTypeError, "fundamental type %s isn't supported",
-                 g_type_name(t));
+      rb_raise(rb_eTypeError, "%s isn't supported",
+               rb_class2name(CLASS_OF(obj)));
     }
 }
 
@@ -85,8 +85,8 @@ rbgobj_ruby_object_from_instance(gpointer instance)
     case G_TYPE_PARAM:
         return rbgobj_get_value_from_param_spec(instance);
     default:
-        rb_raise(rb_eTypeError, "fundamental type %s isn't supported",
-                 g_type_name(t));
+      rb_raise(rb_eTypeError, "%s isn't supported",
+               rb_class2name(CLASS_OF(instance)));
     }
 }
 
