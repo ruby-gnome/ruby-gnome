@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.11 2005/08/01 13:25:22 ktou Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.12 2005/09/11 13:54:25 pterjan Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -28,6 +28,8 @@ static VALUE gnoCanvasPathDef;
 #define _SELF(self) (GnomeCanvasPathDef *)RVAL2BOXED(self, rbgno_canvas_path_def_get_type())
 #define _WRAP(self) BOXED2RVAL(self, rbgno_canvas_path_def_get_type())
 
+#ifndef GNOME_TYPE_CANVAS_PATH_DEF
+/* this is for libgnomecanvas-2.0 < 2.12 */
 static GnomeCanvasPathDef *
 rbgno_canvas_path_def_copy(path_def)
     GnomeCanvasPathDef *path_def;
@@ -47,6 +49,9 @@ rbgno_canvas_path_def_get_type()
                                                  (GBoxedFreeFunc)gnome_canvas_path_def_unref);
     return our_type;
 }
+
+#define GNOME_TYPE_CANVAS_PATH_DEF (rbgno_canvas_path_def_get_type())
+#endif /* GNOME_TYPE_CANVAS_PATH_DEF */
 
 static void
 cpathdef_r2g_func(from, to)
@@ -345,7 +350,7 @@ void
 Init_gnome_canvas_path_def(mGnome)
     VALUE mGnome;
 {
-    gnoCanvasPathDef = G_DEF_CLASS(rbgno_canvas_path_def_get_type(), "CanvasPathDef", mGnome);
+    gnoCanvasPathDef = G_DEF_CLASS(GNOME_TYPE_CANVAS_PATH_DEF, "CanvasPathDef", mGnome);
     rbgobj_register_property_setter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_r2g_func);
     rbgobj_register_property_getter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_g2r_func);
 

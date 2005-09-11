@@ -1,3 +1,8 @@
+2005-09-11  Pascal Terjan  <pterjan@linuxfr.org>
+
+	* src/rbgnome-canvas-path-def.c : Fix for GnomeCanvas 2.12
+	Patch from herzi in ticket #1287758.
+
 2005-08-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas-item.c (citem_intialize): Check first parameter. 
