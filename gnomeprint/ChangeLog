@@ -1,3 +1,21 @@
+2005-09-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: Support newlly Test::Unit::AutoRunner#run API.
+
+	* src/rbgp.h: Move Init_*() to ...
+
+	* src/rbgp.c: ... here.
+	
+	* src/rbgp-utils.h: Remove. Move check_return_code() to ...
+	
+	* src/rbgp.h: ... here. And ...
+
+	* src/rbgp.h, src/rbgp-gnome-print-job.c, src/rbgp-gnome-print.c:
+	... Add 'rbgp_' prefix to check_return_code().
+
+	* src/rbgp-gpa-settings.c (gp_gpa_settings_initialize): Fix
+	compiling warnings.
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/src/rbgp-gnome-print-config.c, rbgp-gnome-print-paper.c, 

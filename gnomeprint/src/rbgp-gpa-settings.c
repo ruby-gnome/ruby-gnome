@@ -40,8 +40,8 @@ gp_gpa_settings_initialize(int argc, VALUE *argv, VALUE self)
                                                             RVAL2GOBJ(tree)));
   } else {
     G_INITIALIZE(self, gpa_settings_new(RVAL2GOBJ(model),
-                                        RVAL2CSTR(name),
-                                        RVAL2CSTR(id)));
+                                        (const guchar *)RVAL2CSTR(name),
+                                        (const guchar *)RVAL2CSTR(id)));
   }
   return Qnil;
 }

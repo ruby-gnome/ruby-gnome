@@ -33,7 +33,7 @@ gp_job_new(int argc, VALUE *argv, VALUE self)
   if (job) {
     G_INITIALIZE(self, job);
   } else {
-    check_return_code(GNOME_PRINT_ERROR_UNKNOWN);
+    rbgp_check_return_code(GNOME_PRINT_ERROR_UNKNOWN);
   }
   
   return Qnil;
@@ -54,30 +54,30 @@ gp_job_get_config(VALUE self)
 static VALUE
 gp_job_close(VALUE self)
 {
-  return check_return_code(gnome_print_job_close(_SELF(self)));
+  return rbgp_check_return_code(gnome_print_job_close(_SELF(self)));
 }
 
 static VALUE
 gp_job_print(VALUE self)
 {
-  return check_return_code(gnome_print_job_print(_SELF(self)));
+  return rbgp_check_return_code(gnome_print_job_print(_SELF(self)));
 }
 
 static VALUE
 gp_job_render(VALUE self, VALUE context)
 {
-  return check_return_code(gnome_print_job_render(_SELF(self),
-                                                  GP_CONTEXT(context)));
+  return rbgp_check_return_code(gnome_print_job_render(_SELF(self),
+                                                       GP_CONTEXT(context)));
 }
 
 /* pageops: whether you want to send begingpage/showpage to output */
 static VALUE
 gp_job_render_page(VALUE self, VALUE context, VALUE page, VALUE pageops)
 {
-  return check_return_code(gnome_print_job_render_page(_SELF(self),
-                                                       GP_CONTEXT(context),
-                                                       NUM2INT(page),
-                                                       RTEST(pageops)));
+  return rbgp_check_return_code(gnome_print_job_render_page(_SELF(self),
+                                                            GP_CONTEXT(context),
+                                                            NUM2INT(page),
+                                                            RTEST(pageops)));
 }
 
 static VALUE
@@ -95,8 +95,8 @@ gp_job_print_to_file(VALUE self, VALUE output)
     g_output = RVAL2CSTR(output);
   }
   
-  return check_return_code(gnome_print_job_print_to_file(_SELF(self),
-                                                         g_output));
+  return rbgp_check_return_code(gnome_print_job_print_to_file(_SELF(self),
+                                                              g_output));
 }
 
 static VALUE

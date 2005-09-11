@@ -23,7 +23,7 @@ static VALUE cGPError, cGPReturnCode;
 static ID s_new, s_to_s, s_code;
 
 VALUE
-check_return_code(gint code) 
+rbgp_check_return_code(gint code) 
 {
   if (code != GNOME_PRINT_OK) {
     VALUE rb_code = rb_funcall(cGPReturnCode, s_new, 1, INT2NUM(code));
