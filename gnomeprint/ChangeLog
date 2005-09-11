@@ -2,6 +2,7 @@
 
 	* src/rbgp-gnome-print.c (gp_gsave): Return the result of yield if
 	available.
+	(gp_gsave): Ensure restore.
 
 	* test/run-test.rb: Support newlly Test::Unit::AutoRunner#run API.
 

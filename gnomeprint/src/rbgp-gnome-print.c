@@ -399,8 +399,7 @@ gp_gsave(VALUE self)
   
   result = rbgp_check_return_code(gnome_print_gsave(_SELF(self)));
   if (rb_block_given_p()) {
-    result = rb_yield(self);
-    gp_grestore(self);
+    result = rb_ensure(rb_yield, self, gp_grestore, self);
   }
       
   return result;
