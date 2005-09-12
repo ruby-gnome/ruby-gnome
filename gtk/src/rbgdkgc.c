@@ -3,8 +3,8 @@
 
   rbgdkgc.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 18:07:01 $
+  $Author: ktou $
+  $Date: 2005/09/12 00:34:49 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -14,6 +14,9 @@
 #include "global.h"
 
 #define _SELF(s) (GDK_GC(RVAL2GOBJ(s)))
+
+static VALUE gdkGC;
+static VALUE gdkDrawable;
 
 static VALUE
 gdkgc_initialize(self, win)
@@ -197,12 +200,16 @@ gdkgc_set_dashes(self, dash_offset, dash_list)
 }
 
 static VALUE
-gdkgc_copy(self)
-    VALUE self;
+gdkgc_copy(self, dst)
+    VALUE self, dst;
 {
-    GdkGC copy;
-    gdk_gc_copy(&copy, _SELF(self));
-    return GOBJ2RVAL(&copy);
+    if (RTEST(rb_obj_is_kind_of(dst, gdkDrawable))) {
+        VALUE args[1];
+        args[0] = dst;
+        dst = rb_class_new_instance(1, args, gdkGC);
+    }
+    gdk_gc_copy(_SELF(dst), _SELF(self));
+    return dst;
 }
 
 static VALUE
@@ -365,8 +372,9 @@ gdkgc_screen(self)
 void
 Init_gtk_gdk_gc()
 {
-    VALUE gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
-
+    gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
+    gdkDrawable = rb_const_get(mGdk, rb_intern("Drawable"));
+        
     rbgobj_add_abstract_but_create_instance_class(GDK_TYPE_GC);
 
     rb_define_method(gdkGC, "initialize", gdkgc_initialize, 1);
@@ -387,7 +395,7 @@ Init_gtk_gdk_gc()
     rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
     rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
     rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
-    rb_define_method(gdkGC, "copy", gdkgc_copy, 0);
+    rb_define_method(gdkGC, "copy", gdkgc_copy, 1);
     rb_define_method(gdkGC, "set_colormap", gdkgc_set_colormap, 1);
 
     rb_define_method(gdkGC, "foreground", gdkgc_get_foreground, 0);

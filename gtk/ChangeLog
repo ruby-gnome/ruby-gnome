@@ -1,3 +1,7 @@
+2005-09-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkgc.c (gdkgc_copy): Require destination object.
+
 2005-08-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdraw.c (gdkdraw_draw_trapezoids): Fix wrong argument
