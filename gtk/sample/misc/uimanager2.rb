@@ -5,7 +5,7 @@
 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager2.rb,v 1.3 2005/07/14 17:01:50 mutoh Exp $
+  $Id: uimanager2.rb,v 1.4 2005/09/12 06:09:22 mutoh Exp $
 =end
 require 'gtk2'
 
@@ -84,7 +84,7 @@ window.add_accel_group(uimanager.accel_group)
 uimanager.add_ui("./uimanager2.xml")
 
 vbox = Gtk::VBox.new
-vbox.pack_start(uimanager.get_widget("/MenuBar"), false, false)
+vbox.pack_start(uimanager["/MenuBar"], false, false)
 vbox.pack_start(Gtk::Label.new("Gtk::UIManager Sample"))
 window.add(vbox)
 window.set_default_size(100, 100).show_all

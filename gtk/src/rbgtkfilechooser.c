@@ -3,8 +3,8 @@
  
   rbgtkfilechooser.c -
  
-  $Author: ggc $
-  $Date: 2005/09/11 17:18:48 $
+  $Author: mutoh $
+  $Date: 2005/09/12 06:09:22 $
  
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
@@ -379,9 +379,11 @@ Init_gtk_file_chooser()
     rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
     rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
 
+#if GTK_CHECK_VERSION(2,8,0)
     /* GtkFileChooserConfirmation */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", gFileCho);
     G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
+#endif
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);
 

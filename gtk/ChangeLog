@@ -1,3 +1,12 @@
+2005-09-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkfilechooser.c: Checks gtk+ version for GtkFileChooserConfirmation. 
+	* src/rbgtkuimanager.c: [] added as an alias of Gtk::UIManager#get_widget.
+	Pointed out by Paul van Tilburg.
+	Gtk::UIManager#get_widget raises an ArgumentError when the widget isn't found.
+	Pointed out by Paul van Tilburg.
+	* sample/misc/uimanager.rb, uimanager2.rb: ditto.
+
 2005-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkgc.c (gdkgc_copy): Require destination object.

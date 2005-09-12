@@ -4,7 +4,7 @@
   rbgtkuimanager.c -
 
   $Author: mutoh $
-  $Date: 2004/10/26 15:57:32 $
+  $Date: 2005/09/12 06:09:22 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -64,7 +64,11 @@ static VALUE
 rbuimanager_get_widget(self, path)
     VALUE self, path;
 {
-    return GOBJ2RVAL(gtk_ui_manager_get_widget(_SELF(self), RVAL2CSTR(path)));
+    GtkWidget* widget = gtk_ui_manager_get_widget(_SELF(self), RVAL2CSTR(path));
+    if (! widget)
+        rb_raise(rb_eArgError, "no widget was found.");
+
+    return GOBJ2RVAL(widget);
 }
 
 static VALUE
@@ -168,6 +172,7 @@ Init_gtk_uimanager()
     rb_define_method(gUI, "action_groups", rbuimanager_get_action_groups, 0);
     rb_define_method(gUI, "accel_group", rbuimanager_get_accel_group, 0);
     rb_define_method(gUI, "get_widget", rbuimanager_get_widget, 1);
+    rb_define_alias(gUI, "[]", "get_widget");
     rb_define_method(gUI, "get_toplevels", rbuimanager_get_toplevels, 1);
     rb_define_method(gUI, "get_action", rbuimanager_get_action, 1);
     rb_define_method(gUI, "add_ui", rbuimanager_add_ui, -1);
