@@ -1,5 +1,11 @@
 2005-09-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkevent.c: Gdk::Event*.new which can accept an event_type can omit
+	the parameter. Gdk::EventScroll, Gdk::EventMotion, Gdk::EventExpose, 
+	Gdk::EventVisibility, Gdk::EventFocusChange, Gdk::EventConfigure, 
+	Gdk::EventProperty, Gdk::EventClient, Gdk::EventNoExpose, Gdk::EventWindowState,
+	Gdk::EventSetting, Gdk::EventOwnerChange.
+	Pointed out by Paul van Tilburg.
 	* src/rbgtkfilechooser.c: Checks gtk+ version for GtkFileChooserConfirmation. 
 	* src/rbgtkuimanager.c: [] added as an alias of Gtk::UIManager#get_widget.
 	Pointed out by Paul van Tilburg.

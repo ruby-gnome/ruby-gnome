@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: mutoh $
-  $Date: 2005/01/31 16:48:17 $
+  $Date: 2005/09/12 07:06:42 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -202,6 +202,35 @@ gdkevent ## type ## _set_axes(self, x, y)\
     rb_define_method(event, G_STRINGIFY(name), gdkevent ## type ## _## name, 0);\
     rb_define_method(event, G_STRINGIFY(set_ ## name), gdkevent ## type ## _set_## name, 1);
 
+
+/* initialize */
+#if GTK_CHECK_VERSION(2,2,0)
+#define GDKEVENT_INIT(type, default_gtype) \
+static VALUE \
+gdkevent ## type ## _initialize(argc, argv, self)\
+    int argc;\
+    VALUE *argv;\
+    VALUE self;\
+{\
+    VALUE type;\
+    GdkEventType gtype;\
+\
+    rb_scan_args(argc, argv, "01", &type);\
+    if (NIL_P(type)){\
+        gtype = default_gtype;\
+    } else {\
+        gtype = RVAL2GENUM(type, GDK_TYPE_EVENT_TYPE);\
+    }\
+\
+    G_INITIALIZE(self, gdk_event_new(gtype));\
+    return Qnil;\
+}
+#define DEFINE_INIT(event, type)                                         \
+  rb_define_method(event, "initialize", gdkevent ## type ## _initialize, -1);
+#else
+#define GDKEVENT_INIT(type, default_gtype) {}
+#define DEFINE_INIT(event, type) {}
+#endif
 /***********************************************/
 
 /* GdkEvent Singleton Methods */
@@ -409,6 +438,7 @@ ATTR_ENUM(scroll, direction, GDK_TYPE_SCROLL_DIRECTION);
 ATTR_GOBJ(scroll, device);
 ATTR_FLOAT(scroll, x_root);
 ATTR_FLOAT(scroll, y_root);
+GDKEVENT_INIT(scroll, GDK_SCROLL);
 
 /* GdkEventMotion */
 ATTR_UINT(motion, time);
@@ -420,6 +450,7 @@ ATTR_FLOAT(motion, y_root);
 ATTR_FLAGS(motion, state, GDK_TYPE_MODIFIER_TYPE);
 ATTR_BOOL(motion, is_hint);
 ATTR_GOBJ(motion, device);
+GDKEVENT_INIT(motion, GDK_MOTION_NOTIFY);
 
 /* GdkEventExpose */
 static VALUE
@@ -457,9 +488,11 @@ gdkeventexpose_set_region(self, region)
 }
 
 ATTR_INT(expose, count);
+GDKEVENT_INIT(expose, GDK_EXPOSE);
 
 /* GdkEventVisibility */
 ATTR_ENUM(visibility, state, GDK_TYPE_VISIBILITY_STATE);
+GDKEVENT_INIT(visibility, GDK_VISIBILITY_NOTIFY);
 
 /* GdkEventCrossing */
 ATTR_GOBJ(crossing, subwindow);
@@ -475,17 +508,20 @@ ATTR_FLAGS(crossing, state, GDK_TYPE_MODIFIER_TYPE);
 
 /* GdkEventFocus */
 ATTR_BOOL(focus_change, in);
+GDKEVENT_INIT(focus_change, GDK_FOCUS_CHANGE);
 
 /* GdkEventConfigure */
 ATTR_INT(configure, x);
 ATTR_INT(configure, y);
 ATTR_INT(configure, width);
 ATTR_INT(configure, height);
+GDKEVENT_INIT(configure, GDK_CONFIGURE);
 
 /* GdkEventProperty */
 ATTR_ATOM(property, atom);
 ATTR_UINT(property, time);
 ATTR_ENUM(property, state, GDK_TYPE_PROPERTY_STATE);
+GDKEVENT_INIT(property, GDK_PROPERTY_NOTIFY);
 
 /* GdkEventSelection */
 ATTR_ATOM(selection, selection);
@@ -506,6 +542,7 @@ ATTR_GOBJ(proximity, device);
 
 /* GdkEventClient */
 ATTR_ATOM(client, message_type);
+GDKEVENT_INIT(client, GDK_CLIENT_EVENT);
 
 static VALUE
 gdkeventclient_data_format(self)
@@ -593,13 +630,18 @@ gdkevent_s_add_client_message_filter(self, message_type)
     return self;
 }
 
+/* GdkEventNoExpose */
+GDKEVENT_INIT(noexpose, GDK_NO_EXPOSE);
+
 /* GdkEventWindowState */
 ATTR_FLAGS(window_state, changed_mask, GDK_TYPE_WINDOW_STATE);
 ATTR_FLAGS(window_state, new_window_state, GDK_TYPE_WINDOW_STATE);
+GDKEVENT_INIT(window_state, GDK_WINDOW_STATE);
 
 /* GdkEventSetting */
 ATTR_ENUM(setting, action, GDK_TYPE_SETTING_ACTION);
 ATTR_STR(setting, name);
+GDKEVENT_INIT(setting, GDK_SETTING);
 
 /* GdkEventOwnerChange */
 #if GTK_CHECK_VERSION(2,6,0)
@@ -608,6 +650,7 @@ ATTR_ENUM(owner_change, reason, GDK_TYPE_OWNER_CHANGE);
 ATTR_ATOM(owner_change, selection);
 ATTR_UINT(owner_change, time);
 ATTR_UINT(owner_change, selection_time);
+GDKEVENT_INIT(owner_change, GDK_OWNER_CHANGE);
 #endif
 
 /* MISC */
@@ -729,6 +772,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, scroll, device);
     DEFINE_ACCESSOR(ev, scroll, x_root);
     DEFINE_ACCESSOR(ev, scroll, y_root);
+    DEFINE_INIT(ev, scroll);
     G_DEF_SETTERS(ev);
 
     /* GdkScrollDirection */
@@ -748,6 +792,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, motion, device);
     DEFINE_ACCESSOR(ev, motion, x_root);
     DEFINE_ACCESSOR(ev, motion, y_root);
+    DEFINE_INIT(ev, motion);
     G_DEF_SETTERS(ev);
 
     /* GdkEventExpose */
@@ -755,6 +800,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, expose, area);
     DEFINE_ACCESSOR(ev, expose, region);
     DEFINE_ACCESSOR(ev, expose, count);
+    DEFINE_INIT(ev, expose);
     rb_define_singleton_method(ev, "get_graphics_expose", 
                                gdkevent_s_get_graphics_expose, 1);
     G_DEF_SETTERS(ev);
@@ -762,6 +808,7 @@ Init_gtk_gdk_event()
     /* GdkEventVisibility */
     ev = gdkevents[GDK_VISIBILITY_NOTIFY];
     DEFINE_ACCESSOR(ev, visibility, state);
+    DEFINE_INIT(ev, visibility);
     G_DEF_SETTERS(ev);
 
     /* GdkVisibilityState */
@@ -794,6 +841,7 @@ Init_gtk_gdk_event()
     ev = gdkevents[GDK_FOCUS_CHANGE];
     rb_define_method(ev, "in?", gdkeventfocus_change_in, 0);
     rb_define_method(ev, "set_in", gdkeventfocus_change_set_in, 1);
+    DEFINE_INIT(ev, focus_change);
     G_DEF_SETTERS(ev);
 
     /* GdkEventConfigure */
@@ -802,6 +850,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, configure, y);
     DEFINE_ACCESSOR(ev, configure, width);
     DEFINE_ACCESSOR(ev, configure, height);
+    DEFINE_INIT(ev, configure);
     G_DEF_SETTERS(ev);
 
     /* GdkEventProperty */
@@ -809,6 +858,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, property, atom);
     DEFINE_ACCESSOR(ev, property, time);
     DEFINE_ACCESSOR(ev, property, state);
+    DEFINE_INIT(ev, property);
     G_DEF_SETTERS(ev);
 
     /* GdkPropertyState */ 
@@ -847,15 +897,18 @@ Init_gtk_gdk_event()
                      gdkeventclient_send_client_message, -1);
     rb_define_method(ev, "send_clientmessage_toall", 
                      gdkeventclient_send_clientmessage_toall, 0);
+    DEFINE_INIT(ev, client);
     G_DEF_SETTERS(ev);
 
     /* GdkEventNoExpose */
-    /* No methods */
+    ev = gdkevents[GDK_NO_EXPOSE];
+    DEFINE_INIT(ev, noexpose);
 
     /* GdkEventWindowState */
     ev = gdkevents[GDK_WINDOW_STATE];
     DEFINE_ACCESSOR(ev, window_state, changed_mask);
     DEFINE_ACCESSOR(ev, window_state, new_window_state);
+    DEFINE_INIT(ev, window_state);
     G_DEF_SETTERS(ev);
 
     /* GdkWindowState */
@@ -866,6 +919,7 @@ Init_gtk_gdk_event()
     ev = gdkevents[GDK_SETTING];
     DEFINE_ACCESSOR(ev, setting, action);
     DEFINE_ACCESSOR(ev, setting, name);
+    DEFINE_INIT(ev, setting);
     G_DEF_SETTERS(ev);
 
     /* GdkSettingAction */
@@ -881,6 +935,7 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, owner_change, time);
     DEFINE_ACCESSOR(ev, owner_change, selection_time);
     G_DEF_SETTERS(ev);
+    DEFINE_INIT(ev, owner_change);
 
     /* GdkOwnerChange */
     G_DEF_CLASS(GDK_TYPE_OWNER_CHANGE, "OwnerChange", ev);
