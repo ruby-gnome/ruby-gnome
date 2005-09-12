@@ -4,7 +4,7 @@
   rbgtkiconview.c -
 
   $Author: ggc $
-  $Date: 2005/09/11 20:57:58 $
+  $Date: 2005/09/12 21:02:09 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -108,6 +108,9 @@ gint        gtk_icon_view_get_column_spacing
 void        gtk_icon_view_set_margin        (GtkIconView *icon_view,
                                              gint margin);
 gint        gtk_icon_view_get_margin        (GtkIconView *icon_view);
+void        gtk_icon_view_set_reorderable   (GtkIconView *icon_view,
+                                             gboolean reorderable);
+gboolean    gtk_icon_view_get_reorderable   (GtkIconView *icon_view);
 */
 
 static VALUE
@@ -225,6 +228,46 @@ iview_dest_item_at_pos(self, drag_x, drag_y)
                        BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
                        GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
 }
+
+static VALUE
+iview_drag_dest_item(self)
+    VALUE self;
+{
+    GtkTreePath* path;
+    GtkIconViewDropPosition pos;
+    gtk_icon_view_get_drag_dest_item(_SELF(self), &path, &pos);
+    return rb_ary_new3(2,
+                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                       GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+}
+
+static VALUE
+iview_item_at_pos(self, x, y)
+    VALUE self, x, y;
+{
+    GtkTreePath* path;
+    GtkCellRenderer* cell;
+    gboolean item_at_pos = gtk_icon_view_get_item_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y), &path, &cell);
+    return rb_ary_new3(3,
+                       RTEST(item_at_pos),
+                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                       GOBJ2RVAL(cell));
+}
+
+static VALUE
+iview_visible_range(self)
+    VALUE self;
+{
+    GtkTreePath* start_path;
+    GtkTreePath* end_path;
+
+    gboolean valid_paths = gtk_icon_view_get_visible_range(_SELF(self), &start_path, &end_path);
+
+    return rb_ary_new3(3,
+                       RTEST(valid_paths),
+                       BOXED2RVAL(start_path, GTK_TYPE_TREE_PATH),
+                       BOXED2RVAL(end_path, GTK_TYPE_TREE_PATH));
+}
 #endif
 
 void
@@ -249,6 +292,9 @@ Init_gtk_iconview()
     rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
     rb_define_method(iview, "cursor", iview_cursor, 0);
     rb_define_method(iview, "dest_item_at_pos", iview_dest_item_at_pos, 2);
+    rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
+    rb_define_method(iview, "item_at_pos", iview_item_at_pos, 2);
+    rb_define_method(iview, "visible_range", iview_visible_range, 0);
 
     /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", iview);
