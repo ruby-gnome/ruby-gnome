@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: mutoh $
-  $Date: 2005/03/06 14:30:27 $
+  $Date: 2005/09/12 16:14:17 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 
@@ -47,12 +47,9 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     gpointer user_data;
 {
     if (! log_canceled){
-        if (RTEST(ruby_verbose)){
-            g_printerr("%s: line %d\n", ruby_sourcefile, ruby_sourceline);
-            g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
-        } else {
-            /* Ignored */
-        }
+        ruby_set_current_source();
+        g_printerr("%s: line %d\n", ruby_sourcefile, ruby_sourceline);
+        g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
     } else {
         g_log_default_handler(log_domain, log_level, message, user_data);
     }
