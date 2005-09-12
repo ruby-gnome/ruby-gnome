@@ -1,5 +1,7 @@
 2005-09-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkdialog.c: Gtk::Dialog.run{} destroy the dialog if a block is given. 
+	Pointed out by Paul van Tilburg.
 	* src/rbgdkevent.c: Gdk::Event*.new which can accept an event_type can omit
 	the parameter. Gdk::EventScroll, Gdk::EventMotion, Gdk::EventExpose, 
 	Gdk::EventVisibility, Gdk::EventFocusChange, Gdk::EventConfigure, 
