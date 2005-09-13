@@ -1,0 +1,55 @@
+Ruby/GtkMozEmbed
+=========
+Ruby/GtkMozEmbed is a Ruby binding of GtkMozEmbed a widget embedding a
+Mozilla Gecko renderer.
+
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   Pango: http://www.pango.org/
+   Ruby/GLib2, Ruby/Gtk >=0.12.0: http://ruby-gnome2.sourceforge.net/
+   Mozilla 1.7.x or Mozilla-Firefox 1.0.x http://www.mozilla.org/
+  
+Install
+-------
+   0. install ruby-1.{8|9}.x, GTK+, mozilla/firefox, 
+      Ruby/GLib2, Ruby/GTK2.
+   1. ruby extconf.rb
+   2. make
+   3. su
+   4. make install
+
+Bugs
+----
+
+   There is a deadlock bug in some situations if used with
+   Ruby-GNOME2<0.12.0. To use this widget you need Ruby-GNOME2>=0.12.0
+   and not to call Gtk::Thread.init.
+
+
+Copying
+-------
+   Copyright (c) 2005 Ruby-GNOME2 Project Team 
+   Copyright (c) 2005 Mirko Maischberger <mirko@lilik.it>
+        
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+   (The sample application ruby-gecko.rb is released under the GPL)
+
+   Please note.
+   I've placed all my library code under the terms of the GNU/LGPL and
+   the test application under the GNU/GPL. After doing this I've seen
+   that the GtkMozEmbed code is released under the triple license
+   MPL-1.1/GPL/LGPL, but some portions of Mozilla code might still be 
+   covered by the MPL-1.1 only.
+
+   If you are unsure, please check that all the code that you are going
+   to use in your project is covered by compatible liceses.
+
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.net/

@@ -1,0 +1,58 @@
+2005-09-13 09:51  Mirko Maischberber <mirko@lilik.it>
+	GtkMozEmbed is now a core ruby-gnome2 package.
+	* extconf.rb: modified to be a part of ruby-gnome2 instead. This
+	is not a standalone package anymore.
+		
+2005-03-26 20:00  Mirko Maischberger <mirko@lilik.it> 
+	* extconf.rb: fixed LD_LIBRARY_PATH oddity, now this is handled
+	with -Wl,-rpath option of gcc.
+	* extconf.rb: fixed bugs and cleaned.
+	Reported by Kazuhiro NISHIYAMA, Paul van Tilburg
+	
+2005-03-17 19:58  Mirko Maischberger <mirko@lilik.it> 
+	* src/rbgtkmozembed.c: added Gtk::MozEmbed#on_new_window and
+	Gtk::MozEmbed#no_new_window to handle the new_window signal
+	correctly.
+	* sample/ruby-gecko.rb: Cleaned.
+	
+2005-03-07 19:58  Mirko Maischberger <mirko@lilik.it> 
+	* src/rbgtkmozembed.c: Added the #render_data method, 
+	  removed the "<<" overloading.
+	* sample/ruby-gecko.rb: Cleaned.
+
+2005-03-07 09:50  Mirko Maischberger <mirko@lilik.it> 
+	* extconf.rb: Modified to compile as a standalone package.
+	* src/rbgtkmozembed.c: Added the stream related
+	  functions. #open_stream, #append_data, #close_stream.
+	* COPYING.LIB.README: Some clarifications on licensing.
+	
+2005-02-20 12:55  Mirko Maischberger <mirko@lilik.it> 
+
+	* extconf.rb: The extconf script now generates a start up script
+	  for the sample program automatically. The script sets the
+	  MOZILLA_FIVE_HOME and LD_LIBRARY_PATH taking the value from
+	  mozilla-gtkmozembed.pc at compile time.
+
+	  Based on this
+	  http://sourceforge.net/mailarchive/message.php?msg_id=10867575
+	  suggestion from Masao.
+
+2005-02-19 22:27  Mirko Maischberger <mirko@lilik.it> 
+
+	* src/rbgtkmozembed.c: GtkMozEmbed
+
+2005-02-19 19:50  Mirko Maischberger <mirko@lilik.it> 
+
+	* sample/: COPYING, README, ruby-gecko.rb: Initial import of
+	  RubyGecko sample app.
+
+2005-02-19 19:49  Mirko Maischberger <mirko@lilik.it> 
+
+	* extconf.rb, src/rbgtkmozembed.c, src/lib/gtkmozembed.rb: Initial
+	  import of gtkmozembed ruby binding sources.
+
+2005-02-19 19:45  Mirko Maischberger <mirko@lilik.it> 
+
+	* COPYING.LIB, COPYING.LIB.README, README: Legalese and
+	  informational files.
+
