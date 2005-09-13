@@ -1,3 +1,7 @@
+2005-09-13  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c: Reverted previous version. Shouldn't destroy in a block.
+
 2005-09-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Gtk::Dialog.run{} destroy the dialog if a block is given. 
