@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: ggc $
-  $Date: 2005/08/30 21:10:20 $
+  $Author: ktou $
+  $Date: 2005/09/14 05:13:19 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -296,7 +296,7 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "set_sort_column_id", tvc_set_sort_column_id, 1);
     rb_define_method(tvc, "sort_column_id", tvc_get_sort_column_id, 0);
     rb_define_method(tvc, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
-    rb_define_method(tvc, "cell_size", tvc_cell_get_size, -1);
+    rb_define_method(tvc, "cell_size", tvc_cell_get_size, 0);
     rb_define_method(tvc, "cell_is_visible?", tvc_cell_is_visible, 0);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(tvc, "focus_cell", tvc_focus_cell, 1);
