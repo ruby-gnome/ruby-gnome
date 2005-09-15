@@ -4,9 +4,9 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/09/11 19:48:20 $
+  $Date: 2005/09/15 06:25:30 $
 
-  Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
   This file is derived from rbgtkobject.c in Ruby/Gtk distribution.
@@ -26,6 +26,7 @@ static GQuark RUBY_GOBJECT_OBJ_KEY;
 static ID id_relatives;
 static ID id_delete;
 static ID id_module_eval;
+static VALUE gobj_table;
 
 /**********************************************************************/
 
@@ -100,6 +101,10 @@ rbgobj_weak_notify(data, where_the_object_was)
     GObject* where_the_object_was;
 {
     gobj_holder* holder = data;
+
+    /* Remove the reference from Ruby side. It will be GCed by Ruby GC. */
+    rb_hash_delete(gobj_table, holder->self);
+
     if (holder->cinfo && holder->cinfo->free)
         holder->cinfo->free(holder->gobj); 
     if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
@@ -113,6 +118,15 @@ rbgobj_weak_notify(data, where_the_object_was)
     holder->gobj = NULL;
 #endif
     holder->destroyed = TRUE;
+}
+
+static void 
+rbgobj_toggle_notify(data, gobject, is_last_ref)
+    gpointer data;
+    GObject* gobject;
+    gboolean is_last_ref;
+{
+    /* We don't need this .... */
 }
 
 static void
@@ -172,9 +186,16 @@ rbgobj_gobject_initialize(obj, cobj)
     holder->gobj  = (GObject*)cobj;
     holder->destroyed = FALSE;
 
+    /* Keep the ruby object until the GObject is removed by C side.
+       It will be removed when weak_notify is called.
+     */
+    rb_hash_aset(gobj_table, obj, obj);
+
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref((GObject*)cobj, (GWeakNotify)rbgobj_weak_notify, holder);
-
+    /* We don't need this:
+    g_object_add_toggle_ref((GObject*)cobj, (GToggleNotify)rbgobj_toggle_notify, holder);
+    */
     {
         GType t1 = G_TYPE_FROM_INSTANCE(cobj);
         GType t2 = CLASS2GTYPE(CLASS_OF(obj));
@@ -484,6 +505,9 @@ Init_gobject()
     extern void Init_gobject_gsignal();
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
+
+    gobj_table = rb_hash_new();
+    rb_global_variable(&gobj_table);
 
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);

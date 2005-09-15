@@ -1,3 +1,8 @@
+2005-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.c: Keep the ruby object when the GObject is removed by C side. 
+	Tomasz Wegrzanowski.
+
 2005-09-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_messages.c: Show Warning messages unless -d option.
