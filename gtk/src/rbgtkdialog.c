@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/13 01:32:27 $
+  $Author: ggc $
+  $Date: 2005/09/15 18:23:00 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -193,7 +193,7 @@ dialog_action_area(self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-dialog_response_for_widget(self, widget)
+dialog_get_response_for_widget(self, widget)
     VALUE self, widget;
 {
     return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
@@ -226,7 +226,7 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);
 
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gDialog, "response_for_widget", dialog_response_for_widget, 1);
+    rb_define_method(gDialog, "get_response_for_widget", dialog_get_response_for_widget, 1);
 #endif
    
     G_DEF_SETTERS(gDialog);

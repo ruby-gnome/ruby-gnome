@@ -4,7 +4,7 @@
   rbgtkiconview.c -
 
   $Author: ggc $
-  $Date: 2005/09/12 21:02:09 $
+  $Date: 2005/09/15 18:23:00 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -217,7 +217,7 @@ iview_cursor(self)
 }
 
 static VALUE
-iview_dest_item_at_pos(self, drag_x, drag_y)
+iview_get_dest_item_at_pos(self, drag_x, drag_y)
     VALUE self, drag_x, drag_y;
 {
     GtkTreePath* path;
@@ -242,7 +242,7 @@ iview_drag_dest_item(self)
 }
 
 static VALUE
-iview_item_at_pos(self, x, y)
+iview_get_item_at_pos(self, x, y)
     VALUE self, x, y;
 {
     GtkTreePath* path;
@@ -291,9 +291,9 @@ Init_gtk_iconview()
     rb_define_method(iview, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
     rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
     rb_define_method(iview, "cursor", iview_cursor, 0);
-    rb_define_method(iview, "dest_item_at_pos", iview_dest_item_at_pos, 2);
+    rb_define_method(iview, "get_dest_item_at_pos", iview_get_dest_item_at_pos, 2);
     rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
-    rb_define_method(iview, "item_at_pos", iview_item_at_pos, 2);
+    rb_define_method(iview, "get_item_at_pos", iview_get_item_at_pos, 2);
     rb_define_method(iview, "visible_range", iview_visible_range, 0);
 
     /* GtkIconViewDropPosition */
