@@ -2,14 +2,24 @@
   makeversion.rb -
 
   $Author: mutoh $
-  $Date: 2005/01/28 09:24:45 $
+  $Date: 2005/09/15 14:50:27 $
 
   Copyright (C) 2005 Masao Mutoh
 =end
 
 version = ARGV[0].split(/\./)
 
-puts %Q[
+puts %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbpangoversion.c -
+
+  $Author: mutoh $
+  $Date: 2005/09/15 14:50:27 $
+
+  Copyright (C) 2005 Masao Mutoh
+************************************************/
+
 #ifndef __RBPANGO_VERSION_H__
 #define __RBPANGO_VERSION_H__
 
