@@ -4,7 +4,7 @@
   rbgtkiconview.c -
 
   $Author: ggc $
-  $Date: 2005/09/15 18:23:00 $
+  $Date: 2005/09/15 20:47:38 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -268,6 +268,52 @@ iview_visible_range(self)
                        BOXED2RVAL(start_path, GTK_TYPE_TREE_PATH),
                        BOXED2RVAL(end_path, GTK_TYPE_TREE_PATH));
 }
+
+static VALUE
+iview_scroll_to_path(self, path, use_align, row_align, col_align)
+    VALUE self, path, use_align, row_align, col_align;
+{
+    gtk_icon_view_scroll_to_path(_SELF(self),
+                                 RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                 RTEST(use_align),
+                                 NUM2DBL(row_align),
+                                 NUM2DBL(col_align));
+    return self;
+}
+
+static VALUE
+iview_set_cursor(self, path, cell, start_editing)
+    VALUE self, path, cell, start_editing;
+{
+    gtk_icon_view_set_cursor(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH), RVAL2GOBJ(cell), RTEST(start_editing));
+    return self;
+}
+
+static VALUE
+iview_set_drag_dest_item(self, path, pos)
+    VALUE self, path, pos;
+{
+    gtk_icon_view_set_drag_dest_item(_SELF(self),
+                                     RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                     RVAL2GENUM(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+    return self;
+}
+
+static VALUE
+iview_unset_model_drag_dest(self)
+    VALUE self;
+{
+    gtk_icon_view_unset_model_drag_dest(_SELF(self));
+    return self;
+}
+
+static VALUE
+iview_unset_model_drag_source(self)
+    VALUE self;
+{
+    gtk_icon_view_unset_model_drag_source(_SELF(self));
+    return self;
+}
 #endif
 
 void
@@ -295,6 +341,11 @@ Init_gtk_iconview()
     rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
     rb_define_method(iview, "get_item_at_pos", iview_get_item_at_pos, 2);
     rb_define_method(iview, "visible_range", iview_visible_range, 0);
+    rb_define_method(iview, "scroll_to_path", iview_scroll_to_path, 4);
+    rb_define_method(iview, "set_cursor", iview_set_cursor, 3);
+    rb_define_method(iview, "set_drag_dest_item", iview_set_drag_dest_item, 2);
+    rb_define_method(iview, "unset_model_drag_dest", iview_unset_model_drag_dest, 0);
+    rb_define_method(iview, "unset_model_drag_source", iview_unset_model_drag_source, 0);
 
     /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", iview);
