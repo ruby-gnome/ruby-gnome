@@ -1,3 +1,23 @@
+2005-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkutil.c: Added Atk::Util::KeyEventType, Atk.focus_object,
+	.(add|remove)_key_event_listener, .focus_tracker_notify. 
+	Move all methods/constants to Atk::Util from Atk.
+	* src/rbatktext.c: Added Atk::Text::Attribute#type_register, #for_name, 
+	#get_value.
+	* src/rbatkstreamablecontent.c: Added Atk::StreamableContent#get_stream. 
+
+2005-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkrelationset.c: Added Atk::RelationSet#add_relation 
+	for ATK-1.9.0.
+	* src/makeversion.rb: Added. Version information and 
+	ATK_CHECK_VERSION.
+	* extconf.rb, src/rbatk.h: Add version information.
+	* src/depend: Added. Install rbatk.h, rbatkversion.h.
+	* src/rbatkrelation.c: Added Atk::Relation#add_target for ATK-1.9.0.
+	* src/rbatkobject.c: Support ATK-1.10.
+
 2005-02-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatktext.c: Fix a compiling problem on MSVC++/atk-1.9.0.

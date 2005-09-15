@@ -4,7 +4,7 @@
   rbatktext.c -
 
   $Author: mutoh $
-  $Date: 2005/02/17 05:01:23 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -271,29 +271,44 @@ rbatk_text_set_caret_offset(self, offset)
     return self;
 }
 
+
+/* We don't need them.
+    void        atk_attribute_set_free          (AtkAttributeSet *attrib_set);
+*/
+
+/*
+ * Atk::TextAttribute
+ */
 static VALUE
-rbatk_s_text_attribute_register(self, name)
+rbatk_tattr_s_register(self, name)
     VALUE self, name;
 {
     return GENUM2RVAL(atk_text_attribute_register(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
 }
 
-/* We don't need them.
-    void        atk_attribute_set_free          (AtkAttributeSet *attrib_set);
-
-    G_CONST_RETURN gchar* atk_text_attribute_get_name
-        (AtkTextAttribute attr);
-    AtkTextAttribute atk_text_attribute_for_name
-        (const gchar *name);
-    G_CONST_RETURN gchar* atk_text_attribute_get_value
-        (AtkTextAttribute attr,
-         gint index_);
+/* We don't need this.
+G_CONST_RETURN gchar* atk_textattribute_type_get_name
+                                            (AtkTextattributeType type);
 */
 
+static VALUE
+rbatk_tattr_s_for_name(self, name)
+    VALUE self, name;
+{
+    return GENUM2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
+}
+
+static VALUE
+rbatk_tattr_get_value(self, index)
+    VALUE self, index;
+{
+    return CSTR2RVAL(atk_text_attribute_get_value(RVAL2GENUM(self, ATK_TYPE_TEXT_ATTRIBUTE), 
+                                                  NUM2INT(index)));
+}
 void
 Init_atk_text()
 {
-    VALUE attr;
+    VALUE tattr;
     VALUE mText = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);
 
     rb_define_method(mText, "get_text", rbatk_text_get_text, 2);
@@ -321,11 +336,6 @@ Init_atk_text()
     rb_define_method(mText, "set_caret_offset", rbatk_text_set_caret_offset, 1);
 
     G_DEF_SETTERS(mText);
-
-    /* AtkTextAttribute */
-    attr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", mText);
-    rb_define_singleton_method(attr, "type_register", rbatk_s_text_attribute_register, 1);
-    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
     
     /* AtkTextBoundary */
 #ifdef ATK_TYPE_TEXT_BOUNDARY
@@ -339,4 +349,11 @@ Init_atk_text()
     G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
 #endif
 #endif
+
+    tattr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", mText);
+    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
+
+    rb_define_singleton_method(tattr, "type_register", rbatk_tattr_s_register, 1);
+    rb_define_singleton_method(tattr, "for_name", rbatk_tattr_s_for_name, 1);
+    rb_define_method(tattr, "get_value", rbatk_tattr_get_value, 1);   
 }

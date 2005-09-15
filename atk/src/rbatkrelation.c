@@ -4,7 +4,7 @@
   rbatkrelation.c -
 
   $Author: mutoh $
-  $Date: 2004/10/17 23:06:07 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -74,6 +74,16 @@ rbatkrel_get_target(self)
     return ary;
 }
 
+#if ATK_CHECK_VERSION(1,9,0)
+static VALUE
+rbatkrel_add_target(self, obj)
+    VALUE self, obj;
+{
+    atk_relation_add_target(_SELF(self), ATK_OBJECT(RVAL2GOBJ(obj)));
+    return self;
+}
+#endif
+
 void
 Init_atk_relation()
 {
@@ -83,6 +93,9 @@ Init_atk_relation()
     rb_define_method(rel, "initialize", rbatkrel_initialize, 2);
     rb_define_method(rel, "relation_type", rbatkrel_get_relation_type, 0);
     rb_define_method(rel, "target", rbatkrel_get_target, 0);
+#if ATK_CHECK_VERSION(1,9,0)
+    rb_define_method(rel, "add_target", rbatkrel_add_target, 1);
+#endif
 
     /* AtkRelationType */
     type = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", rel);

@@ -4,7 +4,7 @@
   rbatkobject.c -
 
   $Author: mutoh $
-  $Date: 2004/11/13 17:35:07 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -12,6 +12,10 @@
 #include "rbatk.h"
 
 #define _SELF(s) (ATK_OBJECT(RVAL2GOBJ(s)))
+
+/* How can I implement this? Since 1.10
+AtkObject*  atk_implementor_ref_accessible  (AtkImplementor *implementor);
+*/
 
 /* Use properties accessible_* 
 G_CONST_RETURN gchar* atk_object_get_name   (AtkObject *accessible);

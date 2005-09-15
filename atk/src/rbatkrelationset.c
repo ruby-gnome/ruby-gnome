@@ -4,7 +4,7 @@
   rbatkrelationset.c -
 
   $Author: mutoh $
-  $Date: 2003/12/08 16:32:09 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -65,6 +65,18 @@ rbatkrelset_get_relation(self, i)
     }
 }
 
+#if ATK_CHECK_VERSION(1,9,0)
+static VALUE
+rbatkrelset_add_relation(self, relationship, obj)
+    VALUE self, relationship, obj;
+{
+    atk_relation_set_add_relation_by_type(_SELF(self), 
+                                          RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE), 
+                                          ATK_OBJECT(RVAL2GOBJ(obj)));
+    return self;
+}
+#endif
+
 void
 Init_atk_relation_set()
 {
@@ -76,5 +88,7 @@ Init_atk_relation_set()
     rb_define_method(rel, "add", rbatkrelset_add, 1);
     rb_define_method(rel, "n_relations", rbatkrelset_get_n_relations, 0);
     rb_define_method(rel, "get_relation", rbatkrelset_get_relation, 1);
-
+#if ATK_CHECK_VERSION(1,9,0)
+    rb_define_method(rel, "add_relation", rbatkrelset_add_relation, 2);
+#endif
 }

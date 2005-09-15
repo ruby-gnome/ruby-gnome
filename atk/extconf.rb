@@ -29,10 +29,16 @@ have_func('atk_text_free_ranges')
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_distcleanfile("rbatkinits.c")
+add_distcleanfile("rbatkversion.h")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_ATK_COMPILATION") {
+  atk_version = PKGConfig.modversion(PACKAGE_NAME)
+
   File.delete("rbatkinits.c") if FileTest.exist?("rbatkinits.c")
+  File.delete("rbatkversion.h") if FileTest.exist?("rbatkversion.h")
+
   system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
+  system("ruby #{SRCDIR}/makeversion.rb #{atk_version} > rbatkversion.h")
 }
 
 create_top_makefile

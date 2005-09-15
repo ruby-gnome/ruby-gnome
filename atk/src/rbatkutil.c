@@ -4,33 +4,64 @@
   rbatkutil.c -
 
   $Author: mutoh $
-  $Date: 2004/02/19 17:16:54 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
 #include "rbatk.h"
 
-/*
-struct      AtkUtil;
+static ID id_call;
+
+/* How can I implement them?
 guint       atk_add_focus_tracker           (AtkEventListener focus_tracker);
 void        atk_remove_focus_tracker        (guint tracker_id);
 void        atk_focus_tracker_init          (AtkEventListenerInit add_function);
-void        atk_focus_tracker_notify        (AtkObject *object);
 void        (*AtkEventListener)             (AtkObject*);
 void        (*AtkEventListenerInit)         (void);
 guint       atk_add_global_event_listener   (GSignalEmissionHook listener,
                                              const gchar *event_type);
 void        atk_remove_global_event_listener
                                             (guint listener_id);
-struct      AtkKeyEventStruct;
-enum        AtkKeyEventType;
-gint        (*AtkKeySnoopFunc)              (AtkKeyEventStruct *event,
-                                             gpointer func_data);
-guint       atk_add_key_event_listener      (AtkKeySnoopFunc listener,
-                                             gpointer data);
-void        atk_remove_key_event_listener   (guint listener_id);
 */
+
+static VALUE
+rbatk_focus_tracker_notify(self, obj)
+    VALUE self, obj;
+{
+    atk_focus_tracker_notify(ATK_OBJECT(RVAL2GOBJ(obj)));
+    return self;
+}
+
+static gint
+key_snoop_func(AtkKeyEventStruct* event, gpointer func)
+{
+    VALUE ret = rb_funcall((VALUE)func, id_call, 7,
+                           INT2NUM(event->type), UINT2NUM(event->state),
+                           UINT2NUM(event->keyval), INT2NUM(event->length),
+                           CSTR2RVAL(event->string), UINT2NUM(event->keycode),
+                           UINT2NUM(event->timestamp));
+    return NUM2INT(ret);
+}
+
+static VALUE
+rbatk_add_key_event_listener(self)
+    VALUE self;
+{
+    guint ret;
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    ret = atk_add_key_event_listener((AtkKeySnoopFunc)key_snoop_func, (gpointer)func);
+    return UINT2NUM(ret);
+}
+
+static VALUE
+rbatk_remove_key_event_listener(self, id)
+    VALUE self, id;
+{
+    atk_remove_key_event_listener(NUM2UINT(id));
+    return self;
+}
 
 static VALUE
 rbatk_get_root(self)
@@ -38,6 +69,15 @@ rbatk_get_root(self)
 {
     return GOBJ2RVAL(atk_get_root());
 }
+
+#if ATK_CHECK_VERSION(1,6,0)
+static VALUE
+rbatk_get_focus_object(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(atk_get_focus_object());
+}
+#endif
 
 static VALUE
 rbatk_get_toolkit_name(self)
@@ -58,11 +98,28 @@ Init_atk_util()
 {
     VALUE coord;
 
-    rb_define_singleton_method(mAtk, "root", rbatk_get_root, 0);
-    rb_define_singleton_method(mAtk, "toolkit_name", rbatk_get_toolkit_name, 0);
-    rb_define_singleton_method(mAtk, "toolkit_version", rbatk_get_toolkit_version, 0);
+    VALUE util = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
+
+    id_call = rb_intern("call");
+
+    rb_define_singleton_method(util, "focus_tracker_notify", rbatk_focus_tracker_notify, 1);
+    rb_define_singleton_method(util, "add_key_event_listener", rbatk_add_key_event_listener, 0);
+    rb_define_singleton_method(util, "remove_key_event_listener", rbatk_remove_key_event_listener, 1);
+
+    rb_define_singleton_method(util, "root", rbatk_get_root, 0);
+#if ATK_CHECK_VERSION(1,6,0)
+    rb_define_singleton_method(util, "focus_object", rbatk_get_focus_object, 0);
+#endif
+    rb_define_singleton_method(util, "toolkit_name", rbatk_get_toolkit_name, 0);
+    rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
+    rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
 
     /* AtkCoordType */
-    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", mAtk);
-    G_DEF_CONSTANTS(mAtk, ATK_TYPE_COORD_TYPE, "ATK_");
+    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", util);
+    G_DEF_CONSTANTS(util, ATK_TYPE_COORD_TYPE, "ATK_");
+
+    /* AtkKeyEventType */
+    coord = G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", util);
+    G_DEF_CONSTANTS(util, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
+
 }

@@ -3,7 +3,7 @@
   rbatk.h -
 
   $Author: mutoh $
-  $Date: 2004/11/13 17:35:07 $
+  $Date: 2005/09/15 17:30:46 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -13,6 +13,7 @@
 #include <atk/atknoopobject.h>
 #include <atk/atknoopobjectfactory.h>
 #include "rbgobject.h"
+#include "rbatkversion.h"
 
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_ATK_STATIC_COMPILATION)
