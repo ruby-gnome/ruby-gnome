@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/09/15 06:25:30 $
+  $Date: 2005/09/15 06:29:37 $
 
   Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -119,16 +119,16 @@ rbgobj_weak_notify(data, where_the_object_was)
 #endif
     holder->destroyed = TRUE;
 }
-
+/*
 static void 
 rbgobj_toggle_notify(data, gobject, is_last_ref)
     gpointer data;
     GObject* gobject;
     gboolean is_last_ref;
 {
-    /* We don't need this .... */
+// We don't need this .... 
 }
-
+*/
 static void
 rbgobj_mark(holder)
     gobj_holder* holder;
