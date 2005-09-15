@@ -1,5 +1,6 @@
 2005-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbatk.c: Added Atk::VERSION, Atk::(MAJOR|MINOR|MICRO)_VERSION.
 	* src/rbatkutil.c: Added Atk::Util::KeyEventType, Atk.focus_object,
 	.(add|remove)_key_event_listener, .focus_tracker_notify. 
 	Move all methods/constants to Atk::Util from Atk.
@@ -13,7 +14,7 @@
 	for ATK-1.9.0.
 	* src/makeversion.rb: Added. Version information and 
 	ATK_CHECK_VERSION.
-	* extconf.rb, src/rbatk.h: Add version information.
+	* extconf.rb, src/rbatk.h: Added version information.
 	* src/depend: Added. Install rbatk.h, rbatkversion.h.
 	* src/rbatkrelation.c: Added Atk::Relation#add_target for ATK-1.9.0.
 	* src/rbatkobject.c: Support ATK-1.10.
