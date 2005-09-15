@@ -1,5 +1,8 @@
 2005-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/lib/glib2.rb: Supports Ruby-GetText-Package.
+	You can use GetText methods unless "require 'gettext'".
+	And it works in English if the users don't have Ruby-GetText-Package.
 	* src/rbgobject.c: Keep the ruby object when the GObject is removed by C side. 
 	Tomasz Wegrzanowski.
 

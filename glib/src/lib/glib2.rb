@@ -173,6 +173,31 @@ GLib::Log.set_log_domain(GLib::Object::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Thread::LOG_DOMAIN)
 GLib::Log.set_log_domain(GLib::Module::LOG_DOMAIN)
 
+# Ruby-GetText-Package support
+begin
+  require 'gettext'
+rescue LoadError
+  unless defined? GetText
+    module GetText
+      module_function
+      def _(msgid); msgid; end
+      def N_(msgid); msgid; end
+      def n_(msgid, msgid_plural, n)
+	n == 1 ? msgid : msgid_plural
+      end
+      def s_(msgid, div = '|')
+	if index = msgid.rindex(div)
+	  msgid = msgid[(index + 1)..-1]
+	else
+	  msgid
+	end
+      end
+      def bindtextdomain(domainname, path = nil, locale = nil, charset = nil)
+      end
+    end
+  end
+end
+
 =begin
 Don't we need this?
 ObjectSpace.define_finalizer(GLib) {
