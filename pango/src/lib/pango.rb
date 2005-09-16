@@ -23,7 +23,7 @@ module Pango
     if const.is_a?(Module)
       case name
       when /^Attr([A-Z].*)/
-        next
+        prefix = $1.gsub(/[A-Z][a-z]*/) {|x| "#{x.upcase}_"}
       when "Attribute", "Coverage"
         prefix = "#{name.upcase}_"
       else
@@ -33,7 +33,7 @@ module Pango
       const.constants.each do |sub_name|
         if sub_name == sub_name.upcase and sub_name != "LOG_DOMAIN"
           if /^TYPE_(.*)/ =~ sub_name
-            new_name = "#{prefix}#{$1}"
+            next
           else
             new_name = "#{prefix}#{sub_name}"
           end
