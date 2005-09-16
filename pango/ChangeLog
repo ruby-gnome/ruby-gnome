@@ -1,3 +1,9 @@
+2005-09-16  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/pango.rb (Pango): Don't make aliases for:
+	- Pango::AttrXXX::TYPE_* -> Pango::XXX_*
+	- Pango::AttrXXX::*      -> Pango::XXX_*
+
 2005-09-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/makeversion.rb: Added copyright to the header.

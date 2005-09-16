@@ -23,7 +23,7 @@ module Pango
     if const.is_a?(Module)
       case name
       when /^Attr([A-Z].*)/
-        prefix = $1.gsub(/[A-Z][a-z]*/) {|x| "#{x.upcase}_"}
+        next
       when "Attribute", "Coverage"
         prefix = "#{name.upcase}_"
       else
