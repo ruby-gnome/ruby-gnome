@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/09/15 06:29:37 $
+  $Date: 2005/09/17 17:27:21 $
 
   Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -303,6 +303,8 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 
 static GHashTable* prop_exclude_list;
 
+#define IS_FLAG(bitmask, flag) ((bitmask) & (flag) == (flag))
+
 void
 rbgobj_define_property_accessors(klass)
     VALUE klass;
@@ -359,7 +361,7 @@ rbgobj_define_property_accessors(klass)
                 pspec->name);
         }
 
-        if (pspec->flags & G_PARAM_WRITABLE){
+        if (IS_FLAG(pspec->flags, G_PARAM_WRITABLE) && !IS_FLAG(pspec->flags, G_PARAM_CONSTRUCT_ONLY)){
             g_string_append_printf(source,
                 "def set_%s(val); set_property('%s', val); end\n",
                 prop_name, pspec->name);
