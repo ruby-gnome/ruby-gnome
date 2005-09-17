@@ -3,8 +3,8 @@
 
   rbpangolayoutline.c -
 
-  $Author: ktou $
-  $Date: 2005/09/08 02:28:59 $
+  $Author: mutoh $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -154,7 +154,19 @@ static VALUE
 layout_line_get_runs(self)
     VALUE self;
 {
-    return GSLIST2ARY2(_SELF(self)->runs, PANGO_TYPE_GLYPH_ITEM);
+    GSList* list = _SELF(self)->runs;
+    VALUE ary = rb_ary_new();
+    while (list) {
+        PangoGlyphItem* old_item = (PangoGlyphItem*)list->data; 
+        PangoGlyphItem new_item;
+
+        new_item.item = pango_item_copy(old_item->item);
+        new_item.glyphs = pango_glyph_string_copy(old_item->glyphs);
+
+        rb_ary_push(ary, BOXED2RVAL(&new_item, PANGO_TYPE_GLYPH_ITEM));
+        list = list->next;
+    }
+    return ary;
 }
 
 static VALUE

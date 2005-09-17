@@ -4,7 +4,7 @@
   rbpangolayoutiter.c -
 
   $Author: mutoh $
-  $Date: 2005/07/24 12:27:25 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -107,7 +107,7 @@ static VALUE
 layout_iter_get_line(self)
     VALUE self;
 {
-    return BOXED2RVAL(pango_layout_iter_get_line, PANGO_TYPE_LAYOUT_LINE);
+    return BOXED2RVAL(pango_layout_iter_get_line(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 static VALUE

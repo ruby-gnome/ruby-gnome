@@ -3,8 +3,8 @@
 
   rbpangolanguage.c -
 
-  $Author: sakai $
-  $Date: 2003/08/16 05:30:54 $
+  $Author: mutoh $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -50,6 +50,17 @@ language_to_str(self)
     return CSTR2RVAL(pango_language_to_string(_SELF(self)));
 }
 
+#if PANGO_CHECK_VERSION(1,4,0)
+/* Moved from Pango::Script */
+static VALUE
+language_includes_script(self, script)
+    VALUE self, script;
+{
+    return CBOOL2RVAL(pango_language_includes_script(_SELF(self), 
+                                                     RVAL2GENUM(script, PANGO_TYPE_SCRIPT)));
+}
+#endif
+
 void
 Init_pango_language()
 {
@@ -60,4 +71,9 @@ Init_pango_language()
     rb_define_method(pLanguage, "matches", language_matches, -1);
     rb_define_method(pLanguage, "to_str", language_to_str, 0);
     rb_define_alias(pLanguage, "to_s", "to_str");
+
+#if PANGO_CHECK_VERSION(1,4,0)
+    rb_define_method(pLanguage, "includes_script", language_includes_script, 1);
+#endif
+
 }

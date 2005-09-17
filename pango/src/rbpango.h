@@ -3,8 +3,8 @@
 
   rbpango.h -
 
-  $Author: ggc $
-  $Date: 2005/08/28 18:44:40 $
+  $Author: mutoh $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -51,6 +51,10 @@ RUBY_PANGO_VAR VALUE mPango;
 #define PANGO_TYPE_GLYPH_INFO (pango_glyph_info_get_type())
 #define PANGO_TYPE_GLYPH_ITEM (pango_glyph_item_get_type())
 
+#if PANGO_CHECK_VERSION(1,4,0)
+#define PANGO_TYPE_SCRIPT_ITER (pango_script_iter_get_type())
+#endif
+
 #define ATTR2RVAL(attr) (pango_make_attribute(attr))
 #define RVAL2ATTR(attr) (pango_get_attribute(attr))
 #define ATTRTYPE2CLASS(attr_type) (pango_get_attribute_klass(attr_type))
@@ -69,6 +73,10 @@ extern GType pango_attr_iter_get_type();
 extern GType pango_coverage_get_type();
 extern GType pango_glyph_info_get_type();
 extern GType pango_glyph_item_get_type();
+
+#if PANGO_CHECK_VERSION(1,4,0)
+extern GType pango_script_iter_get_type();
+#endif
 
 extern VALUE pango_get_attribute_klass(VALUE attr_type);
 extern void pango_add_attribute(int attr_type, VALUE klass);

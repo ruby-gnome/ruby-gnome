@@ -4,7 +4,7 @@
   rbpangoanalysis.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -58,7 +58,17 @@ static VALUE
 ana_get_shape_engine(self)
     VALUE self;
 {
-    return GOBJ2RVAL(_SELF(self)->shape_engine);
+    VALUE ret;
+    if (_SELF(self)->shape_engine){
+        const gchar* gname = G_OBJECT_TYPE_NAME(_SELF(self)->shape_engine);
+        gchar* name = g_strdup(gname);
+        name[0] = g_ascii_toupper(name[0]);
+        G_DEF_CLASS3(gname, name, mPango);
+        ret = GOBJ2RVAL(_SELF(self)->shape_engine);
+    } else {
+        ret = Qnil;
+    }
+    return ret;
 }
 
 static VALUE
@@ -72,7 +82,17 @@ static VALUE
 ana_get_lang_engine(self)
     VALUE self;
 {
-    return GOBJ2RVAL(_SELF(self)->lang_engine);
+    VALUE ret;
+    if (_SELF(self)->lang_engine){
+        const gchar* gname = G_OBJECT_TYPE_NAME(_SELF(self)->lang_engine);
+        gchar* name = g_strdup(gname);
+        name[0] = g_ascii_toupper(name[0]);
+        G_DEF_CLASS3(name, name, mPango);
+        ret = GOBJ2RVAL(_SELF(self)->lang_engine);
+    } else {
+        ret = Qnil;
+    }
+    return ret;
 }
 #endif
 

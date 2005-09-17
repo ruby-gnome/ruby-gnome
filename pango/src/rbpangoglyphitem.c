@@ -4,7 +4,7 @@
   rbpangoglyphitem.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 18:48:13 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -67,6 +67,44 @@ glyph_item_get_glyphs(self)
     return glyphs ? BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING) : Qnil;
 }
 
+static VALUE
+glyph_item_split(self, text, split_index)
+    VALUE self, text, split_index;
+{
+    return BOXED2RVAL(pango_glyph_item_split(_SELF(self), RVAL2CSTR(text),
+                                             NUM2INT(split_index)), PANGO_TYPE_GLYPH_ITEM);
+}
+
+static VALUE
+glyph_item_apply_attrs(self, text, attrs)
+    VALUE self, text, attrs;
+{
+    GSList* list = pango_glyph_item_apply_attrs(_SELF(self), RVAL2CSTR(text),
+                                                (PangoAttrList*)RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST));
+
+    VALUE ret = rb_ary_new();
+
+    while (list) {
+        rb_ary_push(ret, BOXED2RVAL(list->data, PANGO_TYPE_GLYPH_ITEM));
+        pango_glyph_item_free(list->data); 
+        list = list->next;
+    }
+   
+    g_slist_free(list);
+    return ret;
+}
+
+#if PANGO_CHECK_VERSION(1,6,0)
+static VALUE
+glyph_item_letter_space(self, text, log_attrs, letter_spacing)
+    VALUE self, text, log_attrs, letter_spacing;
+{
+    pango_glyph_item_letter_space(_SELF(self), RVAL2CSTR(text),
+                                  (PangoLogAttr*)RVAL2BOXED(log_attrs, PANGO_TYPE_LOG_ATTR),
+                                  NUM2INT(letter_spacing));
+    return self;
+}
+#endif
 #endif
 
 void
@@ -77,6 +115,13 @@ Init_pango_glyph_item()
 
     rb_define_method(pItem, "item", glyph_item_get_item, 0);
     rb_define_method(pItem, "glyphs", glyph_item_get_glyphs, 0);
+
+    rb_define_method(pItem, "split", glyph_item_split, 2);
+    rb_define_method(pItem, "appy_attrs", glyph_item_apply_attrs, 2);
+
+#if PANGO_CHECK_VERSION(1,6,0)
+    rb_define_method(pItem, "letter_space", glyph_item_letter_space, 3);
+#endif
 #endif
 }
 

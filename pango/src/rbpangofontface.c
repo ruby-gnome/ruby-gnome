@@ -4,7 +4,7 @@
   rbpangofontface.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -60,4 +60,9 @@ Init_pango_font_face()
 #if PANGO_CHECK_VERSION(1,4,0)
     rb_define_method(pFace, "sizes", font_face_list_sizes, 0);
 #endif
+    G_DEF_CLASS3("PangoFcFace", "FcFace", mPango);
+    G_DEF_CLASS3("PangoFT2Face", "FT2Face", mPango);
+    G_DEF_CLASS3("PangoXftFace", "XftFace", mPango);
+    G_DEF_CLASS3("PangoXFace", "XFace", mPango);
+    G_DEF_CLASS3("PangoWin32Face", "Win32Face", mPango);
 }

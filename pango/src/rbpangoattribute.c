@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -363,6 +363,7 @@ attr_AttrShape_initialize(argc, argv, self)
             (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));
     } else {
 #if PANGO_CHECK_VERSION(1,8,0)
+        G_RELATIVE(self, data);
         DATA_PTR(self) = pango_attr_shape_new_with_data(
             (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
             (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE),

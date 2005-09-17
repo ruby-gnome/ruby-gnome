@@ -4,9 +4,9 @@
   rbpangofontsetsimple.c -
 
   $Author: mutoh $
-  $Date: 2003/02/01 17:13:25 $
+  $Date: 2005/09/17 17:09:13 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"

@@ -4,9 +4,9 @@
   rbpangofontfamily.c -
 
   $Author: mutoh $
-  $Date: 2005/07/24 08:02:38 $
+  $Date: 2005/09/17 17:09:13 $
 
-  Copyright (C) 2002-2005 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
 
 #include "rbpango.h"
@@ -63,5 +63,8 @@ Init_pango_font_family()
     rb_define_method(pFamily, "faces", font_family_list_faces, 0);
 
     G_DEF_CLASS3("PangoFcFamily", "FcFamily", mPango);
+    G_DEF_CLASS3("PangoFT2Family", "FT2Family", mPango);
     G_DEF_CLASS3("PangoXftFamily", "XftFamily", mPango);
+    G_DEF_CLASS3("PangoXFamily", "XFamily", mPango);
+    G_DEF_CLASS3("PangoWin32Family", "Win32Family", mPango);
 }

@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/07/24 08:02:37 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -197,6 +197,14 @@ rcontext_list_families(self)
     return result;
 }
 
+static VALUE
+rcontext_list_families_old(self)
+    VALUE self;
+{
+    rb_warn("Deprecated. Use Pango::Context#families instead.");
+    return rcontext_list_families(self);
+}
+
 void
 Init_pango_context()
 {
@@ -224,7 +232,10 @@ Init_pango_context()
     rb_define_method(pContext, "load_font", rcontext_load_font, 1);
     rb_define_method(pContext, "load_fontset", rcontext_load_fontset, 2);
     rb_define_method(pContext, "get_metrics", rcontext_get_metrics, 2);
-    rb_define_method(pContext, "list_families", rcontext_list_families, 0);
+    rb_define_method(pContext, "families", rcontext_list_families, 0);
+
+    /* This will remove 2 or 3 releases later since 0.14.0. */
+    rb_define_method(pContext, "list_families", rcontext_list_families_old, 0);
 
     G_DEF_SETTERS(pContext);
 

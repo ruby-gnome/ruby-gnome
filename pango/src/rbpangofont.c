@@ -4,7 +4,7 @@
   rbpangofont.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/09/17 17:09:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -70,6 +70,15 @@ font_get_metrics(argc, argv, self)
                       PANGO_TYPE_FONT_METRICS);
 }
 
+#if PANGO_CHECK_VERSION(1,9,0)
+static VALUE
+font_get_font_map(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(pango_font_get_font_map(_SELF(self)));
+}
+#endif
+
 void
 Init_pango_font()
 {
@@ -81,7 +90,15 @@ Init_pango_font()
     rb_define_method(pFont, "get_glyph_extents", font_get_glyph_extents, 1);
     rb_define_method(pFont, "metrics", font_get_metrics, -1);
 
+#if PANGO_CHECK_VERSION(1,9,0)
+    rb_define_method(pFont, "font_map", font_get_font_map, 0);
+#endif
+
+    G_DEF_CLASS3("PangoXFont", "XFont", mPango);
+    G_DEF_CLASS3("PangoFT2Font", "FT2Font", mPango);
     G_DEF_CLASS3("PangoFcFont", "FcFont", mPango);
     G_DEF_CLASS3("PangoXftFont", "XftFont", mPango);
-
+    G_DEF_CLASS3("PangoCairoFcFont", "CairoFcFont", mPango);
+    G_DEF_CLASS3("PangoCairoFont", "CairoFont", mPango);
+    G_DEF_CLASS3("PangoCairoWin32Font", "CairoWin32Font", mPango);
 }

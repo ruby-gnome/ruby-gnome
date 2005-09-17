@@ -1,3 +1,33 @@
+2005-09-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoengine.c: Added (class names only, Pango::Engine,
+	Pango::EngineShape, Pango::EngineLang). 
+	* src/rbpangoanalysis.c: Fix problems not to show correct class names
+	of Pango::Analysis#shape_engine, #lang_engine. 
+	* src/rbpangolayoutline.c: Fix a segfault of Pango::LayoutLine#runs. 
+	* src/rbpangolayoutiter.c: Fix a bug of Pango::LayoutIter#line. 
+	* sample/script.rb, break.rb, item.rb, layout.rb: Added. 
+
+2005-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoscriptiter.c: Added Pango::ScriptIter for Pango-1.4.
+	* src/rbpangoscript.c: Added Pango::Script for Pango-1.4.
+	* src/rbpangolanguage.c: Added Pango::Language#includes_script. 
+	* src/rbpangofontmap.c: 
+	Added Pango::(FT2|X|Win32|Cairo|CairoFc|CairoWin32)FontMap.
+	* src/rbpangofontface.c: Added Pango::(Fc|FT2|Xft|X|Win32)Face.
+	* src/rbpangofontfamily.c: Added Pango::(X|FT2|Win32)Family.
+	* src/rbpangofont.c: Added Pango::Font#font_map for Pango-1.9. 
+	Supports Pango::CairoFcFont, Pango::CairoFont, Pango::CairoWin32Font
+	for Pango-1.10.
+	Added Pango::XFont, Pango::FT2Font.
+	* src/rbpangoglyphitem.c: Added Pango::GlyphItem#split, #apply_attrs, 
+	#letter_space.
+	* src/rbpangoglyphstring.c: Added Pango::GlyphString#extents, #index_to_x,
+	#x_to_index, #get_logical_widths, #glyphs.
+	* src/rbpangocontext.c: Pango::Context#list_families is deprecated.
+	Use Pango::Context#families instead.
+
 2005-09-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/pango.rb (Pango): Don't make aliases for:
