@@ -1,3 +1,8 @@
+2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoitem.c: Check pango version for pango_item_get_type().
+	* src/rbpangolayoutline.c: ditto.
+
 2005-09-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoengine.c: Added (class names only, Pango::Engine,

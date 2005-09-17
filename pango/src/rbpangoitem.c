@@ -4,7 +4,7 @@
   rbpangoitem.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/09/17 18:30:05 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -33,6 +33,7 @@ item_int_set_ ## name (self, val)\
     rb_define_method(pItem, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
 
 /**********************************/
+#if ! PANGO_CHECK_VERSION(1,9,0)
 GType
 pango_item_get_type(void)
 {
@@ -44,6 +45,7 @@ pango_item_get_type(void)
                     (GBoxedFreeFunc)pango_item_free);
     return our_type;
 }
+#endif
 /**********************************/
 
 static VALUE

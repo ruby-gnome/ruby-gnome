@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2005/09/17 18:30:05 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -15,7 +15,7 @@
 #define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
 
 /**********************************/
-#if !PANGO_CHECK_VERSION(1,10,0)
+#if !PANGO_CHECK_VERSION(1,9,0)
 static PangoLayoutLine*
 layout_line_copy(ref)
     PangoLayoutLine* ref;
