@@ -1,3 +1,8 @@
+2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/gnomevfs-file.c: If Gnome::VFS.open with write mode can't find
+	file, then it creates new file. [Bug #1264492]
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/gnomevfs-file.c: Fix for Ruby-1.9.x. 

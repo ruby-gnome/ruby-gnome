@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2005/07/24 07:34:43 $
+ * $Date: 2005/09/17 18:05:53 $
  *
  *****************************************************************************/
 
@@ -438,30 +438,31 @@ file_initialize(argc, argv, self)
     open_mode = INT2FIX(GNOME_VFS_OPEN_READ);
   }
 
+  printf ("open_mode = %d\n", FIX2INT(open_mode));
   if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
-    if (argc < 3) {
       result = gnome_vfs_open_uri(&handle,
                                   RVAL2GVFSURI(uri),
                                   FIX2INT(open_mode));
-    } else {
-      result = gnome_vfs_create_uri(&handle,
-                                    RVAL2GVFSURI(uri),
-                                    FIX2INT(open_mode),
-                                    RTEST(exclusive),
-                                    FIX2INT(perm));
-    }
+      if (result == GNOME_VFS_ERROR_NOT_FOUND && 
+          (FIX2INT(open_mode) & GNOME_VFS_OPEN_WRITE)){
+        result = gnome_vfs_create_uri(&handle,
+                                      RVAL2GVFSURI(uri),
+                                      FIX2INT(open_mode),
+                                      RTEST(exclusive),
+                                      FIX2INT(perm));
+      }
   } else {
-    if (argc < 3) {
       result = gnome_vfs_open(&handle,
                               RVAL2CSTR(uri),
                               FIX2INT(open_mode));
-    } else {
-      result = gnome_vfs_create(&handle,
-                                RVAL2CSTR(uri),
-                                FIX2INT(open_mode),
-                                RTEST(exclusive),
-                                FIX2INT(perm));
-    }
+      if (result == GNOME_VFS_ERROR_NOT_FOUND && 
+          (FIX2INT(open_mode) & GNOME_VFS_OPEN_WRITE)){
+        result = gnome_vfs_create(&handle,
+                                  RVAL2CSTR(uri),
+                                  FIX2INT(open_mode),
+                                  RTEST(exclusive),
+                                  FIX2INT(perm));
+      }
   }
 
   RAISE_IF_ERROR(result);
