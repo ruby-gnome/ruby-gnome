@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2005/09/18 02:42:01 $
+  $Date: 2005/09/18 16:24:12 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -389,8 +389,8 @@ treeview_get_visible_range(self)
 
     gboolean valid_paths = gtk_tree_view_get_visible_range(_SELF(self), &start_path, &end_path);
 
-    return valid_paths ? rb_assoc_new(start_path ? TREEPATH2RVAL(start_path) : Qnil,
-                                      end_path ? TREEPATH2RVAL(end_path) : Qnil) : Qnil;
+    return valid_paths ? rb_assoc_new(TREEPATH2RVAL(start_path),
+                                      TREEPATH2RVAL(end_path)) : Qnil;
 }
 #endif
 
@@ -656,6 +656,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
     rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
     rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
+    rb_define_alias(gTv, "get_path", "get_path_at_pos");
     rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
     rb_define_method(gTv, "get_background_area", treeview_get_background_area, 2);
     rb_define_method(gTv, "visible_rect", treeview_get_visible_rect, 0);
@@ -673,6 +674,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "set_drag_dest_row", treeview_set_drag_dest_row, 2);
     rb_define_method(gTv, "drag_dest_row", treeview_get_drag_dest_row, 0);
     rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
+    rb_define_alias(gTv, "get_dest_row", "get_dest_row_at_pos");
     rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
     rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
 #if GTK_CHECK_VERSION(2,2,0)

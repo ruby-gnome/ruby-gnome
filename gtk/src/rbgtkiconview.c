@@ -3,8 +3,8 @@
 
   rbgtkiconview.c -
 
-  $Author: ggc $
-  $Date: 2005/09/15 20:47:38 $
+  $Author: mutoh $
+  $Date: 2005/09/18 16:24:12 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -213,7 +213,7 @@ iview_cursor(self)
     GtkTreePath* path;
     GtkCellRenderer* cell;
     gboolean cursor_set = gtk_icon_view_get_cursor(_SELF(self), &path, &cell);
-    return rb_ary_new3(3, RTEST(cursor_set), BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell));
+    return cursor_set ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell)) : Qnil;
 }
 
 static VALUE
@@ -223,10 +223,8 @@ iview_get_dest_item_at_pos(self, drag_x, drag_y)
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
     gboolean item_at_pos = gtk_icon_view_get_dest_item_at_pos(_SELF(self), NUM2INT(drag_x), NUM2INT(drag_y), &path, &pos);
-    return rb_ary_new3(3,
-                       RTEST(item_at_pos),
-                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                       GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+    return item_at_pos ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                                      GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION)) : Qnil;
 }
 
 static VALUE
@@ -236,9 +234,8 @@ iview_drag_dest_item(self)
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
     gtk_icon_view_get_drag_dest_item(_SELF(self), &path, &pos);
-    return rb_ary_new3(2,
-                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                       GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+    return rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                        GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
 }
 
 static VALUE
@@ -248,10 +245,7 @@ iview_get_item_at_pos(self, x, y)
     GtkTreePath* path;
     GtkCellRenderer* cell;
     gboolean item_at_pos = gtk_icon_view_get_item_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y), &path, &cell);
-    return rb_ary_new3(3,
-                       RTEST(item_at_pos),
-                       BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                       GOBJ2RVAL(cell));
+    return item_at_pos ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell)) : Qnil;
 }
 
 static VALUE
@@ -263,10 +257,8 @@ iview_visible_range(self)
 
     gboolean valid_paths = gtk_icon_view_get_visible_range(_SELF(self), &start_path, &end_path);
 
-    return rb_ary_new3(3,
-                       RTEST(valid_paths),
-                       BOXED2RVAL(start_path, GTK_TYPE_TREE_PATH),
-                       BOXED2RVAL(end_path, GTK_TYPE_TREE_PATH));
+    return valid_paths ? rb_assoc_new(BOXED2RVAL(start_path, GTK_TYPE_TREE_PATH),
+                                      BOXED2RVAL(end_path, GTK_TYPE_TREE_PATH)) : Qnil;
 }
 
 static VALUE
@@ -285,7 +277,8 @@ static VALUE
 iview_set_cursor(self, path, cell, start_editing)
     VALUE self, path, cell, start_editing;
 {
-    gtk_icon_view_set_cursor(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH), RVAL2GOBJ(cell), RTEST(start_editing));
+    gtk_icon_view_set_cursor(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH), 
+                             NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RTEST(start_editing));
     return self;
 }
 
@@ -294,7 +287,7 @@ iview_set_drag_dest_item(self, path, pos)
     VALUE self, path, pos;
 {
     gtk_icon_view_set_drag_dest_item(_SELF(self),
-                                     RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                     NIL_P(path) ? NULL : RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
                                      RVAL2GENUM(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
     return self;
 }
@@ -323,6 +316,7 @@ Init_gtk_iconview()
     VALUE iview = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);
     rb_define_method(iview, "initialize", iview_initialize, -1);
     rb_define_method(iview, "get_path_at_pos", iview_get_path_at_pos, 2);
+    rb_define_alias(iview, "get_path", "get_path_at_pos");
     rb_define_method(iview, "selected_each", iview_selected_foreach, 0);
     rb_define_method(iview, "select_path", iview_select_path, 1);
     rb_define_method(iview, "unselect_path", iview_unselect_path, 1);
@@ -337,9 +331,11 @@ Init_gtk_iconview()
     rb_define_method(iview, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
     rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
     rb_define_method(iview, "cursor", iview_cursor, 0);
-    rb_define_method(iview, "get_dest_item_at_pos", iview_get_dest_item_at_pos, 2);
+    rb_define_method(iview, "get_dest_item_at_pos", iview_get_dest_item_at_pos, 2); 
+    rb_define_alias(iview, "get_dest_item", "get_dest_item_at_pos");
     rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
     rb_define_method(iview, "get_item_at_pos", iview_get_item_at_pos, 2);
+    rb_define_alias(iview, "get_item", "get_item_at_pos");
     rb_define_method(iview, "visible_range", iview_visible_range, 0);
     rb_define_method(iview, "scroll_to_path", iview_scroll_to_path, 4);
     rb_define_method(iview, "set_cursor", iview_set_cursor, 3);

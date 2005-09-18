@@ -1,7 +1,7 @@
 # Copyright (c) 2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: iconview.rb,v 1.4 2005/09/11 19:48:54 ggc Exp $
+# $Id: iconview.rb,v 1.5 2005/09/18 16:24:12 mutoh Exp $
 =begin
 = Icon View (IconView)
 
@@ -98,7 +98,6 @@ module Demo
       end
       sw.add(iconview)
       iconview.grab_focus
-
     end
   end
 end
