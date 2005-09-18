@@ -1,3 +1,12 @@
+2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmenubar.c: Gtk::MenuBar::PackDirection names in
+	Gtk::MenuBar renamed.
+	(e.g. Gtk::MenuBar::LTR -> Gtk::MenuBar::PACK_DIRECTION_LTR).
+	* src/rbgtktreeview.c: Gtk::TreeView#visible_range returns
+	[start_path, end_path] or nil(when it's invalid), 
+	not [valid, start_path, end_path].
+
 2005-09-15 22:47  Guillaume Cottenceau
 
 	* src/rbgtkiconview.c: 2.8: wrap remaining new symbols e.g.
@@ -100,13 +109,12 @@
 
 2005-08-30 23:10  Guillaume Cottenceau
 
-	* src/rbgtktreeviewcolumn.c: 2.8: wrap
-	  gtk_tree_view_column_queue_resize
+	* src/rbgtktreeviewcolumn.c: 2.8: Added
+	  Gtk::TreeViewColumn#queue_resize.
 
 2005-08-30 22:51  Guillaume Cottenceau
 
-	* src/rbgtktreerowreference.c: 2.8: wrap
-	  gtk_tree_row_reference_get_model
+	* src/rbgtktreerowreference.c: 2.8: Added Gtk::TreeRowReference#model.
 
 2005-08-30 22:31  Guillaume Cottenceau
 
@@ -115,16 +123,17 @@
 
 2005-08-30 22:22  Guillaume Cottenceau
 
-	* src/rbgtktextiter.c: 2.8: wrap
-	  gtk_text_iter_backward_visible_line,
-	  gtk_text_iter_backward_visible_lines,
-	  gtk_text_iter_forward_visible_line, and
-	  gtk_text_iter_forward_visible_lines
+	* src/rbgtktextiter.c: 2.8: Added
+	  Gtk::TextIter#backward_visible_line,
+	  Gtk::TextIter#backward_visible_lines,
+	  Gtk::TextIter#forward_visible_line, and
+	  Gtk::TextIter#forward_visible_lines
 
 2005-08-30 21:34  Guillaume Cottenceau
 
-	* src/rbgtkstock.c: 2.8: wrap GTK_STOCK_FULLSCREEN, GTK_STOCK_INFO,
-	  GTK_STOCK_LEAVE_FULLSCREEN, gtk_stock_set_translate_func
+	* src/rbgtkstock.c: 2.8: Added Gtk::Stock::FULLSCREEN, 
+	  Gtk::Stock::INFO, Gtk::Stock::LEAVE_FULLSCREEN, 
+	  Gtk::Stock.set_translate_func.
 
 2005-08-30 21:19  Guillaume Cottenceau
 
@@ -133,13 +142,12 @@
 
 2005-08-29 23:02  Guillaume Cottenceau
 
-	* src/rbgtkscrolledwindow.c: 2.8: wrap
-	  gtk_scrolled_window_get_hscrollbar and
-	  gtk_scrolled_window_get_vscrollbar
+	* src/rbgtkscrolledwindow.c: 2.8: Added Gtk::ScrolledWindow#hscrollbar,
+	#vscrollbar.
 
 2005-08-29 22:48  Guillaume Cottenceau
 
-	* src/rbgtkmenubar.c: 2.8: wrap GTK_TYPE_PACK_DIRECTION
+	* src/rbgtkmenubar.c: 2.8: Added Gtk::MenuBar::PackDirection.
 	  (gtk_menu_bar_set_pack_direction and
 	  gtk_menu_bar_get_pack_direction unneeded because of
 	  :pack-direction property, gtk_menu_bar_set_child_pack_direction
@@ -148,7 +156,7 @@
 
 2005-08-28 22:42  Guillaume Cottenceau
 
-	* src/rbgtktreeview.c: 2.8: wrap gtk_tree_view_get_visible_range
+	* src/rbgtktreeview.c: 2.8: Added Gtk::TreeView#visible_range
 
 2005-08-28 22:31  Guillaume Cottenceau
 
@@ -157,7 +165,8 @@
 
 2005-08-28 22:03  Guillaume Cottenceau
 
-	* src/rbgtkwindow.c: 2.8: wrap gtk_window_present_with_time
+	* src/rbgtkwindow.c: 2.8: Gtk::Window#present can accept timestamp
+	  as a parameter.
 	  (gtk_window_get_urgency_hint and gtk_window_set_urgency_hint
 	  unneeded because of :urgency-hint property)
 
@@ -169,7 +178,7 @@
 
 2005-08-28 20:33  Guillaume Cottenceau
 
-	* src/rbgtkimage.c: 2.8: wrap gtk_image_clear
+	* src/rbgtkimage.c: 2.8: Added Gtk::Image#clear.
 
 2005-08-24  Kouhei Sutou  <kou@cozmixng.org>
 

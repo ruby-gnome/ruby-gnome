@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: ggc $
-  $Date: 2005/08/28 20:42:35 $
+  $Author: mutoh $
+  $Date: 2005/09/18 02:42:01 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -389,10 +389,8 @@ treeview_get_visible_range(self)
 
     gboolean valid_paths = gtk_tree_view_get_visible_range(_SELF(self), &start_path, &end_path);
 
-    return rb_ary_new3(3,
-                       RTEST(valid_paths),
-                       start_path ? TREEPATH2RVAL(start_path) : Qnil,
-                       end_path ? TREEPATH2RVAL(end_path) : Qnil);
+    return valid_paths ? rb_assoc_new(start_path ? TREEPATH2RVAL(start_path) : Qnil,
+                                      end_path ? TREEPATH2RVAL(end_path) : Qnil) : Qnil;
 }
 #endif
 
