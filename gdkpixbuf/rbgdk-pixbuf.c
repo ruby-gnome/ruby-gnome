@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 17:46:34 $
+  $Author: ktou $
+  $Date: 2005/09/18 12:49:21 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -59,10 +59,18 @@ static VALUE
 get_pixels(self)
     VALUE self;
 {
-    guchar* pixels = gdk_pixbuf_get_pixels(_SELF(self));
-    return rb_str_new((const char*)pixels,
-                      gdk_pixbuf_get_height(_SELF(self)) * 
-                      gdk_pixbuf_get_rowstride(_SELF(self)));
+    GdkPixbuf *pixbuf = _SELF(self);
+    int size, height, width, rowstride, n_channels, bits_per_sample;
+
+    height = gdk_pixbuf_get_height(pixbuf);
+    width = gdk_pixbuf_get_width(pixbuf);
+    rowstride = gdk_pixbuf_get_rowstride(pixbuf);
+    n_channels = gdk_pixbuf_get_n_channels(pixbuf);
+    bits_per_sample = gdk_pixbuf_get_bits_per_sample(pixbuf);
+    
+    size = ((height - 1) * rowstride +
+            width * ((n_channels * bits_per_sample + 7) / 8));
+    return rb_str_new((const char*)gdk_pixbuf_get_pixels(pixbuf), size);
 }
 
 static VALUE

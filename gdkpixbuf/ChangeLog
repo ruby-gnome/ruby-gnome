@@ -1,3 +1,7 @@
+2005-09-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* rbgdk-pixbuf.c (get_pixels): Fix pixels size.
+
 2005-07-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c, rbgdk-pixbuf-loader.c, rbgdk-pixbuf-format.c: 
