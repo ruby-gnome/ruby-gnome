@@ -9,11 +9,11 @@
 
 2005-09-15 22:47  Guillaume Cottenceau
 
-	* src/rbgtkiconview.c: 2.8: wrap remaining new symbols e.g.
-	  gtk_icon_view_set_cursor, gtk_icon_view_set_drag_dest_item,
-	  gtk_icon_view_set_reorderable,
-	  gtk_icon_view_unset_model_drag_dest, and
-	  gtk_icon_view_unset_model_drag_source
+	* src/rbgtkiconview.c: 2.8: Added remaining new symbols e.g.
+	  Gtk::IconView#set_cursor, Gtk::IconView#set_drag_dest_item,
+	  Gtk::IconView#set_reorderable,
+	  Gtk::IconView#unset_model_drag_dest, and
+	  Gtk::IconView#unset_model_drag_source
 
 2005-09-15 20:23  Guillaume Cottenceau
 
@@ -31,9 +31,9 @@
 
 2005-09-12 23:02  Guillaume Cottenceau
 
-	* src/rbgtkiconview.c: 2.8: wrap gtk_icon_view_get_drag_dest_item,
-	  gtk_icon_view_get_item_at_pos, gtk_icon_view_get_visible_range;
-	  gtk_icon_view_set_reorderable and gtk_icon_view_get_reorderable
+	* src/rbgtkiconview.c: 2.8: wrap Gtk::IconView#get_drag_dest_item,
+	  Gtk::IconView#get_item_at_pos, Gtk::IconView#get_visible_range;
+	  Gtk::IconView#reorderable= and Gtk::IconView#reorderable?
 	  defined as properties
 
 2005-09-12  Masao Mutoh  <mutoh@highway.ne.jp>
@@ -60,10 +60,10 @@
 2005-09-11 22:57  Guillaume Cottenceau
 
 	* src/rbgtkiconview.c: 2.8: wrap GtkIconViewDropPosition,
-	  gtk_icon_view_create_drag_icon,
-	  gtk_icon_view_enable_model_drag_dest,
-	  gtk_icon_view_enable_model_drag_source, gtk_icon_view_get_cursor,
-	  gtk_icon_view_get_dest_item_at_pos (more missing)
+	  Gtk::IconView#create_drag_icon,
+	  Gtk::IconView#enable_model_drag_dest,
+	  Gtk::IconView#enable_model_drag_source, Gtk::IconView#get_cursor,
+	  Gtk::IconView#get_dest_item_at_pos (more missing)
 
 2005-09-11 21:48  Guillaume Cottenceau
 
@@ -75,36 +75,36 @@
 2005-09-11 19:18  Guillaume Cottenceau
 
 	* src/rbgtkfilechooser.c: 2.8:
-	  gtk_file_chooser_set_do_overwrite_confirmation and
-	  gtk_file_chooser_get_do_overwrite_confirmation defined as
-	  properties; GTK_TYPE_FILE_CHOOSER_CONFIRMATION is new
+	  Gtk::FileChooser#do_overwrite_confirmation= and
+	  Gtk::FileChooser#do_overwrite_confirmation? defined as
+	  properties; Gtk::FileChooser#GtkFileChooserConfirmation is new
 
 2005-09-11 17:40  Guillaume Cottenceau
 
 	* src/rbgtkentrycompletion.c: 2.8:
-	  gtk_entry_completion_get_popup_set_width,
-	  gtk_entry_completion_get_popup_single_match,
-	  gtk_entry_completion_set_popup_set_width,
-	  gtk_entry_completion_set_popup_single_match defined as properties
+	  Gtk::EntryCompletion#popup_set_width?,
+	  Gtk::EntryCompletion#popup_single_match?,
+	  Gtk::EntryCompletion#popup_set_width=,
+	  Gtk::EntryCompletion#popup_single_match= defined as properties
 
 2005-09-11 17:12  Guillaume Cottenceau
 
-	* src/rbgtkdrag.c: 2.8: wrap gtk_drag_set_icon_name and
-	  gtk_drag_source_set_icon_name
+	* src/rbgtkdrag.c: 2.8: Added Gtk::Drag#icon_name= and
+	Gtk::Drag#source_icon_name=
 
 2005-09-11 15:24  Guillaume Cottenceau
 
-	* src/rbgtkdialog.c: 2.8: wrap gtk_dialog_get_response_for_widget
+	* src/rbgtkdialog.c: 2.8: Added Gtk::Dialog#get_response_for_widget
 
 2005-09-06 22:06  Guillaume Cottenceau
 
-	* src/rbgtkaction.c: 2.8: wrap gtk_action_get_accel_closure
+	* src/rbgtkaction.c: 2.8: Added Gtk::Action#accel_closure
 
 2005-09-01 23:27  Guillaume Cottenceau
 
-	* src/rbgtkaboutdialog.c: 2.8: wrapping
-	  gtk_about_dialog_get_wrap_license and
-	  gtk_about_dialog_set_wrap_license unneeded because they are
+	* src/rbgtkaboutdialog.c: 2.8:
+	  Gtk::AboutDialog#wrap_license? and
+	  Gtk::AboutDialog#wrap_license= unneeded because they are
 	  defined as properties
 
 2005-08-30 23:10  Guillaume Cottenceau
@@ -118,8 +118,8 @@
 
 2005-08-30 22:31  Guillaume Cottenceau
 
-	* src/rbgtktoolbutton.c: 2.8: gtk_tool_button_set_icon_name and
-	  gtk_tool_button_get_icon_name unneeded thanks to properties
+	* src/rbgtktoolbutton.c: 2.8: Added Gtk::ToolButton#icon_name= and
+	  Gtk::ToolButton#icon_name unneeded thanks to properties
 
 2005-08-30 22:22  Guillaume Cottenceau
 
@@ -137,21 +137,21 @@
 
 2005-08-30 21:19  Guillaume Cottenceau
 
-	* src/rbgtksizegroup.c: 2.8: gtk_size_group_set_ignore_hidden and
-	  gtk_size_group_set_ignore_hidden unneeded, they are properties
+	* src/rbgtksizegroup.c: 2.8: Gtk::SizeGroup#ignore_hidden= and
+	  Gtk::SizeGroup#ignore_hidden? unneeded, they are properties
 
 2005-08-29 23:02  Guillaume Cottenceau
 
 	* src/rbgtkscrolledwindow.c: 2.8: Added Gtk::ScrolledWindow#hscrollbar,
-	#vscrollbar.
+	Gtk::ScrolledWindow#vscrollbar.
 
 2005-08-29 22:48  Guillaume Cottenceau
 
 	* src/rbgtkmenubar.c: 2.8: Added Gtk::MenuBar::PackDirection.
-	  (gtk_menu_bar_set_pack_direction and
-	  gtk_menu_bar_get_pack_direction unneeded because of
-	  :pack-direction property, gtk_menu_bar_set_child_pack_direction
-	  and gtk_menu_bar_get_child_pack_direction unneeded because of
+	  (Gtk::MenuBar#pack_direction= and
+	  Gtk::MenuBar#pack_direction unneeded because of
+	  :pack-direction property, Gtk::MenuBar#child_pack_direction=
+	  and Gtk::MenuBar#child_pack_direction unneeded because of
 	  :child-pack-direction property)
 
 2005-08-28 22:42  Guillaume Cottenceau
@@ -160,14 +160,14 @@
 
 2005-08-28 22:31  Guillaume Cottenceau
 
-	* src/rbgtkmenushell.c: 2.8: gtk_menu_shell_get_take_focus and
-	  gtk_menu_shell_set_take_focus unneeded, defined as properties
+	* src/rbgtkmenushell.c: 2.8: Gtk::MenuShell#take_focus? and
+	  Gtk::MenuShell#take_focus= unneeded, defined as properties
 
 2005-08-28 22:03  Guillaume Cottenceau
 
 	* src/rbgtkwindow.c: 2.8: Gtk::Window#present can accept timestamp
 	  as a parameter.
-	  (gtk_window_get_urgency_hint and gtk_window_set_urgency_hint
+	  (Gtk::Window#urgency_hint? and Gtk::Window#urgency_hint=
 	  unneeded because of :urgency-hint property)
 
 2005-08-28 20:38  Guillaume Cottenceau
