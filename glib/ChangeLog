@@ -1,6 +1,6 @@
 2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgobj_type.c: Add GLib::Interface#install_property, #property,
+	* src/rbgobj_type.c: Add GLib::MetaInterface#install_property, #property,
 	#properties.
 	* src/rbgobject.c: Doesn't wrap the set_foo functions 
 	for construct only properties by Sven Herzberg [Bug #1192975]
