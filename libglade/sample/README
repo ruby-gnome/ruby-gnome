@@ -16,8 +16,10 @@
   file by ruby-glade-create-template.
   Ruby-GetText-Pacakge-0.6.1 or later is required.  
 
-  makemo.rb - create mo file. Run this first(once).
+  makemo.rb    - create mo file. Run this first(once).
   l10n.glade   - glade file
-  l10n_main.rb - Main program. Ruby this file after executing makemo.rb.
+  l10n_gui.rb  - Auto generated file by ruby-glade-create-template.
+                 You shouldn't edit this file by hand.
+  l10n_main.rb - Main program. At first, copy methods from l10n_gui.rb.
                  You'll edit/maintain this file in a real application.
   po/*         - Language resource files.

@@ -1,3 +1,12 @@
+2005-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* bin/ruby-glade-create-template: Remove pseudo GetText code.
+	It moved to glib/src/lib/glib2.rb.
+	Added "glade" accessor.
+	* sample/l10n_gui.rb, l10n_main.rb, README: ditto, improved.
+	* rbglade.c: Added GladeXML#get_widget_prefix, .get_widget_name,
+	.get_widget_tree.
+
 2005-08-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c: GladeXML.new finds GETTEXT_PATH environment variable

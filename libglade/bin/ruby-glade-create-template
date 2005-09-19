@@ -6,15 +6,15 @@
 #
 # Usage: ruby ruby-glade-create-template yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.12 2005/08/04 18:32:53 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.13 2005/09/19 14:05:21 mutoh Exp $
 #
-# Copyright (c) 2002-2004 Masao Mutoh <mutoh@highway.ne.jp>
+# Copyright (c) 2002-2005 Masao Mutoh <mutoh@highway.ne.jp>
 #
 
 require 'libglade2'
 require 'rexml/document'
 
-LG_VERSION = %Q[$Revision: 1.12 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.13 $].scan(/\d/).join(".")
 
 unless ARGV.size == 1
   puts "ruby-glade-create-template #{LG_VERSION}"
@@ -174,36 +174,13 @@ puts <<CLASS_DEF
 #
 require 'libglade2'
 
-# Support L10n (Requires RAA:Ruby-GetText-Package)
-begin
-  require 'gettext'
-rescue LoadError
-  unless defined? GetText
-    module GetText
-      module_function
-      def _(msgid); msgid; end
-      def N_(msgid); msgid; end
-      def n_(msgid, msgid_plural, n)
-	n == 1 ? msgid : msgid_plural
-      end
-      def s_(msgid, div = '|')
-	if index = msgid.rindex(div)
-	  msgid = msgid[(index + 1)..-1]
-	else
-	  msgid
-	end
-      end
-      def bindtextdomain(domainname, path = nil, locale = nil, charset = nil)
-      end
-    end
-  end
-end
-
 class #{classname}
   include GetText
+
+  attr :glade
   #{additional_method_body}
   def initialize(path_or_data, root = nil, domain = nil, localedir = nil, flag = GladeXML::FILE)
-    GetText.bindtextdomain(domain, localedir, nil, "UTF-8")
+    bindtextdomain(domain, localedir, nil, "UTF-8")
     @glade = GladeXML.new(path_or_data, root, domain, localedir, flag) {|handler| method(handler)}
     #{additional_methods}
   end

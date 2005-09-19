@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2005/08/04 18:32:53 $
+  $Date: 2005/09/19 14:05:21 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -41,8 +41,27 @@ rb_gladexml_get_tooltips(VALUE self, VALUE toplevel)
 static VALUE
 rb_gladexml_get_widget(VALUE self, VALUE nameString)
 {
-    GtkWidget *widget = glade_xml_get_widget(GLADE_XML(RVAL2GOBJ(self)), STR2CSTR(nameString));
+    GtkWidget *widget = glade_xml_get_widget(GLADE_XML(RVAL2GOBJ(self)), RVAL2CSTR(nameString));
     return widget ? GOBJ2RVAL(widget) : Qnil;
+}
+
+static VALUE
+rb_gladexml_get_widget_prefix(VALUE self, VALUE name)
+{
+    GList* list = glade_xml_get_widget_prefix(GLADE_XML(RVAL2GOBJ(self)), RVAL2CSTR(name));
+    return GLIST2ARY(list);
+}
+
+static VALUE
+rb_gladexml_s_get_widget_name(VALUE self, VALUE widget)
+{
+    return CSTR2RVAL(glade_get_widget_name(RVAL2GOBJ(widget)));
+}
+
+static VALUE
+rb_gladexml_s_get_widget_tree(VALUE self, VALUE widget)
+{
+    return GOBJ2RVAL(glade_get_widget_tree(RVAL2GOBJ(widget)));
 }
 
 static void
@@ -251,6 +270,9 @@ Init_libglade2()
     rb_define_method(cGladeXML, "get_tooltips", rb_gladexml_get_tooltips, 1);
     rb_define_method(cGladeXML, "get_widget", rb_gladexml_get_widget, 1);
     rb_define_alias(cGladeXML, "[]", "get_widget");
+    rb_define_method(cGladeXML, "get_widget_prefix", rb_gladexml_get_widget_prefix, 1);
+    rb_define_singleton_method(cGladeXML, "get_widget_name", rb_gladexml_s_get_widget_name, 1);
+    rb_define_singleton_method(cGladeXML, "get_widget_tree", rb_gladexml_s_get_widget_tree, 1);
     rb_define_method(cGladeXML, "filename"  , rb_gladexml_filename, 0);
     rb_define_singleton_method(cGladeXML, "set_custom_widget_handler", rb_gladexml_set_custom_widget_handler, 1);
     rb_define_singleton_method(cGladeXML, "require", rb_gladexml_require, 1);
