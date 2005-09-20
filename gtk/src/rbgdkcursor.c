@@ -3,8 +3,8 @@
 
   rbgdkcursor.c -
 
-  $Author: mutoh $
-  $Date: 2004/08/01 07:10:02 $
+  $Author: ggc $
+  $Date: 2005/09/20 21:39:43 $
 
   Copyright (C) 2001-2004 Masao Mutoh
 ************************************************/
@@ -25,10 +25,16 @@ gdkcursor_initialize(argc, argv, self)
         cursor = gdk_cursor_new(RVAL2GENUM(type, GDK_TYPE_CURSOR_TYPE));
     } else if (argc == 2) {
 #if GTK_CHECK_VERSION(2,2,0)
-        VALUE display, type;
-        rb_scan_args(argc, argv, "20", &display, &type);
-        cursor = gdk_cursor_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
-                                            RVAL2GENUM(type, GDK_TYPE_CURSOR_TYPE));
+        VALUE display, type_or_name;
+        rb_scan_args(argc, argv, "20", &display, &type_or_name);
+#if GTK_CHECK_VERSION(2,8,0)
+        if (TYPE(type_or_name) == T_STRING)
+            cursor = gdk_cursor_new_from_name(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                                              RVAL2CSTR(type_or_name));
+        else
+#endif
+            cursor = gdk_cursor_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
+                                                RVAL2GENUM(type_or_name, GDK_TYPE_CURSOR_TYPE));
 #else
         rb_raise(rb_eRuntimeError, "Gdk::Cursor.new(display, cursor_type) has been supported since GTK+-2.2.");
 #endif
@@ -80,6 +86,15 @@ gdkcursor_cursor_type(self)
     return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
 }
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkcursor_get_image(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_cursor_get_image((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
+}
+#endif
+
 void
 Init_gtk_gdk_cursor()
 {
@@ -91,6 +106,9 @@ Init_gtk_gdk_cursor()
 #endif
     rb_define_method(gdkCursor, "pixmap?", gdkcursor_is_pixmap, 0);
     rb_define_method(gdkCursor, "cursor_type", gdkcursor_cursor_type, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkCursor, "image", gdkcursor_get_image, 0);
+#endif
 
     G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", gdkCursor);
     G_DEF_CONSTANTS(gdkCursor, GDK_TYPE_CURSOR_TYPE, "GDK_");
