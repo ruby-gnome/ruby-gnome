@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/12 07:06:42 $
+  $Author: ggc $
+  $Date: 2005/09/20 19:54:09 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,7 +14,9 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE gdkevents[36];
+#elif GTK_CHECK_VERSION(2,6,0)
 static VALUE gdkevents[35];
 #else
 static VALUE gdkevents[34];
@@ -653,6 +655,14 @@ ATTR_UINT(owner_change, selection_time);
 GDKEVENT_INIT(owner_change, GDK_OWNER_CHANGE);
 #endif
 
+/* GdkEventGrabBroken */
+#if GTK_CHECK_VERSION(2,8,0)
+ATTR_BOOL(grab_broken, keyboard);
+ATTR_BOOL(grab_broken, implicit);
+ATTR_GOBJ(grab_broken, grab_window);
+GDKEVENT_INIT(grab_broken, GDK_GRAB_BROKEN);
+#endif
+
 /* MISC */
 static VALUE 
 gdkevent_g2r(const GValue *values)
@@ -706,6 +716,9 @@ Init_gtk_gdk_event()
     gdkevents[GDK_SETTING]       = rb_define_class_under(mGdk, "EventSetting", gdkEventAny);
 #if GTK_CHECK_VERSION(2,6,0)
     gdkevents[GDK_OWNER_CHANGE]  = rb_define_class_under(mGdk, "EventOwnerChange", gdkEventAny);
+#endif
+#if GTK_CHECK_VERSION(2,8,0)
+    gdkevents[GDK_GRAB_BROKEN]   = rb_define_class_under(mGdk, "EventGrabBroken", gdkEventAny);
 #endif
 
     /* GdkEvent */
@@ -940,6 +953,16 @@ Init_gtk_gdk_event()
     /* GdkOwnerChange */
     G_DEF_CLASS(GDK_TYPE_OWNER_CHANGE, "OwnerChange", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_OWNER_CHANGE, "GDK_OWNER_CHANGE_");
+#endif
+
+#if GTK_CHECK_VERSION(2,8,0)
+    /* GdkEventGrabBroken */
+    ev = gdkevents[GDK_GRAB_BROKEN];
+    DEFINE_ACCESSOR(ev, grab_broken, keyboard);
+    DEFINE_ACCESSOR(ev, grab_broken, implicit);
+    DEFINE_ACCESSOR(ev, grab_broken, grab_window);
+    DEFINE_INIT(ev, grab_broken);
+    G_DEF_SETTERS(ev);
 #endif
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
