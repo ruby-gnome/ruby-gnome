@@ -2,6 +2,11 @@
 
 	* src/rbgdkevent.c: 2.8: add Gdk::EventGrabBroken
 
+	* src/rbgdkcursor.c: 2.8: add Gdk::Cursor.new(display, name)
+	  (wraps gdk_cursor_new_from_name), add Gdk::Cursor#image
+
+	* src/rbgdkdisplay.c: 2.8: add Gdk::Display#warp_pointer
+
 2005-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkiconview.c: Gtk::IconView#set_cursor accept nil as 2nd 
