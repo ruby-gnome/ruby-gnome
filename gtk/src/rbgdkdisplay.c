@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: ktou $
-  $Date: 2005/08/24 13:09:52 $
+  $Author: ggc $
+  $Date: 2005/09/20 21:49:39 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -387,6 +387,17 @@ gdkdisplay_get_core_pointer(self)
 {
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkdisplay_warp_pointer(self, screen, x, y)
+    VALUE self, screen, x, y;
+{
+    gdk_display_warp_pointer(_SELF(self), RVAL2GOBJ(screen), NUM2INT(x), NUM2INT(y));
+    return self;
+}
+#endif
+
 #ifdef GDK_WINDOWING_X11
 static VALUE
 gdkdisplay_grab(self)
@@ -472,6 +483,9 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "store_clipboard", gdkdisplay_store_clipboard, 3);
 #endif
     rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkDisplay, "warp_pointer", gdkdisplay_warp_pointer, 3);
+#endif
 
     G_DEF_SETTERS(gdkDisplay);
 #ifdef GDK_WINDOWING_X11
