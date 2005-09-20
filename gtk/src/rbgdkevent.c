@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: ggc $
-  $Date: 2005/09/20 19:54:09 $
+  $Date: 2005/09/20 20:02:26 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -958,8 +958,10 @@ Init_gtk_gdk_event()
 #if GTK_CHECK_VERSION(2,8,0)
     /* GdkEventGrabBroken */
     ev = gdkevents[GDK_GRAB_BROKEN];
-    DEFINE_ACCESSOR(ev, grab_broken, keyboard);
-    DEFINE_ACCESSOR(ev, grab_broken, implicit);
+    rb_define_method(ev, "keyboard?", gdkeventgrab_broken_keyboard, 0);
+    rb_define_method(ev, "set_keyboard", gdkeventgrab_broken_set_keyboard, 1);
+    rb_define_method(ev, "implicit?", gdkeventgrab_broken_implicit, 0);
+    rb_define_method(ev, "set_implicit", gdkeventgrab_broken_set_implicit, 1);
     DEFINE_ACCESSOR(ev, grab_broken, grab_window);
     DEFINE_INIT(ev, grab_broken);
     G_DEF_SETTERS(ev);
