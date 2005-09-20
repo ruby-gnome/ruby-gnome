@@ -1,3 +1,7 @@
+2005-09-20  Guillaume Cottenceau
+
+	* src/rbgdkevent.c: 2.8: add Gdk::EventGrabBroken
+
 2005-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkiconview.c: Gtk::IconView#set_cursor accept nil as 2nd 
