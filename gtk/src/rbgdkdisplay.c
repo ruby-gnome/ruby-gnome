@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: ggc $
-  $Date: 2005/09/20 21:49:39 $
+  $Date: 2005/09/23 19:33:34 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -423,6 +423,22 @@ gdkdisplay_register_standard_event_type(self, event_base, n_events)
     return self;
 }
 #endif
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkdisplay_get_user_time(self)
+    VALUE self;
+{
+    return UINT2NUM(gdk_x11_display_get_user_time(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_set_cursor_theme(self, theme, size)
+    VALUE self, theme, size;
+{
+    gdk_x11_display_set_cursor_theme(_SELF(self), RVAL2CSTR(theme), NUM2INT(size));
+    return self;
+}
+#endif
 #endif
 #endif
 
@@ -493,6 +509,10 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "ungrab", gdkdisplay_ungrab, 0);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gdkDisplay, "register_standard_event_type", gdkdisplay_register_standard_event_type, 2);
+#endif
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkDisplay, "user_time", gdkdisplay_get_user_time, 0);
+    rb_define_method(gdkDisplay, "set_cursor_theme", gdkdisplay_set_cursor_theme, 2);
 #endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
 #endif
