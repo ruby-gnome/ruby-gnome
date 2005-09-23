@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2005/04/14 16:39:16 $
+  $Author: ggc $
+  $Date: 2005/09/23 19:01:15 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -221,6 +221,19 @@ gdkwin_scroll(self, dx, dy)
     gdk_window_scroll(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkwin_move_region(self, region, dx, dy)
+    VALUE self, region, dx, dy;
+{
+    gdk_window_move_region(_SELF(self),
+                           (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION),
+                           NUM2INT(dx),
+                           NUM2INT(dy));
+    return self;
+}
+#endif
 
 static VALUE
 gdkwin_reparent(self, new_parent, x, y)
@@ -695,6 +708,16 @@ gdkwin_set_skip_pager_hint(self, hint)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkwin_set_urgency_hint(self, hint)
+    VALUE self, hint;
+{
+    gdk_window_set_urgency_hint(_SELF(self), RTEST(hint));
+    return self;
+}
+#endif
+
 static VALUE
 gdkwin_get_position(self)
     VALUE self;
@@ -1007,6 +1030,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "resize", gdkwin_resize, 2);
     rb_define_method(gdkWindow, "move_resize", gdkwin_move_resize, 4);
     rb_define_method(gdkWindow, "scroll", gdkwin_scroll, 2);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkWindow, "move_region", gdkwin_move_region, 3);
+#endif
     rb_define_method(gdkWindow, "reparent", gdkwin_reparent, 3);
     rb_define_method(gdkWindow, "clear", gdkwin_clear, 0);
     rb_define_method(gdkWindow, "clear_area", gdkwin_clear_area, -1);
@@ -1055,6 +1081,9 @@ Init_gtk_gdk_window()
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkWindow, "set_skip_taskbar_hint", gdkwin_set_skip_taskbar_hint, 1);
     rb_define_method(gdkWindow, "set_skip_pager_hint", gdkwin_set_skip_pager_hint, 1);
+#endif
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkWindow, "set_urgency_hint", gdkwin_set_urgency_hint, 1);
 #endif
     rb_define_method(gdkWindow, "position", gdkwin_get_position, 0);
     rb_define_method(gdkWindow, "root_origin", gdkwin_get_root_origin, 0);
