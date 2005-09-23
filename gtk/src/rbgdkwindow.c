@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: ggc $
-  $Date: 2005/09/23 19:01:15 $
+  $Date: 2005/09/23 19:17:01 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -991,6 +991,17 @@ gdkwin_get_server_time(self)
 {
     return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkwin_move_to_current_desktop(self)
+    VALUE self;
+{
+    gdk_x11_window_move_to_current_desktop(_SELF(self));
+    return self;
+}
+#endif
+
 #endif
 
 void
@@ -1162,6 +1173,10 @@ Init_gtk_gdk_window()
 
 #ifdef GDK_WINDOWING_X11
     rb_define_method(gdkWindow, "server_time", gdkwin_get_server_time, 0);
+
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkWindow, "move_to_current_desktop", gdkwin_move_to_current_desktop, 0);
+#endif
 
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)
