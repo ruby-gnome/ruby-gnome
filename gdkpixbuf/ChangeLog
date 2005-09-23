@@ -1,3 +1,9 @@
+2005-09-24 Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c, rbgdk-pixbuf.h, rbgdk-pixbufsimpleanim.c,
+	  sample/simpleanim.rb: 2.8: add Gdk::PixbufSimpleAnim with #new
+	  and #add_frame
+	
 2005-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* rbgdk-pixbuf.c (get_pixels): Fix pixels size.

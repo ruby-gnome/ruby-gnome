@@ -1,3 +1,15 @@
+2005-09-24  Guillaume Cottenceau
+
+	* rbgdkscreen.c: 2.8: add Gdk::Screen#rgba_colormap and
+	Gdk::Screen#rgba_visual
+
+	* rbgdkwindow.c: 2.8: add Gdk::Window#move_region and
+	Gdk::Window#urgency_hint=. X11 only,
+	Gdk::Window#move_to_current_desktop.
+
+	* rbgdkdisplay.c: 2.8: for X11 only, add Gdk::Display#user_time
+	and Gdk::Display#set_cursor_theme.
+
 2005-09-20  Guillaume Cottenceau
 
 	* src/rbgdkevent.c: 2.8: add Gdk::EventGrabBroken
