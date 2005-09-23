@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/17 05:35:35 $
+  $Author: ggc $
+  $Date: 2005/09/23 18:45:29 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -67,6 +67,22 @@ gdkscreen_get_rgb_visual(self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgb_visual(_SELF(self)));
 }
+
+#if GTK_CHECK_VERSION(2,8,0)
+static VALUE
+gdkscreen_get_rgba_colormap(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_screen_get_rgba_colormap(_SELF(self)));
+}
+
+static VALUE
+gdkscreen_get_rgba_visual(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_screen_get_rgba_visual(_SELF(self)));
+}
+#endif
 
 static VALUE
 gdkscreen_get_root_window(self)
@@ -413,6 +429,10 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "system_visual", gdkscreen_get_system_visual, 0);
     rb_define_method(gdkScreen, "rgb_colormap", gdkscreen_get_rgb_colormap, 0);
     rb_define_method(gdkScreen, "rgb_visual", gdkscreen_get_rgb_visual, 0);
+#if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gdkScreen, "rgba_colormap", gdkscreen_get_rgba_colormap, 0);
+    rb_define_method(gdkScreen, "rgba_visual", gdkscreen_get_rgba_visual, 0);
+#endif
     rb_define_method(gdkScreen, "root_window", gdkscreen_get_root_window, 0);
     rb_define_method(gdkScreen, "display", gdkscreen_get_display, 0);
     rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
