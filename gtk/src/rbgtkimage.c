@@ -4,7 +4,7 @@
   rbgtkimage.c -
 
   $Author: ggc $
-  $Date: 2005/08/28 18:38:57 $
+  $Date: 2005/09/23 22:02:07 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -59,7 +59,7 @@ image_initialize(argc, argv, self)
                                                GDK_BITMAP(RVAL2GOBJ(arg2)));
         } else if (gtype == GTK_TYPE_ICON_SET){
             widget = gtk_image_new_from_icon_set((GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-        } else if (gtype == GDK_TYPE_PIXBUF_ANIMATION){
+        } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             widget = gtk_image_new_from_animation(GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
         }
     }
@@ -103,7 +103,7 @@ image_set(argc, argv, self)
             gtk_image_set_from_icon_set(_SELF(self), 
                                         (GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), 
                                         RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-        } else if (gtype == GDK_TYPE_PIXBUF_ANIMATION){
+        } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             gtk_image_set_from_animation(_SELF(self), GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
         } else {
             rb_raise(rb_eArgError, "invalid argument: %s", rb_class2name(arg1));

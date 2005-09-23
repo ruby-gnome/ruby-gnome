@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: ktou $
-  $Date: 2005/09/18 12:49:21 $
+  $Author: ggc $
+  $Date: 2005/09/23 22:02:07 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -683,6 +683,9 @@ Init_gdk_pixbuf2()
 #endif
 
     Init_gdk_pixbuf_animation(mGdk);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+    Init_gdk_pixbuf_simpleanim(mGdk);
+#endif
     Init_gdk_pixdata(mGdk);
     Init_gdk_pixbuf_loader(mGdk);
     Init_gdk_pixbuf_format(mGdk);

@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.h -
 
-  $Author: mutoh $
-  $Date: 2004/12/16 14:36:05 $
+  $Author: ggc $
+  $Date: 2005/09/23 22:02:07 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -26,5 +26,9 @@ extern GType gdk_pixbuf_format_get_type(void);
      (GDK_PIXBUF_MAJOR == (major) && GDK_PIXBUF_MINOR > (minor)) || \
      (GDK_PIXBUF_MAJOR == (major) && GDK_PIXBUF_MINOR == (minor) && \
       GDK_PIXBUF_MICRO >= (micro)))
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+extern void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
+#endif
 
 #define GDK_TYPE_PIXBUF_FORMAT (gdk_pixbuf_format_get_type())
