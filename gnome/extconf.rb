@@ -18,6 +18,11 @@ setup_win32(PACKAGE_NAME)
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOME2_COMPILATION")
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOME2_COMPILATION") {
+  gnome_version = PKGConfig.modversion('libgnomeui-2.0')
+
+  File.delete("rbgnomeversion.h") if FileTest.exist?("rbgnomeversion.h")
+  system("ruby #{SRCDIR}/makeversion.rb #{gnome_version} > rbgnomeversion.h")
+}
 
 create_top_makefile

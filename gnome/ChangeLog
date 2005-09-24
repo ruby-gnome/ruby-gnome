@@ -1,3 +1,28 @@
+2005-09-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-trigger.c: Added. 
+	* src/rbgnome-sound.c: Added. 
+	* src/rbgnome.h: ditto. 
+	* sample/gnome-trigger.rb: A sample for Gnome::Trigger.
+	* sample/gnome-sound.rb: A sample for Gnome::Sound.
+	
+2005-09-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-util.c: Added Gnome::Util.extension_pointer. 
+	* src/rbgnome-url.c: Gnome::URL.show accepts child's environment
+	variable as the 5th parameter.
+	* src/rbgnome-help.c: Gnome::Help.display_with_doc_id accepts child's 
+	environment variable as the 5th parameter.
+	Gnome::Help.display_desktop accepts child enverionment variable as 
+	the 5th parameter.
+	Added Gnome::Help.display_uri.
+	* src/makeversion.rb: Added.
+	* src/rbgnome.h: added to support to check version.
+	* src/rbgnome-gconf.c: Added Gnome::GConf. 
+	* src/rbgnome-program.c: Added comments.
+	Added Gnome.libgnome_module_info, .bonobo_module_info, .user_dir,
+	.user_private_dir, .user_accels_dir.
+
 2005-03-22  Mirko Maischberger  <mirko@lilik.it>
 
 	* sample/test-gnome/*.rb: sh-bang (!#) normalization.

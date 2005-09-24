@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.23 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.24 2005/09/24 18:02:43 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -63,4 +63,7 @@ Init_gnome2()
     Init_gnome_url(mGnome);
     Init_gnome_util(mGnome);
     Init_gnome_popt(mGnome);
+    Init_gnome_gconf(mGnome);
+    Init_gnome_sound(mGnome);
+    Init_gnome_trigger(mGnome);
 }

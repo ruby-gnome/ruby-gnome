@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.11 2004/09/23 00:29:58 mutoh Exp $ */
+/* $Id: rbgnome-program.c,v 1.12 2005/09/24 18:02:43 mutoh Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
- * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -274,6 +274,17 @@ call_program_init(app_id, app_version, module_info, argc, argv, pdata_len, pdata
     return pgm;
 }
 
+/* Use gnome_program_init() instead.
+GnomeProgram* gnome_program_initv           (GType type,
+                                             const char *app_id,
+                                             const char *app_version,
+                                             const GnomeModuleInfo *module_info,
+                                             int argc,
+                                             char **argv,
+                                             const char *first_property_name,
+                                             va_list args);
+*/
+
 static VALUE
 program_initialize(argc, argv, self)
     int argc;
@@ -473,6 +484,25 @@ program_print_usage(self)
     rb_bug("program_print_usage: the spec of gnome_program_init changed?");
 }
 
+
+/* Use GLib::Object.install_property
+guint       gnome_program_install_property  (GnomeProgramClass *pclass,
+                                             GObjectGetPropertyFunc get_fn,
+                                             GObjectSetPropertyFunc set_fn,
+                                             GParamSpec *pspec);
+*/
+
+/* Don't need them.
+poptContext gnome_program_preinit           (GnomeProgram *program,
+                                             const char *app_id,
+                                             const char *app_version,
+                                             int argc,
+                                             char **argv);
+void        gnome_program_parse_args        (GnomeProgram *program);
+void        gnome_program_postinit          (GnomeProgram *program);
+*/
+
+
 #if 0 /* TODO or not TODO... */
 void
 gnome_program_module_register (const GnomeModuleInfo *module_info);
@@ -605,6 +635,42 @@ module_hash(self)
     return INT2FIX(key);
 }
 
+/* gnome-init */
+static VALUE
+rbgnome_s_libgnome_module_info_get(self)
+    VALUE self;
+{
+    return BOXED2RVAL((gpointer)libgnome_module_info_get(), GNOME_TYPE_MODULE_INFO);
+}
+
+static VALUE
+rbgnome_s_bonobo_module_info_get(self)
+    VALUE self;
+{
+    return BOXED2RVAL((gpointer)gnome_bonobo_module_info_get(), GNOME_TYPE_MODULE_INFO);
+}
+
+static VALUE
+rbgnome_s_user_dir_get(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gnome_user_dir_get());
+}
+
+static VALUE
+rbgnome_s_user_private_dir_get(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gnome_user_private_dir_get());
+}
+
+static VALUE
+rbgnome_s_user_accels_dir_get(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gnome_user_accels_dir_get());
+}
+
 void
 Init_gnome_program(mGnome)
     VALUE mGnome;
@@ -650,6 +716,13 @@ Init_gnome_program(mGnome)
     rb_define_method(gnoModuleInfo, "eql?", module_equal, 1);
     rb_define_method(gnoModuleInfo, "<=>", module_cmp, 1);
     rb_define_method(gnoModuleInfo, "hash", module_hash, 0);
+
+    /* gnome-init */
+    rb_define_module_function(mGnome, "libgnome_module_info", rbgnome_s_libgnome_module_info_get, 0);
+    rb_define_module_function(mGnome, "bonobo_module_info", rbgnome_s_bonobo_module_info_get, 0);
+    rb_define_module_function(mGnome, "user_dir", rbgnome_s_user_dir_get, 0);
+    rb_define_module_function(mGnome, "user_private_dir", rbgnome_s_user_private_dir_get, 0);
+    rb_define_module_function(mGnome, "user_accels_dir", rbgnome_s_user_accels_dir_get, 0);
 
     rb_define_const(gnoModuleInfo, "LIBGNOME", _WRAP(LIBGNOME_MODULE));
     rb_define_const(gnoModuleInfo, "LIBGNOMEUI", (default_module_info = _WRAP(LIBGNOMEUI_MODULE)));

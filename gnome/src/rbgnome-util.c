@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-util.c,v 1.6 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-util.c,v 1.7 2005/09/24 18:02:43 mutoh Exp $ */
 /* based on libgnome/gnome-util.h */
 
 /* Utility functions for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
@@ -23,6 +23,17 @@
  */
 
 #include "rbgnome.h"
+
+/* Deprecated
+#define     gnome_is_program_in_path        (program)
+*/
+
+static VALUE
+rgutil_extension_pointer(self, path)
+    VALUE self, path;
+{
+    return CSTR2RVAL(g_extension_pointer((const char*)RVAL2CSTR(path)));
+}
 
 static VALUE
 rgutil_prepend_user_home(self, filename)
@@ -55,13 +66,68 @@ rgutil_user_shell(self)
     return obj;
 }
 
+static VALUE
+rgutil_setenv(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE name, value, overwrite;
+
+    rb_scan_args(argc, argv, "21", &name, &value, &overwrite);
+
+    if (NIL_P(overwrite)) overwrite = Qtrue;
+
+    return gnome_setenv((const char*)RVAL2CSTR(name), 
+                        (const char*)RVAL2CSTR(value), 
+                        RTEST(overwrite)) == 0 ? Qtrue : Qfalse;
+}
+
+static VALUE
+rgutil_unsetenv(self, name)
+    VALUE self, name;
+{
+    gnome_unsetenv((const char*)RVAL2CSTR(name));
+    return self;
+}
+
+static VALUE
+rgutil_clearenv(self)
+    VALUE self;
+{
+    gnome_clearenv();
+    return self;
+}
+
+/* Deprecated.
+#define     g_concat_dir_and_file           (dir,file)
+#define     g_file_exists                   (filename)
+#define     g_unix_error_string             (error_num)
+#define     gnome_util_user_home            ()
+#define     g_copy_vector                   (vec)
+#define     gnome_libdir_file               (f)
+#define     gnome_datadir_file              (f)
+#define     gnome_sound_file                (f)
+#define     gnome_pixmap_file               (f)
+#define     gnome_config_file               (f)
+#define     gnome_unconditional_libdir_file (f)
+#define     gnome_unconditional_datadir_file(f)
+#define     gnome_unconditional_sound_file  (f)
+#define     gnome_unconditional_pixmap_file (f)
+#define     gnome_unconditional_config_file (f)
+ */
+
 void
 Init_gnome_util(mGnome)
     VALUE mGnome;
 {
     VALUE mUtil = rb_define_module_under(mGnome, "Util");
 
+    rb_define_module_function(mUtil, "extension_pointer", rgutil_extension_pointer, 1);
     rb_define_module_function(mUtil, "prepend_user_home", rgutil_prepend_user_home, 1);
     rb_define_module_function(mUtil, "home_file", rgutil_home_file, 1);
     rb_define_module_function(mUtil, "user_shell", rgutil_user_shell,0);
+    rb_define_module_function(mUtil, "setenv", rgutil_setenv,-1);
+    rb_define_module_function(mUtil, "unsetenv", rgutil_unsetenv, 1);
+    rb_define_module_function(mUtil, "clearenv", rgutil_clearenv, 0);
 }

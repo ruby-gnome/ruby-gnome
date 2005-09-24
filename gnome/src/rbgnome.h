@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@
 #include "rbgtk.h"
 #include <rubyio.h>
 #include <libgnome/libgnometypebuiltins.h>
+#include "rbgnomeversion.h"
 
 #define SET_STR_AND_GFREE(obj, str) do { \
     if ((str) != NULL) { \
@@ -86,5 +87,8 @@ void Init_gnome_uidefs(VALUE);
 void Init_gnome_url(VALUE);
 void Init_gnome_util(VALUE);
 void Init_gnome_popt(VALUE);
+void Init_gnome_gconf(VALUE);
+void Init_gnome_sound(VALUE);
+void Init_gnome_trigger(VALUE);
 
 #endif /* ! _RBGNOME_H_included */
