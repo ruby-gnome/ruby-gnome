@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-dateedit.c,v 1.8 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-dateedit.c,v 1.9 2005/09/25 17:53:07 mutoh Exp $ */
 /* based on libgnomeui/gnome-dateedit.h */
 
 /* Gnome::DateEdit widget for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
@@ -52,6 +52,27 @@ dateedit_initialize(argc, argv, self)
     RBGTK_INITIALIZE(self, dateedit);
     return Qnil;
 }
+
+/* Don't need this
+void        gnome_date_edit_construct       (GnomeDateEdit *gde,
+                                             time_t the_time,
+                                             GnomeDateEditFlags flags);
+*/
+
+/* Defined as properties.
+void        gnome_date_edit_set_time        (GnomeDateEdit *gde,
+                                             time_t the_time);
+time_t      gnome_date_edit_get_time        (GnomeDateEdit *gde);
+void        gnome_date_edit_set_flags       (GnomeDateEdit *gde,
+                                             GnomeDateEditFlags flags);
+int         gnome_date_edit_get_flags       (GnomeDateEdit *gde);
+time_t      gnome_date_edit_get_initial_time
+                                            (GnomeDateEdit *gde);
+*/
+
+/* Deprecated.
+time_t      gnome_date_edit_get_date        (GnomeDateEdit *gde);
+*/
 
 static VALUE
 dateedit_set_popup_range(self, low_hour, up_hour)

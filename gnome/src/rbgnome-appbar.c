@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-appbar.c,v 1.7 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-appbar.c,v 1.8 2005/09/25 17:53:07 mutoh Exp $ */
 /* base on libgnomeui/gnome-appbar.h */
 
 /* Gnome::AppBar widget for Ruby/Gnome
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
@@ -25,6 +25,12 @@
 #include "rbgnome.h"
 
 #define _SELF(self) GNOME_APPBAR(RVAL2GOBJ(self))
+
+/* Use properties instead.
+#define     GNOME_APPBAR_HAS_STATUS         (appbar)
+#define     GNOME_APPBAR_HAS_PROGRESS       (appbar)
+#define     GNOME_APPBAR_INTERACTIVE        (ab)
+*/
 
 static VALUE
 appbar_initialize(self, has_progress, has_status, interactivity)

@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-uidefs.c,v 1.5 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-uidefs.c,v 1.6 2005/09/25 17:53:07 mutoh Exp $ */
 
 /* Miscellaneous definitions for Ruby/Gnome
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -33,11 +33,21 @@ Init_gnome_uidefs(mGnome)
     rb_define_const(mGnome, "PAD_SMALL", INT2FIX(GNOME_PAD_SMALL));
     rb_define_const(mGnome, "PAD_BIG", INT2FIX(GNOME_PAD_BIG));
 
+/* Deprecated.
+#define     GNOME_YES
+#define     GNOME_NO
+#define     GNOME_OK
+#define GNOME_CANCEL 1
+*/
     /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
        Add to the list as well..
     */
     rb_define_const(mGnome, "KEY_NAME_QUIT", INT2FIX(GNOME_KEY_NAME_QUIT));
     rb_define_const(mGnome, "KEY_MOD_QUIT", INT2FIX(GNOME_KEY_MOD_QUIT));
+/* Deprecated.
+#define GNOME_KEY_NAME_EXIT	GNOME_KEY_NAME_QUIT
+#define GNOME_KEY_MOD_EXIT	GNOME_KEY_MOD_QUIT
+*/
     rb_define_const(mGnome, "KEY_NAME_CLOSE", INT2FIX(GNOME_KEY_NAME_CLOSE));
     rb_define_const(mGnome, "KEY_MOD_CLOSE", INT2FIX(GNOME_KEY_MOD_CLOSE));
 

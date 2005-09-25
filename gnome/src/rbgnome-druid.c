@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid.c,v 1.3 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-druid.c,v 1.4 2005/09/25 17:53:07 mutoh Exp $ */
 
 /* Gnome::Druid widget for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -43,6 +43,13 @@ druid_set_buttons_sensitive(self, back_sensitive, next_sensitive, cancel_sensiti
                                       RTEST(help_sensitive));
     return self;
 }
+
+/* Defined as a property.
+void        gnome_druid_set_show_finish     (GnomeDruid *druid,
+                                             gboolean show_finish);
+void        gnome_druid_set_show_help       (GnomeDruid *druid,
+                                             gboolean show_help);
+*/
 
 static VALUE
 druid_prepend_page(self, page)
@@ -99,6 +106,15 @@ druid_s_new_with_window(klass, title, parent, close_on_cancel)
     gtk_object_sink(GTK_OBJECT(window));
     return rb_ary_new3(2, GOBJ2RVAL(druid), GOBJ2RVAL(window));
 }
+
+/* Don't need this.
+void        gnome_druid_construct_with_window
+                                            (GnomeDruid *druid,
+                                             const char *title,
+                                             GtkWindow *parent,
+                                             gboolean close_on_cancel,
+                                             GtkWidget **window);
+*/
 
 void
 Init_gnome_druid(mGnome)

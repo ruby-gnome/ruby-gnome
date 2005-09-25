@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page-standard.c,v 1.4 2003/10/14 17:47:09 mutoh Exp $ */
+/* $Id: rbgnome-druid-page-standard.c,v 1.5 2005/09/25 17:53:07 mutoh Exp $ */
 
 /* Gnome::DruidPageStandard widget for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,6 +25,12 @@
 #define _SELF(self) GNOME_DRUID_PAGE_STANDARD(RVAL2GOBJ(self))
 #define _PIXBUF(obj) GDK_PIXBUF(RVAL2GOBJ(obj))
 #define _COLOR(obj) ((GdkColor*)RVAL2BOXED(obj, GDK_TYPE_COLOR))
+
+/* Deprecated.
+#define     gnome_druid_page_standard_set_bg_color
+#define     gnome_druid_page_standard_set_logo_bg_color
+#define     gnome_druid_page_standard_set_title_color
+*/
 
 static VALUE
 dstandard_initialize(argc, argv, self)
@@ -49,6 +55,27 @@ dstandard_initialize(argc, argv, self)
     RBGTK_INITIALIZE(self, result);
     return Qnil;
 }
+
+/* Defined as properties.
+void        gnome_druid_page_standard_set_title
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             const gchar *title);
+void        gnome_druid_page_standard_set_logo
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             GdkPixbuf *logo_image);
+void        gnome_druid_page_standard_set_top_watermark
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             GdkPixbuf *top_watermark_image);
+void        gnome_druid_page_standard_set_title_foreground
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             GdkColor *color);
+void        gnome_druid_page_standard_set_background
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             GdkColor *color);
+void        gnome_druid_page_standard_set_logo_background
+                                            (GnomeDruidPageStandard *druid_page_standard,
+                                             GdkColor *color);
+*/
 
 /* Why Isn't this defined as property? */
 static VALUE

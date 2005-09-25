@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-href.c,v 1.6 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-href.c,v 1.7 2005/09/25 17:53:07 mutoh Exp $ */
 /* based on libgnomeui/gnome-href.h */
 
 /* Gnome::HRef widget for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
@@ -58,6 +58,21 @@ href_initialize(argc, argv, self)
     RBGTK_INITIALIZE(self, href);
     return Qnil;
 }
+
+/* Defined as properties
+void        gnome_href_set_url              (GnomeHRef *href,
+                                             const gchar *url);
+const gchar* gnome_href_get_url             (GnomeHRef *href);
+void        gnome_href_set_text             (GnomeHRef *href,
+                                             const gchar *text);
+const gchar* gnome_href_get_text            (GnomeHRef *href);
+*/
+
+/* Deprecated.
+void        gnome_href_set_label            (GnomeHRef *href,
+                                             const gchar *label);
+const gchar* gnome_href_get_label           (GnomeHRef *href);
+*/
 
 void
 Init_gnome_href(mGnome)

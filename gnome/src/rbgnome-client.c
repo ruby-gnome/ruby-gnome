@@ -1,10 +1,10 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.9 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-client.c,v 1.10 2005/09/25 17:53:07 mutoh Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
  *
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  * Copyright (C) 1998      Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
@@ -231,6 +231,10 @@ client_flush(self)
     return self;
 }
 
+/* Deprecated.
+gnome_client_disable_master_connection ()
+*/
+
 static VALUE
 client_initialize(argc, argv, self)
     int argc;
@@ -343,6 +347,15 @@ client_request_interaction(argc, argv, self)
     return self;
 }
 
+/* Don't need this.
+void        gnome_client_request_interaction_interp
+                                            (GnomeClient *client,
+                                             GnomeDialogType dialog_type,
+                                             GtkCallbackMarshal function,
+                                             gpointer data,
+                                             GtkDestroyNotify destroy);
+*/
+
 static VALUE
 rbgnome_interaction_key_return(self, key, cancel_shutdown)
     VALUE self, key, cancel_shutdown;
@@ -409,7 +422,7 @@ Init_gnome_client(mGnome)
     rb_define_method(gnoClient, "initialize", client_initialize, -1);
     rb_define_method(gnoClient, "connect", client_connect, 0);
     rb_define_method(gnoClient, "disconnect", client_disconnect, 0);
-    rb_define_method(gnoClient, "connected", client_connected, 0);
+    rb_define_method(gnoClient, "connected?", client_connected, 0);
     rb_define_method(gnoClient, "set_id", client_set_id, 1);
     rb_define_method(gnoClient, "id", client_get_id, 0);
     rb_define_method(gnoClient, "previous_id", client_get_previous_id, 0);

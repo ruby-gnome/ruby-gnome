@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.8 2003/02/02 12:51:05 tkubo Exp $ */
+/* $Id: rbgnome-app.c,v 1.9 2005/09/25 17:53:07 mutoh Exp $ */
 /* based on libgnomeui/gnome-app.h */
 
 /* Gnome::App widget for Ruby/GNOME2
- * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 1999      Minoru Inachi <inachi@earth.interq.or.jp>
  *
@@ -69,6 +69,12 @@ app_initialize(self, appname, title)
     RBGTK_INITIALIZE(self, gnome_app_new(RVAL2CSTR(appname), RVAL2CSTR(title)));
     return Qnil;
 }
+
+/* Don't need this.
+void        gnome_app_construct             (GnomeApp *app,
+                                             const gchar *appname,
+                                             const gchar *title);
+ */
 
 /*
  * Gnome::App#set_menus(menubar)
@@ -341,6 +347,9 @@ Init_gnome_app(mGnome)
     /* attributes */
     rb_define_method(gnoApp, "name", app_get_name, 0);
     rb_define_method(gnoApp, "prefix", app_get_prefix, 0);
+
+    rb_define_const(gnoApp, "MENUBAR_NAME", CSTR2RVAL(GNOME_APP_MENUBAR_NAME));
+    rb_define_const(gnoApp, "TOOLBAR_NAME", CSTR2RVAL(GNOME_APP_TOOLBAR_NAME));
 
     G_DEF_SETTERS(gnoApp);
 }

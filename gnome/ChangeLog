@@ -1,3 +1,13 @@
+2005-09-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-app.c: Added Gnome::App::MENUBAR_NAME,
+	TOOLBAR_NAME.
+	* src/rbgnome-client.c: Renamed Gnome::Client#connected 
+	-> #connected?.
+	* src/rbgnome-appbar.c, rbgnome-druid.c, rbgnome-druid-page-standard.c,
+	rbgnome-dateedit.c, rbgnome-href.c, rbgnome-icon-entry.c, 
+	rbgnome-stock-icons, rbgnome-uidefs.c: Modified comments.
+
 2005-09-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-trigger.c: Added. 
