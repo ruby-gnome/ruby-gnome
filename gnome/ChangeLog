@@ -1,3 +1,7 @@
+2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-help.c: Fixed a compilation error by Noritsugu Nakamura.
+
 2005-09-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-app.c: Added Gnome::App::MENUBAR_NAME,

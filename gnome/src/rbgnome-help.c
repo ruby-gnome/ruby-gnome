@@ -1,5 +1,5 @@
 /* -*- c-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-help.c,v 1.6 2005/09/24 18:02:43 mutoh Exp $ */
+/* $Id: rbgnome-help.c,v 1.7 2005/09/28 16:36:39 mutoh Exp $ */
 /* based on libgnome/gnome-help.h */
 
 /* Gnome::Help for Ruby/GNOME2
@@ -189,7 +189,7 @@ gnohelp_m_display_uri(argc, argv, self)
       result = gnome_help_display_uri_with_env((const char*)RVAL2CSTR(help_uri), genvp, &error);
 #else
       rb_warn("Ignored 5th argument under this environment. Because it has been supported since GNOME-2.6.");
-      result = gnome_help_display_uri(const char*)RVAL2CSTR(help_uri), &error);
+      result = gnome_help_display_uri((const char*)RVAL2CSTR(help_uri), &error);
 #endif      
     }
     if (!result)
