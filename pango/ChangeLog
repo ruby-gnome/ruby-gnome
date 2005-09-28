@@ -1,3 +1,8 @@
+2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpango.c: Renamed Pango::VERSION to Pango::BUILD_VERSION.
+	Removed Pango::(MAJOR|MINOR|MICRO)_VERSION.
+
 2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoitem.c: Check pango version for pango_item_get_type().
