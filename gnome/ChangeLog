@@ -1,5 +1,7 @@
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgnome.c: Added Gnome::BUILD_VERSION. 
+	* src/rbgnome-app-helper.c: Added Gnome.accelerators_sync. 
 	* src/rbgnome-help.c: Fixed a compilation error by Noritsugu Nakamura.
 
 2005-09-26  Masao Mutoh  <mutoh@highway.ne.jp>

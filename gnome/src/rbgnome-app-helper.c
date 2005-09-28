@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.14 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.15 2005/09/28 17:32:53 mutoh Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -774,6 +774,19 @@ app_fill_menus(self, menuinfo, accel_group, uline_accels, pos)
 }
 
 static VALUE
+gno_s_accelerators_sync(self)
+    VALUE self;
+{
+    gnome_accelerators_sync();
+    return self;
+}
+
+/* How can I implement this?
+void        gnome_app_ui_configure_configurable
+                                            (GnomeUIInfo *uiinfo);
+*/
+
+static VALUE
 app_create_menus(self, menuinfo)
     VALUE self, menuinfo;
 {
@@ -986,11 +999,13 @@ Init_gnome_app_helper(mGnome)
     rb_define_module_function(mGnomeUIInfo, "menu_help_tree", uiinfo_menu_help_tree, 1);
     rb_define_module_function(mGnomeUIInfo, "menu_game_tree", uiinfo_menu_game_tree, 1);
 
-    /*
-     * instance methods
-     */
+    /* Misc methods */
+    rb_define_module_function(mGnome, "accelerators_sync", gno_s_accelerators_sync, 0);
+
     rb_define_method(gtkMenuShell, "fill_menus", app_fill_menus, 4);
+
     rb_define_method(gnoApp, "create_menus", app_create_menus, 1);
+
     rb_define_method(gtkToolBar, "fill_toolbar", app_fill_toolbar, 2);
     rb_define_method(gnoApp, "create_toolbar", app_create_toolbar, 1);
     rb_define_method(gtkMenuShell, "find_menu_pos", app_find_menu_pos, 1);
