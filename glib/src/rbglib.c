@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2005/06/16 13:27:33 $
+  $Date: 2005/09/28 17:47:56 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -135,6 +135,12 @@ void Init_glib2()
                                 INT2FIX(RBGLIB_MAJOR_VERSION),
                                 INT2FIX(RBGLIB_MINOR_VERSION),
                                 INT2FIX(RBGLIB_MICRO_VERSION)));
+
+    rb_define_const(mGLib, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GLIB_MAJOR_VERSION),
+                                INT2FIX(GLIB_MINOR_VERSION),
+                                INT2FIX(GLIB_MICRO_VERSION)));
 
     /* From "The Main Event Loop" */
     rb_define_const(mGLib, "PRIORITY_HIGH", INT2FIX(G_PRIORITY_HIGH));
