@@ -1,3 +1,8 @@
+2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatk.c: Renamed Atk::VERSION to Atk::BUILD_VERSION.
+	Removed Atk::(MAJOR|MINOR|MICRO)_VERSION.
+
 2005-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbatk.c: Added Atk::VERSION, Atk::(MAJOR|MINOR|MICRO)_VERSION.
