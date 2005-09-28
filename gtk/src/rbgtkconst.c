@@ -4,7 +4,7 @@
   rbgtkconst.c -
 
   $Author: mutoh $
-  $Date: 2004/12/12 17:55:06 $
+  $Date: 2005/09/28 17:54:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -27,6 +27,12 @@ Init_gtk_const()
 		    rb_ary_new3(3, INT2FIX(RBGTK_MAJOR_VERSION),
 				INT2FIX(RBGTK_MINOR_VERSION),
 				INT2FIX(RBGTK_MICRO_VERSION)));
+
+    rb_define_const(mGtk, "BUILD_VERSION",
+		    rb_ary_new3(3, INT2FIX(GTK_MAJOR_VERSION),
+				INT2FIX(GTK_MINOR_VERSION),
+				INT2FIX(GTK_MICRO_VERSION)));
+
     rb_define_const(mGtk, "VERSION",
 		    rb_ary_new3(3, INT2FIX(gtk_major_version),
 				INT2FIX(gtk_minor_version),

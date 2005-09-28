@@ -1,3 +1,7 @@
+2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkconst.c: Added Gtk::BUILD_VERSION.
+
 2005-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkcairo.c: support Gdk-Cairo interface.
