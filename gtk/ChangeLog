@@ -1,3 +1,12 @@
+2005-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkcairo.c: support Gdk-Cairo interface.
+	checked by Guillaume Cottenceau <gcottenc@gmail.com>.
+
+	* src/rbgdkdraw.c: ditto.
+
+	* src/lib/gtk2.rb: ditto.
+
 2005-09-24  Guillaume Cottenceau
 
 	* rbgdkscreen.c: 2.8: add Gdk::Screen#rgba_colormap and

@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: ktou $
-  $Date: 2005/08/24 10:09:51 $
+  $Date: 2005/09/28 10:13:24 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -16,6 +16,9 @@
 #include "rbpango.h"
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
+#endif
+#ifdef HAVE_RB_CAIRO_H
+#include <rb_cairo.h>
 #endif
 
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
@@ -392,6 +395,16 @@ gdkdraw_get_screen(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,8,0)
+#  ifdef HAVE_RB_CAIRO_H
+static VALUE
+gdkdraw_cairo_create(self)
+    VALUE self;
+{
+    return CRCONTEXT2RVAL(gdk_cairo_create(_SELF(self)));
+}
+#  endif
+#endif
 
 void
 Init_gtk_gdk_draw()
@@ -438,6 +451,13 @@ Init_gtk_gdk_draw()
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkDrawable, "display", gdkdraw_get_display, 0);
     rb_define_method(gdkDrawable, "screen", gdkdraw_get_screen, 0);
+#endif
+    
+#if GTK_CHECK_VERSION(2,8,0)
+#  ifdef HAVE_RB_CAIRO_H
+    rb_define_method(gdkDrawable, "create_cairo_context",
+                     gdkdraw_cairo_create, 0);
+#  endif
 #endif
     
 #ifdef GDK_WINDOWING_X11

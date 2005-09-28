@@ -54,6 +54,9 @@ if target=="x11"
   have_func("XGetErrorText")
 end
 
+PKGConfig.have_package('cairo')
+have_header('rb_cairo.h')
+
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("pango", "pango/src", TOPDIR)
 
