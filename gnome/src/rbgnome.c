@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome.c,v 1.25 2005/09/28 17:32:53 mutoh Exp $ */
+/* $Id: rbgnome.c,v 1.26 2005/09/28 17:45:25 mutoh Exp $ */
 
 /* GNOME module for Ruby/GNOME
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -33,9 +33,9 @@ Init_gnome2()
 
     rb_define_const(mGnome, "BUILD_VERSION", 
                     rb_ary_new3(3, 
-                                INT2NUM(GNOME_MAJOR_VERSION),
-                                INT2NUM(GNOME_MINOR_VERSION),
-                                INT2NUM(GNOME_MICRO_VERSION)));
+                                INT2FIX(GNOME_MAJOR_VERSION),
+                                INT2FIX(GNOME_MINOR_VERSION),
+                                INT2FIX(GNOME_MICRO_VERSION)));
 
     Init_gnome_program(mGnome);
     Init_gnome_about(mGnome);
