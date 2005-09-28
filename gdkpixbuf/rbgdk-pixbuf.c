@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: ggc $
-  $Date: 2005/09/23 22:02:07 $
+  $Date: 2005/09/28 20:37:27 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -132,6 +132,8 @@ initialize(argc, argv, self)
                                            NUM2INT(arg7), NULL, NULL);
             if (buf == NULL) NOMEM_ERROR(&error);
         }
+        // Save a reference to the string because the pixbuf doesn't copy it.
+        G_RELATIVE(self, arg1);
     } else if (argc == 5){
         if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
             buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
