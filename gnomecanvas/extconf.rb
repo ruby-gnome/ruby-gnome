@@ -25,5 +25,11 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 add_depend_package("libart2", "libart/src", TOPDIR)
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMECANVAS2_COMPILATION")
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMECANVAS2_COMPILATION") {
+  gnomecanvas_version = PKGConfig.modversion('libgnomecanvas-2.0')
+  version_h = "rbgnomecanvasversion.h"
+  File.delete(version_h) if FileTest.exist?(version_h)
+  system("ruby #{SRCDIR}/makeversion.rb #{gnomecanvas_version} > #{version_h}")
+}
+
 create_top_makefile

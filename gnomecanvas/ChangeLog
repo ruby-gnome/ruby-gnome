@@ -1,3 +1,9 @@
+2005-09-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/makeversion.rb: Added.
+	* src/rbgnome-canvas.c: Added Gnome::BUILD_VERSION.
+	* src/rbgnome.h, extconf.rb: ditto.	
+
 2005-09-11  Pascal Terjan  <pterjan@linuxfr.org>
 
 	* src/rbgnome-canvas-path-def.c : Fix for GnomeCanvas 2.12

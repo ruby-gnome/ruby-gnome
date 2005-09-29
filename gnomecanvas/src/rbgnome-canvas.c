@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.15 2005/02/15 07:29:36 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.16 2005/09/29 17:17:39 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
@@ -294,6 +294,12 @@ Init_gnome_canvas(mGnome)
     VALUE mGnome;
 {
     VALUE gnoCanvas = G_DEF_CLASS(GNOME_TYPE_CANVAS, "Canvas", mGnome);
+
+    rb_define_const(gnoCanvas, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GNOMECANVAS_MAJOR_VERSION),
+                                INT2FIX(GNOMECANVAS_MINOR_VERSION),
+                                INT2FIX(GNOMECANVAS_MICRO_VERSION)));
 
     rb_define_method(gnoCanvas, "initialize", canvas_initialize, -1);
     rb_define_method(gnoCanvas, "root", canvas_root, 0);
