@@ -2,7 +2,7 @@
   makeversion.rb -
 
   $Author: mutoh $
-  $Date: 2005/09/24 18:02:43 $
+  $Date: 2005/09/29 17:04:33 $
 
   Copyright (C) 2005 Masao Mutoh
 =end
@@ -12,10 +12,10 @@ version = ARGV[0].split(/\./)
 puts %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgnomeversion.c -
+  rbgnomeversion.h -
 
   $Author: mutoh $
-  $Date: 2005/09/24 18:02:43 $
+  $Date: 2005/09/29 17:04:33 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
