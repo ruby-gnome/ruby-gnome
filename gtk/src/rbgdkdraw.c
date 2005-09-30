@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: ggc $
-  $Date: 2005/09/29 19:06:51 $
+  $Date: 2005/09/30 20:17:59 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -443,13 +443,6 @@ Init_gtk_gdk_draw()
     rb_define_method(gdkDrawable, "get_image", gdkdraw_get_image, 4);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gdkDrawable, "copy_to_image", gdkdraw_copy_to_image, 7);
-#endif
-
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gdkDrawable, "create_cairo_context",
-                     gdkdraw_cairo_create, 0);
-#  endif
 #endif
 
 #ifdef GDK_WINDOWING_X11
