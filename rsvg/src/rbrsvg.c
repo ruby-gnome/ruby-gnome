@@ -33,11 +33,18 @@
 #  include "librsvg-enum-types.h"
 #endif
 
+#include <librsvg/librsvg-features.h>
+
+#define LIBRSVG_CHECK_VERSION(major, minor, micro)                          \
+  (LIBRSVG_MAJOR_VERSION > (major) ||                                       \
+   (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION > (minor)) || \
+   (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION == (minor) && \
+    LIBRSVG_MICRO_VERSION >= (micro)))
+
 #define _SELF(self) ((RsvgHandle *)DATA_PTR(self))
 
 static VALUE cHandle;
 
-static ID id_at;
 static ID id_call;
 static ID id_callback;
 static ID id_closed;
@@ -50,8 +57,8 @@ exec_callback(gint *width, gint *height, gpointer self)
                       id_call, 2, INT2NUM(*width), INT2NUM(*height));
   if (T_ARRAY == TYPE(result)) {
     VALUE w, h;
-    w = rb_funcall(result, id_at, 1, INT2NUM(0));
-    h = rb_funcall(result, id_at, 1, INT2NUM(1));
+    w = rb_ary_entry(result, 0);
+    h = rb_ary_entry(result, 1);
     if (!NIL_P(w)) {
       *width = NUM2INT(w);
     }
@@ -61,6 +68,22 @@ exec_callback(gint *width, gint *height, gpointer self)
   }
 }
 
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+static VALUE
+rb_rsvg_init(VALUE klass)
+{
+  rsvg_init();
+  return Qnil;
+}
+
+static VALUE
+rb_rsvg_term(VALUE klass)
+{
+  rsvg_term();
+  return Qnil;
+}
+#endif
+
 static VALUE
 rb_rsvg_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
@@ -69,7 +92,7 @@ rb_rsvg_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 #else
   rb_warning("not supported in your librsvg");
 #endif
-  return Qnil;
+  return self;
 }
 
 static VALUE
@@ -80,7 +103,7 @@ rb_rsvg_handle_set_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 #else
   rb_warning("not supported in your librsvg");
 #endif
-  return Qnil;
+  return self;
 }
 
 static VALUE
@@ -90,16 +113,20 @@ rb_rsvg_handle_new(int argc, VALUE *argv, VALUE klass)
   VALUE gz, obj;
   rb_scan_args(argc, argv, "01", &gz);
 
-  if (RTEST(gz)) {
-#ifdef HAVE_LIBRSVG_RSVG_GZ_H
-    handle = rsvg_handle_new_gz();
+#if LIBRSVG_CHECK_VERSION(2, 11, 0)
+  handle = rsvg_handle_new();
 #else
+  if (RTEST(gz)) {
+#  ifdef HAVE_LIBRSVG_RSVG_GZ_H
+    handle = rsvg_handle_new_gz();
+#  else
     rb_warning("gz handling is not supported in your librsvg");
     handle = rsvg_handle_new();
-#endif
+#  endif
   } else {
     handle = rsvg_handle_new();
   }
+#endif
 
   obj = Data_Wrap_Struct(cHandle, 0, rsvg_handle_free, handle);
   if (argc == 0) {
@@ -123,7 +150,7 @@ rb_rsvg_handle_set_size_callback(VALUE self)
   rb_ivar_set(self, id_callback, rb_block_proc());
   rsvg_handle_set_size_callback(_SELF(self), exec_callback,
                                 (gpointer)self, NULL);
-  return Qnil;
+  return self;
 }
 
 static VALUE
@@ -173,6 +200,20 @@ rb_rsvg_handle_get_pixbuf(VALUE self)
   return GOBJ2RVAL(rsvg_handle_get_pixbuf(_SELF(self)));
 }
 
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+static VALUE
+rb_rsvg_handle_get_base_uri(VALUE self)
+{
+  return CSTR2RVAL(rsvg_handle_get_base_uri(_SELF(self)));
+}
+
+static VALUE
+rb_rsvg_handle_set_base_uri(VALUE self, VALUE base_uri)
+{
+  rsvg_handle_set_base_uri(_SELF(self), RVAL2CSTR(base_uri));
+  return self;
+}
+#endif
 
 /* Convenience API */
 
@@ -278,7 +319,16 @@ rb_rsvg_handle_get_desc(VALUE self)
   return CSTR2RVAL(rsvg_handle_get_desc(_SELF(self)));
 }
 
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+static VALUE
+rb_rsvg_handle_get_metadata(VALUE self)
+{
+  return CSTR2RVAL(rsvg_handle_get_metadata(_SELF(self)));
+}
+#endif
 
+
+#if !LIBRSVG_CHECK_VERSION(2, 11, 0)
 /* Extended Convenience API */
 
 static VALUE
@@ -373,6 +423,8 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
 
   return GOBJ2RVAL(pixbuf);
 }
+#endif
+
 
 void
 Init_rsvg2(void) {
@@ -383,9 +435,19 @@ Init_rsvg2(void) {
   G_DEF_ERROR(RSVG_ERROR, "Error", mRSVG, rb_eRuntimeError, RSVG_TYPE_ERROR);
 
   id_call = rb_intern("call");
-  id_at = rb_intern("at");
   id_callback = rb_intern("callback");
   id_closed = rb_intern("closed");
+
+  rb_define_const(mRSVG, "BUILD_VERSION",
+                  rb_ary_new3(3,
+                              INT2FIX(LIBRSVG_MAJOR_VERSION),
+                              INT2FIX(LIBRSVG_MINOR_VERSION),
+                              INT2FIX(LIBRSVG_MICRO_VERSION)));
+  
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+  rb_define_module_function(mRSVG, "init", rb_rsvg_init, 0);
+  rb_define_module_function(mRSVG, "term", rb_rsvg_term, 0);
+#endif
 
   rb_define_module_function(mRSVG, "set_default_dpi_x_y",
                             rb_rsvg_set_default_dpi_x_y, 2);
@@ -401,6 +463,11 @@ Init_rsvg2(void) {
   rb_define_method(cHandle, "closed?", rb_rsvg_handle_closed, 0);
   rb_define_method(cHandle, "pixbuf", rb_rsvg_handle_get_pixbuf, 0);
 
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+  rb_define_method(cHandle, "base_uri", rb_rsvg_handle_get_base_uri, 0);
+  rb_define_method(cHandle, "set_base_uri", rb_rsvg_handle_set_base_uri, 1);
+#endif
+  
 /* Convenience API */
 
   rb_define_module_function(mRSVG, "pixbuf_from_file",
@@ -418,7 +485,12 @@ Init_rsvg2(void) {
 
   rb_define_method(cHandle, "title", rb_rsvg_handle_get_title, 0);
   rb_define_method(cHandle, "desc", rb_rsvg_handle_get_desc, 0);
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+  rb_define_method(cHandle, "metadata", rb_rsvg_handle_get_metadata, 0);
+#endif
 
+
+#if !LIBRSVG_CHECK_VERSION(2, 11, 0)
 /* Extended Convenience API */
 
   rb_define_method(cHandle, "pixbuf_from_file_at_size",
@@ -431,6 +503,7 @@ Init_rsvg2(void) {
                    rb_rsvg_pixbuf_from_file_at_max_size_ex, 3);
   rb_define_method(cHandle, "pixbuf_from_file_at_zoom_with_max",
                    rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex, 5);
+#endif
   
   G_DEF_SETTERS(cHandle);
 }
