@@ -3,8 +3,8 @@
 
   rbart.c -
 
-  $Author: ktou $
-  $Date: 2005/06/10 14:34:01 $
+  $Author: mutoh $
+  $Date: 2005/10/01 19:14:37 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -62,4 +62,5 @@ Init_libart2()
     Init_art_vpath(mArt);
     Init_art_vpathdash(mArt);
     Init_art_rect(mArt);
+    Init_art_uta(mArt);
 }

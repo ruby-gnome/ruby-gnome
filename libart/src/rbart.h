@@ -3,8 +3,8 @@
 
   rbart.h - header file for Art module of ruby
 
-  $Author: ktou $
-  $Date: 2005/06/10 14:34:01 $
+  $Author: mutoh $
+  $Date: 2005/10/01 19:14:37 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -28,6 +28,7 @@ extern VALUE artVpathDash;
 extern VALUE artCanvas;
 extern VALUE artDRect;
 extern VALUE artIRect;
+extern VALUE artUta;
 
 /*
  * For other libraries
@@ -53,6 +54,9 @@ extern VALUE make_art_drect(ArtDRect *);
 extern ArtIRect *get_art_irect(VALUE);
 extern VALUE make_art_irect(ArtIRect *);
 
+extern ArtUta *get_art_uta(VALUE);
+extern VALUE make_art_uta(ArtUta *);
+
 /*
  * Internal usage
  */
@@ -63,6 +67,7 @@ extern void Init_art_vpath(VALUE);
 extern void Init_art_vpathdash(VALUE);
 extern void Init_art_canvas(VALUE);
 extern void Init_art_rect(VALUE);
+extern void Init_art_uta(VALUE);
 
 #ifndef HAVE_OBJECT_ALLOCATE
 extern VALUE rbart_s_new(int, VALUE*, VALUE);
