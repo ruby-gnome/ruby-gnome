@@ -1,9 +1,9 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.12 2005/09/11 13:54:25 pterjan Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.13 2005/10/01 19:44:15 mutoh Exp $ */
 
 /* Gnome::CanvasPathDef
  *
- * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,9 +24,6 @@
 #include "rbart.h"
 
 static VALUE gnoCanvasPathDef;
-
-#define _SELF(self) (GnomeCanvasPathDef *)RVAL2BOXED(self, rbgno_canvas_path_def_get_type())
-#define _WRAP(self) BOXED2RVAL(self, rbgno_canvas_path_def_get_type())
 
 #ifndef GNOME_TYPE_CANVAS_PATH_DEF
 /* this is for libgnomecanvas-2.0 < 2.12 */
@@ -50,23 +47,11 @@ rbgno_canvas_path_def_get_type()
     return our_type;
 }
 
-#define GNOME_TYPE_CANVAS_PATH_DEF (rbgno_canvas_path_def_get_type())
 #endif /* GNOME_TYPE_CANVAS_PATH_DEF */
 
-static void
-cpathdef_r2g_func(from, to)
-    VALUE from;
-    GValue* to;
-{
-    g_value_set_pointer(to, _SELF(from));
-}
+#define _SELF(self) (GnomeCanvasPathDef *)RVAL2BOXED(self, GNOME_TYPE_CANVAS_PATH_DEF)
+#define _WRAP(self) BOXED2RVAL(self, GNOME_TYPE_CANVAS_PATH_DEF)
 
-static VALUE
-cpathdef_g2r_func(from)
-    const GValue *from;
-{
-    return _WRAP(g_value_get_pointer(from));
-}
 
 #if 0 /* We don't need them ... */
 GnomeCanvasPathDef* gnome_canvas_path_def_new_from_static_bpath
@@ -101,15 +86,31 @@ cpathdef_initialize(argc, argv, self)
     return Qnil;
 }
 
+static VALUE
+cpathdef_finish(self)
+    VALUE self;
+{
+    gnome_canvas_path_def_finish(_SELF(self));
+    return self;
+}
+
+static VALUE
+cpathdef_ensure_space(self, space)
+    VALUE self, space;
+{
+    gnome_canvas_path_def_ensure_space(_SELF(self), NUM2INT(space));
+    return self;
+}
+
 /*
  * Misc constructors
  * All these return NEW path, not unrefing old
  * Also copy and duplicate force bpath to be private (otherwise you
  * would use ref :)
  */
-#if 0 /* who needs this method in ruby?. */
+/* Don't need this
 void gnome_canvas_path_def_copy (GnomeCanvasPathDef * dst, const GnomeCanvasPathDef * src);
-#endif
+*/
 
 static VALUE
 cpathdef_duplicate(self)
@@ -351,10 +352,11 @@ Init_gnome_canvas_path_def(mGnome)
     VALUE mGnome;
 {
     gnoCanvasPathDef = G_DEF_CLASS(GNOME_TYPE_CANVAS_PATH_DEF, "CanvasPathDef", mGnome);
-    rbgobj_register_property_setter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_r2g_func);
-    rbgobj_register_property_getter(GNOME_TYPE_CANVAS_BPATH, "bpath", cpathdef_g2r_func);
 
     rb_define_method(gnoCanvasPathDef, "initialize", cpathdef_initialize, -1);
+    rb_define_method(gnoCanvasPathDef, "finish", cpathdef_finish, 0);
+    rb_define_method(gnoCanvasPathDef, "ensure_space", cpathdef_ensure_space, 1);
+    rb_define_method(gnoCanvasPathDef, "duplicate", cpathdef_duplicate, 0);
     rb_define_method(gnoCanvasPathDef, "duplicate", cpathdef_duplicate, 0);
     rb_define_method(gnoCanvasPathDef, "concat", cpathdef_concat, -1);
     rb_define_method(gnoCanvasPathDef, "split", cpathdef_split, 0);

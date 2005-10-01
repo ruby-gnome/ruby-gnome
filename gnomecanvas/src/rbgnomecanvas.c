@@ -3,8 +3,8 @@
 
   rbgnomecanvas.c -
 
-  $Author: tkubo $
-  $Date: 2002/10/02 13:36:51 $
+  $Author: mutoh $
+  $Date: 2005/10/01 19:44:15 $
 
   Copyright (C) 2002 KUBO Takehiro 
 ************************************************/
@@ -21,4 +21,5 @@ Init_gnomecanvas2(void)
     Init_gnome_canvas_item(mGnome);
     Init_gnome_canvas_rich_text(mGnome);
     Init_gnome_canvas_path_def(mGnome);
+    Init_gnome_canvas_buf(mGnome);
 }

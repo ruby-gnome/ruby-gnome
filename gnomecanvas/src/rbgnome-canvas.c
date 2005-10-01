@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.16 2005/09/29 17:17:39 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.17 2005/10/01 19:44:15 mutoh Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
- * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -153,8 +153,7 @@ canvas_request_redraw(argc, argv, self)
     if (argc == 1){
         VALUE uta;
         rb_scan_args(argc, argv, "10", &uta);
-/*        gnome_canvas_request_redraw_uta(_SELF(self), get_art_uta(uta)); */
-        rb_warn("not implemented yet.");
+        gnome_canvas_request_redraw_uta(_SELF(self), get_art_uta(uta));
     } else {
         VALUE x1, y1, x2, y2;
         rb_scan_args(argc, argv, "40", &x1, &y1, &x2, &y2);
@@ -289,6 +288,18 @@ canvas_s_convert_color(argc, argv, self)
     return INT2NUM(ret);
 }
 
+
+static VALUE
+buf_signal_render_background(num, values)
+    guint num;
+    const GValue* values;
+{
+    GnomeCanvasBuf* buf = (GnomeCanvasBuf*)g_value_get_pointer(&values[1]);
+
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]),
+                       BOXED2RVAL(buf, GNOME_TYPE_CANVAS_BUF));
+} 
+
 void
 Init_gnome_canvas(mGnome)
     VALUE mGnome;
@@ -300,6 +311,9 @@ Init_gnome_canvas(mGnome)
                                 INT2FIX(GNOMECANVAS_MAJOR_VERSION),
                                 INT2FIX(GNOMECANVAS_MINOR_VERSION),
                                 INT2FIX(GNOMECANVAS_MICRO_VERSION)));
+
+    G_DEF_SIGNAL_FUNC(gnoCanvas, "render-background", 
+                      (GValToRValSignalFunc)buf_signal_render_background);
 
     rb_define_method(gnoCanvas, "initialize", canvas_initialize, -1);
     rb_define_method(gnoCanvas, "root", canvas_root, 0);

@@ -1,5 +1,17 @@
+2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-canvas-path-def.c: Added Gnome::CanvasPathDef#finish,
+	#ensure_space.
+	* src/rbgnome-canvas.c: Handling "render-background" signal correctly
+	(Returns Gnome::CanvasBuf).
+	Gnome::Canvas#request_redraw accepts Art::Uta.
+	* src/rbgnome-canvas-item.c, rbgnome-canvas-path-def.c, rbgnomecanvas.h: 
+	Fix a segfault using Gnome::CanvasPathDef.
+
 2005-09-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgnome-canvas-buf.c: Added Gnome::CanvasBuf.
+	* src/rbgnomecanvas.[ch]: ditto.
 	* src/makeversion.rb: Added.
 	* src/rbgnome-canvas.c: Added Gnome::BUILD_VERSION.
 	* src/rbgnome.h, extconf.rb: ditto.	

@@ -1,8 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.20 2005/08/13 09:02:53 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.21 2005/10/01 19:44:15 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
- * Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -278,7 +278,7 @@ citem_shape_set_path_def(self, def)
     VALUE self, def;
 {
     gnome_canvas_shape_set_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self)), 
-                                    (GnomeCanvasPathDef*)RVAL2BOXED(def, rbgno_canvas_path_def_get_type()));
+                                    (GnomeCanvasPathDef*)RVAL2BOXED(def, GNOME_TYPE_CANVAS_PATH_DEF));
     return self;
 }
 
@@ -286,7 +286,7 @@ static VALUE
 citem_shape_get_path_def(self)
     VALUE self;
 {
-    return BOXED2RVAL(gnome_canvas_shape_get_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self))), rbgno_canvas_path_def_get_type());
+    return BOXED2RVAL(gnome_canvas_shape_get_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self))), GNOME_TYPE_CANVAS_PATH_DEF);
 }
 
 void
