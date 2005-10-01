@@ -1,3 +1,7 @@
+2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangomain.c: Raises RuntimeError if 1st argument is nil. 
+
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpango.c: Renamed Pango::VERSION to Pango::BUILD_VERSION.

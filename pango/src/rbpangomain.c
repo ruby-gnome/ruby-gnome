@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Date: 2005/10/01 16:36:49 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -162,6 +162,8 @@ rpango_parse_markup(argc, argv, self)
     VALUE attr_list = Qnil;
 
     rb_scan_args(argc, argv, "11", &markup_text, &accel_marker);
+
+    if (NIL_P(markup_text)) rb_raise(rb_eRuntimeError, "1st argument can't accept nil");
 
     ret = pango_parse_markup(RVAL2CSTR(markup_text),
                              RSTRING(markup_text)->len,
