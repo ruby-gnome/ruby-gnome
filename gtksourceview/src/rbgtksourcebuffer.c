@@ -3,10 +3,10 @@
 
   rbgtksourcebuffer.c -
 
-  $Author: lrz $
-  $Date: 2004/08/05 18:13:49 $
+  $Author: mutoh $
+  $Date: 2005/10/02 18:40:34 $
 
-  Copyright (C) 2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
 ************************************************/
 #include "rbgtksourcemain.h"
@@ -64,6 +64,15 @@ sourcebuffer_new (argc, argv, self)
 	return Qnil;
 }
 
+/* Defined as a property.
+gboolean    gtk_source_buffer_get_check_brackets
+                                            (GtkSourceBuffer *buffer);
+void        gtk_source_buffer_set_check_brackets
+                                            (GtkSourceBuffer *buffer,
+                                             gboolean check_brackets);
+*/
+
+
 /*
  * Method: set_bracket_match_style(style)
  * style: the Gtk::SourceTagStyle specifying colors and text attributes.
@@ -83,6 +92,26 @@ sourcebuffer_set_bracket_match_style (self, style)
 
 	return self;
 }
+
+/* Defined as properties.
+gboolean    gtk_source_buffer_get_highlight (GtkSourceBuffer *buffer);
+void        gtk_source_buffer_set_highlight (GtkSourceBuffer *buffer,
+                                             gboolean highlight);
+gint        gtk_source_buffer_get_max_undo_levels
+                                            (GtkSourceBuffer *buffer);
+void        gtk_source_buffer_set_max_undo_levels
+                                            (GtkSourceBuffer *buffer,
+                                             gint max_undo_levels);
+GtkSourceLanguage* gtk_source_buffer_get_language
+                                            (GtkSourceBuffer *buffer);
+void        gtk_source_buffer_set_language  (GtkSourceBuffer *buffer,
+                                             GtkSourceLanguage *language);
+gunichar    gtk_source_buffer_get_escape_char
+                                            (GtkSourceBuffer *buffer);
+void        gtk_source_buffer_set_escape_char
+                                            (GtkSourceBuffer *buffer,
+                                             gunichar escape_char);
+*/
 
 /*
  * Method: can_undo?
@@ -151,6 +180,53 @@ sourcebuffer_redo (self)
 }
 
 /*
+ * Method: begin_not_undoable_action
+ * Method: begin_not_undoable_action { ... }
+ * 
+ * Marks the beginning of a not undoable action on the buffer, disabling the
+ * undo manager.
+ * 
+ * If a block is given, the block is called after marking the beginning
+ * of a not undoable action on the buffer.
+ * At the end of the block, marks the end of a not undoable action on the
+ * buffer. When the last not undoable block is finished, the list of undo
+ * actions is cleared and the undo manager is re-enabled.
+ *
+ * Returns: self
+ */
+static VALUE
+sourcebuffer_begin_not_undoable_action(self)
+    VALUE self;
+{
+    gtk_source_buffer_begin_not_undoable_action (_SELF (self));
+
+    if (rb_block_given_p()) {
+	VALUE block = G_BLOCK_PROC ();
+	rb_funcall (block, rb_intern ("call"), 0);
+	gtk_source_buffer_end_not_undoable_action (_SELF (self));
+    }
+    return self;
+}
+
+/*
+ * Method: end_not_undoable_action
+ * 
+ * Marks the end of a not undoable action on the buffer.
+ * When the last not undoable block is finished, the list of undo
+ * actions is cleared and the undo manager is re-enabled.
+ *
+ * Returns: self
+ */
+static VALUE
+sourcebuffer_end_not_undoable_action(self)
+    VALUE self;
+{
+    gtk_source_buffer_end_not_undoable_action (_SELF (self));
+    return self;
+}
+
+
+/*
  * Method: not_undoable_action { ... }
  * 
  * Marks the beginning of a not undoable action on the buffer, disabling the
@@ -159,6 +235,8 @@ sourcebuffer_redo (self)
  * At the end of the block, marks the end of a not undoable action on the
  * buffer. When the last not undoable block is finished, the list of undo
  * actions is cleared and the undo manager is re-enabled.
+ *
+ * ((*Deprecated*)). Use Gtk::SourceView#begin_not_undoable_action{ ... } instead.
  *
  * Returns: the return value of the provided block.
  */
@@ -415,6 +493,10 @@ Init_gtk_sourcebuffer ()
 
 	rb_define_method (cbuffer, "undo!", sourcebuffer_undo, 0);
 	rb_define_method (cbuffer, "redo!", sourcebuffer_redo, 0);
+	rb_define_method (cbuffer, "begin_not_undoable_action",
+			  sourcebuffer_begin_not_undoable_action, 0);
+	rb_define_method (cbuffer, "end_not_undoable_action",
+			  sourcebuffer_end_not_undoable_action, 0);
 	rb_define_method (cbuffer, "not_undoable_action",
 			  sourcebuffer_not_undoable_action, 0);
 	rb_define_alias (cbuffer, "non_undoable_action",

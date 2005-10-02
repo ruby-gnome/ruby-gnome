@@ -1,3 +1,19 @@
+2005-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourceprintjob.c: Added.
+	* src/rbgtksourcetagstyle.c: Added accessors. Gtk::SourceTagStyleMask. 
+	* src/rbgtksourcetag.c: Implemented Gtk::SourceTag#keyword_list_tag_new.
+	* src/rbgtksourcestylescheme.c: Added Gtk::SourceStyleScheme.
+	* src/rbgtksourcemain.c: ditto.
+	* src/rbgtksourceview.c: Added comments of property methods. 
+
+2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtksourcebuffer.c: Added Gtk::SourceView#begin_not_undoable_action,
+	#end_not_undoable_action.
+	Gtk::SourceBuffer#not_undoable_action becomes deprecated.
+	Added comments of property methods.
+
 2005-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Follow mkmf-gnome2.rb changes. 

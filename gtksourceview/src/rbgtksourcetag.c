@@ -4,7 +4,7 @@
   rbgtksourcetag.c -
 
   $Author $
-  $Date: 2004/08/05 18:13:49 $
+  $Date: 2005/10/02 18:40:34 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -13,7 +13,25 @@
 
 /* TODO: Write documentation */
 
+/* Class: Gtk::SourceTag
+ * Class: Gtk::SyntaxTag
+ * Class: Gtk::PatternTag
+ */
+
 #define _SELF(self) (GTK_SOURCE_TAG(RVAL2GOBJ(self)))
+
+static VALUE
+source_tag_get_style(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_source_tag_get_style(_SELF(self)));
+}
+
+/* Defined as a property.
+GtkSourceTagStyle* gtk_source_tag_get_style (GtkSourceTag *tag);
+void        gtk_source_tag_set_style        (GtkSourceTag *tag,
+                                             const GtkSourceTagStyle *style);
+*/
 
 static VALUE
 syntaxtag_new (self, id, name, pattern_start, pattern_end)
@@ -37,16 +55,31 @@ patterntag_new (self, id, name, pattern)
 	return Qnil;
 }
 
-/* FIXME */
 static VALUE
-keywordlisttag_new (self, id, rname, rkeywords, rcase_sensitive,
-		    rmatch_empty_string_at_beginning,
-		    rmatch_empty_string_at_end, rbeginning_regex, rend_regex)
-	VALUE self, id, rname, rkeywords, rcase_sensitive,
-	    rmatch_empty_string_at_beginning, rmatch_empty_string_at_end,
-	    rbeginning_regex, rend_regex;
+keywordlisttag_new (self, id, name, keywords, case_sensitive,
+		    match_empty_string_at_beginning,
+		    match_empty_string_at_end, beginning_regex, end_regex)
+    VALUE self, id, name, keywords, case_sensitive,
+    match_empty_string_at_beginning, match_empty_string_at_end,
+    beginning_regex, end_regex;
 {
-	rb_notimplement ();
+    long i;
+    GSList *glist = NULL;
+
+    Check_Type(keywords, T_ARRAY);
+    for (i = 0; i < RARRAY(keywords)->len; i++) {
+        glist = g_slist_append(glist, RVAL2CSTR(RARRAY(keywords)->ptr[i]));
+    }
+
+    
+    return GOBJ2RVAL(gtk_keyword_list_tag_new(RVAL2CSTR(id),
+                                              RVAL2CSTR(name),
+                                              glist,
+                                              RTEST(case_sensitive),
+                                              RTEST(match_empty_string_at_beginning),
+                                              RTEST(match_empty_string_at_end),
+                                              RVAL2CSTR(beginning_regex),
+                                              RVAL2CSTR(end_regex)));
 }
 
 static VALUE
@@ -80,6 +113,8 @@ Init_gtk_sourcetag ()
 	    G_DEF_CLASS (GTK_TYPE_SYNTAX_TAG, "SyntaxTag", mGtk);
 	VALUE cPatternTag =
 	    G_DEF_CLASS (GTK_TYPE_PATTERN_TAG, "PatternTag", mGtk);
+
+	rb_define_method (cSourceTag, "style", source_tag_get_style, 0);
 
 	rb_define_method (cPatternTag, "initialize", patterntag_new, 2);
 	rb_define_method (cSyntaxTag, "initialize", syntaxtag_new, 3);

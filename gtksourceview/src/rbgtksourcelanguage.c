@@ -3,8 +3,8 @@
 
   rbgtksourcelanguage.c -
 
-  $Author $
-  $Date: 2004/08/05 18:13:49 $
+  $Author: mutoh $
+  $Date: 2005/10/02 18:40:34 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team  
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh

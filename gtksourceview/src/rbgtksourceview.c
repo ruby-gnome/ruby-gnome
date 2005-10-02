@@ -3,10 +3,10 @@
 
   rbgtksourceview.c -
 
-  $Author: lrz $
-  $Date: 2004/08/05 18:13:49 $
+  $Author: mutoh $
+  $Date: 2005/10/02 18:40:34 $
 
-  Copyright (C) 2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
 ************************************************/
 #include "rbgtksourcemain.h"
@@ -45,6 +45,36 @@ sourceview_initialize (argc, argv, self)
 	RBGTK_INITIALIZE (self, widget);
 	return self;
 }
+
+/* Defined as properties.
+void        gtk_source_view_set_show_line_numbers
+                                            (GtkSourceView *view,
+                                             gboolean show);
+gboolean    gtk_source_view_get_show_line_numbers
+                                            (GtkSourceView *view);
+void        gtk_source_view_set_show_line_markers
+                                            (GtkSourceView *view,
+                                             gboolean show);
+gboolean    gtk_source_view_get_show_line_markers
+                                            (GtkSourceView *view);
+void        gtk_source_view_set_tabs_width  (GtkSourceView *view,
+                                             guint width);
+guint       gtk_source_view_get_tabs_width  (GtkSourceView *view);
+void        gtk_source_view_set_auto_indent (GtkSourceView *view,
+                                             gboolean enable);
+gboolean    gtk_source_view_get_auto_indent (GtkSourceView *view);
+void        gtk_source_view_set_insert_spaces_instead_of_tabs
+                                            (GtkSourceView *view,
+                                             gboolean enable);
+gboolean    gtk_source_view_get_insert_spaces_instead_of_tabs
+                                            (GtkSourceView *view);
+void        gtk_source_view_set_show_margin (GtkSourceView *view,
+                                             gboolean show);
+gboolean    gtk_source_view_get_show_margin (GtkSourceView *view);
+void        gtk_source_view_set_margin      (GtkSourceView *view,
+                                             guint margin);
+guint       gtk_source_view_get_margin      (GtkSourceView *view);
+*/
 
 /*
  * Method: set_marker_pixbuf(marker_type, pixbuf)
