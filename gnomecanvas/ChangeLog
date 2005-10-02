@@ -1,5 +1,7 @@
 2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgnome-canvas-util.c: Added Gnome::CanvasBuf#render_svp,
+	#ensure_buf, Gnome::CanvasItem#update_svp, #request_redraw_svp.
 	* src/rbgnome-canvas-path-def.c: Added Gnome::CanvasPathDef#finish,
 	#ensure_space.
 	* src/rbgnome-canvas.c: Handling "render-background" signal correctly
