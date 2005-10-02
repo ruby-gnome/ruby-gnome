@@ -427,7 +427,8 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
 
 
 void
-Init_rsvg2(void) {
+Init_rsvg2(void)
+{
   VALUE mRSVG = rb_define_module("RSVG");
 
   cHandle = rb_define_class_under(mRSVG, "Handle", rb_cObject);
