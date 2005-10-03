@@ -19,6 +19,8 @@
 #ifndef RBGP_H
 #define RBGP_H
 
+#include "rbgp-version.h"
+
 #include <ruby.h>
 
 #include <rbglib.h>

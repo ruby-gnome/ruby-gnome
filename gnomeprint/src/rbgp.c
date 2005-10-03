@@ -36,8 +36,17 @@ extern void Init_rbgp_utils(VALUE mGnome);
 
 void
 Init_gnomeprint2(void) {
-  VALUE mGnome = rb_define_module("Gnome");
+  VALUE mGnome, mGnomePrint;
 
+  mGnome = rb_define_module("Gnome");
+  mGnomePrint = rb_define_module_under(mGnome, "Print");
+
+  rb_define_const(mGnomePrint, "BUILD_VERSION",
+                  rb_ary_new3(3,
+                              INT2FIX(LIBGNOMEPRINT_MAJOR_VERSION),
+                              INT2FIX(LIBGNOMEPRINT_MINOR_VERSION),
+                              INT2FIX(LIBGNOMEPRINT_MICRO_VERSION)));
+  
   Init_gnome_print(mGnome);
   Init_gnome_print_job(mGnome);
   Init_gnome_print_config(mGnome);
