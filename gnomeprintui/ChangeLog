@@ -1,3 +1,15 @@
+2005-10-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: Generate rbgpui-version.h
+
+	* src/rbgpui.h: Moved Init_*() to ...
+	* src/rbgpui.c: ... here.
+
+	* src/rbgpui.c (Gnome::PrintUI::BUILD_VERSION): Added.
+
+	* src/rbgpui-print-content-selector.c: Added.
+	* src/rbgpui-font-dialog.c: Added.
+
 2005-07-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgpui-print-job-preview.c: Fix compiling warning. 

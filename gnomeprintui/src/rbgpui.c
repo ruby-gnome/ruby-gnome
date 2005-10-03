@@ -18,15 +18,38 @@
 
 #include "rbgpui.h"
 
+extern void Init_gnome_print_dialog(VALUE mGnome);
+extern void Init_gnome_print_config_dialog(VALUE mGnome);
+extern void Init_gnome_print_job_preview(VALUE mGnome);
+extern void Init_gnome_print_preview(VALUE mGnome);
+extern void Init_gnome_print_unit_selector(VALUE mGnome);
+extern void Init_gnome_print_content_selector(VALUE mGnome);
+
+extern void Init_gnome_font_dialog(VALUE mGnome);
+
+extern void Init_gnome_paper_selector(VALUE mGnome);
+
 void
 Init_gnomeprintui2(void) {
-  VALUE mGnome = rb_define_module("Gnome");
+  VALUE mGnome,  mGnomePrintUI;
 
+  mGnome = rb_define_module("Gnome");
+  mGnomePrintUI = rb_define_module_under(mGnome, "PrintUI");
+
+  rb_define_const(mGnomePrintUI, "BUILD_VERSION",
+                  rb_ary_new3(3,
+                              INT2FIX(LIBGNOMEPRINTUI_MAJOR_VERSION),
+                              INT2FIX(LIBGNOMEPRINTUI_MINOR_VERSION),
+                              INT2FIX(LIBGNOMEPRINTUI_MICRO_VERSION)));
+  
   Init_gnome_print_dialog(mGnome);
   Init_gnome_print_config_dialog(mGnome);
   Init_gnome_print_job_preview(mGnome);
   Init_gnome_print_preview(mGnome);
   Init_gnome_print_unit_selector(mGnome);
+  Init_gnome_print_content_selector(mGnome);
 
+  Init_gnome_font_dialog(mGnome);
+  
   Init_gnome_paper_selector(mGnome);
 }
