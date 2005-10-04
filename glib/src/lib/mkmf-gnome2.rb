@@ -180,6 +180,40 @@ END
   mfile.close
 end
 
+def make_version_header(app_name, pkgname, dir = "src")
+  version = PKGConfig.modversion(pkgname).split(/\./)
+
+  filename = "rb#{app_name.lowcase}version.h"
+
+  out = File.open(File.join(dir, filename), "w")
+
+  out.print %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  #{filename} -
+
+  This file was generated with mkmf-gnome2.rb.
+
+************************************************/
+
+#ifndef __RB#{app_name}_VERSION_H__
+#define __RB#{app_name}_VERSION_H__
+
+#define #{app_name}_MAJOR_VERSION (#{version[0]})
+#define #{app_name}_MINOR_VERSION (#{version[1]})
+#define #{app_name}_MICRO_VERSION (#{version[2]})
+
+#define #{app_name}_CHECK_VERSION(major,minor,micro)    \\
+    (#{app_name}_MAJOR_VERSION > (major) || \\
+     (#{app_name}_MAJOR_VERSION == (major) && #{app_name}_MINOR_VERSION > (minor)) || \\
+     (#{app_name}_MAJOR_VERSION == (major) && #{app_name}_MINOR_VERSION == (minor) && \\
+      #{app_name}_MICRO_VERSION >= (micro)))
+
+
+#endif /* __RB#{app_name}_VERSION_H__ */
+]
+      out.close
+end
 
 def check_ruby_func
   $CPPFLAGS << " -I$(sitearchdir) "

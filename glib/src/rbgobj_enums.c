@@ -4,7 +4,7 @@
   rbgobj_enums.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Date: 2005/10/04 17:13:32 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
@@ -138,6 +138,7 @@ rbgobj_flags_add_constants(VALUE mod, GType flags_type,
             const char* name = value->value_name + prefix_len;
             rbgobj_define_const(mod, name,
                                 rbgobj_make_flags(value->value, flags_type));
+
         }
     }
 
@@ -220,7 +221,7 @@ rbgobj_init_enum_class(VALUE klass)
         gchar* p;
 
         for (p = nick; *p; p++) {
-            if (*p == '-')
+            if (*p == '-' || *p == ' ')
                 *p = '_';
             else
                 *p = toupper(*p);
@@ -492,8 +493,10 @@ rbgobj_init_flags_class(VALUE klass)
         }
 
         for (p = nick; *p; p++)
-            if (*p == '-')
+            if (*p == '-' || *p == ' ')
                 *p = '_';
+            else
+                *p = tolower(*p);
 
         g_string_append_printf(
             source,
