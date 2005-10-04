@@ -4,7 +4,7 @@
   rbglib_utils.c -
 
   $Author: mutoh $
-  $Date: 2005/10/04 09:42:29 $
+  $Date: 2005/10/04 09:45:59 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -71,7 +71,7 @@ rbglib_m_unsetenv(self, variable)
 #endif
 
 #if GLIB_CHECK_VERSION(2,8,0)
-#if 0
+#if HAVE_G_LISTENV
 static VALUE
 rbglib_m_listenv(self)
     VALUE self;
@@ -88,6 +88,7 @@ rbglib_m_listenv(self)
     return r_list;
 }
 #endif
+
 static VALUE
 rbglib_m_host_name(self)
     VALUE self;

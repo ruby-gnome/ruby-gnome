@@ -2,6 +2,8 @@
 
 	* src/lib/mkmf-gnome2.rb: Fix a bug to compile
 	Ruby-GNOME2 with Ruby/Cairo on Win32.
+	* src/rbglib_utils.c: Fix a linking error on Win32.
+	* extconf.rb: ditto.
 
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
