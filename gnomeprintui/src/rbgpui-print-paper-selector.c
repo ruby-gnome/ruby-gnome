@@ -41,10 +41,10 @@ gpui_paper_selector_new(int argc, VALUE *argv, VALUE self)
   }
   
   if (n_args == 2) {
-    G_INITIALIZE(self, gnome_paper_selector_new_with_flags(pc,
-                                                           RVAL2GPSF(flags)));
+    RBGTK_INITIALIZE(self,
+                     gnome_paper_selector_new_with_flags(pc, RVAL2GPSF(flags)));
   } else {
-    G_INITIALIZE(self, gnome_paper_selector_new(pc));
+    RBGTK_INITIALIZE(self, gnome_paper_selector_new(pc));
   }
   return Qnil;
 }

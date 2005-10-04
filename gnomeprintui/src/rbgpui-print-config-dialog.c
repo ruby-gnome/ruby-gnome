@@ -35,7 +35,7 @@ gpui_config_dialog_new(int argc, VALUE *argv, VALUE self)
     gpc = RVAL2GOBJ(config);
   }
   
-  G_INITIALIZE(self, gnome_print_config_dialog_new(gpc));
+  RBGTK_INITIALIZE(self, gnome_print_config_dialog_new(gpc));
   return Qnil;
 }
 #endif

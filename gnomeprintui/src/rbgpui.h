@@ -5,7 +5,6 @@
 
 #include <ruby.h>
 
-#include <rbglib.h>
-#include <rbgobject.h>
+#include <rbgtk.h>
 
 #endif

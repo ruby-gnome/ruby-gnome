@@ -1,5 +1,7 @@
 2005-10-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src: Use RBGTK_INITIALIZE instead of G_INITIALIZE.
+
 	* src/rbgpui-font-dialog.c (gpui_fp_set_phrase): Fix compiling
 	  warning.
 

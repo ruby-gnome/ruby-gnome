@@ -24,7 +24,7 @@
 static VALUE
 gpui_pcs_new(VALUE self)
 {
-  G_INITIALIZE(self, g_object_new (GNOME_TYPE_PRINT_CONTENT_SELECTOR, NULL));
+  RBGTK_INITIALIZE(self, g_object_new(GNOME_TYPE_PRINT_CONTENT_SELECTOR, NULL));
   return Qnil;
 }
 #endif

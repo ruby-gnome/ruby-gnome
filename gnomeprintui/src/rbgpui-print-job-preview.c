@@ -25,10 +25,9 @@
 static VALUE
 gpui_job_preview_new(VALUE self, VALUE job, VALUE title)
 {
-  G_INITIALIZE(self, gnome_print_job_preview_new(RVAL2GOBJ(job),
-                                                 (const guchar*)RVAL2CSTR(title)));
-  /* XXX: Is it good way??? */
-  g_object_ref(_SELF(self));
+  RBGTK_INITIALIZE(self,
+                   gnome_print_job_preview_new(RVAL2GOBJ(job),
+                                               (const guchar*)RVAL2CSTR(title)));
   return Qnil;
 }
 

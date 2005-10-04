@@ -32,7 +32,7 @@
 static VALUE
 gpui_fs_new(VALUE self)
 {
-  G_INITIALIZE(self, gnome_font_selection_new());
+  RBGTK_INITIALIZE(self, gnome_font_selection_new());
   return Qnil;
 }
 
@@ -65,7 +65,7 @@ gpui_fs_set_font(VALUE self, VALUE font)
 static VALUE
 gpui_fp_new(VALUE self)
 {
-  G_INITIALIZE(self, gnome_font_preview_new());
+  RBGTK_INITIALIZE(self, gnome_font_preview_new());
   return Qnil;
 }
 
@@ -105,8 +105,8 @@ gpui_fd_new(int argc, VALUE *argv, VALUE self)
   } else {
     title = StringValuePtr(rb_title);
   }
-  
-  G_INITIALIZE(self, gnome_font_dialog_new(title));
+
+  RBGTK_INITIALIZE(self, gnome_font_dialog_new(title));
   return Qnil;
 }
 

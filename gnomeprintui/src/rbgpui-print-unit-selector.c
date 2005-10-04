@@ -28,7 +28,7 @@
 static VALUE
 gpui_unit_selector_new(VALUE self, VALUE bases)
 {
-  G_INITIALIZE(self, gnome_print_unit_selector_new(RVAL2GPUB(bases)));
+  RBGTK_INITIALIZE(self, gnome_print_unit_selector_new(RVAL2GPUB(bases)));
   return Qnil;
 }
 

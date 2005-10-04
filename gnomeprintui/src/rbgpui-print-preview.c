@@ -34,13 +34,14 @@ gpui_preview_new(int argc, VALUE *argv, VALUE self)
                         &config, &canvas, &transform, &region);
 
   if (n_args == 2) {
-    G_INITIALIZE(self, gnome_print_preview_new(RVAL2GOBJ(config),
-                                               RVAL2GOBJ(canvas)));
+    RBGTK_INITIALIZE(self, gnome_print_preview_new(RVAL2GOBJ(config),
+                                                   RVAL2GOBJ(canvas)));
   } else if (n_args == 4) {
-    G_INITIALIZE(self, gnome_print_preview_new_full(RVAL2GOBJ(config),
-                                                    RVAL2GOBJ(canvas),
-                                                    get_art_affine(transform),
-                                                    get_art_drect(region)));
+    RBGTK_INITIALIZE(self,
+                     gnome_print_preview_new_full(RVAL2GOBJ(config),
+                                                  RVAL2GOBJ(canvas),
+                                                  get_art_affine(transform),
+                                                  get_art_drect(region)));
   } else {
     rb_raise(rb_eArgError,
              "wrong number of arguments (%d for 2 or 4)",

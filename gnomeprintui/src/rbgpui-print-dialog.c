@@ -46,11 +46,9 @@ gpui_dialog_new(int argc, VALUE *argv, VALUE self)
     }
   }
   
-  G_INITIALIZE(self, gnome_print_dialog_new(RVAL2GOBJ(job),
-                                            (const guchar*)RVAL2CSTR(title),
-                                            g_flags));
-  /* XXX: Is it good way??? */
-  g_object_ref(_SELF(self));
+  RBGTK_INITIALIZE(self, gnome_print_dialog_new(RVAL2GOBJ(job),
+                                                (const guchar*)RVAL2CSTR(title),
+                                                g_flags));
   return Qnil;
 }
 
