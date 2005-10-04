@@ -72,7 +72,8 @@ gpui_fp_new(VALUE self)
 static VALUE
 gpui_fp_set_phrase(VALUE self, VALUE phrase)
 {
-  gnome_font_preview_set_phrase(RVAL2GPFP(self), StringValuePtr(phrase));
+  gnome_font_preview_set_phrase(RVAL2GPFP(self),
+                                (const guchar *)StringValuePtr(phrase));
   return self;
 }
 

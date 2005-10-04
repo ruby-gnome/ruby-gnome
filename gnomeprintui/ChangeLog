@@ -1,3 +1,8 @@
+2005-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgpui-font-dialog.c (gpui_fp_set_phrase): Fix compiling
+	  warning.
+
 2005-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: Generate rbgpui-version.h
