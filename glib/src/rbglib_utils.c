@@ -3,8 +3,8 @@
 
   rbglib_utils.c -
 
-  $Author: pterjan $
-  $Date: 2005/08/21 10:31:13 $
+  $Author: mutoh $
+  $Date: 2005/10/04 09:42:29 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -71,6 +71,7 @@ rbglib_m_unsetenv(self, variable)
 #endif
 
 #if GLIB_CHECK_VERSION(2,8,0)
+#if 0
 static VALUE
 rbglib_m_listenv(self)
     VALUE self;
@@ -86,7 +87,7 @@ rbglib_m_listenv(self)
     g_strfreev(c_list);
     return r_list;
 }
-
+#endif
 static VALUE
 rbglib_m_host_name(self)
     VALUE self;
@@ -280,7 +281,9 @@ Init_glib_utils()
     rb_define_module_function(mGLib, "unsetenv", rbglib_m_unsetenv, 1);
 #endif
 #if GLIB_CHECK_VERSION(2,8,0)
+#if 0
     rb_define_module_function(mGLib, "listenv", rbglib_m_listenv, 0);
+#endif
     rb_define_module_function(mGLib, "host_name", rbglib_m_host_name, 0);
 #endif
     rb_define_module_function(mGLib, "user_name", rbglib_m_user_name, 0);

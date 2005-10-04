@@ -1,3 +1,8 @@
+2005-10-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: Fix a bug to compile
+	Ruby-GNOME2 with Ruby/Cairo on Win32.
+
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.c: Added GLib::BUILD_VERSION.

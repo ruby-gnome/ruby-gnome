@@ -86,17 +86,22 @@ def check_win32()
 end
 
 def set_output_lib(target_name)
-  filename = "libruby-#{target_name}.a"
   if /cygwin|mingw/ =~ RUBY_PLATFORM
+    filename = "libruby-#{target_name}.a"
     if RUBY_VERSION > "1.8.0"
       $DLDFLAGS << ",--out-implib=#{filename}" if filename
     elsif RUBY_VERSION > "1.8"
-      CONFIG["DLDFLAGS"].gsub!(/ -Wl,--out-implib=[^ ]+/, '')
-      CONFIG["DLDFLAGS"] << " -Wl,--out-implib=#{filename}" if filename
+      $DLDFLAGS.gsub!(/ -Wl,--out-implib=[^ ]+/, '')
+      $DLDFLAGS << " -Wl,--out-implib=#{filename}" if filename
     else
-      CONFIG["DLDFLAGS"].gsub!(/ --output-lib\s+[^ ]+/, '')
-      CONFIG["DLDFLAGS"] << " --output-lib #{filename}" if filename
+      $DLDFLAGS.gsub!(/ --output-lib\s+[^ ]+/, '')
+      $DLDFLAGS << " --output-lib #{filename}" if filename
     end
+  elsif /mswin32/ =~ RUBY_PLATFORM
+      filename = "libruby-#{target_name}.lib"
+      $DLDFLAGS.gsub!(/ --output-lib\s+[^ ]+/, '')
+      $DLDFLAGS.gsub!(/ \/IMPLIB:[^ ]+/, '')
+      $DLDFLAGS << " /IMPLIB:#{filename}" if filename    
   end
 end
 
@@ -114,7 +119,7 @@ def add_depend_package(target_name, target_srcdir, topdir)
     $LDFLAGS << " -L#{topdir}/#{target_srcdir}"
   elsif /mswin32/ =~ RUBY_PLATFORM
     $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
-    $libs << " #{target_name}.lib"
+    $libs << " libruby-#{target_name}.lib"
   end
 end
 
