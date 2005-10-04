@@ -1,3 +1,8 @@
+2005-10-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Support Ruby/Cairo on Win32.
+        Use CAIRO_PATH variable.
+
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkconst.c: Added Gtk::BUILD_VERSION.

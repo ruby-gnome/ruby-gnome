@@ -55,7 +55,15 @@ if target=="x11"
 end
 
 PKGConfig.have_package('cairo')
-have_header('rb_cairo.h')
+if have_header('rb_cairo.h')
+  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+    unless ENV["CAIRO_PATH"]
+      puts "Error! Set CAIRO_PATH."
+      exit 1
+    end
+    add_depend_package("cairo", "packages/cairo/ext", ENV["CAIRO_PATH"])
+  end
+end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("pango", "pango/src", TOPDIR)
