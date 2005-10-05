@@ -1,3 +1,15 @@
+2005-10-05  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: Added Cairo check.
+
+	* src/rbpango.h: Include Cairo related headers.
+
+	* src/rbpangocontext.c: Added 1.10 API.
+
+	* src/rbpangocairo.c: Added.
+
+	* src/lib/pango.rb: Require 'cairo'.
+
 2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangomain.c: Raises RuntimeError if 1st argument is nil. 

@@ -3,8 +3,8 @@
 
   rbpangocontext.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: ktou $
+  $Date: 2005/10/05 11:16:26 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -197,6 +197,44 @@ rcontext_list_families(self)
     return result;
 }
 
+#if PANGO_CHECK_VERSION(1,10,0)
+#  if HAVE_RB_CAIRO_H
+static VALUE
+rcontext_set_font_options(self, options)
+    VALUE self, options;
+{
+    pango_cairo_context_set_font_options(_SELF(self),
+                                         RVAL2CRFONTOPTIONS(options));
+    return self;
+}
+
+static VALUE
+rcontext_get_font_options(self)
+    VALUE self;
+{
+    const cairo_font_options_t *options;
+    options = pango_cairo_context_get_font_options(_SELF(self));
+    return CRFONTOPTIONS2RVAL((cairo_font_options_t *)options);
+}
+
+static VALUE
+rcontext_set_resolution(self, dpi)
+    VALUE self, dpi;
+{
+    pango_cairo_context_set_resolution(_SELF(self), NUM2DBL(dpi));
+    return self;
+}
+
+static VALUE
+rcontext_get_resolution(self)
+    VALUE self;
+{
+    return rb_float_new(pango_cairo_context_get_resolution(_SELF(self)));
+}
+#  endif
+#endif
+
+
 static VALUE
 rcontext_list_families_old(self)
     VALUE self;
@@ -234,6 +272,15 @@ Init_pango_context()
     rb_define_method(pContext, "get_metrics", rcontext_get_metrics, 2);
     rb_define_method(pContext, "families", rcontext_list_families, 0);
 
+#if PANGO_CHECK_VERSION(1,10,0)
+#  if HAVE_RB_CAIRO_H
+    rb_define_method(pContext, "set_font_options", rcontext_set_font_options, 1);
+    rb_define_method(pContext, "font_options", rcontext_get_font_options, 0);
+    rb_define_method(pContext, "set_resolution", rcontext_set_resolution, 1);
+    rb_define_method(pContext, "resolution", rcontext_get_resolution, 0);
+#  endif
+#endif
+    
     /* This will remove 2 or 3 releases later since 0.14.0. */
     rb_define_method(pContext, "list_families", rcontext_list_families_old, 0);
 

@@ -26,6 +26,17 @@ have_func("pango_attr_iterator_get_attrs")
 have_func("pango_itemize_with_base_dir")
 have_func("pango_font_family_is_monospace")
 
+PKGConfig.have_package('pangocairo')
+if have_header('rb_cairo.h')
+  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+    unless ENV["CAIRO_PATH"]
+      puts "Error! Set CAIRO_PATH."
+      exit 1
+    end
+    add_depend_package("cairo", "packages/cairo/ext", ENV["CAIRO_PATH"])
+  end
+end
+
 add_depend_package("glib2", "glib/src", TOPDIR)
 
 add_distcleanfile("rbpangoinits.c")

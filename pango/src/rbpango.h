@@ -3,8 +3,8 @@
 
   rbpango.h -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: ktou $
+  $Date: 2005/10/05 11:16:26 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -20,6 +20,13 @@
 
 #include "rbgobject.h"
 #include "rbpangoversion.h"
+
+#if PANGO_CHECK_VERSION(1,10,0)
+#include <pango/pangocairo.h>
+#  if HAVE_RB_CAIRO_H
+#include <rb_cairo.h>
+#  endif
+#endif
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_PANGO_STATIC_COMPILATION)
 #  ifdef RUBY_PANGO_COMPILATION
