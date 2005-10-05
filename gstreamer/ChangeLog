@@ -1,3 +1,9 @@
+2005-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgst.c: Added Gst::BUILD_VERSION.
+	* src/rbgstelement.c: Gst::Element#get_property returns
+	correct name instead of Class class.
+
 2005-08-04  Laurent Sansonetti  <lrz@gnome.org>
 
 	* src/misc.c, src/rbgstelementfactory.c, src/rbgstindexfactory.c, 

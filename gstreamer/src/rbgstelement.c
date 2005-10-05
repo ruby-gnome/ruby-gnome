@@ -261,12 +261,32 @@ rb_gst_element_get_property (VALUE self, VALUE name)
     GValue gvalue = { 0, };
     const gchar *gname;
     VALUE ret;
+    GType gtype = 0;
+    gchar* gtypename = (gchar*)NULL;
 
     element = RGST_ELEMENT (self);
     gname = RVAL2CSTR (name);
 
     check_property (element, gname, &gvalue);
     gst_element_get_property (element, RVAL2CSTR (name), &gvalue);
+
+    gtype = G_VALUE_TYPE(&gvalue);
+    switch (G_TYPE_FUNDAMENTAL(gtype)) {
+    case G_TYPE_ENUM:
+    case G_TYPE_FLAGS:
+    case G_TYPE_OBJECT:
+    case G_TYPE_INTERFACE:
+    case G_TYPE_PARAM:
+      case G_TYPE_POINTER:
+    case G_TYPE_BOXED:
+      gtypename = (gchar *) g_type_name (gtype);
+      
+      if (strncmp (gtypename, "Gst", 3) == 0)
+        gtypename += 3;
+        if (!rb_const_defined_at (mGst, rb_intern (gtypename)))
+          G_DEF_CLASS (gtype, gtypename, mGst);
+    }
+
     /*
      * FIXME: returns nil if property doesn't exist yet 
      */

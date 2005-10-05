@@ -287,4 +287,15 @@ Init_gst (void)
      * GStreamer's micro version.
      */
     rb_define_const (mGst, "VERSION_MICRO", INT2FIX (GST_VERSION_MICRO));
+
+
+    /*
+     * Constant: BUILD_VERSION
+     * GStreamer's build version.
+     */
+    rb_define_const(mGst, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GST_VERSION_MAJOR),
+                                INT2FIX(GST_VERSION_MINOR),
+                                INT2FIX(GST_VERSION_MICRO)));
 }
