@@ -1,3 +1,8 @@
+2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_mainloop.c: Works with ruby threads and signal handlers.
+	Reported by Bram Senders.
+
 2005-10-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_enums.c: Supports spaces in nick names. 
