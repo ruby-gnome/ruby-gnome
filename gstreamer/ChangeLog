@@ -1,3 +1,9 @@
+2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgstelement.c: g_type_name() returns const gchar*, not gchar*.
+	Reported by Sven Herzberg.
+	* src/misc.c: ditto.
+
 2005-10-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgst.c: Added Gst::BUILD_VERSION.

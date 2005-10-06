@@ -45,7 +45,7 @@ VALUE
 rbgst_new_gstobject (void *o)
 {
 	GType gtype = G_OBJECT_TYPE (o);
-	gchar *gtypename = (gchar *) g_type_name (gtype);
+	const gchar *gtypename = g_type_name (gtype);
 	if (strncmp (gtypename, "Gst", 3) == 0)
 		gtypename += 3;
 	if (!rb_const_defined_at (mGst, rb_intern (gtypename)))

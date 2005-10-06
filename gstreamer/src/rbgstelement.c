@@ -262,7 +262,7 @@ rb_gst_element_get_property (VALUE self, VALUE name)
     const gchar *gname;
     VALUE ret;
     GType gtype = 0;
-    gchar* gtypename = (gchar*)NULL;
+    const gchar* gtypename = (const gchar*)NULL;
 
     element = RGST_ELEMENT (self);
     gname = RVAL2CSTR (name);
@@ -279,7 +279,7 @@ rb_gst_element_get_property (VALUE self, VALUE name)
     case G_TYPE_PARAM:
       case G_TYPE_POINTER:
     case G_TYPE_BOXED:
-      gtypename = (gchar *) g_type_name (gtype);
+      gtypename = g_type_name (gtype);
       
       if (strncmp (gtypename, "Gst", 3) == 0)
         gtypename += 3;
