@@ -34,6 +34,7 @@ if have_header('rb_cairo.h')
       exit 1
     end
     add_depend_package("cairo", "packages/cairo/ext", ENV["CAIRO_PATH"])
+    $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
   end
 end
 

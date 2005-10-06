@@ -1,3 +1,7 @@
+2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Fix a compilation error on Win32 and Ruby/Cairo.
+
 2005-10-05  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: Added Cairo check.
