@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 11:16:03 $
+  $Date: 2005/10/06 17:51:16 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -383,10 +383,8 @@ txt_get_selection_bounds(self)
 {
     GtkTextIter start, end;
     
-    if(gtk_text_buffer_get_selection_bounds(_SELF(self), &start, &end))
-        return rb_ary_new3(2, ITR2RVAL(&start), ITR2RVAL(&end));
-    else
-        return Qnil;
+    gboolean ret = gtk_text_buffer_get_selection_bounds(_SELF(self), &start, &end);
+    return rb_ary_new3(3, ITR2RVAL(&start), ITR2RVAL(&end), CBOOL2RVAL(ret));
 }
 
 static VALUE

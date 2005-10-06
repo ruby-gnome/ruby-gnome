@@ -1,3 +1,9 @@
+2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Gtk::TextBuffer#selection_bounds returns 
+	 start/end iters even if the selection has zero length.
+	* extconf.rb: Fix to compilation error on Win32 and Ruby/Cairo.
+
 2005-10-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Support Ruby/Cairo on Win32.
