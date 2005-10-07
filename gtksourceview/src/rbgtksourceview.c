@@ -4,7 +4,7 @@
   rbgtksourceview.c -
 
   $Author: mutoh $
-  $Date: 2005/10/02 18:40:34 $
+  $Date: 2005/10/07 19:26:15 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -115,15 +115,17 @@ sourceview_get_marker_pixbuf (self, marker_type)
 void
 Init_gtk_sourceview ()
 {
-	VALUE cSourceView =
-	    G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
+    VALUE cSourceView = G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
 
-	rb_define_method (cSourceView, "get_marker_pixbuf",
-			  sourceview_get_marker_pixbuf, 1);
-	rb_define_method (cSourceView, "set_marker_pixbuf",
-			  sourceview_set_marker_pixbuf, 2);
-	rb_define_method (cSourceView, "initialize", sourceview_initialize,
-			  -1);
-
-	G_DEF_SETTERS (cSourceView);
+    rb_define_const(cSourceView, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GTKSOURCEVIEW_MAJOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW_MINOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW_MICRO_VERSION)));
+    
+    rb_define_method(cSourceView, "get_marker_pixbuf", sourceview_get_marker_pixbuf, 1);
+    rb_define_method(cSourceView, "set_marker_pixbuf", sourceview_set_marker_pixbuf, 2);
+    rb_define_method(cSourceView, "initialize", sourceview_initialize, -1);
+    
+    G_DEF_SETTERS (cSourceView);
 }

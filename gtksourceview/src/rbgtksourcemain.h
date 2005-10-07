@@ -4,7 +4,7 @@
   rbgtksourcemain.h -
 
   $Author: mutoh $
-  $Date: 2005/10/02 18:40:34 $
+  $Date: 2005/10/07 19:26:15 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -27,6 +27,7 @@
 
 #include "ruby.h"
 #include "rbgtk.h"
+#include "rbgtksourceviewversion.h"
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
 #  ifdef RUBY_GTK2_COMPILATION

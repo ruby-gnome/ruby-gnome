@@ -4,7 +4,7 @@
   rbgtksourcemain.c -
 
   $Author $
-  $Date: 2005/10/02 18:40:34 $
+  $Date: 2005/10/07 19:26:15 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -26,15 +26,15 @@ extern void Init_gtk_sourceprintjob (void);
 void
 Init_gtksourceview (void)
 {
-	Init_gtk_sourceview ();
-	Init_gtk_sourcetag ();
-	Init_gtk_sourcetagstyle ();
-	Init_gtk_sourcetagtable ();
-	Init_gtk_sourcelanguage ();
-	Init_gtk_sourcelanguagesmanager ();
-	Init_gtk_sourcemarker ();
-	Init_gtk_sourcebuffer ();
-	Init_gtk_sourceiter ();
-	Init_gtk_sourcestylescheme ();
-	Init_gtk_sourceprintjob ();
+    Init_gtk_sourceview ();
+    Init_gtk_sourcetag ();
+    Init_gtk_sourcetagstyle ();
+    Init_gtk_sourcetagtable ();
+    Init_gtk_sourcelanguage ();
+    Init_gtk_sourcelanguagesmanager ();
+    Init_gtk_sourcemarker ();
+    Init_gtk_sourcebuffer ();
+    Init_gtk_sourceiter ();
+    Init_gtk_sourcestylescheme ();
+    Init_gtk_sourceprintjob ();
 }
