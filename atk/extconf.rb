@@ -3,6 +3,7 @@ extconf.rb for Ruby/Atk extention library
 =end
 
 PACKAGE_NAME = "atk"
+PACKAGE_ID   = "atk"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..') 
 SRCDIR = TOPDIR + '/atk/src'
@@ -12,7 +13,7 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('atk') or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_func('atk_action_get_localized_name')
@@ -33,16 +34,11 @@ end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_distcleanfile("rbatkinits.c")
-add_distcleanfile("rbatkversion.h")
+
+make_version_header("ATK", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_ATK_COMPILATION") {
-  atk_version = PKGConfig.modversion(PACKAGE_NAME)
-
-  File.delete("rbatkinits.c") if FileTest.exist?("rbatkinits.c")
-  File.delete("rbatkversion.h") if FileTest.exist?("rbatkversion.h")
-
   system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
-  system("ruby #{SRCDIR}/makeversion.rb #{atk_version} > rbatkversion.h")
 }
 
 create_top_makefile
