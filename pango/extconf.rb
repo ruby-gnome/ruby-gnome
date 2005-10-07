@@ -41,15 +41,11 @@ end
 add_depend_package("glib2", "glib/src", TOPDIR)
 
 add_distcleanfile("rbpangoinits.c")
-add_distcleanfile("rbpangoversion.h")
+
+make_version_header("PANGO", "pango")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
-  pango_version = PKGConfig.modversion(PACKAGE_NAME)
-
-  File.delete("rbpangoinits.c") if FileTest.exist?("rbpangoinits.c")
-  File.delete("rbpangoversion.h") if FileTest.exist?("rbpangoversion.h")
   system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
-  system("ruby #{SRCDIR}/makeversion.rb #{pango_version} > rbpangoversion.h")
 }
 
 create_top_makefile
