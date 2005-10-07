@@ -1,3 +1,9 @@
+2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/makeversion.rb: Removed. Use make_version_header() of 
+	Ruby/GLib.
+	* extconf.rb: Follow above change.
+
 2005-09-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome.c: Added Gnome::BUILD_VERSION. 
