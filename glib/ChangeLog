@@ -1,3 +1,7 @@
+2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: Added make_version_header.
+
 2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_mainloop.c: Works with ruby threads and signal handlers.
