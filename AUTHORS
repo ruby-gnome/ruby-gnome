@@ -3,11 +3,14 @@ The Ruby-GNOME2 Project Team (in alphabetical order, M:Maintainer)
 Chikara Takamatsu <c_takamatu@ybb.ne.jp>
      Japanese Website, Website
 
+Guillaume Cottenceau <ggc@users.sourceforge.net>
+     Ruby/GLib, Ruby/GTK, Website.
+
 Dario Linsky <dlinsky@web.de>
      German Website(M).
 
-Erwan Loisant <eloisant@gmail.com>
-     Ruby/GStreamer.
+Franz Burgmann <franz.burgmann@gmx.net>
+     German Website, Website, Provides some binary packages.
 
 Hiroshi IGARASHI <iga@ruby-lang.org>
      rbbr, Technical advisor.
@@ -20,7 +23,7 @@ Joao Pedrosa <joaopedrosa@yahoo.com>
      Portuguese-BR Website(M), Website, Ruby/GTK.
 
 Joshua Keith <joshuakeith@linuxmail.org>
-     Tutorial(M), Website, Ruby-GNOME2 Icon.
+     Tutorial, Website, Ruby-GNOME2 Icon.
 
 Junichiro Kita <kita@kitaj.no-ip.com>
      Ruby/GTK Tutorial(Japanese) (M)
@@ -29,11 +32,12 @@ KATO Kazuyoshi <kzys@8-p.info>
      Ruby/GTK(mainly gtk-demo), Ruby/GdkPixbuf, Ruby/GLib, Ruby/Libart. 
 
 Kouhei Sutou  <kou@cozmixng.org>
-     Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M), 
-     Ruby/GnomeCanvas, Ruby/GTK, Ruby/Libart.
+     Ruby/GnomePrint(M), Ruby/GnomePrintUI(M), Ruby/RSVG(M), Ruby/GdkPixbuf,
+     Ruby/GnomeCanvas, Ruby/GTK, Ruby/Libart, Ruby/Pango, Ruby/GtkGLExt, 
+     Ruby/GLib.
 
 KUBO Takehiro <kubo@jiubao.org>
-     Ruby/GNOME(M), Ruby/GnomeCanvas(M), Ruby/Libart, Ruby/GTK, Ruby/GLib.
+     Ruby/GNOME, Ruby/GnomeCanvas, Ruby/Libart, Ruby/GTK, Ruby/GLib.
 
 Laurent Sansonetti <lrz@gnome.org>
      Ruby/GStreamer(M), Ruby/Libgda(M), Ruby/GtkSourceView(M), 
@@ -46,7 +50,7 @@ Martin Povolný <xpovolny@fi.muni.cz>
      Ruby/GtkHtml2(M). Ruby/GTK, 
 
 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>  
-     Ruby/GLib(M) and almost of the important design
+     Ruby/GLib and almost of the important design
      of Ruby-GNOME2. Porting to Win32 platform.
 
 Masao Mutoh <mutoh@highway.ne.jp>
@@ -62,7 +66,7 @@ Mirko Maischberger <mirko@lilik.it>
      Website.
  
 Nikolai :: lone-star :: Weibull <lone-star@home.se>
-     Ruby/GConf(M), Ruby/GnomeVFS(M), Ruby/GTK.
+     Ruby/GConf, Ruby/GnomeVFS(M), Ruby/GTK.
 
 Nobuyoshi Nakada <nobu.nokada@softhome.net>
      Technical advisor.
@@ -70,15 +74,20 @@ Nobuyoshi Nakada <nobu.nokada@softhome.net>
 OGASAWARA, Takeshi <t-ogs@earth.email.ne.jp>
      Ruby/GTK.
 
+Pascal Terjan <pterjan@linuxfr.org>
+     Ruby/GLib, Ruby/GTK, Ruby/GtkSourceView, Ruby/Pango, Ruby/GnomeVFS,
+     Ruby/GConf.
+
 Sam Stephenson <sstephenson@gmail.com>
      Website.
 
 TAMURA.Kenichi <sgs02516@nifty.com>
-     Japanese ML archives by w3ml on SF.jp(M), Ruby/GLib.
+     Ruby/GLib.
 
 Vincent Isambart <vincent.isambart@laposte.net>
-     Ruby/GtkGLExt(M), Ruby/GnomeCanvas, Ruby/Pango, Ruby/GLib, 
-     French Website, Website.
+     Ruby/GtkGLExt(M), Ruby/GnomeCanvas, Ruby/ATK, Ruby/Pango, Ruby/GLib, 
+     Ruby/GTK, Ruby/GtkHtml2, Ruby/Libart, Ruby/Libglade, French Website, 
+     Website.
 
 All members of Ruby-GNOME2 Mailing lists.
 And many others who have contributed patches, reported bugs. Thanks!
