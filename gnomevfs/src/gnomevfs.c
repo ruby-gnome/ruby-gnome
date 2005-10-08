@@ -2,6 +2,7 @@
  *
  * gnomevfs.c: The GnomeVFS module.
  *
+ * Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
  * Copyright (C) 2003 Nikolai :: lone-star :: Weibull <lone-star@home.se>.
  *
  * This library is free software; you can redistribute it and/or
@@ -20,7 +21,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/06/10 16:51:09 $
+ * $Date: 2005/10/08 18:31:12 $
  *
  *****************************************************************************/
 
@@ -179,6 +180,12 @@ Init_gnomevfs(void)
 	VALUE m_gvfs = rb_define_module("GnomeVFS");
 
 	g_id_call = rb_intern("call");
+
+        rb_define_const(m_gvfs, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GNOMEVFS_MAJOR_VERSION),
+                                INT2FIX(GNOMEVFS_MINOR_VERSION),
+                                INT2FIX(GNOMEVFS_MICRO_VERSION)));        
 
 	rb_define_module_function(m_gvfs, "init", gnomevfs_init, 0);
 	rb_define_module_function(m_gvfs, "initialized?", gnomevfs_initialized,
