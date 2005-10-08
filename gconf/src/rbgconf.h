@@ -20,7 +20,7 @@
  * 
  * $Author: mutoh $
  * 
- * $Date: 2004/05/29 17:21:47 $
+ * $Date: 2005/10/08 18:15:17 $
  * 
  *****************************************************************************/
 
@@ -50,6 +50,7 @@ extern "C" {
 #include "rbgconf-schema.h"
 #include "rbgconf-changeset.h"
 #include "rbgconf-metainfo.h"
+#include "rbgconfversion.h"
 
 /* Defines *******************************************************************/
 

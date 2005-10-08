@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2004/06/10 16:37:45 $
+ * $Date: 2005/10/08 18:15:17 $
  *
  *****************************************************************************/
 
@@ -46,6 +46,12 @@ Init_gconf2(void)
 	VALUE m_gconf = rb_define_module("GConf");
 
 	g_id_call = rb_intern("call");
+
+        rb_define_const(m_gconf, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GCONF_MAJOR_VERSION),
+                                INT2FIX(GCONF_MINOR_VERSION),
+                                INT2FIX(GCONF_MICRO_VERSION)));
 
 	Init_gconf_error(m_gconf);
 	Init_gconf_entry(m_gconf);
