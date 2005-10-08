@@ -1,3 +1,8 @@
+2005-10-09  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/gnomevfs.c, src/gnomevfs.h:
+	Added GnomeVFS::BUILD_VERSION.
+
 2005-09-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/gnomevfs-file.c: If Gnome::VFS.open with write mode can't find
