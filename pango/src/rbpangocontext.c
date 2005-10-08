@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: ktou $
-  $Date: 2005/10/05 11:16:26 $
+  $Date: 2005/10/08 03:13:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -203,8 +203,11 @@ static VALUE
 rcontext_set_font_options(self, options)
     VALUE self, options;
 {
-    pango_cairo_context_set_font_options(_SELF(self),
-                                         RVAL2CRFONTOPTIONS(options));
+    if (NIL_P(options))
+        pango_cairo_context_set_font_options(_SELF(self), NULL);
+    else
+        pango_cairo_context_set_font_options(_SELF(self),
+                                             RVAL2CRFONTOPTIONS(options));
     return self;
 }
 
@@ -214,7 +217,10 @@ rcontext_get_font_options(self)
 {
     const cairo_font_options_t *options;
     options = pango_cairo_context_get_font_options(_SELF(self));
-    return CRFONTOPTIONS2RVAL((cairo_font_options_t *)options);
+    if (options)
+        return CRFONTOPTIONS2RVAL(cairo_font_options_copy(options));
+    else
+        return Qnil;
 }
 
 static VALUE

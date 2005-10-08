@@ -1,3 +1,9 @@
+2005-10-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpangocontext.c
+	(rcontext_set_font_options, rcontext_get_font_options): Added
+	NULL/nil check.
+
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/makeversion.rb: Removed. Use make_version_header() of 
