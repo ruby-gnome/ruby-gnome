@@ -1,3 +1,8 @@
+2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbart.[ch]: Added Art::BUILD_VERSION, ::VERSION,
+	(MAJOR|MINOR|MICRO)_VERSION.
+
 2005-10-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart_uta.c: Added.

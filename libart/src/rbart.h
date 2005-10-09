@@ -4,9 +4,9 @@
   rbart.h - header file for Art module of ruby
 
   $Author: mutoh $
-  $Date: 2005/10/01 19:14:37 $
+  $Date: 2005/10/09 18:49:17 $
 
-  Copyright (C) 2004  Ruby-GNOME2 Project
+  Copyright (C) 2004,2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 **********************************************************************/
@@ -14,6 +14,7 @@
 #ifndef _RBART_H_included
 #define _RBART_H_included
 #include <libart_lgpl/libart.h>
+#include <libart_lgpl/libart-features.h>
 #include <ruby.h>
 
 #ifndef ULONG2NUM

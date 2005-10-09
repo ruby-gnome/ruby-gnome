@@ -4,9 +4,9 @@
   rbart.c -
 
   $Author: mutoh $
-  $Date: 2005/10/01 19:14:37 $
+  $Date: 2005/10/09 18:49:17 $
 
-  Copyright (C) 2004  Ruby-GNOME2 Project Team
+  Copyright (C) 2004,2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 **********************************************************************/
@@ -55,6 +55,21 @@ Init_libart2()
 {
     VALUE mArt = rb_define_module("Art");
 
+    rb_define_const(mArt, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(LIBART_MAJOR_VERSION),
+                                INT2FIX(LIBART_MINOR_VERSION),
+                                INT2FIX(LIBART_MICRO_VERSION)));
+
+    rb_define_const(mArt, "VERSION",
+                    rb_ary_new3(3, INT2FIX(libart_major_version),
+                                INT2FIX(libart_minor_version),
+                                INT2FIX(libart_micro_version)));
+
+    rb_define_const(mArt, "MAJOR_VERSION", INT2FIX(libart_major_version));
+    rb_define_const(mArt, "MINOR_VERSION", INT2FIX(libart_minor_version));
+    rb_define_const(mArt, "MICRO_VERSION", INT2FIX(libart_micro_version));
+    
     Init_art_affine(mArt);
     Init_art_bpath(mArt);
     Init_art_canvas(mArt);
