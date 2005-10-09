@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2005/09/19 14:05:21 $
+  $Date: 2005/10/09 19:31:51 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -21,6 +21,8 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <gmodule.h>
+
+#include "rblibgladeversion.h"
 
 #ifdef HAVE_LIBINTL_H
 #include <libintl.h>
@@ -265,6 +267,7 @@ void
 Init_libglade2()
 {
     cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
+
     rb_define_method(cGladeXML, "signal_autoconnect_full", rb_gladexml_signal_autoconnect_full, 0);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);
     rb_define_method(cGladeXML, "get_tooltips", rb_gladexml_get_tooltips, 1);
@@ -277,7 +280,14 @@ Init_libglade2()
     rb_define_singleton_method(cGladeXML, "set_custom_widget_handler", rb_gladexml_set_custom_widget_handler, 1);
     rb_define_singleton_method(cGladeXML, "require", rb_gladexml_require, 1);
     rb_define_singleton_method(cGladeXML, "provide", rb_gladexml_provide, 1);
+
     rb_define_const(cGladeXML, "FILE", INT2FIX(RB_GLADE_XML_FILE));
     rb_define_const(cGladeXML, "BUFFER", INT2FIX(RB_GLADE_XML_BUFFER));
+
+    rb_define_const(cGladeXML, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(LIBGLADE_MAJOR_VERSION),
+                                INT2FIX(LIBGLADE_MINOR_VERSION),
+                                INT2FIX(LIBGLADE_MICRO_VERSION)));
 
 }

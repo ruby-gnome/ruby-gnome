@@ -3,6 +3,7 @@ extconf.rb for Ruby/Libglade2 extention library
 =end
 
 PACKAGE_NAME = "libglade2"
+PACKAGE_ID   = "libglade-2.0"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -12,7 +13,7 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('libglade-2.0') or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_header("libintl.h")
@@ -29,5 +30,7 @@ if /mswin32/ =~ RUBY_PLATFORM
   #FIXME
   $CFLAGS += " -DHAVE_BINDTEXTDOMAIN -DHAVE_BIND_TEXTDOMAIN_CODESET "
 end
+
+make_version_header("LIBGLADE", PACKAGE_ID, ".")
 
 create_makefile(PACKAGE_NAME)  
