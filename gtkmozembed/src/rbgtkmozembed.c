@@ -25,8 +25,8 @@
 
     ***
 
-    $Author: silicio $
-    $Date: 2005/09/13 08:05:31 $
+    $Author: mutoh $
+    $Date: 2005/10/09 18:18:54 $
 
     *** 
 
@@ -43,6 +43,8 @@
 #include "rbgtk.h"
 
 #include "gtkmozembed.h"
+
+#include "rbgtkmozembedversion.h"
 
 /*
  * Class: Gtk::MozEmbed
@@ -718,4 +720,10 @@ Init_gtkmozembed()
     G_DEF_CLASS(GTK_TYPE_MOZ_EMBED_CHROME_FLAGS, "ChromeFlags", moz);
     G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_CHROME_FLAGS, 
                     "GTK_MOZ_EMBED_FLAG_");
+
+    rb_define_const(moz, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GTKMOZEMBED_MAJOR_VERSION),
+                                INT2FIX(GTKMOZEMBED_MINOR_VERSION),
+                                INT2FIX(GTKMOZEMBED_MICRO_VERSION)));
 }

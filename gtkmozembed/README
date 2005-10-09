@@ -8,7 +8,6 @@ Requirements
    Ruby: http://www.ruby-lang.org/
    GTK+: http://www.gtk.org/
    Pango: http://www.pango.org/
-   Ruby/GLib2, Ruby/Gtk >=0.12.0: http://ruby-gnome2.sourceforge.net/
    Mozilla 1.7.x or Mozilla-Firefox 1.0.x http://www.mozilla.org/
   
 Install
@@ -19,14 +18,6 @@ Install
    2. make
    3. su
    4. make install
-
-Bugs
-----
-
-   There is a deadlock bug in some situations if used with
-   Ruby-GNOME2<0.12.0. To use this widget you need Ruby-GNOME2>=0.12.0
-   and not to call Gtk::Thread.init.
-
 
 Copying
 -------

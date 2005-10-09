@@ -1,3 +1,7 @@
+2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+	* REAMDE: Revised.
+	* extconf.rb, src/rbgtkmozembed.c: Added Gtk::MozEmbed::BUILD_VERSION.
+
 2005-09-13 09:51  Mirko Maischberber <mirko@lilik.it>
 	GtkMozEmbed is now a core ruby-gnome2 package.
 	* extconf.rb: modified to be a part of ruby-gnome2 instead. This

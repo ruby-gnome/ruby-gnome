@@ -3,6 +3,7 @@ extconf.rb for Ruby/GtkMozEmbed extention library
 =end
 
 PACKAGE_NAME = "gtkmozembed"
+PACKAGE_ID = "mozilla-gtkmozembed"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -17,7 +18,7 @@ require 'mkmf-gnome2'
 #
 
 PKGConfig.have_package('gtk+-2.0')
-PKGConfig.have_package('mozilla-gtkmozembed') 
+PKGConfig.have_package(PACKAGE_ID)
 setup_win32(PACKAGE_NAME)
 
 mozpath = PKGConfig.libs_only_L("mozilla-gtkmozembed")
@@ -37,6 +38,8 @@ have_library("gtkembedmoz") or exit 1
 
 have_func('gtk_moz_embed_new') or exit 1
 have_func('gtk_moz_embed_set_profile_path') or exit 1
+
+make_version_header("GTKMOZEMBED", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, 
                           "-DRUBY_GTKMOZEMBED_COMPILATION")
