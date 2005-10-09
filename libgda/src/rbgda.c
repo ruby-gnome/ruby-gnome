@@ -206,6 +206,12 @@ void Init_libgda(void) {
     rb_define_module_function(mGda, "sql_replace_placeholders",
                               rb_gda_sql_replace_placeholders, 2);
 
+    rb_define_const(mGda, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(LIBGDA_MAJOR_VERSION),
+                                INT2FIX(LIBGDA_MINOR_VERSION),
+                                INT2FIX(LIBGDA_MICRO_VERSION)));
+
     /* Initialize all subclasses. */
     Init_all_classes();
 }

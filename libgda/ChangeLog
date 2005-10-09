@@ -1,3 +1,7 @@
+2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbgda.h, rbgda.c: Added Gda::BUILD_VERSION.
+
 2005-03-02  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README: we support 1.1.99.

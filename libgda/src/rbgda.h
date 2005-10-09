@@ -28,6 +28,8 @@
 #include <rbglib.h>
 #include <rbgobject.h>
 
+#include "rblibgdaversion.h"
+
 /* Gda module */
 extern VALUE mGda;
 
