@@ -1,12 +1,21 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/************************************************
+
+  rbgtkhtml.c
+
+  $Author: mutoh $
+  $Date: 2005/10/09 17:43:57 $
+
+  Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
+************************************************/
+
 #include "rbgtkhtml.h"
 
 void
 Init_gtkhtml2(void)
-{
-    //VALUE mGtkHtml2 = rb_define_module("GtkHtml2");
-
+{ 
     Init_html_context(mGtk);
-
+  
     Init_html_document(mGtk);
     Init_html_stream(mGtk);
 
@@ -25,4 +34,5 @@ Init_gtkhtml2(void)
     Init_html_box_embedded(mGtk);
     Init_html_box_form(mGtk);
     Init_html_embedded(mGtk);
+
 }

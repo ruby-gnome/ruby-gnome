@@ -5,6 +5,7 @@
 #include <libgtkhtml/gtkhtml.h>
 #include <libgtkhtml/dom/core/dom-document.h>
 #include <libgtkhtml/dom/core/dom-element.h>
+#include "rbgtkhtmlversion.h"
 
 extern void Init_html_context(VALUE);
 

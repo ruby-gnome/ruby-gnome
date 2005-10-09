@@ -3,6 +3,7 @@ extconf.rb for Ruby/GtkHtml2 extention library
 =end
 
 PACKAGE_NAME = "gtkhtml2"
+PACKAGE_ID   = "libgtkhtml-2.0"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -28,6 +29,8 @@ have_func('html_box_table_get_bottom_offset')
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
+
+make_version_header("GTKHTML", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTKHTML2_COMPILATION")
 create_top_makefile

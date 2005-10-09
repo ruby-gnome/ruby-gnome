@@ -1,3 +1,7 @@
+2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbgtkhtmlcontext.c: Added Gtk::HtmlContext::BUILD_VERSION.
+
 2005-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README, COPYING.LIB: Replace "GNU LIBRARY GENERAL PUBLIC LICENSE"
