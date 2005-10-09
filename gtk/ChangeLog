@@ -1,3 +1,9 @@
+2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkcairo.c:
+	- Added 'gdk_' prefix.
+	- Added status check.
+
 2005-10-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktextbuffer.c: Gtk::TextBuffer#selection_bounds returns 

@@ -4,7 +4,7 @@
   rbgdkcairo.c -
 
   $Author: ktou $
-  $Date: 2005/09/28 10:13:24 $
+  $Date: 2005/10/09 16:24:27 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
@@ -28,6 +28,7 @@ gdkdraw_cairo_set_source_color(self, color)
     VALUE self, color;
 {
     gdk_cairo_set_source_color(_SELF(self), RVAL2COLOR(color));
+    rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
 
@@ -37,6 +38,7 @@ gdkdraw_cairo_set_source_pixbuf(self, pixbuf, pixbuf_x, pixbuf_y)
 {
     gdk_cairo_set_source_pixbuf(_SELF(self), RVAL2PIXBUF(pixbuf),
                                 NUM2DBL(pixbuf_x), NUM2DBL(pixbuf_y));
+    rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
 
@@ -45,6 +47,7 @@ gdkdraw_cairo_rectangle(self, rectangle)
     VALUE self, rectangle;
 {
     gdk_cairo_rectangle(_SELF(self), RVAL2RECTANGLE(rectangle));
+    rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
 
@@ -53,6 +56,7 @@ gdkdraw_cairo_region(self, region)
     VALUE self, region;
 {
     gdk_cairo_region(_SELF(self), RVAL2REGION(region));
+    rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
 #  endif
@@ -67,9 +71,9 @@ Init_gtk_gdk_cairo()
                      gdkdraw_cairo_set_source_color, 1);
     rb_define_method(rb_cCairo_Context, "set_source_pixbuf",
                      gdkdraw_cairo_set_source_pixbuf, 3);
-    rb_define_method(rb_cCairo_Context, "rectangle",
+    rb_define_method(rb_cCairo_Context, "gdk_rectangle",
                      gdkdraw_cairo_rectangle, 1);
-    rb_define_method(rb_cCairo_Context, "region",
+    rb_define_method(rb_cCairo_Context, "gdk_region",
                      gdkdraw_cairo_region, 1);
 
     G_DEF_SETTERS(rb_cCairo_Context);
