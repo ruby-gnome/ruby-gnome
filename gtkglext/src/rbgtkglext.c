@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgtkglext.c,v 1.5 2003/12/26 15:06:26 isambart Exp $ */
+/* $Id: rbgtkglext.c,v 1.6 2005/10/09 14:04:37 mutoh Exp $ */
 /* Ruby/GtkGLExt initialization
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -114,6 +114,13 @@ Init_gtkglext(void)
     rb_define_const(mGdkGL, "MICRO_VERSION", INT2NUM(gdkglext_micro_version));
     rb_define_const(mGdkGL, "INTERFACE_AGE", INT2NUM(gdkglext_interface_age));
     rb_define_const(mGdkGL, "BINARY_AGE",    INT2NUM(gdkglext_binary_age));
+
+    rb_define_const(mGtkGL, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GTKGLEXT_MAJOR_VERSION),
+                                INT2FIX(GTKGLEXT_MINOR_VERSION),
+                                INT2FIX(GTKGLEXT_MICRO_VERSION)));
+
 
 #ifdef GDK_MULTIHEAD_SAFE
     rb_define_const(mGdkGL, "MULTIHEAD_SAFE", Qtrue);
