@@ -1,5 +1,7 @@
 2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src: Fixed indentation.
+
 	* extconf.rb: Use make_version_header.
 
 	* src: Revised copyright information.
