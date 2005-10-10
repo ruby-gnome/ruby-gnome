@@ -1,3 +1,11 @@
+2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: Use make_version_header.
+
+	* src: Revised copyright information.
+
+	* src/rbgp-gnome-print-pango.h: Removed.
+	
 2005-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgp.c (Gnome::Print::BUILD_VERSION): Added.
