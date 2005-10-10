@@ -4,6 +4,7 @@
 	- Added RSVG::VERSION, RSVG::MAJOR_VERSION, RSVG::MINOR_VERSION
 	  and RSVG::MICRO_VERSION.
 	- Revised copyright information.
+	- Fixed indentation.
 
 2005-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
