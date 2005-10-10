@@ -4,17 +4,20 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2005/07/26 12:49:59 $
+  $Date: 2005/10/10 11:59:36 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
 #include "rbgobject.h"
 #include "rbgtk.h"
+#include <orbit/orbit.h>
 #include <panel-applet.h>
 #include <panel-applet-gconf.h>
 
 #include <panel-applet-enums.h>
+
+#include "rbpanelappletversion.h"
 
 static ID id_call;
 
@@ -368,5 +371,10 @@ Init_panelapplet2()
     rb_define_const(cApplet, "ORIENT_DOWN", INT2NUM(PANEL_APPLET_ORIENT_DOWN));
     rb_define_const(cApplet, "ORIENT_LEFT", INT2NUM(PANEL_APPLET_ORIENT_LEFT));
     rb_define_const(cApplet, "ORIENT_RIGHT", INT2NUM(PANEL_APPLET_ORIENT_RIGHT));
-    
+
+    rb_define_const(cApplet, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(PANELAPPLET_MAJOR_VERSION),
+                                INT2FIX(PANELAPPLET_MINOR_VERSION),
+                                INT2FIX(PANELAPPLET_MICRO_VERSION)));
 }
