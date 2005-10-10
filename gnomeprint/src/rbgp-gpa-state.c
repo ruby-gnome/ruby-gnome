@@ -4,7 +4,7 @@
   rbgp-gpa-state.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:59:48 $
+  $Date: 2005/10/10 02:07:41 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -20,14 +20,14 @@
 static VALUE
 gp_gpa_state_initialize(VALUE self, VALUE id)
 {
-  G_INITIALIZE(self, gpa_state_new(RVAL2CSTR(id)));
-  return Qnil;
+    G_INITIALIZE(self, gpa_state_new(RVAL2CSTR(id)));
+    return Qnil;
 }
 
 void
 Init_gnome_print_gpa_state(VALUE mGnome)
 {
-  VALUE c = G_DEF_CLASS(GPA_TYPE_STATE, "GPAState", mGnome);
+    VALUE c = G_DEF_CLASS(GPA_TYPE_STATE, "GPAState", mGnome);
   
-  rb_define_method(c, "initialize", gp_gpa_state_initialize, 1);
+    rb_define_method(c, "initialize", gp_gpa_state_initialize, 1);
 }

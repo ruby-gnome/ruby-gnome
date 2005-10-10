@@ -4,7 +4,7 @@
   rbgp-gpa-node.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:59:48 $
+  $Date: 2005/10/10 02:07:41 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -19,30 +19,31 @@
 static VALUE
 gp_gpa_node_id(VALUE self)
 {
-  return CSTR2RVAL((const char*)gpa_node_id(RVAL2GOBJ(self)));
+    return CSTR2RVAL((const char*)gpa_node_id(RVAL2GOBJ(self)));
 }
 
 static VALUE
 gp_gpa_node_get_value(VALUE self)
 {
-  return CSTR2RVAL((const char*)gpa_node_get_value(RVAL2GOBJ(self)));
+    return CSTR2RVAL((const char*)gpa_node_get_value(RVAL2GOBJ(self)));
 }
 
 static VALUE
 gp_gpa_node_set_value(VALUE self, VALUE value)
 {
-  return CBOOL2RVAL(gpa_node_set_value(RVAL2GOBJ(self), (const guchar*)RVAL2CSTR(value)));
+    return CBOOL2RVAL(gpa_node_set_value(RVAL2GOBJ(self),
+                                         (const guchar*)RVAL2CSTR(value)));
 }
 
 
 void
 Init_gnome_print_gpa_node(VALUE mGnome)
 {
-  VALUE c = G_DEF_CLASS(GPA_TYPE_NODE, "GPANode", mGnome);
+    VALUE c = G_DEF_CLASS(GPA_TYPE_NODE, "GPANode", mGnome);
 
-  rb_define_method(c, "id", gp_gpa_node_id, 0);
-  rb_define_method(c, "value", gp_gpa_node_get_value, 0);
-  rb_define_method(c, "set_value", gp_gpa_node_set_value, 1);
+    rb_define_method(c, "id", gp_gpa_node_id, 0);
+    rb_define_method(c, "value", gp_gpa_node_get_value, 0);
+    rb_define_method(c, "set_value", gp_gpa_node_set_value, 1);
 
-  G_DEF_SETTERS(c);
+    G_DEF_SETTERS(c);
 }
