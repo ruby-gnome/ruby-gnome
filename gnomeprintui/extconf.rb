@@ -104,7 +104,8 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 modname = "libgnomeprintui-2.2"
-  
+app_name = "LIBGNOMEPRINTUI"
+
 PKGConfig.have_package(modname) or exit 1
 setup_win32(PACKAGE_NAME)
 
@@ -115,27 +116,7 @@ add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 have_header("libgnomeprintui/gnome-print-config-dialog.h")
 have_header("libgnomeprintui/gnome-font-dialog.h")
 
-add_distcleanfile("rbgpui-version.h")
-version = PKGConfig.modversion(modname).split(/\./)
-File.open(File.join("src", "rbgpui-version.h"), "w") do |f|
-  f.print <<-EOH
-#ifndef RBGPUI_VERSION_H
-#define RBGPUI_VERSION_H
-
-#define LIBGNOMEPRINTUI_MAJOR_VERSION (#{version[0]})
-#define LIBGNOMEPRINTUI_MINOR_VERSION (#{version[1]})
-#define LIBGNOMEPRINTUI_MICRO_VERSION (#{version[2]})
-
-#define LIBGNOMEPRINTUI_CHECK_VERSION(major, minor, micro) \\
-  (LIBGNOMEPRINTUI_MAJOR_VERSION > (major) ||              \\
-    (LIBGNOMEPRINTUI_MAJOR_VERSION == (major) &&           \\
-      LIBGNOMEPRINTUI_MINOR_VERSION > (minor)) ||          \\
-    (LIBGNOMEPRINTUI_MAJOR_VERSION == (major) &&           \\
-      LIBGNOMEPRINTUI_MINOR_VERSION == (minor) &&          \\
-      LIBGNOMEPRINTUI_MICRO_VERSION >= (micro)))
-#endif
-EOH
-end
+make_version_header(app_name, modname)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINTUI2_COMPILATION"){
   enum_type_dir = "libgnomeprintui"
