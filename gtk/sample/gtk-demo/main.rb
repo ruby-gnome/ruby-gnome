@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.14 2005/07/28 14:30:38 mutoh Exp $
+  $Id: main.rb,v 1.15 2005/10/12 01:11:18 ktou Exp $
 =end
 
 require 'gtk2'
@@ -28,6 +28,15 @@ module Demo
       set_title('Ruby/GTK+ Code Demos')
       signal_connect('destroy') do
 	Gtk.main_quit
+      end
+
+      signal_connect("key_press_event") do |widget, event|
+        if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_q
+          destroy
+          true
+        else
+          false
+        end
       end
 
       hbox = Gtk::HBox.new
@@ -156,7 +165,7 @@ module Demo
 
       selection.signal_connect('changed') do |selection|
 	iter = selection.selected
-	load_file(iter.get_value(FILENAME_COLUMN))
+	load_file(iter.get_value(FILENAME_COLUMN)) if iter
       end
       tree_view.signal_connect('row_activated') do |tree_view, path, column|
         row_activated_cb(tree_view.model, path)

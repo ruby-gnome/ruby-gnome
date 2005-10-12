@@ -1,3 +1,9 @@
+2005-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/gtk-demo/main.rb:
+	- Ctrl+q quit the program.
+	- Added nil check. 
+
 2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkcairo.c:
