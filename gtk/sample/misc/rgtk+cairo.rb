@@ -7,7 +7,7 @@
 
   Heavily inspired from png.rb example of rcairo.
 
-  $Id: rgtk+cairo.rb,v 1.1 2005/09/30 20:16:52 ggc Exp $
+  $Id: rgtk+cairo.rb,v 1.2 2005/10/12 01:13:06 ktou Exp $
 =end
 
 require 'gtk2'
@@ -22,7 +22,7 @@ da.signal_connect('expose-event') { |widget, event|
    cr = widget.window.create_cairo_context
 
    # fill background with white
-   cr.set_source_rgb(1.0, 1.0, 1.0)
+   cr.set_source_rgba(1.0, 1.0, 1.0)
    cr.paint
 
    # create shape

@@ -1,5 +1,8 @@
 2005-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/misc/rgtk+cairo.rb: Use set_source_rgba instead of
+	set_source_rgb. Because set_source_rgb is deprecated.
+
 	* sample/gtk-demo/main.rb:
 	- Ctrl+q quit the program.
 	- Added nil check. 
