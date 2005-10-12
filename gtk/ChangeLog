@@ -1,5 +1,8 @@
 2005-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gtk-demo/cairo-gradient.rb: Use
+	Cairo::GradientPattern#add_color_stop_rgb too.
+
 	* sample/misc/cairo-pong.rb: Added cairo sample from gtkcairo
 	sample.
 
