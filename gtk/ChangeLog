@@ -1,5 +1,7 @@
 2005-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gtk-demo/: Added cairo samples.
+
 	* sample/misc/rgtk+cairo.rb: Use set_source_rgba instead of
 	set_source_rgb. Because set_source_rgb is deprecated.
 
