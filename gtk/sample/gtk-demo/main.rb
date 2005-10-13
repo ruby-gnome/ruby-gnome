@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.15 2005/10/12 01:11:18 ktou Exp $
+  $Id: main.rb,v 1.16 2005/10/13 00:04:40 ktou Exp $
 =end
 
 require 'gtk2'
@@ -43,7 +43,9 @@ module Demo
       add(hbox)
 
       tree = create_tree
-      hbox.pack_start(tree, false, false, 0)
+      scrolled_window = Gtk::ScrolledWindow.new
+      scrolled_window.add(tree)
+      hbox.pack_start(scrolled_window, false, false, 0)
 
       notebook = Gtk::Notebook.new
       hbox.pack_start(notebook, true, true, 0)
@@ -122,6 +124,13 @@ module Demo
           children[parent] += [[child, fn, klass]]
         else
           index += [[title, fn, klass]]
+        end
+      end
+
+      # Sort children
+      children.each_key do |parent|
+        children[parent].sort! do |a, b|
+          a[0] <=> b[0]
         end
       end
 

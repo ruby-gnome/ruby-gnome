@@ -1,5 +1,9 @@
 2005-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gtk-demo/main.rb:
+	- Sort sub tree items.
+	- Surround tree with scrolled window.
+
 	* sample/gtk-demo/cairo-gradient.rb: Use
 	Cairo::GradientPattern#add_color_stop_rgb too.
 
