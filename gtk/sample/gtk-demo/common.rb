@@ -4,7 +4,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: common.rb,v 1.7 2005/10/12 05:38:30 ktou Exp $
+  $Id: common.rb,v 1.8 2005/10/13 16:15:58 ktou Exp $
 =end
 
 require 'gtk2'
@@ -26,6 +26,15 @@ module Demo
       super(Gtk::Window::TOPLEVEL)
       if title
 	set_title("#{title} in Ruby/GTK")
+      end
+
+      signal_connect("key_press_event") do |widget, event|
+        if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_q
+          destroy
+          true
+        else
+          false
+        end
       end
 
       signal_connect("delete_event") do |widget, event|
