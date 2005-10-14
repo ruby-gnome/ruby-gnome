@@ -4,7 +4,7 @@
   rbpangofontsetsimple.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2005/10/14 09:55:57 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -44,7 +44,7 @@ void
 Init_pango_fontset_simple()
 {
 #ifdef PANGO_ENABLE_BACKEND
-    VALUE pFSimple = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontSetSimple", mPango);
+    VALUE pFSimple = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);
     
     rb_define_method(pFSimple, "initialize", fontset_simple_initialize, 1);
     rb_define_method(pFSimple, "append", fontset_simple_append, 1);

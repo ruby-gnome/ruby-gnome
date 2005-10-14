@@ -4,7 +4,7 @@
   rbpangofontset.c -
 
   $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Date: 2005/10/14 09:55:57 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -56,7 +56,7 @@ fontset_foreach(self)
 void
 Init_pango_fontset()
 {
-    VALUE pFontSet = G_DEF_CLASS(PANGO_TYPE_FONTSET, "FontSet", mPango);
+    VALUE pFontSet = G_DEF_CLASS(PANGO_TYPE_FONTSET, "Fontset", mPango);
     
     id_call = rb_intern("call");
 
