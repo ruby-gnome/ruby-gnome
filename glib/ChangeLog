@@ -1,5 +1,7 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbglib.c, src/rbglib_timer.c: Added GLib::Timer.
+	* sample/timer.rb: Added.
 	* src/rbglib_completion.c: Added GLib::Completion.
 	* sample/completion.rb: Added.
 
