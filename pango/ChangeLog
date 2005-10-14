@@ -1,8 +1,13 @@
+2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/glyphstring.rb: Added.
+	* src/rbpangofontmap.c: Removed the definition of PangoCairoFontMap.
+	(It's defined at src/rbpangocairo.c now).
+	
 2005-10-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangofontset.c, rbpangofontsetsimple.c,
-	  src/lib/pango.rb: Rename FontSet to Fontset with backward
-	  compatibility.
+	  src/lib/pango.rb: Rename FontSet to Fontset.
 
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 

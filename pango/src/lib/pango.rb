@@ -46,8 +46,6 @@ module Pango
       end
     end
   end
-  FontSet = Fontset               # for backward compatibility.
-  FontSetSimple = FontsetSimple   # for backward compatibility.
 end
 
 GLib::Log.set_log_domain(Pango::LOG_DOMAIN)

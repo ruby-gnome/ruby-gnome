@@ -4,7 +4,7 @@
   rbpangofontmap.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2005/10/14 17:47:41 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -95,7 +95,6 @@ Init_pango_font_map()
     G_DEF_CLASS3("PangoFT2FontMap", "FT2FontMap", mPango);
     G_DEF_CLASS3("PangoXFontMap", "XFontMap", mPango);
     G_DEF_CLASS3("PangoWin32FontMap", "Win32FontMap", mPango);
-    G_DEF_CLASS3("PangoCairoFontMap", "CairoFontMap", mPango);
     G_DEF_CLASS3("PangoCairoFcFontMap", "CairoFcFontMap", mPango);
     G_DEF_CLASS3("PangoCairoWin32FontMap", "CairoWin32FontMap", mPango);
 }
