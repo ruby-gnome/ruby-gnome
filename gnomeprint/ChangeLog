@@ -1,5 +1,8 @@
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/pac.rb: Added sample based on pac.rb in
+	http://www.artima.com/rubycs/articles/pdf_writer3.html.
+
 	* sample/to_file.rb: Use Gnome::PrintContext#stroke and
 	Gnome::PrintContext#fill with block.
 
