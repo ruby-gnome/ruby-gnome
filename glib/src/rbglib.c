@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2005/09/28 17:47:56 $
+  $Date: 2005/10/14 19:10:08 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -31,6 +31,8 @@ extern void Init_glib_main_context();
 extern void Init_glib_source();
 extern void Init_glib_poll_fd();
 extern void Init_glib_io_channel();
+extern void Init_glib_shell();
+extern void Init_glib_completion();
 
 char *
 rbg_string_value_ptr(ptr)
@@ -111,14 +113,50 @@ Init_mem()
 }
 #endif
 
-void Init_glib2()
+static VALUE
+rbg_s_os_win32(self)
+    VALUE self;
+{
+#ifdef G_OS_WIN32
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
+rbg_s_os_beos(self)
+    VALUE self;
+{
+#ifdef G_OS_BEOS
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
+rbg_s_os_unix(self)
+    VALUE self;
+{
+#ifdef G_OS_UNIX
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+void 
+Init_glib2()
 {
     mGLib = rb_define_module("GLib");
 
     setlocale (LC_CTYPE, "");
 #if LC_MESSAGES
     setlocale (LC_MESSAGES, "");
-#endif    
+#endif
+
+    /* Version Information */
     rb_define_const(mGLib, "VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(glib_major_version),
@@ -142,12 +180,87 @@ void Init_glib2()
                                 INT2FIX(GLIB_MINOR_VERSION),
                                 INT2FIX(GLIB_MICRO_VERSION)));
 
+    /* Limits of Basic Types */
+    rb_define_const(mGLib, "MININT", INT2FIX(G_MININT));
+    rb_define_const(mGLib, "MAXINT", INT2FIX(G_MAXINT));
+    rb_define_const(mGLib, "MAXUINT", INT2FIX(G_MAXUINT));
+    
+    rb_define_const(mGLib, "MINSHORT", INT2FIX(G_MINSHORT));
+    rb_define_const(mGLib, "MAXSHORT", INT2FIX(G_MAXSHORT));
+    rb_define_const(mGLib, "MAXUSHORT", INT2FIX(G_MAXUSHORT));
+
+    rb_define_const(mGLib, "MINLONG", INT2FIX(G_MINLONG));
+    rb_define_const(mGLib, "MAXLONG", INT2FIX(G_MAXLONG));
+    rb_define_const(mGLib, "MAXULONG", INT2FIX(G_MAXULONG));
+
+#if GLIB_CHECK_VERSION(2,4,0)
+    rb_define_const(mGLib, "MININT8", INT2FIX(G_MININT8));
+    rb_define_const(mGLib, "MAXINT8", INT2FIX(G_MAXINT8));
+    rb_define_const(mGLib, "MAXUINT8", INT2FIX(G_MAXUINT8));
+
+    rb_define_const(mGLib, "MININT16", INT2FIX(G_MININT16));
+    rb_define_const(mGLib, "MAXINT16", INT2FIX(G_MAXINT16));
+    rb_define_const(mGLib, "MAXUINT16", INT2FIX(G_MAXUINT16));
+
+    rb_define_const(mGLib, "MININT32", INT2FIX(G_MININT32));
+    rb_define_const(mGLib, "MAXINT32", INT2FIX(G_MAXINT32));
+    rb_define_const(mGLib, "MAXUINT32", INT2FIX(G_MAXUINT32));
+#endif
+    rb_define_const(mGLib, "MININT64", INT2FIX(G_MININT64));
+    rb_define_const(mGLib, "MAXINT64", INT2FIX(G_MAXINT64));
+    rb_define_const(mGLib, "MAXUINT64", INT2FIX(G_MAXUINT64));
+#if GLIB_CHECK_VERSION(2,4,0)
+    rb_define_const(mGLib, "MAXSIZE", INT2FIX(G_MAXSIZE));
+#endif
+    rb_define_const(mGLib, "MINFLOAT", INT2FIX(G_MINFLOAT));
+    rb_define_const(mGLib, "MAXFLOAT", INT2FIX(G_MAXFLOAT));
+
+    rb_define_const(mGLib, "MINDOUBLE", INT2FIX(G_MINDOUBLE));
+    rb_define_const(mGLib, "MAXDOUBLE", INT2FIX(G_MAXDOUBLE));
+
+    /* Standard Macros */
+    rb_define_module_function(mGLib, "os_win32?", rbg_s_os_win32, 0);
+    rb_define_module_function(mGLib, "os_beos?", rbg_s_os_beos, 0);
+    rb_define_module_function(mGLib, "os_unix?", rbg_s_os_unix, 0);
+
+    rb_define_const(mGLib, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
+    rb_define_const(mGLib, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
+
+/* Don't implement them.
+#define     G_DIR_SEPARATOR_S
+#define     G_IS_DIR_SEPARATOR              (c)
+#define     G_SEARCHPATH_SEPARATOR
+#define     TRUE
+#define     FALSE
+#define     NULL
+#define     MIN                             (a, b)
+#define     MAX                             (a, b)
+#define     ABS                             (a)
+#define     CLAMP                           (x, low, high)
+#define     G_STRUCT_MEMBER                 (member_type, struct_p, struct_offset)
+#define     G_STRUCT_MEMBER_P               (struct_p, struct_offset)
+#define     G_STRUCT_OFFSET                 (struct_type, member)
+#define     G_MEM_ALIGN
+#define     G_CONST_RETURN
+*/
+
+    /* Numerical Definitions */
+    rb_define_const(mGLib, "E", CSTR2RVAL(G_STRINGIFY(G_E)));
+    rb_define_const(mGLib, "LN2", CSTR2RVAL(G_STRINGIFY(G_LN2)));
+    rb_define_const(mGLib, "LN10", CSTR2RVAL(G_STRINGIFY(G_LN10)));
+    rb_define_const(mGLib, "PI", CSTR2RVAL(G_STRINGIFY(G_PI)));
+    rb_define_const(mGLib, "PI_2", CSTR2RVAL(G_STRINGIFY(G_PI_2)));
+    rb_define_const(mGLib, "PI_4", CSTR2RVAL(G_STRINGIFY(G_PI_4)));
+    rb_define_const(mGLib, "SQRT2", CSTR2RVAL(G_STRINGIFY(G_SQRT2)));
+    rb_define_const(mGLib, "LOG_2_BASE_10", CSTR2RVAL(G_STRINGIFY(G_LOG_2_BASE_10)));
+
     /* From "The Main Event Loop" */
     rb_define_const(mGLib, "PRIORITY_HIGH", INT2FIX(G_PRIORITY_HIGH));
     rb_define_const(mGLib, "PRIORITY_DEFAULT", INT2FIX(G_PRIORITY_DEFAULT));
     rb_define_const(mGLib, "PRIORITY_HIGH_IDLE", INT2FIX(G_PRIORITY_HIGH_IDLE));
     rb_define_const(mGLib, "PRIORITY_DEFAULT_IDLE", INT2FIX(G_PRIORITY_DEFAULT_IDLE));
     rb_define_const(mGLib, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
+
 
 /*    Init_mem(); */
     Init_utils_int64();
@@ -168,6 +281,8 @@ void Init_glib2()
     Init_glib_source();
     Init_glib_poll_fd();
     Init_glib_io_channel();
+    Init_glib_shell();
+    Init_glib_completion();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);

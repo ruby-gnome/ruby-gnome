@@ -4,7 +4,7 @@
   rbglib_utils.c -
 
   $Author: mutoh $
-  $Date: 2005/10/04 09:45:59 $
+  $Date: 2005/10/14 19:10:08 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -282,7 +282,7 @@ Init_glib_utils()
     rb_define_module_function(mGLib, "unsetenv", rbglib_m_unsetenv, 1);
 #endif
 #if GLIB_CHECK_VERSION(2,8,0)
-#if 0
+#if HAVE_G_LISTENV
     rb_define_module_function(mGLib, "listenv", rbglib_m_listenv, 0);
 #endif
     rb_define_module_function(mGLib, "host_name", rbglib_m_host_name, 0);
