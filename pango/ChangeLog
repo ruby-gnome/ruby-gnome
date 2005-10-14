@@ -1,5 +1,9 @@
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangocairo.c: Added 'pango_' prefix.
+
+	* sample/cairo.rb: Added sample using cairo.
+
 	* src/rbpangocairo.c: Pango::CairoFontMap.new ->
 	Pango::CairoFontMap.create because Pango::CairoFontMap is Module.
 

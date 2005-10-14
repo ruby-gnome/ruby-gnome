@@ -4,7 +4,7 @@
   rbpangocairo.c -
 
   $Author: ktou $
-  $Date: 2005/10/14 01:35:19 $
+  $Date: 2005/10/14 02:05:04 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
@@ -157,18 +157,27 @@ Init_pango_cairo()
     G_DEF_SETTERS(pFontMap);
 
     /* Cairo::Context */
-    rb_define_method(rb_cCairo_Context, "update_context", update_context, 1);
+    rb_define_method(rb_cCairo_Context, "update_pango_context",
+                     update_context, 1);
     /* Convenience */
-    rb_define_method(rb_cCairo_Context, "create_layout", create_layout, 0);
-    rb_define_method(rb_cCairo_Context, "update_layout", update_layout, 1);
+    rb_define_method(rb_cCairo_Context, "create_pango_layout",
+                     create_layout, 0);
+    rb_define_method(rb_cCairo_Context, "update_pango_layout",
+                     update_layout, 1);
     /* Rendering */
-    rb_define_method(rb_cCairo_Context, "show_glyph_string", show_glyph_string, 2);
-    rb_define_method(rb_cCairo_Context, "show_layout_line", show_layout_line, 1);
-    rb_define_method(rb_cCairo_Context, "show_layout", show_layout, 1);
+    rb_define_method(rb_cCairo_Context, "show_pango_glyph_string",
+                     show_glyph_string, 2);
+    rb_define_method(rb_cCairo_Context, "show_pango_layout_line",
+                     show_layout_line, 1);
+    rb_define_method(rb_cCairo_Context, "show_pango_layout",
+                     show_layout, 1);
     /* Rendering to a path */
-    rb_define_method(rb_cCairo_Context, "glyph_string_path", glyph_string_path, 2);
-    rb_define_method(rb_cCairo_Context, "layout_line_path", layout_line_path, 1);
-    rb_define_method(rb_cCairo_Context, "layout_path", layout_path, 1);
+    rb_define_method(rb_cCairo_Context, "pango_glyph_string_path",
+                     glyph_string_path, 2);
+    rb_define_method(rb_cCairo_Context, "pango_layout_line_path",
+                     layout_line_path, 1);
+    rb_define_method(rb_cCairo_Context, "pango_layout_path",
+                     layout_path, 1);
 #  endif
 #endif
 }
