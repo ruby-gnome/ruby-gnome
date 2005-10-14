@@ -6,7 +6,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pac.rb,v 1.1 2005/10/14 05:38:23 ktou Exp $
+  $Id: pac.rb,v 1.2 2005/10/14 06:35:42 ktou Exp $
 =end
 
 require "gnomeprint2"
@@ -41,23 +41,23 @@ context.begin_page("1") do
 
   # Wall
   context.set_rgb_color(*magenta)
-  context.rect_filled(20, 500, 750, 20)
+  context.rounded_rect_filled(20, 500, 750, 20, 10)
   context.set_rgb_color(*cyan)
-  context.rect_stroked(20, 500, 750, 20)
+  context.rounded_rect_stroked(20, 500, 750, 20, 10)
   
   context.set_rgb_color(*magenta)
-  context.rect_filled(20, 200, 750, 20)
+  context.rounded_rect_filled(20, 200, 750, 20, 10)
   context.set_rgb_color(*cyan)
-  context.rect_stroked(20, 200, 750, 20)
+  context.rounded_rect_stroked(20, 200, 750, 20, 10)
   
   # Body
   context.set_rgb_color(*yellow)
   context.fill do
-    context.arc_to(150, 350, 100, 0, 359, false)
+    context.circle_to(150, 350, 100)
   end
   context.set_rgb_color(*black)
   context.stroke do
-    context.arc_to(150, 350, 100, 0, 359, false)
+    context.circle_to(150, 350, 100)
   end
 
   # Mouth
@@ -69,11 +69,11 @@ context.begin_page("1") do
 
   # Dot
   context.set_rgb_color(*yellow)
-  context.arc_to(250, 350, 20, 0, 359, false).fill
-  context.arc_to(300, 350, 10, 0, 359, false).fill
-  context.arc_to(350, 350, 10, 0, 359, false).fill
-  context.arc_to(400, 350, 10, 0, 359, false).fill
-  context.arc_to(450, 350, 10, 0, 359, false).fill
+  context.circle_to(250, 350, 20).fill
+  context.circle_to(300, 350, 10).fill
+  context.circle_to(350, 350, 10).fill
+  context.circle_to(400, 350, 10).fill
+  context.circle_to(450, 350, 10).fill
 
   # Ghost
   ghost = Proc.new do

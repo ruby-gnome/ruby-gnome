@@ -1,7 +1,13 @@
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
-	* sample/pac.rb: Added sample based on pac.rb in
-	http://www.artima.com/rubycs/articles/pdf_writer3.html.
+	* src/lib/gnomeprint2.rb (Gnome::PrintContext#rounded_rect_filled) 
+	(Gnome::PrintContext#rounded_rect_stroked) 
+	(Gnome::PrintContext#circle_to): Added convenience API.
+
+	* sample/pac.rb:
+	- Added sample based on pac.rb in
+	  http://www.artima.com/rubycs/articles/pdf_writer3.html.
+	- Use above convenience API.
 
 	* sample/to_file.rb: Use Gnome::PrintContext#stroke and
 	Gnome::PrintContext#fill with block.
