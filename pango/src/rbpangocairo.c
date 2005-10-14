@@ -4,7 +4,7 @@
   rbpangocairo.c -
 
   $Author: ktou $
-  $Date: 2005/10/05 11:16:26 $
+  $Date: 2005/10/14 01:35:19 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
@@ -22,11 +22,10 @@
 #define RVAL2LINE(v) ((PangoLayoutLine*)RVAL2BOXED(v, PANGO_TYPE_LAYOUT_LINE))
 
 static VALUE
-font_map_initialize(self)
-    VALUE self;
+font_map_create(klass)
+    VALUE klass;
 {
-    G_INITIALIZE(self, pango_cairo_font_map_new());
-    return Qnil;
+    return GOBJ2RVAL(pango_cairo_font_map_new());
 }
 
 static VALUE
@@ -148,9 +147,9 @@ Init_pango_cairo()
     /* Pango::CairoFontMap */
     pFontMap = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
+    rb_define_singleton_method(pFontMap, "create", font_map_create, 0);
     rb_define_singleton_method(pFontMap, "default", font_map_get_default, 0);
 
-    rb_define_method(pFontMap, "initialize", font_map_initialize, 0);
     rb_define_method(pFontMap, "set_resolution", font_map_set_resolution, 1);
     rb_define_method(pFontMap, "resolution", font_map_get_resolution, 0);
     rb_define_method(pFontMap, "create_context", font_map_create_context, 0);
