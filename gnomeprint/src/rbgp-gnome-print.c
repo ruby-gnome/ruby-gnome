@@ -4,7 +4,7 @@
   rbgp-gnome-print.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 02:07:41 $
+  $Date: 2005/10/14 04:33:08 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -156,68 +156,77 @@ gp_context_new(int argc, VALUE *argv, VALUE self)
 static VALUE
 gp_context_close(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_context_close(_SELF(self)));
+    rbgp_check_return_code(gnome_print_context_close(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_context_create_transport(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_context_create_transport(_SELF(self)));
+    rbgp_check_return_code(gnome_print_context_create_transport(_SELF(self)));
+    return self;
 }
 
 
 static VALUE
 gp_newpath(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_newpath(_SELF(self)));
+    rbgp_check_return_code(gnome_print_newpath(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_moveto(VALUE self, VALUE x, VALUE y)
 {
-    return rbgp_check_return_code(gnome_print_moveto(_SELF(self),
-                                                     NUM2DBL(x),
-                                                     NUM2DBL(y)));
+    rbgp_check_return_code(gnome_print_moveto(_SELF(self),
+                                              NUM2DBL(x),
+                                              NUM2DBL(y)));
+    return self;
 }
 
 static VALUE
 gp_lineto(VALUE self, VALUE x, VALUE y)
 {
-    return rbgp_check_return_code(gnome_print_lineto(_SELF(self),
-                                                     NUM2DBL(x),
-                                                     NUM2DBL(y)));
+    rbgp_check_return_code(gnome_print_lineto(_SELF(self),
+                                              NUM2DBL(x),
+                                              NUM2DBL(y)));
+    return self;
 }
 
 static VALUE
 gp_curveto(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2, VALUE x3, VALUE y3)
 {
-    return rbgp_check_return_code(gnome_print_curveto(_SELF(self),
-                                                      NUM2DBL(x1),
-                                                      NUM2DBL(y1),
-                                                      NUM2DBL(x2),
-                                                      NUM2DBL(y2),
-                                                      NUM2DBL(x3),
-                                                      NUM2DBL(y3)));
+    rbgp_check_return_code(gnome_print_curveto(_SELF(self),
+                                               NUM2DBL(x1),
+                                               NUM2DBL(y1),
+                                               NUM2DBL(x2),
+                                               NUM2DBL(y2),
+                                               NUM2DBL(x3),
+                                               NUM2DBL(y3)));
+    return self;
 }
 
 static VALUE
 gp_closepath(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_closepath(_SELF(self)));
+    rbgp_check_return_code(gnome_print_closepath(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_strokepath(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_strokepath(_SELF(self)));
+    rbgp_check_return_code(gnome_print_strokepath(_SELF(self)));
+    return self;
 }
 
 static VALUE
 _gp_bpath(VALUE self, VALUE bpath, VALUE append)
 {
-    return rbgp_check_return_code(gnome_print_bpath(_SELF(self),
-                                                    get_art_bpath(bpath),
-                                                    RTEST(append)));
+    rbgp_check_return_code(gnome_print_bpath(_SELF(self),
+                                             get_art_bpath(bpath),
+                                             RTEST(append)));
+    return self;
 }
 
 static VALUE
@@ -235,9 +244,10 @@ gp_bpath(int argc, VALUE *argv, VALUE self)
 static VALUE
 _gp_vpath(VALUE self, VALUE vpath, VALUE append)
 {
-    return rbgp_check_return_code(gnome_print_vpath(_SELF(self),
-                                                    get_art_vpath(vpath),
-                                                    RTEST(append)));
+    rbgp_check_return_code(gnome_print_vpath(_SELF(self),
+                                             get_art_vpath(vpath),
+                                             RTEST(append)));
+    return self;
 }
 
 static VALUE
@@ -274,57 +284,64 @@ static VALUE
 gp_arcto(VALUE self, VALUE x, VALUE y, VALUE radius,
          VALUE angle1, VALUE angle2, VALUE clockwise)
 {
-    return rbgp_check_return_code(gnome_print_arcto(_SELF(self),
-                                                    NUM2DBL(x),
-                                                    NUM2DBL(y),
-                                                    NUM2DBL(radius),
-                                                    NUM2DBL(angle1),
-                                                    NUM2DBL(angle2),
-                                                    RTEST(clockwise) ? 1 : 0));
+    rbgp_check_return_code(gnome_print_arcto(_SELF(self),
+                                             NUM2DBL(x),
+                                             NUM2DBL(y),
+                                             NUM2DBL(radius),
+                                             NUM2DBL(angle1),
+                                             NUM2DBL(angle2),
+                                             RTEST(clockwise) ? 1 : 0));
+    return self;
 }
 
 static VALUE
 gp_setrgbcolor(VALUE self, VALUE r, VALUE g, VALUE b)
 {
-    return rbgp_check_return_code(gnome_print_setrgbcolor(_SELF(self),
-                                                          NUM2DBL(r),
-                                                          NUM2DBL(g),
-                                                          NUM2DBL(b)));
+    rbgp_check_return_code(gnome_print_setrgbcolor(_SELF(self),
+                                                   NUM2DBL(r),
+                                                   NUM2DBL(g),
+                                                   NUM2DBL(b)));
+    return self;
 }
 
 static VALUE
 gp_setopacity(VALUE self, VALUE opacity)
 {
-    return rbgp_check_return_code(gnome_print_setopacity(_SELF(self),
-                                                         NUM2DBL(opacity)));
+    rbgp_check_return_code(gnome_print_setopacity(_SELF(self),
+                                                  NUM2DBL(opacity)));
+    return self;
 }
 
 static VALUE
 gp_setlinewidth(VALUE self, VALUE width)
 {
-    return rbgp_check_return_code(gnome_print_setlinewidth(_SELF(self),
-                                                           NUM2DBL(width)));
+    rbgp_check_return_code(gnome_print_setlinewidth(_SELF(self),
+                                                    NUM2DBL(width)));
+    return self;
 }
 
 static VALUE
 gp_setmiterlimit(VALUE self, VALUE limit)
 {
-    return rbgp_check_return_code(gnome_print_setmiterlimit(_SELF(self),
-                                                            NUM2DBL(limit)));
+    rbgp_check_return_code(gnome_print_setmiterlimit(_SELF(self),
+                                                     NUM2DBL(limit)));
+    return self;
 }
 
 static VALUE
 gp_setlinejoin(VALUE self, VALUE jointype)
 {
-    return rbgp_check_return_code(gnome_print_setlinejoin(_SELF(self),
-                                                          NUM2INT(jointype)));
+    rbgp_check_return_code(gnome_print_setlinejoin(_SELF(self),
+                                                   NUM2INT(jointype)));
+    return self;
 }
 
 static VALUE
 gp_setlinecap(VALUE self, VALUE captype)
 {
-    return rbgp_check_return_code(gnome_print_setlinecap(_SELF(self),
-                                                         NUM2INT(captype)));
+    rbgp_check_return_code(gnome_print_setlinecap(_SELF(self),
+                                                  NUM2INT(captype)));
+    return self;
 }
 
 static VALUE
@@ -337,55 +354,63 @@ gp_setdash(VALUE self, VALUE values, VALUE offset)
                               g_values,
                               NUM2INT(offset));
     free(g_values);
-    return rbgp_check_return_code(ret);
+    rbgp_check_return_code(ret);
+    return self;
 }
 
 static VALUE
 gp_clip(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_clip(_SELF(self)));
+    rbgp_check_return_code(gnome_print_clip(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_eoclip(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_eoclip(_SELF(self)));
+    rbgp_check_return_code(gnome_print_eoclip(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_concat(VALUE self, VALUE matrix)
 {
-    return rbgp_check_return_code(gnome_print_concat(_SELF(self),
-                                                     get_art_affine(matrix)));
+    rbgp_check_return_code(gnome_print_concat(_SELF(self),
+                                              get_art_affine(matrix)));
+    return self;
 }
 
 static VALUE
 gp_scale(VALUE self, VALUE sx, VALUE sy)
 {
-    return rbgp_check_return_code(gnome_print_scale(_SELF(self),
-                                                    NUM2DBL(sx),
-                                                    NUM2DBL(sy)));
+    rbgp_check_return_code(gnome_print_scale(_SELF(self),
+                                             NUM2DBL(sx),
+                                             NUM2DBL(sy)));
+    return self;
 }
 
 static VALUE
 gp_rotate(VALUE self, VALUE theta)
 {
-    return rbgp_check_return_code(gnome_print_rotate(_SELF(self),
-                                                     NUM2DBL(theta)));
+    rbgp_check_return_code(gnome_print_rotate(_SELF(self),
+                                              NUM2DBL(theta)));
+    return self;
 }
 
 static VALUE
 gp_translate(VALUE self, VALUE x, VALUE y)
 {
-    return rbgp_check_return_code(gnome_print_translate(_SELF(self),
-                                                        NUM2DBL(x),
-                                                        NUM2DBL(y)));
+    rbgp_check_return_code(gnome_print_translate(_SELF(self),
+                                                 NUM2DBL(x),
+                                                 NUM2DBL(y)));
+    return self;
 }
 
 static VALUE
 gp_grestore(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_grestore(_SELF(self)));
+    rbgp_check_return_code(gnome_print_grestore(_SELF(self)));
+    return self;
 }
 
 static VALUE
@@ -393,7 +418,8 @@ gp_gsave(VALUE self)
 {
     VALUE result;
   
-    result = rbgp_check_return_code(gnome_print_gsave(_SELF(self)));
+    rbgp_check_return_code(gnome_print_gsave(_SELF(self)));
+    result = self;
     if (rb_block_given_p()) {
         result = rb_ensure(rb_yield, self, gp_grestore, self);
     }
@@ -404,34 +430,51 @@ gp_gsave(VALUE self)
 static VALUE
 gp_fill(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_fill(_SELF(self)));
+    if (rb_block_given_p()) {
+        gp_newpath(self);
+        rb_yield(self);
+    }
+    rbgp_check_return_code(gnome_print_fill(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_eofill(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_eofill(_SELF(self)));
+    if (rb_block_given_p()) {
+        gp_newpath(self);
+        rb_yield(self);
+    }
+    rbgp_check_return_code(gnome_print_eofill(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_stroke(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_stroke(_SELF(self)));
+    if (rb_block_given_p()) {
+        gp_newpath(self);
+        rb_yield(self);
+    }
+    rbgp_check_return_code(gnome_print_stroke(_SELF(self)));
+    return self;
 }
 
 static VALUE
 gp_show(VALUE self, VALUE text)
 {
-    return rbgp_check_return_code(gnome_print_show(_SELF(self),
-                                                   (const guchar *)RVAL2CSTR(text)));
+    rbgp_check_return_code(gnome_print_show(_SELF(self),
+                                            (const guchar *)RVAL2CSTR(text)));
+    return self;
 }
 
 static VALUE
 gp_show_sized(VALUE self, VALUE text, VALUE bytes)
 {
-    return rbgp_check_return_code(gnome_print_show_sized(_SELF(self),
-                                                         (const guchar *)RVAL2CSTR(text),
-                                                         NUM2INT(bytes)));
+    rbgp_check_return_code(gnome_print_show_sized(_SELF(self),
+                                                  (const guchar *)RVAL2CSTR(text),
+                                                  NUM2INT(bytes)));
+    return self;
 }
 
 
@@ -439,40 +482,44 @@ static VALUE
 gp_grayimage(VALUE self, VALUE data,
              VALUE width, VALUE height, VALUE rowstride)
 {
-    return rbgp_check_return_code(gnome_print_grayimage(_SELF(self),
-                                                        (const guchar *)RVAL2CSTR(data),
-                                                        NUM2INT(width),
-                                                        NUM2INT(height),
-                                                        NUM2INT(rowstride)));
+    rbgp_check_return_code(gnome_print_grayimage(_SELF(self),
+                                                 (const guchar *)RVAL2CSTR(data),
+                                                 NUM2INT(width),
+                                                 NUM2INT(height),
+                                                 NUM2INT(rowstride)));
+    return self;
 }
 
 static VALUE
 gp_rgbimage(VALUE self, VALUE data,
             VALUE width, VALUE height, VALUE rowstride)
 {
-    return rbgp_check_return_code(gnome_print_rgbimage(_SELF(self),
-                                                       (const guchar *)RVAL2CSTR(data),
-                                                       NUM2INT(width),
-                                                       NUM2INT(height),
-                                                       NUM2INT(rowstride)));
+    rbgp_check_return_code(gnome_print_rgbimage(_SELF(self),
+                                                (const guchar *)RVAL2CSTR(data),
+                                                NUM2INT(width),
+                                                NUM2INT(height),
+                                                NUM2INT(rowstride)));
+    return self;
 }
 
 static VALUE
 gp_rgbaimage(VALUE self, VALUE data,
              VALUE width, VALUE height, VALUE rowstride)
 {
-    return rbgp_check_return_code(gnome_print_rgbaimage(_SELF(self),
-                                                        (const guchar *)RVAL2CSTR(data),
-                                                        NUM2INT(width),
-                                                        NUM2INT(height),
-                                                        NUM2INT(rowstride)));
+    rbgp_check_return_code(gnome_print_rgbaimage(_SELF(self),
+                                                 (const guchar *)RVAL2CSTR(data),
+                                                 NUM2INT(width),
+                                                 NUM2INT(height),
+                                                 NUM2INT(rowstride)));
+    return self;
 }
 
 
 static VALUE
 gp_showpage(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_showpage(_SELF(self)));
+    rbgp_check_return_code(gnome_print_showpage(_SELF(self)));
+    return self;
 }
 
 static VALUE
@@ -489,7 +536,8 @@ gp_beginpage(int argc, VALUE *argv, VALUE self)
         c_name = (guchar*)RVAL2CSTR(name);
     }
 
-    result = rbgp_check_return_code(gnome_print_beginpage(_SELF(self), c_name));
+    rbgp_check_return_code(gnome_print_beginpage(_SELF(self), c_name));
+    result = self;
     if (rb_block_given_p()) {
         rb_yield(result);
         result = gp_showpage(self);
@@ -501,38 +549,42 @@ gp_beginpage(int argc, VALUE *argv, VALUE self)
 static VALUE
 gp_end_doc(VALUE self)
 {
-    return rbgp_check_return_code(gnome_print_end_doc(_SELF(self)));
+    rbgp_check_return_code(gnome_print_end_doc(_SELF(self)));
+    return self;
 }
 
 
 static VALUE
 gp_line_stroked(VALUE self, VALUE x0, VALUE y0, VALUE x1, VALUE y1)
 {
-    return rbgp_check_return_code(gnome_print_line_stroked(_SELF(self),
-                                                           NUM2DBL(x0),
-                                                           NUM2DBL(y0),
-                                                           NUM2DBL(x1),
-                                                           NUM2DBL(y1)));
+    rbgp_check_return_code(gnome_print_line_stroked(_SELF(self),
+                                                    NUM2DBL(x0),
+                                                    NUM2DBL(y0),
+                                                    NUM2DBL(x1),
+                                                    NUM2DBL(y1)));
+    return self;
 }
 
 static VALUE
 gp_rect_stroked(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    return rbgp_check_return_code(gnome_print_rect_stroked(_SELF(self),
-                                                           NUM2DBL(x),
-                                                           NUM2DBL(y),
-                                                           NUM2DBL(width),
-                                                           NUM2DBL(height)));
+    rbgp_check_return_code(gnome_print_rect_stroked(_SELF(self),
+                                                    NUM2DBL(x),
+                                                    NUM2DBL(y),
+                                                    NUM2DBL(width),
+                                                    NUM2DBL(height)));
+    return self;
 }
 
 static VALUE
 gp_rect_filled(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    return rbgp_check_return_code(gnome_print_rect_filled(_SELF(self),
-                                                          NUM2DBL(x),
-                                                          NUM2DBL(y),
-                                                          NUM2DBL(width),
-                                                          NUM2DBL(height)));
+    rbgp_check_return_code(gnome_print_rect_filled(_SELF(self),
+                                                   NUM2DBL(x),
+                                                   NUM2DBL(y),
+                                                   NUM2DBL(width),
+                                                   NUM2DBL(height)));
+    return self;
 }
 
 

@@ -1,3 +1,11 @@
+2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/to_file.rb: Use Gnome::PrintContext#stroke and
+	Gnome::PrintContext#fill with block.
+
+	* src/rbgp-gnome-print.c: Return self instead of nil.
+	(gp_fill, gp_eofill, gp_stroke): Accept	block.
+
 2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src: Fixed indentation.

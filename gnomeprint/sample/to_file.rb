@@ -75,29 +75,32 @@ class Renderer
       label("line", 120, 200)
 
       @context.save do
-        @context.move_to(100, 100)
-        @context.line_to(170, 200)
-
-        @context.set_dash([5, 3], 0)
-        @context.line_width = 10
-        @context.stroke
+        @context.stroke do
+          @context.move_to(100, 100)
+          @context.line_to(170, 200)
+          
+          @context.set_dash([5, 3], 0)
+          @context.line_width = 10
+        end
       end
       
       @context.save do
-        @context.move_to(115, 90)
-        @context.line_to(185, 190)
-
-        @context.set_dash([5, 3], 2)
-        @context.line_width = 10
-        @context.stroke
+        @context.stroke do
+          @context.move_to(115, 90)
+          @context.line_to(185, 190)
+          
+          @context.set_dash([5, 3], 2)
+          @context.line_width = 10
+        end
       end
 
       @context.save do
-        @context.move_to(90, 100)
-        @context.line_to(100, 150)
-        @context.line_to(80, 190)
-        @context.line_to(90, 100)
-        @context.fill
+        @context.fill do
+          @context.move_to(90, 100)
+          @context.line_to(100, 150)
+          @context.line_to(80, 190)
+          @context.line_to(90, 100)
+        end
       end
       
       @context.line_width = 20
@@ -126,16 +129,19 @@ class Renderer
 
       label("arc", 70, 450)
       
-      @context.arc_to(50, 450, 10, 0, 90, true)
-      @context.stroke
-      @context.save do
-        @context.set_rgb_color(1, 0.4, 0.9)
-        @context.opacity = 0.7
-        @context.arc_to(40, 450, 10, 0, 359, false)
-        @context.fill
+      @context.stroke do
+        @context.arc_to(50, 450, 10, 0, 90, true)
       end
-      @context.arc_to(40, 450, 10, 0, 359, false)
-      @context.stroke
+      @context.save do
+        @context.fill do
+          @context.set_rgb_color(1, 0.4, 0.9)
+          @context.opacity = 0.7
+          @context.arc_to(40, 450, 10, 0, 359, false)
+        end
+      end
+      @context.stroke do
+        @context.arc_to(40, 450, 10, 0, 359, false)
+      end
     end
   end
 
@@ -203,9 +209,10 @@ class Renderer
       
       label("curve", 500, 450)
       
-      @context.move_to(500, 300)
-      @context.curve_to(470, 400, 470, 500, 520, 600)
-      @context.stroke
+      @context.stroke do
+        @context.move_to(500, 300)
+        @context.curve_to(470, 400, 470, 500, 520, 600)
+      end
     end
   end
   
