@@ -6,7 +6,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pac.rb,v 1.2 2005/10/14 06:35:42 ktou Exp $
+  $Id: pac.rb,v 1.3 2005/10/14 07:47:13 ktou Exp $
 =end
 
 require "gnomeprint2"
@@ -18,15 +18,15 @@ config = job.config
 paper_name = config[Gnome::PrintConfig::KEY_PAPER_SIZE]
 paper = Gnome::PrintPaper.get(paper_name)
 
+width = paper.height
+height = paper.width
+
 setup_config = Proc.new do
   pt = Gnome::PrintUnit.get_by_abbreviation("Pt")
   config[Gnome::PrintConfig::KEY_PAPER_SIZE] = "Custom"
-  config.set(Gnome::PrintConfig::KEY_PAPER_WIDTH, paper.height, pt)
-  config.set(Gnome::PrintConfig::KEY_PAPER_HEIGHT, paper.width, pt)
+  config.set(Gnome::PrintConfig::KEY_PAPER_WIDTH, width, pt)
+  config.set(Gnome::PrintConfig::KEY_PAPER_HEIGHT, height, pt)
 end
-
-width = paper.height
-height = paper.width
 
 white = [65535, 65535, 65535]
 black = [0, 0, 0]

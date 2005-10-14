@@ -1,5 +1,7 @@
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gp-pac.rb: Add sample GnomePrint-ly version pac.rb.
+
 	* src/lib/gnomeprint2.rb (Gnome::PrintContext#rounded_rect_filled) 
 	(Gnome::PrintContext#rounded_rect_stroked) 
 	(Gnome::PrintContext#circle_to): Added convenience API.
