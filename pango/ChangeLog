@@ -1,5 +1,7 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbpangolayoutline.c, rbpangoengine.c: 
+	Fix compiling problem on Pango-1.1. 
 	* src/lib/pango.rb: Added Pango.cairo_available?.
 	* sample/glyphstring.rb: Added.
 	* src/rbpangofontmap.c: Removed the definition of PangoCairoFontMap.

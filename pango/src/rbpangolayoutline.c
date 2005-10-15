@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 18:30:05 $
+  $Date: 2005/10/15 04:32:01 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -150,6 +150,7 @@ layout_line_set_length(self, val)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,2,0)
 static VALUE
 layout_line_get_runs(self)
     VALUE self;
@@ -168,6 +169,7 @@ layout_line_get_runs(self)
     }
     return ary;
 }
+#endif
 
 static VALUE
 layout_line_set_runs(self, ary)
@@ -239,7 +241,9 @@ Init_pango_layout_line()
     rb_define_method(pLine, "set_start_index", layout_line_set_start_index, 1); 
     rb_define_method(pLine, "length", layout_line_get_length, 0); 
     rb_define_method(pLine, "set_length", layout_line_set_length, 1); 
+#if PANGO_CHECK_VERSION(1,2,0)
     rb_define_method(pLine, "runs", layout_line_get_runs, 0); 
+#endif
     rb_define_method(pLine, "set_runs", layout_line_set_runs, 1); 
 
 #if PANGO_CHECK_VERSION(1,4,0)

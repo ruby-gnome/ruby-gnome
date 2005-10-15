@@ -4,12 +4,14 @@
   rbpangoengine.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2005/10/15 04:32:01 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
+
+#ifdef PANGO_TYPE_ENGINE
 
 #define _SELF(self) (PANGO_ENGINE(RVAL2GOBJ(self)))
 
@@ -43,9 +45,13 @@ void        script_engine_init              (GTypeModule *module);
 void        script_engine_exit              (void);
 PangoEngine* script_engine_create           (const char *id);
 */
+
+#endif
+
 void
 Init_pango_engine()
 {
+#ifdef PANGO_TYPE_ENGINE
     G_DEF_CLASS(PANGO_TYPE_ENGINE, "Engine", mPango);
 
 /* FIXME
@@ -54,5 +60,6 @@ Init_pango_engine()
 */
     G_DEF_CLASS(PANGO_TYPE_ENGINE_LANG, "EngineLang", mPango);
     G_DEF_CLASS(PANGO_TYPE_ENGINE_SHAPE, "EngineShape", mPango);
+#endif
 }
 
