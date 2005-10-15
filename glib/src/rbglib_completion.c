@@ -4,7 +4,7 @@
   rbglib_completion.c -
 
   $Author: mutoh $
-  $Date: 2005/10/14 19:10:08 $
+  $Date: 2005/10/15 04:31:38 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -117,7 +117,11 @@ comp_remove_items(self, items)
         VALUE data = RARRAY(items)->ptr[0];
         VALUE item = rb_assoc_new(self, data);
         g_list_append(list, (gpointer)item);
+#if RUBY_VERSION_CODE < 180
+        rb_funcall(items_internal, rb_intern("delete"), 1, data);
+#else
         rb_hash_delete(items_internal, data);
+#endif
     }
     g_completion_remove_items(_SELF(self), list);
 
@@ -153,7 +157,7 @@ comp_complete(self, prefix)
                                             &new_prefix);
 #else
     GList* list = g_completion_complete(_SELF(self),
-                                        (const gchar*)RVAL2CSTR(prefix),
+                                        RVAL2CSTR(prefix),
                                         &new_prefix);
 #endif
     while (list) {

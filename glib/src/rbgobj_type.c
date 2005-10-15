@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: mutoh $
-  $Date: 2005/09/18 13:45:23 $
+  $Date: 2005/10/15 04:31:38 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -748,7 +748,7 @@ interface_s_append_features(self, klass)
     return rb_call_super(1, &klass);
 }
 
-
+#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 interface_install_property(self, pspec_obj)
     VALUE self, pspec_obj;
@@ -831,6 +831,7 @@ interface_properties(int argc, VALUE* argv, VALUE self)
     }
     return ary;
 }
+#endif
 
 static void
 rbgobj_init_interface(interf)
@@ -850,9 +851,11 @@ Init_interface()
     VALUE iface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
 
     rb_define_method(mMetaInterface, "append_features", interface_s_append_features, 1);
+#if GLIB_CHECK_VERSION(2,4,0)
     rb_define_method(mMetaInterface, "install_property", interface_install_property, 1);
     rb_define_method(mMetaInterface, "property", interface_property, 1);
     rb_define_method(mMetaInterface, "properties", interface_properties, -1);
+#endif
 
     rb_extend_object(iface, mMetaInterface);
     rb_include_module(iface, mMetaInterface);

@@ -1,5 +1,8 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgobj_type.c, rbglib_timer.c, rbglib_completion.c,
+	rbgobject.c, rbgobj_type.c, rbglib_messages.c: 
+	Fixed a compilation errors/warnings under GTK+-2.0/Ruby-1.6. 
 	* src/rbglib.c, src/rbglib_timer.c: Added GLib::Timer.
 	* sample/timer.rb: Added.
 	* src/rbglib_completion.c: Added GLib::Completion.

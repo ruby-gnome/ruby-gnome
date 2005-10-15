@@ -4,7 +4,7 @@
   rbglib_timer.c -
 
   $Author: mutoh $
-  $Date: 2005/10/14 19:48:42 $
+  $Date: 2005/10/15 04:31:38 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -115,7 +115,9 @@ Init_glib_timer()
     rb_define_method(timer, "initialize", timer_initialize, 0);
     rb_define_method(timer, "start", timer_start, 0);
     rb_define_method(timer, "stop", timer_stop, 0);
+#if GLIB_CHECK_VERSION(2,4,0)
     rb_define_method(timer, "continue", timer_continue, 0);
+#endif
     rb_define_method(timer, "elapsed", timer_elapsed, 0);
     rb_define_method(timer, "reset", timer_reset, 0);
 }

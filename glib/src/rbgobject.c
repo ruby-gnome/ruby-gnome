@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/09/18 13:45:23 $
+  $Date: 2005/10/15 04:31:38 $
 
   Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -101,9 +101,12 @@ rbgobj_weak_notify(data, where_the_object_was)
     GObject* where_the_object_was;
 {
     gobj_holder* holder = data;
-
+#if RUBY_VERSION_CODE < 180
+    rb_funcall(gobj_table, rb_intern("delete"), 1, holder->self);
+#else
     /* Remove the reference from Ruby side. It will be GCed by Ruby GC. */
     rb_hash_delete(gobj_table, holder->self);
+#endif
 
     if (holder->cinfo && holder->cinfo->free)
         holder->cinfo->free(holder->gobj); 
