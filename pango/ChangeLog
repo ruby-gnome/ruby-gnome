@@ -1,3 +1,8 @@
+2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/pango.rb: Rewrited a code which creates convinient constants 
+	to Pango module to avoid to make unexpect values and works Ruby-1.6.
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/pango.rb: Fixed to work under Ruby-1.6.
