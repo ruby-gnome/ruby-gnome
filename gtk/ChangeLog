@@ -1,3 +1,8 @@
+2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkiconview.c: Renameed Gtk::IconView#get_dest_item_at_pos -> 
+	#get_dest_item, #get_item_at_pos -> #get_item.
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkevent.c: Fixed a compiling error on GTK+-2.0. 

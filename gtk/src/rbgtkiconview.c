@@ -4,7 +4,7 @@
   rbgtkiconview.c -
 
   $Author: mutoh $
-  $Date: 2005/09/18 16:24:12 $
+  $Date: 2005/10/15 18:31:01 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -331,11 +331,9 @@ Init_gtk_iconview()
     rb_define_method(iview, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
     rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
     rb_define_method(iview, "cursor", iview_cursor, 0);
-    rb_define_method(iview, "get_dest_item_at_pos", iview_get_dest_item_at_pos, 2); 
-    rb_define_alias(iview, "get_dest_item", "get_dest_item_at_pos");
+    rb_define_method(iview, "get_dest_item", iview_get_dest_item_at_pos, 2); 
     rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
-    rb_define_method(iview, "get_item_at_pos", iview_get_item_at_pos, 2);
-    rb_define_alias(iview, "get_item", "get_item_at_pos");
+    rb_define_method(iview, "get_item", iview_get_item_at_pos, 2);
     rb_define_method(iview, "visible_range", iview_visible_range, 0);
     rb_define_method(iview, "scroll_to_path", iview_scroll_to_path, 4);
     rb_define_method(iview, "set_cursor", iview_set_cursor, 3);
