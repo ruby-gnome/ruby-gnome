@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-trigger.c,v 1.1 2005/09/24 18:02:43 mutoh Exp $ */
+/* $Id: rbgnome-trigger.c,v 1.2 2005/10/15 07:35:08 mutoh Exp $ */
 
 /* Gnome::Trigger class for Ruby/GNOME2
  * Copyright (C) 2005  Ruby-GNOME2 Project Team
@@ -130,7 +130,11 @@ static VALUE
 trig_s_set_action_func(self)
     VALUE self;
 {
+#if RUBY_VERSION_CODE < 180
+    rb_cvar_set(cTrig, id_action, G_BLOCK_PROC()); 
+#else
     rb_cvar_set(cTrig, id_action, G_BLOCK_PROC(), 0); 
+#endif
     return self;
 }
 
@@ -194,8 +198,11 @@ Init_gnome_trigger(mGnome)
     id_call = rb_intern("call");
     id_action = rb_intern("__action_proc__");
 
+#if RUBY_VERSION_CODE < 180
+    rb_cvar_set(cTrig, id_action, Qnil);
+#else
     rb_cvar_set(cTrig, id_action, Qnil, 0);
-
+#endif
     rb_define_method(cTrig, "initialize", trig_initialize, -1);
     rb_define_singleton_method(cTrig, "set_action_func", trig_s_set_action_func, 0);
 

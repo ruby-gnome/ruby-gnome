@@ -1,3 +1,7 @@
+2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgnome-trigger.c: Fixed compiling error on Ruby-1.6. 
+
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/makeversion.rb: Removed. Use make_version_header() of 
