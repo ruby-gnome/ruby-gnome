@@ -1,3 +1,7 @@
+2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Increment version information. 
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_type.c, rbglib_timer.c, rbglib_completion.c,
