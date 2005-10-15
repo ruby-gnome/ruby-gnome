@@ -4,13 +4,12 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cairo.rb,v 1.1 2005/10/14 02:05:04 ktou Exp $
+  $Id: pango_cairo.rb,v 1.1 2005/10/15 07:57:52 mutoh Exp $
 =end
 
 require 'pango'
 
-if !(defined?(Cairo::Context) and
-       Cairo::Context.instance_methods.include?("create_pango_layout"))
+unless Pango.cairo_available?
   STDERR.puts "This sample requires Pango 1.0.0 or later and cairo support"
   exit 1
 end

@@ -1,5 +1,7 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/lib/pango.rb: Fixed to work under Ruby-1.6.
+	* sample/pango_cairo.rb: Rename cairo.rb to pango_cairo.rb.
 	* src/rbpangolayoutline.c, rbpangoengine.c: 
 	Fix compiling problem on Pango-1.1. 
 	* src/lib/pango.rb: Added Pango.cairo_available?.

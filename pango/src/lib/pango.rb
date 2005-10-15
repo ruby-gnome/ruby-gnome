@@ -47,7 +47,9 @@ module Pango
           else
             new_name = "#{prefix}#{sub_name}"
           end
-          const_set(new_name, const.const_get(sub_name))
+	  unless defined?(new_name)
+	    const_set(new_name, const.const_get(sub_name))
+	  end
         end
       end
     end
