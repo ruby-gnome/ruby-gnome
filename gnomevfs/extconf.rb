@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GConf extention library
+extconf.rb for Ruby/GnomeVFS extention library
 =end
 
 PACKAGE_NAME = "gnomevfs"
@@ -15,6 +15,7 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package(PACKAGE_ID) or exit 1
 PKGConfig.have_package('gnome-vfs-module-2.0') or exit 1
+PKGConfig.have_package("gobject-2.0") or exit 1
 
 have_func("rb_exec_recursive")
 

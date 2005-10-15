@@ -1,3 +1,8 @@
+2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Cygwin support. [bug #1315334]
+	By Yaakov Selkowitz.
+
 2005-10-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/rbgconf.c, src/rbgconf.h: 
@@ -135,7 +140,7 @@
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
 	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2005/10/08 18:15:17 $ macros.
+	and $Date: 2005/10/15 03:07:27 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

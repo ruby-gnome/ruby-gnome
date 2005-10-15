@@ -21,6 +21,8 @@ PKGConfig.have_package(PACKAGE_ID) or exit 1
     end
 end
 
+PKGConfig.have_package("gobject-2.0") or exit 1
+
 setup_win32(PACKAGE_NAME)
 
 add_depend_package("glib2", "glib/src", TOPDIR)
