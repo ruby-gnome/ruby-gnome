@@ -1,3 +1,149 @@
+Ruby-GNOME2-0.14.0 (2005-10-16)
+
+  * Ruby/GLib 
+      - Fix segfault related on GC. [Masao Mutoh]
+      - Support Ruby-GetText-Pacakge(Include pseudo GetText module). [Masao Mutoh]
+      - Add and completed: [Masao Mutoh]
+        Glib::Shell, GLib::Completion, GLib::Timer, sample/shell.rb, completion.rb, timer.rb.
+      - Add some methods, improved, fixed bugs: [Pascal Terjan, Sven Herzberg, Masao Mutoh]
+        GLib, GLib::Object, GLib::MetaInterface, GLib::Enum, GLib::Flags, PKGConfig, 
+        extconf.rb, mkmf-gnome2.rb 
+
+  * Ruby/ATK
+      - Support ATK-1.10. [Masao Mutoh]
+      - Add Atk::BUILD_VERSION. [Masao Mutoh]
+      - Add some methods, improved, fixed bugs: [Masao Mutoh]
+        Atk, Atk::Relation, Atk::RelationSet, Atk::StreamableContent, Atk::Text::Attribute, 
+        Atk::Util
+      - Add and completed: [Masao Mutoh]
+        Atk::Util::KeyEventType
+
+  * Ruby/Pango
+      - Support Pango-1.10 and cairo [Kouhei Sutou, Masao Mutoh]
+      - Add Pango::BUILD_VERSION. [Masao Mutoh]
+      - Add some methods, improved, fixed bugs: [Kouhei Sutou, Masao Mutoh]
+        Pango, Pango::Layout, Pango::LayoutLine, Pango::LayoutIter, Pango::Language, 
+        Pango::Font, Pango::GlyphItem, Pango::GlyphString, Pango::Context, Pango::Analysis, 
+        Pango::Item 
+      - Add and completed: [Masao Mutoh]
+        Pango::ScriptIter, Pango::Script, Pango::(.*)FontMap, Pango::(.*)Face,
+        Pango::(.*)Family, Pango::XFont, Pango::FT2Font,
+        sample/script.rb, break.rb, item.rb, layout.rb
+      - Add classes: [Kouhei Sutou, Masao Mutoh]
+        Pango::Engine, Pango::EngineShape, Pango::EngineLang
+        Cairo::Context, Pango::CairoFcFont, Pango::CairoFont, Pango::CairoWin32Font, 
+        Pango::CairoFontMap
+      - Rename class name: [Masao Mutoh]
+        Pango::FontSet -> Pango::Fontset, Pango::FontSetSimple -> Pango::FontsetSimple.
+
+  * Ruby/GdkPixbuf
+      - Support GTK+-2.8. [Guillaume Cottenceau]
+      - Add some methods, improved, fixed bugs: [Kouhei Sutou, Guillaume Cottenceau]
+        Gdk::Pixbuf
+      - Add and completed: [Guillaume Cottenceau]
+        Gdk::PixbufSimpleAnim, sample/simpleanim.rb
+
+  * Ruby/GTK
+      - Support GTK+-2.8. [Guillaume Cottenceau, Masao Mutoh]
+      - Support cairo. [Kouhei Sutou, Masao Mutoh]
+      - Add Gtk::BUILD_VERSION. [Masao Mutoh]
+      - Add some methods, improve, fix bugs: [Guillaume Cottenceau, Masao Mutoh]
+        Gdk, Gdk::Drawable, Gdk::Display, Gdk::Drawable, Gdk::Cursor, Gdk::Window, Gdk::Screen, 
+        Gtk::Action, Gtk::Dialog, Gtk::Drag, Gtk::EntryCompletion, Gtk::FileChooser, 
+        Gtk::IconView, Gtk::Image, Gtk::Menubar, Gtk::MenuShell, Gtk::ScrolledWindow, 
+        Gtk::SizeGroup, Gtk::Stock, Gtk::TextBuffer, Gtk::TextIter, Gtk::ToolButton, 
+        Gtk::TreeRowReference, Gtk::TreeView, Gtk::TreeViewColumn, Gtk::Window, 
+        sample/gtk-demo/*.rb
+      - Add: [Guillaume Cottenceau, Kouhei Sutou]
+        Cairo::Context, Gdk::EventGrabBroken, sample/gtk-demo/cairo_*.rb, sample/misc/rgtk+cairo.rb
+        
+
+  * Ruby/GNOME [Masao Mutoh]
+      - Support libgnome/libgnomeui-2.12. 
+      - Add Gnome::BUILD_VERSION.
+      - Add some methods, improve, fix bugs:
+        Gnome, Gnome::Util, Gnome::URL, Gnome::Help, Gnome::App, Gnome::Client
+      - Add: Gnome::GConf, Gnome::Sound, Gnome::Trigger
+        sample/gnome-trigger.rb, sample/gnome-sound.rb
+
+  * Ruby/GnomeCanvas
+      - Support libgnomecanvas-2.12. [Pascal Terjan, Masao Mutoh]
+      - Add Gnome::Canvas::BUILD_VERSION. [Masao Mutoh]
+      - Add some methods, improve, fix bugs: [Kouhei Sutoh, Pascal Terjan, Masao Mutoh]
+        Gnome::CanvasItem, Gnome::CanvasPathDef, Gnome::Canvas.
+      - Add: Gnome::CanvasBuf. [Masao Mutoh]
+
+  * Ruby/Libglade [Masao Mutoh]
+      - Support libglade-2.12.
+      - Add GladeXML::BUILD_VERSION. 
+      - Add some methods, improve, fix bugs:
+        bin/ruby-glade-create-template, sample/l10n_*.rb, GladeXML
+
+  * Ruby/Libart [Masao Mutoh]
+      - Add Art::BUILD_VERSION.
+      - Add: Art::Uta.
+
+  * Ruby/GConf
+      - Support Cygwin. [Yaakov Selkowitz]
+      - Add GConf::BUILD_VERSION. [Masao Mutoh]
+
+  * Ruby/GStreamer 
+      - Support on Ruby-1.9. [Laurent Sansonetti]
+      - Add Gst::BUILD_VERSION. [Masao Mutoh]
+      - Fix bugs, improve, add some methods: [Masao Mutoh]
+        Gst::Element 
+
+  * Ruby/GnomeVFS 
+      - Support Cygwin. [Yaakov Selkowitz] 
+      - Add GnomeVFS::BUILD_VERSION. [Masao Mutoh]
+      - Fix bugs, improve, add some methods: [Masao Mutoh]
+        GnomeVFS
+
+  * Ruby/GtkHtml2 [Masao Mutoh]
+      - Add Gtk::HtmlContext::BUILD_VERSION.
+
+  * Ruby/GtkGLExt
+      - Added Gtk::GL::BUILD_VERSION. [Masao Mutoh]
+      - Fix bugs, improve, add some methods: [Kouhei Sutou]
+        Gdk::Pixmap
+
+  * Ruby/Libgda
+      - Support Cygwin. [Yaakov Selkowitz] 
+      - Add Gda::BUILD_VERSION. [Masao Mutoh]
+
+  * Ruby/PanelApplet [Masao Mutoh]
+      - Add PanelApplet::BUILD_VERSION. 
+
+  * Ruby/GtkSourceView [Masao Mutoh]
+      - Support GtkSourcView-1.4.
+      - Add Gtk::SourceView::BUILD_VERSION. 
+      - Fix bugs, Improve, Add some methods: 
+         Gtk::SourceView, Gtk::SourceBuffer, Gtk::SourceTag, Gtk::SourceTagStyleMask
+      - Add and completed:
+        Gtk::SourceStyleScheme, Gtk::SourcePrintJob
+
+  * Ruby/GnomePrint [Kouhei Sutou]
+      - Support libgnomeprint-2.12.
+      - Add Gnome::Print::BUILD_VERSION
+      - Fix bugs, Improve, Add some methods.
+        Gnome::PrintContext
+      - Add: sample/gp-pac.rb
+
+  * Ruby/GnomePrintUI [Kouhei Sutou] 
+      - Support libgnomeprintui-2.12.
+      - Add Gnome::PrintUI::BUILD_VERSION
+      - Add: Gnome::FontSelection, Gnome::FontPreview, Gnome::FontDialog, 
+        Gnome::PrintContentSelector
+
+  * Ruby/RSVG [Kouhei Sutou] 
+      - Support rsvg-2.12.
+      - Add RSVG::BUILD_VERSION
+
+  * Ruby/GtkMozEmbed [NEW]
+      - Merged. [Mirko Maischberber]
+      - Add Gtk::MozEmbed::BUILD_VERSION [Masao Mutoh]
+
+
 Ruby-GNOME2-0.13.0 (2005-07-31)
 
   * Ruby/GLib 
