@@ -4,7 +4,7 @@
   rbgnomecanvas.h -
 
   $Author: mutoh $
-  $Date: 2005/10/01 19:44:15 $
+  $Date: 2005/10/15 09:30:53 $
 
   Copyright (C) 2004,2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002 KUBO Takehiro 
@@ -29,7 +29,7 @@ extern GType rbgno_canvas_path_def_get_type(void);
 
 extern GType gnome_canvas_buf_get_type(void);
 
-#ifndef GNOME_TYPE_CANVAS_PATH_DEF
+#ifndef HAVE_GNOME_CANVAS_PATH_DEF_GET_TYPE
 #define GNOME_TYPE_CANVAS_PATH_DEF (rbgno_canvas_path_def_get_type())
 #endif
 

@@ -21,6 +21,7 @@ PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_func('gnome_canvas_set_center_scroll_region')
+have_func('gnome_canvas_path_def_get_type')
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)

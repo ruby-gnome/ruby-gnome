@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.13 2005/10/01 19:44:15 mutoh Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.14 2005/10/15 09:30:53 mutoh Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -25,15 +25,15 @@
 
 static VALUE gnoCanvasPathDef;
 
-#ifndef GNOME_TYPE_CANVAS_PATH_DEF
+#ifndef HAVE_GNOME_CANVAS_PATH_DEF_GET_TYPE
 /* this is for libgnomecanvas-2.0 < 2.12 */
 static GnomeCanvasPathDef *
 rbgno_canvas_path_def_copy(path_def)
     GnomeCanvasPathDef *path_def;
 {
-	if (path_def)
-		gnome_canvas_path_def_ref(path_def);
-	return path_def;
+  if (path_def)
+  	gnome_canvas_path_def_ref(path_def);
+  return path_def;
 }
 
 GType
