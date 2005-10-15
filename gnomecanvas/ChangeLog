@@ -1,7 +1,7 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgnome-canvas-path-def.c: Fixed compiling error on
-	libgnomecanvas-2.10.
+	* src/rbgnome-canvas-path-def.c: Fixed a compiling error on
+	libgnomecanvas-2.10 and fixed segfault.
 
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
