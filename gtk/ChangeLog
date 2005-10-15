@@ -1,5 +1,6 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgdkevent.c: Fixed a compiling error on GTK+-2.0. 
 	* src/lib/gtk2.rb: Added Gdk.cairo_available?
 	* sample/gtk-demo/common.rb: Follow above change.
 

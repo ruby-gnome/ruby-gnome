@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: ggc $
-  $Date: 2005/09/20 20:02:26 $
+  $Author: mutoh $
+  $Date: 2005/10/15 07:28:02 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -227,12 +227,22 @@ gdkevent ## type ## _initialize(argc, argv, self)\
     G_INITIALIZE(self, gdk_event_new(gtype));\
     return Qnil;\
 }
+#else
+#define GDKEVENT_INIT(type, default_gtype) \
+static VALUE \
+gdkevent ## type ## _initialize(argc, argv, self)\
+    int argc;\
+    VALUE *argv;\
+    VALUE self;\
+{\
+    rb_raise(rb_eRuntimeError, "Gdk::Event.new is not supported in this environment.");\
+    return Qnil;\
+}
+#endif
+
 #define DEFINE_INIT(event, type)                                         \
   rb_define_method(event, "initialize", gdkevent ## type ## _initialize, -1);
-#else
-#define GDKEVENT_INIT(type, default_gtype) {}
-#define DEFINE_INIT(event, type) {}
-#endif
+
 /***********************************************/
 
 /* GdkEvent Singleton Methods */
