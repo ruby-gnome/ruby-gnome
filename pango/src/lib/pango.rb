@@ -8,6 +8,12 @@ require 'pango.so'
 
 module Pango
   LOG_DOMAIN = "Pango"
+
+  def cairo_available?
+    Pango.constants.include?("CairoFontMap")
+  end
+  module_function :cairo_available?
+
   class AttrList
     def each(text = nil)
       iter = iterator
