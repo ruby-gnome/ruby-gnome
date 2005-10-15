@@ -1,3 +1,7 @@
+2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Fixed compiling error when Ruby/GTK2 is not installed.
+
 2005-10-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src: Fixed indentation.

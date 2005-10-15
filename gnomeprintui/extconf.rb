@@ -110,6 +110,7 @@ PKGConfig.have_package(modname) or exit 1
 setup_win32(PACKAGE_NAME)
 
 add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
 add_depend_package("libart2", "libart/src", TOPDIR)
 add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 
