@@ -1,3 +1,8 @@
+2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gtk2.rb: Added Gdk.cairo_available?
+	* sample/gtk-demo/common.rb: Follow above change.
+
 2005-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gtk-demo/common.rb: Ctrl+q quit the sample window.

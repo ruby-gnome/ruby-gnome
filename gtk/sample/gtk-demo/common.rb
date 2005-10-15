@@ -4,7 +4,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: common.rb,v 1.8 2005/10/13 16:15:58 ktou Exp $
+  $Id: common.rb,v 1.9 2005/10/15 03:41:36 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -53,7 +53,7 @@ module Demo
     def initialize(title=nil)
       super
       
-      unless cairo_available?
+      unless Gdk.cairo_available?
         add_cairo_require_label
         return
       end
@@ -76,10 +76,6 @@ module Demo
       end
     end
     
-    def cairo_available?
-      Gdk::Drawable.instance_methods.include?("create_cairo_context")
-    end
-
     def add_cairo_require_label
       message = "This sample requires GTK+ 2.8.0 or later and cairo support"
       add(Gtk::Label.new(message))

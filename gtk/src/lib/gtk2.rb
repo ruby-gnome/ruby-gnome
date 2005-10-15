@@ -10,6 +10,11 @@ require 'gdk_pixbuf2'
 
 module Gdk
   LOG_DOMAIN = "Gdk"
+
+  module_function
+  def cairo_available?
+    Gdk::Drawable.instance_methods.include?("create_cairo_context")
+  end
 end
 
 module Gtk
