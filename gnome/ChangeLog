@@ -1,6 +1,7 @@
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-trigger.c: Fixed compiling error on Ruby-1.6. 
+	* src/rbgnome.h: ditto.
 
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
