@@ -1,7 +1,7 @@
 # Copyright (c) 2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: cairo-image.rb,v 1.1 2005/10/12 05:38:30 ktou Exp $
+# $Id: cairo-image.rb,v 1.2 2005/10/16 12:07:32 mutoh Exp $
 =begin
 = cairo/Image
 
@@ -19,7 +19,7 @@ module Demo
     def draw(cr)
       cr.save do
         loader = Gdk::PixbufLoader.new
-        File.open("background.jpg") do |f|
+        File.open("background.jpg", "rb") do |f|
           loader.last_write(f.read)
         end
         pixbuf = loader.pixbuf

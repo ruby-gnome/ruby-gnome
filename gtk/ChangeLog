@@ -1,5 +1,7 @@
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/gtk-demo/cairo-image.rb, cairo-clip-image.rb: 
+	Works on Win32.
 	* README: Added cairo/rcairo information.
 	* src/rbgtkiconview.c: Renameed Gtk::IconView#get_dest_item_at_pos -> 
 	#get_dest_item, #get_item_at_pos -> #get_item.

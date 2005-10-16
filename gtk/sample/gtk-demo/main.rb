@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.16 2005/10/13 00:04:40 ktou Exp $
+  $Id: main.rb,v 1.17 2005/10/16 12:07:32 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -57,7 +57,7 @@ module Demo
 			   Gtk::Label.new('_Source', true))
 
       @info_buffer.create_tag('title',
-                             {'font' => 'Sans-Serif 18'})
+                             {'font' => 'Sans 18'})
 
       @source_buffer.create_tag('comment',
                                {'foreground' => 'red'})
