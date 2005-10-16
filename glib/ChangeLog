@@ -1,6 +1,7 @@
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: Increment version information. 
+	* src/rbglib_mainloop.c: Fixed to compile on Win32.
 
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 

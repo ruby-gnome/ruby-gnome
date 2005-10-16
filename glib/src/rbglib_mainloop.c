@@ -4,12 +4,13 @@
   rbglib_mainloop.c -
 
   $Author: mutoh $
-  $Date: 2005/10/06 18:35:42 $
+  $Date: 2005/10/16 11:09:42 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+#include <rubysig.h>
 
 /*****************************************/
 GType
@@ -106,7 +107,7 @@ idle(gpointer data)
     CHECK_INTS;
     if (!rb_thread_critical) rb_thread_wait_for(wait);
 
-    return true;
+    return TRUE;
 }
 
 static void
