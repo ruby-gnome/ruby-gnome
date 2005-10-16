@@ -1,5 +1,5 @@
 Ruby/Pango
-===============
+==========
 Ruby/Pango is a Ruby binding of pango-1.x.
 
 Requirements
@@ -7,12 +7,15 @@ Requirements
    Ruby: http://www.ruby-lang.org/
    GLib: http://www.gtk.org/
    Pango: http://www.pango.org/
+   cairo/rcairo: http://cairographics.org/ (optional)
    Ruby/GLib2: http://ruby-gnome2.sourceforge.net/
 
 Install
 -------
-   0. install ruby-1.6.x or later, GLib, Pango, Ruby/GLib2 and Ruby/GTK2.
+   0. install ruby-1.6.x or later, GLib, Pango, Ruby/GLib2, Ruby/GTK2
+      (and cairo/rcairo).
    1. ruby extconf.rb
+      (To use rcairo on Win32, set CAIRO_PATH as a environment variable first)
    2. make
    3. su
    4. make install

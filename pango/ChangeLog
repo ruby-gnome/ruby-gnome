@@ -1,5 +1,6 @@
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* README: Added cairo/rcairo information.
 	* src/lib/pango.rb: Rewrited a code which creates convinient constants 
 	to Pango module to avoid to make unexpect values and works Ruby-1.6.
 
