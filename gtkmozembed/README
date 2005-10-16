@@ -13,7 +13,7 @@ Requirements
 Install
 -------
    0. install ruby-1.{8|9}.x, GTK+, mozilla/firefox, 
-      Ruby/GLib2, Ruby/GTK2.
+      Ruby/GLib2, Ruby/Pango, Ruby/GTK2.
    1. ruby extconf.rb
    2. make
    3. su
@@ -43,4 +43,4 @@ Copying
 
 Project Website
 ---------------
-   http://ruby-gnome2.sourceforge.net/
+   http://ruby-gnome2.sourceforge.jp/
