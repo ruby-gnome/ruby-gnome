@@ -23,6 +23,7 @@ Release packages
     - Ruby/GStreamer     - GStreamer 0.8.x or later
     - Ruby/GtkHtml2      - GtkHtml2 2.0.x or later
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
+    - Ruby/GtkMozEmbed   - GtkMozEmbed(Mozilla 1.7.x or FireFox-1.0.x or later)
     - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
     - Ruby/Libart2       - libart_lgpl 2.3.12 or later
     - Ruby/Libgda        - libgda 1.0.3 or later
@@ -59,6 +60,10 @@ extconf.rb options
    --strict    : if some libraries fail to compile/install, "make"
                  command returns 1(exit 1)
 
+Environment Variables
+---------------------
+   CAIRO_PATH  : rcairo path (for Win32).
+
 Dependencies
 ------------
    You should install a sub-binding with its dependencies.
@@ -67,9 +72,10 @@ Dependencies
       Ruby/GLib          none.
       Ruby/Libart        depends on Ruby/GLib(Use mkmf-gnome2.rb only).
       Ruby/ATK           depends on Ruby/GLib.
-      Ruby/Pango         depends on Ruby/GLib.
+      Ruby/Pango         depends on Ruby/GLib, rcairo(optional).
       Ruby/GdkPixbuf     depends on Ruby/GLib.
-      Ruby/GTK           depends on Ruby/GLib, Ruby/ATK, Ruby/Pango, Ruby/GdkPixbuf
+      Ruby/GTK           depends on Ruby/GLib, Ruby/ATK, Ruby/Pango, 
+                                    Ruby/GdkPixbuf, rcairo(optional)
       Ruby/GConf         depends on Ruby/GLib.
       Ruby/GNOME         depends on Ruby/GnomeCanvas.
       Ruby/GnomeCanvas   depends on Ruby/GTK, Ruby/Libart.
@@ -81,7 +87,7 @@ Dependencies
       Ruby/GtkGLExt      depends on Ruby/GTK, rbogl.
       Ruby/GtkSourceView depends on Ruby/GTK.
       Ruby/Libgda        depends on Ruby/GLib.
-      Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional). REXML(optional)
+      Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
       Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
 
