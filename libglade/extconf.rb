@@ -25,8 +25,9 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 if /mswin32/ =~ RUBY_PLATFORM
-  $libs.gsub!(/ xml2.lib /, " libxml2.lib ")
-  $libs.gsub!(/ z.lib /, " libz.lib ")
+# gladewin32 has been changed?
+#  $libs.gsub!(/ xml2.lib /, " libxml2.lib ")
+#  $libs.gsub!(/ z.lib /, " libz.lib ")
   #FIXME
   $CFLAGS += " -DHAVE_BINDTEXTDOMAIN -DHAVE_BIND_TEXTDOMAIN_CODESET "
 end

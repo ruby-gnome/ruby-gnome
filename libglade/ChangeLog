@@ -1,3 +1,8 @@
+2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Works on Win32. (gladewin32 has been changed the 
+	library names(xml2.lib, z.lib)?)
+
 2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c, extconf.rb: Added GladeXML::BUILD_VERSION. 
