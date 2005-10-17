@@ -6,7 +6,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gp-pac.rb,v 1.1 2005/10/14 07:47:13 ktou Exp $
+  $Id: gp-pac.rb,v 1.2 2005/10/17 12:39:57 ktou Exp $
 =end
 
 require "gnomeprint2"
@@ -76,17 +76,9 @@ context.begin_page("1") do
     context.translate(body_x, body_y)
     context.set_rgb_color(*yellow)
     context.scale(body_width, body_height)
-    context.circle_to(0, 0, 0.5)
+    context.arc_to(0, 0, 0.5, 30, 330, false)
+    context.line_to(0, 0)
     context.fill
-
-    # Mouth
-    context.set_rgb_color(*black)
-    context.move_to(0, 0)
-    context.arc_to(0, 0, 0.5, -30, 30, false)
-    context.fill
-    context.move_to(0, 0)
-    context.arc_to(0, 0, 0.5, -30, 30, false)
-    context.stroke
   end
 
   # Dot
