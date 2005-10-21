@@ -1,3 +1,8 @@
+2005-10-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/misc/drag-move.rb: Added new sample for moving widget by
+	drag.
+
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/gtk-demo/cairo-image.rb, cairo-clip-image.rb, main.rb: 
