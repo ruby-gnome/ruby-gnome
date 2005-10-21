@@ -1,5 +1,8 @@
 2005-10-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/misc/mouse-gesture.rb: Added new sample for implementing
+	mouse gesture.
+
 	* sample/misc/drag-move.rb: Added new sample for moving widget by
 	drag.
 
