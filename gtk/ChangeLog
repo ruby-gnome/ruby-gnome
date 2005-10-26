@@ -1,3 +1,7 @@
+2005-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/iconview.rb: Added.
+
 2005-10-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/misc/mouse-gesture.rb: Added new sample for implementing
