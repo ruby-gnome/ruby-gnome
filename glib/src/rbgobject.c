@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/10/15 04:31:38 $
+  $Date: 2005/11/03 11:53:16 $
 
   Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -26,7 +26,8 @@ static GQuark RUBY_GOBJECT_OBJ_KEY;
 static ID id_relatives;
 static ID id_delete;
 static ID id_module_eval;
-static VALUE gobj_table;
+
+ID rbgobj_id_children;
 
 /**********************************************************************/
 
@@ -101,17 +102,13 @@ rbgobj_weak_notify(data, where_the_object_was)
     GObject* where_the_object_was;
 {
     gobj_holder* holder = data;
-#if RUBY_VERSION_CODE < 180
-    rb_funcall(gobj_table, rb_intern("delete"), 1, holder->self);
-#else
-    /* Remove the reference from Ruby side. It will be GCed by Ruby GC. */
-    rb_hash_delete(gobj_table, holder->self);
-#endif
 
     if (holder->cinfo && holder->cinfo->free)
         holder->cinfo->free(holder->gobj); 
     if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
         rb_ivar_set(holder->self, id_relatives, Qnil);
+    if (RTEST(rb_ivar_defined(holder->self, rbgobj_id_children)))
+        rb_ivar_set(holder->self, rbgobj_id_children, Qnil);
     /*
       XXX. We can't unref() here.
       Because ref_counted have been set to zero in g_object_real_dispose().
@@ -122,16 +119,7 @@ rbgobj_weak_notify(data, where_the_object_was)
 #endif
     holder->destroyed = TRUE;
 }
-/*
-static void 
-rbgobj_toggle_notify(data, gobject, is_last_ref)
-    gpointer data;
-    GObject* gobject;
-    gboolean is_last_ref;
-{
-// We don't need this .... 
-}
-*/
+
 static void
 rbgobj_mark(holder)
     gobj_holder* holder;
@@ -189,16 +177,8 @@ rbgobj_gobject_initialize(obj, cobj)
     holder->gobj  = (GObject*)cobj;
     holder->destroyed = FALSE;
 
-    /* Keep the ruby object until the GObject is removed by C side.
-       It will be removed when weak_notify is called.
-     */
-    rb_hash_aset(gobj_table, obj, obj);
-
     g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
     g_object_weak_ref((GObject*)cobj, (GWeakNotify)rbgobj_weak_notify, holder);
-    /* We don't need this:
-    g_object_add_toggle_ref((GObject*)cobj, (GToggleNotify)rbgobj_toggle_notify, holder);
-    */
     {
         GType t1 = G_TYPE_FROM_INSTANCE(cobj);
         GType t2 = CLASS2GTYPE(CLASS_OF(obj));
@@ -258,16 +238,16 @@ void
 rbgobj_add_relative(obj, relative)
     VALUE obj, relative;
 {
-    VALUE ary = Qnil;
+    VALUE hash = Qnil;
 
     if (RTEST(rb_ivar_defined(obj, id_relatives)))
-        ary = rb_ivar_get(obj, id_relatives);
+        hash = rb_ivar_get(obj, id_relatives);
 
-    if (NIL_P(ary) || TYPE(ary) != T_ARRAY) {
-        ary = rb_ary_new();
-        rb_ivar_set(obj, id_relatives, ary);
+    if (NIL_P(hash) || TYPE(hash) != T_HASH) {
+        hash = rb_hash_new();
+        rb_ivar_set(obj, id_relatives, hash);
     }
-    rb_ary_push(ary, relative);
+    rb_hash_aset(hash, relative, Qnil);
 }
 
 void
@@ -511,9 +491,6 @@ Init_gobject()
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
 
-    gobj_table = rb_hash_new();
-    rb_global_variable(&gobj_table);
-
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
     g_hash_table_insert(prop_exclude_list, "class", "class");
@@ -534,6 +511,8 @@ Init_gobject()
     id_relatives = rb_intern("__relatives__");
     id_delete = rb_intern("delete");
     id_module_eval = rb_intern("module_eval");
+
+    rbgobj_id_children = rb_intern("__stored_children__");
 
     Init_gobject_gtype();
     Init_gobject_gvalue();

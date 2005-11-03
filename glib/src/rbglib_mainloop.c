@@ -4,7 +4,7 @@
   rbglib_mainloop.c -
 
   $Author: mutoh $
-  $Date: 2005/10/16 11:09:42 $
+  $Date: 2005/11/03 11:53:16 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -102,7 +102,7 @@ idle(gpointer data)
     struct timeval wait;
 
     wait.tv_sec  = 0;
-    wait.tv_usec = 100000; /* 100ms */
+    wait.tv_usec = 10000; /* 10ms */
 
     CHECK_INTS;
     if (!rb_thread_critical) rb_thread_wait_for(wait);

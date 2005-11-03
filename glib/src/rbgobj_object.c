@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 17:32:18 $
+  $Date: 2005/11/03 11:53:16 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -261,6 +261,8 @@ gobj_set_property(self, prop_name, val)
         g_object_set_property(RVAL2GOBJ(self), name, &gval);
         g_value_unset(&gval);
 
+        G_CHILD_SET(self, rb_intern(name), val);
+
         return self;
     }
 }
@@ -302,8 +304,12 @@ gobj_get_property(self, prop_name)
 
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
         g_object_get_property(RVAL2GOBJ(self), name, &gval);
+
         ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
         g_value_unset(&gval);
+
+        G_CHILD_SET(self, rb_intern(name), ret);
+
         return ret;
     }
 }

@@ -1,3 +1,14 @@
+2005-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_mainloop.c: rb_thread_wait_for waits 10ms instead of 100ms
+	to avoid to lose any signals for Win32. Report by MIYAMUKO Katsuyuki.
+	* src/rbgobject.[ch]: Added G_CHILD_SET, _UNSET, _ADD, _REMOVE.
+	* src/rbgobj_object.c: Keeps ruby objects as instance variables
+	of the object not to be GCed(GLib::Object#(set|get)_property).
+	* src/rbgobject.c: Fixed memory leaks. Bug #1341573. Retrieve
+	the code from 0.13.0. So, other libs need to support G_CHILD_*
+	to avoid Tomasz's problem(2005-09-15).
+
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib.h: Increment version information. 

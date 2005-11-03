@@ -2,6 +2,7 @@ EXPORTS
 	Init_glib2
 	mGLib		DATA
 	rbgobj_cType	DATA
+	rbgobj_id_children DATA
 	rbgobj_add_relative
 	rbgobj_add_relative_removable
 	rbgobj_remove_relative

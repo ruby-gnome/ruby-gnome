@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: ggc $
-  $Date: 2005/08/29 19:58:15 $
+  $Author: mutoh $
+  $Date: 2005/11/03 11:53:16 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -43,13 +43,28 @@ extern "C" {
     (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
 
 #define G_RELATIVE(obj, rel) (rbgobj_add_relative(obj, rel))
+
+/* G_RELATIVE2 is useless now. Try G_CHILD_ADD/REMOVE first. */
 #define G_RELATIVE2(obj, rel, id, hash_key)\
  (rbgobj_add_relative_removable(obj, rel, id, hash_key))
 #define G_REMOVE_RELATIVE(obj, id, hash_key)\
  (rbgobj_remove_relative(obj, id, hash_key))
 
+extern ID rbgobj_id_children;
+#define G_CHILD_SET(self, id, child)  (rb_ivar_set(self, id, child))
+#define G_CHILD_UNSET(self, id)  (rb_ivar_set(self, id, Qnil))
+
+/* G_CHILD_ADD is same as G_RELATIVE, but the macro name is more obviously
+   to use than G_RELATIVE, and also support "remove" operation with the key
+   which is the object itself.
+*/
+#define G_CHILD_ADD(self, child) \
+    (rbgobj_add_relative_removable(self, Qnil, rbgobj_id_children, child))
+#define G_CHILD_REMOVE(self, child) \
+    (rbgobj_remove_relative(self, rbgobj_id_children, child))
+
 #define G_DEF_SIGNAL_FUNC(klass, sig_name, func)\
-(rbgobj_set_signal_func(klass, sig_name, func))
+ (rbgobj_set_signal_func(klass, sig_name, func))
 
 #define CLASS2CINFO(klass) (rbgobj_lookup_class(klass))
 #define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype, Qnil))
