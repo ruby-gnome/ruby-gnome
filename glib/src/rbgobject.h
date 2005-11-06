@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2005/11/03 11:53:16 $
+  $Date: 2005/11/06 06:41:14 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -62,6 +62,8 @@ extern ID rbgobj_id_children;
     (rbgobj_add_relative_removable(self, Qnil, rbgobj_id_children, child))
 #define G_CHILD_REMOVE(self, child) \
     (rbgobj_remove_relative(self, rbgobj_id_children, child))
+#define G_CHILD_REMOVE_ALL(self) \
+    (rbgobj_remove_relative_all(self, rbgobj_id_children))
 
 #define G_DEF_SIGNAL_FUNC(klass, sig_name, func)\
  (rbgobj_set_signal_func(klass, sig_name, func))
@@ -117,6 +119,7 @@ extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
                                           ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
+extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 
 extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
 extern VALUE rbgobj_create_object(VALUE klass);

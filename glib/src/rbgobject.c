@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/11/03 11:53:16 $
+  $Date: 2005/11/06 06:41:14 $
 
   Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -282,6 +282,14 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
     } else {
         rb_funcall(hash, id_delete, 1, hash_key);
     }
+}
+
+void
+rbgobj_remove_relative_all(obj, obj_ivar_id)
+    VALUE obj;
+    ID    obj_ivar_id;
+{
+    rb_ivar_set(obj, obj_ivar_id, Qnil);
 }
 
 static GHashTable* prop_exclude_list;

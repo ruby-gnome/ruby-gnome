@@ -1,3 +1,7 @@
+2005-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobject.[ch]: Added G_CHILD_REMOVE_ALL.
+
 2005-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_mainloop.c: rb_thread_wait_for waits 10ms instead of 100ms
