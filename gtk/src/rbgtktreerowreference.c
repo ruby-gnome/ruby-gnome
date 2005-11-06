@@ -3,8 +3,8 @@
 
   rbgtktreerowreference.c -
 
-  $Author: ggc $
-  $Date: 2005/08/30 20:51:46 $
+  $Author: mutoh $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -18,6 +18,10 @@
 
 /*****************************************/
 
+static ID id_proxy;
+static ID id_model;
+static ID id_path;
+
 static VALUE
 treerowref_initialize(argc, argv, self)
     int argc;
@@ -29,6 +33,7 @@ treerowref_initialize(argc, argv, self)
     
   if (argc == 3){
     rb_scan_args(argc, argv, "3", &proxy, &model, &path);
+    G_CHILD_SET(self, id_proxy, proxy);
     ref = gtk_tree_row_reference_new_proxy(RVAL2GOBJ(proxy),
                                            GTK_TREE_MODEL(RVAL2GOBJ(model)), 
                                            RVAL2TREEPATH(path));
@@ -39,6 +44,9 @@ treerowref_initialize(argc, argv, self)
   }
   if (ref == NULL)
       rb_raise(rb_eArgError, "Invalid arguments were passed.");
+
+  G_CHILD_SET(self, id_model, model);
+  G_CHILD_SET(self, id_path, path);
   
   G_INITIALIZE(self, ref);
   return Qnil;
@@ -49,7 +57,9 @@ static VALUE
 treerowref_get_path(self)
     VALUE self;
 {
-    return TREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
+    VALUE ret = TREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
+    G_CHILD_SET(self, id_path, ret);
+    return ret;
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
@@ -57,7 +67,9 @@ static VALUE
 treerowref_get_model(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_tree_row_reference_get_model(_SELF(self)));
+    VALUE ret = GOBJ2RVAL(gtk_tree_row_reference_get_model(_SELF(self)));
+    G_CHILD_SET(self, id_model, ret);
+    return ret;
 }
 #endif
 
@@ -65,7 +77,7 @@ static VALUE
 treerowref_valid(self)
     VALUE self;
 {
-    return gtk_tree_row_reference_valid(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_row_reference_valid(_SELF(self)));
 }
 
 static VALUE
@@ -108,6 +120,10 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
 void 
 Init_gtk_treerowreference()
 {
+    id_proxy = rb_intern("proxy");
+    id_model = rb_intern("model");
+    id_path = rb_intern("path");
+
     if (rbgtk_tree_row_reference_get_type) {
         VALUE gTreeref = G_DEF_CLASS(RBGTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   

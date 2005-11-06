@@ -4,7 +4,7 @@
   rbgtkiconview.c -
 
   $Author: mutoh $
-  $Date: 2005/10/15 18:31:01 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -14,6 +14,9 @@
 #if GTK_CHECK_VERSION(2,6,0)
 
 #define _SELF(s) (GTK_ICON_VIEW(RVAL2GOBJ(s)))
+
+static ID id_model;
+static ID id_select_path;
 
 static VALUE
 iview_initialize(argc, argv, self)
@@ -26,6 +29,7 @@ iview_initialize(argc, argv, self)
     if (NIL_P(model)){
         RBGTK_INITIALIZE(self, gtk_icon_view_new());
     } else {
+        G_CHILD_SET(self, id_model, model);
         RBGTK_INITIALIZE(self, 
                          gtk_icon_view_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model))));
     }
@@ -117,6 +121,7 @@ static VALUE
 iview_select_path(self, path)
     VALUE self, path;
 {
+    G_CHILD_SET(self, id_select_path, path);
     gtk_icon_view_select_path(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
     return self;
 }
@@ -125,6 +130,7 @@ static VALUE
 iview_unselect_path(self, path)
        VALUE self, path;
 {
+    G_CHILD_UNSET(self, id_select_path);
     gtk_icon_view_unselect_path(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
     return self;
 }
@@ -314,6 +320,10 @@ Init_gtk_iconview()
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE iview = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);
+
+    id_model = rb_intern("model");
+    id_select_path = rb_intern("select_path");
+
     rb_define_method(iview, "initialize", iview_initialize, -1);
     rb_define_method(iview, "get_path_at_pos", iview_get_path_at_pos, 2);
     rb_define_alias(iview, "get_path", "get_path_at_pos");

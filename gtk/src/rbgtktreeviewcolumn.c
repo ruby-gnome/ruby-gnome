@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: ktou $
-  $Date: 2005/09/14 05:13:19 $
+  $Author: mutoh $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -30,8 +30,10 @@ tvc_initialize(argc, argv, self)
     tvc = gtk_tree_view_column_new();
     if (argc > 0){
         gtk_tree_view_column_set_title(tvc, RVAL2CSTR(argv[0]));
-        if (argc > 1)
+        if (argc > 1) {
             gtk_tree_view_column_pack_start(tvc, RVAL2CELLRENDERER(argv[1]), TRUE);
+            G_CHILD_ADD(self, argv[1]);
+        }
     }
 
     RBGTK_INITIALIZE(self, tvc);
@@ -58,6 +60,7 @@ static VALUE
 tvc_pack_start(self, cell, expand)
     VALUE self, cell, expand;
 {
+    G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RTEST(expand));
     return self;
 }
@@ -66,6 +69,7 @@ static VALUE
 tvc_pack_end(self, cell, expand)
     VALUE self, cell, expand;
 {
+    G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RTEST(expand));
     return self;
 }
@@ -74,6 +78,7 @@ static VALUE
 tvc_clear(self)
     VALUE self;
 {
+    G_CHILD_REMOVE_ALL(self);
     gtk_tree_view_column_clear(_SELF(self));
     return self;
 }

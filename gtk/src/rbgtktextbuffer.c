@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: mutoh $
-  $Date: 2005/10/06 17:51:16 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -20,6 +20,8 @@
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
 
+static ID id_tagtable;
+
 static VALUE
 txt_initialize(argc, argv, self)
     int argc;
@@ -28,8 +30,12 @@ txt_initialize(argc, argv, self)
 {
     VALUE table;
     rb_scan_args(argc, argv, "01", &table);
-    G_INITIALIZE(
-        self, gtk_text_buffer_new(NIL_P(table) ? NULL : GTK_TEXT_TAG_TABLE(RVAL2GOBJ(table))));
+    if (NIL_P(table))
+        G_INITIALIZE(self, gtk_text_buffer_new(NULL));
+    else {
+        G_CHILD_SET(self, id_tagtable, table);
+        G_INITIALIZE(self, gtk_text_buffer_new(GTK_TEXT_TAG_TABLE(RVAL2GOBJ(table))));
+    }
     return Qnil;
 }
 
@@ -224,6 +230,9 @@ static VALUE
 txt_insert_pixbuf(self, iter, pixbuf)
     VALUE self, iter, pixbuf;
 {
+    G_CHILD_ADD(self, iter);
+    G_CHILD_ADD(iter, pixbuf);
+
     if (RTEST(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
@@ -235,6 +244,8 @@ static VALUE
 txt_insert_child_anchor(self, iter, anchor)
     VALUE self, iter, anchor;
 {
+    G_CHILD_ADD(self, iter);
+    G_CHILD_ADD(iter, anchor);
     if (RTEST(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
@@ -246,27 +257,34 @@ static VALUE
 txt_create_child_anchor(self, iter)
     VALUE self, iter;
 {
-    return GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2ITR(iter)));
+    VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2ITR(iter)));
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 txt_create_mark(self, name, where, left_gravity)
     VALUE self, name, where, left_gravity;
 {
-    return GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
-                                                 NIL_P(name) ? NULL : RVAL2CSTR(name),
-                                                 RVAL2ITR(where),
-                                                 RTEST(left_gravity)));
+    VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
+                                                      NIL_P(name) ? NULL : RVAL2CSTR(name),
+                                                      RVAL2ITR(where),
+                                                      RTEST(left_gravity)));
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 txt_delete_mark(self, mark)
     VALUE self, mark;
 {
-    if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK)))
+    if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK))){
+        G_CHILD_REMOVE(self, mark);
         gtk_text_buffer_delete_mark(_SELF(self), RVAL2MARK(mark));
-    else
+    } else {
+        G_CHILD_REMOVE(self, GOBJ2RVAL(gtk_text_buffer_get_mark(_SELF(self), RVAL2CSTR(mark))));
         gtk_text_buffer_delete_mark_by_name(_SELF(self), RVAL2CSTR(mark));
+    }
     return self;
 }
 
@@ -339,6 +357,7 @@ static VALUE
 txt_add_selection_clipboard(self, clipboard)
     VALUE self, clipboard;
 {
+    G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_add_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
     return self;
 }
@@ -347,6 +366,7 @@ static VALUE
 txt_remove_selection_clipboard(self, clipboard)
     VALUE self, clipboard;
 {
+    G_CHILD_REMOVE(self, clipboard);
     gtk_text_buffer_remove_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
     return self;
 }
@@ -355,6 +375,7 @@ static VALUE
 txt_cut_clipboard(self, clipboard, default_editable)
     VALUE self, clipboard, default_editable;
 {
+    G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RTEST(default_editable));
     return self;
 }
@@ -363,6 +384,7 @@ static VALUE
 txt_copy_clipboard(self, clipboard)
     VALUE self, clipboard;
 {
+    G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_copy_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
     return self;
 }
@@ -371,6 +393,7 @@ static VALUE
 txt_paste_clipboard(self, clipboard, location, default_editable)
     VALUE self, clipboard, location, default_editable;
 {
+    G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard),
                                     NIL_P(location) ? NULL : RVAL2ITR(location),
                                     RTEST(default_editable));
@@ -451,13 +474,18 @@ txt_create_tag(self, tag_name, properties)
     VALUE self, tag_name, properties;
 {
     GtkTextTag *tag;
+    VALUE ret;
 
     tag = gtk_text_tag_new(NIL_P(tag_name) ? (gchar*)NULL : RVAL2CSTR(tag_name));
     gtk_text_tag_table_add (gtk_text_buffer_get_tag_table(_SELF(self)), tag);
 
     G_SET_PROPERTIES(GOBJ2RVAL(tag), properties);
     
-    return GOBJ2RVAL(tag);
+    ret = GOBJ2RVAL(tag);
+
+    G_CHILD_ADD(self, ret);
+
+    return ret;
 }
 
 static VALUE
@@ -475,6 +503,8 @@ txt_insert(argc, argv, self)
     rb_scan_args(argc, argv, "2*", &where, &value, &tags);
     tarray = RARRAY(tags);
 
+    G_CHILD_ADD(self, where);
+    G_CHILD_ADD(self, value);
     if (rb_obj_is_kind_of(value, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
         gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(where),
                                       GDK_PIXBUF(RVAL2GOBJ(value)));
@@ -488,6 +518,8 @@ txt_insert(argc, argv, self)
         
         if(tarray->len == 0)
             return self;
+
+        G_CHILD_ADD(self, tags);
         
         gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
         
@@ -618,6 +650,8 @@ void
 Init_gtk_textbuffer()
 {
     VALUE gTextBuffer = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
+
+    id_tagtable = rb_intern("tagtable");
 
     rb_define_method(gTextBuffer, "initialize", txt_initialize, -1);
     rb_define_method(gTextBuffer, "line_count", txt_get_line_count, 0);

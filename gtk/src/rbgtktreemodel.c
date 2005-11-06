@@ -4,7 +4,7 @@
   rbgtktreemodel.c -
 
   $Author: mutoh $
-  $Date: 2005/04/14 16:39:17 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -43,17 +43,25 @@ static VALUE
 treemodel_get_iter_first(self)
     VALUE self;
 {
+    VALUE val = Qnil;
     GtkTreeIter iter;
     GtkTreeModel* model = _SELF(self);
     gboolean ret = (gtk_tree_model_get_iter_first(model, &iter));
     iter.user_data3 = model;
-    return ret ? ITR2RVAL(&iter) : Qnil;
+
+    if (ret) {
+        val = ITR2RVAL(&iter);
+        G_CHILD_ADD(self, val);
+    }
+    
+    return val;
 }
 
 static VALUE
 treemodel_get_iter(self, path)
     VALUE self, path;
 {
+    VALUE val = Qnil;
     GtkTreeIter iter;
     gboolean ret;
     GtkTreeModel* model = _SELF(self);
@@ -67,7 +75,12 @@ treemodel_get_iter(self, path)
     } 
     iter.user_data3 = model;
 
-    return ret ? ITR2RVAL(&iter) : Qnil;
+    if (ret) {
+        val = ITR2RVAL(&iter);
+        G_CHILD_ADD(self, val);
+    }
+    
+    return val;
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtktexttagtable.c -
  
   $Author: mutoh $
-  $Date: 2003/12/21 08:22:19 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -25,6 +25,7 @@ static VALUE
 txt_tt_add(self, tag)
     VALUE self, tag;
 {
+    G_CHILD_ADD(self, tag);
     gtk_text_tag_table_add(_SELF(self), RVAL2TAG(tag));
     return self;
 }
@@ -33,6 +34,7 @@ static VALUE
 txt_tt_remove(self, tag)
     VALUE self, tag;
 {
+    G_CHILD_REMOVE(self, tag);
     gtk_text_tag_table_remove(_SELF(self), RVAL2TAG(tag));
     return self;
 }
@@ -41,8 +43,13 @@ static VALUE
 txt_tt_lookup(self, name)
     VALUE self, name;
 {
+    VALUE ret = Qnil;
     GtkTextTag* tag = gtk_text_tag_table_lookup(_SELF(self), RVAL2CSTR(name));
-    return tag ? GOBJ2RVAL(tag) : Qnil;
+    if (tag){
+        ret = GOBJ2RVAL(tag);
+        G_CHILD_ADD(self, ret);
+    }
+    return ret;
 }
 
 static gboolean
@@ -80,6 +87,7 @@ Init_txt_tt()
     rb_define_method(gTextTagTable, "add", txt_tt_add, 1);
     rb_define_method(gTextTagTable, "remove", txt_tt_remove, 1);
     rb_define_method(gTextTagTable, "lookup", txt_tt_lookup, 1);
+    rb_define_alias(gTextTagTable, "[]", "lookup");
     rb_define_method(gTextTagTable, "each", txt_tt_foreach, 0);
     rb_define_method(gTextTagTable, "size", txt_tt_get_size, 0);
 }

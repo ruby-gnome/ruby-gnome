@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2005/03/05 19:03:06 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -71,6 +71,9 @@ lstore_set_value(self, iter, column, value)
 
     rbgobj_rvalue_to_gvalue(value, &gval);
 
+    G_CHILD_ADD(self, iter);
+    G_CHILD_ADD(iter, value);
+    
     gtk_list_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);
 
     g_value_unset(&gval);
@@ -91,6 +94,7 @@ static VALUE
 lstore_remove(self, iter)
     VALUE self, iter;
 {
+    G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
     return gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
 #else
@@ -108,7 +112,7 @@ lstore_insert(argc, argv, self)
     VALUE* argv;
     VALUE  self;
 {
-    VALUE position, values;
+    VALUE position, values, ret;
     GtkTreeIter iter;
     GtkListStore* store = _SELF(self);
 
@@ -152,57 +156,77 @@ lstore_insert(argc, argv, self)
 #endif
     }
     iter.user_data3 = store;
-    return ITR2RVAL(&iter);
+
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 lstore_insert_before(self, sibling)
     VALUE self, sibling;
 {
+    VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
     gtk_list_store_insert_before(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
     iter.user_data3 = model;
-    return ITR2RVAL(&iter);
+
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 lstore_insert_after(self, sibling)
     VALUE self, sibling;
 { 
+    VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
     gtk_list_store_insert_after(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
     iter.user_data3 = model;
-    return ITR2RVAL(&iter);
+
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 lstore_prepend(self)
     VALUE self;
 {
+    VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
     gtk_list_store_prepend(model, &iter);
     iter.user_data3 = model;
-    return ITR2RVAL(&iter);
+
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 lstore_append(self)
     VALUE self;
 {
+    VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
     gtk_list_store_append(model, &iter);
     iter.user_data3 = model;
-    return ITR2RVAL(&iter);
+    
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+    return ret;
 }
 
 static VALUE
 lstore_clear(self)
     VALUE self;
 {
+    G_CHILD_REMOVE_ALL(self);
     gtk_list_store_clear(_SELF(self));
     return self;
 }

@@ -1,3 +1,25 @@
+2005-11-06  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkcellview.c, rbgtktreeviewcolumn.c: Apply G_CHILD_*.
+
+2005-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkiconview.c,rbgtktreerowreference.c, rbgtktreemodelfilter.c,
+	rbgtktreemodel.c, rbgtktreestore.c, rbgtkliststore.c, 
+	rbgtktextiter.c, rbgtktextappearance.c: Apply G_CHILD_*.
+
+2005-11-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c, rbgtktextview.c: Apply G_CHILD_*. 
+	* src/rbgtktexttagtable.c: Add an alias Gtk::TextTagTable#[] of
+	Gtk::TextTagTable#lookup.
+
+2005-11-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c: rb_thread_wait_for waits 10ms instead of 100ms
+	to avoid to lose any signals for Win32. Report by MIYAMUKO Katsuyuki.
+	* src/rbgtkcontainer.c, rbgtkbox.c: Apply G_CHILD_*.
+
 2005-10-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/iconview.rb: Added.

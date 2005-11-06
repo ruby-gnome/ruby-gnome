@@ -4,7 +4,7 @@
   rbgtkcellview.c -
 
   $Author: mutoh $
-  $Date: 2005/05/05 19:57:29 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -14,6 +14,9 @@
 #if GTK_CHECK_VERSION(2,6,0)
 
 #define _SELF(self) (GTK_CELL_VIEW(RVAL2GOBJ(self)))
+
+static ID id_model;
+static ID id_text;
 
 static VALUE
 cview_initialize(argc, argv, self)
@@ -30,6 +33,7 @@ cview_initialize(argc, argv, self)
     if (NIL_P(text)) {
         widget = gtk_cell_view_new();
     } else {
+        G_CHILD_SET(self, id_text, text);
         if (TYPE(text) == T_STRING){
             if (NIL_P(with_markup) || RTEST(with_markup)){
                 widget = gtk_cell_view_new_with_markup(RVAL2CSTR(text));
@@ -54,6 +58,7 @@ static VALUE
 cview_set_model(self, model)
     VALUE self, model;
 {
+    G_CHILD_SET(self, id_model, model);
     gtk_cell_view_set_model(_SELF(self), 
                             NIL_P(model) ? (GtkTreeModel*)NULL : GTK_TREE_MODEL(RVAL2GOBJ(model)));
     return self;
@@ -113,6 +118,9 @@ Init_gtk_cellview()
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE cview = G_DEF_CLASS(GTK_TYPE_CELL_VIEW, "CellView", mGtk);
+
+    id_model = rb_intern("model");
+    id_text = rb_intern("text");
 
     rb_define_method(cview, "initialize", cview_initialize, -1);
     rb_define_method(cview, "set_model", cview_set_model, 1);

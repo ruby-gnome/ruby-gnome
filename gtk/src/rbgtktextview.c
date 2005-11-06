@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2005/01/10 17:56:38 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -15,6 +15,8 @@
 #define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
 #define RVAL2ITR(i) ((GtkTextIter*)(RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
+
+static ID id_buffer;
 
 static VALUE
 textview_initialize(argc, argv, self)
@@ -28,8 +30,10 @@ textview_initialize(argc, argv, self)
 
     if (NIL_P(buffer))
         widget = gtk_text_view_new();
-    else
+    else {
+        G_CHILD_SET(self, id_buffer, buffer);
         widget = gtk_text_view_new_with_buffer(RVAL2BUFFER(buffer));
+    }
 
     RBGTK_INITIALIZE(self, widget);
     return self;
@@ -39,6 +43,7 @@ static VALUE
 textview_set_buffer(self, buf)
     VALUE self, buf;
 {
+    G_CHILD_SET(self, id_buffer, buf);
     gtk_text_view_set_buffer(_SELF(self), 
                              NIL_P(buf) ? NULL : RVAL2BUFFER(buf));
     return self;
@@ -48,7 +53,10 @@ static VALUE
 textview_get_buffer(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_view_get_buffer(_SELF(self)));
+    VALUE buf = GOBJ2RVAL(gtk_text_view_get_buffer(_SELF(self)));
+    G_CHILD_SET(self, id_buffer, buf);
+
+    return buf;
 }
 
 static VALUE
@@ -89,7 +97,7 @@ static VALUE
 textview_place_cursor_onscreen(self)
     VALUE self;
 {
-    return gtk_text_view_place_cursor_onscreen(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_place_cursor_onscreen(_SELF(self)));
 }
 
 static VALUE
@@ -258,6 +266,7 @@ static VALUE
 textview_add_child_at_anchor(self, child, anchor)
     VALUE self, child, anchor;
 {
+    G_CHILD_ADD(self, child);
     gtk_text_view_add_child_at_anchor(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
                                       GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
     return self;
@@ -267,6 +276,7 @@ static VALUE
 textview_add_child_in_window(self, child, which_window, xpos, ypos)
     VALUE self, child, which_window, xpos, ypos;
 {
+    G_CHILD_ADD(self, child);
     gtk_text_view_add_child_in_window(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                       RVAL2GENUM(which_window, GTK_TYPE_TEXT_WINDOW_TYPE),
                                       NUM2INT(xpos), NUM2INT(ypos));
@@ -277,6 +287,7 @@ static VALUE
 textview_move_child(self, child, xpos, ypos)
     VALUE self, child, xpos, ypos;
 {
+    G_CHILD_ADD(self, child);
     gtk_text_view_move_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                              NUM2INT(xpos), NUM2INT(ypos));
     return self;
@@ -294,6 +305,8 @@ void
 Init_gtk_textview()
 {
     VALUE cTextView = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
+
+    id_buffer = rb_intern("buffer");
 
     rb_define_method(cTextView, "initialize", textview_initialize, -1);
     rb_define_method(cTextView, "set_buffer", textview_set_buffer, 1);

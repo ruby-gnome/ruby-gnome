@@ -4,9 +4,9 @@
   rbgtktreemodelsort.c -
 
   $Author: mutoh $
-  $Date: 2003/11/21 15:14:08 $
+  $Date: 2005/11/06 04:44:24 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -17,10 +17,13 @@
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 
+static ID id_model;
+
 static VALUE
 tmodelsort_initialize(self, model)
     VALUE self, model;
 {
+    G_CHILD_SET(self, id_model, model);
     G_INITIALIZE(self, 
                  gtk_tree_model_sort_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model))));
     return Qnil;
@@ -97,6 +100,8 @@ void
 Init_gtk_tmodelsort()
 {
     VALUE gTMSort = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);
+
+    id_model = rb_intern("model");
 
     rb_define_method(gTMSort, "initialize", tmodelsort_initialize, 1);
     rb_define_method(gTMSort, "convert_child_path_to_path", tmodelsort_convert_child_path_to_path, 1);

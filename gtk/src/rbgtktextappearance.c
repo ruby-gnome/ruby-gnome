@@ -4,7 +4,7 @@
   rbgtktextappearance.c -
  
   $Author: mutoh $
-  $Date: 2004/02/12 08:30:53 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -82,19 +82,23 @@ txt_app_enums_set_ ## name (self, val)\
     return self;\
 }
 
-#define ATTR_BOXED(name, gtype)\
+#define ATTR_GOBJ(name)\
 static VALUE \
-txt_app_boxed_ ## name (self)\
+txt_app_gobj_ ## name (self)\
     VALUE self;\
 {\
+    VALUE val; \
     if (_SELF(self)->name == NULL) return Qnil;\
-    return BOXED2RVAL(_SELF(self)->name, gtype);\
+    val = GOBJ2RVAL(_SELF(self)->name);  \
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
+    return val; \
 }\
 static VALUE \
-txt_app_boxed_set_ ## name (self, val)\
+txt_app_gobj_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    _SELF(self)->name = RVAL2BOXED(val, gtype);\
+    _SELF(self)->name = RVAL2GOBJ(val);\
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
     return self;\
 }
 
@@ -103,13 +107,16 @@ static VALUE \
 txt_app_color_ ## name (self)\
     VALUE self;\
 {\
-    return BOXED2RVAL(&_SELF(self)->name, GDK_TYPE_COLOR);\
+    VALUE val = BOXED2RVAL(&_SELF(self)->name, GDK_TYPE_COLOR);\
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
+    return val;\
 }\
 static VALUE \
 txt_app_color_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-  _SELF(self)->name = *(GdkColor*)RVAL2BOXED(val, GDK_TYPE_COLOR);	\
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
+    _SELF(self)->name = *(GdkColor*)RVAL2BOXED(val, GDK_TYPE_COLOR);	\
     return self;\
 }
 
@@ -119,8 +126,8 @@ txt_app_color_set_ ## name (self, val)\
 /***********************************************/
 ATTR_COLOR(bg_color);
 ATTR_COLOR(fg_color);
-ATTR_BOXED(bg_stipple, GDK_TYPE_PIXMAP);
-ATTR_BOXED(fg_stipple, GDK_TYPE_PIXMAP);
+ATTR_GOBJ(bg_stipple);
+ATTR_GOBJ(fg_stipple);
 
 ATTR_INT(rise);
 ATTR_ENUM(underline, PANGO_TYPE_UNDERLINE);
@@ -133,8 +140,9 @@ static VALUE
 txt_app_initialize(self)
     VALUE self;
 {
-    GtkTextAppearance app;
-    G_INITIALIZE(self, &app);
+    GtkTextAppearance* app = ALLOC(GtkTextAppearance);
+    memset(app, 0, sizeof(GtkTextAppearance));
+    G_INITIALIZE(self, app);
     return Qnil;
 }
 
@@ -146,8 +154,8 @@ Init_txt_appearance()
 
     DEFINE_ACCESSOR(gTextApp, color, bg_color);
     DEFINE_ACCESSOR(gTextApp, color, fg_color);
-    DEFINE_ACCESSOR(gTextApp, boxed, bg_stipple);
-    DEFINE_ACCESSOR(gTextApp, boxed, fg_stipple);
+    DEFINE_ACCESSOR(gTextApp, gobj, bg_stipple);
+    DEFINE_ACCESSOR(gTextApp, gobj, fg_stipple);
     DEFINE_ACCESSOR(gTextApp, int, rise);
     DEFINE_ACCESSOR(gTextApp, enums, underline);
 

@@ -3,9 +3,10 @@
 
   rbgtktextiter.c -
 
-  $Author: ggc $
-  $Date: 2005/08/30 20:22:35 $
+  $Author: mutoh $
+  $Date: 2005/11/06 04:44:24 $
 
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
@@ -16,6 +17,7 @@
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
 static gboolean is_compat_240;
+static ID id_pixbuf;
 
 static VALUE
 get_buffer(self)
@@ -82,7 +84,12 @@ get_pixbuf(self)
     VALUE self;
 {
     GdkPixbuf* pixbuf = gtk_text_iter_get_pixbuf(_SELF(self));
-    return pixbuf ? GOBJ2RVAL(pixbuf) : Qnil;
+    VALUE ret = Qnil;
+    if (pixbuf){
+        ret = GOBJ2RVAL(pixbuf);
+        G_CHILD_SET(self, id_pixbuf, ret);
+    }
+    return Qnil;
 }
 
 static VALUE
@@ -111,28 +118,28 @@ static VALUE
 begins_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
 ends_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
 toggles_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
 has_tag(self, tag)
     VALUE self, tag;
 {
-    return gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
@@ -146,16 +153,14 @@ static VALUE
 editable(self, default_setting)
     VALUE self, default_setting;
 {
-    return gtk_text_iter_editable(_SELF(self), RTEST(default_setting))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_editable(_SELF(self), RTEST(default_setting)));
 }
 
 static VALUE
 can_insert(self, default_setting)
     VALUE self, default_setting;
 {
-    return gtk_text_iter_can_insert(_SELF(self), RTEST(default_setting))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_can_insert(_SELF(self), RTEST(default_setting)));
 }
 
     
@@ -164,7 +169,7 @@ static VALUE \
 __name__(self) \
     VALUE self; \
 { \
-    return gtk_text_iter_##__name__(_SELF(self)) ? Qtrue : Qfalse; \
+    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self)));   \
 }
 
 def_predicate(starts_word)
@@ -436,6 +441,8 @@ Init_gtk_textiter()
     rb_include_module(cTextIter, rb_mComparable);
 
     is_compat_240 = gtk_check_version(2, 4, 0) ? FALSE : TRUE;
+
+    id_pixbuf = rb_intern("pixbuf");
 
     rb_define_method(cTextIter, "buffer", get_buffer, 0);
     rb_define_method(cTextIter, "offset", get_offset, 0);

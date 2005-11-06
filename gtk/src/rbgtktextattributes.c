@@ -4,7 +4,7 @@
   rbgtktextattributes.c -
  
   $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -79,13 +79,17 @@ static VALUE \
 txt_attr_boxed_ ## name (self)\
     VALUE self;\
 {\
+    VALUE val; \
     if (_SELF(self)->name == NULL) return Qnil;\
-    return BOXED2RVAL(_SELF(self)->name, gtype);\
+    val = BOXED2RVAL(_SELF(self)->name, gtype);\
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
+    return val;\
 }\
 static VALUE \
 txt_attr_boxed_set_ ## name (self, val)\
     VALUE self, val;\
 {\
+    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
     _SELF(self)->name = RVAL2BOXED(val, gtype);\
     return self;\
 }

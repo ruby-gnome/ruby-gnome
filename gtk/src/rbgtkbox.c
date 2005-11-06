@@ -4,9 +4,9 @@
   rbgtkbox.c -
 
   $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Date: 2005/11/06 04:44:24 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -38,6 +38,7 @@ box_pack_start_or_end(argc, argv, self, start)
         expand = RTEST(arg1);
       default:
         child = GTK_WIDGET(RVAL2GOBJ(arg0));
+        G_CHILD_ADD(self, arg0);
         break;
     }
     widget = GTK_WIDGET(RVAL2GOBJ(self));

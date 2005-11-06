@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2005/09/18 16:24:12 $
+  $Date: 2005/11/06 04:44:24 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -19,7 +19,8 @@
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
-static ID id_column;
+static ID id_model;
+static ID id_selection;
 
 static VALUE
 treeview_initialize(argc, argv, self)
@@ -31,6 +32,7 @@ treeview_initialize(argc, argv, self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "01", &model) == 1) {
+        G_CHILD_SET(self, id_model, model);
         widget = gtk_tree_view_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model)));
     }
     else {
@@ -45,7 +47,9 @@ static VALUE
 treeview_get_selection(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_tree_view_get_selection(_SELF(self)));
+    VALUE ret = GOBJ2RVAL(gtk_tree_view_get_selection(_SELF(self)));
+    G_CHILD_SET(self, id_selection, ret);
+    return ret;
 }
 
 static VALUE
@@ -60,7 +64,7 @@ static VALUE
 treeview_append_column(self, column)
     VALUE self, column;
 {
-    G_RELATIVE2(self, column, id_column, column);
+    G_CHILD_ADD(self, column);
     return INT2NUM(gtk_tree_view_append_column(_SELF(self), 
                                                TREEVIEW_COL(column)));
 }
@@ -69,7 +73,7 @@ static VALUE
 treeview_remove_column(self, column)
     VALUE self, column;
 {
-    G_REMOVE_RELATIVE(self, id_column, column);
+    G_CHILD_REMOVE(self, column);
     return INT2NUM(gtk_tree_view_remove_column(_SELF(self), 
                                                TREEVIEW_COL(column)));
 }  
@@ -103,7 +107,7 @@ treeview_insert_column(argc, argv, self)
                  &args[3]);        /*           attributes            */
 
     if (argc == 2) {
-        G_RELATIVE2(self, args[0], id_column, args[0]);
+        G_CHILD_ADD(self, args[0]);
         return INT2NUM(gtk_tree_view_insert_column(_SELF(self),
                                                    TREEVIEW_COL(args[0]),
                                                    NUM2INT(args[1])));
@@ -131,6 +135,10 @@ treeview_insert_column(argc, argv, self)
         GtkTreeViewColumn* column = gtk_tree_view_column_new();
 
         Check_Type(args[3], T_HASH);
+
+        G_CHILD_ADD(self, args[2]);
+        G_CHILD_ADD(self, args[3]);
+
         gtk_tree_view_column_set_title(column, RVAL2CSTR(args[1]));
         gtk_tree_view_column_pack_start(column, renderer, TRUE);
         
@@ -628,8 +636,8 @@ Init_gtk_treeview()
 {
     VALUE gTv = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
 
-    id_column = rb_intern("__columns__");
-    rb_ivar_set(gTv, id_column, Qnil);
+    id_selection = rb_intern("selection");
+    id_model = rb_intern("model");
 
     rb_define_method(gTv, "initialize", treeview_initialize, -1);
     rb_define_method(gTv, "selection", treeview_get_selection, 0);

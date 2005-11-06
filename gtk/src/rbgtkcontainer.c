@@ -4,9 +4,9 @@
   rbgtkcontainer.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Date: 2005/11/06 04:44:24 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -28,13 +28,14 @@ static VALUE
 cont_is_resize_container(self)
     VALUE self;
 {
-    return GTK_IS_RESIZE_CONTAINER(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(GTK_IS_RESIZE_CONTAINER(_SELF(self)));
 }
 
 static VALUE
 cont_remove(self, other)
     VALUE self, other;
 {
+    G_CHILD_REMOVE(self, other);
     gtk_container_remove(_SELF(self), GTK_WIDGET(RVAL2GOBJ(other)));
     return self;
 }
@@ -247,6 +248,9 @@ cont_child_get_property(self, child, prop_name)
                                          GTK_WIDGET(RVAL2GOBJ(child)),
                                          name , &gval);
         ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
+
+        G_CHILD_ADD(child, ret);
+
         g_value_unset(&gval);
         return ret;
     }
@@ -293,6 +297,8 @@ cont_child_set_property(self, child, prop_name, val)
                 rbgobj_rvalue_to_gvalue(val, &gval);
         }
 
+        G_CHILD_ADD(child, val);
+
         gtk_container_child_set_property(GTK_CONTAINER(RVAL2GOBJ(self)), 
                                          GTK_WIDGET(RVAL2GOBJ(child)), name, &gval);
 
@@ -315,6 +321,9 @@ cont_add(argc, argv, self)
     child = GTK_WIDGET(RVAL2GOBJ(other));
     gtk_widget_freeze_child_notify(child);
     gtk_container_add(_SELF(self), child);
+
+    G_CHILD_ADD(self, other);
+
     if (child->parent && (! NIL_P(properties))){
         int i;
         VALUE ary;

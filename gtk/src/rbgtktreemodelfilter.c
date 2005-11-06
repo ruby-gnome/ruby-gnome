@@ -4,9 +4,9 @@
   rbgtktreemodelfilter.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:15 $
+  $Date: 2005/11/06 04:44:24 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -17,6 +17,9 @@
 #define TREEPATH2RVAL(s) (BOXED2RVAL(s, GTK_TYPE_TREE_PATH))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
+
+static ID id_child_model;
+static ID id_root;
 
 static VALUE
 treemodelfilter_initialize(argc, argv, self)
@@ -29,8 +32,15 @@ treemodelfilter_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &child_model, &root);
 
-    widget = gtk_tree_model_filter_new(GTK_TREE_MODEL(RVAL2GOBJ(child_model)), 
-                                       NIL_P(root) ? (GtkTreePath*)NULL : RVAL2TREEPATH(root));
+    G_CHILD_SET(self, id_child_model, child_model);
+    if (NIL_P(root)){
+        widget = gtk_tree_model_filter_new(GTK_TREE_MODEL(RVAL2GOBJ(child_model)), 
+                                           (GtkTreePath*)NULL);
+    } else {
+        G_CHILD_SET(self, id_root, root);
+        widget = gtk_tree_model_filter_new(GTK_TREE_MODEL(RVAL2GOBJ(child_model)), 
+                                           (GtkTreePath*)RVAL2TREEPATH(root));
+    }
 
     G_INITIALIZE(self, widget);
     return Qnil;
@@ -188,6 +198,9 @@ Init_gtk_treemodelfilter()
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE tmf = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);
+
+    id_child_model = rb_intern("child_model");
+    id_root = rb_intern("root");
 
     rb_define_method(tmf, "initialize", treemodelfilter_initialize, -1);
     rb_define_method(tmf, "set_visible_func", treemodelfilter_set_visible_func, 0);
