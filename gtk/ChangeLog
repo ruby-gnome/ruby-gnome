@@ -1,3 +1,7 @@
+2005-11-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtktextbuffer.c (txt_get_text, txt_get_slice): Fix typo.
+
 2005-11-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcellview.c, rbgtktreeviewcolumn.c: Apply G_CHILD_*.

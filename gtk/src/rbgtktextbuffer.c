@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ktou $
+  $Date: 2005/11/08 04:58:55 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -175,7 +175,7 @@ txt_get_text(argc, argv, self)
     ret = gtk_text_buffer_get_text(
             buffer,
             NIL_P(start) ? &start_iter : RVAL2ITR(start),
-            NIL_P(start) ? &end_iter : RVAL2ITR(end),
+            NIL_P(end) ? &end_iter : RVAL2ITR(end),
             RTEST(include_hidden_chars));
     result = CSTR2RVAL(ret);
     g_free(ret);
@@ -211,7 +211,7 @@ txt_get_slice(argc, argv, self)
     ret = gtk_text_buffer_get_slice(
             buffer,
             NIL_P(start) ? &start_iter : RVAL2ITR(start),
-            NIL_P(start) ? &end_iter : RVAL2ITR(end),
+            NIL_P(end) ? &end_iter : RVAL2ITR(end),
             RTEST(include_hidden_chars));
     result = CSTR2RVAL(ret);
     g_free(ret);
