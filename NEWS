@@ -7,7 +7,7 @@ Ruby-GNOME2-0.14.1 (2005-11-06)
       - None.
 
   * Ruby/Pango
-      - None.
+      - Fix some bugs. [Masao Mutoh]
 
   * Ruby/GdkPixbuf
       - None.
