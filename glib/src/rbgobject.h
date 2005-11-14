@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: mutoh $
-  $Date: 2005/11/06 06:41:14 $
+  $Date: 2005/11/14 13:02:28 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -50,7 +50,7 @@ extern "C" {
 #define G_REMOVE_RELATIVE(obj, id, hash_key)\
  (rbgobj_remove_relative(obj, id, hash_key))
 
-extern ID rbgobj_id_children;
+RUBY_GLIB2_VAR  ID rbgobj_id_children;
 #define G_CHILD_SET(self, id, child)  (rb_ivar_set(self, id, child))
 #define G_CHILD_UNSET(self, id)  (rb_ivar_set(self, id, Qnil))
 

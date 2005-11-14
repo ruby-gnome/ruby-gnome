@@ -6,6 +6,7 @@ EXPORTS
 	rbgobj_add_relative
 	rbgobj_add_relative_removable
 	rbgobj_remove_relative
+	rbgobj_remove_relative_all
 	rbgobj_define_class
 	rbgobj_define_class_dynamic
 	rbgobj_instance_from_ruby_object
