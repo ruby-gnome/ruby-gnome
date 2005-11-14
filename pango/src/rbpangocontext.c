@@ -3,8 +3,8 @@
 
   rbpangocontext.c -
 
-  $Author: ktou $
-  $Date: 2005/10/08 03:13:54 $
+  $Author: mutoh $
+  $Date: 2005/11/14 07:10:51 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -169,11 +169,18 @@ rcontext_load_fontset(self, desc, lang)
 }
 
 static VALUE
-rcontext_get_metrics(self, desc, lang)
-    VALUE self, desc, lang;
+rcontext_get_metrics(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE desc, lang;
+
+    rb_scan_args(argc, argv, "11", &desc, &lang);
+
     return BOXED2RVAL(pango_context_get_metrics(_SELF(self), 
-                                                RVAL2DESC(desc), RVAL2LANG(lang)),
+                                                RVAL2DESC(desc), 
+                                                NIL_P(lang) ? NULL : RVAL2LANG(lang)),
                                                 PANGO_TYPE_FONT_METRICS);
 }
 
@@ -193,6 +200,8 @@ rcontext_list_families(self)
     result = rb_ary_new2(n_families);
     for (i = 0; i < n_families; i++)
       rb_ary_store(result, i, GOBJ2RVAL(families[i]));
+
+    g_free(families);
 
     return result;
 }
@@ -275,7 +284,7 @@ Init_pango_context()
 #endif
     rb_define_method(pContext, "load_font", rcontext_load_font, 1);
     rb_define_method(pContext, "load_fontset", rcontext_load_fontset, 2);
-    rb_define_method(pContext, "get_metrics", rcontext_get_metrics, 2);
+    rb_define_method(pContext, "get_metrics", rcontext_get_metrics, -1);
     rb_define_method(pContext, "families", rcontext_list_families, 0);
 
 #if PANGO_CHECK_VERSION(1,10,0)

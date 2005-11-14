@@ -3,8 +3,8 @@
 
   rbpangolayout.c -
 
-  $Author: ktou $
-  $Date: 2005/09/07 16:11:31 $
+  $Author: mutoh $
+  $Date: 2005/11/14 07:10:51 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -78,6 +78,14 @@ layout_set_markup(argc, argv, self)
                                            NUM2CHR(accel_marker), &accel_char);
     }
     return CHR2FIX(accel_char);
+}
+
+static VALUE
+layout_set_markup_eq(self, markup)
+    VALUE self, markup;
+{
+    pango_layout_set_markup(_SELF(self), RVAL2CSTR(markup), RSTRING(markup)->len);
+    return markup;
 }
 
 static VALUE
@@ -250,7 +258,14 @@ static VALUE
 layout_get_tabs(self)
     VALUE self;
 {
-    return BOXED2RVAL(pango_layout_get_tabs(_SELF(self)), PANGO_TYPE_TAB_ARRAY);
+    VALUE ret = Qnil;
+    PangoTabArray* tabs = pango_layout_get_tabs(_SELF(self));
+
+    if (tabs) {
+        ret = BOXED2RVAL(tabs, PANGO_TYPE_TAB_ARRAY);
+        pango_tab_array_free(tabs);
+    }
+    return ret;
 }
 
 static VALUE
@@ -499,6 +514,7 @@ Init_pango_layout()
     rb_define_method(pLayout, "set_text", layout_set_text, 1);
     rb_define_method(pLayout, "text", layout_get_text, 0);
     rb_define_method(pLayout, "set_markup", layout_set_markup, -1);
+    rb_define_method(pLayout, "markup=", layout_set_markup_eq, 1);
     rb_define_method(pLayout, "set_attributes", layout_set_attributes, 1);
     rb_define_method(pLayout, "attributes", layout_get_attributes, 0);
     rb_define_method(pLayout, "set_font_description", layout_set_font_description, 1);

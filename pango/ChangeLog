@@ -1,3 +1,10 @@
+2005-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayout.c: Added Pango::Layout#markup=. 
+	Pango::Layout#tabs: Fix memory leak.
+	* src/rbpangocontext.c: Pango::Context#get_metrics: 2nd parameter is omittable. 
+	Pango::Context#families: Fix memory leak.
+
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* README: Added cairo/rcairo information.
