@@ -1,3 +1,69 @@
+Ruby-GNOME2-0.14.1 (2005-11-06)
+
+  * Ruby/GLib 
+      - Fix memory leaks. [Masao Mutoh]
+
+  * Ruby/ATK
+      - None.
+
+  * Ruby/Pango
+      - None.
+
+  * Ruby/GdkPixbuf
+      - None.
+
+  * Ruby/GTK
+      - Improve memory management. [Masao Mutoh]
+
+  * Ruby/GNOME 
+      - None.
+
+  * Ruby/GnomeCanvas
+      - None.
+
+  * Ruby/Libglade
+      - None.
+
+  * Ruby/Libart
+      - None.
+
+  * Ruby/GConf
+      - None.
+
+  * Ruby/GStreamer 
+      - None.
+
+  * Ruby/GnomeVFS 
+      - None.
+
+  * Ruby/GtkHtml2
+      - None.
+
+  * Ruby/GtkGLExt
+      - None.
+
+  * Ruby/Libgda
+      - None.
+
+  * Ruby/PanelApplet
+      - None.
+
+  * Ruby/GtkSourceView
+      - None.
+
+  * Ruby/GnomePrint
+      - None.
+
+  * Ruby/GnomePrintUI
+      - None.
+
+  * Ruby/RSVG
+      - None.
+
+  * Ruby/GtkMozEmbed
+      - None.
+
+
 Ruby-GNOME2-0.14.0 (2005-10-16)
 
   * Ruby/GLib 
