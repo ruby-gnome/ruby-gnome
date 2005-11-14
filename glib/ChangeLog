@@ -1,3 +1,7 @@
+2005-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib.h: Increment micro version.
+
 2005-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobject.[ch]: Added G_CHILD_REMOVE_ALL.
