@@ -4,7 +4,7 @@
   rbgdkpango.c -
 
   $Author: mutoh $
-  $Date: 2005/05/27 18:33:33 $
+  $Date: 2005/11/14 07:04:40 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -123,7 +123,7 @@ Init_gtk_gdk_pango()
     rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, -1);
 
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
-    G_DEF_SETTER(context, "set_colormap");
+    G_DEF_SETTER(context, "colormap");
     rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
     rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
 

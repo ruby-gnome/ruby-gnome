@@ -1,3 +1,11 @@
+2005-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/tree_combo.rb: Added.
+
+2005-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkpango.c: Fix a typo of Pango::Context#colormap=. 
+
 2005-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktextbuffer.c (txt_get_text, txt_get_slice): Fix typo.
