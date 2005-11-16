@@ -4,7 +4,7 @@
   rbpangoattribute.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2005/11/16 16:02:18 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -114,8 +114,8 @@ gboolean    pango_parse_markup              (const char *markup_text,
 */
 
 static VALUE
-attr_s_type_register(name)
-    VALUE name;
+attr_s_type_register(self, name)
+    VALUE self, name;
 {
     return INT2NUM(pango_attr_type_register(RVAL2CSTR(name)));
 }
@@ -270,27 +270,21 @@ MAKE_ATTRENUM_INIT(AttrStretch, stretch, PANGO_TYPE_STRETCH);
 MAKE_ATTRENUM_INIT(AttrWeight, weight, PANGO_TYPE_WEIGHT); 
 
 static VALUE
-attr_AttrSize_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+attr_AttrSize_initialize(self, size)
+    VALUE self, size;
 {
-    VALUE size, absolute;
-    
-    rb_scan_args(argc, argv, "11", &size, &absolute);
-
-    if (NIL_P(absolute) || ! RTEST(absolute)){
-        DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
-    } else {
-#if PANGO_CHECK_VERSION(1,8,0)
-        DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(size));
-#else
-        rb_warning("not supported in pango-1.6.x. The 2nd parameter was ignored. ");
-        DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
-#endif
-    }
+    DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
     return Qnil;
 }
+#if PANGO_CHECK_VERSION(1,8,1)
+static VALUE
+attr_AttrAbsoluteSize_initialize(self, size)
+    VALUE self, size;
+{
+    DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(size));
+    return Qnil;
+}
+#endif
 
 static VALUE
 attr_AttrFontDescription_initialize(self, fontdescription)
@@ -454,7 +448,10 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_WEIGHT, AttrWeight, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_VARIANT, AttrVariant, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_STRETCH, AttrStretch, pattrint, 1);
-    MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, -1);
+    MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, 1);
+#if PANGO_CHECK_VERSION(1,8,1)
+    MAKE_ATTR(PANGO_ATTR_ABSOLUTE_SIZE, AttrAbsoluteSize, pattrint, 1);
+#endif
     MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, pattr, 1);
     rb_define_method(tmpklass, "value", attr_fontdesc_value, 0);
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);

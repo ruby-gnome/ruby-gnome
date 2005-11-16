@@ -1,3 +1,8 @@
+2005-11-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoattribute.c: Fix wrong argument of Pango::Attribute.type_register. 
+	Added Pango::AttrAbsoluteSize and Pango::AttrSize removed second parameter.
+
 2005-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayout.c: Added Pango::Layout#markup=. 
