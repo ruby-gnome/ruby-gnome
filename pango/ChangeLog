@@ -1,3 +1,10 @@
+2005-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangorenderer.c: Pango::Renderer#matrix= accept nil.
+	* src/rbpangomatrix.c: Fix to return wrong value of Pango::Matrix#to_a. 
+	* src/rbpangorenderer.c: Pango::Renderer#set_color accept nil.
+	Pango::Renderer#activate accept block.
+
 2005-11-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangoattribute.c: Fix wrong argument of Pango::Attribute.type_register. 

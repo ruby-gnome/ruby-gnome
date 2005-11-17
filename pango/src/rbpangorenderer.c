@@ -4,7 +4,7 @@
   rbpangorenderer.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:42:49 $
+  $Date: 2005/11/17 16:53:36 $
 
   Copyright (C) 2005 Masao Mutoh 
 ************************************************/
@@ -95,18 +95,21 @@ renderer_draw_glyph(self, font, glyph, x, y)
 }
 
 static VALUE
-renderer_activate(self)
-    VALUE self;
-{
-    pango_renderer_activate(_SELF(self));
-    return self;
-}
-
-static VALUE
 renderer_deactivate(self)
     VALUE self;
 {
     pango_renderer_deactivate(_SELF(self));
+    return self;
+}
+
+static VALUE
+renderer_activate(self)
+    VALUE self;
+{
+    pango_renderer_activate(_SELF(self));
+    if (rb_block_given_p()) {
+        rb_ensure(rb_yield, self, renderer_deactivate, self);
+    }
     return self;
 }
 
@@ -128,10 +131,10 @@ renderer_set_color(self, part, color)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                             (PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR));
+                             (PangoColor*)(NIL_P(color) ? NULL : RVAL2BOXED(color, PANGO_TYPE_COLOR)));
 #else
     pango_renderer_set_color(_SELF(self), NUM2INT(part),
-                             (PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR));
+                             (PangoColor*)(NIL_P(color) ? NULL : RVAL2BOXED(color, PANGO_TYPE_COLOR)));
 #endif
     return self;
 }
@@ -154,7 +157,7 @@ renderer_set_matrix(self, matrix)
     VALUE self, matrix;
 {
     pango_renderer_set_matrix(_SELF(self), 
-                              (PangoMatrix*)RVAL2BOXED(matrix, PANGO_TYPE_MATRIX));
+                              (PangoMatrix*)(NIL_P(matrix) ? NULL : RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbpangomatrix.c -
 
   $Author: mutoh $
-  $Date: 2005/02/11 19:17:23 $
+  $Date: 2005/11/17 16:53:36 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -100,8 +100,8 @@ matrix_to_a(self)
     VALUE self;
 {
     PangoMatrix* matrix = _SELF(self);
-    return rb_ary_new3(6, NUM2INT(matrix->xx), NUM2INT(matrix->xy), NUM2INT(matrix->yx),
-                       NUM2INT(matrix->yy), NUM2INT(matrix->x0), NUM2INT(matrix->y0));
+    return rb_ary_new3(6, INT2NUM(matrix->xx), INT2NUM(matrix->xy), INT2NUM(matrix->yx),
+                       INT2NUM(matrix->yy), INT2NUM(matrix->x0), INT2NUM(matrix->y0));
 }
 
 #endif
