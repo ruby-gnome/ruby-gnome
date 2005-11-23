@@ -4,12 +4,16 @@
   rbglib_timer.c -
 
   $Author: mutoh $
-  $Date: 2005/10/15 04:31:38 $
+  $Date: 2005/11/23 14:27:58 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+#ifdef G_OS_WIN32
+#include <windows.h>
+#endif
 
 /*****************************************/
 
