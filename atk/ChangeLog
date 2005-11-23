@@ -1,3 +1,8 @@
+2005-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Improved cygwin support. [bug #1315334]
+	By Yaakov Selkowitz.
+
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/makeversion.rb: Removed. Use make_version_header() of 
