@@ -4,9 +4,9 @@
   rbgtkitemfactory.c -
 
   $Author: mutoh $
-  $Date: 2005/07/30 16:24:53 $
+  $Date: 2005/11/28 16:39:10 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Hiroshi Igarashi,
                           dellin,
                           MUTOH Masao
@@ -247,7 +247,7 @@ ifact_popup(self, x, y, mouse_button, time)
     VALUE self, x, y, mouse_button, time;
 {
     gtk_item_factory_popup(_SELF(self), NUM2UINT(x), NUM2UINT(y), NUM2UINT(mouse_button),
-                           NUM2INT(time));
+                           NUM2UINT(time));
     return self;
 }
 /*

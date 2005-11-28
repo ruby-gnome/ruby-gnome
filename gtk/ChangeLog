@@ -1,3 +1,8 @@
+2005-11-29  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkitemfactory.c: Fixed a bug of Gtk::ItemFactory.popup.
+	Reported by Grant McLean.
+
 2005-11-14  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/tree_combo.rb: Added.
