@@ -3,8 +3,8 @@
 
   rbpangoglyphitem.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: lrz $
+  $Date: 2005/11/29 12:43:19 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -27,7 +27,7 @@ glyph_item_copy(ref)
 }
 
 #if ! HAVE_PANGO_GLYPH_ITEM_FREE
-static void
+void
 pango_glyph_item_free(PangoGlyphItem* glyph_item)
 {
     if (glyph_item->item)

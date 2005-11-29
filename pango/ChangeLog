@@ -1,3 +1,7 @@
+2005-11-29  Laurent Sansonetti  <lrz@gnome.org>
+
+	* src/rbpangoglyphitem.c: Fixed build error.
+
 2005-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangorenderer.c: Pango::Renderer#matrix= accept nil.
