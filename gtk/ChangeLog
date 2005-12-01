@@ -1,3 +1,7 @@
+2005-12-01  Kouhei Sutou  <kou@kono.cis.iwate-u.ac.jp>
+
+	* sample/gtk-demo/hypertext.rb: Fixed a return key handling bug.
+
 2005-11-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkitemfactory.c: Fixed a bug of Gtk::ItemFactory.popup.

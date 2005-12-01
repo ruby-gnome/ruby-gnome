@@ -1,7 +1,7 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: hypertext.rb,v 1.1 2005/03/20 03:36:56 kzys Exp $
+# $Id: hypertext.rb,v 1.2 2005/12/01 09:27:01 ktou Exp $
 =begin
 = Text Widget/Hypertext
 
@@ -120,10 +120,9 @@ module Demo
     # Links can be activated by pressing Enter.
     def key_press_event(text_view, event)
       case event.keyval
-      when Gdk::Keyval::GDK_Return
-      when Gdk::Keyval::GDK_KP_Enter
+      when Gdk::Keyval::GDK_Return, Gdk::Keyval::GDK_KP_Enter
         buffer = text_view.buffer
-        iter = buffer.get_iter_at_mark(buffer.get_insert)
+        iter = buffer.get_iter_at_mark(buffer.get_mark("insert"))
         follow_if_link(text_view, iter)
       end
 
