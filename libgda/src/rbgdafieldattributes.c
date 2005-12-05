@@ -27,6 +27,31 @@
  */
 VALUE cGdaFieldAttributes;
 
+#if defined(GDA_AT_LEAST_1_3)
+#  define gda_field_attributes_get_defined_size     gda_column_get_defined_size
+#  define gda_field_attributes_set_defined_size     gda_column_set_defined_size
+#  define gda_field_attributes_get_name             gda_column_get_name
+#  define gda_field_attributes_set_name             gda_column_set_name
+#  define gda_field_attributes_get_table            gda_column_get_table
+#  define gda_field_attributes_set_table            gda_column_set_table
+#  define gda_field_attributes_get_caption          gda_column_get_caption
+#  define gda_field_attributes_set_caption          gda_column_set_caption
+#  define gda_field_attributes_get_scale            gda_column_get_scale
+#  define gda_field_attributes_set_scale            gda_column_set_scale
+#  define gda_field_attributes_get_allow_null       gda_column_get_allow_null
+#  define gda_field_attributes_set_allow_null       gda_column_set_allow_null
+#  define gda_field_attributes_get_primary_key      gda_column_get_primary_key
+#  define gda_field_attributes_set_primary_key      gda_column_set_primary_key
+#  define gda_field_attributes_get_unique_key       gda_column_get_unique_key
+#  define gda_field_attributes_set_unique_key       gda_column_set_unique_key
+#  define gda_field_attributes_get_references       gda_column_get_references
+#  define gda_field_attributes_set_references       gda_column_set_references
+#  define gda_field_attributes_get_auto_increment   gda_column_get_auto_increment
+#  define gda_field_attributes_set_auto_increment   gda_column_set_auto_increment
+#  define gda_field_attributes_get_position         gda_column_get_position
+#  define gda_field_attributes_set_position         gda_column_set_position
+#endif
+
 /*
  * Class method: new
  *
@@ -35,7 +60,11 @@ VALUE cGdaFieldAttributes;
 static VALUE rb_gda_field_new(self)
     VALUE self;
 {
+#if defined(GDA_AT_LEAST_1_3)
+    GdaColumn *attr = gda_column_new();
+#else
     GdaFieldAttributes *attr = gda_field_attributes_new();
+#endif
     if (attr != NULL) {
         G_INITIALIZE(self, attr);
     }
@@ -373,8 +402,37 @@ static VALUE rb_gda_field_set_position(self, position)
     return self;
 }
 
+#if defined(GDA_AT_LEAST_1_3)
+#  undef gda_field_attributes_get_undefd_size
+#  undef gda_field_attributes_set_undefd_size
+#  undef gda_field_attributes_get_name
+#  undef gda_field_attributes_set_name
+#  undef gda_field_attributes_get_table
+#  undef gda_field_attributes_set_table
+#  undef gda_field_attributes_get_caption
+#  undef gda_field_attributes_set_caption
+#  undef gda_field_attributes_get_scale
+#  undef gda_field_attributes_set_scale
+#  undef gda_field_attributes_get_allow_null
+#  undef gda_field_attributes_set_allow_null
+#  undef gda_field_attributes_get_primary_key
+#  undef gda_field_attributes_set_primary_key
+#  undef gda_field_attributes_get_unique_key
+#  undef gda_field_attributes_set_unique_key
+#  undef gda_field_attributes_get_references
+#  undef gda_field_attributes_set_references
+#  undef gda_field_attributes_get_auto_increment
+#  undef gda_field_attributes_set_auto_increment
+#  undef gda_field_attributes_get_position
+#  undef gda_field_attributes_set_position
+#endif
+
 void Init_gda_field_attributes(void) {
+#if defined(GDA_AT_LEAST_1_3)
+    VALUE c = G_DEF_CLASS(GDA_TYPE_COLUMN, "Column", mGda);
+#else
     VALUE c = G_DEF_CLASS(GDA_TYPE_FIELD_ATTRIBUTES, "FieldAttributes", mGda);
+#endif
 
     rb_define_method(c, "initialize", rb_gda_field_new, 0);
 

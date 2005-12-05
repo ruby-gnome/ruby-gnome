@@ -49,6 +49,9 @@ static void Init_all_classes(void) {
     extern void Init_gda_table(void);
     extern void Init_gda_time(void);
     extern void Init_gda_transaction(void);
+#if defined(GDA_AT_LEAST_1_3)
+    extern void Init_gda_column(void);
+#endif
 
     Init_gda_client();
     Init_gda_command();

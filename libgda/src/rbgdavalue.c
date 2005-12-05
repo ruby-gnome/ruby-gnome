@@ -36,7 +36,6 @@
 VALUE rb_gda_value_to_rb_value(value)
     GdaValue *value;
 {
-    gpointer binary;
     glong size;
     const GdaDate *dt;
     const GdaGeometricPoint *pt;
@@ -50,7 +49,11 @@ VALUE rb_gda_value_to_rb_value(value)
     const GdaTimestamp *st;
     struct tm tm;
 
+#if defined(GDA_AT_LEAST_1_3)
+    switch (gda_value_get_type(value))
+#else
     switch (value->type)
+#endif
     {
     case GDA_VALUE_TYPE_NULL:
         return Qnil;
@@ -62,8 +65,19 @@ VALUE rb_gda_value_to_rb_value(value)
         return ULL2NUM(gda_value_get_biguint(value));
         
     case GDA_VALUE_TYPE_BINARY:
+    {
+#if defined(GDA_AT_LEAST_1_3)
+        const GdaBinary *binary;
+
+        binary = gda_value_get_binary(value, &size);
+        return rb_str_new(binary->data, binary->binary_length);
+#else
+        gpointer binary;
+
         binary = gda_value_get_binary(value, &size);
         return rb_str_new(binary, size);
+#endif
+    }
         
     case GDA_VALUE_TYPE_BLOB:
         /* TODO */
@@ -175,7 +189,12 @@ VALUE rb_gda_value_to_rb_value(value)
         /* XXX: is this really an exception, perhaps better as
          * rb_notimplement */
         rb_raise(rb_eTypeError, "Unsupported GdaValueType (%d)",
-             value->type);
+#if defined(GDA_AT_LEAST_1_3)
+                 gda_value_get_type(value)
+#else
+                 value->type
+#endif
+                 );
     }
 }
 

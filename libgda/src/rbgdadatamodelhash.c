@@ -73,6 +73,7 @@ static VALUE rb_gda_datamodel_hash_clear(self)
     return self;
 }
 
+#if !defined(GDA_AT_LEAST_1_3)
 /*
  * Method: get_value_at(colnum, rownum)
  * colnum:  column number (starting from 0).
@@ -95,24 +96,6 @@ static VALUE rb_gda_datamodel_hash_get_value_at(self, colnum, rownum)
 }
 
 /*
- * Method: insert_row(rownum, row)
- * rownum: the number of the row.
- * row: the row to insert, as a Gda::Row object.
- *
- * Inserts a row in the data model.
- *
- * Returns: self.
- */
-static VALUE rb_gda_datamodel_hash_insert_row(self, rownum, row)
-    VALUE self, rownum, row;
-{
-    gda_data_model_hash_insert_row(RGDA_DATAMODEL_HASH(self), 
-                                   FIX2INT(rownum),
-                                   RGDA_ROW(row));
-    return self; 
-}
-
-/*
  * Method: get_row(rownum)
  * rownum: a row number.
  *
@@ -131,15 +114,37 @@ static VALUE rb_gda_datamodel_hash_get_row(self, rownum)
         : Qnil;
 }
 
+#endif
+
+/*
+ * Method: insert_row(rownum, row)
+ * rownum: the number of the row.
+ * row: the row to insert, as a Gda::Row object.
+ *
+ * Inserts a row in the data model.
+ *
+ * Returns: self.
+ */
+static VALUE rb_gda_datamodel_hash_insert_row(self, rownum, row)
+    VALUE self, rownum, row;
+{
+    gda_data_model_hash_insert_row(RGDA_DATAMODEL_HASH(self), 
+                                   FIX2INT(rownum),
+                                   RGDA_ROW(row));
+    return self; 
+}
+
 void Init_gda_datamodel_hash(void) {
     VALUE c = G_DEF_CLASS(GDA_TYPE_DATA_MODEL_HASH, "DataModelHash", mGda);
     
     rb_define_method(c, "initialize",    rb_gda_datamodel_hash_new,           1);
     rb_define_method(c, "set_n_columns", rb_gda_datamodel_hash_set_n_columns, 1);
     rb_define_method(c, "clear",         rb_gda_datamodel_hash_clear,         0);
+#if !defined(GDA_AT_LEAST_1_3)
     rb_define_method(c, "get_value_at",  rb_gda_datamodel_hash_get_value_at,  2);
-    rb_define_method(c, "insert_row",    rb_gda_datamodel_hash_insert_row,    2);
     rb_define_method(c, "get_row",       rb_gda_datamodel_hash_get_row,       1);
+#endif
+    rb_define_method(c, "insert_row",    rb_gda_datamodel_hash_insert_row,    2);
     G_DEF_SETTER(c, "n_columns"); 
 }
 

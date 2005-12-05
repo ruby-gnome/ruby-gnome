@@ -97,16 +97,29 @@ static VALUE rb_gda_client_open_connection(argc, argv, self)
 {
     VALUE dsn, username, password, options;
     GdaConnection *conn;    
-
+    GError *error;
+    
     rb_scan_args(argc, argv, "31", &dsn, &username, &password, &options);
 
+    error = NULL;
+    
     conn = gda_client_open_connection(RGDA_CLIENT(self),
                                       RVAL2CSTR(dsn),
                                       NIL_P(username) ? NULL : RVAL2CSTR(username),  
                                       NIL_P(password) ? NULL : RVAL2CSTR(password),  
-                                      NIL_P(options) ? 0 : RVAL2GFLAGS(options, GDA_TYPE_CONNECTION_OPTIONS));
+                                      NIL_P(options) 
+                                        ? 0 
+                                        : RVAL2GFLAGS(options, 
+                                                      GDA_TYPE_CONNECTION_OPTIONS)
+#if defined(GDA_AT_LEAST_1_3)
+                                      , &error
+#endif
+                                      );
     if (rb_block_given_p()) {
         if (conn == NULL) {
+            if (error != NULL)
+                RAISE_GERROR(error);
+            
             rb_raise(rb_eRuntimeError, "Could not create connection...");
         }
         else {
@@ -133,7 +146,11 @@ static VALUE rb_gda_client_get_connections(self)
     GList *list, *node;
     VALUE arr;
 
+#if defined(GDA_AT_LEAST_1_3)
+    list = (GList *) gda_client_get_connections(RGDA_CLIENT(self));
+#else 
     list = (GList *) gda_client_get_connection_list(RGDA_CLIENT(self));
+#endif
     arr = rb_ary_new();
 
     for (node = g_list_first(list); 

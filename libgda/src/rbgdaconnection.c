@@ -214,14 +214,25 @@ static VALUE rb_gda_connection_execute_single_command(argc, argv, self)
     GdaParameterList *plist;
     GdaDataModel *mod;
     VALUE cmd;
-    
+    GError *error;
+
+    error = NULL;
     plist = parse_params(argc, argv, &cmd);
     mod = gda_connection_execute_single_command(RGDA_CONNECTION(self),
                                                 RGDA_COMMAND(cmd),
-                                                plist);
-    return mod != NULL
-        ? RGDA_DATAMODEL_NEW(mod)
-        : Qnil;
+                                                plist
+#if defined(GDA_AT_LEAST_1_3)
+                                                , &error
+#endif
+                                                );
+
+    if (mod == NULL) {
+        if (error != NULL)
+            RAISE_GERROR(error);
+        return Qnil;
+    }
+    
+    return RGDA_DATAMODEL_NEW(mod);
 }
 
 /*
@@ -246,17 +257,26 @@ static VALUE rb_gda_connection_execute_command(argc, argv, self)
     GdaParameterList *plist;
     VALUE cmd, arr;
     GList *list;
-    
+    GError *error;
+
+    error = NULL;
     arr = rb_ary_new();
     plist = parse_params(argc, argv, &cmd);
-    for (list = gda_connection_execute_command(RGDA_CONNECTION(self),
-                                               RGDA_COMMAND(cmd),
-                                               plist);
-         list != NULL;
-         list = g_list_next(list))
-    {
+    list = gda_connection_execute_command(RGDA_CONNECTION(self),
+                                          RGDA_COMMAND(cmd),
+                                          plist
+#if defined(GDA_AT_LEAST_1_3)
+                                          , &error
+#endif
+                                          );
+    if (list == NULL) {
+        if (error != NULL)
+            RAISE_GERROR(error);
+    }
+    else { 
         rb_ary_push(arr, RGDA_DATAMODEL_NEW(list->data));
     }
+    
     return arr;        
 }
 
@@ -277,13 +297,26 @@ static VALUE rb_gda_connection_execute_non_query(argc, argv, self)
 {
     GdaParameterList *plist;
     VALUE cmd;
+    GError *error;
+    int ret;
 
+    error = NULL;
     plist = parse_params(argc, argv, &cmd);
-    return INT2FIX(gda_connection_execute_non_query(RGDA_CONNECTION(self),
-                                                    RGDA_COMMAND(cmd),
-                                                    plist));
+    ret = gda_connection_execute_non_query(RGDA_CONNECTION(self),
+                                           RGDA_COMMAND(cmd),
+                                           plist
+#if defined(GDA_AT_LEAST_1_3)
+                                           , &error
+#endif
+                                           );
+
+    if (ret == -1 && error != NULL)
+        RAISE_GERROR(error);
+
+    return INT2FIX(ret);
 }
 
+#if !defined(GDA_AT_LEAST_1_3)
 /*
  * Method: errors
  *
@@ -333,6 +366,7 @@ static VALUE rb_gda_connection_add_errors(self, errors)
     /* the list is automatically freed */
     return self;
 }
+#endif
 
 /*
  * Method: begin_transaction(xaction)
@@ -418,6 +452,7 @@ static VALUE rb_gda_connection_change_database(self, db)
                                                      RVAL2CSTR(db)));
 }
 
+#if !defined(GDA_AT_LEAST_1_3)
 /*
  * Method: create_database(name)
  * name: database name.
@@ -447,6 +482,7 @@ static VALUE rb_gda_connection_drop_database(self, db)
     return CBOOL2RVAL(gda_connection_drop_database(RGDA_CONNECTION(self),
                                                    RVAL2CSTR(db)));
 }
+#endif
 
 #if defined(GDA_AT_LEAST_1_1)
 /*
@@ -597,14 +633,18 @@ void Init_gda_connection(void) {
     rb_define_method(c, "commit_transaction",   rb_gda_connection_commit_transaction,   1);
     rb_define_method(c, "rollback_transaction", rb_gda_connection_rollback_transaction, 1);
 
+#if !defined(GDA_AT_LEAST_1_3)
     rb_define_method(c, "errors",     rb_gda_connection_get_errors,  0);
     rb_define_method(c, "add_errors", rb_gda_connection_add_errors, -2);
+#endif
     
     rb_define_method(c, "database",        rb_gda_connection_get_database,    0);
     rb_define_method(c, "change_database", rb_gda_connection_change_database, 0);
+#if !defined(GDA_AT_LEAST_1_3)
     rb_define_method(c, "create_database", rb_gda_connection_create_database, 0);
     rb_define_method(c, "drop_database",   rb_gda_connection_drop_database,   0);
-
+#endif
+    
 #if defined(GDA_AT_LEAST_1_1)
     rb_define_method(c, "reset!",  rb_gda_connection_reset,     0);
     rb_define_method(c, "clear_errors", rb_gda_connection_clear_errors, 0);

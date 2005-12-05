@@ -198,8 +198,15 @@ static VALUE rb_gda_datamodel_get_column(self, colnum)
 static VALUE rb_gda_datamodel_describe_column(self, colnum)
     VALUE self, colnum;
 {
-    GdaFieldAttributes *a = gda_data_model_describe_column(RGDA_DATAMODEL(self),
-                                                           FIX2INT(colnum));
+#if defined(GDA_AT_LEAST_1_3)
+    GdaColumn *a;
+#else
+    GdaFieldAttributes *a;
+#endif
+   
+    a = gda_data_model_describe_column(RGDA_DATAMODEL(self),
+                                       FIX2INT(colnum));
+
     return a != NULL
         ? RGDA_FIELD_ATTRIBUTES_NEW(a)
         : Qnil;
@@ -322,8 +329,12 @@ static VALUE rb_gda_datamodel_get_row(self, row_number)
 static VALUE rb_gda_datamodel_append_row(self, values)
     VALUE self, values;
 {
-    GList *list = NULL;
+#if defined(GDA_AT_LEAST_1_3)
+    return CBOOL2RVAL(gda_data_model_append_row(RGDA_DATAMODEL(self), 
+                                                RGDA_ROW(values)));
+#else
     const GdaRow *row;
+    GList *list = NULL;
     int i;
     
     for (i = 0; i < RARRAY(values)->len; i++) {
@@ -339,6 +350,7 @@ static VALUE rb_gda_datamodel_append_row(self, values)
     return row != NULL 
         ? RGDA_ROW_NEW(row)
         : Qnil;
+#endif
 }
 
 /*
@@ -478,7 +490,7 @@ static VALUE rb_gda_datamodel_remove_column(self, column_id)
 static VALUE rb_gda_datamodel_is_updatable(self)
     VALUE self;
 {
-#if defined(GDA_AT_LEAST_1_1)
+#if defined(GDA_AT_LEAST_1_1) || defined(GDA_AT_LEAST_1_3)
     return CBOOL2RVAL(gda_data_model_is_updatable(RGDA_DATAMODEL(self)));
 #else
     return CBOOL2RVAL(gda_data_model_is_editable(RGDA_DATAMODEL(self)));
@@ -498,7 +510,7 @@ static VALUE rb_gda_datamodel_is_updatable(self)
 static VALUE rb_gda_datamodel_has_changed(self)
     VALUE self;
 {
-#if defined(GDA_AT_LEAST_1_1)
+#if defined(GDA_AT_LEAST_1_1) || defined(GDA_AT_LEAST_1_3)
     return CBOOL2RVAL(gda_data_model_has_changed(RGDA_DATAMODEL(self)));
 #else
     return CBOOL2RVAL(gda_data_model_is_editing(RGDA_DATAMODEL(self)));
@@ -516,7 +528,7 @@ static VALUE rb_gda_datamodel_has_changed(self)
 static VALUE rb_gda_datamodel_begin_update(self)
     VALUE self;
 {
-#if defined(GDA_AT_LEAST_1_1)
+#if defined(GDA_AT_LEAST_1_1) || defined(GDA_AT_LEAST_1_3)
     return CBOOL2RVAL(gda_data_model_begin_update(RGDA_DATAMODEL(self)));
 #else
     return CBOOL2RVAL(gda_data_model_begin_edit(RGDA_DATAMODEL(self)));
@@ -534,7 +546,7 @@ static VALUE rb_gda_datamodel_begin_update(self)
 static VALUE rb_gda_datamodel_cancel_update(self)
     VALUE self;
 {
-#if defined(GDA_AT_LEAST_1_1)
+#if defined(GDA_AT_LEAST_1_1) || defined(GDA_AT_LEAST_1_3)
     return CBOOL2RVAL(gda_data_model_cancel_update(RGDA_DATAMODEL(self)));
 #else
     return CBOOL2RVAL(gda_data_model_cancel_edit(RGDA_DATAMODEL(self)));
@@ -554,11 +566,16 @@ static VALUE rb_gda_datamodel_end_update(self)
 {
 #if defined(GDA_AT_LEAST_1_1)
     return CBOOL2RVAL(gda_data_model_end_update(RGDA_DATAMODEL(self)));
-#else
+#else 
+#  if defined(GDA_AT_LEAST_1_3)
+    return CBOOL2RVAL(gda_data_model_commit_update(RGDA_DATAMODEL(self)));
+#  else
     return CBOOL2RVAL(gda_data_model_end_edit(RGDA_DATAMODEL(self)));
+#  endif
 #endif
 }
 
+#if !defined(GDA_AT_LEAST_1_3)
 /*
  * Method: to_comma_separated
  *
@@ -603,6 +620,7 @@ static VALUE rb_gda_datamodel_to_xml(argc, argv, self)
     return CSTR2RVAL(gda_data_model_to_xml(RGDA_DATAMODEL(self), 
                                            NIL_P(standalone) ? FALSE : RVAL2CBOOL(standalone)));
 }
+#endif
 
 /*
  * Method: command_text
@@ -696,9 +714,11 @@ void Init_gda_datamodel(void) {
     rb_define_method(c, "cancel_update", rb_gda_datamodel_cancel_update, 0);
     rb_define_method(c, "end_update",    rb_gda_datamodel_end_update,    0);
 
+#if !defined(GDA_AT_LEAST_1_3)
     rb_define_method(c, "to_comma_separated", rb_gda_datamodel_to_comma_separated, 0);
     rb_define_method(c, "to_tab_separated",   rb_gda_datamodel_to_tab_separated,   0);
     rb_define_method(c, "to_xml",             rb_gda_datamodel_to_xml,            -1);
+#endif
 
 /*  TODO:
 xmlNodePtr  gda_data_model_to_xml_node      (GdaDataModel *model,
