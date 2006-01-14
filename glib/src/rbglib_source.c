@@ -3,8 +3,8 @@
 
   rbglib_source.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/12 18:03:56 $
+  $Author: ktou $
+  $Date: 2006/01/14 08:41:53 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -178,7 +178,8 @@ Init_glib_source()
     rb_define_method(src, "add_poll", source_add_poll, 1);
     rb_define_method(src, "remove_poll", source_remove_poll, 1);
     rb_define_method(src, "current_time", source_get_current_time, 0);
-    rb_define_method(src, "remove", source_remove, 1);
+
+    rb_define_singleton_method(src, "remove", source_remove, 1);
 
     G_DEF_SETTERS(src);
 }

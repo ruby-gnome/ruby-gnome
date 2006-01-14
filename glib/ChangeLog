@@ -1,3 +1,7 @@
+2006-01-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_source.c: GLib::Source#remove -> GLib::Soruce.remove.
+
 2005-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_timer.c: Fix to compile on Cygwin.
