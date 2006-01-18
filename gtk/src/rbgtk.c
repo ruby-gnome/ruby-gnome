@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ktou $
+  $Date: 2006/01/18 15:35:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -108,9 +108,23 @@ rbgtk_poll (GPollFD *fds,
     return ready;
 }
 
+static void
+set_internal_poll_func(void)
+{
+    /* do nothing */
+}
+
+static void
+remove_internal_poll_func(void)
+{
+    /* do nothing */
+}
+
 #else /* !USE_POLL_FUNC */
 
-static gint
+static guint idle_id;
+
+static gboolean
 idle()
 {
     struct timeval wait;
@@ -121,17 +135,53 @@ idle()
     CHECK_INTS;
     if (!rb_thread_critical) rb_thread_wait_for(wait);
 
-    return Qtrue;
+    return TRUE;
 }
 
 static void
 idle_remove(VALUE data)
 {
-    gtk_idle_remove(NUM2UINT(data));
+    gtk_idle_remove(idle_id);
+}
+
+static void
+set_internal_poll_func(void)
+{
+    idle_id = gtk_idle_add((GtkFunction)idle, 0);
+}
+
+static void
+remove_internal_poll_func(void)
+{
+    idle_remove(Qnil);
 }
 
 #endif /* !USE_POLL_FUNC */
 
+
+static VALUE
+gtk_m_events_pending_internal(self)
+    VALUE self;
+{
+    remove_internal_poll_func();
+    return gtk_events_pending() ? Qtrue : Qfalse;
+}
+
+static VALUE
+gtk_m_events_pending_ensure(self)
+    VALUE self;
+{
+    set_internal_poll_func();
+    return Qnil;
+}
+
+static VALUE
+gtk_m_events_pending(self)
+    VALUE self;
+{
+    return rb_ensure(gtk_m_events_pending_internal, self,
+                     gtk_m_events_pending_ensure, self);
+}
 
 /*
  * Init
@@ -144,10 +194,13 @@ Init_gtk_gtk()
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
 
+    rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
+
 #ifdef USE_POLL_FUNC
     g_main_context_set_poll_func(NULL, (GPollFunc)rbgtk_poll);
 #else
-    rb_set_end_proc(idle_remove, UINT2NUM(gtk_idle_add((GtkFunction)idle, 0)));
+    set_internal_poll_func();
+    rb_set_end_proc(idle_remove, Qnil);
 #endif
 
 }

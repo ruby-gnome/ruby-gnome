@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: silicio $
-  $Date: 2005/03/02 12:06:36 $
+  $Author: ktou $
+  $Date: 2006/01/18 15:35:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -135,14 +135,6 @@ gtk_m_init(argc, argv, self)
 gtk_init()
 gtk_exit()
 */
-
-static VALUE
-gtk_m_events_pending(self)
-    VALUE self;
-{
-    return gtk_events_pending() ? Qtrue : Qfalse;
-}
-
 
 /* 
  * An empty timeout 
@@ -450,7 +442,6 @@ gtk_m_check_version_q(self, major, minor, micro)
 void 
 Init_gtk_main()
 {
-    rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
     rb_define_module_function(mGtk, "set_locale", gtk_m_set_locale, 0);
     rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
     rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
