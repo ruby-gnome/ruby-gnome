@@ -1,5 +1,7 @@
 2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/pac.rb: use save instead of Proc.
+
 	* src/rbgp.c (Gnome::Print::BINDING_VERSION): added.
 	* src/rbgp.h (RBGP_{MAJOR,MINOR,MICRO}_VERSION): added.
 

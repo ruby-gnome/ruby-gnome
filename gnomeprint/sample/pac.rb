@@ -6,7 +6,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pac.rb,v 1.4 2005/10/17 12:39:57 ktou Exp $
+  $Id: pac.rb,v 1.5 2006/01/19 12:03:07 ktou Exp $
 =end
 
 require "gnomeprint2"
@@ -66,22 +66,21 @@ context.begin_page("1") do
   context.circle_to(450, 350, 10).fill
 
   # Ghost
-  ghost = Proc.new do
-    context.move_to(500, 250)
-    context.line_to(500, 425)
-    context.curve_to(550, 475, 600, 475, 650, 425)
-    context.line_to(650, 250)
-    context.line_to(625, 275)
-    context.line_to(600, 250)
-    context.line_to(575, 275)
-    context.line_to(550, 250)
-    context.line_to(525, 275)
-    context.line_to(500, 250)
-  end
+  context.move_to(500, 250)
+  context.line_to(500, 425)
+  context.curve_to(550, 475, 600, 475, 650, 425)
+  context.line_to(650, 250)
+  context.line_to(625, 275)
+  context.line_to(600, 250)
+  context.line_to(575, 275)
+  context.line_to(550, 250)
+  context.line_to(525, 275)
+  context.line_to(500, 250)
+
   context.set_rgb_color(*blue)
-  context.fill(&ghost)
+  context.save {context.fill}
   context.set_rgb_color(*cyan)
-  context.stroke(&ghost)
+  context.save {context.stroke}
 
   # Ghost Eyes
   context.set_rgb_color(*white)
