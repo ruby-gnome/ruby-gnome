@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 02:10:03 $
+  $Date: 2006/01/19 03:16:16 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -29,6 +29,10 @@
 #endif
 
 #include <librsvg/librsvg-features.h>
+
+#define RBRSVG_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBRSVG_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBRSVG_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 #define LIBRSVG_CHECK_VERSION(major, minor, micro)                            \
     (LIBRSVG_MAJOR_VERSION > (major) ||                                       \
@@ -431,6 +435,12 @@ Init_rsvg2(void)
     id_callback = rb_intern("callback");
     id_closed = rb_intern("closed");
 
+    rb_define_const(mRSVG, "BINDING_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(RBRSVG_MAJOR_VERSION),
+                                INT2FIX(RBRSVG_MINOR_VERSION),
+                                INT2FIX(RBRSVG_MICRO_VERSION)));
+
     rb_define_const(mRSVG, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(LIBRSVG_MAJOR_VERSION),
@@ -442,11 +452,11 @@ Init_rsvg2(void)
                                 INT2FIX(librsvg_major_version),
                                 INT2FIX(librsvg_minor_version),
                                 INT2FIX(librsvg_micro_version)));
-  
+
     rb_define_const(mRSVG, "MAJOR_VERSION", INT2FIX(librsvg_major_version));
     rb_define_const(mRSVG, "MINOR_VERSION", INT2FIX(librsvg_minor_version));
     rb_define_const(mRSVG, "MICRO_VERSION", INT2FIX(librsvg_micro_version));
-  
+
 #if LIBRSVG_CHECK_VERSION(2, 9, 0)
     rb_define_module_function(mRSVG, "init", rb_rsvg_init, 0);
     rb_define_module_function(mRSVG, "term", rb_rsvg_term, 0);
@@ -470,7 +480,7 @@ Init_rsvg2(void)
     rb_define_method(cHandle, "base_uri", rb_rsvg_handle_get_base_uri, 0);
     rb_define_method(cHandle, "set_base_uri", rb_rsvg_handle_set_base_uri, 1);
 #endif
-  
+
     /* Convenience API */
     rb_define_module_function(mRSVG, "pixbuf_from_file",
                               rb_rsvg_pixbuf_from_file, 1);
@@ -504,6 +514,6 @@ Init_rsvg2(void)
     rb_define_method(cHandle, "pixbuf_from_file_at_zoom_with_max",
                      rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex, 5);
 #endif
-  
+
     G_DEF_SETTERS(cHandle);
 }
