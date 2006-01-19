@@ -4,7 +4,7 @@
   rbgp.h -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:59:48 $
+  $Date: 2006/01/19 03:07:06 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -23,6 +23,10 @@
 
 #include <libgnomeprint/gnome-print-unit.h>
 #include <libgnomeprint/libgnomeprint-enum-types.h>
+
+#define RBGP_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBGP_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBGP_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 VALUE rbgp_check_return_code(gint code);
 

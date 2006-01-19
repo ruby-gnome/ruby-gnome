@@ -4,7 +4,7 @@
   rbgp.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 02:07:41 $
+  $Date: 2006/01/19 03:07:06 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -36,12 +36,18 @@ Init_gnomeprint2(void) {
     mGnome = rb_define_module("Gnome");
     mGnomePrint = rb_define_module_under(mGnome, "Print");
 
+    rb_define_const(mGnomePrint, "BINDING_VERSION",
+		    rb_ary_new3(3,
+                                INT2FIX(RBGP_MAJOR_VERSION),
+				INT2FIX(RBGP_MINOR_VERSION),
+				INT2FIX(RBGP_MICRO_VERSION)));
+
     rb_define_const(mGnomePrint, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(LIBGNOMEPRINT_MAJOR_VERSION),
                                 INT2FIX(LIBGNOMEPRINT_MINOR_VERSION),
                                 INT2FIX(LIBGNOMEPRINT_MICRO_VERSION)));
-  
+
     Init_gnome_print(mGnome);
     Init_gnome_print_job(mGnome);
     Init_gnome_print_config(mGnome);
