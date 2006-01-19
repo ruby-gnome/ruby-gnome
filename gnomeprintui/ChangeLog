@@ -1,3 +1,8 @@
+2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgpui.c (Gnome::PrintUI::BINDING_VERSION): added.
+	* src/rbgpui.h (RBGPUI_{MAJOR,MINOR,MICRO}_VERSION): added.
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Fixed compiling error when Ruby/GTK2 is not installed.

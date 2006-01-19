@@ -4,7 +4,7 @@
   rbgpui.h -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:42:03 $
+  $Date: 2006/01/19 03:10:28 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -19,5 +19,9 @@
 #include <ruby.h>
 
 #include <rbgtk.h>
+
+#define RBGPUI_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBGPUI_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBGPUI_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 #endif

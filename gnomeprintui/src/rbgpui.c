@@ -4,7 +4,7 @@
   rbgpui.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:45:36 $
+  $Date: 2006/01/19 03:10:28 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -31,12 +31,18 @@ Init_gnomeprintui2(void) {
     mGnome = rb_define_module("Gnome");
     mGnomePrintUI = rb_define_module_under(mGnome, "PrintUI");
 
+    rb_define_const(mGnomePrintUI, "BINDING_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(RBGPUI_MAJOR_VERSION),
+                                INT2FIX(RBGPUI_MINOR_VERSION),
+                                INT2FIX(RBGPUI_MICRO_VERSION)));
+
     rb_define_const(mGnomePrintUI, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(LIBGNOMEPRINTUI_MAJOR_VERSION),
                                 INT2FIX(LIBGNOMEPRINTUI_MINOR_VERSION),
                                 INT2FIX(LIBGNOMEPRINTUI_MICRO_VERSION)));
-  
+
     Init_gnome_print_dialog(mGnome);
     Init_gnome_print_config_dialog(mGnome);
     Init_gnome_print_job_preview(mGnome);
@@ -45,6 +51,6 @@ Init_gnomeprintui2(void) {
     Init_gnome_print_content_selector(mGnome);
 
     Init_gnome_font_dialog(mGnome);
-  
+
     Init_gnome_paper_selector(mGnome);
 }
