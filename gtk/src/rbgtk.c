@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: ktou $
-  $Date: 2006/01/18 15:35:32 $
+  $Date: 2006/01/20 12:37:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -59,6 +59,8 @@ exec_callback(widget, proc)
 
 #ifdef USE_POLL_FUNC
 
+static GPollFunc default_poll_func;
+
 static gint 
 rbgtk_poll (GPollFD *fds,
             guint    nfds,
@@ -106,6 +108,14 @@ rbgtk_poll (GPollFD *fds,
     }
 
     return ready;
+}
+
+static void
+restore_poll_func(VALUE data)
+{
+    if (g_main_context_get_poll_func(NULL) == (GPollFunc)rbgtk_poll) {
+        g_main_context_set_poll_func(NULL, default_poll_func);
+    }
 }
 
 static void
@@ -197,7 +207,9 @@ Init_gtk_gtk()
     rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
 
 #ifdef USE_POLL_FUNC
+    default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, (GPollFunc)rbgtk_poll);
+    rb_set_end_proc(restore_poll_func, Qnil);
 #else
     set_internal_poll_func();
     rb_set_end_proc(idle_remove, Qnil);

@@ -1,3 +1,7 @@
+2006-01-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtk.c: Restore default poll function when ruby exits.
+
 2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtk.c: Fixed a bug that Gtk.events_ending? always returns
