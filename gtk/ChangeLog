@@ -1,3 +1,13 @@
+2006-01-27  Geoff Youngs <g@intersect-uk.co.uk>
+
+	* src/rbgdkproperty.c: Fix to be able to use _NET_WM_PID property.
+	* sample/misc/ipc.rb: Added.
+	
+2006-01-27  Tilman Sauerbeck <tilman@code-monkey.de>
+
+	* src/rbgdkpixbuf.c: Fixed wrong argument of 
+	Gdk::Pixbuf#render_pixmap_and_mask.
+
 2006-01-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtk.c: Restore default poll function when ruby exits.

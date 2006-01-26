@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: mutoh $
-  $Date: 2005/07/14 17:01:50 $
+  $Date: 2006/01/26 17:48:39 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -73,7 +73,7 @@ pixbuf_render_pixmap_and_mask(argc, argv, self)
     GdkPixmap *pixmap;
     GdkBitmap *mask;
 
-    rb_scan_args(argc, argv, "01", &colormap_or_alpha, &alpha);
+    rb_scan_args(argc, argv, "11", &colormap_or_alpha, &alpha);
 
     if (rb_obj_is_kind_of(colormap_or_alpha, GTYPE2CLASS(GDK_TYPE_COLORMAP))){
         gdk_pixbuf_render_pixmap_and_mask_for_colormap(_SELF(self),

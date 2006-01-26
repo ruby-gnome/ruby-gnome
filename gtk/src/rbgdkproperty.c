@@ -4,7 +4,7 @@
   rbgdkproperty.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Date: 2006/01/26 17:48:40 $
 
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
@@ -276,7 +276,7 @@ gdkprop_get(argc, argv, self)
                         RTEST(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
         return Qnil;
     }
-    
+ 
     switch(rfmt){
       case 8:
       default:
@@ -292,24 +292,21 @@ gdkprop_get(argc, argv, self)
         break;
         
       case 32:
-/*
-  ret = rb_ary_new();
+         ret = rb_ary_new();
 
-  if(rtype != GDK_SELECTION_TYPE_ATOM){
-  for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, INT2FIX(((unsigned long *)rdat)[i]));
-  }
-  } else {
-  for(i = 0; i < rlen; i++){
-  rb_ary_push(ret, RVAL2BOXED((GdkAtom)(unsigned long *)rdat[i], GDK_TYPE_ATOM));
-  }
-  }
-*/
-        rb_warning("not implemented yet.");
+         if(rtype != GDK_SELECTION_TYPE_ATOM){
+           for(i = 0; i < (rlen/sizeof(unsigned long)); i++){
+             rb_ary_push(ret, INT2FIX(((unsigned long*)rdat)[i]));
+           }
+         } else {
+           for(i = 0; i < (rlen/sizeof(unsigned long)); i++){
+             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((unsigned long*)rdat)[i], GDK_TYPE_ATOM));
+           }
+         }
         break;
     }
     
-    return rb_ary_new3(3, BOXED2RVAL(&rtype, GDK_TYPE_ATOM), 
+    return rb_ary_new3(3, BOXED2RVAL(rtype, GDK_TYPE_ATOM), 
                        ret, INT2NUM(rlen));
 }
 
