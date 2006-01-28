@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: ktou $
-  $Date: 2005/07/30 03:25:02 $
+  $Author: mutoh $
+  $Date: 2006/01/28 04:58:18 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -1039,6 +1039,14 @@ widget_window(self)
     return window ? GOBJ2RVAL(window) : Qnil;
 }
 
+static VALUE
+widget_set_window(self, window)
+    VALUE self;
+{
+    _SELF(self)->window = RVAL2GOBJ(window);
+    return self;
+}
+
 #define DEFINE_IS_WIDGET(STATE) \
 static VALUE \
 widget_ ## STATE (self) \
@@ -1086,6 +1094,16 @@ widget_get_requisition(self)
 }
 
 static VALUE
+widget_set_requisition(self, w, h)
+    VALUE self, w, h;
+{
+    GtkRequisition *r = &(_SELF(self)->requisition);
+    r->width  = NUM2INT(w);
+    r->height = NUM2INT(h);
+    return self;    
+}
+
+static VALUE
 widget_state(self)
     VALUE self;
 {
@@ -1116,6 +1134,7 @@ widget_signal_size_allocate(num, values)
     GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
 }
+
 void 
 Init_gtk_widget()
 {
@@ -1234,9 +1253,11 @@ Init_gtk_widget()
     rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
 #endif
     rb_define_method(gWidget, "window", widget_window, 0);
+    rb_define_method(gWidget, "set_window", widget_set_window, 1);
     rb_define_method(gWidget, "allocation", widget_get_allocation, 0);
     rb_define_method(gWidget, "set_allocation", widget_set_allocation, 4);
     rb_define_method(gWidget, "requisition", widget_get_requisition, 0);
+    rb_define_method(gWidget, "set_requisition", widget_set_requisition, 2);
     rb_define_method(gWidget, "state", widget_state, 0);
     rb_define_method(gWidget, "saved_state", widget_saved_state, 0);
 
