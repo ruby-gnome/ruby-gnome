@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: mutoh $
-  $Date: 2006/01/28 04:58:18 $
+  $Date: 2006/01/31 14:51:11 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -340,7 +340,7 @@ static VALUE
 widget_set_colormap(self, colormap)
     VALUE self, colormap;
 {
-    gtk_widget_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(self)));
+    gtk_widget_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 
