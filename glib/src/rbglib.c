@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/14 19:48:42 $
+  $Author: ktou $
+  $Date: 2006/02/08 14:54:51 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -25,6 +25,7 @@ extern void Init_glib_messages();
 extern void Init_glib_spawn();
 extern void Init_glib_fileutils();
 extern void Init_glib_utils();
+extern void Init_glib_i18n();
 extern void Init_gobject();
 extern void Init_glib_main_loop();
 extern void Init_glib_main_context();
@@ -273,6 +274,7 @@ Init_glib2()
     Init_glib_spawn();
     Init_glib_fileutils();
     Init_glib_utils();
+    Init_glib_i18n();
 
     Init_gobject();
 
