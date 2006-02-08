@@ -1,3 +1,8 @@
+2006-02-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkwidget.c (widget_render_icon): the third argument
+	'detail' is optional and accepts nil.
+
 2006-01-31  Tilman Sauerbeck <tilman@code-monkey.de>
 
 	* src/rbgtkwidget.c: Fixed a wrong parameter of Gtk::Widget#set_colormap. 
@@ -27,7 +32,7 @@
 	true.
 	* src/rbgtkmain.c: ditto.
 
-2005-12-01  Kouhei Sutou  <kou@kono.cis.iwate-u.ac.jp>
+2005-12-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gtk-demo/hypertext.rb: Fixed a return key handling bug.
 
