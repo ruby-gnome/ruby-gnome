@@ -1,5 +1,8 @@
 2006-02-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_win32.c: Supported GLib.win32_locale and
+	GLib.win32_locale_filename_from_utf8.
+
 	* src/rbglib_i18n.c: Supported GLib.language_names.
 
 2006-01-14  Kouhei Sutou  <kou@cozmixng.org>
