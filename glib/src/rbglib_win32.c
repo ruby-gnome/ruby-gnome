@@ -3,8 +3,8 @@
 
   rbglib_win32.c -
 
-  $Author: ktou $
-  $Date: 2006/02/08 14:55:46 $
+  $Author: mutoh $
+  $Date: 2006/03/10 18:58:51 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -37,7 +37,7 @@ rbglib_m_win32_locale_filename_from_utf8(self, utf8_filename)
     VALUE rb_filename;
 
     filename = g_win32_locale_filename_from_utf8(RVAL2CSTR(utf8_filename));
-    rb_locale = CSTR2RVAL(filename);
+    rb_filename = CSTR2RVAL(filename);
     g_free(filename);
 
     return rb_filename;

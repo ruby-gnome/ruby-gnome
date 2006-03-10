@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: mutoh $
-  $Date: 2005/09/15 06:25:30 $
+  $Date: 2006/03/10 18:58:51 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -272,7 +272,7 @@ gobj_sig_connect_after(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE sig, rest;
+    VALUE sig, rest, func;
     int i;
     GClosure* rclosure;
     const char* sig_name;
@@ -291,6 +291,8 @@ gobj_sig_connect_after(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
+    func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
     rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
