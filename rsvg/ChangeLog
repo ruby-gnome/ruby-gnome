@@ -2,6 +2,7 @@
 
 	* src/rbrsvg.c: Supported 2.14.
 	* src/lib/rsvg2.rb: ditto.
+
 	* extconf.rb: ditto.
 
 	* sample/svg2.rb: Added an example with cairo.

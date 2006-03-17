@@ -18,7 +18,7 @@ end
 if RSVG.cairo_available?
   module Cairo
     class Context
-      def render_rsvg(handle, *args, &block)
+      def render_rsvg_handle(handle, *args, &block)
         handle.render_cairo(self, *args, &block)
       end
     end
