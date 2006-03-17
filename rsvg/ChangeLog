@@ -1,3 +1,15 @@
+2006-03-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c: Supported 2.14.
+	* src/lib/rsvg2.rb: ditto.
+	* extconf.rb: ditto.
+
+	* sample/svg2.rb: Added an example with cairo.
+
+	* README:
+	  - Fixed format.
+	  - Updated copying.
+
 2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: Added RSVG::BINDING_VERSION, RBRSVG_MAJOR_VERSION,

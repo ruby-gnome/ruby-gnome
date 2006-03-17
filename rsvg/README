@@ -1,5 +1,5 @@
 Ruby/RSVG
-==============
+=========
 
 Ruby/RSVG is a Ruby binding of librsvg.
 
@@ -24,7 +24,7 @@ Install
 
 Copying
 -------
-   Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
 
    This program is free software.
    You can distribute/modify this program under the terms of
