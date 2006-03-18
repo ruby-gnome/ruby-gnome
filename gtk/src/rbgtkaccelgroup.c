@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/05 19:03:06 $
+  $Author: ktou $
+  $Date: 2006/03/18 06:54:03 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -41,6 +41,7 @@ gaccelgrp_connect(argc, argv, self)
         } else {
             rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         }
+        g_rclosure_attach(rclosure, self);
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
                                 RVAL2MOD(mods), 
                                 RVAL2GFLAGS(flags, GTK_TYPE_ACCEL_FLAGS),
@@ -52,6 +53,7 @@ gaccelgrp_connect(argc, argv, self)
         } else {
             rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         }
+        g_rclosure_attach(rclosure, self);
         gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
     }
     return self;
