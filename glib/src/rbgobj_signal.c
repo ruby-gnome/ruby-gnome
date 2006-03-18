@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2006/03/10 18:58:51 $
+  $Author: ktou $
+  $Date: 2006/03/18 06:53:05 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -114,6 +114,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         proc = rb_funcall(factory, rb_intern("call"), 2, self, ID2SYM(method_id));
 
         class_closure = g_rclosure_new(proc, Qnil, NULL);
+        g_rclosure_attach(class_closure, self);
     }
 
     if (NIL_P(params)) {
@@ -258,9 +259,9 @@ gobj_sig_connect(argc, argv, self)
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
     func = G_BLOCK_PROC();
-    G_RELATIVE(self, func);
     rclosure = g_rclosure_new(func, rest, 
                               rbgobj_get_signal_func(signal_id));
+    g_rclosure_attach((GClosure *)rclosure, self);
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
 
     return INT2FIX(i);
@@ -295,6 +296,7 @@ gobj_sig_connect_after(argc, argv, self)
     G_RELATIVE(self, func);
     rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
                               rbgobj_get_signal_func(signal_id));
+    g_rclosure_attach((GClosure *)rclosure, self);
     i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
 
     return INT2FIX(i);
@@ -607,6 +609,7 @@ gobj_s_method_added(klass, id)
         VALUE proc = rb_funcall(f, rb_intern("call"), 2, klass, id);
         GClosure* rclosure = g_rclosure_new(proc, Qnil,
                                             rbgobj_get_signal_func(signal_id));
+        g_rclosure_attach((GClosure *)rclosure, klass);
         g_signal_override_class_closure(signal_id, cinfo->gtype, rclosure);
     }
 
@@ -840,6 +843,7 @@ signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
 
     closure = g_rclosure_new(proc, Qnil,
                              rbgobj_get_signal_func(query->signal_id));
+    g_rclosure_attach(closure, self);
     hook_id = g_signal_add_emission_hook_closure(query->signal_id, detail, closure);
     return ULONG2NUM(hook_id);
 }

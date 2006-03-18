@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Author: ktou $
+  $Date: 2006/03/18 06:53:05 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -15,13 +15,16 @@
 static ID id_call;
 static gboolean rclosure_initialized = FALSE;
 
+#define CALLBACK_KEY       rb_str_new2("callback")
+#define EXTRA_ARGS_KEY     rb_str_new2("extra_args")
+
 typedef struct _GRClosure GRClosure;
 
 struct _GRClosure
 {
     GClosure closure;
-    VALUE callback;
-    VALUE extra_args;
+    VALUE holder;
+    gint count;
     GValToRValSignalFunc g2r_func;
 };
 
@@ -47,31 +50,46 @@ struct marshal_arg
     gpointer        marshal_data;
 };
 
+static int
+rclosure_alive_p(GRClosure *rclosure)
+{
+    return rclosure->count > 0;
+}
+
 static VALUE
 rclosure_marshal_body(struct marshal_arg* arg)
 {
-    GClosure*       closure         = arg->closure;
+    GRClosure*      rclosure        = (GRClosure *)(arg->closure);
     GValue*         return_value    = arg->return_value;   
     guint           n_param_values  = arg->n_param_values; 
     const GValue*   param_values    = arg->param_values;
     //gpointer        invocation_hint = arg->invocation_hint;
     //gpointer        marshal_data    = arg->marshal_data;
 
-    VALUE ret, args;
+    VALUE ret = Qnil;
+    VALUE args;
     GValToRValSignalFunc func;
 
-    if (((GRClosure*)closure)->g2r_func){
-        func = (GValToRValSignalFunc)((GRClosure*)closure)->g2r_func;
+    if (rclosure->g2r_func){
+        func = (GValToRValSignalFunc)rclosure->g2r_func;
     } else { 
         func = (GValToRValSignalFunc)rclosure_default_g2r_func;
     }
     args = (*func)(n_param_values, param_values);
 
-    if (!NIL_P(((GRClosure*)closure)->extra_args)){
-        args = rb_ary_concat(args, ((GRClosure*)closure)->extra_args);
-    }
+    if (rclosure_alive_p(rclosure)) {
+        VALUE callback, extra_args;
+        callback = rb_hash_aref(rclosure->holder, CALLBACK_KEY);
+        extra_args = rb_hash_aref(rclosure->holder, EXTRA_ARGS_KEY);
 
-    ret = rb_apply(((GRClosure*)closure)->callback, id_call, args);
+        if (!NIL_P(extra_args)) {
+            args = rb_ary_concat(args, extra_args);
+        }
+
+        ret = rb_apply(callback, id_call, args);
+    } else {
+        rb_warn("GRClosure invoking callback: already destroyed");
+    }
 
     if (return_value && G_VALUE_TYPE(return_value))
         rbgobj_rvalue_to_gvalue(ret, return_value);
@@ -118,31 +136,19 @@ rclosure_marshal(GClosure*       closure,
     }
 }
 
-static GHashTable* rclosure_table;
-static VALUE rclosure_table_wrapper;
 
 static void
 rclosure_invalidate(gpointer data, GClosure* closure)
 {
-    g_hash_table_remove(rclosure_table, closure);
-    ((GRClosure*)closure)->callback   = Qnil;
-    ((GRClosure*)closure)->extra_args = Qnil;
-}
+    GRClosure *rclosure = (GRClosure*)closure;
 
-static void
-rclosure_table_mark_entry(gpointer       key,
-                          gpointer       value,
-                          gpointer       user_data)
-{
-    GRClosure* closure = (GRClosure*)key;
-    rb_gc_mark(closure->callback);
-    rb_gc_mark(closure->extra_args);
-}
-
-static void
-rclosure_table_mark(GHashTable* table)
-{
-    g_hash_table_foreach(table, rclosure_table_mark_entry, NULL);
+    if (rclosure_alive_p(rclosure)) {
+        if (rclosure->count != 1) {
+            rb_warn("GRClosure invalidate: strange reference count: %d\n",
+                    rclosure->count);
+        }
+        rclosure->count = 0;
+    }
 }
 
 GClosure*
@@ -152,17 +158,40 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 
     closure = (GRClosure*)g_closure_new_simple(sizeof(GRClosure), NULL);
 
-    closure->callback   = callback_proc;
-    closure->extra_args = extra_args;
+    closure->holder     = rb_hash_new();
+    closure->count      = 0;
     closure->g2r_func   = g2r_func;
 
-    g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
+    rb_hash_aset(closure->holder, CALLBACK_KEY, callback_proc);
+    rb_hash_aset(closure->holder, EXTRA_ARGS_KEY, extra_args);
 
-    g_hash_table_insert(rclosure_table, closure, NULL);
+    g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
     g_closure_add_invalidate_notifier((GClosure*)closure, NULL,
                                       &rclosure_invalidate);
 
     return (GClosure*)closure;
+}
+
+static void
+rclosure_weak_notify(gpointer data, GObject* where_the_object_was)
+{
+    GRClosure *rclosure = data;
+    if (rclosure_alive_p(rclosure)) {
+        rclosure->count--;
+    }
+}
+
+void
+g_rclosure_attach(GClosure *closure, VALUE object)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+    gobj_holder *holder;
+
+    G_CHILD_ADD(object, rclosure->holder);
+
+    rclosure->count++;
+    Data_Get_Struct(object, gobj_holder, holder);
+    g_object_weak_ref(holder->gobj, rclosure_weak_notify, rclosure);
 }
 
 static void
@@ -174,15 +203,6 @@ rclosure_end_proc(VALUE _)
 static void
 Init_rclosure()
 {
-    rclosure_table = g_hash_table_new_full(g_direct_hash, g_direct_equal,
-                                           NULL, NULL);
-
-    rclosure_table_wrapper =
-      Data_Wrap_Struct(rb_cData,
-                       rclosure_table_mark, NULL,
-                       rclosure_table);
-    rb_global_variable(&rclosure_table_wrapper);
-
     id_call = rb_intern("call");
 
     rclosure_initialized = TRUE;

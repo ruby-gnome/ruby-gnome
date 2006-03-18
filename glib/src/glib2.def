@@ -43,6 +43,7 @@ EXPORTS
 	rbgobj_constant_remap
 	rbgobj_signal_wrap
 	g_rclosure_new
+	g_rclosure_attach
 	rbgobj_ruby_value_get_type
 	g_value_get_ruby_value
 	g_value_set_ruby_value

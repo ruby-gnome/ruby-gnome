@@ -1,3 +1,16 @@
+2006-03-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c: Fixed memory leak. Held closure in each
+	object instead of using global table to protect GRClosure from
+	Ruby's GC. Each function using GRClosure needs to call
+	g_rclosure_attach to protect GRClosure from Ruby's GC.
+
+	* src/glib2.def: Added g_rclosure_attach.
+	* src/rbgobject.h: ditto.
+
+	* src/rbgobj_object.c: Called g_rclosure_attach.
+	* src/rbgobj_signal.c: ditto.
+
 2006-03-11  Joao Pedrosa 
 
 	* src/rbglib_win32.c: Fix a typo on win32.

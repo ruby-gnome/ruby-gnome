@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/03 11:53:16 $
+  $Author: ktou $
+  $Date: 2006/03/18 06:53:05 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -433,6 +433,7 @@ gobj_smethod_added(self, id)
         VALUE method = rb_funcall(self, rb_intern("method"), 1, id);
         GClosure* closure = g_rclosure_new(method, Qnil,
                                            rbgobj_get_signal_func(signal_id));
+        g_rclosure_attach(closure, self);
         g_signal_connect_closure(obj, name, closure, FALSE);
     }
 

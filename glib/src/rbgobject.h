@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2005/11/14 13:02:28 $
+  $Author: ktou $
+  $Date: 2006/03/18 06:53:05 $
 
   Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -151,8 +151,9 @@ extern VALUE rbgobj_signal_wrap(guint sig_id);
 
 
 /* rbgobj_closure.c */
-extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args, 
+extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args,
                                 GValToRValSignalFunc func);
+extern void g_rclosure_attach(GClosure *closure, VALUE object);
 
 /* rbgobj_value.c */
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
