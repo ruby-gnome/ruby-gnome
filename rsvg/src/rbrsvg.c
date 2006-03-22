@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/03/17 13:37:12 $
+  $Date: 2006/03/22 03:55:32 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -214,21 +214,6 @@ rb_rsvg_dim_to_s(VALUE self)
 }
 #endif
 
-#if LIBRSVG_CHECK_VERSION(2, 9, 0)
-static VALUE
-rb_rsvg_init(VALUE klass)
-{
-    rsvg_init();
-    return Qnil;
-}
-
-static VALUE
-rb_rsvg_term(VALUE klass)
-{
-    rsvg_term();
-    return Qnil;
-}
-#endif
 
 static VALUE
 rb_rsvg_set_default_dpi(VALUE self, VALUE dpi)
@@ -694,6 +679,11 @@ Init_rsvg2(void)
 {
     VALUE mRSVG = rb_define_module("RSVG");
 
+#if LIBRSVG_CHECK_VERSION(2, 9, 0)
+    rsvg_init();
+    atexit(rsvg_term);
+#endif
+
 #ifdef RSVG_TYPE_HANDLE
     cHandle = G_DEF_CLASS(RSVG_TYPE_HANDLE, "Handle", mRSVG);
 #else
@@ -730,10 +720,6 @@ Init_rsvg2(void)
     rb_define_const(mRSVG, "MINOR_VERSION", INT2FIX(librsvg_minor_version));
     rb_define_const(mRSVG, "MICRO_VERSION", INT2FIX(librsvg_micro_version));
 
-#if LIBRSVG_CHECK_VERSION(2, 9, 0)
-    rb_define_module_function(mRSVG, "init", rb_rsvg_init, 0);
-    rb_define_module_function(mRSVG, "term", rb_rsvg_term, 0);
-#endif
 
     rb_define_module_function(mRSVG, "set_default_dpi",
                               rb_rsvg_set_default_dpi, 1);

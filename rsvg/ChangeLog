@@ -1,3 +1,12 @@
+2006-03-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c: hid rsvg_init() and rsvg_term() from Ruby.
+	* src/lib/rsvg2.rb: ditto.
+
+	* sample/svg2.rb:
+	  - added workaround of rsvg_handle_new_from()'s bug.
+	  - fixed typo.
+
 2006-03-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: Supported 2.14.

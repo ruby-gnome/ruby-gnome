@@ -16,14 +16,17 @@ output_type = File.extname(output)[1..-1].downcase
 output_type = "jpeg" if /jpg/ =~ output_type
 
 def to_pixbuf_with_cairo(input, ratio)
-  handle = RSVG::Handle.new_from_file(input)
+  handle = nil
+  Dir.chdir(File.dirname(File.expand_path(input))) do
+    handle = RSVG::Handle.new_from_file(input)
+  end
   dim = handle.dimensions
   width = dim.width * ratio
   height = dim.height * ratio
   surface = Cairo::ImageSurface.new(Cairo::FORMAT_ARGB32, width, height)
   cr = Cairo::Context.new(surface)
   cr.scale(ratio, ratio)
-  cr.render_rsvg(handle)
+  cr.render_rsvg_handle(handle)
   temp = Tempfile.new("svg2")
   cr.target.write_to_png(temp.path)
   cr.target.finish
