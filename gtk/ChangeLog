@@ -1,3 +1,7 @@
+2006-04-08  Mario Steele 
+
+	* sample/gtk-demo/images.rb: Read the image with "rb" mode not "r".
+
 2006-03-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkaccelgroup.c: Follow new GRClosure API. Call

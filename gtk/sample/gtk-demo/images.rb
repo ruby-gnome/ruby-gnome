@@ -1,7 +1,7 @@
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: images.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
+# $Id: images.rb,v 1.5 2006/04/08 12:30:03 mutoh Exp $
 =begin
 = Images
 
@@ -154,7 +154,7 @@ module Demo
 	end
       else
 	filename = Demo.find_file('alphatest.png')
-	@image_stream = File.open(filename, 'r')
+	@image_stream = File.open(filename, 'rb')
 
 	if @pixbuf_loader != nil
 	  @pixbuf_loader.close
