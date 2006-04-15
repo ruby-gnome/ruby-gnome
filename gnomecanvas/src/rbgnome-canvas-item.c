@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.21 2005/10/01 19:44:15 mutoh Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.22 2006/04/15 01:07:04 ktou Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -32,6 +32,8 @@
 #include <varargs.h>
 #define va_init_list(a,b) va_start(a)
 #endif
+
+static VALUE citem_parent(VALUE self);
 
 static void
 #ifdef HAVE_STDARG_PROTOTYPES
@@ -71,6 +73,8 @@ citem_intialize(self, parent, hash)
     rbgutil_set_properties(self, hash);
 
     g_object_thaw_notify(G_OBJECT(item));
+
+    G_CHILD_ADD(parent, self);
 
     return Qnil;
 }
@@ -225,7 +229,9 @@ citem_reparent(self, new_group)
     if (!g_type_is_a(RVAL2GTYPE(new_group), GNOME_TYPE_CANVAS_GROUP)) {
         rb_raise(rb_eTypeError, "not a GnomeCanvasGroup");
     }
+    G_CHILD_REMOVE(citem_parent(self), self);
     gnome_canvas_item_reparent(_SELF(self), GNOME_CANVAS_GROUP(RVAL2GOBJ(new_group)));
+    G_CHILD_ADD(new_group, self);
     return self;
 }
 

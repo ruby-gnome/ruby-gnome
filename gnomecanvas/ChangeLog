@@ -1,3 +1,9 @@
+2006-04-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgnome-canvas.c: Added G_CHILD_ADD.
+
+	* src/rbgnome-canvas-item.c: Added G_CHILD_ADD and G_CHILD_REMOVE.
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas-path-def.c: Fixed a compiling error on

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.17 2005/10/01 19:44:15 mutoh Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.18 2006/04/15 01:07:04 ktou Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -48,7 +48,12 @@ static VALUE
 canvas_root(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gnome_canvas_root(_SELF(self)));
+    VALUE root;
+
+    root = GOBJ2RVAL(gnome_canvas_root(_SELF(self)));
+    G_CHILD_ADD(self, root);
+
+    return root;
 }
 
 static VALUE
