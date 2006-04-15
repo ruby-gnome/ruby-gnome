@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: ktou $
+  $Date: 2006/04/15 01:58:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,6 +38,8 @@ note_append_page(argc, argv, self)
     gtk_notebook_append_page(_SELF(self),
                              RVAL2WIDGET(child),
                              NIL_P(label) ? NULL : RVAL2WIDGET(label));
+    G_CHILD_ADD(self, child);
+
     return self;
 }
 

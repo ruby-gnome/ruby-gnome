@@ -1,3 +1,9 @@
+2006-04-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmenushell.c: Added G_CHILD_ADD.
+	* src/rbgtknotebook.c: ditto.
+	* src/rbgtktable.c: ditto.
+
 2006-04-08  Mario Steele 
 
 	* sample/gtk-demo/images.rb: Read the image with "rb" mode not "r".

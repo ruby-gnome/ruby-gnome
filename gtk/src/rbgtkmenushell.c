@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: ggc $
-  $Date: 2005/08/28 20:31:49 $
+  $Author: ktou $
+  $Date: 2006/04/15 01:58:50 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -22,6 +22,7 @@ mshell_append(self, child)
     VALUE self, child;
 {
     gtk_menu_shell_append(_SELF(self),RVAL2WIDGET(child));
+    G_CHILD_ADD(self, child);
     return self;
 }
 
@@ -30,6 +31,7 @@ mshell_prepend(self, child)
     VALUE self, child;
 {
     gtk_menu_shell_prepend(_SELF(self), RVAL2WIDGET(child));
+    G_CHILD_ADD(self, child);
     return self;
 }
 
@@ -39,6 +41,7 @@ mshell_insert(self, child, pos)
 {
     gtk_menu_shell_insert(_SELF(self), RVAL2WIDGET(child),
                           NUM2INT(pos));
+    G_CHILD_ADD(self, child);
     return self;
 }
 

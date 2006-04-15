@@ -3,8 +3,8 @@
 
   rbgtktable.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Author: ktou $
+  $Date: 2006/04/15 01:58:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,6 +65,8 @@ tbl_attach(argc, argv, self)
                      NUM2INT(left),NUM2INT(right),
                      NUM2INT(top),NUM2INT(bottom),
                      xopt, yopt, xspc, yspc);
+
+    G_CHILD_ADD(self, child);
 
     return self;
 }
