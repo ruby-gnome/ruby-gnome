@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/03/18 06:53:05 $
+  $Date: 2006/04/15 01:04:53 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -57,18 +57,28 @@ rclosure_alive_p(GRClosure *rclosure)
 }
 
 static VALUE
-rclosure_marshal_body(struct marshal_arg* arg)
+rclosure_marshal_body(VALUE rb_arg)
 {
-    GRClosure*      rclosure        = (GRClosure *)(arg->closure);
-    GValue*         return_value    = arg->return_value;   
-    guint           n_param_values  = arg->n_param_values; 
-    const GValue*   param_values    = arg->param_values;
-    //gpointer        invocation_hint = arg->invocation_hint;
-    //gpointer        marshal_data    = arg->marshal_data;
+    struct marshal_arg *arg;
+    GRClosure*      rclosure;
+    GValue*         return_value;
+    guint           n_param_values;
+    const GValue*   param_values;
+    /* gpointer        invocation_hint;*/
+    /* gpointer        marshal_data; */
 
     VALUE ret = Qnil;
     VALUE args;
     GValToRValSignalFunc func;
+
+
+    Data_Get_Struct(rb_arg, struct marshal_arg, arg);
+    rclosure        = (GRClosure *)(arg->closure);
+    return_value    = arg->return_value;   
+    n_param_values  = arg->n_param_values; 
+    param_values    = arg->param_values;
+    /* invocation_hint = arg->invocation_hint; */
+    /* marshal_data    = arg->marshal_data; */
 
     if (rclosure->g2r_func){
         func = (GValToRValSignalFunc)rclosure->g2r_func;
@@ -105,22 +115,25 @@ rclosure_marshal(GClosure*       closure,
                  gpointer        invocation_hint,
                  gpointer        marshal_data)
 {
-    struct marshal_arg arg;
+    struct marshal_arg *arg;
+    VALUE rb_arg;
     int state;
 
     if (!rclosure_initialized) {
         g_closure_invalidate(closure);
         return;
     }
- 
-    arg.closure         = closure;
-    arg.return_value    = return_value;
-    arg.n_param_values  = n_param_values;
-    arg.param_values    = param_values;
-    arg.invocation_hint = invocation_hint;
-    arg.marshal_data    = marshal_data;
 
-    rb_protect((VALUE (*)_((VALUE)))rclosure_marshal_body, (VALUE)&arg, &state);
+    rb_arg = Data_Make_Struct(rb_cData, struct marshal_arg, 0, 0, arg);
+
+    arg->closure         = closure;
+    arg->return_value    = return_value;
+    arg->n_param_values  = n_param_values;
+    arg->param_values    = param_values;
+    arg->invocation_hint = invocation_hint;
+    arg->marshal_data    = marshal_data;
+
+    rb_protect(rclosure_marshal_body, rb_arg, &state);
 
     if (state){
         /* FIXME */

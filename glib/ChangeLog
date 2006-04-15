@@ -1,3 +1,8 @@
+2006-04-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c (rclosure_marshal, rclosure_marshal_body):
+	Changed an argument type to VALUE from struct marshal_arg *.
+
 2006-03-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c: Fixed memory leak. Held closure in each
