@@ -1,3 +1,7 @@
+2006-04-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_type.c (rbgobj_lookup_class): fixed typo.
+
 2006-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c (rclosure_marshal, rclosure_marshal_body):

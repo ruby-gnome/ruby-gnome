@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/15 04:31:38 $
+  $Author: ktou $
+  $Date: 2006/04/19 13:40:17 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -61,7 +61,7 @@ rbgobj_lookup_class(klass)
         return rbgobj_lookup_class(super);
     }
 
-    rb_raise(rb_eRuntimeError, "can't get gobject class infomation");    
+    rb_raise(rb_eRuntimeError, "can't get gobject class information");    
 }
 
 static VALUE
