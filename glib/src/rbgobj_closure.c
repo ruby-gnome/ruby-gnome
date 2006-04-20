@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/04/15 01:04:53 $
+  $Date: 2006/04/20 00:52:06 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -13,17 +13,28 @@
 #include "global.h"
 
 static ID id_call;
+static ID id_holder;
 static gboolean rclosure_initialized = FALSE;
 
 #define CALLBACK_KEY       rb_str_new2("callback")
 #define EXTRA_ARGS_KEY     rb_str_new2("extra_args")
 
+#define HOLDER(closure)       \
+  (rb_ivar_get((closure)->rb_holder, id_holder))
+#define SETUP_HOLDER(closure) \
+  (rb_ivar_set((closure)->rb_holder, id_holder, rb_hash_new()))
+
 typedef struct _GRClosure GRClosure;
+
+typedef struct _GRClosureHolder
+{
+    GRClosure *closure;
+} GRClosureHolder;
 
 struct _GRClosure
 {
     GClosure closure;
-    VALUE holder;
+    VALUE rb_holder;
     gint count;
     GValToRValSignalFunc g2r_func;
 };
@@ -89,8 +100,8 @@ rclosure_marshal_body(VALUE rb_arg)
 
     if (rclosure_alive_p(rclosure)) {
         VALUE callback, extra_args;
-        callback = rb_hash_aref(rclosure->holder, CALLBACK_KEY);
-        extra_args = rb_hash_aref(rclosure->holder, EXTRA_ARGS_KEY);
+        callback = rb_hash_aref(HOLDER(rclosure), CALLBACK_KEY);
+        extra_args = rb_hash_aref(HOLDER(rclosure), EXTRA_ARGS_KEY);
 
         if (!NIL_P(extra_args)) {
             args = rb_ary_concat(args, extra_args);
@@ -164,19 +175,35 @@ rclosure_invalidate(gpointer data, GClosure* closure)
     }
 }
 
+static void
+gr_closure_holder_free(GRClosureHolder *holder)
+{
+    if (holder) {
+        if (rclosure_alive_p(holder->closure)) {
+            holder->closure->count--;
+        }
+        free(holder);
+    }
+}
+
 GClosure*
 g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_func)
 {
     GRClosure* closure;
+    GRClosureHolder *holder;
 
     closure = (GRClosure*)g_closure_new_simple(sizeof(GRClosure), NULL);
 
-    closure->holder     = rb_hash_new();
     closure->count      = 0;
     closure->g2r_func   = g2r_func;
+    closure->rb_holder  = Data_Make_Struct(rb_cData, GRClosureHolder, 0,
+                                           gr_closure_holder_free, holder);
 
-    rb_hash_aset(closure->holder, CALLBACK_KEY, callback_proc);
-    rb_hash_aset(closure->holder, EXTRA_ARGS_KEY, extra_args);
+    holder->closure = closure;
+    SETUP_HOLDER(closure);
+
+    rb_hash_aset(HOLDER(closure), CALLBACK_KEY, callback_proc);
+    rb_hash_aset(HOLDER(closure), EXTRA_ARGS_KEY, extra_args);
 
     g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
     g_closure_add_invalidate_notifier((GClosure*)closure, NULL,
@@ -200,7 +227,7 @@ g_rclosure_attach(GClosure *closure, VALUE object)
     GRClosure *rclosure = (GRClosure *)closure;
     gobj_holder *holder;
 
-    G_CHILD_ADD(object, rclosure->holder);
+    G_CHILD_ADD(object, rclosure->rb_holder);
 
     rclosure->count++;
     Data_Get_Struct(object, gobj_holder, holder);
@@ -217,6 +244,7 @@ static void
 Init_rclosure()
 {
     id_call = rb_intern("call");
+    id_holder = rb_intern("holder");
 
     rclosure_initialized = TRUE;
     rb_set_end_proc(rclosure_end_proc, Qnil);

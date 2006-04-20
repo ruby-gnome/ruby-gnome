@@ -1,3 +1,7 @@
+2006-04-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c: Fixed a closure reference count bug.
+
 2006-04-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_type.c (rbgobj_lookup_class): fixed typo.
