@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/04/20 00:52:06 $
+  $Date: 2006/04/20 00:59:22 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -224,14 +224,19 @@ rclosure_weak_notify(gpointer data, GObject* where_the_object_was)
 void
 g_rclosure_attach(GClosure *closure, VALUE object)
 {
+    static VALUE mGLibObject = (VALUE)NULL;
     GRClosure *rclosure = (GRClosure *)closure;
-    gobj_holder *holder;
 
     G_CHILD_ADD(object, rclosure->rb_holder);
 
     rclosure->count++;
-    Data_Get_Struct(object, gobj_holder, holder);
-    g_object_weak_ref(holder->gobj, rclosure_weak_notify, rclosure);
+
+    if (!mGLibObject) {
+        mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
+    }
+    if (rb_obj_is_kind_of(object, mGLibObject)) {
+        g_object_weak_ref(RVAL2GOBJ(object), rclosure_weak_notify, rclosure);
+    }
 }
 
 static void

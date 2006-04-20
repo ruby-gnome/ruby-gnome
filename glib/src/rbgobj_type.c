@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: ktou $
-  $Date: 2006/04/19 13:40:17 $
+  $Date: 2006/04/20 00:59:22 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -690,7 +690,7 @@ static void
 Init_interface_commons()
 {
     mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
-    rb_define_method(mMetaInterface, "gtype", generic_s_gtype, 0);
+    rb_define_method(mMetaInterface, "gtype", generic_gtype, 0);
 }
 
 /**********************************************************************/
