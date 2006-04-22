@@ -4,7 +4,7 @@
   rbpanelapplet.c
 
   $Author: mutoh $
-  $Date: 2005/10/10 11:59:36 $
+  $Date: 2006/04/22 15:36:00 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -102,12 +102,20 @@ rbpanel_applet_set_flags(self, flags)
     return self;
 }
 
-/*
-void        panel_applet_set_size_hints     (PanelApplet *applet,
-                                             const int *size_hints,
-                                             int n_elements,
-                                             int base_size);
-*/
+static VALUE
+rbpanel_applet_set_size_hints(self, size_hints, base_size)
+    VALUE self, size_hints, base_size;
+{
+	gint len = NIL_P(size_hints) ? 0 : RARRAY(size_hints)->len;
+	gint *hints = g_new0(gint, len);
+	gint i;
+	for(i = 0; i < len; i++) {
+		hints[i] = NUM2INT(RARRAY(size_hints)->ptr[i]);
+	}
+	panel_applet_set_size_hints(_SELF(self), hints, len, NUM2INT(base_size));
+	g_free(hints);
+	return self;
+}
 
 static VALUE
 rbpanel_applet_get_control(self)
@@ -344,6 +352,7 @@ Init_panelapplet2()
     rb_define_method(cApplet, "add_preferences", rbpanel_applet_add_preferences, 1);
     rb_define_method(cApplet, "flags", rbpanel_applet_get_flags, 0);
     rb_define_method(cApplet, "set_flags", rbpanel_applet_set_flags, 1);
+    rb_define_method(cApplet, "set_size_hints", rbpanel_applet_set_size_hints, 2);
     rb_define_method(cApplet, "control", rbpanel_applet_get_control, 0);
     rb_define_method(cApplet, "popup_component", rbpanel_applet_get_popup_component, 0);
     rb_define_method(cApplet, "gconf_get_int", rbpanel_applet_gconf_get_int, 1);
