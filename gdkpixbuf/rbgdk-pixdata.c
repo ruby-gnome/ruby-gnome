@@ -4,7 +4,7 @@
   rbgdk-pixdata.c -
 
   $Author: mutoh $
-  $Date: 2004/08/14 07:00:50 $
+  $Date: 2006/04/22 15:25:44 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -125,7 +125,11 @@ static VALUE
 pixdata_length(self)
     VALUE self;
 {
-    return INT2NUM(_SELF(self)->length);
+    gint32 length = _SELF(self)->length;
+
+    if(length>0)
+        length -= GDK_PIXDATA_HEADER_LENGTH;
+    return INT2NUM(length);
 }
 
 static VALUE
@@ -162,9 +166,10 @@ pixdata_pixel_data(self)
 {
     gint i;
     guint8* ret = _SELF(self)->pixel_data;
+    gint32 length = _SELF(self)->length - GDK_PIXDATA_HEADER_LENGTH;
 
-    VALUE ary = rb_ary_new2(_SELF(self)->length);
-    for (i = 0; i < _SELF(self)->length; i++) {
+    VALUE ary = rb_ary_new2(length);
+    for (i = 0; i < length; i++) {
         rb_ary_push(ary, UINT2NUM(ret[i]));
     }
     return ary;
