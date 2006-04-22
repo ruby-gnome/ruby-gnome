@@ -4,7 +4,7 @@
   rbgdk-pixdata.c -
 
   $Author: mutoh $
-  $Date: 2006/04/22 15:25:44 $
+  $Date: 2006/04/22 15:39:00 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -127,7 +127,7 @@ pixdata_length(self)
 {
     gint32 length = _SELF(self)->length;
 
-    if(length>0)
+    if(length > 0)
         length -= GDK_PIXDATA_HEADER_LENGTH;
     return INT2NUM(length);
 }

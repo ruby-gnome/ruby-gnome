@@ -3,7 +3,7 @@
 	* rbgdk-pixdata.c: Gdk::Pixdata#length returns the size of pixel_data.
 	(length - GDK_PIXDATA_HEADER_LENGTH).
 	Gdk::Pixdata#pixel_data returns the data size of length - 
-	GDK_PIXDATA_HEADER_LENGTH.
+	GDK_PIXDATA_HEADER_LENGTH. [Patch#1473708]
 
 2005-09-24 Guillaume Cottenceau
 
