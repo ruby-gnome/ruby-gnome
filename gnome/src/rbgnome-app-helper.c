@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.16 2006/03/18 06:54:53 ktou Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.17 2006/04/23 11:40:53 ktou Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -450,7 +450,12 @@ do_ui_signal_connect(uiinfo, signal_name, uibdata)
         return;
     args = rb_ary_new3(1, (VALUE)uiinfo->user_data);
     rclosure = g_rclosure_new(proc, args, NULL);
-    g_rclosure_attach(rclosure, G_OBJECT(uiinfo->widget));
+    /* FIX ME: GOBJ2RVAL(uiinfo->widget) will be GCed. This
+       is same problem as the following:
+         Gtk::Window.new.show_all.signal_connect("destroy") {p :destroyed}
+       In the above sample, callback can't be invoked when
+       the object made by "Gtk::Window.new" is GCed. */
+    g_rclosure_attach(rclosure, GOBJ2RVAL(uiinfo->widget));
     g_signal_connect_closure(G_OBJECT(uiinfo->widget),
                              signal_name, rclosure, FALSE);
 }

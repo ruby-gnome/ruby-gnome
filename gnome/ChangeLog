@@ -1,3 +1,7 @@
+2006-04-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgnome-app-helper.c (do_ui_signal_connect): Add "FIX ME".
+
 2006-03-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgnome-app-helper.c: Follow new GRClosure API. Call
