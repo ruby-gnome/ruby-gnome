@@ -1,3 +1,8 @@
+2006-04-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtk.c: Added reference to Gtk::Window until the widget is
+	destroyed. This change is for backward compatibility and usability.
+
 2006-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmenushell.c: Added G_CHILD_ADD.

@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: ktou $
-  $Date: 2006/01/20 12:37:31 $
+  $Date: 2006/04/26 14:37:44 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -22,6 +22,15 @@ VALUE mGtk;
 
 ID id_relative_callbacks;
 ID id_call;
+static ID id__windows__;
+
+static void
+remove_from_windows(GtkWidget *window, VALUE obj)
+{
+    VALUE klass;
+    klass = rb_obj_class(obj);
+    rb_hash_delete(rb_ivar_get(klass, id__windows__), obj);
+}
 
 void
 rbgtk_initialize_gtkobject(obj, gtkobj)
@@ -31,6 +40,18 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
     gtkobj = g_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
     G_INITIALIZE(obj, gtkobj);
+
+    if (GTK_IS_WINDOW(gtkobj)) {
+        VALUE klass;
+        klass = rb_obj_class(obj);
+        if (NIL_P(rb_ivar_get(klass, id__windows__))) {
+            rb_ivar_set(klass, id__windows__, rb_hash_new());
+        }
+        rb_hash_aset(rb_ivar_get(klass, id__windows__), obj, Qnil);
+        g_signal_connect_after(gtkobj, "destroy",
+                               G_CALLBACK(remove_from_windows),
+                               (gpointer)obj);
+    }
 }
 
 void
@@ -200,6 +221,7 @@ void
 Init_gtk_gtk()
 {
     id_call = rb_intern("call");
+    id__windows__ = rb_intern("__windows__");
 
     mGtk = rb_define_module("Gtk");
     rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
