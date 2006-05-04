@@ -1,3 +1,10 @@
+2006-05-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/misc/fileselection.rb, itemfactory.rb, itemfactory2.rb: 
+	Show "Deprecated" message first.
+	* sample/misc/cairo-pong.rb: Fixed warning when calling 
+	@drawing_area.queue_draw after @drawing_area is broken.
+
 2006-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtk.c: Added reference to Gtk::Window until the widget is

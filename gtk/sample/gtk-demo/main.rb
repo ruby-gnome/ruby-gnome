@@ -5,7 +5,7 @@
   Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.17 2005/10/16 12:07:32 mutoh Exp $
+  $Id: main.rb,v 1.18 2006/05/04 04:05:00 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -215,6 +215,7 @@ module Demo
           iter.set_value(ITALIC_COLUMN, false)
         end
         window.show_all
+	@window = window
       end
     end
 

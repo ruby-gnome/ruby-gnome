@@ -7,7 +7,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cairo-pong.rb,v 1.1 2005/10/12 15:02:04 ktou Exp $
+  $Id: cairo-pong.rb,v 1.2 2006/05/04 04:05:00 mutoh Exp $
 =end
 
 require "gtk2"
@@ -197,7 +197,7 @@ module Pong
 
       Gtk.timeout_add(@speed) do
         @field.update
-        @drawing_area.queue_draw
+        @drawing_area.queue_draw unless @drawing_area.destroyed?
       end
     end
 

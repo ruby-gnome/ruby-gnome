@@ -2,17 +2,19 @@
 =begin
   itemfactory2.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   *NOTE* Gtk::ItemFactory has been deprecated. Use Gtk::UIManager instead.
 
-  $Id: itemfactory2.rb,v 1.6 2005/07/30 10:24:57 mutoh Exp $
+  $Id: itemfactory2.rb,v 1.7 2006/05/04 04:05:00 mutoh Exp $
 =end
 
 require 'gtk2'
 
 Gtk.init
+
+puts "Deprecated. Use Gtk::UIManager instead."
 
 window = Gtk::Window.new("Gtk::ItemFactory2")
 window.signal_connect("destroy") do
