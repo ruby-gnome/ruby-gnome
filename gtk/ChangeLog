@@ -1,3 +1,14 @@
+2006-05-08  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdialog.c: Added Gtk::Dialog#get_response as an alias of 
+	Gtk::Dialog#get_response_for_widget. 
+	* src/rbgtkcurve.c: Added Gtk::Curve#gamma=. 
+	* src/rbgtkclipboard.c: Gtk::Clipboard#set_can_store accept nil as an
+	argument.
+	* src/rbgtkwindow.c: Gtk::Window#active_(focus|default) was wrong name.
+	So they've been deprecated and added 
+	Gtk::Window#activate_(focus|default) instead.
+
 2006-05-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/fileselection.rb, itemfactory.rb, itemfactory2.rb: 

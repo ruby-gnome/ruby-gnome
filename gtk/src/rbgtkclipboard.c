@@ -4,7 +4,7 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Date: 2006/05/07 23:51:20 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -306,8 +306,13 @@ static VALUE
 clipboard_set_can_store(self, targets)
     VALUE self, targets;
 {
-    gint n_targets = RARRAY(targets)->len;
-    GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
+    gint n_targets = 0;
+    GtkTargetEntry* entries = (GtkTargetEntry*)NULL;
+
+    if (!NIL_P(targets)){
+        n_targets = RARRAY(targets)->len;
+        entries = rbgtk_get_target_entry(targets);
+    }
     gtk_clipboard_set_can_store(_SELF(self), entries, n_targets);
     return self;
 }

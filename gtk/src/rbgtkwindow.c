@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: ggc $
-  $Date: 2005/08/28 20:03:57 $
+  $Author: mutoh $
+  $Date: 2006/05/07 23:51:20 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -76,14 +76,30 @@ static VALUE
 gwin_activate_focus(self)
     VALUE self;
 {
-    gtk_window_activate_focus(_SELF(self));
-    return self;
+    return CBOOL2RVAL(gtk_window_activate_focus(_SELF(self)));
 }
 
 static VALUE
 gwin_activate_default(self)
     VALUE self;
 {
+    return CBOOL2RVAL(gtk_window_activate_default(_SELF(self)));
+}
+
+static VALUE
+gwin_active_focus(self)
+    VALUE self;
+{
+    rb_warning("Gtk::Window#active_focus is deprecated. Use Gtk::Window#activate_focus");
+    gtk_window_activate_focus(_SELF(self));
+    return self;
+}
+
+static VALUE
+gwin_active_default(self)
+    VALUE self;
+{
+    rb_warning("Gtk::Window#active_default is deprecated. Use Gtk::Window#activate_default");
     gtk_window_activate_default(_SELF(self));
     return self;
 }
@@ -674,8 +690,11 @@ Init_gtk_window()
     rb_define_method(gWindow, "set_wmclass", gwin_set_wmclass, 2);
     rb_define_method(gWindow, "add_accel_group", gwin_add_accel_group, 1);
     rb_define_method(gWindow, "remove_accel_group", gwin_remove_accel_group, 1);
-    rb_define_method(gWindow, "active_focus", gwin_activate_focus, 0);
-    rb_define_method(gWindow, "active_default", gwin_activate_default, 0);
+    /* active_(focus|default) are deprecated. Use activate_* instead. */
+    rb_define_method(gWindow, "active_focus", gwin_active_focus, 0);
+    rb_define_method(gWindow, "active_default", gwin_active_default, 0);
+    rb_define_method(gWindow, "activate_focus", gwin_activate_focus, 0);
+    rb_define_method(gWindow, "activate_default", gwin_activate_default, 0);
     rb_define_method(gWindow, "set_default_size", gwin_set_default_size, 2);
     rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
     rb_define_method(gWindow, "set_gravity", gwin_set_gravity, 1);

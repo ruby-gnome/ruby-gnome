@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: ggc $
-  $Date: 2005/09/15 18:23:00 $
+  $Author: mutoh $
+  $Date: 2006/05/07 23:51:20 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -226,6 +226,7 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "action_area", dialog_action_area, 0);
 
 #if GTK_CHECK_VERSION(2,8,0)
+    rb_define_method(gDialog, "get_response", dialog_get_response_for_widget, 1);
     rb_define_method(gDialog, "get_response_for_widget", dialog_get_response_for_widget, 1);
 #endif
    
