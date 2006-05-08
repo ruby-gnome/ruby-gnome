@@ -1,3 +1,9 @@
+2006-05-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c (Init_rsvg2): Don't use
+	librsvg_{major,minor,micro}_version because they became to local
+	variable.
+
 2006-03-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: hid rsvg_init() and rsvg_term() from Ruby.

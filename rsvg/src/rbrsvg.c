@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/03/22 03:55:32 $
+  $Date: 2006/05/08 04:58:08 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -709,16 +709,6 @@ Init_rsvg2(void)
                                 INT2FIX(LIBRSVG_MAJOR_VERSION),
                                 INT2FIX(LIBRSVG_MINOR_VERSION),
                                 INT2FIX(LIBRSVG_MICRO_VERSION)));
-
-    rb_define_const(mRSVG, "VERSION",
-                    rb_ary_new3(3,
-                                INT2FIX(librsvg_major_version),
-                                INT2FIX(librsvg_minor_version),
-                                INT2FIX(librsvg_micro_version)));
-
-    rb_define_const(mRSVG, "MAJOR_VERSION", INT2FIX(librsvg_major_version));
-    rb_define_const(mRSVG, "MINOR_VERSION", INT2FIX(librsvg_minor_version));
-    rb_define_const(mRSVG, "MICRO_VERSION", INT2FIX(librsvg_micro_version));
 
 
     rb_define_module_function(mRSVG, "set_default_dpi",
