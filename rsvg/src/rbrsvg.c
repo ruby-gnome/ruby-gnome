@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/05/08 04:58:08 $
+  $Date: 2006/05/12 06:38:12 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -330,7 +330,11 @@ rb_rsvg_handle_initialize(int argc, VALUE *argv, VALUE self)
     }
 #endif
 
+#ifdef RSVG_TYPE_HANDLE
+    G_INITIALIZE(self, handle);
+#else
     DATA_PTR(self) = handle;
+#endif
 
     rb_ivar_set(self, id_closed, Qfalse);
     return Qnil;
