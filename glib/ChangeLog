@@ -1,3 +1,10 @@
+2006-05-14  Sjoerd Simons
+
+	* src/glib2.def, global.h, rbgobj_type.c, rbgobj_value.c,
+	rbgobject.[ch], rbgobj_fundamental.ch: Added to be able to
+	add new fundamental object to Ruby/GLib2 such as GLib::Object,
+	GLib::Boxed.
+
 2006-04-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c (g_rclosure_attach): Fixed a bug

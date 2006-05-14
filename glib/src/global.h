@@ -3,10 +3,11 @@
 
    global.h -
 
-   $Author: sakai $
-   $Date: 2003/11/05 12:56:54 $
+   $Author: mutoh $
+   $Date: 2006/05/14 10:04:04 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
+   Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "rbgobject.h"

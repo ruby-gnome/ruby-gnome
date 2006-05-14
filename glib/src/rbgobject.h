@@ -3,10 +3,10 @@
 
   rbgobject.h -
 
-  $Author: ktou $
-  $Date: 2006/03/18 06:53:05 $
+  $Author: mutoh $
+  $Date: 2006/05/14 10:04:04 $
 
-  Copyright (C) 2003,2004  Ruby-GNOME2 Project Team
+  Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
@@ -41,6 +41,8 @@ extern "C" {
     (rbgobj_define_class(gtype, name, module, 0, 0, Qnil))
 #define G_DEF_INTERFACE2(gtype, name, module, mark, free)\
     (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
+
+#define G_DEF_FUNDAMENTAL(f) (rbgobj_fund_define_fundamental(f))
 
 #define G_RELATIVE(obj, rel) (rbgobj_add_relative(obj, rel))
 
@@ -206,6 +208,28 @@ extern GType g_main_loop_get_type(void);
 extern GType g_main_context_get_type(void);
 extern GType g_source_get_type(void);
 extern GType g_poll_fd_get_type(void);
+
+/* rbgobj_fundamental.c */
+typedef struct {
+  GType type;
+  VALUE (*get_superclass)(void); 
+  void (*type_init_hook)(VALUE);
+  void (*rvalue2gvalue)(VALUE val, GValue *result);
+  VALUE (*gvalue2rvalue)(const GValue *);
+  void (*initialize)(VALUE, gpointer);
+  gpointer (*robj2instance)(VALUE);
+  VALUE (*instance2robj)(gpointer);
+} RGFundamental;
+
+extern void rbgobj_fund_define_fundamental(RGFundamental *f);
+extern gboolean rbgobj_fund_has_type(GType type);
+extern VALUE rbgobj_fund_get_superclass(GType type);
+extern void rbgobj_fund_type_init_hook(GType type, VALUE klass);
+extern VALUE rbgobj_fund_gvalue2rvalue(GType type, const GValue *value);
+extern gboolean rbgobj_fund_rvalue2gvalue(GType type, VALUE val, GValue *result);
+extern void rbgobj_fund_initialize(GType type, VALUE obj, gpointer cobj);
+extern gpointer rbgobj_fund_robj2instance(GType type, VALUE obj);
+extern VALUE rbgobj_fund_instance2robj(GType type, gpointer instance);
 
 #ifdef __cplusplus
 }

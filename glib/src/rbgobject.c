@@ -4,9 +4,9 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 06:41:14 $
+  $Date: 2006/05/14 10:04:04 $
 
-  Copyright (C) 2003-2005  Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
   This file is derived from rbgtkobject.c in Ruby/Gtk distribution.
@@ -49,6 +49,8 @@ rbgobj_initialize_object(obj, cobj)
     case G_TYPE_BOXED:
         rbgobj_boxed_initialize(obj, cobj);
         break;
+    default:
+        rbgobj_fund_initialize(G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj)), obj, cobj);
     }
 }
 
@@ -67,8 +69,14 @@ rbgobj_instance_from_ruby_object(VALUE obj)
     case G_TYPE_PARAM:
         return rbgobj_param_spec_get_struct(obj);
     default:
-      rb_raise(rb_eTypeError, "%s isn't supported",
+      {
+        gpointer ret = rbgobj_fund_robj2instance(t, obj);
+        if (ret == NULL) {
+          rb_raise(rb_eTypeError, "%s isn't supported",
                rb_class2name(CLASS_OF(obj)));
+        }
+        return ret;
+      }
     }
 }
 
@@ -87,8 +95,14 @@ rbgobj_ruby_object_from_instance(gpointer instance)
     case G_TYPE_PARAM:
         return rbgobj_get_value_from_param_spec(instance);
     default:
-      rb_raise(rb_eTypeError, "%s isn't supported",
+      {
+        VALUE ret = rbgobj_fund_instance2robj(t, instance);
+        if (ret == Qnil) {
+          rb_raise(rb_eTypeError, "%s isn't supported",
                rb_class2name(CLASS_OF(instance)));
+        }
+        return ret;
+      }
     }
 }
 
@@ -498,6 +512,7 @@ Init_gobject()
     extern void Init_gobject_gsignal();
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
+    extern void Init_gobject_fundamental();
 
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
@@ -523,6 +538,7 @@ Init_gobject()
     rbgobj_id_children = rb_intern("__stored_children__");
 
     Init_gobject_gtype();
+    Init_gobject_fundamental();
     Init_gobject_gvalue();
     Init_gobject_gvaluetypes();
     Init_gobject_gboxed();

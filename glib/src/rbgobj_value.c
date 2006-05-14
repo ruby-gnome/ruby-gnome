@@ -3,8 +3,8 @@
 
   rbgobj_value.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 16:52:57 $
+  $Author: mutoh $
+  $Date: 2006/05/14 10:04:04 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -110,9 +110,27 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             }
         }
       default:
-        g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
-                  g_type_name(G_VALUE_TYPE(value)));
-        return Qnil;
+        { 
+          VALUE ret;
+          
+          ret = rbgobj_fund_gvalue2rvalue(
+                          G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value)), 
+                          value);
+               
+          if (NIL_P(ret))  {
+             GValueToRValueFunc func;
+             VALUE obj = rb_hash_aref(g2r_func_table, 
+                 INT2NUM(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))));
+             if (NIL_P(obj)) {
+               g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
+                  g_type_name(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))));
+             } else {
+               Data_Get_Struct(obj, void, func);
+               ret = func(value);
+             }
+          }
+          return ret;
+        }
     }
 }
 
@@ -200,8 +218,20 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         }
 
       default:
-        g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
-                  g_type_name(G_VALUE_TYPE(result)));
+        if (!rbgobj_fund_rvalue2gvalue(
+                 G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result)),
+                 val, result)) {
+          RValueToGValueFunc func;
+          VALUE obj = rb_hash_aref(r2g_func_table, 
+              INT2NUM(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result))));
+          if (NIL_P(obj)) {
+            g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
+                g_type_name(G_VALUE_TYPE(result)));
+          } else {
+            Data_Get_Struct(obj, void, func);
+            func(val, result);
+          }
+        }
     }
 }
 

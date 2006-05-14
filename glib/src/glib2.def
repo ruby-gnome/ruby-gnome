@@ -58,5 +58,6 @@ EXPORTS
 	rbgutil_gslist2ary_boxed
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
-        rbgerr_define_gerror
-        rbgerr_gerror2exception
+	rbgerr_define_gerror
+	rbgerr_gerror2exception
+	rbgobj_fund_define_fundermental

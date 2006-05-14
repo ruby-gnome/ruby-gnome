@@ -3,11 +3,11 @@
 
   rbgobj_type.c -
 
-  $Author: ktou $
-  $Date: 2006/04/20 00:59:22 $
+  $Author: mutoh $
+  $Date: 2006/05/14 10:04:04 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
-  Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
@@ -84,7 +84,9 @@ get_superclass(gtype)
       case G_TYPE_FLAGS:
         return rb_cObject;
       default:
-        {
+        if (rbgobj_fund_has_type(gtype)) {
+          return rbgobj_fund_get_superclass(gtype);
+        } else {
             const RGObjClassInfo* cinfo_super =
                 rbgobj_lookup_class_by_gtype(g_type_parent(gtype), Qnil);
             return cinfo_super->klass;
@@ -133,12 +135,21 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
         
     default:
         /* we should raise exception? */
-        fprintf(stderr,
-                "%s: %s's fundamental type %s isn't supported\n",
-                "rbgobj_lookup_class_by_gtype",
-                g_type_name(gtype),
-                g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
-        return NULL;
+        if (rbgobj_fund_has_type(G_TYPE_FUNDAMENTAL(gtype))) {
+          if (NIL_P(parent)) {
+            cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
+                                    get_superclass(gtype));
+          } else {
+          cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
+          }
+        } else {
+          fprintf(stderr,
+                  "%s: %s's fundamental type %s isn't supported\n",
+                  "rbgobj_lookup_class_by_gtype",
+                  g_type_name(gtype),
+                  g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
+          return NULL;
+          }
     
     }
 
@@ -180,6 +191,8 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
         rbgobj_init_flags_class(cinfo->klass);
     } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_INTERFACE) {
         rbgobj_init_interface(cinfo->klass);
+    } else {
+      rbgobj_fund_type_init_hook(G_TYPE_FUNDAMENTAL(gtype), cinfo->klass);
     }
     
     if (gclass)
