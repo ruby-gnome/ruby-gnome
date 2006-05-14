@@ -4,9 +4,9 @@
   rbglib_completion.c -
 
   $Author: mutoh $
-  $Date: 2005/10/15 04:31:38 $
+  $Date: 2006/05/14 10:33:18 $
 
-  Copyright (C) 2005 Masao Mutoh
+  Copyright (C) 2005,2006  Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -92,6 +92,7 @@ comp_add_items(self, items)
     GList* list = (GList*)NULL;
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
+    Check_Type(items, T_ARRAY);
     len = RARRAY(items)->len;
     for (i = 0; i < len; i ++){
         VALUE data = RARRAY(items)->ptr[i];
@@ -112,11 +113,12 @@ comp_remove_items(self, items)
     GList* list = (GList*)NULL;
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
+    Check_Type(items, T_ARRAY);
     len = RARRAY(items)->len;
     for (i = 0; i < len; i ++){
-        VALUE data = RARRAY(items)->ptr[0];
-        VALUE item = rb_assoc_new(self, data);
-        g_list_append(list, (gpointer)item);
+        VALUE data = RARRAY(items)->ptr[i];
+        VALUE item = rb_hash_aref(items_internal, data);
+        list = g_list_append(list, (gpointer)item);
 #if RUBY_VERSION_CODE < 180
         rb_funcall(items_internal, rb_intern("delete"), 1, data);
 #else

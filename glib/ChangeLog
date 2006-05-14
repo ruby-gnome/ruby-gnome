@@ -1,5 +1,7 @@
 2006-05-14  Sjoerd Simons
 
+	* src/rbgobj_enums.c: Don't crash if a genum's nick is uninitialized.
+	* src/rbglib_completion.c: Fixed GLib::Completion#remove_items. 
 	* src/glib2.def, global.h, rbgobj_type.c, rbgobj_value.c,
 	rbgobject.[ch], rbgobj_fundamental.ch: Added to be able to
 	add new fundamental object to Ruby/GLib2 such as GLib::Object,

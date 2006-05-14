@@ -4,10 +4,10 @@
   rbgobj_enums.c -
 
   $Author: mutoh $
-  $Date: 2005/10/04 17:13:32 $
+  $Date: 2006/05/14 10:33:18 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
-  Copyright (C) 2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 **********************************************************************/
 
@@ -220,11 +220,13 @@ rbgobj_init_enum_class(VALUE klass)
         gchar* nick = g_strdup(entry->value_nick);
         gchar* p;
 
-        for (p = nick; *p; p++) {
-            if (*p == '-' || *p == ' ')
-                *p = '_';
-            else
-                *p = toupper(*p);
+        if (nick) {
+            for (p = nick; *p; p++) {
+              if (*p == '-' || *p == ' ')
+                  *p = '_';
+              else
+                  *p = toupper(*p);
+            }
         }
 
 #if 0
@@ -238,7 +240,9 @@ rbgobj_init_enum_class(VALUE klass)
 #else
         {
             VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
-            rbgobj_define_const(klass, nick, value);
+            if (nick) {
+              rbgobj_define_const(klass, nick, value);
+            }
         }
 #endif
 
