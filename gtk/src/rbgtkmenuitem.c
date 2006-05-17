@@ -3,8 +3,8 @@
 
   rbgtkmenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: ktou $
+  $Date: 2006/05/17 13:51:42 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -51,7 +51,16 @@ static VALUE
 mitem_set_submenu(self, child)
     VALUE self, child;
 {
-    gtk_menu_item_set_submenu(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
+    GtkMenuItem *item;
+    GtkWidget *submenu;
+
+    item = _SELF(self);
+    submenu = gtk_menu_item_get_submenu(item);
+    if (submenu)
+        G_CHILD_REMOVE(self, GOBJ2RVAL(submenu));
+
+    gtk_menu_item_set_submenu(item, GTK_WIDGET(RVAL2GOBJ(child)));
+    G_CHILD_ADD(self, child);
     return self;
 }
 
@@ -67,7 +76,15 @@ static VALUE
 mitem_remove_submenu(self)
     VALUE self;
 {
-    gtk_menu_item_remove_submenu(_SELF(self));
+    GtkMenuItem *item;
+    GtkWidget *submenu;
+
+    item = _SELF(self);
+    submenu = gtk_menu_item_get_submenu(item);
+    gtk_menu_item_remove_submenu(item);
+    if (submenu)
+        G_CHILD_REMOVE(self, GOBJ2RVAL(submenu));
+
     return self;
 }
 
