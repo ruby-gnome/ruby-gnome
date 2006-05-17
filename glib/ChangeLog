@@ -1,3 +1,8 @@
+2006-05-17  Sjoerd Simons
+
+	* src/rbgobj_closure.c: Fixed crash when handling exception coming 
+	from an signal handler.
+
 2006-05-14  Sjoerd Simons
 
 	* src/rbgobj_enums.c: Don't crash if a genum's nick is uninitialized.
