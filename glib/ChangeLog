@@ -1,5 +1,11 @@
+2006-05-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_strv.c: Removed GLib::Strv because they are useless.
+	* src/rbgobj_valuearray.c: Removed GLib::ValueArray.
+	
 2006-05-17  Sjoerd Simons
 
+	* src/rbgobj_valuearray.c: Added.
 	* src/rbgobj_closure.c: Fixed crash when handling exception coming 
 	from an signal handler.
 

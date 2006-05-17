@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: mutoh $
-  $Date: 2006/05/14 10:04:04 $
+  $Date: 2006/05/17 14:00:24 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -504,6 +504,7 @@ Init_gobject()
 #if GLIB_CHECK_VERSION(2,6,0)
     extern void Init_gobject_gstrv();
 #endif
+    extern void Init_gobject_value_array();
     extern void Init_gobject_genums();
     extern void Init_gobject_gparam();
     extern void Init_gobject_gparamspecs();
@@ -545,6 +546,7 @@ Init_gobject()
 #if GLIB_CHECK_VERSION(2,6,0)
     Init_gobject_gstrv();
 #endif
+    Init_gobject_value_array();
     Init_gobject_genums();
     Init_gobject_gparam();
     Init_gobject_gparamspecs();

@@ -4,7 +4,7 @@
   rbgobj_gstrv.c -
 
   $Author: mutoh $
-  $Date: 2005/06/16 13:27:33 $
+  $Date: 2006/05/17 14:00:24 $
 
   Copyright (C) 2005  Masao Mutoh
 **********************************************************************/
@@ -59,7 +59,6 @@ strv_from_ruby(VALUE from, GValue* to)
 void Init_gobject_gstrv()
 {
     /* GStrv is treated as Array */
-    G_DEF_CLASS(G_TYPE_STRV, "Strv", mGLib);
     rbgobj_register_g2r_func(G_TYPE_STRV, strv_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_STRV, strv_from_ruby);
 }
