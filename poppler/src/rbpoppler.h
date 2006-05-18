@@ -1,6 +1,8 @@
 #ifndef __RBPOPPLER_H__
 #define __RBPOPPLER_H__
 
+#include "rbpopplerversion.h"
+
 #include <ruby.h>
 
 #include <rbglib.h>

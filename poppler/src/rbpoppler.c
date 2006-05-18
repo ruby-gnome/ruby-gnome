@@ -4,7 +4,7 @@
   rbpoppler.c -
 
   $Author: ktou $
-  $Date: 2006/05/17 12:51:19 $
+  $Date: 2006/05/18 02:26:58 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -41,6 +41,13 @@ Init_poppler(void)
     VALUE mPoppler, cError, cOrientation, cBackend;
 
     mPoppler = rb_define_module("Poppler");
+
+    rb_define_const(mPoppler, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(POPPLER_MAJOR_VERSION),
+                                INT2FIX(POPPLER_MINOR_VERSION),
+                                INT2FIX(POPPLER_MICRO_VERSION)));
+
     cError = G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
     cOrientation = G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation",
                                mPoppler);

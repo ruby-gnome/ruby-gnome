@@ -12,6 +12,8 @@ require "poppler.so"
 
 module Poppler
   LOG_DOMAIN = "Poppler"
+
+  VERSION = version.split(".").collect {|x| x.to_i}
 end
 
 if Poppler.cairo_available?
