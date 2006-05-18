@@ -7,8 +7,10 @@ Requirements
 ------------
 
     Ruby:               http://www.ruby-lang.org/
-    VTE:                http://www.gnome.org/
+    VTE [*]:            http://www.gnome.org/
     Ruby/GTK2:          http://ruby-gnome2.sourceforge.net/
+
+    [*]: 0.12.1 or later is required.
 
 Install
 -------
