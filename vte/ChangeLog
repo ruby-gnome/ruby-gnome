@@ -1,3 +1,11 @@
+2006-05-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbvte-terminal.c (term_set_color_highlight,
+	term_set_word_chars): accepted nil.
+	(term_get_text, term_get_text_range, term_match_check): fixed
+	memory leak.
+	(word_char?): fixed typo.
+
 2006-05-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbvte-terminal.c (term_set_color_cursor): accepted nil.

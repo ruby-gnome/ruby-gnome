@@ -4,7 +4,7 @@
   rbvte-terminal.c -
 
   $Author: ktou $
-  $Date: 2006/05/18 14:15:44 $
+  $Date: 2006/05/18 16:11:05 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -324,7 +324,9 @@ term_set_color_cursor(VALUE self, VALUE cursor)
 static VALUE
 term_set_color_highlight(VALUE self, VALUE highlight)
 {
-    vte_terminal_set_color_highlight(RVAL2TERM(self), RVAL2COLOR(highlight));
+    vte_terminal_set_color_highlight(RVAL2TERM(self),
+                                     NIL_P(highlight) ?
+                                       NULL : RVAL2COLOR(highlight));
     return Qnil;
 }
 
@@ -489,12 +491,14 @@ term_get_has_selection(VALUE self)
 static VALUE
 term_set_word_chars(VALUE self, VALUE word_chars)
 {
-    vte_terminal_set_word_chars(RVAL2TERM(self), RVAL2CSTR(word_chars));
+    vte_terminal_set_word_chars(RVAL2TERM(self),
+                                NIL_P(word_chars) ?
+                                  NULL : RVAL2CSTR(word_chars));
     return Qnil;
 }
 
 static VALUE
-term_is_word_chars(VALUE self, VALUE c)
+term_is_word_char(VALUE self, VALUE c)
 {
     return CBOOL2RVAL(vte_terminal_is_word_char(RVAL2TERM(self), NUM2UINT(c)));
 }
@@ -572,6 +576,7 @@ term_get_text(int argc, VALUE *argv, VALUE self)
                                      (gpointer)proc, attrs);
     }
     rb_text = CSTR2RVAL(text);
+    free(text);
 
     if (attrs) {
         VALUE rb_attrs;
@@ -605,6 +610,7 @@ term_get_text_range(int argc, VALUE *argv, VALUE self)
                                        (gpointer)proc,
                                        attrs);
     rb_text = CSTR2RVAL(text);
+    free(text);
 
     if (attrs) {
         VALUE rb_attrs;
@@ -668,10 +674,14 @@ term_match_check(VALUE self, VALUE column, VALUE row)
 
     string = vte_terminal_match_check(RVAL2TERM(self), NUM2LONG(column),
                                       NUM2LONG(row), &tag);
-    if (string)
-        return rb_ary_new3(2, CSTR2RVAL(string), INT2NUM(tag));
-    else
+    if (string) {
+        VALUE rb_string;
+        rb_string = CSTR2RVAL(string);
+        free(string);
+        return rb_ary_new3(2, rb_string, INT2NUM(tag));
+    } else {
         return Qnil;
+    }
 }
 
 static VALUE
@@ -880,7 +890,7 @@ Init_vte_terminal(VALUE mVte)
     rb_define_method(cTerminal, "has_selection?", term_get_has_selection, 0);
     rb_define_alias(cTerminal, "have_selection?", "has_selection?");
     rb_define_method(cTerminal, "set_word_chars", term_set_word_chars, 1);
-    rb_define_method(cTerminal, "word_chars?", term_is_word_chars, 1);
+    rb_define_method(cTerminal, "word_char?", term_is_word_char, 1);
     rb_define_method(cTerminal, "set_backspace_binding",
                      term_set_backspace_binding, 1);
     rb_define_method(cTerminal, "set_delete_binding",
