@@ -97,12 +97,13 @@ module PKGConfig
       ver[2] >= micro))
   end
 
-  def have_package(pkg, major = 0, minor = 0, micro = 0)
-    if major > 0
-      STDOUT.print("checking for #{pkg} version (>= #{major}.#{minor}.#{micro})... ")
-    else
+  def have_package(pkg, major = nil, minor = 0, micro = 0)
+    if major.nil?
       STDOUT.print("checking for #{pkg}... ")
+    else
+      STDOUT.print("checking for #{pkg} version (>= #{major}.#{minor}.#{micro})... ")
     end
+    major ||= 0
     STDOUT.flush
     if check_version?(pkg, major, minor, micro)
       STDOUT.print "yes\n"
