@@ -4,7 +4,7 @@
   rbvte-terminal.c -
 
   $Author: ktou $
-  $Date: 2006/05/17 12:40:47 $
+  $Date: 2006/05/18 14:15:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -316,7 +316,8 @@ term_set_color_background(VALUE self, VALUE background)
 static VALUE
 term_set_color_cursor(VALUE self, VALUE cursor)
 {
-    vte_terminal_set_color_cursor(RVAL2TERM(self), RVAL2COLOR(cursor));
+    vte_terminal_set_color_cursor(RVAL2TERM(self),
+                                  NIL_P(cursor) ? NULL : RVAL2COLOR(cursor));
     return Qnil;
 }
 

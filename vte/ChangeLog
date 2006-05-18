@@ -1,5 +1,7 @@
 2006-05-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbvte-terminal.c (term_set_color_cursor): accepted nil.
+
 	* README: required 0.12.1 or later.
 	* extconf.rb: ditto.
 
