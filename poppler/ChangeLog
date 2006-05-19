@@ -1,5 +1,7 @@
 2006-05-19  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/pdf2text.rb: added a sample which extract text from PDF.
+
 	* src/rbpoppler-document.c (index_iter_initialize): added NULL
 	check.
 	(Poppler::Layout): fixed type.
