@@ -1,3 +1,9 @@
+2006-05-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-document.c (index_iter_initialize): added NULL
+	check.
+	(Poppler::Layout): fixed type.
+
 2006-05-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: make src/rbpopplerversion.h.

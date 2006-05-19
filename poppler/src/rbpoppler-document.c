@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2006/05/17 12:51:19 $
+  $Date: 2006/05/19 07:03:20 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -149,7 +149,7 @@ index_iter_initialize(VALUE self, VALUE document)
     iter = poppler_index_iter_new(RVAL2GOBJ(document));
     G_INITIALIZE(self, iter);
     poppler_index_iter_free(iter);
-    rb_ivar_set(self, id_valid, Qtrue);
+    rb_ivar_set(self, id_valid, iter ? Qtrue : Qfalse);
     return Qnil;
 }
 
@@ -352,8 +352,7 @@ Init_poppler_document(VALUE mPoppler)
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
     cPSFile = G_DEF_CLASS(POPPLER_TYPE_PS_FILE, "PSFile", mPoppler);
 
-    cPageLayout = G_DEF_CLASS(POPPLER_TYPE_PAGE_LAYOUT, "PageLaytout",
-                              mPoppler);
+    cPageLayout = G_DEF_CLASS(POPPLER_TYPE_PAGE_LAYOUT, "PageLayout", mPoppler);
     cPageMode = G_DEF_CLASS(POPPLER_TYPE_PAGE_MODE, "PageMode", mPoppler);
     cFontType = G_DEF_CLASS(POPPLER_TYPE_FONT_TYPE, "FontType", mPoppler);
     cViewerPreferences = G_DEF_CLASS(POPPLER_TYPE_VIEWER_PREFERENCES,
