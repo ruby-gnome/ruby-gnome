@@ -1,3 +1,7 @@
+2006-05-23  Sjoerd Simons
+
+	* src/rbgobj_fundamental.c: Fixed typo.
+
 2006-05-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/pkg-config.rb (PKGConfig#have_package): accepted 0.X.X

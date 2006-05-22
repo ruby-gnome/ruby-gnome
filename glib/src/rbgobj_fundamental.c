@@ -4,7 +4,7 @@
    rbgobj_fundamental.c -
 
    $Author: mutoh $
-   $Date: 2006/05/16 14:52:45 $
+   $Date: 2006/05/22 17:13:05 $
 
    Copyright (C) 2006 Sjoerd Simons, Masao Mutoh
 ************************************************/
@@ -19,7 +19,7 @@ Init_gobject_fundamental(void) {
 }
 
 void
-rbgobj_fund_define_fundermental(RGFundamental *f) {
+rbgobj_fund_define_fundamental(RGFundamental *f) {
   g_hash_table_insert(fundamentals, &(f->type), f);
 }
 
