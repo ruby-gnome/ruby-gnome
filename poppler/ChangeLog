@@ -1,3 +1,7 @@
+2006-05-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-document.c: fixed some memory leaks.
+
 2006-05-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/pdf2text.rb: added a sample which extract text from PDF.

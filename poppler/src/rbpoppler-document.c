@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2006/05/19 07:03:20 $
+  $Date: 2006/05/23 14:36:31 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -65,6 +65,7 @@ doc_get_n_pages(VALUE self)
 static VALUE
 doc_get_page(VALUE self, VALUE index_or_label)
 {
+    VALUE rb_page;
     PopplerPage *page;
 
     if (RTEST(rb_obj_is_kind_of(index_or_label, rb_cInteger))) {
@@ -80,7 +81,10 @@ doc_get_page(VALUE self, VALUE index_or_label)
                  RVAL2CSTR(inspect));
     }
 
-    return GOBJ2RVAL(page);
+    rb_page = GOBJ2RVAL(page);
+    if (page)
+        g_object_unref(page);
+    return rb_page;
 }
 
 static VALUE
@@ -111,7 +115,14 @@ doc_each(VALUE self)
     document = RVAL2GOBJ(self);
     n_pages = poppler_document_get_n_pages(document);
     for (i = 0; i < n_pages; i++) {
-        rb_yield(GOBJ2RVAL(poppler_document_get_page(document, i)));
+        PopplerPage *page;
+        VALUE rb_page;
+
+        page = poppler_document_get_page(document, i);
+        rb_page = GOBJ2RVAL(page);
+        if (page)
+            g_object_unref(page);
+        rb_yield(rb_page);
     }
     return self;
 }
