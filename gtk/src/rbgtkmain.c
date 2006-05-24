@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: ktou $
-  $Date: 2006/01/18 15:35:32 $
+  $Date: 2006/05/24 15:15:33 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -19,13 +19,38 @@ EXTERN VALUE rb_progname, rb_argv;
 
 static VALUE rbgtk_main_threads = Qnil;
 
+static ID id__quit_callbacks__, id__timeout_callbacks__;
+static ID id__idle_callbacks__, id__snooper_callbacks__;
+
+
+typedef struct _callback_info_t
+{
+    VALUE callback;
+    ID key;
+    guint id;
+} callback_info_t;
+
+
 static gboolean
 gtk_m_function(data)
     gpointer data;
 {
-    VALUE ret = rb_funcall((VALUE)data, id_call, 0);
-    return RTEST(ret);
+    callback_info_t *info = (callback_info_t *)data;
+    gboolean ret;
+
+    ret = RTEST(rb_funcall(info->callback, id_call, 0));
+    if (info->key && !ret)
+        G_REMOVE_RELATIVE(mGtk, info->key, UINT2NUM(info->id));
+    return ret;
 }
+
+static void
+gtk_m_function2(gpointer data)
+{
+    VALUE callback = (VALUE)data;
+    rb_funcall(callback, id_call, 0);
+}
+
 
 static VALUE
 gtk_m_set_locale(self)
@@ -236,8 +261,8 @@ gtk_m_init_add(self)
     VALUE self;
 {
     volatile VALUE func = G_BLOCK_PROC();
-    
-    gtk_init_add((GtkFunction)gtk_m_function, (gpointer)func);
+
+    gtk_init_add((GtkFunction)gtk_m_function2, (gpointer)func);
     G_RELATIVE(self, func);
     return Qnil;
 }
@@ -247,12 +272,19 @@ gtk_m_quit_add(self, main_level)
     VALUE self, main_level;
 {
     volatile VALUE func = G_BLOCK_PROC();
-    VALUE id;
+    VALUE rb_id;
+    callback_info_t *info;
+    guint id;
 
-    id = INT2FIX(gtk_quit_add(NUM2UINT(main_level), 
-                                (GtkFunction)gtk_m_function, (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
-    return id;
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    info->key = id_relative_callbacks;
+    id = gtk_quit_add_full(NUM2UINT(main_level), (GtkFunction)gtk_m_function,
+                           NULL, (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(self, func, id__quit_callbacks__, rb_id);
+    return rb_id;
 }
 
 static VALUE
@@ -260,7 +292,7 @@ gtk_m_quit_remove(self, quit_handler_id)
     VALUE self, quit_handler_id;
 {
     gtk_quit_remove(NUM2UINT(quit_handler_id));
-    G_REMOVE_RELATIVE(self, id_relative_callbacks, quit_handler_id);
+    G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
     return quit_handler_id;
 }
 
@@ -275,23 +307,28 @@ static VALUE
 timeout_add(self, interval)
     VALUE self, interval;
 {
-    VALUE id;
-    VALUE func;
+    VALUE func, rb_id;
+    callback_info_t *info;
+    guint id;
 
     func = G_BLOCK_PROC();
-    id = INT2FIX(gtk_timeout_add(NUM2INT(interval),
-                                 (GtkFunction)gtk_m_function,
-                                 (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
-    return id;
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    info->key = id__timeout_callbacks__;
+    id = gtk_timeout_add_full(NUM2UINT(interval), (GtkFunction)gtk_m_function,
+                              NULL, (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(self, func, id__timeout_callbacks__, rb_id);
+    return rb_id;
 }
 
 static VALUE
 timeout_remove(self, id)
     VALUE self, id;
 {
-    gtk_timeout_remove(NUM2INT(id));
-    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
+    gtk_timeout_remove(NUM2UINT(id));
+    G_REMOVE_RELATIVE(self, id__timeout_callbacks__, id);
     return Qnil;
 }
 
@@ -299,36 +336,49 @@ static VALUE
 idle_add(self)
     VALUE self;
 {
-    VALUE id;
-    VALUE func;
+    VALUE func, rb_id;
+    callback_info_t *info;
+    guint id;
 
     func = G_BLOCK_PROC();
-    id = INT2FIX(gtk_idle_add((GtkFunction)gtk_m_function, (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
-    return id;
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    info->key = id__idle_callbacks__;
+    id = gtk_idle_add_full(G_PRIORITY_DEFAULT_IDLE,
+                           (GtkFunction)gtk_m_function, NULL,
+                           (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
+    return rb_id;
 }
 
 static VALUE
 idle_add_priority(self, priority)
     VALUE self;
 {
-    VALUE id;
-    VALUE func;
+    VALUE func, rb_id;
+    callback_info_t *info;
+    guint id;
 
     func = G_BLOCK_PROC();
-    id = INT2FIX(gtk_idle_add_priority(NUM2INT(priority),
-                                       (GtkFunction)gtk_m_function, 
-                                       (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
-    return id;
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    info->key = id__idle_callbacks__;
+    id = gtk_idle_add_full(NUM2INT(priority), (GtkFunction)gtk_m_function,
+                           NULL, (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
+    return rb_id;
 }
 
 static VALUE
 idle_remove(self, id)
     VALUE self, id;
 {
-    gtk_idle_remove(NUM2INT(id));
-    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
+    gtk_idle_remove(NUM2UINT(id));
+    G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
     return Qnil;
 }
 
@@ -361,7 +411,7 @@ gtk_m_key_snooper_install(self)
     VALUE id = INT2FIX(gtk_key_snooper_install(
                            (GtkKeySnoopFunc)gtk_m_key_snoop_func, 
                            (gpointer)func));
-    G_RELATIVE2(self, func, id_relative_callbacks, id);
+    G_RELATIVE2(self, func, id__snooper_callbacks__, id);
     return id;
 }
 
@@ -370,7 +420,7 @@ gtk_m_key_snooper_remove(self, id)
     VALUE self, id;
 {
     gtk_key_snooper_remove(NUM2UINT(id));
-    G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
+    G_REMOVE_RELATIVE(self, id__snooper_callbacks__, id);
     return Qnil;
 }
 
@@ -442,6 +492,11 @@ gtk_m_check_version_q(self, major, minor, micro)
 void 
 Init_gtk_main()
 {
+    id__quit_callbacks__ = rb_intern("__quit_callbacks__");
+    id__timeout_callbacks__ = rb_intern("__timeout_callbacks__");
+    id__idle_callbacks__ = rb_intern("__idle_callbacks__");
+    id__snooper_callbacks__ = rb_intern("__snooper_callbacks__");
+
     rb_define_module_function(mGtk, "set_locale", gtk_m_set_locale, 0);
     rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
     rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
