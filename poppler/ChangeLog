@@ -1,3 +1,7 @@
+2006-05-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler.h: added extern modifier.
+
 2006-05-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-document.c: fixed some memory leaks.

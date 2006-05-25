@@ -23,7 +23,7 @@ extern GType gdk_region_get_type(void);
 #endif
 
 #ifndef POPPLER_TYPE_DEST
-GType poppler_dest_get_type (void) G_GNUC_CONST;
+extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  define POPPLER_TYPE_DEST (poppler_dest_get_type ())
 #  define RB_POPPLER_TYPE_DEST_NOT_DEFINED
 #endif
@@ -42,9 +42,9 @@ GType poppler_dest_get_type (void) G_GNUC_CONST;
 #define DESTTYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_DEST_TYPE))
 #define RVAL2COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
 
-void Init_poppler_document(VALUE mPoppler);
-void Init_poppler_page(VALUE mPoppler);
-void Init_poppler_attachment(VALUE mPoppler);
-void Init_poppler_action(VALUE mPoppler);
+extern void Init_poppler_document(VALUE mPoppler);
+extern void Init_poppler_page(VALUE mPoppler);
+extern void Init_poppler_attachment(VALUE mPoppler);
+extern void Init_poppler_action(VALUE mPoppler);
 
 #endif
