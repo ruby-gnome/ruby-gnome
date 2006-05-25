@@ -1,3 +1,7 @@
+2006-05-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbvte.h: added extern modifier.
+
 2006-05-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbvte-terminal.c (term_set_color_highlight,
