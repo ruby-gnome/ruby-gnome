@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2005/11/14 07:19:33 $
+  $Author: ssimons $
+  $Date: 2006/05/26 18:57:44 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -77,6 +77,11 @@ extern VALUE rbg_cstr2rval_with_free(gchar* str);
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);
 extern VALUE rbgerr_define_gerror(GQuark domain, gchar* name, VALUE module, VALUE parent, VALUE gtype);
+
+extern VALUE rbglib_int64_to_num(guint64 val);
+extern VALUE rbglib_uint64_to_num(guint64 val);
+extern gint64 rbglib_num_to_int64(VALUE val);
+extern guint64 rbglib_num_to_uint64(VALUE val);
 
 #ifdef __cplusplus
 }

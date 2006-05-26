@@ -1,3 +1,8 @@
+2006-05-26  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbglib.h, src/global.h: Move the 64 bit integer 
+	util functions to the public header
+
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_signal.c: Fix the format string of rb_raise to match with

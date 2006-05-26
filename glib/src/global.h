@@ -3,20 +3,14 @@
 
    global.h -
 
-   $Author: mutoh $
-   $Date: 2006/05/14 10:04:04 $
+   $Author: ssimons $
+   $Date: 2006/05/26 18:57:44 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "rbgobject.h"
-
-extern VALUE rbglib_int64_to_num(guint64 val);
-extern VALUE rbglib_uint64_to_num(guint64 val);
-extern gint64 rbglib_num_to_int64(VALUE val);
-extern guint64 rbglib_num_to_uint64(VALUE val);
-
 
 typedef struct {
     VALUE self;
