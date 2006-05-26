@@ -1,3 +1,7 @@
+2006-05-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbgobj_rbgobj_closure.c: fix compilation error on YARV.
+
 2006-05-23  Sjoerd Simons
 
 	* src/rbgobj_fundamental.c: Fixed typo.
@@ -57,7 +61,7 @@
 
 	* src/rbgobj_object.c: Called g_rclosure_attach.
 	* src/rbgobj_signal.c: ditto.
-
+<
 2006-03-11  Joao Pedrosa 
 
 	* src/rbglib_win32.c: Fix a typo on win32.

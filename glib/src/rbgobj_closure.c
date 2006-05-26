@@ -3,14 +3,19 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/17 12:43:08 $
+  $Author: sakai $
+  $Date: 2006/05/26 10:34:19 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 
 #include "global.h"
+
+#ifdef HAVE_YARV_H
+#include "yarv.h"
+#define ruby_errinfo (GET_THREAD()->errinfo)
+#endif
 
 static ID id_call;
 static ID id_holder;
