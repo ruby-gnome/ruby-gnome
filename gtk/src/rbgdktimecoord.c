@@ -3,8 +3,8 @@
 
   rbgdktimecoord.c -
 
-  $Author: mutoh $
-  $Date: 2005/04/14 16:39:16 $
+  $Author: sakai $
+  $Date: 2006/05/26 14:18:22 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -45,7 +45,7 @@ timecoord_initialize(self, time, axes)
     coord.time = NUM2UINT(time);
 
     if (RARRAY(axes)->len > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %d", RARRAY(axes)->len);
+        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY(axes)->len);
     }
 
     for (i = 0; i < RARRAY(axes)->len; i++){
@@ -92,7 +92,7 @@ timecoord_set_axes(self, axes)
     GdkTimeCoord* coord = _SELF(self);
 
     if (RARRAY(axes)->len > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %d", RARRAY(axes)->len);
+        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY(axes)->len);
     }
 
     for (i = 0; i < RARRAY(axes)->len; i++){
