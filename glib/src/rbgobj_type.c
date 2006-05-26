@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/14 10:04:04 $
+  $Author: sakai $
+  $Date: 2006/05/26 15:33:15 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -121,12 +121,8 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
     case G_TYPE_OBJECT:
     case G_TYPE_ENUM:
     case G_TYPE_FLAGS:
-      if (NIL_P(parent)){
-          cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
-                                    get_superclass(gtype));
-      } else {
-          cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
-      }
+        if (NIL_P(parent)) parent = get_superclass(gtype);
+        cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
         break;
         
     case G_TYPE_INTERFACE:
@@ -136,12 +132,8 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
     default:
         /* we should raise exception? */
         if (rbgobj_fund_has_type(G_TYPE_FUNDAMENTAL(gtype))) {
-          if (NIL_P(parent)) {
-            cinfo->klass = rb_funcall(rb_cClass, id_new, 1,
-                                    get_superclass(gtype));
-          } else {
+          if (NIL_P(parent)) parent = get_superclass(gtype);
           cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
-          }
         } else {
           fprintf(stderr,
                   "%s: %s's fundamental type %s isn't supported\n",
