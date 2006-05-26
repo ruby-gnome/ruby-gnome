@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: ktou $
-  $Date: 2006/03/18 06:53:05 $
+  $Author: sakai $
+  $Date: 2006/05/26 15:23:47 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -399,7 +399,7 @@ gobj_sig_emit(argc, argv, self)
     g_signal_query(signal_id, &arg.query);
 
     if (arg.query.n_params != RARRAY(arg.args)->len)
-        rb_raise(rb_eArgError, "wrong number of arguments(%d for %d)",
+        rb_raise(rb_eArgError, "wrong number of arguments(%ld for %d)",
                  RARRAY(arg.args)->len + 1,
                  arg.query.n_params + 1);
 
