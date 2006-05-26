@@ -3,14 +3,15 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2006/05/26 10:34:19 $
+  $Author: ssimons $
+  $Date: 2006/05/26 19:19:35 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 
 #include "global.h"
+#include <unistd.h>
 
 #ifdef HAVE_YARV_H
 #include "yarv.h"
@@ -124,6 +125,94 @@ rclosure_marshal_body(VALUE rb_arg)
 }
 
 static void
+rclosure_marshal_do(VALUE arg) {
+  int state = 0;
+
+  rb_protect(rclosure_marshal_body, arg, &state);
+  if (state && !NIL_P(ruby_errinfo)) {
+    char buf[BUFSIZ];
+    VALUE errmsg;
+    int ret;
+
+    if (ruby_sourcefile) {
+      ret = snprintf(buf, BUFSIZ, "%s:", ruby_sourcefile);
+      rb_write_error2(buf, MIN(BUFSIZ, ret));
+    }
+    errmsg = rb_funcall(ruby_errinfo, rb_intern("message"), 0, 0);
+
+    ret = snprintf(buf, BUFSIZ, "%d: %s: %s\n",
+            ruby_sourceline, rb_obj_classname(ruby_errinfo),
+              RVAL2CSTR(errmsg));
+    rb_write_error2(buf, MIN(BUFSIZ, ret));
+  }
+}
+
+#ifdef HAVE_NATIVETHREAD
+static GStaticMutex callback_init_mutex = G_STATIC_MUTEX_INIT;
+static GMutex *callback_mutex = NULL;
+static GCond *callback_done_cond = NULL;
+static GCond *callback_finished_cond = NULL;
+static VALUE m_arg = Qnil;
+static int callback_fd[2];
+
+static VALUE
+rclosure_marshal_pop(void) {
+ for (;;) {
+   char buf[1];
+
+   /* wait untill we're triggered. If this happens we can read from the pipe
+    * and it's guaranteed that the needed mutexes are initialized */
+   rb_thread_wait_fd(callback_fd[0]);
+   read(callback_fd[0], buf, 1);
+
+   g_mutex_lock(callback_mutex);
+   if (m_arg != Qnil) {
+     rclosure_marshal_do(m_arg);
+   }
+
+   m_arg = Qnil;
+   g_cond_signal(callback_done_cond);
+   g_mutex_unlock(callback_mutex);
+ }
+}
+
+static void
+init_callback_mutex(void) {
+  if (callback_mutex == NULL) {
+    g_static_mutex_lock(&callback_init_mutex);
+    if (callback_mutex == NULL) {
+      callback_mutex = g_mutex_new();
+      callback_done_cond = g_cond_new();
+      callback_finished_cond = g_cond_new();
+    } /* else some other thread initialised it */
+
+    g_static_mutex_unlock(&callback_init_mutex);
+  }
+}
+
+static void
+rclosure_marshal_push(VALUE arg) {
+  init_callback_mutex();
+
+  g_mutex_lock(callback_mutex);
+  while (m_arg != Qnil) {
+    /* Wait for another callback to finish up */
+    g_cond_wait(callback_finished_cond, callback_mutex);
+  }
+  m_arg = arg;
+  /* trigger ruby callback thread */
+  write(callback_fd[1],"c", 1);
+
+  /* Wait untill the ruby callback thread signals is done and then signal
+   * waiting callback pushes that we're finished 
+   */
+  g_cond_wait(callback_done_cond, callback_mutex);
+  g_cond_signal(callback_finished_cond);
+  g_mutex_unlock(callback_mutex);
+}
+#endif
+
+static void
 rclosure_marshal(GClosure*       closure,
                  GValue*         return_value,
                  guint           n_param_values,
@@ -133,7 +222,6 @@ rclosure_marshal(GClosure*       closure,
 {
     struct marshal_arg *arg;
     VALUE rb_arg;
-    int state;
 
     if (!rclosure_initialized) {
         g_closure_invalidate(closure);
@@ -149,24 +237,18 @@ rclosure_marshal(GClosure*       closure,
     arg->invocation_hint = invocation_hint;
     arg->marshal_data    = marshal_data;
 
-    rb_protect(rclosure_marshal_body, rb_arg, &state);
-
-    if (state && !NIL_P(ruby_errinfo)) {
-      char buf[BUFSIZ];
-      VALUE errmsg;
-      int ret;
-
-      if (ruby_sourcefile) {
-        ret = snprintf(buf, BUFSIZ, "%s:", ruby_sourcefile);
-        rb_write_error2(buf, MIN(BUFSIZ, ret));
-      }
-      errmsg = rb_funcall(ruby_errinfo, rb_intern("message"), 0, 0);
-
-      ret = snprintf(buf, BUFSIZ, "%d: %s: %s\n", 
-              ruby_sourceline, rb_obj_classname(ruby_errinfo),
-              RVAL2CSTR(errmsg));
-      rb_write_error2(buf, MIN(BUFSIZ, ret));
+#ifdef HAVE_NATIVETHREAD
+    if (!is_ruby_native_thread()) {
+       if (!g_thread_supported()) {
+           rb_bug("glib signal in another thread, but gthreads not supported");
+        }
+        rclosure_marshal_push(rb_arg);
+    } else {
+        rclosure_marshal_do(rb_arg);
     }
+#else
+    rclosure_marshal_do(rb_arg);
+#endif
 }
 
 
@@ -305,10 +387,22 @@ static void
 Init_closure()
 {
     VALUE cClosure = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+#ifdef HAVE_NATIVETHREAD
+    VALUE thread;
+#endif
     rb_define_method(cClosure, "initialize", closure_initialize, 0);
     rb_define_method(cClosure, "in_marshal?", closure_in_marshal, 0);
     rb_define_method(cClosure, "invalid?", closure_is_invalid, 0);
     rb_define_method(cClosure, "invalidate", closure_invalidate, 0);
+
+#ifdef HAVE_NATIVETHREAD
+    /* startup the ruby thread to pull callbacks from other threads */
+    if (pipe(callback_fd) != 0) {
+      rb_bug("Unable to create glib callback thread\n");
+    }
+    thread = rb_thread_create(rclosure_marshal_pop, NULL);
+    G_CHILD_ADD(cClosure, thread);
+#endif
 }
 
 /**********************************************************************/
@@ -318,3 +412,4 @@ void Init_gobject_gclosure()
     Init_rclosure();
     Init_closure();
 }
+

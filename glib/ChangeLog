@@ -1,5 +1,12 @@
 2006-05-26  Sjoerd Simons <sjoerd@luon.net>
 
+	* src/rbgobj_closure.c: Ensure that a signal handler in ruby is always run in
+	a ruby native thread. This allows signals coming from non-ruby native threads
+	to be handled correctly. Needs ruby configured with --enable-pthread to work
+	(otherwise the behaviour isn't changed)
+
+2006-05-26  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbglib.h, src/global.h: Move the 64 bit integer 
 	util functions to the public header
 
