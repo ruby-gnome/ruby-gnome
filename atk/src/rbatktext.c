@@ -3,8 +3,8 @@
 
   rbatktext.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/15 17:30:46 $
+  $Author: sakai $
+  $Date: 2006/05/26 14:12:06 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -247,7 +247,7 @@ rbatk_text_remove_selection(self, selection_num)
     VALUE self, selection_num;
 {
     gboolean ret = atk_text_remove_selection(_SELF(self), NUM2INT(selection_num));
-    if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection. num = %d", selection_num);
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection. num = %d", NUM2INT(selection_num));
     return self;
 }
 
