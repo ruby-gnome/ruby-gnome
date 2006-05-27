@@ -3,6 +3,7 @@
 	* src/rbpoppler-page.c:
 	- made Poppler::Page#render generic method.
 	- removed Poppler::Page#render_to_pixbuf.
+	- removed Poppler::Page#render_to_ps.
 	- made Poppler::Page#render_selection generic method.
 
 	* src/lib/poppler.rb: added convenience method

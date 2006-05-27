@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/05/27 09:58:55 $
+  $Date: 2006/05/27 10:21:53 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -36,14 +36,25 @@ page_render(VALUE self, VALUE cairo)
 #endif
 
 static VALUE
+page_render_to_ps(VALUE self, VALUE ps_file)
+{
+    poppler_page_render_to_ps(RVAL2GOBJ(self), RVAL2GOBJ(ps_file));
+    return Qnil;
+}
+
+static VALUE
 page_render_generic(int argc, VALUE *argv, VALUE self)
 {
     if (argc == 1) {
+        if (RTEST(rb_obj_is_kind_of(argv[0], rb_cCairo_Context))) {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
-        return page_render(self, argv[0]);
+            return page_render(self, argv[0]);
 #else
-        rb_raise(rb_eArgError, "cairo is not available");
+            rb_raise(rb_eArgError, "cairo is not available");
 #endif
+        } else {
+            return page_render_to_ps(self, argv[0]);
+        }
     } else if (argc == 7) {
         return page_render_to_pixbuf(self, argv[0], argv[1], argv[2], argv[3],
                                      argv[4], argv[5], argv[6]);
@@ -89,13 +100,6 @@ page_find_text(VALUE self, VALUE text)
 {
     return GLIST2ARY2(poppler_page_find_text(RVAL2GOBJ(self), RVAL2CSTR(text)),
                       POPPLER_TYPE_RECTANGLE);
-}
-
-static VALUE
-page_render_to_ps(VALUE self, VALUE ps_file)
-{
-    poppler_page_render_to_ps(RVAL2GOBJ(self), RVAL2GOBJ(ps_file));
-    return Qnil;
 }
 
 static VALUE
@@ -295,7 +299,6 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
     rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
     rb_define_method(cPage, "find_text", page_find_text, 1);
-    rb_define_method(cPage, "render_to_ps", page_render_to_ps, 1);
     rb_define_method(cPage, "get_text", page_get_text, 1);
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
     rb_define_method(cPage, "get_selection_region",
