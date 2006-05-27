@@ -1,5 +1,11 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_closure.c: Revert changes of 2006-04-15.
+	We shouldn't use Data_Make_Struct in rclosure_marshal since
+	this function could be called from arbitrary threads.
+
+	* src/rbgobj_closure.c: simplify codes a bit.
+
 	* src/rbgobject.c, src/rbgobj_value.c, rbgobject.h, src/glib2.def:
 	Add new APIs:
 	void rbgobj_gc_mark_instance(gpointer instance) and
