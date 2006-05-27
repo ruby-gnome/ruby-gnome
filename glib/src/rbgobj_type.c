@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2006/05/26 15:33:15 $
+  $Date: 2006/05/27 06:48:33 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -700,50 +700,6 @@ Init_interface_commons()
 
 /**********************************************************************/
 
-VALUE cInstantiatable;
-
-static VALUE
-instantiatable_s_allocate(klass)
-     VALUE klass;
-{
-     rb_raise(rb_eTypeError, "abstract class");
-}
-
-static VALUE
-instantiatable_get_gtype(self)
-    VALUE self;
-{
-    return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
-}
-
-static VALUE
-instantiatable_clone(self)
-    VALUE self;
-{
-    rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
-}
-
-static void
-Init_instantiatable()
-{
-    cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
-    rb_extend_object(cInstantiatable, mMetaInterface);
-
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(cInstantiatable, "allocate", instantiatable_s_allocate, 0);
-#else
-    rb_define_alloc_func(cInstantiatable, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
-#endif
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cInstantiatable, "new", &generic_s_new, -1);
-#endif
-
-    rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
-    rb_define_method(cInstantiatable, "clone", instantiatable_clone, 0);
-}
-
-/**********************************************************************/
-
 static VALUE
 interface_s_append_features(self, klass)
      VALUE self, klass;
@@ -919,6 +875,5 @@ void Init_gobject_gtype()
     Init_type();
 
     Init_interface_commons();
-    Init_instantiatable();
     Init_interface();
 }

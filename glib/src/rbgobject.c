@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:45:10 $
+  $Date: 2006/05/27 06:48:33 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -129,43 +129,6 @@ rbgobj_ruby_object_from_instance_if_exist(gpointer instance)
 
 /**********************************************************************/
 
-static void
-each_cinfo(gpointer instance,
-           void (*func)(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data),
-           gpointer user_data)
-{
-    GType gtype = G_TYPE_FROM_INSTANCE(instance);
-    GType* interfaces;
-    guint n_interfaces = 0;
-
-    interfaces = g_type_interfaces(gtype, &n_interfaces);
-    {
-        guint i;
-        for (i = 0; i < n_interfaces; i++)
-            func(instance, GTYPE2CINFO(interfaces[i]), user_data);
-    }
-
-    {
-        GType i;
-        for (i = gtype; gtype != G_TYPE_INVALID; gtype = g_type_parent(gtype))
-            func(instance, GTYPE2CINFO(i), user_data);
-    }
-}
-
-static void
-call_cinfo_free(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
-{
-    if (cinfo->free) cinfo->free(instance);
-}
-
-static void
-call_cinfo_mark(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
-{
-    if (cinfo->mark) cinfo->mark(instance);
-}
-
-/**********************************************************************/
-
 static void 
 rbgobj_weak_notify(data, where_the_object_was)
     gpointer data;
@@ -173,7 +136,7 @@ rbgobj_weak_notify(data, where_the_object_was)
 {
     gobj_holder* holder = data;
 
-    each_cinfo(holder->gobj, call_cinfo_free, NULL);
+    rbgobj_instance_call_cinfo_free(holder->gobj);
     if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
         rb_ivar_set(holder->self, id_relatives, Qnil);
     if (RTEST(rb_ivar_defined(holder->self, rbgobj_id_children)))
@@ -186,7 +149,7 @@ rbgobj_mark(holder)
     gobj_holder* holder;
 {
     if (holder->gobj && !holder->destroyed)
-        each_cinfo(holder->gobj, call_cinfo_mark, NULL);
+        rbgobj_instance_call_cinfo_mark(holder->gobj);
 }
 
 static void
@@ -194,7 +157,7 @@ rbgobj_free(gobj_holder* holder)
 {
     if (holder->gobj){
         if (!holder->destroyed){
-            each_cinfo(holder->gobj, call_cinfo_free, NULL);
+            rbgobj_instance_call_cinfo_free(holder->gobj);
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)rbgobj_weak_notify, holder);
         }
@@ -556,17 +519,11 @@ rbgobj_gobject_new(gtype, params_hash)
     return result;
 }
 
-void
-rbgobj_gc_mark_instance(gpointer instance)
-{
-    VALUE obj = rbgobj_ruby_object_from_instance_if_exist(instance);
-    rb_gc_mark(obj);
-}
-
 void 
 Init_gobject()
 {
     extern void Init_gobject_gtype();
+    extern void Init_gobject_typeinstance();
     extern void Init_gobject_gvalue();
     extern void Init_gobject_gvaluetypes();
     extern void Init_gobject_gboxed();
@@ -608,6 +565,7 @@ Init_gobject()
     rbgobj_id_children = rb_intern("__stored_children__");
 
     Init_gobject_gtype();
+    Init_gobject_typeinstance();
     Init_gobject_fundamental();
     Init_gobject_gvalue();
     Init_gobject_gvaluetypes();

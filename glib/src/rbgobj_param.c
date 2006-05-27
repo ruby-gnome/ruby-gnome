@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:45:10 $
+  $Date: 2006/05/27 06:48:33 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -27,8 +27,8 @@ static void
 pspec_mark(holder)
     pspec_holder* holder;
 {
-    if (holder->instance && holder->cinfo && holder->cinfo->mark)
-        holder->cinfo->mark(holder->instance);
+    if (holder->instance)
+        rbgobj_instance_call_cinfo_mark(holder->instance);
 }
 
 static void
@@ -36,8 +36,7 @@ pspec_free(holder)
     pspec_holder* holder;
 {
     if (holder->instance){
-        if (holder->cinfo && holder->cinfo->free)
-            holder->cinfo->free(holder->instance);
+        rbgobj_instance_call_cinfo_free(holder->instance);
         g_param_spec_set_qdata(holder->instance, qparamspec, NULL);
         g_param_spec_unref(holder->instance);
     }

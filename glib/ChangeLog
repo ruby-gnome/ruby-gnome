@@ -1,9 +1,13 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_typeinstance.c: New file.
+	* src/rbgobj_type.c, src/rbgobject.c, rbgobj_param.c: separate
+	some cInstantiatable stuffs into rbgobj_typeinstance.c.
+	* src/global.h: ditto.
+
 	* src/rbgobj_closure.c: Revert changes of 2006-04-15.
 	We shouldn't use Data_Make_Struct in rclosure_marshal since
 	this function could be called from arbitrary threads.
-
 	* src/rbgobj_closure.c: simplify codes a bit.
 
 	* src/rbgobject.c, src/rbgobj_value.c, rbgobject.h, src/glib2.def:
