@@ -89,7 +89,7 @@ def to_pixbuf(input, scale, rotate)
   pixbuf_width, pixbuf_height = compute_size(width, height, rotate)
   pixbuf = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8,
                            pixbuf_width, pixbuf_height)
-  page.render_to_pixbuf(0, 0, width, height, scale, rotate, pixbuf)
+  page.render(0, 0, width, height, scale, rotate, pixbuf)
   pixbuf
 end
 

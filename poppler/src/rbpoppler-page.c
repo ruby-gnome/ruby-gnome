@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/05/17 12:51:19 $
+  $Date: 2006/05/27 09:58:55 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -34,6 +34,24 @@ page_render(VALUE self, VALUE cairo)
     return Qnil;
 }
 #endif
+
+static VALUE
+page_render_generic(int argc, VALUE *argv, VALUE self)
+{
+    if (argc == 1) {
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
+        return page_render(self, argv[0]);
+#else
+        rb_raise(rb_eArgError, "cairo is not available");
+#endif
+    } else if (argc == 7) {
+        return page_render_to_pixbuf(self, argv[0], argv[1], argv[2], argv[3],
+                                     argv[4], argv[5], argv[6]);
+    } else {
+        rb_raise(rb_eArgError,
+                 "wrong number of arguments (%d for 1 or 7)", argc);
+    }
+}
 
 static VALUE
 page_get_size(VALUE self)
@@ -107,23 +125,65 @@ page_get_selection_region(VALUE self, VALUE scale, VALUE selection)
                                                          RVAL2RECT(selection)));
 }
 
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
-page_render_selection(VALUE self, VALUE scale, VALUE rotation,
-                      VALUE pixbuf, VALUE selection, VALUE rb_old_selection,
+page_render_selection(VALUE self, VALUE cairo,
+                      VALUE selection, VALUE rb_old_selection,
                       VALUE glyph_color, VALUE background_color)
 {
     PopplerRectangle *old_selection = NULL;
 
     if (!NIL_P(rb_old_selection))
         old_selection = RVAL2RECT(rb_old_selection);
-    poppler_page_render_selection(RVAL2GOBJ(self), NUM2DBL(scale),
-                                  NUM2INT(rotation), RVAL2GOBJ(pixbuf),
+    poppler_page_render_selection(RVAL2GOBJ(self), RVAL2CRCONTEXT(cairo),
                                   RVAL2RECT(selection),
                                   old_selection,
                                   RVAL2COLOR(glyph_color),
                                   RVAL2COLOR(background_color));
     return Qnil;
 }
+#endif
+
+static VALUE
+page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
+                                VALUE pixbuf, VALUE selection,
+                                VALUE rb_old_selection,
+                                VALUE glyph_color, VALUE background_color)
+{
+    PopplerRectangle *old_selection = NULL;
+
+    if (!NIL_P(rb_old_selection))
+        old_selection = RVAL2RECT(rb_old_selection);
+    poppler_page_render_selection_to_pixbuf(RVAL2GOBJ(self), NUM2DBL(scale),
+                                            NUM2INT(rotation),
+                                            RVAL2GOBJ(pixbuf),
+                                            RVAL2RECT(selection),
+                                            old_selection,
+                                            RVAL2COLOR(glyph_color),
+                                            RVAL2COLOR(background_color));
+    return Qnil;
+}
+
+static VALUE
+page_render_selection_generic(int argc, VALUE *argv, VALUE self)
+{
+    if (argc == 5) {
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
+        return page_render_selection(self, argv[0], argv[1], argv[2],
+                                     argv[3], argv[4]);
+#else
+        rb_raise(rb_eArgError, "cairo is not available");
+#endif
+    } else if (argc == 7) {
+        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
+                                               argv[2], argv[3], argv[4],
+                                               argv[5], argv[6]);
+    } else {
+        rb_raise(rb_eArgError,
+                 "wrong number of arguments (%d for 5 or 7)", argc);
+    }
+}
+
 
 
 /* A rectangle on a page, with coordinates in PDF points. */
@@ -229,10 +289,7 @@ Init_poppler_page(VALUE mPoppler)
     cLinkMapping = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
 
-    rb_define_method(cPage, "render_to_pixbuf", page_render_to_pixbuf, 7);
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
-    rb_define_method(cPage, "render", page_render, 1);
-#endif
+    rb_define_method(cPage, "render", page_render_generic, -1);
     rb_define_method(cPage, "size", page_get_size, 0);
     rb_define_method(cPage, "index", page_get_index, 0);
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
@@ -243,7 +300,8 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
     rb_define_method(cPage, "get_selection_region",
                      page_get_selection_region, 2);
-    rb_define_method(cPage, "render_selection", page_render_selection, 7);
+    rb_define_method(cPage, "render_selection",
+                     page_render_selection_generic, -1);
 
     G_DEF_SETTERS(cPage);
 

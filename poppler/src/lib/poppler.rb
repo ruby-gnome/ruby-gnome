@@ -22,6 +22,10 @@ if Poppler.cairo_available?
       def render_poppler_page(page, *args, &block)
         page.render(self, *args, &block)
       end
+
+      def render_poppler_page_selection(page, *args, &block)
+        page.render_selection(self, *args, &block)
+      end
     end
   end
 end
