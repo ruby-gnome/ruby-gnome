@@ -4,10 +4,11 @@
   rbgobj_typeinstance.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 06:48:33 $
+  $Date: 2006/05/27 07:42:31 $
   created at: Sat May 27 14:18:55 JST 2006
  
-  Copyright (C) 2006  Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
+  Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 
