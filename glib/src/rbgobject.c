@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 06:48:33 $
+  $Date: 2006/05/27 07:46:19 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -523,6 +523,7 @@ void
 Init_gobject()
 {
     extern void Init_gobject_gtype();
+    extern void Init_gobject_typeinterface();
     extern void Init_gobject_typeinstance();
     extern void Init_gobject_gvalue();
     extern void Init_gobject_gvaluetypes();
@@ -565,6 +566,7 @@ Init_gobject()
     rbgobj_id_children = rb_intern("__stored_children__");
 
     Init_gobject_gtype();
+    Init_gobject_typeinterface();
     Init_gobject_typeinstance();
     Init_gobject_fundamental();
     Init_gobject_gvalue();

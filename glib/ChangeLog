@@ -1,5 +1,9 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_typeinterface.c: New file.
+	* src/rbgobj_type.c, src/rbgobject.c: separate some interface stuffs
+	into src/rbgobj_typeinterface.c.
+
 	* src/rbgobj_typeinstance.c: New file.
 	* src/rbgobj_type.c, src/rbgobject.c, rbgobj_param.c: separate
 	some cInstantiatable stuffs into rbgobj_typeinstance.c.

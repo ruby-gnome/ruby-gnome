@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 06:48:33 $
+  $Date: 2006/05/27 07:46:19 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -13,6 +13,10 @@
 **********************************************************************/
 
 #include "global.h"
+
+/**********************************************************************/
+/* Type Mapping */
+
 #ifdef RBGOBJ_USE_DLPTR
 #include "dl.h"
 #endif
@@ -21,8 +25,6 @@ static ID id_new;
 static ID id_superclass;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
-
-static void rbgobj_init_interface(VALUE interf);
 
 static GHashTable* dynamic_gtype_list;
 typedef struct {
@@ -252,7 +254,53 @@ rbgobj_register_class(VALUE klass,
         rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
 }
 
+#define _register_fundamental_klass_to_gtype(klass, gtype) \
+    rbgobj_register_class(klass, gtype, TRUE, FALSE)
+
+#define _register_fundamental_gtype_to_klass(gtype,klass) \
+    rbgobj_register_class(klass, gtype, FALSE, TRUE)
+
+static void
+Init_typemap()
+{
+    id_new = rb_intern("new");
+    id_superclass = rb_intern("superclass");
+
+    rb_global_variable(&gtype_to_cinfo);
+    rb_global_variable(&klass_to_cinfo);
+    gtype_to_cinfo = rb_hash_new();
+    klass_to_cinfo = rb_hash_new();
+
+    _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
+    _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
+    _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
+    _register_fundamental_klass_to_gtype(Qnil, G_TYPE_NONE);
+    _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
+    _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(Qtrue, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(Qfalse, G_TYPE_BOOLEAN);
+    _register_fundamental_klass_to_gtype(rb_cObject, RBGOBJ_TYPE_RUBY_VALUE);
+
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_FLOAT, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_DOUBLE, rb_cFloat);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
+    _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
+    _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
+    _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
+    _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
+}
+
 /**********************************************************************/
+/* GLib::Type */
 
 VALUE rbgobj_cType;
 static ID id_gtype;
@@ -689,191 +737,9 @@ Init_type()
 
 /**********************************************************************/
 
-VALUE mMetaInterface;
-
-static void 
-Init_interface_commons()
-{
-    mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
-    rb_define_method(mMetaInterface, "gtype", generic_gtype, 0);
-}
-
-/**********************************************************************/
-
-static VALUE
-interface_s_append_features(self, klass)
-     VALUE self, klass;
-{
-    if (!rb_obj_is_kind_of(klass, cInstantiatable))
-        rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
-    return rb_call_super(1, &klass);
-}
-
-#if GLIB_CHECK_VERSION(2,4,0)
-static VALUE
-interface_install_property(self, pspec_obj)
-    VALUE self, pspec_obj;
-{
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-    gpointer ginterface;
-    GParamSpec* pspec;
-
-    if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registered class",
-                 rb_class2name(self));
-
-    pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
-
-    ginterface = g_type_default_interface_ref(cinfo->gtype);
-    g_object_interface_install_property(ginterface, pspec);
-    g_type_default_interface_unref(ginterface);
-
-    /* FIXME: define accessor methods */
-    return Qnil;
-}
-
-static VALUE
-interface_property(self, property_name)
-     VALUE self, property_name;
-{
-    gpointer ginterface;
-    const char* name;
-    GParamSpec* prop;
-    VALUE result;
-
-    if (SYMBOL_P(property_name)) {
-        name = rb_id2name(SYM2ID(property_name));
-    } else {
-        StringValue(property_name);
-        name = StringValuePtr(property_name);
-    }
-
-    ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
-
-    prop = g_object_interface_find_property(ginterface, name);
-    if (!prop){
-        g_type_default_interface_unref(ginterface);
-        rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")), 
-                 "no such property: %s", name);
-    }
-
-    result = GOBJ2RVAL(prop);
-    g_type_default_interface_unref(ginterface);
-    return result;
-}
-
-static VALUE
-interface_properties(int argc, VALUE* argv, VALUE self)
-{
-    guint n_properties;
-    GParamSpec** props;
-    VALUE inherited_too;
-    VALUE ary;
-    int i;
-    gpointer ginterface;
-
-    GType gtype  = CLASS2GTYPE(self);
-    ary = rb_ary_new();
-    if (gtype != G_TYPE_INTERFACE){
-        ginterface = g_type_default_interface_ref(gtype);
-
-        if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
-            inherited_too = Qtrue;
-        
-        props = g_object_interface_list_properties(ginterface, &n_properties);
-        
-        for (i = 0; i < n_properties; i++){
-            if (RTEST(inherited_too)
-                || GTYPE2CLASS(props[i]->owner_type) == self)
-                rb_ary_push(ary, rb_str_new2(props[i]->name));
-        }
-        g_free(props);
-        g_type_default_interface_unref(ginterface);
-    }
-    return ary;
-}
-#endif
-
-static void
-rbgobj_init_interface(interf)
-    VALUE interf;
-{
-    /* pseudo inheritance */
-    if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE){
-        rb_extend_object(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
-        rb_include_module(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
-        rbgobj_define_property_accessors(interf);
-    }
-}
-
-static void
-Init_interface()
-{
-    VALUE iface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
-
-    rb_define_method(mMetaInterface, "append_features", interface_s_append_features, 1);
-#if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_method(mMetaInterface, "install_property", interface_install_property, 1);
-    rb_define_method(mMetaInterface, "property", interface_property, 1);
-    rb_define_method(mMetaInterface, "properties", interface_properties, -1);
-#endif
-
-    rb_extend_object(iface, mMetaInterface);
-    rb_include_module(iface, mMetaInterface);
-}
-
-/**********************************************************************/
-
-#define _register_fundamental_klass_to_gtype(klass, gtype) \
-    rbgobj_register_class(klass, gtype, TRUE, FALSE)
-
-#define _register_fundamental_gtype_to_klass(gtype,klass) \
-    rbgobj_register_class(klass, gtype, FALSE, TRUE)
-
-/*
- * Init
- */
 void Init_gobject_gtype()
 {
     g_type_init();
-
-    id_new = rb_intern("new");
-    id_superclass = rb_intern("superclass");
-
-    rb_global_variable(&gtype_to_cinfo);
-    rb_global_variable(&klass_to_cinfo);
-    gtype_to_cinfo = rb_hash_new();
-    klass_to_cinfo = rb_hash_new();
-
-    _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
-    _register_fundamental_klass_to_gtype(rb_cFloat, G_TYPE_DOUBLE);
-    _register_fundamental_klass_to_gtype(rb_cInteger, G_TYPE_LONG);
-    _register_fundamental_klass_to_gtype(rb_cString, G_TYPE_STRING);
-    _register_fundamental_klass_to_gtype(rb_cSymbol, G_TYPE_STRING);
-    _register_fundamental_klass_to_gtype(Qnil, G_TYPE_NONE);
-    _register_fundamental_klass_to_gtype(rb_cNilClass, G_TYPE_NONE);
-    _register_fundamental_klass_to_gtype(rb_cTrueClass, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(rb_cFalseClass, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(Qtrue, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(Qfalse, G_TYPE_BOOLEAN);
-    _register_fundamental_klass_to_gtype(rb_cObject, RBGOBJ_TYPE_RUBY_VALUE);
-
-    _register_fundamental_gtype_to_klass(G_TYPE_UINT, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_FLOAT, rb_cFloat);
-    _register_fundamental_gtype_to_klass(G_TYPE_DOUBLE, rb_cFloat);
-    _register_fundamental_gtype_to_klass(G_TYPE_INT64, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_UINT64, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_INT, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_LONG, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_CHAR, rb_cFixnum);
-    _register_fundamental_gtype_to_klass(G_TYPE_UCHAR, rb_cFixnum);
-    _register_fundamental_gtype_to_klass(G_TYPE_STRING, rb_cString);
-    _register_fundamental_gtype_to_klass(G_TYPE_ULONG, rb_cInteger);
-    _register_fundamental_gtype_to_klass(G_TYPE_NONE, rb_cNilClass);
-    _register_fundamental_gtype_to_klass(G_TYPE_BOOLEAN, rb_cTrueClass);
-
+    Init_typemap();
     Init_type();
-
-    Init_interface_commons();
-    Init_interface();
 }
