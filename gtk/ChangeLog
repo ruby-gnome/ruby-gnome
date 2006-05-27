@@ -1,3 +1,9 @@
+2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkcontainer.c: Register mark procedure which marks
+	each child widget. So that each child widget is protected from GC
+	whenever the parent container is alive.
+
 2006-05-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdktimecoord.c (timecoord_initialize, timecoord_set_axes):

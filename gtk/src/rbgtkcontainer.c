@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:49:36 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -720,11 +720,24 @@ type_register(int argc, VALUE* argv, VALUE self)
 }
 /**********************************************************************/
 
+void
+cont_mark_callback(GtkWidget* w, gpointer data)
+{
+    rbgobj_gc_mark_instance(w);
+}
+
+void
+cont_mark(void* p)
+{
+    gtk_container_forall(GTK_CONTAINER(p), cont_mark_callback, NULL);
+}
+
+/**********************************************************************/
 
 void 
 Init_gtk_container()
 {
-    VALUE gContainer = G_DEF_CLASS(GTK_TYPE_CONTAINER, "Container", mGtk);
+    VALUE gContainer = G_DEF_CLASS2(GTK_TYPE_CONTAINER, "Container", mGtk, cont_mark, NULL);
 
     rb_define_method(gContainer, "resize_container?", cont_is_resize_container, 0);
     rb_define_method(gContainer, "add", cont_add, -1);
