@@ -1,5 +1,8 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_object.c: Remove GLib::Object#singleton_method_added.
+	Now we can't define signal handlers by defining singleton methods.
+
 	* src/rbgobj_typeinstance.c (each_cinfo): Fix to traverse ancestor's cinfo.
 
 	* src/rbgobj_paramspecs.c, src/rbgobj_value.c: Use RVAL2GOBJ instead of

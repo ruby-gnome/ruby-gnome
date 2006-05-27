@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:45:10 $
+  $Date: 2006/05/27 15:07:21 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -449,25 +449,6 @@ gobj_ref_count(self)
     return INT2NUM(gobj ? gobj->ref_count : 0);
 }
 
-static VALUE
-gobj_smethod_added(self, id)
-    VALUE self, id;
-{
-    GObject *obj = RVAL2GOBJ(self);
-    const char* name = rb_id2name(SYM2ID(id));
-    guint signal_id = g_signal_lookup(name, G_OBJECT_TYPE(obj));
-    
-    if (signal_id) {
-        VALUE method = rb_funcall(self, rb_intern("method"), 1, id);
-        GClosure* closure = g_rclosure_new(method, Qnil,
-                                           rbgobj_get_signal_func(signal_id));
-        g_rclosure_attach(closure, self);
-        g_signal_connect_closure(obj, name, closure, FALSE);
-    }
-
-    return Qnil;
-}
-
 /**********************************************************************/
 
 static VALUE proc_mod_eval;
@@ -661,8 +642,6 @@ Init_gobject_gobject()
     rb_define_method(cGObject, "initialize", gobj_initialize, -1);
     rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
     rb_define_method(cGObject, "inspect", gobj_inspect, 0);
-
-    rb_define_method(cGObject, "singleton_method_added", gobj_smethod_added, 1);
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);
