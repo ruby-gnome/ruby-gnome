@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2006/05/27 07:38:44 $
+   $Date: 2006/05/27 11:39:08 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -40,10 +40,8 @@ extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
 extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);
 
-extern VALUE rbgobj_get_value_from_gobject(GObject* gobj);
-extern VALUE rbgobj_get_value_from_gobject_if_exist(GObject* gobj);
-extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec);
-extern VALUE rbgobj_get_value_from_param_spec_if_exist(GParamSpec* pspec);
+extern VALUE rbgobj_get_value_from_gobject(GObject* gobj, gboolean alloc);
+extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec, gboolean alloc);
 
 extern void rbgobj_init_flags_class(VALUE klass);
 extern void rbgobj_init_enum_class(VALUE klass);
@@ -52,9 +50,6 @@ extern void rbgobj_init_interface(VALUE interf);
 /* FIXME: should have better name */
 extern void rbgobj_instance_call_cinfo_mark(gpointer instance);
 extern void rbgobj_instance_call_cinfo_free(gpointer instance);
-
-/* FIXME: extend rbgobj_ruby_object_from_instance to support this functionality. */
-extern VALUE rbgobj_ruby_object_from_instance_if_exist(gpointer instance);
 
 #ifndef HAVE_OBJECT_ALLOCATE
 VALUE rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self);

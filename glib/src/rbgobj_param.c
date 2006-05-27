@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 06:48:33 $
+  $Date: 2006/05/27 11:39:08 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -68,25 +68,16 @@ rbgobj_param_spec_initialize(self, pspec)
 }
 
 VALUE
-rbgobj_get_value_from_param_spec(GParamSpec* pspec)
+rbgobj_get_value_from_param_spec(GParamSpec* pspec, gboolean alloc)
 {
     gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
     if (data)
         return (VALUE)data;
-    else {
+    else if (alloc) {
         VALUE result = pspec_s_allocate(GTYPE2CLASS(G_PARAM_SPEC_TYPE(pspec)));
         rbgobj_param_spec_initialize(result, pspec);
         return result;
-    }
-}
-
-VALUE
-rbgobj_get_value_from_param_spec_if_exist(GParamSpec* pspec)
-{
-    gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
-    if (data)
-        return (VALUE)data;
-    else
+    } else
         return Qnil;
 }
 

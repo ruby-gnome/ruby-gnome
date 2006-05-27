@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 07:46:19 $
+  $Date: 2006/05/27 11:39:08 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -83,31 +83,11 @@ rbgobj_instance_from_ruby_object(VALUE obj)
 VALUE
 rbgobj_ruby_object_from_instance(gpointer instance)
 {
-    GType t; 
-    
-    if (instance == NULL)
-    	return Qnil;
-    
-    t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
-    switch (t){
-    case G_TYPE_OBJECT:
-        return rbgobj_get_value_from_gobject(instance);
-    case G_TYPE_PARAM:
-        return rbgobj_get_value_from_param_spec(instance);
-    default:
-      {
-        VALUE ret = rbgobj_fund_instance2robj(t, instance);
-        if (ret == Qnil) {
-          rb_raise(rb_eTypeError, "%s isn't supported",
-               rb_class2name(CLASS_OF(instance)));
-        }
-        return ret;
-      }
-    }
+    return rbgobj_ruby_object_from_instance2(instance, TRUE);
 }
 
 VALUE
-rbgobj_ruby_object_from_instance_if_exist(gpointer instance)
+rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
 {
     GType t; 
     
@@ -117,13 +97,21 @@ rbgobj_ruby_object_from_instance_if_exist(gpointer instance)
     t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
     switch (t){
     case G_TYPE_OBJECT:
-        return rbgobj_get_value_from_gobject_if_exist(instance);
+        return rbgobj_get_value_from_gobject(instance, alloc);
     case G_TYPE_PARAM:
-        return rbgobj_get_value_from_param_spec_if_exist(instance);
+        return rbgobj_get_value_from_param_spec(instance, alloc);
     default:
         /* FIXME */
-        rb_raise(rb_eTypeError, "%s isn't supported",
-                 rb_class2name(CLASS_OF(instance)));
+        if (alloc) {
+            VALUE ret = rbgobj_fund_instance2robj(t, instance);
+            if (ret == Qnil) {
+                rb_raise(rb_eTypeError, "%s isn't supported",
+                         rb_class2name(CLASS_OF(instance)));
+            }
+            return ret;
+        } else {
+            return Qnil;
+        }
     }
 }
 
@@ -235,26 +223,20 @@ rbgobj_get_gobject(obj)
 }
 
 VALUE
-rbgobj_get_value_from_gobject_if_exist(gobj)
+rbgobj_get_value_from_gobject(gobj, alloc)
     GObject* gobj;
-{
-    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
-    return holder ? holder->self : Qnil;
-}
-
-VALUE
-rbgobj_get_value_from_gobject(gobj)
-    GObject* gobj;
+    gboolean alloc;
 {
     gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
         return holder->self;
-    else {
+    else if (alloc) {
         VALUE obj = rbgobj_create_object(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_gobject_initialize(obj, (gpointer)gobj);
         return obj;
-    }
+    } else
+        return Qnil;
 }
 
 void

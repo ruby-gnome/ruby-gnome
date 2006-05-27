@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:45:10 $
+  $Date: 2006/05/27 11:39:08 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -118,6 +118,7 @@ typedef struct {
 extern void rbgobj_initialize_object(VALUE obj, gpointer cobj);
 extern gpointer rbgobj_instance_from_ruby_object(VALUE obj);
 extern VALUE rbgobj_ruby_object_from_instance(gpointer instance);
+extern VALUE rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc);
 
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
@@ -132,6 +133,7 @@ extern VALUE rbgobj_create_object(VALUE klass);
 
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
+/* rbgobj_typeinstance.c */
 extern void rbgobj_gc_mark_instance(gpointer instance);
 
 

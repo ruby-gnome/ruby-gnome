@@ -4,7 +4,7 @@
   rbgobj_typeinstance.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 07:42:31 $
+  $Date: 2006/05/27 11:39:08 $
   created at: Sat May 27 14:18:55 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -89,7 +89,7 @@ rbgobj_instance_call_cinfo_free(gpointer instance)
 void
 rbgobj_gc_mark_instance(gpointer instance)
 {
-    VALUE obj = rbgobj_ruby_object_from_instance_if_exist(instance);
+    VALUE obj = rbgobj_ruby_object_from_instance2(instance, FALSE);
     rb_gc_mark(obj);
 }
 

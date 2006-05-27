@@ -1,5 +1,14 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobject.c: Remove rbgobj_ruby_object_from_instance_if_exist
+	and add rbgobj_ruby_object_from_instance2.
+	* src/rbgobject.c: Remove rbgobj_get_value_from_gobject_if_exist
+	and extend rbgobj_get_value_from_gobject by adding one argument.
+	* src/rbgobj_param.c: Remove rbgobj_get_value_from_param_spec_if_exist
+	and extend rbgobj_get_value_from_param_spec by adding one argument.
+	* src/rbgobject.h, src/global.h, src/glib2.def,
+	src/rbgobj_typeinstance.c: Follow above changes.
+
 	* src/rbgobj_typeinterface.c: New file.
 	* src/rbgobj_type.c, src/rbgobject.c: separate some interface stuffs
 	into src/rbgobj_typeinterface.c.
