@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: ktou $
-  $Date: 2006/03/18 06:53:05 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:45:10 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -50,6 +50,34 @@ is_gtkobject(gobj)
     if (!gtype_gtkobject)
         gtype_gtkobject = g_type_from_name("GtkObject");
     return gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject);
+}
+
+static void
+gobj_mark(gpointer ptr)
+{
+    GObject* gobj = ptr;
+    guint n_properties;
+    GParamSpec** properties;
+    GValue gval = {0,};
+    int i;
+
+    properties = g_object_class_list_properties(G_OBJECT_GET_CLASS(gobj), &n_properties);
+
+    for (i = 0; i < n_properties; i++) {
+        GParamSpec* pspec = properties[i];
+        GType value_type = G_PARAM_SPEC_VALUE_TYPE(pspec);
+        if (!(pspec->flags & G_PARAM_READABLE)) continue;
+        /* FIXME: exclude types that doesn't have identity. */
+
+        {
+            g_value_init(&gval, value_type);
+            g_object_get_property(gobj, pspec->name, &gval);
+            rbgobj_gc_mark_gvalue(&gval);
+            g_value_unset(&gval);
+        }
+    }
+
+    g_free(properties);
 }
 
 static VALUE
@@ -608,7 +636,7 @@ Init_gobject_subclass()
 void 
 Init_gobject_gobject()
 {
-    VALUE cGObject = G_DEF_CLASS(G_TYPE_OBJECT, "Object", mGLib);
+    VALUE cGObject = G_DEF_CLASS2(G_TYPE_OBJECT, "Object", mGLib, gobj_mark, NULL);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);

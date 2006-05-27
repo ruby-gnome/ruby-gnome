@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: ktou $
-  $Date: 2006/05/27 01:44:07 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:45:10 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -132,6 +132,8 @@ extern VALUE rbgobj_create_object(VALUE klass);
 
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
+extern void rbgobj_gc_mark_instance(gpointer instance);
+
 
 /* rbgobj_type.c */
 extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
@@ -169,6 +171,8 @@ typedef void (*RValueToGValueFunc)(VALUE from, GValue* to);
 typedef VALUE (*GValueToRValueFunc)(const GValue* from);
 extern void rbgobj_register_r2g_func(GType gtype, RValueToGValueFunc func);
 extern void rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func);
+
+extern void rbgobj_gc_mark_gvalue(GValue* value);
 
 /* rbgobj_valuetypes.c */
 extern VALUE rbgobj_ptr_new(GType type, gpointer ptr);

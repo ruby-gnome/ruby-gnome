@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: mutoh $
-  $Date: 2004/08/22 13:26:50 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:45:10 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -79,6 +79,16 @@ rbgobj_get_value_from_param_spec(GParamSpec* pspec)
         rbgobj_param_spec_initialize(result, pspec);
         return result;
     }
+}
+
+VALUE
+rbgobj_get_value_from_param_spec_if_exist(GParamSpec* pspec)
+{
+    gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
+    if (data)
+        return (VALUE)data;
+    else
+        return Qnil;
 }
 
 /**********************************************************************/

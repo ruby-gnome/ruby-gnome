@@ -3,8 +3,8 @@
 
   rbgobj_value.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/14 10:04:04 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:45:10 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -233,6 +233,17 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
           }
         }
     }
+}
+
+/**********************************************************************/
+
+void
+rbgobj_gc_mark_gvalue(GValue* value)
+{
+    GType gtype = G_VALUE_TYPE(value);
+    /* FIXME */
+    if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT)
+        rbgobj_gc_mark_instance(g_value_get_object(value));
 }
 
 /**********************************************************************/

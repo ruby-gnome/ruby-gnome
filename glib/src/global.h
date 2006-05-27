@@ -3,8 +3,8 @@
 
    global.h -
 
-   $Author: ssimons $
-   $Date: 2006/05/26 18:57:44 $
+   $Author: sakai $
+   $Date: 2006/05/27 03:45:10 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -41,7 +41,9 @@ extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);
 
 extern VALUE rbgobj_get_value_from_gobject(GObject* gobj);
+extern VALUE rbgobj_get_value_from_gobject_if_exist(GObject* gobj);
 extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec);
+extern VALUE rbgobj_get_value_from_param_spec_if_exist(GParamSpec* pspec);
 
 extern void rbgobj_init_flags_class(VALUE klass);
 extern void rbgobj_init_enum_class(VALUE klass);

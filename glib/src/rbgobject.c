@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: ktou $
-  $Date: 2006/05/27 01:44:07 $
+  $Author: sakai $
+  $Date: 2006/05/27 03:45:10 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -106,9 +106,65 @@ rbgobj_ruby_object_from_instance(gpointer instance)
     }
 }
 
+VALUE
+rbgobj_ruby_object_from_instance_if_exist(gpointer instance)
+{
+    GType t; 
+    
+    if (instance == NULL)
+    	return Qnil;
+    
+    t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
+    switch (t){
+    case G_TYPE_OBJECT:
+        return rbgobj_get_value_from_gobject_if_exist(instance);
+    case G_TYPE_PARAM:
+        return rbgobj_get_value_from_param_spec_if_exist(instance);
+    default:
+        /* FIXME */
+        rb_raise(rb_eTypeError, "%s isn't supported",
+                 rb_class2name(CLASS_OF(instance)));
+    }
+}
+
 /**********************************************************************/
 
-#define NO_UNREF_IN_WEAK_NOTIFY
+static void
+each_cinfo(gpointer instance,
+           void (*func)(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data),
+           gpointer user_data)
+{
+    GType gtype = G_TYPE_FROM_INSTANCE(instance);
+    GType* interfaces;
+    guint n_interfaces = 0;
+
+    interfaces = g_type_interfaces(gtype, &n_interfaces);
+    {
+        guint i;
+        for (i = 0; i < n_interfaces; i++)
+            func(instance, GTYPE2CINFO(interfaces[i]), user_data);
+    }
+
+    {
+        GType i;
+        for (i = gtype; gtype != G_TYPE_INVALID; gtype = g_type_parent(gtype))
+            func(instance, GTYPE2CINFO(i), user_data);
+    }
+}
+
+static void
+call_cinfo_free(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
+{
+    if (cinfo->free) cinfo->free(instance);
+}
+
+static void
+call_cinfo_mark(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
+{
+    if (cinfo->mark) cinfo->mark(instance);
+}
+
+/**********************************************************************/
 
 static void 
 rbgobj_weak_notify(data, where_the_object_was)
@@ -117,20 +173,11 @@ rbgobj_weak_notify(data, where_the_object_was)
 {
     gobj_holder* holder = data;
 
-    if (holder->cinfo && holder->cinfo->free)
-        holder->cinfo->free(holder->gobj); 
+    each_cinfo(holder->gobj, call_cinfo_free, NULL);
     if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
         rb_ivar_set(holder->self, id_relatives, Qnil);
     if (RTEST(rb_ivar_defined(holder->self, rbgobj_id_children)))
         rb_ivar_set(holder->self, rbgobj_id_children, Qnil);
-    /*
-      XXX. We can't unref() here.
-      Because ref_counted have been set to zero in g_object_real_dispose().
-    */
-#ifndef NO_UNREF_IN_WEAK_NOTIFY
-    g_object_unref(holder->gobj);
-    holder->gobj = NULL;
-#endif
     holder->destroyed = TRUE;
 }
 
@@ -138,9 +185,8 @@ static void
 rbgobj_mark(holder)
     gobj_holder* holder;
 {
-    if (holder->gobj && !holder->destroyed
-        && holder->cinfo && holder->cinfo->mark)
-        holder->cinfo->mark(holder->gobj);
+    if (holder->gobj && !holder->destroyed)
+        each_cinfo(holder->gobj, call_cinfo_mark, NULL);
 }
 
 static void
@@ -148,12 +194,12 @@ rbgobj_free(gobj_holder* holder)
 {
     if (holder->gobj){
         if (!holder->destroyed){
-            if (holder->cinfo && holder->cinfo->free)
-                holder->cinfo->free(holder->gobj);
+            each_cinfo(holder->gobj, call_cinfo_free, NULL);
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)rbgobj_weak_notify, holder);
         }
         g_object_unref(holder->gobj);
+        /* holder->gobj = NULL; */
     }
     free(holder);
 }
@@ -508,6 +554,13 @@ rbgobj_gobject_new(gtype, params_hash)
     }
 
     return result;
+}
+
+void
+rbgobj_gc_mark_instance(gpointer instance)
+{
+    VALUE obj = rbgobj_ruby_object_from_instance_if_exist(instance);
+    rb_gc_mark(obj);
 }
 
 void 
