@@ -1,5 +1,10 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_paramspecs.c, src/rbgobj_value.c: Use RVAL2GOBJ instead of
+	rbgobj_param_spec_get_struct().
+	* src/rbgobj_param.c: Rename rbgobj_param_spec_get_struct() to
+	rbgobj_get_param_spec().
+
 	* src/rbgobject.c: Remove rbgobj_ruby_object_from_instance_if_exist
 	and add rbgobj_ruby_object_from_instance2.
 	* src/rbgobject.c: Remove rbgobj_get_value_from_gobject_if_exist

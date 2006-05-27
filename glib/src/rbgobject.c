@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 11:39:08 $
+  $Date: 2006/05/27 12:24:15 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -67,7 +67,7 @@ rbgobj_instance_from_ruby_object(VALUE obj)
     case G_TYPE_OBJECT:
         return rbgobj_get_gobject(obj);
     case G_TYPE_PARAM:
-        return rbgobj_param_spec_get_struct(obj);
+        return rbgobj_get_param_spec(obj);
     default:
       {
         gpointer ret = rbgobj_fund_robj2instance(t, obj);

@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:45:10 $
+  $Date: 2006/05/27 12:24:15 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -191,7 +191,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         g_value_set_object(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
         return;
       case G_TYPE_PARAM:
-        g_value_set_param(result, NIL_P(val) ? NULL : rbgobj_param_spec_get_struct(val));
+        g_value_set_param(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
         return;
       case G_TYPE_POINTER:
         if (NIL_P(val))

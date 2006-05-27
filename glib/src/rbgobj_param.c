@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 11:39:08 $
+  $Date: 2006/05/27 12:24:15 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -44,7 +44,7 @@ pspec_free(holder)
 }
 
 GParamSpec*
-rbgobj_param_spec_get_struct(VALUE obj)
+rbgobj_get_param_spec(VALUE obj)
 {
     pspec_holder* holder;
     Data_Get_Struct(obj, pspec_holder, holder);
@@ -106,7 +106,7 @@ pspec_s_allocate(VALUE klass)
 static VALUE
 inspect(VALUE self)
 {
-    GParamSpec* pspec = RVAL2GOBJ(self);
+    GParamSpec* pspec = rbgobj_get_param_spec(self);
     VALUE v = rb_inspect(GTYPE2CLASS(pspec->owner_type));
     gchar* str = g_strdup_printf("#<%s: %s#%s>",
                                  rb_class2name(CLASS_OF(self)),
@@ -120,45 +120,45 @@ inspect(VALUE self)
 static VALUE
 get_name(VALUE self)
 {
-    return rb_str_new2(g_param_spec_get_name(rbgobj_param_spec_get_struct(self)));
+    return rb_str_new2(g_param_spec_get_name(rbgobj_get_param_spec(self)));
 }
 
 static VALUE
 get_nick(VALUE self)
 {
-    const gchar* str = g_param_spec_get_nick(rbgobj_param_spec_get_struct(self));
+    const gchar* str = g_param_spec_get_nick(rbgobj_get_param_spec(self));
     return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE
 get_blurb(VALUE self)
 {
-    const gchar* str = g_param_spec_get_blurb(rbgobj_param_spec_get_struct(self));
+    const gchar* str = g_param_spec_get_blurb(rbgobj_get_param_spec(self));
     return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE
 get_flags(VALUE self)
 {
-    return INT2NUM(rbgobj_param_spec_get_struct(self)->flags);
+    return INT2NUM(rbgobj_get_param_spec(self)->flags);
 }
 
 static VALUE
 get_value_type(VALUE self)
 {
-    return rbgobj_gtype_new(G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+    return rbgobj_gtype_new(G_PARAM_SPEC_VALUE_TYPE(rbgobj_get_param_spec(self)));
 }
 
 static VALUE
 get_owner_type(VALUE self)
 {
-    return rbgobj_gtype_new(rbgobj_param_spec_get_struct(self)->owner_type);
+    return rbgobj_gtype_new(rbgobj_get_param_spec(self)->owner_type);
 }
 
 static VALUE
 get_owner(VALUE self)
 {
-    return GTYPE2CLASS(rbgobj_param_spec_get_struct(self)->owner_type);
+    return GTYPE2CLASS(rbgobj_get_param_spec(self)->owner_type);
 }
 
 static VALUE
@@ -168,8 +168,8 @@ value_default(VALUE self)
     VALUE result;
 
     g_value_init(&tmp,
-                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
-    g_param_value_set_default(rbgobj_param_spec_get_struct(self), &tmp);
+                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_get_param_spec(self)));
+    g_param_value_set_default(rbgobj_get_param_spec(self), &tmp);
     result = rbgobj_gvalue_to_rvalue(&tmp);
     g_value_unset(&tmp);
 
@@ -185,9 +185,9 @@ value_defaults(VALUE self, VALUE val)
 
     /* FIXME: use rb_ensure to ensure following g_value_unset() call*/
     g_value_init(&tmp,
-                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_param_spec_get_struct(self)));
+                 G_PARAM_SPEC_VALUE_TYPE(rbgobj_get_param_spec(self)));
     rbgobj_rvalue_to_gvalue(val, &tmp);
-    result = g_param_value_defaults(rbgobj_param_spec_get_struct(self), &tmp);
+    result = g_param_value_defaults(rbgobj_get_param_spec(self), &tmp);
     g_value_unset(&tmp);
 
     return result ? Qtrue : Qfalse;
@@ -227,7 +227,7 @@ value_validate(self, obj)
     struct validate_arg arg;
     GValue value = {0,};
 
-    arg.pspec = rbgobj_param_spec_get_struct(self);
+    arg.pspec = rbgobj_get_param_spec(self);
     arg.value = &value;
     arg.obj = obj;
 
@@ -241,7 +241,7 @@ value_validate(self, obj)
 static VALUE
 value_convert(int argc, VALUE* argv, VALUE self)
 {
-    GParamSpec* pspec = rbgobj_param_spec_get_struct(self);
+    GParamSpec* pspec = rbgobj_get_param_spec(self);
     VALUE src, strict_validation;
     VALUE src_type;
     VALUE result = Qnil;
@@ -257,7 +257,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 
     rbgobj_rvalue_to_gvalue(src, &src_value);
 
-    b = g_param_value_convert(rbgobj_param_spec_get_struct(self),
+    b = g_param_value_convert(rbgobj_get_param_spec(self),
                               &src_value, &dest_value,
                               RTEST(strict_validation));
 
@@ -277,7 +277,7 @@ static VALUE
 values_compare(self, a, b)
     VALUE self, a, b;
 {
-    GParamSpec* pspec = rbgobj_param_spec_get_struct(self);
+    GParamSpec* pspec = rbgobj_get_param_spec(self);
     GType type = G_PARAM_SPEC_VALUE_TYPE(pspec);
     GValue v1 = {0,};
     GValue v2 = {0,};
@@ -303,7 +303,7 @@ static VALUE
 get_ref_count(self)
     VALUE self;
 {
-    return INT2NUM(G_PARAM_SPEC(rbgobj_param_spec_get_struct(self))->ref_count);
+    return INT2NUM(G_PARAM_SPEC(rbgobj_get_param_spec(self))->ref_count);
 }
 
 
@@ -312,7 +312,7 @@ get_ref_count(self)
     param_is_##flag(self) \
         VALUE self; \
     { \
-        GParamSpec* pspec = G_PARAM_SPEC(rbgobj_param_spec_get_struct(self)); \
+        GParamSpec* pspec = G_PARAM_SPEC(rbgobj_get_param_spec(self)); \
         return (pspec->flags & flag) ? Qtrue : Qfalse; \
     }
 

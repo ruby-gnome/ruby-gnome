@@ -3,8 +3,8 @@
 
   rbgobj_paramspecs.c -
 
-  $Author: mutoh $
-  $Date: 2004/03/05 15:52:27 $
+  $Author: sakai $
+  $Date: 2006/05/27 12:24:15 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2004       Ruby-GNOME2 Project Team
@@ -34,19 +34,19 @@ typename##_initialize(self, name, nick, blurb, minimum, maximum, default_value, 
 static \
 VALUE typename##_minimum(self) \
 { \
-    return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->minimum); \
+    return to_ruby(pspec_cast(RVAL2GOBJ(self))->minimum); \
 } \
 \
 static \
 VALUE typename##_maximum(self) \
 { \
-    return to_ruby(pspec_cast(rbgobj_param_spec_get_struct(self))->maximum); \
+    return to_ruby(pspec_cast(RVAL2GOBJ(self))->maximum); \
 } \
 \
 static \
 VALUE typename##_range(self) \
 { \
-    pspec_type* pspec = pspec_cast(rbgobj_param_spec_get_struct(self)); \
+    pspec_type* pspec = pspec_cast(RVAL2GOBJ(self)); \
     return rb_range_new(pspec->minimum, pspec->maximum, 0); \
 }
 
@@ -65,14 +65,14 @@ static VALUE
 float_epsilon(self)
     VALUE self;
 {
-    return rb_float_new(G_PARAM_SPEC_FLOAT(rbgobj_param_spec_get_struct(self))->epsilon);
+    return rb_float_new(G_PARAM_SPEC_FLOAT(RVAL2GOBJ(self))->epsilon);
 }
 
 static VALUE
 double_epsilon(self)
     VALUE self;
 {
-    return rb_float_new(G_PARAM_SPEC_DOUBLE(rbgobj_param_spec_get_struct(self))->epsilon);
+    return rb_float_new(G_PARAM_SPEC_DOUBLE(RVAL2GOBJ(self))->epsilon);
 }
 
 

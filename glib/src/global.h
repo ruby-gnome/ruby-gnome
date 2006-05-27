@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2006/05/27 11:39:08 $
+   $Date: 2006/05/27 12:24:15 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -37,7 +37,7 @@ extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);
 extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
 
-extern GParamSpec* rbgobj_param_spec_get_struct(VALUE obj);
+extern GParamSpec* rbgobj_get_param_spec(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);
 
 extern VALUE rbgobj_get_value_from_gobject(GObject* gobj, gboolean alloc);
