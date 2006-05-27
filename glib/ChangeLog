@@ -1,5 +1,7 @@
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_typeinstance.c (each_cinfo): Fix to traverse ancestor's cinfo.
+
 	* src/rbgobj_paramspecs.c, src/rbgobj_value.c: Use RVAL2GOBJ instead of
 	rbgobj_param_spec_get_struct().
 	* src/rbgobj_param.c: Rename rbgobj_param_spec_get_struct() to

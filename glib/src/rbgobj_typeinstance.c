@@ -4,7 +4,7 @@
   rbgobj_typeinstance.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 11:39:08 $
+  $Date: 2006/05/27 15:04:14 $
   created at: Sat May 27 14:18:55 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -44,7 +44,7 @@ each_cinfo(gpointer instance,
            void (*func)(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data),
            gpointer user_data)
 {
-    GType gtype = G_TYPE_FROM_INSTANCE(instance);
+    const GType gtype = G_TYPE_FROM_INSTANCE(instance);
     GType* interfaces;
     guint n_interfaces = 0;
 
@@ -57,7 +57,7 @@ each_cinfo(gpointer instance,
 
     {
         GType i;
-        for (i = gtype; gtype != G_TYPE_INVALID; gtype = g_type_parent(gtype))
+        for (i = gtype; i != G_TYPE_INVALID; i = g_type_parent(i))
             func(instance, GTYPE2CINFO(i), user_data);
     }
 }
