@@ -4,7 +4,7 @@
    global.h -
 
    $Author: sakai $
-   $Date: 2006/05/27 06:48:33 $
+   $Date: 2006/05/27 07:38:44 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -47,10 +47,14 @@ extern VALUE rbgobj_get_value_from_param_spec_if_exist(GParamSpec* pspec);
 
 extern void rbgobj_init_flags_class(VALUE klass);
 extern void rbgobj_init_enum_class(VALUE klass);
+extern void rbgobj_init_interface(VALUE interf);
 
 /* FIXME: should have better name */
 extern void rbgobj_instance_call_cinfo_mark(gpointer instance);
 extern void rbgobj_instance_call_cinfo_free(gpointer instance);
+
+/* FIXME: extend rbgobj_ruby_object_from_instance to support this functionality. */
+extern VALUE rbgobj_ruby_object_from_instance_if_exist(gpointer instance);
 
 #ifndef HAVE_OBJECT_ALLOCATE
 VALUE rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self);
