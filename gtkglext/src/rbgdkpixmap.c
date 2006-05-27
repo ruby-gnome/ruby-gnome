@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgdkpixmap.c,v 1.2 2005/08/18 02:43:51 ktou Exp $ */
+/* $Id: rbgdkpixmap.c,v 1.3 2006/05/27 13:50:21 ktou Exp $ */
 /* OpenGL extension to Gdk::Pixmap
  * Copyright (C) 2003 Vincent Isambart <isambart@netcourrier.com>
  *
@@ -77,4 +77,6 @@ Init_gtkglext_gdk_pixmap(void)
     rb_define_method(Pixmap, "gl_capable?",         pixmap_is_gl_capable,       0);
     rb_define_method(Pixmap, "gl_pixmap",           pixmap_get_gl_pixmap,       0);
     rb_define_method(Pixmap, "gl_drawable",         pixmap_get_gl_drawable,     0);
+
+    G_DEF_SETTERS(Pixmap);
 }
