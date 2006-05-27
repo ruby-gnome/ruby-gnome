@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/17 14:00:24 $
+  $Author: ktou $
+  $Date: 2006/05/27 01:44:07 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -279,6 +279,22 @@ rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
         rb_ivar_set(obj, obj_ivar_id, hash);
     }
     rb_hash_aset(hash, hash_key, relative);
+}
+
+VALUE
+rbgobj_get_relative_removable(obj, obj_ivar_id, hash_key)
+    VALUE obj, hash_key;
+    ID    obj_ivar_id;
+{
+    VALUE hash = Qnil;
+
+    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+        hash = rb_ivar_get(obj, obj_ivar_id);
+
+    if (NIL_P(hash) || TYPE(hash) != T_HASH) {
+        return Qnil;
+    }
+    return rb_hash_aref(hash, hash_key);
 }
 
 void

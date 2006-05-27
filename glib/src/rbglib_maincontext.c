@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/25 16:46:33 $
+  $Author: ktou $
+  $Date: 2006/05/27 01:44:07 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -15,6 +15,42 @@
 static ID id_poll_func;
 */
 static ID id_call;
+
+
+static VALUE mGLibSource;
+static ID id__callbacks__;
+static GHashTable *callbacks_table;
+
+typedef struct _callback_info_t
+{
+    VALUE callback;
+    guint id;
+} callback_info_t;
+
+static VALUE
+source_remove(self, tag)
+    VALUE self, tag;
+{
+    VALUE callback;
+    callback = G_GET_RELATIVE(mGLibSource, id__callbacks__, tag);
+    G_REMOVE_RELATIVE(mGLibSource, id__callbacks__, tag);
+    g_hash_table_remove(callbacks_table, (gpointer)callback);
+    return CBOOL2RVAL(g_source_remove(NUM2UINT(tag)));
+}
+
+static gboolean
+invoke_source_func(data)
+    gpointer data;
+{
+    callback_info_t *info = (callback_info_t *)data;
+    gboolean ret;
+
+    ret = RTEST(rb_funcall(info->callback, id_call, 0));
+    if (!ret)
+        G_REMOVE_RELATIVE(mGLibSource, id__callbacks__, UINT2NUM(info->id));
+    return ret;
+}
+
 
 /*****************************************/
 GType
@@ -236,12 +272,6 @@ mc_s_depth(self)
 }
 #endif
 
-static gboolean
-source_func(func)
-    gpointer func;
-{
-    return RTEST(rb_funcall((VALUE)func, id_call, 0));
-}
 
 static VALUE
 timeout_source_new(self, interval)
@@ -251,13 +281,26 @@ timeout_source_new(self, interval)
 }
 
 static VALUE
-timeout_add(self, interval)
-    VALUE self, interval;
+timeout_add(int argc, VALUE *argv, VALUE self)
 {
-    VALUE func = G_BLOCK_PROC();
-    G_RELATIVE(self, func);
-    return UINT2NUM(g_timeout_add(NUM2UINT(interval), 
-                                  (GSourceFunc)source_func, (gpointer)func));
+    VALUE interval, rb_priority, func, rb_id;
+    gint priority;
+    callback_info_t *info;
+    guint id;
+
+    rb_scan_args(argc, argv, "11&", &interval, &rb_priority, &func);
+
+    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : INT2NUM(rb_priority);
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    id = g_timeout_add_full(priority, NUM2UINT(interval),
+                            (GSourceFunc)invoke_source_func,
+                            (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(mGLibSource, func, id__callbacks__, rb_id);
+    g_hash_table_insert(callbacks_table, (gpointer)func, info);
+    return rb_id;
 }
 
 static VALUE
@@ -273,23 +316,45 @@ idle_add(argc, argv, self)
     VALUE* argv;
     VALUE self;
 {
-    VALUE func;
+    VALUE arg1, arg2, func, rb_id;
+    callback_info_t *info;
+    guint id;
+    gint priority;
 
-    rb_scan_args(argc, argv, "01", &func);
+    rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
-    if NIL_P(func)
+    if (RTEST(rb_obj_is_kind_of(arg1, rb_cProc))) {
+        priority = G_PRIORITY_DEFAULT;
+        func = arg1;
+    } else if (RTEST(rb_obj_is_kind_of(arg1, rb_cInteger))) {
+        priority = NUM2INT(arg1);
         func = G_BLOCK_PROC();
+    } else {
+        priority = G_PRIORITY_DEFAULT;
+        func = G_BLOCK_PROC();
+    }
 
-    G_RELATIVE(self, func);
-
-    return UINT2NUM(g_idle_add((GSourceFunc)source_func, (gpointer)func));
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    id = g_idle_add_full(priority, (GSourceFunc)invoke_source_func,
+                         (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(mGLibSource, func, id__callbacks__, rb_id);
+    g_hash_table_insert(callbacks_table, (gpointer)func, info);
+    return rb_id;
 }
 
 static VALUE
 idle_remove(self, func)
     VALUE self, func;
 {
-    return CBOOL2RVAL(g_idle_remove_by_data((gpointer)func));
+    callback_info_t *info;
+
+    info = g_hash_table_lookup(callbacks_table, (gpointer)func);
+    G_REMOVE_RELATIVE(mGLibSource, id__callbacks__, UINT2NUM(info->id));
+    g_hash_table_remove(callbacks_table, (gpointer)func);
+    return CBOOL2RVAL(g_idle_remove_by_data((gpointer)info));
 }
 
 #if GLIB_CHECK_VERSION(2,4,0)
@@ -332,6 +397,12 @@ Init_glib_main_context()
 #endif
 
     id_call = rb_intern("call");
+    id__callbacks__ = rb_intern("__callbacks__");
+    callbacks_table = g_hash_table_new(NULL, NULL);
+
+    mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
+    rb_define_singleton_method(mGLibSource, "remove", source_remove, 1);
+
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
@@ -358,7 +429,7 @@ Init_glib_main_context()
     rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
 #endif
     rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
-    rb_define_module_function(timeout, "add", timeout_add, 1);
+    rb_define_module_function(timeout, "add", timeout_add, -1);
 
     rb_define_module_function(idle, "source_new", idle_source_new, 0);
     rb_define_module_function(idle, "add", idle_add, -1);

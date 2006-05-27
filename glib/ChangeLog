@@ -1,3 +1,16 @@
+2006-05-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_maincontext.c: fixed idle/timeout callback memory leak.
+
+	* src/rbgobject.c: added rbgobj_get_relative_removable.
+	* src/rbgobject.h: ditto.
+	* src/glib2.def: ditto.
+
+	* src/rbglib_source.c: moved GLib::Source.remove to
+	rbglib_maincontext.c
+
+	* src/rbglib.c: initialize source before main_context.
+
 2006-05-26  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgobj_closure.c: Ensure that a signal handler in ruby is always run in
@@ -78,7 +91,7 @@
 
 	* src/rbgobj_object.c: Called g_rclosure_attach.
 	* src/rbgobj_signal.c: ditto.
-<
+
 2006-03-11  Joao Pedrosa 
 
 	* src/rbglib_win32.c: Fix a typo on win32.

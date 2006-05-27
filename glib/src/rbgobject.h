@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2006/05/14 10:04:04 $
+  $Author: ktou $
+  $Date: 2006/05/27 01:44:07 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -49,6 +49,8 @@ extern "C" {
 /* G_RELATIVE2 is useless now. Try G_CHILD_ADD/REMOVE first. */
 #define G_RELATIVE2(obj, rel, id, hash_key)\
  (rbgobj_add_relative_removable(obj, rel, id, hash_key))
+#define G_GET_RELATIVE(obj, id, hash_key)\
+ (rbgobj_get_relative_removable(obj, id, hash_key))
 #define G_REMOVE_RELATIVE(obj, id, hash_key)\
  (rbgobj_remove_relative(obj, id, hash_key))
 
@@ -120,6 +122,8 @@ extern VALUE rbgobj_ruby_object_from_instance(gpointer instance);
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
                                           ID obj_ivar_id, VALUE hash_key);
+extern VALUE rbgobj_get_relative_removable(VALUE obj, ID obj_ivar_id,
+                                           VALUE hash_key);
 extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 

@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: ktou $
-  $Date: 2006/02/08 14:55:46 $
+  $Date: 2006/05/27 01:44:07 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -282,8 +282,8 @@ Init_glib2()
 
     /* Require GBoxed/GObject */
     Init_glib_main_loop();
-    Init_glib_main_context();
     Init_glib_source();
+    Init_glib_main_context();
     Init_glib_poll_fd();
     Init_glib_io_channel();
     Init_glib_shell();

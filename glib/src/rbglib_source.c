@@ -4,7 +4,7 @@
   rbglib_source.c -
 
   $Author: ktou $
-  $Date: 2006/01/14 08:41:53 $
+  $Date: 2006/05/27 01:44:07 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -146,13 +146,6 @@ source_get_current_time(self)
     return rb_assoc_new(LONG2NUM(timeval.tv_sec), LONG2NUM(timeval.tv_usec));
 }
 
-static VALUE
-source_remove(self, tag)
-    VALUE self, tag;
-{
-    return CBOOL2RVAL(g_source_remove(NUM2UINT(tag)));
-}
-
 /* How can I implement them ?
 gboolean    g_source_remove_by_funcs_user_data
                                             (GSourceFuncs *funcs,
@@ -179,7 +172,7 @@ Init_glib_source()
     rb_define_method(src, "remove_poll", source_remove_poll, 1);
     rb_define_method(src, "current_time", source_get_current_time, 0);
 
-    rb_define_singleton_method(src, "remove", source_remove, 1);
+    /* GLib::Source.remove is moved to rbglib_maincontext.c */
 
     G_DEF_SETTERS(src);
 }
