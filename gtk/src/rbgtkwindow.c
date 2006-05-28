@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/07 23:51:20 $
+  $Author: sakai $
+  $Date: 2006/05/28 02:59:11 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -681,6 +681,16 @@ gwin_decorated_window_move_resize_window(self)
 }
 */
 
+static void
+mark_toplevels(void* _)
+{
+    GList* list = gtk_window_list_toplevels();
+    GList* p;
+    for (p = list; p; p = g_list_next(p))
+        rbgobj_gc_mark_instance(p->data);
+    g_list_free(list);
+}
+
 void 
 Init_gtk_window()
 {
@@ -781,4 +791,11 @@ Init_gtk_window()
     /* GtkWindowType (from General constants) */
     G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", gWindow);
     G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
+
+    {
+        static VALUE toplevels_marker;
+        toplevels_marker =
+            rb_data_object_alloc(rb_cData, NULL, mark_toplevels, NULL);
+        rb_global_variable(&toplevels_marker);
+    }
 }

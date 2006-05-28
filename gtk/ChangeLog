@@ -1,3 +1,8 @@
+2006-05-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkwindow.c: Mark all top level windows to protect them from
+	Ruby's GC.
+
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkcontainer.c: Register mark procedure which marks
