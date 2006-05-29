@@ -1,5 +1,8 @@
 2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_singal.c: new function gobj_sig_connect_impl
+	extracted from gobj_sig_connect and gobj_sig_connect_after.
+
 	* src/rbgobj_signal.c: Make eNoSignal and _signal_list to be static.
 
 2006-05-27  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>

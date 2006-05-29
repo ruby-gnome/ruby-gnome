@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2006/05/29 03:00:22 $
+  $Date: 2006/05/29 05:41:37 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -233,7 +233,8 @@ gobj_sig_has_handler_pending(argc, argv, self)
 }
 
 static VALUE
-gobj_sig_connect(argc, argv, self)
+gobj_sig_connect_impl(after, argc, argv, self)
+    gboolean after;
     int argc;
     VALUE *argv;
     VALUE self;
@@ -262,9 +263,18 @@ gobj_sig_connect(argc, argv, self)
     rclosure = g_rclosure_new(func, rest, 
                               rbgobj_get_signal_func(signal_id));
     g_rclosure_attach((GClosure *)rclosure, self);
-    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, FALSE);
+    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, after);
 
     return INT2FIX(i);
+}
+
+static VALUE
+gobj_sig_connect(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    return gobj_sig_connect_impl(FALSE, argc, argv, self);
 }
 
 static VALUE
@@ -273,33 +283,7 @@ gobj_sig_connect_after(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE sig, rest, func;
-    int i;
-    GClosure* rclosure;
-    const char* sig_name;
-    guint signal_id;
-    GQuark detail;
-
-    rb_scan_args(argc, argv, "1*", &sig, &rest);
-
-    if (SYMBOL_P(sig))
-        sig_name = rb_id2name(SYM2ID(sig));
-    else {
-        StringValue(sig);
-        sig_name = StringValuePtr(sig);
-    }
-
-    if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
-        rb_raise(eNoSignalError, "no such signal: %s", sig_name);
-
-    func = G_BLOCK_PROC();
-    G_RELATIVE(self, func);
-    rclosure = g_rclosure_new(G_BLOCK_PROC(), rest, 
-                              rbgobj_get_signal_func(signal_id));
-    g_rclosure_attach((GClosure *)rclosure, self);
-    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, TRUE);
-
-    return INT2FIX(i);
+    return gobj_sig_connect_impl(TRUE, argc, argv, self);
 }
 
 #if 0
