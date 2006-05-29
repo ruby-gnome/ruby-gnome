@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 12:24:15 $
+  $Date: 2006/05/29 14:20:55 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -15,21 +15,19 @@
 /**********************************************************************/
 
 static ID id_to_s;
-static VALUE r2g_func_table;
-static VALUE g2r_func_table;
+static GQuark qRValueToGValueFunc;
+static GQuark qGValueToRValueFunc;
 
 void
 rbgobj_register_r2g_func(GType gtype, RValueToGValueFunc func)
 {
-    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    rb_hash_aset(r2g_func_table, INT2FIX(gtype), obj);
+    g_type_set_qdata(gtype, qRValueToGValueFunc, func);
 }
 
 void
 rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 {
-    VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
-    rb_hash_aset(g2r_func_table, INT2FIX(gtype), obj);
+    g_type_set_qdata(gtype, qGValueToRValueFunc, func);
 }
 
 /**********************************************************************/
@@ -101,11 +99,10 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                  gtype != G_TYPE_INVALID;
                  gtype = g_type_parent(gtype))
             {
-                GValueToRValueFunc func;
-                VALUE obj = rb_hash_aref(g2r_func_table, INT2NUM(gtype));
-                if (NIL_P(obj))
+                GValueToRValueFunc func = 
+                    g_type_get_qdata(gtype, qGValueToRValueFunc);
+                if (!func)
                     continue;
-                Data_Get_Struct(obj, void, func);
                 return func(value);
             }
         }
@@ -118,14 +115,12 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
                           value);
                
           if (NIL_P(ret))  {
-             GValueToRValueFunc func;
-             VALUE obj = rb_hash_aref(g2r_func_table, 
-                 INT2NUM(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))));
-             if (NIL_P(obj)) {
+             GValueToRValueFunc func =
+                 g_type_get_qdata(G_VALUE_TYPE(value), qGValueToRValueFunc);
+             if (!func) {
                g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
                   g_type_name(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))));
              } else {
-               Data_Get_Struct(obj, void, func);
                ret = func(value);
              }
           }
@@ -194,12 +189,8 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         g_value_set_param(result, NIL_P(val) ? NULL : RVAL2GOBJ(val));
         return;
       case G_TYPE_POINTER:
-        if (NIL_P(val))
-            g_value_set_pointer(result, NULL);
-        else
-            g_value_set_pointer(result, rbgobj_ptr2cptr(val));
+        g_value_set_pointer(result, NIL_P(val) ? NULL : rbgobj_ptr2cptr(val));
         return;
-
       case G_TYPE_BOXED:
         {
             GType gtype;
@@ -207,11 +198,10 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
                  gtype != G_TYPE_INVALID;
                  gtype = g_type_parent(gtype))
             {
-                RValueToGValueFunc func;
-                VALUE obj = rb_hash_aref(r2g_func_table, INT2NUM(gtype));
-                if (NIL_P(obj))
+                RValueToGValueFunc func =
+                    g_type_get_qdata(gtype, qRValueToGValueFunc);
+                if (!func)
                     continue;
-                Data_Get_Struct(obj, void, func);
                 func(val, result);
                 return;
             }
@@ -221,14 +211,12 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         if (!rbgobj_fund_rvalue2gvalue(
                  G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result)),
                  val, result)) {
-          RValueToGValueFunc func;
-          VALUE obj = rb_hash_aref(r2g_func_table, 
-              INT2NUM(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result))));
-          if (NIL_P(obj)) {
+          RValueToGValueFunc func =
+            g_type_get_qdata(G_VALUE_TYPE(result), qRValueToGValueFunc);
+          if (!func){
             g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
                 g_type_name(G_VALUE_TYPE(result)));
           } else {
-            Data_Get_Struct(obj, void, func);
             func(val, result);
           }
         }
@@ -251,8 +239,6 @@ rbgobj_gc_mark_gvalue(GValue* value)
 void Init_gobject_gvalue()
 {
     id_to_s = rb_intern("to_s");
-    r2g_func_table = rb_hash_new();
-    g2r_func_table = rb_hash_new();
-    rb_global_variable(&r2g_func_table);
-    rb_global_variable(&g2r_func_table);
+    qRValueToGValueFunc = g_quark_from_static_string("__ruby_r2g_func__");
+    qGValueToRValueFunc = g_quark_from_static_string("__ruby_g2r_func__");
 }

@@ -1,5 +1,8 @@
 2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobjvalue.c: Use g_type_set_qdata and g_type_get_qdata instead
+	of ruby's hash table.
+
 	* src/rbgobj_singal.c: new function gobj_sig_connect_impl
 	extracted from gobj_sig_connect and gobj_sig_connect_after.
 
