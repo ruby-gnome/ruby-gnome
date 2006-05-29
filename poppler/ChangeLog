@@ -1,3 +1,8 @@
+2006-05-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-document.c: fixed memory leaks.
+	* src/rbpoppler-page.c: ditto.
+
 2006-05-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-page.c:

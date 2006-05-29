@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2006/05/23 14:36:31 $
+  $Date: 2006/05/29 16:29:14 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -96,7 +96,12 @@ doc_has_attachments(VALUE self)
 static VALUE
 doc_get_attachments(VALUE self)
 {
-    return GLIST2ARY(poppler_document_get_attachments(RVAL2GOBJ(self)));
+    VALUE result;
+    GList *attachments;
+    attachments = poppler_document_get_attachments(RVAL2GOBJ(self));
+    result = GLIST2ARY(attachments);
+    g_list_free(attachments);
+    return result;
 }
 
 static VALUE

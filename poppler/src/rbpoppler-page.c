@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/05/27 10:21:53 $
+  $Date: 2006/05/29 16:29:14 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -98,8 +98,12 @@ page_get_thumbnail_size(VALUE self)
 static VALUE
 page_find_text(VALUE self, VALUE text)
 {
-    return GLIST2ARY2(poppler_page_find_text(RVAL2GOBJ(self), RVAL2CSTR(text)),
-                      POPPLER_TYPE_RECTANGLE);
+    VALUE result;
+    GList *matches;
+    matches = poppler_page_find_text(RVAL2GOBJ(self), RVAL2CSTR(text));
+    result = GLIST2ARY2(matches, POPPLER_TYPE_RECTANGLE);
+    g_list_free(matches);
+    return result;
 }
 
 static VALUE
@@ -117,8 +121,12 @@ page_get_text(VALUE self, VALUE rect)
 static VALUE
 page_get_link_mapping(VALUE self)
 {
-    return GLIST2ARY2(poppler_page_get_link_mapping(RVAL2GOBJ(self)),
-                      POPPLER_TYPE_LINK_MAPPING);
+    VALUE result;
+    GList *map_list;
+    map_list = poppler_page_get_link_mapping(RVAL2GOBJ(self));
+    result = GLIST2ARY2(map_list, POPPLER_TYPE_LINK_MAPPING);
+    g_list_free(map_list);
+    return result;
 }
 
 static VALUE
