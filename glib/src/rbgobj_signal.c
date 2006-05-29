@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2006/05/26 15:23:47 $
+  $Date: 2006/05/29 03:00:22 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -46,7 +46,7 @@ rbgobj_get_signal_func(guint signal_id)
 
 /**********************************************************************/
 
-VALUE eNoSignalError;
+static VALUE eNoSignalError;
 
 // FIXME: use rb_protect
 static gboolean
@@ -147,7 +147,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     return rbgobj_signal_wrap(sig);
 }
 
-void
+static void
 _signal_list(VALUE result, GType gtype)
 {
     guint n_ids, i;
