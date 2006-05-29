@@ -4,7 +4,7 @@
   rbgtkcontainer.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 03:49:36 $
+  $Date: 2006/05/29 03:10:22 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -720,13 +720,13 @@ type_register(int argc, VALUE* argv, VALUE self)
 }
 /**********************************************************************/
 
-void
+static void
 cont_mark_callback(GtkWidget* w, gpointer data)
 {
     rbgobj_gc_mark_instance(w);
 }
 
-void
+static void
 cont_mark(void* p)
 {
     gtk_container_forall(GTK_CONTAINER(p), cont_mark_callback, NULL);

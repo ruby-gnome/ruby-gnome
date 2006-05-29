@@ -1,3 +1,8 @@
+2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtkcontainer.c: Make cont_mark and cont_mark_callback to be
+	static function.
+
 2006-05-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkwindow.c: Mark all top level windows to protect them from
