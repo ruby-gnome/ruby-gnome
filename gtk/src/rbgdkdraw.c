@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: ggc $
-  $Date: 2005/09/30 20:17:59 $
+  $Author: ktou $
+  $Date: 2006/05/31 08:11:06 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -401,7 +401,12 @@ static VALUE
 gdkdraw_cairo_create(self)
     VALUE self;
 {
-    return CRCONTEXT2RVAL(gdk_cairo_create(_SELF(self)));
+    VALUE rb_cr;
+    cairo_t *cr;
+    cr = gdk_cairo_create(_SELF(self));
+    rb_cr = CRCONTEXT2RVAL(cr);
+    cairo_destroy (cr);
+    return rb_cr;
 }
 #  endif
 #endif

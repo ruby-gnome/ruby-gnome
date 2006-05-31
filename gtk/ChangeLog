@@ -1,3 +1,7 @@
+2006-05-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkdraw.c (gdkdraw_cairo_create): fixed a memory leak bug.
+
 2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtkcontainer.c: Make cont_mark and cont_mark_callback to be
