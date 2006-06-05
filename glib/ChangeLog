@@ -1,3 +1,7 @@
+2006-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+  * src/rbgobj_closure.c, glib2.def: Works on Windows again.
+
 2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobjvalue.c: Use g_type_set_qdata and g_type_get_qdata instead

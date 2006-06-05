@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 05:10:34 $
+  $Author: mutoh $
+  $Date: 2006/06/05 02:34:54 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -12,7 +12,11 @@
 **********************************************************************/
 
 #include "global.h"
+#ifdef G_OS_WIN32
+#undef HAVE_NATIVETHREAD /* FIXME */
+#else
 #include <unistd.h>
+#endif
 
 #ifdef HAVE_YARV_H
 #include "yarv.h"

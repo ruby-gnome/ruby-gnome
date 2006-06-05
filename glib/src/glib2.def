@@ -61,6 +61,6 @@ EXPORTS
 	rbgutil_sym_g2r_func
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
-	rbgobj_fund_define_fundermental
+	rbgobj_fund_define_fundamental
 	rbgobj_gc_mark_gvalue
 	rbgobj_gc_mark_instance
