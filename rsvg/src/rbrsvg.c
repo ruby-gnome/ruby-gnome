@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/05/12 06:38:12 $
+  $Date: 2006/06/06 15:33:52 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -394,6 +394,7 @@ static VALUE
 rb_rsvg_handle_get_pixbuf(int argc, VALUE *argv, VALUE self)
 {
     VALUE id;
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf = NULL;
 
     rb_scan_args(argc, argv, "01", &id);
@@ -409,7 +410,10 @@ rb_rsvg_handle_get_pixbuf(int argc, VALUE *argv, VALUE self)
 #endif
     }
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    if (pixbuf)
+        g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 #if LIBRSVG_CHECK_VERSION(2, 9, 0)
@@ -431,20 +435,24 @@ rb_rsvg_handle_set_base_uri(VALUE self, VALUE base_uri)
 static VALUE
 rb_rsvg_pixbuf_from_file(VALUE self, VALUE file_name)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
     pixbuf = rsvg_pixbuf_from_file(RVAL2CSTR(file_name), &error);
 
     if (error) RAISE_GERROR(error);
-  
-    return GOBJ2RVAL(pixbuf);
+
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
 rb_rsvg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
                                  VALUE x_zoom, VALUE y_zoom)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -455,13 +463,16 @@ rb_rsvg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
 rb_rsvg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
                                  VALUE width, VALUE height)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -472,13 +483,16 @@ rb_rsvg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
 rb_rsvg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
                                      VALUE max_width, VALUE max_height)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -489,7 +503,9 @@ rb_rsvg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
@@ -500,6 +516,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max(VALUE self,
                                           VALUE max_width,
                                           VALUE max_height)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -512,7 +529,9 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max(VALUE self,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
@@ -560,6 +579,7 @@ static VALUE
 rb_rsvg_pixbuf_from_file_at_size_ex(VALUE self, VALUE file_name,
                                     VALUE width, VALUE height)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -571,12 +591,15 @@ rb_rsvg_pixbuf_from_file_at_size_ex(VALUE self, VALUE file_name,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
 rb_rsvg_pixbuf_from_file_ex(VALUE self, VALUE file_name)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -586,13 +609,16 @@ rb_rsvg_pixbuf_from_file_ex(VALUE self, VALUE file_name)
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref (pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
 rb_rsvg_pixbuf_from_file_at_zoom_ex(VALUE self, VALUE file_name,
                                     VALUE x_zoom, VALUE y_zoom)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -622,7 +648,9 @@ rb_rsvg_pixbuf_from_file_at_max_size_ex(VALUE self, VALUE file_name,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 
 static VALUE
@@ -633,6 +661,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
                                              VALUE max_width,
                                              VALUE max_height)
 {
+    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -646,7 +675,9 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
 
     if (error) RAISE_GERROR(error);
 
-    return GOBJ2RVAL(pixbuf);
+    rb_pixbuf = GOBJ2RVAL(pixbuf);
+    g_object_unref(pixbuf);
+    return rb_pixbuf;
 }
 #endif
 
