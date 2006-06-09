@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 15:07:21 $
+  $Author: ssimons $
+  $Date: 2006/06/09 21:30:26 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -66,6 +66,7 @@ gobj_mark(gpointer ptr)
     for (i = 0; i < n_properties; i++) {
         GParamSpec* pspec = properties[i];
         GType value_type = G_PARAM_SPEC_VALUE_TYPE(pspec);
+        if (G_TYPE_FUNDAMENTAL(value_type) != G_TYPE_OBJECT) continue;
         if (!(pspec->flags & G_PARAM_READABLE)) continue;
         /* FIXME: exclude types that doesn't have identity. */
 

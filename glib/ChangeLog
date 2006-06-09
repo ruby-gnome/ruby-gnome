@@ -1,3 +1,9 @@
+2006-06-09  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgobj_object.c: Only let the GObject mark function retrieve
+	object properties that it will actually mark. Which is currently just
+	other GObjects
+
 2006-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
   * src/rbgobj_closure.c, glib2.def: Works on Windows again.
