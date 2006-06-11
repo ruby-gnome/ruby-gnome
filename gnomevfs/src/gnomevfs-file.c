@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/11 14:00:44 $
+ * $Date: 2006/06/11 16:16:28 $
  *
  *****************************************************************************/
 
@@ -627,99 +627,6 @@ file_write(self, str)
   return CHECK_RESULT(result, ULL2NUM(bytes_written));
 }
 
-static VALUE
-file_printf(argc, argv, self)
-     int argc;
-     VALUE *argv;
-     VALUE self;
-{
-  file_write(self, rb_f_sprintf(argc, argv));
-  return Qnil;
-}
-
-static VALUE file_puts(int argc, VALUE *argv, VALUE self);
-
-#ifdef HAVE_RB_EXEC_RECURSIVE
-static VALUE
-file_puts_ary(ary, self, recur)
-     VALUE ary, self, recur;
-{
-  VALUE tmp;
-  long i;
-
-  for (i = 0; i < RARRAY(ary)->len; i++) {
-    tmp = RARRAY(ary)->ptr[i];
-    if (recur) {
-      tmp = rb_str_new2("[...]");
-    }
-    file_puts(1, &tmp, self);
-  }
-
-  return Qnil;
-}
-#else
-static VALUE
-file_puts_ary(ary, self)
-     VALUE ary, self;
-{
-  VALUE tmp;
-  int i;
-  int n;
-
-  for (i = 0, n = RARRAY(ary)->len; i < n; i++) {
-    tmp = RARRAY(ary)->ptr[i];
-    if (rb_inspecting_p(tmp)) {
-      tmp = rb_str_new2("[...]");
-    }
-    file_puts(1, &tmp, self);
-  }
-
-  return Qnil;
-}
-#endif
-
-static VALUE
-file_puts(argc, argv, self)
-     int argc;
-     VALUE *argv;
-     VALUE self;
-{
-  VALUE line;
-  int i;
-
-  if (argc > 0) {
-    for (i = 0; i < argc; i++) {
-      if (NIL_P(argv[i])) {
-        line = rb_str_new2("nil");
-      } else {
-        line = rb_check_convert_type(argv[i],
-                                     T_ARRAY,
-                                     "Array",
-                                     "to_ary");
-        if (!NIL_P(line)) {
-#ifdef HAVE_RB_EXEC_RECURSIVE
-          rb_exec_recursive(file_puts_ary, line, self);
-#else
-          rb_protect_inspect(file_puts_ary, line,
-                             self);
-#endif
-          continue;
-        }
-        line = rb_obj_as_string(argv[i]);
-      }
-      file_write(self, line);
-      if (RSTRING(line)->ptr[RSTRING(line)->len - 1]
-          != '\n') {
-        file_write(self, s_default_rsep);
-      }
-    }
-  } else {
-    file_write(self, s_default_rsep);
-    return Qnil;
-  }
-  return Qnil;
-}
-
 static GnomeVFSFileSize
 remain_size(handle)
      GnomeVFSHandle* handle;
@@ -982,10 +889,7 @@ Init_gnomevfs_file(m_gvfs)
   rb_define_method(g_gvfs_file, "gets", file_gets, -1);
   rb_define_method(g_gvfs_file, "pos", file_pos, -1);
   rb_define_method(g_gvfs_file, "tell", file_tell, 0);
-  rb_define_method(g_gvfs_file, "printf", file_printf, -1);
   rb_define_method(g_gvfs_file, "putc", file_putc, 1);
-  rb_define_method(g_gvfs_file, "puts", file_puts, -1);
-  rb_define_alias(g_gvfs_file, "print", "puts");
   rb_define_method(g_gvfs_file, "read", file_read, -1);
   rb_define_method(g_gvfs_file, "readchar", file_readchar, 0);
   rb_define_method(g_gvfs_file, "readline", file_readline, -1);
@@ -996,7 +900,10 @@ Init_gnomevfs_file(m_gvfs)
   rb_define_method(g_gvfs_file, "file_info", file_stat, -1);
   rb_define_method(g_gvfs_file, "truncate", file_truncate, 1);
   rb_define_method(g_gvfs_file, "write", file_write, 1);
-  rb_define_alias(g_gvfs_file, "<<", "write");
+  rb_define_method(g_gvfs_file, "printf", rb_io_printf, -1);
+  rb_define_method(g_gvfs_file, "puts", rb_io_puts, -1);
+  rb_define_method(g_gvfs_file, "print", rb_io_print, -1);
+  rb_define_method(g_gvfs_file, "<<", rb_io_addstr, 1);
 
   rb_define_const(g_gvfs_file,
                   "OPEN_NONE",
