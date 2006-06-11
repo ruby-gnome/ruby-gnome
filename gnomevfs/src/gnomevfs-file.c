@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: sakai $
  *
- * $Date: 2005/09/17 18:05:53 $
+ * $Date: 2006/06/11 14:00:44 $
  *
  *****************************************************************************/
 
@@ -720,32 +720,74 @@ file_puts(argc, argv, self)
   return Qnil;
 }
 
-static VALUE
-bytes_from_end(self)
-     VALUE self;
+static GnomeVFSFileSize
+remain_size(handle)
+     GnomeVFSHandle* handle;
 {
   GnomeVFSFileInfo *info;
   GnomeVFSFileSize offset;
   GnomeVFSResult result;
-  VALUE value;
+  GnomeVFSFileSize value = BUFSIZ;
 
   info = gnome_vfs_file_info_new();
-  result = gnome_vfs_get_file_info_from_handle(_SELF(self), info,
+  result = gnome_vfs_get_file_info_from_handle(handle, info,
                                                GNOME_VFS_FILE_INFO_DEFAULT);
   if (result == GNOME_VFS_OK) {
-    result = gnome_vfs_tell(_SELF(self), &offset);
+    result = gnome_vfs_tell(handle, &offset);
     if (result == GNOME_VFS_OK) {
       /* XXX: is the + 1 right? */
-      value = ULL2NUM(info->size - offset + 1);
-    } else {
-      value = GVFSRESULT2RVAL(result);
+      value = info->size - offset + 1;
     }
-  } else {
-    value = GVFSRESULT2RVAL(result);
   }
 
   gnome_vfs_file_info_unref(info);
+
+  if (value > LONG_MAX)
+      rb_raise(rb_eIOError, "file too big for single read");
   return value;
+}
+
+static VALUE
+read_all(handle, siz, str)
+     GnomeVFSHandle *handle;
+     GnomeVFSFileSize siz;
+     VALUE str;
+{
+  GnomeVFSFileSize bytes = 0;
+  
+  if (siz == 0) siz = BUFSIZ;
+  if (NIL_P(str)) {
+    str = rb_tainted_str_new(0, siz);
+  } else {
+    StringValue(str);
+    rb_str_modify(str);
+    rb_str_resize(str, siz);
+  }
+  
+  for (;;) {
+    GnomeVFSFileSize bytes_read;
+    GnomeVFSResult result;
+  
+    result = gnome_vfs_read(handle,
+                            RSTRING(str)->ptr + bytes,
+                            siz - bytes,
+                            &bytes_read);
+    
+    if (result == GNOME_VFS_OK) {
+    	bytes += bytes_read;
+        if (siz - bytes < BUFSIZ) {
+          siz += BUFSIZ;
+          rb_str_resize(str, siz);
+    	}
+    } else if (result == GNOME_VFS_ERROR_EOF) {
+      rb_str_resize(str, bytes);
+      break;
+    } else {
+      GVFSRESULT2RVAL(result);
+    }
+  }
+  
+  return str;
 }
 
 static VALUE
@@ -755,33 +797,33 @@ file_read(argc, argv, self)
      VALUE self;
 {
   VALUE len, str;
+  GnomeVFSHandle* handle = _SELF(self);
   GnomeVFSFileSize bytes;
   GnomeVFSFileSize bytes_read;
   GnomeVFSResult result;
 
-  if (rb_scan_args(argc, argv, "01", &len) == 1) {
-    bytes = NUM2INT(len);
-  } else {
-    VALUE bytes_left;
+  rb_scan_args(argc, argv, "02", &len, &str);
+  if (NIL_P(len))
+    return read_all(handle, remain_size(handle), str);
 
-    bytes_left = bytes_from_end(self);
-    if (!NIL_P(bytes_left)) {
-      bytes = NUM2ULONG(bytes_left);
-    } else {
-      return Qnil;
-    }
-  }
-
+  bytes = NUM2INT(len);
   if (bytes < 0) {
-    rb_raise(rb_eArgError, "negative length %d given", bytes);
+    /* FIXME */
+    rb_raise(rb_eArgError, "negative length %ld given", (long)bytes);
   }
 
-  str = rb_str_new(0, bytes);
+  if (NIL_P(str)) {
+    str = rb_tainted_str_new(0, bytes);
+  } else {
+    StringValue(str);
+    rb_str_modify(str);
+    rb_str_resize(str, bytes);
+  }
   if (bytes == 0) {
     return str;
   }
 
-  result = gnome_vfs_read(_SELF(self), RSTRING(str)->ptr, bytes,
+  result = gnome_vfs_read(handle, RSTRING(str)->ptr, bytes,
                           &bytes_read);
   if (result == GNOME_VFS_OK) {
     RSTRING(str)->len = bytes_read;

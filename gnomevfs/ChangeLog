@@ -1,3 +1,9 @@
+2006-06-11  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/gnomevfs-file.c (GnomeVFS::File): Allow optional "buffer" argument like
+	IO#raed. And fix to read to the end of file when length is ommited, even if
+	gnome_vfs_get_file_info_from_handle() and/or gnome_vfs_tell() don't work.
+
 2005-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Cygwin support. [bug #1315334]
