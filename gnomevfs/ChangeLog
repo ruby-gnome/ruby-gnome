@@ -1,3 +1,8 @@
+2006-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/gnomevfs-directory.c (directory_list_load): Fix segmentation fault which
+	caused by a wrong usage of GLIST2ARY(list). 
+
 2006-06-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/gnomevfs-file.c (GnomeVFS::File): Use rb_io_printf, rb_io_puts, rb_io_print

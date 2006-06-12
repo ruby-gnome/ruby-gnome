@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: sakai $
  *
- * $Date: 2003/08/15 13:12:08 $
+ * $Date: 2006/06/12 16:58:52 $
  *
  *****************************************************************************/
 
@@ -75,7 +75,7 @@ directory_list_load(argc, argv, self)
 
 	result = gnome_vfs_directory_list_load(&list, RVAL2CSTR(uri), options);
 	if (result == GNOME_VFS_OK) {
-		ary = GLIST2ARY(list);
+		ary = GLIST2ARY2(list, GNOMEVFS_TYPE_FILE_INFO);
 		gnome_vfs_file_info_list_free(list);
 		return ary;
 	} else {
