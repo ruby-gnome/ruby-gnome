@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: sakai $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -159,7 +159,7 @@ uri_to_string(argc, argv, self)
 	VALUE v_str;
 
 	if (rb_scan_args(argc, argv, "01", &v_hide_opts) == 1) {
-		hide_opts = NUM2INT(v_hide_opts);
+		hide_opts = RVAL2GFLAGS(v_hide_opts, GNOME_VFS_TYPE_VFS_URI_HIDE_OPTIONS);
 	} else {
 		hide_opts = GNOME_VFS_URI_HIDE_NONE;
 	}
@@ -240,7 +240,7 @@ static VALUE
 uri_set_host_port(self, host_port)
 	VALUE self, host_port;
 {
-	gnome_vfs_uri_set_host_port(_SELF(self), FIX2UINT(host_port));
+	gnome_vfs_uri_set_host_port(_SELF(self), NUM2UINT(host_port));
 	return self;
 }
 
@@ -384,20 +384,8 @@ Init_gnomevfs_uri(m_gvfs)
 
 	g_gvfs_uri = G_DEF_CLASS(GNOMEVFS_TYPE_URI, "URI", m_gvfs);
 
-	rb_define_const(g_gvfs_uri, "HIDE_NONE",
-			INT2FIX(GNOME_VFS_URI_HIDE_NONE));
-	rb_define_const(g_gvfs_uri, "HIDE_USER_NAME",
-			INT2FIX(GNOME_VFS_URI_HIDE_USER_NAME));
-	rb_define_const(g_gvfs_uri, "HIDE_PASSWORD",
-			INT2FIX(GNOME_VFS_URI_HIDE_PASSWORD));
-	rb_define_const(g_gvfs_uri, "HIDE_HOST_NAME",
-			INT2FIX(GNOME_VFS_URI_HIDE_HOST_NAME));
-	rb_define_const(g_gvfs_uri, "HIDE_HOST_PORT",
-			INT2FIX(GNOME_VFS_URI_HIDE_HOST_PORT));
-	rb_define_const(g_gvfs_uri, "HIDE_TOPLEVEL_METHOD",
-			INT2FIX(GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD));
-	rb_define_const(g_gvfs_uri, "HIDE_FRAGMENT_IDENTIFIER",
-			INT2FIX(GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_URI_HIDE_OPTIONS, "HideOptions", g_gvfs_uri);
+        G_DEF_CONSTANTS(g_gvfs_uri, GNOME_VFS_TYPE_VFS_URI_HIDE_OPTIONS, "GNOME_VFS_");
 
 	rb_define_const(g_gvfs_uri, "MAGIC_CHR",
 			CHR2FIX(GNOME_VFS_URI_MAGIC_CHR));

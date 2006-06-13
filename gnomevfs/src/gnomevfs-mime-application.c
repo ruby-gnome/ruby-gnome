@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: sakai $
  *
- * $Date: 2003/08/15 13:12:08 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -134,7 +134,7 @@ static VALUE
 mime_application_set_expected_uris(self, type)
 	VALUE self, type;
 {
-	_SELF(self)->expects_uris = FIX2INT(type);
+	_SELF(self)->expects_uris = RVAL2GENUM(type, GNOME_VFS_TYPE_VFS_MIME_APPLICATION_ARGUMENT_TYPE);
 	return self;
 }
 
@@ -142,7 +142,7 @@ static VALUE
 mime_application_get_expected_uris(self)
 	VALUE self;
 {
-	return INT2FIX(_SELF(self)->expects_uris);
+	return GENUM2RVAL(_SELF(self)->expects_uris, GNOME_VFS_TYPE_VFS_MIME_APPLICATION_ARGUMENT_TYPE);
 }
 
 static VALUE
@@ -242,6 +242,8 @@ Init_gnomevfs_mime_application(m_gvfs)
 			 mime_application_save, 0);
 
 	G_DEF_SETTERS(gvfs_mime_app);
+
+        /* FIXME: GNOME_VFS_TYPE_VFS_MIME_APPLICATION_ARGUMENT_TYPE */
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

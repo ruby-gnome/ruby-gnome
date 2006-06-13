@@ -1,5 +1,10 @@
 2006-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/gnomevfs-directory.c, src/gnomevfs-file.c, src/gnomevfs-fileinfo.c,
+	src/gnomevfs-mime-application.c, src/gnomevfs-mime.c, src/gnomevfs-monitor.c,
+	src/gnomevfs-uri.c, src/gnomevfs.c: Apply enum/flags changes. Replace unsafe
+	uses of FIX2INT and FIX2UINT with NUM2INT and NUM2UINT.
+
 	* src/gnomevfs-directory.c (directory_list_load): Fix segmentation fault which
 	caused by a wrong usage of GLIST2ARY(list). 
 

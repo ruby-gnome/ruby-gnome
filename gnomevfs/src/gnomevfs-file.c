@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/11 16:16:28 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -32,6 +32,8 @@
 /* Defines *******************************************************************/
 
 #define _SELF(s)	((GnomeVFSHandle *)RVAL2BOXED(s, GNOMEVFS_TYPE_FILE))
+#define RVAL2OPENMODE(x) ((GnomeVFSOpenMode)(RVAL2GFLAGS(x,GNOME_VFS_TYPE_VFS_OPEN_MODE)))
+#define OPENMODE2RVAL(x) (GFLAGS2RVAL(x,GNOME_VFS_TYPE_VFS_OPEN_MODE))
 
 /* Type Definitions **********************************************************/
 
@@ -187,7 +189,7 @@ file_m_chmod(argc, argv, self)
   rb_secure(2);
   info = gnome_vfs_file_info_new();
   rb_scan_args(argc, argv, "1*", &r_mode, &paths);
-  info->permissions = FIX2INT(r_mode);
+  info->permissions = RVAL2GFLAGS(r_mode, GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS);
   value = apply_set_info(paths, info,
                          GNOME_VFS_SET_FILE_INFO_PERMISSIONS);
   gnome_vfs_file_info_unref(info);
@@ -211,12 +213,12 @@ file_m_chown(argc, argv, self)
   if (NIL_P(r_owner)) {
     info->uid = (guint)-1;
   } else {
-    info->uid = FIX2INT(r_owner);
+    info->uid = NUM2INT(r_owner);
   }
   if (NIL_P(r_group)) {
     info->gid = (guint)-1;
   } else {
-    info->gid = FIX2INT(r_group);
+    info->gid = NUM2INT(r_group);
   }
 
   value = apply_set_info(paths, info, GNOME_VFS_SET_FILE_INFO_OWNER);
@@ -236,7 +238,7 @@ file_m_lstat(argc, argv, self)
   GnomeVFSResult result;
 
   if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 1) {
-    options = FIX2INT(r_options);
+    options = RVAL2GFLAGS(r_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
   } else {
     options = GNOME_VFS_FILE_INFO_DEFAULT;
   }
@@ -268,7 +270,7 @@ file_m_stat(argc, argv, self)
   GnomeVFSResult result;
 
   if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 1) {
-    options = FIX2INT(r_options);
+    options = RVAL2GFLAGS(r_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
   } else {
     options = GNOME_VFS_FILE_INFO_DEFAULT;
   }
@@ -298,11 +300,11 @@ file_m_set_stat(self, uri, info, mask)
   if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     result = gnome_vfs_set_file_info_uri(RVAL2GVFSURI(uri),
                                          RVAL2GVFSFILEINFO(info),
-                                         FIX2INT(mask));
+                                         RVAL2GFLAGS(mask, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
   } else {
     result = gnome_vfs_set_file_info(RVAL2CSTR(uri),
                                      RVAL2GVFSFILEINFO(info),
-                                     FIX2INT(mask));
+                                     RVAL2GFLAGS(mask, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
   }
 
   return GVFSRESULT2RVAL(result);
@@ -435,33 +437,33 @@ file_initialize(argc, argv, self)
     exclusive = Qfalse;
   }
   if (argc < 2) {
-    open_mode = INT2FIX(GNOME_VFS_OPEN_READ);
+    open_mode = OPENMODE2RVAL(GNOME_VFS_OPEN_READ);
   }
 
-  printf ("open_mode = %d\n", FIX2INT(open_mode));
+  printf ("open_mode = %d\n", RVAL2OPENMODE(open_mode));
   if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
       result = gnome_vfs_open_uri(&handle,
                                   RVAL2GVFSURI(uri),
-                                  FIX2INT(open_mode));
+                                  RVAL2OPENMODE(open_mode));
       if (result == GNOME_VFS_ERROR_NOT_FOUND && 
-          (FIX2INT(open_mode) & GNOME_VFS_OPEN_WRITE)){
+          (RVAL2OPENMODE(open_mode) & GNOME_VFS_OPEN_WRITE)){
         result = gnome_vfs_create_uri(&handle,
                                       RVAL2GVFSURI(uri),
-                                      FIX2INT(open_mode),
+                                      RVAL2OPENMODE(open_mode),
                                       RTEST(exclusive),
-                                      FIX2INT(perm));
+                                      NUM2UINT(perm));
       }
   } else {
       result = gnome_vfs_open(&handle,
                               RVAL2CSTR(uri),
-                              FIX2INT(open_mode));
+                              RVAL2OPENMODE(open_mode));
       if (result == GNOME_VFS_ERROR_NOT_FOUND && 
-          (FIX2INT(open_mode) & GNOME_VFS_OPEN_WRITE)){
+          (RVAL2OPENMODE(open_mode) & GNOME_VFS_OPEN_WRITE)){
         result = gnome_vfs_create(&handle,
                                   RVAL2CSTR(uri),
-                                  FIX2INT(open_mode),
+                                  RVAL2OPENMODE(open_mode),
                                   RTEST(exclusive),
-                                  FIX2INT(perm));
+                                  NUM2UINT(perm));
       }
   }
 
@@ -602,7 +604,7 @@ file_putc(self, r_c)
   guint8 c;
   GnomeVFSFileSize bytes_written;
 
-  c = FIX2UINT(r_c) & 0xff;
+  c = NUM2UINT(r_c) & 0xff;
   return GVFSRESULT2RVAL(gnome_vfs_write(_SELF(self), &c, 1ULL, 
                                          &bytes_written));
 }
@@ -808,7 +810,7 @@ file_seek(argc, argv, self)
   GnomeVFSSeekPosition whence;
 
   if (rb_scan_args(argc, argv, "11", &offset, &r_whence) == 2) {
-    whence = FIX2INT(r_whence);
+    whence = RVAL2GENUM(r_whence, GNOME_VFS_TYPE_VFS_SEEK_POSITION);
   } else {
     whence = GNOME_VFS_SEEK_START;
   }
@@ -829,7 +831,7 @@ file_stat(argc, argv, self)
   GnomeVFSResult result;
 
   if (rb_scan_args(argc, argv, "01", &r_options) == 1) {
-    options = FIX2INT(r_options);
+    options = RVAL2GFLAGS(r_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
   } else {
     options = GNOME_VFS_FILE_INFO_DEFAULT;
   }
@@ -905,18 +907,10 @@ Init_gnomevfs_file(m_gvfs)
   rb_define_method(g_gvfs_file, "print", rb_io_print, -1);
   rb_define_method(g_gvfs_file, "<<", rb_io_addstr, 1);
 
-  rb_define_const(g_gvfs_file,
-                  "OPEN_NONE",
-                  INT2FIX(GNOME_VFS_OPEN_NONE));
-  rb_define_const(g_gvfs_file,
-                  "OPEN_READ",
-                  INT2FIX(GNOME_VFS_OPEN_READ));
-  rb_define_const(g_gvfs_file,
-                  "OPEN_WRITE",
-                  INT2FIX(GNOME_VFS_OPEN_WRITE));
-  rb_define_const(g_gvfs_file,
-                  "OPEN_RANDOM",
-                  INT2FIX(GNOME_VFS_OPEN_RANDOM));
+  G_DEF_CLASS(GNOME_VFS_TYPE_VFS_OPEN_MODE , "OpenMode", g_gvfs_file);
+  G_DEF_CONSTANTS(g_gvfs_file, GNOME_VFS_TYPE_VFS_OPEN_MODE, "GNOME_VFS_");
+
+  /* FIXME: GNOME_VFS_TYPE_VFS_SEEK_POSITION */
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: sakai $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -80,7 +80,8 @@ monitor_callback(handle, monitor_uri, info_uri, event_type, data)
 	gpointer data;
 {
 	rb_funcall((VALUE)data, g_id_call, CSTR2RVAL(monitor_uri),
-		   CSTR2RVAL(info_uri), INT2FIX(event_type));
+		   CSTR2RVAL(info_uri),
+                   RVAL2GENUM(event_type, GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE));
 }
 
 static VALUE
@@ -111,7 +112,8 @@ monitor_initialize(argc, argv, self)
 	G_RELATIVE(self, func);
 
 
-	result = gnome_vfs_monitor_add(&handle, text_uri, FIX2INT(type),
+	result = gnome_vfs_monitor_add(&handle, text_uri,
+                                RVAL2GENUM(type, GNOME_VFS_TYPE_VFS_MONITOR_TYPE),
 				(GnomeVFSMonitorCallback)monitor_callback,
 				(gpointer)func);
 
@@ -156,23 +158,11 @@ Init_gnomevfs_monitor(m_gvfs)
 
 	rb_define_method(gvfs_monitor, "remove", monitor_cancel, 0);
 
-	rb_define_const(gvfs_monitor, "FILE",
-			INT2FIX(GNOME_VFS_MONITOR_FILE));
-	rb_define_const(gvfs_monitor, "DIRECTORY",
-			INT2FIX(GNOME_VFS_MONITOR_DIRECTORY));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_MONITOR_TYPE, "Type", gvfs_monitor);
+        G_DEF_CONSTANTS(gvfs_monitor, GNOME_VFS_TYPE_VFS_MONITOR_TYPE, "GNOME_VFS_MONITOR_");
 
-	rb_define_const(gvfs_monitor, "EVENT_CHANGED",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_CHANGED));
-	rb_define_const(gvfs_monitor, "EVENT_DELETED",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_DELETED));
-	rb_define_const(gvfs_monitor, "EVENT_STARTEXECUTING",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_STARTEXECUTING));
-	rb_define_const(gvfs_monitor, "EVENT_STOPTEXECUTING",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_STOPEXECUTING));
-	rb_define_const(gvfs_monitor, "EVENT_CREATED",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_CREATED));
-	rb_define_const(gvfs_monitor, "EVENT_METADATA_CHANGED",
-			INT2FIX(GNOME_VFS_MONITOR_EVENT_METADATA_CHANGED));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE, "EventType", gvfs_monitor);
+        G_DEF_CONSTANTS(gvfs_monitor, GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE, "GNOME_VFS_MONITOR_");
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

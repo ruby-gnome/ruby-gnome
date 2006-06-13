@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/12 16:58:52 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -67,7 +67,7 @@ directory_list_load(argc, argv, self)
 	GnomeVFSResult result;
 
 	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
-		options = FIX2INT(r_options);
+		options = RVAL2GFLAGS(r_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
 	} else {
 		/* XXX: or? */
 		options = GNOME_VFS_FILE_INFO_DEFAULT;
@@ -161,10 +161,10 @@ directory_visit(argc, argv, self)
 	argc = rb_scan_args(argc, argv, "12&", &uri, &info_options,
 			     &visit_options, &func);
 	if (argc < 3) {
-		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
+		visit_options = GFLAGS2RVAL(GNOME_VFS_DIRECTORY_VISIT_DEFAULT, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS);
 	}
 	if (argc < 2) {
-		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
+		info_options = GFLAGS2RVAL(GNOME_VFS_FILE_INFO_DEFAULT, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
 	}
 
 	if (NIL_P(func)) {
@@ -174,14 +174,14 @@ directory_visit(argc, argv, self)
 
 	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		RAISE_IF_ERROR(gnome_vfs_directory_visit_uri(RVAL2GVFSURI(uri),
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
+			RVAL2GFLAGS(info_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS),
+			RVAL2GFLAGS(visit_options, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS),
 			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
 			(gpointer)func));
 	} else {
 		RAISE_IF_ERROR(gnome_vfs_directory_visit(RVAL2CSTR(uri),
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
+			RVAL2GFLAGS(info_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS),
+			RVAL2GFLAGS(visit_options, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS),
 			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
 			(gpointer)func));
 	}
@@ -203,10 +203,10 @@ directory_visit_files(argc, argv, self)
 	argc = rb_scan_args(argc, argv, "22&", &uri, &r_list, &info_options,
 			     &visit_options, &func);
 	if (argc < 4) {
-		visit_options = INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT);
+		visit_options = GENUM2RVAL(GNOME_VFS_DIRECTORY_VISIT_DEFAULT, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS);
 	}
 	if (argc < 3) {
-		info_options = INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT);
+		info_options = GFLAGS2RVAL(GNOME_VFS_FILE_INFO_DEFAULT, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
 	}
 
 	if (NIL_P(func)) {
@@ -220,16 +220,16 @@ directory_visit_files(argc, argv, self)
 		result = gnome_vfs_directory_visit_files_at_uri(
 			RVAL2GVFSURI(uri),
 			list,
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
+			RVAL2GFLAGS(info_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS),
+			RVAL2GFLAGS(visit_options, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS),
 			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
 			(gpointer)func);
 	} else {
 		result = gnome_vfs_directory_visit_files(
 			RVAL2CSTR(uri),
 			list,
-			FIX2INT(info_options),
-			FIX2INT(visit_options),
+			RVAL2GFLAGS(info_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS),
+			RVAL2GFLAGS(visit_options, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS),
 			(GnomeVFSDirectoryVisitFunc)directory_visit_callback,
 			(gpointer)func);
 	}
@@ -283,7 +283,7 @@ directory_initialize(argc, argv, self)
 	 * SafeStringValue(uri);
 	 */
 	if (rb_scan_args(argc, argv, "11", &uri, &r_options) == 2) {
-		options = FIX2INT(r_options);
+		options = RVAL2GFLAGS(r_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS);
 	} else {
 		/* XXX: or? */
 		options = GNOME_VFS_FILE_INFO_DEFAULT;
@@ -407,15 +407,8 @@ Init_gnomevfs_directory(m_gvfs)
 	rb_define_method(g_gvfs_dir, "read", directory_read_next, 0);
 	rb_define_alias(g_gvfs_dir, "read_next", "read");
 
-	rb_define_const(g_gvfs_dir,
-			"VISIT_DEFAULT",
-			INT2FIX(GNOME_VFS_DIRECTORY_VISIT_DEFAULT));
-	rb_define_const(g_gvfs_dir,
-			"VISIT_SAMEFS",
-			INT2FIX(GNOME_VFS_DIRECTORY_VISIT_SAMEFS));
-	rb_define_const(g_gvfs_dir,
-			"VISIT_LOOPCHECK",
-			INT2FIX(GNOME_VFS_DIRECTORY_VISIT_LOOPCHECK));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS, "VisitOptions", g_gvfs_dir);
+        G_DEF_CONSTANTS(g_gvfs_dir, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS, "GNOME_VFS_DIRECTORY_");
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

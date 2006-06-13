@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: sakai $
  *
- * $Date: 2004/03/05 16:00:02 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -395,7 +395,7 @@ static VALUE
 fileinfo_permissions(self)
 	VALUE self;
 {
-	return INT2FIX(_SELF(self)->permissions);
+	return GFLAGS2RVAL(_SELF(self)->permissions, GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS);
 }
 
 static VALUE
@@ -414,7 +414,7 @@ static VALUE
 fileinfo_set_permissions(self, mode)
 	VALUE self, mode;
 {
-	_SELF(self)->permissions = FIX2INT(mode);
+	_SELF(self)->permissions = RVAL2GFLAGS(mode, GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS);
 	return self;
 }
 
@@ -422,7 +422,7 @@ static VALUE
 fileinfo_set_uid(self, uid)
 	VALUE self, uid;
 {
-	_SELF(self)->uid = FIX2INT(uid);
+	_SELF(self)->uid = NUM2INT(uid);
 	return self;
 }
 
@@ -430,7 +430,7 @@ static VALUE
 fileinfo_set_gid(self, gid)
 	VALUE self, gid;
 {
-	_SELF(self)->gid = FIX2INT(gid);
+	_SELF(self)->gid = NUM2INT(gid);
 	return self;
 }
 
@@ -439,10 +439,10 @@ fileinfo_set_owner(self, uid, gid)
 	VALUE self, uid, gid;
 {
 	if (!NIL_P(uid)) {
-		_SELF(self)->uid = FIX2INT(uid);
+		_SELF(self)->uid = NUM2INT(uid);
 	}
 	if (!NIL_P(gid)) {
-		_SELF(self)->gid = FIX2INT(gid);
+		_SELF(self)->gid = NUM2INT(gid);
 	}
 	return self;
 }
@@ -563,105 +563,34 @@ Init_gnomevfs_file_info(m_gvfs)
 	rb_define_method(g_gvs_fileinfo, "set_gid", fileinfo_set_gid, 1);
 	rb_define_method(g_gvs_fileinfo, "set_owner", fileinfo_set_owner, 2);
 	rb_define_method(g_gvs_fileinfo, "set_utime", fileinfo_utime, 2);
-        
 
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS, "Options", g_gvs_fileinfo);
+        G_DEF_CONSTANTS(g_gvs_fileinfo, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS, "GNOME_VFS_FILE_INFO_");
 	/* XXX: this is renamed...bad, but their naming is worse */
 	rb_define_const(g_gvs_fileinfo,
 			"DEFAULT_OPTIONS",
-			INT2FIX(GNOME_VFS_FILE_INFO_DEFAULT));
-	rb_define_const(g_gvs_fileinfo,
-			"GET_MIME_TYPE",
-			INT2FIX(GNOME_VFS_FILE_INFO_GET_MIME_TYPE));
-	rb_define_const(g_gvs_fileinfo,
-			"FORCE_FAST_MIME_TYPE",
-			INT2FIX(GNOME_VFS_FILE_INFO_FORCE_FAST_MIME_TYPE));
-	rb_define_const(g_gvs_fileinfo,
-			"FORCE_SLOW_MIME_TYPE",
-			INT2FIX(GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE));
-	rb_define_const(g_gvs_fileinfo,
-			"FOLLOW_LINKS",
-			INT2FIX(GNOME_VFS_FILE_INFO_FOLLOW_LINKS));
-#ifdef GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS
-	rb_define_const(g_gvs_fileinfo,
-			"GET_ACCESS_RIGHTS",
-			INT2FIX(GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS));
-#endif
+			GFLAGS2RVAL(GNOME_VFS_FILE_INFO_DEFAULT, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS));
+
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK, "SetFileInfoMask", g_gvs_fileinfo);
+        /* FIXME */
 	rb_define_const(g_gvs_fileinfo,
 			"SET_NONE",
-			INT2FIX(GNOME_VFS_SET_FILE_INFO_NONE));
+			GFLAGS2RVAL(GNOME_VFS_SET_FILE_INFO_NONE, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
 	rb_define_const(g_gvs_fileinfo,
 			"SET_NAME",
-			INT2FIX(GNOME_VFS_SET_FILE_INFO_NAME));
+			GFLAGS2RVAL(GNOME_VFS_SET_FILE_INFO_NAME, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
 	rb_define_const(g_gvs_fileinfo,
 			"SET_PERMISSIONS",
-			INT2FIX(GNOME_VFS_SET_FILE_INFO_PERMISSIONS));
+			GFLAGS2RVAL(GNOME_VFS_SET_FILE_INFO_PERMISSIONS, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
 	rb_define_const(g_gvs_fileinfo,
 			"SET_OWNER",
-			INT2FIX(GNOME_VFS_SET_FILE_INFO_OWNER));
+			GFLAGS2RVAL(GNOME_VFS_SET_FILE_INFO_OWNER, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
 	rb_define_const(g_gvs_fileinfo,
 			"SET_TIME",
-			INT2FIX(GNOME_VFS_SET_FILE_INFO_TIME));
+			GFLAGS2RVAL(GNOME_VFS_SET_FILE_INFO_TIME, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
 
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_SUID",
-			INT2FIX(GNOME_VFS_PERM_SUID));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_SGID",
-			INT2FIX(GNOME_VFS_PERM_SGID));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_STICKY",
-			INT2FIX(GNOME_VFS_PERM_STICKY));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_USER_READ",
-			INT2FIX(GNOME_VFS_PERM_USER_READ));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_USER_WRITE",
-			INT2FIX(GNOME_VFS_PERM_USER_WRITE));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_USER_EXEC",
-			INT2FIX(GNOME_VFS_PERM_USER_EXEC));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_USER_ALL",
-			INT2FIX(GNOME_VFS_PERM_USER_ALL));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_GROUP_READ",
-			INT2FIX(GNOME_VFS_PERM_GROUP_READ));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_GROUP_WRITE",
-			INT2FIX(GNOME_VFS_PERM_GROUP_WRITE));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_GROUP_EXEC",
-			INT2FIX(GNOME_VFS_PERM_GROUP_EXEC));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_GROUP_ALL",
-			INT2FIX(GNOME_VFS_PERM_GROUP_ALL));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_OTHER_READ",
-			INT2FIX(GNOME_VFS_PERM_OTHER_READ));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_OTHER_WRITE",
-			INT2FIX(GNOME_VFS_PERM_OTHER_WRITE));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_OTHER_EXEC",
-			INT2FIX(GNOME_VFS_PERM_OTHER_EXEC));
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_OTHER_ALL",
-			INT2FIX(GNOME_VFS_PERM_OTHER_ALL));
-#ifdef GNOME_VFS_PERM_ACCESS_READABLE
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_ACCESS_READABLE",
-			INT2FIX(GNOME_VFS_PERM_ACCESS_READABLE));
-#endif
-#ifdef GNOME_VFS_PERM_ACCESS_WRITABLE
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_ACCESS_WRITABLE",
-			INT2FIX(GNOME_VFS_PERM_ACCESS_WRITABLE));
-#endif
-#ifdef GNOME_VFS_PERM_ACCESS_EXECUTABLE
-	rb_define_const(g_gvs_fileinfo,
-			"PERM_ACCESS_EXECUTABLE",
-			INT2FIX(GNOME_VFS_PERM_ACCESS_EXECUTABLE));
-#endif
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS, "Permissions", g_gvs_fileinfo);
+        G_DEF_CONSTANTS(g_gvs_fileinfo, GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS, "GNOME_VFS_");
 
 	G_DEF_SETTERS(g_gvs_fileinfo);
 }

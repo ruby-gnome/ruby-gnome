@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: sakai $
  *
- * $Date: 2005/10/08 18:31:12 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -124,11 +124,11 @@ gnomevfs_find_directory(argc, argv, self)
 	}
 
 	result = gnome_vfs_find_directory(RVAL2GVFSURI(near_uri),
-					  FIX2INT(kind),
+					  RVAL2GENUM(kind, GNOME_VFS_TYPE_VFS_FIND_DIRECTORY_KIND),
 					  &uri,
 					  RTEST(create),
 					  RTEST(find),
-					  FIX2UINT(permissions));
+					  NUM2UINT(permissions));
 	if (result == GNOME_VFS_OK) {
 		return GVFSURI2RVAL(uri);
 	} else {
@@ -200,12 +200,9 @@ Init_gnomevfs(void)
 	rb_define_module_function(m_gvfs, "get_registered_mime_types",
 				  gnomevfs_get_registered_mime_types, 1);
 
-	rb_define_const(m_gvfs,
-			"DIRECTORY_KIND_DESKTOP",
-			INT2FIX(GNOME_VFS_DIRECTORY_KIND_DESKTOP));
-	rb_define_const(m_gvfs,
-			"DIRECTORY_KIND_TRASH",
-			INT2FIX(GNOME_VFS_DIRECTORY_KIND_TRASH));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_FIND_DIRECTORY_KIND, "FindDirectoryKind", m_gvfs);
+        G_DEF_CONSTANTS(m_gvfs, GNOME_VFS_TYPE_VFS_FIND_DIRECTORY_KIND, "GNOME_VFS_");
+
 	rb_define_const(m_gvfs,
 			"MIME_TYPE_UNKNOWN",
 			CSTR2RVAL(GNOME_VFS_MIME_TYPE_UNKNOWN));

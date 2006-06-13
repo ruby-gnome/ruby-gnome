@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: pcppopper $
+ * $Author: sakai $
  *
- * $Date: 2003/08/11 11:11:10 $
+ * $Date: 2006/06/13 08:07:33 $
  *
  *****************************************************************************/
 
@@ -61,8 +61,7 @@ static VALUE
 mime_get_default_action_type(self, mime)
 	VALUE self, mime;
 {
-	return INT2FIX(gnome_vfs_mime_get_default_action_type(
-							RVAL2CSTR(mime)));
+	return GENUM2RVAL(gnome_vfs_mime_get_default_action_type(RVAL2CSTR(mime)), GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE);
 }
 
 static VALUE
@@ -101,7 +100,7 @@ mime_set_default_action_type(self, mime, type)
 {
 	return GVFSRESULT2RVAL(gnome_vfs_mime_set_default_action_type(
 							RVAL2CSTR(mime),
-							FIX2INT(type)));
+							RVAL2GENUM(type, GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE)));
 }
 
 static VALUE
@@ -490,12 +489,8 @@ Init_gnomevfs_mime(m_gvfs)
 				  mime_registered_mime_type_delete, 1);
 	rb_define_module_function(gvfs_mime, "reset", mime_reset, 0);
 
-	rb_define_const(gvfs_mime, "ACTION_TYPE_NONE",
-			INT2FIX(GNOME_VFS_MIME_ACTION_TYPE_NONE));
-	rb_define_const(gvfs_mime, "ACTION_TYPE_APPLICATION",
-			INT2FIX(GNOME_VFS_MIME_ACTION_TYPE_APPLICATION));
-	rb_define_const(gvfs_mime, "ACTION_TYPE_COMPONENT",
-			INT2FIX(GNOME_VFS_MIME_ACTION_TYPE_COMPONENT));
+        G_DEF_CLASS(GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE, "ActionType", gvfs_mime);
+        G_DEF_CONSTANTS(gvfs_mime, GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE, "GNOME_VFS_MIME_");
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/
