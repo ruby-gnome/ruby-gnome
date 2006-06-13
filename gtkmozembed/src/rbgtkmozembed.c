@@ -6,7 +6,7 @@
 
     Ruby-GNOME2 Gtk::MozEmbed - Ruby bindings for GtkMozEmbed
 
-    Copyright (C) 2005 Ruby-GNOME2 Project Team.
+    Copyright (C) 2005-2006 Ruby-GNOME2 Project Team.
     Copyright (C) 2005 Mirko Maischberger, All rights reserved.
 
     This library is free software; you can redistribute it and/or
@@ -25,8 +25,8 @@
 
     ***
 
-    $Author: mutoh $
-    $Date: 2005/10/09 18:18:54 $
+    $Author: silicio $
+    $Date: 2006/06/13 22:32:16 $
 
     *** 
 
@@ -119,9 +119,8 @@ moz_set_profile_path(self, profile_path, profile_name)
  * /usr/lib/mozilla-firefox depending on your installation and
  * distribution.
  *
- * FIXME - Not sure if this is needed, perhaps we should call this
- * inside Init_gtkmozembed() and set the value at compile time
- * before initializing XPCOM.
+ * We call this inside Init_gtkmozembed() and set the value at 
+ * compile time before initializing XPCOM.
  *
  * Returns: nil.
  *
@@ -726,4 +725,10 @@ Init_gtkmozembed()
                                 INT2FIX(GTKMOZEMBED_MAJOR_VERSION),
                                 INT2FIX(GTKMOZEMBED_MINOR_VERSION),
                                 INT2FIX(GTKMOZEMBED_MICRO_VERSION)));
+    
+    // set default component path if defined
+#ifdef DEFAULT_MOZILLA_FIVE_HOME
+    gtk_moz_embed_set_comp_path(DEFAULT_MOZILLA_FIVE_HOME);
+#endif
+
 }

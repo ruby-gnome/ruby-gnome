@@ -3,7 +3,9 @@ extconf.rb for Ruby/GtkMozEmbed extention library
 =end
 
 PACKAGE_NAME = "gtkmozembed"
-PACKAGE_ID = "mozilla-gtkmozembed"
+PACKAGE_ID = "xulrunner-gtkmozembed"
+#PACKAGE_ID = "firefox-gtkmozembed"
+#PACKAGE_ID = "mozilla-gtkmozembed"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -21,13 +23,15 @@ PKGConfig.have_package('gtk+-2.0')
 PKGConfig.have_package(PACKAGE_ID)
 setup_win32(PACKAGE_NAME)
 
-mozpath = PKGConfig.libs_only_L("mozilla-gtkmozembed")
+mozpath = PKGConfig.libs_only_L(PACKAGE_ID)
+mozpath.sub!(/-L/, "")
 
 if mozpath 
-  mozpath.sub!(/-L/, " -Wl,-rpath ")
-  $LDFLAGS << mozpath
+  # please comment the CFLAGS line if you don't want a default comp_path
+  $CFLAGS << "'-DDEFAULT_MOZILLA_FIVE_HOME=\"" << mozpath << "\"'"
+  $LDFLAGS << " -Wl,-rpath " << mozpath
 else
-  $stderr.puts "mozilla-gtkmozembed.pc cannot be found."
+  $stderr.puts "${PACKAGE_ID}.pc cannot be found."
   exit 1
 end
 

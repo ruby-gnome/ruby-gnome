@@ -1,3 +1,10 @@
+2006-06-14  Mirko Maischberger <mirko@lilik.it>
+        This should close bug #1495276
+	* src/rbgtkmozembed.c: set the moz comp_path in Init if
+	DEFAULT_MOZILLA_FIVE_HOME is defined.
+	* extconf.rb: Now defaults to xulrunner and defines
+	DEFAULT_MOZILLA_FIVE_HOME according to pkg-config.
+	
 2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 	* REAMDE: Revised.
 	* extconf.rb, src/rbgtkmozembed.c: Added Gtk::MozEmbed::BUILD_VERSION.

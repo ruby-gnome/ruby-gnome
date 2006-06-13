@@ -22,6 +22,9 @@
 
 =end
 
+## The following is commented since the comp_path gets a nice 
+## default at compile time.
+##
 #unless ENV['MOZILLA_FIVE_HOME'] 
 #  $stderr.print "Please set MOZILLA_FIVE_HOME environment variable to\n"
 #  $stderr.print "something like /usr/lib/mozilla\n"
@@ -43,10 +46,9 @@ class Browser < Gtk::Window
     self.title = TITLE
     self.resize(800, 570)
 
-    # This one is needed if Mozilla has to load a specific component
+    # This one is needed if GtkMozEmbed can't find the comp_path
     mozhome = ENV['MOZILLA_FIVE_HOME']
     if mozhome
-      # not 100% sure about this :)
       Gtk::MozEmbed.set_comp_path(mozhome)
     end
 
@@ -217,6 +219,7 @@ Gtk.main
 # Hint: You can switch between Mozilla and Firefox implementation by
 # setting the library path appropiately. The Firefox version of
 # GtkMozEmbed is better integrated in Gtk and has nicer scroll-bars
-# and message boxes. (use LD_LIBRARY_PATH, or do some googling)
+# and message boxes. (use LD_LIBRARY_PATH, see extconf.rb or do some 
+# googling)
 
 # Happy coding, Mirko Maischberger
