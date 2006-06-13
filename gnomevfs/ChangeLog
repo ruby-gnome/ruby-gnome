@@ -1,5 +1,7 @@
 2006-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/gnomevfs-file.c: Use rb_rs.
+
 	* src/gnomevfs-directory.c: Define GnomeVFS::Dir as an alias of GnomeVFS::Directory.
 
 	* src/gnomevfs-directory.c (directory_list_load): Use g_list_free() instead of

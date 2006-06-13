@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2006/06/13 16:03:48 $
  *
  *****************************************************************************/
 
@@ -40,8 +40,6 @@
 /* Function Declarations *****************************************************/
 
 /* Global Variables **********************************************************/
-
-static VALUE s_default_rsep;
 
 /* Function Implementations **************************************************/
 
@@ -410,8 +408,8 @@ get_gets_separator(argc, argv, sep, len)
     *sep = RSTRING(r_separator)->ptr;
     *len = RSTRING(r_separator)->len;
   } else {
-    *sep = RSTRING(s_default_rsep)->ptr;
-    *len = RSTRING(s_default_rsep)->len;
+    *sep = RSTRING(rb_rs)->ptr;
+    *len = RSTRING(rb_rs)->len;
   }
 }
 
@@ -855,8 +853,6 @@ void
 Init_gnomevfs_file(m_gvfs)
      VALUE m_gvfs;
 {
-  s_default_rsep = rb_str_new2("\n");
-
   g_gvfs_file = G_DEF_CLASS(GNOMEVFS_TYPE_FILE, "File", m_gvfs);
   rb_include_module(g_gvfs_file, rb_mEnumerable);
 
