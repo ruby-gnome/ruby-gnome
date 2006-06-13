@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/13 08:12:55 $
+ * $Date: 2006/06/13 08:18:35 $
  *
  *****************************************************************************/
 
@@ -376,6 +376,7 @@ Init_gnomevfs_directory(m_gvfs)
 	VALUE m_gvfs;
 {
 	g_gvfs_dir = G_DEF_CLASS(GNOMEVFS_TYPE_DIRECTORY, "Directory", m_gvfs);
+	rb_define_const(m_gvfs, "Dir", g_gvfs_dir);
 
 	rb_include_module(g_gvfs_dir, rb_mEnumerable);
 

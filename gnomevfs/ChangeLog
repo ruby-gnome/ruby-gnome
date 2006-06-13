@@ -1,5 +1,7 @@
 2006-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/gnomevfs-directory.c: Define GnomeVFS::Dir as an alias of GnomeVFS::Directory.
+
 	* src/gnomevfs-directory.c (directory_list_load): Use g_list_free() instead of
 	gnome_vfs_file_info_list_free() since gnome_vfs_file_info_list_free() frees
 	each element of the list and causes segmentation fault in this case.
