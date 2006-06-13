@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2006/06/13 08:12:55 $
  *
  *****************************************************************************/
 
@@ -76,7 +76,7 @@ directory_list_load(argc, argv, self)
 	result = gnome_vfs_directory_list_load(&list, RVAL2CSTR(uri), options);
 	if (result == GNOME_VFS_OK) {
 		ary = GLIST2ARY2(list, GNOMEVFS_TYPE_FILE_INFO);
-		gnome_vfs_file_info_list_free(list);
+		g_list_free(list);
 		return ary;
 	} else {
 		return GVFSRESULT2RVAL(result);
