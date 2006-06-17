@@ -69,7 +69,6 @@ class TestGLib < Test::Unit::TestCase
   def test_inheritance_and_gc
     begin 
       require 'gtk2'
-      Gtk.init
 
       mybutton = Class.new(Gtk::Button)
       box = Gtk::HBox.new
