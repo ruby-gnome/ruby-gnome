@@ -1,3 +1,9 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgutil.[ch]: Added GLIST2ARYF, GLIST2ARY2F, GSLIST2ARYF, GLIST2ARY2F. 
+	 They free the list with g_list_free() or g_slist_free() internal.
+	* src/glib2.def: Follow previous changes.
+	
 2006-06-09  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgobj_object.c: Only let the GObject mark function retrieve
@@ -6,7 +12,7 @@
 
 2006-06-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
-  * src/rbgobj_closure.c, glib2.def: Works on Windows again.
+	* src/rbgobj_closure.c, glib2.def: Works on Windows again.
 
 2006-05-29  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

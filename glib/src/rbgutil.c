@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2004/08/18 16:42:35 $
+  $Date: 2006/06/17 06:59:03 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -52,6 +52,19 @@ rbgutil_glist2ary(list)
 }
 
 VALUE
+rbgutil_glist2ary_and_free(list)
+    GList *list;
+{
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, GOBJ2RVAL(list->data));
+        list = list->next;
+    }
+    g_list_free(list);
+    return ary;
+}
+
+VALUE
 rbgutil_glist2ary_boxed(list, gtype)
     GList *list;
     GType gtype;
@@ -64,6 +77,19 @@ rbgutil_glist2ary_boxed(list, gtype)
     return ary;
 }
 
+VALUE
+rbgutil_glist2ary_boxed_and_free(list, gtype)
+    GList *list;
+    GType gtype;
+{
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
+        list = list->next;
+    }
+    g_list_free(list);
+    return ary;
+}
 
 VALUE
 rbgutil_gslist2ary(list)
@@ -87,6 +113,33 @@ rbgutil_gslist2ary_boxed(list, gtype)
         rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
         list = list->next;
     }
+    return ary;
+}
+
+VALUE
+rbgutil_gslist2ary_and_free(list)
+    GSList *list;
+{
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, GOBJ2RVAL(list->data));
+        list = list->next;
+    }
+    g_slist_free(list);
+    return ary;
+}
+
+VALUE
+rbgutil_gslist2ary_boxed_and_free(list, gtype)
+    GSList *list;
+    GType gtype;
+{
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
+        list = list->next;
+    }
+    g_slist_free(list);
     return ary;
 }
 
