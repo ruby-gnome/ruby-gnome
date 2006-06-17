@@ -4,7 +4,7 @@
   rbpoppler-action.c -
 
   $Author: ktou $
-  $Date: 2006/05/17 12:51:19 $
+  $Date: 2006/06/17 14:32:12 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -97,9 +97,10 @@ dest_get_change_zoom(VALUE self)
 void
 Init_poppler_action(VALUE mPoppler)
 {
+    VALUE cActionType, cDestType, cDest;
+#ifndef HAVE_TYPE_POPPLERACTIONANY
     VALUE cAction, cActionGotoDest, cActionGotoRemote, cActionLaunch;
-    VALUE cActionUri, cActionNamed, cActionMovie, cDest;
-    VALUE cActionType, cDestType;
+    VALUE cActionUri, cActionNamed, cActionMovie;
 
     cAction = G_DEF_CLASS(POPPLER_TYPE_ACTION, "Action", mPoppler);
     cActionGotoDest = G_DEF_CLASS(POPPLER_TYPE_ACTION_GOTO_DEST,
@@ -113,10 +114,6 @@ Init_poppler_action(VALUE mPoppler)
                                mPoppler);
     cActionMovie = G_DEF_CLASS(POPPLER_TYPE_ACTION_MOVIE, "ActionMovie",
                                mPoppler);
-    cActionType = G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
-    cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
-    cDestType = G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
-
     G_DEF_SETTERS(cAction);
     G_DEF_SETTERS(cActionGotoDest);
     G_DEF_SETTERS(cActionGotoRemote);
@@ -124,6 +121,12 @@ Init_poppler_action(VALUE mPoppler)
     G_DEF_SETTERS(cActionUri);
     G_DEF_SETTERS(cActionNamed);
     G_DEF_SETTERS(cActionMovie);
+#endif
+
+    cActionType = G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
+    cDestType = G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
+
+    cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
 
     rb_define_method(cDest, "type", dest_get_type, 0);
     rb_define_method(cDest, "page_num", dest_get_page_num, 0);

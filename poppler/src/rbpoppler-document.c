@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2006/05/29 16:29:14 $
+  $Date: 2006/06/17 14:32:12 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -17,9 +17,15 @@
 #define FITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_FONTS_ITER))
 #define RVAL2FITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_FONTS_ITER))
 
+#ifdef POPPLER_TYPE_FONT_INFO
+#  define HAVE_POPPLER_FONT_INFO 1
+#endif
 
 static ID id_new, id_valid;
-static VALUE cIndexIter, cFontInfo;
+static VALUE cIndexIter;
+#ifdef HAVE_POPPLER_FONT_INFO
+static VALUE cFontInfo;
+#endif
 
 
 static VALUE
@@ -138,11 +144,13 @@ doc_get_index_iter(VALUE self)
     return rb_funcall(cIndexIter, id_new, 1, self);
 }
 
+#ifdef HAVE_POPPLER_FONT_INFO
 static VALUE
 doc_get_font_info(VALUE self)
 {
     return rb_funcall(cFontInfo, id_new, 1, self);
 }
+#endif
 
 
 
@@ -189,12 +197,14 @@ index_iter_is_open(VALUE self)
     return CBOOL2RVAL(poppler_index_iter_is_open(RVAL2IITER(self)));
 }
 
+#ifndef HAVE_TYPE_POPPLERACTIONANY
 static VALUE
 index_iter_get_action(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
     return ACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
 }
+#endif
 
 static VALUE
 index_iter_next(VALUE self)
@@ -223,6 +233,7 @@ index_iter_each(VALUE self)
 }
 
 
+#ifdef HAVE_POPPLER_FONT_INFO
 
 static VALUE
 font_info_initialize(VALUE self, VALUE document)
@@ -244,6 +255,7 @@ font_info_scan(VALUE self, VALUE n_pages)
     }
     return rb_iter;
 }
+#endif
 
 
 #define CHECK_FITER_IS_VALID(iter) do {         \
@@ -364,7 +376,9 @@ Init_poppler_document(VALUE mPoppler)
 
     cDocument = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);
     cIndexIter = G_DEF_CLASS(POPPLER_TYPE_INDEX_ITER, "IndexIter", mPoppler);
+#ifdef HAVE_POPPLER_FONT_INFO
     cFontInfo = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
+#endif
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
     cPSFile = G_DEF_CLASS(POPPLER_TYPE_PS_FILE, "PSFile", mPoppler);
 
@@ -391,7 +405,9 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cDocument, "each", doc_each, 0);
 
     rb_define_method(cDocument, "index_iter", doc_get_index_iter, 0);
+#ifdef HAVE_POPPLER_FONT_INFO
     rb_define_method(cDocument, "font_info", doc_get_font_info, 0);
+#endif
 
     G_DEF_SETTERS(cDocument);
 
@@ -402,7 +418,9 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cIndexIter, "initialize", index_iter_initialize, 1);
     rb_define_method(cIndexIter, "child", index_iter_get_child, 0);
     rb_define_method(cIndexIter, "open?", index_iter_is_open, 0);
+#ifndef HAVE_TYPE_POPPLERACTIONANY
     rb_define_method(cIndexIter, "action", index_iter_get_action, 0);
+#endif
     rb_define_method(cIndexIter, "next", index_iter_next, 0);
 
     rb_define_method(cIndexIter, "valid?", index_iter_valid_p, 0);
@@ -411,10 +429,11 @@ Init_poppler_document(VALUE mPoppler)
     G_DEF_SETTERS(cIndexIter);
 
 
+#ifdef HAVE_POPPLER_FONT_INFO
     rb_define_method(cFontInfo, "initialize", font_info_initialize, 1);
     rb_define_method(cFontInfo, "scan", font_info_scan, 1);
     G_DEF_SETTERS(cFontInfo);
-
+#endif
 
     rb_include_module(cFontsIter, rb_mEnumerable);
 

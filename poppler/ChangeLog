@@ -1,3 +1,25 @@
+2006-06-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: worked without any patches for poppler-glib.
+
+	* extconf.rb: check whether
+	  poppler_page_render_selection_to_pixbuf() and
+	  PopplerActionAny are available or not.
+
+	* src/rbpoppler-page.c: check whether
+	  poppler_render_selection_to_pixbuf() is available or not.
+
+	* src/rbpoppler-document.c: disable Poppler::FontInfo and related
+	  methods when POPPLER_TYPE_FONT_INFO is not
+	  available. (POPPLER_TYPE_FONT_INFO is not available means
+	  PopplerFontInfo is not GObjectize.)
+
+	* src/rbpoppler-action.c: disable Poppler::Action* and related
+	  stuffs when PopplerActionAny is available. (PopplerActionAry is
+	  available means PopplerAction* are not GObjectize.)
+	* src/rbpoppler-document.c: ditto.
+	* src/rbpoppler.h.c: ditto.
+
 2006-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-document.c: fixed memory leaks.

@@ -33,8 +33,11 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  include <rb_cairo.h>
 #endif
 
-#define ACTION2RVAL(obj) (GOBJ2RVAL(obj))
-#define RVAL2ACTION(obj) (RVAL2GOBJ(obj))
+#ifndef HAVE_TYPE_POPPLERACTIONANY
+#  define ACTION2RVAL(obj) (GOBJ2RVAL(obj))
+#  define RVAL2ACTION(obj) (RVAL2GOBJ(obj))
+#endif
+
 #define RECT2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_RECTANGLE))
 #define RVAL2RECT(obj) ((PopplerRectangle *)RVAL2BOXED(obj, POPPLER_TYPE_RECTANGLE))
 #define REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))

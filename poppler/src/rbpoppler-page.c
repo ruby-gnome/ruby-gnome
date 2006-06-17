@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/05/29 16:29:14 $
+  $Date: 2006/06/17 14:32:12 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -137,7 +137,8 @@ page_get_selection_region(VALUE self, VALUE scale, VALUE selection)
                                                          RVAL2RECT(selection)));
 }
 
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
+#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
+      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
 static VALUE
 page_render_selection(VALUE self, VALUE cairo,
                       VALUE selection, VALUE rb_old_selection,
@@ -154,6 +155,10 @@ page_render_selection(VALUE self, VALUE cairo,
                                   RVAL2COLOR(background_color));
     return Qnil;
 }
+#endif
+
+#ifndef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+#  define poppler_page_render_selection_to_pixbuf poppler_page_render_selection
 #endif
 
 static VALUE
@@ -180,7 +185,8 @@ static VALUE
 page_render_selection_generic(int argc, VALUE *argv, VALUE self)
 {
     if (argc == 5) {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
+#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
+      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
         return page_render_selection(self, argv[0], argv[1], argv[2],
                                      argv[3], argv[4]);
 #else
