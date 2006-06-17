@@ -3,15 +3,14 @@
 
   You also need Ruby/GTK.
 
-  Copyright (C) 2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/07/30 11:01:03 $
-  $Id: type-register.rb,v 1.8 2005/07/30 11:01:03 mutoh Exp $
+  $Date: 2006/06/17 14:31:22 $
+  $Id: type-register.rb,v 1.9 2006/06/17 14:31:22 mutoh Exp $
 =end
 
 require 'gtk2'
-Gtk.init
 
 class MyButton < Gtk::Button
   type_register
