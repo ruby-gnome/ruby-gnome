@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: mutoh $
-  $Date: 2006/06/05 02:34:54 $
+  $Date: 2006/06/17 09:18:12 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -80,7 +80,7 @@ rclosure_alive_p(GRClosure *rclosure)
 }
 
 static VALUE
-rclosure_marshal_body(VALUE arg_)
+rclosure_marshal_do(VALUE arg_)
 {
     struct marshal_arg *arg;
     GRClosure*      rclosure;
@@ -129,29 +129,6 @@ rclosure_marshal_body(VALUE arg_)
     return Qnil;
 }
 
-static void
-rclosure_marshal_do(struct marshal_arg* arg) {
-  int state = 0;
-
-  rb_protect(rclosure_marshal_body, (VALUE)arg, &state);
-  if (state && !NIL_P(ruby_errinfo)) {
-    char buf[BUFSIZ];
-    VALUE errmsg;
-    int ret;
-
-    if (ruby_sourcefile) {
-      ret = snprintf(buf, BUFSIZ, "%s:", ruby_sourcefile);
-      rb_write_error2(buf, MIN(BUFSIZ, ret));
-    }
-    errmsg = rb_funcall(ruby_errinfo, rb_intern("message"), 0, 0);
-
-    ret = snprintf(buf, BUFSIZ, "%d: %s: %s\n",
-                   ruby_sourceline, rb_obj_classname(ruby_errinfo),
-                   RVAL2CSTR(errmsg));
-    rb_write_error2(buf, MIN(BUFSIZ, ret));
-  }
-}
-
 #ifdef HAVE_NATIVETHREAD
 static GStaticMutex callback_init_mutex = G_STATIC_MUTEX_INIT;
 static GMutex *callback_mutex = NULL;
@@ -172,8 +149,8 @@ rclosure_marshal_pop(void) {
 
    g_mutex_lock(callback_mutex);
    if (m_arg) {
-     rclosure_marshal_do(m_arg);
-     m_arg = NULL;
+       G_PROTECT_CALLBACK(rclosure_marshal_do, m_arg);
+       m_arg = NULL;
    }
    g_cond_signal(callback_done_cond);
    g_mutex_unlock(callback_mutex);
@@ -245,10 +222,10 @@ rclosure_marshal(GClosure*       closure,
         }
         rclosure_marshal_push(&arg);
     } else {
-        rclosure_marshal_do(&arg);
+       G_PROTECT_CALLBACK(rclosure_marshal_do, &arg);
     }
 #else
-    rclosure_marshal_do(&arg);
+    G_PROTECT_CALLBACK(rclosure_marshal_do, &arg);
 #endif
 }
 

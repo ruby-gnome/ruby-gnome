@@ -1,8 +1,12 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgutil.c: Added G_PROTECT_CALLBACK. You need to wrap the functions which
+	run in the mainloop with this. This is based on rclosure_marshal_do() in
+	src/rbgobj_closure.c.
+	* src/rbgobj_closure.c: Apply above G_PROTECT_CALLBACK.
 	* src/rbgutil.[ch]: Added GLIST2ARYF, GLIST2ARY2F, GSLIST2ARYF, GLIST2ARY2F. 
 	 They free the list with g_list_free() or g_slist_free() internal.
-	* src/glib2.def: Follow previous changes.
+	* src/glib2.def: Follow above changes.
 	
 2006-06-09  Sjoerd Simons <sjoerd@luon.net>
 
