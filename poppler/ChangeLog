@@ -1,5 +1,8 @@
 2006-06-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c: use GLIST2ARYF.
+	* src/rbpoppler-page.c: use GLIST2ARY2F.
+
 	* src/: worked without any patches for poppler-glib.
 
 	* extconf.rb: check whether
