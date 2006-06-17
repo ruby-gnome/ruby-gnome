@@ -1,6 +1,7 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c: Fixed memory leak of Glade.get_widget_prefix.
+	* sample/*.rb: Code cleanup. Remove Gtk.init.
 
 2006-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
 

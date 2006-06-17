@@ -1,10 +1,10 @@
 =begin
   test.rb - Ruby/Libglade2 sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: test.rb,v 1.7 2006/06/17 07:42:50 mutoh Exp $
+  $Id: test.rb,v 1.8 2006/06/17 14:14:55 mutoh Exp $
 =end
 
 require 'libglade2'
@@ -25,6 +25,5 @@ class Test
   end
 end
 
-Gtk.init
 Test.new
 Gtk.main

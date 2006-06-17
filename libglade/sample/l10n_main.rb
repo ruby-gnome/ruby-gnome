@@ -7,10 +7,10 @@
 
   Required: Ruby-GetText-Package-0.6.1 or later.
 
-  Copyright (c) 2004,2005 Ruby-GNOME2 Project
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: l10n_main.rb,v 1.4 2005/09/19 14:05:21 mutoh Exp $
+  $Id: l10n_main.rb,v 1.5 2006/06/17 14:14:55 mutoh Exp $
 =end
 
 #
@@ -49,6 +49,5 @@ class L10n < L10nGlade
   end
 end
 
-Gtk.init 
 L10n.new
 Gtk.main

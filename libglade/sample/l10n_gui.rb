@@ -31,7 +31,6 @@ if __FILE__ == $0
   # Set values as your own application. 
   PROG_PATH = "l10n.glade"
   PROG_NAME = "l10n"
-  Gtk.init
   L10nGlade.new(PROG_PATH, nil, PROG_NAME)
   Gtk.main
 end

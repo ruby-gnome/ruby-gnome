@@ -4,10 +4,10 @@
 
   Note: You need Ruby/GtkHtml2 for this sample.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: custom.rb,v 1.3 2004/03/23 11:46:48 mutoh Exp $
+  $Id: custom.rb,v 1.4 2006/06/17 14:14:55 mutoh Exp $
 =end
 
 require 'libglade2'
@@ -32,7 +32,6 @@ class Custom
   end
 end
 
-Gtk.init
 Custom.new("custom.glade")
 Gtk.main
 

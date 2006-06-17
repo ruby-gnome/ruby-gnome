@@ -6,7 +6,7 @@
 #
 # Usage: ruby ruby-glade-create-template yourgladefile.glade > file.rb
 #
-# $Id: ruby-glade-create-template,v 1.13 2005/09/19 14:05:21 mutoh Exp $
+# $Id: ruby-glade-create-template,v 1.14 2006/06/17 14:14:54 mutoh Exp $
 #
 # Copyright (c) 2002-2005 Masao Mutoh <mutoh@highway.ne.jp>
 #
@@ -14,7 +14,7 @@
 require 'libglade2'
 require 'rexml/document'
 
-LG_VERSION = %Q[$Revision: 1.13 $].scan(/\d/).join(".")
+LG_VERSION = %Q[$Revision: 1.14 $].scan(/\d/).join(".")
 
 unless ARGV.size == 1
   puts "ruby-glade-create-template #{LG_VERSION}"
@@ -51,8 +51,6 @@ classname = filename.split(/[_-]/).collect{|item| item.capitalize}.join("") + "G
 
 if type_gnome
   Gnome::Program.new("ruby-glade-create-template", LG_VERSION)
-else
-  Gtk.init
 end
 
 # Get signals.
@@ -202,11 +200,7 @@ if type_gnome
 puts <<FOOTER_GNOME
   PROG_VERSION = "YOUR_APPLICATION_VERSION"
   Gnome::Program.new(PROG_NAME, PROG_VERSION)
-  #If you use Ruby/GTK2 widgets only, call Gtk.init not Gnome::Program.new here.
-  #Gtk.init
 FOOTER_GNOME
-else
-  puts "  Gtk.init"
 end
 puts <<FOOTER
   #{classname}.new(PROG_PATH, nil, PROG_NAME)
