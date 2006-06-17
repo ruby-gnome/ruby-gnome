@@ -1,4 +1,12 @@
 #!/usr/bin/env ruby
+=begin
+  svg2.rb - Ruby/RSVG sample script.
+
+  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: svg2.rb,v 1.5 2006/06/17 13:30:25 mutoh Exp $
+=end
 
 require 'tempfile'
 require "rsvg2"

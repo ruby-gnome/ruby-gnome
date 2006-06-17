@@ -1,3 +1,7 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/rsvg2.rb: added header part.
+
 2006-06-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: fixed memory leak bugs related GdkPixbuf.
