@@ -3,10 +3,10 @@
 
   rbgtkradiobutton.c -
 
-  $Author: geoff_youngs $
-  $Date: 2004/08/03 16:55:21 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -69,6 +69,7 @@ static VALUE
 rbtn_group(self)
     VALUE self;
 {
+    /* Owened by GTK+ */
     return GSLIST2ARY(gtk_radio_button_get_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 

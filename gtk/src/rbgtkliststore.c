@@ -4,7 +4,7 @@
   rbgtkliststore.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2006/06/17 06:59:32 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -236,8 +236,10 @@ static VALUE
 lstore_iter_is_valid(self, iter)
     VALUE self, iter;
 {
-    return CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+    return (NIL_P(iter)) ? Qfalse :
+        CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
 }
+
 static VALUE
 lstore_reorder(self, new_order)
     VALUE self, new_order;

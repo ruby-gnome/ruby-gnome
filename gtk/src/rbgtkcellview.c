@@ -4,9 +4,9 @@
   rbgtkcellview.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2005 Masao Mutoh
+  Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -106,10 +106,7 @@ static VALUE
 cview_get_cell_renderers(self)
     VALUE self;
 {
-    GList* list = gtk_cell_view_get_cell_renderers(_SELF(self));
-    VALUE ret = list ? GLIST2ARY(list) : Qnil;
-    g_list_free(list);
-    return ret;
+    return GLIST2ARYF(gtk_cell_view_get_cell_renderers(_SELF(self)));
 }
 #endif
 

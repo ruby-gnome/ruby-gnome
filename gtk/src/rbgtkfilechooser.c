@@ -4,9 +4,9 @@
   rbgtkfilechooser.c -
  
   $Author: mutoh $
-  $Date: 2005/09/12 06:09:22 $
+  $Date: 2006/06/17 06:59:32 $
  
-  Copyright (C) 2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2005,2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
 ************************************************/
 
@@ -245,10 +245,7 @@ static VALUE
 fcho_list_filters(self)
     VALUE self;
 {
-    GSList* list = gtk_file_chooser_list_filters(_SELF(self));
-    VALUE ret = GSLIST2ARY(list);
-    g_slist_free(list);
-    return ret;
+    return GSLIST2ARYF(gtk_file_chooser_list_filters(_SELF(self)));
 }
 
 /*

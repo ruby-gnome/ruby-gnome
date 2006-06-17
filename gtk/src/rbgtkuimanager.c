@@ -4,9 +4,9 @@
   rbgtkuimanager.c -
 
   $Author: mutoh $
-  $Date: 2005/09/12 06:09:22 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -50,6 +50,7 @@ static VALUE
 rbuimanager_get_action_groups(self)
     VALUE self;
 {
+    /* Owned by GTK+ */
     return GLIST2ARY(gtk_ui_manager_get_action_groups(_SELF(self)));
 }
 
@@ -75,11 +76,8 @@ static VALUE
 rbuimanager_get_toplevels(self, types)
     VALUE self, types;
 {
-    GSList* list = gtk_ui_manager_get_toplevels(_SELF(self), 
-                                                RVAL2GFLAGS(types, GTK_TYPE_UI_MANAGER_ITEM_TYPE));
-    VALUE ret = GSLIST2ARY(list);
-    g_slist_free(list);
-    return ret;
+    return GSLIST2ARYF(gtk_ui_manager_get_toplevels(_SELF(self), 
+                                                    RVAL2GFLAGS(types, GTK_TYPE_UI_MANAGER_ITEM_TYPE)));
 }
     
 static VALUE

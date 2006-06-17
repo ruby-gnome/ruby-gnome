@@ -3,10 +3,10 @@
 
   rbgtkwidget.c -
 
-  $Author: ktou $
-  $Date: 2006/02/08 01:33:35 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -215,7 +215,7 @@ static VALUE
 widget_list_accel_closures(self)
     VALUE self;
 {
-    return GLIST2ARY2(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
+    return GLIST2ARY2F(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
 }
 
 #if GTK_CHECK_VERSION(2,4,0)
@@ -1013,10 +1013,7 @@ static VALUE
 widget_list_mnemonic_labels(self)
     VALUE self;
 {
-    GList* list = gtk_widget_list_mnemonic_labels(_SELF(self));
-    VALUE ret = GLIST2ARY(list);
-    g_list_free(list);
-    return ret;
+    return GLIST2ARYF(gtk_widget_list_mnemonic_labels(_SELF(self)));
 }
 
 static VALUE

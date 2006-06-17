@@ -4,9 +4,9 @@
   rbgtkactiongroup.c -
 
   $Author: mutoh $
-  $Date: 2005/03/11 15:27:43 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2004,2005 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -48,7 +48,7 @@ static VALUE
 actiongroup_list_actions(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_action_group_list_actions(_SELF(self)));
+    return GLIST2ARYF(gtk_action_group_list_actions(_SELF(self)));
 }
 
 static VALUE

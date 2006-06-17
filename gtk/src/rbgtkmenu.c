@@ -4,9 +4,9 @@
   rbgtkmenu.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -221,6 +221,7 @@ static VALUE
 menu_s_get_for_attach_widget(self, widget)
     VALUE self, widget;
 {
+    /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
 #endif

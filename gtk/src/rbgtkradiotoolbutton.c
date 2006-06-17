@@ -4,9 +4,9 @@
   rbgtkradiotoolbutton.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:30 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -60,6 +60,7 @@ static VALUE
 rbtn_get_group(self)
     VALUE self;
 {
+    /* Owned by GTK+ */
     return GSLIST2ARY(gtk_radio_tool_button_get_group(_SELF(self)));
 }
 

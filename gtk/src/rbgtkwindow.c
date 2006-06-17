@@ -3,10 +3,10 @@
 
   rbgtkwindow.c -
 
-  $Author: sakai $
-  $Date: 2006/05/28 02:59:11 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -167,7 +167,11 @@ static VALUE
 gwin_s_list_toplevels(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_window_list_toplevels());
+    GList* list = gtk_window_list_toplevels();
+    VALUE ret = GLIST2ARY(list);
+    g_list_foreach(list, (GFunc)g_object_ref, NULL);
+    g_list_free(list);
+    return ret;
 }
 
 static VALUE
@@ -429,7 +433,7 @@ static VALUE
 gwin_s_get_default_icon_list(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_window_get_default_icon_list());
+    return GLIST2ARYF(gtk_window_get_default_icon_list());
 }
 
 static VALUE
@@ -471,7 +475,7 @@ static VALUE
 gwin_get_icon_list(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_window_get_icon_list(_SELF(self)));
+    return GLIST2ARYF(gtk_window_get_icon_list(_SELF(self)));
 }
 
 static VALUE

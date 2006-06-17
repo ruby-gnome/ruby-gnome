@@ -4,9 +4,9 @@
   rbgdkdevice.c -
 
   $Author: mutoh $
-  $Date: 2004/05/28 18:59:40 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2003 Masao Mutoh
+  Copyright (C) 2003-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -18,6 +18,7 @@ static VALUE
 device_s_list(self)
     VALUE self;
 {
+    /* Owned by GDK */
     return GLIST2ARY(gdk_devices_list());
 }
 

@@ -4,9 +4,9 @@
   rbgtkradiomenuitem.c -
 
   $Author: mutoh $
-  $Date: 2004/06/07 16:09:31 $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi,
@@ -82,6 +82,7 @@ static VALUE
 rmitem_get_group(self)
     VALUE self;
 {
+    /* Owened by GTK+ */
     return GSLIST2ARY(gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
 }
 
@@ -98,7 +99,7 @@ rmitem_set_group(self, grp_ary)
 
     gtk_radio_menu_item_set_group(rmitem2add, group);
 
-    return GSLIST2ARY(gtk_radio_menu_item_group(rmitem2add));
+    return GSLIST2ARY(gtk_radio_menu_item_get_group(rmitem2add));
 }
 
 void 

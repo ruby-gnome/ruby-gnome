@@ -1,3 +1,23 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwindow.c: Gtk::Window#toplevels, #default_icon_list,
+	#icon_list: Fixed memory leaks. Pointed out by Masahiro Sakai.
+	* src/rbgtkwidget.c: Gtk::Widget#accel_closures: ditto.
+	* src/rbgtktreeviewcolumn.c: Gtk::TreeViewColumn#cell_renderers: ditto. 
+	* src/rbgtktreeview.c: Gtk::TreeView#columns: ditto.
+	* src/rbgtktextchild.c: Gtk::TextChildAnchor#widgets: ditto.
+	* src/rbgtkcontainer.c: Gtk::Container#children, #focus_chain: ditto.
+	* src/rbgtkactiongroup.c: Gtk::ActionGroup#actions: ditto.
+	* src/rbgtktextiter.c: Gtk::TextIter#marks, #toggled_tags, #tags: ditto.
+	* src/rbgdkdisplaymanager.c Gdk::DisplayManager#displays: ditto.
+	* src/rbgtkradiomenuitem.c: Gtk::RadioMenuItem#set_group: Code cleanup. 
+	* src/rbgtkfilechooser.c: Gtk::FileChooser: Code cleanup.
+
+2006-05-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkliststore.c: Gtk::ListStore#iter_is_valid accept nil(returns false) 
+	* src/rbgtktreestore.c: Gtk::TreeStore#iter_is_valid accept nil(returns false) 
+
 2006-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdraw.c (gdkdraw_cairo_create): fixed a memory leak bug.

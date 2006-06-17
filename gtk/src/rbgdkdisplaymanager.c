@@ -3,10 +3,10 @@
 
   rbgdkdisplaymanager.c -
 
-  $Author: sakai $
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
@@ -25,7 +25,7 @@ static VALUE
 gdkdisplaymanager_list_displays(self)
     VALUE self;
 {
-    return GSLIST2ARY(gdk_display_manager_list_displays(_SELF(self)));
+    return GSLIST2ARYF(gdk_display_manager_list_displays(_SELF(self)));
 }
 
 /* Move to Gdk::Display.

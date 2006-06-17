@@ -3,10 +3,10 @@
 
   rbgtkaction.c -
 
-  $Author: ggc $
-  $Date: 2005/09/06 20:06:54 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2004,2005 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -109,6 +109,7 @@ static VALUE
 action_get_proxies(self)
     VALUE self;
 {
+    /* Owned by GTK+ */
     return GSLIST2ARY(gtk_action_get_proxies(_SELF(self)));
 }
 

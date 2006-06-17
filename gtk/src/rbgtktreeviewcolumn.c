@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2006/06/17 06:59:32 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -87,7 +87,7 @@ static VALUE
 tvc_get_cell_renderers(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_tree_view_column_get_cell_renderers(_SELF(self)));
+    return GLIST2ARYF(gtk_tree_view_column_get_cell_renderers(_SELF(self)));
 }
 
 static VALUE

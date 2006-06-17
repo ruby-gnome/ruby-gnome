@@ -4,9 +4,10 @@
   rbgtktextchild.c -
 
   $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Date: 2006/06/17 06:59:32 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
@@ -27,7 +28,7 @@ static VALUE
 textchild_get_widgets(self)
     VALUE self;
 {
-    return GLIST2ARY(gtk_text_child_anchor_get_widgets(_SELF(self)));
+    return GLIST2ARYF(gtk_text_child_anchor_get_widgets(_SELF(self)));
 }
 
 static VALUE

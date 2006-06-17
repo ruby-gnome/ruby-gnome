@@ -5,7 +5,7 @@
   Copyright (C) 2005 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: tree_combo.rb,v 1.1 2005/11/14 07:04:40 mutoh Exp $
+  $Id: tree_combo.rb,v 1.2 2006/06/17 06:59:32 mutoh Exp $
 =end
 
 
@@ -71,7 +71,7 @@ view.append_column(ccol)
   iter = model.append
   iter[T_APPLICATION] = "application #{v}"
   iter[T_COMBO_MODEL] = combo_model
-  iter[T_COMBO_HAS_ENTRY] = true
+  iter[T_COMBO_HAS_ENTRY] = false
   iter[T_COMBO_EDITABLE] = true
   iter[T_COMBO_TEXT] = combo_model.get_iter("0")[0]
 end

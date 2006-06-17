@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: ktou $
-  $Date: 2006/03/18 06:54:03 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -188,6 +188,7 @@ static VALUE
 gaccelgrp_s_from_object(self, object)
     VALUE self, object;
 {
+    /* Owned by GTK+ */
     return GSLIST2ARY(gtk_accel_groups_from_object(RVAL2GOBJ(object)));
 }
 

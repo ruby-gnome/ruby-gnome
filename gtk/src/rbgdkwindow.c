@@ -3,10 +3,10 @@
 
   rbgdkwindow.c -
 
-  $Author: ggc $
-  $Date: 2005/09/23 19:17:01 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -901,10 +901,7 @@ static VALUE
 gdkwin_s_get_toplevels(self)
     VALUE self;
 {
-    GList* list = gdk_window_get_toplevels();
-    VALUE ret = GLIST2ARY(list);
-    g_list_free(list);
-    return ret;
+    return GLIST2ARYF(gdk_window_get_toplevels());
 }
 
 static VALUE

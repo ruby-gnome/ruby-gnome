@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2006/06/17 06:59:32 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -96,14 +96,14 @@ static VALUE
 get_marks(self)
     VALUE self;
 {
-    return GSLIST2ARY(gtk_text_iter_get_marks(_SELF(self)));
+    return GSLIST2ARYF(gtk_text_iter_get_marks(_SELF(self)));
 }
 
 static VALUE
 get_toggled_tags(self, toggled_on)
     VALUE self, toggled_on;
 {
-    return GSLIST2ARY(gtk_text_iter_get_toggled_tags(_SELF(self), RTEST(toggled_on)));
+    return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RTEST(toggled_on)));
 }
 
 static VALUE
@@ -146,7 +146,7 @@ static VALUE
 get_tags(self)
     VALUE self;
 {
-    return GSLIST2ARY(gtk_text_iter_get_tags(_SELF(self)));
+    return GSLIST2ARYF(gtk_text_iter_get_tags(_SELF(self)));
 }
 
 static VALUE

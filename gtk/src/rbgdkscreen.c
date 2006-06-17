@@ -3,10 +3,10 @@
 
   rbgdkdisplay.c -
 
-  $Author: ggc $
-  $Date: 2005/09/23 18:45:29 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
 
@@ -133,20 +133,14 @@ static VALUE
 gdkscreen_list_visuals(self)
     VALUE self;
 {
-    GList* list = gdk_screen_list_visuals(_SELF(self));
-    VALUE ret = GLIST2ARY(list);
-    g_list_free(list);
-    return ret;
+    return GLIST2ARYF(gdk_screen_list_visuals(_SELF(self)));
 }
 
 static VALUE
 gdkscreen_get_toplevel_windows(self)
     VALUE self;
 {
-    GList* list = gdk_screen_get_toplevel_windows(_SELF(self));
-    VALUE ret = GLIST2ARY(list);
-    g_list_free(list);
-    return ret;
+    return GLIST2ARYF(gdk_screen_get_toplevel_windows(_SELF(self)));
 }
 
 static VALUE

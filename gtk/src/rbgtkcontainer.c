@@ -3,10 +3,10 @@
 
   rbgtkcontainer.c -
 
-  $Author: sakai $
-  $Date: 2006/05/29 03:10:22 $
+  $Author: mutoh $
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -84,7 +84,7 @@ static VALUE
 cont_get_children(self)
     VALUE self;
 {
-   return GLIST2ARY(gtk_container_get_children(_SELF(self)));
+   return GLIST2ARYF(gtk_container_get_children(_SELF(self)));
 }
 
 static VALUE
@@ -369,16 +369,8 @@ cont_get_focus_chain(self)
 {
     gboolean ret;
     GList *glist = NULL;
-    VALUE result;
     ret = gtk_container_get_focus_chain(_SELF(self), &glist);
-
-    if (ret){
-        result = GLIST2ARY(glist);
-        g_list_free(glist);
-    } else {
-        result = Qnil;
-    }
-    return result;
+    return GLIST2ARYF(glist);
 }
 
 static VALUE

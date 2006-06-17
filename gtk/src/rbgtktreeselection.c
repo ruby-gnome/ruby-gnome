@@ -3,10 +3,10 @@
 
   rbgtktreeselection.c -
 
-  $Author: sakai $ 
-  $Date: 2003/11/20 18:27:54 $
+  $Author: mutoh $ 
+  $Date: 2006/06/17 06:59:32 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"

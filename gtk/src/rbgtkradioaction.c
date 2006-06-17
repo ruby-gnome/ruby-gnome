@@ -4,9 +4,9 @@
   rbgtkradioaction.c -
  
   $Author: mutoh $
-  $Date: 2005/02/09 16:20:53 $
+  $Date: 2006/06/17 06:59:32 $
  
-  Copyright (C) 2004 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
  
 #include "global.h"
@@ -38,6 +38,7 @@ static VALUE
 raction_get_group(self)
     VALUE self;
 {
+    /* Owned by GTK+ */
     return GSLIST2ARY(gtk_radio_action_get_group(_SELF(self)));
 }
 
