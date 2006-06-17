@@ -4,7 +4,7 @@
   rbpangocontext.c -
 
   $Author: mutoh $
-  $Date: 2005/11/14 07:10:51 $
+  $Date: 2006/06/17 07:50:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -52,7 +52,7 @@ rcontext_itemize(argc, argv, self)
                              NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
 #endif
     }
-    return GLIST2ARY2(list, PANGO_TYPE_ITEM);
+    return GLIST2ARY2F(list, PANGO_TYPE_ITEM);
 }
 
 /* Move to Pango module (rbpangomain.c)

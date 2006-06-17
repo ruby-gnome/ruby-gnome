@@ -4,7 +4,7 @@
   rbpangomain.c -
 
   $Author: mutoh $
-  $Date: 2005/10/01 16:36:49 $
+  $Date: 2006/06/17 07:50:46 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -32,7 +32,7 @@ rpango_reorder_items(self, logical_items)
     ret = pango_reorder_items(glist);
     g_list_free(glist);
 
-    return ret ? GLIST2ARY2(ret, PANGO_TYPE_ITEM) : Qnil;
+    return GLIST2ARY2(ret, PANGO_TYPE_ITEM);
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)
