@@ -1,5 +1,8 @@
+2006-06-17  Masao Mutoh <mutoh@highway.ne.jp>
+	* sample/ruby-gecko.rb: Remove Gtk.init.
+
 2006-06-14  Mirko Maischberger <mirko@lilik.it>
-        This should close bug #1495276
+	This should close bug #1495276
 	* src/rbgtkmozembed.c: set the moz comp_path in Init if
 	DEFAULT_MOZILLA_FIVE_HOME is defined.
 	* extconf.rb: Now defaults to xulrunner and defines

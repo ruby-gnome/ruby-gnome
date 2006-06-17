@@ -205,8 +205,6 @@ class Browser < Gtk::Window
   end
 end
 
-Gtk.init
-
 Browser.new
 
 Gtk.main
