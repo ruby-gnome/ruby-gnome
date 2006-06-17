@@ -1,7 +1,5 @@
 require 'gtksourceview'
 
-Gtk.init
-
 s = Gtk::SourceLanguagesManager.new
 s.available_languages.each do |v|
   puts v.name

@@ -1,15 +1,12 @@
 require 'gtk2'
 $:.push(File::join(File.dirname(__FILE__),'/src'))
+
 require 'gtksourceview'
-
-
 def sw(a) 
 	w = Gtk::ScrolledWindow.new
 	w.add(a)
 	w
 end
-
-Gtk.init
 
 w = Gtk::Window.new
 w.signal_connect("delete-event"){Gtk::main_quit}

@@ -1,8 +1,12 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/*.rb: Remove Gtk.init
+
 2005-10-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/makeversion.rb: Removed. Use make_version_header() of
-        Ruby/GLib.
-        * extconf.rb: Follow above change.
+	Ruby/GLib.
+	* extconf.rb: Follow above change.
 
 2005-10-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
