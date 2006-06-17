@@ -1,3 +1,7 @@
+2006-06-17  Masao Mutoh <mutoh@highway.ne.jp>
+
+	* sample/*.rb: code cleanup.
+
 2006-05-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbvte.h: added extern modifier.

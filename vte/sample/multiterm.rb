@@ -1,4 +1,12 @@
 #!/usr/bin/env ruby
+=begin
+  multiterm.rb - Ruby/VTE sample script.
+
+  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: multiterm.rb,v 1.2 2006/06/17 13:27:51 mutoh Exp $
+=end
 
 require "vte"
 
@@ -16,7 +24,7 @@ class MultiTerm
 
   private
   def init_window
-    @window = Gtk::Window.new
+    @window = Gtk::Window.new("MultiTerm sample")
     @window.signal_connect("destroy") do |widget|
       Gtk.main_quit
     end
@@ -90,7 +98,6 @@ class MultiTerm
   end
 end
 
-Gtk.init
 multi_term = MultiTerm.new
 multi_term.run
 Gtk.main

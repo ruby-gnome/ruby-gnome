@@ -1,10 +1,18 @@
 #!/usr/bin/env ruby
+=begin
+  terminal.rb - Ruby/VTE sample script.
+
+  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: terminal.rb,v 1.2 2006/06/17 13:27:51 mutoh Exp $
+=end
 
 require "vte"
 
-Gtk.init
+window = Gtk::Window.new("Terminal sample")
+window.signal_connect("destroy"){Gtk.main_quit}
 
-window = Gtk::Window.new
 terminal = Vte::Terminal.new
 terminal.set_font("Monospace 16", Vte::TerminalAntiAlias::FORCE_ENABLE)
 terminal.signal_connect("child-exited") do |widget|
