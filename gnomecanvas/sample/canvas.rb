@@ -28,9 +28,6 @@ Original Copyright:
 
 =end
 
-require 'gtk2'
-require 'gdk_pixbuf2'
-require 'libart2'
 require 'gnomecanvas2'
 
 require 'canvas-arrowhead'
@@ -47,9 +44,9 @@ class CanvasSample < Gtk::Window
       Gtk::main_quit()
     end
 
-    notebook = Gtk::Notebook.new()
+    notebook = Gtk::Notebook.new
     self.add(notebook)
-    notebook.show()
+    notebook.show
 
     notebook.append_page(CanvasSamplePrimitives.new(false), Gtk::Label.new("Primitives"))
     notebook.append_page(CanvasSamplePrimitives.new(true), Gtk::Label.new("Antialias"))
@@ -58,10 +55,9 @@ class CanvasSample < Gtk::Window
     notebook.append_page(CanvasSampleFeatures.new(), Gtk::Label.new("Feature"))
     notebook.append_page(CanvasSampleRichText.new(), Gtk::Label.new("Rich Text"))
     notebook.append_page(CanvasSampleBezierCurve.new(), Gtk::Label.new("Bezier Curve"))
-    show()
+    show
   end
 end
 
-Gtk.init
-canvas = CanvasSample.new()
-Gtk::main()
+canvas = CanvasSample.new
+Gtk.main
