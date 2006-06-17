@@ -10,12 +10,10 @@
 #
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: simple-controller.rb,v 1.1 2004/07/03 07:38:02 mutoh Exp $
+# $Id: simple-controller.rb,v 1.2 2006/06/17 14:39:54 mutoh Exp $
 
 require 'gtk2'
 require 'gconf2'
-
-Gtk.init
 
 window = Gtk::Window.new
 entry = Gtk::Entry.new

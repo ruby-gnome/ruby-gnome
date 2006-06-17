@@ -6,7 +6,7 @@
 #
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: basic-gconf-app.rb,v 1.2 2005/01/29 16:52:32 mutoh Exp $
+# $Id: basic-gconf-app.rb,v 1.3 2006/06/17 14:39:54 mutoh Exp $
 
 require 'gconf2'
 require 'gtk2'
@@ -231,8 +231,6 @@ end
 
 
 #main loop
-
-Gtk.init
 
 app = BasicGConfApp.new
 app.start

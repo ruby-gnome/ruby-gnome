@@ -9,12 +9,10 @@
 #
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: simple-view.rb,v 1.2 2004/07/03 07:51:03 mutoh Exp $
+# $Id: simple-view.rb,v 1.3 2006/06/17 14:39:54 mutoh Exp $
 
 require 'gtk2'
 require 'gconf2'
-
-Gtk.init
 
 client = GConf::Client.default
 str = client['/extra/test/directory/key']

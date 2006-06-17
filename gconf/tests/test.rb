@@ -1,8 +1,6 @@
 require 'gtk2'
 require 'gconf2'
 
-Gtk.init
-
 client = GConf::Client.default
 window = Gtk::Window.new
 str = client.get "/apps/gnome-cd/device"
