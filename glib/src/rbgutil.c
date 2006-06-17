@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 09:47:37 $
+  $Date: 2006/06/17 11:05:46 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -187,23 +187,7 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
   int state = 0;
   VALUE ret = rb_protect(func, data, &state);
   if (state && !NIL_P(ruby_errinfo)) {
-    char buf[BUFSIZ];
-    VALUE errmsg;
-    int ret;
-
-    if (ruby_sourcefile) {
-      ret = snprintf(buf, BUFSIZ, "%s:", ruby_sourcefile);
-      rb_write_error2(buf, MIN(BUFSIZ, ret));
-    }
-    errmsg = rb_funcall(ruby_errinfo, rb_intern("message"), 0, 0);
-
-    ret = snprintf(buf, BUFSIZ, "%d: %s: %s\n",
-                   ruby_sourceline, rb_obj_classname(ruby_errinfo),
-                   RVAL2CSTR(errmsg));
-    rb_write_error2(buf, MIN(BUFSIZ, ret));
-    rb_backtrace();
-    ruby_finalize();
-    exit(EXIT_FAILURE);
+      rb_funcall(mGLib, rb_intern("exit_application"), 1, EXIT_FAILURE);
   }
   return ret;
 }

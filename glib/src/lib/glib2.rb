@@ -25,7 +25,6 @@ end
 
 module GLib
   def check_binding_version?(major, minor, micro)
-    
     BINDING_VERSION[0] > major ||
       (BINDING_VERSION[0] == major && 
        BINDING_VERSION[1] > minor) ||
@@ -34,6 +33,18 @@ module GLib
        BINDING_VERSION[2] >= micro)  
   end
   module_function :check_binding_version?
+
+  def exit_application(status)
+    msg = $!.message || $!.to_s
+    msg = $!.class.to_s if msg == ""
+    backtrace = $!.backtrace
+    puts backtrace.shift + ": #{msg}"
+    backtrace.each do |v|
+      puts "\t from #{v}"
+    end
+    exit(status)
+  end
+  module_function :exit_application
 
   def self.__add_one_arg_setter(klass)
     #for Instance methods.

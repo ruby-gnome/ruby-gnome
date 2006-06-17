@@ -1,5 +1,7 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/lib/glib2.rb: Added GLib.exit_application. This is called when it raises
+	the exception in a callback proc and it isn't catched in the proc.
 	* src/rbgutil.c: Added G_PROTECT_CALLBACK. You need to wrap the functions which
 	run in the mainloop with this. This is based on rclosure_marshal_do() in
 	src/rbgobj_closure.c.
