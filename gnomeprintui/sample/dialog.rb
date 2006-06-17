@@ -317,8 +317,6 @@ class Renderer
   
 end
 
-Gtk.init
-
 begin
 Renderer.new.dialog
 rescue Exception

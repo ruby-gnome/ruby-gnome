@@ -1,3 +1,7 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/dialog.rb: Remove Gtk.init.
+
 2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgpui.c (Gnome::PrintUI::BINDING_VERSION): added.
