@@ -1,16 +1,14 @@
 =begin
   drag-move.rb - Move widget by drag sample script.
 
-  Copyright (C) 2005 Kouhei Sutou <kou@cozmixng.org>
+  Copyright (C) 2006 Kouhei Sutou
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/10/21 02:08:38 $
-  $Id: drag-move.rb,v 1.1 2005/10/21 02:08:38 ktou Exp $
+  $Date: 2006/06/17 13:18:12 $
+  $Id: drag-move.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 class DraggableWidget < Gtk::EventBox
   def initialize
@@ -110,7 +108,8 @@ class DraggableWidget < Gtk::EventBox
   end
 end
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Draggable Widget sample")
+window.signal_connect("destroy"){Gtk.main_quit}
 
 layout = Gtk::Layout.new
 

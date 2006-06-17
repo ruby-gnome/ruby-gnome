@@ -7,10 +7,10 @@
 
   Written by Alex Boussinet <mailto:dbug@wanadoo.fr> for testing purpose only.
 
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: t-gtkplug.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
+  $Id: t-gtkplug.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -54,6 +54,5 @@ ARGV.each_index { |i|
   end 
 }
 
-Gtk.init
 MyGtkPlug.new(xid, ARGV.shift)
 Gtk.main

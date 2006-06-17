@@ -7,12 +7,10 @@
 
   *NOTE* Gtk::ItemFactory has been deprecated. Use Gtk::UIManager instead.
 
-  $Id: itemfactory2.rb,v 1.7 2006/05/04 04:05:00 mutoh Exp $
+  $Id: itemfactory2.rb,v 1.8 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 puts "Deprecated. Use Gtk::UIManager instead."
 

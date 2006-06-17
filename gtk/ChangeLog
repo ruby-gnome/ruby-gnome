@@ -1,5 +1,8 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/lib/gtk2.rb, src/lib/gtk2/base.rb: samples/*.rb:
+	Gtk.init is called at gtk2.rb now. So you don't need to call Gtk.init by
+	yourself. If you need not to call Gtk.init, require 'gtk2/base' instead.
 	* src/rbgtkmain.c: Callback functions protect exceptions.
 	If an exception is raised, applications are exited with error
 	messages.

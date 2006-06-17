@@ -1,17 +1,15 @@
 =begin
   cursor.rb - Gdk::Cursor sample script.
 
-  Copyright (C) 2001-2003 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2001-2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cursor.rb,v 1.6 2003/08/31 15:29:44 mutoh Exp $
+  $Id: cursor.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 
-Gtk.init
-
-window = Gtk::Window.new
+window = Gtk::Window.new("Gdk::Cursor sample")
 window.realize
 
 button = Gtk::Button.new("Click!")

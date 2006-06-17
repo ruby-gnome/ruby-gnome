@@ -4,10 +4,10 @@
 
   Original: gtkcairo sample by Evan Martins.
 
-  Copyright (c) 2005 Ruby-GNOME2 Project Team 
+  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: cairo-pong.rb,v 1.2 2006/05/04 04:05:00 mutoh Exp $
+  $Id: cairo-pong.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk2"
@@ -211,6 +211,5 @@ module Pong
   end
 end
 
-Gtk.init
 Pong::Window.new.show_all
 Gtk.main

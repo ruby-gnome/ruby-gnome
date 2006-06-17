@@ -1,15 +1,13 @@
 #!/usr/bin/env ruby
 =begin
-  treemodelfilter.rb - Ruby/GTK sample script.
+  treemodelfilter.rb - Gtk::TreeModelFilter sample
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004,2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treemodelfilter.rb,v 1.2 2005/07/30 10:24:57 mutoh Exp $
+  $Id: treemodelfilter.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 4, 0)
   puts "This sample requires GTK+ 2.4.0 or later"
@@ -51,5 +49,7 @@ treeview.append_column(column2)
   iter[1] = num
 end
 
-Gtk::Window.new.add(treeview).show_all.signal_connect("destroy"){Gtk.main_quit}
+win = Gtk::Window.new("Gtk::TreeModelFilter sample")
+win.signal_connect("destroy"){Gtk.main_quit}
+win.add(treeview).show_all.signal_connect("destroy"){Gtk.main_quit}
 Gtk.main

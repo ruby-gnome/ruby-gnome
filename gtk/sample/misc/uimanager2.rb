@@ -1,15 +1,13 @@
 =begin
   uimanager2.rb - 
 
-  Copyright (C) 2004,2005 Masao Mutoh
+  Copyright (C) 2004-2006 Masao Mutoh
 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager2.rb,v 1.4 2005/09/12 06:09:22 mutoh Exp $
+  $Id: uimanager2.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 4, 0)
   puts "This sample requires GTK+ 2.4.0 or later"
@@ -65,7 +63,7 @@ shape_radio_actions = [
   ["Oval", nil, "_Oval", "<control>O", "Egg", 2]
 ]
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::UIManager sample2")
 window.signal_connect("destroy"){Gtk.main_quit}
 
 actiongroup = Gtk::ActionGroup.new("Actions")

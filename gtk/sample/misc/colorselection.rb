@@ -1,15 +1,13 @@
 =begin
   colorselection.rb - Gtk::ColorSelection sample script.
 
-  Copyright (C) 2005  Masao Mutoh
+  Copyright (C) 2005,2006  Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: colorselection.rb,v 1.2 2005/07/14 17:01:48 mutoh Exp $
+  $Id: colorselection.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 settings = Gtk::Settings.default
 

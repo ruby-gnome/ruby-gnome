@@ -1,19 +1,18 @@
 #!/usr/bin/env ruby
 =begin
-  rgtk+cairo.rb - Ruby/GTK using Ruby/Cairo sample script.
+  rgtk+cairo.rb - Ruby/GTK2 using Ruby/Cairo sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   Heavily inspired from png.rb example of rcairo.
 
-  $Id: rgtk+cairo.rb,v 1.2 2005/10/12 01:13:06 ktou Exp $
+  $Id: rgtk+cairo.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 require 'cairo'
 
-Gtk.init
 w = Gtk::Window.new.add(vb = Gtk::VBox.new)
 vb.add(da = Gtk::DrawingArea.new)
 da.set_size_request(200, 200)
@@ -40,5 +39,6 @@ da.signal_connect('expose-event') { |widget, event|
    cr.stroke
 }
 
+w.signal_connect("destroy"){Gtk.main_quit}
 w.show_all
 Gtk.main

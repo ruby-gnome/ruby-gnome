@@ -3,15 +3,14 @@
 
   GLib::Object#properties and Gtk::Container#child_properties sample script.
 
-  Copyright (C) 2004 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2004-2006 Masao Mutoh
 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: properties.rb,v 1.2 2004/01/29 17:07:57 mutoh Exp $
+  $Id: properties.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-Gtk.init
 
 class MyButton < Gtk::Button
   type_register

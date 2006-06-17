@@ -2,10 +2,10 @@
 =begin
   to_drawable.rb - Gdk::Pixbuf(GDK methods) sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: to_drawable.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
+  $Id: to_drawable.rb,v 1.6 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -16,11 +16,9 @@ unless filename
   exit(1)
 end
 
-Gtk.init
-
 pixbuf = Gdk::Pixbuf.new(filename)
 
-w = Gtk::Window.new
+w = Gtk::Window.new("Drawable sample")
 w.realize
 w.signal_connect('delete-event') do
   Gtk.main_quit

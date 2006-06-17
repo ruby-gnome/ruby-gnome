@@ -1,22 +1,22 @@
 #!/usr/local/bin/ruby
 =begin
-  button2.rb - Ruby/GTK sample script.
+  button2.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: button2.rb,v 1.3 2003/02/01 16:46:22 mutoh Exp $
+  $Id: button2.rb,v 1.4 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 
-Gtk.init
-
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::Button sample")
 
 button1 = Gtk::Button.new("_HELLO")
 button2 = Gtk::Button.new("_HELLO", false)
 button3 = Gtk::Button.new(Gtk::Stock::QUIT)  
+
+button3.signal_connect("clicked"){ Gtk.main_quit }
 
 box = Gtk::VBox.new
 box.add(button1)

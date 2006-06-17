@@ -2,15 +2,13 @@
 =begin
   gc.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gc.rb,v 1.5 2005/07/14 17:01:49 mutoh Exp $
+  $Id: gc.rb,v 1.6 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 window = Gtk::Window.new("Gdk::GC sample")
 window.set_default_size(300, 300)

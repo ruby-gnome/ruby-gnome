@@ -1,16 +1,14 @@
 #!/usr/bin/env ruby
 =begin
-  expander.rb - Ruby/GTK sample script.
+  expander.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: expander.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
+  $Id: expander.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 expander = Gtk::Expander.new("Expander Sample")
 expander.expanded = true

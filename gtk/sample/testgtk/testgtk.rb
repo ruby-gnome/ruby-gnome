@@ -4,9 +4,9 @@
 
   testgtk.rb - testgtk.c rewritten in Ruby/GTK2
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
 
-  $Id: testgtk.rb,v 1.15 2005/07/21 17:47:19 mutoh Exp $
+  $Id: testgtk.rb,v 1.16 2006/06/17 13:18:12 mutoh Exp $
 
   Rewritten by Hiroshi IGARASHI <igarashi@ueda.info.waseda.ac.jp>
 
@@ -175,6 +175,5 @@ if $DEBUG
   end
 end
 
-Gtk.init
 main
 puts("#{$0}: done.")

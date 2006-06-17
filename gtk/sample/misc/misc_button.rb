@@ -2,15 +2,13 @@
 =begin
   misc_button.rb - Ruby/GTK sample script.
                                                                                 
-  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: misc_button.rb,v 1.1 2005/01/09 09:20:30 mutoh Exp $
+  $Id: misc_button.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 4, 0)
   puts "This sample requires GTK+ 2.4.0 or later"

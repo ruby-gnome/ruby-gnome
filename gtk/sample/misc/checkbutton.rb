@@ -1,16 +1,14 @@
 #!/usr/bin/env ruby
 =begin
-  checkbutton.rb - Ruby/GTK sample script.
+  checkbutton.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: checkbutton.rb,v 1.9 2005/07/14 17:01:48 mutoh Exp $
+  $Id: checkbutton.rb,v 1.10 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 window = Gtk::Window.new("check buttons")
 window.border_width = 0

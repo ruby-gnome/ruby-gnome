@@ -2,18 +2,16 @@
 =begin
   pangorenderer.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: pangorenderer.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
+  $Id: pangorenderer.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 
 RADIUS = 80
 N_WORDS = 16
-
-Gtk.init
 
 if str = Gtk.check_version(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"
@@ -22,6 +20,7 @@ if str = Gtk.check_version(2, 6, 0)
 end
 
 win = Gtk::Window.new("Gdk::PangoRenderer sample")
+win.signal_connect("destroy"){Gtk.main_quit}
 win.set_default_size(400, 400)
 win.realize
 

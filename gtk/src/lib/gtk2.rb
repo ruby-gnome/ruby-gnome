@@ -1,25 +1,13 @@
-require 'glib2'
-require 'atk'
-require 'pango'
-begin
-  require 'cairo'
-rescue LoadError
-end
-require 'gtk2.so'
-require 'gdk_pixbuf2'
+#! /usr/bin/env ruby
+=begin
+  gtk2.rb
 
-module Gdk
-  LOG_DOMAIN = "Gdk"
+  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
 
-  module_function
-  def cairo_available?
-    Gdk::Drawable.instance_methods.include?("create_cairo_context")
-  end
-end
+  $Id: gtk2.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
+=end
 
-module Gtk
-  LOG_DOMAIN = "Gtk"
-end
+require 'gtk2/base'
 
-GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
-GLib::Log.set_log_domain(Gtk::LOG_DOMAIN)
+Gtk.init

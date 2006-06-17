@@ -2,16 +2,14 @@
   tree_combo.rb - Gtk::TreeView and Gtk::CellRendererCombo 
   sample script.
 
-  Copyright (C) 2005 Masao Mutoh
+  Copyright (C) 2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: tree_combo.rb,v 1.2 2006/06/17 06:59:32 mutoh Exp $
+  $Id: tree_combo.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"

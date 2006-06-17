@@ -1,17 +1,16 @@
 =begin
   stock.rb - Gtk::Stock sample script.
 
-  Copyright (C) 2001-2005 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2001-2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: stock.rb,v 1.6 2005/07/14 17:01:49 mutoh Exp $
+  $Id: stock.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 
-Gtk.init
-
 window = Gtk::Window.new("Gtk::Stock sample")
+window.signal_connect("destroy"){Gtk.main_quit}
 
 stocks = Gtk::Stock.constants.sort
 

@@ -1,16 +1,14 @@
 #!/usr/bin/env ruby
 =begin
-  iconview.rb - Ruby/GTK sample script.
+  iconview.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2005,2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: iconview.rb,v 1.1 2005/10/26 16:31:27 mutoh Exp $
+  $Id: iconview.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 TEXT_COLUMN   = 0
 PIXBUF_COLUMN = 1
@@ -33,6 +31,8 @@ iv.signal_connect("item_activated") do |iv, path|
   p iter [0]
 end
 
-Gtk::Window.new.add(iv).set_default_size(300,300).show_all
+win = Gtk::Window.new("Gtk::IconView sample")
+win.signal_connect("destroy"){Gtk.main_quit}
+win.add(iv).set_default_size(300,300).show_all
 
 Gtk.main

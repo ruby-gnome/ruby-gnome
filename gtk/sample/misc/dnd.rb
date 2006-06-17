@@ -1,16 +1,14 @@
 =begin
   dnd.rb - Drag and Drop sample script.
 
-  Copyright (C) 2002-2005 Masao Mutoh<mutoh@highway.ne.jp>
+  Copyright (C) 2002-2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/07/14 17:01:49 $
-  $Id: dnd.rb,v 1.8 2005/07/14 17:01:49 mutoh Exp $
+  $Date: 2006/06/17 13:18:12 $
+  $Id: dnd.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 class SrcWindow < Gtk::Window
   def initialize

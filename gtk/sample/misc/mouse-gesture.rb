@@ -1,11 +1,11 @@
 =begin
   mouse-gesture.rb - mouse gesture sample script.
 
-  Copyright (C) 2005 Kouhei Sutou <kou@cozmixng.org>
+  Copyright (C) 2005,2006 Kouhei Sutou 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/10/21 07:15:00 $
-  $Id: mouse-gesture.rb,v 1.1 2005/10/21 07:15:00 ktou Exp $
+  $Date: 2006/06/17 13:18:12 $
+  $Id: mouse-gesture.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -14,8 +14,6 @@ unless Gdk.cairo_available?
   STDERR.puts("need cairo and rcairo support for this sample")
   exit 1
 end
-
-Gtk.init
 
 class GestureProcessor
   DEFAULT_THRESHOLD = 16
@@ -368,7 +366,7 @@ class Layout < Gtk::Layout
   end
 end
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Mouse Gesture sample")
 
 layout = Layout.new
 
@@ -460,6 +458,7 @@ end
 
 
 window.add(layout)
+window.signal_connect("destroy"){Gtk.main_quit}
 
 window.show_all
 

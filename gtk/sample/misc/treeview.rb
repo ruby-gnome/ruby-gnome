@@ -1,18 +1,16 @@
 #!/usr/bin/env ruby
 =begin
-  treeview.rb - Ruby/GTK sample script.
+  treeview.rb - Gtk::TreeView sample
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: treeview.rb,v 1.7 2005/07/30 10:24:57 mutoh Exp $
+  $Id: treeview.rb,v 1.8 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 
-Gtk.init
-
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::TreeView sample")
 
 # Create data
 model = Gtk::TreeStore.new(String, String, Gdk::Color, Float, Gdk::Pixbuf)

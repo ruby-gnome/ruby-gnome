@@ -1,10 +1,10 @@
 =begin
   drawing.rb - Gtk::Drawing sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: drawing.rb,v 1.6 2005/07/14 17:01:49 mutoh Exp $
+  $Id: drawing.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -80,11 +80,8 @@ class A < Canvas
   end
 end
 
-Gtk.init
-
-window = Gtk::Window.new
+window = Gtk::Window.new("drawing test")
 window.signal_connect("destroy") { Gtk.main_quit }
-window.set_title("drawing test")
 
 canvas = A.new
 window.add(canvas)

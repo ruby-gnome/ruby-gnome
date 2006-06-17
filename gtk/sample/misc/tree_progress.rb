@@ -2,16 +2,14 @@
   tree_progress.rb - Gtk::TreeView and Gtk::CellRendererProgress 
   sample script.
 
-  Copyright (C) 2004 Darren Willis, Masao Mutoh
+  Copyright (C) 2004-2006 Darren Willis, Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: tree_progress.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
+  $Id: tree_progress.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"
@@ -19,7 +17,8 @@ if str = Gtk.check_version(2, 6, 0)
   exit
 end
 
-win = Gtk::Window.new
+win = Gtk::Window.new("Gtk::CellRendererProgress sample")
+win.set_default_size(300, 50)
 model = Gtk::ListStore.new(String, Float)
 view = Gtk::TreeView.new(model)
 

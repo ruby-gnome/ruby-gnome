@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 09:20:19 $
+  $Date: 2006/06/17 13:18:12 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -88,6 +88,8 @@ gtk_m_get_default_language(self)
 
 typedef void (*SignalFunc) (int);
 
+static gboolean _initialized = FALSE;
+
 static VALUE
 gtk_m_init(argc, argv, self)
     int argc;
@@ -97,6 +99,11 @@ gtk_m_init(argc, argv, self)
     gint i, gargc;
     VALUE argary;
     gchar** gargv;
+
+    if (_initialized)
+        return self;
+    else
+        _initialized = TRUE;
 
     rb_scan_args(argc, argv, "01", &argary);
 

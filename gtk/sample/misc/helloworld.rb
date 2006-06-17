@@ -1,23 +1,21 @@
 #!/usr/bin/env ruby
 =begin
-  helloworld.rb - Ruby/GTK first sample script.
+  helloworld.rb - Ruby/GTK2 first sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: helloworld.rb,v 1.6 2005/03/22 17:41:28 silicio Exp $
+  $Id: helloworld.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 button = Gtk::Button.new("Hello World")
 button.signal_connect("clicked") {
   puts "Hello World"
 }
 
-window = Gtk::Window.new
+window = Gtk::Window.new("Hello World sample")
 window.signal_connect("delete_event") {
   puts "delete event occurred"
   #true

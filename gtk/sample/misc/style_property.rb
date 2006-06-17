@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 =begin
-  style_property.rb - Ruby/GTK sample script.
+  style_property.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2004,2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2004,2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: style_property.rb,v 1.3 2005/07/14 17:01:49 mutoh Exp $
+  $Id: style_property.rb,v 1.4 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -46,8 +46,6 @@ class MyButton < Gtk::Button
     end
   end
 end
-
-Gtk.init
 
 Gtk::RC.parse("./style_property.rc")
 

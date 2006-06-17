@@ -1,16 +1,14 @@
 =begin
   dndtreeview.rb - Drag and Drop sample script.
 
-  Copyright (C) 2003-2005 Masao Mutoh
+  Copyright (C) 2003-2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/07/14 17:01:49 $
-  $Id: dndtreeview.rb,v 1.2 2005/07/14 17:01:49 mutoh Exp $
+  $Date: 2006/06/17 13:18:12 $
+  $Id: dndtreeview.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 class TestWindow < Gtk::Window
   attr_reader :list

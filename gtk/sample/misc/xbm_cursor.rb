@@ -1,11 +1,11 @@
 =begin
   xbm_cursor.rb - Gdk::Cursor sample script.
 
-  Copyright (C) 2001-2005 Masao Mutoh
+  Copyright (C) 2001-2006 Masao Mutoh
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Date: 2005/07/14 17:01:50 $
-  $Id: xbm_cursor.rb,v 1.5 2005/07/14 17:01:50 mutoh Exp $
+  $Date: 2006/06/17 13:18:12 $
+  $Id: xbm_cursor.rb,v 1.6 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -23,8 +23,6 @@ cursor_mask_bits = [
    0xe0, 0x38, 0x00, 0xe7, 0x1f, 0x0c, 0xe7, 0x1d, 0x0f, 0xe0, 0x38, 0x0e,
    0xe0, 0x78, 0x08, 0xe7, 0xf0, 0x00, 0xf7, 0xf3, 0x01, 0xf0, 0xe3, 0x01,
    0x04, 0x00, 0x00, 0x46, 0x24, 0x06, 0x67, 0x66, 0x0e, 0x67, 0x66, 0x0e].pack("c*")
-
-Gtk.init
 
 window = Gtk::Window.new("Gdk::Cursor sample")
 window.signal_connect("destroy"){Gtk.main_quit}

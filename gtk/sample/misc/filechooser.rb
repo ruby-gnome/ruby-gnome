@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 =begin
-  filechooser.rb - Ruby/GTK sample script.
+  filechooser.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2004, 2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: filechooser.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
+  $Id: filechooser.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk2"
@@ -15,8 +15,6 @@ if str = Gtk.check_version(2, 4, 0)
   puts str
   exit
 end
-
-Gtk.init
 
 dialog =  Gtk::FileChooserDialog.new("Gtk::FileChooser sample", nil, 
 				     Gtk::FileChooser::ACTION_OPEN,

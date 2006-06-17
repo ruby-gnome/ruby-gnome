@@ -2,15 +2,13 @@
 =begin
   image.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: image.rb,v 1.8 2005/07/14 17:01:49 mutoh Exp $
+  $Id: image.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 window = Gtk::Window.new("Image")
 window.signal_connect("destroy") do

@@ -1,17 +1,15 @@
 #!/usr/bin/env ruby
 =begin
-  threads.rb - Ruby/GTK sample script.
+  threads.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: threads.rb,v 1.4 2005/07/14 17:01:49 mutoh Exp $
+  $Id: threads.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
 require 'thread'
-
-Gtk.init
 
 label = Gtk::Label.new
 

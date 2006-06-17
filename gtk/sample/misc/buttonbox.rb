@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 =begin
-  buttonbox.rb - Ruby/GTK sample script.
+  buttonbox.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: buttonbox.rb,v 1.8 2005/07/14 17:01:48 mutoh Exp $
+  $Id: buttonbox.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -64,8 +64,6 @@ def test_vbbox
   create_bbox_window(false, "Start", 450, 40, Gtk::ButtonBox::START)
   create_bbox_window(false, "End", 650, 15, Gtk::ButtonBox::END)
 end
-
-Gtk.init
 
 window = Gtk::Window.new("button box")
 window.signal_connect("delete_event") do
