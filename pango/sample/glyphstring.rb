@@ -3,9 +3,9 @@
   glyphstring.rb - Ruby/Pango sample script.
 
   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
-  This progrum is licenced under the same licence as Ruby-GNOME2.
+  This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: glyphstring.rb,v 1.2 2006/06/17 13:36:11 mutoh Exp $
+  $Id: glyphstring.rb,v 1.3 2006/06/17 14:16:53 ktou Exp $
 =end
 
 require 'gtk2'
