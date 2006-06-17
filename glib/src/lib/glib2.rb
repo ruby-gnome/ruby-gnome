@@ -38,9 +38,9 @@ module GLib
     msg = $!.message || $!.to_s
     msg = $!.class.to_s if msg == ""
     backtrace = $!.backtrace
-    puts backtrace.shift + ": #{msg}"
+    $stderr.puts backtrace.shift + ": #{msg}"
     backtrace.each do |v|
-      puts "\t from #{v}"
+      $stderr.puts "\t from #{v}"
     end
     exit(status)
   end
