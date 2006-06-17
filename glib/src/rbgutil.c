@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 09:18:12 $
+  $Date: 2006/06/17 09:47:37 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -201,6 +201,8 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
                    ruby_sourceline, rb_obj_classname(ruby_errinfo),
                    RVAL2CSTR(errmsg));
     rb_write_error2(buf, MIN(BUFSIZ, ret));
+    rb_backtrace();
+    ruby_finalize();
     exit(EXIT_FAILURE);
   }
   return ret;
