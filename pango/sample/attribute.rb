@@ -4,7 +4,7 @@
   Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: attribute.rb,v 1.5 2005/02/13 17:31:33 mutoh Exp $
+  $Id: attribute.rb,v 1.6 2006/06/17 13:37:01 mutoh Exp $
 =end
 
 require 'pango'
@@ -72,8 +72,6 @@ rescue
   p "Ruby/GTK2 is not existed."
   exit 0
 end
-  Gtk.init
-
   p a = Gdk::PangoAttrEmbossed.new(true)
   p a.value
 

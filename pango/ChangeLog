@@ -1,6 +1,7 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Pango.itemize: Fix memoryleak.
+	* sample/*.rb: Code cleanup.
 
 2005-11-29  Laurent Sansonetti  <lrz@gnome.org>
 

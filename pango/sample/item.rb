@@ -4,7 +4,7 @@
   Copyright (c) 2005 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: item.rb,v 1.1 2005/09/17 17:09:12 mutoh Exp $
+  $Id: item.rb,v 1.2 2006/06/17 13:36:11 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -12,7 +12,7 @@ require 'gtk2'
 Gtk.init
 
 str = "Ruby-GNOME2こんにちわ" 
-win = Gtk::Window.new
+win = Gtk::Window.new("Ruby/Pango sample")
 win.realize
 
 p screen = Gdk::Screen.default

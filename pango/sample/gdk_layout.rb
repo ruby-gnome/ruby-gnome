@@ -1,16 +1,16 @@
 =begin
   gdk_layout.rb - Ruby/Pango sample script.
 
-  Copyright (c) 2003 Ruby-GNOME2 Project
+  Copyright (c) 2003-2006 Ruby-GNOME2 Project
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: gdk_layout.rb,v 1.6 2004/03/14 09:51:47 mutoh Exp $
+  $Id: gdk_layout.rb,v 1.7 2006/06/17 13:36:11 mutoh Exp $
 =end
 
 require 'gtk2'
 
-Gtk.init
-window = Gtk::Window.new
+window = Gtk::Window.new("Ruby/Pango sample")
+window.signal_connect("destroy"){Gtk.main_quit}
 window.realize
 
 gdkwin = window.window

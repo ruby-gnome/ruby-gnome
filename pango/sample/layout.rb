@@ -5,13 +5,11 @@
   Copyright (c) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: layout.rb,v 1.1 2005/09/17 17:09:12 mutoh Exp $
+  $Id: layout.rb,v 1.2 2006/06/17 13:36:11 mutoh Exp $
 =end
 
 require 'gtk2'
 require 'pp'
-
-Gtk.init
 
 puts
 puts "Start----------"
