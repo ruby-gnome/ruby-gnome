@@ -1,9 +1,15 @@
-require 'gtk2'
+=begin
+  test-gtkhtml.rb - Gtk::Html sample script.
+
+  Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: test-gtkhtml.rb,v 1.6 2006/06/17 14:23:40 mutoh Exp $
+=end
+
 require 'gtkhtml2'
 
-Gtk.init
-
-window = Gtk::Window.new
+window = Gtk::Window.new("Gtk::Html sample")
 
 window.signal_connect( "destroy" ) {
    Gtk.main_quit
