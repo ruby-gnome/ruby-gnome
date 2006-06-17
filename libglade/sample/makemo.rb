@@ -10,26 +10,8 @@
   Copyright (C) 2001-2004 MUTOH Masao <mutoh@highway.ne.jp>
   This program is licenced under the same licence as Ruby.
 
-  $Id: makemo.rb,v 1.2 2005/02/22 05:50:31 mutoh Exp $
+  $Id: makemo.rb,v 1.3 2006/06/17 07:42:50 mutoh Exp $
 =end
-                                                                                
-require 'fileutils'
+                                                                               require 'gettext/utils'
 
-mswin32 = false
-if /mswin32/ =~ RUBY_PLATFORM
-  mswin32 = true
-  msgfmt = "rmsgfmt.bat"
-else
-  msgfmt = "rmsgfmt"
-end
-
-podir = "./po/"
-modir = "locale/%s/LC_MESSAGES/"
-                                                                                
-Dir.glob("#{podir}*/*.po") do |file|
-  lang, basename = /\A([\w\.]*)\/(.*)\.po/.match(file[podir.size..-1]).to_a[1,2]
-  outdir = modir % lang
-  outdir.gsub!(/\//, "\\") if mswin32
-  FileUtils.mkdir_p(outdir) unless File.directory?(outdir)
-  system("#{msgfmt} #{file} -o #{outdir}#{basename}.mo")
-end
+GetText.create_mofiles(true, "po", "locale")

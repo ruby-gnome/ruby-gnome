@@ -1,3 +1,11 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbglade.c: Fixed memory leak of Glade.get_widget_prefix.
+
+2006-05-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/makemo.rb: Rewrite to use Ruby-GetText-Package 1.2.
+
 2005-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Works on Win32. (gladewin32 has been changed the 

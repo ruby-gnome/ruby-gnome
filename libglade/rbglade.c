@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2005/10/09 19:31:51 $
+  $Date: 2006/06/17 07:42:50 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -51,7 +51,7 @@ static VALUE
 rb_gladexml_get_widget_prefix(VALUE self, VALUE name)
 {
     GList* list = glade_xml_get_widget_prefix(GLADE_XML(RVAL2GOBJ(self)), RVAL2CSTR(name));
-    return GLIST2ARY(list);
+    return GLIST2ARYF(list);
 }
 
 static VALUE
