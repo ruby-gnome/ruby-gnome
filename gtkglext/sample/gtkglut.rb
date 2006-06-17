@@ -33,7 +33,6 @@ module GLUT
     @@window_pos  = [100, 100]
 
     def GLUT.Init(argc = 1, argv = [])
-        Gtk.init
         Gtk::GL.init
     end
 

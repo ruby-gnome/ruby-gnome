@@ -71,8 +71,6 @@ def realize(w)
     end
 end
 
-# Init GTK
-Gtk.init
 # Init GtkGlExt
 Gtk::GL.init
 # Query OpenGL extension version

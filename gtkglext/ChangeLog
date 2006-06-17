@@ -1,3 +1,7 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/*.rb: Remove Gtk.init.
+
 2006-05-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkpixmap.c: Call G_DEF_SETTERS() for Gdk::Pixmap.

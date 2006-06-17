@@ -7,7 +7,6 @@
 #
 
 require 'gtkglext'
-require 'pango'
 
 FONT_STRING = "courier 12"
 
@@ -77,8 +76,6 @@ def realize(w)
     end
 end
 
-# Init GTK
-Gtk.init
 # Init GtkGlExt
 Gtk::GL.init
 # Query OpenGL extension version
@@ -104,8 +101,7 @@ end
 examine_gl_config_attrib(glconfig)
 
 # Top-level window
-window = Gtk::Window.new
-window.title = "font"
+window = Gtk::Window.new("font")
 # Perform the resize immediately
 window.resize_mode = Gtk::RESIZE_IMMEDIATE
 # Get automatically redrawn if any of their children changed allocation.

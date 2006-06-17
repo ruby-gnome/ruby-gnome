@@ -86,8 +86,6 @@ def expose_event(w)
     end
 end
 
-# Init GTK
-Gtk.init
 # Init GtkGlExt
 Gtk::GL.init
 
