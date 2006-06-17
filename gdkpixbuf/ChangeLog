@@ -1,3 +1,7 @@
+2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/*.rb: Remove Gtk.init, Code cleanup.
+
 2006-04-23  NISHI Takao
 
 	* rbgdk-pixdata.c: Gdk::Pixdata#length returns the size of pixel_data.

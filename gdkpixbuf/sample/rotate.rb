@@ -2,10 +2,10 @@
 =begin
   rotate.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2005 Ruby-GNOME2 Project Team
+  Copyright (c) 2005,2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: rotate.rb,v 1.2 2005/03/22 17:41:25 silicio Exp $
+  $Id: rotate.rb,v 1.3 2006/06/17 14:38:08 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -16,8 +16,6 @@ unless filename
   puts "ruby #{$0} filename"
   exit(1)
 end
-
-Gtk.init
 
 if str = Gtk.check_version(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"

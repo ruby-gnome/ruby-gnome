@@ -2,15 +2,13 @@
 =begin
   anim.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: anim.rb,v 1.4 2005/03/22 17:41:24 silicio Exp $
+  $Id: anim.rb,v 1.5 2006/06/17 14:38:08 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 w = Gtk::Window.new
 w.signal_connect('delete-event') do

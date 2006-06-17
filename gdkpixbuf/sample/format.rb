@@ -2,15 +2,13 @@
 =begin
   format.rb - Ruby/GdkPixbuf sample script.
 
-  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: format.rb,v 1.3 2005/03/22 17:41:24 silicio Exp $
+  $Id: format.rb,v 1.4 2006/06/17 14:38:08 mutoh Exp $
 =end
 
 require 'gtk2'
-
-Gtk.init
 
 if str = Gtk.check_version(2, 2, 0)
   puts "This sample requires GTK+ 2.2.0 or later"

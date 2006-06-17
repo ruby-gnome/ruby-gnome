@@ -4,14 +4,13 @@
   
   Inspired by http://mail.gnome.org/archives/gtk-perl-list/2005-September/msg00110.html
 
-  Copyright (c) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: simpleanim.rb,v 1.1 2005/09/23 22:02:07 ggc Exp $
+  $Id: simpleanim.rb,v 1.2 2006/06/17 14:38:08 mutoh Exp $
 =end
 
 require 'gtk2'
-Gtk.init
 
 $stdout.sync = true
 
@@ -31,5 +30,5 @@ window = Gtk::Window.new
 image = Gtk::Image.new(simple_anim)
 window.add(image)
 window.show_all
-window.signal_connect('destroy') { Gtk2.main_quit }
+window.signal_connect('destroy') { Gtk.main_quit }
 Gtk.main
