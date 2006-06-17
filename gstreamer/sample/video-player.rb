@@ -3,7 +3,6 @@
 require 'gtk2'
 require 'gst'
 
-Gtk.init
 Gst.init
 
 if ARGV.length != 1
