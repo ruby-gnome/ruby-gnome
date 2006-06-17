@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: ktou $
-  $Date: 2006/05/24 15:15:33 $
+  $Author: mutoh $
+  $Date: 2006/06/17 09:20:19 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -31,24 +31,36 @@ typedef struct _callback_info_t
 } callback_info_t;
 
 
-static gboolean
-gtk_m_function(data)
-    gpointer data;
+static VALUE
+gtk_m_function_body(data)
+    VALUE data;
 {
     callback_info_t *info = (callback_info_t *)data;
-    gboolean ret;
+    VALUE ret = rb_funcall(info->callback, id_call, 0);
 
-    ret = RTEST(rb_funcall(info->callback, id_call, 0));
     if (info->key && !ret)
         G_REMOVE_RELATIVE(mGtk, info->key, UINT2NUM(info->id));
     return ret;
 }
 
-static void
-gtk_m_function2(gpointer data)
+static gboolean
+gtk_m_function(data)
+    gpointer data;
+{ 
+    return RTEST(G_PROTECT_CALLBACK(gtk_m_function_body, data));
+}
+
+static VALUE
+gtk_m_function2_body(gpointer proc)
 {
-    VALUE callback = (VALUE)data;
-    rb_funcall(callback, id_call, 0);
+    rb_funcall((VALUE)proc, id_call, 0);
+    return Qnil;
+}
+
+static void
+gtk_m_function2(gpointer proc)
+{
+    G_PROTECT_CALLBACK(gtk_m_function2_body, proc);
 }
 
 

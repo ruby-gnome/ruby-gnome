@@ -1,5 +1,8 @@
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkmain.c: Callback functions protect exceptions.
+	If an exception is raised, applications are exited with error
+	messages.
 	* src/rbgtkwindow.c: Gtk::Window#toplevels, #default_icon_list,
 	#icon_list: Fixed memory leaks. Pointed out by Masahiro Sakai.
 	* src/rbgtkwidget.c: Gtk::Widget#accel_closures: ditto.
