@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 07:46:19 $
+  $Author: mutoh $
+  $Date: 2006/06/18 13:42:33 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -56,7 +56,7 @@ rbgobj_lookup_class(klass)
     if (TYPE(klass) == T_CLASS) {
         VALUE super;
         if (FL_TEST(klass, FL_SINGLETON)) {
-            super = RCLASS(klass)->super;
+            super = rb_class_real(klass);
         } else {
             super = rb_funcall(klass, id_superclass, 0);
         }
