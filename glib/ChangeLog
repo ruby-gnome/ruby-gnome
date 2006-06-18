@@ -1,7 +1,7 @@
 2006-06-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_type.c: Fixed a problem when the object which extends Module
-	can't access the instance methods. Reported by Laurent and Bug #1496185.
+	can't access the instance methods. Reported by Laurent Sansonetti and Bug #1496185.
 
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
