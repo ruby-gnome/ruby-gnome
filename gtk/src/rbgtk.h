@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: ggc $
+  $Date: 2006/06/21 18:10:05 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -50,9 +50,11 @@
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
-#define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 #define GTK_TYPE_BINDING_SET (gtk_bindingset_get_type())
 #define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
+#ifndef GTK_TYPE_TARGET_LIST
+#define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
+#endif
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
 #  ifdef RUBY_GTK2_COMPILATION
