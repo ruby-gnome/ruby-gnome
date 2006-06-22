@@ -3,8 +3,8 @@
 
   rbglib_source.c -
 
-  $Author: ktou $
-  $Date: 2006/05/27 01:44:07 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:53 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -91,7 +91,7 @@ source_get_context(self)
     VALUE self;
 {
     GMainContext* context = g_source_get_context(_SELF(self));
-    return context ? BOXED2RVAL(context, G_TYPE_MAIN_CONTEXT) : Qnil;
+    return BOXED2RVAL(context, G_TYPE_MAIN_CONTEXT);
 }
 
 static gboolean

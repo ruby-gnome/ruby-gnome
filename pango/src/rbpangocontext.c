@@ -3,8 +3,8 @@
 
   rbpangocontext.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 07:50:46 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -91,7 +91,7 @@ rcontext_get_font_description(self)
     VALUE self;
 {
     PangoFontDescription* ret = pango_context_get_font_description(_SELF(self));
-    return ret ? BOXED2RVAL(ret, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
+    return BOXED2RVAL(ret, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE
@@ -140,7 +140,7 @@ rcontext_get_matrix(self)
     VALUE self;
 {
     const PangoMatrix* matrix = pango_context_get_matrix(_SELF(self));
-    return matrix ? BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX) : Qnil;
+    return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
 }
 
 static VALUE

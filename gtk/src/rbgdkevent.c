@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/15 07:28:02 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -140,7 +140,7 @@ gdkevent ## type ## _ ## name (self)\
     VALUE self;\
 {\
     GdkAtom atom = get_gdkevent(self)->type.name;\
-    return atom ? BOXED2RVAL(atom, GDK_TYPE_ATOM) : Qnil;\
+    return BOXED2RVAL(atom, GDK_TYPE_ATOM);\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (self, val)\

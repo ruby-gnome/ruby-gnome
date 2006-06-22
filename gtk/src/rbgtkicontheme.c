@@ -3,8 +3,8 @@
 
   rbgtkicontheme.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/11 16:15:54 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -124,7 +124,7 @@ it_lookup_icon(self, icon_name, size, flags)
                                                    RVAL2CSTR(icon_name),
                                                    NUM2INT(size),
                                                    RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS));
-    return info ? BOXED2RVAL(info, GTK_TYPE_ICON_INFO) : Qnil;
+    return BOXED2RVAL(info, GTK_TYPE_ICON_INFO);
 }
 
 static VALUE

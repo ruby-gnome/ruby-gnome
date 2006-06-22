@@ -3,8 +3,8 @@
 
   rbpangolayout.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/14 07:10:51 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -119,7 +119,7 @@ layout_get_font_description(self)
     VALUE self;
 {
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
-    return desc ? BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
+    return BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
 #endif
 

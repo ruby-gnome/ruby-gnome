@@ -3,8 +3,8 @@
 
   rbgtkstyle.c -
 
-  $Author: ktou $
-  $Date: 2005/07/07 13:06:27 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -97,7 +97,7 @@ style_lookup_icon_set(self, stock_id)
     }
     
     ret = gtk_style_lookup_icon_set(_SELF(self), id);
-    return ret ? BOXED2RVAL(ret, GTK_TYPE_ICON_SET) : Qnil;
+    return BOXED2RVAL(ret, GTK_TYPE_ICON_SET);
 }
 
 static VALUE
@@ -483,7 +483,7 @@ style_font_desc(self)
     VALUE self;
 {
     PangoFontDescription* desc = _SELF(self)->font_desc;
-    return desc ? BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
+    return BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE

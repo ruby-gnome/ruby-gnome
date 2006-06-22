@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -127,7 +127,7 @@ gaccelgrp_find(self)
     result = gtk_accel_group_find(_SELF(self),
                                   (GtkAccelGroupFindFunc)gaccelgrp_find_func,
                                   (gpointer)func);
-    return result ? BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY) : Qnil;
+    return BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY);
 }
 #endif
 

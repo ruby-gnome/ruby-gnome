@@ -3,8 +3,8 @@
 
   rbgtkiconview.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -57,7 +57,7 @@ iview_get_path_at_pos(self, x, y)
 {
     GtkTreePath* path = gtk_icon_view_get_path_at_pos(_SELF(self),
                                                       NUM2INT(x), NUM2INT(y));
-    return path ? BOXED2RVAL(path, GTK_TYPE_TREE_PATH) : Qnil;
+    return BOXED2RVAL(path, GTK_TYPE_TREE_PATH);
 }
 
 static void

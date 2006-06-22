@@ -3,8 +3,8 @@
 
   rbpangoscript.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -26,7 +26,7 @@ rbpango_script_get_sample_language(self)
     VALUE self;
 {
     PangoLanguage* lang = pango_script_get_sample_language(_SELF(self));
-    return lang ? BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE) : Qnil;
+    return BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE);
 }
 
 /* Move to Pango::Language

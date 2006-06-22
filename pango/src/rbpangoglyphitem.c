@@ -3,8 +3,8 @@
 
   rbpangoglyphitem.c -
 
-  $Author: lrz $
-  $Date: 2005/11/29 12:43:19 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -56,7 +56,7 @@ glyph_item_get_item(self)
     VALUE self;
 {
     PangoItem* item = _SELF(self)->item;
-    return item ? BOXED2RVAL(item, PANGO_TYPE_ITEM) : Qnil;
+    return BOXED2RVAL(item, PANGO_TYPE_ITEM);
 }
 
 static VALUE
@@ -64,7 +64,7 @@ glyph_item_get_glyphs(self)
     VALUE self;
 {
     PangoGlyphString* glyphs = _SELF(self)->glyphs;
-    return glyphs ? BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING) : Qnil;
+    return BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
 }
 
 static VALUE

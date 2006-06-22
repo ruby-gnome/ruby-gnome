@@ -3,8 +3,8 @@
 
   rbpangorenderer.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/17 16:53:36 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2005 Masao Mutoh 
 ************************************************/
@@ -149,7 +149,7 @@ renderer_get_color(self, part)
 #else
     PangoColor* color = pango_renderer_get_color(_SELF(self),NUM2INT(part));
 #endif
-    return color ? BOXED2RVAL(color, PANGO_TYPE_COLOR) : Qnil;
+    return BOXED2RVAL(color, PANGO_TYPE_COLOR);
 }
 
 static VALUE

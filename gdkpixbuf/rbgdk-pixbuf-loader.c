@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf-loader.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 17:46:34 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:53 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2003 Geoff Youngs
@@ -56,7 +56,7 @@ loader_get_format(self)
     VALUE self;
 {
     GdkPixbufFormat* format = gdk_pixbuf_loader_get_format(_SELF(self));
-    return format ? BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT) : Qnil;
+    return BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT);
 }
 #endif
 

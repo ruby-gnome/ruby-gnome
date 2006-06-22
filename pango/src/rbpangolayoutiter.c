@@ -3,8 +3,8 @@
 
   rbpangolayoutiter.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -100,7 +100,7 @@ layout_iter_get_run(self)
     VALUE self;
 {
     PangoLayoutRun* run = pango_layout_iter_get_run(_SELF(self));
-    return run ? BOXED2RVAL(run, PANGO_TYPE_GLYPH_ITEM) : Qnil;
+    return BOXED2RVAL(run, PANGO_TYPE_GLYPH_ITEM);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbpangofont.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -35,7 +35,7 @@ font_get_coverage(self, language)
 {
     PangoCoverage* c = pango_font_get_coverage(_SELF(self), 
                                                (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE));
-    return c ? BOXED2RVAL(c, PANGO_TYPE_COVERAGE) : Qnil;
+    return BOXED2RVAL(c, PANGO_TYPE_COVERAGE);
 }
 
 static VALUE

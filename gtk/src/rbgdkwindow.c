@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -409,7 +409,7 @@ gdkwin_get_update_area(self)
     VALUE self;
 {
     GdkRegion* ret = gdk_window_get_update_area(_SELF(self));
-    return ret ? BOXED2RVAL(ret, GDK_TYPE_REGION) : Qnil; 
+    return BOXED2RVAL(ret, GDK_TYPE_REGION); 
 }
 
 static VALUE

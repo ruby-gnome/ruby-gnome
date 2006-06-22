@@ -3,8 +3,8 @@
 
   rbgtkiconfactory.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -44,7 +44,7 @@ ifactory_lookup(self, id)
     GtkIconSet *icon_set;
 
     icon_set = gtk_icon_factory_lookup(_SELF(self), RVAL2CSTR(id));
-    return icon_set ? BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET) : Qnil;
+    return BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET);
 }
 
 static VALUE
@@ -54,7 +54,7 @@ ifactory_lookup_default(self, id)
     GtkIconSet *icon_set;
 
     icon_set = gtk_icon_factory_lookup_default(RVAL2CSTR(id));
-    return icon_set ? BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET) : Qnil;
+    return BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET);
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtkdrag.c -
 
   $Author: ggc $
-  $Date: 2005/09/11 15:12:06 $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -107,7 +107,7 @@ gtkdrag_dest_get_target_list(self, widget)
     VALUE self, widget;
 {
     GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
-    return list ? BOXED2RVAL(list, GTK_TYPE_TARGET_LIST) : Qnil;
+    return BOXED2RVAL(list, GTK_TYPE_TARGET_LIST);
 }
 
 static VALUE

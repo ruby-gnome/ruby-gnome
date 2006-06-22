@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: ktou $
-  $Date: 2006/05/27 01:44:07 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:53 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -101,7 +101,7 @@ mc_find_source(self, source_id)
     VALUE self, source_id;
 {
     GSource* src = g_main_context_find_source_by_id(_SELF(self), NUM2UINT(source_id));
-    return src ? BOXED2RVAL(src, G_TYPE_SOURCE) : Qnil;
+    return BOXED2RVAL(src, G_TYPE_SOURCE);
 }
 
 /*

@@ -3,8 +3,8 @@
 
   rbgtkrcstyle.c -
 
-  $Author: mutoh $
-  $Date: 2003/05/23 18:47:57 $
+  $Author: ggc $
+  $Date: 2006/06/22 19:52:54 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -64,7 +64,7 @@ rcstyle_font_desc(self)
     VALUE self;
 {
     PangoFontDescription* desc = _SELF(self)->font_desc;
-    return desc ? BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION) : Qnil;
+    return BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE
