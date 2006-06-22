@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: mutoh $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2006/06/22 16:50:30 $
  *
  *****************************************************************************/
 
@@ -214,6 +214,8 @@ Init_gnomevfs(void)
 	Init_gnomevfs_file(m_gvfs);
 	Init_gnomevfs_monitor(m_gvfs);
 	Init_gnomevfs_application_registry(m_gvfs);
+        Init_gnomevfs_mime(m_gvfs);
+        Init_gnomevfs_mime_application(m_gvfs);
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/

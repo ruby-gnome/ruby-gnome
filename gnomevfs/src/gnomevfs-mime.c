@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: mutoh $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2006/06/22 16:50:30 $
  *
  *****************************************************************************/
 
@@ -490,7 +490,9 @@ Init_gnomevfs_mime(m_gvfs)
 	rb_define_module_function(gvfs_mime, "reset", mime_reset, 0);
 
         G_DEF_CLASS(GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE, "ActionType", gvfs_mime);
-        G_DEF_CONSTANTS(gvfs_mime, GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE, "GNOME_VFS_MIME_");
+        G_DEF_CONSTANTS(gvfs_mime, GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE,
+                        "GNOME_VFS_MIME_ACTION_TYPE_");
+
 }
 
 /* vim: set sts=0 sw=8 ts=8: *************************************************/
