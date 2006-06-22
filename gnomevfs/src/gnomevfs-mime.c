@@ -20,7 +20,7 @@
  *
  * $Author: mutoh $
  *
- * $Date: 2006/06/22 16:50:30 $
+ * $Date: 2006/06/22 16:55:26 $
  *
  *****************************************************************************/
 
@@ -491,7 +491,7 @@ Init_gnomevfs_mime(m_gvfs)
 
         G_DEF_CLASS(GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE, "ActionType", gvfs_mime);
         G_DEF_CONSTANTS(gvfs_mime, GNOME_VFS_TYPE_VFS_MIME_ACTION_TYPE,
-                        "GNOME_VFS_MIME_ACTION_TYPE_");
+                        "GNOME_VFS_MIME_");
 
 }
 
