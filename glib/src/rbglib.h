@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: ssimons $
-  $Date: 2006/05/26 18:57:44 $
+  $Author: mutoh $
+  $Date: 2006/06/27 16:40:45 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -22,8 +22,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define RBGLIB_MAJOR_VERSION 0
-#define RBGLIB_MINOR_VERSION 14
-#define RBGLIB_MICRO_VERSION 1
+#define RBGLIB_MINOR_VERSION 15
+#define RBGLIB_MICRO_VERSION 0
 
 #ifndef StringValue
 #define StringValue(s) ((s) = (TYPE(s) == T_STRING) ? (s) : rb_str_to_str(s))
