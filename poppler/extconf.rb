@@ -13,8 +13,7 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-# PKGConfig.have_package(PACKAGE_ID, 0, 5, 2) or exit 1
-PKGConfig.have_package(PACKAGE_ID) or exit 1
+PKGConfig.have_package(PACKAGE_ID, 0, 5, 2) or exit 1
 setup_win32(PACKAGE_NAME)
 
 if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
