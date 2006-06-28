@@ -24,11 +24,11 @@ PKGConfig.have_package(PACKAGE_ID)
 setup_win32(PACKAGE_NAME)
 
 mozpath = PKGConfig.libs_only_L(PACKAGE_ID)
-mozpath.sub!(/-L/, "")
+mozpath.strip!.sub!(/^-L/, "")
 
 if mozpath 
   # please comment the CFLAGS line if you don't want a default comp_path
-  $CFLAGS << "'-DDEFAULT_MOZILLA_FIVE_HOME=\"" << mozpath << "\"'"
+  $CFLAGS << " -DDEFAULT_MOZILLA_FIVE_HOME='\"" << mozpath << "\"' "
   $LDFLAGS << " -Wl,-rpath " << mozpath
 else
   $stderr.puts "${PACKAGE_ID}.pc cannot be found."

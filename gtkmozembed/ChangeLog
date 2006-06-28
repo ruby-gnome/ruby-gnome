@@ -1,3 +1,7 @@
+2006-06-28  Mirko Maischberger <mirko@lilik.it>
+	In response to #1511917
+	* extconf.rb: mozpath stripped.
+
 2006-06-17  Masao Mutoh <mutoh@highway.ne.jp>
 	* sample/ruby-gecko.rb: Remove Gtk.init.
 
