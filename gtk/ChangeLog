@@ -1,3 +1,8 @@
+2006-06-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c: Move poll funcs to glib/src/rbglib_mainloop.c.
+        And fixed the bug #1385468.
+
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/gtk2.rb, src/lib/gtk2/base.rb: samples/*.rb:
