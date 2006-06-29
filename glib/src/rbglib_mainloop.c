@@ -4,9 +4,9 @@
   rbglib_mainloop.c -
 
   $Author: mutoh $
-  $Date: 2005/11/03 11:53:16 $
+  $Date: 2006/06/29 18:16:05 $
 
-  Copyright (C) 2005 Masao Mutoh
+  Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -43,6 +43,7 @@ static VALUE rbglib_main_threads;
 # undef USE_POLL_FUNC
 #endif
 
+/* This function is very important to work signals with Ruby. */
 #ifdef USE_POLL_FUNC
 
 static gint 
@@ -94,7 +95,17 @@ rbglib_poll (GPollFD *fds,
     return ready;
 }
 
+static void
+restore_poll_func(VALUE data)
+{
+    if (g_main_context_get_poll_func(NULL) == (GPollFunc)rbglib_poll) {
+        g_main_context_set_poll_func(NULL, default_poll_func);
+    }
+}
+
 #else /* !USE_POLL_FUNC */
+
+static guint idle_id = 0;
 
 static gboolean
 idle(gpointer data)
@@ -110,10 +121,17 @@ idle(gpointer data)
     return TRUE;
 }
 
-static void
-idle_remove(VALUE data)
+void
+rbg_remove_internal_poll_func(VALUE data)
 {
-    g_source_remove(NUM2UINT(data));
+    g_source_remove(idle_id);
+}
+
+
+void
+rbg_set_internal_poll_func(void)
+{
+	idle_id = g_idle_add((GSourceFunc)idle, (gpointer)NULL);
 }
 
 #endif /* !USE_POLL_FUNC */
@@ -200,8 +218,11 @@ Init_glib_main_loop()
     rbglib_main_threads = rb_ary_new();
 
 #ifdef USE_POLL_FUNC
+    default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, (GPollFunc)rbglib_poll);
+    rb_set_end_proc(restore_poll_func, Qnil);
 #else
-    rb_set_end_proc(idle_remove, UINT2NUM(g_idle_add((GSourceFunc)idle, 0)));
+    rbg_set_internal_poll_func();
+    rb_set_end_proc(rbg_remove_internal_poll_func, Qnil);
 #endif
 }

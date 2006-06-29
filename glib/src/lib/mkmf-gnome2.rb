@@ -3,7 +3,7 @@
 #
 # Extended mkmf for Ruby-GNOME2 and Ruby/GLib based libraries.
 #
-# Copyright(C) 2003-2006 Ruby-GNOME2 Project.
+# Copyright(C) 2003-2005 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same
 # license of Ruby-GNOME2.
@@ -37,6 +37,7 @@ end
 include_path = nil
 if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   include_path = (ENV['GTK_BASEPATH'] + "\\INCLUDE").gsub("\\", "/")
+#  $hdrdir += " -I#{include_path} "
   $CFLAGS += " -I#{include_path} " 
 end
 

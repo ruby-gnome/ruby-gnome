@@ -1,3 +1,8 @@
+2006-06-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_mainloop.c, rbgobject.h, glib2.def: Improve to support
+	Win32. rbg_(set|remove)_internal_poll_func are externed.
+
 2006-06-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf-gnome2.rb: Fixed wrong include path.

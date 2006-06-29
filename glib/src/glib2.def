@@ -51,6 +51,8 @@ EXPORTS
 	rbg_cstr2rval
 	rbg_cstr2rval_with_free
 	rbg_string_value_ptr
+        rbg_set_internal_poll_func
+        rbg_remove_internal_poll_func
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary
