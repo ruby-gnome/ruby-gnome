@@ -3,13 +3,13 @@
   gnome-canvas.rb - Affine transformation sample using Ruby/GnomeCanvas2.
 
   $Author: mutoh $
-  $Date: 2003/02/01 16:55:26 $
+  $Date: 2006/06/29 18:24:23 $
 
+  Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
 
 =end
 
-require 'libart2'
 require 'gnomecanvas2'
 
 class AffineApp < Gtk::Window
@@ -117,7 +117,6 @@ class AffineApp < Gtk::Window
 end
 
 def main
-  Gtk.init
   AffineApp.new
   Gtk::main
 end
