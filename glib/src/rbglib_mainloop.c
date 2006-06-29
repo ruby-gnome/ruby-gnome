@@ -4,7 +4,7 @@
   rbglib_mainloop.c -
 
   $Author: mutoh $
-  $Date: 2006/06/29 18:16:05 $
+  $Date: 2006/06/29 18:31:32 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -45,6 +45,8 @@ static VALUE rbglib_main_threads;
 
 /* This function is very important to work signals with Ruby. */
 #ifdef USE_POLL_FUNC
+
+static GPollFunc default_poll_func;
 
 static gint 
 rbglib_poll (GPollFD *fds,
