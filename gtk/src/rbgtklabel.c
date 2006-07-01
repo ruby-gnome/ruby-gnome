@@ -4,7 +4,7 @@
   rbgtklabel.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 19:02:05 $
+  $Date: 2006/07/01 09:08:34 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -99,6 +99,9 @@ static VALUE
 label_get_text(self)
     VALUE self;
 {
+    g_print("get_text start\n");
+    _SELF(self);
+    g_print("get_text 2\n");
     return CSTR2RVAL(gtk_label_get_text(_SELF(self)));
 }
 

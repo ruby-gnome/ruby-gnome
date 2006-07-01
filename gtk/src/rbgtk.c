@@ -4,9 +4,9 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2006/06/29 18:21:53 $
+  $Date: 2006/07/01 09:08:34 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi

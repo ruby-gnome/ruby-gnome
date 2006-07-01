@@ -1,7 +1,16 @@
+2006-07-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmain.c: Show error messages when initializing GTK+.
+	bug #1328554.
+
 2006-06-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtk.c: Move poll funcs to glib/src/rbglib_mainloop.c.
         And fixed the bug #1385468.
+
+2006-06-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/gtk2/base.rb: Added header part.
 
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
