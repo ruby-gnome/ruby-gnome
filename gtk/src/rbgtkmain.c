@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2006/07/01 09:08:34 $
+  $Date: 2006/07/01 09:50:11 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -130,9 +130,7 @@ gtk_m_init(argc, argv, self)
 
     {
         gboolean is_initialized;
-#if GTK_CHECK_VERSION(2,6,0)
         GError* error = NULL;
-#endif
         /* Gdk modifies sighandlers, sigh */
 #ifdef NT
         RETSIGTYPE (*sigfunc[3])();
