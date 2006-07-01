@@ -3,8 +3,8 @@
 
   rbrsvg.c -
 
-  $Author: ktou $
-  $Date: 2006/06/06 15:33:52 $
+  $Author: mutoh $
+  $Date: 2006/07/01 09:54:14 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -618,7 +618,6 @@ static VALUE
 rb_rsvg_pixbuf_from_file_at_zoom_ex(VALUE self, VALUE file_name,
                                     VALUE x_zoom, VALUE y_zoom)
 {
-    VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
     GError *error = NULL;
 
@@ -639,6 +638,7 @@ rb_rsvg_pixbuf_from_file_at_max_size_ex(VALUE self, VALUE file_name,
 {
     GdkPixbuf *pixbuf;
     GError *error = NULL;
+    VALUE rb_pixbuf;
 
     pixbuf = rsvg_pixbuf_from_file_at_max_size_ex(_SELF(self),
                                                   RVAL2CSTR(file_name),
