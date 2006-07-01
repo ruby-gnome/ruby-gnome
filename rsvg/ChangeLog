@@ -1,3 +1,8 @@
+2006-07-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbrsvg.c (rb_rsvg_pixbuf_from_file_at_zoom_ex): fixed a
+	memory leak.
+
 2006-07-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbrsvg.c (rb_rsvg_pixbuf_from_file_at_max_size_ex): Fix a
