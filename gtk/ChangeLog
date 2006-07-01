@@ -1,3 +1,7 @@
+2006-07-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtklabel.c: removed debug codes.
+
 2006-07-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmain.c: Show error messages when initializing GTK+.
