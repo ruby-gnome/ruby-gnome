@@ -2,7 +2,7 @@
 
 	* rbglade.c, lib/libglade2.rb:  signal_autoconnect_full is 
 	called even if there is no given block when GladeXML is 
-	initialized. Bug #[1518384]
+	initialized. Suggested by O. Murat Homurlu, Bug #[1518384]
 	
 
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
