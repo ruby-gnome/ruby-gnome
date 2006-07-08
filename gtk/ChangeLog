@@ -1,5 +1,10 @@
 2006-07-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkpagesetupunixdialog.c: implemented
+	GtkPageSetupUnixDialog bindings.
+	* extconf.rb: detected whether GtkPageSetupUnixDialog is available
+	or not.
+	
 	* src/rbgtkprintunixdialog.c: implemented GtkPrintUnixDialog bindings.
 	* extconf.rb: detected whether GtkPrintUnixDialog is available or not.
 

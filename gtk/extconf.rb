@@ -56,6 +56,7 @@ end
 
 PKGConfig.have_package('gtk+-unix-print-2.0')
 have_header("gtk/gtkprintunixdialog.h")
+have_header("gtk/gtkpagesetupunixdialog.h")
 
 PKGConfig.have_package('cairo')
 if have_header('rb_cairo.h')
