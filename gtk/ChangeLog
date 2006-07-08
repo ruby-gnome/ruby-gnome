@@ -1,4 +1,11 @@
+2006-07-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkprintoperation.c: implemented GtkPrintOperation,
+	GtkPrintStatus, GtkPrintOperationResult and
+	GtkPrintOperationAction.
+
 2006-07-08  Pascal Terjan  <pterjan@linuxfr.org>
+
 	* src/rbgtkwindow.c: Added Gtk::Window#group
 
 2006-07-08  Kouhei Sutou  <kou@cozmixng.org>
