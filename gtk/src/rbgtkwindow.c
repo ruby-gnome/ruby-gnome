@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: pterjan $
+  $Date: 2006/07/08 12:32:53 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -419,6 +419,11 @@ gboolean    gtk_window_get_focus_on_map     (GtkWindow *window);
 
 void        gtk_window_set_urgency_hint     (GtkWindow *window,
                                              gboolean setting);
+
+gboolean    gtk_window_get_deletable        (GtkWindow *window);
+
+void        gtk_window_set_deletable        (GtkWindow *window,
+                                             gboolean setting);
 */
 
 
@@ -526,6 +531,15 @@ gwin_get_type_hint(self)
 {
     return GENUM2RVAL(gtk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gwin_get_group(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_window_get_group(_SELF(self)));
+}
+#endif
 
 static VALUE
 gwin_move(self, x, y)
@@ -762,6 +776,7 @@ Init_gtk_window()
     rb_define_method(gWindow, "size", gwin_get_size, 0);
     rb_define_method(gWindow, "transient_for", gwin_get_transient_for, 0);
     rb_define_method(gWindow, "type_hint", gwin_get_type_hint, 0);
+    rb_define_method(gWindow, "group", gwin_get_group, 0);
     rb_define_method(gWindow, "move", gwin_move, 2);
     rb_define_method(gWindow, "parse_geometry", gwin_parse_geometry, 1);
     rb_define_method(gWindow, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
