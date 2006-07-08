@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2006/07/08 19:31:18 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -492,6 +492,19 @@ widget_shape_combine_mask(self, shape_mask, offset_x, offset_y)
                                   NUM2INT(offset_y));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+widget_input_shape_combine_mask(self, shape_mask, offset_x, offset_y)
+    VALUE self, shape_mask, offset_x, offset_y;
+{
+    gtk_widget_input_shape_combine_mask(_SELF(self),
+                                        GDK_BITMAP(RVAL2GOBJ(shape_mask)),
+                                        NUM2INT(offset_x),
+                                        NUM2INT(offset_y));
+    return self;
+}
+#endif
 
 static VALUE
 widget_path(self)
@@ -1033,6 +1046,22 @@ widget_remove_mnemonic_label(self, label)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+widget_get_action(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_action(_SELF(self)));
+}
+
+static VALUE
+widget_is_composited(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gtk_widget_is_composited(_SELF(self)));
+}
+#endif
+
 static VALUE
 widget_window(self)
     VALUE self;
@@ -1206,6 +1235,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_direction", widget_set_direction, 1);
     rb_define_method(gWidget, "direction", widget_get_direction, 0);
     rb_define_method(gWidget, "shape_combine_mask", widget_shape_combine_mask, 3);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gWidget, "input_shape_combine_mask", widget_input_shape_combine_mask, 3);
+#endif
     rb_define_method(gWidget, "path", widget_path, 0);
     rb_define_method(gWidget, "class_path", widget_class_path, 0);
     rb_define_method(gWidget, "composite_name", widget_get_composite_name, 0);
@@ -1253,6 +1285,10 @@ Init_gtk_widget()
     rb_define_method(gWidget, "mnemonic_labels", widget_list_mnemonic_labels, 0);
     rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
     rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
+#endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gWidget, "action", widget_get_action, 0);
+    rb_define_method(gWidget, "composited?", widget_is_composited, 0);
 #endif
     rb_define_method(gWidget, "window", widget_window, 0);
     rb_define_method(gWidget, "set_window", widget_set_window, 1);
