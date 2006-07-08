@@ -4,7 +4,7 @@
   rbgtkprintunixdialog.c -
 
   $Author: ktou $
-  $Date: 2006/07/08 08:36:07 $
+  $Date: 2006/07/08 08:51:58 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -53,7 +53,7 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
 #endif
 
 void
-Init_gtk_printunixdialog()
+Init_gtk_print_unix_dialog()
 {
 #ifdef HAVE_GTK_GTKPRINTUNIXDIALOG_H
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
