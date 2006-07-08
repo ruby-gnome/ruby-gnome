@@ -4,7 +4,7 @@
   rbglade.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 07:42:50 $
+  $Date: 2006/07/08 16:45:15 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -169,8 +169,10 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
         G_INITIALIZE(self, xml);
         if (rb_block_given_p()){
             rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
-            glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
+        } else {
+            rb_iv_set(self, "@handler_proc", Qnil);
         }
+        glade_xml_signal_autoconnect_full(xml, xml_connect, (gpointer)self);
     } else {
         rb_raise(rb_eIOError, "could not load glade file %s", RVAL2CSTR(text));
     }

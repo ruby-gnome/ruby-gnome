@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.12 2004/09/23 00:21:06 mutoh Exp $
+  $Id: libglade2.rb,v 1.13 2006/07/08 16:45:15 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -25,6 +25,7 @@ class GladeXML
   end
 
   def connect(source, target, signal, handler, data, after = false)
+    @handler_proc ||= Proc.new{}
     handler = canonical_handler(handler)
     if target
       signal_proc = target.method(handler)
