@@ -54,6 +54,9 @@ if target=="x11"
   have_func("XGetErrorText")
 end
 
+PKGConfig.have_package('gtk+-unix-print-2.0')
+have_header("gtk/gtkprintunixdialog.h")
+
 PKGConfig.have_package('cairo')
 if have_header('rb_cairo.h')
   if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM

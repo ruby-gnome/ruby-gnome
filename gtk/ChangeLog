@@ -1,3 +1,8 @@
+2006-07-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkprintunixdialog.c: implemented GtkPrintUnixDialog bindings.
+	* extconf.rb: detected whether GtkPrintUnixDialog is available or not.
+
 2006-07-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtklabel.c: removed debug codes.
