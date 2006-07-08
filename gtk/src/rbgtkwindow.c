@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: pterjan $
-  $Date: 2006/07/08 12:32:53 $
+  $Date: 2006/07/08 19:46:25 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -776,7 +776,9 @@ Init_gtk_window()
     rb_define_method(gWindow, "size", gwin_get_size, 0);
     rb_define_method(gWindow, "transient_for", gwin_get_transient_for, 0);
     rb_define_method(gWindow, "type_hint", gwin_get_type_hint, 0);
+#if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(gWindow, "group", gwin_get_group, 0);
+#endif
     rb_define_method(gWindow, "move", gwin_move, 2);
     rb_define_method(gWindow, "parse_geometry", gwin_parse_geometry, 1);
     rb_define_method(gWindow, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
