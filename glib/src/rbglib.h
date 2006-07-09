@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2006/06/27 16:40:45 $
+  $Author: ktou $
+  $Date: 2006/07/09 03:28:28 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -48,6 +48,7 @@ typedef int GPid;
 #endif
 
 #define RVAL2CSTR(v) (StringValuePtr(v))
+#define RVAL2CSTR2(v) (NIL_P(v) ? NULL : StringValuePtr(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 #define CSTR2RVAL2(s) (rbg_cstr2rval_with_free(s))
 

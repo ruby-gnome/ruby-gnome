@@ -1,3 +1,7 @@
+2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h (RVAL2CSTR2): added convenience macro.
+
 2006-06-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_mainloop.c, rbgobject.h, glib2.def: Improve to support
