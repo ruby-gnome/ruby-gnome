@@ -2,8 +2,6 @@
 
 	* src/rbgtkprintunixdialog.c: implemented GtkPrintCapabilities.
 
-	* src/rbgtkprintoperation.c: implemented GtkPrintError.
-
 	* src/rbgtkprintsettings.c: implemented GtkPrintSettings,
 	GtkPageOrientation, GtkPrintDuplex, GtkPrintQuality,
 	GtkPrintPages and GtkPageSet.
