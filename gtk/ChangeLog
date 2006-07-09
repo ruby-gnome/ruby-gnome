@@ -1,5 +1,8 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkprintoperationpreview.c: implemented
+	GtkPrintOperationPreview.
+
 	* src/rbgtkprintoperation.c: implemented GtkPrintError.
 
 	* src/rbgtkprintunixdialog.c: implemented GtkPrintCapabilities.
