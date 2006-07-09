@@ -4,7 +4,7 @@
   rbgtkprintsettings.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 08:56:56 $
+  $Date: 2006/07/09 14:08:33 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -12,10 +12,6 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
-
-#ifndef GTK_PAPER_SIZE
-#  define GTK_PAPER_SIZE(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAPER_SIZE, GtkPaperSize))
-#endif
 
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
@@ -51,12 +47,7 @@ ps_initialize(VALUE self)
 static VALUE
 ps_copy(VALUE self)
 {
-    VALUE rb_settings;
-    GtkPrintSettings *settings;
-    settings = gtk_print_settings_copy(_SELF(self));
-    rb_settings = GOBJ2RVAL(settings);
-    g_object_unref(settings);
-    return rb_settings;
+    return GOBJ2RVALU(gtk_print_settings_copy(_SELF(self)));
 }
 
 static VALUE

@@ -1,5 +1,11 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkprintsettings.c (ps_copy): use GOBJ2RVALU.
+	moved GTK_PAPER_SIZE to ...
+	* src/rbgtk.h: ... here.
+
+	* src/rbgtkpagesetup.c: implemented GtkPageSetup.
+
 	* src/rbgtkprintcontext.c
 	(pc_create_pango_context, pc_create_pango_layout): fixed memory
 	leaks.
