@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: ktou $
-  $Date: 2006/07/09 14:08:33 $
+  $Date: 2006/07/09 15:20:00 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -54,12 +54,6 @@
 #define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
 #ifndef GTK_TYPE_TARGET_LIST
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
-#endif
-
-#if GTK_CHECK_VERSION(2,10,0)
-#  ifndef GTK_PAPER_SIZE
-#    define GTK_PAPER_SIZE(obj)    (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_PAPER_SIZE, GtkPaperSize))
-#  endif
 #endif
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)

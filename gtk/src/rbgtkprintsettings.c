@@ -4,7 +4,7 @@
   rbgtkprintsettings.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 14:08:33 $
+  $Date: 2006/07/09 15:20:00 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -15,7 +15,7 @@
 
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
-#define RVAL2SIZE(o) (GTK_PAPER_SIZE(RVAL2GOBJ(o)))
+#define RVAL2SIZE(o) (RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
 
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 #define UNIT2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_UNIT))
