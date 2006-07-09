@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: ggc $
-  $Date: 2005/08/30 19:34:19 $
+  $Date: 2006/07/09 09:22:47 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -204,6 +204,12 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "NO", CSTR2SYM(GTK_STOCK_NO));
     rb_define_const(mGtkStock, "OK", CSTR2SYM(GTK_STOCK_OK));
     rb_define_const(mGtkStock, "OPEN", CSTR2SYM(GTK_STOCK_OPEN));
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_const(mGtkStock, "ORIENTATION_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_LANDSCAPE));
+    rb_define_const(mGtkStock, "ORIENTATION_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_PORTRAIT));
+    rb_define_const(mGtkStock, "ORIENTATION_REVERSE_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE));
+    rb_define_const(mGtkStock, "ORIENTATION_REVERSE_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT));
+#endif
     rb_define_const(mGtkStock, "PASTE", CSTR2SYM(GTK_STOCK_PASTE));
     rb_define_const(mGtkStock, "PREFERENCES", CSTR2SYM(GTK_STOCK_PREFERENCES));
     rb_define_const(mGtkStock, "PRINT", CSTR2SYM(GTK_STOCK_PRINT));
@@ -216,6 +222,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "REVERT_TO_SAVED", CSTR2SYM(GTK_STOCK_REVERT_TO_SAVED));
     rb_define_const(mGtkStock, "SAVE", CSTR2SYM(GTK_STOCK_SAVE));
     rb_define_const(mGtkStock, "SAVE_AS", CSTR2SYM(GTK_STOCK_SAVE_AS));
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_const(mGtkStock, "SELECT_ALL", CSTR2SYM(GTK_STOCK_SELECT_ALL));
+#endif
     rb_define_const(mGtkStock, "SELECT_COLOR", CSTR2SYM(GTK_STOCK_SELECT_COLOR));
     rb_define_const(mGtkStock, "SELECT_FONT", CSTR2SYM(GTK_STOCK_SELECT_FONT));
     rb_define_const(mGtkStock, "SORT_ASCENDING", CSTR2SYM(GTK_STOCK_SORT_ASCENDING));
