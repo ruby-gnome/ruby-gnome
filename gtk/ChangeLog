@@ -1,5 +1,7 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkprintunixdialog.c: implemented GtkPrintCapabilities.
+
 	* src/rbgtkprintoperation.c: implemented GtkPrintError.
 
 	* src/rbgtkprintsettings.c: implemented GtkPrintSettings,
