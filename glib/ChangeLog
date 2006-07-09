@@ -1,5 +1,10 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/glib2.def, src/rbgobject.c, src/rbgobject.h
+	(rbgobj_ruby_object_from_instance_with_unref):
+	added convenience function.
+	* src/rbglib.h (GOBJ2RVALU): added convenience macro.
+
 	* src/rbgobj_object.c: implemented GLib::InitiallyUnowned.
 
 	* src/rbglib.h (RVAL2CSTR2): added convenience macro.

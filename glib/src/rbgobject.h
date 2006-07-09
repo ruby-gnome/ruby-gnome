@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: mutoh $
-  $Date: 2006/06/29 18:16:05 $
+  $Author: ktou $
+  $Date: 2006/07/09 13:11:59 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -81,6 +81,7 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 
 #define RVAL2GOBJ(obj)  (rbgobj_instance_from_ruby_object(obj))
 #define GOBJ2RVAL(gobj) (rbgobj_ruby_object_from_instance(gobj))
+#define GOBJ2RVALU(gobj) (rbgobj_ruby_object_from_instance_with_unref(gobj))
 #define GVAL2RVAL(v)    (rbgobj_gvalue_to_rvalue(v))
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
@@ -119,6 +120,7 @@ extern void rbgobj_initialize_object(VALUE obj, gpointer cobj);
 extern gpointer rbgobj_instance_from_ruby_object(VALUE obj);
 extern VALUE rbgobj_ruby_object_from_instance(gpointer instance);
 extern VALUE rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc);
+extern VALUE rbgobj_ruby_object_from_instance_with_unref(gpointer instance);
 
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,

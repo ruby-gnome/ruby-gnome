@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 12:24:15 $
+  $Author: ktou $
+  $Date: 2006/07/09 13:11:59 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -113,6 +113,15 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
             return Qnil;
         }
     }
+}
+
+VALUE
+rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
+{
+    VALUE result = rbgobj_ruby_object_from_instance(instance);
+    if (!NIL_P(result))
+        g_object_unref(instance);
+    return result;
 }
 
 /**********************************************************************/
