@@ -4,7 +4,7 @@
   rbgtkprintoperation.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 06:12:41 $
+  $Date: 2006/07/09 06:23:02 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -141,6 +141,9 @@ Init_gtk_print_operation()
     G_DEF_CLASS(GTK_TYPE_PRINT_STATUS, "PrintStatus", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_ACTION,"PrintOperationAction", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "PrintOperationResult", mGtk);
+
+    G_DEF_ERROR(GTK_PRINT_ERROR, "PrintError", mGtk, rb_eRuntimeError,
+                GTK_TYPE_PRINT_ERROR);
 
     rb_define_method(gPrintOperation, "initialize", po_initialize, 0);
     rb_define_method(gPrintOperation, "run", po_run, -1);
