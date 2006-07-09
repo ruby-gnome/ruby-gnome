@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: ggc $
-  $Date: 2006/07/08 19:31:18 $
+  $Author: ktou $
+  $Date: 2006/07/09 13:20:06 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -614,7 +614,7 @@ static VALUE
 widget_create_pango_context(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_widget_create_pango_context(_SELF(self)));
+    return GOBJ2RVALU(gtk_widget_create_pango_context(_SELF(self)));
 }
 
 static VALUE
@@ -632,8 +632,7 @@ widget_create_pango_layout(argc, argv, self)
 {
     VALUE text;
     rb_scan_args(argc, argv, "01", &text);
-    return GOBJ2RVAL(gtk_widget_create_pango_layout(_SELF(self), 
-                                                    NIL_P(text) ? NULL : RVAL2CSTR(text)));
+    return GOBJ2RVALU(gtk_widget_create_pango_layout(_SELF(self), RVAL2CSTR2(text)));
 }
 
 static VALUE
@@ -644,9 +643,9 @@ widget_render_icon(argc, argv, self)
 {
     VALUE stock_id, size, detail;
     rb_scan_args(argc, argv, "21", &stock_id, &size, &detail);
-    return GOBJ2RVAL(gtk_widget_render_icon(_SELF(self), rb_id2name(SYM2ID(stock_id)),
-                                            RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
-                                            NIL_P(detail) ? NULL : RVAL2CSTR(detail)));
+    return GOBJ2RVALU(gtk_widget_render_icon(_SELF(self), rb_id2name(SYM2ID(stock_id)),
+                                             RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
+                                             RVAL2CSTR2(detail)));
 }
 
 static VALUE

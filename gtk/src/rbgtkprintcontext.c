@@ -4,7 +4,7 @@
   rbgtkprintcontext.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 12:30:07 $
+  $Date: 2006/07/09 13:20:06 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -66,13 +66,13 @@ pc_get_pango_fontmap(VALUE self)
 static VALUE
 pc_create_pango_context(VALUE self)
 {
-    return GOBJ2RVAL(gtk_print_context_create_pango_context(_SELF(self)));
+    return GOBJ2RVALU(gtk_print_context_create_pango_context(_SELF(self)));
 }
 
 static VALUE
 pc_create_pango_layout(VALUE self)
 {
-    return GOBJ2RVAL(gtk_print_context_create_pango_layout(_SELF(self)));
+    return GOBJ2RVALU(gtk_print_context_create_pango_layout(_SELF(self)));
 }
 
 /* Needed for preview implementations */

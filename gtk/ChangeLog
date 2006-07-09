@@ -1,5 +1,13 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkprintcontext.c
+	(pc_create_pango_context, pc_create_pango_layout): fixed memory
+	leaks.
+
+	* src/rbgtkwidget.c (widget_render_icon)
+	(widget_create_pango_layout, widget_create_pango_context): fixed
+	memory leaks.
+
 	* src/rbgtkprintcontext.c: implemented GtkPrintContext.
 
 	* src/rbgtkprintunixdialog.c: set_* method returns self.
