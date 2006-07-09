@@ -3,8 +3,8 @@
 
   rbgtktreestore.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: pterjan $
+  $Date: 2006/07/09 17:11:55 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -150,6 +150,94 @@ tstore_insert_after(self, parent, sibling)
     return ret;
 }
 
+#if GTK_CHECK_VERSION(2,10,0)
+
+/* The 2 following functions where implemented as TreeStore#insert_with_values 
+   which will use a Hash instead of pairs of parameters
+
+void        gtk_tree_store_insert_with_values
+                                            (GtkTreeStore *tree_store,
+                                             GtkTreeIter *iter,
+                                             GtkTreeIter *parent,
+                                             gint position,
+                                             ...);
+
+void        gtk_tree_store_insert_with_valuesv
+                                            (GtkTreeStore *tree_store,
+                                             GtkTreeIter *iter,
+                                             GtkTreeIter *parent,
+                                             gint position,
+                                             gint *columns,
+                                             GValue *values,
+                                             gint n_values);
+
+*/
+
+static VALUE
+tstore_insert_with_values(self, parent, position, values)
+    VALUE self, parent, position, values;
+{
+    VALUE ret;
+    GtkTreeIter iter;
+    GtkTreeStore* model = _SELF(self);
+    gint *c_columns;
+    GValue *c_values;
+    long size, i;
+
+    size = NUM2INT(rb_funcall(values, rb_intern("size"), 0));
+    c_columns = ALLOCA_N(gint, size);
+    c_values = ALLOCA_N(GValue, size);
+
+    if(TYPE(values)==T_ARRAY) {
+      for(i=0; i<size; i++) {
+        c_columns[i] = i;
+        GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                                                     c_columns[i]);
+        
+        GValue gval = {0,};
+        g_value_init(&gval, gtype);
+        rbgobj_rvalue_to_gvalue(rb_ary_shift(values), &gval);
+        c_values[i] = gval;
+      }
+    } else if(TYPE(values)==T_HASH) {
+      VALUE r_columns;
+      r_columns = rb_funcall(values, rb_intern("keys"), 0);
+      
+      for(i=0; i<size; i++) {
+        c_columns[i] = NUM2INT (rb_ary_entry(r_columns, i));
+
+        GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                                                     c_columns[i]);
+        
+        GValue gval = {0,};
+        g_value_init(&gval, gtype);
+        rbgobj_rvalue_to_gvalue(rb_hash_aref(values, INT2NUM(c_columns[i])), &gval);
+        c_values[i] = gval;
+      }
+    } else {
+      rb_raise(rb_eArgError, "values must be of type T_HASH or T_ARRAY");
+    }
+
+    gtk_tree_store_insert_with_valuesv(model, &iter,
+                                       NIL_P(parent) ? NULL : RVAL2ITR(parent),
+                                       NUM2INT(position),
+                                       c_columns,
+                                       c_values,
+                                       size);
+    iter.user_data3 = model;
+
+    ret = ITR2RVAL(&iter);
+    G_CHILD_ADD(self, ret);
+
+    for(i=0; i<size; i++) {
+      G_CHILD_ADD(ret, rbgobj_gvalue_to_rvalue(&(c_values[i])));
+      g_value_unset(&(c_values[i]));
+    }
+
+    return ret;
+}
+#endif
+
 static VALUE
 tstore_prepend(self, parent)
     VALUE self, parent;
@@ -269,6 +357,9 @@ Init_gtk_tree_store()
     rb_define_method(ts, "insert", tstore_insert, 2);
     rb_define_method(ts, "insert_before", tstore_insert_before, 2);
     rb_define_method(ts, "insert_after", tstore_insert_after, 2);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(ts, "insert_with_values", tstore_insert_with_values, 3);
+#endif
     rb_define_method(ts, "prepend", tstore_prepend, 1);
     rb_define_method(ts, "append", tstore_append, 1);
     rb_define_method(ts, "ancestor?", tstore_is_ancestor, 2);

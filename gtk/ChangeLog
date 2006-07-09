@@ -1,3 +1,7 @@
+2006-07-10  Pascal Terjan  <pterjan@linuxfr.org>
+
+	* src/rbgtktreestore.c: Added Gtk::TreeStore#insert_with_values
+
 2006-07-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkprintsettings.c, src/rbgtkpagesetup.c (RVAL2SIZE):
