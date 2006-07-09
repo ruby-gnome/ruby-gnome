@@ -4,7 +4,7 @@
   rbgtkpagesetupunixdialog.c -
 
   $Author: ktou $
-  $Date: 2006/07/08 08:50:07 $
+  $Date: 2006/07/09 08:56:56 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -36,7 +36,7 @@ psud_set_page_setup(VALUE self, VALUE page_setup)
 {
     gtk_page_setup_unix_dialog_set_page_setup(_SELF(self),
                                               RVAL2GOBJ(page_setup));
-    return Qnil;
+    return self;
 }
 
 static VALUE

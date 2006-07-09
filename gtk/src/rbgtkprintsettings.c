@@ -4,7 +4,7 @@
   rbgtkprintsettings.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 03:28:54 $
+  $Date: 2006/07/09 08:56:56 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -110,7 +110,7 @@ static VALUE
 ps_set_bool(VALUE self, VALUE key, VALUE value)
 {
     gtk_print_settings_set_bool(_SELF(self), RVAL2CSTR(key), RVAL2CBOOL(value));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -134,7 +134,7 @@ static VALUE
 ps_set_double(VALUE self, VALUE key, VALUE value)
 {
     gtk_print_settings_set_double(_SELF(self), RVAL2CSTR(key), NUM2DBL(value));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -150,7 +150,7 @@ ps_set_length(VALUE self, VALUE key, VALUE value, VALUE unit)
 {
     gtk_print_settings_set_length(_SELF(self), RVAL2CSTR(key),
                                   NUM2DBL(value), RVAL2UNIT(unit));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -174,7 +174,7 @@ static VALUE
 ps_set_int(VALUE self, VALUE key, VALUE value)
 {
     gtk_print_settings_set_int(_SELF(self), RVAL2CSTR(key), NUM2INT(value));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -286,7 +286,7 @@ static VALUE
 ps_set_printer(VALUE self, VALUE printer)
 {
     gtk_print_settings_set_printer(_SELF(self), RVAL2CSTR2(printer));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -299,7 +299,7 @@ static VALUE
 ps_set_orientation(VALUE self, VALUE orientation)
 {
     gtk_print_settings_set_orientation(_SELF(self), RVAL2PO(orientation));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -312,7 +312,7 @@ static VALUE
 ps_set_paper_size(VALUE self, VALUE paper_size)
 {
     gtk_print_settings_set_paper_size(_SELF(self), RVAL2SIZE(paper_size));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -327,7 +327,7 @@ ps_set_paper_width(VALUE self, VALUE paper_width, VALUE unit)
 {
     gtk_print_settings_set_paper_width(_SELF(self), NUM2DBL(paper_width),
                                        RVAL2UNIT(unit));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -342,7 +342,7 @@ ps_set_paper_height(VALUE self, VALUE paper_height, VALUE unit)
 {
     gtk_print_settings_set_paper_height(_SELF(self), NUM2DBL(paper_height),
                                         RVAL2UNIT(unit));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -355,7 +355,7 @@ static VALUE
 ps_set_use_color(VALUE self, VALUE use_color)
 {
     gtk_print_settings_set_use_color(_SELF(self), RVAL2CBOOL(use_color));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -368,7 +368,7 @@ static VALUE
 ps_set_collate(VALUE self, VALUE collate)
 {
     gtk_print_settings_set_collate(_SELF(self), RVAL2CBOOL(collate));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -381,7 +381,7 @@ static VALUE
 ps_set_reverse(VALUE self, VALUE reverse)
 {
     gtk_print_settings_set_reverse(_SELF(self), RVAL2CBOOL(reverse));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -394,7 +394,7 @@ static VALUE
 ps_set_duplex(VALUE self, VALUE duplex)
 {
     gtk_print_settings_set_duplex(_SELF(self), RVAL2PD(duplex));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -407,7 +407,7 @@ static VALUE
 ps_set_quality(VALUE self, VALUE quality)
 {
     gtk_print_settings_set_quality(_SELF(self), RVAL2PQ(quality));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -420,7 +420,7 @@ static VALUE
 ps_set_n_copies(VALUE self, VALUE n_copies)
 {
     gtk_print_settings_set_n_copies(_SELF(self), NUM2INT(n_copies));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -433,7 +433,7 @@ static VALUE
 ps_set_number_up(VALUE self, VALUE number_up)
 {
     gtk_print_settings_set_number_up(_SELF(self), NUM2INT(number_up));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -446,7 +446,7 @@ static VALUE
 ps_set_resolution(VALUE self, VALUE resolution)
 {
     gtk_print_settings_set_resolution(_SELF(self), NUM2INT(resolution));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -459,7 +459,7 @@ static VALUE
 ps_set_scale(VALUE self, VALUE scale)
 {
     gtk_print_settings_set_scale(_SELF(self), NUM2DBL(scale));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -472,7 +472,7 @@ static VALUE
 ps_set_print_pages(VALUE self, VALUE print_pages)
 {
     gtk_print_settings_set_print_pages(_SELF(self), RVAL2PP(print_pages));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -510,7 +510,7 @@ ps_set_page_ranges(VALUE self, VALUE rb_page_ranges)
         page_ranges[i].end = NUM2INT(RARRAY(page_range)->ptr[1]);
     }
     gtk_print_settings_set_page_ranges(_SELF(self), page_ranges, num_ranges);
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -523,7 +523,7 @@ static VALUE
 ps_set_page_set(VALUE self, VALUE page_set)
 {
     gtk_print_settings_set_page_set(_SELF(self), RVAL2PS(page_set));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -537,7 +537,7 @@ ps_set_default_source(VALUE self, VALUE default_source)
 {
     gtk_print_settings_set_default_source(_SELF(self),
                                           RVAL2CSTR2(default_source));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -550,7 +550,7 @@ static VALUE
 ps_set_media_type(VALUE self, VALUE media_type)
 {
     gtk_print_settings_set_media_type(_SELF(self), RVAL2CSTR2(media_type));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -563,7 +563,7 @@ static VALUE
 ps_set_dither(VALUE self, VALUE dither)
 {
     gtk_print_settings_set_dither(_SELF(self), RVAL2CSTR2(dither));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -576,7 +576,7 @@ static VALUE
 ps_set_finishings(VALUE self, VALUE finishings)
 {
     gtk_print_settings_set_finishings(_SELF(self), RVAL2CSTR2(finishings));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -589,7 +589,7 @@ static VALUE
 ps_set_output_bin(VALUE self, VALUE output_bin)
 {
     gtk_print_settings_set_output_bin(_SELF(self), RVAL2CSTR2(output_bin));
-    return Qnil;
+    return self;
 }
 #endif
 

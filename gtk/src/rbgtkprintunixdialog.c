@@ -4,7 +4,7 @@
   rbgtkprintunixdialog.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 06:10:07 $
+  $Date: 2006/07/09 08:56:56 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -48,7 +48,7 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
     GtkPrintCapabilities capabilities;
     capabilities = RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES);
     gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), capabilities);
-    return Qnil;
+    return self;
 }
 #endif
 

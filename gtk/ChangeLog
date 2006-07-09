@@ -1,5 +1,9 @@
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkprintunixdialog.c: set_* method returns self.
+	* src/rbgtkprintsettings.c: ditto.
+	* src/rbgtkpagesetupunixdialog.c: ditto.
+
 	* src/rbgtkprintoperationpreview.c: implemented
 	GtkPrintOperationPreview.
 
@@ -27,7 +31,7 @@
 	GtkPageSetupUnixDialog bindings.
 	* extconf.rb: detected whether GtkPageSetupUnixDialog is available
 	or not.
-	
+
 	* src/rbgtkprintunixdialog.c: implemented GtkPrintUnixDialog bindings.
 	* extconf.rb: detected whether GtkPrintUnixDialog is available or not.
 
