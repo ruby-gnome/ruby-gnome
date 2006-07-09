@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: ssimons $
-  $Date: 2006/06/09 21:30:26 $
+  $Author: ktou $
+  $Date: 2006/07/09 06:01:57 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -619,6 +619,7 @@ void
 Init_gobject_gobject()
 {
     VALUE cGObject = G_DEF_CLASS2(G_TYPE_OBJECT, "Object", mGLib, gobj_mark, NULL);
+    G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", mGLib);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(cGObject, "allocate", &gobj_s_allocate, 0);
