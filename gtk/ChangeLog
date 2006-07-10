@@ -1,3 +1,8 @@
+2006-07-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: detected whether GtkPrinter is available or not.
+	* src/rbgtkprinter.c: implemented GtkPrinter and GtkPrintBackend.
+
 2006-07-10  Pascal Terjan  <pterjan@linuxfr.org>
 
 	* src/rbgtktreestore.c: Added Gtk::TreeStore#insert_with_values
