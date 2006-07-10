@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/06/17 14:34:54 $
+  $Date: 2006/07/10 01:41:12 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -13,6 +13,8 @@
 #include "rbpoppler.h"
 
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
+
+static VALUE cPSFile;
 
 static VALUE
 page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
@@ -46,14 +48,14 @@ static VALUE
 page_render_generic(int argc, VALUE *argv, VALUE self)
 {
     if (argc == 1) {
-        if (RTEST(rb_obj_is_kind_of(argv[0], rb_cCairo_Context))) {
+        if (RTEST(rb_obj_is_kind_of(argv[0], cPSFile))) {
+            return page_render_to_ps(self, argv[0]);
+        } else {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
             return page_render(self, argv[0]);
 #else
             rb_raise(rb_eArgError, "cairo is not available");
 #endif
-        } else {
-            return page_render_to_ps(self, argv[0]);
         }
     } else if (argc == 7) {
         return page_render_to_pixbuf(self, argv[0], argv[1], argv[2], argv[3],
@@ -286,7 +288,11 @@ link_mapping_get_area(VALUE self)
 static VALUE
 link_mapping_get_action(VALUE self)
 {
+#ifdef ACTION2RVAL
     return ACTION2RVAL(RVAL2LM(self)->action);
+#else
+    return Qnil;
+#endif
 }
 
 void
@@ -298,6 +304,7 @@ Init_poppler_page(VALUE mPoppler)
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
     cLinkMapping = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
+    cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
     rb_define_method(cPage, "render", page_render_generic, -1);
     rb_define_method(cPage, "size", page_get_size, 0);
