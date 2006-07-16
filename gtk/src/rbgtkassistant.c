@@ -4,7 +4,7 @@
   rbgtkassistant.c -
 
   $Author: ggc $
-  $Date: 2006/07/16 12:15:32 $
+  $Date: 2006/07/16 20:47:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,7 +38,7 @@ ass_set_current_page(self, page_num)
     VALUE self, page_num;
 {
     gtk_assistant_set_current_page(_SELF(self), NUM2INT(page_num));
-    return self;
+    return page_num;
 }
 
 static VALUE
@@ -98,7 +98,7 @@ static VALUE
 ass_set_page_type(self, page, type)
     VALUE self, page, type;
 {
-    gtk_assistant_set_page_type(_SELF(self), RVAL2GOBJ(page), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
+    gtk_assistant_set_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
     return self;
 }
 
@@ -106,14 +106,14 @@ static VALUE
 ass_get_page_type(self, page)
     VALUE self, page;
 {
-    return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), RVAL2GOBJ(page)), GTK_TYPE_ASSISTANT_PAGE_TYPE);
+    return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))), GTK_TYPE_ASSISTANT_PAGE_TYPE);
 }
 
 static VALUE
 ass_set_page_title(self, page, title)
     VALUE self, page, title;
 {
-    gtk_assistant_set_page_title(_SELF(self), RVAL2GOBJ(page), RVAL2CSTR(title));
+    gtk_assistant_set_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CSTR(title));
     return self;
 }
 
@@ -121,14 +121,14 @@ static VALUE
 ass_get_page_title(self, page)
     VALUE self, page;
 {
-    return CSTR2RVAL(gtk_assistant_get_page_title(_SELF(self), RVAL2GOBJ(page)));
+    return CSTR2RVAL(gtk_assistant_get_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
 ass_set_page_header_image(self, page, header_image)
     VALUE self, page, header_image;
 {
-    gtk_assistant_set_page_header_image(_SELF(self), RVAL2GOBJ(page), RVAL2GOBJ(header_image));
+    gtk_assistant_set_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(header_image)));
     return self;
 }
 
@@ -136,14 +136,14 @@ static VALUE
 ass_get_page_header_image(self, page)
     VALUE self, page;
 {
-    return GOBJ2RVAL(gtk_assistant_get_page_header_image(_SELF(self), RVAL2GOBJ(page)));
+    return GOBJ2RVAL(gtk_assistant_get_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
 ass_set_page_side_image(self, page, side_image)
     VALUE self, page, side_image;
 {
-    gtk_assistant_set_page_side_image(_SELF(self), RVAL2GOBJ(page), RVAL2GOBJ(side_image));
+    gtk_assistant_set_page_side_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(side_image)));
     return self;
 }
 
@@ -151,14 +151,14 @@ static VALUE
 ass_get_page_side_image(self, page)
     VALUE self, page;
 {
-    return GOBJ2RVAL(gtk_assistant_get_page_side_image(_SELF(self), RVAL2GOBJ(page)));
+    return GOBJ2RVAL(gtk_assistant_get_page_side_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
 ass_set_page_complete(self, page, complete)
     VALUE self, page, complete;
 {
-    gtk_assistant_set_page_complete(_SELF(self), RVAL2GOBJ(page), RVAL2CBOOL(complete));
+    gtk_assistant_set_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CBOOL(complete));
     return self;
 }
 
@@ -166,14 +166,14 @@ static VALUE
 ass_get_page_complete(self, page)
     VALUE self, page;
 {
-    return CBOOL2RVAL(gtk_assistant_get_page_complete(_SELF(self), RVAL2GOBJ(page)));
+    return CBOOL2RVAL(gtk_assistant_get_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
 ass_add_action_widget(self, child)
     VALUE self, child;
 {
-    gtk_assistant_add_action_widget(_SELF(self), RVAL2GOBJ(child));
+    gtk_assistant_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
@@ -181,7 +181,7 @@ static VALUE
 ass_remove_action_widget(self, child)
     VALUE self, child;
 {
-    gtk_assistant_remove_action_widget(_SELF(self), RVAL2GOBJ(child));
+    gtk_assistant_remove_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
