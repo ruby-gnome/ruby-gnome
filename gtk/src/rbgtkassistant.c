@@ -4,7 +4,7 @@
   rbgtkassistant.c -
 
   $Author: ggc $
-  $Date: 2006/07/09 17:45:35 $
+  $Date: 2006/07/16 10:05:39 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -60,7 +60,6 @@ ass_prepend_page(self, page)
     VALUE self, page;
 {
     gtk_assistant_prepend_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)));
-    G_CHILD_ADD(self, page);
     return self;
 }
 
@@ -69,7 +68,6 @@ ass_append_page(self, page)
     VALUE self, page;
 {
     gtk_assistant_append_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)));
-    G_CHILD_ADD(self, page);
     return self;
 }
 
@@ -78,7 +76,6 @@ ass_insert_page(self, page, position)
     VALUE self, page, position;
 {
     gtk_assistant_insert_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), NUM2INT(position));
-    G_CHILD_ADD(self, page);
     return self;
 }
 
