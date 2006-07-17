@@ -1,3 +1,8 @@
+2006-07-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkmain.c: Fixed a problem with calling the script with arguments.
+	Reported by Guillaume Cottenceau, Kouhei Sutou.
+
 2006-07-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: detected whether GtkPrintJob is available or not.
@@ -76,6 +81,7 @@
 
 	* src/rbgtklabel.c: removed debug codes.
 
+>>>>>>> 1.593
 2006-07-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmain.c: Show error messages when initializing GTK+.

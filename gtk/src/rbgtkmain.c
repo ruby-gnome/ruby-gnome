@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: mutoh $
-  $Date: 2006/07/01 09:50:11 $
+  $Date: 2006/07/17 11:28:34 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -130,7 +130,6 @@ gtk_m_init(argc, argv, self)
 
     {
         gboolean is_initialized;
-        GError* error = NULL;
         /* Gdk modifies sighandlers, sigh */
 #ifdef NT
         RETSIGTYPE (*sigfunc[3])();
@@ -152,22 +151,12 @@ gtk_m_init(argc, argv, self)
         sigfunc[6] = signal(SIGTERM, SIG_IGN);
 #endif
 
-#if GTK_CHECK_VERSION(2,6,0)
-        is_initialized = gtk_init_with_args(&gargc, &gargv, NULL, NULL, NULL, &error);
-#else
         is_initialized = gtk_init_check(&gargc, &gargv);
-#endif
         if (! is_initialized) {
-            if (error){
-                rb_raise(rb_eRuntimeError, "%s", error->message);
-                g_error_free (error);
-            } else {
-                const char *display_name_arg = gdk_get_display_arg_name();
-                display_name_arg = display_name_arg ? display_name_arg : g_getenv("DISPLAY");
-                rb_raise(rb_eRuntimeError, "Cannot open display: %s", 
-                         display_name_arg ? display_name_arg : " ");
-            }
-
+            const char *display_name_arg = gdk_get_display_arg_name();
+            display_name_arg = display_name_arg ? display_name_arg : g_getenv("DISPLAY");
+            rb_raise(rb_eRuntimeError, "Cannot open display: %s", 
+                     display_name_arg ? display_name_arg : " ");
         }
 
         setlocale(LC_NUMERIC, "C");
