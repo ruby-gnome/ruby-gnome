@@ -81,7 +81,6 @@
 
 	* src/rbgtklabel.c: removed debug codes.
 
->>>>>>> 1.593
 2006-07-01  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmain.c: Show error messages when initializing GTK+.
