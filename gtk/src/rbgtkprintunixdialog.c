@@ -4,7 +4,7 @@
   rbgtkprintunixdialog.c -
 
   $Author: ktou $
-  $Date: 2006/07/09 08:56:56 $
+  $Date: 2006/08/06 13:29:32 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -58,8 +58,6 @@ Init_gtk_print_unix_dialog()
 #ifdef HAVE_GTK_GTKPRINTUNIXDIALOG_H
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
-
-    G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "PrintCapabilities", mGtk);
 
     rb_define_method(gPrintUnixDialog, "initialize", pud_initialize, -1);
     rb_define_method(gPrintUnixDialog, "add_custom_tab", pud_add_custom_tab, 2);

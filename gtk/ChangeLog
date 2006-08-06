@@ -1,3 +1,9 @@
+2006-08-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkprintunixdialog.c: removed duplicated definition of
+	Gtk::PrintCapabilities.
+	Reported by Tilman Sauerbeck.
+
 2006-07-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkmain.c: Fixed a problem with calling the script with arguments.
