@@ -3,8 +3,8 @@
 
   rbgtktable.c -
 
-  $Author: ktou $
-  $Date: 2006/04/15 01:58:50 $
+  $Author: ssimons $
+  $Date: 2006/08/09 09:03:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -79,6 +79,7 @@ tbl_attach_defaults(self, widget, left_attach, right_attach, top_attach,
     gtk_table_attach_defaults(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
                               NUM2UINT(left_attach), NUM2UINT(right_attach),
                               NUM2UINT(top_attach), NUM2UINT(bottom_attach));
+    G_CHILD_ADD(self, widget);
     return self;
 }
 
