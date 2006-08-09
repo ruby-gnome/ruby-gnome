@@ -3,8 +3,8 @@
 
   rbgtkscrolledwindow.c -
 
-  $Author: ggc $
-  $Date: 2005/08/29 21:02:45 $
+  $Author: ssimons $
+  $Date: 2006/08/09 21:45:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -62,6 +62,7 @@ scwin_add_with_viewport(self, other)
 {
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)),
                                           GTK_WIDGET(RVAL2GOBJ(other)));
+    G_CHILD_ADD(self, other);
     return self;
 }
 

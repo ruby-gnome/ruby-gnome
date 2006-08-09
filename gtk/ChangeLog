@@ -1,5 +1,10 @@
 2006-08-09  Sjoerd Simons <sjoerd@luon.net>
 
+	* src/rbgtkscrolledwindow.c: Added G_CHILD_ADD to
+	Gtk::ScrolledWindow#add_with_viewport
+
+2006-08-09  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgtktable.c: Also do G_CHILD_ADD when using .attach_defaults
 
 2006-08-06  Kouhei Sutou  <kou@cozmixng.org>
