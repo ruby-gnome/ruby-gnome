@@ -3,8 +3,8 @@
 
   rbgtkuimanager.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ssimons $
+  $Date: 2006/08/11 13:09:55 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -35,6 +35,7 @@ rbuimanager_insert_action_group(self, action_group, pos)
     VALUE self, action_group, pos;
 {
     gtk_ui_manager_insert_action_group(_SELF(self), RVAL2GOBJ(action_group), NUM2INT(pos));
+    G_CHILD_ADD(self, action_group);
     return self;
 }
 
@@ -43,6 +44,7 @@ rbuimanager_remove_action_group(self, action_group)
     VALUE self, action_group;
 {
     gtk_ui_manager_remove_action_group(_SELF(self), RVAL2GOBJ(action_group));
+    G_CHILD_REMOVE(self, action_group);
     return self;
 }
 

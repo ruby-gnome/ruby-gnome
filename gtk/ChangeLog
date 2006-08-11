@@ -1,3 +1,10 @@
+2006-08-11  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgtkuimanager.c: Add G_CHILD_ADD and G_CHILD_REMOVE to respectively
+	Gtk::UIManager#insert_action_group and Gtk::UIManager#remove_action_group.
+	Without these the action_group can be garbage collected while it can still
+	be used for callbacks (which causes a nice segv).
+
 2006-08-09  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgtkscrolledwindow.c: Added G_CHILD_ADD to
