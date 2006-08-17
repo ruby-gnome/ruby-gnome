@@ -1,3 +1,7 @@
+2006-08-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_object.c: Compiled on GLib-2.8.x again. 
+
 2006-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/glib2.def, src/rbgobject.c, src/rbgobject.h
