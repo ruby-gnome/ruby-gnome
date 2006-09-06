@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/07/10 01:41:12 $
+  $Date: 2006/09/06 02:25:35 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -288,11 +288,7 @@ link_mapping_get_area(VALUE self)
 static VALUE
 link_mapping_get_action(VALUE self)
 {
-#ifdef ACTION2RVAL
     return ACTION2RVAL(RVAL2LM(self)->action);
-#else
-    return Qnil;
-#endif
 }
 
 void

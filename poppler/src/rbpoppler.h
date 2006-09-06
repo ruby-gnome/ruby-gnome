@@ -33,17 +33,22 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  include <rb_cairo.h>
 #endif
 
-#ifndef HAVE_TYPE_POPPLERACTIONANY
-#  define ACTION2RVAL(obj) (GOBJ2RVAL(obj))
-#  define RVAL2ACTION(obj) (RVAL2GOBJ(obj))
-#endif
-
 #define RECT2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_RECTANGLE))
 #define RVAL2RECT(obj) ((PopplerRectangle *)RVAL2BOXED(obj, POPPLER_TYPE_RECTANGLE))
 #define REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
 #define RVAL2DEST(obj) ((PopplerDest *)RVAL2BOXED(obj, POPPLER_TYPE_DEST))
+#define DEST2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_DEST))
 #define DESTTYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_DEST_TYPE))
+#define ACTIONTYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ACTION_TYPE))
+#define RVAL2ACTIONTYPE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_ACTION_TYPE))
 #define RVAL2COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
+
+#define ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
+#define RVAL2ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
+
+extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
+extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
+
 
 extern void Init_poppler_document(VALUE mPoppler);
 extern void Init_poppler_page(VALUE mPoppler);

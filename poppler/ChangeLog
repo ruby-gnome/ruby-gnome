@@ -1,3 +1,16 @@
+2006-09-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ./: don't require a patch of Bug 6912 for Poppler.
+	https://bugs.freedesktop.org/show_bug.cgi?id=6912
+
+	* extconf.rb: don't check whether PopplerActionAny is exist or
+	not.
+
+	* src/rbpoppler-action.c, src/rbpoppler.h: Poppler::Action is
+	always available.
+	* src/rbpoppler-page.c: Poppler::LinkMapping#action is always
+	available.
+
 2006-07-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-page.c:
