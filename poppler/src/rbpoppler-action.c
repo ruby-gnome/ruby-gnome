@@ -4,7 +4,7 @@
   rbpoppler-action.c -
 
   $Author: ktou $
-  $Date: 2006/09/06 02:25:35 $
+  $Date: 2006/09/06 13:42:01 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -35,37 +35,25 @@ rb_poppler_action_from_ruby_object(VALUE action)
     return NIL_P(action) ? NULL : RVAL2BOXED(action, POPPLER_TYPE_ACTION);
 }
 
-#define ATTR_STR(type, name)                                    \
-static VALUE                                                    \
-action_ ## type ## _ ## name (VALUE self)                       \
-{                                                               \
-    return CSTR2RVAL(RVAL2ACTION(self)->type.name);             \
-}                                                               \
-static VALUE                                                    \
-action_ ## type ## _set_ ## name (VALUE self, VALUE val)        \
-{                                                               \
-    RVAL2ACTION(self)->type.name = RVAL2CSTR(val);              \
-    return self;                                                \
+#define ACTION_ATTR_STR(type, name)                     \
+static VALUE                                            \
+action_ ## type ## _ ## name (VALUE self)               \
+{                                                       \
+    return CSTR2RVAL(RVAL2ACTION(self)->type.name);     \
 }
 
-#define ATTR_DEST(type, name)                                   \
-static VALUE                                                    \
-action_ ## type ## _ ## name (VALUE self)                       \
-{                                                               \
-    return DEST2RVAL(RVAL2ACTION(self)->type.name);             \
-}                                                               \
-static VALUE                                                    \
-action_ ## type ## _set_ ## name (VALUE self, VALUE val)        \
-{                                                               \
-    RVAL2ACTION(self)->type.name = RVAL2DEST(val);              \
-    return self;                                                \
+#define ACTION_ATTR_DEST(type, name)                    \
+static VALUE                                            \
+action_ ## type ## _ ## name (VALUE self)               \
+{                                                       \
+    return DEST2RVAL(RVAL2ACTION(self)->type.name);     \
 }
 
-#define DEFINE_ACCESSOR(action, type, name)                     \
-    rb_define_method(action, G_STRINGIFY(name),                 \
-                     action_ ## type ## _## name, 0);           \
-    rb_define_method(action, G_STRINGIFY(set_ ## name),         \
-                     action_ ## type ## _set_## name, 1);
+#define DEFINE_ACCESSOR(prefix, target, name) \
+    rb_define_method(target, G_STRINGIFY(name), prefix ## _ ## name, 0);
+
+#define DEFINE_ACTION_ACCESSOR(target, type, name) \
+    DEFINE_ACCESSOR(action_ ## type, target, name)
 
 /* PopplerActionAny */
 static VALUE
@@ -73,24 +61,24 @@ action_any_type(VALUE self)
 {
     return ACTIONTYPE2RVAL(RVAL2ACTION(self)->type);
 }
-ATTR_STR(any, title);
+ACTION_ATTR_STR(any, title);
 
 /* PopplerActionGotoDest */
-ATTR_DEST(goto_dest, dest);
+ACTION_ATTR_DEST(goto_dest, dest);
 
 /* PopplerActionGotoRemote */
-ATTR_STR(goto_remote, file_name);
-ATTR_DEST(goto_remote, dest);
+ACTION_ATTR_STR(goto_remote, file_name);
+ACTION_ATTR_DEST(goto_remote, dest);
 
 /* PopplerActionLaunch */
-ATTR_STR(launch, file_name);
-ATTR_STR(launch, params);
+ACTION_ATTR_STR(launch, file_name);
+ACTION_ATTR_STR(launch, params);
 
 /* PopplerActionUri */
-ATTR_STR(uri, uri);
+ACTION_ATTR_STR(uri, uri);
 
 /* PopplerActionNamed */
-ATTR_STR(named, named_dest);
+ACTION_ATTR_STR(named, named_dest);
 
 /* PopplerActionMovie */
 
@@ -117,66 +105,48 @@ dest_get_type(VALUE self)
     return DESTTYPE2RVAL(RVAL2DEST(self)->type);
 }
 
-static VALUE
-dest_get_page_num(VALUE self)
-{
-    return INT2NUM(RVAL2DEST(self)->page_num);
+#define DEST_ATTR_INT(name)                     \
+static VALUE                                    \
+dest_ ## name (VALUE self)                      \
+{                                               \
+    return INT2NUM(RVAL2DEST(self)->name);      \
 }
 
-static VALUE
-dest_get_left(VALUE self)
-{
-    return rb_float_new(RVAL2DEST(self)->left);
+#define DEST_ATTR_UINT(name)                    \
+static VALUE                                    \
+dest_ ## name (VALUE self)                      \
+{                                               \
+    return UINT2NUM(RVAL2DEST(self)->name);     \
 }
 
-static VALUE
-dest_get_bottom(VALUE self)
-{
-    return rb_float_new(RVAL2DEST(self)->bottom);
+#define DEST_ATTR_DOUBLE(name)                  \
+static VALUE                                    \
+dest_ ## name (VALUE self)                      \
+{                                               \
+    return rb_float_new(RVAL2DEST(self)->name); \
 }
 
-static VALUE
-dest_get_right(VALUE self)
-{
-    return rb_float_new(RVAL2DEST(self)->right);
+#define DEST_ATTR_STR(name)                     \
+static VALUE                                    \
+dest_ ## name (VALUE self)                      \
+{                                               \
+    return CSTR2RVAL(RVAL2DEST(self)->name);    \
 }
 
-static VALUE
-dest_get_top(VALUE self)
-{
-    return rb_float_new(RVAL2DEST(self)->top);
-}
+#define DEFINE_DEST_ACCESSOR(target, name) \
+    DEFINE_ACCESSOR(dest, target, name)
 
-static VALUE
-dest_get_zoom(VALUE self)
-{
-    return rb_float_new(RVAL2DEST(self)->zoom);
-}
 
-static VALUE
-dest_get_named_dest(VALUE self)
-{
-    return CSTR2RVAL(RVAL2DEST(self)->named_dest);
-}
-
-static VALUE
-dest_get_change_left(VALUE self)
-{
-    return UINT2NUM(RVAL2DEST(self)->change_left);
-}
-
-static VALUE
-dest_get_change_top(VALUE self)
-{
-    return UINT2NUM(RVAL2DEST(self)->change_top);
-}
-
-static VALUE
-dest_get_change_zoom(VALUE self)
-{
-    return UINT2NUM(RVAL2DEST(self)->change_zoom);
-}
-
+DEST_ATTR_INT(page_num)
+DEST_ATTR_DOUBLE(left)
+DEST_ATTR_DOUBLE(bottom)
+DEST_ATTR_DOUBLE(right)
+DEST_ATTR_DOUBLE(top)
+DEST_ATTR_DOUBLE(zoom)
+DEST_ATTR_STR(named_dest)
+DEST_ATTR_UINT(change_left)
+DEST_ATTR_UINT(change_top)
+DEST_ATTR_UINT(change_zoom)
 
 void
 Init_poppler_action(VALUE mPoppler)
@@ -189,26 +159,26 @@ Init_poppler_action(VALUE mPoppler)
 
     cActionAny = rb_define_class_under(mPoppler, "ActionAny", cAction);
     rb_define_method(cActionAny, "type", action_any_type, 0);
-    DEFINE_ACCESSOR(cActionAny, any, title);
+    DEFINE_ACTION_ACCESSOR(cActionAny, any, title);
 
     cActionGotoDest = rb_define_class_under(mPoppler, "ActionGotoDest",
                                             cActionAny);
-    DEFINE_ACCESSOR(cActionGotoDest, goto_dest, dest);
+    DEFINE_ACTION_ACCESSOR(cActionGotoDest, goto_dest, dest);
 
     cActionGotoRemote = rb_define_class_under(mPoppler, "ActionGotoRemote",
                                               cActionAny);
-    DEFINE_ACCESSOR(cActionGotoRemote, goto_remote, file_name);
-    DEFINE_ACCESSOR(cActionGotoRemote, goto_remote, dest);
+    DEFINE_ACTION_ACCESSOR(cActionGotoRemote, goto_remote, file_name);
+    DEFINE_ACTION_ACCESSOR(cActionGotoRemote, goto_remote, dest);
 
     cActionLaunch = rb_define_class_under(mPoppler, "ActionLaunch", cActionAny);
-    DEFINE_ACCESSOR(cActionLaunch, launch, file_name);
-    DEFINE_ACCESSOR(cActionLaunch, launch, params);
+    DEFINE_ACTION_ACCESSOR(cActionLaunch, launch, file_name);
+    DEFINE_ACTION_ACCESSOR(cActionLaunch, launch, params);
 
     cActionUri = rb_define_class_under(mPoppler, "ActionUri", cActionAny);
-    DEFINE_ACCESSOR(cActionUri, uri, uri);
+    DEFINE_ACTION_ACCESSOR(cActionUri, uri, uri);
 
     cActionNamed = rb_define_class_under(mPoppler, "ActionNamed", cActionAny);
-    DEFINE_ACCESSOR(cActionNamed, named, named_dest);
+    DEFINE_ACTION_ACCESSOR(cActionNamed, named, named_dest);
 
     cActionMovie = rb_define_class_under(mPoppler, "ActionMovie", cActionAny);
 
@@ -235,15 +205,15 @@ Init_poppler_action(VALUE mPoppler)
     cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
 
     rb_define_method(cDest, "type", dest_get_type, 0);
-    rb_define_method(cDest, "page_num", dest_get_page_num, 0);
-    rb_define_method(cDest, "left", dest_get_left, 0);
-    rb_define_method(cDest, "bottom", dest_get_bottom, 0);
-    rb_define_method(cDest, "right", dest_get_right, 0);
-    rb_define_method(cDest, "top", dest_get_top, 0);
-    rb_define_method(cDest, "zoom", dest_get_zoom, 0);
-    rb_define_method(cDest, "named_dest", dest_get_named_dest, 0);
-    rb_define_method(cDest, "change_left", dest_get_change_left, 0);
-    rb_define_method(cDest, "change_top", dest_get_change_top, 0);
-    rb_define_method(cDest, "change_zoom", dest_get_change_zoom, 0);
+    DEFINE_DEST_ACCESSOR(cDest, page_num);
+    DEFINE_DEST_ACCESSOR(cDest, left);
+    DEFINE_DEST_ACCESSOR(cDest, bottom);
+    DEFINE_DEST_ACCESSOR(cDest, right);
+    DEFINE_DEST_ACCESSOR(cDest, top);
+    DEFINE_DEST_ACCESSOR(cDest, zoom);
+    DEFINE_DEST_ACCESSOR(cDest, named_dest);
+    DEFINE_DEST_ACCESSOR(cDest, change_left);
+    DEFINE_DEST_ACCESSOR(cDest, change_top);
+    DEFINE_DEST_ACCESSOR(cDest, change_zoom);
     G_DEF_SETTERS(cDest);
 }

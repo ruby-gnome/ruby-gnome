@@ -1,5 +1,9 @@
 2006-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-action.c:
+	- made Poppler::Action read only.
+	- used macros for defining methods of Poppler::Dest.
+
 	* ./: don't require a patch of Bug 6912 for Poppler.
 	https://bugs.freedesktop.org/show_bug.cgi?id=6912
 
