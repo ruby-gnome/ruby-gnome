@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/14 10:33:18 $
+  $Author: ktou $
+  $Date: 2006/09/21 12:10:19 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -851,7 +851,7 @@ Init_flags()
 
     /* for compatibility */
     rb_define_method(cFlags, "coerce", flags_coerce, 1);
-    rb_define_method(cFlags, "zero?", flags_empty_p, 1);
+    rb_define_method(cFlags, "zero?", flags_empty_p, 0);
     rb_define_method(cFlags, "nonzero?", flags_nonzero_p, 0);
 }
 
