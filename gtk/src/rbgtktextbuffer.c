@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: ktou $
-  $Date: 2005/11/08 04:58:55 $
+  $Date: 2006/09/24 13:12:30 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -719,7 +719,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "bounds", txt_get_bounds, 0);
     rb_define_method(gTextBuffer, "get_iter_at_mark", txt_get_iter_at_mark, 1);
     rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
-    rb_define_method(gTextBuffer, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 2);
+    rb_define_method(gTextBuffer, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 1);
     
     rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
     rb_define_method(gTextBuffer, "apply_tag", txt_apply_tag, 3);

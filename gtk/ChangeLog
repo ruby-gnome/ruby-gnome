@@ -1,6 +1,8 @@
 2006-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/rbgtktreestore.c: removed a needless check bug #1557225.
+	* src/rbgtktextbuffer.c: fixed a typo.
+
+	* src/rbgtktreestore.c: removed a needless check. bug #1557225
 
 2006-08-11  Sjoerd Simons <sjoerd@luon.net>
 
