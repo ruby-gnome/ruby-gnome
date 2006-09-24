@@ -1,6 +1,6 @@
 2006-09-21  kangabroo
 
-	* src/rbgobj_enums.c: fixed typo.
+	* src/rbgobj_enums.c: fixed typo. bug #1561675.
 
 2006-08-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
