@@ -1,3 +1,13 @@
+2006-09-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtksourcetagstyle.c: made Gtk::SourceTagStyle mutable.
+	bug #1544362.
+
+	* src/rbgtksourcetag.c: used alias and property instead of
+	handmade implementation.
+
+	* sample/test.rb: added a changing style example.
+
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/*.rb: Remove Gtk.init

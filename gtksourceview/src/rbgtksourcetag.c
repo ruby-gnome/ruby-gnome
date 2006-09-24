@@ -4,7 +4,7 @@
   rbgtksourcetag.c -
 
   $Author $
-  $Date: 2005/10/02 18:40:34 $
+  $Date: 2006/09/24 13:03:27 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -19,13 +19,6 @@
  */
 
 #define _SELF(self) (GTK_SOURCE_TAG(RVAL2GOBJ(self)))
-
-static VALUE
-source_tag_get_style(self)
-    VALUE self;
-{
-    return GOBJ2RVAL(gtk_source_tag_get_style(_SELF(self)));
-}
 
 /* Defined as a property.
 GtkSourceTagStyle* gtk_source_tag_get_style (GtkSourceTag *tag);
@@ -114,7 +107,8 @@ Init_gtk_sourcetag ()
 	VALUE cPatternTag =
 	    G_DEF_CLASS (GTK_TYPE_PATTERN_TAG, "PatternTag", mGtk);
 
-	rb_define_method (cSourceTag, "style", source_tag_get_style, 0);
+	rb_define_alias (cSourceTag, "style", "tag_style");
+	rb_define_alias (cSourceTag, "set_style", "set_tag_style");
 
 	rb_define_method (cPatternTag, "initialize", patterntag_new, 2);
 	rb_define_method (cSyntaxTag, "initialize", syntaxtag_new, 3);

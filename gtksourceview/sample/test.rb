@@ -17,8 +17,15 @@ lang = Gtk::SourceLanguagesManager.new.get_language('text/x-ruby')
 b.buffer.language = lang
 b.buffer.highlight = true
 w.set_default_size(400,300)
-#p b.methods
-#lang.get_tags.each { |t| p t }
+# customize style
+lang.tags.each do |tag|
+  if tag.id == "Keywords"
+    style = tag.style
+    style.mask |= Gtk::SourceTagStyle::USE_FOREGROUND
+    style.foreground = Gdk::Color.parse("blue")
+    lang.set_tag_style(tag.id, style)
+  end
+end
 w.show_all
 
 Gtk.main
