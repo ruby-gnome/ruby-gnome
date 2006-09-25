@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 09:18:12 $
+  $Author: ktou $
+  $Date: 2006/09/25 14:06:41 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -48,6 +48,7 @@ struct _GRClosure
     GClosure closure;
     VALUE rb_holder;
     gint count;
+    GList *objects;
     GValToRValSignalFunc g2r_func;
 };
 
@@ -229,6 +230,30 @@ rclosure_marshal(GClosure*       closure,
 #endif
 }
 
+static void rclosure_weak_notify(gpointer data, GObject* where_the_object_was);
+
+static void
+rclosure_unref(GRClosure *rclosure)
+{
+    rclosure->count--;
+
+    if (!rclosure_alive_p(rclosure)) {
+        GList *next;
+        for (next = rclosure->objects; next; next = next->next) {
+            GObject *object;
+            object = G_OBJECT(next->data);
+            g_object_weak_unref(object, rclosure_weak_notify, rclosure);
+        }
+        g_list_free(rclosure->objects);
+        rclosure->objects = NULL;
+
+        if (!NIL_P(rclosure->rb_holder)) {
+            GRClosureHolder *holder;
+            Data_Get_Struct(rclosure->rb_holder, GRClosureHolder, holder);
+            holder->closure = NULL;
+        }
+    }
+}
 
 static void
 rclosure_invalidate(gpointer data, GClosure* closure)
@@ -236,11 +261,8 @@ rclosure_invalidate(gpointer data, GClosure* closure)
     GRClosure *rclosure = (GRClosure*)closure;
 
     if (rclosure_alive_p(rclosure)) {
-        if (rclosure->count != 1) {
-            rb_warn("GRClosure invalidate: strange reference count: %d\n",
-                    rclosure->count);
-        }
-        rclosure->count = 0;
+        rclosure->count = 1;
+        rclosure_unref(rclosure);
     }
 }
 
@@ -248,8 +270,11 @@ static void
 gr_closure_holder_free(GRClosureHolder *holder)
 {
     if (holder) {
-        if (rclosure_alive_p(holder->closure)) {
-            holder->closure->count--;
+        if (holder->closure) {
+            holder->closure->rb_holder = Qnil;
+            if (rclosure_alive_p(holder->closure)) {
+                rclosure_unref(holder->closure);
+            }
         }
         free(holder);
     }
@@ -263,10 +288,11 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
 
     closure = (GRClosure*)g_closure_new_simple(sizeof(GRClosure), NULL);
 
-    closure->count      = 0;
+    closure->count      = 1;
     closure->g2r_func   = g2r_func;
     closure->rb_holder  = Data_Make_Struct(rb_cData, GRClosureHolder, 0,
                                            gr_closure_holder_free, holder);
+    closure->objects    = NULL;
 
     holder->closure = closure;
     SETUP_HOLDER(closure);
@@ -286,7 +312,9 @@ rclosure_weak_notify(gpointer data, GObject* where_the_object_was)
 {
     GRClosure *rclosure = data;
     if (rclosure_alive_p(rclosure)) {
-        rclosure->count--;
+        rclosure->objects =
+            g_list_remove(rclosure->objects, where_the_object_was);
+        rclosure_unref(rclosure);
     }
 }
 
@@ -298,13 +326,15 @@ g_rclosure_attach(GClosure *closure, VALUE object)
 
     G_CHILD_ADD(object, rclosure->rb_holder);
 
-    rclosure->count++;
-
     if (!mGLibObject) {
         mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
     }
     if (rb_obj_is_kind_of(object, mGLibObject)) {
-        g_object_weak_ref(RVAL2GOBJ(object), rclosure_weak_notify, rclosure);
+        GObject *gobject;
+        gobject = RVAL2GOBJ(object);
+        rclosure->count++;
+        g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
+        rclosure->objects = g_list_prepend(rclosure->objects, gobject);
     }
 }
 

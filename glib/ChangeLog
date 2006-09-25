@@ -1,3 +1,9 @@
+2006-09-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c: improved closure handling. I hope this
+	change fixes a closure related segmentation fault bug.
+	- added available data marks and checked that marks.
+
 2006-09-21  kangabroo
 
 	* src/rbgobj_enums.c: fixed typo. bug #1561675.
