@@ -1,3 +1,7 @@
+2006-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb: used $INCFLAGS instead of $CFLAGS.
+
 2006-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c: improved closure handling. I hope this
