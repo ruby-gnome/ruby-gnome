@@ -1,3 +1,7 @@
+2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c: improved alive check.
+
 2006-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb: used $INCFLAGS instead of $CFLAGS.

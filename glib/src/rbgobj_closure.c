@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/09/25 14:06:41 $
+  $Date: 2006/10/12 13:30:22 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -77,7 +77,7 @@ struct marshal_arg
 static int
 rclosure_alive_p(GRClosure *rclosure)
 {
-    return rclosure->count > 0;
+    return (rclosure->count > 0 && !NIL_P(rclosure->rb_holder));
 }
 
 static VALUE
@@ -272,9 +272,7 @@ gr_closure_holder_free(GRClosureHolder *holder)
     if (holder) {
         if (holder->closure) {
             holder->closure->rb_holder = Qnil;
-            if (rclosure_alive_p(holder->closure)) {
-                rclosure_unref(holder->closure);
-            }
+            rclosure_invalidate(NULL, (GClosure *)(holder->closure));
         }
         free(holder);
     }
