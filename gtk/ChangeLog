@@ -1,3 +1,8 @@
+2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkselectiondata.c (gtkselectiondata_get_uris): fixed
+	invalid memory free. Bug #1575545.
+
 2006-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktextbuffer.c: fixed a typo.

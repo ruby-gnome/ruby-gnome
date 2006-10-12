@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Author: ktou $
+  $Date: 2006/10/12 02:00:28 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -225,9 +225,10 @@ gtkselectiondata_get_uris(self)
     gchar** uris = gtk_selection_data_get_uris(_SELF(self));
 
     if (uris) {
-        while (*uris){
-            rb_ary_push(ary, CSTR2RVAL(*uris));
-            uris++;
+        gchar **uri = uris;
+        while (*uri) {
+            rb_ary_push(ary, CSTR2RVAL(*uri));
+            uri++;
         }
         g_strfreev(uris);
     }
