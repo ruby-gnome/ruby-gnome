@@ -1,3 +1,9 @@
+2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/libglade2.rb: keep a reference of signal connected object to
+	protect from GC. Bug #1559722.
+	Reported by kangabroo.
+
 2006-07-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbglade.c, lib/libglade2.rb:  signal_autoconnect_full is 

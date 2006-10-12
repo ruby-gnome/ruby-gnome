@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.13 2006/07/08 16:45:15 mutoh Exp $
+  $Id: libglade2.rb,v 1.14 2006/10/12 13:50:17 ktou Exp $
 =end
 
 require 'gtk2'
@@ -40,6 +40,11 @@ class GladeXML
     end
 
     if signal_proc
+      @sources ||= {}
+      @sources[source.object_id] = source
+      source.signal_connect("destroy") do |object|
+        @sources.delete(object.object_id)
+      end
       case signal_proc.arity
       when 0
         sig_conn_proc.call(signal) {signal_proc.call}
