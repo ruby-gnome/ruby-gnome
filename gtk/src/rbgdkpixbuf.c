@@ -4,7 +4,7 @@
   rbgdkpixbuf.c -
 
   $Author: ktou $
-  $Date: 2006/10/14 04:39:21 $
+  $Date: 2006/10/14 04:59:14 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -115,9 +115,7 @@ pixbuf_s_from_drawable(argc, argv, self)
                                        NUM2INT(width), NUM2INT(height));
     if (NIL_P(dest)) {
         if (buf) {
-            VALUE result = GOBJ2RVAL(buf);
-            g_object_unref(buf);
-            return result;
+            return GOBJ2RVALU(buf);
         } else {
             return Qnil;
         }
