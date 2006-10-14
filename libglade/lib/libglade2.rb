@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.14 2006/10/12 13:50:17 ktou Exp $
+  $Id: libglade2.rb,v 1.15 2006/10/14 15:06:00 ktou Exp $
 =end
 
 require 'gtk2'
@@ -40,11 +40,7 @@ class GladeXML
     end
 
     if signal_proc
-      @sources ||= {}
-      @sources[source.object_id] = source
-      source.signal_connect("destroy") do |object|
-        @sources.delete(object.object_id)
-      end
+      guard_source_from_gc(source)
       case signal_proc.arity
       when 0
         sig_conn_proc.call(signal) {signal_proc.call}
@@ -96,6 +92,22 @@ class GladeXML
       }
     end
     [@widget_names, @custom_methods]    
+  end
+
+  def guard_source_from_gc(source)
+    @sources ||= {}
+    @sources[source.object_id] = source
+    source.signal_connect("destroy") do |object|
+      @sources.delete(object.object_id)
+    end
+    make_parent_widgets_for_a_widget_that_has_a_window_in_ancestors(source)
+  end
+
+  def make_parent_widgets_for_a_widget_that_has_a_window_in_ancestors(source)
+    parent = source.parent
+    while parent
+      parent = parent.parent
+    end
   end
 
   LOG_DOMAIN = "libglade"

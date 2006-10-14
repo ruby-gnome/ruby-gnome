@@ -1,3 +1,7 @@
+2006-10-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/libglade2.rb: improved a protection of source from GC.
+
 2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/libglade2.rb: keep a reference of signal connected object to
