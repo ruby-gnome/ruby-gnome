@@ -1,5 +1,9 @@
 2006-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgdkevent.c (ATTR_GOBJ): fixed a reference count related
+	bug of Gdk::EventXXX#set_YYY. Bug #1548806.
+	Reported by Markus Koller.
+
 	* src/rbgdkpixbuf.c (pixbuf_s_from_drawable): fixed a memory leak.
 	Reported by Andy Chantrill.
 

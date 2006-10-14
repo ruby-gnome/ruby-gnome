@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: ktou $
+  $Date: 2006/10/14 05:17:29 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -115,7 +115,13 @@ static VALUE \
 gdkevent ## type ## _set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    get_gdkevent(self)->type.name = RVAL2GOBJ(val);\
+    GdkEvent *event;\
+    event = get_gdkevent(self);\
+    if (event->type.name)\
+      g_object_unref(event->type.name);\
+    event->type.name = RVAL2GOBJ(val);\
+    if (event->type.name)\
+      g_object_ref(event->type.name);\
     return self;\
 }
 
