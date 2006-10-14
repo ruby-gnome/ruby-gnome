@@ -1,3 +1,8 @@
+2006-10-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkpixbuf.c (pixbuf_s_from_drawable): fixed a memory leak.
+	Reported by Andy Chantrill.
+
 2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkselectiondata.c (gtkselectiondata_get_uris): fixed

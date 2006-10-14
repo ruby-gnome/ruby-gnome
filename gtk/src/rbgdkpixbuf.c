@@ -3,8 +3,8 @@
 
   rbgdkpixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2006/01/26 17:48:39 $
+  $Author: ktou $
+  $Date: 2006/10/14 04:39:21 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -115,7 +115,9 @@ pixbuf_s_from_drawable(argc, argv, self)
                                        NUM2INT(width), NUM2INT(height));
     if (NIL_P(dest)) {
         if (buf) {
-            return GOBJ2RVAL(buf);
+            VALUE result = GOBJ2RVAL(buf);
+            g_object_unref(buf);
+            return result;
         } else {
             return Qnil;
         }
