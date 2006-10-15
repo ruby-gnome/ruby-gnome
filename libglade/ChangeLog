@@ -1,3 +1,7 @@
+2006-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Code clean up.
+
 2006-10-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/libglade2.rb: improved a protection of source from GC.

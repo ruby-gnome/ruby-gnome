@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.15 2006/10/14 15:06:00 ktou Exp $
+  $Id: libglade2.rb,v 1.16 2006/10/15 07:43:21 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -100,10 +100,8 @@ class GladeXML
     source.signal_connect("destroy") do |object|
       @sources.delete(object.object_id)
     end
-    make_parent_widgets_for_a_widget_that_has_a_window_in_ancestors(source)
-  end
-
-  def make_parent_widgets_for_a_widget_that_has_a_window_in_ancestors(source)
+    # To get the parent window of the source as a ruby object.
+    # Ruby/GTK keeps the Window objects on the memory to prevend from GC.
     parent = source.parent
     while parent
       parent = parent.parent
