@@ -3,13 +3,10 @@
 
   rbgtkassistant.c -
 
-  $Author: ggc $
-  $Date: 2006/07/16 20:47:31 $
+  $Author: mutoh $
+  $Date: 2006/10/18 15:43:37 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
-  Copyright (C) 1998-2000 Yukihiro Matsumoto,
-                          Daisuke Kanda,
-                          Hiroshi Igarashi
+  Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
@@ -38,7 +35,7 @@ ass_set_current_page(self, page_num)
     VALUE self, page_num;
 {
     gtk_assistant_set_current_page(_SELF(self), NUM2INT(page_num));
-    return page_num;
+    return self;
 }
 
 static VALUE
@@ -223,6 +220,8 @@ Init_gtk_assistant()
     rb_define_method(ass, "add_action_widget", ass_add_action_widget, 1);
     rb_define_method(ass, "remove_action_widget", ass_remove_action_widget, 1);
     rb_define_method(ass, "update_buttons_state", ass_update_buttons_state, 0);
+
+    G_DEF_SETTERS(ass);
 
     /* GtkAssistantPageType */
     G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", ass);

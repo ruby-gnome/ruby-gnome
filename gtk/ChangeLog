@@ -1,3 +1,12 @@
+2006-10-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkassistant.c: Gtk::Assistant#set_current_page returns self.
+	Added G_DEF_SETTERS.
+
+2006-10-15  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreestore.c: Merge Gtk::TreeView#insert_with_values to #insert. 
+
 2006-10-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkevent.c (ATTR_GOBJ): fixed a reference count related
