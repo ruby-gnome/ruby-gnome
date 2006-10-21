@@ -4,12 +4,43 @@
   rbgtktreerowreference.c -
 
   $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
+
+/*****************************************/
+
+#ifndef GTK_TYPE_TREE_ROW_REFERENCE
+static GtkTreeRowReference*
+treerowref_copy(ref)
+    const GtkTreeRowReference* ref;
+{
+    return (GtkTreeRowReference*)ref;
+}
+
+GType
+rbgtk_tree_row_reference_get_type()
+{
+  static GType our_type = 0;
+  if (our_type == 0)
+    our_type = g_boxed_type_register_static ("GtkTreeRowReference",
+                    (GBoxedCopyFunc)treerowref_copy,
+                    (GBoxedFreeFunc)gtk_tree_row_reference_free);
+  return our_type;
+}
+
+GtkTreeRowReference *
+rbgtk_get_tree_row_reference(obj)
+    VALUE obj;
+{
+    return (GtkTreeRowReference*)RVAL2BOXED(obj, GTK_TYPE_TREE_ROW_REFERENCE);
+}
+#endif
+
+/*****************************************/
 
 #define _SELF(s) RVAL2TREEROWREFERENCE(s)
 #define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
@@ -124,19 +155,17 @@ Init_gtk_treerowreference()
     id_model = rb_intern("model");
     id_path = rb_intern("path");
 
-    if (rbgtk_tree_row_reference_get_type) {
-        VALUE gTreeref = G_DEF_CLASS(RBGTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
+    VALUE gTreeref = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   
-        rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
-        rb_define_method(gTreeref, "path", treerowref_get_path, 0);
+    rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
+    rb_define_method(gTreeref, "path", treerowref_get_path, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-        rb_define_method(gTreeref, "model", treerowref_get_model, 0);
+    rb_define_method(gTreeref, "model", treerowref_get_model, 0);
 #endif
-        rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
-
-        rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
-        rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
-        rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
-    }
+    rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
+    
+    rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
+    rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
+    rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
 }
 

@@ -8,8 +8,6 @@ PKG_CONFIG_ID = "gtk+-2.0"
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
 SRCDIR = TOPDIR + '/gtk/src'
-SRCDIR20 = TOPDIR + '/gtk/src20'
-SRCDIR22 = TOPDIR + '/gtk/src22'
 
 $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
@@ -93,11 +91,4 @@ $defs.delete("-DRUBY_GTK2_COMPILATION")
 
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-create_makefile_at_srcdir("gtk20", SRCDIR20) {
-  $objs = ["rbgtk20.o"]
-}
-create_makefile_at_srcdir("gtk22", SRCDIR22) {
-  $objs = ["rbgtk22.o"]
-}
-
-create_top_makefile(["src", "src20", "src22"])
+create_top_makefile(["src"])

@@ -1,3 +1,27 @@
+2006-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtknotebook.c: Added Gtk::Notebook#(get|set)_tab_reorderable, 
+	#(get|set)_tab_detachable, #set_window_creation_hook for GTK+-2.10.0.
+	* src/rbgtklinkbutton.c: Added. 
+	* sample/misc/linkbutton.rb: Added.
+	* sample/misc/window.rb: Improved.
+	* src/rbgtkentry.c: Added Gtk::Entry#layout_index_to_text_index, 
+	#text_index_to_layout_index.
+	* src/rbgtkdrag.c: Added Gtk::Drag.set_track_motion, get_track_motion for GTK+-2.10. 
+	* src/rbgtkcombobox.c, rbgtkbutton.c, rbgtkfilechooserbutton.c, rbgtklabel.c,
+	rbgtkmessagedialog.c: Add comments for GTK+-2.10. 
+
+2006-10-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkclipboard.c: Added Gtk::Clipboard#request_rich_text,
+	#wait_for_rich_text, #waitis_rich_text_avialable? for GTK+-2.10.
+	* src/global.c: Removed(wasn't used).
+	* gtk20/*, gtk22/*: Removed. Now Ruby/GTK2 doesn't support GTK+-2.2 or older. 
+	* extconf.rb, src/init.c, rbgtk.h, rbgtktreerowreference.c, rbgtkclipboard.c: 
+	ditto.
+	* src/rbgtkcellrendereraccel.c: Added.
+	* src/rbgtkcellrendererspin.c: Fixed copyright.
+
 2006-10-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkassistant.c: Gtk::Assistant#set_current_page returns self.

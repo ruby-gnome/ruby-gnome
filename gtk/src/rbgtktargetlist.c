@@ -4,7 +4,7 @@
   rbgtktargetlist.c -
 
   $Author: mutoh $
-  $Date: 2005/01/23 16:47:15 $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -14,6 +14,7 @@
 #define _SELF(r) ((GtkTargetList*)RVAL2BOXED(r, GTK_TYPE_TARGET_LIST))
 
 /**********************************/
+#if ! GTK_CHECK_VERSION(2,10,0) 
 static GtkTargetList*
 rbgtk_target_list_copy(const GtkTargetList* list)
 {
@@ -35,6 +36,7 @@ gtk_target_list_get_type(void)
                     (GBoxedFreeFunc)gtk_target_list_unref);
     return our_type;
 }
+#endif
 /**********************************/
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtkbutton.c -
 
   $Author: mutoh $
-  $Date: 2004/05/24 17:22:58 $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -105,6 +105,31 @@ button_get_alignment(self)
     return rb_assoc_new(rb_float_new(xalign), rb_float_new(yalign));
 }
 #endif
+
+/* Defined as properties.
+void        gtk_button_set_relief           (GtkButton *button,
+                                             GtkReliefStyle newstyle);
+GtkReliefStyle gtk_button_get_relief        (GtkButton *button);
+const gchar* gtk_button_get_label           (GtkButton *button);
+void        gtk_button_set_label            (GtkButton *button,
+                                             const gchar *label);
+gboolean    gtk_button_get_use_stock        (GtkButton *button);
+void        gtk_button_set_use_stock        (GtkButton *button,
+                                             gboolean use_stock);
+gboolean    gtk_button_get_use_underline    (GtkButton *button);
+void        gtk_button_set_use_underline    (GtkButton *button,
+                                             gboolean use_underline);
+void        gtk_button_set_focus_on_click   (GtkButton *button,
+                                             gboolean focus_on_click);
+gboolean    gtk_button_get_focus_on_click   (GtkButton *button);
+void        gtk_button_set_image            (GtkButton *button,
+                                             GtkWidget *image);
+GtkWidget*  gtk_button_get_image            (GtkButton *button);
+void        gtk_button_set_image_position   (GtkButton *button,
+                                             GtkPositionType position);
+GtkPositionType gtk_button_get_image_position
+                                            (GtkButton *button);
+*/
 
 void 
 Init_gtk_button()

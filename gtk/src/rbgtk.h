@@ -3,10 +3,10 @@
 
   rbgtk.h -
 
-  $Author: ktou $
-  $Date: 2006/07/09 15:20:00 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -53,6 +53,7 @@
 #define GTK_TYPE_BINDING_SET (gtk_bindingset_get_type())
 #define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
 #ifndef GTK_TYPE_TARGET_LIST
+extern GType gtk_target_list_get_type();
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 #endif
 
@@ -72,21 +73,27 @@ RUBY_GTK2_VAR VALUE mGdk;
 /*
  * for gtk2.0/gtk2.2
  */
-typedef GtkClipboard* (*RBGtkClipboardGetFunc) (VALUE);
-typedef VALUE (*RBGtkClipboardMakeFunc) (GtkClipboard*);
-typedef GtkTreeRowReference* (*RBGtkTreeRowReferenceGetFunc) (VALUE);
+#ifndef GTK_TYPE_CLIPBOARD
+#define GTK_TYPE_CLIPBOARD (rbgtk_clipboard_get_type())
+#define RVAL2CLIPBOARD(obj) (rbgtk_get_clipboard(obj))
+#define CLIPBOARD2RVAL(val) (rbgtk_make_clipboard(val))
+extern GType rbgtk_clipboard_get_type();
+extern GtkClipboard* rbgtk_get_clipboard(VALUE obj);
+extern VALUE rbgtk_make_clipboard(GtkClipboard* gobj);
+#else
+#define RVAL2CLIPBOARD(obj) (GTK_CLIPBOARD(RVAL2GOBJ(obj)))
+#define CLIPBOARD2RVAL(val) (GOBJ2RVAL(val))
+#endif
 
-#define RBGTK_TYPE_CLIPBOARD (rbgtk_clipboard_get_type())
-#define RVAL2CLIPBOARD(obj) rbgtk_get_clipboard(obj)
-#define CLIPBOARD2RVAL(val) rbgtk_make_clipboard(val)
-RUBY_GTK2_VAR GType (*rbgtk_clipboard_get_type)();
-RUBY_GTK2_VAR GtkClipboard* (*rbgtk_get_clipboard)(VALUE obj);
-RUBY_GTK2_VAR VALUE (*rbgtk_make_clipboard)(GtkClipboard* gobj);
-
-#define RBGTK_TYPE_TREE_ROW_REFERENCE (rbgtk_tree_row_reference_get_type())
+#ifndef GTK_TYPE_TREE_ROW_REFERENCE
+#define GTK_TYPE_TREE_ROW_REFERENCE (rbgtk_tree_row_reference_get_type())
 #define RVAL2TREEROWREFERENCE(obj) (rbgtk_get_tree_row_reference(obj))
-RUBY_GTK2_VAR GType (*rbgtk_tree_row_reference_get_type)();
-RUBY_GTK2_VAR GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj);
+extern GType rbgtk_tree_row_reference_get_type();
+extern GtkTreeRowReference* rbgtk_get_tree_row_reference(VALUE obj);
+#else
+#define RVAL2TREEROWREFERENCE(obj) ((GtkTreeRowReference*)(RVAL2BOXED(obj, GTK_TYPE_TREE_ROW_REFERENCE)))
+#endif
+  
 
 /*
  * for gtk
@@ -96,7 +103,6 @@ extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_allocation_get_type();
 extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
-extern GType gtk_target_list_get_type();
 extern GType gtk_bindingset_get_type();
 extern GType gtk_text_appearance_get_type();
 

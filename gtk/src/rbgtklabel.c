@@ -3,8 +3,8 @@
 
   rbgtklabel.c -
 
-  $Author: ktou $
-  $Date: 2006/07/01 10:02:06 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -143,6 +143,9 @@ void        gtk_label_set_single_line_mode  (GtkLabel *label,
 void        gtk_label_set_width_chars       (GtkLabel *label,
                                              gint n_chars);
 gint        gtk_label_get_width_chars       (GtkLabel *label);
+void        gtk_label_set_line_wrap_mode    (GtkLabel *label,
+                                             PangoWrapMode wrap_mode);
+PangoWrapMode gtk_label_get_line_wrap_mode  (GtkLabel *label);
 */
 
 void 

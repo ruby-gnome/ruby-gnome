@@ -4,9 +4,9 @@
   rbgtkmessagedialog.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 15:49:24 $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2002-2005 Masao Mutoh
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 #include "global.h"
@@ -52,6 +52,11 @@ mdiag_set_markup(self, str)
     return self;
 }
 #endif
+
+/* Defined as properties.
+void        gtk_message_dialog_set_image    (GtkMessageDialog *dialog,
+                                             GtkWidget *image);
+*/
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE

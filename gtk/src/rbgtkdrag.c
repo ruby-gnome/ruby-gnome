@@ -3,10 +3,10 @@
 
   rbgtkdrag.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2002,2003 Masao Mutoh
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 
@@ -143,6 +143,23 @@ gtkdrag_dest_add_uri_targets(self, widget)
 {
     gtk_drag_dest_add_uri_targets(RVAL2WIDGET(widget));
     return self;
+}
+#endif
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gtkdrag_dest_set_track_motion(self, widget, track_motion)
+    VALUE self, widget, track_motion;
+{
+    gtk_drag_dest_set_track_motion(RVAL2WIDGET(widget), RVAL2CBOOL(track_motion));
+    return self;
+}
+
+static VALUE
+gtkdrag_dest_get_track_motion(self, widget)
+    VALUE self, widget;
+{
+    return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
 }
 #endif
 
@@ -375,6 +392,10 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "dest_add_text_targets", gtkdrag_dest_add_text_targets, 1);
     rb_define_module_function(mGtkDrag, "dest_add_image_targets", gtkdrag_dest_add_image_targets, 1);
     rb_define_module_function(mGtkDrag, "dest_add_uri_targets", gtkdrag_dest_add_uri_targets, 1);
+#endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_module_function(mGtkDrag, "set_track_motion", gtkdrag_dest_set_track_motion, 2);
+    rb_define_module_function(mGtkDrag, "get_track_motion", gtkdrag_dest_get_track_motion, 1);
 #endif
     rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
     rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);

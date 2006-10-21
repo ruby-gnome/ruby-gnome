@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: ktou $
-  $Date: 2006/04/15 01:58:50 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -285,21 +285,64 @@ note_get_tab_label_text(self, child)
                                                      RVAL2WIDGET(child)));
 }
 
+#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-note_set_current_page(self, page_num)
-    VALUE self, page_num;
+note_get_tab_reorderable(self, child)
+    VALUE self, child;
 {
-    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page_num));
+    return CBOOL2RVAL(gtk_notebook_get_tab_reorderable(_SELF(self), 
+                                                       GTK_WIDGET(RVAL2GOBJ(child))));
+}
+static VALUE
+note_set_tab_reorderable(self, child, reorderable)
+    VALUE self, child, reorderable;
+{
+    gtk_notebook_set_tab_reorderable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+                                     RVAL2CBOOL(reorderable));
     return self;
 }
 
 static VALUE
-note_set_current_page_eq(self, page_num)
-    VALUE self, page_num;
+note_get_tab_detachable(self, child)
+    VALUE self, child;
 {
-    gtk_notebook_set_current_page(_SELF(self), NUM2INT(page_num));
-    return page_num;
+    return CBOOL2RVAL(gtk_notebook_get_tab_detachable(_SELF(self), 
+                                                      GTK_WIDGET(RVAL2GOBJ(child))));
 }
+static VALUE
+note_set_tab_detachable(self, child, detachable)
+    VALUE self, child, detachable;
+{
+    gtk_notebook_set_tab_detachable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+                                     RVAL2CBOOL(detachable));
+    return self;
+}
+
+static GtkNotebook*
+creation_func(source, page, x, y, func)
+    GtkNotebook *source;
+    GtkWidget *page;
+    gint x;
+    gint y;
+    gpointer func;
+{
+    VALUE ret;
+    ret = rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(source), GOBJ2RVAL(page),
+                     INT2NUM(x), INT2NUM(y));
+    return NIL_P(ret) ? (GtkNotebook*)NULL : GTK_NOTEBOOK(RVAL2GOBJ(ret));
+}
+
+static VALUE
+note_set_window_creation_hook(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+    gtk_notebook_set_window_creation_hook((GtkNotebookWindowCreationFunc)creation_func, 
+                                          (gpointer)func, (GDestroyNotify)NULL);
+    return self;
+}    
+#endif
 
 /***********************************************/
 /*
@@ -343,6 +386,53 @@ signal_g2r_func(num, values)
                        GVAL2RVAL(&values[2]));
 }
 
+/* Defined as the "page" property.
+*/
+
+/* Defined as properties
+// "enable-popup" property
+void        gtk_notebook_popup_enable       (GtkNotebook *notebook);
+void        gtk_notebook_popup_disable      (GtkNotebook *notebook);
+
+void        gtk_notebook_set_group_id       (GtkNotebook *notebook,
+                                             gint group_id);
+gint        gtk_notebook_get_group_id       (GtkNotebook *notebook);
+
+// "homogeneous" property
+void        gtk_notebook_set_homogeneous_tabs
+                                            (GtkNotebook *notebook,
+                                             gboolean homogeneous);
+// "page" property.
+#define     gtk_notebook_current_page
+#define     gtk_notebook_set_page
+gint        gtk_notebook_get_current_page   (GtkNotebook *notebook);
+void        gtk_notebook_set_current_page   (GtkNotebook *notebook,
+                                             gint page_num);
+
+gboolean    gtk_notebook_get_scrollable     (GtkNotebook *notebook);
+void        gtk_notebook_set_scrollable     (GtkNotebook *notebook,
+                                             gboolean scrollable);
+
+void        gtk_notebook_set_show_border    (GtkNotebook *notebook,
+                                             gboolean show_border);
+gboolean    gtk_notebook_get_show_border    (GtkNotebook *notebook);
+
+gboolean    gtk_notebook_get_show_tabs      (GtkNotebook *notebook);
+void        gtk_notebook_set_show_tabs      (GtkNotebook *notebook,
+                                             gboolean show_tabs);
+
+GtkPositionType gtk_notebook_get_tab_pos    (GtkNotebook *notebook);
+void        gtk_notebook_set_tab_pos        (GtkNotebook *notebook,
+                                             GtkPositionType pos);
+
+void        gtk_notebook_set_tab_hborder    (GtkNotebook *notebook,
+                                             guint tab_hborder);
+void        gtk_notebook_set_tab_border     (GtkNotebook *notebook,
+                                             guint border_width);
+void        gtk_notebook_set_tab_vborder    (GtkNotebook *notebook,
+                                             guint tab_vborder);
+ */
+
 /*****************************************/
 
 void 
@@ -377,8 +467,14 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
     rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
     rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
-    rb_define_method(gNotebook, "set_page", note_set_current_page, 1);
-    rb_define_method(gNotebook, "page=", note_set_current_page_eq, 1);
+
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gNotebook, "get_tab_reorderable", note_get_tab_reorderable, 1);
+    rb_define_method(gNotebook, "set_tab_reorderable", note_set_tab_reorderable, 2);
+    rb_define_method(gNotebook, "get_tab_detachable", note_get_tab_detachable, 1);
+    rb_define_method(gNotebook, "set_tab_detachable", note_set_tab_detachable, 2);
+    rb_define_singleton_method(gNotebook, "set_window_creation_hook", note_set_window_creation_hook, 0);
+#endif
     /* GtkNotebookTab */
     rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
     rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);

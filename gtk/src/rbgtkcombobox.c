@@ -4,7 +4,7 @@
   rbgtkcombobox.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -191,7 +191,6 @@ combobox_set_row_separator_func(self)
     return self;
 }
 
-
 /* This calls g_object_notify(combo, "focus_on_click");
    If you want to set "focus_on_click" property only, 
    call GLib::Object.set_property.
@@ -206,6 +205,12 @@ combobox_set_focus_on_click(self, val)
 
 #endif
 #endif
+
+/* Defined as Properties
+void        gtk_combo_box_set_title         (GtkComboBox *combo_box,
+                                             const gchar *title);
+const gchar* gtk_combo_box_get_title        (GtkComboBox *combo_box);
+ */
 
 void 
 Init_gtk_combobox()

@@ -3,10 +3,10 @@
 
   init.c -
 
-  $Author: silicio $
-  $Date: 2005/03/02 12:06:36 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -20,38 +20,10 @@ extern void Init_gtk_gtk();
 extern void Init_gtk_inits();
 
 VALUE treeiter_set_value_table;
-GType (*rbgtk_clipboard_get_type)() = NULL;
-GtkClipboard* (*rbgtk_get_clipboard)(VALUE obj) = NULL;
-VALUE (*rbgtk_make_clipboard)(GtkClipboard* gobj) = NULL;
-GType (*rbgtk_tree_row_reference_get_type)() = NULL;
-GtkTreeRowReference *(*rbgtk_get_tree_row_reference)(VALUE obj) = NULL;
-
-static VALUE
-require_minor()
-{
-#if 0
-    char feature[32];
-    sprintf(feature, "gtk2%d", gtk_minor_version);
-    rb_require(feature);
-#else
-    if (gtk_minor_version == 0) {
-        rb_require("gtk20");
-    } else {
-        rb_require("gtk22");
-    }
-#endif
-    return Qnil;
-}
 
 void
 Init_gtk2()
 {
-#if 0
-    rb_protect(&require_minor, Qnil, NULL);
-#else
-    rb_rescue2(&require_minor, Qnil, NULL, Qnil, rb_eLoadError, NULL);
-#endif
-
     /*
      * For Gtk::TreeModel, Gtk::TreeIter. 
      * They should be initialized on this timing.

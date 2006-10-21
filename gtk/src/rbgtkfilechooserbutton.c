@@ -4,7 +4,7 @@
   rbgtkfilechooserbutton.c -
 
   $Author: mutoh $
-  $Date: 2005/01/09 09:20:30 $
+  $Date: 2006/10/21 16:58:00 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -53,7 +53,13 @@ gint        gtk_file_chooser_button_get_width_chars
 void        gtk_file_chooser_button_set_width_chars
                                             (GtkFileChooserButton *button,
                                              gint n_chars);
+gboolean    gtk_file_chooser_button_get_focus_on_click
+                                            (GtkFileChooserButton *button);
+void        gtk_file_chooser_button_set_focus_on_click
+                                            (GtkFileChooserButton *button,
+                                             gboolean focus_on_click);
 */
+
 #endif
 
 void 

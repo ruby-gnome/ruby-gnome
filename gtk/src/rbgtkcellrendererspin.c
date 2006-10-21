@@ -3,10 +3,10 @@
 
   rbgtkcellrendererspin.c -
 
-  $Author: ggc $
-  $Date: 2006/07/16 20:22:52 $
+  $Author: mutoh $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2006 Ruby-gnome2 team
+  Copyright (C) 2006 Ruby-GNOME2 Team
 ************************************************/
 
 #include "global.h"

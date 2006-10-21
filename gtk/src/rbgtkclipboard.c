@@ -4,14 +4,48 @@
   rbgtkclipboard.c -
  
   $Author: mutoh $
-  $Date: 2006/05/07 23:51:20 $
+  $Date: 2006/10/21 16:58:00 $
 
-  Copyright (C) 2004,2005 Ruby-GNOME2 Project
+  Copyright (C) 2004,2006 Ruby-GNOME2 Project
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
 #include "global.h"
 
 #define _SELF(s) RVAL2CLIPBOARD(s)
+
+#ifndef GTK_TYPE_CLIPBOARD
+static GtkClipboard*
+clipboard_copy(const GtkClipboard *clipboard)
+{
+    /* I don't know how to copy this object ... */
+    return (GtkClipboard*)clipboard;
+}
+
+GType
+rbgtk_clipboard_get_type()
+{
+    static GType our_type = 0;
+    if(our_type == 0)
+        our_type = g_boxed_type_register_static("GtkClipboard",
+                                                (GBoxedCopyFunc)clipboard_copy,
+                                                (GBoxedFreeFunc)g_free);
+    return our_type;
+}
+
+GtkClipboard*
+rbgtk_get_clipboard(obj)
+    VALUE obj;
+{
+    return GTK_CLIPBOARD(RVAL2GOBJ(obj));
+}
+
+VALUE
+rbgtk_make_clipboard(gobj)
+    GtkClipboard* gobj;
+{
+    return GOBJ2RVAL(gobj);
+}
+#endif
 
 static VALUE
 clipboard_get(argc, argv, self)
@@ -220,6 +254,33 @@ clipboard_request_targets(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static void
+clipboard_rich_text_received_func(clipboard, format, text, length, func)
+    GtkClipboard* clipboard;
+    GdkAtom format;
+    const guint8 *text;
+    gsize length;
+    gpointer func;
+{
+    rb_funcall((VALUE)func, id_call, 3, CLIPBOARD2RVAL(clipboard), 
+               BOXED2RVAL(format, GDK_TYPE_ATOM), rb_str_new((char*)text, length));
+}
+
+static VALUE
+clipboard_request_rich_text(self, buffer)
+    VALUE self, buffer;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_RELATIVE(self, func);
+
+    gtk_clipboard_request_rich_text(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)),
+                                    (GtkClipboardRichTextReceivedFunc)clipboard_rich_text_received_func,
+                                    (gpointer)func);
+    return self;
+}
+#endif
+
 static VALUE
 clipboard_wait_for_contents(self, target)
     VALUE self, target;
@@ -249,6 +310,27 @@ clipboard_wait_for_image(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+clipboard_wait_for_rich_text(self, buffer)
+    VALUE self, buffer;
+{
+    GdkAtom format;
+    gsize length;
+    guint8* data = gtk_clipboard_wait_for_rich_text(_SELF(self), 
+                                                    GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)),
+                                                                    &format, &length);
+    if (data){
+        VALUE str = rb_str_new((char*)data, length);
+        g_free(data);
+        return rb_assoc_new(str, BOXED2RVAL(format, GDK_TYPE_ATOM));
+    } else {
+        return rb_assoc_new(Qnil, BOXED2RVAL(format, GDK_TYPE_ATOM));
+    }
+    
+}
+#endif
+
 static VALUE
 clipboard_wait_is_text_available(self)
     VALUE self;
@@ -262,6 +344,15 @@ clipboard_wait_is_image_available(self)
     VALUE self;
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_image_available(_SELF(self)));
+}
+#endif
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+clipboard_wait_is_rich_text_available(self, buffer)
+    VALUE self, buffer;
+{
+    return CBOOL2RVAL(gtk_clipboard_wait_is_rich_text_available(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
 }
 #endif
 
@@ -329,14 +420,13 @@ clipboard_store(self)
 void 
 Init_gtk_clipboard()
 {
-  if (rbgtk_clipboard_get_type){
-    VALUE gClipboard = G_DEF_CLASS(RBGTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
+    VALUE gClipboard = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 
     rb_define_singleton_method(gClipboard, "get", clipboard_get, -1);
     rb_define_method(gClipboard, "display", clipboard_get_display, 0);
     rb_define_method(gClipboard, "set", clipboard_set, 1);
 /*
-    rb_define_method(gClipboard, "owner", clipboard_get_owner, 0);
+  rb_define_method(gClipboard, "owner", clipboard_get_owner, 0);
 */
     rb_define_method(gClipboard, "clear", clipboard_clear, 0);
     rb_define_method(gClipboard, "set_text", clipboard_set_text, 1);
@@ -351,14 +441,23 @@ Init_gtk_clipboard()
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gClipboard, "request_targets", clipboard_request_targets, 0);
 #endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gClipboard, "request_rich_text", clipboard_request_rich_text, 1);
+#endif
     rb_define_method(gClipboard, "wait_for_contents", clipboard_wait_for_contents, 1);
     rb_define_method(gClipboard, "wait_for_text", clipboard_wait_for_text, 0);
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gClipboard, "wait_for_image", clipboard_wait_for_image, 0);
 #endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gClipboard, "wait_for_rich_text", clipboard_wait_for_rich_text, 1);
+#endif
     rb_define_method(gClipboard, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gClipboard, "wait_is_image_available?", clipboard_wait_is_image_available, 0);
+#endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gClipboard, "wait_is_rich_text_available?", clipboard_wait_is_rich_text_available, 1);
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gClipboard, "wait_for_targets", clipboard_wait_for_targets, 0);
@@ -370,5 +469,4 @@ Init_gtk_clipboard()
 #endif
 
     G_DEF_SETTERS(gClipboard);
-  }
 }
