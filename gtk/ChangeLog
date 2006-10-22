@@ -1,5 +1,8 @@
 2006-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtkpagesetup.c: Rename Gtk::PageSetup#(top|bottom|left|right)_margin
+	to Gtk::PageSetup#get_(top|bottom|left|right)_margin to follow
+	Ruby-GNOME2 naming rules.
 	* src/rbgtknotebook.c: Added Gtk::Notebook#(get|set)_tab_reorderable, 
 	#(get|set)_tab_detachable, #set_window_creation_hook for GTK+-2.10.0.
 	* src/rbgtklinkbutton.c: Added. 

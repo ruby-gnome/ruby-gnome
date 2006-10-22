@@ -3,8 +3,8 @@
 
   rbgtkpagesetup.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 15:20:00 $
+  $Author: mutoh $
+  $Date: 2006/10/22 15:12:05 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -177,25 +177,25 @@ Init_gtk_page_setup()
     rb_define_method(gPageSetup, "set_orientation", ps_set_orientation, 1);
     rb_define_method(gPageSetup, "paper_size", ps_get_paper_size, 0);
     rb_define_method(gPageSetup, "set_paper_size", ps_set_paper_size, 1);
-    rb_define_method(gPageSetup, "top_margin", ps_get_top_margin, 1);
+    rb_define_method(gPageSetup, "get_top_margin", ps_get_top_margin, 1);
     rb_define_method(gPageSetup, "set_top_margin", ps_set_top_margin, 2);
-    rb_define_method(gPageSetup, "bottom_margin", ps_get_bottom_margin, 1);
+    rb_define_method(gPageSetup, "get_bottom_margin", ps_get_bottom_margin, 1);
     rb_define_method(gPageSetup, "set_bottom_margin", ps_set_bottom_margin, 2);
-    rb_define_method(gPageSetup, "left_margin", ps_get_left_margin, 1);
+    rb_define_method(gPageSetup, "get_left_margin", ps_get_left_margin, 1);
     rb_define_method(gPageSetup, "set_left_margin", ps_set_left_margin, 2);
-    rb_define_method(gPageSetup, "right_margin", ps_get_right_margin, 1);
+    rb_define_method(gPageSetup, "get_right_margin", ps_get_right_margin, 1);
     rb_define_method(gPageSetup, "set_right_margin", ps_set_right_margin, 2);
 
     rb_define_method(gPageSetup, "set_paper_size_and_default_margins",
                      ps_set_paper_size_and_default_margins, 1);
 
     /* These take orientation, but not margins into consideration */
-    rb_define_method(gPageSetup, "paper_width", ps_get_paper_width, 1);
-    rb_define_method(gPageSetup, "paper_height", ps_get_paper_height, 1);
+    rb_define_method(gPageSetup, "get_paper_width", ps_get_paper_width, 1);
+    rb_define_method(gPageSetup, "get_paper_height", ps_get_paper_height, 1);
 
     /* These take orientation, and margins into consideration */
-    rb_define_method(gPageSetup, "page_width", ps_get_page_width, 1);
-    rb_define_method(gPageSetup, "page_height", ps_get_page_height, 1);
+    rb_define_method(gPageSetup, "get_page_width", ps_get_page_width, 1);
+    rb_define_method(gPageSetup, "get_page_height", ps_get_page_height, 1);
 
     G_DEF_SETTERS(gPageSetup);
 #endif
