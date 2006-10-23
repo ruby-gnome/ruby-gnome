@@ -1,3 +1,10 @@
+2006-10-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkpapersize.c: Rename Gtk::PaperSize#default_(top|bottom|left|right)_margin
+	to Gtk::PaperSize#get_default_(top|bottom|left|right)_margin.
+	Rename Gtk::PaperSize#width, #height to #get_width, #get_height.
+	* src/rbgtkpagesetupunixdialog.c: Code cleanup.
+
 2006-10-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkpagesetup.c: Rename Gtk::PageSetup#(top|bottom|left|right)_margin

@@ -3,8 +3,8 @@
 
   rbgtkpagesetupunixdialog.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 08:56:56 $
+  $Author: mutoh $
+  $Date: 2006/10/23 17:10:15 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -20,12 +20,10 @@ static VALUE
 psud_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget *dialog;
-    VALUE rb_title, parent;
-    gchar *title;
+    VALUE title, parent;
 
-    rb_scan_args(argc, argv, "02", &rb_title, &parent);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
-    dialog = gtk_page_setup_unix_dialog_new(title, RVAL2GOBJ(parent));
+    rb_scan_args(argc, argv, "02", &title, &parent);
+    dialog = gtk_page_setup_unix_dialog_new(RVAL2CSTR2(title), RVAL2GOBJ(parent));
 
     RBGTK_INITIALIZE(self, dialog);
     return Qnil;

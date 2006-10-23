@@ -3,8 +3,8 @@
 
   rbgtkpapersize.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 15:20:00 $
+  $Author: mutoh $
+  $Date: 2006/10/23 17:10:15 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -160,20 +160,20 @@ Init_gtk_paper_size()
     rb_define_method(gPaperSize, "display_name", ps_get_display_name, 0);
     rb_define_method(gPaperSize, "ppd_name", ps_get_ppd_name, 0);
 
-    rb_define_method(gPaperSize, "width", ps_get_width, 1);
-    rb_define_method(gPaperSize, "height", ps_get_height, 1);
+    rb_define_method(gPaperSize, "get_width", ps_get_width, 1);
+    rb_define_method(gPaperSize, "get_height", ps_get_height, 1);
 
     rb_define_method(gPaperSize, "custom?", ps_is_custom, 0);
 
     rb_define_method(gPaperSize, "set_size", ps_set_size, 3);
 
-    rb_define_method(gPaperSize, "default_top_margin",
+    rb_define_method(gPaperSize, "get_default_top_margin",
                      ps_get_default_top_margin, 1);
-    rb_define_method(gPaperSize, "default_bottom_margin",
+    rb_define_method(gPaperSize, "get_default_bottom_margin",
                      ps_get_default_bottom_margin, 1);
-    rb_define_method(gPaperSize, "default_left_margin",
+    rb_define_method(gPaperSize, "get_default_left_margin",
                      ps_get_default_left_margin, 1);
-    rb_define_method(gPaperSize, "default_right_margin",
+    rb_define_method(gPaperSize, "get_default_right_margin",
                      ps_get_default_right_margin, 1);
 
     G_DEF_SETTERS(gPaperSize);
