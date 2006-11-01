@@ -1,3 +1,12 @@
+2006-11-02  Masao Mutoh  <mutoh@core2.yotabanana.com>
+
+	* src/rbgtkprinter.c: Gtk::Printer includes Comparable. 
+	Defines Gtk::PrintBackendCups, Gtk::PrintBackendFile, Gtk::PrintBackendLpr.
+	Gtk::Printer#compare raises TypeError if a parameter 
+	is wrong type.
+	* src/lib/gtk2/base.rb: Add Gtk::Printer.printers.
+	* extconf.rb: Code clean up.
+
 2006-10-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkpapersize.c: Rename Gtk::PaperSize#default_(top|bottom|left|right)_margin

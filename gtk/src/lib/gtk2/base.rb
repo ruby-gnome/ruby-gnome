@@ -5,7 +5,7 @@
   Copyright (c) 2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: base.rb,v 1.2 2006/07/01 09:08:34 mutoh Exp $
+  $Id: base.rb,v 1.3 2006/11/01 15:19:58 mutoh Exp $
 =end
 
 
@@ -30,7 +30,15 @@ end
 
 module Gtk
   LOG_DOMAIN = "Gtk"
+
+  class Printer
+    def self.printers(wait = false)
+      @@printers = []
+      self.each(wait) {|v| @@printers << v}
+      @@printers
+    end
+  end
 end
 
- GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
+GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
 GLib::Log.set_log_domain(Gtk::LOG_DOMAIN)

@@ -3,15 +3,15 @@
 
   rbgtkprinter.c -
 
-  $Author: ktou $
-  $Date: 2006/07/10 13:17:56 $
+  $Author: mutoh $
+  $Date: 2006/11/01 15:19:58 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
 
-#ifdef HAVE_GTK_GTKPRINTER_H
+#if GTK_CHECK_VERSION(2,10,0)
 #include <gtk/gtkprinter.h>
 
 #ifndef GTK_TYPE_PRINT_BACKEND
@@ -38,6 +38,18 @@ p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
     return Qnil;
 }
 
+/* Defined as properties
+gboolean    gtk_printer_accepts_ps          (GtkPrinter *printer);
+gboolean    gtk_printer_accepts_pdf         (GtkPrinter *printer);
+GtkPrintBackend* gtk_printer_get_backend    (GtkPrinter *printer);
+const gchar* gtk_printer_get_icon_name      (GtkPrinter *printer);
+gboolean    gtk_printer_is_virtual          (GtkPrinter *printer);
+const gchar* gtk_printer_get_name           (GtkPrinter *printer);
+const gchar* gtk_printer_get_state_message  (GtkPrinter *printer);
+const gchar* gtk_printer_get_location       (GtkPrinter *printer);
+gint        gtk_printer_get_job_count       (GtkPrinter *printer);
+*/
+
 static VALUE
 p_get_description(VALUE self)
 {
@@ -59,10 +71,10 @@ p_is_default(VALUE self)
 static VALUE
 p_compare(VALUE self, VALUE other)
 {
-    if (RTEST(rb_equal(rb_obj_class(self), rb_obj_class(other)))) {
+    if (rb_obj_is_kind_of(other, GTYPE2CLASS(GTK_TYPE_PRINTER))){
         return INT2NUM(gtk_printer_compare(_SELF(self), _SELF(other)));
     } else {
-        return INT2NUM(G_MAXINT);
+        rb_raise(rb_eTypeError, "%s isn't a kind of Gtk::Printer", rb_class2name(other));
     }
 }
 
@@ -123,8 +135,10 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_printer()
 {
-#ifdef HAVE_GTK_GTKPRINTER_H
+#if GTK_CHECK_VERSION(2,10,0)
     gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
+    rb_include_module(gPrinter, rb_mComparable);
+
     G_DEF_CLASS(GTK_TYPE_PRINT_BACKEND, "PrintBackend", mGtk);
 
     rb_define_singleton_method(gPrinter, "each", p_s_enumerate_printers, -1);
@@ -134,6 +148,10 @@ Init_gtk_printer()
     rb_define_method(gPrinter, "active?", p_is_active, 0);
     rb_define_method(gPrinter, "default?", p_is_default, 0);
     rb_define_method(gPrinter, "<=>", p_compare, 1);
+
+    G_DEF_CLASS3("GtkPrintBackendCups", "PrintBackendCups", mGtk);
+    G_DEF_CLASS3("GtkPrintBackendFile", "PrintBackendFile", mGtk);
+    G_DEF_CLASS3("GtkPrintBackendLpr", "PrintBackendLpr", mGtk);
 
     G_DEF_SETTERS(gPrinter);
 #endif
