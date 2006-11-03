@@ -28,7 +28,7 @@ window.set_default_size(width, height)
 area = Gtk::DrawingArea.new
 
 window.signal_connect("destroy") do
-  Gtk.quit
+  Gtk.main_quit
 end
 
 area.signal_connect("expose_event") do |widget, event|
