@@ -4,7 +4,7 @@
   rbgtkprinter.c -
 
   $Author: mutoh $
-  $Date: 2006/11/01 15:19:58 $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -22,8 +22,6 @@ GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 
 #define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
 
-#define RVAL2PB(o) (GTK_PRINT_BACKEND(RVAL2GOBJ(o)))
-
 static VALUE gPrinter;
 
 static VALUE
@@ -31,7 +29,8 @@ p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
 {
     GtkPrinter *printer;
 
-    printer = gtk_printer_new(RVAL2CSTR(name), RVAL2PB(backend),
+    printer = gtk_printer_new(RVAL2CSTR(name), 
+                              GTK_PRINT_BACKEND(RVAL2GOBJ(backend)),
                               RVAL2CBOOL(rb_virtual));
 
     G_INITIALIZE(self, printer);
@@ -128,7 +127,7 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
     gtk_enumerate_printers(each_printer, (gpointer)block,
                            remove_callback_reference, RVAL2CBOOL(wait));
 
-    return Qnil;
+    return self;
 }
 #endif
 

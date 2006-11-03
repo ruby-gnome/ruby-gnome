@@ -4,7 +4,7 @@
   rbgtkpagesetup.c -
 
   $Author: mutoh $
-  $Date: 2006/10/22 15:12:05 $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -16,11 +16,7 @@
 #define _SELF(s) (GTK_PAGE_SETUP(RVAL2GOBJ(s)))
 
 #define RVAL2SIZE(o) (RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
-
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
-
-#define RVAL2PO(o) (RVAL2GENUM(o, GTK_TYPE_PAGE_ORIENTATION))
-#define PO2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PAGE_ORIENTATION))
 
 static VALUE
 ps_initialize(VALUE self)
@@ -42,13 +38,15 @@ ps_copy(VALUE self)
 static VALUE
 ps_get_orientation(VALUE self)
 {
-    return PO2RVAL(gtk_page_setup_get_orientation(_SELF(self)));
+    return GENUM2RVAL(gtk_page_setup_get_orientation(_SELF(self)), 
+                      GTK_TYPE_PAGE_ORIENTATION);
 }
 
 static VALUE
 ps_set_orientation(VALUE self, VALUE orientation)
 {
-    gtk_page_setup_set_orientation(_SELF(self), RVAL2PO(orientation));
+    gtk_page_setup_set_orientation(_SELF(self), 
+                                   RVAL2GENUM(orientation, GTK_TYPE_PAGE_ORIENTATION));
     return self;
 }
 

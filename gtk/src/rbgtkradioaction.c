@@ -4,7 +4,7 @@
   rbgtkradioaction.c -
  
   $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Date: 2006/11/03 19:40:44 $
  
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -62,14 +62,22 @@ raction_set_group(self, group)
     return self;
 }
 
+#if ! GTK_CHECK_VERSION(2,10,0)
 static VALUE
 raction_get_current_value(self)
     VALUE self;
 {
     return INT2NUM(gtk_radio_action_get_current_value(_SELF(self)));
 }
+#endif
     
 #endif
+
+/* Defined as Properties
+void        gtk_radio_action_set_current_value
+                                            (GtkRadioAction *action,
+                                             gint current_value);
+*/
 
 void 
 Init_gtk_radio_action()
@@ -79,7 +87,10 @@ Init_gtk_radio_action()
     VALUE gRadioAction = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
     rb_define_method(gRadioAction, "initialize", raction_initialize, 5);
+#if ! GTK_CHECK_VERSION(2,10,0)
+    /* Define as Property since 2.10 */
     rb_define_method(gRadioAction, "current_value", raction_get_current_value, 0);
+#endif
     rb_undef_method(gRadioAction, "group");
     rb_undef_method(gRadioAction, "set_group");
     rb_define_method(gRadioAction, "group", raction_get_group, 0);

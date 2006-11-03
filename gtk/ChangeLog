@@ -1,3 +1,22 @@
+2006-11-04  Masao Mutoh  <mutoh@core2.yotabanana.com>
+
+	* src/rbgtkprintoperationpreview.c: Gtk::PrintOperationPreview#render_page, 
+	#end_preview returns self instead of nil.
+	* src/rbgtkradioaction.c: Apply GTK+-2.10. 
+	* src/rbgtkprintunixdialog.c: Gtk::PrintUnixDialog#add_custom_tab returns self
+	instead of nil. Code cleanup. Define Gtk::PrintUnixDialog#Capabilities
+	* src/rbgtkprintsettings.c: Gtk::PrintSettings#each returns self instead of nil.
+	Add constants.
+	[]=(v) returns v, set() returns self.
+	* src/rbgtkprintoperation.c: Gtk::PrintOperation#cancel returns self.
+	Move Gtk::Print.run_page_setup_dialog to Gtk::PrintOperation. 
+	Changes the behaviour of Gtk::PrintOperation#run.
+	Define enums as constants.
+	* src/rbgtkprinter.c: Gtk::Printer#each returns self instead of nil. 
+	* src/rbgtkprintjob.c: Code cleanup.
+	* src/rbgtkprintcontext.c: Gtk::PrinterContext#set_cairo_context returns
+	self instead of nil.
+
 2006-11-02  Masao Mutoh  <mutoh@core2.yotabanana.com>
 
 	* src/rbgtkprinter.c: Gtk::Printer includes Comparable. 

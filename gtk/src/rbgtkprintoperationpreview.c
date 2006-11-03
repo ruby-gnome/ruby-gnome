@@ -3,8 +3,8 @@
 
   rbgtkprintoperationpreview.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 06:42:40 $
+  $Author: mutoh $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -18,14 +18,14 @@ static VALUE
 pop_render_page(VALUE self, VALUE page_number)
 {
     gtk_print_operation_preview_render_page(_SELF(self), NUM2INT(page_number));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 pop_end_preview(VALUE self)
 {
     gtk_print_operation_preview_end_preview(_SELF(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE

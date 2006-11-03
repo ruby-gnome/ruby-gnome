@@ -3,21 +3,43 @@
 
   rbgtkprintunixdialog.c -
 
-  $Author: ktou $
-  $Date: 2006/08/06 13:29:32 $
+  $Author: mutoh $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
 
-#ifdef HAVE_GTK_GTKPRINTUNIXDIALOG_H
+#if GTK_CHECK_VERSION(2,10,0)
 #include <gtk/gtkprintunixdialog.h>
 
 #define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
 #endif
+
+/* Defined as Properties
+void        gtk_print_unix_dialog_set_page_setup
+                                            (GtkPrintUnixDialog *dialog,
+                                             GtkPageSetup *page_setup);
+GtkPageSetup* gtk_print_unix_dialog_get_page_setup
+                                            (GtkPrintUnixDialog *dialog);
+void        gtk_print_unix_dialog_set_current_page
+                                            (GtkPrintUnixDialog *dialog,
+                                             gint current_page);
+gint        gtk_print_unix_dialog_get_current_page
+                                            (GtkPrintUnixDialog *dialog);
+
+void        gtk_print_unix_dialog_set_settings
+                                            (GtkPrintUnixDialog *dialog,
+                                             GtkPrintSettings *settings);
+GtkPrintSettings* gtk_print_unix_dialog_get_settings
+                                            (GtkPrintUnixDialog *dialog);
+
+GtkPrinter* gtk_print_unix_dialog_get_selected_printer
+                                            (GtkPrintUnixDialog *dialog);
+*/
 
 static VALUE
 pud_initialize(int argc, VALUE *argv, VALUE self)
@@ -39,15 +61,14 @@ pud_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
     gtk_print_unix_dialog_add_custom_tab(_SELF(self),
                                          RVAL2GOBJ(child),
                                          RVAL2GOBJ(tab_label));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
 {
-    GtkPrintCapabilities capabilities;
-    capabilities = RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES);
-    gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), capabilities);
+    gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), 
+                                                  RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES));
     return self;
 }
 #endif
@@ -55,7 +76,7 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
 void
 Init_gtk_print_unix_dialog()
 {
-#ifdef HAVE_GTK_GTKPRINTUNIXDIALOG_H
+#if GTK_CHECK_VERSION(2,10,0)
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
 
@@ -67,5 +88,10 @@ Init_gtk_print_unix_dialog()
     rb_define_alias(gPrintUnixDialog, "set_settings", "set_print_settings");
 
     G_DEF_SETTERS(gPrintUnixDialog);
+    
+    /* GtkPrintCapabilities */
+    G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", gPrintUnixDialog);
+    G_DEF_CONSTANTS(gPrintUnixDialog, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
+
 #endif
 }

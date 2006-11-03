@@ -4,7 +4,7 @@
   rbgtkpapersize.c -
 
   $Author: mutoh $
-  $Date: 2006/10/23 17:10:15 $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -177,5 +177,10 @@ Init_gtk_paper_size()
                      ps_get_default_right_margin, 1);
 
     G_DEF_SETTERS(gPaperSize);
+
+    /* GtkUnit */
+    G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", gPaperSize);
+    G_DEF_CONSTANTS(gPaperSize, GTK_TYPE_UNIT, "GTK_");
+
 #endif
 }

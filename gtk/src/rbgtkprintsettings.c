@@ -3,8 +3,8 @@
 
   rbgtkprintsettings.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 15:20:00 $
+  $Author: mutoh $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -15,32 +15,14 @@
 
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
-#define RVAL2SIZE(o) (RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
-
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
-#define UNIT2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_UNIT))
-
-#define RVAL2PO(o) (RVAL2GENUM(o, GTK_TYPE_PAGE_ORIENTATION))
-#define PO2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PAGE_ORIENTATION))
-#define RVAL2PD(o) (RVAL2GENUM(o, GTK_TYPE_PRINT_DUPLEX))
-#define PD2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PRINT_DUPLEX))
-#define RVAL2PQ(o) (RVAL2GENUM(o, GTK_TYPE_PRINT_QUALITY))
-#define PQ2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PRINT_QUALITY))
-#define RVAL2PP(o) (RVAL2GENUM(o, GTK_TYPE_PRINT_PAGES))
-#define PP2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PRINT_PAGES))
-#define RVAL2PS(o) (RVAL2GENUM(o, GTK_TYPE_PAGE_SET))
-#define PS2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PAGE_SET))
 
 static VALUE s_string, s_bool, s_double, s_length, s_int;
 
 static VALUE
 ps_initialize(VALUE self)
 {
-    GtkPrintSettings *settings;
-
-    settings = gtk_print_settings_new();
-
-    G_INITIALIZE(self, settings);
+    G_INITIALIZE(self, gtk_print_settings_new());
     return Qnil;
 }
 
@@ -66,21 +48,20 @@ static VALUE
 ps_set(VALUE self, VALUE key, VALUE value)
 {
     gtk_print_settings_set(_SELF(self), RVAL2CSTR(key), RVAL2CSTR2(value));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 ps_unset(VALUE self, VALUE key)
 {
     gtk_print_settings_unset(_SELF(self), RVAL2CSTR(key));
-    return Qnil;
+    return self;
 }
 
 static void
 ps_foreach_cb(const gchar *key, const gchar *value, gpointer data)
 {
-    VALUE callback = (VALUE)data;
-    rb_funcall(callback, id_call, 2, CSTR2RVAL(key), CSTR2RVAL(value));
+    rb_funcall((VALUE)data, id_call, 2, CSTR2RVAL(key), CSTR2RVAL(value));
 }
 
 static VALUE
@@ -88,7 +69,7 @@ ps_foreach(VALUE self)
 {
     gtk_print_settings_foreach(_SELF(self), ps_foreach_cb,
                                (gpointer)G_BLOCK_PROC());
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -206,30 +187,29 @@ static VALUE
 ps_set_generic(int argc, VALUE *argv, VALUE self)
 {
     VALUE key, value, unit;
-    VALUE result = Qnil;
 
     rb_scan_args(argc, argv, "21", &key, &value, &unit);
 
     switch (TYPE(value)) {
       case T_STRING:
-        result = ps_set(self, key, value);
+        ps_set(self, key, value);
         break;
       case T_TRUE:
       case T_FALSE:
-        result = ps_set_bool(self, key, value);
+        ps_set_bool(self, key, value);
         break;
       case T_FIXNUM:
-        result = ps_set_int(self, key, value);
+        ps_set_int(self, key, value);
         break;
       case T_FLOAT:
         if (NIL_P(unit)) {
-            result = ps_set_double(self, key, value);
+            ps_set_double(self, key, value);
         } else {
-            result = ps_set_length(self, key, value, unit);
+            ps_set_length(self, key, value, unit);
         }
         break;
       case T_NIL:
-        result = ps_unset(self, key);
+        ps_unset(self, key);
         break;
       default:
       {
@@ -241,28 +221,26 @@ ps_set_generic(int argc, VALUE *argv, VALUE self)
       }
     }
 
-    return result;
+    return self;
 }
 
 static VALUE
 ps_set_generic_indexer(int argc, VALUE *argv, VALUE self)
 {
-    VALUE result = Qnil;
-
     if (argc == 3) {
         VALUE swapped_argv[3];
         swapped_argv[0] = argv[0];
         swapped_argv[1] = argv[2];
         swapped_argv[2] = argv[1];
-        result = ps_set_generic(argc, swapped_argv, self);
+        ps_set_generic(argc, swapped_argv, self);
     } else if (argc == 2) {
-        result = ps_set_generic(argc, argv, self);
+        ps_set_generic(argc, argv, self);
     } else {
 	rb_raise(rb_eArgError,
                  "wrong number of arguments (%d for 2 or 3)", argc);
     }
 
-    return result;
+    return argv[2];
 }
 
 
@@ -283,13 +261,15 @@ ps_set_printer(VALUE self, VALUE printer)
 static VALUE
 ps_get_orientation(VALUE self)
 {
-    return PO2RVAL(gtk_print_settings_get_orientation(_SELF(self)));
+    return GENUM2RVAL(gtk_print_settings_get_orientation(_SELF(self)), 
+                      GTK_TYPE_PAGE_ORIENTATION);
 }
 
 static VALUE
 ps_set_orientation(VALUE self, VALUE orientation)
 {
-    gtk_print_settings_set_orientation(_SELF(self), RVAL2PO(orientation));
+    gtk_print_settings_set_orientation(_SELF(self),
+                                       RVAL2GENUM(orientation, GTK_TYPE_PAGE_ORIENTATION));
     return self;
 }
 
@@ -302,7 +282,8 @@ ps_get_paper_size(VALUE self)
 static VALUE
 ps_set_paper_size(VALUE self, VALUE paper_size)
 {
-    gtk_print_settings_set_paper_size(_SELF(self), RVAL2SIZE(paper_size));
+    gtk_print_settings_set_paper_size(_SELF(self), 
+                                      RVAL2BOXED(paper_size, GTK_TYPE_PAPER_SIZE));
     return self;
 }
 
@@ -378,26 +359,30 @@ ps_set_reverse(VALUE self, VALUE reverse)
 static VALUE
 ps_get_duplex(VALUE self)
 {
-    return PD2RVAL(gtk_print_settings_get_duplex(_SELF(self)));
+    return GENUM2RVAL(gtk_print_settings_get_duplex(_SELF(self)), 
+                      GTK_TYPE_PRINT_DUPLEX);
 }
 
 static VALUE
 ps_set_duplex(VALUE self, VALUE duplex)
 {
-    gtk_print_settings_set_duplex(_SELF(self), RVAL2PD(duplex));
+    gtk_print_settings_set_duplex(_SELF(self), 
+                                  RVAL2GENUM(duplex, GTK_TYPE_PRINT_DUPLEX));
     return self;
 }
 
 static VALUE
 ps_get_quality(VALUE self)
 {
-    return PQ2RVAL(gtk_print_settings_get_quality(_SELF(self)));
+    return GENUM2RVAL(gtk_print_settings_get_quality(_SELF(self)), 
+                      GTK_TYPE_PRINT_QUALITY);
 }
 
 static VALUE
 ps_set_quality(VALUE self, VALUE quality)
 {
-    gtk_print_settings_set_quality(_SELF(self), RVAL2PQ(quality));
+    gtk_print_settings_set_quality(_SELF(self), 
+                                   RVAL2GENUM(quality, GTK_TYPE_PRINT_QUALITY));
     return self;
 }
 
@@ -456,13 +441,14 @@ ps_set_scale(VALUE self, VALUE scale)
 static VALUE
 ps_get_print_pages(VALUE self)
 {
-    return PP2RVAL(gtk_print_settings_get_print_pages(_SELF(self)));
+    return GENUM2RVAL(gtk_print_settings_get_print_pages(_SELF(self)), 
+                      GTK_TYPE_PRINT_PAGES);
 }
 
 static VALUE
 ps_set_print_pages(VALUE self, VALUE print_pages)
 {
-    gtk_print_settings_set_print_pages(_SELF(self), RVAL2PP(print_pages));
+    gtk_print_settings_set_print_pages(_SELF(self), RVAL2GENUM(print_pages, GTK_TYPE_PRINT_PAGES));
     return self;
 }
 
@@ -507,13 +493,15 @@ ps_set_page_ranges(VALUE self, VALUE rb_page_ranges)
 static VALUE
 ps_get_page_set(VALUE self)
 {
-    return PS2RVAL(gtk_print_settings_get_page_set(_SELF(self)));
+    return GENUM2RVAL(gtk_print_settings_get_page_set(_SELF(self)), 
+                      GTK_TYPE_PAGE_SET);
 }
 
 static VALUE
 ps_set_page_set(VALUE self, VALUE page_set)
 {
-    gtk_print_settings_set_page_set(_SELF(self), RVAL2PS(page_set));
+    gtk_print_settings_set_page_set(_SELF(self), 
+                                    RVAL2GENUM(page_set, GTK_TYPE_PAGE_SET));
     return self;
 }
 
@@ -595,12 +583,6 @@ Init_gtk_print_settings()
     s_double = ID2SYM(rb_intern("double"));
     s_length = ID2SYM(rb_intern("length"));
     s_int = ID2SYM(rb_intern("int"));
-
-    G_DEF_CLASS(GTK_TYPE_PAGE_ORIENTATION, "PageOrientation", mGtk);
-    G_DEF_CLASS(GTK_TYPE_PRINT_DUPLEX, "PrintDuplex", mGtk);
-    G_DEF_CLASS(GTK_TYPE_PRINT_QUALITY, "PrintQuality", mGtk);
-    G_DEF_CLASS(GTK_TYPE_PRINT_PAGES, "PrintPages", mGtk);
-    G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", mGtk);
 
     gPrintSettings = G_DEF_CLASS(GTK_TYPE_PRINT_SETTINGS,
                                  "PrintSettings", mGtk);
@@ -731,5 +713,21 @@ Init_gtk_print_settings()
     rb_define_method(gPrintSettings, "set_output_bin", ps_set_output_bin, 1);
 
     G_DEF_SETTERS(gPrintSettings);
+
+    /* GtkPageOrientation */
+    G_DEF_CLASS(GTK_TYPE_PAGE_ORIENTATION, "PageOrientation", gPrintSettings);
+    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PAGE_ORIENTATION, "GTK_PAGE_");
+    /* GtkPrintDuplex */
+    G_DEF_CLASS(GTK_TYPE_PRINT_DUPLEX, "PrintDuplex", gPrintSettings);
+    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_DUPLEX, "GTK_PRINT_");
+    /* GtkPrintQuality */
+    G_DEF_CLASS(GTK_TYPE_PRINT_QUALITY, "PrintQuality", gPrintSettings);
+    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_QUALITY, "GTK_PRINT_");
+    /* GtkPrintPages */
+    G_DEF_CLASS(GTK_TYPE_PRINT_PAGES, "PrintPages", gPrintSettings);
+    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_PAGES, "GTK_PRINT_");
+    /* GtkPageSet */
+    G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", gPrintSettings);
+    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PAGE_SET, "GTK_");
 #endif
 }

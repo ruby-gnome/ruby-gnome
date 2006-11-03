@@ -3,8 +3,8 @@
 
   rbgtkprintcontext.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 13:20:06 $
+  $Author: mutoh $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -84,7 +84,7 @@ pc_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
                                         RVAL2CRCONTEXT(cr),
                                         NUM2DBL(dpi_x),
                                         NUM2DBL(dpi_y));
-    return Qnil;
+    return self;
 }
 #  endif
 #endif

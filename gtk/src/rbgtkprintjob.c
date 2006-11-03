@@ -1,17 +1,17 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
-  rbgtkprinter.c -
+  rbgtkprintjob.c -
 
-  $Author: ktou $
-  $Date: 2006/07/10 14:55:27 $
+  $Author: mutoh $
+  $Date: 2006/11/03 19:40:44 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
 
-#ifdef HAVE_GTK_GTKPRINTJOB_H
+#if GTK_CHECK_VERSION(2,10,0)
 
 #include <gtk/gtkprintjob.h>
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
@@ -24,14 +24,6 @@
 
 #define _SELF(s) (GTK_PRINT_JOB(RVAL2GOBJ(s)))
 
-#define RVAL2PRINTER(o) (GTK_PRINTER(RVAL2GOBJ(o)))
-#define RVAL2SETTINGS(o) (GTK_PRINT_SETTINGS(RVAL2GOBJ(o)))
-#define RVAL2SETUP(o) (GTK_PAGE_SETUP(RVAL2GOBJ(o)))
-
-#define RVAL2PC(o) (RVAL2GENUM(o, GTK_TYPE_PRINT_CAPABILITIES))
-
-#define STATUS2RVAL(o) (GENUM2RVAL(o, GTK_TYPE_PRINT_STATUS))
-
 static VALUE gPrintJob;
 
 static VALUE
@@ -40,18 +32,31 @@ pj_initialize(VALUE self, VALUE title, VALUE printer,
 {
     GtkPrintJob *job;
 
-    job = gtk_print_job_new(RVAL2CSTR(title), RVAL2PRINTER(printer),
-                            RVAL2SETTINGS(settings),
-                            RVAL2SETUP(page_setup));
+    job = gtk_print_job_new(RVAL2CSTR(title), 
+                            GTK_PRINTER(RVAL2GOBJ(printer)),
+                            GTK_PRINT_SETTINGS(RVAL2GOBJ(settings)),
+                            GTK_PAGE_SETUP(RVAL2GOBJ(page_setup)));
 
     G_INITIALIZE(self, job);
     return Qnil;
 }
 
+/* Defined as properties.
+GtkPrintSettings* gtk_print_job_get_settings
+                                            (GtkPrintJob *job);
+GtkPrinter* gtk_print_job_get_printer       (GtkPrintJob *job);
+const gchar* gtk_print_job_get_title        (GtkPrintJob *job);
+void        gtk_print_job_set_track_print_status
+                                            (GtkPrintJob *job,
+                                             gboolean track_status);
+gboolean    gtk_print_job_get_track_print_status
+                                            (GtkPrintJob *job);
+*/
+
 static VALUE
 pj_get_status(VALUE self)
 {
-    return STATUS2RVAL(gtk_print_job_get_status(_SELF(self)));
+    return GENUM2RVAL(gtk_print_job_get_status(_SELF(self)), GTK_TYPE_PRINT_STATUS);
 }
 
 static VALUE
@@ -86,8 +91,8 @@ pj_get_surface(VALUE self)
 struct callback_arg
 {
     VALUE callback;
-    int argc;
-    VALUE *argv;
+    VALUE job;
+    GError* error;
 };
 
 static VALUE
@@ -95,47 +100,42 @@ invoke_callback(VALUE data)
 {
     struct callback_arg *arg = (struct callback_arg *)data;
 
-    return rb_funcall2(arg->callback, id_call, arg->argc, arg->argv);
+    if (arg->error) RAISE_GERROR(arg->error);
+    rb_funcall(arg->callback, id_call, 1, arg->job);
+    return Qnil;
 }
 static void
 complete_func(GtkPrintJob *job, gpointer data, GError *error)
 {
-    VALUE argv[2];
     struct callback_arg arg;
 
-    argv[0] = GOBJ2RVAL(job);
-    argv[1] = rbgerr_gerror2exception(error);
-
     arg.callback = (VALUE)data;
-    arg.argc = 2;
-    arg.argv = argv;
-
+    arg.job = GOBJ2RVAL(job);
+    arg.error = error;
     G_PROTECT_CALLBACK(invoke_callback, &arg);
 }
 
 static void
 remove_callback_reference(gpointer data)
 {
-    VALUE callback = (VALUE)data;
-    G_CHILD_REMOVE(gPrintJob, callback);
+    G_CHILD_REMOVE(gPrintJob, (VALUE)data);
 }
 
 static VALUE
 pj_send(VALUE self)
 {
-    VALUE block;
-    block = G_BLOCK_PROC();
+    VALUE block = G_BLOCK_PROC();
     G_CHILD_ADD(gPrintJob, block);
     gtk_print_job_send(_SELF(self), complete_func, (gpointer)block,
                        remove_callback_reference);
-    return Qnil;
+    return self;
 }
 #endif
 
 void
 Init_gtk_print_job()
 {
-#ifdef HAVE_GTK_GTKPRINTJOB_H
+#if GTK_CHECK_VERSION(2,10,0)
     gPrintJob = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "PrintCapabilities", mGtk);
 

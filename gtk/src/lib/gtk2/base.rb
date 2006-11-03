@@ -5,7 +5,7 @@
   Copyright (c) 2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: base.rb,v 1.3 2006/11/01 15:19:58 mutoh Exp $
+  $Id: base.rb,v 1.4 2006/11/03 19:40:44 mutoh Exp $
 =end
 
 
@@ -33,9 +33,9 @@ module Gtk
 
   class Printer
     def self.printers(wait = false)
-      @@printers = []
-      self.each(wait) {|v| @@printers << v}
-      @@printers
+      printers = []
+      self.each(wait) {|v| printers << v}
+      printers
     end
   end
 end
