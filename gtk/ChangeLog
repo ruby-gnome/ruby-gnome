@@ -1,4 +1,4 @@
-2006-11-04  Masao Mutoh  <mutoh@core2.yotabanana.com>
+2006-11-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkprintoperationpreview.c: Gtk::PrintOperationPreview#render_page, 
 	#end_preview returns self instead of nil.
@@ -17,7 +17,7 @@
 	* src/rbgtkprintcontext.c: Gtk::PrinterContext#set_cairo_context returns
 	self instead of nil.
 
-2006-11-02  Masao Mutoh  <mutoh@core2.yotabanana.com>
+2006-11-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkprinter.c: Gtk::Printer includes Comparable. 
 	Defines Gtk::PrintBackendCups, Gtk::PrintBackendFile, Gtk::PrintBackendLpr.
