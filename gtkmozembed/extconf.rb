@@ -3,9 +3,9 @@ extconf.rb for Ruby/GtkMozEmbed extention library
 =end
 
 PACKAGE_NAME = "gtkmozembed"
-PACKAGE_ID = "xulrunner-gtkmozembed"
-#PACKAGE_ID = "firefox-gtkmozembed"
-#PACKAGE_ID = "mozilla-gtkmozembed"
+PACKAGE_IDS = ["xulrunner-gtkmozembed", 
+               "firefox-gtkmozembed", 
+               "mozilla-gtkmozembed"]
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -15,15 +15,32 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
+package_id = nil
+PACKAGE_IDS.each do |v|
+  if PKGConfig.exist?(v)
+    package_id = v
+    $stderr.puts "#{v} is found."
+    break
+  else
+    $stderr.puts "#{v} is not found."
+  end
+end
+
+unless package_id
+  $stderr.puts "No gtkmozembed is found. Abort."
+  exit 1
+end
+
+
 #
 # detect GTK+ configurations
 #
 
 PKGConfig.have_package('gtk+-2.0')
-PKGConfig.have_package(PACKAGE_ID)
+PKGConfig.have_package(package_id)
 setup_win32(PACKAGE_NAME)
 
-mozpath = PKGConfig.libs_only_L(PACKAGE_ID)
+mozpath = PKGConfig.libs_only_L(package_id)
 mozpath.strip!.sub!(/^-L/, "")
 
 if mozpath 
@@ -31,7 +48,7 @@ if mozpath
   $CFLAGS << " -DDEFAULT_MOZILLA_FIVE_HOME='\"" << mozpath << "\"' "
   $LDFLAGS << " -Wl,-rpath " << mozpath
 else
-  $stderr.puts "${PACKAGE_ID}.pc cannot be found."
+  $stderr.puts "${package_id}.pc cannot be found."
   exit 1
 end
 
@@ -43,7 +60,7 @@ have_library("gtkembedmoz") or exit 1
 have_func('gtk_moz_embed_new') or exit 1
 have_func('gtk_moz_embed_set_profile_path') or exit 1
 
-make_version_header("GTKMOZEMBED", PACKAGE_ID)
+make_version_header("GTKMOZEMBED", package_id)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, 
                           "-DRUBY_GTKMOZEMBED_COMPILATION")

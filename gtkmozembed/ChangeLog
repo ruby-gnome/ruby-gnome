@@ -1,3 +1,7 @@
+2006-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Check xulrunner/firefox/mozilla packages.
+
 2006-06-28  Mirko Maischberger <mirko@lilik.it>
 	In response to #1511917
 	* extconf.rb: mozpath stripped.
