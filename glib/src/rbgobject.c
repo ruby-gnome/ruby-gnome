@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 13:11:59 $
+  $Author: mutoh $
+  $Date: 2006/11/05 04:25:55 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -335,7 +335,6 @@ rbgobj_define_property_accessors(klass)
     int i;
     GString* source = g_string_new(NULL);
     guint n_properties = 0;
-
     gtype  = CLASS2GTYPE(klass);
     if (G_TYPE_IS_INTERFACE(gtype)){
 #if GLIB_CHECK_VERSION(2,4,0)
