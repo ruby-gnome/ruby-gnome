@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.16 2006/10/15 07:43:21 mutoh Exp $
+  $Id: libglade2.rb,v 1.17 2006/11/08 00:57:16 ktou Exp $
 =end
 
 require 'gtk2'
@@ -40,7 +40,6 @@ class GladeXML
     end
 
     if signal_proc
-      guard_source_from_gc(source)
       case signal_proc.arity
       when 0
         sig_conn_proc.call(signal) {signal_proc.call}
@@ -92,6 +91,12 @@ class GladeXML
       }
     end
     [@widget_names, @custom_methods]    
+  end
+
+  def guard_sources_from_gc
+    widget_names.each do |name|
+      guard_source_from_gc(self[name])
+    end
   end
 
   def guard_source_from_gc(source)
