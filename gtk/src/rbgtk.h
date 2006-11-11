@@ -4,7 +4,7 @@
   rbgtk.h -
 
   $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Date: 2006/11/11 19:21:04 $
 
   Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -52,6 +52,8 @@
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
 #define GTK_TYPE_BINDING_SET (gtk_bindingset_get_type())
 #define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
+#define GTK_TYPE_RECENT_FILTER_INFO (gtk_recent_filter_info_get_type())
+#define GTK_TYPE_RECENT_DATA (gtk_recent_data_get_type())
 #ifndef GTK_TYPE_TARGET_LIST
 extern GType gtk_target_list_get_type();
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
@@ -105,6 +107,8 @@ extern GType gtk_accel_key_get_type();
 extern GType gtk_accel_group_entry_get_type();
 extern GType gtk_bindingset_get_type();
 extern GType gtk_text_appearance_get_type();
+extern GType gtk_recent_filter_info_get_type();
+extern GType gtk_recent_data_get_type();
 
 /*
  * Gtk::TreeIter callback

@@ -4,7 +4,7 @@
   rbgtkdialog.c -
 
   $Author: mutoh $
-  $Date: 2006/05/07 23:51:20 $
+  $Date: 2006/11/11 19:21:04 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,13 +38,15 @@ rbgtk_dialog_add_buttons_internal(self, button_ary)
 {
     int i;
     GObject* obj = RVAL2GOBJ(self);
-    g_object_freeze_notify(obj);
-    for (i = 0; i < RARRAY(button_ary)->len; i++) {
-        Check_Type(RARRAY(RARRAY(button_ary)->ptr[i]), T_ARRAY);
-        dialog_add_button(self, RARRAY(RARRAY(button_ary)->ptr[i])->ptr[0],
-                          RARRAY(RARRAY(button_ary)->ptr[i])->ptr[1]);
+    if (RARRAY(button_ary)->ptr[0] != Qnil){
+        g_object_freeze_notify(obj);
+        for (i = 0; i < RARRAY(button_ary)->len; i++) {
+            Check_Type(RARRAY(RARRAY(button_ary)->ptr[i]), T_ARRAY);
+            dialog_add_button(self, RARRAY(RARRAY(button_ary)->ptr[i])->ptr[0],
+                              RARRAY(RARRAY(button_ary)->ptr[i])->ptr[1]);
+        }
+        g_object_thaw_notify(obj);
     }
-    g_object_thaw_notify(obj);
     return self;
 }    
 

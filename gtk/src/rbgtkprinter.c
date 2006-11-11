@@ -4,7 +4,7 @@
   rbgtkprinter.c -
 
   $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Date: 2006/11/11 19:21:04 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -21,8 +21,6 @@ GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 #endif
 
 #define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
-
-static VALUE gPrinter;
 
 static VALUE
 p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
@@ -113,7 +111,7 @@ static void
 remove_callback_reference(gpointer data)
 {
     VALUE callback = (VALUE)data;
-    G_CHILD_REMOVE(gPrinter, callback);
+    G_CHILD_REMOVE(mGtk, callback);
 }
 
 static VALUE
@@ -123,7 +121,7 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &wait);
 
     block = G_BLOCK_PROC();
-    G_CHILD_ADD(gPrinter, block);
+    G_CHILD_ADD(mGtk, block);
     gtk_enumerate_printers(each_printer, (gpointer)block,
                            remove_callback_reference, RVAL2CBOOL(wait));
 
@@ -135,7 +133,7 @@ void
 Init_gtk_printer()
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
+    VALUE gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
     rb_include_module(gPrinter, rb_mComparable);
 
     G_DEF_CLASS(GTK_TYPE_PRINT_BACKEND, "PrintBackend", mGtk);

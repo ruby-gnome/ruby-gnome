@@ -1,3 +1,21 @@
+2006-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrecentinfo.c: Added Gtk::RecentInfo for GTK+-2.10. 
+	* src/rbgtkrecentmanager.c: Added Gtk::RecentManager for GTK+-2.10.
+
+2006-11-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrecentdata.c: Added Gtk::RecentData for GTK+-2.10.
+	* src/rbgtkrecentfilter.c: Added Gtk::RecentFilter for GTK+-2.10.
+	* src/rbgtkrecentfilterinfo.c: Added Gtk::RecentFilterInfo for GTK+-2.10.
+	* src/rbgtkrecentchooserwidget.c: Added Gtk::RecentChooserWidget for GTK+-2.10. 
+	* src/rbgtkrecentchooserdialog.c: Added Gtk::RecentChooserDialog for GTK+-2.10. 
+	* src/rbgtk.h: Support Gtk::Recent*.
+
+2006-11-04  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrange.c: Add Gtk::Range::SensitivityType for GTK+-2.10.
+
 2006-11-04  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkprintoperationpreview.c: Gtk::PrintOperationPreview#render_page, 
