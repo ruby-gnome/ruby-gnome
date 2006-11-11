@@ -1,5 +1,6 @@
 2006-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* sample/misc/recentchooserdialog.rb: Added for GTK+-2.10.
 	* src/rbgtkrecentinfo.c: Added Gtk::RecentInfo for GTK+-2.10. 
 	* src/rbgtkrecentmanager.c: Added Gtk::RecentManager for GTK+-2.10.
 
