@@ -1,5 +1,10 @@
 2006-11-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtksizegroup.c: Added Gtk::SizeGroup#widgets for GTK+-2.10.
+	* src/rbgtkselectiondata.c: Added Gtk::SelectionData#targets_include_(uri|rich_text)
+	for GTK+-2.10.
+	* src/rbgtkscrolledwindow.c: Added Gtk::ScrolledWindow#(set|unset)_placement,
+	#placement for GTK+-2.10. Code cleanup.
 	* sample/misc/recentchooserdialog.rb: Added for GTK+-2.10.
 	* src/rbgtkrecentinfo.c: Added Gtk::RecentInfo for GTK+-2.10. 
 	* src/rbgtkrecentmanager.c: Added Gtk::RecentManager for GTK+-2.10.

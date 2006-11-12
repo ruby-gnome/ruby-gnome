@@ -3,8 +3,8 @@
 
   rbgtksizegroup.c -
  
-  $Author: ggc $
-  $Date: 2005/08/30 19:19:42 $
+  $Author: mutoh $
+  $Date: 2006/11/12 15:28:40 $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -45,6 +45,15 @@ gboolean    gtk_size_group_get_ignore_hidden
                                             (GtkSizeGroup *size_group);
 */
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+sizegrp_get_widgets(self)
+    VALUE self;
+{
+    return GSLIST2ARY(gtk_size_group_get_widgets(_SELF(self)));
+}
+#endif
+
 void
 Init_sizegrp()
 {
@@ -53,6 +62,10 @@ Init_sizegrp()
     rb_define_method(gSizeGroup, "initialize", sizegrp_initialize, 1);
     rb_define_method(gSizeGroup, "add_widget", sizegrp_add_widget, 1);
     rb_define_method(gSizeGroup, "remove_widget", sizegrp_remove_widget, 1);
+
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gSizeGroup, "widgets", sizegrp_get_widgets, 0);
+#endif
 
     /* GtkSizeGroupMode */
     G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", gSizeGroup);

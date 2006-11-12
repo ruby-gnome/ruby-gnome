@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: ktou $
-  $Date: 2006/10/12 02:00:28 $
+  $Author: mutoh $
+  $Date: 2006/11/12 15:28:40 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -271,6 +271,22 @@ gtkselectiondata_targets_include_text(self)
     return CBOOL2RVAL(gtk_selection_data_targets_include_text(_SELF(self)));
 }
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gtkselectiondata_targets_include_uri(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gtk_selection_data_targets_include_uri(_SELF(self)));
+}
+static VALUE
+gtkselectiondata_targets_include_rich_text(self, buffer)
+    VALUE self, buffer;
+{
+    return CBOOL2RVAL(gtk_selection_data_targets_include_rich_text(_SELF(self),
+                                                                   GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
+}
+#endif
+
 void
 Init_gtk_selectiondata()
 {
@@ -302,6 +318,10 @@ Init_gtk_selectiondata()
 #endif
     rb_define_method(gSelectionData, "targets", gtkselectiondata_get_targets, 0);
     rb_define_method(gSelectionData, "targets_include_text", gtkselectiondata_targets_include_text, 0);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gSelectionData, "targets_include_uri", gtkselectiondata_targets_include_uri, 0);
+    rb_define_method(gSelectionData, "targets_include_rich_text", gtkselectiondata_targets_include_rich_text, 1);
+#endif
 
     G_DEF_SETTERS(gSelectionData);
 
