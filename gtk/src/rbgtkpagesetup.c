@@ -4,7 +4,7 @@
   rbgtkpagesetup.c -
 
   $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Date: 2006/11/13 14:41:27 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -53,7 +53,7 @@ ps_set_orientation(VALUE self, VALUE orientation)
 static VALUE
 ps_get_paper_size(VALUE self)
 {
-    return GOBJ2RVAL(gtk_page_setup_get_paper_size(_SELF(self)));
+    return BOXED2RVAL(gtk_page_setup_get_paper_size(_SELF(self)), GTK_TYPE_PAPER_SIZE);
 }
 
 static VALUE
