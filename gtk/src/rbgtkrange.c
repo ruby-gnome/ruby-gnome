@@ -3,8 +3,8 @@
 
   rbgtkrange.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/11 19:21:05 $
+  $Author: ktou $
+  $Date: 2006/11/13 12:53:21 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -81,7 +81,9 @@ Init_gtk_range()
 
   G_DEF_SETTERS(gRange);
 
+#if GTK_CHECK_VERSION(2,10,0)
   /* GtkSensitivityType */
   G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", gRange);
   G_DEF_CONSTANTS(gRange, GTK_TYPE_SENSITIVITY_TYPE, "GTK_");
+#endif
 }

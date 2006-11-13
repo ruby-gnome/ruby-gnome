@@ -3,8 +3,8 @@
 
   rbgtkscrolledwindow.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/12 15:28:40 $
+  $Author: ktou $
+  $Date: 2006/11/13 12:53:21 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -83,6 +83,7 @@ scwin_get_vscrollbar(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 scwin_set_placement(self, corner_type)
     VALUE self, corner_type;
@@ -107,6 +108,7 @@ scwin_get_placement(self)
     return GENUM2RVAL(gtk_scrolled_window_get_placement(_SELF(self)), 
                       GTK_TYPE_CORNER_TYPE);
 }
+#endif
 
 /* Defined as properties
 GtkAdjustment* gtk_scrolled_window_get_hadjustment
