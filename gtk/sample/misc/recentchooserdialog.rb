@@ -5,10 +5,16 @@
   Copyright (c) 2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: recentchooserdialog.rb,v 1.1 2006/11/11 19:46:30 mutoh Exp $
+  $Id: recentchooserdialog.rb,v 1.2 2006/11/15 23:46:13 mutoh Exp $
 =end
 
 require 'gtk2'
+
+if str = Gtk.check_version(2, 10, 0)
+  puts "This sample requires GTK+ 2.10.0 or later"
+  puts str
+  exit
+end
 
 dialog = Gtk::RecentChooserDialog.new("Recent Chooser Dialog Sample",
                                       nil,

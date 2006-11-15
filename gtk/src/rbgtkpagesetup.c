@@ -4,7 +4,7 @@
   rbgtkpagesetup.c -
 
   $Author: mutoh $
-  $Date: 2006/11/13 14:41:27 $
+  $Date: 2006/11/15 23:46:13 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -21,11 +21,7 @@
 static VALUE
 ps_initialize(VALUE self)
 {
-    GtkPageSetup *setup;
-
-    setup = gtk_page_setup_new();
-
-    G_INITIALIZE(self, setup);
+    G_INITIALIZE(self, gtk_page_setup_new());
     return Qnil;
 }
 

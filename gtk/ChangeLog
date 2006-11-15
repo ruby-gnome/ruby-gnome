@@ -1,3 +1,8 @@
+2006-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkprintoperation.c: Fixed a segfault of Gtk::PrintOperation.run_page_setup_dialog.
+	Reported by Dobai-Pataky Balint.
+
 2006-11-13  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkpagesetup.c: Fixed a segfault. Reported by Dobai-Pataky Balint.
