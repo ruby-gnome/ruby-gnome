@@ -1,3 +1,13 @@
+2006-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkstyle.c: Added Gtk::Style#lookup_color.
+	* src/rbgtkstatusicon.c: Added Gtk::StatusIcon for GTK+-2.10.
+	* sample/misc/statusicon.rb: Add a sample for Gtk::StatusIcon.
+
+2006-11-17  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c: Avoid Gtk::MenuShell from GC. 
+
 2006-11-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkprintoperation.c: Fixed a segfault of Gtk::PrintOperation.run_page_setup_dialog.

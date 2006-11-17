@@ -3,8 +3,8 @@
 
   rbgtkstyle.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: mutoh $
+  $Date: 2006/11/17 18:12:41 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -83,6 +83,20 @@ style_apply_default_background(self, gdkwindow, set_bg, state_type, area,
                                        NUM2INT(width), NUM2INT(height));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+style_lookup_color(self, color_name)
+    VALUE self, color_name;
+{
+    GdkColor color;
+    if (gtk_style_lookup_color(_SELF(self), RVAL2CSTR(color_name), &color)){
+        return BOXED2RVAL(&color, GDK_TYPE_COLOR);
+    } else {
+        return Qnil;
+    }
+}
+#endif
 
 static VALUE
 style_lookup_icon_set(self, stock_id)
@@ -625,6 +639,9 @@ Init_gtk_style()
     rb_define_method(gStyle, "detach", style_detach, 0);
     rb_define_method(gStyle, "set_background", style_set_background, 2);
     rb_define_method(gStyle, "apply_default_background", style_apply_default_background, 8);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gStyle, "lookup_color", style_lookup_color, 1);
+#endif
     rb_define_method(gStyle, "lookup_icon_set", style_lookup_icon_set, 1);
     rb_define_method(gStyle, "render_icon", style_render_icon, 6);
     rb_define_method(gStyle, "paint_arrow", style_paint_arrow, 12);
