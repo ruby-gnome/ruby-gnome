@@ -1,3 +1,14 @@
+2006-11-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_typeinterface.c: Fixed a bug when accessing the properties
+	of GLib::Instantiatable. 
+
+2006-11-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/mkmf-gnome2.rb: Set "0" to micro version of version 
+	header if pkg-config --modversion doesn't have micro version.
+	Bug #1590573.
+	
 2006-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c: improved alive check.

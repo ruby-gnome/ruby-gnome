@@ -3,8 +3,8 @@
 
   rbgobj_typeinterface.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 07:46:19 $
+  $Author: mutoh $
+  $Date: 2006/11/21 23:57:33 $
   created at: Sat May 27 16:04:13 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -64,17 +64,21 @@ interface_property(self, property_name)
         name = StringValuePtr(property_name);
     }
 
-    ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
+    if (CLASS2GTYPE(self) != RBGOBJ_TYPE_RUBY_VALUE){
+        ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
 
-    prop = g_object_interface_find_property(ginterface, name);
-    if (!prop){
+        prop = g_object_interface_find_property(ginterface, name);
+        if (!prop){
+            g_type_default_interface_unref(ginterface);
+            rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")), 
+                     "no such property: %s", name);
+        }
+
+        result = GOBJ2RVAL(prop);
         g_type_default_interface_unref(ginterface);
-        rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")), 
-                 "no such property: %s", name);
+    } else {
+        result = Qnil;
     }
-
-    result = GOBJ2RVAL(prop);
-    g_type_default_interface_unref(ginterface);
     return result;
 }
 
