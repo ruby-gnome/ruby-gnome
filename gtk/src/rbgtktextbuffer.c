@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: ktou $
-  $Date: 2006/09/24 13:12:30 $
+  $Author: mutoh $
+  $Date: 2006/11/23 08:39:13 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -19,6 +19,7 @@
 #define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
+#define ATOM2RVAL(a) (BOXED2RVAL(a, GDK_TYPE_ATOM))
 
 static ID id_tagtable;
 
@@ -371,6 +372,238 @@ txt_remove_selection_clipboard(self, clipboard)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+txt_deserialize(self, content_buffer, format, iter, data)
+    VALUE self, content_buffer, format, iter, data;
+{
+    GError* error = NULL;
+    gboolean ret;
+
+    Check_Type(data, T_STRING);
+    ret = gtk_text_buffer_deserialize(_SELF(self), _SELF(content_buffer),
+                                      RVAL2ATOM(format),
+                                      RVAL2ITR(iter),
+                                      (const guint8*)RSTRING(data)->ptr,
+                                      (gsize)RSTRING(data)->len,
+                                      &error);
+    if (! ret) RAISE_GERROR(error);
+    return self;
+}
+
+static VALUE
+txt_deserialize_get_can_create_tags(self, format)
+    VALUE self, format;
+{
+    return CBOOL2RVAL(gtk_text_buffer_deserialize_get_can_create_tags(_SELF(self), 
+                                                                      RVAL2ATOM(format)));
+
+}
+
+static VALUE
+txt_deserialize_set_can_create_tags(self, format, can_create_tags)
+    VALUE self, format, can_create_tags;
+{
+    gtk_text_buffer_deserialize_set_can_create_tags(_SELF(self),
+                                                    RVAL2ATOM(format),
+                                                    RTEST(can_create_tags));
+    return self;
+}
+
+/* Defined as Properties
+GtkTargetList* gtk_text_buffer_get_copy_target_list
+                                            (GtkTextBuffer *buffer);
+*/
+
+static VALUE
+txt_get_deserialize_formats(self)
+    VALUE self;
+{
+    gint i;
+    gint n_formats;
+    GdkAtom* atoms = gtk_text_buffer_get_deserialize_formats(_SELF(self), &n_formats);
+    VALUE ary = rb_ary_new();
+
+    for (i = 0; i < n_formats; i++){
+        rb_ary_push(ary, ATOM2RVAL(atoms[i]));
+    }
+    return ary;
+}
+
+/* Defined as Properties
+GtkTargetList* gtk_text_buffer_get_paste_target_list
+                                            (GtkTextBuffer *buffer);
+*/
+
+static VALUE
+txt_get_serialize_formats(self)
+    VALUE self;
+{
+    gint i;
+    gint n_formats;
+    GdkAtom* atoms = gtk_text_buffer_get_serialize_formats(_SELF(self), &n_formats);
+    VALUE ary = rb_ary_new();
+
+    for (i = 0; i < n_formats; i++){
+        rb_ary_push(ary, ATOM2RVAL(atoms[i]));
+    }
+    return ary;
+}
+
+struct callback_arg
+{
+    VALUE callback;
+    int argc;
+    VALUE *argv;
+};
+
+static VALUE
+invoke_callback(VALUE data)
+{
+    struct callback_arg *arg = (struct callback_arg *)data;
+
+    return rb_funcall2(arg->callback, id_call, arg->argc, arg->argv);
+}
+
+static gboolean
+deserialize_func(register_buffer, content_buffer, iter, data, length, create_tags, func, error)
+    GtkTextBuffer* register_buffer;
+    GtkTextBuffer* content_buffer;
+    GtkTextIter* iter;
+    const guint8 *data;
+    gsize length;
+    gboolean create_tags;
+    gpointer func;
+    GError** error;
+{
+    VALUE result;
+    VALUE argv[5];
+    struct callback_arg arg;
+
+    argv[0] = GOBJ2RVAL(register_buffer);
+    argv[1] = GOBJ2RVAL(content_buffer);
+    argv[2] = ITR2RVAL(iter);
+    argv[3] = rb_str_new((char*)data, length);
+    argv[4] = CBOOL2RVAL(create_tags);
+
+    arg.callback = (VALUE)func;
+    arg.argc = 5;
+    arg.argv = argv;
+
+    result = G_PROTECT_CALLBACK(invoke_callback, &arg);
+    return NIL_P(ruby_errinfo) ? RVAL2CBOOL(result) : FALSE;
+}
+
+static void
+remove_callback_reference(gpointer callback)
+{
+    G_CHILD_REMOVE(mGtk, (VALUE)callback);
+}
+
+static VALUE
+txt_register_deserialize_format(self, mime_type)
+    VALUE self, mime_type;
+{
+    VALUE block = G_BLOCK_PROC();
+    GdkAtom atom;
+    G_CHILD_ADD(mGtk, block);
+    atom = gtk_text_buffer_register_deserialize_format(_SELF(self),
+                                                       (const gchar*)RVAL2CSTR(mime_type),
+                                                       (GtkTextBufferDeserializeFunc)deserialize_func,
+                                                       (gpointer)block,
+                                                       (GDestroyNotify)remove_callback_reference);
+    return ATOM2RVAL(atom);
+}
+
+static VALUE
+txt_register_deserialize_target(self, tagset_name)
+    VALUE self, tagset_name;
+{
+    return ATOM2RVAL(gtk_text_buffer_register_deserialize_tagset(_SELF(self),
+                                                                 (const gchar*)(NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name))));
+}
+
+static guint8*
+serialize_func(register_buffer, content_buffer, start, end, length, func)
+    GtkTextBuffer* register_buffer;
+    GtkTextBuffer* content_buffer;
+    GtkTextIter* start;
+    GtkTextIter* end;
+    gsize* length;
+    gpointer func;
+{
+    VALUE result;
+    VALUE argv[4];
+    struct callback_arg arg;
+
+    argv[0] = GOBJ2RVAL(register_buffer);
+    argv[1] = GOBJ2RVAL(content_buffer);
+    argv[2] = ITR2RVAL(start);
+    argv[3] = ITR2RVAL(end);
+
+    arg.callback = (VALUE)func;
+    arg.argc = 4;
+    arg.argv = argv;
+
+    /* This should return data as String */
+    result = G_PROTECT_CALLBACK(invoke_callback, &arg);
+    Check_Type(result, T_STRING);
+    *length = RSTRING(result)->len;
+    return (guint8*)(NIL_P(ruby_errinfo) ? RSTRING(result)->ptr : NULL);
+}
+
+static VALUE
+txt_register_serialize_format(self, mime_type)
+    VALUE self, mime_type;
+{
+    VALUE block = G_BLOCK_PROC();
+    GdkAtom atom;
+    G_CHILD_ADD(mGtk, block);
+    atom = gtk_text_buffer_register_serialize_format(_SELF(self),
+                                                     (const gchar*)RVAL2CSTR(mime_type),
+                                                     (GtkTextBufferSerializeFunc)serialize_func,
+                                                     (gpointer)block,
+                                                     (GDestroyNotify)remove_callback_reference);
+    return ATOM2RVAL(atom);
+}
+
+static VALUE
+txt_register_serialize_target(self, tagset_name)
+    VALUE self, tagset_name;
+{
+    return ATOM2RVAL(gtk_text_buffer_register_serialize_tagset(_SELF(self),
+                                                               NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name)));
+}
+
+static VALUE
+txt_serialize(self, content_buffer, format, start, end)
+    VALUE self, content_buffer, format, start, end;
+{
+    gsize length;
+    guint8* ret = gtk_text_buffer_serialize(_SELF(self), _SELF(self),
+                                            RVAL2ATOM(format),
+                                            RVAL2ITR(start), RVAL2ITR(end),
+                                            &length);
+    return rb_str_new((char*)ret, length);
+}
+
+static VALUE
+txt_unregister_deserialize_format(self, format)
+    VALUE self, format;
+{
+    gtk_text_buffer_unregister_deserialize_format(_SELF(self), RVAL2ATOM(format));
+    return self;
+}
+
+static VALUE
+txt_unregister_serialize_format(self, format)
+    VALUE self, format;
+{
+    gtk_text_buffer_unregister_serialize_format(_SELF(self), RVAL2ATOM(format));
+    return self;
+}
+#endif
+
 static VALUE
 txt_cut_clipboard(self, clipboard, default_editable)
     VALUE self, clipboard, default_editable;
@@ -409,6 +642,11 @@ txt_get_selection_bounds(self)
     gboolean ret = gtk_text_buffer_get_selection_bounds(_SELF(self), &start, &end);
     return rb_ary_new3(3, ITR2RVAL(&start), ITR2RVAL(&end), CBOOL2RVAL(ret));
 }
+
+/* Defined as a proprety
+gboolean    gtk_text_buffer_get_has_selection
+                                            (GtkTextBuffer *buffer);
+*/
 
 static VALUE
 txt_delete_selection(argc, argv, self)
@@ -700,6 +938,20 @@ Init_gtk_textbuffer()
 
     rb_define_method(gTextBuffer, "add_selection_clipboard", txt_add_selection_clipboard, 1);
     rb_define_method(gTextBuffer, "remove_selection_clipboard", txt_remove_selection_clipboard, 1);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gTextBuffer, "deserialize", txt_deserialize, 4);
+    rb_define_method(gTextBuffer, "deserialize_can_create_tags?", txt_deserialize_get_can_create_tags, 1);
+    rb_define_method(gTextBuffer, "deserialize_set_can_create_tags", txt_deserialize_set_can_create_tags, 2);
+    rb_define_method(gTextBuffer, "deserialize_formats", txt_get_deserialize_formats, 0);
+    rb_define_method(gTextBuffer, "serialize_formats", txt_get_serialize_formats, 0);
+    rb_define_method(gTextBuffer, "register_deserialize_format", txt_register_deserialize_format, 1);
+    rb_define_method(gTextBuffer, "register_deserialize_target", txt_register_deserialize_target, 1);
+    rb_define_method(gTextBuffer, "register_serialize_format", txt_register_serialize_format, 1);
+    rb_define_method(gTextBuffer, "register_serialize_target", txt_register_serialize_target, 1);
+    rb_define_method(gTextBuffer, "serialize", txt_serialize, 4);
+    rb_define_method(gTextBuffer, "unregister_deserialize_format", txt_unregister_deserialize_format, 1);
+    rb_define_method(gTextBuffer, "unregister_serialize_format", txt_unregister_serialize_format, 1);
+#endif
     rb_define_method(gTextBuffer, "cut_clipboard", txt_cut_clipboard, 2);
     rb_define_method(gTextBuffer, "copy_clipboard", txt_copy_clipboard, 1);
     rb_define_method(gTextBuffer, "paste_clipboard", txt_paste_clipboard, 3);

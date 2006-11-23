@@ -1,6 +1,14 @@
+2006-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktextbuffer.c: Added Gtk::TextBuffer serialize/deserialize functions for GTK+-2.10. 
+	* sample/misc/test-assistant.rb: Rename to assistant.rb.
+	* sample/misc/textbuffer_serialize.rb: Added a sample for Gtk::TextBuffer serialization..
+
 2006-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
-	* src/rbgtkstyle.c: Added Gtk::Style#lookup_color.
+	* src/rbgtktargetlist.c: Added Gtk::TargetList#add_rich_text_targets for GTK+-2.10.
+	* src/rbgtkselection.c: Gtk::Selection.include_(image|text|uri|rich_text)? for GTK+-2.10.
+	* src/rbgtkstyle.c: Added Gtk::Style#lookup_color for GTK*-2.10.
 	* src/rbgtkstatusicon.c: Added Gtk::StatusIcon for GTK+-2.10.
 	* sample/misc/statusicon.rb: Add a sample for Gtk::StatusIcon.
 

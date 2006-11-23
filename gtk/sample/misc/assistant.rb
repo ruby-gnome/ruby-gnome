@@ -7,7 +7,7 @@
   Copyright (c) 2005,2006  Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: test-assistant.rb,v 1.1 2006/07/16 12:15:32 ggc Exp $
+  $Id: assistant.rb,v 1.1 2006/11/23 08:39:12 mutoh Exp $
 =end
 
 require 'gtk2'

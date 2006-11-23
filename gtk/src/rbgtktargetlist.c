@@ -4,7 +4,7 @@
   rbgtktargetlist.c -
 
   $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Date: 2006/11/23 08:39:13 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -95,6 +95,17 @@ target_list_add_uri_targets(self, info)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+target_list_add_rich_text_targets(self, info, deserializable, buffer)
+    VALUE self, info, deserializable, buffer;
+{
+    gtk_target_list_add_rich_text_targets(_SELF(self), NUM2UINT(info),
+                                          RTEST(deserializable),
+                                          GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)));
+    return self;
+}
+#endif
 
 static VALUE
 target_list_remove(self, target)
@@ -128,6 +139,9 @@ Init_gtk_target_list()
     rb_define_method(gTargetList, "add_text_targets", target_list_add_text_targets, 1);
     rb_define_method(gTargetList, "add_image_targets", target_list_add_image_targets, 2);
     rb_define_method(gTargetList, "add_uri_targets", target_list_add_uri_targets, 1);
+#endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gTargetList, "add_rich_text_targets", target_list_add_rich_text_targets, 3);
 #endif
     rb_define_method(gTargetList, "remove", target_list_remove, 1);
     rb_define_method(gTargetList, "find", target_list_find, 1);
