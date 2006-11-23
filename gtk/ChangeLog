@@ -1,5 +1,12 @@
+2006-11-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtktreeview.c: Added Gtk::TreeView#search_entry, #set_search_entry, 
+	#set_search_position_func for GTK+-2.10.
+
 2006-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbgtktreeview.c: Added Gtk::TreeView::GridLines for GTK+-2.10.
+	* src/rbgtktreestore.c: Improved message.
 	* src/rbgtktextbuffer.c: Added Gtk::TextBuffer serialize/deserialize functions for GTK+-2.10. 
 	* sample/misc/test-assistant.rb: Rename to assistant.rb.
 	* sample/misc/textbuffer_serialize.rb: Added a sample for Gtk::TextBuffer serialization..

@@ -4,7 +4,7 @@
   rbgtktreestore.c -
 
   $Author: mutoh $
-  $Date: 2006/10/18 15:43:37 $
+  $Date: 2006/11/23 15:53:13 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -157,7 +157,7 @@ tstore_insert(argc, argv, self)
                 c_values[i] = gval;
             }
         } else {
-            rb_raise(rb_eArgError, "values must be of type T_HASH or T_ARRAY");
+            rb_raise(rb_eArgError, "values must be of type Hash or Array");
         }
 
         gtk_tree_store_insert_with_valuesv(model, &iter,

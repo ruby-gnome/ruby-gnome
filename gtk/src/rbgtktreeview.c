@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Date: 2006/11/23 15:53:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -631,6 +631,102 @@ treeview_set_row_separator_func(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+treeview_get_search_entry(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_tree_view_get_search_entry(_SELF(self)));
+}
+
+static VALUE
+treeview_set_search_entry(self, entry)
+    VALUE self, entry;
+{
+    gtk_tree_view_set_search_entry(_SELF(self), RVAL2GOBJ(entry));
+    return self;
+}
+
+/* Can't define this.
+GtkTreeViewSearchPositionFunc gtk_tree_view_get_search_position_func
+                                            (GtkTreeView *tree_view);
+*/
+
+struct callback_arg
+{
+    VALUE callback;
+    VALUE tree_view;
+    VALUE search_dialog;
+};
+
+static VALUE
+invoke_callback(VALUE data)
+{
+    struct callback_arg *arg = (struct callback_arg *)data;
+    rb_funcall(arg->callback, id_call, 2, arg->tree_view, arg->search_dialog);
+    return Qnil;
+}
+
+static void
+search_position_func(tree_view, search_dialog, func)
+    GtkTreeView* tree_view;
+    GtkWidget* search_dialog;
+    gpointer func;
+{
+    struct callback_arg arg;
+
+    arg.callback = (VALUE)func;
+    arg.tree_view = GOBJ2RVAL(tree_view);
+    arg.search_dialog = GOBJ2RVAL(search_dialog);
+    G_PROTECT_CALLBACK(invoke_callback, &arg);
+}
+
+static void
+remove_callback_reference(gpointer data)
+{
+    G_CHILD_REMOVE(mGtk, (VALUE)data);
+}
+
+
+static VALUE
+treeview_set_search_position_func(self)
+    VALUE self;
+{
+    VALUE func = G_BLOCK_PROC();
+    G_CHILD_ADD(mGtk, func);
+    gtk_tree_view_set_search_position_func(_SELF(self),
+                                           (GtkTreeViewSearchPositionFunc)search_position_func,
+                                           (gpointer)func,
+                                           (GDestroyNotify)remove_callback_reference);
+    return self;
+}
+
+#endif
+/* Defined as properties
+gboolean    gtk_tree_view_get_headers_clickable
+                                            (GtkTreeView *tree_view);
+void        gtk_tree_view_set_headers_clickable
+                                            (GtkTreeView *tree_view,
+                                             gboolean setting);
+gboolean    gtk_tree_view_get_rubber_banding
+                                            (GtkTreeView *tree_view);
+void        gtk_tree_view_set_rubber_banding
+                                            (GtkTreeView *tree_view,
+                                             gboolean enable);
+gboolean    gtk_tree_view_get_enable_tree_lines
+                                            (GtkTreeView *tree_view);
+void        gtk_tree_view_set_enable_tree_lines
+                                            (GtkTreeView *tree_view,
+                                             gboolean enabled);
+
+// Use Gtk::TreeView#enable_grid_lines, #set_enable_grid_lines instead.
+GtkTreeViewGridLines gtk_tree_view_get_grid_lines
+                                            (GtkTreeView *tree_view);
+
+void        gtk_tree_view_set_grid_lines    (GtkTreeView *tree_view,
+                                             GtkTreeViewGridLines grid_lines);
+*/
+
 void 
 Init_gtk_treeview()
 {
@@ -692,10 +788,19 @@ Init_gtk_treeview()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gTv, "set_row_separator_func", treeview_set_row_separator_func, 0);
 #endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gTv, "search_entry", treeview_get_search_entry, 0);
+    rb_define_method(gTv, "set_search_entry", treeview_set_search_entry, 1);
+    rb_define_method(gTv, "set_search_position_func", treeview_set_search_position_func, 0);
+#endif
 
     /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
+
+    /* GtkTreeViewGridLines */
+    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", gTv);
+    G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
 
     /* Option Signals */
     G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
