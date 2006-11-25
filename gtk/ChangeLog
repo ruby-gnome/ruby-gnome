@@ -1,3 +1,9 @@
+2006-11-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkpagesetupunixdialog.c: use GTK_CHECK_VERSION(2,10,0)
+	instead of HAVE_GTK_GTKPAGESETUPUNIXDIALOG_H.
+	Reported by Dobai-Pataky_Balint. (I'm sorry for using 'a') Thanks!
+
 2006-11-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeview.c: Added Gtk::TreeView#search_entry, #set_search_entry, 

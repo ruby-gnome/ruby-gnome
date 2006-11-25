@@ -3,15 +3,15 @@
 
   rbgtkpagesetupunixdialog.c -
 
-  $Author: mutoh $
-  $Date: 2006/10/23 17:10:15 $
+  $Author: ktou $
+  $Date: 2006/11/25 09:22:16 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "global.h"
 
-#ifdef HAVE_GTK_GTKPAGESETUPUNIXDIALOG_H
+#if GTK_CHECK_VERSION(2,10,0)
 #include <gtk/gtkpagesetupunixdialog.h>
 
 #define _SELF(s) (GTK_PAGE_SETUP_UNIX_DIALOG(RVAL2GOBJ(s)))
@@ -61,7 +61,7 @@ psud_get_print_settings(VALUE self)
 void
 Init_gtk_page_setup_unix_dialog()
 {
-#ifdef HAVE_GTK_GTKPAGESETUPUNIXDIALOG_H
+#if GTK_CHECK_VERSION(2,10,0)
     VALUE gPageSetupUnixDialog = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,
                                              "PageSetupUnixDialog", mGtk);
 
