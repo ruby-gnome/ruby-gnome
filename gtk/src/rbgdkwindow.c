@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: mutoh $
+  $Date: 2006/11/25 17:50:41 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -572,6 +572,46 @@ gdkwin_merge_child_shapes(self)
     return self;
 }   
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gdkwin_input_shape_combine_mask(self, mask, x, y)
+    VALUE self, mask, x, y;
+{
+    gdk_window_input_shape_combine_mask(_SELF(self),
+                                        GDK_BITMAP(RVAL2GOBJ(mask)),
+                                        NUM2INT(x), NUM2INT(y));
+    return self;
+}
+
+static VALUE
+gdkwin_input_shape_combine_region(self, shape_region, offset_x, offset_y)
+    VALUE self, shape_region, offset_x, offset_y;
+{
+    gdk_window_input_shape_combine_region(_SELF(self),
+                                          (GdkRegion*)RVAL2BOXED(shape_region, GDK_TYPE_REGION),
+                                          NUM2INT(offset_x),
+                                          NUM2INT(offset_y));
+    return self;
+}
+
+static VALUE
+gdkwin_set_child_input_shapes(self)
+    VALUE self;
+{
+    gdk_window_set_child_input_shapes(_SELF(self));
+    return self;
+}
+
+static VALUE
+gdkwin_merge_child_input_shapes(self)
+    VALUE self;
+{
+    gdk_window_merge_child_input_shapes(_SELF(self));
+    return self;
+}
+
+#endif
+
 static VALUE
 gdkwin_set_static_gravities(self, use_static)
     VALUE self, use_static;
@@ -689,6 +729,15 @@ gdkwin_set_type_hint(self, hint)
     gdk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
     return self;
 }
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gdkwin_get_type_hint(self)
+    VALUE self;
+{
+    return GENUM2RVAL(gdk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
+}
+#endif
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
@@ -1075,6 +1124,12 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "shape_combine_region", gdkwin_shape_combine_region, 3);
     rb_define_method(gdkWindow, "set_child_shapes", gdkwin_set_child_shapes, 0);
     rb_define_method(gdkWindow, "merge_child_shapes", gdkwin_merge_child_shapes, 0);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gdkWindow, "input_shape_combine_mask", gdkwin_input_shape_combine_mask, 3);
+    rb_define_method(gdkWindow, "input_shape_combine_region", gdkwin_input_shape_combine_region, 3);
+    rb_define_method(gdkWindow, "set_child_input_shapes", gdkwin_set_child_input_shapes, 0);
+    rb_define_method(gdkWindow, "merge_child_input_shapes", gdkwin_merge_child_input_shapes, 0);
+#endif
     rb_define_method(gdkWindow, "set_static_gravities", gdkwin_set_static_gravities, 1);
     rb_define_method(gdkWindow, "set_title", gdkwin_set_title, 1);
     rb_define_method(gdkWindow, "set_background", gdkwin_set_background, 1);
@@ -1086,6 +1141,10 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_icon_list", gdkwin_set_icon_list, 1);
     rb_define_method(gdkWindow, "set_modal_hint", gdkwin_set_modal_hint, 1);
     rb_define_method(gdkWindow, "set_type_hint", gdkwin_set_type_hint, 1);
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gdkWindow, "type_hint", gdkwin_get_type_hint, 0);
+#endif
+
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkWindow, "set_skip_taskbar_hint", gdkwin_set_skip_taskbar_hint, 1);
     rb_define_method(gdkWindow, "set_skip_pager_hint", gdkwin_set_skip_pager_hint, 1);

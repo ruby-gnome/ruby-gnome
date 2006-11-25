@@ -4,13 +4,16 @@
   rbgdkdisplay.c -
 
   $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Date: 2006/11/25 17:50:41 $
 
   Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
 ************************************************/
 
 #include "global.h"
+#ifdef HAVE_RB_CAIRO_H
+#include <rb_cairo.h>
+#endif
 
 #if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
@@ -81,6 +84,15 @@ gdkscreen_get_rgba_visual(self)
     VALUE self;
 {
     return GOBJ2RVAL(gdk_screen_get_rgba_visual(_SELF(self)));
+}
+#endif
+
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gdkscreen_is_composited(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_screen_is_composited(_SELF(self)));
 }
 #endif
 
@@ -226,6 +238,54 @@ gdkscreen_get_setting(argc, argv, self)
     g_value_unset(&val);
     return value;
 }
+
+#if GTK_CHECK_VERSION(2,10,0)
+#ifdef HAVE_RB_CAIRO_H
+static VALUE
+gdkscreen_get_font_options(self)
+    VALUE self;
+{
+    return CRFONTOPTIONS2RVAL((cairo_font_options_t *)gdk_screen_get_font_options(_SELF(self)));
+}
+
+static VALUE
+gdkscreen_set_font_options(self, options)
+    VALUE self, options;
+{
+    gdk_screen_set_font_options(_SELF(self), 
+                                (const cairo_font_options_t *)RVAL2CRFONTOPTIONS(options));
+    return self;
+}
+#endif
+
+/* Defined as properties
+void        gdk_screen_set_font_options     (GdkScreen *screen,
+                                             const cairo_font_options_t *options);
+gdouble     gdk_screen_get_resolution       (GdkScreen *screen);
+ */
+
+static VALUE
+gdkscreen_get_active_window(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gdk_screen_get_active_window(_SELF(self)));
+}
+
+static VALUE
+gdkscreen_get_window_stack(self)
+    VALUE self;
+{
+    GList* list = gdk_screen_get_window_stack(_SELF(self));
+    VALUE ary = rb_ary_new();
+    while (list) {
+        rb_ary_push(ary, GOBJ2RVAL(list->data));
+        g_object_unref(list->data);
+        list = list->next;
+    }
+    g_list_free(list);
+    return ary;
+}
+#endif
 
 #if GTK_CHECK_VERSION(2,4,0)
 static void
@@ -427,6 +487,9 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "rgba_colormap", gdkscreen_get_rgba_colormap, 0);
     rb_define_method(gdkScreen, "rgba_visual", gdkscreen_get_rgba_visual, 0);
 #endif
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gdkScreen, "composited?", gdkscreen_is_composited, 0);
+#endif
     rb_define_method(gdkScreen, "root_window", gdkscreen_get_root_window, 0);
     rb_define_method(gdkScreen, "display", gdkscreen_get_display, 0);
     rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
@@ -442,6 +505,14 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "get_monitor", gdkscreen_get_monitor, -1);
     rb_define_method(gdkScreen, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
     rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
+#if GTK_CHECK_VERSION(2,10,0)
+#ifdef HAVE_RB_CAIRO_H
+    rb_define_method(gdkScreen, "font_options", gdkscreen_get_font_options, 0);
+    rb_define_method(gdkScreen, "set_font_options", gdkscreen_set_font_options, 1);
+#endif
+    rb_define_method(gdkScreen, "active_window", gdkscreen_get_active_window, 0);
+    rb_define_method(gdkScreen, "window_stack", gdkscreen_get_window_stack, 0);
+#endif
 
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gdkScreen, "spawn_on_screen", gdkscreen_spawn_on_screen, 4);

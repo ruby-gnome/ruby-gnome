@@ -1,3 +1,16 @@
+2006-11-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkwindow.c: Added Gdk::Window#input_shape_combine_(mask|region), 
+	#set_child_input_shapes, #merge_child_input_shapes, #type_hint for GTK+-2.10.
+
+2006-11-25  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgdkscreen.c: Added Gdk::Screen#font_options, #set_font_options, #active_window,
+	#window_stack, composited?
+	* src/rbgdkdisplay.c: Added Gdk::Display#supports_(shapes|input_shapes) for GTK+-2.10.
+	* src/rbgdkcairo.c: Added Gdk::Cairo#set_source_pixmap for GTK+-2.10.
+	* src/rbgdkatom.c: Added Gdk::Atom.intern_static_string for GTK+-2.10. 
+
 2006-11-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkpagesetupunixdialog.c: use GTK_CHECK_VERSION(2,10,0)

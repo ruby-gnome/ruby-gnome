@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: ggc $
-  $Date: 2005/09/23 19:33:34 $
+  $Author: mutoh $
+  $Date: 2006/11/25 17:50:41 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -442,6 +442,22 @@ gdkdisplay_set_cursor_theme(self, theme, size)
 #endif
 #endif
 
+#if GTK_CHECK_VERSION(2,10,0)
+static VALUE
+gdkdisplay_supports_shapes(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_shapes(_SELF(self)));
+}
+
+static VALUE
+gdkdisplay_supports_input_shapes(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_input_shapes(_SELF(self)));
+}
+#endif
+
 void 
 Init_gtk_gdk_display()
 {
@@ -516,5 +532,10 @@ Init_gtk_gdk_display()
 #endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
 #endif
+#endif
+
+#if GTK_CHECK_VERSION(2,10,0)
+    rb_define_method(gdkDisplay, "supports_shapes", gdkdisplay_supports_shapes, 0);
+    rb_define_method(gdkDisplay, "supports_input_shapes", gdkdisplay_supports_input_shapes, 0);
 #endif
 }

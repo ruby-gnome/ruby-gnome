@@ -4,7 +4,7 @@
   rbgdkpixmap.c -
 
   $Author: mutoh $
-  $Date: 2005/07/22 18:07:01 $
+  $Date: 2006/11/25 17:50:41 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -78,7 +78,7 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
     Check_Type(data, T_ARRAY);
     buf = ALLOCA_N(char*, RARRAY(data)->len);
     for (i=0; i < RARRAY(data)->len; i++) {
-		buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
+        buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
     }
     new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)), 
 						   &mask, RVAL2COLOR(tcolor), buf);
@@ -147,37 +147,53 @@ gdkpmap_create_from_xbm(self, win, fname)
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
 /* From X Window System Interaction */
+/*
+  Gdk::Window.foreign_new(anid)
+  Gdk::Window.foreign_new(display, anid)                       # Since GTK+-2.2
+  Gdk::Window.foreign_new(screen, anid, width, height, depth)  # Since GTK+-2.10
+ */
+
 static VALUE
 gdkpmap_foreign_new(argc, argv, self)
     int argc;
     VALUE *argv;
     VALUE self;
 {
-    VALUE arg[2];
+    VALUE arg[5];
     GdkPixmap* win = NULL;
     
-    rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
-
+    rb_scan_args(argc, argv, "14", &arg[0], &arg[1], &arg[2], &arg[3], &arg[4]);
+    
     switch(argc)
-    {
-      case 1:
-    	win = gdk_pixmap_foreign_new(NUM2UINT(arg[0]));
-	break;
-      case 2:
+        {
+        case 1:
+            win = gdk_pixmap_foreign_new(NUM2UINT(arg[0]));
+            break;
+        case 2:
 #if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_pixmap_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+            win = gdk_pixmap_foreign_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(arg[0])), 
+                                                     NUM2UINT(arg[1])); 
 #else
-    	win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
+            win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
+            rb_warn("Not supported. Use GTK+-2.2.0 or later.");
 #endif
-    	break;
-    }
-    if (win == NULL)
-        return Qnil;
-    else {
-        return GOBJ2RVAL(win);
-    }
+            break;
+        case 5:
+#if GTK_CHECK_VERSION(2,10,0)
+            win = gdk_pixmap_foreign_new_for_screen(GDK_SCREEN(RVAL2GOBJ(arg[0])), 
+                                                    NUM2UINT(arg[1]), /* anid */
+                                                    NUM2INT(arg[2]),  /* width */
+                                                    NUM2INT(arg[3]),  /* height */
+                                                    NUM2INT(arg[4])); /* depth */
+#else
+            win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
+            rb_warn("Not supported. GTK+-2.10.0 or later.");
+#endif
+            break;
+        }
+    return win ? GOBJ2RVAL(win) : Qnil;
 }
+
 static VALUE
 gdkpmap_lookup(argc, argv, self)
     int argc;
