@@ -4,7 +4,7 @@
   rbgtkrecentchooserdialog.c -
 
   $Author: mutoh $
-  $Date: 2006/11/12 15:28:40 $
+  $Date: 2006/11/27 17:41:06 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -25,12 +25,11 @@ rcd_initialize(argc, argv, self)
     GtkWidget* dialog;
     if (rb_obj_is_kind_of(argv[2], GTYPE2CLASS(GTK_TYPE_RECENT_MANAGER))){
       VALUE manager;
-      printf("a\n");
       rb_scan_args(argc, argv, "03*", &title, &parent, &manager, &button_ary);
 
       dialog = gtk_recent_chooser_dialog_new_for_manager((const gchar*)RVAL2CSTR2(title),
 							 GTK_WINDOW(RVAL2GOBJ(parent)),
-							 GTK_RECENT_MANAGER(manager),
+							 GTK_RECENT_MANAGER(RVAL2GOBJ(manager)),
 							 (const gchar*)NULL, NULL);
     } else {
       rb_scan_args(argc, argv, "02*", &title, &parent, &button_ary);

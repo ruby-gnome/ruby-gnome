@@ -1,3 +1,7 @@
+2006-11-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkrecentchoosermenu.c: Added Gtk::RecentChooserMenu for GTK+-2.10. 
+
 2006-11-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Added Gdk::Window#input_shape_combine_(mask|region), 
