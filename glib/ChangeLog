@@ -1,8 +1,11 @@
 2006-12-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* tests/test-iochannel.txt, tests/test-iochannel-sjis.txt: removed
+	needless files.
+
 	* tests/runner.rb: setup $LOAD_PATH for test environment.
 
-	* tests/test-iochannel.rb: rewrite with Tempfile. I want to
+	* tests/test-iochannel.rb: rewrote with Tempfile. I want to
 	suppress GLib-WARNING and GLib-CRITICAL messages but I don't know
 	how to do the thing...
 
