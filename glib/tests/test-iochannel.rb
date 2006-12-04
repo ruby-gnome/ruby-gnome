@@ -1,38 +1,54 @@
 require 'test/unit'
 require 'glib2'
 
+require 'tempfile'
+require 'nkf'
+
 $KCODE = "U"
 
 class TestGIOChannel < Test::Unit::TestCase
-  TEST_FILE = "test-iochannel.txt"
-  TEST_SJIS_FILE = "test-iochannel-sjis.txt"
-  TEST_WRITE_FILE = "test-write-file.txt"
+  def setup
+    @content = "aaa\nbbb\nccc\nあああ\n"
+    @sjis_content = NKF.nkf("-sW", @content)
+
+    @file = Tempfile.new("glib2-content")
+    @file.open
+    @file.print(@content)
+    @file.close
+
+    @sjis_file = Tempfile.new("glib2-sjis-content")
+    @sjis_file.open
+    @sjis_file.print(@sjis_content)
+    @sjis_file.close
+  end
 
   def test_open
-    io = GLib::IOChannel.open(TEST_FILE)
+    write_test_file = Tempfile.new("glib2-write-test")
+
+    io = GLib::IOChannel.open(@file.path)
     io.close
 
-    io = GLib::IOChannel.open(TEST_FILE, "r")
-    assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+    io = GLib::IOChannel.open(@file.path, "r")
+    assert_equal(@content, io.read)
     io.close
 
-    io = GLib::IOChannel.open(TEST_WRITE_FILE, "w")
+    io = GLib::IOChannel.open(write_test_file.path, "w")
     assert_raises(RuntimeError){
-      assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+      assert_equal(@content, io.read)
     }
     io.close
 
-    GLib::IOChannel.open(TEST_FILE) {|io|
-      assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+    GLib::IOChannel.open(@file.path) {|io|
+      assert_equal(@content, io.read)
     }
 
-    GLib::IOChannel.open(TEST_FILE, "r") {|io|
-      assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+    GLib::IOChannel.open(@file.path, "r") {|io|
+      assert_equal(@content, io.read)
     }
 
-    GLib::IOChannel.open(TEST_WRITE_FILE, "w") {|io|
+    GLib::IOChannel.open(write_test_file.path, "w") {|io|
       assert_raises(RuntimeError){
-	assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+	assert_equal(@content, io.read)
       }
     }
 
@@ -47,7 +63,7 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_getc
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     ["a", "b", "c", "あ"].each do |v|
       3.times do 
 	assert_equal(v.unpack("U")[0], io.getc)
@@ -59,8 +75,8 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_each_char
-    text = "aaa\nbbb\nccc\nあああ\n".split(//)
-    io = GLib::IOChannel.new(TEST_FILE)
+    text = @content.split(//)
+    io = GLib::IOChannel.new(@file.path)
     i = 0
     io.each_char {|ch|
       assert_equal(text[i].unpack("U")[0], ch)
@@ -70,8 +86,8 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_readchar
-    io = GLib::IOChannel.new(TEST_FILE)
-    text = "aaa\nbbb\nccc\nあああ\n".split(//)
+    io = GLib::IOChannel.new(@file.path)
+    text = @content.split(//)
     text.each do |v|
       assert_equal(v.unpack("U")[0], io.readchar)
     end
@@ -82,7 +98,7 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_gets
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("aaa\n", io.gets)
     assert_equal("bbb\n", io.gets)
     assert_equal("ccc\n", io.gets)
@@ -90,7 +106,7 @@ class TestGIOChannel < Test::Unit::TestCase
     assert_equal(nil, io.gets)
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("aaa\nbbb\n", io.gets("bbb\n"))
     assert_equal("ccc\nあああ\n", io.gets("bbb\n"))
     assert_equal(nil, io.gets("bbb\n"))
@@ -98,7 +114,7 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_readline
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("aaa\n", io.readline)
     assert_equal("bbb\n", io.readline)
     assert_equal("ccc\n", io.readline)
@@ -108,7 +124,7 @@ class TestGIOChannel < Test::Unit::TestCase
     }
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("aaa\nbbb\n", io.readline("bbb\n"))
     assert_equal("ccc\nあああ\n", io.readline("bbb\n"))
     assert_raises(EOFError) {
@@ -119,7 +135,7 @@ class TestGIOChannel < Test::Unit::TestCase
 
   def test_each_line
     lines = ["aaa\n", "bbb\n", "ccc\n", "あああ\n"]
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     i = 0
     io.each {|line|
       assert_equal(lines[i], line)
@@ -127,7 +143,7 @@ class TestGIOChannel < Test::Unit::TestCase
     }
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_raises(RuntimeError) {
       io.each {|line|
 	raise "test"
@@ -135,7 +151,7 @@ class TestGIOChannel < Test::Unit::TestCase
     }
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     i = 0
     io.each_line {|line|
       assert_equal(lines[i], line)
@@ -144,7 +160,7 @@ class TestGIOChannel < Test::Unit::TestCase
     io.close
 
     #Test for Enumerable
-    GLib::IOChannel.open(TEST_FILE) {|io| 
+    GLib::IOChannel.open(@file.path) {|io| 
       io.each_with_index {|line, i|
 	assert_equal(lines[i], line)
       }
@@ -156,15 +172,15 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_read
-    io = GLib::IOChannel.new(TEST_FILE)
-    assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+    io = GLib::IOChannel.new(@file.path)
+    assert_equal(@content, io.read)
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
-    assert_equal("aaa\nbbb\nccc\nあああ\n", io.read(100))
+    io = GLib::IOChannel.new(@file.path)
+    assert_equal(@content, io.read(100))
     io.close
 
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("aaa\nbbb\n", io.read(8))
     assert_equal("ccc\n", io.read(4))
     assert_equal("あああ\n", io.read(10))
@@ -174,8 +190,8 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_seek
-    text = "aaa\nbbb\nccc\nあああ\n"
-    io = GLib::IOChannel.new(TEST_FILE)
+    text = @content
+    io = GLib::IOChannel.new(@file.path)
     io.seek(5)
     assert_equal(text[5], io.getc)
     io.seek(6, GLib::IOChannel::SEEK_SET)
@@ -194,7 +210,9 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_write
-    io = GLib::IOChannel.new(TEST_WRITE_FILE, "w")
+    write_test_file = Tempfile.new("glib2-write-test")
+
+    io = GLib::IOChannel.new(write_test_file.path, "w")
     io.write("a\n")
     io.write("あいう\n")
     io.printf("a%sa\n", "a")
@@ -210,7 +228,7 @@ class TestGIOChannel < Test::Unit::TestCase
     io.close
 
     # check them
-    io = GLib::IOChannel.new(TEST_WRITE_FILE, "r")
+    io = GLib::IOChannel.new(write_test_file.path, "r")
     assert_equal("a\n", io.gets)
     assert_equal("あいう\n", io.gets)
     assert_equal("aaa\n", io.gets)
@@ -229,7 +247,7 @@ class TestGIOChannel < Test::Unit::TestCase
   end
 
   def test_encoding
-    io = GLib::IOChannel.new(TEST_FILE)
+    io = GLib::IOChannel.new(@file.path)
     assert_equal("UTF-8", io.encoding)
     io.encoding = "Shift_JIS"
     assert_equal("Shift_JIS", io.encoding)
@@ -238,10 +256,10 @@ class TestGIOChannel < Test::Unit::TestCase
     }
     io.close
 
-    io = GLib::IOChannel.new(TEST_SJIS_FILE)
+    io = GLib::IOChannel.new(@sjis_file.path)
     io.encoding = "Shift_JIS"
     assert_equal("Shift_JIS", io.encoding)
-    assert_equal("aaa\nbbb\nccc\nあああ\n", io.read)
+    assert_equal(@content, io.read)
     io.close
   end
 

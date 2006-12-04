@@ -1,5 +1,9 @@
 2006-12-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* tests/test-iochannel.rb: rewrite with Tempfile. I want to
+	suppress GLib-WARNING and GLib-CRITICAL messages but I don't know
+	how to do the thing...
+
 	* src/rbglib_iochannel.c: made "U" each time for avoiding GC
 	problem.
 
