@@ -1,5 +1,10 @@
 2006-12-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* tests/runner.rb: used Test::Unit::Autorunner.run.
+	* tests/test-glib2, tests/test-iocahnnel.rb: renamed to ...
+	* tests/test_glib2, tests/test_iochannel.rb: ... them for adapting
+	Test::Unit's default configurations.
+
 	* tests/test-iochannel.txt, tests/test-iochannel-sjis.txt: removed
 	needless files.
 

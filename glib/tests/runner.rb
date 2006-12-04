@@ -9,6 +9,4 @@ $LOAD_PATH.unshift(base)
 
 require 'test/unit'
 
-require 'test-glib2.rb'
-require 'test-iochannel.rb'
-
+exit Test::Unit::AutoRunner.run(true, base)
