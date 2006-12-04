@@ -3,8 +3,8 @@
 
   rbglib_iochannel.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/25 16:46:32 $
+  $Author: ktou $
+  $Date: 2006/12/04 13:11:31 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -421,7 +421,6 @@ ioc_write_chars(self, buf)
 }
 
 static ID id_unpack;
-static VALUE utf8;
 
 static VALUE
 ioc_write_unichar(self, thechar)
@@ -435,7 +434,7 @@ ioc_write_unichar(self, thechar)
     if (TYPE(thechar) == T_FIXNUM) {
         unichar = NUM2UINT(thechar);
     } else {
-        VALUE ary = rb_funcall(thechar, id_unpack, 1, utf8);
+        VALUE ary = rb_funcall(thechar, id_unpack, 1, CSTR2RVAL("U"));
         unichar = NUM2UINT(RARRAY(ary)->ptr[0]);
     }
 
@@ -802,7 +801,6 @@ Init_glib_io_channel()
 
     id_call = rb_intern("call");
     id_unpack = rb_intern("unpack");
-    utf8 = CSTR2RVAL("U");
 
 
     rb_define_method(io, "initialize", ioc_initialize, -1);
