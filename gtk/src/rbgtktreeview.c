@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/23 15:53:13 $
+  $Author: ktou $
+  $Date: 2006/12/05 14:54:28 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -798,9 +798,11 @@ Init_gtk_treeview()
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
+#if GTK_CHECK_VERSION(2,10,0)
     /* GtkTreeViewGridLines */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", gTv);
     G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
+#endif
 
     /* Option Signals */
     G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
