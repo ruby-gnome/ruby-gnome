@@ -1,3 +1,9 @@
+2006-12-05  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/glib-mkenums.rb: added.
+	* src/lib/mkmf-gnome2.rb (glib_mkenums): added.
+	* extconf.rb: used glib_mkenums.
+
 2006-12-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* tests/runner.rb: used Test::Unit::Autorunner.run.

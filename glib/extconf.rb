@@ -26,7 +26,16 @@ have_func("rb_check_array_type")
 have_func("rb_exec_recursive")
 have_header('yarv.h')
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION")
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
+  enum_type_prefix = "glib-enum-types"
+
+  include_paths = `pkg-config glib-2.0 --cflags-only-I`
+  headers = include_paths.split.inject([]) do |result, path|
+    result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
+  end.reject do |file|
+    /g(iochannel|scanner)\.h/ =~ file
+  end
+  glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib.h"])
+end
 
 create_top_makefile
-

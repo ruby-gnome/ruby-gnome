@@ -11,6 +11,7 @@
 
 require 'mkmf'
 require 'pkg-config'
+require 'glib-mkenums'
 
 unless defined? macro_defined?
   def macro_defined?(macro, src, opt="")
@@ -255,5 +256,8 @@ def add_obj(name)
   $objs << name unless $objs.index(name)
 end
 
+def glib_mkenums(prefix, files, g_type_prefix, include_files)
+  GLib.mkenums(prefix, files, g_type_prefix, include_files)
+end
 
 check_ruby_func
