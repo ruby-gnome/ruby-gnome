@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/10/12 13:30:22 $
+  $Date: 2006/12/07 14:46:08 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -260,7 +260,7 @@ rclosure_invalidate(gpointer data, GClosure* closure)
 {
     GRClosure *rclosure = (GRClosure*)closure;
 
-    if (rclosure_alive_p(rclosure)) {
+    if (rclosure->count > 0) {
         rclosure->count = 1;
         rclosure_unref(rclosure);
     }
