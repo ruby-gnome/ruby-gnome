@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: ktou $
-  $Date: 2006/12/07 14:46:08 $
+  $Date: 2006/12/07 14:47:37 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -251,6 +251,7 @@ rclosure_unref(GRClosure *rclosure)
             GRClosureHolder *holder;
             Data_Get_Struct(rclosure->rb_holder, GRClosureHolder, holder);
             holder->closure = NULL;
+            rclosure->rb_holder = Qnil;
         }
     }
 }
