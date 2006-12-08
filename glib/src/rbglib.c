@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: ktou $
-  $Date: 2006/05/27 01:44:07 $
+  $Date: 2006/12/08 14:48:39 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -36,6 +36,7 @@ extern void Init_glib_io_channel();
 extern void Init_glib_shell();
 extern void Init_glib_completion();
 extern void Init_glib_timer();
+extern void Init_glib_unicode();
 
 char *
 rbg_string_value_ptr(ptr)
@@ -289,6 +290,7 @@ Init_glib2()
     Init_glib_shell();
     Init_glib_completion();
     Init_glib_timer();
+    Init_glib_unicode();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);
