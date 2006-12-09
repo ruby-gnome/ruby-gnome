@@ -4,7 +4,7 @@
   rbglib_unicode.c -
 
   $Author: ktou $
-  $Date: 2006/12/09 06:56:09 $
+  $Date: 2006/12/09 11:17:45 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -146,26 +146,27 @@ rbglib_m_unichar_get_script(VALUE self, VALUE unichar)
 #endif
 
 static VALUE
-rbglib_m_utf8_get_char(VALUE self, VALUE utf8)
+rbglib_m_utf8_get_char(int argc, VALUE *argv, VALUE self)
 {
-    return UINT2NUM(g_utf8_get_char(StringValueCStr(utf8)));
-}
-
-static VALUE
-rbglib_m_utf8_get_char_validated(VALUE self, VALUE utf8)
-{
+    VALUE utf8, validate;
     gunichar result;
 
-    StringValue(utf8);
-    result = g_utf8_get_char_validated(RSTRING(utf8)->ptr,
-                                       RSTRING(utf8)->len);
-    if (result == (gunichar)-1) {
-        return INT2NUM(-1);
-    } else if (result == (gunichar)-2) {
-        return INT2NUM(-2);
+    rb_scan_args(argc, argv, "11", &utf8, &validate);
+
+    if (RVAL2CBOOL(validate)) {
+        StringValue(utf8);
+        result = g_utf8_get_char_validated(RSTRING(utf8)->ptr,
+                                           RSTRING(utf8)->len);
+        if (result == (gunichar)-1) {
+            return INT2NUM(-1);
+        } else if (result == (gunichar)-2) {
+            return INT2NUM(-2);
+        }
     } else {
-        return UINT2NUM(result);
+        result = g_utf8_get_char(StringValueCStr(utf8));
     }
+
+    return UINT2NUM(result);
 }
 
 static VALUE
@@ -175,6 +176,19 @@ rbglib_m_utf8_strlen(VALUE self, VALUE rb_utf8)
 
     utf8 = StringValueCStr(rb_utf8);
     return INT2NUM(g_utf8_strlen(utf8, RSTRING(rb_utf8)->len));
+}
+
+static VALUE
+rbglib_m_utf8_strreverse(VALUE self, VALUE rb_utf8)
+{
+    VALUE result;
+    gchar *utf8, *reversed_utf8;
+
+    utf8 = StringValueCStr(rb_utf8);
+    reversed_utf8 = g_utf8_strreverse(utf8, RSTRING(rb_utf8)->len);
+    result = rb_str_new2(reversed_utf8);
+    g_free(reversed_utf8);
+    return result;
 }
 
 static VALUE
@@ -444,7 +458,7 @@ Init_glib_unicode(void)
                               rbglib_m_unichar_isalnum, 1);
     rb_define_module_function(mGLib, "unichar_alpha?",
                               rbglib_m_unichar_isalpha, 1);
-    rb_define_module_function(mGLib, "unichar_control?",
+    rb_define_module_function(mGLib, "unichar_cntrl?",
                               rbglib_m_unichar_iscntrl, 1);
     rb_define_module_function(mGLib, "unichar_digit?",
                               rbglib_m_unichar_isdigit, 1);
@@ -500,8 +514,6 @@ Init_glib_unicode(void)
 #endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
-    /* I want't to use "unichar_script" because unichar_type
-       and unichar_break_type don't have 'get'. - kou */
     rb_define_module_function(mGLib, "unichar_get_script",
                               rbglib_m_unichar_get_script, 1);
 #endif
@@ -511,9 +523,7 @@ Init_glib_unicode(void)
       g_utf8_next_char
     */
     rb_define_module_function(mGLib, "utf8_get_char",
-                              rbglib_m_utf8_get_char, 1);
-    rb_define_module_function(mGLib, "utf8_get_char_validated",
-                              rbglib_m_utf8_get_char_validated, 1);
+                              rbglib_m_utf8_get_char, -1);
     /*
       Not implemented.
       g_utf8_offset_to_pointer
@@ -528,8 +538,9 @@ Init_glib_unicode(void)
       Not implemented.
       g_utf8_strncpy
       g_utf8_strrchr
-      g_utf8_strreverse
     */
+    rb_define_module_function(mGLib, "utf8_reverse",
+                              rbglib_m_utf8_strreverse, 1);
     rb_define_module_function(mGLib, "utf8_validate",
                               rbglib_m_utf8_validate, 1);
 

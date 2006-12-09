@@ -26,11 +26,11 @@ class TestGLibUnicode < Test::Unit::TestCase
     assert(!GLib.unichar_alpha?(?1))
   end
 
-  def test_unichar_control?
-    assert(GLib.unichar_control?(?\t))
-    assert(!GLib.unichar_control?(?\h))
-    assert(!GLib.unichar_control?(?a))
-    assert(!GLib.unichar_control?(?1))
+  def test_unichar_cntrl?
+    assert(GLib.unichar_cntrl?(?\t))
+    assert(!GLib.unichar_cntrl?(?\h))
+    assert(!GLib.unichar_cntrl?(?a))
+    assert(!GLib.unichar_cntrl?(?1))
   end
 
   def test_unichar_digit?
@@ -193,20 +193,22 @@ class TestGLibUnicode < Test::Unit::TestCase
   def test_utf8_get_char
     assert_equal(Uconv.u8tou4("あ").unpack("L*")[0],
                  GLib.utf8_get_char("あ"))
-  end
 
-  def test_utf8_get_char_validated
     assert_equal(Uconv.u8tou4("あ").unpack("L*")[0],
-                 GLib.utf8_get_char_validated("あ"))
+                 GLib.utf8_get_char("あ", true))
     partial_input = "あ".unpack("c*")[0..-2].pack("c*")
-    assert_equal(-2, GLib.utf8_get_char_validated(partial_input))
+    assert_equal(-2, GLib.utf8_get_char(partial_input, true))
     invalid_input = "あ".unpack("c*")[2..-1].pack("c*")
-    assert_equal(-1, GLib.utf8_get_char_validated(invalid_input))
+    assert_equal(-1, GLib.utf8_get_char(invalid_input, true))
   end
 
   def test_utf8_size
     assert_equal(1, GLib.utf8_size("あ"))
     assert_equal(2, GLib.utf8_size("あい"))
+  end
+
+  def test_utf8_reverse
+    assert_equal("おえういあ", GLib.utf8_reverse("あいうえお"))
   end
 
   def test_utf8_upcase
