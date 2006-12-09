@@ -1,3 +1,7 @@
+2006-12-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_unicode.c, tests/test_unicode.rb: completed.
+
 2006-12-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_unicode.c: added. not completed yet.

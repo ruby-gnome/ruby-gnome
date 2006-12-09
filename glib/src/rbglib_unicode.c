@@ -4,7 +4,7 @@
   rbglib_unicode.c -
 
   $Author: ktou $
-  $Date: 2006/12/08 14:48:39 $
+  $Date: 2006/12/09 06:56:09 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -42,7 +42,9 @@ DEF_IS_UNICHAR(xdigit)
 DEF_IS_UNICHAR(title)
 DEF_IS_UNICHAR(defined)
 DEF_IS_UNICHAR(wide)
+#if GLIB_CHECK_VERSION(2,12,0)
 DEF_IS_UNICHAR(wide_cjk)
+#endif
 
 #undef DEF_IS_UNICHAR
 
@@ -120,6 +122,7 @@ rbglib_m_unicode_canonical_decomposition(VALUE self, VALUE unichar)
     return normalized_ucs4;
 }
 
+#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 rbglib_m_unichar_get_mirror_char(VALUE self, VALUE unichar)
 {
@@ -131,6 +134,7 @@ rbglib_m_unichar_get_mirror_char(VALUE self, VALUE unichar)
         return unichar;
     }
 }
+#endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
@@ -239,6 +243,183 @@ rbglib_m_utf8_normalize(int argc, VALUE *argv, VALUE self)
     return result;
 }
 
+static VALUE
+rbglib_m_utf8_collate(VALUE self, VALUE utf8a, VALUE utf8b)
+{
+    return INT2NUM(g_utf8_collate(StringValueCStr(utf8a),
+                                  StringValueCStr(utf8b)));
+}
+
+static VALUE
+rbglib_m_utf8_collate_key(int argc, VALUE *argv, VALUE self)
+{
+    VALUE result, rb_utf8, for_filename;
+    gchar *key, *utf8;
+    gssize len;
+
+    rb_scan_args(argc, argv, "11", &rb_utf8, &for_filename);
+
+    utf8 = StringValueCStr(rb_utf8);
+    len = RSTRING(rb_utf8)->len;
+#if GLIB_CHECK_VERSION(2,8,0)
+    if (RVAL2CBOOL(for_filename))
+        key = g_utf8_collate_key_for_filename(utf8, len);
+    else
+#endif
+        key = g_utf8_collate_key(utf8, len);
+
+    result = rb_str_new2(key);
+    g_free(key);
+    return result;
+}
+
+static VALUE
+rbglib_m_utf8_to_utf16(VALUE self, VALUE rb_utf8)
+{
+    VALUE result;
+    gchar *utf8;
+    gunichar2 *utf16;
+    glong len, items_written;
+    GError *error = NULL;
+
+    utf8 = StringValueCStr(rb_utf8);
+    len = RSTRING(rb_utf8)->len;
+
+    utf16 = g_utf8_to_utf16(utf8, len, NULL, &items_written, &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    result = rb_str_new((char *)utf16, items_written * sizeof(*utf16));
+    g_free(utf16);
+    return result;
+}
+
+static VALUE
+rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, VALUE self)
+{
+    VALUE result, rb_utf8, is_fast;
+    gchar *utf8;
+    gunichar *ucs4;
+    glong len, items_written;
+
+    rb_scan_args(argc, argv, "11", &rb_utf8, &is_fast);
+
+    utf8 = StringValueCStr(rb_utf8);
+    len = RSTRING(rb_utf8)->len;
+
+    if (RVAL2CBOOL(is_fast)) {
+        ucs4 = g_utf8_to_ucs4_fast(utf8, len, &items_written);
+    } else {
+        GError *error = NULL;
+        ucs4 = g_utf8_to_ucs4(utf8, len, NULL, &items_written, &error);
+
+        if (error)
+            RAISE_GERROR(error);
+    }
+
+    result = rb_str_new((char *)ucs4, items_written * sizeof(*ucs4));
+    g_free(ucs4);
+    return result;
+}
+
+static VALUE
+rbglib_m_utf16_to_ucs4(VALUE self, VALUE rb_utf16)
+{
+    VALUE result;
+    gunichar *ucs4;
+    gunichar2 *utf16;
+    glong len, items_written;
+    GError *error = NULL;
+
+    utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
+    len = RSTRING(rb_utf16)->len / sizeof(*utf16);
+
+    ucs4 = g_utf16_to_ucs4(utf16, len, NULL, &items_written, &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    result = rb_str_new((char *)ucs4, items_written * sizeof(*ucs4));
+    g_free(ucs4);
+    return result;
+}
+
+static VALUE
+rbglib_m_utf16_to_utf8(VALUE self, VALUE rb_utf16)
+{
+    VALUE result;
+    gchar *utf8;
+    gunichar2 *utf16;
+    glong len, items_written;
+    GError *error = NULL;
+
+    utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
+    len = RSTRING(rb_utf16)->len / sizeof(*utf16);
+
+    utf8 = g_utf16_to_utf8(utf16, len, NULL, &items_written, &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    result = rb_str_new(utf8, items_written * sizeof(*utf8));
+    g_free(utf8);
+    return result;
+}
+
+static VALUE
+rbglib_m_ucs4_to_utf16(VALUE self, VALUE rb_ucs4)
+{
+    VALUE result;
+    gunichar *ucs4;
+    gunichar2 *utf16;
+    glong len, items_written;
+    GError *error = NULL;
+
+    ucs4 = (gunichar *)StringValuePtr(rb_ucs4);
+    len = RSTRING(rb_ucs4)->len / sizeof(*ucs4);
+
+    utf16 = g_ucs4_to_utf16(ucs4, len, NULL, &items_written, &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    result = rb_str_new((char *)utf16, items_written * sizeof(*utf16));
+    g_free(utf16);
+    return result;
+}
+
+static VALUE
+rbglib_m_ucs4_to_utf8(VALUE self, VALUE rb_ucs4)
+{
+    VALUE result;
+    gunichar *ucs4;
+    gchar *utf8;
+    glong len, items_written;
+    GError *error = NULL;
+
+    ucs4 = (gunichar *)StringValuePtr(rb_ucs4);
+    len = RSTRING(rb_ucs4)->len / sizeof(*ucs4);
+
+    utf8 = g_ucs4_to_utf8(ucs4, len, NULL, &items_written, &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    result = rb_str_new(utf8, items_written);
+    g_free(utf8);
+    return result;
+}
+
+static VALUE
+rbglib_m_unichar_to_utf8(VALUE self, VALUE unichar)
+{
+    gchar utf8[6];
+    gint len;
+
+    len = g_unichar_to_utf8(NUM2UINT(unichar), utf8);
+    return rb_str_new(utf8, len);
+}
 
 void
 Init_glib_unicode(void)
@@ -287,8 +468,10 @@ Init_glib_unicode(void)
                               rbglib_m_unichar_isdefined, 1);
     rb_define_module_function(mGLib, "unichar_wide?",
                               rbglib_m_unichar_iswide, 1);
+#if GLIB_CHECK_VERSION(2,12,0)
     rb_define_module_function(mGLib, "unichar_wide_cjk?",
                               rbglib_m_unichar_iswide_cjk, 1);
+#endif
 
     rb_define_module_function(mGLib, "unichar_to_upper",
                               rbglib_m_unichar_toupper, 1);
@@ -311,8 +494,10 @@ Init_glib_unicode(void)
     rb_define_module_function(mGLib, "unicode_canonical_decomposition",
                               rbglib_m_unicode_canonical_decomposition, 1);
 
+#if GLIB_CHECK_VERSION(2,4,0)
     rb_define_module_function(mGLib, "unichar_get_mirror_char",
                               rbglib_m_unichar_get_mirror_char, 1);
+#endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
     /* I want't to use "unichar_script" because unichar_type
@@ -358,17 +543,26 @@ Init_glib_unicode(void)
     rb_define_module_function(mGLib, "utf8_normalize",
                               rbglib_m_utf8_normalize, -1);
 
-    /*
-      ToDo:
-      g_utf8_collate_key
-      g_utf8_collate_key_for_filename
-      g_utf8_to_utf16
-      g_utf8_to_ucs4
-      g_utf8_to_ucs4_fast
-      g_utf16_to_ucs4
-      g_utf16_to_utf8
-      g_ucs4_to_utf16
-      g_ucs4_to_utf8
-      g_unichar_to_utf8
-    */
+    rb_define_module_function(mGLib, "utf8_collate",
+                              rbglib_m_utf8_collate, 2);
+    rb_define_module_function(mGLib, "utf8_collate_key",
+                              rbglib_m_utf8_collate_key, -1);
+
+    rb_define_module_function(mGLib, "utf8_to_utf16",
+                              rbglib_m_utf8_to_utf16, 1);
+    rb_define_module_function(mGLib, "utf8_to_ucs4",
+                              rbglib_m_utf8_to_ucs4, -1);
+
+    rb_define_module_function(mGLib, "utf16_to_ucs4",
+                              rbglib_m_utf16_to_ucs4, 1);
+    rb_define_module_function(mGLib, "utf16_to_utf8",
+                              rbglib_m_utf16_to_utf8, 1);
+
+    rb_define_module_function(mGLib, "ucs4_to_utf16",
+                              rbglib_m_ucs4_to_utf16, 1);
+    rb_define_module_function(mGLib, "ucs4_to_utf8",
+                              rbglib_m_ucs4_to_utf8, 1);
+
+    rb_define_module_function(mGLib, "unichar_to_utf8",
+                              rbglib_m_unichar_to_utf8, 1);
 }

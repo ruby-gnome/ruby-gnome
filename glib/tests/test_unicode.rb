@@ -105,6 +105,7 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unichar_wide_cjk?
+    return unless (GLib::VERSION <=> [2, 12, 0]) >= 0
     require 'uconv'
     assert(GLib.unichar_wide_cjk?(Uconv.u8tou4("あ").unpack("L*")[0]))
     assert(GLib.unichar_wide_cjk?(Uconv.u8tou4("한").unpack("L*")[0]))
@@ -176,14 +177,15 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unichar_get_mirror_char
+    return unless (GLib::VERSION <=> [2, 4, 0]) >= 0
     assert_equal(?\(, GLib.unichar_get_mirror_char(?\)))
     assert_equal(?\), GLib.unichar_get_mirror_char(?\())
     assert_equal(?x, GLib.unichar_get_mirror_char(?x))
   end
 
   def test_unichar_get_script
+    return unless (GLib::VERSION <=> [2, 14, 0]) >= 0
     require 'uconv'
-    return unless (GLib::VERSION <=> [2, 14, 0]) >= 1
     assert_equal(GLib::UNICODE_SCRIPT_HIRAGANA,
                  GLib.unichar_get_script(Uconv.u8tou4("あ").unpack("L*")[0]))
   end
@@ -234,5 +236,85 @@ class TestGLibUnicode < Test::Unit::TestCase
 
     nfkc = [0x00c1].pack("U*")
     assert_equal(nfkc, GLib.utf8_normalize(original, GLib::NORMALIZE_NFKC))
+  end
+
+  def test_utf8_collate
+    assert_operator(0, :>, GLib.utf8_collate("あ", "い"))
+    assert_operator(0, :<, GLib.utf8_collate("い", "あ"))
+    assert_equal(0, GLib.utf8_collate("あ", "あ"))
+  end
+
+  def test_utf8_collate_key
+    assert_operator(0, :>,
+                    GLib.utf8_collate_key("あ") <=> GLib.utf8_collate_key("い"))
+    assert_operator(0, :<,
+                    GLib.utf8_collate_key("い") <=> GLib.utf8_collate_key("あ"))
+    assert_equal(0, GLib.utf8_collate_key("あ") <=> GLib.utf8_collate_key("あ"))
+  end
+
+  def test_utf8_collate_key_for_filename
+    assert_equal(["event.c", "event.h", "eventgenerator.c"],
+                 ["event.c", "eventgenerator.c", "event.h"].sort_by do |f|
+                   GLib.utf8_collate_key(f, true)
+                 end)
+
+    assert_equal(["file1", "file5", "file10"],
+                 ["file1", "file10", "file5"].sort_by do |f|
+                   GLib.utf8_collate_key(f, true)
+                 end)
+  end
+
+  def test_utf8_to_utf16
+    require 'uconv'
+    assert_equal(Uconv.u8tou16("あいうえお"),
+                 GLib.utf8_to_utf16("あいうえお"))
+  end
+
+  def test_utf8_to_ucs4
+    require 'uconv'
+    assert_equal(Uconv.u8tou4("あいうえお"),
+                 GLib.utf8_to_ucs4("あいうえお"))
+
+    assert_raise(GLib::ConvertError) do
+      GLib.utf8_to_ucs4("あいうえお"[1..-1])
+    end
+    assert_nothing_raised do
+      GLib.utf8_to_ucs4("あいうえお"[1..-1], true)
+    end
+  end
+
+  def test_utf16_to_ucs4
+    require 'uconv'
+    assert_equal(Uconv.u8tou4("あいうえお"),
+                 GLib.utf16_to_ucs4(Uconv.u8tou16("あいうえお")))
+  end
+
+  def test_utf16_to_utf8
+    require 'uconv'
+    assert_equal("あいうえお",
+                 GLib.utf16_to_utf8(Uconv.u8tou16("あいうえお")))
+  end
+
+
+  def test_ucs4_to_utf16
+    require 'uconv'
+    assert_equal(Uconv.u8tou16("あいうえお"),
+                 GLib.ucs4_to_utf16(Uconv.u8tou4("あいうえお")))
+
+    assert_raise(GLib::ConvertError) do
+      GLib.ucs4_to_utf16(Uconv.u8tou4("あいうえお")[1..-1])
+    end
+  end
+
+  def test_utf16_to_utf8
+    require 'uconv'
+    assert_equal("あいうえお",
+                 GLib.ucs4_to_utf8(Uconv.u8tou4("あいうえお")))
+  end
+
+  def test_unichar_to_utf8
+    require 'uconv'
+    assert_equal("あ",
+                 GLib.unichar_to_utf8(Uconv.u8tou4("あ").unpack("L*")[0]))
   end
 end
