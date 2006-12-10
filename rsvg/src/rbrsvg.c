@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/07/01 10:12:26 $
+  $Date: 2006/12/10 08:42:12 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -771,6 +771,7 @@ Init_rsvg2(void)
 
     rb_define_method(cDim, "to_s", rb_rsvg_dim_to_s, 0);
     rb_define_method(cDim, "to_a", rb_rsvg_dim_to_a, 0);
+    rb_define_alias(cDim, "to_ary", "to_a");
 
     G_DEF_SETTERS(cDim);
 #endif
