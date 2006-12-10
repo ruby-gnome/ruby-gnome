@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: ktou $
-  $Date: 2006/12/08 14:48:39 $
+  $Author: mutoh $
+  $Date: 2006/12/10 17:24:22 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -249,6 +249,12 @@ Init_glib2()
 */
 
     /* Numerical Definitions */
+/* Don't implement them.
+#define     G_IEEE754_FLOAT_BIAS
+#define     G_IEEE754_DOUBLE_BIAS
+union       GFloatIEEE754;
+union       GDoubleIEEE754;
+*/
     rb_define_const(mGLib, "E", CSTR2RVAL(G_STRINGIFY(G_E)));
     rb_define_const(mGLib, "LN2", CSTR2RVAL(G_STRINGIFY(G_LN2)));
     rb_define_const(mGLib, "LN10", CSTR2RVAL(G_STRINGIFY(G_LN10)));

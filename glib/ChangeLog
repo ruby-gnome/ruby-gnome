@@ -1,3 +1,9 @@
+2006-12-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_maincontext.c: Add GLib::Source.current for GLib-2.12.
+	Add GLib::MainContext#owner? for GLib-2.10.
+	GLib::Timeout#add_seconds, #source_new_seconds for GLib-2.14.
+
 2006-12-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_unicode.c:

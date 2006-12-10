@@ -3,8 +3,8 @@
 
   rbglib_unicode.c -
 
-  $Author: ktou $
-  $Date: 2006/12/10 07:34:43 $
+  $Author: mutoh $
+  $Date: 2006/12/10 17:24:22 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -446,12 +446,15 @@ Init_glib_unicode(void)
     mGLibUTF16 = rb_define_module_under(mGLib, "UTF16");
     mGLibUCS4 = rb_define_module_under(mGLib, "UCS4");
 
+    /* GUnicodeType */
     G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Type", mGLibUnicode);
     G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_TYPE, "G_UNICODE_");
+    /* GUnicodeBreakType */
     G_DEF_CLASS(G_TYPE_UNICODE_BREAK_TYPE, "BreakType", mGLibUnicode);
     G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_BREAK_TYPE, "G_UNICODE_");
 
 #if GLIB_CHECK_VERSION(2,14,0)
+    /* GUnicodeScript */
     G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT, "Script", mGLibUnicode);
     G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_SCRIPT, "G_UNICODE_");
 #endif

@@ -3,8 +3,8 @@
 
   rbglib_source.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:53 $
+  $Author: mutoh $
+  $Date: 2006/12/10 17:24:22 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -48,6 +48,15 @@ source_attach(self, context)
     return UINT2NUM(g_source_attach(_SELF(self), 
                                     RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT)));
 }
+
+#if GLIB_CHECK_VERSION(2,12,0)
+static VALUE
+source_is_destroyed(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
+}
+#endif
 
 static VALUE
 source_set_priority(self, priority)
@@ -161,6 +170,9 @@ Init_glib_source()
     id_call = rb_intern("call");
 
     rb_define_method(src, "attach", source_attach, 1);
+#if GLIB_CHECK_VERSION(2,12,0)
+    rb_define_method(src, "destroyed?", source_is_destroyed, 0);
+#endif
     rb_define_method(src, "set_priority", source_set_priority, 1);
     rb_define_method(src, "priority", source_get_priority, 0);
     rb_define_method(src, "set_can_recurse", source_set_can_recurse, 1);

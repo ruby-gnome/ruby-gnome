@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:53 $
+  $Author: mutoh $
+  $Date: 2006/12/10 17:24:22 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -37,6 +37,15 @@ source_remove(self, tag)
     g_hash_table_remove(callbacks_table, (gpointer)callback);
     return CBOOL2RVAL(g_source_remove(NUM2UINT(tag)));
 }
+
+#if GLIB_CHECK_VERSION(2,12,0)
+static VALUE
+source_current_source(self)
+    VALUE self;
+{
+    return BOXED2RVAL(g_main_current_source, G_TYPE_SOURCE);
+}
+#endif
 
 static gboolean
 invoke_source_func(data)
@@ -136,6 +145,15 @@ mc_release(self)
     g_main_context_release(_SELF(self));
     return self;
 }
+
+#if GLIB_CHECK_VERSION(2,10,0)
+static VALUE
+mc_is_owner(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(g_main_context_is_owner(_SELF(self)));
+}
+#endif
 
 /*
 gboolean    g_main_context_wait             (GMainContext *context,
@@ -279,6 +297,14 @@ timeout_source_new(self, interval)
 {
     return BOXED2RVAL(g_timeout_source_new(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
+#if GLIB_CHECK_VERSION(2,14,0)
+static VALUE
+timeout_source_new_seconds(self, interval)
+    VALUE self, interval;
+{
+    return BOXED2RVAL(g_timeout_source_new_seconds(NUM2UINT(interval)), G_TYPE_SOURCE);
+}
+#endif
 
 static VALUE
 timeout_add(int argc, VALUE *argv, VALUE self)
@@ -302,6 +328,29 @@ timeout_add(int argc, VALUE *argv, VALUE self)
     g_hash_table_insert(callbacks_table, (gpointer)func, info);
     return rb_id;
 }
+
+#if GLIB_CHECK_VERSION(2,14,0)
+static VALUE
+timeout_add_seconds(VALUE self, VALUE interval)
+{
+    VALUE func, rb_id;
+    callback_info_t *info;
+    guint id;
+
+    func = G_BLOCK_PROC();
+
+    info = ALLOC(callback_info_t);
+    info->callback = func;
+    id = g_timeout_add_seconds(NUM2UINT(interval),
+                               (GSourceFunc)invoke_source_func,
+                               (gpointer)info, g_free);
+    info->id = id;
+    rb_id = UINT2NUM(id);
+    G_RELATIVE2(mGLibSource, func, id__callbacks__, rb_id);
+    g_hash_table_insert(callbacks_table, (gpointer)func, info);
+    return rb_id;
+}
+#endif
 
 static VALUE
 idle_source_new(self)
@@ -402,7 +451,9 @@ Init_glib_main_context()
 
     mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
     rb_define_singleton_method(mGLibSource, "remove", source_remove, 1);
-
+#if GLIB_CHECK_VERSION(2,12,0)
+    rb_define_singleton_method(mGLibSource, "current", source_current_source, 0);
+#endif
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
@@ -414,6 +465,9 @@ Init_glib_main_context()
     rb_define_method(mc, "wakeup", mc_wakeup, 0);
     rb_define_method(mc, "acquire", mc_acquire, 0);
     rb_define_method(mc, "release", mc_release, 0);
+#if GLIB_CHECK_VERSION(2,10,0)
+    rb_define_method(mc, "owner?", mc_is_owner, 0);
+#endif
     rb_define_method(mc, "prepare", mc_prepare, 0);
     rb_define_method(mc, "query", mc_query, 1);
 /*
@@ -429,8 +483,13 @@ Init_glib_main_context()
     rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
 #endif
     rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
+#if GLIB_CHECK_VERSION(2,14,0)
+    rb_define_module_function(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
+#endif
     rb_define_module_function(timeout, "add", timeout_add, -1);
-
+#if GLIB_CHECK_VERSION(2,14,0)
+    rb_define_module_function(timeout, "add_seconds", timeout_add_seconds, 1);
+#endif
     rb_define_module_function(idle, "source_new", idle_source_new, 0);
     rb_define_module_function(idle, "add", idle_add, -1);
     rb_define_module_function(idle, "remove", idle_remove, 1);
