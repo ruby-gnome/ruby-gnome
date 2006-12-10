@@ -1,3 +1,15 @@
+2006-12-11  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangomatrix.c: Add Pango::Matrix#font_scale_factor for Pango-1.2. 
+	* src/rbpangofont*.c: Add ATSUIFont classes for Pango-1.2. 
+
+2006-12-05  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangoglyphstring.c: Add Pango::GlyphString#width for Pango-1.4. 
+	* src/rbpangofont.c: Pango::Font#describe accept an argument as absolute_size for Pango-1.4.
+	* src/rbpangocairo.c: Add Cairo#pango_error_underline_path,
+	#show_pango_error_underline. for Pango-1.4.
+
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Pango.itemize: Fix memoryleak.

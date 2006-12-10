@@ -3,10 +3,11 @@
 
   rbpangocairo.c -
 
-  $Author: ktou $
-  $Date: 2005/10/14 02:05:04 $
+  $Author: mutoh $
+  $Date: 2006/12/10 15:13:10 $
 
   Copyright (C) 2005 Kouhei Sutou
+  Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "rbpango.h"
@@ -108,6 +109,18 @@ show_layout(self, layout)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,14,0)
+static VALUE
+show_error_underline(self, x, y, width, height)
+    VALUE self, x, y, width, height;
+{
+    pango_cairo_show_error_underline(RVAL2CRCONTEXT(self), 
+                                     NUM2DBL(x), NUM2DBL(y), 
+                                     NUM2DBL(width), NUM2DBL(height));
+    return self;
+}
+#endif
+
 /* Rendering to a path */
 static VALUE
 glyph_string_path(self, font, glyphs)
@@ -134,6 +147,18 @@ layout_path(self, layout)
     pango_cairo_layout_path(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
     return self;
 }
+
+#if PANGO_CHECK_VERSION(1,14,0)
+static VALUE
+error_underline_path(self, x, y, width, height)
+    VALUE self, x, y, width, height;
+{
+    pango_cairo_error_underline_path(RVAL2CRCONTEXT(self), 
+                                     NUM2DBL(x), NUM2DBL(y), 
+                                     NUM2DBL(width), NUM2DBL(height));
+    return self;
+}
+#endif
 #  endif
 #endif
 
@@ -171,6 +196,10 @@ Init_pango_cairo()
                      show_layout_line, 1);
     rb_define_method(rb_cCairo_Context, "show_pango_layout",
                      show_layout, 1);
+#if PANGO_CHECK_VERSION(1,14,0)
+    rb_define_method(rb_cCairo_Context, "show_pango_error_underline",
+                     show_error_underline, 4);
+#endif
     /* Rendering to a path */
     rb_define_method(rb_cCairo_Context, "pango_glyph_string_path",
                      glyph_string_path, 2);
@@ -178,6 +207,12 @@ Init_pango_cairo()
                      layout_line_path, 1);
     rb_define_method(rb_cCairo_Context, "pango_layout_path",
                      layout_path, 1);
-#  endif
+
+#if PANGO_CHECK_VERSION(1,14,0)
+    rb_define_method(rb_cCairo_Context, "pango_error_underline_path",
+                     error_underline_path, 4);
+#endif
+
+#   endif
 #endif
 }

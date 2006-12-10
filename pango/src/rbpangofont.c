@@ -3,10 +3,10 @@
 
   rbpangofont.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: mutoh $
+  $Date: 2006/12/10 15:13:10 $
 
-  Copyright (C) 2002-2005 Masao Mutoh
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -23,10 +23,26 @@ font_find_shaper(self, language, ch)
 }
 
 static VALUE
-font_describe(self)
+font_describe(argc, argv, self)
+    int argc;
+    VALUE *argv;
     VALUE self;
 {
-    return BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+    VALUE desc, absolute_size;
+    rb_scan_args(argc, argv, "01", &absolute_size);
+
+    if (NIL_P(absolute_size) || ! RTEST(absolute_size)){
+        desc = BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+    } else {
+#if PANGO_CHECK_VERSION(1,14,0)
+        desc = BOXED2RVAL(pango_font_describe_with_absolute_size(_SELF(self)), 
+                          PANGO_TYPE_FONT_DESCRIPTION);
+#else
+        rb_warning("Pango::Font#describe(absolute) has been supported since GTK+-2.10.x. Use Pango::Font#describe() instead."); 
+        desc = BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+#endif
+    }
+    return desc;
 }
 
 static VALUE
@@ -85,7 +101,7 @@ Init_pango_font()
     VALUE pFont = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
     
     rb_define_method(pFont, "find_shaper", font_find_shaper, 2);
-    rb_define_method(pFont, "describe", font_describe, 0);
+    rb_define_method(pFont, "describe", font_describe, -1);
     rb_define_method(pFont, "get_coverage", font_get_coverage, 1);
     rb_define_method(pFont, "get_glyph_extents", font_get_glyph_extents, 1);
     rb_define_method(pFont, "metrics", font_get_metrics, -1);
@@ -101,4 +117,7 @@ Init_pango_font()
     G_DEF_CLASS3("PangoCairoFcFont", "CairoFcFont", mPango);
     G_DEF_CLASS3("PangoCairoFont", "CairoFont", mPango);
     G_DEF_CLASS3("PangoCairoWin32Font", "CairoWin32Font", mPango);
+#if PANGO_CHECK_VERSION(1,12,0)
+    G_DEF_CLASS3("PangoATSUIFont", "ATSUIFont", mPango);
+#endif
 }

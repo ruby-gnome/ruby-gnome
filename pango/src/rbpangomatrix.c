@@ -4,7 +4,7 @@
   rbpangomatrix.c -
 
   $Author: mutoh $
-  $Date: 2005/11/17 16:53:36 $
+  $Date: 2006/12/10 15:13:10 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -88,6 +88,15 @@ matrix_concat(self, new_matrix)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,12,0)
+static VALUE
+matrix_get_font_scale_factor(self)
+    VALUE self;
+{
+    return rb_float_new(pango_matrix_get_font_scale_factor(_SELF(self)));
+}
+#endif
+
 ATTR_FLOAT(xx);
 ATTR_FLOAT(xy);
 ATTR_FLOAT(yx);
@@ -117,7 +126,9 @@ Init_pango_matrix()
     rb_define_method(matrix, "scale!", matrix_scale, 2);
     rb_define_method(matrix, "rotate!", matrix_rotate, 1);
     rb_define_method(matrix, "concat!", matrix_concat, 1);
-
+#if PANGO_CHECK_VERSION(1,12,0)
+    rb_define_method(matrix, "font_scale_factor", matrix_get_font_scale_factor, 0);
+#endif
     rb_define_method(matrix, "to_a", matrix_to_a, 0);
 
     DEFINE_ACCESSOR(xx);

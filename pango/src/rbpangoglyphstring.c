@@ -4,9 +4,9 @@
   rbpangoglyphstring.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2006/12/10 15:13:10 $
 
-  Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
+  Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
 #include "rbpango.h"
@@ -55,6 +55,15 @@ rglyph_extents(argc, argv, self)
     return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
                         BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
 }
+
+#if PANGO_CHECK_VERSION(1,14,0)
+static VALUE
+rglyph_get_width(self)
+    VALUE self;
+{
+    return INT2NUM(pango_glyph_string_get_width(_SELF(self)));
+}
+#endif
 
 static VALUE
 rglyph_index_to_x(self, text, analysis, index, trailing)
@@ -141,6 +150,9 @@ Init_pango_glyph_string()
     rb_define_method(pGlyph, "initialize", rglyph_initialize, 0);
     rb_define_method(pGlyph, "set_size", rglyph_set_size, 1);
     rb_define_method(pGlyph, "extents", rglyph_extents, -1);
+#if PANGO_CHECK_VERSION(1,14,0)
+    rb_define_method(pGlyph, "width", rglyph_get_width, 0);
+#endif
     rb_define_method(pGlyph, "index_to_x", rglyph_index_to_x, 4);
     rb_define_method(pGlyph, "x_to_index", rglyph_x_to_index, 3);
     rb_define_method(pGlyph, "get_logical_widths", rglyph_get_logical_widgths, 2);

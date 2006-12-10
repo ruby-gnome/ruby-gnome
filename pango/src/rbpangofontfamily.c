@@ -4,7 +4,7 @@
   rbpangofontfamily.c -
 
   $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Date: 2006/12/10 15:13:10 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -67,4 +67,8 @@ Init_pango_font_family()
     G_DEF_CLASS3("PangoXftFamily", "XftFamily", mPango);
     G_DEF_CLASS3("PangoXFamily", "XFamily", mPango);
     G_DEF_CLASS3("PangoWin32Family", "Win32Family", mPango);
+#if PANGO_CHECK_VERSION(1,12,0)
+    G_DEF_CLASS3("PangoATSUIFamily", "ATSUIFamily", mPango);
+#endif
+
 }
