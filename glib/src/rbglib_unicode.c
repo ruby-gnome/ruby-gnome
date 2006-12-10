@@ -4,7 +4,7 @@
   rbglib_unicode.c -
 
   $Author: ktou $
-  $Date: 2006/12/09 11:17:45 $
+  $Date: 2006/12/10 03:33:48 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -438,83 +438,87 @@ rbglib_m_unichar_to_utf8(VALUE self, VALUE unichar)
 void
 Init_glib_unicode(void)
 {
-    G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Unicode", mGLib);
-    G_DEF_CONSTANTS(mGLib, G_TYPE_UNICODE_TYPE, "G_");
+    VALUE mGLibUniChar, mGLibUTF8, mGLibUTF16, mGLibUCS4;
+    VALUE cGLibUnicode;
+
+    mGLibUniChar = rb_define_module_under(mGLib, "UniChar");
+    mGLibUTF8 = rb_define_module_under(mGLib, "UTF8");
+    mGLibUTF16 = rb_define_module_under(mGLib, "UTF16");
+    mGLibUCS4 = rb_define_module_under(mGLib, "UCS4");
+
+    cGLibUnicode = G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Unicode", mGLib);
 
     G_DEF_CLASS(G_TYPE_UNICODE_BREAK_TYPE, "UnicodeBreak", mGLib);
-    G_DEF_CONSTANTS(mGLib, G_TYPE_UNICODE_BREAK_TYPE, "G_");
 
 #if GLIB_CHECK_VERSION(2,14,0)
     G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT_TYPE, "UnicodeScript", mGLib);
-    G_DEF_CONSTANTS(mGLib, G_TYPE_UNICODE_SCRIPT_TYPE, "G_");
 #endif
 
     G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", mGLib);
-    G_DEF_CONSTANTS(mGLib, G_TYPE_NORMALIZE_MODE, "G_");
 
     rb_define_module_function(mGLib, "charset", rbglib_m_charset, 0);
 
-    rb_define_module_function(mGLib, "unichar_alnum?",
+    rb_define_module_function(mGLibUniChar, "alnum?",
                               rbglib_m_unichar_isalnum, 1);
-    rb_define_module_function(mGLib, "unichar_alpha?",
+    rb_define_module_function(mGLibUniChar, "alpha?",
                               rbglib_m_unichar_isalpha, 1);
-    rb_define_module_function(mGLib, "unichar_cntrl?",
+    rb_define_module_function(mGLibUniChar, "cntrl?",
                               rbglib_m_unichar_iscntrl, 1);
-    rb_define_module_function(mGLib, "unichar_digit?",
+    rb_define_module_function(mGLibUniChar, "digit?",
                               rbglib_m_unichar_isdigit, 1);
-    rb_define_module_function(mGLib, "unichar_graph?",
+    rb_define_module_function(mGLibUniChar, "graph?",
                               rbglib_m_unichar_isgraph, 1);
-    rb_define_module_function(mGLib, "unichar_lower?",
+    rb_define_module_function(mGLibUniChar, "lower?",
                               rbglib_m_unichar_islower, 1);
-    rb_define_module_function(mGLib, "unichar_print?",
+    rb_define_module_function(mGLibUniChar, "print?",
                               rbglib_m_unichar_isprint, 1);
-    rb_define_module_function(mGLib, "unichar_punct?",
+    rb_define_module_function(mGLibUniChar, "punct?",
                               rbglib_m_unichar_ispunct, 1);
-    rb_define_module_function(mGLib, "unichar_space?",
+    rb_define_module_function(mGLibUniChar, "space?",
                               rbglib_m_unichar_isspace, 1);
-    rb_define_module_function(mGLib, "unichar_upper?",
+    rb_define_module_function(mGLibUniChar, "upper?",
                               rbglib_m_unichar_isupper, 1);
-    rb_define_module_function(mGLib, "unichar_xdigit?",
+    rb_define_module_function(mGLibUniChar, "xdigit?",
                               rbglib_m_unichar_isxdigit, 1);
-    rb_define_module_function(mGLib, "unichar_title?",
+    rb_define_module_function(mGLibUniChar, "title?",
                               rbglib_m_unichar_istitle, 1);
-    rb_define_module_function(mGLib, "unichar_defined?",
+    rb_define_module_function(mGLibUniChar, "defined?",
                               rbglib_m_unichar_isdefined, 1);
-    rb_define_module_function(mGLib, "unichar_wide?",
+    rb_define_module_function(mGLibUniChar, "wide?",
                               rbglib_m_unichar_iswide, 1);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_module_function(mGLib, "unichar_wide_cjk?",
+    rb_define_module_function(mGLibUniChar, "wide_cjk?",
                               rbglib_m_unichar_iswide_cjk, 1);
 #endif
 
-    rb_define_module_function(mGLib, "unichar_to_upper",
+    rb_define_module_function(mGLibUniChar, "to_upper",
                               rbglib_m_unichar_toupper, 1);
-    rb_define_module_function(mGLib, "unichar_to_lower",
+    rb_define_module_function(mGLibUniChar, "to_lower",
                               rbglib_m_unichar_tolower, 1);
-    rb_define_module_function(mGLib, "unichar_to_title",
+    rb_define_module_function(mGLibUniChar, "to_title",
                               rbglib_m_unichar_totitle, 1);
 
-    rb_define_module_function(mGLib, "unichar_digit_value",
+    rb_define_module_function(mGLibUniChar, "digit_value",
                               rbglib_m_unichar_digit_value, 1);
-    rb_define_module_function(mGLib, "unichar_xdigit_value",
+    rb_define_module_function(mGLibUniChar, "xdigit_value",
                               rbglib_m_unichar_xdigit_value, 1);
 
-    rb_define_module_function(mGLib, "unichar_type", rbglib_m_unichar_type, 1);
-    rb_define_module_function(mGLib, "unichar_break_type",
+    rb_define_module_function(mGLibUniChar, "type", rbglib_m_unichar_type, 1);
+    rb_define_module_function(mGLibUniChar, "break_type",
                               rbglib_m_unichar_break_type, 1);
 
-    rb_define_module_function(mGLib, "unicode_canonical_ordering",
-                              rbglib_m_unicode_canonical_ordering, 1);
-    rb_define_module_function(mGLib, "unicode_canonical_decomposition",
-                              rbglib_m_unicode_canonical_decomposition, 1);
+    rb_define_singleton_method(cGLibUnicode, "canonical_ordering",
+                               rbglib_m_unicode_canonical_ordering, 1);
+    rb_define_singleton_method(cGLibUnicode, "canonical_decomposition",
+                               rbglib_m_unicode_canonical_decomposition, 1);
 
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_module_function(mGLib, "unichar_get_mirror_char",
+    rb_define_module_function(mGLibUniChar, "get_mirror_char",
                               rbglib_m_unichar_get_mirror_char, 1);
 #endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_module_function(mGLib, "unichar_get_script",
+    rb_define_module_function(mGLibUniChar, "get_script",
                               rbglib_m_unichar_get_script, 1);
 #endif
 
@@ -522,7 +526,7 @@ Init_glib_unicode(void)
       Not implemented.
       g_utf8_next_char
     */
-    rb_define_module_function(mGLib, "utf8_get_char",
+    rb_define_module_function(mGLibUTF8, "get_char",
                               rbglib_m_utf8_get_char, -1);
     /*
       Not implemented.
@@ -533,47 +537,47 @@ Init_glib_unicode(void)
       g_utf8_find_prev_char
       g_utf8_prev_char
     */
-    rb_define_module_function(mGLib, "utf8_size", rbglib_m_utf8_strlen, 1);
+    rb_define_module_function(mGLibUTF8, "size", rbglib_m_utf8_strlen, 1);
     /*
       Not implemented.
       g_utf8_strncpy
       g_utf8_strrchr
     */
-    rb_define_module_function(mGLib, "utf8_reverse",
+    rb_define_module_function(mGLibUTF8, "reverse",
                               rbglib_m_utf8_strreverse, 1);
-    rb_define_module_function(mGLib, "utf8_validate",
+    rb_define_module_function(mGLibUTF8, "validate",
                               rbglib_m_utf8_validate, 1);
 
-    rb_define_module_function(mGLib, "utf8_upcase",
+    rb_define_module_function(mGLibUTF8, "upcase",
                               rbglib_m_utf8_strup, 1);
-    rb_define_module_function(mGLib, "utf8_downcase",
+    rb_define_module_function(mGLibUTF8, "downcase",
                               rbglib_m_utf8_strdown, 1);
-    rb_define_module_function(mGLib, "utf8_casefold",
+    rb_define_module_function(mGLibUTF8, "casefold",
                               rbglib_m_utf8_casefold, 1);
 
-    rb_define_module_function(mGLib, "utf8_normalize",
+    rb_define_module_function(mGLibUTF8, "normalize",
                               rbglib_m_utf8_normalize, -1);
 
-    rb_define_module_function(mGLib, "utf8_collate",
+    rb_define_module_function(mGLibUTF8, "collate",
                               rbglib_m_utf8_collate, 2);
-    rb_define_module_function(mGLib, "utf8_collate_key",
+    rb_define_module_function(mGLibUTF8, "collate_key",
                               rbglib_m_utf8_collate_key, -1);
 
-    rb_define_module_function(mGLib, "utf8_to_utf16",
+    rb_define_module_function(mGLibUTF8, "to_utf16",
                               rbglib_m_utf8_to_utf16, 1);
-    rb_define_module_function(mGLib, "utf8_to_ucs4",
+    rb_define_module_function(mGLibUTF8, "to_ucs4",
                               rbglib_m_utf8_to_ucs4, -1);
 
-    rb_define_module_function(mGLib, "utf16_to_ucs4",
+    rb_define_module_function(mGLibUTF16, "to_ucs4",
                               rbglib_m_utf16_to_ucs4, 1);
-    rb_define_module_function(mGLib, "utf16_to_utf8",
+    rb_define_module_function(mGLibUTF16, "to_utf8",
                               rbglib_m_utf16_to_utf8, 1);
 
-    rb_define_module_function(mGLib, "ucs4_to_utf16",
+    rb_define_module_function(mGLibUCS4, "to_utf16",
                               rbglib_m_ucs4_to_utf16, 1);
-    rb_define_module_function(mGLib, "ucs4_to_utf8",
+    rb_define_module_function(mGLibUCS4, "to_utf8",
                               rbglib_m_ucs4_to_utf8, 1);
 
-    rb_define_module_function(mGLib, "unichar_to_utf8",
+    rb_define_module_function(mGLibUniChar, "to_utf8",
                               rbglib_m_unichar_to_utf8, 1);
 }
