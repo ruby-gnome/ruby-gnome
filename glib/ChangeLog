@@ -1,5 +1,11 @@
 2006-12-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_unicode.c:
+	- GLib::Unicode::XXX -> GLib::Unicode::Type::XXX.
+	- GLib::UnicodeBreak::XXX -> GLib::Unicode::BreakType::XXX.
+	- GLib::UnicodeScript::XXX -> GLib::Unicode::Script::XXX.
+	* tests/test_unicode.rb: followed the changes.
+
 	* src/lib/glib2.rb: GLib.utf8_validate is deprecated. Use
 	GLib::UTF8.validate instead.
 	* src/rbglib_unicode.c:

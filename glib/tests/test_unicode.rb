@@ -10,7 +10,7 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def test_gunicode_break_type
     assert_nothing_raised do
-      GLib::UnicodeBreak::MANDATORY
+      GLib::Unicode::BREAK_MANDATORY
     end
   end
 
@@ -151,8 +151,8 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unichar_break_type
-    assert_equal(GLib::UnicodeBreak::HYPHEN, GLib::UniChar.break_type(?-))
-    assert_equal(GLib::UnicodeBreak::NUMERIC, GLib::UniChar.break_type(?0))
+    assert_equal(GLib::Unicode::BREAK_HYPHEN, GLib::UniChar.break_type(?-))
+    assert_equal(GLib::Unicode::BREAK_NUMERIC, GLib::UniChar.break_type(?0))
   end
 
   def test_unicode_canonical_ordering

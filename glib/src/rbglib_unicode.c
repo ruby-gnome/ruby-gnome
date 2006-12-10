@@ -4,7 +4,7 @@
   rbglib_unicode.c -
 
   $Author: ktou $
-  $Date: 2006/12/10 03:33:48 $
+  $Date: 2006/12/10 07:34:43 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -438,20 +438,22 @@ rbglib_m_unichar_to_utf8(VALUE self, VALUE unichar)
 void
 Init_glib_unicode(void)
 {
-    VALUE mGLibUniChar, mGLibUTF8, mGLibUTF16, mGLibUCS4;
-    VALUE cGLibUnicode;
+    VALUE mGLibUniChar, mGLibUnicode, mGLibUTF8, mGLibUTF16, mGLibUCS4;
 
     mGLibUniChar = rb_define_module_under(mGLib, "UniChar");
+    mGLibUnicode = rb_define_module_under(mGLib, "Unicode");
     mGLibUTF8 = rb_define_module_under(mGLib, "UTF8");
     mGLibUTF16 = rb_define_module_under(mGLib, "UTF16");
     mGLibUCS4 = rb_define_module_under(mGLib, "UCS4");
 
-    cGLibUnicode = G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Unicode", mGLib);
-
-    G_DEF_CLASS(G_TYPE_UNICODE_BREAK_TYPE, "UnicodeBreak", mGLib);
+    G_DEF_CLASS(G_TYPE_UNICODE_TYPE, "Type", mGLibUnicode);
+    G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_TYPE, "G_UNICODE_");
+    G_DEF_CLASS(G_TYPE_UNICODE_BREAK_TYPE, "BreakType", mGLibUnicode);
+    G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_BREAK_TYPE, "G_UNICODE_");
 
 #if GLIB_CHECK_VERSION(2,14,0)
-    G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT_TYPE, "UnicodeScript", mGLib);
+    G_DEF_CLASS(G_TYPE_UNICODE_SCRIPT, "Script", mGLibUnicode);
+    G_DEF_CONSTANTS(mGLibUnicode, G_TYPE_UNICODE_SCRIPT, "G_UNICODE_");
 #endif
 
     G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", mGLib);
@@ -507,9 +509,9 @@ Init_glib_unicode(void)
     rb_define_module_function(mGLibUniChar, "break_type",
                               rbglib_m_unichar_break_type, 1);
 
-    rb_define_singleton_method(cGLibUnicode, "canonical_ordering",
+    rb_define_singleton_method(mGLibUnicode, "canonical_ordering",
                                rbglib_m_unicode_canonical_ordering, 1);
-    rb_define_singleton_method(cGLibUnicode, "canonical_decomposition",
+    rb_define_singleton_method(mGLibUnicode, "canonical_decomposition",
                                rbglib_m_unicode_canonical_decomposition, 1);
 
 #if GLIB_CHECK_VERSION(2,4,0)
