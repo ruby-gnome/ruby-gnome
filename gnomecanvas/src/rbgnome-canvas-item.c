@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-item.c,v 1.22 2006/04/15 01:07:04 ktou Exp $ */
+/* $Id: rbgnome-canvas-item.c,v 1.23 2006/12/15 18:05:04 mutoh Exp $ */
 
 /* Gnome::CanvasItem widget for Ruby/Gnome
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -53,11 +53,16 @@ citem_do_construct(GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar 
 }
 
 static VALUE
-citem_intialize(self, parent, hash)
-    VALUE self, parent, hash;
+citem_intialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE parent, hash;
     GnomeCanvasItem *item;
     GnomeCanvasGroup *group;
+
+    rb_scan_args(argc, argv, "11", &parent, &hash);
 
     if (! rb_obj_is_kind_of(parent, GTYPE2CLASS(GNOME_TYPE_CANVAS_GROUP))){
         rb_raise(rb_eArgError, "the 1st parameter should be Gnome::CanvasGroup");
@@ -70,8 +75,10 @@ citem_intialize(self, parent, hash)
     g_object_freeze_notify(G_OBJECT(item));
 
     citem_do_construct(item, group, NULL);
-    rbgutil_set_properties(self, hash);
 
+    if (! NIL_P(hash)){
+        rbgutil_set_properties(self, hash);
+    }
     g_object_thaw_notify(G_OBJECT(item));
 
     G_CHILD_ADD(parent, self);
@@ -295,6 +302,44 @@ citem_shape_get_path_def(self)
     return BOXED2RVAL(gnome_canvas_shape_get_path_def(GNOME_CANVAS_SHAPE(RVAL2GOBJ(self))), GNOME_TYPE_CANVAS_PATH_DEF);
 }
 
+static void
+shapedash_r2g_func(from, to)
+    VALUE from;
+    GValue* to;
+{
+    g_value_set_pointer(to, (gpointer)get_art_vpath_dash(from));
+}
+
+static VALUE
+shapedash_g2r_func(from)
+    const GValue *from;
+{
+    ArtVpathDash* dash = g_value_get_pointer(from);
+    
+    ArtVpathDash* ret = g_new0(ArtVpathDash, 1);
+    ret->offset = dash->offset;
+    ret->n_dash = dash->n_dash;
+    ret->dash = g_new(double, ret->n_dash * sizeof (double));
+    memcpy(dash->dash,  ret->dash, dash->n_dash * sizeof (double));
+
+    return make_art_vpath_dash(ret);
+}
+
+static void
+clipgroup_r2g_func(from, to)
+    VALUE from;
+    GValue* to;
+{
+    g_value_set_pointer(to, (GnomeCanvasPathDef*)RVAL2BOXED(from, GNOME_TYPE_CANVAS_PATH_DEF));
+}
+
+static VALUE
+clipgroup_g2r_func(from)
+    const GValue *from;
+{
+    return BOXED2RVAL(g_value_get_pointer(from), GNOME_TYPE_CANVAS_PATH_DEF);
+}
+
 void
 Init_gnome_canvas_item(mGnome)
     VALUE mGnome;
@@ -302,7 +347,7 @@ Init_gnome_canvas_item(mGnome)
     VALUE gnoCanvasItem = G_DEF_CLASS(GNOME_TYPE_CANVAS_ITEM, "CanvasItem", mGnome);
     VALUE gnoCanvasShape = G_DEF_CLASS(GNOME_TYPE_CANVAS_SHAPE, "CanvasShape", mGnome);
 
-    rb_define_method(gnoCanvasItem, "initialize", citem_intialize, 2);
+    rb_define_method(gnoCanvasItem, "initialize", citem_intialize, -1);
     rb_define_method(gnoCanvasItem, "set", citem_set, 1);
     rb_define_method(gnoCanvasItem, "move", citem_move, 2);
     rb_define_method(gnoCanvasItem, "affine_relative", citem_affine_relative, 1);
@@ -330,9 +375,16 @@ Init_gnome_canvas_item(mGnome)
     rb_define_method(gnoCanvasShape, "path_def", citem_shape_get_path_def, 0);
     G_DEF_SETTERS(gnoCanvasShape);
 
+    rbgobj_register_property_setter(GNOME_TYPE_CANVAS_SHAPE, "dash", shapedash_r2g_func);
+    rbgobj_register_property_getter(GNOME_TYPE_CANVAS_SHAPE, "dash", shapedash_g2r_func);
+
     G_DEF_CLASS(GNOME_TYPE_CANVAS_RE, "CanvasRE", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_GROUP, "CanvasGroup", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_CLIPGROUP, "CanvasClipgroup", mGnome);
+
+    rbgobj_register_property_setter(GNOME_TYPE_CANVAS_CLIPGROUP, "path", clipgroup_r2g_func);
+    rbgobj_register_property_getter(GNOME_TYPE_CANVAS_CLIPGROUP, "path", clipgroup_g2r_func);
+
     G_DEF_CLASS(GNOME_TYPE_CANVAS_BPATH, "CanvasBpath", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_LINE, "CanvasLine", mGnome);
     G_DEF_CLASS(GNOME_TYPE_CANVAS_PIXBUF, "CanvasPixbuf", mGnome);
