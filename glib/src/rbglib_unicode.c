@@ -4,14 +4,13 @@
   rbglib_unicode.c -
 
   $Author: mutoh $
-  $Date: 2006/12/10 17:24:22 $
+  $Date: 2006/12/16 05:01:30 $
 
   Copyright (C) 2006 Kouhei Sutou
 
 **********************************************************************/
 #include "global.h"
 #include "rbglib.h"
-#include "glib-enum-types.h"
 
 static VALUE
 rbglib_m_charset(VALUE self)

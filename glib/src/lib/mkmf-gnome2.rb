@@ -257,7 +257,7 @@ def add_obj(name)
 end
 
 def glib_mkenums(prefix, files, g_type_prefix, include_files)
-  GLib.mkenums(prefix, files, g_type_prefix, include_files)
+  GLib::MkEnums.create(prefix, files, g_type_prefix, include_files)
 end
 
 check_ruby_func

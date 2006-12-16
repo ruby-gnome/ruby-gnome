@@ -1,3 +1,10 @@
+2006-12-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_closure.c: Fix warnings on x86_64.
+	* src/rbglib_unicode.c: Code cleanup.
+	* src/lib/glib-mkenums.rb: Make GLib::MkEnums.
+	* src/lib/mkmf-gnome2.rb: Follow above change.
+	
 2006-12-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_maincontext.c: Add GLib::Source.current for GLib-2.12.

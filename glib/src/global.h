@@ -3,14 +3,15 @@
 
    global.h -
 
-   $Author: sakai $
-   $Date: 2006/05/27 12:24:15 $
+   $Author: mutoh $
+   $Date: 2006/12/16 05:01:30 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "rbgobject.h"
+#include "glib-enum-types.h"
 
 typedef struct {
     VALUE self;

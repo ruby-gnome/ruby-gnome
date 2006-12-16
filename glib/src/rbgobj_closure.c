@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: ktou $
-  $Date: 2006/12/07 14:47:37 $
+  $Author: mutoh $
+  $Date: 2006/12/16 05:01:30 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -142,11 +142,12 @@ static VALUE
 rclosure_marshal_pop(void) {
  for (;;) {
    char buf[1];
+   ssize_t size;
 
    /* wait untill we're triggered. If this happens we can read from the pipe
     * and it's guaranteed that the needed mutexes are initialized */
    rb_thread_wait_fd(callback_fd[0]);
-   read(callback_fd[0], buf, 1);
+   size = read(callback_fd[0], buf, 1);
 
    g_mutex_lock(callback_mutex);
    if (m_arg) {
@@ -174,6 +175,8 @@ init_callback_mutex(void) {
 
 static void
 rclosure_marshal_push(struct marshal_arg* arg) {
+  ssize_t size;
+
   init_callback_mutex();
 
   g_mutex_lock(callback_mutex);
@@ -183,7 +186,7 @@ rclosure_marshal_push(struct marshal_arg* arg) {
   }
   m_arg = arg;
   /* trigger ruby callback thread */
-  write(callback_fd[1],"c", 1);
+  size = write(callback_fd[1],"c", 1);
 
   /* Wait until the ruby callback thread signals is done and then signal
    * waiting callback pushes that we're finished 
