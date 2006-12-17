@@ -4,7 +4,7 @@
   rbgtksourceview.c -
 
   $Author: mutoh $
-  $Date: 2005/10/07 19:26:15 $
+  $Date: 2006/12/17 16:15:28 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -67,6 +67,13 @@ void        gtk_source_view_set_insert_spaces_instead_of_tabs
                                             (GtkSourceView *view,
                                              gboolean enable);
 gboolean    gtk_source_view_get_insert_spaces_instead_of_tabs
+                                            (GtkSourceView *view);
+Since 1.8
+void        gtk_source_view_set_indent_on_tab
+                                            (GtkSourceView *view,
+                                             gboolean enable);
+Since 1.8
+gboolean    gtk_source_view_get_indent_on_tab
                                             (GtkSourceView *view);
 void        gtk_source_view_set_show_margin (GtkSourceView *view,
                                              gboolean show);
