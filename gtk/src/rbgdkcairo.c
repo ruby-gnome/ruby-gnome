@@ -3,8 +3,8 @@
 
   rbgdkcairo.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/25 17:50:41 $
+  $Author: ktou $
+  $Date: 2006/12/17 07:55:05 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
@@ -29,11 +29,18 @@ gdkdraw_cairo_set_source_color(self, color)
 }
 
 static VALUE
-gdkdraw_cairo_set_source_pixbuf(self, pixbuf, pixbuf_x, pixbuf_y)
-    VALUE self, pixbuf, pixbuf_x, pixbuf_y;
+gdkdraw_cairo_set_source_pixbuf(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
 {
+    VALUE pixbuf, pixbuf_x, pixbuf_y;
+
+    rb_scan_args(argc, argv, "12", &pixbuf, &pixbuf_x, &pixbuf_y);
+
     gdk_cairo_set_source_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)),
-                                NUM2DBL(pixbuf_x), NUM2DBL(pixbuf_y));
+                                NIL_P(pixbuf_x) ? 0 : NUM2DBL(pixbuf_x),
+                                NIL_P(pixbuf_y) ? 0 : NUM2DBL(pixbuf_y));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
@@ -77,7 +84,7 @@ Init_gtk_gdk_cairo()
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H
     rb_define_method(rb_cCairo_Context, "set_source_color", gdkdraw_cairo_set_source_color, 1);
-    rb_define_method(rb_cCairo_Context, "set_source_pixbuf", gdkdraw_cairo_set_source_pixbuf, 3);
+    rb_define_method(rb_cCairo_Context, "set_source_pixbuf", gdkdraw_cairo_set_source_pixbuf, -1);
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(rb_cCairo_Context, "set_source_pixmap", gdkdraw_cairo_set_source_pixmap, 3);
 #endif
