@@ -1,7 +1,8 @@
 2006-12-17  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/rbgdkcairo.c (gdkdraw_cairo_set_source_pixbuf): made x and y
-	are optional.
+	* src/rbgdkcairo.c (gdkdraw_cairo_set_source_pixbuf):
+	- made x and y are optional.
+	- moved to Ruby/GdkPixbuf2.
 
 2006-12-05  Kouhei Sutou  <kou@cozmixng.org>
 
