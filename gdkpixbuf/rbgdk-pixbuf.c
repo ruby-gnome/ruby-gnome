@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: ggc $
-  $Date: 2005/09/28 20:37:27 $
+  $Author: ktou $
+  $Date: 2006/12/17 08:30:40 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -14,6 +14,14 @@
 #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
 #define GDK_PIXBUF_ENABLE_BACKEND
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
+#endif
+
+#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0) && defined(HAVE_RB_CAIRO_H)
+#  include <gdk/gdkcairo.h>
+#  include <rb_cairo.h>
+#  define CAIRO_AVAILABLE 1
+#else
+#  define CAIRO_AVAILABLE 0
 #endif
 
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
@@ -581,6 +589,37 @@ set_option(self, key, value)
 }
 #endif
 
+static VALUE
+cairo_available_p(self)
+    VALUE self;
+{
+#if CAIRO_AVAILABLE
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+#if CAIRO_AVAILABLE
+static VALUE
+gdkdraw_cairo_set_source_pixbuf(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE pixbuf, pixbuf_x, pixbuf_y;
+
+    rb_scan_args(argc, argv, "12", &pixbuf, &pixbuf_x, &pixbuf_y);
+
+    gdk_cairo_set_source_pixbuf(RVAL2CRCONTEXT(self),
+                                GDK_PIXBUF(RVAL2GOBJ(pixbuf)),
+                                NIL_P(pixbuf_x) ? 0 : NUM2DBL(pixbuf_x),
+                                NIL_P(pixbuf_y) ? 0 : NUM2DBL(pixbuf_y));
+    rb_cairo_check_status(cairo_status(RVAL2CRCONTEXT(self)));
+    return self;
+}
+#endif
+
 void 
 Init_gdk_pixbuf2()
 {
@@ -682,6 +721,16 @@ Init_gdk_pixbuf2()
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gdkPixbuf, "formats", get_formats, 0);
     rb_define_method(gdkPixbuf, "set_option", set_option, 2);
+#endif
+
+    /*
+     * cairo Interface
+     */
+    rb_define_module_function(gdkPixbuf, "cairo_available?",
+                              cairo_available_p, 0);
+#if CAIRO_AVAILABLE
+    rb_define_method(rb_cCairo_Context, "set_source_pixbuf",
+                     gdkdraw_cairo_set_source_pixbuf, -1);
 #endif
 
     Init_gdk_pixbuf_animation(mGdk);

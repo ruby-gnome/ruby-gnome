@@ -1,4 +1,8 @@
 require 'glib2'
+begin
+  require 'cairo'
+rescue LoadError
+end
 require 'gdk_pixbuf2.so'
 
 module Gdk
