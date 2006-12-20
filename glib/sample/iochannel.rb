@@ -4,7 +4,7 @@
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: iochannel.rb,v 1.2 2005/07/14 17:05:22 mutoh Exp $
+  $Id: iochannel.rb,v 1.3 2006/12/20 18:08:20 mutoh Exp $
 =end
 
 require 'glib2'
@@ -20,7 +20,6 @@ stdout.add_watch(GLib::IOChannel::IN
 		 ) {|io, condition|
   puts "condition = #{condition}"
   false
-  true
 }
 
 context = GLib::MainContext.default
@@ -41,6 +40,5 @@ Thread.new{
 }
 
 mainloop.run
-
 
 stdout.close

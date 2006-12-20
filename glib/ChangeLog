@@ -1,3 +1,8 @@
+2006-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_keyfile.c: Add GLib::Keyfile.
+	* sample/keyfile.rb: Add a sample for GLib::KeyFile.
+
 2006-12-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_closure.c: Fix warnings on x86_64.

@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: mutoh $
-  $Date: 2005/01/29 11:41:17 $
+  $Date: 2006/12/20 18:08:21 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -343,4 +343,5 @@ Init_glib_spawn()
     rb_define_const(cSpawnError, "EISDIR", INT2NUM(G_SPAWN_ERROR_ISDIR));
     rb_define_const(cSpawnError, "ELIBBAD", INT2NUM(G_SPAWN_ERROR_LIBBAD));
     rb_define_const(cSpawnError, "FAILED", INT2NUM(G_SPAWN_ERROR_FAILED));
+
 }

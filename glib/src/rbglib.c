@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: mutoh $
-  $Date: 2006/12/10 17:24:22 $
+  $Date: 2006/12/20 18:08:20 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -37,6 +37,7 @@ extern void Init_glib_shell();
 extern void Init_glib_completion();
 extern void Init_glib_timer();
 extern void Init_glib_unicode();
+extern void Init_glib_keyfile();
 
 char *
 rbg_string_value_ptr(ptr)
@@ -279,7 +280,6 @@ union       GDoubleIEEE754;
     Init_glib_threads();
     Init_glib_convert();
     Init_glib_messages();
-    Init_glib_spawn();
     Init_glib_fileutils();
     Init_glib_utils();
     Init_glib_i18n();
@@ -288,6 +288,7 @@ union       GDoubleIEEE754;
     Init_gobject();
 
     /* Require GBoxed/GObject */
+    Init_glib_spawn();
     Init_glib_main_loop();
     Init_glib_source();
     Init_glib_main_context();
@@ -297,6 +298,7 @@ union       GDoubleIEEE754;
     Init_glib_completion();
     Init_glib_timer();
     Init_glib_unicode();
+    Init_glib_keyfile();
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);
