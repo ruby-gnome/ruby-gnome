@@ -4,7 +4,7 @@
   rbgdkdraw.c -
 
   $Author: ktou $
-  $Date: 2006/05/31 08:11:06 $
+  $Date: 2006/12/22 01:07:13 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -34,7 +34,7 @@ static VALUE
 gdkdraw_set_colormap(self, colormap)
     VALUE self, colormap;
 {
-    gdk_drawable_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(self)));
+    gdk_drawable_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 

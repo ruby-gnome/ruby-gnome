@@ -1,3 +1,7 @@
+2006-12-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkdraw.c (gdkdraw_set_colormap): fixed a typo. Bug #1620156.
+
 2006-12-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkcairo.c (gdkdraw_cairo_set_source_pixbuf):
