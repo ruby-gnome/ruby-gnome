@@ -1,3 +1,7 @@
+2006-12-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: check pkg-config for libpng12 too.
+
 2005-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbart.[ch]: Added Art::BUILD_VERSION, ::VERSION,

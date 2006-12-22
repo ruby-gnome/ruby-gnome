@@ -15,7 +15,7 @@ require 'mkmf-gnome2'
 PKGConfig.have_package('libart-2.0') or exit 1
 
 $libs += " -lz "
-have_header("png.h") or exit 1
+PKGConfig.have_package('libpng12') or have_header("png.h") or exit 1
 have_header("jpeglib.h") or exit 1
 
 have_library("png", "png_create_write_struct")
