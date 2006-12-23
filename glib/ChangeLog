@@ -1,3 +1,12 @@
+2006-12-24  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/bookmarkfile.rb: Add for GLib::BookmarkFile sample.
+
+2006-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbglib_bookmarkfile.c: Add GLib::BookmarkFile
+	* src/rbglib_win32.c: Code cleanup. Imprement all functions.
+
 2006-12-21  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_keyfile.c: Add GLib::Keyfile.
