@@ -4,7 +4,7 @@
   rbglib_convert.c -
 
   $Author: mutoh $
-  $Date: 2005/02/01 11:45:10 $
+  $Date: 2006/12/23 17:48:24 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
@@ -169,6 +169,7 @@ static VALUE
 rbglib_m_utf8_validate(self, str)
     VALUE self, str;
 {
+    rb_warning("GLib.utf8_validate is deprecated. Use GLib::UTF8.validate instead.");
     StringValue(str);
     return CBOOL2RVAL(g_utf8_validate(RSTRING(str)->ptr, RSTRING(str)->len, NULL));
 }

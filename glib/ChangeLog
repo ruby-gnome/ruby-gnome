@@ -1,5 +1,7 @@
 2006-12-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
+	* src/rbglib_convert.c: GLib.utf8_validate becomes deprecated.
+	Use GLib::UTF8.validate instead.
 	* sample/bookmarkfile.rb: Add for GLib::BookmarkFile sample.
 
 2006-12-23  Masao Mutoh  <mutoh@highway.ne.jp>
