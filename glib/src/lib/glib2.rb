@@ -176,12 +176,6 @@ module GLib
   module Module
     LOG_DOMAIN = "GModule"
   end
-
-  module_function
-  def utf8_validate(utf8)
-    warn("GLib.utf8_validate is deprecated. Use GLib::UTF8.validate instead")
-    UTF8.validate(utf8)
-  end
 end
 
 GLib::Log.set_log_domain(nil)

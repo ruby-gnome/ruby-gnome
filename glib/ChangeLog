@@ -1,3 +1,7 @@
+2006-12-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/glib2.rb (GLib.utf8_validate): removed needless code.
+
 2006-12-24  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbglib_convert.c: GLib.utf8_validate becomes deprecated.
