@@ -4,7 +4,7 @@
   rbpangolayoutline.c -
 
   $Author: mutoh $
-  $Date: 2005/10/15 04:32:01 $
+  $Date: 2006/12/26 11:40:50 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -181,8 +181,8 @@ layout_line_set_runs(self, ary)
     len = RARRAY(ary)->len;
 
     for (i = 0; i < len; i++) {
-        g_slist_append(list, RVAL2BOXED(RARRAY(ary)->ptr[i], 
-                                        PANGO_TYPE_GLYPH_ITEM));
+        list = g_slist_append(list, RVAL2BOXED(RARRAY(ary)->ptr[i], 
+                                               PANGO_TYPE_GLYPH_ITEM));
     }
 
     if (_SELF(self)->runs) {
