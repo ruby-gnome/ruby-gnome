@@ -1,127 +1,193 @@
 #
 # glib-mkenums.rb
 #
-# Wrapper of glib-mkenums tool.
+# C language enum description generation library like as glib-mkenums tool.
 #
 # Copyright(C) 2006 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 #
-
-require 'mkmf'
+# $Id: glib-mkenums.rb,v 1.4 2006/12/26 08:48:53 mutoh Exp $
+#
 
 module GLib
-  module MkEnums
-    @@mkenums = with_config('glib-mkenums', ENV["GLIB_MKENUMS"] || 'glib-mkenums')
+  class Enum
+    attr_accessor :EnumName, :enum_name, :ENUM_NAME, :ENUM_SHORT
+    attr_accessor :type, :Type
+    attr_accessor :g_type_prefix, :prefix
 
-    module_function
-    def create(prefix, files, g_type_prefix, include_files)
-      create_c(prefix, files, include_files)
-      create_h(prefix, files, g_type_prefix)
+    def initialize(name, const_lines, g_type_prefix)
+      @EnumName = name
+      @g_type_prefix = g_type_prefix
+      @consts = []
+      @enum_name = @EnumName.sub(/^[A-Z]/){|v| v.downcase}.gsub(/[A-Z]+/){|v| "_" + v.downcase}.sub(/(^_|_$)/, "")
+      @ENUM_NAME = @enum_name.upcase
+      @ENUM_SHORT = @ENUM_NAME.sub(/^#{@g_type_prefix.sub(/_TYPE.*$/, "")}/, "").sub(/^_/, "")
+
+      parse_const_lines(const_lines)
     end
 
-    def create_c(prefix, files, include_files)
-      header = "#{prefix}.h"
-      c = "#{prefix}.c"
-      
-      fhead = "#include \"#{header}\"\n"
-      include_files.each do |file|
-        fhead << "#include <#{file}>\n"
+    def parse_const_lines(const_lines)
+      ret = ""
+
+      if const_lines.include? "<<"
+        @type = "flags"
+        @Type = "Flags"
+        regexp = /^\s*([^\s]*)\s.*\n/
+      else
+        @type = "enum"
+        @Type = "Enum"
+        regexp = /^\s*([^\s,]*).*\n/
       end
-      fhead << "\n\n"
-      
-      config = {
-        :fhead => fhead,
-        
-        :fprod => <<-FPROD,
+      consts = []
+      const_lines.scan(regexp){|name|
+        consts << name[0] unless name[0] =~ /^[\/\*]/
+      }
+      @prefix = extract_prefix(consts)
+      consts.each do |name|
+        # consts = [name, nick]
+        @consts << [name, name.sub(/#{@prefix}/, "").gsub(/_/, "-").downcase]
+      end
+    end
 
-/* enumerations from "@filename@" */
-FPROD
+    def extract_prefix(ary)
+      return [] if ary == nil
+      a = ary[0].split(//)
+      if ary.size == 1
+        @ENUM_NAME + "_"
+      else
+        ary[1..-1].each do |b|
+          b = b.split(//)
+          l = [a.length, b.length].min
+          a = a[0, (0...l).find{|i| a[i] != b[i] } || l]
+        end 
+        a.join('')
+      end
+    end
 
-        :vhead => <<-VHEAD,
+    def create_c
+      consts = "\n" + @consts.collect{|name, nick| 
+        %Q[      { #{name}, "#{name}", "#{nick}" },\n] 
+      }.join +
+        %Q[      { 0, NULL, NULL }]
+
+      ret = <<-CREATE_C
+
 GType
-@enum_name@_get_type (void)
+#{@enum_name}_get_type (void)
 {
   static GType etype = 0;
   if (etype == 0) {
-    static const G@Type@Value values[] = {
-VHEAD
-        :vprod => <<-VPROD,
-      { @VALUENAME@, "@VALUENAME@", "@valuenick@" },
-VPROD
-        :vtail => <<-VTAIL,
-      { 0, NULL, NULL }
+    static const G#{@Type}Value values[] = {#{consts}
     };
-    etype = g_@type@_register_static ("@EnumName@", values);
+    etype = g_#{@type}_register_static ("#{@EnumName}", values);
   }
   return etype;
 }
-
-VTAIL
-      }
-      run(c, config, files)
+      CREATE_C
+      ret
     end
 
-    def create_h(prefix, files, g_type_prefix)
-      header = "#{prefix}.h"
+    def create_h
+      %Q[
+GType #{@enum_name}_get_type (void);
+#define #{@g_type_prefix}#{@ENUM_SHORT} (#{@enum_name}_get_type())]
+    end
+
+
+    def self.parse(data, g_type_prefix)
+      enums = []
+      data.scan(/^\s*typedef\s+enum\s*
+                \{?\s*(.*?)
+                \}\s*(\w+);/mx){|consts, name|
+        enum = Enum.new(name, consts, g_type_prefix)
+        enums << enum
+      }
+      enums
+    end
+  end
+
+  class MkEnums
+    # Create target_filename.c and target_filename.h from files
+    # with g_type_prefix and include_files.
+    # * target_filename: the target file name. This creates #{target_filename.c} and #{target_filename.h}.
+    # * files: header files to parse
+    # * g_type_prefix: the gtype prefix such as GTK_TYPE_
+    # * include_files: define #include <file> lines into target_filename.c
+    def self.create(target_filename, files, g_type_prefix, include_files)
+      puts "creating #{target_filename}.c"
+      mkenums = MkEnums.new(target_filename, files, g_type_prefix, include_files)
+
+      open("#{target_filename}.c", "w") do |out|
+        out.write(mkenums.create_c)
+      end
+      puts "creating #{target_filename}.h"
+      open("#{target_filename}.h", "w") do |out|
+        out.write(mkenums.create_h)
+      end
+    end
+
+    # Initialize GLib::MkEnums
+    #
+    # * target_filename: the target file name. This creates #{target_filename.c} and #{target_filename.h}.
+    # * files: header files to parse
+    # * g_type_prefix: the gtype prefix such as GTK_TYPE_
+    # * include_files: define #include <file> lines into target_filename.c
+    def initialize(target_filename, files, g_type_prefix, include_files)
+      @target_filename = target_filename
+      @include_files = include_files
+      @targets = []
+      files.each do |path|
+        data = ""
+        File.open(path) do |i|
+          data = i.read
+        end
+        @targets << [path, Enum.parse(data, g_type_prefix)]
+      end
+    end
+
+    def create_enums(meth)  # :nodoc:
+      ret = ""
+      @targets.each do |target|
+        if target[1].size > 0
+          ret << %Q[\n\n/* enumerations from "#{target[0]}" */]
+          target[1].each{|enum|
+            ret << enum.__send__(meth)
+          }
+        end
+      end
+      ret
+    end
+
+    # Create a C source as a String.
+    def create_c
+      ret = "\n/* Generated by glib-mkenums.rb ($Revision: 1.4 $) */ \n\n"
+      ret << %Q[#include "#{@target_filename}.h"\n]
+      @include_files.each do |file|
+        ret << "#include <#{file}>\n"
+      end
+      ret << "\n"
+      ret << create_enums(:create_c)
+      ret << "\n\n/* Generated data ends here */\n\n"
+      ret
+    end
+
+    # Create a C header as a String.
+    def create_h
+      header = "#{@target_filename}.h"
       const = "__#{File.basename(header).upcase.gsub(/-|\./, '_')}__"
-      
-      fhead = <<-FHEAD
-#ifndef #{const}
-#define #{const}
 
-#include <glib-object.h>
-
-G_BEGIN_DECLS
-FHEAD
-
-      config = {
-        :fhead => fhead,
-
-        :fprod => <<-FPROD,
-
-/* enumerations from "@filename@" */
-FPROD
-        :vhead => <<-VHEAD,
-GType @enum_name@_get_type (void);
-#define #{g_type_prefix}@ENUMSHORT@ (@enum_name@_get_type())
-VHEAD
-        :ftail => <<-FTAIL,
-
-G_END_DECLS
-
-#endif /* #{const}*/
-FTAIL
-      }
-      run(header, config, files)
-    end
-    
-    def run(output, config, files)
-      add_distcleanfile(output)
-      
-      makefile_created = $makefile_created
-      $makefile_created = true
-      args = []
-      params = %w(fhead fprod ftail eprod vhead vprod vtail comments template)
-      params.each do |param|
-        param = param.intern
-        args.concat(["--#{param}", config[param]]) if config.has_key?(param)
-      end
-      args.concat(files)
-      for_read, for_write = IO.pipe
-      pid = fork do
-        STDOUT.reopen(for_write)
-        for_write.close
-        system(@@mkenums, *args)
-        exit!
-      end
-      for_write.close
-      Process.waitpid(pid)
-      File.open(output, "w") do |out|
-        out.print(for_read.read)
-      end
-    ensure
-      $makefile_created = makefile_created
+      ret = "\n/* Generated by glib-mkenums.rb ($Revision: 1.4 $) */ \n\n"
+      ret << "#ifndef #{const}\n"
+      ret << "#define #{const}\n\n"
+      ret << "#include <glib-object.h>\n\n"
+      ret << "G_BEGIN_DECLS"
+      ret << create_enums(:create_h)
+      ret << "\n\nG_END_DECLS\n\n"
+      ret << "#endif /* #{const}*/\n"
+      ret << "\n/* Generated data ends here */\n\n"
+      ret
     end
   end
 end
+

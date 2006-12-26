@@ -257,6 +257,8 @@ def add_obj(name)
 end
 
 def glib_mkenums(prefix, files, g_type_prefix, include_files)
+  add_distcleanfile(prefix + ".h") 
+  add_distcleanfile(prefix + ".c") 
   GLib::MkEnums.create(prefix, files, g_type_prefix, include_files)
 end
 
