@@ -1,3 +1,7 @@
+2006-12-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/glib-mkenums.rb: added a space before comment end mark.
+
 2006-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Code cleanup.
