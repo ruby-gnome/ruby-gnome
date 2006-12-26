@@ -9,6 +9,7 @@ MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
 SRCDIR = TOPDIR + '/pango/src'
 
 $LOAD_PATH.unshift MKMF_GNOME2_DIR
+$LOAD_PATH << "E:\\ruby\\lib\\ruby\\1.8\\i386-mswin32"
 
 require 'mkmf-gnome2'
 
@@ -45,7 +46,7 @@ add_distcleanfile("rbpangoinits.c")
 make_version_header("PANGO", "pango")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
-  system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
+  system("#{$ruby} #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
 }
 
 create_top_makefile

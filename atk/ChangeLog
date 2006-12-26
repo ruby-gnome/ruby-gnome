@@ -1,3 +1,7 @@
+2005-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Work MinGW again.
+
 2006-05-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbatktext.c (rbatk_text_remove_selection): Fix to convert the

@@ -1,3 +1,8 @@
+2006-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbpangolayoutline.c: Fixed a comipling warning.
+	* extconf.rb: Work MinGW again.
+
 2006-12-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangomatrix.c: Add Pango::Matrix#font_scale_factor for Pango-1.2. 

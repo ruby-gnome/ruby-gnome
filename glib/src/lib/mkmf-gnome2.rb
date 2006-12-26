@@ -263,3 +263,8 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files)
 end
 
 check_ruby_func
+
+if /mingw/ =~ RUBY_PLATFORM
+  $ruby.gsub!('\\', '/')
+end
+

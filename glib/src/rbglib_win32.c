@@ -4,7 +4,7 @@
   rbglib_win32.c -
 
   $Author: mutoh $
-  $Date: 2006/12/23 17:43:03 $
+  $Date: 2006/12/26 15:49:16 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -25,7 +25,7 @@ static VALUE
 rbglib_m_win32_locale(self)
     VALUE self;
 {
-    return CSTR2RVAL2(g_win32_get_locale());
+    return CSTR2RVAL2(g_win32_getlocale());
 }
 
 static VALUE
@@ -49,7 +49,7 @@ rbglib_m_get_package_installation_subdirectory(self, package, dll_name, subdir)
   VALUE self, package, dll_name, subdir;
 {
 	return CSTR2RVAL2(g_win32_get_package_installation_subdirectory(RVAL2CSTR(package), 
-	                                                                RVAL2CSTR(dll_name)
+	                                                                RVAL2CSTR(dll_name),
 	                                                                RVAL2CSTR(subdir)));
 }
 

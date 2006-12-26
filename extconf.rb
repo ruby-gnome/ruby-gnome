@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.14 2006/12/26 13:21:05 mutoh Exp $
+  $Id: extconf.rb,v 1.15 2006/12/26 15:49:16 mutoh Exp $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
@@ -48,13 +48,16 @@ end
 targets = []
 ignore = []
 subdirs.each do |subdir|
+  if /mingw/ =~ RUBY_PLATFORM
+    $ruby.gsub!('\\', '/')
+  end
   STDERR.puts("#{$0}: Entering directory `#{subdir}'")
   File.mkpath(subdir)
   topdir = File.join(*([".."] * subdir.split(/\/+/).size))
   /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
   srcdir = File.join(dir, subdir)
   ret = system($ruby, "-C", subdir, File.join(srcdir, "extconf.rb"),
-   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}",
+   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}", "--ruby=#{$ruby}",
    *ARGV)
   STDERR.puts("#{$0}: Leaving directory '#{subdir}'")
   if ret

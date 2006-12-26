@@ -6,6 +6,8 @@
 
 	* extconf.rb: Code cleanup.
 	* src/lib/glib-mkenums.rb: Reimplement as a pure ruby library.
+	* src/lib/mkmf-gnome2.rb: Work MinGW again.
+	* src/rbglib_win32.c: Fix to compile problems.
 
 2006-12-25  Kouhei Sutou  <kou@cozmixng.org>
 
