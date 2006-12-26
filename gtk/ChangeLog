@@ -1,3 +1,9 @@
+2006-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb: Work MinGW again.
+	* src/rbgtkpagesetupunixdialog.c, rbgtkprinter.c, rbgtkprintjob.c
+	rbgtkprintunixdialog.c: Fixed a compiling error on MinGW.
+
 2006-12-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktextiter.c (get_pixbuf): fixed a typo. Bug #1620759.

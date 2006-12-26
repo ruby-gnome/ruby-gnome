@@ -54,6 +54,11 @@ end
 
 PKGConfig.have_package('gtk+-unix-print-2.0')
 
+have_func('gtk_print_unix_dialog_get_type')
+have_func('gtk_print_job_get_type')
+have_func('gtk_printer_get_type')
+have_func('gtk_page_setup_unix_get_type')
+
 PKGConfig.have_package('cairo')
 if have_header('rb_cairo.h')
   if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
@@ -79,8 +84,8 @@ add_distcleanfile("rbgtkinits.c")
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
-  system("ruby #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
-  system("ruby #{SRCDIR}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
+  system("#{$ruby} #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
+  system("#{$ruby} #{SRCDIR}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
 }
 
 $defs.delete("-DRUBY_GTK2_COMPILATION")

@@ -4,7 +4,7 @@
   rbgtkprinter.c -
 
   $Author: mutoh $
-  $Date: 2006/11/11 19:21:04 $
+  $Date: 2006/12/26 15:47:52 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -12,6 +12,7 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
+#ifdef GTK_PRINTER_GET_TYPE
 #include <gtk/gtkprinter.h>
 
 #ifndef GTK_TYPE_PRINT_BACKEND
@@ -128,11 +129,13 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
     return self;
 }
 #endif
+#endif
 
 void
 Init_gtk_printer()
 {
 #if GTK_CHECK_VERSION(2,10,0)
+#ifdef GTK_PRINTER_GET_TYPE
     VALUE gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
     rb_include_module(gPrinter, rb_mComparable);
 
@@ -151,5 +154,6 @@ Init_gtk_printer()
     G_DEF_CLASS3("GtkPrintBackendLpr", "PrintBackendLpr", mGtk);
 
     G_DEF_SETTERS(gPrinter);
+#endif
 #endif
 }

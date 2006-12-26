@@ -4,7 +4,7 @@
   rbgtkprintunixdialog.c -
 
   $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Date: 2006/12/26 15:47:52 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -12,6 +12,7 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
+#ifdef GTK_PRINT_UNIX_DIALOG_GET_TYPE
 #include <gtk/gtkprintunixdialog.h>
 
 #define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))
@@ -72,11 +73,13 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
     return self;
 }
 #endif
+#endif
 
 void
 Init_gtk_print_unix_dialog()
 {
 #if GTK_CHECK_VERSION(2,10,0)
+#ifdef GTK_PRINT_UNIX_DIALOG_GET_TYPE
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
 
@@ -92,6 +95,7 @@ Init_gtk_print_unix_dialog()
     /* GtkPrintCapabilities */
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", gPrintUnixDialog);
     G_DEF_CONSTANTS(gPrintUnixDialog, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
+#endif
 
 #endif
 }
