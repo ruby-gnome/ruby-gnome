@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: ktou $
-  $Date: 2006/10/14 05:17:29 $
+  $Author: mutoh $
+  $Date: 2006/12/26 16:11:13 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -633,7 +633,7 @@ filter_func(xevent, event, func)
     GdkEvent* event;
     gpointer func;
 {
-    VALUE ret = rb_funcall((VALUE)func, id_call, 2, UINT2NUM((guint)xevent), make_gdkevent(event));
+    VALUE ret = rb_funcall((VALUE)func, id_call, 2, LONG2NUM((glong)xevent), make_gdkevent(event));
     return RVAL2GENUM(ret, GDK_TYPE_FILTER_RETURN);
 }
 

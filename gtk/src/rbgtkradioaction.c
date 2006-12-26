@@ -4,7 +4,7 @@
   rbgtkradioaction.c -
  
   $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Date: 2006/12/26 16:11:13 $
  
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -19,16 +19,16 @@ static VALUE
 raction_initialize(self, name, label, tooltip, stock_id, value)
     VALUE self, name, label, tooltip, stock_id, value;
 {
-    gchar* gstock;
+    gchar* gstock = (gchar*)NULL;
 
     if (TYPE(stock_id) == T_STRING){
         gstock = RVAL2CSTR(stock_id);
-    } else {
+    } else if (TYPE(stock_id) == T_SYMBOL) {
         gstock = rb_id2name(SYM2ID(stock_id));
     }
     G_INITIALIZE(self, gtk_radio_action_new(RVAL2CSTR(name),
                                             RVAL2CSTR(label),
-                                            RVAL2CSTR(tooltip),
+                                            NIL_P(tooltip) ? NULL : RVAL2CSTR(tooltip),
                                             gstock,
                                             NUM2INT(value)));
     return Qnil;

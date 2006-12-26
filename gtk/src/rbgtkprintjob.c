@@ -4,7 +4,7 @@
   rbgtkprintjob.c -
 
   $Author: mutoh $
-  $Date: 2006/12/26 15:47:52 $
+  $Date: 2006/12/26 16:11:13 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -12,7 +12,7 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
-#ifdef GTK_PRINT_JOB_GET_TYPE
+#ifdef HAVE_GTK_PRINT_JOB_GET_TYPE
 
 #include <gtk/gtkprintjob.h>
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
@@ -138,7 +138,7 @@ void
 Init_gtk_print_job()
 {
 #if GTK_CHECK_VERSION(2,10,0)
-#ifdef GTK_PRINT_JOB_GET_TYPE
+#ifdef HAVE_GTK_PRINT_JOB_GET_TYPE
     gPrintJob = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "PrintCapabilities", mGtk);
 
