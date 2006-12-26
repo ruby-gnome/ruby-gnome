@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.13 2005/02/24 13:02:45 ktou Exp $
+  $Id: extconf.rb,v 1.14 2006/12/26 13:21:05 mutoh Exp $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
@@ -22,7 +22,6 @@ if /mswin32/ =~ RUBY_PLATFORM
   rm = "del " 
   $ruby.gsub!(/\//, '\\')
 end
-
 
 
 $srcdir = File.dirname(__FILE__)
@@ -71,6 +70,11 @@ puts "Ignored libraries: #{ignore.join(', ')}" if ignore.size > 0
 #
 # generate top-level Makefile
 #
+
+if /mingw/ =~ RUBY_PLATFORM
+  $ruby.gsub!('\\', '/')
+end
+
 File.open("Makefile", "w") do |makefile|
   makefile.print("\
 TOPSRCDIR = #{$topsrcdir}
