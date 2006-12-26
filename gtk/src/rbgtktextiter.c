@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ktou $
+  $Date: 2006/12/26 01:49:14 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -89,7 +89,7 @@ get_pixbuf(self)
         ret = GOBJ2RVAL(pixbuf);
         G_CHILD_SET(self, id_pixbuf, ret);
     }
-    return Qnil;
+    return ret;
 }
 
 static VALUE
