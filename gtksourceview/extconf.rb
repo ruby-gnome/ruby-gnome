@@ -18,8 +18,6 @@ setup_win32(PACKAGE_NAME)
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-have_func("GTK_TYPE_SOURCE_PRINT_JOB")
-
 make_version_header("GTKSOURCEVIEW", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTKSOURCEVIEW_COMPILATION")

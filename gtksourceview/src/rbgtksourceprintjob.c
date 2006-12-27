@@ -4,7 +4,7 @@
   rbgtksourceprintjob.c -
 
   $Author: mutoh $
-  $Date: 2006/12/27 11:26:45 $
+  $Date: 2006/12/27 16:27:37 $
 
   Copyright (C) 2005  Masao Mutoh
 ************************************************/
@@ -12,9 +12,7 @@
 
 /* Module: Gtk::SourcePrintJob
  */
-#ifdef HAVE_GTK_TYPE_SOURCE_PRINT_JOB
 #include <gtksourceview/gtksourceprintjob.h>
-
 #define _SELF(self) (GTK_SOURCE_PRINT_JOB(RVAL2GOBJ(self)))
 
 /*
@@ -236,12 +234,10 @@ sprintjob_set_footer_format(self, left, center, right, separator)
                                            RTEST(separator));
     return self;
 }
-#endif
 
 void
 Init_gtk_sourceprintjob()
 {
-#ifdef HAVE_GTK_TYPE_SOURCE_PRINT_JOB
     VALUE pj = G_DEF_CLASS(GTK_TYPE_SOURCE_PRINT_JOB, "SourcePrintJob", mGtk);
     
     rb_define_method(pj, "initialize", sprintjob_initialize, -1);
@@ -260,5 +256,4 @@ Init_gtk_sourceprintjob()
     rb_define_method(pj, "set_footer_format", sprintjob_set_footer_format, 4);
 
     G_DEF_SETTERS(pj);
-#endif
 }
