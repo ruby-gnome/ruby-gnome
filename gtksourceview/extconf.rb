@@ -14,6 +14,7 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
+have_func("gtk_source_print_job_get_type")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
