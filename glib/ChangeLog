@@ -1,3 +1,7 @@
+2006-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/glib2.rb: Remove to support dropline GTK2-Runtime DLL.
+
 2006-12-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/glib-mkenums.rb: added a space before comment end mark.

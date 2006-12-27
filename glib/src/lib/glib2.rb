@@ -6,21 +6,11 @@
 # license of Ruby-GNOME2.
 #
 
-# for dropline GTK2-Runtime DLL
-# http://www.dropline.net/gtk/
+require 'rbconfig'
 if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
-  begin
-    require 'win32/registry'
-    begin
-      GTK2Dir =
-        Win32::Registry::HKEY_CURRENT_USER.open('Software\GTK\2.0')['Path']
-      ENV['PATH'] = %w(bin lib).collect{|dir|
-        "#{GTK2Dir}\\#{dir};"
-      }.join('') + ENV['PATH']
-    rescue Win32::Registry::Error
-    end
-  rescue LoadError
-  end
+  ENV['PATH'] = %w(bin lib).collect{|dir|
+    "#{Config::CONFIG["prefix"]}\\lib\\GTK\\#{dir};"
+  }.join('') + ENV['PATH']
 end
 
 module GLib
