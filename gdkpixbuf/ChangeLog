@@ -1,3 +1,7 @@
+2006-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* rbgdk-pixbuf.c: Add a comment the change below.
+
 2006-12-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb, rbgdk-pixbuf.c, lib/gdk_pixbuf2.rb: moved

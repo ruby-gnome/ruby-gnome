@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: ktou $
-  $Date: 2006/12/17 08:30:40 $
+  $Author: mutoh $
+  $Date: 2006/12/27 17:49:45 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -601,6 +601,7 @@ cairo_available_p(self)
 }
 
 #if CAIRO_AVAILABLE
+/* Move from gtk/src/rbgdkcairo.c */
 static VALUE
 gdkdraw_cairo_set_source_pixbuf(argc, argv, self)
     int argc;
