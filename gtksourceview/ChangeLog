@@ -1,3 +1,7 @@
+2006-12-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* extconf.rb, src/rbgtksourceprintjob.c: Fix compiling error with 1.7.
+
 2006-12-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtksourceview.c: Add a comment for 1.8.
