@@ -4,7 +4,7 @@
   rbatkdocument.c -
 
   $Author: mutoh $
-  $Date: 2003/12/04 18:06:17 $
+  $Date: 2006/12/27 17:37:26 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -30,6 +30,51 @@ rbatk_document_get_document(self)
 }
 */
 
+#if ATK_CHECK_VERSION(1,12,0)
+static VALUE
+rbatk_document_get_attribute_value(self, name)
+    VALUE self, name;
+{
+    return CSTR2RVAL(atk_document_get_attribute_value(_SELF(self), 
+                                                      (const gchar*)RVAL2CSTR(name)));
+}
+
+static VALUE
+rbatk_document_set_attribute_value(self, name, value)
+    VALUE self, name, value;
+{
+    gboolean ret = atk_document_set_attribute_value(_SELF(self),
+                                                    (const gchar*)RVAL2CSTR(name),
+                                                    (const gchar*)RVAL2CSTR(value));
+
+    if (! ret) rb_raise(rb_eRuntimeError, "Can't set attribute value: %s, %s", 
+                        RVAL2CSTR(name), RVAL2CSTR(value));
+
+    return self;
+}
+
+static VALUE
+rbatk_document_get_attributes(self)
+    VALUE self;
+{
+    AtkAttributeSet* list = atk_document_get_attributes(_SELF(self));
+    VALUE ary = rb_ary_new();
+    while (list) {
+        AtkAttribute* attr = list->data;
+        rb_ary_push(ary, rb_assoc_new(CSTR2RVAL(attr->name), CSTR2RVAL(attr->value)));
+        list = list->next;
+    }
+    return ary;
+}
+#endif
+
+static VALUE
+rbatk_document_get_locale(self)
+    VALUE self;
+{
+    return CSTR2RVAL(atk_document_get_locale(_SELF(self)));
+}
+
 void
 Init_atk_document()
 {
@@ -39,4 +84,13 @@ Init_atk_document()
 /*
     rb_define_method(mDoc, "document", rbatk_document_get_document, 0);
 */
+#if ATK_CHECK_VERSION(1,12,0)
+    rb_define_method(mDoc, "get_attribute_value", rbatk_document_get_attribute_value, 1);
+    rb_define_alias(mDoc, "[]", "get_attribute_value");
+    rb_define_method(mDoc, "set_attribute_value", rbatk_document_set_attribute_value, 2);
+    rb_define_alias(mDoc, "[]=", "set_attribute_value");
+    rb_define_method(mDoc, "attributes", rbatk_document_get_attributes, 0);
+#endif
+    rb_define_method(mDoc, "locale", rbatk_document_get_locale, 0);
+
 }

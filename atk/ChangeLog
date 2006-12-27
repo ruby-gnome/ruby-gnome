@@ -1,6 +1,13 @@
-2005-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
+2006-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Work MinGW again.
+
+2006-11-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbatkdocument.c: Added Atk::Document#get_attribute_value, #[]
+	#set_attribute_value, #[]=, #attributes for ATK+-1.12.
+	Added #locale.
+	* src/rbatkcomponent.c: Added Atk::Component#alpha. for ATK+-1.12.
 
 2006-05-26  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 

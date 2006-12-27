@@ -4,7 +4,7 @@
   rbatkcomponent.c -
 
   $Author: mutoh $
-  $Date: 2004/03/09 18:27:06 $
+  $Date: 2006/12/27 17:37:26 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -146,6 +146,15 @@ comp_set_size(self, width, height)
     return self;
 }
 
+#if ATK_CHECK_VERSION(1,12,0)
+static VALUE
+comp_get_alpha(self)
+    VALUE self;
+{
+    return rb_float_new(atk_component_get_alpha(_SELF(self)));
+}
+#endif
+
 void
 Init_atk_component()
 {
@@ -169,5 +178,7 @@ Init_atk_component()
     rb_define_method(comp, "set_extents", comp_set_extents, 5);
     rb_define_method(comp, "set_position", comp_set_position, 2);
     rb_define_method(comp, "set_size", comp_set_size, 2);
-
+#if ATK_CHECK_VERSION(1,12,0)
+    rb_define_method(comp, "alpha", comp_get_alpha, 0);
+#endif
 }
