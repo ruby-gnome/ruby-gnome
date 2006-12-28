@@ -113,7 +113,11 @@ end
 
 #add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
 def add_depend_package(target_name, target_srcdir, topdir)
-  $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
+  if RUBY_VERSION < "1.8.5"
+    $CFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$CFLAGS}"
+  else
+    $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
+  end
 
   if /cygwin|mingw/ =~ RUBY_PLATFORM
     $libs << " -lruby-#{target_name}"
