@@ -1,3 +1,95 @@
+Ruby-GNOME2-0.16.0 (2006-12-30)
+
+  * Fixed serious bugs (depends on GC)
+  * Support GTK+-2.10 and the latest version of each libraries.
+  * Don't include Ruby/GStreamer and Ruby/Libgda. We cancel to 
+    support Ruby/GStreamer and Ruby/Libgda. 
+  * Cancel to support ruby-1.6.x and GTK+-2.4 or earlier.
+
+  * Ruby/GLib 
+      - Support GLib+-2.10 APIs. [Kouhei Sutou, Masao Mutoh]
+      - Fix segfaults related GC with signal handlers. [Guillaume Cottenceau, Kouhei Sutou]
+      - Add functions for Unicode Manipulation [Kouhei Sutou]
+        GLib::Unicode, GLib::UTF8, GLib::UTF16, GLib::UCS4, GLib::UniChar
+      - Add Key-value file parser [Masao Mutoh]
+        GLib::KeyFile
+      - Add Bookmark file parser [Masao Mutoh]
+        GLib::BookmarkFile
+      - Add Win32 compatibility functions [Masao Mutoh]
+        GLib::Win32
+      - Add glib-mkenums.rb [Kouhei Sutou, Masao Mutoh]
+      - Other improvement and fix bugs.[Kouhei Sutou, Masao Mutoh]
+
+  * Ruby/ATK
+      - Support ATK-1.12 APIs. [Masao Mutoh]
+
+  * Ruby/Pango
+      - Support Pango-1.2, 1.4 APIs [Masao Mutoh]
+      - Fix some bugs. [Masao Mutoh]
+
+  * Ruby/GdkPixbuf
+      - Move Cairo::Context#set_source_pixbuf from Ruby/GTK.[Kouhei Sutou]
+        You can use the methods unless X server.
+
+  * Ruby/GTK
+      - Support GTK+-2.10. [Pascal Terjan, Kouhei Sutou, Masao Mutoh]
+        Gtk::PrintUnixDialog, Gtk::PageSetupUnixDialog, Gtk::Print*, Gtk::PageSet
+        Gtk::LinkButton, Gtk::Recent*, Gtk::Assistant, Gtk::StatusIcon
+      - Other improvement and fix bugs [Sjoerd Simons, Kouhei Sutou, Masao Mutoh]
+
+  * Ruby/GNOME 
+      - None.
+
+  * Ruby/GnomeCanvas
+      - Fixed a bug and trivial improvement. [Masao Mutoh]
+
+  * Ruby/Libglade
+      - Fixed some bugs and trivial improvement. [Kouhei Sutou, Masao Mutoh]
+
+  * Ruby/Libart
+      - a trivial improvement. [Kouhei Sutou]
+
+  * Ruby/GConf
+      - Sample code cleanup. [Masao Mutoh]
+
+
+  * Ruby/GnomeVFS 
+      - None.
+
+  * Ruby/GtkHtml2
+      - None.
+
+  * Ruby/GtkGLExt
+      - None.
+
+  * Ruby/PanelApplet
+      - None. Deprecated (Use Gtk::StatusIcon in Ruby/GTK+)
+
+  * Ruby/GtkSourceView
+      - Support gtksourceview-1.8. Some improvements. [Kouhei Sutou, Masao Mutoh]
+
+  * Ruby/GnomePrint
+      - None.
+
+  * Ruby/GnomePrintUI
+      - a trivial improvement. [Kouhei Sutou]
+
+  * Ruby/RSVG
+      - Added a sample [Kouhei Sutou]
+      - Improved, fixed bugs [Kouhei Sutou]
+
+  * Ruby/GtkMozEmbed
+      - a trivial improvement. [Masao Mutoh]
+
+  * Ruby/Poppler
+      - Improved, fixed bugs [Kouhei Sutou]
+
+  * Ruby/VTE
+      - None.
+
+  * Ruby/GStreamer, Ruby/Libgda
+      - Canceled. 
+
 Ruby-GNOME2-0.15.0 (2006-07-01)
 
   * Ruby/GLib 

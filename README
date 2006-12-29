@@ -20,16 +20,18 @@ Release packages
     - Ruby/GnomePrint    - libgnomeprint-2.8.x or later
     - Ruby/GnomePrintUI  - libgnomeprintui-2.6.x or later
     - Ruby/GnomeVFS      - GnomeVFS 2.0.x or later
-    - Ruby/GStreamer     - GStreamer 0.8.x or later
     - Ruby/GtkHtml2      - GtkHtml2 2.0.x or later
     - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
-    - Ruby/GtkMozEmbed   - GtkMozEmbed(Mozilla 1.7.x or FireFox-1.0.x or later)
+    - Ruby/GtkMozEmbed   - GtkMozEmbed (Mozilla 1.7.x or FireFox-1.0.x or later)
     - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
     - Ruby/Libart2       - libart_lgpl 2.3.12 or later
-    - Ruby/Libgda        - libgda 1.0.3 or later
     - Ruby/Libglade2     - Libglade 2.0.x or later
-    - Ruby/PanelApplet   - gnome-panel 2.6.0 or later
+    - Ruby/PanelApplet   - gnome-panel 2.6.0 or later (deprecated since 0.16.0)
     - Ruby/RSVG          - librsvg 2.8.0 or later
+
+  Not available (removed since 0.16.0)
+    - Ruby/GStreamer     - GStreamer 0.8.x or later
+    - Ruby/Libgda        - libgda 1.0.3 or later
 
 Install
 -------
@@ -82,18 +84,20 @@ Dependencies
       Ruby/GnomeVFS      depends on Ruby/GLib.
       Ruby/GnomePrint    depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
       Ruby/GnomePrintUI  depends on Ruby/GTK, Ruby/GnomePrint.
-      Ruby/GStreamer     depends on Ruby/GLib.
       Ruby/GtkHtml2      depends on Ruby/GTK.
       Ruby/GtkGLExt      depends on Ruby/GTK, rbogl.
       Ruby/GtkSourceView depends on Ruby/GTK.
-      Ruby/Libgda        depends on Ruby/GLib.
       Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
       Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
 
+  (not available)
+      Ruby/GStreamer     depends on Ruby/GLib.
+      Ruby/Libgda        depends on Ruby/GLib.
+
 Copying
 -------
-   Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
 
    This program is free software.
    You can distribute/modify this program under the terms of
