@@ -2,6 +2,7 @@
 
 	* src/lib/mkmf-gnome2.rb: Work ruby-1.8.4 or earlier again.
 	by Kouhei Sutou.
+	* src/rbglib.h: Increment minor version.
 
 2006-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
