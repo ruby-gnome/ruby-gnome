@@ -4,7 +4,7 @@
   rbgtk.c -
 
   $Author: mutoh $
-  $Date: 2006/11/17 18:12:41 $
+  $Date: 2006/12/30 12:51:33 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -44,7 +44,7 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
     if (GTK_IS_WINDOW(gtkobj) || GTK_IS_MENU_SHELL(gtkobj)) {
         VALUE klass;
         klass = rb_obj_class(obj);
-        if (NIL_P(rb_ivar_get(klass, id__windows__))) {
+        if (rb_ivar_defined(klass, id__windows__) == Qfalse) {
             rb_ivar_set(klass, id__windows__, rb_hash_new());
         }
         rb_hash_aset(rb_ivar_get(klass, id__windows__), obj, Qnil);
