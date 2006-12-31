@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.17 2006/11/08 00:57:16 ktou Exp $
+  $Id: libglade2.rb,v 1.18 2006/12/31 03:39:27 ktou Exp $
 =end
 
 require 'gtk2'
@@ -100,6 +100,7 @@ class GladeXML
   end
 
   def guard_source_from_gc(source)
+    return if source.nil?
     @sources ||= {}
     @sources[source.object_id] = source
     source.signal_connect("destroy") do |object|
