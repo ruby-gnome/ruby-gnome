@@ -1,3 +1,10 @@
+2007-01-06  Juergen Mangler  <juergen.mangler@univie.ac.at>
+
+	* sample/misc/alpha-demo.rb: added.
+	Original:
+	- http://plan99.net/~mike/blog/2006/06/05/alpha-blended-windows-in-python/
+	- http://david.navi.cx/blog/?p=91
+
 2007-01-02  Dirk von Schmieden
 
 	* src/rbgdkdragcontext.c: Fix type conversions. Bug #1625880.
