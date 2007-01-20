@@ -5,7 +5,7 @@
   Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
                                                                                 
-  $Id: libglade2.rb,v 1.18 2006/12/31 03:39:27 ktou Exp $
+  $Id: libglade2.rb,v 1.19 2007/01/20 15:59:28 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -19,6 +19,7 @@ GladeXML.set_custom_widget_handler(true)
 
 class GladeXML
   attr_accessor :handler_proc
+  attr_reader :xml
 
   def canonical_handler(handler)
     return handler.gsub(/[-\s]/, "_")
@@ -82,7 +83,8 @@ class GladeXML
     if @widget_names.size == 0
       regexp_name = Regexp.new("<widget class=\".*\" id=\"(.*)\"")
       regexp_custom = Regexp.new("<property name=\"creation_function\">(.*)</property>")
-      IO.readlines(filename).each { |line|
+      gladexml = filename ? IO.read(filename) : xml
+      gladexml.each_line { |line|
 	if md = regexp_name.match(line)
 	  @widget_names << escape_xml(md[1])
 	elsif md = regexp_custom.match(line)

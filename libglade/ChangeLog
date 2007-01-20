@@ -1,3 +1,10 @@
+2007-01-21  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* lib/libglade2.rb: Fix a problem to initialize GladeXML with 
+	GladeXML::BUFFER. Reported by Detlef Reichl.
+	* lib/libglade2.rb, rbglade.c: Add GladeXML#xml for GladeXML::BUFFER
+	mode.
+
 2006-12-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/libglade2.rb (GladeXML.guard_sources_from_gc): added nil check.

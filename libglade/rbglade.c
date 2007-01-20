@@ -3,8 +3,8 @@
 
   rbglade.c -
 
-  $Author: ktou $
-  $Date: 2006/11/08 00:57:15 $
+  $Author: mutoh $
+  $Date: 2007/01/20 15:59:28 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -161,8 +161,9 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
     } else if (dflag == RB_GLADE_XML_BUFFER) {
         StringValue(text);
         xml = glade_xml_new_from_buffer(RVAL2CSTR(text), RSTRING(text)->len, root, domain);
+        rb_iv_set(self, "@xml", text);
     } else {
-         rb_raise(rb_eArgError, "flag is wrong valiable %d", dflag);
+        rb_raise(rb_eArgError, "flag is wrong valiable %d", dflag);
     }
 
     if (xml) {
