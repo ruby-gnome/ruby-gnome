@@ -1,3 +1,7 @@
+2007-01-27  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/lib/libart2.rb: Added.
+
 2006-12-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: check pkg-config for libpng12 too.
