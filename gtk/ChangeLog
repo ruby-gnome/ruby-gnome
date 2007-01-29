@@ -1,3 +1,7 @@
+2007-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkassistant.c: Add Gtk::Assistant#set_current_page. 
+
 2007-01-06  Juergen Mangler  <juergen.mangler@univie.ac.at>
 
 	* sample/misc/alpha-demo.rb: added.

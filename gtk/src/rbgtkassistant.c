@@ -4,7 +4,7 @@
   rbgtkassistant.c -
 
   $Author: mutoh $
-  $Date: 2006/10/18 15:43:37 $
+  $Date: 2007/01/29 16:31:27 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -200,7 +200,7 @@ Init_gtk_assistant()
     rb_define_method(ass, "initialize", ass_initialize, 0);
 
     rb_define_method(ass, "current_page", ass_get_current_page, 0);
-    rb_define_method(ass, "current_page=", ass_set_current_page, 1);
+    rb_define_method(ass, "set_current_page", ass_set_current_page, 1);
     rb_define_method(ass, "n_pages", ass_get_n_pages, 0);
     rb_define_method(ass, "get_nth_page", ass_get_nth_page, 1);
     rb_define_method(ass, "prepend_page", ass_prepend_page, 1);
