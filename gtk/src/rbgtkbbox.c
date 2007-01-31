@@ -3,8 +3,8 @@
 
   rbgtkbbox.c -
 
-  $Author: sakai $
-  $Date: 2003/08/20 17:07:03 $
+  $Author: mutoh $
+  $Date: 2007/01/31 17:55:25 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -23,13 +23,24 @@ bbox_set_child_secondary(self, child, is_secondary)
                                        RTEST(is_secondary));
     return self;
 }
+#if GTK_CHECK_VERSION(2,4,0)
+static VALUE
+bbox_get_child_secondary(self, child)
+    VALUE self, child;
+{
+    return CBOOL2RVAL(gtk_button_box_get_child_secondary(GTK_BUTTON_BOX(RVAL2GOBJ(self)), 
+                                                         GTK_WIDGET(RVAL2GOBJ(child))));
+}
+#endif
 
 void 
 Init_gtk_button_box()
 {
     VALUE gBBox = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
     rb_define_method(gBBox, "set_child_secondary", bbox_set_child_secondary, 2);
-
+#if GTK_CHECK_VERSION(2,4,0)
+    rb_define_method(gBBox, "get_child_secondary", bbox_get_child_secondary, 1);
+#endif
     /* GtkButtonBoxStyle(General constants) */
     G_DEF_CLASS(GTK_TYPE_BUTTON_BOX_STYLE, "Style", gBBox);
     G_DEF_CONSTANTS(gBBox, GTK_TYPE_BUTTON_BOX_STYLE, "GTK_BUTTONBOX_");

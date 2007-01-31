@@ -4,7 +4,7 @@
   rbgtkbindingset.c -
 
   $Author: mutoh $
-  $Date: 2003/12/21 08:22:19 $
+  $Date: 2007/01/31 17:55:25 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -154,10 +154,25 @@ binding_add_path(self, path_type, path_pattern, priority)
     return self;
 }
 
-/* Non-public methods.
-void        gtk_binding_entry_remove        (GtkBindingSet *binding_set,
-                                             guint keyval,
-                                             GdkModifierType modifiers);
+static VALUE
+binding_entry_remove(self, keyval, modifiers)
+    VALUE self, keyval, modifiers;
+{
+    gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
+    return self;
+}
+
+#if GTK_CHECK_VERSION(2,12,0)
+static VALUE
+binding_entry_skip(self, keyval, modifiers)
+    VALUE self, keyval, modifiers;
+{
+    gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
+    return self;
+}
+#endif
+
+/* Deprecated.
 guint       gtk_binding_parse_binding       (GScanner *scanner);
 */
 
@@ -171,5 +186,9 @@ Init_gtk_bindings()
     rb_define_method(gBinding, "entry_clear", binding_entry_clear, 2);
     rb_define_method(gBinding, "add_signal", binding_entry_add_signal, -1);
     rb_define_method(gBinding, "add_path", binding_add_path, 3);
-
+    rb_define_method(gBinding, "entry_add_signal", binding_entry_add_signal, -1);
+    rb_define_method(gBinding, "entry_remove", binding_entry_remove, 2);
+#if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gBinding, "entry_skip", binding_entry_skip, 2);
+#endif
 }

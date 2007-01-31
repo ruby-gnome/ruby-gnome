@@ -1,3 +1,8 @@
+2007-02-01  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkbbox.c: Add Gtk::ButtonBox#get_child_secondary.
+	* src/rbgtkbindingset.c: Add Gtk::BindingSet#entry_remove, #entry_skip. 
+
 2007-01-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkassistant.c: Add Gtk::Assistant#set_current_page. 
