@@ -4,7 +4,7 @@
   rbgtkcellrendereraccel.c -
 
   $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Date: 2007/02/02 19:19:59 $
 
   Copyright (C) 2006 Ruby-GNOME2 Team
 ************************************************/
@@ -34,7 +34,7 @@ Init_gtk_cellrendereraccel()
 
     /* GtkCellRendererAccelMode */
     G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_ACCEL_MODE, "Mode", renderer);
-    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_ACCEL_MODE, "GTK_CELL_RENDERER_ACCEL_MODE_");
+    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_ACCEL_MODE, "GTK_CELL_RENDERER_ACCEL_");
 #endif
 }
 
