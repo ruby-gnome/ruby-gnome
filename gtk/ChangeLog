@@ -1,3 +1,8 @@
+2007-02-28  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkdrag.c: Fixed wrong API names
+        (Gtk::Drag.(set|get)_track_motion to Gtk::Drag.dest_(set|get)_track_motion)
+
 2007-02-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkdrag.c: fixed Ruby to C conversion bugs.

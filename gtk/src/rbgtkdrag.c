@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: ktou $
-  $Date: 2007/02/09 12:35:55 $
+  $Author: mutoh $
+  $Date: 2007/02/28 17:29:40 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -394,8 +394,8 @@ Init_gtk_drag()
     rb_define_module_function(mGtkDrag, "dest_add_uri_targets", gtkdrag_dest_add_uri_targets, 1);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_module_function(mGtkDrag, "set_track_motion", gtkdrag_dest_set_track_motion, 2);
-    rb_define_module_function(mGtkDrag, "get_track_motion", gtkdrag_dest_get_track_motion, 1);
+    rb_define_module_function(mGtkDrag, "dest_set_track_motion", gtkdrag_dest_set_track_motion, 2);
+    rb_define_module_function(mGtkDrag, "dest_get_track_motion", gtkdrag_dest_get_track_motion, 1);
 #endif
     rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
     rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);
