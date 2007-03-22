@@ -3,8 +3,8 @@
 
   rbgtkfilesel.c -
 
-  $Author: mutoh $
-  $Date: 2003/06/04 16:55:08 $
+  $Author: ktou $
+  $Date: 2007/03/22 02:57:12 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -61,7 +61,7 @@ fsel_get_selections(self)
     VALUE ary = rb_ary_new();
     while(*selections){
         rb_ary_push(ary, CSTR2RVAL(*selections));
-        *selections++;
+        selections++;
     }
     if (ptr)
         g_strfreev(ptr);

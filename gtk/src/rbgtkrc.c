@@ -3,8 +3,8 @@
 
   rbgtkrc.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/24 17:33:19 $
+  $Author: ktou $
+  $Date: 2007/03/22 02:57:12 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -122,7 +122,7 @@ rc_get_default_files(self)
     VALUE ary = rb_ary_new();
     while(*files){
         rb_ary_push(ary, CSTR2RVAL(*files));
-        *files++;
+        files++;
     }
     return ary;
 }
