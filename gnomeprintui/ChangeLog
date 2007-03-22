@@ -1,3 +1,8 @@
+2007-03-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgpui-print-content-selector.c: defined
+	Gnome::PrintContextSelector#initialize.
+
 2006-12-05  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/libgnomeprintui-enum-types.[ch].maintainer: removed.
