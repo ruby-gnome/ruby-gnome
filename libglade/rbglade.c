@@ -3,8 +3,8 @@
 
   rbglade.c -
 
-  $Author: mutoh $
-  $Date: 2007/01/20 15:59:28 $
+  $Author: ktou $
+  $Date: 2007/03/22 03:24:20 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -168,6 +168,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     if (xml) {
         G_INITIALIZE(self, xml);
+        rb_funcall(self, rb_intern("guard_sources_from_gc"), 0);
         if (rb_block_given_p()){
             rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
         } else {
@@ -178,7 +179,6 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
         rb_raise(rb_eIOError, "could not load glade file %s", RVAL2CSTR(text));
     }
 
-    rb_funcall(self, rb_intern("guard_sources_from_gc"), 0);
     return self;
 }
 
