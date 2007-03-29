@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2006/06/17 14:34:54 $
+  $Date: 2007/03/29 05:48:34 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -398,6 +398,7 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cDocument, "find_dest", doc_find_dest, 1);
 
     rb_define_method(cDocument, "each", doc_each, 0);
+    rb_define_alias(cDocument, "pages", "to_a");
 
     rb_define_method(cDocument, "index_iter", doc_get_index_iter, 0);
 #ifdef HAVE_POPPLER_FONT_INFO

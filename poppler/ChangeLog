@@ -1,5 +1,8 @@
 2007-03-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c: added a convenient alias:
+	Poppler::Document#pages.
+
 	* sample/pdf2text.rb: used default value.
 
 	* src/rbpoppler-page.c (page_get_text): used page size rectangle
