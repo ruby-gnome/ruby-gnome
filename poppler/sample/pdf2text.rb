@@ -12,7 +12,5 @@ input_uri = "file://#{File.expand_path(input)}"
 
 doc = Poppler::Document.new(input_uri)
 doc.each do |page|
-  width, height = page.size
-  rectangle = Poppler::Rectangle.new(0, 0, width, height)
-  puts page.get_text(rectangle)
+  puts page.get_text
 end

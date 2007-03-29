@@ -1,3 +1,10 @@
+2007-03-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/pdf2text.rb: used default value.
+
+	* src/rbpoppler-page.c (page_get_text): used page size rectangle
+	as default value.
+
 2006-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-action.c:

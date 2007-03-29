@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2006/09/06 02:25:35 $
+  $Date: 2007/03/29 04:35:08 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -105,12 +105,29 @@ page_find_text(VALUE self, VALUE text)
 }
 
 static VALUE
-page_get_text(VALUE self, VALUE rect)
+page_get_text(int argc, VALUE *argv, VALUE self)
 {
     gchar *text;
-    VALUE rb_text;
+    VALUE rb_text, rb_rect;
+    PopplerPage *page;
 
-    text = poppler_page_get_text(RVAL2GOBJ(self), RVAL2RECT(rect));
+    rb_scan_args(argc, argv, "01", &rb_rect);
+
+    page = RVAL2GOBJ(self);
+    if (NIL_P(rb_rect)) {
+        PopplerRectangle rect;
+        double width, height;
+
+        rect.x1 = 0;
+        rect.y1 = 0;
+        poppler_page_get_size(page, &width, &height);
+        rect.x2 = width;
+        rect.y2 = height;
+        text = poppler_page_get_text(page, &rect);
+    } else {
+        text = poppler_page_get_text(page, RVAL2RECT(rb_rect));
+    }
+
     rb_text = CSTR2RVAL(text);
     g_free(text);
     return rb_text;
@@ -308,7 +325,7 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
     rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
     rb_define_method(cPage, "find_text", page_find_text, 1);
-    rb_define_method(cPage, "get_text", page_get_text, 1);
+    rb_define_method(cPage, "get_text", page_get_text, -1);
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
     rb_define_method(cPage, "get_selection_region",
                      page_get_selection_region, 2);
