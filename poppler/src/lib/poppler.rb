@@ -14,6 +14,19 @@ module Poppler
   LOG_DOMAIN = "Poppler"
 
   VERSION = version.split(".").collect {|x| x.to_i}
+
+  class Document
+    private
+    def ensure_uri(uri)
+      if GLib.path_is_absolute?(uri)
+        GLib.filename_to_uri(uri)
+      elsif /\A[a-zA-Z][a-zA-Z\d\-+.]*:/.match(uri)
+        uri
+      else
+        GLib.filename_to_uri(File.expand_path(uri))
+      end
+    end
+  end
 end
 
 if Poppler.cairo_available?

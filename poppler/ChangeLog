@@ -1,3 +1,10 @@
+2007-04-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-document.c (doc_initialize): accepted not only URI
+	but also file name.
+
+	* src/lib/poppler.rb (Poppler::Document#ensure_uri): added.
+
 2007-03-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-document.c: added a convenient alias:
