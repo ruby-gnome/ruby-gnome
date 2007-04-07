@@ -30,10 +30,7 @@ end
 add_depend_package("glib2", "glib/src", TOPDIR)
 
 make_version_header("POPPLER", PACKAGE_ID)
-deflibpath = $DEFLIBPATH
-$DEFLIBPATH = []
 have_func("poppler_page_render_selection_to_pixbuf")
-$DEFLIBPATH = deflibpath
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_POPPLER_COMPILATION")
 create_top_makefile
