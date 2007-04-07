@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2007/04/07 02:50:31 $
+  $Date: 2007/04/07 03:24:45 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -392,6 +392,7 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cDocument, "initialize", doc_initialize, -1);
     rb_define_method(cDocument, "save", doc_save, 1);
     rb_define_method(cDocument, "n_pages", doc_get_n_pages, 0);
+    rb_define_alias(cDocument, "size", "n_pages");
     rb_define_method(cDocument, "get_page", doc_get_page, 1);
     rb_define_alias(cDocument, "[]", "get_page");
     rb_define_method(cDocument, "has_attachments?", doc_has_attachments, 0);

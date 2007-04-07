@@ -1,5 +1,8 @@
 2007-04-07  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c (Poppler::Document#size): added a
+	convenient alias of Poppler::Document#n_pages.
+
 	* src/rbpoppler-document.c (doc_initialize): accepted not only URI
 	but also file name.
 
