@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: pterjan $
-  $Date: 2006/07/08 19:46:25 $
+  $Author: mutoh $
+  $Date: 2007/04/21 16:16:23 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -791,6 +791,7 @@ Init_gtk_window()
     rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
     rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
+    rb_define_alias(gWindow, "icon=", "set_icon");
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWindow, "set_auto_startup_notification", 

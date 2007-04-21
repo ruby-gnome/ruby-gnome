@@ -1,3 +1,8 @@
+2007-04-22  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtkwindow.c: Fixed Gtk::Window#icon= accept an path for icon.
+	Reported by Detlef Reichl.
+
 2007-03-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkfilesel.c (fsel_get_selections),
@@ -13,6 +18,7 @@
 	* src/rbgtkdrag.c: fixed Ruby to C conversion bugs.
 	Thanks to Nobody/Anonymous! Bug #1625880.
 
+>>>>>>> 1.640
 2007-02-03  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcellrendereraccel.c: Fixed wrong constant definition.
