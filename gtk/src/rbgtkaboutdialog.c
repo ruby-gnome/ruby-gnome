@@ -3,8 +3,8 @@
 
   rbgtkaboutdialog.c -
 
-  $Author: ggc $
-  $Date: 2005/09/01 21:27:16 $
+  $Author: mutoh $
+  $Date: 2007/05/16 02:51:36 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -153,6 +153,8 @@ aboutdialog_s_show_about_dialog(self, parent, props)
         } else if (strncmp(pd[i].name, "logo", strlen("logo")) == 0 && 
                    strlen(pd[i].name) == strlen("logo")){
             pd[i].value = g_object_ref(RVAL2GOBJ(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
+        } else if (strncmp(pd[i].name, "wrap_license", strlen("wrap_license")) == 0){
+            pd[i].value = RVAL2CBOOL(RARRAY(ary)->ptr[i]);
         } else {
             pd[i].value = g_strdup(RVAL2CSTR(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
         }
