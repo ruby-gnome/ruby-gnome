@@ -1,3 +1,9 @@
+2007-05-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgpui-print-paper-selector.c,
+	src/rbgpui-print-dialog.c: moved enum-types.h include to ...
+	* src/rbgpui.h: ... here.
+
 2007-03-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgpui-print-content-selector.c: defined

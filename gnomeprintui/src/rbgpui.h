@@ -4,7 +4,7 @@
   rbgpui.h -
 
   $Author: ktou $
-  $Date: 2006/01/19 03:10:28 $
+  $Date: 2007/05/26 02:23:08 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -15,6 +15,12 @@
 #define RBGPUI_H
 
 #include "rblibgnomeprintuiversion.h"
+
+#ifdef HAVE_LIBGNOMEPRINTUI_LIBGNOMEPRINTUI_ENUM_TYPES_H
+#  include <libgnomeprintui/libgnomeprintui-enum-types.h>
+#else
+#  include "libgnomeprintui-enum-types.h"
+#endif
 
 #include <ruby.h>
 

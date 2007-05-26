@@ -4,7 +4,7 @@
   rbgpui-print-paper-selector.c -
 
   $Author: ktou $
-  $Date: 2005/10/10 01:45:36 $
+  $Date: 2007/05/26 02:23:08 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -12,7 +12,6 @@
 **********************************************************************/
 
 #include "rbgpui.h"
-#include "libgnomeprintui/libgnomeprintui-enum-types.h"
 
 #include <gtk/gtkwidget.h>
 #include <libgnomeprintui/gnome-print-paper-selector.h>
