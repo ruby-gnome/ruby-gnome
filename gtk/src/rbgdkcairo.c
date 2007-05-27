@@ -4,7 +4,7 @@
   rbgdkcairo.c -
 
   $Author: ktou $
-  $Date: 2006/12/17 08:30:26 $
+  $Date: 2007/05/27 04:04:12 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
@@ -74,7 +74,8 @@ Init_gtk_gdk_cairo()
 {
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(rb_cCairo_Context, "set_source_color", gdkdraw_cairo_set_source_color, 1);
+    rb_define_method(rb_cCairo_Context, "set_source_gdk_color",
+                     gdkdraw_cairo_set_source_color, 1);
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(rb_cCairo_Context, "set_source_pixmap", gdkdraw_cairo_set_source_pixmap, 3);
 #endif

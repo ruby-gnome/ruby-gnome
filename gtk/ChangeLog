@@ -1,3 +1,10 @@
+2007-05-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkcairo.c (Init_gtk_gdk_cairo): use set_source_gdk_color
+	not set_source_color. rcairo 1.5.0 uses the name.
+
+	* src/lib/gtk2/base.rb: kept backward compatibility.
+
 2007-05-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkaboutdialog.c (aboutdialog_s_show_about_dialog): Fix a bug

@@ -5,7 +5,7 @@
   Copyright (c) 2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: base.rb,v 1.4 2006/11/03 19:40:44 mutoh Exp $
+  $Id: base.rb,v 1.5 2007/05/27 04:04:12 ktou Exp $
 =end
 
 
@@ -27,6 +27,31 @@ module Gdk
     Gdk::Drawable.instance_methods.include?("create_cairo_context")
   end
 end
+
+if Gdk.cairo_available?
+  module Cairo
+    class Context
+      if method_defined?(:set_source_color)
+        alias_method :set_source_not_gdk_color, :set_source_color
+        def set_source_color(color)
+          if color.is_a?(Gdk::Color)
+            set_source_gdk_color(color)
+          else
+            set_source_not_gdk_color(color)
+          end
+        end
+      else
+        alias_method :set_source_color, :set_source_gdk_color
+      end
+
+      def source_color=(color)
+        set_source_color(color)
+        color
+      end
+    end
+  end
+end
+
 
 module Gtk
   LOG_DOMAIN = "Gtk"
