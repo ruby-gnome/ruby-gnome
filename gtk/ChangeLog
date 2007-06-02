@@ -1,3 +1,8 @@
+2007-06-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdk.c (Gdk.windowing_quartz?, Gdk.windowing_directfb?):
+	added.
+
 2007-05-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkcairo.c (Init_gtk_gdk_cairo): use set_source_gdk_color

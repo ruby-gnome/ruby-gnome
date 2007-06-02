@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: mutoh $
-  $Date: 2005/05/07 19:12:52 $
+  $Author: ktou $
+  $Date: 2007/06/02 05:10:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -303,6 +303,28 @@ gdk_s_windowing_fb(self)
 }
 
 static VALUE
+gdk_s_windowing_quartz(self)
+    VALUE self;
+{
+#ifdef GDK_WINDOWING_QUARTZ
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
+gdk_s_windowing_directfb(self)
+    VALUE self;
+{
+#ifdef GDK_WINDOWING_DIRECTFB
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
+static VALUE
 gdk_m_target(self)
     VALUE self;
 {
@@ -345,6 +367,8 @@ Init_gtk_gdk()
     rb_define_module_function(mGdk, "windowing_x11?", gdk_s_windowing_x11, 0);
     rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
     rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);
+    rb_define_module_function(mGdk, "windowing_quartz?", gdk_s_windowing_quartz, 0);
+    rb_define_module_function(mGdk, "windowing_directfb?", gdk_s_windowing_directfb, 0);
 
     rb_define_module_function(mGdk, "target", gdk_m_target, 0);
     
