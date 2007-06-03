@@ -1,3 +1,8 @@
+2007-06-03  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* sample/sourcelanguagesmanager.rb, test.rb: 
+	Code cleanup. Add the header part.
+
 2006-12-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb, src/rbgtksourceprintjob.c: Fix compiling error with 1.7.
