@@ -1,3 +1,8 @@
+2007-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c: Simplify GRClosure data structure by removing
+	GRClosureHolder.
+
 2006-12-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/mkmf-gnome2.rb: Work ruby-1.8.4 or earlier again.
