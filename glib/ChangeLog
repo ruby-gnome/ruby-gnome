@@ -1,3 +1,8 @@
+2007-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_typeinterface.c: GLib::Interface.property, .install_property,
+	.properties raises a NoMethodError when they call as the instance method.
+
 2007-06-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_closure.c: Simplify GRClosure data structure by removing

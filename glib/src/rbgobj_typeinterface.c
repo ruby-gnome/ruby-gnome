@@ -4,7 +4,7 @@
   rbgobj_typeinterface.c -
 
   $Author: mutoh $
-  $Date: 2006/11/21 23:57:33 $
+  $Date: 2007/06/15 15:49:30 $
   created at: Sat May 27 16:04:13 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -30,22 +30,28 @@ static VALUE
 interface_install_property(self, pspec_obj)
     VALUE self, pspec_obj;
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-    gpointer ginterface;
-    GParamSpec* pspec;
+   if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
+       const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
+       gpointer ginterface;
+       GParamSpec* pspec;
+       
+       if (cinfo->klass != self)
+           rb_raise(rb_eTypeError, "%s isn't registered class",
+                    rb_class2name(self));
 
-    if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registered class",
-                 rb_class2name(self));
-
-    pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
-
-    ginterface = g_type_default_interface_ref(cinfo->gtype);
-    g_object_interface_install_property(ginterface, pspec);
-    g_type_default_interface_unref(ginterface);
-
-    /* FIXME: define accessor methods */
-    return Qnil;
+       pspec = G_PARAM_SPEC(RVAL2GOBJ(pspec_obj));
+       
+       ginterface = g_type_default_interface_ref(cinfo->gtype);
+       g_object_interface_install_property(ginterface, pspec);
+       g_type_default_interface_unref(ginterface);
+       
+       /* FIXME: define accessor methods */
+       return Qnil;
+   } else {
+       rb_raise(rb_eNoMethodError, 
+                "Call this as the Module/Class method");
+       return Qnil;
+   }
 }
 
 static VALUE
@@ -64,22 +70,28 @@ interface_property(self, property_name)
         name = StringValuePtr(property_name);
     }
 
-    if (CLASS2GTYPE(self) != RBGOBJ_TYPE_RUBY_VALUE){
-        ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
-
-        prop = g_object_interface_find_property(ginterface, name);
-        if (!prop){
+    if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
+        if (CLASS2GTYPE(self) != RBGOBJ_TYPE_RUBY_VALUE){
+            ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
+            
+            prop = g_object_interface_find_property(ginterface, name);
+            if (!prop){
+                g_type_default_interface_unref(ginterface);
+                rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")), 
+                         "no such property: %s", name);
+            }
+            
+            result = GOBJ2RVAL(prop);
             g_type_default_interface_unref(ginterface);
-            rb_raise(rb_const_get(mGLib, rb_intern("NoPropertyError")), 
-                     "no such property: %s", name);
+        } else {
+            result = Qnil;
         }
-
-        result = GOBJ2RVAL(prop);
-        g_type_default_interface_unref(ginterface);
+        return result;
     } else {
-        result = Qnil;
+        rb_raise(rb_eNoMethodError, 
+                 "Call this as the Module/Class method");
+        return Qnil;
     }
-    return result;
 }
 
 static VALUE
@@ -92,25 +104,31 @@ interface_properties(int argc, VALUE* argv, VALUE self)
     int i;
     gpointer ginterface;
 
-    GType gtype  = CLASS2GTYPE(self);
-    ary = rb_ary_new();
-    if (gtype != G_TYPE_INTERFACE){
-        ginterface = g_type_default_interface_ref(gtype);
-
-        if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
-            inherited_too = Qtrue;
-        
-        props = g_object_interface_list_properties(ginterface, &n_properties);
-        
-        for (i = 0; i < n_properties; i++){
-            if (RTEST(inherited_too)
-                || GTYPE2CLASS(props[i]->owner_type) == self)
-                rb_ary_push(ary, rb_str_new2(props[i]->name));
+    if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
+        GType gtype  = CLASS2GTYPE(self);
+        ary = rb_ary_new();
+        if (gtype != G_TYPE_INTERFACE){
+            ginterface = g_type_default_interface_ref(gtype);
+            
+            if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
+                inherited_too = Qtrue;
+            
+            props = g_object_interface_list_properties(ginterface, &n_properties);
+            
+            for (i = 0; i < n_properties; i++){
+                if (RTEST(inherited_too)
+                    || GTYPE2CLASS(props[i]->owner_type) == self)
+                    rb_ary_push(ary, rb_str_new2(props[i]->name));
+            }
+            g_free(props);
+            g_type_default_interface_unref(ginterface);
         }
-        g_free(props);
-        g_type_default_interface_unref(ginterface);
+        return ary;
+    } else {
+        rb_raise(rb_eNoMethodError, 
+                 "Call this as the Module/Class method");
+        return Qnil;
     }
-    return ary;
 }
 #endif
 
