@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2006/05/29 05:41:37 $
+  $Author: mutoh $
+  $Date: 2007/06/16 08:05:46 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -248,6 +248,8 @@ gobj_sig_connect_impl(after, argc, argv, self)
     VALUE func;
 
     rb_scan_args(argc, argv, "1*", &sig, &rest);
+
+    if (NIL_P(rest)) rest = rb_ary_new();
 
     if (SYMBOL_P(sig)){
         sig_name = rb_id2name(SYM2ID(sig));

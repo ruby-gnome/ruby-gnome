@@ -1,3 +1,8 @@
+2007-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgobj_signal.c: Fixed a segfault using Glade.
+	By syscrash2k Bug#1709389.
+
 2007-06-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* extconf.rb, src/rbglib.h, src/rbglib.c, src/rbglib_convert.c,
