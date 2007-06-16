@@ -3,8 +3,8 @@
 
   rbatkdocument.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/27 17:37:26 $
+  $Author: sakai $
+  $Date: 2007/06/16 09:18:55 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -66,7 +66,6 @@ rbatk_document_get_attributes(self)
     }
     return ary;
 }
-#endif
 
 static VALUE
 rbatk_document_get_locale(self)
@@ -74,6 +73,7 @@ rbatk_document_get_locale(self)
 {
     return CSTR2RVAL(atk_document_get_locale(_SELF(self)));
 }
+#endif
 
 void
 Init_atk_document()
@@ -90,7 +90,6 @@ Init_atk_document()
     rb_define_method(mDoc, "set_attribute_value", rbatk_document_set_attribute_value, 2);
     rb_define_alias(mDoc, "[]=", "set_attribute_value");
     rb_define_method(mDoc, "attributes", rbatk_document_get_attributes, 0);
-#endif
     rb_define_method(mDoc, "locale", rbatk_document_get_locale, 0);
-
+#endif
 }
