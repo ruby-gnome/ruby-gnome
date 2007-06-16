@@ -4,7 +4,7 @@
   rbrsvg.c -
 
   $Author: ktou $
-  $Date: 2006/12/10 08:42:12 $
+  $Date: 2007/06/16 14:44:06 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -283,8 +283,7 @@ rb_rsvg_handle_new_from_data(VALUE self, VALUE data)
     RsvgHandle *handle;
 
     handle = rsvg_handle_new_from_data((const guint8 *)RVAL2CSTR(data),
-                                       RSTRING(data)->len,
-                                       &error);
+                                       RSTRING_LEN(data), &error);
 
     if (error)
         RAISE_GERROR(error);
@@ -356,7 +355,7 @@ rb_rsvg_handle_write(VALUE self, VALUE buf)
     GError *error = NULL;
 
     result = rsvg_handle_write(_SELF(self), (const guchar*)RVAL2CSTR(buf),
-                               RSTRING(buf)->len, &error);
+                               RSTRING_LEN(buf), &error);
 
     if (!result) RAISE_GERROR(error);
 
