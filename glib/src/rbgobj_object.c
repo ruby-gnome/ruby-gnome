@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: mutoh $
-  $Date: 2006/08/17 12:46:22 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -17,8 +17,13 @@
 
 **********************************************************************/
 
+#ifdef HAVE_RUBY_RUBY_H
+#include "ruby/ruby.h"
+#include "ruby/st.h"
+#else
 #include "ruby.h"
 #include "st.h"
+#endif
 #include "global.h"
 
 static VALUE eNoPropertyError;

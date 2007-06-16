@@ -3,8 +3,8 @@
 
   rbglib_keyfile.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/20 18:08:21 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -104,7 +104,7 @@ keyfile_load_from_data(argc, argv, self)
 
     ret = g_key_file_load_from_data(_SELF(self), 
                                     (const gchar*)RVAL2CSTR(data),
-                                    (gsize)RSTRING(data)->len,
+                                    (gsize)RSTRING_LEN(data),
                                     gflags, &error);
 
     if (! ret) RAISE_GERROR(error);

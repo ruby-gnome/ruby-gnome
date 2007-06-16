@@ -3,8 +3,8 @@
 
   rbglib.h -
 
-  $Author: mutoh $
-  $Date: 2006/12/29 08:43:24 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -41,6 +41,13 @@ extern "C" {
 
 #ifndef ULONG2NUM
 #define ULONG2NUM UINT2NUM
+#endif
+
+#ifndef RSTRING_PTR
+#define RSTRING_PTR(s) (RSTRING(s)->ptr)
+#endif
+#ifndef RSTRING_LEN
+#define RSTRING_LEN(s) (RSTRING(s)->len)
 #endif
 
 #if ! GLIB_CHECK_VERSION(2,4,0)

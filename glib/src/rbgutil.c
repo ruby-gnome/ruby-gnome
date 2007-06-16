@@ -3,8 +3,8 @@
 
   rbgutil.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 11:05:46 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -186,7 +186,11 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
 {
   int state = 0;
   VALUE ret = rb_protect(func, data, &state);
+#ifdef HAVE_RB_ERRINFO
+  if (state && !NIL_P(rb_errinfo())) {
+#else
   if (state && !NIL_P(ruby_errinfo)) {
+#endif
       rb_funcall(mGLib, rb_intern("exit_application"), 1, EXIT_FAILURE);
   }
   return ret;

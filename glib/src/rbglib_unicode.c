@@ -3,8 +3,8 @@
 
   rbglib_unicode.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/16 05:01:30 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -100,7 +100,7 @@ rbglib_m_unicode_canonical_ordering(VALUE self, VALUE rb_ucs4)
     gint len;
 
     original_str = StringValuePtr(rb_ucs4);
-    len = RSTRING(rb_ucs4)->len;
+    len = RSTRING_LEN(rb_ucs4);
     ucs4 = g_memdup(original_str, len);
     g_unicode_canonical_ordering(ucs4, len);
     normalized_ucs4 = rb_str_new((const char *)ucs4, len);
@@ -154,8 +154,8 @@ rbglib_m_utf8_get_char(int argc, VALUE *argv, VALUE self)
 
     if (RVAL2CBOOL(validate)) {
         StringValue(utf8);
-        result = g_utf8_get_char_validated(RSTRING(utf8)->ptr,
-                                           RSTRING(utf8)->len);
+        result = g_utf8_get_char_validated(RSTRING_PTR(utf8),
+                                           RSTRING_LEN(utf8));
         if (result == (gunichar)-1) {
             return INT2NUM(-1);
         } else if (result == (gunichar)-2) {
@@ -174,7 +174,7 @@ rbglib_m_utf8_strlen(VALUE self, VALUE rb_utf8)
     gchar *utf8;
 
     utf8 = StringValueCStr(rb_utf8);
-    return INT2NUM(g_utf8_strlen(utf8, RSTRING(rb_utf8)->len));
+    return INT2NUM(g_utf8_strlen(utf8, RSTRING_LEN(rb_utf8)));
 }
 
 static VALUE
@@ -184,7 +184,7 @@ rbglib_m_utf8_strreverse(VALUE self, VALUE rb_utf8)
     gchar *utf8, *reversed_utf8;
 
     utf8 = StringValueCStr(rb_utf8);
-    reversed_utf8 = g_utf8_strreverse(utf8, RSTRING(rb_utf8)->len);
+    reversed_utf8 = g_utf8_strreverse(utf8, RSTRING_LEN(rb_utf8));
     result = rb_str_new2(reversed_utf8);
     g_free(reversed_utf8);
     return result;
@@ -194,7 +194,7 @@ static VALUE
 rbglib_m_utf8_validate(VALUE self, VALUE str)
 {
     StringValue(str);
-    return CBOOL2RVAL(g_utf8_validate(RSTRING(str)->ptr, RSTRING(str)->len,
+    return CBOOL2RVAL(g_utf8_validate(RSTRING_PTR(str), RSTRING_LEN(str),
                                       NULL));
 }
 
@@ -205,7 +205,7 @@ rbglib_m_utf8_strup(VALUE self, VALUE rb_utf8)
     gchar *utf8, *upcased_utf8;
 
     utf8 = StringValueCStr(rb_utf8);
-    upcased_utf8 = g_utf8_strup(utf8, RSTRING(rb_utf8)->len);
+    upcased_utf8 = g_utf8_strup(utf8, RSTRING_LEN(rb_utf8));
     result = rb_str_new2(upcased_utf8);
     g_free(upcased_utf8);
     return result;
@@ -218,7 +218,7 @@ rbglib_m_utf8_strdown(VALUE self, VALUE rb_utf8)
     gchar *utf8, *downcased_utf8;
 
     utf8 = StringValueCStr(rb_utf8);
-    downcased_utf8 = g_utf8_strdown(utf8, RSTRING(rb_utf8)->len);
+    downcased_utf8 = g_utf8_strdown(utf8, RSTRING_LEN(rb_utf8));
     result = rb_str_new2(downcased_utf8);
     g_free(downcased_utf8);
     return result;
@@ -231,7 +231,7 @@ rbglib_m_utf8_casefold(VALUE self, VALUE rb_utf8)
     gchar *utf8, *casefolded_utf8;
 
     utf8 = StringValueCStr(rb_utf8);
-    casefolded_utf8 = g_utf8_casefold(utf8, RSTRING(rb_utf8)->len);
+    casefolded_utf8 = g_utf8_casefold(utf8, RSTRING_LEN(rb_utf8));
     result = rb_str_new2(casefolded_utf8);
     g_free(casefolded_utf8);
     return result;
@@ -250,7 +250,7 @@ rbglib_m_utf8_normalize(int argc, VALUE *argv, VALUE self)
         mode = RVAL2GENUM(rb_mode, G_TYPE_NORMALIZE_MODE);
 
     utf8 = StringValueCStr(rb_utf8);
-    normalized_utf8 = g_utf8_normalize(utf8, RSTRING(rb_utf8)->len, mode);
+    normalized_utf8 = g_utf8_normalize(utf8, RSTRING_LEN(rb_utf8), mode);
     result = rb_str_new2(normalized_utf8);
     g_free(normalized_utf8);
     return result;
@@ -273,7 +273,7 @@ rbglib_m_utf8_collate_key(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &rb_utf8, &for_filename);
 
     utf8 = StringValueCStr(rb_utf8);
-    len = RSTRING(rb_utf8)->len;
+    len = RSTRING_LEN(rb_utf8);
 #if GLIB_CHECK_VERSION(2,8,0)
     if (RVAL2CBOOL(for_filename))
         key = g_utf8_collate_key_for_filename(utf8, len);
@@ -296,7 +296,7 @@ rbglib_m_utf8_to_utf16(VALUE self, VALUE rb_utf8)
     GError *error = NULL;
 
     utf8 = StringValueCStr(rb_utf8);
-    len = RSTRING(rb_utf8)->len;
+    len = RSTRING_LEN(rb_utf8);
 
     utf16 = g_utf8_to_utf16(utf8, len, NULL, &items_written, &error);
 
@@ -319,7 +319,7 @@ rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &rb_utf8, &is_fast);
 
     utf8 = StringValueCStr(rb_utf8);
-    len = RSTRING(rb_utf8)->len;
+    len = RSTRING_LEN(rb_utf8);
 
     if (RVAL2CBOOL(is_fast)) {
         ucs4 = g_utf8_to_ucs4_fast(utf8, len, &items_written);
@@ -346,7 +346,7 @@ rbglib_m_utf16_to_ucs4(VALUE self, VALUE rb_utf16)
     GError *error = NULL;
 
     utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
-    len = RSTRING(rb_utf16)->len / sizeof(*utf16);
+    len = RSTRING_LEN(rb_utf16) / sizeof(*utf16);
 
     ucs4 = g_utf16_to_ucs4(utf16, len, NULL, &items_written, &error);
 
@@ -368,7 +368,7 @@ rbglib_m_utf16_to_utf8(VALUE self, VALUE rb_utf16)
     GError *error = NULL;
 
     utf16 = (gunichar2 *)StringValueCStr(rb_utf16);
-    len = RSTRING(rb_utf16)->len / sizeof(*utf16);
+    len = RSTRING_LEN(rb_utf16) / sizeof(*utf16);
 
     utf8 = g_utf16_to_utf8(utf16, len, NULL, &items_written, &error);
 
@@ -390,7 +390,7 @@ rbglib_m_ucs4_to_utf16(VALUE self, VALUE rb_ucs4)
     GError *error = NULL;
 
     ucs4 = (gunichar *)StringValuePtr(rb_ucs4);
-    len = RSTRING(rb_ucs4)->len / sizeof(*ucs4);
+    len = RSTRING_LEN(rb_ucs4) / sizeof(*ucs4);
 
     utf16 = g_ucs4_to_utf16(ucs4, len, NULL, &items_written, &error);
 
@@ -412,7 +412,7 @@ rbglib_m_ucs4_to_utf8(VALUE self, VALUE rb_ucs4)
     GError *error = NULL;
 
     ucs4 = (gunichar *)StringValuePtr(rb_ucs4);
-    len = RSTRING(rb_ucs4)->len / sizeof(*ucs4);
+    len = RSTRING_LEN(rb_ucs4) / sizeof(*ucs4);
 
     utf8 = g_ucs4_to_utf8(ucs4, len, NULL, &items_written, &error);
 

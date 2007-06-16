@@ -3,8 +3,8 @@
 
   rbglib.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/23 17:43:03 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -49,10 +49,10 @@ rbg_string_value_ptr(ptr)
         s = rb_str_to_str(s);
         *ptr = s;
     }
-    if (!RSTRING(s)->ptr) {
+    if (!RSTRING_PTR(s)) {
         rb_str_modify(s);
     }
-    return RSTRING(s)->ptr;
+    return RSTRING_PTR(s);
 }
 
 VALUE

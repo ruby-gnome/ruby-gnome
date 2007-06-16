@@ -3,8 +3,8 @@
 
   rbglib_mainloop.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/29 18:31:32 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -30,11 +30,16 @@ g_main_loop_get_type(void)
 /*****************************************/
 static VALUE rbglib_main_threads;
 
+/* FIXME */
+#if 1
+#define USE_POLL_FUNC 1
+#else
 #include <version.h>
 #if RUBY_VERSION_CODE >= 154
 # define USE_POLL_FUNC 1
 #else
 # undef USE_POLL_FUNC /* rb_thread_select() may cause busy wait */
+#endif
 #endif
 
 /* We can't use rbglib_poll() on native Win32.
@@ -117,7 +122,9 @@ idle(gpointer data)
     wait.tv_sec  = 0;
     wait.tv_usec = 10000; /* 10ms */
 
+#ifdef CHECK_INTS
     CHECK_INTS;
+#endif
     if (!rb_thread_critical) rb_thread_wait_for(wait);
 
     return TRUE;

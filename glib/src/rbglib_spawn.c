@@ -3,8 +3,8 @@
 
   rbglib_spawn.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/20 18:08:21 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -242,7 +242,7 @@ rbglib_m_spawn_command_line_sync(self, str)
     gboolean ret;
 
     StringValue(str);
-    command_line = RSTRING(str)->ptr;
+    command_line = RSTRING_PTR(str);
     ret = g_spawn_command_line_sync(command_line,
                                                &standard_output,
                                                &standard_error,
@@ -278,7 +278,7 @@ rbglib_m_spawn_command_line_async(self, str)
     VALUE ret;
 
     StringValue(str);
-    command_line = RSTRING(str)->ptr;
+    command_line = RSTRING_PTR(str);
     ret = CBOOL2RVAL(g_spawn_command_line_async(command_line, &err));
     if (err != NULL)
         RAISE_GERROR(err);

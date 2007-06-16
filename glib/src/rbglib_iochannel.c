@@ -3,8 +3,8 @@
 
   rbglib_iochannel.c -
 
-  $Author: ktou $
-  $Date: 2006/12/04 13:11:31 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -247,7 +247,7 @@ ioc_read_line(argc, argv, self)
         old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
 
         g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING(line_term)->len);   
+                                   RSTRING_LEN(line_term));   
     }
 
     status = g_io_channel_read_line(_SELF(self), &str, NULL, NULL, &err);
@@ -285,7 +285,7 @@ ioc_gets(argc, argv, self)
 
         old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
         g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING(line_term)->len);   
+                                   RSTRING_LEN(line_term));   
     }
 
     status = g_io_channel_read_line(_SELF(self), &str, NULL, NULL, &err);
@@ -317,7 +317,7 @@ ioc_set_line_term(args)
     if (doit == Qtrue){
         StringValue(line_term);
         g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING(line_term)->len);  
+                                   RSTRING_LEN(line_term));  
     }
     return self;
 }
@@ -347,7 +347,7 @@ ioc_each_line(argc, argv, self)
 
         old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
         g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                                   RSTRING(line_term)->len);
+                                   RSTRING_LEN(line_term));
     }
 
     while (TRUE){
@@ -412,7 +412,7 @@ ioc_write_chars(self, buf)
 
     StringValue(buf);
 
-    count = RSTRING(buf)->len;
+    count = RSTRING_LEN(buf);
 
     status = g_io_channel_write_chars(_SELF(self), RVAL2CSTR(buf), count, &bytes_written, &err);
 
@@ -746,8 +746,8 @@ ioc_puts(argc, argv, self)
           line = rb_obj_as_string(argv[i]);
         }
         ioc_write_chars(self, line);
-        if (RSTRING(line)->len == 0 ||
-            RSTRING(line)->ptr[RSTRING(line)->len-1] != '\n') {
+        if (RSTRING_LEN(line) == 0 ||
+            RSTRING_PTR(line)[RSTRING_LEN(line)-1] != '\n') {
             ioc_write_chars(self, rb_default_rs);
         }
     }

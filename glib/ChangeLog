@@ -1,3 +1,14 @@
+2007-06-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* extconf.rb, src/rbglib.h, src/rbglib.c, src/rbglib_convert.c,
+	src/rbglib_iochannel.c, src/rbglib_keyfile.c, src/rbglib_mainloop.c,
+	src/rbglib_spawn.c, src/rbglib_unicode.c, src/rbgobj_object.c, src/rbgutil.c:
+	fix to compile on ruby 1.9;
+	  RSTRING(v)->ptr -> RSTRING_PTR(v),
+	  RSTRING(v)->len -> RSTRING_LEN(v),
+	  ruby_errinfo -> rb_errinfo(),
+	  and so on.
+
 2007-06-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgobj_typeinterface.c: GLib::Interface.property, .install_property,

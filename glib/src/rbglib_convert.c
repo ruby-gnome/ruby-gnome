@@ -3,8 +3,8 @@
 
   rbglib_convert.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/23 17:48:24 $
+  $Author: sakai $
+  $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 
@@ -31,7 +31,7 @@ rbglib_m_convert(self, str, to, from)
     VALUE s = Qnil;
 
     StringValue(str);
-    ret = g_convert(RSTRING(str)->ptr, RSTRING(str)->len,
+    ret = g_convert(RSTRING_PTR(str), RSTRING_LEN(str),
                     StringValuePtr(to), StringValuePtr(from),
                     NULL, &written, &err);
     
@@ -52,7 +52,7 @@ rbglib_m_locale_to_utf8(self, str)
     gsize written;
 
     StringValue(str);
-    ret = g_locale_to_utf8(RSTRING(str)->ptr, RSTRING(str)->len,
+    ret = g_locale_to_utf8(RSTRING_PTR(str), RSTRING_LEN(str),
                            NULL, &written, &err);
 
     if (err != NULL)
@@ -72,7 +72,7 @@ rbglib_m_locale_from_utf8(self, str)
     gsize written;
 
     StringValue(str);
-    ret = g_locale_from_utf8(RSTRING(str)->ptr, RSTRING(str)->len,
+    ret = g_locale_from_utf8(RSTRING_PTR(str), RSTRING_LEN(str),
                        NULL, &written, &err);
 
     if (err != NULL)
@@ -92,7 +92,7 @@ rbglib_m_filename_to_utf8(self, str)
     gsize written;
 
     StringValue(str);
-    ret = g_filename_to_utf8(RSTRING(str)->ptr, RSTRING(str)->len,
+    ret = g_filename_to_utf8(RSTRING_PTR(str), RSTRING_LEN(str),
                              NULL, &written, &err);
 
     if (err != NULL)
@@ -112,7 +112,7 @@ rbglib_m_filename_from_utf8(self, str)
     gsize written;
 
     StringValue(str);
-    ret = g_filename_from_utf8(RSTRING(str)->ptr, RSTRING(str)->len,
+    ret = g_filename_from_utf8(RSTRING_PTR(str), RSTRING_LEN(str),
                                NULL, &written, &err);
 
     if (err != NULL)
@@ -171,7 +171,7 @@ rbglib_m_utf8_validate(self, str)
 {
     rb_warning("GLib.utf8_validate is deprecated. Use GLib::UTF8.validate instead.");
     StringValue(str);
-    return CBOOL2RVAL(g_utf8_validate(RSTRING(str)->ptr, RSTRING(str)->len, NULL));
+    return CBOOL2RVAL(g_utf8_validate(RSTRING_PTR(str), RSTRING_LEN(str), NULL));
 }
 
 void
