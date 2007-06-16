@@ -4,7 +4,7 @@
   rbvte-terminal.c -
 
   $Author: ktou $
-  $Date: 2006/05/18 16:11:05 $
+  $Date: 2007/06/16 14:45:52 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -165,10 +165,10 @@ term_feed(VALUE self, VALUE data)
 {
     glong length;
 
-    length = RSTRING(data)->len;
+    length = RSTRING_LEN(data);
 
     if (length > 0) {
-        vte_terminal_feed(RVAL2TERM(self), RSTRING(data)->ptr, length);
+        vte_terminal_feed(RVAL2TERM(self), RSTRING_PTR(data), length);
     }
 
     return Qnil;
@@ -179,10 +179,10 @@ term_feed_child(VALUE self, VALUE data)
 {
     glong length;
 
-    length = RSTRING(data)->len;
+    length = RSTRING_LEN(data);
 
     if (length > 0) {
-        vte_terminal_feed_child(RVAL2TERM(self), RSTRING(data)->ptr, length);
+        vte_terminal_feed_child(RVAL2TERM(self), RSTRING_PTR(data), length);
     }
 
     return Qnil;
@@ -193,11 +193,11 @@ term_feed_child_binary(VALUE self, VALUE data)
 {
     glong length;
 
-    length = RSTRING(data)->len;
+    length = RSTRING_LEN(data);
 
     if (length > 0) {
         vte_terminal_feed_child_binary(RVAL2TERM(self),
-                                       RSTRING(data)->ptr, length);
+                                       RSTRING_PTR(data), length);
     }
 
     return Qnil;
