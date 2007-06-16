@@ -3,8 +3,8 @@
 
   rbatkeditabletext.c -
 
-  $Author: mutoh $
-  $Date: 2003/12/23 15:59:28 $
+  $Author: sakai $
+  $Date: 2007/06/16 09:24:04 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -49,7 +49,7 @@ rbatk_edit_insert_text(self, str, position)
     gint pos = NUM2INT(position);
 
     StringValue(str);
-    atk_editable_text_insert_text(_SELF(self), RVAL2CSTR(str), RSTRING(str)->len, &pos);
+    atk_editable_text_insert_text(_SELF(self), RVAL2CSTR(str), RSTRING_LEN(str), &pos);
     return INT2NUM(pos);
 }
 

@@ -1,5 +1,8 @@
 2007-06-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbatkeditabletext.c: fix to compile on ruby 1.9
+	  RSTRING(v)->len -> RSTRING_LEN(v).
+
 	* src/rbatkdocument.c: Define Atk::Document#locale only when Atk is 1.12 or later.
 	Earlier version of Atk doesn't have atk_document_get_locale(),
 	although it's not listed at <http://developer.gnome.org/doc/API/2.0/atk/ix07.html>.
