@@ -1,5 +1,8 @@
 2007-06-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/gnomevfs-monitor.c (monitor_callback): added missing
+	number of arguments.
+
 	* src/gnomevfs-file.c:
 	- used RSTRING_PTR() and RSTRING_LEN() to support ruby 1.9.
 	- removed debug print.

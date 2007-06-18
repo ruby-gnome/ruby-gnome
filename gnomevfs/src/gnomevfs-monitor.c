@@ -1,3 +1,4 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*****************************************************************************
  *
  * gnomevfs-monitor.c: GnomeVFS::Monitor class.
@@ -18,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ktou $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2007/06/18 10:22:58 $
  *
  *****************************************************************************/
 
@@ -79,7 +80,7 @@ monitor_callback(handle, monitor_uri, info_uri, event_type, data)
 	GnomeVFSMonitorEventType event_type;
 	gpointer data;
 {
-	rb_funcall((VALUE)data, g_id_call, CSTR2RVAL(monitor_uri),
+	rb_funcall((VALUE)data, g_id_call, 3, CSTR2RVAL(monitor_uri),
 		   CSTR2RVAL(info_uri),
                    RVAL2GENUM(event_type, GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE));
 }
