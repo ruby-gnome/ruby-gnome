@@ -1,3 +1,4 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*****************************************************************************
  *
  * gnomevfs-file.c: GnomeVFS::File class.
@@ -18,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ktou $
  *
- * $Date: 2006/06/13 16:03:48 $
+ * $Date: 2007/06/18 10:20:45 $
  *
  *****************************************************************************/
 
@@ -365,8 +366,8 @@ handle_gets(handle, sep, len)
 
         if (len == 1 && c == *sep) {
           break;
-        } else if (memcmp(RSTRING(str)->ptr +
-                          RSTRING(str)->len - len,
+        } else if (memcmp(RSTRING_PTR(str) +
+                          RSTRING_LEN(str) - len,
                           sep, len) == 0) {
           break;
         } else {
@@ -405,11 +406,11 @@ get_gets_separator(argc, argv, sep, len)
 
   if (rb_scan_args(argc, argv, "01", &r_separator) == 1) {
     Check_Type(r_separator, T_STRING);
-    *sep = RSTRING(r_separator)->ptr;
-    *len = RSTRING(r_separator)->len;
+    *sep = RSTRING_PTR(r_separator);
+    *len = RSTRING_LEN(r_separator);
   } else {
-    *sep = RSTRING(rb_rs)->ptr;
-    *len = RSTRING(rb_rs)->len;
+    *sep = RSTRING_PTR(rb_rs);
+    *len = RSTRING_LEN(rb_rs);
   }
 }
 
@@ -618,12 +619,12 @@ file_write(self, str)
     str = rb_obj_as_string(str);
   }
 
-  if (RSTRING(str)->len == 0) {
+  if (RSTRING_LEN(str) == 0) {
     return INT2FIX(0);
   }
 
-  result = gnome_vfs_write(_SELF(self), RSTRING(str)->ptr,
-                           RSTRING(str)->len, &bytes_written);
+  result = gnome_vfs_write(_SELF(self), RSTRING_PTR(str),
+                           RSTRING_LEN(str), &bytes_written);
   return CHECK_RESULT(result, ULL2NUM(bytes_written));
 }
 
@@ -676,7 +677,7 @@ read_all(handle, siz, str)
     GnomeVFSResult result;
   
     result = gnome_vfs_read(handle,
-                            RSTRING(str)->ptr + bytes,
+                            RSTRING_PTR(str) + bytes,
                             siz - bytes,
                             &bytes_read);
     
@@ -730,11 +731,10 @@ file_read(argc, argv, self)
     return str;
   }
 
-  result = gnome_vfs_read(handle, RSTRING(str)->ptr, bytes,
+  result = gnome_vfs_read(handle, RSTRING_PTR(str), bytes,
                           &bytes_read);
   if (result == GNOME_VFS_OK) {
-    RSTRING(str)->len = bytes_read;
-    RSTRING(str)->ptr[bytes_read] = '\0';
+    rb_str_resize(str, bytes_read);
     return str;
   } else if (result == GNOME_VFS_ERROR_EOF) {
     return Qnil;

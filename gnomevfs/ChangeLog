@@ -1,3 +1,8 @@
+2007-06-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/gnomevfs-file.c: used RSTRING_PTR() and RSTRING_LEN() to
+	support ruby 1.9.
+
 2006-06-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/gnomevfs-mime-application.c: Fixed wrong definition of 
