@@ -21,7 +21,7 @@
  *
  * $Author: ktou $
  *
- * $Date: 2007/06/18 10:20:45 $
+ * $Date: 2007/06/18 10:21:28 $
  *
  *****************************************************************************/
 
@@ -439,7 +439,6 @@ file_initialize(argc, argv, self)
     open_mode = OPENMODE2RVAL(GNOME_VFS_OPEN_READ);
   }
 
-  printf ("open_mode = %d\n", RVAL2OPENMODE(open_mode));
   if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
       result = gnome_vfs_open_uri(&handle,
                                   RVAL2GVFSURI(uri),
