@@ -4,7 +4,7 @@
   rbglib_mainloop.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/06/19 16:06:32 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -30,22 +30,10 @@ g_main_loop_get_type(void)
 /*****************************************/
 static VALUE rbglib_main_threads;
 
-/* FIXME */
-#if 1
-#define USE_POLL_FUNC 1
-#else
-#include <version.h>
-#if RUBY_VERSION_CODE >= 154
-# define USE_POLL_FUNC 1
-#else
-# undef USE_POLL_FUNC /* rb_thread_select() may cause busy wait */
-#endif
-#endif
-
 /* We can't use rbglib_poll() on native Win32.
    Because GPollFD doesn't have file descriptor but HANDLE. */
-#ifdef G_OS_WIN32
-# undef USE_POLL_FUNC
+#ifndef G_OS_WIN32
+#define USE_POLL_FUNC
 #endif
 
 /* This function is very important to work signals with Ruby. */
