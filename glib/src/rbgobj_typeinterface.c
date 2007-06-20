@@ -3,8 +3,8 @@
 
   rbgobj_typeinterface.c -
 
-  $Author: mutoh $
-  $Date: 2007/06/15 15:49:30 $
+  $Author: sakai $
+  $Date: 2007/06/20 10:52:50 $
   created at: Sat May 27 16:04:13 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -165,7 +165,7 @@ void
 Init_gobject_typeinterface()
 {
     mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
-    rb_define_method(mMetaInterface, "gtype", generic_gtype, 0);
+    rb_define_method(mMetaInterface, "gtype", generic_s_gtype, 0);
 
     Init_interface();
 }

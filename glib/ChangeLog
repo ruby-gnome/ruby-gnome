@@ -1,5 +1,8 @@
 2007-06-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_typeinterface.c: fix GLib::MetaInterface#gtype;
+	generic_gtype() -> generic_s_gtype().
+
 	* src/rbglib_mainloop.c: use rbglib_poll() if possible, regardless of
 	ruby version. (ruby 1.5.4 is no longer considerd.)
 
