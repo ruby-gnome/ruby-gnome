@@ -1,5 +1,9 @@
 2007-06-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_typeinterface.c: Make interfaces not to be decendants
+	of GLib::MetaInterface.  This change makes Mutoh-san's change at
+	2007-06-16 unnecessary.
+
 	* src/rbgobj_typeinterface.c: fix GLib::MetaInterface#gtype;
 	generic_gtype() -> generic_s_gtype().
 

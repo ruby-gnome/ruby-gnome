@@ -4,7 +4,7 @@
   rbgobj_typeinterface.c -
 
   $Author: sakai $
-  $Date: 2007/06/20 10:52:50 $
+  $Date: 2007/06/20 13:03:36 $
   created at: Sat May 27 16:04:13 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -30,7 +30,6 @@ static VALUE
 interface_install_property(self, pspec_obj)
     VALUE self, pspec_obj;
 {
-   if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
        const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
        gpointer ginterface;
        GParamSpec* pspec;
@@ -47,11 +46,6 @@ interface_install_property(self, pspec_obj)
        
        /* FIXME: define accessor methods */
        return Qnil;
-   } else {
-       rb_raise(rb_eNoMethodError, 
-                "Call this as the Module/Class method");
-       return Qnil;
-   }
 }
 
 static VALUE
@@ -70,7 +64,6 @@ interface_property(self, property_name)
         name = StringValuePtr(property_name);
     }
 
-    if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
         if (CLASS2GTYPE(self) != RBGOBJ_TYPE_RUBY_VALUE){
             ginterface = g_type_default_interface_ref(CLASS2GTYPE(self));
             
@@ -87,11 +80,6 @@ interface_property(self, property_name)
             result = Qnil;
         }
         return result;
-    } else {
-        rb_raise(rb_eNoMethodError, 
-                 "Call this as the Module/Class method");
-        return Qnil;
-    }
 }
 
 static VALUE
@@ -104,7 +92,6 @@ interface_properties(int argc, VALUE* argv, VALUE self)
     int i;
     gpointer ginterface;
 
-    if (RTEST(rb_obj_is_kind_of(self, rb_cModule))){
         GType gtype  = CLASS2GTYPE(self);
         ary = rb_ary_new();
         if (gtype != G_TYPE_INTERFACE){
@@ -124,11 +111,6 @@ interface_properties(int argc, VALUE* argv, VALUE self)
             g_type_default_interface_unref(ginterface);
         }
         return ary;
-    } else {
-        rb_raise(rb_eNoMethodError, 
-                 "Call this as the Module/Class method");
-        return Qnil;
-    }
 }
 #endif
 
@@ -136,7 +118,7 @@ void
 rbgobj_init_interface(interf)
     VALUE interf;
 {
-    /* pseudo inheritance */
+    rb_extend_object(interf, mMetaInterface);
     if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE){
         rb_extend_object(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
         rb_include_module(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
@@ -155,9 +137,6 @@ Init_interface()
     rb_define_method(mMetaInterface, "property", interface_property, 1);
     rb_define_method(mMetaInterface, "properties", interface_properties, -1);
 #endif
-
-    rb_extend_object(iface, mMetaInterface);
-    rb_include_module(iface, mMetaInterface);
 }
 
 
