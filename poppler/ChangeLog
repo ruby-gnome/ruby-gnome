@@ -1,5 +1,7 @@
 2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.c: added enum types appeared at 0.5.9.
+
 	* src/rbpoppler-action.c, src/rbpoppler-document.c: removed
 	needless variables.
 

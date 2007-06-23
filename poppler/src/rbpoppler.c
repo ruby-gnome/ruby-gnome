@@ -4,7 +4,7 @@
   rbpoppler.c -
 
   $Author: ktou $
-  $Date: 2006/05/18 02:26:58 $
+  $Date: 2007/06/23 02:46:22 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -38,7 +38,7 @@ cairo_available(VALUE self)
 void
 Init_poppler(void)
 {
-    VALUE mPoppler, cError, cOrientation, cBackend;
+    VALUE mPoppler;
 
     mPoppler = rb_define_module("Poppler");
 
@@ -48,10 +48,19 @@ Init_poppler(void)
                                 INT2FIX(POPPLER_MINOR_VERSION),
                                 INT2FIX(POPPLER_MICRO_VERSION)));
 
-    cError = G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
-    cOrientation = G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation",
-                               mPoppler);
-    cBackend = G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", mPoppler);
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+    G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_TYPE,
+                "PageTransitionType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_ALIGNMENT,
+                "PageTransitionAlignment", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_DIRECTION,
+                "PageTransitionDirection", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_SELECTION_STYLE, "SelectionStyle", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_TYPE, "FormFieldType", mPoppler);
+#endif
+    G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", mPoppler);
 
     rb_define_module_function(mPoppler, "backend", get_backend, 0);
     rb_define_module_function(mPoppler, "version", get_version, 0);
