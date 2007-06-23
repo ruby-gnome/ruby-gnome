@@ -1,5 +1,9 @@
 2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h, src/rbpoppler-page.c: followed new functions
+	and types in poppler-page.h. But this is not enough. We need more
+	works.
+
 	* src/rbpoppler-document.c, src/lib/poppler.rb: supported
 	Poppler::Document.new(pdf_data).
 

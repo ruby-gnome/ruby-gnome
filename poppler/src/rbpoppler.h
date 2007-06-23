@@ -38,6 +38,9 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #define REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
 #define RVAL2DEST(obj) ((PopplerDest *)RVAL2BOXED(obj, POPPLER_TYPE_DEST))
 #define DEST2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_DEST))
+#define TRANS2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION))
+#define RVAL2TRANS(obj) ((PopplerPageTransition *)RVAL2BOXED(obj, POPPLER_TYPE_PAGE_TRANSITION))
+
 #define DESTTYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_DEST_TYPE))
 #define ACTIONTYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ACTION_TYPE))
 #define RVAL2ACTIONTYPE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_ACTION_TYPE))
@@ -50,6 +53,8 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 
 extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
 extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
+
+#define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
 
 
 extern void Init_poppler_document(VALUE mPoppler);
