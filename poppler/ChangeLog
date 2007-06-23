@@ -1,5 +1,10 @@
 2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h (SELSTYLE2RVAL, RVAL2SELSTYLE): added.
+
+	* src/rbpoppler-page.c: followed API changes of
+	poppler_page_render_selection() family at 0.5.9.
+
 	* src/rbpoppler.c: added enum types appeared at 0.5.9.
 
 	* src/rbpoppler-action.c, src/rbpoppler-document.c: removed
