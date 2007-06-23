@@ -1,3 +1,8 @@
+2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-action.c, src/rbpoppler-document.c: removed
+	needless variables.
+
 2007-04-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-document.c (Poppler::Document#size): added a

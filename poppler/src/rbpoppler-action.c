@@ -4,7 +4,7 @@
   rbpoppler-action.c -
 
   $Author: ktou $
-  $Date: 2006/09/06 13:42:01 $
+  $Date: 2007/06/23 02:43:53 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -151,8 +151,7 @@ DEST_ATTR_UINT(change_zoom)
 void
 Init_poppler_action(VALUE mPoppler)
 {
-    VALUE cActionType, cDestType, cDest;
-    VALUE cAction, cActionAny, cActionGotoDest, cActionGotoRemote;
+    VALUE cDest,  cAction, cActionAny, cActionGotoDest, cActionGotoRemote;
     VALUE cActionLaunch, cActionUri, cActionNamed, cActionMovie;
 
     cAction = G_DEF_CLASS(POPPLER_TYPE_ACTION, "Action", mPoppler);
@@ -199,8 +198,8 @@ Init_poppler_action(VALUE mPoppler)
     G_DEF_SETTERS(cActionNamed);
     G_DEF_SETTERS(cActionMovie);
 
-    cActionType = G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
-    cDestType = G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
 
     cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
 

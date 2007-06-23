@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2007/04/07 03:24:45 $
+  $Date: 2007/06/23 02:43:53 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -364,8 +364,6 @@ void
 Init_poppler_document(VALUE mPoppler)
 {
     VALUE cDocument, cFontsIter, cPSFile;
-    VALUE cPageLayout, cPageMode, cFontType;
-    VALUE cViewerPreferences, cPermissions;
 
     id_new = rb_intern("new");
     id_valid = rb_intern("valid?");
@@ -379,13 +377,11 @@ Init_poppler_document(VALUE mPoppler)
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
     cPSFile = G_DEF_CLASS(POPPLER_TYPE_PS_FILE, "PSFile", mPoppler);
 
-    cPageLayout = G_DEF_CLASS(POPPLER_TYPE_PAGE_LAYOUT, "PageLayout", mPoppler);
-    cPageMode = G_DEF_CLASS(POPPLER_TYPE_PAGE_MODE, "PageMode", mPoppler);
-    cFontType = G_DEF_CLASS(POPPLER_TYPE_FONT_TYPE, "FontType", mPoppler);
-    cViewerPreferences = G_DEF_CLASS(POPPLER_TYPE_VIEWER_PREFERENCES,
-                                     "ViewerPreferences", mPoppler);
-    cPermissions = G_DEF_CLASS(POPPLER_TYPE_PERMISSIONS, "Permissions",
-                               mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_PAGE_LAYOUT, "PageLayout", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_PAGE_MODE, "PageMode", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FONT_TYPE, "FontType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_VIEWER_PREFERENCES, "ViewerPreferences", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_PERMISSIONS, "Permissions", mPoppler);
 
     rb_include_module(cDocument, rb_mEnumerable);
 
