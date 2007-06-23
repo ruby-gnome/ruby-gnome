@@ -1,5 +1,8 @@
 2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c, src/lib/poppler.rb: supported
+	Poppler::Document.new(pdf_data).
+
 	* src/rbpoppler.h (SELSTYLE2RVAL, RVAL2SELSTYLE): added.
 
 	* src/rbpoppler-page.c: followed API changes of

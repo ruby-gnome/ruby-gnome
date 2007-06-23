@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2007/06/23 02:43:53 $
+  $Date: 2007/06/23 03:31:25 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -21,7 +21,7 @@
 #  define HAVE_POPPLER_FONT_INFO 1
 #endif
 
-static ID id_new, id_valid, id_ensure_uri;
+static ID id_new, id_valid, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;
 #ifdef HAVE_POPPLER_FONT_INFO
 static VALUE cFontInfo;
@@ -31,16 +31,28 @@ static VALUE cFontInfo;
 static VALUE
 doc_initialize(int argc, VALUE *argv, VALUE self)
 {
-    PopplerDocument *document;
+    PopplerDocument *document = NULL;
     GError *error = NULL;
-    VALUE uri, rb_password;
+    VALUE uri_or_data, rb_password;
     const char *password;
 
-    rb_scan_args(argc, argv, "11", &uri, &rb_password);
+    rb_scan_args(argc, argv, "11", &uri_or_data, &rb_password);
 
     password = NIL_P(rb_password) ? NULL : RVAL2CSTR(rb_password);
-    uri = rb_funcall(self, id_ensure_uri, 1, uri);
-    document = poppler_document_new_from_file(RVAL2CSTR(uri), password, &error);
+
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+    if (RTEST(rb_funcall(self, id_pdf_data_p, 1, uri_or_data))) {
+        document = poppler_document_new_from_data(RSTRING_PTR(uri_or_data),
+                                                  RSTRING_LEN(uri_or_data),
+                                                  password, &error);
+    }
+#endif
+
+    if (!document && !error) {
+        uri_or_data = rb_funcall(self, id_ensure_uri, 1, uri_or_data);
+        document = poppler_document_new_from_file(RVAL2CSTR(uri_or_data),
+                                                  password, &error);
+    }
 
     if (error)
         RAISE_GERROR(error);
@@ -367,6 +379,7 @@ Init_poppler_document(VALUE mPoppler)
 
     id_new = rb_intern("new");
     id_valid = rb_intern("valid?");
+    id_pdf_data_p = rb_intern("pdf_data?");
     id_ensure_uri = rb_intern("ensure_uri");
 
     cDocument = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);

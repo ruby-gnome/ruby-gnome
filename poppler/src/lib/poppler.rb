@@ -1,3 +1,4 @@
+require "tempfile"
 require "glib2"
 require "gdk_pixbuf2"
 begin
@@ -17,7 +18,19 @@ module Poppler
 
   class Document
     private
+    def pdf_data?(data)
+      /\A%PDF-1\.\d/ =~ data
+    end
+
     def ensure_uri(uri)
+      if pdf_data?(uri)
+        @pdf = Tempfile.new("ruby-poppler-pdf")
+        @pdf.binmode
+        @pdf.print(uri)
+        @pdf.close
+        uri = @pdf.path
+      end
+
       if GLib.path_is_absolute?(uri)
         GLib.filename_to_uri(uri)
       elsif /\A[a-zA-Z][a-zA-Z\d\-+.]*:/.match(uri)
