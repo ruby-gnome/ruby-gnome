@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2007/06/19 15:34:23 $
+  $Date: 2007/06/23 17:36:20 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -230,15 +230,19 @@ rclosure_unref(GRClosure *rclosure)
     if (!rclosure_alive_p(rclosure)) {
         GList *next;
         for (next = rclosure->objects; next; next = next->next) {
-            GObject *object;
-            object = G_OBJECT(next->data);
+            GObject *object = G_OBJECT(next->data);
+            VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
+            if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj))
+                G_CHILD_REMOVE(obj, rclosure->rb_holder);
             g_object_weak_unref(object, rclosure_weak_notify, rclosure);
         }
         g_list_free(rclosure->objects);
         rclosure->objects = NULL;
-        RDATA(rclosure->rb_holder)->dmark = NULL;
-        RDATA(rclosure->rb_holder)->dfree = NULL;
-        rclosure->rb_holder = Qnil;
+        if (!NIL_P(rclosure->rb_holder)) {
+            RDATA(rclosure->rb_holder)->dmark = NULL;
+            RDATA(rclosure->rb_holder)->dfree = NULL;
+            rclosure->rb_holder = Qnil;
+        }
     }
 }
 

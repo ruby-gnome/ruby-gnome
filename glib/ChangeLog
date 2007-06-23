@@ -1,3 +1,9 @@
+2007-06-23  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_closure.c: detach closure->rb_holder from GObject
+	when the closure is invalidated.
+	[ruby-gnome2-devel-en] Signal handling causes memory leaks
+
 2007-06-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_typeinterface.c: Make interfaces not to be decendants
