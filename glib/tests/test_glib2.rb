@@ -101,4 +101,17 @@ class TestGLib < Test::Unit::TestCase
 
     obj = nil
   end
+
+  def test_signal_handler_disconnect_and_gc
+    obj = GLib::Object.new
+    klass = Class.new
+    1000.times {
+      a = klass.new
+      id = obj.signal_connect("notify") { p a }
+      obj.signal_handler_disconnect(id)
+    }
+    ary = []
+    ObjectSpace.each_object(klass) { |a| ary.push(a) }
+    assert(ary.size < 1000)
+  end
 end
