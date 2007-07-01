@@ -23,8 +23,17 @@ module GnomeVFS
         open(uri, *args){|f| f.each(&block) }
       end
 
-      def read(uri, *args)
-        open(uri){|f| f.read(*args) }
+      def read(uri, length=nil, offset=nil)
+        if offset.nil? or offset==0
+          open(uri, OpenMode::READ){|f|
+            f.read(length)
+          }
+        else
+          open(uri, OpenMode::READ | OpenMode::RANDOM){|f|
+            f.seek(offset)
+            f.read(length)
+          }
+        end
       end
 
       def readlines(uri, *args)

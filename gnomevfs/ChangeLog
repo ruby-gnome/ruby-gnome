@@ -1,3 +1,10 @@
+2007-07-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/lib/gnomevfs.rb (GnomeVFS.read): support
+	GnomeVFS::File.read(filename, length, offset).
+
+	* src/gnomevfs-file.c (file_seek): convert offset argument correctly.
+
 2007-06-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/gnomevfs-monitor.c (monitor_callback): added missing

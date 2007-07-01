@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: ktou $
+ * $Author: sakai $
  *
- * $Date: 2007/06/18 10:21:28 $
+ * $Date: 2007/07/01 07:25:59 $
  *
  *****************************************************************************/
 
@@ -813,7 +813,7 @@ file_seek(argc, argv, self)
   }
 
   return GVFSRESULT2RVAL(gnome_vfs_seek(_SELF(self), whence,
-                                        OFFT2NUM(offset)));
+                                        NUM2ULL(offset)));
 }
 
 static VALUE
