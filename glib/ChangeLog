@@ -1,3 +1,8 @@
+2007-07-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_typeinterface.c: brush up and should not call
+	g_type_default_interface_ref(G_TYPE_INTERFACE) which causes SEGV.
+
 2007-06-28  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* tests/test_glib2.rb (TestGLib#test_signal_handler_disconnect_and_gc):
