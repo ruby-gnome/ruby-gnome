@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: mutoh $
-  $Date: 2007/06/16 08:05:46 $
+  $Author: sakai $
+  $Date: 2007/07/01 17:43:56 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -190,12 +190,10 @@ gobj_s_signal(VALUE self, VALUE name)
     const char* sig_name;
     guint sig_id;
 
-    if (SYMBOL_P(name)){
+    if (SYMBOL_P(name))
         sig_name = rb_id2name(SYM2ID(name));
-    } else {
-        StringValue(name);
+    else
         sig_name = StringValuePtr(name);
-    }
     
     sig_id = g_signal_lookup(sig_name, CLASS2GTYPE(self));
     if (!sig_id)
@@ -217,12 +215,10 @@ gobj_sig_has_handler_pending(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &sig, &may_be_blocked);
 
-    if (SYMBOL_P(sig)){
+    if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
-    } else {
-        StringValue(sig);
+    else
         sig_name = StringValuePtr(sig);
-    }
 
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
@@ -251,12 +247,10 @@ gobj_sig_connect_impl(after, argc, argv, self)
 
     if (NIL_P(rest)) rest = rb_ary_new();
 
-    if (SYMBOL_P(sig)){
+    if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
-    } else {
-        StringValue(sig);
+    else
         sig_name = StringValuePtr(sig);
-    }
 
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
@@ -372,10 +366,8 @@ gobj_sig_emit(argc, argv, self)
 
     if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
-    else {
-        StringValue(sig);
+    else
         sig_name = StringValuePtr(sig);
-    }
 
     if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),
@@ -406,10 +398,8 @@ gobj_sig_emit_stop(self, sig)
 
     if (SYMBOL_P(sig))
         sig_name = rb_id2name(SYM2ID(sig));
-    else {
-        StringValue(sig);
+    else
         sig_name = StringValuePtr(sig);
-    }
 
     if (!g_signal_parse_name(sig_name,
                              CLASS2GTYPE(CLASS_OF(self)),

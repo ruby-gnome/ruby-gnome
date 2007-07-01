@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/01 17:43:56 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -156,19 +156,17 @@ gobj_s_property(self, property_name)
     GParamSpec* prop;
     VALUE result;
 
-    if (SYMBOL_P(property_name)) {
+    if (SYMBOL_P(property_name))
         name = rb_id2name(SYM2ID(property_name));
-    } else {
-        StringValue(property_name);
+    else
         name = StringValuePtr(property_name);
-    }
 
     oclass = g_type_class_ref(CLASS2GTYPE(self));
 
     prop = g_object_class_find_property(oclass, name);
     if (!prop){
         g_type_class_unref(oclass);
-        rb_raise(eNoPropertyError, "no such property: %s", name);
+        rb_raise(eNoPropertyError, "No such property: %s", name);
     }
 
     result = GOBJ2RVAL(prop);
@@ -258,12 +256,10 @@ gobj_set_property(self, prop_name, val)
     GParamSpec* pspec;
     const char* name;
 
-    if (SYMBOL_P(prop_name)) {
+    if (SYMBOL_P(prop_name))
         name = rb_id2name(SYM2ID(prop_name));
-    } else {
-        StringValue(prop_name);
+    else
         name = StringValuePtr(prop_name);
-    }
 
     pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
                                          name);
@@ -308,12 +304,10 @@ gobj_get_property(self, prop_name)
     GParamSpec* pspec;
     const char* name;
 
-    if (SYMBOL_P(prop_name)) {
+    if (SYMBOL_P(prop_name))
         name = rb_id2name(SYM2ID(prop_name));
-    } else {
-        StringValue(prop_name);
+    else
         name = StringValuePtr(prop_name);
-    }
 
     pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(RVAL2GOBJ(self)),
                                          name);
@@ -365,7 +359,6 @@ static VALUE
 gobj_notify(self, property_name)
     VALUE self, property_name;
 {
-    StringValue(property_name);
     g_object_notify(RVAL2GOBJ(self), StringValuePtr(property_name));
     return self;
 }

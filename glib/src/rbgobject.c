@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/05 04:25:55 $
+  $Author: sakai $
+  $Date: 2007/07/01 17:43:55 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -435,12 +435,10 @@ _params_setup(arg, param_setup_arg)
     name = rb_ary_entry(arg, 0);
     val  = rb_ary_entry(arg, 1);
 
-    if (SYMBOL_P(name)) {
+    if (SYMBOL_P(name))
         param_setup_arg->params[n].name = rb_id2name(SYM2ID(name));
-    } else {
-        StringValue(name);
+    else
         param_setup_arg->params[n].name = StringValuePtr(name);
-    }
 
     pspec = g_object_class_find_property(
         param_setup_arg->gclass,

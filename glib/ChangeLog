@@ -1,3 +1,9 @@
+2007-07-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbglib_spawn.c, src/rbgobj_object.c, src/rbgobj_signal.c,
+	src/rbgobj_type.c, src/rbgobj_typemodule.c, src/rbgobject.c:
+	remove unncessary StringValue() invocations.
+
 2007-07-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_typeinterface.c: brush up and should not call

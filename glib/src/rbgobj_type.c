@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/18 13:42:33 $
+  $Author: sakai $
+  $Date: 2007/07/01 17:43:56 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -339,7 +339,6 @@ type_initialize(self, type)
         if (!g_type_name(gtype))
             gtype = G_TYPE_INVALID;
     } else {
-        StringValue(type);
         gtype = g_type_from_name(StringValuePtr(type));
     }
 

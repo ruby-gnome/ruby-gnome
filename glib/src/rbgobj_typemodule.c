@@ -3,8 +3,8 @@
 
   rbgobj_typemodule.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:09 $
+  $Author: sakai $
+  $Date: 2007/07/01 17:43:55 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -39,7 +39,6 @@ static VALUE
 set_name(self, name)
    VALUE self, name;
 {
-    StringValue(name);
     g_type_module_set_name(G_TYPE_MODULE(RVAL2GOBJ(self)), StringValuePtr(name));
     return name;
 }

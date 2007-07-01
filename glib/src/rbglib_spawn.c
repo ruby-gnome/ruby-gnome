@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/01 17:43:56 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -241,8 +241,7 @@ rbglib_m_spawn_command_line_sync(self, str)
     VALUE std_out, std_err;
     gboolean ret;
 
-    StringValue(str);
-    command_line = RSTRING_PTR(str);
+    command_line = StringValuePtr(str);
     ret = g_spawn_command_line_sync(command_line,
                                                &standard_output,
                                                &standard_error,
@@ -277,8 +276,7 @@ rbglib_m_spawn_command_line_async(self, str)
     const gchar *command_line;
     VALUE ret;
 
-    StringValue(str);
-    command_line = RSTRING_PTR(str);
+    command_line = StringValuePtr(str);
     ret = CBOOL2RVAL(g_spawn_command_line_async(command_line, &err));
     if (err != NULL)
         RAISE_GERROR(err);
