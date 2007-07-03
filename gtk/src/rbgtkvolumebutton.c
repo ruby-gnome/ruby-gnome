@@ -4,7 +4,7 @@
   rbgtkvolumebutton.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 15:07:14 $
+  $Date: 2007/07/03 15:17:10 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,6 +14,8 @@
 
 #include "global.h"
 
+#if GTK_CHECK_VERSION(2,11,0)
+
 static VALUE
 volumebutton_initialize(self)
     VALUE self;
@@ -22,9 +24,13 @@ volumebutton_initialize(self)
     return Qnil;
 }
 
+#endif
+
 void 
 Init_gtk_volumebutton()
 {
+#if GTK_CHECK_VERSION(2,11,0)
     VALUE gVolumeButton = G_DEF_CLASS(GTK_TYPE_VOLUME_BUTTON, "VolumeButton", mGtk);
     rb_define_method(gVolumeButton, "initialize", volumebutton_initialize, 0);
+#endif
 }
