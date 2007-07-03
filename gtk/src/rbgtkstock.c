@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 16:28:42 $
+  $Date: 2007/07/03 16:29:33 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -122,6 +122,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
+#endif
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_const(mGtkStock, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
 #endif
 
     rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
