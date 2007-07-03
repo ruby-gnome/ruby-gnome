@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: ktou $
-  $Date: 2006/07/09 13:20:06 $
+  $Author: ggc $
+  $Date: 2007/07/03 15:01:12 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -610,6 +610,18 @@ widget_modify_font(self, font_desc)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+widget_modify_cursor(self, primary, seconday)
+    VALUE self, primary, seconday;
+{
+    gtk_widget_modify_cursor(_SELF(self), 
+                             RVAL2BOXED(primary, GDK_TYPE_COLOR),
+                             RVAL2BOXED(seconday, GDK_TYPE_COLOR));
+    return self;
+}
+#endif
+
 static VALUE
 widget_create_pango_context(self)
     VALUE self;
@@ -902,6 +914,23 @@ widget_child_focus(self, direction)
     return gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)) ? Qtrue : Qfalse;
 }
 
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+widget_error_bell(self)
+    VALUE self;
+{
+    gtk_widget_error_bell(_SELF(self));
+    return self;
+}
+
+static VALUE
+widget_keynav_failed(self, direction)
+    VALUE self, direction;
+{
+    return gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)) ? Qtrue : Qfalse;
+}
+#endif
+
 static VALUE
 widget_child_notify(self, child_property)
     VALUE self, child_property;
@@ -1042,6 +1071,61 @@ widget_remove_mnemonic_label(self, label)
 {
     gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
     return self;
+}
+#endif
+
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+widget_set_tooltip_window(self, custom_window)
+    VALUE self, custom_window;
+{
+    gtk_widget_set_tooltip_window(_SELF(self), GTK_WINDOW(RVAL2GOBJ(custom_window)));
+    return self;
+}
+
+static VALUE
+widget_get_tooltip_window(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_widget_get_tooltip_window(_SELF(self)));
+}
+
+static VALUE
+widget_trigger_tooltip_query(self)
+    VALUE self;
+{
+    gtk_widget_trigger_tooltip_query(_SELF(self));
+    return self;
+}
+
+static VALUE
+widget_set_tooltip_text(self, text)
+    VALUE self, text;
+{
+    gtk_widget_set_tooltip_text(_SELF(self), RVAL2CSTR(text));
+    return self;
+}
+
+static VALUE
+widget_get_tooltip_text(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gtk_widget_get_tooltip_text(_SELF(self)));
+}
+
+static VALUE
+widget_set_tooltip_markup(self, markup)
+    VALUE self, markup;
+{
+    gtk_widget_set_tooltip_markup(_SELF(self), RVAL2CSTR(markup));
+    return self;
+}
+
+static VALUE
+widget_get_tooltip_markup(self)
+    VALUE self;
+{
+    return CSTR2RVAL(gtk_widget_get_tooltip_markup(_SELF(self)));
 }
 #endif
 
@@ -1247,6 +1331,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "modify_text", widget_modify_text, 2);
     rb_define_method(gWidget, "modify_base", widget_modify_base, 2);
     rb_define_method(gWidget, "modify_font", widget_modify_font, 1);
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gWidget, "modify_cursor", widget_modify_cursor, 2);
+#endif
     rb_define_method(gWidget, "create_pango_context", widget_create_pango_context, 0);
     rb_define_method(gWidget, "pango_context", widget_get_pango_context, 0);
     rb_define_method(gWidget, "create_pango_layout", widget_create_pango_layout, -1);
@@ -1263,6 +1350,10 @@ Init_gtk_widget()
     rb_define_method(gWidget, "style_get_property", widget_style_get_property, 1);
     rb_define_method(gWidget, "accessible", widget_get_accessible, 0);
     rb_define_method(gWidget, "child_focus", widget_child_focus, 1);
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gWidget, "error_bell", widget_error_bell, 0);
+    rb_define_method(gWidget, "keynav_failed", widget_keynav_failed, 0);
+#endif
     rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
     rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
     rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
@@ -1284,6 +1375,15 @@ Init_gtk_widget()
     rb_define_method(gWidget, "mnemonic_labels", widget_list_mnemonic_labels, 0);
     rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
     rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
+#endif
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gWidget, "set_tooltip_window", widget_set_tooltip_window, 1);
+    rb_define_method(gWidget, "tooltip_window", widget_get_tooltip_window, 0);
+    rb_define_method(gWidget, "trigger_tooltip_query", widget_trigger_tooltip_query, 0);
+    rb_define_method(gWidget, "set_tooltip_text", widget_set_tooltip_text, 1);
+    rb_define_method(gWidget, "tooltip_text", widget_get_tooltip_text, 0);
+    rb_define_method(gWidget, "set_tooltip_markup", widget_set_tooltip_markup, 1);
+    rb_define_method(gWidget, "tooltip_markup", widget_get_tooltip_markup, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(gWidget, "action", widget_get_action, 0);
