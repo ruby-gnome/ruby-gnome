@@ -4,7 +4,7 @@
   rbgtkscalebutton.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 16:09:23 $
+  $Date: 2007/07/03 16:10:47 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -14,9 +14,9 @@
 
 #include "global.h"
 
-#define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
-
 #if GTK_CHECK_VERSION(2,11,0)
+
+#define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
 
 static VALUE
 scalebutton_set_icons(VALUE self, VALUE icons);
