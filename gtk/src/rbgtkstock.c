@@ -4,7 +4,7 @@
   rbgtkstock.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 16:29:33 $
+  $Date: 2007/07/03 16:30:52 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -115,21 +115,6 @@ Init_gtk_stock()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "ABOUT", CSTR2SYM(GTK_STOCK_ABOUT));
 #endif
-
-    rb_define_const(mGtkStock, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
-    rb_define_const(mGtkStock, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));
-    rb_define_const(mGtkStock, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
-    rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
-#if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
-#endif
-#if GTK_CHECK_VERSION(2,11,0)
-    rb_define_const(mGtkStock, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
-#endif
-
-    rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
-    rb_define_const(mGtkStock, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
-
     rb_define_const(mGtkStock, "ADD", CSTR2SYM(GTK_STOCK_ADD));
     rb_define_const(mGtkStock, "APPLY", CSTR2SYM(GTK_STOCK_APPLY));
     rb_define_const(mGtkStock, "BOLD", CSTR2SYM(GTK_STOCK_BOLD));
@@ -143,7 +128,6 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "CONVERT", CSTR2SYM(GTK_STOCK_CONVERT));
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "CONNECT", CSTR2SYM(GTK_STOCK_CONNECT));
-    rb_define_const(mGtkStock, "DISCONNECT", CSTR2SYM(GTK_STOCK_DISCONNECT));
 #endif
     rb_define_const(mGtkStock, "COPY", CSTR2SYM(GTK_STOCK_COPY));
     rb_define_const(mGtkStock, "CUT", CSTR2SYM(GTK_STOCK_CUT));
@@ -151,12 +135,26 @@ Init_gtk_stock()
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_const(mGtkStock, "DIALOG_AUTHENTICATION", CSTR2SYM(GTK_STOCK_DIALOG_AUTHENTICATION));
 #endif
+    rb_define_const(mGtkStock, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
+    rb_define_const(mGtkStock, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));
+    rb_define_const(mGtkStock, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
+    rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_const(mGtkStock, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
+#endif
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_const(mGtkStock, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
+#endif
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_const(mGtkStock, "DISCONNECT", CSTR2SYM(GTK_STOCK_DISCONNECT));
+#endif
+    rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
+    rb_define_const(mGtkStock, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "EDIT", CSTR2SYM(GTK_STOCK_EDIT));
     rb_define_const(mGtkStock, "FILE", CSTR2SYM(GTK_STOCK_FILE));
 #endif
     rb_define_const(mGtkStock, "EXECUTE", CSTR2SYM(GTK_STOCK_EXECUTE));
-
     rb_define_const(mGtkStock, "FIND", CSTR2SYM(GTK_STOCK_FIND));
     rb_define_const(mGtkStock, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
     rb_define_const(mGtkStock, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
