@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/04 12:30:31 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -280,6 +280,15 @@ tvc_queue_resize(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+tvc_get_tree_view(self)
+    VALUE self;
+{
+    return GOBJ2RVAL(gtk_tree_view_column_get_tree_view(_SELF(self)));
+}
+#endif
+
 
 void
 Init_gtk_treeviewcolumn()
@@ -308,6 +317,9 @@ Init_gtk_treeviewcolumn()
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
     rb_define_method(tvc, "queue_resize", tvc_queue_resize, 0);
+#endif
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(tvc, "tree_view", tvc_get_tree_view, 0);
 #endif
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", tvc);
