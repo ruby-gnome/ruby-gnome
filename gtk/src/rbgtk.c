@@ -3,8 +3,8 @@
 
   rbgtk.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/30 12:51:33 $
+  $Author: sakai $
+  $Date: 2007/07/04 13:33:17 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2001 Yukihiro Matsumoto,
@@ -65,17 +65,11 @@ exec_callback(widget, proc)
 /*
  * Gtk module
  */
-#include <version.h>
-#if RUBY_VERSION_CODE >= 154
-# define USE_POLL_FUNC 1
-#else
-# undef USE_POLL_FUNC /* rb_thread_select() may cause busy wait */
-#endif
 
 /* We can't use rbgtk_poll() on native Win32.
    Because GPollFD doesn't have file descriptor but HANDLE. */
-#ifdef G_OS_WIN32
-# undef USE_POLL_FUNC
+#ifndef G_OS_WIN32
+#define USE_POLL_FUNC
 #endif
 
 #ifndef USE_POLL_FUNC

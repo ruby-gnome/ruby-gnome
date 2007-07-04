@@ -1,3 +1,8 @@
+2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtk.c: use rbglib_poll() if possible, regardless of
+	ruby version. (ruby 1.5.4 is no longer considered.)
+
 2007-06-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdk.c (Gdk.windowing_quartz?, Gdk.windowing_directfb?):
