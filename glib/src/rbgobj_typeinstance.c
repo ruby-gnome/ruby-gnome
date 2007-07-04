@@ -4,7 +4,7 @@
   rbgobj_typeinstance.c -
 
   $Author: sakai $
-  $Date: 2006/05/27 15:04:14 $
+  $Date: 2007/07/04 13:13:19 $
   created at: Sat May 27 14:18:55 JST 2006
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -102,15 +102,7 @@ Init_gobject_typeinstance()
     cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
     rb_extend_object(cInstantiatable, mMetaInterface);
 
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(cInstantiatable, "allocate", instantiatable_s_allocate, 0);
-#else
     rb_define_alloc_func(cInstantiatable, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
-#endif
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cInstantiatable, "new", &generic_s_new, -1);
-#endif
-
     rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
     rb_define_method(cInstantiatable, "clone", instantiatable_clone, 0);
 }

@@ -1,3 +1,10 @@
+2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/global.h, src/rbglib.h, src/rbgobj_boxed.c, src/rbgobj_closure.c,
+	src/rbgobj_enums.c, src/rbgobj_object.c, src/rbgobj_param.c, 
+	src/rbgobj_typeinstance.c, src/rbgutil.c, src/rbgutil.h, extconf.rb:
+	remove ruby-1.6.x support and old yarv support.
+
 2007-07-02  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbglib_spawn.c, src/rbgobj_object.c, src/rbgobj_signal.c,

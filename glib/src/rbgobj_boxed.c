@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: ktou $
-  $Date: 2005/09/07 16:09:36 $
+  $Author: sakai $
+  $Date: 2007/07/04 13:13:20 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -102,17 +102,6 @@ rbgobj_boxed_init_copy(self, orig)
 
     return self;
 }
-
-#if RUBY_VERSION_CODE < 180
-static VALUE
-rbgobj_boxed_copy(self)
-    VALUE self;
-{
-    VALUE result = rbgobj_boxed_create(CLASS_OF(self));
-    rbgobj_boxed_init_copy(result, self);
-    return result;
-}
-#endif
 
 /**********************************************************************/
 
@@ -238,26 +227,11 @@ Init_gobject_gboxed()
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(gBoxed, "allocate", rbgobj_boxed_s_allocate, 0);
-#else
     rb_define_alloc_func(gBoxed, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
-#endif
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(gBoxed, "new", generic_s_new, -1);
-#endif
-
     rb_define_singleton_method(gBoxed, "gtype", generic_s_gtype, 0);
     rb_define_method(gBoxed, "gtype", generic_gtype, 0);
     rb_define_method(gBoxed, "initialize", rbgobj_boxed_init, 0);
     rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
-    rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 0);
-
-#if RUBY_VERSION_CODE < 180
-    rb_define_method(gBoxed, "copy", rbgobj_boxed_copy, 0);
-    rb_define_alias(gBoxed, "clone", "copy");
-    rb_define_alias(gBoxed, "dup", "copy");
-#else
+    rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 1);
     rb_define_alias(gBoxed, "copy", "dup");
-#endif
 }

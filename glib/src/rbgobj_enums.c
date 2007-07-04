@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: ktou $
-  $Date: 2006/09/21 12:10:19 $
+  $Author: sakai $
+  $Date: 2007/07/04 13:13:20 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -400,14 +400,7 @@ Init_enum()
     rb_define_singleton_method(cEnum, "range", enum_s_range, 0);
     rb_define_singleton_method(cEnum, "values", enum_s_values, 0);
 
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(cEnum, "allocate", enum_s_allocate, 0);
-#else
     rb_define_alloc_func(cEnum, enum_s_allocate);
-#endif
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cEnum, "new", &generic_s_new, -1);
-#endif
 
     rb_define_method(cEnum, "initialize", enum_initialize, 1);
     rb_define_method(cEnum, "to_i", enum_to_i, 0);
@@ -812,14 +805,7 @@ Init_flags()
     rb_define_singleton_method(cFlags, "mask", flags_s_mask, 0);
     rb_define_singleton_method(cFlags, "values", flags_s_values, 0);
 
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(cFlags, "allocate", flags_s_allocate, 0);
-#else
     rb_define_alloc_func(cFlags, flags_s_allocate);
-#endif
-#ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(cFlags, "new", &generic_s_new, -1);
-#endif
 
     rb_define_method(cFlags, "initialize", flags_initialize, -1);
 

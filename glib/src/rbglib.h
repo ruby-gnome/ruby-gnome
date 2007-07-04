@@ -4,7 +4,7 @@
   rbglib.h -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/04 13:13:20 $
 
   Copyright (C) 2002-2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -24,24 +24,6 @@ extern "C" {
 #define RBGLIB_MAJOR_VERSION 0
 #define RBGLIB_MINOR_VERSION 16
 #define RBGLIB_MICRO_VERSION 0
-
-#ifndef StringValue
-#define StringValue(s) ((s) = (TYPE(s) == T_STRING) ? (s) : rb_str_to_str(s))
-#endif
-#ifndef SafeStringValue
-#define SafeStringValue(v) rb_check_safe_str(StringValue(v))
-#endif
-#ifndef StringValuePtr
-#define StringValuePtr(v) rbg_string_value_ptr(&(v))
-#endif
-
-#ifndef LONG2NUM
-#define LONG2NUM INT2NUM
-#endif
-
-#ifndef ULONG2NUM
-#define ULONG2NUM UINT2NUM
-#endif
 
 #ifndef RSTRING_PTR
 #define RSTRING_PTR(s) (RSTRING(s)->ptr)
@@ -78,7 +60,7 @@ typedef int GPid;
 #endif
 
 RUBY_GLIB2_VAR VALUE mGLib;
-extern gchar* rbg_string_value_ptr(volatile VALUE* ptr);
+extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
 extern VALUE rbg_cstr2rval(const char* str);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);
 

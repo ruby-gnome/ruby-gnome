@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/04 13:13:19 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -157,16 +157,6 @@ rbgutil_sym_g2r_func(from)
     const gchar *str = g_value_get_string(from);
     return str ? ID2SYM(rb_intern(str)) : Qnil;
 }
-
-#ifndef HAVE_OBJECT_ALLOCATE
-VALUE
-rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self)
-{
-    VALUE obj = rb_funcall(self, id_allocate, 0);
-    rb_obj_call_init(obj, argc, argv);
-    return obj;
-}
-#endif /* HAVE_OBJECT_ALLOCATE */
 
 VALUE
 rbgutil_generic_s_gtype(VALUE klass)

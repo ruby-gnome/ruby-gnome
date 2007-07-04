@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2007/06/23 17:36:20 $
+  $Date: 2007/07/04 13:13:20 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -16,12 +16,6 @@
 #undef HAVE_NATIVETHREAD /* FIXME */
 #else
 #include <unistd.h>
-#endif
-
-#ifdef HAVE_YARV_H
-#include "yarv.h"
-#define ruby_errinfo (GET_THREAD()->errinfo)
-#undef HAVE_NATIVETHREAD /* FIXME */
 #endif
 
 static ID id_call;

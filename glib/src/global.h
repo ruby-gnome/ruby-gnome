@@ -3,8 +3,8 @@
 
    global.h -
 
-   $Author: mutoh $
-   $Date: 2006/12/16 05:01:30 $
+   $Author: sakai $
+   $Date: 2007/07/04 13:13:20 $
 
    Copyright (C) 2002,2003  Masahiro Sakai
    Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -51,11 +51,6 @@ extern void rbgobj_init_interface(VALUE interf);
 /* FIXME: should have better name */
 extern void rbgobj_instance_call_cinfo_mark(gpointer instance);
 extern void rbgobj_instance_call_cinfo_free(gpointer instance);
-
-#ifndef HAVE_OBJECT_ALLOCATE
-VALUE rbgutil_generic_s_new(int argc, VALUE* argv, VALUE self);
-#define generic_s_new rbgutil_generic_s_new
-#endif
 
 VALUE rbgutil_generic_s_gtype(VALUE klass);
 VALUE rbgutil_generic_gtype(VALUE self);

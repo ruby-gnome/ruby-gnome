@@ -3,8 +3,8 @@
 
   rbgutil.h -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 09:18:12 $
+  $Author: sakai $
+  $Date: 2007/07/04 13:13:19 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -55,11 +55,7 @@ extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
-#if HAVE_RB_BLOCK_PROC
 #define G_BLOCK_PROC rb_block_proc
-#else
-#define G_BLOCK_PROC rb_f_lambda
-#endif
 
 #ifdef __cplusplus
 }

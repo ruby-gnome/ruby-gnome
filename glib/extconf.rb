@@ -25,7 +25,6 @@ have_func("g_listenv")
 have_func("rb_check_array_type")
 have_func("rb_exec_recursive")
 have_func("rb_errinfo")
-have_header('yarv.h')
 have_header('ruby/ruby.h')
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
