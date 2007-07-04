@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 15:01:12 $
+  $Date: 2007/07/04 08:33:57 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -1098,35 +1098,6 @@ widget_trigger_tooltip_query(self)
     return self;
 }
 
-static VALUE
-widget_set_tooltip_text(self, text)
-    VALUE self, text;
-{
-    gtk_widget_set_tooltip_text(_SELF(self), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-widget_get_tooltip_text(self)
-    VALUE self;
-{
-    return CSTR2RVAL(gtk_widget_get_tooltip_text(_SELF(self)));
-}
-
-static VALUE
-widget_set_tooltip_markup(self, markup)
-    VALUE self, markup;
-{
-    gtk_widget_set_tooltip_markup(_SELF(self), RVAL2CSTR(markup));
-    return self;
-}
-
-static VALUE
-widget_get_tooltip_markup(self)
-    VALUE self;
-{
-    return CSTR2RVAL(gtk_widget_get_tooltip_markup(_SELF(self)));
-}
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
@@ -1380,10 +1351,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_tooltip_window", widget_set_tooltip_window, 1);
     rb_define_method(gWidget, "tooltip_window", widget_get_tooltip_window, 0);
     rb_define_method(gWidget, "trigger_tooltip_query", widget_trigger_tooltip_query, 0);
-    rb_define_method(gWidget, "set_tooltip_text", widget_set_tooltip_text, 1);
-    rb_define_method(gWidget, "tooltip_text", widget_get_tooltip_text, 0);
-    rb_define_method(gWidget, "set_tooltip_markup", widget_set_tooltip_markup, 1);
-    rb_define_method(gWidget, "tooltip_markup", widget_get_tooltip_markup, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(gWidget, "action", widget_get_action, 0);
