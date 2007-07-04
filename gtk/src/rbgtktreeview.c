@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: ktou $
-  $Date: 2006/12/05 14:54:28 $
+  $Author: ggc $
+  $Date: 2007/07/04 12:53:39 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -431,6 +431,71 @@ treeview_tree_to_widget_coords(self, tx, ty)
     return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
 }
 
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+treeview_convert_bin_window_to_tree_coords(self, bx, by)
+    VALUE self, bx, by;
+{
+    gint tx, ty;
+    gtk_tree_view_convert_bin_window_to_tree_coords(_SELF(self),
+                                                    NUM2INT(bx), NUM2INT(by),
+                                                    &tx, &ty);
+    return rb_ary_new3(2, INT2NUM(tx), INT2NUM(ty));
+}
+static VALUE
+treeview_convert_bin_window_to_widget_coords(self, bx, by)
+    VALUE self, bx, by;
+{
+    gint wx, wy;
+    gtk_tree_view_convert_bin_window_to_widget_coords(_SELF(self),
+                                                      NUM2INT(bx), NUM2INT(by),
+                                                      &wx, &wy);
+    return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
+}
+
+static VALUE
+treeview_convert_tree_to_bin_window_coords(self, tx, ty)
+    VALUE self, tx, ty;
+{
+    gint bx, by;
+    gtk_tree_view_convert_tree_to_bin_window_coords(_SELF(self),
+                                                    NUM2INT(tx), NUM2INT(ty),
+                                                    &bx, &by);
+    return rb_ary_new3(2, INT2NUM(bx), INT2NUM(by));
+}
+static VALUE
+treeview_convert_tree_to_widget_coords(self, tx, ty)
+    VALUE self, tx, ty;
+{
+    gint wx, wy;
+    gtk_tree_view_convert_tree_to_widget_coords(_SELF(self),
+                                                NUM2INT(tx), NUM2INT(ty),
+                                                &wx, &wy);
+    return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
+}
+
+static VALUE
+treeview_convert_widget_to_bin_window_coords(self, wx, wy)
+    VALUE self, wx, wy;
+{
+    gint bx, by;
+    gtk_tree_view_convert_widget_to_bin_window_coords(_SELF(self),
+                                                      NUM2INT(wx), NUM2INT(wy),
+                                                      &bx, &by);
+    return rb_ary_new3(2, INT2NUM(bx), INT2NUM(by));
+}
+static VALUE
+treeview_convert_widget_to_tree_coords(self, wx, wy)
+    VALUE self, wx, wy;
+{
+    gint tx, ty;
+    gtk_tree_view_convert_widget_to_tree_coords(_SELF(self),
+                                                NUM2INT(wx), NUM2INT(wy),
+                                                &tx, &ty);
+    return rb_ary_new3(2, INT2NUM(tx), INT2NUM(ty));
+}
+#endif
+
 static VALUE
 treeview_enable_model_drag_dest(self, targets, actions)
     VALUE self, targets, actions;
@@ -771,6 +836,14 @@ Init_gtk_treeview()
     rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
     rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
     rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gTv, "convert_bin_window_to_tree_coords", treeview_convert_bin_window_to_tree_coords, 2);
+    rb_define_method(gTv, "convert_bin_window_to_widget_coords", treeview_convert_bin_window_to_widget_coords, 2);
+    rb_define_method(gTv, "convert_tree_to_bin_window_coords", treeview_convert_tree_to_bin_window_coords, 2);
+    rb_define_method(gTv, "convert_tree_to_widget_coords", treeview_convert_tree_to_widget_coords, 2);
+    rb_define_method(gTv, "convert_widget_to_bin_window_coords", treeview_convert_widget_to_bin_window_coords, 2);
+    rb_define_method(gTv, "convert_widget_to_tree_coords", treeview_convert_widget_to_tree_coords, 2);
+#endif
     rb_define_method(gTv, "enable_model_drag_dest", treeview_enable_model_drag_dest, 2);
     rb_define_method(gTv, "enable_model_drag_source", treeview_enable_model_drag_source, 3);
     rb_define_method(gTv, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
