@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/25 17:50:41 $
+  $Author: ggc $
+  $Date: 2007/07/05 13:13:09 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -458,6 +458,16 @@ gdkdisplay_supports_input_shapes(self)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+gdkdisplay_trigger_tooltip_query(self)
+    VALUE self;
+{
+    gtk_tooltip_trigger_tooltip_query(_SELF(self));
+    return self;
+}
+#endif
+
 void 
 Init_gtk_gdk_display()
 {
@@ -537,5 +547,8 @@ Init_gtk_gdk_display()
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(gdkDisplay, "supports_shapes", gdkdisplay_supports_shapes, 0);
     rb_define_method(gdkDisplay, "supports_input_shapes", gdkdisplay_supports_input_shapes, 0);
+#endif
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gdkDisplay, "trigger_tooltip_query", gdkdisplay_trigger_tooltip_query, 0);
 #endif
 }
