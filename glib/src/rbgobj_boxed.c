@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2007/07/04 13:13:20 $
+  $Date: 2007/07/06 10:00:33 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -134,7 +134,8 @@ rbgobj_boxed_initialize(obj, boxed)
 
 gpointer
 rbgobj_boxed_get(obj, gtype)
-    VALUE obj, gtype;
+    VALUE obj;
+    GType gtype;
 {
     boxed_holder* holder;
     Data_Get_Struct(obj, boxed_holder, holder);

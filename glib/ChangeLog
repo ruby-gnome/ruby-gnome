@@ -1,3 +1,9 @@
+2007-07-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_boxed.c (rbgobj_boxed_get): fix argument type to match 
+	with its prototype. Repored by Guillaume Cottenceau.
+	[ruby-gnome2-devel-en] HEAD doesn't build
+
 2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/global.h, src/rbglib.h, src/rbgobj_boxed.c, src/rbgobj_closure.c,
