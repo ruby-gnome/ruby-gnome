@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: sakai $
-  $Date: 2007/07/06 10:00:33 $
+  $Date: 2007/07/06 15:56:20 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -138,13 +138,13 @@ rbgobj_boxed_get(obj, gtype)
     GType gtype;
 {
     boxed_holder* holder;
-    Data_Get_Struct(obj, boxed_holder, holder);
 
     if (!RTEST(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
         rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
                  rb_class2name(CLASS_OF(obj)), 
                  rb_class2name(GTYPE2CLASS(gtype)));
 
+    Data_Get_Struct(obj, boxed_holder, holder);
     if (!holder->boxed)
         rb_raise(rb_eArgError, "uninitialize %s", rb_class2name(CLASS_OF(obj)));
 
