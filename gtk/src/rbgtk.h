@@ -3,8 +3,8 @@
 
   rbgtk.h -
 
-  $Author: mutoh $
-  $Date: 2006/11/11 19:21:04 $
+  $Author: sakai $
+  $Date: 2007/07/06 10:13:27 $
 
   Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -115,7 +115,7 @@ extern GType gtk_recent_data_get_type();
  */
 typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
                                          gint column, GValue *value);
-extern void rbgtk_register_treeiter_set_value_func(VALUE klass, rbgtkiter_set_value_func);
+extern void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
 
 /*
  * Gtk::SelectionData

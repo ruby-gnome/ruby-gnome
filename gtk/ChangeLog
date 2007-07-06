@@ -1,3 +1,9 @@
+2007-07-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgtk.h: fix prototype of rbgtk_register_treeiter_set_value_func()
+	to match with its implementation.  Repored by Guillaume Cottenceau.
+	[ruby-gnome2-devel-en] HEAD doesn't build
+
 2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: use rbglib_poll() if possible, regardless of
