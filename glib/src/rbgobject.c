@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2007/07/01 17:43:55 $
+  $Author: ggc $
+  $Date: 2007/07/07 15:14:33 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -190,7 +190,7 @@ rbgobj_gobject_initialize(obj, cobj)
 {
     gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
-        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* is already exist.");
+        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* already exists.");
 
     Data_Get_Struct(obj, gobj_holder, holder);
     holder->cinfo = RVAL2CINFO(obj);
