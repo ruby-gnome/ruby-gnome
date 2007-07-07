@@ -3,8 +3,8 @@
 
   rbglib_messages.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/15 04:31:38 $
+  $Author: sakai $
+  $Date: 2007/07/07 09:58:07 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 
@@ -16,6 +16,14 @@
 ************************************************/
 
 #include "global.h"
+
+#ifndef HAVE_RB_SOURCEFILE
+#define rb_sourcefile() (ruby_sourcefile)
+#endif
+
+#ifndef HAVE_RB_SOURCELINE
+#define rb_sourceline() (ruby_sourceline)
+#endif
 
 static VALUE rbglib_log_handler_procs;
 static ID id_call;
@@ -47,10 +55,8 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     gpointer user_data;
 {
     if (! log_canceled){
-#if RUBY_VERSION_CODE > 170
         ruby_set_current_source();
-#endif
-        g_printerr("%s: line %d\n", ruby_sourcefile, ruby_sourceline);
+        g_printerr("%s: line %d\n", rb_sourcefile(), rb_sourceline());
         g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
     } else {
         g_log_default_handler(log_domain, log_level, message, user_data);

@@ -3,8 +3,8 @@
 
   rbglib_completion.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/14 10:33:18 $
+  $Author: sakai $
+  $Date: 2007/07/07 09:58:07 $
 
   Copyright (C) 2005,2006  Masao Mutoh
 ************************************************/
@@ -119,11 +119,7 @@ comp_remove_items(self, items)
         VALUE data = RARRAY(items)->ptr[i];
         VALUE item = rb_hash_aref(items_internal, data);
         list = g_list_append(list, (gpointer)item);
-#if RUBY_VERSION_CODE < 180
-        rb_funcall(items_internal, rb_intern("delete"), 1, data);
-#else
         rb_hash_delete(items_internal, data);
-#endif
     }
     g_completion_remove_items(_SELF(self), list);
 
