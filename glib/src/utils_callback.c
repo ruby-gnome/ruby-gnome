@@ -4,7 +4,7 @@
   utils_callback.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 14:03:35 $
+  $Date: 2007/07/07 18:23:51 $
 
   Copyright (C) 2007  Ruby-GNOME2 Project
 
@@ -72,8 +72,7 @@ callback_info_run_body(VALUE v)
 static VALUE
 callback_info_run(struct callback_info* pinfo)
 {
-    int state = 0;
-    pinfo->ret = rb_protect(callback_info_run_body, (VALUE)pinfo, &state);
+    pinfo->ret = rbgutil_protect(callback_info_run_body, (VALUE)pinfo);
     if (pinfo->done_cond) {
         g_mutex_lock(pinfo->done_mutex);
         g_cond_signal(pinfo->done_cond);
@@ -103,6 +102,7 @@ listen_callback_pipe(void)
         /* To make it reentrant we need to create a new thread. */
         /* It may be nice to use thread pool. */
         rb_thread_create(callback_info_run, info);
+        rb_thread_schedule();
     }
 }
 
@@ -132,6 +132,8 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     info.done_cond  = g_cond_new();
     pinfo = &info;
 
+    g_mutex_lock(info.done_mutex);
+
     /* trigger ruby callback thread */
     /* lock pipe_mutex to write atomically */
     g_mutex_lock(pipe_mutex);
@@ -139,7 +141,6 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     g_mutex_unlock(pipe_mutex);
 
     /* waiting callback to end */
-    g_mutex_lock(info.done_mutex);
     g_cond_wait(info.done_cond, info.done_mutex);
     g_mutex_unlock(info.done_mutex);
 

@@ -1,3 +1,12 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/utils_callback.c (callback_info_run): use rbgutil_protect().
+	* src/utils_callback.c (listen_callback_pipe): call
+	rb_thread_schedule() to activate newly created thread.
+	* src/utils_callback.c (invoke_callback_in_ruby_thread):
+	g_mutex_lock(info.done_mutex) should be done before writing
+	data to pipe.
+
 2007-07-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/extconf.rb, src/rbglib_messages.c: call ruby_set_current_source()
