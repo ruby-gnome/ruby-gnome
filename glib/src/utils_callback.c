@@ -4,7 +4,7 @@
   utils_callback.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 08:15:26 $
+  $Date: 2007/07/07 14:03:35 $
 
   Copyright (C) 2007  Ruby-GNOME2 Project
 
@@ -22,6 +22,11 @@
 
 #ifndef HAVE_RB_ERRINFO
 #define rb_errinfo() (ruby_errinfo)
+#endif
+
+/* FIXME: ruby 1.9's is_ruby_native_thread() always returnes Qtrue... */
+#ifdef HAVE_RB_THREAD_BLOCKING_REGION
+#define is_ruby_native_thread() (!g_thread_supported())
 #endif
 
 static gboolean callback_initialized = FALSE;

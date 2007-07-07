@@ -4,7 +4,7 @@
   rbglib_messages.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 09:58:07 $
+  $Date: 2007/07/07 14:03:35 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 
@@ -55,7 +55,9 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
     gpointer user_data;
 {
     if (! log_canceled){
+#ifdef HAVE_RUBY_SET_CURRENT_SOURCE
         ruby_set_current_source();
+#endif
         g_printerr("%s: line %d\n", rb_sourcefile(), rb_sourceline());
         g_printerr("   %s-%s **:%s\n", log_domain, logmessage(log_level), message);
     } else {

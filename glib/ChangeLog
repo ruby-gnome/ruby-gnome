@@ -1,5 +1,11 @@
 2007-07-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/extconf.rb, src/rbglib_messages.c: call ruby_set_current_source()
+	only if it exists. Current ruby 1.9 doesn't have it.
+
+	* src/extconf.rb, src/utils_callback.c: don't use is_ruby_native_thread
+	on ruby 1.9.
+
 	* src/rbglib_messages.c, extconf.rb: fix to compile on ruby 1.9:
 	  ruby_sourcefile -> rb_sourcefile()
 	  ruby_sourceline -> rb_sourceline()

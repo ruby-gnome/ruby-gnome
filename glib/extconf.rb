@@ -27,6 +27,8 @@ have_func("rb_exec_recursive")
 have_func("rb_errinfo")
 have_func("rb_sourcefile")
 have_func("rb_sourceline")
+have_func("ruby_set_current_source")
+have_func("rb_thread_blocking_region")
 have_header('ruby/ruby.h')
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
