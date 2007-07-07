@@ -59,6 +59,15 @@ class TestGLib < Test::Unit::TestCase
     #rb_define_module_function(mGLog, "remove_handler", rbglib_m_log_remove_handler, 2);
   end
 
+  def test_object
+    assert_raises(GLib::NoPropertyError) {
+      GLib::Object.property("foo")
+    }
+
+    assert_raises(GLib::NoSignalError) {
+      GLib::Object.signal("foo")
+    }
+  end
 
   def test_interface_extend
     assert_raises(TypeError){
@@ -78,6 +87,7 @@ class TestGLib < Test::Unit::TestCase
       GC.start
       assert(box.children.all?{|item| item.is_a? mybutton })
     rescue LoadError
+    rescue RuntimeError
     end
   end
 
@@ -113,5 +123,13 @@ class TestGLib < Test::Unit::TestCase
     ary = []
     ObjectSpace.each_object(klass) { |a| ary.push(a) }
     assert(ary.size < 1000)
+  end
+
+  def test_gtype
+    assert_equal(GLib::Object.gtype, GLib::Type["GObject"])
+    assert_equal(GLib::Interface.gtype, GLib::Type["GInterface"])
+
+    obj = GLib::Object.new
+    assert_equal(obj.gtype, GLib::Object.gtype)
   end
 end
