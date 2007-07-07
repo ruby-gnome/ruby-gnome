@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: ggc $
-  $Date: 2007/07/07 14:39:09 $
+  $Date: 2007/07/07 14:43:52 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -170,8 +170,14 @@ initialize(argc, argv, self)
         }
     } else if (argc == 4) {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+        int width = NUM2INT(arg2);
+        int height = NUM2INT(arg3);
+#if ! RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+        if (width < 0 || height < 0)
+            rb_warning("For scaling on load, a negative value for width or height are not supported in GTK+ < 2.8.0");
+#endif
         buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
-                                                NUM2INT(arg2), NUM2INT(arg3), 
+                                                width, height,
                                                 RTEST(arg4), &error);
         if (buf == NULL){
             rb_gc();
