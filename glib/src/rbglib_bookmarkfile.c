@@ -3,8 +3,8 @@
 
   rbglib_bookmarkfile.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/23 17:43:03 $
+  $Author: sakai $
+  $Date: 2007/07/07 08:25:33 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -69,8 +69,8 @@ bf_load_from_data(self, data)
     GError* error = NULL;
     StringValue(data);
     gboolean ret = g_bookmark_file_load_from_data(_SELF(self),
-                                                  (const gchar*)RVAL2CSTR(data),
-                                                  RSTRING(data)->len,
+                                                  RSTRING_PTR(data),
+                                                  RSTRING_LEN(data),
                                                   &error);
     if (!ret) RAISE_GERROR(error);
     return self;

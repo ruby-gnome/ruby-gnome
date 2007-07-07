@@ -1,5 +1,9 @@
 2007-07-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbglib_bookmarkfile.c: fix to compile on ruby 1.9:
+	  RSTRING(v)->ptr -> RSTRING_PTR(v),
+	  RSTRING(v)->len -> RSTRING_LEN(v).
+
 	* test/test_glib2.rb: add some tests.
 
 	* src/rbbutil.h: change G_PROTECT_CALLBACK() to support calling
