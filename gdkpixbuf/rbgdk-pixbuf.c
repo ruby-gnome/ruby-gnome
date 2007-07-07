@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/27 17:49:45 $
+  $Author: ggc $
+  $Date: 2007/07/07 14:39:09 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -181,7 +181,7 @@ initialize(argc, argv, self)
                                                     RTEST(arg4), &error);
         }
 #else
-        rb_warning("Not supported in GTK+-2.4.x.");
+        rb_warning("Scaling on load not supported in GTK+ < 2.6.0");
         buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
         if (buf == NULL){
             error = NULL;
@@ -200,7 +200,7 @@ initialize(argc, argv, self)
                                                    NUM2INT(arg2), NUM2INT(arg3), &error);
         }
 #else
-        rb_warning("Not supported in GTK+-2.0.x.");
+        rb_warning("Sizing on load not supported in GTK+ < 2.4.0");
         buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
         if (buf == NULL){
             error = NULL;
