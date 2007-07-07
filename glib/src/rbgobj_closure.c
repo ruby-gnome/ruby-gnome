@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2007/07/04 13:13:20 $
+  $Date: 2007/07/07 08:15:26 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -12,11 +12,6 @@
 **********************************************************************/
 
 #include "global.h"
-#ifdef G_OS_WIN32
-#undef HAVE_NATIVETHREAD /* FIXME */
-#else
-#include <unistd.h>
-#endif
 
 static ID id_call;
 static gboolean rclosure_initialized = FALSE;
@@ -111,73 +106,6 @@ rclosure_marshal_do(VALUE arg_)
     return Qnil;
 }
 
-#ifdef HAVE_NATIVETHREAD
-static GStaticMutex callback_init_mutex = G_STATIC_MUTEX_INIT;
-static GMutex *callback_mutex = NULL;
-static GCond *callback_done_cond = NULL;
-static GCond *callback_finished_cond = NULL;
-static struct marshal_arg* m_arg = NULL;
-static int callback_fd[2];
-
-static VALUE
-rclosure_marshal_pop(void) {
- for (;;) {
-   char buf[1];
-   ssize_t size;
-
-   /* wait untill we're triggered. If this happens we can read from the pipe
-    * and it's guaranteed that the needed mutexes are initialized */
-   rb_thread_wait_fd(callback_fd[0]);
-   size = read(callback_fd[0], buf, 1);
-
-   g_mutex_lock(callback_mutex);
-   if (m_arg) {
-       G_PROTECT_CALLBACK(rclosure_marshal_do, m_arg);
-       m_arg = NULL;
-   }
-   g_cond_signal(callback_done_cond);
-   g_mutex_unlock(callback_mutex);
- }
-}
-
-static void
-init_callback_mutex(void) {
-  if (callback_mutex == NULL) {
-    g_static_mutex_lock(&callback_init_mutex);
-    if (callback_mutex == NULL) {
-      callback_mutex = g_mutex_new();
-      callback_done_cond = g_cond_new();
-      callback_finished_cond = g_cond_new();
-    } /* else some other thread initialised it */
-
-    g_static_mutex_unlock(&callback_init_mutex);
-  }
-}
-
-static void
-rclosure_marshal_push(struct marshal_arg* arg) {
-  ssize_t size;
-
-  init_callback_mutex();
-
-  g_mutex_lock(callback_mutex);
-  while (m_arg) {
-    /* Wait for another callback to finish up */
-    g_cond_wait(callback_finished_cond, callback_mutex);
-  }
-  m_arg = arg;
-  /* trigger ruby callback thread */
-  size = write(callback_fd[1],"c", 1);
-
-  /* Wait until the ruby callback thread signals is done and then signal
-   * waiting callback pushes that we're finished 
-   */
-  g_cond_wait(callback_done_cond, callback_mutex);
-  g_cond_signal(callback_finished_cond);
-  g_mutex_unlock(callback_mutex);
-}
-#endif
-
 static void
 rclosure_marshal(GClosure*       closure,
                  GValue*         return_value,
@@ -200,18 +128,7 @@ rclosure_marshal(GClosure*       closure,
     arg.invocation_hint = invocation_hint;
     arg.marshal_data    = marshal_data;
 
-#ifdef HAVE_NATIVETHREAD
-    if (!is_ruby_native_thread()) {
-        if (!g_thread_supported()) {
-            rb_bug("glib signal in another thread, but gthreads not supported");
-        }
-        rclosure_marshal_push(&arg);
-    } else {
-       G_PROTECT_CALLBACK(rclosure_marshal_do, &arg);
-    }
-#else
     G_PROTECT_CALLBACK(rclosure_marshal_do, &arg);
-#endif
 }
 
 static void rclosure_weak_notify(gpointer data, GObject* where_the_object_was);
@@ -329,18 +246,6 @@ static void
 Init_rclosure()
 {
     id_call = rb_intern("call");
-
-#ifdef HAVE_NATIVETHREAD
-    /* startup the ruby thread to pull callbacks from other threads */
-    {
-        static VALUE thread;
-        if (pipe(callback_fd) != 0)
-            rb_bug("Unable to create glib callback thread\n");
-        thread = rb_thread_create(rclosure_marshal_pop, NULL);
-        rb_global_variable(&thread);
-    }
-#endif
-
     rclosure_initialized = TRUE;
     rb_set_end_proc(rclosure_end_proc, Qnil);
 }

@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/07 08:15:26 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -17,6 +17,7 @@
 VALUE mGLib;
 
 extern void Init_utils_int64();
+extern void Init_utils_callback();
 extern void Init_gutil();
 extern void Init_glib_error();
 extern void Init_glib_threads();
@@ -44,15 +45,7 @@ char *
 rbg_string_value_ptr(ptr)
     volatile VALUE *ptr;
 {
-    VALUE s = *ptr;
-    if (TYPE(s) != T_STRING) {
-        s = rb_str_to_str(s);
-        *ptr = s;
-    }
-    if (!RSTRING_PTR(s)) {
-        rb_str_modify(s);
-    }
-    return RSTRING_PTR(s);
+    return rb_string_value_ptr(ptr);
 }
 
 VALUE
@@ -276,6 +269,7 @@ union       GDoubleIEEE754;
 
 /*    Init_mem(); */
     Init_utils_int64();
+    Init_utils_callback();
     Init_gutil();
     Init_glib_error();
     Init_glib_threads();

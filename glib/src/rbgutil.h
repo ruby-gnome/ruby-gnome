@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: sakai $
-  $Date: 2007/07/04 13:13:19 $
+  $Date: 2007/07/07 08:15:26 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -28,7 +28,7 @@ extern "C" {
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
 #define G_SET_SYMBOL_PROPERTY(gtype, name) \
      rbgobj_register_property_getter(gtype, name, rbgutil_sym_g2r_func)
-#define G_PROTECT_CALLBACK(func, data) (rbgutil_protect((VALUE(*)(VALUE))func, (VALUE)data))
+#define G_PROTECT_CALLBACK(func, data) (rbgutil_invoke_callback((VALUE(*)(VALUE))func, (VALUE)data))
 
 #define GLIST2ARY(list)           (rbgutil_glist2ary(list))
 #define GLIST2ARYF(list)          (rbgutil_glist2ary_and_free(list))
@@ -50,6 +50,7 @@ extern VALUE rbgutil_gslist2ary_and_free(GSList* list);
 extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);
 extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList* list, GType gtype);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
+extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;

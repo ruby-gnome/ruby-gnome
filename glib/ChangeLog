@@ -1,3 +1,15 @@
+2007-07-07  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbbutil.h: change G_PROTECT_CALLBACK() to support calling
+	from non-ruby thread.
+
+	* src/rbgutil.c: move rbgutil_protect() into utils_callback.c.
+
+	* src/rbgobj_closure.c: separate stuffs that relate to thread into
+	utils_callback.c.
+
+	* src/utils_callback.c: new file for callback invocation.
+
 2007-07-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_boxed.c (rbgobj_boxed_get): type check should be done

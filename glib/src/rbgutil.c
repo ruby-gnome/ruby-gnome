@@ -4,7 +4,7 @@
   rbgutil.c -
 
   $Author: sakai $
-  $Date: 2007/07/04 13:13:19 $
+  $Date: 2007/07/07 08:15:26 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -168,22 +168,6 @@ VALUE
 rbgutil_generic_gtype(VALUE self)
 {
     return generic_s_gtype(CLASS_OF(self));
-}
-
-
-VALUE
-rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
-{
-  int state = 0;
-  VALUE ret = rb_protect(func, data, &state);
-#ifdef HAVE_RB_ERRINFO
-  if (state && !NIL_P(rb_errinfo())) {
-#else
-  if (state && !NIL_P(ruby_errinfo)) {
-#endif
-      rb_funcall(mGLib, rb_intern("exit_application"), 1, EXIT_FAILURE);
-  }
-  return ret;
 }
 
 void
