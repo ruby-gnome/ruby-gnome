@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: ggc $
-  $Date: 2007/07/07 14:43:52 $
+  $Date: 2007/07/07 14:46:09 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -431,7 +431,7 @@ scale(argc, argv, self)
     if (!NIL_P(interp_type))
         type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
 
-    gdk_pixbuf_scale(_SELF(dest), _SELF(self),
+    gdk_pixbuf_scale(_SELF(self), _SELF(dest),
                      NUM2INT(dest_x), NUM2INT(dest_y), 
                      NUM2INT(dest_width), NUM2INT(dest_height),
                      NUM2DBL(offset_x), NUM2DBL(offset_y),
