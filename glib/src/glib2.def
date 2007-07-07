@@ -67,6 +67,7 @@ EXPORTS
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
 	rbgutil_protect
+	rbgutil_invoke_callback
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
 	rbgobj_fund_define_fundamental
