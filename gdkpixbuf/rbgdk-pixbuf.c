@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: ggc $
-  $Date: 2007/07/07 15:08:10 $
+  $Date: 2007/07/07 16:14:11 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -266,7 +266,13 @@ static VALUE
 copy(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gdk_pixbuf_copy(_SELF(self)));
+    VALUE ret;
+    GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
+    if (dest == NULL)
+        return Qnil;
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
+    return ret;
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
@@ -524,14 +530,26 @@ static VALUE
 rotate_simple(self, angle)
     VALUE self, angle;
 {
-    return GOBJ2RVAL(gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION)));
+    VALUE ret;
+    GdkPixbuf* dest = gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION));
+    if (dest == NULL)
+        return Qnil;
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
+    return ret;
 }
 
 static VALUE
 flip(self, horizontal)
     VALUE self, horizontal;
 {
-    return GOBJ2RVAL(gdk_pixbuf_flip(_SELF(self), RTEST(horizontal)));
+    VALUE ret;
+    GdkPixbuf* dest = gdk_pixbuf_flip(_SELF(self), RTEST(horizontal));
+    if (dest == NULL)
+        return Qnil;
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
+    return ret;
 }
 #endif
 
@@ -539,14 +557,14 @@ static VALUE
 add_alpha(self, substitute_color, r, g, b)
     VALUE self, substitute_color, r, g, b;
 {
-    VALUE ret = Qnil;
-    GdkPixbuf* buf = gdk_pixbuf_add_alpha(_SELF(self),
-                                          RTEST(substitute_color),
-                                          FIX2INT(r), FIX2INT(g), FIX2INT(b));
-    if (buf){
-        ret = GOBJ2RVAL(buf);
-        g_object_unref(buf);
-    }
+    VALUE ret;
+    GdkPixbuf* dest = gdk_pixbuf_add_alpha(_SELF(self),
+                                           RTEST(substitute_color),
+                                           FIX2INT(r), FIX2INT(g), FIX2INT(b));
+    if (dest == NULL)
+        return Qnil;
+    ret = GOBJ2RVAL(dest);
+    g_object_unref(dest);
     return ret;
 }
 
