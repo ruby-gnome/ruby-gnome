@@ -4,7 +4,7 @@
   rbgdk-pixbuf.c -
 
   $Author: ggc $
-  $Date: 2007/07/07 14:46:09 $
+  $Date: 2007/07/07 15:08:10 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -408,6 +408,9 @@ scale_simple(argc, argv, self)
                                    NUM2INT(dest_width),
                                    NUM2INT(dest_height),
                                    type);
+    if (dest == NULL)
+        return Qnil;
+
     ret = GOBJ2RVAL(dest);
     g_object_unref(dest);
     return ret;
@@ -456,6 +459,9 @@ composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
         _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
         type, NUM2INT(overall_alpha), NUM2INT(check_size),
         NUM2UINT(color1), NUM2UINT(color2));
+
+    if (dest == NULL)
+        return Qnil;
 
     ret = GOBJ2RVAL(dest);
     g_object_unref(dest);
