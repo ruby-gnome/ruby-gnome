@@ -3,8 +3,8 @@
 
   rbgobj_gstrv.c -
 
-  $Author: mutoh $
-  $Date: 2006/05/17 14:00:24 $
+  $Author: sakai $
+  $Date: 2007/07/07 08:46:50 $
 
   Copyright (C) 2005  Masao Mutoh
 **********************************************************************/
@@ -44,16 +44,12 @@ strv_from_ruby(VALUE from, GValue* to)
     gstrv = g_new(gchar*, RARRAY(from)->len + 1);
 
     for (i = 0; i < RARRAY(from)->len; i++) {
-        gstrv[i] = RVAL2CSTR(RARRAY(from)->ptr[i]);
+        VALUE v = RARRAY(from)->ptr[i];
+        gstrv[i] = g_strdup(StringValuePtr(v));
     }
     gstrv[RARRAY(from)->len] = NULL;
 
     g_value_set_boxed(to, gstrv);
-
-/* This occurs:
-   *** glibc detected *** double free or corruption (fasttop): 0x0a59a4e8 ***
-    g_strfreev(gstrv);
-*/
 }
 
 void Init_gobject_gstrv()
