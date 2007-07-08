@@ -197,7 +197,7 @@ rb_gst_clock_entry_wait_async (VALUE self)
 
         g_assert (e != NULL);
         e->id = id;
-        e->callback = G_BLOCK_PROC ();
+        e->callback = rb_block_proc ();
         __callbacks = g_slist_append (__callbacks, e);
         return GENUM2RVAL (INT2FIX (gst_clock_id_wait_async (id,
                                                              __callback_dispatcher,

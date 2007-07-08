@@ -20,7 +20,7 @@
  *
  * $Author: sakai $
  *
- * $Date: 2006/06/13 08:18:35 $
+ * $Date: 2007/07/08 02:57:37 $
  *
  *****************************************************************************/
 
@@ -168,7 +168,7 @@ directory_visit(argc, argv, self)
 	}
 
 	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
+		func = rb_block_proc();
 	}
 	G_RELATIVE(self, func);
 
@@ -210,7 +210,7 @@ directory_visit_files(argc, argv, self)
 	}
 
 	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
+		func = rb_block_proc();
 	}
 	G_RELATIVE(self, func);
 

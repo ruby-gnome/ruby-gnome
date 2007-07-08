@@ -3,8 +3,8 @@
 
   rbgtkthreads.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/05 14:38:37 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:50 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -45,9 +45,9 @@ static VALUE
 rbgdk_threads_synchronize(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     gdk_threads_enter();
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     rb_funcall(func, id_call, 0);
     gdk_threads_leave();
     return Qnil;

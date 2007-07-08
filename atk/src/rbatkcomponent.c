@@ -3,8 +3,8 @@
 
   rbatkcomponent.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/27 17:37:26 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:51:52 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -26,7 +26,7 @@ static VALUE
 comp_add_focus_handler(self)
      VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return UINT2NUM(atk_component_add_focus_handler(_SELF(self), focus_handler));
 }

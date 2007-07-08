@@ -3,8 +3,8 @@
 
   rbgtkprintjob.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/26 16:11:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -125,7 +125,7 @@ remove_callback_reference(gpointer data)
 static VALUE
 pj_send(VALUE self)
 {
-    VALUE block = G_BLOCK_PROC();
+    VALUE block = rb_block_proc();
     G_CHILD_ADD(gPrintJob, block);
     gtk_print_job_send(_SELF(self), complete_func, (gpointer)block,
                        remove_callback_reference);

@@ -1,3 +1,7 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: use rb_block_proc directly instead of using G_BLOCK_PROC().
+
 2007-06-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbatkeditabletext.c: fix to compile on ruby 1.9

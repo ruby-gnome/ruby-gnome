@@ -3,8 +3,8 @@
 
   rbpangoattrlist.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/05 18:46:23 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:53:10 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -68,7 +68,7 @@ static VALUE
 attrlist_filter(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return BOXED2RVAL(pango_attr_list_filter(_SELF(self), 
                                              (PangoAttrFilterFunc)filter_func, 

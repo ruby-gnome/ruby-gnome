@@ -3,8 +3,8 @@
 
   rbgtksettings.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:15 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
@@ -62,7 +62,7 @@ settings_s_install_property(self, spec)
 {
     GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
     if (rb_block_given_p()){
-        VALUE func = G_BLOCK_PROC();
+        VALUE func = rb_block_proc();
         rb_hash_aset(prop_func_table, spec, func);
         gtk_settings_install_property_parser(pspec, (GtkRcPropertyParser)rc_property_parser);
     } else {

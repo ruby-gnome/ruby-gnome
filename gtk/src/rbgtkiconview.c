@@ -3,8 +3,8 @@
 
   rbgtkiconview.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -74,7 +74,7 @@ static VALUE
 iview_selected_foreach(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_icon_view_selected_foreach(_SELF(self), 
                                    (GtkIconViewForeachFunc)iview_foreach_func, 

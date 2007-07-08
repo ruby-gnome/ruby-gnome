@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004,2006 Ruby-GNOME2 Project
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -98,7 +98,7 @@ clipboard_set(self, targets)
     VALUE self, targets;
 {
     const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return gtk_clipboard_set_with_data(_SELF(self), 
                                        gtargets,
@@ -167,7 +167,7 @@ static VALUE
 clipboard_request_contents(self, target)
     VALUE self, target;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_clipboard_request_contents(_SELF(self), RVAL2ATOM(target),
                                    (GtkClipboardReceivedFunc)clipboard_received_func,
@@ -191,7 +191,7 @@ static VALUE
 clipboard_request_text(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_clipboard_request_text(_SELF(self),
                                (GtkClipboardTextReceivedFunc)clipboard_text_received_func,
@@ -214,7 +214,7 @@ static VALUE
 clipboard_request_image(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_clipboard_request_image(_SELF(self),
                                (GtkClipboardImageReceivedFunc)clipboard_image_received_func,
@@ -244,7 +244,7 @@ static VALUE
 clipboard_request_targets(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
 
     gtk_clipboard_request_targets(_SELF(self),
@@ -271,7 +271,7 @@ static VALUE
 clipboard_request_rich_text(self, buffer)
     VALUE self, buffer;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
 
     gtk_clipboard_request_rich_text(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)),

@@ -3,8 +3,8 @@
 
   rbgtklinkbutton.c -
 
-  $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -47,7 +47,7 @@ static VALUE
 lb_set_uri_hook(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_link_button_set_uri_hook((GtkLinkButtonUriFunc)link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;

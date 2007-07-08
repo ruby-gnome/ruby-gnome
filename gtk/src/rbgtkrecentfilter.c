@@ -3,8 +3,8 @@
 
   rbgtkrecentfilter.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/12 15:28:40 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -125,7 +125,7 @@ static VALUE
 rf_add_custom(self, needed)
      VALUE self, needed;
 {
-  VALUE func = G_BLOCK_PROC();
+  VALUE func = rb_block_proc();
   G_CHILD_ADD(mGtk, func);
 
   gtk_recent_filter_add_custom(_SELF(self),

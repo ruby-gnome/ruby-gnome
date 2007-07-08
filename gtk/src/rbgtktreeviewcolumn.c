@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: ggc $
-  $Date: 2007/07/04 12:30:31 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -154,7 +154,7 @@ static VALUE
 tvc_set_cell_data_func(self, renderer)
     VALUE self, renderer;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     G_RELATIVE(renderer, func);
     gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2CELLRENDERER(renderer),

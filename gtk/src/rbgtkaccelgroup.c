@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -37,7 +37,7 @@ gaccelgrp_connect(argc, argv, self)
     if (argc > 2){
         rb_scan_args(argc, argv, "31", &key, &mods, &flags, &closure);
         if (NIL_P(closure)){
-            rclosure = g_rclosure_new(G_BLOCK_PROC(), Qnil, NULL);
+            rclosure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
         } else {
             rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         }
@@ -49,7 +49,7 @@ gaccelgrp_connect(argc, argv, self)
     } else {
         rb_scan_args(argc, argv, "11", &path, &closure);
         if (NIL_P(closure)){
-            rclosure = g_rclosure_new(G_BLOCK_PROC(), Qnil, NULL);
+            rclosure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
         } else {
             rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
         }
@@ -122,7 +122,7 @@ gaccelgrp_find(self)
     VALUE self;
 {
     GtkAccelKey *result;
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
 
     result = gtk_accel_group_find(_SELF(self),
                                   (GtkAccelGroupFindFunc)gaccelgrp_find_func,

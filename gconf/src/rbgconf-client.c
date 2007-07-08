@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: sakai $
  *
- * $Date: 2005/01/13 15:18:07 $
+ * $Date: 2007/07/08 02:54:38 $
  *
  *****************************************************************************/
 
@@ -134,7 +134,7 @@ client_notify_add(argc, argv, self)
 	/* parse the namespace and get a block to be called on notifies */
 	rb_scan_args(argc, argv, "1&", &namespace, &func);
 	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
+		func = rb_block_proc();
 	}
 	G_RELATIVE(self, func);
 

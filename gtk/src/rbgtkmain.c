@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: mutoh $
-  $Date: 2006/07/17 11:28:34 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -283,7 +283,7 @@ static VALUE
 gtk_m_init_add(self)
     VALUE self;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
 
     gtk_init_add((GtkFunction)gtk_m_function2, (gpointer)func);
     G_RELATIVE(self, func);
@@ -294,7 +294,7 @@ static VALUE
 gtk_m_quit_add(self, main_level)
     VALUE self, main_level;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     VALUE rb_id;
     callback_info_t *info;
     guint id;
@@ -334,7 +334,7 @@ timeout_add(self, interval)
     callback_info_t *info;
     guint id;
 
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     info = ALLOC(callback_info_t);
     info->callback = func;
     info->key = id__timeout_callbacks__;
@@ -363,7 +363,7 @@ idle_add(self)
     callback_info_t *info;
     guint id;
 
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     info = ALLOC(callback_info_t);
     info->callback = func;
     info->key = id__idle_callbacks__;
@@ -384,7 +384,7 @@ idle_add_priority(self, priority)
     callback_info_t *info;
     guint id;
 
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     info = ALLOC(callback_info_t);
     info->callback = func;
     info->key = id__idle_callbacks__;
@@ -430,7 +430,7 @@ static VALUE
 gtk_m_key_snooper_install(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     VALUE id = INT2FIX(gtk_key_snooper_install(
                            (GtkKeySnoopFunc)gtk_m_key_snoop_func, 
                            (gpointer)func));

@@ -3,8 +3,8 @@
 
   rbgdkdisplay.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/25 17:50:41 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:50 $
 
   Copyright (C) 2003-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs
@@ -310,7 +310,7 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
     gchar** genvp = (gchar**)NULL;
 
     if (rb_block_given_p()) {
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 
@@ -371,7 +371,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
     gint standard_input, standard_output, standard_error;
 
     if (rb_block_given_p()) {
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 

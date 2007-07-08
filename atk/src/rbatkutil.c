@@ -3,8 +3,8 @@
 
   rbatkutil.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/15 17:30:46 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:51:52 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -49,7 +49,7 @@ rbatk_add_key_event_listener(self)
     VALUE self;
 {
     guint ret;
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     ret = atk_add_key_event_listener((AtkKeySnoopFunc)key_snoop_func, (gpointer)func);
     return UINT2NUM(ret);

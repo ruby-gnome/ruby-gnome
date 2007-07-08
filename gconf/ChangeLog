@@ -1,3 +1,8 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgconf-client.c, rbgconf-changeset.c: use rb_block_proc() directly
+	instead of using G_BLOCK_PROC.
+
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/*.rb, test/*.rb: Remove Gtk.init.
@@ -143,8 +148,8 @@
 
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
-	* src/*.[ch]: Updated headers to be more CVS-like using $Author: mutoh $
-	and $Date: 2006/06/17 14:39:54 $ macros.
+	* src/*.[ch]: Updated headers to be more CVS-like using $Author: sakai $
+	and $Date: 2007/07/08 02:54:38 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

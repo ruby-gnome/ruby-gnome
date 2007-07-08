@@ -1,3 +1,7 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
+
 2007-07-01  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/lib/gnomevfs.rb (GnomeVFS.read): support

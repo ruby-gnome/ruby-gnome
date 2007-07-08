@@ -3,8 +3,8 @@
 
   rbpangofontset.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/14 09:55:57 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:07:07 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -44,7 +44,7 @@ static VALUE
 fontset_foreach(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     pango_fontset_foreach(_SELF(self), 
                           (PangoFontsetForeachFunc)fontset_each, 

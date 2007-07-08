@@ -3,8 +3,8 @@
 
   rbgtksourcebuffer.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/02 18:40:34 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:02:28 $
 
   Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -201,7 +201,7 @@ sourcebuffer_begin_not_undoable_action(self)
     gtk_source_buffer_begin_not_undoable_action (_SELF (self));
 
     if (rb_block_given_p()) {
-	VALUE block = G_BLOCK_PROC ();
+	VALUE block = rb_block_proc ();
 	rb_funcall (block, rb_intern ("call"), 0);
 	gtk_source_buffer_end_not_undoable_action (_SELF (self));
     }
@@ -246,7 +246,7 @@ sourcebuffer_not_undoable_action (self)
 {
 	VALUE block, ret;
 
-	block = G_BLOCK_PROC ();
+	block = rb_block_proc ();
 	gtk_source_buffer_begin_not_undoable_action (_SELF (self));
 	ret = rb_funcall (block, rb_intern ("call"), 0);
 	gtk_source_buffer_end_not_undoable_action (_SELF (self));

@@ -3,8 +3,8 @@
 
   rbgtkprintoperation.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/15 23:46:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -101,7 +101,7 @@ po_run_page_setup_dialog(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "03", &parent, &page_setup, &settings);
 
     if (rb_block_given_p()) {
-        volatile VALUE func = G_BLOCK_PROC();
+        volatile VALUE func = rb_block_proc();
         G_CHILD_SET(gPrintOperation, rb_intern("setup_done_cb"), func);
         gtk_print_run_page_setup_dialog_async(RVAL2GOBJ(parent),
                                               RVAL2GOBJ(page_setup),

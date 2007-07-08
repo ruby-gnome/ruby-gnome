@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/25 17:50:41 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -394,7 +394,7 @@ gdkwin_invalidate_maybe_recurse(self, region)
 {
     VALUE func = (VALUE)NULL;
     if (rb_block_given_p()){
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
     gdk_window_invalidate_maybe_recurse(_SELF(self),

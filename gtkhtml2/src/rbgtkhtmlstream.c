@@ -3,8 +3,8 @@
 
   rbgtkhtmlbox.c
 
-  $Author: mutoh $
-  $Date: 2003/12/23 14:25:42 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:01:39 $
 
   Copyright (C) 2003 Masao Mutoh
   Copyright (C) 2003 Martin Povolny
@@ -74,7 +74,7 @@ static VALUE
 rb_html_stream_set_cancel_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);  
 
     html_stream_set_cancel_func(_SELF(self), abort_func, (gpointer)func);

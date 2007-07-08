@@ -3,8 +3,8 @@
 
   rbpangocoverage.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 17:37:41 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:53:10 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -82,7 +82,7 @@ coverage_s_from_bytes(self, bytes)
 {
     StringValue(bytes);
     return BOXED2RVAL(pango_coverage_from_bytes((guchar*)RVAL2CSTR(bytes), 
-                                                RSTRING(bytes)->len),
+                                                RSTRING_LEN(bytes)),
                       PANGO_TYPE_COVERAGE);
 }
 

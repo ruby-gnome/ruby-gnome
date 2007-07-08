@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -58,7 +58,7 @@ cont_foreach(argc, argv, self)
 
     rb_scan_args(argc, argv, "01", &callback);
     if (NIL_P(callback)) {
-        callback = G_BLOCK_PROC();
+        callback = rb_block_proc();
     }
     gtk_container_foreach(_SELF(self), exec_callback, (gpointer)callback);
     return self;
@@ -74,7 +74,7 @@ cont_forall(argc, argv, self)
 
     rb_scan_args(argc, argv, "01", &callback);
     if (NIL_P(callback)) {
-        callback = G_BLOCK_PROC();
+        callback = rb_block_proc();
     }
     gtk_container_forall(_SELF(self), exec_callback, (gpointer)callback);
     return self;

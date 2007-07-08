@@ -3,8 +3,8 @@
 
   rbgtkcombobox.c -
 
-  $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -183,7 +183,7 @@ static VALUE
 combobox_set_row_separator_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_combo_box_set_row_separator_func(_SELF(self), 
                                          (GtkTreeViewRowSeparatorFunc)row_separator_func,

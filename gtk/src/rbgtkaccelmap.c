@@ -3,8 +3,8 @@
 
   rbgtkaccelmap.c -
 
-  $Author: mutoh $
-  $Date: 2004/05/20 16:57:59 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -81,7 +81,7 @@ static VALUE
 accel_map_foreach(self)
     VALUE self;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     gtk_accel_map_foreach((gpointer)func,
                           (GtkAccelMapForeach)accel_map_foreach_func);
     return self;
@@ -91,7 +91,7 @@ static VALUE
 accel_map_foreach_unfilterd(self)
     VALUE self;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     gtk_accel_map_foreach_unfiltered((gpointer)func,
                                      (GtkAccelMapForeach)accel_map_foreach_func);
     return self;

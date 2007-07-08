@@ -3,8 +3,8 @@
 
   rbgtkprintsettings.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -68,7 +68,7 @@ static VALUE
 ps_foreach(VALUE self)
 {
     gtk_print_settings_foreach(_SELF(self), ps_foreach_cb,
-                               (gpointer)G_BLOCK_PROC());
+                               (gpointer)rb_block_proc());
     return self;
 }
 

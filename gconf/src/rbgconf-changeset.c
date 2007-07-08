@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: sakai $
  *
- * $Date: 2003/06/26 15:17:01 $
+ * $Date: 2007/07/08 02:54:38 $
  *
  *****************************************************************************/
 
@@ -106,7 +106,7 @@ change_set_foreach(self)
 {
 	VALUE func;
 
-	func = G_BLOCK_PROC();
+	func = rb_block_proc();
 	G_RELATIVE(self, func);
 	gconf_change_set_foreach(_SELF(self),
 			(GConfChangeSetForeachFunc)change_set_foreach_func,

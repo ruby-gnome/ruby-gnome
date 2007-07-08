@@ -3,8 +3,8 @@
 
   rbgtkassistant.c -
 
-  $Author: mutoh $
-  $Date: 2007/01/29 16:31:27 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -85,7 +85,7 @@ static VALUE
 ass_set_forward_page_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_assistant_set_forward_page_func(_SELF(self), (GtkAssistantPageFunc)ass_page_func, (gpointer)func, NULL);
     return self;

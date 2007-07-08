@@ -3,8 +3,8 @@
 
   rbpangoscriptiter.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/17 17:09:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:53:10 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -50,7 +50,7 @@ rbpango_scriptiter_initialize(self, text)
     PangoScriptIter* iter;
 
     StringValue(text);
-    iter = pango_script_iter_new(RVAL2CSTR(text), RSTRING(text)->len);
+    iter = pango_script_iter_new(RVAL2CSTR(text), RSTRING_LEN(text));
     G_INITIALIZE(self, iter);
     return Qnil;
 }

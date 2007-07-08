@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.10 2005/09/25 17:53:07 mutoh Exp $ */
+/* $Id: rbgnome-client.c,v 1.11 2007/07/08 02:55:33 sakai Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
@@ -337,7 +337,7 @@ client_request_interaction(argc, argv, self)
     VALUE dialog_type, args, proc;
 
     rb_scan_args(argc, argv, "1*", &dialog_type, &args);
-    proc = G_BLOCK_PROC();
+    proc = rb_block_proc();
     rb_ary_unshift(args, proc);
     gnome_client_request_interaction(_SELF(self),
                                      RVAL2GENUM(dialog_type, GNOME_TYPE_DIALOG_TYPE),

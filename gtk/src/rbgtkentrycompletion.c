@@ -3,8 +3,8 @@
 
   rbgtkentrycompletion.c -
 
-  $Author: ggc $
-  $Date: 2005/09/11 15:40:21 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -45,7 +45,7 @@ static VALUE
 entryc_set_match_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_entry_completion_set_match_func(_SELF(self), 
                                         (GtkEntryCompletionMatchFunc)entryc_match_func,

@@ -160,7 +160,7 @@ static void __gda_main(data)
 static VALUE rb_gda_main(self)
     VALUE self;
 {
-    __gda_callback = rb_block_given_p() ? G_BLOCK_PROC() : Qnil;
+    __gda_callback = rb_block_given_p() ? rb_block_proc() : Qnil;
     gda_main_run(__gda_main, NULL);
     return Qnil;
 }

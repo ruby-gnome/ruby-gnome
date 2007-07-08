@@ -3,8 +3,8 @@
 
   rbgtkcolorsel.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/22 15:42:55 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -136,7 +136,7 @@ static VALUE
 colorsel_s_set_change_palette_hook(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
 
     rb_cvar_set(gColorSel, rb_intern("__palette_proc__"), func, 0);
     gtk_color_selection_set_change_palette_with_screen_hook(

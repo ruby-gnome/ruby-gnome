@@ -25,8 +25,8 @@
 
     ***
 
-    $Author: silicio $
-    $Date: 2006/06/13 22:32:16 $
+    $Author: sakai $
+    $Date: 2007/07/08 03:02:08 $
 
     *** 
 
@@ -545,7 +545,7 @@ static VALUE
 set_on_new_window_block(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func); 
     new_win_sig = 
         g_signal_connect(RVAL2GOBJ(self), "new_window",

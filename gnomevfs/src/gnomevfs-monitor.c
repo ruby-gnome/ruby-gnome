@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: ktou $
+ * $Author: sakai $
  *
- * $Date: 2007/06/18 10:22:58 $
+ * $Date: 2007/07/08 02:57:37 $
  *
  *****************************************************************************/
 
@@ -108,7 +108,7 @@ monitor_initialize(argc, argv, self)
 	}
 
 	if (NIL_P(func)) {
-		func = G_BLOCK_PROC();
+		func = rb_block_proc();
 	}
 	G_RELATIVE(self, func);
 

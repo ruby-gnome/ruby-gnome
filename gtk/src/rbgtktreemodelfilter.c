@@ -3,8 +3,8 @@
 
   rbgtktreemodelfilter.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -63,7 +63,7 @@ static VALUE
 treemodelfilter_set_visible_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_tree_model_filter_set_visible_func(_SELF(self), 
                                            (GtkTreeModelFilterVisibleFunc)visible_func, 
@@ -100,7 +100,7 @@ treemodelfilter_set_modify_func(argc, argv, self)
     VALUE* argv;
     VALUE  self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     gint i;
     GType* types;
 

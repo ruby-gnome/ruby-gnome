@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: ggc $
-  $Date: 2007/07/04 08:33:57 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -774,7 +774,7 @@ widget_s_install_style_property(self, spec)
 
     gclass = (GtkWidgetClass *)g_type_class_ref(cinfo->gtype);
     if (rb_block_given_p()){
-        VALUE func = G_BLOCK_PROC();
+        VALUE func = rb_block_proc();
         rb_hash_aset(style_prop_func_table, spec, func);
         gtk_widget_class_install_style_property_parser(gclass, pspec, 
                                                        (GtkRcPropertyParser)rc_property_parser);

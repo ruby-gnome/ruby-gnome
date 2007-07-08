@@ -3,8 +3,8 @@
 
   rbgtkstock.c -
 
-  $Author: ggc $
-  $Date: 2007/07/03 16:30:52 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
 ************************************************/
@@ -88,7 +88,7 @@ stock_m_set_translate_func(klass, domain)
     VALUE klass;
     VALUE domain;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(klass, func);
     gtk_stock_set_translate_func(RVAL2CSTR(domain),
                                  (GtkTranslateFunc)translate_func, 

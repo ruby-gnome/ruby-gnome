@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: ggc $
-  $Date: 2007/07/04 12:53:39 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -113,7 +113,7 @@ treeview_insert_column(argc, argv, self)
                                                    NUM2INT(args[1])));
     } else if (argc == 3) {
         int ret;
-        VALUE func = G_BLOCK_PROC();
+        VALUE func = rb_block_proc();
 
         G_RELATIVE(self, func);
         ret = gtk_tree_view_insert_column_with_data_func(_SELF(self),
@@ -204,7 +204,7 @@ static VALUE
 treeview_set_column_drag_function(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_tree_view_set_column_drag_function(_SELF(self), 
                                            (GtkTreeViewColumnDropFunc)column_drop_func,
@@ -320,7 +320,7 @@ static VALUE
 treeview_map_expanded_rows(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_tree_view_map_expanded_rows(_SELF(self), 
                                     (GtkTreeViewMappingFunc)mapping_func,
@@ -608,7 +608,7 @@ static VALUE
 treeview_set_search_equal_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_tree_view_set_search_equal_func(_SELF(self),
                                         (GtkTreeViewSearchEqualFunc)search_equal_func,
@@ -685,7 +685,7 @@ static VALUE
 treeview_set_row_separator_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
 
     G_RELATIVE(self, func);
     gtk_tree_view_set_row_separator_func(_SELF(self), 
@@ -757,7 +757,7 @@ static VALUE
 treeview_set_search_position_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_CHILD_ADD(mGtk, func);
     gtk_tree_view_set_search_position_func(_SELF(self),
                                            (GtkTreeViewSearchPositionFunc)search_position_func,

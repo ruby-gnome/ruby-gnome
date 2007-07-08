@@ -3,8 +3,8 @@
 
   rbpangomain.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 07:50:46 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:53:10 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -48,7 +48,7 @@ rpango_find_base_dir(self, text)
     VALUE self, text;
 {
     StringValue(text);
-    return GENUM2RVAL(pango_find_base_dir(RVAL2CSTR(text), RSTRING(text)->len), 
+    return GENUM2RVAL(pango_find_base_dir(RVAL2CSTR(text), RSTRING_LEN(text)), 
                       PANGO_TYPE_DIRECTION);
 }
 #endif
@@ -64,7 +64,7 @@ rpango_break(self, text, analysis)
     VALUE ret;
 
     StringValue(text);
-    len = RSTRING(text)->len;
+    len = RSTRING_LEN(text);
     gtext = RVAL2CSTR(text);
     attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
     attrs = g_new0(PangoLogAttr, attrs_len);
@@ -92,7 +92,7 @@ rpango_get_log_attrs(self, text, level, language)
     VALUE ret;
 
     StringValue(text);
-    len = RSTRING(text)->len;
+    len = RSTRING_LEN(text);
     gtext = RVAL2CSTR(text);
     attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
     attrs = g_new0(PangoLogAttr, attrs_len);
@@ -115,7 +115,7 @@ rpango_find_paragraph_boundary(self, text)
 {
     gint paragraph_delimiter_index, next_paragraph_start;
     
-    pango_find_paragraph_boundary(RVAL2CSTR(text), RSTRING(text)->len,
+    pango_find_paragraph_boundary(RVAL2CSTR(text), RSTRING_LEN(text),
                                   &paragraph_delimiter_index,
                                   &next_paragraph_start);
     return rb_ary_new3(2, INT2NUM(paragraph_delimiter_index), 
@@ -138,7 +138,7 @@ rpango_shape(self, text, analysis)
     VALUE ret;
     PangoGlyphString* glyphs = pango_glyph_string_new();
     StringValue(text);
-    pango_shape(RVAL2CSTR(text), RSTRING(text)->len, RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS), glyphs);
+    pango_shape(RVAL2CSTR(text), RSTRING_LEN(text), RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS), glyphs);
     ret = BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
     pango_glyph_string_free (glyphs);
     return ret;
@@ -166,7 +166,7 @@ rpango_parse_markup(argc, argv, self)
     if (NIL_P(markup_text)) rb_raise(rb_eRuntimeError, "1st argument can't accept nil");
 
     ret = pango_parse_markup(RVAL2CSTR(markup_text),
-                             RSTRING(markup_text)->len,
+                             RSTRING_LEN(markup_text),
                              NIL_P(accel_marker) ? 0 : NUM2CHR(accel_marker),
                              &pattr_list, &gtext, &accel_char, &error);
 

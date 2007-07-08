@@ -3,8 +3,8 @@
 
   rbgtknotebook.c -
 
-  $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -336,7 +336,7 @@ static VALUE
 note_set_window_creation_hook(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_notebook_set_window_creation_hook((GtkNotebookWindowCreationFunc)creation_func, 
                                           (gpointer)func, (GDestroyNotify)NULL);

@@ -3,8 +3,8 @@
 
   rbgtkprinter.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/26 16:11:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -121,7 +121,7 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
     VALUE wait, block;
     rb_scan_args(argc, argv, "01", &wait);
 
-    block = G_BLOCK_PROC();
+    block = rb_block_proc();
     G_CHILD_ADD(mGtk, block);
     gtk_enumerate_printers(each_printer, (gpointer)block,
                            remove_callback_reference, RVAL2CBOOL(wait));

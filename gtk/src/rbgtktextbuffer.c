@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/23 08:39:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -504,7 +504,7 @@ static VALUE
 txt_register_deserialize_format(self, mime_type)
     VALUE self, mime_type;
 {
-    VALUE block = G_BLOCK_PROC();
+    VALUE block = rb_block_proc();
     GdkAtom atom;
     G_CHILD_ADD(mGtk, block);
     atom = gtk_text_buffer_register_deserialize_format(_SELF(self),
@@ -556,7 +556,7 @@ static VALUE
 txt_register_serialize_format(self, mime_type)
     VALUE self, mime_type;
 {
-    VALUE block = G_BLOCK_PROC();
+    VALUE block = rb_block_proc();
     GdkAtom atom;
     G_CHILD_ADD(mGtk, block);
     atom = gtk_text_buffer_register_serialize_format(_SELF(self),

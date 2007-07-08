@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/26 16:11:13 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:50 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -358,7 +358,7 @@ static VALUE
 gdkevent_s_handler_set(self)
     VALUE self;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
 
     gdk_event_handler_set((GdkEventFunc)handler_func, (gpointer)func, NULL);
@@ -641,7 +641,7 @@ static VALUE
 gdkevent_s_add_client_message_filter(self, message_type)
     VALUE self, message_type;
 {
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gdk_add_client_message_filter(RVAL2ATOM(message_type),
                                   (GdkFilterFunc)filter_func, (gpointer)func);

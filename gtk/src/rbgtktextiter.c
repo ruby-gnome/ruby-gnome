@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: ktou $
-  $Date: 2006/12/26 01:49:14 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -331,7 +331,7 @@ forward_find_char(argc, argv, self)
     VALUE self;
 {
     VALUE limit;
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
     
     rb_scan_args(argc, argv, "01", &limit);
     return gtk_text_iter_forward_find_char(_SELF(self),
@@ -348,7 +348,7 @@ backward_find_char(argc, argv, self)
     VALUE self;
 {
     VALUE limit;
-    volatile VALUE func = G_BLOCK_PROC();
+    volatile VALUE func = rb_block_proc();
 
     rb_scan_args(argc, argv, "01", &limit);
     return gtk_text_iter_backward_find_char(_SELF(self),

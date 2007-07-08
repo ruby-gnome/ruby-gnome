@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -232,7 +232,7 @@ actiongroup_add_radio_actions(argc, argv, self)
 
     if (NIL_P(value)) value = -1;
     if (NIL_P(proc) && rb_block_given_p()){
-        proc = G_BLOCK_PROC();
+        proc = rb_block_proc();
         G_RELATIVE(self, proc);
     }
     n_entries = (guint)RARRAY(entries)->len;
@@ -289,7 +289,7 @@ static VALUE
 actiongroup_set_translate_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_action_group_set_translate_func(_SELF(self), 
                                         (GtkTranslateFunc)translate_func, 

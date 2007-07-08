@@ -1,3 +1,7 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
+
 2007-07-06  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.h: fix prototype of rbgtk_register_treeiter_set_value_func()

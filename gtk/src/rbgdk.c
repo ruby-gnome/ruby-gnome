@@ -3,8 +3,8 @@
 
   rbgdk.c -
 
-  $Author: ktou $
-  $Date: 2007/06/02 05:10:08 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:50 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -134,7 +134,7 @@ gdk_s_set_x_error_handler(self)
     VALUE self;
 {
 #ifdef HAVE_XGETERRORTEXT
-    rb_x_error = G_BLOCK_PROC();
+    rb_x_error = rb_block_proc();
     G_RELATIVE(self, rb_x_error);
     XSetErrorHandler(rbgdk_x_error);
 #else
@@ -148,7 +148,7 @@ gdk_s_set_x_io_error_handler(self)
     VALUE self;
 {
 #ifdef HAVE_XGETERRORTEXT
-    rb_x_io_error = G_BLOCK_PROC();
+    rb_x_io_error = rb_block_proc();
     G_RELATIVE(self, rb_x_io_error);
     XSetIOErrorHandler(rbgdk_x_io_error);
 #else

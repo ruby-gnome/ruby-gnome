@@ -3,8 +3,8 @@
 
   rbgtkrecentchooser.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/12 15:28:40 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
@@ -114,7 +114,7 @@ static VALUE
 rc_set_sort_func(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_CHILD_ADD(mGtk, func);
     gtk_recent_chooser_set_sort_func(_SELF(self), (GtkRecentSortFunc)sort_func,
                                      (gpointer)func, (GDestroyNotify)remove_callback_reference);

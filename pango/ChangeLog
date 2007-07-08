@@ -1,3 +1,7 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*.c: use rb_block_proc() directly instead of using G_BLOCK_PROC().
+
 2006-12-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayoutline.c: Fixed a comipling warning.

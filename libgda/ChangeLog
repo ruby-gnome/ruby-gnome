@@ -1,3 +1,7 @@
+2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
+
 2005-12-05  Laurent Sansonetti  <lrz@gnome.org>
 
 	* README, extconf.rb, src/rbgda.c, src/rbgda.h, src/rbgdaclient.c,

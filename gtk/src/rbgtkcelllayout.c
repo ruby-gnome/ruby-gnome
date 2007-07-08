@@ -3,8 +3,8 @@
 
   rbgtkcelllayout.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/29 11:44:14 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:00:49 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -86,7 +86,7 @@ layout_set_cell_data_func(self, cell)
     VALUE self, cell;
 {
     if (rb_block_given_p()) {
-        VALUE func = G_BLOCK_PROC();
+        VALUE func = rb_block_proc();
         G_RELATIVE(self, func);
         gtk_cell_layout_set_cell_data_func(_SELF(self), RVAL2RENDERER(cell),
                                            (GtkCellLayoutDataFunc)layout_data_func, 

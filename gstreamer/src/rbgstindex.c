@@ -167,7 +167,7 @@ static VALUE
 rb_gst_index_set_resolver (VALUE self)
 {
     gst_index_set_resolver (RGST_INDEX (self), __resolver,
-                            (gpointer) G_BLOCK_PROC ());
+                            (gpointer) rb_block_proc ());
     return self;
 }
 #endif
@@ -269,7 +269,7 @@ rb_gst_index_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
                                                          GST_TYPE_ASSOC_FLAGS),
                                             *RGST_FORMAT (format),
                                             NUM2ULL (value), __compare,
-                                            (gpointer) G_BLOCK_PROC ());
+                                            (gpointer) rb_block_proc ());
 
     return index_entry != NULL ? RGST_INDEX_ENTRY_NEW (index_entry)
         : Qnil;

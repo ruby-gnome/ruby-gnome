@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-trigger.c,v 1.2 2005/10/15 07:35:08 mutoh Exp $ */
+/* $Id: rbgnome-trigger.c,v 1.3 2007/07/08 02:55:33 sakai Exp $ */
 
 /* Gnome::Trigger class for Ruby/GNOME2
  * Copyright (C) 2005  Ruby-GNOME2 Project Team
@@ -131,9 +131,9 @@ trig_s_set_action_func(self)
     VALUE self;
 {
 #if RUBY_VERSION_CODE < 180
-    rb_cvar_set(cTrig, id_action, G_BLOCK_PROC()); 
+    rb_cvar_set(cTrig, id_action, rb_block_proc()); 
 #else
-    rb_cvar_set(cTrig, id_action, G_BLOCK_PROC(), 0); 
+    rb_cvar_set(cTrig, id_action, rb_block_proc(), 0); 
 #endif
     return self;
 }
