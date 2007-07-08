@@ -1,5 +1,7 @@
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/*.c: use rb_block_proc() directly instead of using G_BLOCK_PROC().
+
 	* src/utils_callback.c (callback_info_run): use rbgutil_protect().
 	* src/utils_callback.c (listen_callback_pipe): call
 	rb_thread_schedule() to activate newly created thread.

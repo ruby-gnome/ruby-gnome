@@ -3,8 +3,8 @@
 
   rbglib_source.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/10 17:24:22 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -114,7 +114,7 @@ static VALUE
 source_set_callback(self)
     VALUE self;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     g_source_set_callback(_SELF(self),
                           (GSourceFunc)source_func,

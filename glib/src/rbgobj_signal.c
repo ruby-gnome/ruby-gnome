@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: sakai $
-  $Date: 2007/07/01 17:43:56 $
+  $Date: 2007/07/08 02:40:12 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -255,7 +255,7 @@ gobj_sig_connect_impl(after, argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     rclosure = g_rclosure_new(func, rest, 
                               rbgobj_get_signal_func(signal_id));
     g_rclosure_attach((GClosure *)rclosure, self);

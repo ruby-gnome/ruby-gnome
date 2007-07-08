@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/10 17:24:22 $
+  $Author: sakai $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -253,7 +253,7 @@ static VALUE
 mc_set_poll_func(self)
     VALUE self;
 {
-    rb_ivar_set(self, id_poll_func, G_BLOCK_PROC());
+    rb_ivar_set(self, id_poll_func, rb_block_proc());
     g_main_context_set_poll_func(_SELF(self), (GPollFunc)poll_func);
 
     return self;
@@ -337,7 +337,7 @@ timeout_add_seconds(VALUE self, VALUE interval)
     callback_info_t *info;
     guint id;
 
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
 
     info = ALLOC(callback_info_t);
     info->callback = func;
@@ -377,10 +377,10 @@ idle_add(argc, argv, self)
         func = arg1;
     } else if (RTEST(rb_obj_is_kind_of(arg1, rb_cInteger))) {
         priority = NUM2INT(arg1);
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
     } else {
         priority = G_PRIORITY_DEFAULT;
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
     }
 
     info = ALLOC(callback_info_t);
@@ -427,7 +427,7 @@ static VALUE
 child_watch_add(self, pid)
     VALUE self, pid;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return UINT2NUM(g_child_watch_add((GPid)NUM2INT(pid), 
                                       (GChildWatchFunc)child_watch_func, (gpointer)func));

@@ -4,7 +4,7 @@
   rbglib_spawn.c -
 
   $Author: sakai $
-  $Date: 2007/07/01 17:43:56 $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2004 Kazuhiro NISHIYAMA
@@ -39,7 +39,7 @@ rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
     gint standard_input, standard_output, standard_error;
 
     if (rb_block_given_p()) {
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 
@@ -102,7 +102,7 @@ rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
     gchar** genvp = (gchar**)NULL;
 
     if (rb_block_given_p()) {
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 
@@ -163,7 +163,7 @@ rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
     VALUE std_out, std_err;
 
     if (rb_block_given_p()) {
-        func = G_BLOCK_PROC();
+        func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 

@@ -4,7 +4,7 @@
   rbgobj_closure.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 08:15:26 $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -256,7 +256,7 @@ static VALUE
 closure_initialize(self)
     VALUE self;
 {
-    GClosure* closure = g_rclosure_new(G_BLOCK_PROC(), Qnil, NULL);
+    GClosure* closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
     g_closure_sink(closure);
     return self;

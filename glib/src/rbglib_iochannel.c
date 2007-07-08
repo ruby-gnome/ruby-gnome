@@ -4,7 +4,7 @@
   rbglib_iochannel.c -
 
   $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -534,7 +534,7 @@ static VALUE
 ioc_add_watch(self, condition)
     VALUE self, condition;
 {
-    VALUE func = G_BLOCK_PROC();
+    VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return UINT2NUM(g_io_add_watch(_SELF(self), NUM2INT(condition), 
                                    (GIOFunc)io_func, (gpointer)func));

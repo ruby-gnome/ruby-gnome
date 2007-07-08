@@ -4,7 +4,7 @@
   rbglib_completion.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 09:58:07 $
+  $Date: 2007/07/08 02:40:12 $
 
   Copyright (C) 2005,2006  Masao Mutoh
 ************************************************/
@@ -72,7 +72,7 @@ comp_initialize(self)
     VALUE block = Qnil;
 
     if (rb_block_given_p()) {
-        block = G_BLOCK_PROC();
+        block = rb_block_proc();
     }
 
     rb_ivar_set(self, id_compfunc, block);
