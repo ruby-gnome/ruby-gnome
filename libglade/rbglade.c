@@ -3,8 +3,8 @@
 
   rbglade.c -
 
-  $Author: ktou $
-  $Date: 2007/03/22 03:24:20 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:04:21 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -89,7 +89,7 @@ xml_autoconnect(const gchar *handler_name, GObject *_source,
 static VALUE
 rb_gladexml_signal_autoconnect_full(VALUE self)
 {
-    rb_iv_set(self, "@autoconnect_proc", G_BLOCK_PROC());
+    rb_iv_set(self, "@autoconnect_proc", rb_block_proc());
     glade_xml_signal_autoconnect_full(GLADE_XML(RVAL2GOBJ(self)), 
                                       xml_autoconnect, (gpointer)self);
     return self;
@@ -170,7 +170,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
         G_INITIALIZE(self, xml);
         rb_funcall(self, rb_intern("guard_sources_from_gc"), 0);
         if (rb_block_given_p()){
-            rb_iv_set(self, "@handler_proc", G_BLOCK_PROC());
+            rb_iv_set(self, "@handler_proc", rb_block_proc());
         } else {
             rb_iv_set(self, "@handler_proc", Qnil);
         }

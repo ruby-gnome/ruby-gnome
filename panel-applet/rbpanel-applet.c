@@ -3,8 +3,8 @@
 
   rbpanelapplet.c
 
-  $Author: mutoh $
-  $Date: 2006/04/22 15:36:00 $
+  $Author: sakai $
+  $Date: 2007/07/08 03:04:52 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -281,7 +281,7 @@ rbpanel_s_main(argc, argv, self)
     if (!rb_block_given_p()){
         rb_raise( rb_eArgError, "PanelApplet.main requires a block" );
     }
-    func = G_BLOCK_PROC();
+    func = rb_block_proc();
     G_RELATIVE(self, func);
 
     if (argc > 3){
