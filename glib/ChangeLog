@@ -1,5 +1,6 @@
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgutil.h: mark G_BLOCK_PROC() as deprecated.
 	* src/*.c: use rb_block_proc() directly instead of using G_BLOCK_PROC().
 
 	* src/utils_callback.c (callback_info_run): use rbgutil_protect().

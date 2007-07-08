@@ -4,7 +4,7 @@
   rbgutil.h -
 
   $Author: sakai $
-  $Date: 2007/07/07 08:15:26 $
+  $Date: 2007/07/08 03:17:21 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -56,6 +56,7 @@ extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
+/* deprecated */
 #define G_BLOCK_PROC rb_block_proc
 
 #ifdef __cplusplus
