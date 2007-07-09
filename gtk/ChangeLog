@@ -1,3 +1,9 @@
+2007-07-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkactiongroup.c (actiongroup_remove_action,
+	actiongroup_add_action): added a G_CHILD_ADD() and G_CHILD_REMOVE()
+	pair.
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().

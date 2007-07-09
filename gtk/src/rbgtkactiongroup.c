@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ktou $
+  $Date: 2007/07/09 12:43:50 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -64,6 +64,8 @@ actiongroup_add_action(argc, argv, self)
     gtk_action_group_add_action_with_accel(_SELF(self),
                                            GTK_ACTION(RVAL2GOBJ(action)),
                                            NIL_P(accelerator) ? NULL : RVAL2CSTR(accelerator));
+    G_CHILD_ADD(self, action);
+
     return self;
 }
 
@@ -72,6 +74,7 @@ actiongroup_remove_action(self, action)
     VALUE self, action;
 {
     gtk_action_group_remove_action(_SELF(self), GTK_ACTION(RVAL2GOBJ(action)));
+    G_CHILD_REMOVE(self, action);
     return self;
 }
 
