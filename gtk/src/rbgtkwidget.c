@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: ggc $
-  $Date: 2007/07/09 12:35:36 $
+  $Date: 2007/07/09 12:36:00 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -1119,7 +1119,7 @@ static VALUE
 widget_window(self)
     VALUE self;
 {
-    GOBJ2RVAL(_SELF(self)->window);
+    return GOBJ2RVAL(_SELF(self)->window);
 }
 
 static VALUE
