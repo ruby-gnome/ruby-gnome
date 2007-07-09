@@ -4,7 +4,7 @@
   rbgtktooltip.c -
 
   $Author: ggc $
-  $Date: 2007/07/09 13:39:28 $
+  $Date: 2007/07/09 13:58:05 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -47,7 +47,7 @@ static VALUE
 tooltip_set_icon_from_stock(self, stock_id, size)
     VALUE self, stock_id, size;
 {
-    gtk_tooltip_set_icon_from_stock(_SELF(self), RVAL2CSTR(stock_id), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
+    gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
