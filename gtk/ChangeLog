@@ -2,7 +2,7 @@
 
 	* src/rbgtkactiongroup.c (actiongroup_remove_action,
 	actiongroup_add_action): added a G_CHILD_ADD() and G_CHILD_REMOVE()
-	pair.
+	pair. Reported by akira yamada. Thanks!!!
 
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
