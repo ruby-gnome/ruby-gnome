@@ -5,7 +5,7 @@
   Copyright (c) 2003-2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: main.rb,v 1.19 2006/06/17 13:18:12 mutoh Exp $
+  $Id: main.rb,v 1.20 2007/07/09 13:21:54 ggc Exp $
 =end
 
 require 'gtk2'
@@ -90,6 +90,10 @@ module Demo
         if title and klass
           break
         end
+      end
+
+      if not klass
+          raise "File not found: #{path}. This script should be run from its directory."
       end
 
       return title, klass.intern, depend
