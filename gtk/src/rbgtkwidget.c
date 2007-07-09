@@ -3,8 +3,8 @@
 
   rbgtkwidget.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/09 12:30:20 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -196,10 +196,10 @@ static VALUE
 widget_remove_accelerator(self, accel, key, mod)
     VALUE self, accel, key, mod;
 {
-    return gtk_widget_remove_accelerator(_SELF(self),
-                                         GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
-                                         NUM2INT(key),
-                                         RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_remove_accelerator(_SELF(self),
+                                                    GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
+                                                    NUM2INT(key),
+                                                    RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE)));
 }
 
 static VALUE
@@ -231,14 +231,14 @@ static VALUE
 widget_event(self, event)
     VALUE self, event;
 {
-    return gtk_widget_event(_SELF(self), RVAL2GEV(event)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_event(_SELF(self), RVAL2GEV(event)));
 }
 
 static VALUE
 widget_activate(self)
     VALUE self;
 {
-    return gtk_widget_activate(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_activate(_SELF(self)));
 }
 
 static VALUE
@@ -264,7 +264,7 @@ static VALUE
 widget_is_focus(self)
     VALUE self;
 {
-    return gtk_widget_is_focus(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_is_focus(_SELF(self)));
 }
 
 static VALUE
@@ -365,7 +365,7 @@ static VALUE
 widget_is_ancestor(self, ancestor)
     VALUE self, ancestor;
 {
-    return (gtk_widget_is_ancestor(_SELF(self), _SELF(ancestor)) ? Qtrue : Qfalse);
+    return CBOOL2RVAL(gtk_widget_is_ancestor(_SELF(self), _SELF(ancestor)));
 }
 
 static VALUE
@@ -388,7 +388,7 @@ static VALUE
 widget_hide_on_delete(self)
 	VALUE self;
 {
-    return gtk_widget_hide_on_delete(_SELF(self)) ? Qtrue: Qfalse;
+    return CBOOL2RVAL(gtk_widget_hide_on_delete(_SELF(self)));
 }
 
 static VALUE
@@ -721,17 +721,16 @@ static VALUE
 widget_set_scroll_adjustments(self, h, v)
     VALUE self, h, v;
 {
-    gboolean res = gtk_widget_set_scroll_adjustments(_SELF(self),
-                                                     GTK_ADJUSTMENT(_SELF(h)),
-                                                     GTK_ADJUSTMENT(_SELF(v)));
-    return res ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_set_scroll_adjustments(_SELF(self),
+                                                        GTK_ADJUSTMENT(_SELF(h)),
+                                                        GTK_ADJUSTMENT(_SELF(v))));
 }
 
 static VALUE
 widget_mnemonic_activate(self, group_cycling)
     VALUE self, group_cycling;
 {
-    return gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)));
 }
 
 /*
@@ -911,7 +910,7 @@ static VALUE
 widget_child_focus(self, direction)
     VALUE self, direction;
 {
-    return gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 
 #if GTK_CHECK_VERSION(2,11,0)
@@ -927,7 +926,7 @@ static VALUE
 widget_keynav_failed(self, direction)
     VALUE self, direction;
 {
-    return gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 #endif
 
@@ -951,7 +950,7 @@ static VALUE
 widget_get_child_visible(self)
     VALUE self;
 {
-    return gtk_widget_get_child_visible(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_widget_get_child_visible(_SELF(self)));
 }
 
 static VALUE
