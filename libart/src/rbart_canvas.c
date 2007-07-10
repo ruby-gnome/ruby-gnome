@@ -3,8 +3,8 @@
 
    rbart_canvas.c -
 
-   $Author: mutoh $
-   $Date: 2005/07/23 12:53:17 $
+   $Author: ggc $
+   $Date: 2007/07/10 13:22:40 $
 
    Copyright (C) 2004 Ruby-GNOME2 Project Team
    Copyright (C) 2003 Tom Payne <ruby-gnome-users-en@tompayne.org>
@@ -74,11 +74,11 @@ canvas_initialize(argc, argv, self)
     art_u32 color;
     rb_scan_args(argc, argv, "22", &r_width, &r_height, &r_color, &r_flags);
     canvas = (ArtCanvas *) xmalloc(sizeof(ArtCanvas));
-    canvas->flags = r_flags == Qnil ? 0 : NUM2INT(r_flags);
+    canvas->flags = NIL_P(r_flags) ? 0 : NUM2INT(r_flags);
     canvas->width = NUM2INT(r_width);
     canvas->height = NUM2INT(r_height);
     canvas->rgb = (art_u8 *) xcalloc(3 * canvas->width * canvas->height, sizeof(art_u8));
-    color = r_color == Qnil ? 0xffffffff : NUM2ULONG(r_color);
+    color = NIL_P(r_color) ? 0xffffffff : NUM2ULONG(r_color);
     art_rgb_run_alpha(canvas->rgb, color >> 24, (color >> 16) & 0xff, (color >> 8) & 0xff, color & 0xff, canvas->width * canvas->height);
     if (canvas->flags & ART_CANVAS_ALPHA_MASK)
     {
@@ -338,7 +338,7 @@ canvas_to_png(argc, argv, r_self)
     int i;
 
     rb_scan_args(argc, argv, "01", &r_flags);
-    flags = r_flags == Qnil ? 0 : NUM2INT(r_flags);
+    flags = NIL_P(r_flags) ? 0 : NUM2INT(r_flags);
     canvas = rbart_get_art_canvas(r_self);
 
     png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);

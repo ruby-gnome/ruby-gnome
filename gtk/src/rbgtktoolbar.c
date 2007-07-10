@@ -3,8 +3,8 @@
 
   rbgtktoolbar.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/10 13:22:40 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -38,7 +38,7 @@ tbar_append(argc, argv, self)
 
     if (argc > 0) type = argv[0];
 
-    if (type == Qnil || TYPE(type) == T_STRING){
+    if (NIL_P(type) || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
@@ -93,7 +93,7 @@ tbar_prepend(argc, argv, self)
 
     if (argc > 0) type = argv[0];
 
-    if (type == Qnil || TYPE(type) == T_STRING){
+    if (NIL_P(type) || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "05", &text, &ttext, &ptext, &icon, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
@@ -147,7 +147,7 @@ tbar_insert(argc, argv, self)
 
     if (argc > 1) type = argv[1];
 
-    if (type == Qnil || TYPE(type) == T_STRING){
+    if (NIL_P(type) || TYPE(type) == T_STRING){
         rb_scan_args(argc, argv, "15", &pos, &text, &ttext, &ptext, &icon, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);

@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: ggc $
-  $Date: 2007/07/07 15:14:33 $
+  $Date: 2007/07/10 13:22:40 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -59,7 +59,7 @@ rbgobj_instance_from_ruby_object(VALUE obj)
 {
     GType t;
 
-    if (obj == Qnil)
+    if (NIL_P(obj))
     	return NULL;
 
     t = G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj));
@@ -104,7 +104,7 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
         /* FIXME */
         if (alloc) {
             VALUE ret = rbgobj_fund_instance2robj(t, instance);
-            if (ret == Qnil) {
+            if (NIL_P(ret)) {
                 rb_raise(rb_eTypeError, "%s isn't supported",
                          rb_class2name(CLASS_OF(instance)));
             }
