@@ -3,8 +3,8 @@
 
   rbgtktreestore.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/23 15:53:13 $
+  $Author: ggc $
+  $Date: 2007/07/10 08:07:15 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -360,7 +360,7 @@ Init_gtk_tree_store()
     rb_define_method(ts, "set_column_types", tstore_set_column_types, -1);
     rb_define_method(ts, "set_value", tstore_set_value, 3);
     rb_define_method(ts, "remove", tstore_remove, 1);
-    rb_define_method(ts, "insert", tstore_insert, 2);
+    rb_define_method(ts, "insert", tstore_insert, -1);
     rb_define_method(ts, "insert_before", tstore_insert_before, 2);
     rb_define_method(ts, "insert_after", tstore_insert_after, 2);
     rb_define_method(ts, "prepend", tstore_prepend, 1);
