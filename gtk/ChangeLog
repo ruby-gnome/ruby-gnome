@@ -1,3 +1,7 @@
+2007-07-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtktooltip.c: used C style comments not C++ style.
+
 2007-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkactiongroup.c (actiongroup_remove_action,

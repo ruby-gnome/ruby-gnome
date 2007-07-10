@@ -3,8 +3,8 @@
 
   rbgtktooltip.c -
 
-  $Author: ggc $
-  $Date: 2007/07/09 13:58:05 $
+  $Author: ktou $
+  $Date: 2007/07/10 11:48:30 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -16,7 +16,7 @@
 
 #if GTK_CHECK_VERSION(2,11,0)
 
-// GTK_TOOLTIP type-cast is private because it should be useless
+/* GTK_TOOLTIP type-cast is private because it should be useless */
 #define _SELF(self) (RVAL2GOBJ(self))
 
 static VALUE
