@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: ggc $
-  $Date: 2007/07/07 16:14:11 $
+  $Author: mutoh $
+  $Date: 2007/07/11 15:57:56 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -430,19 +430,19 @@ scale(argc, argv, self)
 {
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
-    VALUE dest, dest_x, dest_y, dest_width, dest_height; 
+    VALUE src, src_x, src_y, src_width, src_height; 
     VALUE offset_x, offset_y, scale_x, scale_y, interp_type;
 
-    rb_scan_args(argc, argv, "91", &dest, &dest_x, &dest_y, 
-                 &dest_width, &dest_height, &offset_x, &offset_y, 
+    rb_scan_args(argc, argv, "91", &src, &src_x, &src_y, 
+                 &src_width, &src_height, &offset_x, &offset_y, 
                  &scale_x, &scale_y, &interp_type);
 
     if (!NIL_P(interp_type))
         type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
 
-    gdk_pixbuf_scale(_SELF(self), _SELF(dest),
-                     NUM2INT(dest_x), NUM2INT(dest_y), 
-                     NUM2INT(dest_width), NUM2INT(dest_height),
+    gdk_pixbuf_scale(_SELF(src), _SELF(self), 
+                     NUM2INT(src_x), NUM2INT(src_y), 
+                     NUM2INT(src_width), NUM2INT(src_height),
                      NUM2DBL(offset_x), NUM2DBL(offset_y),
                      NUM2DBL(scale_x), NUM2DBL(scale_y), type);
     return self;
