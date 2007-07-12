@@ -7,8 +7,22 @@
   
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: uimanager.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
+  $Id: uimanager.rb,v 1.6 2007/07/12 14:53:09 ggc Exp $
 =end
+
+require 'gtk2'
+
+if str = Gtk.check_version(2, 4, 0)
+  puts "This sample requires GTK+ 2.4.0 or later"
+  puts str
+  exit
+end
+
+if not Gtk.check_version(2, 11, 0)
+    recentmenuitem = "<menuitem name='recent' action='recent'/>"
+else
+    recentmenuitem = ""
+end
 
 ui_info = %Q[
 <ui>
@@ -16,6 +30,7 @@ ui_info = %Q[
     <menu action='FileMenu'>
       <menuitem action='New'/>
       <menuitem action='Open'/>
+      #{recentmenuitem}
       <menuitem action='Save'/>
       <menuitem action='SaveAs'/>
       <separator/>
@@ -45,14 +60,6 @@ ui_info = %Q[
     <toolitem action='Logo'/>
   </toolbar>
 </ui>]
-
-require 'gtk2'
-
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
-  puts str
-  exit
-end
 
 callback = Proc.new {|actiongroup, action| 
   puts "`#{action.name}' is clicked. "
@@ -112,6 +119,16 @@ actiongroup.add_radio_actions(color_radio_actions, 1) do |action, current|
   puts "current = `#{current.name}'"
 end
 actiongroup.add_radio_actions(shape_radio_actions, 2, callback_radio)
+
+if not Gtk.check_version(2, 11, 0)
+    action = Gtk::RecentAction.new('recent', 'Open Recent', nil, 'gtk-open')
+    [ 'item-activated', 'activate' ].each { |signal|
+        action.signal_connect(signal) { |action|
+            puts "`Recent' #{signal}, uri=#{action.current_uri || 'no item selected'}"
+        }
+    }
+    actiongroup.add_action(action)
+end
 
 uimanager = Gtk::UIManager.new
 uimanager.insert_action_group(actiongroup, 0)
