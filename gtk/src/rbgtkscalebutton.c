@@ -4,7 +4,7 @@
   rbgtkscalebutton.c -
 
   $Author: ggc $
-  $Date: 2007/07/03 16:10:47 $
+  $Date: 2007/07/12 14:43:11 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -66,12 +66,12 @@ scalebutton_set_icons(self, icons)
     VALUE self, icons;
 {
     int i;
-    gchar **icons_ = (gchar**) malloc(sizeof(gchar*) * (RARRAY(icons)->len + 1));
+    gchar **icons_c = g_new0(gchar*, RARRAY(icons)->len + 1);
     for (i = 0; i < RARRAY(icons)->len; i++)
-        icons_[i] = RVAL2CSTR(RARRAY(icons)->ptr[i]);
-    icons_[i] = NULL;
-    gtk_scale_button_set_icons(_SELF(self), (const gchar **) icons_);
-    free(icons_);
+        icons_c[i] = RVAL2CSTR(RARRAY(icons)->ptr[i]);
+    icons_c[i] = NULL;
+    gtk_scale_button_set_icons(_SELF(self), (const gchar **) icons_c);
+    g_free(icons_c);
     return self;
 }
 
