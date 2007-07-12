@@ -3,8 +3,8 @@
 
   rbgtktextbuffer.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/12 13:08:43 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -274,6 +274,16 @@ txt_create_mark(self, name, where, left_gravity)
     G_CHILD_ADD(self, ret);
     return ret;
 }
+
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+txt_add_mark(self, mark, where)
+    VALUE self, mark, where;
+{
+    gtk_text_buffer_add_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
+    return self;
+}
+#endif
 
 static VALUE
 txt_delete_mark(self, mark)
@@ -921,6 +931,9 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "create_child_anchor", txt_create_child_anchor, 1);
     
     rb_define_method(gTextBuffer, "create_mark", txt_create_mark, 3);
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gTextBuffer, "add_mark", txt_add_mark, 2);
+#endif
     rb_define_method(gTextBuffer, "delete_mark", txt_delete_mark, 1);
 
     rb_define_method(gTextBuffer, "get_mark", txt_get_mark, 1);
