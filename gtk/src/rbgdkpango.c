@@ -3,8 +3,8 @@
 
   rbgdkpango.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/14 07:04:40 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -46,7 +46,7 @@ static VALUE
 gdkpango_attr_embossed_initialize(self, embossed)
     VALUE self, embossed;
 {
-    DATA_PTR(self) = gdk_pango_attr_embossed_new(RTEST(embossed));
+    DATA_PTR(self) = gdk_pango_attr_embossed_new(RVAL2CBOOL(embossed));
     return Qnil;
 }
 

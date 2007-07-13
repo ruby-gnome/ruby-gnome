@@ -4,7 +4,7 @@
   rbgobj_value.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:07 $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -142,7 +142,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         g_value_set_uchar(result, NUM2UINT(val));
         return;
       case G_TYPE_BOOLEAN:
-        g_value_set_boolean(result, RTEST(val));
+        g_value_set_boolean(result, RVAL2CBOOL(val));
         return;
       case G_TYPE_INT:
         g_value_set_int(result, NUM2INT(val));

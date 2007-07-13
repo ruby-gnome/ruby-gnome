@@ -3,8 +3,8 @@
 
   rbglib_mainloop.c -
 
-  $Author: sakai $
-  $Date: 2007/06/19 16:06:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -141,7 +141,7 @@ ml_initialize(self, context, is_running)
 {
     GMainLoop* ml;
     ml = g_main_loop_new(NIL_P(context)?NULL:RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT), 
-                         RTEST(is_running));
+                         RVAL2CBOOL(is_running));
     G_INITIALIZE(self, ml);
     return Qnil;
 }

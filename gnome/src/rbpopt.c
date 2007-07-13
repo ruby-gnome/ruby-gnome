@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbpopt.c,v 1.3 2007/07/13 14:27:08 ggc Exp $ */
+/* $Id: rbpopt.c,v 1.4 2007/07/13 16:07:30 ggc Exp $ */
 
 /* Part of Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -178,7 +178,7 @@ rbgno_poptoption_array_to_obj(from)
         /* set arg */
         switch (options[i].argInfo & POPT_ARG_MASK) {
           case POPT_ARG_NONE:
-            data[i].u_int = RTEST(RARRAY(entry)->ptr[3]);
+            data[i].u_int = RVAL2CBOOL(RARRAY(entry)->ptr[3]);
             break;
           case POPT_ARG_STRING:
             strcpy(string, RVAL2CSTR(RARRAY(entry)->ptr[3]));

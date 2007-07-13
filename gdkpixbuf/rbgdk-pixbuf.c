@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf.c -
 
-  $Author: mutoh $
-  $Date: 2007/07/11 15:57:56 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2002-2004 Masao Mutoh
   Copyright (C) 2000 Yasushi Shoji
@@ -128,14 +128,14 @@ initialize(argc, argv, self)
     if (argc == 7){
         buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
                                        RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
-                                       RTEST(arg3),   NUM2INT(arg4),
+                                       RVAL2CBOOL(arg3),   NUM2INT(arg4),
                                        NUM2INT(arg5), NUM2INT(arg6),
                                        NUM2INT(arg7), NULL, NULL);
         if (buf == NULL){
             rb_gc();
             buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
                                            RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
-                                           RTEST(arg3),   NUM2INT(arg4),
+                                           RVAL2CBOOL(arg3),   NUM2INT(arg4),
                                            NUM2INT(arg5), NUM2INT(arg6),
                                            NUM2INT(arg7), NULL, NULL);
             if (buf == NULL) NOMEM_ERROR(&error);
@@ -156,12 +156,12 @@ initialize(argc, argv, self)
             }
         } else if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_COLORSPACE))){
             buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
-                                 RTEST(arg2), NUM2INT(arg3),
+                                 RVAL2CBOOL(arg2), NUM2INT(arg3),
                                  NUM2INT(arg4), NUM2INT(arg5));
             if (buf == NULL){
                 rb_gc();
                 buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
-                                     RTEST(arg2), NUM2INT(arg3),
+                                     RVAL2CBOOL(arg2), NUM2INT(arg3),
                                      NUM2INT(arg4), NUM2INT(arg5));
                 if (buf == NULL) NOMEM_ERROR(&error);
             }
@@ -178,13 +178,13 @@ initialize(argc, argv, self)
 #endif
         buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
                                                 width, height,
-                                                RTEST(arg4), &error);
+                                                RVAL2CBOOL(arg4), &error);
         if (buf == NULL){
             rb_gc();
             error = NULL;
             buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
                                                     NUM2INT(arg2), NUM2INT(arg3), 
-                                                    RTEST(arg4), &error);
+                                                    RVAL2CBOOL(arg4), &error);
         }
 #else
         rb_warning("Scaling on load not supported in GTK+ < 2.6.0");
@@ -221,11 +221,11 @@ initialize(argc, argv, self)
         for (i = 0; i < len; i++){
             gstream[i] = (guint8)NUM2UINT(RARRAY(arg1)->ptr[i]);
         }      
-        buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
+        buf = gdk_pixbuf_new_from_inline(len, gstream, RVAL2CBOOL(arg2), &error);
         if (buf == NULL){
             rb_gc();
             error = NULL;
-            buf = gdk_pixbuf_new_from_inline(len, gstream, RTEST(arg2), &error);
+            buf = gdk_pixbuf_new_from_inline(len, gstream, RVAL2CBOOL(arg2), &error);
         }
         /* need to manage the returned value */
         rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
@@ -544,7 +544,7 @@ flip(self, horizontal)
     VALUE self, horizontal;
 {
     VALUE ret;
-    GdkPixbuf* dest = gdk_pixbuf_flip(_SELF(self), RTEST(horizontal));
+    GdkPixbuf* dest = gdk_pixbuf_flip(_SELF(self), RVAL2CBOOL(horizontal));
     if (dest == NULL)
         return Qnil;
     ret = GOBJ2RVAL(dest);
@@ -559,7 +559,7 @@ add_alpha(self, substitute_color, r, g, b)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_add_alpha(_SELF(self),
-                                           RTEST(substitute_color),
+                                           RVAL2CBOOL(substitute_color),
                                            FIX2INT(r), FIX2INT(g), FIX2INT(b));
     if (dest == NULL)
         return Qnil;
@@ -584,7 +584,7 @@ saturate_and_pixelate(self, staturation, pixelate)
 {
     GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
     gdk_pixbuf_saturate_and_pixelate(_SELF(self), dest, 
-                                     NUM2DBL(staturation), RTEST(pixelate));
+                                     NUM2DBL(staturation), RVAL2CBOOL(pixelate));
     return GOBJ2RVAL(dest);
 }
 

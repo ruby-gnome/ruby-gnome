@@ -4,7 +4,7 @@
   rbgdk.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:30 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -198,7 +198,7 @@ gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time
     VALUE self, win, owner_events, event_mask, confine_to, cursor, time;
 {
     return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
-                     RTEST(owner_events),
+                     RVAL2CBOOL(owner_events),
                      RVAL2GFLAGS(event_mask, GDK_TYPE_EVENT_MASK),
                      NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
                      NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
@@ -218,7 +218,7 @@ gdk_s_keyboard_grab(self, win, owner_events, time)
     VALUE self, win, owner_events, time;
 {
     return GENUM2RVAL(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), 
-                                        RTEST(owner_events), NUM2INT(time)), 
+                                        RVAL2CBOOL(owner_events), NUM2INT(time)), 
                       GDK_TYPE_GRAB_STATUS);
 }
 

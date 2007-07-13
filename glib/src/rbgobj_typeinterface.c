@@ -3,8 +3,8 @@
 
   rbgobj_typeinterface.c -
 
-  $Author: sakai $
-  $Date: 2007/07/01 06:29:31 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sat May 27 16:04:13 JST 2006
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -105,7 +105,7 @@ interface_s_properties(int argc, VALUE* argv, VALUE self)
     ginterface = g_type_default_interface_ref(gtype);
     props = g_object_interface_list_properties(ginterface, &n_properties);
     for (i = 0; i < n_properties; i++){
-        if (RTEST(inherited_too) || GTYPE2CLASS(props[i]->owner_type) == self)
+        if (RVAL2CBOOL(inherited_too) || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, rb_str_new2(props[i]->name));
     }
     g_free(props);

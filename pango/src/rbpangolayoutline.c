@@ -3,8 +3,8 @@
 
   rbpangolayoutline.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/26 11:40:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -69,7 +69,7 @@ layout_line_index_to_x(self, index, trailing)
 {
     int x_pos;
     pango_layout_line_index_to_x(_SELF(self), NUM2INT(index), 
-                                 RTEST(trailing), &x_pos);
+                                 RVAL2CBOOL(trailing), &x_pos);
     return INT2NUM(x_pos);
 }
 
@@ -205,7 +205,7 @@ static VALUE
 layout_line_set_paragraph_start(self, val)
     VALUE self, val;
 {
-    _SELF(self)->is_paragraph_start = RTEST(val);
+    _SELF(self)->is_paragraph_start = RVAL2CBOOL(val);
     return self;
 }
 

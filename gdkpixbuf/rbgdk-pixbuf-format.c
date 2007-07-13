@@ -3,8 +3,8 @@
 
   rbgdk-pixbuf-format.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 17:46:34 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -145,7 +145,7 @@ static VALUE
 set_disabled(self, disabled)
     VALUE self, disabled;
 {
-    gdk_pixbuf_format_set_disabled(_SELF(self), RTEST(disabled));
+    gdk_pixbuf_format_set_disabled(_SELF(self), RVAL2CBOOL(disabled));
     return self;
 }
 static VALUE

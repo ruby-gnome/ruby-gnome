@@ -3,8 +3,8 @@
 
   rbglib_source.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 02:40:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -77,7 +77,7 @@ static VALUE
 source_set_can_recurse(self, can_recurse)
     VALUE self, can_recurse;
 {
-    g_source_set_can_recurse(_SELF(self), RTEST(can_recurse));
+    g_source_set_can_recurse(_SELF(self), RVAL2CBOOL(can_recurse));
     return self;
 }
 
@@ -107,7 +107,7 @@ static gboolean
 source_func(func)
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 0));
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 0));
 }
 
 static VALUE

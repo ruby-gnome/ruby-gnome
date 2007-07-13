@@ -4,7 +4,7 @@
   rbgtkcellrenderer.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -86,7 +86,7 @@ static VALUE
 cellrenderer_stop_editing(self, canceled)
     VALUE self, canceled;
 {
-    gtk_cell_renderer_stop_editing(_SELF(self), RTEST(canceled));
+    gtk_cell_renderer_stop_editing(_SELF(self), RVAL2CBOOL(canceled));
     return self;
 }
 #endif

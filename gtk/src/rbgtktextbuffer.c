@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -76,8 +76,8 @@ txt_backspace(self, iter, interactive, default_editable)
     VALUE self, iter, interactive, default_editable;
 {
     return CBOOL2RVAL(gtk_text_buffer_backspace(_SELF(self), RVAL2ITR(iter),
-                                                RTEST(interactive),
-                                                RTEST(default_editable)));
+                                                RVAL2CBOOL(interactive),
+                                                RVAL2CBOOL(default_editable)));
 }
 #endif
 
@@ -98,7 +98,7 @@ txt_insert_interactive(self, iter, text, editable)
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive(_SELF(self), RVAL2ITR(iter),
                                                          RVAL2CSTR(text),
                                                          RSTRING(text)->len,
-                                                         RTEST(editable)));
+                                                         RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -109,7 +109,7 @@ txt_insert_interactive_at_cursor(self, text, editable)
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
                                                                    RVAL2CSTR(text),
                                                                    RSTRING(text)->len,
-                                                                   RTEST(editable)));
+                                                                   RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -129,7 +129,7 @@ txt_insert_range_interactive(self, iter, start, end, editable)
                                                                RVAL2ITR(iter),
                                                                RVAL2ITR(start),
                                                                RVAL2ITR(end),
-                                                               RTEST(editable)));
+                                                               RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -148,7 +148,7 @@ txt_delete_interactive(self, start, end, editable)
     return CBOOL2RVAL(gtk_text_buffer_delete_interactive(_SELF(self),
                                                          RVAL2ITR(start),
                                                          RVAL2ITR(end),
-                                                         RTEST(editable)));
+                                                         RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -173,7 +173,7 @@ txt_get_text(argc, argv, self)
             buffer,
             NIL_P(start) ? &start_iter : RVAL2ITR(start),
             NIL_P(end) ? &end_iter : RVAL2ITR(end),
-            RTEST(include_hidden_chars));
+            RVAL2CBOOL(include_hidden_chars));
     result = CSTR2RVAL(ret);
     g_free(ret);
 
@@ -209,7 +209,7 @@ txt_get_slice(argc, argv, self)
             buffer,
             NIL_P(start) ? &start_iter : RVAL2ITR(start),
             NIL_P(end) ? &end_iter : RVAL2ITR(end),
-            RTEST(include_hidden_chars));
+            RVAL2CBOOL(include_hidden_chars));
     result = CSTR2RVAL(ret);
     g_free(ret);
 
@@ -230,7 +230,7 @@ txt_insert_pixbuf(self, iter, pixbuf)
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, pixbuf);
 
-    if (RTEST(ruby_debug))
+    if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
                                   GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
@@ -243,7 +243,7 @@ txt_insert_child_anchor(self, iter, anchor)
 {
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, anchor);
-    if (RTEST(ruby_debug))
+    if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
                                         GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
@@ -266,7 +266,7 @@ txt_create_mark(self, name, where, left_gravity)
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
                                                       NIL_P(name) ? NULL : RVAL2CSTR(name),
                                                       RVAL2ITR(where),
-                                                      RTEST(left_gravity)));
+                                                      RVAL2CBOOL(left_gravity)));
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -356,7 +356,7 @@ static VALUE
 txt_set_modified(self, setting)
     VALUE self, setting;
 {
-    gtk_text_buffer_set_modified(_SELF(self), RTEST(setting));
+    gtk_text_buffer_set_modified(_SELF(self), RVAL2CBOOL(setting));
     return setting;
 }
 
@@ -412,7 +412,7 @@ txt_deserialize_set_can_create_tags(self, format, can_create_tags)
 {
     gtk_text_buffer_deserialize_set_can_create_tags(_SELF(self),
                                                     RVAL2ATOM(format),
-                                                    RTEST(can_create_tags));
+                                                    RVAL2CBOOL(can_create_tags));
     return self;
 }
 
@@ -615,7 +615,7 @@ txt_cut_clipboard(self, clipboard, default_editable)
     VALUE self, clipboard, default_editable;
 {
     G_CHILD_ADD(self, clipboard);
-    gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RTEST(default_editable));
+    gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RVAL2CBOOL(default_editable));
     return self;
 }
 
@@ -635,7 +635,7 @@ txt_paste_clipboard(self, clipboard, location, default_editable)
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard),
                                     NIL_P(location) ? NULL : RVAL2ITR(location),
-                                    RTEST(default_editable));
+                                    RVAL2CBOOL(default_editable));
     return self;
 }
 
@@ -663,7 +663,7 @@ txt_delete_selection(argc, argv, self)
     VALUE interactive, default_editable;
     rb_scan_args(argc, argv, "20", &interactive, &default_editable); 
     return CBOOL2RVAL(gtk_text_buffer_delete_selection(_SELF(self),
-                                                       RTEST(interactive), RTEST(default_editable)));
+                                                       RVAL2CBOOL(interactive), RVAL2CBOOL(default_editable)));
 }
 
 static VALUE
@@ -791,7 +791,7 @@ txt_insert_with_tags(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    if (RTEST(ruby_debug))
+    if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
     txt_insert(argc, argv, self);
     return self;

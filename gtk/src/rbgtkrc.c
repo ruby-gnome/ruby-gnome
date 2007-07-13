@@ -4,7 +4,7 @@
   rbgtkrc.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -93,7 +93,7 @@ rc_reparse_all_for_settings(self, settings, force_load)
     VALUE self, settings, force_load;
 {
     return CBOOL2RVAL(gtk_rc_reparse_all_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)), 
-                                                      RTEST(force_load)));
+                                                      RVAL2CBOOL(force_load)));
 }
 
 #if GTK_CHECK_VERSION(2,4,0)

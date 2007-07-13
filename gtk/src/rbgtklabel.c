@@ -3,8 +3,8 @@
 
   rbgtklabel.c -
 
-  $Author: mutoh $
-  $Date: 2006/10/21 16:58:00 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -26,7 +26,7 @@ label_initialize(argc, argv, self)
     GtkWidget* widget = NULL;
 
     rb_scan_args(argc, argv, "02", &label, &with_mnemonic);
-    if (NIL_P(with_mnemonic) || ! RTEST(with_mnemonic)){
+    if (NIL_P(with_mnemonic) || ! RVAL2CBOOL(with_mnemonic)){
         widget = gtk_label_new(NIL_P(label)?NULL:RVAL2CSTR(label));
     } else {
         widget = gtk_label_new_with_mnemonic(NIL_P(label)?NULL:RVAL2CSTR(label));
@@ -53,7 +53,7 @@ label_set_text(argc, argv, self)
     VALUE label, with_mnemonic;
 
     rb_scan_args(argc, argv, "02", &label, &with_mnemonic);
-    if (NIL_P(with_mnemonic) || ! RTEST(with_mnemonic)){
+    if (NIL_P(with_mnemonic) || ! RVAL2CBOOL(with_mnemonic)){
         gtk_label_set_text(_SELF(self), RVAL2CSTR(label));
     } else {
         gtk_label_set_text_with_mnemonic(_SELF(self), RVAL2CSTR(label));
@@ -78,7 +78,7 @@ label_set_markup(argc, argv, self)
     VALUE str, with_mnemonic;
     rb_scan_args(argc, argv, "02", &str, &with_mnemonic);
 
-    if (NIL_P(with_mnemonic) || ! RTEST(with_mnemonic)){
+    if (NIL_P(with_mnemonic) || ! RVAL2CBOOL(with_mnemonic)){
         gtk_label_set_markup(_SELF(self), RVAL2CSTR(str));
     } else {
         gtk_label_set_markup_with_mnemonic(_SELF(self), RVAL2CSTR(str));

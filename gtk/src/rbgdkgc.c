@@ -3,8 +3,8 @@
 
   rbgdkgc.c -
 
-  $Author: ktou $
-  $Date: 2005/09/12 00:34:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -164,7 +164,7 @@ static VALUE
 gdkgc_set_exposures(self, exposures)
     VALUE self, exposures;
 {
-    gdk_gc_set_exposures(_SELF(self), RTEST(exposures));
+    gdk_gc_set_exposures(_SELF(self), RVAL2CBOOL(exposures));
     return self;
 }
 
@@ -203,7 +203,7 @@ static VALUE
 gdkgc_copy(self, dst)
     VALUE self, dst;
 {
-    if (RTEST(rb_obj_is_kind_of(dst, gdkDrawable))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(dst, gdkDrawable))) {
         VALUE args[1];
         args[0] = dst;
         dst = rb_class_new_instance(1, args, gdkGC);

@@ -3,8 +3,8 @@
 
   rbrsvg.c -
 
-  $Author: ktou $
-  $Date: 2007/06/16 14:44:06 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:34 $
 
   Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -317,7 +317,7 @@ rb_rsvg_handle_initialize(int argc, VALUE *argv, VALUE self)
 #if LIBRSVG_CHECK_VERSION(2, 11, 0)
     handle = rsvg_handle_new();
 #else
-    if (RTEST(gz)) {
+    if (RVAL2CBOOL(gz)) {
 #  ifdef HAVE_LIBRSVG_RSVG_GZ_H
         handle = rsvg_handle_new_gz();
 #  else
@@ -368,7 +368,7 @@ rb_rsvg_handle_close(VALUE self)
     gboolean result;
     GError *error = NULL;
 
-    if (RTEST(rb_ivar_get(self, id_closed))) {
+    if (RVAL2CBOOL(rb_ivar_get(self, id_closed))) {
         return Qnil;
     }
   

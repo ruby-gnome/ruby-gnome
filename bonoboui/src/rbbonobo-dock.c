@@ -4,7 +4,7 @@
   rbbonobo-dock.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:06 $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
 
@@ -33,7 +33,7 @@ dock_allow_floating_items(self, enable)
     VALUE self, enable;
 {
     bonobo_dock_allow_floating_items(_SELF(self),
-                                     RTEST(enable));
+                                     RVAL2CBOOL(enable));
     return self;
 }
 
@@ -51,7 +51,7 @@ dock_add_item(self, item, placement, band_num, position, offset, in_new_band)
                          NUM2INT(band_num),
                          NUM2INT(position),
                          NUM2INT(offset),
-                         RTEST(in_new_band));
+                         RVAL2CBOOL(in_new_band));
     return self;
 }
 

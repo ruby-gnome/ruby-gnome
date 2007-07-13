@@ -3,8 +3,8 @@
 
   rbpangofont.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/10 15:13:10 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -31,7 +31,7 @@ font_describe(argc, argv, self)
     VALUE desc, absolute_size;
     rb_scan_args(argc, argv, "01", &absolute_size);
 
-    if (NIL_P(absolute_size) || ! RTEST(absolute_size)){
+    if (NIL_P(absolute_size) || ! RVAL2CBOOL(absolute_size)){
         desc = BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
     } else {
 #if PANGO_CHECK_VERSION(1,14,0)

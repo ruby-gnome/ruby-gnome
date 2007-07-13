@@ -3,8 +3,8 @@
 
   rbgtksourceprintjob.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/27 16:35:48 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2005  Masao Mutoh
 ************************************************/
@@ -220,7 +220,7 @@ sprintjob_set_header_format(self, left, center, right, separator)
                                            (const gchar*)RVAL2CSTR(left),
                                            (const gchar*)RVAL2CSTR(center),
                                            (const gchar*)RVAL2CSTR(right),
-                                           RTEST(separator));
+                                           RVAL2CBOOL(separator));
     return self;
 }
 
@@ -232,7 +232,7 @@ sprintjob_set_footer_format(self, left, center, right, separator)
                                            (const gchar*)RVAL2CSTR(left),
                                            (const gchar*)RVAL2CSTR(center),
                                            (const gchar*)RVAL2CSTR(right),
-                                           RTEST(separator));
+                                           RVAL2CBOOL(separator));
     return self;
 }
 #endif

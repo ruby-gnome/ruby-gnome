@@ -3,8 +3,8 @@
 
   rbgtktargetlist.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/23 08:39:13 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
@@ -82,7 +82,7 @@ static VALUE
 target_list_add_image_targets(self, info, writable)
     VALUE self, info, writable;
 {
-    gtk_target_list_add_image_targets(_SELF(self), NUM2UINT(info), RTEST(writable));
+    gtk_target_list_add_image_targets(_SELF(self), NUM2UINT(info), RVAL2CBOOL(writable));
     return self;
 }
 
@@ -101,7 +101,7 @@ target_list_add_rich_text_targets(self, info, deserializable, buffer)
     VALUE self, info, deserializable, buffer;
 {
     gtk_target_list_add_rich_text_targets(_SELF(self), NUM2UINT(info),
-                                          RTEST(deserializable),
+                                          RVAL2CBOOL(deserializable),
                                           GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)));
     return self;
 }

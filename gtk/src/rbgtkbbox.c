@@ -3,8 +3,8 @@
 
   rbgtkbbox.c -
 
-  $Author: mutoh $
-  $Date: 2007/01/31 17:55:25 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -20,7 +20,7 @@ bbox_set_child_secondary(self, child, is_secondary)
 {
     gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(RVAL2GOBJ(self)), 
                                        GTK_WIDGET(RVAL2GOBJ(child)),
-                                       RTEST(is_secondary));
+                                       RVAL2CBOOL(is_secondary));
     return self;
 }
 #if GTK_CHECK_VERSION(2,4,0)

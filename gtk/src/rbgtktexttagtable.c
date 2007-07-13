@@ -3,8 +3,8 @@
 
   rbgtktexttagtable.c -
  
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -57,7 +57,7 @@ txt_tt_foreach_func(tag, func)
     GtkTextTag *tag;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 1, GOBJ2RVAL(tag)));
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 1, GOBJ2RVAL(tag)));
 }
 
 static VALUE

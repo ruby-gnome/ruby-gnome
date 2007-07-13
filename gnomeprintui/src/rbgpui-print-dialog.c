@@ -3,8 +3,8 @@
 
   rbgpui-print-dialog.c -
 
-  $Author: ktou $
-  $Date: 2007/05/26 02:23:08 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:30 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -67,7 +67,7 @@ gpui_dialog_set_copies(VALUE self, VALUE copies, VALUE collate)
 {
     gnome_print_dialog_set_copies(_SELF(self),
                                   NUM2INT(copies),
-                                  RTEST(collate));
+                                  RVAL2CBOOL(collate));
     return Qnil;
 }
 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page-edge.c,v 1.3 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-druid-page-edge.c,v 1.4 2007/07/13 16:07:29 ggc Exp $ */
 
 /* Gnome::DruidPageEdge widget for Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -36,7 +36,7 @@ dedge_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "16", &position, &antialiased, &title, &text, &logo, &watermark, &top_watermark);
     result = gnome_druid_page_edge_new_with_vals(RVAL2GENUM(position, GNOME_TYPE_EDGE_POSITION),
-                                                 RTEST(antialiased),
+                                                 RVAL2CBOOL(antialiased),
                                                  NIL_P(title) ? NULL : RVAL2CSTR(title),
                                                  NIL_P(text) ? NULL : RVAL2CSTR(text),
                                                  NIL_P(logo) ? NULL : _PIXBUF(logo),

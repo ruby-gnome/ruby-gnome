@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-font-picker.c,v 1.7 2003/11/08 18:49:45 mutoh Exp $ */
+/* $Id: rbgnome-font-picker.c,v 1.8 2007/07/13 16:07:29 ggc Exp $ */
 /* based on libgnomeui/gnome-font-picker.h */
 
 /* Gnome::FontPicker widget for Ruby/GNOME2
@@ -42,7 +42,7 @@ picker_set_use_font_in_label(self, use_font, size)
     if (gnome_font_picker_get_mode(gfp) != GNOME_FONT_PICKER_MODE_FONT_INFO)
         rb_raise(rb_eRuntimeError, "mode is not a Gnome::FontPicker::MODE_FONT_INFO.");
     gnome_font_picker_fi_set_use_font_in_label(gfp,
-                                               RTEST(use_font),
+                                               RVAL2CBOOL(use_font),
                                                NUM2INT(size));
     return self;
 }

@@ -4,7 +4,7 @@
   rbgtkpaned.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -39,7 +39,7 @@ paned_pack1(self, child, resize, shrink)
     VALUE self, child, resize, shrink;
 {
     gtk_paned_pack1(_SELF(self), RVAL2WIDGET(child),
-                    RTEST(resize), RTEST(shrink));
+                    RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
     return self;
 }
 
@@ -48,7 +48,7 @@ paned_pack2(self, child, resize, shrink)
     VALUE self, child, resize, shrink;
 {
     gtk_paned_pack2(_SELF(self), RVAL2WIDGET(child),
-                    RTEST(resize), RTEST(shrink));
+                    RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
     return self;
 }
 

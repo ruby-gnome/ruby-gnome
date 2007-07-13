@@ -3,8 +3,8 @@
 
   rbgtkimagemenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2003/01/19 14:28:25 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -22,7 +22,7 @@ imitem_initialize(argc, argv, self)
 
     if (rb_scan_args(argc, argv, "02", &label, &use_underline_or_accel_group) > 0) {
         if (TYPE(label) == T_STRING){
-            if (NIL_P(use_underline_or_accel_group) || RTEST(use_underline_or_accel_group)){
+            if (NIL_P(use_underline_or_accel_group) || RVAL2CBOOL(use_underline_or_accel_group)){
                 widget = gtk_image_menu_item_new_with_mnemonic(RVAL2CSTR(label));
             } else {
                 widget = gtk_image_menu_item_new_with_label(RVAL2CSTR(label));

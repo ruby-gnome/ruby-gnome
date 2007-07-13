@@ -3,8 +3,8 @@
 
   rbgtkiconview.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -273,7 +273,7 @@ iview_scroll_to_path(self, path, use_align, row_align, col_align)
 {
     gtk_icon_view_scroll_to_path(_SELF(self),
                                  RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
-                                 RTEST(use_align),
+                                 RVAL2CBOOL(use_align),
                                  NUM2DBL(row_align),
                                  NUM2DBL(col_align));
     return self;
@@ -284,7 +284,7 @@ iview_set_cursor(self, path, cell, start_editing)
     VALUE self, path, cell, start_editing;
 {
     gtk_icon_view_set_cursor(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH), 
-                             NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RTEST(start_editing));
+                             NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RVAL2CBOOL(start_editing));
     return self;
 }
 

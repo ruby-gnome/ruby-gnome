@@ -4,7 +4,7 @@
   rbgtkaccelmap.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -36,7 +36,7 @@ accel_map_change_entry(self, path, key, mods, replace)
     VALUE self, path, key, mods, replace;
 {
     return CBOOL2RVAL(gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
-                                                 RVAL2MOD(mods), RTEST(replace)));
+                                                 RVAL2MOD(mods), RVAL2CBOOL(replace)));
 }
 
 static VALUE

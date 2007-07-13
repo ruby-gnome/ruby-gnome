@@ -3,8 +3,8 @@
 
   rbpanelapplet.c
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:04:52 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -151,7 +151,7 @@ rbpanel_cb(applet, iid, func)
     const gchar* iid;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(applet), CSTR2RVAL(iid)));
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(applet), CSTR2RVAL(iid)));
 }
    
 
@@ -231,7 +231,7 @@ rbpanel_applet_gconf_set_bool(self, key, value)
 {
     GError* error = NULL;
 
-    panel_applet_gconf_set_bool(_SELF(self), RVAL2CSTR(key), RTEST(value), &error);
+    panel_applet_gconf_set_bool(_SELF(self), RVAL2CSTR(key), RVAL2CBOOL(value), &error);
 
     if (error) RAISE_GERROR(error);
 

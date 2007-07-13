@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.12 2007/07/13 14:27:07 ggc Exp $ */
+/* $Id: rbgnome-client.c,v 1.13 2007/07/13 16:07:28 ggc Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
@@ -216,10 +216,10 @@ client_request_save(self, save_style, shutdown, interact_style, fast, global)
 {
     gnome_client_request_save(_SELF(self),
                               RVAL2GENUM(save_style, GNOME_TYPE_SAVE_STYLE),
-                              RTEST(shutdown),
+                              RVAL2CBOOL(shutdown),
                               RVAL2GENUM(interact_style, GNOME_TYPE_INTERACT_STYLE),
-                              RTEST(fast),
-                              RTEST(global));
+                              RVAL2CBOOL(fast),
+                              RVAL2CBOOL(global));
     return self;
 }
 
@@ -244,7 +244,7 @@ client_initialize(argc, argv, self)
     GnomeClient* client;
     VALUE do_connect;
     rb_scan_args(argc, argv, "01", &do_connect);
-    if (NIL_P(do_connect) || RTEST(do_connect)) {
+    if (NIL_P(do_connect) || RVAL2CBOOL(do_connect)) {
         client = gnome_client_new();
     } else {
         client = gnome_client_new_without_connection();
@@ -360,7 +360,7 @@ static VALUE
 rbgnome_interaction_key_return(self, key, cancel_shutdown)
     VALUE self, key, cancel_shutdown;
 {
-    gnome_interaction_key_return(NUM2INT(key), RTEST(cancel_shutdown));
+    gnome_interaction_key_return(NUM2INT(key), RVAL2CBOOL(cancel_shutdown));
     return Qnil;
 }
 

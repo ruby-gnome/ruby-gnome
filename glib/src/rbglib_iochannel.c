@@ -3,8 +3,8 @@
 
   rbglib_iochannel.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 02:40:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -502,7 +502,7 @@ ioc_shutdown(argc, argv, self)
     rb_scan_args(argc, argv, "01", &flush);
 
     if (!NIL_P(flush)){
-        gflush = RTEST(flush);
+        gflush = RVAL2CBOOL(flush);
     }
 
     status = g_io_channel_shutdown(_SELF(self), gflush, &err);
@@ -525,7 +525,7 @@ io_func(source, condition, func)
     GIOCondition condition;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 2, 
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, 
                             BOXED2RVAL(source, G_TYPE_IO_CHANNEL), 
                             INT2NUM(condition)));
 }
@@ -628,7 +628,7 @@ static VALUE
 ioc_set_buffered(self, buffered)
     VALUE self, buffered;
 {
-    g_io_channel_set_buffered(_SELF(self), RTEST(buffered));
+    g_io_channel_set_buffered(_SELF(self), RVAL2CBOOL(buffered));
     return self;
 }
 

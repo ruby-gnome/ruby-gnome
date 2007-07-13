@@ -3,8 +3,8 @@
 
   rbgtkpapersize.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/03 19:40:44 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -50,7 +50,7 @@ ps_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 ps_is_equal(VALUE self, VALUE other)
 {
-    return CBOOL2RVAL(RTEST(rb_equal(rb_obj_class(self), rb_obj_class(other))) &&
+    return CBOOL2RVAL(RVAL2CBOOL(rb_equal(rb_obj_class(self), rb_obj_class(other))) &&
                       gtk_paper_size_is_equal(_SELF(self), _SELF(other)));
 }
 

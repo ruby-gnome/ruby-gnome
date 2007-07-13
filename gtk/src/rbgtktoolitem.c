@@ -3,8 +3,8 @@
 
   rbgtktoolitem.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/11 17:01:40 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -25,7 +25,7 @@ static VALUE
 toolitem_set_homogeneous(self, homogeneous)
     VALUE self, homogeneous;
 {
-    gtk_tool_item_set_homogeneous(_SELF(self), RTEST(homogeneous));
+    gtk_tool_item_set_homogeneous(_SELF(self), RVAL2CBOOL(homogeneous));
     return self;
 }
 static VALUE
@@ -39,7 +39,7 @@ static VALUE
 toolitem_set_expand(self, expand)
     VALUE self, expand;
 {
-    gtk_tool_item_set_expand(_SELF(self), RTEST(expand));
+    gtk_tool_item_set_expand(_SELF(self), RVAL2CBOOL(expand));
     return self;
 }
 static VALUE
@@ -69,7 +69,7 @@ static VALUE
 toolitem_set_use_drag_window(self, use_drag_window)
     VALUE self, use_drag_window;
 {
-    gtk_tool_item_set_use_drag_window(_SELF(self), RTEST(use_drag_window));
+    gtk_tool_item_set_use_drag_window(_SELF(self), RVAL2CBOOL(use_drag_window));
     return self;
 }
 static VALUE

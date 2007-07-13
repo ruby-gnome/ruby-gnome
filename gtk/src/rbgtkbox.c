@@ -3,8 +3,8 @@
 
   rbgtkbox.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -33,9 +33,9 @@ box_pack_start_or_end(argc, argv, self, start)
       case 4:
         padding = NUM2INT(arg3);
       case 3:
-        fill = RTEST(arg2);
+        fill = RVAL2CBOOL(arg2);
       case 2:
-        expand = RTEST(arg1);
+        expand = RVAL2CBOOL(arg1);
       default:
         child = GTK_WIDGET(RVAL2GOBJ(arg0));
         G_CHILD_ADD(self, arg0);
@@ -122,7 +122,7 @@ box_set_child_packing(self, child, expand, fill, padding, pack_type)
 {
     gtk_box_set_child_packing(_SELF(self), 
                               RVAL2WIDGET(child),
-                              RTEST(expand), RTEST(fill),
+                              RVAL2CBOOL(expand), RVAL2CBOOL(fill),
                               NUM2UINT(padding), RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
     return self;
 }

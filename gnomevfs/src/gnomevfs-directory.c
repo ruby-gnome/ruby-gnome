@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2007/07/08 02:57:37 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -100,7 +100,7 @@ directory_make_directory(argc, argv, self)
 		perm = 0777;
 	}
 
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_make_directory_for_uri(RVAL2GVFSURI(uri),
 							  perm);
 	} else {
@@ -122,7 +122,7 @@ directory_remove_directory(self, uri)
 	SafeStringValue(uri);
 	*/
 	rb_secure(2);
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_remove_directory_from_uri(
 							RVAL2GVFSURI(uri));
 	} else {
@@ -140,7 +140,7 @@ directory_visit_callback(rel_path, info, recursing_will_loop, data, recurse)
 	gpointer data;
 	gboolean *recurse;
 {
-	*recurse = RTEST(rb_funcall((VALUE)data,
+	*recurse = RVAL2CBOOL(rb_funcall((VALUE)data,
 				    g_id_call,
 				    3,
 				    CSTR2RVAL(rel_path),
@@ -172,7 +172,7 @@ directory_visit(argc, argv, self)
 	}
 	G_RELATIVE(self, func);
 
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		RAISE_IF_ERROR(gnome_vfs_directory_visit_uri(RVAL2GVFSURI(uri),
 			RVAL2GFLAGS(info_options, GNOME_VFS_TYPE_VFS_FILE_INFO_OPTIONS),
 			RVAL2GFLAGS(visit_options, GNOME_VFS_TYPE_VFS_DIRECTORY_VISIT_OPTIONS),
@@ -216,7 +216,7 @@ directory_visit_files(argc, argv, self)
 
 	list = STRARY2GLIST(r_list);
 
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_directory_visit_files_at_uri(
 			RVAL2GVFSURI(uri),
 			list,
@@ -289,7 +289,7 @@ directory_initialize(argc, argv, self)
 		options = GNOME_VFS_FILE_INFO_DEFAULT;
 	}
 
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		result = gnome_vfs_directory_open_from_uri(&handle,
 						RVAL2GVFSURI(uri), options);
 	} else {

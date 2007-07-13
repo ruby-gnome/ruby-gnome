@@ -4,7 +4,7 @@
   rbgtkmenu.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -175,7 +175,7 @@ static VALUE
 menu_set_tearoff_state(self, torn_off)
     VALUE self, torn_off;
 {
-    gtk_menu_set_tearoff_state(_SELF(self), RTEST(torn_off));
+    gtk_menu_set_tearoff_state(_SELF(self), RVAL2CBOOL(torn_off));
     return self;
 }
 

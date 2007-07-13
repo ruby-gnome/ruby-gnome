@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.16 2007/07/13 14:27:08 ggc Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.17 2007/07/13 16:07:30 ggc Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -129,7 +129,7 @@ cpathdef_concat(argc, argv, self)
     int i;
 
     for (i = 0; i < argc; i++) {
-        if (!RTEST(rb_obj_is_instance_of(argv[i], gnoCanvasPathDef)))
+        if (!RVAL2CBOOL(rb_obj_is_instance_of(argv[i], gnoCanvasPathDef)))
             rb_raise(rb_eArgError,
                      "invalid argument type %s (expect Gnome::CanvasPathDef)",
                      rb_class2name(CLASS_OF(argv[i])));

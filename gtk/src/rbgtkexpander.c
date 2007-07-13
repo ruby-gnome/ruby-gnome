@@ -3,8 +3,8 @@
 
   rbgtkexpander.c -
 
-  $Author: mutoh $
-  $Date: 2004/05/30 16:41:13 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -25,7 +25,7 @@ expander_initialize(argc, argv, self)
     GtkWidget* widget = NULL;
 
     rb_scan_args(argc, argv, "11", &label, &with_mnemonic);
-    if (NIL_P(with_mnemonic) || ! RTEST(with_mnemonic)){
+    if (NIL_P(with_mnemonic) || ! RVAL2CBOOL(with_mnemonic)){
         widget = gtk_expander_new(RVAL2CSTR(label));
     } else {
         widget = gtk_expander_new_with_mnemonic(RVAL2CSTR(label));

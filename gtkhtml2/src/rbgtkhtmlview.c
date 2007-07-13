@@ -3,8 +3,8 @@
 
   rbgtkhtmlview.c
 
-  $Author: mutoh $
-  $Date: 2004/03/05 16:29:45 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2003,2004 Masao Mutoh
   Copyright (C) 2003 Martin Povolny
@@ -99,7 +99,7 @@ static VALUE
 rb_html_view_find_layout_box(self, node, find_parent)
     VALUE self, node, find_parent;
 {
-    return GOBJ2RVAL(html_view_find_layout_box(_SELF(self), DOM_NODE(RVAL2GOBJ(node)), RTEST(find_parent)));
+    return GOBJ2RVAL(html_view_find_layout_box(_SELF(self), DOM_NODE(RVAL2GOBJ(node)), RVAL2CBOOL(find_parent)));
 }
 
 #ifdef HAVE_HTML_VIEW_SCROLL_TO_NODE

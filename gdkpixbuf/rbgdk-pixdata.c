@@ -3,8 +3,8 @@
 
   rbgdk-pixdata.c -
 
-  $Author: mutoh $
-  $Date: 2006/04/22 15:39:00 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -43,7 +43,7 @@ pixdata_s_from_pixbuf(self, pixbuf, use_rle)
     VALUE self, pixbuf, use_rle;
 {
     GdkPixdata pixdata;
-    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RTEST(use_rle));
+    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
     VALUE ret = PIXDATA2RVAL(&pixdata);
     if (use_rle){
         /* need to manage the returned value */
@@ -57,7 +57,7 @@ pixdata_to_pixbuf(self, copy_pixels)
     VALUE self, copy_pixels;
 {
     GError* error = NULL;
-    GdkPixbuf* ret = gdk_pixbuf_from_pixdata(_SELF(self), RTEST(copy_pixels), &error);
+    GdkPixbuf* ret = gdk_pixbuf_from_pixdata(_SELF(self), RVAL2CBOOL(copy_pixels), &error);
     if (error)
         RAISE_GERROR(error);
     return GOBJ2RVAL(ret);

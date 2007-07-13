@@ -3,8 +3,8 @@
 
   rbgtkentrycompletion.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -37,7 +37,7 @@ entryc_match_func(completion, key, iter, func)
     gpointer func;
 {
     iter->user_data3 = gtk_entry_completion_get_model(completion);
-    return RTEST(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(completion),
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(completion),
                             CSTR2RVAL(key), BOXED2RVAL(iter, GTK_TYPE_TREE_ITER)));
 }
 

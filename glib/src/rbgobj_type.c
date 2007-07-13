@@ -4,7 +4,7 @@
   rbgobj_type.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:07 $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -319,7 +319,7 @@ GType
 rbgobj_gtype_get(self)
     VALUE self;
 {
-    if (RTEST(rb_obj_is_kind_of(self, rbgobj_cType))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(self, rbgobj_cType))) {
         return NUM2ULONG(rb_ivar_get(self, id_gtype));
     } else {
         return CLASS2GTYPE(self);
@@ -333,7 +333,7 @@ type_initialize(self, type)
 {
     GType gtype;
 
-    if (RTEST(rb_obj_is_kind_of(type, rb_cInteger))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
         gtype = NUM2UINT(type);
         // XXX
         if (!g_type_name(gtype))
@@ -369,7 +369,7 @@ static VALUE
 type_compare(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
@@ -390,7 +390,7 @@ static VALUE
 type_eq(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
@@ -403,7 +403,7 @@ static VALUE
 type_lt_eq(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
@@ -416,7 +416,7 @@ static VALUE
 type_gt_eq(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
@@ -429,7 +429,7 @@ static VALUE
 type_lt(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);
@@ -442,7 +442,7 @@ static VALUE
 type_gt(self, other)
     VALUE self, other;
 {
-    if (!RTEST(rb_obj_is_kind_of(other, rbgobj_cType)))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other, rbgobj_cType)))
         return Qnil;
     else {
         GType a = rbgobj_gtype_get(self);

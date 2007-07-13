@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 02:40:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -54,7 +54,7 @@ invoke_source_func(data)
     callback_info_t *info = (callback_info_t *)data;
     gboolean ret;
 
-    ret = RTEST(rb_funcall(info->callback, id_call, 0));
+    ret = RVAL2CBOOL(rb_funcall(info->callback, id_call, 0));
     if (!ret)
         G_REMOVE_RELATIVE(mGLibSource, id__callbacks__, UINT2NUM(info->id));
     return ret;
@@ -95,7 +95,7 @@ static VALUE
 mc_iteration(self, may_block)
     VALUE self, may_block;
 {
-    return CBOOL2RVAL(g_main_context_iteration(_SELF(self), RTEST(may_block)));
+    return CBOOL2RVAL(g_main_context_iteration(_SELF(self), RVAL2CBOOL(may_block)));
 }
 
 static VALUE
@@ -372,10 +372,10 @@ idle_add(argc, argv, self)
 
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
-    if (RTEST(rb_obj_is_kind_of(arg1, rb_cProc))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(arg1, rb_cProc))) {
         priority = G_PRIORITY_DEFAULT;
         func = arg1;
-    } else if (RTEST(rb_obj_is_kind_of(arg1, rb_cInteger))) {
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(arg1, rb_cInteger))) {
         priority = NUM2INT(arg1);
         func = rb_block_proc();
     } else {

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-config.c,v 1.7 2007/07/13 14:27:07 ggc Exp $ */
+/* $Id: rbgnome-config.c,v 1.8 2007/07/13 16:07:29 ggc Exp $ */
 /* based on libgnome/gnome-config.h */
 
 /* Gnome::Config for Ruby/GNOME2
@@ -335,7 +335,7 @@ static VALUE
 config_set_bool(self, path, new_value)
     VALUE self, path, new_value;
 {
-    gnome_config_set_bool(RVAL2CSTR(path), RTEST(new_value));
+    gnome_config_set_bool(RVAL2CSTR(path), RVAL2CBOOL(new_value));
     return self;
 }
 
@@ -394,7 +394,7 @@ static VALUE
 config_private_set_bool(self, path, new_value)
     VALUE self, path, new_value;
 {
-    gnome_config_private_set_bool(RVAL2CSTR(path), RTEST(new_value));
+    gnome_config_private_set_bool(RVAL2CSTR(path), RVAL2CBOOL(new_value));
     return self;
 }
 

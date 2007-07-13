@@ -4,7 +4,7 @@
   rbgtktreeselection.c -
 
   $Author: ggc $ 
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -41,7 +41,7 @@ selection_func(selection, model, path, path_currently_selected, func)
     gboolean path_currently_selected;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 4, 
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, 
                             GOBJ2RVAL(selection),
                             GOBJ2RVAL(model),
                             TREEPATH2RVAL(path),

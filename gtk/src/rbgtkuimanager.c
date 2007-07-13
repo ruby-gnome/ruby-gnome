@@ -3,8 +3,8 @@
 
   rbgtkuimanager.c -
 
-  $Author: ssimons $
-  $Date: 2006/08/11 13:09:55 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -106,7 +106,7 @@ rbuimanager_add_ui(argc, argv, self)
         Check_Type(buffer_or_filename, T_STRING);
         buffer = rb_funcall(buffer_or_filename, rb_intern("include?"), 1, CSTR2RVAL("<ui>"));
 
-        if (RTEST(buffer)){
+        if (RVAL2CBOOL(buffer)){
             StringValue(buffer_or_filename);
             ret = gtk_ui_manager_add_ui_from_string(_SELF(self), RVAL2CSTR(buffer_or_filename),
                                                     RSTRING(buffer_or_filename)->len,
@@ -124,7 +124,7 @@ rbuimanager_add_ui(argc, argv, self)
         gtk_ui_manager_add_ui(_SELF(self), ret, RVAL2CSTR(path),
                               RVAL2CSTR(name), RVAL2CSTR(action), 
                               RVAL2GFLAGS(type, GTK_TYPE_UI_MANAGER_ITEM_TYPE),
-                              RTEST(top));
+                              RVAL2CBOOL(top));
     }
 
     if (ret == 0) RAISE_GERROR(error);

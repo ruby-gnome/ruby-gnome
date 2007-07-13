@@ -4,7 +4,7 @@
   rbgtknotebook.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -254,7 +254,7 @@ note_set_tab_label_packing(self, child, expand, fill, pack_type)
 {
     gtk_notebook_set_tab_label_packing(_SELF(self),
                                        RVAL2WIDGET(child),
-                                       RTEST(expand), RTEST(fill),
+                                       RVAL2CBOOL(expand), RVAL2CBOOL(fill),
                                        RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
     return self;
 }

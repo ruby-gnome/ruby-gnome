@@ -4,7 +4,7 @@
   rbgtkimcontext.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -78,7 +78,7 @@ static VALUE
 imcontext_set_use_preedit(self, use_preedit)
     VALUE self, use_preedit;
 {
-    gtk_im_context_set_use_preedit(_SELF(self), RTEST(use_preedit));
+    gtk_im_context_set_use_preedit(_SELF(self), RVAL2CBOOL(use_preedit));
     return self;
 }
 

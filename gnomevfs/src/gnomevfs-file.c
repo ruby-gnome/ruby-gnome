@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2007/07/01 07:25:59 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -77,7 +77,7 @@ static VALUE
 file_unlink(self, uri)
      VALUE self, uri;
 {
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     return GVFSRESULT2RVAL(
                            gnome_vfs_unlink_from_uri(RVAL2GVFSURI(uri)));
   } else {
@@ -95,13 +95,13 @@ file_move(argc, argv, self)
   gboolean force;
 
   if (rb_scan_args(argc, argv, "21", &source, &target, &r_force) == 3) {
-    force = RTEST(r_force);
+    force = RVAL2CBOOL(r_force);
   } else {
     force = TRUE;
   }
 
   /* XXX: this needs to be fixed */
-  if (RTEST(rb_obj_is_kind_of(source, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(source, g_gvfs_uri))) {
     return GVFSRESULT2RVAL(
                            gnome_vfs_move_uri(RVAL2GVFSURI(source),
                                               RVAL2GVFSURI(target),
@@ -120,14 +120,14 @@ create_symbolic_link(self, uri, reference)
   GnomeVFSURI *tmp;
   VALUE result;
 
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     tmp = RVAL2GVFSURI(uri);
     gnome_vfs_uri_ref(tmp);
   } else {
     tmp = gnome_vfs_uri_new(RVAL2CSTR(uri));
   }
 
-  if (RTEST(rb_obj_is_kind_of(reference, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(reference, g_gvfs_uri))) {
     gchar *str;
 
     str = gnome_vfs_uri_to_string(RVAL2GVFSURI(reference),
@@ -158,7 +158,7 @@ apply_set_info(paths, info, mask)
   Check_Type(paths, T_ARRAY);
   for (i = 0, n = RARRAY(paths)->len; i < n; i++) {
     path = rb_ary_entry(paths, i);
-    if (RTEST(rb_obj_is_kind_of(path, g_gvfs_uri))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(path, g_gvfs_uri))) {
       result = GVFSRESULT2RVAL(
                                gnome_vfs_set_file_info_uri(RVAL2GVFSURI(path),
                                                            info, mask));
@@ -244,7 +244,7 @@ file_m_lstat(argc, argv, self)
 
   info = gnome_vfs_file_info_new();
 
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     result = gnome_vfs_get_file_info_uri(RVAL2GVFSURI(uri),
                                          info,
                                          options);
@@ -277,7 +277,7 @@ file_m_stat(argc, argv, self)
 
   info = gnome_vfs_file_info_new();
 
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     result = gnome_vfs_get_file_info_uri(RVAL2GVFSURI(uri),
                                          info,
                                          options);
@@ -296,7 +296,7 @@ file_m_set_stat(self, uri, info, mask)
 {
   GnomeVFSResult result;
 
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     result = gnome_vfs_set_file_info_uri(RVAL2GVFSURI(uri),
                                          RVAL2GVFSFILEINFO(info),
                                          RVAL2GFLAGS(mask, GNOME_VFS_TYPE_VFS_SET_FILE_INFO_MASK));
@@ -319,7 +319,7 @@ file_m_truncate(self, uri, length)
   /* XXX: how to do this?
    * SafeStringValue(uri);
    */
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
     result = gnome_vfs_truncate_uri(RVAL2GVFSURI(uri),
                                     NUM2ULONG(length));
   } else {
@@ -439,7 +439,7 @@ file_initialize(argc, argv, self)
     open_mode = OPENMODE2RVAL(GNOME_VFS_OPEN_READ);
   }
 
-  if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+  if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
       result = gnome_vfs_open_uri(&handle,
                                   RVAL2GVFSURI(uri),
                                   RVAL2OPENMODE(open_mode));
@@ -448,7 +448,7 @@ file_initialize(argc, argv, self)
         result = gnome_vfs_create_uri(&handle,
                                       RVAL2GVFSURI(uri),
                                       RVAL2OPENMODE(open_mode),
-                                      RTEST(exclusive),
+                                      RVAL2CBOOL(exclusive),
                                       NUM2UINT(perm));
       }
   } else {
@@ -460,7 +460,7 @@ file_initialize(argc, argv, self)
         result = gnome_vfs_create(&handle,
                                   RVAL2CSTR(uri),
                                   RVAL2OPENMODE(open_mode),
-                                  RTEST(exclusive),
+                                  RVAL2CBOOL(exclusive),
                                   NUM2UINT(perm));
       }
   }

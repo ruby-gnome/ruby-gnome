@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-program.c,v 1.12 2005/09/24 18:02:43 mutoh Exp $ */
+/* $Id: rbgnome-program.c,v 1.13 2007/07/13 16:07:30 ggc Exp $ */
 /* based on libgnome/gnome-program.h */
 
 /* Gnome::Program module for Ruby/GNOME2
@@ -132,7 +132,7 @@ prepare_pdata(hash, data, popt_tablep)
                     break;
                   case PROP_BOOLEAN:
                     data[i].type = PROP_DATA_INT;
-                    data[i].value.i = RTEST(value) ? 1 : 0;
+                    data[i].value.i = RVAL2CBOOL(value) ? 1 : 0;
                     break;
                   case PROP_STRING:
                     data[i].type = PROP_DATA_PTR;
@@ -383,9 +383,9 @@ program_locate_file(argc, argv, self)
     result = gnome_program_locate_file(NIL_P(self) ? NULL : _SELF(self),
                                        RVAL2GENUM(domain, GNOME_TYPE_FILE_DOMAIN),
                                        RVAL2CSTR(file_name),
-                                       RTEST(only_if_exists),
-                                       RTEST(multi) ? &ret_locations : NULL);
-    if (RTEST(multi)) {
+                                       RVAL2CBOOL(only_if_exists),
+                                       RVAL2CBOOL(multi) ? &ret_locations : NULL);
+    if (RVAL2CBOOL(multi)) {
         obj = rb_ary_new();
         for (list = ret_locations; list != NULL; list = list->next) {
             rb_ary_push(obj, CSTR2RVAL(list->data));

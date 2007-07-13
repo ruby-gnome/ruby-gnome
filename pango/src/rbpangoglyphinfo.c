@@ -3,8 +3,8 @@
 
   rbpangoglyphinfo.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -98,7 +98,7 @@ static VALUE
 gi_attr_set_is_cluster_start(self, val)
     VALUE self, val;
 {
-    _SELF(self)->attr.is_cluster_start = RTEST(val);
+    _SELF(self)->attr.is_cluster_start = RVAL2CBOOL(val);
     return self;
 }
 

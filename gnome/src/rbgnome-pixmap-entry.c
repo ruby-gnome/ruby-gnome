@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-pixmap-entry.c,v 1.7 2003/06/26 15:16:20 mutoh Exp $ */
+/* $Id: rbgnome-pixmap-entry.c,v 1.8 2007/07/13 16:07:30 ggc Exp $ */
 /* based on libgnomeui/gnome-pixmap-entry.h */
 
 /* Gnome::PixmapEntry widget for Ruby/GNOME2
@@ -39,7 +39,7 @@ pentry_initialize(argc, argv, self)
                  &history_id, &browse_dialog_title, &do_preview);
     pentry = gnome_pixmap_entry_new(NIL_P(history_id)?0:RVAL2CSTR(history_id),
                                     NIL_P(browse_dialog_title)?0:RVAL2CSTR(browse_dialog_title),
-                                    RTEST(do_preview));
+                                    RVAL2CBOOL(do_preview));
     RBGTK_INITIALIZE(self, pentry);
     return Qnil;
 }
@@ -70,7 +70,7 @@ static VALUE
 pentry_set_preview(self, do_preview)
     VALUE self, do_preview;
 {
-    gnome_pixmap_entry_set_preview(_SELF(self), RTEST(do_preview));
+    gnome_pixmap_entry_set_preview(_SELF(self), RVAL2CBOOL(do_preview));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgdkselection.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -27,7 +27,7 @@ gdkselection_owner_set(argc, argv, self)
         rb_scan_args(argc, argv, "40", &owner, &selection, &time, &send_event);
         ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
                                       RVAL2ATOM(selection), 
-                                      NUM2UINT(time), RTEST(send_event));
+                                      NUM2UINT(time), RVAL2CBOOL(send_event));
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
       VALUE display = Qnil;
@@ -35,7 +35,7 @@ gdkselection_owner_set(argc, argv, self)
       ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 GDK_WINDOW(RVAL2GOBJ(owner)), 
                                                 RVAL2ATOM(selection), 
-                                                NUM2UINT(time), RTEST(send_event));
+                                                NUM2UINT(time), RVAL2CBOOL(send_event));
 #else
       rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
 #endif

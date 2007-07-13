@@ -3,8 +3,8 @@
 
   rbgobj_paramspecs.c -
 
-  $Author: sakai $
-  $Date: 2006/05/27 12:24:15 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sun Jul 26 14:31:33 JST 2002
 
   Copyright (C) 2004       Ruby-GNOME2 Project Team
@@ -84,7 +84,7 @@ boolean_initialize(self, name, nick, blurb, default_value, flags)
     pspec = g_param_spec_boolean(StringValuePtr(name),
                                  StringValuePtr(nick),
                                  StringValuePtr(blurb),
-                                 RTEST(default_value),
+                                 RVAL2CBOOL(default_value),
                                  NUM2UINT(flags));
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;

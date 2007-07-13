@@ -4,7 +4,7 @@
   rbgtkaccelgroup.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -112,7 +112,7 @@ gaccelgrp_find_func(key, closure, func)
     GClosure *closure;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 2,
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2,
                             BOXED2RVAL(key, GTK_TYPE_ACCEL_KEY),
                             BOXED2RVAL(closure, G_TYPE_CLOSURE)));
 }

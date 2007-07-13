@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2007/07/08 02:57:37 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -98,7 +98,7 @@ monitor_initialize(argc, argv, self)
 	GnomeVFSResult result;
 
 	rb_scan_args(argc, argv, "2&", &uri, &type, &func);
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		text_uri = gnome_vfs_uri_to_string(RVAL2GVFSURI(uri),
 						   GNOME_VFS_URI_HIDE_NONE);
 		free_uri = TRUE;

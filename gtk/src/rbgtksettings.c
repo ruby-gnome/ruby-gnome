@@ -3,8 +3,8 @@
 
   rbgtksettings.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Masao Mutoh
@@ -48,7 +48,7 @@ rc_property_parser(pspec, rc_string, property_value)
     VALUE ret = rb_funcall(func, id_call, 2, spec, CSTR2RVAL(rc_string->str));
     if (NIL_P(ret)) {
         return FALSE;
-    } else if (RTEST(ret)){
+    } else if (RVAL2CBOOL(ret)){
         rbgobj_rvalue_to_gvalue(ret, property_value);
         return TRUE;
     } else {

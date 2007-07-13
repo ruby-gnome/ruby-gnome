@@ -5,7 +5,7 @@
   rbgtkmain.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -47,7 +47,7 @@ static gboolean
 gtk_m_function(data)
     gpointer data;
 { 
-    return RTEST(G_PROTECT_CALLBACK(gtk_m_function_body, data));
+    return RVAL2CBOOL(G_PROTECT_CALLBACK(gtk_m_function_body, data));
 }
 
 static VALUE
@@ -240,7 +240,7 @@ static VALUE
 gtk_m_main_iteration_do(self, blocking)
     VALUE self, blocking;
 {
-    return CBOOL2RVAL(gtk_main_iteration_do(RTEST(blocking)));
+    return CBOOL2RVAL(gtk_main_iteration_do(RVAL2CBOOL(blocking)));
 }
 
 static VALUE
@@ -423,7 +423,7 @@ gtk_m_key_snoop_func(grab_widget, event, func)
     VALUE ret = rb_funcall((VALUE)func, id_call, 2, 
                            GOBJ2RVAL(grab_widget), 
                            GEV2RVAL((GdkEvent*)event));
-    return RTEST(ret);
+    return RVAL2CBOOL(ret);
 }
 
 static VALUE

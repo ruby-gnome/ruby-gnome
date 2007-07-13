@@ -3,8 +3,8 @@
 
   rbgtkaction.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -169,7 +169,7 @@ static VALUE
 action_set_sensitive(self, sensitive)
     VALUE self, sensitive;
 {
-    gtk_action_set_sensitive(_SELF(self), RTEST(sensitive));
+    gtk_action_set_sensitive(_SELF(self), RVAL2CBOOL(sensitive));
     return self;
 }
 
@@ -181,7 +181,7 @@ static VALUE
 action_set_visible(self, visible)
     VALUE self, visible;
 {
-    gtk_action_set_visible(_SELF(self), RTEST(visible));
+    gtk_action_set_visible(_SELF(self), RVAL2CBOOL(visible));
     return self;
 }
 

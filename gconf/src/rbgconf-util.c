@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: ggc $
  *
- * $Date: 2004/03/14 01:19:24 $
+ * $Date: 2007/07/13 16:07:28 $
  *
  *****************************************************************************/
 
@@ -96,7 +96,7 @@ rb_value_to_gconf_value(val)
 	case T_TRUE:
 	case T_FALSE:
 		gval = gconf_value_new(GCONF_VALUE_BOOL);
-		gconf_value_set_bool(gval, RTEST(val));
+		gconf_value_set_bool(gval, RVAL2CBOOL(val));
 		break;
 	case T_ARRAY: {
 		GConfValueType type;

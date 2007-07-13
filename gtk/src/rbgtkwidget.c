@@ -4,7 +4,7 @@
   rbgtkwidget.c -
 
   $Author: ggc $
-  $Date: 2007/07/09 12:36:00 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -697,7 +697,7 @@ static VALUE
 widget_set_double_buffered(self, double_buffered)
     VALUE self, double_buffered;
 {
-    gtk_widget_set_double_buffered(_SELF(self), RTEST(double_buffered));
+    gtk_widget_set_double_buffered(_SELF(self), RVAL2CBOOL(double_buffered));
     return self;
 }
 
@@ -705,7 +705,7 @@ static VALUE
 widget_set_redraw_on_allocate(self, redraw_on_allocate)
     VALUE self, redraw_on_allocate;
 {
-    gtk_widget_set_redraw_on_allocate(_SELF(self), RTEST(redraw_on_allocate));
+    gtk_widget_set_redraw_on_allocate(_SELF(self), RVAL2CBOOL(redraw_on_allocate));
     return self;
 }
 
@@ -730,7 +730,7 @@ static VALUE
 widget_mnemonic_activate(self, group_cycling)
     VALUE self, group_cycling;
 {
-    return CBOOL2RVAL(gtk_widget_mnemonic_activate(_SELF(self), RTEST(group_cycling)));
+    return CBOOL2RVAL(gtk_widget_mnemonic_activate(_SELF(self), RVAL2CBOOL(group_cycling)));
 }
 
 /*
@@ -751,7 +751,7 @@ rc_property_parser(pspec, rc_string, property_value)
     VALUE ret = rb_funcall(func, id_call, 2, spec, CSTR2RVAL(rc_string->str));
     if (NIL_P(ret)) {
         return FALSE;
-    } else if (RTEST(ret)){
+    } else if (RVAL2CBOOL(ret)){
         rbgobj_rvalue_to_gvalue(ret, property_value);
         return TRUE;
     } else {
@@ -833,7 +833,7 @@ widget_s_style_properties(argc, argv, self)
 
     ary = rb_ary_new();
     for (i = 0; i < n_properties; i++){
-        if (RTEST(inherited_too)
+        if (RVAL2CBOOL(inherited_too)
             || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, CSTR2RVAL(props[i]->name));
     }
@@ -1013,7 +1013,7 @@ static VALUE
 widget_set_child_visible(self, is_visible)
     VALUE self, is_visible;
 {
-    gtk_widget_set_child_visible(_SELF(self), RTEST(is_visible));
+    gtk_widget_set_child_visible(_SELF(self), RVAL2CBOOL(is_visible));
     return self;
 }
 
@@ -1038,7 +1038,7 @@ static VALUE
 widget_set_no_show_all(self, no_show_all)
     VALUE self, no_show_all;
 {
-    gtk_widget_set_no_show_all(_SELF(self), RTEST(no_show_all));
+    gtk_widget_set_no_show_all(_SELF(self), RVAL2CBOOL(no_show_all));
     return self;
 }
 

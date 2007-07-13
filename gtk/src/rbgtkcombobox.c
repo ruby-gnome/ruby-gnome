@@ -3,8 +3,8 @@
 
   rbgtkcombobox.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -175,7 +175,7 @@ row_separator_func(model, iter, func)
     gpointer* func;
 {  
     iter->user_data3 = model;
-    return RTEST(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model),
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model),
                             BOXED2RVAL(iter, GTK_TYPE_TREE_ITER)));
 }
 
@@ -199,7 +199,7 @@ static VALUE
 combobox_set_focus_on_click(self, val)
     VALUE self, val;
 {
-    gtk_combo_box_set_focus_on_click(_SELF(self), RTEST(val));
+    gtk_combo_box_set_focus_on_click(_SELF(self), RVAL2CBOOL(val));
     return self;
 }
 

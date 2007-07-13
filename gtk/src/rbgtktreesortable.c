@@ -3,9 +3,9 @@
 
   rbgtktreesortable.c -
 
-  $Author: sakai $
+  $Author: ggc $
 
-  $Date: 2007/07/08 03:00:49 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
 ************************************************/
@@ -104,7 +104,7 @@ static VALUE
 treesortable_has_default_sort_func(self)
     VALUE self;
 {
-    return RTEST(gtk_tree_sortable_has_default_sort_func(_SELF(self)));
+    return RVAL2CBOOL(gtk_tree_sortable_has_default_sort_func(_SELF(self)));
 }
 
 void

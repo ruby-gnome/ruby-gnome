@@ -3,8 +3,8 @@
 
   rbgdkrgb.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -133,7 +133,7 @@ static VALUE
 rgb_set_install(self, install)
     VALUE self, install;
 {
-    gdk_rgb_set_install(RTEST(install));
+    gdk_rgb_set_install(RVAL2CBOOL(install));
     return self;
 }
 
@@ -170,7 +170,7 @@ static VALUE
 rgb_set_verbose(self, verbose)
     VALUE self, verbose;
 {
-    gdk_rgb_set_verbose(RTEST(verbose));
+    gdk_rgb_set_verbose(RVAL2CBOOL(verbose));
     return self;
 }
 

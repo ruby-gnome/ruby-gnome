@@ -4,7 +4,7 @@
   rbgtkradiobutton.c -
 
   $Author: ggc $
-  $Date: 2007/07/10 13:22:40 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -25,7 +25,7 @@ create_button(group, label, use_underline)
     GtkWidget* widget = NULL;
 
     if (TYPE(label) == T_STRING){
-        if (NIL_P(use_underline) || RTEST(use_underline)){
+        if (NIL_P(use_underline) || RVAL2CBOOL(use_underline)){
             widget = gtk_radio_button_new_with_mnemonic_from_widget(_GROUP(group), RVAL2CSTR(label));
         } else {
             widget = gtk_radio_button_new_with_label_from_widget(_GROUP(group), RVAL2CSTR(label));

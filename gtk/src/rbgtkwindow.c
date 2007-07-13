@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:11 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -151,7 +151,7 @@ static VALUE
 gwin_set_destroy_with_parent(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_destroy_with_parent(_SELF(self), RTEST(setting));
+    gtk_window_set_destroy_with_parent(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -318,14 +318,14 @@ static VALUE
 gwin_set_keep_above(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_keep_above(_SELF(self), RTEST(setting));
+    gtk_window_set_keep_above(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 static VALUE
 gwin_set_keep_below(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_keep_below(_SELF(self), RTEST(setting));
+    gtk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 #endif
@@ -354,7 +354,7 @@ static VALUE
 gwin_set_decorated(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_decorated(_SELF(self), RTEST(setting));
+    gtk_window_set_decorated(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -372,7 +372,7 @@ static VALUE
 gwin_set_has_frame(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_has_frame(_SELF(self), RTEST(setting));
+    gtk_window_set_has_frame(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -659,7 +659,7 @@ static VALUE
 gwin_s_set_auto_startup_notification(self, setting)
     VALUE self, setting;
 {
-    gtk_window_set_auto_startup_notification(RTEST(setting));
+    gtk_window_set_auto_startup_notification(RVAL2CBOOL(setting));
     return self;
 }
 #endif

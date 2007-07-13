@@ -3,8 +3,8 @@
 
   rbgp-gnome-print-job.c -
 
-  $Author: ktou $
-  $Date: 2005/10/10 02:07:41 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:30 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -72,7 +72,7 @@ gp_job_render_page(VALUE self, VALUE context, VALUE page, VALUE pageops)
     return rbgp_check_return_code(gnome_print_job_render_page(_SELF(self),
                                                               GP_CONTEXT(context),
                                                               NUM2INT(page),
-                                                              RTEST(pageops)));
+                                                              RVAL2CBOOL(pageops)));
 }
 
 static VALUE

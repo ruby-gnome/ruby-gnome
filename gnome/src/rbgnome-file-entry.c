@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-file-entry.c,v 1.6 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-file-entry.c,v 1.7 2007/07/13 16:07:29 ggc Exp $ */
 /* based on libgnomeui/gnome-file-entry.h */
 
 /* Gnome::FileEntry widget for Ruby/GNOME2
@@ -63,7 +63,7 @@ fentry_get_full_path(self, file_must_exist)
     VALUE obj;
 
     filename = gnome_file_entry_get_full_path(_SELF(self),
-                                               RTEST(file_must_exist));
+                                               RVAL2CBOOL(file_must_exist));
     SET_STR_AND_GFREE(obj, filename);
     return obj;
 }

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-buf.c,v 1.1 2005/10/01 19:44:15 mutoh Exp $ */
+/* $Id: rbgnome-canvas-buf.c,v 1.2 2007/07/13 16:07:30 ggc Exp $ */
 
 /* Gnome::CanvasBuf
  *
@@ -62,7 +62,7 @@ static VALUE \
 buf_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    _SELF(self)->name = RTEST(val);\
+    _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
 }
 /**********************************/

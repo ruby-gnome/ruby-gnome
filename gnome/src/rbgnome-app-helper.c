@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app-helper.c,v 1.17 2006/04/23 11:40:53 ktou Exp $ */
+/* $Id: rbgnome-app-helper.c,v 1.18 2007/07/13 16:07:28 ggc Exp $ */
 /* based on libgnomeui/gnome-app-helper.h */
 
 /* Gnome::UIInfo module for Ruby/GNOME2
@@ -774,7 +774,7 @@ app_fill_menus(self, menuinfo, accel_group, uline_accels, pos)
                                DATA_PTR(uiinfo),
                                &RbGnome_UIBuilder,
                                GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)),
-                               RTEST(uline_accels),
+                               RVAL2CBOOL(uline_accels),
                                NUM2INT(pos));
     return ui_info_to_ary(DATA_PTR(uiinfo));
 }

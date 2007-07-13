@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-score.c,v 1.2 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-score.c,v 1.3 2007/07/13 16:07:30 ggc Exp $ */
 /* based on libgnome/gnome-score.h */
 
 /* Gnome::Score module for Ruby/GNOME2
@@ -40,7 +40,7 @@ gscore_log(self, score, level, higher_to_lower_score_order)
 {
     gint result = gnome_score_log(NUM2DBL(score),
                                   NIL_P(level) ? NULL : RVAL2CSTR(level),
-                                  RTEST(higher_to_lower_score_order));
+                                  RVAL2CBOOL(higher_to_lower_score_order));
     return INT2NUM(result);
 }
 

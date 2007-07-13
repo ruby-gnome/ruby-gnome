@@ -3,8 +3,8 @@
 
   rbpangologattr.c -
 
-  $Author: mutoh $
-  $Date: 2005/03/05 16:23:46 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -48,7 +48,7 @@ static VALUE \
 log_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    _SELF(self)->name = RTEST(val);\
+    _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
 }
 

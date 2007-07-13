@@ -3,8 +3,8 @@
 
   rbgtktreemodelfilter.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -56,7 +56,7 @@ visible_func(model, iter, func)
 
     iter->user_data3 = model;
     ret = rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model), ITR2RVAL(iter));
-    return RTEST(ret);
+    return RVAL2CBOOL(ret);
 }
 
 static VALUE

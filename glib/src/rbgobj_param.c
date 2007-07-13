@@ -4,7 +4,7 @@
   rbgobj_param.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:06 $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -259,7 +259,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 
     b = g_param_value_convert(rbgobj_get_param_spec(self),
                               &src_value, &dest_value,
-                              RTEST(strict_validation));
+                              RVAL2CBOOL(strict_validation));
 
     if (b)
         result = rbgobj_gvalue_to_rvalue(&dest_value);

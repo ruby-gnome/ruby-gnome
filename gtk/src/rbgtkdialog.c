@@ -3,8 +3,8 @@
 
   rbgtkdialog.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/11 19:21:04 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -139,7 +139,7 @@ static VALUE
 dialog_set_response_sensitive(self, response_id, setting)
     VALUE self, response_id, setting;
 {
-    gtk_dialog_set_response_sensitive(_SELF(self), NUM2INT(response_id), RTEST(setting));
+    gtk_dialog_set_response_sensitive(_SELF(self), NUM2INT(response_id), RVAL2CBOOL(setting));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgtkfixed.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -53,7 +53,7 @@ static VALUE
 fixed_set_has_window(self, has_window)
     VALUE self;
 {
-    gtk_fixed_set_has_window(_SELF(self), RTEST(has_window));
+    gtk_fixed_set_has_window(_SELF(self), RVAL2CBOOL(has_window));
     return self;
 }
 

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid.c,v 1.4 2005/09/25 17:53:07 mutoh Exp $ */
+/* $Id: rbgnome-druid.c,v 1.5 2007/07/13 16:07:29 ggc Exp $ */
 
 /* Gnome::Druid widget for Ruby/GNOME2
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -37,10 +37,10 @@ druid_set_buttons_sensitive(self, back_sensitive, next_sensitive, cancel_sensiti
     VALUE self, back_sensitive, next_sensitive, cancel_sensitive, help_sensitive;
 {
     gnome_druid_set_buttons_sensitive(_SELF(self),
-                                      RTEST(back_sensitive),
-                                      RTEST(next_sensitive),
-                                      RTEST(cancel_sensitive),
-                                      RTEST(help_sensitive));
+                                      RVAL2CBOOL(back_sensitive),
+                                      RVAL2CBOOL(next_sensitive),
+                                      RVAL2CBOOL(cancel_sensitive),
+                                      RVAL2CBOOL(help_sensitive));
     return self;
 }
 
@@ -96,7 +96,7 @@ druid_s_new_with_window(klass, title, parent, close_on_cancel)
 
     druid = gnome_druid_new_with_window(NIL_P(title) ? NULL : RVAL2CSTR(title),
                                         NIL_P(parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(parent)),
-                                        RTEST(close_on_cancel),
+                                        RVAL2CBOOL(close_on_cancel),
                                         &window);
     if (druid == NULL)
         return Qnil;

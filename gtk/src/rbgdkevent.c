@@ -4,7 +4,7 @@
   rbgdkevent.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -136,7 +136,7 @@ static VALUE \
 gdkevent ## type ## _set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    get_gdkevent(self)->type.name = RTEST(val);\
+    get_gdkevent(self)->type.name = RVAL2CBOOL(val);\
     return self;\
 }
 
@@ -376,7 +376,7 @@ static VALUE
 gdkevent_s_set_show_events(self, show_events)
     VALUE self, show_events;
 {
-    gdk_set_show_events(RTEST(show_events));
+    gdk_set_show_events(RVAL2CBOOL(show_events));
     return self;
 }
 #if GTK_CHECK_VERSION(2,2,0)

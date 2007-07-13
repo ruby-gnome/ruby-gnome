@@ -3,8 +3,8 @@
 
   rbgtkradiomenuitem.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -45,14 +45,14 @@ rmitem_initialize(argc, argv, self)
     
     if (rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3) > 0 &&
         TYPE(arg1) == T_STRING) {
-        if (NIL_P(arg2) || RTEST(arg2)){
+        if (NIL_P(arg2) || RVAL2CBOOL(arg2)){
             mnemonic = RVAL2CSTR(arg1);
         } else {
             label = RVAL2CSTR(arg1);
         }
     } else {
         if (!NIL_P(arg2)) {
-            if (NIL_P(arg3) || RTEST(arg3)){
+            if (NIL_P(arg3) || RVAL2CBOOL(arg3)){
                 mnemonic = RVAL2CSTR(arg2);
             } else {
                 label = RVAL2CSTR(arg2);

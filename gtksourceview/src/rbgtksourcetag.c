@@ -4,7 +4,7 @@
   rbgtksourcetag.c -
 
   $Author $
-  $Date: 2006/09/24 13:03:27 $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003 Geoff Youngs, based on gtktextview.c by Masao Mutoh
@@ -68,9 +68,9 @@ keywordlisttag_new (self, id, name, keywords, case_sensitive,
     return GOBJ2RVAL(gtk_keyword_list_tag_new(RVAL2CSTR(id),
                                               RVAL2CSTR(name),
                                               glist,
-                                              RTEST(case_sensitive),
-                                              RTEST(match_empty_string_at_beginning),
-                                              RTEST(match_empty_string_at_end),
+                                              RVAL2CBOOL(case_sensitive),
+                                              RVAL2CBOOL(match_empty_string_at_beginning),
+                                              RVAL2CBOOL(match_empty_string_at_end),
                                               RVAL2CSTR(beginning_regex),
                                               RVAL2CSTR(end_regex)));
 }
@@ -92,7 +92,7 @@ stringtag_new (self, id, name, pattern_start, pattern_end, end_at_line_end)
 	return GOBJ2RVAL (gtk_string_tag_new (RVAL2CSTR (id), RVAL2CSTR (name),
 					      RVAL2CSTR (pattern_start),
 					      RVAL2CSTR (pattern_end),
-					      RTEST (end_at_line_end)));
+					      RVAL2CBOOL (end_at_line_end)));
 
 	return self;
 }

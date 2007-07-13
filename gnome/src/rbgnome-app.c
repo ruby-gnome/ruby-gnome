@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-app.c,v 1.9 2005/09/25 17:53:07 mutoh Exp $ */
+/* $Id: rbgnome-app.c,v 1.10 2007/07/13 16:07:28 ggc Exp $ */
 /* based on libgnomeui/gnome-app.h */
 
 /* Gnome::App widget for Ruby/GNOME2
@@ -265,7 +265,7 @@ static VALUE
 app_enable_layout_config(self, enable)
     VALUE self, enable;
 {
-    gnome_app_enable_layout_config(_SELF(self), RTEST(enable));
+    gnome_app_enable_layout_config(_SELF(self), RVAL2CBOOL(enable));
     return self;
 }
 

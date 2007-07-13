@@ -3,8 +3,8 @@
 
   rbgtkcombo.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/19 17:03:29 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -58,7 +58,7 @@ combo_set_val_in_list(self, val, ok)
     VALUE self, val, ok;
 {
     gtk_combo_set_value_in_list(GTK_COMBO(RVAL2GOBJ(self)),
-				RTEST(val), RTEST(ok));
+				RVAL2CBOOL(val), RVAL2CBOOL(ok));
     return self;
 }
 
@@ -67,7 +67,7 @@ combo_set_use_arrows(self, val)
     VALUE self, val;
 {
     gtk_combo_set_use_arrows(GTK_COMBO(RVAL2GOBJ(self)),
-			     RTEST(val));
+			     RVAL2CBOOL(val));
     return self;
 }
 
@@ -76,7 +76,7 @@ combo_set_use_arrows_always(self, val)
     VALUE self, val;
 {
     gtk_combo_set_use_arrows_always(GTK_COMBO(RVAL2GOBJ(self)),
-                                    RTEST(val));
+                                    RVAL2CBOOL(val));
     return self;
 }
 

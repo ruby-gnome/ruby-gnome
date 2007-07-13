@@ -3,8 +3,8 @@
 
   rbgtktextappearance.c -
  
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -63,7 +63,7 @@ static VALUE \
 txt_app_bool_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    _SELF(self)->name = RTEST(val);\
+    _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
 }
 

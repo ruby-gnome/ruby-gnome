@@ -3,8 +3,8 @@
 
   rbgtkselectiondata.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/12 15:28:40 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -260,7 +260,7 @@ static VALUE
 gtkselectiondata_targets_include_image(self, writable)
     VALUE self, writable;
 {
-    return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RTEST(writable)));
+    return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RVAL2CBOOL(writable)));
 }
 #endif
 

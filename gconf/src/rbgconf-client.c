@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2007/07/08 02:54:38 $
+ * $Date: 2007/07/13 16:07:28 $
  *
  *****************************************************************************/
 
@@ -199,7 +199,7 @@ client_get(argc, argv, self)
 	GConfValue *val;
 
 	rb_scan_args(argc, argv, "11", &key, &use_schema_default);
-	if (NIL_P(use_schema_default) || RTEST(use_schema_default)) {
+	if (NIL_P(use_schema_default) || RVAL2CBOOL(use_schema_default)) {
 		val = gconf_client_get(_SELF(self), RVAL2CSTR(key), NULL);
 	} else {
 		val = gconf_client_get_without_default(_SELF(self),
@@ -226,7 +226,7 @@ client_get_entry(argc, argv, self)
 
 	return GCENTRY2RVAL(gconf_client_get_entry(_SELF(self), RVAL2CSTR(key),
 						   NULL,
-						   RTEST(use_schema_default),
+						   RVAL2CBOOL(use_schema_default),
 						   NULL));
 }
 

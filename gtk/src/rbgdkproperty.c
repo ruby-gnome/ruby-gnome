@@ -3,8 +3,8 @@
 
   rbgdkproperty.c -
 
-  $Author: mutoh $
-  $Date: 2006/01/26 17:48:40 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
 
   Copyright (C) 2003,2004 Ruby-GNOME2 Project Team
@@ -273,7 +273,7 @@ gdkprop_get(argc, argv, self)
     
     if(gdk_property_get(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), RVAL2ATOM(type),
                         NUM2INT(offset), NUM2INT(length),
-                        RTEST(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
+                        RVAL2CBOOL(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
         return Qnil;
     }
  

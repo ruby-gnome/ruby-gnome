@@ -3,8 +3,8 @@
  
   rbgtkfilechooser.c -
  
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
  
   Copyright (C) 2005,2006 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Seiya Nishizawa, Masao Mutoh
@@ -51,9 +51,9 @@ fcho_get_action(self)
 }
 
 /*  They are defined as properties
-    gtk_file_chooser_set_local_only(_SELF(self), RTEST(local));
+    gtk_file_chooser_set_local_only(_SELF(self), RVAL2CBOOL(local));
     gtk_file_chooser_get_local_only(_SELF(self));
-    gtk_file_chooser_set_select_multiple(_SELF(self), RTEST(multiple));
+    gtk_file_chooser_set_select_multiple(_SELF(self), RVAL2CBOOL(multiple));
     gtk_file_chooser_get_select_multiple(_SELF(self));
 */
 
@@ -200,9 +200,9 @@ fcho_get_current_folder_uri(self)
 /* They are defined as properties.
     gtk_file_chooser_set_preview_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget));
     gtk_file_chooser_get_preview_widget(_SELF(self)));
-    gtk_file_chooser_set_preview_widget_active(_SELF(self), RTEST(active));
+    gtk_file_chooser_set_preview_widget_active(_SELF(self), RVAL2CBOOL(active));
     gtk_file_chooser_get_preview_widget_active(_SELF(self));
-    gtk_file_chooser_set_use_preview_label(_SELF(self), RTEST(label));
+    gtk_file_chooser_set_use_preview_label(_SELF(self), RVAL2CBOOL(label));
     gtk_file_chooser_get_use_preview_label(_SELF(self));
 */
 

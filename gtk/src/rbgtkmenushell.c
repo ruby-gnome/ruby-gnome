@@ -3,8 +3,8 @@
 
   rbgtkmenushell.c -
 
-  $Author: ktou $
-  $Date: 2006/04/15 01:58:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -66,7 +66,7 @@ static VALUE
 mshell_select_first(self, search_sensitive)
     VALUE self, search_sensitive;
 {
-    gtk_menu_shell_select_first(_SELF(self), RTEST(search_sensitive));
+    gtk_menu_shell_select_first(_SELF(self), RVAL2CBOOL(search_sensitive));
     return self;
 }
 #endif
@@ -84,7 +84,7 @@ mshell_activate_item(self, menu_item, force_deactivate)
     VALUE self, menu_item, force_deactivate;
 {
     gtk_menu_shell_activate_item(_SELF(self), RVAL2WIDGET(menu_item), 
-                                 RTEST(force_deactivate));
+                                 RVAL2CBOOL(force_deactivate));
     return self;
 }
 

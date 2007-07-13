@@ -3,8 +3,8 @@
 
   rbgtkcontainer.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -91,7 +91,7 @@ static VALUE
 cont_set_reallocate_redraws(self, needs_redraws)
     VALUE self, needs_redraws;
 {
-    gtk_container_set_reallocate_redraws(_SELF(self), RTEST(needs_redraws));
+    gtk_container_set_reallocate_redraws(_SELF(self), RVAL2CBOOL(needs_redraws));
     return self;
 }
 
@@ -474,7 +474,7 @@ cont_s_child_properties(argc, argv, self)
 
     ary = rb_ary_new();
     for (i = 0; i < n_properties; i++){
-        if (RTEST(inherited_too)
+        if (RVAL2CBOOL(inherited_too)
             || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, CSTR2RVAL(props[i]->name));
     }

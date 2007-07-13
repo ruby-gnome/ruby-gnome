@@ -3,8 +3,8 @@
 
   utils_int64.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:03:10 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2003  Masahiro Sakai
   Copyright (C) 2002  Masahiro Sakai
@@ -68,7 +68,7 @@ RubyToPRUint64(VALUE aRuby)
 static PRInt64
 RubyToPRInt64(VALUE aRuby) 
 {
-    if(RTEST(rb_funcall(aRuby, id_lt, 1, INT2FIX(0))))
+    if(RVAL2CBOOL(rb_funcall(aRuby, id_lt, 1, INT2FIX(0))))
     {
         VALUE absRuby = rb_funcall(aRuby, id_abs, 0);
         PRInt64 result;

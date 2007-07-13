@@ -4,7 +4,7 @@
   rbgtkstyle.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -77,7 +77,7 @@ style_apply_default_background(self, gdkwindow, set_bg, state_type, area,
 {
     gtk_style_apply_default_background(_SELF(self), 
                                        GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                                       RTEST(set_bg), RVAL2STATE(state_type),
+                                       RVAL2CBOOL(set_bg), RVAL2STATE(state_type),
                                        RVAL2REC(area), 
                                        NUM2INT(x), NUM2INT(y), 
                                        NUM2INT(width), NUM2INT(height));
@@ -135,7 +135,7 @@ style_paint_arrow(self, gdkwindow, state_type, shadow_type, area, widget, detail
     gtk_paint_arrow(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
                     RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                     GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2CSTR(detail),
-                    RVAL2ARROW(arrow_type), RTEST(fill), NUM2INT(x), NUM2INT(y),
+                    RVAL2ARROW(arrow_type), RVAL2CBOOL(fill), NUM2INT(x), NUM2INT(y),
                     NUM2INT(width), NUM2INT(height));
     return self;
 }
@@ -289,7 +289,7 @@ style_paint_polygon(self, gdkwindow, state_type, shadow_type, area, widget, deta
                       RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                       GTK_WIDGET(RVAL2GOBJ(widget)), 
                       NIL_P(detail) ? NULL : RVAL2CSTR(detail), gpoints,
-                      RARRAY(points)->len, RTEST(fill));
+                      RARRAY(points)->len, RVAL2CBOOL(fill));
     return self;
 }
 
@@ -384,7 +384,7 @@ style_paint_layout(self, gdkwindow, state_type, use_text, area,
     x, y, layout;
 {
     gtk_paint_layout(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                     RVAL2STATE(state_type), RTEST(use_text), RVAL2REC(area),
+                     RVAL2STATE(state_type), RVAL2CBOOL(use_text), RVAL2REC(area),
                      GTK_WIDGET(RVAL2GOBJ(widget)), 
                      NIL_P(detail) ? NULL : RVAL2CSTR(detail),
                      NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)));
@@ -414,9 +414,9 @@ style_s_draw_insertion_cursor(self, widget, drawable, area, location, is_primary
     gtk_draw_insertion_cursor(GTK_WIDGET(RVAL2GOBJ(widget)),
                               GDK_WINDOW(RVAL2GOBJ(drawable)),
                               RVAL2REC(area), RVAL2REC(location),
-                              RTEST(is_primary), 
+                              RVAL2CBOOL(is_primary), 
                               RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION),
-                              RTEST(draw_arrow));
+                              RVAL2CBOOL(draw_arrow));
     return self;
 }
 #endif

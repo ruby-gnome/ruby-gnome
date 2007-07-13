@@ -4,7 +4,7 @@
   rbgtktreeview.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -195,7 +195,7 @@ column_drop_func(treeview, column, prev_column, next_column, func)
     GtkTreeViewColumn* next_column;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(treeview),
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(treeview),
                       GOBJ2RVAL(column), GOBJ2RVAL(prev_column), 
                       GOBJ2RVAL(next_column)));
 }
@@ -227,7 +227,7 @@ treeview_scroll_to_cell(self, path, column, use_align, row_align, col_align)
     gtk_tree_view_scroll_to_cell(_SELF(self),
                                  NIL_P(path) ? NULL : RVAL2TREEPATH(path),
                                  NIL_P(column) ? NULL : TREEVIEW_COL(column), 
-                                 RTEST(use_align),
+                                 RVAL2CBOOL(use_align),
                                  NUM2DBL(row_align), NUM2DBL(col_align));
     return self;
 }
@@ -238,7 +238,7 @@ treeview_set_cursor(self, path, focus_column, start_editing)
 {
     gtk_tree_view_set_cursor(_SELF(self), RVAL2TREEPATH(path),
                              NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
-                             RTEST(start_editing));
+                             RVAL2CBOOL(start_editing));
     return self;
 }
 
@@ -285,7 +285,7 @@ treeview_expand_row(self, path, open_all)
 {
     return CBOOL2RVAL(gtk_tree_view_expand_row(_SELF(self), 
                                                RVAL2TREEPATH(path),
-                                               RTEST(open_all)));
+                                               RVAL2CBOOL(open_all)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
@@ -599,7 +599,7 @@ search_equal_func(model, column, key, iter, func)
     gpointer func;
 {
     iter->user_data3 = model;
-    return RTEST(rb_funcall((VALUE)func, id_call, 4, 
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, 
                             GOBJ2RVAL(model), INT2NUM(column),
                             CSTR2RVAL(key), ITR2RVAL(iter)));
 }
@@ -641,7 +641,7 @@ treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
     gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2TREEPATH(path),
                                      NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
                                      NIL_P(focus_cell) ? NULL : GTK_CELL_RENDERER(RVAL2GOBJ(focus_cell)), 
-                                     RTEST(start_editing));
+                                     RVAL2CBOOL(start_editing));
     return self;
 }
 #endif

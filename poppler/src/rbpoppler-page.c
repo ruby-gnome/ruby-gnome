@@ -3,8 +3,8 @@
 
   rbpoppler-page.c -
 
-  $Author: ktou $
-  $Date: 2007/06/23 08:19:58 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -63,7 +63,7 @@ static VALUE
 page_render_generic(int argc, VALUE *argv, VALUE self)
 {
     if (argc == 1) {
-        if (RTEST(rb_obj_is_kind_of(argv[0], cPSFile))) {
+        if (RVAL2CBOOL(rb_obj_is_kind_of(argv[0], cPSFile))) {
             return page_render_to_ps(self, argv[0]);
         } else {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE

@@ -3,8 +3,8 @@
 
   rbgtkhtmlboxtext.c
 
-  $Author: mutoh $
-  $Date: 2003/11/09 15:44:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -18,7 +18,7 @@ static VALUE
 text_initialize(self, master)
     VALUE self, master;
 {
-    G_INITIALIZE(self, html_box_text_new(RTEST(master)));
+    G_INITIALIZE(self, html_box_text_new(RVAL2CBOOL(master)));
     return Qnil;
 }
 

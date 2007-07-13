@@ -4,7 +4,7 @@
   rbgtkiconsource.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -95,7 +95,7 @@ static VALUE
 icon_source_set_direction_wildcarded(self, setting)
     VALUE self, setting;
 {
-    gtk_icon_source_set_direction_wildcarded(_SELF(self), RTEST(setting));
+    gtk_icon_source_set_direction_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -127,7 +127,7 @@ static VALUE
 icon_source_set_size_wildcarded(self, setting)
     VALUE self, setting;
 {
-    gtk_icon_source_set_size_wildcarded(_SELF(self), RTEST(setting));
+    gtk_icon_source_set_size_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -143,7 +143,7 @@ static VALUE
 icon_source_set_state_wildcarded(self, setting)
     VALUE self, setting;
 {
-    gtk_icon_source_set_state_wildcarded(_SELF(self), RTEST(setting));
+    gtk_icon_source_set_state_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 

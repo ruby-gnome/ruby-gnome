@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -60,7 +60,7 @@ uri_initialize(self, uri)
 {
 	GnomeVFSURI *gvfs_uri;
 
-	if (RTEST(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(uri, g_gvfs_uri))) {
 		gvfs_uri = gnome_vfs_uri_dup(RVAL2GVFSURI(uri));
 	} else {
 		gvfs_uri = gnome_vfs_uri_new(RVAL2CSTR(uri));
@@ -275,7 +275,7 @@ uri_is_parent(self, child, recursive)
 {
 	return CBOOL2RVAL(gnome_vfs_uri_is_parent(RVAL2GVFSURI(self),
 						  RVAL2GVFSURI(child),
-						  RTEST(recursive)));
+						  RVAL2CBOOL(recursive)));
 }
 
 static VALUE
@@ -339,7 +339,7 @@ uri_same_fs(self, other)
 	gboolean same_fs;
 	gchar *text_uri;
 
-	if (RTEST(rb_obj_is_kind_of(other, g_gvfs_uri))) {
+	if (RVAL2CBOOL(rb_obj_is_kind_of(other, g_gvfs_uri))) {
 		result = gnome_vfs_check_same_fs_uris(_SELF(self),
 						      RVAL2GVFSURI(other),
 						      &same_fs);

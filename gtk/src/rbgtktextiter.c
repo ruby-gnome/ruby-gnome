@@ -4,7 +4,7 @@
   rbgtktextiter.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -103,7 +103,7 @@ static VALUE
 get_toggled_tags(self, toggled_on)
     VALUE self, toggled_on;
 {
-    return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RTEST(toggled_on)));
+    return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RVAL2CBOOL(toggled_on)));
 }
 
 static VALUE
@@ -153,14 +153,14 @@ static VALUE
 editable(self, default_setting)
     VALUE self, default_setting;
 {
-    return CBOOL2RVAL(gtk_text_iter_editable(_SELF(self), RTEST(default_setting)));
+    return CBOOL2RVAL(gtk_text_iter_editable(_SELF(self), RVAL2CBOOL(default_setting)));
 }
 
 static VALUE
 can_insert(self, default_setting)
     VALUE self, default_setting;
 {
-    return CBOOL2RVAL(gtk_text_iter_can_insert(_SELF(self), RTEST(default_setting)));
+    return CBOOL2RVAL(gtk_text_iter_can_insert(_SELF(self), RVAL2CBOOL(default_setting)));
 }
 
     
@@ -319,7 +319,7 @@ char_predicate_func(ch, func)
     guint32 ch;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 1, UINT2NUM(ch)));
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 1, UINT2NUM(ch)));
 }
 
 static VALUE

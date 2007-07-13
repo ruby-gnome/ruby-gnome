@@ -3,8 +3,8 @@
 
   rbgtktable.c -
 
-  $Author: ssimons $
-  $Date: 2006/08/09 09:03:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -27,7 +27,7 @@ tbl_initialize(argc, argv, self)
     rb_scan_args(argc, argv, "21", &row, &col, &homogeneous);
     RBGTK_INITIALIZE(self, gtk_table_new(NUM2INT(row),
                                          NUM2INT(col),
-                                         RTEST(homogeneous)));
+                                         RVAL2CBOOL(homogeneous)));
     return Qnil;
 }
 

@@ -4,7 +4,7 @@
   rbgdkdnd.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -137,7 +137,7 @@ static VALUE
 gdkdragcontext_drop_reply(self, ok, time)
     VALUE self, ok, time;
 {
-    gdk_drop_reply(_SELF(self), RTEST(ok), NUM2UINT(time));
+    gdk_drop_reply(_SELF(self), RVAL2CBOOL(ok), NUM2UINT(time));
     return self;
 }
 
@@ -220,7 +220,7 @@ static VALUE
 gdkdragcontext_drop_finish(self, success, time)
     VALUE self, success, time;
 {
-    gdk_drop_finish(_SELF(self), RTEST(success), NUM2UINT(time));
+    gdk_drop_finish(_SELF(self), RVAL2CBOOL(success), NUM2UINT(time));
     return self;
 }
 

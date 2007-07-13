@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: ggc $
  *
- * $Date: 2006/06/22 16:50:30 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -126,8 +126,8 @@ gnomevfs_find_directory(argc, argv, self)
 	result = gnome_vfs_find_directory(RVAL2GVFSURI(near_uri),
 					  RVAL2GENUM(kind, GNOME_VFS_TYPE_VFS_FIND_DIRECTORY_KIND),
 					  &uri,
-					  RTEST(create),
-					  RTEST(find),
+					  RVAL2CBOOL(create),
+					  RVAL2CBOOL(find),
 					  NUM2UINT(permissions));
 	if (result == GNOME_VFS_OK) {
 		return GVFSURI2RVAL(uri);

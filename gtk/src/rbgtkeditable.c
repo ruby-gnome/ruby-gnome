@@ -4,7 +4,7 @@
   rbgtkeditable.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -94,7 +94,7 @@ static VALUE
 edit_set_editable(self, editable)
     VALUE self, editable;
 {
-    gtk_editable_set_editable(GTK_EDITABLE(RVAL2GOBJ(self)), RTEST(editable));
+    gtk_editable_set_editable(GTK_EDITABLE(RVAL2GOBJ(self)), RVAL2CBOOL(editable));
     return self;
 }
 

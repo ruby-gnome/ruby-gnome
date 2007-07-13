@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-selection.c,v 1.5 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-icon-selection.c,v 1.6 2007/07/13 16:07:30 ggc Exp $ */
 /* based on libgnomeui/gnome-icon-sel.h */
 
 /* Gnome::IconSelection widget for Ruby/GNOME2
@@ -64,7 +64,7 @@ icon_sel_clear(self, not_shown)
     VALUE self, not_shown;
 {
     gnome_icon_selection_clear(_SELF(self),
-                               RTEST(not_shown));
+                               RVAL2CBOOL(not_shown));
     return self;
 }
 
@@ -75,7 +75,7 @@ icon_sel_get_icon(self, full_path)
     gchar *filename;
     VALUE obj;
 
-    filename = gnome_icon_selection_get_icon(_SELF(self), RTEST(full_path));
+    filename = gnome_icon_selection_get_icon(_SELF(self), RVAL2CBOOL(full_path));
     SET_STR_AND_GFREE(obj, filename);
     return obj;
 }

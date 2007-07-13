@@ -3,8 +3,8 @@
 
   rbgtktextattributes.c -
  
-  $Author: mutoh $
-  $Date: 2005/11/06 04:44:24 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -40,7 +40,7 @@ static VALUE \
 txt_attr_bool_set_ ## name (self, val)\
     VALUE self, val;\
 {\
-    _SELF(self)->name = RTEST(val);\
+    _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
 }
 

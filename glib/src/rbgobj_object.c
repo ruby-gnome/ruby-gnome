@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:06 $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -191,7 +191,7 @@ gobj_s_properties(int argc, VALUE* argv, VALUE self)
 
     ary = rb_ary_new();
     for (i = 0; i < n_properties; i++){
-        if (RTEST(inherited_too)
+        if (RVAL2CBOOL(inherited_too)
             || GTYPE2CLASS(props[i]->owner_type) == self)
             rb_ary_push(ary, rb_str_new2(props[i]->name));
     }
@@ -377,7 +377,7 @@ gobj_is_destroyed(self)
 {
     gobj_holder* holder;
 
-    if (!RTEST(rb_obj_is_kind_of(self, GTYPE2CLASS(G_TYPE_OBJECT))))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(self, GTYPE2CLASS(G_TYPE_OBJECT))))
         rb_raise(rb_eTypeError, "not a GLib::Object");
 
     Data_Get_Struct(self, gobj_holder, holder);

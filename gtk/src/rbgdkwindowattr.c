@@ -3,8 +3,8 @@
 
   rbgdkwindowattr.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/07 16:53:28 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -169,7 +169,7 @@ static VALUE
 attr_set_override_redirect(self, val)
     VALUE self, val;
 {
-    _SELF(self)->override_redirect = RTEST(val);
+    _SELF(self)->override_redirect = RVAL2CBOOL(val);
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -64,7 +64,7 @@ textview_scroll_to_mark(self, mark, within_margin, use_align, xalign, yalign)
     VALUE self, mark, within_margin, use_align, xalign, yalign;
 {
     gtk_text_view_scroll_to_mark(_SELF(self), RVAL2MARK(mark), 
-                                 NUM2DBL(within_margin), RTEST(use_align), 
+                                 NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
                                  NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
@@ -74,7 +74,7 @@ textview_scroll_to_iter(self, iter, within_margin, use_align, xalign, yalign)
     VALUE self, iter, within_margin, use_align, xalign, yalign;
 {
     return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
-                                                   NUM2DBL(within_margin), RTEST(use_align), 
+                                                   NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
                                                    NUM2DBL(xalign), NUM2DBL(yalign)));
 }
 

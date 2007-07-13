@@ -4,7 +4,7 @@
   rbart_affine.c - Art::Affine class of ruby
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:11 $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -161,7 +161,7 @@ affine_flip(self, horz, vert)
     VALUE self, horz, vert;
 {
     double affine[6];
-    art_affine_flip(affine, Affine_Ptr(self), RTEST(horz), RTEST(vert));
+    art_affine_flip(affine, Affine_Ptr(self), RVAL2CBOOL(horz), RVAL2CBOOL(vert));
     return make_art_affine(affine);
 }
 
@@ -170,7 +170,7 @@ affine_flip_bang(self, horz, vert)
     VALUE self, horz, vert;
 {
     double affine[6];
-    art_affine_flip(affine, Affine_Ptr(self), RTEST(horz), RTEST(vert));
+    art_affine_flip(affine, Affine_Ptr(self), RVAL2CBOOL(horz), RVAL2CBOOL(vert));
     Affine_Set(self, affine);
     return self;
 }

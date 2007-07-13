@@ -3,8 +3,8 @@
 
   rbgtkdrag.c -
 
-  $Author: mutoh $
-  $Date: 2007/02/28 17:29:40 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -73,7 +73,7 @@ gtkdrag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
                             GDK_WINDOW(RVAL2GOBJ(proxy_window)),
                             RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
-                            RTEST(use_coordinates)); 
+                            RVAL2CBOOL(use_coordinates)); 
     return self;
 }
 
@@ -167,8 +167,8 @@ static VALUE
 gtkdrag_finish(self, context, success, del, time)
     VALUE self, context, success, del, time;
 {
-    gtk_drag_finish(RVAL2DC(context), RTEST(success),
-                    RTEST(del), NUM2UINT(time));
+    gtk_drag_finish(RVAL2DC(context), RVAL2CBOOL(success),
+                    RVAL2CBOOL(del), NUM2UINT(time));
     return self;
 }
 

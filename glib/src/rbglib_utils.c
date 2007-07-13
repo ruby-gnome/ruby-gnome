@@ -3,8 +3,8 @@
 
   rbglib_utils.c -
 
-  $Author: mutoh $
-  $Date: 2005/10/14 19:10:08 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2004 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Pascal Terjan
@@ -58,7 +58,7 @@ rbglib_m_setenv(self, variable, value, overwrite)
 {
     return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
                                NIL_P(value) ? NULL : RVAL2CSTR(value),
-                               RTEST(overwrite)));
+                               RVAL2CBOOL(overwrite)));
 }
 
 static VALUE

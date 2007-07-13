@@ -3,8 +3,8 @@
 
   rbgp-gnome-print-config.c -
 
-  $Author: ktou $
-  $Date: 2005/10/10 02:07:41 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:30 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -157,17 +157,17 @@ gp_config_get_generic(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &key, &type);
 
-    if (NIL_P(type) || (RTEST(rb_equal(type, s_string)))) {
+    if (NIL_P(type) || (RVAL2CBOOL(rb_equal(type, s_string)))) {
         result = gp_config_get(self, key);
-    } else if (RTEST(rb_equal(type, s_boolean))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_boolean))) {
         result = gp_config_get_boolean(self, key);
-    } else if (RTEST(rb_equal(type, s_int))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_int))) {
         result = gp_config_get_int(self, key);
-    } else if (RTEST(rb_equal(type, s_double))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_double))) {
         result = gp_config_get_double(self, key);
-    } else if (RTEST(rb_equal(type, s_length))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_length))) {
         result = gp_config_get_length(self, key);
-    } else if (RTEST(rb_equal(type, s_transform))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_transform))) {
         result = gp_config_get_transform(self, key);
     } else {
         result = Qnil;

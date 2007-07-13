@@ -3,8 +3,8 @@
 
   rbgtkactiongroup.c -
 
-  $Author: ktou $
-  $Date: 2007/07/09 12:43:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004-2006 Masao Mutoh
 ************************************************/
@@ -201,7 +201,7 @@ actiongroup_add_toggle_actions(self, entries)
         if (size < 5) continue;
         rb_hash_aset(toggle_action_procs, entry->ptr[0], entry->ptr[5]);
         if (size < 6) continue;
-        gentries[i].is_active = RTEST(entry->ptr[6]);
+        gentries[i].is_active = RVAL2CBOOL(entry->ptr[6]);
     } 
     rb_ivar_set(self, id_toggle_action_procs, toggle_action_procs);
     gtk_action_group_add_toggle_actions(_SELF(self), gentries, n_entries, (gpointer)self);

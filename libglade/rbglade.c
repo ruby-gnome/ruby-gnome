@@ -3,8 +3,8 @@
 
   rbglade.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:04:21 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project
@@ -243,7 +243,7 @@ static gboolean custom_widget_supported = FALSE;
 static VALUE
 rb_gladexml_set_custom_widget_handler(VALUE self, VALUE setting)
 {
-    if (RTEST(setting)){
+    if (RVAL2CBOOL(setting)){
         glade_set_custom_handler(custom_widget_handler, NULL);
         custom_widget_supported = TRUE;
     } else {

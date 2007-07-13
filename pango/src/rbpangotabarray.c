@@ -3,8 +3,8 @@
 
   rbpangoarray.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/15 06:19:54 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -26,7 +26,7 @@ rtab_initialize(argc, argv, self)
     rb_scan_args(argc, argv, "2*", &size, &positions_in_pixels, &attr_ary);
 
     array = pango_tab_array_new(NUM2INT(size), 
-                                RTEST(positions_in_pixels));
+                                RVAL2CBOOL(positions_in_pixels));
     G_INITIALIZE(self, array);
 
     if (! NIL_P(attr_ary)){

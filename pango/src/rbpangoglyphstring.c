@@ -3,8 +3,8 @@
 
   rbpangoglyphstring.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/10 15:13:10 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -75,7 +75,7 @@ rglyph_index_to_x(self, text, analysis, index, trailing)
     pango_glyph_string_index_to_x(_SELF(self), RVAL2CSTR(text), 
                                   RSTRING(text)->len, 
                                   (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
-                                  NUM2INT(index), RTEST(trailing),
+                                  NUM2INT(index), RVAL2CBOOL(trailing),
                                   &x_pos);
     return INT2NUM(x_pos);
 }

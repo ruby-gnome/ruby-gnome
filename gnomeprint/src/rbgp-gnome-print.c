@@ -3,8 +3,8 @@
 
   rbgp-gnome-print.c -
 
-  $Author: ktou $
-  $Date: 2005/10/14 04:33:08 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:30 $
 
   Copyright (C) 2005 Ruby-GNOME2 Project Team
   Copyright (C) 2004 Kouhei Sutou <kou@cozmixng.org>
@@ -225,7 +225,7 @@ _gp_bpath(VALUE self, VALUE bpath, VALUE append)
 {
     rbgp_check_return_code(gnome_print_bpath(_SELF(self),
                                              get_art_bpath(bpath),
-                                             RTEST(append)));
+                                             RVAL2CBOOL(append)));
     return self;
 }
 
@@ -246,7 +246,7 @@ _gp_vpath(VALUE self, VALUE vpath, VALUE append)
 {
     rbgp_check_return_code(gnome_print_vpath(_SELF(self),
                                              get_art_vpath(vpath),
-                                             RTEST(append)));
+                                             RVAL2CBOOL(append)));
     return self;
 }
 
@@ -290,7 +290,7 @@ gp_arcto(VALUE self, VALUE x, VALUE y, VALUE radius,
                                              NUM2DBL(radius),
                                              NUM2DBL(angle1),
                                              NUM2DBL(angle2),
-                                             RTEST(clockwise) ? 1 : 0));
+                                             RVAL2CBOOL(clockwise) ? 1 : 0));
     return self;
 }
 

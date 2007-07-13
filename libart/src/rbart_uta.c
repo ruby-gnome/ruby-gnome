@@ -3,8 +3,8 @@
 
   rbart_uta.c - Art::Uta class for ruby
 
-  $Author: mutoh $
-  $Date: 2005/10/01 19:14:37 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2005  Ruby-GNOME2 Project Team
 
@@ -61,7 +61,7 @@ uta_initialize(int argc, VALUE *argv, VALUE self)
 
     if (NIL_P(coords)) coords = Qfalse;
 
-    if (RTEST(coords)){
+    if (RVAL2CBOOL(coords)){
         uta = art_uta_new_coords(NUM2INT(x0), NUM2INT(y0), NUM2INT(x1), NUM2INT(y1));
     } else {
         uta = art_uta_new(NUM2INT(x0), NUM2INT(y0), NUM2INT(x1), NUM2INT(y1));

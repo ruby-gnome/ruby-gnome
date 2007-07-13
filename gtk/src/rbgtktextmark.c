@@ -4,7 +4,7 @@
   rbgtktextmark.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:31:17 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -17,7 +17,7 @@ static VALUE
 set_visible(self, setting)
     VALUE self, setting;
 {
-    gtk_text_mark_set_visible(_SELF(self), RTEST(setting));
+    gtk_text_mark_set_visible(_SELF(self), RVAL2CBOOL(setting));
     return setting;
 }
 

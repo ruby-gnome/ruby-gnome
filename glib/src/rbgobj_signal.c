@@ -4,7 +4,7 @@
   rbgobj_signal.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:07 $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -65,7 +65,7 @@ accumulator_func(GSignalInvocationHint* ihint,
     tmp = rb_funcall(proc, rb_intern("call"), 3, hint, val, new);
     /* FIXME */
     if (TYPE(tmp) == T_ARRAY) {
-        continue_emission = RTEST(rb_ary_entry(tmp, 0));
+        continue_emission = RVAL2CBOOL(rb_ary_entry(tmp, 0));
         val = rb_ary_entry(tmp, 1);
     } else {
         val = tmp;        
@@ -168,7 +168,7 @@ gobj_s_signals(int argc, VALUE* argv, VALUE self)
     gtype = CLASS2GTYPE(self);
     result = rb_ary_new();
 
-    if (RTEST(inherited_too)){
+    if (RVAL2CBOOL(inherited_too)){
         guint n_interfaces, i;
         GType* interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++)
@@ -225,7 +225,7 @@ gobj_sig_has_handler_pending(argc, argv, self)
 
     return CBOOL2RVAL(g_signal_has_handler_pending(RVAL2GOBJ(self),
                                                    signal_id, detail,
-                                                   RTEST(may_be_blocked)));
+                                                   RVAL2CBOOL(may_be_blocked)));
 }
 
 static VALUE

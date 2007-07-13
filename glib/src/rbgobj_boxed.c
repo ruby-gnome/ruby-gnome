@@ -4,7 +4,7 @@
   rbgobj_boxed.c -
 
   $Author: ggc $
-  $Date: 2007/07/10 15:32:37 $
+  $Date: 2007/07/13 16:07:28 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -142,7 +142,7 @@ rbgobj_boxed_get(obj, gtype)
     if (NIL_P(obj))
         return NULL;
 
-    if (!RTEST(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
         rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
                  rb_class2name(CLASS_OF(obj)), 
                  rb_class2name(GTYPE2CLASS(gtype)));

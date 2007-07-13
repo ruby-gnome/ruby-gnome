@@ -4,7 +4,7 @@
   rbgtkmenuitem.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:09 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -26,7 +26,7 @@ mitem_initialize(argc, argv, self)
     GtkWidget *widget = NULL;
 
     if (rb_scan_args(argc, argv, "02", &label, &use_underline) > 0) {
-        if (NIL_P(use_underline) || RTEST(use_underline)){
+        if (NIL_P(use_underline) || RVAL2CBOOL(use_underline)){
             widget = gtk_menu_item_new_with_mnemonic(RVAL2CSTR(label));
         } else {
             widget = gtk_menu_item_new_with_label(RVAL2CSTR(label));
@@ -43,7 +43,7 @@ static VALUE
 mitem_set_right_justified(self, right_justified)
     VALUE self, right_justified;
 {
-    gtk_menu_item_set_right_justified(_SELF(self), RTEST(right_justified));
+    gtk_menu_item_set_right_justified(_SELF(self), RVAL2CBOOL(right_justified));
     return self;
 }
 

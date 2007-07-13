@@ -4,7 +4,7 @@
   rbgdkatom.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -57,7 +57,7 @@ gdkatom_s_intern(argc, argv, self)
   
     rb_scan_args(argc, argv, "11", &name, &exist);
 
-    return BOXED2RVAL(gdk_atom_intern(RVAL2CSTR(name), RTEST(exist)), 
+    return BOXED2RVAL(gdk_atom_intern(RVAL2CSTR(name), RVAL2CBOOL(exist)), 
                       GDK_TYPE_ATOM);
 }
 

@@ -3,8 +3,8 @@
 
   rbatkobject.c -
 
-  $Author: mutoh $
-  $Date: 2005/09/15 17:30:46 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
@@ -91,7 +91,7 @@ rbatkobj_notify_state_change(self, state, value)
 {
     atk_object_notify_state_change(_SELF(self), 
                                    RVAL2GENUM(state, ATK_TYPE_STATE_TYPE),
-                                   RTEST(value));
+                                   RVAL2CBOOL(value));
     return self;
 }
 

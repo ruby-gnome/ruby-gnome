@@ -3,8 +3,8 @@
 
   rbgtkvbox.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:24 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -24,7 +24,7 @@ vbox_initialize(argc, argv, self)
 
     rb_scan_args(argc, argv, "02", &homogeneous, &spacing);
 
-    RBGTK_INITIALIZE(self, gtk_vbox_new(RTEST(homogeneous),
+    RBGTK_INITIALIZE(self, gtk_vbox_new(RVAL2CBOOL(homogeneous),
 				  (NIL_P(spacing)?0:NUM2INT(spacing))));
     return Qnil;
 }

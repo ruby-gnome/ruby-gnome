@@ -3,8 +3,8 @@
 
   rbgdkcolormap.c -
 
-  $Author: mutoh $
-  $Date: 2004/08/01 07:10:02 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -24,7 +24,7 @@ gdkcmap_initialize(self, visual, allocate)
     VALUE self, visual, allocate;
 {
     GdkColormap *cmap  = gdk_colormap_new(GDK_VISUAL(RVAL2GOBJ(visual)),
-                                          RTEST(allocate));
+                                          RVAL2CBOOL(allocate));
     G_INITIALIZE(self, cmap);
     return Qnil;
 }
@@ -54,7 +54,7 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
     gboolean result;
     GdkColor *c = (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR);
     result = gdk_colormap_alloc_color(_SELF(self), c,
-                                      RTEST(writeable), RTEST(best_match));
+                                      RVAL2CBOOL(writeable), RVAL2CBOOL(best_match));
     return result ? INT2NUM(c->pixel) : Qnil;
 }
 

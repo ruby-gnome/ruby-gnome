@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:11 $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -41,7 +41,7 @@ doc_initialize(int argc, VALUE *argv, VALUE self)
     password = NIL_P(rb_password) ? NULL : RVAL2CSTR(rb_password);
 
 #if POPPLER_CHECK_VERSION(0, 5, 9)
-    if (RTEST(rb_funcall(self, id_pdf_data_p, 1, uri_or_data))) {
+    if (RVAL2CBOOL(rb_funcall(self, id_pdf_data_p, 1, uri_or_data))) {
         document = poppler_document_new_from_data(RSTRING_PTR(uri_or_data),
                                                   RSTRING_LEN(uri_or_data),
                                                   password, &error);
@@ -87,10 +87,10 @@ doc_get_page(VALUE self, VALUE index_or_label)
     VALUE rb_page;
     PopplerPage *page;
 
-    if (RTEST(rb_obj_is_kind_of(index_or_label, rb_cInteger))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cInteger))) {
         page = poppler_document_get_page(RVAL2GOBJ(self),
                                          NUM2INT(index_or_label));
-    } else if (RTEST(rb_obj_is_kind_of(index_or_label, rb_cString))) {
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cString))) {
         page = poppler_document_get_page_by_label(RVAL2GOBJ(self),
                                                   RVAL2CSTR(index_or_label));
     } else {
@@ -164,7 +164,7 @@ doc_get_font_info(VALUE self)
 
 /* Interface for getting the Index of a poppler_document */
 #define CHECK_IITER_IS_VALID(iter) do {         \
-    if (!RTEST(index_iter_valid_p(iter)))       \
+    if (!RVAL2CBOOL(index_iter_valid_p(iter)))       \
         return Qnil;                            \
 } while (0)
 
@@ -267,7 +267,7 @@ font_info_scan(VALUE self, VALUE n_pages)
 
 
 #define CHECK_FITER_IS_VALID(iter) do {         \
-    if (!RTEST(fonts_iter_valid_p(iter)))       \
+    if (!RVAL2CBOOL(fonts_iter_valid_p(iter)))       \
         return Qnil;                            \
 } while (0)
 

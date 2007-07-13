@@ -4,7 +4,7 @@
   rbpangolayout.c -
 
   $Author: ggc $
-  $Date: 2006/06/22 19:52:54 $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -204,7 +204,7 @@ static VALUE
 layout_set_justify(self, justify)
     VALUE self, justify;
 {
-    pango_layout_set_justify(_SELF(self), RTEST(justify));
+    pango_layout_set_justify(_SELF(self), RVAL2CBOOL(justify));
     return self;
 }
 static VALUE
@@ -219,7 +219,7 @@ static VALUE
 layout_set_auto_dir(self, auto_dir)
     VALUE self, auto_dir;
 {
-    pango_layout_set_auto_dir(_SELF(self), RTEST(auto_dir));
+    pango_layout_set_auto_dir(_SELF(self), RVAL2CBOOL(auto_dir));
     return self;
 }
 static VALUE
@@ -272,7 +272,7 @@ static VALUE
 layout_set_single_paragraph_mode(self, setting)
     VALUE self, setting;
 {
-    pango_layout_set_single_paragraph_mode(_SELF(self), RTEST(setting));
+    pango_layout_set_single_paragraph_mode(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -339,7 +339,7 @@ layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
     VALUE self, strong, old_index, old_trailing, direction;
 {
     int new_index, new_trailing;
-    pango_layout_move_cursor_visually(_SELF(self), RTEST(strong),
+    pango_layout_move_cursor_visually(_SELF(self), RVAL2CBOOL(strong),
                                       NUM2INT(old_index), NUM2INT(old_trailing),
                                       NUM2INT(direction),
                                       &new_index, &new_trailing);

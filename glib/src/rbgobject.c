@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: ggc $
-  $Date: 2007/07/10 13:22:40 $
+  $Date: 2007/07/13 16:07:28 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -134,9 +134,9 @@ rbgobj_weak_notify(data, where_the_object_was)
     gobj_holder* holder = data;
 
     rbgobj_instance_call_cinfo_free(holder->gobj);
-    if (RTEST(rb_ivar_defined(holder->self, id_relatives)))
+    if (RVAL2CBOOL(rb_ivar_defined(holder->self, id_relatives)))
         rb_ivar_set(holder->self, id_relatives, Qnil);
-    if (RTEST(rb_ivar_defined(holder->self, rbgobj_id_children)))
+    if (RVAL2CBOOL(rb_ivar_defined(holder->self, rbgobj_id_children)))
         rb_ivar_set(holder->self, rbgobj_id_children, Qnil);
     holder->destroyed = TRUE;
 }
@@ -217,7 +217,7 @@ rbgobj_get_gobject(obj)
 {
     gobj_holder* holder;
 
-    if (!RTEST(rb_obj_is_kind_of(obj, GTYPE2CLASS(G_TYPE_OBJECT))))
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(G_TYPE_OBJECT))))
         rb_raise(rb_eTypeError, "not a GLib::Object");
 
     Data_Get_Struct(obj, gobj_holder, holder);
@@ -254,7 +254,7 @@ rbgobj_add_relative(obj, relative)
 {
     VALUE hash = Qnil;
 
-    if (RTEST(rb_ivar_defined(obj, id_relatives)))
+    if (RVAL2CBOOL(rb_ivar_defined(obj, id_relatives)))
         hash = rb_ivar_get(obj, id_relatives);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
@@ -271,7 +271,7 @@ rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
 {
     VALUE hash = Qnil;
 
-    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+    if (RVAL2CBOOL(rb_ivar_defined(obj, obj_ivar_id)))
         hash = rb_ivar_get(obj, obj_ivar_id);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
@@ -288,7 +288,7 @@ rbgobj_get_relative_removable(obj, obj_ivar_id, hash_key)
 {
     VALUE hash = Qnil;
 
-    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+    if (RVAL2CBOOL(rb_ivar_defined(obj, obj_ivar_id)))
         hash = rb_ivar_get(obj, obj_ivar_id);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {
@@ -304,7 +304,7 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 {
     VALUE hash = Qnil;
 
-    if (RTEST(rb_ivar_defined(obj, obj_ivar_id)))
+    if (RVAL2CBOOL(rb_ivar_defined(obj, obj_ivar_id)))
         hash = rb_ivar_get(obj, obj_ivar_id);
 
     if (NIL_P(hash) || TYPE(hash) != T_HASH) {

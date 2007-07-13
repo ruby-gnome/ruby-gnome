@@ -3,8 +3,8 @@
 
   rbpangoattribute.c -
 
-  $Author: mutoh $
-  $Date: 2005/11/16 16:02:18 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -317,7 +317,7 @@ static VALUE
 attr_AttrStrikethrough_initialize(self, strikethrough)
     VALUE self, strikethrough;
 {
-    DATA_PTR(self) = pango_attr_strikethrough_new(RTEST(strikethrough));
+    DATA_PTR(self) = pango_attr_strikethrough_new(RVAL2CBOOL(strikethrough));
     return Qnil;
 }
 #if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
@@ -386,7 +386,7 @@ static VALUE
 attr_AttrFallback_initialize(self, enable_fallback)
     VALUE self, enable_fallback;
 {
-    DATA_PTR(self) = pango_attr_fallback_new(RTEST(enable_fallback));
+    DATA_PTR(self) = pango_attr_fallback_new(RVAL2CBOOL(enable_fallback));
     return Qnil;
 }
 #endif

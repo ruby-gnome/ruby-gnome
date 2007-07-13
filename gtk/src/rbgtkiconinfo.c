@@ -3,8 +3,8 @@
 
   rbgtkiconinfo.c -
 
-  $Author: mutoh $
-  $Date: 2004/07/25 16:27:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -54,7 +54,7 @@ static VALUE
 iconinfo_set_raw_coordinates(self, raw_coordinates)
     VALUE self, raw_coordinates;
 {
-    gtk_icon_info_set_raw_coordinates(_SELF(self), RTEST(raw_coordinates));
+    gtk_icon_info_set_raw_coordinates(_SELF(self), RVAL2CBOOL(raw_coordinates));
     return self;
 }
 

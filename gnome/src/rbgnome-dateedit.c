@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-dateedit.c,v 1.9 2005/09/25 17:53:07 mutoh Exp $ */
+/* $Id: rbgnome-dateedit.c,v 1.10 2007/07/13 16:07:29 ggc Exp $ */
 /* based on libgnomeui/gnome-dateedit.h */
 
 /* Gnome::DateEdit widget for Ruby/GNOME2
@@ -43,8 +43,8 @@ dateedit_initialize(argc, argv, self)
 
     if (argc == 3) {
 	dateedit = gnome_date_edit_new(tv.tv_sec,
-                                   RTEST(show_time),
-                                   RTEST(use_24_format));
+                                   RVAL2CBOOL(show_time),
+                                   RVAL2CBOOL(use_24_format));
     } else {
 	dateedit = gnome_date_edit_new_flags(tv.tv_sec,
                                              RVAL2GFLAGS(show_time, GNOME_TYPE_DATE_EDIT_FLAGS));

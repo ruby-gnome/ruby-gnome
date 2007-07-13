@@ -18,9 +18,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: mutoh $
+ * $Author: ggc $
  *
- * $Date: 2004/03/21 14:08:41 $
+ * $Date: 2007/07/13 16:07:28 $
  *
  *****************************************************************************/
 
@@ -131,7 +131,7 @@ static VALUE
 entry_set_is_default(self, is_default)
 	VALUE self, is_default;
 {
-	gconf_entry_set_is_default(_SELF(self), RTEST(is_default));
+	gconf_entry_set_is_default(_SELF(self), RVAL2CBOOL(is_default));
 	return self;
 }
 

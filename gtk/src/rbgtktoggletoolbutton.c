@@ -3,8 +3,8 @@
 
   rbgtktoggletoolbutton.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/09 09:20:31 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -42,7 +42,7 @@ static VALUE
 toggletoolbutton_set_active(self, is_active)
     VALUE self, is_active;
 {
-    gtk_toggle_tool_button_set_active(_SELF(self), RTEST(is_active));
+    gtk_toggle_tool_button_set_active(_SELF(self), RVAL2CBOOL(is_active));
     return self;
 }
 

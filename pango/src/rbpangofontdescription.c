@@ -3,8 +3,8 @@
 
   rbpangofontdescription.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -188,7 +188,7 @@ font_desc_merge(self, desc_to_merge, replace_existing)
     VALUE self, desc_to_merge, replace_existing;
 {
     pango_font_description_merge(_SELF(self), _SELF(desc_to_merge),
-                                 RTEST(replace_existing));
+                                 RVAL2CBOOL(replace_existing));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbpangofontset.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:07:07 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:33 $
 
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
@@ -36,7 +36,7 @@ fontset_each(fontset, font, func)
     PangoFont* font;
     gpointer func;
 {
-    return RTEST(rb_funcall((VALUE)func, id_call, 
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 
                             2, GOBJ2RVAL(fontset), GOBJ2RVAL(font)));
 }
 

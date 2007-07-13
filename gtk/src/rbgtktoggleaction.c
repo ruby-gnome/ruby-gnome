@@ -3,8 +3,8 @@
  
   rbgtktoggleaction.c -
  
-  $Author: mutoh $
-  $Date: 2006/12/26 16:11:13 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:32 $
  
   Copyright (C) 2004,2005 Masao Mutoh
 ************************************************/
@@ -46,7 +46,7 @@ static VALUE
 taction_set_active(self, is_active)
     VALUE self, is_active;
 {
-    gtk_toggle_action_set_active(_SELF(self), RTEST(is_active));
+    gtk_toggle_action_set_active(_SELF(self), RVAL2CBOOL(is_active));
     return self;
 }
 

@@ -4,7 +4,7 @@
   rbgtktreeviewcolumn.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -61,7 +61,7 @@ tvc_pack_start(self, cell, expand)
     VALUE self, cell, expand;
 {
     G_CHILD_ADD(self, cell);
-    gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RTEST(expand));
+    gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
     return self;
 }
 
@@ -70,7 +70,7 @@ tvc_pack_end(self, cell, expand)
     VALUE self, cell, expand;
 {
     G_CHILD_ADD(self, cell);
-    gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RTEST(expand));
+    gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
     return self;
 }
 
@@ -216,8 +216,8 @@ tvc_cell_set_cell_data(self, model, iter, is_expander, is_expanded)
     gtk_tree_view_column_cell_set_cell_data(_SELF(self), 
                                             GTK_TREE_MODEL(RVAL2GOBJ(model)),
                                             (GtkTreeIter*)RVAL2BOXED(iter, GTK_TYPE_TREE_ITER), 
-                                            RTEST(is_expander), 
-                                            RTEST(is_expanded));
+                                            RVAL2CBOOL(is_expander), 
+                                            RVAL2CBOOL(is_expanded));
     return self;
 }
 

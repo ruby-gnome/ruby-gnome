@@ -4,7 +4,7 @@
   rbgtkstatusbar.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -62,7 +62,7 @@ static VALUE
 statusbar_set_has_resize_grip(self, setting)
      VALUE self, setting;
 {
-    gtk_statusbar_set_has_resize_grip(_SELF(self), RTEST(setting));
+    gtk_statusbar_set_has_resize_grip(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 

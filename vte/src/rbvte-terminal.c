@@ -3,8 +3,8 @@
 
   rbvte-terminal.c -
 
-  $Author: ktou $
-  $Date: 2007/06/16 14:45:52 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:34 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -129,9 +129,9 @@ term_fork_command(int argc, VALUE *argv, VALUE self)
     directory = NIL_P(rb_directory) ? NULL : RVAL2CSTR(rb_directory);
     pid = vte_terminal_fork_command(RVAL2TERM(self), command,
                                     command_argv, envv, directory,
-                                    NIL_P(lastlog) ? TRUE : RTEST(lastlog),
-                                    NIL_P(utmp) ? TRUE : RTEST(utmp),
-                                    NIL_P(wtmp) ? TRUE : RTEST(wtmp));
+                                    NIL_P(lastlog) ? TRUE : RVAL2CBOOL(lastlog),
+                                    NIL_P(utmp) ? TRUE : RVAL2CBOOL(utmp),
+                                    NIL_P(wtmp) ? TRUE : RVAL2CBOOL(wtmp));
     free_cstrary(command_argv);
     free_cstrary(envv);
 
@@ -152,9 +152,9 @@ term_fork_pty(int argc, VALUE *argv, VALUE self)
     envv = rval2cstrary(rb_envv);
     directory = NIL_P(rb_directory) ? NULL : RVAL2CSTR(rb_directory);
     pid = vte_terminal_forkpty(RVAL2TERM(self), envv, directory,
-                               NIL_P(lastlog) ? TRUE : RTEST(lastlog),
-                               NIL_P(utmp) ? TRUE : RTEST(utmp),
-                               NIL_P(wtmp) ? TRUE : RTEST(wtmp));
+                               NIL_P(lastlog) ? TRUE : RVAL2CBOOL(lastlog),
+                               NIL_P(utmp) ? TRUE : RVAL2CBOOL(utmp),
+                               NIL_P(wtmp) ? TRUE : RVAL2CBOOL(wtmp));
     free_cstrary(envv);
 
     return INT2NUM(pid);
@@ -368,7 +368,7 @@ term_set_default_colors(VALUE self)
 static VALUE
 term_set_background_image(VALUE self, VALUE image_or_path)
 {
-    if (RTEST(rb_obj_is_kind_of(image_or_path, rb_cString))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(image_or_path, rb_cString))) {
         vte_terminal_set_background_image_file(RVAL2TERM(self),
                                                RVAL2CSTR(image_or_path));
     } else {
@@ -549,7 +549,7 @@ term_is_selected_cb(VteTerminal *terminal, glong column, glong row,
         VALUE rb_result;
         rb_result = rb_funcall(callback, id_call, 3, GOBJ2RVAL(terminal),
                                LONG2NUM(column), LONG2NUM(row));
-        result = RTEST(rb_result);
+        result = RVAL2CBOOL(rb_result);
     }
 
     return result;
@@ -568,7 +568,7 @@ term_get_text(int argc, VALUE *argv, VALUE self)
     if (get_attrs != Qfalse)
         attrs = g_array_new(FALSE, TRUE, sizeof(VteCharAttributes));
 
-    if (RTEST(include_trailing_spaces)) {
+    if (RVAL2CBOOL(include_trailing_spaces)) {
         text = vte_terminal_get_text_include_trailing_spaces(
             RVAL2TERM(self), term_is_selected_cb, (gpointer)proc, attrs);
     } else {

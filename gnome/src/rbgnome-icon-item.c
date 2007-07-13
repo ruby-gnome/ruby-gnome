@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-icon-item.c,v 1.2 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-icon-item.c,v 1.3 2007/07/13 16:07:29 ggc Exp $ */
 /* based on libgnomeui/gnome-icon-item.h */
 
 /* Gnome::IconTextItem widget for Ruby/GNOME2
@@ -31,7 +31,7 @@ iti_configure(self, x, y, width, fontname, text, is_editable)
 {
     gnome_icon_text_item_configure(_SELF(self), NUM2INT(x), NUM2INT(y),
                                    NUM2INT(width), RVAL2CSTR(fontname),
-                                   RVAL2CSTR(text), RTEST(is_editable),
+                                   RVAL2CSTR(text), RVAL2CBOOL(is_editable),
                                    FALSE);
     return self;
 }
@@ -48,7 +48,7 @@ static VALUE
 iti_select(self, sel)
     VALUE self, sel;
 {
-    gnome_icon_text_item_select(_SELF(self), RTEST(sel));
+    gnome_icon_text_item_select(_SELF(self), RVAL2CBOOL(sel));
     return self;
 }
 
@@ -56,7 +56,7 @@ static VALUE
 iti_focus(self, focused)
     VALUE self, focused;
 {
-    gnome_icon_text_item_focus(_SELF(self), RTEST(focused));
+    gnome_icon_text_item_focus(_SELF(self), RVAL2CBOOL(focused));
     return self;
 }
 
@@ -80,7 +80,7 @@ static VALUE
 iti_stop_editing(self, accept)
     VALUE self, accept;
 {
-    gnome_icon_text_item_stop_editing(_SELF(self), RTEST(accept));
+    gnome_icon_text_item_stop_editing(_SELF(self), RVAL2CBOOL(accept));
     return self;
 }
 

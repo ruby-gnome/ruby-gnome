@@ -3,8 +3,8 @@
 
   rbgtkcelllayout.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
@@ -21,7 +21,7 @@ layout_pack_start(self, cell, expand)
     VALUE self, cell, expand;
 {
     gtk_cell_layout_pack_start(_SELF(self), RVAL2RENDERER(cell),
-                               RTEST(expand));
+                               RVAL2CBOOL(expand));
     return self;
 }
 
@@ -30,7 +30,7 @@ layout_pack_end(self, cell, expand)
     VALUE self, cell, expand;
 {
     gtk_cell_layout_pack_end(_SELF(self), RVAL2RENDERER(cell),
-                             RTEST(expand));
+                             RVAL2CBOOL(expand));
     return self;
 }
 

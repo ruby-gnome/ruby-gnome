@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-appbar.c,v 1.8 2005/09/25 17:53:07 mutoh Exp $ */
+/* $Id: rbgnome-appbar.c,v 1.9 2007/07/13 16:07:28 ggc Exp $ */
 /* base on libgnomeui/gnome-appbar.h */
 
 /* Gnome::AppBar widget for Ruby/Gnome
@@ -37,8 +37,8 @@ appbar_initialize(self, has_progress, has_status, interactivity)
     VALUE self, has_progress, has_status, interactivity;
 {
     GtkWidget *appbar;
-    appbar = gnome_appbar_new(RTEST(has_progress),
-                              RTEST(has_status),
+    appbar = gnome_appbar_new(RVAL2CBOOL(has_progress),
+                              RVAL2CBOOL(has_status),
                               RVAL2GENUM(interactivity, GNOME_TYPE_PREFERENCES_TYPE));
     RBGTK_INITIALIZE(self, appbar);
     return Qnil;
@@ -137,7 +137,7 @@ appbar_set_prompt(self, prompt, modal)
 {
     gnome_appbar_set_prompt(_SELF(self),
                             RVAL2CSTR(prompt),
-                            RTEST(modal));
+                            RVAL2CBOOL(modal));
     return self;
 }
 

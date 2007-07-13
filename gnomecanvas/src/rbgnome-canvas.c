@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.19 2007/07/13 14:27:08 ggc Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.20 2007/07/13 16:07:30 ggc Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -34,7 +34,7 @@ canvas_initialize(argc, argv, self)
     GtkWidget* canvas = NULL;
 
     rb_scan_args(argc, argv, "01", &antialiased);
-    if (RTEST(antialiased))
+    if (RVAL2CBOOL(antialiased))
         canvas = gnome_canvas_new_aa();
     else
         canvas = gnome_canvas_new();
@@ -87,7 +87,7 @@ canvas_set_center_scroll_region(self, center_scroll_region)
     VALUE self, center_scroll_region;
 {
     gnome_canvas_set_center_scroll_region(_SELF(self),
-                                          RTEST(center_scroll_region));
+                                          RVAL2CBOOL(center_scroll_region));
     return self;
 }
 

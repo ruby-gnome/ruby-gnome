@@ -3,8 +3,8 @@
 
   rbgtkprintsettings.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
@@ -156,18 +156,18 @@ ps_get_generic(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "12", &key, &type, &unit_or_default);
 
-    if (NIL_P(type) || (RTEST(rb_equal(type, s_string)))) {
+    if (NIL_P(type) || (RVAL2CBOOL(rb_equal(type, s_string)))) {
         result = ps_get(self, key);
-    } else if (RTEST(rb_equal(type, s_bool))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_bool))) {
         result = ps_get_bool(self, key);
-    } else if (RTEST(rb_equal(type, s_double))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_double))) {
         VALUE double_argv[2];
         double_argv[0] = key;
         double_argv[1] = unit_or_default;
         result = ps_get_double(2, double_argv, self);
-    } else if (RTEST(rb_equal(type, s_length))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_length))) {
         result = ps_get_length(self, key, unit_or_default);
-    } else if (RTEST(rb_equal(type, s_int))) {
+    } else if (RVAL2CBOOL(rb_equal(type, s_int))) {
         VALUE int_argv[2];
         int_argv[0] = key;
         int_argv[1] = unit_or_default;

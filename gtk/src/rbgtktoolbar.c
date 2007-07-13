@@ -4,7 +4,7 @@
   rbgtktoolbar.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 16:07:32 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -279,7 +279,7 @@ static VALUE
 tbar_set_tooltips(self, enable)
     VALUE self, enable;
 {
-    gtk_toolbar_set_tooltips(_SELF(self), RTEST(enable));
+    gtk_toolbar_set_tooltips(_SELF(self), RVAL2CBOOL(enable));
     return self;
 }
 

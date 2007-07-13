@@ -3,8 +3,8 @@
 
   rbgtkaspectframe.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -22,7 +22,7 @@ aframe_initialize(self, label, xalign, yalign, ratio, obey_child)
                                                 NUM2DBL(xalign),
                                                 NUM2DBL(yalign),
                                                 NUM2DBL(ratio),
-                                                RTEST(obey_child)));
+                                                RVAL2CBOOL(obey_child)));
     return Qnil;
 }
 
@@ -32,7 +32,7 @@ aframe_set(self, xalign, yalign, ratio, obey_child)
 {
     gtk_aspect_frame_set(GTK_ASPECT_FRAME(RVAL2GOBJ(self)),
 			 NUM2DBL(xalign), NUM2DBL(yalign),
-			 NUM2DBL(ratio), RTEST(obey_child));
+			 NUM2DBL(ratio), RVAL2CBOOL(obey_child));
     return self;
 }
 

@@ -3,8 +3,8 @@
 
   rbgdkdraw.c -
 
-  $Author: ktou $
-  $Date: 2006/12/22 01:07:13 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2005 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -189,7 +189,7 @@ gdkdraw_draw_rect(self, gc, filled, x, y, w, h)
     VALUE self, gc, filled, x, y, w, h;
 {
     gdk_draw_rectangle(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                       RTEST(filled),
+                       RVAL2CBOOL(filled),
                        NUM2INT(x), NUM2INT(y),
                        NUM2INT(w), NUM2INT(h));
     return self;
@@ -200,7 +200,7 @@ gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
     VALUE self, gc, filled, x, y, w, h, a1, a2;
 {
     gdk_draw_arc(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                 RTEST(filled),
+                 RVAL2CBOOL(filled),
                  NUM2INT(x), NUM2INT(y),
                  NUM2INT(w), NUM2INT(h),
                  NUM2INT(a1), NUM2INT(a2));
@@ -225,7 +225,7 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
         points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
     }
     gdk_draw_polygon(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                     RTEST(filled),
+                     RVAL2CBOOL(filled),
                      points,
                      RARRAY(pnts)->len);
     return self;

@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: sakai $
+ * $Author: ggc $
  *
- * $Date: 2006/06/13 08:07:33 $
+ * $Date: 2007/07/13 16:07:30 $
  *
  *****************************************************************************/
 
@@ -87,7 +87,7 @@ static VALUE
 fileinfo_set_symlink(self, value)
 	VALUE self, value;
 {
-	GNOME_VFS_FILE_INFO_SET_SYMLINK(_SELF(self), RTEST(value));
+	GNOME_VFS_FILE_INFO_SET_SYMLINK(_SELF(self), RVAL2CBOOL(value));
 	return self;
 }
 
@@ -102,7 +102,7 @@ static VALUE
 fileinfo_set_local(self, value)
 	VALUE self, value;
 {
-	GNOME_VFS_FILE_INFO_SET_LOCAL(_SELF(self), RTEST(value));
+	GNOME_VFS_FILE_INFO_SET_LOCAL(_SELF(self), RVAL2CBOOL(value));
 	return self;
 }
 
@@ -117,7 +117,7 @@ static VALUE
 fileinfo_set_suid(self, value)
 	VALUE self, value;
 {
-	GNOME_VFS_FILE_INFO_SET_SUID(_SELF(self), RTEST(value));
+	GNOME_VFS_FILE_INFO_SET_SUID(_SELF(self), RVAL2CBOOL(value));
 	return self;
 }
 
@@ -132,7 +132,7 @@ static VALUE
 fileinfo_set_sgid(self, value)
 	VALUE self, value;
 {
-	GNOME_VFS_FILE_INFO_SET_SGID(_SELF(self), RTEST(value));
+	GNOME_VFS_FILE_INFO_SET_SGID(_SELF(self), RVAL2CBOOL(value));
 	return self;
 }
 
@@ -147,7 +147,7 @@ static VALUE
 fileinfo_set_sticky(self, value)
 	VALUE self, value;
 {
-	GNOME_VFS_FILE_INFO_SET_STICKY(_SELF(self), RTEST(value));
+	GNOME_VFS_FILE_INFO_SET_STICKY(_SELF(self), RVAL2CBOOL(value));
 	return self;
 }
 

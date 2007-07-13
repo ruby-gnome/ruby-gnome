@@ -4,7 +4,7 @@
   rbgdkwindow.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:08 $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -177,7 +177,7 @@ static VALUE
 gdkwin_set_keep_above(self, setting)
     VALUE self, setting;
 {
-    gdk_window_set_keep_above(_SELF(self), RTEST(setting));
+    gdk_window_set_keep_above(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
@@ -185,7 +185,7 @@ static VALUE
 gdkwin_set_keep_below(self, setting)
     VALUE self, setting;
 {
-    gdk_window_set_keep_below(_SELF(self), RTEST(setting));
+    gdk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 #endif
@@ -260,7 +260,7 @@ gdkwin_clear_area(argc, argv, self)
     VALUE gen_expose, x, y, w, h;
     rb_scan_args(argc, argv, "41", &x, &y, &w, &h, &gen_expose);
 
-    if (! NIL_P(gen_expose) && RTEST(gen_expose)){
+    if (! NIL_P(gen_expose) && RVAL2CBOOL(gen_expose)){
         gdk_window_clear_area_e(_SELF(self),
                                 NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     } else {
@@ -368,11 +368,11 @@ gdkwin_invalidate(self, area, invalidate_children)
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
         gdk_window_invalidate_rect(_SELF(self),
                                    RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
-                                   RTEST(invalidate_children));
+                                   RVAL2CBOOL(invalidate_children));
     } else {
         gdk_window_invalidate_region(_SELF(self),
                                      RVAL2BOXED(area, GDK_TYPE_REGION),
-                                     RTEST(invalidate_children));
+                                     RVAL2CBOOL(invalidate_children));
     }
     return self;
 }
@@ -383,7 +383,7 @@ invalidate_child_func_wrap(window, func)
     VALUE func;
 {
     VALUE result = rb_funcall(func, id_call, 1, GOBJ2RVAL(window));
-    return RTEST(result);
+    return RVAL2CBOOL(result);
 }
 
 typedef gboolean (*ChildFunc) (GdkWindow*, gpointer);
@@ -440,7 +440,7 @@ static VALUE
 gdkwin_process_updates(self, update_children)
     VALUE self, update_children;
 {
-    gdk_window_process_updates(_SELF(self), RTEST(update_children));
+    gdk_window_process_updates(_SELF(self), RVAL2CBOOL(update_children));
     return self;
 }
 
@@ -448,7 +448,7 @@ static VALUE
 gdkwin_s_set_debug_updates(self, setting)
     VALUE self, setting;
 {
-    gdk_window_set_debug_updates(RTEST(setting));
+    gdk_window_set_debug_updates(RVAL2CBOOL(setting));
     return self;
 }
 
@@ -500,7 +500,7 @@ gdkwin_set_override_redirect(self, override_redirect)
     VALUE self, override_redirect;
 {
     gdk_window_set_override_redirect(_SELF(self), 
-                                     RTEST(override_redirect));
+                                     RVAL2CBOOL(override_redirect));
     return self;
 }
 
@@ -509,7 +509,7 @@ static VALUE
 gdkwin_set_accept_focus(self, accept_focus)
     VALUE self, accept_focus;
 {
-    gdk_window_set_accept_focus(_SELF(self), RTEST(accept_focus));
+    gdk_window_set_accept_focus(_SELF(self), RVAL2CBOOL(accept_focus));
     return self;
 }
 #endif
@@ -519,7 +519,7 @@ static VALUE
 gdkwin_set_focus_on_map(self, focus_on_map)
     VALUE self, focus_on_map;
 {
-    gdk_window_set_focus_on_map(_SELF(self), RTEST(focus_on_map));
+    gdk_window_set_focus_on_map(_SELF(self), RVAL2CBOOL(focus_on_map));
     return self;
 }
 #endif
@@ -617,7 +617,7 @@ gdkwin_set_static_gravities(self, use_static)
     VALUE self, use_static;
 {
     gboolean ret = gdk_window_set_static_gravities(_SELF(self),
-                                                   RTEST(use_static));
+                                                   RVAL2CBOOL(use_static));
     if (! ret)
         rb_raise(rb_eRuntimeError, "couldn't turn on static gravity");
 
@@ -651,7 +651,7 @@ gdkwin_set_back_pixmap(self, pixmap, parent_relative)
 {
     gdk_window_set_back_pixmap(_SELF(self), 
                                GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-                               RTEST(parent_relative));
+                               RVAL2CBOOL(parent_relative));
     return self;
 }
 
@@ -718,7 +718,7 @@ static VALUE
 gdkwin_set_modal_hint(self, modal)
     VALUE self, modal;
 {
-    gdk_window_set_modal_hint(_SELF(self), RTEST(modal));
+    gdk_window_set_modal_hint(_SELF(self), RVAL2CBOOL(modal));
     return self;
 }
 
@@ -744,7 +744,7 @@ static VALUE
 gdkwin_set_skip_taskbar_hint(self, hint)
     VALUE self, hint;
 {
-    gdk_window_set_skip_taskbar_hint(_SELF(self), RTEST(hint));
+    gdk_window_set_skip_taskbar_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
 
@@ -752,7 +752,7 @@ static VALUE
 gdkwin_set_skip_pager_hint(self, hint)
     VALUE self, hint;
 {
-    gdk_window_set_skip_pager_hint(_SELF(self), RTEST(hint));
+    gdk_window_set_skip_pager_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
 #endif
@@ -762,7 +762,7 @@ static VALUE
 gdkwin_set_urgency_hint(self, hint)
     VALUE self, hint;
 {
-    gdk_window_set_urgency_hint(_SELF(self), RTEST(hint));
+    gdk_window_set_urgency_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
 #endif

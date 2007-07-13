@@ -3,8 +3,8 @@
 
   rbgtkcellview.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 16:07:31 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -35,7 +35,7 @@ cview_initialize(argc, argv, self)
     } else {
         G_CHILD_SET(self, id_text, text);
         if (TYPE(text) == T_STRING){
-            if (NIL_P(with_markup) || RTEST(with_markup)){
+            if (NIL_P(with_markup) || RVAL2CBOOL(with_markup)){
                 widget = gtk_cell_view_new_with_markup(RVAL2CSTR(text));
             } else {
                 widget = gtk_cell_view_new_with_text(RVAL2CSTR(text));
