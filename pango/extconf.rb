@@ -46,7 +46,8 @@ add_distcleanfile("rbpangoinits.c")
 make_version_header("PANGO", "pango")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
-  system("#{$ruby} #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbpangoinits.c")
+  SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
+  system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbpangoinits.c")
 }
 
 create_top_makefile

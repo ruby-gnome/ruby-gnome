@@ -35,7 +35,8 @@ add_distcleanfile("rbatkinits.c")
 make_version_header("ATK", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_ATK_COMPILATION") {
-  system("#{$ruby} #{SRCDIR}/makeinits.rb #{SRCDIR}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
+  SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
+  system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
 }
 
 create_top_makefile
