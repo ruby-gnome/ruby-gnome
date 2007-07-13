@@ -3,8 +3,8 @@
 
   rbgtkmenuitem.c -
 
-  $Author: ktou $
-  $Date: 2006/05/17 13:51:42 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -133,7 +133,7 @@ static VALUE
 mitem_get_right_justified(self)
     VALUE self;
 {
-    return gtk_menu_item_get_right_justified(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_menu_item_get_right_justified(_SELF(self)));
 }
 
 static VALUE

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-client.c,v 1.11 2007/07/08 02:55:33 sakai Exp $ */
+/* $Id: rbgnome-client.c,v 1.12 2007/07/13 14:27:07 ggc Exp $ */
 /* base on libgnomeui/gnome-client.h */
 
 /* Gnome::Client - GNOME session management client support
@@ -273,7 +273,7 @@ static VALUE
 client_connected(self)
     VALUE self;
 {
-    return GNOME_CLIENT_CONNECTED(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(GNOME_CLIENT_CONNECTED(_SELF(self)));
 }
 
 static VALUE

@@ -4,7 +4,7 @@
   rbgtktextview.c -
 
   $Author $
-  $Date: 2005/11/06 04:44:24 $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -73,9 +73,9 @@ static VALUE
 textview_scroll_to_iter(self, iter, within_margin, use_align, xalign, yalign)
     VALUE self, iter, within_margin, use_align, xalign, yalign;
 {
-    return gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
-                                        NUM2DBL(within_margin), RTEST(use_align), 
-                                        NUM2DBL(xalign), NUM2DBL(yalign)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
+                                                   NUM2DBL(within_margin), RTEST(use_align), 
+                                                   NUM2DBL(xalign), NUM2DBL(yalign)));
 }
 
 static VALUE
@@ -90,7 +90,7 @@ static VALUE
 textview_move_mark_onscreen(self, mark)
     VALUE self, mark;
 {
-    return gtk_text_view_move_mark_onscreen(_SELF(self), RVAL2MARK(mark)) ? Qtrue: Qfalse;
+    return CBOOL2RVAL(gtk_text_view_move_mark_onscreen(_SELF(self), RVAL2MARK(mark)));
 }
 
 static VALUE
@@ -224,42 +224,42 @@ static VALUE
 textview_forward_display_line(self, iter)
     VALUE self, iter;
 {
-    return gtk_text_view_forward_display_line(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
 textview_backward_display_line(self, iter)
     VALUE self, iter;
 {
-    return gtk_text_view_backward_display_line(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
 textview_forward_display_line_end(self, iter)
     VALUE self, iter;
 {
-    return gtk_text_view_forward_display_line_end(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
 textview_backward_display_line_start(self, iter)
     VALUE self, iter;
 {
-    return gtk_text_view_backward_display_line_start(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
 textview_starts_display_line(self, iter)
     VALUE self, iter;
 {
-    return gtk_text_view_starts_display_line(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
 textview_move_visually(self, iter, count)
     VALUE self, iter, count;
 {
-    return gtk_text_view_move_visually(_SELF(self), RVAL2ITR(iter), NUM2INT(count)) ? Qtrue: Qfalse;
+    return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2ITR(iter), NUM2INT(count)));
 }
 
 static VALUE

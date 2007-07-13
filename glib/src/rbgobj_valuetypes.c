@@ -3,8 +3,8 @@
 
   rbgobj_valuetypes.c -
 
-  $Author: sakai $
-  $Date: 2003/08/06 02:14:03 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:07 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -92,7 +92,7 @@ ptr_eql(self, other)
         return Qnil;
     Data_Get_Struct(self, void, ptr1);
     Data_Get_Struct(other, void, ptr2);
-    return (ptr1==ptr2) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ptr1 == ptr2);
 }
 
 static VALUE

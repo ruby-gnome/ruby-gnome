@@ -3,8 +3,8 @@
 
   rbgtkaccelerator.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/09 19:02:05 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -16,7 +16,7 @@ static VALUE
 accel_valid(self, keyval, modifiers)
     VALUE self, keyval, modifiers;
 {
-    return gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)));
 }
 
 static VALUE

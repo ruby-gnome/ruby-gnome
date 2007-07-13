@@ -3,8 +3,8 @@
 
   rbgtkstyle.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/17 18:12:41 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -35,7 +35,7 @@ static VALUE
 style_attached(self)
     VALUE self;
 {
-    return (GTK_STYLE_ATTACHED(_SELF(self)) ? Qtrue : Qfalse);
+    return CBOOL2RVAL(GTK_STYLE_ATTACHED(_SELF(self)));
 }
 
 static VALUE

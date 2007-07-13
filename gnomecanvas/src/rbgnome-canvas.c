@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas.c,v 1.18 2006/04/15 01:07:04 ktou Exp $ */
+/* $Id: rbgnome-canvas.c,v 1.19 2007/07/13 14:27:08 ggc Exp $ */
 
 /* Gnome::Canvas widget for Ruby/Gnome
  * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
@@ -97,7 +97,7 @@ canvas_get_center_scroll_region(self)
 {
     gboolean result;
     result = gnome_canvas_get_center_scroll_region(_SELF(self));
-    return result ? Qtrue : Qfalse;
+    return CBOOL2RVAL(result);
 }
 
 static VALUE
@@ -272,7 +272,7 @@ static VALUE
 canvas_get_aa(self)
     VALUE self;
 {
-    return _SELF(self)->aa ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->aa);
 }
 
 static VALUE

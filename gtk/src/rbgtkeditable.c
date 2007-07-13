@@ -3,8 +3,8 @@
 
   rbgtkeditable.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -102,7 +102,7 @@ static VALUE
 edit_get_editable(self)
     VALUE self;
 {
-    return gtk_editable_get_editable(GTK_EDITABLE(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_editable_get_editable(GTK_EDITABLE(RVAL2GOBJ(self))));
 }
 
 static VALUE

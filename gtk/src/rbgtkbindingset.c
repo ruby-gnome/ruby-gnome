@@ -3,8 +3,8 @@
 
   rbgtkbindingset.c -
 
-  $Author: mutoh $
-  $Date: 2007/01/31 17:55:25 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -70,9 +70,9 @@ static VALUE
 binding_activate(self, keyval, modifiers, object)
     VALUE self, keyval, modifiers, object;
 {
-    return gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
-                                    RVAL2MOD(modifiers),
-                                    GTK_OBJECT(RVAL2GOBJ(object))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
+                                               RVAL2MOD(modifiers),
+                                               GTK_OBJECT(RVAL2GOBJ(object))));
 }
 
 static VALUE

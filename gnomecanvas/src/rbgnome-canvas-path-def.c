@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-canvas-path-def.c,v 1.15 2005/10/15 14:38:40 mutoh Exp $ */
+/* $Id: rbgnome-canvas-path-def.c,v 1.16 2007/07/13 14:27:08 ggc Exp $ */
 
 /* Gnome::CanvasPathDef
  *
@@ -270,7 +270,7 @@ cpathdef_is_empty(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_is_empty(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
@@ -279,7 +279,7 @@ cpathdef_has_current_point(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_has_currentpoint(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
@@ -317,7 +317,7 @@ cpathdef_any_open(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_any_open(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
@@ -326,7 +326,7 @@ cpathdef_all_open(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_all_open(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
@@ -335,7 +335,7 @@ cpathdef_any_closed(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_any_closed(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
@@ -344,7 +344,7 @@ cpathdef_all_closed(self)
 {
     gboolean ret;
     ret = gnome_canvas_path_def_all_closed(_SELF(self));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 #ifndef HAVE_GNOME_CANVAS_PATH_DEF_GET_TYPE

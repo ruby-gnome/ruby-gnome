@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 02:40:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:07 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -223,9 +223,9 @@ gobj_sig_has_handler_pending(argc, argv, self)
     if (!g_signal_parse_name(sig_name, CLASS2GTYPE(CLASS_OF(self)), &signal_id, &detail, TRUE))
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
 
-    return g_signal_has_handler_pending(RVAL2GOBJ(self),
-                                        signal_id, detail,
-                                        RTEST(may_be_blocked)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(g_signal_has_handler_pending(RVAL2GOBJ(self),
+                                                   signal_id, detail,
+                                                   RTEST(may_be_blocked)));
 }
 
 static VALUE
@@ -453,7 +453,7 @@ static VALUE
 gobj_sig_handler_is_connected(self, id)
      VALUE self, id;
 {
-    return g_signal_handler_is_connected(RVAL2GOBJ(self), NUM2ULONG(id)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(g_signal_handler_is_connected(RVAL2GOBJ(self), NUM2ULONG(id)));
 }
 
 #if 0
@@ -750,7 +750,7 @@ query_inspect(self)
     { \
         GSignalQuery* query; \
         Data_Get_Struct(self, GSignalQuery, query); \
-        return (query->signal_flags & flag) ? Qtrue : Qfalse; \
+        return CBOOL2RVAL(query->signal_flags & flag); \
     }
 
 query_is_flag(G_SIGNAL_RUN_FIRST)

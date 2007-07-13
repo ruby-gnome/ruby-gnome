@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-config.c,v 1.6 2003/02/02 12:51:05 tkubo Exp $ */
+/* $Id: rbgnome-config.c,v 1.7 2007/07/13 14:27:07 ggc Exp $ */
 /* based on libgnome/gnome-config.h */
 
 /* Gnome::Config for Ruby/GNOME2
@@ -34,7 +34,7 @@ config_get_string_with_default(self, path)
     VALUE obj = result ? rb_str_new2(result) : Qnil;
     if (result)
         g_free(result);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -46,7 +46,7 @@ config_get_translated_string_with_default(self, path)
     VALUE obj = result ? rb_str_new2(result) : Qnil;
     if (result)
         g_free(result);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -55,7 +55,7 @@ config_get_int_with_default(self, path)
 {
     gboolean def;
     VALUE obj = INT2NUM(gnome_config_get_int_with_default(RVAL2CSTR(path), &def));
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -64,7 +64,7 @@ config_get_float_with_default(self, path)
 {
     gboolean def;
     VALUE obj = rb_float_new(gnome_config_get_float_with_default(RVAL2CSTR(path), &def));
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -72,8 +72,8 @@ config_get_bool_with_default(self, path)
     VALUE self, path;
 {
     gboolean def;
-    VALUE obj = gnome_config_get_bool_with_default(RVAL2CSTR(path), &def) ? Qtrue : Qfalse;
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    VALUE obj = CBOOL2RVAL(gnome_config_get_bool_with_default(RVAL2CSTR(path), &def));
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -87,14 +87,14 @@ config_get_vector_with_default(self, path)
     VALUE obj;
     gnome_config_get_vector_with_default(RVAL2CSTR(path), &argc, &argv, &def);
     if (argc == 0)
-        return rb_ary_new3(2, Qnil, def ? Qtrue : Qfalse);
+        return rb_ary_new3(2, Qnil, CBOOL2RVAL(def));
     obj = rb_ary_new2(argc);
     for (i = 0; i < argc; i++) {
         rb_ary_push(obj, rb_str_new2(argv[i]));
         g_free(argv[i]);
     }
     g_free(argv);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 /* private get functions */
@@ -107,7 +107,7 @@ config_private_get_string_with_default(self, path)
     VALUE obj = result ? rb_str_new2(result) : Qnil;
     if (result)
         g_free(result);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -119,7 +119,7 @@ config_private_get_translated_string_with_default(self, path)
     VALUE obj = result ? rb_str_new2(result) : Qnil;
     if (result)
         g_free(result);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -128,7 +128,7 @@ config_private_get_int_with_default(self, path)
 {
     gboolean def;
     VALUE obj = INT2NUM(gnome_config_private_get_int_with_default(RVAL2CSTR(path), &def));
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -137,7 +137,7 @@ config_private_get_float_with_default(self, path)
 {
     gboolean def;
     VALUE obj = rb_float_new(gnome_config_private_get_float_with_default(RVAL2CSTR(path), &def));
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -145,8 +145,8 @@ config_private_get_bool_with_default(self, path)
     VALUE self, path;
 {
     gboolean def;
-    VALUE obj = gnome_config_private_get_bool_with_default(RVAL2CSTR(path), &def) ? Qtrue : Qfalse;
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    VALUE obj = CBOOL2RVAL(gnome_config_private_get_bool_with_default(RVAL2CSTR(path), &def));
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 static VALUE
@@ -160,14 +160,14 @@ config_private_get_vector_with_default(self, path)
     VALUE obj;
     gnome_config_private_get_vector_with_default(RVAL2CSTR(path), &argc, &argv, &def);
     if (argc == 0)
-        return rb_ary_new3(2, Qnil, def ? Qtrue : Qfalse);
+        return rb_ary_new3(2, Qnil, CBOOL2RVAL(def));
     obj = rb_ary_new2(argc);
     for (i = 0; i < argc; i++) {
         rb_ary_push(obj, rb_str_new2(argv[i]));
         g_free(argv[i]);
     }
     g_free(argv);
-    return rb_ary_new3(2, obj, def ? Qtrue : Qfalse);
+    return rb_ary_new3(2, obj, CBOOL2RVAL(def));
 }
 
 /* normal get functions */
@@ -211,7 +211,7 @@ static VALUE
 config_get_bool(self, path)
     VALUE self, path;
 {
-    return gnome_config_get_bool(RVAL2CSTR(path)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_config_get_bool(RVAL2CSTR(path)));
 }
 
 static VALUE
@@ -275,7 +275,7 @@ static VALUE
 config_private_get_bool(self, path)
     VALUE self, path;
 {
-    return gnome_config_private_get_bool(RVAL2CSTR(path)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_config_private_get_bool(RVAL2CSTR(path)));
 }
 
 static VALUE
@@ -422,14 +422,14 @@ static VALUE
 config_has_section(self, prefix)
     VALUE self, prefix;
 {
-    return gnome_config_has_section(RVAL2CSTR(prefix)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_config_has_section(RVAL2CSTR(prefix)));
 }
 
 static VALUE
 config_private_has_section(self, prefix)
     VALUE self, prefix;
 {
-    return gnome_config_private_has_section(RVAL2CSTR(prefix)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_config_private_has_section(RVAL2CSTR(prefix)));
 }
 
 #if 0 /* FIXME */

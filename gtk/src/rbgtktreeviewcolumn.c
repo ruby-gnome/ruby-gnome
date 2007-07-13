@@ -3,8 +3,8 @@
 
   rbgtktreeviewcolumn.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -254,7 +254,7 @@ tvc_cell_get_size(self)
 static VALUE
 tvc_cell_is_visible(self)
 {
-    return gtk_tree_view_column_cell_is_visible(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_view_column_cell_is_visible(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)

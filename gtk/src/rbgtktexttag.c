@@ -3,8 +3,8 @@
 
   rbgtktexttag.c -
 
-  $Author: mutoh $
-  $Date: 2003/12/21 08:22:19 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -46,7 +46,7 @@ event(self, event_object, event, iter)
                                       RVAL2GOBJ(event_object),
                                       RVAL2GEV(event),
                                       (GtkTextIter*)RVAL2BOXED(iter, GTK_TYPE_TEXT_ITER));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 void

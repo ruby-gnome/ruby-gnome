@@ -3,8 +3,8 @@
 
   rbgtkrc.c -
 
-  $Author: ktou $
-  $Date: 2007/03/22 02:57:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -85,15 +85,15 @@ static VALUE
 rc_reparse_all(self)
     VALUE self;
 {
-    return gtk_rc_reparse_all() ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_rc_reparse_all());
 }
 
 static VALUE
 rc_reparse_all_for_settings(self, settings, force_load)
     VALUE self, settings, force_load;
 {
-    return gtk_rc_reparse_all_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)), 
-                                           RTEST(force_load)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_rc_reparse_all_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)), 
+                                                      RTEST(force_load)));
 }
 
 #if GTK_CHECK_VERSION(2,4,0)

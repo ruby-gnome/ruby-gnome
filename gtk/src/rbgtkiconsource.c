@@ -3,8 +3,8 @@
 
   rbgtkiconsource.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/30 18:40:03 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -35,7 +35,7 @@ static VALUE
 icon_source_get_direction_wildcarded(self)
     VALUE self;
 {
-    return gtk_icon_source_get_direction_wildcarded(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_icon_source_get_direction_wildcarded(_SELF(self)));
 }
 
 static VALUE
@@ -65,7 +65,7 @@ static VALUE
 icon_source_get_size_wildcarded(self)
     VALUE self;
 {
-    return gtk_icon_source_get_size_wildcarded(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_icon_source_get_size_wildcarded(_SELF(self)));
 }
 
 static VALUE
@@ -79,7 +79,7 @@ static VALUE
 icon_source_get_state_wildcarded(self)
     VALUE self;
 {
-    return gtk_icon_source_get_state_wildcarded(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_icon_source_get_state_wildcarded(_SELF(self)));
 }
 
 static VALUE

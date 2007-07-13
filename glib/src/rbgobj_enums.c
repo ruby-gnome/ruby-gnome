@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: sakai $
-  $Date: 2007/07/04 13:13:20 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -368,7 +368,7 @@ enum_eqv(VALUE self, VALUE rhs)
     if (CLASS_OF(rhs) != CLASS_OF(self) &&
         !rb_obj_is_kind_of(rhs, rb_cInteger))
         return Qnil;
-    return (rbgobj_get_enum(self, gtype) == rbgobj_get_enum(rhs, gtype)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(rbgobj_get_enum(self, gtype) == rbgobj_get_enum(rhs, gtype));
 }
 
 static VALUE
@@ -666,7 +666,7 @@ flags_eqv(VALUE self, VALUE rhs)
         return Qnil;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
-    return (p->value == rhs_val) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(p->value == rhs_val);
 }
 
 static VALUE
@@ -681,7 +681,7 @@ flags_gt_eq(VALUE self, VALUE rhs)
         return Qnil;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
-    return ((p->value & rhs_val) == rhs_val) ? Qtrue : Qfalse;
+    return CBOOL2RVAL((p->value & rhs_val) == rhs_val);
 }
 
 static VALUE
@@ -696,7 +696,7 @@ flags_lt_eq(VALUE self, VALUE rhs)
         return Qnil;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
-    return ((p->value & rhs_val) == p->value) ? Qtrue : Qfalse;
+    return CBOOL2RVAL((p->value & rhs_val) == p->value);
 }
 
 static VALUE
@@ -711,8 +711,8 @@ flags_gt(VALUE self, VALUE rhs)
         return Qnil;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
-    return ((p->value & rhs_val) == rhs_val &&
-            p->value != rhs_val) ? Qtrue : Qfalse;
+    return CBOOL2RVAL((p->value & rhs_val) == rhs_val &&
+                      p->value != rhs_val);
 }
 
 static VALUE
@@ -727,8 +727,8 @@ flags_lt(VALUE self, VALUE rhs)
         return Qnil;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
-    return ((p->value & rhs_val) == p->value &&
-            p->value != rhs_val) ? Qtrue : Qfalse;
+    return CBOOL2RVAL((p->value & rhs_val) == p->value &&
+                      p->value != rhs_val);
 }
 
 static VALUE
@@ -766,7 +766,7 @@ static VALUE
 flags_empty_p(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
-    return (p->value == 0) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(p->value == 0);
 }
 
 static VALUE
@@ -792,7 +792,7 @@ static VALUE
 flags_nonzero_p(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
-    return (p->value != 0) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(p->value != 0);
 }
 
 static void

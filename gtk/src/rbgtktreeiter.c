@@ -3,8 +3,8 @@
 
   rbgtktreeiter.c -
 
-  $Author: ktou $
-  $Date: 2006/09/24 11:52:14 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masao Mutoh
@@ -31,7 +31,7 @@ treeiter_first(self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
-    VALUE ret = (gtk_tree_model_get_iter_first(model, iter)) ? Qtrue : Qfalse;
+    VALUE ret = CBOOL2RVAL(gtk_tree_model_get_iter_first(model, iter));
     iter->user_data3 = model;
     return ret;
 }
@@ -99,7 +99,7 @@ treeiter_has_child(self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
-    return gtk_tree_model_iter_has_child(model, iter) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_model_iter_has_child(model, iter));
 }
 
 static VALUE

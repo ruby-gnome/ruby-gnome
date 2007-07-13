@@ -3,8 +3,8 @@
 
   rbgobj_param.c -
 
-  $Author: sakai $
-  $Date: 2007/07/04 13:13:19 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -190,7 +190,7 @@ value_defaults(VALUE self, VALUE val)
     result = g_param_value_defaults(rbgobj_get_param_spec(self), &tmp);
     g_value_unset(&tmp);
 
-    return result ? Qtrue : Qfalse;
+    return CBOOL2RVAL(result);
 }
 #endif
 
@@ -210,7 +210,7 @@ value_validate_body(struct validate_arg* arg)
     rbgobj_rvalue_to_gvalue(arg->obj, arg->value);
     b = g_param_value_validate(arg->pspec, arg->value);
     ret = rbgobj_gvalue_to_rvalue(arg->value);
-    return rb_ary_new3(2, b ? Qtrue : Qfalse, ret);
+    return rb_ary_new3(2, CBOOL2RVAL(b), ret);
 }
 
 static VALUE
@@ -313,7 +313,7 @@ get_ref_count(self)
         VALUE self; \
     { \
         GParamSpec* pspec = G_PARAM_SPEC(rbgobj_get_param_spec(self)); \
-        return (pspec->flags & flag) ? Qtrue : Qfalse; \
+        return CBOOL2RVAL(pspec->flags & flag); \
     }
 
 param_is_flag(G_PARAM_READABLE)

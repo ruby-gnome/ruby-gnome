@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbpopt.c,v 1.2 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbpopt.c,v 1.3 2007/07/13 14:27:08 ggc Exp $ */
 
 /* Part of Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -37,7 +37,7 @@ poptoption_arginfo_to_value(option)
 {
     switch (option->argInfo & POPT_ARG_MASK) {
       case POPT_ARG_NONE:
-        return option->arg ? (*((int *)option->arg) ? Qtrue : Qfalse) : Qnil;
+        return option->arg ? CBOOL2RVAL(*((int *)option->arg)) : Qnil;
       case POPT_ARG_STRING:
         return (option->arg && *((char **)option->arg)) ? rb_str_new2(*((char **)option->arg)) : Qnil;
       case POPT_ARG_INT:

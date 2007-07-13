@@ -3,8 +3,8 @@
 
   rbgtktextmark.c -
 
-  $Author: lrz $
-  $Date: 2004/06/17 22:07:31 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -23,7 +23,7 @@ static VALUE
 get_visible(self)
     VALUE self;
 {
-    return gtk_text_mark_get_visible(GTK_TEXT_MARK(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_mark_get_visible(GTK_TEXT_MARK(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -37,7 +37,7 @@ static VALUE
 get_deleted(self)
     VALUE self;
 {
-    return gtk_text_mark_get_deleted(GTK_TEXT_MARK(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_mark_get_deleted(GTK_TEXT_MARK(RVAL2GOBJ(self))));
 }
 
 static VALUE
@@ -51,7 +51,7 @@ static VALUE
 get_left_gravity(self)
     VALUE self;
 {
-    return gtk_text_mark_get_left_gravity(GTK_TEXT_MARK(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_mark_get_left_gravity(GTK_TEXT_MARK(RVAL2GOBJ(self))));
 }
 
 void 

@@ -3,8 +3,8 @@
 
   rbgdkregion.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -127,7 +127,7 @@ static VALUE
 gdkregion_empty(self)
     VALUE self;
 {
-    return gdk_region_empty(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_region_empty(_SELF(self)));
 }
 
 static VALUE
@@ -137,15 +137,15 @@ gdkregion_equal(self, obj)
     if (!rb_obj_is_instance_of(obj, GTYPE2CLASS(GDK_TYPE_REGION))) {
         return Qnil;
     }
-    return gdk_region_equal(_SELF(self), _SELF(obj)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_region_equal(_SELF(self), _SELF(obj)));
 }
 
 static VALUE
 gdkregion_point_in(self, x, y)
     VALUE self, x, y;
 {
-    return gdk_region_point_in(_SELF(self), NUM2INT(x),
-                               NUM2INT(y)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_region_point_in(_SELF(self), NUM2INT(x),
+                                          NUM2INT(y)));
 }
 
 static VALUE

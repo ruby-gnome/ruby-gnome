@@ -3,8 +3,8 @@
 
   rbgtktreeview.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -283,9 +283,9 @@ static VALUE
 treeview_expand_row(self, path, open_all)
     VALUE self, path, open_all;
 {
-    return gtk_tree_view_expand_row(_SELF(self), 
-                                    RVAL2TREEPATH(path),
-                                    RTEST(open_all)) ? Qtrue: Qfalse;
+    return CBOOL2RVAL(gtk_tree_view_expand_row(_SELF(self), 
+                                               RVAL2TREEPATH(path),
+                                               RTEST(open_all)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
@@ -302,8 +302,8 @@ static VALUE
 treeview_collapse_row(self, path)
     VALUE self, path;
 {
-    return gtk_tree_view_collapse_row(_SELF(self), 
-                                      RVAL2TREEPATH(path)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_view_collapse_row(_SELF(self), 
+                                                 RVAL2TREEPATH(path)));
 }
 
 static void
@@ -332,8 +332,8 @@ static VALUE
 treeview_row_expanded(self, path)
     VALUE self, path;
 {
-    return gtk_tree_view_row_expanded(_SELF(self), 
-                                      RVAL2TREEPATH(path)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_view_row_expanded(_SELF(self), 
+                                                 RVAL2TREEPATH(path)));
 }
 
 static VALUE

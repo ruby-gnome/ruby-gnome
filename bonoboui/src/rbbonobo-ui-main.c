@@ -3,8 +3,8 @@
 
   rbbonobo-ui-main.c -
 
-  $Author: mutoh $
-  $Date: 2002/12/22 14:27:43 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
 
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
@@ -22,7 +22,7 @@ static VALUE
 rbonoboui_is_initialized(self)
     VALUE self;
 {
-    return bonobo_is_initialized() ? Qtrue : Qfalse;
+    return CBOOL2RVAL(bonobo_is_initialized());
 }
 
 /*

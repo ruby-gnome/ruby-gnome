@@ -3,8 +3,8 @@
 
   rbgtktextchild.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
@@ -35,7 +35,7 @@ static VALUE
 textchild_get_deleted(self)
     VALUE self;
 {
-    return gtk_text_child_anchor_get_deleted(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_child_anchor_get_deleted(_SELF(self)));
 }
 
 void

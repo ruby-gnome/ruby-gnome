@@ -3,8 +3,8 @@
 
   rbbonobo-dock.c -
 
-  $Author: mutoh $
-  $Date: 2002/12/22 14:27:43 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
 
   Copyright (C) 2002 KUBO Takehiro <kubo@jiubao.org>
 
@@ -148,7 +148,7 @@ dock_add_from_layout(self, layout)
     gboolean result;
     result = bonobo_dock_add_from_layout(_SELF(self),
                                          BONOBO_DOCK_LAYOUT(RVAL2GOBJ(layout)));
-    return result ? Qtrue : Qfalse;
+    return CBOOL2RVAL(result);
 }
 
 void

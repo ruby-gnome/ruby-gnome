@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: mutoh $
-  $Date: 2007/04/21 16:16:23 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:11 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -431,7 +431,7 @@ static VALUE
 gwin_get_decorated(self)
     VALUE self;
 {
-    return gtk_window_get_decorated(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_window_get_decorated(_SELF(self)));
 }
 
 static VALUE
@@ -473,7 +473,7 @@ static VALUE
 gwin_get_has_frame(self)
     VALUE self;
 {
-    return gtk_window_get_has_frame(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_window_get_has_frame(_SELF(self)));
 }
 
 static VALUE
@@ -553,7 +553,7 @@ static VALUE
 gwin_parse_geometry(self, geometry)
     VALUE self, geometry;
 {
-    return gtk_window_parse_geometry(_SELF(self), RVAL2CSTR(geometry)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_window_parse_geometry(_SELF(self), RVAL2CSTR(geometry)));
 }
 
 static VALUE

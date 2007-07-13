@@ -4,7 +4,7 @@
   rbgdk-pixbuf-loader.c -
 
   $Author: ggc $
-  $Date: 2006/06/22 19:52:53 $
+  $Date: 2007/07/13 14:27:06 $
 
   Copyright (C) 2004 Masao Mutoh
   Copyright (C) 2003 Geoff Youngs
@@ -71,7 +71,7 @@ loader_write(self, data)
     res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data), RSTRING(data)->len, &error);
     if(error)
         RAISE_GERROR(error);
-    return res ? Qtrue : Qfalse;
+    return CBOOL2RVAL(res);
 }
 
 static VALUE
@@ -96,7 +96,7 @@ last_write(self, data)
         return Qnil;
     }
 	
-    return res ? Qtrue : Qfalse;
+    return CBOOL2RVAL(res);
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
@@ -121,7 +121,7 @@ loader_close(self)
     if(error)
         RAISE_GERROR(error);
 	
-    return res ? Qtrue : Qfalse;
+    return CBOOL2RVAL(res);
 }
 
 /****************************************************/

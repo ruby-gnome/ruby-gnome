@@ -3,8 +3,8 @@
 
   rbgtktreepath.c -
 
-  $Author: mutoh $
-  $Date: 2004/06/03 17:28:45 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 2003,2004 Masao Mutoh
@@ -126,14 +126,14 @@ static VALUE
 treepath_prev(self)
     VALUE self;
 {
-    return gtk_tree_path_prev(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_path_prev(_SELF(self)));
 }
 
 static VALUE
 treepath_up(self)
     VALUE self;
 {
-    return gtk_tree_path_up(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_path_up(_SELF(self)));
 }
 
 static VALUE
@@ -148,16 +148,14 @@ static VALUE
 treepath_is_ancestor(self, descendant)
     VALUE self, descendant;
 {
-    return gtk_tree_path_is_ancestor(_SELF(self), _SELF(descendant)) 
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_path_is_ancestor(_SELF(self), _SELF(descendant)));
 }
 
 static VALUE
 treepath_is_descendant(self, ancestor)
     VALUE self, ancestor;
 {
-    return gtk_tree_path_is_descendant(_SELF(self), _SELF(ancestor)) 
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_path_is_descendant(_SELF(self), _SELF(ancestor)));
 }
 
 void 

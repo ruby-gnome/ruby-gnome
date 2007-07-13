@@ -3,8 +3,8 @@
 
   rbgtkaccelgroup.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -63,8 +63,8 @@ static VALUE
 gaccelgrp_disconnect_key(self, key, mods)
     VALUE self, key, mods;
 {
-    return gtk_accel_group_disconnect_key(_SELF(self), NUM2UINT(key),
-                                          RVAL2MOD(mods)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_accel_group_disconnect_key(_SELF(self), NUM2UINT(key),
+                                                     RVAL2MOD(mods)));
 }
 
 static VALUE
@@ -93,8 +93,8 @@ static VALUE
 gaccelgrp_disconnect(self, closure)
     VALUE self, closure;
 {
-    return gtk_accel_group_disconnect(_SELF(self),
-                                      (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_accel_group_disconnect(_SELF(self),
+                                                 (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
 }
 
 static VALUE
@@ -179,9 +179,9 @@ static VALUE
 gaccelgrp_s_activate(self, obj, key, modtype)
     VALUE self, obj, key, modtype;
 {
-    return gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
-                                     NUM2UINT(key),
-                                     RVAL2MOD(modtype)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
+                                                NUM2UINT(key),
+                                                RVAL2MOD(modtype)));
 }
 
 static VALUE

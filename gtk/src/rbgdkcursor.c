@@ -4,7 +4,7 @@
   rbgdkcursor.c -
 
   $Author: ggc $
-  $Date: 2005/09/20 21:39:43 $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2001-2004 Masao Mutoh
 ************************************************/
@@ -75,8 +75,8 @@ static VALUE
 gdkcursor_is_pixmap(self)
     VALUE self;
 {
-    return (((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
-            GDK_CURSOR_IS_PIXMAP) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
+                      GDK_CURSOR_IS_PIXMAP);
 }
 
 static VALUE

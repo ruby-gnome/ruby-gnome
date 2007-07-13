@@ -4,8 +4,8 @@
 
   rbgtkmain.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -233,14 +233,14 @@ static VALUE
 gtk_m_main_iteration(self)
     VALUE self;
 {
-    return gtk_main_iteration() ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_main_iteration());
 }
 
 static VALUE
 gtk_m_main_iteration_do(self, blocking)
     VALUE self, blocking;
 {
-    return gtk_main_iteration_do(RTEST(blocking)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_main_iteration_do(RTEST(blocking)));
 }
 
 static VALUE
@@ -508,7 +508,7 @@ gtk_m_check_version_q(self, major, minor, micro)
     gchar * ret = NULL;
     ret = gtk_check_version(FIX2INT(major),
                             FIX2INT(minor), FIX2INT(micro));
-    return (ret == NULL) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret == NULL);
 }
 
 

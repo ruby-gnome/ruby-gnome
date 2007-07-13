@@ -3,8 +3,8 @@
 
   rbgtkimcontext.c -
 
-  $Author: sakai $
-  $Date: 2003/07/18 13:41:41 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
@@ -37,7 +37,7 @@ static VALUE
 imcontext_filter_keypress(self, event)
     VALUE self, event;
 {
-    return gtk_im_context_filter_keypress(_SELF(self), (GdkEventKey*)RVAL2GEV(event)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_im_context_filter_keypress(_SELF(self), (GdkEventKey*)RVAL2GEV(event)));
 }
 
 static VALUE
@@ -108,8 +108,8 @@ static VALUE
 imcontext_delete_surrounding(self, offset, n_chars)
     VALUE self;
 {
-    return gtk_im_context_delete_surrounding(_SELF(self), NUM2INT(offset),
-                                             NUM2INT(n_chars)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_im_context_delete_surrounding(_SELF(self), NUM2INT(offset),
+                                                        NUM2INT(n_chars)));
 }
 
 void 

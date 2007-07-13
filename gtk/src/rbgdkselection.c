@@ -3,8 +3,8 @@
 
   rbgdkselection.c -
 
-  $Author: mutoh $
-  $Date: 2005/07/22 18:07:18 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
@@ -41,7 +41,7 @@ gdkselection_owner_set(argc, argv, self)
 #endif
 
     }
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtkcolorsel.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -64,7 +64,7 @@ static VALUE
 colorsel_is_adjusting(self)
     VALUE self;
 {
-    return gtk_color_selection_is_adjusting(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_color_selection_is_adjusting(_SELF(self)));
 }
 
 static VALUE

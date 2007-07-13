@@ -3,8 +3,8 @@
 
   rbgdkkeyval.c -
 
-  $Author: mutoh $
-  $Date: 2003/10/07 16:34:34 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -34,14 +34,14 @@ static VALUE
 keyval_is_upper(self, keyval)
     VALUE self, keyval;
 {
-    return (gdk_keyval_is_upper(NUM2UINT(keyval))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_keyval_is_upper(NUM2UINT(keyval)));
 }
 
 static VALUE
 keyval_is_lower(self, keyval)
     VALUE self, keyval;
 {
-    return (gdk_keyval_is_lower(NUM2UINT(keyval))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_keyval_is_lower(NUM2UINT(keyval)));
 }
 
 static VALUE

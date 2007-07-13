@@ -3,8 +3,8 @@
 
   rbart_affine.c - Art::Affine class of ruby
 
-  $Author: ktou $
-  $Date: 2005/06/10 14:33:01 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:11 $
 
   Copyright (C) 2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -218,7 +218,7 @@ static VALUE
 affine_rectiliner(self)
     VALUE self;
 {
-    return art_affine_rectilinear(Affine_Ptr(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(art_affine_rectilinear(Affine_Ptr(self)));
 }
 
 static VALUE
@@ -237,7 +237,7 @@ affine_equal(self, right)
     if (!rb_obj_is_instance_of(right, artAffine)) {
         return Qfalse;
     }
-    return art_affine_equal(Affine_Ptr(self), Affine_Ptr(right)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(art_affine_equal(Affine_Ptr(self), Affine_Ptr(right)));
 }
 
 void

@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-druid-page.c,v 1.2 2003/02/02 12:51:06 tkubo Exp $ */
+/* $Id: rbgnome-druid-page.c,v 1.3 2007/07/13 14:27:07 ggc Exp $ */
 
 /* Gnome::DruidPage widget for Ruby/GNOME2
  * Copyright (C) 2002-2003 Ruby-GNOME2 Project Team
@@ -36,7 +36,7 @@ static VALUE
 dpage_next(self)
     VALUE self;
 {
-    return gnome_druid_page_next(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_druid_page_next(_SELF(self)));
 }
 
 static VALUE
@@ -51,14 +51,14 @@ static VALUE
 dpage_back(self)
     VALUE self;
 {
-    return gnome_druid_page_back(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_druid_page_back(_SELF(self)));
 }
 
 static VALUE
 dpage_cancel(self)
     VALUE self;
 {
-    return gnome_druid_page_cancel(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_druid_page_cancel(_SELF(self)));
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtkcellrenderer.c -
 
-  $Author: mutoh $
-  $Date: 2005/01/10 17:56:37 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -52,7 +52,7 @@ cellrenderer_activate(self, event, widget, path, background_area,
                                RVAL2CSTR(path), RVAL2RECT(background_area),
                                RVAL2RECT(cell_area), 
                                RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtktreeselection.c -
 
-  $Author: sakai $ 
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $ 
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
@@ -45,7 +45,7 @@ selection_func(selection, model, path, path_currently_selected, func)
                             GOBJ2RVAL(selection),
                             GOBJ2RVAL(model),
                             TREEPATH2RVAL(path),
-                            path_currently_selected ? Qtrue : Qfalse));
+                            CBOOL2RVAL(path_currently_selected)));
 }
 
 static VALUE
@@ -126,7 +126,7 @@ static VALUE
 treeselection_path_is_selected(self, path)
     VALUE self, path;
 {
-    return gtk_tree_selection_path_is_selected(_SELF(self), RVAL2TREEPATH(path)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_selection_path_is_selected(_SELF(self), RVAL2TREEPATH(path)));
 }
 
 static VALUE
@@ -149,7 +149,7 @@ static VALUE
 treeselection_iter_is_selected(self, iter)
     VALUE self, iter;
 {
-    return gtk_tree_selection_iter_is_selected(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_tree_selection_iter_is_selected(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE

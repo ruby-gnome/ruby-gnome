@@ -3,8 +3,8 @@
 
   rbgdkatom.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/25 17:50:41 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -105,7 +105,7 @@ static VALUE
 gdkatom_eq(self, other)
     VALUE self, other;
 {
-    return (_SELF(self) == _SELF(other)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self) == _SELF(other));
 }
 
 void

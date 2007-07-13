@@ -3,8 +3,8 @@
 
   rbgdkevent.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:50 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -256,7 +256,7 @@ static VALUE
 gdkevent_s_events_pending(self)
     VALUE self;
 {
-    return gdk_events_pending() ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_events_pending());
 }
 
 static VALUE

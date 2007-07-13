@@ -3,8 +3,8 @@
 
   rbgdkdnd.c -
 
-  $Author: ktou $
-  $Date: 2007/01/02 01:28:35 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -23,7 +23,7 @@ static VALUE
 gdkdragcontext_is_source(self)
     VALUE self;
 {
-    return _SELF(self)->is_source ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->is_source);
 }
 
 static VALUE
@@ -213,7 +213,7 @@ gdkdragcontext_drag_motion(self, dest_window, protocol, x_root, y_root,
                                    RVAL2GFLAGS(suggested_action, GDK_TYPE_DRAG_ACTION), 
                                    RVAL2GFLAGS(possible_actions, GDK_TYPE_DRAG_ACTION), 
                                    NUM2UINT(time));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE

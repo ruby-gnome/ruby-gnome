@@ -3,8 +3,8 @@
 
   rbgdkcolor.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -111,9 +111,9 @@ gdkcolor_to_a(self)
 
 static VALUE
 gdkcolor_equal(self, other)
-	VALUE self, other;
+    VALUE self, other;
 {
-	return (gdk_color_equal(_SELF(self), _SELF(other)))? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_color_equal(_SELF(self), _SELF(other)));
 }
 
 void

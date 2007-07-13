@@ -3,8 +3,8 @@
 
   rbgdkwindow.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -83,14 +83,14 @@ static VALUE
 gdkwin_is_visible(self)
     VALUE self;
 {
-    return gdk_window_is_visible(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_window_is_visible(_SELF(self)));
 }
 
 static VALUE
 gdkwin_is_viewable(self)
     VALUE self;
 {
-    return gdk_window_is_viewable(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_window_is_viewable(_SELF(self)));
 }
 
 static VALUE

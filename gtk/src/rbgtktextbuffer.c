@@ -4,7 +4,7 @@
   rbgtktextbuffer.c -
 
   $Author: ggc $
-  $Date: 2007/07/12 13:08:43 $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -95,11 +95,10 @@ txt_insert_interactive(self, iter, text, editable)
     VALUE self, iter, text, editable;
 {
     StringValue(text);
-    return gtk_text_buffer_insert_interactive(_SELF(self), RVAL2ITR(iter),
-                                              RVAL2CSTR(text),
-                                              RSTRING(text)->len,
-                                              RTEST(editable))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_insert_interactive(_SELF(self), RVAL2ITR(iter),
+                                                         RVAL2CSTR(text),
+                                                         RSTRING(text)->len,
+                                                         RTEST(editable)));
 }
 
 static VALUE
@@ -107,11 +106,10 @@ txt_insert_interactive_at_cursor(self, text, editable)
     VALUE self, text, editable;
 {
     StringValue(text);
-    return gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
-                                                        RVAL2CSTR(text),
-                                                        RSTRING(text)->len,
-                                                        RTEST(editable))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
+                                                                   RVAL2CSTR(text),
+                                                                   RSTRING(text)->len,
+                                                                   RTEST(editable)));
 }
 
 static VALUE
@@ -127,12 +125,11 @@ static VALUE
 txt_insert_range_interactive(self, iter, start, end, editable)
     VALUE self, iter, start, end, editable;
 {
-    return gtk_text_buffer_insert_range_interactive(_SELF(self),
-                                                    RVAL2ITR(iter),
-                                                    RVAL2ITR(start),
-                                                    RVAL2ITR(end),
-                                                    RTEST(editable))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_insert_range_interactive(_SELF(self),
+                                                               RVAL2ITR(iter),
+                                                               RVAL2ITR(start),
+                                                               RVAL2ITR(end),
+                                                               RTEST(editable)));
 }
 
 static VALUE
@@ -148,11 +145,10 @@ static VALUE
 txt_delete_interactive(self, start, end, editable)
     VALUE self, start, end, editable;
 {
-    return gtk_text_buffer_delete_interactive(_SELF(self),
-                                              RVAL2ITR(start),
-                                              RVAL2ITR(end),
-                                              RTEST(editable))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_delete_interactive(_SELF(self),
+                                                         RVAL2ITR(start),
+                                                         RVAL2ITR(end),
+                                                         RTEST(editable)));
 }
 
 static VALUE
@@ -353,7 +349,7 @@ static VALUE
 txt_get_modified(self)
     VALUE self;
 {
-    return gtk_text_buffer_get_modified(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_get_modified(_SELF(self)));
 }
 
 static VALUE
@@ -666,8 +662,8 @@ txt_delete_selection(argc, argv, self)
 {
     VALUE interactive, default_editable;
     rb_scan_args(argc, argv, "20", &interactive, &default_editable); 
-    return gtk_text_buffer_delete_selection(_SELF(self),
-        RTEST(interactive), RTEST(default_editable)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_buffer_delete_selection(_SELF(self),
+                                                       RTEST(interactive), RTEST(default_editable)));
 }
 
 static VALUE

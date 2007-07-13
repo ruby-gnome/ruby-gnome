@@ -3,8 +3,8 @@
 
   rbgobj_closure.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 02:40:12 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
 
   Copyright (C) 2002-2006  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -267,7 +267,7 @@ closure_in_marshal(self)
     VALUE self;
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
-    return closure->in_marshal ? Qtrue : Qfalse;
+    return CBOOL2RVAL(closure->in_marshal);
 }
 
 static VALUE
@@ -275,7 +275,7 @@ closure_is_invalid(self)
     VALUE self;
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
-    return closure->is_invalid ? Qtrue : Qfalse;
+    return CBOOL2RVAL(closure->is_invalid);
 }
 
 static VALUE

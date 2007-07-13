@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: sakai $
-  $Date: 2007/07/01 17:43:56 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:07 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -395,7 +395,7 @@ type_eq(self, other)
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
-        return (a == b) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(a == b);
     }
 }
 
@@ -408,7 +408,7 @@ type_lt_eq(self, other)
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
-        return g_type_is_a(a, b) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(g_type_is_a(a, b));
     }
 }
 
@@ -421,7 +421,7 @@ type_gt_eq(self, other)
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
-        return g_type_is_a(b, a) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(g_type_is_a(b, a));
     }
 }
 
@@ -434,7 +434,7 @@ type_lt(self, other)
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
-        return (g_type_is_a(a, b) && a != b) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(g_type_is_a(a, b) && a != b);
     }
 }
 
@@ -447,7 +447,7 @@ type_gt(self, other)
     else {
         GType a = rbgobj_gtype_get(self);
         GType b = rbgobj_gtype_get(other);
-        return (g_type_is_a(b, a) && a != b) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(g_type_is_a(b, a) && a != b);
     }
 }
 
@@ -476,77 +476,77 @@ static VALUE
 type_is_fundamental(self)
     VALUE self;
 {
-    return G_TYPE_IS_FUNDAMENTAL(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_FUNDAMENTAL(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_derived(self)
     VALUE self;
 {
-    return G_TYPE_IS_DERIVED(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_DERIVED(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_interface(self)
     VALUE self;
 {
-    return G_TYPE_IS_INTERFACE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_INTERFACE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_classed(self)
     VALUE self;
 {
-    return G_TYPE_IS_CLASSED(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_CLASSED(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_instantiatable(self)
     VALUE self;
 {
-    return G_TYPE_IS_INSTANTIATABLE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_INSTANTIATABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_derivable(self)
     VALUE self;
 {
-    return G_TYPE_IS_DERIVABLE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_DERIVABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_deep_derivable(self)
     VALUE self;
 {
-    return G_TYPE_IS_DEEP_DERIVABLE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_DEEP_DERIVABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_abstract(self)
     VALUE self;
 {
-    return G_TYPE_IS_ABSTRACT(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_ABSTRACT(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_value_abstract(self)
     VALUE self;
 {
-    return G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_is_value_type(self)
     VALUE self;
 {
-    return G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
 type_has_value_table(self)
     VALUE self;
 {
-    return G_TYPE_HAS_VALUE_TABLE(rbgobj_gtype_get(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(G_TYPE_HAS_VALUE_TABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
@@ -584,7 +584,7 @@ static VALUE
 type_is_a(self, is_a_type)
     VALUE self, is_a_type;
 {
-    return g_type_is_a(rbgobj_gtype_get(self), rbgobj_gtype_get(is_a_type)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(g_type_is_a(rbgobj_gtype_get(self), rbgobj_gtype_get(is_a_type)));
 }
 
 #if 0

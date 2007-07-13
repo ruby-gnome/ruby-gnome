@@ -3,8 +3,8 @@
 
   rbgtkmenu.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -65,7 +65,7 @@ menu_pos_func(menu, px, py, push_in, data)
 {
     VALUE arr = rb_funcall((VALUE)data, id_call, 4, GOBJ2RVAL(menu), 
                            INT2FIX(*px), INT2FIX(*py), 
-                           *push_in ? Qtrue : Qfalse);
+                           CBOOL2RVAL(*push_in));
 
     if (TYPE(arr) == T_ARRAY && (RARRAY(arr)->len == 2 || RARRAY(arr)->len == 3)){
         *px = NUM2INT(RARRAY(arr)->ptr[0]);
@@ -135,7 +135,7 @@ static VALUE
 menu_get_tearoff_state(self)
     VALUE self;
 {
-    return gtk_menu_get_tearoff_state(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_menu_get_tearoff_state(_SELF(self)));
 }
 
 static VALUE

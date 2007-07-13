@@ -1,5 +1,5 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
-/* $Id: rbgnome-util.c,v 1.7 2005/09/24 18:02:43 mutoh Exp $ */
+/* $Id: rbgnome-util.c,v 1.8 2007/07/13 14:27:08 ggc Exp $ */
 /* based on libgnome/gnome-util.h */
 
 /* Utility functions for Ruby/GNOME2
@@ -78,9 +78,9 @@ rgutil_setenv(argc, argv, self)
 
     if (NIL_P(overwrite)) overwrite = Qtrue;
 
-    return gnome_setenv((const char*)RVAL2CSTR(name), 
-                        (const char*)RVAL2CSTR(value), 
-                        RTEST(overwrite)) == 0 ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gnome_setenv((const char*)RVAL2CSTR(name), 
+                                   (const char*)RVAL2CSTR(value), 
+                                   RTEST(overwrite)) == 0);
 }
 
 static VALUE

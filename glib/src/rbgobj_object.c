@@ -3,8 +3,8 @@
 
   rbgobj_object.c -
 
-  $Author: sakai $
-  $Date: 2007/07/04 13:13:19 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:06 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -382,7 +382,7 @@ gobj_is_destroyed(self)
 
     Data_Get_Struct(self, gobj_holder, holder);
 
-    return (holder->destroyed) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(holder->destroyed);
 }
 
 static VALUE

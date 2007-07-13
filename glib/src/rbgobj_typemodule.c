@@ -3,8 +3,8 @@
 
   rbgobj_typemodule.c -
 
-  $Author: sakai $
-  $Date: 2007/07/01 17:43:55 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:07 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -17,7 +17,7 @@ static VALUE
 use(self)
    VALUE self;
 {
-    return g_type_module_use(G_TYPE_MODULE(RVAL2GOBJ(self))) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(g_type_module_use(G_TYPE_MODULE(RVAL2GOBJ(self))));
 }
 
 static VALUE

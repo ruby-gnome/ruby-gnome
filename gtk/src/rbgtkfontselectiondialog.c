@@ -3,8 +3,8 @@
 
   rbgtkfontselectiondialog.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 2001 Neil Conway <neilconway@rogers.com>
@@ -38,8 +38,8 @@ static VALUE
 fsd_set_font_name(self, fontname)
     VALUE self, fontname;
 {
-    return gtk_font_selection_dialog_set_font_name(_SELF(self),
-                                                   RVAL2CSTR(fontname)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_font_selection_dialog_set_font_name(_SELF(self),
+                                                              RVAL2CSTR(fontname)));
 }
 
 static VALUE

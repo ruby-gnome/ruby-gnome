@@ -3,8 +3,8 @@
 
   rbgtkaccelmap.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
 ************************************************/
@@ -35,9 +35,8 @@ static VALUE
 accel_map_change_entry(self, path, key, mods, replace)
     VALUE self, path, key, mods, replace;
 {
-    return gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
-                                      RVAL2MOD(mods), RTEST(replace))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
+                                                 RVAL2MOD(mods), RTEST(replace)));
 }
 
 static VALUE
@@ -74,7 +73,7 @@ accel_map_foreach_func(func, path, key, mods, changed)
 {
     rb_funcall((VALUE)func, id_call, 4,
                CSTR2RVAL(path), UINT2NUM(key), GFLAGS2RVAL(mods, GDK_TYPE_MODIFIER_TYPE),
-               changed ? Qtrue : Qfalse);
+               CBOOL2RVAL(changed));
 }
 
 static VALUE

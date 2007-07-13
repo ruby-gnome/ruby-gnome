@@ -4,7 +4,7 @@
   rbgdkdisplay.c -
 
   $Author: ggc $
-  $Date: 2007/07/05 13:13:09 $
+  $Date: 2007/07/13 14:27:08 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
 ************************************************/
@@ -105,7 +105,7 @@ static VALUE
 gdkdisplay_pointer_grabbed(self)
     VALUE self;
 {
-    return gdk_display_pointer_is_grabbed(_SELF(self)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gdk_display_pointer_is_grabbed(_SELF(self)));
 }
 
 static VALUE
@@ -233,7 +233,7 @@ static VALUE
 gdkdisplay_get_closed(self)
     VALUE self;
 {
-    return _SELF(self)->closed ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->closed);
 }
 
 #if GTK_CHECK_VERSION(2,4,0)

@@ -3,8 +3,8 @@
 
   rbgtkselection.c -
 
-  $Author: mutoh $
-  $Date: 2006/11/23 08:39:13 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 
@@ -79,7 +79,7 @@ gtkdrag_selection_convert(self, widget, selection, target, time)
     gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
                                          NUM2INT(time));
-    return ret ? Qtrue : Qfalse;
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE

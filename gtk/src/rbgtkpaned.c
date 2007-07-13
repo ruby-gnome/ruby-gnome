@@ -3,8 +3,8 @@
 
   rbgtkpaned.c -
 
-  $Author: mutoh $
-  $Date: 2003/02/01 16:46:23 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -72,28 +72,28 @@ static VALUE
 paned_child1_resize(self)
     VALUE self;
 {
-    return _SELF(self)->child1_resize ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->child1_resize);
 }
 
 static VALUE
 paned_child1_shrink(self)
     VALUE self;
 {
-    return _SELF(self)->child1_shrink ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->child1_shrink);
 }
 
 static VALUE
 paned_child2_resize(self)
     VALUE self;
 {
-    return _SELF(self)->child2_resize ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->child2_resize);
 }
 
 static VALUE
 paned_child2_shrink(self)
     VALUE self;
 {
-    return _SELF(self)->child2_shrink ? Qtrue : Qfalse;
+    return CBOOL2RVAL(_SELF(self)->child2_shrink);
 }
 
 void 

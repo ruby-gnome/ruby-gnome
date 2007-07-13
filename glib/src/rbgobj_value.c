@@ -3,8 +3,8 @@
 
   rbgobj_value.c -
 
-  $Author: sakai $
-  $Date: 2006/05/29 14:20:55 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:07 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -46,7 +46,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_UCHAR:
         return INT2FIX(g_value_get_uchar(value));
       case G_TYPE_BOOLEAN:
-        return g_value_get_boolean(value) ? Qtrue : Qfalse;
+        return CBOOL2RVAL(g_value_get_boolean(value));
       case G_TYPE_INT:
         return INT2NUM(g_value_get_int(value));
       case G_TYPE_UINT:

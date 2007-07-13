@@ -3,8 +3,8 @@
 
   rbgtktextiter.c -
 
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003 Masahiro Sakai
@@ -213,7 +213,7 @@ static VALUE \
 __name__(self) \
     VALUE self; \
 { \
-    return gtk_text_iter_##__name__(_SELF(self)) ? Qtrue : Qfalse; \
+    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self))); \
 }
 
 #define def_move_gint(__name__) \
@@ -221,7 +221,7 @@ static VALUE \
 __name__(self, i) \
     VALUE self, i; \
 { \
-    return gtk_text_iter_##__name__(_SELF(self), NUM2INT(i)) ? Qtrue : Qfalse; \
+    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self), NUM2INT(i))); \
 }
 
 def_move(forward_char)
@@ -297,9 +297,8 @@ forward_to_tag_toggle(argc, argv, self)
     VALUE tag;
 
     rb_scan_args(argc, argv, "01", &tag);
-    return gtk_text_iter_forward_to_tag_toggle(_SELF(self),
-                                               NIL_P(tag) ? NULL : RVAL2TAG(tag))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_forward_to_tag_toggle(_SELF(self),
+                                                          NIL_P(tag) ? NULL : RVAL2TAG(tag)));
 }
 
 static VALUE
@@ -311,9 +310,8 @@ backward_to_tag_toggle(argc, argv, self)
     VALUE tag;
 
     rb_scan_args(argc, argv, "01", &tag);
-    return gtk_text_iter_backward_to_tag_toggle(_SELF(self),
-                                                NIL_P(tag) ? NULL : RVAL2TAG(tag))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_backward_to_tag_toggle(_SELF(self),
+                                                           NIL_P(tag) ? NULL : RVAL2TAG(tag)));
 }
 
 static gboolean
@@ -334,11 +332,10 @@ forward_find_char(argc, argv, self)
     volatile VALUE func = rb_block_proc();
     
     rb_scan_args(argc, argv, "01", &limit);
-    return gtk_text_iter_forward_find_char(_SELF(self),
-                                           (GtkTextCharPredicate)char_predicate_func, 
-                                           (gpointer)func,
-                                           NIL_P(limit) ? NULL : _SELF(limit))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_forward_find_char(_SELF(self),
+                                                      (GtkTextCharPredicate)char_predicate_func, 
+                                                      (gpointer)func,
+                                                      NIL_P(limit) ? NULL : _SELF(limit)));
 }
 
 static VALUE
@@ -351,11 +348,10 @@ backward_find_char(argc, argv, self)
     volatile VALUE func = rb_block_proc();
 
     rb_scan_args(argc, argv, "01", &limit);
-    return gtk_text_iter_backward_find_char(_SELF(self),
-                                            (GtkTextCharPredicate)char_predicate_func,
-                                            (gpointer)func,
-                                            NIL_P(limit) ? NULL : _SELF(limit))
-        ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_backward_find_char(_SELF(self),
+                                                       (GtkTextCharPredicate)char_predicate_func,
+                                                       (gpointer)func,
+                                                       NIL_P(limit) ? NULL : _SELF(limit)));
 }
 
 static VALUE
@@ -413,7 +409,7 @@ static VALUE
 equal(self, other)
     VALUE self, other;
 {
-    return gtk_text_iter_equal(_SELF(self), _SELF(other)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_text_iter_equal(_SELF(self), _SELF(other)));
 }
 
 static VALUE

@@ -3,8 +3,8 @@
 
   rbgtkclipboard.c -
  
-  $Author: sakai $
-  $Date: 2007/07/08 03:00:49 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2004,2006 Ruby-GNOME2 Project
   Copyright (C) 2002,2003 OGASAWARA, Takeshi
@@ -100,12 +100,12 @@ clipboard_set(self, targets)
     const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
-    return gtk_clipboard_set_with_data(_SELF(self), 
-                                       gtargets,
-                                       RARRAY(targets)->len,
-                                       (GtkClipboardGetFunc)clipboard_get_func,
-                                       (GtkClipboardClearFunc)NULL,
-                                       (gpointer)func) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_clipboard_set_with_data(_SELF(self), 
+                                                  gtargets,
+                                                  RARRAY(targets)->len,
+                                                  (GtkClipboardGetFunc)clipboard_get_func,
+                                                  (GtkClipboardClearFunc)NULL,
+                                                  (gpointer)func));
 }
 /*
 Do not implement this. Use Gtk::Clipboard#set_with_data instead.

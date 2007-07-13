@@ -3,8 +3,8 @@
 
   rbpangocolor.c -
 
-  $Author: mutoh $
-  $Date: 2005/02/13 17:31:33 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:11 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -97,8 +97,8 @@ color_equal(self, other)
     PangoColor* c1 = _SELF(self);
     PangoColor* c2 = _SELF(other);
 
-    return ((c1->red == c2->red) && (c1->green == c2->green) && 
-            (c1->blue == c2->blue)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL((c1->red == c2->red) && (c1->green == c2->green) && 
+                      (c1->blue == c2->blue));
 }
 
 void

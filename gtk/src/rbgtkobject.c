@@ -3,8 +3,8 @@
 
   rbgtkobject.c -
 
-  $Author: mutoh $
-  $Date: 2004/03/05 16:24:30 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:10 $
 
   Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -115,9 +115,9 @@ static VALUE
 gobj_bindings_activate(self, keyval, modifiers)
     VALUE self, keyval, modifiers;
 {
-     return gtk_bindings_activate(GTK_OBJECT(RVAL2GOBJ(self)), 
-                                  NUM2UINT(keyval),
-                                  NUM2UINT(modifiers)) ? Qtrue : Qfalse;
+     return CBOOL2RVAL(gtk_bindings_activate(GTK_OBJECT(RVAL2GOBJ(self)), 
+                                             NUM2UINT(keyval),
+                                             NUM2UINT(modifiers)));
 }
 
 /* Move from Bindings */

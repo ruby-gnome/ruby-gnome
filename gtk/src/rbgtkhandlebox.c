@@ -3,8 +3,8 @@
 
   rbgtkhandlebox.c -
 
-  $Author: mutoh $
-  $Date: 2003/08/31 15:29:44 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -26,7 +26,7 @@ static VALUE
 hb_child_detached(self)
     VALUE self;
 {
-    return GTK_HANDLE_BOX(RVAL2GOBJ(self))->child_detached ? Qtrue : Qfalse;
+    return CBOOL2RVAL(GTK_HANDLE_BOX(RVAL2GOBJ(self))->child_detached);
 }
 
 void 

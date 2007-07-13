@@ -3,8 +3,8 @@
 
   rbgtkliststore.c -
 
-  $Author: mutoh $
-  $Date: 2006/06/17 06:59:32 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:09 $
 
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
@@ -96,7 +96,7 @@ lstore_remove(self, iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
-    return gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)) ? Qtrue : Qfalse;
+    return CBOOL2RVAL(gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)));
 #else
     gtk_list_store_remove(_SELF(self), RVAL2ITR(iter));
     return Qtrue;

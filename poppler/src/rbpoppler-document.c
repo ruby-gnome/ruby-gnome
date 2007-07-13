@@ -3,8 +3,8 @@
 
   rbpoppler-document.c -
 
-  $Author: ktou $
-  $Date: 2007/06/23 03:31:25 $
+  $Author: ggc $
+  $Date: 2007/07/13 14:27:11 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -181,7 +181,7 @@ index_iter_initialize(VALUE self, VALUE document)
     iter = poppler_index_iter_new(RVAL2GOBJ(document));
     G_INITIALIZE(self, iter);
     poppler_index_iter_free(iter);
-    rb_ivar_set(self, id_valid, iter ? Qtrue : Qfalse);
+    rb_ivar_set(self, id_valid, CBOOL2RVAL(iter));
     return Qnil;
 }
 
