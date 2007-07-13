@@ -4,7 +4,7 @@
   rbgtktextmark.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 16:07:32 $
+  $Date: 2007/07/13 16:30:53 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
@@ -12,6 +12,19 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
+
+#if GTK_CHECK_VERSION(2,11,0)
+static VALUE
+initialize(self, name, left_gravity)
+    VALUE self, name, left_gravity;
+{
+    if (NIL_P(name))
+        G_INITIALIZE(self, gtk_text_mark_new(NULL, RVAL2CBOOL(left_gravity)));
+    else
+        G_INITIALIZE(self, gtk_text_mark_new(RVAL2CSTR(name), RVAL2CBOOL(left_gravity)));
+    return Qnil;
+}
+#endif
 
 static VALUE
 set_visible(self, setting)
@@ -60,6 +73,9 @@ void
 Init_gtk_textmark()
 {
     VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
+#if GTK_CHECK_VERSION(2,11,0)
+    rb_define_method(gTextMark, "initialize", initialize, 2);
+#endif
     rb_define_method(gTextMark, "set_visible", set_visible, 1);
     rb_define_method(gTextMark, "visible?", get_visible, 0);
     rb_define_method(gTextMark, "name", get_name, 0);
