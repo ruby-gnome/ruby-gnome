@@ -4,18 +4,20 @@
   rbgtktextmark.c -
 
   $Author: ggc $
-  $Date: 2007/07/13 14:27:10 $
+  $Date: 2007/07/13 14:31:17 $
 
   Copyright (C) 2002,2003 Masahiro Sakai
 ************************************************/
 
 #include "global.h"
 
+#define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
+
 static VALUE
 set_visible(self, setting)
     VALUE self, setting;
 {
-    gtk_text_mark_set_visible(GTK_TEXT_MARK(RVAL2GOBJ(self)), RTEST(setting));
+    gtk_text_mark_set_visible(_SELF(self), RTEST(setting));
     return setting;
 }
 
@@ -23,35 +25,35 @@ static VALUE
 get_visible(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gtk_text_mark_get_visible(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return CBOOL2RVAL(gtk_text_mark_get_visible(_SELF(self)));
 }
 
 static VALUE
 get_name(self)
     VALUE self;
 {
-    return CSTR2RVAL(gtk_text_mark_get_name(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return CSTR2RVAL(gtk_text_mark_get_name(_SELF(self)));
 }
 
 static VALUE
 get_deleted(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gtk_text_mark_get_deleted(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return CBOOL2RVAL(gtk_text_mark_get_deleted(_SELF(self)));
 }
 
 static VALUE
 get_buffer(self)
     VALUE self;
 {
-    return GOBJ2RVAL(gtk_text_mark_get_buffer(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
 
 static VALUE
 get_left_gravity(self)
     VALUE self;
 {
-    return CBOOL2RVAL(gtk_text_mark_get_left_gravity(GTK_TEXT_MARK(RVAL2GOBJ(self))));
+    return CBOOL2RVAL(gtk_text_mark_get_left_gravity(_SELF(self)));
 }
 
 void 
