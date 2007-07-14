@@ -4,7 +4,7 @@
   rbglib.c -
 
   $Author: sakai $
-  $Date: 2007/07/14 13:33:07 $
+  $Date: 2007/07/14 13:42:08 $
 
   Copyright (C) 2002,2003  Masahiro Sakai
 
@@ -298,7 +298,4 @@ union       GDoubleIEEE754;
 
     /* This is called here once. */
     G_DEF_SETTERS(mGLib);
-
-    extern void Init_test_callback();
-    Init_test_callback();
 }
