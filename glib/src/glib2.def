@@ -4,6 +4,7 @@ EXPORTS
 	rbgobj_cType	DATA
 	rbgobj_id_children DATA
 	rbgobj_add_relative
+	rbgobj_invalidate_relatives
 	rbgobj_add_relative_removable
 	rbgobj_get_relative_removable
 	rbgobj_remove_relative

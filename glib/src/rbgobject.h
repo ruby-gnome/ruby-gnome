@@ -3,8 +3,8 @@
 
   rbgobject.h -
 
-  $Author: ktou $
-  $Date: 2006/07/09 13:11:59 $
+  $Author: sakai $
+  $Date: 2007/07/14 13:33:07 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -123,6 +123,7 @@ extern VALUE rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc
 extern VALUE rbgobj_ruby_object_from_instance_with_unref(gpointer instance);
 
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
+extern void rbgobj_invalidate_relatives(VALUE obj);
 extern void rbgobj_add_relative_removable(VALUE obj, VALUE relative,
                                           ID obj_ivar_id, VALUE hash_key);
 extern VALUE rbgobj_get_relative_removable(VALUE obj, ID obj_ivar_id,
@@ -131,7 +132,7 @@ extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 
 extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
-extern VALUE rbgobj_create_object(VALUE klass);
+extern VALUE rbgobj_create_object(VALUE klass); /* deperecated */
 
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 

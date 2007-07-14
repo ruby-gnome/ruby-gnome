@@ -3,8 +3,8 @@
 
   rbgobj_boxed.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: sakai $
+  $Date: 2007/07/14 13:33:07 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -42,10 +42,19 @@ rbgobj_boxed_s_allocate(klass)
     VALUE klass;
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
+    boxed_holder* holder;
+    VALUE result;
+
     if (cinfo->gtype == G_TYPE_BOXED)
         rb_raise(rb_eTypeError, "abstract class");
 
-    return rbgobj_create_object(klass);
+    result = Data_Make_Struct(klass, boxed_holder, 
+                              boxed_mark, boxed_free, holder);
+    holder->type  = cinfo->gtype;
+    holder->boxed = NULL;
+    holder->own   = FALSE;
+
+    return result;
 }
 
 static VALUE
@@ -103,23 +112,15 @@ rbgobj_boxed_init_copy(self, orig)
     return self;
 }
 
-/**********************************************************************/
-
+/* deprecated */
 VALUE
 rbgobj_boxed_create(klass)
     VALUE klass;
 {
-    boxed_holder* holder;
-
-    const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
-    VALUE result = Data_Make_Struct(klass, boxed_holder, 
-                                    boxed_mark, boxed_free, holder);
-    holder->type  = cinfo->gtype;
-    holder->boxed = NULL;
-    holder->own   = FALSE;
-
-    return result;
+    return rbgobj_boxed_s_allocate(klass);
 }
+
+/**********************************************************************/
 
 void
 rbgobj_boxed_initialize(obj, boxed)
@@ -167,7 +168,7 @@ rbgobj_make_boxed(p, gtype)
         return Qnil;
     
     cinfo = GTYPE2CINFO(gtype);
-    result = rbgobj_boxed_create(cinfo->klass);
+    result = rbgobj_boxed_s_allocate(cinfo->klass);
     
     Data_Get_Struct(result, boxed_holder, holder);
     

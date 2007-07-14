@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: sakai $
+  $Date: 2007/07/14 13:33:07 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -20,8 +20,6 @@
 #include "ruby.h"
 #include "global.h"
 #include <ctype.h>
-
-static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 static ID id_relatives;
 static ID id_delete;
@@ -126,128 +124,6 @@ rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
 
 /**********************************************************************/
 
-static void 
-rbgobj_weak_notify(data, where_the_object_was)
-    gpointer data;
-    GObject* where_the_object_was;
-{
-    gobj_holder* holder = data;
-
-    rbgobj_instance_call_cinfo_free(holder->gobj);
-    if (RVAL2CBOOL(rb_ivar_defined(holder->self, id_relatives)))
-        rb_ivar_set(holder->self, id_relatives, Qnil);
-    if (RVAL2CBOOL(rb_ivar_defined(holder->self, rbgobj_id_children)))
-        rb_ivar_set(holder->self, rbgobj_id_children, Qnil);
-    holder->destroyed = TRUE;
-}
-
-static void
-rbgobj_mark(holder)
-    gobj_holder* holder;
-{
-    if (holder->gobj && !holder->destroyed)
-        rbgobj_instance_call_cinfo_mark(holder->gobj);
-}
-
-static void
-rbgobj_free(gobj_holder* holder)
-{
-    if (holder->gobj){
-        if (!holder->destroyed){
-            rbgobj_instance_call_cinfo_free(holder->gobj);
-            g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
-            g_object_weak_unref(holder->gobj, (GWeakNotify)rbgobj_weak_notify, holder);
-        }
-        g_object_unref(holder->gobj);
-        /* holder->gobj = NULL; */
-    }
-    free(holder);
-}
-
-VALUE
-rbgobj_create_object(klass)
-    VALUE klass;
-{
-    VALUE result;
-
-    if (G_TYPE_FUNDAMENTAL(CLASS2GTYPE(klass)) == G_TYPE_BOXED){
-        result = rbgobj_boxed_create(klass);
-    } else {
-        gobj_holder* holder;
-        result = Data_Make_Struct(klass, gobj_holder, rbgobj_mark, rbgobj_free, holder);
-        holder->self  = result;
-        holder->gobj  = NULL;
-        holder->cinfo = NULL;
-        holder->destroyed = FALSE;
-    }
-    return result;
-}
-
-void
-rbgobj_gobject_initialize(obj, cobj)
-    VALUE obj;
-    gpointer cobj;
-{
-    gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
-    if (holder)
-        rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* already exists.");
-
-    Data_Get_Struct(obj, gobj_holder, holder);
-    holder->cinfo = RVAL2CINFO(obj);
-    holder->gobj  = (GObject*)cobj;
-    holder->destroyed = FALSE;
-
-    g_object_set_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY, (gpointer)holder);
-    g_object_weak_ref((GObject*)cobj, (GWeakNotify)rbgobj_weak_notify, holder);
-    {
-        GType t1 = G_TYPE_FROM_INSTANCE(cobj);
-        GType t2 = CLASS2GTYPE(CLASS_OF(obj));
-
-        if (t1 != t2) {
-            if (!g_type_is_a(t1, t2))
-                rb_raise(rb_eTypeError, "%s is not subtype of %s",
-                         g_type_name(t1), g_type_name(t2));
-        }
-    }
-}
-
-GObject*
-rbgobj_get_gobject(obj)
-    VALUE obj;
-{
-    gobj_holder* holder;
-
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(G_TYPE_OBJECT))))
-        rb_raise(rb_eTypeError, "not a GLib::Object");
-
-    Data_Get_Struct(obj, gobj_holder, holder);
-
-    if (holder->destroyed)
-        rb_raise(rb_eTypeError, "destroyed GLib::Object");
-
-    if (!holder->gobj)
-        rb_raise(rb_eTypeError, "uninitialize GLib::Object");
-
-    return holder->gobj;
-}
-
-VALUE
-rbgobj_get_value_from_gobject(gobj, alloc)
-    GObject* gobj;
-    gboolean alloc;
-{
-    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
-    if (holder)
-        return holder->self;
-    else if (alloc) {
-        VALUE obj = rbgobj_create_object(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
-        gobj = g_object_ref(gobj);
-        rbgobj_gobject_initialize(obj, (gpointer)gobj);
-        return obj;
-    } else
-        return Qnil;
-}
-
 void
 rbgobj_add_relative(obj, relative)
     VALUE obj, relative;
@@ -262,6 +138,16 @@ rbgobj_add_relative(obj, relative)
         rb_ivar_set(obj, id_relatives, hash);
     }
     rb_hash_aset(hash, relative, Qnil);
+}
+
+void
+rbgobj_invalidate_relatives(obj)
+    VALUE obj;
+{
+    if (RVAL2CBOOL(rb_ivar_defined(obj, id_relatives)))
+        rb_ivar_set(obj, id_relatives, Qnil);
+    if (RVAL2CBOOL(rb_ivar_defined(obj, rbgobj_id_children)))
+        rb_ivar_set(obj, rbgobj_id_children, Qnil);
 }
 
 void
@@ -335,7 +221,8 @@ rbgobj_define_property_accessors(klass)
     int i;
     GString* source = g_string_new(NULL);
     guint n_properties = 0;
-    gtype  = CLASS2GTYPE(klass);
+    gtype = CLASS2GTYPE(klass);
+
     if (G_TYPE_IS_INTERFACE(gtype)){
 #if GLIB_CHECK_VERSION(2,4,0)
         gpointer iface = g_type_default_interface_ref(gtype);
@@ -402,111 +289,6 @@ rbgobj_define_property_accessors(klass)
     g_string_free(source, TRUE);
 }
 
-
-struct param_setup_arg {
-    GObjectClass* gclass;
-    GParameter* params;
-    guint param_size;
-    VALUE params_hash;
-};
-
-static VALUE
-_each_with_index(obj)
-    VALUE obj;
-{
-    rb_funcall(obj, rb_intern("each_with_index"), 0);
-    return Qnil;
-}
-
-static VALUE
-_params_setup(arg, param_setup_arg)
-    VALUE arg;
-    struct param_setup_arg* param_setup_arg;
-{
-    int n = NUM2INT(rb_ary_entry(arg, 1));
-    VALUE name, val;
-    GParamSpec* pspec;
-
-    if (n >= param_setup_arg->param_size)
-       rb_raise(rb_eArgError, "too many parameters");
-
-    arg = rb_ary_entry(arg, 0);
-
-    name = rb_ary_entry(arg, 0);
-    val  = rb_ary_entry(arg, 1);
-
-    if (SYMBOL_P(name))
-        param_setup_arg->params[n].name = rb_id2name(SYM2ID(name));
-    else
-        param_setup_arg->params[n].name = StringValuePtr(name);
-
-    pspec = g_object_class_find_property(
-        param_setup_arg->gclass,
-        param_setup_arg->params[n].name);
-    if (!pspec)
-        rb_raise(rb_eArgError, "No such property: %s",
-                 param_setup_arg->params[n].name);
-
-    g_value_init(&(param_setup_arg->params[n].value),
-                 G_PARAM_SPEC_VALUE_TYPE(pspec));
-    rbgobj_rvalue_to_gvalue(val, &(param_setup_arg->params[n].value));
-    
-    return Qnil;
-}
-
-static VALUE
-gobj_new_body(struct param_setup_arg* arg)
-{
-    rb_iterate((VALUE(*)_((VALUE)))_each_with_index, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
-    return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
-                                arg->param_size, arg->params);
-}
-
-static VALUE
-gobj_new_ensure(struct param_setup_arg* arg)
-{
-    int i;
-    g_type_class_unref(arg->gclass);
-    for (i = 0; i < arg->param_size; i++) {
-        if (G_IS_VALUE(&arg->params[i].value))
-            g_value_unset(&arg->params[i].value);
-    }
-    return Qnil;
-}
-
-GObject*
-rbgobj_gobject_new(gtype, params_hash)
-    GType gtype;
-    VALUE params_hash;
-{
-    GObject* result;
-
-    if (!g_type_is_a(gtype, G_TYPE_OBJECT))
-        rb_raise(rb_eArgError,
-                 "type \"%s\" is not descendant of GObject",
-                 g_type_name(gtype));
-
-    if (NIL_P(params_hash)) {
-        result = g_object_newv(gtype, 0, NULL);
-    } else {
-        size_t param_size;
-        struct param_setup_arg arg;
-
-        param_size = NUM2INT(rb_funcall(params_hash, rb_intern("length"), 0)); 
-
-        arg.param_size = param_size;
-        arg.gclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
-        arg.params = ALLOCA_N(GParameter, param_size);
-        memset(arg.params, 0, sizeof(GParameter) * param_size);
-        arg.params_hash = params_hash;
-
-        result = (GObject*)rb_ensure(&gobj_new_body, (VALUE)&arg,
-                                     &gobj_new_ensure, (VALUE)&arg);
-    }
-
-    return result;
-}
-
 void 
 Init_gobject()
 {
@@ -543,8 +325,6 @@ Init_gobject()
     g_hash_table_insert(prop_exclude_list, "object_id", "object_id");
     g_hash_table_insert(prop_exclude_list, "taint", "taint");
     g_hash_table_insert(prop_exclude_list, "untaint", "untaint");
-
-    RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
 
     /* IDs */
     id_relatives = rb_intern("__relatives__");
