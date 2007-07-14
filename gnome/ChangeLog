@@ -1,3 +1,20 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgnome-app-helper.c, src/rbgnome-app.c,
+	src/rbgnome-appbar.c, src/rbgnome-client.c, src/rbgnome-config.c,
+	src/rbgnome-dateedit.c, src/rbgnome-druid-page-edge.c,
+	src/rbgnome-druid.c, src/rbgnome-file-entry.c,
+	src/rbgnome-font-picker.c, src/rbgnome-icon-item.c,
+	src/rbgnome-icon-selection.c, src/rbgnome-pixmap-entry.c,
+	src/rbgnome-program.c, src/rbgnome-score.c, src/rbgnome-util.c,
+	src/rbpopt.c: replace RTEST uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgnome-client.c, src/rbgnome-config.c,
+	src/rbgnome-druid-page.c, src/rbgnome-util.c, src/rbpopt.c: "?
+	Qtrue : QFalse" => CBOOL2RVAL cleanup
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().

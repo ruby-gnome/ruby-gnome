@@ -2,16 +2,138 @@
 
 	* extconf.rb: Accept the srcdir includes spaces.
 
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgtktextmark.c: use new 2.12 symbol: gtk_text_mark_new
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgdk.c, src/rbgdkatom.c, src/rbgdkcolormap.c,
+	src/rbgdkdragcontext.c, src/rbgdkdraw.c, src/rbgdkevent.c,
+	src/rbgdkgc.c, src/rbgdkpango.c, src/rbgdkproperty.c,
+	src/rbgdkregion.c, src/rbgdkrgb.c, src/rbgdkselection.c,
+	src/rbgdkwindow.c, src/rbgdkwindowattr.c, src/rbgtkaccelgroup.c,
+	src/rbgtkaccelmap.c, src/rbgtkaction.c, src/rbgtkactiongroup.c,
+	src/rbgtkaspectframe.c, src/rbgtkbbox.c, src/rbgtkbox.c,
+	src/rbgtkbutton.c, src/rbgtkcelllayout.c, src/rbgtkcellrenderer.c,
+	src/rbgtkcellview.c, src/rbgtkcheckbutton.c,
+	src/rbgtkcheckmenuitem.c, src/rbgtkcombo.c, src/rbgtkcombobox.c,
+	src/rbgtkcontainer.c, src/rbgtkdialog.c, src/rbgtkdrag.c,
+	src/rbgtkeditable.c, src/rbgtkentrycompletion.c,
+	src/rbgtkexpander.c, src/rbgtkfilechooser.c, src/rbgtkfixed.c,
+	src/rbgtkhbox.c, src/rbgtkiconinfo.c, src/rbgtkiconsource.c,
+	src/rbgtkiconview.c, src/rbgtkimagemenuitem.c,
+	src/rbgtkimcontext.c, src/rbgtklabel.c, src/rbgtkmain.c,
+	src/rbgtkmenu.c, src/rbgtkmenuitem.c, src/rbgtkmenushell.c,
+	src/rbgtknotebook.c, src/rbgtkpaned.c, src/rbgtkpapersize.c,
+	src/rbgtkprintsettings.c, src/rbgtkradiobutton.c,
+	src/rbgtkradiomenuitem.c, src/rbgtkrc.c, src/rbgtkselectiondata.c,
+	src/rbgtksettings.c, src/rbgtkstatusbar.c, src/rbgtkstyle.c,
+	src/rbgtktable.c, src/rbgtktargetlist.c, src/rbgtktextappearance.c,
+	src/rbgtktextattributes.c, src/rbgtktextbuffer.c,
+	src/rbgtktextiter.c, src/rbgtktextmark.c, src/rbgtktexttagtable.c,
+	src/rbgtktextview.c, src/rbgtktoggleaction.c,
+	src/rbgtktogglebutton.c, src/rbgtktoggletoolbutton.c,
+	src/rbgtktoolbar.c, src/rbgtktoolitem.c,
+	src/rbgtktreemodelfilter.c, src/rbgtktreeselection.c,
+	src/rbgtktreesortable.c, src/rbgtktreeview.c,
+	src/rbgtktreeviewcolumn.c, src/rbgtkuimanager.c, src/rbgtkvbox.c,
+	src/rbgtkwidget.c, src/rbgtkwindow.c: replace RTEST uses by
+	RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgtktextmark.c: we usually use a _SELF macro for that case
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgdk.c, src/rbgdkatom.c, src/rbgdkcolor.c,
+	src/rbgdkcursor.c, src/rbgdkdisplay.c, src/rbgdkdragcontext.c,
+	src/rbgdkevent.c, src/rbgdkkeyval.c, src/rbgdkregion.c,
+	src/rbgdkselection.c, src/rbgdkwindow.c, src/rbgtkaccelerator.c,
+	src/rbgtkaccelgroup.c, src/rbgtkaccelmap.c, src/rbgtkbindingset.c,
+	src/rbgtkcellrenderer.c, src/rbgtkclipboard.c, src/rbgtkcolorsel.c,
+	src/rbgtkeditable.c, src/rbgtkfixed.c,
+	src/rbgtkfontselectiondialog.c, src/rbgtkhandlebox.c,
+	src/rbgtkiconsource.c, src/rbgtkimcontext.c, src/rbgtkliststore.c,
+	src/rbgtkmain.c, src/rbgtkmenu.c, src/rbgtkmenuitem.c,
+	src/rbgtknotebook.c, src/rbgtkobject.c, src/rbgtkpaned.c,
+	src/rbgtkrc.c, src/rbgtkselection.c, src/rbgtkstatusbar.c,
+	src/rbgtkstyle.c, src/rbgtktextbuffer.c, src/rbgtktextchild.c,
+	src/rbgtktextiter.c, src/rbgtktextmark.c, src/rbgtktexttag.c,
+	src/rbgtktextview.c, src/rbgtktogglebutton.c, src/rbgtktoolbar.c,
+	src/rbgtktreeiter.c, src/rbgtktreepath.c, src/rbgtktreeselection.c,
+	src/rbgtktreeview.c, src/rbgtktreeviewcolumn.c, src/rbgtkwindow.c:
+	"? Qtrue : QFalse" => CBOOL2RVAL cleanup
+
+2007-07-12  Guillaume Cottenceau
+
+	* sample/misc/uimanager.rb, src/rbgtkrecentaction.c: use new
+	symbols in 2.12: gtk_recent_action_new and friends
+
+2007-07-12  Guillaume Cottenceau
+
+	* src/rbgtkscalebutton.c: noticed I'd better use glib memory
+	allocation mechanism
+
+2007-07-12  Guillaume Cottenceau
+
+	* sample/misc/scalebutton.rb: add very simple Gtk::ScaleButton
+	example
+
+2007-07-12  Guillaume Cottenceau
+
+	* src/rbgtktextbuffer.c: new symbol in gtk 2.12: add
+	gtk_text_buffer_add_mark
+
+2007-07-10  Guillaume Cottenceau
+
+	* src/rbgtkradiobutton.c, src/rbgtktoolbar.c: kou says we should
+	use NIL_P(foo) not foo == Qnil
+
+2007-07-10  Guillaume Cottenceau
+
+	* sample/misc/tooltips.rb: demonstrate the new tooltip API of Gtk+
+	2.12
+	
 2007-07-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktooltip.c: used C style comments not C++ style.
 
+2007-07-10  Guillaume Cottenceau
+
+	* src/rbgtktreestore.c: it's using variable arguments list, make it
+	callable that way :)
+
+2007-07-09  Guillaume Cottenceau
+
+	* src/rbgtktooltip.c: stock ids manipulated as ruby symbols
+
+2007-07-09  Guillaume Cottenceau
+
+	* src/rbgtktooltip.c: new in gtk 2.11
+
+2007-07-09  Guillaume Cottenceau
+
+	* sample/gtk-demo/main.rb: stop with a useful error message when
+	subscripts not found
+	
 2007-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkactiongroup.c (actiongroup_remove_action,
 	actiongroup_add_action): added a G_CHILD_ADD() and G_CHILD_REMOVE()
 	pair. Reported by akira yamada. Thanks!!!
 
+2007-07-09  Guillaume Cottenceau
+
+	* src/rbgtkwidget.c: GOBJ2RVAL (actually
+	rbgobj_ruby_object_from_instance2) already properly returns Qnil if
+	argument is NULL
+
+2007-07-09  Guillaume Cottenceau
+
+	* src/rbgtkwidget.c: use CBOOL2RVAL
+	
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
@@ -22,11 +144,73 @@
 	to match with its implementation.  Repored by Guillaume Cottenceau.
 	[ruby-gnome2-devel-en] HEAD doesn't build
 
+2007-07-05  Guillaume Cottenceau
+
+	* src/rbgdkdisplay.c: use new 2.12 symbol:
+	gtk_tooltip_trigger_tooltip_query
+	
 2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: use rbglib_poll() if possible, regardless of
 	ruby version. (ruby 1.5.4 is no longer considered.)
 
+2007-07-04  Guillaume Cottenceau
+
+	* src/rbgtktreeview.c: use new 2.12 symbols:
+	gtk_tree_view_convert_bin_window_to_tree_coords,
+	gtk_tree_view_convert_bin_window_to_widget_coords,
+	gtk_tree_view_convert_tree_to_bin_window_coords,
+	gtk_tree_view_convert_tree_to_widget_coords,
+	gtk_tree_view_convert_widget_to_bin_window_coords,
+	gtk_tree_view_convert_widget_to_tree_coords
+
+2007-07-04  Guillaume Cottenceau
+
+	* src/rbgtktreeviewcolumn.c: use new 2.12 symbol:
+	gtk_tree_view_column_get_tree_view
+
+2007-07-04  Guillaume Cottenceau
+
+	* src/rbgtkwidget.c: remove unneeded new symbols (these are
+	properties)
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkstock.c: fix more order
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkstock.c: use new 2.12 symbol: GTK_STOCK_DISCARD
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkstock.c: fix order, add missing DIRECTORY
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkscalebutton.c: use new 2.12 symbols:
+	gtk_scale_button_new, gtk_scale_button_get_adjustment,
+	gtk_scale_button_get_value, gtk_scale_button_set_adjustment,
+	gtk_scale_button_set_value
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkvolumebutton.c: hide for older gtk
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkvolumebutton.c: add new 2.12 symbol:
+	gtk_volume_button_new
+
+2007-07-03  Guillaume Cottenceau
+
+	* src/rbgtkwidget.c: use new 2.12 symbols: gtk_widget_error_bell,
+	gtk_widget_get_tooltip_markup, gtk_widget_get_tooltip_text,
+	gtk_widget_get_tooltip_window, gtk_widget_keynav_failed,
+	gtk_widget_modify_cursor, gtk_widget_set_tooltip_markup,
+	gtk_widget_set_tooltip_text, gtk_widget_set_tooltip_window,
+	gtk_widget_trigger_tooltip_query
+	
 2007-06-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdk.c (Gdk.windowing_quartz?, Gdk.windowing_directfb?):

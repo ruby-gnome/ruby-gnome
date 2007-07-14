@@ -1,3 +1,17 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbart_affine.c, src/rbart_uta.c: replace RTEST uses by
+	RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbart_affine.c: "? Qtrue : QFalse" => CBOOL2RVAL cleanup
+
+2007-07-10  Guillaume Cottenceau
+
+	* src/rbart_canvas.c: kou says we should use NIL_P(foo) not foo ==
+	Qnil
+
 2007-01-27  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/lib/libart2.rb: Added.

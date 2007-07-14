@@ -7,6 +7,32 @@
 
 	* src/utils_callback.c: brush up.
 
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbglib_iochannel.c, src/rbglib_maincontext.c,
+	src/rbglib_mainloop.c, src/rbglib_source.c, src/rbglib_utils.c,
+	src/rbgobj_boxed.c, src/rbgobj_object.c, src/rbgobj_param.c,
+	src/rbgobj_paramspecs.c, src/rbgobj_signal.c, src/rbgobj_type.c,
+	src/rbgobj_typeinterface.c, src/rbgobj_value.c, src/rbgobject.c,
+	src/utils_int64.c: replace RTEST uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgobj_closure.c, src/rbgobj_enums.c, src/rbgobj_object.c,
+	src/rbgobj_param.c, src/rbgobj_signal.c, src/rbgobj_type.c,
+	src/rbgobj_typemodule.c, src/rbgobj_value.c,
+	src/rbgobj_valuetypes.c: "? Qtrue : QFalse" => CBOOL2RVAL cleanup
+
+2007-07-10  Guillaume Cottenceau
+
+	* src/rbgobj_boxed.c: support passing nil to RVAL2BOXED, in order
+	to pass NULL to glib/gtk
+
+2007-07-10  Guillaume Cottenceau
+
+	* src/rbgobject.c: kou says we should use NIL_P(foo) not foo ==
+	Qnil
+	
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgutil.h: mark G_BLOCK_PROC() as deprecated.

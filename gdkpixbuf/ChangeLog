@@ -1,7 +1,38 @@
+2007-07-13  Guillaume Cottenceau
+
+	* rbgdk-pixbuf-format.c, rbgdk-pixbuf.c, rbgdk-pixdata.c: replace
+	RTEST uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* rbgdk-pixbuf-loader.c: "? Qtrue : QFalse" => CBOOL2RVAL cleanup
+
 2007-07-12  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Revert the Gdk::Pixbuf#scale change. 
 
+2007-07-07  Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c: fix multiple memory leaks
+
+2007-07-07  Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c: thse can return NULL
+
+2007-07-07  Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c: fix wrong order of arguments in using
+	gdk_pixbuf_scale
+
+2007-07-07  Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c: negative value for width or height in
+	gdk_pixbuf_new_from_file_at_scale only supported in gtk 2.8
+
+2007-07-07  Guillaume Cottenceau
+
+	* rbgdk-pixbuf.c: slightly more general warning messages
+	
 2006-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* rbgdk-pixbuf.c: Add a comment the change below.
@@ -11,6 +42,10 @@
 	* extconf.rb, rbgdk-pixbuf.c, lib/gdk_pixbuf2.rb: moved
 	integration API of Gdk::Pixbuf and Cairo::Context from Ruby/GTK2.
 
+2006-06-22  Guillaume Cottenceau
+
+	* rbgdk-pixbuf-loader.c: simplify code
+	
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/*.rb: Remove Gtk.init, Code cleanup.

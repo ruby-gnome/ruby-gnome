@@ -2,6 +2,18 @@
 
 	* extconf.rb: Accept the srcdir includes spaces.
 
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbpangoattribute.c, src/rbpangofont.c,
+	src/rbpangofontdescription.c, src/rbpangofontset.c,
+	src/rbpangoglyphinfo.c, src/rbpangoglyphstring.c,
+	src/rbpangolayout.c, src/rbpangolayoutline.c, src/rbpangologattr.c,
+	src/rbpangotabarray.c: replace RTEST uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbpangocolor.c: "? Qtrue : QFalse" => CBOOL2RVAL cleanup
+	
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: use rb_block_proc() directly instead of using G_BLOCK_PROC().
@@ -23,6 +35,12 @@
 	* src/rbpangocairo.c: Add Cairo#pango_error_underline_path,
 	#show_pango_error_underline. for Pango-1.4.
 
+2006-06-22  Guillaume Cottenceau
+
+	* src/rbpangocontext.c, src/rbpangofont.c, src/rbpangoglyphitem.c,
+	src/rbpangolayout.c, src/rbpangolayoutiter.c,
+	src/rbpangorenderer.c, src/rbpangoscript.c: simplify code
+	
 2006-06-17  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangocontext.c: Pango.itemize: Fix memoryleak.
@@ -184,6 +202,12 @@
 	* src/rbpangolayout.c (layout_get_line): Return nil if line is out
 	of range.
 
+2005-08-28  Guillaume Cottenceau
+
+	* src/rbpango.h: compile without warning with a recent pango by not
+	redefining PANGO_TYPE_ITEM and PANGO_TYPE_LAYOUT_LINE if they are
+	already defined
+	
 2005-07-30  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbpangolayout.c (layout_get_font_description, 
