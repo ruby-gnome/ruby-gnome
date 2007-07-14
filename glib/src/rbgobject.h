@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2007/07/14 13:33:07 $
+  $Date: 2007/07/14 15:33:54 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -193,12 +193,10 @@ extern void rbgobj_register_property_setter(GType gtype, const char* prop_name, 
 extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, GValueToRValueFunc func);
 
 /* rbgobj_boxed.c */
-extern VALUE rbgobj_boxed_create(VALUE klass);
+extern VALUE rbgobj_boxed_create(VALUE klass); /* deprecated */
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
-extern void rbgobj_boxed_ref(VALUE obj, VALUE other);
-extern void rbgobj_boxed_unref(VALUE obj, VALUE other);
 
 /* rbgobj_enums.c */
 extern void rbgobj_constant_remap(const char *original, const char *replacement);

@@ -1,4 +1,7 @@
 2007-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobject.h: remove unused/undefined functions
+	rbgobj_boxed_ref() and rbgobj_boxed_unref().
 	
 	* src/rbgobject.c: new function rbgobj_invalidate_relatives().
 	* src/rbgobject.c: move GObject stuffs to rbgobj_object.c again.
