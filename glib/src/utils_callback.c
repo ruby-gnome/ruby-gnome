@@ -4,7 +4,7 @@
   utils_callback.c -
 
   $Author: sakai $
-  $Date: 2007/07/07 18:23:51 $
+  $Date: 2007/07/14 07:16:18 $
 
   Copyright (C) 2007  Ruby-GNOME2 Project
 
@@ -49,7 +49,7 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
 
 #ifdef HAVE_NATIVETHREAD
 
-struct callback_info {
+struct callback_req {
     VALUE (*func)(VALUE);
     VALUE arg;
     VALUE ret;
@@ -57,51 +57,50 @@ struct callback_info {
     GCond* done_cond;
 };
 
-static GStaticMutex init_mutex = G_STATIC_MUTEX_INIT;
 static GMutex* pipe_mutex = NULL;
 static int callback_fd[2];
 
 static VALUE
-callback_info_run_body(VALUE v)
+exec_callback(VALUE v)
 {
-    struct callback_info* pinfo = (struct callback_info*)v;
-    pinfo->func(pinfo->arg);
-    return Qnil;
+    struct callback_req* req = (struct callback_req*)v;
+    return req->func(req->arg);
 }
 
 static VALUE
-callback_info_run(struct callback_info* pinfo)
+process_req(struct callback_req* req)
 {
-    pinfo->ret = rbgutil_protect(callback_info_run_body, (VALUE)pinfo);
-    if (pinfo->done_cond) {
-        g_mutex_lock(pinfo->done_mutex);
-        g_cond_signal(pinfo->done_cond);
-        g_mutex_unlock(pinfo->done_mutex);
+    req->ret = rbgutil_protect(exec_callback, (VALUE)req);
+    if (req->done_cond) {
+        g_mutex_lock(req->done_mutex);
+        g_cond_signal(req->done_cond);
+        g_mutex_unlock(req->done_mutex);
     }
     return Qnil;
 }
 
 static VALUE
-listen_callback_pipe(void)
+mainloop(void)
 {
-    struct callback_info* info;
-
     for (;;) {
-        ssize_t size;
+        struct callback_req* req;
 
         /* wait untill we're triggered.
          * If this happens we can read from the pipe
          * and it's guaranteed that the needed mutexes are initialized */
         rb_thread_wait_fd(callback_fd[0]);
 
-        /* lock pipe_mutex to read atomically */
-        g_mutex_lock(pipe_mutex);
-        size = read(callback_fd[0], &info, sizeof(info));
-        g_mutex_unlock(pipe_mutex);
+        {
+            ssize_t size;
+            g_mutex_lock(pipe_mutex); /* lock pipe_mutex to read atomically */
+            size = read(callback_fd[0], &req, sizeof(req));
+            g_mutex_unlock(pipe_mutex);
+            /* FIXME: check size */
+        }
 
         /* To make it reentrant we need to create a new thread. */
         /* It may be nice to use thread pool. */
-        rb_thread_create(callback_info_run, info);
+        rb_thread_create(process_req, req);
         rb_thread_schedule();
     }
 }
@@ -109,45 +108,48 @@ listen_callback_pipe(void)
 static VALUE
 invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
 {
-    struct callback_info info;
-    struct callback_info* pinfo;
-    ssize_t size;
+    struct callback_req req;
 
     if (!g_thread_supported())
         rb_bug("glib callback in another thread, but gthreads not supported");
 
     /* initialize mutex */
+    /* FIXME: use g_once? */
     if (!pipe_mutex) {
+        static GStaticMutex init_mutex = G_STATIC_MUTEX_INIT;
         g_static_mutex_lock(&init_mutex);
-        if (!pipe_mutex) {
+        if (!pipe_mutex)
             pipe_mutex = g_mutex_new();
-        }
         g_static_mutex_unlock(&init_mutex);
     }
 
-    info.func = func;
-    info.arg  = arg;
-    info.ret  = Qnil;
-    info.done_mutex = g_mutex_new();
-    info.done_cond  = g_cond_new();
-    pinfo = &info;
+    req.func = func;
+    req.arg  = arg;
+    req.ret  = Qnil;
+    req.done_mutex = g_mutex_new();
+    req.done_cond  = g_cond_new();
 
-    g_mutex_lock(info.done_mutex);
+    g_mutex_lock(req.done_mutex);
 
     /* trigger ruby callback thread */
-    /* lock pipe_mutex to write atomically */
-    g_mutex_lock(pipe_mutex);
-    size = write(callback_fd[1], &pinfo, sizeof(pinfo));
-    g_mutex_unlock(pipe_mutex);
+    {
+        struct callback_req* p = &req;
+        ssize_t size;
+
+        g_mutex_lock(pipe_mutex); /* lock pipe_mutex to write atomically */
+        size = write(callback_fd[1], &p, sizeof(p));
+        g_mutex_unlock(pipe_mutex);
+        /* FIXME: check size */
+    }
 
     /* waiting callback to end */
-    g_cond_wait(info.done_cond, info.done_mutex);
-    g_mutex_unlock(info.done_mutex);
+    g_cond_wait(req.done_cond, req.done_mutex);
+    g_mutex_unlock(req.done_mutex);
 
-    g_cond_free(info.done_cond);
-    g_mutex_free(info.done_mutex);
+    g_cond_free(req.done_cond);
+    g_mutex_free(req.done_mutex);
 
-    return info.ret;
+    return req.ret;
 }
 
 #endif
@@ -185,7 +187,7 @@ void Init_utils_callback()
         static VALUE thread;
         if (pipe(callback_fd) != 0)
             rb_bug("Unable to create glib callback thread\n");
-        thread = rb_thread_create(listen_callback_pipe, NULL);
+        thread = rb_thread_create(mainloop, NULL);
         rb_global_variable(&thread);
     }
 #endif
