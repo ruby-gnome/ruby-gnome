@@ -1,3 +1,7 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbrsvg.c: replace RTEST uses by RVAL2CBOOL
+
 2007-06-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbrsvg.c: used RSTRING_LEN instead of RSTRING()->len to

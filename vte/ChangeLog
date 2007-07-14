@@ -1,3 +1,7 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbvte-terminal.c: replace RTEST uses by RVAL2CBOOL
+
 2007-06-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbvte-terminal.c: used RSTRING_LEN/RSTRING_PTR instead of

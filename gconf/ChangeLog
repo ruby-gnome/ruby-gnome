@@ -1,3 +1,8 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgconf-client.c, src/rbgconf-entry.c, src/rbgconf-util.c:
+	replace RTEST uses by RVAL2CBOOL
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgconf-client.c, rbgconf-changeset.c: use rb_block_proc() directly
@@ -148,8 +153,8 @@
 
 2002-11-17  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 
-	* src/*.[ch]: Updated headers to be more CVS-like using $Author: sakai $
-	and $Date: 2007/07/08 02:54:38 $ macros.
+	* src/*.[ch]: Updated headers to be more CVS-like using $Author: ggc $
+	and $Date: 2007/07/14 14:01:38 $ macros.
 
 2002-11-14  Nikolai :: lone-star :: Weibull <lone-star@home.se>
 

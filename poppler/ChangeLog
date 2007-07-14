@@ -1,3 +1,13 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbpoppler-document.c, src/rbpoppler-page.c: replace RTEST
+	uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbpoppler-document.c: "? Qtrue : QFalse" => CBOOL2RVAL
+	cleanup
+
 2007-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler.h, src/rbpoppler-page.c: followed new functions

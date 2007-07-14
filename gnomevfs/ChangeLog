@@ -1,3 +1,10 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/gnomevfs-directory.c, src/gnomevfs-file.c,
+	src/gnomevfs-fileinfo.c, src/gnomevfs-monitor.c,
+	src/gnomevfs-uri.c, src/gnomevfs.c: replace RTEST uses by
+	RVAL2CBOOL
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().

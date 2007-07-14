@@ -1,3 +1,8 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgtksourceprintjob.c, src/rbgtksourcetag.c: replace RTEST
+	uses by RVAL2CBOOL
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtksourcebuffer.c: use rb_block_proc() directly instead of

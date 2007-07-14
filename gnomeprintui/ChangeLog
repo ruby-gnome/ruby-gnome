@@ -1,3 +1,7 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgpui-print-dialog.c: replace RTEST uses by RVAL2CBOOL
+
 2007-05-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgpui-print-paper-selector.c,

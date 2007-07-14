@@ -1,3 +1,8 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgp-gnome-print-config.c, src/rbgp-gnome-print-job.c,
+	src/rbgp-gnome-print.c: replace RTEST uses by RVAL2CBOOL
+
 2006-01-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/pac.rb: use save instead of Proc.

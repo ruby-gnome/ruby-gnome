@@ -1,3 +1,13 @@
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgnome-canvas-buf.c, src/rbgnome-canvas-path-def.c,
+	src/rbgnome-canvas.c: replace RTEST uses by RVAL2CBOOL
+
+2007-07-13  Guillaume Cottenceau
+
+	* src/rbgnome-canvas-path-def.c, src/rbgnome-canvas.c: "? Qtrue :
+	QFalse" => CBOOL2RVAL cleanup
+
 2006-12-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgnome-canvas-item.c: Fix Gnome::CanvasClipgroup#path property accessor. 
