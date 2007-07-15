@@ -3,8 +3,8 @@
 
   rbgdkatom.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:31 $
+  $Author: sakai $
+  $Date: 2007/07/15 15:03:11 $
 
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
@@ -61,15 +61,9 @@ gdkatom_s_intern(argc, argv, self)
                       GDK_TYPE_ATOM);
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
-static VALUE
-gdkatom_s_intern_static_string(self, name)
-    VALUE self, name;
-{
-    return BOXED2RVAL(gdk_atom_intern_static_string(RVAL2CSTR(name)), 
-                      GDK_TYPE_ATOM);
-}
-#endif
+/* We don't need them.
+GdkAtom gdk_atom_intern_static_string(const gchar *atom_name);
+ */
 
 static VALUE
 gdkatom_initialize(self, num)
@@ -115,10 +109,6 @@ Init_gtk_gdk_atom()
     VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
 
     rb_define_singleton_method(gdkAtom, "intern", gdkatom_s_intern, -1);
-
-#if GTK_CHECK_VERSION(2,10,0)
-    rb_define_singleton_method(gdkAtom, "intern_static_string", gdkatom_s_intern_static_string, 1);
-#endif
 
     rb_define_method(gdkAtom, "initialize", gdkatom_initialize, 1);
     rb_define_method(gdkAtom, "name", gdkatom_name, 0);

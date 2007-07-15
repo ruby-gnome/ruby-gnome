@@ -1,3 +1,8 @@
+2007-07-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgdkatom.c: remove Gdk::Atom.intern_static_string.
+	It's useless for ruby programs since there are no `static string'.
+
 2007-07-14  Detlef Reichl
 
 	* extconf.rb: Accept the srcdir includes spaces.
@@ -95,7 +100,7 @@
 
 	* sample/misc/tooltips.rb: demonstrate the new tooltip API of Gtk+
 	2.12
-	
+
 2007-07-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktooltip.c: used C style comments not C++ style.
