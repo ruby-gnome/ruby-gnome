@@ -1,5 +1,10 @@
 2007-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
+	* src/rbgobj_type.c: use rbgobj_init_object_class() to initialize
+	object class.
+	* src/rbgobj_object.c, src/global.h: add new function
+	rbgobj_init_object_class().
+
 	* src/rbgobj_object.c (rbgobj_gobject_new): check returned value of
 	g_object_newv().
 

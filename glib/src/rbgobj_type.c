@@ -3,8 +3,8 @@
 
   rbgobj_type.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: sakai $
+  $Date: 2007/07/16 03:35:53 $
   created at: Sun Jun  9 20:31:47 JST 2002
  
   Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
@@ -178,7 +178,7 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
     }
     
     if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT) {
-        rbgobj_define_property_accessors(cinfo->klass);
+        rbgobj_init_object_class(cinfo->klass);
     } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
         rbgobj_init_enum_class(cinfo->klass);
     } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {

@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2007/07/16 02:46:10 $
+  $Date: 2007/07/16 03:35:53 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -155,6 +155,13 @@ rbgobj_get_gobject(obj)
         rb_raise(rb_eTypeError, "uninitialize GLib::Object");
 
     return holder->gobj;
+}
+
+void
+rbgobj_init_object_class(klass)
+    VALUE klass;
+{
+    rbgobj_define_property_accessors(klass);
 }
 
 /**********************************************************************/
