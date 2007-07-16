@@ -1,3 +1,8 @@
+2007-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c (rbgobj_gobject_new): check returned value of
+	g_object_newv().
+
 2007-07-14  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobject.h: remove unused/undefined functions

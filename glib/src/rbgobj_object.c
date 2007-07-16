@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2007/07/16 02:44:03 $
+  $Date: 2007/07/16 02:46:10 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -333,6 +333,9 @@ rbgobj_gobject_new(gtype, params_hash)
         result = (GObject*)rb_ensure(&gobj_new_body, (VALUE)&arg,
                                      &gobj_new_ensure, (VALUE)&arg);
     }
+
+    if (!result)
+        rb_raise(rb_eRuntimeError, "g_object_newv failed");
 
     return result;
 }
