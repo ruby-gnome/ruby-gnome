@@ -3,8 +3,8 @@
 
   rbatktextrange.c -
 
-  $Author: mutoh $
-  $Date: 2004/10/19 13:33:43 $
+  $Author: sakai $
+  $Date: 2007/07/16 03:01:02 $
 
   Copyright (C) 2004 Masao Mutoh
 
@@ -49,6 +49,13 @@ atk_text_range_get_type(void)
 /**********************************/
 /* Struct accessors */
 static VALUE
+atktextrange_bounds(self)
+    VALUE self;
+{
+    return BOXED2RVAL(&_SELF(self)->bounds, ATK_TYPE_TEXT_RECTANGLE);
+}
+
+static VALUE
 atktextrange_start_offset(self)
     VALUE self;
 {
@@ -74,9 +81,9 @@ void
 Init_atk_text_range()
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
-    VALUE range = G_DEF_CLASS4(ATK_TYPE_TEXT_RANGE, "TextRange", 
-                               mAtk, GTYPE2CLASS(ATK_TYPE_TEXT_RECTANGLE));
+    VALUE range = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);
 
+    rb_define_method(range, "bounds", atktextrange_bounds, 0);
     rb_define_method(range, "start_offset", atktextrange_start_offset, 0);
     rb_define_method(range, "end_offset", atktextrange_end_offset, 0);
     rb_define_method(range, "content", atktextrange_content, 0);

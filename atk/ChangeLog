@@ -1,3 +1,8 @@
+2007-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbatktextrange.c: change Atk::TextRange not to be a subclass of
+	Atk::TextRectangle.
+
 2007-07-14  Detlef Reichl
 
 	* extconf.rb: Accept the srcdir includes spaces.
