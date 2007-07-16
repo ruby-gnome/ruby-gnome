@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2007/07/14 13:33:07 $
+  $Date: 2007/07/16 02:44:03 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -93,7 +93,6 @@ rbgobj_create_object(klass)
     return gobj_s_allocate(klass);
 }
 
-
 void
 rbgobj_gobject_initialize(obj, cobj)
     VALUE obj;
@@ -157,6 +156,8 @@ rbgobj_get_gobject(obj)
 
     return holder->gobj;
 }
+
+/**********************************************************************/
 
 static gboolean
 is_gtkobject(gobj)

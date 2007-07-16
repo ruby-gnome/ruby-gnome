@@ -4,7 +4,7 @@
   rbgobject.c -
 
   $Author: sakai $
-  $Date: 2007/07/14 13:33:07 $
+  $Date: 2007/07/16 02:44:03 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -208,6 +208,8 @@ rbgobj_remove_relative_all(obj, obj_ivar_id)
     rb_ivar_set(obj, obj_ivar_id, Qnil);
 }
 
+/**********************************************************************/
+
 static GHashTable* prop_exclude_list;
 
 #define IS_FLAG(bitmask, flag) (((bitmask) & (flag)) == (flag))
@@ -288,6 +290,8 @@ rbgobj_define_property_accessors(klass)
     rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
     g_string_free(source, TRUE);
 }
+
+/**********************************************************************/
 
 void 
 Init_gobject()
