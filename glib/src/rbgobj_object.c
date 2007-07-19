@@ -4,7 +4,7 @@
   rbgobj_object.c -
 
   $Author: sakai $
-  $Date: 2007/07/16 03:35:53 $
+  $Date: 2007/07/19 22:03:44 $
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
   Copyright (C) 2002-2003  Masahiro Sakai
@@ -22,12 +22,11 @@
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
+/* deperecated */
 void
 rbgobj_add_abstract_but_create_instance_class(gtype)
     GType gtype;
 {
-    RGObjClassInfo* cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
-    cinfo->flags |= RBGOBJ_ABSTRACT_BUT_CREATABLE;
 }
 
 static void 
@@ -68,13 +67,8 @@ static VALUE
 gobj_s_allocate(klass)
     VALUE klass;
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
     gobj_holder* holder;
     VALUE result;
-
-    if (G_TYPE_IS_ABSTRACT(cinfo->gtype) &&
-        !(cinfo->flags & RBGOBJ_ABSTRACT_BUT_CREATABLE))
-        rb_raise(rb_eTypeError, "abstract class");
 
     result = Data_Make_Struct(klass, gobj_holder, holder_mark, holder_free, holder);
     holder->self  = result;
@@ -157,11 +151,26 @@ rbgobj_get_gobject(obj)
     return holder->gobj;
 }
 
+static VALUE
+dummy_init(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    GType gtype = CLASS2GTYPE(CLASS_OF(self));
+    if (G_TYPE_IS_ABSTRACT(gtype))
+        rb_raise(rb_eTypeError, "initializing abstract class");
+    else
+        return rb_call_super(argc, argv);
+}
+
 void
 rbgobj_init_object_class(klass)
     VALUE klass;
 {
     rbgobj_define_property_accessors(klass);
+    if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
+        rb_define_method(klass, "initialize", dummy_init, -1);
 }
 
 /**********************************************************************/

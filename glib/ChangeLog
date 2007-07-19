@@ -1,3 +1,9 @@
+2007-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* src/rbgobj_object.c, src/rbgobject.h: deperecate
+	rbgobj_add_abstract_but_create_instance_class() and
+	move abstract-type check from .allocate to dummy #initialize.
+
 2007-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgobj_type.c: use rbgobj_init_object_class() to initialize

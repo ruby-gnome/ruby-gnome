@@ -4,7 +4,7 @@
   rbgobject.h -
 
   $Author: sakai $
-  $Date: 2007/07/14 15:33:54 $
+  $Date: 2007/07/19 22:03:44 $
 
   Copyright (C) 2003,2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -101,7 +101,7 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 
 typedef enum
 {
-    RBGOBJ_ABSTRACT_BUT_CREATABLE = 1 << 0,
+    RBGOBJ_ABSTRACT_BUT_CREATABLE = 1 << 0, /* deprecated */
     RBGOBJ_BOXED_NOT_COPY         = 1 << 1,
     RBGOBJ_DEFINED_BY_RUBY        = 1 << 2,
 } RGObjClassFlag;
@@ -134,6 +134,7 @@ extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
 extern VALUE rbgobj_create_object(VALUE klass); /* deperecated */
 
+/* deprecated */
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);
 
 /* rbgobj_typeinstance.c */
