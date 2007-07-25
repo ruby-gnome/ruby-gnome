@@ -19,9 +19,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
- * $Author: ggc $
+ * $Author: ssimons $
  *
- * $Date: 2007/07/13 16:07:30 $
+ * $Date: 2007/07/25 17:08:03 $
  *
  *****************************************************************************/
 
@@ -82,7 +82,7 @@ monitor_callback(handle, monitor_uri, info_uri, event_type, data)
 {
 	rb_funcall((VALUE)data, g_id_call, 3, CSTR2RVAL(monitor_uri),
 		   CSTR2RVAL(info_uri),
-                   RVAL2GENUM(event_type, GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE));
+                   GENUM2RVAL(event_type, GNOME_VFS_TYPE_VFS_MONITOR_EVENT_TYPE));
 }
 
 static VALUE

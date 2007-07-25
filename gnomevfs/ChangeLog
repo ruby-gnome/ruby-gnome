@@ -1,3 +1,8 @@
+2007-07-25  Sjoerd Simons  <sjoerd@luon.net>
+
+	* src/gnomevfs-monitor.c: Use GENUM2RVAL instead of RVAL2GENUM to
+	convert event types to ruby values in the monitor callback.
+
 2007-07-13  Guillaume Cottenceau
 
 	* src/gnomevfs-directory.c, src/gnomevfs-file.c,
