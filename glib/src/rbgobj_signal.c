@@ -3,8 +3,8 @@
 
   rbgobj_signal.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: ssimons $
+  $Date: 2007/07/25 17:04:28 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2002-2004  Ruby-GNOME2 Project Team
@@ -308,17 +308,23 @@ struct emit_arg{
 static VALUE
 emit_body(struct emit_arg* arg)
 {
-    g_value_init(arg->instance_and_params->values,
-                 G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
-    rbgobj_rvalue_to_gvalue(arg->self, arg->instance_and_params->values);
+    GValue param = { 0, };
+
+    g_value_init(&param, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
+    rbgobj_rvalue_to_gvalue(arg->self, &param);
+    g_value_array_append(arg->instance_and_params, &param);
+    g_value_unset(&param);
 
     {
-        GValue* params = arg->instance_and_params->values + 1;
         int i;
         for (i = 0; i < arg->query.n_params; i++){
             GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
-            g_value_init(params + i, gtype);
-            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), params + i);
+
+            g_value_init(&param,  gtype);
+
+            rbgobj_rvalue_to_gvalue(rb_ary_entry(arg->args, i), &param);
+            g_value_array_append(arg->instance_and_params, &param);
+            g_value_unset(&param);
         }
     }
 
