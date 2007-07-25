@@ -1,6 +1,6 @@
 2007-07-25  Sjoerd Simons   <sjoerd@luon.net>
 	* src/rbgobj_signal.c: Properly use the GValueArray api in emit_body.
-	Causes all values in the paramter array to be unset after emission.
+	Causes all values in the parameter array to be unset after emission.
 	Fixing some reference leaks.
 
 2007-07-20  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
