@@ -3,8 +3,8 @@
 
   rbpoppler-document.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:33 $
+  $Author: ktou $
+  $Date: 2007/07/27 14:44:57 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -17,13 +17,9 @@
 #define FITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_FONTS_ITER))
 #define RVAL2FITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_FONTS_ITER))
 
-#ifdef POPPLER_TYPE_FONT_INFO
-#  define HAVE_POPPLER_FONT_INFO 1
-#endif
-
 static ID id_new, id_valid, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
 static VALUE cFontInfo;
 #endif
 
@@ -152,7 +148,7 @@ doc_get_index_iter(VALUE self)
     return rb_funcall(cIndexIter, id_new, 1, self);
 }
 
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
 static VALUE
 doc_get_font_info(VALUE self)
 {
@@ -241,7 +237,7 @@ index_iter_each(VALUE self)
 }
 
 
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
 
 static VALUE
 font_info_initialize(VALUE self, VALUE document)
@@ -384,7 +380,7 @@ Init_poppler_document(VALUE mPoppler)
 
     cDocument = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);
     cIndexIter = G_DEF_CLASS(POPPLER_TYPE_INDEX_ITER, "IndexIter", mPoppler);
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
     cFontInfo = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
 #endif
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
@@ -413,7 +409,7 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_alias(cDocument, "pages", "to_a");
 
     rb_define_method(cDocument, "index_iter", doc_get_index_iter, 0);
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
     rb_define_method(cDocument, "font_info", doc_get_font_info, 0);
 #endif
 
@@ -437,7 +433,7 @@ Init_poppler_document(VALUE mPoppler)
     G_DEF_SETTERS(cIndexIter);
 
 
-#ifdef HAVE_POPPLER_FONT_INFO
+#if POPPLER_CHECK_VERSION(0, 5, 9)
     rb_define_method(cFontInfo, "initialize", font_info_initialize, 1);
     rb_define_method(cFontInfo, "scan", font_info_scan, 1);
     G_DEF_SETTERS(cFontInfo);
