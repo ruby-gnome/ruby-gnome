@@ -50,9 +50,11 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 
 #define ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
 #define RVAL2ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
+#define FF2RVAL(obj) (rb_poppler_ruby_object_from_form_field(obj))
 
 extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
 extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
+extern VALUE rb_poppler_ruby_object_from_form_field(PopplerFormField *field);
 
 #define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
 

@@ -40,6 +40,34 @@ module Poppler
       end
     end
   end
+
+  if defined?(TextField)
+    class TextField
+      def multiline?
+        type == FormTextType::MULTILINE
+      end
+
+      def file_select?
+        type == FormTextType::FILE_SELECT
+      end
+
+      def normal?
+        type == FormTextType::NORMAL
+      end
+    end
+  end
+
+  if defined?(ChoiceField)
+    class ChoiceField
+      def combo?
+        type == FormChioceType::COMBO
+      end
+
+      def list?
+        type == FormChoiceType::LIST
+      end
+    end
+  end
 end
 
 if Poppler.cairo_available?

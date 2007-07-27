@@ -3,8 +3,8 @@
 
   rbpoppler-page.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:33 $
+  $Author: ktou $
+  $Date: 2007/07/27 14:37:01 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -15,10 +15,11 @@
 #define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
 #define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
-#define RVAL2FF(obj) ((PopplerFormField *)RVAL2BOXED(obj, POPPLER_TYPE_FORM_FIELD))
-#define RVAL2TF(obj) (&(RVAL2FF(obj)->text))
-#define RVAL2BF(obj) (&(RVAL2FF(obj)->button))
-#define RVAL2CF(obj) (&(RVAL2FF(obj)->choice))
+#define RVAL2FFM(obj) ((PopplerFormFieldMapping *)RVAL2BOXED(obj, POPPLER_TYPE_FORM_FIELD_MAPPING))
+#define RVAL2FF(obj) (POPPLER_FORM_FIELD(RVAL2GOBJ(obj)))
+#define RVAL2TF(obj) RVAL2FF(obj)
+#define RVAL2BF(obj) RVAL2FF(obj)
+#define RVAL2CF(obj) RVAL2FF(obj)
 
 #define TT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION_TYPE))
 #define RVAL2TT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_PAGE_TRANSITION_TYPE))
@@ -28,8 +29,15 @@
 #define RVAL2TD(obj) (RVAL2GENUM(obj, POPPLER_TYPE_PAGE_TRANSITION_DIRECTION))
 #define FFT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
 #define RVAL2FFT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
+#define FBT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_BUTTON_TYPE))
+#define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
+#define FCT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_CHOICE_TYPE))
 
 static VALUE cPSFile;
+
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+VALUE cUnknownField, cTextField, cButtonField, cChoiceField, cSignatureField;
+#endif
 
 static VALUE
 page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
@@ -170,6 +178,20 @@ page_get_link_mapping(VALUE self)
 }
 
 static VALUE
+page_get_image_mapping(VALUE self)
+{
+    return GLIST2ARY2F(poppler_page_get_image_mapping(SELF(self)),
+                       POPPLER_TYPE_IMAGE_MAPPING);
+}
+
+static VALUE
+page_get_form_field_mapping(VALUE self)
+{
+    return GLIST2ARY2F(poppler_page_get_form_field_mapping(SELF(self)),
+                       POPPLER_TYPE_FORM_FIELD_MAPPING);
+}
+
+static VALUE
 page_get_selection_region(VALUE self, VALUE scale, VALUE selection)
 {
     return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
@@ -264,18 +286,6 @@ page_render_selection_generic(int argc, VALUE *argv, VALUE self)
 }
 
 #if POPPLER_CHECK_VERSION(0, 5, 9)
-static VALUE
-page_get_form_fields(VALUE self)
-{
-    VALUE rb_fields;
-    GList *fields;
-
-    fields = poppler_page_get_form_fields(SELF(self));
-    rb_fields = GLIST2ARY2(fields, POPPLER_TYPE_FORM_FIELD);
-    poppler_page_free_form_fields(fields);
-    return rb_fields;
-}
-
 static VALUE
 page_get_crop_box(VALUE self)
 {
@@ -389,60 +399,222 @@ DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
 DEF_ACCESSOR(image_mapping, image, RVAL2IM, GOBJ2RVAL, RVAL2GDK_PIXBUF)
 
 
-/* FormField */
-DEF_ACCESSOR_WITH_SETTER(form_field, area,
-                         RVAL2FF, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_ACCESSOR(form_field, type, RVAL2FF, FFT2RVAL, RVAL2FFT)
-DEF_ACCESSOR(form_field, id, RVAL2FF, INT2NUM, NUM2INT)
-DEF_ACCESSOR(form_field, font_size, RVAL2FF, rb_float_new, NUM2DBL)
-
-
-#define NOT_CBOOL2RVAL(bool) (CBOOL2RVAL(!(bool)))
-#define RVAL2NOT_CBOOL(bool) (!(RVAL2CBOOL(bool)))
-
-DEF_ACCESSOR(text_field, multiline, RVAL2TF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(text_field, password, RVAL2TF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(text_field, fileselect, RVAL2TF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR_WITH_NAME(text_field, spell_check, do_not_spell_check,
-                       RVAL2TF, NOT_CBOOL2RVAL, RVAL2NOT_CBOOL)
-DEF_ACCESSOR_WITH_NAME(text_field, scroll, do_not_scroll,
-                       RVAL2TF, NOT_CBOOL2RVAL, RVAL2NOT_CBOOL)
-DEF_ACCESSOR(text_field, comb, RVAL2TF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(text_field, rich_text, RVAL2TF, CBOOL2RVAL, RVAL2CBOOL)
-
-static VALUE
-text_field_get_content(VALUE self)
+/* Mapping between areas on the current page and form fields */
+VALUE
+rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
 {
-    PopplerTextField *field;
-    field = RVAL2TF(self);
-    return rb_str_new(field->content, field->length);
+    VALUE obj;
+
+    obj = rbgobj_ruby_object_from_instance2(field, FALSE);
+    if (NIL_P(obj)) {
+      switch (poppler_form_field_get_field_type(field)) {
+        case POPPLER_FORM_FIELD_UNKNOWN:
+          obj = rbgobj_create_object(cUnknownField);
+          break;
+        case POPPLER_FORM_FIELD_BUTTON:
+          obj = rbgobj_create_object(cButtonField);
+          break;
+        case POPPLER_FORM_FIELD_TEXT:
+          obj = rbgobj_create_object(cTextField);
+          break;
+        case POPPLER_FORM_FIELD_CHOICE:
+          obj = rbgobj_create_object(cChoiceField);
+          break;
+        case POPPLER_FORM_FIELD_SIGNATURE:
+          obj = rbgobj_create_object(cSignatureField);
+          break;
+      }
+      g_object_ref(field);
+      G_INITIALIZE(obj, (gpointer)field);
+    }
+
+    return obj;
 }
 
-static VALUE
-text_field_set_content(VALUE self, VALUE content)
-{
-    PopplerTextField *field;
+DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
+                         RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM, FF2RVAL, RVAL2FF)
 
-    StringValue(content);
-    field = RVAL2TF(self);
-    if (field->content)
-        g_free(field->content);
-    field->content = RSTRING_PTR(content);
-    field->length = RSTRING_LEN(content);
+/* FormField */
+VALUE
+form_field_get_field_type(VALUE self)
+{
+    return FFT2RVAL(poppler_form_field_get_field_type(RVAL2FF(self)));
+}
+
+VALUE
+form_field_get_id(VALUE self)
+{
+    return INT2NUM(poppler_form_field_get_id(RVAL2FF(self)));
+}
+
+VALUE
+form_field_get_font_size(VALUE self)
+{
+    return rb_float_new(poppler_form_field_get_font_size(RVAL2FF(self)));
+}
+
+VALUE
+form_field_is_read_only(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_is_read_only(RVAL2FF(self)));
+}
+
+/* Button Field */
+VALUE
+button_field_get_button_type(VALUE self)
+{
+    return FBT2RVAL(poppler_form_field_button_get_button_type(RVAL2FF(self)));
+}
+
+VALUE
+button_field_get_state(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_button_get_state(RVAL2BF(self)));
+}
+
+VALUE
+button_field_set_state(VALUE self, VALUE state)
+{
+    poppler_form_field_button_set_state(RVAL2BF(self), RVAL2CBOOL(state));
     return Qnil;
 }
 
+/* Text Field */
+VALUE
+text_field_get_text_type(VALUE self)
+{
+    return FTT2RVAL(poppler_form_field_text_get_text_type(RVAL2TF(self)));
+}
 
-DEF_ACCESSOR(button_field, state, RVAL2BF, CBOOL2RVAL, RVAL2CBOOL)
+VALUE
+text_field_get_text(VALUE self)
+{
+    return CSTR2RVAL(poppler_form_field_text_get_text(RVAL2TF(self)));
+}
+
+VALUE
+text_field_set_text(VALUE self, VALUE text)
+{
+    poppler_form_field_text_set_text(RVAL2TF(self), RVAL2CSTR2(text));
+    return Qnil;
+}
+
+VALUE
+text_field_get_max_length(VALUE self)
+{
+    return INT2NUM(poppler_form_field_text_get_max_len(RVAL2TF(self)));
+}
+
+VALUE
+text_field_do_spell_check(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_text_do_spell_check(RVAL2TF(self)));
+}
+
+VALUE
+text_field_do_scroll(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_text_do_scroll(RVAL2TF(self)));
+}
+
+VALUE
+text_field_is_rich_text(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_text_is_rich_text(RVAL2TF(self)));
+}
+
+VALUE
+text_field_is_password(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_text_is_password(RVAL2TF(self)));
+}
 
 
-DEF_ACCESSOR(choice_field, combo, RVAL2CF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(choice_field, edit, RVAL2CF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(choice_field, multi_select, RVAL2CF, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR_WITH_NAME(choice_field, spell_check, do_not_spell_check,
-                       RVAL2CF, NOT_CBOOL2RVAL, RVAL2NOT_CBOOL)
-DEF_ACCESSOR_WITH_NAME(choice_field, commit_on_change, commit_on_sel_change,
-                       RVAL2CF, CBOOL2RVAL, RVAL2CBOOL)
+/* Choice Field */
+VALUE
+choice_field_get_choice_type(VALUE self)
+{
+    return FCT2RVAL(poppler_form_field_choice_get_choice_type(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_is_editable(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_choice_is_editable(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_can_select_multiple(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_choice_can_select_multiple(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_do_spell_check(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_choice_do_spell_check(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_commit_on_change(VALUE self)
+{
+    return CBOOL2RVAL(poppler_form_field_choice_commit_on_change(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_get_n_items(VALUE self)
+{
+    return INT2NUM(poppler_form_field_choice_get_n_items(RVAL2CF(self)));
+}
+
+VALUE
+choice_field_get_item(VALUE self, VALUE index)
+{
+    return CSTR2RVAL(poppler_form_field_choice_get_item(RVAL2CF(self),
+                                                        NUM2INT(index)));
+}
+
+VALUE
+choice_field_is_item_selected(VALUE self, VALUE index)
+{
+    return CBOOL2RVAL(poppler_form_field_choice_is_item_selected(RVAL2CF(self),
+                                                                 NUM2INT(index)));
+}
+
+VALUE
+choice_field_select_item(VALUE self, VALUE index)
+{
+    poppler_form_field_choice_select_item(RVAL2CF(self), NUM2INT(index));
+    return Qnil;
+}
+
+VALUE
+choice_field_unselect_all(VALUE self)
+{
+    poppler_form_field_choice_unselect_all(RVAL2CF(self));
+    return Qnil;
+}
+
+VALUE
+choice_field_toggle_item(VALUE self, VALUE index)
+{
+    poppler_form_field_choice_toggle_item(RVAL2CF(self), NUM2INT(index));
+    return Qnil;
+}
+
+VALUE
+choice_field_set_text(VALUE self, VALUE text)
+{
+    poppler_form_field_choice_set_text(RVAL2CF(self), RVAL2CSTR2(text));
+    return Qnil;
+}
+
+VALUE
+choice_field_get_text(VALUE self)
+{
+    return CSTR2RVAL(poppler_form_field_choice_get_text(RVAL2CF(self)));
+}
 #endif
 
 void
@@ -450,8 +622,7 @@ Init_poppler_page(VALUE mPoppler)
 {
     VALUE cPage, cRectangle, cLinkMapping;
 #if POPPLER_CHECK_VERSION(0, 5, 9)
-    VALUE cPageTransition, cImageMapping, cFormField;
-    VALUE cTextField, cButtonField, cChoiceField;
+    VALUE cPageTransition, cImageMapping, cFormFieldMapping, cFormField;
 #endif
 
     cPage = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
@@ -463,10 +634,20 @@ Init_poppler_page(VALUE mPoppler)
                                   "PageTransition", mPoppler);
     cImageMapping = G_DEF_CLASS(POPPLER_TYPE_IMAGE_MAPPING,
                                 "ImageMapping", mPoppler);
+    cFormFieldMapping = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_MAPPING,
+                                    "FormFieldMapping", mPoppler);
+
+    G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", mPoppler);
+
     cFormField = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
+    cUnknownField = rb_define_class_under(mPoppler, "UnknownField", cFormField);
     cTextField = rb_define_class_under(mPoppler, "TextField", cFormField);
     cButtonField = rb_define_class_under(mPoppler, "ButtonField", cFormField);
     cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", cFormField);
+    cSignatureField = rb_define_class_under(mPoppler, "SignatureField",
+                                            cFormField);
 #endif
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
@@ -482,12 +663,16 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "find_text", page_find_text, 1);
     rb_define_method(cPage, "get_text", page_get_text, -1);
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+    rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
+    rb_define_method(cPage, "form_field_mapping",
+                     page_get_form_field_mapping, 0);
+#endif
     rb_define_method(cPage, "get_selection_region",
                      page_get_selection_region, 2);
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
 #if POPPLER_CHECK_VERSION(0, 5, 9)
-    rb_define_method(cPage, "form_fields", page_get_form_fields, 0);
     rb_define_method(cPage, "crop_box", page_get_crop_box, 0);
 #endif
 
@@ -552,67 +737,60 @@ Init_poppler_page(VALUE mPoppler)
     G_DEF_SETTERS(cImageMapping);
 
 
+/* Mapping between areas on the current page and form fields */
+    rb_define_method(cFormFieldMapping, "area", form_field_mapping_get_area, 0);
+    rb_define_method(cFormFieldMapping, "field", form_field_mapping_get_field,
+                     0);
+
+    rb_define_method(cFormFieldMapping, "set_area",
+                     form_field_mapping_set_area, 1);
+    rb_define_method(cFormFieldMapping, "set_field",
+                     form_field_mapping_set_field, 1);
+
+    G_DEF_SETTERS(cFormFieldMapping);
+
 /* FormField */
-    rb_define_method(cFormField, "area", form_field_get_area, 0);
-    rb_define_method(cFormField, "type", form_field_get_type, 0);
     rb_define_method(cFormField, "id", form_field_get_id, 0);
     rb_define_method(cFormField, "font_size", form_field_get_font_size, 0);
-
-    rb_define_method(cFormField, "set_area", form_field_set_area, 1);
-    rb_define_method(cFormField, "set_type", form_field_set_type, 1);
-    rb_define_method(cFormField, "set_id", form_field_set_id, 1);
-    rb_define_method(cFormField, "set_font_size", form_field_set_font_size, 1);
+    rb_define_method(cFormField, "read_only?", form_field_is_read_only, 0);
 
     G_DEF_SETTERS(cFormField);
 
 
-    rb_define_method(cTextField, "multiline?", text_field_get_multiline, 0);
-    rb_define_method(cTextField, "password?", text_field_get_password, 0);
-    rb_define_method(cTextField, "file_select?", text_field_get_fileselect, 0);
-    rb_define_method(cTextField, "spell_check?", text_field_get_spell_check, 0);
-    rb_define_method(cTextField, "scroll?", text_field_get_scroll, 0);
-    rb_define_method(cTextField, "combo?", text_field_get_comb, 0);
-    rb_define_method(cTextField, "rich_text?", text_field_get_rich_text, 0);
-    rb_define_method(cTextField, "content", text_field_get_content, 0);
-
-    rb_define_method(cTextField, "set_multiline", text_field_set_multiline, 1);
-    rb_define_method(cTextField, "set_password", text_field_set_password, 1);
-    rb_define_method(cTextField, "set_file_select",
-                     text_field_set_fileselect, 1);
-    rb_define_method(cTextField, "set_spell_check",
-                     text_field_set_spell_check, 1);
-    rb_define_method(cTextField, "set_scroll", text_field_set_scroll, 1);
-    rb_define_method(cTextField, "set_combo", text_field_set_comb, 1);
-    rb_define_method(cTextField, "set_rich_text", text_field_set_rich_text, 1);
-    rb_define_method(cTextField, "set_content", text_field_set_content, 1);
-
-    G_DEF_SETTERS(cTextField);
-
-
     rb_define_method(cButtonField, "active?", button_field_get_state, 0);
-
     rb_define_method(cButtonField, "set_active", button_field_set_state, 1);
 
     G_DEF_SETTERS(cButtonField);
 
 
-    rb_define_method(cChoiceField, "combo?", choice_field_get_combo, 0);
-    rb_define_method(cChoiceField, "edit?", choice_field_get_edit, 0);
-    rb_define_method(cChoiceField, "multi_select?",
-                     choice_field_get_multi_select, 0);
-    rb_define_method(cChoiceField, "spell_check?",
-                     choice_field_get_spell_check, 0);
-    rb_define_method(cChoiceField, "commit_on_change?",
-                     choice_field_get_commit_on_change, 0);
+    rb_define_method(cTextField, "type", text_field_get_text_type, 0);
+    rb_define_method(cTextField, "text", text_field_get_text, 0);
+    rb_define_method(cTextField, "set_text", text_field_set_text, 1);
+    rb_define_method(cTextField, "max_length", text_field_get_max_length, 0);
+    rb_define_method(cTextField, "spell_check?", text_field_do_spell_check, 0);
+    rb_define_method(cTextField, "scroll?", text_field_do_scroll, 0);
+    rb_define_method(cTextField, "rich_text?", text_field_is_rich_text, 0);
+    rb_define_method(cTextField, "password?", text_field_is_password, 0);
 
-    rb_define_method(cChoiceField, "set_combo", choice_field_set_combo, 1);
-    rb_define_method(cChoiceField, "set_edit", choice_field_set_edit, 1);
-    rb_define_method(cChoiceField, "set_multi_select",
-                     choice_field_set_multi_select, 1);
-    rb_define_method(cChoiceField, "set_spell_check",
-                     choice_field_set_spell_check, 1);
-    rb_define_method(cChoiceField, "set_commit_on_change",
-                     choice_field_set_commit_on_change, 1);
+    G_DEF_SETTERS(cTextField);
+
+
+    rb_define_method(cChoiceField, "type", choice_field_get_choice_type, 0);
+    rb_define_method(cChoiceField, "editable?", choice_field_is_editable, 0);
+    rb_define_method(cChoiceField, "select_multiple?",
+                     choice_field_can_select_multiple, 0);
+    rb_define_method(cChoiceField, "spell_check?",
+                     choice_field_do_spell_check, 0);
+    rb_define_method(cChoiceField, "commit_on_change?",
+                     choice_field_commit_on_change, 0);
+    rb_define_method(cChoiceField, "n_items", choice_field_get_n_items, 0);
+    rb_define_method(cChoiceField, "[]", choice_field_get_item, 1);
+    rb_define_method(cChoiceField, "selected?",
+                     choice_field_is_item_selected, 1);
+    rb_define_method(cChoiceField, "select", choice_field_select_item, 1);
+    rb_define_method(cChoiceField, "unselect_all", choice_field_unselect_all, 0);
+    rb_define_method(cChoiceField, "text", choice_field_get_text, 0);
+    rb_define_method(cChoiceField, "set_text", choice_field_set_text, 1);
 
     G_DEF_SETTERS(cChoiceField);
 #endif
