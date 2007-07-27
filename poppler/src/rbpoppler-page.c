@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2007/07/27 14:40:15 $
+  $Date: 2007/07/27 14:45:35 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -177,6 +177,7 @@ page_get_link_mapping(VALUE self)
                        POPPLER_TYPE_LINK_MAPPING);
 }
 
+#if POPPLER_CHECK_VERSION(0, 5, 9)
 static VALUE
 page_get_image_mapping(VALUE self)
 {
@@ -190,6 +191,7 @@ page_get_form_field_mapping(VALUE self)
     return GLIST2ARY2F(poppler_page_get_form_field_mapping(SELF(self)),
                        POPPLER_TYPE_FORM_FIELD_MAPPING);
 }
+#endif
 
 static VALUE
 page_get_selection_region(VALUE self, VALUE scale, VALUE selection)

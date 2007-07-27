@@ -1,5 +1,8 @@
 2007-07-27  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h, src/rbpoppler-page.c: worked with poppler <
+	0.5.9 again.
+
 	* src/rbpoppler-document.c: used POPPLER_CHECK_VERSION(0, 5, 9)
 	instead of HAVE_POPPLER_FONT_INFO because my patch is accepted by
 	upstream.
