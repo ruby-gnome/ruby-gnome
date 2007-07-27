@@ -4,7 +4,7 @@
   rbpoppler.c -
 
   $Author: ktou $
-  $Date: 2007/06/23 02:46:22 $
+  $Date: 2007/07/27 14:40:15 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -58,7 +58,10 @@ Init_poppler(void)
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_DIRECTION,
                 "PageTransitionDirection", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_SELECTION_STYLE, "SelectionStyle", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_TYPE, "FormFieldType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", mPoppler);
+
 #endif
     G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", mPoppler);
 

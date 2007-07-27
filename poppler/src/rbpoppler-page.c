@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2007/07/27 14:37:01 $
+  $Date: 2007/07/27 14:40:15 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -437,12 +437,6 @@ DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM, FF2RVAL, RVAL2FF)
 
 /* FormField */
 VALUE
-form_field_get_field_type(VALUE self)
-{
-    return FFT2RVAL(poppler_form_field_get_field_type(RVAL2FF(self)));
-}
-
-VALUE
 form_field_get_id(VALUE self)
 {
     return INT2NUM(poppler_form_field_get_id(RVAL2FF(self)));
@@ -636,10 +630,6 @@ Init_poppler_page(VALUE mPoppler)
                                 "ImageMapping", mPoppler);
     cFormFieldMapping = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_MAPPING,
                                     "FormFieldMapping", mPoppler);
-
-    G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", mPoppler);
 
     cFormField = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
     cUnknownField = rb_define_class_under(mPoppler, "UnknownField", cFormField);

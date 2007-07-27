@@ -1,5 +1,8 @@
 2007-07-27  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.c, src/rbpoppler-page.c: don't show
+	poppler_form_field_get_field_type().
+
 	* src/lib/poppler.rb, src/rbpoppler.h, src/rbpoppler-page.c:
 	followed the recent poppler form API changes but not tested
 	because I don't have a PDF with form...
