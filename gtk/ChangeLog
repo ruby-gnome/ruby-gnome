@@ -1,3 +1,7 @@
+2007-08-06  Mathieu Blondel
+
+	* sample/misc/print.rb: A sample for Gtk::Print*.
+
 2007-07-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgdkatom.c: remove Gdk::Atom.intern_static_string.

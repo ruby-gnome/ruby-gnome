@@ -1,7 +1,7 @@
 # Copyright (c) 2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
-# $Id: iconview.rb,v 1.6 2007/02/28 17:29:40 mutoh Exp $
+# $Id: iconview.rb,v 1.7 2007/08/05 15:41:31 mutoh Exp $
 =begin
 = Icon View (IconView)
 
@@ -9,6 +9,7 @@ The Gtk::IconView widget is used to display and manipulate icons.
 It uses a Gtk::TreeModel for data storage, so the list store example
 might be helpful.
 =end
+$KCODE="u"
 require 'common'
 
 module Demo
@@ -23,7 +24,6 @@ module Demo
         # set COL_DISPLAY_NAME first because changing an iter will trigger the
         # sort function; if we set something else first, the value of
         # COL_DISPLAY_NAME for this row will be "nil" and the sort function will fail
-$KCODE="u"
 puts path
 #puts GLib.convert(GLib.filename_to_utf8(path), "Shift_JIS", "UTF-8")
 #puts File.basename(GLib.convert(GLib.filename_to_utf8(path), "Shift_JIS", "UTF-8"))
