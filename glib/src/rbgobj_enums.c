@@ -3,8 +3,8 @@
 
   rbgobj_enums.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 14:27:06 $
+  $Author: ktou $
+  $Date: 2007/08/08 11:53:09 $
   created at: Sat Jul 27 16:56:01 JST 2002
 
   Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
@@ -16,6 +16,8 @@
 
 static ID id_new;
 static ID id_module_eval;
+static ID id_to_s;
+static ID id_or;
 
 /**********************************************************************/
 
@@ -25,6 +27,72 @@ typedef struct {
 } constant_map;
 
 static GSList *rbgobj_cmap = NULL;
+
+static gchar *
+nick_to_const_name(const gchar *nick)
+{
+    gchar *const_name;
+    gchar *p;
+
+    if (!nick)
+        return NULL;
+
+    const_name = g_strdup(nick);
+    for (p = const_name; *p; p++) {
+        if (*p == '-' || *p == ' ')
+            *p = '_';
+        else
+            *p = toupper(*p);
+    }
+    return const_name;
+}
+
+static VALUE
+resolve_enum_value(VALUE klass, VALUE nick)
+{
+    VALUE value = Qnil;
+    gchar *const_nick;
+    ID const_nick_id;
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(nick, klass)))
+        return nick;
+
+    nick = rb_funcall(nick, id_to_s, 0);
+    const_nick = nick_to_const_name(RVAL2CSTR(nick));
+    const_nick_id = rb_intern(const_nick);
+    if (rb_const_defined(klass, const_nick_id)) {
+        value = rb_const_get(klass, const_nick_id);
+    }
+    g_free(const_nick);
+
+    return value;
+}
+
+static VALUE
+resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
+{
+    int i, len;
+    VALUE flags_value = Qnil;
+
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(nick_or_nicks, rb_cArray)))
+        return resolve_enum_value(klass, nick_or_nicks);
+
+    len = RARRAY(nick_or_nicks)->len;
+    for (i = 0; i < len; i++) {
+        VALUE value;
+
+        value = resolve_enum_value(klass, RARRAY(nick_or_nicks)->ptr[i]);
+        if (NIL_P(value))
+            return Qnil;
+
+        if (NIL_P(flags_value))
+            flags_value = value;
+        else
+            flags_value = rb_funcall(flags_value, id_or, 1, value);
+    }
+
+    return flags_value;
+}
 
 static gint
 rbgobj_constant_find(constant_map *a, char *name)
@@ -201,6 +269,14 @@ rbgobj_get_enum(VALUE obj, GType gtype)
 
     klass = GTYPE2CLASS(gtype);
 
+    if (!rb_obj_is_kind_of(obj, klass)) {
+        VALUE enum_value;
+
+        enum_value = resolve_enum_value(klass, obj);
+        if (!NIL_P(enum_value))
+            obj = enum_value;
+    }
+
     if (rb_obj_is_kind_of(obj, klass))
         return enum_get_holder(obj)->value;
     else
@@ -217,36 +293,28 @@ rbgobj_init_enum_class(VALUE klass)
 
     for (i = 0; i < gclass->n_values; i++) {
         GEnumValue* entry = &(gclass->values[i]);
-        gchar* nick = g_strdup(entry->value_nick);
-        gchar* p;
+        gchar *const_nick_name;
 
-        if (nick) {
-            for (p = nick; *p; p++) {
-              if (*p == '-' || *p == ' ')
-                  *p = '_';
-              else
-                  *p = toupper(*p);
-            }
-        }
+        const_nick_name = nick_to_const_name(entry->value_nick);
 
 #if 0
         {
-            ID id = rb_intern(nick);
+            ID id = rb_intern(const_nick_name);
             if (rb_is_const_id(id)) {
                 VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
-                rb_define_const(klass, nick, value);
+                rb_define_const(klass, const_nick_name, value);
             }
         }
 #else
         {
-            VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
-            if (nick) {
-              rbgobj_define_const(klass, nick, value);
+            if (const_nick_name) {
+                VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
+                rbgobj_define_const(klass, const_nick_name, value);
             }
         }
 #endif
 
-        g_free(nick);
+        g_free(const_nick_name);
     }
 
     g_type_class_unref(gclass);
@@ -460,6 +528,14 @@ rbgobj_get_flags(VALUE obj, GType gtype)
         obj = rbgobj_make_flags(NUM2UINT(obj), gtype);
 
     klass = GTYPE2CLASS(gtype);
+
+    if (!rb_obj_is_kind_of(obj, klass)) {
+        VALUE flags_value = Qnil;
+
+        flags_value = resolve_flags_value(klass, obj);
+        if (!NIL_P(flags_value))
+            obj = flags_value;
+    }
 
     if (rb_obj_is_kind_of(obj, klass))
         return flags_get_holder(obj)->value;
@@ -848,6 +924,8 @@ Init_gobject_genums()
 {
     id_module_eval = rb_intern("module_eval");
     id_new = rb_intern("new");
+    id_to_s = rb_intern("to_s");
+    id_or = rb_intern("|");
 
     Init_enum();
     Init_flags();

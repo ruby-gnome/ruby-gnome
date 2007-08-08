@@ -1,3 +1,19 @@
+2007-08-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_enums.c: supported convenience GEnum and GFlags
+	notation. e.g.:
+	  GLib::UTF8.normalize(utf8, GLib::NormalizeMode::NFD)
+          ->
+	  GLib::UTF8.normalize(utf8, :nfd)
+
+	  key_file.load_from_data(data,
+	                          GLib::KeyFile::KEEP_COMMENTS |
+	                          GLib::KeyFile::KEEP_TRANSLATIONS)
+	  ->
+	  key_file.load_from_data(data, [:keep_contents, :keep_translations])
+
+	* tests/test_enum.rb: added tests for the above feature.
+
 2007-07-25  Sjoerd Simons   <sjoerd@luon.net>
 	* src/rbgobj_signal.c: Properly use the GValueArray api in emit_body.
 	Causes all values in the parameter array to be unset after emission.
