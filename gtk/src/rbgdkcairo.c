@@ -4,15 +4,18 @@
   rbgdkcairo.c -
 
   $Author: ktou $
-  $Date: 2007/05/27 04:04:12 $
+  $Date: 2007/08/13 11:09:22 $
 
   Copyright (C) 2005 Kouhei Sutou
 ************************************************/
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#if GTK_CHECK_VERSION(2,8,0) && defined(HAVE_RB_CAIRO_H)
+#  define CAIRO_AVAILABLE 1
+#endif
+
+#ifdef CAIRO_AVAILABLE
 
 #include <rb_cairo.h>
 
@@ -66,14 +69,22 @@ gdkdraw_cairo_region(self, region)
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
-#  endif
 #endif
+
+static VALUE
+cairo_available_p(VALUE self)
+{
+#if CAIRO_AVAILABLE
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
 
 void
 Init_gtk_gdk_cairo()
 {
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#if CAIRO_AVAILABLE
     rb_define_method(rb_cCairo_Context, "set_source_gdk_color",
                      gdkdraw_cairo_set_source_color, 1);
 #if GTK_CHECK_VERSION(2,10,0)
@@ -83,7 +94,8 @@ Init_gtk_gdk_cairo()
     rb_define_method(rb_cCairo_Context, "gdk_region", gdkdraw_cairo_region, 1);
 
     G_DEF_SETTERS(rb_cCairo_Context);
-#  endif
 #endif
+
+    rb_define_module_function(mGdk, "cairo_available?", cairo_available_p, 0);
 }
 

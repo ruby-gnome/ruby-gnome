@@ -1,3 +1,8 @@
+2007-08-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkcairo.c (Gdk.cairo_available?): moved from ...
+	* src/lib/gtk2/base.rb: ... here.
+
 2007-08-06  Mathieu Blondel
 
 	* sample/misc/print.rb: A sample for Gtk::Print*.

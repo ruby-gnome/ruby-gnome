@@ -5,7 +5,7 @@
   Copyright (c) 2006 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
-  $Id: base.rb,v 1.5 2007/05/27 04:04:12 ktou Exp $
+  $Id: base.rb,v 1.6 2007/08/13 11:09:22 ktou Exp $
 =end
 
 
@@ -21,11 +21,6 @@ require 'gdk_pixbuf2'
 
 module Gdk
   LOG_DOMAIN = "Gdk"
-
-  module_function
-  def cairo_available?
-    Gdk::Drawable.instance_methods.include?("create_cairo_context")
-  end
 end
 
 if Gdk.cairo_available?
