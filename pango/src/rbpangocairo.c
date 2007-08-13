@@ -3,8 +3,8 @@
 
   rbpangocairo.c -
 
-  $Author: mutoh $
-  $Date: 2006/12/10 15:13:10 $
+  $Author: ktou $
+  $Date: 2007/08/13 11:10:22 $
 
   Copyright (C) 2005 Kouhei Sutou
   Copyright (C) 2006 Ruby-GNOME2 Project Team
@@ -12,8 +12,11 @@
 
 #include "rbpango.h"
 
-#if PANGO_CHECK_VERSION(1,10,0)
-#  if HAVE_RB_CAIRO_H
+#if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
+#  define CAIRO_AVAILABLE 1
+#endif
+
+#ifdef CAIRO_AVAILABLE
 
 #define _SELF(self) (PANGO_CAIRO_FONT_MAP(RVAL2GOBJ(self)))
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
@@ -159,14 +162,23 @@ error_underline_path(self, x, y, width, height)
     return self;
 }
 #endif
-#  endif
+
 #endif
+
+static VALUE
+cairo_available_p(VALUE self)
+{
+#if CAIRO_AVAILABLE
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
 
 void
 Init_pango_cairo()
 {
-#if PANGO_CHECK_VERSION(1,10,0)
-#  if HAVE_RB_CAIRO_H
+#ifdef CAIRO_AVAILABLE
     VALUE pFontMap;
 
     /* Pango::CairoFontMap */
@@ -213,6 +225,7 @@ Init_pango_cairo()
                      error_underline_path, 4);
 #endif
 
-#   endif
 #endif
+
+    rb_define_module_function(mPango, "cairo_available?", cairo_available_p, 0);
 }
