@@ -1,3 +1,9 @@
+2007-08-14  Vincent Isambart <vincent.isambart@gmail.com>
+	* src/utils_int64.c: included rbglib.h instead of ruby.h
+	because utils_int64.c uses the RVAL2CBOOL macro that is declared
+	in rbglib.h and thus resulted in a dynamic link error on Mac
+	that the system could not find a RVAL2CBOOL function.
+
 2007-08-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_enums.c: supported convenience GEnum and GFlags

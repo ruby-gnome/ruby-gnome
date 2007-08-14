@@ -3,8 +3,8 @@
 
   utils_int64.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: isambart $
+  $Date: 2007/08/14 10:35:04 $
 
   Copyright (C) 2003  Masahiro Sakai
   Copyright (C) 2002  Masahiro Sakai
@@ -13,7 +13,7 @@
 **********************************************************************/
 
 #include <glib/gtypes.h>
-#include "ruby.h"
+#include "rbglib.h"
 
 static ID id_and;
 static ID id_rshift;
