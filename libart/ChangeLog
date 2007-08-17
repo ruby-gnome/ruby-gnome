@@ -1,3 +1,7 @@
+2007-08-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbart.h: defined RVAL2CBOOL and CBOOL2RVAL.
+
 2007-07-13  Guillaume Cottenceau
 
 	* src/rbart_affine.c, src/rbart_uta.c: replace RTEST uses by

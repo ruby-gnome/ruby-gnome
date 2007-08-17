@@ -3,8 +3,8 @@
 
   rbart.h - header file for Art module of ruby
 
-  $Author: mutoh $
-  $Date: 2005/10/09 18:49:17 $
+  $Author: ktou $
+  $Date: 2007/08/17 11:56:01 $
 
   Copyright (C) 2004,2005  Ruby-GNOME2 Project
   Copyright (C) 2002,2003  KUBO Takehiro <kubo@jiubao.org>
@@ -19,6 +19,13 @@
 
 #ifndef ULONG2NUM
 #define ULONG2NUM UINT2NUM
+#endif
+
+#ifndef RVAL2CBOOL
+#  define RVAL2CBOOL(val) (RTEST(val))
+#endif
+#ifndef CBOOL2RVAL
+#  define CBOOL2RVAL(bool) (bool ? Qtrue : Qfalse)
 #endif
 
 extern VALUE artAffine;
