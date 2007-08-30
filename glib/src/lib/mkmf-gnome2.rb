@@ -13,7 +13,7 @@ require 'mkmf'
 require 'pkg-config'
 require 'glib-mkenums'
 
-unless defined? macro_defined?
+unless defined?(macro_defined?)
   def macro_defined?(macro, src, opt="")
     try_cpp(src + <<EOP, opt)
 #ifndef #{macro}
@@ -28,7 +28,7 @@ STDOUT.print("checking for GCC... ")
 STDOUT.flush
 if macro_defined?("__GNUC__", "")
   STDOUT.print "yes\n"
-  $CFLAGS += ' -Wall' 
+  $CFLAGS += ' -Wall'
   $cc_is_gcc = true
 else
   STDOUT.print "no\n"
@@ -39,7 +39,7 @@ include_path = nil
 if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   include_path = (ENV['GTK_BASEPATH'] + "\\INCLUDE").gsub("\\", "/")
 #  $hdrdir += " -I#{include_path} "
-  $CFLAGS += " -I#{include_path} " 
+  $CFLAGS += " -I#{include_path} "
 end
 
 def check_win32()
@@ -112,46 +112,45 @@ def setup_win32(target_name)
 end
 
 #add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
-def add_depend_package(target_name, target_srcdir, topsrcdir)
-  [topsrcdir, $configure_args['--topdir']].each do |topdir|
-  topdir = File.expand_path(topdir)
-  if RUBY_VERSION < "1.8.5"
-    $CFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$CFLAGS}"
-  else
-    $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
-  end
+def add_depend_package(target_name, target_srcdir, top_srcdir)
+  [top_srcdir, $configure_args['--topdir']].each do |topdir|
+    topdir = File.expand_path(topdir)
+    if RUBY_VERSION < "1.8.5"
+      $CFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$CFLAGS}"
+    else
+      $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
+    end
 
-  if /cygwin|mingw/ =~ RUBY_PLATFORM
-    $libs << " -lruby-#{target_name}"
-    $LDFLAGS << " -L#{topdir}/#{target_srcdir}"
-  elsif /mswin32/ =~ RUBY_PLATFORM
-    $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
-    $libs << " libruby-#{target_name}.lib"
+    if /cygwin|mingw/ =~ RUBY_PLATFORM
+      $libs << " -lruby-#{target_name}"
+      $LDFLAGS << " -L#{topdir}/#{target_srcdir}"
+    elsif /mswin32/ =~ RUBY_PLATFORM
+      $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
+      $libs << " libruby-#{target_name}.lib"
+    end
   end
-  end #
 end
 
 def add_distcleanfile(file)
-  $distcleanfiles = [] unless $distcleanfiles 
+  $distcleanfiles ||= []
   $distcleanfiles << file
 end
 
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
   builddir = $configure_args['--topdir'] + srcdir[TOPDIR.size..-1]
-  Dir.mkdir(builddir) unless File.exist? builddir
+  FileUtils.mkdir_p(builddir)
 
   Dir.chdir(builddir) do
     yield if block_given?
 
     $defs << defs if defs
 
-    $objs = []
-    srcs = Dir[File.join(srcdir, "*.{#{SRC_EXT.join(%q{,})}}")]
-    srcs |= Dir[File.join(".", "*.{#{SRC_EXT.join(%q{,})}}")]
-    for f in srcs
-      obj = File.basename(f, ".*") << ".o"
-      $objs.push(obj) unless $objs.index(obj)
-    end
+    pattern = "*.{#{SRC_EXT.join(',')}}"
+    srcs = Dir[File.join(srcdir, pattern)]
+    srcs |= Dir[File.join(".", pattern)]
+    $objs = srcs.collect do |src|
+      File.basename(src, ".*") + ".o"
+    end.flatten.uniq
 
     create_makefile(pkg_name, srcdir)
   end
@@ -160,7 +159,7 @@ end
 def create_top_makefile(sub_dirs = ["src"])
   mfile = File.open("Makefile", "w")
   if /mswin32/ =~ RUBY_PLATFORM
-    mfile.print <<MSWIN32_END 
+    mfile.print <<MSWIN32_END
 
 all:
 #{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo all\n	@cd ..\n"}.join('')}
@@ -173,7 +172,7 @@ clean:
 	@if exist conftest.* del conftest.*
 	@if exist *.lib del *.lib
 	@if exist *~ del *~
-	@if exist mkmf.log del mkmf.log 
+	@if exist mkmf.log del mkmf.log
 MSWIN32_END
   else
     mfile.print <<END
@@ -207,7 +206,7 @@ def make_version_header(app_name, pkgname, dir = "src")
 
   add_distcleanfile(filename)
 
-  Dir.mkdir(dir) unless File.exist? dir
+  FileUtils.mkdir_p(dir)
   out = File.open(File.join(dir, filename), "w")
 
   out.print %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
@@ -272,8 +271,8 @@ def add_obj(name)
 end
 
 def glib_mkenums(prefix, files, g_type_prefix, include_files)
-  add_distcleanfile(prefix + ".h") 
-  add_distcleanfile(prefix + ".c") 
+  add_distcleanfile(prefix + ".h")
+  add_distcleanfile(prefix + ".c")
   GLib::MkEnums.create(prefix, files, g_type_prefix, include_files)
 end
 
