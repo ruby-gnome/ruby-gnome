@@ -3,8 +3,8 @@
 
   rbglib_unicode.c -
 
-  $Author: sakai $
-  $Date: 2007/06/16 02:46:28 $
+  $Author: ktou $
+  $Date: 2007/08/30 10:16:35 $
 
   Copyright (C) 2006 Kouhei Sutou
 
@@ -140,7 +140,7 @@ static VALUE
 rbglib_m_unichar_get_script(VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_get_script(NUM2UINT(unichar)),
-                      G_TYPE_UNICODE_SCRIPT_TYPE);
+                      G_TYPE_UNICODE_SCRIPT);
 }
 #endif
 

@@ -1,5 +1,8 @@
 2007-08-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_unicode.c (rbglib_m_unichar_get_script):
+	G_TYPE_UNICODE_SCRIPT_TYPE -> G_TYPE_UNICODE_SCRIPT.
+
 	* src/rbglib_maincontext.c (timeout_add_seconds): used
 	g_timeout_add_seconds_full() not g_timeout_add_seconds().
 
