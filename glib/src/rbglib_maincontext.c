@@ -3,8 +3,8 @@
 
   rbglib_maincontext.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: ktou $
+  $Date: 2007/08/30 10:13:44 $
 
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
@@ -331,19 +331,23 @@ timeout_add(int argc, VALUE *argv, VALUE self)
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-timeout_add_seconds(VALUE self, VALUE interval)
+timeout_add_seconds(int argc, VALUE *argv, VALUE self)
 {
-    VALUE func, rb_id;
+    VALUE interval, rb_priority, func, rb_id;
+    gint priority;
     callback_info_t *info;
     guint id;
 
-    func = rb_block_proc();
+    rb_scan_args(argc, argv, "11&", &interval, &rb_priority, &func);
 
+    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : INT2NUM(rb_priority);
     info = ALLOC(callback_info_t);
     info->callback = func;
-    id = g_timeout_add_seconds(NUM2UINT(interval),
-                               (GSourceFunc)invoke_source_func,
-                               (gpointer)info, g_free);
+    id = g_timeout_add_seconds_full(priority,
+                                    NUM2UINT(interval),
+                                    (GSourceFunc)invoke_source_func,
+                                    (gpointer)info,
+                                    g_free);
     info->id = id;
     rb_id = UINT2NUM(id);
     G_RELATIVE2(mGLibSource, func, id__callbacks__, rb_id);
@@ -488,7 +492,7 @@ Init_glib_main_context()
 #endif
     rb_define_module_function(timeout, "add", timeout_add, -1);
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_module_function(timeout, "add_seconds", timeout_add_seconds, 1);
+    rb_define_module_function(timeout, "add_seconds", timeout_add_seconds, -1);
 #endif
     rb_define_module_function(idle, "source_new", idle_source_new, 0);
     rb_define_module_function(idle, "add", idle_add, -1);
