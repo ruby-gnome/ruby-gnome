@@ -1,3 +1,8 @@
+2007-08-30  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* src/lib/mkmf-gnome2.rb: re-supported build in no-source
+	directory.
+
 2007-08-14  Vincent Isambart <vincent.isambart@gmail.com>
 	* src/utils_int64.c: included rbglib.h instead of ruby.h
 	because utils_int64.c uses the RVAL2CBOOL macro that is declared

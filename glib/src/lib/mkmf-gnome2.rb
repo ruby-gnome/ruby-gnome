@@ -112,7 +112,9 @@ def setup_win32(target_name)
 end
 
 #add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
-def add_depend_package(target_name, target_srcdir, topdir)
+def add_depend_package(target_name, target_srcdir, topsrcdir)
+  [topsrcdir, $configure_args['--topdir']].each do |topdir|
+  topdir = File.expand_path(topdir)
   if RUBY_VERSION < "1.8.5"
     $CFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$CFLAGS}"
   else
@@ -126,6 +128,7 @@ def add_depend_package(target_name, target_srcdir, topdir)
     $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
     $libs << " libruby-#{target_name}.lib"
   end
+  end #
 end
 
 def add_distcleanfile(file)
@@ -134,16 +137,23 @@ def add_distcleanfile(file)
 end
 
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
-  begin
-    Dir.mkdir(srcdir) unless File.exist? srcdir
-    Dir.chdir srcdir
+  builddir = $configure_args['--topdir'] + srcdir[TOPDIR.size..-1]
+  Dir.mkdir(builddir) unless File.exist? builddir
 
+  Dir.chdir(builddir) do
     yield if block_given?
 
     $defs << defs if defs
+
+    $objs = []
+    srcs = Dir[File.join(srcdir, "*.{#{SRC_EXT.join(%q{,})}}")]
+    srcs |= Dir[File.join(".", "*.{#{SRC_EXT.join(%q{,})}}")]
+    for f in srcs
+      obj = File.basename(f, ".*") << ".o"
+      $objs.push(obj) unless $objs.index(obj)
+    end
+
     create_makefile(pkg_name, srcdir)
-  ensure
-    Dir.chdir('..')
   end
 end
 
@@ -197,6 +207,7 @@ def make_version_header(app_name, pkgname, dir = "src")
 
   add_distcleanfile(filename)
 
+  Dir.mkdir(dir) unless File.exist? dir
   out = File.open(File.join(dir, filename), "w")
 
   out.print %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
