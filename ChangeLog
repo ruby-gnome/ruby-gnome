@@ -1,3 +1,7 @@
+2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* extconf.rb: re-supported build in no-source directory.
+
 2006-12-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* AUTHORS, NEWS, README: Updated.

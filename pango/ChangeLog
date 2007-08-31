@@ -1,3 +1,7 @@
+2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* src/depend: re-supported build in no-source directory.
+
 2007-08-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpangocairo.c (Pango.cairo_available?): moved from ...

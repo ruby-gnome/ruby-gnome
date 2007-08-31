@@ -1,3 +1,7 @@
+2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* src/depend: re-supported build in no-source directory.
+
 2007-07-16  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbatktextrange.c: change Atk::TextRange not to be a subclass of

@@ -1,7 +1,7 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.15 2006/12/26 15:49:16 mutoh Exp $
+  $Id: extconf.rb,v 1.16 2007/08/31 08:22:45 ktou Exp $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
@@ -28,6 +28,10 @@ $srcdir = File.dirname(__FILE__)
 $topsrcdir = $configure_args["--topsrcdir"] ||= $srcdir
 $topdir = $configure_args["--topdir"] ||= Dir.pwd
 $strict = $configure_args["--strict"] ? "--strict" : ""
+
+$srcdir = File.expand_path($srcdir)
+$topsrcdir = File.expand_path($topsrcdir)
+$topdir = File.expand_path($topdir)
 
 subdirs = ARGV.select{|v|  /^--/ !~ v}
 

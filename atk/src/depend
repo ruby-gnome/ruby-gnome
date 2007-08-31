@@ -1,5 +1,5 @@
 install:
 	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbatk.h $(sitearchdir)$(target_prefix)
-	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbatkversion.h $(sitearchdir)$(target_prefix)
+	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' rbatkversion.h $(sitearchdir)$(target_prefix)
 
 
