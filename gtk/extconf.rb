@@ -83,7 +83,6 @@ add_distcleanfile("rbgtkinits.c")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
-  File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
   system("#{$ruby} #{SRCDIR_QUOTED}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"

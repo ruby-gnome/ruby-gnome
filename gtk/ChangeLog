@@ -1,3 +1,7 @@
+2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* extconf.rb: removed a duplicated line.
+
 2007-08-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkaboutdialog.c (aboutdialog_s_show_about_dialog):
