@@ -1,3 +1,8 @@
+2007-09-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkwindow.c (gwin_get_frame_dimensions): removed needless
+	condition checks.
+
 2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
 
 	* extconf.rb: removed a duplicated line.

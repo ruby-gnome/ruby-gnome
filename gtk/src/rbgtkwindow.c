@@ -3,8 +3,8 @@
 
   rbgtkwindow.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:32 $
+  $Author: ktou $
+  $Date: 2007/09/08 12:44:19 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -463,10 +463,11 @@ gwin_get_frame_dimensions(self)
 {
     int left, top, right, bottom;
     gtk_window_get_frame_dimensions(_SELF(self), &left, &top, &right, &bottom);
-    return rb_ary_new3(4, &left ? INT2NUM(left) : Qnil, 
-                       &top ? INT2NUM(top) : Qnil, 
-                       &right ? INT2NUM(right) : Qnil, 
-                       &bottom ? INT2NUM(bottom) : Qnil);
+    return rb_ary_new3(4,
+                       INT2NUM(left),
+                       INT2NUM(top),
+                       INT2NUM(right),
+                       INT2NUM(bottom));
 }
 
 static VALUE
