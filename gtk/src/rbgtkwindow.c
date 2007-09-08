@@ -4,7 +4,7 @@
   rbgtkwindow.c -
 
   $Author: ktou $
-  $Date: 2007/09/08 12:44:19 $
+  $Date: 2007/09/08 12:49:10 $
 
   Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
@@ -514,8 +514,7 @@ gwin_get_size(self)
 {
     int width, height;
     gtk_window_get_size(_SELF(self), &width, &height);
-    return rb_ary_new3(2, &width ? INT2NUM(width) : Qnil, 
-                       &height ? INT2NUM(height) : Qnil);
+    return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
 static VALUE

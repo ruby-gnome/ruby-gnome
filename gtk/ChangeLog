@@ -2,6 +2,7 @@
 
 	* src/rbgtkwindow.c (gwin_get_frame_dimensions): removed needless
 	condition checks.
+	(gwin_get_size): ditto.
 
 2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
 
