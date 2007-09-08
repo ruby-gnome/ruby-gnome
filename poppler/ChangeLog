@@ -1,3 +1,7 @@
+2007-09-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-page.c: supported 0.6.0. Bug 1790607.
+
 2007-07-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler.h, src/rbpoppler-page.c: worked with poppler <

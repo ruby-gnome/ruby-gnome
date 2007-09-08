@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2007/07/27 14:45:35 $
+  $Date: 2007/09/08 15:06:45 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -33,7 +33,7 @@
 #define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
 #define FCT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_CHOICE_TYPE))
 
-static VALUE cPSFile;
+static VALUE cPSFile, cRectangle;
 
 #if POPPLER_CHECK_VERSION(0, 5, 9)
 VALUE cUnknownField, cTextField, cButtonField, cChoiceField, cSignatureField;
@@ -145,12 +145,30 @@ static VALUE
 page_get_text(int argc, VALUE *argv, VALUE self)
 {
     gchar *text;
-    VALUE rb_text, rb_rect;
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+    PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
+#endif
+    VALUE rb_text, arg1, arg2, rb_rect;
     PopplerPage *page;
 
-    rb_scan_args(argc, argv, "01", &rb_rect);
+    rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
     page = SELF(self);
+    if (NIL_P(arg1)) {
+        rb_rect = arg2;
+    } else {
+        if (RTEST(rb_obj_is_kind_of(arg2, cRectangle))) {
+            rb_rect = arg2;
+        } else {
+            rb_rect = Qnil;
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+            if (!NIL_P(arg2)) {
+                style = RVAL2SELSTYLE(arg2);
+            }
+#endif
+        }
+    }
+
     if (NIL_P(rb_rect)) {
         PopplerRectangle rect;
         double width, height;
@@ -160,9 +178,17 @@ page_get_text(int argc, VALUE *argv, VALUE self)
         poppler_page_get_size(page, &width, &height);
         rect.x2 = width;
         rect.y2 = height;
-        text = poppler_page_get_text(page, &rect);
+        text = poppler_page_get_text(page,
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+                                     style,
+#endif
+                                     &rect);
     } else {
-        text = poppler_page_get_text(page, RVAL2RECT(rb_rect));
+        text = poppler_page_get_text(page,
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+                                     style,
+#endif
+                                     RVAL2RECT(rb_rect));
     }
 
     rb_text = CSTR2RVAL(text);
@@ -194,10 +220,29 @@ page_get_form_field_mapping(VALUE self)
 #endif
 
 static VALUE
-page_get_selection_region(VALUE self, VALUE scale, VALUE selection)
+page_get_selection_region(int argc, VALUE *argv, VALUE self)
 {
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+    PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
+#endif
+    VALUE arg2, arg3, scale, selection;
+
+    rb_scan_args(argc, argv, "21", &scale, &arg2, &arg3);
+
+    if (NIL_P(arg3)) {
+        selection = arg2;
+    } else {
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+        style = RVAL2SELSTYLE(arg2);
+#endif
+        selection = arg3;
+    }
+
     return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
                                                          NUM2DBL(scale),
+#if POPPLER_CHECK_VERSION(0, 5, 9)
+                                                         style,
+#endif
                                                          RVAL2RECT(selection)));
 }
 
@@ -616,7 +661,7 @@ choice_field_get_text(VALUE self)
 void
 Init_poppler_page(VALUE mPoppler)
 {
-    VALUE cPage, cRectangle, cLinkMapping;
+    VALUE cPage, cLinkMapping;
 #if POPPLER_CHECK_VERSION(0, 5, 9)
     VALUE cPageTransition, cImageMapping, cFormFieldMapping, cFormField;
 #endif
@@ -661,7 +706,7 @@ Init_poppler_page(VALUE mPoppler)
                      page_get_form_field_mapping, 0);
 #endif
     rb_define_method(cPage, "get_selection_region",
-                     page_get_selection_region, 2);
+                     page_get_selection_region, -1);
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
 #if POPPLER_CHECK_VERSION(0, 5, 9)
