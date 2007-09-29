@@ -72,16 +72,16 @@ rb_gst_querytype_find (VALUE self, VALUE nick)
 static VALUE
 rb_gst_querytype_each (VALUE self)
 {
-	const GList *list;
+    GstIterator *iter;
+    gpointer value;
 
-	for (list = gst_query_type_get_definitions ();
-	     list != NULL;
-	     list = g_list_next (list))
-	{
-		GstQueryTypeDefinition *def = (GstQueryTypeDefinition *) list->data;
-		rb_yield (RGST_QUERY_TYPE_NEW (&(def->value)));
-	} 
-	return Qnil;
+    iter = gst_query_type_iterate_definitions();
+    while (gst_iterator_next(iter, &value) == GST_ITERATOR_OK) {
+        GstQueryTypeDefinition *definition = value;
+        rb_yield(RGST_QUERY_TYPE_NEW(&(definition->value)));
+    }
+    gst_iterator_free(iter);
+    return Qnil;
 }
 
 /* Method: type_id

@@ -72,15 +72,16 @@ rb_gst_format_find (VALUE self, VALUE nick)
 static VALUE
 rb_gst_format_each (VALUE self)
 {
-	const GList *list;
+    GstIterator *iter;
+    gpointer value;
 
-	for (list = gst_format_get_definitions ();
-	     list != NULL;
-	     list = g_list_next (list))	{
-		GstFormatDefinition *def = (GstFormatDefinition *) list->data;
-		rb_yield (RGST_FORMAT_NEW (&(def->value)));
-	}
-	return Qnil;
+    iter = gst_format_iterate_definitions();
+    while (gst_iterator_next(iter, &value) == GST_ITERATOR_OK) {
+        GstFormatDefinition *def = (GstFormatDefinition *)value;
+        rb_yield(RGST_FORMAT_NEW(&(def->value)));
+    }
+    gst_iterator_free(iter);
+    return Qnil;
 }
 
 /* Method: type_id

@@ -207,20 +207,6 @@ rb_gst_clock_entry_wait_async (VALUE self)
     return Qnil;
 }
 
-/*
- * Method: unlock
- *
- * Unlocks the entry. 
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_clock_entry_unlock (VALUE self)
-{
-    gst_clock_id_unlock (RGST_CLOCK_ENTRY (self));
-    return self;
-}
-
 /* Method: time
  * Returns: the requested time of the entry, in nanoseconds.
  */
@@ -250,13 +236,13 @@ rb_gst_clock_entry_get_clock (VALUE self)
 }
 
 /* Method: status
- * Returns: the status of the entry (see Gst::ClockEntry::Status).
+ * Returns: the status of the entry (see Gst::ClockEntry::Return).
  */
 static VALUE
 rb_gst_clock_entry_get_status (VALUE self)
 {
-    return GENUM2RVAL (GST_CLOCK_ENTRY_STATUS (RGST_CLOCK_ENTRY (self)),
-                       GST_TYPE_CLOCK_ENTRY_STATUS);
+    return GENUM2RVAL(GST_CLOCK_ENTRY_STATUS(RGST_CLOCK_ENTRY (self)),
+                      GST_TYPE_CLOCK_RETURN);
 }
 
 void
@@ -270,7 +256,6 @@ Init_gst_clock_entry (void)
     rb_define_method (c, "wait", rb_gst_clock_entry_wait, 0);
     rb_define_method (c, "wait_async", rb_gst_clock_entry_wait_async, 0);
     rb_define_method (c, "unschedule", rb_gst_clock_entry_unschedule, 0);
-    rb_define_method (c, "unlock", rb_gst_clock_entry_unlock, 0);
     rb_define_method (c, "clock", rb_gst_clock_entry_get_clock, 0);
     rb_define_method (c, "time", rb_gst_clock_entry_get_time, 0);
     rb_define_method (c, "interval", rb_gst_clock_entry_get_interval, 0);
@@ -278,6 +263,6 @@ Init_gst_clock_entry (void)
 
     G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", c);
     G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
-    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_STATUS, "Status", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_STATUS, "GST_CLOCK_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
+    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
 }

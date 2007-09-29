@@ -36,10 +36,10 @@
 static VALUE
 rb_gst_tag_setter_merge (VALUE self, VALUE structure, VALUE merge_mode)
 {
-	gst_tag_setter_merge (RGST_TAG_SETTER (self),
-			      ruby_hash_to_gst_structure_with_name (structure, GST_TAG_LIST_STRUCTURE_NAME),
-			      RVAL2GENUM (merge_mode, GST_TYPE_TAG_MERGE_MODE));
-	return self;
+    gst_tag_setter_merge_tags(RGST_TAG_SETTER(self),
+                              ruby_hash_to_gst_structure_with_name(structure, GST_TAG_LIST_STRUCTURE_NAME),
+                              RVAL2GENUM(merge_mode, GST_TYPE_TAG_MERGE_MODE));
+    return self;
 }
 
 void

@@ -158,7 +158,7 @@ rb_gst_caps_is_empty (VALUE self)
 static VALUE
 rb_gst_caps_is_simple (VALUE self)
 {
-    return CBOOL2RVAL (gst_caps_is_simple (RGST_CAPS (self)));
+    return CBOOL2RVAL(GST_CAPS_IS_SIMPLE(RGST_CAPS (self)));
 }
 
 /*
@@ -288,23 +288,6 @@ rb_gst_caps_normalize (VALUE self)
 }
 
 /*
- * Method: simplify
- *
- * Creates a new Gst::Caps that represents the same set of formats as 
-self, but
- * simpler.  Component structures that are indentical are merged. 
-Component
- * structures that have ranges or lists that can be merged are also merged.
- *
- * Returns: a new Gst::Caps object.
- */
-static VALUE
-rb_gst_caps_simplify (VALUE self)
-{
-    return RGST_CAPS_NEW (gst_caps_simplify (RGST_CAPS (self)));
-}
-
-/*
  * Method: simplify!
  *
  * Modifies the current caps inplace into a representation that represents
@@ -406,7 +389,6 @@ Init_gst_caps (void)
     rb_define_method (c, "intersect", rb_gst_caps_intersect, 1);
     rb_define_method (c, "union", rb_gst_caps_union, 1);
     rb_define_method (c, "normalize", rb_gst_caps_normalize, 0);
-    rb_define_method (c, "simplify", rb_gst_caps_simplify, 0);
     rb_define_method (c, "simplify!", rb_gst_caps_do_simplify, 0);
     rb_define_method (c, "replace!", rb_gst_caps_replace, 1);
     rb_define_method (c, "to_string", rb_gst_caps_to_string, 0);

@@ -34,42 +34,11 @@ rb_gst_pluginfeature_get_name (VALUE self)
 	return CSTR2RVAL (GST_PLUGIN_FEATURE_NAME (feature));
 }
 
-/*
- * Method: ensure_loaded
- *
- * Checks if the plugin containing the feature is loaded.
- * If not, the plugin will be loaded.
- *
- * Returns: a boolean indicating if the feature is loaded.
- */
-static VALUE
-rb_gst_pluginfeature_ensure_loaded (VALUE self)
-{
-	return CBOOL2RVAL (gst_plugin_feature_ensure_loaded (
-		RGST_PLUGIN_FEATURE (self)));
-}
-
-/*
- * Method: unload_thyself
- *
- * Unloads the feature. This will decrease the refcount in the 
- * plugin and will eventually unload the plugin.
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_pluginfeature_unload_thyself (VALUE self)
-{
-	gst_plugin_feature_unload_thyself( RGST_PLUGIN_FEATURE (self));
-	return self;
-}
-
 gboolean
 is_valid_pluginfeature_type (const GType type)
 {
-	return type == GST_TYPE_ELEMENT_FACTORY
-		|| type == GST_TYPE_INDEX_FACTORY
-		|| type == GST_TYPE_SCHEDULER_FACTORY;
+	return type == GST_TYPE_ELEMENT_FACTORY ||
+            type == GST_TYPE_INDEX_FACTORY;
 }
 
 VALUE
@@ -78,8 +47,6 @@ instanciate_pluginfeature (GstPluginFeature *feature)
 
 	if (GST_IS_ELEMENT_FACTORY (feature))
 		return RGST_ELEMENT_FACTORY_NEW (feature);
-	else if (GST_IS_SCHEDULER_FACTORY (feature))
-		return RGST_SCHEDULER_FACTORY_NEW (feature);
 	else if (GST_IS_INDEX_FACTORY (feature))
 		return RGST_INDEX_FACTORY_NEW (feature);
 	else if (GST_IS_TYPE_FIND_FACTORY (feature))
@@ -96,6 +63,4 @@ Init_gst_pluginfeature (void)
 {
 	VALUE c = G_DEF_CLASS (GST_TYPE_PLUGIN_FEATURE, "PluginFeature", mGst);
 	rb_define_method (c, "name", rb_gst_pluginfeature_get_name, 0);
-	rb_define_method (c, "ensure_loaded", rb_gst_pluginfeature_ensure_loaded, 0);
-	rb_define_method (c, "unload_thyself", rb_gst_pluginfeature_unload_thyself, 0);
 }

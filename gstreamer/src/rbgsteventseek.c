@@ -36,24 +36,33 @@ VALUE cGstEventSeek;
  * Returns: a newly allocated Gst::EventSeek object.
  */
 static VALUE
-rb_gst_eventseek_new (VALUE self, VALUE type, VALUE offset)
+rb_gst_event_seek_new(VALUE self, VALUE rate, VALUE format, VALUE flags,
+                      VALUE start_type, VALUE start,
+                      VALUE stop_type, VALUE stop)
 {
-	GstEvent *event = gst_event_new_seek (FIX2INT (type),
-					      NUM2ULL (offset));
-	if (event != NULL)
-		G_INITIALIZE (self, event);
-	return Qnil;
+    GstEvent *event;
+
+    event = gst_event_new_seek(NUM2DBL(rate),
+                               GENUM2RVAL(format, GST_TYPE_FORMAT),
+                               GFLAGS2RVAL(flags, GST_TYPE_SEEK_FLAGS),
+                               GENUM2RVAL(start_type, GST_TYPE_SEEK_TYPE),
+                               NUM2LL(start),
+                               GENUM2RVAL(stop_type, GST_TYPE_SEEK_TYPE),
+                               NUM2LL(stop));
+    if (event != NULL)
+        G_INITIALIZE(self, event);
+    return Qnil;
 }
 
 void
 Init_gst_eventseek (void)
 {
-	VALUE c = rb_define_class_under (mGst, "EventSeek", GTYPE2CLASS(GST_TYPE_EVENT));
-	
-	rb_define_method (c, "initialize", rb_gst_eventseek_new, 2);
+    VALUE c = rb_define_class_under(mGst, "EventSeek", rb_cGstEvent);
 
-	G_DEF_CLASS (GST_TYPE_SEEK_TYPE, "Type", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
+    rb_define_method(c, "initialize", rb_gst_event_seek_new, 7);
 
-	cGstEventSeek = c;
+    G_DEF_CLASS(GST_TYPE_SEEK_TYPE, "Type", c);
+    G_DEF_CONSTANTS(c, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
+
+    cGstEventSeek = c;
 }

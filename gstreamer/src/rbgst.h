@@ -33,6 +33,7 @@
 /* Gst module */
 extern VALUE mGst;
 
+extern VALUE rb_cGstEvent;
 /* Gst::EventSeek class (needed for inheritance) */
 extern VALUE cGstEventSeek;
 
@@ -48,7 +49,6 @@ extern VALUE cGstEventSeek;
 #define GST_TYPE_CLOCK_ENTRY    (gst_clock_entry_get_type())
 #define GST_TYPE_EVENT_MASK     (gst_event_mask_get_type())
 #define GST_TYPE_FORMAT2        (gst_format_get_type2())
-#define GST_TYPE_PLUGIN         (gst_plugin_get_type())
 #define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
@@ -68,7 +68,7 @@ extern VALUE cGstEventSeek;
 #define RGST_PAD(o)                 (GST_PAD(RVAL2GOBJ(o)))
 #define RGST_PAD_TEMPLATE(o)        (GST_PAD_TEMPLATE(RVAL2GOBJ(o)))
 #define RGST_PIPELINE(o)            (GST_PIPELINE(RVAL2GOBJ(o)))
-#define RGST_PLUGIN(o)              (GST_PLUGIN(RVAL2BOXED(o, GST_TYPE_PLUGIN)))
+#define RGST_PLUGIN(o)              (GST_PLUGIN(RVAL2GOBJ(o)))
 #define RGST_PLUGIN_FEATURE(o)      (GST_PLUGIN_FEATURE(RVAL2GOBJ(o)))
 #define RGST_QUERY_TYPE(o)          (GST_QUERY_TYPE2(RVAL2BOXED(o, GST_TYPE_QUERY_TYPE2)))
 #define RGST_REGISTRY(o)            (GST_REGISTRY(RVAL2GOBJ(o)))
@@ -97,7 +97,7 @@ extern VALUE cGstEventSeek;
 #define RGST_PAD_NEW(o)                 (RGST_GOBJ_NEW(GST_PAD(o)))
 #define RGST_PAD_TEMPLATE_NEW(o)        (RGST_GOBJ_NEW(GST_PAD_TEMPLATE(o)))
 #define RGST_PIPELINE_NEW(o)            (RGST_GOBJ_NEW(GST_PIPELINE(o)))
-#define RGST_PLUGIN_NEW(o)              (BOXED2RVAL(GST_PLUGIN(o), GST_TYPE_PLUGIN))
+#define RGST_PLUGIN_NEW(o)              (RGST_GOBJ_NEW(GST_PLUGIN(o)))
 #define RGST_PLUGIN_FEATURE_NEW(o)      (RGST_GOBJ_NEW(GST_PLUGIN_FEATURE(o)))
 #define RGST_QUERY_TYPE_NEW(o)          (BOXED2RVAL(GST_QUERY_TYPE2(o), GST_TYPE_QUERY_TYPE2))
 #define RGST_REGISTRY_NEW(o)            (RGST_GOBJ_NEW(GST_REGISTRY(o)))
@@ -110,7 +110,6 @@ extern VALUE cGstEventSeek;
 GType gst_clock_entry_get_type ();
 GType gst_event_mask_get_type ();
 GType gst_format_get_type2 ();
-GType gst_plugin_get_type ();
 GType gst_query_type_get_type2 ();
 GType gst_type_get_type ();
 

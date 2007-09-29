@@ -90,18 +90,18 @@ def print_pad(p)
     puts "Pad Template: " + p.pad_template.name if p.pad_template
     prefix do
         puts "Implementation:"
-        if p.provides_formats? 
-            prefix do
-                puts "Provides seeking/conversion/query formats:"
-                prefix { p.each_format { |f| print_format(f) } }
-            end
-        end
-        if p.provides_event_masks?
-            prefix do
-                puts "Provides event masks:"
-                prefix { p.each_event_mask { |m| print_event_mask(m) } }
-            end
-        end
+#         if p.provides_formats? 
+#             prefix do
+#                 puts "Provides seeking/conversion/query formats:"
+#                 prefix { p.each_format { |f| print_format(f) } }
+#             end
+#         end
+#         if p.provides_event_masks?
+#             prefix do
+#                 puts "Provides event masks:"
+#                 prefix { p.each_event_mask { |m| print_event_mask(m) } }
+#             end
+#         end
         if p.provides_query_types?
             prefix do
                 puts "Provides query types:"
@@ -112,91 +112,91 @@ def print_pad(p)
 end
 
 def print_element_info(f)
-    raise "Could not create element" unless e = f.create
-    puts "Factory Details:"
-    prefix do
-        f.details.each do |key, val|
-            puts key.capitalize.concat(":").ljust(15) + val
-        end
+  raise "Could not create element" unless e = f.create
+  puts "Factory Details:"
+  prefix do
+    f.details.each do |key, val|
+      puts key.capitalize.concat(":").ljust(15) + val
     end
-    puts ""
-    print_hierarchy(e)
-    puts ""
-    puts "Pad Templates:"
-    prefix do 
-        f.each_pad_template do |p|
-            dir = case p.direction
-                when Gst::Pad::SRC  then "SRC"
-                when Gst::Pad::SINK then "SINK"
-                else "UNKNOWN"
+  end
+  puts ""
+  print_hierarchy(e)
+  puts ""
+  puts "Pad Templates:"
+  prefix do
+    f.each_pad_template do |name, direction, presence, caps|
+      dir = case direction
+            when Gst::Pad::SRC  then "SRC"
+            when Gst::Pad::SINK then "SINK"
+            else "UNKNOWN"
             end
-            puts dir + " template: " + p.name
-            pres = case p.presence
-                when Gst::Pad::ALWAYS    then "always"
-                when Gst::Pad::SOMETIMES then "sometimes"
-                when Gst::Pad::REQUEST   then "on request"
-                else "unknown"
-            end
-            puts "Avaibility: " + pres
-            if p.has_caps?
-                puts "Capabilities:" + p.caps.to_s
-            end
-        end
+      puts dir + " template: " + name
+      pres = case presence
+             when Gst::Pad::ALWAYS    then "always"
+             when Gst::Pad::SOMETIMES then "sometimes"
+             when Gst::Pad::REQUEST   then "on request"
+             else "unknown"
+             end
+      puts "Avaibility: " + pres
+      if caps
+        puts "Capabilities: #{caps}"
+      end
     end
-    puts ""
-    puts "Element Flags:"
-    prefix do
-        flags = {
-            e.complex?          => "GST_ELEMENT_COMPLEX", 
-            e.decoupled?        => "GST_ELEMENT_DECOUPLED", 
-            e.thread_suggested? => "GST_ELEMENT_THREADSUGGESTED",
-            e.event_aware?      => "GST_ELEMENT_EVENT_AWARE" 
-        }
-        flags.each { |b, v| puts v if b }
-        puts "no flags set" unless flags.has_key?(true) 
+  end
+#   puts ""
+#   puts "Element Flags:"
+#   prefix do
+#     flags = {
+#       e.complex?          => "GST_ELEMENT_COMPLEX", 
+#       e.decoupled?        => "GST_ELEMENT_DECOUPLED", 
+#       e.thread_suggested? => "GST_ELEMENT_THREADSUGGESTED",
+#       e.event_aware?      => "GST_ELEMENT_EVENT_AWARE" 
+#     }
+#     flags.each { |b, v| puts v if b }
+#     puts "no flags set" unless flags.has_key?(true) 
+#   end
+  puts ""
+  puts "Clock Interaction:"
+  prefix do
+    puts "element requires a clock" if e.requires_clock? 
+    if e.provides_clock?
+      if c = e.clock   
+        puts "element provides a clock: " + c.name 
+      else
+        puts "element is supposed to provide a clock but returned nil"
+      end
     end
-    puts ""
-    puts "Clock Interaction:"
-    prefix do
-        puts "element requires a clock" if e.requires_clock? 
-        if e.provides_clock?
-            if c = e.clock   
-                puts "element provides a clock: " + c.name 
-            else
-                puts "element is supposed to provide a clock but returned nil"
-            end
-        end
-        puts "none" unless (e.requires_clock? or e.provides_clock?)        
+    puts "none" unless (e.requires_clock? or e.provides_clock?)        
+  end
+  puts ""
+  puts "Indexing capabilities:"
+  prefix { puts((e.indexable?) ? "element can do indexing" : "none") }
+  puts ""
+  puts "Pads:"
+  prefix do
+    if e.pads.empty?
+      puts "none"
+    else
+      e.pads.each { |pad| print_pad(pad) }
     end
-    puts ""
-    puts "Indexing capabilities:"
-    prefix { puts((e.indexable?) ? "element can do indexing" : "none") }
-    puts ""
-    puts "Pads:"
-    prefix do
-        if e.pads.empty?
-            puts "none"
-        else
-            e.pads.each { |pad| print_pad(pad) }
-        end   
-    end    
-    puts ""
-    puts "Element Arguments:"
-    prefix do 
-        e.each_property do |key, descr, val|
-            puts key.concat(":").ljust(15) + descr
-            puts " ".ljust(15) + "#{val.class.to_s} (default: '#{val}')"
-        end
+  end
+#   puts ""
+#   puts "Element Arguments:"
+#   prefix do
+#     e.each_property do |key, descr, val|
+#       puts key.concat(":").ljust(15) + descr
+#       puts " ".ljust(15) + "#{val.class.to_s} (default: '#{val}')"
+#     end
+#   end
+  puts ""
+  puts "Signals:"
+  prefix do
+    if e.class.signals.empty?
+      puts "none"
+    else
+      e.class.signals.each { |x| puts x }
     end
-    puts ""
-    puts "Signals:"
-    prefix do
-        if e.class.signals.empty?
-            puts "none"
-        else
-            e.class.signals.each { |x| puts x }
-        end
-    end
+  end
 end
 
 def print_plugin_info(p)
@@ -229,10 +229,10 @@ def print_plugin_info(p)
 end
 
 def print_element_list
-    Gst::Registry.each_plugin do |p|
-        puts p.name + ":" 
-        prefix { p.each_feature { |f| puts f } } 
-    end
+  Gst::Registry.default.each_plugin do |p|
+    puts p.name + ":" 
+    prefix { p.each_feature { |f| puts f } } 
+  end
 end
 
 def print_help
@@ -245,8 +245,6 @@ EOS
     exit 1
 end
 
-Gst.init
-
 case ARGV.length
     when 0 then print_element_list
     when 1 
@@ -254,7 +252,7 @@ case ARGV.length
         if n.sub!(/\.so$/, "").nil? and f = Gst::ElementFactory.find(n) 
             print_element_info(f)
         else
-            if p = Gst::Registry.find_plugin(n)
+            if p = Gst::Registry.default.find_plugin(n)
                 print_plugin_info(p)
             else
                 $stderr.puts("No such element or plugin `#{n}'")

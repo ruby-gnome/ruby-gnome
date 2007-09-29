@@ -23,23 +23,7 @@
 /* Class: Gst::Event
  * Event definitions.
  */
-
-/*
- * Class method: new(type)
- * type: an event type (see Gst::Event::Type).
- *
- * Allocates a new event of the given type.
- *
- * Returns: a newly allocated Gst::Event object.
- */
-static VALUE
-rb_gst_event_new (VALUE self, VALUE type)
-{
-	GstEvent *event = gst_event_new (RVAL2GENUM (type, GST_TYPE_EVENT_TYPE));
-	if (event != NULL)
-		G_INITIALIZE (self, event);
-	return Qnil;
-}
+VALUE rb_cGstEvent;
 
 /* Method: src
  * Returns: the source Gst::Object that generated this event.
@@ -66,13 +50,14 @@ void
 Init_gst_event (void)
 {
 	VALUE c = G_DEF_CLASS (GST_TYPE_EVENT, "Event", mGst);
-	
-	rb_define_method (c, "initialize", rb_gst_event_new, 1);
+
 	rb_define_method (c, "src", rb_gst_event_src, 0);
 	rb_define_method (c, "timestamp", rb_gst_event_timestamp, 0);
 
 	G_DEF_CLASS (GST_TYPE_EVENT_TYPE, "Type", c);
 	G_DEF_CONSTANTS (c, GST_TYPE_EVENT_TYPE, "GST_EVENT_");
-	G_DEF_CLASS (GST_TYPE_EVENT_FLAG, "Flag", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_EVENT_FLAG, "GST_");
+	G_DEF_CLASS (GST_TYPE_EVENT_TYPE_FLAGS, "Flags", c);
+	G_DEF_CONSTANTS (c, GST_TYPE_EVENT_TYPE_FLAGS, "GST_EVENT_");
+
+        rb_cGstEvent = c;
 }

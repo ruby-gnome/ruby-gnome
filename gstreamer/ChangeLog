@@ -1,3 +1,9 @@
+2007-09-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb, README, src/: made build-able with
+	gstreamer-0.10. only just build-able.
+	* sample/gst-inspect.rb: partially worked.
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*.c: use rb_block_proc() directly instead of using G_BLOCK_PROC().

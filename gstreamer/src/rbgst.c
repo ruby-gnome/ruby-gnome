@@ -32,7 +32,6 @@ Init_gst_classes (void)
     extern void Init_gst_caps (void);
     extern void Init_gst_clock (void);
     extern void Init_gst_clock_entry (void);
-    extern void Init_gst_cpu (void);
     extern void Init_gst_element (void);
     extern void Init_gst_elementfactory (void);
     extern void Init_gst_event (void);
@@ -75,14 +74,10 @@ Init_gst_classes (void)
     Init_gst_caps ();
     Init_gst_clock ();
     Init_gst_clock_entry ();
-    Init_gst_cpu ();
     Init_gst_element ();
     Init_gst_elementfactory ();
-    Init_gst_event ();
-    Init_gst_eventmask ();
-    Init_gst_eventseek ();
-    Init_gst_eventsegmentseek ();
-    Init_gst_eventsize ();
+    /* Init_gst_event (); */
+    /* Init_gst_eventseek (); */
     Init_gst_format ();
     Init_gst_index ();
     Init_gst_indexentry ();
@@ -96,13 +91,9 @@ Init_gst_classes (void)
     Init_gst_pluginfeature ();
     Init_gst_querytype ();
     Init_gst_registry ();
-    Init_gst_registry_pool ();
-    Init_gst_scheduler ();
-    Init_gst_schedulerfactory ();
     Init_gst_systemclock ();
     Init_gst_tag ();
     Init_gst_tag_setter ();
-    Init_gst_thread ();
     Init_gst_typefindfactory ();
     Init_gst_xml ();
 
@@ -136,6 +127,12 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
     gint i, gargc;
     VALUE argary;
     gchar **gargv;
+    GError *error = NULL;
+    static gboolean initialized = FALSE;
+
+    if (initialized)
+        return Qtrue;
+    initialized = TRUE;
 
     /*
      * Convert arguments in a Ruby array.
@@ -168,10 +165,10 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
     gargc++;
 
     /*
-     * Now, we can initialize GStreamer. 
+     * Now, we can initialize GStreamer.
      */
-    if (gst_init_check (&gargc, &gargv) == FALSE)
-        rb_raise (rb_eRuntimeError, "failed to initialize GStreamer");
+    if (!gst_init_check(&gargc, &gargv, &error))
+        RAISE_GERROR(error);
 
     /*
      * Initialize all included classes 
@@ -187,53 +184,20 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
  * Gets the version number of the GStreamer library, in an array
  * of 3 fixnums, which represent major, minor and macro numbers. 
  *
- *	# Prints GStreamer version in a String 'major.minor.macro'
+ *	# Prints GStreamer version in a String 'major.minor.macro.nano'
  *	p Gst.version.join('.')
  *
- * Returns: an Array of 3 fixnums (major, minor and macro numbers).
+ * Returns: an Array of 4 fixnums (major, minor, macro and nano numbers).
  */
 static VALUE
 rb_gst_version (VALUE self)
 {
-    guint major, minor, micro;
-    VALUE arr;
+    guint major, minor, micro, nano;
 
-    gst_version (&major, &minor, &micro);
-    arr = rb_ary_new ();
-    rb_ary_push (arr, INT2FIX (major));
-    rb_ary_push (arr, INT2FIX (minor));
-    rb_ary_push (arr, INT2FIX (micro));
-
-    return arr;
-}
-
-/* Class method: has_threads?
- * Returns: true if GStreamer has threads enabled, false otherwise.
- */
-static VALUE
-rb_gst_has_threads (VALUE self)
-{
-    return CBOOL2RVAL (gst_has_threads ());
-}
-
-/*
- * Class method: use_threads(state)
- * state: a boolean state.
- *
- * Instructs the core to turn on/off threading. 
- *
- * When threading is turned off, all thread operations such as 
- * mutexes and conditionals are turned into NOPs. 
- * Use this if you want absolute minimal overhead and you don't 
- * use any threads in the pipeline.
- *
- * Returns: the provided boolean value.
- */
-static VALUE
-rb_gst_use_threads (VALUE self, VALUE value)
-{
-    gst_use_threads (RVAL2CBOOL (value));
-    return value;
+    gst_version(&major, &minor, &micro, &nano);
+    return rb_ary_new3(4,
+                       INT2NUM(major), INT2NUM(minor),
+                       INT2NUM(micro), INT2NUM(nano));
 }
 
 void
@@ -241,10 +205,8 @@ Init_gst (void)
 {
     mGst = rb_define_module ("Gst");
 
-    rb_define_module_function (mGst, "init", rb_gst_init, -1);
-    rb_define_module_function (mGst, "version", rb_gst_version, 0);
-    rb_define_module_function (mGst, "has_threads?", rb_gst_has_threads, 0);
-    rb_define_module_function (mGst, "use_threads", rb_gst_use_threads, 1);
+    rb_define_module_function(mGst, "init", rb_gst_init, -1);
+    rb_define_module_function(mGst, "version", rb_gst_version, 0);
 
     /*
      * Constant: SECOND

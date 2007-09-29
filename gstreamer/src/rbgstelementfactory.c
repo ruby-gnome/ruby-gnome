@@ -119,22 +119,28 @@ rb_gst_elementfactory_to_s (VALUE self)
  *
  * Requests all pad templates of factory.
  *
- * Returns: an array of Gst::PadTemplate objects.  
+ * Returns: an array of Gst::PadTemplate objects.
  */
 static VALUE
 rb_gst_elementfactory_get_pad_templates (VALUE self)
 {
-	GstElementFactory *factory;
-	GList *list;
-	VALUE arr;
+    GstElementFactory *factory;
+    const GList *list;
+    VALUE arr;
 
-	factory = RGST_ELEMENT_FACTORY (self); 
-	arr = rb_ary_new ();
-	for (list = factory->padtemplates; list != NULL; list = g_list_next (list)) {
-		GstPadTemplate *pad = GST_PAD_TEMPLATE (list->data);
-		rb_ary_push (arr, RGST_PAD_TEMPLATE_NEW (pad));
-	}
-	return arr;
+    factory = RGST_ELEMENT_FACTORY(self);
+    for (list = gst_element_factory_get_static_pad_templates(factory);
+         list != NULL;
+         list = g_list_next(list)) {
+        GstStaticPadTemplate *pad = list->data;
+        rb_ary_push(arr,
+                    rb_ary_new3(3,
+                                CSTR2RVAL(pad->name_template),
+                                GENUM2RVAL(pad->direction, GST_TYPE_PAD_DIRECTION),
+                                GENUM2RVAL(pad->presence, GST_TYPE_PAD_PRESENCE)
+                                /* RGST_CAPS_NEW(&(pad->static_caps.caps)) */));
+    }
+    return arr;
 }
 
 /*

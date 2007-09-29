@@ -26,7 +26,7 @@
  */
 
 static gboolean
-foreach_pair (GQuark field_id, GValue *value, gpointer user_data)
+foreach_pair (GQuark field_id, const GValue *value, gpointer user_data)
 {
     VALUE hash;
     

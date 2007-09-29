@@ -25,19 +25,6 @@
  */
 
 /*
- * Method: destroyed?
- *
- * Checks if the Gst::Object::FLAG_DESTROYED flag is set on the object.
- *
- * Returns: true if the flag is set, false otherwise.
- */
-static VALUE
-rb_gst_object_is_destroyed (VALUE self)
-{
-	return CBOOL2RVAL (GST_OBJECT_DESTROYED (RGST_OBJECT (self)));
-}
-
-/*
  * Method: floating?
  *
  * Checks if the Gst::Object::FLAG_FLOATING flag is set on the object.
@@ -47,7 +34,7 @@ rb_gst_object_is_destroyed (VALUE self)
 static VALUE
 rb_gst_object_is_floating (VALUE self)
 {
-	return CBOOL2RVAL (GST_OBJECT_FLOATING (RGST_OBJECT (self)));
+    return CBOOL2RVAL(GST_OBJECT_IS_FLOATING(RGST_OBJECT(self)));
 }
 
 void
@@ -55,7 +42,6 @@ Init_gst_object (void)
 {
 	VALUE c = G_DEF_CLASS (GST_TYPE_OBJECT, "Object", mGst);   
  
-	rb_define_method(c, "destroyed?", rb_gst_object_is_destroyed, 0);
 	rb_define_method(c, "floating?",  rb_gst_object_is_floating,  0);
 
 	G_DEF_CLASS (GST_TYPE_OBJECT_FLAGS, "Flags", c);

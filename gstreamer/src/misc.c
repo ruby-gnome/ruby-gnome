@@ -46,10 +46,10 @@ rbgst_new_gstobject (void *o)
 {
 	GType gtype = G_OBJECT_TYPE (o);
 	const gchar *gtypename = g_type_name (gtype);
-	if (strncmp (gtypename, "Gst", 3) == 0)
-		gtypename += 3;
-	if (!rb_const_defined_at (mGst, rb_intern (gtypename)))
-		G_DEF_CLASS (gtype, gtypename, mGst);
+        if (strncmp (gtypename, "Gst", 3) == 0)
+            gtypename += 3;
+        if (!rb_const_defined_at (mGst, rb_intern (gtypename)))
+            G_DEF_CLASS (gtype, gtypename, mGst);
 	return GOBJ2RVAL (o);
 }
 

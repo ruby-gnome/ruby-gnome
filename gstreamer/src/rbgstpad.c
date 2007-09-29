@@ -61,36 +61,6 @@ rb_gst_pad_get_padtemplate (VALUE self)
 }
 
 /*
- * Method: provides_formats?
- *
- * Checks if the pad supports formats not handled by
- * the default format dispatcher.
- *
- * Returns: true if supported, false otherwise.
- */
-static VALUE
-rb_gst_pad_provides_formats (VALUE self)
-{
-	GstPad *pad = RGST_PAD (self);
-	return CBOOL2RVAL (GST_RPAD_FORMATSFUNC (pad) != gst_pad_get_formats_default);
-}
-
-/*
- * Method: provides_event_masks?
- *
- * Checks if the pad supports event masks not handled by
- * the default event masks dispatcher.
- *
- * Returns: true if supported, false otherwise.
- */
-static VALUE
-rb_gst_pad_provides_event_masks (VALUE self)
-{
-	GstPad *pad = RGST_PAD (self);
-	return CBOOL2RVAL (GST_RPAD_EVENTMASKFUNC (pad) != gst_pad_get_event_masks_default);
-}
-
-/*
  * Method: provides_query_types?
  *
  * Checks if the pad supports query types not handled by
@@ -102,53 +72,7 @@ static VALUE
 rb_gst_pad_provides_query_types (VALUE self)
 {
 	GstPad *pad = RGST_PAD (self);
-	return CBOOL2RVAL (GST_RPAD_QUERYTYPEFUNC (pad) != gst_pad_get_query_types_default);
-}
-
-/*
- * Method: formats
- *
- * Gets the list of supported formats from the pad.
- *
- * Returns: an array of Gst::Format objects.
- */
-static VALUE
-rb_gst_pad_get_formats (VALUE self)
-{
-	const GstFormat *formats; 
-	VALUE arr;
-
-	arr = rb_ary_new ();
-	formats = gst_pad_get_formats (RGST_PAD (self));
-	
-	while (formats && *formats) {
-		rb_ary_push (arr, RGST_FORMAT_NEW (formats));
-		formats++;
-	}
-	return arr;
-}
-
-/*
- * Method: event_masks
- *
- * Gets the list of event masks from the pad.
- *
- * Returns: an array of Gst::EventMask objects.
- */
-static VALUE
-rb_gst_pad_get_event_masks (VALUE self) 
-{
-	const GstEventMask *masks; 
-	VALUE arr;
-
-	arr = rb_ary_new ();
-	masks = gst_pad_get_event_masks (RGST_PAD (self));
-	
-	while (masks && masks->type) {
-		rb_ary_push (arr, RGST_EVENT_MASK_NEW (masks));
-		masks++;
-	}
-	return arr;
+	return CBOOL2RVAL (GST_PAD_QUERYTYPEFUNC (pad) != gst_pad_get_query_types_default);
 }
 
 /*
@@ -174,34 +98,6 @@ rb_gst_pad_get_query_types (VALUE self)
 	return arr;
 }
 
-/*
- * Method: each_format { |format| ... }
- *
- * Calls the block for each supported format from the pad, passing
- * a reference to the Gst::Format object as parameter.
- *
- * Returns: always nil.
- */
-static VALUE
-rb_gst_pad_each_format (VALUE self)
-{
-	return rb_ary_yield (rb_gst_pad_get_formats (self));
-}   
-   
-/*
- * Method: each_event_mask { |event_mask| ... }
- *
- * Calls the block for each event mask from the pad, passing
- * a reference to the Gst::EventMask object as parameter.
- *
- * Returns: always nil.
- */ 
-static VALUE
-rb_gst_pad_each_event_mask (VALUE self)
-{
-	return rb_ary_yield (rb_gst_pad_get_event_masks (self));
-}   
-	
 /*
  * Method: each_query_type { |query_type| ... } 
  *
@@ -231,25 +127,6 @@ rb_gst_pad_link (VALUE self, VALUE other_pad)
 	GstPad *sinkpad = RGST_PAD (other_pad);
 	return CBOOL2RVAL (gst_pad_link (srcpad, sinkpad)); 
 }
- 
-/*
- * Method: link_filtered(other_pad, caps)
- * other_pad: a Gst::Pad.
- * caps: a Gst::Caps.
- *
- * Links the current pad (source) to an other pad (sink), constrained by
- * the given filter caps.
- *
- * Returns: true if the pads have been linked, false otherwise.
- */  
-static VALUE
-rb_gst_pad_link_filtered (VALUE self, VALUE other_pad, VALUE rcaps)
-{
-	GstPad *srcpad = RGST_PAD (self);
-	GstPad *sinkpad = RGST_PAD (other_pad);
-    GstCaps *caps = RGST_CAPS (rcaps);
-	return CBOOL2RVAL (gst_pad_link_filtered (srcpad, sinkpad, caps)); 
-}
 
 /*
  * Method: unlink(other_pad)
@@ -269,59 +146,31 @@ rb_gst_pad_unlink(VALUE self, VALUE other_pad)
 }
 
 /*
- * Method: disabled?
- *
- * Checks if the Gst::Pad::FLAG_DISABLED flag is set on the object.
- *
- * Returns: true if the flag is set, false otherwise.
- */
-static VALUE
-rb_gst_pad_is_disabled (VALUE self)
-{
-	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_PAD (self), GST_PAD_DISABLED));
-}
-
-/*
- * Method: negotiating?
- *
- * Checks if the Gst::Pad::FLAG_NEGOTIATING flag is set on the object.
- *
- * Returns: true if the flag is set, false otherwise.
- */
-static VALUE
-rb_gst_pad_is_negotiating (VALUE self)
-{
-	return CBOOL2RVAL (GST_FLAG_IS_SET (RGST_PAD (self), GST_PAD_NEGOTIATING));
-}
-
-/*
- * Method: query(query_type, format=Gst::Format::DEFAULT)
- * query_type: a query type (see Gst::QueryType::Type).
- * format: a format (see Gst::Format::Type).
+ * Method: query(query)
+ * query: a query (see Gst::Query).
  *
  * Performs a query on the pad.
  *
  * Returns: the query result value, or nil if the query could not be performed.
  */
-static VALUE
-rb_gst_pad_query (int argc, VALUE *argv, VALUE self)
-{
-	VALUE query_type, format;
-	GstFormat gstformat;
-	gint64 value;
+/* static VALUE */
+/* rb_gst_pad_query(VALUE self, VALUE query) */
+/* { */
+/* 	GstFormat gstformat; */
+/* 	gint64 value; */
 
-	rb_scan_args (argc, argv, "11", &query_type, &format);
-	gstformat = NIL_P (format) ? GST_FORMAT_DEFAULT : RVAL2GENUM (format, GST_TYPE_FORMAT);
+/* 	rb_scan_args (argc, argv, "11", &query_type, &format); */
+/* 	gstformat = NIL_P (format) ? GST_FORMAT_DEFAULT : RVAL2GENUM (format, GST_TYPE_FORMAT); */
 
-	if (gst_pad_query (RGST_PAD(self),
-			   RVAL2GENUM (query_type, GST_TYPE_QUERY_TYPE),
-			   &gstformat,
-			   &value)) {
-		format = GENUM2RVAL (gstformat, GST_TYPE_FORMAT);
-		return ULL2NUM (value);
-	}
-	return Qnil;
-}
+/* 	if (gst_pad_query (RGST_PAD(self), */
+/* 			   RVAL2GENUM (query_type, GST_TYPE_QUERY_TYPE), */
+/* 			   &gstformat, */
+/* 			   &value)) { */
+/* 		format = GENUM2RVAL (gstformat, GST_TYPE_FORMAT); */
+/* 		return ULL2NUM (value); */
+/* 	} */
+/* 	return Qnil; */
+/* } */
 
 /*
  * Method: send_event(event)
@@ -363,21 +212,12 @@ Init_gst_pad (void)
 	rb_define_method (c, "direction", rb_gst_pad_get_direction, 0);
 	rb_define_method (c, "name", rb_gst_pad_get_name, 0);
 	rb_define_method (c, "pad_template", rb_gst_pad_get_padtemplate, 0);
-	rb_define_method (c, "provides_formats?", rb_gst_pad_provides_formats, 0);
-	rb_define_method (c, "provides_event_masks?", rb_gst_pad_provides_event_masks, 0);
 	rb_define_method (c, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
-	rb_define_method (c, "formats",	 rb_gst_pad_get_formats, 0);
-	rb_define_method (c, "event_masks", rb_gst_pad_get_event_masks, 0);
 	rb_define_method (c, "query_types", rb_gst_pad_get_query_types, 0);
-	rb_define_method (c, "each_format", rb_gst_pad_each_format, 0);
-	rb_define_method (c, "each_event_mask", rb_gst_pad_each_event_mask, 0);
 	rb_define_method (c, "each_query_type", rb_gst_pad_each_query_type, 0);
 	rb_define_method (c, "link", rb_gst_pad_link, 1);
-	rb_define_method (c, "link_filtered", rb_gst_pad_link_filtered, 2);
 	rb_define_method (c, "unlink", rb_gst_pad_unlink, 1);
-	rb_define_method (c, "disabled?", rb_gst_pad_is_disabled, 0);
-	rb_define_method (c, "negotiating?", rb_gst_pad_is_negotiating, 0);
-	rb_define_method (c, "query", rb_gst_pad_query,	-1);
+	/* rb_define_method (c, "query", rb_gst_pad_query, 1); */
 	rb_define_method (c, "send_event", rb_gst_pad_send_event, 1);
 	rb_define_method (c, "caps", rb_gst_pad_get_caps, 0);
 

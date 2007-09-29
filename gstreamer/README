@@ -7,12 +7,12 @@ Requirements
 ------------
 
     Ruby:       http://www.ruby-lang.org/
-    GStreamer:  http://gstreamer.freedesktop.org/ 
+    GStreamer:  http://gstreamer.freedesktop.org/
 
 Install
 -------
 
-    0. install Ruby (>= 1.8.x) and GStreamer (>= 0.8.x).
+    0. install Ruby (>= 1.8.x) and GStreamer (>= 0.10.x).
     1. ruby extconf.rb
     2. make
     3. su
@@ -22,7 +22,7 @@ Copying
 -------
 
     Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
-      
+
     This program is free software.
     You can distribute/modify this program under the terms of
     the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.

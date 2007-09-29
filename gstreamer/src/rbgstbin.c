@@ -59,27 +59,28 @@ rb_gst_bin_new (int argc, VALUE * argv, VALUE self)
 static VALUE
 rb_gst_bin_length (VALUE self)
 {
-    return
-        INT2FIX (g_list_length ((GList *) gst_bin_get_list (RGST_BIN (self))));
+    return INT2NUM(RGST_BIN(self)->numchildren);
 }
 
 /*
- * Method: elements
+ * Method: children
  *
  * Returns: an array of all Gst::Element objects in the container.
  */
 static VALUE
-rb_gst_bin_get_elements (VALUE self)
+rb_gst_bin_get_children (VALUE self)
 {
     const GList *list;
+    VALUE children;
 
-    VALUE arr = rb_ary_new ();
+    children = rb_ary_new();
+    for (list = RGST_BIN(self)->children;
+         list != NULL;
+         list = g_list_next(list)) {
+        rb_ary_push(children, RGST_ELEMENT_NEW(list->data));
+    }
 
-    for (list = gst_bin_get_list (RGST_BIN (self));
-         list != NULL; list = g_list_next (list))
-        rb_ary_push (arr, RGST_ELEMENT_NEW (list->data));
-
-    return arr;
+    return children;
 }
 
 /*
@@ -103,7 +104,7 @@ rb_gst_bin_add (int argc, VALUE * argv, VALUE self)
        }
        gst_bin_add (bin, RGST_ELEMENT (argv[i]));
     }
-    return rb_gst_bin_get_elements (self);
+    return rb_gst_bin_get_children(self);
 }
 
 /*
@@ -122,7 +123,7 @@ rb_gst_bin_remove (int argc, VALUE * argv, VALUE self)
 
     for (i = 0; i < argc; i++)
         gst_bin_remove (RGST_BIN (self), RGST_ELEMENT (argv[i]));
-    return rb_gst_bin_get_elements (self);
+    return rb_gst_bin_get_children(self);
 }
 
 /*
@@ -138,7 +139,7 @@ rb_gst_bin_remove_all (VALUE self)
     VALUE arr;
     int i;
 
-    arr = rb_gst_bin_get_elements (self);
+    arr = rb_gst_bin_get_children(self);
     for (i = 0; i < RARRAY (arr)->len; i++) {
         VALUE element = rb_ary_entry (arr, i);
         rb_gst_bin_remove (1, &element, self);
@@ -157,7 +158,7 @@ rb_gst_bin_remove_all (VALUE self)
 static VALUE
 rb_gst_bin_each_element (VALUE self)
 {
-    return rb_ary_yield (rb_gst_bin_get_elements (self));
+    return rb_ary_yield (rb_gst_bin_get_children (self));
 }
 
 /*
@@ -202,54 +203,38 @@ rb_gst_bin_get_by_name_recurse_up (VALUE self, VALUE name)
 }
 
 /*
- * Method: iterate
+ * Method: iterate_elements
  *
  * Iterates over the elements in this bin.
  *
  * Returns: true if the bin did something useful, or false (this value can
  * be used to determine if the bin is in EOS ("end of stream")).
  */
-static VALUE
-rb_gst_bin_iterate (VALUE self)
-{
-    return CBOOL2RVAL (gst_bin_iterate (RGST_BIN (self)));
-}
+/* static VALUE */
+/* rb_gst_bin_iterate_elements(VALUE self) */
+/* { */
+/*     return CBOOL2RVAL(gst_bin_iterate_elements(RGST_BIN(self))); */
+/* } */
 
 /*
- * Method: clock
+ * Method: provided_clock
  *
  * Gets the current clock of the (scheduler of the) bin,
  * as a Gst::Clock object.
- * This method overrides Gst::Element#get_clock.
  *
  * Returns: a Gst::Clock object, or nil.
  */
 static VALUE
-rb_gst_bin_get_clock (VALUE self)
+rb_gst_bin_get_provided_clock (VALUE self)
 {
     GstClock *clock;
 
-    clock = gst_bin_get_clock (RGST_BIN (self));
-    return clock != NULL ? RGST_CLOCK_NEW (clock)
-        : Qnil;
+    clock = RGST_BIN(self)->provided_clock;
+    return clock == NULL ? Qnil : RGST_CLOCK_NEW(clock);
 }
 
 /*
- * Method: auto_clock
- *
- * Let the bin select a clock automatically.
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_bin_auto_clock (VALUE self)
-{
-    gst_bin_auto_clock (RGST_BIN (self));
-    return self;
-}
-
-/*
- * Method: use_clock(clock)
+ * Method: provided_clock=(clock)
  * clock: a Gst::Clock.
  *
  * Forces the bin to use the given clock.  Use nil to force it 
@@ -258,10 +243,19 @@ rb_gst_bin_auto_clock (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_bin_use_clock (VALUE self, VALUE clock)
+rb_gst_bin_set_provided_clock (VALUE self, VALUE clock)
 {
-    gst_bin_use_clock (RGST_BIN (self),
-                       NIL_P (clock) ? NULL : RGST_CLOCK (clock));
+    GstBin *bin;
+
+    bin = RGST_BIN(self);
+    if (bin->provided_clock)
+        g_object_unref(bin->provided_clock);
+
+    if (!NIL_P(clock)) {
+        bin->provided_clock = RGST_CLOCK(clock);
+        g_object_ref(bin->provided_clock);
+    }
+
     return self;
 }
 
@@ -285,7 +279,7 @@ rb_gst_bin_get_by_if (VALUE self, VALUE klass)
 }
 
 /*
- * Method: get_all_by_interface(interface)
+ * Method: iterate_all_by_interface(interface)
  * interface: an interface (Ruby class).
  *
  * Looks for all elements inside the bin that implements the given
@@ -294,21 +288,17 @@ rb_gst_bin_get_by_if (VALUE self, VALUE klass)
  * Returns: a list of elements inside the bin implementing the interface,
  * as an Array of Gst::Element objects.
  */
-static VALUE
-rb_gst_bin_get_all_by_if (VALUE self, VALUE klass)
-{
-    GList *list;
+/* static VALUE */
+/* rb_gst_bin_iterate_all_by_if(VALUE self, VALUE klass) */
+/* { */
+/*     for (list = */
+/*          gst_bin_get_all_by_interface (RGST_BIN (self), CLASS2GTYPE (klass)); */
+/*          list != NULL; list = g_list_next (list)) */
+/*         rb_ary_push (arr, RGST_ELEMENT_NEW (list->data)); */
 
-    VALUE arr = rb_ary_new ();
-
-    for (list =
-         gst_bin_get_all_by_interface (RGST_BIN (self), CLASS2GTYPE (klass));
-         list != NULL; list = g_list_next (list))
-        rb_ary_push (arr, RGST_ELEMENT_NEW (list->data));
-
-    g_list_free (list);
-    return arr;
-}
+/*     g_list_free (list); */
+/*     return arr; */
+/* } */
 
 /*
  * Method: each_by_interface(interface)
@@ -320,52 +310,11 @@ rb_gst_bin_get_all_by_if (VALUE self, VALUE klass)
  *
  * Returns: always nil.
  */
-static VALUE
-rb_gst_bin_each_by_if (VALUE self, VALUE klass)
-{
-    return rb_ary_yield (rb_gst_bin_get_all_by_if (self, klass));
-}
-
-/*
- * Method: sync_children_state
- *
- * Tries to set the state of the children of this bin to the same state of 
- * the bin by calling Gst::Element#set_state for each child not already having
- * a synchronized state.
- *
- * Returns: the worst return value of any Gst::Element#set_state (see
- * Gst::Element::State).
- */
-static VALUE
-rb_gst_bin_sync_children_state (VALUE self)
-{
-    return GENUM2RVAL (gst_bin_sync_children_state (RGST_BIN (self)),
-                       GST_TYPE_ELEMENT_STATE_RETURN);
-}
-
-/*
- * Method: child_state_change(oldstate, newstate, child)
- * oldstate: the old child state (see Gst::Element::State).
- * newstate: the new child state (see Gst::Element::State).
- * child: a Gst::Element that signaled a changed state.
- *
- * An internal method to inform the parent bin about a state change of
- * a child.
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_bin_child_state_change (VALUE self, VALUE oldstate, VALUE newstate,
-                               VALUE child)
-{
-    gst_bin_child_state_change (RGST_BIN (self),
-                                RVAL2GENUM (oldstate,
-                                            GST_TYPE_ELEMENT_STATE_RETURN),
-                                RVAL2GENUM (newstate,
-                                            GST_TYPE_ELEMENT_STATE_RETURN),
-                                RGST_ELEMENT (child));
-    return self;
-}
+/* static VALUE */
+/* rb_gst_bin_each_by_if (VALUE self, VALUE klass) */
+/* { */
+/*     return rb_ary_yield (rb_gst_bin_get_all_by_if (self, klass)); */
+/* } */
 
 void
 Init_gst_bin (void)
@@ -379,7 +328,7 @@ Init_gst_bin (void)
     rb_define_method (c, "remove_all", rb_gst_bin_remove_all, 0);
     rb_define_alias (c, "clear", "remove_all");
 
-    rb_define_method (c, "elements", rb_gst_bin_get_elements, 0);
+    rb_define_method(c, "children", rb_gst_bin_get_children, 0);
     rb_define_method (c, "each_element", rb_gst_bin_each_element, 0);
 
     rb_define_method (c, "get_by_name", rb_gst_bin_get_by_name, 1);
@@ -387,22 +336,16 @@ Init_gst_bin (void)
                       rb_gst_bin_get_by_name_recurse_up, 1);
     rb_define_alias (c, "[]", "get_by_name");
     rb_define_method (c, "get_by_interface", rb_gst_bin_get_by_if, 1);
-    rb_define_method (c, "get_all_by_interface", rb_gst_bin_get_all_by_if, 1);
-    rb_define_method (c, "each_by_interface", rb_gst_bin_each_by_if, 1);
+    /* rb_define_method(c, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
+    /* rb_define_method (c, "each_by_interface", rb_gst_bin_each_by_if, 1); */
 
     rb_define_method (c, "length", rb_gst_bin_length, 0);
     rb_define_alias (c, "size", "length");
 
-    rb_define_method (c, "iterate", rb_gst_bin_iterate, 0);
+    /* rb_define_method(c, "iterate_elements", rb_gst_bin_iterate_elements, 0); */
 
-    rb_define_method (c, "clock", rb_gst_bin_get_clock, 0);
-    rb_define_method (c, "auto_clock", rb_gst_bin_auto_clock, 0);
-    rb_define_method (c, "use_clock", rb_gst_bin_use_clock, 1);
-
-    rb_define_method (c, "sync_children_state", rb_gst_bin_sync_children_state,
-                      0);
-    rb_define_method (c, "child_state_change", rb_gst_bin_child_state_change,
-                      3);
+    rb_define_method(c, "provided_clock", rb_gst_bin_get_provided_clock, 0);
+    rb_define_method(c, "set_provided_clock", rb_gst_bin_set_provided_clock, 1);
 
     G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", c);
     G_DEF_CONSTANTS (c, GST_TYPE_BIN_FLAGS, "GST_BIN_");
