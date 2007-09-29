@@ -1,3 +1,7 @@
+2007-09-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb (create_makefile_at_srcdir): don't use TOPDIR.
+
 2007-08-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_unicode.c (rbglib_m_unichar_get_script):

@@ -137,7 +137,7 @@ def add_distcleanfile(file)
 end
 
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
-  builddir = $configure_args['--topdir'] + srcdir[TOPDIR.size..-1]
+  builddir = File.join($configure_args['--topdir'], File.basename(srcdir))
   FileUtils.mkdir_p(builddir)
 
   Dir.chdir(builddir) do
