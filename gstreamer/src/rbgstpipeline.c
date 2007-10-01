@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define SELF(obj) (RVAL2GST_PIPELINE(obj))
+
 /* Class: Gst::Pipeline
  * In almost all cases, you'll want to use a Gst::Pipeline when creating a 
  * filter graph. The Gst::Pipeline will manage all the scheduling issues, 
@@ -54,9 +56,20 @@ rb_gst_pipeline_new (int argc, VALUE *argv, VALUE self)
 	return Qnil;
 }
 
+static VALUE
+rb_gst_pipeline_get_bus(VALUE self)
+{
+    return RGST_BUS2RVAL(gst_pipeline_get_bus(SELF(self)));
+}
+
 void
 Init_gst_pipeline(void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_PIPELINE, "Pipeline", mGst);
-	rb_define_method (c, "initialize", rb_gst_pipeline_new, -1);
+    VALUE cPipeline;
+
+    cPipeline = G_DEF_CLASS(GST_TYPE_PIPELINE, "Pipeline", mGst);
+
+    rb_define_method(cPipeline, "initialize", rb_gst_pipeline_new, -1);
+
+    rb_define_method(cPipeline, "bus", rb_gst_pipeline_get_bus, 0);
 }

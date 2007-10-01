@@ -52,6 +52,10 @@ extern VALUE cGstEventSeek;
 #define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
+#define RVAL2GST_BUS(obj)           (GST_BUS(RVAL2GOBJ(obj)))
+#define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
+
+
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
 #define RGST_CLOCK(o)               (GST_CLOCK(RVAL2GOBJ(o)))
@@ -67,7 +71,7 @@ extern VALUE cGstEventSeek;
 #define RGST_OBJECT(o)              (GST_OBJECT(RVAL2GOBJ(o)))
 #define RGST_PAD(o)                 (GST_PAD(RVAL2GOBJ(o)))
 #define RGST_PAD_TEMPLATE(o)        (GST_PAD_TEMPLATE(RVAL2GOBJ(o)))
-#define RGST_PIPELINE(o)            (GST_PIPELINE(RVAL2GOBJ(o)))
+#define RGST_PIPELINE(o)            (RVAL2GST_PIPELINE(o))
 #define RGST_PLUGIN(o)              (GST_PLUGIN(RVAL2GOBJ(o)))
 #define RGST_PLUGIN_FEATURE(o)      (GST_PLUGIN_FEATURE(RVAL2GOBJ(o)))
 #define RGST_QUERY_TYPE(o)          (GST_QUERY_TYPE2(RVAL2BOXED(o, GST_TYPE_QUERY_TYPE2)))
@@ -80,6 +84,7 @@ extern VALUE cGstEventSeek;
 #define RGST_XML(o)                 (GST_XML(RVAL2GOBJ(o)))
 
 #define RGST_GOBJ_NEW(o)    (rbgst_new_gstobject(o))
+#define GOBJ2RGST(obj)        (RGST_GOBJ_NEW(obj))
 
 #define RGST_BIN_NEW(o)                 (RGST_GOBJ_NEW(GST_BIN(o)))
 #define RGST_CAPS_NEW(o)                (BOXED2RVAL(GST_CAPS(o), GST_TYPE_CAPS))
@@ -106,6 +111,8 @@ extern VALUE cGstEventSeek;
 #define RGST_SYSTEM_CLOCK_NEW(o)        (RGST_GOBJ_NEW(GST_SYSTEM_CLOCK(o)))
 #define RGST_THREAD_NEW(o)              (RGST_GOBJ_NEW(GST_THREAD(o)))
 #define RGST_TYPE_FIND_FACTORY_NEW(o)   (RGST_GOBJ_NEW(GST_TYPE_FIND_FACTORY(o)))
+
+#define RGST_BUS2RVAL(obj) (GOBJ2RGST(obj))
 
 GType gst_clock_entry_get_type ();
 GType gst_event_mask_get_type ();
