@@ -1,7 +1,6 @@
+#!/usr/bin/env ruby
 
 require 'gst'
-
-Gst.init
 
 if ARGV.length != 1
     puts "Usage: #{__FILE__} mp3-file"
@@ -16,25 +15,14 @@ filesrc.location = file
 pipeline.add(filesrc)
 
 autobin = Gst::Bin.new
-cache = Gst::ElementFactory.make("autoplugcache")
-cache.signal_connect("cache_empty") do |cache|
-    $stderr.puts("have cache empty")
-    pipeline.pause
-    new_element = autobin.get_by_name("new element")
-    filesrc.unlink_pads(cache)
-    cache.unlink_pads(new_element)
-    autobin.remove(cache)
-    filesrc.link_pads(new_element)
-    pipeline.play
-    $stderr.puts("done with cache_empty")
-end
 
 typefind = Gst::ElementFactory.make("typefind")
 typefind.signal_connect("have_type") do |typefind, caps|
     $stderr.puts("GstPipeline: play have type")
     pipeline.pause
-    cache.unlink_pads(typefind)
     autobin.remove(typefind)
+  audio_sink = Gst::ElementFactory.make("gconfaudiosink", "audio-sink")
+  p audio_sink
     osssink = Gst::ElementFactory.make("osssink")
     autoplug = Gst::AutoplugFactory.make("staticrender")
     unless element = autoplug.to_renderers(caps, osssink)
@@ -43,24 +31,22 @@ typefind.signal_connect("have_type") do |typefind, caps|
     end
     element.name = "new element"
     autobin.add(element)
-    cache.reset = true
-    cache.link_pads(element)
     pipeline.play
 end
-autobin.add(cache, typefind)
+# autobin.add(filesrc, typefind)
 
-cache.link_pads(typefind)
-autobin.add_ghost_pad(cache.get_pad("sink"))
-
-pipeline.add(autobin)
-filesrc.link_pads(autobin)
+pipeline.add(typefind)
+pipeline.link(filesrc)
+pipeline.link(typefind)
 
 pipeline.play
+loop = GLib::MainLoop.new(nil, false)
+loop.run
 begin
-    while pipeline.iterate do end
+    while pipeline.iterate do; p 1;  end
 rescue Interrupt
-ensure
-    # XXX stop the pipeline
-    exit!   # exits all running children (needed)
+# ensure
+#     # XXX stop the pipeline
+#     exit!   # exits all running children (needed)
 end
 

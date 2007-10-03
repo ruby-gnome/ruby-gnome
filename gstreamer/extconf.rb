@@ -14,6 +14,7 @@ require 'mkmf-gnome2'
 
 PKGConfig.have_package('gstreamer-0.10') or exit 1
 PKGConfig.have_package('gstreamer-plugins-base-0.10') or exit 1
+
 setup_win32(PACKAGE_NAME)
 
 if have_library("gstinterfaces-0.10") and

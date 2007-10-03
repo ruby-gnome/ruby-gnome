@@ -29,6 +29,7 @@ static void
 Init_gst_classes (void)
 {
     extern void Init_gst_bin (void);
+    extern void Init_gst_bus(void);
     extern void Init_gst_caps (void);
     extern void Init_gst_clock (void);
     extern void Init_gst_clock_entry (void);
@@ -43,6 +44,8 @@ Init_gst_classes (void)
     extern void Init_gst_index (void);
     extern void Init_gst_indexentry (void);
     extern void Init_gst_indexfactory (void);
+    extern void Init_gst_message(void);
+    extern void Init_gst_mini_object(void);
     extern void Init_gst_object (void);
     extern void Init_gst_pad (void);
     extern void Init_gst_padtemplate (void);
@@ -71,6 +74,7 @@ Init_gst_classes (void)
 #endif
 
     Init_gst_bin ();
+    Init_gst_bus();
     Init_gst_caps ();
     Init_gst_clock ();
     Init_gst_clock_entry ();
@@ -82,6 +86,10 @@ Init_gst_classes (void)
     Init_gst_index ();
     Init_gst_indexentry ();
     Init_gst_indexfactory ();
+
+    Init_gst_mini_object();
+    Init_gst_message();
+
     Init_gst_object ();
     Init_gst_pad ();
     Init_gst_padtemplate ();
