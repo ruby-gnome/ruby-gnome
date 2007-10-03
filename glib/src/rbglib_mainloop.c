@@ -3,8 +3,8 @@
 
   rbglib_mainloop.c -
 
-  $Author: ggc $
-  $Date: 2007/07/13 16:07:28 $
+  $Author: ktou $
+  $Date: 2007/10/03 11:06:01 $
 
   Copyright (C) 2005,2006 Masao Mutoh
 ************************************************/
@@ -136,13 +136,18 @@ rbg_set_internal_poll_func(void)
 /*****************************************/
 
 static VALUE
-ml_initialize(self, context, is_running)
-    VALUE self, context, is_running;
+ml_initialize(int argc, VALUE *argv, VALUE self)
 {
-    GMainLoop* ml;
-    ml = g_main_loop_new(NIL_P(context)?NULL:RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT), 
-                         RVAL2CBOOL(is_running));
-    G_INITIALIZE(self, ml);
+    VALUE context, is_running;
+    GMainLoop *loop;
+    GMainContext *main_context = NULL;
+
+    rb_scan_args(argc, argv, "02", &context, &is_running);
+
+    if (!NIL_P(context))
+        main_context = RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT);
+    loop = g_main_loop_new(main_context, RVAL2CBOOL(is_running));
+    G_INITIALIZE(self, loop);
     return Qnil;
 }
 
@@ -203,9 +208,9 @@ ml_get_context(self)
 void
 Init_glib_main_loop()
 {
-    VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib); 
+    VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
 
-    rb_define_method(ml, "initialize", ml_initialize, 2);
+    rb_define_method(ml, "initialize", ml_initialize, -1);
     rb_define_method(ml, "run", ml_run, 0);
     rb_define_method(ml, "quit", ml_quit, 0);
     rb_define_method(ml, "running?", ml_is_running, 0);
