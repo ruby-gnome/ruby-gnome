@@ -3,8 +3,8 @@
 
   rbgobject.c -
 
-  $Author: sakai $
-  $Date: 2007/07/16 02:44:03 $
+  $Author: ktou $
+  $Date: 2007/10/03 12:48:55 $
 
   Copyright (C) 2003-2006  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
@@ -104,7 +104,7 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
             VALUE ret = rbgobj_fund_instance2robj(t, instance);
             if (NIL_P(ret)) {
                 rb_raise(rb_eTypeError, "%s isn't supported",
-                         rb_class2name(CLASS_OF(instance)));
+                         g_type_name(G_TYPE_FROM_INSTANCE(instance)));
             }
             return ret;
         } else {

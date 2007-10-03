@@ -1,5 +1,8 @@
 2007-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobject.c (rbgobj_ruby_object_from_instance2): don't use
+	functions of Ruby for GTypeInstance.
+
 	* src/rbglib_mainloop.c (ml_initialize): all arguments of
 	GLib::MainLoop.new are optional.
 
