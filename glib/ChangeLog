@@ -1,3 +1,8 @@
+2007-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb: fixed build failure with top-level
+	extconf.rb. Reported by andy. Thanks!
+
 2007-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobject.c (rbgobj_ruby_object_from_instance2): don't use
