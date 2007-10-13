@@ -4,7 +4,7 @@
   rbpoppler.c -
 
   $Author: ktou $
-  $Date: 2007/07/27 14:40:15 $
+  $Date: 2007/10/13 05:56:39 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -50,7 +50,7 @@ Init_poppler(void)
 
     G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", mPoppler);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_TYPE,
                 "PageTransitionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_ALIGNMENT,

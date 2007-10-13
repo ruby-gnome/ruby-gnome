@@ -54,7 +54,7 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 
 extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
 extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 extern VALUE rb_poppler_ruby_object_from_form_field(PopplerFormField *field);
 #endif
 

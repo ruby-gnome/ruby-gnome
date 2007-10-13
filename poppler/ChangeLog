@@ -1,5 +1,8 @@
 2007-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/: used POPPLER_CHECK_VERSION(0, 6, 0) not
+	POPPLER_CHECK_VERSION(0, 5, 9).
+
 	* README: updated supported poppler-glib version: 0.5.2 - 0.6.1.
 
 	* src/rbpoppler-document.c:

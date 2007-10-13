@@ -4,7 +4,7 @@
   rbpoppler-page.c -
 
   $Author: ktou $
-  $Date: 2007/09/08 15:06:45 $
+  $Date: 2007/10/13 05:56:39 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -35,7 +35,7 @@
 
 static VALUE cPSFile, cRectangle;
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 VALUE cUnknownField, cTextField, cButtonField, cChoiceField, cSignatureField;
 #endif
 
@@ -103,7 +103,7 @@ page_get_index(VALUE self)
     return INT2NUM(poppler_page_get_index(SELF(self)));
 }
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_duration(VALUE self)
 {
@@ -145,7 +145,7 @@ static VALUE
 page_get_text(int argc, VALUE *argv, VALUE self)
 {
     gchar *text;
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
 #endif
     VALUE rb_text, arg1, arg2, rb_rect;
@@ -161,7 +161,7 @@ page_get_text(int argc, VALUE *argv, VALUE self)
             rb_rect = arg2;
         } else {
             rb_rect = Qnil;
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
             if (!NIL_P(arg2)) {
                 style = RVAL2SELSTYLE(arg2);
             }
@@ -179,13 +179,13 @@ page_get_text(int argc, VALUE *argv, VALUE self)
         rect.x2 = width;
         rect.y2 = height;
         text = poppler_page_get_text(page,
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
                                      style,
 #endif
                                      &rect);
     } else {
         text = poppler_page_get_text(page,
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
                                      style,
 #endif
                                      RVAL2RECT(rb_rect));
@@ -203,7 +203,7 @@ page_get_link_mapping(VALUE self)
                        POPPLER_TYPE_LINK_MAPPING);
 }
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_image_mapping(VALUE self)
 {
@@ -222,7 +222,7 @@ page_get_form_field_mapping(VALUE self)
 static VALUE
 page_get_selection_region(int argc, VALUE *argv, VALUE self)
 {
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
 #endif
     VALUE arg2, arg3, scale, selection;
@@ -232,7 +232,7 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
     if (NIL_P(arg3)) {
         selection = arg2;
     } else {
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
         style = RVAL2SELSTYLE(arg2);
 #endif
         selection = arg3;
@@ -240,7 +240,7 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
 
     return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
                                                          NUM2DBL(scale),
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
                                                          style,
 #endif
                                                          RVAL2RECT(selection)));
@@ -332,7 +332,7 @@ page_render_selection_generic(int argc, VALUE *argv, VALUE self)
     }
 }
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_crop_box(VALUE self)
 {
@@ -428,7 +428,7 @@ DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
                          RVAL2LM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 DEF_ACCESSOR(link_mapping, action, RVAL2LM, ACTION2RVAL, RVAL2ACTION)
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 
 /* Page Transition */
 DEF_ACCESSOR(page_trans, type, RVAL2TRANS, RVAL2TT, TT2RVAL)
@@ -662,7 +662,7 @@ void
 Init_poppler_page(VALUE mPoppler)
 {
     VALUE cPage, cLinkMapping;
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     VALUE cPageTransition, cImageMapping, cFormFieldMapping, cFormField;
 #endif
 
@@ -670,7 +670,7 @@ Init_poppler_page(VALUE mPoppler)
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
     cLinkMapping = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     cPageTransition = G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION,
                                   "PageTransition", mPoppler);
     cImageMapping = G_DEF_CLASS(POPPLER_TYPE_IMAGE_MAPPING,
@@ -691,7 +691,7 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "render", page_render_generic, -1);
     rb_define_method(cPage, "size", page_get_size, 0);
     rb_define_method(cPage, "index", page_get_index, 0);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "duration", page_get_duration, 0);
     rb_define_method(cPage, "transition", page_get_transition, 0);
 #endif
@@ -700,7 +700,7 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "find_text", page_find_text, 1);
     rb_define_method(cPage, "get_text", page_get_text, -1);
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
     rb_define_method(cPage, "form_field_mapping",
                      page_get_form_field_mapping, 0);
@@ -709,7 +709,7 @@ Init_poppler_page(VALUE mPoppler)
                      page_get_selection_region, -1);
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "crop_box", page_get_crop_box, 0);
 #endif
 
@@ -738,7 +738,7 @@ Init_poppler_page(VALUE mPoppler)
 
     G_DEF_SETTERS(cLinkMapping);
 
-#if POPPLER_CHECK_VERSION(0, 5, 9)
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 /* Page Transition */
     rb_define_method(cPageTransition, "type", page_trans_get_type, 0);
     rb_define_method(cPageTransition, "alignment", page_trans_get_alignment, 0);
