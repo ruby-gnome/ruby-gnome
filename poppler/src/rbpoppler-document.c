@@ -4,13 +4,15 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2007/07/27 14:44:57 $
+  $Date: 2007/10/13 05:50:08 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
 **********************************************************************/
 
 #include "rbpoppler.h"
+
+#define RVAL2DOC(obj) (POPPLER_DOCUMENT(RVAL2GOBJ(obj)))
 
 #define IITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_INDEX_ITER))
 #define RVAL2IITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_INDEX_ITER))
@@ -63,7 +65,7 @@ doc_save(VALUE self, VALUE uri)
     gboolean result;
     GError *error = NULL;
 
-    result = poppler_document_save(RVAL2GOBJ(self), RVAL2CSTR(uri), &error);
+    result = poppler_document_save(RVAL2DOC(self), RVAL2CSTR(uri), &error);
 
     if (error)
         RAISE_GERROR(error);
@@ -74,7 +76,7 @@ doc_save(VALUE self, VALUE uri)
 static VALUE
 doc_get_n_pages(VALUE self)
 {
-    return INT2NUM(poppler_document_get_n_pages(RVAL2GOBJ(self)));
+    return INT2NUM(poppler_document_get_n_pages(RVAL2DOC(self)));
 }
 
 static VALUE
@@ -84,10 +86,10 @@ doc_get_page(VALUE self, VALUE index_or_label)
     PopplerPage *page;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cInteger))) {
-        page = poppler_document_get_page(RVAL2GOBJ(self),
+        page = poppler_document_get_page(RVAL2DOC(self),
                                          NUM2INT(index_or_label));
     } else if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cString))) {
-        page = poppler_document_get_page_by_label(RVAL2GOBJ(self),
+        page = poppler_document_get_page_by_label(RVAL2DOC(self),
                                                   RVAL2CSTR(index_or_label));
     } else {
         VALUE inspect;
@@ -105,20 +107,27 @@ doc_get_page(VALUE self, VALUE index_or_label)
 static VALUE
 doc_has_attachments(VALUE self)
 {
-    return CBOOL2RVAL(poppler_document_has_attachments(RVAL2GOBJ(self)));
+    return CBOOL2RVAL(poppler_document_has_attachments(RVAL2DOC(self)));
 }
 
 static VALUE
 doc_get_attachments(VALUE self)
 {
-    return GLIST2ARYF(poppler_document_get_attachments(RVAL2GOBJ(self)));
+    return GLIST2ARYF(poppler_document_get_attachments(RVAL2DOC(self)));
 }
 
 static VALUE
 doc_find_dest(VALUE self, VALUE link_name)
 {
-    return GOBJ2RVAL(poppler_document_find_dest(RVAL2GOBJ(self),
+    return GOBJ2RVAL(poppler_document_find_dest(RVAL2DOC(self),
                                                 RVAL2CSTR(link_name)));
+}
+
+static VALUE
+doc_get_form_field(VALUE self, VALUE id)
+{
+    return GOBJ2RVAL(poppler_document_get_form_field(RVAL2DOC(self),
+                                                     NUM2INT(id)));
 }
 
 static VALUE
@@ -127,7 +136,7 @@ doc_each(VALUE self)
     PopplerDocument *document;
     int i, n_pages;
 
-    document = RVAL2GOBJ(self);
+    document = RVAL2DOC(self);
     n_pages = poppler_document_get_n_pages(document);
     for (i = 0; i < n_pages; i++) {
         PopplerPage *page;
@@ -288,6 +297,13 @@ fonts_iter_get_full_name(VALUE self)
 }
 
 static VALUE
+fonts_iter_get_file_name(VALUE self)
+{
+    CHECK_FITER_IS_VALID(self);
+    return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2FITER(self)));
+}
+
+static VALUE
 fonts_iter_get_font_type(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
@@ -404,6 +420,11 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_alias(cDocument, "have_attachments?", "has_attachments?");
     rb_define_method(cDocument, "attachments", doc_get_attachments, 0);
     rb_define_method(cDocument, "find_dest", doc_find_dest, 1);
+    rb_define_alias(cDocument, "get_destination", "find_dest");
+
+#if POPPLER_CHECK_VERSION(0, 6, 0)
+    rb_define_method(cDocument, "get_form_field", doc_get_form_field, 1);
+#endif
 
     rb_define_method(cDocument, "each", doc_each, 0);
     rb_define_alias(cDocument, "pages", "to_a");
@@ -443,6 +464,9 @@ Init_poppler_document(VALUE mPoppler)
 
     rb_define_method(cFontsIter, "name", fonts_iter_get_name, 0);
     rb_define_method(cFontsIter, "full_name", fonts_iter_get_full_name, 0);
+#if POPPLER_CHECK_VERSION(0, 6, 0)
+    rb_define_method(cFontsIter, "file_name", fonts_iter_get_file_name, 0);
+#endif
     rb_define_method(cFontsIter, "font_type", fonts_iter_get_font_type, 0);
     rb_define_method(cFontsIter, "embedded?", fonts_iter_is_embedded, 0);
     rb_define_method(cFontsIter, "subset?", fonts_iter_is_subset, 0);

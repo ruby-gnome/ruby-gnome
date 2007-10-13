@@ -1,5 +1,9 @@
 2007-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c:
+	- used RVAL2DOC() not RVAL2GOBJ().
+	- supported 0.6.0.
+
 	* src/rbpoppler-attachment.c: supported 0.6.0.
 
 2007-09-09  Kouhei Sutou  <kou@cozmixng.org>
