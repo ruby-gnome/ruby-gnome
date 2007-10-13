@@ -1,5 +1,7 @@
 2007-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* README: updated supported poppler-glib version: 0.5.2 - 0.6.1.
+
 	* src/rbpoppler-document.c:
 	- used RVAL2DOC() not RVAL2GOBJ().
 	- supported 0.6.0.
