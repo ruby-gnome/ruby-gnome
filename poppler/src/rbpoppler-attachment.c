@@ -4,7 +4,7 @@
   rbpoppler-attachment.c -
 
   $Author: ktou $
-  $Date: 2007/10/13 05:48:57 $
+  $Date: 2007/10/13 05:53:10 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -111,10 +111,14 @@ Init_poppler_attachment(VALUE mPoppler)
     rb_define_method(cAttachment, "save", attachment_save, -1);
     rb_define_method(cAttachment, "name", attachment_get_name, 0);
     rb_define_method(cAttachment, "description", attachment_get_description, 0);
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cAttachment, "size", attachment_get_size, 0);
+#endif
     rb_define_method(cAttachment, "mtime", attachment_get_mtime, 0);
     rb_define_method(cAttachment, "ctime", attachment_get_ctime, 0);
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cAttachment, "checksum", attachment_get_checksum, 0);
+#endif
 
     G_DEF_SETTERS(cAttachment);
 }
