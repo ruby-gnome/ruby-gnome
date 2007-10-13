@@ -4,7 +4,7 @@
   rbpoppler-document.c -
 
   $Author: ktou $
-  $Date: 2007/10/13 05:50:08 $
+  $Date: 2007/10/13 05:52:07 $
 
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 
@@ -123,12 +123,14 @@ doc_find_dest(VALUE self, VALUE link_name)
                                                 RVAL2CSTR(link_name)));
 }
 
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 doc_get_form_field(VALUE self, VALUE id)
 {
     return GOBJ2RVAL(poppler_document_get_form_field(RVAL2DOC(self),
                                                      NUM2INT(id)));
 }
+#endif
 
 static VALUE
 doc_each(VALUE self)
@@ -296,12 +298,14 @@ fonts_iter_get_full_name(VALUE self)
     return CSTR2RVAL(poppler_fonts_iter_get_full_name(RVAL2FITER(self)));
 }
 
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 fonts_iter_get_file_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2FITER(self)));
 }
+#endif
 
 static VALUE
 fonts_iter_get_font_type(VALUE self)
