@@ -1,3 +1,7 @@
+2007-10-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/pdf2svg.rb: added a new example that convert PDF to SVG.
+
 2007-10-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: used POPPLER_CHECK_VERSION(0, 6, 0) not
