@@ -9,7 +9,6 @@ if ARGV.size < 2
 end
 
 input, output, scale, rotate = ARGV
-input_uri = "file://#{File.expand_path(input)}"
 scale = (scale || 1.0).to_f
 rotate = (rotate || 0).to_i % 360
 
@@ -95,9 +94,9 @@ end
 
 if Poppler.cairo_available?
   puts "using cairo..."
-  pixbuf = to_pixbuf_with_cairo(input_uri, scale, rotate)
+  pixbuf = to_pixbuf_with_cairo(input, scale, rotate)
 else
-  pixbuf = to_pixbuf(input_uri, scale, rotate)
+  pixbuf = to_pixbuf(input, scale, rotate)
 end
 
 if pixbuf.nil?
