@@ -1,11 +1,12 @@
 =begin
   top-level extconf.rb for Ruby-GNOME2
 
-  $Id: extconf.rb,v 1.16 2007/08/31 08:22:45 ktou Exp $
+  $Id: extconf.rb,v 1.17 2007/10/22 12:19:17 ktou Exp $
 
   Copyright (C) 2003-2005 Ruby-GNOME2 Project Team
 =end
 
+require 'English'
 require 'mkmf'
 require 'ftools'
 
@@ -51,6 +52,14 @@ end
 #
 targets = []
 ignore = []
+
+ruby, *ruby_args = Shellwords.shellwords($ruby)
+if ARGV.grep(/\A--ruby=/)
+  extra_args = ["--ruby=#{$ruby}"] + ARGV.reject {|arg| /\A--ruby=/ =~ arg}
+else
+  extra_args = ARGV.dup
+end
+
 subdirs.each do |subdir|
   if /mingw/ =~ RUBY_PLATFORM
     $ruby.gsub!('\\', '/')
@@ -60,9 +69,10 @@ subdirs.each do |subdir|
   topdir = File.join(*([".."] * subdir.split(/\/+/).size))
   /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
   srcdir = File.join(dir, subdir)
-  ret = system($ruby, "-C", subdir, File.join(srcdir, "extconf.rb"),
-   "--topsrcdir=#{dir}", "--topdir=#{topdir}", "--srcdir=#{srcdir}", "--ruby=#{$ruby}",
-   *ARGV)
+  args = ruby_args + ["-C", subdir, File.join(srcdir, "extconf.rb"),
+                      "--topsrcdir=#{dir}", "--topdir=#{topdir}",
+                      "--srcdir=#{srcdir}", *extra_args]
+  ret = system(ruby, *args)
   STDERR.puts("#{$0}: Leaving directory '#{subdir}'")
   if ret
     targets << subdir

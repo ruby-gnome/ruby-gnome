@@ -1,3 +1,9 @@
+2007-10-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: supported arguments for --ruby option for cross
+	compiling. [#1817067]
+	Thanks to Kero van Gelder!
+
 2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
 
 	* extconf.rb: re-supported build in no-source directory.
