@@ -18,6 +18,7 @@
 EXTERN VALUE rb_progname, rb_argv;
 
 static VALUE rbgtk_main_threads = Qnil;
+static VALUE rbgtk_eGtkInitError;
 
 static ID id__quit_callbacks__, id__timeout_callbacks__;
 static ID id__idle_callbacks__, id__snooper_callbacks__;
@@ -155,7 +156,7 @@ gtk_m_init(argc, argv, self)
         if (! is_initialized) {
             const char *display_name_arg = gdk_get_display_arg_name();
             display_name_arg = display_name_arg ? display_name_arg : g_getenv("DISPLAY");
-            rb_raise(rb_eRuntimeError, "Cannot open display: %s", 
+            rb_raise(rbgtk_eGtkInitError, "Cannot open display: %s",
                      display_name_arg ? display_name_arg : " ");
         }
 
@@ -519,6 +520,9 @@ Init_gtk_main()
     id__timeout_callbacks__ = rb_intern("__timeout_callbacks__");
     id__idle_callbacks__ = rb_intern("__idle_callbacks__");
     id__snooper_callbacks__ = rb_intern("__snooper_callbacks__");
+
+    rbgtk_eGtkInitError = rb_define_class_under(mGtk, "InitError",
+                                                rb_eRuntimeError);
 
     rb_define_module_function(mGtk, "set_locale", gtk_m_set_locale, 0);
     rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
