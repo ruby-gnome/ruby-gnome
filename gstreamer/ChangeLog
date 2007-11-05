@@ -1,3 +1,7 @@
+2007-11-05  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/, test/run-test.rb, test/test_mini_object.rb: just added.
+
 2007-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-mini-object.c, src/rbgst-message.c, src/rbgst-bus.c:
