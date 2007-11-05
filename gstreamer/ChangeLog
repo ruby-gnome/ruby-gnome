@@ -1,5 +1,7 @@
 2007-11-05  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_mini_object.rb: added a test for instanciation.
+
 	* src/rbgst-mini-object.c: rb_gst_* -> rbgst_*.
 
 	* src/rbgst-mini-object.c, test/test_mini_object.rb: added

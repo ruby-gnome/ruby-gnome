@@ -5,6 +5,9 @@ $VERBOSE = true
 require "test/unit"
 
 base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+
+system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
+
 $LOAD_PATH.unshift(File.join(base_dir, "src"))
 $LOAD_PATH.unshift(File.join(base_dir, "src", "lib"))
 require "gst"

@@ -3,5 +3,10 @@ class TestMiniObject < Test::Unit::TestCase
     assert_raise(TypeError) do
       Gst::MiniObject.new
     end
+
+    assert_operator(Gst::MiniObject, :>, Gst::Message)
+    assert_nothing_raised do
+      Gst::Message.new
+    end
   end
 end
