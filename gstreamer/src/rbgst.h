@@ -52,8 +52,8 @@ extern VALUE cGstEventSeek;
 #define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
-#define RVAL2GST_MINI_OBJ(obj) (rb_gst_mini_object_from_ruby_object(obj))
-#define RVAL2GST_MSG(obj) (RVAL2GOBJ(obj))
+#define RVAL2GST_MINI_OBJ(obj)  (GST_MINI_OBJECT(RVAL2GOBJ(obj)))
+#define RVAL2GST_MSG(obj)       (GST_MESSAGE(RVAL2GOBJ(obj)))
 
 #define RVAL2GST_BUS(obj)           (GST_BUS(RVAL2GOBJ(obj)))
 #define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
@@ -88,7 +88,7 @@ extern VALUE cGstEventSeek;
 #define RGST_GOBJ_NEW(o)    (rbgst_new_gstobject(o))
 #define GOBJ2RGST(obj)        (RGST_GOBJ_NEW(obj))
 
-#define GST_MINI_OBJ2RVAL(obj) (rb_gst_mini_object_to_ruby_object(obj))
+#define GST_MINI_OBJ2RVAL(obj) (rbgst_mini_object_to_ruby_object(obj))
 
 #define RGST_BIN_NEW(o)                 (RGST_GOBJ_NEW(GST_BIN(o)))
 #define RGST_CAPS_NEW(o)                (BOXED2RVAL(GST_CAPS(o), GST_TYPE_CAPS))
@@ -124,6 +124,7 @@ GType gst_event_mask_get_type ();
 GType gst_format_get_type2 ();
 GType gst_query_type_get_type2 ();
 GType gst_type_get_type ();
+
 
 /* misc.c interface */
 void rbgst_initialize_gstobject (VALUE obj, GstObject * gstobj);

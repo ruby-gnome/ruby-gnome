@@ -4,9 +4,18 @@ class TestMiniObject < Test::Unit::TestCase
       Gst::MiniObject.new
     end
 
-    assert_operator(Gst::MiniObject, :>, Gst::Message)
+    assert_operator(Gst::MiniObject, :>, Gst::Buffer)
     assert_nothing_raised do
-      Gst::Message.new
+      Gst::Buffer.new
     end
+  end
+
+  def test_writable
+    mini_object = Gst::Buffer.new
+    assert(mini_object.writable?)
+    mini_object.flag = Gst::MiniObject::Flags::READONLY
+    assert(!mini_object.writable?)
+    writable = mini_object.make_writable
+    assert(writable.writable?)
   end
 end

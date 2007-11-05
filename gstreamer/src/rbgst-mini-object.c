@@ -47,10 +47,11 @@ static VALUE
 initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
 {
     GType gtype = CLASS2GTYPE(CLASS_OF(self));
+
     if (G_TYPE_IS_ABSTRACT(gtype))
         rb_raise(rb_eTypeError, "initializing abstract class");
-    else
-        return rb_call_super(argc, argv);
+
+    return rb_call_super(argc, argv);
 }
 
 static void
@@ -61,7 +62,13 @@ rbgst_mini_object_type_init_hook(VALUE klass)
                          initialize_with_abstract_check, -1);
 }
 
-gpointer
+static void
+rbgst_mini_object_initialize(VALUE object, gpointer instance)
+{
+    DATA_PTR(object) = instance;
+}
+
+static gpointer
 rbgst_mini_object_robj2instance(VALUE object)
 {
     gpointer instance;
@@ -85,6 +92,48 @@ rbgst_mini_object_instance2robj(gpointer instance)
     return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
 }
 
+static VALUE
+s_allocate(VALUE klass)
+{
+    return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, NULL);
+}
+
+static VALUE
+get_flags(VALUE self)
+{
+    return GFLAGS2RVAL(GST_MINI_OBJECT_FLAGS(SELF(self)),
+                       GST_TYPE_MINI_OBJECT_FLAGS);
+}
+
+static VALUE
+set_flag(VALUE self, VALUE flag)
+{
+    return GST_MINI_OBJECT_FLAG_SET(SELF(self),
+                                    RVAL2GFLAGS(flag, GST_TYPE_MINI_OBJECT_FLAGS));
+}
+
+static VALUE
+writable_p(VALUE self)
+{
+    return CBOOL2RVAL(gst_mini_object_is_writable(SELF(self)));
+}
+
+static VALUE
+make_writable(VALUE self)
+{
+    GstMiniObject *original, *writable;
+    VALUE result;
+
+    original = SELF(self);
+    gst_mini_object_ref(original);
+    writable = gst_mini_object_make_writable(original);
+    if (original == writable)
+        gst_mini_object_unref(original);
+    result = GOBJ2RVAL(writable); /* I want to use GOBJ2RVALU!!! */
+    gst_mini_object_unref(writable);
+    return result;
+}
+
 void
 Init_gst_mini_object(void)
 {
@@ -93,11 +142,24 @@ Init_gst_mini_object(void)
     fundamental.type_init_hook = rbgst_mini_object_type_init_hook;
     fundamental.rvalue2gvalue = NULL;
     fundamental.gvalue2rvalue = NULL;
-    fundamental.initialize = NULL;
+    fundamental.initialize = rbgst_mini_object_initialize;
     fundamental.robj2instance = rbgst_mini_object_robj2instance;
     fundamental.instance2robj = rbgst_mini_object_instance2robj;
 
     G_DEF_FUNDAMENTAL(&fundamental);
 
     rb_cGstMiniObject = G_DEF_CLASS(GST_TYPE_MINI_OBJECT, "MiniObject", mGst);
+
+    G_DEF_CLASS(GST_TYPE_MINI_OBJECT_FLAGS, "Flags", rb_cGstMiniObject);
+    G_DEF_CONSTANTS(rb_cGstMiniObject, GST_TYPE_MINI_OBJECT_FLAGS,
+                    "GST_MINI_OBJECT_");
+
+    rb_define_alloc_func(rb_cGstMiniObject, s_allocate);
+
+    rb_define_method(rb_cGstMiniObject, "flags", get_flags, 0);
+    rb_define_method(rb_cGstMiniObject, "set_flag", set_flag, 1);
+    rb_define_method(rb_cGstMiniObject, "writable?", writable_p, 0);
+    rb_define_method(rb_cGstMiniObject, "make_writable", make_writable, 0);
+
+    G_DEF_SETTERS(rb_cGstMiniObject);
 }

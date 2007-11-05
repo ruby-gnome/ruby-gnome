@@ -29,6 +29,7 @@ static void
 Init_gst_classes (void)
 {
     extern void Init_gst_bin (void);
+    extern void Init_gst_buffer(void);
     extern void Init_gst_bus(void);
     extern void Init_gst_caps (void);
     extern void Init_gst_clock (void);
@@ -86,10 +87,6 @@ Init_gst_classes (void)
     Init_gst_index ();
     Init_gst_indexentry ();
     Init_gst_indexfactory ();
-
-    Init_gst_mini_object();
-    Init_gst_message();
-
     Init_gst_object ();
     Init_gst_pad ();
     Init_gst_padtemplate ();
@@ -104,6 +101,10 @@ Init_gst_classes (void)
     Init_gst_tag_setter ();
     Init_gst_typefindfactory ();
     Init_gst_xml ();
+
+    Init_gst_mini_object();
+    Init_gst_buffer();
+    Init_gst_message();
 
 #if defined(HAVE_GST_OVERLAY)
     Init_gst_x_overlay ();
