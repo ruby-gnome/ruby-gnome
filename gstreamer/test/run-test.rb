@@ -9,6 +9,9 @@ $LOAD_PATH.unshift(File.join(base_dir, "src"))
 $LOAD_PATH.unshift(File.join(base_dir, "src", "lib"))
 require "gst"
 
+$LOAD_PATH.unshift(File.join(base_dir, "test"))
+require 'test-unit-ext'
+
 test_file = File.join(base_dir, "test", "test_*.rb")
 case ARGV.first
 when /\A--\z/
@@ -25,6 +28,9 @@ end
 argv = ARGV.dup
 unless argv.find {|opt| /\A(?:-v|--verbose=)/ =~ opt}
   argv << "--verbose=n"
+end
+unless argv.find {|opt| /\A--(?:no-)priority/ =~ opt}
+  argv << "--priority"
 end
 
 args = [File.dirname($0), argv.dup]
