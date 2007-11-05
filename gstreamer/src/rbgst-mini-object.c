@@ -43,6 +43,24 @@ rb_gst_mini_object_get_superclass(void)
     return rb_cObject;
 }
 
+static VALUE
+initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
+{
+    GType gtype = CLASS2GTYPE(CLASS_OF(self));
+    if (G_TYPE_IS_ABSTRACT(gtype))
+        rb_raise(rb_eTypeError, "initializing abstract class");
+    else
+        return rb_call_super(argc, argv);
+}
+
+static void
+rb_gst_mini_object_type_init_hook(VALUE klass)
+{
+    if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
+        rb_define_method(klass, "initialize",
+                         initialize_with_abstract_check, -1);
+}
+
 gpointer
 rb_gst_mini_object_robj2instance(VALUE object)
 {
@@ -72,7 +90,7 @@ Init_gst_mini_object(void)
 {
     fundamental.type = GST_TYPE_MINI_OBJECT;
     fundamental.get_superclass = rb_gst_mini_object_get_superclass;
-    fundamental.type_init_hook = NULL;
+    fundamental.type_init_hook = rb_gst_mini_object_type_init_hook;
     fundamental.rvalue2gvalue = NULL;
     fundamental.gvalue2rvalue = NULL;
     fundamental.initialize = NULL;
