@@ -30,7 +30,7 @@ static RGFundamental fundamental;
 static VALUE rb_cGstMiniObject;
 
 static void
-rb_gst_mini_object_free(void *ptr)
+rbgst_mini_object_free(void *ptr)
 {
     if (ptr) {
         gst_mini_object_unref((GstMiniObject *)ptr);
@@ -38,7 +38,7 @@ rb_gst_mini_object_free(void *ptr)
 }
 
 static VALUE
-rb_gst_mini_object_get_superclass(void)
+rbgst_mini_object_get_superclass(void)
 {
     return rb_cObject;
 }
@@ -54,7 +54,7 @@ initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
 }
 
 static void
-rb_gst_mini_object_type_init_hook(VALUE klass)
+rbgst_mini_object_type_init_hook(VALUE klass)
 {
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
         rb_define_method(klass, "initialize",
@@ -62,7 +62,7 @@ rb_gst_mini_object_type_init_hook(VALUE klass)
 }
 
 gpointer
-rb_gst_mini_object_robj2instance(VALUE object)
+rbgst_mini_object_robj2instance(VALUE object)
 {
     gpointer instance;
 
@@ -74,7 +74,7 @@ rb_gst_mini_object_robj2instance(VALUE object)
 }
 
 static VALUE
-rb_gst_mini_object_instance2robj(gpointer instance)
+rbgst_mini_object_instance2robj(gpointer instance)
 {
     VALUE klass;
     GType type;
@@ -82,20 +82,20 @@ rb_gst_mini_object_instance2robj(gpointer instance)
     type = G_TYPE_FROM_INSTANCE(instance);
     klass = GTYPE2CLASS(type);
     gst_mini_object_ref(instance);
-    return Data_Wrap_Struct(klass, NULL, rb_gst_mini_object_free, instance);
+    return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
 }
 
 void
 Init_gst_mini_object(void)
 {
     fundamental.type = GST_TYPE_MINI_OBJECT;
-    fundamental.get_superclass = rb_gst_mini_object_get_superclass;
-    fundamental.type_init_hook = rb_gst_mini_object_type_init_hook;
+    fundamental.get_superclass = rbgst_mini_object_get_superclass;
+    fundamental.type_init_hook = rbgst_mini_object_type_init_hook;
     fundamental.rvalue2gvalue = NULL;
     fundamental.gvalue2rvalue = NULL;
     fundamental.initialize = NULL;
-    fundamental.robj2instance = rb_gst_mini_object_robj2instance;
-    fundamental.instance2robj = rb_gst_mini_object_instance2robj;
+    fundamental.robj2instance = rbgst_mini_object_robj2instance;
+    fundamental.instance2robj = rbgst_mini_object_instance2robj;
 
     G_DEF_FUNDAMENTAL(&fundamental);
 
