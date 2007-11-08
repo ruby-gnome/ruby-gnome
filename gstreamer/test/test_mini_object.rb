@@ -13,7 +13,7 @@ class TestMiniObject < Test::Unit::TestCase
   def test_writable
     mini_object = Gst::Buffer.new
     assert(mini_object.writable?)
-    mini_object.flag = Gst::MiniObject::Flags::READONLY
+    mini_object.flag = :readonly
     assert(!mini_object.writable?)
     writable = mini_object.make_writable
     assert(writable.writable?)
