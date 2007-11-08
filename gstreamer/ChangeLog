@@ -1,5 +1,8 @@
 2007-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: implemented size.
+	* test/test_buffer.rb: added test for size.
+
 	* src/rbgst.h (RVAL2GST_BUF): added.
 	* src/rbgst-buffer.c: added flag related API.
 	* test/test_buffer.rb: added.

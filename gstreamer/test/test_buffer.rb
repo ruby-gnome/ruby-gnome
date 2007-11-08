@@ -20,4 +20,9 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(Gst::Buffer::FLAG_GAP | Gst::Buffer::FLAG_DELTA_UNIT,
                  buffer.flags)
   end
+
+  def test_size
+    assert_equal(0, Gst::Buffer.new.size)
+    assert_equal(5, Gst::Buffer.new(5).size)
+  end
 end

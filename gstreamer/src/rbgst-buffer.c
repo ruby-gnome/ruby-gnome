@@ -27,9 +27,20 @@
     (GFLAGS2RVAL(flags, GST_TYPE_BUFFER_FLAG))
 
 static VALUE
-initialize(VALUE self)
+initialize(int argc, VALUE *argv, VALUE self)
 {
-    G_INITIALIZE(self, gst_buffer_new());
+    VALUE size;
+    GstBuffer *buffer;
+
+    rb_scan_args(argc, argv, "01", &size);
+
+    if (NIL_P(size))
+        buffer = gst_buffer_new();
+    else
+        buffer = gst_buffer_new_and_alloc(NUM2UINT(size));
+
+    G_INITIALIZE(self, buffer);
+
     return Qnil;
 }
 
@@ -67,6 +78,18 @@ flag_raised_p(VALUE self, VALUE flag)
                                                   RVAL2GST_FLAGS(flag)));
 }
 
+static VALUE
+get_data(VALUE self)
+{
+    return CSTR2RVAL((char *)GST_BUFFER_DATA(SELF(self)));
+}
+
+static VALUE
+get_size(VALUE self)
+{
+    return UINT2NUM(GST_BUFFER_SIZE(SELF(self)));
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -77,13 +100,16 @@ Init_gst_buffer(void)
     G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flag", rb_cGstBuffer);
     G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
 
-    rb_define_method(rb_cGstBuffer, "initialize", initialize, 0);
+    rb_define_method(rb_cGstBuffer, "initialize", initialize, -1);
 
     rb_define_method(rb_cGstBuffer, "flags", get_flags, 0);
     rb_define_method(rb_cGstBuffer, "set_flags", set_flags, 1);
     rb_define_method(rb_cGstBuffer, "raise_flag", raise_flag, 1);
     rb_define_method(rb_cGstBuffer, "lower_flag", lower_flag, 1);
     rb_define_method(rb_cGstBuffer, "flag_raised?", flag_raised_p, 1);
+
+    rb_define_method(rb_cGstBuffer, "data", get_data, 0);
+    rb_define_method(rb_cGstBuffer, "size", get_size, 0);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
