@@ -1,5 +1,9 @@
 2007-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst.h (RVAL2GST_BUF): added.
+	* src/rbgst-buffer.c: added flag related API.
+	* test/test_buffer.rb: added.
+
 	* src/rbgst-mini-object.c: implemented flags related APIs.
 	* test/test_mini_object.rb: added tests for flags.
 

@@ -25,8 +25,10 @@
  */
 
 #define SELF(object) (RVAL2GST_MINI_OBJ(object))
-#define RVAL2GST_MINI_FLAGS(flags) \
+#define RVAL2GST_FLAGS(flags) \
     (RVAL2GFLAGS(flags, GST_TYPE_MINI_OBJECT_FLAGS))
+#define GST_FLAGS2RVAL(flags) \
+    (GFLAGS2RVAL(flags, GST_TYPE_MINI_OBJECT_FLAGS))
 
 static RGFundamental fundamental;
 static VALUE rb_cGstMiniObject;
@@ -103,28 +105,27 @@ s_allocate(VALUE klass)
 static VALUE
 get_flags(VALUE self)
 {
-    return GFLAGS2RVAL(GST_MINI_OBJECT_FLAGS(SELF(self)),
-                       GST_TYPE_MINI_OBJECT_FLAGS);
+    return GST_FLAGS2RVAL(GST_MINI_OBJECT_FLAGS(SELF(self)));
 }
 
 static VALUE
 set_flags(VALUE self, VALUE flag)
 {
-    SELF(self)->flags = RVAL2GST_MINI_FLAGS(flag);
+    GST_MINI_OBJECT_FLAGS(SELF(self)) = RVAL2GST_FLAGS(flag);
     return Qnil;
 }
 
 static VALUE
 raise_flag(VALUE self, VALUE flag)
 {
-    GST_MINI_OBJECT_FLAG_SET(SELF(self), RVAL2GST_MINI_FLAGS(flag));
+    GST_MINI_OBJECT_FLAG_SET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
 static VALUE
 lower_flag(VALUE self, VALUE flag)
 {
-    GST_MINI_OBJECT_FLAG_UNSET(SELF(self), RVAL2GST_MINI_FLAGS(flag));
+    GST_MINI_OBJECT_FLAG_UNSET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
@@ -132,7 +133,7 @@ static VALUE
 flag_raised_p(VALUE self, VALUE flag)
 {
     return CBOOL2RVAL(GST_MINI_OBJECT_FLAG_IS_SET(SELF(self),
-                                                  RVAL2GST_MINI_FLAGS(flag)));
+                                                  RVAL2GST_FLAGS(flag)));
 }
 
 static VALUE
