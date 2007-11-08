@@ -1,5 +1,8 @@
 2007-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-mini-object.c: implemented flags related APIs.
+	* test/test_mini_object.rb: added tests for flags.
+
 	* test/run-test.rb: added paths for Ruby/GLib.
 
 2007-11-05  Kouhei Sutou  <kou@cozmixng.org>

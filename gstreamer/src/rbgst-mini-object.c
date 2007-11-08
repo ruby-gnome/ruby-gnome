@@ -25,6 +25,8 @@
  */
 
 #define SELF(object) (RVAL2GST_MINI_OBJ(object))
+#define RVAL2GST_MINI_FLAGS(flags) \
+    (RVAL2GFLAGS(flags, GST_TYPE_MINI_OBJECT_FLAGS))
 
 static RGFundamental fundamental;
 static VALUE rb_cGstMiniObject;
@@ -106,10 +108,31 @@ get_flags(VALUE self)
 }
 
 static VALUE
-set_flag(VALUE self, VALUE flag)
+set_flags(VALUE self, VALUE flag)
 {
-    return GST_MINI_OBJECT_FLAG_SET(SELF(self),
-                                    RVAL2GFLAGS(flag, GST_TYPE_MINI_OBJECT_FLAGS));
+    SELF(self)->flags = RVAL2GST_MINI_FLAGS(flag);
+    return Qnil;
+}
+
+static VALUE
+raise_flag(VALUE self, VALUE flag)
+{
+    GST_MINI_OBJECT_FLAG_SET(SELF(self), RVAL2GST_MINI_FLAGS(flag));
+    return Qnil;
+}
+
+static VALUE
+lower_flag(VALUE self, VALUE flag)
+{
+    GST_MINI_OBJECT_FLAG_UNSET(SELF(self), RVAL2GST_MINI_FLAGS(flag));
+    return Qnil;
+}
+
+static VALUE
+flag_raised_p(VALUE self, VALUE flag)
+{
+    return CBOOL2RVAL(GST_MINI_OBJECT_FLAG_IS_SET(SELF(self),
+                                                  RVAL2GST_MINI_FLAGS(flag)));
 }
 
 static VALUE
@@ -157,7 +180,10 @@ Init_gst_mini_object(void)
     rb_define_alloc_func(rb_cGstMiniObject, s_allocate);
 
     rb_define_method(rb_cGstMiniObject, "flags", get_flags, 0);
-    rb_define_method(rb_cGstMiniObject, "set_flag", set_flag, 1);
+    rb_define_method(rb_cGstMiniObject, "set_flags", set_flags, 1);
+    rb_define_method(rb_cGstMiniObject, "raise_flag", raise_flag, 1);
+    rb_define_method(rb_cGstMiniObject, "lower_flag", lower_flag, 1);
+    rb_define_method(rb_cGstMiniObject, "flag_raised?", flag_raised_p, 1);
     rb_define_method(rb_cGstMiniObject, "writable?", writable_p, 0);
     rb_define_method(rb_cGstMiniObject, "make_writable", make_writable, 0);
 
