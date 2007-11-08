@@ -25,4 +25,13 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(0, Gst::Buffer.new.size)
     assert_equal(5, Gst::Buffer.new(5).size)
   end
+
+  def test_data
+    buffer = Gst::Buffer.new
+    assert_equal([nil, 0], [buffer.data, buffer.size])
+    buffer.data = "XXX"
+    assert_equal(["XXX", 3], [buffer.data, buffer.size])
+    buffer.data = nil
+    assert_equal([nil, 0], [buffer.data, buffer.size])
+  end
 end

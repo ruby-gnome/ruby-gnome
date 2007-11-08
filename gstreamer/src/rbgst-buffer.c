@@ -85,6 +85,23 @@ get_data(VALUE self)
 }
 
 static VALUE
+set_data(VALUE self, VALUE data)
+{
+    GstBuffer *buffer;
+    buffer = SELF(self);
+
+    rb_ivar_set(self, rb_intern("data"), data);
+    if (NIL_P(data)) {
+        gst_buffer_set_data(buffer, NULL, 0);
+    } else {
+        gst_buffer_set_data(buffer,
+                            (guint8 *)RVAL2CSTR(data),
+                            RSTRING_LEN(data));
+    }
+    return Qnil;
+}
+
+static VALUE
 get_size(VALUE self)
 {
     return UINT2NUM(GST_BUFFER_SIZE(SELF(self)));
@@ -109,6 +126,7 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "flag_raised?", flag_raised_p, 1);
 
     rb_define_method(rb_cGstBuffer, "data", get_data, 0);
+    rb_define_method(rb_cGstBuffer, "set_data", set_data, 1);
     rb_define_method(rb_cGstBuffer, "size", get_size, 0);
 
     G_DEF_SETTERS(rb_cGstBuffer);
