@@ -1,5 +1,8 @@
 2007-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: implemented size setter.
+	* test/test_buffer.rb: added test for setting size.
+
 	* src/rbgst-buffer.c: implemented data accessor.
 	* test/test_buffer.rb: added test for data.
 

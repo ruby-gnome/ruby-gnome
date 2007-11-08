@@ -107,6 +107,13 @@ get_size(VALUE self)
     return UINT2NUM(GST_BUFFER_SIZE(SELF(self)));
 }
 
+static VALUE
+set_size(VALUE self, VALUE size)
+{
+    GST_BUFFER_SIZE(SELF(self)) = NUM2UINT(size);
+    return Qnil;
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -128,6 +135,7 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "data", get_data, 0);
     rb_define_method(rb_cGstBuffer, "set_data", set_data, 1);
     rb_define_method(rb_cGstBuffer, "size", get_size, 0);
+    rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
