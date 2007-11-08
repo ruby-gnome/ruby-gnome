@@ -58,10 +58,10 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_BUS(obj)           (GST_BUS(RVAL2GOBJ(obj)))
 #define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
+#define RVAL2GST_CLOCK(obj)         (GST_CLOCK(RVAL2GOBJ(obj)))
 
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
-#define RGST_CLOCK(o)               (GST_CLOCK(RVAL2GOBJ(o)))
 #define RGST_CLOCK_ENTRY(o)         (GST_CLOCK_ENTRY(RVAL2BOXED(o, GST_TYPE_CLOCK_ENTRY)))
 #define RGST_ELEMENT(o)             (GST_ELEMENT(RVAL2GOBJ(o)))
 #define RGST_ELEMENT_FACTORY(o)     (GST_ELEMENT_FACTORY(RVAL2GOBJ(o)))

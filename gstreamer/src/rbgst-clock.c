@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -20,41 +21,42 @@
 
 #include "rbgst.h"
 
+#define SELF(obj) (RVAL2GST_CLOCK(obj))
+
 /*  Class: Gst::Clock
- *  Abstract class for global clocks. 
+ *  Abstract class for global clocks.
  */
 
 /* Method: resolution
  * Returns: the accuracy of the clock.
  */
 static VALUE
-rb_gst_clock_get_resolution (VALUE self)
+get_resolution(VALUE self)
 {
-    return ULL2NUM (gst_clock_get_resolution (RGST_CLOCK (self)));
+    return ULL2NUM(gst_clock_get_resolution(SELF(self)));
 }
 
 /*
  * Method: set_resolution(resolution)
- * resolution: the accurary of the clock.
+ * resolution: the accuracy of the clock.
  *
  * Sets the accuracy of the clock.
  *
  * Returns: self.
  */
 static VALUE
-rb_gst_clock_set_resolution (VALUE self, VALUE resolution)
+set_resolution(VALUE self, VALUE resolution)
 {
-    gst_clock_set_resolution (RGST_CLOCK (self), ULL2NUM (resolution));
-    return self;
+    return ULL2NUM(gst_clock_set_resolution(SELF(self), NUM2ULL(resolution)));
 }
 
 /* Method: time
  * Returns: the time of the clock (in nanoseconds).
  */
 static VALUE
-rb_gst_clock_get_time (VALUE self)
+get_time(VALUE self)
 {
-    return ULL2NUM (gst_clock_get_time (RGST_CLOCK (self)));
+    return ULL2NUM(gst_clock_get_time(SELF(self)));
 }
 
 /*
@@ -65,31 +67,34 @@ rb_gst_clock_get_time (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_clock_is_equal (VALUE self, VALUE other_clock)
+equal_p(VALUE self, VALUE other_clock)
 {
-    if (NIL_P (other_clock))
+    if (NIL_P(other_clock))
         return Qfalse;
     else {
-        GstClock *c1 = RGST_CLOCK (self);
-        GstClock *c2 = RGST_CLOCK (other_clock);
+        GstClock *c1 = SELF(self);
+        GstClock *c2 = SELF(other_clock);
 
-        return CBOOL2RVAL (GST_CLOCK_DIFF (c1, c2) == 0);
+        return CBOOL2RVAL(GST_CLOCK_DIFF(c1, c2) == 0);
     }
 }
 
 void
 Init_gst_clock (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK, "Clock", mGst);
+    VALUE rb_cGstClock;
 
-    rb_define_method (c, "resolution", rb_gst_clock_get_resolution, 0);
-    rb_define_method (c, "set_resolution", rb_gst_clock_set_resolution, 1);
-    rb_define_method (c, "time", rb_gst_clock_get_time, 0);
-    rb_define_method (c, "==", rb_gst_clock_is_equal, 1);
+    rb_cGstClock = G_DEF_CLASS(GST_TYPE_CLOCK, "Clock", mGst);
 
-    G_DEF_CLASS (GST_TYPE_CLOCK_FLAGS, "Flags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
-    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
-    G_DEF_SETTERS (c);
+    G_DEF_CLASS(GST_TYPE_CLOCK_FLAGS, "Flags", rb_cGstClock);
+    G_DEF_CONSTANTS(rb_cGstClock, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
+    G_DEF_CLASS(GST_TYPE_CLOCK_RETURN, "Return", rb_cGstClock);
+    G_DEF_CONSTANTS(rb_cGstClock, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
+
+    rb_define_method(rb_cGstClock, "resolution", get_resolution, 0);
+    rb_define_method(rb_cGstClock, "set_resolution", set_resolution, 1);
+    rb_define_method(rb_cGstClock, "time", get_time, 0);
+    rb_define_method(rb_cGstClock, "==", equal_p, 1);
+
+    G_DEF_SETTERS(rb_cGstClock);
 }
