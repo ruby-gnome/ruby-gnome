@@ -114,6 +114,19 @@ set_size(VALUE self, VALUE size)
     return Qnil;
 }
 
+static VALUE
+get_timestamp(VALUE self)
+{
+    return ULL2NUM(GST_BUFFER_TIMESTAMP(SELF(self)));
+}
+
+static VALUE
+set_timestamp(VALUE self, VALUE timestamp)
+{
+    GST_BUFFER_TIMESTAMP(SELF(self)) = NUM2ULL(timestamp);
+    return Qnil;
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -136,6 +149,8 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "set_data", set_data, 1);
     rb_define_method(rb_cGstBuffer, "size", get_size, 0);
     rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
+    rb_define_method(rb_cGstBuffer, "timestamp", get_timestamp, 0);
+    rb_define_method(rb_cGstBuffer, "set_timestamp", set_timestamp, 1);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }

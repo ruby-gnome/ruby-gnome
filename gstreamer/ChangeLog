@@ -1,5 +1,8 @@
 2007-11-08  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: implemented timestamp API.
+	* test/test_buffer.rb: added a test for timestamp.
+
 	* src/rbgst.h, src/rbgst-clock.c, src/rbgstclock.c: rewrote clock.
 	* test/test_clock.rb: added.
 

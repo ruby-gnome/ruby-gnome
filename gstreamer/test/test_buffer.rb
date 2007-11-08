@@ -37,4 +37,13 @@ class TestBuffer < Test::Unit::TestCase
     buffer.data = nil
     assert_equal([nil, 0], [buffer.data, buffer.size])
   end
+
+  def test_timestamp
+    buffer = Gst::Buffer.new
+    assert_operator(0, :<, buffer.timestamp)
+
+    new_value = buffer.timestamp - 1000
+    buffer.timestamp = new_value
+    assert_equal(new_value, buffer.timestamp)
+  end
 end
