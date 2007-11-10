@@ -70,10 +70,15 @@ rb_gst_type_find_factory_get_extensions(VALUE self)
 
     ary = rb_ary_new ();
     extensions = gst_type_find_factory_get_extensions(SELF(self));
+
+    if (!extensions)
+        return ary;
+
     while (*extensions) {
         rb_ary_push(ary, CSTR2RVAL(*extensions));
         extensions++;
     }
+
     return ary;
 }
 

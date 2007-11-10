@@ -1,5 +1,7 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-type-find-factory.c: added NULL check.
+
 	* src/rbgst-type-find-factory.c: cleanup.
 	* test/test_type_find_factory.rb: added a test for extensions.
 
