@@ -275,7 +275,22 @@ error_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
                                              RVAL2CSTR(debug)));
     return Qnil;
 }
+#endif
 
+static VALUE
+error_parse(VALUE self)
+{
+    VALUE result;
+    GError *error;
+    gchar *debug;
+
+    gst_message_parse_error(SELF(self), &error, &debug);
+    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    g_error_free(error);
+    return result;
+}
+
+#if 0
 static VALUE
 warning_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
 {
@@ -284,7 +299,22 @@ warning_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
                                                RVAL2CSTR(debug)));
     return Qnil;
 }
+#endif
 
+static VALUE
+warning_parse(VALUE self)
+{
+    VALUE result;
+    GError *error;
+    gchar *debug;
+
+    gst_message_parse_warning(SELF(self), &error, &debug);
+    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    g_error_free(error);
+    return result;
+}
+
+#if 0
 static VALUE
 info_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
 {
@@ -293,7 +323,22 @@ info_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
                                             RVAL2CSTR(debug)));
     return Qnil;
 }
+#endif
 
+static VALUE
+info_parse(VALUE self)
+{
+    VALUE result;
+    GError *error;
+    gchar *debug;
+
+    gst_message_parse_info(SELF(self), &error, &debug);
+    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    g_error_free(error);
+    return result;
+}
+
+#if 0
 static VALUE
 tag_initialize(VALUE self, VALUE src, VALUE tag_list)
 {
@@ -312,6 +357,15 @@ buffering_initialize(VALUE self, VALUE src, VALUE percent)
 }
 
 static VALUE
+buffering_parse(VALUE self)
+{
+    gint percent;
+
+    gst_message_parse_buffering(SELF(self), &percent);
+    return INT2NUM(percent);
+}
+
+static VALUE
 state_changed_initialize(VALUE self, VALUE src, VALUE old_state,
                          VALUE new_state, VALUE pending)
 {
@@ -320,6 +374,19 @@ state_changed_initialize(VALUE self, VALUE src, VALUE old_state,
                                                      RVAL2GST_STATE(new_state),
                                                      RVAL2GST_STATE(pending)));
     return Qnil;
+}
+
+static VALUE
+state_changed_parse(VALUE self)
+{
+    GstState old_state, new_state, pending_state;
+
+    gst_message_parse_state_changed(SELF(self),
+                                    &old_state, &new_state, &pending_state);
+    return rb_ary_new3(3,
+                       GST_STATE2RVAL(old_state),
+                       GST_STATE2RVAL(new_state),
+                       GST_STATE2RVAL(pending_state));
 }
 
 static VALUE
@@ -339,6 +406,16 @@ clock_provide_initialize(VALUE self, VALUE src, VALUE clock, VALUE ready)
 }
 
 static VALUE
+clock_provide_parse(VALUE self)
+{
+    GstClock *clock;
+    gboolean ready;
+
+    gst_message_parse_clock_provide(SELF(self), &clock, &ready);
+    return rb_ary_new3(2, GOBJ2RVAL(clock), CBOOL2RVAL(ready));
+}
+
+static VALUE
 clock_lost_initialize(VALUE self, VALUE src, VALUE clock)
 {
     G_INITIALIZE(self, gst_message_new_clock_lost(RVAL2GST_OBJ(src),
@@ -347,11 +424,29 @@ clock_lost_initialize(VALUE self, VALUE src, VALUE clock)
 }
 
 static VALUE
+clock_lost_parse(VALUE self)
+{
+    GstClock *clock;
+
+    gst_message_parse_clock_lost(SELF(self), &clock);
+    return GOBJ2RVAL(clock);
+}
+
+static VALUE
 new_clock_initialize(VALUE self, VALUE src, VALUE clock)
 {
     G_INITIALIZE(self, gst_message_new_new_clock(RVAL2GST_OBJ(src),
                                                  RVAL2GST_CLOCK(clock)));
     return Qnil;
+}
+
+static VALUE
+new_clock_parse(VALUE self)
+{
+    GstClock *clock;
+
+    gst_message_parse_new_clock(SELF(self), &clock);
+    return GOBJ2RVAL(clock);
 }
 
 static VALUE
@@ -380,12 +475,32 @@ segment_start_initialize(VALUE self, VALUE src, VALUE format, VALUE position)
 }
 
 static VALUE
+segment_start_parse(VALUE self)
+{
+    GstFormat format;
+    gint64 position;
+
+    gst_message_parse_segment_start(SELF(self), &format, &position);
+    return rb_ary_new3(2, GST_FORMAT2RVAL(format), LL2NUM(position));
+}
+
+static VALUE
 segment_done_initialize(VALUE self, VALUE src, VALUE format, VALUE position)
 {
     G_INITIALIZE(self, gst_message_new_segment_done(RVAL2GST_OBJ(src),
                                                     RVAL2GST_FORMAT(format),
                                                     NUM2LL(position)));
     return Qnil;
+}
+
+static VALUE
+segment_done_parse(VALUE self)
+{
+    GstFormat format;
+    gint64 position;
+
+    gst_message_parse_segment_done(SELF(self), &format, &position);
+    return rb_ary_new3(2, GST_FORMAT2RVAL(format), LL2NUM(position));
 }
 
 static VALUE
@@ -398,11 +513,30 @@ duration_initialize(VALUE self, VALUE src, VALUE format, VALUE duration)
 }
 
 static VALUE
+duration_parse(VALUE self)
+{
+    GstFormat format;
+    gint64 duration;
+
+    gst_message_parse_duration(SELF(self), &format, &duration);
+    return rb_ary_new3(2, GST_FORMAT2RVAL(format), LL2NUM(duration));
+}
+
+static VALUE
 async_start_initialize(VALUE self, VALUE src, VALUE new_base_time)
 {
     G_INITIALIZE(self, gst_message_new_async_start(RVAL2GST_OBJ(src),
                                                    RVAL2CBOOL(new_base_time)));
     return Qnil;
+}
+
+static VALUE
+async_start_parse(VALUE self)
+{
+    gboolean new_base_time;
+
+    gst_message_parse_async_start(SELF(self), &new_base_time);
+    return CBOOL2RVAL(new_base_time);
 }
 
 static VALUE
@@ -505,38 +639,78 @@ Init_gst_message(void)
 
 
     rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
+
 #if 0
     rb_define_method(rb_cGstMessageError, "initialize", error_initialize, 3);
-    rb_define_method(rb_cGstMessageWarning, "initialize", warning_initialize, 3);
-    rb_define_method(rb_cGstMessageInfo, "initialize", info_initialize, 3);
-    rb_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
 #endif
+    rb_define_method(rb_cGstMessageError, "parse", error_parse, 0);
+
+#if 0
+    rb_define_method(rb_cGstMessageWarning, "initialize", warning_initialize, 3);
+#endif
+    rb_define_method(rb_cGstMessageWarning, "parse", warning_parse, 0);
+
+#if 0
+    rb_define_method(rb_cGstMessageInfo, "initialize", info_initialize, 3);
+#endif
+    rb_define_method(rb_cGstMessageInfo, "parse", info_parse, 0);
+
+#if 0
+    rb_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
+    rb_define_method(rb_cGstMessageTag, "parse", tag_parse, 0);
+#endif
+
     rb_define_method(rb_cGstMessageBuffering, "initialize",
                      buffering_initialize, 2);
+    rb_define_method(rb_cGstMessageBuffering, "parse", buffering_parse, 0);
+
     rb_define_method(rb_cGstMessageStateChanged, "initialize",
                      state_changed_initialize, 4);
+    rb_define_method(rb_cGstMessageStateChanged, "parse",
+                     state_changed_parse, 0);
+
     rb_define_method(rb_cGstMessageStateDirty, "initialize",
                      state_dirty_initialize, 1);
+
     rb_define_method(rb_cGstMessageClockProvide, "initialize",
-                     clock_provide_initialize, 2);
+                     clock_provide_initialize, 3);
+    rb_define_method(rb_cGstMessageClockProvide, "parse",
+                     clock_provide_parse, 0);
+
     rb_define_method(rb_cGstMessageClockLost, "initialize",
                      clock_lost_initialize, 2);
+    rb_define_method(rb_cGstMessageClockLost, "parse", clock_lost_parse, 0);
+
     rb_define_method(rb_cGstMessageNewClock, "initialize",
                      new_clock_initialize, 2);
+    rb_define_method(rb_cGstMessageNewClock, "parse", new_clock_parse, 0);
+
     rb_define_method(rb_cGstMessageApplication, "initialize",
                      application_initialize, 2);
+
     rb_define_method(rb_cGstMessageElement, "initialize",
                      element_initialize, 2);
+
     rb_define_method(rb_cGstMessageSegmentStart, "initialize",
                      segment_start_initialize, 3);
+    rb_define_method(rb_cGstMessageSegmentStart, "parse",
+                     segment_start_parse, 0);
+
     rb_define_method(rb_cGstMessageSegmentDone, "initialize",
                      segment_done_initialize, 3);
+    rb_define_method(rb_cGstMessageSegmentDone, "parse", segment_done_parse, 0);
+
     rb_define_method(rb_cGstMessageDuration, "initialize",
                      duration_initialize, 3);
+    rb_define_method(rb_cGstMessageDuration, "parse", duration_parse, 0);
+
     rb_define_method(rb_cGstMessageAsyncStart, "initialize",
                      async_start_initialize, 2);
+    rb_define_method(rb_cGstMessageAsyncStart, "parse", async_start_parse, 0);
+
     rb_define_method(rb_cGstMessageAsyncDone, "initialize",
                      async_done_initialize, 1);
+
     rb_define_method(rb_cGstMessageLatency, "initialize", latency_initialize, 1);
 
 

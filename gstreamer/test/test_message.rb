@@ -5,119 +5,128 @@ class TestMessage < Test::Unit::TestCase
     end
   end
 
-  def test_create_message_eos
+  def test_message_eos
     assert_nothing_raised do
       Gst::MessageEos.new(nil)
     end
   end
 
-  def test_create_message_error
+  def test_message_error
     return "FIXME" if true
-    assert_nothing_raised do
-      Gst::MessageError.new(nil)
-    end
+    error = nil
+    debug = "ERROR"
+    message = Gst::MessageError.new(nil, error, debug)
+    assert_equal([error, debug], message.parse)
   end
 
-  def test_create_message_warning
+  def test_message_warning
     return "FIXME" if true
-    assert_nothing_raised do
-      Gst::MessageWarning.new(nil)
-    end
+    error = nil
+    debug = "WARNING"
+    message = Gst::MessageWarning.new(nil, error, debug)
+    assert_equal([error, debug], message.parse)
   end
 
-  def test_create_message_info
+  def test_message_info
     return "FIXME" if true
-    assert_nothing_raised do
-      Gst::MessageInfo.new(nil)
-    end
+    error = nil
+    debug = "INFO"
+    message = Gst::MessageInfo.new(nil, error, debug)
+    assert_equal([error, debug], message.parse)
   end
 
-  def test_create_message_tag
+  def test_message_tag
     return "FIXME" if true
-    assert_nothing_raised do
-      Gst::MessageTag.new(nil)
-    end
+    tag_list = []
+    message = Gst::MessageTag.new(nil, tag_list)
+    assert_equal(tag_list, message.parse)
   end
 
-  def test_create_message_buffering
-    assert_nothing_raised do
-      Gst::MessageBuffering.new(nil, 50)
-    end
+  def test_message_buffering
+    percent = 50
+    message = Gst::MessageBuffering.new(nil, percent)
+    assert_equal(percent, message.parse)
   end
 
-  def test_create_message_state_changed
-    assert_nothing_raised do
-      Gst::MessageStateChanged.new(nil, :paused, :playing, :void_pending)
-    end
+  def test_message_state_changed
+    old = Gst::STATE_PAUSED
+    new = Gst::STATE_PLAYING
+    pending = Gst::STATE_VOID_PENDING
+    message = Gst::MessageStateChanged.new(nil, :paused, :playing, :void_pending)
+    assert_equal([old, new, pending], message.parse)
   end
 
-  def test_create_message_state_dirty
+  def test_message_state_dirty
     assert_nothing_raised do
       Gst::MessageStateDirty.new(nil)
     end
   end
 
-  def test_create_message_clock_provide
-    assert_nothing_raised do
-      Gst::MessageClockProvide.new(nil, Gst::SystemClock.obtain)
-    end
+  def test_message_clock_provide
+    clock = Gst::SystemClock.obtain
+    ready = true
+    message = Gst::MessageClockProvide.new(nil, clock, ready)
+    assert_equal([clock, ready], message.parse)
   end
 
-  def test_create_message_clock_lost
-    assert_nothing_raised do
-      Gst::MessageClockLost.new(nil, Gst::SystemClock.obtain)
-    end
+  def test_message_clock_lost
+    clock = Gst::SystemClock.obtain
+    message = Gst::MessageClockLost.new(nil, clock)
+    assert_equal(clock, message.parse)
   end
 
   def test_create_message_new_clock
-    assert_nothing_raised do
-      Gst::MessageNewClock.new(nil, Gst::SystemClock.obtain)
-    end
+    clock = Gst::SystemClock.obtain
+    message = Gst::MessageNewClock.new(nil, clock)
+    assert_equal(clock, message.parse)
   end
 
-  def test_create_message_application
+  def test_message_application
     assert_nothing_raised do
       Gst::MessageApplication.new(nil, {})
     end
   end
 
-  def test_create_message_element
+  def test_message_element
     assert_nothing_raised do
       Gst::MessageElement.new(nil, {})
     end
   end
 
-  def test_create_message_segment_start
-    assert_nothing_raised do
-      Gst::MessageSegmentStart.new(nil, :default, 100)
-    end
+  def test_message_segment_start
+    format = Gst::Format::DEFAULT
+    position = 100
+    message = Gst::MessageSegmentStart.new(nil, :default, position)
+    assert_equal([format, position], message.parse)
   end
 
-  def test_create_message_segment_done
-    assert_nothing_raised do
-      Gst::MessageSegmentDone.new(nil, :default, 100)
-    end
+  def test_message_segment_done
+    format = Gst::Format::DEFAULT
+    position = 100
+    message = Gst::MessageSegmentDone.new(nil, :default, position)
+    assert_equal([format, position], message.parse)
   end
 
-  def test_create_message_duration
-    assert_nothing_raised do
-      Gst::MessageDuration.new(nil, :default, 10)
-    end
+  def test_message_duration
+    format = Gst::Format::DEFAULT
+    duration = 10
+    message = Gst::MessageDuration.new(nil, :default, duration)
+    assert_equal([format, duration], message.parse)
   end
 
-  def test_create_message_async_start
-    assert_nothing_raised do
-      Gst::MessageAsyncStart.new(nil, true)
-    end
+  def test_message_async_start
+    new_base_time = true
+    message = Gst::MessageAsyncStart.new(nil, new_base_time)
+    assert_equal(new_base_time, message.parse)
   end
 
-  def test_create_message_async_done
+  def test_message_async_done
     assert_nothing_raised do
       Gst::MessageAsyncDone.new(nil)
     end
   end
 
-  def test_create_message_latency
+  def test_message_latency
     assert_nothing_raised do
       Gst::MessageLatency.new(nil)
     end

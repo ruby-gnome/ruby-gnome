@@ -258,7 +258,7 @@ rb_gst_element_get_clock (VALUE self)
 static VALUE
 rb_gst_element_set_clock (VALUE self, VALUE clock)
 {
-    gst_element_set_clock (RGST_ELEMENT (self), RGST_CLOCK (clock));
+    gst_element_set_clock(RGST_ELEMENT(self), RVAL2GST_CLOCK(clock));
     return self;
 }
 
@@ -723,9 +723,10 @@ rb_gst_element_found_tag_sig (guint num, const GValue *values)
     source = g_value_get_object (&values[1]);
     tag_list = g_value_get_boxed (&values[2]);
 
-    return rb_ary_new3 (3, RGST_ELEMENT_NEW (element), 
-                           RGST_ELEMENT_NEW (source),
-                           gst_structure_to_ruby_hash (tag_list));
+    return rb_ary_new3(3,
+                       RGST_ELEMENT_NEW(element),
+                       RGST_ELEMENT_NEW(source),
+                       GST_STRUCT2RVAL(tag_list));
 }
 
 void
@@ -786,12 +787,12 @@ Init_gst_element (void)
 
     G_DEF_SETTERS (c);
 
-    G_DEF_CLASS(GST_TYPE_STATE, "State", c);
-    G_DEF_CONSTANTS(c, GST_TYPE_STATE, "GST_");
-    G_DEF_CLASS(GST_TYPE_STATE_CHANGE_RETURN, "StateChangeReturn", c);
-    G_DEF_CONSTANTS(c, GST_TYPE_STATE_CHANGE_RETURN, "GST_");
-    G_DEF_CLASS(GST_TYPE_STATE_CHANGE, "StateChange", c);
-    G_DEF_CONSTANTS(c, GST_TYPE_STATE_CHANGE, "GST_");
+    G_DEF_CLASS(GST_TYPE_STATE, "State", mGst);
+    G_DEF_CONSTANTS(mGst, GST_TYPE_STATE, "GST_");
+    G_DEF_CLASS(GST_TYPE_STATE_CHANGE_RETURN, "StateChangeReturn", mGst);
+    G_DEF_CONSTANTS(mGst, GST_TYPE_STATE_CHANGE_RETURN, "GST_");
+    G_DEF_CLASS(GST_TYPE_STATE_CHANGE, "StateChange", mGst);
+    G_DEF_CONSTANTS(mGst, GST_TYPE_STATE_CHANGE, "GST_");
     G_DEF_CLASS(GST_TYPE_ELEMENT_FLAGS, "Flags", c);
     G_DEF_CONSTANTS(c, GST_TYPE_ELEMENT_FLAGS, "GST_ELEMENT_");
 
