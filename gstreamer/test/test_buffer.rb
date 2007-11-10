@@ -40,10 +40,23 @@ class TestBuffer < Test::Unit::TestCase
 
   def test_timestamp
     buffer = Gst::Buffer.new
-    assert_operator(0, :<, buffer.timestamp)
+    assert_equal(Gst::ClockTime::NONE, buffer.timestamp)
+    assert(!buffer.valid_timestamp?)
 
-    new_value = buffer.timestamp - 1000
+    new_value = Time.now.to_i * Gst::NSECOND
     buffer.timestamp = new_value
     assert_equal(new_value, buffer.timestamp)
+    assert(buffer.valid_timestamp?)
+  end
+
+  def test_duration
+    buffer = Gst::Buffer.new
+    assert_equal(Gst::ClockTime::NONE, buffer.duration)
+    assert(!buffer.valid_duration?)
+
+    new_value = 10 * 60 * Gst::NSECOND
+    buffer.duration = new_value
+    assert_equal(new_value, buffer.duration)
+    assert(buffer.valid_duration?)
   end
 end

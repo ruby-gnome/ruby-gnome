@@ -82,9 +82,17 @@ equal_p(VALUE self, VALUE other_clock)
 void
 Init_gst_clock (void)
 {
-    VALUE rb_cGstClock;
+    VALUE rb_cGstClock, rb_mGstClockTime;
 
     rb_cGstClock = G_DEF_CLASS(GST_TYPE_CLOCK, "Clock", mGst);
+
+    rb_define_const(mGst, "SECOND", LL2NUM(GST_SECOND));
+    rb_define_const(mGst, "MSECOND", LL2NUM(GST_MSECOND));
+    rb_define_const(mGst, "USECOND", LL2NUM(GST_USECOND));
+    rb_define_const(mGst, "NSECOND", LL2NUM(GST_NSECOND));
+
+    rb_mGstClockTime = rb_define_module_under(mGst, "ClockTime");
+    rb_define_const(rb_mGstClockTime, "NONE", ULL2NUM(GST_CLOCK_TIME_NONE));
 
     G_DEF_CLASS(GST_TYPE_CLOCK_FLAGS, "Flags", rb_cGstClock);
     G_DEF_CONSTANTS(rb_cGstClock, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");

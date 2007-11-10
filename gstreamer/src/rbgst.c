@@ -218,46 +218,22 @@ Init_gst (void)
     rb_define_module_function(mGst, "version", rb_gst_version, 0);
 
     /*
-     * Constant: SECOND
-     * Constant that defines one GStreamer second.
-     */
-    rb_define_const (mGst, "SECOND", INT2FIX (GST_SECOND));
-
-    /*
-     * Constant: MSECOND
-     * Constant that defines one GStreamer millisecond.
-     */
-    rb_define_const (mGst, "MSECOND", INT2FIX (GST_MSECOND));
-
-    /*
-     * Constant: USECOND
-     * Constant that defines one GStreamer microsecond.
-     */
-    rb_define_const (mGst, "USECOND", INT2FIX (GST_USECOND));
-
-    /*
-     * Constant: NSECOND
-     * Constant that defines one GStreamer nanosecond.
-     */
-    rb_define_const (mGst, "NSECOND", INT2FIX (GST_NSECOND));
-
-    /*
      * Constant: VERSION_MAJOR
      * GStreamer's major version.
      */
-    rb_define_const (mGst, "VERSION_MAJOR", INT2FIX (GST_VERSION_MAJOR));
+    rb_define_const(mGst, "VERSION_MAJOR", INT2FIX(GST_VERSION_MAJOR));
 
     /*
      * Constant: VERSION_MINOR
      * GStreamer's minor version.
      */
-    rb_define_const (mGst, "VERSION_MINOR", INT2FIX (GST_VERSION_MINOR));
+    rb_define_const(mGst, "VERSION_MINOR", INT2FIX(GST_VERSION_MINOR));
 
     /*
      * Constant: VERSION_MICRO
      * GStreamer's micro version.
      */
-    rb_define_const (mGst, "VERSION_MICRO", INT2FIX (GST_VERSION_MICRO));
+    rb_define_const(mGst, "VERSION_MICRO", INT2FIX(GST_VERSION_MICRO));
 
 
     /*

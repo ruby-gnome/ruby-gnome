@@ -127,6 +127,31 @@ set_timestamp(VALUE self, VALUE timestamp)
     return Qnil;
 }
 
+static VALUE
+valid_timestamp_p(VALUE self)
+{
+    return CBOOL2RVAL(GST_CLOCK_TIME_IS_VALID(GST_BUFFER_TIMESTAMP(SELF(self))));
+}
+
+static VALUE
+get_duration(VALUE self)
+{
+    return ULL2NUM(GST_BUFFER_DURATION(SELF(self)));
+}
+
+static VALUE
+set_duration(VALUE self, VALUE duration)
+{
+    GST_BUFFER_DURATION(SELF(self)) = NUM2ULL(duration);
+    return Qnil;
+}
+
+static VALUE
+valid_duration_p(VALUE self)
+{
+    return CBOOL2RVAL(GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(SELF(self))));
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -151,6 +176,10 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
     rb_define_method(rb_cGstBuffer, "timestamp", get_timestamp, 0);
     rb_define_method(rb_cGstBuffer, "set_timestamp", set_timestamp, 1);
+    rb_define_method(rb_cGstBuffer, "valid_timestamp?", valid_timestamp_p, 0);
+    rb_define_method(rb_cGstBuffer, "duration", get_duration, 0);
+    rb_define_method(rb_cGstBuffer, "set_duration", set_duration, 1);
+    rb_define_method(rb_cGstBuffer, "valid_duration?", valid_duration_p, 0);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
