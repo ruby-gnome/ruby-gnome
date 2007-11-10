@@ -1,5 +1,8 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-type-find-factory.c: cleanup.
+	* test/test_type_find_factory.rb: added a test for extensions.
+
 	* src/rbgst-index-factory.c: supported find and description.
 	* test/test_index_factory.rb: added a test for find and description.
 

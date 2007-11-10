@@ -1,6 +1,7 @@
-
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -20,6 +21,8 @@
  */
 
 #include "rbgst.h"
+
+#define SELF(self) RVAL2GST_TF_FACTORY(self)
 
 /* Class: Gst::TypeFindFactory
  * Information about registered type find functions.
@@ -59,18 +62,17 @@ rb_gst_type_find_factory_get_list (void)
  * Returns: an Array of String objects, or nil if no extensions are 
  * associated with the type find factory.
  */
-static VALUE 
-rb_gst_type_find_factory_get_extensions (VALUE self) 
+static VALUE
+rb_gst_type_find_factory_get_extensions(VALUE self)
 {
     VALUE ary;
-    gchar **exts;
-    
+    gchar **extensions;
+
     ary = rb_ary_new ();
-    exts = gst_type_find_factory_get_extensions (
-                RGST_TYPE_FIND_FACTORY (self));
-    while (*exts != NULL) {
-        rb_ary_push (ary, CSTR2RVAL (*exts));
-        exts++;
+    extensions = gst_type_find_factory_get_extensions(SELF(self));
+    while (*extensions) {
+        rb_ary_push(ary, CSTR2RVAL(*extensions));
+        extensions++;
     }
     return ary;
 }

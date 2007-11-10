@@ -61,6 +61,8 @@ extern VALUE cGstEventSeek;
                                 (GST_ELEMENT_FACTORY(RVAL2GOBJ(obj)))
 #define RVAL2GST_IDX_FACTORY(obj) \
                                 (GST_INDEX_FACTORY(RVAL2GOBJ(obj)))
+#define RVAL2GST_TF_FACTORY(obj) \
+                                (GST_TYPE_FIND_FACTORY(RVAL2GOBJ(obj)))
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
