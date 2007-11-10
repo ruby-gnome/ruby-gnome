@@ -269,6 +269,19 @@ create_sub(VALUE self, VALUE offset, VALUE size)
     return rb_buffer;
 }
 
+static VALUE
+span(VALUE self, VALUE offset, VALUE other, VALUE length)
+{
+    return GOBJ2RVAL(gst_buffer_span(SELF(self), NUM2UINT(offset),
+                                     SELF(other), NUM2UINT(length)));
+}
+
+static VALUE
+span_p(VALUE self, VALUE other)
+{
+    return CBOOL2RVAL(gst_buffer_is_span_fast(SELF(self), SELF(other)));
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -303,6 +316,8 @@ Init_gst_buffer(void)
 
     rb_define_method(rb_cGstBuffer, "size", get_size, 0);
     rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
+    rb_define_alias(rb_cGstBuffer, "length", "size");
+    rb_define_alias(rb_cGstBuffer, "set_length", "set_size");
 
     rb_define_method(rb_cGstBuffer, "timestamp", get_timestamp, 0);
     rb_define_method(rb_cGstBuffer, "set_timestamp", set_timestamp, 1);
@@ -333,6 +348,9 @@ Init_gst_buffer(void)
                      metadata_writable_bang, 0);
 
     rb_define_method(rb_cGstBuffer, "create_sub", create_sub, 2);
+
+    rb_define_method(rb_cGstBuffer, "span", span, 3);
+    rb_define_method(rb_cGstBuffer, "span?", span_p, 1);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }

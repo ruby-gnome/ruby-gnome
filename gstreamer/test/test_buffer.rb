@@ -154,4 +154,21 @@ class TestBuffer < Test::Unit::TestCase
     sub.metadata_writable!
     # assert(sub.metadata_writable?) # FIXME
   end
+
+  def test_span
+    buffer1 = Gst::Buffer.new(5)
+    buffer2 = Gst::Buffer.new(10)
+
+    length = 7
+    merged_buffer = buffer1.span(2, buffer2, length)
+    assert(length, merged_buffer.length)
+  end
+
+  def test_span?
+    buffer = Gst::Buffer.new
+    sub_buffer1 = buffer.create_sub(0, 0)
+    sub_buffer2 = buffer.create_sub(0, 0)
+    assert(sub_buffer1.span?(sub_buffer2))
+    assert(!buffer.span?(sub_buffer1))
+  end
 end
