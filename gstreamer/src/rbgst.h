@@ -60,8 +60,10 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
-#define RVAL2GST_STRUCT(obj)    (ruby_hash_to_gst_structure(obj))
-#define GST_STRUCT2RVAL(obj)    (gst_structure_to_ruby_hash(obj))
+#define RVAL2GST_STRUCT(obj)    (rbgst_hash_to_structure(obj))
+#define RVAL2GST_STRUCT_WITH_NAME(obj, name) \
+                                (rbgst_hash_to_structure_with_name(obj, name))
+#define GST_STRUCT2RVAL(obj)    (rbgst_structure_to_hash(obj))
 
 
 
@@ -146,11 +148,10 @@ VALUE rb_ary_yield (VALUE arr);
 gboolean is_valid_pluginfeature_type (const GType type);
 VALUE instanciate_pluginfeature (GstPluginFeature * feature);
 
-/* implemented in rbgststructure.c */
-VALUE gst_structure_to_ruby_hash (GstStructure *gst_struct);
-GstStructure *ruby_hash_to_gst_structure (VALUE hash);
-GstStructure *ruby_hash_to_gst_structure_with_name (VALUE hash,
-                                                    const char *name);
+/* implemented in rbgst-structure.c */
+VALUE rbgst_structure_to_hash(GstStructure *structure);
+GstStructure *rbgst_hash_to_structure(VALUE hash);
+GstStructure *rbgst_hash_to_structure_with_name(VALUE hash, const char *name);
 
 void rbgst_mini_object_free(void *ptr);
 VALUE rbgst_mini_object_get_superclass(void);

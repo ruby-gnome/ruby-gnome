@@ -44,8 +44,7 @@ rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
     caps = gst_caps_new_any ();
     if (caps != NULL) {
         for (i = 0; i < argc; i++)
-            gst_caps_append_structure (caps, 
-                                       ruby_hash_to_gst_structure (argv[i]));
+            gst_caps_append_structure (caps, RVAL2GST_STRUCT(argv[i]));
         G_INITIALIZE (self, caps);
     }
     return Qnil;
@@ -92,8 +91,7 @@ rb_gst_caps_append (VALUE self, VALUE caps)
 static VALUE
 rb_gst_caps_append_structure (VALUE self, VALUE structure)
 {
-    gst_caps_append_structure (RGST_CAPS (self), 
-                               ruby_hash_to_gst_structure (structure));
+    gst_caps_append_structure (RGST_CAPS (self), RVAL2GST_STRUCT(structure));
     return self;
 }
 
@@ -121,8 +119,7 @@ rb_gst_caps_get_structure (VALUE self, VALUE index)
     GstStructure *structure = gst_caps_get_structure (RGST_CAPS (self),
                                                       FIX2INT (index));
 
-    return structure != NULL ? gst_structure_to_ruby_hash (structure)
-        : Qnil;
+    return GST_STRUCT2RVAL(structure);
 }
 
 static VALUE
