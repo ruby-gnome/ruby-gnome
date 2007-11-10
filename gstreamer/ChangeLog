@@ -1,5 +1,7 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-mini-object.c: supported dynamically name resolving.
+
 	* src/rbgst-buffer.c: implemented metatdata_writable API.
 	* test/test_buffer.rb: added tests for metadata_writable.
 

@@ -92,6 +92,14 @@ rbgst_mini_object_instance2robj(gpointer instance)
 
     type = G_TYPE_FROM_INSTANCE(instance);
     klass = GTYPE2CLASS(type);
+    if (rb_class2name(klass)[0] == '#') {
+        const gchar *type_name;
+        type_name = g_type_name(type);
+
+        if (g_str_has_prefix(type_name, "Gst"))
+            type_name += 3;
+        G_DEF_CLASS(type, type_name, mGst);
+    }
     gst_mini_object_ref(instance);
     return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
 }
