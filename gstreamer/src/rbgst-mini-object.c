@@ -151,19 +151,16 @@ writable_p(VALUE self)
 }
 
 static VALUE
-make_writable(VALUE self)
+writable_bang(VALUE self)
 {
     GstMiniObject *original, *writable;
-    VALUE result;
 
     original = SELF(self);
-    gst_mini_object_ref(original);
     writable = gst_mini_object_make_writable(original);
+    DATA_PTR(self) = writable;
     if (original == writable)
         gst_mini_object_unref(original);
-    result = GOBJ2RVAL(writable); /* I want to use GOBJ2RVALU!!! */
-    gst_mini_object_unref(writable);
-    return result;
+    return self;
 }
 
 void
@@ -194,7 +191,7 @@ Init_gst_mini_object(void)
     rb_define_method(rb_cGstMiniObject, "lower_flag", lower_flag, 1);
     rb_define_method(rb_cGstMiniObject, "flag_raised?", flag_raised_p, 1);
     rb_define_method(rb_cGstMiniObject, "writable?", writable_p, 0);
-    rb_define_method(rb_cGstMiniObject, "make_writable", make_writable, 0);
+    rb_define_method(rb_cGstMiniObject, "writable!", writable_bang, 0);
 
     G_DEF_SETTERS(rb_cGstMiniObject);
 }

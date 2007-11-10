@@ -15,8 +15,8 @@ class TestMiniObject < Test::Unit::TestCase
     assert(mini_object.writable?)
     mini_object.flags = :readonly
     assert(!mini_object.writable?)
-    writable = mini_object.make_writable
-    assert(writable.writable?)
+    mini_object.writable!
+    assert(mini_object.writable?)
   end
 
   def test_flag
