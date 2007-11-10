@@ -40,7 +40,10 @@ foreach_pair (GQuark field_id, const GValue *value, gpointer user_data)
 VALUE gst_structure_to_ruby_hash (GstStructure *gst_struct)
 {
     VALUE hash;
-    
+
+    if (!gst_struct)
+        return Qnil;
+
     hash = rb_hash_new ();
     gst_structure_foreach (gst_struct, foreach_pair, &hash);
     return hash;

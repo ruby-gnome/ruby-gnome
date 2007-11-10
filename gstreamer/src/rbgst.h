@@ -60,8 +60,8 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
-#define RVAL2GST_STRUCT(obj)    (GST_STRUCTURE(RVAL2BOXED(obj, GST_TYPE_STRUCTURE)))
-#define GST_STRUCT2RVAL(obj)    (BOXED2RVAL(obj, GST_TYPE_STRUCTURE))
+#define RVAL2GST_STRUCT(obj)    (ruby_hash_to_gst_structure(obj))
+#define GST_STRUCT2RVAL(obj)    (gst_structure_to_ruby_hash(obj))
 
 
 

@@ -252,6 +252,12 @@ set_source(VALUE self, VALUE source)
     return Qnil;
 }
 
+static VALUE
+get_structure(VALUE self)
+{
+    return GST_STRUCT2RVAL((gpointer)gst_message_get_structure(SELF(self)));
+}
+
 
 static VALUE
 eos_initialize(VALUE self, VALUE src)
@@ -341,6 +347,9 @@ Init_gst_message(void)
     rb_define_method(rb_cGstMessage, "set_source", set_source, 1);
     rb_define_alias(rb_cGstMessage, "src", "source");
     rb_define_alias(rb_cGstMessage, "set_src", "set_source");
+
+    rb_define_method(rb_cGstMessage, "structure", get_structure, 0);
+
 
     rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
 

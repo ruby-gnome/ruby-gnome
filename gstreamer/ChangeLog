@@ -1,5 +1,8 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-message.c: supported structure API.
+	* test/test_message.rb: added tests for structure.
+
 	* src/rbgst-message.c: supported source API.
 	* test/test_message.rb: added tests for source.
 

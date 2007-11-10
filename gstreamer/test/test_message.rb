@@ -1,12 +1,12 @@
 class TestMessage < Test::Unit::TestCase
   def test_create_message
     assert_nothing_raised do
-      Gst::Message.new(Gst::Message::UNKNOWN, nil, nil)
+      Gst::Message.new(:unknown, nil, nil)
     end
   end
 
   def test_type
-    message = Gst::Message.new(Gst::Message::UNKNOWN, nil, nil)
+    message = Gst::Message.new(:unknown, nil, nil)
     assert_equal(Gst::Message::UNKNOWN, message.type)
     message.type = :tag
     assert_equal(Gst::Message::TAG, message.type)
@@ -41,5 +41,12 @@ class TestMessage < Test::Unit::TestCase
     assert_equal(source, message.source)
     message.source = nil
     assert_nil(message.source)
+  end
+
+  def test_structure
+    assert_nil(Gst::MessageEos.new(nil).structure)
+
+    message = Gst::Message.new(:unknown, nil, {})
+    assert_equal({}, message.structure)
   end
 end
