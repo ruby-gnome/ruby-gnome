@@ -203,6 +203,12 @@ valid_offset_end_p(VALUE self)
     return CBOOL2RVAL(GST_BUFFER_OFFSET_END_IS_VALID(SELF(self)));
 }
 
+static VALUE
+discontinuity_p(VALUE self)
+{
+    return CBOOL2RVAL(GST_BUFFER_IS_DISCONT(SELF(self)));
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -248,6 +254,8 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "offset_end", get_offset_end, 0);
     rb_define_method(rb_cGstBuffer, "set_offset_end", set_offset_end, 1);
     rb_define_method(rb_cGstBuffer, "valid_offset_end?", valid_offset_end_p, 0);
+
+    rb_define_method(rb_cGstBuffer, "discontinuity?", discontinuity_p, 0);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }

@@ -1,5 +1,8 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: implemented disconitnuity API.
+	* test/test_buffer.rb: added tests for disconitnuity.
+
 	* src/rbgst-buffer.c: implemented offset_end API.
 	* test/test_buffer.rb: added tests for offset_end.
 

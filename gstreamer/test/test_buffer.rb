@@ -90,4 +90,12 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(offset_end, buffer.offset_end)
     assert(buffer.valid_offset_end?)
   end
+
+  def test_discontinuity
+    buffer = Gst::Buffer.new
+    assert(!buffer.discontinuity?)
+
+    buffer.raise_flag(:discont)
+    assert(buffer.discontinuity?)
+  end
 end
