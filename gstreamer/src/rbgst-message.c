@@ -240,17 +240,33 @@ valid_timestamp_p(VALUE self)
 }
 
 static VALUE
+get_source(VALUE self)
+{
+    return GOBJ2RVAL(GST_MESSAGE_SRC(SELF(self)));
+}
+
+static VALUE
+set_source(VALUE self, VALUE source)
+{
+    GST_MESSAGE_SRC(SELF(self)) = RVAL2GST_OBJ(source);
+    return Qnil;
+}
+
+
+static VALUE
 eos_initialize(VALUE self, VALUE src)
 {
     G_INITIALIZE(self, gst_message_new_eos(RVAL2GST_OBJ(src)));
     return Qnil;
 }
 
+
 static VALUE
 type_name(VALUE self)
 {
     return CSTR2RVAL(gst_message_type_get_name(RVAL2GST_MSG_TYPE(self)));
 }
+
 
 void
 Init_gst_message(void)
@@ -320,6 +336,11 @@ Init_gst_message(void)
     rb_define_method(rb_cGstMessage, "timestamp", get_timestamp, 0);
     rb_define_method(rb_cGstMessage, "set_timestamp", set_timestamp, 1);
     rb_define_method(rb_cGstMessage, "valid_timestamp?", valid_timestamp_p, 0);
+
+    rb_define_method(rb_cGstMessage, "source", get_source, 0);
+    rb_define_method(rb_cGstMessage, "set_source", set_source, 1);
+    rb_define_alias(rb_cGstMessage, "src", "source");
+    rb_define_alias(rb_cGstMessage, "set_src", "set_source");
 
     rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
 

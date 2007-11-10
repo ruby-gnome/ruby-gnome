@@ -1,5 +1,3 @@
-require 'timeout'
-
 class TestMessage < Test::Unit::TestCase
   def test_create_message
     assert_nothing_raised do
@@ -33,5 +31,15 @@ class TestMessage < Test::Unit::TestCase
     message.timestamp = timestamp
     assert_equal(timestamp, message.timestamp)
     assert(message.valid_timestamp?)
+  end
+
+  def test_source
+    assert_nil(Gst::MessageEos.new(nil).source)
+
+    source = Gst::XML.new
+    message = Gst::MessageEos.new(source)
+    assert_equal(source, message.source)
+    message.source = nil
+    assert_nil(message.source)
   end
 end
