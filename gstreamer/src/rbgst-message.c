@@ -37,7 +37,7 @@ static VALUE rb_cGstMessageWarning;
 static VALUE rb_cGstMessageInfo;
 static VALUE rb_cGstMessageTag;
 static VALUE rb_cGstMessageBuffering;
-static VALUE rb_cGstMessageStateChagned;
+static VALUE rb_cGstMessageStateChanged;
 static VALUE rb_cGstMessageStateDirty;
 static VALUE rb_cGstMessageStepDone;
 static VALUE rb_cGstMessageClockProvide;
@@ -91,7 +91,7 @@ instance2robj(gpointer instance)
         klass = rb_cGstMessageBuffering;
         break;
       case GST_MESSAGE_STATE_CHANGED:
-        klass = rb_cGstMessageStateChagned;
+        klass = rb_cGstMessageStateChanged;
         break;
       case GST_MESSAGE_STATE_DIRTY:
         klass = rb_cGstMessageStateDirty;
@@ -266,6 +266,159 @@ eos_initialize(VALUE self, VALUE src)
     return Qnil;
 }
 
+#if 0
+static VALUE
+error_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
+{
+    G_INITIALIZE(self, gst_message_new_error(RVAL2GST_OBJ(src),
+                                             RVAL2GERROR(error), /* FIXME */
+                                             RVAL2CSTR(debug)));
+    return Qnil;
+}
+
+static VALUE
+warning_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
+{
+    G_INITIALIZE(self, gst_message_new_warning(RVAL2GST_OBJ(src),
+                                               RVAL2GERROR(error), /* FIXME */
+                                               RVAL2CSTR(debug)));
+    return Qnil;
+}
+
+static VALUE
+info_initialize(VALUE self, VALUE src, VALUE error, VALUE debug)
+{
+    G_INITIALIZE(self, gst_message_new_info(RVAL2GST_OBJ(src),
+                                            RVAL2GERROR(error), /* FIXME */
+                                            RVAL2CSTR(debug)));
+    return Qnil;
+}
+
+static VALUE
+tag_initialize(VALUE self, VALUE src, VALUE tag_list)
+{
+    G_INITIALIZE(self, gst_message_new_tag(RVAL2GST_OBJ(src),
+                                           RVAL2GST_TAG_LIST(tag_list))); /* FIXME */
+    return Qnil;
+}
+#endif
+
+static VALUE
+buffering_initialize(VALUE self, VALUE src, VALUE percent)
+{
+    G_INITIALIZE(self, gst_message_new_buffering(RVAL2GST_OBJ(src),
+                                                 NUM2INT(percent)));
+    return Qnil;
+}
+
+static VALUE
+state_changed_initialize(VALUE self, VALUE src, VALUE old_state,
+                         VALUE new_state, VALUE pending)
+{
+    G_INITIALIZE(self, gst_message_new_state_changed(RVAL2GST_OBJ(src),
+                                                     RVAL2GST_STATE(old_state),
+                                                     RVAL2GST_STATE(new_state),
+                                                     RVAL2GST_STATE(pending)));
+    return Qnil;
+}
+
+static VALUE
+state_dirty_initialize(VALUE self, VALUE src)
+{
+    G_INITIALIZE(self, gst_message_new_state_dirty(RVAL2GST_OBJ(src)));
+    return Qnil;
+}
+
+static VALUE
+clock_provide_initialize(VALUE self, VALUE src, VALUE clock, VALUE ready)
+{
+    G_INITIALIZE(self, gst_message_new_clock_provide(RVAL2GST_OBJ(src),
+                                                     RVAL2GST_CLOCK(clock),
+                                                     RVAL2CBOOL(ready)));
+    return Qnil;
+}
+
+static VALUE
+clock_lost_initialize(VALUE self, VALUE src, VALUE clock)
+{
+    G_INITIALIZE(self, gst_message_new_clock_lost(RVAL2GST_OBJ(src),
+                                                  RVAL2GST_CLOCK(clock)));
+    return Qnil;
+}
+
+static VALUE
+new_clock_initialize(VALUE self, VALUE src, VALUE clock)
+{
+    G_INITIALIZE(self, gst_message_new_new_clock(RVAL2GST_OBJ(src),
+                                                 RVAL2GST_CLOCK(clock)));
+    return Qnil;
+}
+
+static VALUE
+application_initialize(VALUE self, VALUE src, VALUE structure)
+{
+    G_INITIALIZE(self, gst_message_new_application(RVAL2GST_OBJ(src),
+                                                   RVAL2GST_STRUCT(structure)));
+    return Qnil;
+}
+
+static VALUE
+element_initialize(VALUE self, VALUE src, VALUE structure)
+{
+    G_INITIALIZE(self, gst_message_new_element(RVAL2GST_OBJ(src),
+                                               RVAL2GST_STRUCT(structure)));
+    return Qnil;
+}
+
+static VALUE
+segment_start_initialize(VALUE self, VALUE src, VALUE format, VALUE position)
+{
+    G_INITIALIZE(self, gst_message_new_segment_start(RVAL2GST_OBJ(src),
+                                                     RVAL2GST_FORMAT(format),
+                                                     NUM2LL(position)));
+    return Qnil;
+}
+
+static VALUE
+segment_done_initialize(VALUE self, VALUE src, VALUE format, VALUE position)
+{
+    G_INITIALIZE(self, gst_message_new_segment_done(RVAL2GST_OBJ(src),
+                                                    RVAL2GST_FORMAT(format),
+                                                    NUM2LL(position)));
+    return Qnil;
+}
+
+static VALUE
+duration_initialize(VALUE self, VALUE src, VALUE format, VALUE duration)
+{
+    G_INITIALIZE(self, gst_message_new_duration(RVAL2GST_OBJ(src),
+                                                RVAL2GST_FORMAT(format),
+                                                NUM2LL(duration)));
+    return Qnil;
+}
+
+static VALUE
+async_start_initialize(VALUE self, VALUE src, VALUE new_base_time)
+{
+    G_INITIALIZE(self, gst_message_new_async_start(RVAL2GST_OBJ(src),
+                                                   RVAL2CBOOL(new_base_time)));
+    return Qnil;
+}
+
+static VALUE
+async_done_initialize(VALUE self, VALUE src)
+{
+    G_INITIALIZE(self, gst_message_new_async_done(RVAL2GST_OBJ(src)));
+    return Qnil;
+}
+
+static VALUE
+latency_initialize(VALUE self, VALUE src)
+{
+    G_INITIALIZE(self, gst_message_new_latency(RVAL2GST_OBJ(src)));
+    return Qnil;
+}
+
 
 static VALUE
 type_name(VALUE self)
@@ -293,8 +446,8 @@ Init_gst_message(void)
 
     rb_cGstMessage = G_DEF_CLASS(GST_TYPE_MESSAGE, "Message", mGst);
 
-#define DEFINE_MESSAGE(type) \
-    rb_cGstMessage ## type = \
+#define DEFINE_MESSAGE(type)                                            \
+    rb_cGstMessage ## type =                                            \
         rb_define_class_under(mGst,"Message" #type, rb_cGstMessage)
 
     DEFINE_MESSAGE(Unknown);
@@ -304,7 +457,7 @@ Init_gst_message(void)
     DEFINE_MESSAGE(Info);
     DEFINE_MESSAGE(Tag);
     DEFINE_MESSAGE(Buffering);
-    DEFINE_MESSAGE(StateChagned);
+    DEFINE_MESSAGE(StateChanged);
     DEFINE_MESSAGE(StateDirty);
     DEFINE_MESSAGE(StepDone);
     DEFINE_MESSAGE(ClockProvide);
@@ -352,6 +505,40 @@ Init_gst_message(void)
 
 
     rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
+#if 0
+    rb_define_method(rb_cGstMessageError, "initialize", error_initialize, 3);
+    rb_define_method(rb_cGstMessageWarning, "initialize", warning_initialize, 3);
+    rb_define_method(rb_cGstMessageInfo, "initialize", info_initialize, 3);
+    rb_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
+#endif
+    rb_define_method(rb_cGstMessageBuffering, "initialize",
+                     buffering_initialize, 2);
+    rb_define_method(rb_cGstMessageStateChanged, "initialize",
+                     state_changed_initialize, 4);
+    rb_define_method(rb_cGstMessageStateDirty, "initialize",
+                     state_dirty_initialize, 1);
+    rb_define_method(rb_cGstMessageClockProvide, "initialize",
+                     clock_provide_initialize, 2);
+    rb_define_method(rb_cGstMessageClockLost, "initialize",
+                     clock_lost_initialize, 2);
+    rb_define_method(rb_cGstMessageNewClock, "initialize",
+                     new_clock_initialize, 2);
+    rb_define_method(rb_cGstMessageApplication, "initialize",
+                     application_initialize, 2);
+    rb_define_method(rb_cGstMessageElement, "initialize",
+                     element_initialize, 2);
+    rb_define_method(rb_cGstMessageSegmentStart, "initialize",
+                     segment_start_initialize, 3);
+    rb_define_method(rb_cGstMessageSegmentDone, "initialize",
+                     segment_done_initialize, 3);
+    rb_define_method(rb_cGstMessageDuration, "initialize",
+                     duration_initialize, 3);
+    rb_define_method(rb_cGstMessageAsyncStart, "initialize",
+                     async_start_initialize, 2);
+    rb_define_method(rb_cGstMessageAsyncDone, "initialize",
+                     async_done_initialize, 1);
+    rb_define_method(rb_cGstMessageLatency, "initialize", latency_initialize, 1);
+
 
     rb_define_method(rb_cGstMessageType, "name", type_name, 0);
 

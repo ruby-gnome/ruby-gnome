@@ -60,6 +60,12 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
+
+#define RVAL2GST_STATE(obj)     (RVAL2GENUM(obj, GST_TYPE_STATE))
+#define GST_STATE2RVAL(obj)     (GENUM2RVAL(obj, GST_TYPE_STATE))
+#define RVAL2GST_FORMAT(obj)    (RVAL2GENUM(obj, GST_TYPE_FORMAT))
+#define GST_FORMAT2RVAL(obj)    (GENUM2RVAL(obj, GST_TYPE_FORMAT))
+
 #define RVAL2GST_STRUCT(obj)    (rbgst_hash_to_structure(obj))
 #define RVAL2GST_STRUCT_WITH_NAME(obj, name) \
                                 (rbgst_hash_to_structure_with_name(obj, name))
