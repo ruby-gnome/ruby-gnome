@@ -25,6 +25,8 @@
     (RVAL2GFLAGS(flags, GST_TYPE_BUFFER_FLAG))
 #define GST_FLAGS2RVAL(flags) \
     (GFLAGS2RVAL(flags, GST_TYPE_BUFFER_FLAG))
+#define GST_COPY_FLAGS2RVAL(flags) \
+    (GFLAGS2RVAL(flags, GST_TYPE_BUFFER_COPY_FLAGS))
 
 static VALUE
 initialize(int argc, VALUE *argv, VALUE self)
@@ -212,7 +214,7 @@ discontinuity_p(VALUE self)
 void
 Init_gst_buffer(void)
 {
-    VALUE rb_cGstBuffer;
+    VALUE rb_cGstBuffer, rb_cGstBufferCopyFlags;
 
     rb_cGstBuffer = G_DEF_CLASS(GST_TYPE_BUFFER, "Buffer", mGst);
 
@@ -221,6 +223,14 @@ Init_gst_buffer(void)
 
     G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flag", rb_cGstBuffer);
     G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
+
+    rb_cGstBufferCopyFlags = G_DEF_CLASS(GST_TYPE_BUFFER_COPY_FLAGS,
+                                         "CopyFlags", rb_cGstBuffer);
+    G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_COPY_FLAGS, "GST_BUFFER_");
+    rb_define_const(rb_cGstBufferCopyFlags, "ALL",
+                    GST_COPY_FLAGS2RVAL(GST_BUFFER_COPY_ALL));
+    rb_define_const(rb_cGstBuffer, "COPY_ALL",
+                    GST_COPY_FLAGS2RVAL(GST_BUFFER_COPY_ALL));
 
     rb_define_method(rb_cGstBuffer, "initialize", initialize, -1);
 

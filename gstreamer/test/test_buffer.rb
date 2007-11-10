@@ -98,4 +98,16 @@ class TestBuffer < Test::Unit::TestCase
     buffer.raise_flag(:discont)
     assert(buffer.discontinuity?)
   end
+
+  def test_copy_flags
+    assert_equal(Gst::Buffer::CopyFlags::FLAGS |
+                 Gst::Buffer::CopyFlags::TIMESTAMPS |
+                 Gst::Buffer::CopyFlags::CAPS,
+                 Gst::Buffer::CopyFlags::ALL)
+
+    assert_equal(Gst::Buffer::COPY_FLAGS |
+                 Gst::Buffer::COPY_TIMESTAMPS |
+                 Gst::Buffer::COPY_CAPS,
+                 Gst::Buffer::COPY_ALL)
+  end
 end
