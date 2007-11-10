@@ -1,5 +1,8 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: used GST_BUFFER_CAPS instead of
+	gst_buffer_get_caps().
+
 	* src/rbgst-buffer.c: used macros for GstBuffer.
 
 	* src/rbgst-buffer.c: implemented caps API.

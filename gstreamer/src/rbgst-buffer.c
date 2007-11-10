@@ -155,7 +155,7 @@ valid_duration_p(VALUE self)
 static VALUE
 get_caps(VALUE self)
 {
-    return GST_CAPS2RVAL(gst_buffer_get_caps(SELF(self)));
+    return GST_CAPS2RVAL(GST_BUFFER_CAPS(SELF(self)));
 }
 
 static VALUE
