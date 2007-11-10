@@ -110,4 +110,27 @@ class TestBuffer < Test::Unit::TestCase
                  Gst::Buffer::COPY_CAPS,
                  Gst::Buffer::COPY_ALL)
   end
+
+  def test_copy_metadata
+    buffer = Gst::Buffer.new
+    buffer.flags = :discont
+
+    copied = buffer.copy_metadata(:all)
+    assert(copied.flag_raised?(:discont))
+    copied = buffer.copy_metadata(0)
+    assert(!copied.flag_raised?(:discont))
+
+    copied = Gst::Buffer.new
+    assert(!copied.flag_raised?(:discont))
+    buffer.copy_metadata(copied, :flags)
+    assert(copied.flag_raised?(:discont))
+  end
+
+  def test_copy_metadata_with_readonly
+    buffer = Gst::Buffer.new
+    buffer.flags = :readonly
+
+    copied = buffer.copy_metadata(:all)
+    assert(!copied.flag_raised?(:readonly))
+  end
 end

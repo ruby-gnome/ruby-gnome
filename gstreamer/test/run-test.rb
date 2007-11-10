@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# ENV["GST_DEBUG"] = "GST_BUFFER:5"
+
 $VERBOSE = true
 
 require "test/unit"

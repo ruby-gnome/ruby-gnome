@@ -25,6 +25,8 @@
     (RVAL2GFLAGS(flags, GST_TYPE_BUFFER_FLAG))
 #define GST_FLAGS2RVAL(flags) \
     (GFLAGS2RVAL(flags, GST_TYPE_BUFFER_FLAG))
+#define RVAL2GST_COPY_FLAGS(flags) \
+    (RVAL2GFLAGS(flags, GST_TYPE_BUFFER_COPY_FLAGS))
 #define GST_COPY_FLAGS2RVAL(flags) \
     (GFLAGS2RVAL(flags, GST_TYPE_BUFFER_COPY_FLAGS))
 
@@ -211,6 +213,30 @@ discontinuity_p(VALUE self)
     return CBOOL2RVAL(GST_BUFFER_IS_DISCONT(SELF(self)));
 }
 
+static VALUE
+copy_metadata(int argc, VALUE *argv, VALUE self)
+{
+    VALUE arg1, arg2, copied_dest;
+    GstBuffer *dest;
+    GstBufferCopyFlags flags;
+
+    rb_scan_args(argc, argv, "11", &arg1, &arg2);
+    if (argc == 1) {
+        dest = gst_buffer_new();
+        flags = RVAL2GST_COPY_FLAGS(arg1);
+    } else {
+        dest = SELF(arg1);
+        flags = RVAL2GST_COPY_FLAGS(arg2);
+    }
+
+    gst_buffer_copy_metadata(dest, SELF(self), flags);
+    copied_dest = GOBJ2RVAL(dest);
+    if (argc == 1)
+        gst_buffer_unref(dest);
+
+    return copied_dest;
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -221,7 +247,7 @@ Init_gst_buffer(void)
     rb_define_const(rb_cGstBuffer, "OFFSET_NONE",
                     UINT2NUM(GST_BUFFER_OFFSET_NONE));
 
-    G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flag", rb_cGstBuffer);
+    G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flags", rb_cGstBuffer);
     G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
 
     rb_cGstBufferCopyFlags = G_DEF_CLASS(GST_TYPE_BUFFER_COPY_FLAGS,
@@ -266,6 +292,8 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "valid_offset_end?", valid_offset_end_p, 0);
 
     rb_define_method(rb_cGstBuffer, "discontinuity?", discontinuity_p, 0);
+
+    rb_define_method(rb_cGstBuffer, "copy_metadata", copy_metadata, -1);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
