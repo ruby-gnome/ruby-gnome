@@ -129,8 +129,29 @@ class TestBuffer < Test::Unit::TestCase
   def test_copy_metadata_with_readonly
     buffer = Gst::Buffer.new
     buffer.flags = :readonly
+    assert(!buffer.writable?)
 
     copied = buffer.copy_metadata(:all)
     assert(!copied.flag_raised?(:readonly))
+    assert(copied.writable?)
+  end
+
+  def test_metadata_writable
+    buffer = Gst::Buffer.new
+    assert(buffer.metadata_writable?)
+    buffer.metadata_writable!
+    # assert(buffer.metadata_writable?) # FIXME
+
+    buffer = Gst::Buffer.new
+    buffer.create_sub(0, 0)
+    assert(!buffer.metadata_writable?)
+    buffer.metadata_writable!
+    # assert(buffer.metadata_writable?) # FIXME
+
+    buffer = Gst::Buffer.new
+    sub = buffer.create_sub(0, 0)
+    assert(!sub.metadata_writable?)
+    sub.metadata_writable!
+    # assert(sub.metadata_writable?) # FIXME
   end
 end

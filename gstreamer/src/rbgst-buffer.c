@@ -237,6 +237,38 @@ copy_metadata(int argc, VALUE *argv, VALUE self)
     return copied_dest;
 }
 
+static VALUE
+metadata_writable_p(VALUE self)
+{
+    return CBOOL2RVAL(gst_buffer_is_metadata_writable(SELF(self)));
+}
+
+static VALUE
+metadata_writable_bang(VALUE self)
+{
+    GstBuffer *orig_buffer, *buffer;
+    VALUE rb_buffer;
+
+    orig_buffer = SELF(self);
+    buffer = gst_buffer_make_metadata_writable(orig_buffer);
+    rb_buffer = GOBJ2RVAL(buffer);
+    DATA_PTR(self) = buffer;
+    if (buffer != orig_buffer)
+        gst_buffer_unref(orig_buffer);
+    return rb_buffer;
+}
+
+static VALUE
+create_sub(VALUE self, VALUE offset, VALUE size)
+{
+    GstBuffer *buffer;
+    VALUE rb_buffer;
+
+    buffer = gst_buffer_create_sub(SELF(self), NUM2UINT(offset), NUM2UINT(size));
+    rb_buffer = GOBJ2RVAL(buffer);
+    return rb_buffer;
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -294,6 +326,13 @@ Init_gst_buffer(void)
     rb_define_method(rb_cGstBuffer, "discontinuity?", discontinuity_p, 0);
 
     rb_define_method(rb_cGstBuffer, "copy_metadata", copy_metadata, -1);
+
+    rb_define_method(rb_cGstBuffer, "metadata_writable?",
+                     metadata_writable_p, 0);
+    rb_define_method(rb_cGstBuffer, "metadata_writable!",
+                     metadata_writable_bang, 0);
+
+    rb_define_method(rb_cGstBuffer, "create_sub", create_sub, 2);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
