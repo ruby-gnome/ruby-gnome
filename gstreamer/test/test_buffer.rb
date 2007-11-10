@@ -68,4 +68,15 @@ class TestBuffer < Test::Unit::TestCase
     buffer.caps = caps
     assert_equal(caps, buffer.caps)
   end
+
+  def test_offset
+    buffer = Gst::Buffer.new
+    assert_equal(Gst::Buffer::OFFSET_NONE, buffer.offset)
+    assert(!buffer.valid_offset?)
+
+    offset = 10
+    buffer.offset = offset
+    assert_equal(offset, buffer.offset)
+    assert(buffer.valid_offset?)
+  end
 end

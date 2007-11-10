@@ -165,12 +165,34 @@ set_caps(VALUE self, VALUE caps)
     return Qnil;
 }
 
+static VALUE
+get_offset(VALUE self)
+{
+    return ULL2NUM(GST_BUFFER_OFFSET(SELF(self)));
+}
+
+static VALUE
+set_offset(VALUE self, VALUE offset)
+{
+    GST_BUFFER_OFFSET(SELF(self)) = NUM2ULL(offset);
+    return Qnil;
+}
+
+static VALUE
+valid_offset_p(VALUE self)
+{
+    return CBOOL2RVAL(GST_BUFFER_OFFSET_IS_VALID(SELF(self)));
+}
+
 void
 Init_gst_buffer(void)
 {
     VALUE rb_cGstBuffer;
 
     rb_cGstBuffer = G_DEF_CLASS(GST_TYPE_BUFFER, "Buffer", mGst);
+
+    rb_define_const(rb_cGstBuffer, "OFFSET_NONE",
+                    UINT2NUM(GST_BUFFER_OFFSET_NONE));
 
     G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flag", rb_cGstBuffer);
     G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
@@ -199,6 +221,10 @@ Init_gst_buffer(void)
 
     rb_define_method(rb_cGstBuffer, "caps", get_caps, 0);
     rb_define_method(rb_cGstBuffer, "set_caps", set_caps, 1);
+
+    rb_define_method(rb_cGstBuffer, "offset", get_offset, 0);
+    rb_define_method(rb_cGstBuffer, "set_offset", set_offset, 1);
+    rb_define_method(rb_cGstBuffer, "valid_offset?", valid_offset_p, 0);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
