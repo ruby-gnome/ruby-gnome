@@ -1,3 +1,8 @@
+2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobject.[ch], src/rbgobj_fundamental.c: made RVAL2GOBJU
+	customizable.
+
 2007-10-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb: fixed build failure with top-level

@@ -93,3 +93,10 @@ rbgobj_fund_instance2robj(GType type, gpointer instance) {
   }
   return f->instance2robj(instance);
 }
+
+void
+rbgobj_fund_unref(GType type, gpointer instance) {
+    RGFundamental *fundamental = g_hash_table_lookup(fundamentals, &type);
+    if (fundamental && fundamental->unref)
+        fundamental->unref(instance);
+}

@@ -117,8 +117,19 @@ VALUE
 rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
 {
     VALUE result = rbgobj_ruby_object_from_instance(instance);
-    if (!NIL_P(result))
-        g_object_unref(instance);
+    if (!NIL_P(result)) {
+        GType type;
+
+        type = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
+        switch (type) {
+          case G_TYPE_OBJECT:
+            g_object_unref(instance);
+            break;
+          default:
+            rbgobj_fund_unref(type, instance);
+            break;
+        }
+    }
     return result;
 }
 

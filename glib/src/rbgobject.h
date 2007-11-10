@@ -233,6 +233,7 @@ typedef struct {
   void (*initialize)(VALUE, gpointer);
   gpointer (*robj2instance)(VALUE);
   VALUE (*instance2robj)(gpointer);
+  void  (*unref) (gpointer instance);
 } RGFundamental;
 
 extern void rbgobj_fund_define_fundamental(RGFundamental *f);
@@ -244,6 +245,7 @@ extern gboolean rbgobj_fund_rvalue2gvalue(GType type, VALUE val, GValue *result)
 extern void rbgobj_fund_initialize(GType type, VALUE obj, gpointer cobj);
 extern gpointer rbgobj_fund_robj2instance(GType type, VALUE obj);
 extern VALUE rbgobj_fund_instance2robj(GType type, gpointer instance);
+extern void rbgobj_fund_unref(GType type, gpointer instance);
 
 #ifdef __cplusplus
 }
