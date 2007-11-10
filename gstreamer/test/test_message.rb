@@ -24,4 +24,14 @@ class TestMessage < Test::Unit::TestCase
     message = Gst::MessageEos.new(nil)
     assert(!message.have_cond?)
   end
+
+  def test_timestamp
+    message = Gst::MessageEos.new(nil)
+    assert(!message.valid_timestamp?)
+
+    timestamp = Time.now.to_i * Gst::NSECOND
+    message.timestamp = timestamp
+    assert_equal(timestamp, message.timestamp)
+    assert(message.valid_timestamp?)
+  end
 end

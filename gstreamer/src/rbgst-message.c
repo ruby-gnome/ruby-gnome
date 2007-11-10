@@ -219,6 +219,27 @@ cond_signal(VALUE self)
 }
 
 static VALUE
+get_timestamp(VALUE self)
+{
+    return ULL2NUM(GST_MESSAGE_TIMESTAMP(SELF(self)));
+}
+
+static VALUE
+set_timestamp(VALUE self, VALUE timestamp)
+{
+    GST_MESSAGE_TIMESTAMP(SELF(self)) = NUM2ULL(timestamp);
+    return Qnil;
+}
+
+static VALUE
+valid_timestamp_p(VALUE self)
+{
+    gboolean valid;
+    valid = GST_CLOCK_TIME_IS_VALID(GST_MESSAGE_TIMESTAMP(SELF(self)));
+    return CBOOL2RVAL(valid);
+}
+
+static VALUE
 eos_initialize(VALUE self, VALUE src)
 {
     G_INITIALIZE(self, gst_message_new_eos(RVAL2GST_OBJ(src)));
@@ -296,6 +317,9 @@ Init_gst_message(void)
     rb_define_method(rb_cGstMessage, "wait", cond_wait, 0);
     rb_define_method(rb_cGstMessage, "signal", cond_signal, 0);
 
+    rb_define_method(rb_cGstMessage, "timestamp", get_timestamp, 0);
+    rb_define_method(rb_cGstMessage, "set_timestamp", set_timestamp, 1);
+    rb_define_method(rb_cGstMessage, "valid_timestamp?", valid_timestamp_p, 0);
 
     rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
 
