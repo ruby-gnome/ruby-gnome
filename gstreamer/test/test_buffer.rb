@@ -43,9 +43,9 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(Gst::ClockTime::NONE, buffer.timestamp)
     assert(!buffer.valid_timestamp?)
 
-    new_value = Time.now.to_i * Gst::NSECOND
-    buffer.timestamp = new_value
-    assert_equal(new_value, buffer.timestamp)
+    timestamp = Time.now.to_i * Gst::NSECOND
+    buffer.timestamp = timestamp
+    assert_equal(timestamp, buffer.timestamp)
     assert(buffer.valid_timestamp?)
   end
 
@@ -54,9 +54,18 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(Gst::ClockTime::NONE, buffer.duration)
     assert(!buffer.valid_duration?)
 
-    new_value = 10 * 60 * Gst::NSECOND
-    buffer.duration = new_value
-    assert_equal(new_value, buffer.duration)
+    duration = 10 * 60 * Gst::NSECOND
+    buffer.duration = duration
+    assert_equal(duration, buffer.duration)
     assert(buffer.valid_duration?)
+  end
+
+  def test_caps
+    buffer = Gst::Buffer.new
+    assert_nil(buffer.caps)
+
+    caps = Gst::Caps.new
+    buffer.caps = caps
+    assert_equal(caps, buffer.caps)
   end
 end

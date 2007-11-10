@@ -1,5 +1,8 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-buffer.c: implemented caps API.
+	* test/test_buffer.rb: added tests for caps.
+
 	* src/rbgst-buffer.c: implemented duration API.
 	* test/test_buffer.rb: added tests for duration.
 

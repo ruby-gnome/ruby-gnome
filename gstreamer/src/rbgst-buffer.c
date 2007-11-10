@@ -152,6 +152,19 @@ valid_duration_p(VALUE self)
     return CBOOL2RVAL(GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(SELF(self))));
 }
 
+static VALUE
+get_caps(VALUE self)
+{
+    return GST_CAPS2RVAL(gst_buffer_get_caps(SELF(self)));
+}
+
+static VALUE
+set_caps(VALUE self, VALUE caps)
+{
+    gst_buffer_set_caps(SELF(self), RVAL2GST_CAPS(caps));
+    return Qnil;
+}
+
 void
 Init_gst_buffer(void)
 {
@@ -172,14 +185,20 @@ Init_gst_buffer(void)
 
     rb_define_method(rb_cGstBuffer, "data", get_data, 0);
     rb_define_method(rb_cGstBuffer, "set_data", set_data, 1);
+
     rb_define_method(rb_cGstBuffer, "size", get_size, 0);
     rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
+
     rb_define_method(rb_cGstBuffer, "timestamp", get_timestamp, 0);
     rb_define_method(rb_cGstBuffer, "set_timestamp", set_timestamp, 1);
     rb_define_method(rb_cGstBuffer, "valid_timestamp?", valid_timestamp_p, 0);
+
     rb_define_method(rb_cGstBuffer, "duration", get_duration, 0);
     rb_define_method(rb_cGstBuffer, "set_duration", set_duration, 1);
     rb_define_method(rb_cGstBuffer, "valid_duration?", valid_duration_p, 0);
+
+    rb_define_method(rb_cGstBuffer, "caps", get_caps, 0);
+    rb_define_method(rb_cGstBuffer, "set_caps", set_caps, 1);
 
     G_DEF_SETTERS(rb_cGstBuffer);
 }
