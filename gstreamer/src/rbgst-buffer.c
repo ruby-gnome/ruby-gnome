@@ -130,7 +130,7 @@ set_timestamp(VALUE self, VALUE timestamp)
 static VALUE
 valid_timestamp_p(VALUE self)
 {
-    return CBOOL2RVAL(GST_CLOCK_TIME_IS_VALID(GST_BUFFER_TIMESTAMP(SELF(self))));
+    return CBOOL2RVAL(GST_BUFFER_TIMESTAMP_IS_VALID(SELF(self)));
 }
 
 static VALUE
@@ -149,7 +149,7 @@ set_duration(VALUE self, VALUE duration)
 static VALUE
 valid_duration_p(VALUE self)
 {
-    return CBOOL2RVAL(GST_CLOCK_TIME_IS_VALID(GST_BUFFER_DURATION(SELF(self))));
+    return CBOOL2RVAL(GST_BUFFER_DURATION_IS_VALID(SELF(self)));
 }
 
 static VALUE
