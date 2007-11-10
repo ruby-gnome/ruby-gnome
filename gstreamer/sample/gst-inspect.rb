@@ -1,16 +1,77 @@
+#!/usr/bin/evn ruby
 
-#  gst-inspect.rb aims to mimic the native gst-inspect program,
-#  written in C language.
+require 'optparse'
+require 'ostruct'
 
-#  The purpose of this program is to display various information
-#  about GStreamer plugins, which are installed in the system.
-
-#  Currently, the following points are still missing from the output:
-#    - GstElement custom functions 
-#    -   ''       dynamic parameters 
+argv = ARGV.dup
+ARGV.clear
 
 require 'gst'
 
+def parse(argv)
+  options = OpenStruct.new
+  options.mode = :list
+
+  opts = OptionParser.new do |opts|
+    opts.banner += " [ELEMENT-NAME|PLUGIN-NAME]"
+
+    opts.version = Gst.version
+
+    opts.separator("")
+    opts.on("-a", "--print-all", "Print all elements") do
+      options.mode = :all
+    end
+
+    opts.on("--print-plugin-auto-install-info",
+            "Print a machine-parsable list of features",
+            "the specified plugin provides.",
+            "Useful in connection with external",
+            "automatic plugin installation mechanisms") do
+      options.mode = :list
+    end
+  end
+  opts.parse!(argv)
+
+  options
+end
+
+def show_list
+  n_plugins = 0
+  n_features = 0
+  registry = Gst::Registry.default
+  registry.plugins.sort_by {|plugin| plugin.name}.each do |plugin|
+    n_plugins += 1
+    features = registry.get_features(plugin.name)
+    features.sort_by {|feature| feature.name}.each do |feature|
+      n_features += 1
+      case feature
+      when Gst::ElementFactory
+        puts("#{plugin.name}:  #{feature.name}: #{feature.long_name}")
+      when Gst::IndexFactory
+        puts("#{plugin.name}:  #{feature.name}: #{feature.description}")
+      when Gst::TypeFindFactory
+        if feature.extensions.empty?
+          message = "no extensions"
+        else
+          message = feature.extensions.join(", ")
+        end
+        puts("#{plugin.name}: #{feature.name}: #{message}")
+      else
+        puts("#{plugin.name}:  #{feature.name} (#{feature.gtype})")
+      end
+    end
+  end
+  puts
+  puts("Total count: #{n_plugins} plugins, #{n_features} features")
+end
+
+def show_all
+end
+
+options = parse(argv)
+send("show_#{options.mode}")
+
+__END__
 $prefix = 0
 def prefix; $prefix += 1; yield; $prefix -= 1; end
 
