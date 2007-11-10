@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *

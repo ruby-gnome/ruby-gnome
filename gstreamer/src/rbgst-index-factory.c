@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -20,9 +21,17 @@
 
 #include "rbgst.h"
 
+#define SELF(self) RVAL2GST_IDX_FACTORY(self)
+
 /* Class: Gst::IndexFactory
  * Create indexes from a factory.  
  */
+
+static VALUE
+s_find(VALUE self, VALUE name)
+{
+    return GOBJ2RVAL(gst_index_factory_find(RVAL2CSTR(name)));
+}
 
 /* Method: to_s
  * Returns: a String representing the factory.
@@ -36,9 +45,23 @@ rb_gst_indexfactory_to_s (VALUE self)
 			      factory->longdesc);
 }
 
+static VALUE
+get_description(VALUE self)
+{
+    return CSTR2RVAL(SELF(self)->longdesc);
+}
+
 void
 Init_gst_indexfactory (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_INDEX_FACTORY, "IndexFactory", mGst);
-	rb_define_method (c, "to_s", rb_gst_indexfactory_to_s, 0);
+    VALUE rb_cGstIndexFactory;
+
+    rb_cGstIndexFactory = G_DEF_CLASS(GST_TYPE_INDEX_FACTORY,
+                                      "IndexFactory", mGst);
+
+    rb_define_singleton_method(rb_cGstIndexFactory, "find", s_find, 1);
+
+    rb_define_method(rb_cGstIndexFactory, "to_s", rb_gst_indexfactory_to_s, 0);
+
+    rb_define_method(rb_cGstIndexFactory, "description", get_description, 0);
 }
