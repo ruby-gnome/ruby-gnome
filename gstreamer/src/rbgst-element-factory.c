@@ -20,6 +20,8 @@
 
 #include "rbgst.h"
 
+#define SELF(self) RVAL2GST_ELEM_FACTORY(self)
+
 /* Class: Gst::ElementFactory
  * Creates Gst::Element instances.
  */
@@ -127,6 +129,7 @@ rb_gst_elementfactory_get_pad_templates (VALUE self)
     const GList *list;
     VALUE arr;
 
+    arr = rb_ary_new();
     factory = RGST_ELEMENT_FACTORY(self);
     for (list = gst_element_factory_get_static_pad_templates(factory);
          list != NULL;
@@ -197,16 +200,36 @@ rb_gst_elementfactory_get_details (VALUE self)
 	return hash;
 }
 
+static VALUE
+get_long_name(VALUE self)
+{
+    return CSTR2RVAL(gst_element_factory_get_longname(SELF(self)));
+}
+
 void
 Init_gst_elementfactory (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_ELEMENT_FACTORY, "ElementFactory", mGst);
+    VALUE rb_cGstElementFactory;
 
-	rb_define_singleton_method(c, "make", rb_gst_elementfactory_make, -1);
-	rb_define_singleton_method(c, "find", rb_gst_elementfactory_find, 1);
-	rb_define_method(c, "create", rb_gst_elementfactory_create, -1);
-	rb_define_method(c, "details", rb_gst_elementfactory_get_details, 0);
-	rb_define_method(c, "to_s", rb_gst_elementfactory_to_s, 0);
-	rb_define_method(c, "pad_templates", rb_gst_elementfactory_get_pad_templates, 0);
-	rb_define_method(c, "each_pad_template", rb_gst_elementfactory_each_pad_template, 0);
+    rb_cGstElementFactory = G_DEF_CLASS(GST_TYPE_ELEMENT_FACTORY,
+                                        "ElementFactory",
+                                        mGst);
+
+    rb_define_singleton_method(rb_cGstElementFactory, "make",
+                               rb_gst_elementfactory_make, -1);
+    rb_define_singleton_method(rb_cGstElementFactory, "find",
+                               rb_gst_elementfactory_find, 1);
+
+    rb_define_method(rb_cGstElementFactory, "create",
+                     rb_gst_elementfactory_create, -1);
+    rb_define_method(rb_cGstElementFactory, "details",
+                     rb_gst_elementfactory_get_details, 0);
+    rb_define_method(rb_cGstElementFactory, "to_s",
+                     rb_gst_elementfactory_to_s, 0);
+    rb_define_method(rb_cGstElementFactory, "pad_templates",
+                     rb_gst_elementfactory_get_pad_templates, 0);
+    rb_define_method(rb_cGstElementFactory, "each_pad_template",
+                     rb_gst_elementfactory_each_pad_template, 0);
+
+    rb_define_method(rb_cGstElementFactory, "long_name", get_long_name, 0);
 }
