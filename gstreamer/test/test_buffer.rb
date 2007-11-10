@@ -79,4 +79,15 @@ class TestBuffer < Test::Unit::TestCase
     assert_equal(offset, buffer.offset)
     assert(buffer.valid_offset?)
   end
+
+  def test_offset_end
+    buffer = Gst::Buffer.new
+    assert_equal(Gst::Buffer::OFFSET_NONE, buffer.offset_end)
+    assert(!buffer.valid_offset_end?)
+
+    offset_end = 10
+    buffer.offset_end = offset_end
+    assert_equal(offset_end, buffer.offset_end)
+    assert(buffer.valid_offset_end?)
+  end
 end
