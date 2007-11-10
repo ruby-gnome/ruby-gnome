@@ -30,10 +30,11 @@
 #define GST_FLAGS2RVAL(flags) \
     (GFLAGS2RVAL(flags, GST_TYPE_MINI_OBJECT_FLAGS))
 
-static RGFundamental fundamental;
-static VALUE rb_cGstMiniObject;
+VALUE rb_cGstMiniObject;
 
-static void
+static RGFundamental fundamental;
+
+void
 rbgst_mini_object_free(void *ptr)
 {
     if (ptr) {
@@ -41,7 +42,7 @@ rbgst_mini_object_free(void *ptr)
     }
 }
 
-static VALUE
+VALUE
 rbgst_mini_object_get_superclass(void)
 {
     return rb_cObject;
@@ -58,7 +59,7 @@ initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
     return rb_call_super(argc, argv);
 }
 
-static void
+void
 rbgst_mini_object_type_init_hook(VALUE klass)
 {
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
@@ -66,13 +67,13 @@ rbgst_mini_object_type_init_hook(VALUE klass)
                          initialize_with_abstract_check, -1);
 }
 
-static void
+void
 rbgst_mini_object_initialize(VALUE object, gpointer instance)
 {
     DATA_PTR(object) = instance;
 }
 
-static gpointer
+gpointer
 rbgst_mini_object_robj2instance(VALUE object)
 {
     gpointer instance;
@@ -84,14 +85,9 @@ rbgst_mini_object_robj2instance(VALUE object)
     return instance;
 }
 
-static VALUE
-rbgst_mini_object_instance2robj(gpointer instance)
+void
+rbgst_mini_object_define_class_if_need(VALUE klass, GType type)
 {
-    VALUE klass;
-    GType type;
-
-    type = G_TYPE_FROM_INSTANCE(instance);
-    klass = GTYPE2CLASS(type);
     if (rb_class2name(klass)[0] == '#') {
         const gchar *type_name;
         type_name = g_type_name(type);
@@ -100,8 +96,25 @@ rbgst_mini_object_instance2robj(gpointer instance)
             type_name += 3;
         G_DEF_CLASS(type, type_name, mGst);
     }
+}
+
+VALUE
+rbgst_mini_object_instance2robj(gpointer instance)
+{
+    VALUE klass;
+    GType type;
+
+    type = G_TYPE_FROM_INSTANCE(instance);
+    klass = GTYPE2CLASS(type);
+    rbgst_mini_object_define_class_if_need(klass, type);
     gst_mini_object_ref(instance);
     return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
+}
+
+void
+rbgst_mini_object_unref(gpointer instance)
+{
+    gst_mini_object_unref(instance);
 }
 
 static VALUE
@@ -174,6 +187,7 @@ Init_gst_mini_object(void)
     fundamental.initialize = rbgst_mini_object_initialize;
     fundamental.robj2instance = rbgst_mini_object_robj2instance;
     fundamental.instance2robj = rbgst_mini_object_instance2robj;
+    fundamental.unref = rbgst_mini_object_unref;
 
     G_DEF_FUNDAMENTAL(&fundamental);
 

@@ -1,5 +1,11 @@
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-message.c: supported thread API.
+	* test/test_message.rb: added tests for thread.
+
+	* src/rbgst-message.c: supported Gst::Message.new.
+	* test/test_message.rb: added tests for initialization.
+
 	* src/rbgst-mini-object.c, test/test_mini_object.rb: make_writable
 	-> writable!.
 

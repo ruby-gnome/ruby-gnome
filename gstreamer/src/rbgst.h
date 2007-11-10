@@ -33,6 +33,7 @@
 /* Gst module */
 extern VALUE mGst;
 
+extern VALUE rb_cGstMiniObject;
 extern VALUE rb_cGstEvent;
 /* Gst::EventSeek class (needed for inheritance) */
 extern VALUE cGstEventSeek;
@@ -55,8 +56,14 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_MINI_OBJ(obj)  (GST_MINI_OBJECT(RVAL2GOBJ(obj)))
 #define RVAL2GST_BUF(obj)       (GST_BUFFER(RVAL2GOBJ(obj)))
 #define RVAL2GST_MSG(obj)       (GST_MESSAGE(RVAL2GOBJ(obj)))
+#define RVAL2GST_OBJ(obj)       (GST_OBJECT(RVAL2GOBJ(obj)))
+
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
+#define RVAL2GST_STRUCT(obj)    (GST_STRUCTURE(RVAL2BOXED(obj, GST_TYPE_STRUCTURE)))
+#define GST_STRUCT2RVAL(obj)    (BOXED2RVAL(obj, GST_TYPE_STRUCTURE))
+
+
 
 #define RVAL2GST_BUS(obj)           (GST_BUS(RVAL2GOBJ(obj)))
 #define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
@@ -144,6 +151,16 @@ VALUE gst_structure_to_ruby_hash (GstStructure *gst_struct);
 GstStructure *ruby_hash_to_gst_structure (VALUE hash);
 GstStructure *ruby_hash_to_gst_structure_with_name (VALUE hash,
                                                     const char *name);
+
+void rbgst_mini_object_free(void *ptr);
+VALUE rbgst_mini_object_get_superclass(void);
+void rbgst_mini_object_type_init_hook(VALUE klass);
+void rbgst_mini_object_initialize(VALUE object, gpointer instance);
+gpointer rbgst_mini_object_robj2instance(VALUE object);
+void rbgst_mini_object_define_class_if_need(VALUE klass, GType type);
+VALUE rbgst_mini_object_instance2robj(gpointer instance);
+void rbgst_mini_object_unref(gpointer instance);
+
 
 #define GST_TAG_LIST_STRUCTURE_NAME   "taglist"
 
