@@ -1,3 +1,11 @@
+2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_fundamental.c, src/rbgobj_convert.c,
+	src/rbgobj_value.c, src/rbgobject.[ch], src/rbgobj_type.c: renamed
+	to rbgobj_convert_* from rbgobj_fund_*. The previous API is still
+	available but need to rebuild.
+	* src/rbgprivate.h, src/rbgcompat.h: added.
+
 2007-11-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobject.[ch], src/rbgobj_fundamental.c: made RVAL2GOBJU

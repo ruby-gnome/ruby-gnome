@@ -21,6 +21,8 @@
 #include "global.h"
 #include <ctype.h>
 
+#include "rbgprivate.h"
+
 static ID id_relatives;
 static ID id_delete;
 static ID id_module_eval;
@@ -30,14 +32,19 @@ ID rbgobj_id_children;
 /**********************************************************************/
 
 void
-rbgobj_initialize_object(obj, cobj)
-    VALUE obj;
-    gpointer cobj;
+rbgobj_initialize_object(VALUE obj, gpointer cobj)
 {
+    GType type;
+
     if (!cobj)
         rb_raise(rb_eRuntimeError, "failed to initialize");
 
-    switch (G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj))){
+    type = RVAL2GTYPE(obj);
+    if (rbgobj_convert_initialize(type, obj, cobj))
+        return;
+
+    type = G_TYPE_FUNDAMENTAL(type);
+    switch (type){
     case G_TYPE_OBJECT:
         rbgobj_gobject_initialize(obj, cobj);
         break;
@@ -48,32 +55,39 @@ rbgobj_initialize_object(obj, cobj)
         rbgobj_boxed_initialize(obj, cobj);
         break;
     default:
-        rbgobj_fund_initialize(G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj)), obj, cobj);
+        rbgobj_convert_initialize(type, obj, cobj);
     }
 }
 
 gpointer
 rbgobj_instance_from_ruby_object(VALUE obj)
 {
-    GType t;
+    GType type;
 
     if (NIL_P(obj))
     	return NULL;
 
-    t = G_TYPE_FUNDAMENTAL(RVAL2GTYPE(obj));
-    switch (t){
+    type = RVAL2GTYPE(obj);
+    if (rbgobj_convert_has_type(type)) {
+        gpointer instance;
+        if (rbgobj_convert_robj2instance(type, obj, &instance))
+            return instance;
+    }
+
+    type = G_TYPE_FUNDAMENTAL(type);
+    switch (type){
     case G_TYPE_OBJECT:
         return rbgobj_get_gobject(obj);
     case G_TYPE_PARAM:
         return rbgobj_get_param_spec(obj);
     default:
       {
-        gpointer ret = rbgobj_fund_robj2instance(t, obj);
-        if (ret == NULL) {
-          rb_raise(rb_eTypeError, "%s isn't supported",
-               rb_class2name(CLASS_OF(obj)));
+        gpointer instance;
+        if (!rbgobj_convert_robj2instance(type, obj, &instance)) {
+            rb_raise(rb_eTypeError, "%s isn't supported",
+                     rb_class2name(CLASS_OF(obj)));
         }
-        return ret;
+        return instance;
       }
     }
 }
@@ -87,13 +101,18 @@ rbgobj_ruby_object_from_instance(gpointer instance)
 VALUE
 rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
 {
-    GType t; 
-    
-    if (instance == NULL)
+    VALUE object;
+    GType type, fundamental_type;
+
+    if (!instance)
     	return Qnil;
-    
-    t = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
-    switch (t){
+
+    type = G_TYPE_FROM_INSTANCE(instance);
+    if (alloc && rbgobj_convert_instance2robj(type, instance, &object))
+        return object;
+
+    fundamental_type = G_TYPE_FUNDAMENTAL(type);
+    switch (fundamental_type) {
     case G_TYPE_OBJECT:
         return rbgobj_get_value_from_gobject(instance, alloc);
     case G_TYPE_PARAM:
@@ -101,12 +120,10 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
     default:
         /* FIXME */
         if (alloc) {
-            VALUE ret = rbgobj_fund_instance2robj(t, instance);
-            if (NIL_P(ret)) {
-                rb_raise(rb_eTypeError, "%s isn't supported",
-                         g_type_name(G_TYPE_FROM_INSTANCE(instance)));
-            }
-            return ret;
+            if (!rbgobj_convert_instance2robj(fundamental_type, instance,
+                                              &object))
+                rb_raise(rb_eTypeError, "%s isn't supported", g_type_name(type));
+            return object;
         } else {
             return Qnil;
         }
@@ -120,14 +137,17 @@ rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
     if (!NIL_P(result)) {
         GType type;
 
-        type = G_TYPE_FUNDAMENTAL(G_TYPE_FROM_INSTANCE(instance));
-        switch (type) {
-          case G_TYPE_OBJECT:
-            g_object_unref(instance);
-            break;
-          default:
-            rbgobj_fund_unref(type, instance);
-            break;
+        type = G_TYPE_FROM_INSTANCE(instance);
+        if (!rbgobj_convert_unref(type, instance)) {
+            type = G_TYPE_FUNDAMENTAL(type);
+            switch (type) {
+              case G_TYPE_OBJECT:
+                g_object_unref(instance);
+                break;
+              default:
+                rbgobj_convert_unref(type, instance);
+                break;
+            }
         }
     }
     return result;
@@ -307,6 +327,7 @@ rbgobj_define_property_accessors(klass)
 void 
 Init_gobject()
 {
+    extern void Init_gobject_convert();
     extern void Init_gobject_gtype();
     extern void Init_gobject_typeinterface();
     extern void Init_gobject_typeinstance();
@@ -325,7 +346,6 @@ Init_gobject()
     extern void Init_gobject_gsignal();
     extern void Init_gobject_gtypeplugin();
     extern void Init_gobject_gtypemodule();
-    extern void Init_gobject_fundamental();
 
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
@@ -348,10 +368,11 @@ Init_gobject()
 
     rbgobj_id_children = rb_intern("__stored_children__");
 
+    Init_gobject_convert();
+
     Init_gobject_gtype();
     Init_gobject_typeinterface();
     Init_gobject_typeinstance();
-    Init_gobject_fundamental();
     Init_gobject_gvalue();
     Init_gobject_gvaluetypes();
     Init_gobject_gboxed();

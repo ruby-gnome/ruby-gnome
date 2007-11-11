@@ -12,6 +12,8 @@
 
 #include "global.h"
 
+#include "rbgprivate.h"
+
 /**********************************************************************/
 
 static ID id_to_s;
@@ -35,10 +37,18 @@ rbgobj_register_g2r_func(GType gtype, GValueToRValueFunc func)
 VALUE
 rbgobj_gvalue_to_rvalue(const GValue* value)
 {
+    GType type, fundamental_type;
+    VALUE rvalue;
+
     if (!value)
         return Qnil;
 
-    switch (G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))) {
+    type = G_VALUE_TYPE(value);
+    if (rbgobj_convert_gvalue2rvalue(type, value, &rvalue))
+        return rvalue;
+
+    fundamental_type = G_TYPE_FUNDAMENTAL(type);
+    switch (fundamental_type) {
       case G_TYPE_NONE:
         return Qnil;
       case G_TYPE_CHAR:
@@ -69,9 +79,9 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             return str ? rb_str_new2(str) : Qnil;
         }
       case G_TYPE_ENUM:
-        return rbgobj_make_enum(g_value_get_enum(value), G_VALUE_TYPE(value));
+        return rbgobj_make_enum(g_value_get_enum(value), type);
       case G_TYPE_FLAGS:
-        return rbgobj_make_flags(g_value_get_flags(value), G_VALUE_TYPE(value));
+        return rbgobj_make_flags(g_value_get_flags(value), type);
       case G_TYPE_OBJECT:
       case G_TYPE_INTERFACE:
         {
@@ -89,17 +99,17 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             if (!ptr)
                 return Qnil;
             else
-                return rbgobj_ptr_new(G_VALUE_TYPE(value), ptr);
+                return rbgobj_ptr_new(type, ptr);
         }
 
       case G_TYPE_BOXED:
         {
             GType gtype;
-            for (gtype = G_VALUE_TYPE(value);
+            for (gtype = type;
                  gtype != G_TYPE_INVALID;
                  gtype = g_type_parent(gtype))
             {
-                GValueToRValueFunc func = 
+                GValueToRValueFunc func =
                     g_type_get_qdata(gtype, qGValueToRValueFunc);
                 if (!func)
                     continue;
@@ -107,32 +117,31 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
             }
         }
       default:
-        { 
-          VALUE ret;
-          
-          ret = rbgobj_fund_gvalue2rvalue(
-                          G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value)), 
-                          value);
-               
-          if (NIL_P(ret))  {
-             GValueToRValueFunc func =
-                 g_type_get_qdata(G_VALUE_TYPE(value), qGValueToRValueFunc);
-             if (!func) {
-               g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
-                  g_type_name(G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(value))));
-             } else {
-               ret = func(value);
-             }
-          }
-          return ret;
+        if (!rbgobj_convert_gvalue2rvalue(fundamental_type, value, &rvalue)) {
+            GValueToRValueFunc func;
+            func = g_type_get_qdata(type, qGValueToRValueFunc);
+            if (!func) {
+                g_warning("rbgobj_gvalue_to_rvalue: unsupported type: %s\n",
+                          g_type_name(type));
+            } else {
+                rvalue = func(value);
+            }
         }
+        return rvalue;
     }
 }
 
 void
 rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 {
-    switch (G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result))) {
+    GType type, fundamental_type;
+
+    type = G_VALUE_TYPE(result);
+    if (rbgobj_convert_rvalue2gvalue(type, val, result))
+        return;
+
+    fundamental_type = G_TYPE_FUNDAMENTAL(type);
+    switch (fundamental_type) {
       case G_TYPE_NONE:
         return;
       case G_TYPE_CHAR:
@@ -194,7 +203,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
       case G_TYPE_BOXED:
         {
             GType gtype;
-            for (gtype = G_VALUE_TYPE(result);
+            for (gtype = type;
                  gtype != G_TYPE_INVALID;
                  gtype = g_type_parent(gtype))
             {
@@ -208,17 +217,15 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         }
 
       default:
-        if (!rbgobj_fund_rvalue2gvalue(
-                 G_TYPE_FUNDAMENTAL(G_VALUE_TYPE(result)),
-                 val, result)) {
-          RValueToGValueFunc func =
-            g_type_get_qdata(G_VALUE_TYPE(result), qRValueToGValueFunc);
-          if (!func){
-            g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
-                g_type_name(G_VALUE_TYPE(result)));
-          } else {
-            func(val, result);
-          }
+        if (!rbgobj_convert_rvalue2gvalue(fundamental_type, val, result)) {
+            RValueToGValueFunc func =
+                g_type_get_qdata(type, qRValueToGValueFunc);
+            if (!func){
+                g_warning("rbgobj_rvalue_to_gvalue: unsupported type: %s\n",
+                          g_type_name(type));
+            } else {
+                func(val, result);
+            }
         }
     }
 }

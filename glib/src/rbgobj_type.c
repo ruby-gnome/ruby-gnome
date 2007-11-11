@@ -14,6 +14,8 @@
 
 #include "global.h"
 
+#include "rbgprivate.h"
+
 /**********************************************************************/
 /* Type Mapping */
 
@@ -67,9 +69,13 @@ rbgobj_lookup_class(klass)
 }
 
 static VALUE
-get_superclass(gtype)
-    GType gtype;
+get_superclass(GType gtype)
 {
+    VALUE super_class;
+
+    if (rbgobj_convert_get_superclass(gtype, &super_class))
+        return super_class;
+
     switch (gtype) {
       case G_TYPE_PARAM:
       case G_TYPE_OBJECT:
@@ -86,21 +92,18 @@ get_superclass(gtype)
       case G_TYPE_FLAGS:
         return rb_cObject;
       default:
-        if (rbgobj_fund_has_type(gtype)) {
-          return rbgobj_fund_get_superclass(gtype);
-        } else {
-            const RGObjClassInfo* cinfo_super =
-                rbgobj_lookup_class_by_gtype(g_type_parent(gtype), Qnil);
-            return cinfo_super->klass;
-        }
+      {
+          const RGObjClassInfo* cinfo_super =
+              rbgobj_lookup_class_by_gtype(g_type_parent(gtype), Qnil);
+          return cinfo_super->klass;
+      }
     }
 }
 
 const RGObjClassInfo *
-rbgobj_lookup_class_by_gtype(gtype, parent)
-    GType gtype;
-    VALUE parent;
+rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 {
+    GType fundamental_type;
     RGObjClassInfo* cinfo;
     RGObjClassInfoDynamic* cinfod; 
     void* gclass = NULL;
@@ -116,7 +119,8 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
     cinfo->free  = NULL;
     cinfo->flags = 0;
 
-    switch (G_TYPE_FUNDAMENTAL(gtype)){
+    fundamental_type = G_TYPE_FUNDAMENTAL(gtype);
+    switch (fundamental_type){
     case G_TYPE_POINTER:
     case G_TYPE_BOXED:
     case G_TYPE_PARAM:
@@ -132,19 +136,16 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
         break;
         
     default:
-        /* we should raise exception? */
-        if (rbgobj_fund_has_type(G_TYPE_FUNDAMENTAL(gtype))) {
-          if (NIL_P(parent)) parent = get_superclass(gtype);
-          cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
-        } else {
+      if (NIL_P(parent)) parent = get_superclass(gtype);
+      if (NIL_P(parent)) {
           fprintf(stderr,
                   "%s: %s's fundamental type %s isn't supported\n",
                   "rbgobj_lookup_class_by_gtype",
                   g_type_name(gtype),
-                  g_type_name(G_TYPE_FUNDAMENTAL(gtype)));
+                  g_type_name(fundamental_type));
           return NULL;
-          }
-    
+      }
+      cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
     }
 
     cinfod = (RGObjClassInfoDynamic*)g_hash_table_lookup(dynamic_gtype_list, g_type_name(gtype));
@@ -176,19 +177,27 @@ rbgobj_lookup_class_by_gtype(gtype, parent)
         }
         g_free(interfaces);
     }
-    
-    if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_OBJECT) {
-        rbgobj_init_object_class(cinfo->klass);
-    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_ENUM) {
-        rbgobj_init_enum_class(cinfo->klass);
-    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_FLAGS) {
-        rbgobj_init_flags_class(cinfo->klass);
-    } else if (G_TYPE_FUNDAMENTAL(gtype) == G_TYPE_INTERFACE) {
-        rbgobj_init_interface(cinfo->klass);
-    } else {
-      rbgobj_fund_type_init_hook(G_TYPE_FUNDAMENTAL(gtype), cinfo->klass);
+
+    if (!rbgobj_convert_type_init_hook(gtype, cinfo->klass)) {
+        switch (fundamental_type) {
+          case G_TYPE_OBJECT:
+            rbgobj_init_object_class(cinfo->klass);
+            break;
+          case G_TYPE_ENUM:
+            rbgobj_init_enum_class(cinfo->klass);
+            break;
+          case G_TYPE_FLAGS:
+            rbgobj_init_flags_class(cinfo->klass);
+            break;
+          case G_TYPE_INTERFACE:
+            rbgobj_init_interface(cinfo->klass);
+            break;
+          default:
+            rbgobj_convert_type_init_hook(fundamental_type, cinfo->klass);
+            break;
+        }
     }
-    
+
     if (gclass)
         g_type_class_unref(gclass);
 
