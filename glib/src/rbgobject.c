@@ -102,28 +102,30 @@ VALUE
 rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
 {
     VALUE object;
-    GType type, fundamental_type;
+    GType type;
 
     if (!instance)
     	return Qnil;
 
     type = G_TYPE_FROM_INSTANCE(instance);
-    if (alloc && rbgobj_convert_instance2robj(type, instance, &object))
-        return object;
+    if (alloc) {
+        GType parent_type;
+        for (parent_type = type;
+             parent_type != G_TYPE_INVALID;
+             parent_type = g_type_parent(parent_type)) {
+            if (rbgobj_convert_instance2robj(parent_type, instance, &object))
+                return object;
+        }
+    }
 
-    fundamental_type = G_TYPE_FUNDAMENTAL(type);
-    switch (fundamental_type) {
+    switch (G_TYPE_FUNDAMENTAL(type)) {
     case G_TYPE_OBJECT:
         return rbgobj_get_value_from_gobject(instance, alloc);
     case G_TYPE_PARAM:
         return rbgobj_get_value_from_param_spec(instance, alloc);
     default:
-        /* FIXME */
         if (alloc) {
-            if (!rbgobj_convert_instance2robj(fundamental_type, instance,
-                                              &object))
-                rb_raise(rb_eTypeError, "%s isn't supported", g_type_name(type));
-            return object;
+            rb_raise(rb_eTypeError, "%s isn't supported", g_type_name(type));
         } else {
             return Qnil;
         }
