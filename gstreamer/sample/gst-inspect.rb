@@ -10,7 +10,8 @@ require 'gst'
 
 def parse(argv)
   options = OpenStruct.new
-  options.mode = :list
+  options.print_all = false
+  options.print_auto_install_info = false
 
   opts = OptionParser.new do |opts|
     opts.banner += " [ELEMENT-NAME|PLUGIN-NAME]"
@@ -19,7 +20,7 @@ def parse(argv)
 
     opts.separator("")
     opts.on("-a", "--print-all", "Print all elements") do
-      options.mode = :all
+      options.print_all = true
     end
 
     opts.on("--print-plugin-auto-install-info",
@@ -27,7 +28,7 @@ def parse(argv)
             "the specified plugin provides.",
             "Useful in connection with external",
             "automatic plugin installation mechanisms") do
-      options.mode = :list
+      options.print_auto_install_info = true
     end
   end
   opts.parse!(argv)
@@ -35,41 +36,67 @@ def parse(argv)
   options
 end
 
-def show_list
-  n_plugins = 0
-  n_features = 0
+def each_feature
   registry = Gst::Registry.default
   registry.plugins.sort_by {|plugin| plugin.name}.each do |plugin|
-    n_plugins += 1
     features = registry.get_features(plugin.name)
     features.sort_by {|feature| feature.name}.each do |feature|
-      n_features += 1
-      case feature
-      when Gst::ElementFactory
-        puts("#{plugin.name}:  #{feature.name}: #{feature.long_name}")
-      when Gst::IndexFactory
-        puts("#{plugin.name}:  #{feature.name}: #{feature.description}")
-      when Gst::TypeFindFactory
-        if feature.extensions.empty?
-          message = "no extensions"
-        else
-          message = feature.extensions.join(", ")
-        end
-        puts("#{plugin.name}: #{feature.name}: #{message}")
-      else
-        puts("#{plugin.name}:  #{feature.name} (#{feature.gtype})")
-      end
+      yield(plugin, feature)
+    end
+  end
+end
+
+def print_element_factory(factory, print_names)
+  if !factory.load!
+    puts("element plugin (#{factory.name}) couldn't be loaded\n")
+    return
+  end
+
+  p :before
+  element = factory.create
+  p [element, element.class.ancestors]
+  puts("#{factory.name}: ") if print_names
+end
+
+def print_feature(plugin, feature)
+  case feature
+  when Gst::ElementFactory
+    puts("#{plugin.name}:  #{feature.name}: #{feature.long_name}")
+  when Gst::IndexFactory
+    puts("#{plugin.name}:  #{feature.name}: #{feature.description}")
+  when Gst::TypeFindFactory
+    if feature.extensions.empty?
+      message = "no extensions"
+    else
+      message = feature.extensions.join(", ")
+    end
+    puts("#{plugin.name}: #{feature.name}: #{message}")
+  else
+    puts("#{plugin.name}:  #{feature.name} (#{feature.gtype})")
+  end
+end
+
+def print_list(print_all)
+  plugins = {}
+  n_features = 0
+  each_feature do |plugin, feature|
+    plugins[plugin.name] = nil
+    n_features += 1
+    if print_all
+      print_element_factory(feature, true) if feature.is_a?(Gst::ElementFactory)
+    else
+      print_feature(plugin, feature)
     end
   end
   puts
-  puts("Total count: #{n_plugins} plugins, #{n_features} features")
+  puts("Total count: #{plugins.size} plugins, #{n_features} features")
 end
 
 def show_all
 end
 
 options = parse(argv)
-send("show_#{options.mode}")
+print_list(options.print_all)
 
 __END__
 $prefix = 0

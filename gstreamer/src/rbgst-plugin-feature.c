@@ -70,10 +70,13 @@ load_bang(VALUE self)
     original = SELF(self);
     feature = gst_plugin_feature_load(original);
     if (feature) {
-        G_INITIALIZE(self, feature);
+        if (feature != original)
+            G_INITIALIZE(self, feature);
         gst_object_unref(original);
+        return Qtrue;
+    } else {
+        return Qfalse;
     }
-    return self;
 }
 
 void

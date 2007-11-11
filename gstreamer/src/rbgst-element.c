@@ -1,5 +1,7 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -19,6 +21,40 @@
  */
 
 #include "rbgst.h"
+
+static RGConvertTable table = {0};
+static VALUE rb_cGstElement;
+
+static void
+define_class_if_need(VALUE klass, GType type)
+{
+    const gchar *type_name;
+    gchar *class_name;
+
+    if (rb_class2name(klass)[0] != '#')
+        return;
+
+    type_name = g_type_name(type);
+    if (g_str_has_prefix(type_name, "Gst"))
+        type_name += 3;
+    class_name = g_strconcat("Element", type_name, NULL);
+    G_DEF_CLASS(type, class_name, mGst);
+    g_free(class_name);
+}
+
+static VALUE
+instance2robj(gpointer instance)
+{
+    VALUE klass;
+    GType type;
+
+    type = G_TYPE_FROM_INSTANCE(instance);
+    klass = GTYPE2CLASS(type);
+    define_class_if_need(klass, type);
+    g_object_ref(instance);
+    return Data_Wrap_Struct(klass, NULL, g_object_unref, instance);
+}
+
 
 /* Class: Gst::Element
  * Base class for all pipeline elements.
@@ -732,60 +768,64 @@ rb_gst_element_found_tag_sig (guint num, const GValue *values)
 void
 Init_gst_element (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_ELEMENT, "Element", mGst);
+    table.type = GST_TYPE_ELEMENT;
+    table.instance2robj = instance2robj;
+    G_DEF_FUNDAMENTAL(&table);
 
-    rb_define_singleton_method(c, "get_pad_template",
+    rb_cGstElement = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst);
+
+    rb_define_singleton_method(rb_cGstElement, "get_pad_template",
                                rb_gst_element_get_pad_template, 1);
-    rb_define_singleton_method(c, "pad_templates",
+    rb_define_singleton_method(rb_cGstElement, "pad_templates",
                                rb_gst_element_get_pad_templates, 0);
-    rb_define_singleton_method(c, "each_pad_template",
+    rb_define_singleton_method(rb_cGstElement, "each_pad_template",
                                rb_gst_element_each_pad_template, 0);
 
-    rb_define_method (c, "set_state", rb_gst_element_set_state, 1);
-    rb_define_method (c, "state", rb_gst_element_get_state, 0);
-    rb_define_method (c, "stop", rb_gst_element_stop, 0);
-    rb_define_method (c, "ready", rb_gst_element_ready, 0);
-    rb_define_method (c, "pause", rb_gst_element_pause, 0);
-    rb_define_method (c, "play", rb_gst_element_play, 0);
-    rb_define_method (c, "stopped?", rb_gst_element_is_stopped, 0);
-    rb_define_method (c, "ready?", rb_gst_element_is_ready, 0);
-    rb_define_method (c, "paused?", rb_gst_element_is_paused, 0);
-    rb_define_method (c, "playing?", rb_gst_element_is_playing, 0);
-    rb_define_method (c, "wait", rb_gst_element_wait, 0);
-    rb_define_method (c, "link", rb_gst_element_link, 1);
-    rb_define_alias (c, ">>", "link");
-    rb_define_method (c, "link_filtered", rb_gst_element_link_filtered, 2);
-    rb_define_method (c, "provides_clock?", rb_gst_element_provides_clock, 0);
-    rb_define_method (c, "requires_clock?", rb_gst_element_requires_clock, 0);
-    rb_define_method (c, "clock", rb_gst_element_get_clock, 0);
-    rb_define_method (c, "set_clock", rb_gst_element_set_clock, 1);
-    rb_define_method (c, "base_time", rb_gst_element_get_base_time, 0);
-    rb_define_method (c, "set_base_time", rb_gst_element_set_base_time, 1);
-    rb_define_method (c, "each_pad", rb_gst_element_each_pad, 0);
-    rb_define_method (c, "pads", rb_gst_element_get_pads, 0);
-    rb_define_method (c, "get_pad", rb_gst_element_get_pad, 1);
-    rb_define_method (c, "get_static_pad", rb_gst_element_get_static_pad, 1);
-    rb_define_method (c, "get_request_pad", rb_gst_element_get_request_pad, 1);
-    rb_define_method (c, "release_request_pad",
+    rb_define_method (rb_cGstElement, "set_state", rb_gst_element_set_state, 1);
+    rb_define_method (rb_cGstElement, "state", rb_gst_element_get_state, 0);
+    rb_define_method (rb_cGstElement, "stop", rb_gst_element_stop, 0);
+    rb_define_method (rb_cGstElement, "ready", rb_gst_element_ready, 0);
+    rb_define_method (rb_cGstElement, "pause", rb_gst_element_pause, 0);
+    rb_define_method (rb_cGstElement, "play", rb_gst_element_play, 0);
+    rb_define_method (rb_cGstElement, "stopped?", rb_gst_element_is_stopped, 0);
+    rb_define_method (rb_cGstElement, "ready?", rb_gst_element_is_ready, 0);
+    rb_define_method (rb_cGstElement, "paused?", rb_gst_element_is_paused, 0);
+    rb_define_method (rb_cGstElement, "playing?", rb_gst_element_is_playing, 0);
+    rb_define_method (rb_cGstElement, "wait", rb_gst_element_wait, 0);
+    rb_define_method (rb_cGstElement, "link", rb_gst_element_link, 1);
+    rb_define_alias (rb_cGstElement, ">>", "link");
+    rb_define_method (rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
+    rb_define_method (rb_cGstElement, "provides_clock?", rb_gst_element_provides_clock, 0);
+    rb_define_method (rb_cGstElement, "requires_clock?", rb_gst_element_requires_clock, 0);
+    rb_define_method (rb_cGstElement, "clock", rb_gst_element_get_clock, 0);
+    rb_define_method (rb_cGstElement, "set_clock", rb_gst_element_set_clock, 1);
+    rb_define_method (rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);
+    rb_define_method (rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
+    rb_define_method (rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
+    rb_define_method (rb_cGstElement, "pads", rb_gst_element_get_pads, 0);
+    rb_define_method (rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
+    rb_define_method (rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);
+    rb_define_method (rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);
+    rb_define_method (rb_cGstElement, "release_request_pad",
                       rb_gst_element_release_request_pad, 1);
-    rb_define_method (c, "link_pads", rb_gst_element_link_pads, 1);
-    rb_define_method (c, "unlink_pads", rb_gst_element_unlink_pads, 1);
-    rb_define_method (c, "add_pad", rb_gst_element_add_pad, 1);
-    rb_define_method (c, "remove_pad", rb_gst_element_remove_pad, 1);
-    rb_define_method (c, "indexable?", rb_gst_element_is_indexable, 0);
-    /* rb_define_method (c, "query", rb_gst_element_query, 1); */
-    rb_define_method (c, "send_event", rb_gst_element_send_event, 1);
-    rb_define_method (c, "seek", rb_gst_element_seek, 7);
-    rb_define_method (c, "index", rb_gst_element_get_index, 0);
-    rb_define_method (c, "set_index", rb_gst_element_set_index, 1);
-    rb_define_method (c, "locked_state?", rb_gst_element_is_locked_state, 0);
-    rb_define_method (c, "set_locked_state", rb_gst_element_set_locked_state,
+    rb_define_method (rb_cGstElement, "link_pads", rb_gst_element_link_pads, 1);
+    rb_define_method (rb_cGstElement, "unlink_pads", rb_gst_element_unlink_pads, 1);
+    rb_define_method (rb_cGstElement, "add_pad", rb_gst_element_add_pad, 1);
+    rb_define_method (rb_cGstElement, "remove_pad", rb_gst_element_remove_pad, 1);
+    rb_define_method (rb_cGstElement, "indexable?", rb_gst_element_is_indexable, 0);
+    /* rb_define_method (rb_cGstElement, "query", rb_gst_element_query, 1); */
+    rb_define_method (rb_cGstElement, "send_event", rb_gst_element_send_event, 1);
+    rb_define_method (rb_cGstElement, "seek", rb_gst_element_seek, 7);
+    rb_define_method (rb_cGstElement, "index", rb_gst_element_get_index, 0);
+    rb_define_method (rb_cGstElement, "set_index", rb_gst_element_set_index, 1);
+    rb_define_method (rb_cGstElement, "locked_state?", rb_gst_element_is_locked_state, 0);
+    rb_define_method (rb_cGstElement, "set_locked_state", rb_gst_element_set_locked_state,
                       1);
-    rb_define_method (c, "sync_state_with_parent",
+    rb_define_method (rb_cGstElement, "sync_state_with_parent",
                       rb_gst_element_sync_state_with_parent, 0);
-    rb_define_method (c, "no_more_pads", rb_gst_element_no_more_pads, 0);
+    rb_define_method (rb_cGstElement, "no_more_pads", rb_gst_element_no_more_pads, 0);
 
-    G_DEF_SETTERS (c);
+    G_DEF_SETTERS (rb_cGstElement);
 
     G_DEF_CLASS(GST_TYPE_STATE, "State", mGst);
     G_DEF_CONSTANTS(mGst, GST_TYPE_STATE, "GST_");
@@ -793,14 +833,14 @@ Init_gst_element (void)
     G_DEF_CONSTANTS(mGst, GST_TYPE_STATE_CHANGE_RETURN, "GST_");
     G_DEF_CLASS(GST_TYPE_STATE_CHANGE, "StateChange", mGst);
     G_DEF_CONSTANTS(mGst, GST_TYPE_STATE_CHANGE, "GST_");
-    G_DEF_CLASS(GST_TYPE_ELEMENT_FLAGS, "Flags", c);
-    G_DEF_CONSTANTS(c, GST_TYPE_ELEMENT_FLAGS, "GST_ELEMENT_");
+    G_DEF_CLASS(GST_TYPE_ELEMENT_FLAGS, "Flags", rb_cGstElement);
+    G_DEF_CONSTANTS(rb_cGstElement, GST_TYPE_ELEMENT_FLAGS, "GST_ELEMENT_");
 
     /*
      * TODO:
      * gst_element_clock_wait () 
      */
 
-    G_DEF_SIGNAL_FUNC (c, "found-tag", 
+    G_DEF_SIGNAL_FUNC (rb_cGstElement, "found-tag", 
                        (GValToRValSignalFunc)rb_gst_element_found_tag_sig);
 }

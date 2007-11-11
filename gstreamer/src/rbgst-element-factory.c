@@ -1,3 +1,4 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  * Copyright (C) 2007 Ruby-GNOME2 Project Team
@@ -92,19 +93,15 @@ rb_gst_elementfactory_find (VALUE self, VALUE factory_name)
  * Returns: a newly created object based on Gst::Element.
  */
 static VALUE
-rb_gst_elementfactory_create (int argc, VALUE *argv, VALUE self)
+create(int argc, VALUE *argv, VALUE self)
 {
-	GstElement *element;
-	VALUE name;
+    GstElement *element;
+    VALUE name;
 
-	rb_scan_args(argc, argv, "01", &name);
+    rb_scan_args(argc, argv, "01", &name);
 
-	element = gst_element_factory_create (RGST_ELEMENT_FACTORY (self), 
-		NIL_P (name) ? NULL : RVAL2CSTR (name));
-
-	return element != NULL
-		? RGST_ELEMENT_NEW (element)
-		: Qnil;
+    element = gst_element_factory_create(SELF(self), RVAL2CSTR2(name));
+    return GOBJ2RVAL(element);
 }
 
 static VALUE
@@ -221,8 +218,7 @@ Init_gst_elementfactory (void)
     rb_define_singleton_method(rb_cGstElementFactory, "find",
                                rb_gst_elementfactory_find, 1);
 
-    rb_define_method(rb_cGstElementFactory, "create",
-                     rb_gst_elementfactory_create, -1);
+    rb_define_method(rb_cGstElementFactory, "create", create, -1);
     rb_define_method(rb_cGstElementFactory, "details",
                      rb_gst_elementfactory_get_details, 0);
     rb_define_method(rb_cGstElementFactory, "to_s",
