@@ -57,13 +57,14 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_BUF(obj)       (GST_BUFFER(RVAL2GOBJ(obj)))
 #define RVAL2GST_MSG(obj)       (GST_MESSAGE(RVAL2GOBJ(obj)))
 #define RVAL2GST_OBJ(obj)       (GST_OBJECT(RVAL2GOBJ(obj)))
-#define RVAL2GST_ELEM_FACTORY(obj) \
+#define RVAL2GST_ELEMENT_FACTORY(obj) \
                                 (GST_ELEMENT_FACTORY(RVAL2GOBJ(obj)))
-#define RVAL2GST_IDX_FACTORY(obj) \
+#define RVAL2GST_INDEX_FACTORY(obj) \
                                 (GST_INDEX_FACTORY(RVAL2GOBJ(obj)))
-#define RVAL2GST_TF_FACTORY(obj) \
+#define RVAL2GST_TYPE_FIND_FACTORY(obj) \
                                 (GST_TYPE_FIND_FACTORY(RVAL2GOBJ(obj)))
-#define RVAL2GST_PLUG_FEAT(obj) (GST_PLUGIN_FEATURE(RVAL2GOBJ(obj)))
+#define RVAL2GST_PLUGIN_FEATURE(obj) \
+                                (GST_PLUGIN_FEATURE(RVAL2GOBJ(obj)))
 #define RVAL2GST_PLUGIN(obj)    (GST_PLUGIN(RVAL2GOBJ(obj)))
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))

@@ -22,7 +22,7 @@
 
 #include "rbgst.h"
 
-#define SELF(self) RVAL2GST_PLUG_FEAT(self)
+#define SELF(self) RVAL2GST_PLUGIN_FEATURE(self)
 
 #define RVAL2GST_RANK(rank) RVAL2GENUM(rank, GST_TYPE_RANK)
 #define GST_RANK2RVAL(rank) GENUM2RVAL(rank, GST_TYPE_RANK)

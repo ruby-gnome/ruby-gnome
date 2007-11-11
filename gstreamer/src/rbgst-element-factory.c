@@ -22,7 +22,7 @@
 
 #include "rbgst.h"
 
-#define SELF(self) RVAL2GST_ELEM_FACTORY(self)
+#define SELF(self) RVAL2GST_ELEMENT_FACTORY(self)
 
 /* Class: Gst::ElementFactory
  * Creates Gst::Element instances.

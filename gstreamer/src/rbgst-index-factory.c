@@ -21,7 +21,7 @@
 
 #include "rbgst.h"
 
-#define SELF(self) RVAL2GST_IDX_FACTORY(self)
+#define SELF(self) RVAL2GST_INDEX_FACTORY(self)
 
 /* Class: Gst::IndexFactory
  * Create indexes from a factory.  

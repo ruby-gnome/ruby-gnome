@@ -1,5 +1,7 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/: expanded abbreviated macro name.
+
 	* src/rbgst-plugin.c: supported source.
 	* test/test_plugin.rb: added a test for source.
 

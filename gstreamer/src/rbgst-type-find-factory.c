@@ -22,7 +22,7 @@
 
 #include "rbgst.h"
 
-#define SELF(self) RVAL2GST_TF_FACTORY(self)
+#define SELF(self) RVAL2GST_TYPE_FIND_FACTORY(self)
 
 /* Class: Gst::TypeFindFactory
  * Information about registered type find functions.
