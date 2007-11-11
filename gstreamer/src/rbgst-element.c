@@ -21,6 +21,7 @@
  */
 
 #include "rbgst.h"
+#include "rbgprivate.h"
 
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
@@ -769,7 +770,7 @@ Init_gst_element (void)
 {
     table.type = GST_TYPE_ELEMENT;
     table.instance2robj = instance2robj;
-    G_DEF_FUNDAMENTAL(&table);
+    RG_DEF_CONVERSION(&table);
 
     rb_cGstElement = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst);
 

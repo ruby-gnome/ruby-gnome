@@ -12,4 +12,9 @@ class TestPluginFeature < Test::Unit::TestCase
     feature.rank = :primary
     assert_equal(Gst::RANK_PRIMARY, feature.rank)
   end
+
+  def test_plugin_name
+    feature = Gst::ElementFactory.find("playbin")
+    assert_equal("playbin", feature.plugin_name)
+  end
 end

@@ -65,9 +65,10 @@ def print_element_factory(factory, print_names)
 
   prefix = print_names ? "#{factory.name}: " : ""
   factory_details_info(factory).each do |line|
-    puts "#{prefix.name}#{line}"
+    puts("#{prefix}#{line}")
   end
-  puts
+  puts(prefix)
+  p factory.plugin_name
 end
 
 def print_feature(plugin, feature)

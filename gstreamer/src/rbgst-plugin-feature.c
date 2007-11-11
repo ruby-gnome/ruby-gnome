@@ -101,6 +101,13 @@ set_rank(VALUE self, VALUE rank)
     return Qnil;
 }
 
+static VALUE
+get_plugin_name(VALUE self)
+{
+    return CSTR2RVAL(SELF(self)->plugin_name);
+}
+
+
 void
 Init_gst_plugin_feature (void)
 {
@@ -120,6 +127,8 @@ Init_gst_plugin_feature (void)
 
     rb_define_method(rb_cGstPluginFeature, "rank", get_rank, 0);
     rb_define_method(rb_cGstPluginFeature, "set_rank", set_rank, 1);
+
+    rb_define_method(rb_cGstPluginFeature, "plugin_name", get_plugin_name, 0);
 
     G_DEF_SETTERS(rb_cGstPluginFeature);
 }
