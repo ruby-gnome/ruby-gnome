@@ -42,7 +42,7 @@ extern "C" {
 #define G_DEF_INTERFACE2(gtype, name, module, mark, free)\
     (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
 
-#define G_DEF_CONVERSION(table) (rbgobj_convert_define(table))
+#define RG_DEF_CONVERSION(table) (rbgobj_convert_define(table))
 
 #define G_RELATIVE(obj, rel) (rbgobj_add_relative(obj, rel))
 
