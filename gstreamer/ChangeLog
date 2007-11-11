@@ -1,5 +1,7 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-message.c, src/rbgst-mini-object.c: used RGConvertTable.
+
 	* src/rbgst-plugin-feature.c: supported rank.
 	* test/test_plugin_feature.rb: added a test for rank.
 

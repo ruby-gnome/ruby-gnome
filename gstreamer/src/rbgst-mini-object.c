@@ -33,7 +33,7 @@
 
 VALUE rb_cGstMiniObject;
 
-static RGFundamental fundamental;
+static RGConvertTable table = {0};
 
 void
 rbgst_mini_object_free(void *ptr)
@@ -180,17 +180,17 @@ writable_bang(VALUE self)
 void
 Init_gst_mini_object(void)
 {
-    fundamental.type = GST_TYPE_MINI_OBJECT;
-    fundamental.get_superclass = rbgst_mini_object_get_superclass;
-    fundamental.type_init_hook = rbgst_mini_object_type_init_hook;
-    fundamental.rvalue2gvalue = NULL;
-    fundamental.gvalue2rvalue = NULL;
-    fundamental.initialize = rbgst_mini_object_initialize;
-    fundamental.robj2instance = rbgst_mini_object_robj2instance;
-    fundamental.instance2robj = rbgst_mini_object_instance2robj;
-    fundamental.unref = rbgst_mini_object_unref;
+    table.type = GST_TYPE_MINI_OBJECT;
+    table.get_superclass = rbgst_mini_object_get_superclass;
+    table.type_init_hook = rbgst_mini_object_type_init_hook;
+    table.rvalue2gvalue = NULL;
+    table.gvalue2rvalue = NULL;
+    table.initialize = rbgst_mini_object_initialize;
+    table.robj2instance = rbgst_mini_object_robj2instance;
+    table.instance2robj = rbgst_mini_object_instance2robj;
+    table.unref = rbgst_mini_object_unref;
 
-    G_DEF_FUNDAMENTAL(&fundamental);
+    RG_DEF_CONVERSION(&table);
 
     rb_cGstMiniObject = G_DEF_CLASS(GST_TYPE_MINI_OBJECT, "MiniObject", mGst);
 

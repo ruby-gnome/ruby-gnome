@@ -29,7 +29,7 @@
 #define RVAL2GST_MSG_TYPE(type) RVAL2GFLAGS(type, GST_TYPE_MESSAGE_TYPE)
 #define GST_MSG_TYPE2RVAL(type) GFLAGS2RVAL(type, GST_TYPE_MESSAGE_TYPE)
 
-static RGFundamental fundamental;
+static RGConvertTable table = {0};
 static VALUE rb_cGstMessage;
 static VALUE rb_cGstMessageUnknown;
 static VALUE rb_cGstMessageEos;
@@ -567,17 +567,10 @@ Init_gst_message(void)
 {
     VALUE rb_cGstMessageType;
 
-    fundamental.type = GST_TYPE_MESSAGE;
-    fundamental.get_superclass = get_superclass;
-    fundamental.type_init_hook = rbgst_mini_object_type_init_hook;
-    fundamental.rvalue2gvalue = NULL;
-    fundamental.gvalue2rvalue = NULL;
-    fundamental.initialize = rbgst_mini_object_initialize;
-    fundamental.robj2instance = rbgst_mini_object_robj2instance;
-    fundamental.instance2robj = instance2robj;
-    fundamental.unref = rbgst_mini_object_unref;
-
-    /* G_DEF_FUNDAMENTAL(&fundamental); */
+    table.type = GST_TYPE_MESSAGE;
+    table.get_superclass = get_superclass;
+    table.instance2robj = instance2robj;
+    RG_DEF_CONVERSION(&table);
 
     rb_cGstMessage = G_DEF_CLASS(GST_TYPE_MESSAGE, "Message", mGst);
 
