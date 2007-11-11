@@ -1,5 +1,7 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -20,8 +22,10 @@
 
 #include "rbgst.h"
 
+#define SELF(self) RVAL2GST_PLUG_FEAT(self)
+
 /* Class: Gst::PluginFeature
- * This is a base class for anything that can be added to a Gst::Plugin. 
+ * This is a base class for anything that can be added to a Gst::Plugin.
  */
 
 /* Method: name
@@ -58,9 +62,30 @@ instanciate_pluginfeature (GstPluginFeature *feature)
 	return Qnil;
 }
 
-void
-Init_gst_pluginfeature (void)
+static VALUE
+load_bang(VALUE self)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_PLUGIN_FEATURE, "PluginFeature", mGst);
-	rb_define_method (c, "name", rb_gst_pluginfeature_get_name, 0);
+    GstPluginFeature *original, *feature;
+
+    original = SELF(self);
+    feature = gst_plugin_feature_load(original);
+    if (feature) {
+        G_INITIALIZE(self, feature);
+        gst_object_unref(original);
+    }
+    return self;
+}
+
+void
+Init_gst_plugin_feature (void)
+{
+    VALUE rb_cGstPluginFeature;
+
+    rb_cGstPluginFeature = G_DEF_CLASS(GST_TYPE_PLUGIN_FEATURE,
+                                       "PluginFeature", mGst);
+
+    rb_define_method(rb_cGstPluginFeature, "name",
+                     rb_gst_pluginfeature_get_name, 0);
+
+    rb_define_method(rb_cGstPluginFeature, "load!", load_bang, 0);
 }

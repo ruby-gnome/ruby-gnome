@@ -1,5 +1,7 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -53,7 +55,7 @@ Init_gst_classes (void)
     extern void Init_gst_parse (void);
     extern void Init_gst_pipeline (void);
     extern void Init_gst_plugin (void);
-    extern void Init_gst_pluginfeature (void);
+    extern void Init_gst_plugin_feature (void);
     extern void Init_gst_querytype (void);
     extern void Init_gst_registry (void);
     extern void Init_gst_registry_pool (void);
@@ -93,7 +95,7 @@ Init_gst_classes (void)
     Init_gst_parse ();
     Init_gst_pipeline ();
     Init_gst_plugin ();
-    Init_gst_pluginfeature ();
+    Init_gst_plugin_feature();
     Init_gst_querytype ();
     Init_gst_registry ();
     Init_gst_systemclock ();
