@@ -1,3 +1,7 @@
+2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* README: updated supported poppler-glib version: 0.5.2 - 0.6.2.
+
 2007-10-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/pdf2.rb: removed needless filename -> URI conversion.
