@@ -9,7 +9,7 @@
   Copyright (C) 2002-2004 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 ID rbgutil_id_module_eval;
 

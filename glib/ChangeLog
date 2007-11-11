@@ -1,5 +1,8 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/global.h: merged to src/rbgprivate.h and removed.
+	* src/: followed the above changes.
+
 	* src/glib2.def, src/depend: followed the below changes.
 
 	* src/rbgobj_fundamental.c, src/rbgobj_convert.c,

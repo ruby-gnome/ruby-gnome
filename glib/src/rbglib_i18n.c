@@ -9,7 +9,8 @@
   Copyright (C) 2006 Kouhei Sutou
 
 **********************************************************************/
-#include "global.h"
+
+#include "rbgprivate.h"
 #include "rbglib.h"
 #undef _
 #include <glib/gi18n.h>

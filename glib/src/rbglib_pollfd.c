@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 /*****************************************/
 static GPollFD*

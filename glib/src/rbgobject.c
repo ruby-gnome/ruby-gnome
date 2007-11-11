@@ -18,7 +18,7 @@
 **********************************************************************/
 
 #include "ruby.h"
-#include "global.h"
+#include "rbgprivate.h"
 #include <ctype.h>
 
 #include "rbgprivate.h"

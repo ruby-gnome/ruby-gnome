@@ -11,7 +11,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static void
 boxed_mark(boxed_holder* p)

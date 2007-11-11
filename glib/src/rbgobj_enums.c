@@ -11,7 +11,7 @@
   Copyright (C) 2002,2003  Masahiro Sakai
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 #include <ctype.h>
 
 static ID id_new;

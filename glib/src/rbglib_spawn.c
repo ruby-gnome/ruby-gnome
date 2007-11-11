@@ -10,7 +10,7 @@
   Copyright (C) 2004 Kazuhiro NISHIYAMA
 
 **********************************************************************/
-#include "global.h"
+#include "rbgprivate.h"
 #include "rbglib.h"
 
 static ID id_call;

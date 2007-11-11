@@ -15,7 +15,7 @@
                           Hiroshi Igarashi
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 #ifndef HAVE_RB_SOURCEFILE
 #define rb_sourcefile() (ruby_sourcefile)

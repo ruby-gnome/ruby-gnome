@@ -9,7 +9,7 @@
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 #include <ctype.h>
 
 static ID id_code;

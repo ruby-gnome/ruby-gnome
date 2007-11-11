@@ -17,7 +17,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;

@@ -9,7 +9,8 @@
   Copyright (C) 2004 Masao Mutoh
 
 **********************************************************************/
-#include "global.h"
+
+#include "rbgprivate.h"
 #include "rbglib.h"
 
 /* Use Ruby standard libraries.

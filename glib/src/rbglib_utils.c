@@ -10,7 +10,8 @@
   Copyright (C) 2004 Pascal Terjan
 
 **********************************************************************/
-#include "global.h"
+
+#include "rbgprivate.h"
 
 #if GLIB_CHECK_VERSION(2,2,0)
 static VALUE

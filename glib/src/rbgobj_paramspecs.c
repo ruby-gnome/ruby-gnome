@@ -12,7 +12,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 #define DEF_NUMERIC_PSPEC_METHODS_FUNC(pspec_type, typename, from_ruby, to_ruby, pspec_cast) \
 static VALUE \

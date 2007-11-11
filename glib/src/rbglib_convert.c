@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 KUBO Takehiro
 
 **********************************************************************/
-#include "global.h"
+#include "rbgprivate.h"
 #include "rbglib.h"
 
 static VALUE

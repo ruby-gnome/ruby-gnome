@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static VALUE
 shell_parse(self, command_line)

@@ -11,7 +11,7 @@
 **********************************************************************/
 
 #include <locale.h>
-#include "global.h"
+#include "rbgprivate.h"
 #include "rbglib.h"
 
 VALUE mGLib;

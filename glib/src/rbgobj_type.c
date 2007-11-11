@@ -12,7 +12,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 #include "rbgprivate.h"
 

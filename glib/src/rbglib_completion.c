@@ -9,7 +9,7 @@
   Copyright (C) 2005,2006  Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static ID id_compfunc;
 static ID id_call;

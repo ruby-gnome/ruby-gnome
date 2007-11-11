@@ -10,7 +10,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 #ifdef RBGOBJ_USE_DLPTR
 #include "dl.h"
 #endif

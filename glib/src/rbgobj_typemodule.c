@@ -11,7 +11,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static VALUE
 use(self)

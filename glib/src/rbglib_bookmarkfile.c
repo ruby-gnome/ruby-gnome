@@ -9,7 +9,7 @@
   Copyright (C) 2006 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 #if GLIB_CHECK_VERSION(2,12,0)
 /************************************************/

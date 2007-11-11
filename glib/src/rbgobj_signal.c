@@ -12,7 +12,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static VALUE cSignal;
 VALUE rbgobj_signal_wrap(guint sig_id);

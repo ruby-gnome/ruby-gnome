@@ -11,7 +11,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static ID id_call;
 static gboolean rclosure_initialized = FALSE;

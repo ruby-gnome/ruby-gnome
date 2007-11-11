@@ -9,7 +9,7 @@
   Copyright (C) 2006  Sjoerd Simons
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 static VALUE
 value_array_to_ruby(const GValue* from)

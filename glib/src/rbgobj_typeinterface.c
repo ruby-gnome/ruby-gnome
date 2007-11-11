@@ -12,7 +12,7 @@
 
 **********************************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 VALUE mMetaInterface;
 

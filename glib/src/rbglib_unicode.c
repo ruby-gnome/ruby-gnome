@@ -9,7 +9,7 @@
   Copyright (C) 2006 Kouhei Sutou
 
 **********************************************************************/
-#include "global.h"
+#include "rbgprivate.h"
 #include "rbglib.h"
 
 static VALUE

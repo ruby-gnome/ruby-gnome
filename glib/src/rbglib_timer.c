@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "global.h"
+#include "rbgprivate.h"
 
 #ifdef G_OS_WIN32
 #include <windows.h>
