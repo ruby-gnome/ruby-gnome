@@ -46,15 +46,43 @@ def each_feature
   end
 end
 
-def factory_details_info(factory)
+def print_factory_details_info(factory, prefix)
+  rank_name = factory.rank.name
+  rank_name ||= "unknown"
+  rank_name = rank_name.gsub(/GST_RANK_/, '').downcase
   [
    "Factory Details:",
    "  Long name:\t#{factory.long_name}",
    "  Class:\t#{factory.klass}",
    "  Description:\t#{factory.description}",
    "  Author(s):\t#{factory.author}",
-   "  Rank:\t\t#{factory.rank.name} (#{factory.rank})",
-  ]
+   "  Rank:\t\t#{rank_name} (#{factory.rank.to_i})",
+   "",
+  ].each do |line|
+    puts("#{prefix}#{line}")
+  end
+end
+
+def print_plugin_info(name, prefix)
+  return if name.nil?
+  registry = Gst::Registry.default
+  plugin = registry.find_plugin(name)
+  return if plugin.nil?
+
+  [
+   "Plugin Details:",
+   "  Name:\t\t\t#{plugin.name}",
+   "  Description:\t\t#{plugin.description}",
+   "  Filename:\t\t#{plugin.filename || '(null)'}",
+   "  Version:\t\t#{plugin.version}",
+   "  License:\t\t#{plugin.license}",
+   "  Source module:\t#{plugin.source}",
+   "  Binary package:\t#{plugin.package}",
+   "  Origin URL:\t\t#{plugin.origin}",
+   "",
+  ].each do |line|
+    puts("#{prefix}#{line}")
+  end
 end
 
 def print_element_factory(factory, print_names)
@@ -64,11 +92,8 @@ def print_element_factory(factory, print_names)
   end
 
   prefix = print_names ? "#{factory.name}: " : ""
-  factory_details_info(factory).each do |line|
-    puts("#{prefix}#{line}")
-  end
-  puts(prefix)
-  p factory.plugin_name
+  print_factory_details_info(factory, prefix)
+  print_plugin_info(factory.plugin_name, prefix)
 end
 
 def print_feature(plugin, feature)

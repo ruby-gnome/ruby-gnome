@@ -1,5 +1,7 @@
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -19,6 +21,8 @@
  */
 
 #include "rbgst.h"
+
+#define SELF(self) RVAL2GST_PLUGIN(self)
 
 /* Class: Gst::Plugin
  * Dynamically loadable Elements 
@@ -68,6 +72,12 @@ static VALUE
 rb_gst_plugin_get_license (VALUE self)
 {
 	return CSTR2RVAL (gst_plugin_get_license (RGST_PLUGIN (self)));
+}
+
+static VALUE
+get_source (VALUE self)
+{
+    return CSTR2RVAL(gst_plugin_get_source(SELF(self)));
 }
 
 /* Method: origin
@@ -131,20 +141,24 @@ rb_gst_plugin_is_equal (VALUE self, VALUE other_plugin)
 void
 Init_gst_plugin (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_PLUGIN, "Plugin", mGst);
+    VALUE rb_cGstPlugin;
 
-	rb_define_method (c, "loaded?", rb_gst_plugin_is_loaded, 0);
-	rb_define_method (c, "==", rb_gst_plugin_is_equal, 1);
+    rb_cGstPlugin = G_DEF_CLASS(GST_TYPE_PLUGIN, "Plugin", mGst);
 
-	rb_define_method (c, "filename", rb_gst_plugin_get_filename, 0);
-	rb_define_method (c, "major_version", rb_gst_plugin_get_major_version, 
-			  0); 
-	rb_define_method (c, "minor_version", rb_gst_plugin_get_minor_version, 
-			  0); 
-	rb_define_method (c, "name", rb_gst_plugin_get_name, 0);
-	rb_define_method (c, "description", rb_gst_plugin_get_description, 0);
-	rb_define_method (c, "version", rb_gst_plugin_get_version, 0);
-	rb_define_method (c, "license", rb_gst_plugin_get_license, 0);
-	rb_define_method (c, "package", rb_gst_plugin_get_package, 0);
-	rb_define_method (c, "origin", rb_gst_plugin_get_origin, 0);
+    rb_define_method(rb_cGstPlugin, "loaded?", rb_gst_plugin_is_loaded, 0);
+    rb_define_method(rb_cGstPlugin, "==", rb_gst_plugin_is_equal, 1);
+
+    rb_define_method(rb_cGstPlugin, "filename", rb_gst_plugin_get_filename, 0);
+    rb_define_method(rb_cGstPlugin, "major_version",
+                     rb_gst_plugin_get_major_version, 0);
+    rb_define_method(rb_cGstPlugin, "minor_version",
+                     rb_gst_plugin_get_minor_version, 0);
+    rb_define_method(rb_cGstPlugin, "name", rb_gst_plugin_get_name, 0);
+    rb_define_method(rb_cGstPlugin, "description",
+                     rb_gst_plugin_get_description, 0);
+    rb_define_method(rb_cGstPlugin, "version", rb_gst_plugin_get_version, 0);
+    rb_define_method(rb_cGstPlugin, "license", rb_gst_plugin_get_license, 0);
+    rb_define_method(rb_cGstPlugin, "source", get_source, 0);
+    rb_define_method(rb_cGstPlugin, "package", rb_gst_plugin_get_package, 0);
+    rb_define_method(rb_cGstPlugin, "origin", rb_gst_plugin_get_origin, 0);
 }
