@@ -72,5 +72,6 @@ EXPORTS
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
 	rbgobj_convert_define
+	rbgobj_fund_define_fundamental
 	rbgobj_gc_mark_gvalue
 	rbgobj_gc_mark_instance

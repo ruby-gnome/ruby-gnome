@@ -1,5 +1,9 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_fundamental.c: re-added for making more flexible
+	backward compatibility layer.
+	* src/glib2.def, src/rbgcompat.h: followed the above change.
+
 	* src/rbgobject.h (RG_DEF_CONVERSION), src/rbgcompat.h: used RG_
 	prefix not G_ prefix.
 
