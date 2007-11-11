@@ -46,16 +46,28 @@ def each_feature
   end
 end
 
+def factory_details_info(factory)
+  [
+   "Factory Details:",
+   "  Long name:\t#{factory.long_name}",
+   "  Class:\t#{factory.klass}",
+   "  Description:\t#{factory.description}",
+   "  Author(s):\t#{factory.author}",
+   "  Rank:\t\t#{factory.rank.name} (#{factory.rank})",
+  ]
+end
+
 def print_element_factory(factory, print_names)
   if !factory.load!
     puts("element plugin (#{factory.name}) couldn't be loaded\n")
     return
   end
 
-  p :before
-  element = factory.create
-  p [element, element.class.ancestors]
-  puts("#{factory.name}: ") if print_names
+  prefix = print_names ? "#{factory.name}: " : ""
+  factory_details_info(factory).each do |line|
+    puts "#{prefix.name}#{line}"
+  end
+  puts
 end
 
 def print_feature(plugin, feature)

@@ -1,5 +1,8 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-element-factory.c: supported details readers.
+	* test/test_element_factory.rb: added a test for details readers.
+
 	* src/rbgst-plugin-feature.c: supported load.
 	* test/test_plugin_feature.rb: added a test for load.
 

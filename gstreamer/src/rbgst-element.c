@@ -51,8 +51,7 @@ instance2robj(gpointer instance)
     type = G_TYPE_FROM_INSTANCE(instance);
     klass = GTYPE2CLASS(type);
     define_class_if_need(klass, type);
-    g_object_ref(instance);
-    return Data_Wrap_Struct(klass, NULL, g_object_unref, instance);
+    return rbgobj_get_value_from_gobject(instance, TRUE);
 }
 
 

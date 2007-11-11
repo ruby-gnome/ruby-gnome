@@ -204,6 +204,25 @@ get_long_name(VALUE self)
     return CSTR2RVAL(gst_element_factory_get_longname(SELF(self)));
 }
 
+static VALUE
+get_klass(VALUE self)
+{
+    return CSTR2RVAL(gst_element_factory_get_klass(SELF(self)));
+}
+
+static VALUE
+get_description(VALUE self)
+{
+    return CSTR2RVAL(gst_element_factory_get_description(SELF(self)));
+}
+
+static VALUE
+get_author(VALUE self)
+{
+    return CSTR2RVAL(gst_element_factory_get_author(SELF(self)));
+}
+
+
 void
 Init_gst_elementfactory (void)
 {
@@ -229,4 +248,7 @@ Init_gst_elementfactory (void)
                      rb_gst_elementfactory_each_pad_template, 0);
 
     rb_define_method(rb_cGstElementFactory, "long_name", get_long_name, 0);
+    rb_define_method(rb_cGstElementFactory, "klass", get_klass, 0);
+    rb_define_method(rb_cGstElementFactory, "description", get_description, 0);
+    rb_define_method(rb_cGstElementFactory, "author", get_author, 0);
 }
