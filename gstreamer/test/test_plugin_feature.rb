@@ -1,7 +1,9 @@
 class TestPluginFeature < Test::Unit::TestCase
   def test_load!
     feature = Gst::ElementFactory.find("playbin")
+    assert(!feature.loaded?)
     assert(feature.load!)
+    assert(feature.loaded?)
   end
 
   def test_rank

@@ -83,6 +83,12 @@ load_bang(VALUE self)
 }
 
 static VALUE
+loaded_p(VALUE self)
+{
+    return CBOOL2RVAL(SELF(self)->loaded);
+}
+
+static VALUE
 get_rank(VALUE self)
 {
     return GST_RANK2RVAL(gst_plugin_feature_get_rank(SELF(self)));
@@ -110,6 +116,7 @@ Init_gst_plugin_feature (void)
                      rb_gst_pluginfeature_get_name, 0);
 
     rb_define_method(rb_cGstPluginFeature, "load!", load_bang, 0);
+    rb_define_method(rb_cGstPluginFeature, "loaded?", loaded_p, 0);
 
     rb_define_method(rb_cGstPluginFeature, "rank", get_rank, 0);
     rb_define_method(rb_cGstPluginFeature, "set_rank", set_rank, 1);
