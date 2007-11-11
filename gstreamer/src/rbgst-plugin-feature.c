@@ -24,6 +24,9 @@
 
 #define SELF(self) RVAL2GST_PLUG_FEAT(self)
 
+#define RVAL2GST_RANK(rank) RVAL2GENUM(rank, GST_TYPE_RANK)
+#define GST_RANK2RVAL(rank) GENUM2RVAL(rank, GST_TYPE_RANK)
+
 /* Class: Gst::PluginFeature
  * This is a base class for anything that can be added to a Gst::Plugin.
  */
@@ -79,6 +82,19 @@ load_bang(VALUE self)
     }
 }
 
+static VALUE
+get_rank(VALUE self)
+{
+    return GST_RANK2RVAL(gst_plugin_feature_get_rank(SELF(self)));
+}
+
+static VALUE
+set_rank(VALUE self, VALUE rank)
+{
+    gst_plugin_feature_set_rank(SELF(self), RVAL2GST_RANK(rank));
+    return Qnil;
+}
+
 void
 Init_gst_plugin_feature (void)
 {
@@ -87,8 +103,16 @@ Init_gst_plugin_feature (void)
     rb_cGstPluginFeature = G_DEF_CLASS(GST_TYPE_PLUGIN_FEATURE,
                                        "PluginFeature", mGst);
 
+    G_DEF_CLASS(GST_TYPE_RANK, "Rank", mGst);
+    G_DEF_CONSTANTS(mGst, GST_TYPE_RANK, "GST_");
+
     rb_define_method(rb_cGstPluginFeature, "name",
                      rb_gst_pluginfeature_get_name, 0);
 
     rb_define_method(rb_cGstPluginFeature, "load!", load_bang, 0);
+
+    rb_define_method(rb_cGstPluginFeature, "rank", get_rank, 0);
+    rb_define_method(rb_cGstPluginFeature, "set_rank", set_rank, 1);
+
+    G_DEF_SETTERS(rb_cGstPluginFeature);
 }
