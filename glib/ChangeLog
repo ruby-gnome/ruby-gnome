@@ -1,6 +1,6 @@
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/glib2.def: followed the below changes.
+	* src/glib2.def, src/depend: followed the below changes.
 
 	* src/rbgobj_fundamental.c, src/rbgobj_convert.c,
 	src/rbgobj_value.c, src/rbgobject.[ch], src/rbgobj_type.c: renamed
