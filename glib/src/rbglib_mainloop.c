@@ -28,110 +28,43 @@ g_main_loop_get_type(void)
 #define _SELF(s) ((GMainLoop*)RVAL2BOXED(s, G_TYPE_MAIN_LOOP))
 
 /*****************************************/
-static VALUE rbglib_main_threads;
-
-/* We can't use rbglib_poll() on native Win32.
-   Because GPollFD doesn't have file descriptor but HANDLE. */
-#ifndef G_OS_WIN32
-#define USE_POLL_FUNC
-#endif
-
-/* This function is very important to work signals with Ruby. */
-#ifdef USE_POLL_FUNC
-
-static GPollFunc default_poll_func;
-
-static gint 
-rbglib_poll (GPollFD *fds,
-            guint    nfds,
-            gint     timeout)
+static gboolean
+source_prepare(GSource *source, gint *timeout)
 {
-    struct timeval tv;
-    fd_set rset, wset, xset;
-    GPollFD *f;
-    int ready;
-    int maxfd = 0;
-
-    FD_ZERO (&rset);
-    FD_ZERO (&wset);
-    FD_ZERO (&xset);
-
-    for (f = fds; f < &fds[nfds]; ++f) {
-        if (f->fd >= 0)	{
-            if (f->events & G_IO_IN)
-                FD_SET (f->fd, &rset);
-            if (f->events & G_IO_OUT)
-                FD_SET (f->fd, &wset);
-            if (f->events & G_IO_PRI)
-                FD_SET (f->fd, &xset);
-            if (f->fd > maxfd && (f->events & (G_IO_IN|G_IO_OUT|G_IO_PRI)))
-                maxfd = f->fd;
-        }
-    }
-    tv.tv_sec = timeout / 1000;
-    tv.tv_usec = (timeout % 1000) * 1000;
-
-    ready = rb_thread_select (maxfd + 1, &rset, &wset, &xset,
-                              timeout == -1 ? NULL : &tv);
-    if (ready > 0) {
-        for (f = fds; f < &fds[nfds]; ++f) {
-            f->revents = 0;
-            if (f->fd >= 0) {
-                if (FD_ISSET (f->fd, &rset))
-                    f->revents |= G_IO_IN;
-                if (FD_ISSET (f->fd, &wset))
-                    f->revents |= G_IO_OUT;
-                if (FD_ISSET (f->fd, &xset))
-                    f->revents |= G_IO_PRI;
-            }
-        }
-    }
-
-    return ready;
+    *timeout = 1;
+    rb_thread_schedule();
+    return FALSE;
 }
-
-static void
-restore_poll_func(VALUE data)
-{
-    if (g_main_context_get_poll_func(NULL) == (GPollFunc)rbglib_poll) {
-        g_main_context_set_poll_func(NULL, default_poll_func);
-    }
-}
-
-#else /* !USE_POLL_FUNC */
-
-static guint idle_id = 0;
 
 static gboolean
-idle(gpointer data)
+source_check(GSource *source)
 {
-    struct timeval wait;
+    return FALSE;
+}
 
-    wait.tv_sec  = 0;
-    wait.tv_usec = 10000; /* 10ms */
-
-#ifdef CHECK_INTS
-    CHECK_INTS;
-#endif
-    if (!rb_thread_critical) rb_thread_wait_for(wait);
-
+static gboolean
+source_dispatch(GSource *source, GSourceFunc callback, gpointer user_data)
+{
     return TRUE;
 }
 
-void
-rbg_remove_internal_poll_func(VALUE data)
+static GSourceFuncs source_funcs = {
+    source_prepare,
+    source_check,
+    source_dispatch,
+    NULL
+};
+
+static GSource *
+ruby_source_new(void)
 {
-    g_source_remove(idle_id);
+    GSource *source;
+
+    source = g_source_new(&source_funcs, sizeof(GSource));
+    g_source_set_can_recurse(source, TRUE);
+
+    return source;
 }
-
-
-void
-rbg_set_internal_poll_func(void)
-{
-	idle_id = g_idle_add((GSourceFunc)idle, (gpointer)NULL);
-}
-
-#endif /* !USE_POLL_FUNC */
 
 /*****************************************/
 
@@ -151,27 +84,20 @@ ml_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* 
- * An empty timeout 
- */
-static gint
-empty_timeout_func(gpointer data) { return TRUE; }
-
 static VALUE
 ml_run(self)
     VALUE self;
 {
-    rb_ary_push(rbglib_main_threads, rb_thread_current());
+    GMainLoop *loop;
+    GSource *source;
 
-    /* This forces the custom g_poll function to be called 
-     * with a minimum timeout of 100ms so that the GMainLoop
-     * iterates from time to time even if there is no event.
-     * Another way could be to add a wakeup pipe to the selectable
-     * fds and than wake up the select only when needed.
-     */
-    g_timeout_add(100, empty_timeout_func, NULL);
+    loop = _SELF(self);
 
-    g_main_loop_run(_SELF(self));
+    source = ruby_source_new();
+    g_source_attach(source, g_main_loop_get_context(loop));
+    g_source_unref(source);
+
+    g_main_loop_run(loop);
     return self;
 }
 
@@ -179,15 +105,7 @@ static VALUE
 ml_quit(self)
     VALUE self;
 {
-    VALUE thread = rb_ary_pop(rbglib_main_threads);
-
     g_main_loop_quit(_SELF(self));
-
-    if (NIL_P(thread)){
-        rb_warning("GLib::MainLoop#quit was called incorrectly.");
-    } else {
-        rb_thread_wakeup(thread);
-    }
     return Qnil;
 }
 
@@ -209,6 +127,7 @@ void
 Init_glib_main_loop()
 {
     VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
+    GSource *source;
 
     rb_define_method(ml, "initialize", ml_initialize, -1);
     rb_define_method(ml, "run", ml_run, 0);
@@ -216,15 +135,7 @@ Init_glib_main_loop()
     rb_define_method(ml, "running?", ml_is_running, 0);
     rb_define_method(ml, "context", ml_get_context, 0);
 
-    rb_global_variable(&rbglib_main_threads);
-    rbglib_main_threads = rb_ary_new();
-
-#ifdef USE_POLL_FUNC
-    default_poll_func = g_main_context_get_poll_func(NULL);
-    g_main_context_set_poll_func(NULL, (GPollFunc)rbglib_poll);
-    rb_set_end_proc(restore_poll_func, Qnil);
-#else
-    rbg_set_internal_poll_func();
-    rb_set_end_proc(rbg_remove_internal_poll_func, Qnil);
-#endif
+    source = ruby_source_new();
+    g_source_attach(source, NULL);
+    g_source_unref(source);
 }
