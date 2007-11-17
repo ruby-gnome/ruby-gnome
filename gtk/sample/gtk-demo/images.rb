@@ -139,7 +139,7 @@ module Demo
 
     def progressive_timeout(image)
       if @image_stream
-	buf = @image_stream.read(1024)
+	buf = @image_stream.read(256)
 	
 	@pixbuf_loader.write(buf)
 	
@@ -149,8 +149,6 @@ module Demo
 	  
 	  @pixbuf_loader.close
 	  @pixbuf_loader = nil
-	  
-	  return false
 	end
       else
 	filename = Demo.find_file('alphatest.png')
@@ -189,6 +187,8 @@ module Demo
     end
 
     def cleanup_callback
+      @pixbuf_loader.close if @pixbuf_loader
+      @pixbuf_loader = nil
       if @load_timeout != 0
 	Gtk.timeout_remove(@load_timeout)
       end
