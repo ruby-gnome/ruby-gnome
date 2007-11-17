@@ -17,7 +17,6 @@
 
 EXTERN VALUE rb_progname, rb_argv;
 
-static VALUE rbgtk_main_threads = Qnil;
 static VALUE rbgtk_eGtkInitError;
 
 static ID id__quit_callbacks__, id__timeout_callbacks__;
@@ -506,8 +505,6 @@ Init_gtk_main()
     rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
     rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
     rb_define_module_function(mGtk, "init", gtk_m_init, -1);
-    rb_global_variable(&rbgtk_main_threads);
-    rbgtk_main_threads = rb_ary_new();
     rb_define_module_function(mGtk, "main", gtk_m_main, 0);
     rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
     rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
