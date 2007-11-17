@@ -185,26 +185,10 @@ gtk_init()
 gtk_exit()
 */
 
-/* 
- * An empty timeout 
- */
-static gint
-empty_timeout_func(gpointer data) { return TRUE; }
-
 static VALUE
 gtk_m_main(self)
     VALUE self;
 {
-    rb_ary_push(rbgtk_main_threads, rb_thread_current());
-
-    /* This forces the custom g_poll function to be called 
-     * with a minimum timeout of 100ms so that the GMainLoop
-     * iterates from time to time even if there is no event.
-     * Another way could be to add a wakeup pipe to the selectable
-     * fds and than wake up the select only when needed.
-     */
-    g_timeout_add(100, empty_timeout_func, NULL);
-
     gtk_main();
     return Qnil;
 }
@@ -220,13 +204,7 @@ static VALUE
 gtk_m_main_quit(self)
     VALUE self;
 {
-    VALUE thread = rb_ary_pop(rbgtk_main_threads);
     gtk_main_quit();
-    if (NIL_P(thread)){
-        rb_warning("Gtk.main_quit was called incorrectly.");
-    } else {
-        rb_thread_wakeup(thread);
-    }
     return Qnil;
 }
 

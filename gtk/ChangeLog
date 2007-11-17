@@ -1,3 +1,9 @@
+2007-11-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmain.c: followed the Ruby/GLib polling method changes.
+	- removed needless empty timeout.
+	- removed the current thread holding.
+
 2007-11-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmain.c (gtk_m_init): defined Gtk::InitError and used
