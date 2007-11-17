@@ -1,3 +1,7 @@
+2007-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
+
+	* src/rbgtk.c: Removed USE_POLL macro to work Win32 again.
+
 2007-11-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gtk-demo/images.rb: followed more original style.

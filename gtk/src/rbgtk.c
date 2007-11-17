@@ -68,38 +68,13 @@ exec_callback(widget, proc)
 
 /* We can't use rbgtk_poll() on native Win32.
    Because GPollFD doesn't have file descriptor but HANDLE. */
-#ifndef G_OS_WIN32
 #define USE_POLL_FUNC
-#endif
-
-#ifndef USE_POLL_FUNC
-static VALUE
-gtk_m_events_pending_internal(self)
-    VALUE self;
-{
-    rbg_remove_internal_poll_func((VALUE)Qnil);
-    return CBOOL2RVAL(gtk_events_pending());
-}
-
-static VALUE
-gtk_m_events_pending_ensure(self)
-    VALUE self;
-{
-    rbg_set_internal_poll_func();
-    return Qnil;
-}
-#endif
 
 static VALUE
 gtk_m_events_pending(self)
     VALUE self;
 {
-#ifdef USE_POLL_FUNC
    return CBOOL2RVAL(gtk_events_pending());
-#else
-   return rb_ensure(gtk_m_events_pending_internal, self,
-                    gtk_m_events_pending_ensure, self);
-#endif
 }
 
 /*
