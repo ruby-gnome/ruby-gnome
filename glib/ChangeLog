@@ -1,3 +1,7 @@
+2007-11-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_mainloop.c (source_prepare): checked pending signals.
+
 2007-11-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_mainloop.c: used GSource not poll func overriding.

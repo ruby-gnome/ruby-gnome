@@ -33,6 +33,7 @@ source_prepare(GSource *source, gint *timeout)
 {
     *timeout = 1;
     rb_thread_schedule();
+    CHECK_INTS;
     return FALSE;
 }
 
