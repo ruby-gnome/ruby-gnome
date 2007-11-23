@@ -120,9 +120,10 @@ class TestGLib < Test::Unit::TestCase
       id = obj.signal_connect("notify") { p a }
       obj.signal_handler_disconnect(id)
     }
+    GC.start
     ary = []
     ObjectSpace.each_object(klass) { |a| ary.push(a) }
-    assert(ary.size < 1000)
+    assert_operator(ary.size, :<, 1000)
   end
 
   def test_gtype
