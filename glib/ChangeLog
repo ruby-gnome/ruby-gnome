@@ -1,3 +1,7 @@
+2007-11-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_mainloop.c: used GPollPD.
+
 2007-11-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* tests/test_glib2.rb: added GC.start.
