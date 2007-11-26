@@ -142,7 +142,7 @@ rbglib_num_to_uint64(VALUE val)
 /**********************************************************************/
 
 void
-Init_utils_int64()
+Init_glib_int64()
 {
     id_and    = rb_intern("&");
     id_rshift = rb_intern(">>");

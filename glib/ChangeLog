@@ -1,5 +1,11 @@
 2007-11-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/utils_callback.c: renamed to ...
+	* src/rbgutil_callback.c: ... this.
+	* src/utils_int64.c: renamed to ...
+	* src/rbglib_int64.c: ... this.
+	* src/rbglib.c: followed the above changes.
+
 	* src/rbglib_mainloop.c (source_check): fixed a typo.
 
 2007-11-25  Kouhei Sutou  <kou@cozmixng.org>

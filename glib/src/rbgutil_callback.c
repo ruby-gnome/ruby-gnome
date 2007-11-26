@@ -175,7 +175,7 @@ callback_end_proc(VALUE _)
     callback_initialized = FALSE;
 }
 
-void Init_utils_callback()
+void Init_gutil_callback()
 {
     id_exit_application = rb_intern("exit_application");
     callback_initialized = TRUE;

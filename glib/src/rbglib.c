@@ -16,9 +16,9 @@
 
 VALUE mGLib;
 
-extern void Init_utils_int64();
-extern void Init_utils_callback();
 extern void Init_gutil();
+extern void Init_gutil_callback();
+extern void Init_glib_int64();
 extern void Init_glib_error();
 extern void Init_glib_threads();
 extern void Init_glib_convert();
@@ -268,9 +268,9 @@ union       GDoubleIEEE754;
 
 
 /*    Init_mem(); */
-    Init_utils_int64();
-    Init_utils_callback();
     Init_gutil();
+    Init_gutil_callback();
+    Init_glib_int64();
     Init_glib_error();
     Init_glib_threads();
     Init_glib_convert();
