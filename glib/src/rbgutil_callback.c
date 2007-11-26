@@ -84,11 +84,14 @@ mainloop(void)
 {
     for (;;) {
         struct callback_req* req;
+        fd_set read_fds;
 
         /* wait untill we're triggered.
          * If this happens we can read from the pipe
          * and it's guaranteed that the needed mutexes are initialized */
-        rb_thread_wait_fd(callback_fd[0]);
+        FD_ZERO(&read_fds);
+        FD_SET(callback_fd[0], &read_fds);
+        rb_thread_select(2, &read_fds, NULL, NULL, NULL);
 
         {
             ssize_t size;

@@ -1,5 +1,8 @@
 2007-11-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgutil_callback.c: used rb_thread_select() instead of
+	rb_thread_wait_fd().
+
 	* src/rbglib_mainloop.c: used G_IO_IN as initial events.
 
 	* src/utils_callback.c: renamed to ...
