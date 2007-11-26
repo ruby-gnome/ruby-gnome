@@ -175,7 +175,7 @@ source_check(GSource *source)
     for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
         GPollFD *poll_fd = node->data;
 
-        if (poll_fd->events)
+        if (poll_fd->revents)
             return TRUE;
     }
 

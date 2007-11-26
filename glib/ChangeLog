@@ -1,6 +1,10 @@
+2007-11-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_mainloop.c (source_check): fixed a typo.
+
 2007-11-25  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/rbglib_mainloop.c: used GPollPD.
+	* src/rbglib_mainloop.c: used GPollFD.
 
 2007-11-23  Kouhei Sutou  <kou@cozmixng.org>
 
