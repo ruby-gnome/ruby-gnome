@@ -105,7 +105,7 @@ source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
 
     poll_fd = g_new0(GPollFD, 1);
     poll_fd->fd = thread->fd;
-    poll_fd->events = 0;
+    poll_fd->events = G_IO_IN;
     if (FD_ISSET(thread->fd, &thread->readfds))
         poll_fd->events |= G_IO_IN | G_IO_PRI;
     if (FD_ISSET(thread->fd, &thread->writefds))

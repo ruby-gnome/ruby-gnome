@@ -1,5 +1,7 @@
 2007-11-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_mainloop.c: used G_IO_IN as initial events.
+
 	* src/utils_callback.c: renamed to ...
 	* src/rbgutil_callback.c: ... this.
 	* src/utils_int64.c: renamed to ...
