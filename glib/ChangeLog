@@ -1,3 +1,9 @@
+2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: detected curr_thread.
+
+	* src/rbglib_mainloop.c: supported ruby 1.8.6 p0.
+
 2007-11-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil_callback.c: used rb_thread_select() instead of

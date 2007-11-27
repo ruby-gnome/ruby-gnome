@@ -13,6 +13,10 @@
 #include <rubysig.h>
 #include <node.h>
 
+#ifdef HAVE_CURR_THREAD
+#  define rb_curr_thread curr_thread
+#endif
+
 /* from eval.c */
 #define WAIT_FD		(1<<0)
 #define WAIT_SELECT	(1<<1)
