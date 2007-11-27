@@ -1,3 +1,8 @@
+2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmessagedialog.c (mdiag_initialize): fixed message
+	format bug. Reported by Chris Rohlf. Thanks!
+
 2007-11-18  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtk.c: Removed USE_POLL macro to work Win32 again.

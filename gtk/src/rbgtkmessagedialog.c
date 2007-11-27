@@ -28,7 +28,8 @@ mdiag_initialize(argc, argv, self)
                                RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS), 
                                RVAL2GENUM(type, GTK_TYPE_MESSAGE_TYPE), 
                                RVAL2GENUM(buttons, GTK_TYPE_BUTTONS_TYPE),
-                               (const gchar*)(NIL_P(message) ? "": RVAL2CSTR(message)));
+                               "%s",
+                               NIL_P(message) ? "": RVAL2CSTR(message));
     RBGTK_INITIALIZE(self, w);
     return Qnil;
 }
