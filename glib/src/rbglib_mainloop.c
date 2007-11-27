@@ -86,14 +86,14 @@ typedef struct _RGSource
 } RGSource;
 
 static void
-source_free_poll_fds(GSource *source)
+source_free_poll_fds(GSource *source, gboolean source_is_destroyed)
 {
     RGSource *rg_source = (RGSource *)source;
     GList *node;
 
     for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
         GPollFD *poll_fd = node->data;
-        if (!g_source_is_destroyed(source))
+        if (!source_is_destroyed)
             g_source_remove_poll(source, poll_fd);
         g_free(poll_fd);
     }
@@ -161,7 +161,7 @@ source_prepare(GSource *source, gint *timeout)
     RGSource *rg_source = (RGSource *)source;
 
     *timeout = -1;
-    source_free_poll_fds(source);
+    source_free_poll_fds(source, FALSE);
     rg_source->ready = source_prepare_setup_poll_fd(source, timeout);
 
     return rg_source->ready;
@@ -199,7 +199,7 @@ source_dispatch(GSource *source, GSourceFunc callback, gpointer user_data)
 static void
 source_finalize(GSource *source)
 {
-    source_free_poll_fds(source);
+    source_free_poll_fds(source, TRUE);
 }
 
 static GSourceFuncs source_funcs = {

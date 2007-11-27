@@ -1,5 +1,7 @@
 2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_mainloop.c: don't use g_source_is_destroyed().
+
 	* extconf.rb: detected curr_thread.
 
 	* src/rbglib_mainloop.c: supported ruby 1.8.6 p0.
