@@ -1,3 +1,8 @@
+2007-11-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_mainloop.c (source_prepare_add_poll_fd): treated
+	G_IO_HUP as except case not read case.
+
 2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_mainloop.c: don't use g_source_is_destroyed().
