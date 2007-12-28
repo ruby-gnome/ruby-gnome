@@ -154,7 +154,7 @@ aboutdialog_s_show_about_dialog(self, parent, props)
                    strlen(pd[i].name) == strlen("logo")){
             pd[i].value = g_object_ref(RVAL2GOBJ(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
         } else if (strncmp(pd[i].name, "wrap_license", strlen("wrap_license")) == 0){
-            pd[i].value = (gpointer)RVAL2CBOOL(RARRAY(ary)->ptr[i]);
+            pd[i].value = GINT_TO_POINTER(RVAL2CBOOL(RARRAY(ary)->ptr[i]));
         } else {
             pd[i].value = g_strdup(RVAL2CSTR(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
         }

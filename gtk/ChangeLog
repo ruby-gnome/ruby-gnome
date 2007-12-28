@@ -1,5 +1,8 @@
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkaboutdialog.c: used GINT_TO_POINTER() to cast boolean
+	value to gpointer.
+
 	* src/:
 	- used rb_errinfo().
 	- used RSTRING_LEN() and RSTRING_PTR().
