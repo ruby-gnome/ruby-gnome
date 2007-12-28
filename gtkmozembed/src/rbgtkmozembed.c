@@ -391,13 +391,13 @@ static VALUE
 moz_render_data(self, data, base_uri, mime_type)
     VALUE self, data, base_uri, mime_type;
 {
-    gtk_moz_embed_render_data(_SELF(self), 
-                              RSTRING(data)->ptr, 
-                              RSTRING(data)->len,
+    gtk_moz_embed_render_data(_SELF(self),
+                              RSTRING_PTR(data),
+                              RSTRING_LEN(data),
                               RVAL2CSTR(base_uri),
                               RVAL2CSTR(mime_type));
     return self;
-}    
+}
 
 
 
@@ -477,9 +477,9 @@ moz_append_data(self, data)
                  "Can't append date before open_stream"
                  " is called.");
 
-    gtk_moz_embed_append_data(_SELF(self), 
-                              RSTRING(data)->ptr, 
-                              RSTRING(data)->len);
+    gtk_moz_embed_append_data(_SELF(self),
+                              RSTRING_PTR(data),
+                              RSTRING_LEN(data));
     return self;
 }
 
