@@ -246,8 +246,13 @@ static VALUE
 rbatk_text_remove_selection(self, selection_num)
     VALUE self, selection_num;
 {
-    gboolean ret = atk_text_remove_selection(_SELF(self), NUM2INT(selection_num));
-    if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection. num = %d", NUM2INT(selection_num));
+    gint num;
+    gboolean ret;
+
+    num = NUM2INT(selection_num);
+    ret = atk_text_remove_selection(_SELF(self), num);
+    if (! ret)
+        rb_raise(rb_eRuntimeError, "Can't remove selection. num = %d", num);
     return self;
 }
 

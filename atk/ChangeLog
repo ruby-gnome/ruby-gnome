@@ -1,3 +1,7 @@
+2007-12-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbatktext.c (rbatk_text_remove_selection): used gint for "%d".
+
 2007-08-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
 
 	* src/depend: re-supported build in no-source directory.
