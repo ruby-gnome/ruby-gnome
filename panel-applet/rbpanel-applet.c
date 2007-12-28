@@ -11,6 +11,11 @@
 
 #include "rbgobject.h"
 #include "rbgtk.h"
+
+#ifdef _
+#  undef _
+#endif
+
 #include <orbit/orbit.h>
 #include <panel-applet.h>
 #include <panel-applet-gconf.h>

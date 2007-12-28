@@ -1,3 +1,7 @@
+2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* rbpanel-applet.c: undefined "_".
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* rbpanel-applet.c: use rb_block_proc() directly instead of using
