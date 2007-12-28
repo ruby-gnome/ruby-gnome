@@ -292,16 +292,13 @@ get_file_info(self, filename)
 /****************************************************/
 /* File saving */
 static VALUE
-save(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+save(int argc, VALUE *argv, VALUE self)
 {
     VALUE filename, type, options, key, str;
-    GError* error = NULL;
+    GError *error = NULL;
     gboolean result;
-    gchar** keys = NULL;
-    gchar** values = NULL;
+    gchar **keys = NULL;
+    gchar **values = NULL;
     gint len, i;
     ID to_s = rb_intern("to_s");
     VALUE ary;
@@ -312,12 +309,12 @@ save(argc, argv, self)
         Check_Type(options, T_HASH);
         ary = rb_funcall(options, rb_intern("to_a"), 0);
         len = RARRAY(ary)->len;
-        keys = ALLOCA_N(gchar*, len + 1);
-        values = ALLOCA_N(gchar*, len + 1);
+        keys = ALLOCA_N(gchar *, len + 1);
+        values = ALLOCA_N(gchar *, len + 1);
         for (i = 0; i < len; i++) {
             key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
             if (SYMBOL_P(key)) {
-               keys[i] = rb_id2name(SYM2ID(key));
+                keys[i] = rb_id2name(SYM2ID(key));
             } else {
                 keys[i] = RVAL2CSTR(key);
             }
@@ -346,17 +343,14 @@ gboolean    gdk_pixbuf_save_to_callbackv    (GdkPixbuf *pixbuf,
 */
 
 static VALUE
-save_to_buffer(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+save_to_buffer(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, options, key, str;
-    GError* error = NULL;
+    GError *error = NULL;
     gboolean result;
-    gchar** keys = NULL;
-    gchar** values = NULL;
-    gchar* buffer;
+    gchar **keys = NULL;
+    gchar **values = NULL;
+    gchar *buffer;
     gsize buffer_size;
     gint len, i;
     ID to_s = rb_intern("to_s");
@@ -364,16 +358,16 @@ save_to_buffer(argc, argv, self)
 
     rb_scan_args(argc, argv, "11", &type, &options);
 
-    if (options != Qnil){
+    if (options != Qnil) {
         Check_Type(options, T_HASH);
         ary = rb_funcall(options, rb_intern("to_a"), 0);
         len = RARRAY(ary)->len;
-        keys = ALLOCA_N(gchar*, len + 1);
-        values = ALLOCA_N(gchar*, len + 1);
+        keys = ALLOCA_N(gchar *, len + 1);
+        values = ALLOCA_N(gchar *, len + 1);
         for (i = 0; i < len; i++) {
             key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
             if (SYMBOL_P(key)) {
-               keys[i] = rb_id2name(SYM2ID(key));
+                keys[i] = rb_id2name(SYM2ID(key));
             } else {
                 keys[i] = RVAL2CSTR(key);
             }
@@ -386,7 +380,7 @@ save_to_buffer(argc, argv, self)
     result = gdk_pixbuf_save_to_bufferv(_SELF(self), &buffer, &buffer_size,
                                         RVAL2CSTR(type), keys, values, &error);
 
-    if (! result) RAISE_GERROR(error);
+    if (!result) RAISE_GERROR(error);
 
     return rb_str_new(buffer, buffer_size);
 }
