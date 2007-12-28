@@ -1,3 +1,7 @@
+2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtk.c: removed needless #include "st.h".
+
 2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmessagedialog.c (mdiag_initialize): fixed message
