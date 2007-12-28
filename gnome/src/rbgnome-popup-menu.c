@@ -72,12 +72,13 @@ pmenu_pos_func(menu, px, py, data)
     gint *px, *py;
     gpointer data;
 {
-    VALUE arr = rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(menu), 
-						   INT2FIX(*px), INT2FIX(*py));
+    VALUE arr = rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(menu),
+                           INT2FIX(*px), INT2FIX(*py));
     Check_Type(arr, T_ARRAY);
     if (RARRAY(arr)->len != 2) {
-		rb_raise(rb_eTypeError, "wrong number of result (%d for 2)", 
-				 RARRAY(arr)->len);
+		rb_raise(rb_eTypeError,
+                         "wrong number of result (%ld for 2)",
+                         RARRAY(arr)->len);
     }
     *px = NUM2INT(RARRAY(arr)->ptr[0]);
     *py = NUM2INT(RARRAY(arr)->ptr[1]);

@@ -496,7 +496,7 @@ fill_ui_info(uiinfo, ary, uitype)
                      rb_class2name(CLASS_OF(item)));
         if (RARRAY(item)->len != 10)
             rb_raise(rb_eArgError,
-                     "wrong array size for UIInfo entry (%d for 10)",
+                     "wrong array size for UIInfo entry (%ld for 10)",
                      RARRAY(item)->len);;
 
         type = RVAL2GENUM(RARRAY(item)->ptr[0], GNOME_TYPE_UI_INFO_TYPE);

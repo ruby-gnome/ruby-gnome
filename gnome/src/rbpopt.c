@@ -137,7 +137,9 @@ rbgno_poptoption_array_to_obj(from)
         Check_Type(entry, T_ARRAY);
 
         if (RARRAY(entry)->len < 4 || 6 < RARRAY(entry)->len) {
-            rb_raise(rb_eArgError, "worng # of popt option (%d for 4 - 6)", RARRAY(entry)->len);
+            rb_raise(rb_eArgError,
+                     "wrong # of popt option (%ld for 4 - 6)",
+                     RARRAY(entry)->len);
         }
         sstring += strlen(RVAL2CSTR(RARRAY(entry)->ptr[0])) + 1;
         switch (NUM2INT(RARRAY(entry)->ptr[2])) {
