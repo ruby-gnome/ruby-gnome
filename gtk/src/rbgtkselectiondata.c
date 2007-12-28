@@ -37,14 +37,14 @@ rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
         dat = RVAL2CSTR(src);
         fmt = 8;
-        len = RSTRING(src)->len;
+        len = RSTRING_LEN(src);
     } else if(ntype == compound_text){
         guchar* str = (guchar*)dat;
         gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);
     } else if(type != Qnil && size != Qnil && src != Qnil) {
     	dat = RVAL2CSTR(src);
 	fmt = NUM2INT(size);
-	len = (RSTRING(src)->len * sizeof(char) / fmt);
+	len = (RSTRING_LEN(src) * sizeof(char) / fmt);
     } else {
         rb_raise(rb_eArgError, "no supported type.");
     }
@@ -148,7 +148,7 @@ gtkselectiondata_set_text(self, str)
     StringValue(str);
 
     ret = gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
-                                      RSTRING(str)->len);
+                                      RSTRING_LEN(str));
 
     if (!ret) 
         rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");

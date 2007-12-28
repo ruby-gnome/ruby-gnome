@@ -1,5 +1,9 @@
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/:
+	- used rb_errinfo().
+	- used RSTRING_LEN() and RSTRING_PTR().
+
 	* extconf.rb: checked rb_errinfo() availability.
 	* src/rbgtkrecentfilter.c: used rb_errinfo().
 

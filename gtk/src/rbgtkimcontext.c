@@ -88,7 +88,7 @@ imcontext_set_surrounding(self, text, cursor_index)
 {
     StringValue(text);
     gtk_im_context_set_surrounding(_SELF(self),
-                                   RVAL2CSTR(text), RSTRING(text)->len,
+                                   RVAL2CSTR(text), RSTRING_LEN(text),
                                    NUM2INT(cursor_index));
     return self;
 }

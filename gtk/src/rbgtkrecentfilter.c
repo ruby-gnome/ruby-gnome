@@ -11,10 +11,6 @@
 
 #include "global.h"
 
-#ifndef HAVE_RB_ERRINFO
-#  define rb_errinfo() (ruby_errinfo)
-#endif
-
 #if GTK_CHECK_VERSION(2,10,0)
 
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))

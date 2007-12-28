@@ -139,7 +139,7 @@ clipboard_set_text(self, text)
     VALUE self, text;
 {
     StringValue(text);
-    gtk_clipboard_set_text(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len);
+    gtk_clipboard_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
     return self;
 }
 

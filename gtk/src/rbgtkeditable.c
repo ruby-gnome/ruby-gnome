@@ -42,8 +42,8 @@ edit_insert_text(self, new_text, pos)
 
     StringValue(new_text);
     gtk_editable_insert_text(GTK_EDITABLE(RVAL2GOBJ(self)),
-			     RSTRING(new_text)->ptr,
-			     RSTRING(new_text)->len,
+			     RSTRING_PTR(new_text),
+			     RSTRING_LEN(new_text),
 			     &p);
     return INT2NUM(p);
 }

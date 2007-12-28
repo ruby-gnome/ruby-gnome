@@ -105,7 +105,7 @@ each_printer(GtkPrinter *printer, gpointer data)
     arg.argv = argv;
 
     result = G_PROTECT_CALLBACK(invoke_callback, &arg);
-    return NIL_P(ruby_errinfo) ? TRUE : RVAL2CBOOL(result);
+    return NIL_P(rb_errinfo()) ? TRUE : RVAL2CBOOL(result);
 }
 
 static void

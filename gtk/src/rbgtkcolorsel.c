@@ -138,7 +138,7 @@ colorsel_s_set_change_palette_hook(self)
 {
     VALUE func = rb_block_proc();
 
-    rb_cvar_set(gColorSel, rb_intern("__palette_proc__"), func, 0);
+    rb_cv_set(gColorSel, "__palette_proc__", func);
     gtk_color_selection_set_change_palette_with_screen_hook(
         (GtkColorSelectionChangePaletteWithScreenFunc)screen_func);
     return self;

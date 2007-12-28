@@ -17,6 +17,10 @@
 
 #include "rbgtk.h"
 
+#ifndef HAVE_RB_ERRINFO
+#  define rb_errinfo() (ruby_errinfo)
+#endif
+
 extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
