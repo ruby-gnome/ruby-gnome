@@ -28,7 +28,6 @@
 
 #include "rbgtk.h"
 #include <rubyio.h>
-#include <version.h>
 #include <libgnome/libgnometypebuiltins.h>
 #include "rbgnomeversion.h"
 
