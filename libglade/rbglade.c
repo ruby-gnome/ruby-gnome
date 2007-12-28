@@ -160,7 +160,8 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
         xml = glade_xml_new(RVAL2CSTR(text), root, domain);
     } else if (dflag == RB_GLADE_XML_BUFFER) {
         StringValue(text);
-        xml = glade_xml_new_from_buffer(RVAL2CSTR(text), RSTRING(text)->len, root, domain);
+        xml = glade_xml_new_from_buffer(RVAL2CSTR(text), RSTRING_LEN(text),
+                                        root, domain);
         rb_iv_set(self, "@xml", text);
     } else {
         rb_raise(rb_eArgError, "flag is wrong valiable %d", dflag);
