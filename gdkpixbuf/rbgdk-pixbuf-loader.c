@@ -68,8 +68,9 @@ loader_write(self, data)
     GError *error = NULL;
     gboolean res;
   
-    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data), RSTRING(data)->len, &error);
-    if(error)
+    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data),
+                                  RSTRING_LEN(data), &error);
+    if (error)
         RAISE_GERROR(error);
     return CBOOL2RVAL(res);
 }
@@ -81,21 +82,16 @@ last_write(self, data)
 {
     GError *error = NULL;
     gboolean res;
-	
-    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data), RSTRING(data)->len, &error);
-    if(error)
-    {
+
+    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data),
+                                  RSTRING_LEN(data), &error);
+    if (error)
         RAISE_GERROR(error);
-        return Qnil;
-    }
-	
+
     res = gdk_pixbuf_loader_close(_SELF(self), &error);
-    if(error)
-    {
+    if (error)
         RAISE_GERROR(error);
-        return Qnil;
-    }
-	
+
     return CBOOL2RVAL(res);
 }
 
@@ -104,8 +100,7 @@ static VALUE
 loader_set_size(self, width, height)
     VALUE self, width, height;
 {
-    gdk_pixbuf_loader_set_size(_SELF(self), 
-                               NUM2INT(width), NUM2INT(height));
+    gdk_pixbuf_loader_set_size(_SELF(self), NUM2INT(width), NUM2INT(height));
     return self;
 }
 #endif
