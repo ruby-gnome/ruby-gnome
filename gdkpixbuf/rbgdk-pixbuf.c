@@ -289,24 +289,22 @@ get_file_info(self, filename)
 
 #endif
 
-/****************************************************/
-/* File saving */
 static VALUE
-save(int argc, VALUE *argv, VALUE self)
+save_to(VALUE self, gchar *filename, gchar *type, VALUE options)
 {
-    VALUE filename, type, options, key, str;
+    VALUE result = self;
     GError *error = NULL;
-    gboolean result;
     gchar **keys = NULL;
     gchar **values = NULL;
-    gint len, i;
-    ID to_s = rb_intern("to_s");
-    VALUE ary;
 
-    rb_scan_args(argc, argv, "21", &filename, &type, &options);
+    if (!NIL_P(options)) {
+        VALUE ary, key, value;
+        ID to_s;
+        gint len, i;
 
-    if (options != Qnil){
         Check_Type(options, T_HASH);
+        to_s = rb_intern("to_s");
+
         ary = rb_funcall(options, rb_intern("to_a"), 0);
         len = RARRAY(ary)->len;
         keys = ALLOCA_N(gchar *, len + 1);
@@ -314,21 +312,48 @@ save(int argc, VALUE *argv, VALUE self)
         for (i = 0; i < len; i++) {
             key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
             if (SYMBOL_P(key)) {
-                keys[i] = rb_id2name(SYM2ID(key));
+                const char *const_key;
+                const_key = rb_id2name(SYM2ID(key));
+                keys[i] = (gchar *)const_key;
             } else {
                 keys[i] = RVAL2CSTR(key);
             }
-            str = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
-            values[i] = RVAL2CSTR(str);
+            value = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
+            values[i] = RVAL2CSTR(value);
         }
         keys[len] = NULL;
         values[len] = NULL;
     }
-    result = gdk_pixbuf_savev(_SELF(self), RVAL2CSTR(filename),
-                              RVAL2CSTR(type), keys, values, &error);
-    if (! result) RAISE_GERROR(error);
 
-    return self;
+    if (filename) {
+        gdk_pixbuf_savev(_SELF(self), filename, type, keys, values, &error);
+    }
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+    else {
+        gchar *buffer;
+        gsize buffer_size;
+        if (gdk_pixbuf_save_to_bufferv(_SELF(self), &buffer, &buffer_size,
+                                       type, keys, values, &error))
+            result = rb_str_new(buffer, buffer_size);
+    }
+#endif
+
+    if (error)
+        RAISE_GERROR(error);
+
+    return result;
+}
+
+/****************************************************/
+/* File saving */
+static VALUE
+save(int argc, VALUE *argv, VALUE self)
+{
+    VALUE filename, type, options;
+
+    rb_scan_args(argc, argv, "21", &filename, &type, &options);
+
+    return save_to(self, RVAL2CSTR(filename), RVAL2CSTR(type), options);
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
@@ -345,44 +370,11 @@ gboolean    gdk_pixbuf_save_to_callbackv    (GdkPixbuf *pixbuf,
 static VALUE
 save_to_buffer(int argc, VALUE *argv, VALUE self)
 {
-    VALUE type, options, key, str;
-    GError *error = NULL;
-    gboolean result;
-    gchar **keys = NULL;
-    gchar **values = NULL;
-    gchar *buffer;
-    gsize buffer_size;
-    gint len, i;
-    ID to_s = rb_intern("to_s");
-    VALUE ary;
+    VALUE type, options;
 
     rb_scan_args(argc, argv, "11", &type, &options);
 
-    if (options != Qnil) {
-        Check_Type(options, T_HASH);
-        ary = rb_funcall(options, rb_intern("to_a"), 0);
-        len = RARRAY(ary)->len;
-        keys = ALLOCA_N(gchar *, len + 1);
-        values = ALLOCA_N(gchar *, len + 1);
-        for (i = 0; i < len; i++) {
-            key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
-            if (SYMBOL_P(key)) {
-                keys[i] = rb_id2name(SYM2ID(key));
-            } else {
-                keys[i] = RVAL2CSTR(key);
-            }
-            str = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
-            values[i] = RVAL2CSTR(str);
-        }
-        keys[len] = NULL;
-        values[len] = NULL;
-    }
-    result = gdk_pixbuf_save_to_bufferv(_SELF(self), &buffer, &buffer_size,
-                                        RVAL2CSTR(type), keys, values, &error);
-
-    if (!result) RAISE_GERROR(error);
-
-    return rb_str_new(buffer, buffer_size);
+    return save_to(self, NULL, RVAL2CSTR(type), options);
 }
 #endif
 

@@ -1,6 +1,8 @@
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
-	* rbgdk-pixbuf.c (save, save_to_buffer): cosmetic.
+	* rbgdk-pixbuf.c (save, save_to_buffer):
+	- cosmetic.
+	- generalized.
 
 	* rbgdk-pixbuf-loader.c: used RSTRING_LEN instead of RSTRING()->len.
 
