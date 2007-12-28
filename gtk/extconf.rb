@@ -59,6 +59,8 @@ have_func('gtk_print_job_get_type')
 have_func('gtk_printer_get_type')
 have_func('gtk_page_setup_unix_get_type')
 
+have_func("rb_errinfo")
+
 PKGConfig.have_package('cairo')
 if have_header('rb_cairo.h')
   if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM

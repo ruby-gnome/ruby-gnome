@@ -11,6 +11,10 @@
 
 #include "global.h"
 
+#ifndef HAVE_RB_ERRINFO
+#  define rb_errinfo() (ruby_errinfo)
+#endif
+
 #if GTK_CHECK_VERSION(2,10,0)
 
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
@@ -111,7 +115,7 @@ filter_func(info, func)
     arg.info = BOXED2RVAL((gpointer)info, GTK_TYPE_RECENT_FILTER_INFO);
   
     VALUE result = G_PROTECT_CALLBACK(invoke_callback, &arg);
-    return NIL_P(ruby_errinfo) ? TRUE : RVAL2CBOOL(result);
+    return NIL_P(rb_errinfo()) ? TRUE : RVAL2CBOOL(result);
 }
 
 static void

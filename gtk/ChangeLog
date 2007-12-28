@@ -1,5 +1,8 @@
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: checked rb_errinfo() availability.
+	* src/rbgtkrecentfilter.c: used rb_errinfo().
+
 	* src/rbgtk.c: removed needless #include "st.h".
 
 2007-11-27  Kouhei Sutou  <kou@cozmixng.org>
