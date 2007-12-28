@@ -456,7 +456,7 @@ rbgobj_register_property_setter(gtype, name, func)
     oclass = g_type_class_ref(gtype);
     pspec = g_object_class_find_property(oclass, name);
     
-    rb_hash_aset(table, rb_intern(g_param_spec_get_name(pspec)),
+    rb_hash_aset(table, rb_str_new2(g_param_spec_get_name(pspec)),
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
 
     g_type_class_unref(oclass);
@@ -480,7 +480,7 @@ rbgobj_register_property_getter(gtype, name, func)
     oclass = g_type_class_ref(gtype);
     pspec = g_object_class_find_property(oclass, name);
 
-    rb_hash_aset(table, rb_intern(g_param_spec_get_name(pspec)),
+    rb_hash_aset(table, rb_str_new2(g_param_spec_get_name(pspec)),
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
 }
 

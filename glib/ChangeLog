@@ -1,3 +1,7 @@
+2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_object.c: rb_hash_aset()'s key should be VALUE not ID.
+
 2007-11-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_mainloop.c (source_prepare_add_poll_fd): treated
