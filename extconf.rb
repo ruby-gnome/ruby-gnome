@@ -8,7 +8,7 @@
 
 require 'English'
 require 'mkmf'
-require 'ftools'
+require 'fileutils'
 
 priorlibs = ["glib", "gdkpixbuf", "pango", "atk", "gtk"]
 
@@ -65,7 +65,7 @@ subdirs.each do |subdir|
     $ruby.gsub!('\\', '/')
   end
   STDERR.puts("#{$0}: Entering directory `#{subdir}'")
-  File.mkpath(subdir)
+  FileUtils.mkdir_p(subdir)
   topdir = File.join(*([".."] * subdir.split(/\/+/).size))
   /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
   srcdir = File.join(dir, subdir)
