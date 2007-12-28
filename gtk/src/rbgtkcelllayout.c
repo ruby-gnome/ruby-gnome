@@ -55,7 +55,7 @@ static VALUE
 layout_add_attribute(self, cell, attribute, column)
     VALUE self, cell, attribute, column;
 {
-    gchar* name;
+    const gchar *name;
 
     if (SYMBOL_P(attribute)) {
         name = rb_id2name(SYM2ID(attribute));

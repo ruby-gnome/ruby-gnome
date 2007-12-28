@@ -3,6 +3,7 @@
 	* src/:
 	- used rb_errinfo().
 	- used RSTRING_LEN() and RSTRING_PTR().
+	- added const.
 
 	* extconf.rb: checked rb_errinfo() availability.
 	* src/rbgtkrecentfilter.c: used rb_errinfo().

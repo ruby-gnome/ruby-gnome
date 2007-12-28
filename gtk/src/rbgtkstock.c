@@ -31,7 +31,7 @@ stock_m_add(argc, argv, klass)
 
     rb_scan_args(argc, argv, "23", &stock_id, &label, &modifier, &keyval, &translation_domain);
     Check_Symbol(stock_id);
-    item.stock_id = SYM2CSTR(stock_id);
+    item.stock_id = (gchar *)SYM2CSTR(stock_id);
     item.label = RVAL2CSTR(label);
     item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
     item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);

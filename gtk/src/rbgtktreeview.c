@@ -128,7 +128,7 @@ treeview_insert_column(argc, argv, self)
         int i;
         int col;
         int ret;
-        gchar* name;
+        const gchar *name;
         VALUE ary;
         GtkCellRenderer* renderer = RVAL2CELLRENDERER(args[2]);
         

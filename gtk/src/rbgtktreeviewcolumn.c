@@ -22,9 +22,9 @@ tvc_initialize(argc, argv, self)
 {
     int i;
     int col;
-    GtkTreeViewColumn* tvc;
-    GtkCellRenderer* renderer;
-    gchar* name;
+    GtkTreeViewColumn *tvc;
+    GtkCellRenderer *renderer;
+    const gchar *name;
     VALUE ary, val;
 
     tvc = gtk_tree_view_column_new();
@@ -94,7 +94,7 @@ static VALUE
 tvc_add_attribute(self, cell, attribute, column)
     VALUE self, cell, attribute, column;
 {
-    gchar* name;  
+    const gchar *name;
     if (SYMBOL_P(attribute)) {
         name = rb_id2name(SYM2ID(attribute));
     } else {
@@ -109,9 +109,9 @@ static VALUE
 tvc_set_attributes(self, renderer, attributes)
     VALUE self, renderer, attributes;
 {
-    GtkTreeViewColumn* tvc;
-    GtkCellRenderer* grenderer;
-    gchar* name;
+    GtkTreeViewColumn *tvc;
+    GtkCellRenderer *grenderer;
+    const gchar *name;
     int i, col;
     VALUE ary, val;
 

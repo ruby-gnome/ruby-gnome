@@ -102,8 +102,8 @@ static VALUE
 style_lookup_icon_set(self, stock_id)
     VALUE self, stock_id;
 {
-    gchar* id;
-    GtkIconSet* ret;
+    const gchar *id;
+    GtkIconSet *ret;
     if (TYPE(stock_id) == T_STRING) {
         id = RVAL2CSTR(stock_id);
     } else {

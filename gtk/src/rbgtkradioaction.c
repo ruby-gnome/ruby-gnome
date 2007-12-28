@@ -19,7 +19,7 @@ static VALUE
 raction_initialize(self, name, label, tooltip, stock_id, value)
     VALUE self, name, label, tooltip, stock_id, value;
 {
-    gchar* gstock = (gchar*)NULL;
+    const gchar *gstock = NULL;
 
     if (TYPE(stock_id) == T_STRING){
         gstock = RVAL2CSTR(stock_id);

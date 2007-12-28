@@ -19,7 +19,7 @@ static VALUE
 taction_initialize(self, name, label, tooltip, stock_id)
     VALUE self, name, label, tooltip, stock_id;
 {
-    gchar* gstockid = (gchar*)NULL;
+    const gchar *gstockid = NULL;
 
     if (TYPE(stock_id) == T_SYMBOL){
         gstockid = rb_id2name(SYM2ID(stock_id));

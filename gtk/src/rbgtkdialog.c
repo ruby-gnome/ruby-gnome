@@ -22,7 +22,7 @@ static VALUE
 dialog_add_button(self, button_text, response_id)
     VALUE self, button_text, response_id;
 {
-    gchar* name;
+    const gchar *name;
     if (SYMBOL_P(button_text)) {
         name = rb_id2name(SYM2ID(button_text));
     } else {

@@ -23,7 +23,7 @@ action_initialize(argc, argv, self)
     VALUE self;
 {
     VALUE name, label, tooltip, stock_id;
-    gchar* stock = (gchar*)NULL;
+    const gchar *stock = NULL;
 
     rb_scan_args(argc, argv, "22", &name, &label, &tooltip, &stock_id);
 

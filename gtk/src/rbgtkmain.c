@@ -473,9 +473,8 @@ static VALUE
 gtk_m_check_version(self, major, minor, micro)
     VALUE self, major, minor, micro;
 {
-    gchar * ret = NULL;
-    ret = gtk_check_version(FIX2INT(major),
-                            FIX2INT(minor), FIX2INT(micro));
+    const gchar *ret;
+    ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
     return ret ? CSTR2RVAL(ret) : Qnil;
 }
 
@@ -483,9 +482,8 @@ static VALUE
 gtk_m_check_version_q(self, major, minor, micro)
     VALUE self, major, minor, micro;
 {
-    gchar * ret = NULL;
-    ret = gtk_check_version(FIX2INT(major),
-                            FIX2INT(minor), FIX2INT(micro));
+    const gchar *ret;
+    ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
     return CBOOL2RVAL(ret == NULL);
 }
 
