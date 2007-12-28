@@ -72,8 +72,9 @@ rglyph_index_to_x(self, text, analysis, index, trailing)
     int x_pos;
     StringValue(text);
 
-    pango_glyph_string_index_to_x(_SELF(self), RVAL2CSTR(text), 
-                                  RSTRING(text)->len, 
+    pango_glyph_string_index_to_x(_SELF(self),
+                                  RVAL2CSTR(text),
+                                  RSTRING_LEN(text),
                                   (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
                                   NUM2INT(index), RVAL2CBOOL(trailing),
                                   &x_pos);
@@ -88,7 +89,8 @@ rglyph_x_to_index(self, text, analysis, x_pos)
     int trailing;
 
     StringValue(text);
-    pango_glyph_string_x_to_index(_SELF(self), RVAL2CSTR(text), RSTRING(text)->len, 
+    pango_glyph_string_x_to_index(_SELF(self),
+                                  RVAL2CSTR(text), RSTRING_LEN(text),
                                   (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
                                   NUM2INT(x_pos),
                                   &index, &trailing);
@@ -103,13 +105,11 @@ rglyph_get_logical_widgths(self, text, embedding_level)
     int len, array_len, i;
     char* gtext;
     VALUE ret;
-    
-    StringValue(text);
 
     gtext = RVAL2CSTR(text);
-    len = RSTRING(text)->len;
+    len = RSTRING_LEN(text);
 
-    array_len = g_utf8_strlen(gtext, len); 
+    array_len = g_utf8_strlen(gtext, len);
 
     logical_widths = g_new(PangoGlyphUnit, array_len);
 
