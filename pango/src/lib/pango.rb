@@ -46,7 +46,7 @@ module Pango
   targets.each do |klass, prefix|
     (klass.constants - klass.superclass.constants).each do |name|
       unless klass.const_get(name).is_a? Class
-	const_set(prefix + name, klass.const_get(name))
+	const_set("#{prefix}#{name}", klass.const_get(name))
       end
     end
   end
