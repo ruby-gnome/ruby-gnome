@@ -38,7 +38,7 @@ set_coords_from_points_data(coords, points)
         entry = RARRAY(points)->ptr[i];
         Check_Type(entry, T_ARRAY);
         if (RARRAY(entry)->len != 2) {
-            rb_raise(rb_eArgError, "wrong coordinate value %d entry(s) for 2", RARRAY(entry)->len);
+            rb_raise(rb_eArgError, "wrong coordinate value %ld entry(s) for 2", RARRAY(entry)->len);
         }
         coords[i * 2] = NUM2DBL(RARRAY(entry)->ptr[0]);
         coords[i * 2 + 1] = NUM2DBL(RARRAY(entry)->ptr[1]);
