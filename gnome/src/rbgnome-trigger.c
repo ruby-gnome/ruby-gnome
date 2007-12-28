@@ -130,10 +130,10 @@ static VALUE
 trig_s_set_action_func(self)
     VALUE self;
 {
-#if RUBY_VERSION_CODE < 180
-    rb_cvar_set(cTrig, id_action, rb_block_proc()); 
+#ifdef RB_CVAR_SET_4ARGS
+    rb_cvar_set(cTrig, id_action, rb_block_proc(), 0);
 #else
-    rb_cvar_set(cTrig, id_action, rb_block_proc(), 0); 
+    rb_cvar_set(cTrig, id_action, rb_block_proc());
 #endif
     return self;
 }
@@ -198,10 +198,10 @@ Init_gnome_trigger(mGnome)
     id_call = rb_intern("call");
     id_action = rb_intern("__action_proc__");
 
-#if RUBY_VERSION_CODE < 180
-    rb_cvar_set(cTrig, id_action, Qnil);
-#else
+#ifdef RB_CVAR_SET_4ARGS
     rb_cvar_set(cTrig, id_action, Qnil, 0);
+#else
+    rb_cvar_set(cTrig, id_action, Qnil);
 #endif
     rb_define_method(cTrig, "initialize", trig_initialize, -1);
     rb_define_singleton_method(cTrig, "set_action_func", trig_s_set_action_func, 0);
