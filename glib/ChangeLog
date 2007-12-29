@@ -1,5 +1,8 @@
 2007-12-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_mainloop.c: moved poll related functions to ...
+	* src/rbglib_maincontext.c: ... here.
+
 	* src/rbglib_mainloop.c: supported ruby 1.9.0 thread model.
 
 	* extconf.rb: removed a needless check.
