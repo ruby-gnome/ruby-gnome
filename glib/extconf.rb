@@ -29,7 +29,6 @@ have_func("rb_sourcefile")
 have_func("rb_sourceline")
 have_func("ruby_set_current_source")
 have_func("rb_thread_blocking_region")
-have_header('ruby/ruby.h')
 
 have_var("curr_thread", ["ruby.h", "node.h"])
 have_var("rb_curr_thread", ["ruby.h", "node.h"])

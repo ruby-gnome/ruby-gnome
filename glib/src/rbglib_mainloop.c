@@ -11,28 +11,13 @@
 
 #include "rbgprivate.h"
 #include <rubysig.h>
-#include <node.h>
 
-#ifdef HAVE_CURR_THREAD
-#  define rb_curr_thread curr_thread
+#ifndef HAVE_RB_THREAD_BLOCKING_REGION
+#  include <node.h>
+#  ifdef HAVE_CURR_THREAD
+#    define rb_curr_thread curr_thread
+#  endif
 #endif
-
-/* from eval.c */
-#define WAIT_FD		(1<<0)
-#define WAIT_SELECT	(1<<1)
-#define WAIT_TIME	(1<<2)
-#define WAIT_JOIN	(1<<3)
-#define WAIT_PID	(1<<4)
-
-#define DELAY_INFTY 1E30
-
-static double
-timeofday()
-{
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (double)tv.tv_sec + (double)tv.tv_usec * 1e-6;
-}
 
 /*****************************************/
 GType
@@ -52,6 +37,39 @@ g_main_loop_get_type(void)
 /*****************************************/
 static GPollFunc default_poll_func;
 
+#ifdef HAVE_RB_THREAD_BLOCKING_REGION
+typedef struct _PollInfo {
+    GPollFD *ufds;
+    guint nfsd;
+    gint timeout;
+    gint result;
+} PollInfo;
+
+static VALUE
+rg_poll_in_blocking(void *data)
+{
+    PollInfo *info = data;
+
+    info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
+
+    return Qnil;
+}
+
+static gint
+rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
+{
+    PollInfo info;
+
+    info.ufds = ufds;
+    info.nfsd = nfsd;
+    info.timeout = timeout;
+    info.result = 0;
+
+    rb_thread_blocking_region(rg_poll_in_blocking, &info, RB_UBF_DFL, NULL);
+
+    return info.result;
+}
+#else
 static gint
 rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 {
@@ -67,6 +85,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 
     return result;
 }
+#endif
 
 static void
 restore_poll_func(VALUE data)
@@ -74,6 +93,24 @@ restore_poll_func(VALUE data)
     if (g_main_context_get_poll_func(NULL) == (GPollFunc)rg_poll) {
         g_main_context_set_poll_func(NULL, default_poll_func);
     }
+}
+
+#ifndef HAVE_RB_THREAD_BLOCKING_REGION
+/* from eval.c */
+#define WAIT_FD		(1<<0)
+#define WAIT_SELECT	(1<<1)
+#define WAIT_TIME	(1<<2)
+#define WAIT_JOIN	(1<<3)
+#define WAIT_PID	(1<<4)
+
+#define DELAY_INFTY 1E30
+
+static double
+timeofday()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (double)tv.tv_sec + (double)tv.tv_usec * 1e-6;
 }
 
 /*****************************************/
@@ -223,6 +260,7 @@ ruby_source_new(void)
 
     return source;
 }
+#endif
 
 /*****************************************/
 
@@ -247,13 +285,17 @@ ml_run(self)
     VALUE self;
 {
     GMainLoop *loop;
-    GSource *source;
 
     loop = _SELF(self);
 
-    source = ruby_source_new();
-    g_source_attach(source, g_main_loop_get_context(loop));
-    g_source_unref(source);
+#ifdef HAVE_NODE_H
+    {
+        GSource *source;
+        source = ruby_source_new();
+        g_source_attach(source, g_main_loop_get_context(loop));
+        g_source_unref(source);
+    }
+#endif
 
     g_main_loop_run(loop);
     return self;
@@ -285,8 +327,6 @@ void
 Init_glib_main_loop()
 {
     VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
-    GSource *source;
-    guint tag;
 
     rb_define_method(ml, "initialize", ml_initialize, -1);
     rb_define_method(ml, "run", ml_run, 0);
@@ -298,8 +338,15 @@ Init_glib_main_loop()
     g_main_context_set_poll_func(NULL, rg_poll);
     rb_set_end_proc(restore_poll_func, Qnil);
 
-    source = ruby_source_new();
-    tag = g_source_attach(source, NULL);
-    g_source_unref(source);
-    rb_set_end_proc((void (*)(VALUE))g_source_remove, (VALUE)tag);
+#ifndef HAVE_RB_THREAD_BLOCKING_REGION
+    {
+        GSource *source;
+        guint tag;
+
+        source = ruby_source_new();
+        tag = g_source_attach(source, NULL);
+        g_source_unref(source);
+        rb_set_end_proc((void (*)(VALUE))g_source_remove, (VALUE)tag);
+    }
+#endif
 }

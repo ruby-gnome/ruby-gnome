@@ -1,3 +1,9 @@
+2007-12-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_mainloop.c: supported ruby 1.9.0 thread model.
+
+	* extconf.rb: removed a needless check.
+
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_object.c: rb_hash_aset()'s key should be VALUE not ID.
