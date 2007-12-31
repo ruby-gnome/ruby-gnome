@@ -1,3 +1,8 @@
+2007-12-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil_callback.c: fixed a wrong select() argument.
+	Reported by Carlo E. Prelz. Thanks!!!
+
 2007-12-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_mainloop.c: moved poll related functions to ...

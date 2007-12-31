@@ -91,7 +91,7 @@ mainloop(void)
          * and it's guaranteed that the needed mutexes are initialized */
         FD_ZERO(&read_fds);
         FD_SET(callback_fd[0], &read_fds);
-        rb_thread_select(2, &read_fds, NULL, NULL, NULL);
+        rb_thread_select(callback_fd[0] + 1, &read_fds, NULL, NULL, NULL);
 
         {
             ssize_t size;
