@@ -24,9 +24,8 @@
 #define rb_errinfo() (ruby_errinfo)
 #endif
 
-/* FIXME: ruby 1.9's is_ruby_native_thread() always returnes Qtrue... */
-#ifdef HAVE_RB_THREAD_BLOCKING_REGION
-#define is_ruby_native_thread() (!g_thread_supported())
+#ifndef HAVE_RUBY_NATIVE_THREAD_P
+#  define ruby_native_thread_p() is_ruby_native_thread()
 #endif
 
 static gboolean callback_initialized = FALSE;
@@ -113,9 +112,6 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
 {
     struct callback_req req;
 
-    if (!g_thread_supported())
-        rb_bug("glib callback in another thread, but gthreads not supported");
-
     /* initialize mutex */
     /* FIXME: use g_once? */
     if (!pipe_mutex) {
@@ -163,7 +159,7 @@ VALUE
 rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
 #ifdef HAVE_NATIVETHREAD
-    if (!is_ruby_native_thread()) {
+    if (!ruby_native_thread_p()) {
         return invoke_callback_in_ruby_thread(func, arg);
     }
 #endif
@@ -188,6 +184,10 @@ void Init_gutil_callback()
     /* startup the ruby thread to pull callbacks from other threads */
     {
         static VALUE thread;
+
+        if (!g_thread_supported())
+            g_thread_init(NULL);
+
         if (pipe(callback_fd) != 0)
             rb_bug("Unable to create glib callback thread\n");
         thread = rb_thread_create(mainloop, NULL);

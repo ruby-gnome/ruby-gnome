@@ -1,5 +1,7 @@
 2007-12-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgutil_callback.c: fixed ruby's thread check.
+
 	* src/rbgutil_callback.c: fixed a wrong select() argument.
 	Reported by Carlo E. Prelz. Thanks!!!
 
