@@ -291,7 +291,7 @@ GdaValue *rb_rb_value_to_gda_value(value, type)
 
     case GDA_VALUE_TYPE_BINARY:
         if (TYPE(value) == T_STRING) {
-            return gda_value_new_binary(RSTRING(str)->ptr, RSTRING(str)->len);
+            return gda_value_new_binary(RSTRING_PTR(str), RSTRING_LEN(str));
         } else {
             str = RVAL2CSTR(value);
             return gda_value_new_binary(str, strlen(str));

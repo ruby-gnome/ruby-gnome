@@ -1,3 +1,8 @@
+2007-12-31  Carlo E. Prelz  <fluido@fluido.as>
+
+	* src/rbgdavalue.c (rb_rb_value_to_gda_value): used RSTRING_PTR()
+	and RSTRING_LEN().
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
