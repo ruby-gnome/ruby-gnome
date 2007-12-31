@@ -1,3 +1,9 @@
+2007-12-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkhtmlstream.c (rb_html_stream_write): used RSTRING_PTR()
+	and RSTRING_LEN().
+	Reported by Carlo E. Prelz. Thanks!!!
+
 2007-07-13  Guillaume Cottenceau
 
 	* src/rbgtkhtmlboxtext.c, src/rbgtkhtmlview.c: replace RTEST uses

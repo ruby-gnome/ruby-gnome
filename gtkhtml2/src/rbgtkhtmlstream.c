@@ -33,8 +33,7 @@ static VALUE
 rb_html_stream_write( self, data )
     VALUE self, data;
 {
-    StringValue(data);
-    html_stream_write( _SELF(self), RVAL2CSTR(data), RSTRING(data)->len );
+    html_stream_write( _SELF(self), RSTRING_PTR(data), RSTRING_LEN(data) );
     return self;
 }
 
