@@ -1,3 +1,7 @@
+2008-01-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgstbin.c, src/rbgstclockentry.c: GST_CLOCK() -> RVAL2GST_CLOCK().
+
 2007-11-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: expanded abbreviated macro name.

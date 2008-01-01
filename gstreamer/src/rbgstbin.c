@@ -252,7 +252,7 @@ rb_gst_bin_set_provided_clock (VALUE self, VALUE clock)
         g_object_unref(bin->provided_clock);
 
     if (!NIL_P(clock)) {
-        bin->provided_clock = RGST_CLOCK(clock);
+        bin->provided_clock = RVAL2GST_CLOCK(clock);
         g_object_ref(bin->provided_clock);
     }
 

@@ -80,12 +80,12 @@ rb_gst_clock_entry_new (int argc, VALUE * argv, VALUE self)
      * Single-shot 
      */
     if (NIL_P (interval))
-        id = gst_clock_new_single_shot_id (RGST_CLOCK (clock), NUM2ULL (time));
+        id = gst_clock_new_single_shot_id (RVAL2GST_CLOCK (clock), NUM2ULL (time));
     /*
      * Periodic 
      */
     else
-        id = gst_clock_new_periodic_id (RGST_CLOCK (clock),
+        id = gst_clock_new_periodic_id (RVAL2GST_CLOCK (clock),
                                         NUM2ULL (time), NUM2ULL (interval));
 
     G_INITIALIZE (self, GST_CLOCK_ENTRY (id));

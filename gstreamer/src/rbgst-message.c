@@ -576,7 +576,7 @@ Init_gst_message(void)
 
 #define DEFINE_MESSAGE(type)                                            \
     rb_cGstMessage ## type =                                            \
-        rb_define_class_under(mGst,"Message" #type, rb_cGstMessage)
+        rb_define_class_under(mGst, "Message" #type, rb_cGstMessage)
 
     DEFINE_MESSAGE(Unknown);
     DEFINE_MESSAGE(Eos);
