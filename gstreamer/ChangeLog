@@ -1,5 +1,8 @@
 2008-01-02  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-structure.c, test/test_structure.rb: added #[] and
+	#[]=.
+
 	* src/rbgst-structure.c, src/rbgst.[ch], test/test_message.rb,
 	test/test_structure.rb: stopped conversion between GstStructure
 	and Hash.

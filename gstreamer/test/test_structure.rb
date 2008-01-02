@@ -19,4 +19,15 @@ class TestStructure < Test::Unit::TestCase
     assert(structure.have_name?("me"))
     assert(!structure.have_name?("anonymous"))
   end
+
+  def test_accessor
+    structure = Gst::Structure.new("anonymous")
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+
+    assert_nil(structure["non-existence"])
+    assert_equal("value", structure["string"])
+    assert_equal(1, structure["integer"])
+  end
 end
