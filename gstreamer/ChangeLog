@@ -1,3 +1,9 @@
+2008-01-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-structure.c, src/rbgst.[ch], test/test_message.rb,
+	test/test_structure.rb: stopped conversion between GstStructure
+	and Hash.
+
 2008-01-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgstbin.c, src/rbgstclockentry.c: GST_CLOCK() -> RVAL2GST_CLOCK().

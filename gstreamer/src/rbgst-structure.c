@@ -19,71 +19,44 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#include <st.h>
 #include "rbgst.h"
 
-/*
- * Since GstStructure is basically a hash it is more natural to
- * automatically convert it as a Ruby Hash object, and vice-versa.
- */
+#define SELF(obj) (RVAL2GST_STRUCT(obj))
 
-static gboolean
-foreach_pair(GQuark field_id, const GValue *value, gpointer user_data)
+static VALUE
+initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE hash;
-
-    hash = *(VALUE *)user_data;
-    rb_hash_aset(hash,
-                 CSTR2RVAL(g_quark_to_string (field_id)),
-                 GVAL2RVAL(value));
-
-    return TRUE;
-}
-
-VALUE
-rbgst_structure_to_hash(GstStructure *structure)
-{
-    VALUE hash;
-
-    if (!structure)
-        return Qnil;
-
-    hash = rb_hash_new();
-    gst_structure_foreach(structure, foreach_pair, &hash);
-    return hash;
-}
-
-static int
-each_hash(VALUE key, VALUE value, VALUE data)
-{
-    GstStructure *structure = (GstStructure *)data;
-    GValue g_value = {0, };
-
-    g_value_init(&g_value, RVAL2GTYPE(value));
-    rbgobj_rvalue_to_gvalue(value, &g_value);
-    gst_structure_set_value(structure, RVAL2CSTR(key), &g_value);
-    g_value_unset(&g_value);
-
-    return ST_CONTINUE;
-}
-
-GstStructure *
-rbgst_hash_to_structure_with_name(VALUE hash, const char *name)
-{
+    VALUE name, fields;
     GstStructure *structure;
 
-    if (NIL_P(hash))
-        return NULL;
+    rb_scan_args(argc, argv, "11", &name, &fields);
 
-    Check_Type(hash, T_HASH);
+    structure = gst_structure_empty_new(RVAL2CSTR(name));
+    if (!NIL_P(fields)) {
+        /* set fields */
+    }
 
-    structure = gst_structure_empty_new(name);
-    rb_hash_foreach(hash, each_hash, (VALUE)structure);
-    return structure;
+    G_INITIALIZE(self, structure);
+
+    return Qnil;
 }
 
-GstStructure *
-rbgst_hash_to_structure(VALUE hash)
+static VALUE
+get_name(VALUE self)
 {
-    return rbgst_hash_to_structure_with_name(hash, "");
+    return CSTR2RVAL(gst_structure_get_name(SELF(self)));
+}
+
+void
+Init_gst_structure(void)
+{
+    VALUE rb_cGstStructure;
+
+    rb_cGstStructure = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
+
+    rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
+
+    rb_define_method(rb_cGstStructure, "name", get_name, 0);
+
+    G_DEF_SETTERS(rb_cGstStructure);
 }

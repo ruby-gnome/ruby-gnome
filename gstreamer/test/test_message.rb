@@ -83,13 +83,13 @@ class TestMessage < Test::Unit::TestCase
 
   def test_message_application
     assert_nothing_raised do
-      Gst::MessageApplication.new(nil, {})
+      Gst::MessageApplication.new(nil, nil)
     end
   end
 
   def test_message_element
     assert_nothing_raised do
-      Gst::MessageElement.new(nil, {})
+      Gst::MessageElement.new(nil, nil)
     end
   end
 
@@ -173,7 +173,7 @@ class TestMessage < Test::Unit::TestCase
   def test_structure
     assert_nil(Gst::MessageEos.new(nil).structure)
 
-    message = Gst::Message.new(:unknown, nil, {})
-    assert_equal({}, message.structure)
+    message = Gst::Message.new(:unknown, nil, nil)
+    assert_nil(message.structure)
   end
 end

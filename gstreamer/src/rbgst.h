@@ -75,10 +75,8 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_FORMAT(obj)    (RVAL2GENUM(obj, GST_TYPE_FORMAT))
 #define GST_FORMAT2RVAL(obj)    (GENUM2RVAL(obj, GST_TYPE_FORMAT))
 
-#define RVAL2GST_STRUCT(obj)    (rbgst_hash_to_structure(obj))
-#define RVAL2GST_STRUCT_WITH_NAME(obj, name) \
-                                (rbgst_hash_to_structure_with_name(obj, name))
-#define GST_STRUCT2RVAL(obj)    (rbgst_structure_to_hash(obj))
+#define RVAL2GST_STRUCT(obj)    (GST_STRUCTURE(RVAL2BOXED(obj, GST_TYPE_STRUCTURE)))
+#define GST_STRUCT2RVAL(obj)    (BOXED2RVAL(obj, GST_TYPE_STRUCTURE))
 
 
 
