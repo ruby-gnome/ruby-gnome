@@ -9,4 +9,14 @@ class TestStructure < Test::Unit::TestCase
     structure = Gst::Structure.new("anonymous")
     assert_equal("anonymous", structure.name)
   end
+
+  def test_name
+    structure = Gst::Structure.new("anonymous")
+    assert(structure.have_name?("anonymous"))
+
+    assert(!structure.have_name?("me"))
+    structure.name = "me"
+    assert(structure.have_name?("me"))
+    assert(!structure.have_name?("anonymous"))
+  end
 end

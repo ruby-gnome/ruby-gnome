@@ -4,6 +4,9 @@
 	test/test_structure.rb: stopped conversion between GstStructure
 	and Hash.
 
+	* src/rbgst-structure.c, test/test_structure.rb: added #name=,
+	#have_name?.
+
 2008-01-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgstbin.c, src/rbgstclockentry.c: GST_CLOCK() -> RVAL2GST_CLOCK().

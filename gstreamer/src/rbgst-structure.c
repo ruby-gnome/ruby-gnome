@@ -47,6 +47,19 @@ get_name(VALUE self)
     return CSTR2RVAL(gst_structure_get_name(SELF(self)));
 }
 
+static VALUE
+set_name(VALUE self, VALUE name)
+{
+    gst_structure_set_name(SELF(self), RVAL2CSTR(name));
+    return Qnil;
+}
+
+static VALUE
+has_name_p(VALUE self, VALUE name)
+{
+    return CBOOL2RVAL(gst_structure_has_name(SELF(self), RVAL2CSTR(name)));
+}
+
 void
 Init_gst_structure(void)
 {
@@ -57,6 +70,9 @@ Init_gst_structure(void)
     rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
 
     rb_define_method(rb_cGstStructure, "name", get_name, 0);
+    rb_define_method(rb_cGstStructure, "set_name", set_name, 1);
+    rb_define_method(rb_cGstStructure, "has_name?", has_name_p, 1);
+    rb_define_alias(rb_cGstStructure, "have_name?", "has_name?");
 
     G_DEF_SETTERS(rb_cGstStructure);
 }
