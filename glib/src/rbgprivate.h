@@ -67,6 +67,7 @@ extern gboolean rbgobj_convert_gvalue2rvalue(GType type, const GValue *value,
                                              VALUE *result);
 extern gboolean rbgobj_convert_rvalue2gvalue(GType type, VALUE val,
                                              GValue *result);
+extern GType rbgobj_convert_rvalue2gtype(VALUE val);
 extern gboolean rbgobj_convert_initialize(GType type, VALUE obj, gpointer cobj);
 extern gboolean rbgobj_convert_robj2instance(GType type, VALUE obj,
                                              gpointer *result);

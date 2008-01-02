@@ -94,6 +94,12 @@ rbgobj_convert_gvalue2rvalue(GType type, const GValue *value, VALUE *result)
     return FALSE;
 }
 
+GType
+rbgobj_convert_rvalue2gtype(VALUE value)
+{
+    return 0; /* FIXME */
+}
+
 gboolean
 rbgobj_convert_initialize(GType type, VALUE obj, gpointer cobj)
 {

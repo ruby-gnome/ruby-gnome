@@ -1,3 +1,11 @@
+2008-01-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_value.c, src/rbgobject.h, src/glib2.def
+	(rbgobj_initialize_gvalue): added. (experimental)
+
+	* src/rbgobj_convert.c, src/rbgprivate.h
+	(rbgobj_convert_rvalue2gtype): should be implemented.
+
 2007-12-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil_callback.c: fixed ruby's thread check.

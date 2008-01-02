@@ -130,6 +130,50 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
 }
 
 void
+rbgobj_initialize_gvalue(GValue *result, VALUE value)
+{
+    GType type;
+
+    type = rbgobj_convert_rvalue2gtype(value);
+    if (type == 0) {
+        switch (TYPE(value)) {
+          case T_NONE:
+          case T_NIL:
+            type = G_TYPE_NONE;
+            break;
+          case T_FLOAT:
+            type = G_TYPE_DOUBLE;
+            break;
+          case T_STRING:
+            type = G_TYPE_STRING;
+            break;
+          case T_FIXNUM:
+            type = G_TYPE_INT;
+            break;
+          case T_BIGNUM:
+            type = G_TYPE_INT64;
+            break;
+          case T_TRUE:
+          case T_FALSE:
+            type = G_TYPE_BOOLEAN;
+            break;
+          default:
+          {
+              VALUE inspected_value;
+              inspected_value = rb_funcall(value, rb_intern("inspect"), 0);
+              rb_raise(rb_eArgError,
+                       "unsupported value type: %s",
+                       RSTRING_PTR(inspected_value));
+              break;
+          }
+        }
+    }
+
+    g_value_init(result, type);
+    rbgobj_rvalue_to_gvalue(value, result);
+}
+
+void
 rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
 {
     GType type, fundamental_type;

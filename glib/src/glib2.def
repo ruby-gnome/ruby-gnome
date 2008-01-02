@@ -26,6 +26,7 @@ EXPORTS
 	rbgobj_gtype_new
 	rbgobj_gvalue_to_rvalue
 	rbgobj_rvalue_to_gvalue
+	rbgobj_initialize_gvalue_by_rvalue
 	rbgobj_initialize_object
 	rbgobj_lookup_class
 	rbgobj_lookup_class_by_gtype

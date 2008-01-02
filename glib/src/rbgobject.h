@@ -172,6 +172,7 @@ extern void g_rclosure_attach(GClosure *closure, VALUE object);
 /* rbgobj_value.c */
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
 extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
+extern void rbgobj_initialize_gvalue(GValue *result, VALUE value);
 
 typedef void (*RValueToGValueFunc)(VALUE from, GValue* to);
 typedef VALUE (*GValueToRValueFunc)(const GValue* from);
