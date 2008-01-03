@@ -44,8 +44,7 @@ get_name(VALUE self)
      *  of the pad template is in the "name_template" field of
      *  GstPadTemplate.
      */
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return CSTR2RVAL(GST_PAD_TEMPLATE_NAME_TEMPLATE(pad));
+    return CSTR2RVAL(GST_PAD_TEMPLATE_NAME_TEMPLATE(SELF(self)));
 }
 
 /* Method: presence
@@ -54,8 +53,8 @@ get_name(VALUE self)
 static VALUE
 get_presence(VALUE self)
 {
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE (self);
-    return GENUM2RVAL(pad->presence, GST_TYPE_PAD_PRESENCE);
+    return GENUM2RVAL(GST_PAD_TEMPLATE_PRESENCE(SELF(self)),
+                      GST_TYPE_PAD_PRESENCE);
 }
 
 /* Method: direction
@@ -64,8 +63,8 @@ get_presence(VALUE self)
 static VALUE
 get_direction(VALUE self)
 {
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return GENUM2RVAL(pad->direction, GST_TYPE_PAD_DIRECTION);
+    return GENUM2RVAL(GST_PAD_TEMPLATE_DIRECTION(SELF(self)),
+                      GST_TYPE_PAD_DIRECTION);
 }
 
 /*
@@ -78,7 +77,7 @@ get_direction(VALUE self)
 static VALUE
 get_caps(VALUE self)
 {
-    return RGST_CAPS_NEW(gst_pad_template_get_caps(RGST_PAD_TEMPLATE(self)));
+    return GST_CAPS2RVAL(gst_pad_template_get_caps(RGST_PAD_TEMPLATE(self)));
 }
 
 /*
@@ -101,8 +100,7 @@ each_caps(VALUE self)
 static VALUE
 has_caps_p(VALUE self)
 {
-    GstPadTemplate *pad = RGST_PAD_TEMPLATE(self);
-    return CBOOL2RVAL(pad->caps != NULL);
+    return CBOOL2RVAL(SELF(self)->caps != NULL);
 }
 
 void

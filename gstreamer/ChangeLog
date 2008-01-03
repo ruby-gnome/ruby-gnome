@@ -1,5 +1,8 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-pad-template.c, src/rbgst-static-pad-template.c: used
+	better macros.
+
 	* src/rbgst-pad-template.c: split to ...
 	* src/rbgst-static-pad-template.c: .. this.
 
