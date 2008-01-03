@@ -23,6 +23,17 @@
 #define SELF(obj) (RVAL2GST_STRUCT(obj))
 
 static VALUE
+s_parse(VALUE self, VALUE string)
+{
+    GstStructure *structure;
+    gchar *end;
+
+    structure = gst_structure_from_string(RVAL2CSTR(string), &end);
+
+    return rb_ary_new3(2, GST_STRUCT2RVAL(structure), CSTR2RVAL(end));
+}
+
+static VALUE
 initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, fields;
@@ -251,6 +262,8 @@ Init_gst_structure(void)
     rb_cGstStructure = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
 
     rb_include_module(rb_cGstStructure, rb_mEnumerable);
+
+    rb_define_singleton_method(rb_cGstStructure, "parse", s_parse, 1);
 
     rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
 

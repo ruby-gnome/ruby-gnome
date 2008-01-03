@@ -142,4 +142,18 @@ class TestStructure < Test::Unit::TestCase
 
     assert_match(/: #{Regexp.escape(structure.to_s)}>\z/, structure.inspect)
   end
+
+  def test_parse
+    structure = Gst::Structure.new("anonymous")
+    structure["string"] = "value"
+    structure["integer"] = 1
+
+    parsed_structure, rest = Gst::Structure.parse(structure.to_s)
+    assert_equal(["anonymous, string=(string)value, integer=(int)1;", ""],
+                 [parsed_structure.to_s, rest])
+
+    parsed_structure, rest = Gst::Structure.parse(structure.to_s + "XXX")
+    assert_equal(["anonymous, string=(string)value, integer=(int)1;", "XXX"],
+                 [parsed_structure.to_s, rest])
+  end
 end
