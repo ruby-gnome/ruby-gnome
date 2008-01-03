@@ -97,4 +97,16 @@ class TestStructure < Test::Unit::TestCase
     assert_equal("value" * 2, structure["string"])
     assert_equal(1 * 2, structure["integer"])
   end
+
+  def test_size
+    structure = Gst::Structure.new("anonymous")
+
+    assert_equal(0, structure.size)
+    assert(structure.empty?)
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+    assert_equal(2, structure.size)
+    assert(!structure.empty?)
+  end
 end

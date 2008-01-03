@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  * Copyright (C) 2007 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
@@ -214,6 +213,18 @@ map_in_place(VALUE self)
     return Qnil;
 }
 
+static VALUE
+n_fields(VALUE self)
+{
+    return INT2NUM(gst_structure_n_fields(SELF(self)));
+}
+
+static VALUE
+empty_p(VALUE self)
+{
+    return CBOOL2RVAL(gst_structure_n_fields(SELF(self)) == 0);
+}
+
 void
 Init_gst_structure(void)
 {
@@ -242,6 +253,11 @@ Init_gst_structure(void)
 
     rb_define_method(rb_cGstStructure, "map!", map_in_place, 0);
     rb_define_alias(rb_cGstStructure, "collect!", "map!");
+
+    rb_define_method(rb_cGstStructure, "size", n_fields, 0);
+    rb_define_alias(rb_cGstStructure, "length", "size");
+    rb_define_method(rb_cGstStructure, "empty?", empty_p, 0);
+
 
     G_DEF_SETTERS(rb_cGstStructure);
 }
