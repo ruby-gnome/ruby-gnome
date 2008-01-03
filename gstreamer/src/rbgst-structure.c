@@ -225,6 +225,12 @@ empty_p(VALUE self)
     return CBOOL2RVAL(gst_structure_n_fields(SELF(self)) == 0);
 }
 
+static VALUE
+nth_field_name(VALUE self, VALUE index)
+{
+    return CSTR2RVAL(gst_structure_nth_field_name(SELF(self), NUM2INT(index)));
+}
+
 void
 Init_gst_structure(void)
 {
@@ -258,6 +264,7 @@ Init_gst_structure(void)
     rb_define_alias(rb_cGstStructure, "length", "size");
     rb_define_method(rb_cGstStructure, "empty?", empty_p, 0);
 
+    rb_define_method(rb_cGstStructure, "nth_field_name", nth_field_name, 1);
 
     G_DEF_SETTERS(rb_cGstStructure);
 }

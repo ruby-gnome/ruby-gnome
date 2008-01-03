@@ -1,5 +1,7 @@
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-structure.c, test/test_structure.rb: added #nth_field_name.
+
 	* src/rbgst-structure.c, test/test_structure.rb: added #size and
 	#empty?.
 
