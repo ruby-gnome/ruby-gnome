@@ -85,15 +85,48 @@ def print_plugin_info(name, prefix)
   end
 end
 
+def print_hierarchy(element, prefix)
+  ancestors = []
+  type = element.gtype
+  while type
+    ancestors << type
+    type = type.parent
+  end
+  ancestors.reverse.each_with_index do |klass, i|
+    if i.zero?
+      mark = ""
+    else
+      mark = " " + ("      " * (i - 1)) + "+----"
+    end
+    puts("#{prefix}#{mark}#{klass.name}")
+  end
+end
+
 def print_element_factory(factory, print_names)
   if !factory.load!
     puts("element plugin (#{factory.name}) couldn't be loaded\n")
     return
   end
 
+  element = factory.create
+
   prefix = print_names ? "#{factory.name}: " : ""
+
   print_factory_details_info(factory, prefix)
   print_plugin_info(factory.plugin_name, prefix)
+
+  print_hierarchy(element, prefix)
+  print_interfaces(element, prefix)
+
+  print_pad_templates_info(element, prefix)
+  print_element_flag_info(element, prefix)
+  print_implementation_info(element, prefix)
+  print_clocking_info(element, prefix)
+  print_index_info(element, prefix)
+  print_pad_info(element, prefix)
+  print_element_properties_info(element, prefix)
+  print_signal_info(element, prefix)
+  print_children_info(element, prefix)
 end
 
 def print_feature(plugin, feature)
@@ -143,18 +176,6 @@ def prefix; $prefix += 1; yield; $prefix -= 1; end
 def puts(o)
    print " " * ($prefix * 4) 
    super o 
-end
-
-def print_hierarchy(e)
-    a = Array.new
-    c = e.class
-    while c
-        a.push(c.name)
-        c = c.superclass
-    end
-    old_prefix = $prefix
-    a.reverse.each { |n| puts n; $prefix += 1 }
-    $prefix = old_prefix
 end
 
 def print_prop(name, obj)

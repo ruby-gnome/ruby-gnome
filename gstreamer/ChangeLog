@@ -1,5 +1,7 @@
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gst-inspect.rb: implemented print_hierarchy.
+
 	* src/rbgst-structure.c, test/test_structure.rb: added .parse.
 
 	* src/rbgst-structure.c, test/test_structure.rb: added #to_s and

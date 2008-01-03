@@ -37,8 +37,7 @@ static VALUE
 rb_gst_tag_setter_merge (VALUE self, VALUE structure, VALUE merge_mode)
 {
     gst_tag_setter_merge_tags(RGST_TAG_SETTER(self),
-                              RVAL2GST_STRUCT_WITH_NAME(structure,
-                                                        GST_TAG_LIST_STRUCTURE_NAME),
+                              RVAL2GST_STRUCT(structure),
                               RVAL2GENUM(merge_mode, GST_TYPE_TAG_MERGE_MODE));
     return self;
 }
