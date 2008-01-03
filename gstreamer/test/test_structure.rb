@@ -55,4 +55,31 @@ class TestStructure < Test::Unit::TestCase
     assert_nil(structure["string"])
     assert_nil(structure["integer"])
   end
+
+  def test_each_break
+    structure = Gst::Structure.new("anonymous")
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+
+    result = []
+    structure.each do |key, value|
+      result << [key, value]
+      break
+    end
+    assert_equal([["string", "value"]], result)
+  end
+
+  def test_collect
+    structure = Gst::Structure.new("anonymous")
+    assert_equal([], structure.collect {|key, value| [key, value]})
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+    assert_equal([
+                  ["string", "value"],
+                  ["integer", 1],
+                 ],
+                 structure.collect {|key, value| [key, value]})
+  end
 end

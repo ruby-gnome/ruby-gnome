@@ -104,12 +104,59 @@ remove_all_fields(VALUE self)
     return Qnil;
 }
 
+typedef struct _ForEachCallbackInfo
+{
+    int state;
+    VALUE block;
+} ForEachCallbackInfo;
+
+static VALUE
+invoke_foreach_proc(VALUE data)
+{
+    return rb_funcall(RARRAY(data)->ptr[0],
+                      rb_intern("call"),
+                      2,
+                      RARRAY(data)->ptr[1],
+                      RARRAY(data)->ptr[2]);
+}
+
+static gboolean
+foreach_cb(GQuark field_id, const GValue *value, gpointer user_data)
+{
+    ForEachCallbackInfo *info = user_data;
+
+    rb_protect(invoke_foreach_proc,
+               rb_ary_new3(3,
+                           info->block,
+                           rb_str_new2(g_quark_to_string(field_id)),
+                           GVAL2RVAL(value)),
+               &(info->state));
+
+    return info->state == 0;
+}
+
+static VALUE
+foreach(VALUE self)
+{
+    ForEachCallbackInfo info;
+
+    info.state = 0;
+    info.block = rb_block_proc();
+
+    if (!gst_structure_foreach(SELF(self), foreach_cb, &info))
+        rb_jump_tag(info.state);
+
+    return Qnil;
+}
+
 void
 Init_gst_structure(void)
 {
     VALUE rb_cGstStructure;
 
     rb_cGstStructure = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
+
+    rb_include_module(rb_cGstStructure, rb_mEnumerable);
 
     rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
 
@@ -125,6 +172,8 @@ Init_gst_structure(void)
     rb_define_alias(rb_cGstStructure, "delete", "remove");
     rb_define_method(rb_cGstStructure, "remove_all", remove_all_fields, 0);
     rb_define_alias(rb_cGstStructure, "clear", "remove_all");
+
+    rb_define_method(rb_cGstStructure, "each", foreach, 0);
 
     G_DEF_SETTERS(rb_cGstStructure);
 }
