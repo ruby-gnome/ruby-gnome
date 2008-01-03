@@ -1,5 +1,8 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-pad-template.c: split to ...
+	* src/rbgst-static-pad-template.c: .. this.
+
 	* test/test_pad_template.rb, src/rbgst-pad-template.c,
 	src/rbgst-pad-template.c: made GstStaticPadTemplate object.
 

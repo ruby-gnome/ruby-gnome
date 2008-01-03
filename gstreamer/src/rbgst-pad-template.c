@@ -105,38 +105,10 @@ has_caps_p(VALUE self)
     return CBOOL2RVAL(pad->caps != NULL);
 }
 
-
-#undef SELF
-#define SELF(self) RVAL2GST_STATIC_PAD_TEMPLATE(self)
-
-static VALUE
-static_get_name(VALUE self)
-{
-    return CSTR2RVAL(SELF(self)->name_template);
-}
-
-static VALUE
-static_get_presence(VALUE self)
-{
-    return GENUM2RVAL(SELF(self)->presence, GST_TYPE_PAD_PRESENCE);
-}
-
-static VALUE
-static_get_direction(VALUE self)
-{
-    return GENUM2RVAL(SELF(self)->direction, GST_TYPE_PAD_DIRECTION);
-}
-
-static VALUE
-static_get_caps(VALUE self)
-{
-    return RGST_CAPS_NEW(gst_static_pad_template_get_caps(SELF(self)));
-}
-
 void
 Init_gst_pad_template (void)
 {
-    VALUE cGstPadTemplate, cGstStaticPadTemplate;
+    VALUE cGstPadTemplate;
 
     cGstPadTemplate = G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE, "PadTemplate", mGst);
 
@@ -151,11 +123,4 @@ Init_gst_pad_template (void)
     G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE_FLAGS, "Flags", cGstPadTemplate);
     G_DEF_CONSTANTS(cGstPadTemplate, GST_TYPE_PAD_TEMPLATE_FLAGS,
                     "GST_PAD_TEMPLATE_");
-
-    cGstStaticPadTemplate = G_DEF_CLASS(GST_TYPE_STATIC_PAD_TEMPLATE,
-                                        "StaticPadTemplate", mGst);
-    rb_define_method(cGstStaticPadTemplate, "name", static_get_name, 0);
-    rb_define_method(cGstStaticPadTemplate, "presence", static_get_presence, 0);
-    rb_define_method(cGstStaticPadTemplate, "direction", static_get_direction, 0);
-    rb_define_method(cGstStaticPadTemplate, "caps", static_get_caps, 0);
 }

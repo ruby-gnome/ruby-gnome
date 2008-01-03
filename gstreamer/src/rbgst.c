@@ -62,6 +62,7 @@ Init_gst_classes (void)
     extern void Init_gst_registry_pool (void);
     extern void Init_gst_scheduler (void);
     extern void Init_gst_schedulerfactory (void);
+    extern void Init_gst_static_pad_template(void);
     extern void Init_gst_systemclock (void);
     extern void Init_gst_tag (void);
     extern void Init_gst_tag_setter (void);
@@ -100,6 +101,7 @@ Init_gst_classes (void)
     Init_gst_plugin_feature();
     Init_gst_querytype ();
     Init_gst_registry ();
+    Init_gst_static_pad_template();
     Init_gst_systemclock ();
     Init_gst_tag ();
     Init_gst_tag_setter ();
