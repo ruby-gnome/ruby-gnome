@@ -77,9 +77,24 @@ class TestStructure < Test::Unit::TestCase
     structure["string"] = "value"
     structure["integer"] = 1
     assert_equal([
-                  ["string", "value"],
-                  ["integer", 1],
+                  ["string", "value" * 2],
+                  ["integer", 1 * 2],
                  ],
-                 structure.collect {|key, value| [key, value]})
+                 structure.collect {|key, value| [key, value * 2]})
+
+    assert_equal("value", structure["string"])
+    assert_equal(1, structure["integer"])
+  end
+
+  def test_collect!
+    structure = Gst::Structure.new("anonymous")
+    assert_equal([], structure.collect {|key, value| [key, value]})
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+    structure.collect! {|key, value| value * 2}
+
+    assert_equal("value" * 2, structure["string"])
+    assert_equal(1 * 2, structure["integer"])
   end
 end

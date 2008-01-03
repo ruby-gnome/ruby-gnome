@@ -104,33 +104,47 @@ remove_all_fields(VALUE self)
     return Qnil;
 }
 
-typedef struct _ForEachCallbackInfo
+typedef struct _EachCallbackInfo
 {
     int state;
     VALUE block;
-} ForEachCallbackInfo;
+} EachCallbackInfo;
+
+typedef struct _EachCallbackData
+{
+    VALUE block;
+    VALUE key;
+    VALUE value;
+} EachCallbackData;
+
+typedef struct _RValueToGValueData
+{
+    VALUE rvalue;
+    GValue *gvalue;
+} RValueToGValueData;
 
 static VALUE
-invoke_foreach_proc(VALUE data)
+invoke_foreach_proc(VALUE user_data)
 {
-    return rb_funcall(RARRAY(data)->ptr[0],
+    EachCallbackData *data = (EachCallbackData *)user_data;
+
+    return rb_funcall(data->block,
                       rb_intern("call"),
                       2,
-                      RARRAY(data)->ptr[1],
-                      RARRAY(data)->ptr[2]);
+                      data->key,
+                      data->value);
 }
 
 static gboolean
 foreach_cb(GQuark field_id, const GValue *value, gpointer user_data)
 {
-    ForEachCallbackInfo *info = user_data;
+    EachCallbackInfo *info = user_data;
+    EachCallbackData data;
 
-    rb_protect(invoke_foreach_proc,
-               rb_ary_new3(3,
-                           info->block,
-                           rb_str_new2(g_quark_to_string(field_id)),
-                           GVAL2RVAL(value)),
-               &(info->state));
+    data.block = info->block;
+    data.key = rb_str_new2(g_quark_to_string(field_id));
+    data.value = GVAL2RVAL(value);
+    rb_protect(invoke_foreach_proc, (VALUE)(&data), &(info->state));
 
     return info->state == 0;
 }
@@ -138,12 +152,58 @@ foreach_cb(GQuark field_id, const GValue *value, gpointer user_data)
 static VALUE
 foreach(VALUE self)
 {
-    ForEachCallbackInfo info;
+    EachCallbackInfo info;
 
     info.state = 0;
     info.block = rb_block_proc();
 
     if (!gst_structure_foreach(SELF(self), foreach_cb, &info))
+        rb_jump_tag(info.state);
+
+    return Qnil;
+}
+
+static VALUE
+invoke_rvalue_to_gvalue(VALUE user_data)
+{
+    RValueToGValueData *data = (RValueToGValueData *)user_data;
+
+    rbgobj_rvalue_to_gvalue(data->rvalue, data->gvalue);
+
+    return Qnil;
+}
+
+static gboolean
+map_in_place_cb(GQuark field_id, GValue *value, gpointer user_data)
+{
+    EachCallbackInfo *info = user_data;
+    EachCallbackData data;
+    VALUE result;
+
+    data.block = info->block;
+    data.key = rb_str_new2(g_quark_to_string(field_id));
+    data.value = GVAL2RVAL(value);
+    result = rb_protect(invoke_foreach_proc, (VALUE)(&data), &(info->state));
+    if (info->state == 0) {
+        RValueToGValueData convert_data;
+        convert_data.rvalue = result;
+        convert_data.gvalue = value;
+        rb_protect(invoke_rvalue_to_gvalue,
+                   (VALUE)(&convert_data), &(info->state));
+    }
+
+    return info->state == 0;
+}
+
+static VALUE
+map_in_place(VALUE self)
+{
+    EachCallbackInfo info;
+
+    info.state = 0;
+    info.block = rb_block_proc();
+
+    if (!gst_structure_map_in_place(SELF(self), map_in_place_cb, &info))
         rb_jump_tag(info.state);
 
     return Qnil;
@@ -174,6 +234,9 @@ Init_gst_structure(void)
     rb_define_alias(rb_cGstStructure, "clear", "remove_all");
 
     rb_define_method(rb_cGstStructure, "each", foreach, 0);
+
+    rb_define_method(rb_cGstStructure, "map!", map_in_place, 0);
+    rb_define_alias(rb_cGstStructure, "collect!", "map!");
 
     G_DEF_SETTERS(rb_cGstStructure);
 }
