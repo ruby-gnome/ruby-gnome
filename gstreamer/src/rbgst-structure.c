@@ -237,6 +237,12 @@ has_field_p(VALUE self, VALUE name)
     return CBOOL2RVAL(gst_structure_has_field(SELF(self), RVAL2CSTR(name)));
 }
 
+static VALUE
+to_s(VALUE self)
+{
+    return CSTR2RVAL2(gst_structure_to_string(SELF(self)));
+}
+
 void
 Init_gst_structure(void)
 {
@@ -274,6 +280,8 @@ Init_gst_structure(void)
 
     rb_define_method(rb_cGstStructure, "has_field?", has_field_p, 1);
     rb_define_alias(rb_cGstStructure, "have_field?", "has_field?");
+
+    rb_define_method(rb_cGstStructure, "to_s", to_s, 0);
 
     G_DEF_SETTERS(rb_cGstStructure);
 }

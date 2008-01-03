@@ -9,4 +9,10 @@ module Gst
       Registry.default.each_feature(name, &block)
     end
   end
+
+  class Structure
+    def inspect
+      super.gsub(/>\z/, ": #{to_s}>")
+    end
+  end
 end

@@ -128,4 +128,18 @@ class TestStructure < Test::Unit::TestCase
     assert(structure.have_field?("string"))
     assert(!structure.have_field?("integer"))
   end
+
+  def test_to_s
+    structure = Gst::Structure.new("anonymous")
+    assert_equal("anonymous;", structure.to_s)
+
+    structure["string"] = "value"
+    assert_equal("anonymous, string=(string)value;", structure.to_s)
+
+    structure["integer"] = 1
+    assert_equal("anonymous, string=(string)value, integer=(int)1;",
+                 structure.to_s)
+
+    assert_match(/: #{Regexp.escape(structure.to_s)}>\z/, structure.inspect)
+  end
 end
