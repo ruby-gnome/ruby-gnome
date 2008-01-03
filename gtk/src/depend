@@ -1,2 +1,2 @@
-install: 
-	@$(RUBY) -r ftools -e 'File::install(ARGV[0], ARGV[1], 0644, true)' $(srcdir)/rbgtk.h $(sitearchdir)$(target_prefix)
+install:
+	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/rbgtk.h $(sitearchdir)$(target_prefix)
