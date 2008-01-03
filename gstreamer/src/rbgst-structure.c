@@ -107,12 +107,12 @@ remove_all_fields(VALUE self)
 typedef struct _EachCallbackInfo
 {
     int state;
-    VALUE block;
+    VALUE proc;
 } EachCallbackInfo;
 
 typedef struct _EachCallbackData
 {
-    VALUE block;
+    VALUE proc;
     VALUE key;
     VALUE value;
 } EachCallbackData;
@@ -124,27 +124,35 @@ typedef struct _RValueToGValueData
 } RValueToGValueData;
 
 static VALUE
-invoke_foreach_proc(VALUE user_data)
+invoke_proc_func(VALUE user_data)
 {
     EachCallbackData *data = (EachCallbackData *)user_data;
 
-    return rb_funcall(data->block,
+    return rb_funcall(data->proc,
                       rb_intern("call"),
                       2,
                       data->key,
                       data->value);
 }
 
+static VALUE
+invoke_proc(GQuark field_id, const GValue *value,
+            EachCallbackInfo *info)
+{
+    EachCallbackData data;
+
+    data.proc = info->proc;
+    data.key = rb_str_new2(g_quark_to_string(field_id));
+    data.value = GVAL2RVAL(value);
+    return rb_protect(invoke_proc_func, (VALUE)(&data), &(info->state));
+}
+
 static gboolean
 foreach_cb(GQuark field_id, const GValue *value, gpointer user_data)
 {
     EachCallbackInfo *info = user_data;
-    EachCallbackData data;
 
-    data.block = info->block;
-    data.key = rb_str_new2(g_quark_to_string(field_id));
-    data.value = GVAL2RVAL(value);
-    rb_protect(invoke_foreach_proc, (VALUE)(&data), &(info->state));
+    invoke_proc(field_id, value, info);
 
     return info->state == 0;
 }
@@ -155,7 +163,7 @@ foreach(VALUE self)
     EachCallbackInfo info;
 
     info.state = 0;
-    info.block = rb_block_proc();
+    info.proc = rb_block_proc();
 
     if (!gst_structure_foreach(SELF(self), foreach_cb, &info))
         rb_jump_tag(info.state);
@@ -168,7 +176,8 @@ invoke_rvalue_to_gvalue(VALUE user_data)
 {
     RValueToGValueData *data = (RValueToGValueData *)user_data;
 
-    rbgobj_rvalue_to_gvalue(data->rvalue, data->gvalue);
+    g_value_unset(data->gvalue);
+    rbgobj_initialize_gvalue(data->gvalue, data->rvalue);
 
     return Qnil;
 }
@@ -177,13 +186,9 @@ static gboolean
 map_in_place_cb(GQuark field_id, GValue *value, gpointer user_data)
 {
     EachCallbackInfo *info = user_data;
-    EachCallbackData data;
     VALUE result;
 
-    data.block = info->block;
-    data.key = rb_str_new2(g_quark_to_string(field_id));
-    data.value = GVAL2RVAL(value);
-    result = rb_protect(invoke_foreach_proc, (VALUE)(&data), &(info->state));
+    result = invoke_proc(field_id, value, info);
     if (info->state == 0) {
         RValueToGValueData convert_data;
         convert_data.rvalue = result;
@@ -201,7 +206,7 @@ map_in_place(VALUE self)
     EachCallbackInfo info;
 
     info.state = 0;
-    info.block = rb_block_proc();
+    info.proc = rb_block_proc();
 
     if (!gst_structure_map_in_place(SELF(self), map_in_place_cb, &info))
         rb_jump_tag(info.state);
