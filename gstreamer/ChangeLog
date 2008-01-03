@@ -1,5 +1,7 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gst-inspect.rb: implemented print_pad_templates_info.
+
 	* src/rbgst-pad-template.c, src/rbgst-static-pad-template.c: used
 	better macros.
 

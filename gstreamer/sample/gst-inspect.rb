@@ -117,6 +117,52 @@ def print_interfaces(element, prefix)
   end
 end
 
+def print_caps(caps, prefix)
+  if caps.any?
+    puts("#{prefix}ANY")
+    return
+  end
+  if caps.empty?
+    puts("#{prefix}EMPTY")
+    return
+  end
+
+  caps.each do |cap|
+    structure = cap.structure
+    structure.each do |key, value|
+      puts("#{prefix}#{structure.name}")
+    end
+  end
+end
+
+def print_pad_template_info(template, prefix)
+  puts("#{prefix}  #{template.direction.nick.upcase}: '#{template.name}'")
+  if template.presence == Gst::Pad::REQUEST
+    puts("#{prefix}    Availability: On request")
+  else
+    puts("#{prefix}    Availability: #{template.presence.nick.capitalize}")
+  end
+  puts(prefix)
+
+  return if template.caps.string.nil?
+  puts("#{prefix}    Capabilities:")
+  print_caps(template.caps, prefix)
+end
+
+def print_pad_templates_info(element, factory, prefix)
+  puts("#{prefix}Pad Templates:")
+  templates = factory.pad_templates
+
+  if templates.empty?
+    puts("#{prefix}  none")
+    return
+  end
+
+  templates.each do |template|
+    print_pad_template_info(template, prefix)
+  end
+end
+
 def print_element_factory(factory, print_names)
   if !factory.load!
     puts("element plugin (#{factory.name}) couldn't be loaded\n")
@@ -133,7 +179,7 @@ def print_element_factory(factory, print_names)
   print_hierarchy(element, prefix)
   print_interfaces(element, prefix)
 
-  print_pad_templates_info(element, prefix)
+  print_pad_templates_info(element, factory, prefix)
   print_element_flag_info(element, prefix)
   print_implementation_info(element, prefix)
   print_clocking_info(element, prefix)
