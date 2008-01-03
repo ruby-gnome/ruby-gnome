@@ -1,3 +1,8 @@
+2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgstpadtemplate.c: renamed to ...
+	* src/rbgst-pad-template.c: ... this.
+
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gst-inspect.rb: implemented print_interfaces.
