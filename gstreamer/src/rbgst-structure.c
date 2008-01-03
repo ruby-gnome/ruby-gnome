@@ -231,6 +231,12 @@ nth_field_name(VALUE self, VALUE index)
     return CSTR2RVAL(gst_structure_nth_field_name(SELF(self), NUM2INT(index)));
 }
 
+static VALUE
+has_field_p(VALUE self, VALUE name)
+{
+    return CBOOL2RVAL(gst_structure_has_field(SELF(self), RVAL2CSTR(name)));
+}
+
 void
 Init_gst_structure(void)
 {
@@ -265,6 +271,9 @@ Init_gst_structure(void)
     rb_define_method(rb_cGstStructure, "empty?", empty_p, 0);
 
     rb_define_method(rb_cGstStructure, "nth_field_name", nth_field_name, 1);
+
+    rb_define_method(rb_cGstStructure, "has_field?", has_field_p, 1);
+    rb_define_alias(rb_cGstStructure, "have_field?", "has_field?");
 
     G_DEF_SETTERS(rb_cGstStructure);
 }

@@ -118,4 +118,14 @@ class TestStructure < Test::Unit::TestCase
     assert_equal("string", structure.nth_field_name(0))
     assert_equal("integer", structure.nth_field_name(1))
   end
+
+  def test_have_field?
+    structure = Gst::Structure.new("anonymous")
+
+    assert(!structure.have_field?("string"))
+
+    structure["string"] = "value"
+    assert(structure.have_field?("string"))
+    assert(!structure.have_field?("integer"))
+  end
 end
