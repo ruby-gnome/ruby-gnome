@@ -100,6 +100,21 @@ def print_hierarchy(element, prefix)
     end
     puts("#{prefix}#{mark}#{klass.name}")
   end
+  puts(prefix)
+end
+
+def print_interfaces(element, prefix)
+  interfaces = element.gtype.interfaces
+  return if interfaces.empty?
+
+  output = ["Implemented Interfaces:"]
+  interfaces.each do |interface|
+    output << "  #{interface.name}"
+  end
+  output << ""
+  output.each do |line|
+    puts("#{prefix}#{line}")
+  end
 end
 
 def print_element_factory(factory, print_names)
