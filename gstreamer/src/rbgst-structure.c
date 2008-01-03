@@ -78,6 +78,32 @@ set_value(VALUE self, VALUE name, VALUE rb_value)
     return Qnil;
 }
 
+static VALUE
+remove_fields(int argc, VALUE *argv, VALUE self)
+{
+    int i;
+    VALUE name, rest;
+    GstStructure *structure;
+
+    rb_scan_args(argc, argv, "1*", &name, &rest);
+
+    structure = SELF(self);
+    for (i = 0; i < argc; i++) {
+        name = argv[i];
+
+        gst_structure_remove_field(structure, RVAL2CSTR(name));
+    }
+
+    return Qnil;
+}
+
+static VALUE
+remove_all_fields(VALUE self)
+{
+    gst_structure_remove_all_fields(SELF(self));
+    return Qnil;
+}
+
 void
 Init_gst_structure(void)
 {
@@ -94,6 +120,11 @@ Init_gst_structure(void)
 
     rb_define_method(rb_cGstStructure, "[]", get_value, 1);
     rb_define_method(rb_cGstStructure, "[]=", set_value, 2);
+
+    rb_define_method(rb_cGstStructure, "remove", remove_fields, -1);
+    rb_define_alias(rb_cGstStructure, "delete", "remove");
+    rb_define_method(rb_cGstStructure, "remove_all", remove_all_fields, 0);
+    rb_define_alias(rb_cGstStructure, "clear", "remove_all");
 
     G_DEF_SETTERS(rb_cGstStructure);
 }

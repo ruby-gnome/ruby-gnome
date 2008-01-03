@@ -30,4 +30,29 @@ class TestStructure < Test::Unit::TestCase
     assert_equal("value", structure["string"])
     assert_equal(1, structure["integer"])
   end
+
+  def test_delete
+    structure = Gst::Structure.new("anonymous")
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+
+    assert_equal("value", structure["string"])
+    structure.delete("string")
+    assert_nil(structure["string"])
+    assert_equal(1, structure["integer"])
+  end
+
+  def test_clear
+    structure = Gst::Structure.new("anonymous")
+
+    structure["string"] = "value"
+    structure["integer"] = 1
+
+    assert_equal("value", structure["string"])
+    assert_equal(1, structure["integer"])
+    structure.clear
+    assert_nil(structure["string"])
+    assert_nil(structure["integer"])
+  end
 end
