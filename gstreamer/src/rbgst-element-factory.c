@@ -133,12 +133,7 @@ rb_gst_elementfactory_get_pad_templates (VALUE self)
          list != NULL;
          list = g_list_next(list)) {
         GstStaticPadTemplate *pad = list->data;
-        rb_ary_push(arr,
-                    rb_ary_new3(3,
-                                CSTR2RVAL(pad->name_template),
-                                GENUM2RVAL(pad->direction, GST_TYPE_PAD_DIRECTION),
-                                GENUM2RVAL(pad->presence, GST_TYPE_PAD_PRESENCE)
-                                /* RGST_CAPS_NEW(&(pad->static_caps.caps)) */));
+        rb_ary_push(arr, GST_STATIC_PAD_TEMPLATE2RVAL(pad));
     }
     return arr;
 }

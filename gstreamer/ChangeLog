@@ -1,5 +1,8 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_pad_template.rb, src/rbgst-pad-template.c,
+	src/rbgst-pad-template.c: made GstStaticPadTemplate object.
+
 	* src/rbgstpadtemplate.c: renamed to ...
 	* src/rbgst-pad-template.c: ... this.
 
