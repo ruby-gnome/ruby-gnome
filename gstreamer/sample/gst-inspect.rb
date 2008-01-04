@@ -127,8 +127,7 @@ def print_caps(caps, prefix)
     return
   end
 
-  caps.each do |cap|
-    structure = cap.structure
+  caps.each do |structure|
     structure.each do |key, value|
       puts("#{prefix}#{structure.name}")
     end

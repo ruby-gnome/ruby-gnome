@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2008 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -19,6 +20,8 @@
  */
 
 #include "rbgst.h"
+
+#define SELF(self) (RVAL2GST_CAPS(self))
 
 /* Class: Gst::Caps
  * Capabilities of pads. 
@@ -359,41 +362,66 @@ rb_gst_caps_subtract (VALUE self, VALUE caps)
                                              (caps)));
 }
 
+static VALUE
+each(VALUE self)
+{
+    int i, size;
+    GstCaps *caps;
+
+    caps = SELF(self);
+    size = gst_caps_get_size(caps);
+
+    for (i = 0; i < size; i++) {
+        rb_yield(GST_STRUCT2RVAL(gst_caps_get_structure(caps, i)));
+    }
+
+    return Qnil;
+}
+
 void
 Init_gst_caps (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_CAPS, "Caps", mGst);
+    VALUE cGstCaps;
 
-    rb_define_method (c, "initialize", rb_gst_caps_new, -1);
-    rb_define_method (c, "set_any", rb_gst_caps_set_any, 1);
-    rb_define_method (c, "append", rb_gst_caps_append, 1);
-    rb_define_method (c, "append_structure", rb_gst_caps_append_structure, 1);
-    rb_define_method (c, "size", rb_gst_caps_get_size, 0);
-    rb_define_alias (c, "length", "size");
-    rb_define_method (c, "get_structure", rb_gst_caps_get_structure, 1);
-    rb_define_method (c, "set_simple", rb_gst_caps_set_simple, 2);
-    rb_define_method (c, "any?", rb_gst_caps_is_any, 0);
-    rb_define_method (c, "empty?", rb_gst_caps_is_empty, 0);
-    rb_define_method (c, "simple?", rb_gst_caps_is_simple, 0);
-    rb_define_alias (c, "chained?", "simple?");
-    rb_define_method (c, "fixed?", rb_gst_caps_is_fixed, 0);
-    rb_define_method (c, "equal?", rb_gst_caps_is_equal, 1);
-    rb_define_alias (c, "==", "equal?");
-    rb_define_method (c, "equal_fixed?", rb_gst_caps_is_equal_fixed, 1);
-    rb_define_method (c, "always_compatible?",
-                      rb_gst_caps_is_always_compatible, 1);
-    rb_define_method (c, "subset?", rb_gst_caps_is_subset, 1);
-    rb_define_method (c, "intersect", rb_gst_caps_intersect, 1);
-    rb_define_method (c, "union", rb_gst_caps_union, 1);
-    rb_define_method (c, "normalize", rb_gst_caps_normalize, 0);
-    rb_define_method (c, "simplify!", rb_gst_caps_do_simplify, 0);
-    rb_define_method (c, "replace!", rb_gst_caps_replace, 1);
-    rb_define_method (c, "to_string", rb_gst_caps_to_string, 0);
-    rb_define_alias (c, "to_s", "to_string");
-    rb_define_singleton_method (c, "from_string", rb_gst_caps_from_string, 1);
-    rb_define_method (c, "subtract", rb_gst_caps_subtract, 1);
+    cGstCaps = G_DEF_CLASS (GST_TYPE_CAPS, "Caps", mGst);
 
-    G_DEF_SETTERS(c);
+    rb_include_module(cGstCaps, rb_mEnumerable);
+
+    rb_define_singleton_method(cGstCaps, "parse",
+                               rb_gst_caps_from_string, 1);
+
+    rb_define_method(cGstCaps, "initialize", rb_gst_caps_new, -1);
+    rb_define_method(cGstCaps, "set_any", rb_gst_caps_set_any, 1);
+    rb_define_method(cGstCaps, "append", rb_gst_caps_append, 1);
+    rb_define_method(cGstCaps, "append_structure",
+                     rb_gst_caps_append_structure, 1);
+    rb_define_method(cGstCaps, "size", rb_gst_caps_get_size, 0);
+    rb_define_alias(cGstCaps, "length", "size");
+    rb_define_method(cGstCaps, "get_structure", rb_gst_caps_get_structure, 1);
+    rb_define_alias(cGstCaps, "[]", "get_structure");
+    rb_define_method(cGstCaps, "set_simple", rb_gst_caps_set_simple, 2);
+    rb_define_method(cGstCaps, "any?", rb_gst_caps_is_any, 0);
+    rb_define_method(cGstCaps, "empty?", rb_gst_caps_is_empty, 0);
+    rb_define_method(cGstCaps, "simple?", rb_gst_caps_is_simple, 0);
+    rb_define_alias(cGstCaps, "chained?", "simple?");
+    rb_define_method(cGstCaps, "fixed?", rb_gst_caps_is_fixed, 0);
+    rb_define_method(cGstCaps, "equal?", rb_gst_caps_is_equal, 1);
+    rb_define_alias(cGstCaps, "==", "equal?");
+    rb_define_method(cGstCaps, "equal_fixed?", rb_gst_caps_is_equal_fixed, 1);
+    rb_define_method(cGstCaps, "always_compatible?",
+                     rb_gst_caps_is_always_compatible, 1);
+    rb_define_method(cGstCaps, "subset?", rb_gst_caps_is_subset, 1);
+    rb_define_method(cGstCaps, "intersect", rb_gst_caps_intersect, 1);
+    rb_define_method(cGstCaps, "union", rb_gst_caps_union, 1);
+    rb_define_method(cGstCaps, "normalize", rb_gst_caps_normalize, 0);
+    rb_define_method(cGstCaps, "simplify!", rb_gst_caps_do_simplify, 0);
+    rb_define_method(cGstCaps, "replace!", rb_gst_caps_replace, 1);
+    rb_define_method(cGstCaps, "to_s", rb_gst_caps_to_string, 0);
+    rb_define_method(cGstCaps, "subtract", rb_gst_caps_subtract, 1);
+
+    rb_define_method(cGstCaps, "each", each, 0);
+
+    G_DEF_SETTERS(cGstCaps);
 
 /* TODO:
     gst_caps_structure_fixate_field_nearest_int ()

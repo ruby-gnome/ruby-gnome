@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 Ruby-GNOME2 Project Team
+ * Copyright (C) 2008 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
