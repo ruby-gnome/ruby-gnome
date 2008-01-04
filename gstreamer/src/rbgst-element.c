@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
- * Copyright (C) 2007 Ruby-GNOME2 Project Team
+ * Copyright (C) 2007, 2008 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -22,6 +22,8 @@
 
 #include "rbgst.h"
 #include "rbgprivate.h"
+
+#define SELF(self) RVAL2GST_ELEMENT(self)
 
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
@@ -73,9 +75,9 @@ instance2robj(gpointer instance)
  * Returns: a code (see Gst::Element::StateReturn).
  */
 static VALUE
-rb_gst_element_set_state (VALUE self, VALUE value)
+rb_gst_element_set_state(VALUE self, VALUE value)
 {
-    return GENUM2RVAL(gst_element_set_state(RGST_ELEMENT(self),
+    return GENUM2RVAL(gst_element_set_state(SELF(self),
                                             RVAL2GENUM(value, GST_TYPE_STATE)),
                       GST_TYPE_STATE_CHANGE_RETURN);
 }
@@ -84,9 +86,9 @@ rb_gst_element_set_state (VALUE self, VALUE value)
  * Returns: the state of the element (see Gst::Element::State).
  */
 static VALUE
-rb_gst_element_get_state (VALUE self)
+rb_gst_element_get_state(VALUE self)
 {
-    return GENUM2RVAL(GST_STATE(RGST_ELEMENT(self)), GST_TYPE_STATE);
+    return GENUM2RVAL(GST_STATE(SELF(self)), GST_TYPE_STATE);
 }
 
 /*
@@ -99,7 +101,7 @@ rb_gst_element_get_state (VALUE self)
 static VALUE
 rb_gst_element_stop (VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(RGST_ELEMENT(self), GST_STATE_NULL),
+    return GENUM2RVAL(gst_element_set_state(SELF(self), GST_STATE_NULL),
                       GST_TYPE_STATE_CHANGE_RETURN);
 }
 
@@ -111,9 +113,9 @@ rb_gst_element_stop (VALUE self)
  * Returns: a code (see Gst::Element::StateReturn).
  */
 static VALUE
-rb_gst_element_ready (VALUE self)
+rb_gst_element_ready(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(RGST_ELEMENT(self), GST_STATE_READY),
+    return GENUM2RVAL(gst_element_set_state(SELF(self), GST_STATE_READY),
                       GST_TYPE_STATE_CHANGE_RETURN);
 }
 
@@ -125,9 +127,9 @@ rb_gst_element_ready (VALUE self)
  * Returns: a code (see Gst::Element::StateReturn).
  */
 static VALUE
-rb_gst_element_pause (VALUE self)
+rb_gst_element_pause(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(RGST_ELEMENT(self),
+    return GENUM2RVAL(gst_element_set_state(SELF(self),
                                             GST_STATE_PAUSED),
                       GST_TYPE_STATE_CHANGE_RETURN);
 }
@@ -140,9 +142,9 @@ rb_gst_element_pause (VALUE self)
  * Returns: a code (see Gst::Element::StateReturn).
  */
 static VALUE
-rb_gst_element_play (VALUE self)
+rb_gst_element_play(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(RGST_ELEMENT(self),
+    return GENUM2RVAL(gst_element_set_state(SELF(self),
                                             GST_STATE_PLAYING),
                       GST_TYPE_STATE_CHANGE_RETURN);
 }
@@ -152,9 +154,9 @@ rb_gst_element_play (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_element_is_stopped (VALUE self)
+rb_gst_element_is_stopped(VALUE self)
 {
-    return CBOOL2RVAL(GST_STATE(RGST_ELEMENT(self)) == GST_STATE_NULL);
+    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_NULL);
 }
 
 /* Method: ready?
@@ -162,9 +164,9 @@ rb_gst_element_is_stopped (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_element_is_ready (VALUE self)
+rb_gst_element_is_ready(VALUE self)
 {
-    return CBOOL2RVAL(GST_STATE(RGST_ELEMENT(self)) == GST_STATE_READY);
+    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_READY);
 }
 
 /* Method: paused?
@@ -172,9 +174,9 @@ rb_gst_element_is_ready (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_element_is_paused (VALUE self)
+rb_gst_element_is_paused(VALUE self)
 {
-    return CBOOL2RVAL(GST_STATE(RGST_ELEMENT(self)) == GST_STATE_PAUSED);
+    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_PAUSED);
 }
 
 /* Method: playing?
@@ -182,9 +184,9 @@ rb_gst_element_is_paused (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_element_is_playing (VALUE self)
+rb_gst_element_is_playing(VALUE self)
 {
-    return CBOOL2RVAL(GST_STATE(RGST_ELEMENT(self)) == GST_STATE_PLAYING);
+    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_PLAYING);
 }
 
 /*
@@ -197,7 +199,7 @@ rb_gst_element_is_playing (VALUE self)
 static VALUE
 rb_gst_element_wait(VALUE self)
 {
-    GST_STATE_WAIT(RGST_ELEMENT(self));
+    GST_STATE_WAIT(SELF(self));
     return Qnil;
 }
 
@@ -214,13 +216,13 @@ rb_gst_element_wait(VALUE self)
  * Returns: the destination element, or nil if the link failed.
  */
 static VALUE
-rb_gst_element_link (VALUE self, VALUE other_element)
+rb_gst_element_link(VALUE self, VALUE other_element)
 {
     GstElement *element1, *element2;
 
-    element1 = RGST_ELEMENT (self);
-    element2 = RGST_ELEMENT (other_element);
-    return gst_element_link (element1, element2) == TRUE ? other_element : Qnil;
+    element1 = SELF(self);
+    element2 = SELF(other_element);
+    return gst_element_link(element1, element2) == TRUE ? other_element : Qnil;
 }
 
 /*
@@ -238,15 +240,15 @@ rb_gst_element_link (VALUE self, VALUE other_element)
  * Returns: the destination element, or nil if the link failed.
  */
 static VALUE
-rb_gst_element_link_filtered (VALUE self, VALUE other_element, VALUE rcaps)
+rb_gst_element_link_filtered(VALUE self, VALUE other_element, VALUE rcaps)
 {
     GstElement *element1, *element2;
     GstCaps *caps;
     
-    element1 = RGST_ELEMENT (self);
-    element2 = RGST_ELEMENT (other_element);
-    caps = RGST_CAPS (rcaps);
-    return gst_element_link_filtered (element1, element2, caps)
+    element1 = SELF(self);
+    element2 = SELF(other_element);
+    caps = RGST_CAPS(rcaps);
+    return gst_element_link_filtered(element1, element2, caps)
         ? other_element 
         : Qnil;
 }
@@ -255,18 +257,18 @@ rb_gst_element_link_filtered (VALUE self, VALUE other_element, VALUE rcaps)
  * Returns: true if the element requires a clock, false otherwise.
  */
 static VALUE
-rb_gst_element_requires_clock (VALUE self)
+rb_gst_element_requires_clock(VALUE self)
 {
-    return CBOOL2RVAL (gst_element_requires_clock (RGST_ELEMENT (self)));
+    return CBOOL2RVAL(gst_element_requires_clock(SELF(self)));
 }
 
 /* Method: provides_clock?
  * Returns: true if the element provides a clock, false otherwise.
  */
 static VALUE
-rb_gst_element_provides_clock (VALUE self)
+rb_gst_element_provides_clock(VALUE self)
 {
-    return CBOOL2RVAL (gst_element_provides_clock (RGST_ELEMENT (self)));
+    return CBOOL2RVAL(gst_element_provides_clock(SELF(self)));
 }
 
 /* Method: clock
@@ -274,12 +276,12 @@ rb_gst_element_provides_clock (VALUE self)
  * if this element does not provide a clock.
  */
 static VALUE
-rb_gst_element_get_clock (VALUE self)
+rb_gst_element_get_clock(VALUE self)
 {
     GstClock *clock;
 
-    clock = gst_element_get_clock (RGST_ELEMENT (self));
-    return clock != NULL ? RGST_CLOCK_NEW (clock)
+    clock = gst_element_get_clock(SELF(self));
+    return clock != NULL ? RGST_CLOCK_NEW(clock)
         : Qnil;
 }
 
@@ -292,9 +294,9 @@ rb_gst_element_get_clock (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_set_clock (VALUE self, VALUE clock)
+rb_gst_element_set_clock(VALUE self, VALUE clock)
 {
-    gst_element_set_clock(RGST_ELEMENT(self), RVAL2GST_CLOCK(clock));
+    gst_element_set_clock(SELF(self), RVAL2GST_CLOCK(clock));
     return self;
 }
 
@@ -307,14 +309,14 @@ rb_gst_element_set_clock (VALUE self, VALUE clock)
  * Returns: an Array of Gst::Pad objects.
  */
 static VALUE
-rb_gst_element_get_pads (VALUE self)
+rb_gst_element_get_pads(VALUE self)
 {
     const GList *list;
     VALUE arr;
 
-    arr = rb_ary_new ();
+    arr = rb_ary_new();
 
-    for (list = GST_ELEMENT_PADS(RGST_ELEMENT(self));
+    for (list = GST_ELEMENT_PADS(SELF(self));
          list != NULL;
          list = g_list_next(list)) {
         GstPad *pad = GST_PAD(list->data);
@@ -339,9 +341,9 @@ rb_gst_element_get_pads (VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_element_each_pad (VALUE self)
+rb_gst_element_each_pad(VALUE self)
 {
-    return rb_ary_yield (rb_gst_element_get_pads (self));
+    return rb_ary_yield(rb_gst_element_get_pads(self));
 }
 
 /*
@@ -353,12 +355,12 @@ rb_gst_element_each_pad (VALUE self)
  * Returns: a Gst::Pad object, or nil if the pad cannot be found.
  */
 static VALUE
-rb_gst_element_get_pad (VALUE self, VALUE pad_name)
+rb_gst_element_get_pad(VALUE self, VALUE pad_name)
 {
-    GstPad *pad = gst_element_get_pad (RGST_ELEMENT (self),
-                                       RVAL2CSTR (pad_name));
+    GstPad *pad = gst_element_get_pad(SELF(self),
+                                       RVAL2CSTR(pad_name));
 
-    return pad != NULL ? RGST_PAD_NEW (pad)
+    return pad != NULL ? RGST_PAD_NEW(pad)
         : Qnil;
 }
 
@@ -381,11 +383,11 @@ rb_gst_element_get_pad (VALUE self, VALUE pad_name)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_element_link_pads (VALUE self, VALUE other_element)
+rb_gst_element_link_pads(VALUE self, VALUE other_element)
 {
-    return CBOOL2RVAL (gst_element_link_pads (RGST_ELEMENT (self),
+    return CBOOL2RVAL(gst_element_link_pads(SELF(self),
                                               "src",
-                                              RGST_ELEMENT (other_element),
+                                              SELF(other_element),
                                               "sink"));
 }
 
@@ -407,11 +409,11 @@ rb_gst_element_link_pads (VALUE self, VALUE other_element)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_unlink_pads (self, other_element)
+rb_gst_element_unlink_pads(self, other_element)
         VALUE self, other_element;
 {
-    gst_element_unlink_pads (RGST_ELEMENT (self),
-                             "src", RGST_ELEMENT (other_element), "sink");
+    gst_element_unlink_pads(SELF(self),
+                             "src", SELF(other_element), "sink");
     return self;
 }
 
@@ -419,9 +421,9 @@ rb_gst_element_unlink_pads (self, other_element)
  * Returns: true if the element can be indexed, false otherwise.
  */
 static VALUE
-rb_gst_element_is_indexable (VALUE self)
+rb_gst_element_is_indexable(VALUE self)
 {
-    return CBOOL2RVAL (gst_element_is_indexable (RGST_ELEMENT (self)));
+    return CBOOL2RVAL(gst_element_is_indexable(SELF(self)));
 }
 
 /*
@@ -435,7 +437,7 @@ rb_gst_element_is_indexable (VALUE self)
 /* static VALUE */
 /* rb_gst_element_query(VALUE self, VALUE query) */
 /* { */
-/*     return CBOOL2RVAL(gst_element_query(RGST_ELEMENT(self), */
+/*     return CBOOL2RVAL(gst_element_query(SELF(self), */
 /*                                         RGST_QUERY(query))); */
 /* } */
 
@@ -451,10 +453,10 @@ rb_gst_element_is_indexable (VALUE self)
  * otherwise.
  */
 static VALUE
-rb_gst_element_send_event (VALUE self, VALUE event)
+rb_gst_element_send_event(VALUE self, VALUE event)
 {
-    return CBOOL2RVAL (gst_element_send_event (RGST_ELEMENT (self),
-                                               RGST_EVENT (event)));
+    return CBOOL2RVAL(gst_element_send_event(SELF(self),
+                                               RGST_EVENT(event)));
 }
 
 /*
@@ -466,9 +468,9 @@ rb_gst_element_send_event (VALUE self, VALUE event)
  * element base time in Gst::Element::STATE_PAUSED, or -1 otherwise.
  */
 static VALUE
-rb_gst_element_get_base_time (VALUE self)
+rb_gst_element_get_base_time(VALUE self)
 {
-    return ULL2NUM(gst_element_get_base_time(RGST_ELEMENT(self)));
+    return ULL2NUM(gst_element_get_base_time(SELF(self)));
 }
 
 /*
@@ -485,7 +487,7 @@ rb_gst_element_get_base_time (VALUE self)
 static VALUE
 rb_gst_element_set_base_time(VALUE self, VALUE time)
 {
-    gst_element_set_base_time(RGST_ELEMENT(self), NUM2ULL(time));
+    gst_element_set_base_time(SELF(self), NUM2ULL(time));
     return Qnil;
 }
 
@@ -497,11 +499,11 @@ rb_gst_element_set_base_time(VALUE self, VALUE time)
  * Returns: a Gst::Index or nil when no index was set on the element.
  */
 static VALUE
-rb_gst_element_get_index (VALUE self)
+rb_gst_element_get_index(VALUE self)
 {
-    GstIndex *index = gst_element_get_index (RGST_ELEMENT (self));
+    GstIndex *index = gst_element_get_index(SELF(self));
 
-    return index != NULL ? RGST_INDEX_NEW (index)
+    return index != NULL ? RGST_INDEX_NEW(index)
         : Qnil;
 }
 
@@ -514,9 +516,9 @@ rb_gst_element_get_index (VALUE self)
  * Returns: self. 
  */
 static VALUE
-rb_gst_element_set_index (VALUE self, VALUE index)
+rb_gst_element_set_index(VALUE self, VALUE index)
 {
-    gst_element_set_index (RGST_ELEMENT (self), RGST_INDEX (index));
+    gst_element_set_index(SELF(self), RGST_INDEX(index));
     return self;
 }
 
@@ -530,11 +532,11 @@ rb_gst_element_set_index (VALUE self, VALUE index)
  * Returns: the requested Gst::Pad if found, otherwise nil.
  */
 static VALUE
-rb_gst_element_get_static_pad (VALUE self, VALUE name)
+rb_gst_element_get_static_pad(VALUE self, VALUE name)
 {
     GstPad *pad =
-        gst_element_get_static_pad (RGST_ELEMENT (self), RVAL2CSTR (name));
-    return pad != NULL ? RGST_PAD_NEW (pad) : Qnil;
+        gst_element_get_static_pad(SELF(self), RVAL2CSTR(name));
+    return pad != NULL ? RGST_PAD_NEW(pad) : Qnil;
 }
 
 /*
@@ -547,11 +549,11 @@ rb_gst_element_get_static_pad (VALUE self, VALUE name)
  * Returns: the requested Gst::Pad if found, otherwise nil.
  */
 static VALUE
-rb_gst_element_get_request_pad (VALUE self, VALUE name)
+rb_gst_element_get_request_pad(VALUE self, VALUE name)
 {
     GstPad *pad =
-        gst_element_get_request_pad (RGST_ELEMENT (self), RVAL2CSTR (name));
-    return pad != NULL ? RGST_PAD_NEW (pad) : Qnil;
+        gst_element_get_request_pad(SELF(self), RVAL2CSTR(name));
+    return pad != NULL ? RGST_PAD_NEW(pad) : Qnil;
 }
 
 /*
@@ -564,9 +566,9 @@ rb_gst_element_get_request_pad (VALUE self, VALUE name)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_release_request_pad (VALUE self, VALUE pad)
+rb_gst_element_release_request_pad(VALUE self, VALUE pad)
 {
-    gst_element_release_request_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    gst_element_release_request_pad(SELF(self), RGST_PAD(pad));
     return self;
 }
 
@@ -580,9 +582,9 @@ rb_gst_element_release_request_pad (VALUE self, VALUE pad)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_add_pad (VALUE self, VALUE pad)
+rb_gst_element_add_pad(VALUE self, VALUE pad)
 {
-    gst_element_add_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    gst_element_add_pad(SELF(self), RGST_PAD(pad));
     return self;
 }
 
@@ -595,9 +597,9 @@ rb_gst_element_add_pad (VALUE self, VALUE pad)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_remove_pad (VALUE self, VALUE pad)
+rb_gst_element_remove_pad(VALUE self, VALUE pad)
 {
-    gst_element_remove_pad (RGST_ELEMENT (self), RGST_PAD (pad));
+    gst_element_remove_pad(SELF(self), RGST_PAD(pad));
     return self;
 }
 
@@ -635,14 +637,14 @@ rb_gst_element_get_pad_templates(VALUE self)
     GList *list, *node;
     VALUE ary;
 
-    ary = rb_ary_new ();
+    ary = rb_ary_new();
 
     element_class = g_type_class_peek(CLASS2GTYPE(self));
     list = gst_element_class_get_pad_template_list(element_class);
     for (node = list; node != NULL; node = g_list_next(node)) {
-        rb_ary_push (ary, RGST_PAD_TEMPLATE_NEW(node->data));
+        rb_ary_push(ary, RGST_PAD_TEMPLATE_NEW(node->data));
     }
-    g_list_free (list);
+    g_list_free(list);
     return ary;
 }
 
@@ -655,9 +657,9 @@ rb_gst_element_get_pad_templates(VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_element_each_pad_template (VALUE self)
+rb_gst_element_each_pad_template(VALUE self)
 {
-    return rb_ary_yield (rb_gst_element_get_pad_templates (self));
+    return rb_ary_yield(rb_gst_element_get_pad_templates(self));
 }
 
 /*
@@ -673,7 +675,7 @@ static VALUE
 rb_gst_element_seek(VALUE self, VALUE rate, VALUE format, VALUE flags,
                     VALUE cur_type, gint64 cur, VALUE stop_type, VALUE stop)
 {
-    return CBOOL2RVAL(gst_element_seek(RGST_ELEMENT(self),
+    return CBOOL2RVAL(gst_element_seek(SELF(self),
                                        NUM2DBL(rate),
                                        RVAL2GENUM(format, GST_TYPE_FORMAT),
                                        RVAL2GFLAGS(flags, GST_TYPE_SEEK_FLAGS),
@@ -694,9 +696,9 @@ rb_gst_element_seek(VALUE self, VALUE rate, VALUE format, VALUE flags,
  * Returns: true if the element's state is locked.
  */
 static VALUE
-rb_gst_element_is_locked_state (VALUE self)
+rb_gst_element_is_locked_state(VALUE self)
 {
-    return CBOOL2RVAL (gst_element_is_locked_state (RGST_ELEMENT (self)));
+    return CBOOL2RVAL(gst_element_is_locked_state(SELF(self)));
 }
 
 /*
@@ -709,9 +711,9 @@ rb_gst_element_is_locked_state (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_set_locked_state (VALUE self, VALUE state)
+rb_gst_element_set_locked_state(VALUE self, VALUE state)
 {
-    gst_element_set_locked_state (RGST_ELEMENT (self), RVAL2CBOOL (state));
+    gst_element_set_locked_state(SELF(self), RVAL2CBOOL(state));
     return self;
 }
 
@@ -724,10 +726,10 @@ rb_gst_element_set_locked_state (VALUE self, VALUE state)
  * Returns: true if the element's state could be synced to the parent's state.
  */
 static VALUE
-rb_gst_element_sync_state_with_parent (VALUE self)
+rb_gst_element_sync_state_with_parent(VALUE self)
 {
     return
-        CBOOL2RVAL (gst_element_sync_state_with_parent (RGST_ELEMENT (self)));
+        CBOOL2RVAL(gst_element_sync_state_with_parent(SELF(self)));
 }
 
 /*
@@ -743,30 +745,30 @@ rb_gst_element_sync_state_with_parent (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_element_no_more_pads (VALUE self)
+rb_gst_element_no_more_pads(VALUE self)
 {
-    gst_element_no_more_pads (RGST_ELEMENT (self));
+    gst_element_no_more_pads(SELF(self));
     return self;
 }
 
 static VALUE 
-rb_gst_element_found_tag_sig (guint num, const GValue *values)
+rb_gst_element_found_tag_sig(guint num, const GValue *values)
 {
     GstElement *element, *source;
     GstTagList *tag_list;
 
-    element = g_value_get_object (&values[0]);
-    source = g_value_get_object (&values[1]);
-    tag_list = g_value_get_boxed (&values[2]);
+    element = g_value_get_object(&values[0]);
+    source = g_value_get_object(&values[1]);
+    tag_list = g_value_get_boxed(&values[2]);
 
     return rb_ary_new3(3,
-                       RGST_ELEMENT_NEW(element),
-                       RGST_ELEMENT_NEW(source),
+                       GST_ELEMENT2RVAL(element),
+                       GST_ELEMENT2RVAL(source),
                        GST_STRUCT2RVAL(tag_list));
 }
 
 void
-Init_gst_element (void)
+Init_gst_element(void)
 {
     table.type = GST_TYPE_ELEMENT;
     table.instance2robj = instance2robj;
@@ -781,53 +783,53 @@ Init_gst_element (void)
     rb_define_singleton_method(rb_cGstElement, "each_pad_template",
                                rb_gst_element_each_pad_template, 0);
 
-    rb_define_method (rb_cGstElement, "set_state", rb_gst_element_set_state, 1);
-    rb_define_method (rb_cGstElement, "state", rb_gst_element_get_state, 0);
-    rb_define_method (rb_cGstElement, "stop", rb_gst_element_stop, 0);
-    rb_define_method (rb_cGstElement, "ready", rb_gst_element_ready, 0);
-    rb_define_method (rb_cGstElement, "pause", rb_gst_element_pause, 0);
-    rb_define_method (rb_cGstElement, "play", rb_gst_element_play, 0);
-    rb_define_method (rb_cGstElement, "stopped?", rb_gst_element_is_stopped, 0);
-    rb_define_method (rb_cGstElement, "ready?", rb_gst_element_is_ready, 0);
-    rb_define_method (rb_cGstElement, "paused?", rb_gst_element_is_paused, 0);
-    rb_define_method (rb_cGstElement, "playing?", rb_gst_element_is_playing, 0);
-    rb_define_method (rb_cGstElement, "wait", rb_gst_element_wait, 0);
-    rb_define_method (rb_cGstElement, "link", rb_gst_element_link, 1);
-    rb_define_alias (rb_cGstElement, ">>", "link");
-    rb_define_method (rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
-    rb_define_method (rb_cGstElement, "provides_clock?", rb_gst_element_provides_clock, 0);
+    rb_define_method(rb_cGstElement, "set_state", rb_gst_element_set_state, 1);
+    rb_define_method(rb_cGstElement, "state", rb_gst_element_get_state, 0);
+    rb_define_method(rb_cGstElement, "stop", rb_gst_element_stop, 0);
+    rb_define_method(rb_cGstElement, "ready", rb_gst_element_ready, 0);
+    rb_define_method(rb_cGstElement, "pause", rb_gst_element_pause, 0);
+    rb_define_method(rb_cGstElement, "play", rb_gst_element_play, 0);
+    rb_define_method(rb_cGstElement, "stopped?", rb_gst_element_is_stopped, 0);
+    rb_define_method(rb_cGstElement, "ready?", rb_gst_element_is_ready, 0);
+    rb_define_method(rb_cGstElement, "paused?", rb_gst_element_is_paused, 0);
+    rb_define_method(rb_cGstElement, "playing?", rb_gst_element_is_playing, 0);
+    rb_define_method(rb_cGstElement, "wait", rb_gst_element_wait, 0);
+    rb_define_method(rb_cGstElement, "link", rb_gst_element_link, 1);
+    rb_define_alias(rb_cGstElement, ">>", "link");
+    rb_define_method(rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
+    rb_define_method(rb_cGstElement, "provides_clock?", rb_gst_element_provides_clock, 0);
     rb_define_alias(rb_cGstElement, "provide_clock?", "provides_clock?");
-    rb_define_method (rb_cGstElement, "requires_clock?", rb_gst_element_requires_clock, 0);
+    rb_define_method(rb_cGstElement, "requires_clock?", rb_gst_element_requires_clock, 0);
     rb_define_alias(rb_cGstElement, "require_clock?", "requires_clock?");
-    rb_define_method (rb_cGstElement, "clock", rb_gst_element_get_clock, 0);
-    rb_define_method (rb_cGstElement, "set_clock", rb_gst_element_set_clock, 1);
-    rb_define_method (rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);
-    rb_define_method (rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
-    rb_define_method (rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
-    rb_define_method (rb_cGstElement, "pads", rb_gst_element_get_pads, 0);
-    rb_define_method (rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
-    rb_define_method (rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);
-    rb_define_method (rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);
-    rb_define_method (rb_cGstElement, "release_request_pad",
-                      rb_gst_element_release_request_pad, 1);
-    rb_define_method (rb_cGstElement, "link_pads", rb_gst_element_link_pads, 1);
-    rb_define_method (rb_cGstElement, "unlink_pads", rb_gst_element_unlink_pads, 1);
-    rb_define_method (rb_cGstElement, "add_pad", rb_gst_element_add_pad, 1);
-    rb_define_method (rb_cGstElement, "remove_pad", rb_gst_element_remove_pad, 1);
-    rb_define_method (rb_cGstElement, "indexable?", rb_gst_element_is_indexable, 0);
-    /* rb_define_method (rb_cGstElement, "query", rb_gst_element_query, 1); */
-    rb_define_method (rb_cGstElement, "send_event", rb_gst_element_send_event, 1);
-    rb_define_method (rb_cGstElement, "seek", rb_gst_element_seek, 7);
-    rb_define_method (rb_cGstElement, "index", rb_gst_element_get_index, 0);
-    rb_define_method (rb_cGstElement, "set_index", rb_gst_element_set_index, 1);
-    rb_define_method (rb_cGstElement, "locked_state?", rb_gst_element_is_locked_state, 0);
-    rb_define_method (rb_cGstElement, "set_locked_state", rb_gst_element_set_locked_state,
-                      1);
-    rb_define_method (rb_cGstElement, "sync_state_with_parent",
-                      rb_gst_element_sync_state_with_parent, 0);
-    rb_define_method (rb_cGstElement, "no_more_pads", rb_gst_element_no_more_pads, 0);
+    rb_define_method(rb_cGstElement, "clock", rb_gst_element_get_clock, 0);
+    rb_define_method(rb_cGstElement, "set_clock", rb_gst_element_set_clock, 1);
+    rb_define_method(rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);
+    rb_define_method(rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
+    rb_define_method(rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
+    rb_define_method(rb_cGstElement, "pads", rb_gst_element_get_pads, 0);
+    rb_define_method(rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
+    rb_define_method(rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);
+    rb_define_method(rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);
+    rb_define_method(rb_cGstElement, "release_request_pad",
+                     rb_gst_element_release_request_pad, 1);
+    rb_define_method(rb_cGstElement, "link_pads", rb_gst_element_link_pads, 1);
+    rb_define_method(rb_cGstElement, "unlink_pads", rb_gst_element_unlink_pads, 1);
+    rb_define_method(rb_cGstElement, "add_pad", rb_gst_element_add_pad, 1);
+    rb_define_method(rb_cGstElement, "remove_pad", rb_gst_element_remove_pad, 1);
+    rb_define_method(rb_cGstElement, "indexable?", rb_gst_element_is_indexable, 0);
+    /* rb_define_method(rb_cGstElement, "query", rb_gst_element_query, 1); */
+    rb_define_method(rb_cGstElement, "send_event", rb_gst_element_send_event, 1);
+    rb_define_method(rb_cGstElement, "seek", rb_gst_element_seek, 7);
+    rb_define_method(rb_cGstElement, "index", rb_gst_element_get_index, 0);
+    rb_define_method(rb_cGstElement, "set_index", rb_gst_element_set_index, 1);
+    rb_define_method(rb_cGstElement, "locked_state?", rb_gst_element_is_locked_state, 0);
+    rb_define_method(rb_cGstElement, "set_locked_state", rb_gst_element_set_locked_state,
+                     1);
+    rb_define_method(rb_cGstElement, "sync_state_with_parent",
+                     rb_gst_element_sync_state_with_parent, 0);
+    rb_define_method(rb_cGstElement, "no_more_pads", rb_gst_element_no_more_pads, 0);
 
-    G_DEF_SETTERS (rb_cGstElement);
+    G_DEF_SETTERS(rb_cGstElement);
 
     G_DEF_CLASS(GST_TYPE_STATE, "State", mGst);
     G_DEF_CONSTANTS(mGst, GST_TYPE_STATE, "GST_");
@@ -840,9 +842,9 @@ Init_gst_element (void)
 
     /*
      * TODO:
-     * gst_element_clock_wait () 
+     * gst_element_clock_wait() 
      */
 
-    G_DEF_SIGNAL_FUNC (rb_cGstElement, "found-tag", 
-                       (GValToRValSignalFunc)rb_gst_element_found_tag_sig);
+    G_DEF_SIGNAL_FUNC(rb_cGstElement, "found-tag", 
+                      (GValToRValSignalFunc)rb_gst_element_found_tag_sig);
 }
