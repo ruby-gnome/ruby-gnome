@@ -228,6 +228,43 @@ class Inspector
     puts
   end
 
+  def print_index_info(element)
+    if element.indexable?
+      puts("Indexing capabilities:")
+      puts("  element can do indexing")
+    else
+      puts("Element has no indexing capabilities.")
+    end
+    puts
+  end
+
+  def print_pad_info(element)
+    puts("Pads:")
+    pads = element.pads
+    if pads.empty?
+      puts("  none")
+      return
+    end
+
+    pads.each do |pad|
+      prefix("#{@prefix}  ") do
+        puts("#{pad.direction.nick.upcase}: '#{pad.name}'")
+        prefix("#{@prefix}  ") do
+          template = pad.template
+          puts("Pad Template: '#{template.name}'") if template
+
+          caps = pad.caps
+          break if caps.nil?
+          puts("Capabilities:")
+          prefix("#{@prefix}  ") do
+            print_caps(caps)
+          end
+        end
+      end
+    end
+    puts
+  end
+
   def print_element_factory(factory, print_names)
     if !factory.load!
       puts("element plugin (#{factory.name}) couldn't be loaded\n")
