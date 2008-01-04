@@ -796,7 +796,9 @@ Init_gst_element (void)
     rb_define_alias (rb_cGstElement, ">>", "link");
     rb_define_method (rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
     rb_define_method (rb_cGstElement, "provides_clock?", rb_gst_element_provides_clock, 0);
+    rb_define_alias(rb_cGstElement, "provide_clock?", "provides_clock?");
     rb_define_method (rb_cGstElement, "requires_clock?", rb_gst_element_requires_clock, 0);
+    rb_define_alias(rb_cGstElement, "require_clock?", "requires_clock?");
     rb_define_method (rb_cGstElement, "clock", rb_gst_element_get_clock, 0);
     rb_define_method (rb_cGstElement, "set_clock", rb_gst_element_set_clock, 1);
     rb_define_method (rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);

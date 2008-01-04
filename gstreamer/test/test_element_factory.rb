@@ -18,7 +18,7 @@ class TestElementFactory < Test::Unit::TestCase
   def test_create
     play_bin = Gst::ElementFactory.find("playbin")
     assert_not_nil(play_bin)
-    assert_equal("playbin0", play_bin.create.name)
+    assert_match(/\Aplaybin\d+\z/, play_bin.create.name)
   end
 
   private

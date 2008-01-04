@@ -189,6 +189,45 @@ class Inspector
     end
   end
 
+  def print_element_flag_info(element)
+    puts("Element Flags")
+    puts("  no flags set")
+    puts
+
+    return unless element.is_a?(Gst::Bin)
+    puts("Bin Flags:")
+    puts("  no flags set")
+    puts
+  end
+
+  def print_implementation_info(element)
+    puts("Element Implementation:")
+    puts("  not supported")
+    puts
+  end
+
+  def print_clocking_info(element)
+    if !element.require_clock? and
+        !element.provide_clock? and
+        element.clock.nil?
+      puts("Element has no clocking capabilities.")
+      puts
+      return
+    end
+
+    puts("Clocking Interaction:")
+    puts("  element requires a clock") if element.require_clock?
+    if element.provide_clock?
+      clock = element.clock
+      if clock.nil?
+        puts("  element is supported tot provide a clock but returned nil")
+      else
+        puts("  element provides a clock: #{clock.name}")
+      end
+    end
+    puts
+  end
+
   def print_element_factory(factory, print_names)
     if !factory.load!
       puts("element plugin (#{factory.name}) couldn't be loaded\n")

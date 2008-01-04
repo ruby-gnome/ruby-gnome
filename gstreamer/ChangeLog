@@ -1,5 +1,8 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_element.rb, src/rbgst-element.c: added #require_clock?
+	and #provide_clock?.
+
 	* sample/gst-inspect.rb: defined Inspector class.
 
 	* test/test_value.rb, src/rbgst-value.c: supported GST_TYPE_LIST.
