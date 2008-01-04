@@ -1,3 +1,7 @@
+2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobject.h (GPTR2RVAL, RVAL2GPTR): added.
+
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: don't use ftools.

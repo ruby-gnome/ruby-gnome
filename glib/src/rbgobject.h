@@ -92,6 +92,9 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 #define GENUM2RVAL(n, gtype)    (rbgobj_make_enum(n, gtype))
 #define GFLAGS2RVAL(n, gtype)   (rbgobj_make_flags(n, gtype))
 
+#define RVAL2GPTR(object)       (rbgobj_ptr2cptr(object))
+#define GPTR2RVAL(ptr, gtype)   (rbgobj_ptr_new(gtype, ptr))
+
 #define G_DEF_CONSTANTS(mod, type, strip_prefix) \
 	rbgobj_add_constants(mod, type, strip_prefix)
 #define G_RENAME_CONSTANT(orig, alt) \
