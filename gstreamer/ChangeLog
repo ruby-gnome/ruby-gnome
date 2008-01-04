@@ -1,5 +1,7 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gst-inspect.rb: defined Inspector class.
+
 	* test/test_value.rb, src/rbgst-value.c: supported GST_TYPE_LIST.
 
 	* test/test_caps.rb, src/rbgst-caps.c: added #each and #[].

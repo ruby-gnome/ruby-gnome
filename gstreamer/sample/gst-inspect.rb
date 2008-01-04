@@ -36,201 +36,230 @@ def parse(argv)
   options
 end
 
-def each_feature
-  registry = Gst::Registry.default
-  registry.plugins.sort_by {|plugin| plugin.name}.each do |plugin|
-    features = registry.get_features(plugin.name)
-    features.sort_by {|feature| feature.name}.each do |feature|
-      yield(plugin, feature)
-    end
+class Inspector
+  def initialize(print_all)
+    @print_all = print_all
+    @prefix = ""
   end
-end
 
-def print_factory_details_info(factory, prefix)
-  rank_name = factory.rank.name
-  rank_name ||= "unknown"
-  rank_name = rank_name.gsub(/GST_RANK_/, '').downcase
-  [
-   "Factory Details:",
-   "  Long name:\t#{factory.long_name}",
-   "  Class:\t#{factory.klass}",
-   "  Description:\t#{factory.description}",
-   "  Author(s):\t#{factory.author}",
-   "  Rank:\t\t#{rank_name} (#{factory.rank.to_i})",
-   "",
-  ].each do |line|
-    puts("#{prefix}#{line}")
+  def print
+    print_list
   end
-end
 
-def print_plugin_info(name, prefix)
-  return if name.nil?
-  registry = Gst::Registry.default
-  plugin = registry.find_plugin(name)
-  return if plugin.nil?
-
-  [
-   "Plugin Details:",
-   "  Name:\t\t\t#{plugin.name}",
-   "  Description:\t\t#{plugin.description}",
-   "  Filename:\t\t#{plugin.filename || '(null)'}",
-   "  Version:\t\t#{plugin.version}",
-   "  License:\t\t#{plugin.license}",
-   "  Source module:\t#{plugin.source}",
-   "  Binary package:\t#{plugin.package}",
-   "  Origin URL:\t\t#{plugin.origin}",
-   "",
-  ].each do |line|
-    puts("#{prefix}#{line}")
-  end
-end
-
-def print_hierarchy(element, prefix)
-  ancestors = []
-  type = element.gtype
-  while type
-    ancestors << type
-    type = type.parent
-  end
-  ancestors.reverse.each_with_index do |klass, i|
-    if i.zero?
-      mark = ""
+  private
+  def puts(*args)
+    if args.empty?
+      super(@prefix)
     else
-      mark = " " + ("      " * (i - 1)) + "+----"
-    end
-    puts("#{prefix}#{mark}#{klass.name}")
-  end
-  puts(prefix)
-end
-
-def print_interfaces(element, prefix)
-  interfaces = element.gtype.interfaces
-  return if interfaces.empty?
-
-  output = ["Implemented Interfaces:"]
-  interfaces.each do |interface|
-    output << "  #{interface.name}"
-  end
-  output << ""
-  output.each do |line|
-    puts("#{prefix}#{line}")
-  end
-end
-
-def print_caps(caps, prefix)
-  if caps.any?
-    puts("#{prefix}ANY")
-    return
-  end
-  if caps.empty?
-    puts("#{prefix}EMPTY")
-    return
-  end
-
-  caps.each do |structure|
-    puts("#{prefix}#{structure.name}")
-    structure.each do |key, value|
-      puts("%s  %15s: %s" % [prefix, key, value.inspect])
+      super(*(args.collect {|arg| "#{@prefix}#{arg}"}))
     end
   end
-end
 
-def print_pad_template_info(template, prefix)
-  puts("#{prefix}  #{template.direction.nick.upcase}: '#{template.name}'")
-  if template.presence == Gst::Pad::REQUEST
-    puts("#{prefix}    Availability: On request")
-  else
-    puts("#{prefix}    Availability: #{template.presence.nick.capitalize}")
-  end
-  puts(prefix)
-
-  static_caps = template.caps
-  return if static_caps.description.nil?
-  puts("#{prefix}    Capabilities:")
-  print_caps(static_caps.to_caps, "#{prefix}      ")
-  puts(prefix)
-end
-
-def print_pad_templates_info(element, factory, prefix)
-  puts("#{prefix}Pad Templates:")
-  templates = factory.pad_templates
-
-  if templates.empty?
-    puts("#{prefix}  none")
-    return
+  def prefix(new_prefix)
+    prefix, @prefix = @prefix, new_prefix
+    yield
+  ensure
+    @prefix = prefix
   end
 
-  templates.each do |template|
-    print_pad_template_info(template, prefix)
-  end
-end
-
-def print_element_factory(factory, print_names)
-  if !factory.load!
-    puts("element plugin (#{factory.name}) couldn't be loaded\n")
-    return
-  end
-
-  element = factory.create
-
-  prefix = print_names ? "#{factory.name}: " : ""
-
-  print_factory_details_info(factory, prefix)
-  print_plugin_info(factory.plugin_name, prefix)
-
-  print_hierarchy(element, prefix)
-  print_interfaces(element, prefix)
-
-  print_pad_templates_info(element, factory, prefix)
-  print_element_flag_info(element, prefix)
-  print_implementation_info(element, prefix)
-  print_clocking_info(element, prefix)
-  print_index_info(element, prefix)
-  print_pad_info(element, prefix)
-  print_element_properties_info(element, prefix)
-  print_signal_info(element, prefix)
-  print_children_info(element, prefix)
-end
-
-def print_feature(plugin, feature)
-  case feature
-  when Gst::ElementFactory
-    puts("#{plugin.name}:  #{feature.name}: #{feature.long_name}")
-  when Gst::IndexFactory
-    puts("#{plugin.name}:  #{feature.name}: #{feature.description}")
-  when Gst::TypeFindFactory
-    if feature.extensions.empty?
-      message = "no extensions"
-    else
-      message = feature.extensions.join(", ")
-    end
-    puts("#{plugin.name}: #{feature.name}: #{message}")
-  else
-    puts("#{plugin.name}:  #{feature.name} (#{feature.gtype})")
-  end
-end
-
-def print_list(print_all)
-  plugins = {}
-  n_features = 0
-  each_feature do |plugin, feature|
-    plugins[plugin.name] = nil
-    n_features += 1
-    if print_all
-      print_element_factory(feature, true) if feature.is_a?(Gst::ElementFactory)
-    else
-      print_feature(plugin, feature)
+  def each_feature
+    registry = Gst::Registry.default
+    registry.plugins.sort_by {|plugin| plugin.name}.each do |plugin|
+      features = registry.get_features(plugin.name)
+      features.sort_by {|feature| feature.name}.each do |feature|
+        yield(plugin, feature)
+      end
     end
   end
-  puts
-  puts("Total count: #{plugins.size} plugins, #{n_features} features")
-end
 
-def show_all
+  def print_factory_details_info(factory)
+    rank_name = factory.rank.name
+    rank_name ||= "unknown"
+    rank_name = rank_name.gsub(/GST_RANK_/, '').downcase
+
+    puts("Factory Details:",
+         "  Long name:\t#{factory.long_name}",
+         "  Class:\t#{factory.klass}",
+         "  Description:\t#{factory.description}",
+         "  Author(s):\t#{factory.author}",
+         "  Rank:\t\t#{rank_name} (#{factory.rank.to_i})",
+         "")
+  end
+
+  def print_plugin_info(name)
+    return if name.nil?
+    registry = Gst::Registry.default
+    plugin = registry.find_plugin(name)
+    return if plugin.nil?
+
+    puts("Plugin Details:",
+         "  Name:\t\t\t#{plugin.name}",
+         "  Description:\t\t#{plugin.description}",
+         "  Filename:\t\t#{plugin.filename || '(null)'}",
+         "  Version:\t\t#{plugin.version}",
+         "  License:\t\t#{plugin.license}",
+         "  Source module:\t#{plugin.source}",
+         "  Binary package:\t#{plugin.package}",
+         "  Origin URL:\t\t#{plugin.origin}",
+         "")
+  end
+
+  def print_hierarchy(element)
+    ancestors = []
+    type = element.gtype
+    while type
+      ancestors << type
+      type = type.parent
+    end
+    ancestors.reverse.each_with_index do |klass, i|
+      if i.zero?
+        mark = ""
+      else
+        mark = " " + ("      " * (i - 1)) + "+----"
+      end
+      puts("#{mark}#{klass.name}")
+    end
+    puts
+  end
+
+  def print_interfaces(element)
+    interfaces = element.gtype.interfaces
+    return if interfaces.empty?
+
+    puts("Implemented Interfaces:")
+    interfaces.each do |interface|
+      puts("  #{interface.name}")
+    end
+    puts
+  end
+
+  def print_caps(caps)
+    if caps.any?
+      puts("ANY")
+      return
+    end
+    if caps.empty?
+      puts("EMPTY")
+      return
+    end
+
+    caps.each do |structure|
+      puts(structure.name)
+      structure.each do |key, value|
+        puts("  %15s: %s" % [key, value.inspect])
+      end
+    end
+  end
+
+  def print_pad_template_info(template)
+    prefix("#{@prefix}  ") do
+      puts("#{template.direction.nick.upcase}: '#{template.name}'")
+      prefix("#{@prefix}  ") do
+        if template.presence == Gst::Pad::REQUEST
+          puts("Availability: On request")
+        else
+          puts("Availability: #{template.presence.nick.capitalize}")
+        end
+      end
+    end
+    puts
+
+    static_caps = template.caps
+    return if static_caps.description.nil?
+    prefix("#{@prefix}    ") do
+      puts("Capabilities:")
+      prefix("#{@prefix}  ") do
+        print_caps(static_caps.to_caps)
+      end
+    end
+    puts
+  end
+
+  def print_pad_templates_info(element, factory)
+    puts("Pad Templates:")
+    templates = factory.pad_templates
+
+    if templates.empty?
+      puts("  none")
+      return
+    end
+
+    templates.each do |template|
+      print_pad_template_info(template)
+    end
+  end
+
+  def print_element_factory(factory, print_names)
+    if !factory.load!
+      puts("element plugin (#{factory.name}) couldn't be loaded\n")
+      return
+    end
+
+    element = factory.create
+
+    prefix(print_names ? "#{factory.name}: " : "") do
+      print_factory_details_info(factory)
+      print_plugin_info(factory.plugin_name)
+
+      print_hierarchy(element)
+      print_interfaces(element)
+
+      print_pad_templates_info(element, factory)
+      print_element_flag_info(element)
+      print_implementation_info(element)
+      print_clocking_info(element)
+      print_index_info(element)
+      print_pad_info(element)
+      print_element_properties_info(element)
+      print_signal_info(element)
+      print_children_info(element)
+    end
+  end
+
+  def print_feature(plugin, feature)
+    prefix("#{plugin.name}: #{feature.name}") do
+      case feature
+      when Gst::ElementFactory
+        puts(": #{feature.long_name}")
+      when Gst::IndexFactory
+        puts(": #{feature.description}")
+      when Gst::TypeFindFactory
+        if feature.extensions.empty?
+          message = "no extensions"
+        else
+          message = feature.extensions.join(", ")
+        end
+        puts(": #{message}")
+      else
+        puts(" (#{feature.gtype})")
+      end
+    end
+  end
+
+  def print_list
+    plugins = {}
+    n_features = 0
+    each_feature do |plugin, feature|
+      plugins[plugin.name] = nil
+      n_features += 1
+      if @print_all
+        if feature.is_a?(Gst::ElementFactory)
+          print_element_factory(feature, true)
+        end
+      else
+        print_feature(plugin, feature)
+      end
+    end
+    puts
+    puts("Total count: #{plugins.size} plugins, #{n_features} features")
+  end
+
+  def show_all
+  end
 end
 
 options = parse(argv)
-print_list(options.print_all)
+Inspector.new(options.print_all).print
 
 __END__
 $prefix = 0
