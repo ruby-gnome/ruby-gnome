@@ -329,6 +329,17 @@ class Inspector
     puts
   end
 
+  def print_children_info(element)
+    return unless element.is_a?(Gst::Bin)
+    children = element.children
+    return if children.empty?
+
+    puts("Children:")
+    children.each do |child|
+      puts("  #{child.name}")
+    end
+  end
+
   def print_element_factory(factory, print_names)
     if !factory.load!
       puts("element plugin (#{factory.name}) couldn't be loaded\n")
