@@ -265,6 +265,35 @@ class Inspector
     puts
   end
 
+  def print_element_properties_info(element)
+    puts("Element Properties:")
+    properties = element.class.properties
+    if properties.empty?
+      puts(" none")
+      return
+    end
+
+    properties.each do |name|
+      param = element.class.property(name)
+      puts("  %-20s: %s" % [param.name, param.blurb])
+
+      flags = []
+      flags << "readable" if param.readable?
+      flags << "writable" if param.writable?
+      # flags << "controllable" if param.controllable?
+
+      prefix("#{@prefix}#{' ' * 23} ") do
+        puts("flags: #{flags.join(', ')}")
+        type_name = param.value_type.name
+        current_value = element.get_property(name)
+        value = "Default: #{param.default} Current: #{current_value.inspect}"
+        write_only = param.readable? ? "" : " Write only"
+        puts("#{type_name}. #{value}#{write_only}")
+      end
+    end
+    puts
+  end
+
   def print_element_factory(factory, print_names)
     if !factory.load!
       puts("element plugin (#{factory.name}) couldn't be loaded\n")
