@@ -47,7 +47,7 @@ get_direction(VALUE self)
 static VALUE
 get_caps(VALUE self)
 {
-    return GST_CAPS2RVAL(gst_static_pad_template_get_caps(SELF(self)));
+    return GST_STATIC_CAPS2RVAL(gst_static_pad_template_get_caps(SELF(self)));
 }
 
 void

@@ -144,7 +144,7 @@ def print_pad_template_info(template, prefix)
   end
   puts(prefix)
 
-  return if template.caps.string.nil?
+  return if template.caps.description.nil?
   puts("#{prefix}    Capabilities:")
   print_caps(template.caps, prefix)
 end

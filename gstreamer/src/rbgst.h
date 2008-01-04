@@ -69,6 +69,8 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
+#define RVAL2GST_STATIC_CAPS(obj) ((GstStaticCaps *)RVAL2GPTR(obj))
+#define GST_STATIC_CAPS2RVAL(obj) (GPTR2RVAL(obj, GST_TYPE_STATIC_CAPS))
 
 #define RVAL2GST_STATE(obj)     (RVAL2GENUM(obj, GST_TYPE_STATE))
 #define GST_STATE2RVAL(obj)     (GENUM2RVAL(obj, GST_TYPE_STATE))

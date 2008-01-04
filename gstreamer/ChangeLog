@@ -1,5 +1,7 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_static_pad.rb, src/rbgst-static-caps.c: added.
+
 	* test/test_pad_template.rb: renamed to ...
 	* test/test_static_pad_template.rb: ... this.
 
