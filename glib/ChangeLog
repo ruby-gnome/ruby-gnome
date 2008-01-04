@@ -1,5 +1,7 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (RARRAY_PTR, RARRAY_LEN): defined.
+
 	* src/rbgobject.h (GPTR2RVAL, RVAL2GPTR): added.
 
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>

@@ -26,10 +26,13 @@ extern "C" {
 #define RBGLIB_MICRO_VERSION 0
 
 #ifndef RSTRING_PTR
-#define RSTRING_PTR(s) (RSTRING(s)->ptr)
+#  define RSTRING_PTR(s) (RSTRING(s)->ptr)
+#  define RSTRING_LEN(s) (RSTRING(s)->len)
 #endif
-#ifndef RSTRING_LEN
-#define RSTRING_LEN(s) (RSTRING(s)->len)
+
+#ifndef RARRAY_PTR
+#  define RARRAY_PTR(s) (RARRAY(s)->ptr)
+#  define RARRAY_LEN(s) (RARRAY(s)->len)
 #endif
 
 #if ! GLIB_CHECK_VERSION(2,4,0)
