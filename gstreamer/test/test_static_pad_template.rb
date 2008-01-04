@@ -1,4 +1,4 @@
-class TestPadTemplate < Test::Unit::TestCase
+class TestStaticPadTemplate < Test::Unit::TestCase
   priority :must
   def test_reader
     templates = file_src.pad_templates.collect do |template|

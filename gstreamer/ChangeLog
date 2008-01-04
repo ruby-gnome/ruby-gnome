@@ -1,5 +1,8 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_pad_template.rb: renamed to ...
+	* test/test_static_pad_template.rb: ... this.
+
 	* sample/gst-inspect.rb: implemented print_pad_templates_info.
 
 	* src/rbgst-pad-template.c, src/rbgst-static-pad-template.c: used
