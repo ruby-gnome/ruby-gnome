@@ -28,6 +28,12 @@ get_description(VALUE self)
     return CSTR2RVAL(SELF(self)->string);
 }
 
+static VALUE
+get(VALUE self)
+{
+    return GST_CAPS2RVAL(gst_static_caps_get(SELF(self)));
+}
+
 void
 Init_gst_static_caps(void)
 {
@@ -36,6 +42,8 @@ Init_gst_static_caps(void)
     rb_cGstStaticCaps = G_DEF_CLASS(GST_TYPE_STATIC_CAPS, "StaticCaps", mGst);
 
     rb_define_method(rb_cGstStaticCaps, "description", get_description, 0);
+    rb_define_method(rb_cGstStaticCaps, "get", get, 0);
+    rb_define_alias(rb_cGstStaticCaps, "to_caps", "get");
 
     G_DEF_SETTERS(rb_cGstStaticCaps);
 }

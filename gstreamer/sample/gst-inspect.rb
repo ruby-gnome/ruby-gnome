@@ -144,9 +144,10 @@ def print_pad_template_info(template, prefix)
   end
   puts(prefix)
 
-  return if template.caps.description.nil?
+  static_caps = template.caps
+  return if static_caps.description.nil?
   puts("#{prefix}    Capabilities:")
-  print_caps(template.caps, prefix)
+  print_caps(static_caps.to_caps, prefix)
 end
 
 def print_pad_templates_info(element, factory, prefix)
