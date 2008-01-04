@@ -294,6 +294,41 @@ class Inspector
     puts
   end
 
+  def print_signal_info(element, signal)
+    args = ["object(#{element.class})"]
+    signal.param_types.each_with_index do |name, i|
+      args << "arg#{i}(#{name})"
+    end
+    args = args.join(", ")
+    signature = "{|#{args}| ...} # => #{signal.return_type}"
+    puts("  #{signal.name.inspect}: #{signature}")
+  end
+
+  def print_signals_info(element)
+    signals = []
+    actions = []
+    element.class.signals.each do |name|
+      signal = element.class.signal(name)
+      next if signal.owner >= Gst::Element
+      if signal.action?
+        actions << signal
+      else
+        signals << signal
+      end
+    end
+
+    [[signals, "Signals"],
+     [actions, "Actions"]].each do |target_signals, description|
+      unless target_signals.empty?
+        puts("Element #{description}:")
+        target_signals.each do |signal|
+          print_signal_info(element, signal)
+        end
+      end
+    end
+    puts
+  end
+
   def print_element_factory(factory, print_names)
     if !factory.load!
       puts("element plugin (#{factory.name}) couldn't be loaded\n")
@@ -316,7 +351,7 @@ class Inspector
       print_index_info(element)
       print_pad_info(element)
       print_element_properties_info(element)
-      print_signal_info(element)
+      print_signals_info(element)
       print_children_info(element)
     end
   end

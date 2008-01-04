@@ -1,5 +1,7 @@
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gst-inspect.rb: implemented print_signals_info.
+
 	* sample/gst-inspect.rb: implemented print_element_properties_info.
 
 	* sample/gst-inspect.rb: implemented print_pad_info.
