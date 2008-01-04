@@ -128,8 +128,9 @@ def print_caps(caps, prefix)
   end
 
   caps.each do |structure|
+    puts("#{prefix}#{structure.name}")
     structure.each do |key, value|
-      puts("#{prefix}#{structure.name}")
+      puts("%s  %15s: %s" % [prefix, key, value.inspect])
     end
   end
 end
@@ -146,7 +147,8 @@ def print_pad_template_info(template, prefix)
   static_caps = template.caps
   return if static_caps.description.nil?
   puts("#{prefix}    Capabilities:")
-  print_caps(static_caps.to_caps, prefix)
+  print_caps(static_caps.to_caps, "#{prefix}      ")
+  puts(prefix)
 end
 
 def print_pad_templates_info(element, factory, prefix)

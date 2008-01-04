@@ -69,6 +69,7 @@ Init_gst_classes (void)
     extern void Init_gst_tag_setter (void);
     extern void Init_gst_thread (void);
     extern void Init_gst_typefindfactory (void);
+    extern void Init_gst_value(void);
     extern void Init_gst_xml (void);
 
 #if defined(HAVE_GST_OVERLAY)
@@ -108,6 +109,7 @@ Init_gst_classes (void)
     Init_gst_tag ();
     Init_gst_tag_setter ();
     Init_gst_typefindfactory ();
+    Init_gst_value();
     Init_gst_xml ();
 
     Init_gst_mini_object();
