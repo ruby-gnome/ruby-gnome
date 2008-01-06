@@ -31,6 +31,11 @@ class TestValue < Test::Unit::TestCase
     assert_equal("abcd", fourcc.to_s)
   end
 
+  def test_fraction_range_new
+    assert_equal("[ 2/1, 3/4 ]",
+                 Gst::FractionRange.new(Rational(2, 1), Rational(3, 4)).to_s)
+  end
+
   def test_fraction_range
     assert_equal([Rational(0, 1), Rational(2147483647, 1)],
                  ffmpeg_color_space_caps[0]["framerate"].to_a)

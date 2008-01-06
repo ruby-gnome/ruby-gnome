@@ -439,6 +439,7 @@ Init_gst_value(void)
 
 
     fraction_table.type = GST_TYPE_FRACTION;
+    fraction_table.klass = rb_const_get(rb_cObject, rb_intern("Rational"));
     fraction_table.rvalue2gvalue = fraction_rvalue2gvalue;
     fraction_table.gvalue2rvalue = fraction_gvalue2rvalue;
 
