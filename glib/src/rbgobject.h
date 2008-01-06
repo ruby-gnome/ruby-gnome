@@ -230,6 +230,7 @@ extern GType g_poll_fd_get_type(void);
 /* rbgobj_convert.c */
 typedef struct {
     GType type;
+    VALUE klass;
     VALUE (*get_superclass)(void);
     void (*type_init_hook)(VALUE);
     void (*rvalue2gvalue)(VALUE val, GValue *result);

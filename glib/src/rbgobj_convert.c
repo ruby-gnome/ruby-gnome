@@ -12,18 +12,23 @@
 #include "rbgobject.h"
 #include "rbgprivate.h"
 
-static GHashTable *tables;
+static GHashTable *tables, *class_to_g_type_map;
 
 void
 Init_gobject_convert(void)
 {
     tables = g_hash_table_new(g_int_hash, g_int_equal);
+    class_to_g_type_map = g_hash_table_new(g_int_hash, g_int_equal);
 }
 
 void
 rbgobj_convert_define(RGConvertTable *table)
 {
     g_hash_table_insert(tables, &(table->type), table);
+    if (table->klass && !NIL_P(table->klass)) {
+        g_hash_table_insert(class_to_g_type_map,
+                            &(table->klass), &(table->type));
+    }
 }
 
 RGConvertTable *
@@ -97,7 +102,12 @@ rbgobj_convert_gvalue2rvalue(GType type, const GValue *value, VALUE *result)
 GType
 rbgobj_convert_rvalue2gtype(VALUE value)
 {
-    return 0; /* FIXME */
+    VALUE klass;
+    GType *result;
+
+    klass = rb_class_of(value);
+    result = g_hash_table_lookup(class_to_g_type_map, &klass);
+    return result ? *result : 0;
 }
 
 gboolean
