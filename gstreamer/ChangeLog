@@ -1,6 +1,6 @@
 2008-01-06  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/rbgst-value.c: supported GstIntRange.
+	* test/test_value.rb, src/rbgst-value.c: supported GstIntRange.
 
 2008-01-04  Kouhei Sutou  <kou@cozmixng.org>
 
