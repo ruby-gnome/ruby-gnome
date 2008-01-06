@@ -1,5 +1,8 @@
 2008-01-06  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-mini-object.c: supported Gst::MiniObject <-> GValue
+	conversion.
+
 	* test/test_value.rb, src/rbgst-value.c: supported GstFraction and
 	GstFractionRange.
 

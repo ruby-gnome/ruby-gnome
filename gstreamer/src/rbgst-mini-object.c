@@ -68,6 +68,20 @@ rbgst_mini_object_type_init_hook(VALUE klass)
                          initialize_with_abstract_check, -1);
 }
 
+static VALUE
+gvalue2rvalue(const GValue *value)
+{
+    GstMiniObject* obj;
+    obj = gst_value_get_mini_object(value);
+    return obj ? GOBJ2RVAL(obj) : Qnil;
+}
+
+static void
+rvalue2gvalue(VALUE value, GValue *result)
+{
+    gst_value_set_mini_object(result, NIL_P(value) ? NULL : RVAL2GOBJ(value));
+}
+
 void
 rbgst_mini_object_initialize(VALUE object, gpointer instance)
 {
@@ -183,8 +197,8 @@ Init_gst_mini_object(void)
     table.type = GST_TYPE_MINI_OBJECT;
     table.get_superclass = rbgst_mini_object_get_superclass;
     table.type_init_hook = rbgst_mini_object_type_init_hook;
-    table.rvalue2gvalue = NULL;
-    table.gvalue2rvalue = NULL;
+    table.rvalue2gvalue = rvalue2gvalue;
+    table.gvalue2rvalue = gvalue2rvalue;
     table.initialize = rbgst_mini_object_initialize;
     table.robj2instance = rbgst_mini_object_robj2instance;
     table.instance2robj = rbgst_mini_object_instance2robj;
