@@ -60,6 +60,17 @@ value_list_gvalue2rvalue(const GValue *value)
     return result;
 }
 
+static GValue *
+g_value_new(GType type)
+{
+    GValue *value;
+
+    value = ALLOC(GValue);
+    MEMZERO(value, GValue, 1);
+    g_value_init(value, type);
+
+    return value;
+}
 
 static void
 int_range_free(gpointer instance)
@@ -73,14 +84,7 @@ int_range_free(gpointer instance)
 static VALUE
 int_range_initialize(VALUE self, VALUE min, VALUE max)
 {
-    GValue *value;
-
-    value = ALLOC(GValue);
-    MEMZERO(value, GValue, 1);
-    g_value_init(value, GST_TYPE_INT_RANGE);
-    gst_value_set_int_range(value, NUM2INT(min), NUM2INT(max));
-    G_INITIALIZE(self, value);
-
+    gst_value_set_int_range(DATA_PTR(self), NUM2INT(min), NUM2INT(max));
     return Qnil;
 }
 
@@ -170,17 +174,9 @@ int_range_gvalue2rvalue(const GValue *value)
 
     type = G_VALUE_TYPE(value);
     klass = GTYPE2CLASS(type);
-    copied_value = ALLOC(GValue);
-    MEMZERO(copied_value, GValue, 1);
-    g_value_init(copied_value, type);
+    copied_value = g_value_new(type);
     g_value_copy(value, copied_value);
     return Data_Wrap_Struct(klass, NULL, int_range_free, copied_value);
-}
-
-static void
-int_range_convert_initialize(VALUE object, gpointer instance)
-{
-    DATA_PTR(object) = instance;
 }
 
 static gpointer
@@ -210,12 +206,8 @@ int_range_unref(gpointer instance)
 static VALUE
 int_range_allocate(VALUE klass)
 {
-    GValue *value;
-
-    value = ALLOC(GValue);
-    MEMZERO(value, GValue, 1);
-    g_value_init(value, GST_TYPE_INT_RANGE);
-    return Data_Wrap_Struct(klass, NULL, int_range_free, value);
+    return Data_Wrap_Struct(klass, NULL, int_range_free,
+                            g_value_new(GST_TYPE_INT_RANGE));
 }
 
 void
@@ -233,7 +225,7 @@ Init_gst_value(void)
     int_range_table.type_init_hook = NULL;
     int_range_table.rvalue2gvalue = int_range_rvalue2gvalue;
     int_range_table.gvalue2rvalue = int_range_gvalue2rvalue;
-    int_range_table.initialize = int_range_convert_initialize;
+    int_range_table.initialize = NULL;
     int_range_table.robj2instance = int_range_robj2instance;
     int_range_table.instance2robj = int_range_instance2robj;
     int_range_table.unref = int_range_unref;
