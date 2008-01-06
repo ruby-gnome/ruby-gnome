@@ -31,9 +31,22 @@ class TestValue < Test::Unit::TestCase
     assert_equal("abcd", fourcc.to_s)
   end
 
+  def test_fraction_range
+    assert_equal([Rational(0, 1), Rational(2147483647, 1)],
+                 ffmpeg_color_space_caps[0]["framerate"].to_a)
+  end
+
   private
   def audio_convert_caps
     convert = Gst::ElementFactory.find("audioconvert")
+    assert_not_nil(convert)
+    convert.pad_templates.find do |template|
+      template.direction == Gst::Pad::SRC
+    end.caps.to_caps
+  end
+
+  def ffmpeg_color_space_caps
+    convert = Gst::ElementFactory.find("ffmpegcolorspace")
     assert_not_nil(convert)
     convert.pad_templates.find do |template|
       template.direction == Gst::Pad::SRC

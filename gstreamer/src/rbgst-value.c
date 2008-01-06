@@ -20,17 +20,14 @@
 
 #include "rbgst.h"
 
-static VALUE cIntRange, cFourcc;
+static VALUE cIntRange, cFourcc, cFractionRange;
 
 static RGConvertTable value_list_table = {0};
 static RGConvertTable int_range_table = {0};
 static RGConvertTable fourcc_table = {0};
+static RGConvertTable fraction_table = {0};
+static RGConvertTable fraction_range_table = {0};
 
-static VALUE
-value_list_get_superclass(void)
-{
-    return rb_cObject;
-}
 
 static void
 value_list_rvalue2gvalue(VALUE value, GValue *result)
@@ -263,11 +260,121 @@ fourcc_to_i(VALUE self)
 }
 
 
+static void
+fraction_rvalue2gvalue(VALUE value, GValue *result)
+{
+    gst_value_set_fraction(result,
+                           NUM2INT(rb_funcall(value, rb_intern("numerator"), 0)),
+                           NUM2INT(rb_funcall(value, rb_intern("denominator"),
+                                              0)));
+}
+
+static VALUE
+fraction_gvalue2rvalue(const GValue *value)
+{
+    return rb_funcall(Qnil, rb_intern("Rational"), 2,
+                      INT2NUM(gst_value_get_fraction_numerator(value)),
+                      INT2NUM(gst_value_get_fraction_denominator(value)));
+}
+
+
+static VALUE
+fraction_range_initialize(VALUE self, VALUE min, VALUE max)
+{
+    GValue min_value = {0}, max_value = {0};
+
+    rbgobj_initialize_gvalue(&min_value, min);
+    rbgobj_initialize_gvalue(&max_value, max);
+    gst_value_set_fraction_range(DATA_PTR(self), &min_value, &max_value);
+    return Qnil;
+}
+
+static VALUE
+fraction_range_get_min(VALUE self)
+{
+    return GVAL2RVAL(gst_value_get_fraction_range_min(RVAL2GOBJ(self)));
+}
+
+static VALUE
+fraction_range_set_min(VALUE self, VALUE min)
+{
+    GValue *value;
+    GValue min_value = {0};
+
+    value = RVAL2GOBJ(self);
+    rbgobj_initialize_gvalue(&min_value, min);
+    gst_value_set_fraction_range(value,
+                                 &min_value,
+                                 gst_value_get_fraction_range_max(value));
+    return Qnil;
+}
+
+static VALUE
+fraction_range_get_max(VALUE self)
+{
+    return GVAL2RVAL(gst_value_get_fraction_range_max(RVAL2GOBJ(self)));
+}
+
+static VALUE
+fraction_range_set_max(VALUE self, VALUE max)
+{
+    GValue *value;
+    GValue max_value = {0};
+
+    value = RVAL2GOBJ(self);
+    rbgobj_initialize_gvalue(&max_value, max);
+    gst_value_set_fraction_range(value,
+                                 gst_value_get_fraction_range_min(value),
+                                 &max_value);
+    return Qnil;
+}
+
+static VALUE
+fraction_range_set(VALUE self, VALUE min, VALUE max)
+{
+    GValue min_value = {0}, max_value = {0};
+
+    rbgobj_initialize_gvalue(&min_value, min);
+    rbgobj_initialize_gvalue(&max_value, max);
+    gst_value_set_fraction_range(RVAL2GOBJ(self), &min_value, &max_value);
+    return Qnil;
+}
+
+static VALUE
+fraction_range_to_a(VALUE self)
+{
+    GValue *value;
+
+    value = RVAL2GOBJ(self);
+    return rb_ary_new3(2,
+                       GVAL2RVAL(gst_value_get_fraction_range_min(value)),
+                       GVAL2RVAL(gst_value_get_fraction_range_max(value)));
+}
+
+static VALUE
+fraction_range_get_superclass(void)
+{
+    return rb_cObject;
+}
+
+static void
+fraction_range_rvalue2gvalue(VALUE value, GValue *result)
+{
+    GValue *val;
+
+    val = RVAL2GOBJ(value);
+    gst_value_set_fraction_range(result,
+                                 gst_value_get_fraction_range_min(val),
+                                 gst_value_get_fraction_range_max(val));
+}
+
+DEF_G_VALUE_CONVERTERS(fraction_range, GST_TYPE_FRACTION_RANGE, FractionRange)
+
+
 void
 Init_gst_value(void)
 {
     value_list_table.type = GST_TYPE_LIST;
-    value_list_table.get_superclass = value_list_get_superclass;
     value_list_table.rvalue2gvalue = value_list_rvalue2gvalue;
     value_list_table.gvalue2rvalue = value_list_gvalue2rvalue;
 
@@ -329,4 +436,42 @@ Init_gst_value(void)
     rb_define_method(cFourcc, "to_s", g_value_to_s, 0);
 
     G_DEF_SETTERS(cFourcc);
+
+
+    fraction_table.type = GST_TYPE_FRACTION;
+    fraction_table.rvalue2gvalue = fraction_rvalue2gvalue;
+    fraction_table.gvalue2rvalue = fraction_gvalue2rvalue;
+
+    RG_DEF_CONVERSION(&fraction_table);
+
+
+    fraction_range_table.type = GST_TYPE_FRACTION_RANGE;
+    fraction_range_table.get_superclass = fraction_range_get_superclass;
+    fraction_range_table.type_init_hook = NULL;
+    fraction_range_table.rvalue2gvalue = fraction_range_rvalue2gvalue;
+    fraction_range_table.gvalue2rvalue = g_value_to_ruby_value;
+    fraction_range_table.initialize = NULL;
+    fraction_range_table.robj2instance = fraction_range_robj2instance;
+    fraction_range_table.instance2robj = g_value_type_instance_to_ruby_object;
+    fraction_range_table.unref = g_value_type_unref;
+
+    RG_DEF_CONVERSION(&fraction_range_table);
+
+    cFractionRange = G_DEF_CLASS(GST_TYPE_FRACTION_RANGE, "FractionRange", mGst);
+
+    rb_define_alloc_func(cFractionRange, fraction_range_allocate);
+
+    rb_define_method(cFractionRange, "initialize", fraction_range_initialize, 2);
+
+    rb_define_method(cFractionRange, "min", fraction_range_get_min, 0);
+    rb_define_method(cFractionRange, "set_min", fraction_range_set_min, 1);
+    rb_define_method(cFractionRange, "max", fraction_range_get_max, 0);
+    rb_define_method(cFractionRange, "set_max", fraction_range_set_max, 1);
+
+    rb_define_method(cFractionRange, "set", fraction_range_set, 2);
+
+    rb_define_method(cFractionRange, "to_a", fraction_range_to_a, 0);
+    rb_define_method(cFractionRange, "to_s", g_value_to_s, 0);
+
+    G_DEF_SETTERS(cFractionRange);
 }
