@@ -573,7 +573,8 @@ rbgobj_init_flags_class(VALUE klass)
 
         g_string_append_printf(
             source,
-            "def %s?; self >= self.class.new(%d); end\n",
+            "def %s%s?; self >= self.class.new(%d); end\n",
+            g_ascii_isdigit(nick[0]) ? "_" : "",
             nick, entry->value);
 
         for (p = nick; *p; p++)
