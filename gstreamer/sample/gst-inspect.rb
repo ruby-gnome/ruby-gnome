@@ -285,8 +285,11 @@ class Inspector
       prefix("#{@prefix}#{' ' * 23} ") do
         puts("flags: #{flags.join(', ')}")
         type_name = param.value_type.name
-        current_value = element.get_property(name)
-        value = "Default: #{param.default} Current: #{current_value.inspect}"
+        if param.readable?
+          current_value = element.get_property(name)
+          value = "Default: #{param.default.inspect} "
+          value << "Current: #{current_value.inspect}"
+        end
         write_only = param.readable? ? "" : " Write only"
         puts("#{type_name}. #{value}#{write_only}")
       end
