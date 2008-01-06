@@ -20,10 +20,11 @@
 
 #include "rbgst.h"
 
-static VALUE cIntRange;
+static VALUE cIntRange, cFourcc;
 
 static RGConvertTable value_list_table = {0};
 static RGConvertTable int_range_table = {0};
+static RGConvertTable fourcc_table = {0};
 
 static VALUE
 value_list_get_superclass(void)
@@ -73,13 +74,67 @@ g_value_new(GType type)
 }
 
 static void
-int_range_free(gpointer instance)
+g_value_free(gpointer instance)
 {
     if (instance) {
         g_value_unset(instance);
         g_free(instance);
     }
 }
+
+static VALUE
+g_value_to_ruby_value(const GValue *value)
+{
+    VALUE klass;
+    GType type;
+    GValue *copied_value;
+
+    type = G_VALUE_TYPE(value);
+    klass = GTYPE2CLASS(type);
+    copied_value = g_value_new(type);
+    g_value_copy(value, copied_value);
+    return Data_Wrap_Struct(klass, NULL, g_value_free, copied_value);
+}
+
+static VALUE
+g_value_type_instance_to_ruby_object(gpointer instance)
+{
+    return g_value_to_ruby_value(instance);
+}
+
+static void
+g_value_type_unref(gpointer instance)
+{
+    g_value_unset(instance);
+}
+
+#define DEF_G_VALUE_CONVERTERS(prefix, g_type, type)            \
+static gpointer                                                 \
+prefix ## _robj2instance(VALUE object)                          \
+{                                                               \
+    gpointer instance;                                          \
+                                                                \
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(object, c ## type))) {    \
+        rb_raise(rb_eTypeError, "not a Gst::" # type);          \
+    }                                                           \
+    Data_Get_Struct(object, GValue, instance);                  \
+    return instance;                                            \
+}                                                               \
+                                                                \
+static VALUE                                                    \
+prefix ## _allocate(VALUE klass)                                \
+{                                                               \
+    return Data_Wrap_Struct(klass, NULL,                        \
+                            g_value_free, g_value_new(g_type)); \
+}
+
+static VALUE
+g_value_to_s(VALUE self)
+{
+    return CSTR2RVAL2(g_strdup_value_contents(RVAL2GOBJ(self)));
+}
+
+
 
 static VALUE
 int_range_initialize(VALUE self, VALUE min, VALUE max)
@@ -143,12 +198,6 @@ int_range_to_a(VALUE self)
 }
 
 static VALUE
-int_range_to_s(VALUE self)
-{
-    return CSTR2RVAL2(g_strdup_value_contents(RVAL2GOBJ(self)));
-}
-
-static VALUE
 int_range_get_superclass(void)
 {
     return rb_cObject;
@@ -165,50 +214,54 @@ int_range_rvalue2gvalue(VALUE value, GValue *result)
                             gst_value_get_int_range_max(val));
 }
 
-static VALUE
-int_range_gvalue2rvalue(const GValue *value)
-{
-    VALUE klass;
-    GType type;
-    GValue *copied_value;
+DEF_G_VALUE_CONVERTERS(int_range, GST_TYPE_INT_RANGE, IntRange)
 
-    type = G_VALUE_TYPE(value);
-    klass = GTYPE2CLASS(type);
-    copied_value = g_value_new(type);
-    g_value_copy(value, copied_value);
-    return Data_Wrap_Struct(klass, NULL, int_range_free, copied_value);
-}
-
-static gpointer
-int_range_robj2instance(VALUE object)
-{
-    gpointer instance;
-
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(object, cIntRange))) {
-        rb_raise(rb_eTypeError, "not a Gst::IntRange");
-    }
-    Data_Get_Struct(object, GValue, instance);
-    return instance;
-}
 
 static VALUE
-int_range_instance2robj(gpointer instance)
+fourcc_get_superclass(void)
 {
-    return int_range_gvalue2rvalue(instance);
+    return rb_cObject;
 }
 
 static void
-int_range_unref(gpointer instance)
+fourcc_rvalue2gvalue(VALUE value, GValue *result)
 {
-    g_value_unset(instance);
+    gst_value_set_fourcc(result,
+                         gst_value_get_fourcc(RVAL2GOBJ(value)));
+}
+
+DEF_G_VALUE_CONVERTERS(fourcc, GST_TYPE_FOURCC, Fourcc)
+
+static guint32
+value_to_fourcc(VALUE value)
+{
+    if (RVAL2CBOOL(rb_obj_is_kind_of(value, rb_cString))) {
+        return GST_STR_FOURCC(RSTRING_PTR(value));
+    } else {
+        return NUM2UINT(value);
+    }
 }
 
 static VALUE
-int_range_allocate(VALUE klass)
+fourcc_initialize(VALUE self, VALUE fourcc)
 {
-    return Data_Wrap_Struct(klass, NULL, int_range_free,
-                            g_value_new(GST_TYPE_INT_RANGE));
+    gst_value_set_fourcc(DATA_PTR(self), value_to_fourcc(fourcc));
+    return Qnil;
 }
+
+static VALUE
+fourcc_replace_bang(VALUE self, VALUE fourcc)
+{
+    gst_value_set_fourcc(DATA_PTR(self), value_to_fourcc(fourcc));
+    return Qnil;
+}
+
+static VALUE
+fourcc_to_i(VALUE self)
+{
+    return UINT2NUM(gst_value_get_fourcc(DATA_PTR(self)));
+}
+
 
 void
 Init_gst_value(void)
@@ -220,15 +273,16 @@ Init_gst_value(void)
 
     RG_DEF_CONVERSION(&value_list_table);
 
+
     int_range_table.type = GST_TYPE_INT_RANGE;
     int_range_table.get_superclass = int_range_get_superclass;
     int_range_table.type_init_hook = NULL;
     int_range_table.rvalue2gvalue = int_range_rvalue2gvalue;
-    int_range_table.gvalue2rvalue = int_range_gvalue2rvalue;
+    int_range_table.gvalue2rvalue = g_value_to_ruby_value;
     int_range_table.initialize = NULL;
     int_range_table.robj2instance = int_range_robj2instance;
-    int_range_table.instance2robj = int_range_instance2robj;
-    int_range_table.unref = int_range_unref;
+    int_range_table.instance2robj = g_value_type_instance_to_ruby_object;
+    int_range_table.unref = g_value_type_unref;
 
     RG_DEF_CONVERSION(&int_range_table);
 
@@ -246,7 +300,33 @@ Init_gst_value(void)
     rb_define_method(cIntRange, "set", int_range_set, 2);
 
     rb_define_method(cIntRange, "to_a", int_range_to_a, 0);
-    rb_define_method(cIntRange, "to_s", int_range_to_s, 0);
+    rb_define_method(cIntRange, "to_s", g_value_to_s, 0);
 
     G_DEF_SETTERS(cIntRange);
+
+
+    fourcc_table.type = GST_TYPE_FOURCC;
+    fourcc_table.get_superclass = fourcc_get_superclass;
+    fourcc_table.type_init_hook = NULL;
+    fourcc_table.rvalue2gvalue = fourcc_rvalue2gvalue;
+    fourcc_table.gvalue2rvalue = g_value_to_ruby_value;
+    fourcc_table.initialize = NULL;
+    fourcc_table.robj2instance = fourcc_robj2instance;
+    fourcc_table.instance2robj = g_value_type_instance_to_ruby_object;
+    fourcc_table.unref = g_value_type_unref;
+
+    RG_DEF_CONVERSION(&fourcc_table);
+
+    cFourcc = G_DEF_CLASS(GST_TYPE_FOURCC, "Fourcc", mGst);
+
+    rb_define_alloc_func(cFourcc, fourcc_allocate);
+
+    rb_define_method(cFourcc, "initialize", fourcc_initialize, 1);
+
+    rb_define_method(cFourcc, "replace!", fourcc_replace_bang, 1);
+
+    rb_define_method(cFourcc, "to_i", fourcc_to_i, 0);
+    rb_define_method(cFourcc, "to_s", g_value_to_s, 0);
+
+    G_DEF_SETTERS(cFourcc);
 }

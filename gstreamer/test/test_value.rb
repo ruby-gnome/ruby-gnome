@@ -21,6 +21,16 @@ class TestValue < Test::Unit::TestCase
     assert_equal("[100,9999]", range.to_s)
   end
 
+  def test_fourcc
+    fourcc = Gst::Fourcc.new("MJPG")
+    assert_equal(string_to_fourcc("MJPG"), fourcc.to_i)
+    assert_equal("MJPG", fourcc.to_s)
+
+    fourcc.replace!(string_to_fourcc("abcd"))
+    assert_equal(string_to_fourcc("abcd"), fourcc.to_i)
+    assert_equal("abcd", fourcc.to_s)
+  end
+
   private
   def audio_convert_caps
     convert = Gst::ElementFactory.find("audioconvert")
@@ -28,6 +38,14 @@ class TestValue < Test::Unit::TestCase
     convert.pad_templates.find do |template|
       template.direction == Gst::Pad::SRC
     end.caps.to_caps
+  end
+
+  def string_to_fourcc(string)
+    value = 0
+    string.unpack("C4").each_with_index do |v, i|
+      value += v << (i * 8)
+    end
+    value
   end
 end
 
