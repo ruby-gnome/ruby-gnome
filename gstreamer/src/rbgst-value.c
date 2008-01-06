@@ -23,6 +23,7 @@
 static VALUE cIntRange, cFourcc, cFractionRange;
 
 static RGConvertTable value_list_table = {0};
+static RGConvertTable value_array_table = {0};
 static RGConvertTable int_range_table = {0};
 static RGConvertTable fourcc_table = {0};
 static RGConvertTable fraction_table = {0};
@@ -57,6 +58,37 @@ value_list_gvalue2rvalue(const GValue *value)
 
     return result;
 }
+
+
+static void
+value_array_rvalue2gvalue(VALUE value, GValue *result)
+{
+    guint i, len;
+
+    len = RARRAY_LEN(value);
+    for (i = 0; i < len; i++) {
+        GValue val = {0};
+        rbgobj_initialize_gvalue(&val, RARRAY_PTR(value)[i]);
+        gst_value_array_append_value(result, &val);
+        g_value_unset(&val);
+    }
+}
+
+static VALUE
+value_array_gvalue2rvalue(const GValue *value)
+{
+    guint i, len;
+    VALUE result;
+
+    len = gst_value_array_get_size(value);
+    result = rb_ary_new2(len);
+    for (i = 0; i < len; i++) {
+        rb_ary_push(result, GVAL2RVAL(gst_value_array_get_value(value, i)));
+    }
+
+    return result;
+}
+
 
 static GValue *
 g_value_new(GType type)
@@ -379,6 +411,13 @@ Init_gst_value(void)
     value_list_table.gvalue2rvalue = value_list_gvalue2rvalue;
 
     RG_DEF_CONVERSION(&value_list_table);
+
+
+    value_array_table.type = GST_TYPE_ARRAY;
+    value_array_table.rvalue2gvalue = value_array_rvalue2gvalue;
+    value_array_table.gvalue2rvalue = value_array_gvalue2rvalue;
+
+    RG_DEF_CONVERSION(&value_array_table);
 
 
     int_range_table.type = GST_TYPE_INT_RANGE;
