@@ -900,7 +900,7 @@ void
 rbgobj_define_action_methods(VALUE klass)
 {
     GType gtype = CLASS2GTYPE(klass);
-    GString* source = g_string_new(NULL);
+    GString* source;
     guint n_ids;
     guint* ids;
     int i;
@@ -909,7 +909,10 @@ rbgobj_define_action_methods(VALUE klass)
         return;
 
     ids = g_signal_list_ids(gtype, &n_ids);
+    if (n_ids == 0)
+        return;
 
+    source = g_string_new(NULL);
     for (i = 0; i < n_ids; i++){
         GSignalQuery query;
         g_signal_query(ids[i], &query);
@@ -941,7 +944,9 @@ rbgobj_define_action_methods(VALUE klass)
         }
     }
 
-    rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2(source->str));
+    if (source->len > 0)
+        rb_funcall(klass, rb_intern("module_eval"), 1, rb_str_new2(source->str));
+    g_string_free(source, TRUE);
 }
 
 /**********************************************************************/

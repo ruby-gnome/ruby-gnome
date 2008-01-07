@@ -254,7 +254,7 @@ rbgobj_define_property_accessors(klass)
     GType gtype;
     GParamSpec** pspecs = NULL;
     int i;
-    GString* source = g_string_new(NULL);
+    GString* source;
     guint n_properties = 0;
     gtype = CLASS2GTYPE(klass);
 
@@ -270,6 +270,10 @@ rbgobj_define_property_accessors(klass)
         g_type_class_unref(oclass);
     }
 
+    if (n_properties == 0)
+        return;
+
+    source = g_string_new(NULL);
     for (i = 0; i < n_properties; i++){
         GParamSpec* pspec = pspecs[i];
         char* buf;
@@ -320,7 +324,8 @@ rbgobj_define_property_accessors(klass)
         g_free(buf);
     }
 
-    rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
+    if (source->len > 0)
+        rb_funcall(klass, id_module_eval, 1, rb_str_new2(source->str));
     g_string_free(source, TRUE);
 }
 
