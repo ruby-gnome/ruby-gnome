@@ -1,3 +1,7 @@
+2008-01-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/type-find.rb: added type find sample.
+
 2008-01-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gst-inspect.rb: supported element name inspection.
