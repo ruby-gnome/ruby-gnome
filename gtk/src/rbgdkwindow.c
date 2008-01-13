@@ -1038,6 +1038,15 @@ gdkwin_get_server_time(self)
     return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
 }
 
+#if GTK_CHECK_VERSION(2,6,0)
+static VALUE
+gdkwin_set_user_time(VALUE self, VALUE time)
+{
+    gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
+    return Qnil;
+}
+#endif
+
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 gdkwin_move_to_current_desktop(self)
@@ -1230,6 +1239,9 @@ Init_gtk_gdk_window()
 #ifdef GDK_WINDOWING_X11
     rb_define_method(gdkWindow, "server_time", gdkwin_get_server_time, 0);
 
+#if GTK_CHECK_VERSION(2,6,0)
+    rb_define_method(gdkWindow, "set_user_time", gdkwin_set_user_time, 1);
+#endif
 #if GTK_CHECK_VERSION(2,8,0)
     rb_define_method(gdkWindow, "move_to_current_desktop", gdkwin_move_to_current_desktop, 0);
 #endif

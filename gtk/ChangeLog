@@ -1,3 +1,8 @@
+2008-01-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkwindow.c: added Gdk::Window#set_user_time.
+	Suggested by Aliaksey Kandratsenka. Thanks!!!
+
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: don't use ftools.
