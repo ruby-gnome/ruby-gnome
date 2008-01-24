@@ -1,3 +1,8 @@
+2008-01-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* rbglade.c (rb_gladexml_initialize): fixed a typo. #1878555
+	Reported by Anonymous. Thanks!!!
+
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: don't use ftools.

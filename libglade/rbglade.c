@@ -164,7 +164,7 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
                                         root, domain);
         rb_iv_set(self, "@xml", text);
     } else {
-        rb_raise(rb_eArgError, "flag is wrong valiable %d", dflag);
+        rb_raise(rb_eArgError, "flag is wrong variable %d", dflag);
     }
 
     if (xml) {
