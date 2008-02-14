@@ -76,13 +76,9 @@ static gint
 rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 {
     gint result;
-    int thread_critical;
 
-    thread_critical = rb_thread_critical;
-    rb_thread_critical = 1;
     TRAP_BEG;
     result = default_poll_func(ufds, nfsd, timeout);
-    rb_thread_critical = thread_critical;
     TRAP_END;
 
     return result;

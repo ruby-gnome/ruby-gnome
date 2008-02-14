@@ -1,3 +1,16 @@
+2008-02-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil_callback.c: callback handle thread isn't started
+	automatically. Call rbgutil_start_callback_handle_thread() before
+	some callbacks invoked. This change breaks Sjoerd's GStreamer
+	bindings. Sorry.
+
+	* src/rbglib_maincontext.c: don't use rb_thread_critical because
+	we don't create a thread now.
+
+	* src/rbgutil.h, src/glib2.def: exported
+	rbgutil_{start,stop}_callback_handle_thread().
+
 2008-01-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobject.c (rbgobj_define_property_accessors),

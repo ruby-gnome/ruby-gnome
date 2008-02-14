@@ -16,8 +16,8 @@
 #undef HAVE_NATIVETHREAD /* FIXME */
 #endif
 
-#ifdef HAVE_NATIVETHREAD
-#include <unistd.h>
+#ifdef HAVE_UNISTD_H
+#  include <unistd.h>
 #endif
 
 #ifndef HAVE_RB_ERRINFO
@@ -28,8 +28,7 @@
 #  define ruby_native_thread_p() is_ruby_native_thread()
 #endif
 
-static gboolean callback_initialized = FALSE;
-static ID id_exit_application;
+static ID id_exit_application, id_callback_handle_thread;
 
 /**********************************************************************/
 
@@ -52,12 +51,13 @@ struct callback_req {
     VALUE (*func)(VALUE);
     VALUE arg;
     VALUE ret;
-    GMutex* done_mutex;
-    GCond* done_cond;
+    GMutex *done_mutex;
+    GCond *done_cond;
 };
 
-static GMutex* pipe_mutex = NULL;
-static int callback_fd[2];
+static GMutex *pipe_mutex = NULL;
+static GMutex *callback_handle_thread_mutex = NULL;
+static int callback_fd[2], callback_handle_thread_fd[2];
 
 static VALUE
 exec_callback(VALUE v)
@@ -81,16 +81,24 @@ process_req(struct callback_req* req)
 static VALUE
 mainloop(void)
 {
+    int max_fd;
+
+    max_fd = MAX(callback_fd[0], callback_handle_thread_fd[0]) + 1;
     for (;;) {
         struct callback_req* req;
         fd_set read_fds;
 
-        /* wait untill we're triggered.
+        /* wait until we're triggered.
          * If this happens we can read from the pipe
          * and it's guaranteed that the needed mutexes are initialized */
         FD_ZERO(&read_fds);
         FD_SET(callback_fd[0], &read_fds);
-        rb_thread_select(callback_fd[0] + 1, &read_fds, NULL, NULL, NULL);
+        FD_SET(callback_handle_thread_fd[0], &read_fds);
+        if (rb_thread_select(max_fd, &read_fds, NULL, NULL, NULL) <= 0)
+            rb_sys_fail("select() failed in GLib callback handle thread");
+
+        if (FD_ISSET(callback_handle_thread_fd[0], &read_fds))
+            break;
 
         {
             ssize_t size;
@@ -105,22 +113,14 @@ mainloop(void)
         rb_thread_create(process_req, req);
         rb_thread_schedule();
     }
+
+    return Qnil;
 }
 
 static VALUE
 invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
 {
     struct callback_req req;
-
-    /* initialize mutex */
-    /* FIXME: use g_once? */
-    if (!pipe_mutex) {
-        static GStaticMutex init_mutex = G_STATIC_MUTEX_INIT;
-        g_static_mutex_lock(&init_mutex);
-        if (!pipe_mutex)
-            pipe_mutex = g_mutex_new();
-        g_static_mutex_unlock(&init_mutex);
-    }
 
     req.func = func;
     req.arg  = arg;
@@ -168,30 +168,51 @@ rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 
 /**********************************************************************/
 
-static void
-callback_end_proc(VALUE _)
+void
+rbgutil_start_callback_handle_thread(void)
 {
-    callback_initialized = FALSE;
+#ifdef HAVE_NATIVETHREAD
+    VALUE callback_handle_thread;
+
+    g_mutex_lock(callback_handle_thread_mutex);
+    callback_handle_thread = rb_ivar_get(mGLib, id_callback_handle_thread);
+    if (NIL_P(callback_handle_thread)) {
+        callback_handle_thread = rb_thread_create(mainloop, NULL);
+        rb_ivar_set(mGLib, id_callback_handle_thread, callback_handle_thread);
+    }
+    g_mutex_unlock(callback_handle_thread_mutex);
+#endif
+}
+
+void
+rbgutil_stop_callback_handle_thread(void)
+{
+#ifdef HAVE_NATIVETHREAD
+    g_mutex_lock(callback_handle_thread_mutex);
+    if (!NIL_P(rb_ivar_get(mGLib, id_callback_handle_thread))) {
+        write(callback_handle_thread_fd[1], "STOP", 4);
+        rb_ivar_set(mGLib, id_callback_handle_thread, Qnil);
+    }
+    g_mutex_unlock(callback_handle_thread_mutex);
+#endif
 }
 
 void Init_gutil_callback()
 {
     id_exit_application = rb_intern("exit_application");
-    callback_initialized = TRUE;
-    rb_set_end_proc(callback_end_proc, Qnil);
+    id_callback_handle_thread = rb_intern("callback_handle_thread");
 
 #ifdef HAVE_NATIVETHREAD
-    /* startup the ruby thread to pull callbacks from other threads */
-    {
-        static VALUE thread;
+    if (!g_thread_supported())
+        g_thread_init(NULL);
 
-        if (!g_thread_supported())
-            g_thread_init(NULL);
+    pipe_mutex = g_mutex_new();
+    callback_handle_thread_mutex = g_mutex_new();
 
-        if (pipe(callback_fd) != 0)
-            rb_bug("Unable to create glib callback thread\n");
-        thread = rb_thread_create(mainloop, NULL);
-        rb_global_variable(&thread);
-    }
+    if (pipe(callback_fd) != 0)
+        rb_sys_fail("Unable to create pipe to handle GLib callback "
+                    "from other thread");
+    if (pipe(callback_handle_thread_fd) != 0)
+        rb_sys_fail("Unable to create pipe to stop GLib callback handle thread");
 #endif
 }

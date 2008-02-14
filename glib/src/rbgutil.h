@@ -51,6 +51,8 @@ extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);
 extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList* list, GType gtype);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
+extern void rbgutil_start_callback_handle_thread(void);
+extern void rbgutil_stop_callback_handle_thread(void);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
