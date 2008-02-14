@@ -1,3 +1,8 @@
+2008-02-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst.c (rb_gst_init): called
+	rbgutil_start_callback_handle_thread().
+
 2008-01-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/type-find.rb: added type find sample.

@@ -194,6 +194,8 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
      */
     Init_gst_classes ();
 
+    rbgutil_start_callback_handle_thread();
+
     return Qtrue;
 }
 
