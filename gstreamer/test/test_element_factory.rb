@@ -12,7 +12,7 @@ class TestElementFactory < Test::Unit::TestCase
   end
 
   def test_author
-    assert_equal("Wim Taymans <wim@fluendo.com>", play_bin.author)
+    assert_match(/\AWim Taymans <.*?>\z/, play_bin.author)
   end
 
   def test_create

@@ -1,6 +1,6 @@
 class TestPluginFeature < Test::Unit::TestCase
   def test_load!
-    feature = Gst::ElementFactory.find("playbin")
+    feature = Gst::ElementFactory.find("audiorate")
     assert(!feature.loaded?)
     assert(feature.load!)
     assert(feature.loaded?)
@@ -15,6 +15,6 @@ class TestPluginFeature < Test::Unit::TestCase
 
   def test_plugin_name
     feature = Gst::ElementFactory.find("playbin")
-    assert_equal("playbin", feature.plugin_name)
+    assert_equal("playback", feature.plugin_name)
   end
 end

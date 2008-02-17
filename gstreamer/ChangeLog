@@ -1,3 +1,8 @@
+2008-02-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_element_factory.rb, test/test_plugin.rb,
+	test/test_plugin_feature.rb: followed the current GStreamer changes.
+
 2008-02-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c (rb_gst_init): called
