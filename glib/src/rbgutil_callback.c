@@ -202,6 +202,8 @@ void Init_gutil_callback()
     id_exit_application = rb_intern("exit_application");
     id_callback_handle_thread = rb_intern("callback_handle_thread");
 
+    rb_ivar_set(mGLib, id_callback_handle_thread, Qnil);
+
 #ifdef HAVE_NATIVETHREAD
     if (!g_thread_supported())
         g_thread_init(NULL);

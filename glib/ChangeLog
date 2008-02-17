@@ -1,3 +1,8 @@
+2008-02-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil_callback.c: initialized callback_handle_thread
+	variable as nil.
+
 2008-02-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil_callback.c: callback handle thread isn't started
