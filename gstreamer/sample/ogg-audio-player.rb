@@ -38,7 +38,12 @@ end
 puts "Setting to PLAYING"
 pipeline.play
 puts "Running"
-loop.run
-
-puts "Returned, stopping playback"
-pipeline.stop
+begin
+  loop.run
+  print "Returned, "
+rescue Interrupt
+  print "Interrupted, "
+ensure
+  puts "stopping playback"
+  pipeline.stop
+end
