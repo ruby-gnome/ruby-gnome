@@ -1,3 +1,7 @@
+2008-02-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/: used test-unit-ext on RubyForge.
+
 2008-02-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_element_factory.rb, test/test_plugin.rb,
