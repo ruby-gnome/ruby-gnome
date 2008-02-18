@@ -2,51 +2,40 @@
 
 require 'gst'
 
-if ARGV.length != 1
-    puts "Usage: #{__FILE__} mp3-file"
-    exit
+if ARGV.size != 1
+  puts "Usage: #{$0} audio-file"
+  exit
 end
 
 file = ARGV.first
 
 pipeline = Gst::Pipeline.new
-filesrc = Gst::ElementFactory.make("filesrc")
-filesrc.location = file
-pipeline.add(filesrc)
 
-autobin = Gst::Bin.new
+file_src = Gst::ElementFactory.make("filesrc")
+file_src.location = file
 
-typefind = Gst::ElementFactory.make("typefind")
-typefind.signal_connect("have_type") do |typefind, caps|
-    $stderr.puts("GstPipeline: play have type")
-    pipeline.pause
-    autobin.remove(typefind)
-  audio_sink = Gst::ElementFactory.make("gconfaudiosink", "audio-sink")
-  p audio_sink
-    osssink = Gst::ElementFactory.make("osssink")
-    autoplug = Gst::AutoplugFactory.make("staticrender")
-    unless element = autoplug.to_renderers(caps, osssink)
-        puts "Could not autoplug, no suitable codecs found..."
-        exit 1
-    end
-    element.name = "new element"
-    autobin.add(element)
-    pipeline.play
+decoder = Gst::ElementFactory.make("decodebin")
+
+audio_convert = Gst::ElementFactory.make("audioconvert")
+
+audio_resample = Gst::ElementFactory.make("audioresample")
+
+audio_sink = Gst::ElementFactory.make("autoaudiosink")
+
+pipeline.add(file_src, decoder, audio_convert, audio_resample, audio_sink)
+file_src >> decoder
+audio_convert >> audio_resample >> audio_sink
+
+decoder.signal_connect("new-decoded-pad") do |element, pad|
+  sink_pad = audio_convert.get_pad("sink")
+  pad.link(sink_pad)
 end
-# autobin.add(filesrc, typefind)
-
-pipeline.add(typefind)
-pipeline.link(filesrc)
-pipeline.link(typefind)
 
 pipeline.play
 loop = GLib::MainLoop.new(nil, false)
-loop.run
 begin
-    while pipeline.iterate do; p 1;  end
+  loop.run
 rescue Interrupt
-# ensure
-#     # XXX stop the pipeline
-#     exit!   # exits all running children (needed)
+ensure
+  pipeline.stop
 end
-

@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+if ARGV.size != 1
+  puts "Usage: #{$0} audio-file"
+  exit
+end
+
 require 'gst'
 
 loop = GLib::MainLoop.new(nil, false)
