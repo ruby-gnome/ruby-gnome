@@ -1,5 +1,7 @@
 2008-02-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/video-player.rb: cleanup.
+
 	* sample/mp3-player.rb: removed needless file.
 
 	* sample/audio-player.rb: worked as generic audio player.
