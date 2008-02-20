@@ -19,6 +19,7 @@ $LOAD_PATH.unshift(File.join(base_dir, "test"))
 $LOAD_PATH.unshift(File.join(base_dir, "test-unit-ext", "lib"))
 require 'test-unit-ext'
 
+require 'gst-test-utils'
 test_file = File.join(base_dir, "test", "test_*.rb")
 case ARGV.first
 when /\A--\z/

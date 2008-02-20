@@ -53,6 +53,7 @@ extern VALUE cGstEventSeek;
 #define GST_TYPE_QUERY_TYPE2    (gst_query_type_get_type2())
 #define GST_TYPE_TYPE           (gst_type_get_type())
 
+#define RVAL2GST_OBJ(obj)       (GST_OBJECT(RVAL2GOBJ(obj)))
 #define RVAL2GST_MINI_OBJ(obj)  (GST_MINI_OBJECT(RVAL2GOBJ(obj)))
 #define RVAL2GST_BUF(obj)       (GST_BUFFER(RVAL2GOBJ(obj)))
 #define RVAL2GST_MSG(obj)       (GST_MESSAGE(RVAL2GOBJ(obj)))

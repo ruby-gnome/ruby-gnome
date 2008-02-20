@@ -1,4 +1,6 @@
 class TestElementFactory < Test::Unit::TestCase
+  include GstTestUtils
+
   def test_long_name
     assert_equal("Player Bin", play_bin.long_name)
   end
@@ -16,15 +18,11 @@ class TestElementFactory < Test::Unit::TestCase
   end
 
   def test_create
-    play_bin = Gst::ElementFactory.find("playbin")
-    assert_not_nil(play_bin)
     assert_match(/\Aplaybin\d+\z/, play_bin.create.name)
   end
 
   private
   def play_bin
-    play_bin = Gst::ElementFactory.find("playbin")
-    assert_not_nil(play_bin)
-    play_bin
+    find_element_factory("playbin")
   end
 end

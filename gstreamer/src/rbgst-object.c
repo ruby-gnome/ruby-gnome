@@ -22,6 +22,8 @@
 
 #include "rbgst.h"
 
+#define SELF(self) (RVAL2GST_OBJ(self))
+
 /* Class: Gst::Object
  * Basis for the GST object hierarchy.
  */
@@ -34,18 +36,38 @@
  * Returns: true if the flag is set, false otherwise.
  */
 static VALUE
-rb_gst_object_is_floating (VALUE self)
+object_is_floating(VALUE self)
 {
-    return CBOOL2RVAL(GST_OBJECT_IS_FLOATING(RGST_OBJECT(self)));
+    return CBOOL2RVAL(GST_OBJECT_IS_FLOATING(SELF(self)));
+}
+
+static VALUE
+object_set_name(VALUE self, VALUE name)
+{
+    gst_object_set_name(SELF(self), RVAL2CSTR(name));
+    return Qnil;
+}
+
+static VALUE
+object_sink(VALUE self)
+{
+    gst_object_sink(SELF(self));
+    return Qnil;
 }
 
 void
-Init_gst_object (void)
+Init_gst_object(void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_OBJECT, "Object", mGst);   
- 
-	rb_define_method(c, "floating?",  rb_gst_object_is_floating,  0);
+    VALUE cGstObject;
 
-	G_DEF_CLASS (GST_TYPE_OBJECT_FLAGS, "Flags", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_OBJECT_FLAGS, "GST_");
+    cGstObject = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
+
+    rb_define_method(cGstObject, "floating?", object_is_floating,0);
+    rb_define_method(cGstObject, "set_name", object_set_name, 1);
+    rb_define_method(cGstObject, "sink", object_sink, 0);
+
+    G_DEF_SETTERS(cGstObject);
+
+    G_DEF_CLASS(GST_TYPE_OBJECT_FLAGS, "Flags", cGstObject);
+    G_DEF_CONSTANTS(cGstObject, GST_TYPE_OBJECT_FLAGS, "GST_");
 }
