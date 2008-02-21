@@ -1,3 +1,7 @@
+2008-02-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/audio-player.rb: caught EOS.
+
 2008-02-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-object.c, test/test_object.c: added Gst::Object#name=

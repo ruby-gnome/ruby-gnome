@@ -31,8 +31,21 @@ decoder.signal_connect("new-decoded-pad") do |element, pad|
   pad.link(sink_pad)
 end
 
-pipeline.play
 loop = GLib::MainLoop.new(nil, false)
+
+bus = pipeline.bus
+bus.add_watch do |bus, message|
+  case message.type
+  when Gst::Message::EOS
+    loop.quit
+  when Gst::Message::ERROR
+    p message.parse_error
+    loop.quit
+  end
+  true
+end
+
+pipeline.play
 begin
   loop.run
 rescue Interrupt
