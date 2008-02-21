@@ -1,3 +1,11 @@
+2008-02-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil_callback.c:
+	- used GAsyncQueue instead of pipe() because pipe() isn't
+	portable.
+	- rbgutil_{start,stop}_callback_handle_thread ->
+	  rbgutil_{start,stop}_callback_dispatch_thread.
+
 2008-02-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil_callback.c: initialized callback_handle_thread

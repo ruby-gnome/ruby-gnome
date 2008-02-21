@@ -70,8 +70,8 @@ EXPORTS
 	rbgutil_sym_g2r_func
 	rbgutil_protect
 	rbgutil_invoke_callback
-	rbgutil_start_callback_handle_thread
-	rbgutil_stop_callback_handle_thread
+	rbgutil_start_callback_dispatch_thread
+	rbgutil_stop_callback_dispatch_thread
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
 	rbgobj_convert_define
