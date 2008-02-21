@@ -21,14 +21,16 @@ end
 
 play_bin = Gst::ElementFactory.make('playbin')
 bus = play_bin.bus
-bus.signal_connect('message::eof') do |*args|
-  p args
-  puts "end of stream"
-  Gtk.main_quit
-end
-bus.signal_connect('message::error') do |element, source, error, debug|
-  $stderr.puts "Error: #{error} (#{debug})"
-  Gtk.main_quit
+bus.add_watch do |bus, message|
+  case message.type
+  when Gst::Message::EOS
+    puts "end of stream"
+    Gtk.main_quit
+  when Gst::Message::ERROR
+    $stderr.puts "Error: #{message.parse_error} (#{message.parse_info})"
+    Gtk.main_quit
+  end
+  true
 end
 
 play_bin.uri = normalize_uri(ARGV.first)

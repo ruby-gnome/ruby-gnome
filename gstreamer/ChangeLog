@@ -1,5 +1,7 @@
 2008-02-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/video-player.rb: caught EOS.
+
 	* src/rbgst.c: followed the recent Ruby/GLib change:
 	  rbgutil_{start,stop}_callback_handle_thread ->
 	  rbgutil_{start,stop}_callback_dispatch_thread.
