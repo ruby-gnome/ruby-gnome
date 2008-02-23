@@ -93,6 +93,7 @@ extern VALUE cGstEventSeek;
 #define GST_BUS2RVAL(obj)           (GOBJ2RVAL(obj))
 #define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
 #define RVAL2GST_CLOCK(obj)         (GST_CLOCK(RVAL2GOBJ(obj)))
+#define GST_CLOCK2RVAL(obj)         (GOBJ2RVAL(obj))
 
 #define RVAL2GST_BIN(obj)           (GST_BIN(RVAL2GOBJ(obj)))
 #define GST_BIN2RVAL(obj)           (GOBJ2RVAL(obj))

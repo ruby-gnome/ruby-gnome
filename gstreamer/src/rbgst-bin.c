@@ -122,6 +122,45 @@ rb_gst_bin_clock_dirty_p(VALUE self)
 }
 
 /*
+ * Method: provided_clock
+ *
+ * Gets the current clock of the (scheduler of the) bin,
+ * as a Gst::Clock object.
+ *
+ * Returns: a Gst::Clock object, or nil.
+ */
+static VALUE
+rb_gst_bin_get_provided_clock(VALUE self)
+{
+    return GST_CLOCK2RVAL(SELF(self)->provided_clock);
+}
+
+/*
+ * Method: provided_clock=(clock)
+ * clock: a Gst::Clock.
+ *
+ * Forces the bin to use the given clock.  Use nil to force it 
+ * to use no clock at all.
+ *
+ * Returns: self.
+ */
+static VALUE
+rb_gst_bin_set_provided_clock(VALUE self, VALUE clock)
+{
+    GstBin *bin;
+
+    bin = SELF(self);
+    if (bin->provided_clock)
+        g_object_unref(bin->provided_clock);
+
+    bin->provided_clock = RVAL2GST_CLOCK(clock);
+    if (bin->provided_clock)
+        g_object_ref(bin->provided_clock);
+
+    return self;
+}
+
+/*
  * Method: add(*elements)
  * elements: a list of Gst::Element objects.
  *
@@ -255,49 +294,6 @@ rb_gst_bin_get_by_name_recurse_up (VALUE self, VALUE name)
 /* } */
 
 /*
- * Method: provided_clock
- *
- * Gets the current clock of the (scheduler of the) bin,
- * as a Gst::Clock object.
- *
- * Returns: a Gst::Clock object, or nil.
- */
-static VALUE
-rb_gst_bin_get_provided_clock (VALUE self)
-{
-    GstClock *clock;
-
-    clock = RGST_BIN(self)->provided_clock;
-    return clock == NULL ? Qnil : RGST_CLOCK_NEW(clock);
-}
-
-/*
- * Method: provided_clock=(clock)
- * clock: a Gst::Clock.
- *
- * Forces the bin to use the given clock.  Use nil to force it 
- * to use no clock at all.
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_bin_set_provided_clock (VALUE self, VALUE clock)
-{
-    GstBin *bin;
-
-    bin = RGST_BIN(self);
-    if (bin->provided_clock)
-        g_object_unref(bin->provided_clock);
-
-    if (!NIL_P(clock)) {
-        bin->provided_clock = RVAL2GST_CLOCK(clock);
-        g_object_ref(bin->provided_clock);
-    }
-
-    return self;
-}
-
-/*
  * Method: get_by_interface(interface)
  * interface: an interface (Ruby class).
  *
@@ -377,6 +373,11 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "messages", rb_gst_bin_get_messages, 0);
     rb_define_method(rb_cGstBin, "polling?", rb_gst_bin_polling_p, 0);
     rb_define_method(rb_cGstBin, "clock_dirty?", rb_gst_bin_clock_dirty_p, 0);
+    rb_define_method(rb_cGstBin, "provided_clock",
+                     rb_gst_bin_get_provided_clock, 0);
+    rb_define_method(rb_cGstBin, "set_provided_clock",
+                     rb_gst_bin_set_provided_clock, 1);
+
 
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
     rb_define_alias(rb_cGstBin, "<<", "add");
@@ -394,8 +395,7 @@ Init_gst_bin (void)
 
     /* rb_define_method(rb_cGstBin, "iterate_elements", rb_gst_bin_iterate_elements, 0); */
 
-    rb_define_method(rb_cGstBin, "provided_clock", rb_gst_bin_get_provided_clock, 0);
-    rb_define_method(rb_cGstBin, "set_provided_clock", rb_gst_bin_set_provided_clock, 1);
+    G_DEF_SETTERS(rb_cGstBin);
 
     G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
     G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");

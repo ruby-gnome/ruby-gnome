@@ -35,4 +35,13 @@ class TestBin < Test::Unit::TestCase
     bin = Gst::Bin.new
     assert(!bin.clock_dirty?)
   end
+
+  def test_provided_clock
+    bin = Gst::Bin.new
+    assert_nil(bin.provided_clock)
+    bin.provided_clock = Gst::SystemClock.new
+    assert_not_nil(bin.provided_clock)
+    bin.provided_clock = nil
+    assert_nil(bin.provided_clock)
+  end
 end
