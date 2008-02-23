@@ -1,3 +1,7 @@
+2008-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-bin.c, test/test_bin.rb: added tests.
+
 2008-02-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/video-player.rb: caught EOS.

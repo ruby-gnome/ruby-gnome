@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define SELF(self) RVAL2GST_OBJ(self)
+
 /* Class: Gst::Bin
  * Base container element.
  */
@@ -38,28 +40,28 @@
  * Returns: a newly allocated Gst::Bin object.
  */
 static VALUE
-rb_gst_bin_new (int argc, VALUE * argv, VALUE self)
+rb_gst_bin_initialize(int argc, VALUE *argv, VALUE self)
 {
     GstElement *bin;
     VALUE name;
 
-    rb_scan_args (argc, argv, "01", &name);
+    rb_scan_args(argc, argv, "01", &name);
 
-    bin = gst_bin_new (NIL_P (name) ? NULL : RVAL2CSTR (name));
-    if (bin != NULL)
-        RBGST_INITIALIZE (self, bin);
+    bin = gst_bin_new(RVAL2CSTR2(name));
+    if (bin)
+        RBGST_INITIALIZE(self, bin);
     return Qnil;
 }
 
 /*
- * Method: length
+ * Method: size
  *
  * Returns: the number of elements in the container.
  */
 static VALUE
-rb_gst_bin_length (VALUE self)
+rb_gst_bin_size(VALUE self)
 {
-    return INT2NUM(RGST_BIN(self)->numchildren);
+    return INT2NUM(GST_BIN_NUMCHILDREN(SELF(self)));
 }
 
 /*
@@ -68,7 +70,7 @@ rb_gst_bin_length (VALUE self)
  * Returns: an array of all Gst::Element objects in the container.
  */
 static VALUE
-rb_gst_bin_get_children (VALUE self)
+rb_gst_bin_get_children(VALUE self)
 {
     const GList *list;
     VALUE children;
@@ -148,7 +150,7 @@ rb_gst_bin_remove_all (VALUE self)
 }
 
 /*
- * Method: each_element { |element| ... }
+ * Method: each {|element| ...}
  *
  * Calls the block for each element in the bin, passing a reference to
  * the Gst::Element as parameter.
@@ -319,34 +321,37 @@ rb_gst_bin_get_by_if (VALUE self, VALUE klass)
 void
 Init_gst_bin (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_BIN, "Bin", mGst);
+    VALUE rb_cGstBin;
 
-    rb_define_method (c, "initialize", rb_gst_bin_new, -1);
+    rb_cGstBin = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
 
-    rb_define_method (c, "add", rb_gst_bin_add, -1);
-    rb_define_method (c, "remove", rb_gst_bin_remove, -1);
-    rb_define_method (c, "remove_all", rb_gst_bin_remove_all, 0);
-    rb_define_alias (c, "clear", "remove_all");
+    rb_define_method(rb_cGstBin, "initialize", rb_gst_bin_initialize, -1);
 
-    rb_define_method(c, "children", rb_gst_bin_get_children, 0);
-    rb_define_method (c, "each_element", rb_gst_bin_each_element, 0);
+    rb_define_method(rb_cGstBin, "size", rb_gst_bin_size, 0);
+    rb_define_alias(rb_cGstBin, "length", "size");
 
-    rb_define_method (c, "get_by_name", rb_gst_bin_get_by_name, 1);
-    rb_define_method (c, "get_by_name_recurse_up",
+    rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, 0);
+    rb_define_method(rb_cGstBin, "each_element", rb_gst_bin_each_element, 0);
+
+    rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
+    rb_define_alias(rb_cGstBin, "<<", "add");
+    rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
+    rb_define_method(rb_cGstBin, "remove_all", rb_gst_bin_remove_all, 0);
+    rb_define_alias(rb_cGstBin, "clear", "remove_all");
+
+    rb_define_method(rb_cGstBin, "get_by_name", rb_gst_bin_get_by_name, 1);
+    rb_define_method(rb_cGstBin, "get_by_name_recurse_up",
                       rb_gst_bin_get_by_name_recurse_up, 1);
-    rb_define_alias (c, "[]", "get_by_name");
-    rb_define_method (c, "get_by_interface", rb_gst_bin_get_by_if, 1);
-    /* rb_define_method(c, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
-    /* rb_define_method (c, "each_by_interface", rb_gst_bin_each_by_if, 1); */
+    rb_define_alias(rb_cGstBin, "[]", "get_by_name");
+    rb_define_method(rb_cGstBin, "get_by_interface", rb_gst_bin_get_by_if, 1);
+    /* rb_define_method(rb_cGstBin, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
+    /* rb_define_method(rb_cGstBin, "each_by_interface", rb_gst_bin_each_by_if, 1); */
 
-    rb_define_method (c, "length", rb_gst_bin_length, 0);
-    rb_define_alias (c, "size", "length");
+    /* rb_define_method(rb_cGstBin, "iterate_elements", rb_gst_bin_iterate_elements, 0); */
 
-    /* rb_define_method(c, "iterate_elements", rb_gst_bin_iterate_elements, 0); */
+    rb_define_method(rb_cGstBin, "provided_clock", rb_gst_bin_get_provided_clock, 0);
+    rb_define_method(rb_cGstBin, "set_provided_clock", rb_gst_bin_set_provided_clock, 1);
 
-    rb_define_method(c, "provided_clock", rb_gst_bin_get_provided_clock, 0);
-    rb_define_method(c, "set_provided_clock", rb_gst_bin_set_provided_clock, 1);
-
-    G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_BIN_FLAGS, "GST_BIN_");
+    G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
+    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");
 }

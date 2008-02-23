@@ -44,8 +44,7 @@ object_is_floating(VALUE self)
 static VALUE
 object_set_name(VALUE self, VALUE name)
 {
-    gst_object_set_name(SELF(self), RVAL2CSTR(name));
-    return Qnil;
+    return CBOOL2RVAL(gst_object_set_name(SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE

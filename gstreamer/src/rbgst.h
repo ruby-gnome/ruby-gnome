@@ -93,6 +93,9 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_PIPELINE(obj)      (GST_PIPELINE(RVAL2GOBJ(obj)))
 #define RVAL2GST_CLOCK(obj)         (GST_CLOCK(RVAL2GOBJ(obj)))
 
+#define RVAL2GST_BIN(obj)           (GST_BIN(RVAL2GOBJ(obj)))
+#define GST_BIN2RVAL(obj)           (GOBJ2RVAL(obj))
+
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
 #define RGST_CLOCK_ENTRY(o)         (GST_CLOCK_ENTRY(RVAL2BOXED(o, GST_TYPE_CLOCK_ENTRY)))
