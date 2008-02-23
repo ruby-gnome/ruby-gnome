@@ -160,6 +160,12 @@ rb_gst_bin_set_provided_clock(VALUE self, VALUE clock)
     return self;
 }
 
+static VALUE
+rb_gst_bin_get_clock_provider(VALUE self)
+{
+    return GST_ELEMENT2RVAL(SELF(self)->clock_provider);
+}
+
 /*
  * Method: add(*elements)
  * elements: a list of Gst::Element objects.
@@ -377,6 +383,8 @@ Init_gst_bin (void)
                      rb_gst_bin_get_provided_clock, 0);
     rb_define_method(rb_cGstBin, "set_provided_clock",
                      rb_gst_bin_set_provided_clock, 1);
+    rb_define_method(rb_cGstBin, "clock_provider",
+                     rb_gst_bin_get_clock_provider, 0);
 
 
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);

@@ -44,4 +44,9 @@ class TestBin < Test::Unit::TestCase
     bin.provided_clock = nil
     assert_nil(bin.provided_clock)
   end
+
+  def test_clock_provider
+    bin = Gst::Bin.new
+    assert_nil(bin.clock_provider)
+  end
 end
