@@ -15,4 +15,14 @@ class TestBin < Test::Unit::TestCase
     bin << create_element("fakesink")
     assert_not_equal(cookie, bin.children_cookie)
   end
+
+  def test_child_bus
+    bin = Gst::Bin.new
+    assert_not_nil(bin.child_bus)
+  end
+
+  def test_messages
+    bin = Gst::Bin.new
+    assert_equal([], bin.messages)
+  end
 end

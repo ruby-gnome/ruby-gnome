@@ -21,7 +21,7 @@
 
 #include "rbgst.h"
 
-#define SELF(self) RVAL2GST_OBJ(self)
+#define SELF(self) RVAL2GST_BIN(self)
 
 /* Class: Gst::Bin
  * Base container element.
@@ -87,6 +87,26 @@ static VALUE
 rb_gst_bin_get_children_cookie(VALUE self)
 {
     return UINT2NUM(GST_BIN_CHILDREN_COOKIE(SELF(self)));
+}
+
+static VALUE
+rb_gst_bin_get_child_bus(VALUE self)
+{
+    return GST_BUS2RVAL(SELF(self)->child_bus);
+}
+
+static VALUE
+rb_gst_bin_get_messages(VALUE self)
+{
+    GList *node;
+    VALUE messages;
+
+    messages = rb_ary_new();
+    for (node = SELF(self)->messages; node; node = g_list_next(node)) {
+        rb_ary_push(messages, GST_MSG2RVAL(node->data));
+    }
+
+    return messages;
 }
 
 /*
@@ -341,6 +361,8 @@ Init_gst_bin (void)
 
     rb_define_method(rb_cGstBin, "children_cookie",
                      rb_gst_bin_get_children_cookie, 0);
+    rb_define_method(rb_cGstBin, "child_bus", rb_gst_bin_get_child_bus, 0);
+    rb_define_method(rb_cGstBin, "messages", rb_gst_bin_get_messages, 0);
 
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
     rb_define_alias(rb_cGstBin, "<<", "add");

@@ -1,5 +1,8 @@
 2008-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-bin.c, test/test_bin.rb: added tests for child_bus and
+	messages.
+
 	* src/rbgst-bin.c, test/test_bin.rb: added tests for children_cookie.
 
 	* src/rbgst-bin.c, test/test_bin.rb: added tests.
