@@ -109,6 +109,18 @@ rb_gst_bin_get_messages(VALUE self)
     return messages;
 }
 
+static VALUE
+rb_gst_bin_polling_p(VALUE self)
+{
+    return CBOOL2RVAL(SELF(self)->polling);
+}
+
+static VALUE
+rb_gst_bin_clock_dirty_p(VALUE self)
+{
+    return CBOOL2RVAL(SELF(self)->clock_dirty);
+}
+
 /*
  * Method: add(*elements)
  * elements: a list of Gst::Element objects.
@@ -363,6 +375,8 @@ Init_gst_bin (void)
                      rb_gst_bin_get_children_cookie, 0);
     rb_define_method(rb_cGstBin, "child_bus", rb_gst_bin_get_child_bus, 0);
     rb_define_method(rb_cGstBin, "messages", rb_gst_bin_get_messages, 0);
+    rb_define_method(rb_cGstBin, "polling?", rb_gst_bin_polling_p, 0);
+    rb_define_method(rb_cGstBin, "clock_dirty?", rb_gst_bin_clock_dirty_p, 0);
 
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
     rb_define_alias(rb_cGstBin, "<<", "add");

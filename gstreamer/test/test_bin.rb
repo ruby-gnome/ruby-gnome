@@ -25,4 +25,14 @@ class TestBin < Test::Unit::TestCase
     bin = Gst::Bin.new
     assert_equal([], bin.messages)
   end
+
+  def test_polling?
+    bin = Gst::Bin.new
+    assert(!bin.polling?)
+  end
+
+  def test_clock_dirty?
+    bin = Gst::Bin.new
+    assert(!bin.clock_dirty?)
+  end
 end
