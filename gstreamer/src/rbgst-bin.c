@@ -76,13 +76,17 @@ rb_gst_bin_get_children(VALUE self)
     VALUE children;
 
     children = rb_ary_new();
-    for (list = RGST_BIN(self)->children;
-         list != NULL;
-         list = g_list_next(list)) {
-        rb_ary_push(children, RGST_ELEMENT_NEW(list->data));
+    for (list = GST_BIN_CHILDREN(SELF(self)); list; list = g_list_next(list)) {
+        rb_ary_push(children, GST_ELEMENT2RVAL(list->data));
     }
 
     return children;
+}
+
+static VALUE
+rb_gst_bin_get_children_cookie(VALUE self)
+{
+    return UINT2NUM(GST_BIN_CHILDREN_COOKIE(SELF(self)));
 }
 
 /*
@@ -325,13 +329,18 @@ Init_gst_bin (void)
 
     rb_cGstBin = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
 
+    rb_include_module(rb_cGstBin, rb_mEnumerable);
+
     rb_define_method(rb_cGstBin, "initialize", rb_gst_bin_initialize, -1);
 
     rb_define_method(rb_cGstBin, "size", rb_gst_bin_size, 0);
     rb_define_alias(rb_cGstBin, "length", "size");
 
     rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, 0);
-    rb_define_method(rb_cGstBin, "each_element", rb_gst_bin_each_element, 0);
+    rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, 0);
+
+    rb_define_method(rb_cGstBin, "children_cookie",
+                     rb_gst_bin_get_children_cookie, 0);
 
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
     rb_define_alias(rb_cGstBin, "<<", "add");
