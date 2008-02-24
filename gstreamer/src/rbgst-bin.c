@@ -166,10 +166,19 @@ rb_gst_bin_get_clock_provider(VALUE self)
     return GST_ELEMENT2RVAL(SELF(self)->clock_provider);
 }
 
+/*
+ * Method: <<(element)
+ * element: a Gst::Element object.
+ *
+ * Adds a Gst::Element object to the bin.
+ *
+ * Returns: self.
+ */
 static VALUE
 rb_gst_bin_add(VALUE self, VALUE element)
 {
-    return gst_bin_add(SELF(self), RVAL2GST_ELEMENT(element));
+    gst_bin_add(SELF(self), RVAL2GST_ELEMENT(element));
+    return self;
 }
 
 /*
@@ -202,12 +211,14 @@ rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
  * Returns: an array of all Gst::Element objects in the container.
  */
 static VALUE
-rb_gst_bin_remove (int argc, VALUE * argv, VALUE self)
+rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
 {
     int i;
+    GstBin *bin;
 
+    bin = SELF(self);
     for (i = 0; i < argc; i++)
-        gst_bin_remove (RGST_BIN (self), RGST_ELEMENT (argv[i]));
+        gst_bin_remove(bin, RVAL2GST_ELEMENT(argv[i]));
     return rb_gst_bin_get_children(self);
 }
 

@@ -59,9 +59,19 @@ class TestBin < Test::Unit::TestCase
       bin << "XXX"
     end
 
-    element2 = create_element("faksesink")
-    element3 = create_element("faksesink")
+    element2 = create_element("fakesink")
+    element3 = create_element("fakesink")
     bin.add(element2, element3)
-    assert_equal([element2, element3], bin.children[1..2])
+    assert_equal([element3, element2], bin.children[0, 2])
+  end
+
+  def test_remove
+    bin = Gst::Bin.new
+    element1 = create_element("fakesink")
+    element2 = create_element("fakesink")
+    bin << element1 << element2
+    assert_equal(2, bin.size)
+    bin.remove(element1, element2)
+    assert_equal(0, bin.size)
   end
 end
