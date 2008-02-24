@@ -223,24 +223,25 @@ rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
 }
 
 /*
- * Method: remove_all
+ * Method: clear
  *
  * Removes all Gst::Element objects in the bin.
  *
- * Returns: an empty array.
+ * Returns: nil.
  */
 static VALUE
-rb_gst_bin_remove_all (VALUE self)
+rb_gst_bin_clear(VALUE self)
 {
-    VALUE arr;
-    int i;
+    GstBin *bin;
+    GList *node, *children;
 
-    arr = rb_gst_bin_get_children(self);
-    for (i = 0; i < RARRAY (arr)->len; i++) {
-        VALUE element = rb_ary_entry (arr, i);
-        rb_gst_bin_remove (1, &element, self);
+    bin = SELF(self);
+    children = g_list_copy(GST_BIN_CHILDREN(bin));
+    for (node = children; node; node = g_list_next(node)) {
+        gst_bin_remove(bin, node->data);
     }
-    return rb_ary_clear (arr);
+    g_list_free(children);
+    return Qnil;
 }
 
 /*
@@ -403,8 +404,7 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "<<", rb_gst_bin_add, 1);
     rb_define_method(rb_cGstBin, "add", rb_gst_bin_add_multi, -1);
     rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
-    rb_define_method(rb_cGstBin, "remove_all", rb_gst_bin_remove_all, 0);
-    rb_define_alias(rb_cGstBin, "clear", "remove_all");
+    rb_define_method(rb_cGstBin, "clear", rb_gst_bin_clear, 0);
 
     rb_define_method(rb_cGstBin, "get_by_name", rb_gst_bin_get_by_name, 1);
     rb_define_method(rb_cGstBin, "get_by_name_recurse_up",

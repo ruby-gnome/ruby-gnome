@@ -1,5 +1,7 @@
 2008-02-24  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#clear.
+
 	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#remove.
 
 	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#<<.
