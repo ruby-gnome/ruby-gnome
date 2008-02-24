@@ -166,6 +166,12 @@ rb_gst_bin_get_clock_provider(VALUE self)
     return GST_ELEMENT2RVAL(SELF(self)->clock_provider);
 }
 
+static VALUE
+rb_gst_bin_add(VALUE self, VALUE element)
+{
+    return gst_bin_add(SELF(self), RVAL2GST_ELEMENT(element));
+}
+
 /*
  * Method: add(*elements)
  * elements: a list of Gst::Element objects.
@@ -175,20 +181,16 @@ rb_gst_bin_get_clock_provider(VALUE self)
  * Returns: an array of all Gst::Element objects in the container.
  */
 static VALUE
-rb_gst_bin_add (int argc, VALUE * argv, VALUE self)
+rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
 {
     int i;
-    VALUE klass = GTYPE2CLASS(GST_TYPE_ELEMENT);
-    GstBin* bin = RGST_BIN(self);
 
     for (i = 0; i < argc; i++) {
-       if (!rb_obj_is_kind_of(argv[i], klass)) {
-	 rb_raise(rb_eTypeError, "Gst::Element expected");
-       }
-       gst_bin_add (bin, RGST_ELEMENT (argv[i]));
+        rb_gst_bin_add(self, argv[i]);
     }
     return rb_gst_bin_get_children(self);
 }
+
 
 /*
  * Method: remove(*elements)
@@ -387,8 +389,8 @@ Init_gst_bin (void)
                      rb_gst_bin_get_clock_provider, 0);
 
 
-    rb_define_method(rb_cGstBin, "add", rb_gst_bin_add, -1);
-    rb_define_alias(rb_cGstBin, "<<", "add");
+    rb_define_method(rb_cGstBin, "<<", rb_gst_bin_add, 1);
+    rb_define_method(rb_cGstBin, "add", rb_gst_bin_add_multi, -1);
     rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
     rb_define_method(rb_cGstBin, "remove_all", rb_gst_bin_remove_all, 0);
     rb_define_alias(rb_cGstBin, "clear", "remove_all");

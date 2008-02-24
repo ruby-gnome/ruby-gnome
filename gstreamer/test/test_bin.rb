@@ -49,4 +49,19 @@ class TestBin < Test::Unit::TestCase
     bin = Gst::Bin.new
     assert_nil(bin.clock_provider)
   end
+
+  def test_add
+    bin = Gst::Bin.new
+    element = create_element("fakesink")
+    bin << element
+    assert_equal(element, bin.children[0])
+    assert_raise(TypeError) do
+      bin << "XXX"
+    end
+
+    element2 = create_element("faksesink")
+    element3 = create_element("faksesink")
+    bin.add(element2, element3)
+    assert_equal([element2, element3], bin.children[1..2])
+  end
 end
