@@ -290,7 +290,7 @@ Init_gst_buffer(void)
     rb_cGstBuffer = G_DEF_CLASS(GST_TYPE_BUFFER, "Buffer", mGst);
 
     rb_define_const(rb_cGstBuffer, "OFFSET_NONE",
-                    UINT2NUM(GST_BUFFER_OFFSET_NONE));
+                    ULL2NUM(GST_BUFFER_OFFSET_NONE));
 
     G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flags", rb_cGstBuffer);
     G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
