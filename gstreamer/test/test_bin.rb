@@ -1,6 +1,17 @@
 class TestBin < Test::Unit::TestCase
   include GstTestUtils
 
+  def test_children
+    bin = Gst::Bin.new
+
+    element = create_element("filesink")
+    no_interface_element = create_element("fakesink")
+    bin << element << no_interface_element
+
+    assert_equal([no_interface_element, element], bin.children)
+    assert_equal([element], bin.children(Gst::ElementURIHandler))
+  end
+
   def test_size
     bin = Gst::Bin.new
     assert_equal(0, bin.size)

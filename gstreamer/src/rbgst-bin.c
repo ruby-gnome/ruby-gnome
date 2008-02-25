@@ -66,19 +66,34 @@ rb_gst_bin_size(VALUE self)
 }
 
 /*
- * Method: children
+ * Method: children(interface=nil)
+ * interface: an interface (Ruby class).
  *
- * Returns: an array of all Gst::Element objects in the container.
+ * Returns: If interface is nil, an array of all
+ * Gst::Element objects in the container. Otherwise, an
+ * array of Gst::Element objects in the container that
+ * implements the interface.
  */
 static VALUE
-rb_gst_bin_get_children(VALUE self)
+rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
 {
-    const GList *list;
-    VALUE children;
+    VALUE children, interface;
 
-    children = rb_ary_new();
-    for (list = GST_BIN_CHILDREN(SELF(self)); list; list = g_list_next(list)) {
-        rb_ary_push(children, GST_ELEMENT2RVAL(list->data));
+    rb_scan_args(argc, argv, "01", &interface);
+
+    if (NIL_P(interface)) {
+        const GList *node;
+        children = rb_ary_new();
+        for (node = GST_BIN_CHILDREN(SELF(self));
+             node;
+             node = g_list_next(node)) {
+            rb_ary_push(children, GST_ELEMENT2RVAL(node->data));
+        }
+    } else {
+        GstIterator *iter;
+        iter = gst_bin_iterate_all_by_interface(SELF(self),
+                                                CLASS2GTYPE(interface));
+        children = _rbgst_collect_elements(iter);
     }
 
     return children;
@@ -188,7 +203,7 @@ rb_gst_bin_add(VALUE self, VALUE element)
  *
  * Adds one or more Gst::Element objects to the bin.
  *
- * Returns: an array of all Gst::Element objects in the container.
+ * Returns: nil.
  */
 static VALUE
 rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
@@ -198,7 +213,7 @@ rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
     for (i = 0; i < argc; i++) {
         rb_gst_bin_add(self, argv[i]);
     }
-    return rb_gst_bin_get_children(self);
+    return Qnil;
 }
 
 
@@ -209,7 +224,7 @@ rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
  * Removes one or more Gst::Element objects from the bin, unparenting 
  * as well.
  *
- * Returns: an array of all Gst::Element objects in the container.
+ * Returns: nil.
  */
 static VALUE
 rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
@@ -220,7 +235,7 @@ rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
     bin = SELF(self);
     for (i = 0; i < argc; i++)
         gst_bin_remove(bin, RVAL2GST_ELEMENT(argv[i]));
-    return rb_gst_bin_get_children(self);
+    return Qnil;
 }
 
 /*
@@ -246,17 +261,18 @@ rb_gst_bin_clear(VALUE self)
 }
 
 /*
- * Method: each {|element| ...}
+ * Method: each(interface=nil) {|element| ...}
  *
  * Calls the block for each element in the bin, passing a reference to
- * the Gst::Element as parameter.
+ * the Gst::Element as parameter. If the interface isn't nil,
+ * iterated elements should implement the interface.
  *
- * Returns: always  nil.
+ * Returns: always nil.
  */
 static VALUE
-rb_gst_bin_each_element(VALUE self)
+rb_gst_bin_each_element(int argc, VALUE *argv, VALUE self)
 {
-    return rb_ary_yield(rb_gst_bin_get_children(self));
+    return rb_ary_yield(rb_gst_bin_get_children(argc, argv, self));
 }
 
 /*
@@ -317,58 +333,6 @@ rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
     return GST_ELEMENT2RVAL(element);
 }
 
-/*
- * Method: iterate_elements
- *
- * Iterates over the elements in this bin.
- *
- * Returns: true if the bin did something useful, or false (this value can
- * be used to determine if the bin is in EOS ("end of stream")).
- */
-/* static VALUE */
-/* rb_gst_bin_iterate_elements(VALUE self) */
-/* { */
-/*     return CBOOL2RVAL(gst_bin_iterate_elements(RGST_BIN(self))); */
-/* } */
-
-/*
- * Method: iterate_all_by_interface(interface)
- * interface: an interface (Ruby class).
- *
- * Looks for all elements inside the bin that implements the given
- * interface.  The method recurses bins inside bins.
- *
- * Returns: a list of elements inside the bin implementing the interface,
- * as an Array of Gst::Element objects.
- */
-/* static VALUE */
-/* rb_gst_bin_iterate_all_by_if(VALUE self, VALUE klass) */
-/* { */
-/*     for (list = */
-/*          gst_bin_get_all_by_interface (RGST_BIN (self), CLASS2GTYPE (klass)); */
-/*          list != NULL; list = g_list_next (list)) */
-/*         rb_ary_push (arr, RGST_ELEMENT_NEW (list->data)); */
-
-/*     g_list_free (list); */
-/*     return arr; */
-/* } */
-
-/*
- * Method: each_by_interface(interface)
- * interface: an interface (Ruby class).
- * 
- * Calls the block for each element inside the bin that implements the
- * given interface, passing a reference to the Gst::Element as parameter.
- * This method recurses bins inside bins.
- *
- * Returns: always nil.
- */
-/* static VALUE */
-/* rb_gst_bin_each_by_if (VALUE self, VALUE klass) */
-/* { */
-/*     return rb_ary_yield (rb_gst_bin_get_all_by_if (self, klass)); */
-/* } */
-
 static VALUE
 rb_gst_bin_get_sinks(VALUE self)
 {
@@ -395,8 +359,8 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "size", rb_gst_bin_size, 0);
     rb_define_alias(rb_cGstBin, "length", "size");
 
-    rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, 0);
-    rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, 0);
+    rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, -1);
+    rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, -1);
 
     rb_define_method(rb_cGstBin, "children_cookie",
                      rb_gst_bin_get_children_cookie, 0);
@@ -421,11 +385,6 @@ Init_gst_bin (void)
 
     rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
     rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
-
-    /* rb_define_method(rb_cGstBin, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
-    /* rb_define_method(rb_cGstBin, "each_by_interface", rb_gst_bin_each_by_if, 1); */
-
-    /* rb_define_method(rb_cGstBin, "iterate_elements", rb_gst_bin_iterate_elements, 0); */
 
     G_DEF_SETTERS(rb_cGstBin);
 
