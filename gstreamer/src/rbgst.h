@@ -180,15 +180,6 @@ VALUE rbgst_structure_to_hash(GstStructure *structure);
 GstStructure *rbgst_hash_to_structure(VALUE hash);
 GstStructure *rbgst_hash_to_structure_with_name(VALUE hash, const char *name);
 
-void rbgst_mini_object_free(void *ptr);
-VALUE rbgst_mini_object_get_superclass(void);
-void rbgst_mini_object_type_init_hook(VALUE klass);
-void rbgst_mini_object_initialize(VALUE object, gpointer instance);
-gpointer rbgst_mini_object_robj2instance(VALUE object);
-void rbgst_mini_object_define_class_if_need(VALUE klass, GType type);
-VALUE rbgst_mini_object_instance2robj(gpointer instance);
-void rbgst_mini_object_unref(gpointer instance);
-
 
 #define GST_TAG_LIST_STRUCTURE_NAME   "taglist"
 

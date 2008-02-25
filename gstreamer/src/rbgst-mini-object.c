@@ -37,14 +37,14 @@ VALUE rb_cGstMiniObject;
 static RGConvertTable table = {0};
 
 void
-rbgst_mini_object_free(void *ptr)
+_rbgst_mini_object_free(void *ptr)
 {
     if (ptr) {
         gst_mini_object_unref((GstMiniObject *)ptr);
     }
 }
 
-VALUE
+static VALUE
 rbgst_mini_object_get_superclass(void)
 {
     return rb_cObject;
@@ -61,7 +61,7 @@ initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
     return rb_call_super(argc, argv);
 }
 
-void
+static void
 rbgst_mini_object_type_init_hook(VALUE klass)
 {
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
@@ -83,13 +83,13 @@ rvalue2gvalue(VALUE value, GValue *result)
     gst_value_set_mini_object(result, NIL_P(value) ? NULL : RVAL2GOBJ(value));
 }
 
-void
+static void
 rbgst_mini_object_initialize(VALUE object, gpointer instance)
 {
     DATA_PTR(object) = instance;
 }
 
-gpointer
+static gpointer
 rbgst_mini_object_robj2instance(VALUE object)
 {
     gpointer instance;
@@ -101,13 +101,13 @@ rbgst_mini_object_robj2instance(VALUE object)
     return instance;
 }
 
-void
+static void
 rbgst_mini_object_define_class_if_need(VALUE klass, GType type)
 {
     _rbgst_define_class_if_need(klass, type, NULL);
 }
 
-VALUE
+static VALUE
 rbgst_mini_object_instance2robj(gpointer instance)
 {
     VALUE klass;
@@ -117,10 +117,10 @@ rbgst_mini_object_instance2robj(gpointer instance)
     klass = GTYPE2CLASS(type);
     rbgst_mini_object_define_class_if_need(klass, type);
     gst_mini_object_ref(instance);
-    return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
+    return Data_Wrap_Struct(klass, NULL, _rbgst_mini_object_free, instance);
 }
 
-void
+static void
 rbgst_mini_object_unref(gpointer instance)
 {
     gst_mini_object_unref(instance);
@@ -129,7 +129,7 @@ rbgst_mini_object_unref(gpointer instance)
 static VALUE
 s_allocate(VALUE klass)
 {
-    return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, NULL);
+    return Data_Wrap_Struct(klass, NULL, _rbgst_mini_object_free, NULL);
 }
 
 static VALUE

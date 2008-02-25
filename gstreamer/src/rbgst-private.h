@@ -27,4 +27,6 @@
 char *_rbgst_inspect(VALUE object);
 void _rbgst_define_class_if_need(VALUE klass, GType type, const gchar *prefix);
 
+void _rbgst_mini_object_free(void *ptr);
+
 #endif /* __RBGST_PRIVATE_H_ */

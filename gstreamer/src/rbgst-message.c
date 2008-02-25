@@ -20,6 +20,7 @@
  */
 
 #include "rbgst.h"
+#include "rbgst-private.h"
 
 /* Class: Gst::Message
  * Lightweight objects to signal the application of pipeline events.
@@ -147,7 +148,7 @@ instance2robj(gpointer instance)
         break;
     }
     gst_mini_object_ref(instance);
-    return Data_Wrap_Struct(klass, NULL, rbgst_mini_object_free, instance);
+    return Data_Wrap_Struct(klass, NULL, _rbgst_mini_object_free, instance);
 }
 
 
