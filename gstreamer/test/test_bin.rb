@@ -129,4 +129,16 @@ class TestBin < Test::Unit::TestCase
     assert_equal(element1, bin[1])
     assert_nil(bin[2])
   end
+
+  def test_sinks
+    bin = Gst::Bin.new
+    sink1 = create_element("filesink")
+    sink2 = create_element("fakesink")
+    src = create_element("fakesrc")
+
+    assert_equal([], bin.sinks)
+
+    bin << src << sink1 << sink2
+    assert_equal([sink2, sink1], bin.sinks)
+  end
 end
