@@ -26,6 +26,7 @@
 
 char *_rbgst_inspect(VALUE object);
 void _rbgst_define_class_if_need(VALUE klass, GType type, const gchar *prefix);
+VALUE _rbgst_collect_elements(GstIterator *iter);
 
 void _rbgst_mini_object_free(void *ptr);
 

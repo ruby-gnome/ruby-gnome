@@ -141,4 +141,16 @@ class TestBin < Test::Unit::TestCase
     bin << src << sink1 << sink2
     assert_equal([sink2, sink1], bin.sinks)
   end
+
+  def test_sources
+    bin = Gst::Bin.new
+    src1 = create_element("filesrc")
+    src2 = create_element("fakesrc")
+    sink = create_element("fakesink")
+
+    assert_equal([], bin.sources)
+
+    bin << src1 << src2 << sink
+    assert_equal([src2, src1], bin.sources)
+  end
 end

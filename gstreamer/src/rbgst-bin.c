@@ -20,6 +20,7 @@
  */
 
 #include "rbgst.h"
+#include "rbgst-private.h"
 
 #define SELF(self) RVAL2GST_BIN(self)
 
@@ -371,33 +372,13 @@ rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
 static VALUE
 rb_gst_bin_get_sinks(VALUE self)
 {
-    VALUE sinks;
-    GstIterator *iter;
-    gboolean done = FALSE;
+    return _rbgst_collect_elements(gst_bin_iterate_sinks(SELF(self)));
+}
 
-    sinks = rb_ary_new();
-    iter = gst_bin_iterate_sinks(SELF(self));
-    while (!done) {
-        gpointer item;
-        switch (gst_iterator_next(iter, &item)) {
-          case GST_ITERATOR_OK:
-            rb_ary_push(sinks, GST_ELEMENT2RVAL(item));
-            gst_object_unref(item);
-            break;
-          case GST_ITERATOR_RESYNC:
-            gst_iterator_resync(iter);
-            break;
-          case GST_ITERATOR_ERROR:
-            done = TRUE;
-            break;
-          case GST_ITERATOR_DONE:
-            done = TRUE;
-            break;
-        }
-    }
-    gst_iterator_free(iter);
-
-    return sinks;
+static VALUE
+rb_gst_bin_get_sources(VALUE self)
+{
+    return _rbgst_collect_elements(gst_bin_iterate_sources(SELF(self)));
 }
 
 void
@@ -439,6 +420,7 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "[]", rb_gst_bin_get, -1);
 
     rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
+    rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
 
     /* rb_define_method(rb_cGstBin, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
     /* rb_define_method(rb_cGstBin, "each_by_interface", rb_gst_bin_each_by_if, 1); */

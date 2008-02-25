@@ -56,3 +56,34 @@ _rbgst_define_class_if_need(VALUE klass, GType type, const gchar *prefix)
     if (rb_respond_to(parent, id_gtype))
         _rbgst_define_class_if_need(parent, CLASS2GTYPE(parent), prefix);
 }
+
+VALUE
+_rbgst_collect_elements(GstIterator *iter)
+{
+    VALUE elements;
+    gboolean done = FALSE;
+
+    elements = rb_ary_new();
+    while (!done) {
+        gpointer element;
+        switch (gst_iterator_next(iter, &element)) {
+          case GST_ITERATOR_OK:
+            rb_ary_push(elements, GST_ELEMENT2RVAL(element));
+            gst_object_unref(element);
+            break;
+          case GST_ITERATOR_RESYNC:
+            gst_iterator_resync(iter);
+            break;
+          case GST_ITERATOR_ERROR:
+            done = TRUE;
+            break;
+          case GST_ITERATOR_DONE:
+            done = TRUE;
+            break;
+        }
+    }
+    gst_iterator_free(iter);
+
+    return elements;
+}
+
