@@ -20,6 +20,7 @@
  */
 
 #include "rbgst.h"
+#include "rbgst-private.h"
 
 /* Class: Gst::MiniObject
  * Base class for refcounted lightweight objects.
@@ -103,14 +104,7 @@ rbgst_mini_object_robj2instance(VALUE object)
 void
 rbgst_mini_object_define_class_if_need(VALUE klass, GType type)
 {
-    if (rb_class2name(klass)[0] == '#') {
-        const gchar *type_name;
-        type_name = g_type_name(type);
-
-        if (g_str_has_prefix(type_name, "Gst"))
-            type_name += 3;
-        G_DEF_CLASS(type, type_name, mGst);
-    }
+    _rbgst_define_class_if_need(klass, type, NULL);
 }
 
 VALUE

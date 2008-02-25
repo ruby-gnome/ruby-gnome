@@ -84,4 +84,34 @@ class TestBin < Test::Unit::TestCase
     bin.clear
     assert_equal(0, bin.size)
   end
+
+  def test_refer_by_name
+    bin = Gst::Bin.new
+    sub_bin = Gst::Bin.new
+    bin << sub_bin
+
+    element = create_element("fakesink")
+    assert_nil(bin[element.name])
+    assert_nil(sub_bin[element.name])
+    assert_nil(sub_bin[element.name, true])
+
+    bin << element
+    assert_equal(element, bin[element.name])
+    assert_equal(element, bin[element.name,true])
+    assert_nil(sub_bin[element.name])
+    assert_equal(element, sub_bin[element.name, true])
+  end
+
+  def test_refer_by_interface
+    bin = Gst::Bin.new
+    element = create_element("filesink")
+
+    assert_nil(bin[Gst::ElementURIHandler])
+
+    bin << create_element("fakesink")
+    assert_nil(bin[Gst::ElementURIHandler])
+
+    bin << element
+    assert_equal(element, bin[Gst::ElementURIHandler])
+  end
 end

@@ -27,22 +27,12 @@
 
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
+static ID id_gtype;
 
 static void
 define_class_if_need(VALUE klass, GType type)
 {
-    const gchar *type_name;
-    gchar *class_name;
-
-    if (rb_class2name(klass)[0] != '#')
-        return;
-
-    type_name = g_type_name(type);
-    if (g_str_has_prefix(type_name, "Gst"))
-        type_name += 3;
-    class_name = g_strconcat("Element", type_name, NULL);
-    G_DEF_CLASS(type, class_name, mGst);
-    g_free(class_name);
+    _rbgst_define_class_if_need(klass, type, "Element");
 }
 
 static VALUE
@@ -773,6 +763,8 @@ Init_gst_element(void)
     table.type = GST_TYPE_ELEMENT;
     table.instance2robj = instance2robj;
     RG_DEF_CONVERSION(&table);
+
+    id_gtype = rb_intern("gtype");
 
     rb_cGstElement = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst);
 

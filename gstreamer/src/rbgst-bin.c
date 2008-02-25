@@ -259,44 +259,48 @@ rb_gst_bin_each_element (VALUE self)
 }
 
 /*
- * Method: get_by_name(name)
+ * Method: [](name, recurse=false)
+ * Method: [](interface)
  * name: a name.
+ * recurse: search recursively.
+ * interface: an interface (Ruby class).
  *
- * Gets the element with the given name from the bin, as a reference to 
- * a Gst::Element object.
- *
- * Returns: a Gst::Element reference, or nil if the bin does not contain
- * an element with the given name.
- */
-static VALUE
-rb_gst_bin_get_by_name (VALUE self, VALUE name)
-{
-    GstElement *element = gst_bin_get_by_name (RGST_BIN (self),
-                                               RVAL2CSTR (name));
-
-    return element != NULL ? RGST_ELEMENT_NEW (element)
-        : Qnil;
-}
-
-/*
- * Method: get_by_name_recurse_up(name)
- * name: a name.
- *
- * Gets the element with the given name from the bin, as a reference to 
- * a Gst::Element object. If the element is not found, a recursion is 
+ * 1st: Gets the element with the given name from the
+ * bin, as a reference to a Gst::Element object. If the
+ * element is not found and recurse is true, a recursion is
  * performed on the parent bin.
  *
- * Returns: a Gst::Element reference, or nil if no element with the
- * given name is found.
+ * 2nd: Looks for the first element inside the bin that implements the
+ * given interface. If such an element is found, it returns the element.
+ * If you want all elements that implement the interface, use
+ * Gst::Bin#get_all_by_interface. The method recurses bins inside bins.
+ *
+ * Returns: a Gst::Element reference, or nil if the bin does not contain
+ * an element with the given name nor implementing the interface.
  */
 static VALUE
-rb_gst_bin_get_by_name_recurse_up (VALUE self, VALUE name)
+rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
 {
-    GstElement *element = gst_bin_get_by_name_recurse_up (RGST_BIN (self),
-                                                          RVAL2CSTR (name));
+    VALUE name_or_interface, recurse;
+    GstElement *element;
 
-    return element != NULL ? RGST_ELEMENT_NEW (element)
-        : Qnil;
+    rb_scan_args(argc, argv, "11", &name_or_interface, &recurse);
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(name_or_interface, rb_cString))) {
+        char *name;
+        name = RVAL2CSTR(name_or_interface);
+
+        if (RVAL2CBOOL(recurse)) {
+            element = gst_bin_get_by_name_recurse_up(SELF(self), name);
+        } else {
+            element = gst_bin_get_by_name(SELF(self), name);
+        }
+    } else {
+        element = gst_bin_get_by_interface(SELF(self),
+                                           CLASS2GTYPE(name_or_interface));
+    }
+
+    return GST_ELEMENT2RVAL(element);
 }
 
 /*
@@ -312,25 +316,6 @@ rb_gst_bin_get_by_name_recurse_up (VALUE self, VALUE name)
 /* { */
 /*     return CBOOL2RVAL(gst_bin_iterate_elements(RGST_BIN(self))); */
 /* } */
-
-/*
- * Method: get_by_interface(interface)
- * interface: an interface (Ruby class).
- *
- * Looks for the first element inside the bin that implements the 
- * given interface. If such an element is found, it returns the element.
- * If you want all elements that implement the interface, use 
- * Gst::Bin#get_all_by_interface. The method recurses bins inside bins.
- *
- * Returns: An element inside the bin implementing the interface, as a
- * Gst::Element object.
- */
-static VALUE
-rb_gst_bin_get_by_if (VALUE self, VALUE klass)
-{
-    return RGST_ELEMENT_NEW (gst_bin_get_by_interface (RGST_BIN (self),
-                                                       CLASS2GTYPE (klass)));
-}
 
 /*
  * Method: iterate_all_by_interface(interface)
@@ -406,11 +391,7 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
     rb_define_method(rb_cGstBin, "clear", rb_gst_bin_clear, 0);
 
-    rb_define_method(rb_cGstBin, "get_by_name", rb_gst_bin_get_by_name, 1);
-    rb_define_method(rb_cGstBin, "get_by_name_recurse_up",
-                      rb_gst_bin_get_by_name_recurse_up, 1);
-    rb_define_alias(rb_cGstBin, "[]", "get_by_name");
-    rb_define_method(rb_cGstBin, "get_by_interface", rb_gst_bin_get_by_if, 1);
+    rb_define_method(rb_cGstBin, "[]", rb_gst_bin_get, -1);
     /* rb_define_method(rb_cGstBin, "iterate_all_by_interface", rb_gst_bin_iterate_all_by_if, 1); */
     /* rb_define_method(rb_cGstBin, "each_by_interface", rb_gst_bin_each_by_if, 1); */
 
@@ -418,6 +399,6 @@ Init_gst_bin (void)
 
     G_DEF_SETTERS(rb_cGstBin);
 
-    G_DEF_CLASS (GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
+    G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
     G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");
 }

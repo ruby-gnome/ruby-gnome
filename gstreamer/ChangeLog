@@ -1,3 +1,10 @@
+2008-02-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#[].
+
+	* src/rbgst-private.[ch], src/rbgst-mini-object.c,
+	src/rbgst-element.c: generalized define_class_if_need().
+
 2008-02-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#clear.
