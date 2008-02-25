@@ -1,5 +1,7 @@
 2008-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-bin.c, test/test_bin.rb: supported Gst::Bin#[index].
+
 	* src/rbgst-private.[ch], src/rbgst-mini-object.c,
 	src/rbgst-message.c: hid rbgst_mini_object_*().
 

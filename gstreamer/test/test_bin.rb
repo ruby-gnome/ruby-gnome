@@ -114,4 +114,19 @@ class TestBin < Test::Unit::TestCase
     bin << element
     assert_equal(element, bin[Gst::ElementURIHandler])
   end
+
+  def test_refer_by_index
+    bin = Gst::Bin.new
+    element1 = create_element("filesink")
+    element2 = create_element("fakesink")
+
+    assert_nil(bin[0])
+    assert_nil(bin[1])
+    assert_nil(bin[2])
+
+    bin << element1 << element2
+    assert_equal(element2, bin[0])
+    assert_equal(element1, bin[1])
+    assert_nil(bin[2])
+  end
 end

@@ -253,24 +253,28 @@ rb_gst_bin_clear(VALUE self)
  * Returns: always  nil.
  */
 static VALUE
-rb_gst_bin_each_element (VALUE self)
+rb_gst_bin_each_element(VALUE self)
 {
-    return rb_ary_yield (rb_gst_bin_get_children (self));
+    return rb_ary_yield(rb_gst_bin_get_children (self));
 }
 
 /*
+ * Method: [](index)
  * Method: [](name, recurse=false)
  * Method: [](interface)
+ * index: an index.
  * name: a name.
  * recurse: search recursively.
  * interface: an interface (Ruby class).
  *
- * 1st: Gets the element with the given name from the
+ * 1st: Gets the index-th element.
+ *
+ * 2nd: Gets the element with the given name from the
  * bin, as a reference to a Gst::Element object. If the
  * element is not found and recurse is true, a recursion is
  * performed on the parent bin.
  *
- * 2nd: Looks for the first element inside the bin that implements the
+ * 3nd: Looks for the first element inside the bin that implements the
  * given interface. If such an element is found, it returns the element.
  * If you want all elements that implement the interface, use
  * Gst::Bin#get_all_by_interface. The method recurses bins inside bins.
@@ -281,14 +285,22 @@ rb_gst_bin_each_element (VALUE self)
 static VALUE
 rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
 {
-    VALUE name_or_interface, recurse;
-    GstElement *element;
+    VALUE index_or_name_or_interface, recurse;
+    GstElement *element = NULL;
 
-    rb_scan_args(argc, argv, "11", &name_or_interface, &recurse);
+    rb_scan_args(argc, argv, "11", &index_or_name_or_interface, &recurse);
 
-    if (RVAL2CBOOL(rb_obj_is_kind_of(name_or_interface, rb_cString))) {
+    if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_name_or_interface, rb_cInteger))) {
+        int index;
+        GList *node;
+        index = NUM2INT(index_or_name_or_interface);
+        node = g_list_nth(GST_BIN_CHILDREN(SELF(self)), index);
+        if (node)
+            element = node->data;
+    } else if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_name_or_interface,
+                                            rb_cString))) {
         char *name;
-        name = RVAL2CSTR(name_or_interface);
+        name = RVAL2CSTR(index_or_name_or_interface);
 
         if (RVAL2CBOOL(recurse)) {
             element = gst_bin_get_by_name_recurse_up(SELF(self), name);
@@ -296,8 +308,9 @@ rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
             element = gst_bin_get_by_name(SELF(self), name);
         }
     } else {
-        element = gst_bin_get_by_interface(SELF(self),
-                                           CLASS2GTYPE(name_or_interface));
+        GType interface;
+        interface = CLASS2GTYPE(index_or_name_or_interface);
+        element = gst_bin_get_by_interface(SELF(self), interface);
     }
 
     return GST_ELEMENT2RVAL(element);
