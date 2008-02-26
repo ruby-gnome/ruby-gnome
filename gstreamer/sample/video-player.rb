@@ -27,7 +27,7 @@ bus.add_watch do |bus, message|
     puts "end of stream"
     Gtk.main_quit
   when Gst::Message::ERROR
-    $stderr.puts "Error: #{message.parse_error} (#{message.parse_info})"
+    $stderr.puts "Error: #{message.parse}"
     Gtk.main_quit
   end
   true

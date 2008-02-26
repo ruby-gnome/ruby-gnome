@@ -1,5 +1,7 @@
 2008-02-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/: fixed wrong method name.
+
 	* sample/xml-player.rb: added.
 
 	* sample/xml-ogg-player.rb: removed.

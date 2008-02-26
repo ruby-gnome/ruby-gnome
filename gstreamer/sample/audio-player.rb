@@ -39,7 +39,7 @@ bus.add_watch do |bus, message|
   when Gst::Message::EOS
     loop.quit
   when Gst::Message::ERROR
-    p message.parse_error
+    p message.parse
     loop.quit
   end
   true

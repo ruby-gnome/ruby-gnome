@@ -17,10 +17,21 @@ def type_find(file)
     found_caps = caps
   end
 
+  loop = GLib::MainLoop.new
   source.location = file
-  pipeline.pause
-  while pipeline.state != Gst::State::PAUSED # FIXME
+  bus = pipeline.bus
+  bus.add_watch do |bus, message|
+    case message.type
+    when Gst::Message::STATE_CHANGED, Gst::Message::EOS
+      loop.quit
+    when Gst::Message::ERROR
+      p message.parse
+      loop.quit
+    end
+    true
   end
+  pipeline.pause
+  loop.run
   pipeline.stop
 
   if found_caps
