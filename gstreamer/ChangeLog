@@ -1,3 +1,9 @@
+2008-02-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/xml-player.rb: added.
+
+	* sample/xml-ogg-player.rb: removed.
+
 2008-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-bin.c, test/test_bin.rb: added tests for Gst::Bin#children.
