@@ -1,3 +1,7 @@
+2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-element.c: added missing #include.
+
 2008-02-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/: fixed wrong method name.
