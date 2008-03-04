@@ -56,7 +56,9 @@ RUBY_PANGO_VAR VALUE mPango;
 #define PANGO_TYPE_ATTR_ITERATOR (pango_attr_iter_get_type())
 #define PANGO_TYPE_COVERAGE (pango_coverage_get_type())
 #define PANGO_TYPE_GLYPH_INFO (pango_glyph_info_get_type())
-#define PANGO_TYPE_GLYPH_ITEM (pango_glyph_item_get_type())
+#ifndef PANGO_TYPE_GLYPH_ITEM
+#  define PANGO_TYPE_GLYPH_ITEM (pango_glyph_item_get_type())
+#endif
 
 #if PANGO_CHECK_VERSION(1,4,0)
 #define PANGO_TYPE_SCRIPT_ITER (pango_script_iter_get_type())
@@ -79,7 +81,9 @@ extern GType pango_rectangle_get_type();
 extern GType pango_attr_iter_get_type();
 extern GType pango_coverage_get_type();
 extern GType pango_glyph_info_get_type();
+#ifndef HAVE_PANGO_GLYPH_ITEM_GET_TYPE
 extern GType pango_glyph_item_get_type();
+#endif
 
 #if PANGO_CHECK_VERSION(1,4,0)
 extern GType pango_script_iter_get_type();
