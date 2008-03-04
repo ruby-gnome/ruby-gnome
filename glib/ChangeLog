@@ -1,3 +1,9 @@
+2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c: used G_RELATIVE2 and "closures" ID for
+	keeping GRClosure reference instead of G_ADD_CHILD to protect
+	GRClosures from G_CHILD_REMOVE_ALL.
+
 2008-02-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil_callback.c:

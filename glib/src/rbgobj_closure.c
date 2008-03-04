@@ -13,7 +13,7 @@
 
 #include "rbgprivate.h"
 
-static ID id_call;
+static ID id_call, id_closures;
 static gboolean rclosure_initialized = FALSE;
 
 typedef struct _GRClosure GRClosure;
@@ -144,7 +144,7 @@ rclosure_unref(GRClosure *rclosure)
             GObject *object = G_OBJECT(next->data);
             VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
             if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj))
-                G_CHILD_REMOVE(obj, rclosure->rb_holder);
+                G_REMOVE_RELATIVE(obj, id_closures, rclosure->rb_holder);
             g_object_weak_unref(object, rclosure_weak_notify, rclosure);
         }
         g_list_free(rclosure->objects);
@@ -222,7 +222,7 @@ g_rclosure_attach(GClosure *closure, VALUE object)
     static VALUE mGLibObject = (VALUE)NULL;
     GRClosure *rclosure = (GRClosure *)closure;
 
-    G_CHILD_ADD(object, rclosure->rb_holder);
+    G_RELATIVE2(object, Qnil, id_closures, rclosure->rb_holder);
 
     if (!mGLibObject) {
         mGLibObject = rb_const_get(mGLib, rb_intern("Object"));
@@ -246,6 +246,7 @@ static void
 Init_rclosure()
 {
     id_call = rb_intern("call");
+    id_closures = rb_intern("closures");
     rclosure_initialized = TRUE;
     rb_set_end_proc(rclosure_end_proc, Qnil);
 }
