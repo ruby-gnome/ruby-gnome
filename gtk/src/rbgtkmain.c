@@ -15,7 +15,7 @@
 #include "global.h"
 #include <locale.h>
 
-EXTERN VALUE rb_progname, rb_argv;
+EXTERN VALUE rb_progname;
 
 static VALUE rbgtk_eGtkInitError;
 
@@ -91,10 +91,7 @@ typedef void (*SignalFunc) (int);
 static gboolean _initialized = FALSE;
 
 static VALUE
-gtk_m_init(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gtk_m_init(int argc, VALUE *argv, VALUE self)
 {
     gint i, gargc;
     VALUE argary;
@@ -108,6 +105,8 @@ gtk_m_init(argc, argv, self)
     rb_scan_args(argc, argv, "01", &argary);
 
     if (NIL_P(argary)){
+        VALUE rb_argv;
+        rb_argv = rb_const_get(rb_cObject, rb_intern("ARGV"));
         gargc = RARRAY(rb_argv)->len;
         argary = rb_argv;
     } else {

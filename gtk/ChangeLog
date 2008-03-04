@@ -1,3 +1,7 @@
+2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmain.c: don't use rb_argv.
+
 2008-01-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkwindow.c: added Gdk::Window#set_user_time.
