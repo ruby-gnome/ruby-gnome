@@ -18,25 +18,23 @@ static GdkAtom compound_text;
 
 /************************************************************************/
 void
-rbgtk_atom2selectiondata(type, size, src, gtype, data, format, length)
-    VALUE type, size, src;
-    void** data;
-    GdkAtom* gtype;
-    gint* format;
-    gint* length;
+rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
+                         void **data, gint *format, gint *length)
 {
     void* dat = NULL;
     gint fmt, len;
     GdkAtom ntype = RVAL2ATOM(type);
     
     if(ntype == GDK_SELECTION_TYPE_INTEGER){
-        int i = NUM2INT(src);
-        dat = (void*)&i;
-        fmt = 32;
+        int *i;
+        i = ALLOC(int);
+        *i = NUM2INT(src);
+        dat = i;
+        fmt = sizeof(int) * 8;
         len = 1;
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
         dat = RVAL2CSTR(src);
-        fmt = 8;
+        fmt = sizeof(char) * 8;
         len = RSTRING_LEN(src);
     } else if(ntype == compound_text){
         guchar* str = (guchar*)dat;
@@ -60,7 +58,8 @@ rbgtk_atom2selectiondata_free(type, dat)
     GdkAtom type;
     void* dat;
 {
-    if(type == GDK_SELECTION_TYPE_ATOM) {
+    if (type == GDK_SELECTION_TYPE_INTEGER ||
+        type == GDK_SELECTION_TYPE_ATOM) {
         xfree(dat);
     } else if(type == compound_text) {
         gdk_free_compound_text(dat);
