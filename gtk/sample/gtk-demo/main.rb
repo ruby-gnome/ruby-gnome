@@ -377,4 +377,13 @@ else
   main.show_all
 end
 
+Thread.new do
+  loop do
+    before = Time.now
+    p :before
+    sleep 1
+    p [:ruby, Time.now - before]
+  end
+end
+
 Gtk.main
