@@ -1,5 +1,7 @@
 2008-03-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/: added.
+
 	* src/rbgtkselectiondata.c: fixed a wrong type conversion bug.
 	Reported by Masayuki Yamaguchi. Thanks!!!
 
