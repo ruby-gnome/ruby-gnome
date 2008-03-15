@@ -1,5 +1,8 @@
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/lib/glib-mkenums.rb: supported glib 2.16.1. [Bug #1913301].
+	Reported by mezz. Thanks!!!
+
 	* ./, test/run-test.rb: used TestUnitExt.
 
 	* test/run-test.rb: renamed from test/runner.rb.

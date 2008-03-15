@@ -3,7 +3,7 @@
 #
 # C language enum description generation library like as glib-mkenums tool.
 #
-# Copyright(C) 2006 Ruby-GNOME2 Project.
+# Copyright(C) 2006-2008 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 #
@@ -33,16 +33,14 @@ module GLib
       if const_lines.include? "<<"
         @type = "flags"
         @Type = "Flags"
-        regexp = /^\s*([^\s]*)\s.*\n/
       else
         @type = "enum"
         @Type = "Enum"
-        regexp = /^\s*([^\s,]*).*\n/
       end
       consts = []
-      const_lines.scan(regexp){|name|
+      const_lines.scan(/^\s*([^\s,]*).*\n/) do |name|
         consts << name[0] unless name[0] =~ /(^[\/\*]|^$)/
-      }
+      end
       @prefix = extract_prefix(consts)
       consts.each do |name|
         # consts = [name, nick]
