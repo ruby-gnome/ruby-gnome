@@ -1,3 +1,7 @@
+2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/: renamed from tests/.
+
 2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c: used G_RELATIVE2 and "closures" ID for
