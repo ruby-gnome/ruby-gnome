@@ -11,7 +11,7 @@
 #
 
 module GLib
-  class Enum
+  class EnumDefinition
     attr_accessor :EnumName, :enum_name, :ENUM_NAME, :ENUM_SHORT
     attr_accessor :type, :Type
     attr_accessor :g_type_prefix, :prefix
@@ -98,7 +98,7 @@ GType #{@enum_name}_get_type (void);
       data.scan(/^\s*typedef\s+enum\s*
                 \{?\s*(.*?)
                 \}\s*(\w+);/mx){|consts, name|
-        enum = Enum.new(name, consts, g_type_prefix)
+        enum = new(name, consts, g_type_prefix)
         enums << enum
       }
       enums
@@ -140,7 +140,7 @@ GType #{@enum_name}_get_type (void);
         File.open(path) do |i|
           data = i.read
         end
-        @targets << [path, Enum.parse(data, g_type_prefix)]
+        @targets << [path, EnumDefinition.parse(data, g_type_prefix)]
       end
     end
 
