@@ -1,3 +1,7 @@
+2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: used TestUnitExt in glib/test-unit-ext/.
+
 2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-element.c: added missing #include.

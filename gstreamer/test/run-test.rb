@@ -8,15 +8,18 @@ base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
 system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
 
-$LOAD_PATH.unshift(File.join(base_dir, "..", "glib", "src"))
-$LOAD_PATH.unshift(File.join(base_dir, "..", "glib", "src", "lib"))
+glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
+test_unit_ext_dir = File.join(glib_dir, "test-unit-ext", "lib")
+
+$LOAD_PATH.unshift(File.join(glib_dir, "src"))
+$LOAD_PATH.unshift(File.join(glib_dir, "src", "lib"))
 
 $LOAD_PATH.unshift(File.join(base_dir, "src"))
 $LOAD_PATH.unshift(File.join(base_dir, "src", "lib"))
 require "gst"
 
 $LOAD_PATH.unshift(File.join(base_dir, "test"))
-$LOAD_PATH.unshift(File.join(base_dir, "test-unit-ext", "lib"))
+$LOAD_PATH.unshift(test_unit_ext_dir)
 require 'test-unit-ext'
 
 require 'gst-test-utils'
