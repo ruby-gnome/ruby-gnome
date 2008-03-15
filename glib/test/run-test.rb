@@ -3,10 +3,15 @@
 base = File.expand_path(File.dirname(__FILE__))
 top = File.expand_path(File.join(base, ".."))
 
+if system("make --version > /dev/null")
+  system("cd #{top.dump} && make > /dev/null") or exit(1)
+end
+
 $LOAD_PATH.unshift(File.join(top, "src"))
 $LOAD_PATH.unshift(File.join(top, "src", "lib"))
 $LOAD_PATH.unshift(base)
 
-require 'test/unit'
+$LOAD_PATH.unshift(File.join(top, "test-unit-ext", "lib"))
+require 'test-unit-ext'
 
 exit Test::Unit::AutoRunner.run(true, base)

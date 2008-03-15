@@ -1,5 +1,7 @@
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ./, test/run-test.rb: used TestUnitExt.
+
 	* test/run-test.rb: renamed from test/runner.rb.
 
 	* test/: renamed from tests/.
