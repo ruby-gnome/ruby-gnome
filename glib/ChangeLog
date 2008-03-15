@@ -1,5 +1,9 @@
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/lib/glib-mkenums.rb: used constants instead of consts.
+	* test/test_mkenums.rb: added.
+	* test/run-test.rb: required 'glib2'.
+
 	* src/lib/glib-mkenums.rb: used $Id$ instead of $Rev$.
 
 	* src/lib/glib-mkenums.rb: GLib::Enum -> GLib::EnumDefinition to

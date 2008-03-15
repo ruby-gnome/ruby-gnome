@@ -14,10 +14,12 @@ module GLib
     attr_accessor :type, :Type
     attr_accessor :g_type_prefix, :prefix
 
+    attr_reader :constants
+
     def initialize(name, const_lines, g_type_prefix)
       @EnumName = name
       @g_type_prefix = g_type_prefix
-      @consts = []
+      @constants = []
       @enum_name = @EnumName.sub(/^[A-Z]/){|v| v.downcase}.gsub(/[A-Z]+/){|v| "_" + v.downcase}.sub(/(^_|_$)/, "")
       @ENUM_NAME = @enum_name.upcase
       @ENUM_SHORT = @ENUM_NAME.sub(/^#{@g_type_prefix.sub(/_TYPE.*$/, "")}/, "").sub(/^_/, "")
@@ -35,14 +37,13 @@ module GLib
         @type = "enum"
         @Type = "Enum"
       end
-      consts = []
+      constants = []
       const_lines.scan(/^\s*([^\s,]*).*\n/) do |name|
-        consts << name[0] unless name[0] =~ /(^[\/\*]|^$)/
+        constants << name[0] unless name[0] =~ /(^[\/\*]|^$)/
       end
-      @prefix = extract_prefix(consts)
-      consts.each do |name|
-        # consts = [name, nick]
-        @consts << [name, name.sub(/#{@prefix}/, "").gsub(/_/, "-").downcase]
+      @prefix = extract_prefix(constants)
+      constants.each do |name|
+        @constants << [name, name.sub(/#{@prefix}/, "").gsub(/_/, "-").downcase]
       end
     end
 
@@ -62,7 +63,7 @@ module GLib
     end
 
     def create_c
-      consts = "\n" + @consts.collect{|name, nick| 
+      constants = "\n" + @constants.collect{|name, nick|
         %Q[      { #{name}, "#{name}", "#{nick}" },\n] 
       }.join +
         %Q[      { 0, NULL, NULL }]
@@ -74,7 +75,7 @@ GType
 {
   static GType etype = 0;
   if (etype == 0) {
-    static const G#{@Type}Value values[] = {#{consts}
+    static const G#{@Type}Value values[] = {#{constants}
     };
     etype = g_#{@type}_register_static ("#{@EnumName}", values);
   }
@@ -95,8 +96,8 @@ GType #{@enum_name}_get_type (void);
       enums = []
       data.scan(/^\s*typedef\s+enum\s*
                 \{?\s*(.*?)
-                \}\s*(\w+);/mx){|consts, name|
-        enum = new(name, consts, g_type_prefix)
+                \}\s*(\w+);/mx){|constants, name|
+        enum = new(name, constants, g_type_prefix)
         enums << enum
       }
       enums

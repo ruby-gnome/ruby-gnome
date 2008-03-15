@@ -14,4 +14,6 @@ $LOAD_PATH.unshift(base)
 $LOAD_PATH.unshift(File.join(top, "test-unit-ext", "lib"))
 require 'test-unit-ext'
 
+require 'glib2'
+
 exit Test::Unit::AutoRunner.run(true, base)
