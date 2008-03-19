@@ -19,6 +19,9 @@ Geoff Youngs <g at intersect-uk.co.uk>
      Ruby/GTK, Ruby/GdkPixbuf, Ruby/GtkSourceView,
      Ruby/Pango, Ruby/GLib. Ruby-GNOME2 Icon, Website.
 
+Joachim Glauche <jg at connection-net.de>
+	Releases(M), since 0.17.0
+
 Joao Pedrosa <joaopedrosa at yahoo.com>
      Portuguese-BR Website(M), Website, Ruby/GTK.
 
@@ -98,6 +101,8 @@ And many others who have contributed patches, reported bugs. Thanks!
 ----------------------------------------
 Ruby-GNOME Maintainers.
 (current)
+  Kouhei Sutou  <kou at cozmixng.org> 
+(up to Ruby-GNOME2 ver. 0.16)
   Masao Mutoh <mutoh at highway.ne.jp>
 (up to Ruby-GNOME ver. 0.27)
   Neil Conway <neilconway at rogers.com> 
