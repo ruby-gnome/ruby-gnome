@@ -16,13 +16,25 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
     rbgutil_start_callback_dispatch_thread() in your
     GStreamer bindings. Sorry.
 
+  * Ruby/GLib:  
+      Supported convenience GEnum and GFlags notation. e.g.:
+            GLib::UTF8.normalize(utf8, GLib::NormalizeMode::NFD)
+            ->
+            GLib::UTF8.normalize(utf8, :nfd)
+
+            key_file.load_from_data(data,
+                                    GLib::KeyFile::KEEP_COMMENTS |
+                                    GLib::KeyFile::KEEP_TRANSLATIONS)
+            -> 
+            key_file.load_from_data(data, [:keep_contents, :keep_translations])
+
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
   * Ruby-GNOME2 can be build with ruby 1.9.0 but doesn't
     work well, yet.
  
-  * Some extconf.rb improvements 
+  * Some extconf.rb improvements   
 
   * Many other changes, GC bugs, Segfault fixes. See corresponding CHANGELOG
     for detailed information on changes and contributors.   
