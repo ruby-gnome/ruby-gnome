@@ -29,8 +29,10 @@ Release packages
     - Ruby/PanelApplet   - gnome-panel 2.6.0 or later (deprecated since 0.16.0)
     - Ruby/RSVG          - librsvg 2.8.0 or later
 
+  Experimental / Incomplete:
+    - Ruby/GStreamer     - GStreamer 0.10.x or later
+
   Not available (removed since 0.16.0)
-    - Ruby/GStreamer     - GStreamer 0.8.x or later
     - Ruby/Libgda        - libgda 1.0.3 or later
 
 Install
@@ -90,14 +92,16 @@ Dependencies
       Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
       Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
+ 
+  (experimental)
+      Ruby/GStreamer     depends on Ruby/GLib.
 
   (not available)
-      Ruby/GStreamer     depends on Ruby/GLib.
       Ruby/Libgda        depends on Ruby/GLib.
 
 Copying
 -------
-   Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+   Copyright (c) 2002-2008 Ruby-GNOME2 Project Team
 
    This program is free software.
    You can distribute/modify this program under the terms of
