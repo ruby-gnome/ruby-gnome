@@ -42,7 +42,7 @@ nick_to_const_name(const gchar *nick)
         if (*p == '-' || *p == ' ')
             *p = '_';
         else
-            *p = toupper(*p);
+            *p = g_ascii_toupper(*p);
     }
     return const_name;
 }
@@ -578,7 +578,7 @@ rbgobj_init_flags_class(VALUE klass)
             nick, entry->value);
 
         for (p = nick; *p; p++)
-            *p = toupper(*p);
+            *p = g_ascii_toupper(*p);
 
 #if 0
         {

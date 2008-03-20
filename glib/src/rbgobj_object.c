@@ -773,11 +773,11 @@ type_register(int argc, VALUE* argv, VALUE self)
         parent_type = cinfo->gtype;
     }
 
-    if (NIL_P(type_name)){
+    if (NIL_P(type_name)) {
         VALUE s = rb_funcall(self, rb_intern("name"), 0);
 
         if (strlen(StringValuePtr(s)) == 0)
-            rb_raise(rb_eTypeError, "can't determine type name");        
+            rb_raise(rb_eTypeError, "can't determine type name");
 
         type_name = rb_funcall(
             rb_eval_string("lambda{|x| x.gsub(/::/,'') }"),

@@ -69,7 +69,7 @@ rbgerr_define_gerror(domain, name, module, parent, gtype)
                 if (*p == '-')
                     *p = '_';
                 else
-                    *p = toupper(*p);
+                    *p = g_ascii_toupper(*p);
             }
             rbgobj_define_const(klass, nick, INT2NUM(i));
             g_free(nick);

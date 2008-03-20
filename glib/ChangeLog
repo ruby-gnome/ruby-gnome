@@ -1,3 +1,9 @@
+2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_enums.c, src/rbglib_error.c: used g_ascii_toupper()
+	instead of toupper() to be locale independent. [Bug #1901843]
+	Reported by Joseph Method. Thanks!!!
+
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/glib-mkenums.rb: used constants instead of consts.
