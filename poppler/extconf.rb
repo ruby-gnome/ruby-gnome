@@ -30,6 +30,7 @@ if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
 add_depend_package("gdk_pixbuf2", "gdkpixbuf", TOPDIR)
 
 make_version_header("POPPLER", PACKAGE_ID)
