@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'test/unit'
 require 'glib2'
 
@@ -48,12 +50,6 @@ class TestGLibUnicode < Test::Unit::TestCase
     assert(GLib::UniChar.lower?(?a))
     assert(!GLib::UniChar.lower?(?A))
     assert(!GLib::UniChar.lower?(?1))
-  end
-
-  def test_unichar_print?
-    assert(GLib::UniChar.print?(?a))
-    assert(GLib::UniChar.print?(?\ )) # space
-    assert(!GLib::UniChar.print?(?\t))
   end
 
   def test_unichar_print?
@@ -321,7 +317,7 @@ class TestGLibUnicode < Test::Unit::TestCase
     end
   end
 
-  def test_utf16_to_utf8
+  def test_ucs4_to_utf8
     require 'uconv'
     assert_equal("あいうえお",
                  GLib::UCS4.to_utf8(Uconv.u8tou4("あいうえお")))

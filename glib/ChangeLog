@@ -1,5 +1,7 @@
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_unicode.rb: fixed duplicated name.
+
 	* test/run-test.rb: $VERBOSE = true.
 
 	* src/rbgobj_enums.c, src/rbglib_error.c: used g_ascii_toupper()
