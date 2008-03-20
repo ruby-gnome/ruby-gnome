@@ -1,45 +1,46 @@
 Ruby-GNOME2-0.17.0 (unreleased yet)
 
   Release notes:
-  * Important: The current relase of win32 bindings is EXPERIMENTAL	
-	The changes marked with 2 stars (**) may currently not work on win32 platforms. 
+  * Important: The current relase of win32 bindings is EXPERIMENTAL
+	The changes marked with 2 stars (**) may currently not work on win32 platforms.
 
   * The win32 binaries are compiled against ruby 1.8.6 patchlevel 0
- 
+
   Main changes:
-  * Ruby/GLib: Improved main loop polling. **
+  * Ruby/GLib:
+    - Improved main loop polling. **
+    - Improved callback handling from non Ruby thread.**
 
-  * Ruby/GLib: Improved callback handling from non Ruby
-    thread.**
+      This changes breaks API. Sjoerd, you need to call
+      rbgutil_start_callback_dispatch_thread() in your
+      GStreamer bindings. Sorry.
 
-    This changes breaks API. Sjoerd, you need to call
-    rbgutil_start_callback_dispatch_thread() in your
-    GStreamer bindings. Sorry.
+    - Supported convenience GEnum and GFlags notation. e.g.:
+        GLib::UTF8.normalize(utf8, GLib::NormalizeMode::NFD)
+        ->
+        GLib::UTF8.normalize(utf8, :nfd)
 
-  * Ruby/GLib:  
-      Supported convenience GEnum and GFlags notation. e.g.:
-            GLib::UTF8.normalize(utf8, GLib::NormalizeMode::NFD)
-            ->
-            GLib::UTF8.normalize(utf8, :nfd)
+        key_file.load_from_data(data,
+                                GLib::KeyFile::KEEP_COMMENTS |
+                                GLib::KeyFile::KEEP_TRANSLATIONS)
+        ->
+        key_file.load_from_data(data, [:keep_contents, :keep_translations])
 
-            key_file.load_from_data(data,
-                                    GLib::KeyFile::KEEP_COMMENTS |
-                                    GLib::KeyFile::KEEP_TRANSLATIONS)
-            -> 
-            key_file.load_from_data(data, [:keep_contents, :keep_translations])
+    - Fixed locale dependent constant name computation. [#1901843]
+      [Kouhei Sutou]
 
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
   * Ruby-GNOME2 can be build with ruby 1.9.0 but doesn't
     work well, yet.
- 
-  * Some extconf.rb improvements   
+
+  * Some extconf.rb improvements
 
   * Many other changes, GC bugs, Segfault fixes. See corresponding CHANGELOG
-    for detailed information on changes and contributors.   
-	     
-    Special thanks for your contributions to: (list in no particular order) 
+    for detailed information on changes and contributors.
+
+    Special thanks for your contributions to: (list in no particular order)
    - Kazuhiro NISHIYAMA
    - Kouhei Sutou
    - Kero van Gelder
@@ -53,9 +54,9 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
    - Juergen Mangler
    - Dirk von Schmieden
    - Mathieu Blondel
-   
+   - Joseph Method
+
   And also special thanks to all other contributors not listed above!
-       
 
 Ruby-GNOME2-0.16.0 (2006-12-30)
 
