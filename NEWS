@@ -9,7 +9,7 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
   Main changes:
   * Ruby/GLib:
     - Improved main loop polling. **
-    - Improved callback handling from non Ruby thread.**
+    - Improved callback handling from non Ruby thread. **
 
       This changes breaks API. Sjoerd, you need to call
       rbgutil_start_callback_dispatch_thread() in your
@@ -41,32 +41,33 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
     for detailed information on changes and contributors.
 
     Special thanks for your contributions to: (list in no particular order)
-   - Kazuhiro NISHIYAMA
-   - Kouhei Sutou
-   - Kero van Gelder
-   - Masahiro Sakai
-   - Detlef Reichl
-   - Guillaume Cottenceau
-   - Masahiro Sakai
-   - Mikael Hallendal
-   - Carlo E. Prelz
-   - Sjoerd Simons
-   - Juergen Mangler
-   - Dirk von Schmieden
-   - Mathieu Blondel
-   - Joseph Method
+    - Kazuhiro NISHIYAMA
+    - Kouhei Sutou
+    - Kero van Gelder
+    - Masahiro Sakai
+    - Detlef Reichl
+    - Guillaume Cottenceau
+    - Masahiro Sakai
+    - Mikael Hallendal
+    - Carlo E. Prelz
+    - Sjoerd Simons
+    - Juergen Mangler
+    - Dirk von Schmieden
+    - Mathieu Blondel
+    - Joseph Method
 
   And also special thanks to all other contributors not listed above!
+
 
 Ruby-GNOME2-0.16.0 (2006-12-30)
 
   * Fixed serious bugs (depends on GC)
   * Support GTK+-2.10 and the latest version of each libraries.
-  * Don't include Ruby/GStreamer and Ruby/Libgda. We cancel to 
-    support Ruby/GStreamer and Ruby/Libgda. 
+  * Don't include Ruby/GStreamer and Ruby/Libgda. We cancel to
+    support Ruby/GStreamer and Ruby/Libgda.
   * Cancel to support ruby-1.6.x and GTK+-2.4 or earlier.
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Support GLib+-2.10 APIs. [Kouhei Sutou, Masao Mutoh]
       - Fix segfaults related GC with signal handlers. [Guillaume Cottenceau, Kouhei Sutou]
       - Add functions for Unicode Manipulation [Kouhei Sutou]
@@ -97,7 +98,7 @@ Ruby-GNOME2-0.16.0 (2006-12-30)
         Gtk::LinkButton, Gtk::Recent*, Gtk::Assistant, Gtk::StatusIcon
       - Other improvement and fix bugs [Sjoerd Simons, Kouhei Sutou, Masao Mutoh]
 
-  * Ruby/GNOME 
+  * Ruby/GNOME
       - None.
 
   * Ruby/GnomeCanvas
@@ -113,7 +114,7 @@ Ruby-GNOME2-0.16.0 (2006-12-30)
       - Sample code cleanup. [Masao Mutoh]
 
 
-  * Ruby/GnomeVFS 
+  * Ruby/GnomeVFS
       - None.
 
   * Ruby/GtkHtml2
@@ -148,19 +149,19 @@ Ruby-GNOME2-0.16.0 (2006-12-30)
       - None.
 
   * Ruby/GStreamer, Ruby/Libgda
-      - Canceled. 
+      - Canceled.
 
 Ruby-GNOME2-0.15.0 (2006-07-01)
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Improve signal handlers with pthread ruby(--enable-pthread). [Sjoerd Simons]
       - Added new fundamental object for other bindings. [Sjoerd Simons]
       - GLib::Source#remove -> GLib::Soruce.remove [Kouhei Sutou]
-      - Added new macros (GLIST2ARYF, GLIST2ARY2F, GSLIST2ARYF, GLIST2ARY2F, 
+      - Added new macros (GLIST2ARYF, GLIST2ARY2F, GSLIST2ARYF, GLIST2ARY2F,
         G_PROTECT_CALLBACK) [Masao Mutoh]
       - Added GLib.win32_locale, GLib, win32_locale_filename_from_utf8 [Kouhei Sutou]
       - Improve memory management [Kouhei Sutou, Sjoerd Simons, Masahiro Sakai, Masao Mutoh]
-      - Other improvement and fix bugs. 
+      - Other improvement and fix bugs.
         [Sjoerd Simons, Joao Pedrosa, Kouhei Sutou, Masahiro Sakai, Masao Mutoh]
 
   * Ruby/ATK
@@ -179,10 +180,10 @@ Ruby-GNOME2-0.15.0 (2006-07-01)
       - Improve signal handlers. [Masahiro Sakai]
       - Added Gtk::Widget#set_widget, #set_requisition. [Daniel Chokola]
       - Added Gtk::Dialog#get_response. [Masao Mutoh]
-      - Other improvement and fix bugs [Mario Steele, Tilman Sauerbeck, Geoff Youngs, 
+      - Other improvement and fix bugs [Mario Steele, Tilman Sauerbeck, Geoff Youngs,
         Masahiro Sakai, Kouhei Sutou, Masao Mutoh]
 
-  * Ruby/GNOME 
+  * Ruby/GNOME
       - Follow Ruby/GLib2 change(GRClosure). [Kouhei Sutou]
 
   * Ruby/GnomeCanvas
@@ -197,10 +198,10 @@ Ruby-GNOME2-0.15.0 (2006-07-01)
   * Ruby/GConf
       - Sample code cleanup. [Masao Mutoh]
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Sample code cleanup. [Masao Mutoh]
 
-  * Ruby/GnomeVFS 
+  * Ruby/GnomeVFS
       - Improved and fixed bugs. [Masahiro Sakai, Masao Mutoh]
 
   * Ruby/GtkHtml2
@@ -243,7 +244,7 @@ Ruby-GNOME2-0.15.0 (2006-07-01)
 
 Ruby-GNOME2-0.14.1 (2005-11-06)
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Fix memory leaks. [Masao Mutoh]
 
   * Ruby/ATK
@@ -258,7 +259,7 @@ Ruby-GNOME2-0.14.1 (2005-11-06)
   * Ruby/GTK
       - Improve memory management. [Masao Mutoh]
 
-  * Ruby/GNOME 
+  * Ruby/GNOME
       - None.
 
   * Ruby/GnomeCanvas
@@ -273,10 +274,10 @@ Ruby-GNOME2-0.14.1 (2005-11-06)
   * Ruby/GConf
       - None.
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - None.
 
-  * Ruby/GnomeVFS 
+  * Ruby/GnomeVFS
       - None.
 
   * Ruby/GtkHtml2
@@ -309,20 +310,20 @@ Ruby-GNOME2-0.14.1 (2005-11-06)
 
 Ruby-GNOME2-0.14.0 (2005-10-16)
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Fix segfault related on GC. [Masao Mutoh]
       - Support Ruby-GetText-Pacakge(Include pseudo GetText module). [Masao Mutoh]
       - Add and completed: [Masao Mutoh]
         Glib::Shell, GLib::Completion, GLib::Timer, sample/shell.rb, completion.rb, timer.rb.
       - Add some methods, improved, fixed bugs: [Pascal Terjan, Sven Herzberg, Masao Mutoh]
-        GLib, GLib::Object, GLib::MetaInterface, GLib::Enum, GLib::Flags, PKGConfig, 
-        extconf.rb, mkmf-gnome2.rb 
+        GLib, GLib::Object, GLib::MetaInterface, GLib::Enum, GLib::Flags, PKGConfig,
+        extconf.rb, mkmf-gnome2.rb
 
   * Ruby/ATK
       - Support ATK-1.10. [Masao Mutoh]
       - Add Atk::BUILD_VERSION. [Masao Mutoh]
       - Add some methods, improved, fixed bugs: [Masao Mutoh]
-        Atk, Atk::Relation, Atk::RelationSet, Atk::StreamableContent, Atk::Text::Attribute, 
+        Atk, Atk::Relation, Atk::RelationSet, Atk::StreamableContent, Atk::Text::Attribute,
         Atk::Util
       - Add and completed: [Masao Mutoh]
         Atk::Util::KeyEventType
@@ -331,16 +332,16 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
       - Support Pango-1.10 and cairo [Kouhei Sutou, Masao Mutoh]
       - Add Pango::BUILD_VERSION. [Masao Mutoh]
       - Add some methods, improved, fixed bugs: [Kouhei Sutou, Masao Mutoh]
-        Pango, Pango::Layout, Pango::LayoutLine, Pango::LayoutIter, Pango::Language, 
-        Pango::Font, Pango::GlyphItem, Pango::GlyphString, Pango::Context, Pango::Analysis, 
-        Pango::Item 
+        Pango, Pango::Layout, Pango::LayoutLine, Pango::LayoutIter, Pango::Language,
+        Pango::Font, Pango::GlyphItem, Pango::GlyphString, Pango::Context, Pango::Analysis,
+        Pango::Item
       - Add and completed: [Masao Mutoh]
         Pango::ScriptIter, Pango::Script, Pango::(.*)FontMap, Pango::(.*)Face,
         Pango::(.*)Family, Pango::XFont, Pango::FT2Font,
         sample/script.rb, break.rb, item.rb, layout.rb
       - Add classes: [Kouhei Sutou, Masao Mutoh]
         Pango::Engine, Pango::EngineShape, Pango::EngineLang
-        Cairo::Context, Pango::CairoFcFont, Pango::CairoFont, Pango::CairoWin32Font, 
+        Cairo::Context, Pango::CairoFcFont, Pango::CairoFont, Pango::CairoWin32Font,
         Pango::CairoFontMap
       - Rename class name: [Masao Mutoh]
         Pango::FontSet -> Pango::Fontset, Pango::FontSetSimple -> Pango::FontsetSimple.
@@ -357,18 +358,18 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
       - Support cairo. [Kouhei Sutou, Masao Mutoh]
       - Add Gtk::BUILD_VERSION. [Masao Mutoh]
       - Add some methods, improve, fix bugs: [Guillaume Cottenceau, Masao Mutoh]
-        Gdk, Gdk::Drawable, Gdk::Display, Gdk::Drawable, Gdk::Cursor, Gdk::Window, Gdk::Screen, 
-        Gtk::Action, Gtk::Dialog, Gtk::Drag, Gtk::EntryCompletion, Gtk::FileChooser, 
-        Gtk::IconView, Gtk::Image, Gtk::Menubar, Gtk::MenuShell, Gtk::ScrolledWindow, 
-        Gtk::SizeGroup, Gtk::Stock, Gtk::TextBuffer, Gtk::TextIter, Gtk::ToolButton, 
-        Gtk::TreeRowReference, Gtk::TreeView, Gtk::TreeViewColumn, Gtk::Window, 
+        Gdk, Gdk::Drawable, Gdk::Display, Gdk::Drawable, Gdk::Cursor, Gdk::Window, Gdk::Screen,
+        Gtk::Action, Gtk::Dialog, Gtk::Drag, Gtk::EntryCompletion, Gtk::FileChooser,
+        Gtk::IconView, Gtk::Image, Gtk::Menubar, Gtk::MenuShell, Gtk::ScrolledWindow,
+        Gtk::SizeGroup, Gtk::Stock, Gtk::TextBuffer, Gtk::TextIter, Gtk::ToolButton,
+        Gtk::TreeRowReference, Gtk::TreeView, Gtk::TreeViewColumn, Gtk::Window,
         sample/gtk-demo/*.rb
       - Add: [Guillaume Cottenceau, Kouhei Sutou]
         Cairo::Context, Gdk::EventGrabBroken, sample/gtk-demo/cairo_*.rb, sample/misc/rgtk+cairo.rb
-        
+
 
   * Ruby/GNOME [Masao Mutoh]
-      - Support libgnome/libgnomeui-2.12. 
+      - Support libgnome/libgnomeui-2.12.
       - Add Gnome::BUILD_VERSION.
       - Add some methods, improve, fix bugs:
         Gnome, Gnome::Util, Gnome::URL, Gnome::Help, Gnome::App, Gnome::Client
@@ -384,7 +385,7 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
 
   * Ruby/Libglade [Masao Mutoh]
       - Support libglade-2.12.
-      - Add GladeXML::BUILD_VERSION. 
+      - Add GladeXML::BUILD_VERSION.
       - Add some methods, improve, fix bugs:
         bin/ruby-glade-create-template, sample/l10n_*.rb, GladeXML
 
@@ -396,14 +397,14 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
       - Support Cygwin. [Yaakov Selkowitz]
       - Add GConf::BUILD_VERSION. [Masao Mutoh]
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Support on Ruby-1.9. [Laurent Sansonetti]
       - Add Gst::BUILD_VERSION. [Masao Mutoh]
       - Fix bugs, improve, add some methods: [Masao Mutoh]
-        Gst::Element 
+        Gst::Element
 
-  * Ruby/GnomeVFS 
-      - Support Cygwin. [Yaakov Selkowitz] 
+  * Ruby/GnomeVFS
+      - Support Cygwin. [Yaakov Selkowitz]
       - Add GnomeVFS::BUILD_VERSION. [Masao Mutoh]
       - Fix bugs, improve, add some methods: [Masao Mutoh]
         GnomeVFS
@@ -417,16 +418,16 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
         Gdk::Pixmap
 
   * Ruby/Libgda
-      - Support Cygwin. [Yaakov Selkowitz] 
+      - Support Cygwin. [Yaakov Selkowitz]
       - Add Gda::BUILD_VERSION. [Masao Mutoh]
 
   * Ruby/PanelApplet [Masao Mutoh]
-      - Add PanelApplet::BUILD_VERSION. 
+      - Add PanelApplet::BUILD_VERSION.
 
   * Ruby/GtkSourceView [Masao Mutoh]
       - Support GtkSourcView-1.4.
-      - Add Gtk::SourceView::BUILD_VERSION. 
-      - Fix bugs, Improve, Add some methods: 
+      - Add Gtk::SourceView::BUILD_VERSION.
+      - Fix bugs, Improve, Add some methods:
          Gtk::SourceView, Gtk::SourceBuffer, Gtk::SourceTag, Gtk::SourceTagStyleMask
       - Add and completed:
         Gtk::SourceStyleScheme, Gtk::SourcePrintJob
@@ -438,13 +439,13 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
         Gnome::PrintContext
       - Add: sample/gp-pac.rb
 
-  * Ruby/GnomePrintUI [Kouhei Sutou] 
+  * Ruby/GnomePrintUI [Kouhei Sutou]
       - Support libgnomeprintui-2.12.
       - Add Gnome::PrintUI::BUILD_VERSION
-      - Add: Gnome::FontSelection, Gnome::FontPreview, Gnome::FontDialog, 
+      - Add: Gnome::FontSelection, Gnome::FontPreview, Gnome::FontDialog,
         Gnome::PrintContentSelector
 
-  * Ruby/RSVG [Kouhei Sutou] 
+  * Ruby/RSVG [Kouhei Sutou]
       - Support rsvg-2.12.
       - Add RSVG::BUILD_VERSION
 
@@ -455,15 +456,15 @@ Ruby-GNOME2-0.14.0 (2005-10-16)
 
 Ruby-GNOME2-0.13.0 (2005-07-31)
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Fixed GCC 4.0 warnings [Masao Mutoh]
       - Added and completed: [Masao Mutoh]
-        GLib:PollFD, GLib::Source, GLib::MainLoop, GLib::IOChannel, 
+        GLib:PollFD, GLib::Source, GLib::MainLoop, GLib::IOChannel,
         GLib::Idle, GLib::ChildWatch
       - Added some methods, improved, fixed bugs: [Vincent Isambart, Masao Mutoh]
-        PKGConfig, extconf.rb, 
+        PKGConfig, extconf.rb,
       - Added: [Masao Mutoh]
-        GLib::MainContext, sample/iochannel.rb, idle.rb, timeout.rb, 
+        GLib::MainContext, sample/iochannel.rb, idle.rb, timeout.rb,
         timeout2.rb, tests/test-iochannel.*, runner.rb,
 
   * Ruby/ATK
@@ -473,9 +474,9 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
       - Fixed GCC 4.0 warnings [Masao Mutoh]
       - Support x86_64 [Masao Mutoh]
         Pango::Layout
-      - Added some methods, improved, fixed bugs: [Mirko Maischberger, 
+      - Added some methods, improved, fixed bugs: [Mirko Maischberger,
         Pascal Terjan, Masao Mutoh]
-        sample/parse.rb, Pango::LayoutLine, Pango::Coverage, Pango::LayoutIter, 
+        sample/parse.rb, Pango::LayoutLine, Pango::Coverage, Pango::LayoutIter,
         Pango::FontFamily, Pango::Attriterator
 
   * Ruby/GdkPixbuf
@@ -487,10 +488,10 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
       - Support x86_64 [Kouhei Sutou, Masao Mutoh]
         Gdk::Atom, Gtk::ItemFactory, Gtk::Widget, Gtk::Drag, Gtk::SizeGroup
       - Fixed GCC 4.0 warnings [Masao Mutoh]
-      - Fixed bugs, Improved, Added some methods: [Hiroyuki Ikezoe, KATO Kazuyoshi, 
+      - Fixed bugs, Improved, Added some methods: [Hiroyuki Ikezoe, KATO Kazuyoshi,
         Pascal Terjan, Kouhei Sutou, Mirko Maischberger, Masao Mutoh]
-        Gtk::ActionGroup, Gtk::IconTheme, Gtk::RC, Gtk::TreeModel, Gdk::TimeCoord, 
-        Gdk::Window, Gtk::CellView, Gtk::ToolButton, Gtk::MenuToolButton, Gdk, 
+        Gtk::ActionGroup, Gtk::IconTheme, Gtk::RC, Gtk::TreeModel, Gdk::TimeCoord,
+        Gdk::Window, Gtk::CellView, Gtk::ToolButton, Gtk::MenuToolButton, Gdk,
         Gdk::Display, Gdk::GC, Gdk::PangoAttrEmbossed, Gdk::Drawable, Gtk::Window,
         sample/gtk-demo/main.rb, sample/misc/*.rb, sample/testgtk/*.rb.
       - Added: [KATO Kazuyoshi, Masao Mutoh]
@@ -507,7 +508,7 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
   * Ruby/Libglade
       - None.
 
-  * Ruby/Libart 
+  * Ruby/Libart
       - Added [Kouhei Sutou]
         Art::DRect, Art::IRect
       - Fixed bugs, Improved, Added some methods: [Kouhei Sutou, Masao Mutoh]
@@ -516,11 +517,11 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
   * Ruby/GConf
       - None.
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Fixed GCC 4.0 warnings [Masao Mutoh]
       - Added: [Laurent Sansonetti]
-        Gst::XOverLay, sample/video-player.rb, 
-      - Fixed bugs, Improved, Added some methods: 
+        Gst::XOverLay, sample/video-player.rb,
+      - Fixed bugs, Improved, Added some methods:
         [Laurent Sansonetti]
         Gst::Caps, Gst::Pad, Gst::Element, Gst::TagSetter
 
@@ -547,15 +548,15 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
   * Ruby/GnomePrint
       - Fixed GCC 4.0 warnings [Masao Mutoh]
       - Fixed bugs, Improved, Added some methods. [Kouhei Sutou]
-        Gnome::PrintContext, Gnome::PrintJob, Gnome::PrintConfig, 
-        Gnome::PrintUnit, Gnome::PrintPaper, src/lib/gnomeprint2.rb, 
-        sample/to_file.rb 
+        Gnome::PrintContext, Gnome::PrintJob, Gnome::PrintConfig,
+        Gnome::PrintUnit, Gnome::PrintPaper, src/lib/gnomeprint2.rb,
+        sample/to_file.rb
 
   * Ruby/GnomePrintUI
       - Fixed GCC 4.0 warnings [Masao Mutoh]
       - Fixed bugs, Improved, Added some methods. [Kouhei Sutou]
-        Gnome::PaperSelector, Gnome::PrintUnitSelector, Gnome::PrintPreview, 
-        Gnome::PrintDialog, Gnome::PrintConfigDialog, sample/dialog.rb, 
+        Gnome::PaperSelector, Gnome::PrintUnitSelector, Gnome::PrintPreview,
+        Gnome::PrintDialog, Gnome::PrintConfigDialog, sample/dialog.rb,
 
   * Ruby/RSVG
       - Fixed GCC 4.0 warnings [Masao Mutoh]
@@ -565,36 +566,36 @@ Ruby-GNOME2-0.13.0 (2005-07-31)
 
 Ruby-GNOME2-0.12.0 (2005-03-06)
 
-  * Ruby/GLib 
+  * Ruby/GLib
       - Support GLib-2.6.x. [Masao, Mutoh]
       - Support MS VC++. [Masao, Mutoh]
-      - Fix bugs, Improved, Added some methods. [KATO Kazuyoshi, 
+      - Fix bugs, Improved, Added some methods. [KATO Kazuyoshi,
 	Masao Mutoh]
         PKGConfig, rbgobj_lookup_class().
       - Added: [Masao, Mutoh]
         GLib::Threads, src/lib/pkg-config.rb, sample/spawn.rb.
 
   * Ruby/ATK [Dafydd Harries, Vincent Isambart, Masao Mutoh]
-      - Support MS VC++. 
-      - Fix bugs, Improved, Added some methods. 
+      - Support MS VC++.
+      - Fix bugs, Improved, Added some methods.
       - Follow Ruby/GLib changes.
 
   * Ruby/Pango [Masao Mutoh]
       - Support Pango-1.8.x.
-      - Support MS VC++. 
+      - Support MS VC++.
       - Follow Ruby/GLib changes.
       - Added and completed:
 	Pango::Renderer, Pango::Matrix, Pango::AttrStrikethroughColor,
 	Pango::AttrUnderlineColor, Pango::GlyphItem
-      - Added some methods, improved, fixed bugs: [Matthew Berg, 
+      - Added some methods, improved, fixed bugs: [Matthew Berg,
  	Pango::Context, Pango::AttList, Pango::Attribute, Pango::Layout,
-	Pango, Pango::AttrSize, Pango::LogAttr, Pango::Item, 
-	Pango::Analysis, Pango::Font, Pango::FontDescription, 
-	Pango::FontFace, Pango::FontSet, Pango::AttrList, 
+	Pango, Pango::AttrSize, Pango::LogAttr, Pango::Item,
+	Pango::Analysis, Pango::Font, Pango::FontDescription,
+	Pango::FontFace, Pango::FontSet, Pango::AttrList,
 	Pango::AttrIterator, Pango::Rectangle, Pango::Layout,
 	Pango::LayoutLine, Pango::LayoutIter, Pango::GlyphInfo
       - Added
-        Pango::FcFont, Pango::XftFont, Pango::FontFcFontMap, 
+        Pango::FcFont, Pango::XftFont, Pango::FontFcFontMap,
 	Pango::XftFontMap.
       - Renamed, Moved
 	Pango::FontFamily#list_faces -> #faces.
@@ -603,17 +604,17 @@ Ruby-GNOME2-0.12.0 (2005-03-06)
       - Support GTK+-2.6.x.
       - Follow Ruby/GLib changes.
       - Fixed bugs, Improved, Added some methods for GTK+-2.6.x:
-	Gdk::PixbufAnimationIter, Gdk::Pixbuf, Gdk::PixbufLoader, 
+	Gdk::PixbufAnimationIter, Gdk::Pixbuf, Gdk::PixbufLoader,
 	Gdk::PixbufFormat
 
   * Ruby/GTK
       - Support Ruby-1.9.x.
       - Support Pango-1.8.x.
       - Support GTK+-2.6.x.
-      - Support MS VC++. 
+      - Support MS VC++.
       - Follow Ruby/GLib changes.
       - Improve to support gthread.
-      - Added and completed for GTK+-2.6.x: [Darren Willis, 
+      - Added and completed for GTK+-2.6.x: [Darren Willis,
         Gtk::CellRendererProgress, Gtk::ScrollStep, Gtk::IconView,
 	Gtk::CellRendererCombo, Gtk::AboutDialog, Gdk::PangoRenderer,
 	Gtk::CellView, Gtk::MenuToolButton, Gtk::FileChooserButton,
@@ -621,21 +622,21 @@ Ruby-GNOME2-0.12.0 (2005-03-06)
       - Fixed bugs, Improved, Added some methods for GTK+-2.6.x:
 	[Mirko Maischberger, Joao Pedrosa, KATO Kazuyoshi, Masao Mutoh]
  	Gtk, Gtk::CellLayout, Gtk::RadioToolButton, Gtk::ToggleToolButton,
-	Gtk::Stock, Gtk::Image, Gtk::Label, Gtk::Progressbar, 
+	Gtk::Stock, Gtk::Image, Gtk::Label, Gtk::Progressbar,
 	Gtk::EntryCompletion, Gtk::TextBuffer, Gtk::FileFilter,
 	Gtk::FileChooser, Gtk::Menu, Gtk::CellRenderer, Gtk::TreeView,
-	Gtk::TextView, Gtk::TextBuffer, Gtk::Drag, Gtk::ToolItem, 
+	Gtk::TextView, Gtk::TextBuffer, Gtk::Drag, Gtk::ToolItem,
 	Gtk::ActionGroup, Gtk::Action, Gtk::ComboBox, Gtk::Combo,
 	Gtk::IconTheme, Gtk::SelectionData, Gtk::TargetList, Gtk::ListStore,
 	Gtk::Window, Gtk::ToggleAction, Gtk::MessageDialog, Gdk::Region,
-	Gdk::Window, Gtk::Clipboard, Gtk::Settings, Gtk::TreeModel, 
+	Gdk::Window, Gtk::Clipboard, Gtk::Settings, Gtk::TreeModel,
 	Gtk::ModelFilter, Gtk::TreeViewColumn, Gtk::Widget, Gdk::Pango,
 	Gdk::Display, Gdk::Drawable, Gtk::RadioAction, Gdk::Screen,
-	Gtk::TextBuffer, Gdk::Threads, 
+	Gtk::TextBuffer, Gdk::Threads,
         sample/gtk-demo/*.rb, sample/misc/threads.rb, pangorenderer.rb
       - Added: [KATO Kazuyoshi, Darren Willis, Masao, Mutoh]
-        sample/misc/tree_progress.rb, misc_button.rb, aboutdialog.rb, 
-	aboutdialog2.rb, 
+        sample/misc/tree_progress.rb, misc_button.rb, aboutdialog.rb,
+	aboutdialog2.rb,
 	sample/gtk-demo/clipboard.rb, entry_completion.rb, expander.rb,
 	iconview.rb
 
@@ -647,7 +648,7 @@ Ruby-GNOME2-0.12.0 (2005-03-06)
 
   * Ruby/Libglade [Masao Mutoh]
       - Follow Ruby/GLib changes.
-      - Support MS VC++. 
+      - Support MS VC++.
       - Improved.
 
   * Ruby/Libart [KATO Kazuyoshi, Masao Mutoh]
@@ -657,18 +658,18 @@ Ruby-GNOME2-0.12.0 (2005-03-06)
       - Follow Ruby/GLib changes.
       - Fixed bugs, Improved.
       - Deprecated:
-	GConf::Client.new 
+	GConf::Client.new
 
   * Ruby/GStreamer
       - Follow Ruby/GLib changes. [Masao Mutoh]
       - Added and completed: [Jack Paul, Masao Mutoh, Laurent Sansonetti]
-	Gst::TypeFindFactory, Gst::MediaInfoError, Gst::Tag, 
+	Gst::TypeFindFactory, Gst::MediaInfoError, Gst::Tag,
 	Gst::RegistryPool, Gst::TagSetter
-      - Fixed bugs, Improved, Added some methods: 
+      - Fixed bugs, Improved, Added some methods:
 	[Jack Paul, Max Nickel, Masao Mutoh, Laurent Sansonetti]
-	Gst::Plugin, Gst::PluginFeature, Gst::Caps, Gst::Structure, 
-	Gst::Xml, Gst::Thread, Gst::Scheduler, Gst::SchedulerFactory, 
-	Gst::MediaInfo, 
+	Gst::Plugin, Gst::PluginFeature, Gst::Caps, Gst::Structure,
+	Gst::Xml, Gst::Thread, Gst::Scheduler, Gst::SchedulerFactory,
+	Gst::MediaInfo,
 	sample/gst-inspect.rb
 
   * Ruby/GnomeVFS [Masao Mutoh]
@@ -688,15 +689,15 @@ Ruby-GNOME2-0.12.0 (2005-03-06)
         Gda::DataModel, Gda::Provider, Gda::Quarklist, Gda::Connection
       - Renamed, Moved [Laurent Sansonetti]
         Gda::DataModel#editable? => #updatable?
-	#editing? => changed?, 	#begin_edit => #begin_update, 
+	#editing? => changed?, 	#begin_edit => #begin_update,
 	#cancel_edit => #cancel_update, #end_edit => #end_update
 
   * Ruby/PanelApplet [Neil Stevens, Masao Mutoh]
-      - Follow Ruby/GLib changes. 
+      - Follow Ruby/GLib changes.
       - Added some methods
 
   * Ruby/GtkSourceView [Masao Mutoh]
-      - Follow Ruby/GLib changes. 
+      - Follow Ruby/GLib changes.
       - Added some methods
 
   * Ruby/GnomePrint
@@ -719,14 +720,14 @@ Ruby-GNOME2-0.11.0 (2004-11-14)
 
   * Ruby/ATK [Vincent Isambart, Masao Mutoh]
       - Support ATK+-1.7.x.
-      - Fixed bugs, Improved, Added some methods.  
+      - Fixed bugs, Improved, Added some methods.
 
   * Ruby/Pango [Geoff Youngs, Vincent Isambart, Masao Mutoh]
       - Improved, Fix bugs.
 
   * Ruby/GdkPixbuf [Geoff Youngs, Masao Mutoh]
       - Support GTK+-2.4.x.
-      - Fixed bugs, Improved, Added some methods. 
+      - Fixed bugs, Improved, Added some methods.
 
   * Ruby/GTK [Geoff Youngs, Vincent Isambart, Masao Mutoh]
       - Fixed bugs, Improved, Added some methods.
@@ -747,24 +748,24 @@ Ruby-GNOME2-0.11.0 (2004-11-14)
          Art::Vpath::Dash -> Art::VpathDash.
 
   * Ruby/GConf [Masao Mutoh]
-      - Improved. 
+      - Improved.
 
   * Ruby/GStreamer [Masao Mutoh]
-      - Improved. 
+      - Improved.
 
   * Ruby/GnomeVFS [Masao Mutoh]
-      - Improved. 
+      - Improved.
 
   * Ruby/GtkHtml2 [Masao Mutoh]
-      - Improved. 
+      - Improved.
 
   * Ruby/GtkGLExt [Vincent Isambart]
-      - Improved. 
+      - Improved.
 
-  * Ruby/Libgda 
+  * Ruby/Libgda
       - None.
 
-  * Ruby/PanelApplet 
+  * Ruby/PanelApplet
       - None.
 
   * Ruby/GtkSourceView [Vincent Isambart, Masao Mutoh]
@@ -794,9 +795,9 @@ Ruby-GNOME2-0.10.0 (2004-08-09)
   * Ruby/GLib [Masao Mutoh]
       - Added: [Kazuhiro NISHIYAMA, Masao, Mutoh]
          GLib::Spawn, sample/utils.rb, sample/type-register2.rb
-      - Added some methods, improved, fixed bugs: [Laurent Sansonetti, 
+      - Added some methods, improved, fixed bugs: [Laurent Sansonetti,
         Pascal Terjan, Masao Mutoh]
-         GLib, GLib::Object, GLib::Log, glib2.rb, 
+         GLib, GLib::Object, GLib::Log, glib2.rb,
 
   * Ruby/ATK [Masao Mutoh]
       - None.
@@ -807,27 +808,27 @@ Ruby-GNOME2-0.10.0 (2004-08-09)
   * Ruby/GdkPixbuf [Masao Mutoh]
       - Removed version information.
 
-  * Ruby/GTK 
+  * Ruby/GTK
       - Support GTK+-2.4.x.
       - Added: [Seiya Nishizawa, Masao, Mutoh]
-         Gtk::ToolButton, Gtk::ToolItem, Gtk::ToggleToolButton, 
-         Gtk::SeperatorToolItem, Gtk::ComboBox, Gtk::ComboBoxEntry, 
-         Gtk::Expander, Gtk::ColorButton, Gtk::FontButton, Gtk::FileChooserWidget, 
-         Gtk::FileChooser, Gtk::FileFilter, Gtk::FileChooserDialog, Gtk::Action, 
-         Gtk::ToggleAction, Gtk::IconInfo, Gtk::IconTheme, Gtk::UIManager, 
-         Gtk::RadioAction, Gtk::CellLayout, Gtk::ActionGroup, 
-         sample/misc/entrycompletion.c, filechooser.rb, combobox.rb, expander.rb, 
+         Gtk::ToolButton, Gtk::ToolItem, Gtk::ToggleToolButton,
+         Gtk::SeperatorToolItem, Gtk::ComboBox, Gtk::ComboBoxEntry,
+         Gtk::Expander, Gtk::ColorButton, Gtk::FontButton, Gtk::FileChooserWidget,
+         Gtk::FileChooser, Gtk::FileFilter, Gtk::FileChooserDialog, Gtk::Action,
+         Gtk::ToggleAction, Gtk::IconInfo, Gtk::IconTheme, Gtk::UIManager,
+         Gtk::RadioAction, Gtk::CellLayout, Gtk::ActionGroup,
+         sample/misc/entrycompletion.c, filechooser.rb, combobox.rb, expander.rb,
          color_font_button.rb, uimanager.rb, uimanager2.rb, uimanager2.xml
-      - Improved, fixed bugs: [Geoff Youngs, Vincent Isambart, 
+      - Improved, fixed bugs: [Geoff Youngs, Vincent Isambart,
         Kazuhiro NISHIYAMA, Masao Mutoh]
-         Gtk::Style, Gtk::Widget, Gtk::TextView, Gtk::Container, Gdk::EventClient, 
-         Gtk::Dialog, Gtk::Entry, Gdk::Selection, Gtk::Drag, Gdk, Gdk::Atom, 
+         Gtk::Style, Gtk::Widget, Gtk::TextView, Gtk::Container, Gdk::EventClient,
+         Gtk::Dialog, Gtk::Entry, Gdk::Selection, Gtk::Drag, Gdk, Gdk::Atom,
          Gtk::Editable, Gtk::Stock, Gtk::TextIter, Gtk::TextMark, Gtk::Style,
-         sample/misc/dialog2.rb, entry.rb, settings.rb, 
+         sample/misc/dialog2.rb, entry.rb, settings.rb,
       - Renamed, Moved: [Masao Mutoh]
          Gtk::EventCrossing::CrossingMode to Gtk::EventCrossing::Mode,
          Gdk::SettingAction to Gdk::EventSetting::Action
-         Gdk::Input.set_extension_events to Gdk::Device. 
+         Gdk::Input.set_extension_events to Gdk::Device.
       - Deperecated: [Masao Mutoh]
          Gtk::Combo, Gtk::OptionMenu since GTK+-2.4.
 
@@ -849,22 +850,22 @@ Ruby-GNOME2-0.10.0 (2004-08-09)
       - None.
 
   * Ruby/GConf
-      - Added some methods, Improved, fixed bugs: [Giovanni Corriga, Pascal Terjan, 
+      - Added some methods, Improved, fixed bugs: [Giovanni Corriga, Pascal Terjan,
         Kazuhiro NISHIYAMA, Masao Mutoh]
          GConf::Client
       - Deprecated: [Masao Mutoh]
          GConf::Client.new. Use GConf::Client.default instead.
 
   * Ruby/GStreamer
-      - Requires GStreamer-0.8.x or later. 
+      - Requires GStreamer-0.8.x or later.
       - Added: [Laurent Sansonetti]
          Gst::Clock, Gst::Scheduler
       - Added methods, improved, Fixed bugs: [Laurent Sansonetti]
-         Gst::Element, Gst::Bin, Gst::Caps, Gst::Structure, 
+         Gst::Element, Gst::Bin, Gst::Caps, Gst::Structure,
       - Removed: [Laurent Sansonetti]
          Gst::Autoplug, Gst::AutoplugFactory, Gst::Type,
          Gst::TypeFactory, Gst::TypeFind
-         Gst.set_debug, 
+         Gst.set_debug,
 
   * Ruby/GnomeVFS
       - Fixed bugs: [Pascal Terjan, Giovanni Corriga, Masao Mutoh]
@@ -875,7 +876,7 @@ Ruby-GNOME2-0.10.0 (2004-08-09)
   * Ruby/GtkGLExt
       - Fixed bugs: [Vincent Isambart]
 
-  * Ruby/Libgda 
+  * Ruby/Libgda
       - Added methods, fixed bugs: [Laurent Sansonetti]
         Gda::Command, Gda::Connection
       - Removed: [Laurent Sansonetti]
@@ -920,38 +921,38 @@ Ruby-GNOME2-0.9.0 (2004-03-07)
 
   * Ruby/ATK [NEW]
       - Added and compeleted: [Masao Mutoh]
-         Atk::Action, Atk::Document, Atk::GObjectAccessible, Atk::NoOpObject, 
-         Atk::NoOpObjectFactory, Atk::Value, Atk::Component, Atk::Image, 
-         Atk::HyperText, Atk::HyperLink, Atk::EditableText, Atk::Implementor, 
-         Atk::Object, Atk::Relation, Atk::Registry, Atk::ObjectFactory, 
-         Atk::State, Atk::StateSet, Atk::EditableText, Atk::Table 
+         Atk::Action, Atk::Document, Atk::GObjectAccessible, Atk::NoOpObject,
+         Atk::NoOpObjectFactory, Atk::Value, Atk::Component, Atk::Image,
+         Atk::HyperText, Atk::HyperLink, Atk::EditableText, Atk::Implementor,
+         Atk::Object, Atk::Relation, Atk::Registry, Atk::ObjectFactory,
+         Atk::State, Atk::StateSet, Atk::EditableText, Atk::Table
       - Added: [Masao Mutoh]
          Atk::Util, Atk::Component, Atk::Selection, Atk::Text
 
   * Ruby/GdkPixbuf
       - None.
 
-  * Ruby/Pango 
+  * Ruby/Pango
       - None.
 
   * Ruby/GTK
       - Completed: [Masao Mutoh]
       - Added and completed: [Masao Mutoh]
       - Added: [Kenichi Komiya, Masao, Mutoh]
-         Gtk::TextAppearance, sample/misc/bindings.rb, properties.rb, 
+         Gtk::TextAppearance, sample/misc/bindings.rb, properties.rb,
          style_property.rb, settings.rb
-      - Added some methods, improved, fixed bugs: [Kenichi Komiya, Masahiro Sakai, 
+      - Added some methods, improved, fixed bugs: [Kenichi Komiya, Masahiro Sakai,
           Vincent Isambart, Dafydd Harries, Masao Mutoh]
-         Gdk::Window, Gtk::SizeGroup, Gtk::Object, Gtk::BindingSet, 
-         Gtk::TextTagTable, Gtk::TextTag, Gdk::Colormap, Gtk::TreeViewColumn, 
-         Gtk::TextIter, Gtk::SpinButton, Gtk::Allocation, Gtk::TextView, 
-         Gtk::TextBuffer, Gtk::Widget, Gtk::Container, Gtk::Setting, Gtk::TreePath, 
-         Gtk::TreeIter, Gdk::Display, Gtk::TextAttributes, Gdk::Property, 
-         Gdk::Keymap, Gdk::Pixmap, Gdk::Drawable, Gdk::Screen, Gdk::Event, 
-         Gdk::EventExpose, Gdk::Selection, Gdk::GC,  
+         Gdk::Window, Gtk::SizeGroup, Gtk::Object, Gtk::BindingSet,
+         Gtk::TextTagTable, Gtk::TextTag, Gdk::Colormap, Gtk::TreeViewColumn,
+         Gtk::TextIter, Gtk::SpinButton, Gtk::Allocation, Gtk::TextView,
+         Gtk::TextBuffer, Gtk::Widget, Gtk::Container, Gtk::Setting, Gtk::TreePath,
+         Gtk::TreeIter, Gdk::Display, Gtk::TextAttributes, Gdk::Property,
+         Gdk::Keymap, Gdk::Pixmap, Gdk::Drawable, Gdk::Screen, Gdk::Event,
+         Gdk::EventExpose, Gdk::Selection, Gdk::GC,
          sample/gtk-demo/main.rb, stock_browser.rb, list_store.rb, tree_store.rb,
          sample/testgtk/notebook.rb,
-         sample/misc/label.rb, toolbar.rb, 
+         sample/misc/label.rb, toolbar.rb,
          extconf.rb
       - Removed: [Masao Mutoh]
          Gtk::Object#activate_binding
@@ -991,14 +992,14 @@ Ruby-GNOME2-0.9.0 (2004-03-07)
   * Ruby/GConf
       - None.
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Added some methods, improved, fixed bugs: [Laurent Sansonetti]
          Gst, Gst::Bin, Gst::Pad, Gst::PadTemplate, Gst::Type, Gst::Element
          sample/gst-inspect.rb, media-type2.rb
-        
+
   * Ruby/GnomeVFS
       - Added some methods, improved, fixed bugs: [Masahiro Sakai, Masao Mutoh]
-         GnomeVFS::FileInfo, Gnome::VFS::File, GnomeVFS::ProtocolError, 
+         GnomeVFS::FileInfo, Gnome::VFS::File, GnomeVFS::ProtocolError,
          GnomeVFS::NoMasterBrowserError
 
   * Ruby/GtkHtml2
@@ -1010,11 +1011,11 @@ Ruby-GNOME2-0.9.0 (2004-03-07)
          Gdk::GLDrawable, sample/*.rb
 
   * Ruby/Libgda
-      - Added: [Laurent Sansonetti] 
+      - Added: [Laurent Sansonetti]
         GeometricPoint, Gda::Money, Gdak::Time
       - Added some methods, improved, fixed bugs: [Nikolai Weibull, Laurent Sansonetti]
-         Gda::Error, Gda::ParameterList, Gda::Provider, Gda::DataSource, 
-         Gda::Connection, Gda::Parameter, Gda::Command, Gda::Row, Gda::Value, 
+         Gda::Error, Gda::ParameterList, Gda::Provider, Gda::DataSource,
+         Gda::Connection, Gda::Parameter, Gda::Command, Gda::Row, Gda::Value,
          Gda::DataModel, Gda::ModelList, Gda::FieldAttributes
          tests/*.rb, src/lib/libgda.rb
 
@@ -1036,7 +1037,7 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
       - Provide methods for creating GObject from ruby side. Now you can create
         your own signals and properties: [Masahiro, Sakai]
          GLib::MetaInterface, GLib::Instantiatable, GLib::Signal
-      - Added some methods, improved and Fixed some bugs: 
+      - Added some methods, improved and Fixed some bugs:
         [Masahiro Sakai, Masao Mutoh]
          GLib::Closure, GLib, GLib::Instantiatable, GLib::Object, mkmf-gnome2.rb
       - Added new macros: [Masao Mutoh]
@@ -1045,11 +1046,11 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
          sample/type-register.rb, tests/*.rb
 
   * Ruby/GdkPixbuf
-      - Added some methods, improved and Fixed some bugs: 
+      - Added some methods, improved and Fixed some bugs:
         [KATO Kazuyoshi, Masao Mutoh]
          Gdk::Pixbuf
 
-  * Ruby/Pango 
+  * Ruby/Pango
       - rbpango.h is installed with glib/gtk2 headers.
       - Added new methods: [Masao Mutoh]
          Pango::Layout
@@ -1058,18 +1059,18 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
 
   * Ruby/GTK
       - Completed: [Masao Mutoh]
-         Gdk::Geometry, Gdk::Event*, Gdk::Pixbuf, Gdk::Drawable, 
-         Gdk::DragContext, Gdk::Selection, Gdk::RGB, Gdk::GC, Gdk::Atom, 
-         Gdk::Image, Gdk::Colormap, Gdk::Keyval, Gdk::Screen, Gdk::Visual, 
+         Gdk::Geometry, Gdk::Event*, Gdk::Pixbuf, Gdk::Drawable,
+         Gdk::DragContext, Gdk::Selection, Gdk::RGB, Gdk::GC, Gdk::Atom,
+         Gdk::Image, Gdk::Colormap, Gdk::Keyval, Gdk::Screen, Gdk::Visual,
          Gdk::Window, Gdk::Display,  Gdk
       - Added and completed: [Masao Mutoh]
-         Gdk::Property, Gdk::Keymap, Gdk::TimeCoord, 
-      - Added some methods, improved, fixed bugs: [Matthew Berg, 
-        Martin Povolny, KATO Kazuyoshi, Laurent Sansonetti, Masahiro Sakai, 
-        Masao Mutoh] 
-         Gtk::AccelGroup, Gtk::Accelmap, Gtk::Clipboard, Gtk::Notebook, 
-         Gtk::Drag, Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore, 
-         Gtk::TreeStore, Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath, 
+         Gdk::Property, Gdk::Keymap, Gdk::TimeCoord,
+      - Added some methods, improved, fixed bugs: [Matthew Berg,
+        Martin Povolny, KATO Kazuyoshi, Laurent Sansonetti, Masahiro Sakai,
+        Masao Mutoh]
+         Gtk::AccelGroup, Gtk::Accelmap, Gtk::Clipboard, Gtk::Notebook,
+         Gtk::Drag, Gtk::Menu, Gtk::Stock, Gtk::Style, Gtk::ListStore,
+         Gtk::TreeStore, Gtk::Widget, Gtk::TextBuffer, Gtk::TreePath,
          Gtk::TreeRowReference
       - Added: [KATO Kazuyoshi]
          sample/gtk-demo/changedisplay.rb, sample/gtk-demo/pixbufs.rb.
@@ -1095,9 +1096,9 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
   * Ruby/GConf
       - None.
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Update maintainer's e-mail address [Laurent Sansonetti]
-        
+
   * Ruby/GnomeVFS
       - None.
 
@@ -1108,7 +1109,7 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
       - Completed: [Masao Mutoh]
          Gtk::HtmlView
       - Added: [Masao Mutoh]
-         Gtk::HtmlBox, Gtk::HtmlBoxBlock, Gtk::HtmlBoxTableCaption, 
+         Gtk::HtmlBox, Gtk::HtmlBoxBlock, Gtk::HtmlBoxTableCaption,
          Gtk::HtmlBoxText, Gtk::BoxRoot, Gtk::BoxForm,
          Gtk::HtmlParser, Gtk::HtmlEmbedded, Gtk::HtmlBoxEmbedded
 
@@ -1117,16 +1118,16 @@ Ruby-GNOME2-0.8.0 (2003-11-16)
 
   * Ruby/Libgda [NEW]
       - Added and compeleted: [Laurent Sansonetti]
-         Gda, Gda::Client, Gda::Command, Gda::Provider, 
+         Gda, Gda::Client, Gda::Command, Gda::Provider,
          Gda::DataSource, Gda::Connection, Gda::DataModelArray,
          Gda::DataModelHash, Gda::DataModelList, Gda::Error,
-         Gda::Export, Gda::FieldAttributes, Gda::Parameter, 
-         Gda::ParameterList, Gda::QuarkList, Gda::Row, 
+         Gda::Export, Gda::FieldAttributes, Gda::Parameter,
+         Gda::ParameterList, Gda::QuarkList, Gda::Row,
          Gda::Select, Gda::Table, Gda::Transaction
       - Added
          Gda::DataModel
          sample/*.rb, tests/*.rb
-        
+
 
 Ruby-GNOME2-0.7.0 (2003-09-07)
 
@@ -1134,14 +1135,14 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
       - Enum/Flags support. Enum/Flags constants are defined as classes.
          [Masahiro Sakai, Vincent Isambart, Masao Mutoh]
       - Improve extconf.rb. [Masao Mutoh]
-        If the libraries are not found, they're ignored. 
+        If the libraries are not found, they're ignored.
         And you can specify to target libraries.
 
   * Ruby/GLib
       - Improved and Fixed some bugs. [Masahiro Sakai, Masao Mutoh]
          GLib::Type, GLib::Boxed, mkmf_gnome2.rb
-      - Added lib/glib2.rb and improve to support Win32 platform. 
-         [TAMURA.KENICHI, Masahiro Sakai] 
+      - Added lib/glib2.rb and improve to support Win32 platform.
+         [TAMURA.KENICHI, Masahiro Sakai]
       - Added new class: [Masahiro Sakai]
          GLib::Enum, GLib::Flags
       - Added new macros: [Masahiro Sakai]
@@ -1156,22 +1157,22 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
       - Apply Enum/Flags. [Masahiro Sakai, Masao Mutoh]
       - Follow extconf.rb changes. [Masao Mutoh]
 
-  * Ruby/Pango 
-      - Improved and Fixed some bugs: 
+  * Ruby/Pango
+      - Improved and Fixed some bugs:
         [Vincent Isambart, Masahiro Sakai, Masao Mutoh]
-        Pango::Font, sample/*.rb, extconf.rb 
+        Pango::Font, sample/*.rb, extconf.rb
       - Added new methods: [Masahiro Sakai]
         Pango::Language, Pango::FontMap, Pango::FontFamily, Pango::Context,
-        Pango::FontDescription,  
+        Pango::FontDescription,
       - Apply Enum/Flags. [Masahiro Sakai, Masao Mutoh]
       - Follow extconf.rb changes. [Masao Mutoh]
 
   * Ruby/GTK
       - Follow Ruby/GLib changes. [Masahiro Sakai, Masao Mutoh]
-      - Added some methods, improved, fixed bugs: [Martin Povoln, 
-          KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh] 
-        Gdk::Atom, Gdk::Input, Gdk::DragContext, Gdk::Event, Gdk::GC, Gdk, 
-        Gtk::Label, Gtk::TreeIter, Gtk::TreeView, Gtk::IconSize, 
+      - Added some methods, improved, fixed bugs: [Martin Povoln,
+          KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh]
+        Gdk::Atom, Gdk::Input, Gdk::DragContext, Gdk::Event, Gdk::GC, Gdk,
+        Gtk::Label, Gtk::TreeIter, Gtk::TreeView, Gtk::IconSize,
         gdk-demo/*.rb, extconf.rb
       - Added: [KATO Kazuyoshi]
         Gdk::DisplayManager, gtk-demo.rb
@@ -1199,7 +1200,7 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
       - Apply Enum/Flags. [Masao Mutoh]
       - Follow extconf.rb changes. [Masao Mutoh]
 
-  * Ruby/GStreamer 
+  * Ruby/GStreamer
       - Improved and Fixed some bugs. [Laurent Sansonetti]
         Gst, Gst::MediaInfo, Gst::Second, Gst::MediaType, sample/media-type.rb
       - Added some methods: [Laurent Sansonetti]
@@ -1208,7 +1209,7 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
         Gst::XML, Gst::ClockEntry, sample/xml-ogg-player.rb
       - Win32 support. [Masahiro Sakai]
       - Follow extconf.rb changes. [Masao Mutoh]
-        
+
   * Ruby/GnomeVFS
       - Follow extconf.rb changes. [Masao Mutoh]
 
@@ -1221,7 +1222,7 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
 
   * Ruby/GtkGLExt [NEW]
       - Added and completed. [Vincent Isambart]
-        Gdk::GLConfig, Gdk::GLContext, Gdk::GLDrawable, Gdk::GLPixmap, 
+        Gdk::GLConfig, Gdk::GLContext, Gdk::GLDrawable, Gdk::GLPixmap,
         Gdk::GLWindow, Gdk::Window, Gdk::Pixmap, Gtk::GL, Gtk::Widget
       - Added. [Vincent Isambart]
         Gdk::GL, sample/*.rb
@@ -1232,7 +1233,7 @@ Ruby-GNOME2-0.7.0 (2003-09-07)
 Ruby-GNOME2-0.6.0 (2003-08-09)
 
   * Ruby/GLib
-      - mkmf-gnome2.rb,rbglib.h, rbgobject.h, rbgutil.h are installed 
+      - mkmf-gnome2.rb,rbglib.h, rbgobject.h, rbgutil.h are installed
         to site-ruby directories.
         The other libraries which depends on Ruby/GLib can compile
         in any directotires. [Masahiro Sakai, Masao Mutoh]
@@ -1244,14 +1245,14 @@ Ruby-GNOME2-0.6.0 (2003-08-09)
       - Added some methods: [Masahiro Sakai]
          GLib::Param, GLib::Param::*, GLib::Boxed, GLib::Signal, GLib::Pointer
       - Removed some methods. [Masahiro Sakai]
-         GLib::Param::*#default, #default_value        
+         GLib::Param::*#default, #default_value
 
   * Ruby/GdkPixbuf
       - Follow Ruby/GLib changes. [Masao Mutoh]
-      - Separate Gdk::Pixbuf#scale to #scale and #scale!, 
+      - Separate Gdk::Pixbuf#scale to #scale and #scale!,
         #composite to #composite and #composite!. [Masao Mutoh]
 
-  * Ruby/Pango 
+  * Ruby/Pango
       - Follow Ruby/GLib changes. [Masao Mutoh]
 
   * Ruby/GTK
@@ -1262,21 +1263,21 @@ Ruby-GNOME2-0.6.0 (2003-08-09)
       - Completed: [Geoff Youngs, Masao Mutoh]
          Gtk::Clipboard, Gtk::Menu, Gtk::Notebook, Gtk::Socket, Gtk::Plug,
          Gtk::FileSelection, Gtk::ListStore, Gtk::TreeStore, Gtk::TreeModel,
-         Gtk::TextView, Gtk::Notebook, Gtk::ColorSelection, Gtk::Style, 
+         Gtk::TextView, Gtk::Notebook, Gtk::ColorSelection, Gtk::Style,
          Gtk::ItemFactory, Gtk::Invisible, Gtk::TreeSortable, Gtk::TreeView,
          Gtk::TreeSelection, Gtk::TreePath, Gtk::TreeViewColumn, Gtk::Drag,
          Gtk::TextTag, Gtk module
-      - Added and completed. 
-         Gtk::TreeDragSource, Gtk::TreeDragDest, 
-      - Added some methods, improved, fixed bugs: [Geoff Youngs, 
-        Masahiro Sakai, Masao Mutoh] 
-         Gdk::Window, Gdk::Drawable, Gdk::EventProperty, Gdk module, 
-         Gtk::Object, Gtk::Editable, Gtk::TreeModel, 
+      - Added and completed.
+         Gtk::TreeDragSource, Gtk::TreeDragDest,
+      - Added some methods, improved, fixed bugs: [Geoff Youngs,
+        Masahiro Sakai, Masao Mutoh]
+         Gdk::Window, Gdk::Drawable, Gdk::EventProperty, Gdk module,
+         Gtk::Object, Gtk::Editable, Gtk::TreeModel,
          Gtk module, Gtk::TextBuffer, Gtk::IMContext, Gtk::Menu
       - Added: [Geoff Youngs, Masao Mutoh]
          Gtk::BingindSet, Gdk::Display, Gdk::Screen
       - Removed: [Masao Mutoh]
-         Gtk::Socket#xwindow, Gtk::Menu#set_path, 
+         Gtk::Socket#xwindow, Gtk::Menu#set_path,
          Gtk::Notebook#popup_disable/enable, Gtk::ItemFactory.add_foreign
          Gtk::TreeSortable#sort_func=, Gtk::TreePath#to_s
 
@@ -1301,19 +1302,19 @@ Ruby-GNOME2-0.6.0 (2003-08-09)
       - Version informations are also merged.
       - Completed: [Laurent Sansonetti]
          Gst, Gst::Autoplug, Gst::Cpu,  Gst::Format,
-         Gst::Object, Gst::PadTemplate, Gst::Pipeline, 
-         Gst::PluginFeature, Gst::QueryType, 
+         Gst::Object, Gst::PadTemplate, Gst::Pipeline,
+         Gst::PluginFeature, Gst::QueryType,
          Gst::Type
       - Added and completed. [Laurent Sansonetti]
-         Gst::AutoplugFactory, Gst::EventMask, Gsk::EventSeek, 
-         Gst::EventSegmentSeek, Gst::EventSize, Gst::Parse, 
-         Gst::SystemClock, Gst::Thread,Gst::MediaInfo, 
+         Gst::AutoplugFactory, Gst::EventMask, Gsk::EventSeek,
+         Gst::EventSegmentSeek, Gst::EventSize, Gst::Parse,
+         Gst::SystemClock, Gst::Thread,Gst::MediaInfo,
          Gst::MediaInfoStream, Gst::MediaInfoTrack
       - Added some methods, improved, fixed bugs: [Laurent Sansonetti]
-         Gst::Caps, Gst::Clock, Gst::Plugin, Gst::Pad, Gst::Element, 
+         Gst::Caps, Gst::Clock, Gst::Plugin, Gst::Pad, Gst::Element,
       - Added: [Nikolai :: lone-star :: Weibull, Laurent Sansonetti]
          sample/media-type.rb, gst-inspect.rb, mediap-type2.rb
-        
+
   * Ruby/GnomeVFS [NEW]
       - Initial release. [Nikolai :: lone-star :: Weibull]
       - Completed: [Nikolai :: lone-star :: Weibull]
@@ -1332,14 +1333,14 @@ Ruby-GNOME2-0.5.0 (2003-05-24)
   * Ruby/GLib
       - Fixed warning for ruby-1.8.1. [Masao Mutoh]
       - Fixed some bugs, Added methods and improved: [Masahiro Sakai]
-         GLib::Object, GLib::ParamSpec, GLib::Signal, GLib::Type, 
+         GLib::Object, GLib::ParamSpec, GLib::Signal, GLib::Type,
          GLib::Instantiatable, GLib::MetaInterface, GLib::Param::String
       - Added: [Geoff Youngs, Masao Mutoh]
-         
+
   * Ruby/GdkPixbuf
       - Fixed a bug. [Geoff Youngs]
 
-  * Ruby/Pango 
+  * Ruby/Pango
       - Some constants were moved. [Masao Mutoh]
          Moved Pango::Attribute::UNDERLINE_* to Pango::AttrUnderline::*.
          Moved Pango::Attribute::SCALE_* to Pango::AttrScale::*.
@@ -1347,14 +1348,14 @@ Ruby-GNOME2-0.5.0 (2003-05-24)
   * Ruby/GTK
       - Completed: [Masao Mutoh]
         Gtk::AccelGroup, Gtk::Style, Gtk::Selection
-      - Added some methods, improved: [Stephen Lewis, Masahiro Sakai, Masao Mutoh] 
-         Gtk::TextBuffer, Gtk::TextIter, Gtk::TreeIter, Gtk::ListStore, 
-         Gtk::TreeStore, Gtk, Gtk::HandleBox, Gtk::Frame, Gtk::Container, 
-         Gtk::Table, Gdk::Input, Gtk::Widget, Gtk::Allocation, Gtk::RC, 
-         Gtk::ItemFactory, Gtk::Toolbar, Gtk::Window, Gtk::CellEditable, 
+      - Added some methods, improved: [Stephen Lewis, Masahiro Sakai, Masao Mutoh]
+         Gtk::TextBuffer, Gtk::TextIter, Gtk::TreeIter, Gtk::ListStore,
+         Gtk::TreeStore, Gtk, Gtk::HandleBox, Gtk::Frame, Gtk::Container,
+         Gtk::Table, Gdk::Input, Gtk::Widget, Gtk::Allocation, Gtk::RC,
+         Gtk::ItemFactory, Gtk::Toolbar, Gtk::Window, Gtk::CellEditable,
          Gtk::Accessible, sample/misc/*.rb
       - Added and completed. [Nikolai :: lone-star :: Weibull, Masao Mutoh]
-         Gtk::RcStyle, Gtk::TargetList, Gtk::TreeSortable, Gtk::TreeModelSort, 
+         Gtk::RcStyle, Gtk::TargetList, Gtk::TreeSortable, Gtk::TreeModelSort,
          Gtk::IMContext, Gtk::IMContextSimple, Gtk::IMMulticontext
       - Added: [Masao Mutoh]
          Gtk::Settings
@@ -1383,7 +1384,7 @@ Ruby-GNOME2-0.5.0 (2003-05-24)
   * Ruby/GConf
        - Added GConf::MetaInfo. [Nikolai :: lone-star :: Weibull]
        - Fixed a bug [Masao Mutoh]
- 
+
 Ruby-GNOME2-0.4.0 (2003-03-23)
 
   * The whole Ruby-GNOME2
@@ -1394,7 +1395,7 @@ Ruby-GNOME2-0.4.0 (2003-03-23)
       - Support mkmf-gnome2.rb [Masahiro Sakai]
       - Added some methods. [KUBO Takehiro, Masahiro Sakai]
       - Fix some bugs and improvement. [Masahiro Sakai, Masao Mutoh]
-      
+
   * Ruby/GdkPixbuf
       - Win32 platform support(Cygwin, Mingw32) [Masahiro Sakai]
       - Support mkmf-gnome2.rb [Masahiro Sakai]
@@ -1411,21 +1412,21 @@ Ruby-GNOME2-0.4.0 (2003-03-23)
       - Support mkmf-gnome2.rb [Masahiro Sakai]
       - Multi-threading support. [Masao Mutoh]
       - Added some methods, improved: [Kazuo Saito, Geoff Youngs,
-                                  KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh] 
-         Gtk::Toolbar, Gtk::ItemFactory, Gdk::Region, Gtk::AccelGroup, 
-         Gtk::AccelMap, Gtk::TextIter, Gtk::TextTagTable, Gtk::TreeModel, 
-         Gtk::TreeSelection, Gtk::Clipboard, Gtk::Box, Gdk::RGB, 
-         Gtk::AccelGroupEntry, Gdk::Window, Gtk::SeparatorMenuItem, 
-         Gtk::TreePath, Gtk::TreeView, Gtk::Combo, Gdk::Threads, 
-         Gtk::TreeIter, Gdk::Event, Gtk::Drag, 
+                                  KATO Kazuyoshi, Masahiro Sakai, Masao Mutoh]
+         Gtk::Toolbar, Gtk::ItemFactory, Gdk::Region, Gtk::AccelGroup,
+         Gtk::AccelMap, Gtk::TextIter, Gtk::TextTagTable, Gtk::TreeModel,
+         Gtk::TreeSelection, Gtk::Clipboard, Gtk::Box, Gdk::RGB,
+         Gtk::AccelGroupEntry, Gdk::Window, Gtk::SeparatorMenuItem,
+         Gtk::TreePath, Gtk::TreeView, Gtk::Combo, Gdk::Threads,
+         Gtk::TreeIter, Gdk::Event, Gtk::Drag,
       - Added: [Kazuo Saito, KATO Kazuyoshi, Masao Mutoh]
          sample/gtk-demo/*.rb, sample/misc/threads.rb
       - Removed: [Masao Mutoh]
          Gtk::Toolbar#insert_item/widget/element,
-         Gtk::Toolbar#prepend_item/widget/element, 
+         Gtk::Toolbar#prepend_item/widget/element,
          Gtk::Toolbar#append_item/widget/element.
           Use Gtk::Toolbar#insert, prepend, append instead.
-         Gtk::Combo#list, button, popup, popwin, set_item_string, 
+         Gtk::Combo#list, button, popup, popwin, set_item_string,
 
   * Ruby/GNOME
       - Support mkmf-gnome2.rb [Masahiro Sakai]
@@ -1452,7 +1453,7 @@ Ruby-GNOME2-0.4.0 (2003-03-23)
 Ruby-GNOME2-0.3.0 (2003-02-09)
 
   * Ruby/GLib
-    - Miscellaneous bugfixes and some improvement internal. 
+    - Miscellaneous bugfixes and some improvement internal.
       [Masahiro Sakai, Masao Mutoh]
 
   * Ruby/GTK
@@ -1468,7 +1469,7 @@ Ruby-GNOME2-0.3.0 (2003-02-09)
       - Added and completed:
          Gdk::Pango::Embossed, Gdk::Pango::Stipple, Gdk::Span
       - Added some methods, improved:
-         Gtk::Widget, Gtk::Calender, Gdk::GC, Gtk::Drag, Gtk::SelectionData, 
+         Gtk::Widget, Gtk::Calender, Gdk::GC, Gtk::Drag, Gtk::SelectionData,
          Gtk::RadioMenuItem,Gdk::Pixmap
       - Added:
         sample/misc/dnd.rb, dndtreeview.rb, dnd.rb
@@ -1498,18 +1499,18 @@ Ruby-GNOME2-0.3.0 (2003-02-09)
     - Initial release. [Geoff Youngs, Masao Mutoh]
 
       - Added and completed:
-         Pango::Rectangle, Pango::FontDescription, Pango::FontMetrics, 
-         Pango::FontFace, Pango::Fontset, Pango::FontsetSimple, 
-         Pango::Attribute, Pango::AttrString, Pango::AttrLanguage, 
+         Pango::Rectangle, Pango::FontDescription, Pango::FontMetrics,
+         Pango::FontFace, Pango::Fontset, Pango::FontsetSimple,
+         Pango::Attribute, Pango::AttrString, Pango::AttrLanguage,
          Pango::AttrColor, Pango::AttrInt, Pango::AttrFloat, Pango::AttrBool
-         Pango::AttrFontDesc, Pango::AttrShape, Pango::AttrFamily, 
+         Pango::AttrFontDesc, Pango::AttrShape, Pango::AttrFamily,
          Pango::AttrStyle, Pango::AttrVariant, Pango::AttrStretch,
          Pango::AttrWeight, Pango::AttrSize, Pango::AttrForeground,
          Pango::AttrBackground, Pango::AttrStrikethrough, Pango::AttrUnderline,
          Pango::AttrScale, Pango::AttrRise, Pango::Color, Pango::Language,
          Pango::AttrList, Pango::AttrIterator, Pango::TabArray
      - Added:
-         Pango::Context, Pango::Item, Pango::ClyphString, Pango::Font, 
+         Pango::Context, Pango::Item, Pango::ClyphString, Pango::Font,
          Pango::FontFamily, Pango::FontMap, Pango::Layout, Pango::LayoutIter,
          Pango::LayoutLine,
          sample/attribute.rb, gdk_layout.rb, label.rb, parse.rb.
@@ -1534,20 +1535,20 @@ Ruby-GNOME2-0.2 (2002-12-28)
     - Completed:
        Gtk::TextIter, Gtk::Label, Gtk::Tooltips, Gtk::Viewport.
     - Added and completed:
-       Gtk::TextAttributes, Gtk::IconFactroy, Gtk::IconSet, 
-       Gtk::IconSource, Gtk::IconSize, Gtk::Accelerator, 
-       Gtk::AccelKey, Gtk::AccelGroupEntry, Gtk::SizeGroup, 
+       Gtk::TextAttributes, Gtk::IconFactroy, Gtk::IconSet,
+       Gtk::IconSource, Gtk::IconSize, Gtk::Accelerator,
+       Gtk::AccelKey, Gtk::AccelGroupEntry, Gtk::SizeGroup,
     - Added some methods, improved:
-       Gtk module, Gtk::TextBuffer, Gtk::*MenuItem, Gtk::*Button, 
-       Gtk::ItemFactory, Gtk::Widget, Gtk::TreeViewColumn, 
-       Gtk::Notebook, Gtk::Image, Gtk::AccelLabel, Gtk::Invisible, 
+       Gtk module, Gtk::TextBuffer, Gtk::*MenuItem, Gtk::*Button,
+       Gtk::ItemFactory, Gtk::Widget, Gtk::TreeViewColumn,
+       Gtk::Notebook, Gtk::Image, Gtk::AccelLabel, Gtk::Invisible,
        Gtk::Dialog, Gtk::TreePath, Gdk::Keyval
-       sample/misc/*button.rb, stock.rb 
+       sample/misc/*button.rb, stock.rb
        sample/testgtk/savedposition.rb
     - Added:
        Gtk::Clipboard, Gtk::AccelGroup, Gtk::AccelMap
-       sample/misc/button2.rb, label.rb, dialog.rb, dialog2.rb, 
-       treeview.rb 
+       sample/misc/button2.rb, label.rb, dialog.rb, dialog2.rb,
+       treeview.rb
     - Removed:
        Gdk::Bitmap(use Gdk::Pixmap(depth = 1) instead)
 
@@ -1569,7 +1570,7 @@ Ruby-GNOME2-0.2 (2002-12-28)
     - Follow Ruby/GLib changes.
     - Add bin/ruby-glade-create-template(Create .rb from .glade)
     - Add sample/treeview*
-    - Improve the behavior to work when handlers aren't undefined not 
+    - Improve the behavior to work when handlers aren't undefined not
       to occur signal_proc.arity error.
 
   * Ruby/Libart
