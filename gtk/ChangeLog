@@ -1,3 +1,7 @@
+2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkwindow.c: removed needless alias icon=.
+
 2008-03-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/: added.

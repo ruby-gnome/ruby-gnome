@@ -791,7 +791,6 @@ Init_gtk_window()
     rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
     rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
-    rb_define_alias(gWindow, "icon=", "set_icon");
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWindow, "set_auto_startup_notification", 
