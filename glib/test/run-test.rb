@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+$VERBOSE = true
+
 base = File.expand_path(File.dirname(__FILE__))
 top = File.expand_path(File.join(base, ".."))
 
