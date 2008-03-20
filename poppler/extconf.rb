@@ -16,6 +16,8 @@ require 'mkmf-gnome2'
 PKGConfig.have_package(PACKAGE_ID, 0, 5, 2) or exit 1
 setup_win32(PACKAGE_NAME)
 
+have_func("poppler_page_render_selection_to_pixbuf")
+
 if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
   if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
     unless ENV["CAIRO_PATH"]
@@ -28,9 +30,9 @@ if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gdk_pixbuf2", "gdkpixbuf", TOPDIR)
 
 make_version_header("POPPLER", PACKAGE_ID)
-have_func("poppler_page_render_selection_to_pixbuf")
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_POPPLER_COMPILATION")
 create_top_makefile
