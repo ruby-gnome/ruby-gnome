@@ -1,6 +1,6 @@
 class TestConstants < Test::Unit::TestCase
   def test_annotation
-    if (Poppler::BUILD_VERSION <=> [0, 7, 2]) >= 0
+    if later_version?(0, 7, 2)
       assertion = :assert_const_defined
     else
       assertion = :assert_const_not_defined
@@ -18,6 +18,10 @@ class TestConstants < Test::Unit::TestCase
     send(assertion, Poppler, :AnnotationTextIcon)
     send(assertion, Poppler, :AnnotationTextState)
     send(assertion, Poppler, :AnnotationFreeTextQuadding)
+  end
+
+  def test_permissions
+    assert_const_defined(Poppler, :Permissions)
   end
 
   private

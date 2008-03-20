@@ -18,9 +18,14 @@ test_unit_ext_dir = File.join(glib_dir, "test-unit-ext", "lib")
 end
 require "poppler"
 
-$LOAD_PATH.unshift(File.join(base_dir, "test"))
 $LOAD_PATH.unshift(test_unit_ext_dir)
 require 'test-unit-ext'
+
+$LOAD_PATH.unshift(File.join(base_dir, "test"))
+require 'poppler-test-utils'
+class Test::Unit::TestCase
+  include PopplerTestUtils
+end
 
 Test::Unit::TestSuite.priority_mode = true
 

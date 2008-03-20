@@ -65,6 +65,7 @@ doc_save(VALUE self, VALUE uri)
     gboolean result;
     GError *error = NULL;
 
+    uri = rb_funcall(self, id_ensure_uri, 1, uri);
     result = poppler_document_save(RVAL2DOC(self), RVAL2CSTR(uri), &error);
 
     if (error)
@@ -72,6 +73,24 @@ doc_save(VALUE self, VALUE uri)
 
     return CBOOL2RVAL(result);
 }
+
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+static VALUE
+doc_save_a_copy(VALUE self, VALUE uri)
+{
+    gboolean result;
+    GError *error = NULL;
+
+    uri = rb_funcall(self, id_ensure_uri, 1, uri);
+    result = poppler_document_save_a_copy(RVAL2DOC(self), RVAL2CSTR(uri),
+					  &error);
+
+    if (error)
+        RAISE_GERROR(error);
+
+    return CBOOL2RVAL(result);
+}
+#endif
 
 static VALUE
 doc_get_n_pages(VALUE self)
@@ -416,6 +435,9 @@ Init_poppler_document(VALUE mPoppler)
 
     rb_define_method(cDocument, "initialize", doc_initialize, -1);
     rb_define_method(cDocument, "save", doc_save, 1);
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cDocument, "save_a_copy", doc_save_a_copy, 1);
+#endif
     rb_define_method(cDocument, "n_pages", doc_get_n_pages, 0);
     rb_define_alias(cDocument, "size", "n_pages");
     rb_define_method(cDocument, "get_page", doc_get_page, 1);

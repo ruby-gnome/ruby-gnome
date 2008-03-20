@@ -26,6 +26,6 @@ class TestColor < Test::Unit::TestCase
 
   private
   def color_available?
-    (Poppler::BUILD_VERSION <=> [0, 7, 2]) >= 0
+    later_version?(0, 7, 2)
   end
 end

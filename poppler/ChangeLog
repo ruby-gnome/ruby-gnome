@@ -1,5 +1,12 @@
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-document.c: implemented Poppler::Document#save_a_copy.
+
+	* test/test_document.rb: added.
+
+	* test/poppler-test-utils.rb: added.
+	* test/: used poppler-test-utils.rb.
+
 	* src/rbpoppler.[ch], src/rbpoppler-page.c: just buildable with
 	poppler-glib 0.7.3.
 
