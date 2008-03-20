@@ -234,10 +234,43 @@ page_get_link_mapping(VALUE self)
 static VALUE
 page_get_image_mapping(VALUE self)
 {
-    return GLIST2ARY2F(poppler_page_get_image_mapping(SELF(self)),
-                       POPPLER_TYPE_IMAGE_MAPPING);
+    VALUE mappings;
+    GList *image_mapping, *node;
+
+    mappings = rb_ary_new();
+    image_mapping = poppler_page_get_image_mapping(SELF(self));
+    for (node = image_mapping; node; node = g_list_next(node)) {
+	PopplerImageMapping *image_mapping;
+	VALUE mapping;
+
+	image_mapping = node->data;
+	mapping = BOXED2RVAL(image_mapping, POPPLER_TYPE_IMAGE_MAPPING);
+#if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+	rb_iv_set(mapping, "@page", self);
+#endif
+	rb_ary_push(mappings, mapping);
+    }
+    poppler_page_free_image_mapping(image_mapping);
+
+    return mappings;
+}
+#endif
+
+#if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+static VALUE
+_page_get_image(VALUE self, gint image_id)
+{
+    return CRSURFACE2RVAL(poppler_page_get_image(SELF(self), image_id));
 }
 
+static VALUE
+page_get_image(VALUE self, VALUE image_id)
+{
+    return _page_get_image(self, NUM2INT(image_id));
+}
+#endif
+
+#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_form_field_mapping(VALUE self)
 {
@@ -521,6 +554,13 @@ DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 #ifdef HAVE_ST_IMAGE_ID
 DEF_ACCESSOR(image_mapping, image_id, RVAL2IM, INT2NUM, NUM2INT)
+#  if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+static VALUE
+image_mapping_get_image(VALUE self)
+{
+    return _page_get_image(rb_iv_get(self, "@page"), RVAL2IM(self)->image_id);
+}
+#  endif
 #else
 DEF_ACCESSOR(image_mapping, image, RVAL2IM, GOBJ2RVAL, RVAL2GDK_PIXBUF)
 #endif
@@ -785,6 +825,12 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
+#endif
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cPage, "get_image", page_get_image, 1);
+#endif
+
+#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "form_field_mapping",
                      page_get_form_field_mapping, 0);
 #endif
@@ -866,6 +912,9 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cImageMapping, "area", image_mapping_get_area, 0);
 #ifdef HAVE_ST_IMAGE_ID
     rb_define_method(cImageMapping, "image_id", image_mapping_get_image_id, 0);
+#  if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+    rb_define_method(cImageMapping, "image", image_mapping_get_image, 0);
+#  endif
 #else
     rb_define_method(cImageMapping, "image", image_mapping_get_image, 0);
 #endif

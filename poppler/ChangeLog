@@ -1,5 +1,12 @@
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-page.c: implemented Poppler::Page#image.
+
+	* test/poppler-test-utils.rb, test/test_page.rb: added a PDF that
+	contains images.
+
+	* test/test_page.rb: added.
+
 	* src/rbpoppler-document.c: implemented Poppler::Document#save_a_copy.
 
 	* test/test_document.rb: added.
