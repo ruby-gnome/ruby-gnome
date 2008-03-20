@@ -46,7 +46,14 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #define RVAL2ACTIONTYPE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_ACTION_TYPE))
 #define SELSTYLE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_SELECTION_STYLE))
 #define RVAL2SELSTYLE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_SELECTION_STYLE))
-#define RVAL2COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
+#define RVAL2GDKCOLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
+
+#ifdef POPPLER_TYPE_COLOR
+extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
+#  define RVAL2COLOR(obj) (rb_poppler_ruby_object_to_color(obj))
+#else
+#  define RVAL2COLOR(obj) (RVAL2GDKCOLOR(obj))
+#endif
 
 #define ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
 #define RVAL2ACTION(obj) (rb_poppler_action_from_ruby_object(obj))

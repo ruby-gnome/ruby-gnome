@@ -1,5 +1,10 @@
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.[ch], src/rbpoppler-page.c: just buildable with
+	poppler-glib 0.7.3.
+
+	* test/: added.
+
 	* extconf.rb: fixed build error on Win32. [Patch #1843689]
 	Reported by Yaakov Selkowitz with a patch. Thanks!!!
 

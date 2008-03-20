@@ -39,6 +39,33 @@ static VALUE cPSFile, cRectangle;
 VALUE cUnknownField, cTextField, cButtonField, cChoiceField, cSignatureField;
 #endif
 
+#ifdef POPPLER_TYPE_COLOR
+extern VALUE mGdk;
+VALUE rb_cPopplerColor;
+
+PopplerColor *
+rb_poppler_ruby_object_to_color(VALUE color)
+{
+    static VALUE rb_cGdkColor = Qnil;
+
+    if (NIL_P(rb_cGdkColor)) {
+	rb_cGdkColor = rb_const_get(mGdk, rb_intern("Color"));
+    }
+
+    if (RTEST(rb_obj_is_kind_of(color, rb_cGdkColor))) {
+	GdkColor *gdk_color;
+	gdk_color = RVAL2GDKCOLOR(color);
+	color = rb_funcall(rb_cPopplerColor, rb_intern("new"),
+			   3,
+			   UINT2NUM(gdk_color->red),
+			   UINT2NUM(gdk_color->green),
+			   UINT2NUM(gdk_color->blue));
+    }
+
+    return RVAL2BOXED(color, POPPLER_TYPE_COLOR);
+}
+#endif
+
 static VALUE
 page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
                       VALUE src_height, VALUE scale, VALUE rotation,
@@ -293,8 +320,8 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
 #ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
                                             RVAL2SELSTYLE(style),
 #endif
-                                            RVAL2COLOR(glyph_color),
-                                            RVAL2COLOR(background_color));
+                                            RVAL2GDKCOLOR(glyph_color),
+                                            RVAL2GDKCOLOR(background_color));
     return Qnil;
 }
 
@@ -415,6 +442,55 @@ rectangle_to_a(VALUE self)
 }
 
 
+#ifdef POPPLER_TYPE_COLOR
+/* A color in RGB */
+static VALUE
+color_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
+{
+    PopplerColor color;
+
+    color.red = NUM2UINT(red);
+    color.green = NUM2UINT(green);
+    color.blue = NUM2UINT(blue);
+
+    G_INITIALIZE(self, &color);
+    return Qnil;
+}
+
+DEF_ACCESSOR(color, red, RVAL2COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, green, RVAL2COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, blue, RVAL2COLOR, UINT2NUM, NUM2UINT)
+
+static VALUE
+color_to_a(VALUE self)
+{
+    PopplerColor *color;
+    color = RVAL2COLOR(self);
+    return rb_ary_new3(3,
+                       UINT2NUM(color->red),
+                       UINT2NUM(color->green),
+                       UINT2NUM(color->blue));
+}
+
+static VALUE
+color_inspect(VALUE self)
+{
+    VALUE inspected;
+    gchar *rgb;
+    PopplerColor *color;
+
+    color = RVAL2COLOR(self);
+    inspected = rb_call_super(0, NULL);
+    rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
+    rgb = g_strdup_printf(": [%u, %u, %u]>",
+			  color->red, color->green, color->blue);
+    rb_str_cat2(inspected, rgb);
+    g_free(rgb);
+    return inspected;
+}
+#endif
+
+
 /* Mapping between areas on the current page and PopplerActions */
 #define RECT_ENTITY2RVAL(rect) RECT2RVAL(&(rect))
 #define RECT_ENTITY_SET(rect, rb_rect) rectangle_set(&(rect), rb_rect)
@@ -443,7 +519,11 @@ DEF_ACCESSOR(page_trans, rectangular, RVAL2TRANS, RVAL2CBOOL, CBOOL2RVAL)
 /* Mapping between areas on the current page and images */
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+#ifdef HAVE_ST_IMAGE_ID
+DEF_ACCESSOR(image_mapping, image_id, RVAL2IM, INT2NUM, NUM2INT)
+#else
 DEF_ACCESSOR(image_mapping, image, RVAL2IM, GOBJ2RVAL, RVAL2GDK_PIXBUF)
+#endif
 
 
 /* Mapping between areas on the current page and form fields */
@@ -668,6 +748,9 @@ Init_poppler_page(VALUE mPoppler)
 
     cPage = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
+#ifdef POPPLER_TYPE_COLOR
+    rb_cPopplerColor = G_DEF_CLASS(POPPLER_TYPE_COLOR, "Color", mPoppler);
+#endif
     cLinkMapping = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
 #if POPPLER_CHECK_VERSION(0, 6, 0)
@@ -729,6 +812,21 @@ Init_poppler_page(VALUE mPoppler)
 
     G_DEF_SETTERS(cRectangle);
 
+#ifdef POPPLER_TYPE_COLOR
+/* A color in RGB */
+    rb_define_method(rb_cPopplerColor, "initialize", color_initialize, 3);
+    rb_define_method(rb_cPopplerColor, "red", color_get_red, 0);
+    rb_define_method(rb_cPopplerColor, "green", color_get_green, 0);
+    rb_define_method(rb_cPopplerColor, "blue", color_get_blue, 0);
+    rb_define_method(rb_cPopplerColor, "set_red", color_set_red, 1);
+    rb_define_method(rb_cPopplerColor, "set_green", color_set_green, 1);
+    rb_define_method(rb_cPopplerColor, "set_blue", color_set_blue, 1);
+    rb_define_method(rb_cPopplerColor, "to_a", color_to_a, 0);
+    rb_define_method(rb_cPopplerColor, "inspect", color_inspect, 0);
+
+    G_DEF_SETTERS(rb_cPopplerColor);
+#endif
+
 /* Mapping between areas on the current page and PopplerActions */
     rb_define_method(cLinkMapping, "area", link_mapping_get_area, 0);
     rb_define_method(cLinkMapping, "action", link_mapping_get_action, 0);
@@ -766,10 +864,19 @@ Init_poppler_page(VALUE mPoppler)
 
 /* Mapping between areas on the current page and images */
     rb_define_method(cImageMapping, "area", image_mapping_get_area, 0);
+#ifdef HAVE_ST_IMAGE_ID
+    rb_define_method(cImageMapping, "image_id", image_mapping_get_image_id, 0);
+#else
     rb_define_method(cImageMapping, "image", image_mapping_get_image, 0);
+#endif
 
     rb_define_method(cImageMapping, "set_area", image_mapping_set_area, 1);
+#ifdef HAVE_ST_IMAGE_ID
+    rb_define_method(cImageMapping, "set_image_id",
+		     image_mapping_set_image_id, 1);
+#else
     rb_define_method(cImageMapping, "set_image", image_mapping_set_image, 1);
+#endif
 
     G_DEF_SETTERS(cImageMapping);
 

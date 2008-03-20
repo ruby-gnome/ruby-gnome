@@ -17,6 +17,7 @@ PKGConfig.have_package(PACKAGE_ID, 0, 5, 2) or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_func("poppler_page_render_selection_to_pixbuf")
+have_struct_member("PopplerImageMapping", "image_id", ["poppler.h"])
 
 if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
   if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
