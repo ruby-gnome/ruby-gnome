@@ -284,6 +284,45 @@ page_get_text(int argc, VALUE *argv, VALUE self)
     return rb_text;
 }
 
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+static VALUE
+page_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
+{
+    return GLIST2ARY2F(poppler_page_get_selection_region(SELF(self),
+							 NUM2DBL(scale),
+							 RVAL2SELSTYLE(style),
+							 RVAL2RECT(selection)),
+                       POPPLER_TYPE_RECTANGLE);
+}
+#else
+static VALUE
+page_get_selection_region(int argc, VALUE *argv, VALUE self)
+{
+#if POPPLER_CHECK_VERSION(0, 6, 0)
+    PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
+#endif
+    VALUE arg2, arg3, scale, selection;
+
+    rb_scan_args(argc, argv, "21", &scale, &arg2, &arg3);
+
+    if (NIL_P(arg3)) {
+        selection = arg2;
+    } else {
+#if POPPLER_CHECK_VERSION(0, 6, 0)
+        style = RVAL2SELSTYLE(arg2);
+#endif
+        selection = arg3;
+    }
+
+    return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
+                                                         NUM2DBL(scale),
+#if POPPLER_CHECK_VERSION(0, 6, 0)
+                                                         style,
+#endif
+                                                         RVAL2RECT(selection)));
+}
+#endif
+
 static VALUE
 page_get_link_mapping(VALUE self)
 {
@@ -339,33 +378,6 @@ page_get_form_field_mapping(VALUE self)
                        POPPLER_TYPE_FORM_FIELD_MAPPING);
 }
 #endif
-
-static VALUE
-page_get_selection_region(int argc, VALUE *argv, VALUE self)
-{
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-    PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
-#endif
-    VALUE arg2, arg3, scale, selection;
-
-    rb_scan_args(argc, argv, "21", &scale, &arg2, &arg3);
-
-    if (NIL_P(arg3)) {
-        selection = arg2;
-    } else {
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-        style = RVAL2SELSTYLE(arg2);
-#endif
-        selection = arg3;
-    }
-
-    return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
-                                                         NUM2DBL(scale),
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-                                                         style,
-#endif
-                                                         RVAL2RECT(selection)));
-}
 
 #if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
       defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
@@ -893,6 +905,13 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
     rb_define_method(cPage, "find_text", page_find_text, 1);
     rb_define_method(cPage, "get_text", page_get_text, -1);
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cPage, "get_selection_region",
+		     page_get_selection_region, 3);
+#else
+    rb_define_method(cPage, "get_selection_region",
+                     page_get_selection_region, -1);
+#endif
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
@@ -905,8 +924,6 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "form_field_mapping",
                      page_get_form_field_mapping, 0);
 #endif
-    rb_define_method(cPage, "get_selection_region",
-                     page_get_selection_region, -1);
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
 #if POPPLER_CHECK_VERSION(0, 6, 0)

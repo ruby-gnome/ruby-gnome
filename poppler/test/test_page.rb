@@ -43,6 +43,18 @@ class TestPage < Test::Unit::TestCase
     assert_kind_of(Gdk::Pixbuf, page.thumbnail_pixbuf)
   end
 
+  def test_selection_region
+    document = Poppler::Document.new(form_pdf)
+    page = document[0]
+    rectangle = Poppler::Rectangle.new(0, 0, *page.size)
+    region = page.get_selection_region(0.5, :word, rectangle)
+    if later_version?(0, 7, 2)
+      assert_kind_of(Poppler::Rectangle, region[0])
+    else
+      assert_kind_of(Gdk::Region, region)
+    end
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|

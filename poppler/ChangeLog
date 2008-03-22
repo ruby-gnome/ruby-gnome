@@ -1,5 +1,9 @@
 2008-03-22  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-page.c (page_get_selection_region),
+	test/test_page.rb (TestPage#test_selection_region): implemented
+	Poppler::Page#get_selection_region for 0.7.2.
+
 	* src/rbpoppler-page.c, test/test_page.rb
 	(TestPage#test_thumbnail_pixbuf): implemented
 	Poppler::Page#thumbnail_pixbuf.
