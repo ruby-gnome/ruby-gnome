@@ -116,6 +116,51 @@ page_render_generic(int argc, VALUE *argv, VALUE self)
     }
 }
 
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+static VALUE
+page_render_to_pixbuf_for_printing(VALUE self, VALUE src_x, VALUE src_y,
+				   VALUE src_width, VALUE src_height,
+				   VALUE scale, VALUE rotation, VALUE pixbuf)
+{
+    poppler_page_render_to_pixbuf_for_printing(SELF(self), NUM2INT(src_x),
+					       NUM2INT(src_y),
+					       NUM2INT(src_width),
+					       NUM2INT(src_height),
+					       NUM2DBL(scale),
+					       NUM2INT(rotation),
+					       RVAL2GOBJ(pixbuf));
+    return Qnil;
+}
+
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
+static VALUE
+page_render_for_printing(VALUE self, VALUE cairo)
+{
+    poppler_page_render_for_printing(SELF(self), RVAL2CRCONTEXT(cairo));
+    return Qnil;
+}
+#endif
+
+static VALUE
+page_render_for_printing_generic(int argc, VALUE *argv, VALUE self)
+{
+    if (argc == 1) {
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
+	return page_render_for_printing(self, argv[0]);
+#else
+	rb_raise(rb_eArgError, "cairo is not available");
+#endif
+    } else if (argc == 7) {
+        return page_render_to_pixbuf_for_printing(self, argv[0], argv[1],
+						  argv[2], argv[3],
+						  argv[4], argv[5], argv[6]);
+    } else {
+        rb_raise(rb_eArgError,
+                 "wrong number of arguments (%d for 1 or 7)", argc);
+    }
+}
+#endif
+
 static VALUE
 page_get_size(VALUE self)
 {
@@ -812,6 +857,10 @@ Init_poppler_page(VALUE mPoppler)
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
     rb_define_method(cPage, "render", page_render_generic, -1);
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cPage, "render_for_printing",
+		     page_render_for_printing_generic, -1);
+#endif
     rb_define_method(cPage, "size", page_get_size, 0);
     rb_define_method(cPage, "index", page_get_index, 0);
 #if POPPLER_CHECK_VERSION(0, 6, 0)
