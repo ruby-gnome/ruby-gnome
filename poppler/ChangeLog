@@ -1,5 +1,9 @@
 2008-03-22  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-page.c, test/test_page.rb
+	(TestPage#test_thumbnail_pixbuf): implemented
+	Poppler::Page#thumbnail_pixbuf.
+
 	* src/rbpoppler-page.c (page_render_for_printing_generic),
 	test/test_page.rb (TestPage#test_render_to_pixbuf_for_printing):
 	implemented Poppler::Page#render_for_printing.

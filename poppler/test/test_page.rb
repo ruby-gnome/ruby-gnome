@@ -36,6 +36,13 @@ class TestPage < Test::Unit::TestCase
     assert_not_equal("\0" * 10, pixbuf.pixels[0, 10])
   end
 
+  def test_thumbnail_pixbuf
+    return if true # we doesn't have a PDF that has a thumbnail...
+    document = Poppler::Document.new(thumbnail_pdf)
+    page = document[0]
+    assert_kind_of(Gdk::Pixbuf, page.thumbnail_pixbuf)
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|

@@ -189,11 +189,27 @@ page_get_transition(VALUE self)
 }
 #endif
 
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+#  if RB_POPPLER_CAIRO_AVAILABLE
+static VALUE
+page_get_thumbnail(VALUE self)
+{
+    return CRSURFACE2RVAL(poppler_page_get_thumbnail(SELF(self)));
+}
+#  endif
+
+static VALUE
+page_get_thumbnail_pixbuf(VALUE self)
+{
+    return GOBJ2RVAL(poppler_page_get_thumbnail_pixbuf(SELF(self)));
+}
+#else
 static VALUE
 page_get_thumbnail(VALUE self)
 {
     return GOBJ2RVAL(poppler_page_get_thumbnail(SELF(self)));
 }
+#endif
 
 static VALUE
 page_get_thumbnail_size(VALUE self)
@@ -867,7 +883,13 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "duration", page_get_duration, 0);
     rb_define_method(cPage, "transition", page_get_transition, 0);
 #endif
+#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
+    rb_define_method(cPage, "thumbnail_pixbuf", page_get_thumbnail_pixbuf, 0);
+#else
+    rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
+    rb_define_alias(cPage, "thumbnail_pixbuf", "thumbnail");
+#endif
     rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
     rb_define_method(cPage, "find_text", page_find_text, 1);
     rb_define_method(cPage, "get_text", page_get_text, -1);
