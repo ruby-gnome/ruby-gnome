@@ -24,10 +24,10 @@ module GLib
   end
   module_function :check_binding_version?
 
-  def exit_application(status)
-    msg = $!.message || $!.to_s
-    msg = $!.class.to_s if msg == ""
-    backtrace = $!.backtrace
+  def exit_application(exception, status)
+    msg = exception.message || exception.to_s
+    msg = exception.class.to_s if msg == ""
+    backtrace = exception.backtrace
     $stderr.puts backtrace.shift + ": #{msg}"
     backtrace.each do |v|
       $stderr.puts "\t from #{v}"

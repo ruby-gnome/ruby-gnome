@@ -32,7 +32,7 @@ rbgutil_protect(VALUE (*func) (VALUE), VALUE data)
     VALUE ret = rb_protect(func, data, &state);
     VALUE e = rb_errinfo();
     if (state && !NIL_P(e))
-        rb_funcall(mGLib, id_exit_application, 1, EXIT_FAILURE);
+        rb_funcall(mGLib, id_exit_application, 2, e, INT2NUM(EXIT_FAILURE));
     return ret;
 }
 
