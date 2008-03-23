@@ -56,6 +56,21 @@ class TestAnnotation < Test::Unit::TestCase
     assert_method_defined(Poppler::AnnotationFreeText, :callout_line)
   end
 
+  def test_callout_line
+    return unless later_version?(0, 7, 2)
+    callout_line = Poppler::AnnotationCalloutLine.new(true,
+                                                      1.1, 2.2, 3.3,
+                                                      4.4, 5.5, 6.6)
+    assert(callout_line.multiline?)
+    assert_equal(1.1, callout_line.x1)
+    assert_equal(2.2, callout_line.y1)
+    assert_equal(3.3, callout_line.x2)
+    assert_equal(4.4, callout_line.y2)
+    assert_equal(5.5, callout_line.x3)
+    assert_equal(6.6, callout_line.y3)
+    assert_equal([true, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6], callout_line.to_a)
+  end
+
   private
   def annotation
     document = Poppler::Document.new(form_pdf)
