@@ -42,7 +42,8 @@ typedef int GPid;
 #define RVAL2CSTR(v) (StringValuePtr(v))
 #define RVAL2CSTR2(v) (NIL_P(v) ? NULL : StringValuePtr(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
-#define CSTR2RVAL2(s) (rbg_cstr2rval_with_free(s))
+#define CSTR2RVAL_FREE(s) (rbg_cstr2rval_with_free(s))
+#define CSTR2RVAL2 CSTR2RVAL_FREE
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
