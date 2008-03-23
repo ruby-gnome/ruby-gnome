@@ -12,6 +12,11 @@
 #define RVAL2DEST(obj) ((PopplerDest *)RVAL2BOXED(obj, POPPLER_TYPE_DEST))
 #define DEST2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_DEST))
 
+#define DEST_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_DEST_TYPE))
+#define ACTION_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ACTION_TYPE))
+#define RVAL2ACTION_TYPE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_ACTION_TYPE))
+
+
 /* PopplerAction */
 static VALUE actions[POPPLER_ACTION_MOVIE];
 
@@ -58,7 +63,7 @@ action_ ## type ## _ ## name (VALUE self)               \
 static VALUE
 action_any_type(VALUE self)
 {
-    return ACTIONTYPE2RVAL(RVAL2ACTION(self)->type);
+    return ACTION_TYPE2RVAL(RVAL2ACTION(self)->type);
 }
 ACTION_ATTR_STR(any, title);
 
@@ -101,7 +106,7 @@ poppler_dest_get_type (void)
 static VALUE
 dest_get_type(VALUE self)
 {
-    return DESTTYPE2RVAL(RVAL2DEST(self)->type);
+    return DEST_TYPE2RVAL(RVAL2DEST(self)->type);
 }
 
 #define DEST_ATTR_INT(name)                     \

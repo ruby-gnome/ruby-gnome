@@ -23,6 +23,10 @@ extern GType gdk_region_get_type(void);
 #define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
 #define RVAL2GDK_COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
 
+
+#define SEL_STYLE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_SELECTION_STYLE))
+#define RVAL2SEL_STYLE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_SELECTION_STYLE))
+
 #define RVAL2TRANS(obj) ((PopplerPageTransition *)RVAL2BOXED(obj, POPPLER_TYPE_PAGE_TRANSITION))
 #define TRANS2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION))
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
@@ -198,7 +202,7 @@ page_render_selection(VALUE self, VALUE cairo,
     poppler_page_render_selection(SELF(self), RVAL2CRCONTEXT(cairo),
                                   RVAL2POPPLER_RECT(selection),
                                   old_selection,
-                                  RVAL2SELSTYLE(style),
+                                  RVAL2SEL_STYLE(style),
 #if POPPLER_CHECK_VERSION(0, 7, 2)
                                   RVAL2POPPLER_COLOR(glyph_color),
                                   RVAL2POPPLER_COLOR(background_color)
@@ -235,7 +239,7 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
                                             RVAL2POPPLER_RECT(selection),
                                             old_selection,
 #ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-                                            RVAL2SELSTYLE(style),
+                                            RVAL2SEL_STYLE(style),
 #endif
                                             RVAL2GDK_COLOR(glyph_color),
                                             RVAL2GDK_COLOR(background_color));
@@ -366,7 +370,7 @@ page_get_text(int argc, VALUE *argv, VALUE self)
             rb_rect = Qnil;
 #if POPPLER_CHECK_VERSION(0, 6, 0)
             if (!NIL_P(arg2)) {
-                style = RVAL2SELSTYLE(arg2);
+                style = RVAL2SEL_STYLE(arg2);
             }
 #endif
         }
@@ -405,7 +409,7 @@ page_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
 {
     return GLIST2ARY2F(poppler_page_get_selection_region(SELF(self),
 							 NUM2DBL(scale),
-							 RVAL2SELSTYLE(style),
+							 RVAL2SEL_STYLE(style),
 							 RVAL2POPPLER_RECT(selection)),
                        POPPLER_TYPE_RECTANGLE);
 }
@@ -425,7 +429,7 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
         selection = arg2;
     } else {
 #if POPPLER_CHECK_VERSION(0, 6, 0)
-        style = RVAL2SELSTYLE(arg2);
+        style = RVAL2SEL_STYLE(arg2);
 #endif
         selection = arg3;
     }
