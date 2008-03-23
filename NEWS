@@ -35,12 +35,12 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
   * Ruby/Poppler
     - Supported poppler-glib 0.6.x and 0.8.0. [Kouhei Sutou]
 
-  * Ruby-GNOME2 can be build with ruby 1.9.0 but doesn't
-    work well, yet.
+  * Ruby-GNOME2 can be built with ruby 1.9.0 but doesn't
+    work well without [ruby-dev:34104] patch.
 
   * Some extconf.rb improvements
 
-  * Many other changes, GC bugs, Segfault fixes. See corresponding CHANGELOG
+  * Many other changes, GC bugs, Segfault fixes. See corresponding ChangeLog
     for detailed information on changes and contributors.
 
     Special thanks for your contributions to: (list in no particular order)
