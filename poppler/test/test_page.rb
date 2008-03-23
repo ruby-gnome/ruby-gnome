@@ -55,6 +55,14 @@ class TestPage < Test::Unit::TestCase
     end
   end
 
+  def test_annotation_mapping
+    return unless later_version?(0, 7, 2)
+    document = Poppler::Document.new(form_pdf)
+    page = document[0]
+    assert_equal([Poppler::AnnotationMapping],
+                 page.annotation_mapping.collect {|mapping| mapping.class}.uniq)
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|

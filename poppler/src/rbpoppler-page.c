@@ -465,6 +465,15 @@ page_get_form_field_mapping(VALUE self)
 }
 #endif
 
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+static VALUE
+page_get_annot_mapping(VALUE self)
+{
+    return GLIST2ARY2F(poppler_page_get_annot_mapping(SELF(self)),
+                       POPPLER_TYPE_ANNOT_MAPPING);
+}
+#endif
+
 #if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_crop_box(VALUE self)
@@ -858,6 +867,9 @@ Init_poppler_page(VALUE mPoppler)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     VALUE cPageTransition, cImageMapping, cFormFieldMapping, cFormField;
 #endif
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    VALUE cAnnotationMapping;
+#endif
 
     cPage = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
@@ -881,6 +893,10 @@ Init_poppler_page(VALUE mPoppler)
     cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", cFormField);
     cSignatureField = rb_define_class_under(mPoppler, "SignatureField",
                                             cFormField);
+#endif
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    cAnnotationMapping = G_DEF_CLASS(POPPLER_TYPE_ANNOT_MAPPING,
+				     "AnnotationMapping", mPoppler);
 #endif
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
@@ -923,6 +939,10 @@ Init_poppler_page(VALUE mPoppler)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "form_field_mapping",
                      page_get_form_field_mapping, 0);
+#endif
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cPage, "annotation_mapping",
+                     page_get_annot_mapping, 0);
 #endif
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
