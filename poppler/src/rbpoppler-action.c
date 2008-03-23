@@ -3,15 +3,14 @@
 
   rbpoppler-action.c -
 
-  $Author: ktou $
-  $Date: 2007/06/23 02:43:53 $
-
-  Copyright (C) 2006 Ruby-GNOME2 Project Team
+  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
 
 **********************************************************************/
 
-#include "rbpoppler.h"
+#include "rbpoppler-private.h"
 
+#define RVAL2DEST(obj) ((PopplerDest *)RVAL2BOXED(obj, POPPLER_TYPE_DEST))
+#define DEST2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_DEST))
 
 /* PopplerAction */
 static VALUE actions[POPPLER_ACTION_MOVIE];

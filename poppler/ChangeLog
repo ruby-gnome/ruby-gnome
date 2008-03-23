@@ -1,5 +1,8 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h, src/rbpoppler-page.c, src/rbpoppler-action.c:
+	hide RVAL2DEST and RVAL2TRANS.
+
 	* src/rbpoppler.h, src/rbpoppler-page.c: COLOR -> POPPLER_COLOR.
 
 	* src/rbpoppler.h, src/rbpoppler-page.c: hid GDK related macros.
