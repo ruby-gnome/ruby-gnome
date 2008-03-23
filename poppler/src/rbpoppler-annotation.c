@@ -19,6 +19,8 @@
 #define DATA_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE))
 #define TEXT_ICON2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_ICON))
 #define TEXT_STATE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_STATE))
+#define QUADDING2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING))
+#define LINE2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_ANNOT_CALLOUT_LINE))
 
 static VALUE rb_cDate;
 static ID id_new;
@@ -136,6 +138,22 @@ annot_text_get_state(VALUE self)
 {
     return TEXT_STATE2RVAL(poppler_annot_text_get_state(SELF(self)));
 }
+
+/* PopplerAnnotFreeText */
+#undef SELF
+#define SELF(self) (POPPLER_ANNOT_FREE_TEXT(RVAL2GOBJ(self)))
+
+static VALUE
+annot_free_text_get_quadding(VALUE self)
+{
+    return QUADDING2RVAL(poppler_annot_free_text_get_quadding(SELF(self)));
+}
+
+static VALUE
+annot_free_text_get_callout_line(VALUE self)
+{
+    return LINE2RVAL(poppler_annot_free_text_get_callout_line(SELF(self)));
+}
 #endif
 
 void
@@ -177,6 +195,10 @@ Init_poppler_annotation(VALUE mPoppler)
 
     cAnnotationFreeText = G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT,
                                       "AnnotationFreeText", mPoppler);
+    rb_define_method(cAnnotationFreeText, "quadding",
+                     annot_free_text_get_quadding, 0);
+    rb_define_method(cAnnotationFreeText, "callout_line",
+                     annot_free_text_get_callout_line, 0);
 
     cAnnotationCalloutLine = G_DEF_CLASS(POPPLER_TYPE_ANNOT_CALLOUT_LINE,
                                          "AnnotationCalloutLine", mPoppler);

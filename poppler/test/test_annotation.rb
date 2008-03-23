@@ -49,6 +49,13 @@ class TestAnnotation < Test::Unit::TestCase
     assert_method_defined(Poppler::AnnotationText, :state)
   end
 
+  def test_free_text
+    return unless later_version?(0, 7, 2)
+    # We don't have a PDF that has annotation free text...
+    assert_method_defined(Poppler::AnnotationFreeText, :quadding)
+    assert_method_defined(Poppler::AnnotationFreeText, :callout_line)
+  end
+
   private
   def annotation
     document = Poppler::Document.new(form_pdf)
