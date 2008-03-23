@@ -1,6 +1,9 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
+	methods for Poppler::AnnotationText.
+
+	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
 	methods for Poppler::AnnotationMarkup.
 
 	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented

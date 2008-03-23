@@ -41,6 +41,14 @@ class TestAnnotation < Test::Unit::TestCase
     assert_method_defined(Poppler::AnnotationMarkup, :external_data)
   end
 
+  def test_text
+    return unless later_version?(0, 7, 2)
+    # We don't have a PDF that has annotation text...
+    assert_method_defined(Poppler::AnnotationText, :open?)
+    assert_method_defined(Poppler::AnnotationText, :icon)
+    assert_method_defined(Poppler::AnnotationText, :state)
+  end
+
   private
   def annotation
     document = Poppler::Document.new(form_pdf)

@@ -17,6 +17,8 @@
 #define FLAG2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FLAG))
 #define REPLY_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_MARKUP_REPLY_TYPE))
 #define DATA_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE))
+#define TEXT_ICON2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_ICON))
+#define TEXT_STATE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_STATE))
 
 static VALUE rb_cDate;
 static ID id_new;
@@ -112,6 +114,28 @@ annot_markup_get_external_data(VALUE self)
 {
     return DATA_TYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
 }
+
+/* PopplerAnnotText */
+#undef SELF
+#define SELF(self) (POPPLER_ANNOT_TEXT(RVAL2GOBJ(self)))
+
+static VALUE
+annot_text_get_is_open(VALUE self)
+{
+    return CBOOL2RVAL(poppler_annot_text_get_is_open(SELF(self)));
+}
+
+static VALUE
+annot_text_get_icon(VALUE self)
+{
+    return TEXT_ICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
+}
+
+static VALUE
+annot_text_get_state(VALUE self)
+{
+    return TEXT_STATE2RVAL(poppler_annot_text_get_state(SELF(self)));
+}
 #endif
 
 void
@@ -147,6 +171,9 @@ Init_poppler_annotation(VALUE mPoppler)
 
     cAnnotationText = G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT,
                                   "AnnotationText", mPoppler);
+    rb_define_method(cAnnotationText, "open?", annot_text_get_is_open, 0);
+    rb_define_method(cAnnotationText, "icon", annot_text_get_icon, 0);
+    rb_define_method(cAnnotationText, "state", annot_text_get_state, 0);
 
     cAnnotationFreeText = G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT,
                                       "AnnotationFreeText", mPoppler);
