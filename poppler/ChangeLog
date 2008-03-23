@@ -1,5 +1,11 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
+	methods for Poppler::Annotation.
+
+	* src/rbpoppler-page.c, src/rbpoppler.h: added POPPLER_COLOR2RVAL
+	and POPPLER_COLOR2RVAL_FREE.
+
 	* src/rbpoppler.[ch], src/rbpoppler-private.h: called
 	Init_annotation().
 

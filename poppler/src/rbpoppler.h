@@ -50,10 +50,14 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 
 #ifdef POPPLER_TYPE_COLOR
 extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
+extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
 #  define RVAL2COLOR(obj) (rb_poppler_ruby_object_to_color(obj))
+#  define POPPLER_COLOR2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_COLOR))
+#  define POPPLER_COLOR2RVAL_FREE(obj) (rb_poppler_ruby_object_from_color_with_free(obj))
 #else
 #  define RVAL2COLOR(obj) (RVAL2GDKCOLOR(obj))
 #endif
+
 
 #define POPPLER_ANNOT2RVAL(obj) (GOBJ2RVAL(obj))
 #define RVAL2POPPLER_ANNOT(obj) ((PopplerAnnot *)RVAL2GOBJ(obj))

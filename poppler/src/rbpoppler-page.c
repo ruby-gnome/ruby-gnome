@@ -66,6 +66,16 @@ rb_poppler_ruby_object_to_color(VALUE color)
 
     return RVAL2BOXED(color, POPPLER_TYPE_COLOR);
 }
+
+VALUE
+rb_poppler_ruby_object_from_color_with_free(PopplerColor *color)
+{
+    VALUE rb_color;
+
+    rb_color = POPPLER_COLOR2RVAL(color);
+    g_free(color);
+    return rb_color;
+}
 #endif
 
 static VALUE
