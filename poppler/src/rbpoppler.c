@@ -1,16 +1,13 @@
-/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* -*- c-file-style: "ruby" -*- */
 /**********************************************************************
 
   rbpoppler.c -
 
-  $Author: ktou $
-  $Date: 2007/10/13 05:56:39 $
-
-  Copyright (C) 2006 Ruby-GNOME2 Project Team
+  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
 
 **********************************************************************/
 
-#include "rbpoppler.h"
+#include "rbpoppler-private.h"
 
 static VALUE
 get_backend(VALUE self)
@@ -90,4 +87,5 @@ Init_poppler(void)
     Init_poppler_page(mPoppler);
     Init_poppler_attachment(mPoppler);
     Init_poppler_action(mPoppler);
+    Init_poppler_annotation(mPoppler);
 }

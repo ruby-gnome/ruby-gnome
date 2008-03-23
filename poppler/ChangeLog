@@ -1,5 +1,11 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.[ch], src/rbpoppler-private.h: called
+	Init_annotation().
+
+	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
+	Poppler::Annotation#type.
+
 	* src/rbpoppler-page.c:
 	- defined missing methods: Poppler::ButtonField#type and
 	Poppler::ChoiceField#toggle.

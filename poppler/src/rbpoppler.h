@@ -55,6 +55,9 @@ extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
 #  define RVAL2COLOR(obj) (RVAL2GDKCOLOR(obj))
 #endif
 
+#define POPPLER_ANNOT2RVAL(obj) (GOBJ2RVAL(obj))
+#define RVAL2POPPLER_ANNOT(obj) ((PopplerAnnot *)RVAL2GOBJ(obj))
+
 #define ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
 #define RVAL2ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
 #define FF2RVAL(obj) (rb_poppler_ruby_object_from_form_field(obj))
@@ -66,11 +69,5 @@ extern VALUE rb_poppler_ruby_object_from_form_field(PopplerFormField *field);
 #endif
 
 #define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
-
-
-extern void Init_poppler_document(VALUE mPoppler);
-extern void Init_poppler_page(VALUE mPoppler);
-extern void Init_poppler_attachment(VALUE mPoppler);
-extern void Init_poppler_action(VALUE mPoppler);
 
 #endif
