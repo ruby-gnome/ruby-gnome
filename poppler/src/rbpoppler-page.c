@@ -1,4 +1,4 @@
-/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* -*- c-file-style: "ruby" -*- */
 /**********************************************************************
 
   rbpoppler-page.c -
@@ -6,7 +6,7 @@
   $Author: ktou $
   $Date: 2007/10/13 05:56:39 $
 
-  Copyright (C) 2006 Ruby-GNOME2 Project Team
+  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
 
 **********************************************************************/
 
@@ -160,6 +160,92 @@ page_render_for_printing_generic(int argc, VALUE *argv, VALUE self)
     }
 }
 #endif
+
+#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
+      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
+static VALUE
+page_render_selection(VALUE self, VALUE cairo,
+                      VALUE selection, VALUE rb_old_selection,
+                      VALUE style, VALUE glyph_color, VALUE background_color)
+{
+    PopplerRectangle *old_selection = NULL;
+
+    if (!NIL_P(rb_old_selection))
+        old_selection = RVAL2RECT(rb_old_selection);
+    poppler_page_render_selection(SELF(self), RVAL2CRCONTEXT(cairo),
+                                  RVAL2RECT(selection),
+                                  old_selection,
+                                  RVAL2SELSTYLE(style),
+                                  RVAL2COLOR(glyph_color),
+                                  RVAL2COLOR(background_color));
+    return Qnil;
+}
+#endif
+
+#ifndef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+#  define poppler_page_render_selection_to_pixbuf poppler_page_render_selection
+#endif
+
+static VALUE
+page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
+                                VALUE pixbuf, VALUE selection,
+                                VALUE rb_old_selection,
+#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+                                VALUE style,
+#endif
+                                VALUE glyph_color, VALUE background_color)
+{
+    PopplerRectangle *old_selection = NULL;
+
+    if (!NIL_P(rb_old_selection))
+        old_selection = RVAL2RECT(rb_old_selection);
+    poppler_page_render_selection_to_pixbuf(SELF(self),
+                                            NUM2DBL(scale),
+                                            NUM2INT(rotation),
+                                            RVAL2GOBJ(pixbuf),
+                                            RVAL2RECT(selection),
+                                            old_selection,
+#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+                                            RVAL2SELSTYLE(style),
+#endif
+                                            RVAL2GDKCOLOR(glyph_color),
+                                            RVAL2GDKCOLOR(background_color));
+    return Qnil;
+}
+
+static VALUE
+page_render_selection_generic(int argc, VALUE *argv, VALUE self)
+{
+    if (argc == 6) {
+#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
+      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
+        return page_render_selection(self, argv[0], argv[1], argv[2],
+                                     argv[3], argv[4], argv[5]);
+#else
+        rb_raise(rb_eArgError, "cairo is not available");
+#endif
+#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+    } else if (argc == 8) {
+        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
+                                               argv[2], argv[3], argv[4],
+                                               argv[5], argv[6], argv[7]);
+#else
+    } else if (argc == 7) {
+        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
+                                               argv[2], argv[3], argv[4],
+                                               argv[5], argv[6]);
+#endif
+    } else {
+        rb_raise(rb_eArgError,
+                 "wrong number of arguments (%d for 5 or %d)", argc,
+#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
+                 8
+#else
+                 7
+#endif
+                );
+    }
+}
 
 static VALUE
 page_get_size(VALUE self)
@@ -378,92 +464,6 @@ page_get_form_field_mapping(VALUE self)
                        POPPLER_TYPE_FORM_FIELD_MAPPING);
 }
 #endif
-
-#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
-      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
-static VALUE
-page_render_selection(VALUE self, VALUE cairo,
-                      VALUE selection, VALUE rb_old_selection,
-                      VALUE style, VALUE glyph_color, VALUE background_color)
-{
-    PopplerRectangle *old_selection = NULL;
-
-    if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2RECT(rb_old_selection);
-    poppler_page_render_selection(SELF(self), RVAL2CRCONTEXT(cairo),
-                                  RVAL2RECT(selection),
-                                  old_selection,
-                                  RVAL2SELSTYLE(style),
-                                  RVAL2COLOR(glyph_color),
-                                  RVAL2COLOR(background_color));
-    return Qnil;
-}
-#endif
-
-#ifndef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-#  define poppler_page_render_selection_to_pixbuf poppler_page_render_selection
-#endif
-
-static VALUE
-page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
-                                VALUE pixbuf, VALUE selection,
-                                VALUE rb_old_selection,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-                                VALUE style,
-#endif
-                                VALUE glyph_color, VALUE background_color)
-{
-    PopplerRectangle *old_selection = NULL;
-
-    if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2RECT(rb_old_selection);
-    poppler_page_render_selection_to_pixbuf(SELF(self),
-                                            NUM2DBL(scale),
-                                            NUM2INT(rotation),
-                                            RVAL2GOBJ(pixbuf),
-                                            RVAL2RECT(selection),
-                                            old_selection,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-                                            RVAL2SELSTYLE(style),
-#endif
-                                            RVAL2GDKCOLOR(glyph_color),
-                                            RVAL2GDKCOLOR(background_color));
-    return Qnil;
-}
-
-static VALUE
-page_render_selection_generic(int argc, VALUE *argv, VALUE self)
-{
-    if (argc == 6) {
-#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
-      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
-        return page_render_selection(self, argv[0], argv[1], argv[2],
-                                     argv[3], argv[4], argv[5]);
-#else
-        rb_raise(rb_eArgError, "cairo is not available");
-#endif
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-    } else if (argc == 8) {
-        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
-                                               argv[2], argv[3], argv[4],
-                                               argv[5], argv[6], argv[7]);
-#else
-    } else if (argc == 7) {
-        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
-                                               argv[2], argv[3], argv[4],
-                                               argv[5], argv[6]);
-#endif
-    } else {
-        rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 5 or %d)", argc,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-                 8
-#else
-                 7
-#endif
-                );
-    }
-}
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
