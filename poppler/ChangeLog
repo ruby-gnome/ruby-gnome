@@ -1,5 +1,7 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* README: marked poppler-glib 0.8.0 is supported.
+
 	* src/rbpoppler-page.c: used DEF_* macro.
 
 	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
