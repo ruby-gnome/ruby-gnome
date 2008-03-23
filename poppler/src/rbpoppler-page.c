@@ -183,9 +183,9 @@ page_render_selection(VALUE self, VALUE cairo,
     PopplerRectangle *old_selection = NULL;
 
     if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2RECT(rb_old_selection);
+        old_selection = RVAL2POPPLER_RECT(rb_old_selection);
     poppler_page_render_selection(SELF(self), RVAL2CRCONTEXT(cairo),
-                                  RVAL2RECT(selection),
+                                  RVAL2POPPLER_RECT(selection),
                                   old_selection,
                                   RVAL2SELSTYLE(style),
                                   RVAL2COLOR(glyph_color),
@@ -210,12 +210,12 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
     PopplerRectangle *old_selection = NULL;
 
     if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2RECT(rb_old_selection);
+        old_selection = RVAL2POPPLER_RECT(rb_old_selection);
     poppler_page_render_selection_to_pixbuf(SELF(self),
                                             NUM2DBL(scale),
                                             NUM2INT(rotation),
                                             RVAL2GOBJ(pixbuf),
-                                            RVAL2RECT(selection),
+                                            RVAL2POPPLER_RECT(selection),
                                             old_selection,
 #ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
                                             RVAL2SELSTYLE(style),
@@ -374,7 +374,7 @@ page_get_text(int argc, VALUE *argv, VALUE self)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
                                      style,
 #endif
-                                     RVAL2RECT(rb_rect));
+                                     RVAL2POPPLER_RECT(rb_rect));
     }
 
     rb_text = CSTR2RVAL(text);
@@ -389,7 +389,7 @@ page_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
     return GLIST2ARY2F(poppler_page_get_selection_region(SELF(self),
 							 NUM2DBL(scale),
 							 RVAL2SELSTYLE(style),
-							 RVAL2RECT(selection)),
+							 RVAL2POPPLER_RECT(selection)),
                        POPPLER_TYPE_RECTANGLE);
 }
 #else
@@ -417,7 +417,7 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
                                                          style,
 #endif
-                                                         RVAL2RECT(selection)));
+                                                         RVAL2POPPLER_RECT(selection)));
 }
 #endif
 
@@ -493,7 +493,7 @@ page_get_crop_box(VALUE self)
     PopplerRectangle rect;
 
     poppler_page_get_crop_box(SELF(self), &rect);
-    return RECT2RVAL(&rect);
+    return POPPLER_RECT2RVAL(&rect);
 }
 #endif
 
@@ -513,15 +513,15 @@ rectangle_initialize(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
     return Qnil;
 }
 
-DEF_ACCESSOR(rectangle, x1, RVAL2RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, y1, RVAL2RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, x2, RVAL2RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, y2, RVAL2RECT, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, x1, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, y1, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, x2, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, y2, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
 
 static VALUE
 rectangle_to_a(VALUE self)
 {
-    PopplerRectangle *rectangle = RVAL2RECT(self);
+    PopplerRectangle *rectangle = RVAL2POPPLER_RECT(self);
     return rb_ary_new3(4,
                        rb_float_new(rectangle->x1),
                        rb_float_new(rectangle->y1),
@@ -536,7 +536,7 @@ rectangle_inspect(VALUE self)
     gchar *points;
     PopplerRectangle *rectangle;
 
-    rectangle = RVAL2RECT(self);
+    rectangle = RVAL2POPPLER_RECT(self);
     inspected = rb_call_super(0, NULL);
     rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
     points = g_strdup_printf(": [%g, %g, %g, %g]>",
@@ -598,12 +598,12 @@ color_inspect(VALUE self)
 
 
 /* Mapping between areas on the current page and PopplerActions */
-#define RECT_ENTITY2RVAL(rect) RECT2RVAL(&(rect))
+#define RECT_ENTITY2RVAL(rect) POPPLER_RECT2RVAL(&(rect))
 #define RECT_ENTITY_SET(rect, rb_rect) rectangle_set(&(rect), rb_rect)
 static void
 rectangle_set(PopplerRectangle *rect, VALUE rb_rect)
 {
-    *rect = *(RVAL2RECT(rb_rect));
+    *rect = *(RVAL2POPPLER_RECT(rb_rect));
 }
 
 DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
@@ -861,7 +861,7 @@ annot_mapping_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &area, &annotation);
 
     mapping = poppler_annot_mapping_new();
-    mapping->area = *RVAL2RECT(area);
+    mapping->area = *RVAL2POPPLER_RECT(area);
     mapping->annot = RVAL2POPPLER_ANNOT(annotation);
     G_INITIALIZE(self, mapping);
 
