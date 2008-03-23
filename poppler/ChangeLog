@@ -1,6 +1,9 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
+	methods for Poppler::AnnotationMarkup.
+
+	* src/rbpoppler-annotation.c, test/test_annotation.rb: implemented
 	methods for Poppler::Annotation.
 
 	* src/rbpoppler-page.c, src/rbpoppler.h: added POPPLER_COLOR2RVAL

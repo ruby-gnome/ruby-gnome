@@ -29,10 +29,26 @@ class TestAnnotation < Test::Unit::TestCase
     assert_nil(annotation.color)
   end
 
+  def test_markup
+    return unless later_version?(0, 7, 2)
+    # We don't have a PDF that has annotation markup...
+    assert_method_defined(Poppler::AnnotationMarkup, :label)
+    assert_method_defined(Poppler::AnnotationMarkup, :popup_is_open?)
+    assert_method_defined(Poppler::AnnotationMarkup, :opacity)
+    assert_method_defined(Poppler::AnnotationMarkup, :date)
+    assert_method_defined(Poppler::AnnotationMarkup, :subject)
+    assert_method_defined(Poppler::AnnotationMarkup, :reply_to)
+    assert_method_defined(Poppler::AnnotationMarkup, :external_data)
+  end
+
   private
   def annotation
     document = Poppler::Document.new(form_pdf)
     page = document[0]
     page.annotation_mapping[0].annotation
+  end
+
+  def assert_method_defined(object, method)
+    assert_send([object, :method_defined?, method])
   end
 end

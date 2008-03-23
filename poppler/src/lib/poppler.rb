@@ -1,4 +1,5 @@
 require "tempfile"
+require "date"
 require "glib2"
 require "gdk_pixbuf2"
 begin
