@@ -14,6 +14,9 @@
 
 #define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
 
+#define GDK_REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
+#define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
+
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
 #define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
 #define RVAL2FFM(obj) ((PopplerFormFieldMapping *)RVAL2BOXED(obj, POPPLER_TYPE_FORM_FIELD_MAPPING))
@@ -399,6 +402,7 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
 #endif
+    GdkRegion *region;
     VALUE arg2, arg3, scale, selection;
 
     rb_scan_args(argc, argv, "21", &scale, &arg2, &arg3);
@@ -412,12 +416,13 @@ page_get_selection_region(int argc, VALUE *argv, VALUE self)
         selection = arg3;
     }
 
-    return REGION2RVAL(poppler_page_get_selection_region(SELF(self),
-                                                         NUM2DBL(scale),
+    region = poppler_page_get_selection_region(SELF(self),
+					       NUM2DBL(scale),
 #if POPPLER_CHECK_VERSION(0, 6, 0)
-                                                         style,
+					       style,
 #endif
-                                                         RVAL2POPPLER_RECT(selection)));
+					       RVAL2POPPLER_RECT(selection));
+    return GDK_REGION2RVAL(region);
 }
 #endif
 

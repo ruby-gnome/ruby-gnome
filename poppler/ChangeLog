@@ -1,5 +1,7 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h, src/rbpoppler-page.c: hid GDK related macros.
+
 	* src/rbpoppler.h, src/rbpoppler-page.c: RECT -> POPPLER_RECT.
 
 	* README: marked poppler-glib 0.8.0 is supported.
