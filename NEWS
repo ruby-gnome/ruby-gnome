@@ -32,6 +32,9 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
+  * Ruby/Poppler
+    - Supported poppler-glib 0.6.x and 0.8.0. [Kouhei Sutou]
+
   * Ruby-GNOME2 can be build with ruby 1.9.0 but doesn't
     work well, yet.
 
