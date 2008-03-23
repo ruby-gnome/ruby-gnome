@@ -1,6 +1,8 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
-	* src/rbpoppler-page.c: cleanup., test/test_page.rb: implemented
+	* src/rbpoppler-page.c: added missing static.
+
+	* src/rbpoppler-page.c, test/test_page.rb: implemented
 	Poppler::Page#annotation_mapping for 0.7.2.
 
 2008-03-22  Kouhei Sutou  <kou@cozmixng.org>

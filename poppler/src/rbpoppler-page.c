@@ -685,38 +685,38 @@ DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
 DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM, FF2RVAL, RVAL2FF)
 
 /* FormField */
-VALUE
+static VALUE
 form_field_get_id(VALUE self)
 {
     return INT2NUM(poppler_form_field_get_id(RVAL2FF(self)));
 }
 
-VALUE
+static VALUE
 form_field_get_font_size(VALUE self)
 {
     return rb_float_new(poppler_form_field_get_font_size(RVAL2FF(self)));
 }
 
-VALUE
+static VALUE
 form_field_is_read_only(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_is_read_only(RVAL2FF(self)));
 }
 
 /* Button Field */
-VALUE
+static VALUE
 button_field_get_button_type(VALUE self)
 {
     return FBT2RVAL(poppler_form_field_button_get_button_type(RVAL2FF(self)));
 }
 
-VALUE
+static VALUE
 button_field_get_state(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_button_get_state(RVAL2BF(self)));
 }
 
-VALUE
+static VALUE
 button_field_set_state(VALUE self, VALUE state)
 {
     poppler_form_field_button_set_state(RVAL2BF(self), RVAL2CBOOL(state));
@@ -724,50 +724,50 @@ button_field_set_state(VALUE self, VALUE state)
 }
 
 /* Text Field */
-VALUE
+static VALUE
 text_field_get_text_type(VALUE self)
 {
     return FTT2RVAL(poppler_form_field_text_get_text_type(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_get_text(VALUE self)
 {
     return CSTR2RVAL(poppler_form_field_text_get_text(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_set_text(VALUE self, VALUE text)
 {
     poppler_form_field_text_set_text(RVAL2TF(self), RVAL2CSTR2(text));
     return Qnil;
 }
 
-VALUE
+static VALUE
 text_field_get_max_length(VALUE self)
 {
     return INT2NUM(poppler_form_field_text_get_max_len(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_do_spell_check(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_text_do_spell_check(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_do_scroll(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_text_do_scroll(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_is_rich_text(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_text_is_rich_text(RVAL2TF(self)));
 }
 
-VALUE
+static VALUE
 text_field_is_password(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_text_is_password(RVAL2TF(self)));
@@ -775,85 +775,85 @@ text_field_is_password(VALUE self)
 
 
 /* Choice Field */
-VALUE
+static VALUE
 choice_field_get_choice_type(VALUE self)
 {
     return FCT2RVAL(poppler_form_field_choice_get_choice_type(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_is_editable(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_choice_is_editable(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_can_select_multiple(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_choice_can_select_multiple(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_do_spell_check(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_choice_do_spell_check(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_commit_on_change(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_choice_commit_on_change(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_get_n_items(VALUE self)
 {
     return INT2NUM(poppler_form_field_choice_get_n_items(RVAL2CF(self)));
 }
 
-VALUE
+static VALUE
 choice_field_get_item(VALUE self, VALUE index)
 {
     return CSTR2RVAL(poppler_form_field_choice_get_item(RVAL2CF(self),
                                                         NUM2INT(index)));
 }
 
-VALUE
+static VALUE
 choice_field_is_item_selected(VALUE self, VALUE index)
 {
     return CBOOL2RVAL(poppler_form_field_choice_is_item_selected(RVAL2CF(self),
                                                                  NUM2INT(index)));
 }
 
-VALUE
+static VALUE
 choice_field_select_item(VALUE self, VALUE index)
 {
     poppler_form_field_choice_select_item(RVAL2CF(self), NUM2INT(index));
     return Qnil;
 }
 
-VALUE
+static VALUE
 choice_field_unselect_all(VALUE self)
 {
     poppler_form_field_choice_unselect_all(RVAL2CF(self));
     return Qnil;
 }
 
-VALUE
+static VALUE
 choice_field_toggle_item(VALUE self, VALUE index)
 {
     poppler_form_field_choice_toggle_item(RVAL2CF(self), NUM2INT(index));
     return Qnil;
 }
 
-VALUE
+static VALUE
 choice_field_set_text(VALUE self, VALUE text)
 {
     poppler_form_field_choice_set_text(RVAL2CF(self), RVAL2CSTR2(text));
     return Qnil;
 }
 
-VALUE
+static VALUE
 choice_field_get_text(VALUE self)
 {
     return CSTR2RVAL(poppler_form_field_choice_get_text(RVAL2CF(self)));
