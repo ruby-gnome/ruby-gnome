@@ -43,9 +43,9 @@ extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
 #define POPPLER_ANNOT2RVAL(obj) (GOBJ2RVAL(obj))
 #define RVAL2POPPLER_ANNOT(obj) ((PopplerAnnot *)RVAL2GOBJ(obj))
 
-#define ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
-#define RVAL2ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
-#define FF2RVAL(obj) (rb_poppler_ruby_object_from_form_field(obj))
+#define POPPLER_ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
+#define RVAL2POPPLER_ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
+#define POPPLER_FORM_FIELD2RVAL(obj) (rb_poppler_ruby_object_from_form_field(obj))
 
 extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
 extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);

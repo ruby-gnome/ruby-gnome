@@ -631,7 +631,8 @@ rectangle_set(PopplerRectangle *rect, VALUE rb_rect)
 
 DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
                          RVAL2LM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_ACCESSOR(link_mapping, action, RVAL2LM, ACTION2RVAL, RVAL2ACTION)
+DEF_ACCESSOR(link_mapping, action, RVAL2LM,
+	     POPPLER_ACTION2RVAL, RVAL2POPPLER_ACTION)
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
 
@@ -696,7 +697,8 @@ rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
 
 DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
                          RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM, FF2RVAL, RVAL2FF)
+DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM,
+	     POPPLER_FORM_FIELD2RVAL, RVAL2FF)
 
 /* FormField */
 static VALUE

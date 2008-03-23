@@ -1,5 +1,7 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.h, src/rbpoppler-page.c: added POPPLER_ prefix.
+
 	* src/rbpoppler.h, src/rbpoppler-page.c, src/rbpoppler-action.c:
 	hide conversion macros.
 
