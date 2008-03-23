@@ -61,6 +61,9 @@ class TestPage < Test::Unit::TestCase
     page = document[0]
     assert_equal([Poppler::AnnotationMapping],
                  page.annotation_mapping.collect {|mapping| mapping.class}.uniq)
+    mapping = page.annotation_mapping[0]
+    assert_kind_of(Poppler::Rectangle, mapping.area)
+    assert_kind_of(Poppler::Annotation, mapping.annotation)
   end
 
   private

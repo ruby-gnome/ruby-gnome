@@ -13,6 +13,7 @@
 #include "rbpoppler.h"
 
 #define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
+
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
 #define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
 #define RVAL2FFM(obj) ((PopplerFormFieldMapping *)RVAL2BOXED(obj, POPPLER_TYPE_FORM_FIELD_MAPPING))
@@ -20,6 +21,7 @@
 #define RVAL2TF(obj) RVAL2FF(obj)
 #define RVAL2BF(obj) RVAL2FF(obj)
 #define RVAL2CF(obj) RVAL2FF(obj)
+#define RVAL2AM(obj) ((PopplerAnnotMapping *)RVAL2BOXED(obj, POPPLER_TYPE_ANNOT_MAPPING))
 
 #define TT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION_TYPE))
 #define RVAL2TT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_PAGE_TRANSITION_TYPE))
@@ -556,6 +558,24 @@ rectangle_to_a(VALUE self)
                        rb_float_new(rectangle->y2));
 }
 
+static VALUE
+rectangle_inspect(VALUE self)
+{
+    VALUE inspected;
+    gchar *points;
+    PopplerRectangle *rectangle;
+
+    rectangle = RVAL2RECT(self);
+    inspected = rb_call_super(0, NULL);
+    rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
+    points = g_strdup_printf(": [%g, %g, %g, %g]>",
+			     rectangle->x1, rectangle->y1,
+			     rectangle->x2, rectangle->y2);
+    rb_str_cat2(inspected, points);
+    g_free(points);
+    return inspected;
+}
+
 
 #ifdef POPPLER_TYPE_COLOR
 /* A color in RGB */
@@ -860,6 +880,59 @@ choice_field_get_text(VALUE self)
 }
 #endif
 
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+static VALUE
+annot_mapping_initialize(int argc, VALUE *argv, VALUE self)
+{
+    VALUE area, annotation;
+    PopplerAnnotMapping *mapping;
+
+    rb_scan_args(argc, argv, "02", &area, &annotation);
+
+    mapping = poppler_annot_mapping_new();
+    mapping->area = *RVAL2RECT(area);
+    mapping->annot = RVAL2POPPLER_ANNOT(annotation);
+    G_INITIALIZE(self, mapping);
+
+    return Qnil;
+}
+
+static VALUE
+annot_mapping_get_area(VALUE self)
+{
+    return RECT2RVAL(&(RVAL2AM(self)->area));
+}
+
+static VALUE
+annot_mapping_set_area(VALUE self, VALUE area)
+{
+    PopplerAnnotMapping *mapping;
+
+    mapping = RVAL2AM(self);
+    mapping->area = *RVAL2RECT(area);
+    return Qnil;
+}
+
+static VALUE
+annot_mapping_get_annotation(VALUE self)
+{
+    return POPPLER_ANNOT2RVAL(RVAL2AM(self)->annot);
+}
+
+static VALUE
+annot_mapping_set_annotation(VALUE self, VALUE annotation)
+{
+    PopplerAnnotMapping *mapping;
+
+    mapping = RVAL2AM(self);
+    if (mapping->annot)
+	g_object_unref(mapping->annot);
+
+    mapping->annot = RVAL2POPPLER_ANNOT(annotation);
+    return Qnil;
+}
+#endif
+
 void
 Init_poppler_page(VALUE mPoppler)
 {
@@ -963,6 +1036,7 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cRectangle, "set_x2", rectangle_set_x2, 1);
     rb_define_method(cRectangle, "set_y2", rectangle_set_y2, 1);
     rb_define_method(cRectangle, "to_a", rectangle_to_a, 0);
+    rb_define_method(cRectangle, "inspect", rectangle_inspect, 0);
 
     G_DEF_SETTERS(cRectangle);
 
@@ -1058,6 +1132,7 @@ Init_poppler_page(VALUE mPoppler)
     G_DEF_SETTERS(cFormField);
 
 
+    rb_define_method(cButtonField, "type", button_field_get_button_type, 0);
     rb_define_method(cButtonField, "active?", button_field_get_state, 0);
     rb_define_method(cButtonField, "set_active", button_field_set_state, 1);
 
@@ -1090,9 +1165,24 @@ Init_poppler_page(VALUE mPoppler)
                      choice_field_is_item_selected, 1);
     rb_define_method(cChoiceField, "select", choice_field_select_item, 1);
     rb_define_method(cChoiceField, "unselect_all", choice_field_unselect_all, 0);
+    rb_define_method(cChoiceField, "toggle", choice_field_toggle_item, 1);
     rb_define_method(cChoiceField, "text", choice_field_get_text, 0);
     rb_define_method(cChoiceField, "set_text", choice_field_set_text, 1);
 
     G_DEF_SETTERS(cChoiceField);
+#endif
+
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+    rb_define_method(cAnnotationMapping, "initialize",
+		     annot_mapping_initialize, -1);
+
+    rb_define_method(cAnnotationMapping, "area", annot_mapping_get_area, 0);
+    rb_define_method(cAnnotationMapping, "set_area", annot_mapping_set_area, 1);
+    rb_define_method(cAnnotationMapping, "annotation",
+		     annot_mapping_get_annotation, 0);
+    rb_define_method(cAnnotationMapping, "set_annotation",
+		     annot_mapping_set_annotation, 1);
+
+    G_DEF_SETTERS(cAnnotationMapping);
 #endif
 }

@@ -1,5 +1,13 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-page.c:
+	- defined missing methods: Poppler::ButtonField#type and
+	Poppler::ChoiceField#toggle.
+	- defined Poppler::Rectangle#inspect.
+
+	* src/rbpoppler-page.c, test/test_page.rb: defined
+	Poppler::AnnotationMapping methods.
+
 	* src/rbpoppler-page.c: added missing static.
 
 	* src/rbpoppler-page.c, test/test_page.rb: implemented
