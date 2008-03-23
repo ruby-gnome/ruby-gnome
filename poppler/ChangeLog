@@ -1,5 +1,9 @@
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler.[ch], src/rbpoppler-private.h,
+	src/rbpoppler-page.c, src/rbpoppler-form-field.c: split form
+	field related codes.
+
 	* src/rbpoppler.h, src/rbpoppler-page.c, src/rbpoppler-action.c,
 	src/rbpoppler-document.c: added POPPLER_ prefix.
 

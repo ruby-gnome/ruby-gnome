@@ -8,6 +8,7 @@ extern void Init_poppler_page(VALUE mPoppler);
 extern void Init_poppler_attachment(VALUE mPoppler);
 extern void Init_poppler_action(VALUE mPoppler);
 extern void Init_poppler_annotation(VALUE mPoppler);
+extern void Init_poppler_form_field(VALUE mPoppler);
 
 #define DEF_READER(prefix, name, member, self_to_c, member_to_rb)       \
 static VALUE                                                            \

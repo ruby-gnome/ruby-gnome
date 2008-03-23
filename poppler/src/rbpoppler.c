@@ -88,4 +88,5 @@ Init_poppler(void)
     Init_poppler_attachment(mPoppler);
     Init_poppler_action(mPoppler);
     Init_poppler_annotation(mPoppler);
+    Init_poppler_form_field(mPoppler);
 }
