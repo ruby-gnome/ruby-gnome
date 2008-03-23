@@ -868,27 +868,9 @@ annot_mapping_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-annot_mapping_get_area(VALUE self)
-{
-    return RECT2RVAL(&(RVAL2AM(self)->area));
-}
-
-static VALUE
-annot_mapping_set_area(VALUE self, VALUE area)
-{
-    PopplerAnnotMapping *mapping;
-
-    mapping = RVAL2AM(self);
-    mapping->area = *RVAL2RECT(area);
-    return Qnil;
-}
-
-static VALUE
-annot_mapping_get_annotation(VALUE self)
-{
-    return POPPLER_ANNOT2RVAL(RVAL2AM(self)->annot);
-}
+DEF_ACCESSOR_WITH_SETTER(annot_mapping, area,
+                         RVAL2AM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+DEF_READER(annot_mapping, annotation, annot, RVAL2AM, POPPLER_ANNOT2RVAL)
 
 static VALUE
 annot_mapping_set_annotation(VALUE self, VALUE annotation)
@@ -1148,9 +1130,10 @@ Init_poppler_page(VALUE mPoppler)
 		     annot_mapping_initialize, -1);
 
     rb_define_method(cAnnotationMapping, "area", annot_mapping_get_area, 0);
-    rb_define_method(cAnnotationMapping, "set_area", annot_mapping_set_area, 1);
     rb_define_method(cAnnotationMapping, "annotation",
 		     annot_mapping_get_annotation, 0);
+
+    rb_define_method(cAnnotationMapping, "set_area", annot_mapping_set_area, 1);
     rb_define_method(cAnnotationMapping, "set_annotation",
 		     annot_mapping_set_annotation, 1);
 
