@@ -8,11 +8,6 @@
 #include <rbglib.h>
 #include <rbgobject.h>
 
-#ifndef GDK_TYPE_REGION
-extern GType gdk_region_get_type(void);
-#  define GDK_TYPE_REGION (gdk_region_get_type())
-#endif
-
 #include <poppler.h>
 
 #ifndef POPPLER_TYPE_INDEX_ITER
@@ -46,16 +41,13 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #define RVAL2ACTIONTYPE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_ACTION_TYPE))
 #define SELSTYLE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_SELECTION_STYLE))
 #define RVAL2SELSTYLE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_SELECTION_STYLE))
-#define RVAL2GDKCOLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
 
 #ifdef POPPLER_TYPE_COLOR
 extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
 extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
-#  define RVAL2COLOR(obj) (rb_poppler_ruby_object_to_color(obj))
+#  define RVAL2POPPLER_COLOR(obj) (rb_poppler_ruby_object_to_color(obj))
 #  define POPPLER_COLOR2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_COLOR))
 #  define POPPLER_COLOR2RVAL_FREE(obj) (rb_poppler_ruby_object_from_color_with_free(obj))
-#else
-#  define RVAL2COLOR(obj) (RVAL2GDKCOLOR(obj))
 #endif
 
 

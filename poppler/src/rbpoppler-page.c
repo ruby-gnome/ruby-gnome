@@ -14,8 +14,15 @@
 
 #define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
 
+#ifndef GDK_TYPE_REGION
+extern GType gdk_region_get_type(void);
+#  define GDK_TYPE_REGION (gdk_region_get_type())
+#endif
+
 #define GDK_REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
 #define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
+#define RVAL2GDK_COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
+
 
 #define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
 #define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
@@ -59,7 +66,7 @@ rb_poppler_ruby_object_to_color(VALUE color)
 
     if (RTEST(rb_obj_is_kind_of(color, rb_cGdkColor))) {
 	GdkColor *gdk_color;
-	gdk_color = RVAL2GDKCOLOR(color);
+	gdk_color = RVAL2GDK_COLOR(color);
 	color = rb_funcall(rb_cPopplerColor, rb_intern("new"),
 			   3,
 			   UINT2NUM(gdk_color->red),
@@ -191,8 +198,14 @@ page_render_selection(VALUE self, VALUE cairo,
                                   RVAL2POPPLER_RECT(selection),
                                   old_selection,
                                   RVAL2SELSTYLE(style),
-                                  RVAL2COLOR(glyph_color),
-                                  RVAL2COLOR(background_color));
+#if POPPLER_CHECK_VERSION(0, 7, 2)
+                                  RVAL2POPPLER_COLOR(glyph_color),
+                                  RVAL2POPPLER_COLOR(background_color)
+#else
+                                  RVAL2GDK_COLOR(glyph_color),
+                                  RVAL2GDK_COLOR(background_color)
+#endif
+	);
     return Qnil;
 }
 #endif
@@ -223,8 +236,8 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
 #ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
                                             RVAL2SELSTYLE(style),
 #endif
-                                            RVAL2GDKCOLOR(glyph_color),
-                                            RVAL2GDKCOLOR(background_color));
+                                            RVAL2GDK_COLOR(glyph_color),
+                                            RVAL2GDK_COLOR(background_color));
     return Qnil;
 }
 
@@ -568,15 +581,15 @@ color_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
     return Qnil;
 }
 
-DEF_ACCESSOR(color, red, RVAL2COLOR, UINT2NUM, NUM2UINT)
-DEF_ACCESSOR(color, green, RVAL2COLOR, UINT2NUM, NUM2UINT)
-DEF_ACCESSOR(color, blue, RVAL2COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, red, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, green, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, blue, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
 
 static VALUE
 color_to_a(VALUE self)
 {
     PopplerColor *color;
-    color = RVAL2COLOR(self);
+    color = RVAL2POPPLER_COLOR(self);
     return rb_ary_new3(3,
                        UINT2NUM(color->red),
                        UINT2NUM(color->green),
@@ -590,7 +603,7 @@ color_inspect(VALUE self)
     gchar *rgb;
     PopplerColor *color;
 
-    color = RVAL2COLOR(self);
+    color = RVAL2POPPLER_COLOR(self);
     inspected = rb_call_super(0, NULL);
     rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
     rgb = g_strdup_printf(": [%u, %u, %u]>",
