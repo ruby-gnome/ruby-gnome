@@ -236,7 +236,7 @@ static VALUE
 index_iter_get_action(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
-    return ACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
+    return POPPLER_ACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
 }
 #endif
 
