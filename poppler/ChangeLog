@@ -1,3 +1,7 @@
+2008-03-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* README: added Ruby/GTK+ to Requirements.
+
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpoppler.[ch], src/rbpoppler-private.h,
