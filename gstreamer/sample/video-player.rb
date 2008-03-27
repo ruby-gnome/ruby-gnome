@@ -38,7 +38,10 @@ video_sink = Gst::ElementFactory.make('xvimagesink')
 play_bin.video_sink = video_sink
 
 window = Gtk::Window.new
-window.signal_connect('destroy') {Gtk.main_quit}
+window.signal_connect('destroy') do
+  play_bin.stop
+  Gtk.main_quit
+end
 window.signal_connect('expose-event') do
   video_sink.xwindow_id = window.window.xid
 end

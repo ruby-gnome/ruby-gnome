@@ -1,3 +1,7 @@
+2008-03-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/video-player.rb: stop play bin before quit.
+
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: used TestUnitExt in glib/test-unit-ext/.
