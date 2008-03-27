@@ -1,5 +1,8 @@
 2008-03-27  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_type_find_factory.rb
+	(TestTypeFindFactory#test_extensions): normalized result.
+
 	* sample/video-player.rb: stop play bin before quit.
 
 2008-03-15  Kouhei Sutou  <kou@cozmixng.org>
