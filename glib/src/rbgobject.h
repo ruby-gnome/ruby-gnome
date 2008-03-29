@@ -81,7 +81,8 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 
 #define RVAL2GOBJ(obj)  (rbgobj_instance_from_ruby_object(obj))
 #define GOBJ2RVAL(gobj) (rbgobj_ruby_object_from_instance(gobj))
-#define GOBJ2RVALU(gobj) (rbgobj_ruby_object_from_instance_with_unref(gobj))
+#define GOBJ2RVAL_UNREF(gobj) (rbgobj_ruby_object_from_instance_with_unref(gobj))
+#define GOBJ2RVALU(gobj) GOBJ2RVAL_UNREF(gobj)
 #define GVAL2RVAL(v)    (rbgobj_gvalue_to_rvalue(v))
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))

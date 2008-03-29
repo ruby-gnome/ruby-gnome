@@ -1,5 +1,7 @@
 2008-03-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobject.h (GOBJ2RVAL_UNREF): renamed from GOBJ2RVALU().
+
 	* src/rbgobj_object.c, src/rbgobj_param.c, src/rbgprivate.h:
 	get_value -> get_ruby_object.
 
