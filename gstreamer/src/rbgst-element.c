@@ -22,7 +22,6 @@
 
 #include "rbgst.h"
 #include "rbgst-private.h"
-#include "rbgprivate.h"
 
 #define SELF(self) RVAL2GST_ELEMENT(self)
 
@@ -45,7 +44,7 @@ instance2robj(gpointer instance)
     type = G_TYPE_FROM_INSTANCE(instance);
     klass = GTYPE2CLASS(type);
     define_class_if_need(klass, type);
-    return rbgobj_get_value_from_gobject(instance, TRUE);
+    return rbgobj_get_ruby_object_from_gobject(instance, TRUE);
 }
 
 
