@@ -68,7 +68,7 @@ rbgobj_param_spec_initialize(self, pspec)
 }
 
 VALUE
-rbgobj_get_value_from_param_spec(GParamSpec* pspec, gboolean alloc)
+rbgobj_get_ruby_object_from_param_spec(GParamSpec* pspec, gboolean alloc)
 {
     gpointer data = g_param_spec_get_qdata(pspec, qparamspec);
     if (data)

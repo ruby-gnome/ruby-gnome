@@ -41,8 +41,7 @@ extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
 extern GParamSpec* rbgobj_get_param_spec(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);
 
-extern VALUE rbgobj_get_value_from_gobject(GObject* gobj, gboolean alloc);
-extern VALUE rbgobj_get_value_from_param_spec(GParamSpec* pspec, gboolean alloc);
+extern VALUE rbgobj_get_ruby_object_from_param_spec(GParamSpec* pspec, gboolean alloc);
 
 extern void rbgobj_init_object_class(VALUE klass);
 extern void rbgobj_init_flags_class(VALUE klass);

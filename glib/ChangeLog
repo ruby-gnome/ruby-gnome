@@ -1,3 +1,12 @@
+2008-03-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_object.c, src/rbgobj_param.c, src/rbgprivate.h:
+	get_value -> get_ruby_object.
+
+	* src/rbgobject.c: followed the above changes.
+
+	* src/rbgobject.h: exported rbgobj_get_ruby_object_from_gobject().
+
 2008-03-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h (CSTR2RVAL_FREE): renamed from CSTR2RVAL2.

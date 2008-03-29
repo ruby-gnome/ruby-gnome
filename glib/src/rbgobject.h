@@ -135,7 +135,9 @@ extern void rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key);
 extern void rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id);
 
 extern GObject* rbgobj_gobject_new(GType type, VALUE params_hash);
-extern VALUE rbgobj_create_object(VALUE klass); /* deperecated */
+extern VALUE rbgobj_create_object(VALUE klass); /* deprecated */
+
+extern VALUE rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc);
 
 /* deprecated */
 extern void rbgobj_add_abstract_but_create_instance_class(GType gtype);

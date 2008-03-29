@@ -116,9 +116,7 @@ rbgobj_gobject_initialize(obj, cobj)
 }
 
 VALUE
-rbgobj_get_value_from_gobject(gobj, alloc)
-    GObject* gobj;
-    gboolean alloc;
+rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
 {
     gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
