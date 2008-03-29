@@ -107,9 +107,23 @@ module PKGConfig
     STDOUT.flush
     if check_version?(pkg, major, minor, micro)
       STDOUT.print "yes\n"
+      library_paths = libs_only_L(pkg)
+      library_paths = Shellwords.shellwords(library_paths).collect do |path|
+        if /\b--msvc-syntax\b/ =~ @@cmd
+          path.gsub(/\A\/libpath:/, '')
+        else
+          path.gsub(/\A\-L/, '')
+        end
+      end
       libraries = libs_only_l(pkg)
       dldflags = libs(pkg)
       dldflags = (Shellwords.shellwords(dldflags) - Shellwords.shellwords(libraries)).map{|s| /\s/ =~ s ? "\"#{s}\"" : s }.join(' ')
+      $DEFLIBPATH[1, 0] = library_paths
+      if $cc_is_gcc
+        $DLDFLAGS += ' ' + library_paths.collect do |path|
+          "-Wl,-rpath,#{path.quote}"
+        end.join(' ')
+      end
       $libs   += ' ' + libraries
       if /mswin32/ =~ RUBY_PLATFORM
 	$DLDFLAGS += ' ' + dldflags
