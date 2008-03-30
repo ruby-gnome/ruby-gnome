@@ -1,5 +1,7 @@
 2008-03-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (RVAL2CSTR_ACCEPT_NIL): renamed from RVAL2CSTR2.
+
 	* src/glib2.def: exported rbgobj_get_ruby_object_from_gobject.
 
 2008-03-30  Kouhei Sutou  <kou@cozmixng.org>
