@@ -930,6 +930,45 @@ widget_keynav_failed(self, direction)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,12,0)
+static VALUE
+widget_get_tooltip_markup(self)
+    VALUE self;
+{
+    gchar *t = gtk_widget_get_tooltip_markup(_SELF(self));
+    VALUE v = CSTR2RVAL(t);
+    g_free(t);
+    return v;
+}
+
+static VALUE
+widget_set_tooltip_markup(self, markup)
+    VALUE self, markup;
+{
+    gtk_widget_set_tooltip_markup(_SELF(self), RVAL2CSTR(markup));
+    return self;
+}
+
+static VALUE
+widget_get_tooltip_text(self)
+    VALUE self;
+{
+    gchar *t = gtk_widget_get_tooltip_text(_SELF(self));
+    VALUE v = CSTR2RVAL(t);
+    g_free(t);
+    return v;
+}
+
+static VALUE
+widget_set_tooltip_text(self, text)
+    VALUE self, text;
+{
+    gtk_widget_set_tooltip_text(_SELF(self), RVAL2CSTR(text));
+    return self;
+}
+
+#endif
+
 static VALUE
 widget_child_notify(self, child_property)
     VALUE self, child_property;
@@ -1322,6 +1361,12 @@ Init_gtk_widget()
 #if GTK_CHECK_VERSION(2,11,0)
     rb_define_method(gWidget, "error_bell", widget_error_bell, 0);
     rb_define_method(gWidget, "keynav_failed", widget_keynav_failed, 0);
+#endif
+#if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gWidget, "get_tooltip_markup", widget_get_tooltip_markup, 0);
+    rb_define_method(gWidget, "set_tooltip_markup", widget_set_tooltip_markup, 1);
+    rb_define_method(gWidget, "get_tooltip_text", widget_get_tooltip_text, 0);
+    rb_define_method(gWidget, "set_tooltip_text", widget_set_tooltip_text, 1);
 #endif
     rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
     rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
