@@ -15,6 +15,7 @@ EXPORTS
 	rbgobj_ruby_object_from_instance
 	rbgobj_ruby_object_from_instance2
 	rbgobj_ruby_object_from_instance_with_unref
+	rbgobj_get_ruby_object_from_gobject
 	rbgobj_create_object
 	rbgobj_gobject_new
 	rbgobj_boxed_create
