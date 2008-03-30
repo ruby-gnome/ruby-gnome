@@ -932,41 +932,30 @@ widget_keynav_failed(self, direction)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-widget_get_tooltip_markup(self)
-    VALUE self;
+widget_get_tooltip_markup(VALUE self)
 {
-    gchar *t = gtk_widget_get_tooltip_markup(_SELF(self));
-    VALUE v = CSTR2RVAL(t);
-    g_free(t);
-    return v;
+    return CSTR2RVAL_FREE(gtk_widget_get_tooltip_markup(_SELF(self)));
 }
 
 static VALUE
-widget_set_tooltip_markup(self, markup)
-    VALUE self, markup;
+widget_set_tooltip_markup(VALUE self, VALUE markup)
 {
-    gtk_widget_set_tooltip_markup(_SELF(self), RVAL2CSTR(markup));
+    gtk_widget_set_tooltip_markup(_SELF(self), RVAL2CSTR_ACCEPT_NIL(markup));
     return self;
 }
 
 static VALUE
-widget_get_tooltip_text(self)
-    VALUE self;
+widget_get_tooltip_text(VALUE self)
 {
-    gchar *t = gtk_widget_get_tooltip_text(_SELF(self));
-    VALUE v = CSTR2RVAL(t);
-    g_free(t);
-    return v;
+    return CSTR2RVAL_FREE(gtk_widget_get_tooltip_text(_SELF(self)));
 }
 
 static VALUE
-widget_set_tooltip_text(self, text)
-    VALUE self, text;
+widget_set_tooltip_text(VALUE self, VALUE text)
 {
-    gtk_widget_set_tooltip_text(_SELF(self), RVAL2CSTR(text));
+    gtk_widget_set_tooltip_text(_SELF(self), RVAL2CSTR_ACCEPT_NIL(text));
     return self;
 }
-
 #endif
 
 static VALUE

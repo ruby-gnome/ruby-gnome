@@ -1,5 +1,7 @@
 2008-03-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkwidget.c: cleanup newly written codes.
+
 	* src/rbgtkwidget.c: fixed naming conversion.
 
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
