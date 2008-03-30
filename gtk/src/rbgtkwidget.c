@@ -1363,9 +1363,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "keynav_failed", widget_keynav_failed, 0);
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gWidget, "get_tooltip_markup", widget_get_tooltip_markup, 0);
+    rb_define_method(gWidget, "tooltip_markup", widget_get_tooltip_markup, 0);
     rb_define_method(gWidget, "set_tooltip_markup", widget_set_tooltip_markup, 1);
-    rb_define_method(gWidget, "get_tooltip_text", widget_get_tooltip_text, 0);
+    rb_define_method(gWidget, "tooltip_text", widget_get_tooltip_text, 0);
     rb_define_method(gWidget, "set_tooltip_text", widget_set_tooltip_text, 1);
 #endif
     rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
