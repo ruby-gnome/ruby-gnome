@@ -18,7 +18,7 @@ if str = Gtk.check_version(2, 4, 0)
   exit
 end
 
-if not Gtk.check_version(2, 11, 0)
+if not Gtk.check_version(2, 12, 0)
     recentmenuitem = "<menuitem name='recent' action='recent'/>"
 else
     recentmenuitem = ""
@@ -120,7 +120,7 @@ actiongroup.add_radio_actions(color_radio_actions, 1) do |action, current|
 end
 actiongroup.add_radio_actions(shape_radio_actions, 2, callback_radio)
 
-if not Gtk.check_version(2, 11, 0)
+if not Gtk.check_version(2, 12, 0)
     action = Gtk::RecentAction.new('recent', 'Open Recent', nil, 'gtk-open')
     [ 'item-activated', 'activate' ].each { |signal|
         action.signal_connect(signal) { |action|
