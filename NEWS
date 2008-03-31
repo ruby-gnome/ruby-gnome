@@ -29,6 +29,11 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
     - Fixed locale dependent constant name computation. [#1901843]
       [Kouhei Sutou]
 
+  * Ruby/GTK:
+    - partially support new symbols in 2.12 (Gtk::RecentAction, Gtk::TextBuffer,
+      Gdk::Display, Gtk::TreeViewColumn, Gtk::Stock, Gtk::Widget, Gtk::ScaleButton,
+      Gtk::TreeView, Gtk::VolumneButton, Gtk::Tooptip and Gtk::TextMark only).
+
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
