@@ -14,7 +14,7 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 
 #define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
 
@@ -102,7 +102,7 @@ scalebutton_get_value(self)
 void 
 Init_gtk_scalebutton()
 {
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
     rb_define_method(gScaleButton, "initialize", scalebutton_initialize, -1);
     rb_define_method(gScaleButton, "set_adjustment", scalebutton_set_adjustment, 1);

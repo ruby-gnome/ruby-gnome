@@ -610,7 +610,7 @@ widget_modify_font(self, font_desc)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 widget_modify_cursor(self, primary, seconday)
     VALUE self, primary, seconday;
@@ -913,7 +913,7 @@ widget_child_focus(self, direction)
     return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 widget_error_bell(self)
     VALUE self;
@@ -1073,7 +1073,7 @@ widget_remove_mnemonic_label(self, label)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 widget_set_tooltip_window(self, custom_window)
     VALUE self, custom_window;
@@ -1300,7 +1300,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "modify_text", widget_modify_text, 2);
     rb_define_method(gWidget, "modify_base", widget_modify_base, 2);
     rb_define_method(gWidget, "modify_font", widget_modify_font, 1);
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gWidget, "modify_cursor", widget_modify_cursor, 2);
 #endif
     rb_define_method(gWidget, "create_pango_context", widget_create_pango_context, 0);
@@ -1319,7 +1319,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "style_get_property", widget_style_get_property, 1);
     rb_define_method(gWidget, "accessible", widget_get_accessible, 0);
     rb_define_method(gWidget, "child_focus", widget_child_focus, 1);
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gWidget, "error_bell", widget_error_bell, 0);
     rb_define_method(gWidget, "keynav_failed", widget_keynav_failed, 0);
 #endif
@@ -1345,7 +1345,7 @@ Init_gtk_widget()
     rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
     rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
 #endif
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gWidget, "set_tooltip_window", widget_set_tooltip_window, 1);
     rb_define_method(gWidget, "tooltip_window", widget_get_tooltip_window, 0);
     rb_define_method(gWidget, "trigger_tooltip_query", widget_trigger_tooltip_query, 0);

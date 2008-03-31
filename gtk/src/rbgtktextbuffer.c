@@ -271,7 +271,7 @@ txt_create_mark(self, name, where, left_gravity)
     return ret;
 }
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 txt_add_mark(self, mark, where)
     VALUE self, mark, where;
@@ -928,7 +928,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "create_child_anchor", txt_create_child_anchor, 1);
     
     rb_define_method(gTextBuffer, "create_mark", txt_create_mark, 3);
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gTextBuffer, "add_mark", txt_add_mark, 2);
 #endif
     rb_define_method(gTextBuffer, "delete_mark", txt_delete_mark, 1);

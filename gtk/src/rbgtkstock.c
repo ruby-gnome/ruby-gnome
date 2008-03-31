@@ -142,7 +142,7 @@ Init_gtk_stock()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_const(mGtkStock, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
 #endif
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_const(mGtkStock, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
 #endif
 #if GTK_CHECK_VERSION(2,6,0)

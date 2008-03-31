@@ -458,7 +458,7 @@ gdkdisplay_supports_input_shapes(self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 gdkdisplay_trigger_tooltip_query(self)
     VALUE self;
@@ -548,7 +548,7 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "supports_shapes", gdkdisplay_supports_shapes, 0);
     rb_define_method(gdkDisplay, "supports_input_shapes", gdkdisplay_supports_input_shapes, 0);
 #endif
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gdkDisplay, "trigger_tooltip_query", gdkdisplay_trigger_tooltip_query, 0);
 #endif
 }

@@ -13,7 +13,7 @@
 
 #define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 initialize(self, name, left_gravity)
     VALUE self, name, left_gravity;
@@ -73,7 +73,7 @@ void
 Init_gtk_textmark()
 {
     VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gTextMark, "initialize", initialize, 2);
 #endif
     rb_define_method(gTextMark, "set_visible", set_visible, 1);

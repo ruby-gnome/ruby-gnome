@@ -14,7 +14,7 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 
 /* GTK_TOOLTIP type-cast is private because it should be useless */
 #define _SELF(self) (RVAL2GOBJ(self))
@@ -64,7 +64,7 @@ tooltip_set_custom(self, custom_widget)
 void 
 Init_gtk_tooltip()
 {
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     VALUE gTooltip = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);
     rb_define_method(gTooltip, "set_markup", tooltip_set_markup, 1);
     rb_define_method(gTooltip, "set_text", tooltip_set_text, 1);

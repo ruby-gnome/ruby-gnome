@@ -431,7 +431,7 @@ treeview_tree_to_widget_coords(self, tx, ty)
     return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
 }
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 treeview_convert_bin_window_to_tree_coords(self, bx, by)
     VALUE self, bx, by;
@@ -836,7 +836,7 @@ Init_gtk_treeview()
     rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
     rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
     rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(gTv, "convert_bin_window_to_tree_coords", treeview_convert_bin_window_to_tree_coords, 2);
     rb_define_method(gTv, "convert_bin_window_to_widget_coords", treeview_convert_bin_window_to_widget_coords, 2);
     rb_define_method(gTv, "convert_tree_to_bin_window_coords", treeview_convert_tree_to_bin_window_coords, 2);

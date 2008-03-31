@@ -280,7 +280,7 @@ tvc_queue_resize(self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 tvc_get_tree_view(self)
     VALUE self;
@@ -318,7 +318,7 @@ Init_gtk_treeviewcolumn()
 #if GTK_CHECK_VERSION(2,8,0)
     rb_define_method(tvc, "queue_resize", tvc_queue_resize, 0);
 #endif
-#if GTK_CHECK_VERSION(2,11,0)
+#if GTK_CHECK_VERSION(2,12,0)
     rb_define_method(tvc, "tree_view", tvc_get_tree_view, 0);
 #endif
     /* GtkTreeViewColumnSizing */
