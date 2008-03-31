@@ -82,6 +82,14 @@ action_create_menu_item(self)
     return GOBJ2RVAL(gtk_action_create_menu_item(_SELF(self)));
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+action_create_menu(VALUE self)
+{
+    return GOBJ2RVAL(gtk_action_create_menu(_SELF(self)));
+}
+#endif
+
 static VALUE
 action_create_tool_item(self)
     VALUE self;
@@ -223,6 +231,9 @@ Init_gtk_action()
     rb_define_method(gAction, "activate", action_activate, 0);
     rb_define_method(gAction, "create_icon", action_create_icon, 1);
     rb_define_method(gAction, "create_menu_item", action_create_menu_item, 0);
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(gAction, "create_menu", action_create_menu, 0);
+#endif
     rb_define_method(gAction, "create_tool_item", action_create_tool_item, 0);
     rb_define_method(gAction, "connect_proxy", action_connect_proxy, 1);
     rb_define_method(gAction, "disconnect_proxy", action_disconnect_proxy, 1);

@@ -3,6 +3,8 @@
 	* src/rbgtkwidget.c: removed needless functions gtk_widget_{get,set}_tooltip_{markup,text}.
 	The tooltip is property so there is no need to implement binding method.
 
+	* src/rbgtkaction.c: added Gtk::Action#create_menu.
+
 2008-03-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkwidget.c: cleanup newly written codes.
