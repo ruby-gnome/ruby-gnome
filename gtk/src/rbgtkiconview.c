@@ -52,8 +52,7 @@ gint        gtk_icon_view_get_pixbuf_column (GtkIconView *icon_view);
 */
 
 static VALUE
-iview_get_path_at_pos(self, x, y)
-    VALUE self;
+iview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 {
     GtkTreePath* path = gtk_icon_view_get_path_at_pos(_SELF(self),
                                                       NUM2INT(x), NUM2INT(y));

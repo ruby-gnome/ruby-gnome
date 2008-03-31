@@ -1,3 +1,9 @@
+2008-04-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkiconview.c (iview_get_path_at_pos): added missing
+	argument types. Bug #1930481.
+	Reported by nobody. Thanks!!!
+
 2008-04-01  Hirofumi Nakagawa  <hnakagawa@users.sourceforge.net>
 
 	* src/rbgtkwidget.c: removed needless functions gtk_widget_{get,set}_tooltip_{markup,text}.
