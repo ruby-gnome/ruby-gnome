@@ -533,4 +533,3 @@ Init_gtk_gdk_screen()
   #endif
 #endif
 }
-//
