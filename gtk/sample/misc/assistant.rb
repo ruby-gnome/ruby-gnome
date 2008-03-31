@@ -12,6 +12,12 @@
 
 require 'gtk2'
 
+if str = Gtk.check_version(2, 10, 0)
+    puts "This sample requires GTK+ 2.10.0 or later"
+    puts str
+    exit
+end
+
 def get_test_page(text)
     return Gtk::Label.new(text)
 end
