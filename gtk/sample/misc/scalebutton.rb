@@ -10,8 +10,8 @@
 
 require 'gtk2'
 
-if str = Gtk.check_version(2, 11, 0)
-    puts "This sample requires GTK+ 2.11.0 or later"
+if str = Gtk.check_version(2, 12, 0)
+    puts "This sample requires GTK+ 2.12.0 or later"
     puts str
     exit
 end
