@@ -14,6 +14,7 @@ if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
 end
 
 module GLib
+  module_function
   def check_binding_version?(major, minor, micro)
     BINDING_VERSION[0] > major ||
       (BINDING_VERSION[0] == major && 
@@ -22,7 +23,6 @@ module GLib
        BINDING_VERSION[1] == minor &&
        BINDING_VERSION[2] >= micro)  
   end
-  module_function :check_binding_version?
 
   def exit_application(exception, status)
     msg = exception.message || exception.to_s
@@ -34,9 +34,8 @@ module GLib
     end
     exit(status)
   end
-  module_function :exit_application
 
-  def self.__add_one_arg_setter(klass)
+  def __add_one_arg_setter(klass)
     #for Instance methods.
     ary = klass.instance_methods(false)
     ary.each do |m|

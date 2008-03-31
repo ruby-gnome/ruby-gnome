@@ -44,7 +44,7 @@ typedef int GPid;
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 #define CSTR2RVAL_FREE(s) (rbg_cstr2rval_with_free(s))
-#define CSTR2RVAL2 CSTR2RVAL_FREE
+#define CSTR2RVAL2(s) (CSTR2RVAL_FREE(s))
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))

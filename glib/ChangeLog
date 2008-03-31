@@ -1,3 +1,7 @@
+2008-04-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h (CSTR2RVAL2), src/lib/glib2.rb: cleanup.
+
 2008-03-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h (RVAL2CSTR_ACCEPT_NIL): renamed from RVAL2CSTR2.
