@@ -11,6 +11,14 @@
 
 	* src/rbgtkwidget.c: fixed naming conversion.
 
+2008-03-31  Guillaume Cottenceau
+
+	* src/rbgtktextmark.c, src/rbgdkdisplay.c, src/rbgtkrecentaction.c,
+          src/rbgtkscalebutton.c, src/rbgtkstock.c, src/rbgtktextbuffer.c,
+          src/rbgtktextmark.c, src/rbgtktooltip.c, src/rbgtktreeview.c,
+          src/rbgtktreeviewcolumn.c, src/rbgtkvolumebutton.c,
+	  src/rbgtkwidget.c: check for 2.12 version, not 2.11
+	
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkwindow.c: removed needless alias icon=.
