@@ -11,8 +11,7 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINT_UNIX_DIALOG_GET_TYPE
+#ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkprintunixdialog.h>
 
 #define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))
@@ -73,13 +72,11 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
     return self;
 }
 #endif
-#endif
 
 void
 Init_gtk_print_unix_dialog()
 {
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINT_UNIX_DIALOG_GET_TYPE
+#ifdef HAVE_GTK_UNIX_PRINT
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
 
@@ -91,11 +88,9 @@ Init_gtk_print_unix_dialog()
     rb_define_alias(gPrintUnixDialog, "set_settings", "set_print_settings");
 
     G_DEF_SETTERS(gPrintUnixDialog);
-    
+
     /* GtkPrintCapabilities */
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", gPrintUnixDialog);
     G_DEF_CONSTANTS(gPrintUnixDialog, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
-#endif
-
 #endif
 }

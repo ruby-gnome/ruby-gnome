@@ -46,18 +46,15 @@ have_func('gtk_plug_get_type')
 have_func('gtk_socket_get_type')
 have_func('pango_render_part_get_type')
 
-if target=="x11"
+if target == "x11"
   have_func("XReadBitmapFileData")
   have_header('X11/Xlib.h')
   have_func("XGetErrorText")
 end
 
-PKGConfig.have_package('gtk+-unix-print-2.0')
-
-have_func('gtk_print_unix_dialog_get_type')
-have_func('gtk_print_job_get_type')
-have_func('gtk_printer_get_type')
-have_func('gtk_page_setup_unix_get_type')
+if PKGConfig.have_package('gtk+-unix-print-2.0')
+  $defs.push("-DHAVE_GTK_UNIX_PRINT")
+end
 
 have_func("rb_errinfo")
 

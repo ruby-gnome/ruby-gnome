@@ -11,9 +11,7 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINT_JOB_GET_TYPE
-
+#ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkprintjob.h>
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
@@ -132,13 +130,11 @@ pj_send(VALUE self)
     return self;
 }
 #endif
-#endif
 
 void
 Init_gtk_print_job()
 {
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINT_JOB_GET_TYPE
+#ifdef HAVE_GTK_UNIX_PRINT
     gPrintJob = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "PrintCapabilities", mGtk);
 
@@ -151,6 +147,5 @@ Init_gtk_print_job()
     rb_define_method(gPrintJob, "send", pj_send, 0);
 
     G_DEF_SETTERS(gPrintJob);
-#endif
 #endif
 }

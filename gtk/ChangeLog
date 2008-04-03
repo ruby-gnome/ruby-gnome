@@ -1,3 +1,12 @@
+2008-04-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: define HAVE_GTK_UNIX_PRINT only when
+	gtk+-unix-print-2.0 package is available.
+	* src/rbgtkpagesetupunixdialog.c, src/rbgtkprinter.c,
+	src/rbgtkprintjob.c, src/rbgtkprintunixdialog.c: use
+	HAVE_GTK_UNIX_PRINT to determine availability.
+	* test/test_gtk_unix_print.rb: add.
+
 2008-04-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkiconview.c (iview_get_path_at_pos): added missing

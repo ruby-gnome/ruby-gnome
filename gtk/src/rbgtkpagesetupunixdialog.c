@@ -11,9 +11,8 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
+#ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkpagesetupunixdialog.h>
-#ifdef GTK_PAGE_SETUP_UNIX_DIALOG_GET_TYPE
 
 #define _SELF(s) (GTK_PAGE_SETUP_UNIX_DIALOG(RVAL2GOBJ(s)))
 
@@ -58,13 +57,11 @@ psud_get_print_settings(VALUE self)
     return GOBJ2RVAL(gtk_page_setup_unix_dialog_get_print_settings(_SELF(self)));
 }
 #endif
-#endif
 
 void
 Init_gtk_page_setup_unix_dialog()
 {
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef GTK_PAGE_SETUP_UNIX_DIALOG_GET_TYPE
+#if HAVE_GTK_UNIX_PRINT
     VALUE gPageSetupUnixDialog = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,
                                              "PageSetupUnixDialog", mGtk);
 
@@ -79,6 +76,5 @@ Init_gtk_page_setup_unix_dialog()
                      psud_get_print_settings, 0);
 
     G_DEF_SETTERS(gPageSetupUnixDialog);
-#endif
 #endif
 }

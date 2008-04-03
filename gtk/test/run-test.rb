@@ -8,6 +8,7 @@ atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
 gtk_base = File.join(ruby_gnome2_base, "gtk")
+test_unit_ext_dir = File.join(glib_base, "test-unit-ext", "lib")
 
 [glib_base, atk_base, pango_base, gdk_pixbuf_base, gtk_base].each do |target|
   exit(1) unless `make -C #{target.dump} > /dev/null`
@@ -15,7 +16,10 @@ gtk_base = File.join(ruby_gnome2_base, "gtk")
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
 end
 
-require 'test/unit'
+$LOAD_PATH.unshift(File.join(gtk_base, "test"))
+$LOAD_PATH.unshift(test_unit_ext_dir)
+
+require 'test-unit-ext'
 require 'pp'
 require 'gtk2'
 

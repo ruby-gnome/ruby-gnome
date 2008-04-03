@@ -11,8 +11,7 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINTER_GET_TYPE
+#ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkprinter.h>
 
 #ifndef GTK_TYPE_PRINT_BACKEND
@@ -28,7 +27,7 @@ p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
 {
     GtkPrinter *printer;
 
-    printer = gtk_printer_new(RVAL2CSTR(name), 
+    printer = gtk_printer_new(RVAL2CSTR(name),
                               GTK_PRINT_BACKEND(RVAL2GOBJ(backend)),
                               RVAL2CBOOL(rb_virtual));
 
@@ -129,13 +128,11 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
     return self;
 }
 #endif
-#endif
 
 void
 Init_gtk_printer()
 {
-#if GTK_CHECK_VERSION(2,10,0)
-#ifdef HAVE_GTK_PRINTER_GET_TYPE
+#ifdef HAVE_GTK_UNIX_PRINT
     VALUE gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
     rb_include_module(gPrinter, rb_mComparable);
 
@@ -154,6 +151,5 @@ Init_gtk_printer()
     G_DEF_CLASS3("GtkPrintBackendLpr", "PrintBackendLpr", mGtk);
 
     G_DEF_SETTERS(gPrinter);
-#endif
 #endif
 }
