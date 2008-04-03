@@ -67,8 +67,10 @@ pud_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
 static VALUE
 pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
 {
-    gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), 
-                                                  RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES));
+    GtkPrintCapabilities capabilities;
+
+    capabilities = RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES);
+    gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), capabilities);
     return self;
 }
 #endif
