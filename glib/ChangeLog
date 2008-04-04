@@ -1,3 +1,8 @@
+2008-04-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_bookmarkfile.c (bf_load_from_data): don't declare
+	variable after some expression.
+
 2008-04-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h (CSTR2RVAL2), src/lib/glib2.rb: cleanup.

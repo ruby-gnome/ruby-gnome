@@ -63,17 +63,18 @@ bf_load_from_file(self, filename)
 }
 
 static VALUE
-bf_load_from_data(self, data)
-    VALUE self, data;
+bf_load_from_data(VALUE self, VALUE data)
 {
-    GError* error = NULL;
+    GError *error = NULL;
+
     StringValue(data);
-    gboolean ret = g_bookmark_file_load_from_data(_SELF(self),
-                                                  RSTRING_PTR(data),
-                                                  RSTRING_LEN(data),
-                                                  &error);
-    if (!ret) RAISE_GERROR(error);
-    return self;
+    if (!g_bookmark_file_load_from_data(_SELF(self),
+					RSTRING_PTR(data),
+					RSTRING_LEN(data),
+					&error))
+	RAISE_GERROR(error);
+
+    return Qnil;
 }
 
 static VALUE
