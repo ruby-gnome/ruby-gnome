@@ -17,6 +17,9 @@ PKGConfig.have_package('gthread-2.0')
 
 setup_win32(PACKAGE_NAME)
 
+have_header("unistd.h")
+have_header("io.h")
+
 have_func("g_spawn_close_id")
 have_func("g_thread_init")
 have_func("g_main_depth")

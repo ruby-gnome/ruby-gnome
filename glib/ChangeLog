@@ -1,5 +1,8 @@
 2008-04-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb, src/rbgutil_callback.c: use pipe() for communicating
+	threads.
+
 	* src/rbglib_bookmarkfile.c (bf_load_from_data): don't declare
 	variable after some expression.
 
