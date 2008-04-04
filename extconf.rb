@@ -9,6 +9,7 @@
 require 'English'
 require 'mkmf'
 require 'fileutils'
+require 'pathname'
 
 priorlibs = ["glib", "gdkpixbuf", "pango", "atk", "gtk"]
 
@@ -21,7 +22,6 @@ $ruby = arg_config("--ruby", $ruby)
 rm = "rm -f "
 if /mswin32/ =~ RUBY_PLATFORM
   rm = "del " 
-  $ruby.gsub!(/\//, '\\')
 end
 
 
@@ -61,13 +61,11 @@ else
 end
 
 subdirs.each do |subdir|
-  if /mingw/ =~ RUBY_PLATFORM
-    $ruby.gsub!('\\', '/')
-  end
   STDERR.puts("#{$0}: Entering directory `#{subdir}'")
   FileUtils.mkdir_p(subdir)
   topdir = File.join(*([".."] * subdir.split(/\/+/).size))
-  /^\// =~ (dir = $topsrcdir) or dir = File.join(topdir, $topsrcdir)
+  dir = $topsrcdir
+  dir = File.join(topdir, dir) unless Pathname.new(dir).absolute?
   srcdir = File.join(dir, subdir)
   args = ruby_args + ["-C", subdir, File.join(srcdir, "extconf.rb"),
                       "--topsrcdir=#{dir}", "--topdir=#{topdir}",
@@ -87,10 +85,6 @@ puts "Ignored libraries: #{ignore.join(', ')}" if ignore.size > 0
 #
 # generate top-level Makefile
 #
-
-if /mingw/ =~ RUBY_PLATFORM
-  $ruby.gsub!('\\', '/')
-end
 
 File.open("Makefile", "w") do |makefile|
   makefile.print("\
