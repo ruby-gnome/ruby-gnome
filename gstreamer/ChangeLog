@@ -1,3 +1,8 @@
+2008-04-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_thread_handling.rb: add.
+	Patch by Sjoerd Simons. Thanks!!!
+
 2008-03-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-element.c: followed the recent Ruby/GLib changes.
