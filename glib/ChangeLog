@@ -1,5 +1,7 @@
 2008-04-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/glib2.def: follow the recent changes.
+
 	* extconf.rb, src/rbgutil_callback.c: use pipe() for communicating
 	threads.
 

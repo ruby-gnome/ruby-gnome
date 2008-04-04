@@ -27,7 +27,7 @@ EXPORTS
 	rbgobj_gtype_new
 	rbgobj_gvalue_to_rvalue
 	rbgobj_rvalue_to_gvalue
-	rbgobj_initialize_gvalue_by_rvalue
+	rbgobj_initialize_gvalue
 	rbgobj_initialize_object
 	rbgobj_lookup_class
 	rbgobj_lookup_class_by_gtype
@@ -55,8 +55,6 @@ EXPORTS
 	rbg_cstr2rval
 	rbg_cstr2rval_with_free
 	rbg_string_value_ptr
-        rbg_set_internal_poll_func
-        rbg_remove_internal_poll_func
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary
