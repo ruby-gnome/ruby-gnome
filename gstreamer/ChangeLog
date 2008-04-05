@@ -1,4 +1,9 @@
 2008-04-05  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgst-element-factory.c: The conversion to a ruby object gets one extra
+	reference, but gst_factory_make already gives us one. So drop the extra to
+	ensure correct refcounting.
+
+2008-04-05  Sjoerd Simons <sjoerd@luon.net>
 	* src/rbgst-element.c: Fix silly typo breaking the compilation
 
 2008-04-05  Sjoerd Simons <sjoerd@luon.net>

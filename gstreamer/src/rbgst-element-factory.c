@@ -50,17 +50,24 @@
 static VALUE
 rb_gst_elementfactory_make (int argc, VALUE *argv, VALUE self)
 {
-	GstElement *element;
-	VALUE fname, ename;
+    GstElement *element;
+    VALUE fname, ename;
+    VALUE ret;
 
-	rb_scan_args (argc, argv, "11", &fname, &ename);
+    rb_scan_args (argc, argv, "11", &fname, &ename);
 
-	element = gst_element_factory_make (RVAL2CSTR(fname),
-		NIL_P (ename) ? NULL : RVAL2CSTR (ename));
+    element = gst_element_factory_make (RVAL2CSTR(fname),
+                                        NIL_P (ename) ? NULL
+                                                      : RVAL2CSTR (ename));
 
-	return element != NULL
-		? RGST_ELEMENT_NEW (element)
-		: Qnil;
+    if (element == NULL)
+        return Qnil;
+
+    /* This add another ref to the element, but it was already ours so
+     * unref it again */
+    ret = GOBJ2RVAL(element);
+    GOBJ2RVAL_UNREF(element);
+    return ret;
 }
 
 /*
