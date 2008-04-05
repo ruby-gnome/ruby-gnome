@@ -48,17 +48,16 @@
  * Returns: a newly created object based on Gst::Element.
  */
 static VALUE
-rb_gst_elementfactory_make (int argc, VALUE *argv, VALUE self)
+rb_gst_elementfactory_make(int argc, VALUE *argv, VALUE self)
 {
     GstElement *element;
     VALUE fname, ename;
     VALUE ret;
 
-    rb_scan_args (argc, argv, "11", &fname, &ename);
+    rb_scan_args(argc, argv, "11", &fname, &ename);
 
-    element = gst_element_factory_make (RVAL2CSTR(fname),
-                                        NIL_P (ename) ? NULL
-                                                      : RVAL2CSTR (ename));
+    element = gst_element_factory_make(RVAL2CSTR(fname),
+				       RVAL2CSTR_ACCEPT_NIL(ename));
 
     if (element == NULL)
         return Qnil;
