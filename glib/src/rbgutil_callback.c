@@ -87,9 +87,6 @@ process_request(CallbackRequest *request)
 static VALUE
 mainloop(void)
 {
-    if (pipe(callback_pipe_fds) == -1)
-        rb_sys_fail("pipe()");
-
     for (;;) {
         CallbackRequest *request;
         gchar ready_message_buffer[CALLBACK_PIPE_READY_MESSAGE_SIZE];
@@ -187,6 +184,9 @@ rbgutil_start_callback_dispatch_thread(void)
     g_mutex_lock(callback_dispatch_thread_mutex);
     callback_dispatch_thread = rb_ivar_get(mGLib, id_callback_dispatch_thread);
     if (NIL_P(callback_dispatch_thread)) {
+        if (pipe(callback_pipe_fds) == -1)
+            rb_sys_fail("pipe()");
+
         callback_dispatch_thread = rb_thread_create(mainloop, NULL);
         rb_ivar_set(mGLib, id_callback_dispatch_thread,
                     callback_dispatch_thread);

@@ -1,3 +1,8 @@
+2008-04-05  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgutil_callback.c: Create the pipe inside
+	rbgutil_start_callback_dispatch_thread to ensure it's created in a race-free
+	way
+
 2008-04-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/glib2.def: follow the recent changes.
