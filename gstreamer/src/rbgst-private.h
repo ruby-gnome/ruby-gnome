@@ -30,4 +30,8 @@ VALUE _rbgst_collect_elements(GstIterator *iter);
 
 void _rbgst_mini_object_free(void *ptr);
 
+/* implemented in rbgst-object.c */
+VALUE rbgst_object_instance2robj(gpointer instance);
+
+
 #endif /* __RBGST_PRIVATE_H_ */

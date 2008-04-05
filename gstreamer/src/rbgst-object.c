@@ -21,24 +21,25 @@
  */
 
 #include "rbgst.h"
+#include "rbgprivate.h"
 
 #define SELF(self) (RVAL2GST_OBJ(self))
+
+static RGConvertTable table = {0};
 
 /* Class: Gst::Object
  * Basis for the GST object hierarchy.
  */
 
-/*
- * Method: floating?
- *
- * Checks if the Gst::Object::FLAG_FLOATING flag is set on the object.
- *
- * Returns: true if the flag is set, false otherwise.
- */
-static VALUE
-object_is_floating(VALUE self)
+VALUE
+rbgst_object_instance2robj(gpointer instance)
 {
-    return CBOOL2RVAL(GST_OBJECT_IS_FLOATING(SELF(self)));
+    if (GST_OBJECT_IS_FLOATING(instance)) {
+        gst_object_ref(instance);
+        gst_object_sink(instance);
+    }
+
+    return rbgobj_get_ruby_object_from_gobject(instance, TRUE);
 }
 
 static VALUE
@@ -47,23 +48,19 @@ object_set_name(VALUE self, VALUE name)
     return CBOOL2RVAL(gst_object_set_name(SELF(self), RVAL2CSTR(name)));
 }
 
-static VALUE
-object_sink(VALUE self)
-{
-    gst_object_sink(SELF(self));
-    return Qnil;
-}
-
 void
 Init_gst_object(void)
 {
     VALUE cGstObject;
 
+    table.type = GST_TYPE_OBJECT;
+    table.instance2robj = rbgst_object_instance2robj;
+
+    RG_DEF_CONVERSION(&table);
+
     cGstObject = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
 
-    rb_define_method(cGstObject, "floating?", object_is_floating,0);
     rb_define_method(cGstObject, "set_name", object_set_name, 1);
-    rb_define_method(cGstObject, "sink", object_sink, 0);
 
     G_DEF_SETTERS(cGstObject);
 
