@@ -1,4 +1,7 @@
 2008-04-05  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgst-element.c: Fix silly typo breaking the compilation
+
+2008-04-05  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-object.c, src/rbgst-element.c, src/rbgst.h: Add
 	rbgst_object_instance2robj as a small wrapper around
