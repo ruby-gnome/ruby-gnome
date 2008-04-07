@@ -77,11 +77,11 @@ rb_gst_bin_size(VALUE self)
 static VALUE
 rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
 {
-    VALUE children, interface;
+    VALUE children, iface;
 
-    rb_scan_args(argc, argv, "01", &interface);
+    rb_scan_args(argc, argv, "01", &iface);
 
-    if (NIL_P(interface)) {
+    if (NIL_P(iface)) {
         const GList *node;
         children = rb_ary_new();
         for (node = GST_BIN_CHILDREN(SELF(self));
@@ -92,7 +92,7 @@ rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
     } else {
         GstIterator *iter;
         iter = gst_bin_iterate_all_by_interface(SELF(self),
-                                                CLASS2GTYPE(interface));
+                                                CLASS2GTYPE(iface));
         children = _rbgst_collect_elements(iter);
     }
 
@@ -325,9 +325,9 @@ rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
             element = gst_bin_get_by_name(SELF(self), name);
         }
     } else {
-        GType interface;
-        interface = CLASS2GTYPE(index_or_name_or_interface);
-        element = gst_bin_get_by_interface(SELF(self), interface);
+        GType iface;
+        iface = CLASS2GTYPE(index_or_name_or_interface);
+        element = gst_bin_get_by_interface(SELF(self), iface);
     }
 
     return GST_ELEMENT2RVAL(element);

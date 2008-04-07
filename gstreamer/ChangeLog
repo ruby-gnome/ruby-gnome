@@ -1,3 +1,8 @@
+2008-04-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-bin.c (rb_gst_bin_get): use iface instead of interface
+	for variable name.
+
 2008-04-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-element-factory.c (rb_gst_elementfactory_make): fix
