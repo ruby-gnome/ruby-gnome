@@ -42,7 +42,7 @@
           src/rbgtktextmark.c, src/rbgtktooltip.c, src/rbgtktreeview.c,
           src/rbgtktreeviewcolumn.c, src/rbgtkvolumebutton.c,
 	  src/rbgtkwidget.c: check for 2.12 version, not 2.11
-	
+
 2008-03-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkwindow.c: removed needless alias icon=.
@@ -253,7 +253,7 @@
 
 	* sample/gtk-demo/main.rb: stop with a useful error message when
 	subscripts not found
-	
+
 2007-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkactiongroup.c (actiongroup_remove_action,
@@ -269,7 +269,7 @@
 2007-07-09  Guillaume Cottenceau
 
 	* src/rbgtkwidget.c: use CBOOL2RVAL
-	
+
 2007-07-08  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/*: use rb_block_proc() directly instead of using G_BLOCK_PROC().
@@ -284,7 +284,7 @@
 
 	* src/rbgdkdisplay.c: use new 2.12 symbol:
 	gtk_tooltip_trigger_tooltip_query
-	
+
 2007-07-04  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: use rbglib_poll() if possible, regardless of
@@ -346,7 +346,7 @@
 	gtk_widget_modify_cursor, gtk_widget_set_tooltip_markup,
 	gtk_widget_set_tooltip_text, gtk_widget_set_tooltip_window,
 	gtk_widget_trigger_tooltip_query
-	
+
 2007-06-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdk.c (Gdk.windowing_quartz?, Gdk.windowing_directfb?):
@@ -857,7 +857,7 @@
 
 	* src/rbgdkproperty.c: Fix to be able to use _NET_WM_PID property.
 	* sample/misc/ipc.rb: Added.
-	
+
 2006-01-27  Tilman Sauerbeck <tilman@code-monkey.de>
 
 	* src/rbgdkpixbuf.c: Fixed wrong argument of 
@@ -1222,7 +1222,7 @@
 
 	* src/rbgdkdraw.c (gdkdraw_draw_trapezoids): Fix wrong argument
 	check.
-	
+
 	* src/rbgdkdisplay.c: Add getters.
 
 2005-08-20  Masao Mutoh  <mutoh@highway.ne.jp>
@@ -1356,7 +1356,7 @@
 	Gtk::CellView#displayed_row= allows nil.
 
 2005-04-15  Pascal Terjan <pterjan@linuxfr.org>
-	
+
 	* src/rbgdktimecoord.c: Fixed a warning of Gdk::TimeCoord#set_axes.
 	* src/rbgdkwindow.c: Fixed a warning of Gdk::Window#set_cursor
 
@@ -1376,8 +1376,8 @@
 
 	* sample/misc/*.rb: sh-bang (!#) normalization.
 	* sample/testgtk/testgtk.rb: sh-bang (!#) normalization.
-	Reported by Mezz 
-	
+	Reported by Mezz
+
 2005-03-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* sample/misc/colorselection.rb: Added.
@@ -1432,7 +1432,7 @@
 	  g_poll function. This way the UI gets chances to be updated even
 	  if modified from a different ruby-thread.
 	* samples/misc/threads.rb: some aesthetic makeup
-	
+
 2005-02-26  KATO Kazuyoshi  <kzys@8-p.info>
 
 	* sample/gtk-demo/main.rb (Demo::Main::generate_index): 
@@ -1525,7 +1525,7 @@
 	rbgtksettings.c, rbgtktreemodel.c, rbgtktreemodelfilter.c, 
 	rbgtktreeview.c, rbgtktreeviewcolumn.c, rbgtkwidget.c, gtk2.def: 
 	Fix compiling errors on MS VC++.
-	
+
 2005-01-28  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkpangorenderer.c: Added for GTK+-2.6. 
@@ -1538,7 +1538,7 @@
 	* src/rbgtkmessagedialog.c: Added 
 	Gtk::MessageDialog#set_secondary_(text|markup) for GTK+-2.6.
 	* src/rbgtkseperatortoolitem.c: Rename to rbgtkseparatortoolitem.c. 
-	
+
 2005-01-25  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkdialog.c: Added Gtk::Dialog.alternative_dialog_button_order?, 
@@ -1586,7 +1586,7 @@
 	gtk_action_set_(sensitive|visible).
 	If you need to set "sensitive", "visible" properties.
 	You need to use GLib::Object#set_property().
-	
+
 2005-01-11  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkfilefilter.c: Added Gtk::FileFilter#add_pixbuf_formats
@@ -1667,17 +1667,17 @@
 
 	* src/rbgtktoolbutton.c: Gtk::ToolButton.new
 	  Use Symbols instead of Strings for stock-id (as elsewhere)
-	
+
 	* src/rbgtkselectiondata.c: rbgtk_atom2selectiondata()
 	  Calculate length properly (take format size into account)
-	  
+
 	* src/rbgtkdrag.c: Gtk::Drag.dest_set()
 	  Allow nil as well as empty target list
           (ie. accept any rather than accept none)
-	
+
 	* src/rbgtkallocation.c: Gtk::Allocation
 	  Make object non-copyable (ie. modify original values in struct)
-	
+
 	* src/rbgdkrgb.c: Gdk::RGB#find_color
 	  Fix passing of colormap to gdk_rgb_find_color()
 
@@ -1747,7 +1747,7 @@
 2004-08-08  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeview.c: Fix some methods of Gtk::TreeView to accept nil.
-	
+
 2004-08-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdk.c: Fix a warning on Win32. 
@@ -1768,7 +1768,7 @@
 
 	* src/rbgtkradiobutton.c: Gtk::RadioButton.new(other_button) to create 
 	empty radio button in same group as other_button.
-	
+
 2004-08-02  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkscreen.c: Fixed bugs for Gdk::Screen#spawn_on_screen, 
@@ -2060,7 +2060,7 @@
           src/rbgtktextattributes.c, src/rbgtktextbuffer.c,
           src/rbgtktreeiter.c, src/rbgtktreepath.c, src/rbgtktreeview.c,
           src/rbgtktreeviewcolumn.c, src/rbgtkwidget.c: Update Copyright.
-	
+
 2004-03-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcontainer.c: Fix a memleaks for Gtk::Container#child_properties. 
@@ -2112,7 +2112,7 @@
 	* src/rbgdkkeymap.c, rbgdkgc.c, rbgdkpixmap.c, rbgdkdraw.c, rbgdkwindow.c
 	rbgdkscreen.c, rbgdkdisplay.c: Support G_DEF_CLASS3.
 	Real-classes are defined when private _get_type() is called.
-	
+
 2004-02-22  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Gdk::Window#set_geometry_hints accept nil as geometry.
@@ -2171,7 +2171,7 @@
 
 	* src/rbgtkcontainer.c: Change arguments of Gtk::Container.install_child_property.
 	* sample/misc/properties.rb: ditto.
-	
+
 2004-01-29  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkcontainer.c: Add Gtk::Container.install_child_property.
@@ -2528,7 +2528,7 @@
 
 	* sample/gtk-demo/tree_store.rb: Fix handling of block argument for ruby-1.8.
 	* sample/gtk-demo/editable_cells.rb: Fix segfault of removing items action.
-	
+
 2003-09-06  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtklabel.c: Add Gtk::Label#markup=. 
@@ -2895,7 +2895,7 @@
 
 	* src/rbgtkwidget.c: Rename Gtk::Widget#mnemonic_activate? -> #mnemonic_activate, 
 	Gtk::Widget#child_focus? -> #child_focus
-	
+
 2003-05-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkinput.c: Add constants of GdkExtensionMode. 
@@ -2934,7 +2934,7 @@
 	Gtk::Container#child_type, Gtk::Container#child_get_property, 
 	Gtk::Container#child_set_property.
 	* src/rbgtkcontainer.c, rbgtk.h: Add rbgtkcontainer_register_child_property_setter/getter.
-	
+
 2003-04-26  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkobject.c: Remove Gtk::Object#user_data, #user_data=, #set_user_data. 
@@ -2952,7 +2952,7 @@
 	#set_reallocate_redraws, #focus_vadjustment, #focus_hadjustment, #resize_children, 
 	#propagate_expose, #focus_chain, #set_focus_chain, #unset_focus_chain.
 	Gtk::Container#add() accept properties as 2nd parameter.
-	
+
 
 2003-04-21  Masao Mutoh <mutoh@highway.ne.jp>
 
@@ -3029,7 +3029,7 @@
 	* src/rbgtktreeiter.c: Improve Gtk::TreeIter#==.
 
 2003-03-19  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
-	
+
 	* src/init.c (Init_gtk2): Use rb_rescue2() instead of rb_protect()
 	for avoiding ruby bug!?
 	* src/rbgdkevent.c: change Gdk::Event to a subtype of GLib::Boxed.
@@ -3145,13 +3145,13 @@
 2003-02-15  KATO Kazuyoshi <kadu@zb.wakwak.com>
 
 	* src/rbgtkitemfactory.c: Change callback parameter(add 2nd parameter as widget).
-	
+
 2003-02-15  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktoolbar.c: Remove Gtk::Toolbar#insert_item/widget/element, 
 	Gtk::Toolbar#prepend_item/widget/element, Gtk::Toolbar#append_item/widget/element.
 	Use Gtk::Toolbar#insert, prepend, append instead.
-	
+
 2003-02-15  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtk.c: Remove dependence on id_relatives.
@@ -3173,7 +3173,7 @@
 	* src/rbgdkgc.c: Support GTK+-2.2.x.
 	(Call rbgobj_add_abstract_but_create_instance_class() 
         because GdkGC changes as Abstract class in GTK+-2.2.x ... why?).
-	
+
 2003-02-05  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkwidget.c: Add Gtk::Widget#saved_state, #visible?, #focus?, 
@@ -3298,7 +3298,7 @@
 	* src/rbgtktexttagtable.c: Fix a segfault when TextTagTable#lookup crashes is called 
 	with bad tag name.
 	Bugs item #659231 by Maicon Rodrigues.
-	
+
 2002-12-28  Kazuo Saito <ksaito@uranus.dti.ne.jp>
 
 	* src/rbgtk.h: Fix a bad definition of treeiter_set_value_table.
@@ -3455,7 +3455,7 @@
 	* extconf.rb: Follow above changes.
 	* makegdkkeysyms.h: Append constants of Key symbols to Gdk::Keyval.
 	* src/rbgdkkeyval.c: Include rbgdkkeysyms.h.
-	
+
 2002-11-23  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkkeyval.c: Rename Gdk::Keyval.name to Gdk::Keyval.to_name.
@@ -3555,7 +3555,7 @@
 	Rename #get_end_iter to #end_iter.
 	Fix typo(#cher_count to #char_count).
 	Comment out #create_tag because this implementation is incompletely.
-	
+
 2002-11-12  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* src/rbgtktextbuffer.c: Apply patch from OGASAWARA Takeshi
@@ -3680,7 +3680,7 @@
 	* src/rbgtkentry.c: Fix small bug of Gtk::Entry#initialize.
 
 2002-10-30  Masao Mutoh  <mutoh@highway.ne.jp>
-	
+
 	* src/rbgtkitemfactory.c: Change parameter order of Gtk::ItemFactory#create_item, 
 	#create_items. 
 	* src/rbgtkwidget.c, src/rbgtkdrag.c: Move Dnd methods to rbgtkdrag.c.
@@ -3853,7 +3853,7 @@
 	* src/rbgdkevent.c, src/rbgdk.c: Gdk::events_pending -> Gdk::Event::events_pending?
 	* src/rbgdk.c: Code clean up. Add Gdk::set_double_click_time.
 	* src/rbgdkatom.c, src/rbgdkconst.c, src/rbgdkfont.c: Move some constants.
-	
+
 2002-10-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkwindow.c: Remove Gdk::Window#set_hints.
@@ -3891,7 +3891,7 @@
 	* src/rbgtktreestore.c: Gtk::TreeStore#clear return self. 
 	* src/rbgtktextview.c: Modify file format.
 	* src/rbgtktextbuffer.c: Implement Gtk::TextBuffer#insert, #insert_at_cursor.
-	
+
 2002-10-10  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtktreeselection.c: Add Gtk::Selection#selected.
@@ -3992,7 +3992,7 @@
 	#draw_pixmap, #draw_bitmap).
 	* src/rbgdkevent.c: Remove Gdk::Event#copy, 
 	Change Gdk::Event#get_time to #time.
-	
+
 2002-09-19  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Bugfix: undefined symbol: Init_gtk_inits.
@@ -4006,7 +4006,7 @@
 2002-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkdnd.c: Rename to src/rbgdkdragcontext.c.
-	
+
 2002-09-16  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* extconf.rb: Bugfix for using ruby-1.6.x. 
@@ -4058,7 +4058,7 @@
 	Apply RVAL2GEV, GEV2RVAL macros.
 	* src/rbgtk.c: Code clean up.
 	* src/rbgtkctree.c: Fix warning message of compiling time.
-	
+
 2002-09-09  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgtkctree.c: Bugfix for segmentation fault.
@@ -4080,7 +4080,7 @@
 	* src/rbgtk.c, src/rbgtkprevinfo.c, src/rbgtkobject.c: 
 	Move Gtk::PreviewInfo to src/rbgtkprevinfo.c.
 	Make Gtk::Preview as GTK_DISABLE_DEPRECATED.
-	
+
 2002-09-07  Masao Mutoh  <mutoh@highway.ne.jp>
 
 	* src/rbgdkregion.c, src/rbgdkatom.c, src/rbgtk.h: 
@@ -4311,9 +4311,9 @@
 	src/rbgdkim.c, src/rbgdkgc.c, src/rbgtk.h, src/rbgtk.c, 
 	src/rbgtkfontselection.c, src/rbgtkfontselectiondialog.c, 
 	src/rbgtkobject.c, src/rbgtktext.c: Add GTK_DISABLE_DEPRECATED macro.
-	
+
 2002-07-04  WATANABE Hirofumi <eban@os.rim.or.jp>
-	
+
    	* extconf.rb, src/rbgtk.h: Fix for Win32.
 
 2002-07-02  Masao Mutoh  <mutoh@highway.ne.jp>
@@ -4338,7 +4338,7 @@
 	get_gdkbitmap()  to RVAL2GOBJ().
 	* src/rbgtkaccelgroup.c, src/rbgtkstyle.c: 
 	Correspond to RGObjClassInfo.
-	
+
 2002-06-23  Masao Mutoh <mutoh@highway.ne.jp>
 
 	* src/rbgtk.c, src/rbgtk.h: Remove gobj_mark(),rbgtk_lookup_class(),
@@ -4415,7 +4415,7 @@
 	* src/rbgtkctree.c: ditto.
 
 2002-05-28  Masao Mutoh <mutoh@highway.ne.jp>
-	         
+
 	* src/rbgdkdraw.c: Add Gdk::Drawable#draw_rgb_image, 
                    #draw_rgb_image_dithalign,
                    #draw_gray_image, draw_rgb_32_image.
@@ -5049,7 +5049,7 @@
 
 	* src/rbgtk.c (rbgtk_register_class): manage mappnig GtkType
 	to ruby class object.
-	
+
 	* src/rbgtk.c (get_gtk_type): support additional registered classes.
 
 	* src/rbgtk.c (rbgtk_lookup_class_by_gtype): implemented newly.
@@ -5310,7 +5310,7 @@
 2000-03-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/*.c: split files per class.
-	
+
 2000-03-29  Hiroshi IGARASHI  <igarashi@ueda.info.waseda.ac.jp>
 
 	* src/rbgdkimlib.c: gdkimlib is separated to other module.
@@ -6000,12 +6000,12 @@
 	       specify the relief style of button.
 	     get_relief
 	       return the relief style of button.
-	
+
 	 - add following constants.
 	     Gtk::RELIEF_NORMAL
 	          RELIEF_HALF
 	          RELIEF_NONE
-	
+
 	 - add following methods to Gtk::Box
 	     set_homogeneous(homogeneous)
 	       equalize sizes of children widgets.
@@ -6018,16 +6018,16 @@
 	       about packing specified child widget.
 	     set_child_packing(child, expand, fill, padding, pack_type)
 	       set the information about packing specified child widget.
-	
+
 	 - enable argument omissions in new methods of Gtk::VBox, Gtk::HBox
 	   default values are homogeneous=false, spacing=0
-	
+
 	 - change the constants names for Gtk::Box pack_type
 	     Gtk::GTK_PACK_START -> Gtk::PACK_START
 	     Gtk::GTK_PACK_END -> Gtk::PACK_END
-	
+
 	 - add widget Gtk::TearoffMenuItem
-	
+
 	 - add the following methods Gtk::Toolbar
 	     set_button_relief(style)
 	       set the relief style of buttons in Toolbar.
@@ -6035,18 +6035,18 @@
 	       return the relief style of buttons in Toolbar.
 	     set_space_style
 	       set the spacing style of buttons in Toolbar.
-	
+
 	 - add the following constants for spacing style of Toolbar.
 	     Gtk::Toolbar::SPACE_EMPTY
 	                   SPACE_LINE
-	
+
 	 - add the following methods to Gtk::CheckMenuItem
 	     set_active(is_active)
 	     active=(is_active)
 	       set the status of the checkbutton.
 	     active?
 	       return the status of the checkbutton.
-	
+
 	 - add the following methods to Gtk::CList
 	     set_column_visibility(column, visible)
 	       set visibility of a column.
@@ -6091,30 +6091,30 @@
 	       Enable clists reorder ability.
 	     prepend([text])
 	       Insert <var>[text, ...]</var> before the first row.
-	
+
 	 - modify Gtk::CList#append, insert not to cause error
 	   for nil element in passed array argumet.
-	
+
 	 - modify Gtk::CList#insert to return the row number.
-	
+
 	 - since Gtk::CList#remove conflict with Gtk::Continer#remove in name,
 	   rename it to Gtk::CList#remove_row as Gtk--.
-	
+
 	 - add the following constants for sort type.
 	     Gtk::SORT_ASCENDING
 	          SORT_DESCENDING
-	
+
 	 - fix `#ifdef 0' to `#if 0' in rbgtk.c
-	
+
 	 - doc/gtkbrows.rb
 	   modify it to add clist simply without viewport.
-	
+
 	 - doc/rbbr_gtk.rb
 	   modify it to call set_column_auto_resize for CList.
-	
+
 	 - sample/testgtk/menu.rb
 	   modify it to insert TearoffMenuItem like the original testgtk.
-	
+
 	 - sample/testgtk/toolbar.rb
 	   modify it to add buttons Borders/Borderless, Empty/Lines,
 	   and make the initial state Borderless like the original testgtk.
@@ -6130,14 +6130,14 @@
 	       Return the Cancel Button widget.
 	     help_button
 	       Return the Help Button widget.
-	
+
 	 - in the method Gtk::ColorSelection#get_color, 
 	   modify the conversion from data by gtk_color_selection_get_color
 	   to ruby data.
-	
+
 	 - enable Gtk::ColorSelection#get_color, set_color
 	   to support opacity.
-	
+
 	 - add the following methods to Gtk::Window
 	     set_position(pos)
 	       Set the display position of window.
