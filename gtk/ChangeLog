@@ -1,5 +1,7 @@
 2008-04-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/misc/composited-windows.rb: use Gdk.cairo_available?
+
 	* test/test_gdk_color.rb: add.
 
 	* test/test_gdk_display.rb: add.

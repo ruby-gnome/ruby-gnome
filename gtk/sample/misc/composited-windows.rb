@@ -14,9 +14,8 @@ if str = Gtk.check_version(2, 12, 0)
     exit
 end
 
-unless Gdk::Drawable.instance_methods.include?("create_cairo_context")
+unless Gdk.cairo_available?
     puts "This sample requires Cairo support."
-    puts str
     exit
 end
 
