@@ -116,6 +116,15 @@ gdkcolor_equal(self, other)
     return CBOOL2RVAL(gdk_color_equal(_SELF(self), _SELF(other)));
 }
 
+#if GTK_CHECK_VERSION(2,12,0)
+static VALUE
+gdkcolor_to_string(self, other)
+    VALUE self, other;
+{
+    return CSTR2RVAL_FREE(gdk_color_to_string(_SELF(self)));
+}
+#endif
+
 void
 Init_gtk_gdk_color()
 {
@@ -132,6 +141,9 @@ Init_gtk_gdk_color()
     rb_define_method(gdkColor, "set_blue", gdkcolor_set_blue, 1);
     rb_define_method(gdkColor, "to_a", gdkcolor_to_a, 0);
     rb_define_method(gdkColor, "==", gdkcolor_equal, 1);
+#if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gdkColor, "to_s", gdkcolor_to_string, 0);
+#endif
 
     G_DEF_SETTERS(gdkColor);
 }
