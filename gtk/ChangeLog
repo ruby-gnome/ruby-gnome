@@ -1,3 +1,7 @@
+2008-04-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gdk_display.rb: add.
+
 2008-04-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdisplay.c, src/rbgdkcolor.c:
