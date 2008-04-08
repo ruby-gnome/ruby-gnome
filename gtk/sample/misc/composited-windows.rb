@@ -78,7 +78,7 @@ window.signal_connect_after('expose-event') do |widget, event|
   #
   # In this case we do not want app-paintable to be set on the widget
   # since we want it to draw its own (red) background. Because of this,
-  # however, we must ensure that we use #connect_after so that
+  # however, we must ensure that we use #signal_connect_after so that
   # this handler is called after the red has been drawn. If it was
   # called before then GTK would just blindly paint over our work.
   #
