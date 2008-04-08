@@ -460,6 +460,13 @@ gdkdisplay_supports_input_shapes(self)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
+gdkdisplay_supports_composite(self)
+    VALUE self;
+{
+    return CBOOL2RVAL(gdk_display_supports_composite(_SELF(self)));
+}
+
+static VALUE
 gdkdisplay_trigger_tooltip_query(self)
     VALUE self;
 {
@@ -549,6 +556,7 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "supports_input_shapes", gdkdisplay_supports_input_shapes, 0);
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gdkDisplay, "supports_composite?", gdkdisplay_supports_composite, 0);
     rb_define_method(gdkDisplay, "trigger_tooltip_query", gdkdisplay_trigger_tooltip_query, 0);
 #endif
 }
