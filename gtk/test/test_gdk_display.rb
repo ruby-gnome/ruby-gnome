@@ -1,6 +1,9 @@
 class TestGdkDisplay < Test::Unit::TestCase
-  def test_supports_composite?
+  def test_supports_predicates
     display = Gdk::Display.default
+
+    assert_boolean(display.supports_shapes?)
+    assert_boolean(display.supports_input_shapes?)
     if Gtk.check_version?(2, 12, 0)
       assert_boolean(display.supports_composite?)
     else

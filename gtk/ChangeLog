@@ -1,5 +1,8 @@
 2008-04-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gdk_display.rb: add tests for
+	Gdk::Display#supports_shapes? and Gdk::Display#supports_input_shapes?.
+
 	* sample/misc/composited-windows.rb:
 	- use Gdk.cairo_available?.
 	- use do ... end instead of {...}.
