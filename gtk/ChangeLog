@@ -1,6 +1,8 @@
 2008-04-09  Kouhei Sutou  <kou@cozmixng.org>
 
-	* sample/misc/composited-windows.rb: use Gdk.cairo_available?
+	* sample/misc/composited-windows.rb:
+	- use Gdk.cairo_available?.
+	- use do ... end instead of {...}.
 
 	* test/test_gdk_color.rb: add.
 
