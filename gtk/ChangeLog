@@ -3,6 +3,7 @@
 	* sample/misc/composited-windows.rb:
 	- use Gdk.cairo_available?.
 	- use do ... end instead of {...}.
+	- use 2 spaces for indentation.
 
 	* test/test_gdk_color.rb: add.
 

@@ -9,14 +9,14 @@
 require 'gtk2'
 
 if str = Gtk.check_version(2, 12, 0)
-    puts "This sample requires GTK+ 2.12.0 or later."
-    puts str
-    exit
+  puts "This sample requires GTK+ 2.12.0 or later."
+  puts str
+  exit
 end
 
 unless Gdk.cairo_available?
-    puts "This sample requires Cairo support."
-    exit
+  puts "This sample requires Cairo support."
+  exit
 end
 
 
@@ -39,21 +39,21 @@ event.colormap = event.screen.rgba_colormap
 event.app_paintable = true
 
 event.signal_connect('expose-event') do |widget, event|
-    # This function simply draws a transparency onto a widget on the area
-    # for which it receives expose events.  This is intended to give the
-    # event box a "transparent" background.
-    # 
-    # In order for this to work properly, the widget must have an RGBA
-    # colourmap.  The widget should also be set as app-paintable since it
-    # doesn't make sense for GTK+ to draw a background if we are drawing it
-    # (and because GTK+ might actually replace our transparency with its
-    # default background colour).
-    #
-    cr = widget.window.create_cairo_context
-    cr.operator = Cairo::OPERATOR_CLEAR
-    cr.gdk_region(event.region)
-    cr.fill
-    false
+  # This function simply draws a transparency onto a widget on the area
+  # for which it receives expose events.  This is intended to give the
+  # event box a "transparent" background.
+  #
+  # In order for this to work properly, the widget must have an RGBA
+  # colourmap.  The widget should also be set as app-paintable since it
+  # doesn't make sense for GTK+ to draw a background if we are drawing it
+  # (and because GTK+ might actually replace our transparency with its
+  # default background colour).
+  #
+  cr = widget.window.create_cairo_context
+  cr.operator = Cairo::OPERATOR_CLEAR
+  cr.gdk_region(event.region)
+  cr.fill
+  false
 end
 
 # Put them inside one another
@@ -73,41 +73,41 @@ event.window.composited = true
 # by gtk before our compositing occurs.
 #
 window.signal_connect_after('expose-event') do |widget, event|
-    # This function performs the actual compositing of the event box onto
-    # the already-existing background of the window at 50% normal opacity.
-    # 
-    # In this case we do not want app-paintable to be set on the widget
-    # since we want it to draw its own (red) background. Because of this,
-    # however, we must ensure that we use #connect_after so that
-    # this handler is called after the red has been drawn. If it was
-    # called before then GTK would just blindly paint over our work.
-    # 
-    # Note: if the child window has children, then you need a cairo 1.16
-    # feature to make this work correctly.
-    #
+  # This function performs the actual compositing of the event box onto
+  # the already-existing background of the window at 50% normal opacity.
+  #
+  # In this case we do not want app-paintable to be set on the widget
+  # since we want it to draw its own (red) background. Because of this,
+  # however, we must ensure that we use #connect_after so that
+  # this handler is called after the red has been drawn. If it was
+  # called before then GTK would just blindly paint over our work.
+  #
+  # Note: if the child window has children, then you need a cairo 1.16
+  # feature to make this work correctly.
+  #
 
-    # get our child (in this case, the event box)
-    child = widget.child
+  # get our child (in this case, the event box)
+  child = widget.child
 
-    # create a cairo context to draw to the window
-    cr = widget.window.create_cairo_context
+  # create a cairo context to draw to the window
+  cr = widget.window.create_cairo_context
 
-    # the source data is the (composited) event box
-    # NOTICE: next line generates a GTK warning, it is maybe a GTK problem, it is tracked
-    #         at http://bugzilla.gnome.org/show_bug.cgi?id=526965
-    cr.set_source_pixmap(child.window, child.allocation.x, child.allocation.y)
+  # the source data is the (composited) event box
+  # NOTICE: next line generates a GTK warning, it is maybe a GTK problem, it is tracked
+  #         at http://bugzilla.gnome.org/show_bug.cgi?id=526965
+  cr.set_source_pixmap(child.window, child.allocation.x, child.allocation.y)
 
-    # draw no more than our expose event intersects our child 
-    region = Gdk::Region.new(Gdk::Rectangle.new(child.allocation.x, child.allocation.y, child.allocation.width, child.allocation.height))
-    region.intersect(event.region)
-    cr.gdk_region(region)
-    cr.clip
+  # draw no more than our expose event intersects our child
+  region = Gdk::Region.new(Gdk::Rectangle.new(child.allocation.x, child.allocation.y, child.allocation.width, child.allocation.height))
+  region.intersect(event.region)
+  cr.gdk_region(region)
+  cr.clip
 
-    # composite, with a 50% opacity
-    cr.operator = Cairo::OPERATOR_OVER
-    cr.paint(0.5)
+  # composite, with a 50% opacity
+  cr.operator = Cairo::OPERATOR_OVER
+  cr.paint(0.5)
 
-    false
+  false
 end
 
 Gtk.main
