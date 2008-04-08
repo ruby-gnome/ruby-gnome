@@ -13,7 +13,7 @@
 require "gtk2"
 
 unless Gdk::Drawable.instance_methods.include?("create_cairo_context")
-  raise "GTK+ 2.8.0 or later and cairo support are requered."
+  raise "GTK+ 2.8.0 or later and cairo support are required."
 end
 
 module Pong
