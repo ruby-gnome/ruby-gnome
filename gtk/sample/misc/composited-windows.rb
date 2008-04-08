@@ -61,7 +61,7 @@ window.border_width = 10
 window.add(event)
 event.add(button)
 
-# Realise and show everything
+# Realize and show everything
 window.show_all
 
 # Set the event box GdkWindow to be composited.
