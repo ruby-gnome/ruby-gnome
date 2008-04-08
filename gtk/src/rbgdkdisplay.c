@@ -550,8 +550,8 @@ Init_gtk_gdk_display()
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gdkDisplay, "supports_shapes", gdkdisplay_supports_shapes, 0);
-    rb_define_method(gdkDisplay, "supports_input_shapes", gdkdisplay_supports_input_shapes, 0);
+    rb_define_method(gdkDisplay, "supports_shapes?", gdkdisplay_supports_shapes, 0);
+    rb_define_method(gdkDisplay, "supports_input_shapes?", gdkdisplay_supports_input_shapes, 0);
 #endif
 #if GTK_CHECK_VERSION(2, 12, 0)
     rb_define_method(gdkDisplay, "supports_composite?", gdkdisplay_supports_composite, 0);
