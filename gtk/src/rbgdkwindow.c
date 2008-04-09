@@ -339,6 +339,15 @@ gdkwin_s_constrain_size(self, geometry, flags, w, h)
     return rb_assoc_new(INT2NUM(new_width), INT2NUM(new_height));
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+gdkwin_beep(VALUE self) 
+{
+    gdk_window_beep(_SELF(self));
+    return self;
+}
+#endif
+
 static VALUE
 gdkwin_begin_paint(self, area)
     VALUE self, area;
@@ -946,6 +955,15 @@ gdkwin_set_functions(self, func)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+gdkwin_set_composited(VALUE self, VALUE composited)
+{
+    gdk_window_set_composited(_SELF(self), RVAL2CBOOL(composited));
+    return self;
+}
+#endif
+
 static VALUE
 gdkwin_s_get_toplevels(self)
     VALUE self;
@@ -1106,6 +1124,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "lower", gdkwin_lower, 0);
     rb_define_method(gdkWindow, "focus", gdkwin_focus, 1);
     rb_define_method(gdkWindow, "register_dnd", gdkwin_register_dnd, 0);
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(gdkWindow, "beep", gdkwin_beep, 0);
+#endif
     rb_define_method(gdkWindow, "begin_resize_drag", gdkwin_begin_resize_drag, 5);
     rb_define_method(gdkWindow, "begin_move_drag", gdkwin_begin_move_drag, 4);
     rb_define_method(gdkWindow, "begin_paint", gdkwin_begin_paint, 1);
@@ -1183,6 +1204,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_decorations", gdkwin_set_decorations, 1);
     rb_define_method(gdkWindow, "decorations", gdkwin_get_decorations, 0);
     rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(gdkWindow, "set_composited", gdkwin_set_composited, 1);
+#endif
     rb_define_singleton_method(gdkWindow, "toplevels", gdkwin_s_get_toplevels, 0);
 
     rb_define_singleton_method(gdkWindow, "foreign_new", gdkwin_foreign_new, -1);
