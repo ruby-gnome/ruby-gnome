@@ -1,5 +1,7 @@
 2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/glib2.def: export g_connect_flags_get_type().
+
 	* extconf.rb, src/rbgobj_signal.c: make GSignalFlags,
 	GConnectFlags and GSignalMatchType GLib::Enum or GLib::Flags.
 

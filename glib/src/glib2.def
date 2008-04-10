@@ -78,3 +78,5 @@ EXPORTS
 	rbgobj_fund_define_fundamental
 	rbgobj_gc_mark_gvalue
 	rbgobj_gc_mark_instance
+
+	g_connect_flags_get_type
