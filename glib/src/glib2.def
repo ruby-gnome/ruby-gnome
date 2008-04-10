@@ -31,6 +31,7 @@ EXPORTS
 	rbgobj_initialize_object
 	rbgobj_lookup_class
 	rbgobj_lookup_class_by_gtype
+	rbgobj_gtype_to_ruby_class
 	rbgobj_ptr2cptr
 	rbgobj_ptr_new
 	rbgobj_make_enum

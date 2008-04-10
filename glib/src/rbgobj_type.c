@@ -105,10 +105,14 @@ rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 {
     GType fundamental_type;
     RGObjClassInfo* cinfo;
-    RGObjClassInfoDynamic* cinfod; 
+    RGObjClassInfoDynamic* cinfod;
     void* gclass = NULL;
-    VALUE c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
+    VALUE c;
 
+    if (gtype == G_TYPE_INVALID)
+	return NULL;
+
+    c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
     if (!NIL_P(c)){
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
         return cinfo;
@@ -202,6 +206,15 @@ rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
         g_type_class_unref(gclass);
 
     return cinfo;
+}
+
+VALUE
+rbgobj_gtype_to_ruby_class(GType gtype)
+{
+    const RGObjClassInfo *cinfo;
+
+    cinfo = GTYPE2CINFO(gtype);
+    return cinfo ? cinfo->klass : Qnil;
 }
 
 VALUE

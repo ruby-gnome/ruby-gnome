@@ -1,5 +1,10 @@
 2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_type.c, src/glib2.def (rbgobj_define_class): add.
+
+	* src/rbgobject.h (GTYPE2CLASS), src/rbgobj_type.c
+	(rbgobj_lookup_class_by_gtype): accept G_TYPE_INVALID.
+
 	* src/rbgutil.h:
 	- GLIST2ARYF -> GLIST2ARY_WITH_FREE.
 	- GSLIST2ARYF -> GSLIST2ARY_WITH_FREE.

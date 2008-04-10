@@ -75,7 +75,7 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 #define CLASS2CINFO(klass) (rbgobj_lookup_class(klass))
 #define GTYPE2CINFO(gtype) (rbgobj_lookup_class_by_gtype(gtype, Qnil))
 #define RVAL2CINFO(obj)    (rbgobj_lookup_class(CLASS_OF(obj)))
-#define GTYPE2CLASS(gtype) (GTYPE2CINFO(gtype)->klass)
+#define GTYPE2CLASS(gtype) (rbgobj_gtype_to_ruby_class(gtype))
 #define CLASS2GTYPE(klass) (rbgobj_lookup_class(klass)->gtype)
 #define RVAL2GTYPE(obj)    (CLASS2GTYPE(CLASS_OF(obj)))
 
@@ -150,6 +150,7 @@ extern void rbgobj_gc_mark_instance(gpointer instance);
 /* rbgobj_type.c */
 extern const RGObjClassInfo* rbgobj_lookup_class(VALUE klass);
 extern const RGObjClassInfo* rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent);
+extern VALUE rbgobj_gtype_to_ruby_class(GType gtype);
 extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
                                  void* mark, void* free, VALUE parent); 
 extern VALUE rbgobj_define_class_dynamic(const gchar* gtype_name, 
