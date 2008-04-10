@@ -30,8 +30,10 @@ extern "C" {
 
 #define G_DEF_CLASS(gtype, name, module)\
     (rbgobj_define_class(gtype, name, module, 0, 0, Qnil))
-#define G_DEF_CLASS2(gtype, name, module, mark, free)\
+#define G_DEF_CLASS_WITH_GC_FUNC(gtype, name, module, mark, free)	\
     (rbgobj_define_class(gtype, name, module, mark, free, Qnil))
+#define G_DEF_CLASS2(gtype, name, module, mark, free)			\
+    G_DEF_CLASS_WITH_GC_FUNC(gtype, name, module, mark, free)
 #define G_DEF_CLASS3(gtype_name, name, module)\
     (rbgobj_define_class_dynamic(gtype_name, name, module, 0, 0))
 #define G_DEF_CLASS4(gtype, name, module, parent) \
