@@ -1,3 +1,8 @@
+2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkbuilder.c, src/lib/gtk2/base.rb,
+	test/test_gtk_builder.rb: support Gtk::Builder.
+
 2008-04-09  Guillaume Cottenceau
 
 	* src/rbgdkwindow.c: add new 2.12 symbols.

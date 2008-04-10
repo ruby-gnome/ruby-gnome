@@ -58,6 +58,41 @@ module Gtk
       printers
     end
   end
+
+  if check_version?(2, 12, 0)
+    class Builder
+      private
+      def canonical_handler_name(name)
+        name.gsub(/[-\s]+/, "_")
+      end
+
+      def __connect_signals__(connector, object, signal_name,
+                              handler_name, connect_object, flags)
+        handler_name = canonical_handler_name(handler_name)
+        if connect_object
+          handler = connect_object.method(handler_name)
+        else
+          handler = connector.call(handler_name)
+        end
+        unless handler
+          $stderr.puts("Undefined handler: #{handler_name}") if $DEBUG
+          return
+        end
+
+        if flags.after?
+          signal_connect_method = :signal_connect_after
+        else
+          signal_connect_method = :signal_connect
+        end
+
+        if handler.arity.zero?
+          object.send(signal_connect_method, signal_name) {handler.call}
+        else
+          object.send(signal_connect_method, signal_name, &handler)
+        end
+      end
+    end
+  end
 end
 
 GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
