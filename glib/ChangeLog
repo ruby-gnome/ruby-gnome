@@ -1,5 +1,9 @@
 2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgutil.h:
+	- GLIST2ARYF -> GLIST2ARY_WITH_FREE.
+	- GSLIST2ARYF -> GSLIST2ARY_WITH_FREE.
+
 	* src/rbgobject.h: remove nonexistent
 	rbg_{set,remote}_internal_poll_func.
 

@@ -31,11 +31,13 @@ extern "C" {
 #define G_PROTECT_CALLBACK(func, data) (rbgutil_invoke_callback((VALUE(*)(VALUE))func, (VALUE)data))
 
 #define GLIST2ARY(list)           (rbgutil_glist2ary(list))
-#define GLIST2ARYF(list)          (rbgutil_glist2ary_and_free(list))
+#define GLIST2ARY_WITH_FREE(list) (rbgutil_glist2ary_and_free(list))
+#define GLIST2ARYF(list)          (GLIST2ARY_WITH_FREE(list))
 #define GLIST2ARY2(list, gtype)   (rbgutil_glist2ary_boxed(list, gtype))
 #define GLIST2ARY2F(list, gtype)  (rbgutil_glist2ary_boxed_and_free(list, gtype))
 #define GSLIST2ARY(list)          (rbgutil_gslist2ary(list))
-#define GSLIST2ARYF(list)         (rbgutil_gslist2ary_and_free(list))
+#define GSLIST2ARY_WITH_FREE(list)(rbgutil_gslist2ary_and_free(list))
+#define GSLIST2ARYF(list)         (GSLIST2ARY_WITH_FREE(list))
 #define GSLIST2ARY2(list, gtype)  (rbgutil_gslist2ary_boxed(list, gtype))
 #define GSLIST2ARY2F(list, gtype) (rbgutil_gslist2ary_boxed_and_free(list, gtype))
 
