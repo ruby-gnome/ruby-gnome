@@ -219,8 +219,6 @@ extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 /* rbglib_mainloop.c */
 #define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
 extern GType g_main_loop_get_type(void);
-extern void rbg_remove_internal_poll_func(VALUE data);
-extern void rbg_set_internal_poll_func(void);
 
 /* rbglib_maincontext.c */
 #define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())

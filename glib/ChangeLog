@@ -1,3 +1,8 @@
+2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobject.h: remove nonexistent
+	rbg_{set,remote}_internal_poll_func.
+
 2008-04-05  Sjoerd Simons <sjoerd@luon.net>
 	* src/rbgutil_callback.c: Create the pipe inside
 	rbgutil_start_callback_dispatch_thread to ensure it's created in a race-free
