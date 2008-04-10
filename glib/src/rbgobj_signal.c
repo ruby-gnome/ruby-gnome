@@ -842,6 +842,8 @@ signal_remove_emission_hook(VALUE self, VALUE hook_id)
 static void
 Init_signal_class()
 {
+    VALUE cSignalFlags, cSignalMatchType;
+
     cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
 
     rb_define_method(cSignal, "id", query_signal_id, 0);
@@ -857,15 +859,10 @@ Init_signal_class()
     rb_define_method(cSignal, "remove_emission_hook", signal_remove_emission_hook, 1);
 
     /* GSignalFlags */
-    rb_define_const(cSignal, "RUN_FIRST",   INT2FIX(G_SIGNAL_RUN_FIRST));
-    rb_define_const(cSignal, "RUN_LAST",    INT2FIX(G_SIGNAL_RUN_LAST));
-    rb_define_const(cSignal, "RUN_CLEANUP", INT2FIX(G_SIGNAL_RUN_CLEANUP));
-    rb_define_const(cSignal, "NO_RECURSE",  INT2FIX(G_SIGNAL_NO_RECURSE));
-    rb_define_const(cSignal, "DETAILED",    INT2FIX(G_SIGNAL_DETAILED));
-    rb_define_const(cSignal, "ACTION",      INT2FIX(G_SIGNAL_ACTION));
-    rb_define_const(cSignal, "NO_HOOKS",    INT2FIX(G_SIGNAL_NO_HOOKS));
-
-    rb_define_const(cSignal, "FLAGS_MASK",  INT2FIX(G_SIGNAL_FLAGS_MASK));
+    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
+    G_DEF_CONSTANTS(cSignal, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
+    rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
+    rb_define_const(cSignal, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
 
     rb_define_method(cSignal, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
     rb_define_method(cSignal, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
@@ -877,18 +874,16 @@ Init_signal_class()
 
 
     /* GConnectFlags */
-    rb_define_const(cSignal, "CONNECT_AFTER",   INT2FIX(G_CONNECT_AFTER));
-    rb_define_const(cSignal, "CONNECT_SWAPPED", INT2FIX(G_CONNECT_SWAPPED));
+    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
+    G_DEF_CONSTANTS(cSignal, G_TYPE_CONNECT_FLAGS, "G_");
 
     /* GSignalMatchType */
-    rb_define_const(cSignal, "MATCH_ID",        INT2FIX(G_SIGNAL_MATCH_ID));
-    rb_define_const(cSignal, "MATCH_DETAIL",    INT2FIX(G_SIGNAL_MATCH_DETAIL));
-    rb_define_const(cSignal, "MATCH_CLOSURE",   INT2FIX(G_SIGNAL_MATCH_CLOSURE));
-    rb_define_const(cSignal, "MATCH_FUNC",      INT2FIX(G_SIGNAL_MATCH_FUNC));
-    rb_define_const(cSignal, "MATCH_DATA",      INT2FIX(G_SIGNAL_MATCH_DATA));
-    rb_define_const(cSignal, "MATCH_UNBLOCKED", INT2FIX(G_SIGNAL_MATCH_UNBLOCKED));
+    cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
+				   "SignalMatchType", mGLib);
+    G_DEF_CONSTANTS(cSignal, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
+    rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
+    rb_define_const(cSignal, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
 
-    rb_define_const(cSignal, "MATCH_MASK", INT2FIX(G_SIGNAL_MATCH_MASK));
     rb_define_const(cSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
 
     eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);

@@ -45,7 +45,11 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
   end.reject do |file|
     /g(iochannel|scanner)\.h/ =~ file
   end
-  glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib.h"])
+  include_paths = PKGConfig.cflags_only_I("gobject-2.0")
+  headers = include_paths.split.inject(headers) do |result, path|
+    result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
+  end
+  glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
 end
 
 create_top_makefile

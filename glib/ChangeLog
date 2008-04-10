@@ -1,5 +1,10 @@
 2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb, src/rbgobj_signal.c: make GSignalFlags,
+	GConnectFlags and GSignalMatchType GLib::Enum or GLib::Flags.
+
+	* test/test_signal.rb: add.
+
 	* src/rbgobj_type.c, src/glib2.def (rbgobj_define_class): add.
 
 	* src/rbgobject.h (GTYPE2CLASS), src/rbgobj_type.c
@@ -13,6 +18,7 @@
 	rbg_{set,remote}_internal_poll_func.
 
 2008-04-05  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgutil_callback.c: Create the pipe inside
 	rbgutil_start_callback_dispatch_thread to ensure it's created in a race-free
 	way
