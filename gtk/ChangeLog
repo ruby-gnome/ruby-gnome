@@ -1,3 +1,8 @@
+2008-04-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/gtk-demo/builder.rb, sample/gtk-demo/demo.ui: add an
+	example for Gtk::Builder.
+
 2008-04-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkbuilder.c, src/lib/gtk2/base.rb,
