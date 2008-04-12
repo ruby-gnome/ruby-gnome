@@ -291,49 +291,44 @@ rb_gst_element_set_clock(VALUE self, VALUE clock)
 }
 
 /*
- * Method: pads
- *
- * Gets a list of the pads associated with the element, in an array
- * of Gst::Pad objects.
- *
- * Returns: an Array of Gst::Pad objects.
- */
-static VALUE
-rb_gst_element_get_pads(VALUE self)
-{
-    const GList *list;
-    VALUE arr;
-
-    arr = rb_ary_new();
-
-    for (list = GST_ELEMENT_PADS(SELF(self));
-         list != NULL;
-         list = g_list_next(list)) {
-        GstPad *pad = GST_PAD(list->data);
-
-        /*
-         *  Increment the ref count of the Pad, since it was not
-         *  created with gst_pad_new(), and it will be unref() from
-         *  the GC.
-         */
-        gst_object_ref(GST_OBJECT(pad));
-        rb_ary_push(arr, RGST_PAD_NEW(pad));
-    }
-    return arr;
-}
-
-/*
  * Method: each_pad { |pad| ... }
  *
- * Calls the block for each pad associated with the element, passing a 
- * reference to the Gst::Pad as parameter.
+ * Calls the block for each pad associated with the element, passing a
+ * reference to the Gst::Pad as parameter. Throws an IndexError on errors.
+ * Note that the elements might be yielded multiple times if the iterator had
+ * to resync.
  *
  * Returns: always nil.
  */
 static VALUE
-rb_gst_element_each_pad(VALUE self)
-{
-    return rb_ary_yield(rb_gst_element_get_pads(self));
+rb_gst_element_each_pad(VALUE self) {
+    GstIterator* it = gst_element_iterate_pads(RGST_ELEMENT(self));
+    GstPad *pad;
+    gboolean done = FALSE;
+
+    while (!done) {
+        switch (gst_iterator_next (it, (gpointer)&pad)) {
+            case GST_ITERATOR_OK:
+                rb_yield(RGST_PAD_NEW(pad));
+                gst_object_unref(pad);
+                break;
+            case GST_ITERATOR_RESYNC:
+               gst_iterator_resync(it);
+               break;
+            case GST_ITERATOR_ERROR:
+              goto failed;
+            case GST_ITERATOR_DONE:
+              done = TRUE;
+              break;
+        }
+    }
+    gst_iterator_free(it);
+
+    return Qnil;
+
+failed:
+    gst_iterator_free(it);
+    rb_raise(rb_eIndexError, "Pad iteration failed");
 }
 
 /*
@@ -799,7 +794,6 @@ Init_gst_element(void)
     rb_define_method(rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);
     rb_define_method(rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
     rb_define_method(rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
-    rb_define_method(rb_cGstElement, "pads", rb_gst_element_get_pads, 0);
     rb_define_method(rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
     rb_define_method(rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);
     rb_define_method(rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);

@@ -1,5 +1,11 @@
 2008-04-12  Sjoerd Simons <sjoerd@luon.net>
 
+	* src/rbgst-element.c: Implement Gst::Element.each_pad using a
+	GstIterator to ensure thread safety. Remove the get_pads function
+	as it can't be implemented safely.
+
+2008-04-12  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-bin.c: Do G_CHILD_ADD on all elements added to the bin
 	* src/rbgs-element.c: Do G_CHILD_ADD on all pads added to an element
 
