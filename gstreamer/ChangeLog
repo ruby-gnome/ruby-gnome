@@ -1,3 +1,11 @@
+2008-04-12  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-pad.c: Let Gst::Pad.link return a
+	Gst::Pad::LinkReturn. Add query, >>, negotiated_caps, set_caps,
+	caps= and peer functions on Gst::Pad.
+
+	* src/rbgs-pad.c: Fix pad refcounting in get_caps
+
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-bin.c: Gst::Bin#[] => Gst::Bin#get_child.
