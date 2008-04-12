@@ -575,6 +575,7 @@ static VALUE
 rb_gst_element_add_pad(VALUE self, VALUE pad)
 {
     gst_element_add_pad(SELF(self), RGST_PAD(pad));
+    G_CHILD_ADD(self, pad);
     return self;
 }
 

@@ -1,3 +1,8 @@
+2008-04-12  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-bin.c: Do G_CHILD_ADD on all elements added to the bin
+	* src/rbgs-element.c: Do G_CHILD_ADD on all pads added to an element
+
 2008-04-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-bin.c (rb_gst_bin_get): use iface instead of interface

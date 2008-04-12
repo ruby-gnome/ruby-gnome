@@ -193,7 +193,13 @@ rb_gst_bin_get_clock_provider(VALUE self)
 static VALUE
 rb_gst_bin_add(VALUE self, VALUE element)
 {
+    VALUE klass = GTYPE2CLASS(GST_TYPE_ELEMENT);
+
+    if (!rb_obj_is_kind_of (element, klass)) {
+        rb_raise(rb_eTypeError, "Gst::Element expected");
+    }
     gst_bin_add(SELF(self), RVAL2GST_ELEMENT(element));
+    G_CHILD_ADD(self, element);
     return self;
 }
 
