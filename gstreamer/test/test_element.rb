@@ -16,7 +16,6 @@ class TestElement < Test::Unit::TestCase
     assert_equal(["src"], pads)
   end
 
-  priority :must
   def test_state
     pipeline = Gst::Pipeline.new
     src = create_element("videotestsrc")

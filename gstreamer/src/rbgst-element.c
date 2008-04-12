@@ -324,6 +324,68 @@ rb_gst_element_set_clock(VALUE self, VALUE clock)
     return self;
 }
 
+typedef void (*EachPadCallback)(VALUE pad, VALUE user_data);
+typedef struct _EachPadData {
+    VALUE self;
+    EachPadCallback callback;
+    VALUE user_data;
+    GstIterator *iterator;
+} EachPadData;
+
+static VALUE
+rb_gst_element_each_pad_body(VALUE user_data)
+{
+    GstPad *pad;
+    gboolean done = FALSE;
+    EachPadData *data;
+
+    data = (EachPadData *)user_data;
+
+    while (!done) {
+        switch (gst_iterator_next(data->iterator, (gpointer)&pad)) {
+	  case GST_ITERATOR_OK:
+	    data->callback(GST_PAD2RVAL(pad), data->user_data);
+	    gst_object_unref(pad);
+	    break;
+	  case GST_ITERATOR_RESYNC:
+	    gst_iterator_resync(data->iterator);
+	    break;
+	  case GST_ITERATOR_ERROR:
+	    rb_raise(rb_eIndexError, "Pad iteration failed");
+	    break;
+	  case GST_ITERATOR_DONE:
+	    done = TRUE;
+	    break;
+        }
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rb_gst_element_each_pad_ensure(VALUE user_data)
+{
+    EachPadData *data = (EachPadData *)user_data;
+
+    gst_iterator_free(data->iterator);
+    return Qnil;
+}
+
+static VALUE
+rb_gst_element_each_pad_with_callback(VALUE self,
+				      EachPadCallback callback,
+				      VALUE user_data)
+{
+    EachPadData data;
+
+    data.self = self;
+    data.callback = callback;
+    data.user_data = user_data;
+    data.iterator = gst_element_iterate_pads(SELF(self));
+    return rb_ensure(rb_gst_element_each_pad_body, (VALUE)(&data),
+		     rb_gst_element_each_pad_ensure, (VALUE)(&data));
+}
+
 /*
  * Method: each_pad { |pad| ... }
  *
@@ -337,32 +399,24 @@ rb_gst_element_set_clock(VALUE self, VALUE clock)
 static VALUE
 rb_gst_element_each_pad(VALUE self)
 {
-    GstIterator *it;
-    GstPad *pad;
-    gboolean done = FALSE;
-
-    it = gst_element_iterate_pads(SELF(self));
-    while (!done) {
-        switch (gst_iterator_next(it, (gpointer)&pad)) {
-	  case GST_ITERATOR_OK:
-	    rb_yield(GST_PAD2RVAL(pad));
-	    gst_object_unref(pad);
-	    break;
-	  case GST_ITERATOR_RESYNC:
-	    gst_iterator_resync(it);
-	    break;
-	  case GST_ITERATOR_ERROR:
-	    gst_iterator_free(it);
-	    rb_raise(rb_eIndexError, "Pad iteration failed");
-	    break;
-	  case GST_ITERATOR_DONE:
-	    done = TRUE;
-	    break;
-        }
-    }
-    gst_iterator_free(it);
-
+    rb_gst_element_each_pad_with_callback(self, (EachPadCallback)rb_yield, Qnil);
     return Qnil;
+}
+
+static void
+collect_pad(VALUE pad, VALUE pads)
+{
+    rb_ary_push(pads, pad);
+}
+
+static VALUE
+rb_gst_element_get_pads(VALUE self)
+{
+    VALUE pads;
+
+    pads = rb_ary_new();
+    rb_gst_element_each_pad_with_callback(self, collect_pad, pads);
+    return pads;
 }
 
 /*
@@ -834,6 +888,7 @@ Init_gst_element(void)
     rb_define_method(rb_cGstElement, "base_time", rb_gst_element_get_base_time, 0);
     rb_define_method(rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
     rb_define_method(rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
+    rb_define_method(rb_cGstElement, "pads", rb_gst_element_get_pads, 0);
     rb_define_method(rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
     rb_define_alias(rb_cGstElement, "[]", "get_pad");
     rb_define_method(rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);

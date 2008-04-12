@@ -1,5 +1,7 @@
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-element.c: readd Gst::Element#pads.
+
 	* src/rbgst-element.c: state related methods are worked in another
 	thread. Based on Sjoerd Simons' patch.
 
