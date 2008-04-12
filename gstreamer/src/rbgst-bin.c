@@ -195,7 +195,7 @@ rb_gst_bin_add(VALUE self, VALUE element)
 {
     VALUE klass = GTYPE2CLASS(GST_TYPE_ELEMENT);
 
-    if (!RTEST(rb_obj_is_kind_of(element, klass))) {
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(element, klass))) {
         rb_raise(rb_eTypeError, "Gst::Element expected");
     }
     gst_bin_add(SELF(self), RVAL2GST_ELEMENT(element));

@@ -1,5 +1,7 @@
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-bin.c (rb_gst_bin_add): use RVAL2CBOOL not RTEST.
+
 	* test/test_element.rb (TestElement#test_each_pad): add a test.
 
 	* src/rbgst-element.c (rb_gst_element_each_pad): fix style.
