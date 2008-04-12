@@ -301,34 +301,34 @@ rb_gst_element_set_clock(VALUE self, VALUE clock)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_element_each_pad(VALUE self) {
-    GstIterator* it = gst_element_iterate_pads(RGST_ELEMENT(self));
+rb_gst_element_each_pad(VALUE self)
+{
+    GstIterator *it;
     GstPad *pad;
     gboolean done = FALSE;
 
+    it = gst_element_iterate_pads(SELF(self));
     while (!done) {
-        switch (gst_iterator_next (it, (gpointer)&pad)) {
-            case GST_ITERATOR_OK:
-                rb_yield(RGST_PAD_NEW(pad));
-                gst_object_unref(pad);
-                break;
-            case GST_ITERATOR_RESYNC:
-               gst_iterator_resync(it);
-               break;
-            case GST_ITERATOR_ERROR:
-              goto failed;
-            case GST_ITERATOR_DONE:
-              done = TRUE;
-              break;
+        switch (gst_iterator_next(it, (gpointer)&pad)) {
+	  case GST_ITERATOR_OK:
+	    rb_yield(GST_PAD2RVAL(pad));
+	    gst_object_unref(pad);
+	    break;
+	  case GST_ITERATOR_RESYNC:
+	    gst_iterator_resync(it);
+	    break;
+	  case GST_ITERATOR_ERROR:
+	    gst_iterator_free(it);
+	    rb_raise(rb_eIndexError, "Pad iteration failed");
+	    break;
+	  case GST_ITERATOR_DONE:
+	    done = TRUE;
+	    break;
         }
     }
     gst_iterator_free(it);
 
     return Qnil;
-
-failed:
-    gst_iterator_free(it);
-    rb_raise(rb_eIndexError, "Pad iteration failed");
 }
 
 /*

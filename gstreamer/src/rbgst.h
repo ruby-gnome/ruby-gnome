@@ -83,6 +83,9 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_STRUCT(obj)    (GST_STRUCTURE(RVAL2BOXED(obj, GST_TYPE_STRUCTURE)))
 #define GST_STRUCT2RVAL(obj)    (BOXED2RVAL(obj, GST_TYPE_STRUCTURE))
 
+#define RVAL2GST_PAD(obj)       (GST_PAD(RVAL2GOBJ(obj)))
+#define GST_PAD2RVAL(obj)       (GOBJ2RVAL(obj))
+
 #define RVAL2GST_PAD_TEMPLATE(obj) (GST_PAD_TEMPLATE(RVAL2GOBJ(obj)))
 #define GST_PAD_TEMPLATE2RVAL(obj) (GOBJ2RVAL(obj))
 #define RVAL2GST_STATIC_PAD_TEMPLATE(obj) ((GstStaticPadTemplate *)(RVAL2GPTR(obj)))
