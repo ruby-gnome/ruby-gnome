@@ -72,6 +72,8 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_CAPS(obj)      (GST_CAPS(RVAL2BOXED(obj, GST_TYPE_CAPS)))
 #define GST_CAPS2RVAL(obj)      (BOXED2RVAL(obj, GST_TYPE_CAPS))
+#define GST_CAPS2RVAL_UNREF(obj) \
+    (rbgst_ruby_object_from_gst_caps_with_unref((obj)))
 #define RVAL2GST_STATIC_CAPS(obj) ((GstStaticCaps *)RVAL2GPTR(obj))
 #define GST_STATIC_CAPS2RVAL(obj) (GPTR2RVAL(obj, GST_TYPE_STATIC_CAPS))
 
@@ -85,12 +87,12 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_PAD(obj)       (GST_PAD(RVAL2GOBJ(obj)))
 #define GST_PAD2RVAL(obj)       (GOBJ2RVAL(obj))
+#define GST_PAD2RVAL_UNREF(obj) (GOBJ2RVAL_UNREF(obj))
 
 #define RVAL2GST_PAD_TEMPLATE(obj) (GST_PAD_TEMPLATE(RVAL2GOBJ(obj)))
 #define GST_PAD_TEMPLATE2RVAL(obj) (GOBJ2RVAL(obj))
 #define RVAL2GST_STATIC_PAD_TEMPLATE(obj) ((GstStaticPadTemplate *)(RVAL2GPTR(obj)))
 #define GST_STATIC_PAD_TEMPLATE2RVAL(obj) (GPTR2RVAL(obj, GST_TYPE_STATIC_PAD_TEMPLATE))
-
 
 #define RVAL2GST_BUS(obj)           (GST_BUS(RVAL2GOBJ(obj)))
 #define GST_BUS2RVAL(obj)           (GOBJ2RVAL(obj))
@@ -100,6 +102,11 @@ extern VALUE cGstEventSeek;
 
 #define RVAL2GST_BIN(obj)           (GST_BIN(RVAL2GOBJ(obj)))
 #define GST_BIN2RVAL(obj)           (GOBJ2RVAL(obj))
+
+#define RVAL2GST_QUERY(obj)         (GST_QUERY(RVAL2GOBJ(obj)))
+#define GST_QUERY2RVAL(obj)         (GOBJ2RVAL(obj))
+
+
 
 #define RGST_BIN(o)                 (GST_BIN(RVAL2GOBJ(o)))
 #define RGST_CAPS(o)                (GST_CAPS(RVAL2BOXED(o, GST_TYPE_CAPS)))
@@ -160,6 +167,8 @@ extern VALUE cGstEventSeek;
 
 #define RGST_BUS2RVAL(obj) (GOBJ2RGST(obj))
 #define GST_MSG2RVAL(obj) (GOBJ2RGST(obj))
+
+extern VALUE rbgst_ruby_object_from_gst_caps_with_unref(GstCaps *caps);
 
 GType gst_clock_entry_get_type ();
 GType gst_event_mask_get_type ();

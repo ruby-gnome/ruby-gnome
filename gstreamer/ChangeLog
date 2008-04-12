@@ -1,5 +1,14 @@
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-pad.c:
+	- cleanup.
+	- add Gst::Pad#linked?.
+
+	* src/rbgst.h (GST_CAPS2RVAL_UNREF), src/rbgst-caps.c
+	(rbgst_ruby_object_from_gst_caps_with_unref): add.
+
+	* test/test_pad.rb: add.
+
 	* test/test_bin.rb: use Gst::Bin#get_child instead of [].
 
 2008-04-12  Sjoerd Simons <sjoerd@luon.net>

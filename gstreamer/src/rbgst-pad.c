@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  * Copyright (C) 2006, 2008 Sjoerd Simons <sjoerd@luon.net>
+ * Copyright (C) 2008 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -20,6 +21,8 @@
  */
 
 #include "rbgst.h"
+
+#define SELF(self) RVAL2GST_PAD(self)
 
 static VALUE cGstPad;
 
@@ -53,7 +56,7 @@ rb_gst_pad_get_direction (VALUE self)
  * Returns: the Gst::PadTemplate object of this pad.
  */
 static VALUE
-rb_gst_pad_get_padtemplate (VALUE self)
+rb_gst_pad_get_pad_template(VALUE self)
 {
 	GstPadTemplate *templ = gst_pad_get_pad_template (RGST_PAD (self));
 	if (templ != NULL) {
@@ -113,8 +116,29 @@ static VALUE
 rb_gst_pad_each_query_type (VALUE self)
 {
 	return rb_ary_yield (rb_gst_pad_get_query_types (self));
-}  
- 
+}
+
+static VALUE
+rb_gst_pad_is_linked(VALUE self)
+{
+    return CBOOL2RVAL(gst_pad_is_linked(SELF(self)));
+}
+
+static GstPadLinkReturn
+rb_gst_pad_link_raw(VALUE self, VALUE other_pad)
+{
+    GstPad *src_pad;
+    GstPad *sink_pad;
+
+    src_pad = SELF(self);
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other_pad, cGstPad))) {
+        rb_raise(rb_eTypeError, "Not a Gst::Pad");
+    }
+
+    sink_pad = RVAL2GST_PAD(other_pad);
+    return gst_pad_link(src_pad, sink_pad);
+}
+
 /*
  * Method: link(other_pad)
  * other_pad: a Gst::Pad.
@@ -122,20 +146,12 @@ rb_gst_pad_each_query_type (VALUE self)
  * Links the current pad (source) to an other pad (sink).
  *
  * Returns: a Gst::Pad::LinkReturn
- */  
+ */
 static VALUE
-rb_gst_pad_link (VALUE self, VALUE other_pad)
+rb_gst_pad_link(VALUE self, VALUE other_pad)
 {
-    GstPad *srcpad = RGST_PAD (self);
-    GstPad *sinkpad;
-
-    if (!rb_obj_is_kind_of(other_pad, cGstPad)) {
-        rb_raise(rb_eTypeError, "Not a Gst::Pad");
-    }
-
-    sinkpad = RGST_PAD (other_pad);
-    return GENUM2RVAL (gst_pad_link (srcpad, sinkpad),
-        GST_TYPE_PAD_LINK_RETURN);
+    return GENUM2RVAL(rb_gst_pad_link_raw(self, other_pad),
+                      GST_TYPE_PAD_LINK_RETURN);
 }
 
 /*
@@ -145,20 +161,23 @@ rb_gst_pad_link (VALUE self, VALUE other_pad)
  * Links the current pad (source) to an other pad (sink).
  *
  * Returns: the destination pad, or nil if the link failed.
+ *          (I can't understand why the return value is
+ *          useful. Because I can't write like the
+ *          following:
+ *            element1["src"] >> element2["sink"] >> element2["src"] >> element3["sink"]
+ *          I need to write like the following:
+ *            element1["src"] >> element2["sink"]
+ *            element2["src"] >> element3["sink"]
+ *          Return values aren't used in this case.)
  */
 static VALUE
-rb_gst_pad_link2 (VALUE self, VALUE other_pad)  {
-    GstPad *srcpad = RGST_PAD (self);
-    GstPad *sinkpad;
-
-    if (!rb_obj_is_kind_of(other_pad, cGstPad)) {
-        rb_raise(rb_eTypeError, "Not a Gst::Pad");
-    }
-
-    sinkpad = RGST_PAD (other_pad);
-    return gst_pad_link(srcpad, sinkpad) == GST_PAD_LINK_OK ? other_pad :  Qnil;
+rb_gst_pad_link_shift(VALUE self, VALUE other_pad)
+{
+    if (rb_gst_pad_link_raw(self, other_pad) == GST_PAD_LINK_OK)
+        return other_pad;
+    else
+        return Qnil;
 }
-
 
 /*
  * Method: unlink(other_pad)
@@ -167,19 +186,20 @@ rb_gst_pad_link2 (VALUE self, VALUE other_pad)  {
  * Unlinks the current pad (source) from an other pad (sink).
  *
  * Returns: true if the pads were unlinked and false if the pads weren't linked.
- */  
+ */
 static VALUE
 rb_gst_pad_unlink(VALUE self, VALUE other_pad)
 {
-    GstPad *srcpad = RGST_PAD (self);
-    GstPad *sinkpad;
+    GstPad *src_pad;
+    GstPad *sink_pad;
 
-    if (!rb_obj_is_kind_of(other_pad, cGstPad)) {
+    src_pad = SELF(self);
+    if (!CBOOL2RVAL(rb_obj_is_kind_of(other_pad, cGstPad))) {
         rb_raise(rb_eTypeError, "Not a Gst::Pad");
     }
-    sinkpad = RGST_PAD (other_pad);
+    sink_pad = RVAL2GST_PAD(other_pad);
 
-    return CBOOL2RVAL(gst_pad_unlink (srcpad, sinkpad));
+    return CBOOL2RVAL(gst_pad_unlink(src_pad, sink_pad));
 }
 
 /*
@@ -194,8 +214,9 @@ rb_gst_pad_unlink(VALUE self, VALUE other_pad)
  * Method: query
  */
 static VALUE
-rb_gst_pad_query(VALUE self, VALUE query) {
-    return CBOOL2RVAL(gst_pad_query(RGST_PAD(self), RVAL2GOBJ(query)));
+rb_gst_pad_query(VALUE self, VALUE query)
+{
+    return CBOOL2RVAL(gst_pad_query(SELF(self), RVAL2GST_QUERY(query)));
 }
 
 /*
@@ -222,46 +243,22 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
  * Returns: a Gst::Caps object.
  */
 static VALUE
-rb_gst_pad_get_caps (VALUE self)
+rb_gst_pad_get_caps(VALUE self)
 {
-    VALUE ret;
-    GstCaps *caps = gst_pad_get_caps (RGST_PAD (self));
-
-    if (caps == NULL) {
-        return Qnil;
-    }
-
-    ret = GST_CAPS2RVAL(caps);
-
-    /* get_caps gave us a ref we don't need, so drop it */
-    gst_caps_unref (caps);
-
-    return ret;
+    return GST_CAPS2RVAL_UNREF(gst_pad_get_caps(SELF(self)));
 }
 
 /*
- * Method: negotiatedcaps
+ * Method: negotiated_caps
  *
  * Gets the capabilities of the pad element.
  *
  * Returns: a Gst::Caps object.
  */
 static VALUE
-rb_gst_pad_get_negotiated_caps (VALUE self)
+rb_gst_pad_get_negotiated_caps(VALUE self)
 {
-    VALUE ret;
-    GstCaps *caps = gst_pad_get_negotiated_caps (RGST_PAD (self));
-
-    if (caps == NULL) {
-        return Qnil;
-    }
-
-    ret = GST_CAPS2RVAL(caps);
-
-    /* get_negotiated_caps gave us a ref we don't need, so drop it */
-    gst_caps_unref (caps);
-
-    return ret;
+    return GST_CAPS2RVAL_UNREF(gst_pad_get_negotiated_caps(SELF(self)));
 }
 
 /*
@@ -272,8 +269,9 @@ rb_gst_pad_get_negotiated_caps (VALUE self)
  * Returns: true if the setting succeeded
  */
 static VALUE
-rb_gst_pad_set_caps(VALUE self, VALUE caps) {
-    return CBOOL2RVAL(gst_pad_set_caps(RGST_PAD(self), RGST_CAPS(caps)));
+rb_gst_pad_set_caps(VALUE self, VALUE caps)
+{
+    return CBOOL2RVAL(gst_pad_set_caps(SELF(self), RVAL2GST_CAPS(caps)));
 }
 
 /*
@@ -284,53 +282,43 @@ rb_gst_pad_set_caps(VALUE self, VALUE caps) {
  * Returns: Returns the peer pad or Qnil if there is none
  */
 static VALUE
-rb_gst_pad_get_peer(VALUE self) {
-    VALUE ret;
-    GstPad *pad = gst_pad_get_peer (RGST_PAD (self));
-
-    if (pad == NULL) {
-        return Qnil;
-    }
-
-    ret = GOBJ2RVAL(pad);
-    /* gst_pad_get_peer gave us a ref, which we don't need anymore so drop it */
-    g_object_unref (pad);
-    return ret;
+rb_gst_pad_get_peer(VALUE self)
+{
+    return GST_PAD2RVAL_UNREF(gst_pad_get_peer(SELF(self)));
 }
 
 
 void
 Init_gst_pad (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
+    cGstPad = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
 
-	cGstPad = c;
+    rb_define_method(cGstPad, "direction", rb_gst_pad_get_direction, 0);
+    rb_define_method(cGstPad, "name", rb_gst_pad_get_name, 0);
+    rb_define_method(cGstPad, "pad_template", rb_gst_pad_get_pad_template, 0);
+    rb_define_method(cGstPad, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
+    rb_define_method(cGstPad, "query_types", rb_gst_pad_get_query_types, 0);
+    rb_define_method(cGstPad, "each_query_type", rb_gst_pad_each_query_type, 0);
+    rb_define_method(cGstPad, "linked?", rb_gst_pad_is_linked, 0);
+    rb_define_method(cGstPad, "link", rb_gst_pad_link, 1);
+    rb_define_method(cGstPad, ">>", rb_gst_pad_link_shift, 1);
+    rb_define_method(cGstPad, "unlink", rb_gst_pad_unlink, 1);
+    rb_define_method(cGstPad, "query", rb_gst_pad_query, 1);
+    rb_define_method(cGstPad, "send_event", rb_gst_pad_send_event, 1);
+    rb_define_method(cGstPad, "caps", rb_gst_pad_get_caps, 0);
+    rb_define_method(cGstPad, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
+    rb_define_method(cGstPad, "set_caps", rb_gst_pad_set_caps, 1);
+    rb_define_method(cGstPad, "peer", rb_gst_pad_get_peer, 0);
 
-	rb_define_method (c, "direction", rb_gst_pad_get_direction, 0);
-	rb_define_method (c, "name", rb_gst_pad_get_name, 0);
-	rb_define_method (c, "pad_template", rb_gst_pad_get_padtemplate, 0);
-	rb_define_method (c, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
-	rb_define_method (c, "query_types", rb_gst_pad_get_query_types, 0);
-	rb_define_method (c, "each_query_type", rb_gst_pad_each_query_type, 0);
-	rb_define_method (c, "link", rb_gst_pad_link, 1);
-	rb_define_method (c, ">>", rb_gst_pad_link2, 1);
-	rb_define_method (c, "unlink", rb_gst_pad_unlink, 1);
-	rb_define_method (c, "query", rb_gst_pad_query, 1);
-	rb_define_method (c, "send_event", rb_gst_pad_send_event, 1);
-	rb_define_method (c, "caps", rb_gst_pad_get_caps, 0);
-	rb_define_method (c, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
-	rb_define_method (c, "set_caps", rb_gst_pad_set_caps, 1);
-	rb_define_alias(c, "caps=", "set_caps");
-
-	rb_define_method (c, "peer", rb_gst_pad_get_peer, 0);
+    G_DEF_SETTERS(cGstPad);
 
 
-	G_DEF_CLASS (GST_TYPE_PAD_LINK_RETURN, "LinkReturn", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");
-	G_DEF_CLASS (GST_TYPE_PAD_DIRECTION, "Direction", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_PAD_DIRECTION, "GST_PAD_");
-	G_DEF_CLASS (GST_TYPE_PAD_FLAGS, "Flags", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_PAD_FLAGS, "GST_PAD_");
-	G_DEF_CLASS (GST_TYPE_PAD_PRESENCE, "Presence", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_PAD_PRESENCE, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_LINK_RETURN, "LinkReturn", cGstPad);
+    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_DIRECTION, "Direction", cGstPad);
+    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_DIRECTION, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_FLAGS, "Flags", cGstPad);
+    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_FLAGS, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_PRESENCE, "Presence", cGstPad);
+    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_PRESENCE, "GST_PAD_");
 }

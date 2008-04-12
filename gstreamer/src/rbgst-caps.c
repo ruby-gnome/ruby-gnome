@@ -27,6 +27,17 @@
  * Capabilities of pads. 
  */
 
+VALUE
+rbgst_ruby_object_from_gst_caps_with_unref(GstCaps *caps)
+{
+    VALUE rb_caps;
+
+    rb_caps = GST_CAPS2RVAL(caps);
+    if (caps)
+        gst_caps_unref(caps);
+    return rb_caps;
+}
+
 /*
  * Method: new(*structures)
  * structures: a list of Hash objects.
