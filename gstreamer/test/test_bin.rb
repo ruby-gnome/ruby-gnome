@@ -102,15 +102,15 @@ class TestBin < Test::Unit::TestCase
     bin << sub_bin
 
     element = create_element("fakesink")
-    assert_nil(bin[element.name])
-    assert_nil(sub_bin[element.name])
-    assert_nil(sub_bin[element.name, true])
+    assert_nil(bin.get_child(element.name))
+    assert_nil(sub_bin.get_child(element.name))
+    assert_nil(sub_bin.get_child(element.name, true))
 
     bin << element
-    assert_equal(element, bin[element.name])
-    assert_equal(element, bin[element.name,true])
-    assert_nil(sub_bin[element.name])
-    assert_equal(element, sub_bin[element.name, true])
+    assert_equal(element, bin.get_child(element.name))
+    assert_equal(element, bin.get_child(element.name, true))
+    assert_nil(sub_bin.get_child(element.name))
+    assert_equal(element, sub_bin.get_child(element.name, true))
   end
 
   def test_refer_by_interface
@@ -131,14 +131,14 @@ class TestBin < Test::Unit::TestCase
     element1 = create_element("filesink")
     element2 = create_element("fakesink")
 
-    assert_nil(bin[0])
-    assert_nil(bin[1])
-    assert_nil(bin[2])
+    assert_nil(bin.get_child(0))
+    assert_nil(bin.get_child(1))
+    assert_nil(bin.get_child(2))
 
     bin << element1 << element2
-    assert_equal(element2, bin[0])
-    assert_equal(element1, bin[1])
-    assert_nil(bin[2])
+    assert_equal(element2, bin.get_child(0))
+    assert_equal(element1, bin.get_child(1))
+    assert_nil(bin.get_child(2))
   end
 
   def test_sinks
