@@ -1,5 +1,7 @@
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/audio-player.rb: use [] instead of get_pad.
+
 	* src/rbgst-pad.c:
 	- cleanup.
 	- add Gst::Pad#linked?.

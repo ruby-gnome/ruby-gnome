@@ -27,7 +27,7 @@ file_src >> decoder
 audio_convert >> audio_resample >> audio_sink
 
 decoder.signal_connect("new-decoded-pad") do |element, pad|
-  sink_pad = audio_convert.get_pad("sink")
+  sink_pad = audio_convert["sink"]
   pad.link(sink_pad)
 end
 
