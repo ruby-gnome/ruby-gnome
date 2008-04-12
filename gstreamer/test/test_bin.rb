@@ -117,13 +117,13 @@ class TestBin < Test::Unit::TestCase
     bin = Gst::Bin.new
     element = create_element("filesink")
 
-    assert_nil(bin[Gst::ElementURIHandler])
+    assert_nil(bin.get_child(Gst::ElementURIHandler))
 
     bin << create_element("fakesink")
-    assert_nil(bin[Gst::ElementURIHandler])
+    assert_nil(bin.get_child(Gst::ElementURIHandler))
 
     bin << element
-    assert_equal(element, bin[Gst::ElementURIHandler])
+    assert_equal(element, bin.get_child(Gst::ElementURIHandler))
   end
 
   def test_refer_by_index
