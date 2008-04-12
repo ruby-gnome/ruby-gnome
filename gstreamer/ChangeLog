@@ -1,5 +1,10 @@
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-element.c: state related methods are worked in another
+	thread. Based on Sjoerd Simons' patch.
+
+	* test/test_element.rb: add a test for state related methods.
+
 	* sample/audio-player.rb: use [] instead of get_pad.
 
 	* src/rbgst-pad.c:

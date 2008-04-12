@@ -17,6 +17,9 @@ PKGConfig.have_package('gstreamer-plugins-base-0.10') or exit 1
 
 setup_win32(PACKAGE_NAME)
 
+have_header("unistd.h")
+have_header("io.h")
+
 if have_library("gstinterfaces-0.10") and
     have_header("gst/interfaces/xoverlay.h")
   $CFLAGS += " -DHAVE_GST_OVERLAY"

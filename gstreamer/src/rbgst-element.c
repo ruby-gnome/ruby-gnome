@@ -23,11 +23,35 @@
 #include "rbgst.h"
 #include "rbgst-private.h"
 
+#ifdef HAVE_UNISTD_H
+#  include <unistd.h>
+#endif
+#ifdef HAVE_IO_H
+#  include <io.h>
+#  define pipe(phandles) _pipe(phandles, 128, _O_BINARY)
+#endif
+#include <fcntl.h>
+#include <errno.h>
+
 #define SELF(self) RVAL2GST_ELEMENT(self)
+
+#define NOTIFY_MESSAGE "R"
+#define NOTIFY_MESSAGE_SIZE 1
+
+typedef struct _StateData {
+    GstElement *element;
+    GstState state;
+    GstState pending;
+    GstStateChangeReturn result;
+    GstClockTime timeout;
+    int notify_fd;
+} StateData;
 
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
 static ID id_gtype;
+static GThreadPool *set_state_thread_pool;
+static GThreadPool *get_state_thread_pool;
 
 static void
 define_class_if_need(VALUE klass, GType type)
@@ -52,33 +76,103 @@ instance2robj(gpointer instance)
  * Base class for all pipeline elements.
  */
 
+static void
+set_state_in_thread(gpointer data, gpointer user_data)
+{
+    StateData *state_data = (StateData *)data;
+
+    state_data->result = gst_element_set_state(state_data->element,
+					       state_data->state);
+    write(state_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+}
+
+static VALUE
+rb_gst_element_set_state_internal(VALUE self, GstState state)
+{
+    int notify_fds[2];
+    GError *error = NULL;
+    StateData data;
+
+    if (pipe(notify_fds) != 0)
+	rb_sys_fail("failed to create a pipe to synchronize set state process");
+
+    data.element = SELF(self);
+    data.state = state;
+    data.notify_fd = notify_fds[1];
+
+    g_thread_pool_push(set_state_thread_pool, &data, &error);
+    if (error)
+	RAISE_GERROR(error);
+    rb_thread_wait_fd(notify_fds[0]);
+
+    close(notify_fds[0]);
+    close(notify_fds[1]);
+
+    return GENUM2RVAL(data.result, GST_TYPE_STATE_CHANGE_RETURN);
+}
+
 /*
  * Method: set_state(state)
  * state: the state you want to set (see Gst::Element::State).
  *
- * Sets the state of the element. 
+ * Sets the state of the element.
  *
- * This method will try to set the requested state by going through all 
- * the intermediary states and calling the class's state change function 
+ * This method will try to set the requested state by going through all
+ * the intermediary states and calling the class's state change function
  * for each.
  *
- * Returns: a code (see Gst::Element::StateReturn).
+ * Returns: a code (see Gst::Element::StateChangeReturn).
  */
 static VALUE
-rb_gst_element_set_state(VALUE self, VALUE value)
+rb_gst_element_set_state(VALUE self, VALUE state)
 {
-    return GENUM2RVAL(gst_element_set_state(SELF(self),
-                                            RVAL2GENUM(value, GST_TYPE_STATE)),
-                      GST_TYPE_STATE_CHANGE_RETURN);
+    return rb_gst_element_set_state_internal(self,
+					     RVAL2GENUM(state, GST_TYPE_STATE));
 }
 
-/* Method: state
- * Returns: the state of the element (see Gst::Element::State).
+static void
+get_state_in_thread(gpointer data, gpointer user_data)
+{
+    StateData *state_data = (StateData *)data;
+
+    state_data->result = gst_element_get_state(state_data->element,
+					       &(state_data->state),
+					       &(state_data->pending),
+					       state_data->timeout);
+    write(state_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+}
+
+/* Method: get_state(timeout=nil)
  */
 static VALUE
-rb_gst_element_get_state(VALUE self)
+rb_gst_element_get_state(int argc, VALUE *argv, VALUE self)
 {
-    return GENUM2RVAL(GST_STATE(SELF(self)), GST_TYPE_STATE);
+    VALUE timeout;
+    int notify_fds[2];
+    GError *error = NULL;
+    StateData data;
+
+    rb_scan_args(argc, argv, "01", &timeout);
+
+    if (pipe(notify_fds) != 0)
+	rb_sys_fail("failed to create a pipe to synchronize get state process");
+
+    data.element = SELF(self);
+    data.notify_fd = notify_fds[1];
+    data.timeout = NIL_P(timeout) ? GST_CLOCK_TIME_NONE : NUM2ULL(timeout);
+
+    g_thread_pool_push(get_state_thread_pool, &data, &error);
+    if (error)
+	RAISE_GERROR(error);
+    rb_thread_wait_fd(notify_fds[0]);
+
+    close(notify_fds[0]);
+    close(notify_fds[1]);
+
+    return rb_ary_new3(3,
+		       GENUM2RVAL(data.result, GST_TYPE_STATE_CHANGE_RETURN),
+		       GENUM2RVAL(data.state, GST_TYPE_STATE),
+		       GENUM2RVAL(data.pending, GST_TYPE_STATE));
 }
 
 /*
@@ -86,13 +180,12 @@ rb_gst_element_get_state(VALUE self)
  *
  * This method calls Gst::Element#set_state with Gst::Element::STATE_NULL.
  *
- * Returns: a code (see Gst::Element::StateReturn).
+ * Returns: a code (see Gst::Element::StateChangeReturn).
  */
 static VALUE
-rb_gst_element_stop (VALUE self)
+rb_gst_element_stop(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(SELF(self), GST_STATE_NULL),
-                      GST_TYPE_STATE_CHANGE_RETURN);
+    return rb_gst_element_set_state_internal(self, GST_STATE_NULL);
 }
 
 /*
@@ -100,13 +193,12 @@ rb_gst_element_stop (VALUE self)
  *
  * This method calls Gst::Element#set_state with Gst::Element::STATE_READY.
  *
- * Returns: a code (see Gst::Element::StateReturn).
+ * Returns: a code (see Gst::Element::StateChangeReturn).
  */
 static VALUE
 rb_gst_element_ready(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(SELF(self), GST_STATE_READY),
-                      GST_TYPE_STATE_CHANGE_RETURN);
+    return rb_gst_element_set_state_internal(self, GST_STATE_READY);
 }
 
 /*
@@ -114,14 +206,12 @@ rb_gst_element_ready(VALUE self)
  *
  * This method calls Gst::Element#set_state with Gst::Element::STATE_PAUSED.
  *
- * Returns: a code (see Gst::Element::StateReturn).
+ * Returns: a code (see Gst::Element::StateChangedReturn).
  */
 static VALUE
 rb_gst_element_pause(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(SELF(self),
-                                            GST_STATE_PAUSED),
-                      GST_TYPE_STATE_CHANGE_RETURN);
+    return rb_gst_element_set_state_internal(self, GST_STATE_PAUSED);
 }
 
 /*
@@ -129,68 +219,12 @@ rb_gst_element_pause(VALUE self)
  *
  * This method calls Gst::Element#set_state with Gst::Element::STATE_PLAYING.
  *
- * Returns: a code (see Gst::Element::StateReturn).
+ * Returns: a code (see Gst::Element::StateChangedReturn).
  */
 static VALUE
 rb_gst_element_play(VALUE self)
 {
-    return GENUM2RVAL(gst_element_set_state(SELF(self),
-                                            GST_STATE_PLAYING),
-                      GST_TYPE_STATE_CHANGE_RETURN);
-}
-
-/* Method: stopped?
- * Returns: true if the current state is set to Gst::Element::STATE_NULL,
- * false otherwise.
- */
-static VALUE
-rb_gst_element_is_stopped(VALUE self)
-{
-    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_NULL);
-}
-
-/* Method: ready?
- * Returns: true if the current state equals Gst::Element::STATE_READY,
- * false otherwise.
- */
-static VALUE
-rb_gst_element_is_ready(VALUE self)
-{
-    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_READY);
-}
-
-/* Method: paused?
- * Returns: true if the current state equals Gst::Element::STATE_PAUSED,
- * false otherwise.
- */
-static VALUE
-rb_gst_element_is_paused(VALUE self)
-{
-    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_PAUSED);
-}
-
-/* Method: playing?
- * Returns: true if the current state equals Gst::Element::STATE_PLAYING,
- * false otherwise.
- */
-static VALUE
-rb_gst_element_is_playing(VALUE self)
-{
-    return CBOOL2RVAL(GST_STATE(SELF(self)) == GST_STATE_PLAYING);
-}
-
-/*
- * Method: wait
- *
- * Waits and blocks until the element changed its state.
- *
- * Returns: self.
- */
-static VALUE
-rb_gst_element_wait(VALUE self)
-{
-    GST_STATE_WAIT(SELF(self));
-    return Qnil;
+    return rb_gst_element_set_state_internal(self, GST_STATE_PLAYING);
 }
 
 /*
@@ -756,11 +790,22 @@ rb_gst_element_found_tag_sig(guint num, const GValue *values)
 void
 Init_gst_element(void)
 {
+    GError *error = NULL;
+
     table.type = GST_TYPE_ELEMENT;
     table.instance2robj = instance2robj;
     RG_DEF_CONVERSION(&table);
 
     id_gtype = rb_intern("gtype");
+
+    set_state_thread_pool =
+	g_thread_pool_new(set_state_in_thread, NULL, -1, FALSE, &error);
+    if (error)
+	RAISE_GERROR(error);
+    get_state_thread_pool =
+	g_thread_pool_new(get_state_in_thread, NULL, -1, FALSE, &error);
+    if (error)
+	RAISE_GERROR(error);
 
     rb_cGstElement = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst);
 
@@ -772,16 +817,11 @@ Init_gst_element(void)
                                rb_gst_element_each_pad_template, 0);
 
     rb_define_method(rb_cGstElement, "set_state", rb_gst_element_set_state, 1);
-    rb_define_method(rb_cGstElement, "state", rb_gst_element_get_state, 0);
+    rb_define_method(rb_cGstElement, "get_state", rb_gst_element_get_state, -1);
     rb_define_method(rb_cGstElement, "stop", rb_gst_element_stop, 0);
     rb_define_method(rb_cGstElement, "ready", rb_gst_element_ready, 0);
     rb_define_method(rb_cGstElement, "pause", rb_gst_element_pause, 0);
     rb_define_method(rb_cGstElement, "play", rb_gst_element_play, 0);
-    rb_define_method(rb_cGstElement, "stopped?", rb_gst_element_is_stopped, 0);
-    rb_define_method(rb_cGstElement, "ready?", rb_gst_element_is_ready, 0);
-    rb_define_method(rb_cGstElement, "paused?", rb_gst_element_is_paused, 0);
-    rb_define_method(rb_cGstElement, "playing?", rb_gst_element_is_playing, 0);
-    rb_define_method(rb_cGstElement, "wait", rb_gst_element_wait, 0);
     rb_define_method(rb_cGstElement, "link", rb_gst_element_link, 1);
     rb_define_alias(rb_cGstElement, ">>", "link");
     rb_define_method(rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
