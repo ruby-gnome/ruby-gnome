@@ -1,3 +1,8 @@
+2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-bin.c: Gst::Bin#[] => Gst::Bin#get_child.
+	Suggested by Sjoerd Simons.
+
 2008-04-12  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-element.c: Make [] an alias of get_pad

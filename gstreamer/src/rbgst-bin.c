@@ -282,9 +282,9 @@ rb_gst_bin_each_element(int argc, VALUE *argv, VALUE self)
 }
 
 /*
- * Method: [](index)
- * Method: [](name, recurse=false)
- * Method: [](interface)
+ * Method: get_child(index)
+ * Method: get_child(name, recurse=false)
+ * Method: get_child(interface)
  * index: an index.
  * name: a name.
  * recurse: search recursively.
@@ -387,7 +387,7 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
     rb_define_method(rb_cGstBin, "clear", rb_gst_bin_clear, 0);
 
-    rb_define_method(rb_cGstBin, "[]", rb_gst_bin_get, -1);
+    rb_define_method(rb_cGstBin, "get_child", rb_gst_bin_get, -1);
 
     rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
     rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
