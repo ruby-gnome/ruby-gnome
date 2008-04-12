@@ -795,6 +795,7 @@ Init_gst_element(void)
     rb_define_method(rb_cGstElement, "set_base_time", rb_gst_element_set_base_time, 1);
     rb_define_method(rb_cGstElement, "each_pad", rb_gst_element_each_pad, 0);
     rb_define_method(rb_cGstElement, "get_pad", rb_gst_element_get_pad, 1);
+    rb_define_alias(rb_cGstElement, "[]", "get_pad");
     rb_define_method(rb_cGstElement, "get_static_pad", rb_gst_element_get_static_pad, 1);
     rb_define_method(rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);
     rb_define_method(rb_cGstElement, "release_request_pad",

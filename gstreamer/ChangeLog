@@ -1,3 +1,7 @@
+2008-04-12  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-element.c: Make [] an alias of get_pad
+
 2008-04-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-bin.c (rb_gst_bin_add): use RVAL2CBOOL not RTEST.
