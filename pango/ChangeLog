@@ -1,3 +1,7 @@
+2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: fix rcairo's source path.
+
 2008-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb, src/rbpango.h, src/rbpangoglyphitem.c:
