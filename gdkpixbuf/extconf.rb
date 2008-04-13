@@ -27,7 +27,7 @@ if PKGConfig.have_package('cairo') and
       puts "Error! Set CAIRO_PATH."
       exit 1
     end
-    add_depend_package("cairo", "packages/cairo/ext", ENV["CAIRO_PATH"])
+    add_depend_package("cairo", "src", ENV["CAIRO_PATH"])
     $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
   end
 end
