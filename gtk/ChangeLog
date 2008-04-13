@@ -1,5 +1,7 @@
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: fix rcairo's source path.
+
 	* src/rbgtkbuildable.c: add.
 
 	* test/test_gtk_buildable.rb: add.
