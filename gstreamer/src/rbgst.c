@@ -34,6 +34,7 @@ Init_gst_classes (void)
     extern void Init_gst_buffer(void);
     extern void Init_gst_bus(void);
     extern void Init_gst_caps (void);
+    extern void Init_gst_child_proxy(void);
     extern void Init_gst_clock (void);
     extern void Init_gst_clock_entry (void);
     extern void Init_gst_element (void);
@@ -83,6 +84,7 @@ Init_gst_classes (void)
     Init_gst_bin ();
     Init_gst_bus();
     Init_gst_caps ();
+    Init_gst_child_proxy();
     Init_gst_clock ();
     Init_gst_clock_entry ();
     Init_gst_element ();
