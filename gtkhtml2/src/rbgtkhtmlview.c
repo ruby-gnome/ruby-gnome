@@ -192,6 +192,10 @@ Init_html_view(mGtkHtml2)
 {
     VALUE gHtmlView = G_DEF_CLASS(html_view_get_type(), "HtmlView", mGtkHtml2);
 
+#ifdef DOM_TYPE_ABSTRACT_VIEW
+    G_DEF_CLASS(DOM_TYPE_ABSTRACT_VIEW, "DomAbstractView", mGtkHtml2);
+#endif
+
     rb_define_method(gHtmlView, "initialize",  rb_html_view_initialize,  -1);
     rb_define_method(gHtmlView, "set_document", rb_html_view_set_document, 1);
     rb_define_method(gHtmlView, "jump_to_anchor", rb_html_view_jump_to_anchor, 1);
