@@ -19,6 +19,7 @@
 
 #include "rbgprivate.h"
 
+VALUE rbgobj_cObject;
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
@@ -844,7 +845,12 @@ Init_gobject_subclass()
 void 
 Init_gobject_gobject()
 {
-    VALUE cGObject = G_DEF_CLASS2(G_TYPE_OBJECT, "Object", mGLib, gobj_mark, NULL);
+    VALUE cGObject;
+
+    rbgobj_cObject = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
+					      gobj_mark, NULL);
+    cGObject = rbgobj_cObject;
+
 #ifdef G_TYPE_INITIALLY_UNOWNED
     G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", mGLib);
 #endif

@@ -145,6 +145,7 @@ rbgobj_initialize_gvalue(GValue *result, VALUE value)
             type = G_TYPE_DOUBLE;
             break;
           case T_STRING:
+          case T_SYMBOL:
             type = G_TYPE_STRING;
             break;
           case T_FIXNUM:
@@ -158,14 +159,33 @@ rbgobj_initialize_gvalue(GValue *result, VALUE value)
             type = G_TYPE_BOOLEAN;
             break;
           default:
-          {
-              VALUE inspected_value;
-              inspected_value = rb_funcall(value, rb_intern("inspect"), 0);
-              rb_raise(rb_eArgError,
-                       "unsupported value type: %s",
-                       RSTRING_PTR(inspected_value));
-              break;
-          }
+	    if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cEnum))) {
+		type = G_TYPE_ENUM;
+	    }
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cFlags))) {
+		type = G_TYPE_FLAGS;
+	    }
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cBoxed))) {
+		type = G_TYPE_BOXED;
+	    }
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cParam))) {
+		type = G_TYPE_PARAM;
+	    }
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_cObject))) {
+		type = G_TYPE_OBJECT;
+	    }
+	    else if (RVAL2CBOOL(rb_obj_is_kind_of(value, rbgobj_mInterface))) {
+		/* should use rbgobj_mMetaInterface? */
+		type = G_TYPE_INTERFACE;
+	    }
+	    else {
+		VALUE inspected_value;
+		inspected_value = rb_funcall(value, rb_intern("inspect"), 0);
+		rb_raise(rb_eArgError,
+			 "unsupported value type: %s",
+			 RSTRING_PTR(inspected_value));
+	    }
+	    break;
         }
     }
 

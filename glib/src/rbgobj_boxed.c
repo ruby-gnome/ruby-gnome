@@ -13,6 +13,8 @@
 
 #include "rbgprivate.h"
 
+VALUE rbgobj_cBoxed;
+
 static void
 boxed_mark(boxed_holder* p)
 {
@@ -228,7 +230,11 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed()
 {
-    VALUE gBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
+    VALUE gBoxed;
+
+    rbgobj_cBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
+    gBoxed = rbgobj_cBoxed;
+
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 

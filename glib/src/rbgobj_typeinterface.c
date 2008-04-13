@@ -14,6 +14,7 @@
 
 #include "rbgprivate.h"
 
+VALUE rbgobj_mInterface;
 VALUE mMetaInterface;
 
 static VALUE
@@ -140,5 +141,5 @@ Init_gobject_typeinterface()
     rb_define_method(mMetaInterface, "properties", interface_s_properties, -1);
 #endif
 
-    G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
+    rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
 }

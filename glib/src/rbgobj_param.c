@@ -13,7 +13,7 @@
 
 #include "rbgprivate.h"
 
-static VALUE cParamSpec;
+VALUE rbgobj_cParam;
 static GQuark qparamspec;
 
 static VALUE pspec_s_allocate(VALUE klass);
@@ -328,9 +328,12 @@ param_is_flag(G_PARAM_READWRITE)
 
 static void
 Init_gobject_gparam_spec()
-{    
+{
+    VALUE cParamSpec;
+
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
-    cParamSpec = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
+    rbgobj_cParam = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
+    cParamSpec = rbgobj_cParam;
 
     /* GParamFlags */
     rb_define_const(cParamSpec, "READABLE",       INT2FIX(G_PARAM_READABLE));

@@ -14,6 +14,8 @@
 #include "rbgprivate.h"
 #include <ctype.h>
 
+VALUE rbgobj_cEnum, rbgobj_cFlags;
+
 static ID id_new;
 static ID id_module_eval;
 static ID id_to_s;
@@ -461,7 +463,11 @@ enum_coerce(VALUE self, VALUE other)
 static void
 Init_enum()
 {
-    VALUE cEnum  = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
+    VALUE cEnum;
+
+    rbgobj_cEnum = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
+    cEnum = rbgobj_cEnum;
+
     rb_define_singleton_method(cEnum, "gtype", generic_s_gtype, 0);
     rb_define_method(cEnum, "gtype", generic_gtype, 0);
 
@@ -875,7 +881,11 @@ flags_nonzero_p(VALUE self)
 static void
 Init_flags()
 {
-    VALUE cFlags = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", mGLib);
+    VALUE cFlags;
+
+    rbgobj_cFlags = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", mGLib);
+    cFlags = rbgobj_cFlags;
+
     rb_define_singleton_method(cFlags, "gtype", generic_s_gtype, 0);
     rb_define_method(cFlags, "gtype", generic_gtype, 0);
 
@@ -930,4 +940,4 @@ Init_gobject_genums()
 
     Init_enum();
     Init_flags();
-} 
+}

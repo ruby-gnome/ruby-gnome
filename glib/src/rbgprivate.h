@@ -26,6 +26,13 @@ typedef struct {
     GType type;
 } boxed_holder;
 
+extern VALUE rbgobj_cEnum;
+extern VALUE rbgobj_cFlags;
+extern VALUE rbgobj_cBoxed;
+extern VALUE rbgobj_cParam;
+extern VALUE rbgobj_mInterface;
+extern VALUE rbgobj_cObject;
+
 extern VALUE rbgobj_cInstantiatable;
 extern VALUE rbgobj_mMetaInterface;
 #define cInstantiatable   rbgobj_cInstantiatable
