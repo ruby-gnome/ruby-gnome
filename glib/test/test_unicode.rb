@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-require 'test/unit'
-require 'glib2'
-
 class TestGLibUnicode < Test::Unit::TestCase
+  include GLibTestUtils
+
   def test_gunicode_type
     assert_nothing_raised do
       GLib::Unicode::CONTROL
@@ -17,74 +16,74 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unichar_alnum?
-    assert(GLib::UniChar.alnum?(?a))
-    assert(GLib::UniChar.alnum?(?1))
-    assert(!GLib::UniChar.alnum?(?!))
+    assert(GLib::UniChar.alnum?(unichar("a")))
+    assert(GLib::UniChar.alnum?(unichar("1")))
+    assert(!GLib::UniChar.alnum?(unichar("!")))
   end
 
   def test_unichar_alpha?
-    assert(GLib::UniChar.alpha?(?a))
-    assert(GLib::UniChar.alpha?(?A))
-    assert(!GLib::UniChar.alpha?(?1))
+    assert(GLib::UniChar.alpha?(unichar("a")))
+    assert(GLib::UniChar.alpha?(unichar("A")))
+    assert(!GLib::UniChar.alpha?(unichar("1")))
   end
 
   def test_unichar_cntrl?
-    assert(GLib::UniChar.cntrl?(?\t))
-    assert(!GLib::UniChar.cntrl?(?\h))
-    assert(!GLib::UniChar.cntrl?(?a))
-    assert(!GLib::UniChar.cntrl?(?1))
+    assert(GLib::UniChar.cntrl?(unichar("\t")))
+    assert(!GLib::UniChar.cntrl?(unichar("\h")))
+    assert(!GLib::UniChar.cntrl?(unichar("a")))
+    assert(!GLib::UniChar.cntrl?(unichar("1")))
   end
 
   def test_unichar_digit?
-    assert(GLib::UniChar.digit?(?1))
-    assert(!GLib::UniChar.digit?(?a))
+    assert(GLib::UniChar.digit?(unichar("1")))
+    assert(!GLib::UniChar.digit?(unichar("a")))
   end
 
   def test_unichar_graph?
-    assert(GLib::UniChar.graph?(?a))
-    assert(!GLib::UniChar.graph?(?\ )) # space
-    assert(!GLib::UniChar.graph?(?\t))
+    assert(GLib::UniChar.graph?(unichar("a")))
+    assert(!GLib::UniChar.graph?(unichar(" ")))
+    assert(!GLib::UniChar.graph?(unichar("\t")))
   end
 
   def test_unichar_lower?
-    assert(GLib::UniChar.lower?(?a))
-    assert(!GLib::UniChar.lower?(?A))
-    assert(!GLib::UniChar.lower?(?1))
+    assert(GLib::UniChar.lower?(unichar("a")))
+    assert(!GLib::UniChar.lower?(unichar("A")))
+    assert(!GLib::UniChar.lower?(unichar("1")))
   end
 
   def test_unichar_print?
-    assert(GLib::UniChar.print?(?a))
-    assert(GLib::UniChar.print?(?\ )) # space
-    assert(!GLib::UniChar.print?(?\t))
+    assert(GLib::UniChar.print?(unichar("a")))
+    assert(GLib::UniChar.print?(unichar(" ")))
+    assert(!GLib::UniChar.print?(unichar("\t")))
   end
 
   def test_unichar_punct?
-    assert(GLib::UniChar.punct?(?,))
-    assert(GLib::UniChar.punct?(?.))
-    assert(!GLib::UniChar.punct?(?a))
-    assert(!GLib::UniChar.punct?(?\t))
+    assert(GLib::UniChar.punct?(unichar(",")))
+    assert(GLib::UniChar.punct?(unichar(".")))
+    assert(!GLib::UniChar.punct?(unichar("a")))
+    assert(!GLib::UniChar.punct?(unichar("\t")))
   end
 
   def test_unichar_space?
-    assert(GLib::UniChar.space?(?\ )) # space
-    assert(GLib::UniChar.space?(?\t))
-    assert(GLib::UniChar.space?(?\r))
-    assert(GLib::UniChar.space?(?\n))
-    assert(!GLib::UniChar.space?(?a))
+    assert(GLib::UniChar.space?(unichar(" ")))
+    assert(GLib::UniChar.space?(unichar("\t")))
+    assert(GLib::UniChar.space?(unichar("\r")))
+    assert(GLib::UniChar.space?(unichar("\n")))
+    assert(!GLib::UniChar.space?(unichar("a")))
   end
 
   def test_unichar_upper?
-    assert(GLib::UniChar.upper?(?A))
-    assert(!GLib::UniChar.upper?(?a))
-    assert(!GLib::UniChar.upper?(?1))
+    assert(GLib::UniChar.upper?(unichar("A")))
+    assert(!GLib::UniChar.upper?(unichar("a")))
+    assert(!GLib::UniChar.upper?(unichar("1")))
   end
 
   def test_unichar_xdigit?
-    assert(GLib::UniChar.xdigit?(?1))
-    assert(GLib::UniChar.xdigit?(?a))
-    assert(GLib::UniChar.xdigit?(?A))
-    assert(GLib::UniChar.xdigit?(?F))
-    assert(!GLib::UniChar.xdigit?(?X))
+    assert(GLib::UniChar.xdigit?(unichar("1")))
+    assert(GLib::UniChar.xdigit?(unichar("a")))
+    assert(GLib::UniChar.xdigit?(unichar("A")))
+    assert(GLib::UniChar.xdigit?(unichar("F")))
+    assert(!GLib::UniChar.xdigit?(unichar("X")))
   end
 
   def test_unichar_title?
@@ -94,99 +93,104 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unichar_wide?
-    require 'uconv'
-    assert(GLib::UniChar.wide?(Uconv.u8tou4("あ").unpack("L*")[0]))
-    assert(GLib::UniChar.wide?(Uconv.u8tou4("Ａ").unpack("L*")[0]))
-    assert(!GLib::UniChar.wide?(?a))
+    assert(GLib::UniChar.wide?(unichar("あ")))
+    assert(GLib::UniChar.wide?(unichar("Ａ")))
+    assert(!GLib::UniChar.wide?(unichar("a")))
   end
 
   def test_unichar_wide_cjk?
-    return unless (GLib::VERSION <=> [2, 12, 0]) >= 0
-    require 'uconv'
-    assert(GLib::UniChar.wide_cjk?(Uconv.u8tou4("あ").unpack("L*")[0]))
-    assert(GLib::UniChar.wide_cjk?(Uconv.u8tou4("한").unpack("L*")[0]))
-    assert(!GLib::UniChar.wide_cjk?(?a))
+    only_glib_version(2, 12, 0)
+    assert(GLib::UniChar.wide_cjk?(unichar("あ")))
+    assert(GLib::UniChar.wide_cjk?(0xD55C)) # HANGUL SYLLABLE HAN
+    assert(!GLib::UniChar.wide_cjk?(unichar("a")))
   end
 
   def test_unichar_to_upper
-    assert_equal(?A, GLib::UniChar.to_upper(?a))
-    assert_equal(?A, GLib::UniChar.to_upper(?A))
-    assert_equal(?*, GLib::UniChar.to_title(?*))
+    assert_equal(unichar("A"), GLib::UniChar.to_upper(unichar("a")))
+    assert_equal(unichar("A"), GLib::UniChar.to_upper(unichar("A")))
+    assert_equal(unichar("*"), GLib::UniChar.to_title(unichar("*")))
   end
 
   def test_unichar_to_lower
-    assert_equal(?a, GLib::UniChar.to_lower(?A))
-    assert_equal(?a, GLib::UniChar.to_lower(?a))
-    assert_equal(?*, GLib::UniChar.to_title(?*))
+    assert_equal(unichar("a"), GLib::UniChar.to_lower(unichar("A")))
+    assert_equal(unichar("a"), GLib::UniChar.to_lower(unichar("a")))
+    assert_equal(unichar("*"), GLib::UniChar.to_title(unichar("*")))
   end
 
   def test_unichar_to_title
-    assert_equal(?A, GLib::UniChar.to_title(?a))
-    assert_equal(?A, GLib::UniChar.to_title(?A))
-    assert_equal(?*, GLib::UniChar.to_title(?*))
+    assert_equal(unichar("A"), GLib::UniChar.to_title(unichar("a")))
+    assert_equal(unichar("A"), GLib::UniChar.to_title(unichar("A")))
+    assert_equal(unichar("*"), GLib::UniChar.to_title(unichar("*")))
   end
 
   def test_unichar_digit_value
-    assert_equal(0, GLib::UniChar.digit_value(?0))
-    assert_equal(9, GLib::UniChar.digit_value(?9))
-    assert_equal(-1, GLib::UniChar.digit_value(?a))
+    assert_equal(0, GLib::UniChar.digit_value(unichar("0")))
+    assert_equal(9, GLib::UniChar.digit_value(unichar("9")))
+    assert_equal(-1, GLib::UniChar.digit_value(unichar("a")))
   end
 
   def test_unichar_xdigit_value
-    assert_equal(0, GLib::UniChar.xdigit_value(?0))
-    assert_equal(9, GLib::UniChar.xdigit_value(?9))
-    assert_equal(10, GLib::UniChar.xdigit_value(?a))
-    assert_equal(15, GLib::UniChar.xdigit_value(?F))
-    assert_equal(-1, GLib::UniChar.xdigit_value(?g))
+    assert_equal(0, GLib::UniChar.xdigit_value(unichar("0")))
+    assert_equal(9, GLib::UniChar.xdigit_value(unichar("9")))
+    assert_equal(10, GLib::UniChar.xdigit_value(unichar("a")))
+    assert_equal(15, GLib::UniChar.xdigit_value(unichar("F")))
+    assert_equal(-1, GLib::UniChar.xdigit_value(unichar("g")))
   end
 
   def test_unichar_type
-    assert_equal(GLib::Unicode::DECIMAL_NUMBER, GLib::UniChar.type(?0))
-    assert_equal(GLib::Unicode::LOWERCASE_LETTER, GLib::UniChar.type(?a))
-    assert_equal(GLib::Unicode::UPPERCASE_LETTER, GLib::UniChar.type(?A))
+    assert_equal(GLib::Unicode::DECIMAL_NUMBER,
+                 GLib::UniChar.type(unichar("0")))
+    assert_equal(GLib::Unicode::LOWERCASE_LETTER,
+                 GLib::UniChar.type(unichar("a")))
+    assert_equal(GLib::Unicode::UPPERCASE_LETTER,
+                 GLib::UniChar.type(unichar("A")))
   end
 
   def test_unichar_break_type
-    assert_equal(GLib::Unicode::BREAK_HYPHEN, GLib::UniChar.break_type(?-))
-    assert_equal(GLib::Unicode::BREAK_NUMERIC, GLib::UniChar.break_type(?0))
+    assert_equal(GLib::Unicode::BREAK_HYPHEN,
+                 GLib::UniChar.break_type(unichar("-")))
+    assert_equal(GLib::Unicode::BREAK_NUMERIC,
+                 GLib::UniChar.break_type(unichar("0")))
   end
 
   def test_unicode_canonical_ordering
     require 'uconv'
-    original = [?a, 0x0308, 0x0323, ?e, 0x0304, 0x0301, 0x0323].pack("U*")
-    expected = [?a, 0x0323, 0x0308, ?e, 0x0323, 0x0304, 0x0301].pack("U*")
+    original = [unichar("a"), 0x0308, 0x0323,
+                unichar("e"), 0x0304, 0x0301, 0x0323].pack("U*")
+    expected = [unichar("a"), 0x0323, 0x0308,
+                unichar("e"), 0x0323, 0x0304, 0x0301].pack("U*")
     assert_equal(Uconv.u8tou4(expected),
                  GLib::Unicode.canonical_ordering(Uconv.u8tou4(original)))
   end
 
   def test_unicode_canonical_decomposition
     require 'uconv'
-    unichar = 0x00c1 # "A" with acute
-    expected = [?A, 0x0301].pack("U*")
+    a_with_acute = 0x00E1
+    expected = [unichar("a"), 0x0301].pack("U*")
     assert_equal(Uconv.u8tou4(expected),
-                 GLib::Unicode.canonical_decomposition(unichar))
+                 GLib::Unicode.canonical_decomposition(a_with_acute))
 
-    unichar = 0x304c # "が"
-    expected = [0x304B, 0x3099].pack("U*")
+    hiragana_ga = 0x304C
+    hiragana_ka = 0x304B
+    expected = [hiragana_ka, 0x3099].pack("U*")
     assert_equal(Uconv.u8tou4(expected),
-                 GLib::Unicode.canonical_decomposition(unichar))
+                 GLib::Unicode.canonical_decomposition(hiragana_ga))
   end
 
   def test_unichar_get_mirror_char
-    return unless (GLib::VERSION <=> [2, 4, 0]) >= 0
-    assert_equal(?\(, GLib::UniChar.get_mirror_char(?\)))
-    assert_equal(?\), GLib::UniChar.get_mirror_char(?\())
-    assert_equal(?x, GLib::UniChar.get_mirror_char(?x))
+    assert_equal(unichar("("), GLib::UniChar.get_mirror_char(unichar(")")))
+    assert_equal(unichar(")"), GLib::UniChar.get_mirror_char(unichar("(")))
+    assert_equal(unichar("x"), GLib::UniChar.get_mirror_char(unichar("x")))
   end
 
   def test_unichar_get_script
-    return unless (GLib::VERSION <=> [2, 14, 0]) >= 0
-    require 'uconv'
+    only_glib_version(2, 14, 0)
     assert_equal(GLib::Unicode::SCRIPT_HIRAGANA,
-                 GLib::UniChar.get_script(Uconv.u8tou4("あ").unpack("L*")[0]))
+                 GLib::UniChar.get_script(unichar("あ")))
   end
 
   def test_utf8_get_char
+    require "uconv"
     assert_equal(Uconv.u8tou4("あ").unpack("L*")[0],
                  GLib::UTF8.get_char("あ"))
 
@@ -327,5 +331,29 @@ class TestGLibUnicode < Test::Unit::TestCase
     require 'uconv'
     assert_equal("あ",
                  GLib::UniChar.to_utf8(Uconv.u8tou4("あ").unpack("L*")[0]))
+  end
+
+  def test_unichar_combining_class
+    only_glib_version(2, 14, 0)
+    assert_equal(0, GLib::UniChar.combining_class(unichar("a")))
+    assert_equal(230, GLib::UniChar.combining_class(unichar("́")))
+  end
+
+  def test_unichar_mark?
+    only_glib_version(2, 14, 0)
+    assert(!GLib::UniChar.mark?(unichar("a")))
+    assert(!GLib::UniChar.mark?(0x200E)) # LEFT-TO-RIGHT MARK
+    assert(GLib::UniChar.mark?(0x1DC3)) # COMBINING SUSPENSION MARK
+  end
+
+  def test_unichar_zero_width?
+    only_glib_version(2, 14, 0)
+    assert(!GLib::UniChar.zero_width?(unichar("a")))
+    assert(GLib::UniChar.zero_width?(0x200B)) # ZERO WIDTH SPACE
+  end
+
+  private
+  def unichar(char)
+    GLib::UTF8.get_char(char)
   end
 end

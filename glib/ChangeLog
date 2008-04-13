@@ -1,5 +1,12 @@
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_unicode.c, test/test_unicode.rb: bind Unicode related
+	functions added in GLib 2.14.
+
+	* test/run-test.rb: use glib-test-utils.rb.
+
+	* test/glib-test-utils.rb: add.
+
 	* src/rbgobj_value.c (rbgobj_initialize_gvalue): support more
 	objects.
 

@@ -137,10 +137,28 @@ rbglib_m_unichar_get_mirror_char(VALUE self, VALUE unichar)
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
+rbglib_m_unichar_combining_class(VALUE self, VALUE unichar)
+{
+    return INT2NUM(g_unichar_combining_class(NUM2UINT(unichar)));
+}
+
+static VALUE
 rbglib_m_unichar_get_script(VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_get_script(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_SCRIPT);
+}
+
+static VALUE
+rbglib_m_unichar_ismark(VALUE self, VALUE unichar)
+{
+    return CBOOL2RVAL(g_unichar_ismark(NUM2UINT(unichar)));
+}
+
+static VALUE
+rbglib_m_unichar_iszerowidth(VALUE self, VALUE unichar)
+{
+    return CBOOL2RVAL(g_unichar_iszerowidth(NUM2UINT(unichar)));
 }
 #endif
 
@@ -522,8 +540,14 @@ Init_glib_unicode(void)
 #endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
+    rb_define_module_function(mGLibUniChar, "combining_class",
+			      rbglib_m_unichar_combining_class, 1);
     rb_define_module_function(mGLibUniChar, "get_script",
                               rbglib_m_unichar_get_script, 1);
+    rb_define_module_function(mGLibUniChar, "mark?",
+			      rbglib_m_unichar_ismark, 1);
+    rb_define_module_function(mGLibUniChar, "zero_width?",
+			      rbglib_m_unichar_iszerowidth, 1);
 #endif
 
     /*
