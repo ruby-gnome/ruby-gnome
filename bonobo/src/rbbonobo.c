@@ -20,6 +20,10 @@ void
 Init_bonobo2()
 {
    mBonobo = rb_define_module("Bonobo");
-   
+
+#ifdef BONOBO_TYPE_OBJECT
+   G_DEF_CLASS(BONOBO_TYPE_OBJECT, "Object", mBonobo);
+#endif
+
    Init_bonobo_inits();
 }
