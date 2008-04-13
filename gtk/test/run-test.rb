@@ -16,10 +16,12 @@ test_unit_ext_dir = File.join(glib_base, "test-unit-ext", "lib")
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(gtk_base, "test"))
 $LOAD_PATH.unshift(test_unit_ext_dir)
-
 require 'test-unit-ext'
+
+$LOAD_PATH.unshift(File.join(gtk_base, "test"))
+require 'gtk-test-utils'
+
 require 'pp'
 require 'gtk2'
 
