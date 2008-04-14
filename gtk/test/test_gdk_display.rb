@@ -16,10 +16,6 @@ class TestGdkDisplay < Test::Unit::TestCase
 
     display = Gdk::Display.default
     assert_nil(display.startup_notification_id)
-    display.startup_notification_id = "Start!!!"
-    assert_equal("Start!!!", display.startup_notification_id)
-    display.startup_notification_id = nil
-    assert_nil(display.startup_notification_id)
   end
 
   def test_broadcast_startup_message
