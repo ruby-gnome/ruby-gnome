@@ -470,6 +470,15 @@ ATTR_BOOL(motion, is_hint);
 ATTR_GOBJ(motion, device);
 GDKEVENT_INIT(motion, GDK_MOTION_NOTIFY);
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+gdkeventmotion_request_motions(VALUE self)
+{
+    gdk_event_request_motions(&(get_gdkevent(self)->motion));
+    return self;
+}
+#endif
+
 /* GdkEventExpose */
 static VALUE
 gdkeventexpose_area(self)
@@ -822,6 +831,9 @@ Init_gtk_gdk_event()
     DEFINE_ACCESSOR(ev, motion, x_root);
     DEFINE_ACCESSOR(ev, motion, y_root);
     DEFINE_INIT(ev, motion);
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(ev, "request", gdkeventmotion_request_motions, 0);
+#endif
     G_DEF_SETTERS(ev);
 
     /* GdkEventExpose */
