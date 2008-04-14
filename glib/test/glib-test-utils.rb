@@ -7,8 +7,6 @@ module GLibTestUtils
   end
 
   def only_win32
-    unless GLib.const_defined?(:Win32)
-      omit("Only for Win32 platform")
-    end
+    omit("Only for Win32 platform") unless GLib.os_win32?
   end
 end

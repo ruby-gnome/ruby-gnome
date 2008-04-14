@@ -1,5 +1,7 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/glib-test-utils.rb (GLibTestUtils#only_win32): use GLib.os_win32?.
+
 	* src/rbglib_win32.c: implement
 	g_win32_get_package_installation_directory_of_module() defined in
 	2.16. Maybe work...
