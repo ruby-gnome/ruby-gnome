@@ -961,6 +961,13 @@ gdkwin_set_composited(VALUE self, VALUE composited)
     gdk_window_set_composited(_SELF(self), RVAL2CBOOL(composited));
     return self;
 }
+
+static VALUE
+gdkwin_set_opacity(VALUE self, VALUE opacity)
+{
+    gdk_window_set_opacity(_SELF(self), NUM2DBL(opacity));
+    return self;
+}
 #endif
 
 static VALUE
@@ -1205,6 +1212,7 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_functions", gdkwin_set_functions, 1);
 #if GTK_CHECK_VERSION(2, 12, 0)
     rb_define_method(gdkWindow, "set_composited", gdkwin_set_composited, 1);
+    rb_define_method(gdkWindow, "set_opacity", gdkwin_set_opacity, 1);
 #endif
     rb_define_singleton_method(gdkWindow, "toplevels", gdkwin_s_get_toplevels, 0);
 
