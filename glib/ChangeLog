@@ -1,7 +1,12 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_fileutils.c: implement g_format_size_for_display()
+	defined in 2.16.
+
+	* test/test_file_utils.rb: add.
+
 	* src/rbglib_keyfile.c:
-	- implement keyfile_load_from_dirs() defined in 2.14.
+	- implement g_key_file_load_from_dirs() defined in 2.14.
 	- define G_KEY_FILE_DESKTOP_* defined in 2.14.
 
 	* test/test_key_file.rb: add.

@@ -38,6 +38,14 @@ void        g_dir_rewind                    (GDir *dir);
 void        g_dir_close                     (GDir *dir);
 */
 
+#if GLIB_CHECK_VERSION(2, 16, 0)
+static VALUE
+rbglib_m_format_size_for_display(VALUE self, VALUE size)
+{
+    return CSTR2RVAL_FREE(g_format_size_for_display(NUM2INT(size)));
+}
+#endif
+
 void
 Init_glib_fileutils()
 {
@@ -67,4 +75,9 @@ Init_glib_fileutils()
     rb_define_const(cFileError, "IO", INT2NUM(G_FILE_ERROR_IO));
     rb_define_const(cFileError, "PERM", INT2NUM(G_FILE_ERROR_PERM));
     rb_define_const(cFileError, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
+
+#if GLIB_CHECK_VERSION(2, 16, 0)
+    rb_define_singleton_method(mGLib, "format_size_for_display",
+			       rbglib_m_format_size_for_display, 1);
+#endif
 }
