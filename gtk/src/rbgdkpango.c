@@ -150,12 +150,14 @@ Init_gtk_gdk_pango()
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
     rb_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
+    pango_attribute_destroy(tmpattr);
 
     klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);
     rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
+    pango_attribute_destroy(tmpattr);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);

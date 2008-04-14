@@ -1,5 +1,7 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgdkpango.c (Init_gtk_gdk_pango): destroy temporary object.
+
 	* src/: use RVAL2GDKCOLOR/GDKCOLOR2RVAL.
 
 	* src/rbgtk.h: add RVAL2GDKCOLOR/GDKCOLOR2RVAL.
