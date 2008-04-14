@@ -119,6 +119,14 @@ gdkkeymap_get_direction(self)
   return GENUM2RVAL(gdk_keymap_get_direction(_SELF(self)), PANGO_TYPE_DIRECTION);
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+gdkkeymap_have_bidi_layouts(VALUE self)
+{
+    return CBOOL2RVAL(gdk_keymap_have_bidi_layouts(_SELF(self)));
+}
+#endif
+
 void 
 Init_gtk_gdk_keymap()
 {
@@ -133,6 +141,10 @@ Init_gtk_gdk_keymap()
     rb_define_method(gdkKeymap, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);
     rb_define_method(gdkKeymap, "get_entries_for_keycode", gdkkeymap_get_entries_for_keycode, 1);
     rb_define_method(gdkKeymap, "direction", gdkkeymap_get_direction, 0);
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(gdkKeymap, "have_bidi_layouts?",
+		     gdkkeymap_have_bidi_layouts, 0);
+#endif
 
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkKeymapX11", "KeymapX11", mGdk);
