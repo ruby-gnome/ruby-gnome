@@ -10,6 +10,7 @@
 ************************************************/
 
 #include "global.h"
+#include <st.h>
 
 #if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
@@ -439,6 +440,72 @@ gdkdisplay_set_cursor_theme(self, theme, size)
     return self;
 }
 #endif
+
+#  if GTK_CHECK_VERSION(2, 12, 0)
+/*
+*** need gdk_x11_display_broadcast_startup_messagev() ***
+
+typedef struct _StartupMessageParameterData {
+    gchar **parameters;
+    guint i;
+} StartupMessageParameterData;
+
+static int
+collect_parameter(VALUE key, VALUE value, VALUE data)
+{
+    StartupMessageParameterData *parameter_data;
+    parameter_data = (StartupMessageParameterData *)data;
+
+    parameter_data->parameters[parameter_data->i] = RVAL2CSTR(key);
+    parameter_data->i++;
+    parameter_data->parameters[parameter_data->i] = RVAL2CSTR(value);
+    parameter_data->i++;
+
+    return ST_CONTINUE;
+}
+
+static VALUE
+gdkdisplay_broadcast_startup_message(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_message_type, rb_parameters;
+    char *message_type;
+    guint n_parameters;
+    gchar **parameters;
+
+    rb_scan_args(argc, argv, "11", &rb_message_type, &rb_parameters);
+
+    message_type = RVAL2CSTR(rb_message_type);
+    if (NIL_P(rb_parameters)) {
+	n_parameters = 0;
+	parameters = NULL;
+    }
+    else {
+	StartupMessageParameterData data;
+
+	Check_Type(rb_parameters, T_HASH);
+	n_parameters = NUM2UINT(rb_funcall(rb_parameters, rb_intern("size"), 0));
+	parameters = ALLOCA_N(gchar *, n_parameters * 2);
+	data.i = 0;
+	data.parameters = parameters;
+	rb_hash_foreach(rb_parameters, collect_parameter, (VALUE)&data);
+    }
+
+    gdk_x11_display_broadcast_startup_messagev(_SELF(self),
+					       message_type,
+					       n_parameters,
+					       parameters);
+
+    return self;
+}
+*/
+
+static VALUE
+gdkdisplay_get_startup_notification_id(VALUE self)
+{
+    return CSTR2RVAL(gdk_x11_display_get_startup_notification_id(_SELF(self)));
+}
+#  endif
+
 #endif
 #endif
 
@@ -545,6 +612,14 @@ Init_gtk_gdk_display()
     rb_define_method(gdkDisplay, "user_time", gdkdisplay_get_user_time, 0);
     rb_define_method(gdkDisplay, "set_cursor_theme", gdkdisplay_set_cursor_theme, 2);
 #endif
+#  if GTK_CHECK_VERSION(2, 12, 0)
+/*
+    rb_define_method(gdkDisplay, "broadcast_startup_message",
+		     gdkdisplay_broadcast_startup_message, -1);
+*/
+    rb_define_method(gdkDisplay, "startup_notification_id",
+		     gdkdisplay_get_startup_notification_id, 0);
+#  endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
 #endif
 #endif

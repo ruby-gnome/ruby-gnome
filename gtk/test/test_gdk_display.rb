@@ -1,21 +1,40 @@
 class TestGdkDisplay < Test::Unit::TestCase
+  include GtkTestUtils
+
   def test_supports_predicates
     display = Gdk::Display.default
 
     assert_boolean(display.supports_shapes?)
     assert_boolean(display.supports_input_shapes?)
-    if Gtk.check_version?(2, 12, 0)
-      assert_boolean(display.supports_composite?)
-    else
-      assert_respond_to(display, :supports_composite?)
-    end
+    only_gtk_version(2, 12, 0)
+    assert_boolean(display.supports_composite?)
   end
 
-  private
-  def assert_boolean(expected)
-    assert([true, false].include?(expected),
-           build_message(nil,
-                         "<true or false> expected but was\n<?>",
-                         expected))
+  def test_startup_notification_id
+    only_gtk_version(2, 12, 0)
+    only_x11
+
+    display = Gdk::Display.default
+    assert_nil(display.startup_notification_id)
+    display.startup_notification_id = "Start!!!"
+    assert_equal("Start!!!", display.startup_notification_id)
+    display.startup_notification_id = nil
+    assert_nil(display.startup_notification_id)
+  end
+
+  def test_broadcast_startup_message
+    only_gtk_version(2, 14, 0)
+    only_x11
+
+    id = "#{$$}_TIME_#{Time.now.to_i}"
+    screen = Gdk::Screen.default.number.to_s
+    assert_nothing_raised do
+      Gdk::Display.default.broadcast_startup_message("new",
+                                                     "ID" => id,
+                                                     "NAME" => "Hello World",
+                                                     "SCREEN" => screen)
+      Gdk::Display.default.broadcast_startup_message("remove",
+                                                     "ID" => id)
+    end
   end
 end
