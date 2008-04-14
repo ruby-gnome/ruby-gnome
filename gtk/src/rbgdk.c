@@ -51,10 +51,23 @@ gdk_s_set_sm_client_id(self, id)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdk_s_notify_startup_complete(self)
-    VALUE self;
+gdk_s_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 {
-    gdk_notify_startup_complete();
+    VALUE startup_id;
+
+    rb_scan_args(argc, argv, "01", &startup_id);
+
+    if (NIL_P(startup_id)) {
+	gdk_notify_startup_complete();
+    } else {
+#if GTK_CHECK_VERSION(2, 12, 0)
+	gdk_notify_startup_complete_with_id(RVAL2CSTR(startup_id));
+#else
+	rb_raise(rb_eNotImpError,
+		 "GTK+ >= 2.12 is required to use "
+		 "Gdk.notify_startup_complete with startup ID.");
+#endif
+    }
     return self;
 }
 #endif
@@ -341,8 +354,9 @@ Init_gtk_gdk()
 #endif
     rb_define_module_function(mGdk, "set_locale", gdk_s_set_locale, 0);
     rb_define_module_function(mGdk, "set_sm_client_id", gdk_s_set_sm_client_id, 1);
-#if GTK_CHECK_VERSION(2,2,0)
-    rb_define_module_function(mGdk, "notify_startup_complete", gdk_s_notify_startup_complete, 0);
+#if GTK_CHECK_VERSION(2, 2, 0)
+    rb_define_module_function(mGdk, "notify_startup_complete",
+			      gdk_s_notify_startup_complete, -1);
 #endif
     rb_define_module_function(mGdk, "program_class", gdk_s_get_program_class, 0);
     rb_define_module_function(mGdk, "set_program_class", gdk_s_set_program_class, 1);
