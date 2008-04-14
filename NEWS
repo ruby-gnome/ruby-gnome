@@ -8,6 +8,7 @@ Ruby-GNOME2-0.17.0 (unreleased yet)
 
   Main changes:
   * Ruby/GLib:
+    - Bound functions defined since 2.14 and 2.16.
     - Improved main loop polling. **
     - Improved callback handling from non Ruby thread. **
 
