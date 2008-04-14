@@ -1,5 +1,11 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_keyfile.c:
+	- implement keyfile_load_from_dirs() defined in 2.14.
+	- define G_KEY_FILE_DESKTOP_* defined in 2.14.
+
+	* test/test_key_file.rb: add.
+
 	* src/rbglib_utils.c:
 	- implement g_get_user_XXX_dir() and g_get_system_XXX_dirs().
 	- implement g_get_user_special_dir() defined in 2.14.

@@ -141,6 +141,54 @@ keyfile_load_from_data_dirs(argc, argv, self)
     return full_path ? CSTR2RVAL(full_path) : Qnil;
 }
 
+#if GLIB_CHECK_VERSION(2, 14, 0)
+static VALUE
+keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_file, rb_search_dirs, rb_flags;
+    GError* error = NULL;
+    gboolean success;
+    const gchar *file;
+    gchar **search_dirs;
+    gchar* full_path;
+    GKeyFileFlags flags;
+
+    rb_scan_args(argc, argv, "12", &rb_file, &rb_search_dirs, &rb_flags);
+
+    file = RVAL2CSTR(rb_file);
+    if (NIL_P(rb_search_dirs)) {
+	search_dirs = NULL;
+    }
+    else {
+	long i, len;
+
+	Check_Type(rb_search_dirs, T_ARRAY);
+	len = RARRAY_LEN(rb_search_dirs);
+	search_dirs = ALLOCA_N(gchar *, len + 1);
+	for (i = 0; i < len; i++) {
+	    search_dirs[i] = RVAL2CSTR(RARRAY_PTR(rb_search_dirs)[i]);
+	}
+	search_dirs[i + 1] = NULL;
+    }
+    flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
+    if (!NIL_P(rb_flags))
+        flags = RVAL2GFLAGS(rb_flags, G_TYPE_KEY_FILE_FLAGS);
+
+    if (search_dirs)
+	success = g_key_file_load_from_dirs(_SELF(self), file,
+					    (const gchar **)search_dirs,
+					    &full_path, flags, &error);
+    else
+	success = g_key_file_load_from_data_dirs(_SELF(self), file,
+						 &full_path, flags, &error);
+
+    if (!success)
+	RAISE_GERROR(error);
+
+    return CSTR2RVAL(full_path);
+}
+#endif
+
 static VALUE
 keyfile_to_data(self)
     VALUE self;
@@ -696,6 +744,9 @@ Init_glib_keyfile()
     rb_define_method(kf, "load_from_file", keyfile_load_from_file, -1);
     rb_define_method(kf, "load_from_data", keyfile_load_from_data, -1);
     rb_define_method(kf, "load_from_data_dirs", keyfile_load_from_data_dirs, -1);
+#if GLIB_CHECK_VERSION(2, 14, 0)
+    rb_define_method(kf, "load_from_dirs", keyfile_load_from_dirs, -1);
+#endif
     rb_define_method(kf, "to_data", keyfile_to_data, 0);
     rb_define_method(kf, "start_group", keyfile_get_start_group, 0);
     rb_define_method(kf, "groups", keyfile_get_groups, 0);
@@ -742,5 +793,55 @@ Init_glib_keyfile()
     G_DEF_CLASS(G_TYPE_KEY_FILE_FLAGS, "Flags", kf);
     G_DEF_CONSTANTS(kf, G_TYPE_KEY_FILE_FLAGS, "G_KEY_FILE_");
 
+#if GLIB_CHECK_VERSION(2, 14, 0)
+    /* Defines for handling freedesktop.org Desktop files */
+    rb_define_const(kf, "DESKTOP_GROUP", CSTR2RVAL(G_KEY_FILE_DESKTOP_GROUP));
+
+    rb_define_const(kf, "DESKTOP_KEY_TYPE",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TYPE));
+    rb_define_const(kf, "DESKTOP_KEY_VERSION",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_VERSION));
+    rb_define_const(kf, "DESKTOP_KEY_NAME",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NAME));
+    rb_define_const(kf, "DESKTOP_KEY_GENERIC_NAME",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME));
+    rb_define_const(kf, "DESKTOP_KEY_NO_DISPLAY",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY));
+    rb_define_const(kf, "DESKTOP_KEY_COMMENT",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_COMMENT));
+    rb_define_const(kf, "DESKTOP_KEY_ICON",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_ICON));
+    rb_define_const(kf, "DESKTOP_KEY_HIDDEN",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_HIDDEN));
+    rb_define_const(kf, "DESKTOP_KEY_ONLY_SHOW_IN",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN));
+    rb_define_const(kf, "DESKTOP_KEY_NOT_SHOW_IN",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN));
+    rb_define_const(kf, "DESKTOP_KEY_TRY_EXEC",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TRY_EXEC));
+    rb_define_const(kf, "DESKTOP_KEY_EXEC",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_EXEC));
+    rb_define_const(kf, "DESKTOP_KEY_PATH",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_PATH));
+    rb_define_const(kf, "DESKTOP_KEY_TERMINAL",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TERMINAL));
+    rb_define_const(kf, "DESKTOP_KEY_MIME_TYPE",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_MIME_TYPE));
+    rb_define_const(kf, "DESKTOP_KEY_CATEGORIES",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_CATEGORIES));
+    rb_define_const(kf, "DESKTOP_KEY_STARTUP_NOTIFY",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY));
+    rb_define_const(kf, "DESKTOP_KEY_STARTUP_WM_CLASS",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS));
+    rb_define_const(kf, "DESKTOP_KEY_URL",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_URL));
+
+    rb_define_const(kf, "DESKTOP_TYPE_APPLICATION",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_APPLICATION));
+    rb_define_const(kf, "DESKTOP_TYPE_LINK",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_LINK));
+    rb_define_const(kf, "DESKTOP_TYPE_DIRECTORY",
+                    CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_DIRECTORY));
+#endif
 #endif
 }
