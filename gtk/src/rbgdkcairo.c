@@ -25,8 +25,7 @@ static VALUE
 gdkdraw_cairo_set_source_color(self, color)
     VALUE self, color;
 {
-    gdk_cairo_set_source_color(_SELF(self),
-                               (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_cairo_set_source_color(_SELF(self), RVAL2GDKCOLOR(color));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }

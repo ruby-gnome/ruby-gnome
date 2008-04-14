@@ -52,7 +52,7 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
     VALUE self, color, writeable, best_match;
 {
     gboolean result;
-    GdkColor *c = (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR);
+    GdkColor *c = RVAL2GDKCOLOR(color);
     result = gdk_colormap_alloc_color(_SELF(self), c,
                                       RVAL2CBOOL(writeable), RVAL2CBOOL(best_match));
     return result ? INT2NUM(c->pixel) : Qnil;
@@ -64,8 +64,7 @@ static VALUE
 gdkcmap_free_color(self, color)
     VALUE self, color;
 {
-    gdk_colormap_free_colors(_SELF(self), 
-                             (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR), 1);
+    gdk_colormap_free_colors(_SELF(self), RVAL2GDKCOLOR(color), 1);
     return self;
 }
 
@@ -75,7 +74,7 @@ gdkcmap_query_color(self, pixel)
 {
     GdkColor color;
     gdk_colormap_query_color(_SELF(self), NUM2ULONG(pixel), &color);
-    return BOXED2RVAL(&color, GDK_TYPE_COLOR);
+    return GDKCOLOR2RVAL(&color);
 }
 
 static VALUE

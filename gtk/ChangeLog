@@ -1,5 +1,7 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/: use RVAL2GDKCOLOR/GDKCOLOR2RVAL.
+
 	* src/rbgtk.h: add RVAL2GDKCOLOR/GDKCOLOR2RVAL.
 
 	* src/rbgdkpango.c: implement gdk_pango_attr_emboss_color_new()

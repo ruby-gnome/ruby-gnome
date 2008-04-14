@@ -102,7 +102,7 @@ prenderer_set_override_color(self, part, color)
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_override_color(_SELF(self), 
                                           RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                                          NIL_P(color) ? NULL : (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+                                          RVAL2GDKCOLOR(color));
 #else
       rb_warning("Gdk::PangoRender#set_override_color is not supported (Require pango-1.8.1 or later");
 #endif

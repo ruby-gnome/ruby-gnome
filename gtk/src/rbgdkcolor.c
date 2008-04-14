@@ -14,7 +14,7 @@
 
 #include "global.h"
 
-#define _SELF(c) ((GdkColor*)RVAL2BOXED(c, GDK_TYPE_COLOR))
+#define _SELF(c) (RVAL2GDKCOLOR(c))
 
 static VALUE
 gdkcolor_initialize(self, red, green, blue)

@@ -53,9 +53,9 @@ gdkcursor_initialize(argc, argv, self)
         rb_scan_args(argc, argv, "60", &pixmap, &mask, &fg, &bg, &x, &y);
         cursor = gdk_cursor_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
                                             NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
-                                            NIL_P(fg)?NULL:(GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR), 
-                                            NIL_P(bg)?NULL:(GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR), 
-                                            NUM2INT(x), NUM2INT(y));
+                                            RVAL2GDKCOLOR(fg),
+                                            RVAL2GDKCOLOR(bg),
+					    NUM2INT(x), NUM2INT(y));
     }
     G_INITIALIZE(self, cursor);
        

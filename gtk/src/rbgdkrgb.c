@@ -125,7 +125,7 @@ rgb_find_color(self, colormap, color)
     VALUE self, colormap, color;
 {
     gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(colormap)),
-                       (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+                       RVAL2GDKCOLOR(color));
     return self;
 }
 

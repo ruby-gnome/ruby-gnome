@@ -91,7 +91,7 @@ style_lookup_color(self, color_name)
 {
     GdkColor color;
     if (gtk_style_lookup_color(_SELF(self), RVAL2CSTR(color_name), &color)){
-        return BOXED2RVAL(&color, GDK_TYPE_COLOR);
+        return GDKCOLOR2RVAL(&color);
     } else {
         return Qnil;
     }

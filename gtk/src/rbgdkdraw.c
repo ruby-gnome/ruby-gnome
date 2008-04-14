@@ -301,8 +301,8 @@ gdkdraw_layout_line(argc, argv, self)
     gdk_draw_layout_line_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                                      NUM2INT(x), NUM2INT(y),
                                      (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
-                                     NIL_P(fg) ? NULL : (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
-                                     NIL_P(bg) ? NULL : (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
+                                     RVAL2GDKCOLOR(fg),
+                                     RVAL2GDKCOLOR(bg));
 
     return self;
 }
@@ -319,8 +319,8 @@ gdkdraw_layout(argc, argv, self)
 
     gdk_draw_layout_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                                 NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)),
-                                NIL_P(fg) ? NULL : (GdkColor*)RVAL2BOXED(fg, GDK_TYPE_COLOR),
-                                NIL_P(bg) ? NULL : (GdkColor*)RVAL2BOXED(bg, GDK_TYPE_COLOR));
+                                RVAL2GDKCOLOR(fg),
+                                RVAL2GDKCOLOR(bg));
 
     return self;
 }

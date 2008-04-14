@@ -41,8 +41,7 @@ static VALUE
 gdkgc_set_foreground(self, color)
     VALUE self, color;
 {
-    gdk_gc_set_foreground(_SELF(self), 
-                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_gc_set_foreground(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
@@ -50,8 +49,7 @@ static VALUE
 gdkgc_set_background(self, color)
     VALUE self, color;
 {
-    gdk_gc_set_background(_SELF(self), 
-                          (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_gc_set_background(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
@@ -59,8 +57,7 @@ static VALUE
 gdkgc_set_rgb_fg_color(self, color)
     VALUE self, color;
 {
-    gdk_gc_set_rgb_fg_color(_SELF(self), 
-                            (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_gc_set_rgb_fg_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
@@ -68,8 +65,7 @@ static VALUE
 gdkgc_set_rgb_bg_color(self, color)
     VALUE self, color;
 {
-    gdk_gc_set_rgb_bg_color(_SELF(self), 
-                            (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_gc_set_rgb_bg_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 

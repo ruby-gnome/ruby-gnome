@@ -116,7 +116,7 @@ txt_app_color_set_ ## name (self, val)\
     VALUE self, val;\
 {\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    _SELF(self)->name = *(GdkColor*)RVAL2BOXED(val, GDK_TYPE_COLOR);	\
+    _SELF(self)->name = *RVAL2GDKCOLOR(val);	\
     return self;\
 }
 

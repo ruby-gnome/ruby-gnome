@@ -15,8 +15,6 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_COLOR_SELECTION(RVAL2GOBJ(self)))
-#define RVAL2COLOR(c) ((GdkColor*)RVAL2BOXED(c, GDK_TYPE_COLOR))
-#define COLOR2RVAL(c) (BOXED2RVAL(c, GDK_TYPE_COLOR))
 
 static VALUE gColorSel;
 
@@ -47,7 +45,7 @@ static VALUE
 colorsel_set_previous_color(self, color)
     VALUE self, color;
 {
-    gtk_color_selection_set_previous_color(_SELF(self), RVAL2COLOR(color));
+    gtk_color_selection_set_previous_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
@@ -57,7 +55,7 @@ colorsel_get_previous_color(self)
 {
     GdkColor color;
     gtk_color_selection_get_previous_color(_SELF(self), &color);
-    return COLOR2RVAL(&color);
+    return GDKCOLOR2RVAL(&color);
 }
 
 static VALUE
@@ -80,7 +78,7 @@ colorsel_s_palette_from_string(self, str)
     if (ret) {
         ary = rb_ary_new();
         for (i = 0; i < n_colors; i++) {
-            rb_ary_push(ary, COLOR2RVAL(&gcolors[i]));
+            rb_ary_push(ary, GDKCOLOR2RVAL(&gcolors[i]));
         }
     }
                                                                                 
@@ -108,7 +106,7 @@ colorsel_s_palette_to_string(argc, argv, self)
     gcolors = ALLOCA_N(GdkColor, len);
 
     for (i = 0; i < len; i++) {
-        gcolor = (GdkColor*)RVAL2BOXED(RARRAY(colors)->ptr[i], GDK_TYPE_COLOR);
+        gcolor = RVAL2GDKCOLOR(RARRAY(colors)->ptr[i]);
         gcolors[i] = *gcolor;
     }
 
@@ -126,7 +124,7 @@ screen_func(screen, colors, n_colors)
     VALUE func = rb_cvar_get(gColorSel, rb_intern("__palette_proc__"));
     VALUE ary = rb_ary_new();
     for (i = 0; i < n_colors; i++){
-        ary = rb_ary_push(ary, BOXED2RVAL((GdkColor*)&colors[i], GDK_TYPE_COLOR));
+        ary = rb_ary_push(ary, GDKCOLOR2RVAL((GdkColor *)&colors[i]));
     }
     if (! NIL_P(func))
         rb_funcall(func, id_call, 2, GOBJ2RVAL(screen), ary);

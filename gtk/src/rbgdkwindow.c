@@ -649,8 +649,7 @@ static VALUE
 gdkwin_set_background(self, color)
     VALUE self, color;
 {
-    gdk_window_set_background(_SELF(self), 
-                              (GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+    gdk_window_set_background(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 

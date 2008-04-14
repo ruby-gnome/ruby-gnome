@@ -27,7 +27,7 @@ colorbutton_initialize(argc, argv, self)
     if (NIL_P(color)){
         widget = gtk_color_button_new();
     } else {
-        widget = gtk_color_button_new_with_color((GdkColor*)RVAL2BOXED(color, GDK_TYPE_COLOR));
+        widget = gtk_color_button_new_with_color(RVAL2GDKCOLOR(color));
     }
 
     RBGTK_INITIALIZE(self, widget);
