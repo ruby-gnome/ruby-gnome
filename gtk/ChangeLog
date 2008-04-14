@@ -1,5 +1,12 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtk.h: add RVAL2GDKCOLOR/GDKCOLOR2RVAL.
+
+	* src/rbgdkpango.c: implement gdk_pango_attr_emboss_color_new()
+	defined in 2.12.
+
+	* test/test_gdk_pango.rb: add.
+
 	* src/rbgdk.c: implement gdk_notify_startup_complete_with_id()
 	defined in 2.12.
 

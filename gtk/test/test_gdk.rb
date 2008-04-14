@@ -1,4 +1,4 @@
-class TestGdkColor < Test::Unit::TestCase
+class TestGdk < Test::Unit::TestCase
   include GtkTestUtils
 
   def test_notify_startup_complete

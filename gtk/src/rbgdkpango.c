@@ -107,11 +107,28 @@ gdkpango_layout_line_get_clip_region(self, x_origin, y_origin, index_ranges)
                           ranges, len), GDK_TYPE_REGION);
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+gdkpango_attr_emboss_color_initialize(VALUE self, VALUE color)
+{
+    DATA_PTR(self) = gdk_pango_attr_emboss_color_new(RVAL2GDKCOLOR(color));
+    return Qnil;
+}
+
+static VALUE
+gdkpango_attr_emboss_color_value(VALUE self)
+{
+    return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color),
+		      PANGO_TYPE_COLOR);
+}
+#endif
+
 void
 Init_gtk_gdk_pango()
 {
     VALUE klass;
     PangoAttribute* tmpattr;
+    GdkColor color;
 
     VALUE mGdkPango = rb_define_module_under(mGdk, "Pango");
     VALUE context = GTYPE2CLASS(PANGO_TYPE_CONTEXT);
@@ -119,6 +136,7 @@ Init_gtk_gdk_pango()
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
     VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
+    VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
 
     rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, -1);
 
@@ -138,4 +156,14 @@ Init_gtk_gdk_pango()
     rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
+
+#if GTK_CHECK_VERSION(2, 12, 0)
+    klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);
+    rb_define_method(klass, "initialize",
+		     gdkpango_attr_emboss_color_initialize, 1);
+    rb_define_method(klass, "value", gdkpango_attr_emboss_color_value, 0);
+    tmpattr = gdk_pango_attr_emboss_color_new(&color);
+    RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
+    pango_attribute_destroy(tmpattr);
+#endif
 }

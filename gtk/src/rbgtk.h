@@ -38,6 +38,10 @@
 #define RVAL2GEV(ev) (get_gdkevent(ev))
 #define RVAL2ATOM(atom) (get_gdkatom(atom))
 
+#define RVAL2GDKCOLOR(color) ((GdkColor *)RVAL2BOXED(color, GDK_TYPE_COLOR))
+#define GDKCOLOR2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_COLOR))
+
+
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
 
@@ -160,6 +164,5 @@ extern GType gdk_timecoord_get_type(void);
 extern GdkAtom get_gdkatom(VALUE atom);
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
-
 
 #endif /* _RBGTK_H */
