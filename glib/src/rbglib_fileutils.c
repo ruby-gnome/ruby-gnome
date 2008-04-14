@@ -77,7 +77,7 @@ Init_glib_fileutils()
     rb_define_const(cFileError, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
 #if GLIB_CHECK_VERSION(2, 16, 0)
-    rb_define_singleton_method(mGLib, "format_size_for_display",
-			       rbglib_m_format_size_for_display, 1);
+    rb_define_module_function(mGLib, "format_size_for_display",
+			      rbglib_m_format_size_for_display, 1);
 #endif
 }
