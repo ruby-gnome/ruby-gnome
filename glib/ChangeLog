@@ -1,5 +1,13 @@
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_win32.c: implement
+	g_win32_get_package_installation_directory_of_module() defined in
+	2.16. Maybe work...
+
+	* test/glib-test-utils.rb: add only_win32.
+
+	* test/test_win32.rb: add.
+
 	* src/rbglib_fileutils.c: implement g_format_size_for_display()
 	defined in 2.16.
 

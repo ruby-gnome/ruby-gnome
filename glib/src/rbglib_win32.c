@@ -80,6 +80,27 @@ rbglib_m_win32_locale_filename_from_utf8_deprecated(self)
 }
 
 #endif
+
+#  if GLIB_CHECK_VERSION(2, 16, 0)
+static VALUE
+rbglib_m_win32_get_package_installation_directory_of_module(int argc,
+							    VALUE *argv,
+							    VALUE self)
+{
+    VALUE rb_module;
+    gchar *directory;
+    gpointer hmodule;
+
+    rb_scan_args(argc, argv, "01", &rb_module);
+    if (NIL_P(rb_module))
+	hmodule = NULL;
+    else
+	hmodule = GINT_TO_POINTER(NUM2INT(rb_module));
+
+    directory = g_win32_get_package_installation_directory_of_module(hmodule);
+    return CSTR2RVAL_FREE(directory);
+}
+#  endif
 #endif
 
 void
@@ -103,6 +124,13 @@ Init_glib_win32()
     /* Deprecated */
     rb_define_module_function(mGLib, "win32_locale_filename_from_utf8",
                               rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
+#  endif
+
+#  if GLIB_CHECK_VERSION(2, 16, 0)
+    rb_define_module_function(mWin32,
+			      "get_package_installation_directory_of_module",
+			      rbglib_m_win32_get_package_installation_directory_of_module,
+			      -1);
 #  endif
 #endif
 }
