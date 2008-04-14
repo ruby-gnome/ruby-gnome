@@ -112,6 +112,60 @@ rbglib_m_real_name(self)
     return CSTR2RVAL(g_get_real_name());
 }
 
+#if GLIB_CHECK_VERSION(2, 6, 0)
+static VALUE
+rbglib_m_user_cache_dir(VALUE self)
+{
+    return CSTR2RVAL(g_get_user_cache_dir());
+}
+
+static VALUE
+rbglib_m_user_data_dir(VALUE self)
+{
+    return CSTR2RVAL(g_get_user_data_dir());
+}
+
+static VALUE
+rbglib_m_user_config_dir(VALUE self)
+{
+    return CSTR2RVAL(g_get_user_config_dir());
+}
+
+static VALUE
+strv_to_array(const gchar * const *strv)
+{
+    VALUE array;
+
+    array = rb_ary_new();
+    for (; *strv; strv++) {
+	rb_ary_push(array, CSTR2RVAL(*strv));
+    }
+
+    return array;
+}
+
+static VALUE
+rbglib_m_system_data_dirs(VALUE self)
+{
+    return strv_to_array(g_get_system_data_dirs());
+}
+
+static VALUE
+rbglib_m_system_config_dirs(VALUE self)
+{
+    return strv_to_array(g_get_system_config_dirs());
+}
+#endif
+
+#if GLIB_CHECK_VERSION(2, 14, 0)
+static VALUE
+rbglib_m_get_user_special_dir(VALUE self, VALUE directory)
+{
+    return CSTR2RVAL(g_get_user_special_dir(RVAL2GENUM(directory,
+						       G_TYPE_USER_DIRECTORY)));
+}
+#endif
+
 static VALUE
 rbglib_m_home_dir(self)
     VALUE self;
@@ -271,6 +325,11 @@ void
 Init_glib_utils()
 {
     /* glib/gutils.h */
+#if GLIB_CHECK_VERSION(2, 14, 0)
+    G_DEF_CLASS(G_TYPE_USER_DIRECTORY, "UserDirectory", mGLib);
+    G_DEF_CONSTANTS(mGLib, G_TYPE_USER_DIRECTORY, "G_");
+#endif
+
 #if GLIB_CHECK_VERSION(2,2,0)
     rb_define_module_function(mGLib, "application_name", rbglib_m_application_name, 0);
     rb_define_module_function(mGLib, "set_application_name", rbglib_m_set_application_name, 1);
@@ -290,9 +349,27 @@ Init_glib_utils()
 #endif
     rb_define_module_function(mGLib, "user_name", rbglib_m_user_name, 0);
     rb_define_module_function(mGLib, "real_name", rbglib_m_real_name, 0);
+
+#if GLIB_CHECK_VERSION(2, 6, 0)
+    rb_define_module_function(mGLib, "user_cache_dir",
+			      rbglib_m_user_cache_dir, 0);
+    rb_define_module_function(mGLib, "user_data_dir",
+			      rbglib_m_user_data_dir, 0);
+    rb_define_module_function(mGLib, "user_config_dir",
+			      rbglib_m_user_config_dir, 0);
+    rb_define_module_function(mGLib, "system_data_dirs",
+			      rbglib_m_system_data_dirs, 0);
+    rb_define_module_function(mGLib, "system_config_dirs",
+			      rbglib_m_system_config_dirs, 0);
+#endif
+#if GLIB_CHECK_VERSION(2, 14, 0)
+    rb_define_module_function(mGLib, "get_user_special_dir",
+			      rbglib_m_get_user_special_dir, 1);
+#endif
     rb_define_module_function(mGLib, "home_dir", rbglib_m_home_dir, 0);
     rb_define_module_function(mGLib, "tmp_dir", rbglib_m_tmp_dir, 0);
     rb_define_module_function(mGLib, "current_dir", rbglib_m_current_dir, 0);
+
     rb_define_module_function(mGLib, "path_is_absolute?", rbglib_m_path_is_absolute, 1);
     rb_define_module_function(mGLib, "path_skip_root", rbglib_m_path_skip_root, 1);
     rb_define_module_function(mGLib, "path_get_basename", rbglib_m_path_get_basename, 1);

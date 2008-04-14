@@ -276,13 +276,13 @@ union       GDoubleIEEE754;
     Init_glib_convert();
     Init_glib_messages();
     Init_glib_fileutils();
-    Init_glib_utils();
     Init_glib_i18n();
     Init_glib_win32();
 
     Init_gobject();
 
     /* Require GBoxed/GObject */
+    Init_glib_utils();
     Init_glib_spawn();
     Init_glib_main_loop();
     Init_glib_source();

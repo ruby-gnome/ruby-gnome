@@ -1,3 +1,15 @@
+2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_utils.c:
+	- implement g_get_user_XXX_dir() and g_get_system_XXX_dirs().
+	- implement g_get_user_special_dir() defined in 2.14.
+
+	* test/test_utils.rb: add.
+
+	* src/lib/glib2.rb (GLib::UserDirectory): remove DIRECTORY_ prefix.
+
+	* src/rbglib.c: Init_glib_utils() use G_DEF_CLASS().
+
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_unicode.c, test/test_unicode.rb: bind Unicode related

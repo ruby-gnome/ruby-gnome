@@ -13,6 +13,8 @@ if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
   }.join('') + ENV['PATH']
 end
 
+require 'English'
+
 module GLib
   module_function
   def check_binding_version?(major, minor, micro)
@@ -149,6 +151,16 @@ module GLib
         level = 127
       end
       GLib::Log.set_handler(domain, level)
+    end
+  end
+
+  if const_defined?(:UserDirectory)
+    class UserDirectory
+      constants.each do |name|
+        if /\ADIRECTORY_/ =~ name
+          const_set($POSTMATCH, const_get(name))
+        end
+      end
     end
   end
 
