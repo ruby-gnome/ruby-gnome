@@ -34,9 +34,6 @@
 extern VALUE mGst;
 
 extern VALUE rb_cGstMiniObject;
-extern VALUE rb_cGstEvent;
-/* Gst::EventSeek class (needed for inheritance) */
-extern VALUE cGstEventSeek;
 
 #define RBGST_INITIALIZE(obj,gstobj) \
     (rbgst_initialize_gstobject(obj, GST_OBJECT(gstobj)))
