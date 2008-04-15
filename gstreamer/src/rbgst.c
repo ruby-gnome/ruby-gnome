@@ -88,7 +88,6 @@ Init_gst_classes (void)
     Init_gst_element ();
     Init_gst_elementfactory ();
     Init_gst_seek();
-    Init_gst_seek ();
     Init_gst_format ();
     Init_gst_structure();
     Init_gst_index ();
