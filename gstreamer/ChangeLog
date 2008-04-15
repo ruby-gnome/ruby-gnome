@@ -23,7 +23,7 @@
 	* src/rbgst-pipeline.c: rename from src/rbgstpipeline.c.
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
-  implementation of Gst::Event:gstreamer/ChangeLog
+
 	* src/rbgstxoverlay.c: Add Gst::XOverlay#set_xwindow_id_with_buswatch helper
 	function. To properly set the xwindow id of an XOverlay one has to listen to
 	its messages in sync. This is quite expensive to do in ruby, so do it in a C
