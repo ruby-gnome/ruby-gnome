@@ -1,3 +1,9 @@
+2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil.h:
+	- GLIST2ARY_WITH_FREE -> GLIST2ARY_FREE.
+	- GSLIST2ARY_WITH_FREE -> GSLIST2ARY_FREE.
+
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/glib-test-utils.rb (GLibTestUtils#only_win32): use GLib.os_win32?.
