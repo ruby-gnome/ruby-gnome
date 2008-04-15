@@ -1,20 +1,25 @@
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgstxoverlay.c: Add Gst::XOverlay#set_xwindow_id_with_buswatch helper
 	function. To properly set the xwindow id of an XOverlay one has to listen to
 	its messages in sync. This is quite expensive to do in ruby, so do it in a C
 	helper
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
-	* "src/rbgstpipeline.c: Fix typo
+
+	* src/rbgstpipeline.c: Fix typo
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-seek.c, src/rbgst.c: Add seek flags and types definitions
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-query.c, src/rbgst.c, src/rbgst.h: Add an implementation of
 	Gst::Query
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-element.c: Spawn an extra thread to perform the get_state,
 	set_state, query and send_event functions so the ruby interpreter thread c
 	continue during these functions so it can handle signals which might be
@@ -23,6 +28,7 @@
 	deadlock
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgstelement.c, src/rbgst.h: Correct refcounting for Gst::Element#bus
 
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
