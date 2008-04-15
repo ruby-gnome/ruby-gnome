@@ -28,7 +28,9 @@ Init_gst_seek (void)
 {
     VALUE c = rb_define_module_under(mGst, "Seek");
 
+    G_DEF_CLASS(GST_TYPE_SEEK_TYPE, "SeekType", mGst);
     G_DEF_CONSTANTS(c, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
 
+    G_DEF_CLASS(GST_TYPE_SEEK_FLAGS, "SeekFlags", mGst);
     G_DEF_CONSTANTS(c, GST_TYPE_SEEK_FLAGS, "GST_SEEK_");
 }
