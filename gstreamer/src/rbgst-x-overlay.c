@@ -92,28 +92,28 @@ rb_gst_x_overlay_set_xwindow_id_with_buswatch(VALUE self, VALUE bus,
 }
 
 static VALUE
-rb_gst_x_overlay_set_xwindow_id (VALUE self, VALUE x_window_id)
+rb_gst_x_overlay_set_xwindow_id(VALUE self, VALUE x_window_id)
 {
     gst_x_overlay_set_xwindow_id(SELF(self), NUM2ULONG(x_window_id));
     return self;
 }
 
 static VALUE
-rb_gst_x_overlay_expose (VALUE self)
+rb_gst_x_overlay_expose(VALUE self)
 {
     gst_x_overlay_expose(SELF(self));
     return self;
 }
 
 static VALUE
-rb_gst_x_overlay_got_xwindow_id (VALUE self, VALUE x_window_id)
+rb_gst_x_overlay_got_xwindow_id(VALUE self, VALUE x_window_id)
 {
     gst_x_overlay_got_xwindow_id(SELF(self), NUM2ULL(x_window_id));
     return self;
 }
 
 void
-Init_gst_x_overlay (void)
+Init_gst_x_overlay(void)
 {
     VALUE i = G_DEF_INTERFACE(GST_TYPE_X_OVERLAY, "XOverlay", mGst);
     
