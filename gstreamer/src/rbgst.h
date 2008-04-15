@@ -59,6 +59,8 @@ extern VALUE cGstEventSeek;
 #define RVAL2GST_BUF(obj)       (GST_BUFFER(RVAL2GOBJ(obj)))
 #define RVAL2GST_MSG(obj)       (GST_MESSAGE(RVAL2GOBJ(obj)))
 #define RVAL2GST_ELEMENT(obj)   (GST_ELEMENT(RVAL2GOBJ(obj)))
+#define RVAL2GST_EVENT(obj)     (GST_EVENT(RVAL2GOBJ(obj)))
+#define RVAL2GST_QUERY(obj)     (GST_QUERY(RVAL2GOBJ(obj)))
 #define GST_ELEMENT2RVAL(obj)   (GOBJ2RVAL(obj))
 #define RVAL2GST_ELEMENT_FACTORY(obj) \
                                 (GST_ELEMENT_FACTORY(RVAL2GOBJ(obj)))

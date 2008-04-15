@@ -1,4 +1,12 @@
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgst-element.c: Spawn an extra thread to perform the get_state,
+	set_state, query and send_event functions so the ruby interpreter thread c
+	continue during these functions so it can handle signals which might be
+	needed to complete these functions.
+	* test/test_thread_handling.rb: Add test of to ensure state changes don't
+	deadlock
+
+2008-04-15  Sjoerd Simons <sjoerd@luon.net>
 	* src/rbgstelement.c, src/rbgst.h: Correct refcounting for Gst::Element#bus
 
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
