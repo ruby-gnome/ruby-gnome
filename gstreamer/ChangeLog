@@ -1,3 +1,6 @@
+2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgstelement.c, src/rbgst.h: Correct refcounting for Gst::Element#bus
+
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c, src/rbgst-child-proxy.c: just define

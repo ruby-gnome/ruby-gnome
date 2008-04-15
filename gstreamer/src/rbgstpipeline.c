@@ -1,5 +1,6 @@
 
 /*
+ * Copyright (C) 2008 Sjoerd Simons <sjoerd@luon.net>
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
  * This file is part of Ruby/GStreamer.
@@ -59,7 +60,21 @@ rb_gst_pipeline_new (int argc, VALUE *argv, VALUE self)
 static VALUE
 rb_gst_pipeline_get_bus(VALUE self)
 {
-    return RGST_BUS2RVAL(gst_pipeline_get_bus(SELF(self)));
+    GstBus *bus;
+    VALUE ret;
+
+    bus = gst_pipeline_get_bus(SELF(self));
+    if (bus == NULL)
+      return Qnil;
+
+    ret = RGST_BUS2RVAL_UNREF(bus);
+
+    /* Make the bus a child of the pipeline as their (minimum) livetimes are
+     * bound together.. A pipeline can potentially change it's bus though, but
+     * we have no way to catch that case */
+    G_CHILD_ADD(self, ret);
+
+    return ret;
 }
 
 void
