@@ -327,12 +327,12 @@ Init_gst_event (void)
     rb_cGstEvent ## type =                                          \
         rb_define_class_under(mGst, "Event" #type, rb_cGstEvent);   \
     rb_define_method(rb_cGstEvent ## type, "initialize",            \
-      lctype ## _initialize, arguments)
+                     lctype ## _initialize, arguments)
 
 #define DEFINE_EVENT_PARSE(type, lctype, arguments)                 \
     DEFINE_EVENT(type, lctype, arguments);                          \
     rb_define_method(rb_cGstEvent ## type, "parse",                 \
-      lctype ## _parse, 0)                                          \
+                     lctype ## _parse, 0)
 
     DEFINE_EVENT(FlushStart, flush_start, 0);
     DEFINE_EVENT(FlushStop,  flush_stop, 0);
