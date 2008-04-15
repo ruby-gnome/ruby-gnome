@@ -102,7 +102,7 @@ flush_start_initialize(VALUE self)
 
     event = gst_event_new_flush_start();
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -113,7 +113,7 @@ flush_stop_initialize(VALUE self)
 
     event = gst_event_new_flush_start();
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -124,13 +124,13 @@ eos_initialize(VALUE self)
 
     event = gst_event_new_eos();
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
 static VALUE
 newsegment_initialize(VALUE self, VALUE update, VALUE rate, VALUE applied_rate,
-    VALUE format, VALUE start, VALUE stop, VALUE position)
+                      VALUE format, VALUE start, VALUE stop, VALUE position)
 {
     GstEvent *event;
 
@@ -142,7 +142,7 @@ newsegment_initialize(VALUE self, VALUE update, VALUE rate, VALUE applied_rate,
                                            NUM2LL(stop),
                                            NUM2LL(position));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -158,9 +158,9 @@ newsegment_parse(VALUE self)
                                      &applied_rate, &format, &start, &stop,
                                      &position);
 
-    return rb_ary_new3 (7, CBOOL2RVAL(update), DBL2NUM(update), DBL2NUM(rate),
-                        GST_FORMAT2RVAL(format), LL2NUM(start), LL2NUM(stop),
-                        LL2NUM(position));
+    return rb_ary_new3(7, CBOOL2RVAL(update), DBL2NUM(update), DBL2NUM(rate),
+                       GST_FORMAT2RVAL(format), LL2NUM(start), LL2NUM(stop),
+                       LL2NUM(position));
 }
 
 static VALUE
@@ -169,7 +169,7 @@ tag_initialize(VALUE self, VALUE taglist)
     GstEvent *event;
     event = gst_event_new_tag(RVAL2GST_STRUCT(taglist));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -185,14 +185,14 @@ tag_parse(VALUE self)
 
 static VALUE
 buffersize_initialize(VALUE self, VALUE format, VALUE minsize, VALUE maxsize,
-    VALUE async)
+                      VALUE async)
 {
     GstEvent *event;
 
     event = gst_event_new_buffer_size(RVAL2GST_FORMAT(format), NUM2LL(minsize),
                                       NUM2LL(maxsize), RVAL2CBOOL(async));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -207,8 +207,8 @@ buffersize_parse(VALUE self)
     gst_event_parse_buffer_size(RGST_EVENT(self), &format, &minsize,
                                 &maxsize, &async);
 
-    return rb_ary_new3 (4, GST_FORMAT2RVAL(format), LL2NUM(minsize),
-                        LL2NUM(maxsize), CBOOL2RVAL(async));
+    return rb_ary_new3(4, GST_FORMAT2RVAL(format), LL2NUM(minsize),
+                       LL2NUM(maxsize), CBOOL2RVAL(async));
 }
 
 static VALUE
@@ -219,7 +219,7 @@ qos_initialize(VALUE self, VALUE portion, VALUE clockdiff, VALUE timestamp)
     event = gst_event_new_qos(NUM2DBL(portion), NUM2LL(clockdiff),
                               NUM2ULL(timestamp));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -232,8 +232,8 @@ qos_parse(VALUE self)
 
     gst_event_parse_qos(RGST_EVENT(self), &proportion, &diff, &timestamp);
 
-    return rb_ary_new3 (3, DBL2NUM(proportion), LL2NUM(diff),
-                        ULL2NUM(timestamp));
+    return rb_ary_new3(3, DBL2NUM(proportion), LL2NUM(diff),
+                       ULL2NUM(timestamp));
 }
 
 static VALUE
@@ -250,7 +250,7 @@ seek_initialize(VALUE self, VALUE rate, VALUE format, VALUE flags,
                                RVAL2GENUM(stop_type, GST_TYPE_SEEK_TYPE),
                                NUM2ULL(stop));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -266,11 +266,11 @@ seek_parse(VALUE self)
     gst_event_parse_seek(RGST_EVENT(self), &rate, &format, &flags, &start_type,
                          &start, &stop_type, &stop);
 
-    return rb_ary_new3 (6, DBL2NUM(rate), GST_FORMAT2RVAL(format),
-                        GFLAGS2RVAL(start_type, GST_TYPE_SEEK_FLAGS),
-                        LL2NUM(start),
-                        GFLAGS2RVAL(stop_type, GST_TYPE_SEEK_FLAGS),
-                        LL2NUM(stop));
+    return rb_ary_new3(6, DBL2NUM(rate), GST_FORMAT2RVAL(format),
+                       GFLAGS2RVAL(start_type, GST_TYPE_SEEK_FLAGS),
+                       LL2NUM(start),
+                       GFLAGS2RVAL(stop_type, GST_TYPE_SEEK_FLAGS),
+                       LL2NUM(stop));
 }
 
 static VALUE
@@ -280,7 +280,7 @@ navigation_initialize(VALUE self, VALUE structure)
 
     event = gst_event_new_navigation(RVAL2GST_STRUCT(structure));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
@@ -291,7 +291,7 @@ latency_initialize(VALUE self, VALUE latency)
 
     event = gst_event_new_latency(NUM2ULL(latency));
 
-    G_INITIALIZE (self, event);
+    G_INITIALIZE(self, event);
     return Qnil;
 }
 
