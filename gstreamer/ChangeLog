@@ -1,5 +1,7 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-event.c: add missing definition.
+
 	* src/rbgst-event.c: fix style.
 
 	* src/rbgst.c (Init_gst_classes):

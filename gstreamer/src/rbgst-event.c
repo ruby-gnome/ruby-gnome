@@ -336,6 +336,7 @@ Init_gst_event (void)
 
     DEFINE_EVENT(FlushStart, flush_start, 0);
     DEFINE_EVENT(FlushStop,  flush_stop, 0);
+    DEFINE_EVENT(EOS, eos, 0);
     DEFINE_EVENT_PARSE(NewSegment, newsegment, 7);
     DEFINE_EVENT_PARSE(Tag, tag, 1);
     DEFINE_EVENT_PARSE(BufferSize, buffersize, 4);
