@@ -1,4 +1,8 @@
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgst-query.c, src/rbgst.c, src/rbgst.h: Add an implementation of
+	Gst::Query
+
+2008-04-15  Sjoerd Simons <sjoerd@luon.net>
 	* src/rbgst-element.c: Spawn an extra thread to perform the get_state,
 	set_state, query and send_event functions so the ruby interpreter thread c
 	continue during these functions so it can handle signals which might be

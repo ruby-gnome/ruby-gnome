@@ -58,6 +58,7 @@ Init_gst_classes (void)
     extern void Init_gst_pipeline (void);
     extern void Init_gst_plugin (void);
     extern void Init_gst_plugin_feature (void);
+    extern void Init_gst_query (void);
     extern void Init_gst_querytype (void);
     extern void Init_gst_registry (void);
     extern void Init_gst_registry_pool (void);
@@ -117,6 +118,7 @@ Init_gst_classes (void)
     Init_gst_mini_object();
     Init_gst_buffer();
     Init_gst_message();
+    Init_gst_query();
 
 #if defined(HAVE_GST_OVERLAY)
     Init_gst_x_overlay ();
