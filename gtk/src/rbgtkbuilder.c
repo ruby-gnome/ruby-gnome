@@ -85,7 +85,7 @@ builder_get_object(VALUE self, VALUE name)
 static VALUE
 builder_get_objects(VALUE self)
 {
-    return GSLIST2ARY_WITH_FREE(gtk_builder_get_objects(_SELF(self)));
+    return GSLIST2ARY_FREE(gtk_builder_get_objects(_SELF(self)));
 }
 
 static void

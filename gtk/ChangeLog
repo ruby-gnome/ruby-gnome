@@ -1,5 +1,7 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkbuilder.c: GSLIST2ARY_WITH_FREE -> GSLIST2ARY_FREE.
+
 	* test/test_gtk_builder.rb: use only_gtk_version.
 
 	* test/test_gtk_about_dialog.rb: add.
