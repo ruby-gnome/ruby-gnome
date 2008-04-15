@@ -58,7 +58,7 @@ Init_gst_classes (void)
     extern void Init_gst_pipeline (void);
     extern void Init_gst_plugin (void);
     extern void Init_gst_plugin_feature (void);
-    extern void Init_gst_query (void);
+    extern void Init_gst_query(void);
     extern void Init_gst_querytype (void);
     extern void Init_gst_registry (void);
     extern void Init_gst_registry_pool (void);
