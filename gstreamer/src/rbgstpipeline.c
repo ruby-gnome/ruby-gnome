@@ -67,7 +67,7 @@ rb_gst_pipeline_get_bus(VALUE self)
     if (bus == NULL)
       return Qnil;
 
-    ret = RGST_BUS2RVAL_UNREF(bus);
+    ret = GST_BUS2RVAL_UNREF(bus);
 
     /* Make the bus a child of the pipeline as their (minimum) livetimes are
      * bound together.. A pipeline can potentially change it's bus though, but

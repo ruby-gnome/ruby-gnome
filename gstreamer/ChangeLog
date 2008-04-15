@@ -1,4 +1,7 @@
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+	* "src/rbgstpipeline.c: Fix typo
+
+2008-04-15  Sjoerd Simons <sjoerd@luon.net>
 	* src/rbgst-seek.c, src/rbgst.c: Add seek flags and types definitions
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
