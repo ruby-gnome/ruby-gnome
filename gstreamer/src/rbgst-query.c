@@ -91,7 +91,7 @@ position_initialize(VALUE self, VALUE format)
 
     query = gst_query_new_position(RVAL2GST_FORMAT(format));
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -103,7 +103,7 @@ position_parse(VALUE self)
 
     gst_query_parse_position(RVAL2GST_QUERY(self), &format, &cur);
 
-    return rb_ary_new3 (2, GST_FORMAT2RVAL(format), LL2NUM(cur));
+    return rb_ary_new3(2, GST_FORMAT2RVAL(format), LL2NUM(cur));
 }
 
 static VALUE
@@ -113,7 +113,7 @@ duration_initialize(VALUE self, VALUE format)
 
     query = gst_query_new_duration(RVAL2GST_FORMAT(format));
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -125,7 +125,7 @@ duration_parse(VALUE self)
 
     gst_query_parse_duration(RVAL2GST_QUERY(self), &format, &cur);
 
-    return rb_ary_new3 (2, GST_FORMAT2RVAL(format), LL2NUM(cur));
+    return rb_ary_new3(2, GST_FORMAT2RVAL(format), LL2NUM(cur));
 }
 
 static VALUE
@@ -135,7 +135,7 @@ latency_initialize(VALUE self)
 
     query = gst_query_new_latency();
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -147,10 +147,10 @@ latency_parse(VALUE self)
     gboolean live;
 
     gst_query_parse_latency(RVAL2GST_QUERY(self), &live, &min_latency,
-        &max_latency);
+                            &max_latency);
 
-    return rb_ary_new3 (3, CBOOL2RVAL(live), ULL2NUM(min_latency),
-       ULL2NUM(max_latency));
+    return rb_ary_new3(3, CBOOL2RVAL(live), ULL2NUM(min_latency),
+                       ULL2NUM(max_latency));
 }
 
 
@@ -161,7 +161,7 @@ seeking_initialize(VALUE self, VALUE format)
 
     query = gst_query_new_seeking(RVAL2GST_FORMAT(format));
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -173,10 +173,10 @@ seeking_parse(VALUE self)
     gint64 segment_start, segment_end;
 
     gst_query_parse_seeking(RVAL2GST_QUERY(self), &format, &seekable,
-       &segment_start, &segment_end);
+                            &segment_start, &segment_end);
 
-    return rb_ary_new3 (4, GST_FORMAT2RVAL(format), CBOOL2RVAL(seekable),
-        LL2NUM(segment_start), LL2NUM(segment_end));
+    return rb_ary_new3(4, GST_FORMAT2RVAL(format), CBOOL2RVAL(seekable),
+                       LL2NUM(segment_start), LL2NUM(segment_end));
 }
 
 
@@ -187,7 +187,7 @@ segment_initialize(VALUE self, VALUE format)
 
     query = gst_query_new_segment(RVAL2GST_FORMAT(format));
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -199,22 +199,21 @@ segment_parse(VALUE self)
     gint64 start_value, stop_value;
 
     gst_query_parse_segment(RVAL2GST_QUERY(self), &rate, &format,
-       &start_value, &stop_value);
+                            &start_value, &stop_value);
 
-    return rb_ary_new3 (4, rb_dbl2big(rate), GST_FORMAT2RVAL(format),
-        LL2NUM(start_value), LL2NUM(stop_value));
+    return rb_ary_new3(4, rb_dbl2big(rate), GST_FORMAT2RVAL(format),
+                        LL2NUM(start_value), LL2NUM(stop_value));
 }
 
 static VALUE
-convert_initialize(VALUE self, VALUE src_format, VALUE value,
-    VALUE dest_format)
+convert_initialize(VALUE self, VALUE src_format, VALUE value, VALUE dest_format)
 {
     GstQuery *query;
 
     query = gst_query_new_convert(GST_FORMAT2RVAL(src_format),
                                   NUM2LL(value), GST_FORMAT2RVAL(dest_format));
 
-    G_INITIALIZE (self, query);
+    G_INITIALIZE(self, query);
     return Qnil;
 }
 
@@ -225,10 +224,10 @@ convert_parse(VALUE self)
     gint64 src_value, dest_value;
 
     gst_query_parse_convert(RVAL2GST_QUERY(self), &src_format, &src_value,
-       &dest_format, &dest_value);
+                            &dest_format, &dest_value);
 
-    return rb_ary_new3 (4, GST_FORMAT2RVAL(src_format), LL2NUM(src_value),
-        RVAL2GST_FORMAT(dest_format), LL2NUM(dest_value));
+    return rb_ary_new3(4, GST_FORMAT2RVAL(src_format), LL2NUM(src_value),
+                       RVAL2GST_FORMAT(dest_format), LL2NUM(dest_value));
 }
 
 
@@ -255,7 +254,7 @@ formats_parse(VALUE self)
     for (i = 0 ; i< n_formats; i++) {
         GstFormat format;
         gst_query_parse_formats_nth(RVAL2GST_QUERY(self), i, &format);
-        rb_ary_push (ret, GST_FORMAT2RVAL(format));
+        rb_ary_push(ret, GST_FORMAT2RVAL(format));
     }
 
     return ret;

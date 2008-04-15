@@ -1,5 +1,7 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-query.c: fix style.
+
 	* src/rbgst-pipeline.c: rename from src/rbgstpipeline.c.
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
