@@ -1,3 +1,7 @@
+2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gtk_about_dialog.rb: add.
+
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdisplay.c: implement
