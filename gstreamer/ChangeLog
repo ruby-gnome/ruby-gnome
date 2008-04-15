@@ -1,5 +1,7 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-x-overlay.c: fix wrong cast.
+
 	* src/rbgst-x-overlay.c: rename from src/rbgstxoverlay.c.
 
 	* src/rbgst-seek.c: define classes.

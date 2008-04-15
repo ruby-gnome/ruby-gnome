@@ -87,7 +87,7 @@ rb_gst_x_overlay_set_xwindow_id_with_buswatch(VALUE self, VALUE bus,
     gst_bus_enable_sync_message_emission(GST_BUS(xid_cb_data->bus));
     xid_cb_data->cb_id =
       g_signal_connect_object(xid_cb_data->bus, "sync-message",
-                            (GFunc *)bus_sync_func_cb, sink, 0);
+                              G_CALLBACK(bus_sync_func_cb), sink, 0);
     return self;
 }
 
