@@ -1,3 +1,5 @@
+require 'tempfile'
+
 module GtkTestUtils
   private
   def only_gtk_version(major, minor, micro)

@@ -1,5 +1,7 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gtk_builder.rb: use only_gtk_version.
+
 	* test/test_gtk_about_dialog.rb: add.
 
 2008-04-14  Kouhei Sutou  <kou@cozmixng.org>

@@ -1,32 +1,20 @@
-require 'tempfile'
-
 class TestGtkBuilder < Test::Unit::TestCase
-  def test_constants
-    access_builder_error = Proc.new do
-      assert_kind_of(Gtk::BuilderError, Gtk::BuilderError::INVALID_TAG)
-    end
+  include GtkTestUtils
 
-    if Gtk.check_version?(2, 12, 0)
-      assert_nothing_raised(&access_builder_error)
-    else
-      assert_raise(NameError, &access_builder_error)
-    end
+  def test_constants
+    only_gtk_version(2, 12, 0)
+    assert_kind_of(Gtk::BuilderError, Gtk::BuilderError::INVALID_TAG)
   end
 
   def test_new
-    create_builder = Proc.new do
+    only_gtk_version(2, 12, 0)
+    assert_nothing_raised do
       Gtk::Builder.new
-    end
-
-    if Gtk.check_version?(2, 12, 0)
-      assert_nothing_raised(&create_builder)
-    else
-      assert_raise(NameError, &create_builder)
     end
   end
 
   def test_add_from_file
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -36,7 +24,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_from_string
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -46,7 +34,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_with_file
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -56,7 +44,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_with_string
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -66,7 +54,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_chain
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -77,7 +65,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_objects
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nothing_raised do
@@ -89,7 +77,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_translation_domain
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nil(builder.translation_domain)
@@ -98,7 +86,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_connect_signals
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     handler_names = []
 
@@ -119,7 +107,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_connect_signals_with_no_signal_ui_definition
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     handler_names = []
 
@@ -139,7 +127,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_get_type_from_name
-    return unless Gtk.check_version?(2, 12, 0)
+    only_gtk_version(2, 12, 0)
 
     builder = Gtk::Builder.new
     assert_nil(builder.get_type("XXX"))
