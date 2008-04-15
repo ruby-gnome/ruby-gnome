@@ -39,7 +39,7 @@ Init_gst_classes (void)
     extern void Init_gst_clock_entry (void);
     extern void Init_gst_element (void);
     extern void Init_gst_elementfactory (void);
-    extern void Init_gst_event (void);
+    extern void Init_gst_event(void);
     extern void Init_gst_format (void);
     extern void Init_gst_seek(void);
     extern void Init_gst_structure(void);
@@ -115,7 +115,7 @@ Init_gst_classes (void)
     Init_gst_buffer();
     Init_gst_message();
     Init_gst_query();
-    Init_gst_event ();
+    Init_gst_event();
 
 #if defined(HAVE_GST_OVERLAY)
     Init_gst_x_overlay ();
