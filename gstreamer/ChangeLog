@@ -1,5 +1,9 @@
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_event.rb: add.
+
+	* src/rbgst-event.c: define class.
+
 	* src/rbgst-event.c: add missing definition.
 
 	* src/rbgst-event.c: fix style.

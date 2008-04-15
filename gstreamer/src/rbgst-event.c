@@ -321,6 +321,7 @@ Init_gst_event (void)
 
     rb_cGstEvent = G_DEF_CLASS (GST_TYPE_EVENT, "Event", mGst);
     rb_define_method(rb_cGstEvent, "get_type", rbgst_event_get_type, 0);
+    G_DEF_CLASS(GST_TYPE_EVENT_TYPE, "EventType", mGst);
     G_DEF_CONSTANTS(rb_cGstEvent, GST_TYPE_EVENT_TYPE, "GST_EVENT_");
 
 #define DEFINE_EVENT(type, lctype, arguments) \
