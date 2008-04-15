@@ -1,4 +1,10 @@
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
+	* src/rbgstxoverlay.c: Add Gst::XOverlay#set_xwindow_id_with_buswatch helper
+	function. To properly set the xwindow id of an XOverlay one has to listen to
+	its messages in sync. This is quite expensive to do in ruby, so do it in a C
+	helper
+
+2008-04-15  Sjoerd Simons <sjoerd@luon.net>
 	* "src/rbgstpipeline.c: Fix typo
 
 2008-04-15  Sjoerd Simons <sjoerd@luon.net>
