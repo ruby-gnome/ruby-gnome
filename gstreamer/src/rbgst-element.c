@@ -39,15 +39,6 @@
 #define NOTIFY_MESSAGE "R"
 #define NOTIFY_MESSAGE_SIZE 1
 
-typedef struct _StateData {
-    GstElement *element;
-    GstState state;
-    GstState pending;
-    GstStateChangeReturn result;
-    GstClockTime timeout;
-    int notify_fd;
-} StateData;
-
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
 static ID id_gtype;
@@ -109,20 +100,24 @@ rb_gst_element_thread_do_threaded(GThreadPool **pool, GFunc function,
         *pool = g_thread_pool_new(function,
             NULL, -1, FALSE, &error);
       if (pool == NULL) {
+          /* This only ever happens if threads aren't supported. In that case
+           * things should have aborted long before. So abort */
           rb_bug("Couldn't create rbgst thread: %s", error->message);
       }
     }
 
 
     if (pipe(comm) != 0) {
-        rb_bug("Unable to create rbgst communication pipe");
+        rb_sys_fail("Unable to create rbgst communication pipe");
     }
 
     data->writefd = comm[1];
 
     g_thread_pool_push(*pool, data, &error);
     if (error != NULL) {
-        rb_bug("Couldn't create rbgst thread: %s", error->message);
+        /* Only happens if creating a new thread fails */
+        rb_raise(rb_eRuntimeError, "Couldn't create rbgst thread: %s",
+                 error->message);
     }
 
     rb_thread_wait_fd(comm[0]);

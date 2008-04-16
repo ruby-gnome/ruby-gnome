@@ -1,3 +1,7 @@
+2008-04-16  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-element.c: _raise instead of _bug where appropriate
+
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_event.rb: add.
