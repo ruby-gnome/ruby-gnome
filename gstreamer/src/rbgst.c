@@ -51,7 +51,7 @@ Init_gst_classes (void)
     extern void Init_gst_object (void);
     extern void Init_gst_pad (void);
     extern void Init_gst_pad_template(void);
-    extern void Init_gst_ghost_pad (void);
+    extern void Init_gst_ghost_pad(void);
     extern void Init_gst_parse (void);
     extern void Init_gst_pipeline (void);
     extern void Init_gst_plugin (void);

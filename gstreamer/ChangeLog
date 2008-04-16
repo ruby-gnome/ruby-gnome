@@ -1,3 +1,9 @@
+2008-04-16  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst-ghost-pad.c: fix style.
+
+	* src/rbgst.c (Init_gst_classes): fix style.
+
 2008-04-16  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-ghost-pad.c, src/rbgst.c: Implement Gst::GhostPad

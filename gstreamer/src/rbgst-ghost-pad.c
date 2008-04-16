@@ -22,7 +22,7 @@
 #include "rbgst.h"
 
 static VALUE
-rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad) 
+rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
 {
     GstPad *gpad;
     
@@ -34,9 +34,9 @@ rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
 }
 
 void
-Init_gst_ghost_pad (void)
+Init_gst_ghost_pad(void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_GHOST_PAD, "GhostPad", mGst);
+    VALUE c = G_DEF_CLASS(GST_TYPE_GHOST_PAD, "GhostPad", mGst);
 
     rb_define_method(c, "initialize", rb_gst_ghost_pad_new, 2);
 }
