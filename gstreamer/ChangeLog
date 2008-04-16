@@ -1,3 +1,11 @@
+2008-04-16  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-element.c: Make Gst::Element#link_pads and 
+	Gst::Element#unlink_pads work like their C api counterparts (thus take source
+	and sink names
+
+	* src/rbgst-element.c: Implement Gst::Element#unlink
+
 2008-04-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-ghost-pad.c: fix style.

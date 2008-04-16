@@ -332,6 +332,27 @@ rb_gst_element_link(VALUE self, VALUE other_element)
 }
 
 /*
+ * Method: unlink(element)
+ * element: a Gst::Element object.
+ *
+ * Unlinks this element (source) to the provided element (destination). 
+ *
+ * The method looks for all source pads of the source elemnt that are
+ * linked to the destination element and unlinkes them.
+ *
+ */
+static VALUE
+rb_gst_element_unlink(VALUE self, VALUE other_element)
+{
+    GstElement *element1, *element2;
+
+    element1 = SELF(self);
+    element2 = SELF(other_element);
+    gst_element_unlink(element1, element2);
+    return self;
+}
+
+/*
  * Method: link_filtered(element, caps)
  * element: a Gst::Element object.
  * caps: a Gst::Caps object.
@@ -520,55 +541,41 @@ rb_gst_element_get_pad(VALUE self, VALUE pad_name)
 }
 
 /*
- * Method: link_pads(element)
+ * Method: link_pads(srcpadname, element, dstpadname)
  * element: a Gst::Element.
  *
- * Links the "src" named pad of the current element to the
- * "sink" named pad of the destination element, returning
+ * Links the srcpadname pad of the current element to the
+ * dstpadname pad of the destination element, returning
  * true on success.
- *
- * If you want to link specific named pads, you should use
- * the Gst::Pad#link method directly:
- *
- *	element1.link_pads(element2)
- *	
- * 	# This does the same
- *	element1.get_pad("src").link(element2.get_pad("sink"))
  *
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_element_link_pads(VALUE self, VALUE other_element)
+rb_gst_element_link_pads(VALUE self, VALUE srcpadname, 
+    VALUE other_element, VALUE dstpadname)
 {
     return CBOOL2RVAL(gst_element_link_pads(SELF(self),
-                                              "src",
-                                              SELF(other_element),
-                                              "sink"));
+                                            RVAL2CSTR(srcpadname),
+                                            SELF(other_element),
+                                            RVAL2CSTR(dstpadname)));
 }
 
 /*
- * Method: unlink_pads(element)
+ * Method: unlink_pads(stcpadname, element, dstpadname)
  * element: a Gst::Element.
  *
- * Unlinks the "src" named pad of the current element from the
- * "sink" named pad of the destination element.
- *
- * If you want to unlink specific named pads, you should use
- * the Gst::Pad#unlink method directly:
- *
- * 	element1.unlink_pads(element2)
- *	
- *	# This does the same
- *	element1.get_pad("src").unlink(element2.get_pad("sink"))
+ * Unlinks the srcpadname named pad of the current element from the
+ * destpadname named pad of the destination element.
  *
  * Returns: self.
  */
 static VALUE
-rb_gst_element_unlink_pads(self, other_element)
-        VALUE self, other_element;
+rb_gst_element_unlink_pads(VALUE self, VALUE srcpadname, 
+    VALUE other_element, VALUE dstpadname)
 {
     gst_element_unlink_pads(SELF(self),
-                             "src", SELF(other_element), "sink");
+                            RVAL2CSTR(srcpadname), 
+                            SELF(other_element), RVAL2CSTR(dstpadname));
     return self;
 }
 
@@ -973,6 +980,7 @@ Init_gst_element(void)
     rb_define_method(rb_cGstElement, "play", rb_gst_element_play, 0);
     rb_define_method(rb_cGstElement, "link", rb_gst_element_link, 1);
     rb_define_alias(rb_cGstElement, ">>", "link");
+    rb_define_method(rb_cGstElement, "unlink", rb_gst_element_unlink, 1);
     rb_define_method(rb_cGstElement, "link_filtered", rb_gst_element_link_filtered, 2);
     rb_define_method(rb_cGstElement, "provides_clock?", rb_gst_element_provides_clock, 0);
     rb_define_alias(rb_cGstElement, "provide_clock?", "provides_clock?");
@@ -990,8 +998,8 @@ Init_gst_element(void)
     rb_define_method(rb_cGstElement, "get_request_pad", rb_gst_element_get_request_pad, 1);
     rb_define_method(rb_cGstElement, "release_request_pad",
                      rb_gst_element_release_request_pad, 1);
-    rb_define_method(rb_cGstElement, "link_pads", rb_gst_element_link_pads, 1);
-    rb_define_method(rb_cGstElement, "unlink_pads", rb_gst_element_unlink_pads, 1);
+    rb_define_method(rb_cGstElement, "link_pads", rb_gst_element_link_pads, 3);
+    rb_define_method(rb_cGstElement, "unlink_pads", rb_gst_element_unlink_pads, 3);
     rb_define_method(rb_cGstElement, "add_pad", rb_gst_element_add_pad, 1);
     rb_define_method(rb_cGstElement, "remove_pad", rb_gst_element_remove_pad, 1);
     rb_define_method(rb_cGstElement, "indexable?", rb_gst_element_is_indexable, 0);
