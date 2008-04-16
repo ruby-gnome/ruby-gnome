@@ -1,6 +1,11 @@
 class TestElement < Test::Unit::TestCase
   include GstTestUtils
 
+  class TestBin < Gst::Bin
+    type_register
+  end
+
+
   def test_clock
     bin = create_element("playbin")
     assert(bin.require_clock?)
@@ -57,6 +62,16 @@ class TestElement < Test::Unit::TestCase
                     Gst::STATE_PLAYING,
                     Gst::STATE_VOID_PENDING],
                    pipeline.get_state(10))
+    end
+  end
+
+  def test_refcounting
+    pipeline = Gst::Pipeline.new
+    bin = TestBin.new
+
+    10.times do
+      pipeline.add(bin)
+      pipeline.remove(bin)
     end
   end
 end

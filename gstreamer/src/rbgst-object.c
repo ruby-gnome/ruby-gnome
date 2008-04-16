@@ -42,6 +42,17 @@ rbgst_object_instance2robj(gpointer instance)
     return rbgobj_get_ruby_object_from_gobject(instance, TRUE);
 }
 
+void
+rbgst_object_initialize(VALUE obj, gpointer cobj)
+{
+    if (GST_OBJECT_IS_FLOATING(cobj)) {
+        gst_object_ref(cobj);
+        gst_object_sink(cobj);
+    }
+
+    rbgobj_gobject_initialize(obj, cobj);
+}
+
 static VALUE
 object_set_name(VALUE self, VALUE name)
 {
@@ -55,6 +66,7 @@ Init_gst_object(void)
 
     table.type = GST_TYPE_OBJECT;
     table.instance2robj = rbgst_object_instance2robj;
+    table.initialize = rbgst_object_initialize;
 
     RG_DEF_CONVERSION(&table);
 
