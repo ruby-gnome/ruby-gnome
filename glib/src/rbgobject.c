@@ -35,13 +35,20 @@ void
 rbgobj_initialize_object(VALUE obj, gpointer cobj)
 {
     GType type;
+    GType parent_type;
 
     if (!cobj)
         rb_raise(rb_eRuntimeError, "failed to initialize");
 
     type = RVAL2GTYPE(obj);
-    if (rbgobj_convert_initialize(type, obj, cobj))
-        return;
+
+    for (parent_type = type;
+         parent_type != G_TYPE_INVALID;
+         parent_type = g_type_parent(parent_type)) {
+
+         if (rbgobj_convert_initialize(parent_type, obj, cobj))
+             return;
+    }
 
     type = G_TYPE_FUNDAMENTAL(type);
     switch (type){

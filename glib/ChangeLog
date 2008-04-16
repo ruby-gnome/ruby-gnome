@@ -1,3 +1,8 @@
+2008-04-16  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgobject.c: When initializing look at the complete inheritance tree to
+	see if any superclass defined a specialized initialize function
+
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil.h:
