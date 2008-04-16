@@ -26,7 +26,7 @@ rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
 {
     GstPad *gpad;
     
-    gpad = gst_ghost_pad_new(RVAL2CSTR(name), RGST_PAD(pad));
+    gpad = gst_ghost_pad_new(RVAL2CSTR(name), RVAL2GST_PAD(pad));
 
     G_INITIALIZE(self, gpad);
 
