@@ -1,3 +1,9 @@
+2008-04-17  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbglib_maincontext.c: When preparing our source only add pollfds if we
+	were not already polling for it. Fixes 100% cpu usage as soon as another
+	ruby thread is blocked on a file descriptor.
+
 2008-04-16  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgobject.c: When initializing look at the complete inheritance tree to

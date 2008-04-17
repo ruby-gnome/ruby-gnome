@@ -117,23 +117,23 @@ typedef struct _RGSource
     GSource source;
 
     GList *poll_fds;
+    GList *old_poll_fds;
     gboolean ready;
 } RGSource;
 
 static void
-source_free_poll_fds(GSource *source, gboolean source_is_destroyed)
+source_cleanup_poll_fds(GSource *source)
 {
     RGSource *rg_source = (RGSource *)source;
     GList *node;
 
-    for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
+    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
         GPollFD *poll_fd = node->data;
-        if (!source_is_destroyed)
-            g_source_remove_poll(source, poll_fd);
-        g_free(poll_fd);
+        g_source_remove_poll(source, poll_fd);
+        g_slice_free(GPollFD, poll_fd);
     }
-    g_list_free(rg_source->poll_fds);
-    rg_source->poll_fds = NULL;
+    g_list_free(rg_source->old_poll_fds);
+    rg_source->old_poll_fds = NULL;
 }
 
 static inline void
@@ -141,16 +141,29 @@ source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
 {
     RGSource *rg_source = (RGSource *)source;
     GPollFD *poll_fd;
+    GList *node;
+    gushort events = 0;
 
-    poll_fd = g_new0(GPollFD, 1);
-    poll_fd->fd = thread->fd;
-    poll_fd->events = G_IO_IN;
     if (FD_ISSET(thread->fd, &thread->readfds))
-        poll_fd->events |= G_IO_IN;
+        events |= G_IO_IN;
     if (FD_ISSET(thread->fd, &thread->writefds))
-        poll_fd->events |= G_IO_OUT;
+        events |= G_IO_OUT;
     if (FD_ISSET(thread->fd, &thread->exceptfds))
-        poll_fd->events |= G_IO_PRI | G_IO_ERR | G_IO_HUP;
+        events |= G_IO_PRI | G_IO_ERR | G_IO_HUP;
+
+    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
+        poll_fd = node->data;
+        if (poll_fd->fd == thread->fd && poll_fd->events == events) {
+            rg_source->old_poll_fds = 
+                g_list_remove_link(rg_source->old_poll_fds, node);
+            rg_source->poll_fds = g_list_concat(rg_source->poll_fds, node);
+            return;
+        }
+    }
+
+    poll_fd = g_slice_new0(GPollFD);
+    poll_fd->fd = thread->fd;
+    poll_fd->events = events;
 
     g_source_add_poll(source, poll_fd);
     rg_source->poll_fds = g_list_prepend(rg_source->poll_fds, poll_fd);
@@ -159,8 +172,12 @@ source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
 static inline gboolean
 source_prepare_setup_poll_fd(GSource *source, gint *timeout)
 {
+    RGSource *rg_source = (RGSource *)source;
     rb_thread_t thread;
     gdouble now;
+
+    rg_source->old_poll_fds = rg_source->poll_fds;
+    rg_source->poll_fds = NULL;
 
     now = timeofday();
     thread = rb_curr_thread;
@@ -187,6 +204,8 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
             source_prepare_add_poll_fd(source, thread);
     } while (thread != rb_curr_thread);
 
+    source_cleanup_poll_fds(source);
+
     return FALSE;
 }
 
@@ -196,7 +215,6 @@ source_prepare(GSource *source, gint *timeout)
     RGSource *rg_source = (RGSource *)source;
 
     *timeout = -1;
-    source_free_poll_fds(source, FALSE);
     rg_source->ready = source_prepare_setup_poll_fd(source, timeout);
 
     return rg_source->ready;
@@ -234,7 +252,24 @@ source_dispatch(GSource *source, GSourceFunc callback, gpointer user_data)
 static void
 source_finalize(GSource *source)
 {
-    source_free_poll_fds(source, TRUE);
+    RGSource *rg_source = (RGSource *)source;
+    GList *node;
+
+    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
+        GPollFD *poll_fd = node->data;
+        g_slice_free(GPollFD, poll_fd);
+    }
+
+    for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
+        GPollFD *poll_fd = node->data;
+        g_slice_free(GPollFD, poll_fd);
+    }
+
+    g_list_free(rg_source->old_poll_fds);
+    rg_source->old_poll_fds = NULL;
+
+    g_list_free(rg_source->poll_fds);
+    rg_source->poll_fds = NULL;
 }
 
 static GSourceFuncs source_funcs = {
@@ -255,6 +290,7 @@ ruby_source_new(void)
 
     rg_source = (RGSource *)source;
     rg_source->poll_fds = NULL;
+    rg_source->old_poll_fds = NULL;
 
     return source;
 }
