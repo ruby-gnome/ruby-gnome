@@ -65,7 +65,17 @@ class TestElement < Test::Unit::TestCase
     end
   end
 
-  def test_refcounting
+  def test_query
+    pipeline = Gst::Pipeline.new
+    assert_boolean(pipeline.query(Gst::QueryFormats.new))
+  end
+
+  def test_send_event
+    pipeline = Gst::Pipeline.new
+    assert_boolean(pipeline.send_event(Gst::EventEOS.new))
+  end
+
+  def test_reference_counting
     pipeline = Gst::Pipeline.new
     bin = TestBin.new
 

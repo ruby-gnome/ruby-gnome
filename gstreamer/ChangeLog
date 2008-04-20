@@ -1,14 +1,23 @@
+2008-04-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst.h: remove garbages.
+
+	* src/rbgst-element.c: cleanup.
+
+	* test/test_element.rb: add tests for GstElement#query and
+	GstElement#send_event.
+
 2008-04-16  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-object.c: Implement a custom initialize that sinks the created
 	GstObject
 
 	* src/test_element.rb: Add a refcounting testcase for GstObject classes
-	created inside ruby 
+	created inside ruby
 
 2008-04-16  Sjoerd Simons <sjoerd@luon.net>
 
-	* src/rbgst-element.c: Make Gst::Element#link_pads and 
+	* src/rbgst-element.c: Make Gst::Element#link_pads and
 	Gst::Element#unlink_pads work like their C api counterparts (thus take source
 	and sink names
 

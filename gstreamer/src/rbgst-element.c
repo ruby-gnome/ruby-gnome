@@ -36,12 +36,52 @@
 
 #define SELF(self) RVAL2GST_ELEMENT(self)
 
+#define GST_STATE_CHANGE_RETURN2RVAL(object) \
+    (GENUM2RVAL(object, GST_TYPE_STATE_CHANGE_RETURN))
+
 #define NOTIFY_MESSAGE "R"
 #define NOTIFY_MESSAGE_SIZE 1
+
+typedef struct _SetStateData {
+    GstStateChangeReturn result;
+    GstState state;
+} SetStateData;
+
+typedef struct _GetStateData {
+    GstStateChangeReturn result;
+    GstState state;
+    GstState pending;
+    GstClockTime timeout;
+} GetStateData;
+
+typedef struct _QueryData {
+    gboolean result;
+    GstQuery *query;
+} QueryData;
+
+typedef struct _SendEventData {
+    gboolean result;
+    GstEvent *event;
+} SendEventData;
+
+typedef struct _ThreadData {
+    GstElement *element;
+    int notify_fd;
+    union {
+	SetStateData set_state_data;
+	GetStateData get_state_data;
+	QueryData query_data;
+	SendEventData send_event_data;
+    } data;
+} ThreadData;
 
 static RGConvertTable table = {0};
 static VALUE rb_cGstElement;
 static ID id_gtype;
+static GThreadPool *set_state_thread_pool;
+static GThreadPool *get_state_thread_pool;
+static GThreadPool *query_thread_pool;
+static GThreadPool *send_event_thread_pool;
 
 static void
 define_class_if_need(VALUE klass, GType type)
@@ -61,162 +101,56 @@ instance2robj(gpointer instance)
     return rbgst_object_instance2robj(instance);
 }
 
-struct do_threaded_data {
-    GstElement *element;
-    int writefd;
-    union {
-        struct {
-            GstStateChangeReturn ret;
-            GstState state;
-        } set_state;
-
-        struct {
-            GstStateChangeReturn ret;
-            GstState state;
-            GstState pending;
-            GstClockTime timeout;
-        } get_state;
-
-        struct query {
-          gboolean ret;
-          GstQuery *query;
-        } query;
-
-        struct event {
-          gboolean ret;
-          GstEvent *event;
-        } event;
-    } d;
-};
-
-static void
-rb_gst_element_thread_do_threaded(GThreadPool **pool, GFunc function,
-    struct do_threaded_data *data)
-{
-    int comm[2];
-    GError *error = NULL;
-
-    if (G_UNLIKELY(*pool == NULL)) {
-        *pool = g_thread_pool_new(function,
-            NULL, -1, FALSE, &error);
-      if (pool == NULL) {
-          /* This only ever happens if threads aren't supported. In that case
-           * things should have aborted long before. So abort */
-          rb_bug("Couldn't create rbgst thread: %s", error->message);
-      }
-    }
-
-
-    if (pipe(comm) != 0) {
-        rb_sys_fail("Unable to create rbgst communication pipe");
-    }
-
-    data->writefd = comm[1];
-
-    g_thread_pool_push(*pool, data, &error);
-    if (error != NULL) {
-        /* Only happens if creating a new thread fails */
-        rb_raise(rb_eRuntimeError, "Couldn't create rbgst thread: %s",
-                 error->message);
-    }
-
-    rb_thread_wait_fd(comm[0]);
-
-    close(comm[0]);
-    close(comm[1]);
-}
-
-static void
-thread_set_state_function(gpointer data, gpointer user_data)
-{
-    struct do_threaded_data *sdata = (struct do_threaded_data *) data;
-
-    sdata->d.set_state.ret = gst_element_set_state(sdata->element,
-                                                   sdata->d.set_state.state);
-    write(sdata->writefd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
-}
-
-/* Threaded set_state function */
-static VALUE
-rb_gst_element_threaded_set_state(VALUE element, int state)
-{
-    GstState ret;
-    struct do_threaded_data *data;
-    static GThreadPool *pool = NULL;
-
-    data = g_slice_new(struct do_threaded_data);
-    data->element = RGST_ELEMENT(element);
-    data->d.set_state.state = state;
-
-    rb_gst_element_thread_do_threaded(&pool, thread_set_state_function, data);
-
-    ret = data->d.set_state.ret;
-    g_slice_free(struct do_threaded_data, data);
-
-    return GENUM2RVAL (ret, GST_TYPE_STATE_CHANGE_RETURN);
-}
-
-static void
-thread_get_state_function(gpointer data, gpointer user_data)
-{
-    struct do_threaded_data *sdata = (struct do_threaded_data *) data;
-
-    sdata->d.get_state.ret = gst_element_get_state (sdata->element,
-                                                &(sdata->d.get_state.state),
-                                                &(sdata->d.get_state.pending),
-                                                sdata->d.get_state.timeout);
-    write(sdata->writefd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
-}
-
-/* Threaded get_state function */
-static VALUE
-rb_gst_element_threaded_get_state(VALUE element, GstState *state,
-                                  GstState *pending,   GstClockTime timeout)
-{
-    struct do_threaded_data *data;
-    static GThreadPool *pool = NULL;
-    GstStateChangeReturn ret;
-
-    data = g_slice_new(struct do_threaded_data);
-
-    data->element = RGST_ELEMENT(element);
-    data->d.get_state.timeout = timeout;
-
-    rb_gst_element_thread_do_threaded(&pool,thread_get_state_function, data);
-
-    *state = data->d.get_state.state;
-    *pending = data->d.get_state.pending;
-    ret = data->d.get_state.ret;
-
-    g_slice_free(struct do_threaded_data, data);
-
-    return GENUM2RVAL (ret, GST_TYPE_STATE_CHANGE_RETURN);
-}
-
-static void
-thread_query_function(gpointer data, gpointer user_data)
-{
-    struct do_threaded_data *sdata = (struct do_threaded_data *) data;
-
-    sdata->d.query.ret = gst_element_query (sdata->element,
-                                            sdata->d.query.query);
-    write(sdata->writefd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
-}
-
-static void
-threaded_send_event_function(gpointer data, gpointer user_data)
-{
-    struct do_threaded_data *sdata = (struct do_threaded_data *) data;
-
-    gst_event_ref(sdata->d.event.event);
-    sdata->d.event.ret = gst_element_send_event(sdata->element,
-                                                sdata->d.event.event);
-    write(sdata->writefd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
-}
 
 /* Class: Gst::Element
  * Base class for all pipeline elements.
  */
+
+static void
+do_in_thread(GThreadPool *pool, ThreadData *data)
+{
+    int notify_fds[2];
+    GError *error = NULL;
+
+    if (pipe(notify_fds) != 0)
+	rb_sys_fail("failed to create a pipe to synchronize threaded operation");
+
+    data->notify_fd = notify_fds[1];
+    g_thread_pool_push(pool, data, &error);
+    if (error)
+	RAISE_GERROR(error);
+    rb_thread_wait_fd(notify_fds[0]);
+
+    close(notify_fds[0]);
+    close(notify_fds[1]);
+}
+
+static void
+set_state_in_thread(gpointer data, gpointer user_data)
+{
+    ThreadData *thread_data = (ThreadData *)data;
+    SetStateData *set_state_data;
+
+    set_state_data = &(thread_data->data.set_state_data);
+    set_state_data->result = gst_element_set_state(thread_data->element,
+						   set_state_data->state);
+    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+}
+
+static VALUE
+rb_gst_element_set_state_internal(VALUE self, GstState state)
+{
+    ThreadData thread_data;
+    SetStateData *set_state_data;
+
+    thread_data.element = SELF(self);
+    set_state_data = &(thread_data.data.set_state_data);
+    set_state_data->state = state;
+
+    do_in_thread(set_state_thread_pool, &thread_data);
+
+    return GST_STATE_CHANGE_RETURN2RVAL(set_state_data->result);
+}
 
 /*
  * Method: set_state(state)
@@ -231,30 +165,50 @@ threaded_send_event_function(gpointer data, gpointer user_data)
  * Returns: a code (see Gst::Element::StateChangeReturn).
  */
 static VALUE
-rb_gst_element_set_state (VALUE self, VALUE value)
+rb_gst_element_set_state(VALUE self, VALUE state)
 {
-    const int state = RVAL2GENUM (value, GST_TYPE_STATE);
-    return rb_gst_element_threaded_set_state(self, state);
+    return rb_gst_element_set_state_internal(self,
+					     RVAL2GENUM(state, GST_TYPE_STATE));
 }
 
-/* Method: get_state([timeout])
- * Returns:  [Gst::StateChangeReturn, current state, pending state]
- *   (see Gst::Element::State).
+static void
+get_state_in_thread(gpointer data, gpointer user_data)
+{
+    ThreadData *thread_data = (ThreadData *)data;
+    GetStateData *get_state_data;
+
+    get_state_data = &(thread_data->data.get_state_data);
+    get_state_data->result = gst_element_get_state(thread_data->element,
+						   &(get_state_data->state),
+						   &(get_state_data->pending),
+						   get_state_data->timeout);
+    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+}
+
+/* Method: get_state(timeout=nil)
  */
 static VALUE
-rb_gst_element_get_state (int argc, VALUE *argv, VALUE self)
+rb_gst_element_get_state(int argc, VALUE *argv, VALUE self)
 {
-    VALUE result, rstate, rpending, timeout;
-    GstState state;
-    GstState pending;
+    VALUE timeout;
+    ThreadData thread_data;
+    GetStateData *get_state_data;
+
     rb_scan_args(argc, argv, "01", &timeout);
 
-    result = rb_gst_element_threaded_get_state(self, &state, &pending,
-                                        NIL_P(timeout) ? GST_CLOCK_TIME_NONE
-                                          : NUM2ULL(timeout));
-    rstate = GENUM2RVAL(state, GST_TYPE_STATE);
-    rpending = GENUM2RVAL(pending, GST_TYPE_STATE);
-    return rb_ary_new3(3, result, rstate, rpending);
+    thread_data.element = SELF(self);
+    get_state_data = &(thread_data.data.get_state_data);
+    if (NIL_P(timeout))
+	get_state_data->timeout = GST_CLOCK_TIME_NONE;
+    else
+	get_state_data->timeout = NUM2ULL(timeout);
+
+    do_in_thread(get_state_thread_pool, &thread_data);
+
+    return rb_ary_new3(3,
+		       GST_STATE_CHANGE_RETURN2RVAL(get_state_data->result),
+		       GST_STATE2RVAL(get_state_data->state),
+		       GST_STATE2RVAL(get_state_data->pending));
 }
 
 /*
@@ -267,7 +221,7 @@ rb_gst_element_get_state (int argc, VALUE *argv, VALUE self)
 static VALUE
 rb_gst_element_stop(VALUE self)
 {
-    return rb_gst_element_threaded_set_state(self, GST_STATE_NULL);
+    return rb_gst_element_set_state_internal(self, GST_STATE_NULL);
 }
 
 /*
@@ -280,7 +234,7 @@ rb_gst_element_stop(VALUE self)
 static VALUE
 rb_gst_element_ready(VALUE self)
 {
-    return rb_gst_element_threaded_set_state(self, GST_STATE_READY);
+    return rb_gst_element_set_state_internal(self, GST_STATE_READY);
 }
 
 /*
@@ -293,7 +247,7 @@ rb_gst_element_ready(VALUE self)
 static VALUE
 rb_gst_element_pause(VALUE self)
 {
-    return rb_gst_element_threaded_set_state(self, GST_STATE_PAUSED);
+    return rb_gst_element_set_state_internal(self, GST_STATE_PAUSED);
 }
 
 /*
@@ -306,7 +260,7 @@ rb_gst_element_pause(VALUE self)
 static VALUE
 rb_gst_element_play(VALUE self)
 {
-    return rb_gst_element_threaded_set_state(self, GST_STATE_PLAYING);
+    return rb_gst_element_set_state_internal(self, GST_STATE_PLAYING);
 }
 
 /*
@@ -541,41 +495,42 @@ rb_gst_element_get_pad(VALUE self, VALUE pad_name)
 }
 
 /*
- * Method: link_pads(srcpadname, element, dstpadname)
+ * Method: link_pads(source_pad_name, element, destination_pad_name)
  * element: a Gst::Element.
  *
- * Links the srcpadname pad of the current element to the
- * dstpadname pad of the destination element, returning
+ * Links the source_pad_name pad of the current element to the
+ * destination_pad_name pad of the destination element, returning
  * true on success.
  *
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_element_link_pads(VALUE self, VALUE srcpadname, 
-    VALUE other_element, VALUE dstpadname)
+rb_gst_element_link_pads(VALUE self, VALUE source_pad_name,
+			 VALUE other_element, VALUE destination_pad_name)
 {
     return CBOOL2RVAL(gst_element_link_pads(SELF(self),
-                                            RVAL2CSTR(srcpadname),
-                                            SELF(other_element),
-                                            RVAL2CSTR(dstpadname)));
+					    RVAL2CSTR(source_pad_name),
+					    SELF(other_element),
+					    RVAL2CSTR(destination_pad_name)));
 }
 
 /*
- * Method: unlink_pads(stcpadname, element, dstpadname)
+ * Method: unlink_pads(source_pad_name, element, destination_pad_name)
  * element: a Gst::Element.
  *
- * Unlinks the srcpadname named pad of the current element from the
- * destpadname named pad of the destination element.
+ * Unlinks the source_pad_name named pad of the current element from the
+ * destination_pad_name named pad of the destination element.
  *
  * Returns: self.
  */
 static VALUE
-rb_gst_element_unlink_pads(VALUE self, VALUE srcpadname, 
-    VALUE other_element, VALUE dstpadname)
+rb_gst_element_unlink_pads(VALUE self, VALUE source_pad_name,
+			   VALUE other_element, VALUE destination_pad_name)
 {
     gst_element_unlink_pads(SELF(self),
-                            RVAL2CSTR(srcpadname), 
-                            SELF(other_element), RVAL2CSTR(dstpadname));
+			    RVAL2CSTR(source_pad_name),
+			    SELF(other_element),
+			    RVAL2CSTR(destination_pad_name));
     return self;
 }
 
@@ -586,6 +541,18 @@ static VALUE
 rb_gst_element_is_indexable(VALUE self)
 {
     return CBOOL2RVAL(gst_element_is_indexable(SELF(self)));
+}
+
+static void
+query_in_thread(gpointer data, gpointer user_data)
+{
+    ThreadData *thread_data = (ThreadData *)data;
+    QueryData *query_data;
+
+    query_data = &(thread_data->data.query_data);
+    query_data->result = gst_element_query(thread_data->element,
+					   query_data->query);
+    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
 }
 
 /*
@@ -599,22 +566,29 @@ rb_gst_element_is_indexable(VALUE self)
 static VALUE
 rb_gst_element_query(VALUE self, VALUE query)
 {
-    struct do_threaded_data *data;
-    static GThreadPool *pool = NULL;
-    gboolean ret;
+    ThreadData thread_data;
+    QueryData *query_data;
 
-    data = g_slice_new(struct do_threaded_data);
-    data->element = RGST_ELEMENT(self);
-    data->d.query.query = RVAL2GST_QUERY(query);
+    thread_data.element = SELF(self);
+    query_data = &(thread_data.data.query_data);
+    query_data->query = RVAL2GST_QUERY(query);
 
-    rb_gst_element_thread_do_threaded(&pool, thread_query_function, data);
+    do_in_thread(query_thread_pool, &thread_data);
 
-    ret = data->d.query.ret;
-    g_slice_free(struct do_threaded_data, data);
-
-    return CBOOL2RVAL(ret);
+    return CBOOL2RVAL(query_data->result);
 }
 
+static void
+send_event_in_thread(gpointer data, gpointer user_data)
+{
+    ThreadData *thread_data = (ThreadData *)data;
+    SendEventData *send_event_data;
+
+    send_event_data = &(thread_data->data.send_event_data);
+    send_event_data->result = gst_element_send_event(thread_data->element,
+						     send_event_data->event);
+    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+}
 /*
  * Method: send_event(event)
  * event: a Gst::Event object.
@@ -629,20 +603,17 @@ rb_gst_element_query(VALUE self, VALUE query)
 static VALUE
 rb_gst_element_send_event(VALUE self, VALUE event)
 {
-    struct do_threaded_data *data;
-    static GThreadPool *pool = NULL;
-    gboolean ret;
+    ThreadData thread_data;
+    SendEventData *send_event_data;
 
-    data = g_slice_new(struct do_threaded_data);
-    data->element = RGST_ELEMENT(self);
-    data->d.event.event = RVAL2GST_EVENT(event);
+    thread_data.element = SELF(self);
+    send_event_data = &(thread_data.data.send_event_data);
+    send_event_data->event = RVAL2GST_EVENT(event);
 
-    rb_gst_element_thread_do_threaded(&pool, threaded_send_event_function, data);
+    gst_event_ref(send_event_data->event);
+    do_in_thread(send_event_thread_pool, &thread_data);
 
-    ret = data->d.event.ret;
-    g_slice_free(struct do_threaded_data, data);
-
-    return CBOOL2RVAL(ret);
+    return CBOOL2RVAL(send_event_data->result);
 }
 
 /*
@@ -954,6 +925,16 @@ rb_gst_element_found_tag_sig(guint num, const GValue *values)
                        GST_STRUCT2RVAL(tag_list));
 }
 
+static void
+initialize_thread_pool(GThreadPool **pool, GFunc function)
+{
+    GError *error = NULL;
+
+    *pool = g_thread_pool_new(function, NULL, -1, FALSE, &error);
+    if (error)
+	RAISE_GERROR(error);
+}
+
 void
 Init_gst_element(void)
 {
@@ -962,6 +943,11 @@ Init_gst_element(void)
     RG_DEF_CONVERSION(&table);
 
     id_gtype = rb_intern("gtype");
+
+    initialize_thread_pool(&set_state_thread_pool, set_state_in_thread);
+    initialize_thread_pool(&get_state_thread_pool, get_state_in_thread);
+    initialize_thread_pool(&query_thread_pool, query_in_thread);
+    initialize_thread_pool(&send_event_thread_pool, send_event_in_thread);
 
     rb_cGstElement = G_DEF_CLASS(GST_TYPE_ELEMENT, "Element", mGst);
 
