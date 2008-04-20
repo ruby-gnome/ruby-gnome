@@ -176,7 +176,7 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     rb_thread_t thread;
     gdouble now;
 
-    source_cleanup_poll_fds(source);
+    g_assert(rg_source->old_poll_fds == NULL);
     rg_source->old_poll_fds = rg_source->poll_fds;
     rg_source->poll_fds = NULL;
 
@@ -188,15 +188,23 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
         if ((thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
              thread != rb_curr_thread) ||
             (thread->wait_for & WAIT_JOIN &&
-             thread->join->status == THREAD_KILLED))
+             thread->join->status == THREAD_KILLED)) {
+            rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
+                                                rg_source->old_poll_fds);
+            rg_source->old_poll_fds = NULL;
             return TRUE;
+        }
 
         if (thread->wait_for & WAIT_TIME && thread->delay != DELAY_INFTY) {
             gint delay;
 
             delay = (thread->delay - now) * 1000;
-            if (delay <= 0)
+            if (delay <= 0) {
+                rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
+                                                    rg_source->old_poll_fds);
+                rg_source->old_poll_fds = NULL;
                 return TRUE;
+            }
             if (*timeout == -1 || delay < *timeout)
                 *timeout = delay;
         }
