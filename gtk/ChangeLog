@@ -1,3 +1,8 @@
+2008-04-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/gtk-test-utils.rb: remove assert_boolean because
+	TestUnitExt provides it.
+
 2008-04-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkbuilder.c: GSLIST2ARY_WITH_FREE -> GSLIST2ARY_FREE.
