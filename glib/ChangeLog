@@ -1,3 +1,7 @@
+2008-04-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_maincontext.c: free old FDs.
+
 2008-04-17  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbglib_maincontext.c: When preparing our source only add pollfds if we

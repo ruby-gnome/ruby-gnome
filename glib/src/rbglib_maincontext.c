@@ -154,7 +154,7 @@ source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
     for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
         poll_fd = node->data;
         if (poll_fd->fd == thread->fd && poll_fd->events == events) {
-            rg_source->old_poll_fds = 
+            rg_source->old_poll_fds =
                 g_list_remove_link(rg_source->old_poll_fds, node);
             rg_source->poll_fds = g_list_concat(rg_source->poll_fds, node);
             return;
@@ -176,6 +176,7 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     rb_thread_t thread;
     gdouble now;
 
+    source_cleanup_poll_fds(source);
     rg_source->old_poll_fds = rg_source->poll_fds;
     rg_source->poll_fds = NULL;
 
