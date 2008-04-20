@@ -140,16 +140,22 @@ set_state_in_thread(gpointer data, gpointer user_data)
 static VALUE
 rb_gst_element_set_state_internal(VALUE self, GstState state)
 {
-    ThreadData thread_data;
+    VALUE result;
+    ThreadData *thread_data;
     SetStateData *set_state_data;
 
-    thread_data.element = SELF(self);
-    set_state_data = &(thread_data.data.set_state_data);
+    thread_data = g_slice_new(ThreadData);
+    thread_data->element = SELF(self);
+    set_state_data = &(thread_data->data.set_state_data);
     set_state_data->state = state;
 
-    do_in_thread(set_state_thread_pool, &thread_data);
+    do_in_thread(set_state_thread_pool, thread_data);
 
-    return GST_STATE_CHANGE_RETURN2RVAL(set_state_data->result);
+    result = GST_STATE_CHANGE_RETURN2RVAL(set_state_data->result);
+
+    g_slice_free(ThreadData, thread_data);
+
+    return result;
 }
 
 /*
@@ -190,25 +196,30 @@ get_state_in_thread(gpointer data, gpointer user_data)
 static VALUE
 rb_gst_element_get_state(int argc, VALUE *argv, VALUE self)
 {
-    VALUE timeout;
-    ThreadData thread_data;
+    VALUE result, timeout;
+    ThreadData *thread_data;
     GetStateData *get_state_data;
 
     rb_scan_args(argc, argv, "01", &timeout);
 
-    thread_data.element = SELF(self);
-    get_state_data = &(thread_data.data.get_state_data);
+    thread_data = g_slice_new(ThreadData);
+    thread_data->element = SELF(self);
+    get_state_data = &(thread_data->data.get_state_data);
     if (NIL_P(timeout))
 	get_state_data->timeout = GST_CLOCK_TIME_NONE;
     else
 	get_state_data->timeout = NUM2ULL(timeout);
 
-    do_in_thread(get_state_thread_pool, &thread_data);
+    do_in_thread(get_state_thread_pool, thread_data);
 
-    return rb_ary_new3(3,
-		       GST_STATE_CHANGE_RETURN2RVAL(get_state_data->result),
-		       GST_STATE2RVAL(get_state_data->state),
-		       GST_STATE2RVAL(get_state_data->pending));
+    result = rb_ary_new3(3,
+			 GST_STATE_CHANGE_RETURN2RVAL(get_state_data->result),
+			 GST_STATE2RVAL(get_state_data->state),
+			 GST_STATE2RVAL(get_state_data->pending));
+
+    g_slice_free(ThreadData, thread_data);
+
+    return result;
 }
 
 /*
@@ -566,16 +577,22 @@ query_in_thread(gpointer data, gpointer user_data)
 static VALUE
 rb_gst_element_query(VALUE self, VALUE query)
 {
-    ThreadData thread_data;
+    VALUE result;
+    ThreadData *thread_data;
     QueryData *query_data;
 
-    thread_data.element = SELF(self);
-    query_data = &(thread_data.data.query_data);
+    thread_data = g_slice_new(ThreadData);
+    thread_data->element = SELF(self);
+    query_data = &(thread_data->data.query_data);
     query_data->query = RVAL2GST_QUERY(query);
 
-    do_in_thread(query_thread_pool, &thread_data);
+    do_in_thread(query_thread_pool, thread_data);
 
-    return CBOOL2RVAL(query_data->result);
+    result = CBOOL2RVAL(query_data->result);
+
+    g_slice_free(ThreadData, thread_data);
+
+    return result;
 }
 
 static void
@@ -603,17 +620,23 @@ send_event_in_thread(gpointer data, gpointer user_data)
 static VALUE
 rb_gst_element_send_event(VALUE self, VALUE event)
 {
-    ThreadData thread_data;
+    VALUE result;
+    ThreadData *thread_data;
     SendEventData *send_event_data;
 
-    thread_data.element = SELF(self);
-    send_event_data = &(thread_data.data.send_event_data);
+    thread_data = g_slice_new(ThreadData);
+    thread_data->element = SELF(self);
+    send_event_data = &(thread_data->data.send_event_data);
     send_event_data->event = RVAL2GST_EVENT(event);
 
     gst_event_ref(send_event_data->event);
-    do_in_thread(send_event_thread_pool, &thread_data);
+    do_in_thread(send_event_thread_pool, thread_data);
 
-    return CBOOL2RVAL(send_event_data->result);
+    result = CBOOL2RVAL(send_event_data->result);
+
+    g_slice_free(ThreadData, thread_data);
+
+    return result;
 }
 
 /*

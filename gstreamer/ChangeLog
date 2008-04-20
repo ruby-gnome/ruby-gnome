@@ -1,5 +1,7 @@
 2008-04-20  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst-element.c: allocate memory instead of using local variable.
+
 	* src/rbgst.h: remove garbages.
 
 	* src/rbgst-element.c: cleanup.
