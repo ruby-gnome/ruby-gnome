@@ -275,6 +275,19 @@ rb_gst_pad_set_caps(VALUE self, VALUE caps)
 }
 
 /*
+ * Method: set_active
+ *
+ * Sets the active state of the pad.
+ *
+ * Returns: true if the setting succeeded
+ */
+static VALUE
+rb_gst_pad_set_active(VALUE self, VALUE active)
+{
+    return CBOOL2RVAL(gst_pad_set_active(SELF(self), RVAL2CBOOL(active)));
+}
+
+/*
  * Method: peer
  *
  * Get the peer of a pad
@@ -308,6 +321,7 @@ Init_gst_pad (void)
     rb_define_method(cGstPad, "caps", rb_gst_pad_get_caps, 0);
     rb_define_method(cGstPad, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
     rb_define_method(cGstPad, "set_caps", rb_gst_pad_set_caps, 1);
+    rb_define_method(cGstPad, "set_active", rb_gst_pad_set_active, 1);
     rb_define_method(cGstPad, "peer", rb_gst_pad_get_peer, 0);
 
     G_DEF_SETTERS(cGstPad);
