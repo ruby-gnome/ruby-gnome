@@ -129,6 +129,7 @@ source_cleanup_poll_fds(GSource *source)
 
     for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
         GPollFD *poll_fd = node->data;
+
         g_source_remove_poll(source, poll_fd);
         g_slice_free(GPollFD, poll_fd);
     }
@@ -137,23 +138,15 @@ source_cleanup_poll_fds(GSource *source)
 }
 
 static inline void
-source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
+source_prepare_add_poll_fd(GSource *source, gint fd, guchar events)
 {
-    RGSource *rg_source = (RGSource *)source;
     GPollFD *poll_fd;
     GList *node;
-    gushort events = 0;
-
-    if (FD_ISSET(thread->fd, &thread->readfds))
-        events |= G_IO_IN;
-    if (FD_ISSET(thread->fd, &thread->writefds))
-        events |= G_IO_OUT;
-    if (FD_ISSET(thread->fd, &thread->exceptfds))
-        events |= G_IO_PRI | G_IO_ERR | G_IO_HUP;
+    RGSource *rg_source = (RGSource *)source;
 
     for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
         poll_fd = node->data;
-        if (poll_fd->fd == thread->fd && poll_fd->events == events) {
+        if (poll_fd->fd == fd && poll_fd->events == events) {
             rg_source->old_poll_fds =
                 g_list_remove_link(rg_source->old_poll_fds, node);
             rg_source->poll_fds = g_list_concat(rg_source->poll_fds, node);
@@ -162,11 +155,41 @@ source_prepare_add_poll_fd(GSource *source, rb_thread_t thread)
     }
 
     poll_fd = g_slice_new0(GPollFD);
-    poll_fd->fd = thread->fd;
+    poll_fd->fd = fd;
     poll_fd->events = events;
 
     g_source_add_poll(source, poll_fd);
     rg_source->poll_fds = g_list_prepend(rg_source->poll_fds, poll_fd);
+}
+
+static inline void
+source_prepare_add_poll(GSource *source, rb_thread_t thread)
+{
+    if (thread->wait_for == WAIT_FD) {
+        /* The thread is blocked on thread->fd for read. */
+        source_prepare_add_poll_fd(source, thread->fd, G_IO_IN);
+        return;
+    }
+
+    if (thread->wait_for & WAIT_SELECT) {
+        /* thread->fd is the maximum fd of the fds in the various sets. Need to
+         * check the sets to see which fd's to wait for */
+        int fd;
+
+        for (fd = 0; fd < thread->fd; fd++) {
+            gushort events = 0;
+
+            if (FD_ISSET(fd, &thread->readfds))
+                events |= G_IO_IN;
+            if (FD_ISSET(fd, &thread->writefds))
+                events |= G_IO_OUT;
+            if (FD_ISSET(fd, &thread->exceptfds))
+                events |= G_IO_PRI | G_IO_ERR | G_IO_HUP;
+
+            if (events != 0)
+              source_prepare_add_poll_fd(source, fd, events);
+        }
+    }
 }
 
 static inline gboolean
@@ -209,8 +232,8 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
                 *timeout = delay;
         }
 
-        if (thread->wait_for & WAIT_FD)
-            source_prepare_add_poll_fd(source, thread);
+        if (thread->wait_for == WAIT_FD || thread->wait_for & WAIT_SELECT)
+            source_prepare_add_poll(source, thread);
     } while (thread != rb_curr_thread);
 
     source_cleanup_poll_fds(source);

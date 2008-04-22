@@ -1,3 +1,8 @@
+2008-04-22  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbglib_maincontext: Handle both thread->wait_for WAIT_FD and
+	WAIT_SELECT properly.
+
 2008-04-20  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbglib_maincontext: Properly handle the case where the poll setup
