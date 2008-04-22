@@ -1,3 +1,7 @@
+2008-04-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/number-pdf.rb: add.
+
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: fix rcairo's source path.
