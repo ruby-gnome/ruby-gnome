@@ -1,3 +1,7 @@
+2008-04-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/misc/assistant.rb: cleanup.
+
 2008-04-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/gtk-test-utils.rb: remove assert_boolean because

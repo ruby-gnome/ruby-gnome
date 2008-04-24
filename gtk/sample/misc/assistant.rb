@@ -4,7 +4,7 @@
 
   Guillaume Cottenceau for the ruby-gnome2 project.
 
-  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team 
+  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: assistant.rb,v 1.1 2006/11/23 08:39:12 mutoh Exp $
@@ -13,322 +13,320 @@
 require 'gtk2'
 
 if str = Gtk.check_version(2, 10, 0)
-    puts "This sample requires GTK+ 2.10.0 or later"
-    puts str
-    exit
+  puts "This sample requires GTK+ 2.10.0 or later"
+  puts str
+  exit
 end
 
-def get_test_page(text)
-    return Gtk::Label.new(text)
-end
+class AssistantRunner
+  def initialize
+    @simple_assistant = nil
+    @generous_assistant = nil
+    @selected_branch = "A"
+    @nonlinear_assistant = nil
+    @full_featured_assistant = nil
+  end
 
-def add_completion_test_page(assistant, text, visible, complete)
+  def run_simple_assistant
+    @simple_assistant = run_assistant(@simple_assistant,
+                                      :create_simple_assistant)
+  end
+
+  def run_generous_assistant
+    @generous_assistant = run_assistant(@generous_assistant,
+                                        :create_generous_assistant)
+  end
+
+  def run_nonlinear_assistant
+    @nonlinear_assistant = run_assistant(@nonlinear_assistant,
+                                         :create_nonlinear_assistant)
+  end
+
+  def run_full_featured_assistant
+    @full_featured_assistant = run_assistant(@full_featured_assistant,
+                                             :create_full_featured_assistant)
+  end
+
+  private
+  def run_assistant(assistant, assistant_create_method)
+    assistant ||= send(assistant_create_method)
+    if !assistant.visible?
+      assistant.show
+    else
+      assistant.destroy
+      assistant = nil
+    end
+    assistant
+  end
+
+  def add_completion_test_page(assistant, text, visible, complete)
     page = Gtk::VBox.new(0, 0)
     check = Gtk::CheckButton.new("Complete")
     page.add(Gtk::Label.new(text))
     page.add(check)
     check.active = complete
-    check.signal_connect('toggled') {
-        complete = check.active?
-        assistant.set_page_complete(page, complete)
-    }
-    if visible
-        page.show_all
+    check.signal_connect('toggled') do
+      complete = check.active?
+      assistant.set_page_complete(page, complete)
     end
+    page.show_all if visible
     assistant.append_page(page)
     assistant.set_page_title(page, text)
     assistant.set_page_complete(page, complete)
-    return page
-end
+    page
+  end
 
-def prepare_cb(assistant, page)
+  def create_test_page(text)
+    Gtk::Label.new(text)
+  end
+
+  def prepare_cb(assistant, page)
     if page.is_a?(Gtk::Label)
-        puts "prepare: #{page.text}"
+      puts "prepare: #{page.text}"
     elsif assistant.get_page_type(page) == Gtk::Assistant::PAGE_PROGRESS
+      progress = page.child
+      assistant.set_page_complete(page, false)
+      progress.fraction = 0.0
+      Gtk.timeout_add(300) do
+        page = assistant.get_nth_page(assistant.current_page)
         progress = page.child
-        assistant.set_page_complete(page, false)
-        progress.fraction = 0.0
-        Gtk.timeout_add(300) {
-            retval = true
-            page = assistant.get_nth_page(assistant.current_page)
-            progress = page.child
-            value = progress.fraction = progress.fraction + 0.1
-            if value >= 1.0
-                assistant.set_page_complete(page, true)
-                retval = false
-            end
-            retval
-        }
+        value = progress.fraction = progress.fraction + 0.1
+        continue = value < 1.0
+        assistant.set_page_complete(page, true) unless continue
+        continue
+      end
     else
-        puts "prepare: #{assistant.current_page}"
+      puts "prepare: #{assistant.current_page}"
     end
+  end
+
+  def create_simple_assistant
+    assistant = Gtk::Assistant.new
+    assistant.set_default_size(400, 300)
+    assistant.signal_connect('cancel') do
+      puts "cancel"
+      assistant.hide
+    end
+    assistant.signal_connect('close') do
+      puts "close"
+      assistant.hide
+    end
+    assistant.signal_connect('apply') do
+      puts "apply"
+    end
+    assistant.signal_connect('prepare') do |_assistant, page|
+      prepare_cb(_assistant, page)
+    end
+
+    page = create_test_page("Page 1")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 1")
+    assistant.set_page_complete(page, true)
+
+    page = create_test_page("Page 2")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 2")
+    assistant.set_page_type(page, :confirm)
+    assistant.set_page_complete(page, true)
+  end
+
+  def create_generous_assistant
+    assistant = Gtk::Assistant.new
+    assistant.set_default_size(400, 300)
+    assistant.signal_connect('cancel') do
+      puts "cancel"
+      assistant.hide
+    end
+    assistant.signal_connect('close') do
+      puts "close"
+      assistant.hide
+    end
+    assistant.signal_connect('apply') do
+      puts "apply"
+    end
+    assistant.signal_connect('prepare') do|_assistant, page|
+      prepare_cb(_assistant, page)
+    end
+
+    page = create_test_page("Introduction")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Introduction")
+    assistant.set_page_type(page, :intro)
+    assistant.set_page_complete(page, true)
+
+    page = add_completion_test_page(assistant, "Content", true, false)
+    next_page = add_completion_test_page(assistant, "More Content", true, true)
+
+    check = Gtk::CheckButton.new("Next page visible");
+    check.active = true
+    check.signal_connect('toggled') do
+      puts "beuh"
+      next_page.visible = check.active?
+    end
+    check.show
+    page.add(check)
+
+    add_completion_test_page(assistant, "Even More Content", true, true)
+
+    page = create_test_page("Confirmation")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Confirmation")
+    assistant.set_page_type(page, :confirm)
+    assistant.set_page_complete(page, true)
+
+    page = Gtk::Alignment.new(0.5, 0.5, 0.9, 0.0)
+    page.add(Gtk::ProgressBar.new)
+    page.show_all
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Progress")
+    assistant.set_page_type(page, :progress)
+    assistant.set_page_complete(page, true)
+
+    page = create_test_page("Summary")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Summary")
+    assistant.set_page_type(page, :summary)
+    assistant.set_page_complete(page, true)
+  end
+
+  def create_nonlinear_assistant
+    assistant = Gtk::Assistant.new
+    assistant.set_default_size(400, 300)
+    assistant.signal_connect('cancel') do
+      puts "cancel"
+      assistant.hide
+    end
+    assistant.signal_connect('close') do
+      puts "close"
+      assistant.hide
+    end
+    assistant.signal_connect('apply') do
+      puts "apply"
+    end
+    assistant.signal_connect('prepare') do |_assistant, page|
+      prepare_cb(_assistant, page)
+    end
+
+    assistant.set_forward_page_func do |current_page|
+      retval = -1
+      if current_page == 0
+        if @selected_branch == 'A'
+          retval = 1
+        else
+          retval = 2
+        end
+      elsif current_page == 1 || current_page == 2
+        retval = 3
+      end
+      retval
+    end
+
+    page = Gtk::VBox.new(false, 6)
+    button = Gtk::RadioButton.new('branch A')
+    page.pack_start(button, false, false, 0)
+    button.signal_connect('toggled') do
+      @selected_branch = 'A'
+    end
+    button.active = true
+    button = Gtk::RadioButton.new(button, 'branch B')
+    page.pack_start(button, false, false, 0)
+    button.signal_connect('toggled') do
+      @selected_branch = 'B'
+    end
+    page.show_all
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 1")
+    assistant.set_page_complete(page, true)
+
+    page = create_test_page("Page 2A")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 2A")
+    assistant.set_page_complete(page, true)
+
+    page = create_test_page("Page 2B")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 2B")
+    assistant.set_page_complete(page, true)
+
+    page = create_test_page("Confirmation")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Confirmation")
+    assistant.set_page_type(page, :confirm)
+    assistant.set_page_complete(page, true)
+  end
+
+  def create_full_featured_assistant
+    assistant = Gtk::Assistant.new
+    assistant.set_default_size(400, 300)
+    assistant.signal_connect('cancel') do
+      puts "cancel"
+      assistant.hide
+    end
+    assistant.signal_connect('close') do
+      puts "close"
+      assistant.hide
+    end
+    assistant.signal_connect('apply') do
+      puts "apply"
+    end
+    assistant.signal_connect('prepare') do |_assistant, page|
+      prepare_cb(_assistant, page)
+    end
+
+    button = Gtk::Button.new(Gtk::Stock::STOP)
+    button.show
+    assistant.add_action_widget(button)
+
+    page = create_test_page("Page 1")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 1")
+    assistant.set_page_complete(page, true)
+
+    #- set a side image
+    pixbuf = page.render_icon(Gtk::Stock::DIALOG_WARNING, :dialog)
+    assistant.set_page_side_image(page, pixbuf)
+
+    #- set a header image
+    pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, :dialog)
+    assistant.set_page_header_image(page, pixbuf)
+
+    page = create_test_page("Invisible page")
+    assistant.append_page(page)
+
+    page = create_test_page("Page 3")
+    page.show
+    assistant.append_page(page)
+    assistant.set_page_title(page, "Page 3")
+    assistant.set_page_type(page, :confirm)
+    assistant.set_page_complete(page, true)
+
+    #- set a header image
+    pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, :dialog)
+    assistant.set_page_header_image(page, pixbuf)
+
+    assistant
+  end
 end
 
-$simple_assistant = nil
-def create_simple_assistant()
-    if $simple_assistant.nil?
-        $simple_assistant = Gtk::Assistant.new
-        $simple_assistant.set_default_size(400, 300)
-        $simple_assistant.signal_connect('cancel') {
-            puts "cancel"
-            $simple_assistant.hide
-        }
-        $simple_assistant.signal_connect('close') {
-            puts "close"
-            $simple_assistant.hide
-        }
-        $simple_assistant.signal_connect('apply') {
-            puts "apply"
-        }
-        $simple_assistant.signal_connect('prepare') { |assistant, page|
-            prepare_cb(assistant, page)
-        }
-
-        page = get_test_page("Page 1")
-        page.show
-        $simple_assistant.append_page(page)
-        $simple_assistant.set_page_title(page, "Page 1")
-        $simple_assistant.set_page_complete(page, true)
-
-        page = get_test_page("Page 2")
-        page.show
-        $simple_assistant.append_page(page)
-        $simple_assistant.set_page_title(page, "Page 2")
-        $simple_assistant.set_page_type(page, Gtk::Assistant::PAGE_CONFIRM)
-        $simple_assistant.set_page_complete(page, true)
-    end
-
-    if ! $simple_assistant.visible?
-        $simple_assistant.show
-    else
-        $simple_assistant.destroy
-        $simple_assistant = nil
-    end
-end
-
-$generous_assistant = nil
-def create_generous_assistant()
-    if $generous_assistant.nil?
-        $generous_assistant = Gtk::Assistant.new
-        $generous_assistant.set_default_size(400, 300)
-        $generous_assistant.signal_connect('cancel') {
-            puts "cancel"
-            $generous_assistant.hide
-        }
-        $generous_assistant.signal_connect('close') {
-            puts "close"
-            $generous_assistant.hide
-        }
-        $generous_assistant.signal_connect('apply') {
-            puts "apply"
-        }
-        $generous_assistant.signal_connect('prepare') { |assistant, page|
-            prepare_cb(assistant, page)
-        }
-
-        page = get_test_page("Introduction")
-        page.show
-        $generous_assistant.append_page(page)
-        $generous_assistant.set_page_title(page, "Introduction")
-        $generous_assistant.set_page_type(page, Gtk::Assistant::PAGE_INTRO)
-        $generous_assistant.set_page_complete(page, true)
-
-        page = add_completion_test_page($generous_assistant, "Content", true, false)
-        next_ = add_completion_test_page($generous_assistant, "More Content", true, true)
-
-        check = Gtk::CheckButton.new("Next page visible");
-        check.active = true
-        check.signal_connect('toggled') {
-            puts "beuh"
-            next_.visible = check.active?
-        }
-        check.show
-        page.add(check)
-
-        add_completion_test_page($generous_assistant, "Even More Content", true, true)
-
-        page = get_test_page("Confirmation")
-        page.show
-        $generous_assistant.append_page(page)
-        $generous_assistant.set_page_title(page, "Confirmation")
-        $generous_assistant.set_page_type(page, Gtk::Assistant::PAGE_CONFIRM)
-        $generous_assistant.set_page_complete(page, true)
-
-        page = Gtk::Alignment.new(0.5, 0.5, 0.9, 0.0)
-        page.add(Gtk::ProgressBar.new)
-        page.show_all
-        $generous_assistant.append_page(page)
-        $generous_assistant.set_page_title(page, "Progress")
-        $generous_assistant.set_page_type(page, Gtk::Assistant::PAGE_PROGRESS)
-        $generous_assistant.set_page_complete(page, true)
-
-        page = get_test_page("Summary")
-        page.show
-        $generous_assistant.append_page(page)
-        $generous_assistant.set_page_title(page, "Summary")
-        $generous_assistant.set_page_type(page, Gtk::Assistant::PAGE_SUMMARY)
-        $generous_assistant.set_page_complete(page, true)
-    end
-
-    if ! $generous_assistant.visible?
-        $generous_assistant.show
-    else
-        $generous_assistant.destroy
-        $generous_assistant = nil
-    end
-end
-
-$selected_branch = 'A'
-$nonlinear_assistant = nil
-def create_nonlinear_assistant()
-    if $nonlinear_assistant.nil?
-        $nonlinear_assistant = Gtk::Assistant.new
-        $nonlinear_assistant.set_default_size(400, 300)
-        $nonlinear_assistant.signal_connect('cancel') {
-            puts "cancel"
-            $nonlinear_assistant.hide
-        }
-        $nonlinear_assistant.signal_connect('close') {
-            puts "close"
-            $nonlinear_assistant.hide
-        }
-        $nonlinear_assistant.signal_connect('apply') {
-            puts "apply"
-        }
-        $nonlinear_assistant.signal_connect('prepare') { |assistant, page|
-            prepare_cb(assistant, page)
-        }
-
-        $nonlinear_assistant.set_forward_page_func { |current_page|
-            retval = -1
-            if current_page == 0
-                if $selected_branch == 'A'
-                    retval = 1
-                else
-                    retval = 2
-                end
-            elsif current_page == 1 || current_page == 2
-                retval = 3
-            end
-            retval
-        }
-
-        page = Gtk::VBox.new(false, 6)
-        button = Gtk::RadioButton.new('branch A')
-        page.pack_start(button, false, false, 0)
-        button.signal_connect('toggled') {
-            $selected_branch = 'A'
-        }
-        button.active = true
-        button = Gtk::RadioButton.new(button, 'branch B')
-        page.pack_start(button, false, false, 0)
-        button.signal_connect('toggled') {
-            $selected_branch = 'B'
-        }
-        page.show_all
-        $nonlinear_assistant.append_page(page)
-        $nonlinear_assistant.set_page_title(page, "Page 1")
-        $nonlinear_assistant.set_page_complete(page, true)
-
-        page = get_test_page("Page 2A")
-        page.show
-        $nonlinear_assistant.append_page(page)
-        $nonlinear_assistant.set_page_title(page, "Page 2A")
-        $nonlinear_assistant.set_page_complete(page, true)
-
-        page = get_test_page("Page 2B")
-        page.show
-        $nonlinear_assistant.append_page(page)
-        $nonlinear_assistant.set_page_title(page, "Page 2B")
-        $nonlinear_assistant.set_page_complete(page, true)
-
-        page = get_test_page("Confirmation")
-        page.show
-        $nonlinear_assistant.append_page(page)
-        $nonlinear_assistant.set_page_title(page, "Confirmation")
-        $nonlinear_assistant.set_page_type(page, Gtk::Assistant::PAGE_CONFIRM)
-        $nonlinear_assistant.set_page_complete(page, true)
-    end
-
-    if ! $nonlinear_assistant.visible?
-        $nonlinear_assistant.show
-    else
-        $nonlinear_assistant.destroy
-        $nonlinear_assistant = nil
-    end
-end
-
-
-$full_featured_assistant = nil
-def create_full_featured_assistant()
-    if $full_featured_assistant.nil?
-        $full_featured_assistant = Gtk::Assistant.new
-        $full_featured_assistant.set_default_size(400, 300)
-        $full_featured_assistant.signal_connect('cancel') {
-            puts "cancel"
-            $full_featured_assistant.hide
-        }
-        $full_featured_assistant.signal_connect('close') {
-            puts "close"
-            $full_featured_assistant.hide
-        }
-        $full_featured_assistant.signal_connect('apply') {
-            puts "apply"
-        }
-        $full_featured_assistant.signal_connect('prepare') { |assistant, page|
-            prepare_cb(assistant, page)
-        }
-
-        button = Gtk::Button.new(Gtk::Stock::STOP)
-        button.show
-        $full_featured_assistant.add_action_widget(button)
-
-        page = get_test_page("Page 1")
-        page.show
-        $full_featured_assistant.append_page(page)
-        $full_featured_assistant.set_page_title(page, "Page 1")
-        $full_featured_assistant.set_page_complete(page, true)
-
-        #- set a side image
-        pixbuf = page.render_icon(Gtk::Stock::DIALOG_WARNING, Gtk::IconSize::DIALOG)
-        $full_featured_assistant.set_page_side_image(page, pixbuf)
-        
-        #- set a header image
-        pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, Gtk::IconSize::DIALOG)
-        $full_featured_assistant.set_page_header_image(page, pixbuf)
-
-        page = get_test_page("Invisible page")
-        $full_featured_assistant.append_page(page)
-
-        page = get_test_page("Page 3")
-        page.show
-        $full_featured_assistant.append_page(page)
-        $full_featured_assistant.set_page_title(page, "Page 3")
-        $full_featured_assistant.set_page_type(page, Gtk::Assistant::PAGE_CONFIRM)
-        $full_featured_assistant.set_page_complete(page, true)
-
-        #- set a header image
-        pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, Gtk::IconSize::DIALOG)
-        $full_featured_assistant.set_page_header_image(page, pixbuf)
-    end
-
-    if ! $full_featured_assistant.visible?
-        $full_featured_assistant.show
-    else
-        $full_featured_assistant.destroy
-        $full_featured_assistant = nil
-    end
-end
-
+runner = AssistantRunner.new
 buttons = [
-    [ 'simple assistant', proc { create_simple_assistant } ],
-    [ 'generous assistant', proc { create_generous_assistant } ],
-    [ 'nonlinear assistant', proc { create_nonlinear_assistant } ],
-    [ 'full featured assistant', proc { create_full_featured_assistant } ],
+    [ 'simple assistant', proc { runner.run_simple_assistant } ],
+    [ 'generous assistant', proc { runner.run_generous_assistant } ],
+    [ 'nonlinear assistant', proc { runner.run_nonlinear_assistant } ],
+    [ 'full featured assistant', proc { runner.run_full_featured_assistant } ],
 ]
 
 if ENV['RTL']
-    Gtk::Widget.default_direction = Gtk::Widget::TEXT_DIR_RTL
+  Gtk::Widget.default_direction = Gtk::Widget::TEXT_DIR_RTL
 end
 
 window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
@@ -338,12 +336,12 @@ window.signal_connect('delete-event') { false }
 box = Gtk::VBox.new(false, 6)
 window.add(box)
 
-buttons.each { |elem|
-    button = Gtk::Button.new(elem[0])
-    button.signal_connect('clicked') {
-        elem[1].call
-    }
-    box.pack_start(button, true, true, 0)
-}
+buttons.each do |label, callback|
+  button = Gtk::Button.new(label)
+  button.signal_connect('clicked') do
+    callback.call
+  end
+  box.pack_start(button, true, true, 0)
+end
 window.show_all
 Gtk.main
