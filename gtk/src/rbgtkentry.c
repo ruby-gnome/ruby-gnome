@@ -120,6 +120,21 @@ gint        gtk_entry_get_max_length        (GtkEntry *entry);
 gboolean    gtk_entry_get_visibility        (GtkEntry *entry);
 */
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+entry_get_cursor_hadjustment(VALUE self)
+{
+    return GOBJ2RVAL(gtk_entry_get_cursor_hadjustment(_SELF(self)));
+}
+
+static VALUE
+entry_set_cursor_hadjustment(VALUE self, VALUE adjustment)
+{
+    gtk_entry_set_cursor_hadjustment(_SELF(self), RVAL2GOBJ(adjustment));
+    return self;
+}
+#endif
+
 void 
 Init_gtk_entry()
 {
@@ -134,6 +149,13 @@ Init_gtk_entry()
 #endif
     rb_define_method(gEntry, "layout_index_to_text_index", entry_layout_index_to_text_index, 1);
     rb_define_method(gEntry, "text_index_to_layout_index", entry_text_index_to_layout_index, 1);
+
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(gEntry, "cursor_hadjustment",
+		     entry_get_cursor_hadjustment, 0);
+    rb_define_method(gEntry, "set_cursor_hadjustment",
+		     entry_set_cursor_hadjustment, 1);
+#endif
 
     G_DEF_SETTERS(gEntry);
 }

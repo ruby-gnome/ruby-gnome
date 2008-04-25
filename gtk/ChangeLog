@@ -1,3 +1,13 @@
+2008-04-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkentry.c: implement Gtk::Entry#cursor_hadjustment and
+	Gtk::Entry#cursor_hadjustment= defined in GTK+ 2.12.
+
+	* test/test_gtk_entry.rb: add.
+
+	* test/gtk-test-utils.rb (GtkTestUtils#only_gtk_version): make
+	micro version optional.
+
 2008-04-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/misc/assistant.rb: cleanup.
