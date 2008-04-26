@@ -92,6 +92,36 @@ rbgutil_glist2ary_boxed_and_free(list, gtype)
 }
 
 VALUE
+rbgutil_glist2ary_string(GList *list)
+{
+    VALUE array;
+
+    array = rb_ary_new();
+    while (list) {
+        rb_ary_push(array, CSTR2RVAL(list->data));
+        list = g_list_next(list);
+    }
+    return array;
+}
+
+VALUE
+rbgutil_glist2ary_string_and_free(GList *list)
+{
+    VALUE array;
+
+    array = rb_ary_new();
+    while (list) {
+	gchar *string = list->data;
+
+        rb_ary_push(array, CSTR2RVAL(string));
+	g_free(string);
+        list = g_list_next(list);
+    }
+    g_list_free(list);
+    return array;
+}
+
+VALUE
 rbgutil_gslist2ary(list)
     GSList *list;
 {

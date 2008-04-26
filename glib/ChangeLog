@@ -1,5 +1,10 @@
 2008-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgutil.h (GLIST2ARY_STR, GLIST2ARY_STR_FREE): add.
+
+	* src/glib2.def, src/rbgutil.c (rbgutil_glist2ary_string,
+	rbgutil_glist2ary_string_and_free): add.
+
 	* src/rbglib.h (RBG_INSPECT): add.
 
 	* src/glib2.def: src/rbglib.c (rbg_rval_inspect): add.

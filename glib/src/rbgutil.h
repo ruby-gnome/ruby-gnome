@@ -35,6 +35,8 @@ extern "C" {
 #define GLIST2ARYF(list)          (GLIST2ARY_FREE(list))
 #define GLIST2ARY2(list, gtype)   (rbgutil_glist2ary_boxed(list, gtype))
 #define GLIST2ARY2F(list, gtype)  (rbgutil_glist2ary_boxed_and_free(list, gtype))
+#define GLIST2ARY_STR(list)       (rbgutil_glist2ary_string(list))
+#define GLIST2ARY_STR_FREE(list)  (rbgutil_glist2ary_string_and_free(list))
 #define GSLIST2ARY(list)          (rbgutil_gslist2ary(list))
 #define GSLIST2ARY_FREE(list)     (rbgutil_gslist2ary_and_free(list))
 #define GSLIST2ARYF(list)         (GSLIST2ARY_FREE(list))
@@ -45,8 +47,10 @@ extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_glist2ary(GList* list);
 extern VALUE rbgutil_glist2ary_boxed(GList* list, GType gtype);
+extern VALUE rbgutil_glist2ary_string(GList* list);
 extern VALUE rbgutil_glist2ary_and_free(GList* list);
 extern VALUE rbgutil_glist2ary_boxed_and_free(GList* list, GType gtype);
+extern VALUE rbgutil_glist2ary_string_and_free(GList* list);
 extern VALUE rbgutil_gslist2ary(GSList* list);
 extern VALUE rbgutil_gslist2ary_and_free(GSList* list);
 extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);

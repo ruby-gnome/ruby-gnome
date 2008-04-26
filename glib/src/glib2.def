@@ -62,8 +62,10 @@ EXPORTS
 	rbgutil_def_setters
 	rbgutil_glist2ary
 	rbgutil_glist2ary_boxed
+	rbgutil_glist2ary_string
 	rbgutil_glist2ary_and_free
 	rbgutil_glist2ary_boxed_and_free
+	rbgutil_glist2ary_string_and_free
 	rbgutil_gslist2ary
 	rbgutil_gslist2ary_boxed
 	rbgutil_gslist2ary_and_free
