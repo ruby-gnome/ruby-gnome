@@ -14,6 +14,8 @@
 #if GTK_CHECK_VERSION(2,4,0)
 #define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
 
+#define RVAL2ICON_LOOKUP_FLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS))
+#define ICON_INFO2RVAL(info) (BOXED2RVAL(info, GTK_TYPE_ICON_INFO))
 
 static VALUE
 it_initialize(self)
@@ -120,26 +122,30 @@ static VALUE
 it_lookup_icon(self, icon_name, size, flags)
     VALUE self, icon_name, size, flags;
 {
-    GtkIconInfo* info = gtk_icon_theme_lookup_icon(_SELF(self),
-                                                   RVAL2CSTR(icon_name),
-                                                   NUM2INT(size),
-                                                   RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS));
-    return BOXED2RVAL(info, GTK_TYPE_ICON_INFO);
+    GtkIconInfo* info;
+
+    info = gtk_icon_theme_lookup_icon(_SELF(self),
+				      RVAL2CSTR(icon_name),
+				      NUM2INT(size),
+				      RVAL2ICON_LOOKUP_FLAGS(flags));
+    return ICON_INFO2RVAL(info);
 }
 
 static VALUE
 it_load_icon(self, icon_name, size, flags)
     VALUE self, icon_name, size, flags;
 {
-    GError* error = NULL;
+    GError *error = NULL;
+    GdkPixbuf *pixbuf;
 
-    GdkPixbuf* ret = gtk_icon_theme_load_icon(_SELF(self), 
-                                              RVAL2CSTR(icon_name),
-                                              NUM2INT(size),
-                                              RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS),
-                                              &error);
-    if (! ret) RAISE_GERROR(error);
-    return GOBJ2RVAL(ret);
+    pixbuf = gtk_icon_theme_load_icon(_SELF(self),
+				      RVAL2CSTR(icon_name),
+				      NUM2INT(size),
+				      RVAL2ICON_LOOKUP_FLAGS(flags),
+				      &error);
+    if (!pixbuf)
+	RAISE_GERROR(error);
+    return GOBJ2RVAL(pixbuf);
 }
 
 static VALUE
@@ -207,9 +213,68 @@ it_s_add_builtin_icon(self, icon_name, size, pixbuf)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+it_choose_icon(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_icon_names, rb_size, rb_flags;
+    gint size;
+    gchar **icon_names;
+    GtkIconLookupFlags flags;
+    GtkIconInfo *info;
+
+    rb_scan_args(argc, argv, "21", &rb_icon_names, &rb_size, &rb_flags);
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(rb_icon_names, rb_cString))) {
+	icon_names = ALLOCA_N(gchar *, 2);
+	icon_names[0] = RVAL2CSTR(rb_icon_names);
+	icon_names[1] = NULL;
+    }
+    else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_icon_names, rb_cArray))) {
+	VALUE *elements;
+	long i, len;
+
+	len = RARRAY_LEN(rb_icon_names);
+	icon_names = ALLOCA_N(gchar *, len + 1);
+	elements = RARRAY_PTR(rb_icon_names);
+	for (i = 0; i < len; i++) {
+	    icon_names[i] = RVAL2CSTR(elements[i]);
+	}
+	icon_names[i] = NULL;
+    }
+    else {
+	rb_raise(rb_eArgError,
+		 "expected (name, size), (name, size, flags), "
+		 "([name1, name2, ...], size) or "
+		 "([name1, name2, ...], size, flags): %s",
+		 RBG_INSPECT(rb_ary_new4(argc, argv)));
+    }
+
+    size = NUM2INT(rb_size);
+
+    if (NIL_P(rb_flags)) {
+	flags = GTK_ICON_LOOKUP_GENERIC_FALLBACK;
+    }
+    else {
+	flags = RVAL2ICON_LOOKUP_FLAGS(rb_flags);
+    }
+
+    info = gtk_icon_theme_choose_icon(_SELF(self),
+				      (const gchar **)icon_names,
+				      size, flags);
+    return ICON_INFO2RVAL(info);
+}
+
+static VALUE
+it_list_contexts(VALUE self)
+{
+    return GLIST2ARY_STR_FREE(gtk_icon_theme_list_contexts(_SELF(self)));
+}
 #endif
 
-void 
+#endif
+
+void
 Init_gtk_icon_theme()
 {
 #if GTK_CHECK_VERSION(2,4,0)
@@ -236,6 +301,11 @@ Init_gtk_icon_theme()
 
     rb_define_singleton_method(it, "add_builtin_icon", it_s_add_builtin_icon, 3);
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(it, "choose_icon", it_choose_icon, -1);
+    rb_define_method(it, "contexts", it_list_contexts, 0);
+#endif
+
     G_DEF_SETTERS(it);
 
     /* GtkIconThemeError */
@@ -245,6 +315,6 @@ Init_gtk_icon_theme()
     /* GtkIconLookupFlags */
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", it);
     G_DEF_CONSTANTS(it, GTK_TYPE_ICON_LOOKUP_FLAGS, "GTK_ICON_");
-    
+
 #endif
 }
