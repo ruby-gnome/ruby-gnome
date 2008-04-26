@@ -114,7 +114,7 @@ rbgutil_glist2ary_string_and_free(GList *list)
     for (node = list; node; node = g_list_next(node)) {
 	gchar *string = node->data;
 
-        rb_ary_push(array, CSTR2RVAL(string));
+	rb_ary_push(array, CSTR2RVAL(string));
 	g_free(string);
     }
     g_list_free(list);
