@@ -108,14 +108,14 @@ VALUE
 rbgutil_glist2ary_string_and_free(GList *list)
 {
     VALUE array;
+    GList *node;
 
     array = rb_ary_new();
-    while (list) {
-	gchar *string = list->data;
+    for (node = list; node; node = g_list_next(node)) {
+	gchar *string = node->data;
 
         rb_ary_push(array, CSTR2RVAL(string));
 	g_free(string);
-        list = g_list_next(list);
     }
     g_list_free(list);
     return array;
@@ -147,27 +147,28 @@ rbgutil_gslist2ary_boxed(list, gtype)
 }
 
 VALUE
-rbgutil_gslist2ary_and_free(list)
-    GSList *list;
+rbgutil_gslist2ary_and_free(GSList *list)
 {
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, GOBJ2RVAL(list->data));
-        list = list->next;
+    GSList *node;
+    VALUE ary;
+
+    ary = rb_ary_new();
+    for (node = list; node; node = g_slist_next(node)) {
+        rb_ary_push(ary, GOBJ2RVAL(node->data));
     }
     g_slist_free(list);
     return ary;
 }
 
 VALUE
-rbgutil_gslist2ary_boxed_and_free(list, gtype)
-    GSList *list;
-    GType gtype;
+rbgutil_gslist2ary_boxed_and_free(GSList *list, GType gtype)
 {
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
-        list = list->next;
+    GSList *node;
+    VALUE ary;
+
+    ary = rb_ary_new();
+    for (node = list; node; node = g_slist_next(node)) {
+        rb_ary_push(ary, BOXED2RVAL(node->data, gtype));
     }
     g_slist_free(list);
     return ary;

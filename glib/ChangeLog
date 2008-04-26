@@ -1,5 +1,9 @@
 2008-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgutil.c (rbgutil_glist2ary_string)
+	(rbgutil_gslist2ary_and_free, rbgutil_gslist2ary_boxed_and_free):
+	fix not freed bug.
+
 	* src/rbgutil.h (GLIST2ARY_STR, GLIST2ARY_STR_FREE): add.
 
 	* src/glib2.def, src/rbgutil.c (rbgutil_glist2ary_string,
