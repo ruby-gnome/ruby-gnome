@@ -48,6 +48,12 @@ rbg_string_value_ptr(ptr)
     return rb_string_value_ptr(ptr);
 }
 
+gchar *
+rbg_rval2cstr_accept_nil(VALUE str)
+{
+    return NIL_P(str) ? NULL : StringValuePtr(str);
+}
+
 VALUE
 rbg_cstr2rval(const char* str)
 {
