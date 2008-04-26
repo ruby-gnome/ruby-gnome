@@ -14,6 +14,8 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
+static ID id_inspect;
+
 VALUE mGLib;
 
 extern void Init_gutil();
@@ -40,6 +42,15 @@ extern void Init_glib_timer();
 extern void Init_glib_unicode();
 extern void Init_glib_keyfile();
 extern void Init_glib_bookmark_file();
+
+const gchar *
+rbg_rval_inspect(VALUE object)
+{
+    VALUE inspected;
+
+    inspected = rb_funcall(object, id_inspect, 0);
+    return RVAL2CSTR(inspected);
+}
 
 char *
 rbg_string_value_ptr(ptr)
@@ -154,6 +165,8 @@ rbg_s_os_unix(self)
 void 
 Init_glib2()
 {
+    id_inspect = rb_intern("inspect");
+
     mGLib = rb_define_module("GLib");
 
     setlocale (LC_CTYPE, "");

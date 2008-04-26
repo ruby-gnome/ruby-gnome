@@ -53,7 +53,8 @@ EXPORTS
 	rbgobj_ruby_value_get_type
 	g_value_get_ruby_value
 	g_value_set_ruby_value
-        rbg_rval2cstr_accept_nil
+	rbg_rval_inspect
+	rbg_rval2cstr_accept_nil
 	rbg_cstr2rval
 	rbg_cstr2rval_with_free
 	rbg_string_value_ptr

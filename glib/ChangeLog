@@ -1,5 +1,9 @@
 2008-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (RBG_INSPECT): add.
+
+	* src/glib2.def: src/rbglib.c (rbg_rval_inspect): add.
+
 	* src/rbglib.h (RVAL2CSTR_ACCEPT_NIL): use function instead of
 	macro to avoid double evaluation.
 
