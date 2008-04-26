@@ -149,27 +149,16 @@ it_load_icon(self, icon_name, size, flags)
 }
 
 static VALUE
-it_list_icons(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+it_list_icons(int argc, VALUE *argv, VALUE self)
 {
     VALUE context;
-    GList* list;
-    GList* old;
-    VALUE ary = rb_ary_new();
+    GList *icons;
 
     rb_scan_args(argc, argv, "01", &context);
 
-    list = gtk_icon_theme_list_icons(_SELF(self), 
-                                     NIL_P(context) ? NULL : RVAL2CSTR(context));
-    old = list;
-    while (list) {
-        rb_ary_push(ary, CSTR2RVAL2(list->data));
-        list = list->next;
-    }
-    g_list_free(old);
-    return ary;
+    icons = gtk_icon_theme_list_icons(_SELF(self),
+				      RVAL2CSTR_ACCEPT_NIL(context));
+    return GLIST2ARY_STR_FREE(icons);
 }
 
 #if GTK_CHECK_VERSION(2,6,0)

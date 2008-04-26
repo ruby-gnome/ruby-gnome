@@ -1,4 +1,4 @@
-class TestGtkThemeChooseIcon < Test::Unit::TestCase
+class TestGtkIconTheme < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
@@ -21,5 +21,10 @@ class TestGtkThemeChooseIcon < Test::Unit::TestCase
     only_gtk_version(2, 12)
 
     assert_operator(@theme.contexts, :include?, "Apps")
+  end
+
+  def test_icons
+    assert_operator(@theme.icons, :include?, "undo")
+    assert_operator(@theme.icons("Actions"), :include?, "remove")
   end
 end

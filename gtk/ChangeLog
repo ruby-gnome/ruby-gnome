@@ -1,5 +1,10 @@
 2008-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gtk_icon_theme.rb (TestGtkThemeChooseIcon#test_icons):
+	add a test for Gtk::IconTheme#icons.
+
+	* src/rbgtkicontheme.c	(it_list_icons): use GLIST2ARY_STR_FREE().
+
 	* src/rbgtkicontheme.c: implement Gtk::IconTheme.choose_icon and
 	Gtk::IconTheme.contents defined in GTK+ 2.12.
 
