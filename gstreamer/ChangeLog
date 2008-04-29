@@ -1,3 +1,8 @@
+2008-04-23  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-message.c: rbgerr_gerror2exception frees the passed error, don't
+	free it again.
+
 2008-04-21  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-pad.c: Implement Gst::Pad#set_active

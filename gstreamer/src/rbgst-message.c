@@ -288,7 +288,6 @@ error_parse(VALUE self)
 
     gst_message_parse_error(SELF(self), &error, &debug);
     result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
-    g_error_free(error);
     return result;
 }
 
@@ -312,7 +311,6 @@ warning_parse(VALUE self)
 
     gst_message_parse_warning(SELF(self), &error, &debug);
     result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
-    g_error_free(error);
     return result;
 }
 
@@ -336,7 +334,6 @@ info_parse(VALUE self)
 
     gst_message_parse_info(SELF(self), &error, &debug);
     result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
-    g_error_free(error);
     return result;
 }
 
