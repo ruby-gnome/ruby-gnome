@@ -99,6 +99,24 @@ rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
     return children;
 }
 
+/*
+ * Method: children_recurse()
+ *
+ * Returns: an array of all Gst::Element objects in the container and child
+ * bins.
+ */
+static VALUE
+rb_gst_bin_get_children_recurse(VALUE self)
+{
+   GstIterator *iter;
+   VALUE children;
+
+   iter = gst_bin_iterate_recurse(SELF(self));
+   children = _rbgst_collect_elements(iter);
+
+    return children;
+}
+
 static VALUE
 rb_gst_bin_get_children_cookie(VALUE self)
 {
@@ -282,6 +300,20 @@ rb_gst_bin_each_element(int argc, VALUE *argv, VALUE self)
 }
 
 /*
+ * Method: each_recurse() {|element| ...}
+ *
+ * Calls the block for each element in the bin and its child bins, passing a
+ * reference to the Gst::Element as parameter. 
+ *
+ * Returns: always nil.
+ */
+static VALUE
+rb_gst_bin_each_recurse_element(VALUE self)
+{
+    return rb_ary_yield(rb_gst_bin_get_children_recurse(self));
+}
+
+/*
  * Method: get_child(index)
  * Method: get_child(name, recurse=false)
  * Method: get_child(interface)
@@ -367,6 +399,11 @@ Init_gst_bin (void)
 
     rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, -1);
     rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, -1);
+
+    rb_define_method(rb_cGstBin, "children_recurse", 
+                     rb_gst_bin_get_children_recurse, 0);
+    rb_define_method(rb_cGstBin, "each_recurse", 
+                     rb_gst_bin_each_recurse_element, 0);
 
     rb_define_method(rb_cGstBin, "children_cookie",
                      rb_gst_bin_get_children_cookie, 0);

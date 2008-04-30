@@ -1,3 +1,8 @@
+2008-04-30  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-bin.c: Add Gst::Bin#each_recurse and Gst::Bin#children_recurse
+	which iterate/get all children of the bin and all its sub-bins recursively
+
 2008-04-23  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-message.c: rbgerr_gerror2exception frees the passed error, don't
