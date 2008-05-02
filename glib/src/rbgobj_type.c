@@ -217,7 +217,7 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
     if (gclass)
         g_type_class_unref(gclass);
 
-    return (VALUE) cinfo;
+    return (VALUE)cinfo;
 }
 
 static VALUE
