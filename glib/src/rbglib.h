@@ -50,7 +50,8 @@ typedef int GPid;
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
-#define RAISE_GERROR(error) rb_exc_raise(rbgerr_gerror2exception(error))
+#define GERROR2RVAL(error) (rbgerr_gerror2exception(error))
+#define RAISE_GERROR(error) rb_exc_raise(GERROR2RVAL(error))
 #define G_DEF_ERROR(domain, name, module, parent, gtype)         \
     rbgerr_define_gerror(domain, name, module, parent, gtype)
 #define G_DEF_ERROR2(domain, name, module, parent) \

@@ -1,3 +1,7 @@
+2008-05-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h (GERROR2RVAL): define.
+
 2008-04-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil.c (rbgutil_glist2ary_string)
