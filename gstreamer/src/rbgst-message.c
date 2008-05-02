@@ -287,7 +287,7 @@ error_parse(VALUE self)
     gchar *debug;
 
     gst_message_parse_error(SELF(self), &error, &debug);
-    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    result = rb_ary_new3(2, GERROR2RVAL(error), CSTR2RVAL2(debug));
     return result;
 }
 
@@ -310,7 +310,7 @@ warning_parse(VALUE self)
     gchar *debug;
 
     gst_message_parse_warning(SELF(self), &error, &debug);
-    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    result = rb_ary_new3(2, GERROR2RVAL(error), CSTR2RVAL2(debug));
     return result;
 }
 
@@ -333,7 +333,7 @@ info_parse(VALUE self)
     gchar *debug;
 
     gst_message_parse_info(SELF(self), &error, &debug);
-    result = rb_ary_new3(2, rbgerr_gerror2exception(error), CSTR2RVAL2(debug));
+    result = rb_ary_new3(2, GERROR2RVAL(error), CSTR2RVAL2(debug));
     return result;
 }
 
