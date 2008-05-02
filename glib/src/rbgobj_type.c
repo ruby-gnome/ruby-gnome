@@ -15,6 +15,7 @@
 #include "rbgprivate.h"
 
 #include "rbgprivate.h"
+#include <rubysig.h>
 
 /**********************************************************************/
 /* Type Mapping */
@@ -36,6 +37,11 @@ typedef struct {
     void (*free)(gpointer);
     int flags; /* RGObjClassFlag */
 } RGObjClassInfoDynamic;
+
+typedef struct {
+  VALUE parent;
+  GType gtype;
+} RGObjClassByGtypeData;
 
 static void
 cinfo_mark(RGObjClassInfo* cinfo)
@@ -100,22 +106,28 @@ get_superclass(GType gtype)
     }
 }
 
-const RGObjClassInfo *
-rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
+static VALUE
+rbgobj_lookup_class_by_gtype_body(VALUE data)
 {
     GType fundamental_type;
     RGObjClassInfo* cinfo;
     RGObjClassInfoDynamic* cinfod;
     void* gclass = NULL;
     VALUE c;
+    GType gtype;
+    VALUE parent;
+    RGObjClassByGtypeData *cdata = (RGObjClassByGtypeData *)data;
+
+    gtype = cdata->gtype;
+    parent = cdata->parent;
 
     if (gtype == G_TYPE_INVALID)
-	return NULL;
+        return (VALUE)NULL;
 
     c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
     if (!NIL_P(c)){
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
-        return cinfo;
+        return (VALUE)cinfo;
     }
     c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
     cinfo->gtype = gtype;
@@ -147,7 +159,7 @@ rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
                   "rbgobj_lookup_class_by_gtype",
                   g_type_name(gtype),
                   g_type_name(fundamental_type));
-          return NULL;
+          return (VALUE)NULL;
       }
       cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
     }
@@ -205,7 +217,26 @@ rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
     if (gclass)
         g_type_class_unref(gclass);
 
-    return cinfo;
+    return (VALUE) cinfo;
+}
+
+static VALUE
+rbgobj_lookup_class_by_gtype_ensure(VALUE value)
+{
+    rb_thread_critical = (int)value;
+    return Qundef;
+}
+
+const RGObjClassInfo *
+rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent) 
+{
+    VALUE critical = rb_thread_critical;
+    RGObjClassByGtypeData data = { .parent = parent, .gtype = gtype };
+
+    rb_thread_critical = 1;
+
+    return (RGObjClassInfo *)rb_ensure (rbgobj_lookup_class_by_gtype_body,
+        (VALUE)&data, rbgobj_lookup_class_by_gtype_ensure, critical);
 }
 
 VALUE

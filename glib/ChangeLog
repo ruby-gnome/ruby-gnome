@@ -1,3 +1,9 @@
+2008-05-02  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgobj_type.c: Make rbgobj_lookup_class_by_gtype a thread critical
+	section. Prevents issues if two ruby threads want to convert an unknown
+	GObject class at the same time.
+
 2008-05-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h (GERROR2RVAL): define.
