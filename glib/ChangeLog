@@ -1,3 +1,7 @@
+2008-05-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_type.c: fix style.
+
 2008-05-02  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgobj_type.c: Make rbgobj_lookup_class_by_gtype a thread critical

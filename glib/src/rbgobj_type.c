@@ -228,15 +228,17 @@ rbgobj_lookup_class_by_gtype_ensure(VALUE value)
 }
 
 const RGObjClassInfo *
-rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent) 
+rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 {
     VALUE critical = rb_thread_critical;
     RGObjClassByGtypeData data = { .parent = parent, .gtype = gtype };
 
     rb_thread_critical = 1;
 
-    return (RGObjClassInfo *)rb_ensure (rbgobj_lookup_class_by_gtype_body,
-        (VALUE)&data, rbgobj_lookup_class_by_gtype_ensure, critical);
+    return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
+				       (VALUE)&data,
+				       rbgobj_lookup_class_by_gtype_ensure,
+				       critical);
 }
 
 VALUE
