@@ -14,6 +14,8 @@ test_unit_ext_dir = File.join(glib_base, "test-unit-ext", "lib")
   exit(1) unless `make -C #{target.dump} > /dev/null`
   $LOAD_PATH.unshift(File.join(target, "src"))
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
+  $LOAD_PATH.unshift(File.join(target))
+  $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
 $LOAD_PATH.unshift(test_unit_ext_dir)
