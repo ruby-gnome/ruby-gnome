@@ -80,6 +80,34 @@ lstore_set_value(self, iter, column, value)
     return self;
 }
 
+#if GTK_CHECK_VERSION(2, 12, 0)
+static VALUE
+lstore_set_valuesv(VALUE self, VALUE iter, VALUE columns, VALUE value, VALUE n_values)
+{
+    GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(columns));
+    GValue gval = {0,};
+    gint i,len = RARRAY(columns)->len;
+    gint* gcolumns = g_new(gint, len);
+
+    for (i = 0; i < len; i++) {
+        gcolumns[i] = NUM2INT(RARRAY(columns)->ptr[i]);
+    }
+
+    g_value_init(&gval, gtype);
+
+    rbgobj_rvalue_to_gvalue(value, &gval);
+
+    G_CHILD_ADD(self, iter);
+    G_CHILD_ADD(iter, value);
+
+    gtk_list_store_set_valuesv(_SELF(self), RVAL2ITR(iter), gcolumns, &gval, NUM2INT(n_values));
+
+    g_value_unset(&gval);
+    g_free(gcolumns);
+    return self;
+}
+#endif
+
 /*
   void        gtk_tree_store_set (GtkTreeStore *tree_store,
   GtkTreeIter *iter,
@@ -306,6 +334,9 @@ Init_gtk_list_store()
     rb_define_method(ls, "swap", lstore_swap, 2);
     rb_define_method(ls, "move_before", lstore_move_before, 2);
     rb_define_method(ls, "move_after", lstore_move_after, 2);
+#endif
+#if GTK_CHECK_VERSION(2, 12, 0)
+    rb_define_method(ls, "set_valuesv", lstore_set_valuesv, 4);
 #endif
 
 }
