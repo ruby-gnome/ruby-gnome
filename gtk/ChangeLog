@@ -1,3 +1,8 @@
+2008-05-13  Hirofumi Nakagawa  <hnakagawa@users.sourceforge.net>
+
+	* src/rbgtkliststore.c: Fixed Gtk::ListStore#set_values()
+	add a test for Gtk::ListStore#set_values()
+	
 2008-05-12  Hirofumi Nakagawa  <hnakagawa@users.sourceforge.net>
 
 	* src/rbgtkliststore.c: added Gtk::ListStore#set_valuesv()
