@@ -9,9 +9,9 @@ class TestSelectionData < Test::Unit::TestCase
     Gdk::Property.change(@window, name,
                          Gdk::Selection::TYPE_INTEGER,
                          :replace, value)
-    assert_equal([Gdk::Selection::TYPE_INTEGER, [value], 8],
+    assert_equal([Gdk::Selection::TYPE_INTEGER, [value]],
                  Gdk::Property.get(@window, name,
                                    Gdk::Selection::TYPE_INTEGER,
-                                   false))
+                                   false)[0, 2])
   end
 end

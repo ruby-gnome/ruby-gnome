@@ -1,5 +1,9 @@
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gdk_selection_data.rb
+	(TestSelectionData#test_type_integer): ignore actual
+	length. (Gdk::Property should return it?)
+
 	* test/test_gtk_list_store.rb: rename from
 	test/test_gtk_liststore.rb.
 
