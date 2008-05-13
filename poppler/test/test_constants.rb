@@ -18,7 +18,7 @@ class TestConstants < Test::Unit::TestCase
     if later_version?(0, 9, 0)
       assert_const_not_defined(Poppler, :AnnotationTextIcon)
     else
-      assert_const_defined(Poppler, :AnnotationTextIcon)
+      send(assertion, Poppler, :AnnotationTextIcon)
     end
     send(assertion, Poppler, :AnnotationTextState)
     send(assertion, Poppler, :AnnotationFreeTextQuadding)

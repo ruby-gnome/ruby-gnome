@@ -8,6 +8,7 @@ class TestDocument < Test::Unit::TestCase
     assert(document.save(saved_pdf))
     assert(File.exist?(saved_pdf))
 
+    return unless later_version?(0, 8, 0)
     reread_document = Poppler::Document.new(saved_pdf)
     assert_equal("XXX", find_first_text_field(reread_document).text)
   end

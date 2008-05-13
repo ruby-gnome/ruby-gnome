@@ -1,5 +1,7 @@
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_document.rb, test/test_constants.rb: fix version check.
+
 	* test/test_constants.rb: followed the below changes.
 
 	* src/rbpoppler-annotation.c: support master at 2008-05-13.
