@@ -23,7 +23,7 @@ class TestPage < Test::Unit::TestCase
   end
 
   def test_render_to_pixbuf_for_printing
-    return unless later_version?(0, 7, 2)
+    only_poppler_version(0, 7, 2)
 
     document = Poppler::Document.new(image_pdf)
     page = document[0]
@@ -37,7 +37,7 @@ class TestPage < Test::Unit::TestCase
   end
 
   def test_thumbnail_pixbuf
-    return if true # we doesn't have a PDF that has a thumbnail...
+    omit("We doesn't have a PDF that has a thumbnail...")
     document = Poppler::Document.new(thumbnail_pdf)
     page = document[0]
     assert_kind_of(Gdk::Pixbuf, page.thumbnail_pixbuf)
@@ -56,7 +56,7 @@ class TestPage < Test::Unit::TestCase
   end
 
   def test_annotation_mapping
-    return unless later_version?(0, 7, 2)
+    only_poppler_version(0, 7, 2)
     document = Poppler::Document.new(form_pdf)
     page = document[0]
     assert_equal([Poppler::AnnotationMapping],

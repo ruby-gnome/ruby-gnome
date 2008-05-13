@@ -33,7 +33,15 @@ module PopplerTestUtils
     File.join(fixtures_dir, "image.pdf")
   end
 
-  def later_version?(major, minor, micro)
+  def later_version?(major, minor, micro=nil)
+    micro ||= 0
     (Poppler::BUILD_VERSION <=> [major, minor, micro]) >= 0
+  end
+
+  def only_poppler_version(major, minor, micro=nil)
+    micro ||= 0
+    unless later_version?(major, minor, micro)
+      omit("Require Poppler >= #{major}.#{minor}.#{micro}")
+    end
   end
 end

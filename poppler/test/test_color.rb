@@ -1,13 +1,13 @@
 class TestColor < Test::Unit::TestCase
   def test_initialize
-    return unless color_available?
+    only_poppler_version(0, 7, 2)
     rose = Poppler::Color.new(65535, 0, 32639)
     assert_equal([65535, 0, 32639], [rose.red, rose.green, rose.blue])
     assert_equal([65535, 0, 32639], rose.to_a)
   end
 
   def test_accessor
-    return unless color_available?
+    only_poppler_version(0, 7, 2)
     white = Poppler::Color.new(65535, 65535, 65535)
     red = white.dup
     red.green = 0
@@ -17,15 +17,10 @@ class TestColor < Test::Unit::TestCase
   end
 
   def test_inspect
-    return unless color_available?
+    only_poppler_version(0, 7, 2)
     color = Poppler::Color.new(0, 32767, 65535)
     rgb = '[0, 32767, 65535]'
     assert_match(/\A#<Poppler::Color:.*: #{Regexp.escape(rgb)}>\z/,
                  color.inspect)
-  end
-
-  private
-  def color_available?
-    later_version?(0, 7, 2)
   end
 end

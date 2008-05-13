@@ -8,13 +8,13 @@ class TestDocument < Test::Unit::TestCase
     assert(document.save(saved_pdf))
     assert(File.exist?(saved_pdf))
 
-    return unless later_version?(0, 8, 0)
+    only_poppler_version(0, 8, 0)
     reread_document = Poppler::Document.new(saved_pdf)
     assert_equal("XXX", find_first_text_field(reread_document).text)
   end
 
   def test_save_a_copy
-    return unless later_version?(0, 7, 2)
+    only_poppler_version(0, 7, 2)
     copied_pdf = File.join(tmp_dir, "copied.pdf")
     FileUtils.rm_f(copied_pdf)
 
