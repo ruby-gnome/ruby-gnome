@@ -3,33 +3,36 @@
 # quick & dirty script for running all available tests for each module
 # Author: Joachim Glauche
 
+require "rbconfig"
 require "open3"
 
-# for creating a seperating line
-def seperator()
-  str = ""; 
-  80.times do
-    str << "-"
-  end
-  str+"\n"
+ruby = File.join(Config::CONFIG['bindir'],
+                 Config::CONFIG['RUBY_INSTALL_NAME'] +Config::CONFIG['EXEEXT'])
+
+# for creating a separating line
+def separator
+  "-" * 80
 end
 
 puts "starting tests..."
-log = File.open("tests.log","w")
+File.open("tests.log", "w") do |log|
+  Dir.glob("*").each do |dir|
+    next unless File.directory?(dir)
+    Dir.chdir(dir) do
+      if File.exists?("test")
+        log.puts "#{Time.now} running test for #{dir}"
+        log.puts separator
 
-dirs = Dir.glob("*")
-dirs.each do |dir|
-  if File.exists?(dir+"/test")
-    log.puts "#{Time.now} running test for #{dir}\n"+seperator()
+        stdin, stdout, stderr = Open3.popen3(ruby, "test/run-test.rb")
 
-    stdin, stdout, stderr = Open3.popen3("ruby "+dir+"/test/run-test.rb")
-   
-    log.puts stdout.readlines
-    log.puts stderr.readlines
-    log.puts "\n\n"+seperator()        
-  end	
- 
+        log.puts stdout.readlines
+        log.puts stderr.readlines
+        log.puts
+        log.puts
+        log.puts separator
+      end
+    end
+  end
 end
-log.close
 puts "done. see tests.log for details"
 
