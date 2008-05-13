@@ -131,7 +131,11 @@ annot_text_get_is_open(VALUE self)
 static VALUE
 annot_text_get_icon(VALUE self)
 {
+#if POPPLER_CHECK_VERSION(0, 9, 0)
+    return CSTR2RVAL_FREE(poppler_annot_text_get_icon(SELF(self)));
+#else
     return TEXT_ICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
+#endif
 }
 
 static VALUE

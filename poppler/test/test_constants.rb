@@ -15,7 +15,11 @@ class TestConstants < Test::Unit::TestCase
     if assertion == :assert_const_defined
       assert_equal("3d", Poppler::AnnotationExternalDataType::TYPE_3D.nick)
     end
-    send(assertion, Poppler, :AnnotationTextIcon)
+    if later_version?(0, 9, 0)
+      assert_const_not_defined(Poppler, :AnnotationTextIcon)
+    else
+      assert_const_defined(Poppler, :AnnotationTextIcon)
+    end
     send(assertion, Poppler, :AnnotationTextState)
     send(assertion, Poppler, :AnnotationFreeTextQuadding)
   end

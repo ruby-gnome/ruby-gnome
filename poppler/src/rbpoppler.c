@@ -70,7 +70,9 @@ Init_poppler(void)
     G_RENAME_NICK("3D", "TYPE_3D");
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE,
 		"AnnotationExternalDataType", mPoppler);
+#  if !POPPLER_CHECK_VERSION(0, 9, 0)
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_ICON, "AnnotationTextIcon", mPoppler);
+#  endif
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_STATE, "AnnotationTextState", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING,
 		"AnnotationFreeTextQuadding", mPoppler);
