@@ -1,3 +1,7 @@
+2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpoppler-page.c: add cairo availability check.
+
 2008-04-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/number-pdf.rb: add.

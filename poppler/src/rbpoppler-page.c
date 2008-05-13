@@ -733,7 +733,9 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "transition", page_get_transition, 0);
 #endif
 #if POPPLER_CHECK_VERSION(0, 7, 2)
+#  if RB_POPPLER_CAIRO_AVAILABLE
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
+#  endif
     rb_define_method(cPage, "thumbnail_pixbuf", page_get_thumbnail_pixbuf, 0);
 #else
     rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
@@ -754,7 +756,9 @@ Init_poppler_page(VALUE mPoppler)
     rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
 #endif
 #if POPPLER_CHECK_VERSION(0, 7, 2)
+#  if RB_POPPLER_CAIRO_AVAILABLE
     rb_define_method(cPage, "get_image", page_get_image, 1);
+#  endif
 #endif
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
