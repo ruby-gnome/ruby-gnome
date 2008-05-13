@@ -168,7 +168,7 @@ keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
 	for (i = 0; i < len; i++) {
 	    search_dirs[i] = RVAL2CSTR(RARRAY_PTR(rb_search_dirs)[i]);
 	}
-	search_dirs[i + 1] = NULL;
+	search_dirs[i] = NULL;
     }
     flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
     if (!NIL_P(rb_flags))

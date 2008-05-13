@@ -1,3 +1,7 @@
+2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_keyfile.c (keyfile_load_from_dirs): fix index.
+
 2008-05-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_type.c: fix style.
