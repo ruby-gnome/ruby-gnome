@@ -5,23 +5,21 @@ class TestGtkListStore < Test::Unit::TestCase
     only_gtk_version(2, 12)
 
     store = Gtk::ListStore.new(Integer, String)
-    itr = store.append
+    iter = store.append
     assert_nothing_raised do
-      store.set_values(itr, [0, '1'])
+      store.set_values(iter, [0, '1'])
     end
-    assert_equal(0, itr[0])
-    assert_equal('1', itr[1])
+    assert_equal([0, '1'], [iter[0], iter[1]])
 
-    itr = store.append
+    iter = store.append
     assert_nothing_raised do
-      store.set_values(itr, [2, '3'])
+      store.set_values(iter, [2, '3'])
     end
-
-    assert_equal(2, itr[0])
-    assert_equal('3', itr[1])
+    assert_equal([2, '3'], [iter[0], iter[1]])
 
     assert_nothing_raised do
-      store.set_values(itr, [])
+      store.set_values(iter, [])
     end
+    assert_equal([2, '3'], [iter[0], iter[1]])
   end
 end
