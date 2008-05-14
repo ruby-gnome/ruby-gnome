@@ -7,14 +7,14 @@ class TestGtkListStore < Test::Unit::TestCase
     store = Gtk::ListStore.new(Integer, String)
     itr = store.append
     assert_nothing_raised do
-      store.set_values(itr, [0,'1'])
+      store.set_values(itr, [0, '1'])
     end
     assert_equal(0, itr[0])
     assert_equal('1', itr[1])
 
     itr = store.append
     assert_nothing_raised do
-      store.set_values(itr, [2,'3'])
+      store.set_values(itr, [2, '3'])
     end
 
     assert_equal(2, itr[0])

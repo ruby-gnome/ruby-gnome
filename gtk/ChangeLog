@@ -1,3 +1,7 @@
+2008-05-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gtk_list_store.rb: fix style.
+
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gdk_selection_data.rb
