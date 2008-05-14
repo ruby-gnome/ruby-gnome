@@ -10,12 +10,13 @@
 ************************************************/
 
 #include "global.h"
+#include <st.h>
 
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 #define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
-static ID id_to_a;
+static ID id_to_a, id_size;
 
 static VALUE
 lstore_initialize(argc, argv, self)
@@ -81,38 +82,99 @@ lstore_set_value(self, iter, column, value)
 }
 
 #if GTK_CHECK_VERSION(2, 12, 0)
+typedef struct _ValuesInfo
+{
+    gint i;
+    VALUE iter;
+    GtkTreeModel *model;
+    gint *g_columns;
+    GValue *g_values;
+} ValuesInfo;
+
+static int
+collect_value(VALUE key, VALUE value, ValuesInfo *info)
+{
+    GType g_type;
+    gint column;
+
+    column = NUM2INT(key);
+    info->g_columns[info->i] = column;
+    g_type = gtk_tree_model_get_column_type(info->model, column);
+    g_value_init(&(info->g_values[info->i]), g_type);
+    rbgobj_rvalue_to_gvalue(value, &(info->g_values[info->i]));
+    G_CHILD_ADD(info->iter, value);
+    info->i++;
+
+    return ST_CONTINUE;
+}
+
+static void
+hash_to_values(VALUE hash, VALUE iter, GtkTreeModel *model,
+	       gint *g_columns, GValue *g_values, gint length)
+{
+    ValuesInfo info;
+
+    info.i = 0;
+    info.iter = iter;
+    info.model = model;
+    info.g_columns = g_columns;
+    info.g_values = g_values;
+    rb_hash_foreach(hash, collect_value, (VALUE)(&info));
+}
+
+static void
+array_to_values(VALUE array, VALUE iter, GtkTreeModel *model,
+		gint *g_columns, GValue *g_values, gint length)
+{
+    gint i;
+
+    for (i = 0; i < length; i++) {
+	GType g_type;
+
+        g_columns[i] = i;
+        g_type = gtk_tree_model_get_column_type(model, i);
+        g_value_init(&g_values[i], g_type);
+        rbgobj_rvalue_to_gvalue(RARRAY(array)->ptr[i], &g_values[i]);
+        G_CHILD_ADD(iter, RARRAY(array)->ptr[i]);
+    }
+}
+
 static VALUE
 lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
 {
-    GType gtype;
-    GValue *gvalues;
-    gint* gcolumns;
-    gint i, len;
+    GValue *g_values;
+    GtkListStore *store;
+    GtkTreeModel *model;
+    gint *g_columns;
+    gint i, length;
 
-    len = RARRAY(values)->len;
-    if (!len)
+    length = NUM2INT(rb_funcall(values, id_size, 0));
+    if (length == 0)
         return self;
 
-    gcolumns = g_new(gint, len);
-    gvalues = g_new(GValue, len);
+    g_columns = ALLOCA_N(gint, length);
+    g_values = ALLOCA_N(GValue, length);
+    MEMZERO(g_values, GValue, length);
 
     G_CHILD_ADD(self, iter);
- 
-    for (i = 0; i < len; i++) {
-        gcolumns[i] = i;
-        gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), i);
-        g_value_init(&gvalues[i], gtype);
-        rbgobj_rvalue_to_gvalue(RARRAY(values)->ptr[i], &gvalues[i]);
-        G_CHILD_ADD(iter, RARRAY(values)->ptr[i]);
+
+    store = _SELF(self);
+    model = GTK_TREE_MODEL(store);
+    if (RVAL2CBOOL(rb_obj_is_kind_of(values, rb_cHash))) {
+	hash_to_values(values, iter, model, g_columns, g_values, length);
+    }
+    else if (RVAL2CBOOL(rb_obj_is_kind_of(values, rb_cArray))) {
+	array_to_values(values, iter, model, g_columns, g_values, length);
+    }
+    else {
+	rb_raise(rb_eArgError, "must be array or hash of values");
     }
 
-    gtk_list_store_set_valuesv(_SELF(self), RVAL2ITR(iter), gcolumns, gvalues, len);
+    gtk_list_store_set_valuesv(store, RVAL2ITR(iter),
+			       g_columns, g_values, length);
 
-    for (i = 0; i < len; i++)
-        g_value_unset(&gvalues[i]);
-
-    g_free(gvalues);
-    g_free(gcolumns);
+    for (i = 0; i < length; i++)
+        g_value_unset(&g_values[i]);
 
     return self;
 }
@@ -325,6 +387,7 @@ Init_gtk_list_store()
     VALUE ls = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
 
     id_to_a = rb_intern("to_a");
+    id_size = rb_intern("size");
 
     rbgtk_register_treeiter_set_value_func(GTK_TYPE_LIST_STORE, 
                                            (rbgtkiter_set_value_func)&gtk_list_store_set_value);
@@ -350,5 +413,3 @@ Init_gtk_list_store()
 #endif
 
 }
-
-

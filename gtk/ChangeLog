@@ -1,5 +1,8 @@
 2008-05-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtkliststore.c, test/test_gtk_list_store.rb:
+	Gtk::ListStore#set_values accept Hash as input.
+
 	* test/test_gtk_list_store.rb: clean-up.
 
 	* test/test_gtk_list_store.rb: fix style.
