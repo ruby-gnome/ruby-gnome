@@ -16,6 +16,12 @@
 #define _RBGTK_GLOBAL_H
 
 #include "rbgtk.h"
+#ifdef HAVE_ST_H
+#  include <st.h>
+#endif
+#ifdef HAVE_RUBY_ST_H
+#  include <ruby/st.h>
+#endif
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)

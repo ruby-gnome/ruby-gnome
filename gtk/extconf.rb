@@ -21,6 +21,9 @@ PKGConfig.have_package('gthread-2.0')
 PKGConfig.have_package(PKG_CONFIG_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
+have_header("st.h")
+have_header("ruby/st.h")
+
 STDOUT.print("checking for target... ")
 STDOUT.flush
 target = PKGConfig.variable(PKG_CONFIG_ID, "target")

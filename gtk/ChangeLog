@@ -1,3 +1,11 @@
+2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: check st.h and ruby/st.h.
+
+	* src/global.h: include st.h.
+
+	* src/rbgtkliststore.c, src/rbgdkdisplay.c: remove #include st.h.
+
 2008-05-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkliststore.c, test/test_gtk_list_store.rb:

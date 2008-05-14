@@ -10,7 +10,6 @@
 ************************************************/
 
 #include "global.h"
-#include <st.h>
 
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))

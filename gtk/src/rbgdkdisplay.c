@@ -10,7 +10,6 @@
 ************************************************/
 
 #include "global.h"
-#include <st.h>
 
 #if GTK_CHECK_VERSION(2,2,0)
 #define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
