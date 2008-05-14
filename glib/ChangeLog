@@ -1,3 +1,9 @@
+2008-05-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_unicode.rb:
+	- add uconv check.
+	- add GLib version check.
+
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_keyfile.c (keyfile_load_from_dirs): fix index.

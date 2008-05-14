@@ -154,7 +154,7 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unicode_canonical_ordering
-    require 'uconv'
+    require_uconv
     original = [unichar("a"), 0x0308, 0x0323,
                 unichar("e"), 0x0304, 0x0301, 0x0323].pack("U*")
     expected = [unichar("a"), 0x0323, 0x0308,
@@ -164,7 +164,7 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_unicode_canonical_decomposition
-    require 'uconv'
+    require_uconv
     a_with_acute = 0x00E1
     expected = [unichar("a"), 0x0301].pack("U*")
     assert_equal(Uconv.u8tou4(expected),
@@ -250,12 +250,14 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_utf8_collate
+    only_glib_version(2, 16, 0)
     assert_operator(0, :>, GLib::UTF8.collate("あ", "い"))
     assert_operator(0, :<, GLib::UTF8.collate("い", "あ"))
     assert_equal(0, GLib::UTF8.collate("あ", "あ"))
   end
 
   def test_utf8_collate_key
+    only_glib_version(2, 16, 0)
     assert_operator(0, :>,
                     GLib::UTF8.collate_key("あ") <=>
                     GLib::UTF8.collate_key("い"))
@@ -280,13 +282,13 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_utf8_to_utf16
-    require 'uconv'
+    require_uconv
     assert_equal(Uconv.u8tou16("あいうえお"),
                  GLib::UTF8.to_utf16("あいうえお"))
   end
 
   def test_utf8_to_ucs4
-    require 'uconv'
+    require_uconv
     assert_equal(Uconv.u8tou4("あいうえお"),
                  GLib::UTF8.to_ucs4("あいうえお"))
 
@@ -299,20 +301,20 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_utf16_to_ucs4
-    require 'uconv'
+    require_uconv
     assert_equal(Uconv.u8tou4("あいうえお"),
                  GLib::UTF16.to_ucs4(Uconv.u8tou16("あいうえお")))
   end
 
   def test_utf16_to_utf8
-    require 'uconv'
+    require_uconv
     assert_equal("あいうえお",
                  GLib::UTF16.to_utf8(Uconv.u8tou16("あいうえお")))
   end
 
 
   def test_ucs4_to_utf16
-    require 'uconv'
+    require_uconv
     assert_equal(Uconv.u8tou16("あいうえお"),
                  GLib::UCS4.to_utf16(Uconv.u8tou4("あいうえお")))
 
@@ -322,13 +324,13 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_ucs4_to_utf8
-    require 'uconv'
+    require_uconv
     assert_equal("あいうえお",
                  GLib::UCS4.to_utf8(Uconv.u8tou4("あいうえお")))
   end
 
   def test_unichar_to_utf8
-    require 'uconv'
+    require_uconv
     assert_equal("あ",
                  GLib::UniChar.to_utf8(Uconv.u8tou4("あ").unpack("L*")[0]))
   end
@@ -355,5 +357,11 @@ class TestGLibUnicode < Test::Unit::TestCase
   private
   def unichar(char)
     GLib::UTF8.get_char(char)
+  end
+
+  def require_uconv
+    require 'uconv'
+  rescue LoadError
+    omit("Need uconv to run this test.")
   end
 end
