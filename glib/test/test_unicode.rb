@@ -190,7 +190,7 @@ class TestGLibUnicode < Test::Unit::TestCase
   end
 
   def test_utf8_get_char
-    require "uconv"
+    require_uconv
     assert_equal(Uconv.u8tou4("あ").unpack("L*")[0],
                  GLib::UTF8.get_char("あ"))
 
