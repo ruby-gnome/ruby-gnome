@@ -1,3 +1,7 @@
+2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst.c (rb_gst_init): don't use global rb_argv.
+
 2008-05-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-message.c: use GERROR2RVAL().

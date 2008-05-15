@@ -141,7 +141,7 @@ Init_gst_classes (void)
  *
  * Returns: always true, or an exception on failure.
  */
-extern VALUE rb_progname, rb_argv;
+extern VALUE rb_progname;
 
 static VALUE
 rb_gst_init (int argc, VALUE * argv, VALUE self)
@@ -163,7 +163,9 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
     rb_scan_args (argc, argv, "01", &argary);
 
     if (NIL_P (argary)) {
-        gargc = RARRAY (rb_argv)->len;
+	VALUE rb_argv;
+        rb_argv = rb_const_get(rb_cObject, rb_intern("ARGV"));
+        gargc = RARRAY(rb_argv)->len;
         argary = rb_argv;
     } else {
         Check_Type (argary, T_ARRAY);
