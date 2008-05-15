@@ -1,3 +1,7 @@
+2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* run_tests.rb: set include path.
+
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* run_tests.rb: cleanup.
