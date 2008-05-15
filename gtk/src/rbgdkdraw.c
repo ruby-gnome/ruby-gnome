@@ -404,6 +404,7 @@ gdkdraw_cairo_create(self)
     VALUE rb_cr;
     cairo_t *cr;
     cr = gdk_cairo_create(_SELF(self));
+    rb_cairo_check_status(cairo_status(cr));
     rb_cr = CRCONTEXT2RVAL(cr);
     cairo_destroy (cr);
     return rb_cr;

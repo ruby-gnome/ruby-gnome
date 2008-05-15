@@ -1,5 +1,7 @@
 2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgdkdraw.c (gdkdraw_cairo_create): add status check.
+
 	* extconf.rb: check st.h and ruby/st.h.
 
 	* src/global.h: include st.h.
