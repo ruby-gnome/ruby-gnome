@@ -1,3 +1,7 @@
+2008-05-16  Kouhei Sutou  <kou@cozmixng.org>
+
+	* run-tests.rb: use '-' instead of '_' for filename.
+
 2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* run_tests.rb: set include path.
