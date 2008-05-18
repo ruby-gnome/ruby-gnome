@@ -85,7 +85,8 @@ flag_raised_p(VALUE self, VALUE flag)
 static VALUE
 get_data(VALUE self)
 {
-    return CSTR2RVAL((char *)GST_BUFFER_DATA(SELF(self)));
+    return rb_str_new((char *)GST_BUFFER_DATA(SELF(self)),
+        GST_BUFFER_SIZE(SELF(self)));
 }
 
 static VALUE

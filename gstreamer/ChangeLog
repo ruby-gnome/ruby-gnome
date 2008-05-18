@@ -1,3 +1,8 @@
+2008-05-18  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-buffer.c: use rb_str_new to implement Gst::Buffer#data. The data
+	isn't a \0 terminated C string, so need to specify the size to copy
+
 2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c (rb_gst_init): don't use global rb_argv.
