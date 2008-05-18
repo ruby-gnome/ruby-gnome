@@ -733,7 +733,7 @@ rb_gst_element_get_request_pad(VALUE self, VALUE name)
 {
     GstPad *pad =
         gst_element_get_request_pad(SELF(self), RVAL2CSTR(name));
-    return pad != NULL ? RGST_PAD_NEW(pad) : Qnil;
+    return pad != NULL ? GST_PAD2RVAL_UNREF(pad) : Qnil;
 }
 
 /*
