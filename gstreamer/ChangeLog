@@ -1,5 +1,9 @@
 2008-05-18  Sjoerd Simons <sjoerd@luon.net>
 
+	* src/rbgst-bin.c: Call G_CHILD_REMOVE when removing elements from a bin
+
+2008-05-18  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-buffer.c: use rb_str_new to implement Gst::Buffer#data. The data
 	isn't a \0 terminated C string, so need to specify the size to copy
 

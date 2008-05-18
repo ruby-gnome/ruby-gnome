@@ -257,8 +257,10 @@ rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
     GstBin *bin;
 
     bin = SELF(self);
-    for (i = 0; i < argc; i++)
+    for (i = 0; i < argc; i++) {
+        G_CHILD_REMOVE(self, argv[i]);
         gst_bin_remove(bin, RVAL2GST_ELEMENT(argv[i]));
+    }
     return Qnil;
 }
 
