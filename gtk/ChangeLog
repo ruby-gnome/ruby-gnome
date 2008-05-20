@@ -1,3 +1,8 @@
+2008-05-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmain.c: don't use rb_argv variable name for ruby 1.9.x.
+	Patch by Joao Pedrosa. Thanks!!!
+
 2008-05-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdraw.c (gdkdraw_cairo_create): add status check.
