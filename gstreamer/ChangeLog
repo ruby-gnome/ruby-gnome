@@ -1,3 +1,8 @@
+2008-05-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst.c: don't use rb_argv variable name for ruby 1.9.x.
+	Patch by Joao Pedrosa. Thanks!!!
+
 2008-05-18  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-element.c: gst_element_get_request_pad gives us a ref. So

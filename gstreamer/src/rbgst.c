@@ -163,10 +163,8 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
     rb_scan_args (argc, argv, "01", &argary);
 
     if (NIL_P (argary)) {
-	VALUE rb_argv;
-        rb_argv = rb_const_get(rb_cObject, rb_intern("ARGV"));
-        gargc = RARRAY(rb_argv)->len;
-        argary = rb_argv;
+        argary = rb_const_get(rb_cObject, rb_intern("ARGV"));
+        gargc = RARRAY(argary)->len;
     } else {
         Check_Type (argary, T_ARRAY);
         gargc = RARRAY (argary)->len;
