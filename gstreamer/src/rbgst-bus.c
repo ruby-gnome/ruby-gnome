@@ -65,7 +65,7 @@ rb_gst_bus_add_watch(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01&", &rb_priority, &block);
 
     priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : INT2NUM(rb_priority);
-    info = ALLOC(callback_info_t);
+    info = g_new(callback_info_t, 1);
     info->bus = self;
     info->callback = block;
     info->id = gst_bus_add_watch_full(SELF(self),

@@ -1,5 +1,10 @@
 2008-05-21  Sjoerd Simons <sjoerd@luon.net>
 
+	* src/rbgst-bus.c: Don't use ALLOC to allocate data that's going to be freed
+	with g_free, use g_new instead. 
+
+2008-05-21  Sjoerd Simons <sjoerd@luon.net>
+
 	* src/rbgst-element.c: Actually read the data coming from the notify fd.
 	As rb_wait_for_fd can return before there is data available on the fd.
 
