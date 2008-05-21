@@ -1,5 +1,6 @@
 class TestThreadHandling < Test::Unit::TestCase
   def test_scheduling
+    only_gst_version(0, 10, 16)
     pipeline = Gst::Pipeline.new
     buffers_seen = 0
 
@@ -26,6 +27,7 @@ class TestThreadHandling < Test::Unit::TestCase
   end
 
   def test_state_changes
+    only_gst_version(0, 10, 16)
      pipeline = Gst::Pipeline.new
      buffers_seen = 0
 

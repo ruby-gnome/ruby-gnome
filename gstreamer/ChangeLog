@@ -1,3 +1,11 @@
+2008-05-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/gst-test-utils.rb (GstTestUtils#only_gst_version): add.
+
+	* test/test_thread_handling.rb (TestThreadHandling): require
+	GStreamer 0.10.16 for using identity element's signal-handoffs
+	property.
+
 2008-05-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c: don't use rb_argv variable name for ruby 1.9.x.
