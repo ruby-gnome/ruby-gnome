@@ -110,16 +110,24 @@ static void
 do_in_thread(GThreadPool *pool, ThreadData *data)
 {
     int notify_fds[2];
+    char buf[NOTIFY_MESSAGE_SIZE];
     GError *error = NULL;
 
     if (pipe(notify_fds) != 0)
-	rb_sys_fail("failed to create a pipe to synchronize threaded operation");
+        rb_sys_fail("failed to create a pipe to synchronize threaded operation");
 
     data->notify_fd = notify_fds[1];
     g_thread_pool_push(pool, data, &error);
-    if (error)
-	RAISE_GERROR(error);
+    if (error) {
+        close(notify_fds[0]);
+        close(notify_fds[1]);
+        RAISE_GERROR(error);
+    }
+
     rb_thread_wait_fd(notify_fds[0]);
+
+    read(notify_fds[0], buf, NOTIFY_MESSAGE_SIZE);
+
 
     close(notify_fds[0]);
     close(notify_fds[1]);
@@ -133,7 +141,7 @@ set_state_in_thread(gpointer data, gpointer user_data)
 
     set_state_data = &(thread_data->data.set_state_data);
     set_state_data->result = gst_element_set_state(thread_data->element,
-						   set_state_data->state);
+                                                   set_state_data->state);
     write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
 }
 

@@ -1,3 +1,8 @@
+2008-05-21  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-element.c: Actually read the data coming from the notify fd.
+	As rb_wait_for_fd can return before there is data available on the fd.
+
 2008-05-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_thread_handling.rb
