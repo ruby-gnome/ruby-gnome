@@ -1,5 +1,8 @@
 2008-05-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_thread_handling.rb
+	(TestThreadHandling#test_state_changes): fix indentation.
+
 	* test/gst-test-utils.rb (GstTestUtils#only_gst_version): add.
 
 	* test/test_thread_handling.rb (TestThreadHandling): require
