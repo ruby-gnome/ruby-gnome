@@ -5,7 +5,7 @@ $VERBOSE = true
 base = File.expand_path(File.dirname(__FILE__))
 top = File.expand_path(File.join(base, ".."))
 
-if system("make --version > /dev/null")
+if system("which make > /dev/null")
   system("cd #{top.dump} && make > /dev/null") or exit(1)
 end
 
