@@ -2,6 +2,11 @@
 
 	* test/run-test.rb: use which not --version to detect make.
 
+2008-05-23  Sjoerd Simons <sjoerd@luon.net>
+
+	* src/rbgst-bin.c: Add Gst::Bin#to_dot_file and
+	Gst::Bin#to_dot_file_with_ts to dump pipelines to dot files
+
 2008-05-21  Sjoerd Simons <sjoerd@luon.net>
 
 	* src/rbgst-bus.c: Don't use ALLOC to allocate data that's going
