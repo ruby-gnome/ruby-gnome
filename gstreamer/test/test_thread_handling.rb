@@ -1,4 +1,8 @@
+require 'gst-test-utils.rb'
+
 class TestThreadHandling < Test::Unit::TestCase
+  include GstTestUtils
+
   def test_scheduling
     only_gst_version(0, 10, 16)
     pipeline = Gst::Pipeline.new

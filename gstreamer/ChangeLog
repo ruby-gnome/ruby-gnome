@@ -1,5 +1,9 @@
 2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgst.c (Gst.check_version?): add.
+
+	* test/test_thread_handling.rb: include missing GstTestUtils.
+
 	* test/run-test.rb: use which not --version to detect make.
 
 2008-05-23  Sjoerd Simons <sjoerd@luon.net>

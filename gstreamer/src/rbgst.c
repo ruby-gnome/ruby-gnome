@@ -224,6 +224,21 @@ rb_gst_version (VALUE self)
                        INT2NUM(micro), INT2NUM(nano));
 }
 
+static VALUE
+rbgst_m_check_version(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
+{
+    guint major, minor, micro, nano;
+
+    gst_version(&major, &minor, &micro, &nano);
+    return CBOOL2RVAL(major > NUM2UINT(rb_major) ||
+                      (major == NUM2UINT(rb_major) &&
+                       minor > NUM2UINT(rb_minor)) ||
+                      (major == NUM2UINT(rb_major) &&
+                       minor == NUM2UINT(rb_minor) &&
+                       micro >= NUM2UINT(rb_micro)));
+}
+
+
 void
 Init_gst (void)
 {
@@ -260,4 +275,6 @@ Init_gst (void)
                                 INT2FIX(GST_VERSION_MAJOR),
                                 INT2FIX(GST_VERSION_MINOR),
                                 INT2FIX(GST_VERSION_MICRO)));
+
+    rb_define_module_function(mGst, "check_version?", rbgst_m_check_version, 3);
 }
