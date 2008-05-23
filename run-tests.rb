@@ -4,7 +4,6 @@
 # Author: Joachim Glauche
 
 require "rbconfig"
-require "open3"
 require "pathname"
 
 ruby = File.join(Config::CONFIG['bindir'],
@@ -32,23 +31,16 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
   targets << dir
 end
 
-puts "starting tests..."
-File.open("tests.log", "w") do |log|
-  targets.each do |target|
-    Dir.chdir(target.to_s) do
-      log.puts "#{Time.now} running test for #{target}"
-      log.puts separator
+targets.each do |target|
+  Dir.chdir(target.to_s) do
+    puts "#{Time.now} running test for #{target}"
+    puts separator
 
-      args = includes + ["test/run-test.rb"]
-      stdin, stdout, stderr = Open3.popen3(ruby, *args)
+    args = includes + ["test/run-test.rb"]
+    command = [ruby, *args]
+    system(command.collect {|arg| "'#{arg.gsub(/'/, '\\\'')}'"}.join(' '))
 
-      log.puts stdout.readlines
-      log.puts stderr.readlines
-      log.puts
-      log.puts
-      log.puts separator
-    end
+    puts separator
   end
 end
-puts "done. see tests.log for details"
 

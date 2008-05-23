@@ -1,3 +1,7 @@
+2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* run-tests.rb: don't use open3, just output to stdout and stderr.
+
 2008-05-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* run-tests.rb: use '-' instead of '_' for filename.
