@@ -6,7 +6,9 @@ $VERBOSE = true
 
 base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
-system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
+if system("which make > /dev/null")
+  system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
+end
 
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
 test_unit_ext_dir = File.join(glib_dir, "test-unit-ext", "lib")
