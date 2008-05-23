@@ -386,20 +386,20 @@ rb_gst_bin_get_sources(VALUE self)
 }
 
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-static VALUE 
+static VALUE
 rb_gst_bin_to_dot_file(VALUE self, VALUE details, VALUE filename)
 {
-  GST_DEBUG_BIN_TO_DOT_FILE(SELF(self), 
-      NUM2INT(details), RVAL2CSTR(filename));
-  return Qnil;
+    GST_DEBUG_BIN_TO_DOT_FILE(SELF(self), NUM2INT(details), RVAL2CSTR(filename));
+    return Qnil;
 }
 
-static VALUE 
+static VALUE
 rb_gst_bin_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
 {
-  GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(SELF(self), 
-      NUM2INT(details), RVAL2CSTR(filename));
-  return Qnil;
+    GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(SELF(self),
+                                      NUM2INT(details),
+                                      RVAL2CSTR(filename));
+    return Qnil;
 }
 #endif
 
@@ -450,10 +450,9 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
 
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-    rb_define_method(rb_cGstBin, "to_dot_file", 
-      rb_gst_bin_to_dot_file, 2);
-    rb_define_method(rb_cGstBin, "to_dot_file_with_ts", 
-      rb_gst_bin_to_dot_file_with_ts, 2);
+    rb_define_method(rb_cGstBin, "to_dot_file", rb_gst_bin_to_dot_file, 2);
+    rb_define_method(rb_cGstBin, "to_dot_file_with_ts",
+                     rb_gst_bin_to_dot_file_with_ts, 2);
 #endif
 
     G_DEF_SETTERS(rb_cGstBin);
