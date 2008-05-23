@@ -11,7 +11,9 @@ gtk_base = File.join(ruby_gnome2_base, "gtk")
 test_unit_ext_dir = File.join(glib_base, "test-unit-ext", "lib")
 
 [glib_base, atk_base, pango_base, gdk_pixbuf_base, gtk_base].each do |target|
-  exit(1) unless `make -C #{target.dump} > /dev/null`
+  if system("which make > /dev/null")
+    `make -C #{target.dump} > /dev/null` or exit(1)
+  end
   $LOAD_PATH.unshift(File.join(target, "src"))
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
   $LOAD_PATH.unshift(File.join(target))
