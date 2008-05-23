@@ -385,6 +385,24 @@ rb_gst_bin_get_sources(VALUE self)
     return _rbgst_collect_elements(gst_bin_iterate_sources(SELF(self)));
 }
 
+#ifdef GST_DEBUG_BIN_TO_DOT_FILE
+static VALUE 
+rb_gst_bin_to_dot_file(VALUE self, VALUE details, VALUE filename)
+{
+  GST_DEBUG_BIN_TO_DOT_FILE(SELF(self), 
+      NUM2INT(details), RVAL2CSTR(filename));
+  return Qnil;
+}
+
+static VALUE 
+rb_gst_bin_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
+{
+  GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(SELF(self), 
+      NUM2INT(details), RVAL2CSTR(filename));
+  return Qnil;
+}
+#endif
+
 void
 Init_gst_bin (void)
 {
@@ -431,8 +449,19 @@ Init_gst_bin (void)
     rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
     rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
 
+#ifdef GST_DEBUG_BIN_TO_DOT_FILE
+    rb_define_method(rb_cGstBin, "to_dot_file", 
+      rb_gst_bin_to_dot_file, 2);
+    rb_define_method(rb_cGstBin, "to_dot_file_with_ts", 
+      rb_gst_bin_to_dot_file_with_ts, 2);
+#endif
+
     G_DEF_SETTERS(rb_cGstBin);
 
     G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
     G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");
+#ifdef GST_DEBUG_BIN_TO_DOT_FILE
+    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_DEBUG_GRAPH_DETAILS,
+        "GST_DEBUG_GRAPH_");
+#endif
 }
