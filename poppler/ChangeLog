@@ -1,3 +1,7 @@
+2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: use which not --version to detect make.
+
 2008-05-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/: use omit.

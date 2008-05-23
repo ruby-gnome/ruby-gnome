@@ -4,7 +4,7 @@ $VERBOSE = true
 
 base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
-if system("make --version > /dev/null")
+if system("which make > /dev/null")
   system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
 end
 
