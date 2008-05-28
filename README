@@ -99,6 +99,14 @@ Dependencies
   (not available)
       Ruby/Libgda        depends on Ruby/GLib.
 
+Bugs
+----
+Please report bugs either in our bug tracker
+http://sourceforge.net/tracker/?group_id=53614&atid=470969
+
+or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
+http://sourceforge.net/mail/?group_id=53614
+
 Copying
 -------
    Copyright (c) 2002-2008 Ruby-GNOME2 Project Team
