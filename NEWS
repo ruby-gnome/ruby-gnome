@@ -1,10 +1,11 @@
-Ruby-GNOME2-0.17.0 (unreleased yet)
+Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
 
   Release notes:
-  * Important: The current relase of win32 bindings is EXPERIMENTAL
-	The changes marked with 2 stars (**) may currently not work on win32 platforms.
+  * This Release Candidate seems to be pretty stable. Please give us
+    feedback if you encounter any problems.
+  * The win32 bindings will be released later and will be considered as EXPERIMENTAL
+          The changes marked with 2 stars (**) may currently not work on win32 platforms.
 
-  * The win32 binaries are compiled against ruby 1.8.6 patchlevel 0
 
   Main changes:
   * Ruby/GLib:
