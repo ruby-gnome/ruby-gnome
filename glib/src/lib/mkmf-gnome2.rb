@@ -158,42 +158,56 @@ def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
   end
 end
 
-def create_top_makefile(sub_dirs = ["src"])
-  mfile = File.open("Makefile", "w")
+def run_make_in_sub_dirs_command(command, sub_dirs)
   if /mswin32/ =~ RUBY_PLATFORM
-    mfile.print <<MSWIN32_END
+    sub_dirs.collect do |dir|
+      <<-EOM.chmop
+	@cd #{dir}
+	@nmake -nologo DESTDIR=$(DESTDIR) #{command}
+	@cd ..
+      EOM
+    end.join("\n")
+  else
+    sub_dirs.collect do |dir|
+      "\t@cd #{dir}; $(MAKE) #{command}"
+    end.join("\n")
+  end
+end
 
+def create_top_makefile(sub_dirs=["src"])
+  File.open("Makefile", "w") do |makefile|
+    makefile.print(<<-EOM)
 all:
-#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo all\n	@cd ..\n"}.join('')}
+#{run_make_in_sub_dirs_command("all", sub_dirs)}
+
 install:
-#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo install DESTDIR=$(DESTDIR)\n	@cd ..\n"}.join('')}
+#{run_make_in_sub_dirs_command("install", sub_dirs)}
+
 site-install:
-#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo site-install DESTDIR=$(DESTDIR)\n	@cd ..\n"}.join('')}
+#{run_make_in_sub_dirs_command("site-install", sub_dirs)}
+
 clean:
-#{sub_dirs.map{|d| "	@cd #{d}\n	@nmake -nologo clean\n	@cd ..\n"}.join('')}	@if exist extconf.h del extconf.h
+#{run_make_in_sub_dirs_command("clean", sub_dirs)}
+    EOM
+
+    if /mswin32/ =~ RUBY_PLATFORM
+      makefile.print(<<-EOM)
+	@if exist extconf.h del extconf.h
 	@if exist conftest.* del conftest.*
 	@if exist *.lib del *.lib
 	@if exist *~ del *~
 	@if exist mkmf.log del mkmf.log
-MSWIN32_END
-  else
-    mfile.print <<END
-all:
-#{sub_dirs.map{|d| "	@cd #{d}; make all\n"}.join('')}
+      EOM
+    else
+      makefile.print(<<-EOM)
 
-install:
-#{sub_dirs.map{|d| "	@cd #{d}; make install\n"}.join('')}
-site-install:
-#{sub_dirs.map{|d| "	@cd #{d}; make site-install\n"}.join('')}
-clean:
-#{sub_dirs.map{|d| "	@cd #{d}; make clean\n"}.join('')}
-distclean:	clean
-#{sub_dirs.map{|d| "	@cd #{d}; make distclean\n"}.join('')}
+distclean: clean
+#{run_make_in_sub_dirs_command("distclean", sub_dirs)}
 	@rm -f Makefile extconf.h conftest.*
 	@rm -f core *~ mkmf.log
-END
+      EOM
+    end
   end
-  mfile.close
 end
 
 # This is used for the library which doesn't support version info.
