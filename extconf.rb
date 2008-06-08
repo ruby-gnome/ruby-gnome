@@ -19,9 +19,9 @@ priorlibs = ["glib", "gdkpixbuf", "pango", "atk", "gtk"]
 $ruby = File.join(Config::CONFIG['bindir'], Config::CONFIG['RUBY_INSTALL_NAME'] + Config::CONFIG['EXEEXT'])
 $ruby = arg_config("--ruby", $ruby)
 
-rm = "rm -f "
+rm = "rm -f"
 if /mswin32/ =~ RUBY_PLATFORM
-  rm = "del " 
+  rm = "del"
 end
 
 
@@ -86,29 +86,63 @@ puts "Ignored libraries: #{ignore.join(', ')}" if ignore.size > 0
 # generate top-level Makefile
 #
 
+def run_make_in_sub_dirs(command)
+  if /mswin32/ =~ RUBY_PLATFORM
+    "	$(COMMAND) '$(SUBDIRS)' $(MAKE) #{command}"
+  else
+    <<-EOS.chomp
+	@(					\\
+	  succeeded='';				\\
+	  failed='';				\\
+	  for dir in $(SUBDIRS); do		\\
+	    (cd $$dir; $(MAKE) #{command});	\\
+	    if [ $$? -eq 0 ]; then		\\
+	      succeeded="$$succeeded $$dir";	\\
+	    else				\\
+	      failed="$$failed $$dir";		\\
+	    fi;					\\
+	  done;					\\
+	  if [ "$$succeeded" = "" ]; then	\\
+	    succeeded="NONE";			\\
+	  fi;					\\
+	  if [ "$$failed" = "" ]; then		\\
+	    failed="NONE";			\\
+	  fi;					\\
+	  echo;					\\
+	  echo "-----";				\\
+	  echo "SUCCEEDED: $$succeeded";	\\
+	  echo "FAILED: $$failed";		\\
+	  echo "-----";				\\
+	  echo "Done.";				\\
+	)
+    EOS
+  end
+end
+
+
 File.open("Makefile", "w") do |makefile|
-  makefile.print("\
+  makefile.print(<<-EOM)
 TOPSRCDIR = #{$topsrcdir}
 SUBDIRS = #{targets.join(' ')}
 COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb #{$strict}
 RM = #{rm}
 
 all:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) all
+#{run_make_in_sub_dirs('all')}
 
 install:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) install
+#{run_make_in_sub_dirs('install')}
 
 site-install:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) site-install
+#{run_make_in_sub_dirs('site-install')}
 
 clean:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) clean
+#{run_make_in_sub_dirs('clean')}
 
 distclean:
-	$(COMMAND) '$(SUBDIRS)' $(MAKE) distclean
+#{run_make_in_sub_dirs('distclean')}
 	$(RM) Makefile mkmf.log
-")
+EOM
 end
 
 puts "-----"

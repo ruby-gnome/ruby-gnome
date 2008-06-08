@@ -1,3 +1,7 @@
+2008-06-08  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: don't use exec_make.rb to pass make flags to sub make.
+
 2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* run-tests.rb: don't use open3, just output to stdout and stderr.
