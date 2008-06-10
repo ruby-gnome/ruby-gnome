@@ -14,7 +14,7 @@
 #define _SELF(r) ((PangoLayoutIter*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_ITER))
 
 /**********************************/
-#if ! HAVE_PANGO_LAYOUT_ITER_GET_TYPE
+#ifndef HAVE_PANGO_LAYOUT_ITER_GET_TYPE
 static PangoLayoutIter*
 layout_iter_copy(ref)
     const PangoLayoutIter* ref;
