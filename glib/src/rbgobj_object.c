@@ -624,16 +624,18 @@ gobj_inspect(self)
     VALUE self;
 {
     gobj_holder* holder;
-    char *cname = rb_class2name(CLASS_OF(self));
+    const char *class_name;
     char *s;
     VALUE result;
 
     Data_Get_Struct(self, gobj_holder, holder);
 
+    class_name = rb_class2name(CLASS_OF(self));
     if (!holder->destroyed)
-        s = g_strdup_printf("#<%s:%p ptr=%p>", cname, (void *)self, holder->gobj);
+        s = g_strdup_printf("#<%s:%p ptr=%p>", class_name, (void *)self,
+			    holder->gobj);
     else
-        s = g_strdup_printf("#<%s:%p destroyed>", cname, (void *)self);
+        s = g_strdup_printf("#<%s:%p destroyed>", class_name, (void *)self);
 
     result = rb_str_new2(s);
     g_free(s);
