@@ -15,13 +15,14 @@ require 'mkmf-gnome2'
 PKGConfig.have_package('librsvg-2.0') or exit 1
 setup_win32(PACKAGE_NAME)
 
-have_func("rsvg_set_default_dpi")
-have_func("rsvg_set_default_dpi_x_y")
-have_func("rsvg_handle_set_dpi")
-have_func("rsvg_handle_set_dpi_x_y")
-have_func("rsvg_handle_get_metadata")
-have_func("rsvg_handle_free")
-have_func("rsvg_handle_get_pixbuf_sub")
+rsvg_header = "librsvg/rsvg.h"
+have_func("rsvg_set_default_dpi", rsvg_header)
+have_func("rsvg_set_default_dpi_x_y", rsvg_header)
+have_func("rsvg_handle_set_dpi", rsvg_header)
+have_func("rsvg_handle_set_dpi_x_y", rsvg_header)
+have_func("rsvg_handle_get_metadata", rsvg_header)
+have_func("rsvg_handle_free", rsvg_header)
+have_func("rsvg_handle_get_pixbuf_sub", rsvg_header)
 have_header("librsvg/rsvg-gz.h")
 have_type("RsvgDimensionData", "librsvg/rsvg.h")
 
