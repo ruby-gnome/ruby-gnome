@@ -1,3 +1,7 @@
+2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: include gtk/gtk.h or X11/Xlib.h in have_func test.
+
 2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: use which not --version to detect make.

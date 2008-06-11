@@ -45,14 +45,15 @@ tmpincl.each do |i|
 end
 raise "can't find gdkkeysyms.h" if gdkincl.nil?
 
-have_func('gtk_plug_get_type')
-have_func('gtk_socket_get_type')
-have_func('pango_render_part_get_type')
+gtk_header = "gtk/gtk.h"
+have_func('gtk_plug_get_type', gtk_header)
+have_func('gtk_socket_get_type', gtk_header)
+have_func('pango_render_part_get_type', gtk_header)
 
-if target == "x11"
-  have_func("XReadBitmapFileData")
-  have_header('X11/Xlib.h')
-  have_func("XGetErrorText")
+xlib_header = "X11/Xlib.h"
+if target == "x11" and have_header('X11/Xlib.h')
+  have_func("XReadBitmapFileData", xlib_header)
+  have_func("XGetErrorText", xlib_header)
 end
 
 if PKGConfig.have_package('gtk+-unix-print-2.0')
