@@ -1,5 +1,7 @@
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpoppler-action.c: fix an index bug.
+
 	* extconf.rb: include poppler.h in have_func test.
 
 2008-05-23  Kouhei Sutou  <kou@cozmixng.org>

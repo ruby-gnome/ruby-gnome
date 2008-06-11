@@ -18,7 +18,7 @@
 
 
 /* PopplerAction */
-static VALUE actions[POPPLER_ACTION_MOVIE];
+static VALUE actions[POPPLER_ACTION_MOVIE + 1];
 
 VALUE
 rb_poppler_ruby_object_from_action(PopplerAction *action)
