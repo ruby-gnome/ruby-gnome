@@ -16,18 +16,19 @@ require 'mkmf-gnome2'
 PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
-have_func('atk_action_get_localized_name')
-have_func('atk_hyperlink_is_inline')
-have_func('atk_object_add_relationship')
-have_func('atk_object_remove_relationship')
-have_func('atk_component_get_layer')
-have_func('atk_component_mdi_zorder')
-have_func('atk_hyperlink_is_selected_link')
-have_func('atk_text_get_bounded_ranges')
-have_func('atk_role_get_localized_name')
-have_func('atk_text_clip_type_get_type')
+atk_header = "atk/atk.h"
+have_func('atk_action_get_localized_name', atk_header)
+have_func('atk_hyperlink_is_inline', atk_header)
+have_func('atk_object_add_relationship', atk_header)
+have_func('atk_object_remove_relationship', atk_header)
+have_func('atk_component_get_layer', atk_header)
+have_func('atk_component_get_mdi_zorder', atk_header)
+have_func('atk_hyperlink_is_selected_link', atk_header)
+have_func('atk_text_get_bounded_ranges', atk_header)
+have_func('atk_role_get_localized_name', atk_header)
+have_func('atk_text_clip_type_get_type', atk_header)
 
-have_func('atk_text_free_ranges')
+have_func('atk_text_free_ranges', atk_header)
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_distcleanfile("rbatkinits.c")
