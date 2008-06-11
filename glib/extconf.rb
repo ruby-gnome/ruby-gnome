@@ -20,22 +20,24 @@ setup_win32(PACKAGE_NAME)
 have_header("unistd.h")
 have_header("io.h")
 
-have_func("g_spawn_close_id")
-have_func("g_thread_init")
-have_func("g_main_depth")
-have_func("g_listenv")
+glib_header = "glib.h"
+have_func("g_spawn_close_pid", glib_header)
+have_func("g_thread_init", glib_header)
+have_func("g_main_depth", glib_header)
+have_func("g_listenv", glib_header)
 
-have_func("rb_check_array_type")
-have_func("rb_exec_recursive")
-have_func("rb_errinfo")
-have_func("rb_sourcefile")
-have_func("rb_sourceline")
-have_func("ruby_set_current_source")
-have_func("rb_thread_blocking_region")
-have_func("ruby_native_thread_p")
+ruby_header = "ruby.h"
+have_func("rb_check_array_type", ruby_header)
+have_func("rb_exec_recursive", ruby_header)
+have_func("rb_errinfo", ruby_header)
+have_func("rb_sourcefile", ruby_header)
+have_func("rb_sourceline", ruby_header)
+have_func("ruby_set_current_source", ruby_header)
+have_func("rb_thread_blocking_region", ruby_header)
+have_func("ruby_native_thread_p", ruby_header)
 
-have_var("curr_thread", ["ruby.h", "node.h"])
-have_var("rb_curr_thread", ["ruby.h", "node.h"])
+have_var("curr_thread", [ruby_header, "node.h"])
+have_var("rb_curr_thread", [ruby_header, "node.h"])
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
   enum_type_prefix = "glib-enum-types"

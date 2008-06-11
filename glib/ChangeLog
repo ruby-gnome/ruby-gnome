@@ -1,3 +1,7 @@
+2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: include glib.h or ruby.h in have_func test.
+
 2008-06-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb (create_top_makefile): cleanup.
