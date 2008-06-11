@@ -16,7 +16,9 @@ PKGConfig.have_package('gdk-pixbuf-2.0') or exit 1
 
 setup_win32(PACKAGE_NAME)
 
-have_func("gdk_pixbuf_set_option")
+have_func("gdk_pixbuf_set_option", "gdk-pixbuf/gdk-pixbuf.h") do |src|
+  "#define GDK_PIXBUF_ENABLE_BACKEND\n#{src}"
+end
 have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
 if PKGConfig.have_package('cairo') and
