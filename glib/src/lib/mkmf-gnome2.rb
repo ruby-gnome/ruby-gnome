@@ -257,8 +257,9 @@ def check_ruby_func
   $CPPFLAGS << " -I$(sitearchdir) "
 
   #Other options
-  have_func("rb_define_alloc_func") # for ruby-1.8
-  have_func("rb_block_proc") # for ruby-1.8
+  ruby_header = "ruby.h"
+  have_func("rb_define_alloc_func", ruby_header) # for ruby-1.8
+  have_func("rb_block_proc", ruby_header) # for ruby-1.8
 
   STDOUT.print("checking for new allocation framework... ") # for ruby-1.7
   if Object.respond_to? :allocate

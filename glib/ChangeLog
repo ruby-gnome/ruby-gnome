@@ -1,5 +1,8 @@
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/lib/mkmf-gnome2.rb (check_ruby_func): include ruby.h in
+	have_func test.
+
 	* src/rbgobj_object.c (gobj_inspect): add const.
 
 	* extconf.rb: include glib.h or ruby.h in have_func test.
