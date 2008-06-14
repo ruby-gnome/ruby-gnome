@@ -85,8 +85,16 @@ flag_raised_p(VALUE self, VALUE flag)
 static VALUE
 get_data(VALUE self)
 {
-    return rb_str_new((char *)GST_BUFFER_DATA(SELF(self)),
-        GST_BUFFER_SIZE(SELF(self)));
+    GstBuffer *buffer;
+    guint size;
+
+    buffer = SELF(self);
+    size = GST_BUFFER_SIZE(buffer);
+
+    if (size == 0)
+        return Qnil;
+    else
+        return rb_str_new((char *)GST_BUFFER_DATA(buffer), size);
 }
 
 static VALUE
