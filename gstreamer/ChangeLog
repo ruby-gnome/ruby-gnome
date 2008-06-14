@@ -1,3 +1,7 @@
+2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: use glib/test/glib-test-init.rb.
+
 2008-05-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c (Gst.check_version?): add.
