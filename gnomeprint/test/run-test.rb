@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 
-system("make")
+base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
 
-$LOAD_PATH.unshift(File.expand_path("./src"))
-$LOAD_PATH.unshift(File.expand_path("./src/lib"))
+$LOAD_PATH.unshift(glib_dir)
+require 'test/glib-test-init'
 
-require "test/unit"
-
-if Test::Unit::AutoRunner.respond_to?(:standalone?)
-  exit Test::Unit::AutoRunner.run($0, File.dirname($0))
-else
-  exit Test::Unit::AutoRunner.run(false, File.dirname($0))
+if system("which make > /dev/null")
+  system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
 end
+
+$LOAD_PATH.unshift(File.join(base_dir, "src"))
+$LOAD_PATH.unshift(File.join(base_dir, "src", "lib"))
+
+exit Test::Unit::AutoRunner.run(true)

@@ -1,3 +1,7 @@
+2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: use glib/test/glib-test-init.rb.
+
 2007-07-13  Guillaume Cottenceau
 
 	* src/rbgp-gnome-print-config.c, src/rbgp-gnome-print-job.c,
