@@ -1,3 +1,9 @@
+2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ./: use test-unit not test-unit-ext.
+	* test/glib-test-init.rb: add.
+	* test/run-test.rb: use test/glib-test-init.
+
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb (check_ruby_func): include ruby.h in
