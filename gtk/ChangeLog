@@ -1,3 +1,7 @@
+2008-06-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gc.rb (TestGC#test_closure): add.
+
 2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: use glib/test/glib-test-init.rb.
