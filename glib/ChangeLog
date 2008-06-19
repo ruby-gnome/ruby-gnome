@@ -1,3 +1,17 @@
+2008-06-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype_body): add
+	create_class option.
+
+	* src/rbgobject.h (GTYPE2CINFO_NO_CREATE): add.
+
+	* src/rbgobject.h, src/rbgobj_type.c
+	(rbgobj_lookup_class_by_gtype_full): add.
+
+	* src/rbgobj_typeinstance.c (each_cinfo): don't create object
+	during GC to work with ruby 1.8.7.
+	Reported by Kazuhiro NISHIYAMA. Thanks!!!
+
 2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ./: use test-unit not test-unit-ext.

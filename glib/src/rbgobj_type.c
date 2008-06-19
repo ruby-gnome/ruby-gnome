@@ -39,8 +39,9 @@ typedef struct {
 } RGObjClassInfoDynamic;
 
 typedef struct {
-  VALUE parent;
-  GType gtype;
+    VALUE parent;
+    GType gtype;
+    gboolean create_class;
 } RGObjClassByGtypeData;
 
 static void
@@ -125,10 +126,14 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
         return (VALUE)NULL;
 
     c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
-    if (!NIL_P(c)){
+    if (!NIL_P(c)) {
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
         return (VALUE)cinfo;
     }
+
+    if (!cdata->create_class)
+	return (VALUE)NULL;
+
     c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
     cinfo->gtype = gtype;
     cinfo->mark  = NULL;
@@ -230,8 +235,19 @@ rbgobj_lookup_class_by_gtype_ensure(VALUE value)
 const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 {
+    return rbgobj_lookup_class_by_gtype_full(gtype, parent, TRUE);
+}
+
+const RGObjClassInfo *
+rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
+				  gboolean create_class)
+{
     VALUE critical = rb_thread_critical;
-    RGObjClassByGtypeData data = { .parent = parent, .gtype = gtype };
+    RGObjClassByGtypeData data;
+
+    data.gtype = gtype;
+    data.parent = parent;
+    data.create_class = create_class;
 
     rb_thread_critical = 1;
 

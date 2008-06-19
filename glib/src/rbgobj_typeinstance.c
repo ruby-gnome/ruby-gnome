@@ -16,6 +16,10 @@
 
 VALUE cInstantiatable;
 
+typedef void (*ClassInfoCallbackFunc) (gpointer instance,
+				       const RGObjClassInfo *class_info,
+				       gpointer user_data);
+
 static VALUE
 instantiatable_s_allocate(klass)
      VALUE klass;
@@ -40,9 +44,7 @@ instantiatable_clone(self)
 /**********************************************************************/
 
 static void
-each_cinfo(gpointer instance,
-           void (*func)(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data),
-           gpointer user_data)
+each_cinfo(gpointer instance, ClassInfoCallbackFunc func, gpointer user_data)
 {
     const GType gtype = G_TYPE_FROM_INSTANCE(instance);
     GType* interfaces;
@@ -51,25 +53,35 @@ each_cinfo(gpointer instance,
     interfaces = g_type_interfaces(gtype, &n_interfaces);
     {
         guint i;
-        for (i = 0; i < n_interfaces; i++)
-            func(instance, GTYPE2CINFO(interfaces[i]), user_data);
+        for (i = 0; i < n_interfaces; i++) {
+	    const RGObjClassInfo *info;
+
+	    info = GTYPE2CINFO_NO_CREATE(interfaces[i]);
+	    if (info)
+		func(instance, info, user_data);
+	}
     }
 
     {
-        GType i;
-        for (i = gtype; i != G_TYPE_INVALID; i = g_type_parent(i))
-            func(instance, GTYPE2CINFO(i), user_data);
+        GType type;
+        for (type = gtype; type != G_TYPE_INVALID; type = g_type_parent(type)) {
+	    const RGObjClassInfo *info;
+
+	    info = GTYPE2CINFO_NO_CREATE(type);
+	    if (info)
+		func(instance, info, user_data);
+	}
     }
 }
 
 static void
-call_cinfo_free(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
+call_cinfo_free(gpointer instance, const RGObjClassInfo *cinfo, gpointer user_data)
 {
     if (cinfo->free) cinfo->free(instance);
 }
 
 static void
-call_cinfo_mark(gpointer instance, const RGObjClassInfo* cinfo, gpointer user_data)
+call_cinfo_mark(gpointer instance, const RGObjClassInfo *cinfo, gpointer user_data)
 {
     if (cinfo->mark) cinfo->mark(instance);
 }
