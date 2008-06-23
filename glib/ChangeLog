@@ -1,3 +1,9 @@
+2008-06-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb (create_makefile_at_srcdir): allow source
+	directory that isn't absolute path.
+	Reported by Guillaume Cottenceau. Thanks!!!
+
 2008-06-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_type.c (rbgobj_lookup_class_by_gtype_body): add

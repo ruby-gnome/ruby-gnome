@@ -138,7 +138,10 @@ end
 
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
   base_dir = File.basename(Dir.pwd)
-  builddir = srcdir[(srcdir.rindex(base_dir) + base_dir.size + 1)..-1]
+  last_common_index = srcdir.rindex(base_dir)
+  if last_common_index
+    builddir = srcdir[(last_common_index + base_dir.size + 1)..-1]
+  end
   builddir ||= "."
   FileUtils.mkdir_p(builddir)
 
