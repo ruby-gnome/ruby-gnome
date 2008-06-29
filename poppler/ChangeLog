@@ -1,3 +1,8 @@
+2008-06-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_document.rb (TestDocument#test_save):
+	omit if poppler < 0.8.2.
+
 2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: use glib/test/glib-test-init.rb.
