@@ -1,3 +1,7 @@
+2008-07-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gtk_image.rb (TestGtkImage#test_stock): add.
+
 2008-06-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gc.rb (TestGC#test_closure): add.
