@@ -558,7 +558,7 @@ gobj_get_property(self, prop_name)
             VALUE table = rb_hash_aref(type_to_prop_getter_table,
                                        INT2FIX(pspec->owner_type));
             if (!NIL_P(table)){
-                VALUE obj = rb_hash_aref(table, rb_intern(g_param_spec_get_name(pspec)));
+                VALUE obj = rb_hash_aref(table, CSTR2RVAL(g_param_spec_get_name(pspec)));
                 if (!NIL_P(obj))
                     Data_Get_Struct(obj, void, getter);
             }

@@ -1,3 +1,8 @@
+2008-07-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_object.c (gobj_get_property): fix a bug introduced in
+	r2740. (Gtk::Image#stock returns String not Symbol)
+
 2008-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb (create_makefile_at_srcdir): allow source
