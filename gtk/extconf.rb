@@ -49,6 +49,9 @@ gtk_header = "gtk/gtk.h"
 have_func('gtk_plug_get_type', gtk_header)
 have_func('gtk_socket_get_type', gtk_header)
 have_func('pango_render_part_get_type', gtk_header)
+have_header('gtk/gtkfilesystem.h') do |src|
+  "#define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED\n#{src}"
+end
 
 xlib_header = "X11/Xlib.h"
 if target == "x11" and have_header('X11/Xlib.h')

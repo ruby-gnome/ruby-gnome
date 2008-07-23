@@ -16,9 +16,11 @@
 
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
 
+#ifdef HAVE_GTK_GTKFILESYSTEM_H
 /* For error handling */
-#define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED
-#include <gtk/gtkfilesystem.h>
+#  define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED
+#  include <gtk/gtkfilesystem.h>
+#endif
 
 static VALUE
 gslist2ary_free(list)
@@ -324,7 +326,9 @@ Init_gtk_file_chooser()
 #if GTK_CHECK_VERSION(2,4,0)
 
     VALUE gFileCho = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
-    VALUE fse;
+#ifdef HAVE_GTK_GTKFILESYSTEM_H
+    VALUE eFileSystemError;
+#endif
 
     rb_define_method(gFileCho, "set_action", fcho_set_action, 1);
     rb_define_method(gFileCho, "action", fcho_get_action, 0);
@@ -367,14 +371,24 @@ Init_gtk_file_chooser()
     /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
+
+#ifdef HAVE_GTK_GTKFILESYSTEM_H
     /* GtkFileSystemError */
-    fse = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError", mGtk, rb_eRuntimeError);
-    rb_define_const(fse, "NONEXISTENT", INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
-    rb_define_const(fse, "NOT_FOLDER", INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
-    rb_define_const(fse, "INVALID_URI", INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
-    rb_define_const(fse, "BAD_FILENAME", INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
-    rb_define_const(fse, "FAILED", INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
-    rb_define_const(fse, "ALREADY_EXSITS", INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+    eFileSystemError = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
+				    mGtk, rb_eRuntimeError);
+    rb_define_const(eFileSystemError, "NONEXISTENT",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
+    rb_define_const(eFileSystemError, "NOT_FOLDER",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
+    rb_define_const(eFileSystemError, "INVALID_URI",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
+    rb_define_const(eFileSystemError, "BAD_FILENAME",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
+    rb_define_const(eFileSystemError, "FAILED",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
+    rb_define_const(eFileSystemError, "ALREADY_EXSITS",
+		    INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
     /* GtkFileChooserConfirmation */

@@ -1,3 +1,9 @@
+2008-07-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb, src/rbgtkfilechooser.c: check GTK_FILE_SYSTEM_ERROR
+	availability. [#2025651]
+	Reported by Cesare Tirabassi. Thanks!!!
+
 2008-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gtk_image.rb (TestGtkImage#test_stock): add.
