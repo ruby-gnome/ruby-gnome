@@ -142,9 +142,6 @@ rclosure_unref(GRClosure *rclosure)
         GList *next;
         for (next = rclosure->objects; next; next = next->next) {
             GObject *object = G_OBJECT(next->data);
-            VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
-            if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj))
-                G_REMOVE_RELATIVE(obj, id_closures, rclosure->rb_holder);
             g_object_weak_unref(object, rclosure_weak_notify, rclosure);
         }
         g_list_free(rclosure->objects);
@@ -163,7 +160,16 @@ rclosure_invalidate(gpointer data, GClosure* closure)
     GRClosure *rclosure = (GRClosure*)closure;
 
     if (rclosure->count > 0) {
+        GList *next;
+
         rclosure->count = 1;
+        for (next = rclosure->objects; next; next = next->next) {
+            GObject *object = G_OBJECT(next->data);
+            VALUE obj = rbgobj_ruby_object_from_instance2(object, FALSE);
+            if (!NIL_P(rclosure->rb_holder) && !NIL_P(obj))
+                G_REMOVE_RELATIVE(obj, id_closures, rclosure->rb_holder);
+        }
+
         rclosure_unref(rclosure);
     }
 }
@@ -178,7 +184,13 @@ gr_closure_holder_mark(GRClosure *rclosure)
 static void
 gr_closure_holder_free(GRClosure *rclosure)
 {
-    rclosure_invalidate(NULL, (GClosure*)rclosure);
+    if (rclosure->count > 0) {
+        rclosure->count = 1;
+
+        /* No need to remove us from the relatives hash of our objects, as
+         * those aren't alive anymore anyway */
+        rclosure_unref(rclosure);
+    }
 }
 
 GClosure*

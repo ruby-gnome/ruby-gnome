@@ -1,3 +1,9 @@
+2008-07-27  Sjoerd Simons  <sjoerd@luon.net>
+
+	* src/rbgobj_closure.c: Only use G_REMOVE_RELATIVE when a closure is
+	directly invalidated. This prevents object creation when freeing the
+	closure from the garbage collector.
+
 2008-07-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_object.c (gobj_get_property): fix a bug introduced in
