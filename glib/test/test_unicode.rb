@@ -251,6 +251,7 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def test_utf8_collate
     only_glib_version(2, 16, 0)
+    require_uconv
     assert_operator(0, :>, GLib::UTF8.collate("あ", "い"))
     assert_operator(0, :<, GLib::UTF8.collate("い", "あ"))
     assert_equal(0, GLib::UTF8.collate("あ", "あ"))
@@ -258,6 +259,7 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def test_utf8_collate_key
     only_glib_version(2, 16, 0)
+    require_uconv
     assert_operator(0, :>,
                     GLib::UTF8.collate_key("あ") <=>
                     GLib::UTF8.collate_key("い"))
