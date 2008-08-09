@@ -1,3 +1,7 @@
+2008-08-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/gtk-demo/printing.rb: add.
+
 2008-07-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb, src/rbgtkfilechooser.c: check GTK_FILE_SYSTEM_ERROR
