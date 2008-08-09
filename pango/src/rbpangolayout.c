@@ -108,11 +108,23 @@ layout_get_attributes(self)
 }
 
 static VALUE
-layout_set_font_description(self, desc)
-    VALUE self, desc;
+layout_set_font_description(VALUE self, VALUE rb_desc)
 {
-    pango_layout_set_font_description(_SELF(self), 
-                                      (PangoFontDescription*)RVAL2BOXED(desc, PANGO_TYPE_FONT_DESCRIPTION));
+    PangoFontDescription *desc;
+    gboolean desc_created = FALSE;
+
+    if (RVAL2CBOOL(rb_obj_is_kind_of(rb_desc, rb_cString))) {
+	desc = pango_font_description_from_string(RVAL2CSTR(rb_desc));
+	desc_created = TRUE;
+    } else {
+	desc = RVAL2BOXED(rb_desc, PANGO_TYPE_FONT_DESCRIPTION);
+    }
+
+    pango_layout_set_font_description(_SELF(self), desc);
+
+    if (desc_created)
+	pango_font_description_free(desc);
+
     return self;
 }
 

@@ -1,3 +1,10 @@
+2008-08-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpangolayout.c: Pango::Layout#font_description= accepts
+	font description string too.
+
+	* test/: add.
+
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: include pango/pango.h in have_func test.
