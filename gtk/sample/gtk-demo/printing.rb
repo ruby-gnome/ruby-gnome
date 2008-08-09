@@ -68,6 +68,11 @@ module Demo
 
     def on_draw_page(operation, context, page_number, data)
       cr = context.cairo_context
+      draw_header(cr, operation, context, page_number, data)
+      draw_body(cr, operation, context, page_number, data)
+    end
+
+    def draw_header(cr, operation, context, page_number, data)
       width = context.width
 
       cr.rectangle(0, 0, width, HEADER_HEIGHT)
@@ -90,15 +95,19 @@ module Demo
         text_width, text_height = layout.pixel_size
       end
 
-      cr.move_to((width - text_width) / 2, (HEADER_HEIGHT - text_height) / 2)
+      y = (HEADER_HEIGHT - text_height) / 2
+
+      cr.move_to((width - text_width) / 2, y)
       cr.show_pango_layout(layout)
 
       layout.text = "#{page_number + 1}/#{data.n_pages}"
       layout.width = -1
       text_width, text_height = layout.pixel_size
-      cr.move_to(width - text_width - 4, (HEADER_HEIGHT - text_height) / 2)
+      cr.move_to(width - text_width - 4, y)
       cr.show_pango_layout(layout)
+    end
 
+    def draw_body(cr, operation, context, page_number, data)
       layout = context.create_pango_layout
       description = Pango::FontDescription.new("monosapce")
       description.size = data.font_size * Pango::SCALE
