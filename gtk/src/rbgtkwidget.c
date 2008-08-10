@@ -1123,8 +1123,7 @@ widget_window(self)
 }
 
 static VALUE
-widget_set_window(self, window)
-    VALUE self;
+widget_set_window(VALUE self, VALUE window)
 {
     _SELF(self)->window = RVAL2GOBJ(window);
     return self;

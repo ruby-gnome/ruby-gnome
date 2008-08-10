@@ -1,3 +1,11 @@
+2008-08-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkwindowattr.c (attr_initialize), src/rbgtkwidget.c
+	(widget_set_window): add missing type declarations. [#2043970]
+	Reported by Neil Roberts. Thanks!!!
+
+	* test/test_gdk_window_attribute.rb, test/test_gtk_widget.rb: add.
+
 2008-08-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gtk-demo/printing.rb: add.

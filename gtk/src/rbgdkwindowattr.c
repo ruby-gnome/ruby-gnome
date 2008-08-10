@@ -37,8 +37,8 @@ gdk_windowattr_get_type(void)
 #define _SELF(w) ((GdkWindowAttr*)RVAL2BOXED(w, GDK_TYPE_WINDOW_ATTR))
 
 static VALUE
-attr_initialize(self, width, height, wclass, window_type)
-    VALUE self;
+attr_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
+		VALUE window_type)
 {
     GdkWindowAttr w;
     w.width = NUM2INT(width);
