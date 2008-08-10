@@ -36,6 +36,10 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
       Gdk::Display, Gtk::TreeViewColumn, Gtk::Stock, Gtk::Widget, Gtk::ScaleButton,
       Gtk::TreeView, Gtk::VolumneButton, Gtk::Tooptip and Gtk::TextMark only).
 
+    - [#2025651] FTBFS with gtk+ 2.13.5 [Cesare Tirabassi, Kouhei Sutou]
+
+    - [#2043970] Segfaults on 64-bit Linux [Neil Roberts, Kouhei Sutou]
+
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
@@ -66,6 +70,8 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
     - Mathieu Blondel
     - Joseph Method
     - Masayuki Yamaguchi
+    - Neil Roberts
+    - Cesare Tirabassi
 
   And also special thanks to all other contributors not listed above!
 

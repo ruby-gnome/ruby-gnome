@@ -1,3 +1,7 @@
+2008-08-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: add [#2025651] and [#2043970].
+
 2008-06-08  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: don't use exec_make.rb to pass make flags to sub make.
