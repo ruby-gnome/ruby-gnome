@@ -40,6 +40,9 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
 
     - [#2043970] Segfaults on 64-bit Linux [Neil Roberts, Kouhei Sutou]
 
+  * Ruby/Pango:
+    - [#2043970] Pango::FontDescription#weight= seg fault [Kouhei Sutou]
+
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
 
