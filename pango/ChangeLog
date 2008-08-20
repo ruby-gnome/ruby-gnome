@@ -1,3 +1,9 @@
+2008-08-20  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpangofontdescription.c (font_desc_set_weight): add missing
+	type declaration for 'wight' argument. [#2059917]
+	Reported by Blondel Mathieu. Thanks!!!
+
 2008-08-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpangolayout.c: Pango::Layout#font_description= accepts

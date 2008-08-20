@@ -107,10 +107,10 @@ font_desc_get_variant(self)
 }
 
 static VALUE
-font_desc_set_weight(self, weight)
-    VALUE self;
+font_desc_set_weight(VALUE self, VALUE weight)
 {
-    pango_font_description_set_weight(_SELF(self), RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
+    pango_font_description_set_weight(_SELF(self),
+				      RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
     return self;
 }
 
