@@ -1,3 +1,10 @@
+2008-08-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/misc/aboutdialog.rb, sample/misc/aboutdialog2.rb: use
+	Gtk::AboutDialog#prgoram_name= not Gtk::AboutDialog#name= because
+	Gtk::AboutDialog is deprecated.
+	Pointed out by Mathieu Blondel. Thanks!!!
+
 2008-08-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkwindowattr.c (attr_initialize), src/rbgtkwidget.c
