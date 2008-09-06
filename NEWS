@@ -31,6 +31,9 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
     - Fixed locale dependent constant name computation. [#1901843]
       [Kouhei Sutou]
 
+    - [#2060606] Crash when removing ruby applet from gnome panel with 0.7rc1
+      [Kouhei Sutou]
+
   * Ruby/GTK:
     - partially support new symbols in 2.12 (Gtk::RecentAction, Gtk::TextBuffer,
       Gdk::Display, Gtk::TreeViewColumn, Gtk::Stock, Gtk::Widget, Gtk::ScaleButton,
