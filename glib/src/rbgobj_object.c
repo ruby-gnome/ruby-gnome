@@ -39,6 +39,9 @@ weak_notify(data, where_the_object_was)
     rbgobj_instance_call_cinfo_free(holder->gobj);
     rbgobj_invalidate_relatives(holder->self);
     holder->destroyed = TRUE;
+
+    g_object_unref(holder->gobj);
+    holder->gobj = NULL;
 }
 
 static void
@@ -58,8 +61,7 @@ holder_free(gobj_holder* holder)
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)weak_notify, holder);
         }
-        g_object_unref(holder->gobj);
-        /* holder->gobj = NULL; */
+        holder->gobj = NULL;
     }
     free(holder);
 }
