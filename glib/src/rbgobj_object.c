@@ -30,12 +30,11 @@ rbgobj_add_abstract_but_create_instance_class(gtype)
 {
 }
 
-static void 
-weak_notify(data, where_the_object_was)
-    gpointer data;
-    GObject* where_the_object_was;
+static void
+weak_notify(gpointer data, GObject *where_the_object_was)
 {
-    gobj_holder* holder = data;
+    gobj_holder *holder = data;
+
     rbgobj_instance_call_cinfo_free(holder->gobj);
     rbgobj_invalidate_relatives(holder->self);
     holder->destroyed = TRUE;
@@ -45,18 +44,17 @@ weak_notify(data, where_the_object_was)
 }
 
 static void
-holder_mark(holder)
-    gobj_holder* holder;
+holder_mark(gobj_holder *holder)
 {
     if (holder->gobj && !holder->destroyed)
         rbgobj_instance_call_cinfo_mark(holder->gobj);
 }
 
 static void
-holder_free(gobj_holder* holder)
+holder_free(gobj_holder *holder)
 {
-    if (holder->gobj){
-        if (!holder->destroyed){
+    if (holder->gobj) {
+        if (!holder->destroyed) {
             rbgobj_instance_call_cinfo_free(holder->gobj);
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)weak_notify, holder);

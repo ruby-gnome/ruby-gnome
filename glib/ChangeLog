@@ -1,5 +1,7 @@
 2008-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_object.c: cleanup.
+
 	* src/rbgobj_object.c: destroy object on weak notify. [Bug #2060606]
 	Reported by Arnaud Cornet. Thanks!!!
 
