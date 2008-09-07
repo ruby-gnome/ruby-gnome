@@ -1,3 +1,7 @@
+2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: add for releasing.
+
 2008-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add [#2060606].
