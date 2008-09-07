@@ -1,3 +1,30 @@
+Ruby-GNOME2-0.17.0 (2008-09-07)
+
+  Release notes:
+  * This Release supports Ruby 1.8.7 and has many bug fixes and
+    new bound functions.
+
+  Main changes:
+  * Ruby/GLib:
+    - [#2060606] Crash when removing ruby applet from gnome panel with 0.7rc1
+      [Kouhei Sutou]
+
+  * Ruby/GTK:
+    - [#2025651] FTBFS with gtk+ 2.13.5 [Cesare Tirabassi, Kouhei Sutou]
+
+    - [#2043970] Segfaults on 64-bit Linux [Neil Roberts, Kouhei Sutou]
+
+  * Ruby/Pango:
+    - [#2043970] Pango::FontDescription#weight= seg fault [Kouhei Sutou]
+
+  * Many other changes, GC bugs, Segfault fixes. See corresponding ChangeLog
+    for detailed information on changes and contributors.
+
+    Special thanks for your contributions to: (list in no particular order)
+    - Neil Roberts
+    - Cesare Tirabassi
+    - Arnaud Cornet
+
 Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
 
   Release notes:
@@ -31,9 +58,6 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
     - Fixed locale dependent constant name computation. [#1901843]
       [Kouhei Sutou]
 
-    - [#2060606] Crash when removing ruby applet from gnome panel with 0.7rc1
-      [Kouhei Sutou]
-
   * Ruby/GTK:
     - partially support new symbols in 2.12 (Gtk::RecentAction, Gtk::TextBuffer,
       Gdk::Display, Gtk::TreeViewColumn, Gtk::Stock, Gtk::Widget, Gtk::ScaleButton,
@@ -42,9 +66,6 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
     - [#2025651] FTBFS with gtk+ 2.13.5 [Cesare Tirabassi, Kouhei Sutou]
 
     - [#2043970] Segfaults on 64-bit Linux [Neil Roberts, Kouhei Sutou]
-
-  * Ruby/Pango:
-    - [#2043970] Pango::FontDescription#weight= seg fault [Kouhei Sutou]
 
   * Ruby/GStreamer: Worked with GStreamer >= 0.10.x but isn't
     completed yet.
@@ -76,8 +97,6 @@ Ruby-GNOME2-0.17.0-rc1 (2008-06-06)
     - Mathieu Blondel
     - Joseph Method
     - Masayuki Yamaguchi
-    - Neil Roberts
-    - Cesare Tirabassi
 
   And also special thanks to all other contributors not listed above!
 
