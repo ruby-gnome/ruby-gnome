@@ -1,3 +1,7 @@
+2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h: 0.17.0 -> 0.18.0.
+
 2008-09-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_object.c: cleanup.
