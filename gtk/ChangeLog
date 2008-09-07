@@ -1,3 +1,7 @@
+2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gtk_icon_theme.rb: use "MimeTypes" not "Apps".
+
 2008-08-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/misc/aboutdialog.rb, sample/misc/aboutdialog2.rb: use

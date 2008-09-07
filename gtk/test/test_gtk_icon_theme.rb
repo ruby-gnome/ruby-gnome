@@ -20,7 +20,7 @@ class TestGtkIconTheme < Test::Unit::TestCase
   def test_contexts
     only_gtk_version(2, 12)
 
-    assert_operator(@theme.contexts, :include?, "Apps")
+    assert_operator(@theme.contexts, :include?, "MimeTypes")
   end
 
   def test_icons
