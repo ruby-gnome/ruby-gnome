@@ -1,6 +1,6 @@
 # -*- ruby -*-
 
-repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2/"
+repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2"
 
 task :default => :build
 
@@ -79,4 +79,23 @@ gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "gnome",
                            "panel-applet", "poppler", "rsvg", "vte"]
 task :dist_gnome2 do
   package("ruby-gnome2-all", base_files + gnome2_dirs)
+end
+
+task :tag do
+  tagged_url = "#{repository_base_url}/tags/#{version}"
+
+  success = false
+  begin
+    sh("svn", "ls", tagged_url)
+    success = true
+  rescue RuntimeError
+  end
+  raise "#{version} is already tagged" if success
+
+  svn_commands = ["svn", "cp", "-m", "released #{version}!!!"]
+  if ENV["SVN_USER"]
+    svn_commands.configure(["--username", ENV["SVN_USER"]])
+  end
+  svn_commands.concat(["#{repository_base_url}/trunk", tagged_url])
+  sh(*svn_commands)
 end

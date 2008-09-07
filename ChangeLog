@@ -1,5 +1,7 @@
 2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add tag task.
+
 	* NEWS: add 0.17.0 entry.
 
 	* Rakefile: add build related tasks.
