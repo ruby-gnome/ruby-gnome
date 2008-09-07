@@ -1,5 +1,9 @@
 # -*- ruby -*-
 
+repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2/"
+
+task :default => :build
+
 def version
   @version ||= ENV["VERSION"] || guess_version
 end
@@ -33,13 +37,35 @@ ensure
   rm_rf(dist_dir)
 end
 
-repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2/"
-
-task :dist => [:dist_gtk2, :dist_gnome2] do
+task :configure do
+  ruby("extconf.rb")
 end
 
+file "Makefile" do
+  task(:configure).invoke
+end
+
+task :build => ["Makefile"] do
+  sh("make")
+end
+
+task :clean do
+  sh("make", "clean") if File.exist?("Makefile")
+end
+
+task :distclean do
+  sh("make", "distclean") if File.exist?("Makefile")
+end
+
+task :test => [:build] do
+  ruby("run-tests.rb")
+end
+
+task :dist => [:dist_gtk2, :dist_gnome2]
+
 base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
-              "README", "exec_make.rb", "extconf.rb", "run-tests.rb"]
+              "README", "Rakefile",
+              "exec_make.rb", "extconf.rb", "run-tests.rb"]
 gtk2_dirs = ["glib", "atk", "pango", "gdkpixbuf", "gtk"]
 task :dist_gtk2 do
   package("ruby-gtk2", base_files + gtk2_dirs)
