@@ -92,9 +92,10 @@ Dependencies
       Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
       Ruby/PanelApplet   depends on Ruby/GNOME.
       Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
- 
+
   (experimental)
       Ruby/GStreamer     depends on Ruby/GLib.
+      Ruby/GooCanvas     depends on Ruby/GTK.
 
   (not available)
       Ruby/Libgda        depends on Ruby/GLib.
