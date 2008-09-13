@@ -1,5 +1,7 @@
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add a 0.18.0 entry.
+
 	* README: add a Ruby/GooCanvas entry.
 
 	* NEWS: format as RD.
