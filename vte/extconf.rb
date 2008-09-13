@@ -16,16 +16,7 @@ require 'mkmf-gnome2'
 PKGConfig.have_package(PACKAGE_ID, 0, 12, 1) or exit 1
 setup_win32(PACKAGE_NAME)
 
-if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
-  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-    unless ENV["CAIRO_PATH"]
-      puts "Error! Set CAIRO_PATH."
-      exit 1
-    end
-    add_depend_package("cairo", "src", ENV["CAIRO_PATH"])
-    $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
-  end
-end
+check_cairo
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)

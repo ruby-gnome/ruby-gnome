@@ -1,3 +1,7 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use check_cairo.
+
 2008-08-20  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpangofontdescription.c (font_desc_set_weight): add missing

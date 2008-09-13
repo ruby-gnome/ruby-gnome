@@ -1,3 +1,7 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use check_cairo.
+
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: include gdk-pixbuf/gdk-pixbuf.h in have_func test.

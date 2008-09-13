@@ -1,3 +1,7 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use check_cairo.
+
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: fix rcairo's source path.

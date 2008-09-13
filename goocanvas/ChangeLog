@@ -1,5 +1,7 @@
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: use check_cairo.
+
 	* /: move to The Ruby-GNOME2 Project.
 
 2008-08-16  Kouhei Sutou  <kou@cozmixng.org>

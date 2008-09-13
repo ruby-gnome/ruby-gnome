@@ -26,17 +26,7 @@ have_func("rsvg_handle_get_pixbuf_sub", rsvg_header)
 have_header("librsvg/rsvg-gz.h")
 have_type("RsvgDimensionData", "librsvg/rsvg.h")
 
-if PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
-  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-    unless ENV["CAIRO_PATH"]
-      puts "Error! Set CAIRO_PATH."
-      exit 1
-    end
-    add_depend_package("cairo", "src", ENV["CAIRO_PATH"])
-    $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
-  end
-  have_header("librsvg/rsvg-cairo.h")
-end
+check_cairo
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 

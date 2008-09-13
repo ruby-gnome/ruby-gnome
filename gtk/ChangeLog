@@ -1,3 +1,7 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use check_cairo.
+
 2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gtk_icon_theme.rb: use "MimeTypes" not "Apps".
