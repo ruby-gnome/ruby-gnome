@@ -1,0 +1,51 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* /: move to The Ruby-GNOME2 Project.
+
+2008-08-16  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/demo-primitives.rb: update menu widgets to follow the
+	latest original demo.
+
+	* sample/demo-primitives.rb: TAB -> 2 spaces.
+
+2008-07-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgoocairo.c (rb_cairo_pattern_to_goo)
+	(rb_cairo_matrix_to_goo): fix a reference count bug.
+
+	* sample/demo-fifteen.rb (CanvasSampleFifteen#scramble): fix broken.
+
+	* src/rbgoocanvas.c: bind Goo::Canvas#scroll_to.
+
+2008-06-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/demo.rb: support quiting by C-q.
+
+	* sample/demo.rb: set $LOAD_PATH.
+
+2007-06-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/:
+	- cleanup macros.
+	- cleanup styles.
+
+	* src/rbgoocanvasitem.c:
+	- fixed style.
+	- used more self-describing macro.
+
+	* README: added.
+
+2007-05-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/demo.rb: cleanup.
+
+	* extconf.rb, src/rbgoocairo.c: required >= 0.8.0.
+
+	* sample/demo.rb: untabified.
+
+	* extconf.rb: supported GooCanvas version check in C.
+
+	* src/rbgoocanvas.h, src/rbgoocairo.c: supported build with
+	GooCanvas 0.6.0.
+
