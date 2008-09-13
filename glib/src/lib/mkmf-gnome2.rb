@@ -296,6 +296,41 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files)
   GLib::MkEnums.create(prefix, files, g_type_prefix, include_files)
 end
 
+def check_cairo
+  return false unless PKGConfig.have_package('cairo')
+
+  have_rb_cairo_h = have_header('rb_cairo.h')
+  unless have_rb_cairo_h
+    begin
+      require 'rubygems'
+      gem 'cairo'
+      require 'cairo'
+      rcairo_src_gem_path_re =
+        /\A#{Regexp.escape(Gem.dir)}\/gems\/cairo-[\d.]+\/src\z/
+      $:.each do |path|
+        if rcairo_src_gem_path_re =~ path
+          $CFLAGS += " -I#{path} "
+          have_rb_cairo_h = have_header('rb_cairo.h')
+          break
+        end
+      end
+    rescue LoadError
+    end
+  end
+
+  if have_rb_cairo_h
+    if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+      unless ENV["CAIRO_PATH"]
+        puts "Error! Set CAIRO_PATH."
+        exit 1
+      end
+      add_depend_package("cairo", "src", ENV["CAIRO_PATH"])
+      $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
+    end
+  end
+  have_rb_cairo_h
+end
+
 check_ruby_func
 
 if /mingw/ =~ RUBY_PLATFORM

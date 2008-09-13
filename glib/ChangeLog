@@ -1,3 +1,8 @@
+2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb (check_cairo): support rcairo in gem.
+	Suggested by OBATA Akio. Thanks!!!
+
 2008-09-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h: 0.17.0 -> 0.18.0.
