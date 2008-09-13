@@ -8,11 +8,15 @@ RELEASE NOTE.
 
 === Changes
 
+Ruby/GLib:
+  * mkmf-gnome2.rb: add check_cairo. [Kouhei Sutou]
+
 Ruby/GooCanvas [NEW][EXPERIMENTAL]:
   * added.
 
 === Thanks
 
+  * OBATA Akio
   * ...
 
 == Ruby-GNOME2 0.17.0: 2008-09-07
