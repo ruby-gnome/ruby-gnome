@@ -1,5 +1,9 @@
 2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS:
+	- fixed [#2110165] Gdk::Pixbuf memory leak
+	- add Ricky Zheng to Thanks section.
+
 	* NEWS: add James Healy to Thanks section.
 
 	* Rakefile: remove libgda and add goocanvas.

@@ -10,14 +10,20 @@ RELEASE NOTE.
 
 Ruby/GLib:
   * mkmf-gnome2.rb: add check_cairo. [Kouhei Sutou]
+  * fixed memory leaks. [Kouhei Sutou]
+    * [#2110165] Gdk::Pixbuf memory leak
 
 Ruby/GooCanvas [NEW][EXPERIMENTAL]:
   * added.
+
+Ruby/Pango:
+  * fixed memory leaks. [Kouhei Sutou]
 
 === Thanks
 
   * OBATA Akio
   * James Healy
+  * Ricky Zheng
   * ...
 
 == Ruby-GNOME2 0.17.0: 2008-09-07
