@@ -55,10 +55,9 @@ font_map_get_resolution(self)
 }
 
 static VALUE
-font_map_create_context(self)
-    VALUE self;
+font_map_create_context(VALUE self)
 {
-    return GOBJ2RVAL(pango_cairo_font_map_create_context(_SELF(self)));
+    return GOBJ2RVAL_UNREF(pango_cairo_font_map_create_context(_SELF(self)));
 }
 
 static VALUE
