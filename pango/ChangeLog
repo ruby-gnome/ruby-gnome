@@ -1,5 +1,7 @@
 2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangolayout.c (layout_copy): fix memory leak.
+
 	* src/rbpangocairo.c (create_layout, font_map_create_context):
 	fix memory leak.
 	Reported by James Healy. Thanks!!!

@@ -23,10 +23,9 @@ layout_initialize(self, context)
 }
 
 static VALUE
-layout_copy(self)
-    VALUE self;
+layout_copy(VALUE self)
 {
-    return GOBJ2RVAL(pango_layout_copy(_SELF(self)));
+    return GOBJ2RVAL_UNREF(pango_layout_copy(_SELF(self)));
 }
 
 static VALUE
