@@ -14,20 +14,22 @@
 #define _SELF(self) ((PangoFontDescription*)RVAL2BOXED(self, PANGO_TYPE_FONT_DESCRIPTION))
 
 static VALUE
-font_desc_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+font_desc_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE str;
+    PangoFontDescription *description;
 
     rb_scan_args(argc, argv, "01", &str);
 
     if (NIL_P(str)) {
-        G_INITIALIZE(self, pango_font_description_new());
+	description = pango_font_description_new();
     } else {
-        G_INITIALIZE(self, pango_font_description_from_string(RVAL2CSTR(str)));
+        description = pango_font_description_from_string(RVAL2CSTR(str));
     }
+
+    G_INITIALIZE(self, description);
+    pango_font_description_free(description);
+
     return Qnil;
 }
 /*

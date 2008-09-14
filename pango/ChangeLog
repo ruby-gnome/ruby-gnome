@@ -1,5 +1,7 @@
 2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangofontdescription.c (font_desc_initialize): fix memory leak.
+
 	* src/rbpangolayout.c (layout_copy): fix memory leak.
 
 	* src/rbpangocairo.c (create_layout, font_map_create_context):
