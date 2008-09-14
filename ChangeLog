@@ -1,5 +1,7 @@
 2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add James Healy to Thanks section.
+
 	* Rakefile: remove libgda and add goocanvas.
 
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
