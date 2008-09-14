@@ -61,7 +61,7 @@ holder_free(gobj_holder *holder)
         }
         holder->gobj = NULL;
     }
-    free(holder);
+    xfree(holder);
 }
 
 static VALUE
@@ -96,7 +96,6 @@ rbgobj_gobject_initialize(obj, cobj)
     gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
         rb_raise(rb_eRuntimeError, "ruby wrapper for this GObject* already exists.");
-
     Data_Get_Struct(obj, gobj_holder, holder);
     holder->cinfo = RVAL2CINFO(obj);
     holder->gobj  = (GObject*)cobj;
@@ -119,16 +118,21 @@ rbgobj_gobject_initialize(obj, cobj)
 VALUE
 rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
 {
-    gobj_holder* holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
-    if (holder)
+    gobj_holder *holder;
+
+    holder = g_object_get_qdata(gobj, RUBY_GOBJECT_OBJ_KEY);
+    if (holder) {
         return holder->self;
-    else if (alloc) {
-        VALUE obj = gobj_s_allocate(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
+    } else if (alloc) {
+        VALUE obj;
+
+	obj = gobj_s_allocate(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_gobject_initialize(obj, (gpointer)gobj);
         return obj;
-    } else
+    } else {
         return Qnil;
+    }
 }
 
 GObject*
