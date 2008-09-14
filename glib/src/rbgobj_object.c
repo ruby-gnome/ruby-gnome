@@ -55,9 +55,9 @@ holder_free(gobj_holder *holder)
 {
     if (holder->gobj) {
         if (!holder->destroyed) {
-            rbgobj_instance_call_cinfo_free(holder->gobj);
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)weak_notify, holder);
+	    weak_notify(holder, holder->gobj);
         }
         holder->gobj = NULL;
     }

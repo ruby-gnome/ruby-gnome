@@ -1,3 +1,7 @@
+2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_object.c (holder_free): fix memory leak.
+
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb (check_cairo): support rcairo in gem.
