@@ -4,8 +4,12 @@ extconf.rb for Ruby/GooCanvas extension library
 
 PACKAGE_NAME = "goocanvas"
 
-TOPDIR = File.expand_path(File.dirname(__FILE__))
-SRCDIR = TOPDIR + '/src'
+base_dir = File.expand_path(File.dirname(__FILE__))
+TOPDIR = File.expand_path(base_dir + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = base_dir + '/src'
+
+$LOAD_PATH.unshift(MKMF_GNOME2_DIR)
 
 require 'mkmf-gnome2'
 
