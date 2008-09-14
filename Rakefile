@@ -71,11 +71,11 @@ task :dist_gtk2 do
   package("ruby-gtk2", base_files + gtk2_dirs)
 end
 
-gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "gnome",
+gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
                            "gnomecanvas", "gnomeprint", "gnomeprintui",
                            "gnomevfs", "gstreamer", "gtkglext",
                            "gtkhtml2", "gtkmozembed", "gtksourceview",
-                           "libart", "libgda", "libglade",
+                           "libart", "libglade",
                            "panel-applet", "poppler", "rsvg", "vte"]
 task :dist_gnome2 do
   package("ruby-gnome2-all", base_files + gnome2_dirs)
