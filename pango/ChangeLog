@@ -1,3 +1,8 @@
+2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbpangocairo.c (create_layout): fix memory leak.
+	Reported by James Healy. Thanks!!!
+
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: use check_cairo.

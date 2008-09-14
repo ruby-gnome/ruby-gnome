@@ -71,10 +71,9 @@ update_context(self, context)
 
 /* Convenience */
 static VALUE
-create_layout(self)
-    VALUE self;
+create_layout(VALUE self)
 {
-    return GOBJ2RVAL(pango_cairo_create_layout(RVAL2CRCONTEXT(self)));
+    return GOBJ2RVAL_UNREF(pango_cairo_create_layout(RVAL2CRCONTEXT(self)));
 }
 
 static VALUE
