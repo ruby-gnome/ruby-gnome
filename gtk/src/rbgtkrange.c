@@ -36,6 +36,15 @@ void        gtk_range_set_lower_stepper_sensitivity
                                              GtkSensitivityType sensitivity);
 GtkSensitivityType gtk_range_get_lower_stepper_sensitivity
                                             (GtkRange *range);
+void               gtk_range_set_show_fill_level           (GtkRange      *range,
+                                                            gboolean       show_fill_level);
+gboolean           gtk_range_get_show_fill_level           (GtkRange      *range);
+void               gtk_range_set_restrict_to_fill_level    (GtkRange      *range,
+                                                            gboolean       restrict_to_fill_level);
+gboolean           gtk_range_get_restrict_to_fill_level    (GtkRange      *range);
+void               gtk_range_set_fill_level                (GtkRange      *range,
+                                                            gdouble        fill_level);
+gdouble            gtk_range_get_fill_level                (GtkRange      *range);
 */
 
 static VALUE
