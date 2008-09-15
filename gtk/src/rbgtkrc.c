@@ -143,6 +143,9 @@ rc_set_default_files(self, filenames)
 /*
 guint       gtk_rc_parse_color              (GScanner *scanner,
                                              GdkColor *color);
+guint       gtk_rc_parse_color_full         (GScanner *scanner,
+                                             GtkRcStyle *style,
+                                             GdkColor *color);
 guint       gtk_rc_parse_state              (GScanner *scanner,
                                              GtkStateType *state);
 guint       gtk_rc_parse_priority           (GScanner *scanner,
