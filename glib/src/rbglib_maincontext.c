@@ -753,6 +753,14 @@ child_watch_add(self, pid)
 }
 #endif
 
+#ifndef HAVE_RB_THREAD_BLOCKING_REGION
+static void
+ruby_source_remove(VALUE tag)
+{
+    g_source_remove(NUM2UINT(tag));
+}
+#endif
+
 void
 Init_glib_main_context()
 {
@@ -831,7 +839,7 @@ Init_glib_main_context()
         source = ruby_source_new();
         tag = g_source_attach(source, NULL);
         g_source_unref(source);
-        rb_set_end_proc((void (*)(VALUE))g_source_remove, (VALUE)tag);
+        rb_set_end_proc(ruby_source_remove, UINT2NUM(tag));
     }
 #endif
 }
