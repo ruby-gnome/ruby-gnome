@@ -19,12 +19,43 @@
 
 static VALUE s_string, s_bool, s_double, s_length, s_int;
 
+#if GTK_CHECK_VERSION(2,12,0)
+static VALUE
+ps_initialize(argc, argv, self)
+    int argc;
+    VALUE *argv;
+    VALUE self;
+{
+    VALUE arg1, arg2;
+    GtkPrintSettings* settings = NULL;
+    GError *error = NULL;
+    rb_scan_args(argc, argv, "02", &arg1, &arg2);
+    if (NIL_P(arg1)){
+        settings = gtk_print_settings_new();
+    } else if (NIL_P(arg2)){
+        settings = gtk_print_settings_new_from_file(RVAL2CSTR(arg1), &error);
+        if (!settings) {
+            RAISE_GERROR(error);
+        }
+    } else {
+        settings = gtk_print_settings_new_from_key_file((GKeyFile*)RVAL2BOXED(arg1, G_TYPE_KEY_FILE),
+                                                        RVAL2CSTR(arg2),
+                                                        &error);
+        if (!settings) {
+            RAISE_GERROR(error);
+        }
+    }
+    G_INITIALIZE(self, settings);
+    return Qnil;
+}
+#else
 static VALUE
 ps_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_print_settings_new());
     return Qnil;
 }
+#endif
 
 static VALUE
 ps_copy(VALUE self)
@@ -572,6 +603,28 @@ ps_set_output_bin(VALUE self, VALUE output_bin)
 }
 #endif
 
+#if GTK_CHECK_VERSION(2,12,0)
+static VALUE
+ps_to_file(VALUE self, VALUE file_name)
+{
+    GError *error = NULL;
+    if (!gtk_print_settings_to_file(_SELF(self), RVAL2CSTR(file_name), &error)) {
+        RAISE_GERROR(error);
+    }
+    return self;
+}
+static VALUE
+ps_to_key_file(int argc, VALUE *argv, VALUE self)
+{
+    VALUE key_file, group_name;
+    rb_scan_args(argc, argv, "11", &key_file, &group_name);
+    gtk_print_settings_to_key_file(_SELF(self),
+                                   (GKeyFile*)RVAL2BOXED(key_file, G_TYPE_KEY_FILE),
+                                   RVAL2CSTR2(group_name));
+    return self;
+}
+#endif
+
 void
 Init_gtk_print_settings()
 {
@@ -589,7 +642,11 @@ Init_gtk_print_settings()
 
     rb_include_module(gPrintSettings, rb_mEnumerable);
 
+#if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gPrintSettings, "initialize", ps_initialize, -1);
+#else
     rb_define_method(gPrintSettings, "initialize", ps_initialize, 0);
+#endif
     rb_define_method(gPrintSettings, "dup", ps_copy, 0);
     rb_define_method(gPrintSettings, "has_key?", ps_has_key, 1);
 
@@ -729,5 +786,9 @@ Init_gtk_print_settings()
     /* GtkPageSet */
     G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", gPrintSettings);
     G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PAGE_SET, "GTK_");
+#endif
+#if GTK_CHECK_VERSION(2,12,0)
+    rb_define_method(gPrintSettings, "to_file", ps_to_file, 1);
+    rb_define_method(gPrintSettings, "to_key_file", ps_to_key_file, -1);
 #endif
 }
