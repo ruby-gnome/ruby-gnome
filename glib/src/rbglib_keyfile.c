@@ -39,7 +39,6 @@ g_key_file_get_type(void)
 }
 /************************************************/
 
-#define G_TYPE_KEY_FILE (g_key_file_get_type())
 #define _SELF(self) ((GKeyFile*)(RVAL2BOXED(self, G_TYPE_KEY_FILE)))
 
 static VALUE
