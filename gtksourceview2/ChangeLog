@@ -1,0 +1,11 @@
+2008-09-21  yselkowitz
+
+	Wrap new features in 2.4.0.
+	* extconf.rb: Test for new functions in 2.4.
+	* src/rbgtksourceview.c: Add Gtk::SourceView#get_mark_category_background,
+	#set_mark_category_background, ::DRAW_SPACES_*.
+	* src/rbgtksourcelanguagemanager.c: Add Gtk::SourceLanguageManager#guess_language.
+
+2008-07-11  yselkowitz
+
+	Initial import of gtksourceview2.

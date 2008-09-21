@@ -141,6 +141,47 @@ sourceview_get_mark_category_priority (self, category)
 }
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
+#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
+/*
+ * Method: get_mark_category_background(category)
+ * category: a category (as a string).
+ *
+ * Gets the background color which is associated with the given category.
+ *
+ * Returns: a Gdk::Color object if found, or nil if not found.
+ */
+static VALUE
+sourceview_get_mark_category_background (self, category)
+	VALUE self, category;
+{
+	GdkColor *color;
+	gtk_source_view_get_mark_category_background (_SELF (self),
+	                                              RVAL2CSTR (category),
+	                                              &color);
+	return GOBJ2RVAL(color);
+}
+
+/*
+ * Method: set_mark_category_background(category, color)
+ * category: a category (as a string).
+ * color: a Gdk::Color.
+ *
+ * Sets given background color for mark category. If color is NULL,
+ * the background color is unset.
+ *
+ * Returns: self.
+ */
+static VALUE
+sourceview_set_mark_category_background (self, category, color)
+	VALUE self, category, color;
+{
+	gtk_source_view_set_mark_category_background (_SELF (self),
+					   RVAL2CSTR (category),
+					   NIL_P (color) ? NULL : GDK_COLOR (RVAL2GOBJ (color)));
+	return self;
+}
+# endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
+
 /* Defined as properties.
 void                gtk_source_view_set_highlight_current_line
                                                         (GtkSourceView *view,
@@ -187,10 +228,17 @@ Init_gtk_sourceview ()
     rb_define_method(cSourceView, "set_mark_category_pixbuf", sourceview_set_mark_category_pixbuf, 2);
     rb_define_method(cSourceView, "get_mark_category_priority", sourceview_get_mark_category_priority, 1);
     rb_define_method(cSourceView, "set_mark_category_priority", sourceview_set_mark_category_priority, 2);
-#endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
-
+#endif
+#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
+    rb_define_method(cSourceView, "get_mark_category_background", sourceview_get_mark_category_background, 1);
+    rb_define_method(cSourceView, "set_mark_category_background", sourceview_set_mark_category_background, 2);
+#endif
     G_DEF_SETTERS (cSourceView);
 
     G_DEF_CLASS(GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "SmartHomeEndType", cSourceView);
     G_DEF_CONSTANTS(cSourceView, GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "GTK_SOURCE_");
+#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
+    G_DEF_CLASS(GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", cSourceView);
+    G_DEF_CONSTANTS(cSourceView, GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "GTK_SOURCE_");
+#endif
 }

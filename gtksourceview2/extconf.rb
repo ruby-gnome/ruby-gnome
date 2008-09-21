@@ -18,6 +18,9 @@ setup_win32(PACKAGE_NAME)
 # 2.2
 have_func('gtk_source_mark_get_type', "gtksourceview/gtksourcemark.h")
 have_func('gtk_source_print_compositor_get_type', "gtksourceview/gtksourceprintcompositor.h")
+# 2.4
+have_func('gtk_source_view_get_mark_category_background', "gtksourceview/gtksourceview.h")
+have_func('gtk_source_language_manager_guess_language', "gtksourceview/gtksourcelanguagemanager.h")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)

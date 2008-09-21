@@ -146,6 +146,28 @@ slm_get_language (self, id)
 		       (_SELF (self), RVAL2CSTR (id)));
 }
 
+#ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
+/*
+ * Method: guess_language(filename, content_type)
+ * filename: a file name (as a string), or nil.
+ * content_type: content type (as a string), or nil.
+ *
+ * Guesses the Gtk::SourceLanguage for the given file name and content type.
+ *
+ * Returns: a Gtk::SourceLanguage, or nil if there is no language associated
+ * with the given filename or content_type.
+ */
+static VALUE
+slm_guess_language (self, filename, content_type)
+	VALUE self, filename, content_type;
+{
+	return GOBJ2RVAL (gtk_source_language_manager_guess_language
+	                     (_SELF (self),
+		                  NIL_P(filename) ? NULL : RVAL2CSTR (filename),
+		                  NIL_P(content_type) ? NULL : RVAL2CSTR (content_type)));
+}
+#endif /* HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE */
+
 void
 Init_gtk_sourcelanguagemanager ()
 {
@@ -158,6 +180,9 @@ Init_gtk_sourcelanguagemanager ()
 	rb_define_method (cslm, "search_path", slm_get_search_path, 0);
 	rb_define_method (cslm, "language_ids", slm_get_language_ids, 0);
 	rb_define_method (cslm, "get_language", slm_get_language, 1);
+#ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
+	rb_define_method (cslm, "guess_language", slm_guess_language, 2);
+#endif
 	rb_define_singleton_method(cslm, "default", slm_get_default, 0);
 	G_DEF_SETTERS (cslm);
 }
