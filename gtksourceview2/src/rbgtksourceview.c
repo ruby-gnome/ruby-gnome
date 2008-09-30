@@ -154,11 +154,11 @@ static VALUE
 sourceview_get_mark_category_background (self, category)
 	VALUE self, category;
 {
-	GdkColor *color;
+	GdkColor color;
 	gtk_source_view_get_mark_category_background (_SELF (self),
 	                                              RVAL2CSTR (category),
 	                                              &color);
-	return GOBJ2RVAL(color);
+	return GDKCOLOR2RVAL(&color);
 }
 
 /*
@@ -177,7 +177,7 @@ sourceview_set_mark_category_background (self, category, color)
 {
 	gtk_source_view_set_mark_category_background (_SELF (self),
 					   RVAL2CSTR (category),
-					   NIL_P (color) ? NULL : GDK_COLOR (RVAL2GOBJ (color)));
+					   NIL_P (color) ? NULL : RVAL2GDKCOLOR((color)));
 	return self;
 }
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */

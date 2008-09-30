@@ -1,3 +1,10 @@
+2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: setup testing environment.
+
+	* src/rbgtksourceview.c, test/test_source_view.rb: fix
+	Gtk::SourceView#{get,set}_mark_category_background bugs.
+
 2008-09-21  yselkowitz
 
 	Wrap new features in 2.4.0.
