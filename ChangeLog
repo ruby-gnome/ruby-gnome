@@ -1,3 +1,8 @@
+2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* run-tests.rb: rename to ...
+	* run-test.rb: ... this.
+
 2008-09-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS:
