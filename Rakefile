@@ -20,21 +20,30 @@ def guess_version
   ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
 end
 
+def dist_dir(base_name, _version=nil)
+  _version ||= version
+  "#{base_name}-#{_version}"
+end
+
+def archive_name(base_name, _version=nil)
+  dist_dir(base_name, _version) + ".tar.gz"
+end
+
 @needless_paths = [".svn", ".test-result", ".gdb_history", "mkmf.log"]
 def package(base_name, paths, needless_paths=nil)
-  dist_dir = "#{base_name}-#{version}"
+  _dist_dir = dist_dir(base_name)
 
-  rm_rf(dist_dir)
-  mkdir_p(dist_dir)
-  cp_r(paths, dist_dir, :preserve => true)
+  rm_rf(_dist_dir)
+  mkdir_p(_dist_dir)
+  cp_r(paths, _dist_dir, :preserve => true)
 
   needless_paths ||= @needless_paths
-  Dir.glob("#{dist_dir}/**/{#{needless_paths.join(',')}}") do |needless_path|
+  Dir.glob("#{_dist_dir}/**/{#{needless_paths.join(',')}}") do |needless_path|
     rm_rf(needless_path)
   end
-  sh("tar", "cvfz", "#{dist_dir}.tar.gz", dist_dir)
+  sh("tar", "cvfz", archive_name(base_name), _dist_dir)
 ensure
-  rm_rf(dist_dir)
+  rm_rf(_dist_dir)
 end
 
 task :configure do
@@ -58,17 +67,18 @@ task :distclean do
 end
 
 task :test => [:build] do
-  ruby("run-tests.rb")
+  ruby("run-test.rb")
 end
 
 task :dist => [:dist_gtk2, :dist_gnome2]
 
 base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
               "README", "Rakefile",
-              "exec_make.rb", "extconf.rb", "run-tests.rb"]
+              "exec_make.rb", "extconf.rb", "run-test.rb"]
 gtk2_dirs = ["glib", "atk", "pango", "gdkpixbuf", "gtk"]
+gtk2_base_name = "ruby-gtk2"
 task :dist_gtk2 do
-  package("ruby-gtk2", base_files + gtk2_dirs)
+  package(gtk2_base_name, base_files + gtk2_dirs)
 end
 
 gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
@@ -78,8 +88,20 @@ gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
                            "gtksourceview", "gtksourceview2",
                            "libart", "libglade",
                            "panel-applet", "poppler", "rsvg", "vte"]
+gnome2_base_name = "ruby-gnome2-all"
 task :dist_gnome2 do
-  package("ruby-gnome2-all", base_files + gnome2_dirs)
+  package(gnome2_base_name, base_files + gnome2_dirs)
+end
+
+task :release => [:dist_gtk2, :dist_gnome2] do
+  sf_user_name = ENV["SF_USER_NAME"] || ENV["USER"]
+  project_name = "ruby-gnome2"
+  ruby("misc/release.rb", sf_user_name, project_name,
+       gtk2_base_name, version, archive_name(gtk2_base_name),
+       "README:1", "NEWS")
+  ruby("misc/release.rb", sf_user_name, project_name,
+       gnome2_base_name, version, archive_name(gnome2_base_name),
+       "README:1", "NEWS")
 end
 
 task :tag do

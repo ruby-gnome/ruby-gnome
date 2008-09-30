@@ -2,9 +2,10 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.18.0: 200X-XX-XX
+== Ruby-GNOME2 0.18.0: 2008-09-30
 
-RELEASE NOTE.
+This release fixes some memory leak bugs and has new
+experimental packages.
 
 === Changes
 

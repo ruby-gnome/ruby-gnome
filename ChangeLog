@@ -1,5 +1,11 @@
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* misc/release.rb: add for releasing.
+
+	* NEWS: add release note for 0.18.0.
+
+	* Rakefile: add release task.
+
 	* README: use RD.
 
 	* NEWS: update 0.18.0 entry.
