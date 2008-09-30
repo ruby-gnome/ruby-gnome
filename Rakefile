@@ -96,12 +96,13 @@ end
 task :release => [:dist] do
   sf_user_name = ENV["SVN_USER"] || ENV["USER"]
   project_name = "Ruby-GNOME 2"
-  ruby("misc/release.rb", sf_user_name, project_name,
-       gtk2_base_name, version, archive_name(gtk2_base_name),
-       "README:1", "NEWS")
-  ruby("misc/release.rb", sf_user_name, project_name,
-       gnome2_base_name, version, archive_name(gnome2_base_name),
-       "README:1", "NEWS")
+  package_name = "ruby-gnome2"
+  release_name = "ruby-gnome2-#{version}"
+  [gtk2_base_name, gnome2_base_name].each do |archive_base_name|
+    ruby("misc/release.rb", sf_user_name, project_name,
+         package_name, release_name, archive_name(archive_base_name),
+         "README:1", "NEWS")
+  end
 end
 
 task :tag do
