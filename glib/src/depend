@@ -3,3 +3,4 @@ install:
 	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/rbgutil.h $(sitearchdir)$(target_prefix)
 	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/rbgobject.h $(sitearchdir)$(target_prefix)
 	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/rbgcompat.h $(sitearchdir)$(target_prefix)
+	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/glib-enum-types.h $(sitearchdir)$(target_prefix)
