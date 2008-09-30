@@ -12,8 +12,6 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
-#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static ID id_to_a, id_size;
 
@@ -74,7 +72,7 @@ lstore_set_value(self, iter, column, value)
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, value);
     
-    gtk_list_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);
+    gtk_list_store_set_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &gval);
 
     g_value_unset(&gval);
     return self;
@@ -169,7 +167,7 @@ lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
 	rb_raise(rb_eArgError, "must be array or hash of values");
     }
 
-    gtk_list_store_set_valuesv(store, RVAL2ITR(iter),
+    gtk_list_store_set_valuesv(store, RVAL2GTKTREEITER(iter),
 			       g_columns, g_values, length);
 
     for (i = 0; i < length; i++)
@@ -195,9 +193,9 @@ lstore_remove(self, iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
-    return CBOOL2RVAL(gtk_list_store_remove(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter)));
 #else
-    gtk_list_store_remove(_SELF(self), RVAL2ITR(iter));
+    gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter));
     return Qtrue;
 #endif
 }
@@ -256,7 +254,7 @@ lstore_insert(argc, argv, self)
     }
     iter.user_data3 = store;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -268,10 +266,10 @@ lstore_insert_before(self, sibling)
     VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
-    gtk_list_store_insert_before(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    gtk_list_store_insert_before(model, &iter, NIL_P(sibling) ? NULL : RVAL2GTKTREEITER(sibling));
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -283,10 +281,10 @@ lstore_insert_after(self, sibling)
     VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
-    gtk_list_store_insert_after(model, &iter, NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+    gtk_list_store_insert_after(model, &iter, NIL_P(sibling) ? NULL : RVAL2GTKTREEITER(sibling));
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -301,7 +299,7 @@ lstore_prepend(self)
     gtk_list_store_prepend(model, &iter);
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -316,7 +314,7 @@ lstore_append(self)
     gtk_list_store_append(model, &iter);
     iter.user_data3 = model;
     
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -336,7 +334,7 @@ lstore_iter_is_valid(self, iter)
     VALUE self, iter;
 {
     return (NIL_P(iter)) ? Qfalse :
-        CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+        CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
@@ -359,23 +357,23 @@ static VALUE
 lstore_swap(self, iter1, iter2)
     VALUE self, iter1, iter2;
 {
-    gtk_list_store_swap(_SELF(self), RVAL2ITR(iter1), RVAL2ITR(iter2));
+    gtk_list_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
 static VALUE
 lstore_move_before(self, iter, position)
     VALUE self, iter, position;
 {
-    gtk_list_store_move_before(_SELF(self), RVAL2ITR(iter), 
-                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    gtk_list_store_move_before(_SELF(self), RVAL2GTKTREEITER(iter), 
+                               NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 static VALUE
 lstore_move_after(self, iter, position)
     VALUE self, iter, position;
 {
-    gtk_list_store_move_after(_SELF(self), RVAL2ITR(iter), 
-                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    gtk_list_store_move_after(_SELF(self), RVAL2GTKTREEITER(iter), 
+                               NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 #endif

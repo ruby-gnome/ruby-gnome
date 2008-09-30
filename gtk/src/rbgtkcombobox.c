@@ -74,7 +74,7 @@ static VALUE
 combobox_set_active_iter(self, iter)
     VALUE self, iter;
 {
-    gtk_combo_box_set_active_iter(_SELF(self), RVAL2BOXED(iter, GTK_TYPE_TREE_ITER));
+    gtk_combo_box_set_active_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
 
@@ -176,7 +176,7 @@ row_separator_func(model, iter, func)
 {  
     iter->user_data3 = model;
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model),
-                            BOXED2RVAL(iter, GTK_TYPE_TREE_ITER)));
+                      GTKTREEITER2RVAL(iter)));
 }
 
 static VALUE

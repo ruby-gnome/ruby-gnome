@@ -78,7 +78,7 @@ layout_data_func(layout, cell, tree_model, iter, func)
 {
     iter->user_data3 = tree_model;
     rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(layout), GOBJ2RVAL(cell),
-               GOBJ2RVAL(tree_model), BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+               GOBJ2RVAL(tree_model), GTKTREEITER2RVAL(iter));
 }
 
 static VALUE

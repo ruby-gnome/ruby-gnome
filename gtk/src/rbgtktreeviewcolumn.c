@@ -146,7 +146,7 @@ cell_data_func(tree_column, cell, model, iter, func)
     iter->user_data3 = model;
     rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(tree_column),
                GOBJ2RVAL(cell), GOBJ2RVAL(model), 
-               BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+               GTKTREEITER2RVAL(iter));
 }
 
 
@@ -215,7 +215,7 @@ tvc_cell_set_cell_data(self, model, iter, is_expander, is_expanded)
 {
     gtk_tree_view_column_cell_set_cell_data(_SELF(self), 
                                             GTK_TREE_MODEL(RVAL2GOBJ(model)),
-                                            (GtkTreeIter*)RVAL2BOXED(iter, GTK_TYPE_TREE_ITER), 
+                                            RVAL2GTKTREEITER(iter), 
                                             RVAL2CBOOL(is_expander), 
                                             RVAL2CBOOL(is_expanded));
     return self;

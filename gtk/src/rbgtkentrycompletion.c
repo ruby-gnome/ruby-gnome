@@ -38,7 +38,7 @@ entryc_match_func(completion, key, iter, func)
 {
     iter->user_data3 = gtk_entry_completion_get_model(completion);
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(completion),
-                            CSTR2RVAL(key), BOXED2RVAL(iter, GTK_TYPE_TREE_ITER)));
+                            CSTR2RVAL(key), GTKTREEITER2RVAL(iter)));
 }
 
 static VALUE

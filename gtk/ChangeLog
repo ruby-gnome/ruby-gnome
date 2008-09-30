@@ -1,3 +1,12 @@
+2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* gtk/src/rbgtkconversions.h: add.
+
+	* gtk/src/depend: install rbgtkconversions.h.
+
+	* gtk/src/: use conversion macros defined in rbgtkconversions.h.
+	Patch by Guillaume Cottenceau. Thanks!!!
+
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: use check_cairo.

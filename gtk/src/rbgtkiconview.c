@@ -54,9 +54,7 @@ gint        gtk_icon_view_get_pixbuf_column (GtkIconView *icon_view);
 static VALUE
 iview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 {
-    GtkTreePath* path = gtk_icon_view_get_path_at_pos(_SELF(self),
-                                                      NUM2INT(x), NUM2INT(y));
-    return BOXED2RVAL(path, GTK_TYPE_TREE_PATH);
+    return GTKTREEPATH2RVAL(gtk_icon_view_get_path_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y)));
 }
 
 static void
@@ -65,8 +63,7 @@ iview_foreach_func(iview, path, func)
     GtkTreePath* path;
     gpointer* func;
 {
-    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(iview),
-               BOXED2RVAL(path, GTK_TYPE_TREE_PATH)); 
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(iview), GTKTREEPATH2RVAL(path));
 }
 
 static VALUE
@@ -121,7 +118,7 @@ iview_select_path(self, path)
     VALUE self, path;
 {
     G_CHILD_SET(self, id_select_path, path);
-    gtk_icon_view_select_path(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
+    gtk_icon_view_select_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 
@@ -130,7 +127,7 @@ iview_unselect_path(self, path)
        VALUE self, path;
 {
     G_CHILD_UNSET(self, id_select_path);
-    gtk_icon_view_unselect_path(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
+    gtk_icon_view_unselect_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
  
@@ -138,9 +135,7 @@ static VALUE
 iview_path_is_selected(self, path)
        VALUE self, path;
 {
-    return CBOOL2RVAL(gtk_icon_view_path_is_selected(_SELF(self), 
-                                                     RVAL2BOXED(path, GTK_TYPE_TREE_PATH)));
-    return self;
+    return CBOOL2RVAL(gtk_icon_view_path_is_selected(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
@@ -174,8 +169,7 @@ static VALUE
 iview_item_activated(self, path)
        VALUE self, path;
 {
-    gtk_icon_view_item_activated(_SELF(self), 
-                                 RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
+    gtk_icon_view_item_activated(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 #endif
@@ -185,7 +179,7 @@ static VALUE
 iview_create_drag_icon(self, path)
        VALUE self, path;
 {
-    return GOBJ2RVAL(gtk_icon_view_create_drag_icon(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH)));
+    return GOBJ2RVAL(gtk_icon_view_create_drag_icon(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
@@ -218,7 +212,7 @@ iview_cursor(self)
     GtkTreePath* path;
     GtkCellRenderer* cell;
     gboolean cursor_set = gtk_icon_view_get_cursor(_SELF(self), &path, &cell);
-    return cursor_set ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell)) : Qnil;
+    return cursor_set ? rb_assoc_new(GTKTREEPATH2RVAL(path), GOBJ2RVAL(cell)) : Qnil;
 }
 
 static VALUE
@@ -228,7 +222,7 @@ iview_get_dest_item_at_pos(self, drag_x, drag_y)
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
     gboolean item_at_pos = gtk_icon_view_get_dest_item_at_pos(_SELF(self), NUM2INT(drag_x), NUM2INT(drag_y), &path, &pos);
-    return item_at_pos ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+    return item_at_pos ? rb_assoc_new(GTKTREEPATH2RVAL(path),
                                       GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION)) : Qnil;
 }
 
@@ -239,7 +233,7 @@ iview_drag_dest_item(self)
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
     gtk_icon_view_get_drag_dest_item(_SELF(self), &path, &pos);
-    return rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+    return rb_assoc_new(GTKTREEPATH2RVAL(path),
                         GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
 }
 
@@ -250,7 +244,7 @@ iview_get_item_at_pos(self, x, y)
     GtkTreePath* path;
     GtkCellRenderer* cell;
     gboolean item_at_pos = gtk_icon_view_get_item_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y), &path, &cell);
-    return item_at_pos ? rb_assoc_new(BOXED2RVAL(path, GTK_TYPE_TREE_PATH), GOBJ2RVAL(cell)) : Qnil;
+    return item_at_pos ? rb_assoc_new(GTKTREEPATH2RVAL(path), GOBJ2RVAL(cell)) : Qnil;
 }
 
 static VALUE
@@ -262,8 +256,8 @@ iview_visible_range(self)
 
     gboolean valid_paths = gtk_icon_view_get_visible_range(_SELF(self), &start_path, &end_path);
 
-    return valid_paths ? rb_assoc_new(BOXED2RVAL(start_path, GTK_TYPE_TREE_PATH),
-                                      BOXED2RVAL(end_path, GTK_TYPE_TREE_PATH)) : Qnil;
+    return valid_paths ? rb_assoc_new(GTKTREEPATH2RVAL(start_path),
+                                      GTKTREEPATH2RVAL(end_path)) : Qnil;
 }
 
 static VALUE
@@ -271,7 +265,7 @@ iview_scroll_to_path(self, path, use_align, row_align, col_align)
     VALUE self, path, use_align, row_align, col_align;
 {
     gtk_icon_view_scroll_to_path(_SELF(self),
-                                 RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                 RVAL2GTKTREEPATH(path),
                                  RVAL2CBOOL(use_align),
                                  NUM2DBL(row_align),
                                  NUM2DBL(col_align));
@@ -282,7 +276,7 @@ static VALUE
 iview_set_cursor(self, path, cell, start_editing)
     VALUE self, path, cell, start_editing;
 {
-    gtk_icon_view_set_cursor(_SELF(self), RVAL2BOXED(path, GTK_TYPE_TREE_PATH), 
+    gtk_icon_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
                              NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RVAL2CBOOL(start_editing));
     return self;
 }
@@ -292,7 +286,7 @@ iview_set_drag_dest_item(self, path, pos)
     VALUE self, path, pos;
 {
     gtk_icon_view_set_drag_dest_item(_SELF(self),
-                                     NIL_P(path) ? NULL : RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                     NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
                                      RVAL2GENUM(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
     return self;
 }

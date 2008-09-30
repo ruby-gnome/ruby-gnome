@@ -43,9 +43,6 @@ rbgtk_get_tree_row_reference(obj)
 /*****************************************/
 
 #define _SELF(s) RVAL2TREEROWREFERENCE(s)
-#define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
-#define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
-#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 /*****************************************/
 
@@ -67,11 +64,11 @@ treerowref_initialize(argc, argv, self)
     G_CHILD_SET(self, id_proxy, proxy);
     ref = gtk_tree_row_reference_new_proxy(RVAL2GOBJ(proxy),
                                            GTK_TREE_MODEL(RVAL2GOBJ(model)), 
-                                           RVAL2TREEPATH(path));
+                                           RVAL2GTKTREEPATH(path));
   } else {
     rb_scan_args(argc, argv, "2", &model, &path);
     ref = gtk_tree_row_reference_new(GTK_TREE_MODEL(RVAL2GOBJ(model)), 
-                                     RVAL2TREEPATH(path));
+                                     RVAL2GTKTREEPATH(path));
   }
   if (ref == NULL)
       rb_raise(rb_eArgError, "Invalid arguments were passed.");
@@ -88,7 +85,7 @@ static VALUE
 treerowref_get_path(self)
     VALUE self;
 {
-    VALUE ret = TREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
+    VALUE ret = GTKTREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
     G_CHILD_SET(self, id_path, ret);
     return ret;
 }
@@ -115,7 +112,7 @@ static VALUE
 treerowref_s_inserted(self, proxy, path)
     VALUE self, proxy, path;
 {
-    gtk_tree_row_reference_inserted(RVAL2GOBJ(proxy), RVAL2TREEPATH(path));
+    gtk_tree_row_reference_inserted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
@@ -123,7 +120,7 @@ static VALUE
 treerowref_s_deleted(self, proxy, path)
     VALUE self, proxy, path;
 {
-    gtk_tree_row_reference_deleted(RVAL2GOBJ(proxy), RVAL2TREEPATH(path));
+    gtk_tree_row_reference_deleted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
@@ -143,8 +140,8 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
         orders[i] = RARRAY(new_orders)->ptr[i];
     }
   
-    gtk_tree_row_reference_reordered(RVAL2GOBJ(proxy), RVAL2TREEPATH(path), 
-                                     RVAL2ITR(iter), orders);
+    gtk_tree_row_reference_reordered(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path), 
+                                     RVAL2GTKTREEITER(iter), orders);
     return self;
 }
 

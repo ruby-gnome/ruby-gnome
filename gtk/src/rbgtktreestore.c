@@ -12,8 +12,6 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_TREE_STORE(RVAL2GOBJ(s)))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
-#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 tstore_initialize(argc, argv, self)
@@ -72,7 +70,7 @@ tstore_set_value(self, iter, column, value)
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, value);
 
-    gtk_tree_store_set_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &gval);
+    gtk_tree_store_set_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &gval);
 
     g_value_unset(&gval);
     return self;
@@ -94,9 +92,9 @@ tstore_remove(self, iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
-    return CBOOL2RVAL(gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_tree_store_remove(_SELF(self), RVAL2GTKTREEITER(iter)));
 #else
-    gtk_tree_store_remove(_SELF(self), RVAL2ITR(iter));
+    gtk_tree_store_remove(_SELF(self), RVAL2GTKTREEITER(iter));
     return Qtrue;
 #endif
 }
@@ -115,10 +113,10 @@ tstore_insert(argc, argv, self)
 
     if (NIL_P(values)){
         gtk_tree_store_insert(model, &iter, 
-                              NIL_P(parent) ? NULL : RVAL2ITR(parent), 
+                              NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
                               NUM2INT(position));
         iter.user_data3 = model;
-        ret = ITR2RVAL(&iter);
+        ret = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, ret);
     } else {
 #if GTK_CHECK_VERSION(2,10,0)
@@ -161,14 +159,14 @@ tstore_insert(argc, argv, self)
         }
 
         gtk_tree_store_insert_with_valuesv(model, &iter,
-                                           NIL_P(parent) ? NULL : RVAL2ITR(parent),
+                                           NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent),
                                            NUM2INT(position),
                                            c_columns,
                                            c_values,
                                            size);
         iter.user_data3 = model;
 
-        ret = ITR2RVAL(&iter);
+        ret = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, ret);
 
         for(i=0; i<size; i++) {
@@ -178,10 +176,10 @@ tstore_insert(argc, argv, self)
 #else
         rb_warn("Gtk::TreeStore#insert(parent, position, values) requires GTK+-2.10.0 or later");
         gtk_tree_store_insert(model, &iter, 
-                              NIL_P(parent) ? NULL : RVAL2ITR(parent), 
+                              NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
                               NUM2INT(position));
         iter.user_data3 = model;
-        ret = ITR2RVAL(&iter);
+        ret = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, ret);
 #endif
     }
@@ -198,10 +196,10 @@ tstore_insert_before(self, parent, sibling)
     GtkTreeIter iter;
     GtkTreeStore* model = _SELF(self);
     gtk_tree_store_insert_before(model, &iter, 
-                                 NIL_P(parent) ? NULL : RVAL2ITR(parent), 
-                                 NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+                                 NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
+                                 NIL_P(sibling) ? NULL : RVAL2GTKTREEITER(sibling));
     iter.user_data3 = model;
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -214,11 +212,11 @@ tstore_insert_after(self, parent, sibling)
     GtkTreeIter iter;
     GtkTreeStore* model = _SELF(self);
     gtk_tree_store_insert_after(model, &iter, 
-                                NIL_P(parent) ? NULL : RVAL2ITR(parent), 
-                                NIL_P(sibling) ? NULL : RVAL2ITR(sibling));
+                                NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
+                                NIL_P(sibling) ? NULL : RVAL2GTKTREEITER(sibling));
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -252,10 +250,10 @@ tstore_prepend(self, parent)
     GtkTreeIter iter;
     GtkTreeStore* model = _SELF(self);
     gtk_tree_store_prepend(model, &iter, 
-                           NIL_P(parent)?NULL:RVAL2ITR(parent));
+                           NIL_P(parent)?NULL:RVAL2GTKTREEITER(parent));
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -268,10 +266,10 @@ tstore_append(self, parent)
     GtkTreeIter iter;
     GtkTreeStore* model = _SELF(self);
     gtk_tree_store_append(model, &iter, 
-                          NIL_P(parent)?NULL:RVAL2ITR(parent));
+                          NIL_P(parent)?NULL:RVAL2GTKTREEITER(parent));
     iter.user_data3 = model;
 
-    ret = ITR2RVAL(&iter);
+    ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -280,15 +278,15 @@ static VALUE
 tstore_is_ancestor(self, iter, descendant)
     VALUE self, iter, descendant;
 {
-    return gtk_tree_store_is_ancestor(_SELF(self), RVAL2ITR(iter), 
-                                      RVAL2ITR(descendant));
+    return gtk_tree_store_is_ancestor(_SELF(self), RVAL2GTKTREEITER(iter), 
+                                      RVAL2GTKTREEITER(descendant));
 }
 
 static VALUE
 tstore_iter_depth(self, iter)
     VALUE self, iter;
 {
-    return INT2NUM(gtk_tree_store_iter_depth(_SELF(self), RVAL2ITR(iter)));
+    return INT2NUM(gtk_tree_store_iter_depth(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
@@ -305,7 +303,7 @@ tstore_iter_is_valid(self, iter)
     VALUE self, iter;
 {
     return (NIL_P(iter)) ? Qfalse : 
-        CBOOL2RVAL(gtk_tree_store_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+        CBOOL2RVAL(gtk_tree_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 static VALUE
 tstore_reorder(self, parent, new_order)
@@ -319,7 +317,7 @@ tstore_reorder(self, parent, new_order)
         gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
     }
 
-    gtk_tree_store_reorder(_SELF(self), RVAL2ITR(parent), gnew_order);
+    gtk_tree_store_reorder(_SELF(self), RVAL2GTKTREEITER(parent), gnew_order);
     g_free(gnew_order);
     return self;
 }
@@ -327,23 +325,23 @@ static VALUE
 tstore_swap(self, iter1, iter2)
     VALUE self, iter1, iter2;
 {
-    gtk_tree_store_swap(_SELF(self), RVAL2ITR(iter1), RVAL2ITR(iter2));
+    gtk_tree_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
 static VALUE
 tstore_move_before(self, iter, position)
     VALUE self, iter, position;
 {
-    gtk_tree_store_move_before(_SELF(self), RVAL2ITR(iter), 
-                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    gtk_tree_store_move_before(_SELF(self), RVAL2GTKTREEITER(iter), 
+                               NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 static VALUE
 tstore_move_after(self, iter, position)
     VALUE self, iter, position;
 {
-    gtk_tree_store_move_after(_SELF(self), RVAL2ITR(iter), 
-                               NIL_P(position) ? NULL : RVAL2ITR(position));
+    gtk_tree_store_move_after(_SELF(self), RVAL2GTKTREEITER(iter), 
+                               NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 #endif

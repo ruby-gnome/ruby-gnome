@@ -70,7 +70,7 @@ cview_set_displayed_row(self, path)
 {
     gtk_cell_view_set_displayed_row(_SELF(self),  
                                     NIL_P(path) ? (GtkTreePath*)NULL :
-                                    (GtkTreePath*)RVAL2BOXED(path, GTK_TYPE_TREE_PATH));
+                                    RVAL2GTKTREEPATH(path));
     return self;
 }
 
@@ -78,8 +78,7 @@ static VALUE
 cview_get_displayed_row(self)
     VALUE self;
 {
-    return BOXED2RVAL(gtk_cell_view_get_displayed_row(_SELF(self)), 
-                      GTK_TYPE_TREE_PATH);
+    return GTKTREEPATH2RVAL(gtk_cell_view_get_displayed_row(_SELF(self)));
 }
 
 static VALUE
@@ -88,7 +87,7 @@ cview_get_size_of_row(self, path)
 {
     GtkRequisition req;
     gboolean ret = gtk_cell_view_get_size_of_row(_SELF(self),  
-                                                 RVAL2BOXED(path, GTK_TYPE_TREE_PATH),
+                                                 RVAL2GTKTREEPATH(path),
                                                  &req);
     if (! ret)
         rb_raise(rb_eRuntimeError, "Can't get the value");

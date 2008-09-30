@@ -13,7 +13,6 @@
 #include "global.h"
 
 #define _SELF(s)	(GTK_TREE_SORTABLE(RVAL2GOBJ(s)))
-#define ITR2RVAL(i) 	(BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 treesortable_sort_column_changed(self)
@@ -72,8 +71,8 @@ sort_func(model, a, b, func)
 {
     a->user_data3 = model;
     b->user_data3 = model;
-    return NUM2INT(rb_funcall((VALUE)func, id_call, 2, ITR2RVAL(a),
-			      ITR2RVAL(b)));
+    return NUM2INT(rb_funcall((VALUE)func, id_call, 2, GTKTREEITER2RVAL(a),
+			      GTKTREEITER2RVAL(b)));
 }
 
 static VALUE

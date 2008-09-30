@@ -12,10 +12,6 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_TREE_MODEL_SORT(RVAL2GOBJ(s)))
-#define RVAL2TREEPATH(s) ((GtkTreePath*)RVAL2BOXED(s, GTK_TYPE_TREE_PATH))
-#define TREEPATH2RVAL(s) (BOXED2RVAL(s, GTK_TYPE_TREE_PATH))
-#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
 
 static ID id_model;
 
@@ -33,9 +29,9 @@ static VALUE
 tmodelsort_convert_child_path_to_path(self, child_path)
     VALUE self, child_path;
 {
-    return TREEPATH2RVAL(gtk_tree_model_sort_convert_child_path_to_path(
+    return GTKTREEPATH2RVAL(gtk_tree_model_sort_convert_child_path_to_path(
                              _SELF(self),
-                             RVAL2TREEPATH(child_path)));
+                             RVAL2GTKTREEPATH(child_path)));
 }
 
 static VALUE
@@ -45,18 +41,18 @@ tmodelsort_convert_child_iter_to_iter(self, child_iter)
     GtkTreeIter sort_iter;
     GtkTreeModelSort* modelsort = _SELF(self);
     gtk_tree_model_sort_convert_child_iter_to_iter(modelsort, &sort_iter,
-                                                   RVAL2ITR(child_iter));
+                                                   RVAL2GTKTREEITER(child_iter));
     sort_iter.user_data3 = gtk_tree_model_sort_get_model(modelsort);
-    return ITR2RVAL(&sort_iter);
+    return GTKTREEITER2RVAL(&sort_iter);
 }
 
 static VALUE
 tmodelsort_convert_path_to_child_path(self, sorted_path)
     VALUE self, sorted_path;
 {
-    return TREEPATH2RVAL(gtk_tree_model_sort_convert_path_to_child_path(
+    return GTKTREEPATH2RVAL(gtk_tree_model_sort_convert_path_to_child_path(
                              _SELF(self),
-                             RVAL2TREEPATH(sorted_path)));
+                             RVAL2GTKTREEPATH(sorted_path)));
 }
 
 static VALUE
@@ -66,9 +62,9 @@ tmodelsort_convert_iter_to_child_iter(self, sorted_iter)
     GtkTreeIter child_iter;
     GtkTreeModelSort* modelsort = _SELF(self);
     gtk_tree_model_sort_convert_iter_to_child_iter(modelsort, &child_iter,
-                                                   RVAL2ITR(sorted_iter));
+                                                   RVAL2GTKTREEITER(sorted_iter));
     child_iter.user_data3 = gtk_tree_model_sort_get_model(modelsort);
-    return ITR2RVAL(&child_iter);
+    return GTKTREEITER2RVAL(&child_iter);
 } 
 
 static VALUE
@@ -92,7 +88,7 @@ static VALUE
 tmodelsort_iter_is_valid(self, iter)
     VALUE self, iter;
 {
-    return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 #endif
 

@@ -12,10 +12,6 @@
 #include "global.h"
 
 #define _SELF(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
-#define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
-#define RVAL2TREEPATH(p) ((GtkTreePath*)RVAL2BOXED(p, GTK_TYPE_TREE_PATH))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
-#define RVAL2ITR(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 static VALUE
 treemodel_get_flags(self)
@@ -50,7 +46,7 @@ treemodel_get_iter_first(self)
     iter.user_data3 = model;
 
     if (ret) {
-        val = ITR2RVAL(&iter);
+        val = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, val);
     }
     
@@ -71,12 +67,12 @@ treemodel_get_iter(self, path)
                                                   RVAL2CSTR(path));
     } else {
         ret = gtk_tree_model_get_iter(model, &iter, 
-                                      RVAL2TREEPATH(path));
+                                      RVAL2GTKTREEPATH(path));
     } 
     iter.user_data3 = model;
 
     if (ret) {
-        val = ITR2RVAL(&iter);
+        val = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, val);
     }
     
@@ -89,7 +85,7 @@ treemodel_get_value(self, iter, column)
 {
     GValue value = {0, };
     VALUE ret = Qnil;
-    gtk_tree_model_get_value(_SELF(self), RVAL2ITR(iter), NUM2INT(column), &value);
+    gtk_tree_model_get_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value);
@@ -118,7 +114,7 @@ treemodel_foreach_func(model, path, iter, func)
     gpointer func;
 {
     iter->user_data3 = model;
-    rb_yield(rb_ary_new3(3, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter)));
+    rb_yield(rb_ary_new3(3, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter)));
     return FALSE;
 }
 
@@ -136,7 +132,7 @@ static VALUE
 treemodel_row_changed(self, path, iter)
     VALUE self, path, iter;
 {
-    gtk_tree_model_row_changed(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter));
+    gtk_tree_model_row_changed(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
@@ -144,7 +140,7 @@ static VALUE
 treemodel_row_inserted(self, path, iter)
     VALUE self, path, iter;
 {
-    gtk_tree_model_row_inserted(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter));
+    gtk_tree_model_row_inserted(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
@@ -152,7 +148,7 @@ static VALUE
 treemodel_row_has_child_toggled(self, path, iter)
     VALUE self, path, iter;
 {
-    gtk_tree_model_row_has_child_toggled(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter));
+    gtk_tree_model_row_has_child_toggled(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
@@ -160,7 +156,7 @@ static VALUE
 treemodel_row_deleted(self, path)
     VALUE self, path;
 {
-    gtk_tree_model_row_deleted(_SELF(self), RVAL2TREEPATH(path));
+    gtk_tree_model_row_deleted(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 
@@ -180,7 +176,7 @@ treemodel_rows_reordered(self, path, iter, new_orders)
         orders[i] = RARRAY(new_orders)->ptr[i];
     }
   
-    gtk_tree_model_rows_reordered(_SELF(self), RVAL2TREEPATH(path), RVAL2ITR(iter), orders);
+    gtk_tree_model_rows_reordered(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter), orders);
     return self;
 }
 
@@ -201,7 +197,7 @@ signal_func(num, values)
     GtkTreeIter* iter = g_value_get_boxed(&values[2]);
     iter->user_data3 = model;
     
-    return rb_ary_new3(3, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter));
+    return rb_ary_new3(3, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter));
 }
 
 static VALUE
@@ -223,7 +219,7 @@ signal_rows_reordered_func(num, values)
     for (i = 0; i < len; i++, new_orders++) {
         rb_ary_push(orders, INT2NUM(*new_orders));
     }
-    return rb_ary_new3(4, GOBJ2RVAL(model), TREEPATH2RVAL(path), ITR2RVAL(iter), orders);
+    return rb_ary_new3(4, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter), orders);
 }
 
 void 

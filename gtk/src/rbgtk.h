@@ -19,6 +19,7 @@
 #include "rubysig.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
+#include "rbgtkconversions.h"
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>

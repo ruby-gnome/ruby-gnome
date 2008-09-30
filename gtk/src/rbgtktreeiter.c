@@ -13,8 +13,6 @@
 #include "global.h"
 
 #define _SELF(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TREE_ITER))
-#define TREEPATH2RVAL(t) (BOXED2RVAL(t, GTK_TYPE_TREE_PATH))
 
 void
 rbgtk_register_treeiter_set_value_func(gtype, func)
@@ -77,7 +75,7 @@ treeiter_children(self)
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     gboolean ret = gtk_tree_model_iter_children(model, &child, iter);
     child.user_data3 = model;
-    return ret ? ITR2RVAL(&child) : Qnil;
+    return ret ? GTKTREEITER2RVAL(&child) : Qnil;
 }
 
 static VALUE
@@ -88,7 +86,7 @@ treeiter_get_path(self)
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     GtkTreePath* path = gtk_tree_model_get_path(model, iter);
-    retval= TREEPATH2RVAL(path);
+    retval= GTKTREEPATH2RVAL(path);
     gtk_tree_path_free(path);
     return retval;
 }
@@ -120,7 +118,7 @@ treeiter_nth_child(self, n)
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     gboolean ret = gtk_tree_model_iter_nth_child(model, &child, iter, NUM2INT(n));
     child.user_data3 = model;
-    return ret ? ITR2RVAL(&child) : Qnil;
+    return ret ? GTKTREEITER2RVAL(&child) : Qnil;
 }
 
 static VALUE
@@ -132,7 +130,7 @@ treeiter_parent(self)
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     gboolean ret = gtk_tree_model_iter_parent(model, &parent, iter);
     parent.user_data3 = model;
-    return ret ? ITR2RVAL(&parent) : Qnil;
+    return ret ? GTKTREEITER2RVAL(&parent) : Qnil;
 }
 
 static VALUE
