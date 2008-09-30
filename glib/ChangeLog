@@ -1,3 +1,8 @@
+2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h (g_key_file_get_type): move to ...
+	* src/rbgobject.h: ... here.
+
 2008-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_maincontext.c: use VALUE not guint to

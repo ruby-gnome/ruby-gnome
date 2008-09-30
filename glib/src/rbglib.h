@@ -85,10 +85,6 @@ extern VALUE rbglib_uint64_to_num(guint64 val);
 extern gint64 rbglib_num_to_int64(VALUE val);
 extern guint64 rbglib_num_to_uint64(VALUE val);
 
-/* rbglib_keyfile.c */
-#define G_TYPE_KEY_FILE (g_key_file_get_type())
-extern GType g_key_file_get_type(void);
-
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

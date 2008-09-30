@@ -235,6 +235,10 @@ extern GType g_main_context_get_type(void);
 extern GType g_source_get_type(void);
 extern GType g_poll_fd_get_type(void);
 
+/* rbglib_keyfile.c */
+#define G_TYPE_KEY_FILE (g_key_file_get_type())
+extern GType g_key_file_get_type(void);
+
 /* rbgobj_convert.c */
 typedef struct {
     GType type;
