@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 # quick & dirty script for running all available tests for each module
 # Author: Joachim Glauche
