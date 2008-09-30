@@ -1,5 +1,7 @@
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* README: use RD.
+
 	* NEWS: update 0.18.0 entry.
 
 	* Rakefile: add gtksourceview2 to Ruby-GNOME2 package.

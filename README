@@ -1,122 +1,180 @@
-Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
-==========================================
+# -*- RD -*-
 
-   This is a set of bindings for the GNOME-2.x libraries for use from Ruby.
+= README
 
-Release packages
-----------------
-   ruby-gtk2
-    - Ruby/GLib2        - GLib 2.0.x or later
-    - Ruby/ATK          - ATK 1.0.x or later
-    - Ruby/Pango        - Pango 1.1.x or later
-    - Ruby/GdkPixbuf2   - GTK+ 2.0.x or later
-    - Ruby/GTK2         - GTK+ 2.0.x or later
+== Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
 
-   ruby-gnome2-all
-    - ruby-gtk2
-    - Ruby/GConf2        - GConf 2.0.x or later
-    - Ruby/GNOME2        - libgnome-2.0.x, libgnomeui-2.0.x or later
-    - Ruby/GnomeCanvas2  - libgnomecanvas-2.0.x or later
-    - Ruby/GnomePrint    - libgnomeprint-2.8.x or later
-    - Ruby/GnomePrintUI  - libgnomeprintui-2.6.x or later
-    - Ruby/GnomeVFS      - GnomeVFS 2.0.x or later
-    - Ruby/GtkHtml2      - GtkHtml2 2.0.x or later
-    - Ruby/GtkGLExt      - GtkGLExt 1.0.3 or later
-    - Ruby/GtkMozEmbed   - GtkMozEmbed (Mozilla 1.7.x or FireFox-1.0.x or later)
-    - Ruby/GtkSourceView - GtkSourceView 1.0.1 or later
-    - Ruby/Libart2       - libart_lgpl 2.3.12 or later
-    - Ruby/Libglade2     - Libglade 2.0.x or later
-    - Ruby/PanelApplet   - gnome-panel 2.6.0 or later (deprecated since 0.16.0)
-    - Ruby/RSVG          - librsvg 2.8.0 or later
+This is a set of bindings for the GNOME-2.x libraries for use from Ruby.
 
-  Experimental / Incomplete:
-    - Ruby/GStreamer     - GStreamer 0.10.x or later
+== Release packages
 
-  Not available (removed since 0.16.0)
-    - Ruby/Libgda        - libgda 1.0.3 or later
+=== ruby-gtk2
 
-Install
--------
-   1. ruby extconf.rb
-   2. make
-   3. su
-   4. make install
+  * Ruby/GLib2:           GLib 2.0.x or later
+  * Ruby/ATK:             ATK 1.0.x or later
+  * Ruby/Pango:           Pango 1.1.x or later
+  * Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
+  * Ruby/GTK2:            GTK+ 2.0.x or later
 
-   To compile and install a particular sub-binding, 
-   you can add arguments:
+=== ruby-gnome2-all
 
-     ruby extconf.rb [subdir]...
-       e.g.) ruby extconf.rb glib pango gdkpixbuf 
+  * ruby-gtk2
+  * Ruby/GConf2:          GConf 2.0.x or later
+  * Ruby/GNOME2:          libgnome-2.0.x, libgnomeui-2.0.x or later
+  * Ruby/GnomeCanvas2:    libgnomecanvas-2.0.x or later
+  * Ruby/GnomePrint:      libgnomeprint-2.8.x or later
+  * Ruby/GnomePrintUI:    libgnomeprintui-2.6.x or later
+  * Ruby/GnomeVFS:        GnomeVFS 2.0.x or later
+  * Ruby/GtkHtml2:        GtkHtml2 2.0.x or later
+  * Ruby/GtkGLExt:        GtkGLExt 1.0.3 or later
+  * Ruby/GtkMozEmbed:     GtkMozEmbed (Mozilla 1.7.x or FireFox-1.0.x or later)
+  * Ruby/GtkSourceView:   GtkSourceView 1.0.1 or later
+  * Ruby/Libart2:         libart_lgpl 2.3.12 or later
+  * Ruby/Libglade2:       Libglade 2.0.x or later
+  * Ruby/PanelApplet:     gnome-panel 2.6.0 or later (deprecated since 0.16.0)
+  * Ruby/RSVG:            librsvg 2.8.0 or later
 
-   Or you can compile each sub-binding:
+=== Experimental / Incomplete:
 
-     0. cd <each sub-directory>
-     1. ruby extconf.rb
-     2. make
-     3. su
-     4. make install
+  * Ruby/GStreamer:       GStreamer 0.10.x or later
+  * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
+  * Ruby/GooCanvas:       GooCanvas 0.8.0 or later
 
-extconf.rb options
--------------------
-   --ruby      : ruby directory
-   --topsrcdir : top source directory
-   --topdir    : top directory
-   --strict    : if some libraries fail to compile/install, "make"
-                 command returns 1(exit 1)
+=== Not available (removed since 0.16.0)
 
-Environment Variables
----------------------
-   CAIRO_PATH  : rcairo path (for Win32).
+  * Ruby/Libgda:          libgda 1.0.3 or later
 
-Dependencies
-------------
-   You should install a sub-binding with its dependencies.
-   The current dependencies are:
+== Install
 
-      Ruby/GLib          none.
-      Ruby/Libart        depends on Ruby/GLib(Use mkmf-gnome2.rb only).
-      Ruby/ATK           depends on Ruby/GLib.
-      Ruby/Pango         depends on Ruby/GLib, rcairo(optional).
-      Ruby/GdkPixbuf     depends on Ruby/GLib.
-      Ruby/GTK           depends on Ruby/GLib, Ruby/ATK, Ruby/Pango, 
-                                    Ruby/GdkPixbuf, rcairo(optional)
-      Ruby/GConf         depends on Ruby/GLib.
-      Ruby/GNOME         depends on Ruby/GnomeCanvas.
-      Ruby/GnomeCanvas   depends on Ruby/GTK, Ruby/Libart.
-      Ruby/GnomeVFS      depends on Ruby/GLib.
-      Ruby/GnomePrint    depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
-      Ruby/GnomePrintUI  depends on Ruby/GTK, Ruby/GnomePrint.
-      Ruby/GtkHtml2      depends on Ruby/GTK.
-      Ruby/GtkGLExt      depends on Ruby/GTK, rbogl.
-      Ruby/GtkSourceView depends on Ruby/GTK.
-      Ruby/Libglade      depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
-      Ruby/PanelApplet   depends on Ruby/GNOME.
-      Ruby/RSVG          depends on Ruby/GLib, Ruby/GdkPixbuf2.
+  % ruby extconf.rb
+  % make
+  % sudo make install
 
-  (experimental)
-      Ruby/GStreamer     depends on Ruby/GLib.
-      Ruby/GooCanvas     depends on Ruby/GTK.
+To compile and install a particular sub-binding, you can add arguments:
 
-  (not available)
-      Ruby/Libgda        depends on Ruby/GLib.
+  % ruby extconf.rb [subdir]...
+    e.g.) ruby extconf.rb glib pango gdkpixbuf
 
-Bugs
-----
+Or you can compile each sub-binding:
+
+  % cd <each sub-directory>
+  % ruby extconf.rb
+  % make
+  % sudo make install
+
+=== extconf.rb options
+
+: --ruby
+   ruby directory
+
+: --topsrcdir
+   top source directory
+
+: --topdir
+    top directory
+
+: --strict
+    if some libraries fail to compile/install, "make"
+    command returns 1(exit 1)
+
+=== Environment Variables
+
+: CAIRO_PATH
+    rcairo path (for Win32).
+
+=== Dependencies
+
+You should install a sub-binding with its dependencies.  The
+current dependencies are:
+
+: Ruby/GLib
+   none.
+
+: Ruby/Libart
+   depends on Ruby/GLib(Use mkmf-gnome2.rb only).
+
+: Ruby/ATK
+   depends on Ruby/GLib.
+
+: Ruby/Pango
+   depends on Ruby/GLib, rcairo(optional).
+
+: Ruby/GdkPixbuf
+   depends on Ruby/GLib.
+
+: Ruby/GTK
+   depends on Ruby/GLib, Ruby/ATK, Ruby/Pango,
+   Ruby/GdkPixbuf, rcairo(optional)
+
+: Ruby/GConf
+   depends on Ruby/GLib.
+
+: Ruby/GNOME
+   depends on Ruby/GnomeCanvas.
+
+: Ruby/GnomeCanvas
+   depends on Ruby/GTK, Ruby/Libart.
+
+: Ruby/GnomeVFS
+   depends on Ruby/GLib.
+
+: Ruby/GnomePrint
+   depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
+
+: Ruby/GnomePrintUI
+   depends on Ruby/GTK, Ruby/GnomePrint.
+
+: Ruby/GtkHtml2
+   depends on Ruby/GTK.
+
+: Ruby/GtkGLExt
+   depends on Ruby/GTK, rbogl.
+
+: Ruby/GtkSourceView
+   depends on Ruby/GTK.
+
+: Ruby/Libglade
+   depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
+
+: Ruby/PanelApplet
+   depends on Ruby/GNOME.
+
+: Ruby/RSVG
+   depends on Ruby/GLib, Ruby/GdkPixbuf2.
+
+=== Experimental
+
+: Ruby/GStreamer
+   depends on Ruby/GLib.
+
+: Ruby/GooCanvas
+   depends on Ruby/GTK.
+
+: Ruby/GtkSourceView2
+   depends on Ruby/GTK.
+
+=== Not available
+
+: Ruby/Libgda
+   depends on Ruby/GLib.
+
+== Bugs
+
 Please report bugs either in our bug tracker
-http://sourceforge.net/tracker/?group_id=53614&atid=470969
+((<URL:http://sourceforge.net/tracker/?group_id=53614&atid=470969>))
 
 or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
-http://sourceforge.net/mail/?group_id=53614
+((<URL:http://sourceforge.net/mail/?group_id=53614>))
 
-Copying
--------
-   Copyright (c) 2002-2008 Ruby-GNOME2 Project Team
+== Copying
 
-   This program is free software.
-   You can distribute/modify this program under the terms of
-   the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+Copyright (c) 2002-2008 Ruby-GNOME2 Project Team
 
-Project Website
----------------
-   http://ruby-gnome2.sourceforge.jp/
+This program is free software.
+You can distribute/modify this program under the terms of
+the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+== Project Website
+
+((<URL:http://ruby-gnome2.sourceforge.jp/>))
 
