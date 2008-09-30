@@ -93,8 +93,8 @@ task :dist_gnome2 do
   package(gnome2_base_name, base_files + gnome2_dirs)
 end
 
-task :release => [:dist_gtk2, :dist_gnome2] do
-  sf_user_name = ENV["SF_USER_NAME"] || ENV["USER"]
+task :release => [:dist] do
+  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
   project_name = "ruby-gnome2"
   ruby("misc/release.rb", sf_user_name, project_name,
        gtk2_base_name, version, archive_name(gtk2_base_name),
