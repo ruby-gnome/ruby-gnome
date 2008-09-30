@@ -1,5 +1,7 @@
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtksourceview.c: cleanup style.
+
 	* test/test_source_view.rb: add a test.
 
 	* test/run-test.rb: setup testing environment.

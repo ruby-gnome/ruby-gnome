@@ -27,23 +27,20 @@
  * Returns: a newly created Gtk::SourceView object.
  */
 static VALUE
-sourceview_initialize (argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
+sourceview_initialize(int argc, VALUE *argv, VALUE self)
 {
-	VALUE buffer;
-	GtkWidget *widget;
+    VALUE buffer;
+    GtkWidget *widget;
 
-	rb_scan_args (argc, argv, "01", &buffer);
+    rb_scan_args(argc, argv, "01", &buffer);
 
-	if (NIL_P (buffer))
-		widget = gtk_source_view_new ();
-	else
-		widget = gtk_source_view_new_with_buffer (RVAL2GOBJ (buffer));
+    if (NIL_P(buffer))
+	widget = gtk_source_view_new();
+    else
+	widget = gtk_source_view_new_with_buffer(RVAL2GOBJ(buffer));
 
-	RBGTK_INITIALIZE (self, widget);
-	return self;
+    RBGTK_INITIALIZE(self, widget);
+    return self;
 }
 
 /* Defined as properties.
@@ -78,13 +75,12 @@ GtkSourceSmartHomeEndType gtk_source_view_get_smart_home_end
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_pixbuf (self, category, pixbuf)
-	VALUE self, category, pixbuf;
+sourceview_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
 {
-	gtk_source_view_set_mark_category_pixbuf (_SELF (self),
-					   RVAL2CSTR (category),
-					   GDK_PIXBUF (RVAL2GOBJ (pixbuf)));
-	return self;
+    gtk_source_view_set_mark_category_pixbuf(_SELF(self),
+					     RVAL2CSTR(category),
+					     GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+    return self;
 }
 
 /*
@@ -96,12 +92,13 @@ sourceview_set_mark_category_pixbuf (self, category, pixbuf)
  * Returns: a Gdk::Pixbuf object if found, or nil if not found.
  */
 static VALUE
-sourceview_get_mark_category_pixbuf (self, category)
-	VALUE self, category;
+sourceview_get_mark_category_pixbuf(VALUE self, VALUE category)
 {
-	return
-	    GOBJ2RVAL (gtk_source_view_get_mark_category_pixbuf
-		       (_SELF (self), RVAL2CSTR (category)));
+    GdkPixbuf *pixbuf;
+
+    pixbuf = gtk_source_view_get_mark_category_pixbuf(_SELF(self),
+						      RVAL2CSTR(category));
+    return GOBJ2RVAL(pixbuf);
 }
 
 /*
@@ -114,13 +111,12 @@ sourceview_get_mark_category_pixbuf (self, category)
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_priority (self, category, priority)
-	VALUE self, category, priority;
+sourceview_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
 {
-	gtk_source_view_set_mark_category_priority (_SELF (self),
-					   RVAL2CSTR (category),
-					   NUM2INT (priority));
-	return self;
+    gtk_source_view_set_mark_category_priority(_SELF (self),
+					       RVAL2CSTR(category),
+					       NUM2INT(priority));
+    return self;
 }
 
 /*
@@ -132,12 +128,13 @@ sourceview_set_mark_category_priority (self, category, priority)
  * Returns: the priority if found, or 0 if not found.
  */
 static VALUE
-sourceview_get_mark_category_priority (self, category)
-	VALUE self, category;
+sourceview_get_mark_category_priority(VALUE self, VALUE category)
 {
-	return
-	    INT2NUM (gtk_source_view_get_mark_category_priority
-		       (_SELF (self), RVAL2CSTR (category)));
+    gint priority;
+
+    priority = gtk_source_view_get_mark_category_priority(_SELF(self),
+							  RVAL2CSTR(category));
+    return INT2NUM(priority);
 }
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
@@ -151,14 +148,13 @@ sourceview_get_mark_category_priority (self, category)
  * Returns: a Gdk::Color object if found, or nil if not found.
  */
 static VALUE
-sourceview_get_mark_category_background (self, category)
-	VALUE self, category;
+sourceview_get_mark_category_background(VALUE self, VALUE category)
 {
-	GdkColor color;
-	gtk_source_view_get_mark_category_background (_SELF (self),
-	                                              RVAL2CSTR (category),
-	                                              &color);
-	return GDKCOLOR2RVAL(&color);
+    GdkColor color;
+    gtk_source_view_get_mark_category_background(_SELF (self),
+						 RVAL2CSTR(category),
+						 &color);
+    return GDKCOLOR2RVAL(&color);
 }
 
 /*
@@ -172,13 +168,12 @@ sourceview_get_mark_category_background (self, category)
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_background (self, category, color)
-	VALUE self, category, color;
+sourceview_set_mark_category_background(VALUE self, VALUE category, VALUE color)
 {
-	gtk_source_view_set_mark_category_background (_SELF (self),
-					   RVAL2CSTR (category),
-					   NIL_P (color) ? NULL : RVAL2GDKCOLOR((color)));
-	return self;
+    gtk_source_view_set_mark_category_background(_SELF (self),
+						 RVAL2CSTR (category),
+						 RVAL2GDKCOLOR((color)));
+    return self;
 }
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
 
