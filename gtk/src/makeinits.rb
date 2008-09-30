@@ -1,10 +1,10 @@
 except_targets = ["Init_gtk2()", "Init_gtk_gdk()", "Init_gtk_gtk()"]
-dependencies = {
-  "Init_gtk_gdk_gc()" => ["Init_gtk_gdk_draw()"],
-}
 
 def print_data(array, type, defs, extern = false)
   if array[type]
+    dependencies = {
+      "Init_gtk_gdk_gc()" => ["Init_gtk_gdk_draw()"],
+    }
     extern_def = "extern void" if extern
     print "##{defs} #{type}\n" if defs
     sorted_array = array[type].dup
