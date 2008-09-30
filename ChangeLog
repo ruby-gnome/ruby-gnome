@@ -1,5 +1,9 @@
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: update 0.18.0 entry.
+
+	* Rakefile: add gtksourceview2 to Ruby-GNOME2 package.
+
 	* run-tests.rb: rename to ...
 	* run-test.rb: ... this.
 

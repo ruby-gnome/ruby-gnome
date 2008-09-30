@@ -74,7 +74,8 @@ end
 gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
                            "gnomecanvas", "gnomeprint", "gnomeprintui",
                            "gnomevfs", "gstreamer", "gtkglext",
-                           "gtkhtml2", "gtkmozembed", "gtksourceview",
+                           "gtkhtml2", "gtkmozembed",
+                           "gtksourceview", "gtksourceview2",
                            "libart", "libglade",
                            "panel-applet", "poppler", "rsvg", "vte"]
 task :dist_gnome2 do
