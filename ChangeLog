@@ -1,5 +1,8 @@
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add a entry for [#2113491] Incorrect initialize order
+	(compiling with mingw)
+
 	* NEWS: add a entry for [#2106938] Install glib-enum-types.h.
 
 	* run-test.rb: use /usr/bin/env ruby instead of /usr/bin/ruby.
