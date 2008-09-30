@@ -18,6 +18,9 @@ setup_win32(PACKAGE_NAME)
 
 check_cairo or exit 1
 
+add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
+
 make_version_header("GOO_CANVAS", PACKAGE_NAME)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GOO_CANVAS_COMPILATION")
