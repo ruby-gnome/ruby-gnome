@@ -1,3 +1,9 @@
+2008-10-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/makeinits.rb: call Init_gtk_gdk_draw() before
+	Init_gtk_gdk_gc(). [#2113491]
+	Reported by Ricky Zheng. Thanks!!!
+
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* gtk/src/rbgtkconversions.h: add.

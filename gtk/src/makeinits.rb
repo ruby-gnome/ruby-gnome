@@ -1,10 +1,24 @@
 except_targets = ["Init_gtk2()", "Init_gtk_gdk()", "Init_gtk_gtk()"]
+dependencies = {
+  "Init_gtk_gdk_gc()" => ["Init_gtk_gdk_draw()"],
+}
 
 def print_data(array, type, defs, extern = false)
   if array[type]
     extern_def = "extern void" if extern
     print "##{defs} #{type}\n" if defs
-    array[type].each do |val|
+    sorted_array = array[type].dup
+    dependencies.each do |key, values|
+      key_index = sorted_array.index(key)
+      values.each do |value|
+        value_index = sorted_array.index(value)
+        next if value_index.nil?
+        sorted_array.delete(value)
+        sorted_array[key_index - 1, 1] = value
+        key_index = sorted_array.index(key)
+      end
+    end
+    sorted_array.each do |val|
 	   print "#{extern_def}   #{val};\n"
     end
     print "#endif\n" if defs
