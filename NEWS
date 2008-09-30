@@ -13,6 +13,8 @@ Ruby/GLib:
   * mkmf-gnome2.rb: add check_cairo. [Kouhei Sutou]
   * fixed memory leaks. [Kouhei Sutou]
     * [#2110165] Gdk::Pixbuf memory leak
+  * install glib-enum-types.h. [Andy Spencer]
+    * [#2106938] Install glib-enum-types.h
 
 Ruby/GTK2:
   * add GTK+ 2.12 related bindings. [Guillaume Cottenceau]
