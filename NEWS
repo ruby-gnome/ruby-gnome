@@ -2,6 +2,21 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.19.0: 2008-XX-XX
+
+RELEASE NOTE. (WRITE ME)
+
+=== Changes
+
+Ruby/GTK2:
+  * fixed initialize function is deleted.
+    [kimura wataru, Kouhei Sutou]
+
+=== Thanks
+
+  * kimura wataru
+  * ...
+
 == Ruby-GNOME2 0.18.0: 2008-09-30
 
 This release fixes some memory leak bugs and has new
@@ -9,7 +24,7 @@ experimental packages.
 
 === Changes
 
-Ruby/GLib:
+Ruby/GLib2:
   * mkmf-gnome2.rb: add check_cairo. [Kouhei Sutou]
   * fixed memory leaks. [Kouhei Sutou]
     * [#2110165] Gdk::Pixbuf memory leak
