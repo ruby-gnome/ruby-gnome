@@ -14,7 +14,7 @@ def print_data(array, type, defs, extern = false)
         value_index = sorted_array.index(value)
         next if value_index.nil?
         sorted_array.delete(value)
-        sorted_array[key_index - 1, 1] = value
+        sorted_array[key_index - 1, 0] = value
         key_index = sorted_array.index(key)
       end
     end

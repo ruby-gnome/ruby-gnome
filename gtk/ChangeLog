@@ -1,3 +1,8 @@
+2008-10-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/makeinits.rb: fix a bug that init function is deleted.
+	Reported by kimura wataru. Thanks!!!
+
 2008-10-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/makeinits.rb: call Init_gtk_gdk_draw() before
