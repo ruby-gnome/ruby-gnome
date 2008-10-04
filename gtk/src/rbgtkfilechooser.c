@@ -372,7 +372,7 @@ Init_gtk_file_chooser()
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
 
-#ifdef HAVE_GTK_GTKFILESYSTEM_H
+#ifdef GTK_FILE_SYSTEM_ERROR
     /* GtkFileSystemError */
     eFileSystemError = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
 				    mGtk, rb_eRuntimeError);

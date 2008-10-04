@@ -1,3 +1,8 @@
+2008-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkfilechooser.c: check GTK_FILE_SYSTEM_ERROR availability.
+	Reported by Philipp Götzinger. Thanks!!!
+
 2008-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/makeinits.rb: fix a bug that init function is deleted.
