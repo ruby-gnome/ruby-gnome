@@ -1,3 +1,9 @@
+2008-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: add a entry for 'checked GTK_FILE_SYSTEM_ERROR
+	availability. GTK+ 2.15.x doesn't have it.' reported by Philipp
+	Götzinger. Thanks!!!
+
 2008-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add a 0.19.0 entry.
