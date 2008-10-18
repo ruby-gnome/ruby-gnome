@@ -10,7 +10,7 @@
 ************************************************/
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define _SELF(self) (GTK_ACTION(RVAL2GOBJ(self)))
@@ -210,13 +210,30 @@ action_get_accel_closure(self)
 }
 #endif
 
+static void
+action_mark(void *p)
+{
+    GtkAction *action;
+    GSList *node;
+
+    action = GTK_ACTION(p);
+    for (node = gtk_action_get_proxies(action);
+	 node;
+	 node = g_slist_next(node)) {
+	GtkWidget *proxy = node->data;
+	rbgobj_gc_mark_instance(proxy);
+    }
+}
 #endif
 
-void 
+void
 Init_gtk_action()
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gAction = G_DEF_CLASS(GTK_TYPE_ACTION, "Action", mGtk);
+    VALUE gAction;
+
+    gAction = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION, "Action", mGtk,
+				       action_mark, NULL);
 
     rb_define_method(gAction, "initialize", action_initialize, -1);
     /* (NOTICE) Gtk::Action#is_sensitive?, #is_visible are special.

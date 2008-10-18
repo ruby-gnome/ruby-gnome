@@ -158,13 +158,31 @@ rbuimanager_ensure_update(self)
     gtk_ui_manager_ensure_update(_SELF(self));
     return self;
 }
+
+static void
+rbuimanager_mark(void *p)
+{
+    GtkUIManager *manager;
+    GList *node;
+
+    manager = GTK_UI_MANAGER(p);
+    for (node = gtk_ui_manager_get_action_groups(manager);
+	 node;
+	 node = g_list_next(node)) {
+	GtkWidget *action_group = node->data;
+	rbgobj_gc_mark_instance(action_group);
+    }
+}
 #endif
 
-void 
+void
 Init_gtk_uimanager()
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gUI = G_DEF_CLASS(GTK_TYPE_UI_MANAGER, "UIManager", mGtk);
+    VALUE gUI;
+
+    gUI = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_UI_MANAGER, "UIManager", mGtk,
+				   rbuimanager_mark, NULL);
 
     rb_define_method(gUI, "initialize", rbuimanager_initialize, 0);
     rb_define_method(gUI, "insert_action_group", rbuimanager_insert_action_group, 2);

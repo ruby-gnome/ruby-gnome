@@ -729,8 +729,10 @@ cont_mark(void* p)
 void 
 Init_gtk_container()
 {
-    VALUE gContainer = G_DEF_CLASS2(GTK_TYPE_CONTAINER, "Container", mGtk, cont_mark, NULL);
+    VALUE gContainer;
 
+    gContainer = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_CONTAINER, "Container",
+					  mGtk, cont_mark, NULL);
     rb_define_method(gContainer, "resize_container?", cont_is_resize_container, 0);
     rb_define_method(gContainer, "add", cont_add, -1);
     rb_define_alias(gContainer, "<<", "add");

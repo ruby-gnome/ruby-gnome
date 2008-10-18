@@ -317,13 +317,31 @@ actiongroup_translate_string(self, str)
     return CSTR2RVAL(gtk_action_group_translate_string(_SELF(self), RVAL2CSTR(str)));
 }
 #endif
+
+static void
+action_group_mark(void *p)
+{
+    GtkActionGroup *group;
+    GList *actions, *node;
+
+    group = GTK_ACTION_GROUP(p);
+    actions = gtk_action_group_list_actions(group);
+    for (node = actions; node; node = g_list_next(node)) {
+	GtkWidget *action = node->data;
+	rbgobj_gc_mark_instance(action);
+    }
+    g_list_free(actions);
+}
 #endif
 
 void 
 Init_gtk_actiongroup()
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gActionGroup = G_DEF_CLASS(GTK_TYPE_ACTION_GROUP, "ActionGroup", mGtk);
+    VALUE gActionGroup;
+
+    gActionGroup = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
+					    mGtk, action_group_mark, NULL);
 
     id_action_procs = rb_intern("@action_procs");
     id_toggle_action_procs = rb_intern("@toggle_action_procs");

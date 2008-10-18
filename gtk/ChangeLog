@@ -1,3 +1,9 @@
+2008-10-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkaction.c, src/rbgtkactiongroup.c, src/rbgtkcontainer.c,
+	src/rbgtkuimanager.c: fix GC problems.
+	Reported by Andrew S. Townley. Thanks!!!
+
 2008-10-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkfilechooser.c: check GTK_FILE_SYSTEM_ERROR availability.
