@@ -1,3 +1,7 @@
+2008-10-22  Guillaume Cottenceau
+
+	* test/test_gdk_gc.rb: add a basic Gdk::GC autotest
+
 2008-10-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkaction.c, src/rbgtkactiongroup.c, src/rbgtkcontainer.c,
