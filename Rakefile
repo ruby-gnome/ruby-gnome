@@ -105,6 +105,15 @@ task :release => [:dist] do
   end
 end
 
+def guess_copy_source_repository_uri
+  info_xml = `svn info --xml`
+  if /<url>(.+?)<\/url>/ =~ info_xml
+    $1
+  else
+    raise "can't find repository URI from:\n#{info_xml}"
+  end
+end
+
 task :tag do
   tagged_url = "#{repository_base_url}/tags/#{version}"
 
@@ -120,6 +129,6 @@ task :tag do
   if ENV["SVN_USER"]
     svn_commands.configure(["--username", ENV["SVN_USER"]])
   end
-  svn_commands.concat(["#{repository_base_url}/trunk", tagged_url])
+  svn_commands.concat([guess_copy_source_repository_uri, tagged_url])
   sh(*svn_commands)
 end
