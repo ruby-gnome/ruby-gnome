@@ -1,3 +1,7 @@
+2008-10-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: add 0.18.1 entry.
+
 2008-09-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add a entry for [#2113491] Incorrect initialize order

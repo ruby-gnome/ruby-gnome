@@ -2,6 +2,19 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.18.1: 2008-10-23
+
+This release is bug fix release of 0.18.0.
+
+=== Changes
+
+Ruby/GTK2:
+  * fix a bug that init function is deleted. [Kouhei Sutou]
+
+=== Thanks
+
+  * kimura wataru
+
 == Ruby-GNOME2 0.18.0: 2008-09-30
 
 This release fixes some memory leak bugs and has new
