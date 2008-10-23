@@ -14,11 +14,14 @@ Ruby/GTK2:
   * checked GTK_FILE_SYSTEM_ERROR availability. GTK+ 2.15.x
     doesn't have it.
     [Kouhei Sutou]
+  * fixed GC problems.
+    [Kouhei Sutou]
 
 === Thanks
 
   * kimura wataru
   * Philipp Götzinger
+  * Andrew S. Townley
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30

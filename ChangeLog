@@ -1,5 +1,8 @@
 2008-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add an entry for 'fixed GC problems.'
+	Reported by Andrew S. Townley. Thanks!!!
+
 	* Rakefile: guess release source repository's URI from the current
 	working copy.
 
