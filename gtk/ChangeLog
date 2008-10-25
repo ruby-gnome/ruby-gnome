@@ -1,3 +1,8 @@
+2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gtk_unix_print.rb (TestGtkUnixPrint#test_classes):
+	assert_const_not_defined -> assert_not_const_defined.
+
 2008-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gtk_unix_print.rb, test/test_gdk_gc.rb: use

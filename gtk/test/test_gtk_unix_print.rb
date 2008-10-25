@@ -3,7 +3,7 @@ class TestGtkUnixPrint < Test::Unit::TestCase
     if GLib.os_unix?
       assertion = :assert_const_defined
     else
-      assertion = :assert_const_not_defined
+      assertion = :assert_not_const_defined
     end
     send(assertion, Gtk, :PageSetupUnixDialog)
     send(assertion, Gtk, :Printer)
