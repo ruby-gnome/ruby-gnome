@@ -1,3 +1,8 @@
+2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_constants.rb: use assert_{,not_}const_defined in
+	Test::Unit.
+
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: use check_cairo.

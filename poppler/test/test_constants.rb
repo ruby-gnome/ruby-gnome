@@ -3,7 +3,7 @@ class TestConstants < Test::Unit::TestCase
     if later_version?(0, 7, 2)
       assertion = :assert_const_defined
     else
-      assertion = :assert_const_not_defined
+      assertion = :assert_not_const_defined
     end
     send(assertion, Poppler, :AnnotationType)
     if assertion == :assert_const_defined
@@ -16,7 +16,7 @@ class TestConstants < Test::Unit::TestCase
       assert_equal("3d", Poppler::AnnotationExternalDataType::TYPE_3D.nick)
     end
     if later_version?(0, 9, 0)
-      assert_const_not_defined(Poppler, :AnnotationTextIcon)
+      assert_not_const_defined(Poppler, :AnnotationTextIcon)
     else
       send(assertion, Poppler, :AnnotationTextIcon)
     end
@@ -26,18 +26,5 @@ class TestConstants < Test::Unit::TestCase
 
   def test_permissions
     assert_const_defined(Poppler, :Permissions)
-  end
-
-  private
-  def assert_const_defined(parent, name)
-    assert_block("<#{parent}::#{name}> expected to be defined.") do
-      parent.const_defined?(name)
-    end
-  end
-
-  def assert_const_not_defined(parent, name)
-    assert_block("<#{parent}::#{name}> expected to be not defined.") do
-      !parent.const_defined?(name)
-    end
   end
 end
