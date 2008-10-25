@@ -1,3 +1,7 @@
+2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_signal.rb: use assert_const_defined.
+
 2008-10-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* TODO: add.
