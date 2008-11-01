@@ -67,26 +67,26 @@ scores_initialize(self, names, scores, times, clear)
     int i, num_scores;
 
     Check_Type(names, T_ARRAY);
-    c_names = ALLOCA_N(gchar*, RARRAY(names)->len+1);
-    for (i = 0; i < RARRAY(names)->len; ++i) {
-        c_names[i] = RVAL2CSTR(RARRAY(names)->ptr[i]);
+    c_names = ALLOCA_N(gchar*, RARRAY_LEN(names)+1);
+    for (i = 0; i < RARRAY_LEN(names); ++i) {
+        c_names[i] = RVAL2CSTR(RARRAY_PTR(names)[i]);
     }
 
     Check_Type(scores, T_ARRAY);
-    c_scores = ALLOCA_N(gfloat, RARRAY(scores)->len+1);
-    for (i = 0; i < RARRAY(scores)->len; ++i) {
-        c_scores[i] = NUM2LONG(RARRAY(scores)->ptr[i]);
+    c_scores = ALLOCA_N(gfloat, RARRAY_LEN(scores)+1);
+    for (i = 0; i < RARRAY_LEN(scores); ++i) {
+        c_scores[i] = NUM2LONG(RARRAY_PTR(scores)[i]);
     }
 
     Check_Type(times, T_ARRAY);
-    c_times = ALLOCA_N(time_t, RARRAY(times)->len+1);
-    for (i = 0; i < RARRAY(times)->len; ++i) {
-        c_times[i] = NUM2INT(rb_funcall(RARRAY(times)->ptr[i], rb_intern("to_i"), 0));
+    c_times = ALLOCA_N(time_t, RARRAY_LEN(times)+1);
+    for (i = 0; i < RARRAY_LEN(times); ++i) {
+        c_times[i] = NUM2INT(rb_funcall(RARRAY_PTR(times)[i], rb_intern("to_i"), 0));
     }
 
-    if ((RARRAY(names)->len == RARRAY(scores)->len) &&
-        (RARRAY(names)->len == RARRAY(times)->len)) {
-        num_scores = RARRAY(names)->len;
+    if ((RARRAY_LEN(names) == RARRAY_LEN(scores)) &&
+        (RARRAY_LEN(names) == RARRAY_LEN(times))) {
+        num_scores = RARRAY_LEN(names);
     } else {
         rb_raise(rb_eArgError, "All arrays must be the same length.");
     }

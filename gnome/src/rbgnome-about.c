@@ -42,16 +42,16 @@ about_initialize(argc, argv, self)
                  &documenters, &translator_credits, &logo_pixbuf);
 
     Check_Type(authors, T_ARRAY);
-    c_authors = ALLOCA_N(const gchar*, RARRAY(authors)->len+1);
-    for (i=0; i<RARRAY(authors)->len; i++) {
-        c_authors[i] = RVAL2CSTR(RARRAY(authors)->ptr[i]);
+    c_authors = ALLOCA_N(const gchar*, RARRAY_LEN(authors)+1);
+    for (i=0; i<RARRAY_LEN(authors); i++) {
+        c_authors[i] = RVAL2CSTR(RARRAY_PTR(authors)[i]);
     }
     c_authors[i] = NULL; /* we need to terminate the array with a NULL. */
 
     Check_Type(documenters, T_ARRAY);
-    c_documenters = ALLOCA_N(const gchar*, RARRAY(documenters)->len+1);
-    for (i=0; i<RARRAY(documenters)->len; i++) {
-        c_documenters[i] = RVAL2CSTR(RARRAY(documenters)->ptr[i]);
+    c_documenters = ALLOCA_N(const gchar*, RARRAY_LEN(documenters)+1);
+    for (i=0; i<RARRAY_LEN(documenters); i++) {
+        c_documenters[i] = RVAL2CSTR(RARRAY_PTR(documenters)[i]);
     }
     c_documenters[i] = NULL; /* we need to terminate the array with a NULL. */
 

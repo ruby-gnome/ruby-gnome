@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgnome-trigger.c: used RB_CVAR_SET_4ARGS instead of

@@ -60,13 +60,13 @@ gnohelp_m_display_with_doc_id(argc, argv, self)
       char** genvp;
 
       Check_Type(env, T_ARRAY);
-      genc = RARRAY(env)->len;
+      genc = RARRAY_LEN(env);
 
       genvp = ALLOCA_N(gchar*, genc + 1);
 
       for (i = 0; i < genc; i++) {
-        if (TYPE(RARRAY(env)->ptr[i]) == T_STRING) {
-          genvp[i] = RVAL2CSTR(RARRAY(env)->ptr[i]);
+        if (TYPE(RARRAY_PTR(env)[i]) == T_STRING) {
+          genvp[i] = RVAL2CSTR(RARRAY_PTR(env)[i]);
         }
         else {
           genvp[i] = "";
@@ -119,13 +119,13 @@ gnohelp_m_display_desktop(argc, argv, self)
       char** genvp;
       
       Check_Type(env, T_ARRAY);
-      genc = RARRAY(env)->len;
+      genc = RARRAY_LEN(env);
 
       genvp = ALLOCA_N(gchar*, genc + 1);
       
       for (i = 0; i < genc; i++) {
-        if (TYPE(RARRAY(env)->ptr[i]) == T_STRING) {
-          genvp[i] = RVAL2CSTR(RARRAY(env)->ptr[i]);
+        if (TYPE(RARRAY_PTR(env)[i]) == T_STRING) {
+          genvp[i] = RVAL2CSTR(RARRAY_PTR(env)[i]);
         }
         else {
           genvp[i] = "";
@@ -173,13 +173,13 @@ gnohelp_m_display_uri(argc, argv, self)
       char** genvp;
       
       Check_Type(env, T_ARRAY);
-      genc = RARRAY(env)->len;
+      genc = RARRAY_LEN(env);
 
       genvp = ALLOCA_N(gchar*, genc + 1);
       
       for (i = 0; i < genc; i++) {
-        if (TYPE(RARRAY(env)->ptr[i]) == T_STRING) {
-          genvp[i] = RVAL2CSTR(RARRAY(env)->ptr[i]);
+        if (TYPE(RARRAY_PTR(env)[i]) == T_STRING) {
+          genvp[i] = RVAL2CSTR(RARRAY_PTR(env)[i]);
         }
         else {
           genvp[i] = "";

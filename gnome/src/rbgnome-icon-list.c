@@ -284,8 +284,8 @@ icon_list_set_icon_data(self, idx, data)
     if (ary_idx == -1) {
         if (!NIL_P(data)) {
             /* search empty entry. */
-            for (i = 0; i < RARRAY(ary)->len; i++) {
-                if (NIL_P(RARRAY(ary)->ptr[i]))
+            for (i = 0; i < RARRAY_LEN(ary); i++) {
+                if (NIL_P(RARRAY_PTR(ary)[i]))
                     break;
             }
             rb_ary_store(ary, i, data);
@@ -310,11 +310,11 @@ icon_list_find_icon_from_data(self, data)
     if (NIL_P(ary))
         return INT2FIX(-1);
 
-    for (i = 0; i < RARRAY(ary)->len; i++) {
-        if (rb_equal(RARRAY(ary)->ptr[i], data))
+    for (i = 0; i < RARRAY_LEN(ary); i++) {
+        if (rb_equal(RARRAY_PTR(ary)[i], data))
             break;
     }
-    if (i == RARRAY(ary)->len)
+    if (i == RARRAY_LEN(ary))
         return INT2FIX(-1);
     return INT2NUM(gnome_icon_list_find_icon_from_data(_SELF(self), GINT_TO_POINTER(i + 1)));
 }

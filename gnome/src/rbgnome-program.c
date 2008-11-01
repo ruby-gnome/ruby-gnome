@@ -110,12 +110,12 @@ prepare_pdata(hash, data, popt_tablep)
         return 0;
     Check_Type(hash, T_HASH);
     ary = rb_funcall(hash, id_to_a, 0);
-    if (RARRAY(ary)->len >= SIZE_OF_PROP_TABLE)
+    if (RARRAY_LEN(ary) >= SIZE_OF_PROP_TABLE)
         rb_raise(rb_eArgError, "too many properties");
     *popt_tablep = Qnil;
-    for (i = 0; i < RARRAY(ary)->len; i++) {
-        name = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
-        value = RARRAY(RARRAY(ary)->ptr[i])->ptr[1];
+    for (i = 0; i < RARRAY_LEN(ary); i++) {
+        name = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
+        value = RARRAY_PTR(RARRAY_PTR(ary)[i])[1];
         if (SYMBOL_P(name)) {
             g_strlcpy(cname, rb_id2name(SYM2ID(name)), sizeof(cname));
         } else {
@@ -317,10 +317,10 @@ program_initialize(argc, argv, self)
 
     args = rb_obj_dup(args); /* clone to attach to 'self'. */
     rb_ary_unshift(args, arg0);
-    cargc = RARRAY(args)->len;
+    cargc = RARRAY_LEN(args);
     cargv = ALLOCA_N(char*, cargc + 1);
     for (i = 0; i < cargc; i++) {
-        cargv[i] = RVAL2CSTR(RARRAY(args)->ptr[i]);
+        cargv[i] = RVAL2CSTR(RARRAY_PTR(args)[i]);
     }
     cargv[i] = NULL;
     rb_ivar_set(self, id_args, args);
@@ -454,7 +454,7 @@ program_print_common(self, arg)
     VALUE popt_table = rb_ivar_get(self, id_popt_table);
     char *argv[3];
 
-    argv[0] = RVAL2CSTR(RARRAY(args)->ptr[0]);
+    argv[0] = RVAL2CSTR(RARRAY_PTR(args)[0]);
     argv[1] = (char *)arg;
     argv[2] = NULL;
     /* ugly hack!

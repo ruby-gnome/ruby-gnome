@@ -75,13 +75,13 @@ pmenu_pos_func(menu, px, py, data)
     VALUE arr = rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(menu),
                            INT2FIX(*px), INT2FIX(*py));
     Check_Type(arr, T_ARRAY);
-    if (RARRAY(arr)->len != 2) {
+    if (RARRAY_LEN(arr) != 2) {
 		rb_raise(rb_eTypeError,
                          "wrong number of result (%ld for 2)",
-                         RARRAY(arr)->len);
+                         RARRAY_LEN(arr));
     }
-    *px = NUM2INT(RARRAY(arr)->ptr[0]);
-    *py = NUM2INT(RARRAY(arr)->ptr[1]);
+    *px = NUM2INT(RARRAY_PTR(arr)[0]);
+    *py = NUM2INT(RARRAY_PTR(arr)[1]);
 }
 
 static VALUE

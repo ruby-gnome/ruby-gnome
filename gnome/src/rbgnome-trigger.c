@@ -149,12 +149,12 @@ trig_add_trigger(argc, argv, self)
     char** supinfo;
 
     rb_scan_args(argc, argv, "0*", &args);
-    len = RARRAY(args)->len;
+    len = RARRAY_LEN(args);
 
     supinfo = (char**)g_new(char*, len + 1);
 
     for (i = 0; i < len; i++){
-        supinfo[i] = g_strdup(RVAL2CSTR(RARRAY(args)->ptr[i]));
+        supinfo[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(args)[i]));
     }
     supinfo[len] = NULL;
 
@@ -174,12 +174,12 @@ trig_s_do(argc, argv, self)
     char** supinfo;
 
     rb_scan_args(argc, argv, "2*", &msg, &level, &args);
-    len = RARRAY(args)->len;
+    len = RARRAY_LEN(args);
 
     supinfo = (char**)g_new(char*, len + 1);
 
     for (i = 0; i < len; i++){
-        supinfo[i] = g_strdup(RVAL2CSTR(RARRAY(args)->ptr[i]));
+        supinfo[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(args)[i]));
     }
     supinfo[len] = NULL;
 

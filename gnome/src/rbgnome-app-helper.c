@@ -481,8 +481,8 @@ fill_ui_info(uiinfo, ary, uitype)
     int i, j;
 
     /* ary is T_ARRAY. */
-    for (i = 0; i < RARRAY(ary)->len; i++) {
-        item = RARRAY(ary)->ptr[i];
+    for (i = 0; i < RARRAY_LEN(ary); i++) {
+        item = RARRAY_PTR(ary)[i];
 
         /* set temporal terminator for free_ui_info. */
         uiinfo[i].type = GNOME_APP_UI_ENDOFINFO;
@@ -494,22 +494,22 @@ fill_ui_info(uiinfo, ary, uitype)
             rb_raise(rb_eArgError,
                      "invalid data type for UIInfo entry (%s for Array)",
                      rb_class2name(CLASS_OF(item)));
-        if (RARRAY(item)->len != 10)
+        if (RARRAY_LEN(item) != 10)
             rb_raise(rb_eArgError,
                      "wrong array size for UIInfo entry (%ld for 10)",
-                     RARRAY(item)->len);;
+                     RARRAY_LEN(item));;
 
-        type = RVAL2GENUM(RARRAY(item)->ptr[0], GNOME_TYPE_UI_INFO_TYPE);
-        uiinfo[i].label = NIL_P(RARRAY(item)->ptr[1])?0:RVAL2CSTR(RARRAY(item)->ptr[1]);
-        uiinfo[i].hint = NIL_P(RARRAY(item)->ptr[2])?0:RVAL2CSTR(RARRAY(item)->ptr[2]);
-        moreinfo = RARRAY(item)->ptr[3];
-        uiinfo[i].user_data = (gpointer)RARRAY(item)->ptr[4];
+        type = RVAL2GENUM(RARRAY_PTR(item)[0], GNOME_TYPE_UI_INFO_TYPE);
+        uiinfo[i].label = NIL_P(RARRAY_PTR(item)[1])?0:RVAL2CSTR(RARRAY_PTR(item)[1]);
+        uiinfo[i].hint = NIL_P(RARRAY_PTR(item)[2])?0:RVAL2CSTR(RARRAY_PTR(item)[2]);
+        moreinfo = RARRAY_PTR(item)[3];
+        uiinfo[i].user_data = (gpointer)RARRAY_PTR(item)[4];
         uiinfo[i].unused_data = NULL;
-        uiinfo[i].pixmap_type = RVAL2GENUM(RARRAY(item)->ptr[5], GNOME_TYPE_UI_PIXMAP_TYPE);
-        pixmap_info = RARRAY(item)->ptr[6];
-        uiinfo[i].accelerator_key = NUM2INT(RARRAY(item)->ptr[7]);
-        uiinfo[i].ac_mods = RVAL2GFLAGS(RARRAY(item)->ptr[8], GDK_TYPE_MODIFIER_TYPE);
-        uiinfo[i].widget = NIL_P(RARRAY(item)->ptr[9])?0:GTK_WIDGET(RVAL2GOBJ((RARRAY(item)->ptr[9])));
+        uiinfo[i].pixmap_type = RVAL2GENUM(RARRAY_PTR(item)[5], GNOME_TYPE_UI_PIXMAP_TYPE);
+        pixmap_info = RARRAY_PTR(item)[6];
+        uiinfo[i].accelerator_key = NUM2INT(RARRAY_PTR(item)[7]);
+        uiinfo[i].ac_mods = RVAL2GFLAGS(RARRAY_PTR(item)[8], GDK_TYPE_MODIFIER_TYPE);
+        uiinfo[i].widget = NIL_P(RARRAY_PTR(item)[9])?0:GTK_WIDGET(RVAL2GOBJ((RARRAY_PTR(item)[9])));
 
         switch (uitype) {
           case RBUI_MENUS:
@@ -576,7 +576,7 @@ fill_ui_info(uiinfo, ary, uitype)
             /* expect subarray */
             if (TYPE(moreinfo) != T_ARRAY)
                 RAISE_TYPE_MISMATCH("moreinfo", moreinfo, "Array");
-            sub = g_new(GnomeUIInfo, RARRAY(moreinfo)->len + 1);
+            sub = g_new(GnomeUIInfo, RARRAY_LEN(moreinfo) + 1);
             sub[0].type = GNOME_APP_UI_ENDOFINFO;
             uiinfo[i].moreinfo = sub;
             uiinfo[i].type = type;
@@ -618,10 +618,10 @@ fill_ui_info(uiinfo, ary, uitype)
                 rb_raise(rb_eArgError,
                          "wrong pixmap data for Gnome::App::PIXMAP_DATA (%s for Array)",
                          rb_class2name(CLASS_OF(pixmap_info)));
-            xpm_data = g_new(char *, RARRAY(pixmap_info)->len + 1);
+            xpm_data = g_new(char *, RARRAY_LEN(pixmap_info) + 1);
             uiinfo[i].pixmap_info = xpm_data;
-            for (j = 0; j < RARRAY(pixmap_info)->len; j++) {
-                xpm_data[j] = RVAL2CSTR(RARRAY(pixmap_info)->ptr[j]);
+            for (j = 0; j < RARRAY_LEN(pixmap_info); j++) {
+                xpm_data[j] = RVAL2CSTR(RARRAY_PTR(pixmap_info)[j]);
             }
             xpm_data[j] = NULL;
             break;
@@ -685,7 +685,7 @@ rbgno_ary_to_ui_info(ary, uitype)
     VALUE obj;
 
     Check_Type(ary, T_ARRAY);
-    uiinfo = g_new(GnomeUIInfo, RARRAY(ary)->len + 1);
+    uiinfo = g_new(GnomeUIInfo, RARRAY_LEN(ary) + 1);
     /* set terminator for free_ui_info. */
     uiinfo[0].type = GNOME_APP_UI_ENDOFINFO;
 

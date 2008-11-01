@@ -348,10 +348,10 @@ config_set_vector(self, path, new_value)
     int i;
 
     Check_Type(new_value, T_ARRAY);
-    argc = RARRAY(new_value)->len;
+    argc = RARRAY_LEN(new_value);
     argv = ALLOCA_N(char const *, argc);
     for (i = 0; i < argc; i++) {
-        argv[i] = RVAL2CSTR(RARRAY(new_value)->ptr[i]);
+        argv[i] = RVAL2CSTR(RARRAY_PTR(new_value)[i]);
     }
     gnome_config_set_vector(RVAL2CSTR(path), argc, argv);
     return self;
@@ -407,10 +407,10 @@ config_private_set_vector(self, path, new_value)
     int i;
 
     Check_Type(new_value, T_ARRAY);
-    argc = RARRAY(new_value)->len;
+    argc = RARRAY_LEN(new_value);
     argv = ALLOCA_N(char const *, argc);
     for (i = 0; i < argc; i++) {
-        argv[i] = RVAL2CSTR(RARRAY(new_value)->ptr[i]);
+        argv[i] = RVAL2CSTR(RARRAY_PTR(new_value)[i]);
     }
     gnome_config_private_set_vector(RVAL2CSTR(path), argc, argv);
     return self;

@@ -39,12 +39,12 @@ call_argv_command(func, self, args)
     int i;
 
     Check_Type(args, T_ARRAY);
-    argv = ALLOCA_N(gchar *, RARRAY(args)->len + 1);
-    for (i = 0; i < RARRAY(args)->len; i++) {
-        argv[i] = RVAL2CSTR(RARRAY(args)->ptr[i]);
+    argv = ALLOCA_N(gchar *, RARRAY_LEN(args) + 1);
+    for (i = 0; i < RARRAY_LEN(args); i++) {
+        argv[i] = RVAL2CSTR(RARRAY_PTR(args)[i]);
     }
     argv[i] = NULL;
-    (*func)(_SELF(self), RARRAY(args)->len, argv);
+    (*func)(_SELF(self), RARRAY_LEN(args), argv);
 }
 
 static VALUE
@@ -315,16 +315,16 @@ client_interact_function(client, key, dialog_type, data)
     GnomeDialogType dialog_type;
     gpointer data;
 {
-    VALUE proc = RARRAY(data)->ptr[0];
-    int argc = RARRAY(data)->len + 2;
+    VALUE proc = RARRAY_PTR(data)[0];
+    int argc = RARRAY_LEN(data) + 2;
     VALUE *argv = ALLOCA_N(VALUE, argc);
     int i;
 
     argv[0] = GOBJ2RVAL(client);
     argv[1] = INT2NUM(key);
     argv[2] = GENUM2RVAL(dialog_type, GNOME_TYPE_DIALOG_TYPE);
-    for (i = 1; i < RARRAY(data)->len; i++) {
-        argv[i + 2] = RARRAY(data)->ptr[i];
+    for (i = 1; i < RARRAY_LEN(data); i++) {
+        argv[i + 2] = RARRAY_PTR(data)[i];
     }
     rb_funcall2(proc, id_call, argc, argv);
 }

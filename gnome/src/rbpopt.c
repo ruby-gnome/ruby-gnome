@@ -128,29 +128,29 @@ rbgno_poptoption_array_to_obj(from)
     int i;
 
     Check_Type(from, T_ARRAY);
-    len = RARRAY(from)->len;
+    len = RARRAY_LEN(from);
     sopt = sizeof(struct poptOption) * (len + 1);
     sdata = sizeof(union popt_data) * len;
     sstring = 0;
     for (i = 0; i < len; i++) {
-        entry = RARRAY(from)->ptr[i];
+        entry = RARRAY_PTR(from)[i];
         Check_Type(entry, T_ARRAY);
 
-        if (RARRAY(entry)->len < 4 || 6 < RARRAY(entry)->len) {
+        if (RARRAY_LEN(entry) < 4 || 6 < RARRAY_LEN(entry)) {
             rb_raise(rb_eArgError,
                      "wrong # of popt option (%ld for 4 - 6)",
-                     RARRAY(entry)->len);
+                     RARRAY_LEN(entry));
         }
-        sstring += strlen(RVAL2CSTR(RARRAY(entry)->ptr[0])) + 1;
-        switch (NUM2INT(RARRAY(entry)->ptr[2])) {
+        sstring += strlen(RVAL2CSTR(RARRAY_PTR(entry)[0])) + 1;
+        switch (NUM2INT(RARRAY_PTR(entry)[2])) {
           case POPT_ARG_STRING:
-            sstring += strlen(RVAL2CSTR(RARRAY(entry)->ptr[3])) + 1;
+            sstring += strlen(RVAL2CSTR(RARRAY_PTR(entry)[3])) + 1;
         }
-        if (RARRAY(entry)->len > 4 && !NIL_P(RARRAY(entry)->ptr[4])) {
-            sstring += strlen(RVAL2CSTR(RARRAY(entry)->ptr[4])) + 1;
+        if (RARRAY_LEN(entry) > 4 && !NIL_P(RARRAY_PTR(entry)[4])) {
+            sstring += strlen(RVAL2CSTR(RARRAY_PTR(entry)[4])) + 1;
         }
-        if (RARRAY(entry)->len > 5 && !NIL_P(RARRAY(entry)->ptr[5])) {
-            sstring += strlen(RVAL2CSTR(RARRAY(entry)->ptr[5])) + 1;
+        if (RARRAY_LEN(entry) > 5 && !NIL_P(RARRAY_PTR(entry)[5])) {
+            sstring += strlen(RVAL2CSTR(RARRAY_PTR(entry)[5])) + 1;
         }
     }
 
@@ -160,50 +160,50 @@ rbgno_poptoption_array_to_obj(from)
     obj = Data_Wrap_Struct(rb_cData, NULL, g_free, options);
 
     for (i = 0; i < len; i++) {
-        entry = RARRAY(from)->ptr[i];
+        entry = RARRAY_PTR(from)[i];
 
         /* set longName */
-        strcpy(string, RVAL2CSTR(RARRAY(entry)->ptr[0]));
+        strcpy(string, RVAL2CSTR(RARRAY_PTR(entry)[0]));
         options[i].longName = string;
         string += strlen(string) + 1;
 
         /* set shortName */
-        if (NIL_P(RARRAY(entry)->ptr[1])) {
+        if (NIL_P(RARRAY_PTR(entry)[1])) {
             options[i].shortName = '\0';
         } else {
-            options[i].shortName = *(RVAL2CSTR(RARRAY(entry)->ptr[1]));
+            options[i].shortName = *(RVAL2CSTR(RARRAY_PTR(entry)[1]));
         }
 
         /* set argInfo */
-        options[i].argInfo = NUM2INT(RARRAY(entry)->ptr[2]);
+        options[i].argInfo = NUM2INT(RARRAY_PTR(entry)[2]);
 
         /* set arg */
         switch (options[i].argInfo & POPT_ARG_MASK) {
           case POPT_ARG_NONE:
-            data[i].u_int = RVAL2CBOOL(RARRAY(entry)->ptr[3]);
+            data[i].u_int = RVAL2CBOOL(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_STRING:
-            strcpy(string, RVAL2CSTR(RARRAY(entry)->ptr[3]));
+            strcpy(string, RVAL2CSTR(RARRAY_PTR(entry)[3]));
             data[i].u_string = string;
             string += strlen(string) + 1;
             break;
           case POPT_ARG_INT:
-            data[i].u_int = NUM2INT(RARRAY(entry)->ptr[3]);
+            data[i].u_int = NUM2INT(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_LONG:
-            data[i].u_long = NUM2LONG(RARRAY(entry)->ptr[3]);
+            data[i].u_long = NUM2LONG(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_VAL:
-            data[i].u_int = NUM2INT(RARRAY(entry)->ptr[3]);
+            data[i].u_int = NUM2INT(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_FLOAT:
-            data[i].u_float = NUM2INT(RARRAY(entry)->ptr[3]);
+            data[i].u_float = NUM2INT(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_DOUBLE:
-            data[i].u_double = NUM2INT(RARRAY(entry)->ptr[3]);
+            data[i].u_double = NUM2INT(RARRAY_PTR(entry)[3]);
             break;
           case POPT_ARG_INCLUDE_TABLE:
-            sub = rbgno_poptoption_array_to_obj(RARRAY(entry)->ptr[3]);
+            sub = rbgno_poptoption_array_to_obj(RARRAY_PTR(entry)[3]);
             data[i].u_options = DATA_PTR(sub);
             G_RELATIVE(obj, sub);
             break;
@@ -222,8 +222,8 @@ rbgno_poptoption_array_to_obj(from)
         options[i].val = 0;
 
         /* set descrip */
-        if (RARRAY(entry)->len > 4 && !NIL_P(RARRAY(entry)->ptr[4])) {
-            strcpy(string, RVAL2CSTR(RARRAY(entry)->ptr[4]));
+        if (RARRAY_LEN(entry) > 4 && !NIL_P(RARRAY_PTR(entry)[4])) {
+            strcpy(string, RVAL2CSTR(RARRAY_PTR(entry)[4]));
             options[i].descrip = string;
             string += strlen(string) + 1;
         } else {
@@ -231,8 +231,8 @@ rbgno_poptoption_array_to_obj(from)
         }
 
         /* set argDescrip */
-        if (RARRAY(entry)->len > 5 && !NIL_P(RARRAY(entry)->ptr[5])) {
-            strcpy(string, RVAL2CSTR(RARRAY(entry)->ptr[5]));
+        if (RARRAY_LEN(entry) > 5 && !NIL_P(RARRAY_PTR(entry)[5])) {
+            strcpy(string, RVAL2CSTR(RARRAY_PTR(entry)[5]));
             options[i].argDescrip = string;
             string += strlen(string) + 1;
         } else {
