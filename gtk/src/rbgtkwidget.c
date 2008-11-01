@@ -287,7 +287,7 @@ static VALUE
 widget_set_state(self, state)
     VALUE self, state;
 {
-    gtk_widget_set_state(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE));
+    gtk_widget_set_state(_SELF(self), RVAL2GTKSTATETYPE(state));
     return self;
 }
 
@@ -569,7 +569,7 @@ static VALUE
 widget_modify_fg(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_fg(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE), 
+    gtk_widget_modify_fg(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
     return self;
 }
@@ -578,7 +578,7 @@ static VALUE
 widget_modify_bg(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_bg(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
+    gtk_widget_modify_bg(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
     return self;
 }
@@ -587,7 +587,7 @@ static VALUE
 widget_modify_text(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_text(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
+    gtk_widget_modify_text(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
     return self;
 }
@@ -596,7 +596,7 @@ static VALUE
 widget_modify_base(self, state, color)
     VALUE self, state, color;
 {
-    gtk_widget_modify_base(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
+    gtk_widget_modify_base(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
     return self;
 }
