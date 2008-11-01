@@ -87,11 +87,11 @@ pixdata_s_deserialize(self, stream)
     GError* error = NULL;
     gint i, len;
 
-    len = RARRAY(stream)->len;
+    len = RARRAY_LEN(stream);
     gstream = g_new(guint8, len);
     //   gstream = ALLOCA_N(guint8, len);
     for (i = 0; i < len; i++){
-        gstream[i] = (guint8)NUM2UINT(RARRAY(stream)->ptr[i]);
+        gstream[i] = (guint8)NUM2UINT(RARRAY_PTR(stream)[i]);
     }
     ret = gdk_pixdata_deserialize(&pixdata, len, gstream, &error);
 

@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ./: use RARRAY_PTR() and RARRAY_LEN().
+
 2008-09-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: use check_cairo.

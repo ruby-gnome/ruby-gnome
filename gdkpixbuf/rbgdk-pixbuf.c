@@ -216,10 +216,10 @@ initialize(argc, argv, self)
 #endif
     } else if (argc == 2){
         int i;
-        int len = RARRAY(arg1)->len; 
+        int len = RARRAY_LEN(arg1); 
         guint8 *gstream = g_new(guint8, len);
         for (i = 0; i < len; i++){
-            gstream[i] = (guint8)NUM2UINT(RARRAY(arg1)->ptr[i]);
+            gstream[i] = (guint8)NUM2UINT(RARRAY_PTR(arg1)[i]);
         }      
         buf = gdk_pixbuf_new_from_inline(len, gstream, RVAL2CBOOL(arg2), &error);
         if (buf == NULL){
@@ -239,9 +239,9 @@ initialize(argc, argv, self)
             }
         } else if (TYPE(arg1) == T_ARRAY) {
             int i;
-            gchar** data = ALLOCA_N(gchar*, RARRAY(arg1)->len);
-            for (i=0; i < RARRAY(arg1)->len; i++) {
-		data[i] = RVAL2CSTR(RARRAY(arg1)->ptr[i]);
+            gchar** data = ALLOCA_N(gchar*, RARRAY_LEN(arg1));
+            for (i=0; i < RARRAY_LEN(arg1); i++) {
+		data[i] = RVAL2CSTR(RARRAY_PTR(arg1)[i]);
             }
             buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
             if (buf == NULL){
@@ -306,11 +306,11 @@ save_to(VALUE self, gchar *filename, gchar *type, VALUE options)
         to_s = rb_intern("to_s");
 
         ary = rb_funcall(options, rb_intern("to_a"), 0);
-        len = RARRAY(ary)->len;
+        len = RARRAY_LEN(ary);
         keys = ALLOCA_N(gchar *, len + 1);
         values = ALLOCA_N(gchar *, len + 1);
         for (i = 0; i < len; i++) {
-            key = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+            key = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
             if (SYMBOL_P(key)) {
                 const char *const_key;
                 const_key = rb_id2name(SYM2ID(key));
@@ -318,7 +318,7 @@ save_to(VALUE self, gchar *filename, gchar *type, VALUE options)
             } else {
                 keys[i] = RVAL2CSTR(key);
             }
-            value = rb_funcall(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], to_s, 0);
+            value = rb_funcall(RARRAY_PTR(RARRAY_PTR(ary)[i])[1], to_s, 0);
             values[i] = RVAL2CSTR(value);
         }
         keys[len] = NULL;
