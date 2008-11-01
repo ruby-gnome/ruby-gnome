@@ -39,9 +39,6 @@
 #define RVAL2GEV(ev) (get_gdkevent(ev))
 #define RVAL2ATOM(atom) (get_gdkatom(atom))
 
-#define RVAL2GDKCOLOR(color) ((GdkColor *)RVAL2BOXED(color, GDK_TYPE_COLOR))
-#define GDKCOLOR2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_COLOR))
-
 
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))

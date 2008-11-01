@@ -1,5 +1,8 @@
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtk.h (RVAL2GDKCOLOR, GDKCOLOR2RVAL): move to ...
+	* src/rbgtkconversions.h: ... here.
+
 	* src/rbgtkwidget.c: use RVAL2GTKSTATETYPE().
 
 	* src/rbgtkconversions.h: add conversions:
