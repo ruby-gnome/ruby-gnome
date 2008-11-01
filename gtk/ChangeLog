@@ -1,5 +1,7 @@
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/global.h: fix #ifdef condition.
+
 	* src/rbgtk.h: remove a needless header.
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().
