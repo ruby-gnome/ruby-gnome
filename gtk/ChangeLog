@@ -1,3 +1,15 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkconversions.h: add conversions:
+	- RVAL2GTKSTATETYPE
+	- GTKRCFLAGS2RVAL
+	- RVAL2GTKRCFLAGS
+
+	* src/rbgtkrcstyle.c, test/test_gtk_rc_style.rb: fix type
+	conversion.
+	Bug #2195432: Gtk::RCStyle.set_color_flags wrong conversion
+	Reported by Jesse van den Kieboom. Thanks!!!
+
 2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gtk_unix_print.rb (TestGtkUnixPrint#test_classes):

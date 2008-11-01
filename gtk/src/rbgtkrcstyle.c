@@ -76,25 +76,21 @@ rcstyle_set_font_desc(self, font_desc)
 }
 
 static VALUE
-rcstyle_color_flags(self, idx)
-    VALUE self, idx;
+rcstyle_color_flags(VALUE self, VALUE rb_state_type)
 {
-    int i = NUM2INT(idx);
+    GtkStateType state_type;
 
-    if (i < 0 || 5 < i)
-        rb_raise(rb_eArgError, "state out of range");
-    return INT2FIX(_SELF(self)->color_flags[i]);
+    state_type = RVAL2GTKSTATETYPE(rb_state_type);
+    return GTKRCFLAGS2RVAL(_SELF(self)->color_flags[state_type]);
 }
 
 static VALUE
-rcstyle_set_color_flags(self, idx, flags)
-    VALUE self, idx, flags;
+rcstyle_set_color_flags(VALUE self, VALUE rb_state_type, VALUE flags)
 {
-    GtkRcFlags i = (GtkRcFlags)FIX2INT(idx);
+    GtkStateType state_type;
 
-    if (i < 0 || 5 < i)
-        rb_raise(rb_eArgError, "state out of range");
-    _SELF(self)->color_flags[i] = flags;
+    state_type = RVAL2GTKSTATETYPE(rb_state_type);
+    _SELF(self)->color_flags[state_type] = RVAL2GTKRCFLAGS(flags);
     return self;
 }
 
