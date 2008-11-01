@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2007-12-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgnome-canvas-util.c: used "%ld" for RARRAY()->len.

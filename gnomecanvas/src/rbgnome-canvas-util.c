@@ -34,14 +34,14 @@ set_coords_from_points_data(coords, points)
     VALUE entry;
     int i;
 
-    for (i = 0;i < RARRAY(points)->len;i++) {
-        entry = RARRAY(points)->ptr[i];
+    for (i = 0;i < RARRAY_LEN(points);i++) {
+        entry = RARRAY_PTR(points)[i];
         Check_Type(entry, T_ARRAY);
-        if (RARRAY(entry)->len != 2) {
-            rb_raise(rb_eArgError, "wrong coordinate value %ld entry(s) for 2", RARRAY(entry)->len);
+        if (RARRAY_LEN(entry) != 2) {
+            rb_raise(rb_eArgError, "wrong coordinate value %ld entry(s) for 2", RARRAY_LEN(entry));
         }
-        coords[i * 2] = NUM2DBL(RARRAY(entry)->ptr[0]);
-        coords[i * 2 + 1] = NUM2DBL(RARRAY(entry)->ptr[1]);
+        coords[i * 2] = NUM2DBL(RARRAY_PTR(entry)[0]);
+        coords[i * 2 + 1] = NUM2DBL(RARRAY_PTR(entry)[1]);
     }
 }
 
@@ -74,11 +74,11 @@ cpoint_from_ruby(from, to)
     double *coords;
 
     Check_Type(from, T_ARRAY);
-    coords = ALLOCA_N(double, RARRAY(from)->len * 2);
+    coords = ALLOCA_N(double, RARRAY_LEN(from) * 2);
     set_coords_from_points_data(coords, from);
     /* store all values to coords before allocate points. */
-    points = gnome_canvas_points_new(RARRAY(from)->len);
-    memcpy(points->coords, coords, sizeof(double) * RARRAY(from)->len * 2);
+    points = gnome_canvas_points_new(RARRAY_LEN(from));
+    memcpy(points->coords, coords, sizeof(double) * RARRAY_LEN(from) * 2);
     g_value_set_boxed(to, points);
     gnome_canvas_points_free(points);
 }
@@ -140,11 +140,11 @@ canvas_s_polygon_to_point(klass, points, x, y)
     double result;
 
     Check_Type(points, T_ARRAY);
-    coords = ALLOCA_N(double, RARRAY(points)->len * 2);
+    coords = ALLOCA_N(double, RARRAY_LEN(points) * 2);
     set_coords_from_points_data(coords, points);
 
     result = gnome_canvas_polygon_to_point(coords,
-                                           RARRAY(points)->len,
+                                           RARRAY_LEN(points),
                                            NUM2DBL(x),
                                            NUM2DBL(y));
     return rb_float_new(result);
