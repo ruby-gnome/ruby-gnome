@@ -27,12 +27,12 @@
 #define RARRAY_TO_ATTRIB_ARRAY(rb_array, array) \
     do { \
         int i, len; \
-        len = RARRAY(rb_array)->len; \
-        array = ALLOCA_N(int, RARRAY(rb_array)->len+1); \
+        len = RARRAY_LEN(rb_array); \
+        array = ALLOCA_N(int, RARRAY_LEN(rb_array)+1); \
         for (i=0; i<len; ++i) { \
             int type; \
             VALUE val; \
-            val = RARRAY(rb_array)->ptr[i]; \
+            val = RARRAY_PTR(rb_array)[i]; \
             type = TYPE(val); \
             if ((type == T_FIXNUM) || (type == T_BIGNUM)) \
                 array[i] = NUM2INT(val); \
