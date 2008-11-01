@@ -32,13 +32,13 @@ ruby_to_goo_canvas_bounds(VALUE rb_bounds, GooCanvasBounds *dest_bounds)
         return ruby_to_goo_canvas_bounds(rb_array, dest_bounds);
     }
     
-    if (RARRAY(rb_bounds)->len != 4)
+    if (RARRAY_LEN(rb_bounds) != 4)
         rb_raise(rb_eRuntimeError, "Bounds must be arrays of length 4");
     
-    dest_bounds->x1 = NUM2DBL(RARRAY(rb_bounds)->ptr[0]);
-    dest_bounds->y1 = NUM2DBL(RARRAY(rb_bounds)->ptr[1]);
-    dest_bounds->x2 = NUM2DBL(RARRAY(rb_bounds)->ptr[2]);
-    dest_bounds->y2 = NUM2DBL(RARRAY(rb_bounds)->ptr[3]);
+    dest_bounds->x1 = NUM2DBL(RARRAY_PTR(rb_bounds)[0]);
+    dest_bounds->y1 = NUM2DBL(RARRAY_PTR(rb_bounds)[1]);
+    dest_bounds->x2 = NUM2DBL(RARRAY_PTR(rb_bounds)[2]);
+    dest_bounds->y2 = NUM2DBL(RARRAY_PTR(rb_bounds)[3]);
 
     return dest_bounds;
 }

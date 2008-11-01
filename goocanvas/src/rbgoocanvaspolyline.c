@@ -64,10 +64,10 @@ rb_goo_canvas_points_set(VALUE self, VALUE point, VALUE new_coords)
         rb_raise(rb_eArgError, "invalid point number %d", i);
     if (TYPE(new_coords) != T_ARRAY)
         rb_raise(rb_eArgError, "rb_goo_canvas_points_set should be given an array as new value");
-    if (RARRAY(new_coords)->len != 2)
+    if (RARRAY_LEN(new_coords) != 2)
         rb_raise(rb_eArgError, "rb_goo_canvas_points_set should be given an array of length 2 as new value");
-    points->coords[i*2] = NUM2DBL(RARRAY(new_coords)->ptr[0]);
-    points->coords[i*2+1] = NUM2DBL(RARRAY(new_coords)->ptr[1]);
+    points->coords[i*2] = NUM2DBL(RARRAY_PTR(new_coords)[0]);
+    points->coords[i*2+1] = NUM2DBL(RARRAY_PTR(new_coords)[1]);
     return self;
 }
 
