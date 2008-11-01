@@ -121,13 +121,13 @@ static gdouble *
 rb_array_to_gdouble_array(VALUE array)
 {
     int i;
-    gint size = RARRAY(array)->len;
+    gint size = RARRAY_LEN(array);
     gdouble *g_array;
 
     g_array = ALLOC_N(gdouble, size);
 
     for (i = 0; i < size; i++) {
-        g_array[i] = NUM2DBL(RARRAY(array)->ptr[i]);
+        g_array[i] = NUM2DBL(RARRAY_PTR(array)[i]);
     }
 
     return g_array;
@@ -350,7 +350,7 @@ gp_setdash(VALUE self, VALUE values, VALUE offset)
     gint ret;
     gdouble *g_values = rb_array_to_gdouble_array(values);
     ret = gnome_print_setdash(_SELF(self),
-                              RARRAY(values)->len,
+                              RARRAY_LEN(values),
                               g_values,
                               NUM2INT(offset));
     free(g_values);
