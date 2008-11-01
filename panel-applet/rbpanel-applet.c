@@ -111,11 +111,11 @@ static VALUE
 rbpanel_applet_set_size_hints(self, size_hints, base_size)
     VALUE self, size_hints, base_size;
 {
-	gint len = NIL_P(size_hints) ? 0 : RARRAY(size_hints)->len;
+	gint len = NIL_P(size_hints) ? 0 : RARRAY_LEN(size_hints);
 	gint *hints = g_new0(gint, len);
 	gint i;
 	for(i = 0; i < len; i++) {
-		hints[i] = NUM2INT(RARRAY(size_hints)->ptr[i]);
+		hints[i] = NUM2INT(RARRAY_PTR(size_hints)[i]);
 	}
 	panel_applet_set_size_hints(_SELF(self), hints, len, NUM2INT(base_size));
 	g_free(hints);
@@ -297,16 +297,16 @@ rbpanel_s_main(argc, argv, self)
         gtype = PANEL_TYPE_APPLET;
     }
 
-    sys_argv_p = (char**)g_new0(char*, RARRAY(rb_argv)->len + 1);
+    sys_argv_p = (char**)g_new0(char*, RARRAY_LEN(rb_argv) + 1);
 
     sys_argv_p[0] = RVAL2CSTR(rb_progname);
-    for(index = 1; index <= RARRAY(rb_argv)->len; index++) {
-        sys_argv_p[index] = RVAL2CSTR(RARRAY(rb_argv)->ptr[index - 1]);
+    for(index = 1; index <= RARRAY_LEN(rb_argv); index++) {
+        sys_argv_p[index] = RVAL2CSTR(RARRAY_PTR(rb_argv)[index - 1]);
     }
 
     gnome_program_init(RVAL2CSTR(name), RVAL2CSTR(version),
                         LIBGNOMEUI_MODULE,
-                        RARRAY(rb_argv)->len + 1, sys_argv_p,
+                        RARRAY_LEN(rb_argv) + 1, sys_argv_p,
                         GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
                         GNOME_PARAM_NONE);
                         
