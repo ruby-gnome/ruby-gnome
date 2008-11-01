@@ -60,8 +60,8 @@ keywordlisttag_new (self, id, name, keywords, case_sensitive,
     GSList *glist = NULL;
 
     Check_Type(keywords, T_ARRAY);
-    for (i = 0; i < RARRAY(keywords)->len; i++) {
-        glist = g_slist_append(glist, RVAL2CSTR(RARRAY(keywords)->ptr[i]));
+    for (i = 0; i < RARRAY_LEN(keywords); i++) {
+        glist = g_slist_append(glist, RVAL2CSTR(RARRAY_PTR(keywords)[i]));
     }
 
     

@@ -61,9 +61,9 @@ sourcetagtable_add_tags (self, list)
 
 	Check_Type (list, T_ARRAY);
 
-	for (i = 0; i < RARRAY (list)->len; i++)
+	for (i = 0; i < RARRAY_LEN(list); i++)
 		tags =
-		    g_slist_append (tags, RVAL2GOBJ (RARRAY (list)->ptr[i]));
+		    g_slist_append (tags, RVAL2GOBJ(RARRAY_PTR(list)[i]));
 
 	gtk_source_tag_table_add_tags (_SELF (self), tags);
 

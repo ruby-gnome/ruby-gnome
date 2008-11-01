@@ -174,9 +174,9 @@ sourcelanguage_set_mime_types (self, list)
 	if (list != Qnil) {
 		Check_Type (list, T_ARRAY);
 
-		for (i = 0; i < RARRAY (list)->len; i++)
-			types = g_slist_append (types, 
-					RVAL2CSTR (RARRAY (list)->ptr[i]));
+		for (i = 0; i < RARRAY_LEN(list); i++)
+			types = g_slist_append (types,
+						RVAL2CSTR(RARRAY_PTR(list)[i]));
 	}
 	
 	gtk_source_language_set_mime_types (_SELF (self), types);
