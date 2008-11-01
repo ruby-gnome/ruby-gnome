@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2008-04-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbbonobo.c (Init_bonobo2): just define Bonobo::Object.

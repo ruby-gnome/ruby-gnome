@@ -32,19 +32,19 @@ rbonobo_init(argc, argv, self)
     rb_scan_args(argc, argv, "01", &argary);
 
     if (NIL_P(argary)){
-        gargc = RARRAY(rb_argv)->len;
+        gargc = RARRAY_LEN(rb_argv);
         argary = rb_argv;
     } else {
         Check_Type(argary, T_ARRAY);
-        gargc = RARRAY(argary)->len;
+        gargc = RARRAY_LEN(argary);
     }
 
     gargv = ALLOCA_N(char*,gargc + 1);
     gargv[0] = RVAL2CSTR(rb_progname);
 
     for (i = 0; i < gargc; i++) {
-        if (TYPE(RARRAY(argary)->ptr[i]) == T_STRING) {
-            gargv[i+1] = RVAL2CSTR(RARRAY(argary)->ptr[i]);
+        if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
+            gargv[i+1] = RVAL2CSTR(RARRAY_PTR(argary)[i]);
         }
         else {
             gargv[i+1] = "";
