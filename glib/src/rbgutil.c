@@ -31,10 +31,10 @@ rbgutil_set_properties(self, hash)
     obj = RVAL2GOBJ(self);
 
     g_object_freeze_notify(obj);
-    for (i = 0; i < RARRAY(ary)->len; i++) {
+    for (i = 0; i < RARRAY_LEN(ary); i++) {
       rb_funcall(self, id_set_property, 2,
-                 RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
-                 RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+                 RARRAY_PTR(RARRAY_PTR(ary)[i])[0],
+                 RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
     }
     g_object_thaw_notify(obj);
 }

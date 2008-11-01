@@ -578,12 +578,12 @@ static VALUE
 keyfile_set_string_list(self, group_name, key, list)
     VALUE self, group_name, key, list;
 {
-    gint len = RARRAY(list)->len;
+    gint len = RARRAY_LEN(list);
     gchar** glist = ALLOCA_N(gchar*, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY(list)->ptr[i]);
+        glist[i] = RVAL2CSTR(RARRAY_PTR(list)[i]);
     }
 
     g_key_file_set_string_list(_SELF(self), 
@@ -597,12 +597,12 @@ static VALUE
 keyfile_set_locale_string_list(self, group_name, key, locale, list)
     VALUE self, group_name, key, locale, list;
 {
-    gint len = RARRAY(list)->len;
+    gint len = RARRAY_LEN(list);
     gchar** glist = ALLOCA_N(gchar*, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY(list)->ptr[i]);
+        glist[i] = RVAL2CSTR(RARRAY_PTR(list)[i]);
     }
 
     g_key_file_set_locale_string_list(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
@@ -617,12 +617,12 @@ static VALUE
 keyfile_set_boolean_list(self, group_name, key, list)
     VALUE self, group_name, key, list;
 {
-    gint len = RARRAY(list)->len;
+    gint len = RARRAY_LEN(list);
     gboolean* glist = ALLOCA_N(gboolean, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY(list)->ptr[i]);
+        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
     }
 
     g_key_file_set_boolean_list(_SELF(self),
@@ -636,12 +636,12 @@ static VALUE
 keyfile_set_integer_list(self, group_name, key, list)
     VALUE self, group_name, key, list;
 {
-    gint len = RARRAY(list)->len;
+    gint len = RARRAY_LEN(list);
     gint* glist = ALLOCA_N(gint, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY(list)->ptr[i]);
+        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
     }
 
     g_key_file_set_integer_list(_SELF(self),
@@ -656,12 +656,12 @@ static VALUE
 keyfile_set_double_list(self, group_name, key, list)
     VALUE self, group_name, key, list;
 {
-    gint len = RARRAY(list)->len;
+    gint len = RARRAY_LEN(list);
     gdouble* glist = ALLOCA_N(gdouble, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY(list)->ptr[i]);
+        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
     }
 
     g_key_file_set_double_list(_SELF(self),

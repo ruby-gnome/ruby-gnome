@@ -412,12 +412,12 @@ static VALUE
 bf_set_groups(self, uri, groups)
     VALUE self, uri, groups;
 {
-    gint len = RARRAY(groups)->len;
+    gint len = RARRAY_LEN(groups);
     gchar** glist = ALLOCA_N(gchar*, len);
     gint i;
 
     for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY(groups)->ptr[i]);
+        glist[i] = RVAL2CSTR(RARRAY_PTR(groups)[i]);
     }
     
     g_bookmark_file_set_groups(_SELF(self),

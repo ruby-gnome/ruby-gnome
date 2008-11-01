@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR(), RARRAY_LEN() and RSTRING_LEN().
+
 2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_signal.rb: use assert_const_defined.

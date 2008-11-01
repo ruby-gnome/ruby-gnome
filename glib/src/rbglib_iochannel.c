@@ -310,9 +310,9 @@ static VALUE
 ioc_set_line_term(args)
     VALUE args;
 {
-    VALUE self = RARRAY(args)->ptr[0];
-    VALUE doit = RARRAY(args)->ptr[1];
-    VALUE line_term = RARRAY(args)->ptr[2];
+    VALUE self = RARRAY_PTR(args)[0];
+    VALUE doit = RARRAY_PTR(args)[1];
+    VALUE line_term = RARRAY_PTR(args)[2];
 
     if (doit == Qtrue){
         StringValue(line_term);
@@ -435,7 +435,7 @@ ioc_write_unichar(self, thechar)
         unichar = NUM2UINT(thechar);
     } else {
         VALUE ary = rb_funcall(thechar, id_unpack, 1, CSTR2RVAL("U"));
-        unichar = NUM2UINT(RARRAY(ary)->ptr[0]);
+        unichar = NUM2UINT(RARRAY_PTR(ary)[0]);
     }
 
     status = g_io_channel_write_unichar(_SELF(self), unichar, &err);
@@ -612,7 +612,7 @@ ioc_set_line_term(self, line_term)
 {
     StringValue(line_term);
     g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
-                               RSTRING(line_term)->len);
+                               RSTRING_LEN(line_term));
     return self;
 }
 */
@@ -701,8 +701,8 @@ ioc_puts_ary(ary, out, recur)
     VALUE tmp;
     long i;
 
-    for (i=0; i<RARRAY(ary)->len; i++) {
-        tmp = RARRAY(ary)->ptr[i];
+    for (i=0; i<RARRAY_LEN(ary); i++) {
+        tmp = RARRAY_PTR(ary)[i];
         if (recur) {
             tmp = rb_str_new2("[...]");
         }

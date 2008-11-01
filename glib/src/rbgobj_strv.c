@@ -41,13 +41,13 @@ strv_from_ruby(VALUE from, GValue* to)
     }
 
     Check_Type(from, T_ARRAY);
-    gstrv = g_new(gchar*, RARRAY(from)->len + 1);
+    gstrv = g_new(gchar*, RARRAY_LEN(from) + 1);
 
-    for (i = 0; i < RARRAY(from)->len; i++) {
-        VALUE v = RARRAY(from)->ptr[i];
+    for (i = 0; i < RARRAY_LEN(from); i++) {
+        VALUE v = RARRAY_PTR(from)[i];
         gstrv[i] = g_strdup(StringValuePtr(v));
     }
-    gstrv[RARRAY(from)->len] = NULL;
+    gstrv[RARRAY_LEN(from)] = NULL;
 
     g_value_set_boxed(to, gstrv);
 }

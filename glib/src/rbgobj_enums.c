@@ -79,11 +79,11 @@ resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
     if (!RVAL2CBOOL(rb_obj_is_kind_of(nick_or_nicks, rb_cArray)))
         return resolve_enum_value(klass, nick_or_nicks);
 
-    len = RARRAY(nick_or_nicks)->len;
+    len = RARRAY_LEN(nick_or_nicks);
     for (i = 0; i < len; i++) {
         VALUE value;
 
-        value = resolve_enum_value(klass, RARRAY(nick_or_nicks)->ptr[i]);
+        value = resolve_enum_value(klass, RARRAY_PTR(nick_or_nicks)[i]);
         if (NIL_P(value))
             return Qnil;
 

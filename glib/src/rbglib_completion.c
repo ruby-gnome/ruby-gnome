@@ -52,8 +52,8 @@ comp_func(compdata)
     gpointer compdata;
 {
     VALUE ret;
-    VALUE self = RARRAY((VALUE)compdata)->ptr[0];
-    VALUE data = RARRAY((VALUE)compdata)->ptr[1];
+    VALUE self = RARRAY_PTR((VALUE)compdata)[0];
+    VALUE data = RARRAY_PTR((VALUE)compdata)[1];
     
     VALUE func = rb_ivar_get(self, id_compfunc);
     
@@ -93,9 +93,9 @@ comp_add_items(self, items)
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
     Check_Type(items, T_ARRAY);
-    len = RARRAY(items)->len;
+    len = RARRAY_LEN(items);
     for (i = 0; i < len; i ++){
-        VALUE data = RARRAY(items)->ptr[i];
+        VALUE data = RARRAY_PTR(items)[i];
         VALUE item = rb_assoc_new(self, data);
         list = g_list_append(list, (gpointer)item);
         rb_hash_aset(items_internal, data, item);
@@ -114,9 +114,9 @@ comp_remove_items(self, items)
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
     Check_Type(items, T_ARRAY);
-    len = RARRAY(items)->len;
+    len = RARRAY_LEN(items);
     for (i = 0; i < len; i ++){
-        VALUE data = RARRAY(items)->ptr[i];
+        VALUE data = RARRAY_PTR(items)[i];
         VALUE item = rb_hash_aref(items_internal, data);
         list = g_list_append(list, (gpointer)item);
         rb_hash_delete(items_internal, data);
@@ -159,7 +159,7 @@ comp_complete(self, prefix)
                                         &new_prefix);
 #endif
     while (list) {
-        rb_ary_push(ary, RARRAY((VALUE)list->data)->ptr[1]);
+        rb_ary_push(ary, RARRAY_PTR((VALUE)list->data)[1]);
         list = list->next;
     }
 

@@ -67,7 +67,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.timeout = timeout;
     info.result = 0;
 
-    rb_thread_blocking_region(rg_poll_in_blocking, &info, RB_UBF_DFL, NULL);
+    rb_thread_blocking_region(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
 
     return info.result;
 }

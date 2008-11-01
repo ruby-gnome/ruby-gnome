@@ -121,10 +121,10 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         n_params = 0;
         param_types = NULL;
     } else {
-        n_params = RARRAY(params)->len;
+        n_params = RARRAY_LEN(params);
         param_types = ALLOCA_N(GType, n_params);
         for (i = 0; i < n_params; i++)
-            param_types[i] = rbgobj_gtype_get(RARRAY(params)->ptr[i]);
+            param_types[i] = rbgobj_gtype_get(RARRAY_PTR(params)[i]);
     }
 
     sig = g_signal_newv(StringValuePtr(signal_name),
@@ -382,9 +382,9 @@ gobj_sig_emit(argc, argv, self)
 
     g_signal_query(signal_id, &arg.query);
 
-    if (arg.query.n_params != RARRAY(arg.args)->len)
+    if (arg.query.n_params != RARRAY_LEN(arg.args))
         rb_raise(rb_eArgError, "wrong number of arguments(%ld for %d)",
-                 RARRAY(arg.args)->len + 1,
+                 RARRAY_LEN(arg.args) + 1,
                  arg.query.n_params + 1);
 
     arg.self = self;
@@ -422,8 +422,8 @@ static VALUE
 _sig_handler_block_ensure(arg)
     VALUE arg;
 {
-    VALUE self = RARRAY(arg)->ptr[0];
-    VALUE id   = RARRAY(arg)->ptr[1];
+    VALUE self = RARRAY_PTR(arg)[0];
+    VALUE id   = RARRAY_PTR(arg)[1];
     gobj_sig_handler_unblock(self, id);
     return Qnil;
 }

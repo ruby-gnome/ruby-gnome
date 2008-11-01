@@ -42,10 +42,10 @@ value_array_from_ruby(VALUE from, GValue* to)
 
     array = g_value_array_new(0);
 
-    for (i = 0; i < RARRAY(from)->len; i++) {
+    for (i = 0; i < RARRAY_LEN(from); i++) {
       GValue v = { 0, };
-      g_value_init(&v, RVAL2GTYPE(RARRAY(from)->ptr[i]));
-      rbgobj_rvalue_to_gvalue(RARRAY(from)->ptr[i], &v);
+      g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(from)[i]));
+      rbgobj_rvalue_to_gvalue(RARRAY_PTR(from)[i], &v);
       g_value_array_append(array, &v);
     }
     g_value_set_boxed(to, array);
