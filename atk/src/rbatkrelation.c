@@ -37,11 +37,11 @@ rbatkrel_initialize(self, targets, relationship)
     VALUE self, targets, relationship;
 {
     gint i;
-    gint len = RARRAY(targets)->len;
+    gint len = RARRAY_LEN(targets);
     AtkObject* objects = g_new(AtkObject, len);
 
     for (i = 0; i < len; i++) {
-        objects = (AtkObject*)RARRAY(targets)->ptr[i];
+        objects = (AtkObject*)RARRAY_PTR(targets)[i];
         objects++;
     }
 

@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2008-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: include atk/atk.h in have_func test.

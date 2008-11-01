@@ -41,13 +41,13 @@ rbatkstateset_add_states(self, types)
     VALUE self, types;
 {
     gint i;
-    gint n_types = RARRAY(types)->len;
+    gint n_types = RARRAY_LEN(types);
     AtkStateType* atypes = g_new(AtkStateType, n_types);
 
     Check_Type(types, T_ARRAY);
 
     for (i = 0; i < n_types; i++) {
-        atypes[i] = RVAL2GENUM(RARRAY(types)->ptr[i], ATK_TYPE_STATE_TYPE);
+        atypes[i] = RVAL2GENUM(RARRAY_PTR(types)[i], ATK_TYPE_STATE_TYPE);
     }
 
     atk_state_set_add_states(_SELF(self), atypes, n_types);
@@ -77,13 +77,13 @@ rbatkstateset_contains_states(self, types)
 {
     gint i;
     gboolean ret;
-    gint n_types = RARRAY(types)->len;
+    gint n_types = RARRAY_LEN(types);
     AtkStateType* atypes = g_new(AtkStateType, n_types);
 
     Check_Type(types, T_ARRAY);
 
     for (i = 0; i < n_types; i++) {
-        atypes[i] = RVAL2GENUM(RARRAY(types)->ptr[i], ATK_TYPE_STATE_TYPE);
+        atypes[i] = RVAL2GENUM(RARRAY_PTR(types)[i], ATK_TYPE_STATE_TYPE);
     }
     
     ret = CBOOL2RVAL(atk_state_set_contains_states(_SELF(self), atypes, n_types));

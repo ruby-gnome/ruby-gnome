@@ -23,8 +23,8 @@ rbatk_edit_set_run_attributes(self, attributes, start_offset, end_offset)
     if (NIL_P(attributes)) return Qfalse;
 
     Check_Type(attributes, T_ARRAY);
-    for (i=0; i<RARRAY(attributes)->len; i++) {
-        list = g_slist_append(list, RVAL2GOBJ(RARRAY(attributes)->ptr[i]));
+    for (i=0; i<RARRAY_LEN(attributes); i++) {
+        list = g_slist_append(list, RVAL2GOBJ(RARRAY_PTR(attributes)[i]));
     }
 
     ret = CBOOL2RVAL(atk_editable_text_set_run_attributes(
