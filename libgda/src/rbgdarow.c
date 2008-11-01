@@ -50,7 +50,7 @@ static VALUE rb_gda_row_new(argc, argv, self)
     rb_scan_args(argc, argv, "1*", &model, &values);
 
     /* Using gda_row_new() */
-    if (RARRAY(values)->len == 1) {
+    if (RARRAY_LEN(values) == 1) {
         row = gda_row_new(RGDA_DATAMODEL(model),
                           INT2FIX(rb_ary_entry(values, 0)));
     }
@@ -59,7 +59,7 @@ static VALUE rb_gda_row_new(argc, argv, self)
         GList *vals = NULL;
         int i;
 
-        for (i = 0; i < RARRAY(values)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(values); i++) {
             vals = g_list_append(vals,
                                  RGDA_VALUE(rb_ary_entry(values, i),
                                             GDA_VALUE_TYPE_NULL));

@@ -40,7 +40,7 @@ static VALUE rb_gda_datamodel_list_new(self, args)
     GList *list = NULL;
     int i;
     
-    for (i = 0; i < RARRAY(args)->len; i++) {
+    for (i = 0; i < RARRAY_LEN(args); i++) {
         VALUE v = rb_ary_entry(args, i);
         list = g_list_append(list, RVAL2CSTR(v));
     }

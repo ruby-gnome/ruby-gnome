@@ -102,12 +102,12 @@ static VALUE rb_gda_init(argc, argv, self)
     rb_scan_args(argc, argv, "21", &app_id, &app_version, &argary);
 
     if (NIL_P(argary)){
-        gargc = RARRAY(rb_argv)->len;
+        gargc = RARRAY_LEN(rb_argv);
         argary = rb_argv;
     } 
     else {
         Check_Type(argary, T_ARRAY);
-        gargc = RARRAY(argary)->len;
+        gargc = RARRAY_LEN(argary);
     }
 
     /*
@@ -117,8 +117,8 @@ static VALUE rb_gda_init(argc, argv, self)
     gargv[0] = (gchar *) STR2CSTR(rb_progname);
 
     for (i = 0; i < gargc; i++) {
-        if (TYPE(RARRAY(argary)->ptr[i]) == T_STRING) {
-            gargv[i+1] = (gchar *) STR2CSTR(RARRAY(argary)->ptr[i]);
+        if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
+            gargv[i+1] = (gchar *) STR2CSTR(RARRAY_PTR(argary)[i]);
         }
         else {
             gargv[i+1] = "";

@@ -43,7 +43,7 @@ static VALUE rb_gda_param_list_new(self, params)
     
     list = gda_parameter_list_new();
     if (list != NULL) {
-        for (i = 0; i < RARRAY(params)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(params); i++) {
             gda_parameter_list_add_parameter(
                 list,
                 g_boxed_copy(GDA_TYPE_PARAMETER,

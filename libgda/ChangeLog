@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2007-12-31  Carlo E. Prelz  <fluido@fluido.as>
 
 	* src/rbgdavalue.c (rb_rb_value_to_gda_value): used RSTRING_PTR()

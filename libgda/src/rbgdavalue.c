@@ -338,7 +338,7 @@ GdaValue *rb_rb_value_to_gda_value(value, type)
     case GDA_VALUE_TYPE_LIST:
         list = NULL;
         /* XXX: is this more safe for multi-threading perhaps? */
-        for (i = 0; i < RARRAY(value)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(value); i++) {
             /* XXX: type here must be a list then... */
 		list = g_list_append(list,
 				     rb_rb_value_to_gda_value(

@@ -359,7 +359,7 @@ static VALUE rb_gda_connection_add_errors(self, errors)
     GList *list = NULL;
     int i;
 
-    for (i = 0; i < RARRAY(errors)->len; i++) {
+    for (i = 0; i < RARRAY_LEN(errors); i++) {
         list = g_list_append(list, RGDA_ERROR(rb_ary_entry(errors, i)));
     }
     gda_connection_add_error_list(RGDA_CONNECTION(self), list);
@@ -531,8 +531,8 @@ static VALUE rb_gda_connection_create_table(self, name, attributes)
     int i;
     gboolean ok;
     
-    c_attributes = g_new(GdaFieldAttributes *, RARRAY(attributes)->len);
-    for (i = 0; i < RARRAY(attributes)->len; i++)
+    c_attributes = g_new(GdaFieldAttributes *, RARRAY_LEN(attributes));
+    for (i = 0; i < RARRAY_LEN(attributes); i++)
         c_attributes[i] = RGDA_FIELD_ATTRIBUTES(rb_ary_entry(attributes, i));
     ok = gda_connection_create_table(RGDA_CONNECTION(self), RVAL2CSTR(name), 
                                      (const GdaFieldAttributes **)c_attributes);
