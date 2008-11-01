@@ -11,4 +11,22 @@ class TestGtkWidget < Test::Unit::TestCase
     @widget.window = window
     assert_equal(window, @widget.window)
   end
+
+  def test_modify_color_component_with_nil_color
+    assert_nothing_raised do
+      @widget.modify_base(:normal, nil)
+    end
+
+    assert_nothing_raised do
+      @widget.modify_text(:normal, nil)
+    end
+
+    assert_nothing_raised do
+      @widget.modify_fg(:normal, nil)
+    end
+
+    assert_nothing_raised do
+      @widget.modify_bg(:normal, nil)
+    end
+  end
 end

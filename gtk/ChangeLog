@@ -1,5 +1,8 @@
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gtk_widget.rb
+	(TestGtkWidget#test_modify_color_component_with_nil_color): add.
+
 	* src/rbgtk.h (RVAL2GDKCOLOR, GDKCOLOR2RVAL): move to ...
 	* src/rbgtkconversions.h: ... here.
 
