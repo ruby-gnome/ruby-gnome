@@ -53,7 +53,7 @@ rb_ary_to_gconfval_list(ary_val, list_type)
 
 	/* loop over the array and convert to GConfValues and store in list */
 	Check_Type(ary_val, T_ARRAY);
-	n = RARRAY(ary_val)->len;
+	n = RARRAY_LEN(ary_val);
 	for (i = 0; i < n; i++) {
 		val = rb_value_to_gconf_value(rb_ary_entry(ary_val, i));
 

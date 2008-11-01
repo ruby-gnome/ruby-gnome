@@ -333,7 +333,7 @@ client_change_set_from_currentv(self, keys)
 	VALUE key, set;
 
 	Check_Type(keys, T_ARRAY);
-	n = RARRAY(keys)->len;
+	n = RARRAY_LEN(keys);
 	gkeys = g_new(gchar *, n + 1);
 
 	/* convert to NULL-terminated array of gchar *'s */
