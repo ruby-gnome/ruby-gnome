@@ -16,7 +16,6 @@
 #define _RBGTK_H
 
 #include "ruby.h"
-#include "rubysig.h"
 #include "rbgobject.h"
 #include <gtk/gtk.h>
 #include "rbgtkconversions.h"
