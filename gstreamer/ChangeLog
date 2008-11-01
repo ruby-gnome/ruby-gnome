@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2008-06-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst-buffer.c (get_data): return nil if size is zero.

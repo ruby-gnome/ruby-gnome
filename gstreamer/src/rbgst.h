@@ -194,6 +194,4 @@ GstStructure *rbgst_hash_to_structure_with_name(VALUE hash, const char *name);
 
 #define GST_TAG_LIST_STRUCTURE_NAME   "taglist"
 
-#define DBL2NUM(v)      (rb_float_new(v))
-
 #endif                          /* __RBGST_H_ */

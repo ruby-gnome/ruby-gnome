@@ -164,10 +164,10 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
 
     if (NIL_P (argary)) {
         argary = rb_const_get(rb_cObject, rb_intern("ARGV"));
-        gargc = RARRAY(argary)->len;
+        gargc = RARRAY_LEN(argary);
     } else {
-        Check_Type (argary, T_ARRAY);
-        gargc = RARRAY (argary)->len;
+        Check_Type(argary, T_ARRAY);
+        gargc = RARRAY_LEN(argary);
     }
 
     /*
@@ -178,8 +178,8 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
     gargv[0] = (gchar *) STR2CSTR (rb_progname);
 
     for (i = 0; i < gargc; i++) {
-        if (TYPE (RARRAY (argary)->ptr[i]) == T_STRING) {
-            gargv[i + 1] = (gchar *) STR2CSTR (RARRAY (argary)->ptr[i]);
+        if (TYPE (RARRAY_PTR(argary)[i]) == T_STRING) {
+            gargv[i + 1] = (gchar *) STR2CSTR (RARRAY_PTR(argary)[i]);
         } else {
             gargv[i + 1] = "";
         }
