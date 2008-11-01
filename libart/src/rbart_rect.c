@@ -53,12 +53,12 @@ TARGET ## _initialize(int argc, VALUE *argv, VALUE self)    \
                                                             \
   if (argc == 1) {                                          \
     Check_Type(argv[0], T_ARRAY);                           \
-    if (RARRAY(argv[0])->len != 4) {                        \
+    if (RARRAY_LEN(argv[0]) != 4) {                        \
       rb_raise(rb_eArgError,                                \
                "wrong size of Array (%ld for 4)",           \
-               RARRAY(argv[0])->len);                       \
+               RARRAY_LEN(argv[0]));                       \
     } else {                                                \
-      argv = RARRAY(argv[0])->ptr;                          \
+      argv = RARRAY_PTR(argv[0]);                          \
     }                                                       \
   } else if (argc != 4) {                                   \
     rb_raise(rb_eArgError,                                  \

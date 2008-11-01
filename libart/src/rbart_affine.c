@@ -51,9 +51,9 @@ affine_initialize(argc, argv, klass)
 
     if (argc == 1) {
         Check_Type(argv[0], T_ARRAY);
-        if (RARRAY(argv[0])->len != 6)
+        if (RARRAY_LEN(argv[0]) != 6)
             rb_raise(rb_eArgError, "wrong size of Array (expect 6)");
-        argv = RARRAY(argv[0])->ptr;
+        argv = RARRAY_PTR(argv[0]);
     } else if (argc != 6) {
         rb_raise(rb_eArgError, "wrong # of argument (expect an array(5 members) or 6 parameters)");
     }
@@ -121,10 +121,10 @@ affine_point(argc, argv, self)
     if (argc == 1) {
         if (TYPE(argv[0]) != T_ARRAY)
             goto arg_error;
-        if (RARRAY(argv[0])-> len != 2)
+        if (RARRAY_LEN(argv[0]) != 2)
             goto arg_error;
-        src.x = NUM2DBL(RARRAY(argv[0])->ptr[0]);
-        src.y = NUM2DBL(RARRAY(argv[0])->ptr[1]);
+        src.x = NUM2DBL(RARRAY_PTR(argv[0])[0]);
+        src.y = NUM2DBL(RARRAY_PTR(argv[0])[1]);
     } else if (argc == 2) {
         src.x = NUM2DBL(argv[0]);
         src.y = NUM2DBL(argv[1]);

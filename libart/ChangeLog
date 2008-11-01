@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2008-01-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: don't use ftools.

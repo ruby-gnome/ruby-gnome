@@ -56,8 +56,8 @@ vpath_initialize(argc, argv, self)
     if (argc == 1){
         VALUE ary;
         rb_scan_args(argc, argv, "1", &ary);
-        if (TYPE(RARRAY(ary)->ptr) == T_ARRAY){
-            r_array = (VALUE)(RARRAY(ary)->ptr[0]);
+        if (TYPE(RARRAY_PTR(ary)) == T_ARRAY){
+            r_array = (VALUE)(RARRAY_PTR(ary)[0]);
         } else {
             r_array = ary;
         }
@@ -66,29 +66,29 @@ vpath_initialize(argc, argv, self)
     }
 
     Check_Type(r_array, T_ARRAY);
-    vpath = art_new(ArtVpath, RARRAY(r_array)->len);
-    for (i = 0; i < RARRAY(r_array)->len; ++i)
+    vpath = art_new(ArtVpath, RARRAY_LEN(r_array));
+    for (i = 0; i < RARRAY_LEN(r_array); ++i)
     {
-        VALUE r_point = RARRAY(r_array)->ptr[i];
+        VALUE r_point = RARRAY_PTR(r_array)[i];
         Check_Type(r_point, T_ARRAY);
-        if (RARRAY(r_point)->len < 1)
+        if (RARRAY_LEN(r_point) < 1)
             rb_raise(rb_eTypeError, "wrong size of Array (expect 1 or 3)");
-        vpath[i].code = NUM2INT(RARRAY(r_point)->ptr[0]);
+        vpath[i].code = NUM2INT(RARRAY_PTR(r_point)[0]);
         switch (vpath[i].code)
         {
           case ART_MOVETO:
           case ART_MOVETO_OPEN:
           case ART_LINETO:
-            if (RARRAY(r_point)->len != 3)
+            if (RARRAY_LEN(r_point) != 3)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 3)");
-            vpath[i].x = NUM2DBL(RARRAY(r_point)->ptr[1]);
-            vpath[i].y = NUM2DBL(RARRAY(r_point)->ptr[2]);
+            vpath[i].x = NUM2DBL(RARRAY_PTR(r_point)[1]);
+            vpath[i].y = NUM2DBL(RARRAY_PTR(r_point)[2]);
             break;
           case ART_CURVETO:
             rb_raise(rb_eTypeError, "wrong path code for Art::Vpath (Art::CURVETO).");
             break;
           case ART_END:
-            if (RARRAY(r_point)->len != 1)
+            if (RARRAY_LEN(r_point) != 1)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 1)");
             break;
           default:

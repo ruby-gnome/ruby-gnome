@@ -57,8 +57,8 @@ bpath_initialize(argc, argv, self)
     if (argc == 1){
         VALUE ary;
         rb_scan_args(argc, argv, "1", &ary);
-        if (TYPE(RARRAY(ary)->ptr) == T_ARRAY){
-            r_array = (VALUE)(RARRAY(ary)->ptr[0]);
+        if (TYPE(RARRAY_PTR(ary)) == T_ARRAY){
+            r_array = (VALUE)(RARRAY_PTR(ary)[0]);
         } else {
             r_array = ary;
         }
@@ -67,37 +67,37 @@ bpath_initialize(argc, argv, self)
     }
 
     Check_Type(r_array, T_ARRAY);
-    bpath = art_new(ArtBpath, RARRAY(r_array)->len);
+    bpath = art_new(ArtBpath, RARRAY_LEN(r_array));
 
-    for (i = 0; i < RARRAY(r_array)->len; i++)
+    for (i = 0; i < RARRAY_LEN(r_array); i++)
     {
-        VALUE r_point = RARRAY(r_array)->ptr[i];
+        VALUE r_point = RARRAY_PTR(r_array)[i];
         Check_Type(r_point, T_ARRAY);
-        if (RARRAY(r_point)->len < 1)
+        if (RARRAY_LEN(r_point) < 1)
             rb_raise(rb_eTypeError, "wrong size of Array (expect 1, 3 or 7)");
-        bpath[i].code = NUM2INT(RARRAY(r_point)->ptr[0]);
+        bpath[i].code = NUM2INT(RARRAY_PTR(r_point)[0]);
         switch (bpath[i].code)
         {
           case ART_MOVETO:
           case ART_MOVETO_OPEN:
           case ART_LINETO:
-            if (RARRAY(r_point)->len != 3)
+            if (RARRAY_LEN(r_point) != 3)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 3)");
-            bpath[i].x3 = NUM2DBL(RARRAY(r_point)->ptr[1]);
-            bpath[i].y3 = NUM2DBL(RARRAY(r_point)->ptr[2]);
+            bpath[i].x3 = NUM2DBL(RARRAY_PTR(r_point)[1]);
+            bpath[i].y3 = NUM2DBL(RARRAY_PTR(r_point)[2]);
             break;
           case ART_CURVETO:
-            if (RARRAY(r_point)->len != 7)
+            if (RARRAY_LEN(r_point) != 7)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 7)");
-            bpath[i].x1 = NUM2DBL(RARRAY(r_point)->ptr[1]);
-            bpath[i].y1 = NUM2DBL(RARRAY(r_point)->ptr[2]);
-            bpath[i].x2 = NUM2DBL(RARRAY(r_point)->ptr[3]);
-            bpath[i].y2 = NUM2DBL(RARRAY(r_point)->ptr[4]);
-            bpath[i].x3 = NUM2DBL(RARRAY(r_point)->ptr[5]);
-            bpath[i].y3 = NUM2DBL(RARRAY(r_point)->ptr[6]);
+            bpath[i].x1 = NUM2DBL(RARRAY_PTR(r_point)[1]);
+            bpath[i].y1 = NUM2DBL(RARRAY_PTR(r_point)[2]);
+            bpath[i].x2 = NUM2DBL(RARRAY_PTR(r_point)[3]);
+            bpath[i].y2 = NUM2DBL(RARRAY_PTR(r_point)[4]);
+            bpath[i].x3 = NUM2DBL(RARRAY_PTR(r_point)[5]);
+            bpath[i].y3 = NUM2DBL(RARRAY_PTR(r_point)[6]);
             break;
           case ART_END:
-            if (RARRAY(r_point)->len != 1)
+            if (RARRAY_LEN(r_point) != 1)
                 rb_raise(rb_eTypeError, "wrong size of Array (expect 1)");
             break;
           default:

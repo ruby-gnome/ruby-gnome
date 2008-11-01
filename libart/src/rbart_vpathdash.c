@@ -67,10 +67,10 @@ vpath_dash_initialize(argc, argv, self)
 
     dash = (ArtVpathDash *) art_alloc(sizeof(ArtVpathDash));
     dash->offset = NUM2DBL(offset);
-    dash->n_dash = RARRAY(ary)->len;
+    dash->n_dash = RARRAY_LEN(ary);
     dash->dash = art_new(double, dash->n_dash);
     for (i = 0; i < dash->n_dash; ++i)
-        dash->dash[i] = NUM2DBL(RARRAY(ary)->ptr[i]);
+        dash->dash[i] = NUM2DBL(RARRAY_PTR(ary)[i]);
     DATA_PTR(self) = dash;
     return Qnil;
 }
@@ -85,8 +85,7 @@ vpath_dash_to_a(r_self)
     dash = get_art_vpath_dash(r_self);
     r_dash = rb_ary_new2(dash->n_dash);
     for (i = 0; i < dash->n_dash; ++i)
-        RARRAY(r_dash)->ptr[i] = rb_float_new(dash->dash[i]);
-    RARRAY(r_dash)->len = dash->n_dash;
+        RARRAY_PTR(r_dash)[i] = rb_float_new(dash->dash[i]);
     return rb_ary_new3(2, rb_float_new(dash->offset), r_dash);
 }
 
