@@ -26,10 +26,10 @@ rval2cstrary(VALUE ary)
     if (NIL_P(ary))
         return NULL;
 
-    len = RARRAY(ary)->len;
+    len = RARRAY_LEN(ary);
     result = ALLOC_N(char *, len + 1);
     for (i = 0; i < len; i++) {
-        result[i] = g_strdup(RVAL2CSTR(RARRAY(ary)->ptr[i]));
+        result[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(ary)[i]));
     }
     result[i] = NULL;
 
@@ -337,7 +337,7 @@ term_set_colors(VALUE self, VALUE foreground, VALUE background,
     glong i, len;
     GdkColor *palette;
 
-    len = RARRAY(rb_palette)->len;
+    len = RARRAY_LEN(rb_palette);
 
     if (!(len == 0 || len == 8 || len == 16 || len == 24)) {
         char *inspect;
@@ -349,7 +349,7 @@ term_set_colors(VALUE self, VALUE foreground, VALUE background,
     palette = ALLOCA_N(GdkColor, len);
     for (i = 0; i < len; i++) {
         GdkColor *color;
-        color = RVAL2COLOR(RARRAY(rb_palette)->ptr[i]);
+        color = RVAL2COLOR(RARRAY_PTR(rb_palette)[i]);
         palette[i] = *color;
     }
 
