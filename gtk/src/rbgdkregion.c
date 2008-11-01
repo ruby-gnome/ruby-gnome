@@ -43,17 +43,17 @@ gdkregion_initialize(argc, argv, self)
     if (NIL_P(points_or_rectangle)){
         region = gdk_region_new();
     } else if (TYPE(points_or_rectangle) == T_ARRAY){
-        gpoints = ALLOCA_N(GdkPoint, RARRAY(points_or_rectangle)->len);
+        gpoints = ALLOCA_N(GdkPoint, RARRAY_LEN(points_or_rectangle));
 
-        for (i = 0; i < RARRAY(points_or_rectangle)->len; i++) {
-            Check_Type(RARRAY(points_or_rectangle)->ptr[i], T_ARRAY);
-            if (RARRAY(RARRAY(points_or_rectangle)->ptr[i])->len < 2) {
+        for (i = 0; i < RARRAY_LEN(points_or_rectangle); i++) {
+            Check_Type(RARRAY_PTR(points_or_rectangle)[i], T_ARRAY);
+            if (RARRAY_LEN(RARRAY_PTR(points_or_rectangle)[i]) < 2) {
                 rb_raise(rb_eArgError, "point %d should be array of size 2", i);
             }
-            gpoints[i].x = NUM2INT(RARRAY(RARRAY(points_or_rectangle)->ptr[i])->ptr[0]);
-            gpoints[i].y = NUM2INT(RARRAY(RARRAY(points_or_rectangle)->ptr[i])->ptr[1]);
+            gpoints[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(points_or_rectangle)[i])[0]);
+            gpoints[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(points_or_rectangle)[i])[1]);
         }
-        region = gdk_region_polygon(gpoints, RARRAY(points_or_rectangle)->len, 
+        region = gdk_region_polygon(gpoints, RARRAY_LEN(points_or_rectangle),
                                     RVAL2GENUM(fill_rule, GDK_TYPE_FILL_RULE));
     } else if (RVAL2GTYPE(points_or_rectangle) == GDK_TYPE_RECTANGLE){
         region = gdk_region_rectangle((GdkRectangle*)RVAL2BOXED(points_or_rectangle, 
@@ -99,17 +99,17 @@ gdkregion_spans_intersect_foreach(self, spans, sorted)
     VALUE self, spans, sorted;
 {
     int i;
-    GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY(spans)->len);
+    GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY_LEN(spans));
     volatile VALUE func = rb_block_proc();
 
     G_RELATIVE(self, func);
-    for (i = 0; i < RARRAY(spans)->len; i++) {
-        gspans[i].x = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[0]);
-        gspans[i].y = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[1]);
-        gspans[i].width = NUM2INT(RARRAY(RARRAY(spans)->ptr[i])->ptr[2]);
+    for (i = 0; i < RARRAY_LEN(spans); i++) {
+        gspans[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[0]);
+        gspans[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[1]);
+        gspans[i].width = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[2]);
     }
-    gdk_region_spans_intersect_foreach(_SELF(self), 
-                                       gspans, RARRAY(spans)->len, RVAL2CBOOL(sorted), 
+    gdk_region_spans_intersect_foreach(_SELF(self),
+                                       gspans, RARRAY_LEN(spans), RVAL2CBOOL(sorted),
                                        (GdkSpanFunc)gdkregion_span_func, (gpointer)func);
     return self;
 }

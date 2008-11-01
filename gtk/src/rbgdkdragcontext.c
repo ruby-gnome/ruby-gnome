@@ -190,8 +190,8 @@ gdkdragcontext_s_drag_begin(self, window, targets)
     GList* list = NULL;
     VALUE ret;
     int i;
-    for (i = 0; i < RARRAY(targets)->len; i++){
-        list = g_list_append(list, GINT_TO_POINTER(RVAL2ATOM(RARRAY(targets)->ptr[0])));
+    for (i = 0; i < RARRAY_LEN(targets); i++){
+        list = g_list_append(list, GINT_TO_POINTER(RVAL2ATOM(RARRAY_PTR(targets)[0])));
     }
 
     ret = GOBJ2RVAL(gdk_drag_begin(GDK_WINDOW(RVAL2GOBJ(window)), list));

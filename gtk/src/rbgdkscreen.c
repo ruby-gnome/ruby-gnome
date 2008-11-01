@@ -316,11 +316,11 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
 
     if (! NIL_P(argv)){
         Check_Type(argv, T_ARRAY);
-        gargc = RARRAY(argv)->len;
+        gargc = RARRAY_LEN(argv);
         gargv = ALLOCA_N(gchar*, gargc + 1);
         for (i = 0; i < gargc; i++) {
-            if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
-                gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
+            if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
+                gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
                 gargv[i] = "";
@@ -331,11 +331,11 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
 
     if (! NIL_P(envp)){
         Check_Type(envp, T_ARRAY);
-        genc = RARRAY(envp)->len;
+        genc = RARRAY_LEN(envp);
         genvp = ALLOCA_N(gchar*, genc + 1);
         for (i = 0; i < genc; i++) {
-            if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
-                genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
+            if (TYPE(RARRAY_PTR(envp)[i]) == T_STRING) {
+                genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
                 genvp[i] = "";
@@ -377,11 +377,11 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
 
     if (! NIL_P(argv)){
         Check_Type(argv, T_ARRAY);
-        gargc = RARRAY(argv)->len;
+        gargc = RARRAY_LEN(argv);
         gargv = ALLOCA_N(gchar*, gargc + 1);
         for (i = 0; i < gargc; i++) {
-            if (TYPE(RARRAY(argv)->ptr[i]) == T_STRING) {
-                gargv[i] = RVAL2CSTR(RARRAY(argv)->ptr[i]);
+            if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
+                gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
                 gargv[i] = "";
@@ -392,11 +392,11 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
 
     if (! NIL_P(envp)){
         Check_Type(envp, T_ARRAY);
-        genc = RARRAY(envp)->len;
+        genc = RARRAY_LEN(envp);
         genvp = ALLOCA_N(gchar*, genc + 1);
         for (i = 0; i < genc; i++) {
-            if (TYPE(RARRAY(envp)->ptr[i]) == T_STRING) {
-                genvp[i] = RVAL2CSTR(RARRAY(envp)->ptr[i]);
+            if (TYPE(RARRAY_PTR(envp)[i]) == T_STRING) {
+                genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
                 genvp[i] = "";

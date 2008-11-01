@@ -115,12 +115,12 @@ device_get_axis(self, axes, use)
     gboolean ret;
     gdouble* gaxes;
     gint i;
-    gint len = RARRAY(axes)->len;
+    gint len = RARRAY_LEN(axes);
 
     gaxes = g_new(gdouble, len);
 
     for (i = 0; i < len; i++){
-        gaxes[i] = RARRAY(axes)->ptr[i];
+        gaxes[i] = RARRAY_PTR(axes)[i];
     }
 
     ret = gdk_device_get_axis(_SELF(self), gaxes, RVAL2GENUM(use, GDK_TYPE_AXIS_USE),

@@ -56,11 +56,11 @@ it_set_search_path(self, paths)
 
     Check_Type(paths, T_ARRAY);
     
-    size = RARRAY(paths)->len;
+    size = RARRAY_LEN(paths);
     gpaths = g_new(gchar*, size);
 
     for (i = 0; i < size; i++) { 
-        gpaths[i] = (gchar*)(RARRAY(paths)->ptr[0]);
+        gpaths[i] = (gchar*)(RARRAY_PTR(paths)[0]);
     }
     gtk_icon_theme_set_search_path(_SELF(self), (const gchar**)gpaths, size);
     g_free(gpaths);

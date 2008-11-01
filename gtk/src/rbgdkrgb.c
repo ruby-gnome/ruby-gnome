@@ -56,14 +56,14 @@ rgb_draw_indexed_image(self, win, gc, x, y, w, h, dither, buf, rowstride, colors
     guint32* gcolors;
     gint i, n_colors;
 
-    n_colors = RARRAY(colors)->len;
+    n_colors = RARRAY_LEN(colors);
 
     if (n_colors > 255)
         rb_raise(rb_eArgError, "colors: out of range (0 - 255)");
 
     gcolors = g_new(guint32, n_colors);
     for (i = 0; i < n_colors; i++) {
-        gcolors[i] = NUM2UINT(RARRAY(colors)->ptr[i]);
+        gcolors[i] = NUM2UINT(RARRAY_PTR(colors)[i]);
     }
 
     cmap = gdk_rgb_cmap_new(gcolors, n_colors);

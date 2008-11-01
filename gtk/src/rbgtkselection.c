@@ -60,7 +60,7 @@ gtkdrag_selection_add_targets(self, widget, selection, targets)
 {
     gtk_selection_add_targets(RVAL2WIDGET(widget), 
                               RVAL2ATOM(selection),
-                              rbgtk_get_target_entry(targets), RARRAY(targets)->len);
+                              rbgtk_get_target_entry(targets), RARRAY_LEN(targets));
     return self;
 }
 
@@ -96,11 +96,11 @@ targets_include_image(self, targets, writable)
      VALUE self, targets, writable;
 {
   gint i;
-  gint len = RARRAY(targets)->len;
+  gint len = RARRAY_LEN(targets);
   GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
 
   for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
   }
 
   return CBOOL2RVAL(gtk_targets_include_image(gtargets, len, RVAL2CBOOL(writable)));
@@ -111,10 +111,10 @@ targets_include_text(self, targets)
      VALUE self, targets;
 {
   gint i;
-  gint len = RARRAY(targets)->len;
+  gint len = RARRAY_LEN(targets);
   GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
   for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
   }
   return CBOOL2RVAL(gtk_targets_include_text(gtargets, len));
 }
@@ -124,11 +124,11 @@ targets_include_uri(self, targets)
      VALUE self, targets;
 {
   gint i;
-  gint len = RARRAY(targets)->len;
+  gint len = RARRAY_LEN(targets);
   GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
 
   for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
   }
 
   return CBOOL2RVAL(gtk_targets_include_uri(gtargets, len));
@@ -139,11 +139,11 @@ targets_include_rich_text(self, targets, buffer)
      VALUE self, targets, buffer;
 {
   gint i;
-  gint len = RARRAY(targets)->len;
+  gint len = RARRAY_LEN(targets);
   GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
 
   for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
   }
 
   return CBOOL2RVAL(gtk_targets_include_rich_text(gtargets, len, RVAL2GOBJ(buffer)));

@@ -123,8 +123,8 @@ items_exec_callback_wrap(callback_data, action_id, widget)
     VALUE iter, data;
     VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));
 
-    iter = RARRAY(action)->ptr[0];
-    data = RARRAY(action)->ptr[1];
+    iter = RARRAY_PTR(action)[0];
+    data = RARRAY_PTR(action)[1];
     if (!NIL_P(iter)) {
         rb_funcall(iter, id_call, 2, data, GOBJ2RVAL(widget));
     }
@@ -201,19 +201,19 @@ ifact_create_items(self, ary)
     GtkItemFactoryEntry *entries;
     guint i, len, n_menu_entries;
 
-    n_menu_entries = RARRAY(ary)->len;
+    n_menu_entries = RARRAY_LEN(ary);
     entries = ALLOC_N(GtkItemFactoryEntry, n_menu_entries);
 
     for (i = 0; i < n_menu_entries; i++) {
-        entry = RARRAY(ary)->ptr[i];
-        len = RARRAY(entry)->len;
+        entry = RARRAY_PTR(ary)[i];
+        len = RARRAY_LEN(entry);
         Check_Type(entry, T_ARRAY);
-        path =  RARRAY(entry)->ptr[0];
-        type =  ((len > 1) ? RARRAY(entry)->ptr[1] : Qnil);
-        accel = ((len > 2) ? RARRAY(entry)->ptr[2] : Qnil);
-        extdata = ((len > 3) ? RARRAY(entry)->ptr[3] : Qnil);
-        func =  ((len > 4) ? RARRAY(entry)->ptr[4] : Qnil);
-        data =  ((len > 5) ? RARRAY(entry)->ptr[5] : Qnil);
+        path =  RARRAY_PTR(entry)[0];
+        type =  ((len > 1) ? RARRAY_PTR(entry)[1] : Qnil);
+        accel = ((len > 2) ? RARRAY_PTR(entry)[2] : Qnil);
+        extdata = ((len > 3) ? RARRAY_PTR(entry)[3] : Qnil);
+        func =  ((len > 4) ? RARRAY_PTR(entry)[4] : Qnil);
+        data =  ((len > 5) ? RARRAY_PTR(entry)[5] : Qnil);
 
         create_factory_entry(&entries[i], self, path, type, accel, extdata, func, data);
     }

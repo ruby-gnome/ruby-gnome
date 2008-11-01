@@ -44,12 +44,12 @@ timecoord_initialize(self, time, axes)
     int i;
     coord.time = NUM2UINT(time);
 
-    if (RARRAY(axes)->len > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY(axes)->len);
+    if (RARRAY_LEN(axes) > GDK_MAX_TIMECOORD_AXES){
+        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY_LEN(axes));
     }
 
-    for (i = 0; i < RARRAY(axes)->len; i++){
-        coord.axes[i] = NUM2DBL(RARRAY(axes)->ptr[i]);
+    for (i = 0; i < RARRAY_LEN(axes); i++){
+        coord.axes[i] = NUM2DBL(RARRAY_PTR(axes)[i]);
     }
 
     G_INITIALIZE(self, &coord);
@@ -91,12 +91,12 @@ timecoord_set_axes(self, axes)
     int i;
     GdkTimeCoord* coord = _SELF(self);
 
-    if (RARRAY(axes)->len > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY(axes)->len);
+    if (RARRAY_LEN(axes) > GDK_MAX_TIMECOORD_AXES){
+        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY_LEN(axes));
     }
 
-    for (i = 0; i < RARRAY(axes)->len; i++){
-        coord->axes[i] = NUM2DBL(RARRAY(axes)->ptr[i]);
+    for (i = 0; i < RARRAY_LEN(axes); i++){
+        coord->axes[i] = NUM2DBL(RARRAY_PTR(axes)[i]);
     }
     return self;
 }

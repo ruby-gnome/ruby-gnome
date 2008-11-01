@@ -31,8 +31,8 @@ rbtn_initialize(argc, argv, self)
         if (TYPE(group_or_stock_id) == T_ARRAY){
             int i;
             Check_Type(group_or_stock_id, T_ARRAY);
-            for (i = 0; i < RARRAY(group_or_stock_id)->len; i++) {
-                list = g_slist_append(list, RVAL2GOBJ(RARRAY(group_or_stock_id)->ptr[i]));
+            for (i = 0; i < RARRAY_LEN(group_or_stock_id); i++) {
+                list = g_slist_append(list, RVAL2GOBJ(RARRAY_PTR(group_or_stock_id)[i]));
             }
         } else if (rb_obj_is_kind_of(group_or_stock_id, gRToolButton)){
             list = gtk_radio_tool_button_get_group(_SELF(group_or_stock_id));
@@ -71,8 +71,8 @@ rbtn_set_group(self, group)
     GSList* list = NULL;
     if (TYPE(group) == T_ARRAY){
         int i;
-        for (i = 0; i < RARRAY(group)->len; i++){
-            list = g_slist_append(list, RVAL2GOBJ(RARRAY(group)->ptr[i]));
+        for (i = 0; i < RARRAY_LEN(group); i++){
+            list = g_slist_append(list, RVAL2GOBJ(RARRAY_PTR(group)[i]));
         }
     } else {
         list = gtk_radio_tool_button_get_group(_SELF(group));

@@ -66,9 +66,9 @@ scalebutton_set_icons(self, icons)
     VALUE self, icons;
 {
     int i;
-    gchar **icons_c = g_new0(gchar*, RARRAY(icons)->len + 1);
-    for (i = 0; i < RARRAY(icons)->len; i++)
-        icons_c[i] = RVAL2CSTR(RARRAY(icons)->ptr[i]);
+    gchar **icons_c = g_new0(gchar*, RARRAY_LEN(icons) + 1);
+    for (i = 0; i < RARRAY_LEN(icons); i++)
+        icons_c[i] = RVAL2CSTR(RARRAY_PTR(icons)[i]);
     icons_c[i] = NULL;
     gtk_scale_button_set_icons(_SELF(self), (const gchar **) icons_c);
     g_free(icons_c);

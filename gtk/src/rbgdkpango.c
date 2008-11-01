@@ -77,11 +77,11 @@ gdkpango_layout_get_clip_region(self, x_origin, y_origin, index_ranges)
     VALUE self, x_origin, y_origin, index_ranges;
 {
     int i;
-    gint len = RARRAY(index_ranges)->len;
+    gint len = RARRAY_LEN(index_ranges);
     gint* ranges = g_new(gint, len);
 
     for (i = 0; i < len; i++) {
-        ranges[i] = RARRAY(index_ranges)->ptr[i];
+        ranges[i] = RARRAY_PTR(index_ranges)[i];
     }
     return BOXED2RVAL(gdk_pango_layout_get_clip_region(PANGO_LAYOUT(RVAL2GOBJ(self)),
                                                        NUM2INT(x_origin),
@@ -94,11 +94,11 @@ gdkpango_layout_line_get_clip_region(self, x_origin, y_origin, index_ranges)
     VALUE self, x_origin, y_origin, index_ranges;
 {
     int i;
-    gint len = RARRAY(index_ranges)->len;
+    gint len = RARRAY_LEN(index_ranges);
     gint* ranges = g_new(gint, len);
 
     for (i = 0; i < len; i++) {
-        ranges[i] = RARRAY(index_ranges)->ptr[i];
+        ranges[i] = RARRAY_PTR(index_ranges)[i];
     }
     return BOXED2RVAL(gdk_pango_layout_line_get_clip_region(
                           (PangoLayoutLine*)RVAL2BOXED(self, PANGO_TYPE_LAYOUT_LINE),

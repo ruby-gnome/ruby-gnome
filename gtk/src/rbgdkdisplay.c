@@ -368,11 +368,11 @@ gdkdisplay_store_clipboard(self, clipboard_window, time_, targets)
     VALUE self, clipboard_window, time_, targets;
 {
     gint i;
-    gint n_targets = RARRAY(targets)->len;
+    gint n_targets = RARRAY_LEN(targets);
     GdkAtom* gtargets = g_new(GdkAtom, n_targets);
 
     for (i = 0; i < n_targets; i++){
-        gtargets[i] = RVAL2ATOM(RARRAY(targets)->ptr[i]);
+        gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
     }
 
     gdk_display_store_clipboard(_SELF(self), GDK_WINDOW(RVAL2GOBJ(clipboard_window)),

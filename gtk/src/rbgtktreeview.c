@@ -140,14 +140,14 @@ treeview_insert_column(argc, argv, self)
         
         ret = gtk_tree_view_insert_column(_SELF(self), column, NUM2INT(args[0]));
         ary = rb_funcall(args[3], rb_intern("to_a"), 0);
-        for (i = 0; i < RARRAY(ary)->len; i++) {
-            VALUE val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+        for (i = 0; i < RARRAY_LEN(ary); i++) {
+            VALUE val = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
             if (SYMBOL_P(val)) {
                 name = rb_id2name(SYM2ID(val));
             } else {
                 name = RVAL2CSTR(val);
             }
-            col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+            col = NUM2INT(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
             gtk_tree_view_column_add_attribute(column,
                                                renderer,
                                                name, col);
@@ -497,7 +497,7 @@ treeview_enable_model_drag_dest(self, targets, actions)
     VALUE self, targets, actions;
 {
     const GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
-    int num = RARRAY(targets)->len;
+    int num = RARRAY_LEN(targets);
 
     gtk_tree_view_enable_model_drag_dest(_SELF(self),  entries, 
                                          num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
@@ -510,7 +510,7 @@ treeview_enable_model_drag_source(self, start_button_mask, targets, actions)
 {
     GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
     if (entries){
-        gint num = RARRAY(targets)->len;
+        gint num = RARRAY_LEN(targets);
         
         gtk_tree_view_enable_model_drag_source(_SELF(self), 
                                                RVAL2GFLAGS(start_button_mask, GDK_TYPE_MODIFIER_TYPE), 

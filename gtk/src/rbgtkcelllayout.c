@@ -117,10 +117,10 @@ layout_set_attributes(self, cell, attrs)
     layout_clear_attributes(self, cell);
 
     ary = rb_funcall(attrs, rb_intern("to_a"), 0);
-    for (i = 0; i < RARRAY(ary)->len; i++){
+    for (i = 0; i < RARRAY_LEN(ary); i++){
         layout_add_attribute(self, cell, 
-                             RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
-                             RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+                             RARRAY_PTR(RARRAY_PTR(ary)[i])[0],
+                             RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
     }
     return self;
 }

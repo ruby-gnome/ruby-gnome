@@ -46,7 +46,7 @@ target_list_initialize(self, targets)
     Check_Type(targets, T_ARRAY);
     G_INITIALIZE(self, gtk_target_list_new(
                      rbgtk_get_target_entry(targets), 
-                     RARRAY(targets)->len));
+                     RARRAY_LEN(targets)));
     return Qnil;
 }
 
@@ -65,7 +65,7 @@ target_list_add_table(self, targets)
 {
     gtk_target_list_add_table(_SELF(self),
                               rbgtk_get_target_entry(targets), 
-                              RARRAY(targets)->len);
+                              RARRAY_LEN(targets));
     return self;
 }
 

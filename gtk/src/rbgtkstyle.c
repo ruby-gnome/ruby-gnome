@@ -279,17 +279,17 @@ style_paint_polygon(self, gdkwindow, state_type, shadow_type, area, widget, deta
     points, fill;
 {
     int i;
-    GdkPoint* gpoints = g_new (GdkPoint, RARRAY(points)->len);
+    GdkPoint* gpoints = g_new (GdkPoint, RARRAY_LEN(points));
 
-    for (i = 0; i < RARRAY(points)->len; i++){
-        gpoints[i].x = RARRAY(RARRAY(points)->ptr[i])->ptr[0];
-        gpoints[i].y = RARRAY(RARRAY(points)->ptr[i])->ptr[1];
+    for (i = 0; i < RARRAY_LEN(points); i++){
+        gpoints[i].x = RARRAY_PTR(RARRAY_PTR(points)[i])[0];
+        gpoints[i].y = RARRAY_PTR(RARRAY_PTR(points)[i])[1];
     }
     gtk_paint_polygon(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
                       RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
                       GTK_WIDGET(RVAL2GOBJ(widget)), 
                       NIL_P(detail) ? NULL : RVAL2CSTR(detail), gpoints,
-                      RARRAY(points)->len, RVAL2CBOOL(fill));
+                      RARRAY_LEN(points), RVAL2CBOOL(fill));
     return self;
 }
 

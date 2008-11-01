@@ -41,14 +41,14 @@ tvc_initialize(argc, argv, self)
     if (argc == 3){
         ary = rb_funcall(argv[2], rb_intern("to_a"), 0);
         renderer = RVAL2CELLRENDERER(argv[1]);
-        for (i = 0; i < RARRAY(ary)->len; i++) {
-            val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+        for (i = 0; i < RARRAY_LEN(ary); i++) {
+            val = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
             if (SYMBOL_P(val)) {
                 name = rb_id2name(SYM2ID(val));
             } else {
                 name = RVAL2CSTR(val);
             }
-            col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+            col = NUM2INT(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
             gtk_tree_view_column_add_attribute(_SELF(self), renderer, name, col);
         }       
     }
@@ -122,14 +122,14 @@ tvc_set_attributes(self, renderer, attributes)
     gtk_tree_view_column_clear_attributes(tvc, grenderer);
 
     ary = rb_funcall(attributes, rb_intern("to_a"), 0);
-    for (i = 0; i < RARRAY(ary)->len; i++) {
-        val = RARRAY(RARRAY(ary)->ptr[i])->ptr[0];
+    for (i = 0; i < RARRAY_LEN(ary); i++) {
+        val = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
         if (SYMBOL_P(val)) {
             name = rb_id2name(SYM2ID(val));
         } else {
             name = RVAL2CSTR(val);
         }
-        col = NUM2INT(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+        col = NUM2INT(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
         gtk_tree_view_column_add_attribute(tvc, grenderer, name, col);
     }       
     return self;

@@ -197,12 +197,12 @@ gtkselectiondata_set_uris(self, uris)
     int i, n_targets;
     
     Check_Type(uris, T_ARRAY);
-    n_targets = RARRAY(uris)->len;
+    n_targets = RARRAY_LEN(uris);
  
     guris = g_new(gchar*, n_targets + 1);
 
     for (i = 0; i < n_targets; i++) {
-        guris[i] = RVAL2CSTR(RARRAY(uris)->ptr[i]);
+        guris[i] = RVAL2CSTR(RARRAY_PTR(uris)[i]);
     }
     guris[n_targets] = NULL;
 

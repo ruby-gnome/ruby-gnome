@@ -91,7 +91,6 @@ binding_entry_add_signal(argc, argv, self)
      VALUE self;
 {
     VALUE keyval, modifiers, signame, rest;
-    struct RArray *params;
     long i;
     VALUE param;
     GSList *slist, *free_slist;
@@ -100,14 +99,13 @@ binding_entry_add_signal(argc, argv, self)
 
     rb_scan_args(argc, argv, "3*", &keyval, &modifiers, &signame, &rest);
 
-    params = RARRAY(rest);
-    for (i=0; i<params->len; i++) {
+    for (i = 0; i < RARRAY_LEN(rest); i++) {
         GtkBindingArg *arg;
 
         arg = g_new0 (GtkBindingArg, 1);
         slist = g_slist_prepend (slist, arg);
 
-        param = params->ptr[i];
+        param = RARRAY_PTR(rest)[i];
         if (TYPE(param) == T_FLOAT) {
             arg->arg_type = G_TYPE_DOUBLE;
             arg->d.double_data = NUM2DBL(param);

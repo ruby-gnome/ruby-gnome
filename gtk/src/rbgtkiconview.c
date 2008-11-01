@@ -188,7 +188,7 @@ iview_enable_model_drag_dest(self, targets, actions)
 {
     gtk_icon_view_enable_model_drag_dest(_SELF(self),
                                          rbgtk_get_target_entry(targets),
-                                         RARRAY(targets)->len,
+                                         RARRAY_LEN(targets),
                                          RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     return self;
 }
@@ -200,7 +200,7 @@ iview_enable_model_drag_source(self, flags, targets, actions)
     gtk_icon_view_enable_model_drag_source(_SELF(self),
                                            RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
                                            rbgtk_get_target_entry(targets),
-                                           RARRAY(targets)->len,
+                                           RARRAY_LEN(targets),
                                            RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     return self;
 }

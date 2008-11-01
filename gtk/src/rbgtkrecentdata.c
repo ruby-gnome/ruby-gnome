@@ -97,10 +97,10 @@ rd_set_groups(self, groups)
     VALUE self, groups;
 {
     gint i;
-    gint len = RARRAY(groups)->len;
+    gint len = RARRAY_LEN(groups);
     gchar** grps = g_new(gchar*, len + 1);
     for (i = 0; i < len; i++) {
-        grps[i] = RVAL2CSTR(RARRAY(groups)->ptr[i]);
+        grps[i] = RVAL2CSTR(RARRAY_PTR(groups)[i]);
     }
     grps[len] = NULL;
     _SELF(self)->groups = grps;

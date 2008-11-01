@@ -102,11 +102,11 @@ colorsel_s_palette_to_string(argc, argv, self)
         rb_scan_args(argc, argv, "10", &colors);
     }
 
-    len = RARRAY(colors)->len;
+    len = RARRAY_LEN(colors);
     gcolors = ALLOCA_N(GdkColor, len);
 
     for (i = 0; i < len; i++) {
-        gcolor = RVAL2GDKCOLOR(RARRAY(colors)->ptr[i]);
+        gcolor = RVAL2GDKCOLOR(RARRAY_PTR(colors)[i]);
         gcolors[i] = *gcolor;
     }
 

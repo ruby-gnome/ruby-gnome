@@ -184,13 +184,13 @@ gdkgc_set_dashes(self, dash_offset, dash_list)
 
     Check_Type(dash_list, T_ARRAY);
 
-    buf = ALLOCA_N(gint8, RARRAY(dash_list)->len);
-    for (i = 0; i < RARRAY(dash_list)->len; i++) {
-        Check_Type(RARRAY(dash_list)->ptr[i], T_FIXNUM);
-        buf[i] = (gint8)NUM2CHR(RARRAY(dash_list)->ptr[i]);
+    buf = ALLOCA_N(gint8, RARRAY_LEN(dash_list));
+    for (i = 0; i < RARRAY_LEN(dash_list); i++) {
+        Check_Type(RARRAY_PTR(dash_list)[i], T_FIXNUM);
+        buf[i] = (gint8)NUM2CHR(RARRAY_PTR(dash_list)[i]);
     }
     gdk_gc_set_dashes(_SELF(self), NUM2INT(dash_offset),
-                      (gint8*)buf, RARRAY(dash_list)->len);
+                      (gint8*)buf, RARRAY_LEN(dash_list));
 
     return self;
 }

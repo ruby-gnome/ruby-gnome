@@ -333,10 +333,10 @@ cont_add(argc, argv, self)
         ary = rb_funcall(properties, rb_intern("to_a"), 0);
         obj = RVAL2GOBJ(self);
         
-        for (i = 0; i < RARRAY(ary)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(ary); i++) {
             cont_child_set_property(self, other, 
-                       RARRAY(RARRAY(ary)->ptr[i])->ptr[0],
-                       RARRAY(RARRAY(ary)->ptr[i])->ptr[1]);
+                       RARRAY_PTR(RARRAY_PTR(ary)[i])[0],
+                       RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
         }
     }
     gtk_widget_thaw_child_notify(child);
@@ -381,8 +381,8 @@ cont_set_focus_chain(self, focusable_widgets)
     GList *glist = NULL;
 
     Check_Type(focusable_widgets, T_ARRAY);
-    for (i = 0; i < RARRAY(focusable_widgets)->len; i++) {
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY(focusable_widgets)->ptr[i]));
+    for (i = 0; i < RARRAY_LEN(focusable_widgets); i++) {
+        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(focusable_widgets)[i]));
     }
     gtk_container_set_focus_chain(_SELF(self), glist);
     g_list_free(glist);

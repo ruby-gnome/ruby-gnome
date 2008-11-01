@@ -58,7 +58,7 @@ curve_set_vector(self, length, vector)
 
     c_vec = ALLOCA_N(gfloat, len);
     for (i = 0; i < len; i++)
-      c_vec[i] = NUM2DBL(RARRAY(vector)->ptr[i]);
+      c_vec[i] = NUM2DBL(RARRAY_PTR(vector)[i]);
 
     gtk_curve_set_vector(GTK_CURVE(RVAL2GOBJ(self)), len, c_vec);
 

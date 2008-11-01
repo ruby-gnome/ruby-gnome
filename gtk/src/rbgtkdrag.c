@@ -27,7 +27,7 @@ rbgtk_get_target_entry(targets)
     if (NIL_P(targets)) return NULL;
     Check_Type(targets, T_ARRAY);
     
-    n_targets = RARRAY(targets)->len;
+    n_targets = RARRAY_LEN(targets);
     entries = ALLOC_N(GtkTargetEntry, n_targets);
     
     for (i = 0; i < n_targets; i++) {
@@ -52,7 +52,7 @@ gtkdrag_dest_set(self, widget, flags, targets, actions)
     int num;
     GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
     if (entries){
-        num = RARRAY(targets)->len;
+        num = RARRAY_LEN(targets);
         
         gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
                           entries, 
@@ -283,7 +283,7 @@ gtkdrag_source_set(self, widget, flags, targets, actions)
 {
     gtk_drag_source_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
                         rbgtk_get_target_entry(targets), 
-                        RARRAY(targets)->len, 
+                        RARRAY_LEN(targets), 
                         RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
     return self;
 }

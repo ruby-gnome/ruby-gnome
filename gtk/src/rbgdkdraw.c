@@ -93,18 +93,18 @@ gdkdraw_draw_points(self, gc, pnts)
     int i;
 
     Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
-    for (i=0; i<RARRAY(pnts)->len; i++) {
-        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
+    for (i = 0; i < RARRAY_LEN(pnts); i++) {
+        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
             rb_raise(rb_eArgError, "point %d should be array of size 2", i);
         }
-        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
+        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
     }
     gdk_draw_points(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                     points,
-                    RARRAY(pnts)->len);
+                    RARRAY_LEN(pnts));
     return self;
 }
 
@@ -126,18 +126,18 @@ gdkdraw_draw_lines(self, gc, pnts)
     int i;
 
     Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
-    for (i=0; i<RARRAY(pnts)->len; i++) {
-        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
+    for (i = 0; i < RARRAY_LEN(pnts); i++) {
+        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
             rb_raise(rb_eArgError, "point %d should be array of size 2", i);
         }
-        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
+        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
     }
     gdk_draw_lines(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                    points,
-                   RARRAY(pnts)->len);
+                   RARRAY_LEN(pnts));
     return self;
 }
 
@@ -168,19 +168,19 @@ gdkdraw_draw_segs(self, gc, segs)
     int i;
 
     Check_Type(segs, T_ARRAY);
-    segments = ALLOCA_N(GdkSegment,RARRAY(segs)->len);
-    for (i=0; i<RARRAY(segs)->len; i++) {
-        Check_Type(RARRAY(segs)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(segs)->ptr[i])->len < 4) {
+    segments = ALLOCA_N(GdkSegment,RARRAY_LEN(segs));
+    for (i = 0; i < RARRAY_LEN(segs); i++) {
+        Check_Type(RARRAY_PTR(segs)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(segs)[i]) < 4) {
             rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
         }
-        segments[i].x1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[0]);
-        segments[i].y1 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[1]);
-        segments[i].x2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[2]);
-        segments[i].y2 = NUM2INT(RARRAY(RARRAY(segs)->ptr[i])->ptr[3]);
+        segments[i].x1 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[0]);
+        segments[i].y1 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[1]);
+        segments[i].x2 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[2]);
+        segments[i].y2 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[3]);
     }
     gdk_draw_segments(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                      segments, RARRAY(segs)->len);
+                      segments, RARRAY_LEN(segs));
     return self;
 }
 
@@ -215,19 +215,19 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
     int i;
 
     Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY(pnts)->len);
-    for (i=0; i<RARRAY(pnts)->len; i++) {
-        Check_Type(RARRAY(pnts)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(pnts)->ptr[i])->len < 2) {
+    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
+    for (i = 0; i < RARRAY_LEN(pnts); i++) {
+        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
             rb_raise(rb_eArgError, "point %d should be array of size 2", i);
         }
-        points[i].x = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[0]);
-        points[i].y = NUM2INT(RARRAY(RARRAY(pnts)->ptr[i])->ptr[1]);
+        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
+        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
     }
     gdk_draw_polygon(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                      RVAL2CBOOL(filled),
                      points,
-                     RARRAY(pnts)->len);
+                     RARRAY_LEN(pnts));
     return self;
 }
 
@@ -244,20 +244,20 @@ gdkdraw_draw_trapezoids(self, gc, trapezoids)
 
     Check_Type(trapezoids, T_ARRAY);
 
-    len = RARRAY(trapezoids)->len;
+    len = RARRAY_LEN(trapezoids);
 
     gtrapezoids = ALLOCA_N(GdkTrapezoid, len);
     for (i = 0; i < len; i++) {
-        Check_Type(RARRAY(trapezoids)->ptr[i], T_ARRAY);
-        if (RARRAY(RARRAY(trapezoids)->ptr[i])->len < 6) {
+        Check_Type(RARRAY_PTR(trapezoids)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(trapezoids)[i]) < 6) {
             rb_raise(rb_eArgError, "trapezoids %d should be array of size 6", i);
         }
-        gtrapezoids[i].y1 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[0]);
-        gtrapezoids[i].x11 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[1]);
-        gtrapezoids[i].x21 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[2]);
-        gtrapezoids[i].y2 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[3]);
-        gtrapezoids[i].x12 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[4]);
-        gtrapezoids[i].x22 = NUM2DBL(RARRAY(RARRAY(trapezoids)->ptr[i])->ptr[5]);
+        gtrapezoids[i].y1 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[0]);
+        gtrapezoids[i].x11 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[1]);
+        gtrapezoids[i].x21 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[2]);
+        gtrapezoids[i].y2 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[3]);
+        gtrapezoids[i].x12 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[4]);
+        gtrapezoids[i].x22 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[5]);
     }
     gdk_draw_trapezoids(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), gtrapezoids, len);
     return self; 

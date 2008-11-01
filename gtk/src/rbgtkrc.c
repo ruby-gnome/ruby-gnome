@@ -132,11 +132,11 @@ rc_set_default_files(self, filenames)
     VALUE self, filenames;
 {
     int i;
-    gchar** gfiles = g_new(gchar*, RARRAY(filenames)->len + 1);
-    for (i = 0; i < RARRAY(filenames)->len; i++) {
-        gfiles[i] = RVAL2CSTR(RARRAY(filenames)->ptr[i]);
+    gchar** gfiles = g_new(gchar*, RARRAY_LEN(filenames) + 1);
+    for (i = 0; i < RARRAY_LEN(filenames); i++) {
+        gfiles[i] = RVAL2CSTR(RARRAY_PTR(filenames)[i]);
     }
-    gfiles[RARRAY(filenames)->len] = NULL;
+    gfiles[RARRAY_LEN(filenames)] = NULL;
     gtk_rc_set_default_files(gfiles);
     return filenames;
 }

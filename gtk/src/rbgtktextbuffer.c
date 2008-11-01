@@ -739,13 +739,11 @@ txt_insert(argc, argv, self)
     VALUE self;
 {
     VALUE where, value, tags;
-    struct RArray *tarray;
     gint start_offset;
     GtkTextIter start;
     int i;
 
     rb_scan_args(argc, argv, "2*", &where, &value, &tags);
-    tarray = RARRAY(tags);
 
     G_CHILD_ADD(self, where);
     G_CHILD_ADD(self, value);
@@ -761,22 +759,24 @@ txt_insert(argc, argv, self)
         gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where),
                                RVAL2CSTR(value), RSTRING_LEN(value));
         
-        if(tarray->len == 0)
+        if (RARRAY_LEN(tags) == 0)
             return self;
 
         G_CHILD_ADD(self, tags);
         
         gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
         
-        for(i=0; i<tarray->len; i++) {
+        for(i = 0; i < RARRAY_LEN(tags); i++) {
             GtkTextTag *tag;
             
-            if (rb_obj_is_kind_of(tarray->ptr[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
-                tag = RVAL2GOBJ(tarray->ptr[i]);
+            if (rb_obj_is_kind_of(RARRAY_PTR(tags)[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
+                tag = RVAL2GOBJ(RARRAY_PTR(tags)[i]);
             } else {
-                tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table, RVAL2CSTR(tarray->ptr[i]));
+                tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table,
+						RVAL2CSTR(RARRAY_PTR(tags)[i]));
                 if (tag == NULL) {
-                    g_warning ("%s: no tag with name '%s'!", G_STRLOC, RVAL2CSTR(tarray->ptr[i]));
+                    g_warning ("%s: no tag with name '%s'!",
+			       G_STRLOC, RVAL2CSTR(RARRAY_PTR(tags)[i]));
                     return self;
                 }
             }

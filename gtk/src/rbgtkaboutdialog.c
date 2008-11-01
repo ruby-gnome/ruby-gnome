@@ -129,34 +129,34 @@ aboutdialog_s_show_about_dialog(self, parent, props)
 
     ary = rb_funcall(props, rb_intern("to_a"), 0);
     
-    if (RARRAY(ary)->len > ABOUT_PROP_NUM)
+    if (RARRAY_LEN(ary) > ABOUT_PROP_NUM)
         rb_raise(rb_eArgError, "Too many args.");
 
     for (i = 0; i < ABOUT_PROP_NUM; i++){
         pd[i].name = (const char*)NULL;
         pd[i].value = (gpointer)NULL;
     }
-    for (i = 0; i < RARRAY(ary)->len; i++){
-        if (TYPE(RARRAY(RARRAY(ary)->ptr[i])->ptr[0]) == T_SYMBOL){
-            pd[i].name = rb_id2name(SYM2ID(RARRAY(RARRAY(ary)->ptr[i])->ptr[0]));
+    for (i = 0; i < RARRAY_LEN(ary); i++){
+        if (TYPE(RARRAY_PTR(RARRAY_PTR(ary)[i])[0]) == T_SYMBOL){
+            pd[i].name = rb_id2name(SYM2ID(RARRAY_PTR(RARRAY_PTR(ary)[i])[0]));
         } else {
-            pd[i].name = RVAL2CSTR(RARRAY(RARRAY(ary)->ptr[i])->ptr[0]);
+            pd[i].name = RVAL2CSTR(RARRAY_PTR(RARRAY_PTR(ary)[i])[0]);
         }
         if (strncmp(pd[i].name, "artists", strlen("artists")) == 0||
             strncmp(pd[i].name, "authors", strlen("authors")) == 0||
             strncmp(pd[i].name, "documenters", strlen("documenters")) == 0){
             GValue gval = {0,};
             g_value_init(&gval, G_TYPE_STRV);
-            rbgobj_rvalue_to_gvalue(RARRAY(RARRAY(ary)->ptr[i])->ptr[1], &gval);
+            rbgobj_rvalue_to_gvalue(RARRAY_PTR(RARRAY_PTR(ary)[i])[1], &gval);
 
             pd[i].value = g_boxed_copy(G_TYPE_STRV, g_value_get_boxed(&gval));
-        } else if (strncmp(pd[i].name, "logo", strlen("logo")) == 0 && 
+        } else if (strncmp(pd[i].name, "logo", strlen("logo")) == 0 &&
                    strlen(pd[i].name) == strlen("logo")){
-            pd[i].value = g_object_ref(RVAL2GOBJ(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
+            pd[i].value = g_object_ref(RVAL2GOBJ(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]));
         } else if (strncmp(pd[i].name, "wrap_license", strlen("wrap_license")) == 0){
-            pd[i].value = GINT_TO_POINTER(RVAL2CBOOL(RARRAY(ary)->ptr[i]));
+            pd[i].value = GINT_TO_POINTER(RVAL2CBOOL(RARRAY_PTR(ary)[i]));
         } else {
-            pd[i].value = g_strdup(RVAL2CSTR(RARRAY(RARRAY(ary)->ptr[i])->ptr[1]));
+            pd[i].value = g_strdup(RVAL2CSTR(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]));
         }
     }
 

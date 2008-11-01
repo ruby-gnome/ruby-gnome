@@ -131,8 +131,8 @@ array_to_values(VALUE array, VALUE iter, GtkTreeModel *model,
         g_columns[i] = i;
         g_type = gtk_tree_model_get_column_type(model, i);
         g_value_init(&g_values[i], g_type);
-        rbgobj_rvalue_to_gvalue(RARRAY(array)->ptr[i], &g_values[i]);
-        G_CHILD_ADD(iter, RARRAY(array)->ptr[i]);
+        rbgobj_rvalue_to_gvalue(RARRAY_PTR(array)[i], &g_values[i]);
+        G_CHILD_ADD(iter, RARRAY_PTR(array)[i]);
     }
 }
 
@@ -225,18 +225,18 @@ lstore_insert(argc, argv, self)
         GValue* gvalues;
         VALUE ary = rb_funcall(values, id_to_a, 0);
 
-        n_values = RARRAY(ary)->len;
+        n_values = RARRAY_LEN(ary);
         
         gvalues = g_new(GValue, n_values);
         columns = g_new(gint, n_values);
         
         for (cnt = 0; cnt < n_values; cnt++) {
-            Check_Type(RARRAY(RARRAY(ary)->ptr[cnt]), T_ARRAY);
-            columns[cnt] = NUM2INT(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[1]);
+            Check_Type(RARRAY_PTR(ary)[cnt], T_ARRAY);
+            columns[cnt] = NUM2INT(RARRAY_PTR(RARRAY_PTR(ary)[cnt])[1]);
             gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(store), columns[cnt]);
             gvalues[cnt].g_type = 0;
             g_value_init(&gvalues[cnt], gtype);
-            rbgobj_rvalue_to_gvalue(RARRAY(RARRAY(ary)->ptr[cnt])->ptr[0], &gvalues[cnt]);
+            rbgobj_rvalue_to_gvalue(RARRAY_PTR(RARRAY_PTR(ary)[cnt])[0], &gvalues[cnt]);
         }
         
         gtk_list_store_insert_with_valuesv(store, &iter, NUM2INT(position),
@@ -342,11 +342,11 @@ lstore_reorder(self, new_order)
     VALUE self, new_order;
 {
     gint i;
-    gint len = RARRAY(new_order)->len;
+    gint len = RARRAY_LEN(new_order);
     gint* gnew_order = g_new(gint, len);
 
     for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
+        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
     }
 
     gtk_list_store_reorder(_SELF(self), gnew_order);

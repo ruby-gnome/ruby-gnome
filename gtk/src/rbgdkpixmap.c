@@ -76,9 +76,9 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
     gchar **buf;
 
     Check_Type(data, T_ARRAY);
-    buf = ALLOCA_N(char*, RARRAY(data)->len);
-    for (i=0; i < RARRAY(data)->len; i++) {
-        buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
+    buf = ALLOCA_N(char*, RARRAY_LEN(data));
+    for (i=0; i < RARRAY_LEN(data); i++) {
+        buf[i] = RVAL2CSTR(RARRAY_PTR(data)[i]);
     }
     new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
 				       &mask, RVAL2GDKCOLOR(tcolor), buf);
@@ -113,9 +113,9 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
     gchar **buf;
 
     Check_Type(data, T_ARRAY);
-    buf = ALLOCA_N(char*, RARRAY(data)->len);
-    for (i=0; i<RARRAY(data)->len; i++) {
-	buf[i] = RVAL2CSTR(RARRAY(data)->ptr[i]);
+    buf = ALLOCA_N(char*, RARRAY_LEN(data));
+    for (i=0; i<RARRAY_LEN(data); i++) {
+	buf[i] = RVAL2CSTR(RARRAY_PTR(data)[i]);
     }
 
     new = gdk_pixmap_colormap_create_from_xpm_d(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),

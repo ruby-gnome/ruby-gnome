@@ -24,8 +24,8 @@ ary2gslist(ary)
 
     if (NIL_P(ary)) return NULL;
     Check_Type(ary, T_ARRAY);
-    for (i=0; i<RARRAY(ary)->len; i++) {
-        glist = g_slist_append(glist,RVAL2GOBJ(RARRAY(ary)->ptr[i]));
+    for (i=0; i<RARRAY_LEN(ary); i++) {
+        glist = g_slist_append(glist,RVAL2GOBJ(RARRAY_PTR(ary)[i]));
     }
 
     return glist;

@@ -38,12 +38,12 @@ rbgtk_dialog_add_buttons_internal(self, button_ary)
 {
     int i;
     GObject* obj = RVAL2GOBJ(self);
-    if (RARRAY(button_ary)->ptr[0] != Qnil){
+    if (RARRAY_PTR(button_ary)[0] != Qnil){
         g_object_freeze_notify(obj);
-        for (i = 0; i < RARRAY(button_ary)->len; i++) {
-            Check_Type(RARRAY(RARRAY(button_ary)->ptr[i]), T_ARRAY);
-            dialog_add_button(self, RARRAY(RARRAY(button_ary)->ptr[i])->ptr[0],
-                              RARRAY(RARRAY(button_ary)->ptr[i])->ptr[1]);
+        for (i = 0; i < RARRAY_LEN(button_ary); i++) {
+            Check_Type(RARRAY_PTR(button_ary)[i], T_ARRAY);
+            dialog_add_button(self, RARRAY_PTR(RARRAY_PTR(button_ary)[i])[0],
+                              RARRAY_PTR(RARRAY_PTR(button_ary)[i])[1]);
         }
         g_object_thaw_notify(obj);
     }
@@ -165,11 +165,11 @@ dialog_set_alternative_button_order(self, new_order)
     VALUE self, new_order;
 {
     gint i;
-    gint len = RARRAY(new_order)->len;
+    gint len = RARRAY_LEN(new_order);
     gint* gnew_order = g_new(gint, len);
 
     for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
+        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
     }
 
     gtk_dialog_set_alternative_button_order_from_array(_SELF(self), len, gnew_order);

@@ -102,7 +102,7 @@ clipboard_set(self, targets)
     G_RELATIVE(self, func);
     return CBOOL2RVAL(gtk_clipboard_set_with_data(_SELF(self), 
                                                   gtargets,
-                                                  RARRAY(targets)->len,
+                                                  RARRAY_LEN(targets),
                                                   (GtkClipboardGetFunc)clipboard_get_func,
                                                   (GtkClipboardClearFunc)NULL,
                                                   (gpointer)func));
@@ -401,7 +401,7 @@ clipboard_set_can_store(self, targets)
     GtkTargetEntry* entries = (GtkTargetEntry*)NULL;
 
     if (!NIL_P(targets)){
-        n_targets = RARRAY(targets)->len;
+        n_targets = RARRAY_LEN(targets);
         entries = rbgtk_get_target_entry(targets);
     }
     gtk_clipboard_set_can_store(_SELF(self), entries, n_targets);

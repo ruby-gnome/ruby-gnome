@@ -579,8 +579,8 @@ gwin_s_set_default_icon_list(self, list)
     int i;
     GList *glist = NULL;
     Check_Type(list, T_ARRAY);
-    for (i = 0; i < RARRAY(list)->len; i++){
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY(list)->ptr[i]));
+    for (i = 0; i < RARRAY_LEN(list); i++){
+        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(list)[i]));
     }
     gtk_window_set_default_icon_list(glist);
     g_list_free(glist);
@@ -647,8 +647,8 @@ gwin_set_icon_list(self, list)
     int i;
     GList *glist = NULL;
     Check_Type(list, T_ARRAY);
-    for (i = 0; i < RARRAY(list)->len; i++){
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY(list)->ptr[i]));
+    for (i = 0; i < RARRAY_LEN(list); i++){
+        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(list)[i]));
     }
     gtk_window_set_icon_list(_SELF(self), glist);
     g_list_free(glist);

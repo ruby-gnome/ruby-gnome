@@ -509,13 +509,13 @@ ps_set_page_ranges(VALUE self, VALUE rb_page_ranges)
     GtkPageRange *page_ranges;
     gint i, num_ranges;
 
-    num_ranges = RARRAY(rb_page_ranges)->len;
+    num_ranges = RARRAY_LEN(rb_page_ranges);
     page_ranges = ALLOCA_N(GtkPageRange, num_ranges);
     for (i = 0; i < num_ranges; i++) {
         VALUE page_range;
-        page_range = RARRAY(rb_page_ranges)->ptr[i];
-        page_ranges[i].start = NUM2INT(RARRAY(page_range)->ptr[0]);
-        page_ranges[i].end = NUM2INT(RARRAY(page_range)->ptr[1]);
+        page_range = RARRAY_PTR(rb_page_ranges)[i];
+        page_ranges[i].start = NUM2INT(RARRAY_PTR(page_range)[0]);
+        page_ranges[i].end = NUM2INT(RARRAY_PTR(page_range)[1]);
     }
     gtk_print_settings_set_page_ranges(_SELF(self), page_ranges, num_ranges);
     return self;

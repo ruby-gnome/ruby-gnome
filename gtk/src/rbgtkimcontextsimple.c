@@ -25,10 +25,10 @@ imcsimple_add_table(self, data, max_seq_len, n_seqs)
     VALUE self, data, max_seq_len, n_seqs;
 {
     int i;
-    guint16* gdata = ALLOCA_N(guint16, RARRAY(data)->len);
+    guint16* gdata = ALLOCA_N(guint16, RARRAY_LEN(data));
     
-    for (i = 0; i < RARRAY(data)->len; i++) {
-        gdata[i] = NUM2INT(RARRAY(data)->ptr[i]);
+    for (i = 0; i < RARRAY_LEN(data); i++) {
+        gdata[i] = NUM2INT(RARRAY_PTR(data)[i]);
     }
     
     gtk_im_context_simple_add_table(_SELF(self), gdata,

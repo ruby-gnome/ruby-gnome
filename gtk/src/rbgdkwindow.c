@@ -714,8 +714,8 @@ gdkwin_set_icon_list(self, pixbufs)
     GList *glist = NULL;
 
     Check_Type(pixbufs, T_ARRAY);
-    for (i = 0; i < RARRAY(pixbufs)->len; i++) {
-        glist = g_list_append(glist, GDK_PIXBUF(RVAL2GOBJ(RARRAY(pixbufs)->ptr[i])));
+    for (i = 0; i < RARRAY_LEN(pixbufs); i++) {
+        glist = g_list_append(glist, GDK_PIXBUF(RVAL2GOBJ(RARRAY_PTR(pixbufs)[i])));
     }
 
     gdk_window_set_icon_list(_SELF(self), glist);

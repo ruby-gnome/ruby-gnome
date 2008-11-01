@@ -169,11 +169,11 @@ treemodel_rows_reordered(self, path, iter, new_orders)
 
     Check_Type(new_orders, T_ARRAY);
 
-    len = RARRAY(new_orders)->len;
+    len = RARRAY_LEN(new_orders);
     orders = ALLOCA_N(gint, len);
 
     for (i = 0; i < len; i++) {
-        orders[i] = RARRAY(new_orders)->ptr[i];
+        orders[i] = RARRAY_PTR(new_orders)[i];
     }
   
     gtk_tree_model_rows_reordered(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter), orders);

@@ -50,13 +50,13 @@ raction_set_group(self, group)
     GSList *glist = NULL;
 
     if (TYPE(group) == T_ARRAY){
-        for (i = 0; i < RARRAY(group)->len; i++) {
-            glist = g_slist_append(glist, RVAL2GOBJ(RARRAY(group)->ptr[i]));
+        for (i = 0; i < RARRAY_LEN(group); i++) {
+            glist = g_slist_append(glist, RVAL2GOBJ(RARRAY_PTR(group)[i]));
         }
         gtk_radio_action_set_group(_SELF(group), glist);
         g_slist_free(glist);
     } else {
-        glist = gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(group))); 
+        glist = gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(group)));
         gtk_radio_action_set_group(_SELF(group), glist);
     }
     return self;

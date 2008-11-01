@@ -67,11 +67,11 @@ menu_pos_func(menu, px, py, push_in, data)
                            INT2FIX(*px), INT2FIX(*py), 
                            CBOOL2RVAL(*push_in));
 
-    if (TYPE(arr) == T_ARRAY && (RARRAY(arr)->len == 2 || RARRAY(arr)->len == 3)){
-        *px = NUM2INT(RARRAY(arr)->ptr[0]);
-        *py = NUM2INT(RARRAY(arr)->ptr[1]);
-        if (RARRAY(arr)->len == 3)
-            *push_in = RVAL2CBOOL(RARRAY(arr)->ptr[2]);
+    if (TYPE(arr) == T_ARRAY && (RARRAY_LEN(arr) == 2 || RARRAY_LEN(arr) == 3)){
+        *px = NUM2INT(RARRAY_PTR(arr)[0]);
+        *py = NUM2INT(RARRAY_PTR(arr)[1]);
+        if (RARRAY_LEN(arr) == 3)
+            *push_in = RVAL2CBOOL(RARRAY_PTR(arr)[2]);
     } else {
         rb_raise(rb_eArgError, "block should return [x, y, push_in]"); 
     } 

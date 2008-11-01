@@ -133,11 +133,11 @@ treerowref_s_reordered(self, proxy, path, iter, new_orders)
 
     Check_Type(new_orders, T_ARRAY);
 
-    len = RARRAY(new_orders)->len;
+    len = RARRAY_LEN(new_orders);
     orders = ALLOCA_N(gint, len);
 
     for (i = 0; i < len; i++) {
-        orders[i] = RARRAY(new_orders)->ptr[i];
+        orders[i] = RARRAY_PTR(new_orders)[i];
     }
   
     gtk_tree_row_reference_reordered(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path), 

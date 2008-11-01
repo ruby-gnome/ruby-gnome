@@ -310,11 +310,11 @@ tstore_reorder(self, parent, new_order)
     VALUE self, parent, new_order;
 {
     gint i;
-    gint len = RARRAY(new_order)->len;
+    gint len = RARRAY_LEN(new_order);
     gint* gnew_order = g_new(gint, len);
 
     for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY(new_order)->ptr[i]);
+        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
     }
 
     gtk_tree_store_reorder(_SELF(self), RVAL2GTKTREEITER(parent), gnew_order);
