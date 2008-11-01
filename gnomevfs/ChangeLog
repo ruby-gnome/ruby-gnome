@@ -1,3 +1,7 @@
+2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/: use RARRAY_PTR() and RARRAY_LEN().
+
 2007-07-25  Sjoerd Simons  <sjoerd@luon.net>
 
 	* src/gnomevfs-monitor.c: Use GENUM2RVAL instead of RVAL2GENUM to

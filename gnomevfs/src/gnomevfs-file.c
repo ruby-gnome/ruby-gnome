@@ -156,7 +156,7 @@ apply_set_info(paths, info, mask)
   GnomeVFSResult result;
 
   Check_Type(paths, T_ARRAY);
-  for (i = 0, n = RARRAY(paths)->len; i < n; i++) {
+  for (i = 0, n = RARRAY_LEN(paths); i < n; i++) {
     path = rb_ary_entry(paths, i);
     if (RVAL2CBOOL(rb_obj_is_kind_of(path, g_gvfs_uri))) {
       result = GVFSRESULT2RVAL(

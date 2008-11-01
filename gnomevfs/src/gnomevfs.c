@@ -57,7 +57,7 @@ strary2glist(ary)
 	int i = 0;
 
 	Check_Type(ary, T_ARRAY);
-	for (i = 0; i < RARRAY(ary)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(ary); i++) {
 		str = rb_ary_entry(ary, i);
 		Check_Type(str, T_STRING);
 		list = g_list_append(list, RVAL2CSTR(str));
