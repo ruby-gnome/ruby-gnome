@@ -66,11 +66,11 @@ slm_set_search_path (self, dirs)
 
     if (! NIL_P(dirs)){
         Check_Type(dirs, T_ARRAY);
-        i = RARRAY(dirs)->len;
+        i = RARRAY_LEN(dirs);
         gdirs = ALLOCA_N(gchar*, i + 1);
         for (i = 0; i < i; i++) {
-            if (TYPE(RARRAY(dirs)->ptr[i]) == T_STRING) {
-                gdirs[i] = RVAL2CSTR(RARRAY(dirs)->ptr[i]);
+            if (TYPE(RARRAY_PTR(dirs)[i]) == T_STRING) {
+                gdirs[i] = RVAL2CSTR(RARRAY_PTR(dirs)[i]);
             }
             else {
                 gdirs[i] = "";
