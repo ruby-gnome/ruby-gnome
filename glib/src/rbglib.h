@@ -35,6 +35,10 @@ extern "C" {
 #  define RARRAY_LEN(s) (RARRAY(s)->len)
 #endif
 
+#ifndef DBL2NUM
+#  define DBL2NUM(v)      (rb_float_new(v))
+#endif
+
 #if ! GLIB_CHECK_VERSION(2,4,0)
 typedef int GPid;
 #endif

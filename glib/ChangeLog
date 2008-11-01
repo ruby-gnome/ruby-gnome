@@ -1,5 +1,7 @@
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (DBL2NUM): define.
+
 	* src/: use RARRAY_PTR(), RARRAY_LEN() and RSTRING_LEN().
 
 2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
