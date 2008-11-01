@@ -25,8 +25,8 @@ rpango_reorder_items(self, logical_items)
 
     Check_Type(logical_items, T_ARRAY);
 
-    for (i = 0; i < RARRAY(logical_items)->len; i++){
-        glist = g_list_append(glist, RVAL2BOXED(RARRAY(logical_items)->ptr[i], PANGO_TYPE_ITEM));
+    for (i = 0; i < RARRAY_LEN(logical_items); i++){
+        glist = g_list_append(glist, RVAL2BOXED(RARRAY_PTR(logical_items)[i], PANGO_TYPE_ITEM));
     }
 
     ret = pango_reorder_items(glist);

@@ -146,11 +146,11 @@ ana_set_extra_attrs(self, attrs)
     VALUE self, attrs;
 {
     gint i;
-    gint len = RARRAY(attrs)->len;
+    gint len = RARRAY_LEN(attrs);
     GSList* gattrs = NULL;
 
     for (i = 0; i < len; i++){
-        gattrs = g_slist_append(gattrs, RVAL2ATTR(RARRAY(attrs)->ptr[i]));
+        gattrs = g_slist_append(gattrs, RVAL2ATTR(RARRAY_PTR(attrs)[i]));
     }
 
     _SELF(self)->extra_attrs = gattrs;

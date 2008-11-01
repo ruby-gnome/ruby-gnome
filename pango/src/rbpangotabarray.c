@@ -30,10 +30,10 @@ rtab_initialize(argc, argv, self)
     G_INITIALIZE(self, array);
 
     if (! NIL_P(attr_ary)){
-        for (i = 0; i < RARRAY(attr_ary)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(attr_ary); i++) {
             pango_tab_array_set_tab(array, i, 
-                                    RVAL2GENUM(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[0], PANGO_TYPE_TAB_ALIGN),
-                                    FIX2INT(RARRAY(RARRAY(attr_ary)->ptr[i])->ptr[1]));
+                                    RVAL2GENUM(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[0], PANGO_TYPE_TAB_ALIGN),
+                                    FIX2INT(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[1]));
         }
     }
      

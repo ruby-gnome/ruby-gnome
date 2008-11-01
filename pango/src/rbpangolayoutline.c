@@ -178,10 +178,10 @@ layout_line_set_runs(self, ary)
     int i, len;
     GSList* list = NULL;
 
-    len = RARRAY(ary)->len;
+    len = RARRAY_LEN(ary);
 
     for (i = 0; i < len; i++) {
-        list = g_slist_append(list, RVAL2BOXED(RARRAY(ary)->ptr[i], 
+        list = g_slist_append(list, RVAL2BOXED(RARRAY_PTR(ary)[i], 
                                                PANGO_TYPE_GLYPH_ITEM));
     }
 
