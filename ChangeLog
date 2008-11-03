@@ -1,3 +1,8 @@
+2008-11-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/Poppler: removed 0.6.x support. 0.8.0 or later is
+	required.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add an entry for '#2195432: Gtk::RCStyle.set_color_flags

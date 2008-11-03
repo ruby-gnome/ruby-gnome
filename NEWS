@@ -20,6 +20,10 @@ Ruby/GTK2:
     * #2195432: Gtk::RCStyle.set_color_flags wrong conversion
       [Jesse van den Kieboom, Kouhei Sutou]
 
+Ruby/Popper:
+  * removed 0.6.x support. 0.8.0 or later is required.
+    [Kouhei Sutou]
+
 === Thanks
 
   * kimura wataru
