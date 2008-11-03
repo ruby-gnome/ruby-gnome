@@ -15,38 +15,18 @@
 #ifndef _RBGTK_H
 #define _RBGTK_H
 
-#include "ruby.h"
-#include "rbgobject.h"
+#include <rbgobject.h>
+#include <rbgtkmacros.h>
 #include <gtk/gtk.h>
-#include "rbgtkconversions.h"
-
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
+#include <rbgdk.h>
+#include <rbgtkconversions.h>
 
 #include <signal.h>
 
-#define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
-#define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
-#define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
-
 #define RubyGtkContainerHookModule "RubyGtkContainerHook__"
-
-#define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
-
-#define GEV2RVAL(ev) (make_gdkevent(ev))
-#define RVAL2GEV(ev) (get_gdkevent(ev))
-#define RVAL2ATOM(atom) (get_gdkatom(atom))
-
 
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, GTK_OBJECT(gtkobj)))
-
-#define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
-#define GDK_TYPE_REGION (gdk_region_get_type())
-#define GDK_TYPE_ATOM (gdk_atom_get_type())
-#define GDK_TYPE_WINDOW_ATTR (gdk_windowattr_get_type())
-#define GDK_TYPE_TIME_COORD (gdk_timecoord_get_type())
 
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
@@ -60,18 +40,7 @@ extern GType gtk_target_list_get_type();
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 #endif
 
-#if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
-#  ifdef RUBY_GTK2_COMPILATION
-#    define RUBY_GTK2_VAR __declspec(dllexport)
-#  else
-#    define RUBY_GTK2_VAR extern __declspec(dllimport)
-#  endif
-#else
-#  define RUBY_GTK2_VAR extern
-#endif
-
 RUBY_GTK2_VAR VALUE mGtk;
-RUBY_GTK2_VAR VALUE mGdk;
 
 /*
  * for gtk2.0/gtk2.2
@@ -144,22 +113,5 @@ extern void rbgtkcontainer_register_child_property_getter(GType gtype,
  * Dialog
  */
 extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
-
-/*
- * for gdk
- */
-typedef struct {
-    GdkAtom atom;
-} GdkAtomData;
-
-extern GType gdk_windowattr_get_type(void);
-extern GType gdk_atom_get_type(void);
-extern GType gdk_geometry_get_type(void);
-extern GType gdk_region_get_type(void);
-extern GType gdk_timecoord_get_type(void);
-
-extern GdkAtom get_gdkatom(VALUE atom);
-extern VALUE make_gdkevent(GdkEvent* event);
-extern GdkEvent* get_gdkevent(VALUE event);
 
 #endif /* _RBGTK_H */

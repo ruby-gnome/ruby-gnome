@@ -16,6 +16,8 @@
 
 #define _SELF(c) (RVAL2GDKCOLOR(c))
 
+VALUE rb_cGdkColor = Qnil;
+
 static VALUE
 gdkcolor_initialize(self, red, green, blue)
     VALUE self;
@@ -127,23 +129,23 @@ gdkcolor_to_string(VALUE self, VALUE other)
 void
 Init_gtk_gdk_color()
 {
-    VALUE gdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
+    rb_cGdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
-    rb_define_singleton_method(gdkColor, "parse", gdkcolor_s_parse, 1);
-    rb_define_method(gdkColor, "initialize", gdkcolor_initialize, 3);
-    rb_define_method(gdkColor, "pixel", gdkcolor_pixel, 0);
-    rb_define_method(gdkColor, "red", gdkcolor_red, 0);
-    rb_define_method(gdkColor, "set_red", gdkcolor_set_red, 1);
-    rb_define_method(gdkColor, "green", gdkcolor_green, 0);
-    rb_define_method(gdkColor, "set_green", gdkcolor_set_green, 1);
-    rb_define_method(gdkColor, "blue", gdkcolor_blue, 0);
-    rb_define_method(gdkColor, "set_blue", gdkcolor_set_blue, 1);
-    rb_define_method(gdkColor, "to_a", gdkcolor_to_a, 0);
-    rb_define_method(gdkColor, "==", gdkcolor_equal, 1);
+    rb_define_singleton_method(rb_cGdkColor, "parse", gdkcolor_s_parse, 1);
+    rb_define_method(rb_cGdkColor, "initialize", gdkcolor_initialize, 3);
+    rb_define_method(rb_cGdkColor, "pixel", gdkcolor_pixel, 0);
+    rb_define_method(rb_cGdkColor, "red", gdkcolor_red, 0);
+    rb_define_method(rb_cGdkColor, "set_red", gdkcolor_set_red, 1);
+    rb_define_method(rb_cGdkColor, "green", gdkcolor_green, 0);
+    rb_define_method(rb_cGdkColor, "set_green", gdkcolor_set_green, 1);
+    rb_define_method(rb_cGdkColor, "blue", gdkcolor_blue, 0);
+    rb_define_method(rb_cGdkColor, "set_blue", gdkcolor_set_blue, 1);
+    rb_define_method(rb_cGdkColor, "to_a", gdkcolor_to_a, 0);
+    rb_define_method(rb_cGdkColor, "==", gdkcolor_equal, 1);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gdkColor, "to_s", gdkcolor_to_string, 0);
+    rb_define_method(rb_cGdkColor, "to_s", gdkcolor_to_string, 0);
 #endif
 
-    G_DEF_SETTERS(gdkColor);
+    G_DEF_SETTERS(rb_cGdkColor);
 }
 

@@ -1,6 +1,7 @@
 EXPORTS
     Init_gtk2
     mGdk DATA
+    rb_cGdkColor DATA
     mGtk DATA
     exec_callback
     gdk_atom_copy
