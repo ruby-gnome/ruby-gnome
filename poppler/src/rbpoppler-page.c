@@ -18,7 +18,6 @@ extern GType gdk_region_get_type(void);
 
 #define GDK_REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
 #define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
-#define RVAL2GDK_COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))
 
 
 #define SEL_STYLE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_SELECTION_STYLE))
@@ -41,27 +40,23 @@ extern GType gdk_region_get_type(void);
 static VALUE cPSFile, cRectangle;
 
 #ifdef POPPLER_TYPE_COLOR
-extern VALUE mGdk;
 VALUE rb_cPopplerColor;
 
 PopplerColor *
 rb_poppler_ruby_object_to_color(VALUE color)
 {
-    static VALUE rb_cGdkColor = Qnil;
-
-    if (NIL_P(rb_cGdkColor)) {
-	rb_cGdkColor = rb_const_get(mGdk, rb_intern("Color"));
-    }
-
+#ifdef POPPLER_WITH_GDK
     if (RTEST(rb_obj_is_kind_of(color, rb_cGdkColor))) {
 	GdkColor *gdk_color;
-	gdk_color = RVAL2GDK_COLOR(color);
+
+	gdk_color = RVAL2GDKCOLOR(color);
 	color = rb_funcall(rb_cPopplerColor, rb_intern("new"),
 			   3,
 			   UINT2NUM(gdk_color->red),
 			   UINT2NUM(gdk_color->green),
 			   UINT2NUM(gdk_color->blue));
     }
+#endif
 
     return RVAL2BOXED(color, POPPLER_TYPE_COLOR);
 }
@@ -77,6 +72,7 @@ rb_poppler_ruby_object_from_color_with_free(PopplerColor *color)
 }
 #endif
 
+#ifdef POPPLER_WITH_GDK
 static VALUE
 page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
                       VALUE src_height, VALUE scale, VALUE rotation,
@@ -88,6 +84,7 @@ page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
                                   NUM2INT(rotation), RVAL2GOBJ(pixbuf));
     return Qnil;
 }
+#endif
 
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
@@ -119,15 +116,20 @@ page_render_generic(int argc, VALUE *argv, VALUE self)
 #endif
         }
     } else if (argc == 7) {
+#ifdef POPPLER_WITH_GDK
         return page_render_to_pixbuf(self, argv[0], argv[1], argv[2], argv[3],
                                      argv[4], argv[5], argv[6]);
+#else
+	rb_raise(rb_eArgError, "GDK is not available");
+#endif
     } else {
         rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 1 or 7)", argc);
+                 "wrong number of arguments (%d for 1 or 7)",
+		 argc);
     }
 }
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
+#ifdef POPPLER_WITH_GDK
 static VALUE
 page_render_to_pixbuf_for_printing(VALUE self, VALUE src_x, VALUE src_y,
 				   VALUE src_width, VALUE src_height,
@@ -142,6 +144,7 @@ page_render_to_pixbuf_for_printing(VALUE self, VALUE src_x, VALUE src_y,
 					       RVAL2GOBJ(pixbuf));
     return Qnil;
 }
+#endif
 
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
@@ -162,15 +165,18 @@ page_render_for_printing_generic(int argc, VALUE *argv, VALUE self)
 	rb_raise(rb_eArgError, "cairo is not available");
 #endif
     } else if (argc == 7) {
+#ifdef POPPLER_WITH_GDK
         return page_render_to_pixbuf_for_printing(self, argv[0], argv[1],
 						  argv[2], argv[3],
 						  argv[4], argv[5], argv[6]);
+#else
+	rb_raise(rb_eArgError, "GDK is not available");
+#endif
     } else {
         rb_raise(rb_eArgError,
                  "wrong number of arguments (%d for 1 or 7)", argc);
     }
 }
-#endif
 
 #if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
       defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
@@ -187,29 +193,18 @@ page_render_selection(VALUE self, VALUE cairo,
                                   RVAL2POPPLER_RECT(selection),
                                   old_selection,
                                   RVAL2SEL_STYLE(style),
-#if POPPLER_CHECK_VERSION(0, 7, 2)
                                   RVAL2POPPLER_COLOR(glyph_color),
-                                  RVAL2POPPLER_COLOR(background_color)
-#else
-                                  RVAL2GDK_COLOR(glyph_color),
-                                  RVAL2GDK_COLOR(background_color)
-#endif
-	);
+                                  RVAL2POPPLER_COLOR(background_color));
     return Qnil;
 }
 #endif
 
-#ifndef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-#  define poppler_page_render_selection_to_pixbuf poppler_page_render_selection
-#endif
-
+#ifdef POPPLER_WITH_GDK
 static VALUE
 page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
                                 VALUE pixbuf, VALUE selection,
                                 VALUE rb_old_selection,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
                                 VALUE style,
-#endif
                                 VALUE glyph_color, VALUE background_color)
 {
     PopplerRectangle *old_selection = NULL;
@@ -222,45 +217,34 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
                                             RVAL2GOBJ(pixbuf),
                                             RVAL2POPPLER_RECT(selection),
                                             old_selection,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
                                             RVAL2SEL_STYLE(style),
-#endif
-                                            RVAL2GDK_COLOR(glyph_color),
-                                            RVAL2GDK_COLOR(background_color));
+                                            RVAL2GDKCOLOR(glyph_color),
+                                            RVAL2GDKCOLOR(background_color));
     return Qnil;
 }
+#endif
 
 static VALUE
 page_render_selection_generic(int argc, VALUE *argv, VALUE self)
 {
     if (argc == 6) {
-#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
-      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
         return page_render_selection(self, argv[0], argv[1], argv[2],
                                      argv[3], argv[4], argv[5]);
 #else
         rb_raise(rb_eArgError, "cairo is not available");
 #endif
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
     } else if (argc == 8) {
+#ifdef POPPLER_WITH_GDK
         return page_render_selection_to_pixbuf(self, argv[0], argv[1],
                                                argv[2], argv[3], argv[4],
                                                argv[5], argv[6], argv[7]);
 #else
-    } else if (argc == 7) {
-        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
-                                               argv[2], argv[3], argv[4],
-                                               argv[5], argv[6]);
+        rb_raise(rb_eArgError, "GDK is not available");
 #endif
     } else {
         rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 5 or %d)", argc,
-#ifdef HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF
-                 8
-#else
-                 7
-#endif
-                );
+                 "wrong number of arguments (%d for 5 or 8)", argc);
     }
 }
 
@@ -278,7 +262,6 @@ page_get_index(VALUE self)
     return INT2NUM(poppler_page_get_index(SELF(self)));
 }
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_duration(VALUE self)
 {
@@ -290,27 +273,20 @@ page_get_transition(VALUE self)
 {
     return TRANS2RVAL(poppler_page_get_transition(SELF(self)));
 }
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
-#  if RB_POPPLER_CAIRO_AVAILABLE
+#if RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 page_get_thumbnail(VALUE self)
 {
     return CRSURFACE2RVAL(poppler_page_get_thumbnail(SELF(self)));
 }
-#  endif
+#endif
 
+#ifdef POPPLER_WITH_GDK
 static VALUE
 page_get_thumbnail_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(poppler_page_get_thumbnail_pixbuf(SELF(self)));
-}
-#else
-static VALUE
-page_get_thumbnail(VALUE self)
-{
-    return GOBJ2RVAL(poppler_page_get_thumbnail(SELF(self)));
 }
 #endif
 
@@ -336,9 +312,7 @@ static VALUE
 page_get_text(int argc, VALUE *argv, VALUE self)
 {
     gchar *text;
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
-#endif
     VALUE rb_text, arg1, arg2, rb_rect;
     PopplerPage *page;
 
@@ -352,11 +326,9 @@ page_get_text(int argc, VALUE *argv, VALUE self)
             rb_rect = arg2;
         } else {
             rb_rect = Qnil;
-#if POPPLER_CHECK_VERSION(0, 6, 0)
             if (!NIL_P(arg2)) {
                 style = RVAL2SEL_STYLE(arg2);
             }
-#endif
         }
     }
 
@@ -370,15 +342,11 @@ page_get_text(int argc, VALUE *argv, VALUE self)
         rect.x2 = width;
         rect.y2 = height;
         text = poppler_page_get_text(page,
-#if POPPLER_CHECK_VERSION(0, 6, 0)
                                      style,
-#endif
                                      &rect);
     } else {
         text = poppler_page_get_text(page,
-#if POPPLER_CHECK_VERSION(0, 6, 0)
                                      style,
-#endif
                                      RVAL2POPPLER_RECT(rb_rect));
     }
 
@@ -387,7 +355,6 @@ page_get_text(int argc, VALUE *argv, VALUE self)
     return rb_text;
 }
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
 static VALUE
 page_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
 {
@@ -397,36 +364,6 @@ page_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
 							 RVAL2POPPLER_RECT(selection)),
                        POPPLER_TYPE_RECTANGLE);
 }
-#else
-static VALUE
-page_get_selection_region(int argc, VALUE *argv, VALUE self)
-{
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-    PopplerSelectionStyle style = POPPLER_SELECTION_GLYPH;
-#endif
-    GdkRegion *region;
-    VALUE arg2, arg3, scale, selection;
-
-    rb_scan_args(argc, argv, "21", &scale, &arg2, &arg3);
-
-    if (NIL_P(arg3)) {
-        selection = arg2;
-    } else {
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-        style = RVAL2SEL_STYLE(arg2);
-#endif
-        selection = arg3;
-    }
-
-    region = poppler_page_get_selection_region(SELF(self),
-					       NUM2DBL(scale),
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-					       style,
-#endif
-					       RVAL2POPPLER_RECT(selection));
-    return GDK_REGION2RVAL(region);
-}
-#endif
 
 static VALUE
 page_get_link_mapping(VALUE self)
@@ -435,7 +372,6 @@ page_get_link_mapping(VALUE self)
                        POPPLER_TYPE_LINK_MAPPING);
 }
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_image_mapping(VALUE self)
 {
@@ -450,7 +386,7 @@ page_get_image_mapping(VALUE self)
 
 	image_mapping = node->data;
 	mapping = BOXED2RVAL(image_mapping, POPPLER_TYPE_IMAGE_MAPPING);
-#if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
 	rb_iv_set(mapping, "@page", self);
 #endif
 	rb_ary_push(mappings, mapping);
@@ -459,9 +395,8 @@ page_get_image_mapping(VALUE self)
 
     return mappings;
 }
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 _page_get_image(VALUE self, gint image_id)
 {
@@ -475,25 +410,20 @@ page_get_image(VALUE self, VALUE image_id)
 }
 #endif
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_form_field_mapping(VALUE self)
 {
     return GLIST2ARY2F(poppler_page_get_form_field_mapping(SELF(self)),
                        POPPLER_TYPE_FORM_FIELD_MAPPING);
 }
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
 static VALUE
 page_get_annot_mapping(VALUE self)
 {
     return GLIST2ARY2F(poppler_page_get_annot_mapping(SELF(self)),
                        POPPLER_TYPE_ANNOT_MAPPING);
 }
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 page_get_crop_box(VALUE self)
 {
@@ -502,7 +432,6 @@ page_get_crop_box(VALUE self)
     poppler_page_get_crop_box(SELF(self), &rect);
     return POPPLER_RECT2RVAL(&rect);
 }
-#endif
 
 
 /* A rectangle on a page, with coordinates in PDF points. */
@@ -618,7 +547,6 @@ DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
 DEF_ACCESSOR(link_mapping, action, RVAL2LM,
 	     POPPLER_ACTION2RVAL, RVAL2POPPLER_ACTION)
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 
 /* Page Transition */
 DEF_ACCESSOR(page_trans, type, RVAL2TRANS, RVAL2TT, TT2RVAL)
@@ -633,17 +561,13 @@ DEF_ACCESSOR(page_trans, rectangular, RVAL2TRANS, RVAL2CBOOL, CBOOL2RVAL)
 /* Mapping between areas on the current page and images */
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-#ifdef HAVE_ST_IMAGE_ID
 DEF_ACCESSOR(image_mapping, image_id, RVAL2IM, INT2NUM, NUM2INT)
-#  if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 image_mapping_get_image(VALUE self)
 {
     return _page_get_image(rb_iv_get(self, "@page"), RVAL2IM(self)->image_id);
 }
-#  endif
-#else
-DEF_ACCESSOR(image_mapping, image, RVAL2IM, GOBJ2RVAL, RVAL2GDK_PIXBUF)
 #endif
 
 
@@ -652,9 +576,7 @@ DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
                          RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM,
 	     POPPLER_FORM_FIELD2RVAL, RVAL2POPPLER_FORM_FIELD)
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
 static VALUE
 annot_mapping_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -687,18 +609,13 @@ annot_mapping_set_annotation(VALUE self, VALUE annotation)
     mapping->annot = RVAL2POPPLER_ANNOT(annotation);
     return Qnil;
 }
-#endif
 
 void
 Init_poppler_page(VALUE mPoppler)
 {
     VALUE cPage, cLinkMapping;
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     VALUE cPageTransition, cImageMapping, cFormFieldMapping;
-#endif
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     VALUE cAnnotationMapping;
-#endif
 
     cPage = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
@@ -707,73 +624,48 @@ Init_poppler_page(VALUE mPoppler)
 #endif
     cLinkMapping = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     cPageTransition = G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION,
                                   "PageTransition", mPoppler);
     cImageMapping = G_DEF_CLASS(POPPLER_TYPE_IMAGE_MAPPING,
                                 "ImageMapping", mPoppler);
     cFormFieldMapping = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_MAPPING,
                                     "FormFieldMapping", mPoppler);
-#endif
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     cAnnotationMapping = G_DEF_CLASS(POPPLER_TYPE_ANNOT_MAPPING,
 				     "AnnotationMapping", mPoppler);
-#endif
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
     rb_define_method(cPage, "render", page_render_generic, -1);
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cPage, "render_for_printing",
 		     page_render_for_printing_generic, -1);
-#endif
     rb_define_method(cPage, "size", page_get_size, 0);
     rb_define_method(cPage, "index", page_get_index, 0);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "duration", page_get_duration, 0);
     rb_define_method(cPage, "transition", page_get_transition, 0);
+
+#if RB_POPPLER_CAIRO_AVAILABLE
+    rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
 #endif
-#if POPPLER_CHECK_VERSION(0, 7, 2)
-#  if RB_POPPLER_CAIRO_AVAILABLE
-    rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
-#  endif
+#if POPPLER_WITH_GDK
     rb_define_method(cPage, "thumbnail_pixbuf", page_get_thumbnail_pixbuf, 0);
-#else
-    rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
-    rb_define_alias(cPage, "thumbnail_pixbuf", "thumbnail");
 #endif
     rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
     rb_define_method(cPage, "find_text", page_find_text, 1);
     rb_define_method(cPage, "get_text", page_get_text, -1);
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cPage, "get_selection_region",
 		     page_get_selection_region, 3);
-#else
-    rb_define_method(cPage, "get_selection_region",
-                     page_get_selection_region, -1);
-#endif
     rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
-#endif
-#if POPPLER_CHECK_VERSION(0, 7, 2)
-#  if RB_POPPLER_CAIRO_AVAILABLE
+#if RB_POPPLER_CAIRO_AVAILABLE
     rb_define_method(cPage, "get_image", page_get_image, 1);
-#  endif
 #endif
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "form_field_mapping",
                      page_get_form_field_mapping, 0);
-#endif
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cPage, "annotation_mapping",
                      page_get_annot_mapping, 0);
-#endif
     rb_define_method(cPage, "render_selection",
                      page_render_selection_generic, -1);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cPage, "crop_box", page_get_crop_box, 0);
-#endif
 
     G_DEF_SETTERS(cPage);
 
@@ -816,7 +708,6 @@ Init_poppler_page(VALUE mPoppler)
 
     G_DEF_SETTERS(cLinkMapping);
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 /* Page Transition */
     rb_define_method(cPageTransition, "type", page_trans_get_type, 0);
     rb_define_method(cPageTransition, "alignment", page_trans_get_alignment, 0);
@@ -844,22 +735,14 @@ Init_poppler_page(VALUE mPoppler)
 
 /* Mapping between areas on the current page and images */
     rb_define_method(cImageMapping, "area", image_mapping_get_area, 0);
-#ifdef HAVE_ST_IMAGE_ID
     rb_define_method(cImageMapping, "image_id", image_mapping_get_image_id, 0);
-#  if POPPLER_CHECK_VERSION(0, 7, 2) && defined(RB_POPPLER_CAIRO_AVAILABLE)
-    rb_define_method(cImageMapping, "image", image_mapping_get_image, 0);
-#  endif
-#else
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
     rb_define_method(cImageMapping, "image", image_mapping_get_image, 0);
 #endif
 
     rb_define_method(cImageMapping, "set_area", image_mapping_set_area, 1);
-#ifdef HAVE_ST_IMAGE_ID
     rb_define_method(cImageMapping, "set_image_id",
 		     image_mapping_set_image_id, 1);
-#else
-    rb_define_method(cImageMapping, "set_image", image_mapping_set_image, 1);
-#endif
 
     G_DEF_SETTERS(cImageMapping);
 
@@ -875,9 +758,7 @@ Init_poppler_page(VALUE mPoppler)
                      form_field_mapping_set_field, 1);
 
     G_DEF_SETTERS(cFormFieldMapping);
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cAnnotationMapping, "initialize",
 		     annot_mapping_initialize, -1);
 
@@ -890,5 +771,4 @@ Init_poppler_page(VALUE mPoppler)
 		     annot_mapping_set_annotation, 1);
 
     G_DEF_SETTERS(cAnnotationMapping);
-#endif
 }

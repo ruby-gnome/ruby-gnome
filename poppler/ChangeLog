@@ -1,3 +1,8 @@
+2008-11-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb, README, src/: remove 0.6.x support. require 0.8.0 or
+	later.
+
 2008-10-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_constants.rb: use assert_{,not_}const_defined in

@@ -20,7 +20,6 @@
 #define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
 #define FCT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_CHOICE_TYPE))
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE cUnknownField, cTextField, cButtonField;
 static VALUE cChoiceField, cSignatureField;
 
@@ -229,12 +228,10 @@ choice_field_get_text(VALUE self)
 {
     return CSTR2RVAL(poppler_form_field_choice_get_text(RVAL2CF(self)));
 }
-#endif
 
 void
 Init_poppler_form_field(VALUE mPoppler)
 {
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     VALUE cFormField;
 
     cFormField = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
@@ -291,5 +288,4 @@ Init_poppler_form_field(VALUE mPoppler)
     rb_define_method(cChoiceField, "set_text", choice_field_set_text, 1);
 
     G_DEF_SETTERS(cChoiceField);
-#endif
 }

@@ -3,6 +3,10 @@
 
 #include "rbpoppler.h"
 
+#ifdef POPPLER_WITH_GDK
+#  include <rbgdk.h>
+#endif
+
 extern void Init_poppler_document(VALUE mPoppler);
 extern void Init_poppler_page(VALUE mPoppler);
 extern void Init_poppler_attachment(VALUE mPoppler);

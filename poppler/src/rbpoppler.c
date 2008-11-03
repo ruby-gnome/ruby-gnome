@@ -48,7 +48,6 @@ Init_poppler(void)
     G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", mPoppler);
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_TYPE,
                 "PageTransitionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_ALIGNMENT,
@@ -59,9 +58,7 @@ Init_poppler(void)
     G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", mPoppler);
-#endif
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     G_RENAME_NICK("3D", "TYPE_3D");
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TYPE, "AnnotationType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FLAG, "AnnotationFlag", mPoppler);
@@ -76,7 +73,6 @@ Init_poppler(void)
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_STATE, "AnnotationTextState", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING,
 		"AnnotationFreeTextQuadding", mPoppler);
-#endif
 
 
     G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", mPoppler);

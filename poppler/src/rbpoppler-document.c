@@ -21,9 +21,7 @@
 
 static ID id_new, id_valid, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE cFontInfo;
-#endif
 
 
 static VALUE
@@ -38,13 +36,11 @@ doc_initialize(int argc, VALUE *argv, VALUE self)
 
     password = NIL_P(rb_password) ? NULL : RVAL2CSTR(rb_password);
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     if (RVAL2CBOOL(rb_funcall(self, id_pdf_data_p, 1, uri_or_data))) {
         document = poppler_document_new_from_data(RSTRING_PTR(uri_or_data),
                                                   RSTRING_LEN(uri_or_data),
                                                   password, &error);
     }
-#endif
 
     if (!document && !error) {
         uri_or_data = rb_funcall(self, id_ensure_uri, 1, uri_or_data);
@@ -74,7 +70,6 @@ doc_save(VALUE self, VALUE uri)
     return CBOOL2RVAL(result);
 }
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
 static VALUE
 doc_save_a_copy(VALUE self, VALUE uri)
 {
@@ -90,7 +85,6 @@ doc_save_a_copy(VALUE self, VALUE uri)
 
     return CBOOL2RVAL(result);
 }
-#endif
 
 static VALUE
 doc_get_n_pages(VALUE self)
@@ -142,14 +136,12 @@ doc_find_dest(VALUE self, VALUE link_name)
                                                 RVAL2CSTR(link_name)));
 }
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 doc_get_form_field(VALUE self, VALUE id)
 {
     return GOBJ2RVAL(poppler_document_get_form_field(RVAL2DOC(self),
                                                      NUM2INT(id)));
 }
-#endif
 
 static VALUE
 doc_each(VALUE self)
@@ -178,13 +170,11 @@ doc_get_index_iter(VALUE self)
     return rb_funcall(cIndexIter, id_new, 1, self);
 }
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 doc_get_font_info(VALUE self)
 {
     return rb_funcall(cFontInfo, id_new, 1, self);
 }
-#endif
 
 
 
@@ -317,14 +307,12 @@ fonts_iter_get_full_name(VALUE self)
     return CSTR2RVAL(poppler_fonts_iter_get_full_name(RVAL2FITER(self)));
 }
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
 static VALUE
 fonts_iter_get_file_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2FITER(self)));
 }
-#endif
 
 static VALUE
 fonts_iter_get_font_type(VALUE self)
@@ -419,9 +407,7 @@ Init_poppler_document(VALUE mPoppler)
 
     cDocument = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);
     cIndexIter = G_DEF_CLASS(POPPLER_TYPE_INDEX_ITER, "IndexIter", mPoppler);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     cFontInfo = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
-#endif
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
     cPSFile = G_DEF_CLASS(POPPLER_TYPE_PS_FILE, "PSFile", mPoppler);
 
@@ -435,9 +421,7 @@ Init_poppler_document(VALUE mPoppler)
 
     rb_define_method(cDocument, "initialize", doc_initialize, -1);
     rb_define_method(cDocument, "save", doc_save, 1);
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     rb_define_method(cDocument, "save_a_copy", doc_save_a_copy, 1);
-#endif
     rb_define_method(cDocument, "n_pages", doc_get_n_pages, 0);
     rb_define_alias(cDocument, "size", "n_pages");
     rb_define_method(cDocument, "get_page", doc_get_page, 1);
@@ -448,17 +432,13 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cDocument, "find_dest", doc_find_dest, 1);
     rb_define_alias(cDocument, "get_destination", "find_dest");
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cDocument, "get_form_field", doc_get_form_field, 1);
-#endif
 
     rb_define_method(cDocument, "each", doc_each, 0);
     rb_define_alias(cDocument, "pages", "to_a");
 
     rb_define_method(cDocument, "index_iter", doc_get_index_iter, 0);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cDocument, "font_info", doc_get_font_info, 0);
-#endif
 
     G_DEF_SETTERS(cDocument);
 

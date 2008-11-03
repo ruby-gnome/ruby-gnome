@@ -13,7 +13,7 @@ Requirements
     Ruby/GdkPixbuf2:    http://ruby-gnome2.sourceforge.net/
     cairo/rcairo: http://cairographics.org/ (optional)
 
-    [*]: 0.5.2 - 0.8.0 is requried.
+    [*]: 0.8.0 or later is requried.
 
 Install
 -------

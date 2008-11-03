@@ -13,7 +13,7 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package(PACKAGE_ID, 0, 5, 2) or exit 1
+PKGConfig.have_package(PACKAGE_ID, 0, 8, 0) or exit 1
 setup_win32(PACKAGE_NAME)
 
 poppler_header = "poppler.h"

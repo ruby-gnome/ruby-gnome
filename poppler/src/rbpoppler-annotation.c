@@ -9,8 +9,6 @@
 
 #include "rbpoppler-private.h"
 
-#if POPPLER_CHECK_VERSION(0, 7, 2)
-
 #define SELF(self) (POPPLER_ANNOT(RVAL2GOBJ(self)))
 
 #define TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TYPE))
@@ -223,12 +221,10 @@ annot_callout_line_inspect(VALUE self)
     g_free(info);
     return inspected;
 }
-#endif
 
 void
 Init_poppler_annotation(VALUE mPoppler)
 {
-#if POPPLER_CHECK_VERSION(0, 7, 2)
     VALUE cAnnotation, cAnnotationMarkup, cAnnotationText;
     VALUE cAnnotationFreeText, cAnnotationCalloutLine;
 
@@ -308,5 +304,4 @@ Init_poppler_annotation(VALUE mPoppler)
                      annot_callout_line_inspect, 0);
 
     G_DEF_SETTERS(cAnnotationCalloutLine);
-#endif
 }
