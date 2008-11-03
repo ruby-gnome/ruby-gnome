@@ -178,8 +178,7 @@ page_render_for_printing_generic(int argc, VALUE *argv, VALUE self)
     }
 }
 
-#if defined(RB_POPPLER_CAIRO_AVAILABLE) && \
-      defined(HAVE_POPPLER_PAGE_RENDER_SELECTION_TO_PIXBUF)
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 page_render_selection(VALUE self, VALUE cairo,
                       VALUE selection, VALUE rb_old_selection,
