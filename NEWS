@@ -24,12 +24,17 @@ Ruby/Popper:
   * removed 0.6.x support. 0.8.0 or later is required.
     [Kouhei Sutou]
 
+Ruby/RSVG2:
+  * fixed broken cairo integration.
+    [James Healy, Kouhei Sutou]
+
 === Thanks
 
   * kimura wataru
   * Philipp Götzinger
   * Andrew S. Townley
   * Jesse van den Kieboom
+  * James Healy
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30
