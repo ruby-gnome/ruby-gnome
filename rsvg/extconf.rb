@@ -26,7 +26,7 @@ have_func("rsvg_handle_get_pixbuf_sub", rsvg_header)
 have_header("librsvg/rsvg-gz.h")
 have_type("RsvgDimensionData", "librsvg/rsvg.h")
 
-check_cairo
+check_cairo and have_header("librsvg/rsvg-cairo.h")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 
