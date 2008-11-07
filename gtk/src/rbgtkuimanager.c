@@ -172,6 +172,8 @@ rbuimanager_mark(void *p)
 	GtkWidget *action_group = node->data;
 	rbgobj_gc_mark_instance(action_group);
     }
+
+    rbgobj_gc_mark_instance(gtk_ui_manager_get_accel_group(manager));
 }
 #endif
 
