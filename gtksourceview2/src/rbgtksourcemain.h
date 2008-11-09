@@ -29,17 +29,4 @@
 #include "rbgtk.h"
 #include "rbgtksourceview2version.h"
 
-#if defined(G_PLATFORM_WIN32) && !defined(RUBY_GTK2_STATIC_COMPILATION)
-#  ifdef RUBY_GTK2_COMPILATION
-#    define RUBY_GTK2_VAR __declspec(dllexport)
-#  else
-#    define RUBY_GTK2_VAR extern __declspec(dllimport)
-#  endif
-#else
-#  define RUBY_GTK2_VAR extern
-#endif
-
-RUBY_GTK2_VAR VALUE mGtk;
-RUBY_GTK2_VAR VALUE mGdk;
-
 #endif /* __RBGTKSOURCEVIEWMAIN_H_ */

@@ -14,7 +14,6 @@
 /* Module: Gtk::SourcePrintCompositor
  */
 #define _SELF(self) (GTK_SOURCE_PRINT_COMPOSITOR(RVAL2GOBJ(self)))
-#define DBL2NUM(v)  rb_float_new(v)
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 /*
