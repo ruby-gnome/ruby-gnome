@@ -1,3 +1,7 @@
+2008-11-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdavalue.c (rb_gda_value_to_rb_value): fix format string.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().

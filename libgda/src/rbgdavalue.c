@@ -128,7 +128,7 @@ VALUE rb_gda_value_to_rb_value(value)
         /* XXX: is this sufficient? */
         gn = gda_value_get_numeric(value);
         if (gn->precision == 0) {
-            return sscanf(gn->number, "%Ld", &num) == 1 ?
+            return sscanf(gn->number, "%" G_GINT64_FORMAT, &num) == 1 ?
                 LL2NUM(num) : CSTR2RVAL(gn->number);
         } else {
             return sscanf(gn->number, "%lf", &dnum) == 1 ?
