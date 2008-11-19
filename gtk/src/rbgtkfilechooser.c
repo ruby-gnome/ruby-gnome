@@ -326,7 +326,7 @@ Init_gtk_file_chooser()
 #if GTK_CHECK_VERSION(2,4,0)
 
     VALUE gFileCho = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
-#ifdef HAVE_GTK_GTKFILESYSTEM_H
+#ifdef GTK_FILE_SYSTEM_ERROR
     VALUE eFileSystemError;
 #endif
 
