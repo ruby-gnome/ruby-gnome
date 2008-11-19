@@ -1,3 +1,7 @@
+2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_gc.rb (TestGC#test_inheritance_and_gc): moved from Ruby/GLib.
+
 2008-11-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkfilechooser.c (Init_gtk_file_chooser): fix ifdef guard target.
