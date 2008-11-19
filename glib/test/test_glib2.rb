@@ -75,22 +75,6 @@ class TestGLib < Test::Unit::TestCase
     }
   end
 
-  def test_inheritance_and_gc
-    begin 
-      require 'gtk2'
-
-      mybutton = Class.new(Gtk::Button)
-      box = Gtk::HBox.new
-      10.times{
-	box.add mybutton.new
-      }
-      GC.start
-      assert(box.children.all?{|item| item.is_a? mybutton })
-    rescue LoadError
-    rescue RuntimeError
-    end
-  end
-
   def test_signal_has_handler_pending
     obj = GLib::Object.new
     signal_name = "notify"
