@@ -1,5 +1,8 @@
 2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_enums.c, test/test_enum.rb: GLib::Flags#| accepts
+	empty array.
+
 	* test/test_glib2.rb: move a test that depends of Ruby/GTK2 to
 	Ruby/GTK2.
 

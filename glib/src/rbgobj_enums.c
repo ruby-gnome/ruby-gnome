@@ -74,12 +74,13 @@ static VALUE
 resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
 {
     int i, len;
-    VALUE flags_value = Qnil;
+    VALUE flags_value;
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(nick_or_nicks, rb_cArray)))
         return resolve_enum_value(klass, nick_or_nicks);
 
     len = RARRAY_LEN(nick_or_nicks);
+    flags_value = rb_funcall(klass, id_new, 0);
     for (i = 0; i < len; i++) {
         VALUE value;
 
@@ -87,10 +88,7 @@ resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
         if (NIL_P(value))
             return Qnil;
 
-        if (NIL_P(flags_value))
-            flags_value = value;
-        else
-            flags_value = rb_funcall(flags_value, id_or, 1, value);
+	flags_value = rb_funcall(flags_value, id_or, 1, value);
     }
 
     return flags_value;
@@ -102,9 +100,8 @@ rbgobj_constant_find(constant_map *a, char *name)
       return strcmp(a->original, name);
 }
 
-void 
-rbgobj_constant_remap(const char *original, 
-			const char *replacement)
+void
+rbgobj_constant_remap(const char *original, const char *replacement)
 {
       constant_map *map = g_new(constant_map,1);
       
@@ -119,8 +116,8 @@ rbgobj_constant_lookup(const char *name)
 {
       GSList *p = rbgobj_cmap;
       
-      p = g_slist_find_custom(rbgobj_cmap, name, 
-      			(GCompareFunc)rbgobj_constant_find);
+      p = g_slist_find_custom(rbgobj_cmap, name,
+			      (GCompareFunc)rbgobj_constant_find);
       if (p)
       {
           char *replacement;
@@ -262,8 +259,9 @@ rbgobj_get_enum(VALUE obj, GType gtype)
     VALUE klass;
 
     if (!g_type_is_a(gtype, G_TYPE_ENUM))
-        rb_raise(rb_eTypeError, "%s is not a %s",
-                 g_type_name(gtype), g_type_name(G_TYPE_ENUM));
+        rb_raise(rb_eTypeError, "%s is not a %s: %s",
+                 g_type_name(gtype), g_type_name(G_TYPE_ENUM),
+		 RBG_INSPECT(obj));
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
@@ -282,7 +280,8 @@ rbgobj_get_enum(VALUE obj, GType gtype)
     if (rb_obj_is_kind_of(obj, klass))
         return enum_get_holder(obj)->value;
     else
-        rb_raise(rb_eTypeError, "not a %s", rb_class2name(klass));
+        rb_raise(rb_eTypeError, "not a %s: %s",
+		 rb_class2name(klass), RBG_INSPECT(obj));
 }
 
 /**********************************************************************/
@@ -546,7 +545,8 @@ rbgobj_get_flags(VALUE obj, GType gtype)
     if (rb_obj_is_kind_of(obj, klass))
         return flags_get_holder(obj)->value;
     else
-        rb_raise(rb_eTypeError, "not a %s", rb_class2name(klass));
+        rb_raise(rb_eTypeError, "not a %s: %s",
+		 rb_class2name(klass), RBG_INSPECT(obj));
 }
 
 /**********************************************************************/

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'test/unit'
 require 'glib2'
 
@@ -65,6 +66,15 @@ class TestEnum < Test::Unit::TestCase
     end
   end
 
+  def test_flags_or
+    assert_equal(GLib::KeyFile::KEEP_COMMENTS,
+                 GLib::KeyFile::KEEP_COMMENTS | [])
+    assert_equal(GLib::KeyFile::KEEP_COMMENTS |
+                 GLib::KeyFile::KEEP_TRANSLATIONS ,
+                 GLib::KeyFile::KEEP_COMMENTS | [:keep_translations])
+  end
+
+  private
   def assert_key_file_load(flags, convenience_flags)
     data = <<-EOD
 [SECTION]
