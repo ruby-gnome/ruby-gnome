@@ -19,7 +19,7 @@ class TestGdkDisplay < Test::Unit::TestCase
   end
 
   def test_broadcast_startup_message
-    only_gtk_version(2, 14, 0)
+    only_gtk_version(2, 16, 0)
     only_x11
 
     id = "#{$$}_TIME_#{Time.now.to_i}"

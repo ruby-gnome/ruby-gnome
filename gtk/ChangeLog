@@ -1,5 +1,10 @@
 2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gdk_display.rb
+	(TestGdkDisplay#test_broadcast_startup_message):
+	Gdk::Display#broadcast_startup_message can't be implemented in
+	GTK+ 2.14 API. :<
+
 	* test/test_gc.rb (TestGC#test_inheritance_and_gc): moved from Ruby/GLib.
 
 2008-11-09  Kouhei Sutou  <kou@cozmixng.org>
