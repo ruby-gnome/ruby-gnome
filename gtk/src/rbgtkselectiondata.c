@@ -34,8 +34,13 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
         len = 1;
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
         dat = RVAL2CSTR(src);
-        fmt = sizeof(char) * 8;
-        len = RSTRING_LEN(src);
+	if (NIL_P(size)) {
+	    fmt = sizeof(char) * 8;
+	    len = RSTRING_LEN(src);
+	} else {
+	    len = NUM2UINT(size);
+	    fmt = (RSTRING_LEN(src) / len) * 8;
+	}
     } else if(ntype == compound_text){
         guchar* str = (guchar*)dat;
         gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);

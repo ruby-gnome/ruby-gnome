@@ -1,3 +1,10 @@
+2008-11-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkselectiondata.c (rbgtk_atom2selectiondata): accept
+	length for string type selection.
+	[#2318481] gtkselectiondata_set Drag and Drop API problem
+	Reported by dave foster. Thanks!!!
+
 2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/test_gdk_display.rb
