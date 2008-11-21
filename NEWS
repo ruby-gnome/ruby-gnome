@@ -19,6 +19,8 @@ Ruby/GTK2:
       [Kouhei Sutou]
     * #2195432: Gtk::RCStyle.set_color_flags wrong conversion
       [Jesse van den Kieboom, Kouhei Sutou]
+    * #2318481: gtkselectiondata_set Drag and Drop API problem
+      [dave foster, Kouhei Sutou]
 
 Ruby/Popper:
   * removed 0.6.x support. 0.8.0 or later is required.
@@ -35,6 +37,7 @@ Ruby/RSVG2:
   * Andrew S. Townley
   * Jesse van den Kieboom
   * James Healy
+  * dave foster
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30

@@ -1,3 +1,9 @@
+2008-11-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: #2318481: gtkselectiondata_set Drag and Drop
+	API problem.
+	Reported by dave foster. Thanks!!!
+
 2008-11-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/RSVG2: fixed broken cairo integration.
