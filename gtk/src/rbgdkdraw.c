@@ -31,18 +31,26 @@ gdkdraw_get_visual(self)
 }
 
 static VALUE
-gdkdraw_set_colormap(self, colormap)
-    VALUE self, colormap;
+gdkdraw_set_colormap(VALUE self, VALUE colormap)
 {
+    VALUE old_colormap;
+
+    old_colormap = GOBJ2RVAL(gdk_drawable_get_colormap(_SELF(self)));
+    G_CHILD_REMOVE(self, old_colormap);
+
+    G_CHILD_ADD(self, colormap);
     gdk_drawable_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 
 static VALUE
-gdkdraw_get_colormap(self)
-    VALUE self;
+gdkdraw_get_colormap(VALUE self)
 {
-    return GOBJ2RVAL(gdk_drawable_get_colormap(_SELF(self)));
+    VALUE rb_colormap;
+
+    rb_colormap = GOBJ2RVAL(gdk_drawable_get_colormap(_SELF(self)));
+    G_CHILD_ADD(self, rb_colormap);
+    return rb_colormap;
 }
 
 static VALUE

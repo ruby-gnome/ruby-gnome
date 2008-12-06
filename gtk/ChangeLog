@@ -1,3 +1,8 @@
+2008-12-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkdraw.c (gdkdraw_set_colormap, gdkdraw_get_colormap):
+	guard colormap from GC.
+
 2008-11-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkselectiondata.c (rbgtk_atom2selectiondata): accept
