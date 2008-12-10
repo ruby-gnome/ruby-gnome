@@ -118,13 +118,16 @@ interface_s_properties(int argc, VALUE* argv, VALUE self)
 #endif
 
 void
-rbgobj_init_interface(interf)
-    VALUE interf;
+rbgobj_init_interface(VALUE interf)
 {
+    static VALUE rb_mGLibInterface = Qnil;
+
     rb_extend_object(interf, mMetaInterface);
-    if (CLASS2GTYPE(interf) != G_TYPE_INTERFACE){
-        rb_extend_object(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
-        rb_include_module(interf, GTYPE2CLASS(G_TYPE_INTERFACE));
+    if (CLASS2GTYPE(interf) == G_TYPE_INTERFACE) {
+	rb_mGLibInterface = interf;
+    } else {
+        rb_extend_object(interf, rb_mGLibInterface);
+        rb_include_module(interf, rb_mGLibInterface);
         rbgobj_define_property_accessors(interf);
     }
 }

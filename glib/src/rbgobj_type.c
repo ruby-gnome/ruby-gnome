@@ -6,16 +6,13 @@
   $Author: sakai $
   $Date: 2007/07/16 03:35:53 $
   created at: Sun Jun  9 20:31:47 JST 2002
- 
-  Copyright (C) 2002-2006  Ruby-GNOME2 Project Team
+
+  Copyright (C) 2002-2008  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
 
 #include "rbgprivate.h"
-
-#include "rbgprivate.h"
-#include <rubysig.h>
 
 /**********************************************************************/
 /* Type Mapping */
@@ -24,8 +21,13 @@
 #include "dl.h"
 #endif
 
+static VALUE rb_cMutex;
+static VALUE lookup_class_mutex;
+
 static ID id_new;
 static ID id_superclass;
+static ID id_lock;
+static ID id_unlock;
 static VALUE gtype_to_cinfo;
 static VALUE klass_to_cinfo;
 
@@ -72,8 +74,12 @@ rbgobj_lookup_class(klass)
         return rbgobj_lookup_class(super);
     }
 
-    rb_raise(rb_eRuntimeError, "can't get gobject class information");    
+    rb_raise(rb_eRuntimeError, "can't get gobject class information");
 }
+
+static const RGObjClassInfo *rbgobj_lookup_class_by_gtype_without_lock(GType gtype,
+								       VALUE parent,
+								       gboolean create_class);
 
 static VALUE
 get_superclass(GType gtype)
@@ -100,39 +106,39 @@ get_superclass(GType gtype)
         return rb_cObject;
       default:
       {
-          const RGObjClassInfo* cinfo_super =
-              rbgobj_lookup_class_by_gtype(g_type_parent(gtype), Qnil);
+          const RGObjClassInfo *cinfo_super;
+	  GType parent_type;
+
+	  parent_type = g_type_parent(gtype);
+	  cinfo_super = rbgobj_lookup_class_by_gtype_without_lock(parent_type,
+								  Qnil,
+								  TRUE);
           return cinfo_super->klass;
       }
     }
 }
 
-static VALUE
-rbgobj_lookup_class_by_gtype_body(VALUE data)
+static const RGObjClassInfo *
+rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
+					  gboolean create_class)
 {
     GType fundamental_type;
     RGObjClassInfo* cinfo;
     RGObjClassInfoDynamic* cinfod;
     void* gclass = NULL;
     VALUE c;
-    GType gtype;
-    VALUE parent;
-    RGObjClassByGtypeData *cdata = (RGObjClassByGtypeData *)data;
-
-    gtype = cdata->gtype;
-    parent = cdata->parent;
 
     if (gtype == G_TYPE_INVALID)
-        return (VALUE)NULL;
+        return NULL;
 
     c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
     if (!NIL_P(c)) {
         Data_Get_Struct(c, RGObjClassInfo, cinfo);
-        return (VALUE)cinfo;
+        return cinfo;
     }
 
-    if (!cdata->create_class)
-	return (VALUE)NULL;
+    if (!create_class)
+	return NULL;
 
     c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
     cinfo->gtype = gtype;
@@ -164,12 +170,13 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
                   "rbgobj_lookup_class_by_gtype",
                   g_type_name(gtype),
                   g_type_name(fundamental_type));
-          return (VALUE)NULL;
+          return NULL;
       }
       cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
     }
 
-    cinfod = (RGObjClassInfoDynamic*)g_hash_table_lookup(dynamic_gtype_list, g_type_name(gtype));
+    cinfod = (RGObjClassInfoDynamic *)g_hash_table_lookup(dynamic_gtype_list,
+							  g_type_name(gtype));
     if (cinfod){
         cinfo->mark = cinfod->mark;
         cinfo->free = cinfod->free;
@@ -184,17 +191,20 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
     
     if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
         rbgobj_define_action_methods(cinfo->klass);
-    
+
     if (G_TYPE_IS_INSTANTIATABLE(gtype)){
         GType* interfaces = NULL;
         guint n_interfaces = 0;
         int i;
-        
+
         interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++){
-            rb_include_module(
-                cinfo->klass,
-                rbgobj_lookup_class_by_gtype(interfaces[i], Qnil)->klass);
+	    const RGObjClassInfo *iface_cinfo;
+	    iface_cinfo =
+		rbgobj_lookup_class_by_gtype_without_lock(interfaces[i],
+							  Qnil,
+							  TRUE);
+            rb_include_module(cinfo->klass, iface_cinfo->klass);
         }
         g_free(interfaces);
     }
@@ -222,13 +232,25 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
     if (gclass)
         g_type_class_unref(gclass);
 
+    return cinfo;
+}
+
+static VALUE
+rbgobj_lookup_class_by_gtype_body(VALUE data)
+{
+    RGObjClassByGtypeData *cdata = (RGObjClassByGtypeData *)data;
+    const RGObjClassInfo *cinfo;
+
+    cinfo = rbgobj_lookup_class_by_gtype_without_lock(cdata->gtype,
+						      cdata->parent,
+						      cdata->create_class);
     return (VALUE)cinfo;
 }
 
 static VALUE
-rbgobj_lookup_class_by_gtype_ensure(VALUE value)
+rbgobj_lookup_class_by_gtype_ensure(VALUE data)
 {
-    rb_thread_critical = (int)value;
+    rb_funcall(lookup_class_mutex, id_unlock, 0);
     return Qundef;
 }
 
@@ -242,19 +264,22 @@ const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
 				  gboolean create_class)
 {
-    VALUE critical = rb_thread_critical;
     RGObjClassByGtypeData data;
 
     data.gtype = gtype;
     data.parent = parent;
     data.create_class = create_class;
 
-    rb_thread_critical = 1;
-
-    return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
-				       (VALUE)&data,
-				       rbgobj_lookup_class_by_gtype_ensure,
-				       critical);
+    if (create_class) {
+	rb_funcall(lookup_class_mutex, id_lock, 0);
+	return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
+					   (VALUE)&data,
+					   rbgobj_lookup_class_by_gtype_ensure,
+					   (VALUE)&data);
+    } else {
+	return rbgobj_lookup_class_by_gtype_without_lock(gtype, parent,
+							 create_class);
+    }
 }
 
 VALUE
@@ -734,6 +759,12 @@ void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 static void
 Init_type()
 {
+    rb_cMutex = rb_const_get(rb_cObject, rb_intern("Mutex"));
+    id_lock = rb_intern("lock");
+    id_unlock = rb_intern("unlock");
+    lookup_class_mutex = rb_funcall(rb_cMutex, id_new, 0);
+    rb_iv_set(mGLib, "lookup_class_mutex", lookup_class_mutex);
+
     dynamic_gtype_list = g_hash_table_new(g_str_hash, g_str_equal);
     id_gtype = rb_intern("__gobject_gtype__");
 

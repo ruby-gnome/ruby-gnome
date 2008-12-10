@@ -14,6 +14,7 @@ if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
 end
 
 require 'English'
+require 'thread'
 
 module GLib
   module_function

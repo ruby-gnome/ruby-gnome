@@ -16,25 +16,28 @@
 VALUE rbgobj_cBoxed;
 
 static void
-boxed_mark(boxed_holder* p)
+boxed_mark(boxed_holder *holder)
 {
-    const RGObjClassInfo* cinfo = GTYPE2CINFO(p->type);
+    const RGObjClassInfo *cinfo;
+
+    cinfo = GTYPE2CINFO_NO_CREATE(holder->type);
     if (cinfo && cinfo->mark)
-        cinfo->mark(p->boxed);
+        cinfo->mark(holder->boxed);
 }
 
 static void
-boxed_free(boxed_holder* p)
+boxed_free(boxed_holder *holder)
 {
-    const RGObjClassInfo* cinfo = GTYPE2CINFO(p->type);
+    const RGObjClassInfo *cinfo;
 
+    cinfo = GTYPE2CINFO(holder->type);
     if (cinfo && cinfo->free)
-        cinfo->free(p->boxed);
-    
-    if (p->own && p->boxed)
-        g_boxed_free(p->type, p->boxed);
+        cinfo->free(holder->boxed);
 
-    free(p);
+    if (holder->own && holder->boxed)
+        g_boxed_free(holder->type, holder->boxed);
+
+    free(holder);
 }
 
 /**********************************************************************/

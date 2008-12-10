@@ -1,3 +1,9 @@
+2008-12-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_type.c: use Mutex instead of rb_thread_critical.
+	* src/rbgobj_boxed.c, src/rbgobj_enums.c,
+	src/rbgobj_typeinterface.c, src/lib/glib.2rb: follow the above change.
+
 2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_enums.c, test/test_enum.rb: GLib::Flags#| accepts

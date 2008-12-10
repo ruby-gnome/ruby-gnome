@@ -247,10 +247,16 @@ enum_get_holder(VALUE obj)
     return p;
 }
 
+static VALUE
+make_enum(gint n, VALUE klass)
+{
+    return rb_funcall(klass, id_new, 1, INT2NUM(n));
+}
+
 VALUE
 rbgobj_make_enum(gint n, GType gtype)
 {
-    return rb_funcall(GTYPE2CLASS(gtype), id_new, 1, INT2NUM(n));
+    return make_enum(n, GTYPE2CLASS(gtype));
 }
 
 gint
@@ -302,14 +308,18 @@ rbgobj_init_enum_class(VALUE klass)
         {
             ID id = rb_intern(const_nick_name);
             if (rb_is_const_id(id)) {
-                VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
+                VALUE value;
+
+		value = make_enum(entry->value, klass);
                 rb_define_const(klass, const_nick_name, value);
             }
         }
 #else
         {
             if (const_nick_name) {
-                VALUE value = rbgobj_make_enum(entry->value, CLASS2GTYPE(klass));
+                VALUE value;
+
+		value = make_enum(entry->value, klass);
                 rbgobj_define_const(klass, const_nick_name, value);
             }
         }
@@ -334,18 +344,17 @@ enum_s_range(self)
 }
 
 static VALUE
-enum_s_values(self)
-    VALUE self;
+enum_s_values(VALUE self)
 {
-    GEnumClass* gclass = g_type_class_ref(CLASS2GTYPE(self));
-    GType gtype = G_TYPE_FROM_CLASS(gclass);
-    VALUE result = rb_ary_new();
+    GEnumClass *gclass;
+    VALUE result;
     int i;
 
+    gclass = g_type_class_ref(CLASS2GTYPE(self));;
+    result = rb_ary_new();
     for (i = 0; i < gclass->n_values; i++) {
-        GEnumValue* p = &(gclass->values[i]);
-        VALUE obj = rbgobj_make_enum(p->value, gtype);
-        rb_ary_push(result, obj);
+        GEnumValue *p = &(gclass->values[i]);
+        rb_ary_push(result, make_enum(p->value, self));
     }
 
     g_type_class_unref(gclass);
@@ -450,13 +459,16 @@ enum_hash(VALUE self)
 static VALUE
 enum_coerce(VALUE self, VALUE other)
 {
-    if (rb_obj_is_kind_of(other, rb_cInteger)){
-        enum_holder* p = enum_get_holder(self);
-        GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-        other = rbgobj_make_enum(NUM2INT(other), gtype);
-        return rb_ary_new3(2, other, self);
-    } else
+    enum_holder *holder;
+    GType gtype;
+
+    if (!rb_obj_is_kind_of(other, rb_cInteger))
         rb_raise(rb_eTypeError, "can't coerce");
+
+    holder = enum_get_holder(self);
+    gtype = G_TYPE_FROM_CLASS(holder->gclass);
+    other = rbgobj_make_enum(NUM2INT(other), gtype);
+    return rb_ary_new3(2, other, self);
 }
 
 static void
@@ -513,10 +525,16 @@ flags_get_holder(VALUE obj)
     return p;
 }
 
+static VALUE
+make_flags(guint n, VALUE klass)
+{
+    return rb_funcall(klass, id_new, 1, UINT2NUM(n));
+}
+
 VALUE
 rbgobj_make_flags(guint n, GType gtype)
 {
-    return rb_funcall(GTYPE2CLASS(gtype), id_new, 1, UINT2NUM(n));
+    return make_flags(n, GTYPE2CLASS(gtype));
 }
 
 guint
@@ -590,14 +608,12 @@ rbgobj_init_flags_class(VALUE klass)
         {
             ID id = rb_intern(nick);
             if (rb_is_const_id(id)) {
-                VALUE value = rbgobj_make_flags(entry->value, CLASS2GTYPE(klass));
-                rb_define_const(klass, nick, value);
+                rb_define_const(klass, nick, make_flags(entry->value, klass));
             }
         }
 #else
         {
-            VALUE value = rbgobj_make_flags(entry->value, CLASS2GTYPE(klass));
-            rbgobj_define_const(klass, nick, value);
+            rbgobj_define_const(klass, nick, make_flags(entry->value, klass));
         }
 #endif
 
@@ -622,17 +638,16 @@ flags_s_mask(VALUE klass)
 static VALUE
 flags_s_values(VALUE klass)
 {
-    GFlagsClass* gclass = g_type_class_ref(CLASS2GTYPE(klass));
-    GType gtype = G_TYPE_FROM_CLASS(gclass);
-    VALUE result = rb_ary_new();
+    GFlagsClass *gclass;
+    VALUE result;
     int i;
 
+    gclass = g_type_class_ref(CLASS2GTYPE(klass));
+    result = rb_ary_new();
     for (i = 0; i < gclass->n_values; i++) {
-        GFlagsValue* p = &(gclass->values[i]);
-        VALUE obj = rbgobj_make_flags(p->value, gtype);
-        rb_ary_push(result, obj);
+        GFlagsValue *p = &(gclass->values[i]);
+        rb_ary_push(result, make_flags(p->value, klass));
     }
-
     g_type_class_unref(gclass);
 
     return result;
@@ -862,13 +877,16 @@ flags_hash(VALUE self)
 static VALUE
 flags_coerce(VALUE self, VALUE other)
 {
-    if (rb_obj_is_kind_of(other, rb_cInteger)){
-        flags_holder* p = flags_get_holder(self);
-        GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-        other = rbgobj_make_flags(NUM2UINT(other), gtype);
-        return rb_ary_new3(2, other, self);
-    } else
+    flags_holder *holder;
+    GType gtype;
+
+    if (rb_obj_is_kind_of(other, rb_cInteger))
         rb_raise(rb_eTypeError, "can't coerce");
+
+    holder = flags_get_holder(self);
+    gtype = G_TYPE_FROM_CLASS(holder->gclass);
+    other = rbgobj_make_flags(NUM2UINT(other), gtype);
+    return rb_ary_new3(2, other, self);
 }
 
 static VALUE
