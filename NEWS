@@ -21,6 +21,8 @@ Ruby/GTK2:
       [Jesse van den Kieboom, Kouhei Sutou]
     * #2318481: gtkselectiondata_set Drag and Drop API problem
       [dave foster, Kouhei Sutou]
+    * #2420281: Failed to build
+      [troels knak-nielsen, Kouhei Sutou]
 
 Ruby/Popper:
   * removed 0.6.x support. 0.8.0 or later is required.
@@ -38,6 +40,7 @@ Ruby/RSVG2:
   * Jesse van den Kieboom
   * James Healy
   * dave foster
+  * troels knak-nielsen
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30

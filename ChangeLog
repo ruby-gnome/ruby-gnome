@@ -1,3 +1,8 @@
+2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: #2420281: Failed to build.
+	Reported by troels knak-nielsen. Thanks!!!
+
 2008-11-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: #2318481: gtkselectiondata_set Drag and Drop
