@@ -1,3 +1,8 @@
+2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* TODO: add an entry:
+	make log message handler set by Ruby/GLib removable.
+
 2008-12-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_type.c: use Mutex instead of rb_thread_critical.
