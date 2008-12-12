@@ -8,6 +8,11 @@ RELEASE NOTE. (WRITE ME)
 
 === Changes
 
+Ruby/GLib2:
+  * Bug fixes:
+    * #2420281: Failed to build
+      [troels knak-nielsen, Kouhei Sutou]
+
 Ruby/GTK2:
   * Bug fixes:
     * fixed initialize function is deleted.
