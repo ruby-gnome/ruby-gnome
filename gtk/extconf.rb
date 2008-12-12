@@ -77,15 +77,15 @@ add_depend_package("pango", "pango/src", TOPDIR)
 add_distcleanfile("rbgdkkeysyms.h")
 add_distcleanfile("rbgtkinits.c")
 
+$defs.delete("-DRUBY_GTK2_COMPILATION")
+
+add_depend_package("gtk2", "gtk/src", TOPDIR)
+
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {
   File.delete("rbgtkinits.c") if FileTest.exist?("rbgtkinits.c")
   SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbgtkinits.c") or raise "failed to make GTK inits"
   system("#{$ruby} #{SRCDIR_QUOTED}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
 }
-
-$defs.delete("-DRUBY_GTK2_COMPILATION")
-
-add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 create_top_makefile(["src"])

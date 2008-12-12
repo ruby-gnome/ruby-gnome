@@ -1,3 +1,9 @@
+2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: fix dependency check order to support build on other
+	directory. [#2420281]
+	Reported by troels knak-nielsen. Thanks!!!
+
 2008-12-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkdraw.c (gdkdraw_set_colormap, gdkdraw_get_colormap):
