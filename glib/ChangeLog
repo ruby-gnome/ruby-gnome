@@ -1,5 +1,9 @@
 2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/depend (install): glib-enum-types.h exists in $(builddir)
+	not $(srcdir). [#2420281]
+	Reported by troels knak-nielsen. Thanks!!!
+
 	* TODO: add an entry:
 	make log message handler set by Ruby/GLib removable.
 
@@ -7,7 +11,7 @@
 
 	* src/rbgobj_type.c: use Mutex instead of rb_thread_critical.
 	* src/rbgobj_boxed.c, src/rbgobj_enums.c,
-	src/rbgobj_typeinterface.c, src/lib/glib.2rb: follow the above change.
+	src/rbgobj_typeinterface.c, src/lib/glib2.rb: follow the above change.
 
 2008-11-19  Kouhei Sutou  <kou@cozmixng.org>
 
