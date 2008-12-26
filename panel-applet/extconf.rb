@@ -7,7 +7,7 @@ PACKAGE_ID   = "libpanelapplet-2.0"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
-SRCDIR = TOPDIR + '/panel-applet'
+BASE_DIR = TOPDIR + '/panel-applet'
 
 $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
@@ -19,7 +19,10 @@ setup_win32(PACKAGE_NAME)
 add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
-make_version_header("PANELAPPLET", PACKAGE_ID, ".")
+make_version_header("PANELAPPLET", PACKAGE_ID)
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANELAPPLET_COMPILATION")
-
+create_makefile_at_srcdir(PACKAGE_NAME, BASE_DIR + "/src",
+                          "-DRUBY_PANELAPPLET_COMPILATION")
+create_makefile_at_srcdir(PACKAGE_NAME + "_main", BASE_DIR + "/main",
+                          "-DRUBY_PANELAPPLET_COMPILATION")
+create_top_makefile(["src", "main"])

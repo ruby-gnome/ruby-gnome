@@ -1,3 +1,13 @@
+2008-12-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* rbpanel-applet.c: split to ...
+	* src/rbpanel-applet.c, main/rbpanel-applet-main.c: ... them to
+	support both libpanel-applet that is depended on libgnomeui and
+	not depended. This change will fix [#2466921].
+	Reported by Mamoru Tasaka. Thanks!!!
+
+	* lib/panelapplet2.rb, extconf.rb: follow the above change.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().

@@ -24,8 +24,6 @@
 
 #include "rbpanelappletversion.h"
 
-static ID id_call;
-
 #define _SELF(s) (PANEL_APPLET(RVAL2GOBJ(s)))
 
 static VALUE
@@ -150,16 +148,6 @@ void        panel_applet_setup_menu_from_file
                                              gpointer user_data);
 */
 
-static gboolean
-rbpanel_cb(applet, iid, func)
-    PanelApplet* applet;
-    const gchar* iid;
-    gpointer func;
-{
-    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(applet), CSTR2RVAL(iid)));
-}
-   
-
 static VALUE
 rbpanel_applet_gconf_get_string(self, key)
     VALUE self, key;
@@ -270,83 +258,19 @@ rbpanel_applet_gconf_set_float(self, key, value)
 }
 
 static VALUE
-rbpanel_s_main(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+rbpanel_s_need_gnome_p(VALUE self)
 {
-    VALUE func;
-    VALUE iid, klass, name, version;
-    GType gtype;
-    int ret;
-    int index;
-    char **sys_argv_p;
-    EXTERN VALUE rb_progname;
-
-    if (!rb_block_given_p()){
-        rb_raise( rb_eArgError, "PanelApplet.main requires a block" );
-    }
-    func = rb_block_proc();
-    G_RELATIVE(self, func);
-
-    if (argc > 3){
-        rb_scan_args(argc, argv, "40", &iid, &klass, &name, &version);
-        gtype = CLASS2GTYPE(klass);
-    } else {
-        rb_scan_args(argc, argv, "30", &iid, &name, &version);
-        gtype = PANEL_TYPE_APPLET;
-    }
-
-    sys_argv_p = (char**)g_new0(char*, RARRAY_LEN(rb_argv) + 1);
-
-    sys_argv_p[0] = RVAL2CSTR(rb_progname);
-    for(index = 1; index <= RARRAY_LEN(rb_argv); index++) {
-        sys_argv_p[index] = RVAL2CSTR(RARRAY_PTR(rb_argv)[index - 1]);
-    }
-
-    gnome_program_init(RVAL2CSTR(name), RVAL2CSTR(version),
-                        LIBGNOMEUI_MODULE,
-                        RARRAY_LEN(rb_argv) + 1, sys_argv_p,
-                        GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
-                        GNOME_PARAM_NONE);
-                        
-    ret = INT2NUM(panel_applet_factory_main(STR2CSTR(iid), gtype, 
-                                            (PanelAppletFactoryCallback)rbpanel_cb, 
-                                            (void*)func));
-
-    g_free( sys_argv_p );
-
-    return ret;
+#ifdef LIBGNOMEUI_MODULE
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
 }
-
-/*
-int         panel_applet_factory_main_closure
-                                            (const gchar *iid,
-                                             GType applet_type,
-                                             GClosure *closure);
-
-Bonobo_Unknown panel_applet_shlib_factory   (const char *iid,
-                                             GType applet_type,
-                                             PortableServer_POA poa,
-                                             gpointer impl_ptr,
-                                             PanelAppletFactoryCallback callback,
-                                             gpointer user_data,
-                                             CORBA_Environment *ev);
-Bonobo_Unknown panel_applet_shlib_factory_closure
-                                            (const char *iid,
-                                             GType applet_type,
-                                             PortableServer_POA poa,
-                                             gpointer impl_ptr,
-                                             GClosure *closure,
-                                             CORBA_Environment *ev);
-#define     PANEL_APPLET_BONOBO_SHLIB_FACTORY(iid, type, descr, callback, data)
-*/
 
 void
 Init_panelapplet2()
 {
     VALUE cApplet = G_DEF_CLASS(PANEL_TYPE_APPLET, "PanelApplet", rb_cObject);
-    id_call = rb_intern("call");
 
     rb_define_method(cApplet, "initialize", rbpanel_applet_initialize, 0);
 
@@ -369,7 +293,8 @@ Init_panelapplet2()
     rb_define_method(cApplet, "gconf_set_bool", rbpanel_applet_gconf_set_bool, 2);
     rb_define_method(cApplet, "gconf_set_float", rbpanel_applet_gconf_set_float, 2);
 
-    rb_define_singleton_method(cApplet, "main", rbpanel_s_main, -1);
+    rb_define_singleton_method(cApplet, "need_gnome?",
+			       rbpanel_s_need_gnome_p, 0);
 
     G_DEF_SETTERS(cApplet);
 
