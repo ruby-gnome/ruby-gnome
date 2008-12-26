@@ -137,7 +137,8 @@ current dependencies are:
    depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
 
 : Ruby/PanelApplet
-   depends on Ruby/GNOME.
+   depends on Ruby/GTK (since libpanel-applet 2.25) or
+   Ruby/GNOME (before libpanel-applet 2.25).
 
 : Ruby/RSVG
    depends on Ruby/GLib, Ruby/GdkPixbuf2.

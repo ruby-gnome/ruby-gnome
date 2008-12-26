@@ -1,3 +1,13 @@
+2008-12-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/PanelApplet: #2466921: fixed build failure with
+	libpanel-applet >= 2.25.
+	Reported by Mamoru Tasaka. Thanks!!!
+
+	BTW, can we continue supporting Ruby/PanelApplet?
+
+	* README: update Ruby/PanelApplet dependency.
+
 2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GLib2, Ruby/GTK2: #2420281: Failed to build.
