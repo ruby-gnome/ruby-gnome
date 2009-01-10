@@ -1,3 +1,9 @@
+2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_maincontext.c: add workaround for ruby 1.9.0. Should
+	we try to support 1.9.0? [#2493874]
+	Reported by boo. Thanks!!!
+
 2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend (install): glib-enum-types.h exists in $(builddir)

@@ -39,6 +39,12 @@ typedef struct _callback_info_t
 static GPollFunc default_poll_func;
 
 #ifdef HAVE_RB_THREAD_BLOCKING_REGION
+
+/* just for ruby-1.9.0. */
+#if !defined(RUBY_UBF_IO) && defined(RB_UBF_DFL)
+#  define RUBY_UBF_IO RB_UBF_DFL
+#endif
+
 typedef struct _PollInfo
 {
     GPollFD *ufds;
