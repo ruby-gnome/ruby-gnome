@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.19.0: 2008-XX-XX
+== Ruby-GNOME2 0.19.0: 2009-XX-XX
 
 RELEASE NOTE. (WRITE ME)
 
@@ -12,6 +12,8 @@ Ruby/GLib2:
   * Bug fixes:
     * #2420281: Failed to build
       [troels knak-nielsen, Kouhei Sutou]
+    * #2493874: glib/rbglib_maincontext.c error in "RUBY_UBF_IO"
+      [boo, Kouhei Sutou]
 
 Ruby/GTK2:
   * Bug fixes:
@@ -50,6 +52,7 @@ Ruby/PanelApplet:
   * James Healy
   * dave foster
   * troels knak-nielsen
+  * boo
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30
