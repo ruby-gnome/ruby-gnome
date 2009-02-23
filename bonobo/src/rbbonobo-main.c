@@ -10,7 +10,6 @@
 ************************************************/
 
 #include "rbbonobo.h"
-EXTERN VALUE rb_progname;
 
 static VALUE
 rbonobo_is_initialized(self)
@@ -40,7 +39,7 @@ rbonobo_init(argc, argv, self)
     }
 
     gargv = ALLOCA_N(char*,gargc + 1);
-    gargv[0] = RVAL2CSTR(rb_progname);
+    gargv[0] = RVAL2CSTR(rb_argv0);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {

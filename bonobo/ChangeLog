@@ -1,3 +1,7 @@
+2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbbonobo-main.c: use rb_argv0 instead of rb_progname.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().
