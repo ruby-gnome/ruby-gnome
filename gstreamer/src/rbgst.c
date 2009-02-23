@@ -141,7 +141,6 @@ Init_gst_classes (void)
  *
  * Returns: always true, or an exception on failure.
  */
-extern VALUE rb_progname;
 
 static VALUE
 rb_gst_init (int argc, VALUE * argv, VALUE self)
@@ -175,7 +174,7 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
      */
     gargv = ALLOCA_N (char *, gargc + 1);
 
-    gargv[0] = RVAL2CSTR(rb_progname);
+    gargv[0] = RVAL2CSTR(rb_argv0);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE (RARRAY_PTR(argary)[i]) == T_STRING) {
