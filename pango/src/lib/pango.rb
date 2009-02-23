@@ -1,6 +1,6 @@
 #
 # pango.rb
-# Copyright(C) 2005 Ruby-GNOME2 Project.
+# Copyright(C) 2005, 2009 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same
 # license of Ruby-GNOME2.
@@ -26,7 +26,7 @@ module Pango
         else
           yield(iter)
         end
-     end while iter.next!
+      end while iter.next!
     end
   end
 

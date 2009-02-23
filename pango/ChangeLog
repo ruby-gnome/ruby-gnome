@@ -1,3 +1,7 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/pango.rb: fix indent.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().
