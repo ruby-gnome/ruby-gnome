@@ -4,7 +4,7 @@
   rbpanel-applet-main.c
 
   Copyright (C) 2003,2004 Masao Mutoh
-  Copyright (C) 2008 Ruby-GNOME2 Project Team
+  Copyright (C) 2008-2009 Ruby-GNOME2 Project Team
 ************************************************/
 
 #include "rbgtk.h"
@@ -74,7 +74,7 @@ rbpanel_s_main(int argc, VALUE *argv, VALUE self)
     bonobo_init(&sys_argc, sys_argv_p);
 #endif
 
-    ret = INT2NUM(panel_applet_factory_main(STR2CSTR(iid),
+    ret = INT2NUM(panel_applet_factory_main(RVAL2CSTR(iid),
 					    gtype,
                                             rbpanel_cb,
                                             (gpointer)&func));
