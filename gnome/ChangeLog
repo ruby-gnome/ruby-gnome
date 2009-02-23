@@ -1,3 +1,7 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgnome.h: use ruby/io.h if it is available.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().

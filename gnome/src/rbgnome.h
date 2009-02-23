@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005, 2009 Ruby-GNOME2 Project Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,11 @@
 #undef _
 
 #include "rbgtk.h"
-#include <rubyio.h>
+#ifdef HAVE_RUBY_IO_H
+#  include <ruby/io.h>
+#else
+#  include <rubyio.h>
+#endif
 #include <libgnome/libgnometypebuiltins.h>
 #include "rbgnomeversion.h"
 
