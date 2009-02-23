@@ -1,6 +1,7 @@
-
+/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  * Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
+ * Copyright (C) 2009 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/Libgda.
  *
@@ -85,7 +86,6 @@ static void Init_all_classes(void) {
  *
  * Returns: always nil.
  */
-extern VALUE rb_progname, rb_argv;
 static VALUE rb_gda_init(argc, argv, self)
     int argc;
     VALUE *argv;
@@ -114,11 +114,11 @@ static VALUE rb_gda_init(argc, argv, self)
      *  Fill the gargv array with the provided arguments.
      */
     gargv = ALLOCA_N(char*, gargc + 1);
-    gargv[0] = (gchar *) STR2CSTR(rb_progname);
+    gargv[0] = RVAL2CSTR(rb_argv0);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
-            gargv[i+1] = (gchar *) STR2CSTR(RARRAY_PTR(argary)[i]);
+            gargv[i+1] = RVAL2CSTR(RARRAY_PTR(argary)[i]);
         }
         else {
             gargv[i+1] = "";

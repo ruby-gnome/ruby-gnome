@@ -1,3 +1,9 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgda.c (rb_gda_init):
+	- use rb_argv0 instead of rb_progname.
+	- use RVAL2CSTR instead of STR2CSTR.
+
 2008-11-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdavalue.c (rb_gda_value_to_rb_value): fix format string.
