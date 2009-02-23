@@ -1,7 +1,8 @@
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
-	* main/rbpanel-applet-main.c (rbpanel_s_main): use RVAL2CSTR
-	instead of STR2CSTR.
+	* main/rbpanel-applet-main.c (rbpanel_s_main):
+	- use RVAL2CSTR	instead of STR2CSTR.
+	- use rb_argv0 instead of rb_progname.
 
 2008-12-26  Kouhei Sutou  <kou@cozmixng.org>
 

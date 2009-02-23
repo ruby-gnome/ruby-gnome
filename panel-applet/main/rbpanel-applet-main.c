@@ -40,7 +40,6 @@ rbpanel_s_main(int argc, VALUE *argv, VALUE self)
     int index;
     int sys_argc;
     char **sys_argv_p;
-    EXTERN VALUE rb_progname;
 
     if (!rb_block_given_p()) {
         rb_raise(rb_eArgError, "PanelApplet.main requires a block");
@@ -59,7 +58,7 @@ rbpanel_s_main(int argc, VALUE *argv, VALUE self)
     sys_argc = RARRAY_LEN(rb_argv) + 1;
     sys_argv_p = (char **)g_new0(char *, sys_argc);
 
-    sys_argv_p[0] = RVAL2CSTR(rb_progname);
+    sys_argv_p[0] = RVAL2CSTR(rb_argv0);
     for(index = 1; index <= RARRAY_LEN(rb_argv); index++) {
         sys_argv_p[index] = RVAL2CSTR(RARRAY_PTR(rb_argv)[index - 1]);
     }
