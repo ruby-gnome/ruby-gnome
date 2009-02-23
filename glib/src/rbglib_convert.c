@@ -7,19 +7,11 @@
   $Date: 2007/06/16 02:46:28 $
 
   Copyright (C) 2002,2003 KUBO Takehiro
+  Copyright (C) 2009 Ruby-GNOME2 Project Team
 
 **********************************************************************/
 #include "rbgprivate.h"
 #include "rbglib.h"
-
-static VALUE
-rbglib_m_charset(self)
-    VALUE self;
-{
-    const char *charset;
-    g_get_charset(&charset);
-    return rb_str_new2(charset);
-}
 
 static VALUE
 rbglib_m_convert(self, str, to, from)
@@ -187,7 +179,8 @@ Init_glib_convert()
     rb_define_const(cCharError, "NOT_ABSOLUTE_PATH", INT2NUM(G_CONVERT_ERROR_NOT_ABSOLUTE_PATH));
 
     /* glib/gunicode.h */
-    rb_define_module_function(mGLib, "charset", rbglib_m_charset, 0);
+    /* just for backward compatibility.
+       Use GLib::UTF8.validate instead. */
     rb_define_module_function(mGLib, "utf8_validate", rbglib_m_utf8_validate, 1);
 
     /* glib/gconvert.h */

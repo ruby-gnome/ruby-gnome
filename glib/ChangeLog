@@ -1,5 +1,7 @@
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib_convert.c: remove duplicated GLib.charset method.
+
 	* src/rbgobj_object.c (Init_gobject_gobject): undef automatically
 	notify method defined for GObject::notify signal.
 
