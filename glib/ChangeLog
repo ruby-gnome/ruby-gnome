@@ -1,5 +1,8 @@
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_object.c (Init_gobject_gobject): undef automatically
+	notify method defined for GObject::notify signal.
+
 	* test/test_iochannel.rb: suppress warnings for Ruby 1.9.2dev.
 
 2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
