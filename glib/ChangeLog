@@ -1,3 +1,7 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_iochannel.rb: suppress warnings for Ruby 1.9.2dev.
+
 2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_maincontext.c: add workaround for ruby 1.9.0. Should

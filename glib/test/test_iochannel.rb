@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require 'test/unit'
 require 'glib2'
 
@@ -38,28 +40,28 @@ class TestGIOChannel < Test::Unit::TestCase
     }
     io.close
 
-    GLib::IOChannel.open(@file.path) {|io|
-      assert_equal(@content, io.read)
-    }
+    GLib::IOChannel.open(@file.path) do |_io|
+      assert_equal(@content, _io.read)
+    end
 
-    GLib::IOChannel.open(@file.path, "r") {|io|
-      assert_equal(@content, io.read)
-    }
+    GLib::IOChannel.open(@file.path, "r") do |_io|
+      assert_equal(@content, _io.read)
+    end
 
-    GLib::IOChannel.open(write_test_file.path, "w") {|io|
-      assert_raises(RuntimeError){
+    GLib::IOChannel.open(write_test_file.path, "w") do |_io|
+      io = _io
+      assert_raises(RuntimeError) do
 	assert_equal(@content, io.read)
-      }
-    }
+      end
+    end
 
-    assert_raises(GLib::IOChannelError){
+    assert_raises(GLib::IOChannelError) do
       io.close
-    }
+    end
 
-    assert_raises(GLib::FileError){
+    assert_raises(GLib::FileError) do
       GLib::IOChannel.new("foo")
-    }
-
+    end
   end
 
   def test_getc
@@ -160,15 +162,16 @@ class TestGIOChannel < Test::Unit::TestCase
     io.close
 
     #Test for Enumerable
-    GLib::IOChannel.open(@file.path) {|io| 
-      io.each_with_index {|line, i|
-	assert_equal(lines[i], line)
-      }
-    }
+    GLib::IOChannel.open(@file.path) do |_io|
+      io = _io
+      io.each_with_index do |line, _i|
+	assert_equal(lines[_i], line)
+      end
+    end
 
-    assert_raises(ArgumentError){
+    assert_raises(ArgumentError) do
       io.each
-    }
+    end
   end
 
   def test_read
