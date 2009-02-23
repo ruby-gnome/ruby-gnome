@@ -1,3 +1,7 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgst.c (rb_gst_init): use RVAL2CSTR instead of STR2CSTR.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().

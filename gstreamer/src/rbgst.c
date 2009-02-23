@@ -175,11 +175,11 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
      */
     gargv = ALLOCA_N (char *, gargc + 1);
 
-    gargv[0] = (gchar *) STR2CSTR (rb_progname);
+    gargv[0] = RVAL2CSTR(rb_progname);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE (RARRAY_PTR(argary)[i]) == T_STRING) {
-            gargv[i + 1] = (gchar *) STR2CSTR (RARRAY_PTR(argary)[i]);
+            gargv[i + 1] = RVAL2CSTR(RARRAY_PTR(argary)[i]);
         } else {
             gargv[i + 1] = "";
         }
