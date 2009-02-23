@@ -1,5 +1,8 @@
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgnome-program.c (program_initialize): use rb_progname
+	instead of rb_argv0.
+
 	* src/rbgnome.h: use ruby/io.h if it is available.
 
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>

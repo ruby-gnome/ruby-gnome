@@ -296,7 +296,6 @@ program_initialize(argc, argv, self)
     char **cargv;
     struct prop_data pdata[SIZE_OF_PROP_TABLE];
     VALUE popt_table;
-    EXTERN VALUE rb_progname;
     int i;
 
     rb_scan_args(argc, argv, "24", &app_id, &app_version, &module_info, &arg0, &args, &prop);
@@ -308,7 +307,7 @@ program_initialize(argc, argv, self)
 
     /* prepare arguments */
     if (NIL_P(arg0))
-        arg0 = rb_progname;
+        arg0 = rb_argv0;
     if (NIL_P(args)) {
         args = rb_argv;
     } else {
