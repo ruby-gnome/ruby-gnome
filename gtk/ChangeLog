@@ -1,3 +1,7 @@
+2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmain.c (gtk_m_init): use rb_argv0 instead of rb_progname.
+
 2008-12-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: fix dependency check order to support build on other

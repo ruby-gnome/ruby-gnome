@@ -1,4 +1,3 @@
-
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
@@ -7,15 +6,13 @@
   $Author: ggc $
   $Date: 2007/07/13 16:07:31 $
 
-  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+  Copyright (C) 2002,2003, 2009 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
 ************************************************/
 #include "global.h"
 #include <locale.h>
-
-EXTERN VALUE rb_progname;
 
 static VALUE rbgtk_eGtkInitError;
 
@@ -112,8 +109,8 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
         gargc = RARRAY_LEN(argary);
     }
 
-    gargv = ALLOCA_N(char*,gargc + 1);
-    gargv[0] = RVAL2CSTR(rb_progname);
+    gargv = ALLOCA_N(char *, gargc + 1);
+    gargv[0] = RVAL2CSTR(rb_argv0);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
