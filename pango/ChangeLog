@@ -1,3 +1,7 @@
+2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: set $VERBOSE.
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/pango.rb: fix indent.
