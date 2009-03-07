@@ -139,10 +139,24 @@ attr_start_index(self)
 }
 
 static VALUE
+attr_set_start_index(VALUE self, VALUE value)
+{
+    RVAL2ATTR(self)->start_index = NUM2UINT(value);
+    return Qnil;
+}
+
+static VALUE
 attr_end_index(self)
     VALUE self;
 {
     return UINT2NUM(RVAL2ATTR(self)->end_index);
+}
+
+static VALUE
+attr_set_end_index(VALUE self, VALUE value)
+{
+    RVAL2ATTR(self)->end_index = NUM2UINT(value);
+    return Qnil;
 }
 
 /* PangoAttrString */
@@ -411,7 +425,11 @@ Init_pango_attribute()
     rb_define_singleton_method(pattr, "type_register", attr_s_type_register, 1);
     rb_define_method(pattr, "==", attr_equal, 1);
     rb_define_method(pattr, "start_index", attr_start_index, 0);
+    rb_define_method(pattr, "set_start_index", attr_set_start_index, 1);
     rb_define_method(pattr, "end_index", attr_end_index, 0);
+    rb_define_method(pattr, "set_end_index", attr_set_end_index, 1);
+
+    G_DEF_SETTERS(pattr);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     rb_define_singleton_method(pattr, "allocate", attr_s_allocate, 0);

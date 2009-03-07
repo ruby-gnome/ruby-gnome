@@ -1,5 +1,9 @@
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangoattribute.c, test/test-attribute.rb: add
+	Pango::Attribute#start_index= and Pango::Attribute#end_index=.
+	Suggested by Geoff Youngs. Thanks!!!
+
 	* src/rbpangolanguage.c, test/test-language.rb: bind
 	Pango::Language.default.
 
