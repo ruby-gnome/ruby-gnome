@@ -1,4 +1,4 @@
-/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* -*- c-file-style: "ruby" -*- */
 
 /************************************************
 
@@ -6,7 +6,7 @@
 
     Ruby-GNOME2 Gtk::MozEmbed - Ruby bindings for GtkMozEmbed
 
-    Copyright (C) 2005-2006 Ruby-GNOME2 Project Team.
+    Copyright (C) 2005-2007, 2009 Ruby-GNOME2 Project Team.
     Copyright (C) 2005 Mirko Maischberger, All rights reserved.
 
     This library is free software; you can redistribute it and/or
@@ -23,12 +23,6 @@
     License along with this library; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    ***
-
-    $Author: sakai $
-    $Date: 2007/07/08 03:02:08 $
-
-    *** 
 
     Many thanks to Christopher Blizzard <blizzard@mozilla.org> for
     writing the gtkmozembed library and to the Mozilla Foundation.
@@ -38,13 +32,17 @@
 
 ************************************************/
 
-#include "ruby.h"
+#include "rbgtkmozembed.h"
 
-#include "rbgtk.h"
+#ifndef GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS
+#  define GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS (gtk_moz_embed_reload_flags_get_type ())
+GType gtk_moz_embed_reload_flags_get_type (void);
+#endif
 
-#include "gtkmozembed.h"
-
-#include "rbgtkmozembedversion.h"
+#ifndef GTK_TYPE_MOZ_EMBED_CHROME_FLAGS
+#  define GTK_TYPE_MOZ_EMBED_CHROME_FLAGS (gtk_moz_embed_chrome_flags_get_type ())
+GType gtk_moz_embed_chrome_flags_get_type (void);
+#endif
 
 /*
  * Class: Gtk::MozEmbed
@@ -670,8 +668,8 @@ gtk_moz_embed_chrome_flags_get_type(void)
 
 /** INIT **/
 
-void 
-Init_gtkmozembed()
+void
+Init_gtk_moz_embed(void)
 {
 
     VALUE moz = G_DEF_CLASS(GTK_TYPE_MOZ_EMBED, "MozEmbed", mGtk);
@@ -725,10 +723,4 @@ Init_gtkmozembed()
                                 INT2FIX(GTKMOZEMBED_MAJOR_VERSION),
                                 INT2FIX(GTKMOZEMBED_MINOR_VERSION),
                                 INT2FIX(GTKMOZEMBED_MICRO_VERSION)));
-    
-    // set default component path if defined
-#ifdef DEFAULT_MOZILLA_FIVE_HOME
-    gtk_moz_embed_set_comp_path(DEFAULT_MOZILLA_FIVE_HOME);
-#endif
-
 }

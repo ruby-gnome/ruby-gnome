@@ -1,3 +1,8 @@
+2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb, src/rbgtkmozembed.[ch], rbgtkmozembed-init.cpp:
+	support libxul-embedding-unstable.
+
 2007-12-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmozembed.c: used RSTRING_PTR() and RSTRING_LEN().
