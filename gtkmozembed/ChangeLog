@@ -1,5 +1,13 @@
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb, src/rbgtkmozembed.c: generate enum types automatically.
+
+	* test/run-test.rb, test/gtk-moz-embed-test-utils.rb: setup test
+	environment.
+
+	* src/lib/gtkmozembed.rb, test/test-gtk-moz-embed.rb: add aliases
+	for more readable constant name.
+
 	* extconf.rb, src/rbgtkmozembed.[ch], rbgtkmozembed-init.cpp:
 	support libxul-embedding-unstable.
 

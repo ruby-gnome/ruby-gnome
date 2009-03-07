@@ -41,13 +41,13 @@ PKGConfig.have_package('gtk+-2.0')
 PKGConfig.have_package(package_id)
 setup_win32(PACKAGE_NAME)
 
-mozpath = PKGConfig.libs_only_L(package_id)
-mozpath.strip!.sub!(/^-L/, "")
+mozilla_library_path = PKGConfig.libs_only_L(package_id)
+mozilla_path = mozilla_library_path.strip.sub(/^-L/, "")
 
-if mozpath
+if mozilla_path
   # please comment the CFLAGS line if you don't want a default comp_path
-  $CFLAGS << " -DDEFAULT_MOZILLA_FIVE_HOME='\"" << mozpath << "\"' "
-  $LDFLAGS << " -Wl,-rpath " << mozpath
+  $CFLAGS << " -DDEFAULT_MOZILLA_FIVE_HOME='\"#{mozilla_path}\"' "
+  $LDFLAGS << " -Wl,-rpath #{mozilla_path}"
 else
   $stderr.puts "${package_id}.pc cannot be found."
   exit 1
@@ -69,5 +69,18 @@ end
 make_version_header("GTKMOZEMBED", package_id)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
-                          "-DRUBY_GTKMOZEMBED_COMPILATION")
+                          "-DRUBY_GTKMOZEMBED_COMPILATION") do
+  enum_type_prefix = "gtkmozembed-enum-types"
+  include_paths = PKGConfig.cflags_only_I(package_id)
+  include_paths = include_paths.split.collect do |path|
+    path.strip.sub(/^-I/, '')
+  end
+  headers = include_paths.inject([]) do |result, path|
+    gtkmozembed_h = File.join(path, "gtkmozembed.h")
+    result += [gtkmozembed_h] if gtkmozembed_h
+    result
+  end
+  glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"])
+end
+
 create_top_makefile

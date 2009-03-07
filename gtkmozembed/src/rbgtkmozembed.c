@@ -33,16 +33,7 @@
 ************************************************/
 
 #include "rbgtkmozembed.h"
-
-#ifndef GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS
-#  define GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS (gtk_moz_embed_reload_flags_get_type ())
-GType gtk_moz_embed_reload_flags_get_type (void);
-#endif
-
-#ifndef GTK_TYPE_MOZ_EMBED_CHROME_FLAGS
-#  define GTK_TYPE_MOZ_EMBED_CHROME_FLAGS (gtk_moz_embed_chrome_flags_get_type ())
-GType gtk_moz_embed_chrome_flags_get_type (void);
-#endif
+#include "gtkmozembed-enum-types.h"
 
 /*
  * Class: Gtk::MozEmbed
@@ -575,97 +566,6 @@ clear_on_new_window_block(self)
     return self;
 } 
 
-
-/*************************************************************/
-/*  Some methods missing in the Gtk2 version of GtkMozEmbed  */
-
-static GtkFlagValue gtk_moz_embed_reload_flags_values[] = {
-    { GTK_MOZ_EMBED_FLAG_RELOADNORMAL,
-      "GTK_MOZ_EMBED_FLAG_RELOADNORMAL", "reloadnormal" },
-    { GTK_MOZ_EMBED_FLAG_RELOADBYPASSCACHE,
-      "GTK_MOZ_EMBED_FLAG_RELOADBYPASSCACHE", "reloadbypasscache" },
-    { GTK_MOZ_EMBED_FLAG_RELOADBYPASSPROXY,
-      "GTK_MOZ_EMBED_FLAG_RELOADBYPASSPROXY", "reloadbypassproxy" },
-    { GTK_MOZ_EMBED_FLAG_RELOADBYPASSPROXYANDCACHE,
-      "GTK_MOZ_EMBED_FLAG_RELOADBYPASSPROXYANDCACHE",
-      "reloadbypassproxyandcache" },
-    { GTK_MOZ_EMBED_FLAG_RELOADCHARSETCHANGE,
-      "GTK_MOZ_EMBED_FLAG_RELOADCHARSETCHANGE", "reloadcharset" },
-    { 0,
-      NULL, NULL }
-};
-
-static GtkFlagValue gtk_moz_embed_chrome_flags_values[] = {
-    { GTK_MOZ_EMBED_FLAG_DEFAULTCHROME, 
-      "GTK_MOZ_EMBED_FLAG_DEFAULTCHROME", "defaultchrome" },
-    { GTK_MOZ_EMBED_FLAG_WINDOWBORDERSON, 
-      "GTK_MOZ_EMBED_FLAG_WINDOWBORDERSON", "windowborderson" },
-    { GTK_MOZ_EMBED_FLAG_WINDOWCLOSEON,
-      "GTK_MOZ_EMBED_FLAG_WINDOWCLOSEON", "windowcloseon" },
-    { GTK_MOZ_EMBED_FLAG_WINDOWRESIZEON,
-      "GTK_MOZ_EMBED_FLAG_WINDOWRESIZEON", "windowresizeon" },
-    { GTK_MOZ_EMBED_FLAG_MENUBARON, 
-      "GTK_MOZ_EMBED_FLAG_MENUBARON", "menubaron" },
-    { GTK_MOZ_EMBED_FLAG_TOOLBARON,
-      "GTK_MOZ_EMBED_FLAG_TOOLBARON", "toolbaron" },
-    { GTK_MOZ_EMBED_FLAG_LOCATIONBARON,
-      "GTK_MOZ_EMBED_FLAG_LOCATIONBARON", "locationbaron" },
-    { GTK_MOZ_EMBED_FLAG_STATUSBARON,
-      "GTK_MOZ_EMBED_FLAG_STATUSBARON", "statusbaron" },
-    { GTK_MOZ_EMBED_FLAG_PERSONALTOOLBARON,
-      "GTK_MOZ_EMBED_FLAG_PERSONALTOOLBARON", "personaltoolbaron" },
-    { GTK_MOZ_EMBED_FLAG_SCROLLBARSON,
-      "GTK_MOZ_EMBED_FLAG_SCROLLBARSON", "scrollbarson" },
-    { GTK_MOZ_EMBED_FLAG_TITLEBARON, 
-      "GTK_MOZ_EMBED_FLAG_TITLEBARON", "titlebaron" },
-    { GTK_MOZ_EMBED_FLAG_EXTRACHROMEON,
-      "GTK_MOZ_EMBED_FLAG_EXTRACHROMEON", "extrachromeon" },
-    { GTK_MOZ_EMBED_FLAG_ALLCHROME, 
-      "GTK_MOZ_EMBED_FLAG_ALLCHROME", "allchrome" },
-    { GTK_MOZ_EMBED_FLAG_WINDOWRAISED, 
-      "GTK_MOZ_EMBED_FLAG_WINDOWRAISED", "windowraised" },
-    { GTK_MOZ_EMBED_FLAG_WINDOWLOWERED,
-      "GTK_MOZ_EMBED_FLAG_WINDOWLOWERED", "windowlowered" },
-    { GTK_MOZ_EMBED_FLAG_CENTERSCREEN,
-      "GTK_MOZ_EMBED_FLAG_CENTERSCREEN", "centerscreen" },
-    { GTK_MOZ_EMBED_FLAG_DEPENDENT,
-      "GTK_MOZ_EMBED_FLAG_DEPENDENT", "dependent" },
-    { GTK_MOZ_EMBED_FLAG_MODAL,
-      "GTK_MOZ_EMBED_FLAG_MODAL", "modal" },
-    { GTK_MOZ_EMBED_FLAG_OPENASDIALOG,
-      "GTK_MOZ_EMBED_FLAG_OPENASDIALOG", "openasdialog" },
-    { GTK_MOZ_EMBED_FLAG_OPENASCHROME, 
-      "GTK_MOZ_EMBED_FLAG_OPENASCHROME", "openaschrome" },
-    { 0,
-      NULL, NULL }
-};
-
-GtkType
-gtk_moz_embed_reload_flags_get_type(void)
-{
-    static GtkType reload_flags_type = 0;
-
-    if (!reload_flags_type)
-        reload_flags_type =
-            g_flags_register_static("GtkMozEmbedReloadFlags",
-                                    gtk_moz_embed_reload_flags_values);
-    return reload_flags_type;
-}
-
-GtkType
-gtk_moz_embed_chrome_flags_get_type(void)
-{
-    static GtkType chrome_flags_type = 0;
-
-    if (!chrome_flags_type)
-        chrome_flags_type = 
-            g_flags_register_static("GtkMozEmbedChromeFlags",
-                                    gtk_moz_embed_chrome_flags_values);
-    return chrome_flags_type;
-}
-/*                                                           */
-/*************************************************************/
-
 /** INIT **/
 
 void
@@ -710,12 +610,20 @@ Init_gtk_moz_embed(void)
 
     G_DEF_SETTERS(moz);
 
+    G_DEF_CLASS(GTK_TYPE_MOZ_EMBED_PROGRESS_FLAGS, "ProgressFlags", moz);
+    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_PROGRESS_FLAGS,
+                    "GTK_MOZ_EMBED_FLAG_");
+
+    G_DEF_CLASS(GTK_TYPE_MOZ_EMBED_STATUS_FLAGS, "StatusFlags", moz);
+    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_STATUS_FLAGS,
+                    "GTK_MOZ_EMBED_STATUS_");
+
     G_DEF_CLASS(GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS, "ReloadFlags", moz);
-    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS, 
+    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS,
                     "GTK_MOZ_EMBED_FLAG_");
 
     G_DEF_CLASS(GTK_TYPE_MOZ_EMBED_CHROME_FLAGS, "ChromeFlags", moz);
-    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_CHROME_FLAGS, 
+    G_DEF_CONSTANTS(moz, GTK_TYPE_MOZ_EMBED_CHROME_FLAGS,
                     "GTK_MOZ_EMBED_FLAG_");
 
     rb_define_const(moz, "BUILD_VERSION",

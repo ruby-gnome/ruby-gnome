@@ -1,0 +1,2 @@
+module GtkMozEmbedTestUtils
+end
