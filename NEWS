@@ -47,6 +47,10 @@ Ruby/PanelApplet:
   * #2466921: fixed build failure with libpanel-applet >= 2.25
     [Mamoru Tasaka, Kouhei Sutou]
 
+Ruby/GtkMozEmbed:
+  * supported XULRunner 1.9.0.
+    [Arnaud Cornet, Kouhei Sutou]
+
 === Thanks
 
   * kimura wataru
@@ -57,6 +61,8 @@ Ruby/PanelApplet:
   * dave foster
   * troels knak-nielsen
   * boo
+  * Geoff Youngs
+  * Arnaud Cornet
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30
