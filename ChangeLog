@@ -1,10 +1,16 @@
+2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/Pango:
+	Pango::Attribute#start_index= and Pango::Attribute#end_index=.
+	Suggested by Geoff Youngs. Thanks!!!
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* README: partially work with Ruby 1.9.1.
 
 2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS: NEWS: Ruby/GLib2: #2493874: glib/rbglib_maincontext.c
+	* NEWS: Ruby/GLib2: #2493874: glib/rbglib_maincontext.c
 	error in "RUBY_UBF_IO".
 	Reported by boo. Thanks!!!
 

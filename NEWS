@@ -31,6 +31,10 @@ Ruby/GTK2:
     * #2420281: Failed to build
       [troels knak-nielsen, Kouhei Sutou]
 
+Ruby/Pango:
+  * added Pango::Attribute#start_index= and Pango::Attribute#end_index=.
+    [Geoff Youngs, Kouhei Sutou]
+
 Ruby/Popper:
   * removed 0.6.x support. 0.8.0 or later is required.
     [Kouhei Sutou]
