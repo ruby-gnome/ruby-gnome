@@ -637,7 +637,7 @@ timeout_add(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11&", &interval, &rb_priority, &func);
 
-    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : INT2NUM(rb_priority);
+    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : NUM2INT(rb_priority);
     info = ALLOC(callback_info_t);
     info->callback = func;
     id = g_timeout_add_full(priority, NUM2UINT(interval),
@@ -661,7 +661,7 @@ timeout_add_seconds(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11&", &interval, &rb_priority, &func);
 
-    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : INT2NUM(rb_priority);
+    priority = NIL_P(rb_priority) ? G_PRIORITY_DEFAULT : NUM2INT(rb_priority);
     info = ALLOC(callback_info_t);
     info->callback = func;
     id = g_timeout_add_seconds_full(priority,

@@ -1,3 +1,9 @@
+2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib_maincontext.c, test/test_timeout.rb: fix inverted
+	type conversion.
+	Reported by Nikolai Weibull. Thanks!!!
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib_convert.c: remove duplicated GLib.charset method.
