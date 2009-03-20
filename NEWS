@@ -14,6 +14,8 @@ Ruby/GLib2:
       [troels knak-nielsen, Kouhei Sutou]
     * #2493874: glib/rbglib_maincontext.c error in "RUBY_UBF_IO"
       [boo, Kouhei Sutou]
+    * wrong priority conversion in GLib::Timeout.add and
+      GLib::Timeout.add_seconds. [Nikolai Weibull]
 
 Ruby/GTK2:
   * Bug fixes:

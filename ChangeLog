@@ -1,3 +1,9 @@
+2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: wrong priority conversion in GLib::Timeout.add
+	and GLib::Timeout.add_seconds.
+	Reported by Nikolai Weibull. Thanks!!!
+
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: supported XULRunner 1.9.0.
