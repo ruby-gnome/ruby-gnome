@@ -1,3 +1,9 @@
+2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbbonobo-ui-main.c: moved Bonobo.setup_x_error_handler from
+	Ruby/Bonobo2.
+	Reported by id:luna_8bit. Thanks!!!
+
 2007-07-13  Guillaume Cottenceau
 
 	* src/rbbonobo-dock.c: replace RTEST uses by RVAL2CBOOL

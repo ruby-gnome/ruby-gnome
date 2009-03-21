@@ -6,17 +6,20 @@
   $Author: ggc $
   $Date: 2007/07/13 14:27:06 $
 
+  Copyright (C) 2009 The Ruby GNOME2 Project Team
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
 #include "rbbonoboui.h"
 
-/*
-static int
-bonobo_x_error_handler (Display *display, XErrorEvent *error)
-void
-bonobo_setup_x_error_handler (void)
-*/
+#ifdef GDK_WINDOWING_X11
+static VALUE
+rbonobo_setup_x_error_handler(VALUE self)
+{
+    bonobo_setup_x_error_handler();
+    return self;
+}
+#endif
 
 static VALUE
 rbonoboui_is_initialized(self)
@@ -74,9 +77,12 @@ rbonoboui_module_info_get(self)
 void
 Init_bonobo_ui_main()
 {
+#ifdef GDK_WINDOWING_X11
+    rb_define_module_function(mBonobo, "setup_x_error_handler", rbonobo_setup_x_error_handler, 0);
+#endif
+
     rb_define_module_function(mBonoboUI, "initialized?", rbonoboui_is_initialized, 0);
     rb_define_module_function(mBonoboUI, "main", rbonoboui_main, 0);
     rb_define_module_function(mBonoboUI, "debug_shutdown", rbonoboui_debug_shutdown, 0);
     rb_define_module_function(mBonoboUI, "module_info", rbonoboui_module_info_get, 0);
-
 }
