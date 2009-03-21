@@ -20,7 +20,6 @@
 
 #define ENABLE_NLS 1
 
-#include <sys/time.h>
 #include <gnome.h>
 
 #undef PATH_SEP
@@ -43,8 +42,6 @@
         (obj) = Qnil; \
     } \
 } while(0)
-
-struct timeval rb_time_timeval(VALUE);
 
 VALUE rbgno_poptoption_raw_to_arary(struct poptOption *);
 VALUE rbgno_poptoption_array_to_obj(VALUE);

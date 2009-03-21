@@ -1,3 +1,9 @@
+2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgnome.h, src/rbgnome-dateedit.c: use <time.h> instead of
+	<sys/time.h>.
+	Reported by id:luna_8bit. Thanks!!!
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgnome-program.c (program_initialize): use rb_progname

@@ -3,7 +3,7 @@
 /* based on libgnomeui/gnome-dateedit.h */
 
 /* Gnome::DateEdit widget for Ruby/GNOME2
- * Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+ * Copyright (C) 2002-2005, 2009 Ruby-GNOME2 Project Team
  * Copyright (C) 2002      KUBO Takehiro <kubo@jiubao.org>
  * Copyright (C) 2001      Neil Conway <neilconway@rogers.com>
  *
@@ -23,16 +23,16 @@
  */
 
 #include "rbgnome.h"
+#include <time.h>
+
+struct timeval rb_time_timeval(VALUE);
 
 static ID id_at;
 
 #define _SELF(self) GNOME_DATE_EDIT(RVAL2GOBJ(self))
 
 static VALUE
-dateedit_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+dateedit_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE the_time, show_time, use_24_format;
     struct timeval tv;
