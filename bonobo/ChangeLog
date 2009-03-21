@@ -1,3 +1,9 @@
+2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbbonobo-main.c: move Bonobo.setup_x_error_handler to
+	Ruby/BonoboUI2.
+	Reported by id:luna_8bit. Thanks!!!
+
 2009-01-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbbonobo-main.c: use rb_argv0 instead of rb_progname.

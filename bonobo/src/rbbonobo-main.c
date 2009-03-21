@@ -6,6 +6,7 @@
   $Author: mutoh $
   $Date: 2002/12/22 14:27:43 $
 
+  Copyright (C) 2009 The Ruby GNOME2 Project Team
   Copyright (C) 2002 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
@@ -92,14 +93,6 @@ rbonobo_activate(self)
     return CBOOL2RVAL(bonobo_activate());
 }
 
-static VALUE
-rbonobo_setup_x_error_handler(self)
-    VALUE self;
-{
-    bonobo_setup_x_error_handler();
-    return self;
-}
-
 /*
 CORBA_ORB   bonobo_orb                      (void);
 PortableServer_POA bonobo_poa               (void);
@@ -115,6 +108,5 @@ Init_bonobo_main()
     rb_define_module_function(mBonobo, "main", rbonobo_main, 0);
     rb_define_module_function(mBonobo, "main_quit", rbonobo_main_quit, 0);
     rb_define_module_function(mBonobo, "activate", rbonobo_activate, 0);
-    rb_define_module_function(mBonobo, "setup_x_error_handler", rbonobo_setup_x_error_handler, 0);
 
 }
