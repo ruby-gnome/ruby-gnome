@@ -4,6 +4,9 @@
 	and GLib::Timeout.add_seconds.
 	Reported by Nikolai Weibull. Thanks!!!
 
+	* NEWS: Ruby/GNOME2: support MinGW.
+	Reported by id:luna_8bit. Thanks!!!
+
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: supported XULRunner 1.9.0.

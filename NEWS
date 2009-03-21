@@ -53,6 +53,10 @@ Ruby/GtkMozEmbed:
   * supported XULRunner 1.9.0.
     [Arnaud Cornet, Kouhei Sutou]
 
+Ruby/GNOME2:
+  * support MinGW.
+    [id:luna_8bit, Kouhei Sutou]
+
 === Thanks
 
   * kimura wataru
