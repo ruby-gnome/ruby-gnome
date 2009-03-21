@@ -54,7 +54,15 @@ Ruby/GtkMozEmbed:
     [Arnaud Cornet, Kouhei Sutou]
 
 Ruby/GNOME2:
-  * support MinGW.
+  * supported MinGW.
+    [id:luna_8bit, Kouhei Sutou]
+
+Ruby/Bonobo2:
+  * moved Bonobo.setup_x_error_handler to Ruby/BonoboUI2.
+    [id:luna_8bit, Kouhei Sutou]
+
+Ruby/BonoboUI2:
+  * moved Bonobo.setup_x_error_handler from Ruby/Bonobo2.
     [id:luna_8bit, Kouhei Sutou]
 
 === Thanks
@@ -69,6 +77,7 @@ Ruby/GNOME2:
   * boo
   * Geoff Youngs
   * Arnaud Cornet
+  * id:luna_8bit
   * ...
 
 == Ruby-GNOME2 0.18.0: 2008-09-30

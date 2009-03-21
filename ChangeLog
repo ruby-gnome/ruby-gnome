@@ -1,11 +1,19 @@
 2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS: Ruby/GLib2: wrong priority conversion in GLib::Timeout.add
-	and GLib::Timeout.add_seconds.
-	Reported by Nikolai Weibull. Thanks!!!
+	* NEWS: Ruby/Bonobo2: moved Bonobo.setup_x_error_handler to
+	Ruby/BonoboUI2.
+	Reported by id:luna_8bit. Thanks!!!
+
+	* NEWS: Ruby/BonoboUI2: moved Bonobo.setup_x_error_handler from
+	Ruby/Bonobo2.
+	Reported by id:luna_8bit. Thanks!!!
 
 	* NEWS: Ruby/GNOME2: support MinGW.
 	Reported by id:luna_8bit. Thanks!!!
+
+	* NEWS: Ruby/GLib2: wrong priority conversion in GLib::Timeout.add
+	and GLib::Timeout.add_seconds.
+	Reported by Nikolai Weibull. Thanks!!!
 
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
