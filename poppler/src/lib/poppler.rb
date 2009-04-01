@@ -1,3 +1,17 @@
+# Copyright(C) 2006-2009 Ruby-GNOME2 Project.
+#
+# This library is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 2.1 of the License.
+#
+# Foobar is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
 require "tempfile"
 require "date"
 require "glib2"
@@ -5,6 +19,12 @@ require "gdk_pixbuf2"
 begin
   require "gtk2"
 rescue LoadError
+rescue
+  if defined?(Gtk::InitError) and $!.class == Gtk::InitError
+    # ignore
+  else
+    raise
+  end
 end
 begin
   require "cairo"
