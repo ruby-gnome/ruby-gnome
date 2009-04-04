@@ -1,3 +1,9 @@
+2009-04-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: add 'const' to name argument of
+	rbgerr_define_gerror().
+	Suggested by Nikolai Weibull.
+
 2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/Bonobo2: moved Bonobo.setup_x_error_handler to

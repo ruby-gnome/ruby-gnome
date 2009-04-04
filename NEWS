@@ -9,6 +9,8 @@ RELEASE NOTE. (WRITE ME)
 === Changes
 
 Ruby/GLib2:
+  * add 'const' to name argument of rbgerr_define_gerror()
+    [Nikolai Weibull, Kouhei Sutou]
   * Bug fixes:
     * #2420281: Failed to build
       [troels knak-nielsen, Kouhei Sutou]
