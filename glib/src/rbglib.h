@@ -82,7 +82,7 @@ extern VALUE rbg_cstr2rval_with_free(gchar* str);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);
-extern VALUE rbgerr_define_gerror(GQuark domain, gchar* name, VALUE module, VALUE parent, VALUE gtype);
+extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, VALUE gtype);
 
 extern VALUE rbglib_int64_to_num(guint64 val);
 extern VALUE rbglib_uint64_to_num(guint64 val);

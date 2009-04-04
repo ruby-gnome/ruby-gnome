@@ -45,7 +45,7 @@ rbgerr_gerror2exception(error)
 VALUE
 rbgerr_define_gerror(domain, name, module, parent, gtype)
     GQuark domain;
-    gchar* name;
+    const gchar* name;
     VALUE module;
     VALUE parent;
     VALUE gtype;
