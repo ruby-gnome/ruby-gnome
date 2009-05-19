@@ -1,3 +1,8 @@
+2009-05-19  Pascal Terjan <pterjan@linuxfr.org>
+
+	* src/gnomevfs-result.c (gnomevfs_result_to_rval): fix format
+	security error.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().

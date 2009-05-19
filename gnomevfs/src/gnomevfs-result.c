@@ -46,7 +46,7 @@ gnomevfs_result_to_rval(result)
     if (result == GNOME_VFS_OK) {
         return Qtrue;
     } else {
-        GError* error = g_error_new(GNOME_VFS_ERROR, result, 
+        GError* error = g_error_new(GNOME_VFS_ERROR, result, "%s",
                                     gnome_vfs_result_to_string(result));
         RAISE_GERROR(error);
     }
