@@ -67,6 +67,10 @@ Ruby/BonoboUI2:
   * moved Bonobo.setup_x_error_handler from Ruby/Bonobo2.
     [id:luna_8bit, Kouhei Sutou]
 
+Ruby/GnomeVFS:
+  * format security error.
+    [Pascal Terjan]
+
 === Thanks
 
   * kimura wataru
