@@ -1,3 +1,8 @@
+2009-05-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: fix incomplete install.
+	Reported by Pascal Terjan. Thanks!!!
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* main/rbpanel-applet-main.c (rbpanel_s_main):
