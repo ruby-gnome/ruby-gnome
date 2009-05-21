@@ -1,3 +1,8 @@
+2009-05-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/PanelApplet: fixed incomplete install.
+	Reported by Pascal Terjan. Thanks!!!
+
 2009-05-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GnomeVFS: format security error.

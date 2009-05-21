@@ -50,6 +50,8 @@ Ruby/RSVG2:
 Ruby/PanelApplet:
   * #2466921: fixed build failure with libpanel-applet >= 2.25
     [Mamoru Tasaka, Kouhei Sutou]
+  * fixed incomplete install.
+    [Pascal Terjan, Kouhei Sutou]
 
 Ruby/GtkMozEmbed:
   * supported XULRunner 1.9.0.
