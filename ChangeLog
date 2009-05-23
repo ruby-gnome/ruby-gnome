@@ -1,3 +1,7 @@
+2009-05-23  Detlef Reichl  <detlef.reichl@gmx.org>
+
+	* NEWS: Ruby/PanelApplet: added set_menu method
+
 2009-05-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/PanelApplet: fixed incomplete install.

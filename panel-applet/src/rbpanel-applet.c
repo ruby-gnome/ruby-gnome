@@ -9,6 +9,7 @@
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
+#include "global.h"
 #include "rbgobject.h"
 #include "rbgtk.h"
 
@@ -25,6 +26,9 @@
 #include "rbpanelappletversion.h"
 
 #define _SELF(s) (PANEL_APPLET(RVAL2GOBJ(s)))
+
+static VALUE action_table;
+static guint action_id = 0;
 
 static VALUE
 rbpanel_applet_initialize(self)
@@ -135,10 +139,6 @@ rbpanel_applet_get_popup_component(self)
 }
 
 /*
-void        panel_applet_setup_menu         (PanelApplet *applet,
-                                             const gchar *xml,
-                                             const BonoboUIVerb *verb_list,
-                                             gpointer user_data);
 void        panel_applet_setup_menu_from_file
                                             (PanelApplet *applet,
                                              const gchar *opt_datadir,
@@ -147,6 +147,69 @@ void        panel_applet_setup_menu_from_file
                                              const BonoboUIVerb *verb_list,
                                              gpointer user_data);
 */
+
+static void menu_callback_wrap (uic, action_id, verbname)
+    BonoboUIComponent *uic;
+    guint action_id;
+    const gchar *verbname;
+{
+    VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));
+    
+    if (!NIL_P(action)) {
+        rb_funcall(action, id_call, 0);
+    }
+}
+
+static void ui_verb_set_data (self, verb, name, proc)
+    VALUE self;
+    BonoboUIVerb *verb;
+    VALUE name;
+    VALUE proc;
+{
+    verb->cname = (const gchar *)g_strdup (RVAL2CSTR(name));
+    verb->cb = (BonoboUIVerbFn)menu_callback_wrap;
+    verb->user_data = GUINT_TO_POINTER (action_id);
+
+    rb_hash_aset(action_table, UINT2NUM(action_id), proc);
+    action_id++;
+}
+
+static VALUE
+rbpanel_applet_set_menu(self, xml, verbs)
+    VALUE self;
+    VALUE xml;
+    VALUE verbs;
+{
+    int i;
+    int len;
+    
+    Check_Type(verbs, T_ARRAY);
+    len = RARRAY_LEN(verbs);
+    if (!len){
+        bonobo_ui_component_rm (panel_applet_get_popup_component (_SELF(self)),
+                                "/", NULL);
+        return Qnil;
+    }
+    
+    BonoboUIVerb *menu_verbs = g_new (BonoboUIVerb, len + 1);
+    menu_verbs[len].cname = NULL;
+    menu_verbs[len].cb = NULL;
+    
+    for (i = 0; i < len; i++) {
+        Check_Type(RARRAY_PTR(verbs)[i], T_ARRAY);
+        if (RARRAY_LEN(RARRAY_PTR(verbs)[i]) != 2)
+        rb_raise(rb_eArgError, "invalid parameter length in verbs");
+        ui_verb_set_data (self, &menu_verbs[i],
+                          RARRAY_PTR(RARRAY_PTR(verbs)[i])[0],
+                          RARRAY_PTR(RARRAY_PTR(verbs)[i])[1]);
+    }
+    
+    panel_applet_setup_menu (_SELF(self),
+                             RVAL2CSTR (xml),
+                             menu_verbs,
+                             NULL);
+    return Qnil;
+}
 
 static VALUE
 rbpanel_applet_gconf_get_string(self, key)
@@ -284,6 +347,7 @@ Init_panelapplet2()
     rb_define_method(cApplet, "set_size_hints", rbpanel_applet_set_size_hints, 2);
     rb_define_method(cApplet, "control", rbpanel_applet_get_control, 0);
     rb_define_method(cApplet, "popup_component", rbpanel_applet_get_popup_component, 0);
+    rb_define_method(cApplet, "set_menu", rbpanel_applet_set_menu, 2);
     rb_define_method(cApplet, "gconf_get_int", rbpanel_applet_gconf_get_int, 1);
     rb_define_method(cApplet, "gconf_get_string", rbpanel_applet_gconf_get_string, 1);
     rb_define_method(cApplet, "gconf_get_bool", rbpanel_applet_gconf_get_bool, 1);
@@ -316,4 +380,7 @@ Init_panelapplet2()
                                 INT2FIX(PANELAPPLET_MAJOR_VERSION),
                                 INT2FIX(PANELAPPLET_MINOR_VERSION),
                                 INT2FIX(PANELAPPLET_MICRO_VERSION)));
+
+    action_table = rb_hash_new();
+    rb_global_variable(&action_table);
 }
