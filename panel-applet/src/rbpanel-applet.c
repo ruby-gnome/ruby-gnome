@@ -9,7 +9,6 @@
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
-#include "global.h"
 #include "rbgobject.h"
 #include "rbgtk.h"
 
@@ -110,6 +109,14 @@ rbpanel_applet_set_flags(self, flags)
 }
 
 static VALUE
+rbpanel_applet_request_focus(self,timestamp)
+    VALUE self, timestamp;
+{
+    panel_applet_request_focus(_SELF(self), NUM2UINT(timestamp));
+    return self;
+}
+
+static VALUE
 rbpanel_applet_set_size_hints(self, size_hints, base_size)
     VALUE self, size_hints, base_size;
 {
@@ -153,6 +160,7 @@ static void menu_callback_wrap (uic, action_id, verbname)
     guint action_id;
     const gchar *verbname;
 {
+    ID id_call = rb_intern("call");
     VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));
     
     if (!NIL_P(action)) {
@@ -344,6 +352,7 @@ Init_panelapplet2()
     rb_define_method(cApplet, "add_preferences", rbpanel_applet_add_preferences, 1);
     rb_define_method(cApplet, "flags", rbpanel_applet_get_flags, 0);
     rb_define_method(cApplet, "set_flags", rbpanel_applet_set_flags, 1);
+    rb_define_method(cApplet, "request_focus", rbpanel_applet_request_focus, 1);
     rb_define_method(cApplet, "set_size_hints", rbpanel_applet_set_size_hints, 2);
     rb_define_method(cApplet, "control", rbpanel_applet_get_control, 0);
     rb_define_method(cApplet, "popup_component", rbpanel_applet_get_popup_component, 0);

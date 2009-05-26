@@ -1,3 +1,9 @@
+2009-05-26  Detlef Reichl  <detlef.reichl@gmx.org>
+
+	* FIX: Ruby/PanelApplet: fixed build problem
+	Reported by Grant McLean. Thanks!!
+	* NEWS: Ruby/PanelApplet: added request_focus method
+
 2009-05-23  Detlef Reichl  <detlef.reichl@gmx.org>
 
 	* NEWS: Ruby/PanelApplet: added set_menu method
