@@ -2,7 +2,7 @@ class TestPage < Test::Unit::TestCase
   def test_get_image
     document = Poppler::Document.new(image_pdf)
     page, mapping = find_first_image_mapping(document)
-    if later_version?(0, 7, 2)
+    if later_version?(0, 7, 2) and Poppler.cairo_available?
       assert_kind_of(Cairo::ImageSurface, page.get_image(mapping.image_id))
       assert_kind_of(Cairo::ImageSurface, mapping.image)
     else
