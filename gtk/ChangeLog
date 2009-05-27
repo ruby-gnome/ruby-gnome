@@ -1,3 +1,8 @@
+2009-05-27  Pascal Terjan  <pterjan@linuxfr.org>
+	* test/test_gdk_display.rb (test_broadcast_startup_message):
+	As explained by Kouhei, Gdk::Display#broadcast_startup_message is
+	not yet implemented (see GNOME bug #528020), so omit the test for now.
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmain.c (gtk_m_init): use rb_argv0 instead of rb_progname.

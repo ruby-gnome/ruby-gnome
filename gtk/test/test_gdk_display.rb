@@ -19,6 +19,7 @@ class TestGdkDisplay < Test::Unit::TestCase
   end
 
   def test_broadcast_startup_message
+    omit("Not yet implemented (GNOME bug #528020)")
     only_gtk_version(2, 16, 0)
     only_x11
 
