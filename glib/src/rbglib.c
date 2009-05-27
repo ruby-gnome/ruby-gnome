@@ -200,41 +200,41 @@ Init_glib2()
 
     /* Limits of Basic Types */
     rb_define_const(mGLib, "MININT", INT2FIX(G_MININT));
-    rb_define_const(mGLib, "MAXINT", INT2FIX(G_MAXINT));
-    rb_define_const(mGLib, "MAXUINT", INT2FIX(G_MAXUINT));
+    rb_define_const(mGLib, "MAXINT", INT2NUM(G_MAXINT));
+    rb_define_const(mGLib, "MAXUINT", UINT2NUM(G_MAXUINT));
     
     rb_define_const(mGLib, "MINSHORT", INT2FIX(G_MINSHORT));
     rb_define_const(mGLib, "MAXSHORT", INT2FIX(G_MAXSHORT));
-    rb_define_const(mGLib, "MAXUSHORT", INT2FIX(G_MAXUSHORT));
+    rb_define_const(mGLib, "MAXUSHORT", UINT2NUM(G_MAXUSHORT));
 
     rb_define_const(mGLib, "MINLONG", INT2FIX(G_MINLONG));
-    rb_define_const(mGLib, "MAXLONG", INT2FIX(G_MAXLONG));
-    rb_define_const(mGLib, "MAXULONG", INT2FIX(G_MAXULONG));
+    rb_define_const(mGLib, "MAXLONG", INT2NUM(G_MAXLONG));
+    rb_define_const(mGLib, "MAXULONG", UINT2NUM(G_MAXULONG));
 
 #if GLIB_CHECK_VERSION(2,4,0)
     rb_define_const(mGLib, "MININT8", INT2FIX(G_MININT8));
     rb_define_const(mGLib, "MAXINT8", INT2FIX(G_MAXINT8));
-    rb_define_const(mGLib, "MAXUINT8", INT2FIX(G_MAXUINT8));
+    rb_define_const(mGLib, "MAXUINT8", UINT2NUM(G_MAXUINT8));
 
     rb_define_const(mGLib, "MININT16", INT2FIX(G_MININT16));
     rb_define_const(mGLib, "MAXINT16", INT2FIX(G_MAXINT16));
-    rb_define_const(mGLib, "MAXUINT16", INT2FIX(G_MAXUINT16));
+    rb_define_const(mGLib, "MAXUINT16", UINT2NUM(G_MAXUINT16));
 
     rb_define_const(mGLib, "MININT32", INT2FIX(G_MININT32));
-    rb_define_const(mGLib, "MAXINT32", INT2FIX(G_MAXINT32));
-    rb_define_const(mGLib, "MAXUINT32", INT2FIX(G_MAXUINT32));
+    rb_define_const(mGLib, "MAXINT32", INT2NUM(G_MAXINT32));
+    rb_define_const(mGLib, "MAXUINT32", UINT2NUM(G_MAXUINT32));
 #endif
     rb_define_const(mGLib, "MININT64", INT2FIX(G_MININT64));
-    rb_define_const(mGLib, "MAXINT64", INT2FIX(G_MAXINT64));
-    rb_define_const(mGLib, "MAXUINT64", INT2FIX(G_MAXUINT64));
+    rb_define_const(mGLib, "MAXINT64", LL2NUM(G_MAXINT64));
+    rb_define_const(mGLib, "MAXUINT64", ULL2NUM(G_MAXUINT64));
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_const(mGLib, "MAXSIZE", INT2FIX(G_MAXSIZE));
+    rb_define_const(mGLib, "MAXSIZE", UINT2NUM(G_MAXSIZE));
 #endif
     rb_define_const(mGLib, "MINFLOAT", INT2FIX(G_MINFLOAT));
-    rb_define_const(mGLib, "MAXFLOAT", INT2FIX(G_MAXFLOAT));
+    rb_define_const(mGLib, "MAXFLOAT", DBL2NUM(G_MAXFLOAT));
 
     rb_define_const(mGLib, "MINDOUBLE", INT2FIX(G_MINDOUBLE));
-    rb_define_const(mGLib, "MAXDOUBLE", INT2FIX(G_MAXDOUBLE));
+    rb_define_const(mGLib, "MAXDOUBLE", DBL2NUM(G_MAXDOUBLE));
 
     /* Standard Macros */
     rb_define_module_function(mGLib, "os_win32?", rbg_s_os_win32, 0);

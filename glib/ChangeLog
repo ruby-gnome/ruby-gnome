@@ -1,3 +1,7 @@
+2009-05-27  Pascal Terjan  <pterjan@linuxfr.org>
+
+	* src/rbglib.c: fix limits of basic types
+
 2009-04-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h, src/rbglib_error.c (rbgerr_define_gerror): add
