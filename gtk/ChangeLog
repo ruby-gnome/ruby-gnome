@@ -1,3 +1,6 @@
+2009-05-27  Detlef Reichl  <detlef.reichl@gmx.org>
+	* src/rbgtkmain.c (gtk_m_init): use $0 instead of rb_argv0.
+
 2009-05-27  Pascal Terjan  <pterjan@linuxfr.org>
 	* test/test_gdk_display.rb (test_broadcast_startup_message):
 	As explained by Kouhei, Gdk::Display#broadcast_startup_message is

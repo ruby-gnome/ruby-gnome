@@ -93,6 +93,7 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
     gint i, gargc;
     VALUE argary;
     gchar** gargv;
+    VALUE progname;
 
     if (_initialized)
         return self;
@@ -108,9 +109,10 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
         Check_Type(argary, T_ARRAY);
         gargc = RARRAY_LEN(argary);
     }
-
+    
     gargv = ALLOCA_N(char *, gargc + 1);
-    gargv[0] = RVAL2CSTR(rb_argv0);
+    progname = rb_gv_get("$0");
+    gargv[0] = RVAL2CSTR(progname);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
