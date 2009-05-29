@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.19.0: 2009-XX-XX
+== Ruby-GNOME2 0.19.0: 2009-05-29
 
 This release supports new versions of panel-applet and xulrunner
 and fixes various bugs including some GC issues
