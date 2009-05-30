@@ -2,6 +2,18 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.19.1: 2009-XX-XX
+
+RELEASE NOTE. WRITE ME.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Bug fixes:
+    * avoid object allocation while GC
+      [OBATA Akio, Kouhei Sutou]
+
 == Ruby-GNOME2 0.19.0: 2009-05-29
 
 This release supports new versions of panel-applet and xulrunner
@@ -18,7 +30,7 @@ Ruby/GLib2:
     * #2493874: glib/rbglib_maincontext.c error in "RUBY_UBF_IO"
       [boo, Kouhei Sutou]
     * wrong priority conversion in GLib::Timeout.add and
-      GLib::Timeout.add_seconds. 
+      GLib::Timeout.add_seconds.
       [Nikolai Weibull]
     * fixed limits of basic types
       [Pascal Terjan]
