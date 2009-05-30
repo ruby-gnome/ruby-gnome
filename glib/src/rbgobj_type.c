@@ -7,7 +7,7 @@
   $Date: 2007/07/16 03:35:53 $
   created at: Sun Jun  9 20:31:47 JST 2002
 
-  Copyright (C) 2002-2008  Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2009  Ruby-GNOME2 Project Team
   Copyright (C) 2002,2003  Masahiro Sakai
 
 **********************************************************************/
@@ -28,7 +28,7 @@ static ID id_new;
 static ID id_superclass;
 static ID id_lock;
 static ID id_unlock;
-static VALUE gtype_to_cinfo;
+static GHashTable *gtype_to_cinfo;
 static VALUE klass_to_cinfo;
 
 static GHashTable* dynamic_gtype_list;
@@ -131,11 +131,9 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
     if (gtype == G_TYPE_INVALID)
         return NULL;
 
-    c = rb_hash_aref(gtype_to_cinfo, INT2NUM(gtype));
-    if (!NIL_P(c)) {
-        Data_Get_Struct(c, RGObjClassInfo, cinfo);
+    cinfo = g_hash_table_lookup(gtype_to_cinfo, GUINT_TO_POINTER(gtype));
+    if (cinfo)
         return cinfo;
-    }
 
     if (!create_class)
 	return NULL;
@@ -184,7 +182,7 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
     }
 
     rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
-    rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+    g_hash_table_insert(gtype_to_cinfo, GUINT_TO_POINTER(gtype), cinfo);
     
     if (G_TYPE_IS_CLASSED(gtype))
         gclass = g_type_class_ref(gtype);
@@ -335,19 +333,27 @@ rbgobj_register_class(VALUE klass,
                       gboolean klass2gtype,
                       gboolean gtype2klass)
 {
-    RGObjClassInfo* cinfo;
-    VALUE c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);  
-		    
-    cinfo->klass = klass;
-    cinfo->gtype = gtype;
-    cinfo->mark  = NULL;
-    cinfo->free  = NULL;
-    cinfo->flags = 0;
- 
+    RGObjClassInfo* cinfo = NULL;
+    VALUE c = Qnil;
+
     if (klass2gtype)
-        rb_hash_aset(klass_to_cinfo, cinfo->klass, c); 
+	c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+    if (gtype2klass && !cinfo)
+	cinfo = g_new(RGObjClassInfo, 1);
+
+    if (cinfo) {
+	cinfo->klass = klass;
+	cinfo->gtype = gtype;
+	cinfo->mark  = NULL;
+	cinfo->free  = NULL;
+	cinfo->flags = 0;
+    }
+
+    if (klass2gtype)
+        rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
+
     if (gtype2klass)
-        rb_hash_aset(gtype_to_cinfo, INT2NUM(gtype), c);
+        g_hash_table_insert(gtype_to_cinfo, GUINT_TO_POINTER(gtype), cinfo);
 }
 
 #define _register_fundamental_klass_to_gtype(klass, gtype) \
@@ -362,9 +368,8 @@ Init_typemap()
     id_new = rb_intern("new");
     id_superclass = rb_intern("superclass");
 
-    rb_global_variable(&gtype_to_cinfo);
+    gtype_to_cinfo = g_hash_table_new(g_direct_hash, g_direct_equal);
     rb_global_variable(&klass_to_cinfo);
-    gtype_to_cinfo = rb_hash_new();
     klass_to_cinfo = rb_hash_new();
 
     _register_fundamental_klass_to_gtype(rb_cFixnum, G_TYPE_LONG);
