@@ -30,7 +30,7 @@ boxed_free(boxed_holder *holder)
 {
     const RGObjClassInfo *cinfo;
 
-    cinfo = GTYPE2CINFO(holder->type);
+    cinfo = GTYPE2CINFO_NO_CREATE(holder->type);
     if (cinfo && cinfo->free)
         cinfo->free(holder->boxed);
 

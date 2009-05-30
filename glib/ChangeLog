@@ -1,5 +1,7 @@
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgobj_boxed.c (boxed_free): don't create new object on free.
+
 	* src/rbglib.h (RBGLIB_MICRO_VERSION): 0.19.0 -> 0.19.1.
 
 2009-05-27  Pascal Terjan  <pterjan@linuxfr.org>
