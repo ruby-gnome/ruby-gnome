@@ -1,5 +1,7 @@
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add a note for 0.19.x series.
+
 	* NEWS: add an entry for 0.19.1.
 
 	* NEWS: Ruby/GLib2: avoid object allocation while GC.
