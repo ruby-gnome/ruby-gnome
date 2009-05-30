@@ -1,3 +1,7 @@
+2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h (RBGLIB_MICRO_VERSION): 0.19.0 -> 0.19.1.
+
 2009-05-27  Pascal Terjan  <pterjan@linuxfr.org>
 
 	* src/rbglib.c: fix limits of basic types
