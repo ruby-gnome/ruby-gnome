@@ -1,5 +1,7 @@
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/lib/mkmf-gnome2.rb: add also "-I$(vendorarchdir)" to CPPFLAGS.
+
 	* src/depend: use RUBYARCHDIR.
 	Patch by OBATA Akio. Thanks!!!
 

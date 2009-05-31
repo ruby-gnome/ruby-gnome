@@ -257,8 +257,6 @@ def make_version_header(app_name, pkgname, dir = "src")
 end
 
 def check_ruby_func
-  $CPPFLAGS << " -I$(sitearchdir) "
-
   #Other options
   ruby_header = "ruby.h"
   have_func("rb_define_alloc_func", ruby_header) # for ruby-1.8
@@ -330,6 +328,9 @@ def check_cairo
   end
   have_rb_cairo_h
 end
+
+$CPPFLAGS << " -I$(sitearchdir) "
+$CPPFLAGS << " -I$(vendorarchdir) "
 
 check_ruby_func
 
