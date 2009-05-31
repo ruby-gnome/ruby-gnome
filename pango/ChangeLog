@@ -1,5 +1,8 @@
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/lib/pango.rb: use gem version rcairo as fallback.
+	Patch by OBATA Akio. Thanks!!!
+
 	* src/depend: use RUBYARCHDIR.
 	Patch by OBATA Akio. Thanks!!!
 
