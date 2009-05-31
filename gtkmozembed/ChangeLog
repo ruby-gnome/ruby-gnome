@@ -1,3 +1,8 @@
+2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: add missing existent check.
+	Patch by OBATA Akio. Thanks!!!
+
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb, src/rbgtkmozembed.c: generate enum types automatically.

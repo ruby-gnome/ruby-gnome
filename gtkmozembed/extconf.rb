@@ -77,7 +77,7 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
   end
   headers = include_paths.inject([]) do |result, path|
     gtkmozembed_h = File.join(path, "gtkmozembed.h")
-    result += [gtkmozembed_h] if gtkmozembed_h
+    result += [gtkmozembed_h] if File.exist?(gtkmozembed_h)
     result
   end
   glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"])
