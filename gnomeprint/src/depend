@@ -1,0 +1,2 @@
+install-so:
+	$(INSTALL_DATA) rblibgnomeprintversion.h $(RUBYARCHDIR)
