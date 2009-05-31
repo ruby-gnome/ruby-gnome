@@ -1,5 +1,8 @@
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/depend: use RUBYARCHDIR.
+	Patch by OBATA Akio. Thanks!!!
+
 	* src/lib/gtk2/base.rb: remove cairo loading because Ruby/Pango
 	has tried it.
 
