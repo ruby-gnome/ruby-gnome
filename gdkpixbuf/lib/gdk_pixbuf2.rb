@@ -1,6 +1,11 @@
 require 'glib2'
 begin
-  require 'cairo'
+  begin
+    require 'cairo'
+  rescue LoadError
+    require 'rubygems'
+    require 'cairo'
+  end
 rescue LoadError
 end
 require 'gdk_pixbuf2.so'
