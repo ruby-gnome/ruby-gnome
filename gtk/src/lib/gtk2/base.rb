@@ -12,10 +12,6 @@
 require 'glib2'
 require 'atk'
 require 'pango'
-begin
-  require 'cairo'
-rescue LoadError
-end
 require 'gtk2.so'
 require 'gdk_pixbuf2'
 

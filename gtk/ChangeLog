@@ -1,3 +1,8 @@
+2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/gtk2/base.rb: remove cairo loading because Ruby/Pango
+	has tried it.
+
 2009-05-27  Detlef Reichl  <detlef.reichl@gmx.org>
 	* src/rbgtkmain.c (gtk_m_init): use $0 instead of rb_argv0.
 
