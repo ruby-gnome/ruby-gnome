@@ -8,6 +8,11 @@ RELEASE NOTE. WRITE ME.
 
 === Changes
 
+==== Ruby/GTK2
+
+  * use RUBYARCHDIR
+    [OBATA Akio]
+
 ==== Ruby/GLib2
 
   * Bug fixes:

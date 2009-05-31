@@ -1,6 +1,6 @@
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS: Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/Libart:
+	* NEWS: Ruby/GTK2, Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/Libart:
 	use RUBYARCHDIR.
 	Patch by OBATA Akio. Thanks!!!
 
