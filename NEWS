@@ -50,9 +50,15 @@ RELEASE NOTE. WRITE ME.
   * install rblibgnomeprintversion.h
     [OBATA Akio, Kouhei Sutou]
 
+==== Ruby/GtkMozEmbeded
+
+  * fix header generation error caused by missing file
+    [OBATA Akio]
+
 === Thanks
 
   * OBATA Akio
+  * ...
 
 == Ruby-GNOME2 0.19.0: 2009-05-29
 

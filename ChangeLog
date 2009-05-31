@@ -11,7 +11,11 @@
 	Suggested by OBATA Akio. Thanks!!!
 
 	* NEWS: Ruby/GLib2: mkmf-gnome2.rb add "-I$(vendorarchdir)" to $CPPFLAGS.
-	[OBATA Akio, Kouhei Sutou]
+	Suggested by OBATA Akio. Thanks!!!
+
+	* NEWS: Ruby/GtkMozembed: fix header generation error caused by
+	missing file.
+	Patch by OBATA Akio. Thanks!!!
 
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
