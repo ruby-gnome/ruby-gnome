@@ -25,10 +25,17 @@ RELEASE NOTE. WRITE ME.
 
   * use RUBYARCHDIR
     [OBATA Akio]
+  * use gem version rcairo as fallback
+    [OBATA Akio]
 
 ==== Ruby/Libart
 
   * use RUBYARCHDIR
+    [OBATA Akio]
+
+==== Ruby/GdkPixbuf
+
+  * use gem version rcairo as fallback
     [OBATA Akio]
 
 === Thanks

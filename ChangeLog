@@ -1,7 +1,10 @@
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/Libart:
-	use RUBYARCHDIR
+	use RUBYARCHDIR.
+	Patch by OBATA Akio. Thanks!!!
+
+	* NEWS: Ruby/Pango, Ruby/GdkPixbuf: use gem version rcairo as fallback.
 	Patch by OBATA Akio. Thanks!!!
 
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
