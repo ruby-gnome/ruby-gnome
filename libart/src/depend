@@ -1,2 +1,2 @@
 install:
-	@$(RUBY) -run -e install -- -m 0644 -v $(srcdir)/rbart.h $(sitearchdir)$(target_prefix)
+	$(INSTALL_DATA) $(srcdir)/rbart.h $(RUBYARCHDIR)

@@ -1,3 +1,8 @@
+2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/depend: use RUBYARCHDIR.
+	Patch by OBATA Akio. Thanks!!!
+
 2009-03-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbpangoattribute.c, test/test-attribute.rb: add
