@@ -10,6 +10,9 @@
 	* NEWS: Ruby/GnomePrint: install rblibgnomeprintversion.h.
 	Suggested by OBATA Akio. Thanks!!!
 
+	* NEWS: Ruby/GLib2: mkmf-gnome2.rb add "-I$(vendorarchdir)" to $CPPFLAGS.
+	[OBATA Akio, Kouhei Sutou]
+
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add a note for 0.19.x series.

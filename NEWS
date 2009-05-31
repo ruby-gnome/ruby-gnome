@@ -20,6 +20,8 @@ RELEASE NOTE. WRITE ME.
       [OBATA Akio, Kouhei Sutou]
   * use RUBYARCHDIR
     [OBATA Akio]
+  * mkmf-gnome2.rb add "-I$(vendorarchdir)" to $CPPFLAGS.
+    [OBATA Akio, Kouhei Sutou]
 
 ==== Ruby/ATK
 
@@ -46,7 +48,7 @@ RELEASE NOTE. WRITE ME.
 ==== Ruby/GnomePrint
 
   * install rblibgnomeprintversion.h
-    [OBATA Akio]
+    [OBATA Akio, Kouhei Sutou]
 
 === Thanks
 
