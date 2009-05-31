@@ -7,6 +7,9 @@
 	* NEWS: Ruby/Pango, Ruby/GdkPixbuf: use gem version rcairo as fallback.
 	Patch by OBATA Akio. Thanks!!!
 
+	* NEWS: Ruby/GnomePrint: install rblibgnomeprintversion.h.
+	Suggested by OBATA Akio. Thanks!!!
+
 2009-05-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add a note for 0.19.x series.

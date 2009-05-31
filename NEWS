@@ -43,6 +43,11 @@ RELEASE NOTE. WRITE ME.
   * use gem version rcairo as fallback
     [OBATA Akio]
 
+==== Ruby/GnomePrint
+
+  * install rblibgnomeprintversion.h
+    [OBATA Akio]
+
 === Thanks
 
   * OBATA Akio
