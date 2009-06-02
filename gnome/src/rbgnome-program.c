@@ -307,7 +307,7 @@ program_initialize(argc, argv, self)
 
     /* prepare arguments */
     if (NIL_P(arg0))
-        arg0 = rb_argv0;
+        arg0 = rb_gv_get("$0");
     if (NIL_P(args)) {
         args = rb_argv;
     } else {

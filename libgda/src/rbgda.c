@@ -91,7 +91,7 @@ static VALUE rb_gda_init(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE argary, app_id, app_version;
+    VALUE argary, app_id, app_version, progname;
     gint i, gargc;
     gchar** gargv;
 
@@ -114,7 +114,8 @@ static VALUE rb_gda_init(argc, argv, self)
      *  Fill the gargv array with the provided arguments.
      */
     gargv = ALLOCA_N(char*, gargc + 1);
-    gargv[0] = RVAL2CSTR(rb_argv0);
+    progname = rb_gv_get("$0");
+    gargv[0] = RVAL2CSTR(progname);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {

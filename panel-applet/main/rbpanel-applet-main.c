@@ -34,7 +34,7 @@ static VALUE
 rbpanel_s_main(int argc, VALUE *argv, VALUE self)
 {
     VALUE func;
-    VALUE iid, klass, name, version;
+    VALUE iid, klass, name, version, progname;
     GType gtype;
     int ret;
     int index;
@@ -58,7 +58,8 @@ rbpanel_s_main(int argc, VALUE *argv, VALUE self)
     sys_argc = RARRAY_LEN(rb_argv) + 1;
     sys_argv_p = (char **)g_new0(char *, sys_argc);
 
-    sys_argv_p[0] = RVAL2CSTR(rb_argv0);
+    progname = rb_gv_get("$0");
+    sys_argv_p[0] = RVAL2CSTR(progname);
     for(index = 1; index <= RARRAY_LEN(rb_argv); index++) {
         sys_argv_p[index] = RVAL2CSTR(RARRAY_PTR(rb_argv)[index - 1]);
     }

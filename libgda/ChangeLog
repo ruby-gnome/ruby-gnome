@@ -1,3 +1,8 @@
+2009-06-02  Detlef Reichl <detlef.reichl@gmx.org>
+
+	* src/rbgda.c (rb_gda_init):
+	- use $0 instead of rb_argv0.
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgda.c (rb_gda_init):

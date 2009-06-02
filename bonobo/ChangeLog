@@ -1,3 +1,7 @@
+2009-06-02  Detlef Reichl  <detlef.reichl@gmx.org>
+
+	* src/rbbonobo-main.c: use $0 instead of rb_argv0.
+
 2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbbonobo-main.c: move Bonobo.setup_x_error_handler to

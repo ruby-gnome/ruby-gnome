@@ -26,7 +26,7 @@ rbonobo_init(argc, argv, self)
     VALUE self;
 {
     int i, gargc;
-    VALUE argary;
+    VALUE argary, progname;
     char** gargv;
 
     rb_scan_args(argc, argv, "01", &argary);
@@ -40,7 +40,8 @@ rbonobo_init(argc, argv, self)
     }
 
     gargv = ALLOCA_N(char*,gargc + 1);
-    gargv[0] = RVAL2CSTR(rb_argv0);
+    progname = rb_gv_get("$0");
+    gargv[0] = RVAL2CSTR(progname);
 
     for (i = 0; i < gargc; i++) {
         if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
