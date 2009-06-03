@@ -1,3 +1,9 @@
+2009-06-03  Detlef Reichl  <detlef.reichl@gmx.org>
+
+	* NEWS: Ruby/*: add pkg-config file generation
+	
+	* NEWS: Ruby/Bonobo, Ruby/Bonoboui: add version information
+
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2, Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/Libart:
