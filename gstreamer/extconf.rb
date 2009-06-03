@@ -28,4 +28,5 @@ end
 add_depend_package("glib2", "glib/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GST_COMPILATION")
+create_pkg_config_file(nil, nil, 'gstreamer-0.10-ruby.pc')
 create_top_makefile

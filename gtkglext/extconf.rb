@@ -19,4 +19,5 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTKGLEXT_COMPILATION")
+create_pkg_config_file(nil, nil, 'gtkglext-1.0-ruby.pc')
 create_top_makefile

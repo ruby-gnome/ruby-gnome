@@ -1,0 +1,2 @@
+install:
+	$(INSTALL_DATA) ../gtksourceview-1.0-ruby.pc $(libdir)/pkgconfig

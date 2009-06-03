@@ -19,8 +19,15 @@ VALUE mBonoboUI;
 void
 Init_bonoboui2()
 {
-   mBonobo = rb_define_module("Bonobo");
-   mBonoboUI = rb_define_module_under(mBonobo, "UI");
+    mBonobo = rb_define_module("Bonobo");
+    mBonoboUI = rb_define_module_under(mBonobo, "UI");
+   
+    rb_define_const(mBonoboUI, "BUILD_VERSION", 
+                    rb_ary_new3(3, 
+                                INT2FIX(BONOBOUI_MAJOR_VERSION), 
+                                INT2FIX(BONOBOUI_MINOR_VERSION), 
+                                INT2FIX(BONOBOUI_MICRO_VERSION)));
 
-   Init_bonoboui_inits();
+
+    Init_bonoboui_inits();
 }

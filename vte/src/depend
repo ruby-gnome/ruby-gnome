@@ -1,0 +1,2 @@
+install:
+	$(INSTALL_DATA) ../vte-ruby.pc $(libdir)/pkgconfig

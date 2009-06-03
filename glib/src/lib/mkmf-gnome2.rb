@@ -136,6 +136,41 @@ def add_distcleanfile(file)
   $distcleanfiles << file
 end
 
+def create_pkg_config_file module_name, h_file_name, out_file_name
+  h_file = h_file_name ? File.new(h_file_name) : nil
+  pc_file = File.new(out_file_name, 'w+', 0644)
+
+  version = nil
+  package = out_file_name.gsub('-ruby.pc', '')
+
+  if h_file
+    major = nil
+    minor = nil
+    micro = nil
+    h_file.each_line do |line|
+      next unless line.match /#define (RB){0,1}#{module_name}_[A-Z]+_VERSION/
+      if line.include? 'MAJOR'
+          major = line.split(' ')[-1].gsub(/[^0-9]/, '')
+      elsif line.include? 'MINOR'
+          minor = line.split(' ')[-1].gsub(/[^0-9]/, '')
+      elsif line.include? 'MICRO'
+          micro = line.split(' ')[-1].gsub(/[^0-9]/, '')
+      end
+    end
+    version = "#{major}.#{minor}.#{micro}"
+  else
+    version = PKGConfig.modversion package
+  end
+  
+  name = PKGConfig.name package
+  pc_file.printf("Name: #{name}\n") if name
+  
+  description = PKGConfig.description package
+  pc_file.printf("Description: #{description}\n") if description
+  
+  pc_file.printf("Version: #{version}\n")
+end
+
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
   base_dir = File.basename(Dir.pwd)
   last_common_index = srcdir.rindex(base_dir)

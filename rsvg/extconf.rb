@@ -42,4 +42,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_RSVG2_COMPILATION") do
   end
 end
 
+create_pkg_config_file('GLIB', '../glib/src/rbglib.h', 'librsvg-2.0-ruby.pc')
 create_top_makefile

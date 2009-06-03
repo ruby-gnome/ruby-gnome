@@ -46,4 +46,6 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
                   "libgnomeprintui/gnome-print-paper-selector.h"])
   end
 end
+
+create_pkg_config_file('LIBGNOMEPRINTUI', 'src/rblibgnomeprintuiversion.h', 'libgnomeprintui-2.2-ruby.pc')
 create_top_makefile

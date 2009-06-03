@@ -33,4 +33,5 @@ add_depend_package("gtk2", "gtk/src", TOPDIR)
 make_version_header("GTKHTML", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTKHTML2_COMPILATION")
+create_pkg_config_file('GTKHTML', 'src/rbgtkhtmlversion.h', 'libgtkhtml-2.0-ruby.pc')
 create_top_makefile

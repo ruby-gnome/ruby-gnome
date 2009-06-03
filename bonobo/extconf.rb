@@ -50,6 +50,8 @@ begin
     end
     add_obj("rbbonoboinits#{obj_ext}")
 
+	make_version_header("BONOBO", 'libbonobo-2.0', '.')
+
     #
     # create Makefiles
     #
@@ -70,6 +72,7 @@ allclean: clean
     Dir.chdir ".."
   end
 
+  create_pkg_config_file('BONOBO', 'src/rbbonoboversion.h', 'libbonobo-2.0-ruby.pc')
   create_top_makefile
 
 rescue Interrupt

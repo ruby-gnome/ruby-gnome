@@ -43,6 +43,6 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
   SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbpangoinits.c")
 }
-
+create_pkg_config_file('PANGO', 'src/rbpangoversion.h', 'pango-ruby.pc')
 create_top_makefile
 

@@ -26,4 +26,5 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 make_version_header("GNOMEVFS", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEVFS_COMPILATION")
+create_pkg_config_file('GNOMEVFS', 'src/rbgnomevfsversion.h', 'gnome-vfs-2.0-ruby.pc')
 create_top_makefile

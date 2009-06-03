@@ -20,6 +20,7 @@
 
 #include <bonobo.h>
 #include "rbgtk.h"
+#include "rbbonobouiversion.h"
 
 extern VALUE mBonobo;
 extern VALUE mBonoboUI;

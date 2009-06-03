@@ -54,4 +54,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
   glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
 end
 
+create_pkg_config_file('GLIB', 'src/rbglib.h', 'glib-2.0-ruby.pc')
 create_top_makefile

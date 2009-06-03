@@ -24,4 +24,5 @@ make_version_header("GCONF", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GCONF2_COMPILATION")
 
+create_pkg_config_file('GCONF', 'src/rbgconfversion.h', 'gconf-2.0-ruby.pc')
 create_top_makefile

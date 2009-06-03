@@ -1,0 +1,2 @@
+install:
+	$(INSTALL_DATA) ../gstreamer-0.10-ruby.pc $(libdir)/pkgconfig

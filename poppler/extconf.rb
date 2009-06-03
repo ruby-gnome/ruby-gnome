@@ -25,4 +25,5 @@ add_depend_package("gdk_pixbuf2", "gdkpixbuf", TOPDIR)
 make_version_header("POPPLER", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_POPPLER_COMPILATION")
+create_pkg_config_file('POPPLER', 'src/rbpopplerversion.h', 'poppler-ruby.pc')
 create_top_makefile

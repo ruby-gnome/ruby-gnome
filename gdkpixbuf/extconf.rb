@@ -26,5 +26,6 @@ if PKGConfig.have_package('gdk-2.0')
 end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
-
+create_pkg_config_file(nil, nil, 'gdk-pixbuf-2.0-ruby.pc')
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR)
+

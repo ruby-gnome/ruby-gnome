@@ -9,3 +9,4 @@ $(BINDIR)/$(GLADE_CREATOR): $(srcdir)/bin/$(GLADE_CREATOR)
 	$(INSTALL_SCRIPT) $(srcdir)/bin/$(GLADE_CREATOR) $(BINDIR)
 
 install: $(BINDIR) $(BINDIR)/$(GLADE_CREATOR)
+	$(INSTALL_DATA) libglade-2.0-ruby.pc $(libdir)/pkgconfig

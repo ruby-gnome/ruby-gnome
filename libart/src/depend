@@ -1,2 +1,3 @@
 install:
 	$(INSTALL_DATA) $(srcdir)/rbart.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) ../libart-2.0-ruby.pc $(libdir)/pkgconfig

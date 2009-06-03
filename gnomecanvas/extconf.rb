@@ -30,5 +30,5 @@ add_depend_package("libart2", "libart/src", TOPDIR)
 make_version_header("GNOMECANVAS", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMECANVAS2_COMPILATION")
-
+create_pkg_config_file('GNOMECANVAS', 'src/rbgnomecanvasversion.h', 'libgnomecanvas-2.0-ruby.pc')
 create_top_makefile

@@ -25,5 +25,6 @@ have_library("art_lgpl_2", "art_affine_identity") or exit 1
 setup_win32(PACKAGE_NAME)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_LIBART2_COMPILATION")
+create_pkg_config_file(nil, nil, 'libart-2.0-ruby.pc')
 create_top_makefile
 

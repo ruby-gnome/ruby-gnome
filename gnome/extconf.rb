@@ -23,4 +23,5 @@ make_version_header("GNOME", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOME2_COMPILATION")
 
+create_pkg_config_file('GNOME', 'src/rbgnomeversion.h', 'libgnome-2.0-ruby.pc')
 create_top_makefile

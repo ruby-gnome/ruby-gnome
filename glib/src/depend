@@ -4,3 +4,6 @@ install-so:
 	$(INSTALL_DATA) $(srcdir)/rbgobject.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) $(srcdir)/rbgcompat.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) glib-enum-types.h $(RUBYARCHDIR)
+
+install:
+	$(INSTALL_DATA) ../glib-2.0-ruby.pc $(libdir)/pkgconfig

@@ -37,5 +37,5 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 make_version_header("LIBGDA", package_id)
 
 create_makefile_at_srcdir(package_name, SRCDIR, "-DRUBY_LIBGDA_COMPILATION")
-
+create_pkg_config_file('LIBGDA', 'src/rblibgdaversion.h', 'libgda-ruby.pc')
 create_top_makefile

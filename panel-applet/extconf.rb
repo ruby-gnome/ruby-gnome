@@ -26,4 +26,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, BASE_DIR + "/src",
 $INSTALLFILES << ["../lib/**/*.rb", "$(RUBYLIBDIR)", "../lib"]
 create_makefile_at_srcdir(PACKAGE_NAME + "_main", BASE_DIR + "/main",
                           "-DRUBY_PANELAPPLET_COMPILATION")
+create_pkg_config_file('PANELAPPLET', 'src/rbpanelappletversion.h', 'libpanelapplet-2.0-ruby.pc')
 create_top_makefile(["src", "main"])

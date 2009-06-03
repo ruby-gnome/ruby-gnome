@@ -21,6 +21,7 @@
 
 #include <bonobo.h>
 #include "rbgtk.h"
+#include "rbbonoboversion.h"
 
 extern VALUE mBonobo;
 extern void Init_bonobo_inits();

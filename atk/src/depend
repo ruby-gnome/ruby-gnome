@@ -1,3 +1,7 @@
 install-so:
 	$(INSTALL_DATA) $(srcdir)/rbatk.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) rbatkversion.h $(RUBYARCHDIR)
+
+
+install:
+	$(INSTALL_DATA) ../atk-ruby.pc $(libdir)/pkgconfig

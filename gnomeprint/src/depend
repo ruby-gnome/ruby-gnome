@@ -1,2 +1,5 @@
 install-so:
 	$(INSTALL_DATA) rblibgnomeprintversion.h $(RUBYARCHDIR)
+
+install:
+	$(INSTALL_DATA) ../libgnomeprint-2.2-ruby.pc $(libdir)/pkgconfig

@@ -1,0 +1,2 @@
+install:
+	$(INSTALL_DATA) ../libgnome-2.0-ruby.pc $(libdir)/pkgconfig

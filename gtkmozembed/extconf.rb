@@ -83,4 +83,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
   glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"])
 end
 
+create_pkg_config_file('GTKMOZEMBED', 'src/rbgtkmozembedversion.h', 'mozilla-gtkmozembed-ruby.pc')
 create_top_makefile

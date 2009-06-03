@@ -48,6 +48,8 @@ begin
       item.gsub(/\.c$/, obj_ext)
     end
     add_obj("rbbonobouiinits#{obj_ext}")
+    
+    make_version_header("BONOBOUI", 'libbonoboui-2.0', '.')
 
     #
     # create Makefiles
@@ -68,6 +70,7 @@ allclean: clean
     Dir.chdir ".."
   end
 
+  create_pkg_config_file('BONOBOUI', 'src/rbbonobouiversion.h', 'libbonoboui-2.0-ruby.pc')
   create_top_makefile
 
 rescue Interrupt

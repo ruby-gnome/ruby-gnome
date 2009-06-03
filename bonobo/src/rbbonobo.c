@@ -19,11 +19,17 @@ VALUE mBonobo;
 void
 Init_bonobo2()
 {
-   mBonobo = rb_define_module("Bonobo");
+    mBonobo = rb_define_module("Bonobo");
+   
+    rb_define_const(mBonobo, "BUILD_VERSION", 
+                    rb_ary_new3(3, 
+                                INT2FIX(BONOBO_MAJOR_VERSION), 
+                                INT2FIX(BONOBO_MINOR_VERSION), 
+                                INT2FIX(BONOBO_MICRO_VERSION)));
 
 #ifdef BONOBO_TYPE_OBJECT
-   G_DEF_CLASS(BONOBO_TYPE_OBJECT, "Object", mBonobo);
+    G_DEF_CLASS(BONOBO_TYPE_OBJECT, "Object", mBonobo);
 #endif
 
-   Init_bonobo_inits();
+    Init_bonobo_inits();
 }
