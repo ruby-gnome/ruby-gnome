@@ -1,7 +1,11 @@
+2009-06-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: support VTE 0.20.
+
 2009-06-03  Detlef Reichl  <detlef.reichl@gmx.org>
 
 	* NEWS: Ruby/*: add pkg-config file generation
-	
+
 	* NEWS: Ruby/Bonobo, Ruby/Bonoboui: add version information
 
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>

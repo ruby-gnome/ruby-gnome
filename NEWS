@@ -55,6 +55,11 @@ RELEASE NOTE. WRITE ME.
   * fix header generation error caused by missing file
     [OBATA Akio]
 
+==== Ruby/VTE
+
+  * support VTE 0.20
+    [Kouhei Sutou]
+
 === Thanks
 
   * OBATA Akio
