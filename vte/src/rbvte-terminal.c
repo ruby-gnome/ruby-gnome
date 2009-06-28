@@ -462,6 +462,12 @@ term_get_pty(VALUE self)
 {
     return INT2NUM(vte_terminal_get_pty(RVAL2TERM(self)));
 }
+
+static VALUE
+term_get_child_exit_status(VALUE self)
+{
+    return INT2NUM(vte_terminal_get_child_exit_status(RVAL2TERM(self)));
+}
 #endif
 
 static VALUE
@@ -955,6 +961,8 @@ Init_vte_terminal(VALUE mVte)
     rb_define_method(cTerminal, "set_cursor_shape", term_set_cursor_shape, 1);
     rb_define_method(cTerminal, "cursor_shape", term_get_cursor_shape, 0);
     rb_define_method(cTerminal, "pty", term_get_pty, 0);
+    rb_define_method(cTerminal, "child_exit_status",
+		     term_get_child_exit_status, 0);
 #endif
     rb_define_method(cTerminal, "set_scrollback_lines",
                      term_set_scrollback_lines, 1);

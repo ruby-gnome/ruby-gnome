@@ -4,6 +4,7 @@
 	- support vte_terminal_{set,get}_cursor_blink_mode().
 	- support vte_terminal_{set,get}_cursor_shape().
 	- support vte_terminal_get_pty().
+	- support vte_terminal_get_child_exit_status().
 
 	* extconf.rb, src/rbvte.h: use VTE_CHECK_VERSION provided by VTE itself.
 
