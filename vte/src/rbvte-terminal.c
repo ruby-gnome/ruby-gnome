@@ -405,7 +405,7 @@ term_set_background_transparent(VALUE self, VALUE transparent)
 static VALUE
 term_set_cursor_blinks(VALUE self, VALUE blink)
 {
-#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+#if VTE_CHECK_VERSION(0, 18, 0)
     VteTerminalCursorBlinkMode mode;
 
     mode = RVAL2CBOOL(blink) ? VTE_CURSOR_BLINK_ON : VTE_CURSOR_BLINK_OFF;
@@ -416,7 +416,7 @@ term_set_cursor_blinks(VALUE self, VALUE blink)
     return Qnil;
 }
 
-#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+#if VTE_CHECK_VERSION(0, 18, 0)
 static VALUE
 term_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 {
@@ -434,6 +434,27 @@ term_get_cursor_blink_mode(VALUE self)
 
     mode = vte_terminal_get_cursor_blink_mode(RVAL2TERM(self));
     return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 19, 1)
+static VALUE
+term_set_cursor_shape(VALUE self, VALUE rb_shape)
+{
+    VteTerminalCursorShape shape;
+
+    shape = RVAL2GENUM(rb_shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
+    vte_terminal_set_cursor_shape(RVAL2TERM(self), shape);
+    return Qnil;
+}
+
+static VALUE
+term_get_cursor_shape(VALUE self)
+{
+    VteTerminalCursorShape shape;
+
+    shape = vte_terminal_get_cursor_shape(RVAL2TERM(self));
+    return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
 }
 #endif
 
@@ -824,8 +845,11 @@ void
 Init_vte_terminal(VALUE mVte)
 {
     VALUE cTerminal, cTerminalEraseBinding, cTerminalAntiAlias;
-#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+#if VTE_CHECK_VERSION(0, 18, 0)
     VALUE cTerminalCursorBlinkMode;
+#endif
+#if VTE_CHECK_VERSION(0, 19, 1)
+    VALUE cTerminalCursorShape;
 #endif
 
     id_new = rb_intern("new");
@@ -841,9 +865,13 @@ Init_vte_terminal(VALUE mVte)
     cTerminal = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
     cTerminalEraseBinding = G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING,
                                         "TerminalEraseBinding", mVte);
-#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+#if VTE_CHECK_VERSION(0, 18, 0)
     cTerminalCursorBlinkMode = G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE,
 					   "TerminalCursorBlinkMode", mVte);
+#endif
+#if VTE_CHECK_VERSION(0, 19, 1)
+    cTerminalCursorShape = G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE,
+				       "TerminalCursorShape", mVte);
 #endif
     cTerminalAntiAlias = G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS,
                                      "TerminalAntiAlias", mVte);
@@ -911,11 +939,15 @@ Init_vte_terminal(VALUE mVte)
     rb_define_method(cTerminal, "set_background_transparent",
                      term_set_background_transparent, 1);
     rb_define_method(cTerminal, "set_cursor_blinks", term_set_cursor_blinks, 1);
-#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+#if VTE_CHECK_VERSION(0, 18, 0)
     rb_define_method(cTerminal, "set_cursor_blink_mode",
 		     term_set_cursor_blink_mode, 1);
     rb_define_method(cTerminal, "cursor_blink_mode",
 		     term_get_cursor_blink_mode, 0);
+#endif
+#if VTE_CHECK_VERSION(0, 19, 1)
+    rb_define_method(cTerminal, "set_cursor_shape", term_set_cursor_shape, 1);
+    rb_define_method(cTerminal, "cursor_shape", term_get_cursor_shape, 0);
 #endif
     rb_define_method(cTerminal, "set_scrollback_lines",
                      term_set_scrollback_lines, 1);
