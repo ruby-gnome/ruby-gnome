@@ -1,5 +1,8 @@
 2009-06-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbvte-terminal.c: support
+	vte_terminal_{set,get}_cursor_blink_mode().
+
 	* extconf.rb, src/rbvte.h: use VTE_CHECK_VERSION provided by VTE itself.
 
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>

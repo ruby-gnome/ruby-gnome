@@ -22,7 +22,10 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 add_depend_package("gtk2", "gtk/src", TOPDIR)
 add_depend_package("atk", "atk/src", TOPDIR)
 
-unless have_macro("VTE_CHECK_VERSION", ["vte/vte.h"])
+vte_headers = ["vte/vte.h"]
+have_type("VteTerminalCursorBlinkMode", vte_headers)
+
+unless have_macro("VTE_CHECK_VERSION", vte_headers)
   make_version_header("VTE", PACKAGE_ID)
   create_pkg_config_file('VTE', 'src/rbvteversion.h', 'vte-ruby.pc')
 end

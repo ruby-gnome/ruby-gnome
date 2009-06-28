@@ -405,9 +405,37 @@ term_set_background_transparent(VALUE self, VALUE transparent)
 static VALUE
 term_set_cursor_blinks(VALUE self, VALUE blink)
 {
+#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+    VteTerminalCursorBlinkMode mode;
+
+    mode = RVAL2CBOOL(blink) ? VTE_CURSOR_BLINK_ON : VTE_CURSOR_BLINK_OFF;
+    vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
+#else
     vte_terminal_set_cursor_blinks(RVAL2TERM(self), RVAL2CBOOL(blink));
+#endif
     return Qnil;
 }
+
+#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+static VALUE
+term_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
+{
+    VteTerminalCursorBlinkMode mode;
+
+    mode = RVAL2GENUM(rb_mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+    vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
+    return Qnil;
+}
+
+static VALUE
+term_get_cursor_blink_mode(VALUE self)
+{
+    VteTerminalCursorBlinkMode mode;
+
+    mode = vte_terminal_get_cursor_blink_mode(RVAL2TERM(self));
+    return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+}
+#endif
 
 static VALUE
 term_set_scrollback_lines(VALUE self, VALUE lines)
@@ -796,6 +824,9 @@ void
 Init_vte_terminal(VALUE mVte)
 {
     VALUE cTerminal, cTerminalEraseBinding, cTerminalAntiAlias;
+#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+    VALUE cTerminalCursorBlinkMode;
+#endif
 
     id_new = rb_intern("new");
     id_call = rb_intern("call");
@@ -810,6 +841,10 @@ Init_vte_terminal(VALUE mVte)
     cTerminal = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
     cTerminalEraseBinding = G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING,
                                         "TerminalEraseBinding", mVte);
+#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+    cTerminalCursorBlinkMode = G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE,
+					   "TerminalCursorBlinkMode", mVte);
+#endif
     cTerminalAntiAlias = G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS,
                                      "TerminalAntiAlias", mVte);
 
@@ -876,6 +911,12 @@ Init_vte_terminal(VALUE mVte)
     rb_define_method(cTerminal, "set_background_transparent",
                      term_set_background_transparent, 1);
     rb_define_method(cTerminal, "set_cursor_blinks", term_set_cursor_blinks, 1);
+#ifdef HAVE_TYPE_VTETERMINALCURSORBLINKMODE
+    rb_define_method(cTerminal, "set_cursor_blink_mode",
+		     term_set_cursor_blink_mode, 1);
+    rb_define_method(cTerminal, "cursor_blink_mode",
+		     term_get_cursor_blink_mode, 0);
+#endif
     rb_define_method(cTerminal, "set_scrollback_lines",
                      term_set_scrollback_lines, 1);
 
