@@ -8,7 +8,9 @@
 #include <vte/vteaccess.h>
 #include <vte/reaper.h>
 
-#include "rbvteversion.h"
+#ifndef VTE_CHECK_VERSION
+#  include "rbvteversion.h"
+#endif
 
 #define RVAL2TERM(obj) (RVAL2GOBJ(obj))
 #define RVAL2COLOR(obj) ((GdkColor *)RVAL2BOXED(obj, GDK_TYPE_COLOR))

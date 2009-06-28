@@ -1,3 +1,7 @@
+2009-06-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb, src/rbvte.h: use VTE_CHECK_VERSION provided by VTE itself.
+
 2008-11-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: use RARRAY_PTR() and RARRAY_LEN().
