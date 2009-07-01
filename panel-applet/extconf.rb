@@ -23,6 +23,7 @@ make_version_header("PANELAPPLET", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, BASE_DIR + "/src",
                           "-DRUBY_PANELAPPLET_COMPILATION")
+$INSTALLFILES ||= []
 $INSTALLFILES << ["../lib/**/*.rb", "$(RUBYLIBDIR)", "../lib"]
 create_makefile_at_srcdir(PACKAGE_NAME + "_main", BASE_DIR + "/main",
                           "-DRUBY_PANELAPPLET_COMPILATION")
