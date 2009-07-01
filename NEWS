@@ -12,6 +12,8 @@ RELEASE NOTE. WRITE ME.
 
   * use RUBYARCHDIR
     [OBATA Akio]
+  * install missing headers
+    [Mamoru Tasaka]
 
 ==== Ruby/GLib2
 
@@ -63,6 +65,7 @@ RELEASE NOTE. WRITE ME.
 === Thanks
 
   * OBATA Akio
+  * Mamoru Tasaka
   * ...
 
 == Ruby-GNOME2 0.19.0: 2009-05-29
