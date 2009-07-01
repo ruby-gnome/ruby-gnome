@@ -12,7 +12,7 @@ RELEASE NOTE. WRITE ME.
 
   * use RUBYARCHDIR
     [OBATA Akio]
-  * install missing headers
+  * #2814953: install missing headers
     [Mamoru Tasaka]
 
 ==== Ruby/GLib2
@@ -61,6 +61,11 @@ RELEASE NOTE. WRITE ME.
 
   * support VTE 0.20
     [Kouhei Sutou]
+
+==== Ruby/PanelApplet
+
+  * #2815036: re-support Ruby 1.8.6.
+    [Mamoru Tasaka, Kouhei Sutou]
 
 === Thanks
 

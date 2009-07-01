@@ -1,7 +1,10 @@
 2009-07-01  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS: Ruby/GTK2: install missing headers.
+	* NEWS: Ruby/GTK2: install missing headers. [#2814953]
 	Patch by Mamoru Tasaka. Thanks!!!
+
+	* NEWS: Ruby/PanelApplet: re-support Ruby 1.8.6. [#2815036]
+	Reported by Mamoru Tasaka. Thanks!!!
 
 2009-06-28  Kouhei Sutou  <kou@cozmixng.org>
 
