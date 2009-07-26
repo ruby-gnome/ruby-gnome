@@ -2,9 +2,11 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.19.1: 2009-XX-XX
+== Ruby-GNOME2 0.19.1: 2009-07-26
 
-RELEASE NOTE. WRITE ME.
+NOTE: 0.19.x releases are development series.
+
+This release is a bug fix release of 0.19.0.
 
 === Changes
 
