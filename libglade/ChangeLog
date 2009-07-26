@@ -1,3 +1,9 @@
+2009-07-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* rbglade.c, lib/libglade2.rb: use mark function instead of self
+	reference. Debian#519786.
+	Reported by Arnaud Cornet. Thanks!!!
+
 2008-01-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* rbglade.c (rb_gladexml_initialize): fixed a typo. #1878555

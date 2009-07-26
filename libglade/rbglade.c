@@ -1,4 +1,4 @@
-/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
+/* -*- c-file-style: "ruby" -*- */
 /************************************************
 
   rbglade.c -
@@ -7,7 +7,7 @@
   $Date: 2007/07/13 16:07:33 $
 
 
-  Copyright (C) 2002-2005 Ruby-GNOME2 Project
+  Copyright (C) 2002-2009 Ruby-GNOME2 Project
 
   This program is free software.
   You can distribute/modify this program under the terms of
@@ -32,6 +32,21 @@ static const int RB_GLADE_XML_FILE = 1;
 static const int RB_GLADE_XML_BUFFER = 2;
 
 static VALUE cGladeXML;
+
+static void
+rb_gladexml_mark(gpointer pointer)
+{
+    GladeXML *xml = pointer;
+    GList *names, *node;
+
+    names = glade_xml_get_widget_prefix(xml, "");
+    for (node = names; node; node = g_list_next(node)) {
+	GtkWidget *widget = node->data;
+
+	rbgobj_gc_mark_instance(widget);
+    }
+    g_list_free(names);
+}
 
 static VALUE
 rb_gladexml_get_tooltips(VALUE self, VALUE toplevel)
@@ -169,7 +184,6 @@ rb_gladexml_initialize(int argc, VALUE *argv, VALUE self)
 
     if (xml) {
         G_INITIALIZE(self, xml);
-        rb_funcall(self, rb_intern("guard_sources_from_gc"), 0);
         if (rb_block_given_p()){
             rb_iv_set(self, "@handler_proc", rb_block_proc());
         } else {
@@ -271,7 +285,8 @@ rb_gladexml_provide(VALUE self, VALUE library)
 void 
 Init_libglade2()
 {
-    cGladeXML = G_DEF_CLASS(GLADE_TYPE_XML, "GladeXML", rb_cObject);
+    cGladeXML = G_DEF_CLASS_WITH_GC_FUNC(GLADE_TYPE_XML, "GladeXML", rb_cObject,
+					 rb_gladexml_mark, NULL);
 
     rb_define_method(cGladeXML, "signal_autoconnect_full", rb_gladexml_signal_autoconnect_full, 0);
     rb_define_method(cGladeXML, "initialize", rb_gladexml_initialize, -1);

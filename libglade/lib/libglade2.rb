@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 =begin
   libglade2.rb
-                                                                                
-  Copyright (c) 2002-2004 Ruby-GNOME2 Project Team
+
+  Copyright (c) 2002-2009 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-                                                                                
-  $Id: libglade2.rb,v 1.19 2007/01/20 15:59:28 mutoh Exp $
 =end
 
 require 'gtk2'
@@ -93,27 +91,6 @@ class GladeXML
       }
     end
     [@widget_names, @custom_methods]    
-  end
-
-  def guard_sources_from_gc
-    widget_names.each do |name|
-      guard_source_from_gc(self[name])
-    end
-  end
-
-  def guard_source_from_gc(source)
-    return if source.nil?
-    @sources ||= {}
-    @sources[source.object_id] = source
-    source.signal_connect("destroy") do |object|
-      @sources.delete(object.object_id)
-    end
-    # To get the parent window of the source as a ruby object.
-    # Ruby/GTK keeps the Window objects on the memory to prevend from GC.
-    parent = source.parent
-    while parent
-      parent = parent.parent
-    end
   end
 
   LOG_DOMAIN = "libglade"
