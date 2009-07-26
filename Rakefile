@@ -95,15 +95,16 @@ task :dist_gnome2 do
 end
 
 task :release => [:dist] do
-  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
+  sf_user_name = ENV["SF_USER"] || ENV["USER"]
   project_name = "Ruby-GNOME 2"
   package_name = "ruby-gnome2"
   release_name = "ruby-gnome2-#{version}"
-  [gtk2_base_name, gnome2_base_name].each do |archive_base_name|
-    ruby("misc/release.rb", sf_user_name, project_name,
-         package_name, release_name, archive_name(archive_base_name),
-         "README:1", "NEWS")
+  archive_names = [gtk2_base_name, gnome2_base_name].collect do |base_name|
+    archive_name(base_name)
   end
+  ruby("misc/release.rb", sf_user_name, project_name,
+       package_name, release_name, "README:1", "NEWS",
+       *archive_names)
 end
 
 def guess_copy_source_repository_uri
