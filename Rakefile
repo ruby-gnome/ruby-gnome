@@ -95,7 +95,7 @@ task :dist_gnome2 do
 end
 
 task :release => [:dist] do
-  sf_user_name = ENV["SF_USER"] || ENV["USER"]
+  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
   project_name = "Ruby-GNOME 2"
   package_name = "ruby-gnome2"
   release_name = "ruby-gnome2-#{version}"
