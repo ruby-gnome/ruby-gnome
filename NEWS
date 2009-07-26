@@ -67,11 +67,17 @@ RELEASE NOTE. WRITE ME.
   * #2815036: re-support Ruby 1.8.6.
     [Mamoru Tasaka, Kouhei Sutou]
 
+==== Ruby/Libglade2
+
+  * Debian#519786: fix GC related SEGV when a widget in
+    glade is removed by hand.
+    [Arnaud Cornet, Kouhei Sutou]
+
 === Thanks
 
   * OBATA Akio
   * Mamoru Tasaka
-  * ...
+  * Arnaud Cornet
 
 == Ruby-GNOME2 0.19.0: 2009-05-29
 
