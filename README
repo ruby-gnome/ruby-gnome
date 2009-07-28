@@ -32,14 +32,19 @@ use from Ruby 1.8.6, 1.8.7 and 1.9.1.
   * Ruby/GtkSourceView:   GtkSourceView 1.0.1 or later
   * Ruby/Libart2:         libart_lgpl 2.3.12 or later
   * Ruby/Libglade2:       Libglade 2.0.x or later
-  * Ruby/PanelApplet:     gnome-panel 2.6.0 or later (deprecated since 0.16.0)
   * Ruby/RSVG:            librsvg 2.8.0 or later
+  * Ruby/Poppler:         poppler-glib 0.8.0 or later
+  * Ruby/VTE              VTE 0.12.1 or later
 
 === Experimental / Incomplete:
 
   * Ruby/GStreamer:       GStreamer 0.10.x or later
   * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
   * Ruby/GooCanvas:       GooCanvas 0.8.0 or later
+
+=== Deprecated
+
+  * Ruby/PanelApplet:     gnome-panel 2.6.0 or later (deprecated since 0.16.0)
 
 === Not available (removed since 0.16.0)
 
@@ -135,14 +140,16 @@ current dependencies are:
    depends on Ruby/GTK.
 
 : Ruby/Libglade
-   depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional)
-
-: Ruby/PanelApplet
-   depends on Ruby/GTK (since libpanel-applet 2.25) or
-   Ruby/GNOME (before libpanel-applet 2.25).
+   depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional).
 
 : Ruby/RSVG
    depends on Ruby/GLib, Ruby/GdkPixbuf2.
+
+: Ruby/Poppler
+   depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo(optional).
+
+: Ruby/VTE
+   depends on Ruby/GTK.
 
 === Experimental
 
@@ -154,6 +161,12 @@ current dependencies are:
 
 : Ruby/GtkSourceView2
    depends on Ruby/GTK.
+
+=== Deprecated
+
+: Ruby/PanelApplet
+   depends on Ruby/GTK (since libpanel-applet 2.25) or
+   Ruby/GNOME (before libpanel-applet 2.25).
 
 === Not available
 

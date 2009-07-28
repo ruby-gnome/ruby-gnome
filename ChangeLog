@@ -1,3 +1,8 @@
+2009-07-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* README: update.
+	Reported by kimura wataru. Thanks!!!
+
 2009-07-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: follow the misc/recent.rb changes.
