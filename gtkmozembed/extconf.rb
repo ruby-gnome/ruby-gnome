@@ -68,6 +68,16 @@ end
 
 make_version_header("GTKMOZEMBED", package_id)
 
+pc = "#{package_id}-ruby.pc"
+create_pkg_config_file('GTKMOZEMBED', 'src/rbgtkmozembedversion.h', pc)
+File.open(File.join(SRCDIR, "depend"), "w") do |depend|
+  depend.puts(<<-EOD)
+install:
+\t$(MAKEDIRS) $(libdir)/pkgconfig
+\t$(INSTALL_DATA) ../#{pc} $(libdir)/pkgconfig
+EOD
+end
+
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
                           "-DRUBY_GTKMOZEMBED_COMPILATION") do
   enum_type_prefix = "gtkmozembed-enum-types"
@@ -83,5 +93,4 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
   glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"])
 end
 
-create_pkg_config_file('GTKMOZEMBED', 'src/rbgtkmozembedversion.h', 'mozilla-gtkmozembed-ruby.pc')
 create_top_makefile

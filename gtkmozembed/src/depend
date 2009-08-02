@@ -1,2 +1,0 @@
-install:
-	$(INSTALL_DATA) ../mozilla-gtkmozembed-ruby.pc $(libdir)/pkgconfig
