@@ -2,6 +2,25 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.19.2: 20XX-XX-XX
+
+NOTE: 0.19.x releases are development series.
+
+WRITE ME
+
+=== Changes
+
+==== Ruby/GtkMozEmbed
+
+  * Bug fixes:
+    * fix .pc detection.
+      [OBATA Akio, Kouhei Sutou]
+
+=== Thanks
+
+  * OBATA Akio
+  * ...
+
 == Ruby-GNOME2 0.19.1: 2009-07-26
 
 NOTE: 0.19.x releases are development series.
