@@ -6,6 +6,7 @@ PACKAGE_NAME = "gtkmozembed"
 PACKAGE_IDS = ["libxul-embedding-unstable",
                "xulrunner-gtkmozembed",
                "firefox-gtkmozembed",
+               "seamonkey-gtkmozembed",
                "mozilla-gtkmozembed"]
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')

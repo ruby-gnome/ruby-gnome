@@ -1,5 +1,8 @@
 2009-08-02  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: add seamonky to detect target list.
+	Suggested by OBATA Akio. Thanks!!!
+
 	* extconf.rb: auto-generate src/depend for existing GtkMozEmbed
 	package.
 	* src/depend: remove.
