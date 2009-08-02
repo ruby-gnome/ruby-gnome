@@ -3,4 +3,5 @@ install-so:
 	$(INSTALL_DATA) rbpangoversion.h $(RUBYARCHDIR)
 
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../pango-ruby.pc $(libdir)/pkgconfig

@@ -6,4 +6,5 @@ install-so:
 	$(INSTALL_DATA) $(srcdir)/rbgtkmacros.h $(RUBYARCHDIR)
 
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../gtk+-2.0-ruby.pc $(libdir)/pkgconfig

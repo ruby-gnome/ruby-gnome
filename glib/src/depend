@@ -6,4 +6,5 @@ install-so:
 	$(INSTALL_DATA) glib-enum-types.h $(RUBYARCHDIR)
 
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../glib-2.0-ruby.pc $(libdir)/pkgconfig

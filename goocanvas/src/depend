@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../goocanvas-ruby.pc $(libdir)/pkgconfig

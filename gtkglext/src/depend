@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../gtkglext-1.0-ruby.pc $(libdir)/pkgconfig

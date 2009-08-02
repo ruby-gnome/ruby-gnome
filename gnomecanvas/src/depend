@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../libgnomecanvas-2.0-ruby.pc $(libdir)/pkgconfig

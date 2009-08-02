@@ -1,3 +1,7 @@
+2009-08-02  Yaakov Sekowitz  <yselkowitz@users.sourceforge.net>
+
+	* FIX: Ruby/*: fixed pkg-config file installation.
+
 2009-08-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: fix .pc detection.

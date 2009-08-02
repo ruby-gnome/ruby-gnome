@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../libgnomeprintui-2.2-ruby.pc $(libdir)/pkgconfig

@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ../gstreamer-0.10-ruby.pc $(libdir)/pkgconfig
