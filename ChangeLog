@@ -1,4 +1,8 @@
-2009-08-02  Yaakov Sekowitz  <yselkowitz@users.sourceforge.net>
+2009-08-04  Yaakov Selkowitz  <yselkowitz@users.sourceforge.net>
+
+	* FIX: Ruby/Libglade2: fix pkg-config file installation here also.
+
+2009-08-02  Yaakov Selkowitz  <yselkowitz@users.sourceforge.net>
 
 	* FIX: Ruby/*: fixed pkg-config file installation.
 
