@@ -138,19 +138,18 @@ end
 
 def create_pkg_config_file(ruby_mod_name, c_package, version = nil)
   out_file_name = 'ruby-' + ruby_mod_name + '.pc'
-  version ||= PKGConfig.modversion c_package
+  version ||= PKGConfig.modversion(c_package)
 
   puts "creating #{out_file_name}"
 
-  pc_file = File.new(out_file_name, 'w+', 0644)
+  File.open(out_file_name, 'w') do |pc_file|
+    name = PKGConfig.name(c_package)
+    pc_file.puts("Name: Ruby/#{name}") if name
 
-  name = PKGConfig.name c_package
-  pc_file.printf("Name: Ruby/#{name}\n") if name
-  
-  description = PKGConfig.description c_package
-  pc_file.printf("Description: Ruby bindings for #{description}\n") if description
-  
-  pc_file.printf("Version: #{version}\n")
+    description = PKGConfig.description(c_package)
+    pc_file.puts("Description: Ruby bindings for #{description}") if description
+    pc_file.printf("Version: #{version}")
+  end
 end
 
 def ruby_gnome2_version(glib_source_directory=nil)
