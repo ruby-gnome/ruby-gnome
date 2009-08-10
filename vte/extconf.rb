@@ -27,8 +27,8 @@ have_type("VteTerminalCursorBlinkMode", vte_headers)
 
 unless have_macro("VTE_CHECK_VERSION", vte_headers)
   make_version_header("VTE", PACKAGE_ID)
-  create_pkg_config_file('VTE', 'src/rbvteversion.h', 'vte-ruby.pc')
 end
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_VTE_COMPILATION")
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

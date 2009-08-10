@@ -88,5 +88,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {
   system("#{$ruby} #{SRCDIR_QUOTED}/makekeysyms.rb #{gdkincl}/gdkkeysyms.h > rbgdkkeysyms.h") or raise "failed to make GDK Keysyms"
 }
 
-create_pkg_config_file('GLIB', '../glib/src/rbglib.h', 'gtk+-2.0-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PKG_CONFIG_ID, ruby_gnome2_version)
 create_top_makefile(["src"])

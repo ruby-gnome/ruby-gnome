@@ -3,6 +3,7 @@ extconf.rb for Ruby/Pango extention library
 =end
 
 PACKAGE_NAME = "pango"
+PACKAGE_ID   = "pango"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -13,7 +14,7 @@ $LOAD_PATH << "E:\\ruby\\lib\\ruby\\1.8\\i386-mswin32"
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('pango') or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 pango_header = "pango/pango.h"
@@ -43,6 +44,6 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
   SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbpangoinits.c")
 }
-create_pkg_config_file('PANGO', 'src/rbpangoversion.h', 'pango-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile
 

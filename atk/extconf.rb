@@ -40,6 +40,6 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_ATK_COMPILATION") {
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbatkinits.c") or raise "failed to make ATK inits"
 }
 
-create_pkg_config_file('ATK', 'src/rbatkversion.h', 'atk-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile
 

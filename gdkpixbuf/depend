@@ -1,2 +1,2 @@
 install:
-	$(INSTALL_DATA) gdk-pixbuf-2.0-ruby.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ruby-gdk_pixbuf2.pc $(libdir)/pkgconfig

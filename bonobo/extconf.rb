@@ -2,6 +2,9 @@
 extconf.rb for Ruby/Bonobo extention library
 =end
 
+PACKAGE_NAME = "bonobo2"
+PACKAGE_ID   = "libbonobo-2.0"
+
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 require 'mkmf-gnome2'
 
@@ -50,12 +53,12 @@ begin
     end
     add_obj("rbbonoboinits#{obj_ext}")
 
-	make_version_header("BONOBO", 'libbonobo-2.0', '.')
+	make_version_header("BONOBO", PACKAGE_ID, '.')
 
     #
     # create Makefiles
     #
-    create_makefile("bonobo2", srcdir)
+    create_makefile(PACKAGE_NAME, srcdir)
     raise Interrupt if not FileTest.exist? "Makefile"
 
     mfile = File.open("Makefile", "a")
@@ -72,7 +75,7 @@ allclean: clean
     Dir.chdir ".."
   end
 
-  create_pkg_config_file('BONOBO', 'src/rbbonoboversion.h', 'libbonobo-2.0-ruby.pc')
+  create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
   create_top_makefile
 
 rescue Interrupt

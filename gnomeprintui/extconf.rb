@@ -5,6 +5,7 @@ extconf.rb for Ruby/GnomePrintUI extention library
 require "fileutils"
 
 PACKAGE_NAME = "gnomeprintui2"
+PACKAGE_ID   = "libgnomeprintui-2.2"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -14,10 +15,9 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-modname = "libgnomeprintui-2.2"
 app_name = "LIBGNOMEPRINTUI"
 
-PKGConfig.have_package(modname) or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 add_depend_package("glib2", "glib/src", TOPDIR)
@@ -28,7 +28,7 @@ add_depend_package("gnomeprint2", "gnomeprint/src", TOPDIR)
 have_header("libgnomeprintui/gnome-print-config-dialog.h")
 have_header("libgnomeprintui/gnome-font-dialog.h")
 
-make_version_header(app_name, modname)
+make_version_header(app_name, PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
                           "-DRUBY_GNOMEPRINTUI2_COMPILATION") do
@@ -47,5 +47,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
   end
 end
 
-create_pkg_config_file('LIBGNOMEPRINTUI', 'src/rblibgnomeprintuiversion.h', 'libgnomeprintui-2.2-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

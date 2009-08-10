@@ -17,7 +17,7 @@ require 'mkmf-gnome2'
 # detect GTK+ configurations
 #
 
-PKGConfig.have_package('libgtkhtml-2.0') or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 have_func('html_view_scroll_to_node')
@@ -33,5 +33,5 @@ add_depend_package("gtk2", "gtk/src", TOPDIR)
 make_version_header("GTKHTML", PACKAGE_ID)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTKHTML2_COMPILATION")
-create_pkg_config_file('GTKHTML', 'src/rbgtkhtmlversion.h', 'libgtkhtml-2.0-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

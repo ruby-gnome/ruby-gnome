@@ -1,3 +1,3 @@
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../poppler-ruby.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ../ruby-poppler.pc $(libdir)/pkgconfig

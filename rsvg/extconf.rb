@@ -3,6 +3,7 @@ extconf.rb for Ruby/RSVG extention library
 =end
 
 PACKAGE_NAME = "rsvg2"
+PACKAGE_ID   = "librsvg-2.0"
 
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
@@ -12,7 +13,7 @@ $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package('librsvg-2.0') or exit 1
+PKGConfig.have_package(PACKAGE_ID) or exit 1
 setup_win32(PACKAGE_NAME)
 
 rsvg_header = "librsvg/rsvg.h"
@@ -42,5 +43,5 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_RSVG2_COMPILATION") do
   end
 end
 
-create_pkg_config_file('GLIB', '../glib/src/rbglib.h', 'librsvg-2.0-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

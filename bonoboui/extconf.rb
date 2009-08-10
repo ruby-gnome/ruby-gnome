@@ -2,6 +2,9 @@
 extconf.rb for Ruby/BonoboUI extention library
 =end
 
+PACKAGE_NAME = "bonoboui2"
+PACKAGE_ID   = "libbonoboui-2.0"
+
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
 
 require 'mkmf-gnome2'
@@ -49,12 +52,12 @@ begin
     end
     add_obj("rbbonobouiinits#{obj_ext}")
     
-    make_version_header("BONOBOUI", 'libbonoboui-2.0', '.')
+    make_version_header("BONOBOUI", PACKAGE_ID, '.')
 
     #
     # create Makefiles
     #
-    create_makefile("bonoboui2", srcdir)
+    create_makefile(PACKAGE_NAME, srcdir)
 
     mfile = File.open("Makefile", "a")
     $source_files.each do |e|
@@ -70,7 +73,7 @@ allclean: clean
     Dir.chdir ".."
   end
 
-  create_pkg_config_file('BONOBOUI', 'src/rbbonobouiversion.h', 'libbonoboui-2.0-ruby.pc')
+  create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
   create_top_makefile
 
 rescue Interrupt

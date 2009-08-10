@@ -3,4 +3,4 @@ install-so:
 
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../libgnomeprint-2.2-ruby.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ../ruby-gnomeprint2.pc $(libdir)/pkgconfig

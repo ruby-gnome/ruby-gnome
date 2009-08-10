@@ -136,19 +136,34 @@ def add_distcleanfile(file)
   $distcleanfiles << file
 end
 
-def create_pkg_config_file module_name, h_file_name, out_file_name
-  h_file = h_file_name ? File.new(h_file_name) : nil
+def create_pkg_config_file(ruby_mod_name, c_package, version = nil)
+  out_file_name = 'ruby-' + ruby_mod_name + '.pc'
+  version ||= PKGConfig.modversion c_package
+
+  puts "creating #{out_file_name}"
+
   pc_file = File.new(out_file_name, 'w+', 0644)
 
+  name = PKGConfig.name c_package
+  pc_file.printf("Name: Ruby/#{name}\n") if name
+  
+  description = PKGConfig.description c_package
+  pc_file.printf("Description: Ruby bindings for #{description}\n") if description
+  
+  pc_file.printf("Version: #{version}\n")
+end
+
+def ruby_gnome2_version(glib_source_directory=nil)
   version = nil
-  package = out_file_name.gsub('-ruby.pc', '')
+  glib_source_directory ||= File.join(File.dirname(__FILE__), "..")
+  h_file = File.new(File.join(glib_source_directory, "rbglib.h"))
 
   if h_file
     major = nil
     minor = nil
     micro = nil
     h_file.each_line do |line|
-      next unless line.match /#define (RB){0,1}#{module_name}_[A-Z]+_VERSION/
+      next unless line.match /#define RBGLIB_[A-Z]+_VERSION/
       if line.include? 'MAJOR'
           major = line.split(' ')[-1].gsub(/[^0-9]/, '')
       elsif line.include? 'MINOR'
@@ -158,17 +173,9 @@ def create_pkg_config_file module_name, h_file_name, out_file_name
       end
     end
     version = "#{major}.#{minor}.#{micro}"
-  else
-    version = PKGConfig.modversion package
   end
-  
-  name = PKGConfig.name package
-  pc_file.printf("Name: #{name}\n") if name
-  
-  description = PKGConfig.description package
-  pc_file.printf("Description: #{description}\n") if description
-  
-  pc_file.printf("Version: #{version}\n")
+
+  version
 end
 
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)

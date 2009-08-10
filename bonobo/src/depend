@@ -1,3 +1,3 @@
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../libbonobo-2.0-ruby.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ../ruby-bonobo2.pc $(libdir)/pkgconfig

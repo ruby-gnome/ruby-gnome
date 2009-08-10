@@ -27,5 +27,5 @@ $INSTALLFILES ||= []
 $INSTALLFILES << ["../lib/**/*.rb", "$(RUBYLIBDIR)", "../lib"]
 create_makefile_at_srcdir(PACKAGE_NAME + "_main", BASE_DIR + "/main",
                           "-DRUBY_PANELAPPLET_COMPILATION")
-create_pkg_config_file('PANELAPPLET', 'src/rbpanelappletversion.h', 'libpanelapplet-2.0-ruby.pc')
+create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile(["src", "main"])
