@@ -1,5 +1,7 @@
 2009-08-10  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb, src/lib/mkmf-gnome2.rb: cleanup.
+
 	* src/lib/mkmf-gnome2.rb: cleanup.
 
 2009-07-26  Kouhei Sutou  <kou@cozmixng.org>

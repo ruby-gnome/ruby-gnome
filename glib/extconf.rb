@@ -40,6 +40,8 @@ have_func("ruby_native_thread_p", ruby_header)
 have_var("curr_thread", [ruby_header, "node.h"])
 have_var("rb_curr_thread", [ruby_header, "node.h"])
 
+create_pkg_config_file("Ruby/GLib2", PACKAGE_ID, ruby_gnome2_version)
+
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
   enum_type_prefix = "glib-enum-types"
   include_paths = PKGConfig.cflags_only_I("glib-2.0")
@@ -55,5 +57,4 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
   glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
 end
 
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

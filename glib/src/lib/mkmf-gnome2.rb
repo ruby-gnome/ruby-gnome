@@ -136,15 +136,19 @@ def add_distcleanfile(file)
   $distcleanfiles << file
 end
 
-def create_pkg_config_file(ruby_mod_name, c_package, version = nil)
-  out_file_name = 'ruby-' + ruby_mod_name + '.pc'
-  version ||= PKGConfig.modversion(c_package)
+def create_pkg_config_file(package_name, c_package,
+                           version=nil, pc_file_name=nil)
+  pc_file_name ||= "#{package_name.downcase.sub(/\//, '-')}.pc"
+  version ||= ruby_gnome2_version || PKGConfig.modversion(c_package)
 
-  puts "creating #{out_file_name}"
+  puts "creating #{pc_file_name}"
 
-  File.open(out_file_name, 'w') do |pc_file|
-    name = PKGConfig.name(c_package)
-    pc_file.puts("Name: Ruby/#{name}") if name
+  File.open(pc_file_name, 'w') do |pc_file|
+    if package_name.nil?
+      c_module_name = PKGConfig.name(c_package)
+      package_name = "Ruby/#{c_module_name}" if c_module_name
+    end
+    pc_file.puts("Name: #{package_name}") if package_name
 
     description = PKGConfig.description(c_package)
     pc_file.puts("Description: Ruby bindings for #{description}") if description
@@ -153,25 +157,23 @@ def create_pkg_config_file(ruby_mod_name, c_package, version = nil)
 end
 
 def ruby_gnome2_version(glib_source_directory=nil)
-  version = nil
   glib_source_directory ||= File.join(File.dirname(__FILE__), "..")
-  h_file = File.new(File.join(glib_source_directory, "rbglib.h"))
+  rbglib_h = File.join(glib_source_directory, "rbglib.h")
+  return nil unless File.exist?(rbglib_h)
 
-  if h_file
-    major = nil
-    minor = nil
-    micro = nil
+  version = nil
+  File.open(rbglib_h) do |h_file|
+    version_info = {}
     h_file.each_line do |line|
-      next unless line.match /#define RBGLIB_[A-Z]+_VERSION/
-      if line.include? 'MAJOR'
-          major = line.split(' ')[-1].gsub(/[^0-9]/, '')
-      elsif line.include? 'MINOR'
-          minor = line.split(' ')[-1].gsub(/[^0-9]/, '')
-      elsif line.include? 'MICRO'
-          micro = line.split(' ')[-1].gsub(/[^0-9]/, '')
+      case line
+      when /\A#define RBGLIB_(MAJOR|MINOR|MICRO)_VERSION\s+(\d+)/
+        version_info[$1] = $2
       end
     end
-    version = "#{major}.#{minor}.#{micro}"
+    version_info = [version_info["MAJOR"],
+                    version_info["MINOR"],
+                    version_info["MICRO"]].compact
+    version = version_info.join(".") if version_info.size == 3
   end
 
   version
