@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/Libart extention library
+extconf.rb for Ruby/Libart2 extension library
 =end
 
 PACKAGE_NAME = "libart2"
@@ -25,7 +25,7 @@ have_library("art_lgpl_2", "art_affine_identity") or exit 1
 
 setup_win32(PACKAGE_NAME)
 
+create_pkg_config_file("Ruby/Libart2", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_LIBART2_COMPILATION")
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile
 

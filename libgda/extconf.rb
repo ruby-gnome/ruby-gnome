@@ -37,5 +37,5 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 make_version_header("LIBGDA", package_id)
 
 create_makefile_at_srcdir(package_name, SRCDIR, "-DRUBY_LIBGDA_COMPILATION")
-create_pkg_config_file(package_name, package_id, ruby_gnome2_version)
+create_pkg_config_file("Ruby/Libgda", package_id)
 create_top_makefile

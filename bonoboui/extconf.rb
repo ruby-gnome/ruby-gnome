@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/BonoboUI extention library
+extconf.rb for Ruby/BonoboUI2 extention library
 =end
 
 PACKAGE_NAME = "bonoboui2"
@@ -37,6 +37,8 @@ begin
   srcdir = File.dirname($0) == "." ? "." :
     File.expand_path(File.dirname($0) + "/src")
 
+  create_pkg_config_file("Ruby/BonoboUI2", PACKAGE_ID)
+
   Dir.mkdir "src" unless FileTest.exist? "src"
   Dir.chdir "src"
 
@@ -73,7 +75,6 @@ allclean: clean
     Dir.chdir ".."
   end
 
-  create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
   create_top_makefile
 
 rescue Interrupt

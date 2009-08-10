@@ -40,10 +40,10 @@ add_distcleanfile("rbpangoinits.c")
 
 make_version_header("PANGO", "pango")
 
+create_pkg_config_file("Ruby/Pango", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_PANGO_COMPILATION") {
   SRCDIR_QUOTED = SRCDIR.gsub(' ', '\ ')
   system("#{$ruby} #{SRCDIR_QUOTED}/makeinits.rb #{SRCDIR_QUOTED}/*.c > rbpangoinits.c")
 }
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile
 

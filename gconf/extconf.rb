@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GConf extention library
+extconf.rb for Ruby/GConf2 extention library
 =end
 
 PACKAGE_NAME = "gconf2"
@@ -22,7 +22,6 @@ add_depend_package("glib2", "glib/src", TOPDIR)
 
 make_version_header("GCONF", PACKAGE_ID)
 
+create_pkg_config_file("Ruby/GConf2", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GCONF2_COMPILATION")
-
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

@@ -69,7 +69,7 @@ end
 
 make_version_header("GTKMOZEMBED", package_id)
 
-create_pkg_config_file(PACKAGE_NAME, package_id, ruby_gnome2_version)
+create_pkg_config_file('Ruby/GtkMozEmbed', package_id)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
                           "-DRUBY_GTKMOZEMBED_COMPILATION") do

@@ -21,11 +21,13 @@ add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 make_version_header("PANELAPPLET", PACKAGE_ID)
 
+create_pkg_config_file("Ruby/PanelApplet", PACKAGE_ID,
+                       nil, "ruby-panelapplet2.pc")
+
 create_makefile_at_srcdir(PACKAGE_NAME, BASE_DIR + "/src",
                           "-DRUBY_PANELAPPLET_COMPILATION")
 $INSTALLFILES ||= []
 $INSTALLFILES << ["../lib/**/*.rb", "$(RUBYLIBDIR)", "../lib"]
 create_makefile_at_srcdir(PACKAGE_NAME + "_main", BASE_DIR + "/main",
                           "-DRUBY_PANELAPPLET_COMPILATION")
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile(["src", "main"])

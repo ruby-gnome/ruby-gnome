@@ -31,6 +31,8 @@ check_cairo and have_header("librsvg/rsvg-cairo.h")
 
 add_depend_package("glib2", "glib/src", TOPDIR)
 
+create_pkg_config_file("Ruby/RSVG", PACKAGE_ID, nil, "ruby-rsvg2.pc")
+
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_RSVG2_COMPILATION") do
   enum_type_prefix = "librsvg-enum-types"
   unless have_header("librsvg/#{enum_type_prefix}.h")
@@ -43,5 +45,4 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_RSVG2_COMPILATION") do
   end
 end
 
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

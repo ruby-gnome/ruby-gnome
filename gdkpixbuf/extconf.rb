@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GdkPixbuf extention library
+extconf.rb for Ruby/GdkPixbuf2 extention library
 =end
 
 PACKAGE_NAME = "gdk_pixbuf2"
@@ -27,6 +27,5 @@ if PKGConfig.have_package('gdk-2.0')
 end
 
 add_depend_package("glib2", "glib/src", TOPDIR)
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
+create_pkg_config_file("Ruby/GdkPixbuf2", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR)
-

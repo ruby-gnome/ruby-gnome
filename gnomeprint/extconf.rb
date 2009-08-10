@@ -21,6 +21,7 @@ add_depend_package("libart2", "libart/src", TOPDIR)
 
 make_version_header(app_name, PACKAGE_ID)
 
+create_pkg_config_file("Ruby/GnomePrint", PACKAGE_ID,
+                       nil, "ruby-gnomeprint2.pc")
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOMEPRINT2_COMPILATION")
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

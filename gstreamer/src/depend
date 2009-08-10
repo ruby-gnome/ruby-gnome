@@ -1,3 +1,3 @@
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-gst.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ../ruby-gstreamer.pc $(libdir)/pkgconfig

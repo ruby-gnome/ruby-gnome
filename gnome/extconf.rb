@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GNOME extention library
+extconf.rb for Ruby/GNOME2 extention library
 =end
 
 PACKAGE_NAME = "gnome2"
@@ -21,7 +21,6 @@ add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 make_version_header("GNOME", PACKAGE_ID)
 
+create_pkg_config_file("Ruby/GNOME2", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GNOME2_COMPILATION")
-
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

@@ -24,6 +24,6 @@ add_depend_package("gdk_pixbuf2", "gdkpixbuf", TOPDIR)
 
 make_version_header("POPPLER", PACKAGE_ID)
 
+create_pkg_config_file("Ruby/Poppler", PACKAGE_ID)
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_POPPLER_COMPILATION")
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

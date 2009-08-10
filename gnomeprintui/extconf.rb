@@ -30,6 +30,8 @@ have_header("libgnomeprintui/gnome-font-dialog.h")
 
 make_version_header(app_name, PACKAGE_ID)
 
+create_pkg_config_file("Ruby/GnomePrintUI", PACKAGE_ID,
+                       nil, "ruby-gnomeprintui2.pc")
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
                           "-DRUBY_GNOMEPRINTUI2_COMPILATION") do
   enum_type_dir = "libgnomeprintui"
@@ -47,5 +49,4 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
   end
 end
 
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
 create_top_makefile

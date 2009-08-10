@@ -33,5 +33,5 @@ if /mswin32/ =~ RUBY_PLATFORM
 end
 
 make_version_header("LIBGLADE", PACKAGE_ID, ".")
-create_pkg_config_file(PACKAGE_NAME, PACKAGE_ID, ruby_gnome2_version)
-create_makefile(PACKAGE_NAME)  
+create_pkg_config_file("Ruby/Libglade2", PACKAGE_ID, ruby_gnome2_version)
+create_makefile(PACKAGE_NAME)
