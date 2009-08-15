@@ -373,7 +373,9 @@ def check_cairo
 end
 
 $CPPFLAGS << " -I$(sitearchdir) "
-$CPPFLAGS << " -I$(vendorarchdir) "
+if Config::CONFIG["vendorarchdir"]
+  $CPPFLAGS << " -I$(vendorarchdir) "
+end
 
 check_ruby_func
 
