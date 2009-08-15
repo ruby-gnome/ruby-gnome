@@ -1,3 +1,9 @@
+2009-08-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: empty $(vendorarchdir) related build problem
+	on CentOS 5.3 x86_64.
+	Reported by Toshiyuki Suzumura. Thanks!!!
+
 2009-08-09  Yaakov Selkowitz  <yselkowitz@users.sourceforge.net>
 
 	* NEWS: Ruby/*: Changed pkg-config file names to ruby-MODULE.pc.

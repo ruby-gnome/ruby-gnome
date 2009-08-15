@@ -10,6 +10,12 @@ WRITE ME
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Bug fixes:
+    * empty $(vendorarchdir) related build problem on CentOS 5.3 x86_64.
+      [Toshiyuki Suzumura, Kouhei Sutou]
+
 ==== Ruby/GtkMozEmbed
 
   * Bug fixes:
@@ -19,6 +25,7 @@ WRITE ME
 === Thanks
 
   * OBATA Akio
+  * Toshiyuki Suzumura
   * ...
 
 == Ruby-GNOME2 0.19.1: 2009-07-26
