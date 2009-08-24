@@ -1,0 +1,34 @@
+Ruby/GIO
+========
+
+
+Ruby/GIO is a Ruby binding of gio-2.0.x.
+
+Requirements
+------------
+
+	Ruby:		http://www.ruby-lang.org/
+	GIO:	        http://library.gnome.org/devel/gio/stable
+
+Install
+-------
+
+	0. install Ruby and GLib.
+	1. ruby extconf.rb
+	2. make
+	3. su
+	4. make install
+
+Copying
+-------
+
+	Copyright (c) 2008 Ruby-GNOME2 Project Team
+      
+	This program is free software.
+	You can distribute/modify this program under the terms of
+	the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+Project Website
+---------------
+
+   	http://ruby-gnome2.sourceforge.jp/
