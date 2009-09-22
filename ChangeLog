@@ -1,5 +1,8 @@
 2009-09-22  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GLib2: work Ruby thread with GTK+. [Debian #502262]
+	Reported by Johan Walles. Thanks!!!
+
 	* NEWS: Ruby/GLib2: fix multi thread blocking with Ruby
 	1.8.6-p368 or later and 1.8.7-p173 or later. [#2862022]
 	Reported by Roy Wright. Thanks!!!
