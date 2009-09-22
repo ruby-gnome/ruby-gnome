@@ -79,6 +79,13 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 
     return info.result;
 }
+
+static VALUE
+ruby_source_set_priority (VALUE self, VALUE priority)
+{
+    return Qnil;
+}
+
 #else
 static gint
 rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
@@ -102,6 +109,8 @@ restore_poll_func(VALUE data)
 }
 
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
+static guint ruby_source_id = 0;
+
 /* from eval.c */
 #define WAIT_FD		(1<<0)
 #define WAIT_SELECT	(1<<1)
@@ -244,11 +253,14 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     rg_source->old_poll_fds = rg_source->poll_fds;
     rg_source->poll_fds = NULL;
 
+    g_print("prepare\n");
+
     now = timeofday();
     thread = rb_curr_thread;
     do {
         thread = thread->next;
 
+        g_print("prepare here\n");
         if ((thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
              thread != rb_curr_thread) ||
             (thread->wait_for & WAIT_JOIN &&
@@ -256,6 +268,11 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
             rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
                                                 rg_source->old_poll_fds);
             rg_source->old_poll_fds = NULL;
+            g_print("prepare wow: %d:%d\n",
+                    (thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
+                     thread != rb_curr_thread),
+                (thread->wait_for & WAIT_JOIN &&
+             thread->join->status == THREAD_KILLED));
             return TRUE;
         }
 
@@ -267,6 +284,8 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
                 rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
                                                     rg_source->old_poll_fds);
                 rg_source->old_poll_fds = NULL;
+                g_print("prepare delay: %g: %g: %g\n",
+                        delay, thread->delay, now);
                 return TRUE;
             }
             if (*timeout == -1 || delay < *timeout)
@@ -278,6 +297,7 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     } while (thread != rb_curr_thread);
 
     source_cleanup_poll_fds(source);
+    g_print("prepare done\n");
 
     return FALSE;
 }
@@ -366,6 +386,19 @@ ruby_source_new(void)
     rg_source->old_poll_fds = NULL;
 
     return source;
+}
+
+static VALUE
+ruby_source_set_priority (VALUE self, VALUE priority)
+{
+    GSource *ruby_source;
+
+    ruby_source = g_main_context_find_source_by_id(NULL, ruby_source_id);
+    if (ruby_source) {
+        g_source_set_priority(ruby_source, NUM2INT(priority));
+    }
+
+    return Qnil;
 }
 #endif
 
@@ -817,6 +850,11 @@ Init_glib_main_context()
     id__callbacks__ = rb_intern("__callbacks__");
     callbacks_table = g_hash_table_new(NULL, NULL);
 
+    rb_define_singleton_method(mGLib, "set_ruby_thread_priority",
+                               ruby_source_set_priority, 1);
+    rb_define_singleton_method(mGLib, "ruby_thread_priority=",
+                               ruby_source_set_priority, 1);
+
     mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
     rb_define_singleton_method(mGLibSource, "remove", source_remove, 1);
 #if GLIB_CHECK_VERSION(2,12,0)
@@ -875,12 +913,12 @@ Init_glib_main_context()
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
     {
         GSource *source;
-        guint tag;
 
         source = ruby_source_new();
-        tag = g_source_attach(source, NULL);
+        g_source_set_priority(source, G_PRIORITY_DEFAULT_IDLE);
+        ruby_source_id = g_source_attach(source, NULL);
         g_source_unref(source);
-        rb_set_end_proc(ruby_source_remove, UINT2NUM(tag));
+        rb_set_end_proc(ruby_source_remove, Qnil);
     }
 #endif
 }
