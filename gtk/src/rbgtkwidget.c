@@ -1311,7 +1311,9 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_double_buffered", widget_set_double_buffered, 1);
     rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
     rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
-    rb_define_method(gWidget, "set_scroll_adjustment", widget_set_scroll_adjustments, 2);
+    rb_define_method(gWidget, "set_scroll_adjustments", widget_set_scroll_adjustments, 2);
+    /* for backward compatibility. */
+    rb_define_alias(gWidget, "set_scroll_adjustment", "set_scroll_adjustments");
     rb_define_method(gWidget, "mnemonic_activate", widget_mnemonic_activate, 1);
     rb_define_method(gWidget, "region_intersect", widget_region_intersect, 1);
     rb_define_method(gWidget, "send_expose", widget_send_expose, 1);

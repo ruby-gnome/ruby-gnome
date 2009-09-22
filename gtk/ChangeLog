@@ -1,3 +1,10 @@
+2009-09-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkwidget.c: fix a typo:
+	Gtk::Widget#set_scroll_adjustments ->
+	Gtk::Widget#set_scroll_adjustment. [#2679744]
+	Reported by Kentaro Fukuchi. Thanks!!!
+
 2009-07-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: add missing headers.
