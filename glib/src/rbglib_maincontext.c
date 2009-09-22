@@ -12,8 +12,10 @@
 #include "rbgprivate.h"
 
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
+#  include <version.h>
 #  include <rubysig.h>
 #  include <node.h>
+#  include <time.h>
 #  ifdef HAVE_CURR_THREAD
 #    define rb_curr_thread curr_thread
 #  endif
@@ -109,10 +111,43 @@ restore_poll_func(VALUE data)
 
 #define DELAY_INFTY 1E30
 
+#ifdef RUBY_RELEASE_YEAR
+#  define CHECK_RUBY_RELEASE_DATE(year, month, day)     \
+    (RUBY_RELEASE_YEAR >= (year) &&                     \
+     RUBY_RELEASE_MONTH >= (month) &&                   \
+     RUBY_RELEASE_DAY >= (day))
+#else
+#  define CHECK_RUBY_RELEASE_DATE(year, month, day) 0
+#endif
+
 static double
 timeofday()
 {
     struct timeval tv;
+#if CHECK_RUBY_RELEASE_DATE(2009, 1, 7)
+/* The following CLOCK_MONOTONIC change was introduced into
+ * Ruby 1.8.6 and 1.8.7 at 2009-01-07.
+ *
+ * 1.8.6:
+ * Wed Jan  7 10:06:12 2009  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+ *
+ *        * eval.c (timeofday): use monotonic clock.  based on a patch
+ *          from zimbatm <zimbatm@oree.ch> in [ruby-core:16627].
+ *
+ * 1.8.7:
+ * Wed Jan  7 10:09:46 2009  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+ *
+ *        * eval.c (timeofday): use monotonic clock.  based on a patch
+ *          from zimbatm <zimbatm@oree.ch> in [ruby-core:16627].
+ */
+#  ifdef CLOCK_MONOTONIC
+    struct timespec tp;
+
+    if (clock_gettime(CLOCK_MONOTONIC, &tp) == 0) {
+	return (double)tp.tv_sec + (double)tp.tv_nsec * 1e-9;
+    }
+#  endif
+#endif
     gettimeofday(&tv, NULL);
     return (double)tv.tv_sec + (double)tv.tv_usec * 1e-6;
 }
