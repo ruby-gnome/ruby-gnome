@@ -372,8 +372,10 @@ def check_cairo
   have_rb_cairo_h
 end
 
-$CPPFLAGS << " -I$(sitearchdir) "
-if Config::CONFIG["vendorarchdir"]
+if File.exist?(Config::CONFIG["sitearchdir"])
+  $CPPFLAGS << " -I$(sitearchdir) "
+end
+if File.exist?(Config::CONFIG["vendorarchdir"])
   $CPPFLAGS << " -I$(vendorarchdir) "
 end
 

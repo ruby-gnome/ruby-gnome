@@ -1,3 +1,7 @@
+2009-09-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb: don't add nonexistent path to include paths.
+
 2009-08-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/mkmf-gnome2.rb: check $(vendorarchdir) availability.
