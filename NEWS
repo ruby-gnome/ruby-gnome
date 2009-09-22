@@ -21,6 +21,14 @@ WRITE ME
     * [Debian #502262] work Ruby thread with GTK+.
       [Johan Walles, Kouhei Sutou]
 
+==== Ruby/GTK2
+
+  * Bug fixes:
+    * [#2679744] fix a typo:
+      Gtk::Widget#set_scroll_adjustments ->
+      Gtk::Widget#set_scroll_adjustment.
+      [Kentaro Fukuchi, Kouhei Sutou]
+
 ==== Ruby/GtkMozEmbed
 
   * Bug fixes:
@@ -34,6 +42,7 @@ WRITE ME
   * Roy Wright
   * Andrea Dallera
   * Johan Walles
+  * Kentaro Fukuchi
   * ...
 
 == Ruby-GNOME2 0.19.1: 2009-07-26
