@@ -253,14 +253,11 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     rg_source->old_poll_fds = rg_source->poll_fds;
     rg_source->poll_fds = NULL;
 
-    g_print("prepare\n");
-
     now = timeofday();
     thread = rb_curr_thread;
     do {
         thread = thread->next;
 
-        g_print("prepare here\n");
         if ((thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
              thread != rb_curr_thread) ||
             (thread->wait_for & WAIT_JOIN &&
@@ -268,11 +265,6 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
             rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
                                                 rg_source->old_poll_fds);
             rg_source->old_poll_fds = NULL;
-            g_print("prepare wow: %d:%d\n",
-                    (thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
-                     thread != rb_curr_thread),
-                (thread->wait_for & WAIT_JOIN &&
-             thread->join->status == THREAD_KILLED));
             return TRUE;
         }
 
@@ -284,8 +276,6 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
                 rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
                                                     rg_source->old_poll_fds);
                 rg_source->old_poll_fds = NULL;
-                g_print("prepare delay: %g: %g: %g\n",
-                        delay, thread->delay, now);
                 return TRUE;
             }
             if (*timeout == -1 || delay < *timeout)
@@ -297,7 +287,6 @@ source_prepare_setup_poll_fd(GSource *source, gint *timeout)
     } while (thread != rb_curr_thread);
 
     source_cleanup_poll_fds(source);
-    g_print("prepare done\n");
 
     return FALSE;
 }
