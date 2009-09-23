@@ -130,7 +130,7 @@ task :tag do
 
   svn_commands = ["svn", "cp", "-m", "released #{version}!!!"]
   if ENV["SVN_USER"]
-    svn_commands.configure(["--username", ENV["SVN_USER"]])
+    svn_commands.concat(["--username", ENV["SVN_USER"]])
   end
   svn_commands.concat([guess_copy_source_repository_uri, tagged_url])
   sh(*svn_commands)

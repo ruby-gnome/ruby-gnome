@@ -1,5 +1,7 @@
 2009-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: fix a typo.
+
 	* NEWS: fix a typo.
 
 	* Rakefile: follow the recent misc/release.rb changes.
