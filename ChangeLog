@@ -1,3 +1,7 @@
+2009-09-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: set 0.19.2 release date.
+
 2009-09-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: fix a typo:
