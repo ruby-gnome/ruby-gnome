@@ -380,12 +380,13 @@ ruby_source_new(void)
 static VALUE
 ruby_source_set_priority (VALUE self, VALUE priority)
 {
-    GSource *ruby_source;
+    GSource *ruby_source = NULL;
 
-    ruby_source = g_main_context_find_source_by_id(NULL, ruby_source_id);
-    if (ruby_source) {
+    if (ruby_source_id != 0)
+        ruby_source = g_main_context_find_source_by_id(NULL, ruby_source_id);
+
+    if (ruby_source)
         g_source_set_priority(ruby_source, NUM2INT(priority));
-    }
 
     return Qnil;
 }
@@ -818,9 +819,12 @@ child_watch_add(self, pid)
 
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
 static void
-ruby_source_remove(VALUE tag)
+ruby_source_remove(VALUE data)
 {
-    g_source_remove(NUM2UINT(tag));
+    if (ruby_source_id != 0) {
+        g_source_remove(ruby_source_id);
+        ruby_source_id = 0;
+    }
 }
 #endif
 
