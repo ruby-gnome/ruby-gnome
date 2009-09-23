@@ -1,5 +1,7 @@
 2009-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: fix a typo.
+
 	* Rakefile: follow the recent misc/release.rb changes.
 
 	* NEWS: set 0.19.2 release date.

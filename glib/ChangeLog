@@ -1,5 +1,7 @@
 2009-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (RBGLIB_MICRO_VERSION): 0.19.2 -> 0.19.3.
+
 	* src/rbglib_maincontext.c: follow the recent Ruby thread priority
 	changes.
 

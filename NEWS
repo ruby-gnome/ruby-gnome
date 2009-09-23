@@ -25,8 +25,8 @@ This release is a bug fix release of 0.19.1.
 
   * Bug fixes:
     * [#2679744] fix a typo:
-      Gtk::Widget#set_scroll_adjustments ->
-      Gtk::Widget#set_scroll_adjustment.
+      Gtk::Widget#set_scroll_adjustment ->
+      Gtk::Widget#set_scroll_adjustments.
       [Kentaro Fukuchi, Kouhei Sutou]
 
 ==== Ruby/GtkMozEmbed
