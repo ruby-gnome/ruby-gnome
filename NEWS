@@ -2,6 +2,20 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.19.4: 20XX-XX-XX
+
+NOTE: 0.19.x releases are development series.
+
+WRITE ME.
+
+=== Changes
+
+==== ...
+
+=== Thanks
+
+  * ...
+
 == Ruby-GNOME2 0.19.3: 2009-09-24
 
 NOTE: 0.19.x releases are development series.
@@ -10,7 +24,7 @@ This release is a bug fix release of 0.19.2.
 
 === Changes
 
-===== Ruby/GLib2
+==== Ruby/GLib2
 
   * Bug fix:
     * really fix

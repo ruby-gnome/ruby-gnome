@@ -1,5 +1,7 @@
 2009-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add a 0.19.4 entry.
+
 	* NEWS: Ruby/GLib2: really fix
 	'empty $(vendorarchdir) related build problem on CentOS 5.3 x86_64.'
 	Reported by Simon Arnaud. Thanks!!!
