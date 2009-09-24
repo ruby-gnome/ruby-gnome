@@ -23,7 +23,7 @@ extern "C" {
 
 #define RBGLIB_MAJOR_VERSION 0
 #define RBGLIB_MINOR_VERSION 19
-#define RBGLIB_MICRO_VERSION 3
+#define RBGLIB_MICRO_VERSION 4
 
 #ifndef RSTRING_PTR
 #  define RSTRING_PTR(s) (RSTRING(s)->ptr)

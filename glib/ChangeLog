@@ -1,5 +1,7 @@
 2009-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbglib.h (RBGLIB_MICRO_VERSION): 0.19.3 -> 0.19.4.
+
 	* src/lib/mkmf-gnome2.rb: add missing nil check.
 	Reported by Simon Arnaud. Thanks!!!
 
