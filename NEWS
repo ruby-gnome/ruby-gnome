@@ -2,19 +2,24 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.19.3: 20XX-XX-XX
+== Ruby-GNOME2 0.19.3: 2009-09-24
 
 NOTE: 0.19.x releases are development series.
 
-WRITE ME
+This release is a bug fix release of 0.19.2.
 
 === Changes
 
-===== ...
+===== Ruby/GLib2
+
+  * Bug fix:
+    * really fix
+      'empty $(vendorarchdir) related build problem on CentOS 5.3 x86_64.'
+      [Simon Arnaud, Kouhei Sutou]
 
 === Thanks
 
-  * ...
+  * Simon Arnaud
 
 == Ruby-GNOME2 0.19.2: 2009-09-23
 
