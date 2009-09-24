@@ -372,12 +372,15 @@ def check_cairo
   have_rb_cairo_h
 end
 
-if File.exist?(Config::CONFIG["sitearchdir"])
-  $CPPFLAGS << " -I$(sitearchdir) "
+add_include_path = Proc.new do |dir_variable|
+  value = Config::CONFIG[dir_variable]
+  if value and File.exist?(value)
+    $INCFLAGS << " -I$(#{dir_variable}) "
+  end
 end
-if File.exist?(Config::CONFIG["vendorarchdir"])
-  $CPPFLAGS << " -I$(vendorarchdir) "
-end
+
+add_include_path.call("sitearchdir")
+add_include_path.call("vendorarchdir")
 
 check_ruby_func
 
