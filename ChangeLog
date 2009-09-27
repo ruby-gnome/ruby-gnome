@@ -1,3 +1,9 @@
+2009-09-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: ignore GdkWindow's cursor property. [#2865895]
+	Reported by Guillaume Cottenceau. Thanks!!!
+	Reported by Mamoru Tasaka. Thanks!!!
+
 2009-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add a 0.19.4 entry.

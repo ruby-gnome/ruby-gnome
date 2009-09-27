@@ -10,10 +10,16 @@ WRITE ME.
 
 === Changes
 
-==== ...
+==== Ruby/GTK2
+
+  * Bug fixes:
+    * [#2865895] ignore GdkWindow's cursor property.
+      [Guillaume Cottenceau, Mamoru Tasaka]
 
 === Thanks
 
+  * Guillaume Cottenceau
+  * Mamoru Tasaka
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24
