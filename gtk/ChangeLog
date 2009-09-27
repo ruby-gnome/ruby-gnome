@@ -1,3 +1,12 @@
+2009-09-27  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkwindow.c: ignore GdkWindow's cursor property because it
+	is registered as gpointer. We can't handle Gdk::Cursor without
+	type information. We should define Gdk::Window#cursor instead of
+	auto-property reader for it. [#2865895]
+	Reported by Guillaume Cottenceau. Thanks!!!
+	Reported by Mamoru Tasaka. Thanks!!!
+
 2009-09-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkwidget.c: fix a typo:

@@ -1093,7 +1093,10 @@ gdkwin_move_to_current_desktop(self)
 void
 Init_gtk_gdk_window()
 {
+    GObjectClass *g_class;
     VALUE gdkWindow = G_DEF_CLASS(GDK_TYPE_WINDOW, "Window", mGdk);
+
+    g_class = g_type_class_peek(GDK_TYPE_WINDOW);
 
     rb_define_method(gdkWindow, "initialize", gdkwin_initialize, 3);
     rb_define_method(gdkWindow, "destroy", gdkwin_destroy, 0);
@@ -1178,6 +1181,10 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_background", gdkwin_set_background, 1);
     rb_define_method(gdkWindow, "set_back_pixmap", gdkwin_set_back_pixmap, 2);
     rb_define_method(gdkWindow, "set_cursor", gdkwin_set_cursor, 1);
+    if (g_object_class_find_property(g_class, "cursor")) {
+        rb_undef_method(gdkWindow, "cursor");
+        rb_undef_method(gdkWindow, "cursor=");
+    }
     rb_define_method(gdkWindow, "user_data", gdkwin_get_user_data, 0);
     rb_define_method(gdkWindow, "geometry", gdkwin_get_geometry, 0);
     rb_define_method(gdkWindow, "set_geometry_hints", gdkwin_set_geometry_hints, 2);
