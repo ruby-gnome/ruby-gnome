@@ -663,6 +663,7 @@ gdkwin_set_back_pixmap(self, pixmap, parent_relative)
     return self;
 }
 
+#if !GTK_CHECK_VERSION(2, 18, 0)
 static VALUE
 gdkwin_set_cursor(self, cursor)
     VALUE self, cursor;
@@ -672,6 +673,7 @@ gdkwin_set_cursor(self, cursor)
 
     return self;
 }
+#endif
 
 /* Obsolete
    #define     gdk_window_set_colormap
@@ -1180,11 +1182,9 @@ Init_gtk_gdk_window()
     rb_define_method(gdkWindow, "set_title", gdkwin_set_title, 1);
     rb_define_method(gdkWindow, "set_background", gdkwin_set_background, 1);
     rb_define_method(gdkWindow, "set_back_pixmap", gdkwin_set_back_pixmap, 2);
+#if !GTK_CHECK_VERSION(2, 18, 0)
     rb_define_method(gdkWindow, "set_cursor", gdkwin_set_cursor, 1);
-    if (g_object_class_find_property(g_class, "cursor")) {
-        rb_undef_method(gdkWindow, "cursor");
-        rb_undef_method(gdkWindow, "cursor=");
-    }
+#endif
     rb_define_method(gdkWindow, "user_data", gdkwin_get_user_data, 0);
     rb_define_method(gdkWindow, "geometry", gdkwin_get_geometry, 0);
     rb_define_method(gdkWindow, "set_geometry_hints", gdkwin_set_geometry_hints, 2);

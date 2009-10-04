@@ -1,3 +1,10 @@
+2009-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkwindow.c: enable GdkWindow's cursor property again
+	because GTK+ 2.18.1 fixed it. We marks GTK+ 2.18.0 as unsupported
+	GTK+ version.
+	Reported by Guillaume Cottenceau. Thanks!!!
+
 2009-09-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkwindow.c: ignore GdkWindow's cursor property because it
