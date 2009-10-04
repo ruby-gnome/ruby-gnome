@@ -1,3 +1,7 @@
+2009-10-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: mark GTK+ 2.18.0 as unsupported GTK+ version.
+
 2009-09-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: ignore GdkWindow's cursor property. [#2865895]
