@@ -1,3 +1,7 @@
+2009-10-11  Michal Suchanek <hramrach@centrum.cz>
+
+	* rbgdk-pixbuf.c: add Gdk::Pixbuf#pixels=.
+
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/gdk_pixbuf2.rb: use gem version rcairo as fallback.

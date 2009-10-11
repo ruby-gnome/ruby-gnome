@@ -11,6 +11,8 @@
 ************************************************/
 
 #include "rbgdk-pixbuf.h"
+#include <string.h>
+
 #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
 #define GDK_PIXBUF_ENABLE_BACKEND
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
@@ -63,22 +65,53 @@ get_bits_per_sample(self)
     return INT2FIX(gdk_pixbuf_get_bits_per_sample(_SELF(self)));
 }
 
-static VALUE
-get_pixels(self)
-    VALUE self;
+static int
+pixels_size(GdkPixbuf *pixbuf)
 {
-    GdkPixbuf *pixbuf = _SELF(self);
-    int size, height, width, rowstride, n_channels, bits_per_sample;
+    int height, width, rowstride, n_channels, bits_per_sample;
 
     height = gdk_pixbuf_get_height(pixbuf);
     width = gdk_pixbuf_get_width(pixbuf);
     rowstride = gdk_pixbuf_get_rowstride(pixbuf);
     n_channels = gdk_pixbuf_get_n_channels(pixbuf);
     bits_per_sample = gdk_pixbuf_get_bits_per_sample(pixbuf);
-    
-    size = ((height - 1) * rowstride +
+
+    return ((height - 1) * rowstride +
             width * ((n_channels * bits_per_sample + 7) / 8));
+}
+
+static VALUE
+get_pixels(VALUE self)
+{
+    GdkPixbuf *pixbuf = _SELF(self);
+    int size;
+
+    size = pixels_size(pixbuf);
     return rb_str_new((const char*)gdk_pixbuf_get_pixels(pixbuf), size);
+}
+
+static VALUE
+set_pixels(VALUE self, VALUE pixels)
+{
+    GdkPixbuf *pixbuf = _SELF(self);
+    int size;
+    int arg_size;
+
+    size = pixels_size(pixbuf);
+
+    Check_Type(pixels, T_STRING);
+    arg_size = RSTRING_LEN(pixels);
+    if (arg_size != size)
+      rb_raise(rb_eRangeError,
+               "Pixels are %i bytes, %i bytes supplied.",
+               size, arg_size);
+
+    /* The user currently cannot get a pointer to the actual
+     * pixels, the data is copied to a String. */
+    memcpy(gdk_pixbuf_get_pixels(pixbuf),
+           RSTRING_PTR(pixels), MIN(RSTRING_LEN(pixels), size));
+
+  return pixels;
 }
 
 static VALUE
@@ -670,6 +703,7 @@ Init_gdk_pixbuf2()
     rb_define_method(gdkPixbuf, "has_alpha?", get_has_alpha, 0);
     rb_define_method(gdkPixbuf, "bits_per_sample", get_bits_per_sample, 0);
     rb_define_method(gdkPixbuf, "pixels", get_pixels, 0);
+    rb_define_method(gdkPixbuf, "pixels=", set_pixels, 1);
     rb_define_method(gdkPixbuf, "width", get_width, 0);
     rb_define_method(gdkPixbuf, "height", get_height, 0);
     rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
