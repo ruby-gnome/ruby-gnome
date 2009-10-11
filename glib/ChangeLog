@@ -1,3 +1,10 @@
+2009-10-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_object.c: fix type_register on Ruby 1.9.
+	don't use each_with_index in C because
+	rb_iterate() API seems changed in Ruby 1.9.
+	Reported by Simon Arnaud. Thanks!!!
+
 2009-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h (RBGLIB_MICRO_VERSION): 0.19.3 -> 0.19.4.

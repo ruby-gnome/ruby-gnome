@@ -257,56 +257,50 @@ struct param_setup_arg {
     GParameter* params;
     guint param_size;
     VALUE params_hash;
+    guint index;
 };
-
-static VALUE
-_each_with_index(obj)
-    VALUE obj;
-{
-    rb_funcall(obj, rb_intern("each_with_index"), 0);
-    return Qnil;
-}
 
 static VALUE
 _params_setup(arg, param_setup_arg)
     VALUE arg;
     struct param_setup_arg* param_setup_arg;
 {
-    int n = NUM2INT(rb_ary_entry(arg, 1));
+    guint index;
     VALUE name, val;
     GParamSpec* pspec;
 
-    if (n >= param_setup_arg->param_size)
+    index = param_setup_arg->index;
+    if (index >= param_setup_arg->param_size)
        rb_raise(rb_eArgError, "too many parameters");
-
-    arg = rb_ary_entry(arg, 0);
 
     name = rb_ary_entry(arg, 0);
     val  = rb_ary_entry(arg, 1);
 
     if (SYMBOL_P(name))
-        param_setup_arg->params[n].name = rb_id2name(SYM2ID(name));
+        param_setup_arg->params[index].name = rb_id2name(SYM2ID(name));
     else
-        param_setup_arg->params[n].name = StringValuePtr(name);
+        param_setup_arg->params[index].name = StringValuePtr(name);
 
     pspec = g_object_class_find_property(
         param_setup_arg->gclass,
-        param_setup_arg->params[n].name);
+        param_setup_arg->params[index].name);
     if (!pspec)
         rb_raise(rb_eArgError, "No such property: %s",
-                 param_setup_arg->params[n].name);
+                 param_setup_arg->params[index].name);
 
-    g_value_init(&(param_setup_arg->params[n].value),
+    g_value_init(&(param_setup_arg->params[index].value),
                  G_PARAM_SPEC_VALUE_TYPE(pspec));
-    rbgobj_rvalue_to_gvalue(val, &(param_setup_arg->params[n].value));
-    
+    rbgobj_rvalue_to_gvalue(val, &(param_setup_arg->params[index].value));
+
+    param_setup_arg->index++;
+
     return Qnil;
 }
 
 static VALUE
 gobj_new_body(struct param_setup_arg* arg)
 {
-    rb_iterate((VALUE(*)_((VALUE)))_each_with_index, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
+    rb_iterate(rb_each, (VALUE)arg->params_hash, _params_setup, (VALUE)arg);
     return (VALUE)g_object_newv(G_TYPE_FROM_CLASS(arg->gclass),
                                 arg->param_size, arg->params);
 }
@@ -348,6 +342,7 @@ rbgobj_gobject_new(gtype, params_hash)
         arg.params = ALLOCA_N(GParameter, param_size);
         memset(arg.params, 0, sizeof(GParameter) * param_size);
         arg.params_hash = params_hash;
+        arg.index = 0;
 
         result = (GObject*)rb_ensure(&gobj_new_body, (VALUE)&arg,
                                      &gobj_new_ensure, (VALUE)&arg);
