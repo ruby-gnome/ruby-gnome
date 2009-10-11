@@ -1,3 +1,8 @@
+2009-10-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS Ruby/GdkPixbuf: add Gdk::Pixbuf#pixels=.
+	Patch by Michal Suchanek. Thanks!!!
+
 2009-10-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: mark GTK+ 2.18.0 as unsupported GTK+ version.

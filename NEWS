@@ -17,10 +17,16 @@ WRITE ME.
       NOTE: GTK+ 2.18.0 is unsupported version.
       [Guillaume Cottenceau, Mamoru Tasaka]
 
+==== Ruby/GdkPixbuf
+
+  * add Gdk::Pixbuf#pixels=.
+    [Michal Suchanek]
+
 === Thanks
 
   * Guillaume Cottenceau
   * Mamoru Tasaka
+  * Michal Suchanek
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24
