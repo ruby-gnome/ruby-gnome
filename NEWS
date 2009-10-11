@@ -10,6 +10,12 @@ WRITE ME.
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Bug fixes:
+    * fix type_register on Ruby 1.9.
+      [Simon Arnaud, Kouhei Sutou]
+
 ==== Ruby/GTK2
 
   * Bug fixes:
@@ -27,6 +33,7 @@ WRITE ME.
   * Guillaume Cottenceau
   * Mamoru Tasaka
   * Michal Suchanek
+  * Simon Arnaud
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24

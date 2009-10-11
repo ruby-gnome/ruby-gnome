@@ -1,6 +1,9 @@
 2009-10-11  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS Ruby/GdkPixbuf: add Gdk::Pixbuf#pixels=.
+	* NEWS: Ruby/GLib2: fix type_register on Ruby 1.9.
+	Reported by Simon Arnaud. Thanks!!!
+
+	* NEWS: Ruby/GdkPixbuf: add Gdk::Pixbuf#pixels=.
 	Patch by Michal Suchanek. Thanks!!!
 
 2009-10-04  Kouhei Sutou  <kou@cozmixng.org>
