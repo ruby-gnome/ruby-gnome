@@ -1,3 +1,10 @@
+2009-12-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkmenuitem.c: accept nil as label.
+	Reported by Kazuhiro NISHIYAMA. Thanks!!!
+
+	* test/test_gtk_menu_item.rb: add.
+
 2009-10-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkwindow.c: enable GdkWindow's cursor property again
