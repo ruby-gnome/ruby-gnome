@@ -22,14 +22,15 @@ mitem_initialize(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
+    const gchar *label = NULL;
     VALUE rb_label, use_underline;
     GtkWidget *widget = NULL;
 
-    if (rb_scan_args(argc, argv, "02", &rb_label, &use_underline) > 0) {
-        const gchar *label = NULL;
+    rb_scan_args(argc, argv, "02", &rb_label, &use_underline);
 
-        if (!NIL_P(rb_label))
-            label = RVAL2CSTR(rb_label);
+    if (!NIL_P(rb_label))
+        label = RVAL2CSTR(rb_label);
+    if (label) {
         if (NIL_P(use_underline) || RVAL2CBOOL(use_underline)) {
             widget = gtk_menu_item_new_with_mnemonic(label);
         } else {
