@@ -22,6 +22,8 @@ WRITE ME.
     * [#2865895] support GdkWindow's cursor property.
       NOTE: GTK+ 2.18.0 is unsupported version.
       [Guillaume Cottenceau, Mamoru Tasaka]
+    * Gtk::MenuItem.new accepts nil as a label.
+      [Kazuhiro NISHIYAMA, Kouhei Sutou]
 
 ==== Ruby/GdkPixbuf
 
@@ -34,6 +36,7 @@ WRITE ME.
   * Mamoru Tasaka
   * Michal Suchanek
   * Simon Arnaud
+  * Kazuhiro NISHIYAMA
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24

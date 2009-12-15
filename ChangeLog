@@ -1,3 +1,8 @@
+2009-12-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: Gtk::MenuItem.new accepts nil as a label.
+	Reported by Kazuhiro NISHIYAMA. Thanks!!!
+
 2009-10-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GLib2: fix type_register on Ruby 1.9.
