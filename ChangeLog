@@ -1,3 +1,7 @@
+2009-12-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* gio/: remove.
+
 2009-12-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: Gtk::MenuItem.new accepts nil as a label.
