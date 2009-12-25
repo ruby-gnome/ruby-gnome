@@ -30,6 +30,10 @@ WRITE ME.
   * add Gdk::Pixbuf#pixels=.
     [Michal Suchanek]
 
+==== Ruby/GStreamer
+
+  * [#2920997] fix argument type. [Johan Kiviniemi]
+
 === Thanks
 
   * Guillaume Cottenceau
@@ -37,6 +41,7 @@ WRITE ME.
   * Michal Suchanek
   * Simon Arnaud
   * Kazuhiro NISHIYAMA
+  * Johan Kiviniemi
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24

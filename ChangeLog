@@ -1,3 +1,8 @@
+2009-12-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GStreamer: fix argument type.
+	Patch by Johan Kiviniemi. Thanks!!!
+
 2009-12-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* gio/: remove.
