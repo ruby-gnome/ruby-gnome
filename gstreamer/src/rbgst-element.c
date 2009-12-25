@@ -862,7 +862,7 @@ rb_gst_element_each_pad_template(VALUE self)
  */
 static VALUE
 rb_gst_element_seek(VALUE self, VALUE rate, VALUE format, VALUE flags,
-                    VALUE cur_type, gint64 cur, VALUE stop_type, VALUE stop)
+                    VALUE cur_type, VALUE cur, VALUE stop_type, VALUE stop)
 {
     return CBOOL2RVAL(gst_element_seek(SELF(self),
                                        NUM2DBL(rate),

@@ -1,3 +1,7 @@
+2009-12-25  Johan Kiviniemi
+
+	* src/rbgst-element.c (rb_gst_element_seek): fix argument type.
+
 2009-02-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgst.c (rb_gst_init): use rb_argv0 instead of rg_progname.
