@@ -1,3 +1,8 @@
+2010-01-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GtkMozEmbed: fix -Wl,-rpath syntax. [#2924766]
+	Reported by OBATA Akio. Thanks!!!
+
 2009-12-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GStreamer: fix argument type.

@@ -32,7 +32,13 @@ WRITE ME.
 
 ==== Ruby/GStreamer
 
-  * [#2920997] fix argument type. [Johan Kiviniemi]
+  * Bug fixes:
+    * [#2920997] fix argument type. [Johan Kiviniemi]
+
+==== Ruby/GtkMozEmbed
+
+  * Bug Fixes:
+    * [#2924766] fix -Wl,-rpath syntax. [OBATA Akio]
 
 === Thanks
 
@@ -42,6 +48,7 @@ WRITE ME.
   * Simon Arnaud
   * Kazuhiro NISHIYAMA
   * Johan Kiviniemi
+  * OBATA Akio
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24
