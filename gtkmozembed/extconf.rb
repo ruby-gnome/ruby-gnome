@@ -48,7 +48,7 @@ mozilla_path = mozilla_library_path.strip.sub(/^-L/, "")
 if mozilla_path
   # please comment the CFLAGS line if you don't want a default comp_path
   $CFLAGS << " -DDEFAULT_MOZILLA_FIVE_HOME='\"#{mozilla_path}\"' "
-  $LDFLAGS << " -Wl,-rpath #{mozilla_path}"
+  $LDFLAGS << " -Wl,-rpath,#{mozilla_path}"
 else
   $stderr.puts "${package_id}.pc cannot be found."
   exit 1

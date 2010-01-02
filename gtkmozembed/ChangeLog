@@ -1,3 +1,8 @@
+2010-01-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: fix -Wl,-rpath syntax. [#2924766]
+	Reported by OBATA Akio. Thanks!!!
+
 2009-08-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: add seamonky to detect target list.
