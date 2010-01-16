@@ -1,3 +1,8 @@
+2010-01-16  Hiroyuki Ito  <ZXB01226@nifty.com>
+
+	* src/rbgdkwindow.c (gdkwin_invalidate): accept nil as 'area'
+	argument.
+
 2009-12-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkmenuitem.c: accept nil as label.

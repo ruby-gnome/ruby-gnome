@@ -374,14 +374,14 @@ static VALUE
 gdkwin_invalidate(self, area, invalidate_children)
     VALUE self, area, invalidate_children;
 {
-    if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
-        gdk_window_invalidate_rect(_SELF(self),
-                                   RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
-                                   RVAL2CBOOL(invalidate_children));
-    } else {
+    if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_REGION))){
         gdk_window_invalidate_region(_SELF(self),
                                      RVAL2BOXED(area, GDK_TYPE_REGION),
                                      RVAL2CBOOL(invalidate_children));
+    } else {
+        gdk_window_invalidate_rect(_SELF(self),
+                                   RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
+                                   RVAL2CBOOL(invalidate_children));
     }
     return self;
 }
