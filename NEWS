@@ -24,6 +24,10 @@ WRITE ME.
       [Guillaume Cottenceau, Mamoru Tasaka]
     * Gtk::MenuItem.new accepts nil as a label.
       [Kazuhiro NISHIYAMA, Kouhei Sutou]
+  * Improvements:
+    * Gdk::Window#invalidate accepts nil as 'area'
+      argument. It means 'invalidates whole window'.
+      [Hiroyuki Ito]
 
 ==== Ruby/GdkPixbuf
 
