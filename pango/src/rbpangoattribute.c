@@ -300,6 +300,22 @@ attr_AttrAbsoluteSize_initialize(self, size)
 }
 #endif
 
+#if PANGO_CHECK_VERSION(1,16,0)
+static VALUE
+attr_AttrGravity_initialize(VALUE self, VALUE gravity)
+{
+    DATA_PTR(self) = pango_attr_gravity_new(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    return Qnil;
+}
+
+static VALUE
+attr_AttrGravityHint_initialize(VALUE self, VALUE gravity_hint)
+{
+    DATA_PTR(self) = pango_attr_gravity_hint_new(RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+    return Qnil;
+}
+#endif
+
 static VALUE
 attr_AttrFontDescription_initialize(self, fontdescription)
     VALUE self, fontdescription;
@@ -469,6 +485,10 @@ Init_pango_attribute()
     MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, 1);
 #if PANGO_CHECK_VERSION(1,8,1)
     MAKE_ATTR(PANGO_ATTR_ABSOLUTE_SIZE, AttrAbsoluteSize, pattrint, 1);
+#endif
+#if PANGO_CHECK_VERSION(1,16,0)
+    MAKE_ATTR(PANGO_ATTR_GRAVITY, AttrGravity, pattrint, 1);
+    MAKE_ATTR(PANGO_ATTR_GRAVITY_HINT, AttrGravityHint, pattrint, 1);
 #endif
     MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, pattr, 1);
     rb_define_method(tmpklass, "value", attr_fontdesc_value, 0);

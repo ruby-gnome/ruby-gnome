@@ -1,3 +1,12 @@
+2010-01-17  Hiroyuki Ito  <ZXB01226@nifty.com>
+
+	* src/rbpangoattribute.c,
+	src/rbpangocontext.c,
+	src/rbpangofontdescription.c,
+	src/rbpangogravity.c,
+	src/rbpangomatrix.c,
+	src/rbpangoscript.c: support PangoGravity.
+
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/pango.rb: use gem version rcairo as fallback.

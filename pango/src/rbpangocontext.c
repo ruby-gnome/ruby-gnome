@@ -134,6 +134,34 @@ rcontext_set_base_dir(self, direction)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,16,0)
+static VALUE
+rcontext_get_base_gravity(VALUE self)
+{
+    return GENUM2RVAL(pango_context_get_base_gravity(_SELF(self)), PANGO_TYPE_GRAVITY);
+}
+
+static VALUE
+rcontext_set_base_gravity(VALUE self, VALUE gravity)
+{
+    pango_context_set_base_gravity(_SELF(self), RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    return self;
+}
+
+static VALUE
+rcontext_get_gravity_hint(VALUE self)
+{
+    return GENUM2RVAL(pango_context_get_gravity_hint(_SELF(self)), PANGO_TYPE_GRAVITY_HINT);
+}
+
+static VALUE
+rcontext_set_gravity_hint(VALUE self, VALUE gravity_hint)
+{
+    pango_context_set_gravity_hint(_SELF(self), RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+    return self;
+}
+#endif
+
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
 rcontext_get_matrix(self)
@@ -278,6 +306,12 @@ Init_pango_context()
     rb_define_method(pContext, "set_language", rcontext_set_language, 1);
     rb_define_method(pContext, "base_dir", rcontext_get_base_dir, 0);
     rb_define_method(pContext, "set_base_dir", rcontext_set_base_dir, 1);
+#if PANGO_CHECK_VERSION(1,16,0)
+    rb_define_method(pContext, "base_gravity", rcontext_get_base_gravity, 0);
+    rb_define_method(pContext, "set_base_gravity", rcontext_set_base_gravity, 1);
+    rb_define_method(pContext, "gravity_hint", rcontext_get_gravity_hint, 0);
+    rb_define_method(pContext, "set_gravity_hint", rcontext_set_gravity_hint, 1);
+#endif
 #if PANGO_CHECK_VERSION(1,6,0)
     rb_define_method(pContext, "matrix", rcontext_get_matrix, 0);
     rb_define_method(pContext, "set_matrix", rcontext_set_matrix, 1);

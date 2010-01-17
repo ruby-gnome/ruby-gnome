@@ -170,6 +170,21 @@ font_desc_get_size_is_absolute(self)
 }
 #endif
 
+#if PANGO_CHECK_VERSION(1,16,0)
+static VALUE
+font_desc_get_gravity(VALUE self)
+{
+    return GENUM2RVAL(pango_font_description_get_gravity(_SELF(self)), PANGO_TYPE_GRAVITY);
+}
+
+static VALUE
+font_desc_set_gravity(VALUE self, VALUE gravity)
+{
+    pango_font_description_set_gravity(_SELF(self), RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    return self;
+}
+#endif
+
 static VALUE
 font_desc_get_set_fields(self)
     VALUE self;
@@ -248,6 +263,10 @@ Init_pango_font_description()
 #if PANGO_CHECK_VERSION(1,8,0)
     rb_define_method(pFontDesc, "set_absolute_size", font_desc_set_absolute_size, 1);
     rb_define_method(pFontDesc, "size_is_absolute?", font_desc_get_size_is_absolute, 0);
+#endif
+#if PANGO_CHECK_VERSION(1,16,0)
+    rb_define_method(pFontDesc, "set_gravity", font_desc_set_gravity, 1);
+    rb_define_method(pFontDesc, "gravity", font_desc_get_gravity, 0);
 #endif
     rb_define_method(pFontDesc, "set_fields", font_desc_get_set_fields, 0);
     rb_define_method(pFontDesc, "unset_fields", font_desc_unset_fields, 1);

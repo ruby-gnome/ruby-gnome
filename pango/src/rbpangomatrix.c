@@ -80,6 +80,14 @@ matrix_rotate(self, degrees)
     return self;
 }
 
+#if PANGO_CHECK_VERSION(1,16,0)
+static VALUE
+matrix_get_gravity(VALUE self)
+{
+    return GENUM2RVAL(pango_gravity_get_for_matrix(_SELF(self)), PANGO_TYPE_GRAVITY);
+}
+#endif
+
 static VALUE
 matrix_concat(self, new_matrix)
     VALUE self, new_matrix;
@@ -128,6 +136,9 @@ Init_pango_matrix()
     rb_define_method(matrix, "concat!", matrix_concat, 1);
 #if PANGO_CHECK_VERSION(1,12,0)
     rb_define_method(matrix, "font_scale_factor", matrix_get_font_scale_factor, 0);
+#endif
+#if PANGO_CHECK_VERSION(1,16,0)
+    rb_define_method(matrix, "gravity", matrix_get_gravity, 0);
 #endif
     rb_define_method(matrix, "to_a", matrix_to_a, 0);
 
