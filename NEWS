@@ -29,6 +29,12 @@ WRITE ME.
       argument. It means 'invalidates whole window'.
       [Hiroyuki Ito]
 
+==== Ruby/Pango
+
+  * Improvements:
+    * add Pango::Gravity.
+      [Hiroyuki Ito, Kouhei Sutou]
+
 ==== Ruby/GdkPixbuf
 
   * add Gdk::Pixbuf#pixels=.

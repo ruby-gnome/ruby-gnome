@@ -1,3 +1,8 @@
+2010-01-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/Pango: add Pango::Gravity.
+	Patch by Hiroyuki Ito. Thanks!!!
+
 2010-01-16  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: Gdk::Window#invalidate accepts nil as 'area'
