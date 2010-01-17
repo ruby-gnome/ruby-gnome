@@ -17,8 +17,13 @@ to_rotation(VALUE self, VALUE gravity)
 {
     return rb_float_new(pango_gravity_to_rotation(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
 }
-#endif
 
+static VALUE
+is_vertical(VALUE self, VALUE gravity)
+{
+    return CBOOL2RVAL(PANGO_GRAVITY_IS_VERTICAL(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
+}
+#endif
 
 void
 Init_pango_gravity(void)
@@ -27,6 +32,7 @@ Init_pango_gravity(void)
     VALUE mGravity = rb_define_module_under(mPango, "Gravity");
 
     rb_define_singleton_method(mGravity, "to_rotation", to_rotation, 1);
+    rb_define_singleton_method(mGravity, "vertical?", is_vertical, 1);
 
     G_DEF_CLASS(PANGO_TYPE_GRAVITY, "Gravity", mGravity);
     G_DEF_CONSTANTS(mGravity, PANGO_TYPE_GRAVITY, "PANGO_GRAVITY_");
