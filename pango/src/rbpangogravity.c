@@ -23,9 +23,9 @@ to_rotation(VALUE self, VALUE gravity)
 void
 Init_pango_gravity(void)
 {
+#if PANGO_CHECK_VERSION(1,16,0)
   VALUE mGravity = rb_define_module_under(mPango, "Gravity");
 
-#if PANGO_CHECK_VERSION(1,16,0)
   rb_define_singleton_method(mGravity, "to_rotation", to_rotation, 1);
 
   G_DEF_CLASS(PANGO_TYPE_GRAVITY, "Gravity", mGravity);

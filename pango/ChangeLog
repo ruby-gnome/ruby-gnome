@@ -1,5 +1,8 @@
 2010-01-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangogravity.c (Init_pango_gravity): don't define
+	Pango::Gravity on Pango < 1.16 environment.
+
 	* src/rbpangoscript.c: Pango::Script#gravity ->
 	Pango::Script#get_gravity.
 
