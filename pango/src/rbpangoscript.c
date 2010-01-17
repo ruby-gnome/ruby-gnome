@@ -69,7 +69,7 @@ Init_pango_script()
     rb_define_method(script, "sample_language", rbpango_script_get_sample_language, 0);
 #endif
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(script, "gravity", rbpango_script_get_gravity, -1);
+    rb_define_method(script, "get_gravity", rbpango_script_get_gravity, -1);
 #endif
 }
 
