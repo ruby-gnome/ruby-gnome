@@ -44,10 +44,15 @@ rbpango_script_get_gravity(int argc, VALUE *argv, VALUE self)
                                          RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY),
                                          RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
     } else {
+#  if PANGO_CHECK_VERSION(1,26,0)
         g = pango_gravity_get_for_script_and_width(_SELF(self),
                                                    RVAL2CBOOL(wide),
                                                    RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY),
                                                    RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+#  else
+        rb_raise(rb_eArgError,
+                 "the 3rd 'wide' argument requires Pango >= 1.26");
+#  endif
     }
     return GENUM2RVAL(g, PANGO_TYPE_GRAVITY);
 }

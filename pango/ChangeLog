@@ -1,5 +1,10 @@
 2010-01-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbpangoscript.c: Pango::Script#get_gravity doesn't accept
+	'wide' argument with Pango < 1.26 because
+	pango_gravity_get_for_script_and_width() is defined since Pango
+	1.26.
+
 	* src/rbpangogravity.c (Init_pango_gravity): don't define
 	Pango::Gravity on Pango < 1.16 environment.
 
