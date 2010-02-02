@@ -26,7 +26,7 @@ is_vertical(VALUE self, VALUE gravity)
 #endif
 
 void
-Init_pango_gravity(void)
+Init_pango_gravity()
 {
 #if PANGO_CHECK_VERSION(1,16,0)
     VALUE mGravity = rb_define_module_under(mPango, "Gravity");
