@@ -1,3 +1,8 @@
+2010-02-02  Hiroyuki Ito  <ZXB01226@nifty.com>
+
+	* src/rbgtkstock.c (Init_gtk_stock): add items available with GTK+
+	2.14 and 2.16.
+
 2010-01-16  Hiroyuki Ito  <ZXB01226@nifty.com>
 
 	* src/rbgdkwindow.c (gdkwin_invalidate): accept nil as 'area'

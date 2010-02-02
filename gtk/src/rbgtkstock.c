@@ -119,6 +119,9 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "APPLY", CSTR2SYM(GTK_STOCK_APPLY));
     rb_define_const(mGtkStock, "BOLD", CSTR2SYM(GTK_STOCK_BOLD));
     rb_define_const(mGtkStock, "CANCEL", CSTR2SYM(GTK_STOCK_CANCEL));
+#if GTK_CHECK_VERSION(2,16,0)
+    rb_define_const(mGtkStock, "CAPS_LOCK_WARNING", CSTR2SYM(GTK_STOCK_CAPS_LOCK_WARNING));
+#endif
     rb_define_const(mGtkStock, "CDROM", CSTR2SYM(GTK_STOCK_CDROM));
     rb_define_const(mGtkStock, "CLEAR", CSTR2SYM(GTK_STOCK_CLEAR));
     rb_define_const(mGtkStock, "CLOSE", CSTR2SYM(GTK_STOCK_CLOSE));
@@ -214,10 +217,21 @@ Init_gtk_stock()
     rb_define_const(mGtkStock, "ORIENTATION_REVERSE_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE));
     rb_define_const(mGtkStock, "ORIENTATION_REVERSE_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT));
 #endif
+#if GTK_CHECK_VERSION(2,14,0)
+    rb_define_const(mGtkStock, "PAGE_SETUP", CSTR2SYM(GTK_STOCK_PAGE_SETUP));
+#endif
     rb_define_const(mGtkStock, "PASTE", CSTR2SYM(GTK_STOCK_PASTE));
     rb_define_const(mGtkStock, "PREFERENCES", CSTR2SYM(GTK_STOCK_PREFERENCES));
     rb_define_const(mGtkStock, "PRINT", CSTR2SYM(GTK_STOCK_PRINT));
+#if GTK_CHECK_VERSION(2,14,0)
+    rb_define_const(mGtkStock, "PRINT_ERROR", CSTR2SYM(GTK_STOCK_PRINT_ERROR));
+    rb_define_const(mGtkStock, "PRINT_PAUSED", CSTR2SYM(GTK_STOCK_PRINT_PAUSED));
+#endif
     rb_define_const(mGtkStock, "PRINT_PREVIEW", CSTR2SYM(GTK_STOCK_PRINT_PREVIEW));
+#if GTK_CHECK_VERSION(2,14,0)
+    rb_define_const(mGtkStock, "PRINT_REPORT", CSTR2SYM(GTK_STOCK_PRINT_REPORT));
+    rb_define_const(mGtkStock, "PRINT_WARNING", CSTR2SYM(GTK_STOCK_PRINT_WARNING));
+#endif
     rb_define_const(mGtkStock, "PROPERTIES", CSTR2SYM(GTK_STOCK_PROPERTIES));
     rb_define_const(mGtkStock, "QUIT", CSTR2SYM(GTK_STOCK_QUIT));
     rb_define_const(mGtkStock, "REDO", CSTR2SYM(GTK_STOCK_REDO));
