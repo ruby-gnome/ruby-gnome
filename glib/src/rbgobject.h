@@ -181,6 +181,7 @@ extern VALUE rbgobj_signal_wrap(guint sig_id);
 extern GClosure* g_rclosure_new(VALUE callback_proc, VALUE extra_args,
                                 GValToRValSignalFunc func);
 extern void g_rclosure_attach(GClosure *closure, VALUE object);
+extern void g_rclosure_set_tag(GClosure *closure, const gchar *tag);
 
 /* rbgobj_value.c */
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);

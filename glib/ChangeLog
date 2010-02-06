@@ -1,3 +1,8 @@
+2010-02-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgobj_closure.c, src/rbgobj_signal.c, src/rbgobject.h,
+	srb/glib2.def: set tag to GRClosure for debugging.
+
 2009-10-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_object.c: fix type_register on Ruby 1.9.

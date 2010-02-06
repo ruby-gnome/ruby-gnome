@@ -242,6 +242,8 @@ gobj_sig_connect_impl(after, argc, argv, self)
     guint signal_id;
     GQuark detail;
     VALUE func;
+    GObject *g_object;
+    gchar *tag;
 
     rb_scan_args(argc, argv, "1*", &sig, &rest);
 
@@ -259,7 +261,13 @@ gobj_sig_connect_impl(after, argc, argv, self)
     rclosure = g_rclosure_new(func, rest, 
                               rbgobj_get_signal_func(signal_id));
     g_rclosure_attach((GClosure *)rclosure, self);
-    i = g_signal_connect_closure_by_id(RVAL2GOBJ(self), signal_id, detail, rclosure, after);
+    g_object = RVAL2GOBJ(self);
+    tag = g_strdup_printf("%s::%s",
+                          G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(g_object)),
+                          sig_name);
+    g_rclosure_set_tag((GClosure *)rclosure, tag);
+    g_free(tag);
+    i = g_signal_connect_closure_by_id(g_object, signal_id, detail, rclosure, after);
 
     return INT2FIX(i);
 }

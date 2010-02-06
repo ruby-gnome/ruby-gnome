@@ -16,6 +16,7 @@
 static ID id_call, id_closures;
 static gboolean rclosure_initialized = FALSE;
 
+#define TAG_SIZE 64
 typedef struct _GRClosure GRClosure;
 struct _GRClosure
 {
@@ -26,6 +27,7 @@ struct _GRClosure
     gint count;
     GList *objects;
     GValToRValSignalFunc g2r_func;
+    gchar tag[TAG_SIZE];
 };
 
 static VALUE
@@ -97,7 +99,8 @@ rclosure_marshal_do(VALUE arg_)
 
         ret = rb_apply(callback, id_call, args);
     } else {
-        rb_warn("GRClosure invoking callback: already destroyed");
+        rb_warn("GRClosure invoking callback: already destroyed: %s",
+                rclosure->tag[0] ? rclosure->tag : "(anonymous)");
     }
 
     if (return_value && G_VALUE_TYPE(return_value))
@@ -209,6 +212,7 @@ g_rclosure_new(VALUE callback_proc, VALUE extra_args, GValToRValSignalFunc g2r_f
                                            gr_closure_holder_mark,
                                            gr_closure_holder_free,
                                            closure);
+    closure->tag[0]     = '\0';
 
     g_closure_set_marshal((GClosure*)closure, &rclosure_marshal);
     g_closure_add_invalidate_notifier((GClosure*)closure, NULL,
@@ -245,6 +249,19 @@ g_rclosure_attach(GClosure *closure, VALUE object)
         rclosure->count++;
         g_object_weak_ref(gobject, rclosure_weak_notify, rclosure);
         rclosure->objects = g_list_prepend(rclosure->objects, gobject);
+    }
+}
+
+void
+g_rclosure_set_tag(GClosure *closure, const gchar *tag)
+{
+    GRClosure *rclosure = (GRClosure *)closure;
+
+    if (tag) {
+        strncpy(rclosure->tag, tag, TAG_SIZE);
+        rclosure->tag[TAG_SIZE - 1] = '\0';
+    } else {
+        rclosure->tag[0] = '\0';
     }
 }
 
