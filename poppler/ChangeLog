@@ -1,3 +1,7 @@
+2010-02-10  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/pdfdiv.rb: add.
+
 2009-04-01  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/lib/poppler.rb: ignore Gtk::InitError.
