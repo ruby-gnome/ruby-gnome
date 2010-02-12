@@ -201,6 +201,16 @@ rbgutil_generic_gtype(VALUE self)
     return generic_s_gtype(CLASS_OF(self));
 }
 
+VALUE
+rbgutil_string_set_utf8_encoding(VALUE string)
+{
+#ifdef HAVE_RB_STR_ENCODE
+    if (!NIL_P(string))
+        rb_enc_associate(string, rb_utf8_encoding());
+#endif
+    return string;
+}
+
 void
 Init_gutil()
 {

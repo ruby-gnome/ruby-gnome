@@ -14,6 +14,9 @@
 
 #include <glib-object.h>
 #include "ruby.h"
+#ifdef HAVE_RUBY_ENCODING_H
+#  include <ruby/encoding.h>
+#endif
 #include "rbglib.h"
 
 #ifdef __cplusplus
@@ -43,6 +46,9 @@ extern "C" {
 #define GSLIST2ARY2(list, gtype)  (rbgutil_gslist2ary_boxed(list, gtype))
 #define GSLIST2ARY2F(list, gtype) (rbgutil_gslist2ary_boxed_and_free(list, gtype))
 
+#define RBG_STRING_SET_UTF8_ENCODING(string) \
+    (rbgutil_string_set_utf8_encoding(string))
+
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_glist2ary(GList* list);
@@ -59,6 +65,8 @@ extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);
 extern void rbgutil_stop_callback_dispatch_thread(void);
+
+extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;

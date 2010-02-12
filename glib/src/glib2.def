@@ -78,6 +78,7 @@ EXPORTS
 	rbgutil_invoke_callback
 	rbgutil_start_callback_dispatch_thread
 	rbgutil_stop_callback_dispatch_thread
+	rbgutil_string_set_utf8_encoding
 	rbgerr_define_gerror
 	rbgerr_gerror2exception
 	rbgobj_convert_define

@@ -1,3 +1,9 @@
+2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgutil.[ch], src/glib2.def: add
+	rbgutil_string_set_utf8_encoding() for Ruby 1.9.
+	* extconf.rb: detect rb_enc_associate().
+
 2010-02-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_closure.c, src/rbgobj_signal.c, src/rbgobject.h,
