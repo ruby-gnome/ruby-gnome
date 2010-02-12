@@ -28,6 +28,9 @@ WRITE ME.
     * Gdk::Window#invalidate accepts nil as 'area'
       argument. It means 'invalidates whole window'.
       [Hiroyuki Ito]
+    * Gtk::Clipbord#request_text sets UTF-8 encoding in Ruby
+      1.9.
+      [Rg Rg, Kouhei Sutou]
 
 ==== Ruby/Pango
 
@@ -60,6 +63,7 @@ WRITE ME.
   * Johan Kiviniemi
   * OBATA Akio
   * Hiroyuki Ito
+  * Rg Rg
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24

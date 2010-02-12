@@ -1,3 +1,9 @@
+2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: Gtk::Clipbord#request_text sets UTF-8 encoding
+	in Ruby 1.9.
+	Suggested by Rg Rg. Thanks!!!
+
 2010-01-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/Pango: add Pango::Gravity.
