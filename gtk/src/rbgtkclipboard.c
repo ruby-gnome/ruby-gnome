@@ -176,14 +176,15 @@ clipboard_request_contents(self, target)
 }
 
 static void
-clipboard_text_received_func(clipboard, text, func)
-    GtkClipboard* clipboard;
-    const gchar* text;
-    gpointer func;
+clipboard_text_received_func(GtkClipboard *clipboard, const gchar *text,
+                             gpointer func)
 {
     VALUE vtext = Qnil;
-    if(text) vtext = CSTR2RVAL(text);
-        
+    if (text) {
+        vtext = CSTR2RVAL(text);
+        RBG_STRING_SET_UTF8_ENCODING(vtext);
+    }
+
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), vtext);
 }
 

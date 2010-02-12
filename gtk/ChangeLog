@@ -1,3 +1,9 @@
+2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkclipboard.c (clipboard_text_received_func): set UTF-8
+	encoding to text passed from clipbord.
+	Suggested by Rg Rg. Thanks!!!
+
 2010-02-02  Hiroyuki Ito  <ZXB01226@nifty.com>
 
 	* src/rbgtkstock.c (Init_gtk_stock): add items available with GTK+
