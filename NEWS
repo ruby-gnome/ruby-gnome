@@ -47,6 +47,7 @@ WRITE ME.
 
   * Bug fixes:
     * [#2920997] fix argument type. [Johan Kiviniemi]
+  * [#2924886] implement Gst::MessageTag#parse. [Vincent Carmona]
 
 ==== Ruby/GtkMozEmbed
 

@@ -1,3 +1,9 @@
+2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GStreamer: [#2924886] implement
+	Gst::MessageTag#parse.
+	Patch by Vincent Carmona. Thanks!!!
+
 2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: Gtk::Clipbord#request_text sets UTF-8 encoding
