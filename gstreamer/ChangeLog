@@ -1,3 +1,7 @@
+2010-02-28  Vincent Carmona
+
+	* src/rbgst-message.c: implement Gst::MessageTag#parse.
+
 2009-12-25  Johan Kiviniemi
 
 	* src/rbgst-element.c (rb_gst_element_seek): fix argument type.

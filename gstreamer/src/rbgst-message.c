@@ -347,6 +347,26 @@ tag_initialize(VALUE self, VALUE src, VALUE tag_list)
 }
 #endif
 
+static gboolean
+foreach_pair(GQuark field_id, const GValue *value, gpointer user_data)
+{
+    rb_hash_aset(*(VALUE*)user_data, CSTR2RVAL(g_quark_to_string(field_id)),
+                 GVAL2RVAL(value));
+    return TRUE;
+}
+
+static VALUE
+tag_parse(VALUE self)
+{
+    VALUE value = rb_hash_new();
+    GstTagList *tag_list;
+
+    gst_message_parse_tag(SELF(self), &tag_list);
+    gst_structure_foreach(tag_list, foreach_pair, &value);
+    gst_tag_list_free(tag_list);
+    return value;
+}
+
 static VALUE
 buffering_initialize(VALUE self, VALUE src, VALUE percent)
 {
@@ -649,8 +669,8 @@ Init_gst_message(void)
 
 #if 0
     rb_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
-    rb_define_method(rb_cGstMessageTag, "parse", tag_parse, 0);
 #endif
+    rb_define_method(rb_cGstMessageTag, "parse", tag_parse, 0);
 
     rb_define_method(rb_cGstMessageBuffering, "initialize",
                      buffering_initialize, 2);
