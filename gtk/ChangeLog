@@ -1,3 +1,7 @@
+2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgdkpixbuf.c: fix wrong number of arguments.
+
 2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkclipboard.c (clipboard_text_received_func): set UTF-8

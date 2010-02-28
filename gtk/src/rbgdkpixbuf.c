@@ -33,8 +33,7 @@ pixbuf_render_to_drawable(argc, argv, self)
     VALUE *argv;
     VALUE self;
 {
-    VALUE args[11];
-    VALUE gc, src_x, src_y, dest_x, dest_y, width, height, 
+    VALUE gc, src_x, src_y, dest_x, dest_y, width, height,
         dither, x_dither, y_dither;
 
     int i;
@@ -43,13 +42,23 @@ pixbuf_render_to_drawable(argc, argv, self)
     rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#draw_pixbuf instead.");
 #endif
 
-    rb_scan_args(argc, argv, "83", &gc, &src_x, &src_y, &dest_x, &dest_y,
+    rb_scan_args(argc, argv, "73", &gc, &src_x, &src_y, &dest_x, &dest_y,
                  &width, &height, &dither, &x_dither, &y_dither);
 
-    for (i = 0; i < 8; i++) {
-	if (NIL_P(args[i]))
-	    rb_raise(rb_eArgError, "arguments %d must be non nil", i);
-    }
+    if (NIL_P(gc))
+        rb_raise(rb_eArgError, "arguments 1 must be non nil");
+    if (NIL_P(src_x))
+        rb_raise(rb_eArgError, "arguments 2 must be non nil");
+    if (NIL_P(src_y))
+        rb_raise(rb_eArgError, "arguments 3 must be non nil");
+    if (NIL_P(dest_x))
+        rb_raise(rb_eArgError, "arguments 4 must be non nil");
+    if (NIL_P(dest_y))
+        rb_raise(rb_eArgError, "arguments 5 must be non nil");
+    if (NIL_P(width))
+        rb_raise(rb_eArgError, "arguments 6 must be non nil");
+    if (NIL_P(height))
+        rb_raise(rb_eArgError, "arguments 7 must be non nil");
 
     gdk_pixbuf_render_to_drawable(_SELF(self),
 				  GDK_DRAWABLE(RVAL2GOBJ(self)),
