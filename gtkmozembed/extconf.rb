@@ -83,7 +83,8 @@ create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR,
     result += [gtkmozembed_h] if File.exist?(gtkmozembed_h)
     result
   end
-  glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"])
+  glib_mkenums(enum_type_prefix, headers, "GTK_TYPE_", ["gtkmozembed.h"],
+               :force_flags => [/Flags/])
 end
 
 create_top_makefile
