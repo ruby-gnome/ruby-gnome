@@ -331,10 +331,10 @@ def add_obj(name)
   $objs << name unless $objs.index(name)
 end
 
-def glib_mkenums(prefix, files, g_type_prefix, include_files)
+def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
   add_distcleanfile(prefix + ".h")
   add_distcleanfile(prefix + ".c")
-  GLib::MkEnums.create(prefix, files, g_type_prefix, include_files)
+  GLib::MkEnums.create(prefix, files, g_type_prefix, include_files, options)
 end
 
 def check_cairo

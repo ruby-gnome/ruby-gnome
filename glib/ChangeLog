@@ -1,3 +1,9 @@
+2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/mkmf-gnome2.rb, src/lib/glib-mkenums.rb: add
+	{:force_flags => [pattern1, ...]} options to glib_mkenums to force
+	treating detected enum as flags.
+
 2010-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgutil.[ch], src/glib2.def: add
