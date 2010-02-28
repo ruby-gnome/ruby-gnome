@@ -53,6 +53,8 @@ WRITE ME.
 
   * Bug Fixes:
     * [#2924766] fix -Wl,-rpath syntax. [OBATA Akio]
+    * [#2925285] Gtk::MozEmbed#chrome_mask fails.
+      [tobi, Kouhei Sutou]
 
 === Thanks
 
@@ -65,6 +67,8 @@ WRITE ME.
   * OBATA Akio
   * Hiroyuki Ito
   * Rg Rg
+  * Vincent Carmona
+  * tobi
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24

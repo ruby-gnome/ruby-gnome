@@ -1,5 +1,9 @@
 2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GtkMozEmbed: [#2925285] Gtk::MozEmbed#chrome_mask
+	fails. [#2925285]
+	Reported by tobi. Thanks!!!
+
 	* NEWS: Ruby/GStreamer: [#2924886] implement
 	Gst::MessageTag#parse.
 	Patch by Vincent Carmona. Thanks!!!
