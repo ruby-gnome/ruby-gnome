@@ -55,6 +55,7 @@ WRITE ME.
     * [#2924766] fix -Wl,-rpath syntax. [OBATA Akio]
     * [#2925285] Gtk::MozEmbed#chrome_mask fails.
       [tobi, Kouhei Sutou]
+    * support XULRunner 1.9.2. [OBATA Akio]
 
 === Thanks
 

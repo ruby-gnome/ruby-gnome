@@ -1,3 +1,8 @@
+2010-03-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GtkMozEmbed: support XULRunner 1.9.2.
+	Reported by OBATA Akio. Thanks!!!
+
 2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: [#2925285] Gtk::MozEmbed#chrome_mask
