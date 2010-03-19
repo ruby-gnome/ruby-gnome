@@ -4,6 +4,7 @@ extconf.rb for Ruby/GtkMozEmbed extention library
 
 PACKAGE_NAME = "gtkmozembed"
 PACKAGE_IDS = ["libxul-embedding-unstable",
+               "libxul-embedding",
                "xulrunner-gtkmozembed",
                "firefox-gtkmozembed",
                "seamonkey-gtkmozembed",

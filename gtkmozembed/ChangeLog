@@ -1,3 +1,9 @@
+2010-03-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: add libxul-embedding to PACKAGED_IDS for xulrunner
+	1.9.2.
+	Reported by OBATA Akio. Thanks!!!
+
 2010-02-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: generate collected flags type. [#2925285]
