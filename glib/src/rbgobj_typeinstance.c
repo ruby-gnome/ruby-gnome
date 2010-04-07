@@ -61,6 +61,7 @@ each_cinfo(gpointer instance, ClassInfoCallbackFunc func, gpointer user_data)
 		func(instance, info, user_data);
 	}
     }
+    g_free(interfaces);
 
     {
         GType type;
