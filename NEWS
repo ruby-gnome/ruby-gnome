@@ -24,6 +24,8 @@ WRITE ME.
       [Guillaume Cottenceau, Mamoru Tasaka]
     * Gtk::MenuItem.new accepts nil as a label.
       [Kazuhiro NISHIYAMA, Kouhei Sutou]
+    * fixed wrong conversion in Gtk::TreePath#<=>.
+      [Takeuchi Yusuke, Kouhei Sutou]
   * Improvements:
     * Gdk::Window#invalidate accepts nil as 'area'
       argument. It means 'invalidates whole window'.
@@ -31,6 +33,8 @@ WRITE ME.
     * Gtk::Clipbord#request_text sets UTF-8 encoding in Ruby
       1.9.
       [Rg Rg, Kouhei Sutou]
+    * add Gtk::TreePath#==.
+      [Takeuchi Yusuke, Kouhei Sutou]
 
 ==== Ruby/Pango
 
@@ -70,6 +74,7 @@ WRITE ME.
   * Rg Rg
   * Vincent Carmona
   * tobi
+  * Takeuchi Yusuke
   * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24
