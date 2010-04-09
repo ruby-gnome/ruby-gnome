@@ -13,8 +13,10 @@ WRITE ME.
 ==== Ruby/GLib2
 
   * Bug fixes:
-    * fix type_register on Ruby 1.9.
+    * fixed type_register on Ruby 1.9.
       [Simon Arnaud, Kouhei Sutou]
+    * fixed memory leak in GC.
+      [Kouhei Sutou]
 
 ==== Ruby/GTK2
 

@@ -5,6 +5,8 @@
 	- add Gtk::TreePath#==.
 	Reported by Takeuchi Yusuke. Thanks!!!
 
+	* NEWS: Ruby/GLIb2: fixed memory leak in GC.
+
 2010-03-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: support XULRunner 1.9.2.
