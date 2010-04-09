@@ -14,6 +14,8 @@
 
 #define _SELF(s) ((GtkTreePath*)RVAL2BOXED(s, GTK_TYPE_TREE_PATH))
 
+static ID id_equal;
+
 static VALUE
 treepath_initialize(argc, argv, self)
     int argc;
@@ -115,6 +117,16 @@ treepath_compare(self, other)
 }
 
 static VALUE
+treepath_equal(VALUE self, VALUE other)
+{
+    if (!RVAL2CBOOL(rb_funcall(CLASS_OF(self), id_equal, 1, CLASS_OF(other)))) {
+        return Qfalse;
+    }
+
+    return CBOOL2RVAL(gtk_tree_path_compare(_SELF(self), _SELF(other)) == 0);
+}
+
+static VALUE
 treepath_next(self)
     VALUE self;
 {
@@ -163,6 +175,8 @@ Init_gtk_treepath()
 {
     VALUE gTreepath = G_DEF_CLASS(GTK_TYPE_TREE_PATH, "TreePath", mGtk);
 
+    id_equal = rb_intern("==");
+
     rb_define_method(gTreepath, "initialize", treepath_initialize, -1);
     rb_define_method(gTreepath, "to_str", treepath_to_string, 0);
     rb_define_alias(gTreepath, "to_s", "to_str");
@@ -171,6 +185,7 @@ Init_gtk_treepath()
     rb_define_method(gTreepath, "depth", treepath_get_depth, 0);
     rb_define_method(gTreepath, "indices", treepath_get_indices, 0);
     rb_define_method(gTreepath, "<=>", treepath_compare, 1);
+    rb_define_method(gTreepath, "==", treepath_equal, 1);
     rb_define_method(gTreepath, "next!", treepath_next, 0);
     rb_define_method(gTreepath, "prev!", treepath_prev, 0);
     rb_define_method(gTreepath, "up!", treepath_up, 0);

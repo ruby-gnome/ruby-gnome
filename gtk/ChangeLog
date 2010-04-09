@@ -1,5 +1,9 @@
 2010-04-09  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgtktreepath.c, test/test_gtk_tree_path.rb: add
+	Gtk::TreePath#==.
+	Suggested by Takeuchi Yusuke. Thanks!!!
+
 	* src/rbgtktreepath.c, test/test_gtk_tree_path.rb: fix wrong Ruby
 	<-> C conversion of Gtk::TreePath#<=>.
 	Reported by Takeuchi Yusuke. Thanks!!!
