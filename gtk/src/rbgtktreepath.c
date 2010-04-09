@@ -111,7 +111,7 @@ static VALUE
 treepath_compare(self, other)
     VALUE self, other;
 {
-    return NUM2INT(gtk_tree_path_compare(_SELF(self), _SELF(other)));
+    return INT2NUM(gtk_tree_path_compare(_SELF(self), _SELF(other)));
 }
 
 static VALUE
