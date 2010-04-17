@@ -1,3 +1,8 @@
+2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkrecentinfo.c (ri_get_application_info): fix double free
+	bug.
+
 2010-04-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtktreepath.c, test/test_gtk_tree_path.rb: add

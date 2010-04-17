@@ -79,7 +79,7 @@ static VALUE
 ri_get_application_info(self, app_name)
     VALUE self, app_name;
 {
-    gchar* app_exec;
+    const gchar *app_exec;
     guint count;
     time_t t;
     gboolean ret = gtk_recent_info_get_application_info(_SELF(self),
@@ -90,7 +90,6 @@ ri_get_application_info(self, app_name)
     VALUE ary = rb_ary_new();
     if (ret){
         rb_ary_push(ary, CSTR2RVAL(app_exec));
-        g_free(app_exec);
         rb_ary_push(ary, UINT2NUM(count));
         rb_ary_push(ary, rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t)));
     }
