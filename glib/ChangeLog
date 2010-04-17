@@ -1,3 +1,7 @@
+2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.h: 0.19.4 -> 0.20.0.
+
 2010-04-07  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgobj_typeinstance.c (each_cinfo): fix a memory leak.
