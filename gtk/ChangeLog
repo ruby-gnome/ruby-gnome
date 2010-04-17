@@ -1,5 +1,8 @@
 2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/rbgdkpixbuf.c (pixbuf_render_to_drawable): remove an unused
+	variable.
+
 	* src/rbgtkrecentinfo.c (ri_get_application_info): fix double free
 	bug.
 

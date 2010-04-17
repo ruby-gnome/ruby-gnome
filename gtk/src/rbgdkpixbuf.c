@@ -36,8 +36,6 @@ pixbuf_render_to_drawable(argc, argv, self)
     VALUE gc, src_x, src_y, dest_x, dest_y, width, height,
         dither, x_dither, y_dither;
 
-    int i;
-
 #if GTK_CHECK_VERSION(2,2,0)
     rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#draw_pixbuf instead.");
 #endif
