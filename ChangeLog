@@ -1,5 +1,7 @@
 2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add 0.20.0 place holder.
+
 	* NEWS: Ruby/GTK2: fix Gtk::RecentInfo#application_info's double
 	free bug.
 

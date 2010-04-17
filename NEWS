@@ -2,6 +2,20 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.20.0: 20XX-XX-XX
+
+NOTE: 0.20.x releases are stable series.
+
+WRITE ME.
+
+=== Changes
+
+...
+
+=== Thanks
+
+  * ...
+
 == Ruby-GNOME2 0.19.4: 2011-04-17
 
 NOTE: 0.19.x releases are development series.
@@ -81,7 +95,6 @@ application live long time, you should upgrade.
   * Vincent Carmona
   * tobi
   * Takeuchi Yusuke
-  * ...
 
 == Ruby-GNOME2 0.19.3: 2009-09-24
 
