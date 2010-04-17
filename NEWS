@@ -2,11 +2,13 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.19.4: 20XX-XX-XX
+== Ruby-GNOME2 0.19.4: 2011-04-17
 
 NOTE: 0.19.x releases are development series.
 
-WRITE ME.
+This release has many bug fixes and some improvements. The
+fixed bugs include a memory leak bug on GC. If your
+application live long time, you should upgrade.
 
 === Changes
 
