@@ -30,6 +30,8 @@ application live long time, you should upgrade.
       [Kazuhiro NISHIYAMA, Kouhei Sutou]
     * fixed wrong conversion in Gtk::TreePath#<=>.
       [Takeuchi Yusuke, Kouhei Sutou]
+    * fix Gtk::RecentInfo#application_info's double free bug.
+      [Kouhei Sutou]
   * Improvements:
     * Gdk::Window#invalidate accepts nil as 'area'
       argument. It means 'invalidates whole window'.
