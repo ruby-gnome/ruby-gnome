@@ -1,3 +1,8 @@
+2010-05-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgtkbuildable.c: use #builder_name/#set_builder_name
+	instead of #name/#set_name because they are hidden by Gtk::Widget.
+
 2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgdkpixbuf.c (pixbuf_render_to_drawable): remove an unused

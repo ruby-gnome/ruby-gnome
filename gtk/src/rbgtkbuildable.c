@@ -100,8 +100,8 @@ Init_gtk_buildable()
 
     cGtkBuildable = G_DEF_CLASS(GTK_TYPE_BUILDABLE, "Buildable", mGtk);
 
-    rb_define_method(cGtkBuildable, "name", buildable_get_name, 0);
-    rb_define_method(cGtkBuildable, "set_name", buildable_set_name, 1);
+    rb_define_method(cGtkBuildable, "builder_name", buildable_get_name, 0);
+    rb_define_method(cGtkBuildable, "set_builder_name", buildable_set_name, 1);
     rb_define_method(cGtkBuildable, "add_child", buildable_add_child, -1);
     rb_define_method(cGtkBuildable, "set_buildable_property",
                      buildable_set_buildable_property, 3);
