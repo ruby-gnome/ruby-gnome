@@ -1,3 +1,8 @@
+2010-05-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: add Gtk::Buildable#builder_name/set_builder_name.
+	Suggested by Simon Arnaud. Thanks!!!
+
 2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add 0.20.0 place holder.

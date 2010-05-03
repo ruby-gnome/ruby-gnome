@@ -10,11 +10,16 @@ WRITE ME.
 
 === Changes
 
-...
+==== Ruby/GTK2
+
+  * Bug fixes:
+    * [ruby-gnome2-devel-en] Gtk 2.20, Gtk::Builder and 'name'
+      add Gtk::Buildable#builder_name/set_builder_name.
+      [Simon Arnaud, Kouhei Sutou]
 
 === Thanks
 
-  * ...
+  * Simon Arnaud
 
 == Ruby-GNOME2 0.19.4: 2011-04-17
 
