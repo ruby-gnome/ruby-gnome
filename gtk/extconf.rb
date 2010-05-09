@@ -79,8 +79,6 @@ add_distcleanfile("rbgtkinits.c")
 
 $defs.delete("-DRUBY_GTK2_COMPILATION")
 
-add_depend_package("gtk2", "gtk/src", TOPDIR)
-
 create_pkg_config_file("Ruby/GTK2", PKG_CONFIG_ID, ruby_gnome2_version)
 
 create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GTK2_COMPILATION") {

@@ -1,3 +1,7 @@
+2010-05-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: remove needless add_depended_package.
+
 2010-05-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtkbuildable.c: use #builder_name/#set_builder_name
