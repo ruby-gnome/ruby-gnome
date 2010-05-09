@@ -1,3 +1,7 @@
+2010-05-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use add_depend_package.
+
 2009-06-02  Detlef Reichl  <detlef.reichl@gmx.org>
 
 	* src/rbbonobo-main.c: use $0 instead of rb_argv0.

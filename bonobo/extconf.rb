@@ -5,7 +5,12 @@ extconf.rb for Ruby/Bonobo2 extension library
 PACKAGE_NAME = "bonobo2"
 PACKAGE_ID   = "libbonobo-2.0"
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../glib/src/lib')
+TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
+MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+SRCDIR = TOPDIR + '/bonobo/src'
+
+$LOAD_PATH.unshift MKMF_GNOME2_DIR
+
 require 'mkmf-gnome2'
 
 #
@@ -16,20 +21,8 @@ require 'mkmf-gnome2'
  PKGConfig.have_package('libbonoboui-2.0')) or exit 1
 check_win32
 
-top = File.expand_path(File.dirname(__FILE__) + '/..') # XXX
-$CFLAGS += " " + ['glib/src', 'gtk/src'].map{|d|
-  "-I" + File.join(top, d)
-}.join(" ")
-
-if /cygwin|mingw/ =~ RUBY_PLATFORM
-  top = "../.."
-  [
-    ["glib/src", "ruby-glib2"],
-  ].each{|d,l|
-    $libs << " -l#{l}"
-    $LDFLAGS << " -L#{top}/#{d}"
-  }
-end
+add_depend_package("glib2", "glib/src", TOPDIR)
+add_depend_package("gtk2", "gtk/src", TOPDIR)
 
 begin
   srcdir = File.dirname($0) == "." ? "." :
