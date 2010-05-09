@@ -1,3 +1,7 @@
+2010-05-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbgda.h: fix inverted ifdef check.
+
 2009-06-02  Detlef Reichl <detlef.reichl@gmx.org>
 
 	* src/rbgda.c (rb_gda_init):
