@@ -54,7 +54,7 @@ have_header('gtk/gtkfilesystem.h') do |src|
 end
 
 xlib_header = "X11/Xlib.h"
-if target == "x11" and have_header('X11/Xlib.h')
+if target == "x11" and have_header('X11/Xlib.h') and have_library("X11")
   have_func("XReadBitmapFileData", xlib_header)
   have_func("XGetErrorText", xlib_header)
 end
