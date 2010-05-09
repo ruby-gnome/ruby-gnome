@@ -1,3 +1,7 @@
+2010-05-09  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: use add_depend_package.
+
 2009-03-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbbonobo-ui-main.c: moved Bonobo.setup_x_error_handler from
