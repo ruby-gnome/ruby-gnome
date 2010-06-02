@@ -183,11 +183,21 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 == Copying
 
-Copyright (c) 2002-2009 Ruby-GNOME2 Project Team
+Except Ruby/Poppler:
+
+Copyright (c) 2002-2010 Ruby-GNOME2 Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
 the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+Ruby/Poppler:
+
+Copyright (c) 2002-2010 Ruby-GNOME2 Project Team
+
+This program is free software.
+You can distribute/modify this program under the terms of
+the GNU GENERAL PUBLIC LICENSE Version 2.
 
 == Project Website
 

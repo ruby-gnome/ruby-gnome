@@ -17,6 +17,12 @@ WRITE ME.
       add Gtk::Buildable#builder_name/set_builder_name.
       [Simon Arnaud, Kouhei Sutou]
 
+==== Ruby/Poppler
+
+  * Bug fixes:
+    * fixed license. LGPL 2.1 -> GPL 2.
+      [Kouhei Sutou]
+
 === Thanks
 
   * Simon Arnaud
