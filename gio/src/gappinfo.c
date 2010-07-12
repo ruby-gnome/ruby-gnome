@@ -22,21 +22,28 @@
 
 #define _SELF(value) RVAL2GAPPINFO(value)
 
+#define RVAL2GAPPINFOCREATEFLAGS(value) \
+        RVAL2GFLAGS((value), G_TYPE_APP_INFO_CREATE_FLAGS)
+
+#define RVAL2GAPPINFOCREATEFLAGSDEFAULT(value) \
+        RVAL2TYPE_WITH_DEFAULT((value), \
+                               RVAL2GAPPINFOCREATEFLAGS, \
+                               G_APP_INFO_CREATE_NONE)
+
 static VALUE
-appinfo_create_from_commandline(int argc, VALUE *argv, UNUSED(VALUE self))
+appinfo_create_from_commandline(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
         VALUE commandline, application_name, flags;
         GError *error = NULL;
         GAppInfo *info;
 
         rb_scan_args(argc, argv, "12", &commandline, &application_name, &flags);
-
         info = g_app_info_create_from_commandline(RVAL2CSTR(commandline),
                                                   RVAL2CSTR_ACCEPT_NIL(application_name),
                                                   RVAL2GAPPINFOCREATEFLAGSDEFAULT(flags),
                                                   &error);
         if (info == NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return GOBJ2RVAL(info);
 }
@@ -50,13 +57,13 @@ appinfo_reset_type_associations(VALUE self, VALUE content_type)
 }
 
 static VALUE
-appinfo_get_all_for_type(UNUSED(VALUE self), VALUE content_type)
+appinfo_get_all_for_type(G_GNUC_UNUSED VALUE self, VALUE content_type)
 {
         return GLIST2ARY_FREE(g_app_info_get_all_for_type(RVAL2CSTR(content_type)));
 }
 
 static VALUE
-appinfo_all(int argc, VALUE *argv, VALUE self)
+appinfo_get_all(int argc, VALUE *argv, VALUE self)
 {
         VALUE content_type;
 
@@ -68,7 +75,7 @@ appinfo_all(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-appinfo_get_default_for_type(int argc, VALUE *argv, UNUSED(VALUE self))
+appinfo_get_default_for_type(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
         VALUE content_type, must_support_uris;
 
@@ -79,7 +86,7 @@ appinfo_get_default_for_type(int argc, VALUE *argv, UNUSED(VALUE self))
 }
 
 static VALUE
-appinfo_get_default_for_uri_scheme(UNUSED(VALUE self), VALUE uri_scheme)
+appinfo_get_default_for_uri_scheme(G_GNUC_UNUSED VALUE self, VALUE uri_scheme)
 {
         return GOBJ2RVAL(g_app_info_get_default_for_uri_scheme(RVAL2CSTR(uri_scheme)));
 }
@@ -91,11 +98,10 @@ appinfo_launch_default_for_uri(int argc, VALUE *argv, VALUE self)
         GError *error;
 
         rb_scan_args(argc, argv, "11", &uri, &launch_context);
-
         if (!g_app_info_launch_default_for_uri(RVAL2CSTR(uri),
                                                RVAL2GAPPLAUNCHCONTEXT(launch_context),
                                                &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -113,39 +119,45 @@ appinfo_equal(VALUE self, VALUE other)
 }
 
 static VALUE
-appinfo_id(VALUE self)
+appinfo_get_id(VALUE self)
 {
-	return CSTR2RVAL(g_app_info_get_id(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_id(_SELF(self)));
 }
 
 static VALUE
-appinfo_name(VALUE self)
+appinfo_get_name(VALUE self)
 {
-	return CSTR2RVAL(g_app_info_get_name(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_name(_SELF(self)));
 }
 
 static VALUE
-appinfo_description(VALUE self)
+appinfo_get_display_name(VALUE self)
 {
-	return CSTR2RVAL(g_app_info_get_description(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_display_name(_SELF(self)));
 }
 
 static VALUE
-appinfo_executable(VALUE self)
+appinfo_get_description(VALUE self)
 {
-	return CSTR2RVAL(g_app_info_get_executable(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_description(_SELF(self)));
 }
 
 static VALUE
-appinfo_commandline(VALUE self)
+appinfo_get_executable(VALUE self)
 {
-	return CSTR2RVAL(g_app_info_get_commandline(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_executable(_SELF(self)));
 }
 
 static VALUE
-appinfo_icon(VALUE self)
+appinfo_get_commandline(VALUE self)
 {
-	return GOBJ2RVAL(g_app_info_get_icon(_SELF(self)));
+        return CSTR2RVAL(g_app_info_get_commandline(_SELF(self)));
+}
+
+static VALUE
+appinfo_get_icon(VALUE self)
+{
+        return GOBJ2RVAL(g_app_info_get_icon(_SELF(self)));
 }
 
 typedef gboolean (*LaunchMethod)(GAppInfo *,
@@ -154,10 +166,9 @@ typedef gboolean (*LaunchMethod)(GAppInfo *,
                                  GError **);
 
 static VALUE
-launch_by(LaunchMethod method, int argc, VALUE *argv, VALUE self)
+launch_method(LaunchMethod method, int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbfiles,
-              rblaunch_context;
+        VALUE rbfiles, rblaunch_context;
         GList *files;
         GAppLaunchContext *launch_context;
         GError *error = NULL;
@@ -165,14 +176,12 @@ launch_by(LaunchMethod method, int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "02", &rbfiles, &rblaunch_context);
         launch_context = RVAL2GAPPLAUNCHCONTEXT(rblaunch_context);
-        files = g_file_ary_to_glist(rbfiles);
-
+        files = GFILEARY2GLIST_ACCEPT_NIL(rbfiles);
         launched = method(_SELF(self), files, launch_context, &error);
-
         g_list_free(files);
 
         if (!launched)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -180,43 +189,43 @@ launch_by(LaunchMethod method, int argc, VALUE *argv, VALUE self)
 static VALUE
 appinfo_launch(int argc, VALUE *argv, VALUE self)
 {
-        return launch_by(g_app_info_launch, argc, argv, self);
+        return launch_method(g_app_info_launch, argc, argv, self);
 }
 
 static VALUE
 appinfo_supports_files(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_supports_files(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_supports_files(_SELF(self)));
 }
 
 static VALUE
 appinfo_supports_uris(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_supports_uris(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_supports_uris(_SELF(self)));
 }
 
 static VALUE
 appinfo_launch_uris(int argc, VALUE *argv, VALUE self)
 {
-        return launch_by(g_app_info_launch_uris, argc, argv, self);
+        return launch_method(g_app_info_launch_uris, argc, argv, self);
 }
 
 static VALUE
 appinfo_should_show(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_should_show(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_should_show(_SELF(self)));
 }
 
 static VALUE
 appinfo_can_delete(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_can_delete(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_can_delete(_SELF(self)));
 }
 
 static VALUE
 appinfo_delete(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_delete(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_delete(_SELF(self)));
 }
 
 static VALUE
@@ -225,7 +234,7 @@ appinfo_set_as_default_for_type(VALUE self, VALUE value)
         GError *error = NULL;
 
         if (!g_app_info_set_as_default_for_type(_SELF(self), RVAL2CSTR(value), &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -236,7 +245,7 @@ appinfo_set_as_default_for_extension(VALUE self, VALUE value)
         GError *error = NULL;
 
         if (!g_app_info_set_as_default_for_extension(_SELF(self), RVAL2CSTR(value), &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -247,7 +256,7 @@ appinfo_add_supports_type(VALUE self, VALUE value)
         GError *error = NULL;
 
         if (!g_app_info_add_supports_type(_SELF(self), RVAL2CSTR(value), &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -258,7 +267,7 @@ appinfo_remove_supports_type(VALUE self, VALUE value)
         GError *error = NULL;
 
         if (!g_app_info_remove_supports_type(_SELF(self), RVAL2CSTR(value), &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -266,7 +275,7 @@ appinfo_remove_supports_type(VALUE self, VALUE value)
 static VALUE
 appinfo_can_remove_supports_type(VALUE self)
 {
-	return CBOOL2RVAL(g_app_info_can_remove_supports_type(_SELF(self)));
+        return CBOOL2RVAL(g_app_info_can_remove_supports_type(_SELF(self)));
 }
 
 void
@@ -275,11 +284,11 @@ Init_gappinfo(VALUE glib)
         VALUE appinfo = G_DEF_INTERFACE(G_TYPE_APP_INFO, "AppInfo", glib);
 
         G_DEF_CLASS(G_TYPE_APP_INFO_CREATE_FLAGS, "CreateFlags", appinfo);
-	G_DEF_CONSTANTS(appinfo, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");
+        G_DEF_CONSTANTS(appinfo, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");
 
         rb_define_singleton_method(appinfo, "create_from_commandline", appinfo_create_from_commandline, -1);
         rb_define_singleton_method(appinfo, "reset_type_associations", appinfo_reset_type_associations, -1);
-        rb_define_singleton_method(appinfo, "all", appinfo_all, 0);
+        rb_define_singleton_method(appinfo, "all", appinfo_get_all, 0);
         rb_define_singleton_method(appinfo, "get_all_for_type", appinfo_get_all_for_type, 1);
         rb_define_singleton_method(appinfo, "get_default_for_type", appinfo_get_default_for_type, -1);
         rb_define_singleton_method(appinfo, "get_default_for_uri_scheme", appinfo_get_default_for_uri_scheme, 1);
@@ -287,12 +296,13 @@ Init_gappinfo(VALUE glib)
 
         rb_define_method(appinfo, "dup", appinfo_dup, 0);
         rb_define_method(appinfo, "equal?", appinfo_equal, 1);
-        rb_define_method(appinfo, "id", appinfo_id, 0);
-        rb_define_method(appinfo, "name", appinfo_name, 0);
-        rb_define_method(appinfo, "description", appinfo_description, 0);
-        rb_define_method(appinfo, "executable", appinfo_executable, 0);
-        rb_define_method(appinfo, "commandline", appinfo_commandline, 0);
-        rb_define_method(appinfo, "icon", appinfo_icon, 0);
+        rb_define_method(appinfo, "id", appinfo_get_id, 0);
+        rb_define_method(appinfo, "name", appinfo_get_name, 0);
+        rb_define_method(appinfo, "display_name", appinfo_get_display_name, 0);
+        rb_define_method(appinfo, "description", appinfo_get_description, 0);
+        rb_define_method(appinfo, "executable", appinfo_get_executable, 0);
+        rb_define_method(appinfo, "commandline", appinfo_get_commandline, 0);
+        rb_define_method(appinfo, "icon", appinfo_get_icon, 0);
         rb_define_method(appinfo, "launch", appinfo_launch, -1);
         rb_define_method(appinfo, "supports_files?", appinfo_supports_files, 0);
         rb_define_method(appinfo, "supports_uris?", appinfo_supports_uris, 0);

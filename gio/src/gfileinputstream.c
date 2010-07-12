@@ -20,10 +20,11 @@
 
 #include "gio2.h"
 
-#define _SELF(value) RVAL2GFILEINPUTSTREAM(value)
+#define _SELF(value) G_FILE_INPUT_STREAM(RVAL2GOBJ(value))
+
 
 static VALUE
-stream_query_info(int argc, VALUE *argv, VALUE self)
+fileinputstream_query_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, cancellable;
         GError *error = NULL;
@@ -35,25 +36,24 @@ stream_query_info(int argc, VALUE *argv, VALUE self)
                                               RVAL2GCANCELLABLE(cancellable),
                                               &error);
         if (info == NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return GOBJ2RVAL(info);
 }
 
 static VALUE
-stream_query_info_async(int argc, VALUE *argv, VALUE self)
+fileinputstream_query_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbio_priority, rbcancellable, block;
         const char *attributes;
         int io_priority;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "03&", &rbattributes, &rbio_priority, &rbcancellable, &block);
-	attributes = RVAL2ATTRIBUTESDEFAULT(rbattributes);
-	io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
-	SAVE_BLOCK(block);
-
+        rb_scan_args(argc, argv, "03&", &rbattributes, &rbio_priority, &rbcancellable, &block);
+        attributes = RVAL2ATTRIBUTESDEFAULT(rbattributes);
+        io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        SAVE_BLOCK(block);
         g_file_input_stream_query_info_async(_SELF(self),
                                              attributes,
                                              io_priority,
@@ -65,7 +65,7 @@ stream_query_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_query_info_finish(VALUE self, VALUE result)
+fileinputstream_query_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -74,7 +74,7 @@ stream_query_info_finish(VALUE self, VALUE result)
                                                      RVAL2GASYNCRESULT(result),
                                                      &error);
         if (info == NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return GOBJ2RVAL(info);
 }
@@ -82,13 +82,11 @@ stream_query_info_finish(VALUE self, VALUE result)
 void
 Init_gfileinputstream(VALUE glib)
 {
-        VALUE fileinputstream = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM,
-                                            "FileInputStream",
-                                            glib);
+        VALUE fileinputstream = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", glib);
 
         rb_undef_alloc_func(fileinputstream);
 
-        rb_define_method(fileinputstream, "query_info", stream_query_info, -1);
-        rb_define_method(fileinputstream, "query_info_async", stream_query_info_async, -1);
-        rb_define_method(fileinputstream, "query_info_finish", stream_query_info_finish, 1);
+        rb_define_method(fileinputstream, "query_info", fileinputstream_query_info, -1);
+        rb_define_method(fileinputstream, "query_info_async", fileinputstream_query_info_async, -1);
+        rb_define_method(fileinputstream, "query_info_finish", fileinputstream_query_info_finish, 1);
 }

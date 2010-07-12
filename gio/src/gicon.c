@@ -23,12 +23,14 @@
 #define _SELF(value) RVAL2GICON(value)
 
 static VALUE
-icon_new_for_string(UNUSED(VALUE self), VALUE string)
+icon_new_for_string(G_GNUC_UNUSED VALUE self, VALUE string)
 {
         GError *error = NULL;
-        GIcon *icon = g_icon_new_for_string(RVAL2CSTR(string), &error);
+        GIcon *icon;
+
+        icon = g_icon_new_for_string(RVAL2CSTR(string), &error);
         if (icon == NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return GOBJ2RVAL(icon);
 }
@@ -36,7 +38,7 @@ icon_new_for_string(UNUSED(VALUE self), VALUE string)
 static VALUE
 icon_hash(VALUE self)
 {
-        return UINT2NUM(g_icon_hash(_SELF(self)));
+        return GUINT2RVAL(g_icon_hash(_SELF(self)));
 }
 
 static VALUE
@@ -60,10 +62,7 @@ Init_gicon(VALUE glib)
         rb_define_singleton_method(icon, "new_for_string", icon_new_for_string, 1);
 
         rb_define_method(icon, "hash", icon_hash, 0);
-        /* TODO: Define initialize? */
         rb_define_method(icon, "==", icon_equal, 1);
-        /* TODO: Implement eql? */
-        /* TODO: Which of these three methods do we keep? */
         rb_define_method(icon, "to_string", icon_to_string, 0);
         rb_define_alias(icon, "to_str", "to_string");
         rb_define_alias(icon, "to_s", "to_string");

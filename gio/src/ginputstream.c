@@ -22,58 +22,62 @@
 
 #define _SELF(value) RVAL2GINPUTSTREAM(value)
 
-static VALUE s_id_call;
+static VALUE s_cReadAsyncResult;
 
 static VALUE
-stream_read(int argc, VALUE *argv, VALUE self)
+inputstream_read(int argc, VALUE *argv, VALUE self)
 {
-        VALUE count, cancellable, buffer;
+        VALUE rbcount, cancellable, result;
+        gsize count;
         GError *error = NULL;
         gssize bytes_read;
 
-        rb_scan_args(argc, argv, "11", &count, &cancellable);
-
-        /* TODO: Correct? */
-        buffer = rb_str_buf_new(NUM2UINT(count));
-
+        rb_scan_args(argc, argv, "11", &rbcount, &cancellable);
+        count = RVAL2GSIZE(rbcount);
+        result = rb_str_new(NULL, count);
         bytes_read = g_input_stream_read(_SELF(self),
-                                         RSTRING_PTR(buffer),
-                                         NUM2UINT(count),
+                                         RSTRING_PTR(result),
+                                         count,
                                          RVAL2GCANCELLABLE(cancellable),
                                          &error);
         if (bytes_read == -1)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return buffer;
+        rb_str_set_len(result, bytes_read);
+        rb_str_resize(result, bytes_read);
+        OBJ_TAINT(result);
+
+        return result;
 }
 
 static VALUE
-stream_read_all(int argc, VALUE *argv, VALUE self)
+inputstream_read_all(int argc, VALUE *argv, VALUE self)
 {
-        VALUE count, cancellable, buffer;
+        VALUE rbcount, cancellable, result;
+        gsize count;
         GError *error = NULL;
         gsize bytes_read;
 
-        rb_scan_args(argc, argv, "11", &count, &cancellable);
-
-        buffer = rb_str_buf_new(NUM2UINT(count));
-
+        rb_scan_args(argc, argv, "11", &rbcount, &cancellable);
+        count = RVAL2GSIZE(rbcount);
+        result = rb_str_new(NULL, count);
         if (!g_input_stream_read_all(_SELF(self),
-                                     RSTRING_PTR(buffer),
-                                     NUM2UINT(count),
+                                     RSTRING_PTR(result),
+                                     count,
                                      &bytes_read,
                                      RVAL2GCANCELLABLE(cancellable),
                                      &error))
-                /* TODO: Should we include information about how many bytes
-                 * were read (bytes_read)? */
-                /* TODO: Should we free buffer? */
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return buffer;
+        rb_str_set_len(result, bytes_read);
+        rb_str_resize(result, bytes_read);
+        OBJ_TAINT(result);
+
+        return result;
 }
 
 static VALUE
-stream_skip(int argc, VALUE *argv, VALUE self)
+inputstream_skip(int argc, VALUE *argv, VALUE self)
 {
         VALUE count, cancellable;
         GError *error = NULL;
@@ -81,66 +85,108 @@ stream_skip(int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "11", &count, &cancellable);
         bytes_skipped = g_input_stream_skip(_SELF(self),
-                                            NUM2UINT(count),
+                                            RVAL2GSIZE(count),
                                             RVAL2GCANCELLABLE(cancellable),
                                             &error);
         if (bytes_skipped == -1)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return INT2NUM(bytes_skipped);
+        return GSSIZE2RVAL(bytes_skipped);
 }
 
 static VALUE
-stream_close(int argc, VALUE *argv, VALUE self)
+inputstream_close(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        if (!g_input_stream_close(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_input_stream_close(_SELF(self),
+                                  RVAL2GCANCELLABLE(cancellable),
+                                  &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
+struct read_async_result
+{
+        VALUE string;
+        GAsyncResult *result;
+};
+
 static void
-read_async_callback(UNUSED(GObject *source),
+read_async_result_mark(struct read_async_result *result)
+{
+        rb_gc_mark(result->string);
+}
+
+struct read_async_callback_data
+{
+        GAsyncResult *result;
+        gpointer user_data;
+};
+
+static VALUE
+read_async_callback_call(VALUE data)
+{
+        static ID s_id_call;
+        struct read_async_callback_data *real;
+        VALUE ary;
+        struct read_async_result *result;
+
+        if (s_id_call == 0)
+                s_id_call = rb_intern("call");
+
+        real = (struct read_async_callback_data *)data;
+
+        ary = (VALUE)real->user_data;
+        G_CHILD_REMOVE(mGLib, ary);
+        if (NIL_P(RARRAY_PTR(ary)[1]))
+                return Qnil;
+
+        result = g_new(struct read_async_result, 1);
+        result->string = RARRAY_PTR(ary)[0];
+        result->result = real->result;
+
+        rb_funcall(RARRAY_PTR(ary)[1], s_id_call, 1,
+                   Data_Wrap_Struct(s_cReadAsyncResult,
+                                    read_async_result_mark,
+                                    g_free,
+                                    result));
+
+        return Qnil;
+}
+
+static void
+read_async_callback(G_GNUC_UNUSED GObject *source,
                     GAsyncResult *result,
                     gpointer user_data)
 {
-        VALUE data = (VALUE)user_data;
+        struct read_async_callback_data real = { result, user_data };
 
-        if (NIL_P(data))
-                return;
-
-        G_CHILD_REMOVE(mGLib, data);
-
-        /* TODO: I guess we should probably implement our own result object
-         * here that gives you data[0] on #finish. */
-        rb_funcall(RARRAY_PTR(data)[1], s_id_call, 2,
-                   GOBJ2RVAL(result), RARRAY_PTR(data)[0]);
+        G_PROTECT_CALLBACK(read_async_callback_call, &real);
 }
 
 static VALUE
-stream_read_async(int argc, VALUE *argv, VALUE self)
+inputstream_read_async(int argc, VALUE *argv, VALUE self)
 {
-        VALUE count, io_priority, cancellable, data;
+        VALUE rbcount, rbio_priority, rbcancellable, block, data;
+        gsize count;
+        int io_priority;
+        GCancellable *cancellable;
 
-        rb_scan_args(argc, argv, "12", &count, &io_priority, &cancellable);
-
-        if (rb_block_given_p()) {
-                data = rb_assoc_new(rb_str_buf_new(NUM2UINT(count)), rb_block_proc());
-                G_CHILD_ADD(mGLib, data);
-        } else {
-                data = Qnil;
-        }
-
-        /* TODO: This array/string pointer access can not be correct. */
+        rb_scan_args(argc, argv, "12&", &rbcount, &rbio_priority, &rbcancellable, &block);
+        count = RVAL2GSIZE(rbcount);
+        io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        data = rb_assoc_new(rb_str_new(NULL, count), block);
+        G_CHILD_ADD(mGLib, data);
         g_input_stream_read_async(_SELF(self),
                                   RSTRING_PTR(RARRAY_PTR(data)[0]),
-                                  NUM2UINT(count),
-                                  RVAL2IOPRIORITYDEFAULT(io_priority),
-                                  RVAL2GCANCELLABLE(cancellable),
+                                  count,
+                                  io_priority,
+                                  cancellable,
                                   read_async_callback,
                                   (gpointer)data);
 
@@ -148,35 +194,39 @@ stream_read_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_read_finish(VALUE self, VALUE result)
+inputstream_read_finish(VALUE self, VALUE rbresult)
 {
+        struct read_async_result *result;
         GError *error = NULL;
-        gssize read_bytes;
+        gssize bytes_read;
 
-        read_bytes = g_input_stream_read_finish(_SELF(self),
-                                                RVAL2GASYNCRESULT(result),
+        Data_Get_Struct(rbresult, struct read_async_result, result);
+        bytes_read = g_input_stream_read_finish(_SELF(self),
+                                                result->result,
                                                 &error);
-        if (read_bytes == -1)
-                rbgio_raise_io_error(error);
+        if (bytes_read == -1)
+                rbgio_raise_error(error);
 
-        /* TODO: Return self instead? */
-        return INT2NUM(read_bytes);
+        rb_str_set_len(result->string, bytes_read);
+        rb_str_resize(result->string, bytes_read);
+        OBJ_TAINT(result->string);
+
+        return result->string;
 }
 
 static VALUE
-stream_skip_async(int argc, VALUE *argv, VALUE self)
+inputstream_skip_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, rbio_priority, rbcancellable, block;
         gsize count;
         int io_priority;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "12&", &rbcount, &rbio_priority, &rbcancellable, &block);
-	count = NUM2UINT(rbcount);
-	io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
-	SAVE_BLOCK(block);
-
+        rb_scan_args(argc, argv, "12&", &rbcount, &rbio_priority, &rbcancellable, &block);
+        count = RVAL2GSIZE(rbcount);
+        io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        SAVE_BLOCK(block);
         g_input_stream_skip_async(_SELF(self),
                                   count,
                                   io_priority,
@@ -188,7 +238,7 @@ stream_skip_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_skip_finish(VALUE self, VALUE result)
+inputstream_skip_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gssize skipped_bytes;
@@ -197,23 +247,22 @@ stream_skip_finish(VALUE self, VALUE result)
                                                    RVAL2GASYNCRESULT(result),
                                                    &error);
         if (skipped_bytes == -1)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return INT2NUM(skipped_bytes);
+        return GSSIZE2RVAL(skipped_bytes);
 }
 
 static VALUE
-stream_close_async(int argc, VALUE *argv, VALUE self)
+inputstream_close_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "02&", &rbio_priority, &rbcancellable, &block);
-	io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        rb_scan_args(argc, argv, "02&", &rbio_priority, &rbcancellable, &block);
+        io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
         SAVE_BLOCK(block);
-
         g_input_stream_close_async(_SELF(self),
                                    io_priority,
                                    cancellable,
@@ -224,42 +273,42 @@ stream_close_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_close_finish(VALUE self, VALUE result)
+inputstream_close_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         if (!g_input_stream_skip_finish(_SELF(self),
                                         RVAL2GASYNCRESULT(result),
                                         &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_is_closed(VALUE self)
+inputstream_is_closed(VALUE self)
 {
-	return CBOOL2RVAL(g_input_stream_is_closed(_SELF(self)));
+        return CBOOL2RVAL(g_input_stream_is_closed(_SELF(self)));
 }
 
 static VALUE
-stream_has_pending(VALUE self)
+inputstream_has_pending(VALUE self)
 {
-	return CBOOL2RVAL(g_input_stream_has_pending(_SELF(self)));
+        return CBOOL2RVAL(g_input_stream_has_pending(_SELF(self)));
 }
 
 static VALUE
-stream_set_pending(VALUE self)
+inputstream_set_pending(VALUE self)
 {
         GError *error = NULL;
 
         if (!g_input_stream_set_pending(_SELF(self), &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_clear_pending(VALUE self)
+inputstream_clear_pending(VALUE self)
 {
         g_input_stream_clear_pending(_SELF(self));
 
@@ -271,22 +320,22 @@ Init_ginputstream(VALUE glib)
 {
         VALUE inputstream = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", glib);
 
-        s_id_call = rb_intern("call");
+        s_cReadAsyncResult = rb_define_class_under(inputstream, "ReadAsyncResult", rb_cObject);
+        
+        rb_undef_alloc_func(inputstream);
 
-        /* TODO: Undef alloct func? */
-
-        rb_define_method(inputstream, "read", stream_read, -1);
-        rb_define_method(inputstream, "read_all", stream_read_all, -1);
-        rb_define_method(inputstream, "skip", stream_skip, -1);
-        rb_define_method(inputstream, "close", stream_close, -1);
-        rb_define_method(inputstream, "read_async", stream_read_async, -1);
-        rb_define_method(inputstream, "read_finish", stream_read_finish, 1);
-        rb_define_method(inputstream, "skip_async", stream_skip_async, -1);
-        rb_define_method(inputstream, "skip_finish", stream_skip_finish, 1);
-        rb_define_method(inputstream, "close_async", stream_close_async, -1);
-        rb_define_method(inputstream, "close_finish", stream_close_finish, 1);
-        rb_define_method(inputstream, "closed?", stream_is_closed, 0);
-        rb_define_method(inputstream, "has_pending?", stream_has_pending, 0);
-        rb_define_method(inputstream, "set_pending", stream_set_pending, 0);
-        rb_define_method(inputstream, "clear_pending", stream_clear_pending, 0);
+        rb_define_method(inputstream, "read", inputstream_read, -1);
+        rb_define_method(inputstream, "read_all", inputstream_read_all, -1);
+        rb_define_method(inputstream, "skip", inputstream_skip, -1);
+        rb_define_method(inputstream, "close", inputstream_close, -1);
+        rb_define_method(inputstream, "read_async", inputstream_read_async, -1);
+        rb_define_method(inputstream, "read_finish", inputstream_read_finish, 1);
+        rb_define_method(inputstream, "skip_async", inputstream_skip_async, -1);
+        rb_define_method(inputstream, "skip_finish", inputstream_skip_finish, 1);
+        rb_define_method(inputstream, "close_async", inputstream_close_async, -1);
+        rb_define_method(inputstream, "close_finish", inputstream_close_finish, 1);
+        rb_define_method(inputstream, "closed?", inputstream_is_closed, 0);
+        rb_define_method(inputstream, "has_pending?", inputstream_has_pending, 0);
+        rb_define_method(inputstream, "set_pending", inputstream_set_pending, 0);
+        rb_define_method(inputstream, "clear_pending", inputstream_clear_pending, 0);
 }

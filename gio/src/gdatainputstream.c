@@ -22,18 +22,20 @@
 
 #define _SELF(value) G_DATA_INPUT_STREAM(RVAL2GOBJ(value))
 
+#define GDATASTREAMNEWLINETYPE2RVAL(value) \
+        RVAL2GENUM((value), G_TYPE_DATA_STREAM_NEWLINE_TYPE)
+
+#define RVAL2GDATASTREAMNEWLINETYPE(value) \
+        GENUM2RVAL((value), G_TYPE_DATA_STREAM_NEWLINE_TYPE)
+
 static VALUE
-stream_initialize(int argc, VALUE *argv, VALUE self)
+datainputstream_initialize(int argc, VALUE *argv, VALUE self)
 {
-        VALUE base_stream,
-              byte_order,
-              newline_type;
+        VALUE base_stream, byte_order, newline_type;
 
-        rb_scan_args(argc, argv, "12",
-                     &base_stream, &byte_order, &newline_type);
+        rb_scan_args(argc, argv, "12", &base_stream, &byte_order, &newline_type);
 
-        G_INITIALIZE(self,
-                     g_data_input_stream_new(RVAL2GINPUTSTREAM(base_stream)));
+        G_INITIALIZE(self, g_data_input_stream_new(RVAL2GINPUTSTREAM(base_stream)));
 
         if (!NIL_P(byte_order))
                 g_data_input_stream_set_byte_order(_SELF(self),
@@ -47,160 +49,175 @@ stream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_byte_order(VALUE self)
+datainputstream_get_byte_order(VALUE self)
 {
-	return GDATASTREAMBYTEORDER2RVAL(g_data_input_stream_get_byte_order(_SELF(self)));
+        return GDATASTREAMBYTEORDER2RVAL(g_data_input_stream_get_byte_order(_SELF(self)));
 }
 
 static VALUE
-stream_set_byte_order(VALUE self, VALUE value)
+datainputstream_set_byte_order(VALUE self, VALUE value)
 {
-	g_data_input_stream_set_byte_order(_SELF(self), RVAL2GDATASTREAMBYTEORDER(value));
+        g_data_input_stream_set_byte_order(_SELF(self),
+                                           RVAL2GDATASTREAMBYTEORDER(value));
 
-	return self;
+        return self;
 }
 
 static VALUE
-stream_newline_type(VALUE self)
+datainputstream_set_newline_type(VALUE self, VALUE value)
 {
-	return GDATASTREAMNEWLINETYPE2RVAL(g_data_input_stream_get_newline_type(_SELF(self)));
+        g_data_input_stream_set_newline_type(_SELF(self),
+                                             RVAL2GDATASTREAMNEWLINETYPE(value));
+
+        return self;
 }
 
 static VALUE
-stream_set_newline_type(VALUE self, VALUE value)
+datainputstream_get_newline_type(VALUE self)
 {
-	g_data_input_stream_set_newline_type(_SELF(self), RVAL2GDATASTREAMNEWLINETYPE(value));
-
-	return self;
+        return GDATASTREAMNEWLINETYPE2RVAL(g_data_input_stream_get_newline_type(_SELF(self)));
 }
 
 static VALUE
-stream_read_byte(int argc, VALUE *argv, VALUE self)
+datainputstream_read_byte(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         guchar value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_byte(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_byte(_SELF(self),
+                                              RVAL2GCANCELLABLE(cancellable),
+                                              &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return UINT2NUM(value);
+        return GUCHAR2RVAL(value);
 }
 
 static VALUE
-stream_read_int16(int argc, VALUE *argv, VALUE self)
+datainputstream_read_int16(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         gint16 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_int16(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_int16(_SELF(self),
+                                               RVAL2GCANCELLABLE(cancellable),
+                                               &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return INT2FIX(value);
+        return GINT162RVAL(value);
 }
 
-
 static VALUE
-stream_read_uint16(int argc, VALUE *argv, VALUE self)
+datainputstream_read_uint16(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         guint16 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_uint16(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_uint16(_SELF(self),
+                                                RVAL2GCANCELLABLE(cancellable),
+                                                &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return UINT2NUM(value);
+        return GUINT162RVAL(value);
 }
 
 static VALUE
-stream_read_int32(int argc, VALUE *argv, VALUE self)
+datainputstream_read_int32(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         gint32 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_int32(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_int32(_SELF(self),
+                                               RVAL2GCANCELLABLE(cancellable),
+                                               &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return INT2NUM(value);
+        return GINT322RVAL(value);
 }
 
 static VALUE
-stream_read_uint32(int argc, VALUE *argv, VALUE self)
+datainputstream_read_uint32(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         guint32 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_uint32(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_uint32(_SELF(self),
+                                                RVAL2GCANCELLABLE(cancellable),
+                                                &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return UINT2NUM(value);
+        return GUINT322RVAL(value);
 }
 
 static VALUE
-stream_read_int64(int argc, VALUE *argv, VALUE self)
+datainputstream_read_int64(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         gint64 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_int64(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_int64(_SELF(self),
+                                               RVAL2GCANCELLABLE(cancellable),
+                                               &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return rbglib_int64_to_num(value);
+        return GINT642RVAL(value);
 }
 
 static VALUE
-stream_read_uint64(int argc, VALUE *argv, VALUE self)
+datainputstream_read_uint64(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
         guint64 value;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        value = g_data_input_stream_read_uint64(_SELF(self), RVAL2GCANCELLABLE(cancellable), &error);
+        value = g_data_input_stream_read_uint64(_SELF(self),
+                                                RVAL2GCANCELLABLE(cancellable),
+                                                &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return rbglib_uint64_to_num(value);
+        return GUINT642RVAL(value);
 }
 
 static VALUE
-stream_read_line(int argc, VALUE *argv, VALUE self)
+datainputstream_read_line(int argc, VALUE *argv, VALUE self)
 {
-        gsize length;
         VALUE cancellable;
+        gsize length;
         GError *error;
         char *line;
 
         rb_scan_args(argc, argv, "01", &cancellable);
-        line = g_data_input_stream_read_line(_SELF(self), &length, RVAL2GCANCELLABLE(cancellable), &error);
+        line = g_data_input_stream_read_line(_SELF(self),
+                                             &length,
+                                             RVAL2GCANCELLABLE(cancellable),
+                                             &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        if (line == NULL)
-                return Qnil;
-
-        return CSTR2RVAL_OWN(line, length);
+        return CSTR2RVAL_TAINTED_FREE(line, length);
 }
 
 static VALUE
-stream_read_line_async(int argc, VALUE *argv, VALUE self)
+datainputstream_read_line_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -220,7 +237,7 @@ stream_read_line_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_read_line_finish(VALUE self, VALUE result)
+datainputstream_read_line_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gsize length;
@@ -231,13 +248,13 @@ stream_read_line_finish(VALUE self, VALUE result)
                                                     &length,
                                                     &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return CSTR2RVAL_OWN(line, length);
+        return CSTR2RVAL_TAINTED_FREE(line, length);
 }
 
 static VALUE
-stream_read_until(int argc, VALUE *argv, VALUE self)
+datainputstream_read_until(int argc, VALUE *argv, VALUE self)
 {
         VALUE stop_chars, cancellable;
         gsize length;
@@ -251,13 +268,13 @@ stream_read_until(int argc, VALUE *argv, VALUE self)
                                                 RVAL2GCANCELLABLE(cancellable),
                                                 &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return CSTR2RVAL_OWN(string, length);
+        return CSTR2RVAL_TAINTED_FREE(string, length);
 }
 
 static VALUE
-stream_read_until_async(int argc, VALUE *argv, VALUE self)
+datainputstream_read_until_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbstop_chars, rbcancellable, rbio_priority, block;
         const char *stop_chars;
@@ -280,7 +297,7 @@ stream_read_until_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_read_until_finish(VALUE self, VALUE result)
+datainputstream_read_until_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gsize length;
@@ -291,36 +308,34 @@ stream_read_until_finish(VALUE self, VALUE result)
                                                        &length,
                                                        &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return CSTR2RVAL_OWN(string, length);
+        return CSTR2RVAL_TAINTED_FREE(string, length);
 }
 
 void
 Init_gdatainputstream(VALUE glib)
 {
-        VALUE datainputstream = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM,
-                                            "DataInputStream",
-                                            glib);
+        VALUE datainputstream = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
 
-        rb_define_method(datainputstream, "initialize", stream_initialize, -1);
-        rb_define_method(datainputstream, "byte_order", stream_byte_order, 0);
-	rb_define_method(datainputstream, "set_byte_order", stream_set_byte_order, 1);
-	G_DEF_SETTER(datainputstream, "byte_order");
-        rb_define_method(datainputstream, "newline_type", stream_newline_type, 0);
-	rb_define_method(datainputstream, "set_newline_type", stream_set_newline_type, 1);
-	G_DEF_SETTER(datainputstream, "newline_type");
-        rb_define_method(datainputstream, "read_byte", stream_read_byte, -1);
-        rb_define_method(datainputstream, "read_int16", stream_read_int16, -1);
-        rb_define_method(datainputstream, "read_uint16", stream_read_uint16, -1);
-        rb_define_method(datainputstream, "read_int32", stream_read_int32, -1);
-        rb_define_method(datainputstream, "read_uint32", stream_read_uint32, -1);
-        rb_define_method(datainputstream, "read_int64", stream_read_int64, -1);
-        rb_define_method(datainputstream, "read_uint64", stream_read_uint64, -1);
-        rb_define_method(datainputstream, "read_line", stream_read_line, -1);
-        rb_define_method(datainputstream, "read_line_async", stream_read_line_async, -1);
-        rb_define_method(datainputstream, "read_line_finish", stream_read_line_finish, 1);
-        rb_define_method(datainputstream, "read_until", stream_read_until, -1);
-        rb_define_method(datainputstream, "read_until_async", stream_read_until_async, -1);
-        rb_define_method(datainputstream, "read_until_finish", stream_read_until_finish, 1);
+        rb_define_method(datainputstream, "initialize", datainputstream_initialize, -1);
+        rb_define_method(datainputstream, "byte_order", datainputstream_get_byte_order, 0);
+        rb_define_method(datainputstream, "set_byte_order", datainputstream_set_byte_order, 1);
+        G_DEF_SETTER(datainputstream, "byte_order");
+        rb_define_method(datainputstream, "set_newline_type", datainputstream_set_newline_type, 1);
+        G_DEF_SETTER(datainputstream, "newline_type");
+        rb_define_method(datainputstream, "newline_type", datainputstream_get_newline_type, 0);
+        rb_define_method(datainputstream, "read_byte", datainputstream_read_byte, -1);
+        rb_define_method(datainputstream, "read_int16", datainputstream_read_int16, -1);
+        rb_define_method(datainputstream, "read_uint16", datainputstream_read_uint16, -1);
+        rb_define_method(datainputstream, "read_int32", datainputstream_read_int32, -1);
+        rb_define_method(datainputstream, "read_uint32", datainputstream_read_uint32, -1);
+        rb_define_method(datainputstream, "read_int64", datainputstream_read_int64, -1);
+        rb_define_method(datainputstream, "read_uint64", datainputstream_read_uint64, -1);
+        rb_define_method(datainputstream, "read_line", datainputstream_read_line, -1);
+        rb_define_method(datainputstream, "read_line_async", datainputstream_read_line_async, -1);
+        rb_define_method(datainputstream, "read_line_finish", datainputstream_read_line_finish, 1);
+        rb_define_method(datainputstream, "read_until", datainputstream_read_until, -1);
+        rb_define_method(datainputstream, "read_until_async", datainputstream_read_until_async, -1);
+        rb_define_method(datainputstream, "read_until_finish", datainputstream_read_until_finish, 1);
 }

@@ -40,7 +40,7 @@ get_value_by(GetMethod method, int argc, VALUE *argv, VALUE self)
         char *value;
 
         rb_scan_args(argc, argv, "11", &info, &rbfiles);
-        files = g_file_ary_to_glist(rbfiles);
+        files = GFILEARY2GLIST_ACCEPT_NIL(rbfiles);
         value = method(_SELF(self), RVAL2GAPPINFO(info), files);
         g_list_free(files);
 

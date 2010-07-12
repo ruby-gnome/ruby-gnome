@@ -37,9 +37,10 @@ loadableicon_load(int argc, VALUE *argv, VALUE self)
                                       RVAL2GCANCELLABLE(cancellable),
                                       &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
-        return rb_assoc_new(GOBJ2RVAL(stream), CSTR2RVAL(type));
+        /* TODO: Should type be freed? */
+        return rb_assoc_new(GOBJ2RVAL(stream), CSTR2RVAL_FREE(type));
 }
 
 static VALUE
@@ -49,11 +50,10 @@ loadableicon_load_async(int argc, VALUE *argv, VALUE self)
         int size;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "11&", &rbsize, &rbcancellable, &block);
-	size = NUM2INT(rbsize);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
-	SAVE_BLOCK(block);
-
+        rb_scan_args(argc, argv, "11&", &rbsize, &rbcancellable, &block);
+        size = NUM2INT(rbsize);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        SAVE_BLOCK(block);
         g_loadable_icon_load_async(_SELF(self),
                                    size,
                                    cancellable,
@@ -75,7 +75,7 @@ loadableicon_load_finish(VALUE self, VALUE result)
                                              &type,
                                              &error);
         if (error != NULL)
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return rb_assoc_new(GOBJ2RVAL(stream), CSTR2RVAL_FREE(type));
 }
@@ -83,9 +83,7 @@ loadableicon_load_finish(VALUE self, VALUE result)
 void
 Init_gloadableicon(VALUE glib)
 {
-        VALUE loadableicon = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON,
-                                             "LoadableIcon",
-                                             glib);
+        VALUE loadableicon = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", glib);
 
         rb_define_method(loadableicon, "load", loadableicon_load, -1);
         rb_define_method(loadableicon, "load_async", loadableicon_load_async, -1);

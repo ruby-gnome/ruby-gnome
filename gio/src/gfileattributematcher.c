@@ -77,7 +77,6 @@ fileattributematcher_enumerate_next(VALUE self)
 void
 Init_gfileattributematcher(VALUE glib)
 {
-        /* TODO: Should be defined under G::FileAttribute as Matcher? */
         VALUE fileattributematcher = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", glib);
 
         rb_define_method(fileattributematcher, "initialize", fileattributematcher_initialize, 1);

@@ -22,49 +22,99 @@
 
 void Init_gio2(void);
 
+static VALUE
+gio_has_unix(G_GNUC_UNUSED VALUE self)
+{
+#ifdef HAVE_GIO_UNIX
+        return Qtrue;
+#else
+        return Qfalse;
+#endif
+}
+
 void
 Init_gio2(void)
 {
-	VALUE glib = rb_define_module("GLib");
+        VALUE glib = mGLib;
 
-        G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", glib);
-	G_DEF_CONSTANTS(glib, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");
+        rb_define_module_function(glib, "gio_has_unix?", gio_has_unix, 0);
 
-	Init_gappinfo(glib);
-	Init_gapplaunchcontext(glib);
-	Init_gasyncresult(glib);
-	Init_gbufferedinputstream(glib);
-	Init_gbufferedoutputstream(glib);
-	Init_gcancellable(glib);
-	Init_gcontenttype(glib);
-	Init_gdatainputstream(glib);
-	Init_gfileattributematcher(glib);
-	Init_gdataoutputstream(glib);
-	Init_gdrive(glib);
-	Init_gemblem(glib);
-	Init_gemblemedicon(glib);
-	Init_gfile(glib);
-	Init_gfileattribute(glib);
-	Init_gfileenumerator(glib);
-	Init_gfileicon(glib);
-	Init_gfileinfo(glib);
-	Init_gfileinputstream(glib);
-	Init_gfilemonitor(glib);
-	Init_gfilenamecompleter(glib);
-	Init_gfileoutputstream(glib);
-	Init_gfilterinputstream(glib);
-	Init_gfilteroutputstream(glib);
-	Init_gicon(glib);
-	Init_ginputstream(glib);
+        Init_util();
+
+        Init_gappinfo(glib);
+        Init_gapplaunchcontext(glib);
+        Init_gasyncinitable(glib);
+        Init_gasyncresult(glib);
+        Init_gbufferedinputstream(glib);
+        Init_gbufferedoutputstream(glib);
+        Init_gcancellable(glib);
+        Init_gcharsetconverter(glib);
+        Init_gcontenttype(glib);
+        Init_gconverter(glib);
+        Init_gconverterinputstream(glib);
+        Init_gconverteroutputstream(glib);
+        Init_gdatainputstream(glib);
+        Init_gdesktopappinfo(glib);
+        Init_gfileattributematcher(glib);
+        Init_gdataoutputstream(glib);
+        Init_gdrive(glib);
+        Init_gemblem(glib);
+        Init_gemblemedicon(glib);
+        Init_gfile(glib);
+        Init_gfileattribute(glib);
+        Init_gfiledescriptorbased(glib);
+        Init_gfileenumerator(glib);
+        Init_gfileicon(glib);
+        Init_gfileinfo(glib);
+        Init_gfileinputstream(glib);
+        Init_gfileiostream(glib);
+        Init_gfilemonitor(glib);
+        Init_gfilenamecompleter(glib);
+        Init_gfileoutputstream(glib);
+        Init_gfilterinputstream(glib);
+        Init_gfilteroutputstream(glib);
+        Init_gicon(glib);
+        Init_ginetaddress(glib);
+        Init_ginetsocketaddress(glib);
+        Init_ginitable(glib);
+        Init_ginputstream(glib);
         Init_gioerror(glib);
-	Init_gloadableicon(glib);
-	Init_gmemoryinputstream(glib);
-	Init_gmemoryoutputstream(glib);
-	Init_gmount(glib);
-	Init_gmountoperation(glib);
+        Init_giomodule(glib);
+        Init_gioscheduler(glib);
+        Init_giostream(glib);
+        Init_gloadableicon(glib);
+        Init_gmemoryinputstream(glib);
+        Init_gmemoryoutputstream(glib);
+        Init_gmount(glib);
+        Init_gmountoperation(glib);
+        Init_gnetworkaddress(glib);
+        Init_gnetworkservice(glib);
         Init_goutputstream(glib);
-	Init_gseekable(glib);
-	Init_gthemedicon(glib);
-	Init_gvolume(glib);
-	Init_gvolumemonitor(glib);
+        Init_gresolver(glib);
+        Init_gseekable(glib);
+        Init_gsimpleasyncresult(glib);
+        Init_gsocket(glib);
+        Init_gsocketaddress(glib);
+        Init_gsocketclient(glib);
+        Init_gsocketconnectable(glib);
+        Init_gsocketconnection(glib);
+        Init_gsocketcontrolmessage(glib);
+        Init_gsocketlistener(glib);
+        Init_gsocketservice(glib);
+        Init_gsrvtarget(glib);
+        Init_gtcpconnection(glib);
+        Init_gthemedicon(glib);
+        Init_gthreadedsocketservice(glib);
+        Init_gunixconnection(glib);
+        Init_gunixfdlist(glib);
+        Init_gunixfdmessage(glib);
+        Init_gunixinputstream(glib);
+        Init_gunixmounts(glib);
+        Init_gunixoutputstream(glib);
+        Init_gunixsocketaddress(glib);
+        Init_gvfs(glib);
+        Init_gvolume(glib);
+        Init_gvolumemonitor(glib);
+        Init_gzlibcompressor(glib);
+        Init_gzlibdecompressor(glib);
 }

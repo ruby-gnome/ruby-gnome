@@ -22,21 +22,44 @@
 
 #define _SELF(value) G_MEMORY_OUTPUT_STREAM(RVAL2GOBJ(value))
 
-#if 0
+/* TODO: Take string argument? */
 static VALUE
-stream_initialize(int argc, VALUE *argv, VALUE self)
+memoryoutputstream_initialize(VALUE self)
 {
-        G_INITIALIZE(self, g_memory_output_stream_new(…));
+        G_INITIALIZE(self, g_memory_output_stream_new(NULL,
+                                                      0,
+                                                      g_realloc,
+                                                      g_free));
 
         return Qnil;
 }
-#endif
+
+/* TODO: Is there a way to avoid duplicating the result? */
+static VALUE
+memoryoutputstream_get_data(VALUE self)
+{
+        return CSTR2RVAL(g_memory_output_stream_get_data(_SELF(self)));
+}
+
+static VALUE
+memoryoutputstream_get_size(VALUE self)
+{
+        return GSIZE2RVAL(g_memory_output_stream_get_size(_SELF(self)));
+}
+
+static VALUE
+memoryoutputstream_get_data_size(VALUE self)
+{
+        return GSIZE2RVAL(g_memory_output_stream_get_data_size(_SELF(self)));
+}
 
 void
 Init_gmemoryoutputstream(VALUE glib)
 {
         VALUE memoryoutputstream = G_DEF_CLASS(G_TYPE_MEMORY_OUTPUT_STREAM, "MemoryOutputStream", glib);
 
-        /* TODO: This needs work. */
-     /*   rb_define_method(memoryoutputstream, "initialize", stream_initialize, -1); */
+        rb_define_method(memoryoutputstream, "initialize", memoryoutputstream_initialize, 0);
+        rb_define_method(memoryoutputstream, "data", memoryoutputstream_get_data, 0);
+        rb_define_method(memoryoutputstream, "size", memoryoutputstream_get_size, 0);
+        rb_define_method(memoryoutputstream, "data_size", memoryoutputstream_get_data_size, 0);
 }

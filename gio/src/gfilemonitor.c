@@ -25,20 +25,19 @@
 static VALUE
 filemonitor_cancel(VALUE self)
 {
-	return CBOOL2RVAL(g_file_monitor_cancel(_SELF(self)));
+        return CBOOL2RVAL(g_file_monitor_cancel(_SELF(self)));
 }
 
 static VALUE
 filemonitor_is_cancelled(VALUE self)
 {
-	return CBOOL2RVAL(g_file_monitor_is_cancelled(_SELF(self)));
+        return CBOOL2RVAL(g_file_monitor_is_cancelled(_SELF(self)));
 }
-
 
 static VALUE
 filemonitor_set_rate_limit(VALUE self, VALUE rate_limit)
 {
-        g_file_monitor_set_rate_limit(_SELF(self), NUM2INT(rate_limit));
+        g_file_monitor_set_rate_limit(_SELF(self), FIX2INT(rate_limit));
 
         return self;
 }
@@ -46,20 +45,19 @@ filemonitor_set_rate_limit(VALUE self, VALUE rate_limit)
 void
 Init_gfilemonitor(VALUE glib)
 {
-        VALUE filemonitor = G_DEF_CLASS(G_TYPE_FILE_MONITOR,
-                                        "FileMonitor",
-                                        glib);
+        VALUE filemonitor = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", glib);
+
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", filemonitor);
+        G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");
 
         G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", filemonitor);
-	G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
-        G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", filemonitor);
-	G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");
+        G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
 
         rb_undef_alloc_func(filemonitor);
 
         rb_define_method(filemonitor, "cancel", filemonitor_cancel, 0);
         rb_define_method(filemonitor, "cancelled?", filemonitor_is_cancelled, 0);
         rb_define_method(filemonitor, "set_rate_limit", filemonitor_set_rate_limit, 1);
-	G_DEF_SETTER(filemonitor, "rate_limit");
+        G_DEF_SETTER(filemonitor, "rate_limit");
         /* TODO: Do we need #emit_event? */
 }

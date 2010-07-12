@@ -23,9 +23,16 @@
 #define _SELF(value) G_FILENAME_COMPLETER(RVAL2GOBJ(value))
 
 static VALUE
-filenamecompleter_initialize(VALUE self)
+filenamecompleter_initialize(int argc, VALUE *argv, VALUE self)
 {
-        G_INITIALIZE(self, g_filename_completer_new());
+        VALUE dirs_only;
+        GFilenameCompleter *completer;
+
+        rb_scan_args(argc, argv, "01", &dirs_only);
+        completer = g_filename_completer_new();
+        g_filename_completer_set_dirs_only(completer, RVAL2CBOOL(dirs_only));
+
+        G_INITIALIZE(self, completer);
 
         return Qnil;
 }
@@ -33,13 +40,15 @@ filenamecompleter_initialize(VALUE self)
 static VALUE
 filenamecompleter_get_completion_suffix(VALUE self, VALUE initial_text)
 {
-	return CSTR2RVAL_FREE(g_filename_completer_get_completion_suffix(_SELF(self), RVAL2CSTR(initial_text)));
+        return CSTR2RVAL_FREE(g_filename_completer_get_completion_suffix(_SELF(self),
+                                                                         RVAL2CSTR(initial_text)));
 }
 
 static VALUE
 filenamecompleter_get_completions(VALUE self, VALUE initial_text)
 {
-	return str_vector_to_ary(g_filename_completer_get_completions(_SELF(self), RVAL2CSTR(initial_text)));
+        return STRVECTOR2ARY_FREE(g_filename_completer_get_completions(_SELF(self),
+                                                                       RVAL2CSTR(initial_text)));
 }
 
 static VALUE
@@ -53,12 +62,11 @@ filenamecompleter_set_dirs_only(VALUE self, VALUE dirs_only)
 void
 Init_gfilenamecompleter(VALUE glib)
 {
-        VALUE filenamecompleter = G_DEF_INTERFACE(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
+        VALUE filenamecompleter = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
 
-        rb_define_method(filenamecompleter, "initialize", filenamecompleter_initialize, 0);
+        rb_define_method(filenamecompleter, "initialize", filenamecompleter_initialize, -1);
         rb_define_method(filenamecompleter, "get_completion_suffix", filenamecompleter_get_completion_suffix, 1);
         rb_define_method(filenamecompleter, "get_completions", filenamecompleter_get_completions, 1);
-        /* TODO: Allow this attribute to be set from .new. */
         rb_define_method(filenamecompleter, "set_dirs_only", filenamecompleter_set_dirs_only, 1);
-	G_DEF_SETTER(filenamecompleter, "dirs_only");
+        G_DEF_SETTER(filenamecompleter, "dirs_only");
 }

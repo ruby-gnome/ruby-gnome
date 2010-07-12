@@ -22,18 +22,20 @@
 
 #define _SELF(value) G_SEEKABLE(RVAL2GOBJ(value))
 
+#define RVAL2GSEEKTYPEDEFAULT(value) \
+        RVAL2TYPE_WITH_DEFAULT((value), NUM2INT, G_SEEK_CUR)
+
 static VALUE
 seekable_tell(VALUE self)
 {
-	return rbglib_int64_to_num(g_seekable_tell(_SELF(self)));
+        return GOFFSET2RVAL(g_seekable_tell(_SELF(self)));
 }
 
 static VALUE
 seekable_can_seek(VALUE self)
 {
-	return CBOOL2RVAL(g_seekable_can_seek(_SELF(self)));
+        return CBOOL2RVAL(g_seekable_can_seek(_SELF(self)));
 }
-
 
 static VALUE
 seekable_seek(int argc, VALUE *argv, VALUE self)
@@ -43,11 +45,11 @@ seekable_seek(int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "12", &offset, &type, &cancellable);
         if (!g_seekable_seek(_SELF(self),
-                             rbglib_num_to_int64(offset),
+                             RVAL2GOFFSET(offset),
                              RVAL2GSEEKTYPEDEFAULT(type),
                              RVAL2GCANCELLABLE(cancellable),
                              &error))
-                rbgio_raise_io_error(error);
+                rbgio_raise_error(error);
 
         return self;
 }
@@ -55,7 +57,7 @@ seekable_seek(int argc, VALUE *argv, VALUE self)
 static VALUE
 seekable_can_truncate(VALUE self)
 {
-	return CBOOL2RVAL(g_seekable_can_truncate(_SELF(self)));
+        return CBOOL2RVAL(g_seekable_can_truncate(_SELF(self)));
 }
 
 static VALUE
@@ -65,9 +67,11 @@ seekable_truncate(int argc, VALUE *argv, VALUE self)
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &offset, &cancellable);
-        if (!g_seekable_truncate(_SELF(self), rbglib_num_to_int64(offset),
-                                 RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_seekable_truncate(_SELF(self),
+                                 RVAL2GOFFSET(offset),
+                                 RVAL2GCANCELLABLE(cancellable),
+                                 &error))
+                rbgio_raise_error(error);
 
         return self;
 }

@@ -31,17 +31,16 @@ emblemedicon_initialize(VALUE self, VALUE icon, VALUE emblem)
 }
 
 static VALUE
-emblemedicon_icon(VALUE  self)
+emblemedicon_get_icon(VALUE self)
 {
-	return GOBJ2RVAL(g_emblemed_icon_get_icon(_SELF(self)));
+        return GOBJ2RVAL(g_emblemed_icon_get_icon(_SELF(self)));
 }
 
 static VALUE
-emblemedicon_emblems(VALUE  self)
+emblemedicon_get_emblems(VALUE self)
 {
-	return GLIST2ARY_FREE(g_emblemed_icon_get_emblems(_SELF(self)));
+        return GLIST2ARY_FREE(g_emblemed_icon_get_emblems(_SELF(self)));
 }
-
 
 static VALUE
 emblemedicon_add_emblem(VALUE self, VALUE emblem)
@@ -54,11 +53,11 @@ emblemedicon_add_emblem(VALUE self, VALUE emblem)
 void
 Init_gemblemedicon(VALUE glib)
 {
-        VALUE emblemedicon = G_DEF_INTERFACE(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", glib);
+        VALUE emblemedicon = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", glib);
 
         rb_define_method(emblemedicon, "initialize", emblemedicon_initialize, 2);
-        rb_define_method(emblemedicon, "icon", emblemedicon_icon, 0);
-        rb_define_method(emblemedicon, "emblems", emblemedicon_emblems, 0);
+        rb_define_method(emblemedicon, "icon", emblemedicon_get_icon, 0);
+        rb_define_method(emblemedicon, "emblems", emblemedicon_get_emblems, 0);
         rb_define_method(emblemedicon, "add_emblem", emblemedicon_add_emblem, 1);
         rb_define_alias(emblemedicon, "<<", "add_emblem");
 }

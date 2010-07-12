@@ -23,15 +23,14 @@
 #define _SELF(value) G_DATA_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-stream_initialize(int argc, VALUE *argv, VALUE self)
+dataoutputstream_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE base_stream,
               byte_order;
 
         rb_scan_args(argc, argv, "11", &base_stream, &byte_order);
 
-        G_INITIALIZE(self,
-                     g_data_output_stream_new(RVAL2GOUTPUTSTREAM(base_stream)));
+        G_INITIALIZE(self, g_data_output_stream_new(RVAL2GOUTPUTSTREAM(base_stream)));
 
         if (!NIL_P(byte_order))
                 g_data_output_stream_set_byte_order(_SELF(self),
@@ -41,178 +40,163 @@ stream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-stream_byte_order(VALUE self)
+dataoutputstream_get_byte_order(VALUE self)
 {
-	return GDATASTREAMBYTEORDER2RVAL(g_data_output_stream_get_byte_order(_SELF(self)));
+        return GDATASTREAMBYTEORDER2RVAL(g_data_output_stream_get_byte_order(_SELF(self)));
 }
 
 static VALUE
-stream_set_byte_order(VALUE self, VALUE value)
+dataoutputstream_set_byte_order(VALUE self, VALUE value)
 {
-	g_data_output_stream_set_byte_order(_SELF(self), RVAL2GDATASTREAMBYTEORDER(value));
+        g_data_output_stream_set_byte_order(_SELF(self),
+                                            RVAL2GDATASTREAMBYTEORDER(value));
 
-	return self;
+        return self;
 }
 
 static VALUE
-stream_put_byte(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_byte(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_byte(_SELF(self), FIX2UINT(value),
-                                           RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_byte(_SELF(self),
+                                           RVAL2GUCHAR(value),
+                                           RVAL2GCANCELLABLE(cancellable),
+                                           &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_int16(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_int16(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_int16(_SELF(self), FIX2UINT(value),
-                                            RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_int16(_SELF(self),
+                                            RVAL2GINT16(value),
+                                            RVAL2GCANCELLABLE(cancellable),
+                                            &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_uint16(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_uint16(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_uint16(_SELF(self), FIX2UINT(value),
-                                             RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_uint16(_SELF(self),
+                                             RVAL2GUINT16(value),
+                                             RVAL2GCANCELLABLE(cancellable),
+                                             &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_int32(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_int32(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_int16(_SELF(self), NUM2INT(value),
-                                            RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_int32(_SELF(self),
+                                            RVAL2GINT32(value),
+                                            RVAL2GCANCELLABLE(cancellable),
+                                            &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_uint32(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_uint32(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_int16(_SELF(self), NUM2UINT(value),
-                                            RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_uint32(_SELF(self),
+                                             RVAL2GINT32(value),
+                                             RVAL2GCANCELLABLE(cancellable),
+                                             &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_int64(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_int64(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_int64(_SELF(self), rbglib_num_to_int64(value),
-                                            RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_int64(_SELF(self),
+                                            RVAL2GINT64(value),
+                                            RVAL2GCANCELLABLE(cancellable),
+                                            &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_uint64(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_uint64(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_int16(_SELF(self), rbglib_num_to_uint64(value),
-                                            RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_uint64(_SELF(self),
+                                             RVAL2GUINT64(value),
+                                             RVAL2GCANCELLABLE(cancellable),
+                                             &error))
+                rbgio_raise_error(error);
 
         return self;
 }
 
 static VALUE
-stream_put_string(int argc, VALUE *argv, VALUE self)
+dataoutputstream_put_string(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "11", &value, &cancellable);
-        if (!g_data_output_stream_put_string(_SELF(self), RVAL2CSTR(value),
-                                             RVAL2GCANCELLABLE(cancellable), &error))
-                rbgio_raise_io_error(error);
+        if (!g_data_output_stream_put_string(_SELF(self),
+                                             RVAL2CSTR(value),
+                                             RVAL2GCANCELLABLE(cancellable),
+                                             &error))
+                rbgio_raise_error(error);
 
         return self;
 }
-
-#if 0
-static VALUE
-put_value(int argc, VALUE *argv, VALUE self)
-{
-        VALUE value,
-              cancellable;
-        gboolean success;
-        GError *error = NULL;
-
-        rb_scan_args(argc, argv, "11", &value, &cancellable);
-
-        /* TODO: How do we convert from a Number to uint64 through byte in a
-         * reliable manner?  Is it even sane to do so? */
-        switch (TYPE(value)) {
-        case T_STRING:
-                success = g_data_output_stream_put_string(_SELF(self),
-                                                          RVAL2CSTR(value),
-                                                          cancellable,
-                                                          &error);
-                break;
-
-        if (!success)
-                rbgio_raise_io_error(error);
-
-        return self;
-}
-#endif
 
 void
 Init_gdataoutputstream(VALUE glib)
 {
         VALUE dataoutputstream = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", glib);
 
-        rb_define_method(dataoutputstream, "initialize", stream_initialize, -1);
-        rb_define_method(dataoutputstream, "byte_order", stream_byte_order, 0);
-	rb_define_method(dataoutputstream, "set_byte_order", stream_set_byte_order, 1);
-	G_DEF_SETTER(dataoutputstream, "byte_order");
-        rb_define_method(dataoutputstream, "put_byte", stream_put_byte, -1);
-        rb_define_method(dataoutputstream, "put_int16", stream_put_int16, -1);
-        rb_define_method(dataoutputstream, "put_uint16", stream_put_uint16, -1);
-        rb_define_method(dataoutputstream, "put_int32", stream_put_int32, -1);
-        rb_define_method(dataoutputstream, "put_uint32", stream_put_uint32, -1);
-        rb_define_method(dataoutputstream, "put_int64", stream_put_int64, -1);
-        rb_define_method(dataoutputstream, "put_uint64", stream_put_uint64, -1);
-        rb_define_method(dataoutputstream, "put_string", stream_put_string, -1);
-        rb_define_alias(dataoutputstream, "<<", "put_string");
-        rb_define_alias(dataoutputstream, "write", "put_string");
-
-        /* TODO: Should we add #put_value/#put? */
+        rb_define_method(dataoutputstream, "initialize", dataoutputstream_initialize, -1);
+        rb_define_method(dataoutputstream, "byte_order", dataoutputstream_get_byte_order, 0);
+        rb_define_method(dataoutputstream, "set_byte_order", dataoutputstream_set_byte_order, 1);
+        G_DEF_SETTER(dataoutputstream, "byte_order");
+        rb_define_method(dataoutputstream, "put_byte", dataoutputstream_put_byte, -1);
+        rb_define_method(dataoutputstream, "put_int16", dataoutputstream_put_int16, -1);
+        rb_define_method(dataoutputstream, "put_uint16", dataoutputstream_put_uint16, -1);
+        rb_define_method(dataoutputstream, "put_int32", dataoutputstream_put_int32, -1);
+        rb_define_method(dataoutputstream, "put_uint32", dataoutputstream_put_uint32, -1);
+        rb_define_method(dataoutputstream, "put_int64", dataoutputstream_put_int64, -1);
+        rb_define_method(dataoutputstream, "put_uint64", dataoutputstream_put_uint64, -1);
+        rb_define_method(dataoutputstream, "put_string", dataoutputstream_put_string, -1);
 }

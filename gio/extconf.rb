@@ -2,17 +2,20 @@
 extconf.rb for Ruby/GIO extention library
 =end
 
+PACKAGE_NAME = 'gio2'
+
 TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
 MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
 SRCDIR = TOPDIR + '/gio/src'
 
 $LOAD_PATH.unshift MKMF_GNOME2_DIR
 
-PACKAGE_NAME = 'gio2'
-
 require 'mkmf-gnome2'
 
+defines = '-DRUBY_GIO2_COMPILATION'
+
 PKGConfig.have_package('gio-2.0') or exit 1
+PKGConfig.have_package('gio-unix-2.0') and defines += ' -DHAVE_GIO_UNIX'
 PKGConfig.have_package('gobject-2.0') or exit 1
 
 have_func('rb_exec_recursive')
@@ -53,10 +56,6 @@ try_compiler_option '-Wpointer-arith'
 # try_compiler_option '-Wredundant-decls'
 # NOTE: Complains about index, for example.
 # try_compiler_option '-Wshadow'
-try_compiler_option '-Wsign-compare'
-try_compiler_option '-Wstrict-aliasing=2'
-# NOTE: ruby.h and intern.h are messed up and for some reason GCC wants to
-# complain about them as well.  System headers?
 try_compiler_option '-Wswitch-default'
 try_compiler_option '-Wswitch-enum'
 try_compiler_option '-Wundef'
@@ -65,5 +64,5 @@ try_compiler_option '-Wundef'
 try_compiler_option '-Wunsafe-loop-optimizations'
 try_compiler_option '-Wwrite-strings'
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, '-DRUBY_GIO2_COMPILATION')
+create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, defines)
 create_top_makefile

@@ -20,37 +20,39 @@
 
 #include "gio2.h"
 
-#define _SELF(value) \
-        RVAL2GEMBLEM(value)
+#define _SELF(value) RVAL2GEMBLEM(value)
+
+#define GEMBLEMORIGIN2RVAL(value) \
+        GENUM2RVAL((value), G_TYPE_EMBLEM_ORIGIN)
+
+#define RVAL2GEMBLEMORIGIN(value) \
+        RVAL2GENUM((value), G_TYPE_EMBLEM_ORIGIN)
 
 static VALUE
 emblem_initialize(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbicon,
-              origin;
+        VALUE rbicon, origin;
         GIcon *icon;
+        GEmblem *emblem;
 
         rb_scan_args(argc, argv, "11", &rbicon, &origin);
         icon = RVAL2GICON(rbicon);
-
-        if (!NIL_P(origin))
-                G_INITIALIZE(self,
-                             g_emblem_new_with_origin(icon,
-                                                      RVAL2GEMBLEMORIGIN(origin)));
-        else
-                G_INITIALIZE(self, g_emblem_new(icon));
+        emblem = NIL_P(origin) ?
+                g_emblem_new(icon) :
+                g_emblem_new_with_origin(icon, RVAL2GEMBLEMORIGIN(origin));
+        G_INITIALIZE(self, emblem);
 
         return Qnil;
 }
 
 static VALUE
-emblem_icon(VALUE self)
+emblem_get_icon(VALUE self)
 {
         return GOBJ2RVAL(g_emblem_get_icon(_SELF(self)));
 }
 
 static VALUE
-emblem_origin(VALUE self)
+emblem_get_origin(VALUE self)
 {
         return GEMBLEMORIGIN2RVAL(g_emblem_get_origin(_SELF(self)));
 }
@@ -58,12 +60,12 @@ emblem_origin(VALUE self)
 void
 Init_gemblem(VALUE glib)
 {
-        VALUE emblem = G_DEF_INTERFACE(G_TYPE_EMBLEM, "Emblem", glib);
+        VALUE emblem = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", glib);
 
         G_DEF_CLASS(G_TYPE_EMBLEM_ORIGIN, "Origin", emblem);
-	G_DEF_CONSTANTS(emblem, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
+        G_DEF_CONSTANTS(emblem, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
 
         rb_define_method(emblem, "initialize", emblem_initialize, -1);
-        rb_define_method(emblem, "icon", emblem_icon, 0);
-        rb_define_method(emblem, "origin", emblem_origin, 0);
+        rb_define_method(emblem, "icon", emblem_get_icon, 0);
+        rb_define_method(emblem, "origin", emblem_get_origin, 0);
 }

@@ -27,7 +27,7 @@ fileattributeinfo_copy(const GFileAttributeInfo *info)
 }
 
 static void
-fileattributeinfo_free(UNUSED(const GFileAttributeInfo *info))
+fileattributeinfo_free(G_GNUC_UNUSED GFileAttributeInfo *info)
 {
         return;
 }
@@ -36,22 +36,35 @@ static GType
 g_file_attribute_info_get_type(void)
 {
         static GType our_type = 0;
+
         if (our_type == 0)
                 our_type = g_boxed_type_register_static("GFileAttributeInfo",
                                                         (GBoxedCopyFunc)fileattributeinfo_copy,
                                                         (GBoxedFreeFunc)fileattributeinfo_free);
+
         return our_type;
 }
 
+#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
+
 #define RVAL2GFILEATTRIBUTEINFO(object) \
         ((GFileAttributeInfo *)(RVAL2BOXED(object, G_TYPE_FILE_ATTRIBUTE_INFO)))
-
-#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
 
 #define GFILEATTRIBUTEINFO2RVAL(object) \
         BOXED2RVAL(object, G_TYPE_FILE_ATTRIBUTE_INFO)
 
 #define _SELF(value) RVAL2GFILEATTRIBUTEINFO(value)
+
+#define GFILEATTRIBUTEINFOFLAGS2RVAL(value) \
+        GFLAGS2RVAL((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
+
+#define RVAL2GFILEATTRIBUTEINFOFLAGS(value) \
+        RVAL2GFLAGS((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
+
+#define RVAL2GFILEATTRIBUTEINFOFLAGSDEFAULT(value) \
+        RVAL2TYPE_WITH_DEFAULT((value), \
+                               RVAL2GFILEATTRIBUTEINFOFLAGS, \
+                               G_FILE_ATTRIBUTE_INFO_NONE)
 
 static VALUE
 fileattributeinfo_name(VALUE self)
@@ -106,7 +119,7 @@ fileattributeinfolist_dup(VALUE self)
 static VALUE
 fileattributeinfolist_lookup(VALUE self, VALUE name)
 {
-        /* TODO: How do we deal with this? */
+        /* TODO: How do we deal with the const? */
         return GFILEATTRIBUTEINFO2RVAL((GFileAttributeInfo *)g_file_attribute_info_list_lookup(_SELF(self),
                                                                                                RVAL2CSTR(name)));
 }
@@ -138,13 +151,10 @@ fileattributeinfolist_each(VALUE self)
         return self;
 }
 
-/* TODO: How do we name these? */
 void
 Init_gfileattribute(VALUE glib)
 {
-        VALUE fileattribute,
-              fileattributeinfo,
-              fileattributeinfolist;
+        VALUE fileattribute, fileattributeinfo, fileattributeinfolist;
 
         fileattribute = rb_define_module_under(glib, "FileAttribute");
 
@@ -179,7 +189,14 @@ Init_gfileattribute(VALUE glib)
         rb_define_const(fileattribute, "MOUNTABLE_CAN_UNMOUNT", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT));
         rb_define_const(fileattribute, "MOUNTABLE_CAN_EJECT", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT));
         rb_define_const(fileattribute, "MOUNTABLE_UNIX_DEVICE", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE));
+        rb_define_const(fileattribute, "MOUNTABLE_UNIX_DEVICE_FILE", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE));
         rb_define_const(fileattribute, "MOUNTABLE_HAL_UDI", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI));
+        rb_define_const(fileattribute, "MOUNTABLE_CAN_POLL", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL));
+        rb_define_const(fileattribute, "MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC));
+        rb_define_const(fileattribute, "MOUNTABLE_CAN_START", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START));
+        rb_define_const(fileattribute, "MOUNTABLE_CAN_START_DEGRADED", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED));
+        rb_define_const(fileattribute, "MOUNTABLE_CAN_STOP", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP));
+        rb_define_const(fileattribute, "MOUNTABLE_START_STOP_TYPE", CSTR2RVAL(G_FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE));
         rb_define_const(fileattribute, "TIME_MODIFIED", CSTR2RVAL(G_FILE_ATTRIBUTE_TIME_MODIFIED));
         rb_define_const(fileattribute, "TIME_MODIFIED_USEC", CSTR2RVAL(G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC));
         rb_define_const(fileattribute, "TIME_ACCESS", CSTR2RVAL(G_FILE_ATTRIBUTE_TIME_ACCESS));
@@ -216,17 +233,18 @@ Init_gfileattribute(VALUE glib)
         rb_define_const(fileattribute, "TRASH_ITEM_COUNT", CSTR2RVAL(G_FILE_ATTRIBUTE_TRASH_ITEM_COUNT));
 
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_TYPE, "Type", fileattribute);
-	G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_TYPE, "G_FILE_ATTRIBUTE_");
+        G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_TYPE, "G_FILE_ATTRIBUTE_");
 
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "InfoFlags", fileattribute);
-	G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_");
+        G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_");
 
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_STATUS, "Status", fileattribute);
-	G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_STATUS, "G_FILE_ATTRIBUTE_");
+        G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_STATUS, "G_FILE_ATTRIBUTE_");
 
         fileattributeinfo = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "Info", fileattribute);
 
         rb_undef_alloc_func(fileattributeinfo);
+        rbgobj_boxed_not_copy_obj(G_TYPE_FILE_ATTRIBUTE_INFO);
 
         rb_define_method(fileattributeinfo, "name", fileattributeinfo_name, 0);
         rb_define_method(fileattributeinfo, "type", fileattributeinfo_type, 0);
@@ -234,11 +252,12 @@ Init_gfileattribute(VALUE glib)
 
         fileattributeinfolist = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "InfoList", fileattributeinfo);
 
+        rb_include_module(fileattributeinfolist, rb_mEnumerable);
+
         rb_define_method(fileattributeinfolist, "initialize", fileattributeinfolist_initialize, 0);
         rb_define_method(fileattributeinfolist, "dup", fileattributeinfolist_dup, 0);
         rb_define_method(fileattributeinfolist, "lookup", fileattributeinfolist_lookup, 1);
         rb_define_alias(fileattributeinfolist, "[]", "lookup");
         rb_define_method(fileattributeinfolist, "add", fileattributeinfolist_add, 3);
         rb_define_method(fileattributeinfolist, "each", fileattributeinfolist_each, 0);
-        rb_include_module(fileattributeinfolist, rb_mEnumerable);
 }

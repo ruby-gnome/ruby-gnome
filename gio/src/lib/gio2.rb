@@ -33,7 +33,22 @@ private
   # TODO: Add #each_byte?
 end
 
+if GLib.const_defined? :DesktopAppInfo
+  class GLib::DesktopAppInfo
+    class << self
+      def desktop_env=(desktop_env)
+        set_desktop_env desktop_env
+        desktop_env
+      end
+    end
+  end
+end
+
 module GLib::File
+  def eql?(other)
+    self === other and self == other
+  end
+
   alias each enumerate_children
 
   def each_async(num_files, attributes = nil, flags = nil,
@@ -83,8 +98,34 @@ class GLib::FileInfo
   end
 end
 
+class GLib::Icon
+  def eql?(other)
+    self === other and self == other
+  end
+end
+
 class GLib::InputStream
   def pending=(pending)
     pending ? set_pending : clear_pending
+  end
+end
+
+class GLib::Resolver
+  class << self
+    def default=(default)
+      set_default default
+      default
+    end
+  end
+end
+
+class GLib::SocketConnectable
+  include Enumerable
+
+  def each(cancellable = nil)
+    enumerator = enumerate
+    while address = enumerator.next(cancellable)
+      yield address
+    end
   end
 end

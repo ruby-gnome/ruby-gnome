@@ -23,53 +23,52 @@
 #define _SELF(value) G_VOLUME(RVAL2GOBJ(value))
 
 static VALUE
-volume_name(VALUE self)
+volume_get_name(VALUE self)
 {
-	return CSTR2RVAL_FREE(g_volume_get_name(_SELF(self)));
+        return CSTR2RVAL_FREE(g_volume_get_name(_SELF(self)));
 }
 
 static VALUE
-volume_uuid(VALUE self)
+volume_get_uuid(VALUE self)
 {
-	return CSTR2RVAL_FREE(g_volume_get_uuid(_SELF(self)));
+        return CSTR2RVAL_FREE(g_volume_get_uuid(_SELF(self)));
 }
 
 static VALUE
-volume_icon(VALUE self)
+volume_get_icon(VALUE self)
 {
-	return GOBJ2RVAL(g_volume_get_icon(_SELF(self)));
+        return GOBJ2RVAL(g_volume_get_icon(_SELF(self)));
 }
 
 static VALUE
-volume_drive(VALUE self)
+volume_get_drive(VALUE self)
 {
-	return GOBJ2RVAL(g_volume_get_drive(_SELF(self)));
+        return GOBJ2RVAL(g_volume_get_drive(_SELF(self)));
 }
 
 static VALUE
 volume_get_mount(VALUE self)
 {
-	return GOBJ2RVAL(g_volume_get_mount(_SELF(self)));
+        return GOBJ2RVAL(g_volume_get_mount(_SELF(self)));
 }
 
 static VALUE
 volume_can_mount(VALUE self)
 {
-	return CBOOL2RVAL(g_volume_can_mount(_SELF(self)));
+        return CBOOL2RVAL(g_volume_can_mount(_SELF(self)));
 }
 
 static VALUE
 volume_should_automount(VALUE self)
 {
-	return CBOOL2RVAL(g_volume_should_automount(_SELF(self)));
+        return CBOOL2RVAL(g_volume_should_automount(_SELF(self)));
 }
 
 static VALUE
-volume_activation_root(VALUE self)
+volume_get_activation_root(VALUE self)
 {
-	return GOBJ2RVAL(g_volume_get_activation_root(_SELF(self)));
+        return GOBJ2RVAL(g_volume_get_activation_root(_SELF(self)));
 }
-
 
 static VALUE
 volume_mount(int argc, VALUE *argv, VALUE self)
@@ -79,12 +78,11 @@ volume_mount(int argc, VALUE *argv, VALUE self)
         GMountOperation *mount_operation;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "03&", &rbflags, &rbmount_operation, &rbcancellable, &block);
-	flags = RVAL2GMOUNTMOUNTFLAGSDEFAULT(rbflags);
-	mount_operation = RVAL2GMOUNTOPERATION(rbmount_operation);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
-	SAVE_BLOCK(block);
-
+        rb_scan_args(argc, argv, "03&", &rbflags, &rbmount_operation, &rbcancellable, &block);
+        flags = RVAL2GMOUNTMOUNTFLAGSDEFAULT(rbflags);
+        mount_operation = RVAL2GMOUNTOPERATION(rbmount_operation);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        SAVE_BLOCK(block);
         g_volume_mount(_SELF(self),
                        flags,
                        mount_operation,
@@ -95,60 +93,66 @@ volume_mount(int argc, VALUE *argv, VALUE self)
         return self;
 }
 
+typedef gboolean (*BooleanFinishMethod)(GVolume *,
+                                        GAsyncResult *,
+                                        GError **);
+
+static VALUE
+boolean_finish_method(BooleanFinishMethod method, VALUE self, VALUE result)
+{
+        GError *error = NULL;
+
+        if (!method(_SELF(self), RVAL2GASYNCRESULT(result), &error))
+                rbgio_raise_error(error);
+
+        return self;
+}
+
 static VALUE
 volume_mount_finish(VALUE self, VALUE result)
 {
-        GError *error = NULL;
-        if (!g_volume_mount_finish(_SELF(self),
-                                   RVAL2GASYNCRESULT(result),
-                                   &error))
-                rbgio_raise_io_error(error);
-
-        return self;
+        return boolean_finish_method(g_volume_mount_finish, self, result);
 }
 
 static VALUE
 volume_can_eject(VALUE self)
 {
-	return CBOOL2RVAL(g_volume_can_eject(_SELF(self)));
+        return CBOOL2RVAL(g_volume_can_eject(_SELF(self)));
 }
 
 static VALUE
-volume_eject(int argc, VALUE *argv, VALUE self)
+volume_eject_with_operation(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbflags, rbcancellable, block;
+        VALUE rbflags, rbmount_operation, rbcancellable, block;
         GMountUnmountFlags flags;
+        GMountOperation *mount_operation;
         GCancellable *cancellable;
 
-	rb_scan_args(argc, argv, "02&", &rbflags, &rbcancellable, &block);
-	flags = RVAL2GMOUNTUNMOUNTFLAGSDEFAULT(rbflags);
-	cancellable = RVAL2GCANCELLABLE(rbcancellable);
-	SAVE_BLOCK(block);
-
-        g_volume_eject(_SELF(self),
-                       flags,
-                       cancellable,
-                       rbgio_async_ready_callback,
-                       (gpointer)block);
+        rb_scan_args(argc, argv, "03&", &rbflags, &rbmount_operation, &rbcancellable, &block);
+        flags = RVAL2GMOUNTUNMOUNTFLAGSDEFAULT(rbflags);
+        mount_operation = RVAL2GMOUNTOPERATION(rbmount_operation);
+        cancellable = RVAL2GCANCELLABLE(rbcancellable);
+        SAVE_BLOCK(block);
+        g_volume_eject_with_operation(_SELF(self),
+                                      flags,
+                                      mount_operation,
+                                      cancellable,
+                                      rbgio_async_ready_callback,
+                                      (gpointer)block);
 
         return self;
 }
 
 static VALUE
-volume_eject_finish(VALUE self, VALUE result)
+volume_eject_with_operation_finish(VALUE self, VALUE result)
 {
-        GError *error = NULL;
-
-        if (!g_volume_eject_finish(_SELF(self), RVAL2GASYNCRESULT(result), &error))
-                rbgio_raise_io_error(error);
-
-        return self;
+        return boolean_finish_method(g_volume_eject_with_operation_finish, self, result);
 }
 
 static VALUE
 volume_enumerate_identifiers(VALUE self)
 {
-	return str_vector_to_ary(g_volume_enumerate_identifiers(_SELF(self)));
+        return STRVECTOR2ARY_FREE(g_volume_enumerate_identifiers(_SELF(self)));
 }
 
 static VALUE
@@ -168,21 +172,20 @@ Init_gvolume(VALUE glib)
         rb_define_const(volume, "IDENTIFIER_KIND_UNIX_DEVICE", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE));
         rb_define_const(volume, "IDENTIFIER_KIND_UUID", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UUID));
 
-        rb_define_method(volume, "name", volume_name, 0);
-        rb_define_method(volume, "uuid", volume_uuid, 0);
-        rb_define_method(volume, "icon", volume_icon, 0);
-        rb_define_method(volume, "drive", volume_drive, 0);
-        rb_define_method(volume, "get_mount", volume_get_mount, 0);
+        rb_define_method(volume, "name", volume_get_name, 0);
+        rb_define_method(volume, "uuid", volume_get_uuid, 0);
+        rb_define_method(volume, "icon", volume_get_icon, 0);
+        rb_define_method(volume, "drive", volume_get_drive, 0);
+        rb_define_method(volume, "mount", volume_get_mount, 0);
         rb_define_method(volume, "can_mount?", volume_can_mount, 0);
         rb_define_method(volume, "should_automount?", volume_should_automount, 0);
-        rb_define_method(volume, "activation_root", volume_activation_root, 0);
+        rb_define_method(volume, "activation_root", volume_get_activation_root, 0);
         rb_define_method(volume, "mount", volume_mount, -1);
         rb_define_method(volume, "mount_finish", volume_mount_finish, 1);
         rb_define_method(volume, "can_eject?", volume_can_eject, 0);
-        rb_define_method(volume, "eject", volume_eject, -1);
-        rb_define_method(volume, "eject_finish", volume_eject_finish, 1);
+        rb_define_method(volume, "eject_with_operation", volume_eject_with_operation, -1);
+        rb_define_method(volume, "eject_with_operation_finish", volume_eject_with_operation_finish, 1);
         rb_define_method(volume, "enumerate_identifiers", volume_enumerate_identifiers, -1);
-        /* TODO: Does this make sense? */
         rb_define_alias(volume, "identifiers", "enumerate_identifiers");
         rb_define_method(volume, "get_identifier", volume_get_identifier, 1);
 }

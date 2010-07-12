@@ -22,12 +22,11 @@
 
 #define _SELF(value) G_THEMED_ICON(RVAL2GOBJ(value))
 
+/* TODO: Is this unnecessarily complicated? */
 static VALUE
 themedicon_initialize(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbiconnames,
-              with_default_fallbacks;
-        int n;
+        VALUE rbiconnames, with_default_fallbacks;
         char **iconnames;
         GIcon *icon;
 
@@ -36,24 +35,22 @@ themedicon_initialize(int argc, VALUE *argv, VALUE self)
         if (TYPE(rbiconnames) != T_ARRAY) {
                 const char *iconname = RVAL2CSTR(rbiconnames);
 
-                if (RVAL2CBOOL(with_default_fallbacks))
-                        G_INITIALIZE(self,
-                                     g_themed_icon_new_with_default_fallbacks(iconname));
-                else
-                        G_INITIALIZE(self, g_themed_icon_new(iconname));
+                icon = RVAL2CBOOL(with_default_fallbacks) ?
+                        g_themed_icon_new_with_default_fallbacks(iconname) :
+                        g_themed_icon_new(iconname);
+
+                G_INITIALIZE(self, icon);
 
                 return Qnil;
         }
 
         if (argc > 1)
-                /* TODO: Better error message or simply ignore that we were
-                 * passed more than one argument? */
                 rb_raise(rb_eArgError,
-                         "Only one argument allowed when first argument is an Array");
+                         "only one argument allowed when first argument is an Array");
 
-        n = string_ary_to_char_p_ary(rbiconnames, &iconnames);
+        iconnames = ARY2STRVECTOR(rbiconnames);
 
-        icon = g_themed_icon_new_from_names(iconnames, n);
+        icon = g_themed_icon_new_from_names(iconnames, -1);
 
         g_free(iconnames);
 
@@ -81,9 +78,7 @@ themedicon_append_name(VALUE self, VALUE iconname)
 void
 Init_gthemedicon(VALUE glib)
 {
-        VALUE themedicon = G_DEF_INTERFACE(G_TYPE_THEMED_ICON,
-                                           "ThemedIcon",
-                                           glib);
+        VALUE themedicon = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
 
         rb_define_method(themedicon, "initialize", themedicon_initialize, 1);
         rb_define_method(themedicon, "prepend_name", themedicon_prepend_name, 1);

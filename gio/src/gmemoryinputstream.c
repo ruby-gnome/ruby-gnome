@@ -23,32 +23,30 @@
 #define _SELF(value) G_MEMORY_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-stream_new_from_data(VALUE self, VALUE data)
+memoryinputstream_initialize(int argc, VALUE *argv, VALUE self)
 {
+        VALUE data;
+
+        rb_scan_args(argc, argv, "01", &data);
+        if (NIL_P(data)) {
+                G_INITIALIZE(self, g_memory_input_stream_new());
+                return Qnil;
+        }
+
         StringValue(data);
-
-        G_CHILD_ADD(self, data);
-
-        return GOBJ2RVAL(g_memory_input_stream_new_from_data(RSTRING_PTR(data),
-                                                             RSTRING_LEN(data),
-                                                             NULL));
-}
-
-static VALUE
-stream_initialize(VALUE self)
-{
-        G_INITIALIZE(self, g_memory_input_stream_new());
+        G_RELATIVE(self, data);
+        G_INITIALIZE(self, g_memory_input_stream_new_from_data(RSTRING_PTR(data),
+                                                               RSTRING_LEN(data),
+                                                               NULL));
 
         return Qnil;
 }
 
 static VALUE
-stream_add_data(VALUE self, VALUE data)
+memoryinputstream_add_data(VALUE self, VALUE data)
 {
         StringValue(data);
-
-        G_CHILD_ADD(self, data);
-
+        G_RELATIVE(self, data);
         g_memory_input_stream_add_data(_SELF(self),
                                        RSTRING_PTR(data),
                                        RSTRING_LEN(data),
@@ -62,8 +60,6 @@ Init_gmemoryinputstream(VALUE glib)
 {
         VALUE memoryinputstream = G_DEF_CLASS(G_TYPE_MEMORY_INPUT_STREAM, "MemoryInputStream", glib);
 
-        rb_define_singleton_method(memoryinputstream, "new_from_data", stream_new_from_data, 1);
-
-        rb_define_method(memoryinputstream, "initialize", stream_initialize, 0);
-        rb_define_method(memoryinputstream, "add_data", stream_add_data, 1);
+        rb_define_method(memoryinputstream, "initialize", memoryinputstream_initialize, -1);
+        rb_define_method(memoryinputstream, "add_data", memoryinputstream_add_data, 1);
 }

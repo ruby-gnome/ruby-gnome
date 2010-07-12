@@ -1,3 +1,7 @@
+2010-07-12  Nikolai Weibull
+
+	* src/: Update to GIO 2.24.1.
+
 2010-06-16  Nikolai Weibull
 
 	* src/: Remove macro use.

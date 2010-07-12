@@ -20,43 +20,101 @@
 
 #include "gio2.h"
 
-void
-value_to_gtimeval(VALUE value, GTimeVal *time)
+static ID s_id_enum_name;
+static ID s_id_errors;
+
+static VALUE s_errors;
+
+VALUE
+rbgio_cstr_to_rval_tainted(const char *string, gsize length)
 {
-        if (rb_respond_to(value, rb_intern("tv_sec"))) {
-                time->tv_sec = NUM2LONG(rb_funcall(value, rb_intern("tv_sec"), 0));
-                time->tv_usec = rb_respond_to(value, rb_intern("tv_usec")) ?
-                        rb_funcall(value, rb_intern("tv_usec"), 0) :
-                        0;
-        } else if (rb_respond_to(value, rb_intern("to_ary"))) {
-                /* TODO: How do we convert to ary? */
-                VALUE ary = rb_funcall(value, rb_intern("to_ary"), 0);
-                if (RARRAY_LEN(ary) < 1 || RARRAY_LEN(ary) > 2)
-                        rb_raise(rb_eArgError, "Array of length 1 or 2 expected");
-                time->tv_sec = RARRAY_PTR(ary)[0];
-                time->tv_usec = RARRAY_LEN(ary) > 1 ? RARRAY_PTR(ary)[1] : 0;
-        } else {
-                time->tv_sec = NUM2LONG(value);
-                time->tv_usec = 0;
-        }
+        VALUE result;
+
+        if (string == NULL)
+                return Qnil;
+
+        result = rb_str_new(string, length);
+        OBJ_TAINT(result);
+
+        return result;
+}
+
+struct rbgio_cstr_to_rval_tainted_free_data
+{
+        char *string;
+        gsize length;
+};
+
+static VALUE
+rbgio_cstr_to_rval_tainted_free_body(VALUE data)
+{
+        struct rbgio_cstr_to_rval_tainted_free_data *real;
+
+        real = (struct rbgio_cstr_to_rval_tainted_free_data *)data;
+
+        return rbgio_cstr_to_rval_tainted(real->string, real->length);
+}
+
+static VALUE
+rbgio_cstr_to_rval_tainted_free_ensure(VALUE data)
+{
+        g_free(((struct rbgio_cstr_to_rval_tainted_free_data *)data)->string);
+
+        return Qnil;
+}
+
+VALUE
+rbgio_cstr_to_rval_tainted_free(char *string, gsize length)
+{
+        struct rbgio_cstr_to_rval_tainted_free_data data = { string, length };
+        
+        return rb_ensure(rbgio_cstr_to_rval_tainted_free_body, (VALUE)&data,
+                         rbgio_cstr_to_rval_tainted_free_ensure, (VALUE)&data);
+}
+
+VALUE
+rbgio_fds_to_ary(const gint *fds)
+{
+        int i, n;
+        VALUE ary;
+
+        for (i = n = 0; fds[i] != -1; i++)
+                n++;
+
+        ary = rb_ary_new2(n);
+        for (i = 0; i < n; i++)
+                RARRAY_PTR(ary)[i] = FD2RVAL(fds[i]);
+
+        return ary;
+}
+
+static VALUE
+rbgio_fds_to_ary_free_ensure(gint *fds)
+{
+        g_free(fds);
+
+        return Qnil;
+}
+
+VALUE
+rbgio_fds_to_ary_free(gint *fds)
+{
+        return rb_ensure(rbgio_fds_to_ary, (VALUE)fds,
+                         rbgio_fds_to_ary_free_ensure, (VALUE)fds);
 }
 
 GList *
-g_file_ary_to_glist(VALUE ary)
+rbgio_gfile_ary_to_glist(VALUE ary)
 {
+        int i, n;
+        volatile GFile *file;
         GList *list = NULL;
-        int i,
-            n;
 
-        if (NIL_P(ary))
-                return list;
-
-        Check_Type(ary, T_ARRAY);
-
+        ary = rb_ary_to_ary(ary);
         n = RARRAY_LEN(ary);
 
         for (i = 0; i < n; i++)
-                RVAL2GFILE(RARRAY_PTR(ary)[i]);
+                file = RVAL2GFILE(RARRAY_PTR(ary)[i]);
 
         for (i = 0; i < n; i++)
                 list = g_list_append(list, RVAL2GFILE(RARRAY_PTR(ary)[i]));
@@ -64,82 +122,117 @@ g_file_ary_to_glist(VALUE ary)
         return list;
 }
 
-int
-string_ary_to_char_p_ary(VALUE ary, char ***strings_out)
+GList *
+rbgio_gfile_ary_to_glist_accept_nil(VALUE ary)
 {
+        if (NIL_P(ary))
+                return NULL;
+
+        return rbgio_gfile_ary_to_glist(ary);
+}
+
+void
+rbgio_rval_to_gtimeval(VALUE value, GTimeVal *time)
+{
+        if (rb_respond_to(value, rb_intern("tv_sec"))) {
+                time->tv_sec = RVAL2GLONG(rb_funcall(value, rb_intern("tv_sec"), 0));
+                time->tv_usec = rb_respond_to(value, rb_intern("tv_usec")) ?
+                        RVAL2GLONG(rb_funcall(value, rb_intern("tv_usec"), 0)) :
+                        0;
+        } else if (rb_respond_to(value, rb_intern("to_ary"))) {
+                VALUE ary = rb_ary_to_ary(value);
+                if (RARRAY_LEN(ary) < 1 || RARRAY_LEN(ary) > 2)
+                        rb_raise(rb_eArgError, "Array of length 1 or 2 expected");
+                time->tv_sec = RVAL2GLONG(RARRAY_PTR(ary)[0]);
+                time->tv_usec = RARRAY_LEN(ary) > 1 ? RVAL2GLONG(RARRAY_PTR(ary)[1]) : 0;
+        } else {
+                time->tv_sec = RVAL2GLONG(value);
+                time->tv_usec = 0;
+        }
+}
+
+VALUE
+rbgio_str_vector_to_ary(const gchar * const *vector)
+{
+        int i, n;
+        VALUE ary;
+ 
+        for (i = n = 0; vector[i] != NULL; i++)
+                n++;
+        ary = rb_ary_new2(n);
+        for (i = 0; i < n; i++)
+                RARRAY_PTR(ary)[i] = CSTR2RVAL(vector[i]);
+
+        return ary;
+}
+
+static VALUE
+rbgio_str_vector_to_ary_free_ensure(gchar **vector)
+{
+        g_strfreev(vector);
+
+        return Qnil;
+}
+
+VALUE
+rbgio_str_vector_to_ary_free(gchar **vector)
+{
+        return rb_ensure(rbgio_str_vector_to_ary, (VALUE)vector,
+                         rbgio_str_vector_to_ary_free_ensure, (VALUE)vector);
+}
+
+char **
+rbgio_ary_to_str_vector(VALUE ary)
+{
+        int i, n;
         char **strings;
-        int i,
-            n;
 
-        Check_Type(ary, T_ARRAY);
-
+        ary = rb_ary_to_ary(ary);
         n = RARRAY_LEN(ary);
 
         for (i = 0; i < n; i++)
                 StringValue(RARRAY_PTR(ary)[i]);
 
-        strings = g_new(char *, n);
+        strings = g_new(char *, n + 1);
         for (i = 0; i < n; i++)
                 strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+        strings[n] = NULL;
 
-        *strings_out = strings;
-
-        return n;
+        return strings;
 }
 
-VALUE
-str_vector_to_ary(gchar **vector)
+struct async_ready_callback_data
 {
-        int i;
-        VALUE ary = rb_ary_new();
+        GAsyncResult *result;
+        gpointer data;
+};
 
-        for (i = 0; vector[i] != NULL; i++)
-                rb_ary_push(ary, CSTR2RVAL(vector[i]));
-
-        g_strfreev(vector);
-
-        return ary;
-}
-
-void
-rbgio_async_ready_callback(UNUSED(GObject *source),
-                           GAsyncResult *result,
-                           gpointer data)
+static VALUE
+rbgio_async_ready_callback_call(VALUE data)
 {
         static VALUE s_id_call;
-
+        struct async_ready_callback_data *real;
+        VALUE block;
+ 
         if (s_id_call == 0)
                 s_id_call = rb_intern("call");
 
-        VALUE block = USE_BLOCK(data);
-
+        real = (struct async_ready_callback_data *)data;
+        block = USE_BLOCK(real->data);
         if (!NIL_P(block))
-                rb_funcall(block, s_id_call, 1, GOBJ2RVAL(result));
+                rb_funcall(block, s_id_call, 1, GOBJ2RVAL(real->result));
+
+        return Qnil;
 }
 
-/* TODO: This is a bit of a hack, but I see no other way of doing it. */
-/* TODO: Need to verify that LENGTH is always correct. */
-VALUE
-cstr_to_rval_own(char *string, gsize length)
+void
+rbgio_async_ready_callback(G_GNUC_UNUSED GObject *source,
+                           GAsyncResult *result,
+                           gpointer data)
 {
-        NEWOBJ(str, struct RString);
-        OBJSETUP(str, rb_cString, T_STRING);
+        struct async_ready_callback_data real = { result, data };
 
-        str->ptr = string;
-        str->len = length;
-        str->aux.capa = length;
-
-        return (VALUE)str;
-}
-
-VALUE
-cstr_to_rval_own_frozen(const char *string, gsize length)
-{
-        VALUE value = cstr_to_rval_own((char *)string, length);
-
-        rb_str_freeze(value);
-
-        return value;
+        G_PROTECT_CALLBACK(rbgio_async_ready_callback_call, &real);
 }
 
 VALUE
@@ -150,54 +243,66 @@ rbgio_child_remove_and_return(VALUE parent, VALUE child)
         return child;
 }
 
-static VALUE codes2errors[G_IO_ERROR_TOO_MANY_OPEN_FILES];
-
-void
-Init_gioerror(VALUE glib)
+VALUE
+rbgio_define_domain_error(VALUE module,
+                          const char *name,
+                          GQuark domain,
+                          const char *enum_name,
+                          VALUE parent)
 {
-        VALUE io = rb_define_module_under(glib, "IO");
+        VALUE error;
 
-        VALUE error = rb_define_class_under(io, "Error", rb_eRuntimeError);
+        error = rb_define_class_under(module, name, parent);
+        rb_ivar_set(error, s_id_enum_name, CSTR2RVAL(enum_name));
+        rb_hash_aset(s_errors, UINT2NUM(domain), error);
 
-        codes2errors[G_IO_ERROR_FAILED] = rb_define_class_under(io, "FailedError", error);
-        codes2errors[G_IO_ERROR_NOT_FOUND] = rb_define_class_under(io, "NotFoundError", error);
-        codes2errors[G_IO_ERROR_EXISTS] = rb_define_class_under(io, "ExistsError", error);
-        codes2errors[G_IO_ERROR_IS_DIRECTORY] = rb_define_class_under(io, "IsDirectoryError", error);
-        codes2errors[G_IO_ERROR_NOT_DIRECTORY] = rb_define_class_under(io, "NotDirectoryError", error);
-        codes2errors[G_IO_ERROR_NOT_EMPTY] = rb_define_class_under(io, "NotEmptyError", error);
-        codes2errors[G_IO_ERROR_NOT_REGULAR_FILE] = rb_define_class_under(io, "NotRegularFileError", error);
-        codes2errors[G_IO_ERROR_NOT_SYMBOLIC_LINK] = rb_define_class_under(io, "NotSymbolicLinkError", error);
-        codes2errors[G_IO_ERROR_NOT_MOUNTABLE_FILE] = rb_define_class_under(io, "NotMountableFileError", error);
-        codes2errors[G_IO_ERROR_FILENAME_TOO_LONG] = rb_define_class_under(io, "FilenameTooLongError", error);
-        codes2errors[G_IO_ERROR_INVALID_FILENAME] = rb_define_class_under(io, "InvalidFilenameError", error);
-        codes2errors[G_IO_ERROR_TOO_MANY_LINKS] = rb_define_class_under(io, "TooManyLinksError", error);
-        codes2errors[G_IO_ERROR_NO_SPACE] = rb_define_class_under(io, "NoSpaceError", error);
-        codes2errors[G_IO_ERROR_INVALID_ARGUMENT] = rb_define_class_under(io, "InvalidArgumentError", error);
-        codes2errors[G_IO_ERROR_PERMISSION_DENIED] = rb_define_class_under(io, "PermissionDeniedError", error);
-        codes2errors[G_IO_ERROR_NOT_SUPPORTED] = rb_define_class_under(io, "NotSupportedError", error);
-        codes2errors[G_IO_ERROR_NOT_MOUNTED] = rb_define_class_under(io, "NotMountedError", error);
-        codes2errors[G_IO_ERROR_ALREADY_MOUNTED] = rb_define_class_under(io, "AlreadyMountedError", error);
-        codes2errors[G_IO_ERROR_CLOSED] = rb_define_class_under(io, "ClosedError", error);
-        codes2errors[G_IO_ERROR_CANCELLED] = rb_define_class_under(io, "CancelledError", error);
-        codes2errors[G_IO_ERROR_PENDING] = rb_define_class_under(io, "PendingError", error);
-        codes2errors[G_IO_ERROR_READ_ONLY] = rb_define_class_under(io, "ReadOnlyError", error);
-        codes2errors[G_IO_ERROR_CANT_CREATE_BACKUP] = rb_define_class_under(io, "CantCreateBackupError", error);
-        codes2errors[G_IO_ERROR_WRONG_ETAG] = rb_define_class_under(io, "WrongEtagError", error);
-        codes2errors[G_IO_ERROR_TIMED_OUT] = rb_define_class_under(io, "TimedOutError", error);
-        codes2errors[G_IO_ERROR_WOULD_RECURSE] = rb_define_class_under(io, "WouldRecurseError", error);
-        codes2errors[G_IO_ERROR_BUSY] = rb_define_class_under(io, "BusyError", error);
-        codes2errors[G_IO_ERROR_WOULD_BLOCK] = rb_define_class_under(io, "WouldBlockError", error);
-        codes2errors[G_IO_ERROR_HOST_NOT_FOUND] = rb_define_class_under(io, "HostNotFoundError", error);
-        codes2errors[G_IO_ERROR_WOULD_MERGE] = rb_define_class_under(io, "WouldMergeError", error);
-        codes2errors[G_IO_ERROR_FAILED_HANDLED] = rb_define_class_under(io, "FailedHandledError", error);
-        codes2errors[G_IO_ERROR_TOO_MANY_OPEN_FILES] = rb_define_class_under(io, "TooManyOpenFilesError", error);
+        return error;
+}
+
+VALUE
+rbgio_define_error(VALUE module,
+                   const char *name,
+                   gint code,
+                   VALUE domain_error)
+{
+        VALUE error;
+        
+        error = rb_define_class_under(module, name, domain_error);
+        rb_hash_aset(rb_ivar_get(domain_error, s_id_errors),
+                     INT2NUM(code),
+                     error);
+
+        return error;
 }
 
 void
-rbgio_raise_io_error(GError *error)
+rbgio_raise_error(GError *error)
 {
-        if (error->code < 0 || (unsigned)error->code >= (sizeof(codes2errors) / sizeof(codes2errors[0])))
-                rb_raise(rb_eNotImpError, "GIOErrorEnum contains items not implemented: %d", error->code);
+        VALUE domain_error, rberror;
 
-        rb_raise(codes2errors[error->code], error->message);
+        domain_error = rb_hash_aref(s_errors, UINT2NUM(error->domain));
+        if (NIL_P(domain_error))
+                RAISE_GERROR(error);
+
+        rberror = rb_hash_aref(rb_ivar_get(domain_error, s_id_errors),
+                               INT2NUM(error->code));
+        if (NIL_P(rberror)) {
+                VALUE enum_name = rb_ivar_get(domain_error, s_id_enum_name);
+
+                rb_raise(rb_eNotImpError,
+                         "%s contains error codes that have not been implemented: %d",
+                         RVAL2CSTR(enum_name), error->code);
+        }
+
+        rb_raise(rberror, error->message);
+}
+
+void
+Init_util(void)
+{
+        s_id_enum_name = rb_intern("@enum_name");
+        s_id_errors = rb_intern("@errors");
+
+        s_errors = rb_hash_new();
+        rb_global_variable(&s_errors);
 }
