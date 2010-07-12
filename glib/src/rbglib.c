@@ -72,14 +72,24 @@ rbg_cstr2rval(const char* str)
 }
 
 VALUE
+rbg_cstr2rval_with_free_body(VALUE str)
+{
+    return rb_str_new2((gchar*)str);
+}
+
+VALUE
+rbg_cstr2rval_with_free_ensure(VALUE str)
+{
+    g_free((gchar*)str);
+
+    return Qnil;
+}
+
+VALUE
 rbg_cstr2rval_with_free(gchar* str)
 {
-    VALUE ret = Qnil;
-    if (str) {
-        ret = rb_str_new2(str);
-        g_free(str);
-    }
-    return ret;
+    return str ? rb_ensure(rbg_cstr2rval_with_free_body, (VALUE)str,
+                           rbg_cstr2rval_with_free_ensure, (VALUE)str) : Qnil;
 }
 
 #if 0

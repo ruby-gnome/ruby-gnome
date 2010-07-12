@@ -1,3 +1,8 @@
+2010-07-12  Nikolai Weibull
+
+	* src/rbglib.c: use rb_ensure for rbg_cstr_to_rval to free the memory
+	even if an error occurs when creating the Ruby String.
+
 2010-04-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.h: 0.19.4 -> 0.20.0.
