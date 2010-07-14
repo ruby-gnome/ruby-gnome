@@ -1,3 +1,7 @@
+2010-07-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/rbglib.c: fix coding style.
+
 2010-07-12  Nikolai Weibull
 
 	* src/rbglib.c: use rb_ensure for rbg_cstr_to_rval to free the memory
