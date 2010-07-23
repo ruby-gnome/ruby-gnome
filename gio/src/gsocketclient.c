@@ -45,7 +45,7 @@ socketclient_connect(int argc, VALUE *argv, VALUE self)
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(connection);
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE
@@ -82,7 +82,7 @@ connection_finish_method(ConnectionFinishMethod method, VALUE self, VALUE result
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(connection);
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE

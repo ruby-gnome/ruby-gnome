@@ -37,31 +37,31 @@ mount_get_uuid(VALUE self)
 static VALUE
 mount_get_icon(VALUE self)
 {
-        return GOBJ2RVAL(g_mount_get_icon(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_mount_get_icon(_SELF(self)));
 }
 
 static VALUE
 mount_get_drive(VALUE self)
 {
-        return GOBJ2RVAL(g_mount_get_drive(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_mount_get_drive(_SELF(self)));
 }
 
 static VALUE
 mount_get_root(VALUE self)
 {
-        return GOBJ2RVAL(g_mount_get_root(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_mount_get_root(_SELF(self)));
 }
 
 static VALUE
 mount_get_volume(VALUE self)
 {
-        return GOBJ2RVAL(g_mount_get_volume(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_mount_get_volume(_SELF(self)));
 }
 
 static VALUE
 mount_get_default_location(VALUE self)
 {
-        return GOBJ2RVAL(g_mount_get_default_location(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_mount_get_default_location(_SELF(self)));
 }
 
 static VALUE

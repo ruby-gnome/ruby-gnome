@@ -37,7 +37,7 @@ fileoutputstream_query_info(int argc, VALUE *argv, VALUE self)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -75,7 +75,7 @@ fileoutputstream_query_info_finish(VALUE self, VALUE result)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE

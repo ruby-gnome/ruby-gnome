@@ -37,19 +37,19 @@ volume_get_uuid(VALUE self)
 static VALUE
 volume_get_icon(VALUE self)
 {
-        return GOBJ2RVAL(g_volume_get_icon(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_volume_get_icon(_SELF(self)));
 }
 
 static VALUE
 volume_get_drive(VALUE self)
 {
-        return GOBJ2RVAL(g_volume_get_drive(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_volume_get_drive(_SELF(self)));
 }
 
 static VALUE
 volume_get_mount(VALUE self)
 {
-        return GOBJ2RVAL(g_volume_get_mount(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_volume_get_mount(_SELF(self)));
 }
 
 static VALUE
@@ -67,7 +67,7 @@ volume_should_automount(VALUE self)
 static VALUE
 volume_get_activation_root(VALUE self)
 {
-        return GOBJ2RVAL(g_volume_get_activation_root(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_volume_get_activation_root(_SELF(self)));
 }
 
 static VALUE

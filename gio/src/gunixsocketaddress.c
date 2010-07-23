@@ -37,8 +37,8 @@ static VALUE
 unixsocketaddress_new_abstract(G_GNUC_UNUSED VALUE self, VALUE path)
 {
         StringValue(path);
-        return GOBJ2RVAL(g_unix_socket_address_new_abstract(RSTRING_PTR(path),
-                                                            RSTRING_LEN(path)));
+        return GOBJ2RVAL_UNREF(g_unix_socket_address_new_abstract(RSTRING_PTR(path),
+                                                                  RSTRING_LEN(path)));
 }
 
 static VALUE

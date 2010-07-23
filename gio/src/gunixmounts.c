@@ -88,7 +88,7 @@ unixmount_is_system_internal(VALUE self)
 static VALUE
 unixmount_guess_icon(VALUE self)
 {
-        return GOBJ2RVAL(g_unix_mount_guess_icon(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_unix_mount_guess_icon(_SELF(self)));
 }
 
 static VALUE
@@ -179,7 +179,7 @@ unixmountpoint_is_loopback(VALUE self)
 static VALUE
 unixmountpoint_guess_icon(VALUE self)
 {
-        return GOBJ2RVAL(g_unix_mount_point_guess_icon(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_unix_mount_point_guess_icon(_SELF(self)));
 }
 
 static VALUE

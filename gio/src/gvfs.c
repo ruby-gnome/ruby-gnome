@@ -25,19 +25,19 @@
 static VALUE
 vfs_get_file_for_path(VALUE self, VALUE path)
 {
-        return GOBJ2RVAL(g_vfs_get_file_for_path(_SELF(self), RVAL2CSTR(path)));
+        return GOBJ2RVAL_UNREF(g_vfs_get_file_for_path(_SELF(self), RVAL2CSTR(path)));
 }
 
 static VALUE
 vfs_get_file_for_uri(VALUE self, VALUE uri)
 {
-        return GOBJ2RVAL(g_vfs_get_file_for_uri(_SELF(self), RVAL2CSTR(uri)));
+        return GOBJ2RVAL_UNREF(g_vfs_get_file_for_uri(_SELF(self), RVAL2CSTR(uri)));
 }
 
 static VALUE
 vfs_parse_name(VALUE self, VALUE parse_name)
 {
-        return GOBJ2RVAL(g_vfs_parse_name(_SELF(self), RVAL2CSTR(parse_name)));
+        return GOBJ2RVAL_UNREF(g_vfs_parse_name(_SELF(self), RVAL2CSTR(parse_name)));
 }
 
 static VALUE

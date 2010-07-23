@@ -25,7 +25,7 @@
 static VALUE
 resolver_get_default(G_GNUC_UNUSED VALUE self)
 {
-        return GOBJ2RVAL(g_resolver_get_default());
+        return GOBJ2RVAL_UNREF(g_resolver_get_default());
 }
 
 static VALUE
@@ -49,7 +49,7 @@ resolver_lookup_by_name(VALUE self, VALUE hostname, VALUE cancellable)
         if (addresses == NULL)
                 rbgio_raise_error(error);
 
-        return GLIST2ARYF(addresses);
+        return GLIST2ARY_UNREF_FREE(addresses);
 }
 
 static VALUE
@@ -84,7 +84,7 @@ resolver_lookup_by_name_finish(VALUE self, VALUE result)
         if (addresses == NULL)
                 rbgio_raise_error(error);
 
-        return GLIST2ARYF(addresses);
+        return GLIST2ARY_UNREF_FREE(addresses);
 }
 
 static VALUE
@@ -157,7 +157,7 @@ resolver_lookup_service(int argc, VALUE *argv, VALUE self)
         if (targets == NULL)
                 rbgio_raise_error(error);
 
-        return GLIST2ARYF(targets);
+        return GLIST2ARY_UNREF_FREE(targets);
 }
 
 static VALUE
@@ -196,7 +196,7 @@ resolver_lookup_service_finish(VALUE self, VALUE result)
         if (targets == NULL)
                 rbgio_raise_error(error);
 
-        return GLIST2ARYF(targets);
+        return GLIST2ARY_UNREF_FREE(targets);
 }
 
 void

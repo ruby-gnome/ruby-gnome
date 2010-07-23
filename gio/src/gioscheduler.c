@@ -73,8 +73,10 @@ ioscheduler_job_callback_call(VALUE data)
 
         real = (struct ioscheduler_job_callback_data *)data;
 
+        /* TODO: Totally unsure if _UNREF is correct here or not. */
         return rb_funcall(USE_BLOCK_AND_SAVE(real->data), s_id_call, 2,
-                          GOBJ2RVAL(real->job), GOBJ2RVAL(real->cancellable));
+                          GOBJ2RVAL_UNREF(real->job),
+                          GOBJ2RVAL_UNREF(real->cancellable));
 }
 
 static gboolean

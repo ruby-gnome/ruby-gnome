@@ -25,7 +25,7 @@
 static VALUE
 volumemonitor_get(G_GNUC_UNUSED VALUE self)
 {
-        return GOBJ2RVAL(g_volume_monitor_get());
+        return GOBJ2RVAL_UNREF(g_volume_monitor_get());
 }
 
 static VALUE
@@ -49,13 +49,13 @@ volumemonitor_get_mounts(VALUE self)
 static VALUE
 volumemonitor_get_mount_for_uuid(VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_volume_monitor_get_mount_for_uuid(_SELF(self), RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_volume_monitor_get_mount_for_uuid(_SELF(self), RVAL2CSTR(value)));
 }
 
 static VALUE
 volumemonitor_get_volume_for_uuid(VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_volume_monitor_get_volume_for_uuid(_SELF(self), RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_volume_monitor_get_volume_for_uuid(_SELF(self), RVAL2CSTR(value)));
 }
 
 void

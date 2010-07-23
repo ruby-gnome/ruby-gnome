@@ -41,7 +41,7 @@ socket_initialize(int argc, VALUE *argv, VALUE self)
         if (socket == NULL)
                 rbgio_raise_error(error);
 
-        G_INITIALIZE(self, GOBJ2RVAL(socket));
+        G_INITIALIZE(self, socket);
 
         return Qnil;
 }
@@ -56,7 +56,7 @@ socket_new_from_fd(G_GNUC_UNUSED VALUE self, VALUE id)
         if (socket == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(socket);
+        return GOBJ2RVAL_UNREF(socket);
 }
 
 static VALUE
@@ -182,7 +182,7 @@ socket_receive_from(int argc, VALUE *argv, VALUE self)
         rb_str_resize(result, read);
         OBJ_TAINT(result);
 
-        return rb_assoc_new(GOBJ2RVAL(address), result);
+        return rb_assoc_new(GOBJ2RVAL_UNREF(address), result);
 }
 
 static VALUE
@@ -270,9 +270,9 @@ socket_create_source(int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "11", &condition, &cancellable);
 
-        return GOBJ2RVAL(g_socket_create_source(_SELF(self),
-                                                RVAL2GIOCONDITION(condition),
-                                                RVAL2GCANCELLABLE(cancellable)));
+        return GOBJ2RVAL_UNREF(g_socket_create_source(_SELF(self),
+                                                      RVAL2GIOCONDITION(condition),
+                                                      RVAL2GCANCELLABLE(cancellable)));
 }
 
 static VALUE
@@ -362,7 +362,7 @@ socket_get_local_address(VALUE self)
         if (address == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(address);
+        return GOBJ2RVAL_UNREF(address);
 }
 
 static VALUE
@@ -381,7 +381,7 @@ socket_get_remote_address(VALUE self)
         if (address == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(address);
+        return GOBJ2RVAL_UNREF(address);
 }
 
 static VALUE

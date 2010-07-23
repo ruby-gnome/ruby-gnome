@@ -25,7 +25,7 @@
 static VALUE
 socketlistener_initialize(VALUE self)
 {
-        G_INITIALIZE(self, GOBJ2RVAL(g_socket_listener_new()));
+        G_INITIALIZE(self, g_socket_listener_new());
 
         return Qnil;
 }
@@ -61,7 +61,7 @@ socketlistener_add_address(int argc, VALUE *argv, VALUE self)
                                            &error))
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(address);
+        return GOBJ2RVAL_UNREF(address);
 }
 
 static VALUE
@@ -110,7 +110,7 @@ socketlistener_accept(int argc, VALUE *argv, VALUE self)
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(connection);
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE
@@ -145,7 +145,7 @@ socketlistener_accept_finish(int argc, VALUE *argv, VALUE self)
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(connection);
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE
@@ -163,7 +163,7 @@ socketlistener_accept_socket(int argc, VALUE *argv, VALUE self)
         if (socket == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(socket);
+        return GOBJ2RVAL_UNREF(socket);
 }
 
 static VALUE
@@ -188,15 +188,17 @@ socketlistener_accept_socket_finish(int argc, VALUE *argv, VALUE self)
 {
         VALUE result, source_object;
         GError *error = NULL;
+        GSocket *socket;
 
         rb_scan_args(argc, argv, "11", &result, &source_object);
-        if (!g_socket_listener_accept_socket_finish(_SELF(self),
-                                                    RVAL2GASYNCRESULT(result),
-                                                    RVAL2GOBJ(source_object),
-                                                    &error))
+        socket = g_socket_listener_accept_socket_finish(_SELF(self),
+                                                        RVAL2GASYNCRESULT(result),
+                                                        RVAL2GOBJ(source_object),
+                                                        &error);
+        if (socket == NULL)
                 rbgio_raise_error(error);
 
-        return self;
+        return GOBJ2RVAL_UNREF(socket);
 }
 
 static VALUE

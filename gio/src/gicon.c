@@ -32,7 +32,7 @@ icon_new_for_string(G_GNUC_UNUSED VALUE self, VALUE string)
         if (icon == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(icon);
+        return GOBJ2RVAL_UNREF(icon);
 }
 
 static VALUE

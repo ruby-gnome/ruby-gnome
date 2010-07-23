@@ -40,7 +40,7 @@ loadableicon_load(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         /* TODO: Should type be freed? */
-        return rb_assoc_new(GOBJ2RVAL(stream), CSTR2RVAL_FREE(type));
+        return rb_assoc_new(GOBJ2RVAL_UNREF(stream), CSTR2RVAL_FREE(type));
 }
 
 static VALUE
@@ -77,7 +77,7 @@ loadableicon_load_finish(VALUE self, VALUE result)
         if (error != NULL)
                 rbgio_raise_error(error);
 
-        return rb_assoc_new(GOBJ2RVAL(stream), CSTR2RVAL_FREE(type));
+        return rb_assoc_new(GOBJ2RVAL_UNREF(stream), CSTR2RVAL_FREE(type));
 }
 
 void

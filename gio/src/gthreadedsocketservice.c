@@ -25,7 +25,7 @@
 static VALUE
 threadedsocketservice_initialize(VALUE self)
 {
-        G_INITIALIZE(self, GOBJ2RVAL(g_socket_service_new()));
+        G_INITIALIZE(self, g_socket_service_new());
 
         return Qnil;
 }

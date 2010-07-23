@@ -6,11 +6,4 @@ GIOExtension
 Other
 -----
 
-We should probably use GOBJ2RVAL_UNREF a lot more, possibly every time the
-documentation mentions that g_object_unref should be used.  Need to do this
-with GLIST2ARYF as well.
-
 When we use GOBJ2RVAL on properties of objects, should we call G_CHILD_ADD?
-
-Rewrite rbg_cstr2rval_with_free to ensure that we call g_free, even if
-rb_str_new2 fails.  (And the same for other such methods.)

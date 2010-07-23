@@ -73,6 +73,20 @@ rbgio_cstr_to_rval_tainted_free(char *string, gsize length)
 }
 
 VALUE
+rbgio_glist_to_ary_unref_free(GList *list)
+{
+        VALUE ary;
+        GList *i;
+
+        ary = rb_ary_new();
+        for (i = list; i != NULL; i = i->next)
+                rb_ary_push(ary, GOBJ2RVAL_UNREF(i->data));
+        g_list_free(list);
+
+        return ary;
+}
+
+VALUE
 rbgio_fds_to_ary(const gint *fds)
 {
         int i, n;
@@ -220,7 +234,7 @@ rbgio_async_ready_callback_call(VALUE data)
         real = (struct async_ready_callback_data *)data;
         block = USE_BLOCK(real->data);
         if (!NIL_P(block))
-                rb_funcall(block, s_id_call, 1, GOBJ2RVAL(real->result));
+                rb_funcall(block, s_id_call, 1, GOBJ2RVAL_UNREF(real->result));
 
         return Qnil;
 }

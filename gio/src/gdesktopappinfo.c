@@ -31,13 +31,13 @@
 static VALUE
 desktopappinfo_new_from_filename(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
-        return GOBJ2RVAL(g_desktop_app_info_new_from_filename(RVAL2CSTR(filename)));
+        return GOBJ2RVAL_UNREF(g_desktop_app_info_new_from_filename(RVAL2CSTR(filename)));
 }
 
 static VALUE
 desktopappinfo_new_from_keyfile(G_GNUC_UNUSED VALUE self, VALUE keyfile)
 {
-        return GOBJ2RVAL(g_desktop_app_info_new_from_keyfile(RVAL2GKEYFILE(keyfile)));
+        return GOBJ2RVAL_UNREF(g_desktop_app_info_new_from_keyfile(RVAL2GKEYFILE(keyfile)));
 }
 
 static VALUE

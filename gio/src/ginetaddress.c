@@ -25,7 +25,7 @@
 static VALUE
 inetaddress_new_from_string(G_GNUC_UNUSED VALUE self, VALUE string)
 {
-        return GOBJ2RVAL(g_inet_address_new_from_string(RVAL2CSTR(string)));
+        return GOBJ2RVAL_UNREF(g_inet_address_new_from_string(RVAL2CSTR(string)));
 }
 
 /* TODO: Should this take an array instead? */
@@ -60,19 +60,19 @@ inetaddress_new_from_bytes(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                 break;
         }
 
-        return GOBJ2RVAL(g_inet_address_new_from_bytes(bytes, family));
+        return GOBJ2RVAL_UNREF(g_inet_address_new_from_bytes(bytes, family));
 }
 
 static VALUE
 inetaddress_new_any(G_GNUC_UNUSED VALUE self, VALUE family)
 {
-        return GOBJ2RVAL(g_inet_address_new_any(RVAL2GSOCKETFAMILY(family)));
+        return GOBJ2RVAL_UNREF(g_inet_address_new_any(RVAL2GSOCKETFAMILY(family)));
 }
 
 static VALUE
 inetaddress_new_loopback(G_GNUC_UNUSED VALUE self, VALUE family)
 {
-        return GOBJ2RVAL(g_inet_address_new_loopback(RVAL2GSOCKETFAMILY(family)));
+        return GOBJ2RVAL_UNREF(g_inet_address_new_loopback(RVAL2GSOCKETFAMILY(family)));
 }
 
 /* TODO: Return array of bytes instead? */

@@ -58,31 +58,31 @@
 static VALUE
 file_new_for_path(G_GNUC_UNUSED VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_file_new_for_path(RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_file_new_for_path(RVAL2CSTR(value)));
 }
 
 static VALUE
 file_new_for_uri(G_GNUC_UNUSED VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_file_new_for_uri(RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_file_new_for_uri(RVAL2CSTR(value)));
 }
 
 static VALUE
 file_new_for_commandline_arg(G_GNUC_UNUSED VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_file_new_for_commandline_arg(RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_file_new_for_commandline_arg(RVAL2CSTR(value)));
 }
 
 static VALUE
 file_parse_name(G_GNUC_UNUSED VALUE self, VALUE value)
 {
-        return GOBJ2RVAL(g_file_parse_name(RVAL2CSTR(value)));
+        return GOBJ2RVAL_UNREF(g_file_parse_name(RVAL2CSTR(value)));
 }
 
 static VALUE
 file_dup(VALUE self)
 {
-        return GOBJ2RVAL(g_file_dup(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_file_dup(_SELF(self)));
 }
 
 static VALUE
@@ -124,7 +124,7 @@ file_get_parse_name(VALUE self)
 static VALUE
 file_get_parent(VALUE self)
 {
-        return GOBJ2RVAL(g_file_get_parent(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_file_get_parent(_SELF(self)));
 }
 
 static VALUE
@@ -139,7 +139,7 @@ file_has_parent(int argc, VALUE *argv, VALUE self)
 static VALUE
 file_get_child(VALUE self, VALUE name)
 {
-        return GOBJ2RVAL(g_file_get_child(_SELF(self), RVAL2CSTR(name)));
+        return GOBJ2RVAL_UNREF(g_file_get_child(_SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE
@@ -152,7 +152,7 @@ file_get_child_for_display_name(VALUE self, VALUE name)
         if (file == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(file);
+        return GOBJ2RVAL_UNREF(file);
 }
 
 static VALUE
@@ -170,7 +170,7 @@ file_get_relative_path(VALUE self, VALUE other)
 static VALUE
 file_resolve_relative_path(VALUE self, VALUE path)
 {
-        return GOBJ2RVAL(g_file_resolve_relative_path(_SELF(self), RVAL2CSTR(path)));
+        return GOBJ2RVAL_UNREF(g_file_resolve_relative_path(_SELF(self), RVAL2CSTR(path)));
 }
 
 static VALUE
@@ -227,9 +227,9 @@ file_read(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_input_stream_close, (VALUE)&data);
 }
 
@@ -263,7 +263,7 @@ file_read_finish(VALUE self, VALUE result)
         if (stream == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(stream);
+        return GOBJ2RVAL_UNREF(stream);
 }
 
 typedef GFileOutputStream *(*CreateMethod)(GFile *,
@@ -310,9 +310,9 @@ create_method(CreateMethod method, int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_output_stream_close, (VALUE)&data);
 }
 
@@ -347,9 +347,9 @@ file_replace(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_output_stream_close, (VALUE)&data);
 }
 
@@ -398,7 +398,7 @@ write_finish_method(WriteFinishMethod method, VALUE self, VALUE result)
         if (stream == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(stream);
+        return GOBJ2RVAL_UNREF(stream);
 }
 
 static VALUE
@@ -485,7 +485,7 @@ file_query_info(int argc, VALUE *argv, VALUE self)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -523,7 +523,7 @@ file_query_info_finish(VALUE self, VALUE result)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -563,7 +563,7 @@ file_query_filesystem_info(int argc, VALUE *argv, VALUE self)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -601,7 +601,7 @@ file_query_filesystem_info_finish(VALUE self, VALUE result)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -618,7 +618,7 @@ file_query_default_handler(int argc, VALUE *argv, VALUE self)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -635,7 +635,7 @@ file_find_enclosing_mount(int argc, VALUE *argv, VALUE self)
         if (mount == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(mount);
+        return GOBJ2RVAL_UNREF(mount);
 }
 
 static VALUE
@@ -667,7 +667,7 @@ file_find_enclosing_mount_finish(VALUE self, VALUE result)
         if (mount == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(mount);
+        return GOBJ2RVAL_UNREF(mount);
 }
 
 struct file_enumerator_each_data
@@ -694,7 +694,7 @@ file_enumerator_each(VALUE data)
                 if (info == NULL)
                         break;
 
-                rb_yield(GOBJ2RVAL(info));
+                rb_yield(GOBJ2RVAL_UNREF(info));
         }
 
         return Qnil;
@@ -738,7 +738,7 @@ file_enumerate_children(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.enumerator);
+                return GOBJ2RVAL_UNREF(data.enumerator);
 
         rb_ensure(file_enumerator_each, (VALUE)&data,
                   file_enumerator_each_ensure, (VALUE)&data);
@@ -784,7 +784,7 @@ file_enumerate_children_finish(VALUE self, VALUE result)
         if (enumerator == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(enumerator);
+        return GOBJ2RVAL_UNREF(enumerator);
 }
 
 static VALUE
@@ -803,7 +803,7 @@ file_set_display_name(int argc, VALUE *argv, VALUE self)
         if (file == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(file);
+        return GOBJ2RVAL_UNREF(file);
 }
 
 static VALUE
@@ -841,7 +841,7 @@ file_set_display_name_finish(VALUE self, VALUE result)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 typedef gboolean (*CancellableMethod)(GFile *, GCancellable *, GError **);
@@ -1196,7 +1196,7 @@ file_set_attributes_finish(VALUE self, VALUE result)
                                           &error))
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -1355,7 +1355,7 @@ file_mount_mountable_finish(VALUE self, VALUE result)
         if (file == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(file);
+        return GOBJ2RVAL_UNREF(file);
 }
 
 typedef void (*UnmountEjectStopMountableMethod)(GFile *,
@@ -1520,7 +1520,7 @@ monitor_method(MonitorMethod method, int argc, VALUE *argv, VALUE self)
         if (monitor == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(monitor);
+        return GOBJ2RVAL_UNREF(monitor);
 }
 
 static VALUE
@@ -1803,9 +1803,9 @@ file_create_readwrite(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_io_stream_close, (VALUE)&data);
 }
 
@@ -1826,7 +1826,7 @@ readwrite_finish_method(ReadwriteFinishMethod method, VALUE self, VALUE result)
         if (stream == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(stream);
+        return GOBJ2RVAL_UNREF(stream);
 }
 
 static VALUE
@@ -1851,9 +1851,9 @@ file_open_readwrite(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_io_stream_close, (VALUE)&data);
 }
 
@@ -1899,9 +1899,9 @@ file_replace_readwrite(int argc, VALUE *argv, VALUE self)
                 rbgio_raise_error(error);
 
         if (!rb_block_given_p())
-                return GOBJ2RVAL(data.stream);
+                return GOBJ2RVAL_UNREF(data.stream);
 
-        return rb_ensure(rb_yield, GOBJ2RVAL(data.stream),
+        return rb_ensure(rb_yield, GOBJ2RVAL_UNREF(data.stream),
                          file_io_stream_close, (VALUE)&data);
 }
 

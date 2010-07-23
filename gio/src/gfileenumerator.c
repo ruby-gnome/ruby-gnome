@@ -36,7 +36,7 @@ fileenumerator_next_file(int argc, VALUE *argv, VALUE self)
         if (error != NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE

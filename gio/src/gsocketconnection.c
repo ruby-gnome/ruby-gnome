@@ -23,6 +23,19 @@
 #define _SELF(value) G_SOCKET_CONNECTION(RVAL2GOBJ(value))
 
 static VALUE
+socketconnection_get_local_address(VALUE self)
+{
+        GError *error = NULL;
+        GSocketAddress *address;
+
+        address = g_socket_connection_get_local_address(_SELF(self), &error);
+        if (address == NULL)
+                rbgio_raise_error(error);
+
+        return GOBJ2RVAL_UNREF(address);
+}
+
+static VALUE
 socketconnection_get_remote_address(VALUE self)
 {
         GError *error = NULL;
@@ -32,7 +45,7 @@ socketconnection_get_remote_address(VALUE self)
         if (address == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(address);
+        return GOBJ2RVAL_UNREF(address);
 }
 
 static VALUE
@@ -44,7 +57,7 @@ socketconnection_get_socket(VALUE self)
 static VALUE
 socketconnectionfactory_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
 {
-        return GOBJ2RVAL(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
+        return GOBJ2RVAL_UNREF(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
 }
 
 /* TODO: lookup_type */
@@ -58,6 +71,7 @@ Init_gsocketconnection(VALUE glib)
 
         socketconnection = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", glib);
 
+        rb_define_method(socketconnection, "local_address", socketconnection_get_local_address, 0);
         rb_define_method(socketconnection, "remote_address", socketconnection_get_remote_address, 0);
         rb_define_method(socketconnection, "socket", socketconnection_get_socket, 0);
 

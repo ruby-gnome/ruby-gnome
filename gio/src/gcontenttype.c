@@ -53,7 +53,7 @@ contenttype_get_mime_type(G_GNUC_UNUSED VALUE type)
 static VALUE
 contenttype_get_icon(G_GNUC_UNUSED VALUE type)
 {
-        return GOBJ2RVAL(g_content_type_get_icon(RVAL2CSTR(type)));
+        return GOBJ2RVAL_UNREF(g_content_type_get_icon(RVAL2CSTR(type)));
 }
 
 static VALUE

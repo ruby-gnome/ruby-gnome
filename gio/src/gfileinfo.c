@@ -42,7 +42,7 @@ fileinfo_initialize(VALUE self)
 static VALUE
 fileinfo_dup(VALUE self)
 {
-        return GOBJ2RVAL(g_file_info_dup(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_file_info_dup(_SELF(self)));
 }
 
 /* TODO: Does this make sense from the Ruby side? */

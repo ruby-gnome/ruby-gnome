@@ -55,7 +55,7 @@ networkaddress_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE defaul
         if (connectable == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(connectable);
+        return GOBJ2RVAL_UNREF(connectable);
 }
 
 void

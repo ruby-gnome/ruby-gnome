@@ -27,7 +27,7 @@
 static VALUE
 asyncresult_get_source_object(VALUE self)
 {
-        return GOBJ2RVAL(g_async_result_get_source_object(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_async_result_get_source_object(_SELF(self)));
 }
 
 void

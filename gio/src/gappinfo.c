@@ -45,7 +45,7 @@ appinfo_create_from_commandline(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         if (info == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL(info);
+        return GOBJ2RVAL_UNREF(info);
 }
 
 static VALUE
@@ -81,14 +81,14 @@ appinfo_get_default_for_type(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
         rb_scan_args(argc, argv, "11", &content_type, &must_support_uris);
 
-        return GOBJ2RVAL(g_app_info_get_default_for_type(RVAL2CSTR(content_type),
-                                                         RVAL2CBOOL(must_support_uris)));
+        return GOBJ2RVAL_UNREF(g_app_info_get_default_for_type(RVAL2CSTR(content_type),
+                                                               RVAL2CBOOL(must_support_uris)));
 }
 
 static VALUE
 appinfo_get_default_for_uri_scheme(G_GNUC_UNUSED VALUE self, VALUE uri_scheme)
 {
-        return GOBJ2RVAL(g_app_info_get_default_for_uri_scheme(RVAL2CSTR(uri_scheme)));
+        return GOBJ2RVAL_UNREF(g_app_info_get_default_for_uri_scheme(RVAL2CSTR(uri_scheme)));
 }
 
 static VALUE
@@ -109,7 +109,7 @@ appinfo_launch_default_for_uri(int argc, VALUE *argv, VALUE self)
 static VALUE
 appinfo_dup(VALUE self)
 {
-        return GOBJ2RVAL(g_app_info_dup(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_app_info_dup(_SELF(self)));
 }
 
 static VALUE

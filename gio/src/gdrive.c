@@ -34,7 +34,7 @@ drive_get_name(VALUE self)
 static VALUE
 drive_get_icon(VALUE self)
 {
-        return GOBJ2RVAL(g_drive_get_icon(_SELF(self)));
+        return GOBJ2RVAL_UNREF(g_drive_get_icon(_SELF(self)));
 }
 
 static VALUE

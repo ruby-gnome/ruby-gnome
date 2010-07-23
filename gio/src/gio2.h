@@ -212,6 +212,8 @@ GType g_file_attribute_info_list_get_type();
 #define CSTR2RVAL_TAINTED_FREE(string, length) \
         rbgio_cstr_to_rval_tainted_free((string), (length))
 
+#define GLIST2ARY_UNREF_FREE(list) rbgio_glist_to_ary_unref_free(list)
+
 #define GFDS2ARY(fds) rbgio_fds_to_ary(fds)
 #define GFDS2ARY_FREE(fds) rbgio_fds_to_ary_free(fds)
 
@@ -226,6 +228,7 @@ G_GNUC_INTERNAL VALUE rbgio_cstr_to_rval_tainted(const char *string,
                                                  gsize length);
 G_GNUC_INTERNAL VALUE rbgio_cstr_to_rval_tainted_free(char *string,
                                                       gsize length);
+G_GNUC_INTERNAL VALUE rbgio_glist_to_ary_unref_free(GList *list);
 G_GNUC_INTERNAL VALUE rbgio_fds_to_ary(const gint *fds);
 G_GNUC_INTERNAL VALUE rbgio_fds_to_ary_free(gint *fds);
 G_GNUC_INTERNAL GList *rbgio_gfile_ary_to_glist(VALUE ary);
