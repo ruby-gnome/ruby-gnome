@@ -40,138 +40,220 @@ rbgutil_set_properties(self, hash)
 }
 
 VALUE
-rbgutil_glist2ary(list)
-    GList *list;
+rbgutil_glist2ary(const GList *const list)
 {
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, GOBJ2RVAL(list->data));
-        list = list->next;
-    }
-    return ary;
-}
-
-VALUE
-rbgutil_glist2ary_and_free(list)
-    GList *list;
-{
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, GOBJ2RVAL(list->data));
-        list = list->next;
-    }
-    g_list_free(list);
-    return ary;
-}
-
-VALUE
-rbgutil_glist2ary_boxed(list, gtype)
-    GList *list;
-    GType gtype;
-{
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
-        list = list->next;
-    }
-    return ary;
-}
-
-VALUE
-rbgutil_glist2ary_boxed_and_free(list, gtype)
-    GList *list;
-    GType gtype;
-{
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
-        list = list->next;
-    }
-    g_list_free(list);
-    return ary;
-}
-
-VALUE
-rbgutil_glist2ary_string(GList *list)
-{
-    VALUE array;
-
-    array = rb_ary_new();
-    while (list) {
-        rb_ary_push(array, CSTR2RVAL(list->data));
-        list = g_list_next(list);
-    }
-    return array;
-}
-
-VALUE
-rbgutil_glist2ary_string_and_free(GList *list)
-{
-    VALUE array;
-    GList *node;
-
-    array = rb_ary_new();
-    for (node = list; node; node = g_list_next(node)) {
-	gchar *string = node->data;
-
-	rb_ary_push(array, CSTR2RVAL(string));
-	g_free(string);
-    }
-    g_list_free(list);
-    return array;
-}
-
-VALUE
-rbgutil_gslist2ary(list)
-    GSList *list;
-{
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, GOBJ2RVAL(list->data));
-        list = list->next;
-    }
-    return ary;
-}
-
-VALUE
-rbgutil_gslist2ary_boxed(list, gtype)
-    GSList *list;
-    GType gtype;
-{
-    VALUE ary = rb_ary_new();
-    while (list) {
-        rb_ary_push(ary, BOXED2RVAL(list->data, gtype));
-        list = list->next;
-    }
-    return ary;
-}
-
-VALUE
-rbgutil_gslist2ary_and_free(GSList *list)
-{
-    GSList *node;
     VALUE ary;
+    const GList *i;
 
     ary = rb_ary_new();
-    for (node = list; node; node = g_slist_next(node)) {
-        rb_ary_push(ary, GOBJ2RVAL(node->data));
-    }
-    g_slist_free(list);
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, GOBJ2RVAL(i->data));
+
     return ary;
 }
 
 VALUE
-rbgutil_gslist2ary_boxed_and_free(GSList *list, GType gtype)
+rbgutil_glist2ary_and_free_body(VALUE data)
 {
-    GSList *node;
     VALUE ary;
+    GList *i;
 
     ary = rb_ary_new();
-    for (node = list; node; node = g_slist_next(node)) {
-        rb_ary_push(ary, BOXED2RVAL(node->data, gtype));
-    }
-    g_slist_free(list);
+    for (i = (GList *)data; i != NULL; i = i->next)
+        rb_ary_push(ary, GOBJ2RVAL(i->data));
+
     return ary;
+}
+
+VALUE
+rbgutil_glist2ary_and_free_ensure(VALUE data)
+{
+    g_list_free((GList *)data);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_glist2ary_and_free(GList *const list)
+{
+    return rb_ensure(rbgutil_glist2ary_and_free_body, (VALUE)list,
+                     rbgutil_glist2ary_and_free_ensure, (VALUE)list);
+}
+
+VALUE
+rbgutil_glist2ary_boxed(const GList *const list, GType gtype)
+{
+    VALUE ary;
+    const GList *i;
+
+    ary = rb_ary_new();
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, BOXED2RVAL(i->data, gtype));
+
+    return ary;
+}
+
+struct rbgutil_glist2ary_boxed_and_free_data
+{
+    GList *const list;
+    GType gtype;
+};
+
+VALUE
+rbgutil_glist2ary_boxed_and_free_body(VALUE data)
+{
+    struct rbgutil_glist2ary_boxed_and_free_data *real;
+    VALUE ary;
+    GList *i;
+
+    real = (struct rbgutil_glist2ary_boxed_and_free_data *)data;
+    ary = rb_ary_new();
+    for (i = real->list; i != NULL; i = i->next)
+        rb_ary_push(ary, BOXED2RVAL(i->data, real->gtype));
+
+    return ary;
+}
+
+VALUE
+rbgutil_glist2ary_boxed_and_free_ensure(VALUE data)
+{
+    g_list_free(((struct rbgutil_glist2ary_boxed_and_free_data *)data)->list);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_glist2ary_boxed_and_free(GList *const list, GType gtype)
+{
+    struct rbgutil_glist2ary_boxed_and_free_data data = { list, gtype };
+
+    return rb_ensure(rbgutil_glist2ary_boxed_and_free_body, (VALUE)&data,
+                     rbgutil_glist2ary_boxed_and_free_ensure, (VALUE)&data);
+}
+
+VALUE
+rbgutil_glist2ary_string(const GList *const list)
+{
+    VALUE ary;
+    const GList *i;
+
+    ary = rb_ary_new();
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, CSTR2RVAL(i->data));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_glist2ary_string_and_free_body(VALUE data)
+{
+    VALUE ary;
+    GList *i;
+
+    ary = rb_ary_new();
+    for (i = (GList *)data; i != NULL; i = i->next)
+        rb_ary_push(ary, CSTR2RVAL_FREE(i->data));
+
+    return ary;
+}
+
+VALUE
+rbgutil_glist2ary_string_and_free(GList *const list)
+{
+    return rb_ensure(rbgutil_glist2ary_string_and_free_body, (VALUE)list,
+                     rbgutil_glist2ary_and_free_ensure, (VALUE)list);
+}
+
+VALUE
+rbgutil_gslist2ary(const GSList *const list)
+{
+    VALUE ary;
+    const GSList *i;
+    
+    ary = rb_ary_new();
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, GOBJ2RVAL(i->data));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_gslist2ary_and_free_body(VALUE data)
+{
+    VALUE ary;
+    GSList *i;
+
+    ary = rb_ary_new();
+    for (i = (GSList *)data; i != NULL; i = i->next)
+        rb_ary_push(ary, GOBJ2RVAL(i->data));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_gslist2ary_and_free_ensure(VALUE data)
+{
+    g_slist_free((GSList *)data);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_gslist2ary_and_free(GSList *const list)
+{
+    return rb_ensure(rbgutil_gslist2ary_and_free_body, (VALUE)&list,
+                     rbgutil_gslist2ary_and_free_ensure, (VALUE)&list);
+}
+
+VALUE
+rbgutil_gslist2ary_boxed(const GSList *const list, GType gtype)
+{
+    VALUE ary;
+    const GSList *i;
+    
+    ary = rb_ary_new();
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, BOXED2RVAL(i->data, gtype));
+
+    return ary;
+}
+
+struct rbgutil_gslist2ary_boxed_and_free_data
+{
+    GSList *const list;
+    GType gtype;
+};
+
+static VALUE
+rbgutil_gslist2ary_boxed_and_free_body(VALUE data)
+{
+    struct rbgutil_gslist2ary_boxed_and_free_data *real;
+    VALUE ary;
+    GSList *i;
+
+    real = (struct rbgutil_gslist2ary_boxed_and_free_data *)data;
+    ary = rb_ary_new();
+    for (i = real->list; i != NULL; i = i->next)
+        rb_ary_push(ary, BOXED2RVAL(i->data, real->gtype));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_gslist2ary_boxed_and_free_ensure(VALUE data)
+{
+    g_slist_free(((struct rbgutil_gslist2ary_boxed_and_free_data *)data)->list);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_gslist2ary_boxed_and_free(GSList *const list, GType gtype)
+{
+    struct rbgutil_gslist2ary_boxed_and_free_data data = { list, gtype };
+
+    return rb_ensure(rbgutil_gslist2ary_boxed_and_free_body, (VALUE)&data,
+                     rbgutil_gslist2ary_boxed_and_free_ensure, (VALUE)&data);
 }
 
 VALUE

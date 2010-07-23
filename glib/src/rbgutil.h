@@ -51,16 +51,16 @@ extern "C" {
 
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
-extern VALUE rbgutil_glist2ary(GList* list);
-extern VALUE rbgutil_glist2ary_boxed(GList* list, GType gtype);
-extern VALUE rbgutil_glist2ary_string(GList* list);
+extern VALUE rbgutil_glist2ary(const GList *list);
 extern VALUE rbgutil_glist2ary_and_free(GList* list);
-extern VALUE rbgutil_glist2ary_boxed_and_free(GList* list, GType gtype);
-extern VALUE rbgutil_glist2ary_string_and_free(GList* list);
-extern VALUE rbgutil_gslist2ary(GSList* list);
-extern VALUE rbgutil_gslist2ary_and_free(GSList* list);
-extern VALUE rbgutil_gslist2ary_boxed(GSList* list, GType gtype);
-extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList* list, GType gtype);
+extern VALUE rbgutil_glist2ary_boxed(const GList *list, GType gtype);
+extern VALUE rbgutil_glist2ary_boxed_and_free(GList *list, GType gtype);
+extern VALUE rbgutil_glist2ary_string(const GList *list);
+extern VALUE rbgutil_glist2ary_string_and_free(GList *list);
+extern VALUE rbgutil_gslist2ary(const GSList *list);
+extern VALUE rbgutil_gslist2ary_and_free(GSList *list);
+extern VALUE rbgutil_gslist2ary_boxed(const GSList *list, GType gtype);
+extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList *list, GType gtype);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);

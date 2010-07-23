@@ -1,3 +1,9 @@
+2010-07-23  Nikolai Weibull
+
+	src/rbgutil.c: use rb_ensure around all *_free functions and also fix a
+	bug that made sure that no lists were actually freed.  That's the price
+	of reusing variables.
+
 2010-07-14  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbglib.c: fix coding style.
