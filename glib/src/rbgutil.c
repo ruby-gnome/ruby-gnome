@@ -152,16 +152,28 @@ rbgutil_glist2ary_string_and_free_body(VALUE data)
 
     ary = rb_ary_new();
     for (i = (GList *)data; i != NULL; i = i->next)
-        rb_ary_push(ary, CSTR2RVAL_FREE(i->data));
+        rb_ary_push(ary, CSTR2RVAL(i->data));
 
     return ary;
+}
+
+static VALUE
+rbgutil_glist2ary_string_and_free_ensure(VALUE data)
+{
+    GList *i;
+
+    for (i = (GList *)data; i != NULL; i = i->next)
+        g_free(i->data);
+    g_list_free((GList *)data);
+
+    return Qnil;
 }
 
 VALUE
 rbgutil_glist2ary_string_and_free(GList *const list)
 {
     return rb_ensure(rbgutil_glist2ary_string_and_free_body, (VALUE)list,
-                     rbgutil_glist2ary_and_free_ensure, (VALUE)list);
+                     rbgutil_glist2ary_string_and_free_ensure, (VALUE)list);
 }
 
 VALUE

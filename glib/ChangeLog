@@ -1,3 +1,8 @@
+2010-07-24  Nikolai Weibull
+
+	src/rbgutil.c: make sure that all strings are fred in
+	rbgutil_glist2ary_string_and_free.
+
 2010-07-23  Nikolai Weibull
 
 	src/rbgutil.c: use rb_ensure around all *_free functions and also fix a
