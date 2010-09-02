@@ -1,3 +1,7 @@
+2010-09-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ./: reconstruct directory structure for rake-compiler.
+
 2010-07-24  Nikolai Weibull
 
 	src/rbgutil.c: make sure that all strings are fred in

@@ -2,11 +2,13 @@
 extconf.rb for Ruby/GLib extention library
 =end
 
-TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
-MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
+require 'pathname'
+
+TOPDIR = Pathname(__FILE__).dirname.parent.parent.expand_path
+MKMF_GNOME2_DIR = TOPDIR + 'lib'
 SRCDIR = TOPDIR + '/glib/src'
 
-$LOAD_PATH.unshift MKMF_GNOME2_DIR
+$LOAD_PATH.unshift MKMF_GNOME2_DIR.to_s
 
 PACKAGE_NAME = "glib2"
 PACKAGE_ID   = "gobject-2.0"
@@ -43,19 +45,18 @@ have_var("rb_curr_thread", [ruby_header, "node.h"])
 
 create_pkg_config_file("Ruby/GLib2", PACKAGE_ID)
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_GLIB2_COMPILATION") do
-  enum_type_prefix = "glib-enum-types"
-  include_paths = PKGConfig.cflags_only_I("glib-2.0")
-  headers = include_paths.split.inject([]) do |result, path|
-    result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
-  end.reject do |file|
-    /g(iochannel|scanner)\.h/ =~ file
-  end
-  include_paths = PKGConfig.cflags_only_I("gobject-2.0")
-  headers = include_paths.split.inject(headers) do |result, path|
-    result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
-  end
-  glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
+enum_type_prefix = "glib-enum-types"
+include_paths = PKGConfig.cflags_only_I("glib-2.0")
+headers = include_paths.split.inject([]) do |result, path|
+  result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
+end.reject do |file|
+  /g(iochannel|scanner)\.h/ =~ file
 end
+include_paths = PKGConfig.cflags_only_I("gobject-2.0")
+headers = include_paths.split.inject(headers) do |result, path|
+  result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
+end
+glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
 
-create_top_makefile
+$defs << "-DRUBY_GLIB2_COMPILATION"
+create_makefile(PACKAGE_NAME)
