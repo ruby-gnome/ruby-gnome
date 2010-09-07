@@ -348,11 +348,12 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
 
     $objs = []
     srcs = Dir[File.join(source_dir, "*.{#{SRC_EXT.join(',')}}")]
-    (["#{prefix}.c"] + srcs).each do |f|
+    srcs.each do |f|
       obj = File.basename(f, ".*") << ".o"
-      $objs.push(obj) unless $objs.index(obj)
+      add_obj(obj)
     end
   end
+  add_obj("#{prefix}.o")
 end
 
 def check_cairo
