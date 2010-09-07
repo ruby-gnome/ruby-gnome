@@ -10,7 +10,13 @@
 #
 
 require 'mkmf'
-require 'pkg-config'
+begin
+  require 'pkg-config'
+rescue LoadError
+  require 'rubygems'
+  gem 'pkg-config'
+  require 'pkg-config'
+end
 require 'glib-mkenums'
 
 unless defined?(macro_defined?)
@@ -335,6 +341,18 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
   add_distcleanfile(prefix + ".h")
   add_distcleanfile(prefix + ".c")
   GLib::MkEnums.create(prefix, files, g_type_prefix, include_files, options)
+
+  if $objs.nil?
+    source_dir = '$(srcdir)'
+    RbConfig.expand(source_dir)
+
+    $objs = []
+    srcs = Dir[File.join(source_dir, "*.{#{SRC_EXT.join(',')}}")]
+    (["#{prefix}.c"] + srcs).each do |f|
+      obj = File.basename(f, ".*") << ".o"
+      $objs.push(obj) unless $objs.index(obj)
+    end
+  end
 end
 
 def check_cairo
@@ -373,7 +391,7 @@ def check_cairo
 end
 
 add_include_path = Proc.new do |dir_variable|
-  value = Config::CONFIG[dir_variable]
+  value = RbConfig::CONFIG[dir_variable]
   if value and File.exist?(value)
     $INCFLAGS << " -I$(#{dir_variable}) "
   end
