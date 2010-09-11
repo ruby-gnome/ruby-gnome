@@ -751,18 +751,16 @@ idle_add(argc, argv, self)
     VALUE arg1, arg2, func, rb_id;
     callback_info_t *info;
     guint id;
-    gint priority;
+    gint priority = G_PRIORITY_DEFAULT_IDLE;
 
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(arg1, rb_cProc))) {
-        priority = G_PRIORITY_DEFAULT;
         func = arg1;
     } else if (RVAL2CBOOL(rb_obj_is_kind_of(arg1, rb_cInteger))) {
         priority = NUM2INT(arg1);
         func = rb_block_proc();
     } else {
-        priority = G_PRIORITY_DEFAULT;
         func = rb_block_proc();
     }
 
