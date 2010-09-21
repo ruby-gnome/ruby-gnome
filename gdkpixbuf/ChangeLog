@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ./: make buidlable with rake-compiler.
+
 	* ./: reconstruct for cross compile.
 
 2009-10-11  Michal Suchanek <hramrach@centrum.cz>

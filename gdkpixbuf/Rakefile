@@ -66,7 +66,6 @@ namespace :win32 do
   task :download do
     $LOAD_PATH.unshift((@rb_glib2_dir + "lib").to_s)
     require 'gnome2-win32-binary-downloader'
-    GNOME2Win32BinaryDownloader.download(:package => "gtk+",
-                                         :dependencies => ["gettext-runtime"])
+    GNOME2Win32BinaryDownloader.download(:package => "gtk+")
   end
 end
