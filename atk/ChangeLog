@@ -1,3 +1,7 @@
+2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/: -> lib/
+
 2009-05-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/depend: use RUBYARCHDIR.
