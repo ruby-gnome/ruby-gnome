@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (#check_cairo): follow rcairo's path change.
+
 	* ext/glib/extconfr.b, lib/mkmf-gnome2.rb: share Windows setup code.
 
 	* Rakefile, lib/gnome2-win32-binary-downloader.rb: share

@@ -70,7 +70,7 @@ def setup_win32(target_name, base_dir=nil)
 end
 
 #add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
-def add_depend_package(target_name, target_srcdir, top_srcdir)
+def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   [top_srcdir, $configure_args['--topdir']].each do |topdir|
     topdir = File.expand_path(topdir)
     if RUBY_VERSION < "1.8.5"
@@ -78,12 +78,13 @@ def add_depend_package(target_name, target_srcdir, top_srcdir)
     else
       $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
     end
+    target_build_dir = options[:target_build_dir] || target_srcdir
 
     if /cygwin|mingw/ =~ RUBY_PLATFORM
       $libs << " -lruby-#{target_name}"
-      $LDFLAGS << " -L#{topdir}/#{target_srcdir}"
+      $LDFLAGS << " -L#{topdir}/#{target_build_dir}"
     elsif /mswin32/ =~ RUBY_PLATFORM
-      $DLDFLAGS << " /libpath:#{topdir}/#{target_srcdir}"
+      $DLDFLAGS << " /libpath:#{topdir}/#{target_build_dir}"
       $libs << " libruby-#{target_name}.lib"
     end
   end
@@ -318,8 +319,8 @@ def check_cairo
       gem 'cairo'
       require 'cairo'
       rcairo_src_gem_path_re =
-        /\A#{Regexp.escape(Gem.dir)}\/gems\/cairo-[\d.]+\/src\z/
-      $:.each do |path|
+        /\A#{Regexp.escape(Gem.dir)}\/gems\/cairo-[\d.]+\/ext\/cairo\z/
+      $LOAD_PATH.each do |path|
         if rcairo_src_gem_path_re =~ path
           $CFLAGS += " -I#{path} "
           have_rb_cairo_h = have_header('rb_cairo.h')
