@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ./: make buildable by rake-compiler.
+
 	* src/ -> ext/pango/
 
 	* src/lib/: -> lib/
