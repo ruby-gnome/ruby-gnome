@@ -309,9 +309,14 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
   add_obj("#{prefix}.o")
 end
 
-def check_cairo
+def check_cairo(options={})
   return false unless PKGConfig.have_package('cairo')
 
+  rcairo_source_dir = options[:rcairo_source_dir]
+  if rcairo_source_dir and !File.exist?(rcairo_source_dir)
+    rcairo_source_dir = nil
+  end
+  $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo" if rcairo_source_dir
   have_rb_cairo_h = have_header('rb_cairo.h')
   unless have_rb_cairo_h
     begin
@@ -333,11 +338,12 @@ def check_cairo
 
   if have_rb_cairo_h
     if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-      unless ENV["CAIRO_PATH"]
-        puts "Error! Set CAIRO_PATH."
-        exit 1
+      options = {}
+      build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
+      if File.exist?(File.join(rcairo_source_dir, build_dir))
+        options[:target_build_dir] = build_dir
       end
-      add_depend_package("cairo", "src", ENV["CAIRO_PATH"])
+      add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
       $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
     end
   end
