@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ./: make buildable with rake-compiler.
+
 	* src/: -> ext/atk/
 
 	* src/lib/: -> lib/
