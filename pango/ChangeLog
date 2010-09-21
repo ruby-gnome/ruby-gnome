@@ -1,3 +1,7 @@
+2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/: -> lib/
+
 2010-02-02  Hiroyuki Ito <ZXB01226@nifty.com>
 
 	* src/rbpangogravity.c (Init_pango_gravity): remove redundant
