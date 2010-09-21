@@ -1,2 +1,3 @@
 install:
+	$(MAKEDIRS) $(libdir)/pkgconfig
 	$(INSTALL_DATA) ruby-gdkpixbuf2.pc $(libdir)/pkgconfig

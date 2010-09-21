@@ -1,31 +1,48 @@
-=begin
-extconf.rb for Ruby/GdkPixbuf2 extention library
-=end
+#!/usr/bin/env ruby
 
-PACKAGE_NAME = "gdk_pixbuf2"
-PACKAGE_ID   = "gdk-pixbuf-2.0"
+require 'pathname'
+require 'mkmf'
+require 'rbconfig'
+require 'fileutils'
 
-TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
-MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
-SRCDIR = TOPDIR + '/gdkpixbuf'
+package = "gdk_pixbuf2"
 
-$LOAD_PATH.unshift MKMF_GNOME2_DIR
+base_dir = Pathname(__FILE__).dirname.expand_path
+ext_dir = base_dir + "ext" + package
+mkmf_gnome2_dir = base_dir + 'lib'
 
-require 'mkmf-gnome2'
+ruby = File.join(RbConfig::CONFIG['bindir'],
+                 RbConfig::CONFIG['ruby_install_name'] +
+                 RbConfig::CONFIG["EXEEXT"])
 
-PKGConfig.have_package(PACKAGE_ID) or exit 1
-
-setup_win32(PACKAGE_NAME)
-
-have_func("gdk_pixbuf_set_option", "gdk-pixbuf/gdk-pixbuf.h") do |src|
-  "#define GDK_PIXBUF_ENABLE_BACKEND\n#{src}"
-end
-have_header("gdk-pixbuf/gdk-pixbuf-io.h")
-
-if PKGConfig.have_package('gdk-2.0')
-  check_cairo
+Dir.chdir(ext_dir.to_s) do
+  system(ruby, "extconf.rb", *ARGV) || exit(false)
 end
 
-add_depend_package("glib2", "glib/src", TOPDIR)
-create_pkg_config_file("Ruby/GdkPixbuf2", PACKAGE_ID)
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR)
+create_makefile(package)
+FileUtils.mv("Makefile", "Makefile.lib")
+
+File.open("Makefile", "w") do |makefile|
+  makefile.puts(<<-EOM)
+all:
+	(cd ext/#{package} && $(MAKE))
+	$(MAKE) -f Makefile.lib
+
+install:
+	(cd ext/#{package} && $(MAKE) install)
+	$(MAKE) -f Makefile.lib install
+
+site-install:
+	(cd ext/#{package} && $(MAKE) site-install)
+	$(MAKE) -f Makefile.lib site-install
+
+clean:
+	(cd ext/#{package} && $(MAKE) clean)
+	$(MAKE) -f Makefile.lib clean
+
+distclean:
+	(cd ext/#{package} && $(MAKE) distclean)
+	$(MAKE) -f Makefile.lib distclean
+	@rm -f Makefile.lib
+EOM
+end
