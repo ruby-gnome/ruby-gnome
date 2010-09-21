@@ -25,7 +25,19 @@ end
 have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
 if PKGConfig.have_package('gdk-2.0')
-  check_cairo
+  options = {}
+  rcairo_source_dir_names = ["rcairo"]
+  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+    rcairo_source_dir_names.unshift("rcairo.win32")
+  end
+  rcairo_source_dir_names.each do |rcairo_source_dir_name|
+    rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+    if rcairo_source_dir.exist?
+      options[:rcairo_source_dir] = rcairo_source_dir.to_s
+      break
+    end
+  end
+  check_cairo(options)
 end
 
 build_dir = "glib/tmp/#{RUBY_PLATFORM}/glib2/#{RUBY_VERSION}"
