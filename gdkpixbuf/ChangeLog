@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add dependencies.
+
 	* ext/gdk_pixbuf2/extconf.rb: use relative rcairo path if it exists.
 
 	* ./: make buidlable with rake-compiler.
