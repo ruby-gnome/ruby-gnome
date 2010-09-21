@@ -1,5 +1,7 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/ -> ext/pango/
+
 	* src/lib/: -> lib/
 
 2010-02-02  Hiroyuki Ito <ZXB01226@nifty.com>
