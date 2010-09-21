@@ -1,6 +1,8 @@
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
-	* glib/Rakefile, lib/gnome2-win32-binary-downloader.rb: share
+	* ext/glib/extconfr.b, lib/mkmf-gnome2.rb: share Windows setup code.
+
+	* Rakefile, lib/gnome2-win32-binary-downloader.rb: share
 	Windows binary file downloader.
 
 2010-09-11  Kouhei Sutou  <kou@cozmixng.org>

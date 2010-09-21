@@ -48,73 +48,25 @@ if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   $CFLAGS += " -I#{include_path} "
 end
 
-def check_win32()
-  $G_PLATFORM_WIN32 = false
-  $G_OS_WIN32       = false
-  $G_WITH_CYGWIN    = false
-
-  STDOUT.print("checking for G_PLATFORM_WIN32... ")
-  STDOUT.flush
-  if macro_defined?('G_PLATFORM_WIN32', "#include <glibconfig.h>\n")
-    STDOUT.print "yes\n"
-    $G_PLATFORM_WIN32 = true
-  else
-    STDOUT.print "no\n"
-  end
-
-  if $G_PLATFORM_WIN32
-    STDOUT.print("checking for G_OS_WIN32... ")
-    STDOUT.flush
-    if macro_defined?('G_OS_WIN32', "#include <glibconfig.h>\n")
-      STDOUT.print "yes\n"
-      $G_OS_WIN32 = true
-      if $cc_is_gcc
-	if /^2\./ =~ `#{Config::CONFIG['CC']} -dumpversion`.chomp
-	  $CFLAGS += ' -fnative-struct'
-	else
-	  $CFLAGS += ' -mms-bitfields'
-	end
-      end
+def setup_win32(target_name, base_dir=nil)
+  checking_for(checking_message("Win32 OS")) do
+    case RUBY_PLATFORM
+    when /cygwin|mingw|mswin32/
+      import_library_name = "libruby-#{target_name}.a"
+      $DLDFLAGS << " -Wl,--out-implib=#{import_library_name}"
+      $cleanfiles << import_library_name
+      base_dir ||= Pathname($0).dirname.parent.parent.expand_path
+      base_dir = Pathname(base_dir) if base_dir.is_a?(String)
+      binary_base_dir = base_dir + "vendor" + "local"
+      $CFLAGS += " -I#{binary_base_dir}/include"
+      pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
+      PKGConfig.add_path(pkg_config_dir.to_s)
+      PKGConfig.set_override_variable("prefix", binary_base_dir.to_s)
+      true
     else
-      STDOUT.print "no\n"
+      false
     end
-
-#    STDOUT.print("checking for G_WITH_CYGWIN... ")
-#    STDOUT.flush
-#    if macro_defined?('G_WITH_CYGWIN', "#include <glibconfig.h>\n")
-#      STDOUT.print "yes\n"
-#      $G_WITH_CYGWIN = true
-#    else
-#      STDOUT.print "no\n"
-#    end
   end
-
-  nil
-end
-
-def set_output_lib(target_name)
-  if /cygwin|mingw/ =~ RUBY_PLATFORM
-    filename = "libruby-#{target_name}.a"
-    if RUBY_VERSION > "1.8.0"
-      $DLDFLAGS << ",--out-implib=#{filename}" if filename
-    elsif RUBY_VERSION > "1.8"
-      $DLDFLAGS.gsub!(/ -Wl,--out-implib=[^ ]+/, '')
-      $DLDFLAGS << " -Wl,--out-implib=#{filename}" if filename
-    else
-      $DLDFLAGS.gsub!(/ --output-lib\s+[^ ]+/, '')
-      $DLDFLAGS << " --output-lib #{filename}" if filename
-    end
-  elsif /mswin32/ =~ RUBY_PLATFORM
-      filename = "libruby-#{target_name}.lib"
-      $DLDFLAGS.gsub!(/ --output-lib\s+[^ ]+/, '')
-      $DLDFLAGS.gsub!(/ \/IMPLIB:[^ ]+/, '')
-      $DLDFLAGS << " /IMPLIB:#{filename}" if filename   
-  end
-end
-
-def setup_win32(target_name)
-  check_win32
-  set_output_lib(target_name)
 end
 
 #add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")

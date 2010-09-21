@@ -14,22 +14,7 @@ package_id = "gobject-2.0"
 
 require 'mkmf-gnome2'
 
-checking_for(checking_message("Win32 OS")) do
-  case RUBY_PLATFORM
-  when /cygwin|mingw|mswin32/
-    import_library_name = "libruby-#{module_name}.a"
-    $DLDFLAGS << " -Wl,--out-implib=#{import_library_name}"
-    $cleanfiles << import_library_name
-    binary_base_dir = base_dir + "vendor" + "local"
-    $CFLAGS += " -I#{binary_base_dir}/include"
-    pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
-    PKGConfig.add_path(pkg_config_dir.to_s)
-    PKGConfig.set_override_variable("prefix", binary_base_dir.to_s)
-    true
-  else
-    false
-  end
-end
+setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
 PKGConfig.have_package('gthread-2.0')
