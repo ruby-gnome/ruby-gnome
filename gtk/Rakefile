@@ -41,6 +41,7 @@ spec = Gem::Specification.new do |s|
   s.add_dependency("cairo", ">= 1.10.0")
   s.add_dependency("glib2", "= #{version}")
   s.add_dependency("pango", "= #{version}")
+  s.add_dependency("atk", "= #{version}")
   s.extensions = FileList["ext/#{package_name}/extconf.rb"]
   s.require_paths = ["lib"]
   s.files = FileList["ChangeLog", "README", "Rakefile", "extconf.rb",
