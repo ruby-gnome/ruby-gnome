@@ -2,14 +2,6 @@
 
 	* gio/: add.
 
-2010-06-02  Kouhei Sutou  <kou@cozmixng.org>
-
-	* NEWS: Ruby/Poppler: fix license: LGPL 2.1 -> GPL.
-
-	* README: fix Ruby/Poppler license.
-
-	* COPYING: add.
-
 2010-05-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: add Gtk::Buildable#builder_name/set_builder_name.
