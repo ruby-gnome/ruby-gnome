@@ -1,3 +1,7 @@
+2010-09-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/: -> lib/.
+
 2008-11-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: add missing librsvg/rsvg-cairo.h check.
