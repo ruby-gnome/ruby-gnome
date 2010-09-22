@@ -1,11 +1,3 @@
-2010-06-02  Kouhei Sutou  <kou@cozmixng.org>
-
-	* README: fix Ruby/Poppler license. It should be GPL not LGPL
-	because poppler is GPL not LGPL.
-
-	* COPYING.LIB: remove.
-	* COPYING: add.
-
 2010-02-10  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/pdfdiv.rb: add.
