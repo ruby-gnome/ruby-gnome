@@ -1,3 +1,7 @@
+2010-09-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* src/lib/: -> lib/.
+
 2010-05-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: add missing have_library("X11").
