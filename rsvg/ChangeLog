@@ -1,3 +1,7 @@
+2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ./: make buildable with rake-compiler.
+
 2010-09-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/: -> ext/rsvg2/.
