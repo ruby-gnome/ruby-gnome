@@ -1,29 +1,48 @@
-=begin
-extconf.rb for Ruby/Poppler extention library
-=end
+#!/usr/bin/env ruby
 
-PACKAGE_NAME = "poppler"
-PACKAGE_ID = "poppler-glib"
+require 'pathname'
+require 'mkmf'
+require 'rbconfig'
+require 'fileutils'
 
-TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
-MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
-SRCDIR = TOPDIR + '/poppler/src'
+package = "poppler"
 
-$LOAD_PATH.unshift MKMF_GNOME2_DIR
+base_dir = Pathname(__FILE__).dirname.expand_path
+ext_dir = base_dir + "ext" + package
+mkmf_gnome2_dir = base_dir + 'lib'
 
-require 'mkmf-gnome2'
+ruby = File.join(RbConfig::CONFIG['bindir'],
+                 RbConfig::CONFIG['ruby_install_name'] +
+                 RbConfig::CONFIG["EXEEXT"])
 
-PKGConfig.have_package(PACKAGE_ID, 0, 8, 0) or exit 1
-setup_win32(PACKAGE_NAME)
+Dir.chdir(ext_dir.to_s) do
+  system(ruby, "extconf.rb", *ARGV) || exit(false)
+end
 
-check_cairo
+create_makefile(package)
+FileUtils.mv("Makefile", "Makefile.lib")
 
-add_depend_package("glib2", "glib/src", TOPDIR)
-add_depend_package("gtk2", "gtk/src", TOPDIR)
-add_depend_package("gdk_pixbuf2", "gdkpixbuf", TOPDIR)
+File.open("Makefile", "w") do |makefile|
+  makefile.puts(<<-EOM)
+all:
+	(cd ext/#{package} && $(MAKE))
+	$(MAKE) -f Makefile.lib
 
-make_version_header("POPPLER", PACKAGE_ID)
+install:
+	(cd ext/#{package} && $(MAKE) install)
+	$(MAKE) -f Makefile.lib install
 
-create_pkg_config_file("Ruby/Poppler", PACKAGE_ID)
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, "-DRUBY_POPPLER_COMPILATION")
-create_top_makefile
+site-install:
+	(cd ext/#{package} && $(MAKE) site-install)
+	$(MAKE) -f Makefile.lib site-install
+
+clean:
+	(cd ext/#{package} && $(MAKE) clean)
+	$(MAKE) -f Makefile.lib clean
+
+distclean:
+	(cd ext/#{package} && $(MAKE) distclean)
+	$(MAKE) -f Makefile.lib distclean
+	@rm -f Makefile.lib
+EOM
+end
