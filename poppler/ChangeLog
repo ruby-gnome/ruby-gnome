@@ -1,5 +1,7 @@
 2010-09-22  Kouhei Sutou  <kou@cozmixng.org>
 
+	* src/: -> ext/poppler/.
+
 	* src/lib/: -> lib/.
 
 2010-02-10  Kouhei Sutou  <kou@cozmixng.org>
