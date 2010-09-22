@@ -20,13 +20,8 @@ EXPORTS
     notebookpage_copy
     rbgtk_atom2selectiondata
     rbgtk_atom2selectiondata_free
-    rbgtk_clipboard_get_type DATA
-    rbgtk_get_clipboard DATA
-    rbgtk_make_clipboard DATA
     rbgtk_get_target_entry
-    rbgtk_get_tree_row_reference DATA
     rbgtk_initialize_gtkobject
     rbgtk_register_treeiter_set_value_func
-    rbgtk_tree_row_reference_get_type DATA
-    gtk_text_appearance_get_type DATA
+    gtk_text_appearance_get_type
     rbgtk_dialog_add_buttons_internal
