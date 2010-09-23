@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* extconf.rb: just use top-level extconf.rb.
+
 	* Rakefile (#guess_version): follow Ruby/GLib2 directory structure
 	chagne.
 
