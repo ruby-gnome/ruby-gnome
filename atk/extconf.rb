@@ -15,9 +15,10 @@ ruby = File.join(RbConfig::CONFIG['bindir'],
                  RbConfig::CONFIG['ruby_install_name'] +
                  RbConfig::CONFIG["EXEEXT"])
 
-Dir.chdir(ext_dir.to_s) do
-  system(ruby, "extconf.rb", *ARGV) || exit(false)
-end
+build_dir = Pathname("ext") + package
+FileUtils.mkdir_p(build_dir.to_s) unless build_dir.exist?
+extconf_rb_path = ext_dir + "extconf.rb"
+system(ruby, "-C", build_dir.to_s, extconf_rb_path.to_s, *ARGV) || exit(false)
 
 create_makefile(package)
 FileUtils.mv("Makefile", "Makefile.lib")
