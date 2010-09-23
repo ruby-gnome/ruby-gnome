@@ -7,6 +7,7 @@ require 'pathname'
 base_dir = Pathname(__FILE__).dirname.parent.parent.expand_path
 top_dir = base_dir.parent
 mkmf_gnome2_dir = top_dir + "glib" + 'lib'
+top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
@@ -34,9 +35,9 @@ have_func('atk_text_clip_type_get_type', atk_header)
 have_func('atk_text_free_ranges', atk_header)
 
 build_dir = "glib/tmp/#{RUBY_PLATFORM}/glib2/#{RUBY_VERSION}"
-options = {}
-options[:target_build_dir] = build_dir if (top_dir + build_dir).exist?
-add_depend_package("glib2", "glib/ext/glib2", top_dir.to_s, options)
+add_depend_package("glib2", "glib/ext/glib2", top_dir.to_s,
+                   :top_build_dir => top_build_dir.to_s,
+                   :target_build_dir => build_dir)
 add_distcleanfile("rbatkinits.c")
 
 make_version_header("ATK", package_id, ".")
