@@ -9,12 +9,14 @@ end
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
 gtk_dir = File.expand_path(File.join(base_dir, "..", "gtk"))
 
-$LOAD_PATH.unshift(glib_dir)
-require 'test/glib-test-init'
+$LOAD_PATH.unshift(File.join(glib_dir, "test"))
+require 'glib-test-init'
 
-[gtk_dir, glib_dir, base_dir].each do |dir|
-  $LOAD_PATH.unshift(File.join(dir, "src"))
-  $LOAD_PATH.unshift(File.join(dir, "src", "lib"))
+[[gtk_dir, "gtk2"],
+ [glib_dir, "glib2"],
+ [base_dir, "poppler"]].each do |dir, module_name|
+  $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
+  $LOAD_PATH.unshift(File.join(dir, "lib"))
 end
 require "poppler"
 

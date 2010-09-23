@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/run-test.rb: fix extension library path.
+
 	* ext/poppler/rbpoppler.h: don't use rbpopplerverseion.h when
 	Poppler provides version macros.
 
