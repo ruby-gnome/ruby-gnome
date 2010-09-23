@@ -63,12 +63,39 @@ end
 
 namespace :gem do
   namespace :win32 do
-    desc "build all Windows gem"
+    packages = ["glib", "atk", "pango", "gtk", "gdkpixbuf", "rsvg", "poppler"]
+
+    desc "build all Windows gems"
     task :build do
-      packages = ["glib", "atk", "pango", "gtk", "gdkpixbuf", "rsvg", "poppler"]
       packages.each do |package|
         Dir.chdir(package) do
           sh("rake", "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
+        end
+      end
+    end
+
+    desc "clean all Windows gems build"
+    task :clean do
+      packages.each do |package|
+        rm_rf(File.join(package, "tmp"))
+      end
+    end
+
+    desc "download DLL for Windows all gems"
+    task :download do
+      packages.each do |package|
+        Dir.chdir(package) do
+          sh("rake", "win32:download")
+        end
+      end
+    end
+
+    desc "push all Windows gem"
+    task :push do
+      packages.each do |package|
+        Dir.chdir(package) do
+          sh("gem", "push",
+             *Dir.glob(File.join("pkg", "*-#{version}-x86-mingw32.gem")))
         end
       end
     end

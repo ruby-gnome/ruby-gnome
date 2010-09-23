@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add more gem:win32:* tasks.
+
 	* Rakefile: add gem:win32:build task.
 
 	* NEWS: add 0.90.0 entry.
