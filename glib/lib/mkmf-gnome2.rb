@@ -73,18 +73,20 @@ end
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   [top_srcdir, $configure_args['--topdir']].each do |topdir|
     topdir = File.expand_path(topdir)
-    target_build_dir = options[:target_build_dir]
+    top_build_dir = options[:top_build_dir] || topdir
+    target_build_dir = options[:target_build_dir] || target_srcdir
     $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
-    if target_build_dir
-      $INCFLAGS = "-I#{File.join(topdir, target_build_dir)} #{$INCFLAGS}"
+    target_build_dir_full_path = File.join(top_build_dir, target_build_dir)
+    unless File.exist?(target_build_dir_full_path)
+      target_build_dir_full_path = File.join(top_build_dir, target_srcdir)
     end
-    target_build_dir ||= target_srcdir
+    $INCFLAGS = "-I#{File.join(target_build_dir_full_path)} #{$INCFLAGS}"
 
     if /cygwin|mingw/ =~ RUBY_PLATFORM
       $libs << " -lruby-#{target_name}"
-      $LDFLAGS << " -L#{topdir}/#{target_build_dir}"
+      $LDFLAGS << " -L#{target_build_dir_full_path}"
     elsif /mswin32/ =~ RUBY_PLATFORM
-      $DLDFLAGS << " /libpath:#{topdir}/#{target_build_dir}"
+      $DLDFLAGS << " /libpath:#{target_build_dir_full_path}"
       $libs << " libruby-#{target_name}.lib"
     end
   end

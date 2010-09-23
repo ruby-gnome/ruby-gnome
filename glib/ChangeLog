@@ -1,5 +1,8 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (#add_depend_package): support top build
+	directory path.
+
 	* README: add installation document by RubyGems.
 
 	* lib/mkmf-gnome2.rb (#add_depend_package): add build directory to
