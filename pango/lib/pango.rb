@@ -16,7 +16,17 @@ begin
   end
 rescue LoadError
 end
-require 'pango.so'
+
+base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
+vendor_dir = base_dir + "vendor" + "local"
+vendor_bin_dir = vendor_dir + "bin"
+GLib.prepend_environment_path(vendor_bin_dir)
+begin
+  major, minor, micro, = RUBY_VERSION.split(/\./)
+  require "#{major}.#{minor}/pango.so"
+rescue LoadError
+  require "pango.so"
+end
 
 module Pango
   LOG_DOMAIN = "Pango"
