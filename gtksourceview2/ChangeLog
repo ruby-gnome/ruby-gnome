@@ -1,3 +1,7 @@
+2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: support Ruby/GLib2 directory structure change.
+
 2008-11-09  Kouhei Sutou  <kou@cozmixng.org>
 
 	* src/rbgtksourcemain.h, src/rbgtksourceprintcompositor.c: remove
