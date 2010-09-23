@@ -61,6 +61,21 @@ task :build => ["Makefile"] do
   sh("make")
 end
 
+namespace :gem do
+  namespace :win32 do
+    desc "build all Windows gem"
+    task :build do
+      packages = ["glib", "atk", "pango", "gtk", "gdkpixbuf", "rsvg", "poppler"]
+      packages.each do |package|
+        Dir.chdir(package) do
+          sh("rake", "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
+        end
+      end
+    end
+  end
+end
+
+
 desc "clean all packages"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
