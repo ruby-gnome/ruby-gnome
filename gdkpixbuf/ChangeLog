@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gdk_pixbuf2.rb: support bundled Windows DLL.
+
 	* extconf.rb: support other directory build.
 
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
