@@ -39,7 +39,7 @@ options[:target_build_dir] = build_dir if (top_dir + build_dir).exist?
 add_depend_package("glib2", "glib/ext/glib2", top_dir.to_s, options)
 add_distcleanfile("rbatkinits.c")
 
-make_version_header("ATK", package_id)
+make_version_header("ATK", package_id, ".")
 
 create_pkg_config_file("Ruby/ATK", package_id)
 $defs << " -DRUBY_ATK_COMPILATION"

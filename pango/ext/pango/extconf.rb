@@ -55,7 +55,7 @@ add_depend_package("glib2", "glib/ext/glib2", top_dir.to_s, options)
 
 add_distcleanfile("rbpangoinits.c")
 
-make_version_header("PANGO", "pango")
+make_version_header("PANGO", "pango", ".")
 
 create_pkg_config_file("Ruby/Pango", package_id)
 $defs << " -DRUBY_PANGO_COMPILATION"

@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* */ext/*/extconf.rb: create version header in the current directory.
+
 	* extconf.rb: don't specify --srcdir.
 
 	* */extconf.rb: make other build dir support.

@@ -46,7 +46,7 @@ end
 end
 
 unless have_macro("POPPLER_MAJOR_VERSION", ["poppler.h"])
-  make_version_header("POPPLER", package_id)
+  make_version_header("POPPLER", package_id, ".")
 end
 
 create_pkg_config_file("Ruby/Poppler", package_id)
