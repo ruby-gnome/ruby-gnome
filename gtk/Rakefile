@@ -45,7 +45,7 @@ spec = Gem::Specification.new do |s|
   s.extensions = FileList["ext/#{package_name}/extconf.rb"]
   s.require_paths = ["lib"]
   s.files = FileList["ChangeLog", "README", "Rakefile", "extconf.rb",
-                     "lib/*.rb", "{ext,sample,test}/**/*"]
+                     "lib/**/*.rb", "{ext,sample,test}/**/*"]
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
