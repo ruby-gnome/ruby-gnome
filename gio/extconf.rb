@@ -2,15 +2,20 @@
 extconf.rb for Ruby/GIO extention library
 =end
 
-PACKAGE_NAME = 'gio2'
+require 'pathname'
 
-TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
-MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
-SRCDIR = TOPDIR + '/gio/src'
+base_dir = Pathname(__FILE__).dirname.expand_path
+top_dir = base_dir.parent.expand_path
+mkmf_gnome2_dir = top_dir + "glib" + 'lib'
+top_build_dir = Pathname(".").parent.expand_path
 
-$LOAD_PATH.unshift MKMF_GNOME2_DIR
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
+
+module_name = "gio2"
 
 require 'mkmf-gnome2'
+
+setup_win32(module_name, base_dir)
 
 defines = '-DRUBY_GIO2_COMPILATION'
 
@@ -20,9 +25,13 @@ PKGConfig.have_package('gobject-2.0') or exit 1
 
 have_func('rb_exec_recursive')
 
-setup_win32(PACKAGE_NAME)
-
-add_depend_package('glib2', 'glib/src', TOPDIR)
+[["glib", "glib2"]].each do |directory, library_name|
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{library_name}/#{RUBY_VERSION}"
+  add_depend_package(library_name, "#{directory}/ext/#{library_name}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
 
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do
@@ -64,5 +73,5 @@ try_compiler_option '-Wundef'
 try_compiler_option '-Wunsafe-loop-optimizations'
 try_compiler_option '-Wwrite-strings'
 
-create_makefile_at_srcdir(PACKAGE_NAME, SRCDIR, defines)
+create_makefile_at_srcdir(module_name, (base_dir + "src").to_s, defines)
 create_top_makefile
