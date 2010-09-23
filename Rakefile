@@ -47,6 +47,7 @@ ensure
   rm_rf(_dist_dir)
 end
 
+desc "configure all packages"
 task :configure do
   ruby("extconf.rb")
 end
@@ -55,22 +56,27 @@ file "Makefile" do
   task(:configure).invoke
 end
 
+desc "build all packages"
 task :build => ["Makefile"] do
   sh("make")
 end
 
+desc "clean all packages"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
 end
 
+desc "more clean all packages"
 task :distclean do
   sh("make", "distclean") if File.exist?("Makefile")
 end
 
+desc "run tests for all packages"
 task :test => [:build] do
   ruby("run-test.rb")
 end
 
+desc "make all packages"
 task :dist => [:dist_gtk2, :dist_gnome2]
 
 base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
@@ -78,6 +84,7 @@ base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
               "exec_make.rb", "extconf.rb", "run-test.rb"]
 gtk2_dirs = ["glib", "atk", "pango", "gdkpixbuf", "gtk"]
 gtk2_base_name = "ruby-gtk2"
+desc "make Ruby/GTK2 package"
 task :dist_gtk2 do
   package(gtk2_base_name, base_files + gtk2_dirs)
 end
@@ -90,10 +97,12 @@ gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
                            "libart", "libglade",
                            "panel-applet", "poppler", "rsvg", "vte"]
 gnome2_base_name = "ruby-gnome2-all"
+desc "make Ruby/GNOME2 package"
 task :dist_gnome2 do
   package(gnome2_base_name, base_files + gnome2_dirs)
 end
 
+desc "releae Ruby-GNOME2 packages"
 task :release => [:dist] do
   sf_user_name = ENV["SVN_USER"] || ENV["USER"]
   project_id = "ruby-gnome2"
@@ -117,6 +126,7 @@ def guess_copy_source_repository_uri
   end
 end
 
+desc "tag the current release"
 task :tag do
   tagged_url = "#{repository_base_url}/tags/#{version}"
 
