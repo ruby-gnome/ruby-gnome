@@ -2,27 +2,37 @@
 extconf.rb for Ruby/Libglade2 extention library
 =end
 
-PACKAGE_NAME = "libglade2"
-PACKAGE_ID   = "libglade-2.0"
+require 'pathname'
 
-TOPDIR = File.expand_path(File.dirname(__FILE__) + '/..')
-MKMF_GNOME2_DIR = TOPDIR + '/glib/src/lib'
-SRCDIR = TOPDIR + '/libglade'
+base_dir = Pathname(__FILE__).dirname.expand_path
+top_dir = base_dir.parent.expand_path
+mkmf_gnome2_dir = top_dir + "glib" + 'lib'
+top_build_dir = Pathname(".").parent.expand_path
 
-$LOAD_PATH.unshift MKMF_GNOME2_DIR
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
+
+module_name = "libglade2"
+package_id = "libglade-2.0"
 
 require 'mkmf-gnome2'
 
-PKGConfig.have_package(PACKAGE_ID) or exit 1
-setup_win32(PACKAGE_NAME)
+setup_win32(module_name, base_dir)
+
+PKGConfig.have_package(package_id) or exit(false)
 
 have_header("libintl.h")
 
 have_func("bindtextdomain")
 have_func("bind_textdomain_codeset")
 
-add_depend_package("glib2", "glib/src", TOPDIR)
-add_depend_package("gtk2", "gtk/src", TOPDIR)
+[["glib", "glib2"],
+ ["gtk", "gtk2"]].each do |directory, library_name|
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{library_name}/#{RUBY_VERSION}"
+  add_depend_package(library_name, "#{directory}/ext/#{library_name}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
 
 if /mswin32/ =~ RUBY_PLATFORM
 # gladewin32 has been changed?
@@ -32,6 +42,6 @@ if /mswin32/ =~ RUBY_PLATFORM
   $CFLAGS += " -DHAVE_BINDTEXTDOMAIN -DHAVE_BIND_TEXTDOMAIN_CODESET "
 end
 
-make_version_header("LIBGLADE", PACKAGE_ID, ".")
-create_pkg_config_file("Ruby/Libglade2", PACKAGE_ID, ruby_gnome2_version)
-create_makefile(PACKAGE_NAME)
+make_version_header("LIBGLADE", package_id, ".")
+create_pkg_config_file("Ruby/Libglade2", package_id)
+create_makefile(module_name)
