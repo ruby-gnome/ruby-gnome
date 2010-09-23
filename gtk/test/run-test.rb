@@ -9,9 +9,6 @@ pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
 gtk_base = File.join(ruby_gnome2_base, "gtk")
 
-$LOAD_PATH.unshift(File.join(glib_base, "test"))
-require 'glib-test-init'
-
 [[glib_base, "glib2"],
  [atk_base, "atk"],
  [pango_base, "pangp"],
@@ -23,6 +20,9 @@ require 'glib-test-init'
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
+
+$LOAD_PATH.unshift(File.join(glib_base, "test"))
+require 'glib-test-init'
 
 $LOAD_PATH.unshift(File.join(gtk_base, "test"))
 require 'gtk-test-utils'

@@ -1,5 +1,10 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_gtk_builder.rb (TestGtkBuilder#test_objects): use
+	builder_name instead of name.
+
+	* test/run-test.rb: fix require order.
+
 	* test/run-test.rb: fix extension library path.
 
 	* Rakefile (#guess_version): add missing atk dependency.
