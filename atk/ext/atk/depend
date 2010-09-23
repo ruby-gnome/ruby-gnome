@@ -5,4 +5,4 @@ install-so:
 
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-atk.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ruby-atk.pc $(libdir)/pkgconfig

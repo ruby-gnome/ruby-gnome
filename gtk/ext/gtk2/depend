@@ -7,4 +7,4 @@ install-so:
 
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-gtk2.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ruby-gtk2.pc $(libdir)/pkgconfig
