@@ -46,10 +46,6 @@ use from Ruby 1.8.6, 1.8.7 and 1.9.1.
 
   * Ruby/PanelApplet:     gnome-panel 2.6.0 or later (deprecated since 0.16.0)
 
-=== Not available (removed since 0.16.0)
-
-  * Ruby/Libgda:          libgda 1.0.3 or later
-
 == Install
 
   % ruby extconf.rb
@@ -167,11 +163,6 @@ current dependencies are:
 : Ruby/PanelApplet
    depends on Ruby/GTK (since libpanel-applet 2.25) or
    Ruby/GNOME (before libpanel-applet 2.25).
-
-=== Not available
-
-: Ruby/Libgda
-   depends on Ruby/GLib.
 
 == Bugs
 

@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* libgda/, README: drop Ruby/Libgda.
+
 	* */ext/*/extconf.rb: pass top build directory to add_depend_package.
 
 	* */ext/*/extconf.rb: create version header in the current directory.

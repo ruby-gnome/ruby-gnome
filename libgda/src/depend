@@ -1,3 +1,0 @@
-install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-libgda.pc $(libdir)/pkgconfig
