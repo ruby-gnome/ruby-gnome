@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gio2.rb: support bundled Windows DLL.
+
 	* ./: make buildable.
 
 	* src/: -> ext/gio2/.
