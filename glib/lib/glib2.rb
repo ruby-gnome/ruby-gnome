@@ -1,18 +1,12 @@
 #
 # glib2.rb
-# Copyright(C) 2005 Ruby-GNOME2 Project.
+# Copyright(C) 2005-2010 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same 
 # license of Ruby-GNOME2.
 #
 
-require 'rbconfig'
-if /mingw|mswin|mswin32/ =~ RUBY_PLATFORM
-  ENV['PATH'] = %w(bin lib).collect{|dir|
-    "#{Config::CONFIG["prefix"]}\\lib\\GTK\\#{dir};"
-  }.join('') + ENV['PATH']
-end
-
+require 'pathname'
 require 'English'
 require 'thread'
 
@@ -66,9 +60,34 @@ module GLib
       end
     end
   end
+
+  def prepend_environment_path(path)
+    path = Pathname(path) unless path.is_a?(Pathname)
+    if path.exist?
+      environment_name = "PATH"
+      separator = File::PATH_SEPARATOR
+
+      paths = (ENV[environment_name] || '').split(/#{separator}/)
+      dir = path.to_s
+      dir = dir.gsub(/\//, File::ALT_SEPARATOR) if File::ALT_SEPARATOR
+      unless paths.include?(dir)
+        paths = [dir] + paths
+        ENV[environment_name] = paths.join(separator)
+      end
+    end
+  end
 end
 
-require 'glib2.so'
+
+base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
+vendor_dir = base_dir + "vendor" + "local"
+GLib.prepend_environment_path(vendor_dir + "bin")
+begin
+  major, minor, micro, = RUBY_VERSION.split(/\./)
+  require "#{major}.#{minor}/glib2.so"
+rescue LoadError
+  require 'glib2.so'
+end
 
 module GLib
   
