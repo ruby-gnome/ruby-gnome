@@ -73,14 +73,18 @@ end
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   [top_srcdir, $configure_args['--topdir']].each do |topdir|
     topdir = File.expand_path(topdir)
+    target_source_dir_full_path = File.join(topdir, target_srcdir)
+    if File.exist?(target_source_dir_full_path)
+      $INCFLAGS = "-I#{target_source_dir_full_path} #{$INCFLAGS}"
+    end
+
     top_build_dir = options[:top_build_dir] || topdir
     target_build_dir = options[:target_build_dir] || target_srcdir
-    $INCFLAGS = "-I#{File.join(topdir, target_srcdir)} #{$INCFLAGS}"
     target_build_dir_full_path = File.join(top_build_dir, target_build_dir)
     unless File.exist?(target_build_dir_full_path)
       target_build_dir_full_path = File.join(top_build_dir, target_srcdir)
     end
-    $INCFLAGS = "-I#{File.join(target_build_dir_full_path)} #{$INCFLAGS}"
+    $INCFLAGS = "-I#{target_build_dir_full_path} #{$INCFLAGS}"
 
     if /cygwin|mingw/ =~ RUBY_PLATFORM
       $libs << " -lruby-#{target_name}"

@@ -1,5 +1,8 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (#add_depend_package): don't add nonexistent
+	path to include paths.
+
 	* lib/mkmf-gnome2.rb (#ruby_gnome2_version): follow directory
 	structure change.
 
