@@ -69,7 +69,7 @@ subdirs.each do |subdir|
   srcdir = File.join(dir, subdir)
   args = ruby_args + ["-C", subdir, File.join(srcdir, "extconf.rb"),
                       "--topsrcdir=#{dir}", "--topdir=#{topdir}",
-                      "--srcdir=#{srcdir}", *extra_args]
+                      *extra_args]
   ret = system(ruby, *args)
   STDERR.puts("#{$0}: Leaving directory '#{subdir}'")
   if ret
