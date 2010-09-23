@@ -1,14 +1,16 @@
 #ifndef __RBPOPPLER_H__
 #define __RBPOPPLER_H__
 
-#include "rbpopplerversion.h"
-
 #include <ruby.h>
 
 #include <rbglib.h>
 #include <rbgobject.h>
 
 #include <poppler.h>
+
+#ifndef POPPLER_MAJOR_VERSION
+#  include "rbpopplerversion.h"
+#endif
 
 #ifndef POPPLER_TYPE_INDEX_ITER
 #  define POPPLER_TYPE_INDEX_ITER (poppler_index_iter_get_type ())
