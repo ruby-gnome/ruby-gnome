@@ -2,6 +2,24 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.2: 2010-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME.
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Bug fixes:
+    * fix gtk2/base.rb is missing in gem.
+      [S.Kitagawa, Kouhei Sutou]
+
+=== Thanks
+
+  * S.Kitagawa
+
 == Ruby-GNOME2 0.90.1: 2010-09-23
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
