@@ -9,16 +9,18 @@ pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
 gtk_base = File.join(ruby_gnome2_base, "gtk")
 
-$LOAD_PATH.unshift(glib_base)
-require 'test/glib-test-init'
+$LOAD_PATH.unshift(File.join(glib_base, "test"))
+require 'glib-test-init'
 
-[glib_base, atk_base, pango_base, gdk_pixbuf_base, gtk_base].each do |target|
+[[glib_base, "glib2"],
+ [atk_base, "atk"],
+ [pango_base, "pangp"],
+ [gdk_pixbuf_base, "gdk_pixbuf2"],
+ [gtk_base, "gtk2"]].each do |target, module_name|
   if system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(1)
+    `make -C #{target.dump} > /dev/null` or exit(false)
   end
-  $LOAD_PATH.unshift(File.join(target, "src"))
-  $LOAD_PATH.unshift(File.join(target, "src", "lib"))
-  $LOAD_PATH.unshift(File.join(target))
+  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
