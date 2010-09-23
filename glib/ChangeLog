@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h: 0.90.1 -> 0.90.2.
+
 	* Rakefile: don't add .zip into gem.
 
 	* lib/mkmf-gnome2.rb (#add_depend_package): improve auto build
