@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gtk2/base.rb: support bundled Windows DLL.
+
 	* test/test_gtk_builder.rb (TestGtkBuilder#test_objects): use
 	builder_name instead of name.
 
