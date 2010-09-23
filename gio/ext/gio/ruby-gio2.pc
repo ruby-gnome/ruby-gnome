@@ -1,0 +1,3 @@
+Name: Ruby/GIO2
+Description: Ruby bindings for glib I/O library
+Version: 0.90.1

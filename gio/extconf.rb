@@ -1,77 +1,49 @@
-=begin
-extconf.rb for Ruby/GIO extention library
-=end
+#!/usr/bin/env ruby
 
 require 'pathname'
+require 'mkmf'
+require 'rbconfig'
+require 'fileutils'
+
+package = "gio"
 
 base_dir = Pathname(__FILE__).dirname.expand_path
-top_dir = base_dir.parent.expand_path
-mkmf_gnome2_dir = top_dir + "glib" + 'lib'
-top_build_dir = Pathname(".").parent.expand_path
+ext_dir = base_dir + "ext" + package
+mkmf_gnome2_dir = base_dir + 'lib'
 
-$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
+ruby = File.join(RbConfig::CONFIG['bindir'],
+                 RbConfig::CONFIG['ruby_install_name'] +
+                 RbConfig::CONFIG["EXEEXT"])
 
-module_name = "gio2"
+build_dir = Pathname("ext") + package
+FileUtils.mkdir_p(build_dir.to_s) unless build_dir.exist?
+extconf_rb_path = ext_dir + "extconf.rb"
+system(ruby, "-C", build_dir.to_s, extconf_rb_path.to_s, *ARGV) || exit(false)
 
-require 'mkmf-gnome2'
+create_makefile(package)
+FileUtils.mv("Makefile", "Makefile.lib")
 
-setup_win32(module_name, base_dir)
+File.open("Makefile", "w") do |makefile|
+  makefile.puts(<<-EOM)
+all:
+	(cd ext/#{package} && $(MAKE))
+	$(MAKE) -f Makefile.lib
 
-defines = '-DRUBY_GIO2_COMPILATION'
+install:
+	(cd ext/#{package} && $(MAKE) install)
+	$(MAKE) -f Makefile.lib install
 
-PKGConfig.have_package('gio-2.0') or exit 1
-PKGConfig.have_package('gio-unix-2.0') and defines += ' -DHAVE_GIO_UNIX'
-PKGConfig.have_package('gobject-2.0') or exit 1
+site-install:
+	(cd ext/#{package} && $(MAKE) site-install)
+	$(MAKE) -f Makefile.lib site-install
 
-have_func('rb_exec_recursive')
+clean:
+	(cd ext/#{package} && $(MAKE) clean)
+	$(MAKE) -f Makefile.lib clean
 
-[["glib", "glib2"]].each do |directory, library_name|
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{library_name}/#{RUBY_VERSION}"
-  add_depend_package(library_name, "#{directory}/ext/#{library_name}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
+distclean:
+	(cd ext/#{package} && $(MAKE) distclean)
+	$(MAKE) -f Makefile.lib distclean
+	@rm -f Makefile.lib
+EOM
 end
-
-def try_compiler_option(opt, &block)
-  checking_for "#{opt} option to compiler" do
-    $CFLAGS += " #{opt}" if try_compile '', opt, &block
-  end
-end
-
-try_compiler_option '-finline-functions'
-try_compiler_option '-fno-common'
-try_compiler_option '-Wall'
-try_compiler_option '-Waggregate-return'
-try_compiler_option '-Wcast-align'
-# NOTE: Generates way too many false positives.
-# try_compiler_option '-Wconversion'
-try_compiler_option '-Wextra'
-try_compiler_option '-Wformat=2'
-try_compiler_option '-Winit-self'
-try_compiler_option '-Winline'
-try_compiler_option '-Wlarger-than-65500'
-try_compiler_option '-Wmissing-declarations'
-try_compiler_option '-Wmissing-format-attribute'
-try_compiler_option '-Wmissing-include-dirs'
-try_compiler_option '-Wmissing-noreturn'
-try_compiler_option '-Wmissing-prototypes'
-try_compiler_option '-Wnested-externs'
-try_compiler_option '-Wold-style-definition'
-try_compiler_option '-Wpacked'
-try_compiler_option '-Wp,-D_FORTIFY_SOURCE=2'
-try_compiler_option '-Wpointer-arith'
-# NOTE: ruby.h and intern.h have too many of these.
-# try_compiler_option '-Wredundant-decls'
-# NOTE: Complains about index, for example.
-# try_compiler_option '-Wshadow'
-try_compiler_option '-Wswitch-default'
-try_compiler_option '-Wswitch-enum'
-try_compiler_option '-Wundef'
-# NOTE: Incredible amounts of false positives.
-#try_compiler_option '-Wunreachable-code'
-try_compiler_option '-Wunsafe-loop-optimizations'
-try_compiler_option '-Wwrite-strings'
-
-create_makefile_at_srcdir(module_name, (base_dir + "src").to_s, defines)
-create_top_makefile
