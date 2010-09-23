@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add 0.90.1 entry.
+
 	* */ext/*/depend: fix .pc position.
 	Reported by OBATA Akio. Thanks!!!
 
