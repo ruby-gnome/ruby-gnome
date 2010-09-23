@@ -118,7 +118,8 @@ def create_pkg_config_file(package_name, c_package,
 end
 
 def ruby_gnome2_version(glib_source_directory=nil)
-  glib_source_directory ||= File.join(File.dirname(__FILE__), "..")
+  glib_source_directory ||= File.join(File.dirname(__FILE__), "..",
+                                      "ext", "glib2")
   rbglib_h = File.join(glib_source_directory, "rbglib.h")
   return nil unless File.exist?(rbglib_h)
 
