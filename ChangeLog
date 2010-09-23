@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: add 0.90.0 entry.
+
 	* libgda/, README: drop Ruby/Libgda.
 
 	* */ext/*/extconf.rb: pass top build directory to add_depend_package.

@@ -2,11 +2,11 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.20.0: 20XX-XX-XX
+== Ruby-GNOME2 0.90.0: 2010-09-23
 
-NOTE: 0.20.x releases are stable series.
+NOTE: 0.90.x releases are for 1.0.0 major release.
 
-WRITE ME.
+RubyGems support!
 
 === Changes
 
