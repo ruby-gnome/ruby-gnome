@@ -213,8 +213,8 @@ rbgutil_gslist2ary_and_free_ensure(VALUE data)
 VALUE
 rbgutil_gslist2ary_and_free(GSList *const list)
 {
-    return rb_ensure(rbgutil_gslist2ary_and_free_body, (VALUE)&list,
-                     rbgutil_gslist2ary_and_free_ensure, (VALUE)&list);
+    return rb_ensure(rbgutil_gslist2ary_and_free_body, (VALUE)list,
+                     rbgutil_gslist2ary_and_free_ensure, (VALUE)list);
 }
 
 VALUE

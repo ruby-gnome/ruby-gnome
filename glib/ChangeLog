@@ -1,5 +1,8 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbgutil.c (rbgutil_gslist2ary_and_free): fix wrong
+	address is passed.
+
 	* test/run-test.rb: fix extension library path.
 
 	* lib/mkmf-gnome2.rb (#add_depend_package): don't add nonexistent
