@@ -1,3 +1,7 @@
+2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/run-test.rb: fix extension library path.
+
 2010-09-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ./: make buildable by rake-compiler.

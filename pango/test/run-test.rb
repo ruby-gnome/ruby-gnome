@@ -8,15 +8,16 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 glib_base = File.join(ruby_gnome2_base, "glib")
 pango_base = File.join(ruby_gnome2_base, "pango")
 
-$LOAD_PATH.unshift(glib_base)
-require 'test/glib-test-init'
+$LOAD_PATH.unshift(File.join(glib_base, "test"))
+require 'glib-test-init'
 
-[glib_base, pango_base].each do |target|
+[[glib_base, "glib2"],
+ [pango_base, "pango"]].each do |target, module_name|
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(1)
   end
-  $LOAD_PATH.unshift(File.join(target, "src"))
-  $LOAD_PATH.unshift(File.join(target, "src", "lib"))
+  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
+  $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
 $LOAD_PATH.unshift(File.join(pango_base, "test"))
