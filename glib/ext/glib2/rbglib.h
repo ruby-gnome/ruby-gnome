@@ -22,7 +22,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define RBGLIB_MAJOR_VERSION 0
-#define RBGLIB_MINOR_VERSION 20
+#define RBGLIB_MINOR_VERSION 90
 #define RBGLIB_MICRO_VERSION 0
 
 #ifndef RSTRING_PTR

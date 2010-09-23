@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h (RBGLIB_MINOR_VERSION): 20 -> 90. (0.20.0 -> 0.90.0)
+
 	* lib/glib2.rb (GLib#prepend_environment_path): add for Windows DLL.
 
 	* ext/glib2/rbgutil.c (rbgutil_gslist2ary_and_free): fix wrong
