@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/run-test.rb: fix extension library path.
+
 	* lib/mkmf-gnome2.rb (#add_depend_package): don't add nonexistent
 	path to include paths.
 

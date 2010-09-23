@@ -10,8 +10,8 @@ if system("which make > /dev/null")
   system("cd #{top.dump} && make > /dev/null") or exit(1)
 end
 
-$LOAD_PATH.unshift(File.join(top, "src"))
-$LOAD_PATH.unshift(File.join(top, "src", "lib"))
+$LOAD_PATH.unshift(File.join(top, "ext", "glib2"))
+$LOAD_PATH.unshift(File.join(top, "lib"))
 
 $LOAD_PATH.unshift(base)
 require 'glib-test-utils'
