@@ -10,7 +10,7 @@ end
 
 def guess_version
   versions = {}
-  File.open("glib/src/rbglib.h") do |rbglib_h|
+  File.open("glib/ext/glib2/rbglib.h") do |rbglib_h|
     rbglib_h.each_line do |line|
       if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
         versions[$1.downcase] = $2.to_i
@@ -44,7 +44,7 @@ def package(base_name, paths, needless_paths=nil)
   end
   sh("tar", "cvfz", archive_name(base_name), _dist_dir)
 ensure
-  rm_rf(_dist_dir)
+  rm_rf(_dist_dir) if _dist_dir
 end
 
 desc "configure all packages"
