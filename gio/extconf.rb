@@ -5,7 +5,7 @@ require 'mkmf'
 require 'rbconfig'
 require 'fileutils'
 
-package = "gio"
+package = "gio2"
 
 base_dir = Pathname(__FILE__).dirname.expand_path
 ext_dir = base_dir + "ext" + package

@@ -27,12 +27,12 @@ def guess_version
   ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
 end
 
-package_name = "gio"
+package_name = "gio2"
 
 spec = Gem::Specification.new do |s|
   s.name = package_name
-  s.summary = "Ruby/GIO is a Ruby binding of gio-2.x."
-  s.description = "Ruby/GIO is a Ruby binding of gio-2.x."
+  s.summary = "Ruby/GIO2 is a Ruby binding of gio-2.x."
+  s.description = "Ruby/GIO2 is a Ruby binding of gio-2.x."
   s.author = "The Ruby-GNOME2 Proejct Team"
   s.email = "ruby-gnome2-devel-en@lists.sourceforge.net"
   s.homepage = "http://ruby-gnome2.sourceforge.jp/"

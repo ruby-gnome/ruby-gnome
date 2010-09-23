@@ -2,7 +2,7 @@
 
 	* ./: make buildable.
 
-	* src/: -> ext/gio/.
+	* src/: -> ext/gio2/.
 
 	* src/lib/: -> lib/.
 
