@@ -4,7 +4,17 @@ begin
   require "cairo"
 rescue LoadError
 end
-require "rsvg2.so"
+
+base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
+vendor_dir = base_dir + "vendor" + "local"
+vendor_bin_dir = vendor_dir + "bin"
+GLib.prepend_environment_path(vendor_bin_dir)
+begin
+  major, minor, micro, = RUBY_VERSION.split(/\./)
+  require "#{major}.#{minor}/rsvg2.so"
+rescue LoadError
+  require "rsvg2.so"
+end
 
 module RSVG
   LOG_DOMAIN = "librsvg"

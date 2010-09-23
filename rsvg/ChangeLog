@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/rsvg2.rb: support bundled Windows DLL.
+
 	* ./: make buildable with rake-compiler.
 
 2010-09-22  Kouhei Sutou  <kou@cozmixng.org>
