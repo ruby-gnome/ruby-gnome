@@ -1,5 +1,8 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (#add_depend_package): improve auto build
+	path detection.
+
 	* ext/glib2/rbglib.h: 0.90.0 -> 0.90.1.
 
 	* ext/glib2/rbglib.h (RBGLIB_MINOR_VERSION): 20 -> 90. (0.20.0 -> 0.90.0)
