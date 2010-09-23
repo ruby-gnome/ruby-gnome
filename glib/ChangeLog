@@ -1,5 +1,7 @@
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* README: add installation document by RubyGems.
+
 	* lib/mkmf-gnome2.rb (#add_depend_package): add build directory to
 	include path.
 
