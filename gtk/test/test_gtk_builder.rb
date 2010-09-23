@@ -73,7 +73,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
     assert_equal(["dialog1", "vbox1", "hbuttonbox1", "ok_button",
                   "main-window"].sort,
-                 builder.objects.collect {|object| object.name}.sort)
+                 builder.objects.collect {|object| object.builder_name}.sort)
   end
 
   def test_translation_domain
