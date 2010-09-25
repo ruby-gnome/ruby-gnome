@@ -7,14 +7,20 @@ require 'pathname'
 source_dir = Pathname(__FILE__).dirname
 base_dir = source_dir.parent.parent.expand_path
 top_dir = base_dir.parent.expand_path
-mkmf_gnome2_dir = top_dir + "glib" + 'lib'
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
-if mkmf_gnome2_dir.exist?
-  $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
-else
-  require "glib2"
+glib_dir_name = mkmf_gnome2_dir = nil
+glib_dir_name_candidates = ["glib"]
+if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
+  glib_dir_name_candidates << "glib2#{$1}"
 end
+glib_dir_name_candidates.each do |glib_dir_name_candidate|
+  glib_dir_name = glib_dir_name_candidate
+  mkmf_gnome2_dir = top_dir + glib_dir_name + 'lib'
+  next if mkmf_gnome2_dir.exist?
+end
+
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
 module_name = "gtk2"
 package_id = "gtk+-2.0"

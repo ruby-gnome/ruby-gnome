@@ -1,5 +1,11 @@
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* glib/: -> glib2/
+	* gtk/: -> gtk2/
+	* rsvgb/: -> rsvg2/
+	* gdkpixbuf/: -> gdk_pixbuf2/
+	* gio/: -> gio2/
+
 	* */ext/extconf.rb: require "glib2" if mkmf-gnome2 doesn't exist.
 
 	* */Rakefile: include lib/**/*.rb into gems.
