@@ -1,5 +1,7 @@
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: fill 0.90.2 release note.
+
 	* */Rakefile, */ext/*/extconf.rb: follow directory name changes.
 
 	* glib/: -> glib2/
