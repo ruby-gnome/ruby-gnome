@@ -313,7 +313,9 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
     RbConfig.expand(source_dir)
 
     $objs = []
-    srcs = Dir[File.join(source_dir, "*.{#{SRC_EXT.join(',')}}")]
+    pattern = "*.{#{SRC_EXT.join(',')}}"
+    srcs = Dir[File.join(source_dir, pattern)]
+    srcs |= Dir[File.join(".", pattern)]
     srcs.each do |f|
       obj = File.basename(f, ".*") << ".o"
       add_obj(obj)
