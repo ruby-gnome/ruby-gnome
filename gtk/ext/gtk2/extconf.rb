@@ -10,7 +10,11 @@ top_dir = base_dir.parent.expand_path
 mkmf_gnome2_dir = top_dir + "glib" + 'lib'
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
-$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
+if mkmf_gnome2_dir.exist?
+  $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
+else
+  require "glib2"
+end
 
 module_name = "gtk2"
 package_id = "gtk+-2.0"

@@ -1,5 +1,7 @@
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* */ext/extconf.rb: require "glib2" if mkmf-gnome2 doesn't exist.
+
 	* */Rakefile: include lib/**/*.rb into gems.
 
 2010-09-24  Kouhei Sutou  <kou@cozmixng.org>
