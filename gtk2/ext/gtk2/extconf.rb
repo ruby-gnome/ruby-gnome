@@ -94,9 +94,6 @@ check_cairo(options)
                      :target_build_dir => build_dir)
 end
 
-add_distcleanfile("rbgdkkeysyms.h")
-add_distcleanfile("rbgtkinits.c")
-
 create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
 
 class InitCreator
@@ -195,6 +192,11 @@ rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
     end
   end
 end
+
+add_distcleanfile("rbgdkkeysyms.h")
+add_distcleanfile("rbgtkinits.c")
+
+ensure_objs
 
 $defs << "-DRUBY_GTK2_COMPILATION"
 create_makefile(module_name)

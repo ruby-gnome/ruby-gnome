@@ -1,3 +1,7 @@
+2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/extconf.rb: ensure adding built source to targets.
+
 2010-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: add missing gtk2/base.rb.
