@@ -1,3 +1,7 @@
+2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* */Rakefile: include lib/**/*.rb into gems.
+
 2010-09-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add 0.90.2 entry.
