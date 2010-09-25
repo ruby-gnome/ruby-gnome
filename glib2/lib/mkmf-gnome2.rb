@@ -151,6 +151,20 @@ def ruby_gnome2_version(glib_source_directory=nil)
   version
 end
 
+def ensure_objs
+  return unless $objs.nil?
+
+  source_dir = '$(srcdir)'
+  RbConfig.expand(source_dir)
+
+  pattern = "*.{#{SRC_EXT.join(',')}}"
+  srcs = Dir[File.join(source_dir, pattern)]
+  srcs |= Dir[File.join(".", pattern)]
+  $objs = srcs.collect do |f|
+    File.basename(f, ".*") + ".o"
+  end.uniq
+end
+
 def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
   base_dir = File.basename(Dir.pwd)
   last_common_index = srcdir.rindex(base_dir)
@@ -164,14 +178,7 @@ def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
     yield if block_given?
 
     $defs << defs if defs
-
-    pattern = "*.{#{SRC_EXT.join(',')}}"
-    srcs = Dir[File.join(srcdir, pattern)]
-    srcs |= Dir[File.join(".", pattern)]
-    $objs = srcs.collect do |src|
-      File.basename(src, ".*") + ".o"
-    end.flatten.uniq
-
+    ensure_objs
     create_makefile(pkg_name, srcdir)
   end
 end
@@ -300,6 +307,7 @@ SRC
 end
 
 def add_obj(name)
+  ensure_objs
   $objs << name unless $objs.index(name)
 end
 
@@ -307,20 +315,6 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
   add_distcleanfile(prefix + ".h")
   add_distcleanfile(prefix + ".c")
   GLib::MkEnums.create(prefix, files, g_type_prefix, include_files, options)
-
-  if $objs.nil?
-    source_dir = '$(srcdir)'
-    RbConfig.expand(source_dir)
-
-    $objs = []
-    pattern = "*.{#{SRC_EXT.join(',')}}"
-    srcs = Dir[File.join(source_dir, pattern)]
-    srcs |= Dir[File.join(".", pattern)]
-    srcs.each do |f|
-      obj = File.basename(f, ".*") << ".o"
-      add_obj(obj)
-    end
-  end
   add_obj("#{prefix}.o")
 end
 

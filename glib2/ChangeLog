@@ -1,5 +1,7 @@
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (ensure_objs): add.
+
 	* lib/mkmf-gnome2.rb: add generated files in build directory
 	to build targets too.
 
