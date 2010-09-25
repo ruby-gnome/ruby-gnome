@@ -6,8 +6,16 @@ require 'pathname'
 
 base_dir = Pathname(__FILE__).dirname.expand_path
 top_dir = base_dir.parent.expand_path
-mkmf_gnome2_dir = top_dir + "glib" + 'lib'
 top_build_dir = Pathname(".").parent.expand_path
+
+mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
+version_suffix = ""
+unless mkmf_gnome2_dir.exist?
+  if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
+    version_suffix = $1
+    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + 'lib'
+  end
+end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 

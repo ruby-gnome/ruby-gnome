@@ -6,14 +6,18 @@ require 'pathname'
 
 base_dir = Pathname(__FILE__).dirname.parent.parent.expand_path
 top_dir = base_dir.parent
-mkmf_gnome2_dir = top_dir + "glib" + 'lib'
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
-if mkmf_gnome2_dir.exist?
-  $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
-else
-  require "glib2"
+mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
+version_suffix = ""
+unless mkmf_gnome2_dir.exist?
+  if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
+    version_suffix = $1
+    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + 'lib'
+  end
 end
+
+$LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
 module_name = "poppler"
 package_id = "poppler-glib"
@@ -40,11 +44,10 @@ if PKGConfig.have_package('poppler-cairo')
   check_cairo(options)
 end
 
-[["glib", "glib2"],
- ["gtk", "gtk2"],
- ["gdkpixbuf", "gdk_pixbuf2"]].each do |directory, library_name|
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{library_name}/#{RUBY_VERSION}"
-  add_depend_package(library_name, "#{directory}/ext/#{library_name}",
+["glib2", "gtk2", "gdk_pixbuf2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
                      :target_build_dir => build_dir)

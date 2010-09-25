@@ -6,7 +6,7 @@ require 'rubygems'
 require 'rake/extensiontask'
 
 @top_dir = Pathname(__FILE__).dirname.parent.expand_path
-@rb_glib2_dir = @top_dir + "glib"
+@rb_glib2_dir = @top_dir + "glib2"
 
 task :default => :build
 

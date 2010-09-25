@@ -10,7 +10,7 @@ end
 
 def guess_version
   versions = {}
-  File.open("glib/ext/glib2/rbglib.h") do |rbglib_h|
+  File.open("glib2/ext/glib2/rbglib.h") do |rbglib_h|
     rbglib_h.each_line do |line|
       if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
         versions[$1.downcase] = $2.to_i
@@ -63,7 +63,8 @@ end
 
 namespace :gem do
   namespace :win32 do
-    packages = ["glib", "atk", "pango", "gtk", "gdkpixbuf", "rsvg", "poppler"]
+    packages = ["glib2", "atk", "pango", "gtk2", "gdk_pixbuf2",
+                "rsvg2", "poppler"]
 
     desc "build all Windows gems"
     task :build do
@@ -124,7 +125,7 @@ task :dist => [:dist_gtk2, :dist_gnome2]
 base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
               "README", "Rakefile",
               "exec_make.rb", "extconf.rb", "run-test.rb"]
-gtk2_dirs = ["glib", "atk", "pango", "gdkpixbuf", "gtk"]
+gtk2_dirs = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
 gtk2_base_name = "ruby-gtk2"
 desc "make Ruby/GTK2 package"
 task :dist_gtk2 do
@@ -137,7 +138,7 @@ gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
                            "gtkhtml2", "gtkmozembed",
                            "gtksourceview", "gtksourceview2",
                            "libart", "libglade",
-                           "panel-applet", "poppler", "rsvg", "vte"]
+                           "panel-applet", "poppler", "rsvg2", "vte"]
 gnome2_base_name = "ruby-gnome2-all"
 desc "make Ruby/GNOME2 package"
 task :dist_gnome2 do
