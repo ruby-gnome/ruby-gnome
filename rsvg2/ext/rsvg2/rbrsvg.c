@@ -22,7 +22,7 @@
 #  include <librsvg/rsvg.h>
 #endif
 
-#ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 #  include <rb_cairo.h>
 #  include <librsvg/rsvg-cairo.h>
 #endif
