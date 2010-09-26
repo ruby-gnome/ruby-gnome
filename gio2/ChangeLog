@@ -1,5 +1,8 @@
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gio2/util.c (rbgio_raise_error): don't us dynamic string
+	as format string for security reason.
+
 	* ext/gio2/depend (install): fix a typo in .pc name.
 	[#3075619] Cann't install gio
 	Reported by O01eg. Thanks!!!

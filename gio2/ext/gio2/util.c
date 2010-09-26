@@ -308,7 +308,7 @@ rbgio_raise_error(GError *error)
                          RVAL2CSTR(enum_name), error->code);
         }
 
-        rb_raise(rberror, error->message);
+        rb_raise(rberror, "%s", error->message);
 }
 
 void
