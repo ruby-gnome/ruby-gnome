@@ -94,10 +94,8 @@ namespace :gem do
     desc "push all Windows gem"
     task :push do
       packages.each do |package|
-        Dir.chdir(package) do
-          sh("gem", "push",
-             *Dir.glob(File.join("pkg", "*-#{version}-x86-mingw32.gem")))
-        end
+        sh("gem", "push",
+           *Dir.glob(File.join(package, "pkg", "*-#{_version}-x86-mingw32.gem")))
       end
     end
   end

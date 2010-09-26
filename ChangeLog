@@ -1,5 +1,7 @@
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: fix version detection in gem:win32:push task.
+
 	* NEWS: Ruby/GIO2: fix a typo in .pc name. [#3075619]
 	Reported by O01eg. Thanks!!!
 
