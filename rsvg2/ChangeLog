@@ -1,7 +1,7 @@
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/rsvg2/rbrsvg.c: also check rb_cairo.h availability.
-	[3075617] Cann't compile rsvg.
+	[#3075617] Cann't compile rsvg.
 	Reported by O01eg. Thanks!!!
 
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>

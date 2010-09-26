@@ -16,9 +16,22 @@ A RubyGems package fix release.
     * fix gtk2/base.rb is missing in gem.
       [S.Kitagawa, Kouhei Sutou]
 
+==== Ruby/GIO2
+
+  * Bug fixes:
+    * fix a typo in .pc name. [#3075619]
+      [O01eg, Kouhei Sutou]
+
+==== Ruby/RSVG2
+
+  * Bug fixes:
+    * also check rb_cairo.h availability. [#3075617]
+      [O01eg, Kouhei Sutou]
+
 === Thanks
 
   * S.Kitagawa
+  * O01eg
 
 == Ruby-GNOME2 0.90.1: 2010-09-23
 

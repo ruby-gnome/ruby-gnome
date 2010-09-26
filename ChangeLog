@@ -1,3 +1,11 @@
+2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GIO2: fix a typo in .pc name. [#3075619]
+	Reported by O01eg. Thanks!!!
+
+	* NEWS: Ruby/RSVG2: also check rb_cairo.h availability. [#3075617]
+	Reported by O01eg. Thanks!!!
+
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* etconf.rb: follow directory name changes.
