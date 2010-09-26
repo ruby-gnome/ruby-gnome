@@ -1,3 +1,3 @@
 install:
 	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-gio.pc $(libdir)/pkgconfig
+	$(INSTALL_DATA) ruby-gio2.pc $(libdir)/pkgconfig

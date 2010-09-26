@@ -1,3 +1,9 @@
+2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gio2/depend (install): fix a typo in .pc name.
+	[#3075619] Cann't install gio
+	Reported by O01eg. Thanks!!!
+
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/gio2.rb: support bundled Windows DLL.
