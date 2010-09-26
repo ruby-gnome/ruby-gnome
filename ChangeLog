@@ -1,3 +1,7 @@
+2010-09-26 Guillaume Cottenceau
+
+        * README: fix example for compiling only selected sub bindings
+
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: fix version detection in gem:win32:push task.

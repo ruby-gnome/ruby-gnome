@@ -55,7 +55,7 @@ use from Ruby 1.8.6, 1.8.7 and 1.9.1.
 To compile and install a particular sub-binding, you can add arguments:
 
   % ruby extconf.rb [subdir]...
-    e.g.) ruby extconf.rb glib pango gdkpixbuf
+    e.g.) ruby extconf.rb glib2 pango gdk_pixbuf2 gtk2
 
 Or you can compile each sub-binding:
 
