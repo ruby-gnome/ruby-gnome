@@ -1,3 +1,7 @@
+2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib.h: 0.90.2 -> 0.90.3.
+
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/mkmf-gnome2.rb (ensure_objs): add.
