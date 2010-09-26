@@ -1,3 +1,7 @@
+2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* extconf.rb: reset $objs for each Makefile creation.
+
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: support Ruby/GLib2 directory structure change.

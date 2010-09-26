@@ -44,6 +44,7 @@ create_pkg_config_file("Ruby/PanelApplet", package_id,
 
 create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
                           "-DRUBY_PANELAPPLET_COMPILATION")
+$objs = nil
 $INSTALLFILES ||= []
 $INSTALLFILES << ["../lib/**/*.rb", "$(RUBYLIBDIR)", "../lib"]
 create_makefile_at_srcdir("#{module_name}_main", (base_dir + "main").to_s,
