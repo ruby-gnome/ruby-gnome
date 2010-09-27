@@ -95,7 +95,7 @@ namespace :gem do
     task :push do
       packages.each do |package|
         sh("gem", "push",
-           *Dir.glob(File.join(package, "pkg", "*-#{_version}-x86-mingw32.gem")))
+           *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
       end
     end
   end
