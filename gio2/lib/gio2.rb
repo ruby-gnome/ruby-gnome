@@ -108,7 +108,7 @@ class GLib::FileInfo
   end
 end
 
-class GLib::Icon
+module GLib::Icon
   def eql?(other)
     self === other and self == other
   end
@@ -129,7 +129,7 @@ class GLib::Resolver
   end
 end
 
-class GLib::SocketConnectable
+module GLib::SocketConnectable
   include Enumerable
 
   def each(cancellable = nil)

@@ -1,3 +1,13 @@
+2010-10-27  Nikolai Weibull
+
+	* ext/gio2/util.c (rbgio_define_domain_error): Add the Hash instance
+	variable that we need for rbgio_raise_error.
+
+	* ext/gio2/gfile.c: Do not undefine that which does not exist (File is
+	a module, not a class, so it doesn’t have an alloc function).
+
+	* lib/gio2.rb: Fix class/module “typos”.
+
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gio2/util.c (rbgio_raise_error): don't us dynamic string

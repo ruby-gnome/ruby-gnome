@@ -268,6 +268,7 @@ rbgio_define_domain_error(VALUE module,
 
         error = rb_define_class_under(module, name, parent);
         rb_ivar_set(error, s_id_enum_name, CSTR2RVAL(enum_name));
+        rb_ivar_set(error, s_id_errors, rb_hash_new());
         rb_hash_aset(s_errors, UINT2NUM(domain), error);
 
         return error;
