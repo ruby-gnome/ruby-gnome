@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
-glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
+glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
 
 $LOAD_PATH.unshift(glib_dir)
 require 'test/glib-test-init'

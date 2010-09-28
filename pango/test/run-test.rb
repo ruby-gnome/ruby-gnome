@@ -5,7 +5,7 @@ $VERBOSE = true
 ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
-glib_base = File.join(ruby_gnome2_base, "glib")
+glib_base = File.join(ruby_gnome2_base, "glib2")
 pango_base = File.join(ruby_gnome2_base, "pango")
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))

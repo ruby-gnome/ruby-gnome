@@ -6,7 +6,7 @@ if system("which make > /dev/null")
   system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
 end
 
-glib_dir = File.expand_path(File.join(base_dir, "..", "glib"))
+glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
 gtk_dir = File.expand_path(File.join(base_dir, "..", "gtk"))
 
 $LOAD_PATH.unshift(File.join(glib_dir, "test"))

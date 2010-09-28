@@ -1,3 +1,11 @@
+2010-09-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* gnomeprint/test/run-test.rb, gstreamer/test/run-test.rb,
+	gtkmozembed/test/run-test.rb, gtksourceview2/test/run-test.rb,
+	pango/test/run-test.rb, poppler/test/run-test.rb,
+	gtk2/test/run-test.rb: follow directory name changes.
+	Reported by kimura wataru. Thanks!!!
+
 2010-09-27  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: fix version detection in gem:win32:push task.
