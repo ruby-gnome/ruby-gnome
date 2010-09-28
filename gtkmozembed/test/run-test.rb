@@ -9,7 +9,7 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
-gtk_base = File.join(ruby_gnome2_base, "gtk")
+gtk_base = File.join(ruby_gnome2_base, "gtk2")
 gtk_moz_embed_base = File.join(ruby_gnome2_base, "gtkmozembed")
 
 $LOAD_PATH.unshift(glib_base)
