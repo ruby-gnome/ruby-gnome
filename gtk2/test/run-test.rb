@@ -6,7 +6,7 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
-gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
+gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gtk_base = File.join(ruby_gnome2_base, "gtk2")
 
 [[glib_base, "glib2"],
