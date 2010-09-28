@@ -7,7 +7,7 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdkpixbuf")
-gtk_base = File.join(ruby_gnome2_base, "gtk")
+gtk_base = File.join(ruby_gnome2_base, "gtk2")
 gtk_source_view2_base = File.join(ruby_gnome2_base, "gtksourceview2")
 
 $LOAD_PATH.unshift(glib_base)
@@ -18,6 +18,7 @@ require 'test/glib-test-init'
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(1)
   end
+  $LOAD_PATH.unshift(File.join(target, "ext", File.basename(target)))
   $LOAD_PATH.unshift(File.join(target, "src"))
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
   $LOAD_PATH.unshift(File.join(target))
