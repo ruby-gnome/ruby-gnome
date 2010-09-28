@@ -1,5 +1,7 @@
 2010-09-28  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: All: fix path.
+
 	* gnomeprint/test/run-test.rb, gstreamer/test/run-test.rb,
 	gtkmozembed/test/run-test.rb, gtksourceview2/test/run-test.rb,
 	pango/test/run-test.rb, poppler/test/run-test.rb,

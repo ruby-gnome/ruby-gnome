@@ -10,6 +10,11 @@ A RubyGems package fix release.
 
 === Changes
 
+==== All
+
+  * fix path.
+    [kimura wataru, Kouhei Sutou]
+
 ==== Ruby/GTK2
 
   * Bug fixes:
@@ -32,6 +37,7 @@ A RubyGems package fix release.
 
   * S.Kitagawa
   * O01eg
+  * kimura wataru
 
 == Ruby-GNOME2 0.90.1: 2010-09-23
 
