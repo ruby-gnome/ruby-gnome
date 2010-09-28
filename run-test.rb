@@ -22,7 +22,10 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
   next unless dir.directory?
   dir = dir.expand_path
   src_dir = dir + "src"
-  if src_dir.directory?
+  ext_dir = dir + "ext" + dir.basename
+  if ext_dir.directory?
+    includes.concat(["-I", (src_dir + "lib").to_s, "-I", ext_dir.to_s])
+  elsif src_dir.directory?
     includes.concat(["-I", (src_dir + "lib").to_s, "-I", src_dir.to_s])
   else
     includes.concat(["-I", (dir + "lib").to_s, "-I", dir.to_s])
