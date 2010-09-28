@@ -20,6 +20,7 @@ require 'test/glib-test-init'
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(1)
   end
+  $LOAD_PATH.unshift(File.join(target, "ext", File.basename(target)))
   $LOAD_PATH.unshift(File.join(target, "src"))
   $LOAD_PATH.unshift(File.join(target, "src", "lib"))
   $LOAD_PATH.unshift(File.join(target))
