@@ -7,12 +7,14 @@ if system("which make > /dev/null")
 end
 
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
-gtk_dir = File.expand_path(File.join(base_dir, "..", "gtk"))
+gdk_pixbuf_dir = File.expand_path(File.join(base_dir, "..", "gdk_pixbuf2"))
+gtk_dir = File.expand_path(File.join(base_dir, "..", "gtk2"))
 
 $LOAD_PATH.unshift(File.join(glib_dir, "test"))
 require 'glib-test-init'
 
 [[gtk_dir, "gtk2"],
+ [gdk_pixbuf_dir, "gdk_pibuf2"],
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
   $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
