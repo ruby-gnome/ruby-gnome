@@ -1,3 +1,7 @@
+2010-09-28  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: add missing dependencies.
+
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: don't add .zip into gem.
