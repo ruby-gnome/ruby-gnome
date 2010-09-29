@@ -1,3 +1,8 @@
+2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: add missing libjpeg dependency.
+	Reported by U.Nakamura. Thanks!!!
+
 2010-09-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: fix path.

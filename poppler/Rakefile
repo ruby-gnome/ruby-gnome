@@ -72,6 +72,6 @@ namespace :win32 do
     $LOAD_PATH.unshift((@rb_glib2_dir + "lib").to_s)
     require 'gnome2-win32-binary-downloader'
     GNOME2Win32BinaryDownloader.download(:packages => ["gtk"],
-                                         :dependencies => ["poppler"])
+                                         :dependencies => ["poppler", "jpeg"])
   end
 end
