@@ -1,3 +1,8 @@
+2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: add missing libcroco dependency.
+	Reported by U.Nakamura. Thanks!!!
+
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/rsvg2/rbrsvg.c: also check rb_cairo.h availability.
