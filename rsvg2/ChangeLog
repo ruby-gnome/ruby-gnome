@@ -1,5 +1,7 @@
 2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: fix dependencies.
+
 	* Rakefile: add missing gdk-pixbuf dependency.
 
 	* Rakefile: add missing libcroco dependency.
