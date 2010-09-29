@@ -2,6 +2,30 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.3: 2010-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME.
+
+=== Changes
+
+==== Ruby/RSVG2
+
+  * Bug fixes:
+    * add missing libcroco dependency on Windows.
+      [U.Nakamura, Kouhei Sutou]
+
+==== Ruby/Poppler
+
+  * Bug fixes:
+    * add missing libjpeg dependency on Windows.
+      [U.Nakamura, Kouhei Sutou]
+
+=== Thanks
+
+  * U.Nakamura
+
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
