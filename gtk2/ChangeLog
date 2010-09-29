@@ -1,3 +1,7 @@
+2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: fix dependencies.
+
 2010-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/extconf.rb: ensure adding built source to targets.
