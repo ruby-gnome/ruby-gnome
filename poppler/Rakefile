@@ -71,7 +71,10 @@ namespace :win32 do
   task :download do
     $LOAD_PATH.unshift((@rb_glib2_dir + "lib").to_s)
     require 'gnome2-win32-binary-downloader'
-    GNOME2Win32BinaryDownloader.download(:packages => ["gtk+"],
-                                         :dependencies => ["poppler", "jpeg"])
+    packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+"]
+    dependencies = ["gettext-runtime", "zlib", "freetype", "expat",
+                    "fontconfig", "cairo", "libpng", "poppler", "jpeg"]
+    GNOME2Win32BinaryDownloader.download(:packages => packages,
+                                         :dependencies => dependencies)
   end
 end
