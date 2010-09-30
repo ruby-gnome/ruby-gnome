@@ -43,6 +43,18 @@ extern void Init_glib_unicode();
 extern void Init_glib_keyfile();
 extern void Init_glib_bookmark_file();
 
+gchar *
+rbg_rval2cstr(VALUE str)
+{
+    StringValue(str);
+#ifdef HAVE_RB_STR_ENCODE
+    if (rb_enc_get(str) != rb_utf8_encoding()) {
+        str = rb_str_export_to_enc(str, rb_utf8_encoding());
+    }
+#endif
+    return RSTRING_PTR(str);
+}
+
 const gchar *
 rbg_rval_inspect(VALUE object)
 {
@@ -62,19 +74,27 @@ rbg_string_value_ptr(ptr)
 gchar *
 rbg_rval2cstr_accept_nil(VALUE str)
 {
-    return NIL_P(str) ? NULL : StringValuePtr(str);
+    return NIL_P(str) ? NULL : RVAL2CSTR(str);
 }
 
 VALUE
 rbg_cstr2rval(const char* str)
 {
+#ifdef HAVE_RB_STR_ENCODE
+    return str ? rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding()) : Qnil;
+#else
     return str ? rb_str_new2(str) : Qnil;
+#endif
 }
 
 static VALUE
 rbg_cstr2rval_with_free_body(VALUE str)
 {
+#ifdef HAVE_RB_STR_ENCODE
+    return rb_external_str_new_with_enc((gchar *)str, strlen((gchar *)str), rb_utf8_encoding());
+#else
     return rb_str_new2((gchar *)str);
+#endif
 }
 
 static VALUE

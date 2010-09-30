@@ -45,7 +45,7 @@ typedef int GPid;
 
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
-#define RVAL2CSTR(v) (StringValuePtr(v))
+#define RVAL2CSTR(v) (rbg_rval2cstr(v))
 #define RVAL2CSTR_ACCEPT_NIL(v) (rbg_rval2cstr_accept_nil(v))
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
@@ -76,6 +76,7 @@ RUBY_GLIB2_VAR VALUE mGLib;
 extern const gchar *rbg_rval_inspect(VALUE object);
 
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
+extern gchar *rbg_rval2cstr(VALUE str);
 extern gchar *rbg_rval2cstr_accept_nil(VALUE str);
 extern VALUE rbg_cstr2rval(const char* str);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);

@@ -72,10 +72,7 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
       case G_TYPE_DOUBLE:
         return rb_float_new(g_value_get_double(value));
       case G_TYPE_STRING:
-        {
-            const char* str = g_value_get_string(value);
-            return str ? rb_str_new2(str) : Qnil;
-        }
+        return CSTR2RVAL(g_value_get_string(value));
       case G_TYPE_ENUM:
         return rbgobj_make_enum(g_value_get_enum(value), type);
       case G_TYPE_FLAGS:
@@ -249,7 +246,7 @@ rbgobj_rvalue_to_gvalue(VALUE val, GValue* result)
         {
             if (SYMBOL_P(val))
                 val = rb_funcall(val, id_to_s, 0);
-            g_value_set_string(result, NIL_P(val) ? NULL : StringValuePtr(val));
+            g_value_set_string(result, RVAL2CSTR_ACCEPT_NIL(val));
             return;
         }
       case G_TYPE_OBJECT:

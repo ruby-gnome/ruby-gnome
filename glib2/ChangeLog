@@ -1,3 +1,12 @@
+2010-09-30  Guillaume Cottenceau
+
+	* ext/glib2/rbglib.c, ext/glib2/rbgobj_value.c,
+	ext/glib2/rbglib.h, ext/glib2/glib2.def: improve CSTR2RVAL,
+	RVAL2CSTR, gvalue2rvalue, and rvalue2gvalue, to use UTF-8 strings
+	when Ruby supports String encoding (Ruby 1.9) - in particular this
+	should allow retrieving usable Strings from rg2 (Strings with a
+	set encoding)
+
 2010-09-26  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib.h: 0.90.2 -> 0.90.3.
