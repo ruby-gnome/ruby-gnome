@@ -1,3 +1,7 @@
+2010-10-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* */Rakefile: fix gem dependencies.
+
 2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/RSVG2: add missing libcroco dependency on Windows.
