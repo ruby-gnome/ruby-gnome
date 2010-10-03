@@ -12,7 +12,7 @@ top_build_dir = Pathname(".").parent.parent.parent.expand_path
 mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
 version_suffix = ""
 unless mkmf_gnome2_dir.exist?
-  if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
+  if /(-\d+\.\d+\.\d+)(?:\.\d+)?\z/ =~ base_dir.basename.to_s
     version_suffix = $1
     mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + 'lib'
   end

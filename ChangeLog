@@ -1,3 +1,7 @@
+2010-10-03  Kouhei Sutou  <kou@clear-code.com>
+
+	* */ext/*/extconf.rb: support tiny version.
+
 2010-10-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* */Rakefile: fix gem dependencies.
