@@ -1,3 +1,8 @@
+2010-10-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/Poppler: support Popper 0.15.0. [#3079667]
+	Reported by Mamoru Tasaka. Thanks!!!
+
 2010-10-03  Kouhei Sutou  <kou@clear-code.com>
 
 	* NEWS: Ruby/Poppler: fix installed Ruby/GLib2 gem can't be

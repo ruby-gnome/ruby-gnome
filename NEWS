@@ -18,6 +18,10 @@ WRITE ME.
 
 ==== Ruby/Poppler
 
+  * Improvements:
+    * support Popper 0.15.0. [#3079667]
+      [Mamoru Tasaka, Kouhei Sutou]
+
   * Bug fixes:
     * add missing libjpeg dependency on Windows.
       [U.Nakamura, Kouhei Sutou]
@@ -28,6 +32,7 @@ WRITE ME.
 
   * U.Nakamura
   * kdmsnr
+  * Mamoru Tasaka
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
