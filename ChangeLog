@@ -1,5 +1,9 @@
 2010-10-03  Kouhei Sutou  <kou@clear-code.com>
 
+	* NEWS: Ruby/Poppler: fix installed Ruby/GLib2 gem can't be
+	detected.
+	Reported by kdmsnr. Thanks!!!
+
 	* */ext/*/extconf.rb: support tiny version.
 
 2010-10-02  Kouhei Sutou  <kou@cozmixng.org>

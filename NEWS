@@ -21,10 +21,13 @@ WRITE ME.
   * Bug fixes:
     * add missing libjpeg dependency on Windows.
       [U.Nakamura, Kouhei Sutou]
+    * fix installed Ruby/GLib2 gem can't be detected.
+      [kdmsnr, Kouhei Sutou]
 
 === Thanks
 
   * U.Nakamura
+  * kdmsnr
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
