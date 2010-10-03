@@ -1,3 +1,8 @@
+2010-10-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/poppler/rbpoppler-page.c: support Poppler 0.15.0. [#3079667]
+	Reported by Mamoru Tasaka. Thanks!!!
+
 2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: fix dependencies.

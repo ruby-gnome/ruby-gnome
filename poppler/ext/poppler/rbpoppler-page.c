@@ -332,6 +332,9 @@ page_get_text(int argc, VALUE *argv, VALUE self)
     }
 
     if (NIL_P(rb_rect)) {
+#if POPPLER_CHECK_VERSION(0, 15, 0)
+        text = poppler_page_get_text(page);
+#else
         PopplerRectangle rect;
         double width, height;
 
@@ -343,10 +346,16 @@ page_get_text(int argc, VALUE *argv, VALUE self)
         text = poppler_page_get_text(page,
                                      style,
                                      &rect);
+#endif
     } else {
-        text = poppler_page_get_text(page,
-                                     style,
-                                     RVAL2POPPLER_RECT(rb_rect));
+        PopplerRectangle *rect;
+
+	rect = RVAL2POPPLER_RECT(rb_rect);
+#if POPPLER_CHECK_VERSION(0, 15, 0)
+        text = poppler_page_get_selected_text(page, style, rect);
+#else
+        text = poppler_page_get_text(page, style, rect);
+#endif
     }
 
     rb_text = CSTR2RVAL(text);
