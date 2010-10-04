@@ -1,3 +1,9 @@
+2010-10-04  Guillaume Cottenceau
+
+	* ext/gtk2/rbgtkfilechooser.c: correctly handle filenames
+	to/from rg2 with ruby 1.9 String supporting encodings (in
+	particular, they are not necessarily specified in UTF-8)
+
 2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: fix dependencies.
