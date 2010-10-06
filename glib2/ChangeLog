@@ -1,3 +1,8 @@
+2010-10-06  Guillaume Cottenceau
+
+	* ext/glib2/rbglib.c, ext/glib2/extconf.rb: use
+	HAVE_RUBY_ENCODING_H, not HAVE_RB_STR_ENCODE
+
 2010-09-30  Guillaume Cottenceau
 
 	* ext/glib2/rbglib.c, ext/glib2/rbgobj_value.c,

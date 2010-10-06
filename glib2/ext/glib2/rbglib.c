@@ -47,7 +47,7 @@ gchar *
 rbg_rval2cstr(VALUE str)
 {
     StringValue(str);
-#ifdef HAVE_RB_STR_ENCODE
+#ifdef HAVE_RUBY_ENCODING_H
     if (rb_enc_get(str) != rb_utf8_encoding()) {
         str = rb_str_export_to_enc(str, rb_utf8_encoding());
     }
@@ -80,7 +80,7 @@ rbg_rval2cstr_accept_nil(VALUE str)
 VALUE
 rbg_cstr2rval(const char* str)
 {
-#ifdef HAVE_RB_STR_ENCODE
+#ifdef HAVE_RUBY_ENCODING_H
     return str ? rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding()) : Qnil;
 #else
     return str ? rb_str_new2(str) : Qnil;
@@ -90,7 +90,7 @@ rbg_cstr2rval(const char* str)
 static VALUE
 rbg_cstr2rval_with_free_body(VALUE str)
 {
-#ifdef HAVE_RB_STR_ENCODE
+#ifdef HAVE_RUBY_ENCODING_H
     return rb_external_str_new_with_enc((gchar *)str, strlen((gchar *)str), rb_utf8_encoding());
 #else
     return rb_str_new2((gchar *)str);
