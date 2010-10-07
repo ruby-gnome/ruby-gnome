@@ -60,6 +60,9 @@ EXPORTS
 	rbg_rval2cstr_accept_nil
 	rbg_cstr2rval
 	rbg_cstr2rval_with_free
+        rbg_filename_to_ruby_free
+        rbg_filename_from_ruby
+        rbg_filename_gslist_to_array_free
 	rbg_string_value_ptr
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters

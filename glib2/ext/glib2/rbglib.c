@@ -112,6 +112,94 @@ rbg_cstr2rval_with_free(gchar *str)
                            rbg_cstr2rval_with_free_ensure, (VALUE)str) : Qnil;
 }
 
+#ifdef HAVE_RUBY_ENCODING_H
+static rb_encoding *filename_encoding_if_not_utf8;
+#endif
+
+VALUE
+rbg_filename_to_ruby_free(gchar *filename)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+    gchar *filename_utf8;
+    GError *error = NULL;
+    gsize written;
+    VALUE rb_filename = Qnil;
+
+    if (filename == NULL)
+        return Qnil;
+       
+    /* convert filename to UTF-8 if needed */
+    if (filename_encoding_if_not_utf8 != NULL) {
+        filename_utf8 = g_filename_to_utf8(filename, -1, NULL, &written, &error);
+        g_free(filename);
+        if (error != NULL)
+            RAISE_GERROR(error);
+    } else {
+        filename_utf8 = filename;
+    }
+
+    /* create Ruby String in UTF-8 */
+    rb_filename = rb_external_str_new_with_enc(filename_utf8,
+                                               strlen(filename_utf8),
+                                               rb_utf8_encoding());
+    g_free(filename_utf8);
+
+    /* if needed, change encoding of Ruby String to filename encoding, so that
+       upcoming File operations will work properly */
+    if (filename_encoding_if_not_utf8 != NULL) {
+        return rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8);
+    } else {
+        return rb_filename;
+    }
+
+#else
+    return CSTR2RVAL_FREE(filename);
+#endif
+}
+
+gchar *
+rbg_filename_from_ruby(VALUE filename)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+    GError *error = NULL;
+    gchar *retval;
+    gsize written;
+
+    /* if needed, change encoding of Ruby String to UTF-8 */
+    StringValue(filename);
+    if (rb_enc_get(filename) != rb_utf8_encoding()) {
+        filename = rb_str_export_to_enc(filename, rb_utf8_encoding());
+    }
+
+    /* convert it to filename encoding if needed */
+    if (filename_encoding_if_not_utf8 != NULL) {
+        retval = g_filename_from_utf8(RSTRING_PTR(filename), -1, NULL, &written, &error);
+        if (error != NULL)
+            RAISE_GERROR(error);
+    } else {
+        retval = RSTRING_PTR(filename);
+    }
+
+    return retval;
+
+#else
+    return RVAL2CSTR(filename);
+#endif
+}
+
+VALUE
+rbg_filename_gslist_to_array_free(GSList *list)
+{
+    GSList *l;
+    VALUE ary = rb_ary_new();
+    for (l = list; l != NULL; l = g_slist_next(l)) {
+        rb_ary_push(ary, rbg_filename_to_ruby_free(l->data));
+    }
+    g_slist_free(list);
+    return ary;
+}
+
+
 #if 0
 /*
 2004-04-15 Commented out by Masao.
@@ -195,6 +283,10 @@ rbg_s_os_unix(self)
 void 
 Init_glib2()
 {
+#ifdef HAVE_RUBY_ENCODING_H
+    const gchar **filename_charsets;
+#endif
+
     id_inspect = rb_intern("inspect");
 
     mGLib = rb_define_module("GLib");
@@ -273,6 +365,21 @@ Init_glib2()
 
     rb_define_const(mGLib, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
     rb_define_const(mGLib, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
+
+    /* discover and store glib filename encoding */
+#ifdef HAVE_RUBY_ENCODING_H
+    if (g_get_filename_charsets(&filename_charsets)
+        || filename_charsets == NULL
+        || filename_charsets[0] == NULL
+        || !strcmp(filename_charsets[0], "UTF-8")
+        || rb_enc_find(filename_charsets[0]) == rb_enc_find("ASCII-8BIT")) {
+        /* set to NULL, mean do not perform transcoding, either filename
+           encoding is unknown, UTF-8, or unsupported */
+        filename_encoding_if_not_utf8 = NULL;
+    } else {
+        filename_encoding_if_not_utf8 = rb_enc_find(filename_charsets[0]);
+    }
+#endif
 
 /* Don't implement them.
 #define     G_DIR_SEPARATOR_S

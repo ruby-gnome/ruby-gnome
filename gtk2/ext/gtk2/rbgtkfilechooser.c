@@ -22,81 +22,6 @@
 #  include <gtk/gtkfilesystem.h>
 #endif
 
-#ifdef HAVE_RUBY_ENCODING_H
-static rb_encoding *filename_encoding_if_not_utf8;
-#endif
-
-static VALUE
-filename_to_ruby_free(gchar* filename)
-{
-#ifdef HAVE_RUBY_ENCODING_H
-    gchar* filename_utf8;
-    GError *error = NULL;
-    gsize written;
-    VALUE rb_filename = Qnil;
-
-    if (filename == NULL)
-        return Qnil;
-       
-    /* convert filename to UTF-8 if needed */
-    if (filename_encoding_if_not_utf8 != NULL) {
-        filename_utf8 = g_filename_to_utf8(filename, -1, NULL, &written, &error);
-        g_free(filename);
-        if (error != NULL)
-            RAISE_GERROR(error);
-    } else {
-        filename_utf8 = filename;
-    }
-
-    /* create Ruby String in UTF-8 */
-    rb_filename = rb_external_str_new_with_enc(filename_utf8,
-                                               strlen(filename_utf8),
-                                               rb_utf8_encoding());
-    g_free(filename_utf8);
-
-    /* if needed, change encoding of Ruby String to filename encoding, so that
-       upcoming File operations will work properly */
-    if (filename_encoding_if_not_utf8 != NULL) {
-        return rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8);
-    } else {
-        return rb_filename;
-    }
-
-#else
-    return CSTR2RVAL_FREE(filename);
-#endif
-}
-
-static gchar*
-filename_from_ruby(VALUE filename)
-{
-#ifdef HAVE_RUBY_ENCODING_H
-    GError *error = NULL;
-    gchar *retval;
-    gsize written;
-
-    /* if needed, change encoding of Ruby String to UTF-8 */
-    StringValue(filename);
-    if (rb_enc_get(filename) != rb_utf8_encoding()) {
-        filename = rb_str_export_to_enc(filename, rb_utf8_encoding());
-    }
-
-    /* convert it to filename encoding if needed */
-    if (filename_encoding_if_not_utf8 != NULL) {
-        retval = g_filename_from_utf8(RSTRING_PTR(filename), -1, NULL, &written, &error);
-        if (error != NULL)
-            RAISE_GERROR(error);
-    } else {
-        retval = RSTRING_PTR(filename);
-    }
-
-    return retval;
-
-#else
-    return RVAL2CSTR(filename);
-#endif
-}
-
 static VALUE
 gslist2ary_free(GSList* list)
 {
@@ -108,19 +33,6 @@ gslist2ary_free(GSList* list)
     g_slist_free(list);
     return ary;
 }
-
-static VALUE
-gsfilenamelist2ary_free(GSList* list)
-{
-    GSList* l;
-    VALUE ary = rb_ary_new();
-    for (l = list; l != NULL; l = g_slist_next(l)) {
-        rb_ary_push(ary, filename_to_ruby_free(l->data));
-    }
-    g_slist_free(list);
-    return ary;
-}
-
 
 static VALUE
 fcho_set_action(self, action)
@@ -167,14 +79,14 @@ static VALUE
 fcho_get_filename(self)
     VALUE self;
 {
-    return filename_to_ruby_free(gtk_file_chooser_get_filename(_SELF(self)));
+    return CSTRFILENAME2RVAL_FREE(gtk_file_chooser_get_filename(_SELF(self)));
 }
 
 static VALUE
 fcho_set_filename(self, name)
     VALUE self, name;
 {
-    gboolean ret = gtk_file_chooser_set_filename(_SELF(self), filename_from_ruby(name));
+    gboolean ret = gtk_file_chooser_set_filename(_SELF(self), RVAL2CSTRFILENAME(name));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set filename");
     return self;
 }
@@ -183,14 +95,14 @@ static VALUE
 fcho_select_filename(self, filename)
     VALUE self, filename;
 {
-    return CBOOL2RVAL(gtk_file_chooser_select_filename(_SELF(self), filename_from_ruby(filename)));
+    return CBOOL2RVAL(gtk_file_chooser_select_filename(_SELF(self), RVAL2CSTRFILENAME(filename)));
 }
 
 static VALUE
 fcho_unselect_filename(self, filename)
     VALUE self, filename;
 {
-    gtk_file_chooser_unselect_filename(_SELF(self), filename_from_ruby(filename));
+    gtk_file_chooser_unselect_filename(_SELF(self), RVAL2CSTRFILENAME(filename));
     return self;
 }
 
@@ -214,7 +126,7 @@ static VALUE
 fcho_get_filenames(self)
     VALUE self;
 {
-    return gsfilenamelist2ary_free(gtk_file_chooser_get_filenames(_SELF(self)));
+    return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_get_filenames(_SELF(self)));
 }
 
 static VALUE
@@ -349,7 +261,7 @@ fcho_add_shortcut_folder(self, folder)
     VALUE self, folder;
 {
     GError *error = NULL;
-    if (! gtk_file_chooser_add_shortcut_folder(_SELF(self), filename_from_ruby(folder), &error))
+    if (! gtk_file_chooser_add_shortcut_folder(_SELF(self), RVAL2CSTRFILENAME(folder), &error))
         RAISE_GERROR(error);
     return self;
 }
@@ -359,7 +271,7 @@ fcho_remove_shortcut_folder(self, folder)
     VALUE self, folder;
 {
     GError *error = NULL;
-    if (! gtk_file_chooser_remove_shortcut_folder(_SELF(self), filename_from_ruby(folder), &error))
+    if (! gtk_file_chooser_remove_shortcut_folder(_SELF(self), RVAL2CSTRFILENAME(folder), &error))
         RAISE_GERROR(error);
     return self;
 }
@@ -368,7 +280,7 @@ static VALUE
 fcho_list_shortcut_folders(self)
     VALUE self;
 {
-    return gsfilenamelist2ary_free(gtk_file_chooser_list_shortcut_folders(_SELF(self)));
+    return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_list_shortcut_folders(_SELF(self)));
 }
 
 
@@ -411,21 +323,6 @@ gboolean    gtk_file_chooser_get_do_overwrite_confirmation
 void 
 Init_gtk_file_chooser()
 {
-#ifdef HAVE_RUBY_ENCODING_H
-    const gchar** charsets;
-    /* discover and store glib filename encoding */
-    if (g_get_filename_charsets(&charsets)
-        || charsets == NULL
-        || charsets[0] == NULL
-        || !strcmp(charsets[0], "UTF-8")
-        || rb_enc_find(charsets[0]) == rb_enc_find("ASCII-8BIT")) {
-        /* set to NULL, mean do not perform transcoding, either filename
-           encoding is unknown, UTF-8, or unsupported */
-        filename_encoding_if_not_utf8 = NULL;
-    } else {
-        filename_encoding_if_not_utf8 = rb_enc_find(charsets[0]);
-    }
-#endif
 
 #if GTK_CHECK_VERSION(2,4,0)
 

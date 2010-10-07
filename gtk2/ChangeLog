@@ -1,3 +1,9 @@
+2010-10-07  Guillaume Cottenceau
+
+	* ext/gtk2/rbgtkfilechooser.c: move functions to handle filename
+	String to/from rg2 manipulations to glib2, to use them in any rg2
+	submodules
+
 2010-10-04  Guillaume Cottenceau
 
 	* ext/gtk2/rbgtkfilechooser.c: correctly handle filenames

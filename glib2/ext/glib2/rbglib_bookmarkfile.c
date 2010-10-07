@@ -56,7 +56,7 @@ bf_load_from_file(self, filename)
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_load_from_file(_SELF(self),
-                                                  (const gchar*)RVAL2CSTR(filename),
+                                                  RVAL2CSTRFILENAME(filename),
                                                   &error);
     if (!ret) RAISE_GERROR(error);
     return self;
@@ -117,7 +117,7 @@ bf_to_file(self, filename)
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_to_file(_SELF(self),
-                                           (const gchar *)RVAL2CSTR(filename),
+                                           RVAL2CSTRFILENAME(filename),
                                            &error);
     if (!ret) RAISE_GERROR(error);
     return self;

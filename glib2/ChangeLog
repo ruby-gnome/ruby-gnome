@@ -1,3 +1,11 @@
+2010-10-07  Guillaume Cottenceau
+
+	* ext/glib2/rbglib.c, ext/glib2/rbglib.h, ext/glib2/glib2.def,
+	ext/glib2/rbglib_bookmarkfile.c: have RVAL2CSTRFILENAME,
+	CSTRFILENAME2RVAL_FREE and CSTRFILENAMEARRAY2RVAL_FREE, to handle
+	filename String to/from rg2 manipulations, in glib2 to use them in
+	any rg2 submodules
+
 2010-10-06  Guillaume Cottenceau
 
 	* ext/glib2/rbglib.c, ext/glib2/extconf.rb: use
