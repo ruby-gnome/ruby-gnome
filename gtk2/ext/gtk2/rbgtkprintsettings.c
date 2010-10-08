@@ -78,7 +78,7 @@ ps_get(VALUE self, VALUE key)
 static VALUE
 ps_set(VALUE self, VALUE key, VALUE value)
 {
-    gtk_print_settings_set(_SELF(self), RVAL2CSTR(key), RVAL2CSTR2(value));
+    gtk_print_settings_set(_SELF(self), RVAL2CSTR(key), RVAL2CSTR_ACCEPT_NIL(value));
     return self;
 }
 
@@ -285,7 +285,7 @@ ps_get_printer(VALUE self)
 static VALUE
 ps_set_printer(VALUE self, VALUE printer)
 {
-    gtk_print_settings_set_printer(_SELF(self), RVAL2CSTR2(printer));
+    gtk_print_settings_set_printer(_SELF(self), RVAL2CSTR_ACCEPT_NIL(printer));
     return self;
 }
 
@@ -546,7 +546,7 @@ static VALUE
 ps_set_default_source(VALUE self, VALUE default_source)
 {
     gtk_print_settings_set_default_source(_SELF(self),
-                                          RVAL2CSTR2(default_source));
+                                          RVAL2CSTR_ACCEPT_NIL(default_source));
     return self;
 }
 
@@ -559,7 +559,7 @@ ps_get_media_type(VALUE self)
 static VALUE
 ps_set_media_type(VALUE self, VALUE media_type)
 {
-    gtk_print_settings_set_media_type(_SELF(self), RVAL2CSTR2(media_type));
+    gtk_print_settings_set_media_type(_SELF(self), RVAL2CSTR_ACCEPT_NIL(media_type));
     return self;
 }
 
@@ -572,7 +572,7 @@ ps_get_dither(VALUE self)
 static VALUE
 ps_set_dither(VALUE self, VALUE dither)
 {
-    gtk_print_settings_set_dither(_SELF(self), RVAL2CSTR2(dither));
+    gtk_print_settings_set_dither(_SELF(self), RVAL2CSTR_ACCEPT_NIL(dither));
     return self;
 }
 
@@ -585,7 +585,7 @@ ps_get_finishings(VALUE self)
 static VALUE
 ps_set_finishings(VALUE self, VALUE finishings)
 {
-    gtk_print_settings_set_finishings(_SELF(self), RVAL2CSTR2(finishings));
+    gtk_print_settings_set_finishings(_SELF(self), RVAL2CSTR_ACCEPT_NIL(finishings));
     return self;
 }
 
@@ -598,7 +598,7 @@ ps_get_output_bin(VALUE self)
 static VALUE
 ps_set_output_bin(VALUE self, VALUE output_bin)
 {
-    gtk_print_settings_set_output_bin(_SELF(self), RVAL2CSTR2(output_bin));
+    gtk_print_settings_set_output_bin(_SELF(self), RVAL2CSTR_ACCEPT_NIL(output_bin));
     return self;
 }
 #endif
@@ -620,7 +620,7 @@ ps_to_key_file(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &key_file, &group_name);
     gtk_print_settings_to_key_file(_SELF(self),
                                    (GKeyFile*)RVAL2BOXED(key_file, G_TYPE_KEY_FILE),
-                                   RVAL2CSTR2(group_name));
+                                   RVAL2CSTR_ACCEPT_NIL(group_name));
     return self;
 }
 #endif

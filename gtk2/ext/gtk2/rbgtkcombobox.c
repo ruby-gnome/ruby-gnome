@@ -153,7 +153,7 @@ static VALUE
 combobox_get_active_text(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_combo_box_get_active_text(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_combo_box_get_active_text(_SELF(self)));
 }
 
 static VALUE

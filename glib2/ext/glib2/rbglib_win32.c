@@ -19,14 +19,14 @@ static VALUE
 rbglib_m_win32_error_message(self, error)
     VALUE self, error;
 {
-    return CSTR2RVAL2(g_win32_error_message(NUM2INT(error)));
+    return CSTR2RVAL_FREE(g_win32_error_message(NUM2INT(error)));
 }
 
 static VALUE
 rbglib_m_win32_locale(self)
     VALUE self;
 {
-    return CSTR2RVAL2(g_win32_getlocale());
+    return CSTR2RVAL_FREE(g_win32_getlocale());
 }
 
 static VALUE
@@ -41,7 +41,7 @@ static VALUE
 rbglib_m_win32_get_package_installation_directory(self, package, dll_name)
   VALUE self, package, dll_name;
 {
-	return CSTR2RVAL2(g_win32_get_package_installation_directory(RVAL2CSTR(package), 
+	return CSTR2RVAL_FREE(g_win32_get_package_installation_directory(RVAL2CSTR(package), 
 	                                                            RVAL2CSTR(dll_name)));
 }
 
@@ -49,7 +49,7 @@ static VALUE
 rbglib_m_get_package_installation_subdirectory(self, package, dll_name, subdir)
   VALUE self, package, dll_name, subdir;
 {
-	return CSTR2RVAL2(g_win32_get_package_installation_subdirectory(RVAL2CSTR(package), 
+	return CSTR2RVAL_FREE(g_win32_get_package_installation_subdirectory(RVAL2CSTR(package), 
 	                                                                RVAL2CSTR(dll_name),
 	                                                                RVAL2CSTR(subdir)));
 }
@@ -68,7 +68,7 @@ static VALUE
 rbglib_m_win32_locale_filename_from_utf8(self, utf8_filename)
     VALUE self, utf8_filename;
 {
-    return CSTR2RVAL2(g_win32_locale_filename_from_utf8(RVAL2CSTR(utf8_filename)));
+    return CSTR2RVAL_FREE(g_win32_locale_filename_from_utf8(RVAL2CSTR(utf8_filename)));
 }
 
 static VALUE

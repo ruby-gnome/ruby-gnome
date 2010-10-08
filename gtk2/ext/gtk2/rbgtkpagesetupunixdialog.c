@@ -23,7 +23,7 @@ psud_initialize(int argc, VALUE *argv, VALUE self)
     VALUE title, parent;
 
     rb_scan_args(argc, argv, "02", &title, &parent);
-    dialog = gtk_page_setup_unix_dialog_new(RVAL2CSTR2(title), RVAL2GOBJ(parent));
+    dialog = gtk_page_setup_unix_dialog_new(RVAL2CSTR_ACCEPT_NIL(title), RVAL2GOBJ(parent));
 
     RBGTK_INITIALIZE(self, dialog);
     return Qnil;

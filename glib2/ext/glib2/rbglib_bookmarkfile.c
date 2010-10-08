@@ -187,7 +187,7 @@ bf_get_title(self, uri)
                                            (const gchar *)RVAL2CSTR(uri),
                                            &error);
     if (error) RAISE_GERROR(error);
-    return CSTR2RVAL2(ret);
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -199,7 +199,7 @@ bf_get_description(self, uri)
                                                  (const gchar *)RVAL2CSTR(uri),
                                                  &error);
     if (error) RAISE_GERROR(error);
-    return CSTR2RVAL2(ret);
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -211,7 +211,7 @@ bf_get_mime_type(self, uri)
                                                (const gchar *)RVAL2CSTR(uri),
                                                &error);
     if (error) RAISE_GERROR(error);
-    return CSTR2RVAL2(ret);
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -241,7 +241,7 @@ bf_get_icon(self, uri)
         if (error) RAISE_GERROR(error);
         return Qnil;
     }
-    return rb_assoc_new(CSTR2RVAL2(href), CSTR2RVAL2(mime_type)); 
+    return rb_assoc_new(CSTR2RVAL_FREE(href), CSTR2RVAL_FREE(mime_type)); 
 }
 
 static VALUE

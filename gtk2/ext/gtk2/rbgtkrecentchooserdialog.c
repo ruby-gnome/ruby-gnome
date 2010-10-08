@@ -27,14 +27,14 @@ rcd_initialize(argc, argv, self)
       VALUE manager;
       rb_scan_args(argc, argv, "03*", &title, &parent, &manager, &button_ary);
 
-      dialog = gtk_recent_chooser_dialog_new_for_manager((const gchar*)RVAL2CSTR2(title),
+      dialog = gtk_recent_chooser_dialog_new_for_manager((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
 							 GTK_WINDOW(RVAL2GOBJ(parent)),
 							 GTK_RECENT_MANAGER(RVAL2GOBJ(manager)),
 							 (const gchar*)NULL, NULL);
     } else {
       rb_scan_args(argc, argv, "02*", &title, &parent, &button_ary);
 
-      dialog = gtk_recent_chooser_dialog_new((const gchar*)RVAL2CSTR2(title),
+      dialog = gtk_recent_chooser_dialog_new((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
 					     GTK_WINDOW(RVAL2GOBJ(parent)),
 					     (const gchar*)NULL, NULL);
     }

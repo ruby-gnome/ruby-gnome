@@ -102,7 +102,7 @@ fileinfo_remove_attribute(VALUE self, VALUE attribute)
 static VALUE
 fileinfo_get_attribute_as_string(VALUE self, VALUE attribute)
 {
-        return CSTR2RVAL2(g_file_info_get_attribute_as_string(_SELF(self), RVAL2CSTR(attribute)));
+        return CSTR2RVAL_FREE(g_file_info_get_attribute_as_string(_SELF(self), RVAL2CSTR(attribute)));
 }
 
 static VALUE

@@ -251,7 +251,7 @@ has_field_p(VALUE self, VALUE name)
 static VALUE
 to_s(VALUE self)
 {
-    return CSTR2RVAL2(gst_structure_to_string(SELF(self)));
+    return CSTR2RVAL_FREE(gst_structure_to_string(SELF(self)));
 }
 
 void

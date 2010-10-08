@@ -1,3 +1,9 @@
+2010-10-08  Guillaume Cottenceau
+
+	* RVAL2CSTR2 is deprecated, replace with RVAL2CSTR_ACCEPT_NIL
+
+	* CSTR2RVAL2 is deprecated, replace with CSTR2RVAL_FREE
+
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: fix extension library path.

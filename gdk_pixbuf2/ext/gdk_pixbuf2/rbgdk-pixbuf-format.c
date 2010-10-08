@@ -54,14 +54,14 @@ static VALUE
 get_name(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gdk_pixbuf_format_get_name(_SELF(self)));
+    return CSTR2RVAL_FREE(gdk_pixbuf_format_get_name(_SELF(self)));
 }
 
 static VALUE
 get_description(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gdk_pixbuf_format_get_description(_SELF(self)));
+    return CSTR2RVAL_FREE(gdk_pixbuf_format_get_description(_SELF(self)));
 }
     
 static VALUE

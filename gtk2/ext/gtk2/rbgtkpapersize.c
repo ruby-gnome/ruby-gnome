@@ -26,7 +26,7 @@ ps_initialize(int argc, VALUE *argv, VALUE self)
     if (argc <= 1) {
         VALUE name;
         rb_scan_args(argc, argv, "01", &name);
-        size = gtk_paper_size_new(RVAL2CSTR2(name));
+        size = gtk_paper_size_new(RVAL2CSTR_ACCEPT_NIL(name));
     } else if (argc == 4) {
         size = gtk_paper_size_new_from_ppd(RVAL2CSTR(argv[0]),
                                            RVAL2CSTR(argv[1]),

@@ -156,7 +156,7 @@ static VALUE
 rc_find_module_in_path(self, module_file)
     VALUE self, module_file;
 {
-    return CSTR2RVAL2(gtk_rc_find_module_in_path(RVAL2CSTR(module_file)));
+    return CSTR2RVAL_FREE(gtk_rc_find_module_in_path(RVAL2CSTR(module_file)));
 }
 
 /*
@@ -169,7 +169,7 @@ static VALUE
 rc_get_module_dir(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_rc_get_module_dir());
+    return CSTR2RVAL_FREE(gtk_rc_get_module_dir());
 }
 
 static VALUE
@@ -190,7 +190,7 @@ static VALUE
 rc_get_theme_dir(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_rc_get_theme_dir());
+    return CSTR2RVAL_FREE(gtk_rc_get_theme_dir());
 }
 
 void 

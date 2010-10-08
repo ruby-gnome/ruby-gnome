@@ -644,7 +644,7 @@ widget_create_pango_layout(argc, argv, self)
 {
     VALUE text;
     rb_scan_args(argc, argv, "01", &text);
-    return GOBJ2RVALU(gtk_widget_create_pango_layout(_SELF(self), RVAL2CSTR2(text)));
+    return GOBJ2RVALU(gtk_widget_create_pango_layout(_SELF(self), RVAL2CSTR_ACCEPT_NIL(text)));
 }
 
 static VALUE
@@ -657,7 +657,7 @@ widget_render_icon(argc, argv, self)
     rb_scan_args(argc, argv, "21", &stock_id, &size, &detail);
     return GOBJ2RVALU(gtk_widget_render_icon(_SELF(self), rb_id2name(SYM2ID(stock_id)),
                                              RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
-                                             RVAL2CSTR2(detail)));
+                                             RVAL2CSTR_ACCEPT_NIL(detail)));
 }
 
 static VALUE

@@ -284,7 +284,7 @@ keyfile_get_value(self, group_name, key)
 
     if (error) RAISE_GERROR(error);
 
-    return ret ? CSTR2RVAL2(ret) : Qnil;
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -299,7 +299,7 @@ keyfile_get_string(self, group_name, key)
 
     if (error) RAISE_GERROR(error);
 
-    return ret ? CSTR2RVAL2(ret) : Qnil;
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -322,7 +322,7 @@ keyfile_get_locale_string(argc, argv, self)
 
     if (error) RAISE_GERROR(error);
 
-    return ret ? CSTR2RVAL2(ret) : Qnil;
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -508,7 +508,7 @@ keyfile_get_comment(self, group_name, key)
     
     if (error) RAISE_GERROR(error);
 
-    return CSTR2RVAL2(ret);
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE

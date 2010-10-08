@@ -142,14 +142,14 @@ static VALUE
 fcho_get_current_folder(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_file_chooser_get_current_folder(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_file_chooser_get_current_folder(_SELF(self)));
 }
 
 static VALUE
 fcho_get_uri(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_file_chooser_get_uri(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_file_chooser_get_uri(_SELF(self)));
 }
 
 static VALUE
@@ -196,7 +196,7 @@ static VALUE
 fcho_get_current_folder_uri(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_file_chooser_get_current_folder_uri(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_file_chooser_get_current_folder_uri(_SELF(self)));
 }
 
 /* They are defined as properties.
@@ -212,14 +212,14 @@ static VALUE
 fcho_get_preview_filename(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_file_chooser_get_preview_filename(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_file_chooser_get_preview_filename(_SELF(self)));
 }
 
 static VALUE
 fcho_get_preview_uri(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_file_chooser_get_preview_uri(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_file_chooser_get_preview_uri(_SELF(self)));
 }
 
 /* They are defined as properties.

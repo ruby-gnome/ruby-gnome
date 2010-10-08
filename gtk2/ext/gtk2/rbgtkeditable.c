@@ -61,7 +61,7 @@ static VALUE
 edit_get_chars(self, start, end)
     VALUE self, start, end;
 {
-    return CSTR2RVAL2(
+    return CSTR2RVAL_FREE(
     	gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)),   /* check s */
 			       NUM2INT(start), NUM2INT(end)));  /* check start,end */
 }

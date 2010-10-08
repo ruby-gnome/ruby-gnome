@@ -37,7 +37,7 @@ static VALUE
 shell_quote(self, unquoted_string)
     VALUE self, unquoted_string;
 {
-    return CSTR2RVAL2(g_shell_quote((const gchar*)RVAL2CSTR(unquoted_string)));
+    return CSTR2RVAL_FREE(g_shell_quote((const gchar*)RVAL2CSTR(unquoted_string)));
 }
 
 static VALUE
@@ -49,7 +49,7 @@ shell_unquote(self, quoted_string)
 
     if (! str) RAISE_GERROR(err);
 
-    return CSTR2RVAL2(str);
+    return CSTR2RVAL_FREE(str);
 }
 
 void

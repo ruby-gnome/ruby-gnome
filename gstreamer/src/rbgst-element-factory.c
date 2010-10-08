@@ -106,7 +106,7 @@ create(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &name);
 
-    element = gst_element_factory_create(SELF(self), RVAL2CSTR2(name));
+    element = gst_element_factory_create(SELF(self), RVAL2CSTR_ACCEPT_NIL(name));
     return GOBJ2RVAL(element);
 }
 

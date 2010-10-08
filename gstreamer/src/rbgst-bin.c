@@ -48,7 +48,7 @@ rb_gst_bin_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &name);
 
-    bin = gst_bin_new(RVAL2CSTR2(name));
+    bin = gst_bin_new(RVAL2CSTR_ACCEPT_NIL(name));
     if (bin)
         RBGST_INITIALIZE(self, bin);
     return Qnil;

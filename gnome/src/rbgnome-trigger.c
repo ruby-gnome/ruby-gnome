@@ -87,7 +87,7 @@ trig_action_function(msg, level, supinfo)
             }
             i++;
         }
-        rb_funcall(func, id_call, 3, CSTR2RVAL(msg), CSTR2RVAL2(level), ary);
+        rb_funcall(func, id_call, 3, CSTR2RVAL(msg), CSTR2RVAL_FREE(level), ary);
     }
 }
 

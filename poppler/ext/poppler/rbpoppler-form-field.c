@@ -109,7 +109,7 @@ text_field_get_text(VALUE self)
 static VALUE
 text_field_set_text(VALUE self, VALUE text)
 {
-    poppler_form_field_text_set_text(RVAL2TF(self), RVAL2CSTR2(text));
+    poppler_form_field_text_set_text(RVAL2TF(self), RVAL2CSTR_ACCEPT_NIL(text));
     return Qnil;
 }
 
@@ -219,7 +219,7 @@ choice_field_toggle_item(VALUE self, VALUE index)
 static VALUE
 choice_field_set_text(VALUE self, VALUE text)
 {
-    poppler_form_field_choice_set_text(RVAL2CF(self), RVAL2CSTR2(text));
+    poppler_form_field_choice_set_text(RVAL2CF(self), RVAL2CSTR_ACCEPT_NIL(text));
     return Qnil;
 }
 

@@ -85,7 +85,7 @@ static VALUE
 gdkatom_name(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gdk_atom_name(_SELF(self)));
+    return CSTR2RVAL_FREE(gdk_atom_name(_SELF(self)));
 }
 
 static VALUE

@@ -183,7 +183,7 @@ static VALUE
 it_get_example_icon_name(self)
     VALUE self;
 {
-    return CSTR2RVAL2(gtk_icon_theme_get_example_icon_name(_SELF(self)));
+    return CSTR2RVAL_FREE(gtk_icon_theme_get_example_icon_name(_SELF(self)));
 }
 
 static VALUE

@@ -160,7 +160,7 @@ prefix ## _allocate(VALUE klass)                                \
 static VALUE
 g_value_to_s(VALUE self)
 {
-    return CSTR2RVAL2(g_strdup_value_contents(RVAL2GOBJ(self)));
+    return CSTR2RVAL_FREE(g_strdup_value_contents(RVAL2GOBJ(self)));
 }
 
 
