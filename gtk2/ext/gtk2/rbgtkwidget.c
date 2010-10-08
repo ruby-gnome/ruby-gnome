@@ -796,8 +796,7 @@ widget_s_find_style_property(self, property_name)
     if (SYMBOL_P(property_name)) {
         name = rb_id2name(SYM2ID(property_name));
     } else {
-        StringValue(property_name);
-        name = StringValuePtr(property_name);
+        name = RVAL2CSTR(property_name);
     }
 
     oclass = (GtkWidgetClass*)g_type_class_ref(CLASS2GTYPE(self));
@@ -879,8 +878,7 @@ widget_style_get_property(self, prop_name)
     if (SYMBOL_P(prop_name)) {
         name = rb_id2name(SYM2ID(prop_name));
     } else {
-        StringValue(prop_name);
-        name = StringValuePtr(prop_name);
+        name = RVAL2CSTR(prop_name);
     }
 #if GTK_CHECK_VERSION(2,2,0)
     pspec = gtk_widget_class_find_style_property((GtkWidgetClass*)g_type_class_ref(RVAL2GTYPE(self)), name);

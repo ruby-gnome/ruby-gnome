@@ -105,7 +105,8 @@ static VALUE
 gtkselectiondata_data(self)
     VALUE self;
 {
-    return rb_str_new((const char*)_SELF(self)->data, _SELF(self)->length);
+    return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)_SELF(self)->data,
+                                                   _SELF(self)->length));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)

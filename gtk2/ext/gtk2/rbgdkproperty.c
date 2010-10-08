@@ -283,7 +283,7 @@ gdkprop_get(argc, argv, self)
     switch(rfmt){
       case 8:
       default:
-        ret = rb_str_new((const char*)rdat, rlen);
+        ret = RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)rdat, rlen));
         break;
         
       case 16:

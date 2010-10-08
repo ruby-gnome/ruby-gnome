@@ -144,14 +144,14 @@ Init_gtk_paper_size()
 
     rb_define_singleton_method(gPaperSize, "default", ps_s_get_default, 0);
 
-    rb_define_const(gPaperSize, "A3", rb_str_new2(GTK_PAPER_NAME_A3));
-    rb_define_const(gPaperSize, "A4", rb_str_new2(GTK_PAPER_NAME_A4));
-    rb_define_const(gPaperSize, "A5", rb_str_new2(GTK_PAPER_NAME_A5));
-    rb_define_const(gPaperSize, "B5", rb_str_new2(GTK_PAPER_NAME_B5));
-    rb_define_const(gPaperSize, "LETTER", rb_str_new2(GTK_PAPER_NAME_LETTER));
+    rb_define_const(gPaperSize, "A3", CSTR2RVAL(GTK_PAPER_NAME_A3));
+    rb_define_const(gPaperSize, "A4", CSTR2RVAL(GTK_PAPER_NAME_A4));
+    rb_define_const(gPaperSize, "A5", CSTR2RVAL(GTK_PAPER_NAME_A5));
+    rb_define_const(gPaperSize, "B5", CSTR2RVAL(GTK_PAPER_NAME_B5));
+    rb_define_const(gPaperSize, "LETTER", CSTR2RVAL(GTK_PAPER_NAME_LETTER));
     rb_define_const(gPaperSize, "EXECUTIVE",
-                    rb_str_new2(GTK_PAPER_NAME_EXECUTIVE));
-    rb_define_const(gPaperSize, "LEGAL", rb_str_new2(GTK_PAPER_NAME_LEGAL));
+                    CSTR2RVAL(GTK_PAPER_NAME_EXECUTIVE));
+    rb_define_const(gPaperSize, "LEGAL", CSTR2RVAL(GTK_PAPER_NAME_LEGAL));
 
     rb_define_method(gPaperSize, "initialize", ps_initialize, -1);
     rb_define_method(gPaperSize, "==", ps_is_equal, 1);

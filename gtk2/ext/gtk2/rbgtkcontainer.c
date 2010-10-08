@@ -220,8 +220,7 @@ cont_child_get_property(self, child, prop_name)
     if (SYMBOL_P(prop_name)) {
         name = rb_id2name(SYM2ID(prop_name));
     } else {
-        StringValue(prop_name);
-        name = StringValuePtr(prop_name);
+        name = RVAL2CSTR(prop_name);
     }
 
     pspec = gtk_container_class_find_child_property(
@@ -266,8 +265,7 @@ cont_child_set_property(self, child, prop_name, val)
     if (SYMBOL_P(prop_name)) {
         name = rb_id2name(SYM2ID(prop_name));
     } else {
-        StringValue(prop_name);
-        name = StringValuePtr(prop_name);
+        name = RVAL2CSTR(prop_name);
     }
 
     pspec = gtk_container_class_find_child_property(
@@ -410,8 +408,7 @@ cont_s_child_property(self, property_name)
     if (SYMBOL_P(property_name)) {
         name = rb_id2name(SYM2ID(property_name));
     } else {
-        StringValue(property_name);
-        name = StringValuePtr(property_name);
+        name = RVAL2CSTR(property_name);
     }
 
     oclass = g_type_class_ref(CLASS2GTYPE(self));

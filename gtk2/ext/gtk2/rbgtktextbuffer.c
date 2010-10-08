@@ -489,7 +489,7 @@ deserialize_func(register_buffer, content_buffer, iter, data, length, create_tag
     argv[0] = GOBJ2RVAL(register_buffer);
     argv[1] = GOBJ2RVAL(content_buffer);
     argv[2] = ITR2RVAL(iter);
-    argv[3] = rb_str_new((char*)data, length);
+    argv[3] = RBG_STRING_SET_UTF8_ENCODING(rb_str_new((char*)data, length));
     argv[4] = CBOOL2RVAL(create_tags);
 
     arg.callback = (VALUE)func;
@@ -590,7 +590,7 @@ txt_serialize(self, content_buffer, format, start, end)
                                             RVAL2ATOM(format),
                                             RVAL2ITR(start), RVAL2ITR(end),
                                             &length);
-    return rb_str_new((char*)ret, length);
+    return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((char*)ret, length));
 }
 
 static VALUE

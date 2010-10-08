@@ -182,7 +182,6 @@ clipboard_text_received_func(GtkClipboard *clipboard, const gchar *text,
     VALUE vtext = Qnil;
     if (text) {
         vtext = CSTR2RVAL(text);
-        RBG_STRING_SET_UTF8_ENCODING(vtext);
     }
 
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), vtext);

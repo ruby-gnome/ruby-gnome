@@ -83,7 +83,7 @@ rbglib_m_listenv(self)
     c_list = g_listenv();
     c_var = c_list;
     while(*c_var) {
-        rb_ary_push(r_list, rb_str_new2(*(c_var++)));
+        rb_ary_push(r_list, CSTR2RVAL(*(c_var++)));
     }
     g_strfreev(c_list);
     return r_list;

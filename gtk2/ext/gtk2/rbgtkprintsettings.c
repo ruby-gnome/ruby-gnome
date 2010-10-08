@@ -666,59 +666,59 @@ Init_gtk_print_settings()
     rb_define_method(gPrintSettings, "each", ps_foreach, 0);
 
     rb_define_const(gPrintSettings, "PRINTER",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PRINTER));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PRINTER));
     rb_define_const(gPrintSettings, "ORIENTATION",
-                    rb_str_new2(GTK_PRINT_SETTINGS_ORIENTATION));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_ORIENTATION));
     rb_define_const(gPrintSettings, "PAPER_FORMAT",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PAPER_FORMAT));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_FORMAT));
     rb_define_const(gPrintSettings, "PAPER_WIDTH",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PAPER_WIDTH));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_WIDTH));
     rb_define_const(gPrintSettings, "PAPER_HEIGHT",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PAPER_HEIGHT));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_HEIGHT));
     rb_define_const(gPrintSettings, "N_COPIES",
-                    rb_str_new2(GTK_PRINT_SETTINGS_N_COPIES));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_N_COPIES));
     rb_define_const(gPrintSettings, "DEFAULT_SOURCE",
-                    rb_str_new2(GTK_PRINT_SETTINGS_DEFAULT_SOURCE));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_DEFAULT_SOURCE));
     rb_define_const(gPrintSettings, "QUALITY",
-                    rb_str_new2(GTK_PRINT_SETTINGS_QUALITY));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_QUALITY));
     rb_define_const(gPrintSettings, "RESOLUTION",
-                    rb_str_new2(GTK_PRINT_SETTINGS_RESOLUTION));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_RESOLUTION));
     rb_define_const(gPrintSettings, "USE_COLOR",
-                    rb_str_new2(GTK_PRINT_SETTINGS_USE_COLOR));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_USE_COLOR));
     rb_define_const(gPrintSettings, "DUPLEX",
-                    rb_str_new2(GTK_PRINT_SETTINGS_DUPLEX));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_DUPLEX));
     rb_define_const(gPrintSettings, "COLLATE",
-                    rb_str_new2(GTK_PRINT_SETTINGS_COLLATE));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_COLLATE));
     rb_define_const(gPrintSettings, "REVERSE",
-                    rb_str_new2(GTK_PRINT_SETTINGS_REVERSE));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_REVERSE));
     rb_define_const(gPrintSettings, "MEDIA_TYPE",
-                    rb_str_new2(GTK_PRINT_SETTINGS_MEDIA_TYPE));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_MEDIA_TYPE));
     rb_define_const(gPrintSettings, "DITHER",
-                    rb_str_new2(GTK_PRINT_SETTINGS_DITHER));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_DITHER));
     rb_define_const(gPrintSettings, "SCALE",
-                    rb_str_new2(GTK_PRINT_SETTINGS_SCALE));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_SCALE));
     rb_define_const(gPrintSettings, "PRINT_PAGES",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PRINT_PAGES));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PRINT_PAGES));
     rb_define_const(gPrintSettings, "PAGE_RANGES",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PAGE_RANGES));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PAGE_RANGES));
     rb_define_const(gPrintSettings, "PAGE_SET",
-                    rb_str_new2(GTK_PRINT_SETTINGS_PAGE_SET));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_PAGE_SET));
     rb_define_const(gPrintSettings, "FINISHINGS",
-                    rb_str_new2(GTK_PRINT_SETTINGS_FINISHINGS));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_FINISHINGS));
     rb_define_const(gPrintSettings, "NUMBER_UP",
-                    rb_str_new2(GTK_PRINT_SETTINGS_NUMBER_UP));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_NUMBER_UP));
     rb_define_const(gPrintSettings, "OUTPUT_BIN",
-                    rb_str_new2(GTK_PRINT_SETTINGS_OUTPUT_BIN));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_BIN));
 
     rb_define_const(gPrintSettings, "OUTPUT_FILE_FORMAT",
-                    rb_str_new2(GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT));
     rb_define_const(gPrintSettings, "OUTPUT_URI",
-                    rb_str_new2(GTK_PRINT_SETTINGS_OUTPUT_URI));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_URI));
 
     rb_define_const(gPrintSettings, "WIN32_DRIVER_VERSION",
-                    rb_str_new2(GTK_PRINT_SETTINGS_WIN32_DRIVER_VERSION));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_WIN32_DRIVER_VERSION));
     rb_define_const(gPrintSettings, "WIN32_DRIVER_EXTRA",
-                    rb_str_new2(GTK_PRINT_SETTINGS_WIN32_DRIVER_EXTRA));
+                    CSTR2RVAL(GTK_PRINT_SETTINGS_WIN32_DRIVER_EXTRA));
 
     /* Helpers: */
     rb_define_method(gPrintSettings, "printer", ps_get_printer, 0);

@@ -192,13 +192,12 @@ static VALUE
 keyfile_to_data(self)
     VALUE self;
 {
-    gsize length;
     GError* error = NULL;
-    gchar* data = g_key_file_to_data(_SELF(self), &length, &error);
+    gchar* data = g_key_file_to_data(_SELF(self), NULL, &error);
 
     if (error) RAISE_GERROR(error);
 
-    return rb_str_new(data, length);
+    return CSTR2RVAL_FREE(data);
 }
 
 static VALUE

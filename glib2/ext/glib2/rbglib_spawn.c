@@ -241,7 +241,7 @@ rbglib_m_spawn_command_line_sync(self, str)
     VALUE std_out, std_err;
     gboolean ret;
 
-    command_line = StringValuePtr(str);
+    command_line = RVAL2CSTR(str);
     ret = g_spawn_command_line_sync(command_line,
                                                &standard_output,
                                                &standard_error,

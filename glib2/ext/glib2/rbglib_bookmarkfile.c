@@ -98,17 +98,12 @@ static VALUE
 bf_to_data(self)
     VALUE self;
 {
-    VALUE ret;
-    gsize len;
     GError* error = NULL;
-    gchar* data = g_bookmark_file_to_data(_SELF(self), &len, &error);
+    gchar* data = g_bookmark_file_to_data(_SELF(self), NULL, &error);
 
     if (error) RAISE_GERROR(error);
     
-    ret = rb_str_new(data, len);
-    g_free(data);
-    
-    return ret;
+    return CSTR2RVAL_FREE(data);
 }
 
 static VALUE
