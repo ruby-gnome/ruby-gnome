@@ -1,3 +1,10 @@
+2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: keep backward compatibility around GDK key
+	symbols introduced at GTK+ 2.20.
+	"[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
+	Patch by Vincent Carmona. Thanks!!!
+
 2010-10-03  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/Poppler: support Popper 0.15.0. [#3079667]

@@ -10,6 +10,14 @@ WRITE ME.
 
 === Changes
 
+==== Ruby/GTK2
+
+  * Improvements:
+    * keep backward compatibility around GDK key
+      symbols introduced at GTK+ 2.20.
+      "[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
+      [Vincent Carmona]
+
 ==== Ruby/RSVG2
 
   * Bug fixes:
@@ -33,6 +41,7 @@ WRITE ME.
   * U.Nakamura
   * kdmsnr
   * Mamoru Tasaka
+  * Vincent Carmona
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
